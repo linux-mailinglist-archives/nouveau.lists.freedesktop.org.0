@@ -2,49 +2,37 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id EB5679849D9
-	for <lists+nouveau@lfdr.de>; Tue, 24 Sep 2024 18:42:00 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 99692984BD7
+	for <lists+nouveau@lfdr.de>; Tue, 24 Sep 2024 21:57:08 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 3E5C310E72D;
-	Tue, 24 Sep 2024 16:41:59 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 5875D10E737;
+	Tue, 24 Sep 2024 19:57:07 +0000 (UTC)
 Authentication-Results: gabe.freedesktop.org;
-	dkim=pass (2048-bit key; unprotected) header.d=Nvidia.com header.i=@Nvidia.com header.b="Wj9U1e5F";
+	dkim=pass (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="XxFXiFMw";
 	dkim-atps=neutral
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from NAM02-SN1-obe.outbound.protection.outlook.com
- (mail-sn1nam02on2085.outbound.protection.outlook.com [40.107.96.85])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 1661210E72D
- for <nouveau@lists.freedesktop.org>; Tue, 24 Sep 2024 16:41:58 +0000 (UTC)
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=u1FIsGrTOCk58+5SlQy3S99DCMawUhElrgrbP46MLQ5RpHD2jK5hoXwJtQetmPf24XWDNK6EvlfihLLvK9uByy2L/Or8bNn+ErKJeMJxsXhlNqVyskUWk83XjFq2xX+DNaN7ONcelXtE6bTYOA7UTty8fIJJn905ONHj0zwjx2HvNPUmW6Dx93kJeUtw0cLwQDTCD0fJjauAvrY65elWLMfqCSTJS+Fq1m99Ns0gz/QLV6JJwfXvp9VGrMsNCv+ePG6vXjXb6D2iHZy08WQ90Dv5R9B9WV1zKmdbI4526qlkssxShIbASHJcpLjPtQu5l0s9IaLVufdto9T+B5ku3w==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=4X4NXFLDFBRIGmcqSFAq/c+XH3o35limhligv9qa8xY=;
- b=pH9jM3kNhL2++w340PJSMMmpv7jRq4k+bbiuHjuMkmQT9LD5TMQ/rss3Vc3fsIBiC0S+wy6VHdBnJ8QSxMeUFMbwK4a6/y97reHBR2lgtuVVQ0zs7fb808iyRaC+bneN2NmmhSWBs2IPNamW0IHbi8TbLtGQ532oi7O7+kZa5UA9s5n8h04nlXoDS3jko1BTbgQAjaBsbMRIR1oYbL3+vrjA17utsneHZZVQcTLY6icoAPZvu1A8uGc32TL5xOtmuAEUxRbEFHTZQp57mGIlfhSri9Gxqrcw+Tysy2142uZPdE1LYixxTvUHHlbxuMN9x9xaEuGpAYFk4ZnQnpzwVA==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=nvidia.com; dmarc=pass action=none header.from=nvidia.com;
- dkim=pass header.d=nvidia.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=Nvidia.com;
- s=selector2;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=4X4NXFLDFBRIGmcqSFAq/c+XH3o35limhligv9qa8xY=;
- b=Wj9U1e5FEFWsLnpR84zNop61lNTnboDpmt6zx6T+w/aFuTvo102Yh6rSXEIxpL0tM3C+jLxBUupJ0FrAUQWjmtBLgQtvKZ5K9FxbnpVlqgMnA2YTpgn+0UQXPpYd2D5IkskWBM2aFaxSdqKXE5iAZxr6TAv3aRY5Yl6bnRPsdDpXAhJUPqIsotDHWD9qxPfOZSRA9569olCuoXQCV7X54JJITvIf0j7jGMcUnB/DpX1gnjSlF6So23DzDGsFwVSYD0lIfRvZdEqpkPg4ZpB7y7m00xi4oMA5XNR0jmFImM0H7nze5eVHSg3ZGkFhian/xcce3T2lv2fb0Y9TwqasZw==
-Authentication-Results: dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=nvidia.com;
-Received: from CH3PR12MB8659.namprd12.prod.outlook.com (2603:10b6:610:17c::13)
- by DM4PR12MB5818.namprd12.prod.outlook.com (2603:10b6:8:62::15) with
- Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.7982.25; Tue, 24 Sep
- 2024 16:41:53 +0000
-Received: from CH3PR12MB8659.namprd12.prod.outlook.com
- ([fe80::6eb6:7d37:7b4b:1732]) by CH3PR12MB8659.namprd12.prod.outlook.com
- ([fe80::6eb6:7d37:7b4b:1732%4]) with mapi id 15.20.7982.022; Tue, 24 Sep 2024
- 16:41:53 +0000
-Date: Tue, 24 Sep 2024 13:41:51 -0300
-From: Jason Gunthorpe <jgg@nvidia.com>
-To: Danilo Krummrich <dakr@kernel.org>
+Received: from dfw.source.kernel.org (dfw.source.kernel.org [139.178.84.217])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 4A4B610E737
+ for <nouveau@lists.freedesktop.org>; Tue, 24 Sep 2024 19:57:05 +0000 (UTC)
+Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
+ by dfw.source.kernel.org (Postfix) with ESMTP id 871EE5C5C95;
+ Tue, 24 Sep 2024 19:57:00 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id D7DF2C4CEC4;
+ Tue, 24 Sep 2024 19:57:00 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+ s=k20201202; t=1727207824;
+ bh=vs/Q00mpqMCANbeBETDP9iTGdVlpdkwKxWxZINpqxFU=;
+ h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
+ b=XxFXiFMwZrSGnLiyTu2hLENoclsOGKfRdG0HohayTiJhJ0TO6sB6giHtySe0YMGMD
+ 3u6j5C1iTmTRoYCDSM6ZdLr1x1JC0jHgPJ/cIhuu3PKQODIXMqJqNcjB91Rw5QYFqf
+ NXHmRcAvbCvSssZHAoXsGp+GyHoxU+zNWG2r3IRzBWzbwY5L9J3zMfYiCFUDNHrKDZ
+ XKHuTCtSwIrMOOpintYtxEQGuQRFyZf25xAarUqPbYjrgSbXOiHOo0va4BEwjAaF8H
+ v3e5DPlkXcw8bY9J589OVYFFezKSbLN/BWKDjSP34aJDmPH+me+5KsAALcE7kljel/
+ UFoH0kPPnL9Uw==
+Date: Tue, 24 Sep 2024 21:56:58 +0200
+From: Danilo Krummrich <dakr@kernel.org>
+To: Jason Gunthorpe <jgg@nvidia.com>
 Cc: Zhi Wang <zhiw@nvidia.com>, kvm@vger.kernel.org,
  nouveau@lists.freedesktop.org, alex.williamson@redhat.com,
  kevin.tian@intel.com, airlied@gmail.com, daniel@ffwll.ch,
@@ -52,87 +40,15 @@ Cc: Zhi Wang <zhiw@nvidia.com>, kvm@vger.kernel.org,
  ankita@nvidia.com, aniketa@nvidia.com, kwankhede@nvidia.com,
  targupta@nvidia.com, zhiwang@kernel.org
 Subject: Re: [RFC 00/29] Introduce NVIDIA GPU Virtualization (vGPU) Support
-Message-ID: <20240924164151.GJ9417@nvidia.com>
+Message-ID: <ZvMZisyZFO888N0E@cassiopeiae>
 References: <20240922124951.1946072-1-zhiw@nvidia.com>
  <ZvErg51xH32b8iW6@pollux> <20240923150140.GB9417@nvidia.com>
  <ZvHwzzp2F71W8TAs@pollux.localdomain>
+ <20240924164151.GJ9417@nvidia.com>
+MIME-Version: 1.0
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
-In-Reply-To: <ZvHwzzp2F71W8TAs@pollux.localdomain>
-X-ClientProxiedBy: MN2PR06CA0006.namprd06.prod.outlook.com
- (2603:10b6:208:23d::11) To CH3PR12MB8659.namprd12.prod.outlook.com
- (2603:10b6:610:17c::13)
-MIME-Version: 1.0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: CH3PR12MB8659:EE_|DM4PR12MB5818:EE_
-X-MS-Office365-Filtering-Correlation-Id: c5f082a5-9b5d-4220-18f3-08dcdcb7cb5e
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0;ARA:13230040|376014|366016|1800799024;
-X-Microsoft-Antispam-Message-Info: =?us-ascii?Q?WTceFln66tr1Ur6L0zISxfLhUQsfqhJ55KSIAOKBVLhqT3Z3mNHbX2c/EiUQ?=
- =?us-ascii?Q?oHm25OfGY64Nb4UKBKLtoYkW3EGIgRowlWJe69w0FyxL6da+fq6CVWSO47fP?=
- =?us-ascii?Q?iBP/p7iW/QnuqECwiKTYlP2el4BAzED8RIuzHI60wObOy73mL8YhYp6R2YRe?=
- =?us-ascii?Q?+LN8X2I6mrr+ypRhqWW3apV6cJP0f6t+cElS/wK+CSulgn4C3EvJSUpp/6HS?=
- =?us-ascii?Q?tjytdG1Yh7RcHU/vkBowTtq7NlgRr1imFMy7U+swphoA5qJgchoJS6RGPFMY?=
- =?us-ascii?Q?xxOlwitXIIg8DAiIC9Rf4uKVplJhEnRFPW9+W2uEz3fZso5cVrsqf6QAc23H?=
- =?us-ascii?Q?beEy6erXINvM5tt1UlJszgLcnuMV/RSDTOirYj/zJmfJQRHeZnJVRk45FXxu?=
- =?us-ascii?Q?7boEpSg+vxI1beFRyjfY0aYL5bVCFV8xKrA4n4FC0UqTNFP4lzwHZW7bOfNc?=
- =?us-ascii?Q?IP6xLKNgmxLl9imeiPSk2GkVCF1gK8QkANAtZXV0AmndI4Ea+MGytKkL0JNg?=
- =?us-ascii?Q?BbxUne8vN0Z8niekXhpO6U2hKgAmiDziIxUzJnATJ7HAkVxt5Z0il4ecW+f8?=
- =?us-ascii?Q?jiZUyWWKTzhuS0qLsM1o1PtSifnqQm2HqNfKPlqjX+Lqe2sajaG9/uLdUuZm?=
- =?us-ascii?Q?TmcXdFwSiwa9EIDUc91WrKdoL1aF0Akv9PTtrYm/bHJvudbFXoRV3lNohQ6t?=
- =?us-ascii?Q?XK3MPd+8qskexw3AdwNZFcmRCXaz7XNMGSiee3BqNN7zZtHbYpYLFksMylO3?=
- =?us-ascii?Q?7Oa3FRG9TYG5JLEgTaLlPijIk7JSXOJOKjJtoU76IJiz0slgCq7ouE52q9B6?=
- =?us-ascii?Q?33Cx9RDjhbwRrBCtfqvGSHPg+2Lzh5b1XpK1XGNen6jwnXbubjDnw/sOpi39?=
- =?us-ascii?Q?nbp5S3IlmHLI1bvShL0laD207KeT499pFZkBGk5d4EiQHKMuvus7a1+lvESt?=
- =?us-ascii?Q?EQ2PwpRK/hZ+sClcNdn+BC11bQcg0yMC7WFVKQkFyknXTOR7eCUNiCkrKCLj?=
- =?us-ascii?Q?hisNUVLpyD1TQ8msjDPaWnJWvoNEUkCQD1sSuDueHQhqh4Bp+BewbPscZFr7?=
- =?us-ascii?Q?VY9haQSu7+fIP9bejpkXLueO/qTC/dF30Ia7d5TYag6B1jgiFNAyjkQEG/Lq?=
- =?us-ascii?Q?3Mtormq4yEW7B2t+tzDRx/NsGTpQ9VPu9gAzLevDKFXKofB07141lFc+xt6S?=
- =?us-ascii?Q?w3SdI7zwuYHyH+pOvv7NVRN3xx+aPSIVW3qFaCVyqcaMkb2S9aTshxEGgP0R?=
- =?us-ascii?Q?qPBk6c8XcPkKB8Sq19/d7nuXs0urcfEs7Eq01TtON7dGao9HtUzXhEcdJAU6?=
- =?us-ascii?Q?vv/NoLelVkCtKTnQ14dENJXHGNVdrPudWMizq8magMydIw=3D=3D?=
-X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
- IPV:NLI; SFV:NSPM; H:CH3PR12MB8659.namprd12.prod.outlook.com; PTR:; CAT:NONE;
- SFS:(13230040)(376014)(366016)(1800799024); DIR:OUT; SFP:1101; 
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: =?us-ascii?Q?Pmlqy5a3ps/n2APmtUTOV2pNZoDP3ooY+NNPsTQtVL2zG1k5kHRRAAMUG/Qj?=
- =?us-ascii?Q?JH5PKJxUXDj3cJIreYYQ1KUmA0Sp7+y+X0lUkPyhuvufnbup3pym/DFFGi32?=
- =?us-ascii?Q?VUz++C7FMsyvrXc02yabzmPBtvTwB9IDo+IuKaDxlnksXydaI6DORpqmmigQ?=
- =?us-ascii?Q?ZpDyOoTFgschLHdP3tWyUINC8yvsJdZA0P7z7vVJKsrQ3ixM2Kxzabp7STRx?=
- =?us-ascii?Q?evaSnHp7AEAAhGmsln7Xcm9ZFEWg+MRwUQQTmh0ZKbVIN5JnHDIUY/0HAmcI?=
- =?us-ascii?Q?S0138nOaCOrjevlLxJqRIAZgn8oO+M+YK4/gSsTfpLVfajX4HIJfXIWIlUJ/?=
- =?us-ascii?Q?Ic3/yznhiqv/SSEkVZD8UP89fI9tdac/jGrQstkBuC93AAFMV+6MmpcMYX0J?=
- =?us-ascii?Q?i+3X8SlsanTc1JGahJk3M5tXbYIdAFhhUUNPe82EJx0rfTAUzqYYkN5rdUNv?=
- =?us-ascii?Q?1EXGoYBrcJCSFKFj3AwkAjXdsRpuHHWF/Om/TDmbZirA6tI1IfKx10Jp8JI9?=
- =?us-ascii?Q?4bRdnod0CEnhrUKw3FkKdx2O5owyauEXc+aMtSZYq32DINwlmgV3CWvWnqL7?=
- =?us-ascii?Q?VtX9LXntr4jaQdkXkvhkbBouESTw4yKdpbotVER/DmB74tcvfn6+kIlS3lID?=
- =?us-ascii?Q?nyYCAflo6ZLWTilIxIukGnAPVxcoFw0hHlETo/xqyQPewXjb0fO00OlS5BFa?=
- =?us-ascii?Q?8l9FFCrxHPKRkKNgi6rRxtUobyNjIKdg0cPl/CdNoYGPYbvKuwx+RCaeDBLJ?=
- =?us-ascii?Q?lv7A4FHFozen/MAopJht7Z3smhhZWtC7VeDdpwj7AkdcXT59UN9cVkIjVJtq?=
- =?us-ascii?Q?onhW37RiAO9NJcxkdjvThtKiAVj4VQuRopPBtcU/NE2I5XCzspDAIddvIdXr?=
- =?us-ascii?Q?+NDqbOUsPsesNjqIHJuQKUhpVGaSJnKTWZ4J2SRIoYEtHvHnT3zeyr55zy3G?=
- =?us-ascii?Q?Om4Y5HLItWKjzf2pEFHqhzZ9UrOAlVexm0UEYesKS+V6IRYHgjfalTMwNncc?=
- =?us-ascii?Q?PFm4ueY6Hik+8FAbV31GhwO+lLXXxdaSH6sgrsv9f/TtWX4NCNS6jCNO7auL?=
- =?us-ascii?Q?PTRTHBL2OxAM1VJGNWse7fxtaEotB8fPcyYqlGKKvCASHwxymX2pOm88+BB3?=
- =?us-ascii?Q?Sagdx3DIzFH/fESUFEpxC8tj43b5rJUrIeO1rlLLG9IFDKjcdbJFZQ1gfzfL?=
- =?us-ascii?Q?eHU0N9Y8OzA1FRiX+hZLdDk3BEqruodY0UW+z/r2e3MPS0UzA/8PmmyBsSD2?=
- =?us-ascii?Q?QMs+PsBiUwpmi1mBB/Lq7OOeJdXO1iszE4XQpbLoDNeWapioei5qkhB6w6jl?=
- =?us-ascii?Q?VlQqIbWKRvnb1hvqaQk1qDKwmBMzun8bFyfloIiR8KhghAEM0HvU08Oda9Hi?=
- =?us-ascii?Q?6WX9sBTk/cbb65EsJyoR8kGe4g8hDfQLcVQTQXhuTv4N7qmK5GF7yiJ3HFSq?=
- =?us-ascii?Q?Ni28fOeZcLUvgqP5JXUo9QXxH7NvyvZVi2r/LmKQie+TJ5k2VmH4xoV21UC4?=
- =?us-ascii?Q?b+jSGAlIr6O57Jdhak09QosylUeG8xncaI9x77/CUTGLfNHAUSPwX8sC//yW?=
- =?us-ascii?Q?Y7M09xvfjT/gt4zni18=3D?=
-X-OriginatorOrg: Nvidia.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: c5f082a5-9b5d-4220-18f3-08dcdcb7cb5e
-X-MS-Exchange-CrossTenant-AuthSource: CH3PR12MB8659.namprd12.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 24 Sep 2024 16:41:53.0703 (UTC)
-X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
-X-MS-Exchange-CrossTenant-Id: 43083d15-7273-40c1-b7db-39efd9ccc17a
-X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: egadkeR5QZHhFwTlV/6b0EXk2ytKLvjcj4gLFTMPSUT6wxBvm+fqSab3PKvaGXjG
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: DM4PR12MB5818
+In-Reply-To: <20240924164151.GJ9417@nvidia.com>
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -147,80 +63,142 @@ List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-On Tue, Sep 24, 2024 at 12:50:55AM +0200, Danilo Krummrich wrote:
-
-> > From the VFIO side I would like to see something like this merged in
-> > nearish future as it would bring a previously out of tree approach to
-> > be fully intree using our modern infrastructure. This is a big win for
-> > the VFIO world.
+On Tue, Sep 24, 2024 at 01:41:51PM -0300, Jason Gunthorpe wrote:
+> On Tue, Sep 24, 2024 at 12:50:55AM +0200, Danilo Krummrich wrote:
+> 
+> > > From the VFIO side I would like to see something like this merged in
+> > > nearish future as it would bring a previously out of tree approach to
+> > > be fully intree using our modern infrastructure. This is a big win for
+> > > the VFIO world.
+> > > 
+> > > As a commercial product this will be backported extensively to many
+> > > old kernels and that is harder/impossible if it isn't exclusively in
+> > > C. So, I think nova needs to co-exist in some way.
 > > 
-> > As a commercial product this will be backported extensively to many
-> > old kernels and that is harder/impossible if it isn't exclusively in
-> > C. So, I think nova needs to co-exist in some way.
+> > We'll surely not support two drivers for the same thing in the long term,
+> > neither does it make sense, nor is it sustainable.
 > 
-> We'll surely not support two drivers for the same thing in the long term,
-> neither does it make sense, nor is it sustainable.
+> What is being done here is the normal correct kernel thing to
+> do. Refactor the shared core code into a module and stick higher level
+> stuff on top of it. Ideally Nova/Nouveau would exist as peers
+> implementing DRM subsystem on this shared core infrastructure. We've
+> done this sort of thing before in other places in the kernel. It has
+> been proven to work well.
 
-What is being done here is the normal correct kernel thing to
-do. Refactor the shared core code into a module and stick higher level
-stuff on top of it. Ideally Nova/Nouveau would exist as peers
-implementing DRM subsystem on this shared core infrastructure. We've
-done this sort of thing before in other places in the kernel. It has
-been proven to work well.
+So, that's where you have the wrong understanding of what we're working on: You
+seem to think that Nova is just another DRM subsystem layer on top of the NVKM
+parts (what you call the core driver) of Nouveau.
 
-So, I'm not sure why you think there should be two drivers in the long
-term? Do you have some technical reason why Nova can't fit into this
-modular architecture?
+But the whole point of Nova is to replace the NVKM parts of Nouveau, since
+that's where the problems we want to solve reside in.
 
-Regardless, assuming Nova will eventually propose merging duplicated
-bootup code then I suggest it should be able to fully replace the C
-code with a kconfig switch and provide C compatible interfaces for
-VFIO. When Rust is sufficiently mature we can consider a deprecation
-schedule for the C version.
-
-I agree duplication doesn't make sense, but if it is essential to make
-everyone happy then we should do it to accommodate the ongoing Rust
-experiment.
-
-> We have a lot of good reasons why we decided to move forward with Nova as a
-> successor of Nouveau for GSP-based GPUs in the long term -- I also just held a
-> talk about this at LPC.
-
-I know, but this series is adding a VFIO driver to the kernel, and a
-complete Nova driver doesn't even exist yet. It is fine to think about
-future plans, but let's not get too far ahead of ourselves here..
-
-> For the short/mid term I think it may be reasonable to start with
-> Nouveau, but this must be based on some agreements, for instance:
 > 
-> - take responsibility, e.g. commitment to help with maintainance with some of
->   NVKM / NVIDIA GPU core (or whatever we want to call it) within Nouveau
+> So, I'm not sure why you think there should be two drivers in the long
+> term? Do you have some technical reason why Nova can't fit into this
+> modular architecture?
 
-I fully expect NVIDIA teams to own this core driver and VFIO parts. I
-see there are no changes to the MAINTAINERs file in this RFC, that
-will need to be corrected.
+Like I said above, the whole point of Nova is to be the core driver, the DRM
+parts on top are more like "the icing on the cake".
 
-> - commitment to help with Nova in general and, once applicable, move the vGPU
->   parts over to Nova
+> 
+> Regardless, assuming Nova will eventually propose merging duplicated
+> bootup code then I suggest it should be able to fully replace the C
+> code with a kconfig switch and provide C compatible interfaces for
+> VFIO. When Rust is sufficiently mature we can consider a deprecation
+> schedule for the C version.
+> 
+> I agree duplication doesn't make sense, but if it is essential to make
+> everyone happy then we should do it to accommodate the ongoing Rust
+> experiment.
+> 
+> > We have a lot of good reasons why we decided to move forward with Nova as a
+> > successor of Nouveau for GSP-based GPUs in the long term -- I also just held a
+> > talk about this at LPC.
+> 
+> I know, but this series is adding a VFIO driver to the kernel, and a
 
-I think you will get help with Nova based on its own merit, but I
-don't like where you are going with this. Linus has had negative
-things to say about this sort of cross-linking and I agree with
-him. We should not be trying to extract unrelated promises on Nova as
-a condition for progressing a VFIO series. :\
+I have no concerns regarding the VFIO driver, this is about the new features
+that you intend to add to Nouveau.
 
-> But I think the very last one naturally happens if we stop further support for
-> new HW in Nouveau at some point.
+> complete Nova driver doesn't even exist yet. It is fine to think about
+> future plans, but let's not get too far ahead of ourselves here..
 
-I expect the core code would continue to support new HW going forward
-to support the VFIO driver, even if nouveau doesn't use it, until Rust
-reaches some full ecosystem readyness for the server space.
+Well, that's true, but we can't just add new features to something that has been
+agreed to be replaced without having a strategy for this for the successor.
 
-There are going to be a lot of users of this code, let's not rush to
-harm them please.
+> 
+> > For the short/mid term I think it may be reasonable to start with
+> > Nouveau, but this must be based on some agreements, for instance:
+> > 
+> > - take responsibility, e.g. commitment to help with maintainance with some of
+> >   NVKM / NVIDIA GPU core (or whatever we want to call it) within Nouveau
+> 
+> I fully expect NVIDIA teams to own this core driver and VFIO parts. I
+> see there are no changes to the MAINTAINERs file in this RFC, that
+> will need to be corrected.
 
-Fortunately there is no use case for DRM and VFIO to coexist in a
-hypervisor, so this does not turn into a such a technical problem like
-most other dual-driver situations.
+Well, I did not say to just take over the biggest part of Nouveau.
 
-Jason
+Currently - and please correct me if I'm wrong - you make it sound to me as if
+you're not willing to respect the decisions that have been taken by Nouveau and
+DRM maintainers.
+
+> 
+> > - commitment to help with Nova in general and, once applicable, move the vGPU
+> >   parts over to Nova
+> 
+> I think you will get help with Nova based on its own merit, but I
+> don't like where you are going with this. Linus has had negative
+> things to say about this sort of cross-linking and I agree with
+> him. We should not be trying to extract unrelated promises on Nova as
+> a condition for progressing a VFIO series. :\
+
+No cross-linking, no unrelated promises.
+
+Again, we're working on a successor of Nouveau and if we keep adding features to
+Nouveau in the meantime, we have to have a strategy for the transition,
+otherwise we're effectively just ignoring this decision.
+
+So, I really need you to respect the fact that there has been a decision for a
+successor and that this *is* in fact relevant for all major changes to Nouveau
+as well.
+
+Once you do this, we get the chance to work things out for the short/mid term
+and for the long term and make everyone benefit.
+
+I encourage that NVIDIA wants to move things upstream and I'm absolutely willing
+to collaborate and help with the use-cases and goals NVIDIA has. But it really
+has to be a collaboration and this starts with acknowledging the goals of *each
+other*.
+
+> 
+> > But I think the very last one naturally happens if we stop further support for
+> > new HW in Nouveau at some point.
+> 
+> I expect the core code would continue to support new HW going forward
+> to support the VFIO driver, even if nouveau doesn't use it, until Rust
+> reaches some full ecosystem readyness for the server space.
+
+From an upstream perspective the kernel doesn't need to consider OOT drivers,
+i.e. the guest driver.
+
+This doesn't mean that we can't work something out for a seamless transition
+though.
+
+But again, this can only really work if we acknowledge the goals of each other.
+
+> 
+> There are going to be a lot of users of this code, let's not rush to
+> harm them please.
+
+Please abstain from such kind of unconstructive insinuations; it's ridiculous to
+imply that upstream kernel developers and maintainers would harm the users of
+NVIDIA GPUs.
+
+> 
+> Fortunately there is no use case for DRM and VFIO to coexist in a
+> hypervisor, so this does not turn into a such a technical problem like
+> most other dual-driver situations.
+> 
+> Jason
+> 
