@@ -2,88 +2,137 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id 02FCD98460B
-	for <lists+nouveau@lfdr.de>; Tue, 24 Sep 2024 14:38:55 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id EB5679849D9
+	for <lists+nouveau@lfdr.de>; Tue, 24 Sep 2024 18:42:00 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 9F47110E2B2;
-	Tue, 24 Sep 2024 12:38:53 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 3E5C310E72D;
+	Tue, 24 Sep 2024 16:41:59 +0000 (UTC)
 Authentication-Results: gabe.freedesktop.org;
-	dkim=pass (1024-bit key; unprotected) header.d=redhat.com header.i=@redhat.com header.b="Ovrda3jM";
+	dkim=pass (2048-bit key; unprotected) header.d=Nvidia.com header.i=@Nvidia.com header.b="Wj9U1e5F";
 	dkim-atps=neutral
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from us-smtp-delivery-124.mimecast.com
- (us-smtp-delivery-124.mimecast.com [170.10.133.124])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 6175810E2B2
- for <nouveau@lists.freedesktop.org>; Tue, 24 Sep 2024 12:38:52 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1727181531;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references;
- bh=fWJf14pBKxF1Jl5Fnq532LPwg6/dEPqgWBI4nFcsoSs=;
- b=Ovrda3jMet3rwh7Fhafi2OxAwrddp3MeoCgmL4GjDFsR4nr61yNA2JEWMmEe20qzfiA7jw
- GAMl7YiU4yffvKvK/6v9UxDtAslOyBBwjeezqQ9K0sKFSL6LcmCj/Ua6Lsp+Y1ibFaejc0
- U3XHp9WP/xQVAevgLOMi9CNF9TMJPDU=
-Received: from mail-wm1-f71.google.com (mail-wm1-f71.google.com
- [209.85.128.71]) by relay.mimecast.com with ESMTP with STARTTLS
- (version=TLSv1.3, cipher=TLS_AES_256_GCM_SHA384) id
- us-mta-308-AepO3aJlPnSCEKMsO3u_Lg-1; Tue, 24 Sep 2024 08:38:50 -0400
-X-MC-Unique: AepO3aJlPnSCEKMsO3u_Lg-1
-Received: by mail-wm1-f71.google.com with SMTP id
- 5b1f17b1804b1-42cb236ad4aso36640515e9.3
- for <nouveau@lists.freedesktop.org>; Tue, 24 Sep 2024 05:38:50 -0700 (PDT)
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1727181529; x=1727786329;
- h=content-transfer-encoding:in-reply-to:from:content-language
- :references:to:subject:user-agent:mime-version:date:message-id
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=fWJf14pBKxF1Jl5Fnq532LPwg6/dEPqgWBI4nFcsoSs=;
- b=F5salOzRyYUOWhTCihsaMuSw30An88MPtWeG4uqDTuOzI50ggW9/7rysv0EYc3YPMG
- 6r5NpjOr1b5MwGhuY51sjISCcQjt/mRAWYzxuqxNOgBzGgREI5RcxpYrsSFkHuaUHmxq
- G+Wkhx+wzPJvqHcAkIKidoXK86KDG3D/YjhjDxz3KYGghtaIkzNUzrCYwJtkjZTZd5yR
- oG8sBz8j5Q5jDjvrpClng44fUOr7h3VjNsHHuQGnhb5kzqO5FbFsCtPS3LmZ+gRpUMGV
- j7C06N7UlQMuK3eMwnrrkEuZR/LN2ebYe/Dvu7VfnRz6cdDdX1Icuu/MhInUa6940L72
- 8k/g==
-X-Forwarded-Encrypted: i=1;
- AJvYcCV2om+erAwrGtDQP9e+e8cYSufZb16zQ5bgqqFKLJ31OhdCJr2ER4+oXyqb0+0vh0p2mXjJrz5o@lists.freedesktop.org
-X-Gm-Message-State: AOJu0Yz/wjbp+BFFbMU9HI+Aj3pAR4yiV6RS3BDu025FdGSc8W0qG+4z
- kg4AYNlG61GUNBLfiXXPVeQpSvXnqmIoc79sDcszGuN6kBLC2kM3y+uGNuaGRmk6eCktgy1c7GQ
- T0+ujwHS3uOAKxy+zaPMT9DY0lVCIgq+Txt5Xsn2uuYgFFM+9OLdz4+a7MGNfSRQ=
-X-Received: by 2002:a05:600c:1f07:b0:426:5269:9824 with SMTP id
- 5b1f17b1804b1-42e7c015d62mr103129065e9.0.1727181529025; 
- Tue, 24 Sep 2024 05:38:49 -0700 (PDT)
-X-Google-Smtp-Source: AGHT+IFTnZ+ETIKc752z7llxTmvvRpN2SnJ1x3VlVNb8im4P31/x79zt4r3sRVy1teNii1h+JF8lGA==
-X-Received: by 2002:a05:600c:1f07:b0:426:5269:9824 with SMTP id
- 5b1f17b1804b1-42e7c015d62mr103128775e9.0.1727181528586; 
- Tue, 24 Sep 2024 05:38:48 -0700 (PDT)
-Received: from ?IPV6:2a01:e0a:c:37e0:ced3:55bd:f454:e722?
- ([2a01:e0a:c:37e0:ced3:55bd:f454:e722])
- by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-42e902c66d0sm20775145e9.41.2024.09.24.05.38.47
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Tue, 24 Sep 2024 05:38:47 -0700 (PDT)
-Message-ID: <51ea32fd-e17c-42d8-8320-e2582c719f0d@redhat.com>
-Date: Tue, 24 Sep 2024 14:38:46 +0200
+Received: from NAM02-SN1-obe.outbound.protection.outlook.com
+ (mail-sn1nam02on2085.outbound.protection.outlook.com [40.107.96.85])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 1661210E72D
+ for <nouveau@lists.freedesktop.org>; Tue, 24 Sep 2024 16:41:58 +0000 (UTC)
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=u1FIsGrTOCk58+5SlQy3S99DCMawUhElrgrbP46MLQ5RpHD2jK5hoXwJtQetmPf24XWDNK6EvlfihLLvK9uByy2L/Or8bNn+ErKJeMJxsXhlNqVyskUWk83XjFq2xX+DNaN7ONcelXtE6bTYOA7UTty8fIJJn905ONHj0zwjx2HvNPUmW6Dx93kJeUtw0cLwQDTCD0fJjauAvrY65elWLMfqCSTJS+Fq1m99Ns0gz/QLV6JJwfXvp9VGrMsNCv+ePG6vXjXb6D2iHZy08WQ90Dv5R9B9WV1zKmdbI4526qlkssxShIbASHJcpLjPtQu5l0s9IaLVufdto9T+B5ku3w==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=4X4NXFLDFBRIGmcqSFAq/c+XH3o35limhligv9qa8xY=;
+ b=pH9jM3kNhL2++w340PJSMMmpv7jRq4k+bbiuHjuMkmQT9LD5TMQ/rss3Vc3fsIBiC0S+wy6VHdBnJ8QSxMeUFMbwK4a6/y97reHBR2lgtuVVQ0zs7fb808iyRaC+bneN2NmmhSWBs2IPNamW0IHbi8TbLtGQ532oi7O7+kZa5UA9s5n8h04nlXoDS3jko1BTbgQAjaBsbMRIR1oYbL3+vrjA17utsneHZZVQcTLY6icoAPZvu1A8uGc32TL5xOtmuAEUxRbEFHTZQp57mGIlfhSri9Gxqrcw+Tysy2142uZPdE1LYixxTvUHHlbxuMN9x9xaEuGpAYFk4ZnQnpzwVA==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=nvidia.com; dmarc=pass action=none header.from=nvidia.com;
+ dkim=pass header.d=nvidia.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=Nvidia.com;
+ s=selector2;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=4X4NXFLDFBRIGmcqSFAq/c+XH3o35limhligv9qa8xY=;
+ b=Wj9U1e5FEFWsLnpR84zNop61lNTnboDpmt6zx6T+w/aFuTvo102Yh6rSXEIxpL0tM3C+jLxBUupJ0FrAUQWjmtBLgQtvKZ5K9FxbnpVlqgMnA2YTpgn+0UQXPpYd2D5IkskWBM2aFaxSdqKXE5iAZxr6TAv3aRY5Yl6bnRPsdDpXAhJUPqIsotDHWD9qxPfOZSRA9569olCuoXQCV7X54JJITvIf0j7jGMcUnB/DpX1gnjSlF6So23DzDGsFwVSYD0lIfRvZdEqpkPg4ZpB7y7m00xi4oMA5XNR0jmFImM0H7nze5eVHSg3ZGkFhian/xcce3T2lv2fb0Y9TwqasZw==
+Authentication-Results: dkim=none (message not signed)
+ header.d=none;dmarc=none action=none header.from=nvidia.com;
+Received: from CH3PR12MB8659.namprd12.prod.outlook.com (2603:10b6:610:17c::13)
+ by DM4PR12MB5818.namprd12.prod.outlook.com (2603:10b6:8:62::15) with
+ Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.7982.25; Tue, 24 Sep
+ 2024 16:41:53 +0000
+Received: from CH3PR12MB8659.namprd12.prod.outlook.com
+ ([fe80::6eb6:7d37:7b4b:1732]) by CH3PR12MB8659.namprd12.prod.outlook.com
+ ([fe80::6eb6:7d37:7b4b:1732%4]) with mapi id 15.20.7982.022; Tue, 24 Sep 2024
+ 16:41:53 +0000
+Date: Tue, 24 Sep 2024 13:41:51 -0300
+From: Jason Gunthorpe <jgg@nvidia.com>
+To: Danilo Krummrich <dakr@kernel.org>
+Cc: Zhi Wang <zhiw@nvidia.com>, kvm@vger.kernel.org,
+ nouveau@lists.freedesktop.org, alex.williamson@redhat.com,
+ kevin.tian@intel.com, airlied@gmail.com, daniel@ffwll.ch,
+ acurrid@nvidia.com, cjia@nvidia.com, smitra@nvidia.com,
+ ankita@nvidia.com, aniketa@nvidia.com, kwankhede@nvidia.com,
+ targupta@nvidia.com, zhiwang@kernel.org
+Subject: Re: [RFC 00/29] Introduce NVIDIA GPU Virtualization (vGPU) Support
+Message-ID: <20240924164151.GJ9417@nvidia.com>
+References: <20240922124951.1946072-1-zhiw@nvidia.com>
+ <ZvErg51xH32b8iW6@pollux> <20240923150140.GB9417@nvidia.com>
+ <ZvHwzzp2F71W8TAs@pollux.localdomain>
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <ZvHwzzp2F71W8TAs@pollux.localdomain>
+X-ClientProxiedBy: MN2PR06CA0006.namprd06.prod.outlook.com
+ (2603:10b6:208:23d::11) To CH3PR12MB8659.namprd12.prod.outlook.com
+ (2603:10b6:610:17c::13)
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v3 0/2] drm/nouveau: Add drm_panic support for nv50+
-To: Ilia Mirkin <imirkin@alum.mit.edu>, James Jones <jajones@nvidia.com>,
- Karol Herbst <kherbst@redhat.com>, Lyude Paul <lyude@redhat.com>,
- Danilo Krummrich <dakr@redhat.com>, David Airlie <airlied@gmail.com>,
- Daniel Vetter <daniel@ffwll.ch>,
- Maarten Lankhorst <maarten.lankhorst@linux.intel.com>,
- Maxime Ripard <mripard@kernel.org>, Thomas Zimmermann <tzimmermann@suse.de>,
- dri-devel@lists.freedesktop.org, nouveau@lists.freedesktop.org
-References: <20240913071036.574782-1-jfalempe@redhat.com>
-From: Jocelyn Falempe <jfalempe@redhat.com>
-In-Reply-To: <20240913071036.574782-1-jfalempe@redhat.com>
-X-Mimecast-Spam-Score: 0
-X-Mimecast-Originator: redhat.com
-Content-Language: en-US, fr
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: CH3PR12MB8659:EE_|DM4PR12MB5818:EE_
+X-MS-Office365-Filtering-Correlation-Id: c5f082a5-9b5d-4220-18f3-08dcdcb7cb5e
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: BCL:0;ARA:13230040|376014|366016|1800799024;
+X-Microsoft-Antispam-Message-Info: =?us-ascii?Q?WTceFln66tr1Ur6L0zISxfLhUQsfqhJ55KSIAOKBVLhqT3Z3mNHbX2c/EiUQ?=
+ =?us-ascii?Q?oHm25OfGY64Nb4UKBKLtoYkW3EGIgRowlWJe69w0FyxL6da+fq6CVWSO47fP?=
+ =?us-ascii?Q?iBP/p7iW/QnuqECwiKTYlP2el4BAzED8RIuzHI60wObOy73mL8YhYp6R2YRe?=
+ =?us-ascii?Q?+LN8X2I6mrr+ypRhqWW3apV6cJP0f6t+cElS/wK+CSulgn4C3EvJSUpp/6HS?=
+ =?us-ascii?Q?tjytdG1Yh7RcHU/vkBowTtq7NlgRr1imFMy7U+swphoA5qJgchoJS6RGPFMY?=
+ =?us-ascii?Q?xxOlwitXIIg8DAiIC9Rf4uKVplJhEnRFPW9+W2uEz3fZso5cVrsqf6QAc23H?=
+ =?us-ascii?Q?beEy6erXINvM5tt1UlJszgLcnuMV/RSDTOirYj/zJmfJQRHeZnJVRk45FXxu?=
+ =?us-ascii?Q?7boEpSg+vxI1beFRyjfY0aYL5bVCFV8xKrA4n4FC0UqTNFP4lzwHZW7bOfNc?=
+ =?us-ascii?Q?IP6xLKNgmxLl9imeiPSk2GkVCF1gK8QkANAtZXV0AmndI4Ea+MGytKkL0JNg?=
+ =?us-ascii?Q?BbxUne8vN0Z8niekXhpO6U2hKgAmiDziIxUzJnATJ7HAkVxt5Z0il4ecW+f8?=
+ =?us-ascii?Q?jiZUyWWKTzhuS0qLsM1o1PtSifnqQm2HqNfKPlqjX+Lqe2sajaG9/uLdUuZm?=
+ =?us-ascii?Q?TmcXdFwSiwa9EIDUc91WrKdoL1aF0Akv9PTtrYm/bHJvudbFXoRV3lNohQ6t?=
+ =?us-ascii?Q?XK3MPd+8qskexw3AdwNZFcmRCXaz7XNMGSiee3BqNN7zZtHbYpYLFksMylO3?=
+ =?us-ascii?Q?7Oa3FRG9TYG5JLEgTaLlPijIk7JSXOJOKjJtoU76IJiz0slgCq7ouE52q9B6?=
+ =?us-ascii?Q?33Cx9RDjhbwRrBCtfqvGSHPg+2Lzh5b1XpK1XGNen6jwnXbubjDnw/sOpi39?=
+ =?us-ascii?Q?nbp5S3IlmHLI1bvShL0laD207KeT499pFZkBGk5d4EiQHKMuvus7a1+lvESt?=
+ =?us-ascii?Q?EQ2PwpRK/hZ+sClcNdn+BC11bQcg0yMC7WFVKQkFyknXTOR7eCUNiCkrKCLj?=
+ =?us-ascii?Q?hisNUVLpyD1TQ8msjDPaWnJWvoNEUkCQD1sSuDueHQhqh4Bp+BewbPscZFr7?=
+ =?us-ascii?Q?VY9haQSu7+fIP9bejpkXLueO/qTC/dF30Ia7d5TYag6B1jgiFNAyjkQEG/Lq?=
+ =?us-ascii?Q?3Mtormq4yEW7B2t+tzDRx/NsGTpQ9VPu9gAzLevDKFXKofB07141lFc+xt6S?=
+ =?us-ascii?Q?w3SdI7zwuYHyH+pOvv7NVRN3xx+aPSIVW3qFaCVyqcaMkb2S9aTshxEGgP0R?=
+ =?us-ascii?Q?qPBk6c8XcPkKB8Sq19/d7nuXs0urcfEs7Eq01TtON7dGao9HtUzXhEcdJAU6?=
+ =?us-ascii?Q?vv/NoLelVkCtKTnQ14dENJXHGNVdrPudWMizq8magMydIw=3D=3D?=
+X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
+ IPV:NLI; SFV:NSPM; H:CH3PR12MB8659.namprd12.prod.outlook.com; PTR:; CAT:NONE;
+ SFS:(13230040)(376014)(366016)(1800799024); DIR:OUT; SFP:1101; 
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0: =?us-ascii?Q?Pmlqy5a3ps/n2APmtUTOV2pNZoDP3ooY+NNPsTQtVL2zG1k5kHRRAAMUG/Qj?=
+ =?us-ascii?Q?JH5PKJxUXDj3cJIreYYQ1KUmA0Sp7+y+X0lUkPyhuvufnbup3pym/DFFGi32?=
+ =?us-ascii?Q?VUz++C7FMsyvrXc02yabzmPBtvTwB9IDo+IuKaDxlnksXydaI6DORpqmmigQ?=
+ =?us-ascii?Q?ZpDyOoTFgschLHdP3tWyUINC8yvsJdZA0P7z7vVJKsrQ3ixM2Kxzabp7STRx?=
+ =?us-ascii?Q?evaSnHp7AEAAhGmsln7Xcm9ZFEWg+MRwUQQTmh0ZKbVIN5JnHDIUY/0HAmcI?=
+ =?us-ascii?Q?S0138nOaCOrjevlLxJqRIAZgn8oO+M+YK4/gSsTfpLVfajX4HIJfXIWIlUJ/?=
+ =?us-ascii?Q?Ic3/yznhiqv/SSEkVZD8UP89fI9tdac/jGrQstkBuC93AAFMV+6MmpcMYX0J?=
+ =?us-ascii?Q?i+3X8SlsanTc1JGahJk3M5tXbYIdAFhhUUNPe82EJx0rfTAUzqYYkN5rdUNv?=
+ =?us-ascii?Q?1EXGoYBrcJCSFKFj3AwkAjXdsRpuHHWF/Om/TDmbZirA6tI1IfKx10Jp8JI9?=
+ =?us-ascii?Q?4bRdnod0CEnhrUKw3FkKdx2O5owyauEXc+aMtSZYq32DINwlmgV3CWvWnqL7?=
+ =?us-ascii?Q?VtX9LXntr4jaQdkXkvhkbBouESTw4yKdpbotVER/DmB74tcvfn6+kIlS3lID?=
+ =?us-ascii?Q?nyYCAflo6ZLWTilIxIukGnAPVxcoFw0hHlETo/xqyQPewXjb0fO00OlS5BFa?=
+ =?us-ascii?Q?8l9FFCrxHPKRkKNgi6rRxtUobyNjIKdg0cPl/CdNoYGPYbvKuwx+RCaeDBLJ?=
+ =?us-ascii?Q?lv7A4FHFozen/MAopJht7Z3smhhZWtC7VeDdpwj7AkdcXT59UN9cVkIjVJtq?=
+ =?us-ascii?Q?onhW37RiAO9NJcxkdjvThtKiAVj4VQuRopPBtcU/NE2I5XCzspDAIddvIdXr?=
+ =?us-ascii?Q?+NDqbOUsPsesNjqIHJuQKUhpVGaSJnKTWZ4J2SRIoYEtHvHnT3zeyr55zy3G?=
+ =?us-ascii?Q?Om4Y5HLItWKjzf2pEFHqhzZ9UrOAlVexm0UEYesKS+V6IRYHgjfalTMwNncc?=
+ =?us-ascii?Q?PFm4ueY6Hik+8FAbV31GhwO+lLXXxdaSH6sgrsv9f/TtWX4NCNS6jCNO7auL?=
+ =?us-ascii?Q?PTRTHBL2OxAM1VJGNWse7fxtaEotB8fPcyYqlGKKvCASHwxymX2pOm88+BB3?=
+ =?us-ascii?Q?Sagdx3DIzFH/fESUFEpxC8tj43b5rJUrIeO1rlLLG9IFDKjcdbJFZQ1gfzfL?=
+ =?us-ascii?Q?eHU0N9Y8OzA1FRiX+hZLdDk3BEqruodY0UW+z/r2e3MPS0UzA/8PmmyBsSD2?=
+ =?us-ascii?Q?QMs+PsBiUwpmi1mBB/Lq7OOeJdXO1iszE4XQpbLoDNeWapioei5qkhB6w6jl?=
+ =?us-ascii?Q?VlQqIbWKRvnb1hvqaQk1qDKwmBMzun8bFyfloIiR8KhghAEM0HvU08Oda9Hi?=
+ =?us-ascii?Q?6WX9sBTk/cbb65EsJyoR8kGe4g8hDfQLcVQTQXhuTv4N7qmK5GF7yiJ3HFSq?=
+ =?us-ascii?Q?Ni28fOeZcLUvgqP5JXUo9QXxH7NvyvZVi2r/LmKQie+TJ5k2VmH4xoV21UC4?=
+ =?us-ascii?Q?b+jSGAlIr6O57Jdhak09QosylUeG8xncaI9x77/CUTGLfNHAUSPwX8sC//yW?=
+ =?us-ascii?Q?Y7M09xvfjT/gt4zni18=3D?=
+X-OriginatorOrg: Nvidia.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: c5f082a5-9b5d-4220-18f3-08dcdcb7cb5e
+X-MS-Exchange-CrossTenant-AuthSource: CH3PR12MB8659.namprd12.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 24 Sep 2024 16:41:53.0703 (UTC)
+X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
+X-MS-Exchange-CrossTenant-Id: 43083d15-7273-40c1-b7db-39efd9ccc17a
+X-MS-Exchange-CrossTenant-MailboxType: HOSTED
+X-MS-Exchange-CrossTenant-UserPrincipalName: egadkeR5QZHhFwTlV/6b0EXk2ytKLvjcj4gLFTMPSUT6wxBvm+fqSab3PKvaGXjG
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: DM4PR12MB5818
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -98,52 +147,80 @@ List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-On 13/09/2024 09:03, Jocelyn Falempe wrote:
-> This series adds basic drm_panic support for nouveau.
-> Patches 1 Add ABGR2101010 support in drm_panic.
-> Patch 2 registers nouveau to drm_panic, and handle tiling.
-> I've tested on a GTX1650 (Turing) and GF 8800 GT (Tesla), while
-> running Gnome/Wayland desktop, and in VT.
+On Tue, Sep 24, 2024 at 12:50:55AM +0200, Danilo Krummrich wrote:
 
-I got a test report, that it also works correctly on a GT1030 (Pascal).
-So I'm confident it works also on earlier GPUs.
+> > From the VFIO side I would like to see something like this merged in
+> > nearish future as it would bring a previously out of tree approach to
+> > be fully intree using our modern infrastructure. This is a big win for
+> > the VFIO world.
+> > 
+> > As a commercial product this will be backported extensively to many
+> > old kernels and that is harder/impossible if it isn't exclusively in
+> > C. So, I think nova needs to co-exist in some way.
+> 
+> We'll surely not support two drivers for the same thing in the long term,
+> neither does it make sense, nor is it sustainable.
 
-Best regards,
+What is being done here is the normal correct kernel thing to
+do. Refactor the shared core code into a module and stick higher level
+stuff on top of it. Ideally Nova/Nouveau would exist as peers
+implementing DRM subsystem on this shared core infrastructure. We've
+done this sort of thing before in other places in the kernel. It has
+been proven to work well.
 
--- 
+So, I'm not sure why you think there should be two drivers in the long
+term? Do you have some technical reason why Nova can't fit into this
+modular architecture?
 
-Jocelyn
+Regardless, assuming Nova will eventually propose merging duplicated
+bootup code then I suggest it should be able to fully replace the C
+code with a kconfig switch and provide C compatible interfaces for
+VFIO. When Rust is sufficiently mature we can consider a deprecation
+schedule for the C version.
 
-> 
-> It should work on other nv50+ cards, but I didn't test them.
-> 
-> To test it, you need to build your kernel with CONFIG_DRM_PANIC=y, and run:
-> 
-> echo c > /proc/sysrq-trigger
-> 
-> or you can enable CONFIG_DRM_PANIC_DEBUG and run:
-> 
-> echo 1 > /sys/kernel/debug/dri/0/drm_panic_plane_0
-> 
-> v2:
->   * Rebase and drop already merged patches.
->   * Rework the tiling algorithm, using "swizzle" to compute the offset
->     inside the block.
->     
-> v3:
->   * Fix support for Tesla GPU, which have simpler tiling.
->   * Drop "add a private pointer to struct drm_scanout_buffer".
->   * Use nouveau_framebuffer_get_layout() to get the tiling parameters.
->   * Have 2 set_pixel() functions, depending on GPU family.
->   
-> Jocelyn Falempe (2):
->    drm/panic: Add ABGR2101010 support
->    drm/nouveau: Add drm_panic support for nv50+
-> 
->   drivers/gpu/drm/drm_panic.c             |  10 ++
->   drivers/gpu/drm/nouveau/dispnv50/wndw.c | 139 +++++++++++++++++++++++-
->   2 files changed, 147 insertions(+), 2 deletions(-)
-> 
-> 
-> base-commit: 9d443deb0441b9dbb22a9aac3b471da05220df1b
+I agree duplication doesn't make sense, but if it is essential to make
+everyone happy then we should do it to accommodate the ongoing Rust
+experiment.
 
+> We have a lot of good reasons why we decided to move forward with Nova as a
+> successor of Nouveau for GSP-based GPUs in the long term -- I also just held a
+> talk about this at LPC.
+
+I know, but this series is adding a VFIO driver to the kernel, and a
+complete Nova driver doesn't even exist yet. It is fine to think about
+future plans, but let's not get too far ahead of ourselves here..
+
+> For the short/mid term I think it may be reasonable to start with
+> Nouveau, but this must be based on some agreements, for instance:
+> 
+> - take responsibility, e.g. commitment to help with maintainance with some of
+>   NVKM / NVIDIA GPU core (or whatever we want to call it) within Nouveau
+
+I fully expect NVIDIA teams to own this core driver and VFIO parts. I
+see there are no changes to the MAINTAINERs file in this RFC, that
+will need to be corrected.
+
+> - commitment to help with Nova in general and, once applicable, move the vGPU
+>   parts over to Nova
+
+I think you will get help with Nova based on its own merit, but I
+don't like where you are going with this. Linus has had negative
+things to say about this sort of cross-linking and I agree with
+him. We should not be trying to extract unrelated promises on Nova as
+a condition for progressing a VFIO series. :\
+
+> But I think the very last one naturally happens if we stop further support for
+> new HW in Nouveau at some point.
+
+I expect the core code would continue to support new HW going forward
+to support the VFIO driver, even if nouveau doesn't use it, until Rust
+reaches some full ecosystem readyness for the server space.
+
+There are going to be a lot of users of this code, let's not rush to
+harm them please.
+
+Fortunately there is no use case for DRM and VFIO to coexist in a
+hypervisor, so this does not turn into a such a technical problem like
+most other dual-driver situations.
+
+Jason
