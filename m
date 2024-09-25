@@ -2,74 +2,69 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id 7269B984F6D
-	for <lists+nouveau@lfdr.de>; Wed, 25 Sep 2024 02:19:00 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 18E0A984F75
+	for <lists+nouveau@lfdr.de>; Wed, 25 Sep 2024 02:31:50 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 88E3510E91C;
-	Wed, 25 Sep 2024 00:18:58 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 35A2510E03A;
+	Wed, 25 Sep 2024 00:31:48 +0000 (UTC)
 Authentication-Results: gabe.freedesktop.org;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="EpppM531";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="Tnyj6Gqq";
 	dkim-atps=neutral
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from mail-ej1-f43.google.com (mail-ej1-f43.google.com
- [209.85.218.43])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 0346510E91C
- for <nouveau@lists.freedesktop.org>; Wed, 25 Sep 2024 00:18:58 +0000 (UTC)
-Received: by mail-ej1-f43.google.com with SMTP id
- a640c23a62f3a-a910860e4dcso401705566b.3
- for <nouveau@lists.freedesktop.org>; Tue, 24 Sep 2024 17:18:57 -0700 (PDT)
+Received: from mail-ej1-f51.google.com (mail-ej1-f51.google.com
+ [209.85.218.51])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 5BC2710E03A
+ for <nouveau@lists.freedesktop.org>; Wed, 25 Sep 2024 00:31:46 +0000 (UTC)
+Received: by mail-ej1-f51.google.com with SMTP id
+ a640c23a62f3a-a8d4093722bso531442266b.0
+ for <nouveau@lists.freedesktop.org>; Tue, 24 Sep 2024 17:31:46 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1727223536; x=1727828336; darn=lists.freedesktop.org;
+ d=gmail.com; s=20230601; t=1727224305; x=1727829105; darn=lists.freedesktop.org;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=Yv16jQk7rEGBbw8xL1Oe3JyYoI/jGzct9FQFpNOnJ2g=;
- b=EpppM531RgKZulwT2tSdE3FYOGkNas/i5OZGkS7qEB378VoexqBZKomUtPGPhtVrRQ
- pl0JAPGnVxdJc1AqUa0PliAbrCKIVxrmWOpXjg7zkFPWv8dewEtPWVaS2+TWCrQnalAM
- JFaVyKHT6elBCk3opFan7foeAD2P96WwtOSaio/YyjsTwLr2Y7ZnILpOXYBBd77stTYl
- l7ACjKIINAhn6J0Xmib6FLT1x6RCBuecN8dqESEzm9DxvZz7OntvYTVS2rCwW4a+jjG+
- ooizMWq8Q1tSUTo8pbqpNzV3EYuv27qg/P7Lh2outitWQJdB7k9bgTjjhbdDg9bKdKjC
- dncQ==
+ bh=K/9pwGYPPYAs84vniTwGu/e23/s6+5iVY6/PDAAG4us=;
+ b=Tnyj6GqqXm/SAlOPxWEXk7OzGebU3mMZMxWA5raNclz47yFI1PRNiFPIGBxypyX6NN
+ BQNp2HHGszPu5NCLAQrdFx+4ubOa6CEiBrXRslQVR2pOx7zuCaI7bS9cDdicnp1jUPs7
+ 22Sj5nm+nBPTVbyFDEXqBM4sD74Va1VXxrmfj30cta098L+DS1TBWNtJVk3c1fP5tnL4
+ kD9+u/l5e/uP0FIv6ZjaNcCbXX5U0saw2mvMnk6ctUvHIV7rod71b79vN/voIsVcdhe0
+ 3OwCj+5xZksZAu8zYcPLgq1ZA4AyhdV9ErJDJ1D5Xi1Ey+mgpWxrixW9SpvYpM+JXa/2
+ l7uA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1727223536; x=1727828336;
+ d=1e100.net; s=20230601; t=1727224305; x=1727829105;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=Yv16jQk7rEGBbw8xL1Oe3JyYoI/jGzct9FQFpNOnJ2g=;
- b=gOM9fCxcE5/fCBXHbimAJDhA5PpdO/xaRWWN9wtJe4ZMX2dasbnT+VgFWiKuEZPDOd
- J8guSu+0mxmoevG7zI/luE+eL7ZELMo44d8ELSdVEdziKQDTfMaHpa4TBb2Z9c1L6gN+
- /NSHPNCngAGF+hBs6dSHpgAqUrznzXV7nMXDp+XlmYmjjADMrmx5erx5IAxSaEAl57VS
- Sv/RJbVRxCOKGw1t8OK0GYDO9pt9d3wKzx7MXamAehVXMx388kABm6HL+erohZwIwswF
- cpp3HNlMiAyiwl0c28VSt2VGs7gRS1r3g3/ZtHG5Th6HkINQ81VS7mp4BU7ToHEk3aUa
- sNUg==
+ bh=K/9pwGYPPYAs84vniTwGu/e23/s6+5iVY6/PDAAG4us=;
+ b=awfPTJxHKr/lz6gdP1oarT8lw8yKWQlMkY4W90JNXwPZO+P6Ruu5t4WUIH7AM2qZhT
+ fFNgsguwtznIxR23qS4zCW/1jH/q4gVp/vISvHSI1n2l4JWh0hfGdScbUtHMreyh7oRR
+ sE8VT/qVv6gkawvs6X0u/6hXdlCVIB8Ud+8FB19XvOX9l0WovKxPFCgbsZ2RGBiCzaWl
+ ghhNMwOJusOQg2YZPUibZ1pONVQofbRbTKu6d02XbVwMbvw5z4UkpmzDrgjFcJ3fNbNu
+ TLBX/pKHzMnG68XeFhuoWmixig/JaI1HcYrtqEb7ocMP8YeRCshCGWyYNXLRNE9wO2A7
+ +jNw==
 X-Forwarded-Encrypted: i=1;
- AJvYcCVt75JbjgOrkqUdJBDrhR0h1KV4dUnLO94P/J76C8H4oni2hSQ72VnA53wEMLRH6yIYmjKoR9Bf@lists.freedesktop.org
-X-Gm-Message-State: AOJu0YyCjoeQ/fLLToGLGtydbMqTbSSRyWVL/LyFpjskRAcaZ60T7Tge
- mnxpxNBcHyPH9DNO3gdqW8FQ/VuH2A5ZwjQIOZ2VU+1ZncCsYYFMpsJaqvBiVqkWPGF4dhZRwUp
- poHMyyBLgwvGXrQRZoqwmNEXRRkE=
-X-Google-Smtp-Source: AGHT+IEt67eLPjMCYEnb/Hd0k2bBqedjSfc1C1Ro09JNvTH+9QxA6VQ96hJjaslvRI44SDV9U2WgAsDL1SM/NUINiL0=
-X-Received: by 2002:a17:907:d2da:b0:a86:80b7:4743 with SMTP id
- a640c23a62f3a-a93a036904emr82742866b.24.1727223536062; Tue, 24 Sep 2024
- 17:18:56 -0700 (PDT)
+ AJvYcCX/9yod8qfowS0M1GsJ0aj8g1cAuC1NIUonKluqP8v1bZ0TqlV1dE+VbF4smnzXYWvAdDwMmT5k@lists.freedesktop.org
+X-Gm-Message-State: AOJu0YyVw9cpvQx1hn5UpjMgWdr32zCJ/Eh9X5eShT8msO2ux1smLH5B
+ 3KJ8P7MhwM3lvYLO/R7RUA5xz6PLyciaiq6NbDMTQ26tkgB/WfvxcU1hF76EhwzgNPVVST1HSLv
+ UlVsei6jv0vNi62k0ivCoJYrmaEA=
+X-Google-Smtp-Source: AGHT+IES8mbAOSEQK03hCpA8I4gleTbb1OGNxfdrnBI54A5Kyh/dhdPilb6p2UktQA62b9ecz3ULt1rUmU4VtsfaVYQ=
+X-Received: by 2002:a17:907:944e:b0:a86:96f5:fa81 with SMTP id
+ a640c23a62f3a-a93a03e32c5mr81294266b.32.1727224304377; Tue, 24 Sep 2024
+ 17:31:44 -0700 (PDT)
 MIME-Version: 1.0
 References: <20240922124951.1946072-1-zhiw@nvidia.com>
- <ZvErg51xH32b8iW6@pollux>
- <20240923150140.GB9417@nvidia.com> <ZvHwzzp2F71W8TAs@pollux.localdomain>
- <20240924164151.GJ9417@nvidia.com> <ZvMZisyZFO888N0E@cassiopeiae>
- <CAPM=9twKGFV8SA165QufaGUev0tnuHABAi0TMvDQSfa7PJfZaQ@mail.gmail.com>
- <20240924234737.GO9417@nvidia.com>
-In-Reply-To: <20240924234737.GO9417@nvidia.com>
+ <20240922124951.1946072-28-zhiw@nvidia.com>
+In-Reply-To: <20240922124951.1946072-28-zhiw@nvidia.com>
 From: Dave Airlie <airlied@gmail.com>
-Date: Wed, 25 Sep 2024 10:18:44 +1000
-Message-ID: <CAPM=9tx+uU=uceg=Zr4N9=Y28j8kHnBVD+J9sf9xkfJ1xtTXEA@mail.gmail.com>
-Subject: Re: [RFC 00/29] Introduce NVIDIA GPU Virtualization (vGPU) Support
-To: Jason Gunthorpe <jgg@nvidia.com>
-Cc: Danilo Krummrich <dakr@kernel.org>, Zhi Wang <zhiw@nvidia.com>,
- kvm@vger.kernel.org, 
- nouveau@lists.freedesktop.org, alex.williamson@redhat.com, 
- kevin.tian@intel.com, daniel@ffwll.ch, acurrid@nvidia.com, cjia@nvidia.com, 
- smitra@nvidia.com, ankita@nvidia.com, aniketa@nvidia.com, 
- kwankhede@nvidia.com, targupta@nvidia.com, zhiwang@kernel.org
+Date: Wed, 25 Sep 2024 10:31:33 +1000
+Message-ID: <CAPM=9tz34jg8nD703b+iAzWQejjKKfKJgULt+sHAp_N2AYzZMw@mail.gmail.com>
+Subject: Re: [RFC 27/29] vfio/vgpu_mgr: bootload the new vGPU
+To: Zhi Wang <zhiw@nvidia.com>
+Cc: kvm@vger.kernel.org, nouveau@lists.freedesktop.org, 
+ alex.williamson@redhat.com, kevin.tian@intel.com, jgg@nvidia.com, 
+ daniel@ffwll.ch, acurrid@nvidia.com, cjia@nvidia.com, smitra@nvidia.com, 
+ ankita@nvidia.com, aniketa@nvidia.com, kwankhede@nvidia.com, 
+ targupta@nvidia.com, zhiwang@kernel.org
 Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
@@ -85,81 +80,29 @@ List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
+On Sun, 22 Sept 2024 at 22:51, Zhi Wang <zhiw@nvidia.com> wrote:
 >
-> Well, no, I am calling a core driver to be the very minimal parts that
-> are actually shared between vfio and drm. It should definitely not
-> include key parts you want to work on in rust, like the command
-> marshaling.
+> All the resources that required by a new vGPU has been set up. It is time
+> to activate it.
+>
+> Send the NV2080_CTRL_CMD_VGPU_MGR_INTERNAL_BOOTLOAD_GSP_VGPU_PLUGIN_TASK
+> GSP RPC to activate the new vGPU.
 
-Unfortunately not, the fw ABI is the unsolved problem, rust is our
-best solution.
+This patch is probably the best example of how this can't work.
 
->
-> I expect there is more work to do in order to make this kind of split,
-> but this is what I'm thinking/expecting.
->
-> > > But the whole point of Nova is to replace the NVKM parts of Nouveau, since
-> > > that's where the problems we want to solve reside in.
-> >
-> > Just to re-emphasise for Jason who might not be as across this stuff,
-> >
-> > NVKM replacement with rust is the main reason for the nova project,
-> > 100% the driving force for nova is the unstable NVIDIA firmware API.
-> > The ability to use rust proc-macros to hide the NVIDIA instability
-> > instead of trying to do it in C by either generators or abusing C
-> > macros (which I don't think are sufficient).
->
-> I would not include any of this in the very core most driver. My
-> thinking is informed by what we've done in RDMA, particularly mlx5
-> which has a pretty thin PCI driver and each of the drivers stacked on
-> top form their own command buffers directly. The PCI driver primarily
-> just does some device bootup, command execution and interrupts because
-> those are all shared by the subsystem drivers.
->
-> We have a lot of experiance now building these kinds of
-> multi-subsystem structures and this pattern works very well.
->
-> So, broadly, build your rust proc macros on the DRM Nova driver and
-> call a core function to submit a command buffer to the device and get
-> back a response.
->
-> VFIO will make it's command buffers with C and call the same core
-> function.
->
-> > I think the idea of a nova drm and nova core driver architecture is
-> > acceptable to most of us, but long term trying to main a nouveau based
-> > nvkm is definitely not acceptable due to the unstable firmware APIs.
->
-> ? nova core, meaning nova rust, meaning vfio depends on rust, doesn't
-> seem acceptable ? We need to keep rust isolated to DRM for the
-> foreseeable future. Just need to find a separation that can do that.
+The GSP firmware interfaces are not guaranteed stable. Exposing these
+interfaces outside the nvkm core is unacceptable, as otherwise we
+would have to adapt the whole kernel depending on the loaded firmware.
 
-That isn't going to happen, if we start with that as the default
-positioning it won't get us very far.
+You cannot use any nvidia sdk headers, these all have to be abstracted
+behind things that have no bearing on the API.
 
-The core has to be rust, because NVIDIA has an unstable firmware API.
-The unstable firmware API isn't some command marshalling, it's deep
-down into the depths of it, like memory sizing requirements, base
-message queue layout and encoding, firmware init procedures. These are
-all changeable at any time with no regard for upstream development, so
-upstream development needs to be insulated from these as much as
-possible. Using rust provides that insulation layer. The unstable ABI
-isn't a solvable problem in the short term, using rust is the
-maintainable answer.
+If a new NVIDIA driver release was to add a parameter inside
+NV2080_CTRL_VGPU_MGR_INTERNAL_BOOTLOAD_GSP_VGPU_PLUGIN_TASK_PARAMS how
+would you handle it?
 
-Now there are maybe some on/off ramps we can use here that might
-provide some solutions to bridge the gap. Using rust in the kernel has
-various levels, which we currently tie into one place, but if we
-consider different longer term progressions it might be possible to
-start with some rust that is easier to backport than other rust might
-be etc.
-
-Strategies for moving nvkm core from C to rust in steps, or along a
-sliding scale of fws supported could be open for discussion.
-
-The end result though is to have nova core and nova drm in rust, that
-is the decision upstream made 6-12 months ago, I don't see any of the
-initial reasons for using rust have been invalidated or removed that
-warrant revisiting that decision.
+Outside of the other discussion, this is the fundamental problem with
+working on the GSP firmware. We cannot trust that any API exposed
+won't change, and NVIDIA aren't in a position to guarantee it.
 
 Dave.
