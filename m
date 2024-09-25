@@ -2,141 +2,63 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id 61DE79850A2
-	for <lists+nouveau@lfdr.de>; Wed, 25 Sep 2024 03:29:45 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id E37B598574B
+	for <lists+nouveau@lfdr.de>; Wed, 25 Sep 2024 12:44:46 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 12FA010E085;
-	Wed, 25 Sep 2024 01:29:44 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 1FE5910E06E;
+	Wed, 25 Sep 2024 10:44:45 +0000 (UTC)
 Authentication-Results: gabe.freedesktop.org;
-	dkim=pass (2048-bit key; unprotected) header.d=Nvidia.com header.i=@Nvidia.com header.b="kcIAmoM2";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="NxIN002u";
 	dkim-atps=neutral
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from NAM10-DM6-obe.outbound.protection.outlook.com
- (mail-dm6nam10on2071.outbound.protection.outlook.com [40.107.93.71])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 8613F10E085
- for <nouveau@lists.freedesktop.org>; Wed, 25 Sep 2024 01:29:42 +0000 (UTC)
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=DH+evcT+dRmQUsQHoTuwUmFl3qQK1yL8UQJPFMJ7qc6AQNu3GTV0q+m8E4gx3lWFUM24dSlkL1691nEzazmNZ820lHn58mgxemAL8RTQZAcz1BMhZwxxWFOQRP8T9ipXxSVlD9R/kU+l1cPLFItZSg7pTxNU83v62rDSflkKUDzZOXKq7JK997dOhBF1Zg8MI9r6J/NmSpSA9FdJRm7wgiuuZZPFiSpLOroOwthju8xZVtiD0lHi3bmIQ5ELWOfoG9owkxoq0YDtR+k/z8iB32+vSeC20k3yX/m3fmV2cS7NZL4+BUeGlDutbDcOhFnxR9/781oLUJ9qb2yEoDaXUA==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=GQGJVTfcfOGukN/wqn42eQkyJSDGVaQxvHsrL8yY1VU=;
- b=R9SHrJrutTjrT3ZFA1JCbYjxfoRjS9gNMbaLgOqMYDHZEtucfwmQ4E6t7AKbEbsREhl+lE0RaA9HygSqcxr7+x4tgnzTQY7Cr5zf/OsVAbhGZ5Iq4j4fRY/voXJJv3UgYrO/pLbqFXVkA6Q+FUYN4I8ewq7/xliQnx/IeX9rra1SKiCUrzrgD/Nn/npKRU9I/XXWm5cE9y6iP/v5rLJclnJqLJMYBgI+36TkU2Tv0z/cK6QAbIkM+1MabfPSWr8Zqu1Cb484DySwPB/EUIhiGduOisNAq0JSmmMq9vWAGVrVnhJcOWU6EDzJPwLj/ek0+O41feGO568J9V9mM1LyGg==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=nvidia.com; dmarc=pass action=none header.from=nvidia.com;
- dkim=pass header.d=nvidia.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=Nvidia.com;
- s=selector2;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=GQGJVTfcfOGukN/wqn42eQkyJSDGVaQxvHsrL8yY1VU=;
- b=kcIAmoM2+dxEcHL4uWhNlgayi9KEzjfj0j/bKO28vSeriFXy3pNoUNJoiPp9Fo2mA4cKRHDZZSMgykHE9ts/cbPf8HXYUThb1H765pzODW+JbsLrtl91709nCyfLgzNSnY+QKfMnFwFmaqSrDgA3T45CNpIeRIzuts/beXBka+B9ryQKj9pp48wwqdDNK5iSVa4GSEx1/ou63jVXHZzDmfku66SjbPah9/sACLWfX2klHE00lMXuH9yIgmKiLbS0bndA5GJNGxsxPzF/w5Tqva5AsMmMMcquUCJlP1rQbDM9fGngMdaaiBhlwlraK3KEdbnShCh6853AA6yyFuMnbQ==
-Authentication-Results: dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=nvidia.com;
-Received: from CH3PR12MB8659.namprd12.prod.outlook.com (2603:10b6:610:17c::13)
- by PH7PR12MB8593.namprd12.prod.outlook.com (2603:10b6:510:1b1::7)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.7982.24; Wed, 25 Sep
- 2024 01:29:37 +0000
-Received: from CH3PR12MB8659.namprd12.prod.outlook.com
- ([fe80::6eb6:7d37:7b4b:1732]) by CH3PR12MB8659.namprd12.prod.outlook.com
- ([fe80::6eb6:7d37:7b4b:1732%4]) with mapi id 15.20.7982.022; Wed, 25 Sep 2024
- 01:29:36 +0000
-Date: Tue, 24 Sep 2024 22:29:35 -0300
-From: Jason Gunthorpe <jgg@nvidia.com>
-To: Dave Airlie <airlied@gmail.com>
-Cc: Danilo Krummrich <dakr@kernel.org>, Zhi Wang <zhiw@nvidia.com>,
- kvm@vger.kernel.org, nouveau@lists.freedesktop.org,
- alex.williamson@redhat.com, kevin.tian@intel.com, daniel@ffwll.ch,
- acurrid@nvidia.com, cjia@nvidia.com, smitra@nvidia.com,
- ankita@nvidia.com, aniketa@nvidia.com, kwankhede@nvidia.com,
- targupta@nvidia.com, zhiwang@kernel.org
-Subject: Re: [RFC 00/29] Introduce NVIDIA GPU Virtualization (vGPU) Support
-Message-ID: <20240925012935.GQ9417@nvidia.com>
-References: <20240922124951.1946072-1-zhiw@nvidia.com>
- <ZvErg51xH32b8iW6@pollux> <20240923150140.GB9417@nvidia.com>
- <ZvHwzzp2F71W8TAs@pollux.localdomain>
- <20240924164151.GJ9417@nvidia.com> <ZvMZisyZFO888N0E@cassiopeiae>
- <CAPM=9twKGFV8SA165QufaGUev0tnuHABAi0TMvDQSfa7PJfZaQ@mail.gmail.com>
- <20240924234737.GO9417@nvidia.com>
- <CAPM=9tx+uU=uceg=Zr4N9=Y28j8kHnBVD+J9sf9xkfJ1xtTXEA@mail.gmail.com>
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <CAPM=9tx+uU=uceg=Zr4N9=Y28j8kHnBVD+J9sf9xkfJ1xtTXEA@mail.gmail.com>
-X-ClientProxiedBy: MN2PR06CA0016.namprd06.prod.outlook.com
- (2603:10b6:208:23d::21) To CH3PR12MB8659.namprd12.prod.outlook.com
- (2603:10b6:610:17c::13)
+Received: from mail-lf1-f53.google.com (mail-lf1-f53.google.com
+ [209.85.167.53])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 5FBD110E06E
+ for <nouveau@lists.freedesktop.org>; Wed, 25 Sep 2024 10:44:44 +0000 (UTC)
+Received: by mail-lf1-f53.google.com with SMTP id
+ 2adb3069b0e04-5365d3f9d34so6800199e87.3
+ for <nouveau@lists.freedesktop.org>; Wed, 25 Sep 2024 03:44:44 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=gmail.com; s=20230601; t=1727261082; x=1727865882; darn=lists.freedesktop.org;
+ h=to:subject:message-id:date:from:references:in-reply-to:mime-version
+ :from:to:cc:subject:date:message-id:reply-to;
+ bh=5tt+uixxRqyQQJuCOCrisCOg4+aMLT5vzvaHSSVwSzw=;
+ b=NxIN002uII4ABT7lb1LMFEo3tmdgoGfLeLxT/TJ8FfYutdYp/HjQTGdMFhmK8tChs4
+ +Vh2xRkAsX0YwtmrblCp/g+ADOqgkRemwOPB9qQVf7XDOqt5qqujulaKxKRMF9kQCd9y
+ phQ3KBWD/goQhgPnRrAMF39GCGd1yoZM5pc9kgoYOnrwDJGzmMPHvvZ9XW6QHcD0XrUM
+ sNkZ55I/8T5fYZp7VeIlXNRmhRn1I7dd4+5m4u6FaLKO25Kpa+ggppmXtA0CR+PK20o/
+ mLYIVYD1C9v38oxh5ImYlluJauBOkaa2DpYMCJtuIv0CrLADx7Fo+1LQQAHCroVSCtkR
+ aRLw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1727261082; x=1727865882;
+ h=to:subject:message-id:date:from:references:in-reply-to:mime-version
+ :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+ bh=5tt+uixxRqyQQJuCOCrisCOg4+aMLT5vzvaHSSVwSzw=;
+ b=wFtgKybv8sS+7QkrPTtL3wwIGddUgH3XqSf2C3mmTDUtiD3D0Y/j6kHBMwmw9W4pvQ
+ AR9nXd7UZMYwHZiMd6hprvZBHfa9pcNhqYhtSxvU0s6Cnjkbh8jE7ptL7UzwbcarKr+n
+ Z5e9iSLzwMCbED8YygguIbTFxiPph948/lKLhYYLMsXTc91e1Mh4RhRLUWV56iZLlH7r
+ MbWOfrv2iwvR4udbnVW3gpncECoMmo7fabhenukNXn4dLCZCn5fmBq0LA1LD9ttgkLbE
+ ti+jPk867RoIda01IaudI5yZYicZtopuR+QIyJHq8LXTPU/qO8d32JuDibLrOllwXMfL
+ TKsg==
+X-Gm-Message-State: AOJu0YyY8UikO/z/aonfoopOqArnJWIx+u//m6nZ22B4VgX8Brfqkq5L
+ 7VJjoYP0CZPvy3ylKXYZV6+T4hUTp5fLjedI2TykMvbiBJPTCy7Yc/A7mijVqSH18NEPHoRRUYp
+ URJwsG/GltWyG/1N8wDEE6OS0x+eyDQ==
+X-Google-Smtp-Source: AGHT+IG6DKWqBDSu7Wlpa+f+anHaPuI8ijwR5mQPxWzrZw1vFG/Ytfa8VBnoABhfj35qdpEInvcVexKon9hAHqHQmjo=
+X-Received: by 2002:a05:6512:1194:b0:536:7cfb:6998 with SMTP id
+ 2adb3069b0e04-53877538d2amr1356922e87.35.1727261081706; Wed, 25 Sep 2024
+ 03:44:41 -0700 (PDT)
 MIME-Version: 1.0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: CH3PR12MB8659:EE_|PH7PR12MB8593:EE_
-X-MS-Office365-Filtering-Correlation-Id: 4824a838-e3fe-4412-03fb-08dcdd018458
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0;ARA:13230040|1800799024|376014|366016;
-X-Microsoft-Antispam-Message-Info: =?us-ascii?Q?X6EVdkEv9mCNHUa+cXN99ijoKBMXs1Okj3R0704HoNEBrtRuwK1Wp6Ua4yOZ?=
- =?us-ascii?Q?2+gSujN11f4TxdTu9yIDfTBdBmlrHu5S30rd/OjtUWUN6UT3bgt60BSpkQOu?=
- =?us-ascii?Q?wT+kJPtGg8xqjFjQgg2+pPTivchwN1/HT2/O5l+IH3db5Lhn3gD5RUF8cuFq?=
- =?us-ascii?Q?PzIjYWO7JC6M+REfH5zZ/SKNAY36/GUABxB6sBq7B9Dg0YZ0HelMtsGwL5Qi?=
- =?us-ascii?Q?q9npKFsh77a+cjGawDYGusNeHo1OxSiHBwoQB/tmCb0gEb4x/J8Dxx9svHP/?=
- =?us-ascii?Q?CqkvyGyUt3Lf/02kBlfTVVzd+sv1k4rYMaPWlR9RK49nUkMPOVPSN1nhoeh+?=
- =?us-ascii?Q?hCJEymzHh57RIWpCzdd1K1fdGMniopgdMhx3TYjgyBjguJX2h4bw2vOU4w8S?=
- =?us-ascii?Q?3fG314T/v1CvfiOI0HD/bWt0f2e5gwTAhd269Aa3W+NPWIbv2cBOgoRtLq7f?=
- =?us-ascii?Q?CKw+zM5BZKAF3x0lfh7OKQ99itfocYuRr6CPCP2gd+GyjEfyzt7soWYEOB4W?=
- =?us-ascii?Q?OsQmD3d7UuSyrU4cRVlxaY2XNMfEKV1dfgo/AceH4arJ8pjmsuutUw/SGjid?=
- =?us-ascii?Q?/kN248/Oebv8JlDavoFc+oLg8klomtcUJYjMmQrMCjwQQiDvqMqFBig/Opua?=
- =?us-ascii?Q?AgLnToc0BAOA+QmUSa46JBmqnMKvLlFNrx61IdNR2Y80sNC2BYh/+urWDwOU?=
- =?us-ascii?Q?cvks3GcuGJw1wgWw74Lrah0vH36ZPtEDG7UQzfE9jGTTxnKxZ7x5Ns/sDYBW?=
- =?us-ascii?Q?d/auaQNGBSiObQ1tZEEn5NqMFk+CHTeLPfLtkxNnyaoCS07T65cHmOWIxYeF?=
- =?us-ascii?Q?ouHlWsFZDat4s4uK6GdlHDzV9+nF9JdoizmGcHr6YuN3YczWss/sG9wcnQuj?=
- =?us-ascii?Q?Et9JB2MJnhqX/I5cvQfSqEh2wLLou+4eG1SISvAbOK55cnEWOKV6pDxJ8tzU?=
- =?us-ascii?Q?jiwfKUObdOoVjV9IutVCxc2lOujdRSX2wkZDnQg87Sue26huWGcnokdATePI?=
- =?us-ascii?Q?VQ6hUh2TCFnFBIN76Zl9QWweK3n0guGcV2bcfcJUtNLmYmIme6WdGlbEQ32Z?=
- =?us-ascii?Q?v73YH6Qdphb8ZfJBf5wOUs2HN5hkwY/WWmvJG/SPfqeYcoOkBOm1xyzs+kKY?=
- =?us-ascii?Q?tMg1pV3MwEXoY9hajpPgoEiD7nsKZnpj61FOhstAplbVjKDPiDr18sf42vkJ?=
- =?us-ascii?Q?qlOBa5vVWGPSql23RMHgAYlepVGL8phrGVPsPfOVuTX38E6hejJf+tOne5vh?=
- =?us-ascii?Q?4Ce7JWMFRlQJkDKQQdyFjofu8fq0uvdEyuWYYND5CeRfNhkwFRNwuMAxKjeK?=
- =?us-ascii?Q?HDz4bx3oHi7iRTkyS7XDwIHIUnaPKBKjXmA1SpRMHUbyRg=3D=3D?=
-X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
- IPV:NLI; SFV:NSPM; H:CH3PR12MB8659.namprd12.prod.outlook.com; PTR:; CAT:NONE;
- SFS:(13230040)(1800799024)(376014)(366016); DIR:OUT; SFP:1101; 
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: =?us-ascii?Q?4hEzHtDxfffKlUIbh0PuMF7CgXx0pFV9lNtZbLUkoEZPSDAh2wwdrFpZC38c?=
- =?us-ascii?Q?htKmK5UX3eRfnGoo1Y2WsJdcPLUnEnq2OgcQPxBhOFzlwjKbHQV/Wthk0oPc?=
- =?us-ascii?Q?kn3rPO0e5e/2trsndY8nyAzS5UPGYiXcaTCIRr9UHN1wwtwZJTEEe82YOp5l?=
- =?us-ascii?Q?o7gW/pLd1FEA0kgRedQoKVK46VamHdim7Y9SAGhWZqV8NzcEuD/RpB/ohl1N?=
- =?us-ascii?Q?vqoM9qxw8NKVt0iYy+F2hc7oM0O0IchYh5JoLoXFc5WFLJ5OOk1i6bddtxwM?=
- =?us-ascii?Q?eB5UU1fsVFqWrvO9Uv7Axv4jYYzi2R78YyvA7eGo6khatCNmGpcB3SIgNxQc?=
- =?us-ascii?Q?psSA5q/ie01cNPy//reN8ftzqLgdNT8sIXJlKH0ClPEJFqF+SOm+oOX814AQ?=
- =?us-ascii?Q?XFyb7sFgg3KE/A0dEaKfIdNy4y4MBgurTo4fc/QLCla8eorDCPtdktRRE3P1?=
- =?us-ascii?Q?PSevft5WSk0IT4axEPCl/dX5C+40LaEHOmMoJIVA9gKsnKYvmIHOxRvs9+4G?=
- =?us-ascii?Q?BefbKFVTZqrEqzmXEuvfxW8O6JpWbHszULGzaEZZuXeSmPG/YRy+Fiwo67zU?=
- =?us-ascii?Q?vKyFVRsee56bas4Mf70ObN/vCQkzMIlU3GHfD6liMHxR4vdG/dTQr8DxkHP/?=
- =?us-ascii?Q?T6aGi/LPE1cgJHAMoOzGWFcb+KgaGhT8aeJ8w6WGAarTBP6PZmV/o/ovBKqP?=
- =?us-ascii?Q?kcKG+ArXJfGZZXFDfMm0bVQbILLG4c9o0femR1bcz5Mxm/MyEAYJ3JuGgJFY?=
- =?us-ascii?Q?dkdBEPxvrIaKJVpiin+HitCYnIvls3dnhEMCtl7hhGsBVLCrNQh+/uPwzFu5?=
- =?us-ascii?Q?JsVg6WvqN8G1CioaKj13uKl9KTIrSOBr9EnFGiRUP7nBgkgR6WbgUWYV2Sw7?=
- =?us-ascii?Q?NAjEq7vXouste8Qlruj4VaLAMFKXshaO+TTWUIAopN4CiVut7Al5v1kuJBZR?=
- =?us-ascii?Q?zBnIam1BH5BYZsm1THviAySfYyen3WVP10mK1LUoZ8aF/wum3ofQCmKBY3PW?=
- =?us-ascii?Q?yBzdcdrry9Wyq1YE0lzpl7m6TA4dEpJ91gY/NfxFCC3n4acyLEy/0Mey2ogM?=
- =?us-ascii?Q?sTovK1pjgMXop66tDo/P/NA65+gCNmEad+UX4u8LqMyvoqQUceBoacT7VtCp?=
- =?us-ascii?Q?liBDfO8sDn1foDHLGyVEZPwwfVQE6bHKebvSImJ4FjNsKwuYZobgPkm2/Vg+?=
- =?us-ascii?Q?oGpjQ154zughLHJOUNbZ0sQnlChoXsh70cBCemDy6tLAHhZt638DmtU8He1O?=
- =?us-ascii?Q?YumAo59JW8RClrox+NDthe1VKeiE/adCpxsCBFDdRws1BVSV7XDQLFn3MrrH?=
- =?us-ascii?Q?KIOi3TKGoZwIDkLvQ8yYIcBwygDIAB1CBHXK0XRU6QekpjtLYgRezg+EMK8x?=
- =?us-ascii?Q?1xC31Mtpy18d4qqQtL5WQXMnzwtvPi6LUC9BID0NvfmggBZSLceTQdtX7oFr?=
- =?us-ascii?Q?WIyiGfHUrVZ0LJrWFo6M0jN6r63eW0KqzN7gl1XOGD5YuPek0UVaXKsNDS2w?=
- =?us-ascii?Q?Ky4L/TJ1HVPRu1pYfHSWNWfy1+33AS6c/Ignl7TApDFDkF+rWiq3qIAsgNQg?=
- =?us-ascii?Q?ALNc5drxyoUiLg6088o=3D?=
-X-OriginatorOrg: Nvidia.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 4824a838-e3fe-4412-03fb-08dcdd018458
-X-MS-Exchange-CrossTenant-AuthSource: CH3PR12MB8659.namprd12.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 25 Sep 2024 01:29:36.6129 (UTC)
-X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
-X-MS-Exchange-CrossTenant-Id: 43083d15-7273-40c1-b7db-39efd9ccc17a
-X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: uDraaNHsxeVCqtHfhLir+9e2QcosdlUZ53Ibfd8wUWOtQBnQpzj+ggymjVkPm9pL
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: PH7PR12MB8593
+Received: by 2002:aa6:d087:0:b0:29b:9970:cf97 with HTTP; Wed, 25 Sep 2024
+ 03:44:40 -0700 (PDT)
+In-Reply-To: <CAD8U+g-kywnHzW1SRRkUmgfTv8Vey9KdCDwnan2N9aRTU_jHgw@mail.gmail.com>
+References: <CAD8U+g-kywnHzW1SRRkUmgfTv8Vey9KdCDwnan2N9aRTU_jHgw@mail.gmail.com>
+From: riveravaldez <riveravaldezmail@gmail.com>
+Date: Wed, 25 Sep 2024 07:44:40 -0300
+Message-ID: <CAD8U+g_9QtPzLwTOcA-uA73FWjv_tJsn247_VOez9HHf1jrwZA@mail.gmail.com>
+Subject: Re: Some program windows only show "rain"...
+To: nouveau <nouveau@lists.freedesktop.org>
+Content-Type: multipart/alternative; boundary="00000000000035a9680622ef4f48"
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -151,68 +73,88 @@ List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-On Wed, Sep 25, 2024 at 10:18:44AM +1000, Dave Airlie wrote:
+--00000000000035a9680622ef4f48
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 
-> > ? nova core, meaning nova rust, meaning vfio depends on rust, doesn't
-> > seem acceptable ? We need to keep rust isolated to DRM for the
-> > foreseeable future. Just need to find a separation that can do that.
-> 
-> That isn't going to happen, if we start with that as the default
-> positioning it won't get us very far.
+El martes, 24 de septiembre de 2024, riveravaldez<riveravaldezmail@gmail.co=
+m>
+escribi=C3=B3:
+> Hi, I guess somewhat around a year I started to have this problem (I'm on
+an updated Arch GNU+Linux laptop, Dell XPS 15) which disappeared with some
+system updates but reappeared with others and it has stayed through various
+updates for a while now...
+>
+> Programs seem to run normally but their windows only show "rain", nothing
+understandable.
+>
+> It only happens with this programs, AFAICT:
+> $ chromium (avoidable with --disable-gpu )
+> $ epiphany
+> $ flatpak run chat.delta.desktop
+> $ jami (seems to get fixed with: $ LIBGL_ALWAYS_SOFTWARE=3D1 jami )
+> $ mscore (aka, musescore)
+>
+> Despite variations on each program, the 'nouveau' part I got in terminal
+output is always one of these (e.g.):
+>
+> $ epiphany
+> (...)
+> (etc.)
+>
+> $ flatpak run chat.delta.desktop
+> (...)
+> (etc.)
+>
+>
+> Any help would be very welcome...
+>
+> Some questions:
+> 0. Should I add a complete terminal output in some way?
+> 1. Is there anything I could do to help fix this issue?
+> 2. What can I do to keep working with those programs until the issue gets
+fixed?
+>
+> Thanks a lot in advance, kind regards.
 
-What do you want me to say to that? We can't have rust in VFIO right
-now, we don't have that luxury. This is just a fact, I can't change
-it.
+Hi, everybody, in case is relevant: rebooting and editing the 'linux' line
+in GRUB with:
 
-If you say upstream has to be rust then there just won't be upstream
-and this will all go OOT and stay as C code. That isn't a good
-outcome. Having rust usage actively harm participation in the kernel
-seems like the exact opposite of the consensus of the maintainer
-summit.
+module_blacklist=3Dnouveau
 
-> The core has to be rust, because NVIDIA has an unstable firmware API.
-> The unstable firmware API isn't some command marshalling, it's deep
-> down into the depths of it, like memory sizing requirements, base
-> message queue layout and encoding, firmware init procedures.
+, makes everything work apparently fine.
 
-I get the feeling the vast majorty of the work, and primary rust
-benefit, lies in the command marshalling.
+Any ideas?
 
-If the init *procedures* change, for instance, you are going to have to
-write branches no matter what language you use.
+Thanks a lot in advance.
+Kind regards.
 
-I don't know, it is just a suggestion to consider.
+--00000000000035a9680622ef4f48
+Content-Type: text/html; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 
-> Now there are maybe some on/off ramps we can use here that might
-> provide some solutions to bridge the gap. Using rust in the kernel has
-> various levels, which we currently tie into one place, but if we
-> consider different longer term progressions it might be possible to
-> start with some rust that is easier to backport than other rust might
-> be etc.
+El martes, 24 de septiembre de 2024, riveravaldez&lt;<a href=3D"mailto:rive=
+ravaldezmail@gmail.com">riveravaldezmail@gmail.com</a>&gt; escribi=C3=B3:<b=
+r>&gt; Hi, I guess somewhat around a year I started to have this problem (I=
+&#39;m on an updated Arch GNU+Linux laptop, Dell XPS 15) which disappeared =
+with some system updates but reappeared with others and it has stayed throu=
+gh various updates for a while now...<br>&gt;<br>&gt; Programs seem to run =
+normally but their windows only show &quot;rain&quot;, nothing understandab=
+le.<br>&gt;<br>&gt; It only happens with this programs, AFAICT:<br>&gt; $ c=
+hromium (avoidable with --disable-gpu )<br>&gt; $ epiphany<br>&gt; $ flatpa=
+k run chat.delta.desktop<br>&gt; $ jami (seems to get fixed with: $ LIBGL_A=
+LWAYS_SOFTWARE=3D1 jami )<br>&gt; $ mscore (aka, musescore)<br>&gt;<br>&gt;=
+ Despite variations on each program, the &#39;nouveau&#39; part I got in te=
+rminal output is always one of these (e.g.):<br>&gt;<br>&gt; $ epiphany<br>=
+&gt; (...)<br>&gt; (etc.)<br>&gt;<br>&gt; $ flatpak run chat.delta.desktop<=
+br>&gt; (...)<br>&gt; (etc.)<br>&gt;<br>&gt;<br>&gt; Any help would be very=
+ welcome...<br>&gt;<br>&gt; Some questions:<br>&gt; 0. Should I add a compl=
+ete terminal output in some way?<br>&gt; 1. Is there anything I could do to=
+ help fix this issue?<br>&gt; 2. What can I do to keep working with those p=
+rograms until the issue gets fixed?<br>&gt;<br>&gt; Thanks a lot in advance=
+, kind regards.<br><br>Hi, everybody, in case is relevant: rebooting and ed=
+iting the &#39;linux&#39; line in GRUB with:<br><br>module_blacklist=3Dnouv=
+eau<br><br>, makes everything work apparently fine.<br><br>Any ideas?<br><b=
+r>Thanks a lot in advance.<br>Kind regards.
 
-That seems to be entirely unexplored territory. Certainly if the
-backporting can be shown to be solved then I have much less objection
-to having VFIO depend on rust.
-
-This is part of why I suggested that a rust core driver could expose
-the C APIs that VFIO needs with a kconfig switch. Then people can
-experiment and give feedback on what backporting this rust stuff is
-actually like. That would be valuable for everyone I think. Especially
-if the feedback is that backporting is no problem.
-
-Yes we have duplication while that is ongoing, but I think that is
-inevitable, and at least everyone could agree to the duplication and I
-expect NVIDIA would sign up to maintain the C VFIO stack top to
-bottom.
-
-> The end result though is to have nova core and nova drm in rust, that
-> is the decision upstream made 6-12 months ago, I don't see any of the
-> initial reasons for using rust have been invalidated or removed that
-> warrant revisiting that decision.
-
-Never said they did, but your decision to use Rust in Nova does not
-automatically mean a decision to use Rust in VFIO, and now we have a
-new requirement to couple the two together. It still must be resolved
-satisfactorily.
-
-Jason
+--00000000000035a9680622ef4f48--
