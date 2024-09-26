@@ -2,42 +2,45 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id 72D7098742E
-	for <lists+nouveau@lfdr.de>; Thu, 26 Sep 2024 15:08:29 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 5E70998746C
+	for <lists+nouveau@lfdr.de>; Thu, 26 Sep 2024 15:28:39 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 4691E10EB35;
-	Thu, 26 Sep 2024 13:07:56 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 3BA7610EB42;
+	Thu, 26 Sep 2024 13:28:20 +0000 (UTC)
 Authentication-Results: gabe.freedesktop.org;
-	dkim=pass (1024-bit key; unprotected) header.d=ideasonboard.com header.i=@ideasonboard.com header.b="k2UWsHwg";
+	dkim=pass (1024-bit key; unprotected) header.d=ideasonboard.com header.i=@ideasonboard.com header.b="DhKI+3Ix";
 	dkim-atps=neutral
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
 Received: from perceval.ideasonboard.com (perceval.ideasonboard.com
  [213.167.242.64])
- by gabe.freedesktop.org (Postfix) with ESMTPS id F359810EB2C;
- Thu, 26 Sep 2024 13:07:54 +0000 (UTC)
+ by gabe.freedesktop.org (Postfix) with ESMTPS id AA6FB10EB41;
+ Thu, 26 Sep 2024 13:28:18 +0000 (UTC)
 Received: from [192.168.88.20] (91-156-87-48.elisa-laajakaista.fi
  [91.156.87.48])
- by perceval.ideasonboard.com (Postfix) with ESMTPSA id 864B4169;
- Thu, 26 Sep 2024 15:06:25 +0200 (CEST)
+ by perceval.ideasonboard.com (Postfix) with ESMTPSA id C9AA2169;
+ Thu, 26 Sep 2024 15:26:48 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=ideasonboard.com;
- s=mail; t=1727355986;
- bh=eh67dtCNXV3U8aT3LsVobHpkYFjKFmttr/m5eSCwtWo=;
+ s=mail; t=1727357209;
+ bh=VyvCCdwoCQ4Lzb7ohJQPcoY0VfQjDbrkwtkur0zexOc=;
  h=Date:Subject:To:Cc:References:From:In-Reply-To:From;
- b=k2UWsHwgVA/FPxAsSsH5yKXV6/Jlap+NAeNhsLKp2Ld18XpfXdvM2UrBoVV7YTfPd
- yPtHCt/5LrVagb0iTS9+BHYIZk9pE5HhmlCtxWlNk2espq4cPKZY3kt2UIUbjArUoE
- QA2zLmxe5iQqvbfpE8MOslQJ4r3yUdcZSfsRZk1s=
-Message-ID: <a926cc52-fe99-492c-ae36-9388c13b2738@ideasonboard.com>
-Date: Thu, 26 Sep 2024 16:07:50 +0300
+ b=DhKI+3IxWChNSev/1/JEyv7qhpEdl+JQq29YIjAeXszy2UeSVOWzeAPmQ+/GKlt0Y
+ 3QzHRaBEhPwBK8Nu8wYGDuTNKOwx9YNC/3B2SOCGvC8fgJen4b0XnlDUA/JLONFQZo
+ GXWFvkLCxTWJh20RpLAvY3CfGSwRtqT72Cv2gEls=
+Message-ID: <890a574e-caa0-47af-af09-ab2a1f695bbf@ideasonboard.com>
+Date: Thu, 26 Sep 2024 16:28:13 +0300
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v5 80/80] drm/omapdrm: Run DRM default client setup
+Subject: Re: [PATCH v5 47/80] drm/xlnx: Run DRM default client setup
 To: Thomas Zimmermann <tzimmermann@suse.de>, javierm@redhat.com,
  jfalempe@redhat.com, airlied@gmail.com, simona@ffwll.ch
 Cc: dri-devel@lists.freedesktop.org, amd-gfx@lists.freedesktop.org,
- intel-gfx@lists.freedesktop.org, nouveau@lists.freedesktop.org
+ intel-gfx@lists.freedesktop.org, nouveau@lists.freedesktop.org,
+ Laurent Pinchart <laurent.pinchart@ideasonboard.com>,
+ Michal Simek <michal.simek@amd.com>,
+ Laurent Pinchart <laurent.pinchart+renesas@ideasonboard.com>
 References: <20240924071734.98201-1-tzimmermann@suse.de>
- <20240924071734.98201-81-tzimmermann@suse.de>
+ <20240924071734.98201-48-tzimmermann@suse.de>
 Content-Language: en-US
 From: Tomi Valkeinen <tomi.valkeinen@ideasonboard.com>
 Autocrypt: addr=tomi.valkeinen@ideasonboard.com; keydata=
@@ -83,7 +86,7 @@ Autocrypt: addr=tomi.valkeinen@ideasonboard.com; keydata=
  ueeIlwJl5CpT5l8RpoZXEOVtXYn8zzOJ7oGZYINRV9Pf8qKGLf3Dft7zKBP832I3PQjeok7F
  yjt+9S+KgSFSHP3Pa4E7lsSdWhSlHYNdG/czhoUkSCN09C0rEK93wxACx3vtxPLjXu6RptBw
  3dRq7n+mQChEB1am0BueV1JZaBboIL0AGlSJkm23kw==
-In-Reply-To: <20240924071734.98201-81-tzimmermann@suse.de>
+In-Reply-To: <20240924071734.98201-48-tzimmermann@suse.de>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
 X-BeenThere: nouveau@lists.freedesktop.org
@@ -100,253 +103,72 @@ List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-On 24/09/2024 10:13, Thomas Zimmermann wrote:
-> Rework fbdev probing to support fbdev_probe in struct drm_driver
-> and remove the old fb_probe callback. Provide an initializer macro
-> for struct drm_driver that sets the callback according to the kernel
-> configuration.
-> 
-> Call drm_client_setup() to run the kernel's default client setup
-> for DRM. Set fbdev_probe in struct drm_driver, so that the client
+On 24/09/2024 10:12, Thomas Zimmermann wrote:
+> Call drm_client_setup_with_fourcc() to run the kernel's default client
+> setup for DRM. Set fbdev_probe in struct drm_driver, so that the client
 > setup can start the common fbdev client.
-> 
-> The omapdrm driver specifies a preferred color mode of 32. As this
-> is the default if no format has been given, leave it out entirely.
 > 
 > v5:
 > - select DRM_CLIENT_SELECTION
+> v2:
+> - use drm_client_setup_with_fourcc()
 > 
 > Signed-off-by: Thomas Zimmermann <tzimmermann@suse.de>
+> Cc: Laurent Pinchart <laurent.pinchart@ideasonboard.com>
 > Cc: Tomi Valkeinen <tomi.valkeinen@ideasonboard.com>
-> Acked-by: Javier Martinez Canillas <javierm@redhat.com>
+> Cc: Michal Simek <michal.simek@amd.com>
+> Reviewed-by: Laurent Pinchart <laurent.pinchart+renesas@ideasonboard.com>
 > ---
->   drivers/gpu/drm/omapdrm/Kconfig      |   1 +
->   drivers/gpu/drm/omapdrm/omap_drv.c   |   1 +
->   drivers/gpu/drm/omapdrm/omap_fbdev.c | 131 ++++++---------------------
->   drivers/gpu/drm/omapdrm/omap_fbdev.h |   8 ++
->   4 files changed, 39 insertions(+), 102 deletions(-)
+>   drivers/gpu/drm/xlnx/Kconfig      | 1 +
+>   drivers/gpu/drm/xlnx/zynqmp_kms.c | 4 +++-
+>   2 files changed, 4 insertions(+), 1 deletion(-)
+> 
+
+Tested on zynqmp zcu106.
 
 Reviewed-by: Tomi Valkeinen <tomi.valkeinen@ideasonboard.com>
 
   Tomi
 
-> diff --git a/drivers/gpu/drm/omapdrm/Kconfig b/drivers/gpu/drm/omapdrm/Kconfig
-> index fbd9af758581..9d4016bd0f44 100644
-> --- a/drivers/gpu/drm/omapdrm/Kconfig
-> +++ b/drivers/gpu/drm/omapdrm/Kconfig
-> @@ -4,6 +4,7 @@ config DRM_OMAP
->   	depends on MMU
->   	depends on DRM && OF
->   	depends on ARCH_OMAP2PLUS || (COMPILE_TEST && PAGE_SIZE_LESS_THAN_64KB)
+> diff --git a/drivers/gpu/drm/xlnx/Kconfig b/drivers/gpu/drm/xlnx/Kconfig
+> index 626e5ac4c33d..4197f44e202f 100644
+> --- a/drivers/gpu/drm/xlnx/Kconfig
+> +++ b/drivers/gpu/drm/xlnx/Kconfig
+> @@ -6,6 +6,7 @@ config DRM_ZYNQMP_DPSUB
+>   	depends on PHY_XILINX_ZYNQMP
+>   	depends on XILINX_ZYNQMP_DPDMA
+>   	select DMA_ENGINE
 > +	select DRM_CLIENT_SELECTION
->   	select DRM_KMS_HELPER
+>   	select DRM_DISPLAY_DP_HELPER
 >   	select DRM_DISPLAY_HELPER
 >   	select DRM_BRIDGE_CONNECTOR
-> diff --git a/drivers/gpu/drm/omapdrm/omap_drv.c b/drivers/gpu/drm/omapdrm/omap_drv.c
-> index a982378aa141..1796cd20a877 100644
-> --- a/drivers/gpu/drm/omapdrm/omap_drv.c
-> +++ b/drivers/gpu/drm/omapdrm/omap_drv.c
-> @@ -647,6 +647,7 @@ static const struct drm_driver omap_drm_driver = {
->   	.gem_prime_import = omap_gem_prime_import,
->   	.dumb_create = omap_gem_dumb_create,
->   	.dumb_map_offset = omap_gem_dumb_map_offset,
-> +	OMAP_FBDEV_DRIVER_OPS,
->   	.ioctls = ioctls,
->   	.num_ioctls = DRM_OMAP_NUM_IOCTLS,
->   	.fops = &omapdriver_fops,
-> diff --git a/drivers/gpu/drm/omapdrm/omap_fbdev.c b/drivers/gpu/drm/omapdrm/omap_fbdev.c
-> index 044e80403c3b..f4bd0c6e3f34 100644
-> --- a/drivers/gpu/drm/omapdrm/omap_fbdev.c
-> +++ b/drivers/gpu/drm/omapdrm/omap_fbdev.c
-> @@ -6,6 +6,7 @@
->   
->   #include <linux/fb.h>
->   
+> diff --git a/drivers/gpu/drm/xlnx/zynqmp_kms.c b/drivers/gpu/drm/xlnx/zynqmp_kms.c
+> index bd1368df7870..2452c2f09161 100644
+> --- a/drivers/gpu/drm/xlnx/zynqmp_kms.c
+> +++ b/drivers/gpu/drm/xlnx/zynqmp_kms.c
+> @@ -14,6 +14,7 @@
+>   #include <drm/drm_blend.h>
+>   #include <drm/drm_bridge.h>
+>   #include <drm/drm_bridge_connector.h>
 > +#include <drm/drm_client_setup.h>
->   #include <drm/drm_drv.h>
->   #include <drm/drm_crtc_helper.h>
->   #include <drm/drm_fb_helper.h>
-> @@ -124,8 +125,32 @@ static const struct fb_ops omap_fb_ops = {
->   	.fb_destroy	= omap_fbdev_fb_destroy,
->   };
+>   #include <drm/drm_connector.h>
+>   #include <drm/drm_crtc.h>
+>   #include <drm/drm_device.h>
+> @@ -402,6 +403,7 @@ static const struct drm_driver zynqmp_dpsub_drm_driver = {
+>   					  DRIVER_ATOMIC,
 >   
-> -static int omap_fbdev_create(struct drm_fb_helper *helper,
-> -		struct drm_fb_helper_surface_size *sizes)
-> +static int omap_fbdev_dirty(struct drm_fb_helper *helper, struct drm_clip_rect *clip)
-> +{
-> +	if (!(clip->x1 < clip->x2 && clip->y1 < clip->y2))
-> +		return 0;
-> +
-> +	if (helper->fb->funcs->dirty)
-> +		return helper->fb->funcs->dirty(helper->fb, NULL, 0, 0, clip, 1);
-> +
-> +	return 0;
-> +}
-> +
-> +static const struct drm_fb_helper_funcs omap_fbdev_helper_funcs = {
-> +	.fb_dirty = omap_fbdev_dirty,
-> +};
-> +
-> +static struct drm_fb_helper *get_fb(struct fb_info *fbi)
-> +{
-> +	if (!fbi || strcmp(fbi->fix.id, MODULE_NAME)) {
-> +		/* these are not the fb's you're looking for */
-> +		return NULL;
-> +	}
-> +	return fbi->par;
-> +}
-> +
-> +int omap_fbdev_driver_fbdev_probe(struct drm_fb_helper *helper,
-> +				  struct drm_fb_helper_surface_size *sizes)
->   {
->   	struct drm_device *dev = helper->dev;
->   	struct omap_drm_private *priv = dev->dev_private;
-> @@ -207,6 +232,7 @@ static int omap_fbdev_create(struct drm_fb_helper *helper,
+>   	DRM_GEM_DMA_DRIVER_OPS_WITH_DUMB_CREATE(zynqmp_dpsub_dumb_create),
+> +	DRM_FBDEV_DMA_DRIVER_OPS,
 >   
->   	DBG("fbi=%p, dev=%p", fbi, dev);
+>   	.fops				= &zynqmp_dpsub_drm_fops,
 >   
-> +	helper->funcs = &omap_fbdev_helper_funcs;
->   	helper->fb = fb;
+> @@ -523,7 +525,7 @@ int zynqmp_dpsub_drm_init(struct zynqmp_dpsub *dpsub)
+>   		goto err_poll_fini;
 >   
->   	fbi->fbops = &omap_fb_ops;
-> @@ -253,94 +279,10 @@ static int omap_fbdev_create(struct drm_fb_helper *helper,
->   	return ret;
->   }
+>   	/* Initialize fbdev generic emulation. */
+> -	drm_fbdev_dma_setup(drm, 24);
+> +	drm_client_setup_with_fourcc(drm, DRM_FORMAT_RGB888);
 >   
-> -static int omap_fbdev_dirty(struct drm_fb_helper *helper, struct drm_clip_rect *clip)
-> -{
-> -	if (!(clip->x1 < clip->x2 && clip->y1 < clip->y2))
-> -		return 0;
-> -
-> -	if (helper->fb->funcs->dirty)
-> -		return helper->fb->funcs->dirty(helper->fb, NULL, 0, 0, clip, 1);
-> -
-> -	return 0;
-> -}
-> -
-> -static const struct drm_fb_helper_funcs omap_fb_helper_funcs = {
-> -	.fb_probe = omap_fbdev_create,
-> -	.fb_dirty = omap_fbdev_dirty,
-> -};
-> -
-> -static struct drm_fb_helper *get_fb(struct fb_info *fbi)
-> -{
-> -	if (!fbi || strcmp(fbi->fix.id, MODULE_NAME)) {
-> -		/* these are not the fb's you're looking for */
-> -		return NULL;
-> -	}
-> -	return fbi->par;
-> -}
-> -
-> -/*
-> - * struct drm_client
-> - */
-> -
-> -static void omap_fbdev_client_unregister(struct drm_client_dev *client)
-> -{
-> -	struct drm_fb_helper *fb_helper = drm_fb_helper_from_client(client);
-> -
-> -	if (fb_helper->info) {
-> -		drm_fb_helper_unregister_info(fb_helper);
-> -	} else {
-> -		drm_client_release(&fb_helper->client);
-> -		drm_fb_helper_unprepare(fb_helper);
-> -		kfree(fb_helper);
-> -	}
-> -}
-> -
-> -static int omap_fbdev_client_restore(struct drm_client_dev *client)
-> -{
-> -	drm_fb_helper_lastclose(client->dev);
-> -
-> -	return 0;
-> -}
-> -
-> -static int omap_fbdev_client_hotplug(struct drm_client_dev *client)
-> -{
-> -	struct drm_fb_helper *fb_helper = drm_fb_helper_from_client(client);
-> -	struct drm_device *dev = client->dev;
-> -	int ret;
-> -
-> -	if (dev->fb_helper)
-> -		return drm_fb_helper_hotplug_event(dev->fb_helper);
-> -
-> -	ret = drm_fb_helper_init(dev, fb_helper);
-> -	if (ret)
-> -		goto err_drm_err;
-> -
-> -	ret = drm_fb_helper_initial_config(fb_helper);
-> -	if (ret)
-> -		goto err_drm_fb_helper_fini;
-> -
-> -	return 0;
-> -
-> -err_drm_fb_helper_fini:
-> -	drm_fb_helper_fini(fb_helper);
-> -err_drm_err:
-> -	drm_err(dev, "Failed to setup fbdev emulation (ret=%d)\n", ret);
-> -	return ret;
-> -}
-> -
-> -static const struct drm_client_funcs omap_fbdev_client_funcs = {
-> -	.owner		= THIS_MODULE,
-> -	.unregister	= omap_fbdev_client_unregister,
-> -	.restore	= omap_fbdev_client_restore,
-> -	.hotplug	= omap_fbdev_client_hotplug,
-> -};
-> -
->   void omap_fbdev_setup(struct drm_device *dev)
->   {
->   	struct omap_drm_private *priv = dev->dev_private;
->   	struct omap_fbdev *fbdev;
-> -	struct drm_fb_helper *helper;
-> -	int ret;
+>   	return 0;
 >   
->   	drm_WARN(dev, !dev->registered, "Device has not been registered.\n");
->   	drm_WARN(dev, dev->fb_helper, "fb_helper is already set!\n");
-> @@ -353,20 +295,5 @@ void omap_fbdev_setup(struct drm_device *dev)
->   
->   	priv->fbdev = fbdev;
->   
-> -	helper = kzalloc(sizeof(*helper), GFP_KERNEL);
-> -	if (!helper)
-> -		return;
-> -	drm_fb_helper_prepare(dev, helper, 32, &omap_fb_helper_funcs);
-> -
-> -	ret = drm_client_init(dev, &helper->client, "fbdev", &omap_fbdev_client_funcs);
-> -	if (ret)
-> -		goto err_drm_client_init;
-> -
-> -	drm_client_register(&helper->client);
-> -
-> -	return;
-> -
-> -err_drm_client_init:
-> -	drm_fb_helper_unprepare(helper);
-> -	kfree(helper);
-> +	drm_client_setup(dev, NULL);
->   }
-> diff --git a/drivers/gpu/drm/omapdrm/omap_fbdev.h b/drivers/gpu/drm/omapdrm/omap_fbdev.h
-> index 74c691a8d45f..283e35b42ada 100644
-> --- a/drivers/gpu/drm/omapdrm/omap_fbdev.h
-> +++ b/drivers/gpu/drm/omapdrm/omap_fbdev.h
-> @@ -10,10 +10,18 @@
->   #define __OMAPDRM_FBDEV_H__
->   
->   struct drm_device;
-> +struct drm_fb_helper;
-> +struct drm_fb_helper_surface_size;
->   
->   #ifdef CONFIG_DRM_FBDEV_EMULATION
-> +int omap_fbdev_driver_fbdev_probe(struct drm_fb_helper *helper,
-> +				  struct drm_fb_helper_surface_size *sizes);
-> +#define OMAP_FBDEV_DRIVER_OPS \
-> +	.fbdev_probe = omap_fbdev_driver_fbdev_probe
->   void omap_fbdev_setup(struct drm_device *dev);
->   #else
-> +#define OMAP_FBDEV_DRIVER_OPS \
-> +	.fbdev_probe = NULL
->   static inline void omap_fbdev_setup(struct drm_device *dev)
->   {
->   }
 
