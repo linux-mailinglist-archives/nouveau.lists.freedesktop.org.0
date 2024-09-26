@@ -2,54 +2,90 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id 6B2C798742B
-	for <lists+nouveau@lfdr.de>; Thu, 26 Sep 2024 15:08:00 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 72D7098742E
+	for <lists+nouveau@lfdr.de>; Thu, 26 Sep 2024 15:08:29 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 15DF910EB40;
-	Thu, 26 Sep 2024 13:07:51 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 4691E10EB35;
+	Thu, 26 Sep 2024 13:07:56 +0000 (UTC)
 Authentication-Results: gabe.freedesktop.org;
-	dkim=pass (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="q3wf+1Om";
+	dkim=pass (1024-bit key; unprotected) header.d=ideasonboard.com header.i=@ideasonboard.com header.b="k2UWsHwg";
 	dkim-atps=neutral
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from dfw.source.kernel.org (dfw.source.kernel.org [139.178.84.217])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 13E8210EB2C
- for <nouveau@lists.freedesktop.org>; Thu, 26 Sep 2024 13:07:50 +0000 (UTC)
-Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by dfw.source.kernel.org (Postfix) with ESMTP id 84F335C5761;
- Thu, 26 Sep 2024 13:07:45 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 5C603C4CEC5;
- Thu, 26 Sep 2024 13:07:45 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1727356069;
- bh=b6uepNoKGBmNgWNv12pM51LJzIsTrpLZkdikjVf8S5U=;
- h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
- b=q3wf+1Om0DN5ukH4JzcaCRMqQIbx7NgUmuTqWlefv/XOzQZi4lXCjzx2Ms6a+sci+
- 1NmdmJTk0yXFs8EXoCIz/Sw/zWp+KRTzEdfIdnSNPgjNaKjj3QgYUwUlJvthoZCGOR
- 5YtO2ffPcE5v0mczLmpjApOhpAlB64qvW3a3zXKLn2woPfs6Tc4fWdJ8u9UvDF6OkK
- 2zsncgJ8syz87Iv9egN4jwWoYAOgOQ4kbCDUlwn5cIJNUljdAGlujfENTkoNuJXGI7
- j+A+M09Sg4wq5FTad9Hf2Gv1lvTmvcK/gN/syaD7BEpwwxpLODlDIb5NhQ9xz/037o
- UkusMmzvp2Smg==
-Date: Thu, 26 Sep 2024 15:07:40 +0200
-From: Danilo Krummrich <dakr@kernel.org>
-To: Jason Gunthorpe <jgg@nvidia.com>, Greg KH <gregkh@linuxfoundation.org>
-Cc: Zhi Wang <zhiw@nvidia.com>, kvm@vger.kernel.org,
- nouveau@lists.freedesktop.org, alex.williamson@redhat.com,
- kevin.tian@intel.com, airlied@gmail.com, daniel@ffwll.ch,
- acurrid@nvidia.com, cjia@nvidia.com, smitra@nvidia.com,
- ankita@nvidia.com, aniketa@nvidia.com, kwankhede@nvidia.com,
- targupta@nvidia.com, zhiwang@kernel.org
-Subject: Re: [RFC 00/29] Introduce NVIDIA GPU Virtualization (vGPU) Support
-Message-ID: <ZvVcnCRLd8B3Jilh@cassiopeiae>
-References: <20240922124951.1946072-1-zhiw@nvidia.com>
- <ZvErg51xH32b8iW6@pollux> <20240923150140.GB9417@nvidia.com>
- <2024092614-fossil-bagful-1d59@gregkh>
- <20240926124239.GX9417@nvidia.com>
- <2024092619-unglazed-actress-0a0f@gregkh>
+Received: from perceval.ideasonboard.com (perceval.ideasonboard.com
+ [213.167.242.64])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id F359810EB2C;
+ Thu, 26 Sep 2024 13:07:54 +0000 (UTC)
+Received: from [192.168.88.20] (91-156-87-48.elisa-laajakaista.fi
+ [91.156.87.48])
+ by perceval.ideasonboard.com (Postfix) with ESMTPSA id 864B4169;
+ Thu, 26 Sep 2024 15:06:25 +0200 (CEST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=ideasonboard.com;
+ s=mail; t=1727355986;
+ bh=eh67dtCNXV3U8aT3LsVobHpkYFjKFmttr/m5eSCwtWo=;
+ h=Date:Subject:To:Cc:References:From:In-Reply-To:From;
+ b=k2UWsHwgVA/FPxAsSsH5yKXV6/Jlap+NAeNhsLKp2Ld18XpfXdvM2UrBoVV7YTfPd
+ yPtHCt/5LrVagb0iTS9+BHYIZk9pE5HhmlCtxWlNk2espq4cPKZY3kt2UIUbjArUoE
+ QA2zLmxe5iQqvbfpE8MOslQJ4r3yUdcZSfsRZk1s=
+Message-ID: <a926cc52-fe99-492c-ae36-9388c13b2738@ideasonboard.com>
+Date: Thu, 26 Sep 2024 16:07:50 +0300
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <2024092619-unglazed-actress-0a0f@gregkh>
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v5 80/80] drm/omapdrm: Run DRM default client setup
+To: Thomas Zimmermann <tzimmermann@suse.de>, javierm@redhat.com,
+ jfalempe@redhat.com, airlied@gmail.com, simona@ffwll.ch
+Cc: dri-devel@lists.freedesktop.org, amd-gfx@lists.freedesktop.org,
+ intel-gfx@lists.freedesktop.org, nouveau@lists.freedesktop.org
+References: <20240924071734.98201-1-tzimmermann@suse.de>
+ <20240924071734.98201-81-tzimmermann@suse.de>
+Content-Language: en-US
+From: Tomi Valkeinen <tomi.valkeinen@ideasonboard.com>
+Autocrypt: addr=tomi.valkeinen@ideasonboard.com; keydata=
+ xsFNBE6ms0cBEACyizowecZqXfMZtnBniOieTuFdErHAUyxVgtmr0f5ZfIi9Z4l+uUN4Zdw2
+ wCEZjx3o0Z34diXBaMRJ3rAk9yB90UJAnLtb8A97Oq64DskLF81GCYB2P1i0qrG7UjpASgCA
+ Ru0lVvxsWyIwSfoYoLrazbT1wkWRs8YBkkXQFfL7Mn3ZMoGPcpfwYH9O7bV1NslbmyJzRCMO
+ eYV258gjCcwYlrkyIratlHCek4GrwV8Z9NQcjD5iLzrONjfafrWPwj6yn2RlL0mQEwt1lOvn
+ LnI7QRtB3zxA3yB+FLsT1hx0va6xCHpX3QO2gBsyHCyVafFMrg3c/7IIWkDLngJxFgz6DLiA
+ G4ld1QK/jsYqfP2GIMH1mFdjY+iagG4DqOsjip479HCWAptpNxSOCL6z3qxCU8MCz8iNOtZk
+ DYXQWVscM5qgYSn+fmMM2qN+eoWlnCGVURZZLDjg387S2E1jT/dNTOsM/IqQj+ZROUZuRcF7
+ 0RTtuU5q1HnbRNwy+23xeoSGuwmLQ2UsUk7Q5CnrjYfiPo3wHze8avK95JBoSd+WIRmV3uoO
+ rXCoYOIRlDhg9XJTrbnQ3Ot5zOa0Y9c4IpyAlut6mDtxtKXr4+8OzjSVFww7tIwadTK3wDQv
+ Bus4jxHjS6dz1g2ypT65qnHen6mUUH63lhzewqO9peAHJ0SLrQARAQABzTBUb21pIFZhbGtl
+ aW5lbiA8dG9taS52YWxrZWluZW5AaWRlYXNvbmJvYXJkLmNvbT7CwY4EEwEIADgWIQTEOAw+
+ ll79gQef86f6PaqMvJYe9QUCX/HruAIbAwULCQgHAgYVCgkICwIEFgIDAQIeAQIXgAAKCRD6
+ PaqMvJYe9WmFD/99NGoD5lBJhlFDHMZvO+Op8vCwnIRZdTsyrtGl72rVh9xRfcSgYPZUvBuT
+ VDxE53mY9HaZyu1eGMccYRBaTLJSfCXl/g317CrMNdY0k40b9YeIX10feiRYEWoDIPQ3tMmA
+ 0nHDygzcnuPiPT68JYZ6tUOvAt7r6OX/litM+m2/E9mtp8xCoWOo/kYO4mOAIoMNvLB8vufi
+ uBB4e/AvAjtny4ScuNV5c5q8MkfNIiOyag9QCiQ/JfoAqzXRjVb4VZG72AKaElwipiKCWEcU
+ R4+Bu5Qbaxj7Cd36M/bI54OrbWWETJkVVSV1i0tghCd6HHyquTdFl7wYcz6cL1hn/6byVnD+
+ sR3BLvSBHYp8WSwv0TCuf6tLiNgHAO1hWiQ1pOoXyMEsxZlgPXT+wb4dbNVunckwqFjGxRbl
+ Rz7apFT/ZRwbazEzEzNyrBOfB55xdipG/2+SmFn0oMFqFOBEszXLQVslh64lI0CMJm2OYYe3
+ PxHqYaztyeXsx13Bfnq9+bUynAQ4uW1P5DJ3OIRZWKmbQd/Me3Fq6TU57LsvwRgE0Le9PFQs
+ dcP2071rMTpqTUteEgODJS4VDf4lXJfY91u32BJkiqM7/62Cqatcz5UWWHq5xeF03MIUTqdE
+ qHWk3RJEoWHWQRzQfcx6Fn2fDAUKhAddvoopfcjAHfpAWJ+ENc7BTQROprNHARAAx0aat8GU
+ hsusCLc4MIxOQwidecCTRc9Dz/7U2goUwhw2O5j9TPqLtp57VITmHILnvZf6q3QAho2QMQyE
+ DDvHubrdtEoqaaSKxKkFie1uhWNNvXPhwkKLYieyL9m2JdU+b88HaDnpzdyTTR4uH7wk0bBa
+ KbTSgIFDDe5lXInypewPO30TmYNkFSexnnM3n1PBCqiJXsJahE4ZQ+WnV5FbPUj8T2zXS2xk
+ 0LZ0+DwKmZ0ZDovvdEWRWrz3UzJ8DLHb7blPpGhmqj3ANXQXC7mb9qJ6J/VSl61GbxIO2Dwb
+ xPNkHk8fwnxlUBCOyBti/uD2uSTgKHNdabhVm2dgFNVuS1y3bBHbI/qjC3J7rWE0WiaHWEqy
+ UVPk8rsph4rqITsj2RiY70vEW0SKePrChvET7D8P1UPqmveBNNtSS7In+DdZ5kUqLV7rJnM9
+ /4cwy+uZUt8cuCZlcA5u8IsBCNJudxEqBG10GHg1B6h1RZIz9Q9XfiBdaqa5+CjyFs8ua01c
+ 9HmyfkuhXG2OLjfQuK+Ygd56mV3lq0aFdwbaX16DG22c6flkkBSjyWXYepFtHz9KsBS0DaZb
+ 4IkLmZwEXpZcIOQjQ71fqlpiXkXSIaQ6YMEs8WjBbpP81h7QxWIfWtp+VnwNGc6nq5IQDESH
+ mvQcsFS7d3eGVI6eyjCFdcAO8eMAEQEAAcLBXwQYAQIACQUCTqazRwIbDAAKCRD6PaqMvJYe
+ 9fA7EACS6exUedsBKmt4pT7nqXBcRsqm6YzT6DeCM8PWMTeaVGHiR4TnNFiT3otD5UpYQI7S
+ suYxoTdHrrrBzdlKe5rUWpzoZkVK6p0s9OIvGzLT0lrb0HC9iNDWT3JgpYDnk4Z2mFi6tTbq
+ xKMtpVFRA6FjviGDRsfkfoURZI51nf2RSAk/A8BEDDZ7lgJHskYoklSpwyrXhkp9FHGMaYII
+ m9EKuUTX9JPDG2FTthCBrdsgWYPdJQvM+zscq09vFMQ9Fykbx5N8z/oFEUy3ACyPqW2oyfvU
+ CH5WDpWBG0s5BALp1gBJPytIAd/pY/5ZdNoi0Cx3+Z7jaBFEyYJdWy1hGddpkgnMjyOfLI7B
+ CFrdecTZbR5upjNSDvQ7RG85SnpYJTIin+SAUazAeA2nS6gTZzumgtdw8XmVXZwdBfF+ICof
+ 92UkbYcYNbzWO/GHgsNT1WnM4sa9lwCSWH8Fw1o/3bX1VVPEsnESOfxkNdu+gAF5S6+I6n3a
+ ueeIlwJl5CpT5l8RpoZXEOVtXYn8zzOJ7oGZYINRV9Pf8qKGLf3Dft7zKBP832I3PQjeok7F
+ yjt+9S+KgSFSHP3Pa4E7lsSdWhSlHYNdG/czhoUkSCN09C0rEK93wxACx3vtxPLjXu6RptBw
+ 3dRq7n+mQChEB1am0BueV1JZaBboIL0AGlSJkm23kw==
+In-Reply-To: <20240924071734.98201-81-tzimmermann@suse.de>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -64,87 +100,253 @@ List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-On Thu, Sep 26, 2024 at 02:54:38PM +0200, Greg KH wrote:
-> On Thu, Sep 26, 2024 at 09:42:39AM -0300, Jason Gunthorpe wrote:
-> > On Thu, Sep 26, 2024 at 11:14:27AM +0200, Greg KH wrote:
-> > > On Mon, Sep 23, 2024 at 12:01:40PM -0300, Jason Gunthorpe wrote:
-> > > > On Mon, Sep 23, 2024 at 10:49:07AM +0200, Danilo Krummrich wrote:
-> > > > > > 2. Proposal for upstream
-> > > > > > ========================
-> > > > > 
-> > > > > What is the strategy in the mid / long term with this?
-> > > > > 
-> > > > > As you know, we're trying to move to Nova and the blockers with the device /
-> > > > > driver infrastructure have been resolved and we're able to move forward. Besides
-> > > > > that, Dave made great progress on the firmware abstraction side of things.
-> > > > > 
-> > > > > Is this more of a proof of concept? Do you plan to work on Nova in general and
-> > > > > vGPU support for Nova?
-> > > > 
-> > > > This is intended to be a real product that customers would use, it is
-> > > > not a proof of concept. There is alot of demand for this kind of
-> > > > simplified virtualization infrastructure in the host side. The series
-> > > > here is the first attempt at making thin host infrastructure and
-> > > > Zhi/etc are doing it with an upstream-first approach.
-> > > > 
-> > > > >From the VFIO side I would like to see something like this merged in
-> > > > nearish future as it would bring a previously out of tree approach to
-> > > > be fully intree using our modern infrastructure. This is a big win for
-> > > > the VFIO world.
-> > > > 
-> > > > As a commercial product this will be backported extensively to many
-> > > > old kernels and that is harder/impossible if it isn't exclusively in
-> > > > C. So, I think nova needs to co-exist in some way.
-> > > 
-> > > Please never make design decisions based on old ancient commercial
-> > > kernels that have any relevance to upstream kernel development
-> > > today.
-> > 
-> > Greg, you are being too extreme. Those "ancient commercial kernels"
-> > have a huge relevance to alot of our community because they are the
-> > users that actually run the code we are building and pay for it to be
-> > created. Yes we usually (but not always!) push back on accommodations
-> > upstream, but taking hard dependencies on rust is currently a very
-> > different thing.
+On 24/09/2024 10:13, Thomas Zimmermann wrote:
+> Rework fbdev probing to support fbdev_probe in struct drm_driver
+> and remove the old fb_probe callback. Provide an initializer macro
+> for struct drm_driver that sets the callback according to the kernel
+> configuration.
 > 
-> That's fine, but again, do NOT make design decisions based on what you
-> can, and can not, feel you can slide by one of these companies to get it
-> into their old kernels.  That's what I take objection to here.
+> Call drm_client_setup() to run the kernel's default client setup
+> for DRM. Set fbdev_probe in struct drm_driver, so that the client
+> setup can start the common fbdev client.
 > 
-> Also always remember please, that the % of overall Linux kernel
-> installs, even counting out Android and embedded, is VERY tiny for these
-> companies.  The huge % overall is doing the "right thing" by using
-> upstream kernels.  And with the laws in place now that % is only going
-> to grow and those older kernels will rightfully fall away into even
-> smaller %.
+> The omapdrm driver specifies a preferred color mode of 32. As this
+> is the default if no format has been given, leave it out entirely.
 > 
-> I know those companies pay for many developers, I'm not saying that
-> their contributions are any less or more important than others, they all
-> are equal.  You wouldn't want design decisions for a patch series to be
-> dictated by some really old Yocto kernel restrictions that are only in
-> autos, right?  We are a large community, that's what I'm saying.
+> v5:
+> - select DRM_CLIENT_SELECTION
 > 
-> > Otherwise, let's slow down here. Nova is still years away from being
-> > finished. Nouveau is the in-tree driver for this HW. This series
-> > improves on Nouveau. We are definitely not at the point of refusing
-> > new code because it is not writte in Rust, RIGHT?
+> Signed-off-by: Thomas Zimmermann <tzimmermann@suse.de>
+> Cc: Tomi Valkeinen <tomi.valkeinen@ideasonboard.com>
+> Acked-by: Javier Martinez Canillas <javierm@redhat.com>
+> ---
+>   drivers/gpu/drm/omapdrm/Kconfig      |   1 +
+>   drivers/gpu/drm/omapdrm/omap_drv.c   |   1 +
+>   drivers/gpu/drm/omapdrm/omap_fbdev.c | 131 ++++++---------------------
+>   drivers/gpu/drm/omapdrm/omap_fbdev.h |   8 ++
+>   4 files changed, 39 insertions(+), 102 deletions(-)
 
-Just a reminder on what I said and not said, respectively. I never said we can't
-support this in Nouveau for the short and mid term.
+Reviewed-by: Tomi Valkeinen <tomi.valkeinen@ideasonboard.com>
 
-But we can't add new features and support new use-cases in Nouveau *without*
-considering the way forward to the new driver.
+  Tomi
 
-> 
-> No, I do object to "we are ignoring the driver being proposed by the
-> developers involved for this hardware by adding to the old one instead"
-> which it seems like is happening here.
-> 
-> Anyway, let's focus on the code, there's already real issues with this
-> patch series as pointed out by me and others that need to be addressed
-> before it can go anywhere.
-> 
-> thanks,
-> 
-> greg k-h
-> 
+> diff --git a/drivers/gpu/drm/omapdrm/Kconfig b/drivers/gpu/drm/omapdrm/Kconfig
+> index fbd9af758581..9d4016bd0f44 100644
+> --- a/drivers/gpu/drm/omapdrm/Kconfig
+> +++ b/drivers/gpu/drm/omapdrm/Kconfig
+> @@ -4,6 +4,7 @@ config DRM_OMAP
+>   	depends on MMU
+>   	depends on DRM && OF
+>   	depends on ARCH_OMAP2PLUS || (COMPILE_TEST && PAGE_SIZE_LESS_THAN_64KB)
+> +	select DRM_CLIENT_SELECTION
+>   	select DRM_KMS_HELPER
+>   	select DRM_DISPLAY_HELPER
+>   	select DRM_BRIDGE_CONNECTOR
+> diff --git a/drivers/gpu/drm/omapdrm/omap_drv.c b/drivers/gpu/drm/omapdrm/omap_drv.c
+> index a982378aa141..1796cd20a877 100644
+> --- a/drivers/gpu/drm/omapdrm/omap_drv.c
+> +++ b/drivers/gpu/drm/omapdrm/omap_drv.c
+> @@ -647,6 +647,7 @@ static const struct drm_driver omap_drm_driver = {
+>   	.gem_prime_import = omap_gem_prime_import,
+>   	.dumb_create = omap_gem_dumb_create,
+>   	.dumb_map_offset = omap_gem_dumb_map_offset,
+> +	OMAP_FBDEV_DRIVER_OPS,
+>   	.ioctls = ioctls,
+>   	.num_ioctls = DRM_OMAP_NUM_IOCTLS,
+>   	.fops = &omapdriver_fops,
+> diff --git a/drivers/gpu/drm/omapdrm/omap_fbdev.c b/drivers/gpu/drm/omapdrm/omap_fbdev.c
+> index 044e80403c3b..f4bd0c6e3f34 100644
+> --- a/drivers/gpu/drm/omapdrm/omap_fbdev.c
+> +++ b/drivers/gpu/drm/omapdrm/omap_fbdev.c
+> @@ -6,6 +6,7 @@
+>   
+>   #include <linux/fb.h>
+>   
+> +#include <drm/drm_client_setup.h>
+>   #include <drm/drm_drv.h>
+>   #include <drm/drm_crtc_helper.h>
+>   #include <drm/drm_fb_helper.h>
+> @@ -124,8 +125,32 @@ static const struct fb_ops omap_fb_ops = {
+>   	.fb_destroy	= omap_fbdev_fb_destroy,
+>   };
+>   
+> -static int omap_fbdev_create(struct drm_fb_helper *helper,
+> -		struct drm_fb_helper_surface_size *sizes)
+> +static int omap_fbdev_dirty(struct drm_fb_helper *helper, struct drm_clip_rect *clip)
+> +{
+> +	if (!(clip->x1 < clip->x2 && clip->y1 < clip->y2))
+> +		return 0;
+> +
+> +	if (helper->fb->funcs->dirty)
+> +		return helper->fb->funcs->dirty(helper->fb, NULL, 0, 0, clip, 1);
+> +
+> +	return 0;
+> +}
+> +
+> +static const struct drm_fb_helper_funcs omap_fbdev_helper_funcs = {
+> +	.fb_dirty = omap_fbdev_dirty,
+> +};
+> +
+> +static struct drm_fb_helper *get_fb(struct fb_info *fbi)
+> +{
+> +	if (!fbi || strcmp(fbi->fix.id, MODULE_NAME)) {
+> +		/* these are not the fb's you're looking for */
+> +		return NULL;
+> +	}
+> +	return fbi->par;
+> +}
+> +
+> +int omap_fbdev_driver_fbdev_probe(struct drm_fb_helper *helper,
+> +				  struct drm_fb_helper_surface_size *sizes)
+>   {
+>   	struct drm_device *dev = helper->dev;
+>   	struct omap_drm_private *priv = dev->dev_private;
+> @@ -207,6 +232,7 @@ static int omap_fbdev_create(struct drm_fb_helper *helper,
+>   
+>   	DBG("fbi=%p, dev=%p", fbi, dev);
+>   
+> +	helper->funcs = &omap_fbdev_helper_funcs;
+>   	helper->fb = fb;
+>   
+>   	fbi->fbops = &omap_fb_ops;
+> @@ -253,94 +279,10 @@ static int omap_fbdev_create(struct drm_fb_helper *helper,
+>   	return ret;
+>   }
+>   
+> -static int omap_fbdev_dirty(struct drm_fb_helper *helper, struct drm_clip_rect *clip)
+> -{
+> -	if (!(clip->x1 < clip->x2 && clip->y1 < clip->y2))
+> -		return 0;
+> -
+> -	if (helper->fb->funcs->dirty)
+> -		return helper->fb->funcs->dirty(helper->fb, NULL, 0, 0, clip, 1);
+> -
+> -	return 0;
+> -}
+> -
+> -static const struct drm_fb_helper_funcs omap_fb_helper_funcs = {
+> -	.fb_probe = omap_fbdev_create,
+> -	.fb_dirty = omap_fbdev_dirty,
+> -};
+> -
+> -static struct drm_fb_helper *get_fb(struct fb_info *fbi)
+> -{
+> -	if (!fbi || strcmp(fbi->fix.id, MODULE_NAME)) {
+> -		/* these are not the fb's you're looking for */
+> -		return NULL;
+> -	}
+> -	return fbi->par;
+> -}
+> -
+> -/*
+> - * struct drm_client
+> - */
+> -
+> -static void omap_fbdev_client_unregister(struct drm_client_dev *client)
+> -{
+> -	struct drm_fb_helper *fb_helper = drm_fb_helper_from_client(client);
+> -
+> -	if (fb_helper->info) {
+> -		drm_fb_helper_unregister_info(fb_helper);
+> -	} else {
+> -		drm_client_release(&fb_helper->client);
+> -		drm_fb_helper_unprepare(fb_helper);
+> -		kfree(fb_helper);
+> -	}
+> -}
+> -
+> -static int omap_fbdev_client_restore(struct drm_client_dev *client)
+> -{
+> -	drm_fb_helper_lastclose(client->dev);
+> -
+> -	return 0;
+> -}
+> -
+> -static int omap_fbdev_client_hotplug(struct drm_client_dev *client)
+> -{
+> -	struct drm_fb_helper *fb_helper = drm_fb_helper_from_client(client);
+> -	struct drm_device *dev = client->dev;
+> -	int ret;
+> -
+> -	if (dev->fb_helper)
+> -		return drm_fb_helper_hotplug_event(dev->fb_helper);
+> -
+> -	ret = drm_fb_helper_init(dev, fb_helper);
+> -	if (ret)
+> -		goto err_drm_err;
+> -
+> -	ret = drm_fb_helper_initial_config(fb_helper);
+> -	if (ret)
+> -		goto err_drm_fb_helper_fini;
+> -
+> -	return 0;
+> -
+> -err_drm_fb_helper_fini:
+> -	drm_fb_helper_fini(fb_helper);
+> -err_drm_err:
+> -	drm_err(dev, "Failed to setup fbdev emulation (ret=%d)\n", ret);
+> -	return ret;
+> -}
+> -
+> -static const struct drm_client_funcs omap_fbdev_client_funcs = {
+> -	.owner		= THIS_MODULE,
+> -	.unregister	= omap_fbdev_client_unregister,
+> -	.restore	= omap_fbdev_client_restore,
+> -	.hotplug	= omap_fbdev_client_hotplug,
+> -};
+> -
+>   void omap_fbdev_setup(struct drm_device *dev)
+>   {
+>   	struct omap_drm_private *priv = dev->dev_private;
+>   	struct omap_fbdev *fbdev;
+> -	struct drm_fb_helper *helper;
+> -	int ret;
+>   
+>   	drm_WARN(dev, !dev->registered, "Device has not been registered.\n");
+>   	drm_WARN(dev, dev->fb_helper, "fb_helper is already set!\n");
+> @@ -353,20 +295,5 @@ void omap_fbdev_setup(struct drm_device *dev)
+>   
+>   	priv->fbdev = fbdev;
+>   
+> -	helper = kzalloc(sizeof(*helper), GFP_KERNEL);
+> -	if (!helper)
+> -		return;
+> -	drm_fb_helper_prepare(dev, helper, 32, &omap_fb_helper_funcs);
+> -
+> -	ret = drm_client_init(dev, &helper->client, "fbdev", &omap_fbdev_client_funcs);
+> -	if (ret)
+> -		goto err_drm_client_init;
+> -
+> -	drm_client_register(&helper->client);
+> -
+> -	return;
+> -
+> -err_drm_client_init:
+> -	drm_fb_helper_unprepare(helper);
+> -	kfree(helper);
+> +	drm_client_setup(dev, NULL);
+>   }
+> diff --git a/drivers/gpu/drm/omapdrm/omap_fbdev.h b/drivers/gpu/drm/omapdrm/omap_fbdev.h
+> index 74c691a8d45f..283e35b42ada 100644
+> --- a/drivers/gpu/drm/omapdrm/omap_fbdev.h
+> +++ b/drivers/gpu/drm/omapdrm/omap_fbdev.h
+> @@ -10,10 +10,18 @@
+>   #define __OMAPDRM_FBDEV_H__
+>   
+>   struct drm_device;
+> +struct drm_fb_helper;
+> +struct drm_fb_helper_surface_size;
+>   
+>   #ifdef CONFIG_DRM_FBDEV_EMULATION
+> +int omap_fbdev_driver_fbdev_probe(struct drm_fb_helper *helper,
+> +				  struct drm_fb_helper_surface_size *sizes);
+> +#define OMAP_FBDEV_DRIVER_OPS \
+> +	.fbdev_probe = omap_fbdev_driver_fbdev_probe
+>   void omap_fbdev_setup(struct drm_device *dev);
+>   #else
+> +#define OMAP_FBDEV_DRIVER_OPS \
+> +	.fbdev_probe = NULL
+>   static inline void omap_fbdev_setup(struct drm_device *dev)
+>   {
+>   }
+
