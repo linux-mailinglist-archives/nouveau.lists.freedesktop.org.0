@@ -2,142 +2,141 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id 2E1E2988770
-	for <lists+nouveau@lfdr.de>; Fri, 27 Sep 2024 16:46:12 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id A4A6D988842
+	for <lists+nouveau@lfdr.de>; Fri, 27 Sep 2024 17:27:31 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id CB0A910E1D5;
-	Fri, 27 Sep 2024 14:46:10 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id AEAD210ECD3;
+	Fri, 27 Sep 2024 15:27:29 +0000 (UTC)
 Authentication-Results: gabe.freedesktop.org;
-	dkim=pass (1024-bit key; unprotected) header.d=suse.de header.i=@suse.de header.b="tfT63/EN";
-	dkim=permerror (0-bit key) header.d=suse.de header.i=@suse.de header.b="FB/iJqV5";
-	dkim=pass (1024-bit key) header.d=suse.de header.i=@suse.de header.b="tfT63/EN";
-	dkim=permerror (0-bit key) header.d=suse.de header.i=@suse.de header.b="FB/iJqV5";
+	dkim=pass (2048-bit key; unprotected) header.d=Nvidia.com header.i=@Nvidia.com header.b="jDW0Zb0t";
 	dkim-atps=neutral
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from smtp-out2.suse.de (smtp-out2.suse.de [195.135.223.131])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 05B4210E1D5;
- Fri, 27 Sep 2024 14:46:10 +0000 (UTC)
-Received: from imap1.dmz-prg2.suse.org (imap1.dmz-prg2.suse.org
- [IPv6:2a07:de40:b281:104:10:150:64:97])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
- (No client certificate requested)
- by smtp-out2.suse.de (Postfix) with ESMTPS id 71C341FB3A;
- Fri, 27 Sep 2024 14:46:08 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.de; s=susede2_rsa;
- t=1727448368; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
- mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references:autocrypt:autocrypt;
- bh=ag95j2HlwCUZAp2SvGyj6ELR44w7cR5N8MXq/hsV3lg=;
- b=tfT63/EN6pUS3YCuCGfd8F05gnmjMrbMPzUJ3F7Z9g+8iOkRx3DGHWpYVcWp686sj8p2wv
- WTnfUFRsTSxlWjqq8dvyRI9HQXDnJ/MHYLcDUvoOcaackTT90cn/F5lb8AmTTVldpvKQ3l
- uBnsxgvLvjjSiid16FtwI2AcBZUbuj0=
-DKIM-Signature: v=1; a=ed25519-sha256; c=relaxed/relaxed; d=suse.de;
- s=susede2_ed25519; t=1727448368;
- h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
- mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references:autocrypt:autocrypt;
- bh=ag95j2HlwCUZAp2SvGyj6ELR44w7cR5N8MXq/hsV3lg=;
- b=FB/iJqV5sxWZHvX3gozgBPwRuj/GLILRQ2en9IgAsXOKrkT01kQTvTBejEeyA90rRRnh+O
- pTf2C6dTVdyS1GAA==
-Authentication-Results: smtp-out2.suse.de;
- dkim=pass header.d=suse.de header.s=susede2_rsa header.b="tfT63/EN";
- dkim=pass header.d=suse.de header.s=susede2_ed25519 header.b="FB/iJqV5"
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.de; s=susede2_rsa;
- t=1727448368; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
- mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references:autocrypt:autocrypt;
- bh=ag95j2HlwCUZAp2SvGyj6ELR44w7cR5N8MXq/hsV3lg=;
- b=tfT63/EN6pUS3YCuCGfd8F05gnmjMrbMPzUJ3F7Z9g+8iOkRx3DGHWpYVcWp686sj8p2wv
- WTnfUFRsTSxlWjqq8dvyRI9HQXDnJ/MHYLcDUvoOcaackTT90cn/F5lb8AmTTVldpvKQ3l
- uBnsxgvLvjjSiid16FtwI2AcBZUbuj0=
-DKIM-Signature: v=1; a=ed25519-sha256; c=relaxed/relaxed; d=suse.de;
- s=susede2_ed25519; t=1727448368;
- h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
- mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references:autocrypt:autocrypt;
- bh=ag95j2HlwCUZAp2SvGyj6ELR44w7cR5N8MXq/hsV3lg=;
- b=FB/iJqV5sxWZHvX3gozgBPwRuj/GLILRQ2en9IgAsXOKrkT01kQTvTBejEeyA90rRRnh+O
- pTf2C6dTVdyS1GAA==
-Received: from imap1.dmz-prg2.suse.org (localhost [127.0.0.1])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
- (No client certificate requested)
- by imap1.dmz-prg2.suse.org (Postfix) with ESMTPS id 347F31386E;
- Fri, 27 Sep 2024 14:46:08 +0000 (UTC)
-Received: from dovecot-director2.suse.de ([2a07:de40:b281:106:10:150:64:167])
- by imap1.dmz-prg2.suse.org with ESMTPSA id GLZ8CzDF9mbyKwAAD6G6ig
- (envelope-from <tzimmermann@suse.de>); Fri, 27 Sep 2024 14:46:08 +0000
-Message-ID: <8fb2df6b-4708-4eac-aa18-d7825d0410a6@suse.de>
-Date: Fri, 27 Sep 2024 16:46:07 +0200
+Received: from NAM10-BN7-obe.outbound.protection.outlook.com
+ (mail-bn7nam10on2043.outbound.protection.outlook.com [40.107.92.43])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id D650410ECD3
+ for <nouveau@lists.freedesktop.org>; Fri, 27 Sep 2024 15:27:28 +0000 (UTC)
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=QSJBhxZRtEjERq11AG+h3fWzXkEfMNBmInvKdUeOhIb40ft/GWmSzkYCd4ahSxHt5ClbgbieVYxa09ZpXbU9imTfoARtk8rFxPb7WjJXEaWSeipFMk6aC6KS21hOcIwS1tQh4JcW7R34yOy8r7OrRQzRh6cD4tS/mB3AWEognYpcojinGFfE5UL/Nn5e5p3PY6RrsN3bRLX/snnJwJ6fNLBg+HRoRWxQJxKUHf2+L+CdrGhnohFHfB5BzEiVYtovY4gNWMHZHsqpddzy9bfS7S5Ri80eV5biOCHBbPaUYR16KBQ8AcSTYgtKutMw752H9jv0eyyY+6AYylYfyCiu+A==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=3pTdnrBYGUYHeR177lcdcDy1mE3mLolYvUp+szHMqF8=;
+ b=x9BHPxDmIx2Zb1tkrfsuZDMev6+rhPfmh/lvvWecEl1Q0BIMR1/ZLKOZOHar+lXNbGftof/XFzKEmO8KaK+xnOuGwkGpc8tRmO1rsuOXxIPPioSpY4KpPxjwiGHMLwXOyDwPEaJTdtlCMIQ7fc2h2QR/zjRgCbJ/G0BRUTK9qISZ9QqiJ2lfHBB62xFiIiqcfTmwZb8+4gwytN0yIQMING/CSaT+jmKdVC5rkSIztU1mXjSLNdUtP5+64sfHpWzRc9w5id/V+6Qo22/Y2b27FpV+N5fATLMah6w77gOHahV8kJ0piTgklF9ydR3FwMkPyOTG9rsbQRxX4ChFFx9Z9Q==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=nvidia.com; dmarc=pass action=none header.from=nvidia.com;
+ dkim=pass header.d=nvidia.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=Nvidia.com;
+ s=selector2;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=3pTdnrBYGUYHeR177lcdcDy1mE3mLolYvUp+szHMqF8=;
+ b=jDW0Zb0tYSfECfbg19NysjEBnjrdG5zUPbWsKV1/S8HUi9yTSkzmWv7PAQVIkUVonXOqp3xTjlOHKbjU1DhHNdSQOGWUhg3dJdRb7M5SMnY/tuub/QGyQkdIpfmklyDBq4gyAGClrnyOwehC3T/UOs01Z1l/jFk9ysYW6eGaTXVzAeFTlbJOCnxYMNi4/ezsy62DloKVC+QgKFysNooDbbEbJaGQ6lImZYfsWip++T4ClYeBrotv1qyQ5R8YKXqr6+QxK49Jcmi2OFD36X4agbeMn4Pm+aqhgDUj6vk7fHRsbhLGJX209M9z1krju5Y2yeE+4qVCFroTaiBUZe3oyA==
+Authentication-Results: dkim=none (message not signed)
+ header.d=none;dmarc=none action=none header.from=nvidia.com;
+Received: from CH3PR12MB8659.namprd12.prod.outlook.com (2603:10b6:610:17c::13)
+ by PH7PR12MB5901.namprd12.prod.outlook.com (2603:10b6:510:1d5::19)
+ with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.7982.28; Fri, 27 Sep
+ 2024 15:27:25 +0000
+Received: from CH3PR12MB8659.namprd12.prod.outlook.com
+ ([fe80::6eb6:7d37:7b4b:1732]) by CH3PR12MB8659.namprd12.prod.outlook.com
+ ([fe80::6eb6:7d37:7b4b:1732%4]) with mapi id 15.20.7982.022; Fri, 27 Sep 2024
+ 15:27:25 +0000
+Date: Fri, 27 Sep 2024 12:27:24 -0300
+From: Jason Gunthorpe <jgg@nvidia.com>
+To: Danilo Krummrich <dakr@kernel.org>
+Cc: Greg KH <gregkh@linuxfoundation.org>, Zhi Wang <zhiw@nvidia.com>,
+ kvm@vger.kernel.org, nouveau@lists.freedesktop.org,
+ alex.williamson@redhat.com, kevin.tian@intel.com, airlied@gmail.com,
+ daniel@ffwll.ch, acurrid@nvidia.com, cjia@nvidia.com,
+ smitra@nvidia.com, ankita@nvidia.com, aniketa@nvidia.com,
+ kwankhede@nvidia.com, targupta@nvidia.com, zhiwang@kernel.org
+Subject: Re: [RFC 00/29] Introduce NVIDIA GPU Virtualization (vGPU) Support
+Message-ID: <20240927152724.GC4568@nvidia.com>
+References: <20240922124951.1946072-1-zhiw@nvidia.com>
+ <ZvErg51xH32b8iW6@pollux> <20240923150140.GB9417@nvidia.com>
+ <2024092614-fossil-bagful-1d59@gregkh>
+ <20240926124239.GX9417@nvidia.com>
+ <2024092619-unglazed-actress-0a0f@gregkh>
+ <20240926144057.GZ9417@nvidia.com>
+ <ZvXjcPOCVUSlALZZ@pollux.localdomain>
+ <20240927125115.GZ9417@nvidia.com> <Zva_qP2B4rndSiCw@pollux>
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <Zva_qP2B4rndSiCw@pollux>
+X-ClientProxiedBy: MN2PR02CA0027.namprd02.prod.outlook.com
+ (2603:10b6:208:fc::40) To CH3PR12MB8659.namprd12.prod.outlook.com
+ (2603:10b6:610:17c::13)
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v5 79/80] drm/omapdrm: Remove struct drm_fb_helper from
- struct omap_fbdev.
-To: Tomi Valkeinen <tomi.valkeinen@ideasonboard.com>, javierm@redhat.com,
- jfalempe@redhat.com, airlied@gmail.com, simona@ffwll.ch
-Cc: dri-devel@lists.freedesktop.org, amd-gfx@lists.freedesktop.org,
- intel-gfx@lists.freedesktop.org, nouveau@lists.freedesktop.org
-References: <20240924071734.98201-1-tzimmermann@suse.de>
- <20240924071734.98201-80-tzimmermann@suse.de>
- <029f0567-f9df-402c-ae42-3bf27c060986@ideasonboard.com>
-Content-Language: en-US
-From: Thomas Zimmermann <tzimmermann@suse.de>
-Autocrypt: addr=tzimmermann@suse.de; keydata=
- xsBNBFs50uABCADEHPidWt974CaxBVbrIBwqcq/WURinJ3+2WlIrKWspiP83vfZKaXhFYsdg
- XH47fDVbPPj+d6tQrw5lPQCyqjwrCPYnq3WlIBnGPJ4/jreTL6V+qfKRDlGLWFjZcsrPJGE0
- BeB5BbqP5erN1qylK9i3gPoQjXGhpBpQYwRrEyQyjuvk+Ev0K1Jc5tVDeJAuau3TGNgah4Yc
- hdHm3bkPjz9EErV85RwvImQ1dptvx6s7xzwXTgGAsaYZsL8WCwDaTuqFa1d1jjlaxg6+tZsB
- 9GluwvIhSezPgnEmimZDkGnZRRSFiGP8yjqTjjWuf0bSj5rUnTGiyLyRZRNGcXmu6hjlABEB
- AAHNJ1Rob21hcyBaaW1tZXJtYW5uIDx0emltbWVybWFubkBzdXNlLmRlPsLAjgQTAQgAOAIb
- AwULCQgHAgYVCgkICwIEFgIDAQIeAQIXgBYhBHIX+6yM6c9jRKFo5WgNwR1TC3ojBQJftODH
- AAoJEGgNwR1TC3ojx1wH/0hKGWugiqDgLNXLRD/4TfHBEKmxIrmfu9Z5t7vwUKfwhFL6hqvo
- lXPJJKQpQ2z8+X2vZm/slsLn7J1yjrOsoJhKABDi+3QWWSGkaGwRJAdPVVyJMfJRNNNIKwVb
- U6B1BkX2XDKDGffF4TxlOpSQzdtNI/9gleOoUA8+jy8knnDYzjBNOZqLG2FuTdicBXblz0Mf
- vg41gd9kCwYXDnD91rJU8tzylXv03E75NCaTxTM+FBXPmsAVYQ4GYhhgFt8S2UWMoaaABLDe
- 7l5FdnLdDEcbmd8uLU2CaG4W2cLrUaI4jz2XbkcPQkqTQ3EB67hYkjiEE6Zy3ggOitiQGcqp
- j//OwE0EWznS4AEIAMYmP4M/V+T5RY5at/g7rUdNsLhWv1APYrh9RQefODYHrNRHUE9eosYb
- T6XMryR9hT8XlGOYRwKWwiQBoWSDiTMo/Xi29jUnn4BXfI2px2DTXwc22LKtLAgTRjP+qbU6
- 3Y0xnQN29UGDbYgyyK51DW3H0If2a3JNsheAAK+Xc9baj0LGIc8T9uiEWHBnCH+RdhgATnWW
- GKdDegUR5BkDfDg5O/FISymJBHx2Dyoklv5g4BzkgqTqwmaYzsl8UxZKvbaxq0zbehDda8lv
- hFXodNFMAgTLJlLuDYOGLK2AwbrS3Sp0AEbkpdJBb44qVlGm5bApZouHeJ/+n+7r12+lqdsA
- EQEAAcLAdgQYAQgAIAIbDBYhBHIX+6yM6c9jRKFo5WgNwR1TC3ojBQJftOH6AAoJEGgNwR1T
- C3ojVSkIALpAPkIJPQoURPb1VWjh34l0HlglmYHvZszJWTXYwavHR8+k6Baa6H7ufXNQtThR
- yIxJrQLW6rV5lm7TjhffEhxVCn37+cg0zZ3j7zIsSS0rx/aMwi6VhFJA5hfn3T0TtrijKP4A
- SAQO9xD1Zk9/61JWk8OysuIh7MXkl0fxbRKWE93XeQBhIJHQfnc+YBLprdnxR446Sh8Wn/2D
- Ya8cavuWf2zrB6cZurs048xe0UbSW5AOSo4V9M0jzYI4nZqTmPxYyXbm30Kvmz0rYVRaitYJ
- 4kyYYMhuULvrJDMjZRvaNe52tkKAvMevcGdt38H4KSVXAylqyQOW5zvPc4/sq9c=
-In-Reply-To: <029f0567-f9df-402c-ae42-3bf27c060986@ideasonboard.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 8bit
-X-Rspamd-Queue-Id: 71C341FB3A
-X-Spam-Score: -6.51
-X-Rspamd-Action: no action
-X-Spamd-Result: default: False [-6.51 / 50.00]; BAYES_HAM(-3.00)[100.00%];
- DWL_DNSWL_MED(-2.00)[suse.de:dkim];
- NEURAL_HAM_LONG(-1.00)[-1.000];
- R_DKIM_ALLOW(-0.20)[suse.de:s=susede2_rsa,suse.de:s=susede2_ed25519];
- NEURAL_HAM_SHORT(-0.20)[-1.000]; MIME_GOOD(-0.10)[text/plain];
- MX_GOOD(-0.01)[]; FREEMAIL_ENVRCPT(0.00)[gmail.com];
- DKIM_SIGNED(0.00)[suse.de:s=susede2_rsa,suse.de:s=susede2_ed25519];
- FREEMAIL_TO(0.00)[ideasonboard.com,redhat.com,gmail.com,ffwll.ch];
- ARC_NA(0.00)[]; FUZZY_BLOCKED(0.00)[rspamd.com];
- MIME_TRACE(0.00)[0:+]; TO_MATCH_ENVRCPT_ALL(0.00)[];
- RCVD_TLS_ALL(0.00)[]; DKIM_TRACE(0.00)[suse.de:+];
- FROM_EQ_ENVFROM(0.00)[]; FROM_HAS_DN(0.00)[];
- TO_DN_SOME(0.00)[]; RCVD_COUNT_TWO(0.00)[2];
- RCPT_COUNT_SEVEN(0.00)[9]; MID_RHS_MATCH_FROM(0.00)[];
- RCVD_VIA_SMTP_AUTH(0.00)[];
- DBL_BLOCKED_OPENRESOLVER(0.00)[suse.de:dkim, suse.de:mid, suse.de:email,
- imap1.dmz-prg2.suse.org:rdns, imap1.dmz-prg2.suse.org:helo]
-X-Rspamd-Server: rspamd1.dmz-prg2.suse.org
-X-Spam-Flag: NO
-X-Spam-Level: 
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: CH3PR12MB8659:EE_|PH7PR12MB5901:EE_
+X-MS-Office365-Filtering-Correlation-Id: 1f0576e9-f661-4c28-85ce-08dcdf08e3b6
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: BCL:0;ARA:13230040|1800799024|376014|366016;
+X-Microsoft-Antispam-Message-Info: =?us-ascii?Q?zwHOrhwV3gjz2lXNXYsniVHjgZkkyVYzydCHtXwOdIrxeUk9CI/El41l6Afe?=
+ =?us-ascii?Q?E+7lGToJKZ5TFFxyymc03ujvDDCnk132Oj8N7nw1v9VngOlwhC29WU61VBg/?=
+ =?us-ascii?Q?Hcsh2t9T1xMWwZJadwQtLarJwFM1c1u09C/mMkumUsYBSi1F3OVtrrzou/VB?=
+ =?us-ascii?Q?uv/POcchqgta3AhnNG1yv98Sj4iKyz9/K7q2BBTLp217BkL1AdyodDLiL9Wg?=
+ =?us-ascii?Q?k4+v0MAaVY1PMcfAus9RuzvcjJsZl5xyEkZ7LEw5OF6xBCmzaSRv2CPgysPx?=
+ =?us-ascii?Q?ZVX5fCIo16g7phhqWn8HcY5bcgOjI4zyzLb8eD5xULkQt2cmM9HejgiOmzqr?=
+ =?us-ascii?Q?WXcXppIsfBGrjud2EjYHSu4IbefiD8Epjo6WVoUJjer3FwossjQoGFDPsu4O?=
+ =?us-ascii?Q?h/yeC4bY9oy7o6jNwOw9lzxeW+CHjgKIgyx0xLEMJO28wf23nLLMvw8cOB5q?=
+ =?us-ascii?Q?gaFXRHGpdGqS0nHc3s6m9AB6/fbLQ/gerandsRb1nVqSiT1UFvA1evKfm9mX?=
+ =?us-ascii?Q?c9sOWf8xxw2ByXE9D1eWEb1xp4fSB/IG0tsIJq1eX6tmjt/nvwmOST+kIgWr?=
+ =?us-ascii?Q?xu4qbwTbsSfnC4kMlzuV5bySkPzvhLIC66EvRfHNgPocAthliAr1SkgRaCVm?=
+ =?us-ascii?Q?K1Qndg9oazziE8+2Q3U8AVm+WZaHOIlFwCdp24FV8j28tLR0UIWl/tD1NLHQ?=
+ =?us-ascii?Q?NXJpWW2OFp12KSlJ3aNe8rSmGp8ZNg1/X5GqpuOuFFivHqYVA0Gz156LsNY1?=
+ =?us-ascii?Q?VJ5ruNAGaw1hMurJ5mgOqJ2r1ywYCTVobb/EJtIhQjrDzAU96CimdfPFnXRp?=
+ =?us-ascii?Q?cfIwnlgXVcyrPzG1IWnuNvJvdqEGLPxQcVenwJoT0TO+O9SkS8IDTQb5gP7t?=
+ =?us-ascii?Q?yfqNaMty7ik8eS+rPc4Jg2o6VG/tgPElx4DU/UTzTCVlABKCgIUvXOpd/WAB?=
+ =?us-ascii?Q?dhvqWjmmPg8qL6s20Cw0XxXeFW7vGbBvNJmlHQYj+QySUdrFPI79pSWtcISk?=
+ =?us-ascii?Q?LfB+IZOl9H4aOr0lR05FgMnSuywPgICWlEaW9885SIbbUy4808uD6bOoP4hW?=
+ =?us-ascii?Q?mcWQM0JBfuyxyDMkwCzMdU16DKHmbRkx0s0hjc/QvzjDB3KioP5MffuCxhPy?=
+ =?us-ascii?Q?4mlajpjJ705xqlP1ifOWK3EpAkjhIbcRvbJkvrA6Vm6Z2qtbt/pwew9vOjAw?=
+ =?us-ascii?Q?bLztxpjZGFYs/BiTkSXo5N7OqwUOd+Su8ZxkfkDB9SEJzpenbzkirCtuofKP?=
+ =?us-ascii?Q?iy46d5leYzr+5TJnmVbP+Acwdr/vlDL3lfHaOUvABA=3D=3D?=
+X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
+ IPV:NLI; SFV:NSPM; H:CH3PR12MB8659.namprd12.prod.outlook.com; PTR:; CAT:NONE;
+ SFS:(13230040)(1800799024)(376014)(366016); DIR:OUT; SFP:1101; 
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0: =?us-ascii?Q?nt+XWEhapZxEY7u/f4AxumGxWMZMa/P7RFWQnzs5J5bx5Q1PELBCv6zQaDUH?=
+ =?us-ascii?Q?TN8M+uJGNKHE3MkW0e4K87JScZefwPPB4y4vtKI3r/w7sRcms3/W5ywxX/rO?=
+ =?us-ascii?Q?GfzfsxLObdYMVq1rLb6ICe6DS4XanYPQAth1TpGcaTC6ENwBg4j9RJzzlkC3?=
+ =?us-ascii?Q?g1ow3YTshiaIGt5UrnKlxs8QaWy8dtcojtuGlDDFliYFG6iF3wh9z6sl66hs?=
+ =?us-ascii?Q?nOPjUNcL5pn4VQrUmjhQp5B42y8iDlo3aytHGBbZul96C4IK0MbAnikRcdAc?=
+ =?us-ascii?Q?Q178KWMwbXyJq5FnTxopO/JYzUvn9IVwPiSN/9GzlYlE2plpxFloBEXm8yJ0?=
+ =?us-ascii?Q?hHd3cnWpfYMkKzSsnqtCSqM5iN2A1hoKqzdcpeeOyKQbLghv0nresc/DvBnx?=
+ =?us-ascii?Q?BbByEvb+en6wdA9YWBb9K2ykCBbJrm5M+pMHG/CIb3BSitcvUr3/Ll5hfwBC?=
+ =?us-ascii?Q?0N8OstFewm1hwrWZ3B+kj9hhJJlnzD+OOARPhd2XPjBX2RTD5fb2brQn2C4F?=
+ =?us-ascii?Q?egJImW/ECxwOCBCLXoI5jpkL+3JgE9gLsXc9yvTtAfAOY9L3vsLuomjmT2ea?=
+ =?us-ascii?Q?4eQrZnYJRSGOyupX73Kiii2FiqSJUITsgS+9zJbkSvrpGVAM7aBgSoeghJc5?=
+ =?us-ascii?Q?Rr8m+9xe7Y77xW0JuJVkvcIoPScIxBgWh2C/jGFKeL0PFAfUSMd9jOvAzTxs?=
+ =?us-ascii?Q?FT7WFhOXmnGf9wPkpJapPwJ+oNTfpBiLNQ9SNXM95Tis/kc7I9yEzo2fnvvF?=
+ =?us-ascii?Q?gnrzoit97UbJv42SEon4LxvIOii8iCBNMPN7/NtpvFOmHt3xs6mfJ3u6ZGje?=
+ =?us-ascii?Q?Tm61bW8NdjBm6ZUZDdAAv4Fhbhv8AwGN084l2x9dMyHuFqZmiFfIrPXgpLR3?=
+ =?us-ascii?Q?U5ocQ9U5gyJoH99l8VXs+Zcp6pvwbqg++bZP7Lbu7dNKfhF2ERbMZWCEaQ9Y?=
+ =?us-ascii?Q?nAP78OfOpjD9/mnP2r7rVXi7YXLevd9ELtlPLH207cu6IaC1UrrVdXjC1u70?=
+ =?us-ascii?Q?wx7sJ+NaiTAzM1cdMh/X0GA2Lhl5URdCOHdQXGmHPZ4zy3bYBMDvhBvtfLCY?=
+ =?us-ascii?Q?j3aN6AkNsQ7yfTOcTfuKcHhFom7vgeQDGtRqy9FsjBKgLSPB51qXzm03ANvh?=
+ =?us-ascii?Q?CVvcJ8hXgjFdtrVo+iAJknR0A3P4NHjwA4rvvKn8a2KjOiyWS1Xt8ugktjNs?=
+ =?us-ascii?Q?oKTtS7bcII+ayORAHD7E4iOBbEBpzaTHZF1P6IQiyL8sNqLggxQlyZ6qcTd0?=
+ =?us-ascii?Q?IRNRJ0OOPs/eB41N0NYnB/7milzn+SKuubZkPfYAEEdRYosppeqNWtMtZpPW?=
+ =?us-ascii?Q?uqsru2zu5rMEUl261TGY4kPuIIbZN2LLRPkcH9sNi0WCH9fGq1vTlM/RwQGu?=
+ =?us-ascii?Q?+FuuLaijPTE47pUKsFKpDcYbG4/D92E2v/+Gs8LzT1GQzpY3t1N8Piwx6Qub?=
+ =?us-ascii?Q?IfTBhbNj0vym/7YoQf3Ihd46h2KIKqkkO5Oq/+2uXMKjdar/8qcWyJYEv6tJ?=
+ =?us-ascii?Q?31jexfhVCx/PpxUUMy6syNh3IxX+pttZ/NmLGRgGKBhLYc0BBG/CXiK8YHNV?=
+ =?us-ascii?Q?DE9MbqQL663nSM/qFJs=3D?=
+X-OriginatorOrg: Nvidia.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: 1f0576e9-f661-4c28-85ce-08dcdf08e3b6
+X-MS-Exchange-CrossTenant-AuthSource: CH3PR12MB8659.namprd12.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 27 Sep 2024 15:27:25.4890 (UTC)
+X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
+X-MS-Exchange-CrossTenant-Id: 43083d15-7273-40c1-b7db-39efd9ccc17a
+X-MS-Exchange-CrossTenant-MailboxType: HOSTED
+X-MS-Exchange-CrossTenant-UserPrincipalName: Ym6H9LI9hr8wLq4M7pxCNLkiGnuG78xf36Pjn/X6uywS/bIZgyXqH4FftBqxr1wD
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: PH7PR12MB5901
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -152,209 +151,44 @@ List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-Hi
+On Fri, Sep 27, 2024 at 04:22:32PM +0200, Danilo Krummrich wrote:
+> > When you say things like this it comes across as though you are
+> > implying there are two tiers to the community. Ie those that set the
+> > strategy and those that don't.
+> 
+> This isn't true, I just ask you to consider the goals that have been set
+> already, because we have been working on this already.
 
-Am 26.09.24 um 15:07 schrieb Tomi Valkeinen:
-> Hi,
->
-> On 24/09/2024 10:13, Thomas Zimmermann wrote:
->> Store instances of drm_fb_helper and struct omap_fbdev separately.
->> This will allow omapdrm to use the common fbdev client, which allocates
->> its own instance of struct drm_fb_helper.
->>
->> There is at most one instance of each per DRM device, so both can be
->> referenced directly from the omap and DRM device structures. A later
->> patchset might rework the common fbdev client to allow for storing
->> both, drm_fb_helper and omap_fbdev, together in the same place.
->>
->> Signed-off-by: Thomas Zimmermann <tzimmermann@suse.de>
->> Cc: Tomi Valkeinen <tomi.valkeinen@ideasonboard.com>
->> Acked-by: Javier Martinez Canillas <javierm@redhat.com>
->> ---
->>   drivers/gpu/drm/omapdrm/omap_drv.h   |  3 ++
->>   drivers/gpu/drm/omapdrm/omap_fbdev.c | 42 +++++++++++++++-------------
->>   2 files changed, 26 insertions(+), 19 deletions(-)
->
-> The ywrap seems to be broken, but it's broken without this series too. 
-> With some quick hacks I managed to get the omapdrm's panning function 
-> called, and it works the same way with or without this series.
->
-> Tested on DRA76 EVM.
->
-> Reviewed-by: Tomi Valkeinen <tomi.valkeinen@ideasonboard.com>
->
-> For reference, in case someone is interested fixing omapdrm's ywrap code:
->
-> - get_fb() doesn't work. I don't understand the point of the function. 
-> It compares fbi->fix.id and MODULE_NAME, and the "fbi->fix.id" has 
-> changed along the years so the check no longer works. Afaik, the whole 
-> function is not needed, and we can just use fbi->par.
->
-> - omap_fbdev_pan_display() doesn't seem to get called when the console 
-> scrolls. I can get it called with an userspace app that does some y 
-> panning. Maybe FBINFO_HWACCEL_YWRAP is not supported anymore?
+Why do keep saying I haven't?
 
-If ywrap doesn't work and no one complained, can we remove it? The rest 
-of the code is equivalent to drm_fbdev_dma.c, so we could remove omap's 
-implementation entirely.
+I have no intention of becoming involved in your project or
+nouveau. My only interest here is to get an agreement that we can get
+a VFIO driver (to improve the VFIO subsystem and community!) in the
+near term on top of in-tree nouveau.
 
-Best regards
-Thomas
+> > > But, we have to agree on a long term strategy and work towards the corresponding
+> > > goals *together*.
+> > 
+> > I think we went over all the options already. IMHO the right one is
+> > for nova and vfio to share some kind of core driver. The choice of
+> > Rust for nova complicates planning this, but it doesn't mean anyone is
+> > saying no to it.
+> 
+> This is the problem, you're many steps ahead.
+> 
+> You should start with understanding why we want the core driver to be in Rust.
+> You then can raise your concerns about it and then we can discuss them and see
+> if we can find solutions / consensus.
 
->
->  Tomi
->
->> diff --git a/drivers/gpu/drm/omapdrm/omap_drv.h 
->> b/drivers/gpu/drm/omapdrm/omap_drv.h
->> index 4c7217b35f6b..d903568fd8cc 100644
->> --- a/drivers/gpu/drm/omapdrm/omap_drv.h
->> +++ b/drivers/gpu/drm/omapdrm/omap_drv.h
->> @@ -32,6 +32,7 @@
->>   #define MODULE_NAME     "omapdrm"
->>     struct omap_drm_usergart;
->> +struct omap_fbdev;
->>     struct omap_drm_pipeline {
->>       struct drm_crtc *crtc;
->> @@ -97,6 +98,8 @@ struct omap_drm_private {
->>         /* memory bandwidth limit if it is needed on the platform */
->>       unsigned int max_bandwidth;
->> +
->> +    struct omap_fbdev *fbdev;
->>   };
->>     diff --git a/drivers/gpu/drm/omapdrm/omap_fbdev.c 
->> b/drivers/gpu/drm/omapdrm/omap_fbdev.c
->> index 523be34682ca..044e80403c3b 100644
->> --- a/drivers/gpu/drm/omapdrm/omap_fbdev.c
->> +++ b/drivers/gpu/drm/omapdrm/omap_fbdev.c
->> @@ -13,6 +13,7 @@
->>   #include <drm/drm_fourcc.h>
->>   #include <drm/drm_framebuffer.h>
->>   #include <drm/drm_gem_framebuffer_helper.h>
->> +#include <drm/drm_managed.h>
->>   #include <drm/drm_util.h>
->>     #include "omap_drv.h"
->> @@ -26,10 +27,8 @@ module_param_named(ywrap, ywrap_enabled, bool, 0644);
->>    * fbdev funcs, to implement legacy fbdev interface on top of drm 
->> driver
->>    */
->>   -#define to_omap_fbdev(x) container_of(x, struct omap_fbdev, base)
->> -
->>   struct omap_fbdev {
->> -    struct drm_fb_helper base;
->> +    struct drm_device *dev;
->>       bool ywrap_enabled;
->>         /* for deferred dmm roll when getting called in atomic ctx */
->> @@ -41,7 +40,7 @@ static struct drm_fb_helper *get_fb(struct fb_info 
->> *fbi);
->>   static void pan_worker(struct work_struct *work)
->>   {
->>       struct omap_fbdev *fbdev = container_of(work, struct 
->> omap_fbdev, work);
->> -    struct drm_fb_helper *helper = &fbdev->base;
->> +    struct drm_fb_helper *helper = fbdev->dev->fb_helper;
->>       struct fb_info *fbi = helper->info;
->>       struct drm_gem_object *bo = drm_gem_fb_get_obj(helper->fb, 0);
->>       int npages;
->> @@ -55,24 +54,25 @@ FB_GEN_DEFAULT_DEFERRED_DMAMEM_OPS(omap_fbdev,
->>                      drm_fb_helper_damage_range,
->>                      drm_fb_helper_damage_area)
->>   -static int omap_fbdev_pan_display(struct fb_var_screeninfo *var,
->> -        struct fb_info *fbi)
->> +static int omap_fbdev_pan_display(struct fb_var_screeninfo *var, 
->> struct fb_info *fbi)
->>   {
->>       struct drm_fb_helper *helper = get_fb(fbi);
->> -    struct omap_fbdev *fbdev = to_omap_fbdev(helper);
->> +    struct omap_drm_private *priv;
->> +    struct omap_fbdev *fbdev;
->>         if (!helper)
->>           goto fallback;
->>   +    priv = helper->dev->dev_private;
->> +    fbdev = priv->fbdev;
->> +
->>       if (!fbdev->ywrap_enabled)
->>           goto fallback;
->>   -    if (drm_can_sleep()) {
->> +    if (drm_can_sleep())
->>           pan_worker(&fbdev->work);
->> -    } else {
->> -        struct omap_drm_private *priv = helper->dev->dev_private;
->> +    else
->>           queue_work(priv->wq, &fbdev->work);
->> -    }
->>         return 0;
->>   @@ -92,7 +92,6 @@ static void omap_fbdev_fb_destroy(struct fb_info 
->> *info)
->>       struct drm_fb_helper *helper = info->par;
->>       struct drm_framebuffer *fb = helper->fb;
->>       struct drm_gem_object *bo = drm_gem_fb_get_obj(fb, 0);
->> -    struct omap_fbdev *fbdev = to_omap_fbdev(helper);
->>         DBG();
->>   @@ -104,7 +103,7 @@ static void omap_fbdev_fb_destroy(struct 
->> fb_info *info)
->>         drm_client_release(&helper->client);
->>       drm_fb_helper_unprepare(helper);
->> -    kfree(fbdev);
->> +    kfree(helper);
->>   }
->>     /*
->> @@ -128,9 +127,9 @@ static const struct fb_ops omap_fb_ops = {
->>   static int omap_fbdev_create(struct drm_fb_helper *helper,
->>           struct drm_fb_helper_surface_size *sizes)
->>   {
->> -    struct omap_fbdev *fbdev = to_omap_fbdev(helper);
->>       struct drm_device *dev = helper->dev;
->>       struct omap_drm_private *priv = dev->dev_private;
->> +    struct omap_fbdev *fbdev = priv->fbdev;
->>       struct drm_framebuffer *fb = NULL;
->>       union omap_gem_size gsize;
->>       struct fb_info *fbi = NULL;
->> @@ -338,6 +337,7 @@ static const struct drm_client_funcs 
->> omap_fbdev_client_funcs = {
->>     void omap_fbdev_setup(struct drm_device *dev)
->>   {
->> +    struct omap_drm_private *priv = dev->dev_private;
->>       struct omap_fbdev *fbdev;
->>       struct drm_fb_helper *helper;
->>       int ret;
->> @@ -345,24 +345,28 @@ void omap_fbdev_setup(struct drm_device *dev)
->>       drm_WARN(dev, !dev->registered, "Device has not been 
->> registered.\n");
->>       drm_WARN(dev, dev->fb_helper, "fb_helper is already set!\n");
->>   -    fbdev = kzalloc(sizeof(*fbdev), GFP_KERNEL);
->> +    fbdev = drmm_kzalloc(dev, sizeof(*fbdev), GFP_KERNEL);
->>       if (!fbdev)
->>           return;
->> -    helper = &fbdev->base;
->> +    fbdev->dev = dev;
->> +    INIT_WORK(&fbdev->work, pan_worker);
->> +
->> +    priv->fbdev = fbdev;
->>   +    helper = kzalloc(sizeof(*helper), GFP_KERNEL);
->> +    if (!helper)
->> +        return;
->>       drm_fb_helper_prepare(dev, helper, 32, &omap_fb_helper_funcs);
->>         ret = drm_client_init(dev, &helper->client, "fbdev", 
->> &omap_fbdev_client_funcs);
->>       if (ret)
->>           goto err_drm_client_init;
->>   -    INIT_WORK(&fbdev->work, pan_worker);
->> -
->>       drm_client_register(&helper->client);
->>         return;
->>     err_drm_client_init:
->>       drm_fb_helper_unprepare(helper);
->> -    kfree(fbdev);
->> +    kfree(helper);
->>   }
->
+I don't want to debate with you about Nova. It is too far in the
+future, and it doesn't intersect with anything I am doing.
 
--- 
---
-Thomas Zimmermann
-Graphics Driver Developer
-SUSE Software Solutions Germany GmbH
-Frankenstrasse 146, 90461 Nuernberg, Germany
-GF: Ivo Totev, Andrew Myers, Andrew McDonald, Boudien Moerman
-HRB 36809 (AG Nuernberg)
+> But you're not even considering it, and instead start with a counter proposal.
+> This isn't acceptable to me.
 
+I'm even agreeing to a transition into a core driver in Rust, someday,
+when the full community can agree it is the right time.
+
+What more do you want from me?
+
+Jason
