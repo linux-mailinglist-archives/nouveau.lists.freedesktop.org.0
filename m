@@ -2,47 +2,47 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id 09A7598A01D
-	for <lists+nouveau@lfdr.de>; Mon, 30 Sep 2024 13:10:04 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 06F1098A02C
+	for <lists+nouveau@lfdr.de>; Mon, 30 Sep 2024 13:20:40 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 41E2C10E3EB;
-	Mon, 30 Sep 2024 11:10:02 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 46BD810E3E7;
+	Mon, 30 Sep 2024 11:20:38 +0000 (UTC)
 Authentication-Results: gabe.freedesktop.org;
-	dkim=pass (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="kRVKwZrR";
+	dkim=pass (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="tO+PK3cm";
 	dkim-atps=neutral
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from nyc.source.kernel.org (nyc.source.kernel.org [147.75.193.91])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 4462410E034
- for <nouveau@lists.freedesktop.org>; Mon, 30 Sep 2024 11:10:00 +0000 (UTC)
+Received: from dfw.source.kernel.org (dfw.source.kernel.org [139.178.84.217])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 54AD710E034
+ for <nouveau@lists.freedesktop.org>; Mon, 30 Sep 2024 11:20:37 +0000 (UTC)
 Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by nyc.source.kernel.org (Postfix) with ESMTP id 02672A418E8;
- Mon, 30 Sep 2024 11:09:51 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 16574C4CEC7;
- Mon, 30 Sep 2024 11:09:57 +0000 (UTC)
+ by dfw.source.kernel.org (Postfix) with ESMTP id 768895C2B52;
+ Mon, 30 Sep 2024 11:20:32 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 5B550C4CEC7;
+ Mon, 30 Sep 2024 11:20:35 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1727694599;
- bh=pzBdeaLGUF4+8kO8nklskpS3IYxNLey+38OIU2bKmbY=;
+ s=k20201202; t=1727695236;
+ bh=D34FnNso2mKyPNtD5emxnQNZ3judy8F+Azic7aL00nA=;
  h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
- b=kRVKwZrRMRueCbAlGZtCh+6luFKe+3pV4xyPbwd8ct8Jaw2BnnKE6SjEAi03QqZUK
- D95lJ2hvyfMAc7hA7IhnPALbEA/mv2DM4Ck7807uGtxDq1EXGOFSohtTZDkXKaLHFJ
- jdj/G41LhxtX/bcfWGRqWgSoSkJMR2jyHPYF9cF+PY4hyghNxb5NdNY8i6qMOB3siU
- q/BqlGslQ9QpVebwSYfqVZ5JBUXTJVx1eYeeJdY7Y/319M9BJyJqTJpOhUUrY5lkNN
- HjTBpC+VpklZEVvHDrcEk/bQtLIAiU3W7wgteTIUzgK2/qomVDIwm6R/t5tSIe2ruI
- TzxxdTlZq+/mg==
-Date: Mon, 30 Sep 2024 13:09:55 +0200
+ b=tO+PK3cmdfy9L3eXnGb+iUvjClDBDwYQPntgvSbnZc7GTJ6m93fuAhJoWuu9J/2MH
+ 2Ds047ggO3Idju6tMUzDu7hrbGuosWAXMJHNbokooYSxM+bgNZuQsvcrlIfFB2NTu5
+ ZxBPszz7kyX1ZcJ9VsUWt38xk6LUnS3rFJhrf/K22G2xY3tXxGD3eliHEN+llx0+O7
+ UggIDgTz80xe229OFvFzjakDql5A9xeMIAHXSdNEMgvN0B6lqdT7ZY6UNVVM9SZGF6
+ 3hrdTFkwl5hJGhnqC2R5Z/24WnQ+jReung9rjSaQUyiUS5qvEsYerpfNT24zgRl3TA
+ 8lsPk90fDG0YQ==
+Date: Mon, 30 Sep 2024 13:20:32 +0200
 From: Danilo Krummrich <dakr@kernel.org>
 To: Yonatan Maman <Ymaman@nvidia.com>
 Cc: nouveau@lists.freedesktop.org, Gal Shalom <GalShalom@nvidia.com>
-Subject: Re: [PATCH 1/2] nouveau/dmem: Fix privileged error in copy engine
- channel
-Message-ID: <ZvqHA76iSOYJexSh@pollux>
+Subject: Re: [PATCH 2/2] nouveau/dmem: Fix memory leak in `migrate_to_ram`
+ upon copy error
+Message-ID: <ZvqJgMVBs2kAWguk@pollux>
 References: <20240923135449.356244-1-Ymaman@Nvidia.com>
- <20240923135449.356244-2-Ymaman@Nvidia.com>
+ <20240923135449.356244-3-Ymaman@Nvidia.com>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
-In-Reply-To: <20240923135449.356244-2-Ymaman@Nvidia.com>
+In-Reply-To: <20240923135449.356244-3-Ymaman@Nvidia.com>
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -57,61 +57,43 @@ List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-Hi Yonatan,
+On Mon, Sep 23, 2024 at 01:54:58PM +0000, Yonatan Maman wrote:
+> A copy push command might fail, causing `migrate_to_ram` to return a
+> dirty HIGH_USER page to the user.
+> 
+> This exposes a security vulnerability in the nouveau driver. To prevent
+> memory leaks in `migrate_to_ram` upon a copy error, allocate a zero
+> page for the destination page.
 
-On Mon, Sep 23, 2024 at 01:54:56PM +0000, Yonatan Maman wrote:
-> When `nouveau_dmem_copy_one` is called, the following error occurs:
+So, you refer to the case where this function fails in nouveau_dmem_copy_one()?
+
+If so, can you please explain why adding __GFP_ZERO to alloc_page_vma() helps
+with that?
+
 > 
-> [272146.675156] nouveau 0000:06:00.0: fifo: PBDMA9: 00000004 [HCE_PRIV]
-> ch 1 00000300 00003386
-> 
-> This indicates that a copy push command triggered a Host Copy Engine
-> Privileged error on channel 1 (Copy Engine channel). To address this
-> issue, modify the Copy Engine channel to allow privileged push commands
-> 
-> Fixes: 6de125383a5cc
 > Signed-off-by: Yonatan Maman <Ymaman@Nvidia.com>
 > Signed-off-by: Gal Shalom <GalShalom@Nvidia.com>
 
-Please read [1] and use scripts/checkpatch.pl and scripts/get_maintainer.pl
-before sending patches.
-
-In particular, the 'Fixes' tag has a defined format, I recommend:
-
-```
-[core]
-        abbrev = 12
-[pretty]
-        fixes = Fixes: %h (\"%s\")
-```
-
-in your `.gitconfig`.
-
-Also make sure so use 'Co-developed-by' if there is a co-author; I see that this
-patch is also signed off by Gal Shalom.
-
-Please also send the patches to all relevant mailing lists and maintainers to
-avoid your patches not getting the required attention.
-
-[1] https://docs.kernel.org/process/submitting-patches.html
+Since this is a bug, please also add a 'Fixes' tag, CC stable and add a
+'Co-developed-by' tag if appropriate.
 
 > ---
->  drivers/gpu/drm/nouveau/nouveau_drm.c | 2 +-
+>  drivers/gpu/drm/nouveau/nouveau_dmem.c | 2 +-
 >  1 file changed, 1 insertion(+), 1 deletion(-)
 > 
-> diff --git a/drivers/gpu/drm/nouveau/nouveau_drm.c b/drivers/gpu/drm/nouveau/nouveau_drm.c
-> index a58c31089613..0a75ce4c5021 100644
-> --- a/drivers/gpu/drm/nouveau/nouveau_drm.c
-> +++ b/drivers/gpu/drm/nouveau/nouveau_drm.c
-> @@ -356,7 +356,7 @@ nouveau_accel_ce_init(struct nouveau_drm *drm)
->  		return;
->  	}
+> diff --git a/drivers/gpu/drm/nouveau/nouveau_dmem.c b/drivers/gpu/drm/nouveau/nouveau_dmem.c
+> index 6fb65b01d778..097bd3af0719 100644
+> --- a/drivers/gpu/drm/nouveau/nouveau_dmem.c
+> +++ b/drivers/gpu/drm/nouveau/nouveau_dmem.c
+> @@ -193,7 +193,7 @@ static vm_fault_t nouveau_dmem_migrate_to_ram(struct vm_fault *vmf)
+>  	if (!spage || !(src & MIGRATE_PFN_MIGRATE))
+>  		goto done;
 >  
-> -	ret = nouveau_channel_new(drm, device, false, runm, NvDmaFB, NvDmaTT, &drm->cechan);
-> +	ret = nouveau_channel_new(drm, device, true, runm, NvDmaFB, NvDmaTT, &drm->cechan);
->  	if (ret)
->  		NV_ERROR(drm, "failed to create ce channel, %d\n", ret);
->  }
+> -	dpage = alloc_page_vma(GFP_HIGHUSER, vmf->vma, vmf->address);
+> +	dpage = alloc_page_vma(GFP_HIGHUSER | __GFP_ZERO, vmf->vma, vmf->address);
+>  	if (!dpage)
+>  		goto done;
+>  
 > -- 
 > 2.34.1
 > 
