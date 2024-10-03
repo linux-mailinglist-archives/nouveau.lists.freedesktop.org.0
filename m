@@ -2,93 +2,75 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id 215A698F011
-	for <lists+nouveau@lfdr.de>; Thu,  3 Oct 2024 15:12:08 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 02C7998F0C1
+	for <lists+nouveau@lfdr.de>; Thu,  3 Oct 2024 15:47:03 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 3264810E148;
-	Thu,  3 Oct 2024 13:12:06 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 30D0610E850;
+	Thu,  3 Oct 2024 13:46:59 +0000 (UTC)
 Authentication-Results: gabe.freedesktop.org;
-	dkim=pass (1024-bit key; unprotected) header.d=ideasonboard.com header.i=@ideasonboard.com header.b="bgOnL8bW";
+	dkim=pass (2048-bit key; unprotected) header.d=intel.com header.i=@intel.com header.b="YoSJx8J+";
 	dkim-atps=neutral
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from perceval.ideasonboard.com (perceval.ideasonboard.com
- [213.167.242.64])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 3D99310E078;
- Thu,  3 Oct 2024 13:12:04 +0000 (UTC)
-Received: from [192.168.88.20] (91-156-87-48.elisa-laajakaista.fi
- [91.156.87.48])
- by perceval.ideasonboard.com (Postfix) with ESMTPSA id 20062593;
- Thu,  3 Oct 2024 15:10:29 +0200 (CEST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=ideasonboard.com;
- s=mail; t=1727961029;
- bh=tplxAmF4PFVVUhtYrM26ew2n9imTSDe1och2jI6SSB0=;
- h=Date:Subject:To:Cc:References:From:In-Reply-To:From;
- b=bgOnL8bWv5Qxe0ZVgDQvuLT41kypPTSecAUUYQmoBRKLIYmj4x/OyetiqCE9zvlWg
- tYjWPoxcFV4X8YOq60rbS1L4CZ+aQ1dER7/a6+RrAcO5vkSHx3dUgCG7IBCfmrt2UL
- bp2mlwe4thU4mI+nxp0Dn31uvNeIZaNGTby3Dx7Q=
-Message-ID: <fbf0b1fb-afe7-47be-9016-eadac5492c1a@ideasonboard.com>
-Date: Thu, 3 Oct 2024 16:11:59 +0300
+Received: from mgamail.intel.com (mgamail.intel.com [198.175.65.18])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 04F4510E1E6;
+ Thu,  3 Oct 2024 13:46:56 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
+ d=intel.com; i=@intel.com; q=dns/txt; s=Intel;
+ t=1727963217; x=1759499217;
+ h=date:from:to:subject:message-id:references:mime-version:
+ content-transfer-encoding:in-reply-to;
+ bh=n5OHn3QUdpat2aC/O/iKVjfoE6iGTaPoN/6J8frtUYg=;
+ b=YoSJx8J+nOAGpupUZE+M60XfDzYhATyBDvLh1Pyt7oWYpE7QcdXGuwzz
+ FLhuhYWSxZ1RGCaVw9uOQnYJ6qPpA+QUo6zvwzn8pMShC/OpcqiHsCbuT
+ CfNXnZbq9kjilvnWBNfJD9oiWUO+LkDipWrN95v08e+Ji9T7OKabsytCt
+ RG/PXL+y71c7SUWfkZvUlGHLDvWTn5c1URim4E0rKm0ne8hbIpQfn6Bda
+ g8WxF4JZUD9Kgl7Xs30/ew7IP+YdudA3aVD+lBBy0hlJxSbFlDboEX+bq
+ iKcdKnzzEpv/bV1XKZ0MfakioZ5uXigMQNsE32lU19HGXFw+UJJS260x7 Q==;
+X-CSE-ConnectionGUID: ZPZJ2HX5RDamrE/7b0Feog==
+X-CSE-MsgGUID: UtIE7sqkRfyK+vj5rH0d7w==
+X-IronPort-AV: E=McAfee;i="6700,10204,11214"; a="27286656"
+X-IronPort-AV: E=Sophos;i="6.11,174,1725346800"; d="scan'208";a="27286656"
+Received: from fmviesa008.fm.intel.com ([10.60.135.148])
+ by orvoesa110.jf.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
+ 03 Oct 2024 06:46:56 -0700
+X-CSE-ConnectionGUID: H7+f/vSCTa27grfFf3KfqQ==
+X-CSE-MsgGUID: dSiUo7Y0SbyaiImM3Q2NMw==
+X-ExtLoop1: 1
+X-IronPort-AV: E=Sophos;i="6.11,174,1725346800"; d="scan'208";a="74451391"
+Received: from stinkpipe.fi.intel.com (HELO stinkbox) ([10.237.72.74])
+ by fmviesa008.fm.intel.com with SMTP; 03 Oct 2024 06:46:50 -0700
+Received: by stinkbox (sSMTP sendmail emulation);
+ Thu, 03 Oct 2024 16:46:48 +0300
+Date: Thu, 3 Oct 2024 16:46:48 +0300
+From: Ville =?iso-8859-1?Q?Syrj=E4l=E4?= <ville.syrjala@linux.intel.com>
+To: dri-devel@lists.freedesktop.org, intel-gfx@lists.freedesktop.org,
+ Liviu Dudau <liviu.dudau@arm.com>, Russell King <linux@armlinux.org.uk>,
+ Inki Dae <inki.dae@samsung.com>,
+ Patrik Jakobsson <patrik.r.jakobsson@gmail.com>,
+ Alain Volmat <alain.volmat@foss.st.com>,
+ Sandy Huang <hjc@rock-chips.com>, Jyri Sarha <jyri.sarha@iki.fi>,
+ Alexey Brodkin <abrodkin@synopsys.com>,
+ Hans de Goede <hdegoede@redhat.com>,
+ =?iso-8859-1?Q?Ma=EDra?= Canal <mairacanal@riseup.net>,
+ Zack Rusin <zack.rusin@broadcom.com>, amd-gfx@lists.freedesktop.org,
+ linux-mediatek@lists.infradead.org,
+ linux-amlogic@lists.infradead.org, linux-arm-msm@vger.kernel.org,
+ freedreno@lists.freedesktop.org, nouveau@lists.freedesktop.org,
+ virtualization@lists.linux.dev, spice-devel@lists.freedesktop.org,
+ linux-renesas-soc@vger.kernel.org, xen-devel@lists.xenproject.org
+Subject: Re: [PATCH 2/2] drm: Move crtc->{x, y, mode, enabled} to legacy
+ sub-structure
+Message-ID: <Zv6gSGMXZZARf3oV@intel.com>
+References: <20241002182200.15363-1-ville.syrjala@linux.intel.com>
+ <20241002182200.15363-3-ville.syrjala@linux.intel.com>
+ <Zv6QF2EmIcogtlLA@louis-chauvet-laptop>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v5 79/80] drm/omapdrm: Remove struct drm_fb_helper from
- struct omap_fbdev.
-To: Thomas Zimmermann <tzimmermann@suse.de>, javierm@redhat.com,
- jfalempe@redhat.com, airlied@gmail.com, simona@ffwll.ch
-Cc: dri-devel@lists.freedesktop.org, amd-gfx@lists.freedesktop.org,
- intel-gfx@lists.freedesktop.org, nouveau@lists.freedesktop.org
-References: <20240924071734.98201-1-tzimmermann@suse.de>
- <20240924071734.98201-80-tzimmermann@suse.de>
- <029f0567-f9df-402c-ae42-3bf27c060986@ideasonboard.com>
- <8fb2df6b-4708-4eac-aa18-d7825d0410a6@suse.de>
-Content-Language: en-US
-From: Tomi Valkeinen <tomi.valkeinen@ideasonboard.com>
-Autocrypt: addr=tomi.valkeinen@ideasonboard.com; keydata=
- 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
-In-Reply-To: <8fb2df6b-4708-4eac-aa18-d7825d0410a6@suse.de>
-Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Type: text/plain; charset=iso-8859-1
+Content-Disposition: inline
 Content-Transfer-Encoding: 8bit
+In-Reply-To: <Zv6QF2EmIcogtlLA@louis-chauvet-laptop>
+X-Patchwork-Hint: comment
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -103,59 +85,110 @@ List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-Hi,
-
-On 27/09/2024 17:46, Thomas Zimmermann wrote:
-> Hi
+On Thu, Oct 03, 2024 at 02:38:35PM +0200, Louis Chauvet wrote:
+> Le 02/10/24 - 21:22, Ville Syrjala a écrit :
+> > From: Ville Syrjälä <ville.syrjala@linux.intel.com>
+> > 
+> > Atomic drivers shouldn't be using the legacy state stored
+> > directly under drm_crtc. Move that junk into a 'legacy' sub
+> > structure to highlight the offenders, of which there are
+> > quite a few unfortunately.
 > 
-> Am 26.09.24 um 15:07 schrieb Tomi Valkeinen:
->> Hi,
->>
->> On 24/09/2024 10:13, Thomas Zimmermann wrote:
->>> Store instances of drm_fb_helper and struct omap_fbdev separately.
->>> This will allow omapdrm to use the common fbdev client, which allocates
->>> its own instance of struct drm_fb_helper.
->>>
->>> There is at most one instance of each per DRM device, so both can be
->>> referenced directly from the omap and DRM device structures. A later
->>> patchset might rework the common fbdev client to allow for storing
->>> both, drm_fb_helper and omap_fbdev, together in the same place.
->>>
->>> Signed-off-by: Thomas Zimmermann <tzimmermann@suse.de>
->>> Cc: Tomi Valkeinen <tomi.valkeinen@ideasonboard.com>
->>> Acked-by: Javier Martinez Canillas <javierm@redhat.com>
->>> ---
->>> Â  drivers/gpu/drm/omapdrm/omap_drv.hÂ Â  |Â  3 ++
->>> Â  drivers/gpu/drm/omapdrm/omap_fbdev.c | 42 +++++++++++++++-------------
->>> Â  2 files changed, 26 insertions(+), 19 deletions(-)
->>
->> The ywrap seems to be broken, but it's broken without this series too. 
->> With some quick hacks I managed to get the omapdrm's panning function 
->> called, and it works the same way with or without this series.
->>
->> Tested on DRA76 EVM.
->>
->> Reviewed-by: Tomi Valkeinen <tomi.valkeinen@ideasonboard.com>
->>
->> For reference, in case someone is interested fixing omapdrm's ywrap code:
->>
->> - get_fb() doesn't work. I don't understand the point of the function. 
->> It compares fbi->fix.id and MODULE_NAME, and the "fbi->fix.id" has 
->> changed along the years so the check no longer works. Afaik, the whole 
->> function is not needed, and we can just use fbi->par.
->>
->> - omap_fbdev_pan_display() doesn't seem to get called when the console 
->> scrolls. I can get it called with an userspace app that does some y 
->> panning. Maybe FBINFO_HWACCEL_YWRAP is not supported anymore?
+> Hi,
 > 
-> If ywrap doesn't work and no one complained, can we remove it? The rest 
-> of the code is equivalent to drm_fbdev_dma.c, so we could remove omap's 
-> implementation entirely.
+> Do we need to do something particular in an atomic driver except using
+> state content?
+> 
+> I proposed some modifications for VKMS bellow. If you think this is good,
+> I can send a patch to avoid being an offender :-) I just tested it, and it
+> seems to work.
+> 
+> > I'm hoping we could get all these fixed and then declare
+> > the legacy state off limits for atomic drivers (which is
+> > what did long ago for plane->fb/etc). And maybe eventually
+> > turn crtc->legacy into a pointer and only allocate it on
+> > legacy drivers.
+> > 
+> > TODO: hwmode should probably go there too but it probably
+> >       needs a closer look, maybe other stuff too...
+> 
+> [...]
+> 
+> > diff --git a/drivers/gpu/drm/vkms/vkms_composer.c b/drivers/gpu/drm/vkms/vkms_composer.c
+> > index 57a5769fc994..a7f8b1da6e85 100644
+> > --- a/drivers/gpu/drm/vkms/vkms_composer.c
+> > +++ b/drivers/gpu/drm/vkms/vkms_composer.c
+> > @@ -187,7 +187,7 @@ static void blend(struct vkms_writeback_job *wb,
+> >  
+> >  	const struct pixel_argb_u16 background_color = { .a = 0xffff };
+> >  
+> > -	size_t crtc_y_limit = crtc_state->base.crtc->mode.vdisplay;
+> > +	size_t crtc_y_limit = crtc_state->base.crtc->legacy.mode.vdisplay;
+> 
+> 	size_t crtc_y_limit = crtc_state->base.mode.vdisplay;
+> 
+> >  	/*
+> >  	 * The planes are composed line-by-line to avoid heavy memory usage. It is a necessary
+> > @@ -270,7 +270,7 @@ static int compose_active_planes(struct vkms_writeback_job *active_wb,
+> >  	if (WARN_ON(check_format_funcs(crtc_state, active_wb)))
+> >  		return -EINVAL;
+> >  
+> > -	line_width = crtc_state->base.crtc->mode.hdisplay;
+> > +	line_width = crtc_state->base.crtc->legacy.mode.hdisplay;
+> 
+> 	line_width = crtc_state->base.mode.hdisplay;
+> 
+> >  	stage_buffer.n_pixels = line_width;
+> >  	output_buffer.n_pixels = line_width;
+> >  
+> > diff --git a/drivers/gpu/drm/vkms/vkms_crtc.c b/drivers/gpu/drm/vkms/vkms_crtc.c
+> > index a40295c18b48..780681ea77e4 100644
+> > --- a/drivers/gpu/drm/vkms/vkms_crtc.c
+> > +++ b/drivers/gpu/drm/vkms/vkms_crtc.c
+> > @@ -64,7 +64,7 @@ static int vkms_enable_vblank(struct drm_crtc *crtc)
+> >  	struct drm_vblank_crtc *vblank = drm_crtc_vblank_crtc(crtc);
+> >  	struct vkms_output *out = drm_crtc_to_vkms_output(crtc);
+> >  
+> > -	drm_calc_timestamping_constants(crtc, &crtc->mode);
+> > +	drm_calc_timestamping_constants(crtc, &crtc->legacy.mode);
+> 
+> 	drm_calc_timestamping_constants(crtc, &crtc->state->mode);
 
-Personally I'm fine with dropping it, but I have to say the console 
-scrolling looked reaaaally slow without it. I'll try to find the time to 
-at least figure out when it broke. Maybe it was a recent thing, and thus 
-no one has complained.
+This one doesn't look safe. You want to call that during your atomic
+commit already.
 
-  Tomi
+The rest look reasonable.
 
+> 
+> >  	hrtimer_init(&out->vblank_hrtimer, CLOCK_MONOTONIC, HRTIMER_MODE_REL);
+> >  	out->vblank_hrtimer.function = &vkms_vblank_simulate;
+> > diff --git a/drivers/gpu/drm/vkms/vkms_writeback.c b/drivers/gpu/drm/vkms/vkms_writeback.c
+> > index bc724cbd5e3a..27164cddb94d 100644
+> > --- a/drivers/gpu/drm/vkms/vkms_writeback.c
+> > +++ b/drivers/gpu/drm/vkms/vkms_writeback.c
+> > @@ -131,8 +131,8 @@ static void vkms_wb_atomic_commit(struct drm_connector *conn,
+> >  	struct drm_connector_state *conn_state = wb_conn->base.state;
+> >  	struct vkms_crtc_state *crtc_state = output->composer_state;
+> >  	struct drm_framebuffer *fb = connector_state->writeback_job->fb;
+> > -	u16 crtc_height = crtc_state->base.crtc->mode.vdisplay;
+> > -	u16 crtc_width = crtc_state->base.crtc->mode.hdisplay;
+> > +	u16 crtc_height = crtc_state->base.crtc->legacy.mode.vdisplay;
+> > +	u16 crtc_width = crtc_state->base.crtc->legacy.mode.hdisplay;
+> 
+> 	u16 crtc_height = crtc_state->base.mode.vdisplay;
+> 	u16 crtc_width = crtc_state->base.mode.hdisplay;
+> 
+> >  	struct vkms_writeback_job *active_wb;
+> >  	struct vkms_frame_info *wb_frame_info;
+> >  	u32 wb_format = fb->format->format;
+> 
+> [...]
+> 
+> -- 
+> Louis Chauvet, Bootlin
+> Embedded Linux and Kernel engineering
+> https://bootlin.com
+
+-- 
+Ville Syrjälä
+Intel
