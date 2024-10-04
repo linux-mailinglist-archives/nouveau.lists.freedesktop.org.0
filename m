@@ -2,71 +2,83 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id 6B93799060F
-	for <lists+nouveau@lfdr.de>; Fri,  4 Oct 2024 16:28:42 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 530B6990642
+	for <lists+nouveau@lfdr.de>; Fri,  4 Oct 2024 16:39:16 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 0C9FB10EA22;
-	Fri,  4 Oct 2024 14:28:37 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id CD7D510EA2B;
+	Fri,  4 Oct 2024 14:39:14 +0000 (UTC)
 Authentication-Results: gabe.freedesktop.org;
-	dkim=pass (2048-bit key; unprotected) header.d=intel.com header.i=@intel.com header.b="iXN5Zq9H";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="O7k2r36g";
 	dkim-atps=neutral
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from mgamail.intel.com (mgamail.intel.com [192.198.163.15])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 80CD210EA1E;
- Fri,  4 Oct 2024 14:28:35 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
- d=intel.com; i=@intel.com; q=dns/txt; s=Intel;
- t=1728052115; x=1759588115;
- h=message-id:subject:from:to:cc:date:in-reply-to:
- references:content-transfer-encoding:mime-version;
- bh=R8f1TonJcjc6CllqsM53rLaU+shc07l4ahUTZ1zG9cM=;
- b=iXN5Zq9HbTuFUMQaHyjB+u90J0hWqAy3t0Thpv3a+K++qVd2CxqSucjx
- J4UjNaAHvc9vYel1IPdYgvZF/0aUeFB2kbeMuJ0cGr4hKl5b2CpoA/3Z+
- WuCAQTkAfoR2+1uOMJSVWCBEmiz6MQZeXEQZD2CA/o5m/MVN2sk+O7Ozn
- tPJ9Fkz80X3OCiD/YG9WoZ/EAgXsw45JOvKLhV4tlCHOM6+zmFsvO9E1U
- G911BFX6yEw6WcCdYDhXsCw7gvWSPam70lsqn19scdJqvKWjAQkxLIz29
- goaCJDFTpYneh0zxgoDYJpTTIG+R7r/mk94p2ksl6h8qVrqlc6fFAsPtK A==;
-X-CSE-ConnectionGUID: MhajpUexR86bsn4kfxRdIw==
-X-CSE-MsgGUID: H9NTVNJFQFCGPxorPQPk4w==
-X-IronPort-AV: E=McAfee;i="6700,10204,11215"; a="27422876"
-X-IronPort-AV: E=Sophos;i="6.11,177,1725346800"; d="scan'208";a="27422876"
-Received: from fmviesa006.fm.intel.com ([10.60.135.146])
- by fmvoesa109.fm.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
- 04 Oct 2024 07:28:35 -0700
-X-CSE-ConnectionGUID: /KvbZvRGRuOQRNN7b7Hm/Q==
-X-CSE-MsgGUID: K7KhtKYOQ22+CrJs9n3k0g==
-X-ExtLoop1: 1
-X-IronPort-AV: E=Sophos;i="6.11,177,1725346800"; d="scan'208";a="74305455"
-Received: from pgcooper-mobl3.ger.corp.intel.com (HELO [10.245.245.128])
- ([10.245.245.128])
- by fmviesa006-auth.fm.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
- 04 Oct 2024 07:28:32 -0700
-Message-ID: <a9ef0e2bb79c1f572f82c320a9d77f9cdc75c964.camel@linux.intel.com>
-Subject: Re: [PATCH v2 1/2] drm/ttm: Change ttm_device_init to use a struct
- instead of multiple bools
-From: Thomas =?ISO-8859-1?Q?Hellstr=F6m?= <thomas.hellstrom@linux.intel.com>
-To: Christian =?ISO-8859-1?Q?K=F6nig?= <christian.koenig@amd.com>, 
- intel-xe@lists.freedesktop.org
-Cc: amd-gfx@lists.freedesktop.org, intel-gfx@lists.freedesktop.org, 
- nouveau@lists.freedesktop.org, spice-devel@lists.freedesktop.org, 
- dri-devel@lists.freedesktop.org, Zack Rusin <zack.rusin@broadcom.com>, 
- bcm-kernel-feedback-list@broadcom.com, Sui Jingfeng
- <suijingfeng@loongson.cn>,  Matthew Brost <matthew.brost@intel.com>, Thomas
- Zimmermann <tzimmermann@suse.de>
-Date: Fri, 04 Oct 2024 16:28:29 +0200
-In-Reply-To: <761343773c9e1f5f0cc348a1ec953fb3194194e1.camel@linux.intel.com>
-References: <20241002122422.287276-1-thomas.hellstrom@linux.intel.com>
- <20241002122422.287276-2-thomas.hellstrom@linux.intel.com>
- <6c0387d0-1979-48ae-b9ff-49e00a459438@amd.com>
- <761343773c9e1f5f0cc348a1ec953fb3194194e1.camel@linux.intel.com>
-Autocrypt: addr=thomas.hellstrom@linux.intel.com; prefer-encrypt=mutual;
- keydata=mDMEZaWU6xYJKwYBBAHaRw8BAQdAj/We1UBCIrAm9H5t5Z7+elYJowdlhiYE8zUXgxcFz360SFRob21hcyBIZWxsc3Ryw7ZtIChJbnRlbCBMaW51eCBlbWFpbCkgPHRob21hcy5oZWxsc3Ryb21AbGludXguaW50ZWwuY29tPoiTBBMWCgA7FiEEbJFDO8NaBua8diGTuBaTVQrGBr8FAmWllOsCGwMFCwkIBwICIgIGFQoJCAsCBBYCAwECHgcCF4AACgkQuBaTVQrGBr/yQAD/Z1B+Kzy2JTuIy9LsKfC9FJmt1K/4qgaVeZMIKCAxf2UBAJhmZ5jmkDIf6YghfINZlYq6ixyWnOkWMuSLmELwOsgPuDgEZaWU6xIKKwYBBAGXVQEFAQEHQF9v/LNGegctctMWGHvmV/6oKOWWf/vd4MeqoSYTxVBTAwEIB4h4BBgWCgAgFiEEbJFDO8NaBua8diGTuBaTVQrGBr8FAmWllOsCGwwACgkQuBaTVQrGBr/P2QD9Gts6Ee91w3SzOelNjsus/DcCTBb3fRugJoqcfxjKU0gBAKIFVMvVUGbhlEi6EFTZmBZ0QIZEIzOOVfkaIgWelFEH
-Organization: Intel Sweden AB, Registration Number: 556189-6027
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-User-Agent: Evolution 3.50.4 (3.50.4-1.fc39) 
+Received: from mail-yb1-f171.google.com (mail-yb1-f171.google.com
+ [209.85.219.171])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 0968E10EA2B
+ for <nouveau@lists.freedesktop.org>; Fri,  4 Oct 2024 14:39:14 +0000 (UTC)
+Received: by mail-yb1-f171.google.com with SMTP id
+ 3f1490d57ef6-e260b747fdcso2227477276.3
+ for <nouveau@lists.freedesktop.org>; Fri, 04 Oct 2024 07:39:13 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=linaro.org; s=google; t=1728052753; x=1728657553; darn=lists.freedesktop.org;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=n0+r7C3ydLN7J4JW4zmWAe1MqpY7cd+9UFl+Vc3xTNY=;
+ b=O7k2r36gtL+VTSX3derPXOLJUyx6TRRxtDJTP1qwvAkDLZGfiVS5huNJEVtuKyBc1o
+ gvwhJWFOSB1lOw82GNq2/hocyaAs9qfZJGCH6nVyZnBkCSuxrW7L1uZlUJqg2Vy7H5G+
+ YpjbbTfNcxmxc6GDYekb+nM+IaXORH07aMuqGdouP3KFFyCRQHaq7GP6XdxKvNjRKoDV
+ iYpu1NjYT2xpM9UlaXYnwCtQtWLGOfl/zwl8KlMR7JTg+F1aLs4PFCO0G4eG5q7w3mPS
+ 3+HLTzM4W6Mbpk0hE1nzU+uHlsKgh9kVbjrMgt+/kxwLRye3SQEWBtr9DtrzowY6OwU3
+ 2kjQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1728052753; x=1728657553;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=n0+r7C3ydLN7J4JW4zmWAe1MqpY7cd+9UFl+Vc3xTNY=;
+ b=wOEm+UkXxXZrYGf/d+m0PHm1W1YnO65TwNrr4ua2hQGtTw4oWZG59tYwGkgyYkDrEM
+ Ozug+W9+BQ/JUmKYnphdQFyHYhGkUzEY66SxvT7k09pNwPgdk8v2N0hFrUT43+T37hKO
+ PFygdMriWCgczPTNlwKmvSuGW/V3EcCVyoQu3EBNOuskf9qOm6kHm9UkXuOSK/an+LX7
+ bwH2Pc1PUEPLD+4l8X0MwOHM0xSXyADEh1kfFzW6zvKghuPEV6YaJmBBUl0keUcvUAGr
+ iRAfpwNrOoqqaWiCJdHTl9zP0e/x1c0DxllDQCjSR3VJNwuhNuFlgQ9jRcscL4dXEyPj
+ T9aQ==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCWDqr0ZujXaX19bQyfT29WH1qKE7n7CjyfgApX0g1BntXSXzLc+jSTXqlZoeQeqbRaVSoChYcP+@lists.freedesktop.org
+X-Gm-Message-State: AOJu0YwvzIXg0eg4LYUaEzRu7tPUQhJnjgHBVO6Ps2l1BEL1T3P9qL4n
+ SjbL0s62iRpZgD2LHYMxxx4/4BOUrgpvNs9+w/oMcGsFqzBxKG0ETByYu7zH4RL5oGZUwVfsgdq
+ pHGJjUaJQrEPcFwCWzdcy+QTeetZ6w7dKRK+v3Q==
+X-Google-Smtp-Source: AGHT+IE1kQI4PJXVDnkiYmxoxJdQtCeM/vstLIS7kgzFE5E+D/sU/FpG9q6FB6tXRDFQWi6Sd5Ul2dRXNEwpALHwRFg=
+X-Received: by 2002:a05:6902:27c8:b0:e1a:a665:1db4 with SMTP id
+ 3f1490d57ef6-e289391768amr2205104276.14.1728052752782; Fri, 04 Oct 2024
+ 07:39:12 -0700 (PDT)
 MIME-Version: 1.0
+References: <20241004094101.113349-1-sakari.ailus@linux.intel.com>
+In-Reply-To: <20241004094101.113349-1-sakari.ailus@linux.intel.com>
+From: Ulf Hansson <ulf.hansson@linaro.org>
+Date: Fri, 4 Oct 2024 16:38:36 +0200
+Message-ID: <CAPDyKFp0N6UJhnHS164Tdf=xkWB0jzq65L9TdvYazeBQ-6WjeQ@mail.gmail.com>
+Subject: Re: [PATCH 00/51] treewide: Switch to __pm_runtime_put_autosuspend()
+To: Sakari Ailus <sakari.ailus@linux.intel.com>
+Cc: dri-devel@lists.freedesktop.org, linux-kernel@vger.kernel.org, 
+ linux-bluetooth@vger.kernel.org, linux-clk@vger.kernel.org, 
+ linux-crypto@vger.kernel.org, dmaengine@vger.kernel.org, 
+ linux-gpio@vger.kernel.org, amd-gfx@lists.freedesktop.org, 
+ nouveau@lists.freedesktop.org, linux-stm32@st-md-mailman.stormreply.com, 
+ linux-arm-kernel@lists.infradead.org, linux-i2c@vger.kernel.org, 
+ linux-i3c@lists.infradead.org, linux-iio@vger.kernel.org, 
+ linux-input@vger.kernel.org, patches@opensource.cirrus.com, 
+ iommu@lists.linux.dev, imx@lists.linux.dev, 
+ linux-mediatek@lists.infradead.org, linux-media@vger.kernel.org, 
+ linux-mmc@vger.kernel.org, linux-mtd@lists.infradead.org, 
+ netdev@vger.kernel.org, linux-wireless@vger.kernel.org, 
+ linux-pci@vger.kernel.org, linux-phy@lists.infradead.org, 
+ linux-pwm@vger.kernel.org, linux-remoteproc@vger.kernel.org, 
+ linux-sound@vger.kernel.org, linux-spi@vger.kernel.org, 
+ linux-staging@lists.linux.dev, linux-usb@vger.kernel.org, 
+ linux-serial@vger.kernel.org, greybus-dev@lists.linaro.org, 
+ asahi@lists.linux.dev, laurent.pinchart@ideasonboard.com, rafael@kernel.org, 
+ Andy Shevchenko <andy.shevchenko@gmail.com>
+Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -81,737 +93,477 @@ List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-On Wed, 2024-10-02 at 14:54 +0200, Thomas Hellstr=C3=B6m wrote:
-> On Wed, 2024-10-02 at 14:45 +0200, Christian K=C3=B6nig wrote:
-> > Am 02.10.24 um 14:24 schrieb Thomas Hellstr=C3=B6m:
-> > > The ttm_device_init funcition uses multiple bool arguments. That
-> > > means
-> > > readability in the caller becomes poor, and all callers need to
-> > > change if
-> > > yet another bool is added.
-> > >=20
-> > > Instead use a struct with multiple single-bit flags. This
-> > > addresses
-> > > both
-> > > problems. Prefer it over using defines or enums with explicit bit
-> > > shifts,
-> > > since converting to and from these bit values uses logical
-> > > operations or
-> > > tests which are implicit with the struct usage, and ofc type-
-> > > checking.
-> >=20
-> > Ok, that style is new to me. I've mostly seen defined parameter
-> > flags
-> > in=20
-> > the kernel.
-> >=20
-> > It obviously has some advantages, but do we have any precedence in
-> > the=20
-> > kernel for using that approach?
->=20
-> I don't know TBH, but I can take a look.
+On Fri, 4 Oct 2024 at 11:41, Sakari Ailus <sakari.ailus@linux.intel.com> wrote:
+>
+> Hello everyone,
+>
+> This set will switch the users of pm_runtime_put_autosuspend() to
+> __pm_runtime_put_autosuspend() while the former will soon be re-purposed
+> to include a call to pm_runtime_mark_last_busy(). The two are almost
+> always used together, apart from bugs which are likely common. Going
+> forward, most new users should be using pm_runtime_put_autosuspend().
+>
+> Once this conversion is done and pm_runtime_put_autosuspend() re-purposed,
+> I'll post another set to merge the calls to __pm_runtime_put_autosuspend()
+> and pm_runtime_mark_last_busy().
 
-So it seems  parse_events__modifier_event() uses something similar
+That sounds like it could cause a lot of churns.
 
-grep u32 `find . -name '*.h'` | grep ': 1' or
-grep bool `find . -name '*.h'` | grep ': 1'
+Why not add a new helper function that does the
+pm_runtime_put_autosuspend() and the pm_runtime_mark_last_busy()
+things? Then we can start moving users over to this new interface,
+rather than having this intermediate step?
 
-reveals a huge number of lines but most of it looks like it's not used
-as function parameters.
+Kind regards
+Uffe
 
-I'll ping Dave and Sima on IRC (I guess they're the ones to receive
-most blame from Linus if it's deemed not good).
-
-/Thomas
-
-
->=20
-> I've used the same style in some of the shrinker series patches,
-> since
-> using multiple bools in the prototype severely reduces readability
-> and
-> mixing the resulting flag defines without type-checking may introduce
-> hard-to find bugs.
->=20
-> /Thomas
->=20
->=20
->=20
-> >=20
-> > Regards,
-> > Christian.
-> >=20
-> > >=20
-> > > This is in preparation of adding yet another bool flag parameter
-> > > to
-> > > the
-> > > function.
-> > >=20
-> > > Cc: Christian K=C3=B6nig <christian.koenig@amd.com>
-> > > Cc: amd-gfx@lists.freedesktop.org
-> > > Cc: intel-gfx@lists.freedesktop.org
-> > > Cc: nouveau@lists.freedesktop.org
-> > > Cc: spice-devel@lists.freedesktop.org
-> > > Cc: dri-devel@lists.freedesktop.org
-> > > Cc: Zack Rusin <zack.rusin@broadcom.com>
-> > > Cc: <bcm-kernel-feedback-list@broadcom.com>
-> > > Cc: Sui Jingfeng <suijingfeng@loongson.cn>
-> > > Cc: <intel-xe@lists.freedesktop.org>
-> > > Signed-off-by: Thomas Hellstr=C3=B6m
-> > > <thomas.hellstrom@linux.intel.com>
-> > > ---
-> > > =C2=A0 drivers/gpu/drm/amd/amdgpu/amdgpu_ttm.c=C2=A0=C2=A0=C2=A0=C2=
-=A0=C2=A0=C2=A0 |=C2=A0 6 ++++--
-> > > =C2=A0 drivers/gpu/drm/drm_gem_vram_helper.c=C2=A0=C2=A0=C2=A0=C2=A0=
-=C2=A0=C2=A0=C2=A0=C2=A0 |=C2=A0 7 ++++---
-> > > =C2=A0 drivers/gpu/drm/i915/intel_region_ttm.c=C2=A0=C2=A0=C2=A0=C2=
-=A0=C2=A0=C2=A0 |=C2=A0 3 ++-
-> > > =C2=A0 drivers/gpu/drm/loongson/lsdc_ttm.c=C2=A0=C2=A0=C2=A0=C2=A0=C2=
-=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 |=C2=A0 5 ++++-
-> > > =C2=A0 drivers/gpu/drm/nouveau/nouveau_ttm.c=C2=A0=C2=A0=C2=A0=C2=A0=
-=C2=A0=C2=A0=C2=A0=C2=A0 |=C2=A0 7 +++++--
-> > > =C2=A0 drivers/gpu/drm/qxl/qxl_ttm.c=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=
-=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 |=C2=A0 2 +=
--
-> > > =C2=A0 drivers/gpu/drm/radeon/radeon_ttm.c=C2=A0=C2=A0=C2=A0=C2=A0=C2=
-=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 |=C2=A0 6 ++++--
-> > > =C2=A0 drivers/gpu/drm/ttm/tests/ttm_bo_test.c=C2=A0=C2=A0=C2=A0=C2=
-=A0=C2=A0=C2=A0 | 16 +++++++-----
-> > > --
-> > > -
-> > > =C2=A0 .../gpu/drm/ttm/tests/ttm_bo_validate_test.c=C2=A0 |=C2=A0 3 +=
-+-
-> > > =C2=A0 drivers/gpu/drm/ttm/tests/ttm_device_test.c=C2=A0=C2=A0 | 16 +=
-+++++++----
-> > > --
-> > > -
-> > > =C2=A0 drivers/gpu/drm/ttm/tests/ttm_kunit_helpers.c | 20 ++++++++---=
--
-> > > --
-> > > -----
-> > > =C2=A0 drivers/gpu/drm/ttm/tests/ttm_kunit_helpers.h |=C2=A0 6 ++----
-> > > =C2=A0 drivers/gpu/drm/ttm/ttm_device.c=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=
-=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 |=C2=A0 7 +++----
-> > > =C2=A0 drivers/gpu/drm/vmwgfx/vmwgfx_drv.c=C2=A0=C2=A0=C2=A0=C2=A0=C2=
-=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 |=C2=A0 4 ++--
-> > > =C2=A0 drivers/gpu/drm/xe/xe_device.c=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=
-=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 |=C2=A0 3 ++-
-> > > =C2=A0 include/drm/ttm/ttm_device.h=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=
-=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 | 12 =
-++++++++++-
-> > > =C2=A0 16 files changed, 71 insertions(+), 52 deletions(-)
-> > >=20
-> > > diff --git a/drivers/gpu/drm/amd/amdgpu/amdgpu_ttm.c
-> > > b/drivers/gpu/drm/amd/amdgpu/amdgpu_ttm.c
-> > > index 74adb983ab03..e43635ac54fd 100644
-> > > --- a/drivers/gpu/drm/amd/amdgpu/amdgpu_ttm.c
-> > > +++ b/drivers/gpu/drm/amd/amdgpu/amdgpu_ttm.c
-> > > @@ -1853,8 +1853,10 @@ int amdgpu_ttm_init(struct amdgpu_device
-> > > *adev)
-> > > =C2=A0=C2=A0	r =3D ttm_device_init(&adev->mman.bdev, &amdgpu_bo_drive=
-r,
-> > > adev->dev,
-> > > =C2=A0=C2=A0			=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 adev_to_drm(adev)=
-->anon_inode-
-> > > > i_mapping,
-> > > =C2=A0=C2=A0			=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 adev_to_drm(adev)=
--
-> > > > vma_offset_manager,
-> > > -			=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 adev->need_swiotlb,
-> > > -			=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 dma_addressing_limited(adev-
-> > > >dev));
-> > > +			=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 (struct ttm_device_init_flag=
-s){
-> > > +				=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 .use_dma_alloc =3D adev-
-> > > > need_swiotlb,
-> > > +				=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 .use_dma32 =3D
-> > > dma_addressing_limited(adev->dev)
-> > > +			=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 });
-> > > =C2=A0=C2=A0	if (r) {
-> > > =C2=A0=C2=A0		DRM_ERROR("failed initializing buffer object
-> > > driver(%d).\n", r);
-> > > =C2=A0=C2=A0		return r;
-> > > diff --git a/drivers/gpu/drm/drm_gem_vram_helper.c
-> > > b/drivers/gpu/drm/drm_gem_vram_helper.c
-> > > index 22b1fe9c03b8..7c3165b00378 100644
-> > > --- a/drivers/gpu/drm/drm_gem_vram_helper.c
-> > > +++ b/drivers/gpu/drm/drm_gem_vram_helper.c
-> > > @@ -931,9 +931,10 @@ static int drm_vram_mm_init(struct
-> > > drm_vram_mm
-> > > *vmm, struct drm_device *dev,
-> > > =C2=A0=C2=A0	vmm->vram_size =3D vram_size;
-> > > =C2=A0=20
-> > > =C2=A0=C2=A0	ret =3D ttm_device_init(&vmm->bdev, &bo_driver, dev->dev=
-,
-> > > -				 dev->anon_inode->i_mapping,
-> > > -				 dev->vma_offset_manager,
-> > > -				 false, true);
-> > > +			=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 dev->anon_inode->i_mapping,
-> > > +			=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 dev->vma_offset_manager,
-> > > +			=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 (struct ttm_device_init_flags)
-> > > +			=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 {.use_dma32 =3D true});
-> > > =C2=A0=C2=A0	if (ret)
-> > > =C2=A0=C2=A0		return ret;
-> > > =C2=A0=20
-> > > diff --git a/drivers/gpu/drm/i915/intel_region_ttm.c
-> > > b/drivers/gpu/drm/i915/intel_region_ttm.c
-> > > index 04525d92bec5..db34da63814c 100644
-> > > --- a/drivers/gpu/drm/i915/intel_region_ttm.c
-> > > +++ b/drivers/gpu/drm/i915/intel_region_ttm.c
-> > > @@ -34,7 +34,8 @@ int intel_region_ttm_device_init(struct
-> > > drm_i915_private *dev_priv)
-> > > =C2=A0=20
-> > > =C2=A0=C2=A0	return ttm_device_init(&dev_priv->bdev,
-> > > i915_ttm_driver(),
-> > > =C2=A0=C2=A0			=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 drm->dev, drm->an=
-on_inode-
-> > > > i_mapping,
-> > > -			=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 drm->vma_offset_manager, fal=
-se,
-> > > false);
-> > > +			=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 drm->vma_offset_manager,
-> > > +			=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 (struct
-> > > ttm_device_init_flags){});
-> > > =C2=A0 }
-> > > =C2=A0=20
-> > > =C2=A0 /**
-> > > diff --git a/drivers/gpu/drm/loongson/lsdc_ttm.c
-> > > b/drivers/gpu/drm/loongson/lsdc_ttm.c
-> > > index 2e42c6970c9f..c684f1636f3f 100644
-> > > --- a/drivers/gpu/drm/loongson/lsdc_ttm.c
-> > > +++ b/drivers/gpu/drm/loongson/lsdc_ttm.c
-> > > @@ -544,7 +544,10 @@ int lsdc_ttm_init(struct lsdc_device *ldev)
-> > > =C2=A0=20
-> > > =C2=A0=C2=A0	ret =3D ttm_device_init(&ldev->bdev, &lsdc_bo_driver,
-> > > ddev-
-> > > > dev,
-> > > =C2=A0=C2=A0			=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 ddev->anon_inode->i_map=
-ping,
-> > > -			=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 ddev->vma_offset_manager, false,
-> > > true);
-> > > +			=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 ddev->vma_offset_manager,
-> > > +			=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 (struct ttm_device_init_flags){
-> > > +				=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 .use_dma32 =3D true
-> > > +			=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 });
-> > > =C2=A0=C2=A0	if (ret)
-> > > =C2=A0=C2=A0		return ret;
-> > > =C2=A0=20
-> > > diff --git a/drivers/gpu/drm/nouveau/nouveau_ttm.c
-> > > b/drivers/gpu/drm/nouveau/nouveau_ttm.c
-> > > index e244927eb5d4..5f89d2b40425 100644
-> > > --- a/drivers/gpu/drm/nouveau/nouveau_ttm.c
-> > > +++ b/drivers/gpu/drm/nouveau/nouveau_ttm.c
-> > > @@ -302,8 +302,11 @@ nouveau_ttm_init(struct nouveau_drm *drm)
-> > > =C2=A0=C2=A0	ret =3D ttm_device_init(&drm->ttm.bdev,
-> > > &nouveau_bo_driver,
-> > > drm->dev->dev,
-> > > =C2=A0=C2=A0				=C2=A0 dev->anon_inode->i_mapping,
-> > > =C2=A0=C2=A0				=C2=A0 dev->vma_offset_manager,
-> > > -				=C2=A0 drm_need_swiotlb(drm-
-> > > > client.mmu.dmabits),
-> > > -				=C2=A0 drm->client.mmu.dmabits <=3D
-> > > 32);
-> > > +				=C2=A0 (struct
-> > > ttm_device_init_flags){
-> > > +					=C2=A0 .use_dma_alloc =3D
-> > > +					=C2=A0 drm_need_swiotlb(drm-
-> > > > client.mmu.dmabits),
-> > > +					=C2=A0 .use_dma32 =3D (drm-
-> > > > client.mmu.dmabits <=3D 32)
-> > > +				=C2=A0 });
-> > > =C2=A0=C2=A0	if (ret) {
-> > > =C2=A0=C2=A0		NV_ERROR(drm, "error initialising bo driver,
-> > > %d\n", ret);
-> > > =C2=A0=C2=A0		return ret;
-> > > diff --git a/drivers/gpu/drm/qxl/qxl_ttm.c
-> > > b/drivers/gpu/drm/qxl/qxl_ttm.c
-> > > index 765a144cea14..ced4c60c4650 100644
-> > > --- a/drivers/gpu/drm/qxl/qxl_ttm.c
-> > > +++ b/drivers/gpu/drm/qxl/qxl_ttm.c
-> > > @@ -196,7 +196,7 @@ int qxl_ttm_init(struct qxl_device *qdev)
-> > > =C2=A0=C2=A0	r =3D ttm_device_init(&qdev->mman.bdev, &qxl_bo_driver,
-> > > NULL,
-> > > =C2=A0=C2=A0			=C2=A0=C2=A0=C2=A0 qdev->ddev.anon_inode->i_mapping,
-> > > =C2=A0=C2=A0			=C2=A0=C2=A0=C2=A0 qdev->ddev.vma_offset_manager,
-> > > -			=C2=A0=C2=A0=C2=A0 false, false);
-> > > +			=C2=A0=C2=A0=C2=A0 (struct ttm_device_init_flags){});
-> > > =C2=A0=C2=A0	if (r) {
-> > > =C2=A0=C2=A0		DRM_ERROR("failed initializing buffer object
-> > > driver(%d).\n", r);
-> > > =C2=A0=C2=A0		return r;
-> > > diff --git a/drivers/gpu/drm/radeon/radeon_ttm.c
-> > > b/drivers/gpu/drm/radeon/radeon_ttm.c
-> > > index 69d0c12fa419..2915473e4956 100644
-> > > --- a/drivers/gpu/drm/radeon/radeon_ttm.c
-> > > +++ b/drivers/gpu/drm/radeon/radeon_ttm.c
-> > > @@ -684,8 +684,10 @@ int radeon_ttm_init(struct radeon_device
-> > > *rdev)
-> > > =C2=A0=C2=A0	r =3D ttm_device_init(&rdev->mman.bdev, &radeon_bo_drive=
-r,
-> > > rdev->dev,
-> > > =C2=A0=C2=A0			=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 rdev_to_drm(rdev)=
-->anon_inode-
-> > > > i_mapping,
-> > > =C2=A0=C2=A0			=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 rdev_to_drm(rdev)=
--
-> > > > vma_offset_manager,
-> > > -			=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 rdev->need_swiotlb,
-> > > -			=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 dma_addressing_limited(&rdev=
--
-> > > >pdev-
-> > > > dev));
-> > > +			=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 (struct ttm_device_init_flag=
-s){
-> > > +					.use_dma_alloc =3D rdev-
-> > > > need_swiotlb,
-> > > +					.use_dma32 =3D
-> > > dma_addressing_limited(&rdev->pdev->dev)
-> > > +				});
-> > > =C2=A0=C2=A0	if (r) {
-> > > =C2=A0=C2=A0		DRM_ERROR("failed initializing buffer object
-> > > driver(%d).\n", r);
-> > > =C2=A0=C2=A0		return r;
-> > > diff --git a/drivers/gpu/drm/ttm/tests/ttm_bo_test.c
-> > > b/drivers/gpu/drm/ttm/tests/ttm_bo_test.c
-> > > index f0a7eb62116c..8a2ab90c6e8f 100644
-> > > --- a/drivers/gpu/drm/ttm/tests/ttm_bo_test.c
-> > > +++ b/drivers/gpu/drm/ttm/tests/ttm_bo_test.c
-> > > @@ -251,7 +251,7 @@ static void ttm_bo_unreserve_basic(struct
-> > > kunit
-> > > *test)
-> > > =C2=A0=C2=A0	ttm_dev =3D kunit_kzalloc(test, sizeof(*ttm_dev),
-> > > GFP_KERNEL);
-> > > =C2=A0=C2=A0	KUNIT_ASSERT_NOT_NULL(test, ttm_dev);
-> > > =C2=A0=20
-> > > -	err =3D ttm_device_kunit_init(priv, ttm_dev, false,
-> > > false);
-> > > +	err =3D ttm_device_kunit_init(priv, ttm_dev, (struct
-> > > ttm_device_init_flags){});
-> > > =C2=A0=C2=A0	KUNIT_ASSERT_EQ(test, err, 0);
-> > > =C2=A0=C2=A0	priv->ttm_dev =3D ttm_dev;
-> > > =C2=A0=20
-> > > @@ -290,7 +290,7 @@ static void ttm_bo_unreserve_pinned(struct
-> > > kunit *test)
-> > > =C2=A0=C2=A0	ttm_dev =3D kunit_kzalloc(test, sizeof(*ttm_dev),
-> > > GFP_KERNEL);
-> > > =C2=A0=C2=A0	KUNIT_ASSERT_NOT_NULL(test, ttm_dev);
-> > > =C2=A0=20
-> > > -	err =3D ttm_device_kunit_init(priv, ttm_dev, false,
-> > > false);
-> > > +	err =3D ttm_device_kunit_init(priv, ttm_dev, (struct
-> > > ttm_device_init_flags){});
-> > > =C2=A0=C2=A0	KUNIT_ASSERT_EQ(test, err, 0);
-> > > =C2=A0=C2=A0	priv->ttm_dev =3D ttm_dev;
-> > > =C2=A0=20
-> > > @@ -342,7 +342,7 @@ static void ttm_bo_unreserve_bulk(struct
-> > > kunit
-> > > *test)
-> > > =C2=A0=C2=A0	resv =3D kunit_kzalloc(test, sizeof(*resv), GFP_KERNEL);
-> > > =C2=A0=C2=A0	KUNIT_ASSERT_NOT_NULL(test, ttm_dev);
-> > > =C2=A0=20
-> > > -	err =3D ttm_device_kunit_init(priv, ttm_dev, false,
-> > > false);
-> > > +	err =3D ttm_device_kunit_init(priv, ttm_dev, (struct
-> > > ttm_device_init_flags){});
-> > > =C2=A0=C2=A0	KUNIT_ASSERT_EQ(test, err, 0);
-> > > =C2=A0=C2=A0	priv->ttm_dev =3D ttm_dev;
-> > > =C2=A0=20
-> > > @@ -394,7 +394,7 @@ static void ttm_bo_put_basic(struct kunit
-> > > *test)
-> > > =C2=A0=C2=A0	ttm_dev =3D kunit_kzalloc(test, sizeof(*ttm_dev),
-> > > GFP_KERNEL);
-> > > =C2=A0=C2=A0	KUNIT_ASSERT_NOT_NULL(test, ttm_dev);
-> > > =C2=A0=20
-> > > -	err =3D ttm_device_kunit_init(priv, ttm_dev, false,
-> > > false);
-> > > +	err =3D ttm_device_kunit_init(priv, ttm_dev, (struct
-> > > ttm_device_init_flags){});
-> > > =C2=A0=C2=A0	KUNIT_ASSERT_EQ(test, err, 0);
-> > > =C2=A0=C2=A0	priv->ttm_dev =3D ttm_dev;
-> > > =C2=A0=20
-> > > @@ -437,7 +437,7 @@ static void ttm_bo_put_shared_resv(struct
-> > > kunit
-> > > *test)
-> > > =C2=A0=C2=A0	ttm_dev =3D kunit_kzalloc(test, sizeof(*ttm_dev),
-> > > GFP_KERNEL);
-> > > =C2=A0=C2=A0	KUNIT_ASSERT_NOT_NULL(test, ttm_dev);
-> > > =C2=A0=20
-> > > -	err =3D ttm_device_kunit_init(priv, ttm_dev, false,
-> > > false);
-> > > +	err =3D ttm_device_kunit_init(priv, ttm_dev, (struct
-> > > ttm_device_init_flags){});
-> > > =C2=A0=C2=A0	KUNIT_ASSERT_EQ(test, err, 0);
-> > > =C2=A0=C2=A0	priv->ttm_dev =3D ttm_dev;
-> > > =C2=A0=20
-> > > @@ -477,7 +477,7 @@ static void ttm_bo_pin_basic(struct kunit
-> > > *test)
-> > > =C2=A0=C2=A0	ttm_dev =3D kunit_kzalloc(test, sizeof(*ttm_dev),
-> > > GFP_KERNEL);
-> > > =C2=A0=C2=A0	KUNIT_ASSERT_NOT_NULL(test, ttm_dev);
-> > > =C2=A0=20
-> > > -	err =3D ttm_device_kunit_init(priv, ttm_dev, false,
-> > > false);
-> > > +	err =3D ttm_device_kunit_init(priv, ttm_dev, (struct
-> > > ttm_device_init_flags){});
-> > > =C2=A0=C2=A0	KUNIT_ASSERT_EQ(test, err, 0);
-> > > =C2=A0=C2=A0	priv->ttm_dev =3D ttm_dev;
-> > > =C2=A0=20
-> > > @@ -512,7 +512,7 @@ static void ttm_bo_pin_unpin_resource(struct
-> > > kunit *test)
-> > > =C2=A0=C2=A0	ttm_dev =3D kunit_kzalloc(test, sizeof(*ttm_dev),
-> > > GFP_KERNEL);
-> > > =C2=A0=C2=A0	KUNIT_ASSERT_NOT_NULL(test, ttm_dev);
-> > > =C2=A0=20
-> > > -	err =3D ttm_device_kunit_init(priv, ttm_dev, false,
-> > > false);
-> > > +	err =3D ttm_device_kunit_init(priv, ttm_dev, (struct
-> > > ttm_device_init_flags){});
-> > > =C2=A0=C2=A0	KUNIT_ASSERT_EQ(test, err, 0);
-> > > =C2=A0=C2=A0	priv->ttm_dev =3D ttm_dev;
-> > > =C2=A0=20
-> > > @@ -563,7 +563,7 @@ static void
-> > > ttm_bo_multiple_pin_one_unpin(struct kunit *test)
-> > > =C2=A0=C2=A0	ttm_dev =3D kunit_kzalloc(test, sizeof(*ttm_dev),
-> > > GFP_KERNEL);
-> > > =C2=A0=C2=A0	KUNIT_ASSERT_NOT_NULL(test, ttm_dev);
-> > > =C2=A0=20
-> > > -	err =3D ttm_device_kunit_init(priv, ttm_dev, false,
-> > > false);
-> > > +	err =3D ttm_device_kunit_init(priv, ttm_dev, (struct
-> > > ttm_device_init_flags){});
-> > > =C2=A0=C2=A0	KUNIT_ASSERT_EQ(test, err, 0);
-> > > =C2=A0=C2=A0	priv->ttm_dev =3D ttm_dev;
-> > > =C2=A0=20
-> > > diff --git a/drivers/gpu/drm/ttm/tests/ttm_bo_validate_test.c
-> > > b/drivers/gpu/drm/ttm/tests/ttm_bo_validate_test.c
-> > > index 1adf18481ea0..c69b9707e6d2 100644
-> > > --- a/drivers/gpu/drm/ttm/tests/ttm_bo_validate_test.c
-> > > +++ b/drivers/gpu/drm/ttm/tests/ttm_bo_validate_test.c
-> > > @@ -1044,7 +1044,8 @@ static void
-> > > ttm_bo_validate_busy_domain_evict(struct kunit *test)
-> > > =C2=A0=C2=A0	 */
-> > > =C2=A0=C2=A0	ttm_device_fini(priv->ttm_dev);
-> > > =C2=A0=20
-> > > -	err =3D ttm_device_kunit_init_bad_evict(test->priv, priv-
-> > > > ttm_dev, false, false);
-> > > +	err =3D ttm_device_kunit_init_bad_evict(test->priv, priv-
-> > > > ttm_dev,
-> > > +					=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 (struct
-> > > ttm_device_init_flags){});
-> > > =C2=A0=C2=A0	KUNIT_ASSERT_EQ(test, err, 0);
-> > > =C2=A0=20
-> > > =C2=A0=C2=A0	ttm_mock_manager_init(priv->ttm_dev, mem_type,
-> > > MANAGER_SIZE);
-> > > diff --git a/drivers/gpu/drm/ttm/tests/ttm_device_test.c
-> > > b/drivers/gpu/drm/ttm/tests/ttm_device_test.c
-> > > index 1621903818e5..9415c7b76e3b 100644
-> > > --- a/drivers/gpu/drm/ttm/tests/ttm_device_test.c
-> > > +++ b/drivers/gpu/drm/ttm/tests/ttm_device_test.c
-> > > @@ -25,7 +25,7 @@ static void ttm_device_init_basic(struct kunit
-> > > *test)
-> > > =C2=A0=C2=A0	ttm_dev =3D kunit_kzalloc(test, sizeof(*ttm_dev),
-> > > GFP_KERNEL);
-> > > =C2=A0=C2=A0	KUNIT_ASSERT_NOT_NULL(test, ttm_dev);
-> > > =C2=A0=20
-> > > -	err =3D ttm_device_kunit_init(priv, ttm_dev, false,
-> > > false);
-> > > +	err =3D ttm_device_kunit_init(priv, ttm_dev, (struct
-> > > ttm_device_init_flags){});
-> > > =C2=A0=C2=A0	KUNIT_ASSERT_EQ(test, err, 0);
-> > > =C2=A0=20
-> > > =C2=A0=C2=A0	KUNIT_EXPECT_PTR_EQ(test, ttm_dev->funcs,
-> > > &ttm_dev_funcs);
-> > > @@ -55,7 +55,8 @@ static void ttm_device_init_multiple(struct
-> > > kunit
-> > > *test)
-> > > =C2=A0=C2=A0	KUNIT_ASSERT_NOT_NULL(test, ttm_devs);
-> > > =C2=A0=20
-> > > =C2=A0=C2=A0	for (i =3D 0; i < num_dev; i++) {
-> > > -		err =3D ttm_device_kunit_init(priv, &ttm_devs[i],
-> > > false, false);
-> > > +		err =3D ttm_device_kunit_init(priv, &ttm_devs[i],
-> > > +					=C2=A0=C2=A0=C2=A0 (struct
-> > > ttm_device_init_flags){});
-> > > =C2=A0=C2=A0		KUNIT_ASSERT_EQ(test, err, 0);
-> > > =C2=A0=20
-> > > =C2=A0=C2=A0		KUNIT_EXPECT_PTR_EQ(test,
-> > > ttm_devs[i].dev_mapping,
-> > > @@ -81,7 +82,7 @@ static void ttm_device_fini_basic(struct kunit
-> > > *test)
-> > > =C2=A0=C2=A0	ttm_dev =3D kunit_kzalloc(test, sizeof(*ttm_dev),
-> > > GFP_KERNEL);
-> > > =C2=A0=C2=A0	KUNIT_ASSERT_NOT_NULL(test, ttm_dev);
-> > > =C2=A0=20
-> > > -	err =3D ttm_device_kunit_init(priv, ttm_dev, false,
-> > > false);
-> > > +	err =3D ttm_device_kunit_init(priv, ttm_dev, (struct
-> > > ttm_device_init_flags){});
-> > > =C2=A0=C2=A0	KUNIT_ASSERT_EQ(test, err, 0);
-> > > =C2=A0=20
-> > > =C2=A0=C2=A0	man =3D ttm_manager_type(ttm_dev, TTM_PL_SYSTEM);
-> > > @@ -109,7 +110,7 @@ static void ttm_device_init_no_vma_man(struct
-> > > kunit *test)
-> > > =C2=A0=C2=A0	vma_man =3D drm->vma_offset_manager;
-> > > =C2=A0=C2=A0	drm->vma_offset_manager =3D NULL;
-> > > =C2=A0=20
-> > > -	err =3D ttm_device_kunit_init(priv, ttm_dev, false,
-> > > false);
-> > > +	err =3D ttm_device_kunit_init(priv, ttm_dev, (struct
-> > > ttm_device_init_flags){});
-> > > =C2=A0=C2=A0	KUNIT_EXPECT_EQ(test, err, -EINVAL);
-> > > =C2=A0=20
-> > > =C2=A0=C2=A0	/* Bring the manager back for a graceful cleanup */
-> > > @@ -162,9 +163,10 @@ static void ttm_device_init_pools(struct
-> > > kunit
-> > > *test)
-> > > =C2=A0=C2=A0	ttm_dev =3D kunit_kzalloc(test, sizeof(*ttm_dev),
-> > > GFP_KERNEL);
-> > > =C2=A0=C2=A0	KUNIT_ASSERT_NOT_NULL(test, ttm_dev);
-> > > =C2=A0=20
-> > > -	err =3D ttm_device_kunit_init(priv, ttm_dev,
-> > > -				=C2=A0=C2=A0=C2=A0 params->use_dma_alloc,
-> > > -				=C2=A0=C2=A0=C2=A0 params->use_dma32);
-> > > +	err =3D ttm_device_kunit_init(priv, ttm_dev, (struct
-> > > ttm_device_init_flags){
-> > > +			.use_dma_alloc =3D params->use_dma_alloc,
-> > > +			.use_dma32 =3D params->use_dma32
-> > > +		});
-> > > =C2=A0=C2=A0	KUNIT_ASSERT_EQ(test, err, 0);
-> > > =C2=A0=20
-> > > =C2=A0=C2=A0	pool =3D &ttm_dev->pool;
-> > > diff --git a/drivers/gpu/drm/ttm/tests/ttm_kunit_helpers.c
-> > > b/drivers/gpu/drm/ttm/tests/ttm_kunit_helpers.c
-> > > index b91c13f46225..24706fabb1c9 100644
-> > > --- a/drivers/gpu/drm/ttm/tests/ttm_kunit_helpers.c
-> > > +++ b/drivers/gpu/drm/ttm/tests/ttm_kunit_helpers.c
-> > > @@ -114,8 +114,7 @@ static void bad_evict_flags(struct
-> > > ttm_buffer_object *bo,
-> > > =C2=A0=20
-> > > =C2=A0 static int ttm_device_kunit_init_with_funcs(struct
-> > > ttm_test_devices *priv,
-> > > =C2=A0=C2=A0					=C2=A0=C2=A0=C2=A0 struct ttm_device
-> > > *ttm,
-> > > -					=C2=A0=C2=A0=C2=A0 bool use_dma_alloc,
-> > > -					=C2=A0=C2=A0=C2=A0 bool use_dma32,
-> > > +					=C2=A0=C2=A0=C2=A0 const struct
-> > > ttm_device_init_flags flags,
-> > > =C2=A0=C2=A0					=C2=A0=C2=A0=C2=A0 struct
-> > > ttm_device_funcs *funcs)
-> > > =C2=A0 {
-> > > =C2=A0=C2=A0	struct drm_device *drm =3D priv->drm;
-> > > @@ -124,7 +123,7 @@ static int
-> > > ttm_device_kunit_init_with_funcs(struct ttm_test_devices *priv,
-> > > =C2=A0=C2=A0	err =3D ttm_device_init(ttm, funcs, drm->dev,
-> > > =C2=A0=C2=A0			=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 drm->anon_inode->i_mapp=
-ing,
-> > > =C2=A0=C2=A0			=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 drm->vma_offset_manager=
-,
-> > > -			=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 use_dma_alloc, use_dma32);
-> > > +			=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 flags);
-> > > =C2=A0=20
-> > > =C2=A0=C2=A0	return err;
-> > > =C2=A0 }
-> > > @@ -140,11 +139,9 @@ EXPORT_SYMBOL_GPL(ttm_dev_funcs);
-> > > =C2=A0=20
-> > > =C2=A0 int ttm_device_kunit_init(struct ttm_test_devices *priv,
-> > > =C2=A0=C2=A0			=C2=A0 struct ttm_device *ttm,
-> > > -			=C2=A0 bool use_dma_alloc,
-> > > -			=C2=A0 bool use_dma32)
-> > > +			=C2=A0 const struct ttm_device_init_flags
-> > > flags)
-> > > =C2=A0 {
-> > > -	return ttm_device_kunit_init_with_funcs(priv, ttm,
-> > > use_dma_alloc,
-> > > -						use_dma32,
-> > > &ttm_dev_funcs);
-> > > +	return ttm_device_kunit_init_with_funcs(priv, ttm,
-> > > flags,
-> > > &ttm_dev_funcs);
-> > > =C2=A0 }
-> > > =C2=A0 EXPORT_SYMBOL_GPL(ttm_device_kunit_init);
-> > > =C2=A0=20
-> > > @@ -159,11 +156,10 @@ EXPORT_SYMBOL_GPL(ttm_dev_funcs_bad_evict);
-> > > =C2=A0=20
-> > > =C2=A0 int ttm_device_kunit_init_bad_evict(struct ttm_test_devices
-> > > *priv,
-> > > =C2=A0=C2=A0				=C2=A0=C2=A0=C2=A0 struct ttm_device *ttm,
-> > > -				=C2=A0=C2=A0=C2=A0 bool use_dma_alloc,
-> > > -				=C2=A0=C2=A0=C2=A0 bool use_dma32)
-> > > +				=C2=A0=C2=A0=C2=A0 const struct
-> > > ttm_device_init_flags flags)
-> > > =C2=A0 {
-> > > -	return ttm_device_kunit_init_with_funcs(priv, ttm,
-> > > use_dma_alloc,
-> > > -						use_dma32,
-> > > &ttm_dev_funcs_bad_evict);
-> > > +	return ttm_device_kunit_init_with_funcs(priv, ttm,
-> > > flags,
-> > > +						&ttm_dev_funcs_b
-> > > ad
-> > > _evict);
-> > > =C2=A0 }
-> > > =C2=A0 EXPORT_SYMBOL_GPL(ttm_device_kunit_init_bad_evict);
-> > > =C2=A0=20
-> > > @@ -249,7 +245,7 @@ struct ttm_test_devices
-> > > *ttm_test_devices_all(struct kunit *test)
-> > > =C2=A0=C2=A0	ttm_dev =3D kunit_kzalloc(test, sizeof(*ttm_dev),
-> > > GFP_KERNEL);
-> > > =C2=A0=C2=A0	KUNIT_ASSERT_NOT_NULL(test, ttm_dev);
-> > > =C2=A0=20
-> > > -	err =3D ttm_device_kunit_init(devs, ttm_dev, false,
-> > > false);
-> > > +	err =3D ttm_device_kunit_init(devs, ttm_dev, (struct
-> > > ttm_device_init_flags){});
-> > > =C2=A0=C2=A0	KUNIT_ASSERT_EQ(test, err, 0);
-> > > =C2=A0=20
-> > > =C2=A0=C2=A0	devs->ttm_dev =3D ttm_dev;
-> > > diff --git a/drivers/gpu/drm/ttm/tests/ttm_kunit_helpers.h
-> > > b/drivers/gpu/drm/ttm/tests/ttm_kunit_helpers.h
-> > > index c7da23232ffa..fbf0d3984f25 100644
-> > > --- a/drivers/gpu/drm/ttm/tests/ttm_kunit_helpers.h
-> > > +++ b/drivers/gpu/drm/ttm/tests/ttm_kunit_helpers.h
-> > > @@ -28,12 +28,10 @@ struct ttm_test_devices {
-> > > =C2=A0 /* Building blocks for test-specific init functions */
-> > > =C2=A0 int ttm_device_kunit_init(struct ttm_test_devices *priv,
-> > > =C2=A0=C2=A0			=C2=A0 struct ttm_device *ttm,
-> > > -			=C2=A0 bool use_dma_alloc,
-> > > -			=C2=A0 bool use_dma32);
-> > > +			=C2=A0 const struct ttm_device_init_flags
-> > > flags);
-> > > =C2=A0 int ttm_device_kunit_init_bad_evict(struct ttm_test_devices
-> > > *priv,
-> > > =C2=A0=C2=A0				=C2=A0=C2=A0=C2=A0 struct ttm_device *ttm,
-> > > -				=C2=A0=C2=A0=C2=A0 bool use_dma_alloc,
-> > > -				=C2=A0=C2=A0=C2=A0 bool use_dma32);
-> > > +				=C2=A0=C2=A0=C2=A0 const struct
-> > > ttm_device_init_flags flags);
-> > > =C2=A0 struct ttm_buffer_object *ttm_bo_kunit_init(struct kunit *test=
-,
-> > > =C2=A0=C2=A0					=C2=A0=C2=A0=C2=A0 struct
-> > > ttm_test_devices *devs,
-> > > =C2=A0=C2=A0					=C2=A0=C2=A0=C2=A0 size_t size,
-> > > diff --git a/drivers/gpu/drm/ttm/ttm_device.c
-> > > b/drivers/gpu/drm/ttm/ttm_device.c
-> > > index e7cc4954c1bc..0c85d10e5e0b 100644
-> > > --- a/drivers/gpu/drm/ttm/ttm_device.c
-> > > +++ b/drivers/gpu/drm/ttm/ttm_device.c
-> > > @@ -174,8 +174,7 @@ EXPORT_SYMBOL(ttm_device_swapout);
-> > > =C2=A0=C2=A0 * @dev: The core kernel device pointer for DMA mappings =
-and
-> > > allocations.
-> > > =C2=A0=C2=A0 * @mapping: The address space to use for this bo.
-> > > =C2=A0=C2=A0 * @vma_manager: A pointer to a vma manager.
-> > > - * @use_dma_alloc: If coherent DMA allocation API should be
-> > > used.
-> > > - * @use_dma32: If we should use GFP_DMA32 for device memory
-> > > allocations.
-> > > + * @flags: Flags governing the device behaviour.
-> > > =C2=A0=C2=A0 *
-> > > =C2=A0=C2=A0 * Initializes a struct ttm_device:
-> > > =C2=A0=C2=A0 * Returns:
-> > > @@ -184,7 +183,7 @@ EXPORT_SYMBOL(ttm_device_swapout);
-> > > =C2=A0 int ttm_device_init(struct ttm_device *bdev, const struct
-> > > ttm_device_funcs *funcs,
-> > > =C2=A0=C2=A0		=C2=A0=C2=A0=C2=A0 struct device *dev, struct address_s=
-pace
-> > > *mapping,
-> > > =C2=A0=C2=A0		=C2=A0=C2=A0=C2=A0 struct drm_vma_offset_manager *vma_m=
-anager,
-> > > -		=C2=A0=C2=A0=C2=A0 bool use_dma_alloc, bool use_dma32)
-> > > +		=C2=A0=C2=A0=C2=A0 const struct ttm_device_init_flags flags)
-> > > =C2=A0 {
-> > > =C2=A0=C2=A0	struct ttm_global *glob =3D &ttm_glob;
-> > > =C2=A0=C2=A0	int ret, nid;
-> > > @@ -212,7 +211,7 @@ int ttm_device_init(struct ttm_device *bdev,
-> > > const struct ttm_device_funcs *func
-> > > =C2=A0=C2=A0	else
-> > > =C2=A0=C2=A0		nid =3D NUMA_NO_NODE;
-> > > =C2=A0=20
-> > > -	ttm_pool_init(&bdev->pool, dev, nid, use_dma_alloc,
-> > > use_dma32);
-> > > +	ttm_pool_init(&bdev->pool, dev, nid,
-> > > flags.use_dma_alloc,
-> > > flags.use_dma32);
-> > > =C2=A0=20
-> > > =C2=A0=C2=A0	bdev->vma_manager =3D vma_manager;
-> > > =C2=A0=C2=A0	spin_lock_init(&bdev->lru_lock);
-> > > diff --git a/drivers/gpu/drm/vmwgfx/vmwgfx_drv.c
-> > > b/drivers/gpu/drm/vmwgfx/vmwgfx_drv.c
-> > > index cf7a89d002e4..7ff7e5d7a9f3 100644
-> > > --- a/drivers/gpu/drm/vmwgfx/vmwgfx_drv.c
-> > > +++ b/drivers/gpu/drm/vmwgfx/vmwgfx_drv.c
-> > > @@ -1049,8 +1049,8 @@ static int vmw_driver_load(struct
-> > > vmw_private
-> > > *dev_priv, u32 pci_id)
-> > > =C2=A0=C2=A0			=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 dev_priv->drm.dev,
-> > > =C2=A0=C2=A0			=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 dev_priv->drm.anon_inod=
-e-
-> > > >i_mapping,
-> > > =C2=A0=C2=A0			=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 dev_priv->drm.vma_offse=
-t_manager,
-> > > -			=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 dev_priv->map_mode =3D=3D
-> > > vmw_dma_alloc_coherent,
-> > > -			=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 false);
-> > > +			=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 (struct ttm_device_init_flags)
-> > > +			=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 {.use_dma_alloc =3D (dev_priv-
-> > > > map_mode =3D=3D vmw_dma_alloc_coherent)});
-> > > =C2=A0=C2=A0	if (unlikely(ret !=3D 0)) {
-> > > =C2=A0=C2=A0		drm_err(&dev_priv->drm,
-> > > =C2=A0=C2=A0			"Failed initializing TTM buffer object
-> > > driver.\n");
-> > > diff --git a/drivers/gpu/drm/xe/xe_device.c
-> > > b/drivers/gpu/drm/xe/xe_device.c
-> > > index 09a7ad830e69..f9317f56ff9c 100644
-> > > --- a/drivers/gpu/drm/xe/xe_device.c
-> > > +++ b/drivers/gpu/drm/xe/xe_device.c
-> > > @@ -320,7 +320,8 @@ struct xe_device *xe_device_create(struct
-> > > pci_dev *pdev,
-> > > =C2=A0=20
-> > > =C2=A0=C2=A0	err =3D ttm_device_init(&xe->ttm, &xe_ttm_funcs, xe-
-> > > > drm.dev,
-> > > =C2=A0=C2=A0			=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 xe->drm.anon_inode->i_m=
-apping,
-> > > -			=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 xe->drm.vma_offset_manager, false,
-> > > false);
-> > > +			=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 xe->drm.vma_offset_manager,
-> > > +			=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 (struct ttm_device_init_flags){});
-> > > =C2=A0=C2=A0	if (WARN_ON(err))
-> > > =C2=A0=C2=A0		goto err;
-> > > =C2=A0=20
-> > > diff --git a/include/drm/ttm/ttm_device.h
-> > > b/include/drm/ttm/ttm_device.h
-> > > index c22f30535c84..1534bd946c78 100644
-> > > --- a/include/drm/ttm/ttm_device.h
-> > > +++ b/include/drm/ttm/ttm_device.h
-> > > @@ -287,10 +287,20 @@ static inline void
-> > > ttm_set_driver_manager(struct ttm_device *bdev, int type,
-> > > =C2=A0=C2=A0	bdev->man_drv[type] =3D manager;
-> > > =C2=A0 }
-> > > =C2=A0=20
-> > > +/**
-> > > + * struct ttm_device_init_flags - Flags for ttm device creation
-> > > + */
-> > > +struct ttm_device_init_flags {
-> > > +	/** @use_dma_alloc: Whether coherent DMA allocation API
-> > > should be used. */
-> > > +	u32 use_dma_alloc : 1;
-> > > +	/** @use_dma32: If we should use GFP_DMA32 for device
-> > > memory allocations. */
-> > > +	u32 use_dma32 : 1;
-> > > +};
-> > > +
-> > > =C2=A0 int ttm_device_init(struct ttm_device *bdev, const struct
-> > > ttm_device_funcs *funcs,
-> > > =C2=A0=C2=A0		=C2=A0=C2=A0=C2=A0 struct device *dev, struct address_s=
-pace
-> > > *mapping,
-> > > =C2=A0=C2=A0		=C2=A0=C2=A0=C2=A0 struct drm_vma_offset_manager *vma_m=
-anager,
-> > > -		=C2=A0=C2=A0=C2=A0 bool use_dma_alloc, bool use_dma32);
-> > > +		=C2=A0=C2=A0=C2=A0 const struct ttm_device_init_flags flags);
-> > > =C2=A0 void ttm_device_fini(struct ttm_device *bdev);
-> > > =C2=A0 void ttm_device_clear_dma_mappings(struct ttm_device *bdev);
-> > > =C2=A0=20
-> >=20
->=20
-
+>
+> The diff in these patches have been generated using the following
+> Coccinelle script (besides a manual change in
+> drivers/iio/magnetometer/af8133j.c):
+>
+> ----------8<-------------------
+> @@
+> expression E1;
+>
+> @@
+>
+> - pm_runtime_put_autosuspend(E1)
+> + __pm_runtime_put_autosuspend(E1)
+> ----------8<-------------------
+>
+> These patches are on top of today's linux-next (i.e. next-20241004).
+>
+> Sakari Ailus (51):
+>   accel/ivpu: Switch to __pm_runtime_put_autosuspend()
+>   bluetooth: Switch to __pm_runtime_put_autosuspend()
+>   bus: sunxi-rsb: Switch to __pm_runtime_put_autosuspend()
+>   hwrng: Switch to __pm_runtime_put_autosuspend()
+>   clk: Switch to __pm_runtime_put_autosuspend()
+>   crypto: Switch to __pm_runtime_put_autosuspend()
+>   dmaengine: Switch to __pm_runtime_put_autosuspend()
+>   gpio: Switch to __pm_runtime_put_autosuspend()
+>   drm/amd: Switch to __pm_runtime_put_autosuspend()
+>   drm/nouveau: Switch to __pm_runtime_put_autosuspend()
+>   drm/radeon: Switch to __pm_runtime_put_autosuspend()
+>   drm/panfrost: Switch to __pm_runtime_put_autosuspend()
+>   drivers: drm: Switch to __pm_runtime_put_autosuspend()
+>   HSI: omap_ssi_port: Switch to __pm_runtime_put_autosuspend()
+>   stm class: Switch to __pm_runtime_put_autosuspend()
+>   i2c: Switch to __pm_runtime_put_autosuspend()
+>   i3c: master: svc: Switch to __pm_runtime_put_autosuspend()
+>   i3c: dw: Switch to __pm_runtime_put_autosuspend()
+>   iio: Switch to __pm_runtime_put_autosuspend()
+>   Input: omap4-keypad: Switch to __pm_runtime_put_autosuspend()
+>   Input: cs40l50: Switch to __pm_runtime_put_autosuspend()
+>   iommu/arm-smmu: Switch to __pm_runtime_put_autosuspend()
+>   irqchip/imx-irqsteer: Switch to __pm_runtime_put_autosuspend()
+>   mailbox: mtk-cmdq-mailbox: Switch to __pm_runtime_put_autosuspend()
+>   media: Switch to __pm_runtime_put_autosuspend()
+>   mfd: Switch to __pm_runtime_put_autosuspend()
+>   mei: Switch to __pm_runtime_put_autosuspend()
+>   mmc: Switch to __pm_runtime_put_autosuspend()
+>   mtd: rawnand: gpmi: Switch to __pm_runtime_put_autosuspend()
+>   net: Switch to __pm_runtime_put_autosuspend()
+>   nfc: trf7970a: Switch to __pm_runtime_put_autosuspend()
+>   PCI/portdrv: Switch to __pm_runtime_put_autosuspend()
+>   phy: motorola: phy-mapphone-mdm6600: Switch to
+>     __pm_runtime_put_autosuspend()
+>   phy: ti: phy-twl4030-usb: Switch to __pm_runtime_put_autosuspend()
+>   power: Switch to __pm_runtime_put_autosuspend()
+>   pwm: img: Switch to __pm_runtime_put_autosuspend()
+>   regulator: stm32-vrefbuf: Switch to __pm_runtime_put_autosuspend()
+>   remoteproc: omap: Switch to __pm_runtime_put_autosuspend()
+>   slimbus: Switch to __pm_runtime_put_autosuspend()
+>   soundwire: Switch to __pm_runtime_put_autosuspend()
+>   spi: Switch to __pm_runtime_put_autosuspend()
+>   staging: Switch to __pm_runtime_put_autosuspend()
+>   thunderbolt: Switch to __pm_runtime_put_autosuspend()
+>   serial: Switch to __pm_runtime_put_autosuspend()
+>   usb: Switch to __pm_runtime_put_autosuspend()
+>   w1: omap-hdq: Switch to __pm_runtime_put_autosuspend()
+>   staging: greybus: Switch to __pm_runtime_put_autosuspend()
+>   ALSA: hda: Switch to __pm_runtime_put_autosuspend()
+>   ASoC: Switch to __pm_runtime_put_autosuspend()
+>   ALSA: intel_hdmi: Switch to __pm_runtime_put_autosuspend()
+>   soc: apple: mailbox: Switch to __pm_runtime_put_autosuspend()
+>
+>  drivers/accel/ivpu/ivpu_drv.c                 |   2 +-
+>  drivers/accel/ivpu/ivpu_pm.c                  |   8 +-
+>  drivers/bluetooth/btmtksdio.c                 |   2 +-
+>  drivers/bluetooth/hci_bcm.c                   |   6 +-
+>  drivers/bluetooth/hci_h5.c                    |   4 +-
+>  drivers/bluetooth/hci_intel.c                 |   6 +-
+>  drivers/bus/sunxi-rsb.c                       |   4 +-
+>  drivers/char/hw_random/cctrng.c               |   2 +-
+>  drivers/char/hw_random/omap3-rom-rng.c        |   2 +-
+>  drivers/clk/imx/clk-imx8qxp-lpcg.c            |   2 +-
+>  drivers/clk/imx/clk-scu.c                     |   2 +-
+>  drivers/clk/qcom/lpassaudiocc-sc7280.c        |   4 +-
+>  drivers/clk/qcom/lpasscorecc-sc7180.c         |   4 +-
+>  drivers/crypto/ccree/cc_pm.c                  |   2 +-
+>  drivers/crypto/hisilicon/qm.c                 |   2 +-
+>  drivers/crypto/omap-aes-gcm.c                 |   2 +-
+>  drivers/crypto/omap-aes.c                     |   2 +-
+>  drivers/crypto/omap-des.c                     |   2 +-
+>  drivers/crypto/omap-sham.c                    |   2 +-
+>  drivers/crypto/rockchip/rk3288_crypto_ahash.c |   2 +-
+>  .../crypto/rockchip/rk3288_crypto_skcipher.c  |   2 +-
+>  drivers/crypto/stm32/stm32-crc32.c            |   4 +-
+>  drivers/crypto/stm32/stm32-cryp.c             |   2 +-
+>  drivers/crypto/stm32/stm32-hash.c             |   2 +-
+>  drivers/dma/at_xdmac.c                        |  24 +--
+>  drivers/dma/pl330.c                           |  14 +-
+>  drivers/dma/qcom/bam_dma.c                    |  10 +-
+>  drivers/dma/qcom/hidma.c                      |  18 +-
+>  drivers/dma/qcom/hidma_dbg.c                  |   2 +-
+>  drivers/dma/qcom/hidma_mgmt.c                 |   4 +-
+>  drivers/dma/ste_dma40.c                       |  16 +-
+>  drivers/dma/ti/cppi41.c                       |  10 +-
+>  drivers/dma/xilinx/zynqmp_dma.c               |   2 +-
+>  drivers/gpio/gpio-arizona.c                   |  10 +-
+>  drivers/gpio/gpio-mxc.c                       |   2 +-
+>  drivers/gpu/drm/amd/amdgpu/amdgpu_acpi.c      |   2 +-
+>  .../gpu/drm/amd/amdgpu/amdgpu_connectors.c    |  16 +-
+>  drivers/gpu/drm/amd/amdgpu/amdgpu_debugfs.c   | 120 ++++++------
+>  drivers/gpu/drm/amd/amdgpu/amdgpu_display.c   |   2 +-
+>  drivers/gpu/drm/amd/amdgpu/amdgpu_drv.c       |   6 +-
+>  drivers/gpu/drm/amd/amdgpu/amdgpu_fence.c     |   6 +-
+>  drivers/gpu/drm/amd/amdgpu/amdgpu_gfx.c       |   4 +-
+>  drivers/gpu/drm/amd/amdgpu/amdgpu_kms.c       |   4 +-
+>  drivers/gpu/drm/amd/amdgpu/amdgpu_rap.c       |   4 +-
+>  drivers/gpu/drm/amd/amdgpu/amdgpu_ras.c       |   2 +-
+>  .../gpu/drm/amd/amdgpu/amdgpu_securedisplay.c |   4 +-
+>  drivers/gpu/drm/amd/amdkfd/kfd_process.c      |   4 +-
+>  .../gpu/drm/amd/display/amdgpu_dm/amdgpu_dm.c |   2 +-
+>  drivers/gpu/drm/amd/pm/amdgpu_pm.c            | 178 +++++++++---------
+>  .../drm/bridge/analogix/analogix_dp_core.c    |   2 +-
+>  drivers/gpu/drm/bridge/analogix/anx7625.c     |   4 +-
+>  drivers/gpu/drm/bridge/parade-ps8640.c        |   4 +-
+>  drivers/gpu/drm/bridge/ti-sn65dsi86.c         |  14 +-
+>  drivers/gpu/drm/etnaviv/etnaviv_gpu.c         |  12 +-
+>  drivers/gpu/drm/exynos/exynos_drm_fimc.c      |   4 +-
+>  drivers/gpu/drm/exynos/exynos_drm_g2d.c       |   4 +-
+>  drivers/gpu/drm/exynos/exynos_drm_gsc.c       |   6 +-
+>  drivers/gpu/drm/exynos/exynos_drm_rotator.c   |   2 +-
+>  drivers/gpu/drm/exynos/exynos_drm_scaler.c    |   2 +-
+>  drivers/gpu/drm/i915/intel_runtime_pm.c       |   4 +-
+>  drivers/gpu/drm/imx/dcss/dcss-crtc.c          |   2 +-
+>  drivers/gpu/drm/lima/lima_sched.c             |   2 +-
+>  drivers/gpu/drm/msm/adreno/adreno_device.c    |   2 +-
+>  drivers/gpu/drm/msm/adreno/adreno_gpu.c       |   2 +-
+>  drivers/gpu/drm/msm/msm_gpu.c                 |   2 +-
+>  drivers/gpu/drm/msm/msm_iommu.c               |   4 +-
+>  drivers/gpu/drm/msm/msm_submitqueue.c         |   2 +-
+>  drivers/gpu/drm/nouveau/dispnv50/disp.c       |  10 +-
+>  drivers/gpu/drm/nouveau/nouveau_connector.c   |   4 +-
+>  drivers/gpu/drm/nouveau/nouveau_debugfs.c     |   8 +-
+>  drivers/gpu/drm/nouveau/nouveau_display.c     |   4 +-
+>  drivers/gpu/drm/nouveau/nouveau_drm.c         |  10 +-
+>  drivers/gpu/drm/nouveau/nouveau_gem.c         |  10 +-
+>  drivers/gpu/drm/panel/panel-edp.c             |   8 +-
+>  .../gpu/drm/panel/panel-samsung-atna33xc20.c  |   6 +-
+>  drivers/gpu/drm/panel/panel-simple.c          |   6 +-
+>  drivers/gpu/drm/panfrost/panfrost_job.c       |   4 +-
+>  drivers/gpu/drm/panfrost/panfrost_mmu.c       |   4 +-
+>  drivers/gpu/drm/panfrost/panfrost_perfcnt.c   |   4 +-
+>  drivers/gpu/drm/panthor/panthor_device.c      |   2 +-
+>  drivers/gpu/drm/panthor/panthor_sched.c       |   6 +-
+>  drivers/gpu/drm/radeon/radeon_acpi.c          |   2 +-
+>  drivers/gpu/drm/radeon/radeon_connectors.c    |  20 +-
+>  drivers/gpu/drm/radeon/radeon_display.c       |   6 +-
+>  drivers/gpu/drm/radeon/radeon_drv.c           |   4 +-
+>  drivers/gpu/drm/radeon/radeon_fbdev.c         |   4 +-
+>  drivers/gpu/drm/radeon/radeon_kms.c           |  10 +-
+>  drivers/gpu/drm/tegra/submit.c                |   2 +-
+>  drivers/gpu/drm/tidss/tidss_drv.c             |   2 +-
+>  drivers/gpu/drm/vc4/vc4_v3d.c                 |   2 +-
+>  drivers/hsi/controllers/omap_ssi_port.c       |  42 ++---
+>  drivers/hwtracing/stm/core.c                  |   8 +-
+>  drivers/i2c/busses/i2c-amd-mp2-pci.c          |   2 +-
+>  drivers/i2c/busses/i2c-amd-mp2.h              |   2 +-
+>  drivers/i2c/busses/i2c-at91-master.c          |   2 +-
+>  drivers/i2c/busses/i2c-cadence.c              |   2 +-
+>  drivers/i2c/busses/i2c-davinci.c              |   4 +-
+>  drivers/i2c/busses/i2c-designware-master.c    |   2 +-
+>  drivers/i2c/busses/i2c-designware-pcidrv.c    |   2 +-
+>  drivers/i2c/busses/i2c-hix5hd2.c              |   2 +-
+>  drivers/i2c/busses/i2c-i801.c                 |   4 +-
+>  drivers/i2c/busses/i2c-img-scb.c              |   6 +-
+>  drivers/i2c/busses/i2c-imx-lpi2c.c            |   6 +-
+>  drivers/i2c/busses/i2c-imx.c                  |   4 +-
+>  drivers/i2c/busses/i2c-mv64xxx.c              |   2 +-
+>  drivers/i2c/busses/i2c-nvidia-gpu.c           |   4 +-
+>  drivers/i2c/busses/i2c-omap.c                 |   6 +-
+>  drivers/i2c/busses/i2c-qcom-cci.c             |   2 +-
+>  drivers/i2c/busses/i2c-qcom-geni.c            |   2 +-
+>  drivers/i2c/busses/i2c-qup.c                  |   4 +-
+>  drivers/i2c/busses/i2c-riic.c                 |   4 +-
+>  drivers/i2c/busses/i2c-rzv2m.c                |   2 +-
+>  drivers/i2c/busses/i2c-sprd.c                 |   4 +-
+>  drivers/i2c/busses/i2c-stm32f7.c              |  10 +-
+>  drivers/i2c/busses/i2c-xiic.c                 |   2 +-
+>  drivers/i3c/master/dw-i3c-master.c            |  16 +-
+>  drivers/i3c/master/svc-i3c-master.c           |  16 +-
+>  drivers/iio/accel/bmc150-accel-core.c         |   2 +-
+>  drivers/iio/accel/bmi088-accel-core.c         |   6 +-
+>  drivers/iio/accel/fxls8962af-core.c           |   2 +-
+>  drivers/iio/accel/kxcjk-1013.c                |   2 +-
+>  drivers/iio/accel/kxsd9.c                     |   6 +-
+>  drivers/iio/accel/mma8452.c                   |   2 +-
+>  drivers/iio/accel/mma9551_core.c              |   2 +-
+>  drivers/iio/accel/msa311.c                    |  12 +-
+>  drivers/iio/adc/ab8500-gpadc.c                |   2 +-
+>  drivers/iio/adc/at91-sama5d2_adc.c            |  20 +-
+>  drivers/iio/adc/rcar-gyroadc.c                |   2 +-
+>  drivers/iio/adc/stm32-adc-core.c              |   2 +-
+>  drivers/iio/adc/stm32-adc.c                   |  12 +-
+>  drivers/iio/adc/sun4i-gpadc-iio.c             |   4 +-
+>  drivers/iio/adc/ti-ads1015.c                  |   2 +-
+>  drivers/iio/adc/ti-ads1100.c                  |   2 +-
+>  drivers/iio/adc/ti-ads1119.c                  |   4 +-
+>  drivers/iio/chemical/atlas-sensor.c           |   4 +-
+>  .../common/hid-sensors/hid-sensor-trigger.c   |   2 +-
+>  drivers/iio/dac/stm32-dac.c                   |   6 +-
+>  drivers/iio/gyro/bmg160_core.c                |   2 +-
+>  drivers/iio/gyro/fxas21002c_core.c            |   2 +-
+>  drivers/iio/gyro/mpu3050-core.c               |   6 +-
+>  drivers/iio/gyro/mpu3050-i2c.c                |   2 +-
+>  .../iio/imu/inv_icm42600/inv_icm42600_accel.c |  10 +-
+>  .../imu/inv_icm42600/inv_icm42600_buffer.c    |   2 +-
+>  .../iio/imu/inv_icm42600/inv_icm42600_gyro.c  |  10 +-
+>  .../iio/imu/inv_icm42600/inv_icm42600_temp.c  |   2 +-
+>  drivers/iio/imu/inv_mpu6050/inv_mpu_core.c    |  14 +-
+>  drivers/iio/imu/inv_mpu6050/inv_mpu_trigger.c |   4 +-
+>  drivers/iio/imu/kmx61.c                       |   2 +-
+>  drivers/iio/light/apds9306.c                  |   6 +-
+>  drivers/iio/light/apds9960.c                  |   4 +-
+>  drivers/iio/light/bh1780.c                    |   2 +-
+>  drivers/iio/light/gp2ap002.c                  |   4 +-
+>  drivers/iio/light/isl29028.c                  |   2 +-
+>  drivers/iio/light/ltrf216a.c                  |   2 +-
+>  drivers/iio/light/pa12203001.c                |   2 +-
+>  drivers/iio/light/rpr0521.c                   |   2 +-
+>  drivers/iio/light/tsl2583.c                   |   2 +-
+>  drivers/iio/light/tsl2591.c                   |   4 +-
+>  drivers/iio/light/us5182d.c                   |   2 +-
+>  drivers/iio/light/vcnl4000.c                  |   2 +-
+>  drivers/iio/light/vcnl4035.c                  |   2 +-
+>  drivers/iio/magnetometer/af8133j.c            |   4 +-
+>  drivers/iio/magnetometer/ak8974.c             |   4 +-
+>  drivers/iio/magnetometer/ak8975.c             |   2 +-
+>  drivers/iio/magnetometer/bmc150_magn.c        |   2 +-
+>  drivers/iio/magnetometer/tmag5273.c           |   4 +-
+>  drivers/iio/magnetometer/yamaha-yas530.c      |   4 +-
+>  drivers/iio/pressure/bmp280-core.c            |  10 +-
+>  drivers/iio/pressure/icp10100.c               |   2 +-
+>  drivers/iio/pressure/mpl115.c                 |   4 +-
+>  drivers/iio/pressure/zpa2326.c                |   4 +-
+>  .../iio/proximity/pulsedlight-lidar-lite-v2.c |   2 +-
+>  drivers/iio/proximity/srf04.c                 |   2 +-
+>  drivers/iio/temperature/mlx90614.c            |   4 +-
+>  drivers/iio/temperature/mlx90632.c            |   4 +-
+>  drivers/iio/temperature/mlx90635.c            |   4 +-
+>  drivers/input/keyboard/omap4-keypad.c         |   8 +-
+>  drivers/input/misc/cs40l50-vibra.c            |   8 +-
+>  drivers/iommu/arm/arm-smmu/arm-smmu.c         |   2 +-
+>  drivers/irqchip/irq-imx-irqsteer.c            |   2 +-
+>  drivers/mailbox/mtk-cmdq-mailbox.c            |  10 +-
+>  drivers/media/i2c/alvium-csi2.c               |   2 +-
+>  drivers/media/i2c/ccs/ccs-core.c              |  10 +-
+>  drivers/media/i2c/dw9719.c                    |   2 +-
+>  drivers/media/i2c/gc0308.c                    |   6 +-
+>  drivers/media/i2c/gc2145.c                    |   8 +-
+>  drivers/media/i2c/imx283.c                    |   6 +-
+>  drivers/media/i2c/imx290.c                    |   6 +-
+>  drivers/media/i2c/imx296.c                    |   4 +-
+>  drivers/media/i2c/imx415.c                    |   4 +-
+>  drivers/media/i2c/mt9m114.c                   |  12 +-
+>  drivers/media/i2c/ov2680.c                    |   2 +-
+>  drivers/media/i2c/ov4689.c                    |   6 +-
+>  drivers/media/i2c/ov5640.c                    |   8 +-
+>  drivers/media/i2c/ov5645.c                    |   6 +-
+>  drivers/media/i2c/ov5693.c                    |   2 +-
+>  drivers/media/i2c/ov64a40.c                   |   8 +-
+>  drivers/media/i2c/ov7251.c                    |   2 +-
+>  drivers/media/i2c/ov8858.c                    |   4 +-
+>  drivers/media/i2c/thp7312.c                   |   8 +-
+>  drivers/media/i2c/video-i2c.c                 |   8 +-
+>  .../media/platform/nvidia/tegra-vde/h264.c    |   4 +-
+>  drivers/media/platform/qcom/venus/vdec.c      |   4 +-
+>  drivers/media/platform/qcom/venus/venc.c      |   4 +-
+>  .../platform/raspberrypi/pisp_be/pisp_be.c    |   4 +-
+>  .../media/platform/st/sti/delta/delta-v4l2.c  |   4 +-
+>  drivers/media/platform/st/sti/hva/hva-hw.c    |   8 +-
+>  .../media/platform/verisilicon/hantro_drv.c   |   2 +-
+>  drivers/media/rc/gpio-ir-recv.c               |   2 +-
+>  drivers/mfd/arizona-irq.c                     |   2 +-
+>  drivers/mfd/cs40l50-core.c                    |   2 +-
+>  drivers/mfd/cs42l43.c                         |   2 +-
+>  drivers/misc/mei/client.c                     |  14 +-
+>  drivers/mmc/core/core.c                       |   4 +-
+>  drivers/mmc/host/atmel-mci.c                  |   4 +-
+>  drivers/mmc/host/dw_mmc-rockchip.c            |   2 +-
+>  drivers/mmc/host/dw_mmc.c                     |   2 +-
+>  drivers/mmc/host/mmci.c                       |   2 +-
+>  drivers/mmc/host/omap_hsmmc.c                 |   6 +-
+>  drivers/mmc/host/sdhci-msm.c                  |   2 +-
+>  drivers/mmc/host/sdhci-of-at91.c              |   2 +-
+>  drivers/mmc/host/sdhci-omap.c                 |   4 +-
+>  drivers/mmc/host/sdhci-pci-core.c             |   2 +-
+>  drivers/mmc/host/sdhci-pxav3.c                |   6 +-
+>  drivers/mmc/host/sdhci-sprd.c                 |   2 +-
+>  drivers/mmc/host/sdhci-xenon.c                |   2 +-
+>  drivers/mmc/host/sdhci_am654.c                |   2 +-
+>  drivers/mmc/host/tmio_mmc_core.c              |   2 +-
+>  drivers/mtd/nand/raw/gpmi-nand/gpmi-nand.c    |  10 +-
+>  drivers/net/ethernet/cadence/macb_main.c      |  10 +-
+>  drivers/net/ethernet/freescale/fec_main.c     |  16 +-
+>  drivers/net/ethernet/renesas/ravb_main.c      |   8 +-
+>  drivers/net/ethernet/ti/davinci_mdio.c        |  14 +-
+>  drivers/net/ipa/ipa_interrupt.c               |   2 +-
+>  drivers/net/ipa/ipa_main.c                    |   2 +-
+>  drivers/net/ipa/ipa_modem.c                   |   8 +-
+>  drivers/net/ipa/ipa_smp2p.c                   |   4 +-
+>  drivers/net/ipa/ipa_uc.c                      |   4 +-
+>  drivers/net/wireless/ath/wil6210/pm.c         |   2 +-
+>  drivers/net/wireless/ti/wl18xx/debugfs.c      |   6 +-
+>  drivers/net/wireless/ti/wlcore/cmd.c          |   2 +-
+>  drivers/net/wireless/ti/wlcore/debugfs.c      |  22 +--
+>  drivers/net/wireless/ti/wlcore/main.c         |  72 +++----
+>  drivers/net/wireless/ti/wlcore/scan.c         |   2 +-
+>  drivers/net/wireless/ti/wlcore/sysfs.c        |   2 +-
+>  drivers/net/wireless/ti/wlcore/testmode.c     |   4 +-
+>  drivers/net/wireless/ti/wlcore/tx.c           |   2 +-
+>  drivers/net/wireless/ti/wlcore/vendor_cmd.c   |   6 +-
+>  drivers/net/wwan/qcom_bam_dmux.c              |   4 +-
+>  drivers/net/wwan/t7xx/t7xx_hif_cldma.c        |   6 +-
+>  drivers/net/wwan/t7xx/t7xx_hif_dpmaif_rx.c    |   6 +-
+>  drivers/net/wwan/t7xx/t7xx_hif_dpmaif_tx.c    |   4 +-
+>  drivers/nfc/trf7970a.c                        |   2 +-
+>  drivers/pci/pcie/portdrv.c                    |   2 +-
+>  drivers/phy/motorola/phy-mapphone-mdm6600.c   |   4 +-
+>  drivers/phy/ti/phy-twl4030-usb.c              |   8 +-
+>  drivers/power/supply/bq24190_charger.c        |  28 +--
+>  drivers/power/supply/twl4030_charger.c        |   2 +-
+>  drivers/pwm/pwm-img.c                         |   4 +-
+>  drivers/regulator/stm32-vrefbuf.c             |  12 +-
+>  drivers/remoteproc/omap_remoteproc.c          |   6 +-
+>  drivers/slimbus/core.c                        |   2 +-
+>  drivers/slimbus/messaging.c                   |   4 +-
+>  drivers/soc/apple/mailbox.c                   |   2 +-
+>  drivers/soundwire/bus.c                       |   2 +-
+>  drivers/soundwire/cadence_master.c            |   2 +-
+>  drivers/soundwire/qcom.c                      |   6 +-
+>  drivers/spi/atmel-quadspi.c                   |  10 +-
+>  drivers/spi/spi-cadence-quadspi.c             |   4 +-
+>  drivers/spi/spi-cadence.c                     |   2 +-
+>  drivers/spi/spi-dw-pci.c                      |   2 +-
+>  drivers/spi/spi-fsl-espi.c                    |   4 +-
+>  drivers/spi/spi-fsl-lpspi.c                   |   4 +-
+>  drivers/spi/spi-imx.c                         |   6 +-
+>  drivers/spi/spi-mtk-nor.c                     |   2 +-
+>  drivers/spi/spi-omap2-mcspi.c                 |   6 +-
+>  drivers/spi/spi-pxa2xx-pci.c                  |   2 +-
+>  drivers/spi/spi-s3c64xx.c                     |   6 +-
+>  drivers/spi/spi-sprd.c                        |   2 +-
+>  drivers/spi/spi-stm32-qspi.c                  |  14 +-
+>  drivers/spi/spi-stm32.c                       |   4 +-
+>  drivers/spi/spi-ti-qspi.c                     |   4 +-
+>  drivers/spi/spi-zynqmp-gqspi.c                |   2 +-
+>  drivers/spi/spi.c                             |   6 +-
+>  drivers/staging/greybus/gbphy.h               |   2 +-
+>  drivers/staging/media/rkvdec/rkvdec.c         |   2 +-
+>  drivers/thunderbolt/debugfs.c                 |  22 +--
+>  drivers/thunderbolt/domain.c                  |   4 +-
+>  drivers/thunderbolt/icm.c                     |  14 +-
+>  drivers/thunderbolt/nhi.c                     |   2 +-
+>  drivers/thunderbolt/retimer.c                 |   4 +-
+>  drivers/thunderbolt/switch.c                  |   6 +-
+>  drivers/thunderbolt/tb.c                      |  18 +-
+>  drivers/thunderbolt/usb4_port.c               |   4 +-
+>  drivers/tty/serial/8250/8250_omap.c           |  18 +-
+>  drivers/tty/serial/8250/8250_port.c           |   4 +-
+>  drivers/tty/serial/fsl_lpuart.c               |   2 +-
+>  drivers/tty/serial/serial_core.c              |   2 +-
+>  drivers/tty/serial/uartlite.c                 |   4 +-
+>  drivers/tty/serial/xilinx_uartps.c            |   2 +-
+>  drivers/usb/cdns3/cdns3-gadget.c              |   2 +-
+>  drivers/usb/cdns3/cdnsp-gadget.c              |   2 +-
+>  drivers/usb/chipidea/core.c                   |   2 +-
+>  drivers/usb/chipidea/otg_fsm.c                |   2 +-
+>  drivers/usb/dwc3/core.c                       |   2 +-
+>  drivers/usb/dwc3/dwc3-am62.c                  |   2 +-
+>  drivers/usb/dwc3/dwc3-imx8mp.c                |   2 +-
+>  drivers/usb/gadget/udc/cdns2/cdns2-gadget.c   |   2 +-
+>  drivers/usb/host/xhci-mtk.c                   |   2 +-
+>  drivers/usb/misc/apple-mfi-fastcharge.c       |   2 +-
+>  drivers/usb/mtu3/mtu3_plat.c                  |   2 +-
+>  drivers/usb/musb/musb_core.c                  |  10 +-
+>  drivers/usb/musb/musb_debugfs.c               |  10 +-
+>  drivers/usb/musb/musb_dsps.c                  |   2 +-
+>  drivers/usb/musb/musb_gadget.c                |   8 +-
+>  drivers/usb/musb/omap2430.c                   |   2 +-
+>  drivers/w1/masters/omap_hdq.c                 |  10 +-
+>  include/linux/greybus/bundle.h                |   2 +-
+>  sound/hda/hdac_device.c                       |   2 +-
+>  sound/pci/hda/cs35l41_hda.c                   |   8 +-
+>  sound/pci/hda/cs35l56_hda.c                   |   2 +-
+>  sound/pci/hda/hda_intel.c                     |   2 +-
+>  sound/pci/hda/tas2781_hda_i2c.c               |   6 +-
+>  sound/soc/atmel/mchp-spdifrx.c                |  12 +-
+>  sound/soc/codecs/arizona-jack.c               |  12 +-
+>  sound/soc/codecs/arizona.c                    |   2 +-
+>  sound/soc/codecs/cs35l41.c                    |   4 +-
+>  sound/soc/codecs/cs35l45.c                    |   2 +-
+>  sound/soc/codecs/cs35l56-sdw.c                |   4 +-
+>  sound/soc/codecs/cs35l56-shared.c             |   2 +-
+>  sound/soc/codecs/cs35l56.c                    |   2 +-
+>  sound/soc/codecs/cs42l42-sdw.c                |   2 +-
+>  sound/soc/codecs/cs42l42.c                    |   4 +-
+>  sound/soc/codecs/cs42l43-jack.c               |  10 +-
+>  sound/soc/codecs/cs42l43.c                    |   4 +-
+>  sound/soc/codecs/hda.c                        |   6 +-
+>  sound/soc/codecs/madera.c                     |   6 +-
+>  sound/soc/codecs/max98363.c                   |   2 +-
+>  sound/soc/codecs/max98373-sdw.c               |   2 +-
+>  sound/soc/codecs/rt1017-sdca-sdw.c            |   2 +-
+>  sound/soc/codecs/rt1308-sdw.c                 |   2 +-
+>  sound/soc/codecs/rt1316-sdw.c                 |   2 +-
+>  sound/soc/codecs/rt1318-sdw.c                 |   2 +-
+>  sound/soc/codecs/rt1320-sdw.c                 |   2 +-
+>  sound/soc/codecs/rt5682-sdw.c                 |   2 +-
+>  sound/soc/codecs/rt700.c                      |   4 +-
+>  sound/soc/codecs/rt711-sdca.c                 |   4 +-
+>  sound/soc/codecs/rt711.c                      |   4 +-
+>  sound/soc/codecs/rt712-sdca-dmic.c            |   2 +-
+>  sound/soc/codecs/rt712-sdca.c                 |   4 +-
+>  sound/soc/codecs/rt715-sdca.c                 |   2 +-
+>  sound/soc/codecs/rt715.c                      |   2 +-
+>  sound/soc/codecs/rt722-sdca.c                 |   4 +-
+>  sound/soc/codecs/wcd-mbhc-v2.c                |   4 +-
+>  sound/soc/codecs/wsa881x.c                    |   2 +-
+>  sound/soc/codecs/wsa884x.c                    |   2 +-
+>  sound/soc/intel/atom/sst/sst_pvt.c            |   2 +-
+>  sound/soc/intel/avs/core.c                    |   2 +-
+>  sound/soc/intel/avs/debugfs.c                 |   4 +-
+>  sound/soc/intel/avs/pcm.c                     |   2 +-
+>  sound/soc/intel/catpt/pcm.c                   |  12 +-
+>  sound/soc/intel/catpt/sysfs.c                 |   2 +-
+>  sound/soc/soc-component.c                     |   2 +-
+>  sound/soc/sof/control.c                       |   2 +-
+>  sound/soc/sof/debug.c                         |   2 +-
+>  sound/soc/sof/ipc3-dtrace.c                   |   2 +-
+>  sound/soc/sof/ipc4-loader.c                   |   2 +-
+>  sound/soc/sof/pcm.c                           |   2 +-
+>  sound/soc/sof/sof-client-ipc-flood-test.c     |   2 +-
+>  .../soc/sof/sof-client-ipc-kernel-injector.c  |   2 +-
+>  sound/soc/sof/sof-client-ipc-msg-injector.c   |   2 +-
+>  sound/soc/sof/sof-client-probes.c             |   6 +-
+>  sound/x86/intel_hdmi_audio.c                  |   6 +-
+>  373 files changed, 1076 insertions(+), 1076 deletions(-)
+>
+> --
+> 2.39.5
+>
+>
