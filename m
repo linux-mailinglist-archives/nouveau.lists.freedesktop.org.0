@@ -2,89 +2,130 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id C2BC8993A3E
-	for <lists+nouveau@lfdr.de>; Tue,  8 Oct 2024 00:35:30 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id B1C51993F54
+	for <lists+nouveau@lfdr.de>; Tue,  8 Oct 2024 09:32:20 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 15A0910E10E;
-	Mon,  7 Oct 2024 22:35:28 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id B23E810E47F;
+	Tue,  8 Oct 2024 07:32:18 +0000 (UTC)
 Authentication-Results: gabe.freedesktop.org;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="bR6a3lN3";
+	dkim=pass (2048-bit key; unprotected) header.d=Nvidia.com header.i=@Nvidia.com header.b="VJkQTTUL";
 	dkim-atps=neutral
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from mail-yb1-f170.google.com (mail-yb1-f170.google.com
- [209.85.219.170])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 65A1910E355
- for <nouveau@lists.freedesktop.org>; Mon,  7 Oct 2024 22:35:27 +0000 (UTC)
-Received: by mail-yb1-f170.google.com with SMTP id
- 3f1490d57ef6-e026a2238d8so4471274276.0
- for <nouveau@lists.freedesktop.org>; Mon, 07 Oct 2024 15:35:27 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1728340526; x=1728945326; darn=lists.freedesktop.org;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=gesjil9Y0RZgbcjmX5qHd/S97rHztDCcedkOm+1cl0k=;
- b=bR6a3lN3VFGBRVAOySVLeUnmnHyyDB7bAXACy8FALFYKoASbXvmlSKRnoFefgJ/gFn
- Wx5nfip133cNAxG8Fwr0S3P+8LXA+BQMdktBmxF7zLnuskQ29hGbPqpYSUXtXtQdz+m+
- 4cd/zWniDYG3YmZtzA8j3h+81onMP8Rd0iFngWf0Dt9pjzUjXdBb8bAXGrxGIgNNcq/y
- yT7Z+BDJtIJmFItqMyOQpggXaVB64UV+XfB59K3SFk1dX1qLl8/H3382RglrxI2iIEVx
- ++nmZWXoSP220KP2TxTJtWxDNCrMpungr7u7PHIh0Jxszzey2QECDH7VCdhayepIkKPU
- z05g==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1728340526; x=1728945326;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=gesjil9Y0RZgbcjmX5qHd/S97rHztDCcedkOm+1cl0k=;
- b=Eny1Aifo/T/IEcGKyKXxRtl+FMI4GxJpeda1E+uorY6zp0XO2o6TrpPNeodcfwy+2S
- slnXzbjxqat9Ir20/Lv+CejlejlN1eaj8JMy9pAWILDwd77x8IckluJfJRB3w6egMvv3
- zbwY9BgtSZdNu8uXmO5HHmpRmHPnLlLTIBAjUdhniueOMesQZJf3bxx5//K6Qj1QFsdn
- 2WepWiH18Zzd5ZrwStuNT3ej8GMGo9JE88TrnSRMZBsSFtTdicVu6AAT6IloLNLdlnn6
- KFCbOxragetvmHvu1NX3q10ljEd3WY8W+BQVAinifzcOJD5AXC8vcAzxkF8n8Ul2W0by
- YECw==
-X-Forwarded-Encrypted: i=1;
- AJvYcCWSeu1dBIudBtAuXpivPnQnOSTvy5Z9Ba6DjoUfE45cIlC00aa++X3Z0XTa252gMd1fbLoS8Lv1@lists.freedesktop.org
-X-Gm-Message-State: AOJu0YzU3ltAZAD7QCR8eEy/Wz7q5sJ014JYngy9rcQDEg5VlyStYMxQ
- irq+glusUfJ5u8nxovn1epRSLOdOq9ZCEhKTDK7rZaQZdWI+xi8mgYkj1X38RGbpy05rGLONBCk
- 29nbfDEK0uhZA+CepVlwefXpLYIMSkNlCy3hqYw==
-X-Google-Smtp-Source: AGHT+IGYLLRVc3CeXKReIUVnntYlZ+ULRb29gPUl3UTx4hoqAUGdx6q2aFDzdnacRWqcM/cOYseo4GoEdp7e3a8qLZE=
-X-Received: by 2002:a05:6902:2305:b0:e28:6ec7:4353 with SMTP id
- 3f1490d57ef6-e2893964043mr10612649276.54.1728340526338; Mon, 07 Oct 2024
- 15:35:26 -0700 (PDT)
+Received: from NAM12-MW2-obe.outbound.protection.outlook.com
+ (mail-mw2nam12on2054.outbound.protection.outlook.com [40.107.244.54])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id A935110E47F;
+ Tue,  8 Oct 2024 07:32:17 +0000 (UTC)
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=tDwxYpfIlH9Wgyn8clcA8G44owWjfKvlexvu2sowDPHv54MIWrQG1kKFQKNfmW+BwDIolXZLEySwYCR6DMddo0Xblh4N2/tKZOlkaUxkGK+cGnkMFeyz4DBlciOrdhF8UCLeE6zu1ZeAH2wevdovIhPCtcQmFmoocKB60Q3FPdQoOiuNdLDzt4Ci+w/Y9kRQQE9x+8z60dQnQhNVy3W+yBlbCflVvgVE6HIA1q3zLukRMcM8uHnHIUiqUtXIA96nftNIFOdOflXVhxOBZsGHdAfjQ1zJhL6Vn5T+PBX2iSz1jlOKYJd3YWqWcFkN5IDZedoEkqDosLk0A7d2lwmI4A==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=eIrTafYvUs/SQVSBu1JFq2xnjjOVF1j2qPafoBaktKY=;
+ b=gC5hLYCs9F2+s3NTxSUiUro0ktSKsg7L6Dl0ak4xEfVt/oHtyZd+C90kvzgxrm+UCfx5S78/zoPfTWSkw2psU/qanfaRoAZoEs0DIbE42IW1BoRJw5LYuOzQn82KDI8m2XO2+EJBbluIXunTWW1ufvAeSPdO2GYVvScSiUd/zYSIDEcALsNhV3nPl//xZneh8c5+d5/8Z8iKmhk8tII1MwbJxX2j4UVm1/WbshvKE9FJzhwoTno+Rm7TGw3bjE/+pbkxEsC7ovrzeXW47b+1VQ1FdIjlmU46hiNvDEaTmZrBJSmCrF9GceJWMzj0f6SfUNCTjQkTbwdCoypOJayLjA==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
+ 216.228.118.232) smtp.rcpttodomain=redhat.com smtp.mailfrom=nvidia.com;
+ dmarc=pass (p=reject sp=reject pct=100) action=none header.from=nvidia.com;
+ dkim=none (message not signed); arc=none (0)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=Nvidia.com;
+ s=selector2;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=eIrTafYvUs/SQVSBu1JFq2xnjjOVF1j2qPafoBaktKY=;
+ b=VJkQTTULy1qJ2bUEzDM4scrZ/roAHCigaVNFicL2kJkIGtKPWdP9zdu7xnJ6IuEXTT5Gyc1YkgwoYlGxW+wijrcwkvnKLmJ7Ihwkwr+OS46Aor+tGCELraUh9HFSKr3f9PXGtOcgxI/b0krX/klizYwBmhpnTKdXGrU3BQVLLzZdrDhQ5JprrEaABY4Ea/HiHnjl4DBKil5Rvi5dwIxLwPo5KplUB3MFLeQ3rvQ4ZDWcLSP7h4Uge0GPJ+v9gqWMS29Id7yoERaINOn0OvY68HJaJfTaw3x5CNUbYNYYY8PIXV+eq9ZHxVTHa7yQel0lzyc90r2xQWKmf06tz7d5vg==
+Received: from BL1PR13CA0112.namprd13.prod.outlook.com (2603:10b6:208:2b9::27)
+ by BL1PR12MB5754.namprd12.prod.outlook.com (2603:10b6:208:391::20)
+ with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.8026.22; Tue, 8 Oct
+ 2024 07:32:14 +0000
+Received: from BL02EPF0001A0FB.namprd03.prod.outlook.com
+ (2603:10b6:208:2b9:cafe::2e) by BL1PR13CA0112.outlook.office365.com
+ (2603:10b6:208:2b9::27) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.8048.17 via Frontend
+ Transport; Tue, 8 Oct 2024 07:32:14 +0000
+X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 216.228.118.232)
+ smtp.mailfrom=nvidia.com;
+ dkim=none (message not signed)
+ header.d=none;dmarc=pass action=none header.from=nvidia.com;
+Received-SPF: Pass (protection.outlook.com: domain of nvidia.com designates
+ 216.228.118.232 as permitted sender) receiver=protection.outlook.com;
+ client-ip=216.228.118.232; helo=mail.nvidia.com; pr=C
+Received: from mail.nvidia.com (216.228.118.232) by
+ BL02EPF0001A0FB.mail.protection.outlook.com (10.167.242.102) with Microsoft
+ SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ 15.20.8048.13 via Frontend Transport; Tue, 8 Oct 2024 07:32:14 +0000
+Received: from drhqmail203.nvidia.com (10.126.190.182) by mail.nvidia.com
+ (10.127.129.5) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.1544.4; Tue, 8 Oct 2024
+ 00:32:02 -0700
+Received: from drhqmail202.nvidia.com (10.126.190.181) by
+ drhqmail203.nvidia.com (10.126.190.182) with Microsoft SMTP Server
+ (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ 15.2.1544.4; Tue, 8 Oct 2024 00:32:01 -0700
+Received: from vdi.nvidia.com (10.127.8.9) by mail.nvidia.com (10.126.190.181)
+ with Microsoft SMTP Server id 15.2.1544.4 via Frontend Transport;
+ Tue, 8 Oct 2024 00:31:58 -0700
+From: Yonatan Maman <ymaman@nvidia.com>
+To: <kherbst@redhat.com>, <lyude@redhat.com>, <dakr@redhat.com>,
+ <airlied@gmail.com>, <daniel@ffwll.ch>, <bskeggs@nvidia.com>,
+ <jglisse@redhat.com>, <dri-devel@lists.freedesktop.org>,
+ <nouveau@lists.freedesktop.org>
+CC: Yonatan Maman <Ymaman@Nvidia.com>, <linux-kernel@vger.kernel.org>,
+ <stable@vger.kernel.org>
+Subject: [PATCH v3 0/2] drm/nouveau/dmem: Fix Vulnerability and Device
+ Channels configuration
+Date: Tue, 8 Oct 2024 10:31:01 +0300
+Message-ID: <20241008073103.987926-1-ymaman@nvidia.com>
+X-Mailer: git-send-email 2.34.1
 MIME-Version: 1.0
-References: <20241004094101.113349-1-sakari.ailus@linux.intel.com>
- <CAPDyKFp0N6UJhnHS164Tdf=xkWB0jzq65L9TdvYazeBQ-6WjeQ@mail.gmail.com>
- <20241007184924.GH14766@pendragon.ideasonboard.com>
- <CAPDyKFpQVnF7eQv3dup8k-3EijnMjuveCG9sZ=Rpey1Y6MBJEg@mail.gmail.com>
- <20241007222502.GG30699@pendragon.ideasonboard.com>
-In-Reply-To: <20241007222502.GG30699@pendragon.ideasonboard.com>
-From: Ulf Hansson <ulf.hansson@linaro.org>
-Date: Tue, 8 Oct 2024 00:34:49 +0200
-Message-ID: <CAPDyKFrGNwna6Y2pqSRaBbRYHKRaD2ayqQHLtoqLPOu9Et7qTg@mail.gmail.com>
-Subject: Re: [PATCH 00/51] treewide: Switch to __pm_runtime_put_autosuspend()
-To: Laurent Pinchart <laurent.pinchart@ideasonboard.com>
-Cc: Sakari Ailus <sakari.ailus@linux.intel.com>,
- dri-devel@lists.freedesktop.org, 
- linux-kernel@vger.kernel.org, linux-bluetooth@vger.kernel.org, 
- linux-clk@vger.kernel.org, linux-crypto@vger.kernel.org, 
- dmaengine@vger.kernel.org, linux-gpio@vger.kernel.org, 
- amd-gfx@lists.freedesktop.org, nouveau@lists.freedesktop.org, 
- linux-stm32@st-md-mailman.stormreply.com, 
- linux-arm-kernel@lists.infradead.org, linux-i2c@vger.kernel.org, 
- linux-i3c@lists.infradead.org, linux-iio@vger.kernel.org, 
- linux-input@vger.kernel.org, patches@opensource.cirrus.com, 
- iommu@lists.linux.dev, imx@lists.linux.dev, 
- linux-mediatek@lists.infradead.org, linux-media@vger.kernel.org, 
- linux-mmc@vger.kernel.org, linux-mtd@lists.infradead.org, 
- netdev@vger.kernel.org, linux-wireless@vger.kernel.org, 
- linux-pci@vger.kernel.org, linux-phy@lists.infradead.org, 
- linux-pwm@vger.kernel.org, linux-remoteproc@vger.kernel.org, 
- linux-sound@vger.kernel.org, linux-spi@vger.kernel.org, 
- linux-staging@lists.linux.dev, linux-usb@vger.kernel.org, 
- linux-serial@vger.kernel.org, greybus-dev@lists.linaro.org, 
- asahi@lists.linux.dev, rafael@kernel.org, 
- Andy Shevchenko <andy.shevchenko@gmail.com>
-Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
+X-NV-OnPremToCloud: ExternallySecured
+X-EOPAttributedMessage: 0
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: BL02EPF0001A0FB:EE_|BL1PR12MB5754:EE_
+X-MS-Office365-Filtering-Correlation-Id: fc0d09a8-58cf-499c-4a7b-08dce76b5472
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: BCL:0;
+ ARA:13230040|82310400026|1800799024|36860700013|376014|7416014; 
+X-Microsoft-Antispam-Message-Info: =?us-ascii?Q?W8Az60HKZA8LGJyYLC9WlEX1xICB5nrpsiqkvqQ4ktoV30ONZ9bnSiBqhP4E?=
+ =?us-ascii?Q?jTg6SIofNWgp5mUVnPEjMWSMTgw7ya53SVhJBkXNEfhzYwnR2p1GX9xuxxeH?=
+ =?us-ascii?Q?JDfC8HWGidx4jXozX9ZvQ9Ot/B/uQWUF3HZ9BtvMFAo46RBZEbsCUPOsHpBF?=
+ =?us-ascii?Q?wsER3sJzuFXfFlbhPFmWJPWjD7FaObC0TezAGodroNvk1kg8yc3WAMtaVJrl?=
+ =?us-ascii?Q?HsBaG/5TLmuHwZnEvKGp1YvrMsz/Zm503mRnzmmPymNi8eSNBSb+uYMh0AEI?=
+ =?us-ascii?Q?HYfmPukHaZVMAG3vP3rSm4ibvWcnrWsTMv6bT587NjGgTVF4qvaKELYjsfEY?=
+ =?us-ascii?Q?98bU2IHUdrdtYwZ/AkrowLSpnPJs/pmN1zOHzg0w13IAKQRmf+odN5Wrkq9Z?=
+ =?us-ascii?Q?H8AdKu0HoCksJ0nr1iv43nc56U9D/QbAQal4GkYxpsd1ZhD4RaHBv2dXfwZ6?=
+ =?us-ascii?Q?0CDdUqHqvKSomB2Yz86CZyjqrggbFcXCixk7mOKvb7svN6ZRmFl1jALyQdY/?=
+ =?us-ascii?Q?IyVRVJZAGQHNxk+fZq3O4JB4GymJov0PuEu1otp8uiaIamHitaA5+YH15+3I?=
+ =?us-ascii?Q?zV13+N3uESsbys8YhW4NeU4NHE8LvTwudUM3uKCQWl3rm1fizNkSs7i+KIUc?=
+ =?us-ascii?Q?FXUjZk0rmph4zSXZLJv7epW7gk1pljqPJzw2rK+9QYMLDaGJM49LbeAtsyq5?=
+ =?us-ascii?Q?9b7SjMUmmiT+W9N0kcKWQntpaeBecHBmMNKo85CtBAK44b492mu7RRV94W5r?=
+ =?us-ascii?Q?qwFgvDL6AfSt8IPU9dok7NhSE6M2Bw1BXR47FHElILrjyMbwSg56Roj40aA8?=
+ =?us-ascii?Q?bSH8b1DduZgMh/OMYOqXW/qMv6FC8+OgT6VV8sFiyI34HY4fAs/MQi2aQfKb?=
+ =?us-ascii?Q?j1rxjvbJ4yjrx9cyiiP44pTFVBY1tBUn7o0Q1juACaRq+KykfJvcuSd0367m?=
+ =?us-ascii?Q?cyVV8eIfYmxwfH/fmuALjDcBD9jJh7kE/eA4nqz9rFFDSpbnDNv7s8w1z2AF?=
+ =?us-ascii?Q?ar10FqZr5hTjyCHHpx0WwYP/h9IfgVWtmku8VMeSrAiv/p7McmaQb9qO5bo9?=
+ =?us-ascii?Q?//VpCrQS1J7yJLJ+k8IePjLfQ61c0kL7QDvHubypm4Y4mHB2KwqvwwFmnZ0y?=
+ =?us-ascii?Q?0vlC4+ANvodsB7vMnC+GcHwY39nopJshRP2ZnUy/AL4hhsz0b0oVsZxm4ZZZ?=
+ =?us-ascii?Q?EZdnZHPvqjcOQ78YzDE6e3vo4ZMKKtKjs/+ZR+B6UK9L1NN/5hqryhs5ODrk?=
+ =?us-ascii?Q?EyAigbAZ3smdyj7Je6ra9etghAtofo/o+gOH8zBLJos0MymwlrwkBOmpsf19?=
+ =?us-ascii?Q?S2MkJ40IKimDevU4Ipv7xdmsvfZ88esnGKdO0wCAMfOXlEZqQq/JeN3/LkA6?=
+ =?us-ascii?Q?3TcdqL44SbjMmE0C1ecCvVhYqnz0?=
+X-Forefront-Antispam-Report: CIP:216.228.118.232; CTRY:US; LANG:en; SCL:1; SRV:;
+ IPV:NLI; SFV:NSPM; H:mail.nvidia.com; PTR:dc7edge1.nvidia.com; CAT:NONE;
+ SFS:(13230040)(82310400026)(1800799024)(36860700013)(376014)(7416014); DIR:OUT;
+ SFP:1101; 
+X-OriginatorOrg: Nvidia.com
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 08 Oct 2024 07:32:14.2186 (UTC)
+X-MS-Exchange-CrossTenant-Network-Message-Id: fc0d09a8-58cf-499c-4a7b-08dce76b5472
+X-MS-Exchange-CrossTenant-Id: 43083d15-7273-40c1-b7db-39efd9ccc17a
+X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=43083d15-7273-40c1-b7db-39efd9ccc17a; Ip=[216.228.118.232];
+ Helo=[mail.nvidia.com]
+X-MS-Exchange-CrossTenant-AuthSource: BL02EPF0001A0FB.namprd03.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Anonymous
+X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: BL1PR12MB5754
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -99,92 +140,36 @@ List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-On Tue, 8 Oct 2024 at 00:25, Laurent Pinchart
-<laurent.pinchart@ideasonboard.com> wrote:
->
-> Hi Ulf,
->
-> On Tue, Oct 08, 2024 at 12:08:24AM +0200, Ulf Hansson wrote:
-> > On Mon, 7 Oct 2024 at 20:49, Laurent Pinchart wrote:
-> > > On Fri, Oct 04, 2024 at 04:38:36PM +0200, Ulf Hansson wrote:
-> > > > On Fri, 4 Oct 2024 at 11:41, Sakari Ailus wrote:
-> > > > >
-> > > > > Hello everyone,
-> > > > >
-> > > > > This set will switch the users of pm_runtime_put_autosuspend() to
-> > > > > __pm_runtime_put_autosuspend() while the former will soon be re-purposed
-> > > > > to include a call to pm_runtime_mark_last_busy(). The two are almost
-> > > > > always used together, apart from bugs which are likely common. Going
-> > > > > forward, most new users should be using pm_runtime_put_autosuspend().
-> > > > >
-> > > > > Once this conversion is done and pm_runtime_put_autosuspend() re-purposed,
-> > > > > I'll post another set to merge the calls to __pm_runtime_put_autosuspend()
-> > > > > and pm_runtime_mark_last_busy().
-> > > >
-> > > > That sounds like it could cause a lot of churns.
-> > > >
-> > > > Why not add a new helper function that does the
-> > > > pm_runtime_put_autosuspend() and the pm_runtime_mark_last_busy()
-> > > > things? Then we can start moving users over to this new interface,
-> > > > rather than having this intermediate step?
-> > >
-> > > I think the API would be nicer if we used the shortest and simplest
-> > > function names for the most common use cases. Following
-> > > pm_runtime_put_autosuspend() with pm_runtime_mark_last_busy() is that
-> > > most common use case. That's why I like Sakari's approach of repurposing
-> > > pm_runtime_put_autosuspend(), and introducing
-> > > __pm_runtime_put_autosuspend() for the odd cases where
-> > > pm_runtime_mark_last_busy() shouldn't be called.
-> >
-> > Okay, so the reason for this approach is because we couldn't find a
-> > short and descriptive name that could be used in favor of
-> > pm_runtime_put_autosuspend(). Let me throw some ideas at it and maybe
-> > you like it - or not. :-)
->
-> I like the idea at least :-)
->
-> > I don't know what options you guys discussed, but to me the entire
-> > "autosuspend"-suffix isn't really that necessary in my opinion. There
-> > are more ways than calling pm_runtime_put_autosuspend() that triggers
-> > us to use the RPM_AUTO flag for rpm_suspend(). For example, just
-> > calling pm_runtime_put() has the similar effect.
->
-> To be honest, I'm lost there. pm_runtime_put() calls
-> __pm_runtime_idle(RPM_GET_PUT | RPM_ASYNC), while
-> pm_runtime_put_autosuspend() calls __pm_runtime_suspend(RPM_GET_PUT |
-> RPM_ASYNC | RPM_AUTO).
+From: Yonatan Maman <Ymaman@Nvidia.com>
 
-__pm_runtime_idle() ends up calling rpm_idle(), which may call
-rpm_suspend() - if it succeeds to idle the device. In that case, it
-tags on the RPM_AUTO flag in the call to rpm_suspend(). Quite similar
-to what is happening when calling pm_runtime_put_autosuspend().
+This patch series addresses two critical issues in the Nouveau driver
+related to device channels, error handling, and sensitive data leaks.
 
->
-> >
-> > Moreover, it's similar for pm_runtime_mark_last_busy(), it's called
-> > during rpm_resume() too, for example. So why bother about having
-> > "mark_last_busy" in the new name too.
-> >
-> > That said, my suggestion is simply "pm_runtime_put_suspend".
->
-> Can we do even better, and make pm_runtime_put() to handle autosuspend
-> automatically when autosuspend is enabled ?
+- Vulnerability in migrate_to_ram: The migrate_to_ram function might
+  return a dirty HIGH_USER page when a copy push command (FW channel)
+  fails, potentially exposing sensitive data and posing a security
+  risk. To mitigate this, the patch ensures the allocation of a non-dirty
+  (zero) page for the destination, preventing the return of a dirty page
+  and enhancing driver security in case of failure.
 
-As stated above, this is already the case.
+- Privileged Error in Copy Engine Channel: An error was observed when
+  the nouveau_dmem_copy_one function is executed, leading to a Host Copy
+  Engine Privileged error on channel 1. The patch resolves this by
+  adjusting the Copy Engine channel configuration to permit privileged
+  push commands, resolving the error.
 
->
-> > If you don't like it, I will certainly not object to your current
-> > approach, even if I think it leads to unnecessary churns.
-> >
-> > [...]
-> >
-> > Kind regards
-> > Uffe
->
-> --
-> Regards,
->
-> Laurent Pinchart
+Changes since V2:
+- Fixed version according to Danilo Krummrich's comments.
 
-Kind regards
-Uffe
+
+Yonatan Maman (2):
+  nouveau/dmem: Fix privileged error in copy engine channel
+  nouveau/dmem: Fix vulnerability in migrate_to_ram upon copy error
+
+ drivers/gpu/drm/nouveau/nouveau_dmem.c | 2 +-
+ drivers/gpu/drm/nouveau/nouveau_drm.c  | 2 +-
+ 2 files changed, 2 insertions(+), 2 deletions(-)
+
+-- 
+2.34.1
+
