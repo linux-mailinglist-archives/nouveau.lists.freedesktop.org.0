@@ -2,56 +2,48 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id BB777996740
-	for <lists+nouveau@lfdr.de>; Wed,  9 Oct 2024 12:28:30 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id BE265996C23
+	for <lists+nouveau@lfdr.de>; Wed,  9 Oct 2024 15:34:50 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 0AA5910E6C8;
-	Wed,  9 Oct 2024 10:28:24 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 675CB10E713;
+	Wed,  9 Oct 2024 13:34:49 +0000 (UTC)
 Authentication-Results: gabe.freedesktop.org;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="Ih6htpbw";
+	dkim=pass (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="U3neOl0y";
 	dkim-atps=neutral
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from mail-yb1-f181.google.com (mail-yb1-f181.google.com
- [209.85.219.181])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 2F81310E6C8
- for <nouveau@lists.freedesktop.org>; Wed,  9 Oct 2024 10:28:23 +0000 (UTC)
-Received: by mail-yb1-f181.google.com with SMTP id
- 3f1490d57ef6-e28fe3b02ffso699574276.3
- for <nouveau@lists.freedesktop.org>; Wed, 09 Oct 2024 03:28:23 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1728469702; x=1729074502; darn=lists.freedesktop.org;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=/fIjIpUdHAzWUFceihGJMz4qHHzjyT7pvRboVHLIXt8=;
- b=Ih6htpbwyLr654Nkt0W1aNcLBG72rAoTYIbz3MlR/dx0LY1I1quiAPH62Bvr6guBhP
- TWgKZPQvKtxuOzGF/CDtXsbp7fL08QmZwjo4beiB7YF2T4og3N8zG64JVdW38+lxoBAg
- 3ZB3Ds8D4zn05KDMdZ+eXGctHsTrzWLbsAbpsY77N1mlujxg04igISPToeQNyZ5cC9cc
- 7JOhXjdXh+hL/Ryy+2KOOceD6Fjb7+pPol+BWjcJKav80da/VdLrcMwssxWgr9fWzv+C
- 15g9wrq1Y3BLuhPm/SIHj2VTu8RYUo3Y+WIbDBgVWros7auRbDy2gg0MMXcU9dGuZPFO
- 76bQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1728469702; x=1729074502;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=/fIjIpUdHAzWUFceihGJMz4qHHzjyT7pvRboVHLIXt8=;
- b=UndV/n35FeXM1IiATQP/A0cezfYiKHjTbihRiyWJx6MUNXI5H9Q2WuzsfyNvMZMsLB
- EZ9aw0luDILcVMShyw6gvx2zCFchRcFvUNBCynT57G8K/BZxCzkPy96imFivSTwtqDVt
- e3MLHfLFV4XyiaBoB7rkJ2bRr2hpjU+LJuuBPDDwrYMkqYIQTVLIUCJpCzM5QstMv1Uw
- iJa3XepZDTQlAAE8e1vB9COKbaCcH/TStW3wmJCh/DTRV4Q2QN85T7Be+FN/9NQ7/BVv
- 649VkuTIbkt2nPZ3JLp1p5j5b3A+D1ULREIqyLxFERHzWccXm87yEAvjzZbA4L0CiFz6
- GDBg==
+Received: from nyc.source.kernel.org (nyc.source.kernel.org [147.75.193.91])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 9131210E713;
+ Wed,  9 Oct 2024 13:34:48 +0000 (UTC)
+Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
+ by nyc.source.kernel.org (Postfix) with ESMTP id A7839A43FAB;
+ Wed,  9 Oct 2024 13:34:38 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 55A70C4CED2;
+ Wed,  9 Oct 2024 13:34:46 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+ s=k20201202; t=1728480886;
+ bh=e0gqHlZkDT5WvXlJLxiiH51AUvpJH6OopoCW36UMFTI=;
+ h=References:In-Reply-To:From:Date:Subject:To:Cc:From;
+ b=U3neOl0ybb4Ab65jgWhp3xT7HcEy4YMuUgGV+fe0qorbYgOtJiVf4vdBC8aSbF+zk
+ VaSzmlKJr1Td+ZlEfUnqPwPvP3ItSIxZE3mhiSqTU0Y+ILn1z2LAcj5l0mNd964u9E
+ IJiiL6vn/nZ84NJqFn6bT+eDEGpN/zUWDJjiTS1Nw44OfqVQU1G+/BklpTTM5qjnQt
+ qFWcWXBTn592t1uwoUFl7fAOhoRDLvjep0N3/TGk+zJy9Qodx9ZM9pOn4mlQ+m1tjB
+ +zz3ljVHlk8StJ6aovxl3cW8GcQDcp3o2MYDG6IpoR0lwS4CMa0F2Pi7cYkeI0mOAq
+ BM9t8zEhFY8Sg==
+Received: by mail-oo1-f41.google.com with SMTP id
+ 006d021491bc7-5e1c49f9b9aso2731865eaf.2; 
+ Wed, 09 Oct 2024 06:34:46 -0700 (PDT)
 X-Forwarded-Encrypted: i=1;
- AJvYcCWhh59yszol9KeTvQ5ePUOEg4rs2JmbHs0XVf+TvF8c48ZE6aduaD9YFGio3dKVnO7cQG8N89We@lists.freedesktop.org
-X-Gm-Message-State: AOJu0YzSPssI7MR9aNlXPdG7q0C0YxJX7q2FbT4WA6PjyFxLmDspxrBk
- ZarqnW+XEj8A5xcV83pNAtbkAv0vRzKhr59e6+G2/Wl11xWUsbI+gnOyTNCIKQSHlvUOMP3/+H+
- GZ5FeSAPGYFZBEgdV3MK0xa+SSdbenwfSsbdPCg==
-X-Google-Smtp-Source: AGHT+IHNaU3Z3+DDKTWwqyhccdWy6KGvX0jRFFJtFda2WTvGLlJcpHA53hhWZp12VBznxD4kUpVSZMoh/Lgesk7avnk=
-X-Received: by 2002:a25:eb02:0:b0:e25:96a4:1706 with SMTP id
- 3f1490d57ef6-e28fe43f3d1mr1744852276.19.1728469701975; Wed, 09 Oct 2024
- 03:28:21 -0700 (PDT)
+ AJvYcCVKU08C0c8BIDwpgMsYRkIM7cSDVqeajvsBdybuJE268EGHdTwT1wmyCHDQGKgaqMQELW6HXEV1+w==@lists.freedesktop.org,
+ AJvYcCWZ2bUFhj+8c1LzN6+PrAsJcvRAA5/XNA9UIevPYxIpbfSY3pz3t6Ouk0na9B7cNsSAmMYGijkZSN6L@lists.freedesktop.org,
+ AJvYcCXAyo6Gh/XyDLyA4TUrAiGuYXjFyiAgI+KVdQlAoCWvssWbYZ9ayTHN5eKHRoBNfDrTakMEihzk@lists.freedesktop.org
+X-Gm-Message-State: AOJu0YyHAHMTd1hkZi9DuLwIDio8TgbLunPtorlfRdzmrgYXBzaYwSsG
+ EFra+IAvLVS9oUZfoZgqRzLlBfQ/bjASJqHA/ZjjbHMLC4mwBizcXfJZvFsR1FAYSPYTFsOSzPp
+ PZ/N0fUXrJ+yCMf4R0K+WWwcIoR8=
+X-Google-Smtp-Source: AGHT+IGPvjQmX3zbZk+/LQ5kxG4XslEJ8m7y5iETpKVOpmsBmOdZ4tET2kRXnqT/piSrFy5yYrBa2CfwSNatwWXgz3s=
+X-Received: by 2002:a05:6820:270f:b0:5e5:c489:6f3c with SMTP id
+ 006d021491bc7-5e987bc9df9mr1249377eaf.5.1728480885551; Wed, 09 Oct 2024
+ 06:34:45 -0700 (PDT)
 MIME-Version: 1.0
 References: <20241004094101.113349-1-sakari.ailus@linux.intel.com>
  <CAPDyKFp0N6UJhnHS164Tdf=xkWB0jzq65L9TdvYazeBQ-6WjeQ@mail.gmail.com>
@@ -60,14 +52,18 @@ References: <20241004094101.113349-1-sakari.ailus@linux.intel.com>
  <20241007222502.GG30699@pendragon.ideasonboard.com>
  <CAPDyKFrGNwna6Y2pqSRaBbRYHKRaD2ayqQHLtoqLPOu9Et7qTg@mail.gmail.com>
  <CAJZ5v0jvJyS7D5-wURi2kyWN-rmNa+YqupeQJ000pQRVd9VBcQ@mail.gmail.com>
-In-Reply-To: <CAJZ5v0jvJyS7D5-wURi2kyWN-rmNa+YqupeQJ000pQRVd9VBcQ@mail.gmail.com>
-From: Ulf Hansson <ulf.hansson@linaro.org>
-Date: Wed, 9 Oct 2024 12:27:45 +0200
-Message-ID: <CAPDyKFqh_BS=6eN4tQzZ20sWCHL3kdnrY=1Mgd7B9gfBamm8bw@mail.gmail.com>
+ <41a0ad69-912b-4eb3-84f7-fb385433c056@opensource.cirrus.com>
+In-Reply-To: <41a0ad69-912b-4eb3-84f7-fb385433c056@opensource.cirrus.com>
+From: "Rafael J. Wysocki" <rafael@kernel.org>
+Date: Wed, 9 Oct 2024 15:34:33 +0200
+X-Gmail-Original-Message-ID: <CAJZ5v0gbrhMpPT0fHYSC+ES5WS5kv7XkM2hj9M4vpNwFFs6xsQ@mail.gmail.com>
+Message-ID: <CAJZ5v0gbrhMpPT0fHYSC+ES5WS5kv7XkM2hj9M4vpNwFFs6xsQ@mail.gmail.com>
 Subject: Re: [PATCH 00/51] treewide: Switch to __pm_runtime_put_autosuspend()
-To: "Rafael J. Wysocki" <rafael@kernel.org>
-Cc: Laurent Pinchart <laurent.pinchart@ideasonboard.com>, 
- Sakari Ailus <sakari.ailus@linux.intel.com>, dri-devel@lists.freedesktop.org, 
+To: Richard Fitzgerald <rf@opensource.cirrus.com>,
+ Sakari Ailus <sakari.ailus@linux.intel.com>
+Cc: Ulf Hansson <ulf.hansson@linaro.org>, 
+ Laurent Pinchart <laurent.pinchart@ideasonboard.com>,
+ dri-devel@lists.freedesktop.org, 
  linux-kernel@vger.kernel.org, linux-bluetooth@vger.kernel.org, 
  linux-clk@vger.kernel.org, linux-crypto@vger.kernel.org, 
  dmaengine@vger.kernel.org, linux-gpio@vger.kernel.org, 
@@ -85,7 +81,8 @@ Cc: Laurent Pinchart <laurent.pinchart@ideasonboard.com>,
  linux-sound@vger.kernel.org, linux-spi@vger.kernel.org, 
  linux-staging@lists.linux.dev, linux-usb@vger.kernel.org, 
  linux-serial@vger.kernel.org, greybus-dev@lists.linaro.org, 
- asahi@lists.linux.dev, Andy Shevchenko <andy.shevchenko@gmail.com>
+ asahi@lists.linux.dev, Andy Shevchenko <andy.shevchenko@gmail.com>, 
+ =?UTF-8?Q?Uwe_Kleine=2DK=C3=B6nig?= <u.kleine-koenig@pengutronix.de>
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
 X-BeenThere: nouveau@lists.freedesktop.org
@@ -102,140 +99,138 @@ List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-On Tue, 8 Oct 2024 at 20:25, Rafael J. Wysocki <rafael@kernel.org> wrote:
+On Wed, Oct 9, 2024 at 2:48=E2=80=AFPM Richard Fitzgerald
+<rf@opensource.cirrus.com> wrote:
 >
-> On Tue, Oct 8, 2024 at 12:35=E2=80=AFAM Ulf Hansson <ulf.hansson@linaro.o=
-rg> wrote:
+> On 08/10/2024 7:24 pm, Rafael J. Wysocki wrote:
+> > On Tue, Oct 8, 2024 at 12:35=E2=80=AFAM Ulf Hansson <ulf.hansson@linaro=
+.org> wrote:
+> >>
+> >> On Tue, 8 Oct 2024 at 00:25, Laurent Pinchart
+> >> <laurent.pinchart@ideasonboard.com> wrote:
+> >>>
+> >>> Hi Ulf,
+> >>>
+> >>> On Tue, Oct 08, 2024 at 12:08:24AM +0200, Ulf Hansson wrote:
+> >>>> On Mon, 7 Oct 2024 at 20:49, Laurent Pinchart wrote:
+> >>>>> On Fri, Oct 04, 2024 at 04:38:36PM +0200, Ulf Hansson wrote:
+> >>>>>> On Fri, 4 Oct 2024 at 11:41, Sakari Ailus wrote:
+> >>>>>>>
+> >>>>>>> Hello everyone,
+> >>>>>>>
+> >>>>>>> This set will switch the users of pm_runtime_put_autosuspend() to
+> >>>>>>> __pm_runtime_put_autosuspend() while the former will soon be re-p=
+urposed
+> >>>>>>> to include a call to pm_runtime_mark_last_busy(). The two are alm=
+ost
+> >>>>>>> always used together, apart from bugs which are likely common. Go=
+ing
+> >>>>>>> forward, most new users should be using pm_runtime_put_autosuspen=
+d().
+> >>>>>>>
+> >>>>>>> Once this conversion is done and pm_runtime_put_autosuspend() re-=
+purposed,
+> >>>>>>> I'll post another set to merge the calls to __pm_runtime_put_auto=
+suspend()
+> >>>>>>> and pm_runtime_mark_last_busy().
+> >>>>>>
+> >>>>>> That sounds like it could cause a lot of churns.
+> >>>>>>
+> >>>>>> Why not add a new helper function that does the
+> >>>>>> pm_runtime_put_autosuspend() and the pm_runtime_mark_last_busy()
+> >>>>>> things? Then we can start moving users over to this new interface,
+> >>>>>> rather than having this intermediate step?
+> >>>>>
+> >>>>> I think the API would be nicer if we used the shortest and simplest
+> >>>>> function names for the most common use cases. Following
+> >>>>> pm_runtime_put_autosuspend() with pm_runtime_mark_last_busy() is th=
+at
+> >>>>> most common use case. That's why I like Sakari's approach of repurp=
+osing
+> >>>>> pm_runtime_put_autosuspend(), and introducing
+> >>>>> __pm_runtime_put_autosuspend() for the odd cases where
+> >>>>> pm_runtime_mark_last_busy() shouldn't be called.
+> >>>>
+> >>>> Okay, so the reason for this approach is because we couldn't find a
+> >>>> short and descriptive name that could be used in favor of
+> >>>> pm_runtime_put_autosuspend(). Let me throw some ideas at it and mayb=
+e
+> >>>> you like it - or not. :-)
+> >>>
+> >>> I like the idea at least :-)
+> >>>
+> >>>> I don't know what options you guys discussed, but to me the entire
+> >>>> "autosuspend"-suffix isn't really that necessary in my opinion. Ther=
+e
+> >>>> are more ways than calling pm_runtime_put_autosuspend() that trigger=
+s
+> >>>> us to use the RPM_AUTO flag for rpm_suspend(). For example, just
+> >>>> calling pm_runtime_put() has the similar effect.
+> >>>
+> >>> To be honest, I'm lost there. pm_runtime_put() calls
+> >>> __pm_runtime_idle(RPM_GET_PUT | RPM_ASYNC), while
+> >>> pm_runtime_put_autosuspend() calls __pm_runtime_suspend(RPM_GET_PUT |
+> >>> RPM_ASYNC | RPM_AUTO).
+> >>
+> >> __pm_runtime_idle() ends up calling rpm_idle(), which may call
+> >> rpm_suspend() - if it succeeds to idle the device. In that case, it
+> >> tags on the RPM_AUTO flag in the call to rpm_suspend(). Quite similar
+> >> to what is happening when calling pm_runtime_put_autosuspend().
 > >
-> > On Tue, 8 Oct 2024 at 00:25, Laurent Pinchart
-> > <laurent.pinchart@ideasonboard.com> wrote:
-> > >
-> > > Hi Ulf,
-> > >
-> > > On Tue, Oct 08, 2024 at 12:08:24AM +0200, Ulf Hansson wrote:
-> > > > On Mon, 7 Oct 2024 at 20:49, Laurent Pinchart wrote:
-> > > > > On Fri, Oct 04, 2024 at 04:38:36PM +0200, Ulf Hansson wrote:
-> > > > > > On Fri, 4 Oct 2024 at 11:41, Sakari Ailus wrote:
-> > > > > > >
-> > > > > > > Hello everyone,
-> > > > > > >
-> > > > > > > This set will switch the users of pm_runtime_put_autosuspend(=
-) to
-> > > > > > > __pm_runtime_put_autosuspend() while the former will soon be =
-re-purposed
-> > > > > > > to include a call to pm_runtime_mark_last_busy(). The two are=
- almost
-> > > > > > > always used together, apart from bugs which are likely common=
-. Going
-> > > > > > > forward, most new users should be using pm_runtime_put_autosu=
-spend().
-> > > > > > >
-> > > > > > > Once this conversion is done and pm_runtime_put_autosuspend()=
- re-purposed,
-> > > > > > > I'll post another set to merge the calls to __pm_runtime_put_=
-autosuspend()
-> > > > > > > and pm_runtime_mark_last_busy().
-> > > > > >
-> > > > > > That sounds like it could cause a lot of churns.
-> > > > > >
-> > > > > > Why not add a new helper function that does the
-> > > > > > pm_runtime_put_autosuspend() and the pm_runtime_mark_last_busy(=
-)
-> > > > > > things? Then we can start moving users over to this new interfa=
-ce,
-> > > > > > rather than having this intermediate step?
-> > > > >
-> > > > > I think the API would be nicer if we used the shortest and simple=
-st
-> > > > > function names for the most common use cases. Following
-> > > > > pm_runtime_put_autosuspend() with pm_runtime_mark_last_busy() is =
-that
-> > > > > most common use case. That's why I like Sakari's approach of repu=
-rposing
-> > > > > pm_runtime_put_autosuspend(), and introducing
-> > > > > __pm_runtime_put_autosuspend() for the odd cases where
-> > > > > pm_runtime_mark_last_busy() shouldn't be called.
-> > > >
-> > > > Okay, so the reason for this approach is because we couldn't find a
-> > > > short and descriptive name that could be used in favor of
-> > > > pm_runtime_put_autosuspend(). Let me throw some ideas at it and may=
-be
-> > > > you like it - or not. :-)
-> > >
-> > > I like the idea at least :-)
-> > >
-> > > > I don't know what options you guys discussed, but to me the entire
-> > > > "autosuspend"-suffix isn't really that necessary in my opinion. The=
-re
-> > > > are more ways than calling pm_runtime_put_autosuspend() that trigge=
-rs
-> > > > us to use the RPM_AUTO flag for rpm_suspend(). For example, just
-> > > > calling pm_runtime_put() has the similar effect.
-> > >
-> > > To be honest, I'm lost there. pm_runtime_put() calls
-> > > __pm_runtime_idle(RPM_GET_PUT | RPM_ASYNC), while
-> > > pm_runtime_put_autosuspend() calls __pm_runtime_suspend(RPM_GET_PUT |
-> > > RPM_ASYNC | RPM_AUTO).
+> > Right.
 > >
-> > __pm_runtime_idle() ends up calling rpm_idle(), which may call
-> > rpm_suspend() - if it succeeds to idle the device. In that case, it
-> > tags on the RPM_AUTO flag in the call to rpm_suspend(). Quite similar
-> > to what is happening when calling pm_runtime_put_autosuspend().
->
-> Right.
->
-> For almost everybody, except for a small bunch of drivers that
-> actually have a .runtime_idle() callback, pm_runtime_put() is
-> literally equivalent to pm_runtime_put_autosuspend().
->
-> So really the question is why anyone who doesn't provide a
-> .runtime_idle() callback bothers with using this special
-> pm_runtime_put_autosuspend() thing, which really means "do a
-> runtime_put(), but skip my .runtime_idle() callback".
-
-My guess is that it's in most cases a legacy pattern that is being
-followed. Also note that rpm_idle() didn't "always" tag on the
-RPM_AUTO flag, even if it's quite a while ago (2013) since we added
-it.
-
-Unless there is some actual optimization involved, as it also allows
-us to skip calling rpm_idle() and go directly for rpm_suspend().
-
->
-> > >
-> > > >
-> > > > Moreover, it's similar for pm_runtime_mark_last_busy(), it's called
-> > > > during rpm_resume() too, for example. So why bother about having
-> > > > "mark_last_busy" in the new name too.
-> > > >
-> > > > That said, my suggestion is simply "pm_runtime_put_suspend".
-> > >
-> > > Can we do even better, and make pm_runtime_put() to handle autosuspen=
-d
-> > > automatically when autosuspend is enabled ?
+> > For almost everybody, except for a small bunch of drivers that
+> > actually have a .runtime_idle() callback, pm_runtime_put() is
+> > literally equivalent to pm_runtime_put_autosuspend().
 > >
-> > As stated above, this is already the case.
+> > So really the question is why anyone who doesn't provide a
+> > .runtime_idle() callback bothers with using this special
+> > pm_runtime_put_autosuspend() thing,
 >
-> What really is needed appears to be a combination of
-> pm_runtime_mark_last_busy() with pm_runtime_put().
-
-This makes sense to me too, but I don't think we should limit it to this.
-
-Making pm_runtime_put_autosuspend (or if the name
-"pm_runtime_put_suspend" is better?) to do the similar thing, is
-probably a good idea too. At least in my opinion.
-
+> Because they are following the documentation? It says:
 >
-> Granted, pm_runtime_put() could do the pm_runtime_mark_last_busy()
-> thing automatically if autosuspend is enabled and the only consequence
-> of it might be delaying a suspend of the device until its autosuspend
-> timer expires, which should not be a problem in the vast majority of
-> cases.
+> "Drivers should call pm_runtime_mark_last_busy() to update this field
+> after carrying out I/O, typically just before calling
+> pm_runtime_put_autosuspend()."
+>
+> and
+>
+> "In order to use autosuspend, subsystems or drivers must call
+> pm_runtime_use_autosuspend() (...), and thereafter they should use the
+> various `*_autosuspend()` helper functions instead of the non#
+> autosuspend counterparts"
+>
+> So the documentation says I should be using pm_runtime_put_autosuspend()
+> instead of pm_runtime_put().
+>
+> Seems unfair to criticise people for following the documentation.
 
-Right.
+I'm not criticising anyone, just wondering why they do what they do.
 
-I guess we should expect the *sync* variants to be used, if the timer
-really needs to be overridden.
+"Because it is documented this way" is a fair answer, but it doesn't
+invalidate the observation that the difference between
+pm_runtime_put_autosuspend() and pm_runtime_put() boils down to the
+cases when the .runtime_idle() callback is present (which are few and
+far between so to speak).  Moreover, there are call sites using
+pm_runtime_*() functions even though they may not know whether or not
+autosuspend is enabled for the target devices, so the advice given in
+the documentation cannot be universally followed regardless.
 
-Kind regards
-Uffe
+This thread is about the way to go, generally speaking, and what I'm
+saying is effectively that replacing pm_runtime_put_autosuspend() with
+pm_runtime_put() almost everywhere (if not just everywhere) would be
+fine with me.
+
+I also think that the current users of pm_runtime_put_autosuspend()
+that is not immediately preceded by pm_runtime_mark_last_busy() can be
+readily switched over to using pm_runtime_put() instead of it and then
+pm_runtime_put_autosuspend() can be made call
+pm_runtime_mark_last_busy(), so the latter can be removed from the
+code using the former.  Note that this last step does not require
+tree-wide changes, because calling pm_runtime_mark_last_busy() twice
+in a row for the same device is not a problem.
+
+Of course, the documentation needs to be updated in accordance with
+the code changes, which didn't happen when previous changes were made
+to pm_runtime_put() and that likely is why it does not reflect the
+current code.
