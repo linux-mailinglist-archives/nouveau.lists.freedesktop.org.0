@@ -2,93 +2,54 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id 2756CCBA976
-	for <lists+nouveau@lfdr.de>; Sat, 13 Dec 2025 13:41:21 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 458F4CBA9B7
+	for <lists+nouveau@lfdr.de>; Sat, 13 Dec 2025 13:41:32 +0100 (CET)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 221FC10E9E3;
-	Sat, 13 Dec 2025 12:40:56 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 00E5C10E9E8;
+	Sat, 13 Dec 2025 12:40:57 +0000 (UTC)
 Authentication-Results: gabe.freedesktop.org;
-	dkim=pass (2048-bit key; unprotected) header.d=cirrus.com header.i=@cirrus.com header.b="WI0sVayc";
+	dkim=fail reason="signature verification failed" (2048-bit key; unprotected) header.d=freemail.hu header.i=@freemail.hu header.b="jvt7JZkL";
 	dkim-atps=neutral
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-X-Greylist: delayed 1557 seconds by postgrey-1.36 at gabe;
- Wed, 09 Oct 2024 13:14:30 UTC
-Received: from mx0b-001ae601.pphosted.com (mx0a-001ae601.pphosted.com
- [67.231.149.25])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 7B1B510E266;
- Wed,  9 Oct 2024 13:14:30 +0000 (UTC)
-Received: from pps.filterd (m0077473.ppops.net [127.0.0.1])
- by mx0a-001ae601.pphosted.com (8.18.1.2/8.18.1.2) with ESMTP id 4994xc0x003245;
- Wed, 9 Oct 2024 07:48:18 -0500
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=cirrus.com; h=cc
- :content-transfer-encoding:content-type:date:from:in-reply-to
- :message-id:mime-version:references:subject:to; s=
- PODMain02222019; bh=b9CbWLDMZti2ojgRTihH3RA0WYLUzEcG7aX6pdihoQY=; b=
- WI0sVaycTZYkwMgmtYcXXMdvigsiua8Ix4Qh02mNCGH2fBXcoCmYBNNsEO5BXVde
- 1Bz9WSIl3H9aytV4MjeLGq5iNgl4nMnifXKD7gZBG7Nh0M0RDNAmEax34ZlRrQpc
- BqxwXp6rQsj7d8HBI3neZNecBDiZiUXrqk9SjO/XH7GSP3KBa0vc3lo3Nh2evgTs
- vMpU/eouIhXwHQgJkPlVYadHgMk2W3tKDA7WeoPiKLk9i2DcqwNiAeCbgFtNS1E3
- D/03y3ryRn8KcZ7U0bo3WMxdHCmB9tG9qfIm/V0gyX7oGE/Hh+fOgbX3EkFod4UH
- WWLlkgIPTShr+Vylj7CyYA==
-Received: from ediex02.ad.cirrus.com ([84.19.233.68])
- by mx0a-001ae601.pphosted.com (PPS) with ESMTPS id 4232uy5xfs-1
- (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
- Wed, 09 Oct 2024 07:48:17 -0500 (CDT)
-Received: from ediex01.ad.cirrus.com (198.61.84.80) by ediex02.ad.cirrus.com
- (198.61.84.81) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.1544.9; Wed, 9 Oct 2024
- 13:48:15 +0100
-Received: from ediswmail9.ad.cirrus.com (198.61.86.93) by
- anon-ediex01.ad.cirrus.com (198.61.84.80) with Microsoft SMTP Server id
- 15.2.1544.9 via Frontend Transport; Wed, 9 Oct 2024 13:48:15 +0100
-Received: from [198.90.208.18] (ediswws06.ad.cirrus.com [198.90.208.18])
- by ediswmail9.ad.cirrus.com (Postfix) with ESMTP id 33C5E82024A;
- Wed,  9 Oct 2024 12:48:15 +0000 (UTC)
-Message-ID: <41a0ad69-912b-4eb3-84f7-fb385433c056@opensource.cirrus.com>
-Date: Wed, 9 Oct 2024 13:48:15 +0100
+Received: from smtp-out.freemail.hu (fmfe36.freemail.hu [46.107.16.241])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 25CAB10E0A3;
+ Fri, 11 Oct 2024 10:24:45 +0000 (UTC)
+Received: from [192.168.0.16] (catv-178-48-208-49.catv.fixed.vodafone.hu
+ [178.48.208.49])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits)
+ key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
+ (No client certificate requested)
+ by smtp.freemail.hu (Postfix) with ESMTPSA id 4XQ2mn4GPSzD8J;
+ Fri, 11 Oct 2024 12:24:41 +0200 (CEST)
+Message-ID: <264890a1-7234-407e-b7ba-078f32462afe@freemail.hu>
+Date: Fri, 11 Oct 2024 12:23:18 +0200
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 00/51] treewide: Switch to __pm_runtime_put_autosuspend()
-To: "Rafael J. Wysocki" <rafael@kernel.org>, Ulf Hansson
- <ulf.hansson@linaro.org>, Laurent Pinchart
- <laurent.pinchart@ideasonboard.com>, Sakari Ailus
- <sakari.ailus@linux.intel.com>
-CC: <dri-devel@lists.freedesktop.org>, <linux-kernel@vger.kernel.org>,
- <linux-bluetooth@vger.kernel.org>, <linux-clk@vger.kernel.org>,
- <linux-crypto@vger.kernel.org>, <dmaengine@vger.kernel.org>,
- <linux-gpio@vger.kernel.org>, <amd-gfx@lists.freedesktop.org>,
- <nouveau@lists.freedesktop.org>,
- <linux-stm32@st-md-mailman.stormreply.com>,
- <linux-arm-kernel@lists.infradead.org>, <linux-i2c@vger.kernel.org>,
- <linux-i3c@lists.infradead.org>, <linux-iio@vger.kernel.org>,
- <linux-input@vger.kernel.org>, <patches@opensource.cirrus.com>,
- <iommu@lists.linux.dev>, <imx@lists.linux.dev>,
- <linux-mediatek@lists.infradead.org>, <linux-media@vger.kernel.org>,
- <linux-mmc@vger.kernel.org>, <linux-mtd@lists.infradead.org>,
- <netdev@vger.kernel.org>, <linux-wireless@vger.kernel.org>,
- <linux-pci@vger.kernel.org>, <linux-phy@lists.infradead.org>,
- <linux-pwm@vger.kernel.org>, <linux-remoteproc@vger.kernel.org>,
- <linux-sound@vger.kernel.org>, <linux-spi@vger.kernel.org>,
- <linux-staging@lists.linux.dev>, <linux-usb@vger.kernel.org>,
- <linux-serial@vger.kernel.org>, <greybus-dev@lists.linaro.org>,
- <asahi@lists.linux.dev>, Andy Shevchenko <andy.shevchenko@gmail.com>
-References: <20241004094101.113349-1-sakari.ailus@linux.intel.com>
- <CAPDyKFp0N6UJhnHS164Tdf=xkWB0jzq65L9TdvYazeBQ-6WjeQ@mail.gmail.com>
- <20241007184924.GH14766@pendragon.ideasonboard.com>
- <CAPDyKFpQVnF7eQv3dup8k-3EijnMjuveCG9sZ=Rpey1Y6MBJEg@mail.gmail.com>
- <20241007222502.GG30699@pendragon.ideasonboard.com>
- <CAPDyKFrGNwna6Y2pqSRaBbRYHKRaD2ayqQHLtoqLPOu9Et7qTg@mail.gmail.com>
- <CAJZ5v0jvJyS7D5-wURi2kyWN-rmNa+YqupeQJ000pQRVd9VBcQ@mail.gmail.com>
-Content-Language: en-GB
-From: Richard Fitzgerald <rf@opensource.cirrus.com>
-In-Reply-To: <CAJZ5v0jvJyS7D5-wURi2kyWN-rmNa+YqupeQJ000pQRVd9VBcQ@mail.gmail.com>
-Content-Type: text/plain; charset="UTF-8"; format=flowed
+Subject: Re: [PATCH] drm/nouveau/i2c: rename aux.c and aux.h to auxch.c and
+ auxch.h
+To: Lyude Paul <lyude@redhat.com>, bskeggs@nvidia.com, kherbst@redhat.com,
+ airlied@gmail.com, daniel@ffwll.ch, dri-devel@lists.freedesktop.org,
+ nouveau@lists.freedesktop.org, linux-kernel@vger.kernel.org
+References: <20240603091558.35672-1-egyszeregy@freemail.hu>
+ <114482fe-0d91-4742-8ea1-5eaef8254c45@freemail.hu>
+ <40b4b653e8c0c15343e211ff88ac8fe3f4d53e20.camel@redhat.com>
+Content-Language: hu
+From: =?UTF-8?Q?Sz=C5=91ke_Benjamin?= <egyszeregy@freemail.hu>
+In-Reply-To: <40b4b653e8c0c15343e211ff88ac8fe3f4d53e20.camel@redhat.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 8bit
-X-Proofpoint-GUID: ltWPFp1gnPUjzPmaRQ9EaXCq91PhMVjU
-X-Proofpoint-ORIG-GUID: ltWPFp1gnPUjzPmaRQ9EaXCq91PhMVjU
-X-Proofpoint-Spam-Reason: safe
-X-Mailman-Approved-At: Sat, 13 Dec 2025 12:40:44 +0000
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=simple/relaxed; t=1728642282; 
+ s=20181004; d=freemail.hu;
+ h=Message-ID:Date:MIME-Version:Subject:To:References:From:In-Reply-To:Content-Type:Content-Transfer-Encoding;
+ l=8454; bh=wmH4MV95rwYFIztY5AXfM1HAtK2mdhjrRiZSZ1fyGyI=;
+ b=jvt7JZkLPIQ6RukzGrSHqrANt5slZDKVr7MCcTZk3XVh8rlmADWvccTnvoL7Joja
+ exzlJxeZwQfIsPtQbOv7VSxxCqwHrt+OkAHeoqRhq3hmy+buUqmvpsxPtHGRM/U9a76
+ KmF3kW39DsrugrYBUdcl/mHq0A8c0wap4I1362Zi+uHIZBSuMtU/LI8vzmRw5rCKuth
+ mQ8QxAQQe4VUoux6iTpECTDVzJjTHiYh+uMswQqlfvh6CGhd6El5pYBxB2zz36OFyyS
+ gSfNmIHJyCXUvhPbkAiEAREZSwynScVYylanCsTte4Ked3zCXjbuPAoRQn72MWvNuPQ
+ VlZ82Shwrg==
+X-Mailman-Approved-At: Sat, 13 Dec 2025 12:40:52 +0000
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -103,94 +64,210 @@ List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-On 08/10/2024 7:24 pm, Rafael J. Wysocki wrote:
-> On Tue, Oct 8, 2024 at 12:35 AM Ulf Hansson <ulf.hansson@linaro.org> wrote:
+2024. 10. 10. 23:17 keltezéssel, Lyude Paul írta:
+> Hi - how did you send this message? This patch comes out looking quite strange
+> on my machine, perhaps you don't have the encoding set to UTF-8 or aren't
+> using git send-email?
+> 
+> On Mon, 2024-09-23 at 22:18 +0200, Szőke Benjamin wrote:
+>> 	s=20181004; d=freemail.hu;
+>> 	h=Message-ID:Date:MIME-Version:Subject:To:References:From:In-Reply-To:Content-Type:Content-Transfer-Encoding;
+>> 	l=6727; bh=sJL9AOsUJH2ovHr5PYMU/rHzKoMeXVYsbJRkD0TaT5E=;
+>> 	b=qY1DL1nlKnhWn0mpbbrefaus7g0fXuyQgL10k8YLW7EoFYdwaqOeDl6O+oQvVNmk
+>> 	SvFiAJ5gdZeuP+2ZqTy3J1GOrOWP4HE77uQ4mJh9vyF3orZv2QtyIksudyXdHHiWwSS
+>> 	IV7i4YkfUElv4+pFlUQ+hMRRXAOiqU/RVo1xBF0MBe/XGM1dt2UOj96u6lDp/vR7KP4
+>> 	Tc7OCbj3h2I+07VEElEunHRpDFgZer+RV3SBLWBjiYBFtuUj3+iMnO/z36DlNJyHAj5
+>> 	fySgG1IiRjIheKlzc5H7ikpMRfchALaeD+t1ayA7CERE4zDvIcBse8S5Oxkxvg7zwIW
+>> 	Elv65cjloA==
+>> Content-Transfer-Encoding: quoted-printable
 >>
->> On Tue, 8 Oct 2024 at 00:25, Laurent Pinchart
->> <laurent.pinchart@ideasonboard.com> wrote:
->>>
->>> Hi Ulf,
->>>
->>> On Tue, Oct 08, 2024 at 12:08:24AM +0200, Ulf Hansson wrote:
->>>> On Mon, 7 Oct 2024 at 20:49, Laurent Pinchart wrote:
->>>>> On Fri, Oct 04, 2024 at 04:38:36PM +0200, Ulf Hansson wrote:
->>>>>> On Fri, 4 Oct 2024 at 11:41, Sakari Ailus wrote:
->>>>>>>
->>>>>>> Hello everyone,
->>>>>>>
->>>>>>> This set will switch the users of pm_runtime_put_autosuspend() to
->>>>>>> __pm_runtime_put_autosuspend() while the former will soon be re-purposed
->>>>>>> to include a call to pm_runtime_mark_last_busy(). The two are almost
->>>>>>> always used together, apart from bugs which are likely common. Going
->>>>>>> forward, most new users should be using pm_runtime_put_autosuspend().
->>>>>>>
->>>>>>> Once this conversion is done and pm_runtime_put_autosuspend() re-purposed,
->>>>>>> I'll post another set to merge the calls to __pm_runtime_put_autosuspend()
->>>>>>> and pm_runtime_mark_last_busy().
->>>>>>
->>>>>> That sounds like it could cause a lot of churns.
->>>>>>
->>>>>> Why not add a new helper function that does the
->>>>>> pm_runtime_put_autosuspend() and the pm_runtime_mark_last_busy()
->>>>>> things? Then we can start moving users over to this new interface,
->>>>>> rather than having this intermediate step?
->>>>>
->>>>> I think the API would be nicer if we used the shortest and simplest
->>>>> function names for the most common use cases. Following
->>>>> pm_runtime_put_autosuspend() with pm_runtime_mark_last_busy() is that
->>>>> most common use case. That's why I like Sakari's approach of repurposing
->>>>> pm_runtime_put_autosuspend(), and introducing
->>>>> __pm_runtime_put_autosuspend() for the odd cases where
->>>>> pm_runtime_mark_last_busy() shouldn't be called.
->>>>
->>>> Okay, so the reason for this approach is because we couldn't find a
->>>> short and descriptive name that could be used in favor of
->>>> pm_runtime_put_autosuspend(). Let me throw some ideas at it and maybe
->>>> you like it - or not. :-)
->>>
->>> I like the idea at least :-)
->>>
->>>> I don't know what options you guys discussed, but to me the entire
->>>> "autosuspend"-suffix isn't really that necessary in my opinion. There
->>>> are more ways than calling pm_runtime_put_autosuspend() that triggers
->>>> us to use the RPM_AUTO flag for rpm_suspend(). For example, just
->>>> calling pm_runtime_put() has the similar effect.
->>>
->>> To be honest, I'm lost there. pm_runtime_put() calls
->>> __pm_runtime_idle(RPM_GET_PUT | RPM_ASYNC), while
->>> pm_runtime_put_autosuspend() calls __pm_runtime_suspend(RPM_GET_PUT |
->>> RPM_ASYNC | RPM_AUTO).
+>> 2024. 06. 03. 11:15 keltez=C3=A9ssel, egyszeregy@freemail.hu =C3=ADrta:
+>>> From: Benjamin Sz=C5=91ke <egyszeregy@freemail.hu>
+>>> =20
+>>> The goal is to clean-up Linux repository from AUX file names, because
+>>> the use of such file names is prohibited on other operating systems
+>>> such as Windows, so the Linux repository cannot be cloned and
+>>> edited on them.
+>>> =20
+>>> Signed-off-by: Benjamin Sz=C5=91ke <egyszeregy@freemail.hu>
+>>> ---
+>>>    drivers/gpu/drm/nouveau/nvkm/subdev/i2c/Kbuild             | 2 +-
+>>>    drivers/gpu/drm/nouveau/nvkm/subdev/i2c/anx9805.c          | 2 +-
+>>>    drivers/gpu/drm/nouveau/nvkm/subdev/i2c/{aux.c =3D> auxch.c} | 2 +-
+>>>    drivers/gpu/drm/nouveau/nvkm/subdev/i2c/{aux.h =3D> auxch.h} | 0
+>>>    drivers/gpu/drm/nouveau/nvkm/subdev/i2c/auxg94.c           | 2 +-
+>>>    drivers/gpu/drm/nouveau/nvkm/subdev/i2c/auxgf119.c         | 2 +-
+>>>    drivers/gpu/drm/nouveau/nvkm/subdev/i2c/auxgm200.c         | 2 +-
+>>>    drivers/gpu/drm/nouveau/nvkm/subdev/i2c/base.c             | 2 +-
+>>>    drivers/gpu/drm/nouveau/nvkm/subdev/i2c/padg94.c           | 2 +-
+>>>    drivers/gpu/drm/nouveau/nvkm/subdev/i2c/padgf119.c         | 2 +-
+>>>    drivers/gpu/drm/nouveau/nvkm/subdev/i2c/padgm200.c         | 2 +-
+>>>    11 files changed, 10 insertions(+), 10 deletions(-)
+>>>    rename drivers/gpu/drm/nouveau/nvkm/subdev/i2c/{aux.c =3D> auxch.c} (=
+>> 99%)
+>>>    rename drivers/gpu/drm/nouveau/nvkm/subdev/i2c/{aux.h =3D> auxch.h} (=
+>> 100%)
+>>> =20
+>>> diff --git a/drivers/gpu/drm/nouveau/nvkm/subdev/i2c/Kbuild b/drivers/g=
+>> pu/drm/nouveau/nvkm/subdev/i2c/Kbuild
+>>> index 819703913a00..2c551bdc9bc9 100644
+>>> --- a/drivers/gpu/drm/nouveau/nvkm/subdev/i2c/Kbuild
+>>> +++ b/drivers/gpu/drm/nouveau/nvkm/subdev/i2c/Kbuild
+>>> @@ -25,7 +25,7 @@ nvkm-y +=3D nvkm/subdev/i2c/busnv50.o
+>>>    nvkm-y +=3D nvkm/subdev/i2c/busgf119.o
+>>>    nvkm-y +=3D nvkm/subdev/i2c/bit.o
+>>>   =20
+>>> -nvkm-y +=3D nvkm/subdev/i2c/aux.o
+>>> +nvkm-y +=3D nvkm/subdev/i2c/auxch.o
+>>>    nvkm-y +=3D nvkm/subdev/i2c/auxg94.o
+>>>    nvkm-y +=3D nvkm/subdev/i2c/auxgf119.o
+>>>    nvkm-y +=3D nvkm/subdev/i2c/auxgm200.o
+>>> diff --git a/drivers/gpu/drm/nouveau/nvkm/subdev/i2c/anx9805.c b/driver=
+>> s/gpu/drm/nouveau/nvkm/subdev/i2c/anx9805.c
+>>> index dd391809fef7..6c76e5e14b75 100644
+>>> --- a/drivers/gpu/drm/nouveau/nvkm/subdev/i2c/anx9805.c
+>>> +++ b/drivers/gpu/drm/nouveau/nvkm/subdev/i2c/anx9805.c
+>>> @@ -24,7 +24,7 @@
+>>>    #define anx9805_pad(p) container_of((p), struct anx9805_pad, base)
+>>>    #define anx9805_bus(p) container_of((p), struct anx9805_bus, base)
+>>>    #define anx9805_aux(p) container_of((p), struct anx9805_aux, base)
+>>> -#include "aux.h"
+>>> +#include "auxch.h"
+>>>    #include "bus.h"
+>>>   =20
+>>>    struct anx9805_pad {
+>>> diff --git a/drivers/gpu/drm/nouveau/nvkm/subdev/i2c/aux.c b/drivers/gp=
+>> u/drm/nouveau/nvkm/subdev/i2c/auxch.c
+>>> similarity index 99%
+>>> rename from drivers/gpu/drm/nouveau/nvkm/subdev/i2c/aux.c
+>>> rename to drivers/gpu/drm/nouveau/nvkm/subdev/i2c/auxch.c
+>>> index d063d0dc13c5..fafc634acbf6 100644
+>>> --- a/drivers/gpu/drm/nouveau/nvkm/subdev/i2c/aux.c
+>>> +++ b/drivers/gpu/drm/nouveau/nvkm/subdev/i2c/auxch.c
+>>> @@ -24,7 +24,7 @@
+>>>   =20
+>>>    #include <linux/string_helpers.h>
+>>>   =20
+>>> -#include "aux.h"
+>>> +#include "auxch.h"
+>>>    #include "pad.h"
+>>>   =20
+>>>    static int
+>>> diff --git a/drivers/gpu/drm/nouveau/nvkm/subdev/i2c/aux.h b/drivers/gp=
+>> u/drm/nouveau/nvkm/subdev/i2c/auxch.h
+>>> similarity index 100%
+>>> rename from drivers/gpu/drm/nouveau/nvkm/subdev/i2c/aux.h
+>>> rename to drivers/gpu/drm/nouveau/nvkm/subdev/i2c/auxch.h
+>>> diff --git a/drivers/gpu/drm/nouveau/nvkm/subdev/i2c/auxg94.c b/drivers=
+>> /gpu/drm/nouveau/nvkm/subdev/i2c/auxg94.c
+>>> index 47068f6f9c55..854bb4b5fdb4 100644
+>>> --- a/drivers/gpu/drm/nouveau/nvkm/subdev/i2c/auxg94.c
+>>> +++ b/drivers/gpu/drm/nouveau/nvkm/subdev/i2c/auxg94.c
+>>> @@ -22,7 +22,7 @@
+>>>     * Authors: Ben Skeggs <bskeggs@redhat.com>
+>>>     */
+>>>    #define g94_i2c_aux(p) container_of((p), struct g94_i2c_aux, base)
+>>> -#include "aux.h"
+>>> +#include "auxch.h"
+>>>   =20
+>>>    struct g94_i2c_aux {
+>>>    	struct nvkm_i2c_aux base;
+>>> diff --git a/drivers/gpu/drm/nouveau/nvkm/subdev/i2c/auxgf119.c b/drive=
+>> rs/gpu/drm/nouveau/nvkm/subdev/i2c/auxgf119.c
+>>> index dab40cd8fe3a..c17d5647cb99 100644
+>>> --- a/drivers/gpu/drm/nouveau/nvkm/subdev/i2c/auxgf119.c
+>>> +++ b/drivers/gpu/drm/nouveau/nvkm/subdev/i2c/auxgf119.c
+>>> @@ -19,7 +19,7 @@
+>>>     * ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE=
+>>   OR
+>>>     * OTHER DEALINGS IN THE SOFTWARE.
+>>>     */
+>>> -#include "aux.h"
+>>> +#include "auxch.h"
+>>>   =20
+>>>    static const struct nvkm_i2c_aux_func
+>>>    gf119_i2c_aux =3D {
+>>> diff --git a/drivers/gpu/drm/nouveau/nvkm/subdev/i2c/auxgm200.c b/drive=
+>> rs/gpu/drm/nouveau/nvkm/subdev/i2c/auxgm200.c
+>>> index 8bd1d442e465..3c5005e3b330 100644
+>>> --- a/drivers/gpu/drm/nouveau/nvkm/subdev/i2c/auxgm200.c
+>>> +++ b/drivers/gpu/drm/nouveau/nvkm/subdev/i2c/auxgm200.c
+>>> @@ -22,7 +22,7 @@
+>>>     * Authors: Ben Skeggs <bskeggs@redhat.com>
+>>>     */
+>>>    #define gm200_i2c_aux(p) container_of((p), struct gm200_i2c_aux, base=
+>> )
+>>> -#include "aux.h"
+>>> +#include "auxch.h"
+>>>   =20
+>>>    struct gm200_i2c_aux {
+>>>    	struct nvkm_i2c_aux base;
+>>> diff --git a/drivers/gpu/drm/nouveau/nvkm/subdev/i2c/base.c b/drivers/g=
+>> pu/drm/nouveau/nvkm/subdev/i2c/base.c
+>>> index 976539de4220..ab86e11e7780 100644
+>>> --- a/drivers/gpu/drm/nouveau/nvkm/subdev/i2c/base.c
+>>> +++ b/drivers/gpu/drm/nouveau/nvkm/subdev/i2c/base.c
+>>> @@ -22,7 +22,7 @@
+>>>     * Authors: Ben Skeggs
+>>>     */
+>>>    #include "priv.h"
+>>> -#include "aux.h"
+>>> +#include "auxch.h"
+>>>    #include "bus.h"
+>>>    #include "pad.h"
+>>>   =20
+>>> diff --git a/drivers/gpu/drm/nouveau/nvkm/subdev/i2c/padg94.c b/drivers=
+>> /gpu/drm/nouveau/nvkm/subdev/i2c/padg94.c
+>>> index 5904bc5f2d2a..cc26cd677917 100644
+>>> --- a/drivers/gpu/drm/nouveau/nvkm/subdev/i2c/padg94.c
+>>> +++ b/drivers/gpu/drm/nouveau/nvkm/subdev/i2c/padg94.c
+>>> @@ -22,7 +22,7 @@
+>>>     * Authors: Ben Skeggs
+>>>     */
+>>>    #include "pad.h"
+>>> -#include "aux.h"
+>>> +#include "auxch.h"
+>>>    #include "bus.h"
+>>>   =20
+>>>    void
+>>> diff --git a/drivers/gpu/drm/nouveau/nvkm/subdev/i2c/padgf119.c b/drive=
+>> rs/gpu/drm/nouveau/nvkm/subdev/i2c/padgf119.c
+>>> index 3bc4d0310076..1797c6c65979 100644
+>>> --- a/drivers/gpu/drm/nouveau/nvkm/subdev/i2c/padgf119.c
+>>> +++ b/drivers/gpu/drm/nouveau/nvkm/subdev/i2c/padgf119.c
+>>> @@ -22,7 +22,7 @@
+>>>     * Authors: Ben Skeggs
+>>>     */
+>>>    #include "pad.h"
+>>> -#include "aux.h"
+>>> +#include "auxch.h"
+>>>    #include "bus.h"
+>>>   =20
+>>>    static const struct nvkm_i2c_pad_func
+>>> diff --git a/drivers/gpu/drm/nouveau/nvkm/subdev/i2c/padgm200.c b/drive=
+>> rs/gpu/drm/nouveau/nvkm/subdev/i2c/padgm200.c
+>>> index 7d417f6a816e..5afc1bf8e798 100644
+>>> --- a/drivers/gpu/drm/nouveau/nvkm/subdev/i2c/padgm200.c
+>>> +++ b/drivers/gpu/drm/nouveau/nvkm/subdev/i2c/padgm200.c
+>>> @@ -22,7 +22,7 @@
+>>>     * Authors: Ben Skeggs
+>>>     */
+>>>    #include "pad.h"
+>>> -#include "aux.h"
+>>> +#include "auxch.h"
+>>>    #include "bus.h"
+>>>   =20
+>>>    static void
 >>
->> __pm_runtime_idle() ends up calling rpm_idle(), which may call
->> rpm_suspend() - if it succeeds to idle the device. In that case, it
->> tags on the RPM_AUTO flag in the call to rpm_suspend(). Quite similar
->> to what is happening when calling pm_runtime_put_autosuspend().
+>> @Ben Skeggs
+>> When it will be merged? Your hints was done and ready in this renaming pa=
+>> tch.
+>>
 > 
-> Right.
-> 
-> For almost everybody, except for a small bunch of drivers that
-> actually have a .runtime_idle() callback, pm_runtime_put() is
-> literally equivalent to pm_runtime_put_autosuspend().
-> 
-> So really the question is why anyone who doesn't provide a
-> .runtime_idle() callback bothers with using this special
-> pm_runtime_put_autosuspend() thing,
 
-Because they are following the documentation? It says:
+It was sent via git send-email and it used UTF-8 in default.
 
-"Drivers should call pm_runtime_mark_last_busy() to update this field
-after carrying out I/O, typically just before calling
-pm_runtime_put_autosuspend()."
-
-and
-
-"In order to use autosuspend, subsystems or drivers must call
-pm_runtime_use_autosuspend() (...), and thereafter they should use the
-various `*_autosuspend()` helper functions instead of the non#
-autosuspend counterparts"
-
-So the documentation says I should be using pm_runtime_put_autosuspend()
-instead of pm_runtime_put().
-
-Seems unfair to criticise people for following the documentation.
+In the patch website there is no any problem about encoding looks good, please 
+check your mailing client.
+https://lore.kernel.org/all/4fbfe84b-c092-4648-819f-4368add9ec4a@nvidia.com/T/
 
