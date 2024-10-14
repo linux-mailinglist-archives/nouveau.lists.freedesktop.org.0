@@ -2,60 +2,49 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id A06D999D2F1
-	for <lists+nouveau@lfdr.de>; Mon, 14 Oct 2024 17:32:01 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id E403B99D478
+	for <lists+nouveau@lfdr.de>; Mon, 14 Oct 2024 18:18:38 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 1E02310E478;
-	Mon, 14 Oct 2024 15:32:00 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id EB37A10E1E0;
+	Mon, 14 Oct 2024 16:18:36 +0000 (UTC)
 Authentication-Results: gabe.freedesktop.org;
-	dkim=pass (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="TbW7hJYE";
+	dkim=pass (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="ZCAMPOq1";
 	dkim-atps=neutral
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from nyc.source.kernel.org (nyc.source.kernel.org [147.75.193.91])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 6F7BB10E478
- for <nouveau@lists.freedesktop.org>; Mon, 14 Oct 2024 15:31:59 +0000 (UTC)
+Received: from dfw.source.kernel.org (dfw.source.kernel.org [139.178.84.217])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id E2FF710E1E0
+ for <nouveau@lists.freedesktop.org>; Mon, 14 Oct 2024 16:18:35 +0000 (UTC)
 Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by nyc.source.kernel.org (Postfix) with ESMTP id 905FEA41F28;
- Mon, 14 Oct 2024 15:31:49 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id E52F0C4CEC7;
- Mon, 14 Oct 2024 15:31:54 +0000 (UTC)
+ by dfw.source.kernel.org (Postfix) with ESMTP id B24F55C5803;
+ Mon, 14 Oct 2024 16:18:30 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 1CDD8C4CEC3;
+ Mon, 14 Oct 2024 16:18:31 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1728919918;
- bh=m4/Lbp9gUvfhLwKLfDxL4imJ4fusNjTrJZy75/fdTiI=;
+ s=k20201202; t=1728922714;
+ bh=EE8ZAHy6yYFPBwcoF5mopLpCJUSiOfcz+F/jv677e48=;
  h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
- b=TbW7hJYEJXNhRbFnZyMuZfxPmmljXv05Gq1aGN2820+qZTXRarS6spCblDoX60wsA
- wUp7r2ddizGPSz1cEiCyTyeQ1ZOfzo+VKdkX3XMMpSDoVULCD3qx2Q5cOfb5cLZwDn
- r8er3BA6R3wHULGrQ3W1GofsDMEmgvmhYwqNIOWmDgPfnH+FtFCR/0C4us3UwAPr+e
- jL0pvygKVH0oTFCnKIg4PGd91LSUc8e85MGUTOJPCuS1omg3yv+4+LR/A2Er9h16v4
- 9zszz/nrJyphWQLLjNxSOcwZC3O+Hc68LJXzC5R/UQjfFdM+0wDFcOvkAI06PqYCOG
- O7DGFzqfkawTg==
-Date: Mon, 14 Oct 2024 17:31:48 +0200
+ b=ZCAMPOq1xwMFFeNtGD+Ix+ltYmgZGkSp1CpSGqDevimf5uT8LGYQSxlrK6TPPkiqI
+ 8tsYr9OUIXGGOIH6UgMDXV7/GdgYN8xHP4tQcHSNQjfE8wBzOAvcVNZaAyyzEemfbC
+ Zu8R+AapzCvNfIYKEj65A4jDi0DMZMrYZOOxzgRBGu5TXP+r6we7kx9iH0AZ4on9A4
+ JYvVVXEcJbpZUy7BiNVk3JKha0hZejdXEAn4OGOKmPnmPFg1J8cqDXy7VlHh/Z5Va/
+ 9Cy+n9y6gm4QNF4zpotipj692vA6v51aOjbPZHiAGQcC13LAZ0uXe8CqiFMllZ2Ixk
+ NfVILgsLrpO+A==
+Date: Mon, 14 Oct 2024 18:18:26 +0200
 From: Danilo Krummrich <dakr@kernel.org>
 To: Zhi Wang <zhiw@nvidia.com>
-Cc: "nouveau@lists.freedesktop.org" <nouveau@lists.freedesktop.org>,
- "airlied@gmail.com" <airlied@gmail.com>,
- "daniel@ffwll.ch" <daniel@ffwll.ch>,
- Ben Skeggs <bskeggs@nvidia.com>, Andy Currid <ACurrid@nvidia.com>,
- Neo Jia <cjia@nvidia.com>, Surath Mitra <smitra@nvidia.com>,
- Ankit Agrawal <ankita@nvidia.com>, Aniket Agashe <aniketa@nvidia.com>,
- Kirti Wankhede <kwankhede@nvidia.com>,
- "Tarun Gupta (SW-GPU)" <targupta@nvidia.com>,
- "zhiwang@kernel.org" <zhiwang@kernel.org>,
- Karol Herbst <kherbst@redhat.com>, Lyude Paul <lyude@redhat.com>,
- Danilo Krummrich <dakr@redhat.com>
-Subject: Re: [PATCH 2/3] nvkm/gsp: correctly calculate the available space of
- the GSP cmdq buffer
-Message-ID: <Zw05ZN5khnZLCW7x@pollux>
+Cc: nouveau@lists.freedesktop.org, airlied@gmail.com, daniel@ffwll.ch,
+ bskeggs@nvidia.com, acurrid@nvidia.com, cjia@nvidia.com,
+ smitra@nvidia.com, ankita@nvidia.com, aniketa@nvidia.com,
+ kwankhede@nvidia.com, targupta@nvidia.com, zhiwang@kernel.org
+Subject: Re: [PATCH 3/3] nvkm/gsp: handle the return of large RPC
+Message-ID: <Zw1EUlV6QvaxnCam@pollux>
 References: <20240922130709.1946893-1-zhiw@nvidia.com>
- <20240922130709.1946893-3-zhiw@nvidia.com>
- <ZwAi6oMlVoa82hb2@pollux>
- <00670266-2259-4593-a575-e32f814119f1@nvidia.com>
+ <20240922130709.1946893-4-zhiw@nvidia.com>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
-In-Reply-To: <00670266-2259-4593-a575-e32f814119f1@nvidia.com>
+In-Reply-To: <20240922130709.1946893-4-zhiw@nvidia.com>
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -70,234 +59,309 @@ List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-On Sun, Oct 13, 2024 at 06:27:32PM +0000, Zhi Wang wrote:
-> On 04/10/2024 20.16, Danilo Krummrich wrote:
-> > External email: Use caution opening links or attachments
-> >=20
-> >=20
->=20
-> Hey Danilo. I am just back from my vacation. Sorry for the delay. See my=
-=20
-> comments below.
+On Sun, Sep 22, 2024 at 06:07:09AM -0700, Zhi Wang wrote:
+> The max RPC size is 16 pages (including the RPC header). To send an RPC
+> larger than 16 pages, nvkm should split it into multiple RPCs and send
+> it accordingly. The first of the split RPCs has the expected function
+> number, while the rest of the split RPCs are sent with function number
+> as NV_VGPU_MSG_FUNCTION_CONTINUATION_RECORD. GSP will consume the split
+> RPCs from the cmdq and always write the result back to the msgq. The
+> result is also formed as split RPCs.
+> 
+> However, NVKM is able to send split RPC when dealing with large RPCs,
+> but totally not aware of handling the return of the large RPCs, which
+> are the split RPC in the msgq. Thus, it keeps dumping the unknown RPC
+> messages from msgq, which is actually CONTINUATION_RECORD message,
+> discard them unexpectly. Thus, the caller will not be able to consume
+> the result from GSP.
+> 
+> Introduce the handling of split RPCs on the msgq path. Slightly
+> re-factor the low-level part of receiving RPCs from the msgq, RPC
+> vehicle handling to merge the split RPCs back into a large RPC before
+> handling it to the upper level. Thus, the upper-level of RPC APIs don't
+> need to be heavily changed.
+> 
+> Signed-off-by: Zhi Wang <zhiw@nvidia.com>
+> ---
+>  .../gpu/drm/nouveau/nvkm/subdev/gsp/r535.c    | 172 ++++++++++++------
+>  1 file changed, 121 insertions(+), 51 deletions(-)
+> 
+> diff --git a/drivers/gpu/drm/nouveau/nvkm/subdev/gsp/r535.c b/drivers/gpu/drm/nouveau/nvkm/subdev/gsp/r535.c
+> index 49721935013b..ec4ab732997a 100644
+> --- a/drivers/gpu/drm/nouveau/nvkm/subdev/gsp/r535.c
+> +++ b/drivers/gpu/drm/nouveau/nvkm/subdev/gsp/r535.c
+> @@ -72,6 +72,21 @@ struct r535_gsp_msg {
+>  
+>  #define GSP_MSG_HDR_SIZE offsetof(struct r535_gsp_msg, data)
+>  
+> +struct nvfw_gsp_rpc {
+> +	u32 header_version;
+> +	u32 signature;
+> +	u32 length;
+> +	u32 function;
+> +	u32 rpc_result;
+> +	u32 rpc_result_private;
+> +	u32 sequence;
+> +	union {
+> +		u32 spare;
+> +		u32 cpuRmGfid;
+> +	};
+> +	u8  data[];
+> +};
+> +
+>  static int
+>  r535_rpc_status_to_errno(uint32_t rpc_status)
+>  {
+> @@ -87,12 +102,12 @@ r535_rpc_status_to_errno(uint32_t rpc_status)
+>  }
+>  
+>  static void *
+> -r535_gsp_msgq_wait(struct nvkm_gsp *gsp, u32 repc, u32 *prepc, int *ptime)
+> +r535_gsp_msgq_wait(struct nvkm_gsp *gsp, u32 repc, u32 *prepc, int *ptime,
+> +		   u8 *msg, bool skip_copy_rpc_header)
 
-Hi Zhi. No worries, just so you know I may have a bit of delay in the coming
-weeks too -- vacation, relocation...
+This function now has very specific expectations on the memory that has to be
+allocated by the caller, which is dependent on multiple factors, i.e.
+`skip_copy_rpc_header`, `prepc`, etc. and also exposes the burden to free the
+memory on failure to the caller.
 
->=20
-> > On Sun, Sep 22, 2024 at 06:07:08AM -0700, Zhi Wang wrote:
-> >> r535_gsp_cmdq_push() waits for the available page in the GSP cmdq
-> >> buffer when handling a large RPC request. When it sees at least one
-> >> available page in the cmdq, it quits the waiting with the amount of
-> >> free buffer pages in the queue.
-> >>
-> >> Unfortunately, it always takes the [write pointer, buf_size) as
-> >> available buffer pages before rolling back and wrongly calculates the
-> >> size of the data should be copied. Thus, it can overwrite the RPC
-> >> request that GSP is currently reading, which causes GSP hang due
-> >> to corrupted RPC request:
-> >>
-> >> [  549.209389] ------------[ cut here ]------------
-> >> [  549.214010] WARNING: CPU: 8 PID: 6314 at drivers/gpu/drm/nouveau/nv=
-km/subdev/gsp/r535.c:116 r535_gsp_msgq_wait+0xd0/0x190 [nvkm]
-> >> [  549.225678] Modules linked in: nvkm(E+) gsp_log(E) snd_seq_dummy(E)=
- snd_hrtimer(E) snd_seq(E) snd_timer(E) snd_seq_device(E) snd(E) soundcore(=
-E) rfkill(E) qrtr(E) vfat(E) fat(E) ipmi_ssif(E) amd_atl(E) intel_rapl_msr(=
-E) intel_rapl_common(E) mlx5_ib(E) amd64_edac(E) edac_mce_amd(E) kvm_amd(E)=
- ib_uverbs(E) kvm(E) ib_core(E) acpi_ipmi(E) ipmi_si(E) mxm_wmi(E) ipmi_dev=
-intf(E) rapl(E) i2c_piix4(E) wmi_bmof(E) joydev(E) ptdma(E) acpi_cpufreq(E)=
- k10temp(E) pcspkr(E) ipmi_msghandler(E) xfs(E) libcrc32c(E) ast(E) i2c_alg=
-o_bit(E) crct10dif_pclmul(E) drm_shmem_helper(E) nvme_tcp(E) crc32_pclmul(E=
-) ahci(E) drm_kms_helper(E) libahci(E) nvme_fabrics(E) crc32c_intel(E) nvme=
-(E) cdc_ether(E) mlx5_core(E) nvme_core(E) usbnet(E) drm(E) libata(E) ccp(E=
-) ghash_clmulni_intel(E) mii(E) t10_pi(E) mlxfw(E) sp5100_tco(E) psample(E)=
- pci_hyperv_intf(E) wmi(E) dm_multipath(E) sunrpc(E) dm_mirror(E) dm_region=
-_hash(E) dm_log(E) dm_mod(E) be2iscsi(E) bnx2i(E) cnic(E) uio(E) cxgb4i(E) =
-cxgb4(E) tls(E) libcxgbi(E) libcxgb(E) qla4xxx(E)
-> >> [  549.225752]  iscsi_boot_sysfs(E) iscsi_tcp(E) libiscsi_tcp(E) libis=
-csi(E) scsi_transport_iscsi(E) fuse(E) [last unloaded: gsp_log(E)]
-> >> [  549.326293] CPU: 8 PID: 6314 Comm: insmod Tainted: G            E  =
-    6.9.0-rc6+ #1
-> >> [  549.334039] Hardware name: ASRockRack 1U1G-MILAN/N/ROMED8-NL, BIOS =
-L3.12E 09/06/2022
-> >> [  549.341781] RIP: 0010:r535_gsp_msgq_wait+0xd0/0x190 [nvkm]
-> >> [  549.347343] Code: 08 00 00 89 da c1 e2 0c 48 8d ac 11 00 10 00 00 4=
-8 8b 0c 24 48 85 c9 74 1f c1 e0 0c 4c 8d 6d 30 83 e8 30 89 01 e9 68 ff ff f=
-f <0f> 0b 49 c7 c5 92 ff ff ff e9 5a ff ff ff ba ff ff ff ff be c0 0c
-> >> [  549.366090] RSP: 0018:ffffacbccaaeb7d0 EFLAGS: 00010246
-> >> [  549.371315] RAX: 0000000000000000 RBX: 0000000000000012 RCX: 000000=
-0000923e28
-> >> [  549.378451] RDX: 0000000000000000 RSI: 0000000055555554 RDI: ffffac=
-bccaaeb730
-> >> [  549.385590] RBP: 0000000000000001 R08: ffff8bd14d235f70 R09: ffff8b=
-d14d235f70
-> >> [  549.392721] R10: 0000000000000002 R11: ffff8bd14d233864 R12: 000000=
-0000000020
-> >> [  549.399854] R13: ffffacbccaaeb818 R14: 0000000000000020 R15: ffff8b=
-b298c67000
-> >> [  549.406988] FS:  00007f5179244740(0000) GS:ffff8bd14d200000(0000) k=
-nlGS:0000000000000000
-> >> [  549.415076] CS:  0010 DS: 0000 ES: 0000 CR0: 0000000080050033
-> >> [  549.420829] CR2: 00007fa844000010 CR3: 00000001567dc005 CR4: 000000=
-0000770ef0
-> >> [  549.427963] PKRU: 55555554
-> >> [  549.430672] Call Trace:
-> >> [  549.433126]  <TASK>
-> >> [  549.435233]  ? __warn+0x7f/0x130
-> >> [  549.438473]  ? r535_gsp_msgq_wait+0xd0/0x190 [nvkm]
-> >> [  549.443426]  ? report_bug+0x18a/0x1a0
-> >> [  549.447098]  ? handle_bug+0x3c/0x70
-> >> [  549.450589]  ? exc_invalid_op+0x14/0x70
-> >> [  549.454430]  ? asm_exc_invalid_op+0x16/0x20
-> >> [  549.458619]  ? r535_gsp_msgq_wait+0xd0/0x190 [nvkm]
-> >> [  549.463565]  r535_gsp_msg_recv+0x46/0x230 [nvkm]
-> >> [  549.468257]  r535_gsp_rpc_push+0x106/0x160 [nvkm]
-> >> [  549.473033]  r535_gsp_rpc_rm_ctrl_push+0x40/0x130 [nvkm]
-> >> [  549.478422]  nvidia_grid_init_vgpu_types+0xbc/0xe0 [nvkm]
-> >> [  549.483899]  nvidia_grid_init+0xb1/0xd0 [nvkm]
-> >> [  549.488420]  ? srso_alias_return_thunk+0x5/0xfbef5
-> >> [  549.493213]  nvkm_device_pci_probe+0x305/0x420 [nvkm]
-> >> [  549.498338]  local_pci_probe+0x46/0xa0
-> >> [  549.502096]  pci_call_probe+0x56/0x170
-> >> [  549.505851]  pci_device_probe+0x79/0xf0
-> >> [  549.509690]  ? driver_sysfs_add+0x59/0xc0
-> >> [  549.513702]  really_probe+0xd9/0x380
-> >> [  549.517282]  __driver_probe_device+0x78/0x150
-> >> [  549.521640]  driver_probe_device+0x1e/0x90
-> >> [  549.525746]  __driver_attach+0xd2/0x1c0
-> >> [  549.529594]  ? __pfx___driver_attach+0x10/0x10
-> >> [  549.534045]  bus_for_each_dev+0x78/0xd0
-> >> [  549.537893]  bus_add_driver+0x112/0x210
-> >> [  549.541750]  driver_register+0x5c/0x120
-> >> [  549.545596]  ? __pfx_nvkm_init+0x10/0x10 [nvkm]
-> >> [  549.550224]  do_one_initcall+0x44/0x300
-> >> [  549.554063]  ? do_init_module+0x23/0x240
-> >> [  549.557989]  do_init_module+0x64/0x240
-> >>
-> >> Calculate the available buffer page before rolling back based on
-> >> the result from the waiting.
-> >=20
-> > It looks like you hit this one while working on the VFIO stuff too. So,=
- same
-> > question here,
->=20
-> Yes. But theses bugs are not specific to vGPU because two-page GSP RPC=20
-> are part of valid RPC vehicle format of GSP RPC protocol family. The=20
-> fixes are for a better sophisticated GSP RPC handling in Nouveau. Other=
-=20
-> GSP RPC can use this vehicle format as well.
+Besides that, I think the name `r535_gsp_msgq_wait` becomes misleading, it has
+quite some more semantics than just that meanwhile.
 
-Yeah, that's fine. I just try to figure out whether we need those patches in
--fixes, or if we can take them through -next.
+I think shouldn't open-code all this, instead I think it would be better to wrap
+all relevant arguments in a dedicated state structure that explains all the
+different cases and conditionals, and build a properly documented state machine
+around it.
 
->=20
-> can we hit this case with "vanilla nouveau"?
->=20
-> Not yet. But introducing new GSP RPCs that using this vehicle format=20
-> (related to vGPU/not-related to vGPU) in nouveau might hit this bug later.
-
-Great, so we can take all three through -next, right?
-
->=20
-> Out of curiostiy, do we have any unit-test package or flows to test the=
-=20
-> patches? Like CIs.
-
-There's igt_gpu_tools [1], but unfortunately Nouveau has practically no test
-cases.
-
-> I am using the Phoronix test suite in the ubuntu with=20
-> a PPA repo that has latest mesa/drm userspace libraries.
-
-I typically use Vulkan CTS [2] and some manual smoke testing for the KMS pa=
-rts.
-
-However, for the long term I definitely want to get to have proper (unit) t=
-ests
-additionally.
-
-For Nova we can easily use KUnit tests through examples in the code
-documentation. Additionally, I could think of something analogous to
-igt_gpu_tools I already played around with for Nova [3].
-
-[1] https://gitlab.freedesktop.org/drm/igt-gpu-tools
-[2] https://github.com/KhronosGroup/VK-GL-CTS
-[3] https://gitlab.freedesktop.org/dakr/drm-test
-
->=20
-> It would be nice that I can align with others. :)
->=20
-> Thanks,
-> Zhi.
-> >=20
->=20
-> >>
-> >> Fixes: 176fdcbddfd28 ("drm/nouveau/gsp/r535: add support for booting G=
-SP-RM")
-> >=20
-> > Same as in patch 1.
-> >=20
-> >> Cc: Ben Skeggs <bskeggs@nvidia.com>
-> >> Cc: Karol Herbst <kherbst@redhat.com>
-> >> Cc: Lyude Paul <lyude@redhat.com>
-> >> Cc: Danilo Krummrich <dakr@redhat.com>
-> >> Cc: David Airlie <airlied@gmail.com>
-> >> Signed-off-by: Zhi Wang <zhiw@nvidia.com>
-> >> ---
-> >>   drivers/gpu/drm/nouveau/nvkm/subdev/gsp/r535.c | 8 ++++++--
-> >>   1 file changed, 6 insertions(+), 2 deletions(-)
-> >>
-> >> diff --git a/drivers/gpu/drm/nouveau/nvkm/subdev/gsp/r535.c b/drivers/=
-gpu/drm/nouveau/nvkm/subdev/gsp/r535.c
-> >> index 736cde1987d0..49721935013b 100644
-> >> --- a/drivers/gpu/drm/nouveau/nvkm/subdev/gsp/r535.c
-> >> +++ b/drivers/gpu/drm/nouveau/nvkm/subdev/gsp/r535.c
-> >> @@ -161,7 +161,7 @@ r535_gsp_cmdq_push(struct nvkm_gsp *gsp, void *arg=
-v)
-> >>        u64 *end;
-> >>        u64 csum =3D 0;
-> >>        int free, time =3D 1000000;
-> >> -     u32 wptr, size;
-> >> +     u32 wptr, size, step;
-> >>        u32 off =3D 0;
-> >>
-> >>        argc =3D ALIGN(GSP_MSG_HDR_SIZE + argc, GSP_PAGE_SIZE);
-> >> @@ -178,11 +178,13 @@ r535_gsp_cmdq_push(struct nvkm_gsp *gsp, void *a=
-rgv)
-> >>        cmd->checksum =3D upper_32_bits(csum) ^ lower_32_bits(csum);
-> >>
-> >>        wptr =3D *gsp->cmdq.wptr;
-> >> +
-> >=20
-> > Please remove the addition of empty lines here...
-> >=20
-> >>        do {
-> >>                do {
-> >>                        free =3D *gsp->cmdq.rptr + gsp->cmdq.cnt - wptr=
- - 1;
-> >>                        if (free >=3D gsp->cmdq.cnt)
-> >>                                free -=3D gsp->cmdq.cnt;
-> >> +
-> >=20
-> > and here.
-> >=20
-> >>                        if (free >=3D 1)
-> >>                                break;
-> >>
-> >> @@ -195,7 +197,9 @@ r535_gsp_cmdq_push(struct nvkm_gsp *gsp, void *arg=
-v)
-> >>                }
-> >>
-> >>                cqe =3D (void *)((u8 *)gsp->shm.cmdq.ptr + 0x1000 + wpt=
-r * 0x1000);
-> >> -             size =3D min_t(u32, argc, (gsp->cmdq.cnt - wptr) * GSP_P=
-AGE_SIZE);
-> >> +             step =3D min_t(u32, free, (gsp->cmdq.cnt - wptr));
-> >> +             size =3D min_t(u32, argc, step * GSP_PAGE_SIZE);
-> >> +
-> >>                memcpy(cqe, (u8 *)cmd + off, size);
-> >>
-> >>                wptr +=3D DIV_ROUND_UP(size, 0x1000);
-> >> --
-> >> 2.34.1
-> >>
->=20
+>  {
+>  	struct r535_gsp_msg *mqe;
+>  	u32 size, rptr = *gsp->msgq.rptr;
+>  	int used;
+> -	u8 *msg;
+>  	u32 len;
+>  
+>  	size = DIV_ROUND_UP(GSP_MSG_HDR_SIZE + repc, GSP_PAGE_SIZE);
+> @@ -123,13 +138,13 @@ r535_gsp_msgq_wait(struct nvkm_gsp *gsp, u32 repc, u32 *prepc, int *ptime)
+>  
+>  	size = ALIGN(repc + GSP_MSG_HDR_SIZE, GSP_PAGE_SIZE);
+>  
+> -	msg = kvmalloc(repc, GFP_KERNEL);
+> -	if (!msg)
+> -		return ERR_PTR(-ENOMEM);
+> -
+>  	len = ((gsp->msgq.cnt - rptr) * GSP_PAGE_SIZE) - sizeof(*mqe);
+>  	len = min_t(u32, repc, len);
+> -	memcpy(msg, mqe->data, len);
+> +	if (!skip_copy_rpc_header)
+> +		memcpy(msg, mqe->data, len);
+> +	else
+> +		memcpy(msg, mqe->data + sizeof(struct nvfw_gsp_rpc),
+> +		       len - sizeof(struct nvfw_gsp_rpc));
+>  
+>  	repc -= len;
+>  
+> @@ -145,10 +160,91 @@ r535_gsp_msgq_wait(struct nvkm_gsp *gsp, u32 repc, u32 *prepc, int *ptime)
+>  	return msg;
+>  }
+>  
+> +static void
+> +r535_gsp_msg_dump(struct nvkm_gsp *gsp, struct nvfw_gsp_rpc *msg, int lvl)
+> +{
+> +	if (gsp->subdev.debug >= lvl) {
+> +		nvkm_printk__(&gsp->subdev, lvl, info,
+> +			      "msg fn:%d len:0x%x/0x%zx res:0x%x resp:0x%x\n",
+> +			      msg->function, msg->length, msg->length - sizeof(*msg),
+> +			      msg->rpc_result, msg->rpc_result_private);
+> +		print_hex_dump(KERN_INFO, "msg: ", DUMP_PREFIX_OFFSET, 16, 1,
+> +			       msg->data, msg->length - sizeof(*msg), true);
+> +	}
+> +}
+> +
+>  static void *
+> -r535_gsp_msgq_recv(struct nvkm_gsp *gsp, u32 repc, int *ptime)
+> +r535_gsp_msgq_recv_continuation(struct nvkm_gsp *gsp, u32 *payload_size,
+> +				u8 *buf, int *ptime)
+>  {
+> -	return r535_gsp_msgq_wait(gsp, repc, NULL, ptime);
+> +	struct nvkm_subdev *subdev = &gsp->subdev;
+> +	struct nvfw_gsp_rpc *msg;
+> +	u32 size;
+> +
+> +	/* Peek next message */
+> +	msg = r535_gsp_msgq_wait(gsp, sizeof(*msg), &size, ptime, NULL,
+> +				 false);
+> +	if (IS_ERR_OR_NULL(msg))
+> +		return msg;
+> +
+> +	if (msg->function != NV_VGPU_MSG_FUNCTION_CONTINUATION_RECORD) {
+> +		nvkm_error(subdev, "Not a continuation of a large RPC\n");
+> +		r535_gsp_msg_dump(gsp, msg, NV_DBG_ERROR);
+> +		return ERR_PTR(-EIO);
+> +	}
+> +
+> +	*payload_size = msg->length - sizeof(*msg);
+> +	return r535_gsp_msgq_wait(gsp, msg->length, NULL, ptime, buf,
+> +				  true);
+> +}
+> +
+> +static void *
+> +r535_gsp_msgq_recv(struct nvkm_gsp *gsp, u32 msg_repc, u32 total_repc,
+> +		   int *ptime)
+> +{
+> +	struct nvfw_gsp_rpc *msg;
+> +	const u32 max_msg_size = (16 * 0x1000) - sizeof(struct r535_gsp_msg);
+> +	const u32 max_rpc_size = max_msg_size - sizeof(*msg);
+> +	u32 repc = total_repc;
+> +	u8 *buf, *next;
+> +
+> +	if (WARN_ON(msg_repc > max_msg_size))
+> +		return NULL;
+> +
+> +	buf = kvmalloc(max_t(u32, msg_repc, total_repc + sizeof(*msg)), GFP_KERNEL);
+> +	if (!buf)
+> +		return ERR_PTR(-ENOMEM);
+> +
+> +	msg = r535_gsp_msgq_wait(gsp, msg_repc, NULL, ptime, buf, false);
+> +	if (IS_ERR_OR_NULL(msg)) {
+> +		kfree(buf);
+> +		return msg;
+> +	}
+> +
+> +	if (total_repc <= max_rpc_size)
+> +		return buf;
+> +
+> +	next = buf;
+> +
+> +	next += msg_repc;
+> +	repc -= msg_repc - sizeof(*msg);
+> +
+> +	while (repc) {
+> +		struct nvfw_gsp_rpc *cont_msg;
+> +		u32 size;
+> +
+> +		cont_msg = r535_gsp_msgq_recv_continuation(gsp, &size, next,
+> +						      ptime);
+> +		if (IS_ERR_OR_NULL(cont_msg)) {
+> +			kfree(buf);
+> +			return cont_msg;
+> +		}
+> +		repc -= size;
+> +		next += size;
+> +	}
+> +
+> +	msg->length = total_repc + sizeof(*msg);
+> +	return buf;
+>  }
+>  
+>  static int
+> @@ -236,40 +332,12 @@ r535_gsp_cmdq_get(struct nvkm_gsp *gsp, u32 argc)
+>  	return cmd->data;
+>  }
+>  
+> -struct nvfw_gsp_rpc {
+> -	u32 header_version;
+> -	u32 signature;
+> -	u32 length;
+> -	u32 function;
+> -	u32 rpc_result;
+> -	u32 rpc_result_private;
+> -	u32 sequence;
+> -	union {
+> -		u32 spare;
+> -		u32 cpuRmGfid;
+> -	};
+> -	u8  data[];
+> -};
+> -
+>  static void
+>  r535_gsp_msg_done(struct nvkm_gsp *gsp, struct nvfw_gsp_rpc *msg)
+>  {
+>  	kvfree(msg);
+>  }
+>  
+> -static void
+> -r535_gsp_msg_dump(struct nvkm_gsp *gsp, struct nvfw_gsp_rpc *msg, int lvl)
+> -{
+> -	if (gsp->subdev.debug >= lvl) {
+> -		nvkm_printk__(&gsp->subdev, lvl, info,
+> -			      "msg fn:%d len:0x%x/0x%zx res:0x%x resp:0x%x\n",
+> -			      msg->function, msg->length, msg->length - sizeof(*msg),
+> -			      msg->rpc_result, msg->rpc_result_private);
+> -		print_hex_dump(KERN_INFO, "msg: ", DUMP_PREFIX_OFFSET, 16, 1,
+> -			       msg->data, msg->length - sizeof(*msg), true);
+> -	}
+> -}
+> -
+>  static struct nvfw_gsp_rpc *
+>  r535_gsp_msg_recv(struct nvkm_gsp *gsp, int fn, u32 repc)
+>  {
+> @@ -279,11 +347,11 @@ r535_gsp_msg_recv(struct nvkm_gsp *gsp, int fn, u32 repc)
+>  	u32 size;
+>  
+>  retry:
+> -	msg = r535_gsp_msgq_wait(gsp, sizeof(*msg), &size, &time);
+> +	msg = r535_gsp_msgq_wait(gsp, sizeof(*msg), &size, &time, NULL, false);
+>  	if (IS_ERR_OR_NULL(msg))
+>  		return msg;
+>  
+> -	msg = r535_gsp_msgq_recv(gsp, msg->length, &time);
+> +	msg = r535_gsp_msgq_recv(gsp, msg->length, repc, &time);
+>  	if (IS_ERR_OR_NULL(msg))
+>  		return msg;
+>  
+> @@ -736,6 +804,7 @@ r535_gsp_rpc_push(struct nvkm_gsp *gsp, void *argv, bool wait, u32 repc)
+>  	mutex_lock(&gsp->cmdq.mutex);
+>  	if (rpc_size > max_rpc_size) {
+>  		const u32 fn = rpc->function;
+> +		u32 remain_rpc_size = rpc_size;
+>  
+>  		/* Adjust length, and send initial RPC. */
+>  		rpc->length = sizeof(*rpc) + max_rpc_size;
+> @@ -746,11 +815,11 @@ r535_gsp_rpc_push(struct nvkm_gsp *gsp, void *argv, bool wait, u32 repc)
+>  			goto done;
+>  
+>  		argv += max_rpc_size;
+> -		rpc_size -= max_rpc_size;
+> +		remain_rpc_size -= max_rpc_size;
+>  
+>  		/* Remaining chunks sent as CONTINUATION_RECORD RPCs. */
+> -		while (rpc_size) {
+> -			u32 size = min(rpc_size, max_rpc_size);
+> +		while (remain_rpc_size) {
+> +			u32 size = min(remain_rpc_size, max_rpc_size);
+>  			void *next;
+>  
+>  			next = r535_gsp_rpc_get(gsp, NV_VGPU_MSG_FUNCTION_CONTINUATION_RECORD, size);
+> @@ -766,19 +835,20 @@ r535_gsp_rpc_push(struct nvkm_gsp *gsp, void *argv, bool wait, u32 repc)
+>  				goto done;
+>  
+>  			argv += size;
+> -			rpc_size -= size;
+> +			remain_rpc_size -= size;
+>  		}
+>  
+>  		/* Wait for reply. */
+> -		if (wait) {
+> -			rpc = r535_gsp_msg_recv(gsp, fn, repc);
+> -			if (!IS_ERR_OR_NULL(rpc))
+> +		rpc = r535_gsp_msg_recv(gsp, fn, rpc_size);
+> +		if (!IS_ERR_OR_NULL(rpc)) {
+> +			if (wait)
+>  				repv = rpc->data;
+> -			else
+> -				repv = rpc;
+> -		} else {
+> -			repv = NULL;
+> -		}
+> +			else {
+> +				nvkm_gsp_rpc_done(gsp, rpc);
+> +				repv = NULL;
+> +			}
+> +		} else
+> +			repv = wait ? rpc : NULL;
+>  	} else {
+>  		repv = r535_gsp_rpc_send(gsp, argv, wait, repc);
+>  	}
+> -- 
+> 2.34.1
+> 
