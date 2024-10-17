@@ -2,46 +2,48 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id E6A139A20F8
-	for <lists+nouveau@lfdr.de>; Thu, 17 Oct 2024 13:32:19 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id C27D19A20FC
+	for <lists+nouveau@lfdr.de>; Thu, 17 Oct 2024 13:32:51 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 30D2A10E7F1;
-	Thu, 17 Oct 2024 11:32:18 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 6FD4D10E7EE;
+	Thu, 17 Oct 2024 11:32:50 +0000 (UTC)
 Authentication-Results: gabe.freedesktop.org;
-	dkim=pass (1024-bit key; unprotected) header.d=linuxfoundation.org header.i=@linuxfoundation.org header.b="NQ8F11an";
+	dkim=pass (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="PViMFZho";
 	dkim-atps=neutral
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
 Received: from dfw.source.kernel.org (dfw.source.kernel.org [139.178.84.217])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 7CBF310E7F1
- for <nouveau@lists.freedesktop.org>; Thu, 17 Oct 2024 11:32:17 +0000 (UTC)
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 4216210E7EE
+ for <nouveau@lists.freedesktop.org>; Thu, 17 Oct 2024 11:32:49 +0000 (UTC)
 Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by dfw.source.kernel.org (Postfix) with ESMTP id 03D4C5C610A;
- Thu, 17 Oct 2024 11:32:12 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 6D5C6C4CEC5;
- Thu, 17 Oct 2024 11:32:15 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=linuxfoundation.org;
- s=korg; t=1729164736;
- bh=+x1CGAgYUGQhLPtP/ssxqmj1tTL8BqysxgsjWUS0PqU=;
+ by dfw.source.kernel.org (Postfix) with ESMTP id 39AC25C60EB;
+ Thu, 17 Oct 2024 11:32:44 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 8F670C4CEC3;
+ Thu, 17 Oct 2024 11:32:45 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+ s=k20201202; t=1729164768;
+ bh=r1IiSnAkYiS0NP/cyGmYsw7K91UXDo3rqnS7feSToCM=;
  h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
- b=NQ8F11an+8cIrI7iZVURy+g17MTjudyFtF/P6Kljd5xoyvE6cVrZwpirYffB1cNYC
- aIIAYFGz7BlJdO24hjFf/TiZlTh0cv8wJH22Sp3jAlK30El2ydhXk8VyUO0hiUpMYL
- eCid9bWGgOrMtQ7Yru8hLlhysQXCq+Vx27iXFIhY=
-Date: Thu, 17 Oct 2024 13:32:13 +0200
-From: Greg KH <gregkh@linuxfoundation.org>
+ b=PViMFZhoKibeY/qlUhuSHFSYXlBRSr17NW3Nrgwd9YF5wPav0Cb3bBnboqAWSikDS
+ nhEIBDiKWiDKimNbcGuiVcf4F/ApyL6zyp3aoUDyFICdcod5ho9WMwr+33DJU5reL/
+ 9PZCg2an4ZNQubAKd3SCCwQo51l+SRWrM0C9e7ikwo1903BHvL968osCa+FID/FWOh
+ HEulfEXIrCX3DttdF6TgFQOH6B85pqZIWBNQP23GJ/PE2zqPeDFlBd5S3Z9QK3kp6u
+ TnnON0QdfHO6R26onc+gW6oPF0yQbFHegmapmMn2prMgUfRVrS/9QOY3d3BP+kCkPC
+ 4MV80ku6aWLaQ==
+Date: Thu, 17 Oct 2024 13:32:42 +0200
+From: Danilo Krummrich <dakr@kernel.org>
 To: Zhi Wang <zhiw@nvidia.com>
 Cc: nouveau@lists.freedesktop.org, airlied@gmail.com, daniel@ffwll.ch,
- dakr@kernel.org, bskeggs@nvidia.com, acurrid@nvidia.com,
- cjia@nvidia.com, smitra@nvidia.com, ankita@nvidia.com,
- aniketa@nvidia.com, kwankhede@nvidia.com, targupta@nvidia.com,
- zhiwang@kernel.org
-Subject: Re: [PATCH] drm/nouveau/nvkm: refine the device SKU enum
-Message-ID: <2024101756-carving-registry-40ec@gregkh>
-References: <20241017112454.2524588-1-zhiw@nvidia.com>
+ bskeggs@nvidia.com, acurrid@nvidia.com, cjia@nvidia.com,
+ smitra@nvidia.com, ankita@nvidia.com, aniketa@nvidia.com,
+ kwankhede@nvidia.com, targupta@nvidia.com, zhiwang@kernel.org
+Subject: Re: [PATCH 0/3] NVKM GSP RPC fixes
+Message-ID: <ZxD12t-L_eDhaE33@pollux>
+References: <20241017071922.2518724-1-zhiw@nvidia.com>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
-In-Reply-To: <20241017112454.2524588-1-zhiw@nvidia.com>
+In-Reply-To: <20241017071922.2518724-1-zhiw@nvidia.com>
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -56,22 +58,42 @@ List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-On Thu, Oct 17, 2024 at 04:24:54AM -0700, Zhi Wang wrote:
-> NVKM uses a enum called "card_type" to represent the device SKU in the
-> code. Within the enum, each device SKU is represent like NV_10, AD100, etc.
+On Thu, Oct 17, 2024 at 12:19:19AM -0700, Zhi Wang wrote:
+> Hi folks:
 > 
-> Many concerns were raised due to over-short SKU enums can conflicts with
-> other local enums and a prefix is also required as an identifier of
-> namespace of a driver.
+> Here are some fixes of weird bugs I encountered when I was enabling vGPU [1] on
+> core-driver aka NVKM. They are exposed because of the new RPCs required by
+> vGPU.
 > 
-> Rename enum "card_type" to "sku". Add the prefix NVKM_DEVICE_ before each
-> device SKU inside the enum and some other coding format tweaks to make
-> checkpatch.pl happy.
+> For testing, I tried to run Uniengine Heaven[2] on my RTX 4060 for 8 hours and
+> the GL CTS runner[3] (commandline: ./cts-runner --type-gl40) from Khronos
+> without any problem.
 > 
-> No functional change is intended.
+> v2:
 > 
-> Signed-off-by: Zhi Wang <zhiw@nvidia.com>
+> - Remove the Fixes: tags as the vanilla nouveau aren't going to hit these bugs. (Danilo)
+> - Test the patchset on VK-GL-CTS. (Danilo)
+> - Remove the ambiguous empty line in PATCH 2. (Danilo)
+> - Rename the r535_gsp_msgq_wait to gsp_msgq_recv. (Danilo)
+> - Introduce a data structure to hold the params of gsp_msgq_recv(). (Danilo)
+> - Document the params and the states they are related to. (Danilo)
 
-Nice, thanks for doing this.
+When you send a v2, please make sure to pass `-v2` to `git format-patch`,
+otherwise it's hard to distinguish patch versions from their subject.
 
-Acked-by: Greg Kroah-Hartman <gregkh@linuxfoundation.org>
+> 
+> [1] https://lore.kernel.org/kvm/20240922124951.1946072-1-zhiw@nvidia.com/T/#t
+> [2] https://benchmark.unigine.com/heaven
+> [3] https://github.com/KhronosGroup/VK-GL-CTS
+> 
+> Zhi Wang (3):
+>   nvkm/gsp: correctly advance the read pointer of GSP message queue
+>   nvkm: correctly calculate the available space of the GSP cmdq buffer
+>   nvkm: handle the return of large RPC
+> 
+>  .../gpu/drm/nouveau/nvkm/subdev/gsp/r535.c    | 251 +++++++++++++-----
+>  1 file changed, 184 insertions(+), 67 deletions(-)
+> 
+> -- 
+> 2.34.1
+> 
