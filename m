@@ -2,68 +2,68 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id 0F7099A1B8A
-	for <lists+nouveau@lfdr.de>; Thu, 17 Oct 2024 09:19:46 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id B904B9A1B8B
+	for <lists+nouveau@lfdr.de>; Thu, 17 Oct 2024 09:19:47 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 661A810E7AA;
-	Thu, 17 Oct 2024 07:19:44 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id D430010E1D7;
+	Thu, 17 Oct 2024 07:19:45 +0000 (UTC)
 Authentication-Results: gabe.freedesktop.org;
-	dkim=pass (2048-bit key; unprotected) header.d=Nvidia.com header.i=@Nvidia.com header.b="g+9Rb43i";
+	dkim=pass (2048-bit key; unprotected) header.d=Nvidia.com header.i=@Nvidia.com header.b="W90A4R1v";
 	dkim-atps=neutral
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from NAM11-BN8-obe.outbound.protection.outlook.com
- (mail-bn8nam11on2054.outbound.protection.outlook.com [40.107.236.54])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 73A1F10E1D7
- for <nouveau@lists.freedesktop.org>; Thu, 17 Oct 2024 07:19:42 +0000 (UTC)
+Received: from NAM02-BN1-obe.outbound.protection.outlook.com
+ (mail-bn1nam02on2059.outbound.protection.outlook.com [40.107.212.59])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 3921010E1D7
+ for <nouveau@lists.freedesktop.org>; Thu, 17 Oct 2024 07:19:44 +0000 (UTC)
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=v+yd4xdiiCnOKDNEB2Nk3bRlxkZcncRo0tPU0wZ1iLeV3djEeiO2D9Pa7UvRUp8FHH1sZ6v69+H7smZ8gkSEBp+FPolbLnLXtOVlob0pWOFUl8Bp0VRdURMHNYyaoolC7nfYvlRGEc2d/KxPrDanNPiHWH3d8lv0MOKZg3o9H1E8DiKD5jZC9QnfM54XbbofWeVHaITzB/phOKpwAFjzXLEOhBDmEC0TDAXhhlOK8JVJL2fhHSztk7+fGxG+3FO/oLKvwGgsoiTtpJW2uabHivNaW0NA/66eAphEei7olKm6uEpVsiypnaRtuOvSztXEG6T22IqlgRDgsbuyMef55g==
+ b=c4AmdBUj1DUkCCOuHC8otriN4rjyZtG4wojvmbQsUQkKB5OFYS0OpqHn89v2E7vi/y2KFdDT0rQrLYrxc/HwzzpGEgxI8vjCgbj90otYvlSb1qd/xRsi32A6TLcIMJhBD6jQ6hDf8avWf0K/wLvHovdTtdIdjkxcf+5uBK6Yf719LB8869kOY2JMqTsYzRgWJo9p3ewmhhYpdfjFzXLuF9g+OeehVakvrAj7GMWRQSTfl81gxEMWqLumXKSRbqNwr5bl0Hd6BJimk0qZxSFmwTYH3lqftxBXYQMoP6D+xIyXLejUSYAkhGq8r84KKzndvb9pB5kopEtJq3+D+DWl8w==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
  s=arcselector10001;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=a1ubfkvZGlA/zDI2pdELtvcxaXFqSX75T19/P51CfDY=;
- b=vW6zypyb9Iix1Yio3u9SVWDN2TWgymJkIf3RFUBgFQ6rs8orrWB4jKigMuNHvWSg0R/bc3YOhqt//iAW/b6euaeI6CjtZiUs9m2ondSQe0ZgRPOOWFaqiVh4VVUC+EZQVRiCOM5KP80MJA5roNjNcPWZKtZ2jbcttEb+2RR6c9PKoXyAGmlUl7iSgMdij2b8/l2Zs7N84EayZ332DRA53ifzeSODRDitG9w1x27vb2zVG6kT1EWdnapRcB/wsTngbF7erCLXClcaScs5A9OBbPGujUBWGj+ObMQvi9FnhSvbLkMk3cYFd/6admrF19PkJDbEsx8ToWKP13bSJnboSw==
+ bh=P1+d9RBoeD4B5orYzVRxEQcCpuMLqArhUsUfnZTDrtA=;
+ b=DugCwDoN4yW/iyUYpKFKk+nJoHKPtnkxFuhjC00OegB1ObxLDlmqbbd/FIjeHeK4iVv1drvpAWvtUArsBrbw+6OjcEG3x1W8wE01f0N4ELMQwLS/Ct0y8jTmAbM1jyHWSNq+g21Bdjv0YqZYu8coO9PmSUjGy/hjbhB334I/Bt8IrDcDeAvMQV75GZMmGufDvrkawhb26BKIw9dQl4eMpxOb2xWtWxTkScMxgrkjSZJih8oJRrcWRBimlzqQUmJb2ovXGsOooQ0ZrHE90bka5C/Gzb6s8TPv9yZx+iG6UsTSQJJNXk5H3J1LrG5g5n8u93GFW9SKzNmAs/qlKHwQyA==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
- 216.228.117.161) smtp.rcpttodomain=lists.freedesktop.org
+ 216.228.117.160) smtp.rcpttodomain=lists.freedesktop.org
  smtp.mailfrom=nvidia.com; dmarc=pass (p=reject sp=reject pct=100) action=none
  header.from=nvidia.com; dkim=none (message not signed); arc=none (0)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=Nvidia.com;
  s=selector2;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=a1ubfkvZGlA/zDI2pdELtvcxaXFqSX75T19/P51CfDY=;
- b=g+9Rb43id+jMoOhX4FcgV9vcVFnRokGgfNSgDIXTxqaNUqmk3WSPnB6U7P74p/ZcKtKwh5a6LWphXACPRHX/baq4JuDMwz4+oJrkFtiXIcigIbvDmprqMy15no78QD+DTBlj52qhm/9DW9sdmfWW80lqA/Ew5WL9Nd7jPWAR9i96uzoLrf46F5nNkE49SZFDHqW2CiPjD2DA/10HZlhnq/VBTswP7+V0w7ZhEU51j9i78Qf0oVdcgO9pxn93Qe+Y2OH0QZgI5WBp9aWSbakBylACZPYWJTxYij04YacUK0NrImsgf6YrKoFLcdrLlGx/7qLQJ4UubvEalJZ2jhKNjQ==
-Received: from BY5PR13CA0017.namprd13.prod.outlook.com (2603:10b6:a03:180::30)
- by CY5PR12MB6372.namprd12.prod.outlook.com (2603:10b6:930:e::5) with
- Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.8048.27; Thu, 17 Oct
- 2024 07:19:39 +0000
-Received: from CO1PEPF000044F6.namprd21.prod.outlook.com
- (2603:10b6:a03:180:cafe::b4) by BY5PR13CA0017.outlook.office365.com
- (2603:10b6:a03:180::30) with Microsoft SMTP Server (version=TLS1_2,
+ bh=P1+d9RBoeD4B5orYzVRxEQcCpuMLqArhUsUfnZTDrtA=;
+ b=W90A4R1viY34294UGOqVtE89sj5Qqjs6+83Nkaj+J8+j+dyzQ/OGcRSWPDO3PHfuzPd+uXY+4H2OVunzTyHGmTEvBtYRCOZM2CGN3GZm+u/Vqgdwzb22+K76lKa52SkGMcYRKJVyrWvqgzVhT7Jiae9OxXRa5t90y5XJRo7d8hG8XZG+FEreL+bqOGGv+GnNdL7tM4b2H+JV9zSsZYiAkdza4kjkCB6RL4WOf/jFLVpSu5SCdGbsTHznOPQ8Fmw2ljx6KqLj7E/txOCZwbZhpub4jTcJXb4ZIruaUuyVoSYUlxZGGF/Cmi4PJH1Hwj1yYf+BccdVDG3SgHOjqXZmqQ==
+Received: from BN9PR03CA0665.namprd03.prod.outlook.com (2603:10b6:408:10e::10)
+ by PH0PR12MB8007.namprd12.prod.outlook.com (2603:10b6:510:28e::5)
+ with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.8069.19; Thu, 17 Oct
+ 2024 07:19:38 +0000
+Received: from BN2PEPF000044AC.namprd04.prod.outlook.com
+ (2603:10b6:408:10e:cafe::b0) by BN9PR03CA0665.outlook.office365.com
+ (2603:10b6:408:10e::10) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.8069.18 via Frontend
  Transport; Thu, 17 Oct 2024 07:19:38 +0000
-X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 216.228.117.161)
+X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 216.228.117.160)
  smtp.mailfrom=nvidia.com;
  dkim=none (message not signed)
  header.d=none;dmarc=pass action=none header.from=nvidia.com;
 Received-SPF: Pass (protection.outlook.com: domain of nvidia.com designates
- 216.228.117.161 as permitted sender) receiver=protection.outlook.com;
- client-ip=216.228.117.161; helo=mail.nvidia.com; pr=C
-Received: from mail.nvidia.com (216.228.117.161) by
- CO1PEPF000044F6.mail.protection.outlook.com (10.167.241.196) with Microsoft
+ 216.228.117.160 as permitted sender) receiver=protection.outlook.com;
+ client-ip=216.228.117.160; helo=mail.nvidia.com; pr=C
+Received: from mail.nvidia.com (216.228.117.160) by
+ BN2PEPF000044AC.mail.protection.outlook.com (10.167.243.107) with Microsoft
  SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.20.8093.1 via Frontend Transport; Thu, 17 Oct 2024 07:19:38 +0000
+ 15.20.8069.17 via Frontend Transport; Thu, 17 Oct 2024 07:19:38 +0000
 Received: from rnnvmail202.nvidia.com (10.129.68.7) by mail.nvidia.com
- (10.129.200.67) with Microsoft SMTP Server (version=TLS1_2,
+ (10.129.200.66) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.1544.4; Thu, 17 Oct
- 2024 00:19:26 -0700
+ 2024 00:19:27 -0700
 Received: from rnnvmail204.nvidia.com (10.129.68.6) by rnnvmail202.nvidia.com
  (10.129.68.7) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.1544.4; Thu, 17 Oct
  2024 00:19:26 -0700
 Received: from inno-linux.nvidia.com (10.127.8.13) by mail.nvidia.com
  (10.129.68.6) with Microsoft SMTP Server id 15.2.1544.4 via Frontend
- Transport; Thu, 17 Oct 2024 00:19:25 -0700
+ Transport; Thu, 17 Oct 2024 00:19:26 -0700
 From: Zhi Wang <zhiw@nvidia.com>
 To: <nouveau@lists.freedesktop.org>
 CC: <airlied@gmail.com>, <daniel@ffwll.ch>, <dakr@kernel.org>,
@@ -71,61 +71,63 @@ CC: <airlied@gmail.com>, <daniel@ffwll.ch>, <dakr@kernel.org>,
  <smitra@nvidia.com>, <ankita@nvidia.com>, <aniketa@nvidia.com>,
  <kwankhede@nvidia.com>, <targupta@nvidia.com>, <zhiw@nvidia.com>,
  <zhiwang@kernel.org>
-Subject: [PATCH 0/3] NVKM GSP RPC fixes
-Date: Thu, 17 Oct 2024 00:19:19 -0700
-Message-ID: <20241017071922.2518724-1-zhiw@nvidia.com>
+Subject: [PATCH 1/3] nvkm/gsp: correctly advance the read pointer of GSP
+ message queue
+Date: Thu, 17 Oct 2024 00:19:20 -0700
+Message-ID: <20241017071922.2518724-2-zhiw@nvidia.com>
 X-Mailer: git-send-email 2.34.1
+In-Reply-To: <20241017071922.2518724-1-zhiw@nvidia.com>
+References: <20241017071922.2518724-1-zhiw@nvidia.com>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+Content-Transfer-Encoding: quoted-printable
 Content-Type: text/plain
 X-NV-OnPremToCloud: ExternallySecured
 X-EOPAttributedMessage: 0
 X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: CO1PEPF000044F6:EE_|CY5PR12MB6372:EE_
-X-MS-Office365-Filtering-Correlation-Id: 9b677fed-2bb7-44e7-9e6b-08dcee7c0f86
+X-MS-TrafficTypeDiagnostic: BN2PEPF000044AC:EE_|PH0PR12MB8007:EE_
+X-MS-Office365-Filtering-Correlation-Id: 6525ec4c-d989-420d-c575-08dcee7c0f8c
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
 X-Microsoft-Antispam: BCL:0;
- ARA:13230040|1800799024|376014|36860700013|82310400026; 
-X-Microsoft-Antispam-Message-Info: =?us-ascii?Q?Y9nYwnku8+fgNXzvfCjpMqojiV3oVdHfHCLTTKty2SdOSTQWxRL2eSSiVlDK?=
- =?us-ascii?Q?edd2xciQX+TBYwnxzB2hA3lLbK8JF1bLopnxGnn4B0Ugri0uU9FgamlcyYjy?=
- =?us-ascii?Q?lXbzuyq+6oeioe3DUTblKA2FqJkqNcXIi0By0NAjlWdRzlZkYhv5yf+w/nRD?=
- =?us-ascii?Q?u7mDBoHKx4MVqKgR995ZwCGSiuRmkex3G2rX4UNjsnimc0jhVOZBhVVui6r9?=
- =?us-ascii?Q?Odnu1+nwrGNTmEZdv+LoXfCHOTMNkgdE20ZdFm/nVABPVLj9YJdh8XzKxzMD?=
- =?us-ascii?Q?k154GjSVcfS1MjyeyLt5XqlS82asX6yFhEvOeWDJ1zc7K7ZDJwn7aIKzNNSE?=
- =?us-ascii?Q?lsJrZo2C6OWnFasWfzEfceADArzVLBcxprhwVRqjRe/WbB231ie129uZXZ5Y?=
- =?us-ascii?Q?662DO7BYKEdDH26vEqanlKGLKU5s8DviN8zGQ3TdqczGRUB4PQ3DDtlaCGOR?=
- =?us-ascii?Q?/cVTtFb7ChCvWvxLl50i8rM4y5XY3jGR/+ksJkQ7I3A/p2vW8exCuoRt2x4p?=
- =?us-ascii?Q?VYhoRi3ItLfuHsGim6Ib4gBeYlORjfygwjZf96NgxyLG+sXkC1X2eFL8t10H?=
- =?us-ascii?Q?OU5eZFpLMsF8ebd0XemUBOEIjX6av0xHL3cjxDcHwS8nbjcr9RZWZzCrZkvO?=
- =?us-ascii?Q?8EqvaBYU556c5xcgR0Fhel2K8OuB5k8udckBoNt76sdK7xCYBQn4e0eS2f1N?=
- =?us-ascii?Q?OX2g91mAbkawqnllVrifhqNbCJ6JTRY0G0QwWYheBF+KbLwYw76+nnKOtCNl?=
- =?us-ascii?Q?bdOBsTa5x3891VnNjk5tSea7U/M29/J3HPnHsUat/6Mcq8aC5o/QdmsLz9UV?=
- =?us-ascii?Q?GVcT+yhd5ERpGlh31KwUJfOzfLL96yftVxGrM1vzkDmY1IWvZhDcgSwfAgNW?=
- =?us-ascii?Q?LKIzNnUa61aZ9A0YIHaPk8DLPoKdKih0qn/epZrpxdrv9UdW8DFSd0erQs1o?=
- =?us-ascii?Q?EbnTvJabbe5RX8LUQtnqB0e6LAitX7FhxmtZr62+aW7od/Bwn+YfU8itzXVt?=
- =?us-ascii?Q?GyKLoy5c7NHP2JamHC0GBRx6MksCRfXTZLOyw+XMQaXJ47xEzTudMAgtzsE2?=
- =?us-ascii?Q?s9km6REacvMxyTGRSSza2IO4b27suECfSBSewq90Lc3pXme+QYVEkd/sLEVo?=
- =?us-ascii?Q?7wqnL56dDck8/Uq499maZSLo/08rPN2P8mGaKfyiIadep+p5/eH/tsZA+/5K?=
- =?us-ascii?Q?2u/QP8tdvuPYf2zWMnFLRcA1fHCmntp3BzJ6OA9MNA4Mt3RSj0YLgG3RWVeT?=
- =?us-ascii?Q?nDco5dUJAkhfnsIJr3BeAJQuTSilBF/65uvF1Ypq9FIjggEx/KKfl2uh2h38?=
- =?us-ascii?Q?jlOvPITJNu+ZMSftqPKkGRPy45jU3ZOi/DxDnKctLBdAc2yUMmisoMjrFjnj?=
- =?us-ascii?Q?OOHvouPkYW5MK5D7dbokpN1H9xjHCZ8WHouD4dIq5s+sdERxwjktUQNpe693?=
- =?us-ascii?Q?uJ4jJ/Quhic=3D?=
-X-Forefront-Antispam-Report: CIP:216.228.117.161; CTRY:US; LANG:en; SCL:1; SRV:;
- IPV:NLI; SFV:NSPM; H:mail.nvidia.com; PTR:dc6edge2.nvidia.com; CAT:NONE;
- SFS:(13230040)(1800799024)(376014)(36860700013)(82310400026); DIR:OUT;
+ ARA:13230040|82310400026|36860700013|376014|1800799024; 
+X-Microsoft-Antispam-Message-Info: =?us-ascii?Q?W+EJKTSnLMSJkQcEy9whAKg4s+1wT3kRa17LTF14sGnILGpEpqvhQ4/hxVcl?=
+ =?us-ascii?Q?sl/80XahxRuq0N8YsmlSc6POKhjTpOhM0MDjhAtnMqii6SE8I9yqsKXsUhQd?=
+ =?us-ascii?Q?dv9vdGnz01bpbJdNb9nWAWczWjoDSaM+5Dz8qee+eRSdJhDul8/ut8yfu+U/?=
+ =?us-ascii?Q?n3TCwEDi28AWi1oIq4j79nAwu7n1Xc2ZgZmuzYjRN2PPMtl2DDdbmZofZh58?=
+ =?us-ascii?Q?gLVNCOkaFTULXY2OTqBpqfWVOgjr2NbQldWfe0cpEe1r1bvqqiHYgDS2zrjE?=
+ =?us-ascii?Q?b24akLowwqBHOkdzjIJ4A4REjHzlU1xspuEB7xdCoUALQ8slxRGKh2AwoDVD?=
+ =?us-ascii?Q?nxIlqj+oMNwjm6/5xhbfQgnlI9OZbQLvLt9vDRGJNwGSv4YOy9eLUhRJvB5q?=
+ =?us-ascii?Q?Sf8IthIDZZHnXGEpXR0RdTuiVa4g+TVTHeiRHxpgXoq3JUXRcfIVkpE9TIJ3?=
+ =?us-ascii?Q?fOHM7pim1kP2/7bNmfmuu2G3GTbZERPaabGC6kycswTWQmHGkxgPC/Klh6DT?=
+ =?us-ascii?Q?oTWQxT040ab9QXEAmfi11yyJzZyPPVGzANtO8x1RV0PJICIOsnyjXjPv20jp?=
+ =?us-ascii?Q?vItesjm0TV2YuOLjLZueVGC63tKSzWdrm/qcHQcGjq6mlF+Pf6wVVThfey4v?=
+ =?us-ascii?Q?4pOcVr2GHjwCnUE+oRrGXssIEameW63WDRug6NgxUwDJr1DRqL411gZ09aJe?=
+ =?us-ascii?Q?nwhRlWKN0Kxh1Th0iMwi3f7yU+IpV9vr57Uv2ibLj4k+mv129qRFvviMuD68?=
+ =?us-ascii?Q?dUhiSe0hXqiIymgllwM0ak8TEdL2Gt3ojH7NcyT42ItbFUZgh9wl1+H6mYhL?=
+ =?us-ascii?Q?gY6d/UWLtHREw8HZcuqbfGxCyQWi9OjlJ18rf+k9alfMN+eaSfy5c2PSs29p?=
+ =?us-ascii?Q?8gGuwGrKSic1LxoKl0ar/aCTQwkxAFkWEgSEoYsfDWpnCPHfRiuzDYSfwYgt?=
+ =?us-ascii?Q?uIwPBfKbJsLAAYoc5BVvgVtQBvZ77hdheGvQUEZ29vWQk2zoW6Dhvtn6andC?=
+ =?us-ascii?Q?KBgddxjAcH5IG/rEajNUunqQMoUO8OS2EIYTxMavadUY9e1zldfUd2CL1Ifv?=
+ =?us-ascii?Q?p7PoqvbnsTa85ZxhIwN7OmdJJSDP9r3UJIFBhHQZpzwKC7h8L9xK3rXotqmp?=
+ =?us-ascii?Q?QCz6TMRumKt/TcoUF88u09mkRflo6oropL2V70Wt53TuJfrC10hEreWC1dby?=
+ =?us-ascii?Q?rIcy/RPberLcp4Ih4+SJBwgcjh2L/N8swxG0vMq9RCWYUxFY7YxnUmr4MA1E?=
+ =?us-ascii?Q?Ds3i6lozENvkCV12AiNxj1ISusDVuu0/TFe5nzejo+22JXKNEhUItDitpQsB?=
+ =?us-ascii?Q?xE4t2dgQNWJVhljLrLndc0xjMtdaGN0C1LHDB6Yw6cI7ODhV2tSfrCr1QOm+?=
+ =?us-ascii?Q?cdRHavnhSOmL5C/0loSUiMKq1BPvHiJV2RL60Yc/298mDCeKtA=3D=3D?=
+X-Forefront-Antispam-Report: CIP:216.228.117.160; CTRY:US; LANG:en; SCL:1; SRV:;
+ IPV:NLI; SFV:NSPM; H:mail.nvidia.com; PTR:dc6edge1.nvidia.com; CAT:NONE;
+ SFS:(13230040)(82310400026)(36860700013)(376014)(1800799024); DIR:OUT;
  SFP:1101; 
 X-OriginatorOrg: Nvidia.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 17 Oct 2024 07:19:38.2041 (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: 9b677fed-2bb7-44e7-9e6b-08dcee7c0f86
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 17 Oct 2024 07:19:38.1975 (UTC)
+X-MS-Exchange-CrossTenant-Network-Message-Id: 6525ec4c-d989-420d-c575-08dcee7c0f8c
 X-MS-Exchange-CrossTenant-Id: 43083d15-7273-40c1-b7db-39efd9ccc17a
-X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=43083d15-7273-40c1-b7db-39efd9ccc17a; Ip=[216.228.117.161];
+X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=43083d15-7273-40c1-b7db-39efd9ccc17a; Ip=[216.228.117.160];
  Helo=[mail.nvidia.com]
-X-MS-Exchange-CrossTenant-AuthSource: CO1PEPF000044F6.namprd21.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthSource: BN2PEPF000044AC.namprd04.prod.outlook.com
 X-MS-Exchange-CrossTenant-AuthAs: Anonymous
 X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: CY5PR12MB6372
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: PH0PR12MB8007
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -140,37 +142,195 @@ List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-Hi folks:
+A GSP event message consists three parts: message header, RPC header,
+message body. GSP calculates the number of pages to write from the
+total size of a GSP message. This behavior can be observed from the
+movement of the write pointer.
 
-Here are some fixes of weird bugs I encountered when I was enabling vGPU [1] on
-core-driver aka NVKM. They are exposed because of the new RPCs required by
-vGPU.
+However, nvkm takes only the size of RPC header and message body as
+the message size when advancing the read pointer. When handling a
+two-page GSP message in the non rollback case, It wrongly takes the
+message body of the previous message as the message header of the next
+message. As the "message length" tends to be zero, in the calculation of
+size needs to be copied (0 - size of (message header)), the size needs to
+be copied will be "0xffffffxx". It also triggers a kernel panic due to a
+NULL pointer error.
 
-For testing, I tried to run Uniengine Heaven[2] on my RTX 4060 for 8 hours and
-the GL CTS runner[3] (commandline: ./cts-runner --type-gl40) from Khronos
-without any problem.
+[  547.614102] msg: 00000f90: ff ff ff ff ff ff ff ff 40 d7 18 fb 8b 00 00 =
+00  ........@.......
+[  547.622533] msg: 00000fa0: 00 00 00 00 ff ff ff ff ff ff ff ff 00 00 00 =
+00  ................
+[  547.630965] msg: 00000fb0: ff ff ff ff ff ff ff ff 00 00 00 00 ff ff ff =
+ff  ................
+[  547.639397] msg: 00000fc0: ff ff ff ff 00 00 00 00 ff ff ff ff ff ff ff =
+ff  ................
+[  547.647832] nvkm 0000:c1:00.0: gsp: peek msg rpc fn:0 len:0x0/0xffffffff=
+ffffffe0
+[  547.655225] nvkm 0000:c1:00.0: gsp: get msg rpc fn:0 len:0x0/0xfffffffff=
+fffffe0
+[  547.662532] BUG: kernel NULL pointer dereference, address: 0000000000000=
+020
+[  547.669485] #PF: supervisor read access in kernel mode
+[  547.674624] #PF: error_code(0x0000) - not-present page
+[  547.679755] PGD 0 P4D 0
+[  547.682294] Oops: 0000 [#1] PREEMPT SMP NOPTI
+[  547.686643] CPU: 22 PID: 322 Comm: kworker/22:1 Tainted: G            E =
+     6.9.0-rc6+ #1
+[  547.694893] Hardware name: ASRockRack 1U1G-MILAN/N/ROMED8-NL, BIOS L3.12=
+E 09/06/2022
+[  547.702626] Workqueue: events r535_gsp_msgq_work [nvkm]
+[  547.707921] RIP: 0010:r535_gsp_msg_recv+0x87/0x230 [nvkm]
+[  547.713375] Code: 00 8b 70 08 48 89 e1 31 d2 4c 89 f7 e8 12 f5 ff ff 48 =
+89 c5 48 85 c0 0f 84 cf 00 00 00 48 81 fd 00 f0 ff ff 0f 87 c4 00 00 00 <8b=
+> 55 10 41 8b 46 30 85 d2 0f 85 f6 00 00 00 83 f8 04 76 10 ba 05
+[  547.732119] RSP: 0018:ffffabe440f87e10 EFLAGS: 00010203
+[  547.737335] RAX: 0000000000000010 RBX: 0000000000000008 RCX: 00000000000=
+0003f
+[  547.744461] RDX: 0000000000000000 RSI: ffffabe4480a8030 RDI: 00000000000=
+00010
+[  547.751585] RBP: 0000000000000010 R08: 0000000000000000 R09: ffffabe440f=
+87bb0
+[  547.758707] R10: ffffabe440f87dc8 R11: 0000000000000010 R12: 00000000000=
+00000
+[  547.765834] R13: 0000000000000000 R14: ffff9351df1e5000 R15: 00000000000=
+00000
+[  547.772958] FS:  0000000000000000(0000) GS:ffff93708eb00000(0000) knlGS:=
+0000000000000000
+[  547.781035] CS:  0010 DS: 0000 ES: 0000 CR0: 0000000080050033
+[  547.786771] CR2: 0000000000000020 CR3: 00000003cc220002 CR4: 00000000007=
+70ef0
+[  547.793896] PKRU: 55555554
+[  547.796600] Call Trace:
+[  547.799046]  <TASK>
+[  547.801152]  ? __die+0x20/0x70
+[  547.804211]  ? page_fault_oops+0x75/0x170
+[  547.808221]  ? print_hex_dump+0x100/0x160
+[  547.812226]  ? exc_page_fault+0x64/0x150
+[  547.816152]  ? asm_exc_page_fault+0x22/0x30
+[  547.820341]  ? r535_gsp_msg_recv+0x87/0x230 [nvkm]
+[  547.825184]  r535_gsp_msgq_work+0x42/0x50 [nvkm]
+[  547.829845]  process_one_work+0x196/0x3d0
+[  547.833861]  worker_thread+0x2fc/0x410
+[  547.837613]  ? __pfx_worker_thread+0x10/0x10
+[  547.841885]  kthread+0xdf/0x110
+[  547.845031]  ? __pfx_kthread+0x10/0x10
+[  547.848775]  ret_from_fork+0x30/0x50
+[  547.852354]  ? __pfx_kthread+0x10/0x10
+[  547.856097]  ret_from_fork_asm+0x1a/0x30
+[  547.860019]  </TASK>
+[  547.862208] Modules linked in: nvkm(E) gsp_log(E) snd_seq_dummy(E) snd_h=
+rtimer(E) snd_seq(E) snd_timer(E) snd_seq_device(E) snd(E) soundcore(E) rfk=
+ill(E) qrtr(E) vfat(E) fat(E) ipmi_ssif(E) amd_atl(E) intel_rapl_msr(E) int=
+el_rapl_common(E) amd64_edac(E) mlx5_ib(E) edac_mce_amd(E) kvm_amd(E) ib_uv=
+erbs(E) kvm(E) ib_core(E) acpi_ipmi(E) ipmi_si(E) ipmi_devintf(E) mxm_wmi(E=
+) joydev(E) rapl(E) ptdma(E) i2c_piix4(E) acpi_cpufreq(E) wmi_bmof(E) pcspk=
+r(E) k10temp(E) ipmi_msghandler(E) xfs(E) libcrc32c(E) ast(E) i2c_algo_bit(=
+E) drm_shmem_helper(E) crct10dif_pclmul(E) drm_kms_helper(E) ahci(E) crc32_=
+pclmul(E) nvme_tcp(E) libahci(E) nvme(E) crc32c_intel(E) nvme_fabrics(E) cd=
+c_ether(E) nvme_core(E) usbnet(E) mlx5_core(E) ghash_clmulni_intel(E) drm(E=
+) libata(E) ccp(E) mii(E) t10_pi(E) mlxfw(E) sp5100_tco(E) psample(E) pci_h=
+yperv_intf(E) wmi(E) dm_multipath(E) sunrpc(E) dm_mirror(E) dm_region_hash(=
+E) dm_log(E) dm_mod(E) be2iscsi(E) bnx2i(E) cnic(E) uio(E) cxgb4i(E) cxgb4(=
+E) tls(E) libcxgbi(E) libcxgb(E) qla4xxx(E)
+[  547.862283]  iscsi_boot_sysfs(E) iscsi_tcp(E) libiscsi_tcp(E) libiscsi(E=
+) scsi_transport_iscsi(E) fuse(E) [last unloaded: gsp_log(E)]
+[  547.962691] CR2: 0000000000000020
+[  547.966003] ---[ end trace 0000000000000000 ]---
+[  549.012012] clocksource: Long readout interval, skipping watchdog check:=
+ cs_nsec: 1370499158 wd_nsec: 1370498904
+[  549.043676] pstore: backend (erst) writing error (-28)
+[  549.050924] RIP: 0010:r535_gsp_msg_recv+0x87/0x230 [nvkm]
+[  549.056389] Code: 00 8b 70 08 48 89 e1 31 d2 4c 89 f7 e8 12 f5 ff ff 48 =
+89 c5 48 85 c0 0f 84 cf 00 00 00 48 81 fd 00 f0 ff ff 0f 87 c4 00 00 00 <8b=
+> 55 10 41 8b 46 30 85 d2 0f 85 f6 00 00 00 83 f8 04 76 10 ba 05
+[  549.075138] RSP: 0018:ffffabe440f87e10 EFLAGS: 00010203
+[  549.080361] RAX: 0000000000000010 RBX: 0000000000000008 RCX: 00000000000=
+0003f
+[  549.087484] RDX: 0000000000000000 RSI: ffffabe4480a8030 RDI: 00000000000=
+00010
+[  549.094609] RBP: 0000000000000010 R08: 0000000000000000 R09: ffffabe440f=
+87bb0
+[  549.101733] R10: ffffabe440f87dc8 R11: 0000000000000010 R12: 00000000000=
+00000
+[  549.108857] R13: 0000000000000000 R14: ffff9351df1e5000 R15: 00000000000=
+00000
+[  549.115982] FS:  0000000000000000(0000) GS:ffff93708eb00000(0000) knlGS:=
+0000000000000000
+[  549.124061] CS:  0010 DS: 0000 ES: 0000 CR0: 0000000080050033
+[  549.129807] CR2: 0000000000000020 CR3: 00000003cc220002 CR4: 00000000007=
+70ef0
+[  549.136940] PKRU: 55555554
+[  549.139653] Kernel panic - not syncing: Fatal exception
+[  549.145054] Kernel Offset: 0x18c00000 from 0xffffffff81000000 (relocatio=
+n range: 0xffffffff80000000-0xffffffffbfffffff)
+[  549.165074] ---[ end Kernel panic - not syncing: Fatal exception ]---
 
-v2:
+Also, nvkm wrongly advances the read pointer when handling a two-page GSP
+message in the rollback case. In the rollback case, the GSP message will
+be copied in two rounds. When handling a two-page GSP message, nvkm first
+copies amount of (GSP_PAGE_SIZE - header) data into the buffer, then
+advances the read pointer by the result of DIV_ROUND_UP(size,
+GSP_PAGE_SIZE). Thus, the read pointer is advanced by 1.
 
-- Remove the Fixes: tags as the vanilla nouveau aren't going to hit these bugs. (Danilo)
-- Test the patchset on VK-GL-CTS. (Danilo)
-- Remove the ambiguous empty line in PATCH 2. (Danilo)
-- Rename the r535_gsp_msgq_wait to gsp_msgq_recv. (Danilo)
-- Introduce a data structure to hold the params of gsp_msgq_recv(). (Danilo)
-- Document the params and the states they are related to. (Danilo)
+Next, nvkm copies the amount of (total size - (GSP_PAGE_SIZE -
+header)) data into the buffer. The left amount of the data will be always
+larger than one page since the message header is not taken into account
+in the first copy. Thus, the read pointer is advanced by DIV_ROUND_UP(
+size(larger than one page), GSP_PAGE_SIZE) =3D 2.
 
-[1] https://lore.kernel.org/kvm/20240922124951.1946072-1-zhiw@nvidia.com/T/#t
-[2] https://benchmark.unigine.com/heaven
-[3] https://github.com/KhronosGroup/VK-GL-CTS
+In the end, the read pointer is wrongly advanced by 3 when handling a
+two-page GSP message in the rollback case.
 
-Zhi Wang (3):
-  nvkm/gsp: correctly advance the read pointer of GSP message queue
-  nvkm: correctly calculate the available space of the GSP cmdq buffer
-  nvkm: handle the return of large RPC
+Fix the problems by taking the total size of the message into account
+when advancing the read pointer and calculate the read pointer in the end
+of the all copies for the rollback case.
 
- .../gpu/drm/nouveau/nvkm/subdev/gsp/r535.c    | 251 +++++++++++++-----
- 1 file changed, 184 insertions(+), 67 deletions(-)
+BTW: the two-page GSP message can be observed in the msgq when vGPU is
+enabled.
 
--- 
+Signed-off-by: Zhi Wang <zhiw@nvidia.com>
+---
+ drivers/gpu/drm/nouveau/nvkm/subdev/gsp/r535.c | 10 ++++------
+ 1 file changed, 4 insertions(+), 6 deletions(-)
+
+diff --git a/drivers/gpu/drm/nouveau/nvkm/subdev/gsp/r535.c b/drivers/gpu/d=
+rm/nouveau/nvkm/subdev/gsp/r535.c
+index cf58f9da9139..736cde1987d0 100644
+--- a/drivers/gpu/drm/nouveau/nvkm/subdev/gsp/r535.c
++++ b/drivers/gpu/drm/nouveau/nvkm/subdev/gsp/r535.c
+@@ -121,6 +121,8 @@ r535_gsp_msgq_wait(struct nvkm_gsp *gsp, u32 repc, u32 =
+*prepc, int *ptime)
+ 		return mqe->data;
+ 	}
+=20
++	size =3D ALIGN(repc + GSP_MSG_HDR_SIZE, GSP_PAGE_SIZE);
++
+ 	msg =3D kvmalloc(repc, GFP_KERNEL);
+ 	if (!msg)
+ 		return ERR_PTR(-ENOMEM);
+@@ -129,19 +131,15 @@ r535_gsp_msgq_wait(struct nvkm_gsp *gsp, u32 repc, u3=
+2 *prepc, int *ptime)
+ 	len =3D min_t(u32, repc, len);
+ 	memcpy(msg, mqe->data, len);
+=20
+-	rptr +=3D DIV_ROUND_UP(len, GSP_PAGE_SIZE);
+-	if (rptr =3D=3D gsp->msgq.cnt)
+-		rptr =3D 0;
+-
+ 	repc -=3D len;
+=20
+ 	if (repc) {
+ 		mqe =3D (void *)((u8 *)gsp->shm.msgq.ptr + 0x1000 + 0 * 0x1000);
+ 		memcpy(msg + len, mqe, repc);
+-
+-		rptr +=3D DIV_ROUND_UP(repc, GSP_PAGE_SIZE);
+ 	}
+=20
++	rptr =3D (rptr + DIV_ROUND_UP(size, GSP_PAGE_SIZE)) % gsp->msgq.cnt;
++
+ 	mb();
+ 	(*gsp->msgq.rptr) =3D rptr;
+ 	return msg;
+--=20
 2.34.1
 
