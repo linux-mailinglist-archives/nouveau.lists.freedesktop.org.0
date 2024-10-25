@@ -2,48 +2,48 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id A799C9AF938
-	for <lists+nouveau@lfdr.de>; Fri, 25 Oct 2024 07:45:53 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 92D1B9AF93D
+	for <lists+nouveau@lfdr.de>; Fri, 25 Oct 2024 07:45:57 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 22A7010E26B;
+	by gabe.freedesktop.org (Postfix) with ESMTP id 7560B10E292;
 	Fri, 25 Oct 2024 05:45:49 +0000 (UTC)
 Authentication-Results: gabe.freedesktop.org;
-	dkim=pass (2048-bit key; unprotected) header.d=intel.com header.i=@intel.com header.b="gpoIeLzW";
+	dkim=pass (2048-bit key; unprotected) header.d=intel.com header.i=@intel.com header.b="YkEwCIGx";
 	dkim-atps=neutral
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
 Received: from mgamail.intel.com (mgamail.intel.com [192.198.163.10])
- by gabe.freedesktop.org (Postfix) with ESMTPS id AB62A10E217;
+ by gabe.freedesktop.org (Postfix) with ESMTPS id E025010E22A;
  Fri, 25 Oct 2024 05:45:47 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
  d=intel.com; i=@intel.com; q=dns/txt; s=Intel;
  t=1729835148; x=1761371148;
  h=date:from:to:cc:subject:message-id:references:
  mime-version:in-reply-to;
- bh=d6JyXPx+kHE4nYoocbnftXCWw7YO4qfXOoYUCXuMLxA=;
- b=gpoIeLzWvBKJvYnYb1XQT6yavXZLwYwyyz1CJoeja+OernuGBc8DDkWZ
- VtUtinHEmJgPSGQYTvqTTNQs6exeYlsqQvklKzL9WD+eipuYabt1EGGcy
- Ppbm0WE1lHbxO99S8pHDTTp+nZdGVsfbupwCaeUgDCrplsO1MlPXahWEZ
- brnx8o9N9Fk/nJRgoaQmK7l3TyJ04/RHKAPdbQnWQrMcZ9Vrx1k5RSxMK
- P5L9bdKn6YZeTzLT5eRv/aKX5UPwh08t3WH1Etvxi/XMyvsI3p8PjM58h
- eo8hf5y5f7eo43u7PttH9GexvFTBLdo0VuwQ9Uoobrwauc286cyCwJtyl Q==;
-X-CSE-ConnectionGUID: BRdPv24bQrmm08Q3ekl51A==
-X-CSE-MsgGUID: ZpiqNd6WSbiT4DB3KZlURA==
-X-IronPort-AV: E=McAfee;i="6700,10204,11235"; a="40868320"
-X-IronPort-AV: E=Sophos;i="6.11,231,1725346800"; d="scan'208";a="40868320"
+ bh=+8YdKGr5Fv9UWaGPtsTURl32RwtbX08N+XEK40AZcHw=;
+ b=YkEwCIGxeGwUgXPS0ZqSTx+nH3GgDOEMKGm2DAJaWIy2qFWKU1ZNMe13
+ CSfmw/foqZ4jYvLi23lh0PltuNWAuKrjIE3g2jMFnGM4nAlOUKo6MDYJE
+ U+RnQr7EeMcJNpjgiLLEsPhvO33JFD0wF2De+S+jIjoIvDOyfjzsPomqy
+ ksiNrIqXKw5zdrA3n92UkzPh4MyrX518miHnZRjzyN+KouyArLSZ8Tq6H
+ YuKBhogQ8jz1HBCiAPdQvZdidXXXThQgHnqwdttLuRrUemtl3nRUBSSQe
+ h3lT7+UM10erA3GkHWCRk4RSGlQgCQUI5KsQR7fSVDdJ12f43UEWL8Xl7 g==;
+X-CSE-ConnectionGUID: OS83gK5PQyyEDlzdsIs1oQ==
+X-CSE-MsgGUID: LNJc6WfgSaqjxVbCHJxzVA==
+X-IronPort-AV: E=McAfee;i="6700,10204,11235"; a="40868340"
+X-IronPort-AV: E=Sophos;i="6.11,231,1725346800"; d="scan'208";a="40868340"
 Received: from fmviesa002.fm.intel.com ([10.60.135.142])
  by fmvoesa104.fm.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
  24 Oct 2024 22:45:47 -0700
-X-CSE-ConnectionGUID: 8RRHYjSZR/mmg5cNN9rESg==
-X-CSE-MsgGUID: j9kwpRVPQfu+hTcVUF9OoQ==
+X-CSE-ConnectionGUID: U+IhO4ZdSmukpojzOgMEog==
+X-CSE-MsgGUID: 57T+eSsTSUawMXHuyqKwcg==
 X-ExtLoop1: 1
-X-IronPort-AV: E=Sophos;i="6.11,231,1725346800"; d="scan'208";a="104136408"
+X-IronPort-AV: E=Sophos;i="6.11,231,1725346800"; d="scan'208";a="104136410"
 Received: from lkp-server01.sh.intel.com (HELO a48cf1aa22e8) ([10.239.97.150])
  by fmviesa002.fm.intel.com with ESMTP; 24 Oct 2024 22:45:43 -0700
 Received: from kbuild by a48cf1aa22e8 with local (Exim 4.96)
- (envelope-from <lkp@intel.com>) id 1t4D8m-000Xdu-1s;
+ (envelope-from <lkp@intel.com>) id 1t4D8m-000Xds-1o;
  Fri, 25 Oct 2024 05:45:40 +0000
-Date: Fri, 25 Oct 2024 13:44:57 +0800
+Date: Fri, 25 Oct 2024 13:44:59 +0800
 From: kernel test robot <lkp@intel.com>
 To: Jani Nikula <jani.nikula@intel.com>, dri-devel@lists.freedesktop.org
 Cc: oe-kbuild-all@lists.linux.dev, jani.nikula@intel.com,
@@ -59,7 +59,7 @@ Cc: oe-kbuild-all@lists.linux.dev, jani.nikula@intel.com,
  nouveau@lists.freedesktop.org, xen-devel@lists.xenproject.org
 Subject: Re: [PATCH 2/2] drm: remove driver date from struct drm_driver and
  all drivers
-Message-ID: <202410251351.r16zfufe-lkp@intel.com>
+Message-ID: <202410251306.cOs7w98U-lkp@intel.com>
 References: <20241024162240.2398664-2-jani.nikula@intel.com>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=us-ascii
@@ -81,10 +81,10 @@ Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
 Hi Jani,
 
-kernel test robot noticed the following build warnings:
+kernel test robot noticed the following build errors:
 
-[auto build test WARNING on drm-misc/drm-misc-next]
-[also build test WARNING on next-20241024]
+[auto build test ERROR on drm-misc/drm-misc-next]
+[also build test ERROR on next-20241024]
 [cannot apply to drm-exynos/exynos-drm-next shawnguo/for-next drm-xe/drm-xe-next linus/master v6.12-rc4]
 [If your patch is applied to the wrong git tree, kindly drop us a note.
 And when submitting patch, we suggest to use '--base' as documented in
@@ -94,25 +94,25 @@ url:    https://github.com/intel-lab-lkp/linux/commits/Jani-Nikula/drm-remove-dr
 base:   git://anongit.freedesktop.org/drm/drm-misc drm-misc-next
 patch link:    https://lore.kernel.org/r/20241024162240.2398664-2-jani.nikula%40intel.com
 patch subject: [PATCH 2/2] drm: remove driver date from struct drm_driver and all drivers
-config: i386-buildonly-randconfig-004-20241025 (https://download.01.org/0day-ci/archive/20241025/202410251351.r16zfufe-lkp@intel.com/config)
-compiler: gcc-12 (Debian 12.2.0-14) 12.2.0
-reproduce (this is a W=1 build): (https://download.01.org/0day-ci/archive/20241025/202410251351.r16zfufe-lkp@intel.com/reproduce)
+config: loongarch-allmodconfig (https://download.01.org/0day-ci/archive/20241025/202410251306.cOs7w98U-lkp@intel.com/config)
+compiler: loongarch64-linux-gcc (GCC) 14.1.0
+reproduce (this is a W=1 build): (https://download.01.org/0day-ci/archive/20241025/202410251306.cOs7w98U-lkp@intel.com/reproduce)
 
 If you fix the issue in a separate patch/commit (i.e. not just a new version of
 the same patch/commit), kindly add following tags
 | Reported-by: kernel test robot <lkp@intel.com>
-| Closes: https://lore.kernel.org/oe-kbuild-all/202410251351.r16zfufe-lkp@intel.com/
+| Closes: https://lore.kernel.org/oe-kbuild-all/202410251306.cOs7w98U-lkp@intel.com/
 
-All warnings (new ones prefixed by >>):
+All errors (new ones prefixed by >>):
 
-   drivers/accel/qaic/qaic_drv.c:211:10: error: 'const struct drm_driver' has no member named 'date'
+>> drivers/accel/qaic/qaic_drv.c:211:10: error: 'const struct drm_driver' has no member named 'date'
      211 |         .date                   = "20190618",
          |          ^~~~
->> drivers/accel/qaic/qaic_drv.c:211:35: warning: initialization of 'unsigned int' from 'char *' makes integer from pointer without a cast [-Wint-conversion]
+>> drivers/accel/qaic/qaic_drv.c:211:35: error: initialization of 'unsigned int' from 'char *' makes integer from pointer without a cast [-Wint-conversion]
      211 |         .date                   = "20190618",
          |                                   ^~~~~~~~~~
    drivers/accel/qaic/qaic_drv.c:211:35: note: (near initialization for 'qaic_accel_driver.driver_features')
-   drivers/accel/qaic/qaic_drv.c:211:35: warning: initialized field overwritten [-Woverride-init]
+>> drivers/accel/qaic/qaic_drv.c:211:35: error: initializer element is not computable at load time
    drivers/accel/qaic/qaic_drv.c:211:35: note: (near initialization for 'qaic_accel_driver.driver_features')
 
 
