@@ -2,52 +2,53 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id 92D1B9AF93D
-	for <lists+nouveau@lfdr.de>; Fri, 25 Oct 2024 07:45:57 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 8ABCA9AF9BC
+	for <lists+nouveau@lfdr.de>; Fri, 25 Oct 2024 08:16:53 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 7560B10E292;
-	Fri, 25 Oct 2024 05:45:49 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 71F2710E9F8;
+	Fri, 25 Oct 2024 06:16:50 +0000 (UTC)
 Authentication-Results: gabe.freedesktop.org;
-	dkim=pass (2048-bit key; unprotected) header.d=intel.com header.i=@intel.com header.b="YkEwCIGx";
+	dkim=pass (2048-bit key; unprotected) header.d=intel.com header.i=@intel.com header.b="IvdA1i9S";
 	dkim-atps=neutral
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from mgamail.intel.com (mgamail.intel.com [192.198.163.10])
- by gabe.freedesktop.org (Postfix) with ESMTPS id E025010E22A;
- Fri, 25 Oct 2024 05:45:47 +0000 (UTC)
+Received: from mgamail.intel.com (mgamail.intel.com [198.175.65.20])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 130AC10E9F3;
+ Fri, 25 Oct 2024 06:16:49 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
  d=intel.com; i=@intel.com; q=dns/txt; s=Intel;
- t=1729835148; x=1761371148;
+ t=1729837010; x=1761373010;
  h=date:from:to:cc:subject:message-id:references:
  mime-version:in-reply-to;
- bh=+8YdKGr5Fv9UWaGPtsTURl32RwtbX08N+XEK40AZcHw=;
- b=YkEwCIGxeGwUgXPS0ZqSTx+nH3GgDOEMKGm2DAJaWIy2qFWKU1ZNMe13
- CSfmw/foqZ4jYvLi23lh0PltuNWAuKrjIE3g2jMFnGM4nAlOUKo6MDYJE
- U+RnQr7EeMcJNpjgiLLEsPhvO33JFD0wF2De+S+jIjoIvDOyfjzsPomqy
- ksiNrIqXKw5zdrA3n92UkzPh4MyrX518miHnZRjzyN+KouyArLSZ8Tq6H
- YuKBhogQ8jz1HBCiAPdQvZdidXXXThQgHnqwdttLuRrUemtl3nRUBSSQe
- h3lT7+UM10erA3GkHWCRk4RSGlQgCQUI5KsQR7fSVDdJ12f43UEWL8Xl7 g==;
-X-CSE-ConnectionGUID: OS83gK5PQyyEDlzdsIs1oQ==
-X-CSE-MsgGUID: LNJc6WfgSaqjxVbCHJxzVA==
-X-IronPort-AV: E=McAfee;i="6700,10204,11235"; a="40868340"
-X-IronPort-AV: E=Sophos;i="6.11,231,1725346800"; d="scan'208";a="40868340"
-Received: from fmviesa002.fm.intel.com ([10.60.135.142])
- by fmvoesa104.fm.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
- 24 Oct 2024 22:45:47 -0700
-X-CSE-ConnectionGUID: U+IhO4ZdSmukpojzOgMEog==
-X-CSE-MsgGUID: 57T+eSsTSUawMXHuyqKwcg==
+ bh=c6V1Mv+taW3ICFO5XNnbFK4fCJZFIwQpzeF7YcNeRNs=;
+ b=IvdA1i9SI68cqw+Fsqfug1O5+DxmoILdMgfh8qsm14q6P8Y3MKqvDH1Z
+ MsjHg1ZxktlPl/1SQva3RrfJgkAThg99Cc954hIHsedyrkM4t5yJxTAWA
+ sX1BKA1PsEDZbtQExpAiUxrLjbTdKIaoQgfzh/mk28QnFJY1CR6Kg3ZNI
+ PREdFn5KQrzSuPxaMsv4a8dVaXDb72EqQw+P9n+8Sevi3tTWW78wqcoT2
+ J3phmuaaK68gdfZjmXlJpOOM20hf4OYUyBMD8Cg/249Ngb//5qFQCT0TX
+ h4TVWE+Ur3Bqt0KOch/Hdzi+HFBxhd1odwjcUja3sMFVoHf6n9/c5DKZ6 g==;
+X-CSE-ConnectionGUID: PimQ0CzyRwa74y65+M9ZXQ==
+X-CSE-MsgGUID: qr6TmRq7SnSYUskfTj0Zng==
+X-IronPort-AV: E=McAfee;i="6700,10204,11222"; a="29274984"
+X-IronPort-AV: E=Sophos;i="6.11,199,1725346800"; d="scan'208";a="29274984"
+Received: from orviesa001.jf.intel.com ([10.64.159.141])
+ by orvoesa112.jf.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
+ 24 Oct 2024 23:16:49 -0700
+X-CSE-ConnectionGUID: PKYOkV+QSeWAVUQvMAg3ZA==
+X-CSE-MsgGUID: q+TANJcEReWiNuhgN2CKuw==
 X-ExtLoop1: 1
-X-IronPort-AV: E=Sophos;i="6.11,231,1725346800"; d="scan'208";a="104136410"
+X-IronPort-AV: E=Sophos;i="6.11,231,1725346800"; d="scan'208";a="118287858"
 Received: from lkp-server01.sh.intel.com (HELO a48cf1aa22e8) ([10.239.97.150])
- by fmviesa002.fm.intel.com with ESMTP; 24 Oct 2024 22:45:43 -0700
+ by orviesa001.jf.intel.com with ESMTP; 24 Oct 2024 23:16:44 -0700
 Received: from kbuild by a48cf1aa22e8 with local (Exim 4.96)
- (envelope-from <lkp@intel.com>) id 1t4D8m-000Xds-1o;
- Fri, 25 Oct 2024 05:45:40 +0000
-Date: Fri, 25 Oct 2024 13:44:59 +0800
+ (envelope-from <lkp@intel.com>) id 1t4Dcn-000Xg8-1z;
+ Fri, 25 Oct 2024 06:16:41 +0000
+Date: Fri, 25 Oct 2024 14:16:09 +0800
 From: kernel test robot <lkp@intel.com>
 To: Jani Nikula <jani.nikula@intel.com>, dri-devel@lists.freedesktop.org
-Cc: oe-kbuild-all@lists.linux.dev, jani.nikula@intel.com,
- David Airlie <airlied@gmail.com>, Hamza Mahfooz <hamza.mahfooz@amd.com>,
+Cc: llvm@lists.linux.dev, oe-kbuild-all@lists.linux.dev,
+ jani.nikula@intel.com, David Airlie <airlied@gmail.com>,
+ Hamza Mahfooz <hamza.mahfooz@amd.com>,
  Javier Martinez Canillas <javierm@redhat.com>,
  Maarten Lankhorst <maarten.lankhorst@linux.intel.com>,
  Maxime Ripard <mripard@kernel.org>,
@@ -59,7 +60,7 @@ Cc: oe-kbuild-all@lists.linux.dev, jani.nikula@intel.com,
  nouveau@lists.freedesktop.org, xen-devel@lists.xenproject.org
 Subject: Re: [PATCH 2/2] drm: remove driver date from struct drm_driver and
  all drivers
-Message-ID: <202410251306.cOs7w98U-lkp@intel.com>
+Message-ID: <202410251345.nA1iHU0x-lkp@intel.com>
 References: <20241024162240.2398664-2-jani.nikula@intel.com>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=us-ascii
@@ -94,26 +95,115 @@ url:    https://github.com/intel-lab-lkp/linux/commits/Jani-Nikula/drm-remove-dr
 base:   git://anongit.freedesktop.org/drm/drm-misc drm-misc-next
 patch link:    https://lore.kernel.org/r/20241024162240.2398664-2-jani.nikula%40intel.com
 patch subject: [PATCH 2/2] drm: remove driver date from struct drm_driver and all drivers
-config: loongarch-allmodconfig (https://download.01.org/0day-ci/archive/20241025/202410251306.cOs7w98U-lkp@intel.com/config)
-compiler: loongarch64-linux-gcc (GCC) 14.1.0
-reproduce (this is a W=1 build): (https://download.01.org/0day-ci/archive/20241025/202410251306.cOs7w98U-lkp@intel.com/reproduce)
+config: s390-allmodconfig (https://download.01.org/0day-ci/archive/20241025/202410251345.nA1iHU0x-lkp@intel.com/config)
+compiler: clang version 20.0.0git (https://github.com/llvm/llvm-project 5886454669c3c9026f7f27eab13509dd0241f2d6)
+reproduce (this is a W=1 build): (https://download.01.org/0day-ci/archive/20241025/202410251345.nA1iHU0x-lkp@intel.com/reproduce)
 
 If you fix the issue in a separate patch/commit (i.e. not just a new version of
 the same patch/commit), kindly add following tags
 | Reported-by: kernel test robot <lkp@intel.com>
-| Closes: https://lore.kernel.org/oe-kbuild-all/202410251306.cOs7w98U-lkp@intel.com/
+| Closes: https://lore.kernel.org/oe-kbuild-all/202410251345.nA1iHU0x-lkp@intel.com/
 
 All errors (new ones prefixed by >>):
 
->> drivers/accel/qaic/qaic_drv.c:211:10: error: 'const struct drm_driver' has no member named 'date'
+   In file included from drivers/accel/qaic/qaic_drv.c:7:
+   In file included from include/linux/dma-mapping.h:8:
+   In file included from include/linux/device.h:32:
+   In file included from include/linux/device/driver.h:21:
+   In file included from include/linux/module.h:19:
+   In file included from include/linux/elf.h:6:
+   In file included from arch/s390/include/asm/elf.h:181:
+   In file included from arch/s390/include/asm/mmu_context.h:11:
+   In file included from arch/s390/include/asm/pgalloc.h:18:
+   In file included from include/linux/mm.h:2213:
+   include/linux/vmstat.h:504:43: warning: arithmetic between different enumeration types ('enum zone_stat_item' and 'enum numa_stat_item') [-Wenum-enum-conversion]
+     504 |         return vmstat_text[NR_VM_ZONE_STAT_ITEMS +
+         |                            ~~~~~~~~~~~~~~~~~~~~~ ^
+     505 |                            item];
+         |                            ~~~~
+   include/linux/vmstat.h:511:43: warning: arithmetic between different enumeration types ('enum zone_stat_item' and 'enum numa_stat_item') [-Wenum-enum-conversion]
+     511 |         return vmstat_text[NR_VM_ZONE_STAT_ITEMS +
+         |                            ~~~~~~~~~~~~~~~~~~~~~ ^
+     512 |                            NR_VM_NUMA_EVENT_ITEMS +
+         |                            ~~~~~~~~~~~~~~~~~~~~~~
+   include/linux/vmstat.h:518:36: warning: arithmetic between different enumeration types ('enum node_stat_item' and 'enum lru_list') [-Wenum-enum-conversion]
+     518 |         return node_stat_name(NR_LRU_BASE + lru) + 3; // skip "nr_"
+         |                               ~~~~~~~~~~~ ^ ~~~
+   include/linux/vmstat.h:524:43: warning: arithmetic between different enumeration types ('enum zone_stat_item' and 'enum numa_stat_item') [-Wenum-enum-conversion]
+     524 |         return vmstat_text[NR_VM_ZONE_STAT_ITEMS +
+         |                            ~~~~~~~~~~~~~~~~~~~~~ ^
+     525 |                            NR_VM_NUMA_EVENT_ITEMS +
+         |                            ~~~~~~~~~~~~~~~~~~~~~~
+   In file included from drivers/accel/qaic/qaic_drv.c:7:
+   In file included from include/linux/dma-mapping.h:11:
+   In file included from include/linux/scatterlist.h:9:
+   In file included from arch/s390/include/asm/io.h:93:
+   include/asm-generic/io.h:548:31: warning: performing pointer arithmetic on a null pointer has undefined behavior [-Wnull-pointer-arithmetic]
+     548 |         val = __raw_readb(PCI_IOBASE + addr);
+         |                           ~~~~~~~~~~ ^
+   include/asm-generic/io.h:561:61: warning: performing pointer arithmetic on a null pointer has undefined behavior [-Wnull-pointer-arithmetic]
+     561 |         val = __le16_to_cpu((__le16 __force)__raw_readw(PCI_IOBASE + addr));
+         |                                                         ~~~~~~~~~~ ^
+   include/uapi/linux/byteorder/big_endian.h:37:59: note: expanded from macro '__le16_to_cpu'
+      37 | #define __le16_to_cpu(x) __swab16((__force __u16)(__le16)(x))
+         |                                                           ^
+   include/uapi/linux/swab.h:102:54: note: expanded from macro '__swab16'
+     102 | #define __swab16(x) (__u16)__builtin_bswap16((__u16)(x))
+         |                                                      ^
+   In file included from drivers/accel/qaic/qaic_drv.c:7:
+   In file included from include/linux/dma-mapping.h:11:
+   In file included from include/linux/scatterlist.h:9:
+   In file included from arch/s390/include/asm/io.h:93:
+   include/asm-generic/io.h:574:61: warning: performing pointer arithmetic on a null pointer has undefined behavior [-Wnull-pointer-arithmetic]
+     574 |         val = __le32_to_cpu((__le32 __force)__raw_readl(PCI_IOBASE + addr));
+         |                                                         ~~~~~~~~~~ ^
+   include/uapi/linux/byteorder/big_endian.h:35:59: note: expanded from macro '__le32_to_cpu'
+      35 | #define __le32_to_cpu(x) __swab32((__force __u32)(__le32)(x))
+         |                                                           ^
+   include/uapi/linux/swab.h:115:54: note: expanded from macro '__swab32'
+     115 | #define __swab32(x) (__u32)__builtin_bswap32((__u32)(x))
+         |                                                      ^
+   In file included from drivers/accel/qaic/qaic_drv.c:7:
+   In file included from include/linux/dma-mapping.h:11:
+   In file included from include/linux/scatterlist.h:9:
+   In file included from arch/s390/include/asm/io.h:93:
+   include/asm-generic/io.h:585:33: warning: performing pointer arithmetic on a null pointer has undefined behavior [-Wnull-pointer-arithmetic]
+     585 |         __raw_writeb(value, PCI_IOBASE + addr);
+         |                             ~~~~~~~~~~ ^
+   include/asm-generic/io.h:595:59: warning: performing pointer arithmetic on a null pointer has undefined behavior [-Wnull-pointer-arithmetic]
+     595 |         __raw_writew((u16 __force)cpu_to_le16(value), PCI_IOBASE + addr);
+         |                                                       ~~~~~~~~~~ ^
+   include/asm-generic/io.h:605:59: warning: performing pointer arithmetic on a null pointer has undefined behavior [-Wnull-pointer-arithmetic]
+     605 |         __raw_writel((u32 __force)cpu_to_le32(value), PCI_IOBASE + addr);
+         |                                                       ~~~~~~~~~~ ^
+   include/asm-generic/io.h:693:20: warning: performing pointer arithmetic on a null pointer has undefined behavior [-Wnull-pointer-arithmetic]
+     693 |         readsb(PCI_IOBASE + addr, buffer, count);
+         |                ~~~~~~~~~~ ^
+   include/asm-generic/io.h:701:20: warning: performing pointer arithmetic on a null pointer has undefined behavior [-Wnull-pointer-arithmetic]
+     701 |         readsw(PCI_IOBASE + addr, buffer, count);
+         |                ~~~~~~~~~~ ^
+   include/asm-generic/io.h:709:20: warning: performing pointer arithmetic on a null pointer has undefined behavior [-Wnull-pointer-arithmetic]
+     709 |         readsl(PCI_IOBASE + addr, buffer, count);
+         |                ~~~~~~~~~~ ^
+   include/asm-generic/io.h:718:21: warning: performing pointer arithmetic on a null pointer has undefined behavior [-Wnull-pointer-arithmetic]
+     718 |         writesb(PCI_IOBASE + addr, buffer, count);
+         |                 ~~~~~~~~~~ ^
+   include/asm-generic/io.h:727:21: warning: performing pointer arithmetic on a null pointer has undefined behavior [-Wnull-pointer-arithmetic]
+     727 |         writesw(PCI_IOBASE + addr, buffer, count);
+         |                 ~~~~~~~~~~ ^
+   include/asm-generic/io.h:736:21: warning: performing pointer arithmetic on a null pointer has undefined behavior [-Wnull-pointer-arithmetic]
+     736 |         writesl(PCI_IOBASE + addr, buffer, count);
+         |                 ~~~~~~~~~~ ^
+>> drivers/accel/qaic/qaic_drv.c:211:3: error: field designator 'date' does not refer to any field in type 'const struct drm_driver'
      211 |         .date                   = "20190618",
-         |          ^~~~
->> drivers/accel/qaic/qaic_drv.c:211:35: error: initialization of 'unsigned int' from 'char *' makes integer from pointer without a cast [-Wint-conversion]
-     211 |         .date                   = "20190618",
-         |                                   ^~~~~~~~~~
-   drivers/accel/qaic/qaic_drv.c:211:35: note: (near initialization for 'qaic_accel_driver.driver_features')
->> drivers/accel/qaic/qaic_drv.c:211:35: error: initializer element is not computable at load time
-   drivers/accel/qaic/qaic_drv.c:211:35: note: (near initialization for 'qaic_accel_driver.driver_features')
+         |         ~^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+   drivers/accel/qaic/qaic_drv.c:448:46: warning: shift count >= width of type [-Wshift-count-overflow]
+     448 |         ret = dma_set_mask_and_coherent(&pdev->dev, DMA_BIT_MASK(64));
+         |                                                     ^~~~~~~~~~~~~~~~
+   include/linux/dma-mapping.h:77:54: note: expanded from macro 'DMA_BIT_MASK'
+      77 | #define DMA_BIT_MASK(n) (((n) == 64) ? ~0ULL : ((1ULL<<(n))-1))
+         |                                                      ^ ~~~
+   17 warnings and 1 error generated.
 
 
 vim +211 drivers/accel/qaic/qaic_drv.c
