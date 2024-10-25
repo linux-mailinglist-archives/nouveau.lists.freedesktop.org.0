@@ -2,76 +2,61 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id 2662C9AFFD6
-	for <lists+nouveau@lfdr.de>; Fri, 25 Oct 2024 12:15:32 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 9BAC19B01B6
+	for <lists+nouveau@lfdr.de>; Fri, 25 Oct 2024 13:52:50 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id D9ACF10EA6F;
-	Fri, 25 Oct 2024 10:15:27 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 80FFF10EA8A;
+	Fri, 25 Oct 2024 11:52:46 +0000 (UTC)
 Authentication-Results: gabe.freedesktop.org;
-	dkim=pass (2048-bit key; unprotected) header.d=intel.com header.i=@intel.com header.b="d/FcIrP4";
+	dkim=pass (1024-bit key; secure) header.d=tecnico.ulisboa.pt header.i=@tecnico.ulisboa.pt header.b="WE4xFSG0";
 	dkim-atps=neutral
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from mgamail.intel.com (mgamail.intel.com [192.198.163.16])
- by gabe.freedesktop.org (Postfix) with ESMTPS id DCC8810E05C;
- Fri, 25 Oct 2024 10:15:25 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
- d=intel.com; i=@intel.com; q=dns/txt; s=Intel;
- t=1729851326; x=1761387326;
- h=date:from:to:cc:subject:message-id:references:
- mime-version:content-transfer-encoding:in-reply-to;
- bh=kYN2dB4ddnWcQp0D9KeXmv8oxL33z53rJDsqLD0hKak=;
- b=d/FcIrP49z/QI7OaCkTkBAcnDnidYDb5U+v1E7feGTrwlaZE+Z+nQHRv
- QzTkfCvHnRRF48HKIlQaAxECxsKXcwX6PCAKt0Xhvrtdw42ehtOFb/LBA
- cT8GpUI5zKHGFOPH5qN5Ylce+ZRZzo1O8eC6EjdIWoeSs+ijb4bHJ59Bo
- 7aImBcTxImHdwr+coO8GKJiGI9eI6l0QoFgqzQZTiEyzSjxgrqnKlxrw4
- qNEM0c3ZbO3KuXE0L2Agf3SuCaPyVh3yFj4QKxsidPBlSQWW5VWcg0TCi
- KhKvaEfTAIajDH33LE/Yuhd0uzYijxYLMc0fGB3aEq2d4fkKH3pajXbiI A==;
-X-CSE-ConnectionGUID: 9ymU8nkVRF+iF5mRxheheQ==
-X-CSE-MsgGUID: rAYKmdaGQgSqble3+wFWYw==
-X-IronPort-AV: E=McAfee;i="6700,10204,11235"; a="17146742"
-X-IronPort-AV: E=Sophos;i="6.11,231,1725346800"; d="scan'208";a="17146742"
-Received: from fmviesa008.fm.intel.com ([10.60.135.148])
- by fmvoesa110.fm.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
- 25 Oct 2024 03:15:25 -0700
-X-CSE-ConnectionGUID: Jvp5S744RhGH2KlCx35tjQ==
-X-CSE-MsgGUID: Z+j7UqPCTj2FihB6FZNH6Q==
-X-ExtLoop1: 1
-X-IronPort-AV: E=Sophos;i="6.11,231,1725346800"; d="scan'208";a="80985766"
-Received: from stinkpipe.fi.intel.com (HELO stinkbox) ([10.237.72.74])
- by fmviesa008.fm.intel.com with SMTP; 25 Oct 2024 03:15:19 -0700
-Received: by stinkbox (sSMTP sendmail emulation);
- Fri, 25 Oct 2024 13:15:18 +0300
-Date: Fri, 25 Oct 2024 13:15:18 +0300
-From: Ville =?iso-8859-1?Q?Syrj=E4l=E4?= <ville.syrjala@linux.intel.com>
-To: Jani Nikula <jani.nikula@linux.intel.com>
-Cc: dri-devel@lists.freedesktop.org, intel-gfx@lists.freedesktop.org,
- Alex Deucher <alexander.deucher@amd.com>,
- Christian =?iso-8859-1?Q?K=F6nig?= <christian.koenig@amd.com>,
- Xinhui Pan <Xinhui.Pan@amd.com>,
- Patrik Jakobsson <patrik.r.jakobsson@gmail.com>,
- Rob Clark <robdclark@gmail.com>, Abhinav Kumar <quic_abhinavk@quicinc.com>,
- Dmitry Baryshkov <dmitry.baryshkov@linaro.org>,
- Sean Paul <sean@poorly.run>,
- Marijn Suijten <marijn.suijten@somainline.org>,
- Karol Herbst <kherbst@redhat.com>, Lyude Paul <lyude@redhat.com>,
- Danilo Krummrich <dakr@redhat.com>, Sandy Huang <hjc@rock-chips.com>,
- Heiko =?iso-8859-1?Q?St=FCbner?= <heiko@sntech.de>,
- Andy Yan <andy.yan@rock-chips.com>, amd-gfx@lists.freedesktop.org,
- linux-arm-msm@vger.kernel.org, freedreno@lists.freedesktop.org,
- nouveau@lists.freedesktop.org
-Subject: Re: [PATCH 1/2] drm: Move plane->{fb,old_fb,crtc} to legacy
- sub-structure
-Message-ID: <ZxtvtqQzME--oy7-@intel.com>
-References: <20241002182200.15363-1-ville.syrjala@linux.intel.com>
- <20241002182200.15363-2-ville.syrjala@linux.intel.com>
- <Zv58AalhFaMgh7c5@intel.com> <875xpgqzc1.fsf@intel.com>
-MIME-Version: 1.0
-Content-Type: text/plain; charset=iso-8859-1
-Content-Disposition: inline
-Content-Transfer-Encoding: 8bit
-In-Reply-To: <875xpgqzc1.fsf@intel.com>
-X-Patchwork-Hint: comment
+Received: from smtp1.tecnico.ulisboa.pt (smtp1.tecnico.ulisboa.pt
+ [193.136.128.21])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id EF42610EA87;
+ Fri, 25 Oct 2024 11:52:40 +0000 (UTC)
+Received: from localhost (localhost.localdomain [127.0.0.1])
+ by smtp1.tecnico.ulisboa.pt (Postfix) with ESMTP id 4F6CE6002C23;
+ Fri, 25 Oct 2024 12:52:38 +0100 (WEST)
+X-Virus-Scanned: by amavis-2.13.0 (20230106) (Debian) at tecnico.ulisboa.pt
+Received: from smtp1.tecnico.ulisboa.pt ([127.0.0.1])
+ by localhost (smtp1.tecnico.ulisboa.pt [127.0.0.1]) (amavis, port 10025)
+ with LMTP id ujDn4Jn9IZZN; Fri, 25 Oct 2024 12:52:35 +0100 (WEST)
+Received: from mail1.tecnico.ulisboa.pt (mail1.ist.utl.pt
+ [IPv6:2001:690:2100:1::b3dd:b9ac])
+ by smtp1.tecnico.ulisboa.pt (Postfix) with ESMTPS id 8D16F600298B;
+ Fri, 25 Oct 2024 12:52:35 +0100 (WEST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=tecnico.ulisboa.pt;
+ s=mail; t=1729857155;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:mime-version:mime-version:content-type:content-type:
+ content-transfer-encoding:content-transfer-encoding:
+ in-reply-to:in-reply-to:references:references;
+ bh=J0w0CRKvFjbgPcKdTa0ghGahWPu5fZXRVHkiS+qSlJ8=;
+ b=WE4xFSG0TOaq5bC+Qk1pRTITv4L/vPKznQe74YzTeYc3Q5P4SbDbp2qYa9P9dZOUgwIuJ/
+ PP/JHfrllj3Lq2PYLgusi5/mfnbeX5lxxxEVQ9IzZ6PGIoZeFNGPU3fe4aHuLprrGmIMpM
+ U4gvormObxE6giQdv6WIVSdrhDj+Hic=
+Received: from localhost (unknown
+ [IPv6:2001:8a0:6a67:5600:aca0:c311:d240:b169])
+ (Authenticated sender: ist187313)
+ by mail1.tecnico.ulisboa.pt (Postfix) with ESMTPSA id C81A83601AD;
+ Fri, 25 Oct 2024 12:52:34 +0100 (WEST)
+Mime-Version: 1.0
+Content-Transfer-Encoding: quoted-printable
+Content-Type: text/plain; charset=UTF-8
+Date: Fri, 25 Oct 2024 12:52:33 +0100
+Message-Id: <D54V6LMBOVIW.2XKY3HBGCDYPR@tecnico.ulisboa.pt>
+To: "Linux regressions mailing list" <regressions@lists.linux.dev>,
+ <kherbst@redhat.com>, <lyude@redhat.com>, <dakr@redhat.com>,
+ <airlied@gmail.com>, <simona@ffwll.ch>, <dri-devel@lists.freedesktop.org>,
+ <nouveau@lists.freedesktop.org>, <linux-kernel@vger.kernel.org>
+Subject: Re: [REGRESSION] GM20B pmu timeout
+From: "Diogo Ivo" <diogo.ivo@tecnico.ulisboa.pt>
+X-Mailer: aerc 0.18.2-0-ge037c095a049
+References: <20241010133253.30311-1-diogo.ivo@tecnico.ulisboa.pt>
+ <041511ee-4556-422a-8604-30b5e0dfd21c@leemhuis.info>
+In-Reply-To: <041511ee-4556-422a-8604-30b5e0dfd21c@leemhuis.info>
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -86,108 +71,42 @@ List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-On Fri, Oct 25, 2024 at 12:57:50PM +0300, Jani Nikula wrote:
-> On Thu, 03 Oct 2024, Ville Syrjälä <ville.syrjala@linux.intel.com> wrote:
-> > On Wed, Oct 02, 2024 at 09:21:59PM +0300, Ville Syrjala wrote:
-> >> From: Ville Syrjälä <ville.syrjala@linux.intel.com>
-> >> 
-> >> Hide the plane->fb/etc. footguns better by stashing them inside
-> >> a "legacy" sub struct.
-> >> 
-> >> Eventually maybe we could turn 'legacy' into a pointer
-> >> that only exists on legacy drivers to completely prevent
-> >> any abuse by atomic drivers...
-> >
-> > Hmm. I should probably make it a pointer from the start,
-> > to avoid having to go through the same churn yet again.
-> 
-> [snip]
-> 
-> >> diff --git a/include/drm/drm_plane.h b/include/drm/drm_plane.h
-> >> index dd718c62ac31..a2d91ee4b40c 100644
-> >> --- a/include/drm/drm_plane.h
-> >> +++ b/include/drm/drm_plane.h
-> >> @@ -663,31 +663,33 @@ struct drm_plane {
-> >>  	/** @modifier_count: Size of the array pointed at by @modifier_count. */
-> >>  	unsigned int modifier_count;
-> >>  
-> >> -	/**
-> >> -	 * @crtc:
-> >> -	 *
-> >> -	 * Currently bound CRTC, only meaningful for non-atomic drivers. For
-> >> -	 * atomic drivers this is forced to be NULL, atomic drivers should
-> >> -	 * instead check &drm_plane_state.crtc.
-> >> -	 */
-> >> -	struct drm_crtc *crtc;
-> >> -
-> >> -	/**
-> >> -	 * @fb:
-> >> -	 *
-> >> -	 * Currently bound framebuffer, only meaningful for non-atomic drivers.
-> >> -	 * For atomic drivers this is forced to be NULL, atomic drivers should
-> >> -	 * instead check &drm_plane_state.fb.
-> >> -	 */
-> >> -	struct drm_framebuffer *fb;
-> >> -
-> >> -	/**
-> >> -	 * @old_fb:
-> >> -	 *
-> >> -	 * Temporary tracking of the old fb while a modeset is ongoing. Only
-> >> -	 * used by non-atomic drivers, forced to be NULL for atomic drivers.
-> >> -	 */
-> >> -	struct drm_framebuffer *old_fb;
-> >> +	struct {
-> 
-> Do you mean something along the lines of:
-> 
-> 	struct __plane_legacy_or_something {
-> 
-> >> +		/**
-> >> +		 * @crtc:
-> >> +		 *
-> >> +		 * Currently bound CRTC, only meaningful for non-atomic drivers. For
-> >> +		 * atomic drivers this is forced to be NULL, atomic drivers should
-> >> +		 * instead check &drm_plane_state.crtc.
-> >> +		 */
-> >> +		struct drm_crtc *crtc;
-> >> +
-> >> +		/**
-> >> +		 * @fb:
-> >> +		 *
-> >> +		 * Currently bound framebuffer, only meaningful for non-atomic drivers.
-> >> +		 * For atomic drivers this is forced to be NULL, atomic drivers should
-> >> +		 * instead check &drm_plane_state.fb.
-> >> +		 */
-> >> +		struct drm_framebuffer *fb;
-> >> +
-> >> +		/**
-> >> +		 * @old_fb:
-> >> +		 *
-> >> +		 * Temporary tracking of the old fb while a modeset is ongoing. Only
-> >> +		 * used by non-atomic drivers, forced to be NULL for atomic drivers.
-> >> +		 */
-> >> +		struct drm_framebuffer *old_fb;
-> >> +	} legacy;
-> 
-> and
-> 
-> 	} __legacy;
-> 
-> 	struct __plane_legacy_or_something *legacy;
-> 
-> and initially unconditionally:
-> 
->        	p->legacy = &p->__legacy;
-> 
-> but later, once atomic drivers have been fixed:
-> 
-> 	if (!drm_core_check_feature(dev, DRIVER_COMPUTE_ATOMIC))
-> 		p->legacy = &p->__legacy;
-> 
-> It would make the last update really simple.
+Hi Thorsten,
 
-Yeah, something like that.
+On Tue Oct 15, 2024 at 7:13 PM WEST, Linux regression tracking (Thorsten Le=
+emhuis) wrote:
+> Hi, Thorsten here, the Linux kernel's regression tracker.
+>
+> On 10.10.24 15:32, Diogo Ivo wrote:
+> >=20
+> > Somewhere between 6.11-rc4 and 6.11-rc5 the following error message is =
+displayed
+> > when trying to initialize a nvc0_screen on the Tegra X1's GM20B:
+> >=20
+> > [ 34.431210] nouveau 57000000.gpu: pmu:hpq: timeout waiting for queue r=
+eady
+> > [ 34.438145] nouveau 57000000.gpu: gr: init failed, -110
+> > nvc0_screen_create:1075 - Error allocating PGRAPH context for M2MF: -11=
+0
+> > failed to create GPU screen
+>
+> Thx for the report. Hmmm. No reply so far. :-/
+>
+> Diogo, maybe report this here as well:
+> https://gitlab.freedesktop.org/drm/nouveau/-/issues/
+>
+> Afterwards drop a link to the ticket here. Reporting nouveau issues via
+> email should work, but maybe you have more luck there.
+>
+> Ciao, Thorsten (wearing his 'the Linux kernel's regression tracker' hat)
 
--- 
-Ville Syrjälä
-Intel
+I opened the ticket as you mentioned but completely forgot to drop the
+link here, so here goes:
+
+https://gitlab.freedesktop.org/drm/nouveau/-/issues/391
+
+I cannot seem to get it properly formatted there, hopefully it's still
+useful.
+
+Thanks,
+Diogo
