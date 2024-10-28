@@ -2,61 +2,74 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id 9BAC19B01B6
-	for <lists+nouveau@lfdr.de>; Fri, 25 Oct 2024 13:52:50 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 4B57F9B31FA
+	for <lists+nouveau@lfdr.de>; Mon, 28 Oct 2024 14:44:01 +0100 (CET)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 80FFF10EA8A;
-	Fri, 25 Oct 2024 11:52:46 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id D2E4010E4B4;
+	Mon, 28 Oct 2024 13:43:59 +0000 (UTC)
 Authentication-Results: gabe.freedesktop.org;
-	dkim=pass (1024-bit key; secure) header.d=tecnico.ulisboa.pt header.i=@tecnico.ulisboa.pt header.b="WE4xFSG0";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="tP+olFZj";
 	dkim-atps=neutral
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from smtp1.tecnico.ulisboa.pt (smtp1.tecnico.ulisboa.pt
- [193.136.128.21])
- by gabe.freedesktop.org (Postfix) with ESMTPS id EF42610EA87;
- Fri, 25 Oct 2024 11:52:40 +0000 (UTC)
-Received: from localhost (localhost.localdomain [127.0.0.1])
- by smtp1.tecnico.ulisboa.pt (Postfix) with ESMTP id 4F6CE6002C23;
- Fri, 25 Oct 2024 12:52:38 +0100 (WEST)
-X-Virus-Scanned: by amavis-2.13.0 (20230106) (Debian) at tecnico.ulisboa.pt
-Received: from smtp1.tecnico.ulisboa.pt ([127.0.0.1])
- by localhost (smtp1.tecnico.ulisboa.pt [127.0.0.1]) (amavis, port 10025)
- with LMTP id ujDn4Jn9IZZN; Fri, 25 Oct 2024 12:52:35 +0100 (WEST)
-Received: from mail1.tecnico.ulisboa.pt (mail1.ist.utl.pt
- [IPv6:2001:690:2100:1::b3dd:b9ac])
- by smtp1.tecnico.ulisboa.pt (Postfix) with ESMTPS id 8D16F600298B;
- Fri, 25 Oct 2024 12:52:35 +0100 (WEST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=tecnico.ulisboa.pt;
- s=mail; t=1729857155;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references;
- bh=J0w0CRKvFjbgPcKdTa0ghGahWPu5fZXRVHkiS+qSlJ8=;
- b=WE4xFSG0TOaq5bC+Qk1pRTITv4L/vPKznQe74YzTeYc3Q5P4SbDbp2qYa9P9dZOUgwIuJ/
- PP/JHfrllj3Lq2PYLgusi5/mfnbeX5lxxxEVQ9IzZ6PGIoZeFNGPU3fe4aHuLprrGmIMpM
- U4gvormObxE6giQdv6WIVSdrhDj+Hic=
-Received: from localhost (unknown
- [IPv6:2001:8a0:6a67:5600:aca0:c311:d240:b169])
- (Authenticated sender: ist187313)
- by mail1.tecnico.ulisboa.pt (Postfix) with ESMTPSA id C81A83601AD;
- Fri, 25 Oct 2024 12:52:34 +0100 (WEST)
-Mime-Version: 1.0
-Content-Transfer-Encoding: quoted-printable
-Content-Type: text/plain; charset=UTF-8
-Date: Fri, 25 Oct 2024 12:52:33 +0100
-Message-Id: <D54V6LMBOVIW.2XKY3HBGCDYPR@tecnico.ulisboa.pt>
-To: "Linux regressions mailing list" <regressions@lists.linux.dev>,
- <kherbst@redhat.com>, <lyude@redhat.com>, <dakr@redhat.com>,
- <airlied@gmail.com>, <simona@ffwll.ch>, <dri-devel@lists.freedesktop.org>,
- <nouveau@lists.freedesktop.org>, <linux-kernel@vger.kernel.org>
-Subject: Re: [REGRESSION] GM20B pmu timeout
-From: "Diogo Ivo" <diogo.ivo@tecnico.ulisboa.pt>
-X-Mailer: aerc 0.18.2-0-ge037c095a049
-References: <20241010133253.30311-1-diogo.ivo@tecnico.ulisboa.pt>
- <041511ee-4556-422a-8604-30b5e0dfd21c@leemhuis.info>
-In-Reply-To: <041511ee-4556-422a-8604-30b5e0dfd21c@leemhuis.info>
+Received: from mail-lj1-f171.google.com (mail-lj1-f171.google.com
+ [209.85.208.171])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 82F1610E4B2
+ for <nouveau@lists.freedesktop.org>; Mon, 28 Oct 2024 13:43:58 +0000 (UTC)
+Received: by mail-lj1-f171.google.com with SMTP id
+ 38308e7fff4ca-2fb3da341c9so40903151fa.2
+ for <nouveau@lists.freedesktop.org>; Mon, 28 Oct 2024 06:43:58 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=linaro.org; s=google; t=1730123037; x=1730727837; darn=lists.freedesktop.org;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=/fMezR/kOH2DQBT9AoD8Am6CVmqlmYght41fc7YQIn4=;
+ b=tP+olFZj/kQ812QlRgM1GvM/LQsgFCIKngZgMGNR3iAv9qgK33bILVhbHi+aTnjBe2
+ bykk2fsSASJwp2oLyHTxo4JsFGJ0bQpEgrmLrMOXEkt3qz5EKxqIhaUDeQF5726wXi6w
+ 9jhofClllGFlF7qQr5eGKR6eyyRJuBvb3ZAiDq/q2LrNZG3ZYPP4z4ilDKijWWKxMeGk
+ VDSeef6UlaH2Tt30khwpUSgqbpHIKpXqeIOAoIOvmASi98KrWIF77qEg6vGIURXLqFID
+ WDQIIGuYh0zuvK2iPVYYE9ERDfkyk9CKaAfrREL/iMbK1tyhJwxyQukPZY08dXQkTCMg
+ A8Kw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1730123037; x=1730727837;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=/fMezR/kOH2DQBT9AoD8Am6CVmqlmYght41fc7YQIn4=;
+ b=UEqBOmlVyUkB0JuqHyqO7V53CJac7YwR2JDnYQHf9QvKCE5ji2H5GyQ/rIkY/bdSU/
+ EToGz/dJz63n9IQEgc7SiXDFgMV4q7jkKZ7s0eWnI+g+jwVZKWzV3MxLkMrikiiCHWMB
+ TwtJW6H1ptYR/VJdHCSXRqd6mt+xMLvCcQtraWdWfd0mSKlIVyV4jlLCYguCIru9vzIY
+ T17dUNDUBjBRcjF5oP7dUhYfg4eq9okcMXOSFzAUHNDv7CQLKktOuxYr1YP2ctIfVO7q
+ Q9zRfACevXkiq5Q+dIQ4uN9GdSU4fb2xxKGZoBNR8I5JuHm80t3BFf7HGyzEb9a06V6+
+ F1cw==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCWx1RKZEc/l9LYlJyDkJqljxWWJofL8fpi62XNwtdSLXizUJb815TH+xoVMDB9IA26ijARKKhxe@lists.freedesktop.org
+X-Gm-Message-State: AOJu0YxTwAmezJxcyDYww/7U6j5hLJpJI6RHO7aOvaSFT4sqcL+mFdSf
+ lsHXGpjIa9pWHVnwCllbRJioiSBEAAsgJ/eYYlp322nzr8OykHJ5jcbUdkiPfJ4=
+X-Google-Smtp-Source: AGHT+IFDCzKfy9vb0H+t7XlbkzhNd21X/z+Uek3eGFqV/jEyV6gcWxJNF6Q+5QcV2YXLsDKfxar/4Q==
+X-Received: by 2002:a2e:a590:0:b0:2f6:5921:f35b with SMTP id
+ 38308e7fff4ca-2fcbe0055ffmr39731081fa.27.1730123036398; 
+ Mon, 28 Oct 2024 06:43:56 -0700 (PDT)
+Received: from eriador.lumag.spb.ru
+ (2001-14ba-a0c3-3a00--7a1.rev.dnainternet.fi. [2001:14ba:a0c3:3a00::7a1])
+ by smtp.gmail.com with ESMTPSA id
+ 38308e7fff4ca-2fcb4612a5asm11513551fa.122.2024.10.28.06.43.53
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Mon, 28 Oct 2024 06:43:55 -0700 (PDT)
+Date: Mon, 28 Oct 2024 15:43:52 +0200
+From: Dmitry Baryshkov <dmitry.baryshkov@linaro.org>
+To: linux@treblig.org, nouveau@lists.freedesktop.org, 
+ Ben Skeggs <bskeggs@redhat.com>
+Cc: maarten.lankhorst@linux.intel.com, mripard@kernel.org, 
+ tzimmermann@suse.de, airlied@gmail.com, simona@ffwll.ch, 
+ dri-devel@lists.freedesktop.org, linux-kernel@vger.kernel.org
+Subject: Re: [PATCH] drm: encoder_slave: Remove unused encoder functions
+Message-ID: <im7gtswtfo6c24waourrtaoeazxuk5paeqblzig73knks735b2@dsj2svieqmur>
+References: <20241025203920.244116-1-linux@treblig.org>
+MIME-Version: 1.0
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <20241025203920.244116-1-linux@treblig.org>
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -71,42 +84,126 @@ List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-Hi Thorsten,
+On Fri, Oct 25, 2024 at 09:39:20PM +0100, linux@treblig.org wrote:
+> From: "Dr. David Alan Gilbert" <linux@treblig.org>
+> 
+> drm_i2c_encoder_commit(), drm_i2c_encoder_mode_set() and
+> drm_i2c_encoder_prepare() have been unused since 2016's
+> commit 7bc61cc5df80 ("drm/arcpgu: Accommodate adv7511 switch to DRM
+> bridge").
+> 
+> Remove them.
+> That change makes drm_i2c_encoder_dpms() unused.
+> Remove it.
+> 
+> Remove the comments about those functions wrapping a couple of
+> pointers in drm_encoder_slave_funcs.  I can see sil164, ch7006, and nv17
+> set those fields, and I can see some nouveau code that calls them
+> directly; so i don't think we can remove the fields.
+> (Although it's not clear to me if the sil164 or ch7006 code
+> can ever get called).
+> 
+> Signed-off-by: Dr. David Alan Gilbert <linux@treblig.org>
+> ---
+>  drivers/gpu/drm/drm_encoder_slave.c | 26 --------------------------
+>  include/drm/drm_encoder_slave.h     | 11 ++---------
+>  2 files changed, 2 insertions(+), 35 deletions(-)
+> 
+> diff --git a/drivers/gpu/drm/drm_encoder_slave.c b/drivers/gpu/drm/drm_encoder_slave.c
+> index e464429d32df..0c994a4ef9ae 100644
+> --- a/drivers/gpu/drm/drm_encoder_slave.c
+> +++ b/drivers/gpu/drm/drm_encoder_slave.c
+> @@ -125,12 +125,6 @@ get_slave_funcs(struct drm_encoder *enc)
+>  	return to_encoder_slave(enc)->slave_funcs;
+>  }
+>  
+> -void drm_i2c_encoder_dpms(struct drm_encoder *encoder, int mode)
+> -{
+> -	get_slave_funcs(encoder)->dpms(encoder, mode);
+> -}
+> -EXPORT_SYMBOL(drm_i2c_encoder_dpms);
 
-On Tue Oct 15, 2024 at 7:13 PM WEST, Linux regression tracking (Thorsten Le=
-emhuis) wrote:
-> Hi, Thorsten here, the Linux kernel's regression tracker.
->
-> On 10.10.24 15:32, Diogo Ivo wrote:
-> >=20
-> > Somewhere between 6.11-rc4 and 6.11-rc5 the following error message is =
-displayed
-> > when trying to initialize a nvc0_screen on the Tegra X1's GM20B:
-> >=20
-> > [ 34.431210] nouveau 57000000.gpu: pmu:hpq: timeout waiting for queue r=
-eady
-> > [ 34.438145] nouveau 57000000.gpu: gr: init failed, -110
-> > nvc0_screen_create:1075 - Error allocating PGRAPH context for M2MF: -11=
-0
-> > failed to create GPU screen
->
-> Thx for the report. Hmmm. No reply so far. :-/
->
-> Diogo, maybe report this here as well:
-> https://gitlab.freedesktop.org/drm/nouveau/-/issues/
->
-> Afterwards drop a link to the ticket here. Reporting nouveau issues via
-> email should work, but maybe you have more luck there.
->
-> Ciao, Thorsten (wearing his 'the Linux kernel's regression tracker' hat)
+I think it might be better to convert nouveau to use these functions
+instead of open-coding them. Another option might be to make nouveau use
+normal drm_bridge interface to talk to i2c encoders and drop the custom
+interface.
 
-I opened the ticket as you mentioned but completely forgot to drop the
-link here, so here goes:
+Ben, WDYT?
 
-https://gitlab.freedesktop.org/drm/nouveau/-/issues/391
+> -
+>  bool drm_i2c_encoder_mode_fixup(struct drm_encoder *encoder,
+>  		const struct drm_display_mode *mode,
+>  		struct drm_display_mode *adjusted_mode)
+> @@ -142,26 +136,6 @@ bool drm_i2c_encoder_mode_fixup(struct drm_encoder *encoder,
+>  }
+>  EXPORT_SYMBOL(drm_i2c_encoder_mode_fixup);
+>  
+> -void drm_i2c_encoder_prepare(struct drm_encoder *encoder)
+> -{
+> -	drm_i2c_encoder_dpms(encoder, DRM_MODE_DPMS_OFF);
+> -}
+> -EXPORT_SYMBOL(drm_i2c_encoder_prepare);
+> -
+> -void drm_i2c_encoder_commit(struct drm_encoder *encoder)
+> -{
+> -	drm_i2c_encoder_dpms(encoder, DRM_MODE_DPMS_ON);
+> -}
+> -EXPORT_SYMBOL(drm_i2c_encoder_commit);
+> -
+> -void drm_i2c_encoder_mode_set(struct drm_encoder *encoder,
+> -		struct drm_display_mode *mode,
+> -		struct drm_display_mode *adjusted_mode)
+> -{
+> -	get_slave_funcs(encoder)->mode_set(encoder, mode, adjusted_mode);
+> -}
+> -EXPORT_SYMBOL(drm_i2c_encoder_mode_set);
+> -
+>  enum drm_connector_status drm_i2c_encoder_detect(struct drm_encoder *encoder,
+>  	    struct drm_connector *connector)
+>  {
+> diff --git a/include/drm/drm_encoder_slave.h b/include/drm/drm_encoder_slave.h
+> index 49172166a164..3089db10b6fd 100644
+> --- a/include/drm/drm_encoder_slave.h
+> +++ b/include/drm/drm_encoder_slave.h
+> @@ -58,8 +58,7 @@ struct drm_encoder_slave_funcs {
+>  	void (*destroy)(struct drm_encoder *encoder);
+>  
+>  	/**
+> -	 * @dpms: Analogous to &drm_encoder_helper_funcs @dpms callback. Wrapped
+> -	 * by drm_i2c_encoder_dpms().
+> +	 * @dpms: Analogous to &drm_encoder_helper_funcs @dpms callback.
+>  	 */
+>  	void (*dpms)(struct drm_encoder *encoder, int mode);
+>  
+> @@ -88,7 +87,7 @@ struct drm_encoder_slave_funcs {
+>  			  struct drm_display_mode *mode);
+>  	/**
+>  	 * @mode_set: Analogous to &drm_encoder_helper_funcs @mode_set
+> -	 * callback. Wrapped by drm_i2c_encoder_mode_set().
+> +	 * callback.
+>  	 */
+>  	void (*mode_set)(struct drm_encoder *encoder,
+>  			 struct drm_display_mode *mode,
+> @@ -223,15 +222,9 @@ void drm_i2c_encoder_destroy(struct drm_encoder *encoder);
+>   * Wrapper fxns which can be plugged in to drm_encoder_helper_funcs:
+>   */
+>  
+> -void drm_i2c_encoder_dpms(struct drm_encoder *encoder, int mode);
+>  bool drm_i2c_encoder_mode_fixup(struct drm_encoder *encoder,
+>  		const struct drm_display_mode *mode,
+>  		struct drm_display_mode *adjusted_mode);
+> -void drm_i2c_encoder_prepare(struct drm_encoder *encoder);
+> -void drm_i2c_encoder_commit(struct drm_encoder *encoder);
+> -void drm_i2c_encoder_mode_set(struct drm_encoder *encoder,
+> -		struct drm_display_mode *mode,
+> -		struct drm_display_mode *adjusted_mode);
+>  enum drm_connector_status drm_i2c_encoder_detect(struct drm_encoder *encoder,
+>  	    struct drm_connector *connector);
+>  void drm_i2c_encoder_save(struct drm_encoder *encoder);
+> -- 
+> 2.47.0
+> 
 
-I cannot seem to get it properly formatted there, hopefully it's still
-useful.
-
-Thanks,
-Diogo
+-- 
+With best wishes
+Dmitry
