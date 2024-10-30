@@ -2,51 +2,126 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id AF8FB9B570E
-	for <lists+nouveau@lfdr.de>; Wed, 30 Oct 2024 00:40:18 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 28E149B6DAF
+	for <lists+nouveau@lfdr.de>; Wed, 30 Oct 2024 21:30:32 +0100 (CET)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 9C59910E3C8;
-	Tue, 29 Oct 2024 23:40:16 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 5439710E0E3;
+	Wed, 30 Oct 2024 20:30:30 +0000 (UTC)
 Authentication-Results: gabe.freedesktop.org;
-	dkim=pass (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="G76qqw3V";
+	dkim=pass (2048-bit key; unprotected) header.d=Nvidia.com header.i=@Nvidia.com header.b="FFjVf062";
 	dkim-atps=neutral
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from nyc.source.kernel.org (nyc.source.kernel.org [147.75.193.91])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 976E810E1A6
- for <nouveau@lists.freedesktop.org>; Tue, 29 Oct 2024 23:40:14 +0000 (UTC)
-Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by nyc.source.kernel.org (Postfix) with ESMTP id 8C7A3A435AA;
- Tue, 29 Oct 2024 23:38:17 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id D9231C4CECD;
- Tue, 29 Oct 2024 23:40:11 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1730245212;
- bh=lm+r5XIv8nxVhivzXgN2PMVG51F6eoKfnrYZatLou9c=;
- h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
- b=G76qqw3VfHgIsaG/47WlYJiyFCGZDYZl16YaMQgMJ9YqqbEL+j0R7CRRCKlA3HR+j
- rko5MltwO5VBj7eC3+77AUICqSVO1a/yWNuk4zNMO3IRPtwrWEmM+my2k4dWf3IdZ8
- 5eev4ds9jqnSnnsFRTqPaZo64ScwYg9oc1ae1h5cOBTUXpXSpk6k3HOl8b5UAuozjb
- 790rJUZU86XqeibJ7ngauBR5nXDpAC00lfdgyvcDNlNVi1QsFJb1emIr0dAufebq87
- VWDTPzk5nkM9gkmDjERxFAVDj0BcoXxIHBDmW7M2fOz6/Y9junBHmOdyOQCB95ohYt
- 8nFa+CSvuTKKA==
-Date: Wed, 30 Oct 2024 00:40:08 +0100
-From: Danilo Krummrich <dakr@kernel.org>
-To: Timur Tabi <ttabi@nvidia.com>
-Cc: "airlied@redhat.com" <airlied@redhat.com>,
- "nouveau@lists.freedesktop.org" <nouveau@lists.freedesktop.org>,
- Ben Skeggs <bskeggs@nvidia.com>
-Subject: Re: [PATCH 2/2] [v8] drm/nouveau: expose GSP-RM logging buffers via
- debugfs
-Message-ID: <ZyFyWCj6dfPWdBJy@pollux>
-References: <20240910215616.1516679-1-ttabi@nvidia.com>
- <20240910215616.1516679-2-ttabi@nvidia.com>
- <Zv8ROwm6ynsKYouo@pollux>
- <2ff5ae312ca85e26fb3f3aaa85fbf3739d9d14e7.camel@nvidia.com>
+Received: from NAM11-DM6-obe.outbound.protection.outlook.com
+ (mail-dm6nam11on2059.outbound.protection.outlook.com [40.107.223.59])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 15C4610E80B
+ for <nouveau@lists.freedesktop.org>; Wed, 30 Oct 2024 20:30:29 +0000 (UTC)
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=gIo7V0UMHLPC5wBNUq0MWgIo3WjjCvgiv24HacVk/rxK+20t8rCMaT6mBspz9iYCz4H5LHlZk73JCK4m+1MYSmMEPxkDXH8ZfW8V4/ikadTl0qQq5uGrnY8y+qKYPWHctzMdrw4qLcmdoa1Gi7Db7FCdhP7Lwcyj+5gWFEIonmG7DaEFfIDZBZ0SgTAIHSyxQIRDI/VFl0Fpym7nHfh6e5NIUKKIbmcdRUkXrH5DECwEzVdYlfcmVAFUS4mvScF6wfxopdPNNqd2nkie/+Qw7Em+GbCRjVFhLchb5MfCm6i2rfBMfkl/+JUqyUjJRZGUJNd4Rem12uzvzWNmlYULaw==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=lvhcYubYY/RQyyZyjduWBKD8DTtxKgWUttC9Tvc2+Ug=;
+ b=iJhor26j0AqNuHiYTDWBPquHpDHIr2BJfQ8qL+1TvVBybbXhUaP/Sm2XCGthgeNiVGpQvz+cyMx/uWlCB2aB60QqRHgdKXnvmQ03ooN6B4Opuni8DEeg/7/eLZ9EhQskyrfrxqbXBeH0lg8CeNpZNMoY2XckAG9IdQ00WCKXJiIlqi8UMeVhBkfgQvtbWc413JrhK4HlSfIgAjUV7mIW8h24Npm/v6dKAqqY0/FvljwWSiiJ6yEMwgnCfUzYEC3OX77883oR73MveTM03t3sKtlROKqoV8XBYK8JZWPrV/ODdl7nLNdX1wOOCGGIZxJHbiqJoq5gisQEx7Wwa1c04w==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
+ 216.228.117.160) smtp.rcpttodomain=redhat.com smtp.mailfrom=nvidia.com;
+ dmarc=pass (p=reject sp=reject pct=100) action=none header.from=nvidia.com;
+ dkim=none (message not signed); arc=none (0)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=Nvidia.com;
+ s=selector2;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=lvhcYubYY/RQyyZyjduWBKD8DTtxKgWUttC9Tvc2+Ug=;
+ b=FFjVf062lCfFCAHhkZez1n7zv8g87fpqjM46etjFKhglnt/7UNjF5y7yeFvgJF0ggSSU0vd6hYm6PhuXCJNLNiCpt3udWvJsk1HEIkj9dI1gqAoy8Jl8SkHpWARHO64KCgRJEnA/bG4DseDl/CBljelKd+dJHgJEYuFOh0yBK3zLwqwveLZSoVEFG0QO96MQvMbriJTz1wFc6aTVjAHxaE7PSksEtFkfu6ZmEbZCPm3PEWQqaowstDh5SIuv0pW07z0mZPjCXlD5c/r2sDjJML+cy7xrvaSrAtsC9cyAK2VoT/aoO6HA3Pn95Vqtyfkwl0d8HB6sQRQxMQqdo9l0QQ==
+Received: from MW2PR16CA0019.namprd16.prod.outlook.com (2603:10b6:907::32) by
+ SN7PR12MB6767.namprd12.prod.outlook.com (2603:10b6:806:269::8) with
+ Microsoft
+ SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ 15.20.8093.25; Wed, 30 Oct 2024 20:30:21 +0000
+Received: from CO1PEPF000075EE.namprd03.prod.outlook.com
+ (2603:10b6:907:0:cafe::6c) by MW2PR16CA0019.outlook.office365.com
+ (2603:10b6:907::32) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.8093.29 via Frontend
+ Transport; Wed, 30 Oct 2024 20:30:20 +0000
+X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 216.228.117.160)
+ smtp.mailfrom=nvidia.com;
+ dkim=none (message not signed)
+ header.d=none;dmarc=pass action=none header.from=nvidia.com;
+Received-SPF: Pass (protection.outlook.com: domain of nvidia.com designates
+ 216.228.117.160 as permitted sender) receiver=protection.outlook.com;
+ client-ip=216.228.117.160; helo=mail.nvidia.com; pr=C
+Received: from mail.nvidia.com (216.228.117.160) by
+ CO1PEPF000075EE.mail.protection.outlook.com (10.167.249.37) with Microsoft
+ SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ 15.20.8114.16 via Frontend Transport; Wed, 30 Oct 2024 20:30:20 +0000
+Received: from rnnvmail201.nvidia.com (10.129.68.8) by mail.nvidia.com
+ (10.129.200.66) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.1544.4; Wed, 30 Oct
+ 2024 13:30:05 -0700
+Received: from ttabi.nvidia.com (10.126.230.35) by rnnvmail201.nvidia.com
+ (10.129.68.8) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.1544.4; Wed, 30 Oct
+ 2024 13:30:04 -0700
+From: Timur Tabi <ttabi@nvidia.com>
+To: Danilo Krummrich <dakr@redhat.com>, <bskeggs@nvidia.com>, Dave Airlie
+ <airlied@redhat.com>, <nouveau@lists.freedesktop.org>
+Subject: [PATCH 1/2] [v2] drm/nouveau: retain device pointer in nvkm_gsp_mem
+ object
+Date: Wed, 30 Oct 2024 15:29:51 -0500
+Message-ID: <20241030202952.694055-1-ttabi@nvidia.com>
+X-Mailer: git-send-email 2.34.1
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <2ff5ae312ca85e26fb3f3aaa85fbf3739d9d14e7.camel@nvidia.com>
+X-NVConfidentiality: public
+Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
+X-Originating-IP: [10.126.230.35]
+X-ClientProxiedBy: rnnvmail202.nvidia.com (10.129.68.7) To
+ rnnvmail201.nvidia.com (10.129.68.8)
+X-EOPAttributedMessage: 0
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: CO1PEPF000075EE:EE_|SN7PR12MB6767:EE_
+X-MS-Office365-Filtering-Correlation-Id: 2f7cefa2-c0b4-4de3-3675-08dcf921ace4
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: BCL:0;
+ ARA:13230040|1800799024|376014|82310400026|36860700013; 
+X-Microsoft-Antispam-Message-Info: =?us-ascii?Q?CGxZ/azHTHNXLesuwd7nk5nAGiySvZmR7aEn1Jboe4Z1iXRDGIrev7qH0v50?=
+ =?us-ascii?Q?bOCF+6LZXhm4MLT+87rvcsd7byLW6P0S/T265kuGVnyhVoNNv1NZGAvwI3QQ?=
+ =?us-ascii?Q?6nfzt1BiOxnjlZUMt1UmYJARFxIplAvgTlAcX3OyMOmn/C5Md0+tHhZLmXb6?=
+ =?us-ascii?Q?NC/t0kUj1d0GlwZQKqWMjEL9amw8Nm4pjPmWkt3zaa5UQcJT3x5KSwG63T8A?=
+ =?us-ascii?Q?RX/T1QmELjUr/mimF6OcgOM4g0GIi3zkaQfCwAohBv1uFphtUWPn7hwTgjYg?=
+ =?us-ascii?Q?sFEqPwJc2qX7K5uJioxq3p0gSEwT/2QVK6nCnk7bWtBC05iwoENKpoSrnhPn?=
+ =?us-ascii?Q?b27EEHeywpmLM5AIEBt33itUtJ1efLDRjBw3Y0KGOR/4UcrIOE1WanIRzZTY?=
+ =?us-ascii?Q?2p2om6wbbsVtGrpmzNwwS8g9ksHgC9EvS/dEaC9nus5JxOJGA9oS0jWUdS3n?=
+ =?us-ascii?Q?Om8cTGT/TcqpQQV0XLBnvzGPDehBfpR+H3ZakPY9Nx/bXebo0FsYg5D5qR4H?=
+ =?us-ascii?Q?lJxXg91lbfy/CtqMv5M9lF30rRoLDESKnshfBQE1gzHNjt7TQIuyRdXbm5Tv?=
+ =?us-ascii?Q?IYmhY39Hntivemk+VsoKM72bA51idpozYYPYJ+a3L84V1FXbs2vHbsT92c1I?=
+ =?us-ascii?Q?VQdPQGUvhwBfQx3ITds5Ygw4taszmpSFlQr+TmlIqR1C1do3Vtico2L90OeR?=
+ =?us-ascii?Q?JUJC9R4TRJawwZh94fpESuJogEXRmEU/fAfGqfYaVvpWUUQtANVhVyTSFUSK?=
+ =?us-ascii?Q?7QixazZsdV8k6iSHBshx5oAR6L3iIeNK5Bc2RDg+kJivQP2f6Jq2dZA9qWOv?=
+ =?us-ascii?Q?lsuEpLYNy2Q9fla+stXpv6PpNz7CstW4M3VyOs08ISsh26g21JzfsyfbFcFA?=
+ =?us-ascii?Q?nTReH55axx2CiRlpg2jLOePrDGOPV4YnyrzdYxRMw+JF7HmN/1fokQDAAIBR?=
+ =?us-ascii?Q?mVdrdE1+5+mZyclF/nStQp1pbBpY72glTRyGptka5LM/JWA+ujin0z1GLU8y?=
+ =?us-ascii?Q?o0cbW2cDy2St5VAdpSTRlxuQkaGg2dQcTB8LlXP03cqBmsXQHyu8842mzER7?=
+ =?us-ascii?Q?kEeTtvQtGzHtxLSqcmUdld2J61tDt0IEnff0HzAJiUDogZrseKeEn3VpK9H3?=
+ =?us-ascii?Q?6dwZidQIY+WDZ8P77gycQvmv4zWmLxhL1DG8G21hHAWk+4nbRsB4EvuyDGYl?=
+ =?us-ascii?Q?z37l0P5qDjYg7bTZKdH+Y5lyXl7g8kJLQQPTVZB8L9w/s1bXeJP+92RCM1DN?=
+ =?us-ascii?Q?h9sMHvhU3Fv26MBdCTFJctBqoKwHrmOKOJDpVNEok8oZCY4XHU3C8iwCQo8c?=
+ =?us-ascii?Q?moS283yGChhEcbWPq08VZJyKCezhkwdXvUbkao2l5e3KrYtD6LXLgNvRiYsd?=
+ =?us-ascii?Q?8FVHRJaOGnlBcyVluNDPlK4eDswBoua9kMNkheQs9doC8Psm4Q=3D=3D?=
+X-Forefront-Antispam-Report: CIP:216.228.117.160; CTRY:US; LANG:en; SCL:1; SRV:;
+ IPV:NLI; SFV:NSPM; H:mail.nvidia.com; PTR:dc6edge1.nvidia.com; CAT:NONE;
+ SFS:(13230040)(1800799024)(376014)(82310400026)(36860700013); DIR:OUT;
+ SFP:1101; 
+X-OriginatorOrg: Nvidia.com
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 30 Oct 2024 20:30:20.8392 (UTC)
+X-MS-Exchange-CrossTenant-Network-Message-Id: 2f7cefa2-c0b4-4de3-3675-08dcf921ace4
+X-MS-Exchange-CrossTenant-Id: 43083d15-7273-40c1-b7db-39efd9ccc17a
+X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=43083d15-7273-40c1-b7db-39efd9ccc17a; Ip=[216.228.117.160];
+ Helo=[mail.nvidia.com]
+X-MS-Exchange-CrossTenant-AuthSource: CO1PEPF000075EE.namprd03.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Anonymous
+X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: SN7PR12MB6767
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -61,203 +136,154 @@ List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-On Tue, Oct 29, 2024 at 07:50:06PM +0000, Timur Tabi wrote:
-> On Thu, 2024-10-03 at 23:48 +0200, Danilo Krummrich wrote:
-> > > +#ifdef CONFIG_DEBUG_FS
-> > > +	/*
-> > > +	 * Logging buffers in debugfs. The wrapper objects need to remain
-> > > +	 * in memory until the dentry is deleted.
-> > > +	 */
-> > > +	struct dentry *dir;		/* Parent dentry */
-> > > +	struct dentry *dir_init;
-> > > +	struct dentry *dir_rm;
-> > > +	struct dentry *dir_intr;
-> > > +	struct dentry *dir_pmu;
-> > 
-> > I think `dir` is confusing, maybe just `dent_*`? Or maybe just wrap all those in
-> > a `struct { ... } debugfs;` and just name them `init`, `rm`, etc.?
-> 
-> Ok, but I'm pretty sure this is like the fifth time I've moved these fields
-> around because you keep telling me to put them somewhere else.
+Store the struct device pointer used to allocate the DMA buffer in
+the nvkm_gsp_mem object.  This allows nvkm_gsp_mem_dtor() to release
+the buffer without needing the nvkm_gsp.  This is needed so that
+we can retain DMA buffers even after the nvkm_gsp object is deleted.
 
-You added those fields in *this* version, so I don't see how that makes any
-sense.
+Signed-off-by: Timur Tabi <ttabi@nvidia.com>
+---
+ .../gpu/drm/nouveau/include/nvkm/subdev/gsp.h |  1 +
+ .../gpu/drm/nouveau/nvkm/subdev/gsp/r535.c    | 50 ++++++++++++-------
+ 2 files changed, 34 insertions(+), 17 deletions(-)
 
-If you don't want to rename them -- fine too. It was a suggestion, and since
-you'll need a v9 anyways it doesn't seem like too much to ask for.
+diff --git a/drivers/gpu/drm/nouveau/include/nvkm/subdev/gsp.h b/drivers/gpu/drm/nouveau/include/nvkm/subdev/gsp.h
+index 9e6f39912368..a45a4ad843b9 100644
+--- a/drivers/gpu/drm/nouveau/include/nvkm/subdev/gsp.h
++++ b/drivers/gpu/drm/nouveau/include/nvkm/subdev/gsp.h
+@@ -9,6 +9,7 @@
+ #define GSP_PAGE_SIZE  BIT(GSP_PAGE_SHIFT)
+ 
+ struct nvkm_gsp_mem {
++	struct device *dev;
+ 	size_t size;
+ 	void *data;
+ 	dma_addr_t addr;
+diff --git a/drivers/gpu/drm/nouveau/nvkm/subdev/gsp/r535.c b/drivers/gpu/drm/nouveau/nvkm/subdev/gsp/r535.c
+index cf58f9da9139..86450b0cd605 100644
+--- a/drivers/gpu/drm/nouveau/nvkm/subdev/gsp/r535.c
++++ b/drivers/gpu/drm/nouveau/nvkm/subdev/gsp/r535.c
+@@ -1000,7 +1000,7 @@ r535_gsp_rpc_get_gsp_static_info(struct nvkm_gsp *gsp)
+ }
+ 
+ static void
+-nvkm_gsp_mem_dtor(struct nvkm_gsp *gsp, struct nvkm_gsp_mem *mem)
++nvkm_gsp_mem_dtor(struct nvkm_gsp_mem *mem)
+ {
+ 	if (mem->data) {
+ 		/*
+@@ -1009,19 +1009,35 @@ nvkm_gsp_mem_dtor(struct nvkm_gsp *gsp, struct nvkm_gsp_mem *mem)
+ 		 */
+ 		memset(mem->data, 0xFF, mem->size);
+ 
+-		dma_free_coherent(gsp->subdev.device->dev, mem->size, mem->data, mem->addr);
++		dma_free_coherent(mem->dev, mem->size, mem->data, mem->addr);
++		put_device(mem->dev);
++
+ 		memset(mem, 0, sizeof(*mem));
+ 	}
+ }
+ 
++/**
++ * nvkm_gsp_mem_ctor - constructor for nvkm_gsp_mem objects
++ * @gsp: gsp pointer
++ * @size: number of bytes to allocate
++ * @mem: nvkm_gsp_mem object to initialize
++ *
++ * Allocates a block of memory for use with GSP.
++ *
++ * This memory block can potentially out-live the driver's remove() callback,
++ * so we take a device reference to ensure its lifetime. The reference is
++ * dropped in the destructor.
++ */
+ static int
+ nvkm_gsp_mem_ctor(struct nvkm_gsp *gsp, size_t size, struct nvkm_gsp_mem *mem)
+ {
+-	mem->size = size;
+ 	mem->data = dma_alloc_coherent(gsp->subdev.device->dev, size, &mem->addr, GFP_KERNEL);
+ 	if (WARN_ON(!mem->data))
+ 		return -ENOMEM;
+ 
++	mem->size = size;
++	mem->dev = get_device(gsp->subdev.device->dev);
++
+ 	return 0;
+ }
+ 
+@@ -1054,8 +1070,8 @@ r535_gsp_postinit(struct nvkm_gsp *gsp)
+ 	nvkm_wr32(device, 0x110004, 0x00000040);
+ 
+ 	/* Release the DMA buffers that were needed only for boot and init */
+-	nvkm_gsp_mem_dtor(gsp, &gsp->boot.fw);
+-	nvkm_gsp_mem_dtor(gsp, &gsp->libos);
++	nvkm_gsp_mem_dtor(&gsp->boot.fw);
++	nvkm_gsp_mem_dtor(&gsp->libos);
+ 
+ 	return ret;
+ }
+@@ -2234,8 +2250,8 @@ static void
+ nvkm_gsp_radix3_dtor(struct nvkm_gsp *gsp, struct nvkm_gsp_radix3 *rx3)
+ {
+ 	nvkm_gsp_sg_free(gsp->subdev.device, &rx3->lvl2);
+-	nvkm_gsp_mem_dtor(gsp, &rx3->lvl1);
+-	nvkm_gsp_mem_dtor(gsp, &rx3->lvl0);
++	nvkm_gsp_mem_dtor(&rx3->lvl1);
++	nvkm_gsp_mem_dtor(&rx3->lvl0);
+ }
+ 
+ /**
+@@ -2323,9 +2339,9 @@ nvkm_gsp_radix3_sg(struct nvkm_gsp *gsp, struct sg_table *sgt, u64 size,
+ 
+ 	if (ret) {
+ lvl2_fail:
+-		nvkm_gsp_mem_dtor(gsp, &rx3->lvl1);
++		nvkm_gsp_mem_dtor(&rx3->lvl1);
+ lvl1_fail:
+-		nvkm_gsp_mem_dtor(gsp, &rx3->lvl0);
++		nvkm_gsp_mem_dtor(&rx3->lvl0);
+ 	}
+ 
+ 	return ret;
+@@ -2417,7 +2433,7 @@ r535_gsp_init(struct nvkm_gsp *gsp)
+ 
+ done:
+ 	if (gsp->sr.meta.data) {
+-		nvkm_gsp_mem_dtor(gsp, &gsp->sr.meta);
++		nvkm_gsp_mem_dtor(&gsp->sr.meta);
+ 		nvkm_gsp_radix3_dtor(gsp, &gsp->sr.radix3);
+ 		nvkm_gsp_sg_free(gsp->subdev.device, &gsp->sr.sgt);
+ 		return ret;
+@@ -2498,7 +2514,7 @@ r535_gsp_dtor(struct nvkm_gsp *gsp)
+ 	mutex_destroy(&gsp->client_id.mutex);
+ 
+ 	nvkm_gsp_radix3_dtor(gsp, &gsp->radix3);
+-	nvkm_gsp_mem_dtor(gsp, &gsp->sig);
++	nvkm_gsp_mem_dtor(&gsp->sig);
+ 	nvkm_firmware_dtor(&gsp->fw);
+ 
+ 	nvkm_falcon_fw_dtor(&gsp->booter.unload);
+@@ -2509,12 +2525,12 @@ r535_gsp_dtor(struct nvkm_gsp *gsp)
+ 
+ 	r535_gsp_dtor_fws(gsp);
+ 
+-	nvkm_gsp_mem_dtor(gsp, &gsp->rmargs);
+-	nvkm_gsp_mem_dtor(gsp, &gsp->wpr_meta);
+-	nvkm_gsp_mem_dtor(gsp, &gsp->shm.mem);
+-	nvkm_gsp_mem_dtor(gsp, &gsp->loginit);
+-	nvkm_gsp_mem_dtor(gsp, &gsp->logintr);
+-	nvkm_gsp_mem_dtor(gsp, &gsp->logrm);
++	nvkm_gsp_mem_dtor(&gsp->rmargs);
++	nvkm_gsp_mem_dtor(&gsp->wpr_meta);
++	nvkm_gsp_mem_dtor(&gsp->shm.mem);
++	nvkm_gsp_mem_dtor(&gsp->loginit);
++	nvkm_gsp_mem_dtor(&gsp->logintr);
++	nvkm_gsp_mem_dtor(&gsp->logrm);
+ }
+ 
+ int
 
-> 
-> > > +/*
-> > > + * The debugfs root for all devices.  Normally we'd use /sys/kernel/debug/dri.,
-> > > + * but that path may not exist when we need it.  So create a new root
-> > > + * /sys/kernel/debug/nouveau/.
-> > > + *
-> > > + * We take a reference every time a dentry under the root is created.  When
-> > > + * the last reference is released, the root is deleted.
-> > > + */
-> > > +static struct {
-> > > +	struct mutex mutex; /* Protects dentry */
-> > > +	struct dentry *dentry;
-> > > +	struct kref kref;
-> > > +} root = {
-> > > +	.mutex = __MUTEX_INITIALIZER(root.mutex),
-> > > +	.kref = KREF_INIT(0),
-> > > +	.dentry = NULL,
-> > > +};
-> > > +
-> > > +static void release_root_dentry(struct kref *ref)
-> > > +{
-> > > +	mutex_lock(&root.mutex);
-> > > +	debugfs_remove(root.dentry);
-> > > +	root.dentry = NULL;
-> > > +	mutex_unlock(&root.mutex);
-> > > +}
-> > 
-> > I think all this should go into module_init() and module_exit(), then you don't
-> > need the mutex and all the reference counts.
-> 
-> Sorry, I don't see how I can just move "all this" to module_init and exit. 
-> The point is to keep the parent dentry around until the last GPU has shut
-> down in r535_debugfs_shutdown().  
-> 
-> Please tell me what you think module_init() and module_exit() will look
-> like.
+base-commit: 904bc5479896d8da7dcd3e162ce224c32c3dc6c3
+prerequisite-patch-id: 6f7d619f67878dea2a3378e76e28d3c666921fbd
+-- 
+2.34.1
 
-You can create the root debugfs entry in module_init() and remove it in
-module_exit() and make it available as a global. Then you don't need any mutex
-and reference count.
-
-Please let me know if anything is still unclear or if I miss anything.
-
-> 
-> > > +/**
-> > > + * create_debufgs - create a blob debugfs entry
-> > > + * @name: filename
-> > > + * @parent: parent
-> > > + * @blob: blob
-> > > + *
-> > > + * Creates a debugfs entry for a logging buffer with the name 'name'.
-> > > + */
-> > > +static struct dentry *create_debugfs(struct nvkm_gsp *gsp, const char *name,
-> > > +				     struct debugfs_blob_wrapper *blob)
-> > > +{
-> > > +	struct dentry *dir;
-> > 
-> > I think `dir` is confusing, what about `dent` or `entry`?
-> 
-> Here's a count of the most popular names for this type:
-> 
->      10 	struct dentry *ddir;
->      18 	struct dentry *d;
->      21 	struct dentry *debugfs_root;
->      31 	struct dentry *dbgfs_dir;
->      39 	struct dentry *debugfs_dir;
->      50 	struct dentry *dentry;
->      55 	struct dentry *debugfs;
->      55 	struct dentry *dir;
->      64 	struct dentry *root;
-> 
-> As you can see, 'dir' is the second most popular name.  So I think it's
-> fine.
-
-Being the second most popular name doesn't make it a good name. I wonder how
-often people use "password" as their password...
-
-> 
-> Besides, couldn't you have make this suggestion during one of the previous 7
-> versions of this patch?  I'm never going to get this patch finished if you
-> keep asking for cosmetic changes.
-
-Agreed, however, I think it got my attention, since you added all those
-
-+	struct dentry *dir;		/* Parent dentry */
-+	struct dentry *dir_init;
-+	struct dentry *dir_rm;
-+	struct dentry *dir_intr;
-+	struct dentry *dir_pmu;
-
-to struct nvkm_gsp in *this* version.
-
-Feel free to keep it, but as mentioned above, you need a v9 anyways, so it also
-shouldn't be a big deal to change those.
-
-Please also note that none of the revisions you have been sending were motivated
-by "cosmetic changes".
-
-> 
-> > > +	dir = debugfs_create_blob(name, 0444, gsp->dir, blob);
-> > > +	if (IS_ERR(dir)) {
-> > > +		nvkm_error(&gsp->subdev,
-> > > +			   "failed to create %s debugfs entry\n", name);
-> > > +		return NULL;
-> > > +	}
-> > > +
-> > > +	/*
-> > > +	 * For some reason, debugfs_create_blob doesn't set the size of the
-> > > +	 * dentry, so do that here.
-> > > +	 */
-> > > +	i_size_write(d_inode(dir), blob->size);
-> > 
-> > I think debugfs entries typically don't need this. Do we need it?
-> 
-> Yes.  I submitted a patch to debugfs earlier this year that would fix it for
-> all debugfs blobs, but it was rejected because I was asked to fix all of
-> debugfs itself, which I wasn't willing to do.
-> 
-> https://www.spinics.net/lists/linux-fsdevel/msg262843.html
-
-I see...
-
-Can you please add a very brief comment and this [1] link?
-
-[1] https://lore.kernel.org/r/linux-fsdevel/20240207200619.3354549-1-ttabi@nvidia.com/
-
-> 
-> > > +	gsp->dir_init = create_debugfs(gsp, "loginit", &gsp->blob_init);
-> > 
-> > Here you use your helper, but for...
-> > 
-> > > +	if (!gsp->dir_init)
-> > > +		goto error;
-> > > +
-> > > +	gsp->dir_intr = debugfs_create_blob("logintr", 0444, gsp->dir, &gsp->blob_intr);
-> > > +	if (IS_ERR(gsp->dir_intr)) {
-> > > +		nvkm_error(&gsp->subdev, "failed to create logintr debugfs entry\n");
-> > > +		goto error;
-> > > +	}
-> > > +
-> > > +	gsp->dir_rm = debugfs_create_blob("logrm", 0444, gsp->dir, &gsp->blob_rm);
-> > > +	if (IS_ERR(gsp->dir_rm)) {
-> > > +		nvkm_error(&gsp->subdev, "failed to create logrm debugfs entry\n");
-> > > +		goto error;
-> > > +	}
-> > > +
-> > > +	/*
-> > > +	 * Since the PMU buffer is copied from an RPC, it doesn't need to be
-> > > +	 * a DMA buffer.
-> > > +	 */
-> > > +	gsp->blob_pmu.size = GSP_PAGE_SIZE;
-> > > +	gsp->blob_pmu.data = kzalloc(gsp->blob_pmu.size, GFP_KERNEL);
-> > > +	if (!gsp->blob_pmu.data)
-> > > +		goto error;
-> > > +
-> > > +	gsp->dir_pmu = debugfs_create_blob("logpmu", 0444, gsp->dir, &gsp->blob_pmu);
-> > > +	if (IS_ERR(gsp->dir_pmu)) {
-> > > +		nvkm_error(&gsp->subdev, "failed to create logpmu debugfs entry\n");
-> > > +		kfree(gsp->blob_pmu.data);
-> > > +		goto error;
-> > > +	}
-> > > +
-> > > +	i_size_write(d_inode(gsp->dir_init), gsp->blob_init.size);
-> > > +	i_size_write(d_inode(gsp->dir_intr), gsp->blob_intr.size);
-> > > +	i_size_write(d_inode(gsp->dir_rm), gsp->blob_rm.size);
-> > > +	i_size_write(d_inode(gsp->dir_pmu), gsp->blob_pmu.size);
-> > 
-> > ...all those, it seems you forgot to switch to your helper.
-> 
-> Oops.  I think I've been working on this patch too long.
-> 
-> I will post a v10 with struct { ... } debugfs and create_debugfs fixes.  But
-> I will need your help with the module_init/exit change if you still want
-> that.
-> 
