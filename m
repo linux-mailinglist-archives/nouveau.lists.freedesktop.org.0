@@ -2,74 +2,50 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id DC3BF9B8DBC
-	for <lists+nouveau@lfdr.de>; Fri,  1 Nov 2024 10:22:28 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 91CB79B9291
+	for <lists+nouveau@lfdr.de>; Fri,  1 Nov 2024 14:52:12 +0100 (CET)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 6E2BA10E2FD;
-	Fri,  1 Nov 2024 09:22:27 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 4608A10E9C9;
+	Fri,  1 Nov 2024 13:52:11 +0000 (UTC)
 Authentication-Results: gabe.freedesktop.org;
-	dkim=pass (2048-bit key; unprotected) header.d=intel.com header.i=@intel.com header.b="T4g5MXr8";
+	dkim=pass (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="JV7T24fb";
 	dkim-atps=neutral
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from mgamail.intel.com (mgamail.intel.com [192.198.163.9])
- by gabe.freedesktop.org (Postfix) with ESMTPS id A370310E21D;
- Fri,  1 Nov 2024 09:22:25 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
- d=intel.com; i=@intel.com; q=dns/txt; s=Intel;
- t=1730452946; x=1761988946;
- h=from:to:cc:subject:in-reply-to:references:date:
- message-id:mime-version;
- bh=bTGvYe562v4iO/ej2FrV7MW9IE5/LvMsQygTJKb+YdY=;
- b=T4g5MXr8nxubm8MBQIX74RTjTyWgfn850ILgsStS+RWAyn9fEH9dzKMM
- JUJMxHeXVaMWynUoPhHNj6s7G9krlKDFzfTBPXQ1vtK3z0RluJ9mdrXvf
- QCpfXnbzVUJsm/LeTwQizJpO9Zxa1/0wIXm+yAe3nwFunIA7YPaq6enAk
- 7d5Sd+Gaq2E/Ul6XEAFFQlqtSMIHpyp7k81p83FHPG4GI3w3C2Nf7azKM
- xQkKjaIAD+CzyXkmuTZda9/i2sounkZ2a5DFRTP8oQwNVmxdK6QObTaw0
- 10IDoHvzU7kGsaESkuIEqHD6x14NFJx21LQeFeZajIDbVeckqqMqjKx9r w==;
-X-CSE-ConnectionGUID: cpdezEzpT/+6q/F32TjWSQ==
-X-CSE-MsgGUID: SZ68p8kNQi6AGW71dHvh4A==
-X-IronPort-AV: E=McAfee;i="6700,10204,11242"; a="40844918"
-X-IronPort-AV: E=Sophos;i="6.11,249,1725346800"; d="scan'208";a="40844918"
-Received: from fmviesa004.fm.intel.com ([10.60.135.144])
- by fmvoesa103.fm.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
- 01 Nov 2024 02:22:25 -0700
-X-CSE-ConnectionGUID: D+IpKCtRTomwlwGuBOc3FQ==
-X-CSE-MsgGUID: y8duOdhSQS2qYZJsphVRQQ==
-X-ExtLoop1: 1
-X-IronPort-AV: E=Sophos;i="6.11,249,1725346800"; d="scan'208";a="87508070"
-Received: from fdefranc-mobl3.ger.corp.intel.com (HELO localhost)
- ([10.245.246.234])
- by fmviesa004-auth.fm.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
- 01 Nov 2024 02:22:16 -0700
-From: Jani Nikula <jani.nikula@linux.intel.com>
-To: imre.deak@intel.com, Abel Vesa <abel.vesa@linaro.org>
-Cc: Maarten Lankhorst <maarten.lankhorst@linux.intel.com>, Maxime Ripard
- <mripard@kernel.org>, Thomas Zimmermann <tzimmermann@suse.de>, David
- Airlie <airlied@gmail.com>, Simona Vetter <simona@ffwll.ch>, Karol Herbst
- <kherbst@redhat.com>, Lyude Paul <lyude@redhat.com>, Danilo Krummrich
- <dakr@redhat.com>, Rodrigo Vivi <rodrigo.vivi@intel.com>, Joonas Lahtinen
- <joonas.lahtinen@linux.intel.com>, Tvrtko Ursulin <tursulin@ursulin.net>,
- Rob Clark <robdclark@gmail.com>, Abhinav Kumar
- <quic_abhinavk@quicinc.com>, Dmitry Baryshkov
- <dmitry.baryshkov@linaro.org>, Sean Paul <sean@poorly.run>, Marijn Suijten
- <marijn.suijten@somainline.org>, Bjorn Andersson <andersson@kernel.org>,
- Konrad Dybcio <konradybcio@kernel.org>, Johan Hovold <johan@kernel.org>,
- dri-devel@lists.freedesktop.org, linux-kernel@vger.kernel.org,
- nouveau@lists.freedesktop.org, intel-gfx@lists.freedesktop.org,
- intel-xe@lists.freedesktop.org, linux-arm-msm@vger.kernel.org,
- freedreno@lists.freedesktop.org
-Subject: Re: [PATCH RFC 1/4] drm/dp: Add helper to set LTTPRs in transparent
- mode
-In-Reply-To: <ZyPxLpykHkO9Xx_R@ideak-desk.fi.intel.com>
-Organization: Intel Finland Oy - BIC 0357606-4 - Westendinkatu 7, 02160 Espoo
-References: <20241031-drm-dp-msm-add-lttpr-transparent-mode-set-v1-0-cafbb9855f40@linaro.org>
- <20241031-drm-dp-msm-add-lttpr-transparent-mode-set-v1-1-cafbb9855f40@linaro.org>
- <ZyPxLpykHkO9Xx_R@ideak-desk.fi.intel.com>
-Date: Fri, 01 Nov 2024 11:22:13 +0200
-Message-ID: <87msijjol6.fsf@intel.com>
+Received: from dfw.source.kernel.org (dfw.source.kernel.org [139.178.84.217])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id C64A510E9C9
+ for <nouveau@lists.freedesktop.org>; Fri,  1 Nov 2024 13:52:09 +0000 (UTC)
+Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
+ by dfw.source.kernel.org (Postfix) with ESMTP id C03375C90AF;
+ Thu, 31 Oct 2024 09:05:06 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id E7423C4CEC3;
+ Thu, 31 Oct 2024 09:05:48 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+ s=k20201202; t=1730365551;
+ bh=UKXW3/4EmfxDoKhp7ewD4Y5Yg9pheLXaBZxwalAV/TI=;
+ h=Date:Subject:To:Cc:References:From:In-Reply-To:From;
+ b=JV7T24fbFDtXcj2uR7YjzV1rDbyahACTW6ch1BYC5nMo9UlYxJC0EUKRX8as0nEh8
+ NmgovKS2YL3C5FIf+8am8hGe7YEu+Muo/+W72C+mH5iDUkuuKFqfNSyU65KZ0xnd4h
+ 9r05W2EVSbuwB+69Dfg3RNn5xBQZtVVjTkCO2H4px//CpjhrZEyGflIBhRDBIGURQh
+ QILWjhGUMzYjbX9zVAMDI4ijYwyI2oJgv5l+1TEE0tq3S499dcfd2xlAktD/XJulPq
+ oXYx2HKEDfVs/X0xmGs+UxXfPpcci1DL7dZ3HAyHUHMW5JjZKK/VLSxJdmcBJwnvvz
+ GJVlRZa/pVUvQ==
+Message-ID: <44db9a6e-41d3-4e78-996e-c4e9aff8ae95@kernel.org>
+Date: Thu, 31 Oct 2024 10:05:46 +0100
 MIME-Version: 1.0
-Content-Type: text/plain
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v3 00/15] NVKM GSP RPC kernel docs, cleanups and fixes
+To: Zhi Wang <zhiw@nvidia.com>
+Cc: nouveau@lists.freedesktop.org, airlied@gmail.com, daniel@ffwll.ch,
+ bskeggs@nvidia.com, acurrid@nvidia.com, cjia@nvidia.com, smitra@nvidia.com,
+ ankita@nvidia.com, aniketa@nvidia.com, kwankhede@nvidia.com,
+ targupta@nvidia.com, zhiwang@kernel.org
+References: <20241031085250.2941482-1-zhiw@nvidia.com>
+From: Danilo Krummrich <dakr@kernel.org>
+Content-Language: en-US
+In-Reply-To: <20241031085250.2941482-1-zhiw@nvidia.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -84,78 +60,19 @@ List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-On Thu, 31 Oct 2024, Imre Deak <imre.deak@intel.com> wrote:
-> On Thu, Oct 31, 2024 at 05:12:45PM +0200, Abel Vesa wrote:
->> According to the DisplayPort standard, LTTPRs have two operating
->> modes:
->>  - non-transparent - it replies to DPCD LTTPR field specific AUX
->>    requests, while passes through all other AUX requests
->>  - transparent - it passes through all AUX requests.
->> 
->> Switching between this two modes is done by the DPTX by issuing
->> an AUX write to the DPCD PHY_REPEATER_MODE register.
->> 
->> Add a generic helper that allows switching between these modes.
->> 
->> Signed-off-by: Abel Vesa <abel.vesa@linaro.org>
->> ---
->>  drivers/gpu/drm/display/drm_dp_helper.c | 17 +++++++++++++++++
->>  include/drm/display/drm_dp_helper.h     |  1 +
->>  2 files changed, 18 insertions(+)
->> 
->> diff --git a/drivers/gpu/drm/display/drm_dp_helper.c b/drivers/gpu/drm/display/drm_dp_helper.c
->> index 6ee51003de3ce616c3a52653c2f1979ad7658e21..38d612345986ad54b42228902ea718a089d169c4 100644
->> --- a/drivers/gpu/drm/display/drm_dp_helper.c
->> +++ b/drivers/gpu/drm/display/drm_dp_helper.c
->> @@ -2694,6 +2694,23 @@ int drm_dp_lttpr_max_link_rate(const u8 caps[DP_LTTPR_COMMON_CAP_SIZE])
->>  }
->>  EXPORT_SYMBOL(drm_dp_lttpr_max_link_rate);
->>  
->> +/**
->> + * drm_dp_lttpr_set_transparent_mode - set the LTTPR in transparent mode
->> + * @aux: DisplayPort AUX channel
->> + * @enable: Enable or disable transparent mode
->> + *
->> + * Returns 0 on success or a negative error code on failure.
->
-> Should be "Returns 1 on success".
+Hi Zhi,
 
-But is that a sensible return value?
+On 10/31/24 9:52 AM, Zhi Wang wrote:
+> Hi folks:
+> 
+> Here is the leftover of the previous spin of NVKM GSP RPC fixes, which
+> is handling the return of large GSP message. PATCH 1 and 2 in the previous
+> spin were merged [1], and this spin is based on top of PATCH 1 and PATCH 2
+> in the previous spin.
+> 
+> Besides the support of the large GSP message, kernel doc and many cleanups
+> are introduced according to the comments in the previous spin [2].
 
->
->> + */
->> +
+Thanks for this work! I'll go through the patches in the next days.
 
-Superfluous newline.
-
->> +int drm_dp_lttpr_set_transparent_mode(struct drm_dp_aux *aux, bool enable)
->> +{
->> +	u8 val = enable ? DP_PHY_REPEATER_MODE_TRANSPARENT :
->> +			  DP_PHY_REPEATER_MODE_NON_TRANSPARENT;
->> +
->> +	return drm_dp_dpcd_writeb(aux, DP_PHY_REPEATER_MODE, val);
->> +}
->> +EXPORT_SYMBOL(drm_dp_lttpr_set_transparent_mode);
->> +
->>  /**
->>   * drm_dp_lttpr_max_lane_count - get the maximum lane count supported by all LTTPRs
->>   * @caps: LTTPR common capabilities
->> diff --git a/include/drm/display/drm_dp_helper.h b/include/drm/display/drm_dp_helper.h
->> index 279624833ea9259809428162f4e845654359f8c9..8821ab2d36b0e04d38ccbdddcb703b34de7ed680 100644
->> --- a/include/drm/display/drm_dp_helper.h
->> +++ b/include/drm/display/drm_dp_helper.h
->> @@ -625,6 +625,7 @@ int drm_dp_read_lttpr_phy_caps(struct drm_dp_aux *aux,
->>  			       u8 caps[DP_LTTPR_PHY_CAP_SIZE]);
->>  int drm_dp_lttpr_count(const u8 cap[DP_LTTPR_COMMON_CAP_SIZE]);
->>  int drm_dp_lttpr_max_link_rate(const u8 caps[DP_LTTPR_COMMON_CAP_SIZE]);
->> +int drm_dp_lttpr_set_transparent_mode(struct drm_dp_aux *aux, bool enable);
->>  int drm_dp_lttpr_max_lane_count(const u8 caps[DP_LTTPR_COMMON_CAP_SIZE]);
->>  bool drm_dp_lttpr_voltage_swing_level_3_supported(const u8 caps[DP_LTTPR_PHY_CAP_SIZE]);
->>  bool drm_dp_lttpr_pre_emphasis_level_3_supported(const u8 caps[DP_LTTPR_PHY_CAP_SIZE]);
->> 
->> -- 
->> 2.34.1
->> 
-
--- 
-Jani Nikula, Intel
+- Danilo
