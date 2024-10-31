@@ -2,27 +2,27 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id 3DAEA9B76D1
-	for <lists+nouveau@lfdr.de>; Thu, 31 Oct 2024 09:53:38 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id B7CF89B76D3
+	for <lists+nouveau@lfdr.de>; Thu, 31 Oct 2024 09:53:40 +0100 (CET)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id E6E9610E84B;
-	Thu, 31 Oct 2024 08:53:36 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 6F3F810E857;
+	Thu, 31 Oct 2024 08:53:39 +0000 (UTC)
 Authentication-Results: gabe.freedesktop.org;
-	dkim=pass (2048-bit key; unprotected) header.d=Nvidia.com header.i=@Nvidia.com header.b="AcufwY+s";
+	dkim=pass (2048-bit key; unprotected) header.d=Nvidia.com header.i=@Nvidia.com header.b="cN1qIRK1";
 	dkim-atps=neutral
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from NAM12-DM6-obe.outbound.protection.outlook.com
- (mail-dm6nam12on2042.outbound.protection.outlook.com [40.107.243.42])
- by gabe.freedesktop.org (Postfix) with ESMTPS id D82A510E848
- for <nouveau@lists.freedesktop.org>; Thu, 31 Oct 2024 08:53:35 +0000 (UTC)
+Received: from NAM11-BN8-obe.outbound.protection.outlook.com
+ (mail-bn8nam11on2042.outbound.protection.outlook.com [40.107.236.42])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 715CD10E845
+ for <nouveau@lists.freedesktop.org>; Thu, 31 Oct 2024 08:53:38 +0000 (UTC)
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=U7l5wWF6/FxmAan8EcoQQC6jryzPcoI1DB7mR7Fogu096XuPYhZtJTQz8Ei1TFt2tAq4rv0n7H9KuKR00w6Hr0+ktjYEXNR0Qv0CwBdw4xRNUYqtAxihCaHv1nCdjn0ITPD95tPqUOUAfqAaSwXbyDBjut2zTysR9H0njgoycf68I6JnxRlzTnn9NUpgL86IgpwqCXY2ClGnLiIvLnr0i8jglYfbMfxlYCDhvC4utD0qHPojIpCvcq/dWz/sWZDJmd9cyCxOBGz/gqGJPsCXND3vvvuaCBnuOtfXegZbHicA0GwokHnORoKkD+hG1NVQpcBDRGV+TgqFb7B4/ehcEQ==
+ b=FXAHAe/Clg2CpbvrGI5uuCU2BCALRXcTHNzZvEESso9B6zz8z30dA+Fz7Sqft+4O6iYOieFX0aS0opjJP6Z1PX1LUUdhw/tltXT3Tpyzvl37b1xdU8EHq5igO10E6a8TQp7h2YuRozEH2MBHeg/xZU7VF5jgYfYwPt5LETpjn+6Mx6AacVEBJD4yXZr8wgLcnFTFsd0qqC36ZF3kcChcCskjdGILuxKyH48QCa1L5fbOlQaHSiO9xjVgNgokO3jQ/IxN3Qbu5Ipd1h10f8QUOH/ALs3vDgv6whjgiGcBN6YKbAeVcsJBj+a+nrW+z4i62AD5fVK6WmluYpLniw7e9A==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
  s=arcselector10001;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=MmYbw5tk4QJwxkE+HGTK3qZt2C0I1qQgf3shZYR6VO8=;
- b=xQ2/r1A93+NGmqXuFzb28EoKd4WLuyP6R0h09pcsarYSQPkHmakPffu3uhlQSDt6+kY5uI9+bLdkabe9wUaQoXruBtqeO1xQMC6yCZg2OTOSEoT6cLrHlBxlBwQHpGTLmnZOlwj0D0vXk9Ymj6XEhf3Txugj/v/Si0XmMeR3MK4kjtMDcqcDNrePBKDlPlN5vvTeVfbseln6qwlhkPw7MWZomMUHwS/+ifhk9i3jiedvh6VroKxTCoQk29oUrFlAM/dXTFIYGw+Wv/nKd7NLmU4ahRaIbBrw0jHcRcOSl8W1p/ASEztDORd7551ZrwGsL/WVt26i/cpxE3HHm6dt5Q==
+ bh=9qm0Erc/9U3A9f6GytbWxmi86zagUgPcpUSIUWUj+7Q=;
+ b=FR4AtUjVbeDLo6Qzwso6kBZCrTgE4zvy799bm6jL9vkkhwkt+oqh6n3vGwRuWcN/RfxpE6Y/4E/Yta8N0hN1c22TGAZnmArOCU8e72Djzqfuby+Qf4wdt+dvw8MKUoy9noM5yQfEX569gYf3yZ9fxZg3XnhbW/PIccyVIrb/gXDyPagyoW4qgKNn9mSD2lMMLDLpmYOCwN5zlo8KKicdHwbtxoafODEs+Pnl/PyKcM6b1oc3DD/OAj3Feyjahe6zp1sEXmMUDI1ByYkLywIBuGu+UODF9TRVBnSwBd0ZWzo4V/9XHPkvbZPT4ofYKoWiN46e/8vV4gVLB5BHbn/uVw==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
  216.228.118.232) smtp.rcpttodomain=lists.freedesktop.org
  smtp.mailfrom=nvidia.com; dmarc=pass (p=reject sp=reject pct=100) action=none
@@ -30,18 +30,18 @@ ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=Nvidia.com;
  s=selector2;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=MmYbw5tk4QJwxkE+HGTK3qZt2C0I1qQgf3shZYR6VO8=;
- b=AcufwY+sAeW1Ndq89qZE/E4vImw9TmSEX5hzN0pY1Lop5C5cPGaY6Q8g2xP3Imua4JHhST3c+pUsV7CUfRmAqBCjj+VakBb5v6RFDe4RhZM1ooxulxuLxJJaXQ9b5Cg3N7IRFnwlYkAq4opFW4tOak+5EcktfrqbFO8AdA5hoow2clOiZ606RXeKZlMznDxfLmSepFpJ38n6rOpamuy5TtTBcWt+OVigfN9qdiqlOMT5/6IXlz6OIISESAvD3rnMyqeuAK8RtpThiiGVi6/6NYH19yh4/3pQU5T4C4Q+17fnHZRjTHIYB7r2+B+tBtqNxyqsuwqejGWgwOG/7Drlqg==
-Received: from BL1PR13CA0319.namprd13.prod.outlook.com (2603:10b6:208:2c1::24)
- by IA0PR12MB8376.namprd12.prod.outlook.com (2603:10b6:208:40b::9)
+ bh=9qm0Erc/9U3A9f6GytbWxmi86zagUgPcpUSIUWUj+7Q=;
+ b=cN1qIRK15cMVT187RqVABOSQzhRw9JtE+IXMBxn9OR8vw8P0hsouJTHcf3i6mMArM+DF84ZUXtZhn9y8gtxPgAj5wBxd2qK6TicNW+nXeVtZ2eMk/24sETuWCgTiOdMmROWjUDJOEIdOyvfXucerPUJ9Voqwq5Ene6Rgk5uYq5K1/VQZ9qjzJFP4MHhch+LMGhD0xHtI6mWN2ERifDOM7MbiQNQD6ro3nepfS5MOMwDZMNAIHpcJ1xTQHvEhapZSdh/it6Ui2z5KZMUTWnuWEIz/t9xLG/I+nsBbjgIB5CgL3qlalhT1RYKlfRLXG81lDol2RrAFlOR1PAvuz7LIUA==
+Received: from BL1PR13CA0315.namprd13.prod.outlook.com (2603:10b6:208:2c1::20)
+ by SN7PR12MB7130.namprd12.prod.outlook.com (2603:10b6:806:2a2::22)
  with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.8114.20; Thu, 31 Oct
- 2024 08:53:30 +0000
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.8093.27; Thu, 31 Oct
+ 2024 08:53:33 +0000
 Received: from BN2PEPF00004FC1.namprd04.prod.outlook.com
- (2603:10b6:208:2c1:cafe::ca) by BL1PR13CA0319.outlook.office365.com
- (2603:10b6:208:2c1::24) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.8114.14 via Frontend
- Transport; Thu, 31 Oct 2024 08:53:30 +0000
+ (2603:10b6:208:2c1:cafe::c9) by BL1PR13CA0315.outlook.office365.com
+ (2603:10b6:208:2c1::20) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.8137.7 via Frontend
+ Transport; Thu, 31 Oct 2024 08:53:33 +0000
 X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 216.228.118.232)
  smtp.mailfrom=nvidia.com;
  dkim=none (message not signed)
@@ -52,18 +52,18 @@ Received-SPF: Pass (protection.outlook.com: domain of nvidia.com designates
 Received: from mail.nvidia.com (216.228.118.232) by
  BN2PEPF00004FC1.mail.protection.outlook.com (10.167.243.187) with Microsoft
  SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.20.8114.16 via Frontend Transport; Thu, 31 Oct 2024 08:53:30 +0000
-Received: from drhqmail202.nvidia.com (10.126.190.181) by mail.nvidia.com
+ 15.20.8114.16 via Frontend Transport; Thu, 31 Oct 2024 08:53:33 +0000
+Received: from drhqmail201.nvidia.com (10.126.190.180) by mail.nvidia.com
  (10.127.129.5) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.1544.4; Thu, 31 Oct
- 2024 01:53:17 -0700
+ 2024 01:53:18 -0700
 Received: from drhqmail203.nvidia.com (10.126.190.182) by
- drhqmail202.nvidia.com (10.126.190.181) with Microsoft SMTP Server
+ drhqmail201.nvidia.com (10.126.190.180) with Microsoft SMTP Server
  (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.2.1544.4; Thu, 31 Oct 2024 01:53:17 -0700
+ 15.2.1544.4; Thu, 31 Oct 2024 01:53:18 -0700
 Received: from inno-linux.nvidia.com (10.127.8.13) by mail.nvidia.com
  (10.126.190.182) with Microsoft SMTP Server id 15.2.1544.4 via Frontend
- Transport; Thu, 31 Oct 2024 01:53:16 -0700
+ Transport; Thu, 31 Oct 2024 01:53:17 -0700
 From: Zhi Wang <zhiw@nvidia.com>
 To: <nouveau@lists.freedesktop.org>
 CC: <airlied@gmail.com>, <daniel@ffwll.ch>, <dakr@kernel.org>,
@@ -71,10 +71,9 @@ CC: <airlied@gmail.com>, <daniel@ffwll.ch>, <dakr@kernel.org>,
  <smitra@nvidia.com>, <ankita@nvidia.com>, <aniketa@nvidia.com>,
  <kwankhede@nvidia.com>, <targupta@nvidia.com>, <zhiw@nvidia.com>,
  <zhiwang@kernel.org>
-Subject: [PATCH v3 14/15] nvkm: support handling the return of large GSP
- message
-Date: Thu, 31 Oct 2024 01:52:49 -0700
-Message-ID: <20241031085250.2941482-15-zhiw@nvidia.com>
+Subject: [PATCH v3 15/15] nvkm: consume the return of large GSP message
+Date: Thu, 31 Oct 2024 01:52:50 -0700
+Message-ID: <20241031085250.2941482-16-zhiw@nvidia.com>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <20241031085250.2941482-1-zhiw@nvidia.com>
 References: <20241031085250.2941482-1-zhiw@nvidia.com>
@@ -84,50 +83,50 @@ Content-Type: text/plain
 X-NV-OnPremToCloud: ExternallySecured
 X-EOPAttributedMessage: 0
 X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: BN2PEPF00004FC1:EE_|IA0PR12MB8376:EE_
-X-MS-Office365-Filtering-Correlation-Id: 32d2e0a7-206a-403e-6bd7-08dcf9897e7c
+X-MS-TrafficTypeDiagnostic: BN2PEPF00004FC1:EE_|SN7PR12MB7130:EE_
+X-MS-Office365-Filtering-Correlation-Id: d3abad1d-2fbe-411e-0b7e-08dcf9898001
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
 X-Microsoft-Antispam: BCL:0;
- ARA:13230040|82310400026|376014|36860700013|1800799024; 
-X-Microsoft-Antispam-Message-Info: =?us-ascii?Q?DNpeS1k13wNLtWQhlCPgcJDvZdnFHD7korsuw2+AbEUOkNHg9PCa7RXIv/DY?=
- =?us-ascii?Q?KVrOP4AVhe98AArsFJrPTl/cerxTroS0jax4cKsb5ZNM136o662gAd7dNlbh?=
- =?us-ascii?Q?nGsOnL39NwsancM07yaiNVe8LJw4R3+tw971p2zh8OVzX6083TAzuZYpsxLo?=
- =?us-ascii?Q?+GrXYm0aJ3+eB5I5bal0pmGq/ZlOzSX6uQOnpLvrTAtGf9GFUmzF9CQp4bLw?=
- =?us-ascii?Q?yLJ23myeNtrRLF8Gd6zznevWqkxsVno2hnCARGB2+lLIewCx7/r45uUqMmRz?=
- =?us-ascii?Q?V6/6iYy6HR8lqCPrMRLnq6OupXMhHIdnU7GSXmnOQXnXxcmc3Rc0fgu2W2Jq?=
- =?us-ascii?Q?cA1La7EXfCPjbhmJqSBuZ6WCFrwes0PBa/ewBGXGa59ECUiFPvJXMKUjLVXA?=
- =?us-ascii?Q?DzJLhwcAzHaXBhqqvmUUPAlgCLIrQ1bX7A4LRNG0nAbKCudwnJhfJSEsFI9a?=
- =?us-ascii?Q?wkBJ+b3Sdwt1tncMT5BNQd4+DA6OKAijsoIm2g1R1hfMibY/iNjSlAL/a+Qr?=
- =?us-ascii?Q?EJM+Z7Tw2PvI8PiVJX5X56VmfRtiAoUylRlvczPOEwtMtU0Z5jg1wurCzYjZ?=
- =?us-ascii?Q?rH3tTaJWmJ+RA4ZxXU9+a9l3L2zxe9k+XpiU40FzpMqHcZJK1CjYfly5khkO?=
- =?us-ascii?Q?GMqWnuPh/NWDrr7v4yG4TjCOAKev9qnXzpXC2ldjxMt/KxzD7gLjf087amSG?=
- =?us-ascii?Q?Z10k+hLA3XOEgmR/j3ktOylv/RD1XPS4hp3SjpP7QOTxuOrQoXugrkhanhkB?=
- =?us-ascii?Q?GimHut/tL1jhTVRjPeR1r5CQWEP0P/InpUvNYSx4XdpTjelSnNDsx5iAGFX4?=
- =?us-ascii?Q?8Q1m+fG+D/ifDpi+SAeA+rdeMFm77gaF2d/6mKoL/ZahEuV4jV/hXo8jY0Cy?=
- =?us-ascii?Q?DQmes+X3NCLABdkL6j/bTGW88cHSW9nDxl1VSvVWH+KBlqJR0s5kivQdfHBG?=
- =?us-ascii?Q?ApxA6eF13Ku5czkYi+VgyCUbIFbSM0zlakURyGOjB8OeXeMvw/9opXnUXkjp?=
- =?us-ascii?Q?leTkJ+/mybsaaK5lqgHesTMHrBFy4SQNpjtCc2iuQTED5n4DgYts9/Rfdvsz?=
- =?us-ascii?Q?idzciLwlsIt66g8yLYNzKPSd2CvvvCa2ksdmSmtDMNNlXiq+lwJFtRBKVGtZ?=
- =?us-ascii?Q?f6QWw4nr1bFj3NwYL2i+ChGSXPP7HotMoAZzJtbPsxBPHwLWBOXI/raIaUKK?=
- =?us-ascii?Q?PRdBegwv6cy/SjJudHKePHpX4Q9zKKeMDTMCvEVlsctLeE/Vyv7uwOQb6uw4?=
- =?us-ascii?Q?KKAGQefOjyvbzsnL4+T6QeA7knVFOkEw6LDxrftEl12gQZICIqPGbIHr0MX5?=
- =?us-ascii?Q?8KY9txEeq3pSOlws9+cSgjg0cNYkFfN6SERBsx7OWd8kb1O6MmdrGwTV9At3?=
- =?us-ascii?Q?tuo5bV5jUaAvNiRvJLbyhOLv6tNv1nyfR6CXtAgKLaVwWCh76g=3D=3D?=
+ ARA:13230040|1800799024|376014|36860700013|82310400026; 
+X-Microsoft-Antispam-Message-Info: =?us-ascii?Q?rcN4uiAv/BVtc3o78SyxF8KuvTiRQAxaQFDw/KIemK6TzHDk0BJ8qcfTptJr?=
+ =?us-ascii?Q?vTr8zKlj0U4B3GfDpvxiVaelO2R8slZl6dd/zmQLKJR70loMogzpTh2BFhTA?=
+ =?us-ascii?Q?f5cWwxWkzdpObRJGHQlvH+SCvwXw269g0OswK7wWo5+1aUf6CSj8hqe0AyGl?=
+ =?us-ascii?Q?a7EIPkr8xmoYPNbpgu1N3p7il5T1DzEPJGGsXj+AfD6ERS94pVHaPaWLLO3N?=
+ =?us-ascii?Q?Glz4BzXZ5khCNpVuTzRLC428xD7rPLYqqb769nDOW57bC2efaH6pF4XUiRIA?=
+ =?us-ascii?Q?9toQsn392A1neSjsP9ShUBGeQFN+iuOzv3PiEnfSNrMtazOl+l6KSwab9eiA?=
+ =?us-ascii?Q?3nTrK31hGsZfHHS36R24cOpw2Dv8IJeYswAtLfVWxA/lrdxLny8sHe1AOFoT?=
+ =?us-ascii?Q?mY0xp5W2bk7HLkCWfvVGc7zZGpPyasjSDwWbFTjWl3GqW3wLRz/RUgo0c/dd?=
+ =?us-ascii?Q?xXAkJJXjvFw/4N0rTIrslcaCxUMIRe5ExK5vTt7o6wuzMqP1sYwMrIMMz6f1?=
+ =?us-ascii?Q?icoJG7BLCyyPLsx7pXOwDmgkksidQiNDOgRNgCX5RkR4m1QDYbNg6kSq/jXy?=
+ =?us-ascii?Q?PbNU/HiM9dckEPEAcsw+aQVhC5w/I2212jqxDFOF1rzaQblFem2P+Va73Q8p?=
+ =?us-ascii?Q?GlnPIc76lXa0G/rtQNun8tIZuxMeI7ezR4tXidTAtEjXG6E7lU0eUQOKqhVl?=
+ =?us-ascii?Q?i5qG9vrEgzfbvhWkSKmALO7Uzc8QvJvE9yy5p5RTq0xiIfGHKI/T3n+Nomwl?=
+ =?us-ascii?Q?LUq67UKp3ALErtuqWsljU5FkB9a9Mk5oHX/Ez7jdYrsmzxAhXIu5LCo312mI?=
+ =?us-ascii?Q?02YGH4BXb/7lP833I9VSfrnxpkiZJFVJOPz8uSPeY0/kjJszu/vYkVD52SCG?=
+ =?us-ascii?Q?11zE+yeZ47TalqEJm2OmImy4jOzuRp3AvdlChnrao5Lq8LRJhRPh+9/s2BeN?=
+ =?us-ascii?Q?P7sTFSaDns4N470NM1Jq0StvJnMgCxPaMtpDbMottuiF24UE3jZSwos+ndb3?=
+ =?us-ascii?Q?R62jFYA8xFh66qxl86I+SrjAIn+KvHd6Ksq+p6QBYGNSb1Z+E5ut0lzYaM/p?=
+ =?us-ascii?Q?onxG6xxVeMxo/4UFZBTsGNombDTDMgtZLwBL60VBLPTVx7GMtGWR64GKPc1G?=
+ =?us-ascii?Q?C18+WUMEjZWIIJa89f141XEL2wBBBAmom5Iu85iJO/PdaALf3TBXn0wXwNFL?=
+ =?us-ascii?Q?ujubmv4DJix9rJhH/GHd4tn4GKUXUF/sJjAO96wCw4bwuJD2427qXL2trtFw?=
+ =?us-ascii?Q?DqZpzWVLjSMgndulG7SuOXNK7avBQGKKmKifbdWmhZmx5E//atPhfT8kuEeA?=
+ =?us-ascii?Q?53uwWdoiBXW2AFpPVP5PKAuNkNL7gZYLPAQGY9emtPfMRCoHZobcSuPb+jCa?=
+ =?us-ascii?Q?cwxd32Oso8hH0Ymq9Es74+PrTg2feCyTSQoG/RxckjhLBG+rfA=3D=3D?=
 X-Forefront-Antispam-Report: CIP:216.228.118.232; CTRY:US; LANG:en; SCL:1; SRV:;
  IPV:NLI; SFV:NSPM; H:mail.nvidia.com; PTR:dc7edge1.nvidia.com; CAT:NONE;
- SFS:(13230040)(82310400026)(376014)(36860700013)(1800799024); DIR:OUT;
+ SFS:(13230040)(1800799024)(376014)(36860700013)(82310400026); DIR:OUT;
  SFP:1101; 
 X-OriginatorOrg: Nvidia.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 31 Oct 2024 08:53:30.5655 (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: 32d2e0a7-206a-403e-6bd7-08dcf9897e7c
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 31 Oct 2024 08:53:33.1280 (UTC)
+X-MS-Exchange-CrossTenant-Network-Message-Id: d3abad1d-2fbe-411e-0b7e-08dcf9898001
 X-MS-Exchange-CrossTenant-Id: 43083d15-7273-40c1-b7db-39efd9ccc17a
 X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=43083d15-7273-40c1-b7db-39efd9ccc17a; Ip=[216.228.118.232];
  Helo=[mail.nvidia.com]
 X-MS-Exchange-CrossTenant-AuthSource: BN2PEPF00004FC1.namprd04.prod.outlook.com
 X-MS-Exchange-CrossTenant-AuthAs: Anonymous
 X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: IA0PR12MB8376
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: SN7PR12MB7130
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -142,217 +141,87 @@ List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-The max GSP message element size is 16 pages (including the headers). To
-send a message larger than 16 pages, nvkm should split it into multiple
-and send them accordingly. The first element has the expected function
-number, while the rest are sent with function number as
-NV_VGPU_MSG_FUNCTION_CONTINUATION_RECORD. GSP consumes the elements from
-the cmdq and always writes the result back to the msgq. The result is also
-formed as split elements.
-
-However, nvkm is able to split the large GSP message and send them, but
-totally not aware of handling the return of the large GSP message, which
-are the split elements in the msgq. Thus, it keeps dumping the unknown RPC
-messages from msgq, which is actually CONTINUATION_RECORD message,
-discard them unexpectly. Thus, the caller will not be able to consume
-the result from GSP.
-
-Introduce the handling of the return of large GSP message on the msgq path.
-Slightly re-factor the low-level part of msg receiving routines. Merge the
-split elements back into a large element before handling it to the upper
-level. Thus, the upper-level of GSP RPC APIs don't need to be heavily
-changed.
+As the GSP message recv path is able to handle the return of large GSP
+message, consume the return of large GSP message in the sending path.
 
 Signed-off-by: Zhi Wang <zhiw@nvidia.com>
 ---
- .../gpu/drm/nouveau/nvkm/subdev/gsp/r535.c    | 111 +++++++++++++++---
- 1 file changed, 92 insertions(+), 19 deletions(-)
+ .../gpu/drm/nouveau/nvkm/subdev/gsp/r535.c    | 35 ++++++++++---------
+ 1 file changed, 19 insertions(+), 16 deletions(-)
 
 diff --git a/drivers/gpu/drm/nouveau/nvkm/subdev/gsp/r535.c b/drivers/gpu/drm/nouveau/nvkm/subdev/gsp/r535.c
-index 08a74d8bd06f..41da8c72d618 100644
+index 41da8c72d618..5a9c7ffa635c 100644
 --- a/drivers/gpu/drm/nouveau/nvkm/subdev/gsp/r535.c
 +++ b/drivers/gpu/drm/nouveau/nvkm/subdev/gsp/r535.c
-@@ -104,6 +104,17 @@
-  * |        params          |
-  * +------------------------+
-  *
-+ * The max size of a message queue element is 16 pages (including the
-+ * headers). When a GSP message to be sent is larger than 16 pages, the
-+ * message should be split into multiple elements and sent accordingly.
-+ *
-+ * In the bunch of the split elements, the first element has the expected
-+ * function number, while the rest of the elements are sent with the
-+ * function number NV_VGPU_MSG_FUNCTION_CONTINUATION_RECORD.
-+ *
-+ * GSP consumes the elements from the cmdq and always writes the result
-+ * back to the msgq. The result is also formed as split elements.
-+ *
-  * decoders:
-  *
-  * - gsp_msg(msg): GSP message element (element header + GSP RPC header +
-@@ -125,6 +136,21 @@ struct r535_gsp_msg {
- 	u8  data[];
- };
+@@ -483,10 +483,9 @@ r535_gsp_msg_recv(struct nvkm_gsp *gsp, int fn, u32 gsp_rpc_len)
  
-+struct nvfw_gsp_rpc {
-+	u32 header_version;
-+	u32 signature;
-+	u32 length;
-+	u32 function;
-+	u32 rpc_result;
-+	u32 rpc_result_private;
-+	u32 sequence;
-+	union {
-+		u32 spare;
-+		u32 cpuRmGfid;
-+	};
-+	u8  data[];
-+};
-+
- #define GSP_MSG_HDR_SIZE offsetof(struct r535_gsp_msg, data)
+ 	if (fn && rpc->function == fn) {
+ 		if (gsp_rpc_len) {
+-			if (rpc->length < sizeof(*rpc) + gsp_rpc_len) {
+-				nvkm_error(subdev, "rpc len %d < %zd\n",
+-					   rpc->length, sizeof(*rpc) +
+-					   gsp_rpc_len);
++			if (rpc->length < gsp_rpc_len) {
++				nvkm_error(subdev, "rpc len %d < %d\n",
++					   rpc->length, gsp_rpc_len);
+ 				r535_gsp_msg_dump(gsp, rpc, NV_DBG_ERROR);
+ 				r535_gsp_msg_done(gsp, rpc);
+ 				return ERR_PTR(-EIO);
+@@ -932,6 +931,7 @@ r535_gsp_rpc_push(struct nvkm_gsp *gsp, void *payload, bool wait,
+ 	mutex_lock(&gsp->cmdq.mutex);
+ 	if (payload_size > max_payload_size) {
+ 		const u32 fn = rpc->function;
++		u32 remain_payload_size = payload_size;
  
- #define to_gsp_hdr(p, header) \
-@@ -203,8 +229,12 @@ struct r535_gsp_msg_info {
- 	int *retries;
- 	u32 gsp_rpc_len;
- 	void *gsp_rpc_buf;
-+	bool continuation;
- };
+ 		/* Adjust length, and send initial RPC. */
+ 		rpc->length = sizeof(*rpc) + max_payload_size;
+@@ -942,11 +942,12 @@ r535_gsp_rpc_push(struct nvkm_gsp *gsp, void *payload, bool wait,
+ 			goto done;
  
-+static void
-+r535_gsp_msg_dump(struct nvkm_gsp *gsp, struct nvfw_gsp_rpc *msg, int lvl);
-+
- static void *
- r535_gsp_msgq_recv_one_elem(struct nvkm_gsp *gsp,
- 			    struct r535_gsp_msg_info *info)
-@@ -222,11 +252,28 @@ r535_gsp_msgq_recv_one_elem(struct nvkm_gsp *gsp,
- 		return ERR_PTR(ret);
+ 		payload += max_payload_size;
+-		payload_size -= max_payload_size;
++		remain_payload_size -= max_payload_size;
  
- 	mqe = r535_gsp_msgq_get_entry(gsp);
-+
-+	if (info->continuation) {
-+		struct nvfw_gsp_rpc *rpc = (struct nvfw_gsp_rpc *)mqe->data;
-+
-+		if (rpc->function != NV_VGPU_MSG_FUNCTION_CONTINUATION_RECORD) {
-+			nvkm_error(&gsp->subdev,
-+				   "Not a continuation of a large RPC\n");
-+			r535_gsp_msg_dump(gsp, rpc, NV_DBG_ERROR);
-+			return ERR_PTR(-EIO);
-+		}
-+	}
-+
- 	size = ALIGN(expected + GSP_MSG_HDR_SIZE, GSP_PAGE_SIZE);
+ 		/* Remaining chunks sent as CONTINUATION_RECORD RPCs. */
+-		while (payload_size) {
+-			u32 size = min(payload_size, max_payload_size);
++		while (remain_payload_size) {
++			u32 size = min(remain_payload_size,
++				       max_payload_size);
+ 			void *next;
  
- 	len = ((gsp->msgq.cnt - rptr) * GSP_PAGE_SIZE) - sizeof(*mqe);
- 	len = min_t(u32, expected, len);
--	memcpy(buf, mqe->data, len);
-+
-+	if (info->continuation)
-+		memcpy(buf, mqe->data + sizeof(struct nvfw_gsp_rpc),
-+		       len - sizeof(struct nvfw_gsp_rpc));
-+	else
-+		memcpy(buf, mqe->data, len);
+ 			next = r535_gsp_rpc_get(gsp, NV_VGPU_MSG_FUNCTION_CONTINUATION_RECORD, size);
+@@ -962,19 +963,21 @@ r535_gsp_rpc_push(struct nvkm_gsp *gsp, void *payload, bool wait,
+ 				goto done;
  
- 	expected -= len;
+ 			payload += size;
+-			payload_size -= size;
++			remain_payload_size -= size;
+ 		}
  
-@@ -245,16 +292,26 @@ r535_gsp_msgq_recv_one_elem(struct nvkm_gsp *gsp,
- static void *
- r535_gsp_msgq_recv(struct nvkm_gsp *gsp, u32 gsp_rpc_len, int *retries)
- {
-+	struct r535_gsp_msg *mqe;
-+	const u32 max_rpc_size = GSP_MSG_MAX_SIZE - sizeof(*mqe);
-+	struct nvfw_gsp_rpc *rpc;
- 	struct r535_gsp_msg_info info = {0};
-+	u32 expected = gsp_rpc_len;
- 	void *buf;
- 
--	buf = kvmalloc(gsp_rpc_len, GFP_KERNEL);
-+	mqe = r535_gsp_msgq_get_entry(gsp);
-+	rpc = (struct nvfw_gsp_rpc *)mqe->data;
-+
-+	if (WARN_ON(rpc->length > max_rpc_size))
-+		return NULL;
-+
-+	buf = kvmalloc(max_t(u32, rpc->length, expected), GFP_KERNEL);
- 	if (!buf)
- 		return ERR_PTR(-ENOMEM);
- 
- 	info.gsp_rpc_buf = buf;
- 	info.retries = retries;
--	info.gsp_rpc_len = gsp_rpc_len;
-+	info.gsp_rpc_len = rpc->length;
- 
- 	buf = r535_gsp_msgq_recv_one_elem(gsp, &info);
- 	if (IS_ERR(buf)) {
-@@ -262,6 +319,37 @@ r535_gsp_msgq_recv(struct nvkm_gsp *gsp, u32 gsp_rpc_len, int *retries)
- 		info.gsp_rpc_buf = NULL;
+ 		/* Wait for reply. */
+-		if (wait) {
+-			rpc = r535_gsp_msg_recv(gsp, fn, gsp_rpc_len);
+-			if (!IS_ERR_OR_NULL(rpc))
++		rpc = r535_gsp_msg_recv(gsp, fn, payload_size +
++					sizeof(*rpc));
++		if (!IS_ERR_OR_NULL(rpc)) {
++			if (wait)
+ 				repv = rpc->data;
+-			else
+-				repv = rpc;
+-		} else {
+-			repv = NULL;
+-		}
++			else {
++				nvkm_gsp_rpc_done(gsp, rpc);
++				repv = NULL;
++			}
++		} else
++			repv = wait ? rpc : NULL;
+ 	} else {
+ 		repv = r535_gsp_rpc_send(gsp, payload, wait, gsp_rpc_len);
  	}
- 
-+	if (expected <= max_rpc_size)
-+		return buf;
-+
-+	info.gsp_rpc_buf += info.gsp_rpc_len;
-+	expected -= info.gsp_rpc_len;
-+
-+	while (expected) {
-+		u32 size;
-+
-+		rpc = r535_gsp_msgq_peek(gsp, sizeof(*rpc), info.retries);
-+		if (IS_ERR_OR_NULL(rpc)) {
-+			kfree(buf);
-+			return rpc;
-+		}
-+
-+		info.gsp_rpc_len = rpc->length;
-+		info.continuation = true;
-+
-+		rpc = r535_gsp_msgq_recv_one_elem(gsp, &info);
-+		if (IS_ERR_OR_NULL(rpc)) {
-+			kfree(buf);
-+			return rpc;
-+		}
-+
-+		size = info.gsp_rpc_len - sizeof(*rpc);
-+		expected -= size;
-+		info.gsp_rpc_buf += size;
-+	}
-+
-+	rpc = buf;
-+	rpc->length = gsp_rpc_len;
- 	return buf;
- }
- 
-@@ -350,21 +438,6 @@ r535_gsp_cmdq_get(struct nvkm_gsp *gsp, u32 gsp_rpc_len)
- 	return msg->data;
- }
- 
--struct nvfw_gsp_rpc {
--	u32 header_version;
--	u32 signature;
--	u32 length;
--	u32 function;
--	u32 rpc_result;
--	u32 rpc_result_private;
--	u32 sequence;
--	union {
--		u32 spare;
--		u32 cpuRmGfid;
--	};
--	u8  data[];
--};
--
- static void
- r535_gsp_msg_done(struct nvkm_gsp *gsp, struct nvfw_gsp_rpc *msg)
- {
-@@ -396,7 +469,7 @@ r535_gsp_msg_recv(struct nvkm_gsp *gsp, int fn, u32 gsp_rpc_len)
- 	if (IS_ERR_OR_NULL(rpc))
- 		return rpc;
- 
--	rpc = r535_gsp_msgq_recv(gsp, rpc->length, &retries);
-+	rpc = r535_gsp_msgq_recv(gsp, gsp_rpc_len, &retries);
- 	if (IS_ERR_OR_NULL(rpc))
- 		return rpc;
- 
 -- 
 2.34.1
 
