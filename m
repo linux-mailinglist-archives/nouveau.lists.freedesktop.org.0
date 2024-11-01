@@ -2,77 +2,74 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id 803019B84F0
-	for <lists+nouveau@lfdr.de>; Thu, 31 Oct 2024 22:08:12 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id DC3BF9B8DBC
+	for <lists+nouveau@lfdr.de>; Fri,  1 Nov 2024 10:22:28 +0100 (CET)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id BE76610E932;
-	Thu, 31 Oct 2024 21:08:09 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 6E2BA10E2FD;
+	Fri,  1 Nov 2024 09:22:27 +0000 (UTC)
 Authentication-Results: gabe.freedesktop.org;
-	dkim=pass (2048-bit key; unprotected) header.d=intel.com header.i=@intel.com header.b="RxfCkLDH";
+	dkim=pass (2048-bit key; unprotected) header.d=intel.com header.i=@intel.com header.b="T4g5MXr8";
 	dkim-atps=neutral
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from mgamail.intel.com (mgamail.intel.com [198.175.65.18])
- by gabe.freedesktop.org (Postfix) with ESMTPS id C57EA10E932;
- Thu, 31 Oct 2024 21:08:08 +0000 (UTC)
+Received: from mgamail.intel.com (mgamail.intel.com [192.198.163.9])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id A370310E21D;
+ Fri,  1 Nov 2024 09:22:25 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
  d=intel.com; i=@intel.com; q=dns/txt; s=Intel;
- t=1730408889; x=1761944889;
- h=date:from:to:cc:subject:message-id:reply-to:references:
- mime-version:in-reply-to;
- bh=MskkAwGzR4Xb9GOIMxqvO2yFYtiuGRuTFN0lPBXNzjQ=;
- b=RxfCkLDHZHB5yokpKGqPO5qCQ3Hfnz2BDd04Ftvm9URetmDpJ1MNwtQk
- nQWDzqCmM7omD0Ht7usW9gjxj5REnPibaLVK51zk2Ms2UbMhHWfI5CGQ1
- 1KVhjSFIlra//LsnFqb4ki/IB1CmtvxvQFAgxaT67x4lDtIlm/SibuVP8
- RA8w/4jzEYXNCIT3MfjTGk8V6qZ0VpGtB3j525xIxhrBkIBjYwFombhTX
- 5q1goYR4eK4hBbTfQIy1vr9aEst0ibkMF6ZXF/jVIL95kP852CXYPr5ho
- 6IjjX0H7h0dETZBsKo5CulcDkszPpTnSO4zajpjks5lhY1uHLXMXDm1uL w==;
-X-CSE-ConnectionGUID: kSFhNoZiQ0epDa8RrfdNEg==
-X-CSE-MsgGUID: E8t2l09gStG5GvCMIajCrA==
-X-IronPort-AV: E=McAfee;i="6700,10204,11222"; a="30359914"
-X-IronPort-AV: E=Sophos;i="6.11,199,1725346800"; d="scan'208";a="30359914"
-Received: from fmviesa008.fm.intel.com ([10.60.135.148])
- by orvoesa110.jf.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
- 31 Oct 2024 14:08:09 -0700
-X-CSE-ConnectionGUID: mIgV1Pw3Rkm58OhClUvVgQ==
-X-CSE-MsgGUID: YB04KzZ8SNaqJlGvMCXuNw==
+ t=1730452946; x=1761988946;
+ h=from:to:cc:subject:in-reply-to:references:date:
+ message-id:mime-version;
+ bh=bTGvYe562v4iO/ej2FrV7MW9IE5/LvMsQygTJKb+YdY=;
+ b=T4g5MXr8nxubm8MBQIX74RTjTyWgfn850ILgsStS+RWAyn9fEH9dzKMM
+ JUJMxHeXVaMWynUoPhHNj6s7G9krlKDFzfTBPXQ1vtK3z0RluJ9mdrXvf
+ QCpfXnbzVUJsm/LeTwQizJpO9Zxa1/0wIXm+yAe3nwFunIA7YPaq6enAk
+ 7d5Sd+Gaq2E/Ul6XEAFFQlqtSMIHpyp7k81p83FHPG4GI3w3C2Nf7azKM
+ xQkKjaIAD+CzyXkmuTZda9/i2sounkZ2a5DFRTP8oQwNVmxdK6QObTaw0
+ 10IDoHvzU7kGsaESkuIEqHD6x14NFJx21LQeFeZajIDbVeckqqMqjKx9r w==;
+X-CSE-ConnectionGUID: cpdezEzpT/+6q/F32TjWSQ==
+X-CSE-MsgGUID: SZ68p8kNQi6AGW71dHvh4A==
+X-IronPort-AV: E=McAfee;i="6700,10204,11242"; a="40844918"
+X-IronPort-AV: E=Sophos;i="6.11,249,1725346800"; d="scan'208";a="40844918"
+Received: from fmviesa004.fm.intel.com ([10.60.135.144])
+ by fmvoesa103.fm.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
+ 01 Nov 2024 02:22:25 -0700
+X-CSE-ConnectionGUID: D+IpKCtRTomwlwGuBOc3FQ==
+X-CSE-MsgGUID: y8duOdhSQS2qYZJsphVRQQ==
 X-ExtLoop1: 1
-X-IronPort-AV: E=Sophos;i="6.11,247,1725346800"; d="scan'208";a="82880364"
-Received: from ideak-desk.fi.intel.com ([10.237.72.78])
- by fmviesa008-auth.fm.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
- 31 Oct 2024 14:08:02 -0700
-Date: Thu, 31 Oct 2024 23:08:35 +0200
-From: Imre Deak <imre.deak@intel.com>
-To: Abel Vesa <abel.vesa@linaro.org>
-Cc: Maarten Lankhorst <maarten.lankhorst@linux.intel.com>,
- Maxime Ripard <mripard@kernel.org>,
- Thomas Zimmermann <tzimmermann@suse.de>,
- David Airlie <airlied@gmail.com>, Simona Vetter <simona@ffwll.ch>,
- Karol Herbst <kherbst@redhat.com>, Lyude Paul <lyude@redhat.com>,
- Danilo Krummrich <dakr@redhat.com>,
- Jani Nikula <jani.nikula@linux.intel.com>,
- Rodrigo Vivi <rodrigo.vivi@intel.com>,
- Joonas Lahtinen <joonas.lahtinen@linux.intel.com>,
- Tvrtko Ursulin <tursulin@ursulin.net>, Rob Clark <robdclark@gmail.com>,
- Abhinav Kumar <quic_abhinavk@quicinc.com>,
- Dmitry Baryshkov <dmitry.baryshkov@linaro.org>,
- Sean Paul <sean@poorly.run>,
- Marijn Suijten <marijn.suijten@somainline.org>,
- Bjorn Andersson <andersson@kernel.org>,
- Konrad Dybcio <konradybcio@kernel.org>,
- Johan Hovold <johan@kernel.org>, dri-devel@lists.freedesktop.org,
- linux-kernel@vger.kernel.org, nouveau@lists.freedesktop.org,
- intel-gfx@lists.freedesktop.org, intel-xe@lists.freedesktop.org,
- linux-arm-msm@vger.kernel.org, freedreno@lists.freedesktop.org
-Subject: Re: [PATCH RFC 3/4] drm/i915/dp: Use the generic helper to control
- LTTPR transparent mode
-Message-ID: <ZyPx0917iWCeLqVA@ideak-desk.fi.intel.com>
+X-IronPort-AV: E=Sophos;i="6.11,249,1725346800"; d="scan'208";a="87508070"
+Received: from fdefranc-mobl3.ger.corp.intel.com (HELO localhost)
+ ([10.245.246.234])
+ by fmviesa004-auth.fm.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
+ 01 Nov 2024 02:22:16 -0700
+From: Jani Nikula <jani.nikula@linux.intel.com>
+To: imre.deak@intel.com, Abel Vesa <abel.vesa@linaro.org>
+Cc: Maarten Lankhorst <maarten.lankhorst@linux.intel.com>, Maxime Ripard
+ <mripard@kernel.org>, Thomas Zimmermann <tzimmermann@suse.de>, David
+ Airlie <airlied@gmail.com>, Simona Vetter <simona@ffwll.ch>, Karol Herbst
+ <kherbst@redhat.com>, Lyude Paul <lyude@redhat.com>, Danilo Krummrich
+ <dakr@redhat.com>, Rodrigo Vivi <rodrigo.vivi@intel.com>, Joonas Lahtinen
+ <joonas.lahtinen@linux.intel.com>, Tvrtko Ursulin <tursulin@ursulin.net>,
+ Rob Clark <robdclark@gmail.com>, Abhinav Kumar
+ <quic_abhinavk@quicinc.com>, Dmitry Baryshkov
+ <dmitry.baryshkov@linaro.org>, Sean Paul <sean@poorly.run>, Marijn Suijten
+ <marijn.suijten@somainline.org>, Bjorn Andersson <andersson@kernel.org>,
+ Konrad Dybcio <konradybcio@kernel.org>, Johan Hovold <johan@kernel.org>,
+ dri-devel@lists.freedesktop.org, linux-kernel@vger.kernel.org,
+ nouveau@lists.freedesktop.org, intel-gfx@lists.freedesktop.org,
+ intel-xe@lists.freedesktop.org, linux-arm-msm@vger.kernel.org,
+ freedreno@lists.freedesktop.org
+Subject: Re: [PATCH RFC 1/4] drm/dp: Add helper to set LTTPRs in transparent
+ mode
+In-Reply-To: <ZyPxLpykHkO9Xx_R@ideak-desk.fi.intel.com>
+Organization: Intel Finland Oy - BIC 0357606-4 - Westendinkatu 7, 02160 Espoo
 References: <20241031-drm-dp-msm-add-lttpr-transparent-mode-set-v1-0-cafbb9855f40@linaro.org>
- <20241031-drm-dp-msm-add-lttpr-transparent-mode-set-v1-3-cafbb9855f40@linaro.org>
+ <20241031-drm-dp-msm-add-lttpr-transparent-mode-set-v1-1-cafbb9855f40@linaro.org>
+ <ZyPxLpykHkO9Xx_R@ideak-desk.fi.intel.com>
+Date: Fri, 01 Nov 2024 11:22:13 +0200
+Message-ID: <87msijjol6.fsf@intel.com>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <20241031-drm-dp-msm-add-lttpr-transparent-mode-set-v1-3-cafbb9855f40@linaro.org>
+Content-Type: text/plain
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -84,37 +81,81 @@ List-Post: <mailto:nouveau@lists.freedesktop.org>
 List-Help: <mailto:nouveau-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
  <mailto:nouveau-request@lists.freedesktop.org?subject=subscribe>
-Reply-To: imre.deak@intel.com
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-On Thu, Oct 31, 2024 at 05:12:47PM +0200, Abel Vesa wrote:
-> LTTPRs operating modes are defined by the DisplayPort standard and the
-> generic framework now provides a helper to switch between them.
-> So use the drm generic helper instead as it makes the code a bit cleaner.
-> 
-> Signed-off-by: Abel Vesa <abel.vesa@linaro.org>
+On Thu, 31 Oct 2024, Imre Deak <imre.deak@intel.com> wrote:
+> On Thu, Oct 31, 2024 at 05:12:45PM +0200, Abel Vesa wrote:
+>> According to the DisplayPort standard, LTTPRs have two operating
+>> modes:
+>>  - non-transparent - it replies to DPCD LTTPR field specific AUX
+>>    requests, while passes through all other AUX requests
+>>  - transparent - it passes through all AUX requests.
+>> 
+>> Switching between this two modes is done by the DPTX by issuing
+>> an AUX write to the DPCD PHY_REPEATER_MODE register.
+>> 
+>> Add a generic helper that allows switching between these modes.
+>> 
+>> Signed-off-by: Abel Vesa <abel.vesa@linaro.org>
+>> ---
+>>  drivers/gpu/drm/display/drm_dp_helper.c | 17 +++++++++++++++++
+>>  include/drm/display/drm_dp_helper.h     |  1 +
+>>  2 files changed, 18 insertions(+)
+>> 
+>> diff --git a/drivers/gpu/drm/display/drm_dp_helper.c b/drivers/gpu/drm/display/drm_dp_helper.c
+>> index 6ee51003de3ce616c3a52653c2f1979ad7658e21..38d612345986ad54b42228902ea718a089d169c4 100644
+>> --- a/drivers/gpu/drm/display/drm_dp_helper.c
+>> +++ b/drivers/gpu/drm/display/drm_dp_helper.c
+>> @@ -2694,6 +2694,23 @@ int drm_dp_lttpr_max_link_rate(const u8 caps[DP_LTTPR_COMMON_CAP_SIZE])
+>>  }
+>>  EXPORT_SYMBOL(drm_dp_lttpr_max_link_rate);
+>>  
+>> +/**
+>> + * drm_dp_lttpr_set_transparent_mode - set the LTTPR in transparent mode
+>> + * @aux: DisplayPort AUX channel
+>> + * @enable: Enable or disable transparent mode
+>> + *
+>> + * Returns 0 on success or a negative error code on failure.
+>
+> Should be "Returns 1 on success".
 
-Acked-by: Imre Deak <imre.deak@intel.com>
+But is that a sensible return value?
 
-> ---
->  drivers/gpu/drm/i915/display/intel_dp_link_training.c | 2 +-
->  1 file changed, 1 insertion(+), 1 deletion(-)
-> 
-> diff --git a/drivers/gpu/drm/i915/display/intel_dp_link_training.c b/drivers/gpu/drm/i915/display/intel_dp_link_training.c
-> index 397cc4ebae526a416fcda9c74f57a8f9f803ce3b..0038608d29219ff1423a649089a38980e95b87e4 100644
-> --- a/drivers/gpu/drm/i915/display/intel_dp_link_training.c
-> +++ b/drivers/gpu/drm/i915/display/intel_dp_link_training.c
-> @@ -118,7 +118,7 @@ intel_dp_set_lttpr_transparent_mode(struct intel_dp *intel_dp, bool enable)
->  	u8 val = enable ? DP_PHY_REPEATER_MODE_TRANSPARENT :
->  			  DP_PHY_REPEATER_MODE_NON_TRANSPARENT;
->  
-> -	if (drm_dp_dpcd_write(&intel_dp->aux, DP_PHY_REPEATER_MODE, &val, 1) != 1)
-> +	if (drm_dp_lttpr_set_transparent_mode(&intel_dp->aux, enable) != 1)
->  		return false;
->  
->  	intel_dp->lttpr_common_caps[DP_PHY_REPEATER_MODE -
-> 
-> -- 
-> 2.34.1
-> 
+>
+>> + */
+>> +
+
+Superfluous newline.
+
+>> +int drm_dp_lttpr_set_transparent_mode(struct drm_dp_aux *aux, bool enable)
+>> +{
+>> +	u8 val = enable ? DP_PHY_REPEATER_MODE_TRANSPARENT :
+>> +			  DP_PHY_REPEATER_MODE_NON_TRANSPARENT;
+>> +
+>> +	return drm_dp_dpcd_writeb(aux, DP_PHY_REPEATER_MODE, val);
+>> +}
+>> +EXPORT_SYMBOL(drm_dp_lttpr_set_transparent_mode);
+>> +
+>>  /**
+>>   * drm_dp_lttpr_max_lane_count - get the maximum lane count supported by all LTTPRs
+>>   * @caps: LTTPR common capabilities
+>> diff --git a/include/drm/display/drm_dp_helper.h b/include/drm/display/drm_dp_helper.h
+>> index 279624833ea9259809428162f4e845654359f8c9..8821ab2d36b0e04d38ccbdddcb703b34de7ed680 100644
+>> --- a/include/drm/display/drm_dp_helper.h
+>> +++ b/include/drm/display/drm_dp_helper.h
+>> @@ -625,6 +625,7 @@ int drm_dp_read_lttpr_phy_caps(struct drm_dp_aux *aux,
+>>  			       u8 caps[DP_LTTPR_PHY_CAP_SIZE]);
+>>  int drm_dp_lttpr_count(const u8 cap[DP_LTTPR_COMMON_CAP_SIZE]);
+>>  int drm_dp_lttpr_max_link_rate(const u8 caps[DP_LTTPR_COMMON_CAP_SIZE]);
+>> +int drm_dp_lttpr_set_transparent_mode(struct drm_dp_aux *aux, bool enable);
+>>  int drm_dp_lttpr_max_lane_count(const u8 caps[DP_LTTPR_COMMON_CAP_SIZE]);
+>>  bool drm_dp_lttpr_voltage_swing_level_3_supported(const u8 caps[DP_LTTPR_PHY_CAP_SIZE]);
+>>  bool drm_dp_lttpr_pre_emphasis_level_3_supported(const u8 caps[DP_LTTPR_PHY_CAP_SIZE]);
+>> 
+>> -- 
+>> 2.34.1
+>> 
+
+-- 
+Jani Nikula, Intel
