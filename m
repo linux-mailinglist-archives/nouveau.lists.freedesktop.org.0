@@ -2,88 +2,60 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id 103659BB3D3
-	for <lists+nouveau@lfdr.de>; Mon,  4 Nov 2024 12:49:35 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 8CC359BB444
+	for <lists+nouveau@lfdr.de>; Mon,  4 Nov 2024 13:12:04 +0100 (CET)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 4842F10E039;
-	Mon,  4 Nov 2024 11:49:33 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 415FA10E3EC;
+	Mon,  4 Nov 2024 12:12:03 +0000 (UTC)
 Authentication-Results: gabe.freedesktop.org;
-	dkim=pass (1024-bit key; unprotected) header.d=redhat.com header.i=@redhat.com header.b="Cr+E4Qdh";
+	dkim=pass (1024-bit key; secure) header.d=tecnico.ulisboa.pt header.i=@tecnico.ulisboa.pt header.b="CRaAeQ4K";
 	dkim-atps=neutral
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from us-smtp-delivery-124.mimecast.com
- (us-smtp-delivery-124.mimecast.com [170.10.133.124])
- by gabe.freedesktop.org (Postfix) with ESMTPS id C3AFE10E039
- for <nouveau@lists.freedesktop.org>; Mon,  4 Nov 2024 11:49:32 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1730720971;
+Received: from smtp1.tecnico.ulisboa.pt (smtp1.tecnico.ulisboa.pt
+ [193.136.128.21])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 9FE7010E3EC;
+ Mon,  4 Nov 2024 12:11:58 +0000 (UTC)
+Received: from localhost (localhost.localdomain [127.0.0.1])
+ by smtp1.tecnico.ulisboa.pt (Postfix) with ESMTP id C51BF6006BA4;
+ Mon,  4 Nov 2024 12:11:54 +0000 (WET)
+X-Virus-Scanned: by amavis-2.13.0 (20230106) (Debian) at tecnico.ulisboa.pt
+Received: from smtp1.tecnico.ulisboa.pt ([127.0.0.1])
+ by localhost (smtp1.tecnico.ulisboa.pt [127.0.0.1]) (amavis, port 10025)
+ with LMTP id oDOtJgU_cQon; Mon,  4 Nov 2024 12:11:52 +0000 (WET)
+Received: from mail1.tecnico.ulisboa.pt (mail1.ist.utl.pt [193.136.128.10])
+ by smtp1.tecnico.ulisboa.pt (Postfix) with ESMTPS id 245656006BAB;
+ Mon,  4 Nov 2024 12:11:52 +0000 (WET)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=tecnico.ulisboa.pt;
+ s=mail; t=1730722312;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:mime-version:mime-version:content-type:content-type:
  content-transfer-encoding:content-transfer-encoding:
  in-reply-to:in-reply-to:references:references;
- bh=FajwGdAb1Fq2c51xU3s+pLkKIio9AZFquBlJwhWBQaM=;
- b=Cr+E4Qdh3yD3osh+sWMWPnW1IOcDPTzzx70ZBXpHjp94Z8X7rYs+0y15Bd7FU2v0RHq3vi
- JLBsL1kvXTKSas4BvWzANdbDKHV3iCYhO2WC5d2bCynjgKj3WdLaFyieTzPvZaeYKsKlQn
- nKeqz3ve59McWCX0zXMX4lPiP6qDlq8=
-Received: from mail-wm1-f70.google.com (mail-wm1-f70.google.com
- [209.85.128.70]) by relay.mimecast.com with ESMTP with STARTTLS
- (version=TLSv1.3, cipher=TLS_AES_256_GCM_SHA384) id
- us-mta-22-3PPth-nyMsu_JrdHVtzCZA-1; Mon, 04 Nov 2024 06:49:30 -0500
-X-MC-Unique: 3PPth-nyMsu_JrdHVtzCZA-1
-Received: by mail-wm1-f70.google.com with SMTP id
- 5b1f17b1804b1-4315af466d9so27578315e9.3
- for <nouveau@lists.freedesktop.org>; Mon, 04 Nov 2024 03:49:29 -0800 (PST)
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1730720969; x=1731325769;
- h=content-transfer-encoding:in-reply-to:from:content-language
- :references:to:subject:user-agent:mime-version:date:message-id
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=FajwGdAb1Fq2c51xU3s+pLkKIio9AZFquBlJwhWBQaM=;
- b=B7b4YK6FhDdWigiqJlBOdPGXsuHPv58D2A+BkwC6jA6ak+m1Xpxj69nAtCMdq9UKg2
- Lpj+1JNiSK9Hkx0wie++ZM8QhwDAhPZIg6OROswP7G2HUBHIeP5oxHZ1A8YsVSj4XJ0f
- TPIqn14fxe/wngRXx4B9VrpoFhnaIXf+y4l9sE13gcd2ACktRh4jZCe2xwxpQuVjXMv7
- A4u1MqxweHlKvIu6irnM/Fs5vq4ei9Ds7qX6mAHxIBwqvEcErvJ8AtdA1BwkenW1TyVS
- ZpjuzjV+XftjrjqEjkOTAtkn0PNN6iO0jcYFxWEI0a5mqbk0b0suoOSwUPD8kfmgR8SZ
- u38Q==
-X-Forwarded-Encrypted: i=1;
- AJvYcCV+QEzodWYEmJnN/s2yhde15dEJYFzzy8Jp1TXsT/f0Le74SSCQv5j50e4LVYZ6qPFp8Gp7obZW@lists.freedesktop.org
-X-Gm-Message-State: AOJu0YyIEOd1My9gnCHu99wymsBnLvzT4Rjq7tqzzm70bpeEjbao7pue
- eWkEJ9aGy6s6neESyrznGAxY4Sl9txqX/OVBbjaDAgJoy3PEyq1+ZakDpDuj24Lbmz+YEC6UIB6
- IAEgomSBnaLimhZpzTK455liBJOXhf77dRnkKYIgEJYJHhd7pkMZ9SEnuxcBAsRY=
-X-Received: by 2002:a05:600c:4e8a:b0:42b:af5a:109 with SMTP id
- 5b1f17b1804b1-43283284867mr92634245e9.24.1730720968907; 
- Mon, 04 Nov 2024 03:49:28 -0800 (PST)
-X-Google-Smtp-Source: AGHT+IE0mfmkYvn5+DPu5WFAP6Bwmiw9OPX5hMQilF72BbPZbvkwp7CgzH1rQ3k70jUtL6XfPi25oQ==
-X-Received: by 2002:a05:600c:4e8a:b0:42b:af5a:109 with SMTP id
- 5b1f17b1804b1-43283284867mr92634035e9.24.1730720968533; 
- Mon, 04 Nov 2024 03:49:28 -0800 (PST)
-Received: from ?IPV6:2a01:e0a:c:37e0:ced3:55bd:f454:e722?
- ([2a01:e0a:c:37e0:ced3:55bd:f454:e722])
- by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-381c10b7d20sm13165426f8f.7.2024.11.04.03.49.27
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Mon, 04 Nov 2024 03:49:28 -0800 (PST)
-Message-ID: <8b880d48-ee98-42ab-afb9-a203cb27d6e7@redhat.com>
-Date: Mon, 4 Nov 2024 12:49:27 +0100
-MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v4 0/3] drm/nouveau: Add drm_panic support for nv50+
-To: Lyude Paul <lyude@redhat.com>, Karol Herbst <kherbst@redhat.com>,
- Danilo Krummrich <dakr@redhat.com>, David Airlie <airlied@gmail.com>,
- Daniel Vetter <daniel@ffwll.ch>,
- Maarten Lankhorst <maarten.lankhorst@linux.intel.com>,
- Maxime Ripard <mripard@kernel.org>, Thomas Zimmermann <tzimmermann@suse.de>,
- dri-devel@lists.freedesktop.org, nouveau@lists.freedesktop.org
-References: <20241022185553.1103384-1-jfalempe@redhat.com>
- <5af437fd77cc7f9514817f14299f352cba1c54a7.camel@redhat.com>
-From: Jocelyn Falempe <jfalempe@redhat.com>
-In-Reply-To: <5af437fd77cc7f9514817f14299f352cba1c54a7.camel@redhat.com>
-X-Mimecast-Spam-Score: 0
-X-Mimecast-Originator: redhat.com
-Content-Language: en-US, fr
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
+ bh=s9gQN2SpE6AzjNfjKKCELsz24974cBjufKf7Ow0Xbl4=;
+ b=CRaAeQ4KZzRUY8BeMjb1SuPhI7NGFOkleUW9HfEXTtEUqwl9TftuW8ESmPhugnWK9mocym
+ 3YhxL/I+kzEe8qPZgsyEwKL9AiwMJRL+y3l3rsAb33AW5PBU/oyTP6rvRHydC4MwqBpfFr
+ pyszNkZa1URg/cGgbVAFskYTwlR+jMA=
+Received: from localhost (unknown [165.225.92.235])
+ (Authenticated sender: ist187313)
+ by mail1.tecnico.ulisboa.pt (Postfix) with ESMTPSA id A029036012B;
+ Mon,  4 Nov 2024 12:11:50 +0000 (WET)
+Mime-Version: 1.0
+Content-Transfer-Encoding: quoted-printable
+Content-Type: text/plain; charset=UTF-8
+Date: Mon, 04 Nov 2024 12:11:44 +0000
+Message-Id: <D5DDUQJOZ4HW.1XDOASECJR714@tecnico.ulisboa.pt>
+Subject: Re: [REGRESSION] GM20B pmu timeout
+From: "Diogo Ivo" <diogo.ivo@tecnico.ulisboa.pt>
+To: "Linux regressions mailing list" <regressions@lists.linux.dev>,
+ <kherbst@redhat.com>, <lyude@redhat.com>, <dakr@redhat.com>,
+ <airlied@gmail.com>, <simona@ffwll.ch>, <bskeggs@nvidia.com>,
+ <dri-devel@lists.freedesktop.org>, <nouveau@lists.freedesktop.org>,
+ <linux-kernel@vger.kernel.org>
+X-Mailer: aerc 0.18.2-0-ge037c095a049
+References: <20241010133253.30311-1-diogo.ivo@tecnico.ulisboa.pt>
+ <041511ee-4556-422a-8604-30b5e0dfd21c@leemhuis.info>
+In-Reply-To: <041511ee-4556-422a-8604-30b5e0dfd21c@leemhuis.info>
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -98,15 +70,36 @@ List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-On 31/10/2024 21:29, Lyude Paul wrote:
-> Reviewed-by: Lyude Paul <lyude@redhat.com>
-> 
+Hello,
 
-I just pushed it to drm-misc-next.
+On Tue Oct 15, 2024 at 7:13 PM WEST, Linux regression tracking (Thorsten Le=
+emhuis) wrote:
+> Hi, Thorsten here, the Linux kernel's regression tracker.
+>
+> On 10.10.24 15:32, Diogo Ivo wrote:
+> >=20
+> > Somewhere between 6.11-rc4 and 6.11-rc5 the following error message is =
+displayed
+> > when trying to initialize a nvc0_screen on the Tegra X1's GM20B:
+> >=20
+> > [ 34.431210] nouveau 57000000.gpu: pmu:hpq: timeout waiting for queue r=
+eady
+> > [ 34.438145] nouveau 57000000.gpu: gr: init failed, -110
+> > nvc0_screen_create:1075 - Error allocating PGRAPH context for M2MF: -11=
+0
+> > failed to create GPU screen
+>
+> Thx for the report. Hmmm. No reply so far. :-/
+>
+> Diogo, maybe report this here as well:
+> https://gitlab.freedesktop.org/drm/nouveau/-/issues/
+>
+> Afterwards drop a link to the ticket here. Reporting nouveau issues via
+> email should work, but maybe you have more luck there.
+>
+> Ciao, Thorsten (wearing his 'the Linux kernel's regression tracker' hat)
 
-Thanks & Best regards,
+Gentle ping on this topic.
 
--- 
-
-Jocelyn
-
+Thanks,
+Diogo
