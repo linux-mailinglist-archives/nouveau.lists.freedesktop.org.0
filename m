@@ -2,77 +2,138 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id 66B469C21EA
-	for <lists+nouveau@lfdr.de>; Fri,  8 Nov 2024 17:21:09 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id D60A69C22AF
+	for <lists+nouveau@lfdr.de>; Fri,  8 Nov 2024 18:05:15 +0100 (CET)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 1ABBA10EA09;
-	Fri,  8 Nov 2024 16:21:08 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id B692610EA1D;
+	Fri,  8 Nov 2024 17:05:13 +0000 (UTC)
 Authentication-Results: gabe.freedesktop.org;
-	dkim=pass (2048-bit key; unprotected) header.d=google.com header.i=@google.com header.b="LhgKyQZB";
+	dkim=pass (2048-bit key; unprotected) header.d=Nvidia.com header.i=@Nvidia.com header.b="oWu07Yev";
 	dkim-atps=neutral
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from mail-wr1-f74.google.com (mail-wr1-f74.google.com
- [209.85.221.74])
- by gabe.freedesktop.org (Postfix) with ESMTPS id AEF6810EA01
- for <nouveau@lists.freedesktop.org>; Fri,  8 Nov 2024 16:21:06 +0000 (UTC)
-Received: by mail-wr1-f74.google.com with SMTP id
- ffacd0b85a97d-37d563a1af4so1140570f8f.2
- for <nouveau@lists.freedesktop.org>; Fri, 08 Nov 2024 08:21:06 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=google.com; s=20230601; t=1731082865; x=1731687665;
- darn=lists.freedesktop.org; 
- h=cc:to:from:subject:message-id:references:mime-version:in-reply-to
- :date:from:to:cc:subject:date:message-id:reply-to;
- bh=LLzT0eDLF6iAMaTBJqJboYyOg2pJMFOgkBQWEqDLmNQ=;
- b=LhgKyQZBCvMVXJtubPNbXy2Jf5pGVywD7PNS+d4B/LadJEP4tnGjufHT2oV2dYl7IS
- VF3iyeQBj1zEq8FsqMjE0kq9EycmMvAPm+tbpkgT31/GlmYedNEUvEdQ/D1ZGA3aH38K
- yJXAhZkaL9lHIcCrXDUs0Z2auTED6LbGA6Myhvdrr2/6xn191vcxaJbhGWmeVcIoKdM/
- VWyMnQ1Wih66XtV/yqM1/XrA9cT5+EfUxr78PtQ8mDvBtnv6EgR4KafXDftcZ61e+VAC
- /442vxB0zmwyTz/qg6f3VK3GYIQUVb62DOAvAl3wrucq/UR0m7Cbc62/ggDWLkVEQHMS
- TsyA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1731082865; x=1731687665;
- h=cc:to:from:subject:message-id:references:mime-version:in-reply-to
- :date:x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=LLzT0eDLF6iAMaTBJqJboYyOg2pJMFOgkBQWEqDLmNQ=;
- b=PBTWmC95y3ea3rl6//LhPz/Sdup7iQkETSTkAT7BzGelBbDUbQasFshaTUYSbShV0p
- WZB8R4/fWjAPOC6cSQ68Ni2AODgs1L488q3FIgx14Ga6MwooiMuB2EenVPvqKnm9lfBn
- PDTXIF7BwIU1qBzdqpP9tzqPDR0wWRiiYfGKtYIoBiF+aheSTUN5cdgi1VF1AYxhZoLR
- KTp125EsSI5OhhNgZ5Y+EwukfXUyfg9kAYcjYnYxi79sxhhcpouNqDXToN4R38CyXB2r
- iD0R/6Gi8P12oFvnDsuUll6jVUaGjAv7R9Z03dRDK90YdH3ZWWl8fcyLl8p7LIY4uwFl
- emtw==
-X-Forwarded-Encrypted: i=1;
- AJvYcCWDzEznuJkS0RMZd2pgkROUwRQA50oa2Jvl2ovd7yZVOTqjyx0xbDHzt220TIc75EK29vBgcRsf@lists.freedesktop.org
-X-Gm-Message-State: AOJu0YwT82ujUKVTd+81zt54/MOpxqT0TX08h548dMA99C7OuW+nqOHT
- GgXXUfI9/hkamfaC3cXQqtybZuawv+JTaT344kozpARn1+A/BBKMOS7uv16d9jeoiduWQujJ3A=
- =
-X-Google-Smtp-Source: AGHT+IHHoxyjGs1AUxhryPf5sywJLDUszI7O7sOrCReyd47RhmaPFBz34fv43FAG+LKSgY7icD6Ea0HGQw==
-X-Received: from fuad.c.googlers.com ([fda3:e722:ac3:cc00:28:9cb1:c0a8:1613])
- (user=tabba job=sendgmr) by 2002:a05:6000:1b02:b0:37d:4850:c3be
- with SMTP id
- ffacd0b85a97d-381f18881dfmr2466f8f.10.1731082865212; Fri, 08 Nov 2024
- 08:21:05 -0800 (PST)
-Date: Fri,  8 Nov 2024 16:20:40 +0000
-In-Reply-To: <20241108162040.159038-1-tabba@google.com>
-Mime-Version: 1.0
+Received: from NAM12-BN8-obe.outbound.protection.outlook.com
+ (mail-bn8nam12on2062.outbound.protection.outlook.com [40.107.237.62])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 1545710EA1B;
+ Fri,  8 Nov 2024 17:05:12 +0000 (UTC)
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=SXQaXW4k3lPpGtHl8QkybTSt94vDykgS4Wyp+xKXysXbGX6lmXBJqJE76FZWQtE21ng+LzNmLa25udl4PyYs77472qsUoVGJI/36Ma9is39K1DOiLpa52H8GbkGMNHNDBUL1zj7y5uFX/QIepo5r0eApTKqS/oxgzAL3Qp2tzXHZ/B2zOSKZkMAcTIVxJB4vwJjnmDh9vJCuLserOavq50wvOa6gOVdz4glhUH/Ou2BGWVM0WdpRekqRuv8o2sWYyxoKDdqK74xchhIysEJJYv6m2dFlDa706rqvR5AMP+OtAJsqqlqf/cF5bT4TR/txaGY2Y8plb0nWzrz8GOsD3A==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=//uN02JBa2w1Rs/po+9aXDE/9/kIOy+mFQ9ApdaZpso=;
+ b=vA5nxlUDjsoHHjfujgS5SzqXcra0Yh1o+Wda2sMMVjcs/2uJ7tAVS9858ioQHN6i9mVdS0NpM1ILfVP65Qx7xrD91EDAOPUsmSdAyUFcYpA7FEUronG8vCpqv9mahwAK5sqaLuRxaXcLX6nEozY3tSg3SjSOT/JilSZP4xKQpCVXUKQ9z7K2R6xcMYj4YaoZ0+7ZRAfakNPDlPKugebzFM2KHgxr9gLnPNReoH9LDcHEQ7KZqVBFzuJt1wxOvMdhJil97Z7y25NnjQkqMaVTdlTRyT/uwNVhlbiydjNViKdt8vlE7Y91fI06fX+bAxe7rxYQ7t1KOx4DM2sYHF2Fnw==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=nvidia.com; dmarc=pass action=none header.from=nvidia.com;
+ dkim=pass header.d=nvidia.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=Nvidia.com;
+ s=selector2;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=//uN02JBa2w1Rs/po+9aXDE/9/kIOy+mFQ9ApdaZpso=;
+ b=oWu07YevNfjUe+iQmEu/5qSBwgF2NLeFIHtjaC3M/1t7WSS8nTkBtaToVvHQ94IPVLBC22X9LOU9AAwyg0wvBoXgLjweaPYegbmhLcgkhcs7zEopLny8Gf8MiX4qV7Tsm+j/1TevT9y1AwaAkjMrMauY/LZbZWpAKgd1GToKOk5kh8DSIhINNserxKuuqFR7WQZJR1K2II9ffit7FocHyUssDwNxc3dOsrhHfVmjogZAA7yDhSOzra8v4+T/BW6YR9eV6ESXo8XFsM/p51ngl4q8kyn9e0+BLwdhD8x/SDZa6IQAz83RwEW5m4vx2zrwgSdraVxbwyyavHrbw46h6w==
+Authentication-Results: dkim=none (message not signed)
+ header.d=none;dmarc=none action=none header.from=nvidia.com;
+Received: from CH3PR12MB8659.namprd12.prod.outlook.com (2603:10b6:610:17c::13)
+ by DS7PR12MB5861.namprd12.prod.outlook.com (2603:10b6:8:78::12) with
+ Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.8137.19; Fri, 8 Nov
+ 2024 17:05:02 +0000
+Received: from CH3PR12MB8659.namprd12.prod.outlook.com
+ ([fe80::6eb6:7d37:7b4b:1732]) by CH3PR12MB8659.namprd12.prod.outlook.com
+ ([fe80::6eb6:7d37:7b4b:1732%4]) with mapi id 15.20.8137.021; Fri, 8 Nov 2024
+ 17:05:02 +0000
+Date: Fri, 8 Nov 2024 13:05:01 -0400
+From: Jason Gunthorpe <jgg@nvidia.com>
+To: Fuad Tabba <tabba@google.com>
+Cc: linux-mm@kvack.org, kvm@vger.kernel.org, nouveau@lists.freedesktop.org,
+ dri-devel@lists.freedesktop.org, david@redhat.com, rppt@kernel.org,
+ jglisse@redhat.com, akpm@linux-foundation.org,
+ muchun.song@linux.dev, simona@ffwll.ch, airlied@gmail.com,
+ pbonzini@redhat.com, seanjc@google.com, willy@infradead.org,
+ jhubbard@nvidia.com, ackerleytng@google.com, vannapurve@google.com,
+ mail@maciej.szmigiero.name, kirill.shutemov@linux.intel.com,
+ quic_eberman@quicinc.com, maz@kernel.org, will@kernel.org,
+ qperret@google.com, keirf@google.com, roypat@amazon.co.uk
+Subject: Re: [RFC PATCH v1 00/10] mm: Introduce and use folio_owner_ops
+Message-ID: <20241108170501.GI539304@nvidia.com>
 References: <20241108162040.159038-1-tabba@google.com>
-X-Mailer: git-send-email 2.47.0.277.g8800431eea-goog
-Message-ID: <20241108162040.159038-11-tabba@google.com>
-Subject: [RFC PATCH v1 10/10] mm: hugetlb: Use owner_ops on folio_put for
- hugetlb
-From: Fuad Tabba <tabba@google.com>
-To: linux-mm@kvack.org
-Cc: kvm@vger.kernel.org, nouveau@lists.freedesktop.org, 
- dri-devel@lists.freedesktop.org, david@redhat.com, rppt@kernel.org, 
- jglisse@redhat.com, akpm@linux-foundation.org, muchun.song@linux.dev, 
- simona@ffwll.ch, airlied@gmail.com, pbonzini@redhat.com, seanjc@google.com, 
- willy@infradead.org, jgg@nvidia.com, jhubbard@nvidia.com, 
- ackerleytng@google.com, vannapurve@google.com, mail@maciej.szmigiero.name, 
- kirill.shutemov@linux.intel.com, quic_eberman@quicinc.com, maz@kernel.org, 
- will@kernel.org, qperret@google.com, keirf@google.com, roypat@amazon.co.uk, 
- tabba@google.com
-Content-Type: text/plain; charset="UTF-8"
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <20241108162040.159038-1-tabba@google.com>
+X-ClientProxiedBy: MN2PR19CA0060.namprd19.prod.outlook.com
+ (2603:10b6:208:19b::37) To CH3PR12MB8659.namprd12.prod.outlook.com
+ (2603:10b6:610:17c::13)
+MIME-Version: 1.0
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: CH3PR12MB8659:EE_|DS7PR12MB5861:EE_
+X-MS-Office365-Filtering-Correlation-Id: 6f8d0b6c-5c6a-4b68-0146-08dd00177c01
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: BCL:0;ARA:13230040|366016|1800799024|7416014|376014;
+X-Microsoft-Antispam-Message-Info: =?us-ascii?Q?2++y7XEbcBiMfgOEs2XAaQZ5LW3CIKcw9p6kwu9Bzz83g4et4/VKPGnA8fYf?=
+ =?us-ascii?Q?tj24DWehjABfDqVzQkp0h4Jq9R4IqcNHZ15jPUQNJcYKJBhXrYnXWlDXHV5y?=
+ =?us-ascii?Q?0P4qCxbY3sKNdBHNoS7QPRfYOSSSqqgVY9ZcTCWKn+QS6tE5jUHDuDbYaumC?=
+ =?us-ascii?Q?K6H9nccUC4aMD1gdKPqhGggU5tEQhls2ddGIxE6mXWerazmKAfPWaRdiDycc?=
+ =?us-ascii?Q?mzbA/UNyyd1BXHrWXm61YBJ6DIpVZU5Pv5rNbbA7LnnpF8QNRm75NqYtkR1p?=
+ =?us-ascii?Q?Fy+nGFrmPc1n/Zttp+m5Q/YvHIMwTsSpyNoV4rW5i5iZsZ9+DxXlzH+ajRc3?=
+ =?us-ascii?Q?v75MU5iV9NXvaEZd5RrmWoQysg5YDCA2SCutYeUqDPShXuSlGNbafTNN+UkJ?=
+ =?us-ascii?Q?gaF4mlc6JAvMfmkLF9D2CWkes3I3K6Ii41ciZcaTItLzKSvmy0RkSYG8eRQw?=
+ =?us-ascii?Q?c2WapThAGSDVKzvGohz6DnGhjvRtUChA3U3dxqwpAJJtejkW5FoYqNV4/bHK?=
+ =?us-ascii?Q?tYV1XAw7Z1ywqEcEKUqE3bVazGRYVhx+b5hWDlWoPsXoFSFlpNdNZyTxi9cx?=
+ =?us-ascii?Q?bahtsEwZ7DXCDMp97OTJ2coV3k2XUszJ3rmfxPNPBKj5+q6+5wtv6N1zoabQ?=
+ =?us-ascii?Q?r9O+V0GofbzOuPzfnmS4aOVPNrS9DvBi7VEKByIvPZDtQBohfnQSDGyqM8oY?=
+ =?us-ascii?Q?J4fw4pvR3kJHf+ynyvJLowx0hJsEmMbB/Jzdk+lCYI67RgBc08dYCTty2Van?=
+ =?us-ascii?Q?Wj+z2yNznSnbYmTMXiHcg+Tccpz/bGejZPf52NYfcpycJ8G1N/yWGXucDHRF?=
+ =?us-ascii?Q?YekTufgP9tyEnay7Vl4oGtpyg4/E+Egx0FvnYGftTUhmTionda/S2n96aHJs?=
+ =?us-ascii?Q?3Erkea9i0DKO49YygeT2vQTeEjgzPUrqHUkt6diHAdx+vp6A78F7Co7wOc0+?=
+ =?us-ascii?Q?Ik1YDN0qi7I8Xqtcrni0xG7wFw4mZvgjBZAmF0ZRsfA+hrpW5oqTHwDw8fnY?=
+ =?us-ascii?Q?XXcnnD3eFV09fPLRKFHS0vrDblsQ972UY+cWIBERnBQWkqHAntX+NFZKRLD0?=
+ =?us-ascii?Q?Rv3bJnfXI/RCUXNt/bzRnWQh+fMZoJVRwJImwJReh57GafK0zbedF8hy5Wiy?=
+ =?us-ascii?Q?zXZGBlFZUrtixAVSv2FMKVEjnkWDxy0fG3CKCxt4GrIe9U6hQHyNlLzPkftv?=
+ =?us-ascii?Q?vhUKU/gllFZjS4HRKv7WmrBgM92Q49ruWKIGJyrZs/sfnLqyn0mqRxpFwrSS?=
+ =?us-ascii?Q?S5wkMaSUCctr0I21oBXSCZvpjR5wvN6Rz38stIU6GpAzUHPJVEa5GTRL+wF3?=
+ =?us-ascii?Q?MO59Tpvri8OxEemThy8ioW1M?=
+X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
+ IPV:NLI; SFV:NSPM; H:CH3PR12MB8659.namprd12.prod.outlook.com; PTR:; CAT:NONE;
+ SFS:(13230040)(366016)(1800799024)(7416014)(376014); DIR:OUT; SFP:1101; 
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0: =?us-ascii?Q?5+C2GjXByB1c8oXSDkfF20PxgCkwnUUP9MzJma1eOBupn0MG7y3CIEFpt1vX?=
+ =?us-ascii?Q?Q6F8vY11EhxpZ6///1Y1vPw82a3Bl98bw6dFklAvRopU98fRHa6GIswp+cnD?=
+ =?us-ascii?Q?oh4LuBzoWGF8gKGup1wrCqOnsp4GnDFoxGQnIUMq3+zY1d+q9fSRk9sixr7/?=
+ =?us-ascii?Q?77//xM4d8F7os3vn8F80S/6HAXojX24HVnU9UNjKLpNrBzrLfOb+pVRbgUj+?=
+ =?us-ascii?Q?D7dL2NViffYyI6t3FE1/eeEdCddmABjXwKTdBrX1zxR3D/bl6kp4EIRrdQrJ?=
+ =?us-ascii?Q?fTd/6yGQveBAAEDK+u7LUIXY1AcM9ao2AXYxWGE98BDvTFVPuII4EAMsev+b?=
+ =?us-ascii?Q?cY4XJflf+mRDTI/9fEAJbutAzmVWIZNLV28DmgEKlsGshPGp3a9j5bk9h0ZS?=
+ =?us-ascii?Q?ErBKmRxgyQMTTCjyMD8bIYBllA1hXiHWwSS4SwEQATdwan4xtSzLL+yA49kO?=
+ =?us-ascii?Q?tofpLG/IJ6cRkKKqZF4NnOs6OoPhtkzrJKT0DKnoncM+bJ/FLDgRkwGJ7N+k?=
+ =?us-ascii?Q?UL5SEXiLuLZl1VRpxjRsS0DMz30JaHyakkMbPLYBLj0wVwQl+CrKeknptS+j?=
+ =?us-ascii?Q?ZUHa5iTujhqt8bGoujFamUmg52sjMx7KXjCx617ZLhZHzwcF1c4CMlJ4hl22?=
+ =?us-ascii?Q?WJuCOlsjkxFAZje+1ZmE4S1nahTWkGPYjkG8NTq0q2tmOZjjR3bkSXeGo5jP?=
+ =?us-ascii?Q?4ZGu+i9hLlOpgvDSOznvFdEqbLTcaJVTkhKBNMNNicsToWnX6tfQcJ0iTL83?=
+ =?us-ascii?Q?Yazv11W2ZyPAW6EVM0l/1Hr5l8C2dB5nxuolr5oZuR7mKe4M7ZDlyYEpkcAR?=
+ =?us-ascii?Q?iPIIIfUOgAeFIjvRez/gm9TPFrlUBag5awkz/+Ns3ijXGpKGubJjdExCOhtk?=
+ =?us-ascii?Q?v+wX+ohQpn+KKoJBPO8gTi/9FcxvFDbbs2gPKYqbu790MVLz0ZLKWNd+6QdO?=
+ =?us-ascii?Q?h42d1yL2sZ5Gl6HORqbix+EMxnQi3u0CK2AFUPE8OVWjdOsiLi5RL/rgVtyR?=
+ =?us-ascii?Q?g44TeiQpZV08voaaHdcIT36Xu2TEQz0Onii60IZ5J5hiYneFL5JAEhAapJ2l?=
+ =?us-ascii?Q?uGCU1fSFVNRr3Z43yxzuxzUaXer7dpepVHcSsbcwjB/gRk3iNt3U0oB8+aoQ?=
+ =?us-ascii?Q?FLtH4WXSKa809/k1zeOZlrLsC2ByDr249K0O1jplrH3/5WUlfMb9pGxHN130?=
+ =?us-ascii?Q?XixOgbDmC6E8I7ZILMFvOx3RachHlDtt4VfyjcZPFnPe4E/OtEUwFqBAdTTR?=
+ =?us-ascii?Q?+1CUfdS8M3GQOJrBUNxCDEoHU64xCW/d2tdwd+xblGs8aVHUgHLx41M47u5F?=
+ =?us-ascii?Q?XB1Wy5D5SjzV4xOKAoAIM4bicLUdKLDUPgkrSfjwjH0ibHONOoEyn+341Kp8?=
+ =?us-ascii?Q?HzoCDvsXghMJ+TTD18o85nx1LVzyzMZQ39KZBWta9YrOHxZ7AUOaPNNtE3yB?=
+ =?us-ascii?Q?PpkwHwRnrZiv9g+y7cN97e7KP68HIb5Yi74DQbdEGNyO3LTv+zs86mhUc6yO?=
+ =?us-ascii?Q?V+YchhgQ3iIp3JbRwvjbIAp36xDxV9NoKePAPOgUGrpGOe/CsmWxJeBPnCZ+?=
+ =?us-ascii?Q?X6+HytxXPsigUeHevdvYMIvOvzPJm2Aw5+eUesHE?=
+X-OriginatorOrg: Nvidia.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: 6f8d0b6c-5c6a-4b68-0146-08dd00177c01
+X-MS-Exchange-CrossTenant-AuthSource: CH3PR12MB8659.namprd12.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 08 Nov 2024 17:05:02.3076 (UTC)
+X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
+X-MS-Exchange-CrossTenant-Id: 43083d15-7273-40c1-b7db-39efd9ccc17a
+X-MS-Exchange-CrossTenant-MailboxType: HOSTED
+X-MS-Exchange-CrossTenant-UserPrincipalName: dI7yVwzkSnE2pVJPxwePzoViAy73wVhvzdYoTSaD/xDHbElb4TQ6XAvEe7bdPJoH
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: DS7PR12MB5861
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -87,211 +148,29 @@ List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-Now that we have the folio_owner_ops callback, use it for hugetlb
-pages instead of using a dedicated callback.
+On Fri, Nov 08, 2024 at 04:20:30PM +0000, Fuad Tabba wrote:
+> Some folios, such as hugetlb folios and zone device folios,
+> require special handling when the folio's reference count reaches
+> 0, before being freed. Moreover, guest_memfd folios will likely
+> require special handling to notify it once a folio's reference
+> count reaches 0, to facilitate shared to private folio conversion
+> [*]. Currently, each usecase has a dedicated callback when the
+> folio refcount reaches 0 to that effect. Adding yet more
+> callbacks is not ideal.
 
-Since owner_ops is overlaid with lru, we need to unset owner_ops
-to allow the use of lru when its isolated. At that point we know
-that the reference count is elevated, will not reach 0, and thus
-not trigger a callback. Therefore, it is safe to do so provided
-we restore it before we put the folio back.
+Honestly, I question this thesis. How complex would it be to have 'yet
+more callbacks'? Is the challenge really that the mm can't detect when
+guestmemfd is the owner of the page because the page will be
+ZONE_NORMAL?
 
-Signed-off-by: Fuad Tabba <tabba@google.com>
----
- include/linux/hugetlb.h |  2 --
- mm/hugetlb.c            | 57 +++++++++++++++++++++++++++++++++--------
- mm/swap.c               | 14 ----------
- 3 files changed, 47 insertions(+), 26 deletions(-)
+So the point of this is really to allow ZONE_NORMAL pages to have a
+per-allocator callback?
 
-diff --git a/include/linux/hugetlb.h b/include/linux/hugetlb.h
-index e846d7dac77c..500848862702 100644
---- a/include/linux/hugetlb.h
-+++ b/include/linux/hugetlb.h
-@@ -20,8 +20,6 @@ struct user_struct;
- struct mmu_gather;
- struct node;
- 
--void free_huge_folio(struct folio *folio);
--
- #ifdef CONFIG_HUGETLB_PAGE
- 
- #include <linux/pagemap.h>
-diff --git a/mm/hugetlb.c b/mm/hugetlb.c
-index 2308e94d8615..4e1c87e37968 100644
---- a/mm/hugetlb.c
-+++ b/mm/hugetlb.c
-@@ -89,6 +89,33 @@ static void __hugetlb_vma_unlock_write_free(struct vm_area_struct *vma);
- static void hugetlb_unshare_pmds(struct vm_area_struct *vma,
- 		unsigned long start, unsigned long end);
- static struct resv_map *vma_resv_map(struct vm_area_struct *vma);
-+static void free_huge_folio(struct folio *folio);
-+
-+static const struct folio_owner_ops hugetlb_owner_ops = {
-+	.free = free_huge_folio,
-+};
-+
-+/*
-+ * Mark this folio as a hugetlb-owned folio.
-+ *
-+ * Set the folio hugetlb flag and owner operations.
-+ */
-+static void folio_set_hugetlb_owner(struct folio *folio)
-+{
-+	__folio_set_hugetlb(folio);
-+	folio_set_owner_ops(folio, &hugetlb_owner_ops);
-+}
-+
-+/*
-+ * Unmark this folio from being a hugetlb-owned folio.
-+ *
-+ * Clear the folio hugetlb flag and owner operations.
-+ */
-+static void folio_clear_hugetlb_owner(struct folio *folio)
-+{
-+	folio_clear_owner_ops(folio);
-+	__folio_clear_hugetlb(folio);
-+}
- 
- static void hugetlb_free_folio(struct folio *folio)
- {
-@@ -1617,7 +1644,7 @@ static void remove_hugetlb_folio(struct hstate *h, struct folio *folio,
- 	 * to tail struct pages.
- 	 */
- 	if (!folio_test_hugetlb_vmemmap_optimized(folio)) {
--		__folio_clear_hugetlb(folio);
-+		folio_clear_hugetlb_owner(folio);
- 	}
- 
- 	h->nr_huge_pages--;
-@@ -1641,7 +1668,7 @@ static void add_hugetlb_folio(struct hstate *h, struct folio *folio,
- 		h->surplus_huge_pages++;
- 		h->surplus_huge_pages_node[nid]++;
- 	}
--	__folio_set_hugetlb(folio);
-+	folio_set_hugetlb_owner(folio);
- 
- 	folio_change_private(folio, NULL);
- 	/*
-@@ -1692,7 +1719,7 @@ static void __update_and_free_hugetlb_folio(struct hstate *h,
- 	 */
- 	if (folio_test_hugetlb(folio)) {
- 		spin_lock_irq(&hugetlb_lock);
--		__folio_clear_hugetlb(folio);
-+		folio_clear_hugetlb_owner(folio);
- 		spin_unlock_irq(&hugetlb_lock);
- 	}
- 
-@@ -1793,7 +1820,7 @@ static void bulk_vmemmap_restore_error(struct hstate *h,
- 		list_for_each_entry_safe(folio, t_folio, non_hvo_folios, _hugetlb_list) {
- 			list_del(&folio->_hugetlb_list);
- 			spin_lock_irq(&hugetlb_lock);
--			__folio_clear_hugetlb(folio);
-+			folio_clear_hugetlb_owner(folio);
- 			spin_unlock_irq(&hugetlb_lock);
- 			update_and_free_hugetlb_folio(h, folio, false);
- 			cond_resched();
-@@ -1818,7 +1845,7 @@ static void bulk_vmemmap_restore_error(struct hstate *h,
- 			} else {
- 				list_del(&folio->_hugetlb_list);
- 				spin_lock_irq(&hugetlb_lock);
--				__folio_clear_hugetlb(folio);
-+				folio_clear_hugetlb_owner(folio);
- 				spin_unlock_irq(&hugetlb_lock);
- 				update_and_free_hugetlb_folio(h, folio, false);
- 				cond_resched();
-@@ -1851,14 +1878,14 @@ static void update_and_free_pages_bulk(struct hstate *h,
- 	 * should only be pages on the non_hvo_folios list.
- 	 * Do note that the non_hvo_folios list could be empty.
- 	 * Without HVO enabled, ret will be 0 and there is no need to call
--	 * __folio_clear_hugetlb as this was done previously.
-+	 * folio_clear_hugetlb_owner as this was done previously.
- 	 */
- 	VM_WARN_ON(!list_empty(folio_list));
- 	VM_WARN_ON(ret < 0);
- 	if (!list_empty(&non_hvo_folios) && ret) {
- 		spin_lock_irq(&hugetlb_lock);
- 		list_for_each_entry(folio, &non_hvo_folios, _hugetlb_list)
--			__folio_clear_hugetlb(folio);
-+			folio_clear_hugetlb_owner(folio);
- 		spin_unlock_irq(&hugetlb_lock);
- 	}
- 
-@@ -1879,7 +1906,7 @@ struct hstate *size_to_hstate(unsigned long size)
- 	return NULL;
- }
- 
--void free_huge_folio(struct folio *folio)
-+static void free_huge_folio(struct folio *folio)
- {
- 	/*
- 	 * Can't pass hstate in here because it is called from the
-@@ -1959,7 +1986,7 @@ static void __prep_account_new_huge_page(struct hstate *h, int nid)
- 
- static void init_new_hugetlb_folio(struct hstate *h, struct folio *folio)
- {
--	__folio_set_hugetlb(folio);
-+	folio_set_hugetlb_owner(folio);
- 	INIT_LIST_HEAD(&folio->_hugetlb_list);
- 	hugetlb_set_folio_subpool(folio, NULL);
- 	set_hugetlb_cgroup(folio, NULL);
-@@ -7428,6 +7455,14 @@ bool folio_isolate_hugetlb(struct folio *folio, struct list_head *list)
- 		goto unlock;
- 	}
- 	folio_clear_hugetlb_migratable(folio);
-+	/*
-+	 * Clear folio->owner_ops; now we can use folio->lru.
-+	 * Note that the folio cannot get freed because we are holding a
-+	 * reference. The reference will be put in folio_putback_hugetlb(),
-+	 * after restoring folio->owner_ops.
-+	 */
-+	folio_clear_owner_ops(folio);
-+	INIT_LIST_HEAD(&folio->lru);
- 	list_del_init(&folio->_hugetlb_list);
- 	list_add_tail(&folio->lru, list);
- unlock:
-@@ -7480,7 +7515,9 @@ void folio_putback_hugetlb(struct folio *folio)
- {
- 	spin_lock_irq(&hugetlb_lock);
- 	folio_set_hugetlb_migratable(folio);
--	list_del_init(&folio->lru);
-+	list_del(&folio->lru);
-+	/* Restore folio->owner_ops since we can no longer use folio->lru. */
-+	folio_set_owner_ops(folio, &hugetlb_owner_ops);
- 	list_add_tail(&folio->_hugetlb_list, &(folio_hstate(folio))->hugepage_activelist);
- 	spin_unlock_irq(&hugetlb_lock);
- 	folio_put(folio);
-diff --git a/mm/swap.c b/mm/swap.c
-index d2578465e270..9798ca47f26a 100644
---- a/mm/swap.c
-+++ b/mm/swap.c
-@@ -117,11 +117,6 @@ void __folio_put(struct folio *folio)
- 		return;
- 	}
- 
--	if (folio_test_hugetlb(folio)) {
--		free_huge_folio(folio);
--		return;
--	}
--
- 	page_cache_release(folio);
- 	folio_unqueue_deferred_split(folio);
- 	mem_cgroup_uncharge(folio);
-@@ -953,15 +948,6 @@ void folios_put_refs(struct folio_batch *folios, unsigned int *refs)
- 		if (!folio_ref_sub_and_test(folio, nr_refs))
- 			continue;
- 
--		/* hugetlb has its own memcg */
--		if (folio_test_hugetlb(folio)) {
--			if (lruvec) {
--				unlock_page_lruvec_irqrestore(lruvec, flags);
--				lruvec = NULL;
--			}
--			free_huge_folio(folio);
--			continue;
--		}
- 		folio_unqueue_deferred_split(folio);
- 		__page_cache_release(folio, &lruvec, &flags);
- 
--- 
-2.47.0.277.g8800431eea-goog
+But this is also why I suggested to shift them to ZONE_DEVICE for
+guestmemfd, because then you get these things for free from the pgmap.
 
+(this is not a disagreement this is a valid solution, but a request
+you explain much more about what it is you actually need and compare
+it with the other existing options)
+
+Jason
