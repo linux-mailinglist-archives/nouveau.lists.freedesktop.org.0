@@ -2,140 +2,49 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id 37A809C259A
-	for <lists+nouveau@lfdr.de>; Fri,  8 Nov 2024 20:33:58 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 7C7D29C371D
+	for <lists+nouveau@lfdr.de>; Mon, 11 Nov 2024 04:47:44 +0100 (CET)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id E773810EA2F;
-	Fri,  8 Nov 2024 19:33:56 +0000 (UTC)
-Authentication-Results: gabe.freedesktop.org;
-	dkim=pass (1024-bit key; unprotected) header.d=redhat.com header.i=@redhat.com header.b="L60C5nhK";
-	dkim-atps=neutral
+	by gabe.freedesktop.org (Postfix) with ESMTP id 4F09310E411;
+	Mon, 11 Nov 2024 03:47:42 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from us-smtp-delivery-124.mimecast.com
- (us-smtp-delivery-124.mimecast.com [170.10.133.124])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 1C3F410E2A0
- for <nouveau@lists.freedesktop.org>; Fri,  8 Nov 2024 19:33:55 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1731094434;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references:autocrypt:autocrypt;
- bh=HXUvQ9DDoTuKmTlcnKhUpWVHW2+zg/XnWwIaMSXVfPs=;
- b=L60C5nhKRy5F5hnXiDEA83IG1rydqE53hf+s6hxB5RQEEIByPxy0B5iNQ15t2frXbnTsjw
- T5om+zYWuA6QQAU4mlqwRydd82MQ2s0vXaxmSYnI6Cl4up1AZ1vzerhwcaMAMu13AerwVT
- L7WB75zHpsJICtQajS3MP0GMs1OjSwc=
-Received: from mail-wr1-f72.google.com (mail-wr1-f72.google.com
- [209.85.221.72]) by relay.mimecast.com with ESMTP with STARTTLS
- (version=TLSv1.3, cipher=TLS_AES_256_GCM_SHA384) id
- us-mta-664-4BXgIcMbOCWWYWIW6qPOCA-1; Fri, 08 Nov 2024 14:33:53 -0500
-X-MC-Unique: 4BXgIcMbOCWWYWIW6qPOCA-1
-X-Mimecast-MFC-AGG-ID: 4BXgIcMbOCWWYWIW6qPOCA
-Received: by mail-wr1-f72.google.com with SMTP id
- ffacd0b85a97d-37d4d51b4efso1225484f8f.3
- for <nouveau@lists.freedesktop.org>; Fri, 08 Nov 2024 11:33:52 -0800 (PST)
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1731094432; x=1731699232;
- h=content-transfer-encoding:in-reply-to:organization:autocrypt
- :content-language:from:references:cc:to:subject:user-agent
- :mime-version:date:message-id:x-gm-message-state:from:to:cc:subject
- :date:message-id:reply-to;
- bh=HXUvQ9DDoTuKmTlcnKhUpWVHW2+zg/XnWwIaMSXVfPs=;
- b=stQuds8P4SC3KsEldKExJKc7C/uC9de31ExB0RO30zhojX4Tcgp0oeowFctWm20u1o
- BuvVsvQa0O24XFlyXpuFEGONYFRrVTJYaPqLngNZlaYG/6Uw909ePd26MQelwhKYoyTP
- nZYRC/xoz4KK4hs2mI/k94NshdqmzvbvLngCclRHztWSlmZAnFvu/qT9P7I5WBND3BYw
- w3PQcSkvZgwjtPPVubjchIvWclslpub0BxtAisgGFz0ZUxWn/VEr0JqhBwGJEMTIGlFh
- BW5XKNGI6veCZuX76Rq5K3tD2qa2HqGtfXZKfPdkctagXLKg81TahmngRi7FZx/0DlRh
- hAGQ==
-X-Forwarded-Encrypted: i=1;
- AJvYcCX7fy6R+IXC4uB4antmqW3YNAK90iMZjc1Ofk5KKoVB8QpNfE9mTPop7o8nIW3mRdVd0txun7kO@lists.freedesktop.org
-X-Gm-Message-State: AOJu0YzX7AIYBGpeC2sLrZNFZnPdbMQ3RElKOOdg2J3rVlhTkEf1Ksr9
- FxhI39zXRT+zwwYNpvCKBZUL9XK7WxSBNPI8rmOTkFZc1wQ0+tdGZIDgp+Kk83fzxy7mCaIoWCS
- hBMUOJ/5SyxKBY/unEt+9BFHeaFKXQPQjw/pX9BVJ8Xd7NneoC0Vgwd0Kv5C4MfI=
-X-Received: by 2002:a05:6000:1564:b0:381:d014:9be0 with SMTP id
- ffacd0b85a97d-381f186c6a3mr3649597f8f.17.1731094431764; 
- Fri, 08 Nov 2024 11:33:51 -0800 (PST)
-X-Google-Smtp-Source: AGHT+IHMHDodmRF53aDkZGw6BGZ9F+ccf5Mc+bz5kN7YN38h8pDU+2YBOqvKdtD83yKuSgIuDHnfag==
-X-Received: by 2002:a05:6000:1564:b0:381:d014:9be0 with SMTP id
- ffacd0b85a97d-381f186c6a3mr3649554f8f.17.1731094431330; 
- Fri, 08 Nov 2024 11:33:51 -0800 (PST)
-Received: from ?IPV6:2003:d8:2f3a:cb00:3f4e:6894:3a3b:36b5?
- (p200300d82f3acb003f4e68943a3b36b5.dip0.t-ipconnect.de.
- [2003:d8:2f3a:cb00:3f4e:6894:3a3b:36b5])
- by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-381ed9ea7c3sm5912898f8f.80.2024.11.08.11.33.49
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Fri, 08 Nov 2024 11:33:50 -0800 (PST)
-Message-ID: <9dc212ac-c4c3-40f2-9feb-a8bcf71a1246@redhat.com>
-Date: Fri, 8 Nov 2024 20:33:49 +0100
+X-Greylist: delayed 303 seconds by postgrey-1.36 at gabe;
+ Mon, 11 Nov 2024 03:47:40 UTC
+Received: from us-smtp-delivery-44.mimecast.com
+ (us-smtp-delivery-44.mimecast.com [207.211.30.44])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 9961D10E037
+ for <nouveau@lists.freedesktop.org>; Mon, 11 Nov 2024 03:47:40 +0000 (UTC)
+Received: from mx-prod-mc-03.mail-002.prod.us-west-2.aws.redhat.com
+ (ec2-54-186-198-63.us-west-2.compute.amazonaws.com [54.186.198.63]) by
+ relay.mimecast.com with ESMTP with STARTTLS (version=TLSv1.3,
+ cipher=TLS_AES_256_GCM_SHA384) id us-mta-428-PLEafD1iOK6bkVwbLzmkhw-1; Sun,
+ 10 Nov 2024 22:41:32 -0500
+X-MC-Unique: PLEafD1iOK6bkVwbLzmkhw-1
+X-Mimecast-MFC-AGG-ID: PLEafD1iOK6bkVwbLzmkhw
+Received: from mx-prod-int-05.mail-002.prod.us-west-2.aws.redhat.com
+ (mx-prod-int-05.mail-002.prod.us-west-2.aws.redhat.com [10.30.177.17])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
+ (No client certificate requested)
+ by mx-prod-mc-03.mail-002.prod.us-west-2.aws.redhat.com (Postfix) with ESMTPS
+ id 72FA919560BA; Mon, 11 Nov 2024 03:41:31 +0000 (UTC)
+Received: from dreadlord.redhat.com (unknown [10.64.136.106])
+ by mx-prod-int-05.mail-002.prod.us-west-2.aws.redhat.com (Postfix) with ESMTP
+ id F337019560A3; Mon, 11 Nov 2024 03:41:29 +0000 (UTC)
+From: Dave Airlie <airlied@gmail.com>
+To: dri-devel@lists.freedesktop.org
+Cc: nouveau@lists.freedesktop.org
+Subject: [PATCH 1/2] nouveau: handle EBUSY and EAGAIN for GSP aux errors.
+Date: Mon, 11 Nov 2024 13:41:24 +1000
+Message-ID: <20241111034126.2028401-1-airlied@gmail.com>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [RFC PATCH v1 00/10] mm: Introduce and use folio_owner_ops
-To: Jason Gunthorpe <jgg@nvidia.com>, Fuad Tabba <tabba@google.com>
-Cc: linux-mm@kvack.org, kvm@vger.kernel.org, nouveau@lists.freedesktop.org,
- dri-devel@lists.freedesktop.org, rppt@kernel.org, jglisse@redhat.com,
- akpm@linux-foundation.org, muchun.song@linux.dev, simona@ffwll.ch,
- airlied@gmail.com, pbonzini@redhat.com, seanjc@google.com,
- willy@infradead.org, jhubbard@nvidia.com, ackerleytng@google.com,
- vannapurve@google.com, mail@maciej.szmigiero.name,
- kirill.shutemov@linux.intel.com, quic_eberman@quicinc.com, maz@kernel.org,
- will@kernel.org, qperret@google.com, keirf@google.com, roypat@amazon.co.uk
-References: <20241108162040.159038-1-tabba@google.com>
- <20241108170501.GI539304@nvidia.com>
-From: David Hildenbrand <david@redhat.com>
-Autocrypt: addr=david@redhat.com; keydata=
- xsFNBFXLn5EBEAC+zYvAFJxCBY9Tr1xZgcESmxVNI/0ffzE/ZQOiHJl6mGkmA1R7/uUpiCjJ
- dBrn+lhhOYjjNefFQou6478faXE6o2AhmebqT4KiQoUQFV4R7y1KMEKoSyy8hQaK1umALTdL
- QZLQMzNE74ap+GDK0wnacPQFpcG1AE9RMq3aeErY5tujekBS32jfC/7AnH7I0v1v1TbbK3Gp
- XNeiN4QroO+5qaSr0ID2sz5jtBLRb15RMre27E1ImpaIv2Jw8NJgW0k/D1RyKCwaTsgRdwuK
- Kx/Y91XuSBdz0uOyU/S8kM1+ag0wvsGlpBVxRR/xw/E8M7TEwuCZQArqqTCmkG6HGcXFT0V9
- PXFNNgV5jXMQRwU0O/ztJIQqsE5LsUomE//bLwzj9IVsaQpKDqW6TAPjcdBDPLHvriq7kGjt
- WhVhdl0qEYB8lkBEU7V2Yb+SYhmhpDrti9Fq1EsmhiHSkxJcGREoMK/63r9WLZYI3+4W2rAc
- UucZa4OT27U5ZISjNg3Ev0rxU5UH2/pT4wJCfxwocmqaRr6UYmrtZmND89X0KigoFD/XSeVv
- jwBRNjPAubK9/k5NoRrYqztM9W6sJqrH8+UWZ1Idd/DdmogJh0gNC0+N42Za9yBRURfIdKSb
- B3JfpUqcWwE7vUaYrHG1nw54pLUoPG6sAA7Mehl3nd4pZUALHwARAQABzSREYXZpZCBIaWxk
- ZW5icmFuZCA8ZGF2aWRAcmVkaGF0LmNvbT7CwZgEEwEIAEICGwMGCwkIBwMCBhUIAgkKCwQW
- AgMBAh4BAheAAhkBFiEEG9nKrXNcTDpGDfzKTd4Q9wD/g1oFAl8Ox4kFCRKpKXgACgkQTd4Q
- 9wD/g1oHcA//a6Tj7SBNjFNM1iNhWUo1lxAja0lpSodSnB2g4FCZ4R61SBR4l/psBL73xktp
- rDHrx4aSpwkRP6Epu6mLvhlfjmkRG4OynJ5HG1gfv7RJJfnUdUM1z5kdS8JBrOhMJS2c/gPf
- wv1TGRq2XdMPnfY2o0CxRqpcLkx4vBODvJGl2mQyJF/gPepdDfcT8/PY9BJ7FL6Hrq1gnAo4
- 3Iv9qV0JiT2wmZciNyYQhmA1V6dyTRiQ4YAc31zOo2IM+xisPzeSHgw3ONY/XhYvfZ9r7W1l
- pNQdc2G+o4Di9NPFHQQhDw3YTRR1opJaTlRDzxYxzU6ZnUUBghxt9cwUWTpfCktkMZiPSDGd
- KgQBjnweV2jw9UOTxjb4LXqDjmSNkjDdQUOU69jGMUXgihvo4zhYcMX8F5gWdRtMR7DzW/YE
- BgVcyxNkMIXoY1aYj6npHYiNQesQlqjU6azjbH70/SXKM5tNRplgW8TNprMDuntdvV9wNkFs
- 9TyM02V5aWxFfI42+aivc4KEw69SE9KXwC7FSf5wXzuTot97N9Phj/Z3+jx443jo2NR34XgF
- 89cct7wJMjOF7bBefo0fPPZQuIma0Zym71cP61OP/i11ahNye6HGKfxGCOcs5wW9kRQEk8P9
- M/k2wt3mt/fCQnuP/mWutNPt95w9wSsUyATLmtNrwccz63XOwU0EVcufkQEQAOfX3n0g0fZz
- Bgm/S2zF/kxQKCEKP8ID+Vz8sy2GpDvveBq4H2Y34XWsT1zLJdvqPI4af4ZSMxuerWjXbVWb
- T6d4odQIG0fKx4F8NccDqbgHeZRNajXeeJ3R7gAzvWvQNLz4piHrO/B4tf8svmRBL0ZB5P5A
- 2uhdwLU3NZuK22zpNn4is87BPWF8HhY0L5fafgDMOqnf4guJVJPYNPhUFzXUbPqOKOkL8ojk
- CXxkOFHAbjstSK5Ca3fKquY3rdX3DNo+EL7FvAiw1mUtS+5GeYE+RMnDCsVFm/C7kY8c2d0G
- NWkB9pJM5+mnIoFNxy7YBcldYATVeOHoY4LyaUWNnAvFYWp08dHWfZo9WCiJMuTfgtH9tc75
- 7QanMVdPt6fDK8UUXIBLQ2TWr/sQKE9xtFuEmoQGlE1l6bGaDnnMLcYu+Asp3kDT0w4zYGsx
- 5r6XQVRH4+5N6eHZiaeYtFOujp5n+pjBaQK7wUUjDilPQ5QMzIuCL4YjVoylWiBNknvQWBXS
- lQCWmavOT9sttGQXdPCC5ynI+1ymZC1ORZKANLnRAb0NH/UCzcsstw2TAkFnMEbo9Zu9w7Kv
- AxBQXWeXhJI9XQssfrf4Gusdqx8nPEpfOqCtbbwJMATbHyqLt7/oz/5deGuwxgb65pWIzufa
- N7eop7uh+6bezi+rugUI+w6DABEBAAHCwXwEGAEIACYCGwwWIQQb2cqtc1xMOkYN/MpN3hD3
- AP+DWgUCXw7HsgUJEqkpoQAKCRBN3hD3AP+DWrrpD/4qS3dyVRxDcDHIlmguXjC1Q5tZTwNB
- boaBTPHSy/Nksu0eY7x6HfQJ3xajVH32Ms6t1trDQmPx2iP5+7iDsb7OKAb5eOS8h+BEBDeq
- 3ecsQDv0fFJOA9ag5O3LLNk+3x3q7e0uo06XMaY7UHS341ozXUUI7wC7iKfoUTv03iO9El5f
- XpNMx/YrIMduZ2+nd9Di7o5+KIwlb2mAB9sTNHdMrXesX8eBL6T9b+MZJk+mZuPxKNVfEQMQ
- a5SxUEADIPQTPNvBewdeI80yeOCrN+Zzwy/Mrx9EPeu59Y5vSJOx/z6OUImD/GhX7Xvkt3kq
- Er5KTrJz3++B6SH9pum9PuoE/k+nntJkNMmQpR4MCBaV/J9gIOPGodDKnjdng+mXliF3Ptu6
- 3oxc2RCyGzTlxyMwuc2U5Q7KtUNTdDe8T0uE+9b8BLMVQDDfJjqY0VVqSUwImzTDLX9S4g/8
- kC4HRcclk8hpyhY2jKGluZO0awwTIMgVEzmTyBphDg/Gx7dZU1Xf8HFuE+UZ5UDHDTnwgv7E
- th6RC9+WrhDNspZ9fJjKWRbveQgUFCpe1sa77LAw+XFrKmBHXp9ZVIe90RMe2tRL06BGiRZr
- jPrnvUsUUsjRoRNJjKKA/REq+sAnhkNPPZ/NNMjaZ5b8Tovi8C0tmxiCHaQYqj7G2rgnT0kt
- WNyWQQ==
-Organization: Red Hat
-In-Reply-To: <20241108170501.GI539304@nvidia.com>
+X-Scanned-By: MIMEDefang 3.0 on 10.30.177.17
 X-Mimecast-Spam-Score: 0
-X-Mimecast-MFC-PROC-ID: wXI2G6_dRs0yuJAy2KBWRlJK0fvrf6sXVeQQtXt6GqM_1731094432
-X-Mimecast-Originator: redhat.com
-Content-Language: en-US
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
+X-Mimecast-MFC-PROC-ID: IqXxjW7rL2Mtrkv8RZ9KsxchsBxKAYx5JBP95FRTWvg_1731296491
+X-Mimecast-Originator: gmail.com
+Content-Transfer-Encoding: quoted-printable
+Content-Type: text/plain; charset=WINDOWS-1252; x-default=true
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -150,73 +59,76 @@ List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-On 08.11.24 18:05, Jason Gunthorpe wrote:
-> On Fri, Nov 08, 2024 at 04:20:30PM +0000, Fuad Tabba wrote:
->> Some folios, such as hugetlb folios and zone device folios,
->> require special handling when the folio's reference count reaches
->> 0, before being freed. Moreover, guest_memfd folios will likely
->> require special handling to notify it once a folio's reference
->> count reaches 0, to facilitate shared to private folio conversion
->> [*]. Currently, each usecase has a dedicated callback when the
->> folio refcount reaches 0 to that effect. Adding yet more
->> callbacks is not ideal.
-> 
+From: Dave Airlie <airlied@redhat.com>
 
-Thanks for having a look!
+The upper layer transfer functions expect EBUSY as a return
+for when retries should be done.
 
-Replying to clarify some things. Fuad, feel free to add additional 
-information.
+Fix the AUX error translation, but also check for both errors
+in a few places.
 
-> Honestly, I question this thesis. How complex would it be to have 'yet
-> more callbacks'? Is the challenge really that the mm can't detect when
-> guestmemfd is the owner of the page because the page will be
-> ZONE_NORMAL?
+Fixes: eb284f4b3781 ("drm/nouveau/dp: Honor GSP link training retry timeout=
+s")
+Signed-off-by: Dave Airlie <airlied@redhat.com>
+---
+ drivers/gpu/drm/nouveau/nvkm/engine/disp/r535.c | 2 +-
+ drivers/gpu/drm/nouveau/nvkm/subdev/gsp/r535.c  | 6 +++---
+ 2 files changed, 4 insertions(+), 4 deletions(-)
 
-Fuad might have been a bit imprecise here: We don't want an ever growing 
-list of checks+callbacks on the page freeing fast path.
-
-This series replaces the two cases we have by a single generic one, 
-which is nice independent of guest_memfd I think.
-
-> 
-> So the point of this is really to allow ZONE_NORMAL pages to have a
-> per-allocator callback?
-
-To intercept the refcount going to zero independent of any zones or 
-magic page types, without as little overhead in the common page freeing 
-path.
-
-It can be used to implement custom allocators, like factored out for 
-hugetlb in this series. It's not necessarily limited to that, though. It 
-can be used as a form of "asynchronous page ref freezing", where you get 
-notified once all references are gone.
-
-(I might have another use case with PageOffline, where we want to 
-prevent virtio-mem ones of them from getting accidentally leaked into 
-the buddy during memory offlining with speculative references -- 
-virtio_mem_fake_offline_going_offline() contains the interesting bits. 
-But I did not look into the dirty details yet, just some thought where 
-we'd want to intercept the refcount going to 0.)
-
-> 
-> But this is also why I suggested to shift them to ZONE_DEVICE for
-> guestmemfd, because then you get these things for free from the pgmap.
-
-With this series even hugetlb gets it for "free", and hugetlb is not 
-quite the nail for the ZONE_DEVICE hammer IMHO :)
-
-For things we can statically set aside early during boot and never 
-really want to return to the buddy/another allocator, I would agree that 
-static ZONE_DEVICE would have possible.
-
-Whenever the buddy or other allocators are involved, and we might have 
-granularity as a handful of pages (e.g., taken from the buddy), getting 
-ZONE_DEVICE involved is not a good (or even feasible) approach.
-
-After all, all we want is intercept the refcount going to 0.
-
--- 
-Cheers,
-
-David / dhildenb
+diff --git a/drivers/gpu/drm/nouveau/nvkm/engine/disp/r535.c b/drivers/gpu/=
+drm/nouveau/nvkm/engine/disp/r535.c
+index 027867c2a8c5..8f9aa3463c3c 100644
+--- a/drivers/gpu/drm/nouveau/nvkm/engine/disp/r535.c
++++ b/drivers/gpu/drm/nouveau/nvkm/engine/disp/r535.c
+@@ -992,7 +992,7 @@ r535_dp_train_target(struct nvkm_outp *outp, u8 target,=
+ bool mst, u8 link_nr, u8
+ =09=09ctrl->data =3D data;
+=20
+ =09=09ret =3D nvkm_gsp_rm_ctrl_push(&disp->rm.objcom, &ctrl, sizeof(*ctrl)=
+);
+-=09=09if (ret =3D=3D -EAGAIN && ctrl->retryTimeMs) {
++=09=09if ((ret =3D=3D -EAGAIN || ret =3D=3D -EBUSY) && ctrl->retryTimeMs) =
+{
+ =09=09=09/*
+ =09=09=09 * Device (likely an eDP panel) isn't ready yet, wait for the tim=
+e specified
+ =09=09=09 * by GSP before retrying again
+diff --git a/drivers/gpu/drm/nouveau/nvkm/subdev/gsp/r535.c b/drivers/gpu/d=
+rm/nouveau/nvkm/subdev/gsp/r535.c
+index cf58f9da9139..d586aea30898 100644
+--- a/drivers/gpu/drm/nouveau/nvkm/subdev/gsp/r535.c
++++ b/drivers/gpu/drm/nouveau/nvkm/subdev/gsp/r535.c
+@@ -78,7 +78,7 @@ r535_rpc_status_to_errno(uint32_t rpc_status)
+ =09switch (rpc_status) {
+ =09case 0x55: /* NV_ERR_NOT_READY */
+ =09case 0x66: /* NV_ERR_TIMEOUT_RETRY */
+-=09=09return -EAGAIN;
++=09=09return -EBUSY;
+ =09case 0x51: /* NV_ERR_NO_MEMORY */
+ =09=09return -ENOMEM;
+ =09default:
+@@ -601,7 +601,7 @@ r535_gsp_rpc_rm_alloc_push(struct nvkm_gsp_object *obje=
+ct, void *argv, u32 repc)
+=20
+ =09if (rpc->status) {
+ =09=09ret =3D ERR_PTR(r535_rpc_status_to_errno(rpc->status));
+-=09=09if (PTR_ERR(ret) !=3D -EAGAIN)
++=09=09if (PTR_ERR(ret) !=3D -EAGAIN && PTR_ERR(ret) !=3D -EBUSY)
+ =09=09=09nvkm_error(&gsp->subdev, "RM_ALLOC: 0x%x\n", rpc->status);
+ =09} else {
+ =09=09ret =3D repc ? rpc->params : NULL;
+@@ -660,7 +660,7 @@ r535_gsp_rpc_rm_ctrl_push(struct nvkm_gsp_object *objec=
+t, void **argv, u32 repc)
+=20
+ =09if (rpc->status) {
+ =09=09ret =3D r535_rpc_status_to_errno(rpc->status);
+-=09=09if (ret !=3D -EAGAIN)
++=09=09if (ret !=3D -EAGAIN && ret !=3D -EBUSY)
+ =09=09=09nvkm_error(&gsp->subdev, "cli:0x%08x obj:0x%08x ctrl cmd:0x%08x f=
+ailed: 0x%08x\n",
+ =09=09=09=09   object->client->object.handle, object->handle, rpc->cmd, rp=
+c->status);
+ =09}
+--=20
+2.47.0
 
