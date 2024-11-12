@@ -2,93 +2,88 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id A81B39C5A2A
-	for <lists+nouveau@lfdr.de>; Tue, 12 Nov 2024 15:22:59 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 4656C9C5C40
+	for <lists+nouveau@lfdr.de>; Tue, 12 Nov 2024 16:48:57 +0100 (CET)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 5251710E5F6;
-	Tue, 12 Nov 2024 14:22:53 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 17EF210E090;
+	Tue, 12 Nov 2024 15:48:55 +0000 (UTC)
 Authentication-Results: gabe.freedesktop.org;
-	dkim=pass (1024-bit key; unprotected) header.d=redhat.com header.i=@redhat.com header.b="PD0m4FY0";
+	dkim=pass (1024-bit key; unprotected) header.d=redhat.com header.i=@redhat.com header.b="aw9aFdz7";
 	dkim-atps=neutral
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
 Received: from us-smtp-delivery-124.mimecast.com
- (us-smtp-delivery-124.mimecast.com [170.10.129.124])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 6C6EA10E5FF
- for <nouveau@lists.freedesktop.org>; Tue, 12 Nov 2024 14:22:52 +0000 (UTC)
+ (us-smtp-delivery-124.mimecast.com [170.10.133.124])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id E936910E62B
+ for <nouveau@lists.freedesktop.org>; Tue, 12 Nov 2024 15:48:52 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1731421371;
+ s=mimecast20190719; t=1731426532;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:content-type:content-type:
  content-transfer-encoding:content-transfer-encoding:
  in-reply-to:in-reply-to:references:references:autocrypt:autocrypt;
- bh=ih3h7sj3/PrQh5CHmukyEc1uZxk8P4jeW0tJ5ye/2l4=;
- b=PD0m4FY0+QGgEMjExCm9TLZLFZJaCuvg/uNROI0xXnr5NJUQPB52kWz7OquCfZR/Jmhyq/
- uxTU7asSNxUKazKqqpiO8QOaINGwSJh/Vt1IKasfOaWFemmHm0akTic87S1jhz4ibAFbEE
- 8L+ZGbWxFqK8CyY1Nl6TfYyo1CK5idA=
-Received: from mail-wm1-f69.google.com (mail-wm1-f69.google.com
- [209.85.128.69]) by relay.mimecast.com with ESMTP with STARTTLS
+ bh=NBzWljeInLaYVlceeq4uS83CUx9RaqrCT0JduSM/3es=;
+ b=aw9aFdz7GSqRyRrf8Cuu8qGBNg+bmlElKe3307W+XDplNG1I6A2aX9VaUnRfT2iVozmQMQ
+ PXof+aX5RPEiBHMqoQvsSSre4jpHUGNz/oJa7Zgew09kt6UAmczmKbby90bwlJAO2t/QJU
+ lJrRuDAzKxQsE1acKR/RBaUdvay/7oQ=
+Received: from mail-wm1-f71.google.com (mail-wm1-f71.google.com
+ [209.85.128.71]) by relay.mimecast.com with ESMTP with STARTTLS
  (version=TLSv1.3, cipher=TLS_AES_256_GCM_SHA384) id
- us-mta-653-1P85ooD-NV2vUnulvFkvJg-1; Tue, 12 Nov 2024 09:22:50 -0500
-X-MC-Unique: 1P85ooD-NV2vUnulvFkvJg-1
-X-Mimecast-MFC-AGG-ID: 1P85ooD-NV2vUnulvFkvJg
-Received: by mail-wm1-f69.google.com with SMTP id
- 5b1f17b1804b1-4316655b2f1so40741785e9.0
- for <nouveau@lists.freedesktop.org>; Tue, 12 Nov 2024 06:22:50 -0800 (PST)
+ us-mta-418-ZnOwSKz6MEyu7VPa0skwZw-1; Tue, 12 Nov 2024 10:48:50 -0500
+X-MC-Unique: ZnOwSKz6MEyu7VPa0skwZw-1
+X-Mimecast-MFC-AGG-ID: ZnOwSKz6MEyu7VPa0skwZw
+Received: by mail-wm1-f71.google.com with SMTP id
+ 5b1f17b1804b1-4316655b2f1so41413745e9.0
+ for <nouveau@lists.freedesktop.org>; Tue, 12 Nov 2024 07:48:50 -0800 (PST)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1731421369; x=1732026169;
+ d=1e100.net; s=20230601; t=1731426529; x=1732031329;
  h=content-transfer-encoding:in-reply-to:organization:autocrypt
  :content-language:from:references:cc:to:subject:user-agent
  :mime-version:date:message-id:x-gm-message-state:from:to:cc:subject
  :date:message-id:reply-to;
- bh=ih3h7sj3/PrQh5CHmukyEc1uZxk8P4jeW0tJ5ye/2l4=;
- b=iTu6W6pDd6iMnP1JNETwsOkKK+U6jTZVDQOxp0iHn94sChSCeNDoGcfYykxfW/eN9j
- NrMCaFhXy4Bp3kwdQt7NJldPSRkFHWlDa3+lzz/DcSAqjU2B6lWxlv86wVw1FaKTW/K2
- MWj7IhWDSbw+1bJaJM6QoUHINe02wDsoMUia4Y65qdVDmUXJ8qFcLVIliFo//2TmaQSX
- /CHfe+1FU+rUl5Z9R7dYo5U0b/oEt1v3FXI65QOfeBhwMkaUXACEkn0oWTPf6s+PNYLk
- qqw3uLvTZomJZH5V8clkeCspV7P8baqyEWmWm5Mf657pPJYu6xuVKXhkUprnubPXXezi
- 1adQ==
+ bh=NBzWljeInLaYVlceeq4uS83CUx9RaqrCT0JduSM/3es=;
+ b=SBNdEvRgHWareLGIPWyZqM6PN9PbssX+aydOXXOKablgeXlt+w5KP8hvLBh5T4wb97
+ /wOdP1gEhz/GPstRn6YawwhPCGR6PW8c9qoa/IlbXOlvDJ2dkCUj9hfMQ4UslUq7TXQC
+ 6vYNyxQXvWzdvyj7/rQS0INVVpCk/dwpeuCCr5WU8t9soAvhmv6hjItKRQbDJXuVj991
+ PIqhAO8I1C78tJ6zKU0AhLUsD0kqQtg3iW9ny/DZW1z3LscPL6uEOpaGwMIk3m8AZke/
+ HQtXXun5AhM8DqppCeBUbIGf5vOsZs9AKQ7/sktNYsKYiqbKh9z49tM43xtc57PLHuam
+ joPw==
 X-Forwarded-Encrypted: i=1;
- AJvYcCXfrgyhPD6emoqWF90NPoZaft0p2RrrkHrjMPsIeb+HzOMAJeZzQjUeWOrik/w2Hnmy4btT22Nr@lists.freedesktop.org
-X-Gm-Message-State: AOJu0YzWBnKOsk6bTlyziH+RS4Xha2nFmRIczaoZd15DJlZ+tu9Qfot5
- NyN+UQLqXhEQvZZJrnfDokLC+Vwqq8IgA8LGY2zIkt5SSNgKHj4zRfzcGlFNFdYWupfNgYM82Cr
- 7AQG+9HTAoor7BfjX/2SdiL0hQc6hnT7dUSwHIefLoXiCfTN7F41LG/ZlVMIjD8s=
-X-Received: by 2002:a05:600c:3ca0:b0:42c:b037:5f9d with SMTP id
- 5b1f17b1804b1-432b74fd71emr143890035e9.3.1731421369195; 
- Tue, 12 Nov 2024 06:22:49 -0800 (PST)
-X-Google-Smtp-Source: AGHT+IH59gtj5JuaEfqGVlrZNoO+nuZRVjGPGhZoZcwaXvNihYJ1LG3ikeJRXAg5sAwoquW2Wr0J6g==
-X-Received: by 2002:a05:600c:3ca0:b0:42c:b037:5f9d with SMTP id
- 5b1f17b1804b1-432b74fd71emr143889835e9.3.1731421368855; 
- Tue, 12 Nov 2024 06:22:48 -0800 (PST)
+ AJvYcCVHlZJE6DxyNL9VRB3+XQOP+/815+aXWhw5eJQLTlhv73OBqeCPqtwGjptWdJw+7Rbb2mj+Kwfj@lists.freedesktop.org
+X-Gm-Message-State: AOJu0Ywwy7jMqc8KUg36ZMuezX0Y6D1871CNkaIw9TPKDwFFoxw7N2Sz
+ Ru2Yzg30QXs+As0LfoveonQdKmIsGAObPOF2Acicujx3WSZ/cg4bgaD6uJ8W6yGySRl3SVcGVjd
+ OrxzMRPm+Of9fFiDbwKde922dfx66ciKgC1kF1kfhE6Z25sAdd51UkLzqwyY+j6s=
+X-Received: by 2002:a05:600c:510a:b0:431:4e3f:9dee with SMTP id
+ 5b1f17b1804b1-432b74fd7edmr149845295e9.4.1731426529666; 
+ Tue, 12 Nov 2024 07:48:49 -0800 (PST)
+X-Google-Smtp-Source: AGHT+IGiPlR/rYHL3ApkGE6Xy5PVD9KX3s3Wo+vNqUEbyrZ9AhAQ6ENWfeeHRjP2S1TjOJdxKPfR6g==
+X-Received: by 2002:a05:600c:510a:b0:431:4e3f:9dee with SMTP id
+ 5b1f17b1804b1-432b74fd7edmr149844975e9.4.1731426529244; 
+ Tue, 12 Nov 2024 07:48:49 -0800 (PST)
 Received: from ?IPV6:2003:cb:c739:8e00:7a46:1b8c:8b13:d3d?
  (p200300cbc7398e007a461b8c8b130d3d.dip0.t-ipconnect.de.
  [2003:cb:c739:8e00:7a46:1b8c:8b13:d3d])
  by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-432b054a3ebsm209649235e9.12.2024.11.12.06.22.46
+ 5b1f17b1804b1-432b053069fsm218177955e9.4.2024.11.12.07.48.47
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Tue, 12 Nov 2024 06:22:48 -0800 (PST)
-Message-ID: <430b6a38-facf-4127-b1ef-5cfe7c495d63@redhat.com>
-Date: Tue, 12 Nov 2024 15:22:46 +0100
+ Tue, 12 Nov 2024 07:48:47 -0800 (PST)
+Message-ID: <2a6c1377-c76b-4b75-b4be-6896c860896b@redhat.com>
+Date: Tue, 12 Nov 2024 16:48:46 +0100
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [RFC PATCH v1 00/10] mm: Introduce and use folio_owner_ops
-To: Jason Gunthorpe <jgg@nvidia.com>
-Cc: Matthew Wilcox <willy@infradead.org>, Fuad Tabba <tabba@google.com>,
- linux-mm@kvack.org, kvm@vger.kernel.org, nouveau@lists.freedesktop.org,
- dri-devel@lists.freedesktop.org, rppt@kernel.org, jglisse@redhat.com,
- akpm@linux-foundation.org, muchun.song@linux.dev, simona@ffwll.ch,
- airlied@gmail.com, pbonzini@redhat.com, seanjc@google.com,
- jhubbard@nvidia.com, ackerleytng@google.com, vannapurve@google.com,
- mail@maciej.szmigiero.name, kirill.shutemov@linux.intel.com,
- quic_eberman@quicinc.com, maz@kernel.org, will@kernel.org,
- qperret@google.com, keirf@google.com, roypat@amazon.co.uk
-References: <20241108162040.159038-1-tabba@google.com>
- <20241108170501.GI539304@nvidia.com>
- <9dc212ac-c4c3-40f2-9feb-a8bcf71a1246@redhat.com>
- <CA+EHjTy3kNdg7pfN9HufgibE7qY1S+WdMZfRFRiF5sHtMzo64w@mail.gmail.com>
- <ZzLnFh1_4yYao_Yz@casper.infradead.org>
- <e82d7a46-8749-429c-82fa-0c996c858f4a@redhat.com>
- <20241112135348.GA28228@nvidia.com>
+Subject: Re: [RFC PATCH v1 06/10] mm/hugetlb: use separate
+ folio->_hugetlb_list for hugetlb-internals
+To: wang wei <a929244872@163.com>, tabba@google.com
+Cc: ackerleytng@google.com, airlied@gmail.com, akpm@linux-foundation.org,
+ dri-devel@lists.freedesktop.org, jgg@nvidia.com, jglisse@redhat.com,
+ jhubbard@nvidia.com, keirf@google.com, kirill.shutemov@linux.intel.com,
+ linux-mm@kvack.org, mail@maciej.szmigiero.name, maz@kernel.org,
+ muchun.song@linux.dev, nouveau@lists.freedesktop.org, pbonzini@redhat.com,
+ qperret@google.com, quic_eberman@quicinc.com, roypat@amazon.co.uk,
+ rppt@kernel.org, seanjc@google.com, simona@ffwll.ch, vannapurve@google.com,
+ will@kernel.org, willy@infradead.org
+References: <20241108162040.159038-7-tabba@google.com>
+ <20241112152849.10369-1-a929244872@163.com>
 From: David Hildenbrand <david@redhat.com>
 Autocrypt: addr=david@redhat.com; keydata=
  xsFNBFXLn5EBEAC+zYvAFJxCBY9Tr1xZgcESmxVNI/0ffzE/ZQOiHJl6mGkmA1R7/uUpiCjJ
@@ -135,9 +130,9 @@ Autocrypt: addr=david@redhat.com; keydata=
  jPrnvUsUUsjRoRNJjKKA/REq+sAnhkNPPZ/NNMjaZ5b8Tovi8C0tmxiCHaQYqj7G2rgnT0kt
  WNyWQQ==
 Organization: Red Hat
-In-Reply-To: <20241112135348.GA28228@nvidia.com>
+In-Reply-To: <20241112152849.10369-1-a929244872@163.com>
 X-Mimecast-Spam-Score: 0
-X-Mimecast-MFC-PROC-ID: 2l3qk1zw6A1xxH1t20AV5rAJvy3gh5GvyRJWKAEAYjY_1731421369
+X-Mimecast-MFC-PROC-ID: 1fanha0OZyshfcWW4inBo_h_EzSh59x1uE7UCzOj9Ss_1731426530
 X-Mimecast-Originator: redhat.com
 Content-Language: en-US
 Content-Type: text/plain; charset=UTF-8; format=flowed
@@ -156,72 +151,43 @@ List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-On 12.11.24 14:53, Jason Gunthorpe wrote:
-> On Tue, Nov 12, 2024 at 10:10:06AM +0100, David Hildenbrand wrote:
->> On 12.11.24 06:26, Matthew Wilcox wrote:
->>> On Mon, Nov 11, 2024 at 08:26:54AM +0000, Fuad Tabba wrote:
->>>> Thanks for your comments Jason, and for clarifying my cover letter
->>>> David. I think David has covered everything, and I'll make sure to
->>>> clarify this in the cover letter when I respin.
->>>
->>> I don't want you to respin.  I think this is a bad idea.
+On 12.11.24 16:28, wang wei wrote:
+> Signed-off-by: wang wei <a929244872@163.com>
+> ---
+>> diff --git a/include/linux/mm_types.h b/include/linux/mm_types.h
+>> index 80fef38d9d64..365c73be0bb4 100644
+>> --- a/include/linux/mm_types.h
+>> +++ b/include/linux/mm_types.h
+>> @@ -310,6 +310,7 @@ typedef struct {
+>>   * @_hugetlb_cgroup: Do not use directly, use accessor in hugetlb_cgroup.h.
+>>   * @_hugetlb_cgroup_rsvd: Do not use directly, use accessor in hugetlb_cgroup.h.
+>>   * @_hugetlb_hwpoison: Do not use directly, call raw_hwp_list_head().
+>> + * @_hugetlb_list: To be used in hugetlb core code only.
+>>   * @_deferred_list: Folios to be split under memory pressure.
+>>   * @_unused_slab_obj_exts: Placeholder to match obj_exts in struct slab.
+>>   *
+>> @@ -397,6 +398,17 @@ struct folio {
+>> 		};
+>> 		struct page __page_2;
+>> 	};
+>> +	union {
+>> +		struct {
+>> +			unsigned long _flags_3;
+>> +			unsigned long _head_3;
+>> +	/* public: */
+>> +			struct list_head _hugetlb_list;
+>> +	/* private: the union with struct page is transitional */
+>> +		};
+>> +		struct page __page_3;
+>> +	};
+>> +
+>> };
 >>
->> I'm hoping you'll find some more time to explain what exactly you don't
->> like, because this series only refactors what we already have.
->>
->> I enjoy seeing the special casing (especially hugetlb) gone from mm/swap.c.
->>
->> I don't particularly enjoy overlaying folio->lru, primarily because we have
->> to temporarily "evacuate" it when someone wants to make use of folio->lru
->> (e.g., hugetlb isolation). So it's not completely "sticky", at least for
->> hugetlb.
-> 
-> This is really the worst part of it though
+> As far as I know, increasing the size of folio maybe decrease
+> the revenue of HVO, do you measure it?
 
-Yes.
-
-> 
-> And, IMHO, seems like overkill. We have only a handful of cases -
-> maybe we shouldn't be trying to get to full generality but just handle
-> a couple of cases directly? I don't really think it is such a bad
-> thing to have an if ladder on the free path if we have only a couple
-> things. Certainly it looks good instead of doing overlaying tricks.
-
-I'd really like to abstract hugetlb handling if possible. The way it 
-stands it's just very odd.
-
-We'll need some reliable way to identify these folios that need care. 
-guest_memfd will be using folio->mapcount for now, so for now we 
-couldn't set a page type like hugetlb does.
-
-
-> Also how does this translate to Matthew's memdesc world?
-
-guest_memfd and hugetlb would be operating on folios (at least for now), 
-which contain the refcount,lru,private, ... so nothing special there.
-
-Once we actually decoupled "struct folio" from "struct page", we *might* 
-have to play less tricks, because we could just have a callback pointer 
-there. But well, maybe we also want to save some space in there.
-
-Do we want dedicated memdescs for hugetlb/guest_memfd that extend folios 
-in the future? I don't know, maybe.
-
-
-I'm currently wondering if we can use folio->private for the time being. 
-Either
-
-(a) If folio->private is still set once the refcount drops to 0, it 
-indicates that there is a freeing callback/owner_ops. We'll have to make 
-hugetlb not use folio->private and convert others to clear 
-folio->private before freeing.
-
-(b) Use bitX of folio->private to indicate that this has "owner_ops" 
-meaning. We'll have to make hugetlb not use folio->private and make 
-others not use bitX. Might be harder and overkill, because right now we 
-only really need the callback when refcount==0.
-
-(c) Use some other indication that folio->private contains folio_ops.
+We should always have a writable page2, even with HVO. So nothing should 
+change at this point. Thanks!
 
 -- 
 Cheers,
