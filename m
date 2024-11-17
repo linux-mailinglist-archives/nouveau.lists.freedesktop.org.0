@@ -2,41 +2,100 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id E33E89CFE51
-	for <lists+nouveau@lfdr.de>; Sat, 16 Nov 2024 11:46:24 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 97B1B9D05F6
+	for <lists+nouveau@lfdr.de>; Sun, 17 Nov 2024 21:54:42 +0100 (CET)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id D33DC10E2E5;
-	Sat, 16 Nov 2024 10:46:22 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id B5AD810E234;
+	Sun, 17 Nov 2024 20:54:38 +0000 (UTC)
 Authentication-Results: gabe.freedesktop.org;
-	dkim=pass (2048-bit key; unprotected) header.d=gnu.org header.i=@gnu.org header.b="ir7VubWj";
+	dkim=pass (1024-bit key; unprotected) header.d=ideasonboard.com header.i=@ideasonboard.com header.b="XZe5vUJI";
 	dkim-atps=neutral
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from eggs.gnu.org (eggs.gnu.org [209.51.188.92])
- by gabe.freedesktop.org (Postfix) with ESMTPS id F142B10E2E5
- for <nouveau@lists.freedesktop.org>; Sat, 16 Nov 2024 10:46:20 +0000 (UTC)
-Received: from fencepost.gnu.org ([2001:470:142:3::e])
- by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <davidh@gnu.org>) id 1tCGJo-0000ge-5z
- for nouveau@lists.freedesktop.org; Sat, 16 Nov 2024 05:46:20 -0500
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=gnu.org;
- s=fencepost-gnu-org; h=Subject:To:From:MIME-Version:Date:in-reply-to:
- references; bh=H9yHMMw0LHMopLyy7R7suvWArmwdAXUqAHk5fmEwHLc=; b=ir7VubWjH8KvNo
- aydI96MRFynB50nYYzxg1NTZCGRIltKgh6+VDgVMxFAf0n6u4zl90MPqNiUvXmXfHaB0xHNfH5Ix1
- eNg+Bk9Lo0HDxdgEB+zjZHELxOl4KO1bNVAAB36CvlX5/k9Iu/x/J0dSoNsGRiJn0JBFb4Zjpre5Z
- VvXZumDAKc/SNDbBXaqdUv1BQqiJhfOXV58i41R9IpUss+uwTmOQkVxdEei4QIwhrYZhay76c+Mqv
- hZbPsWL6yEqfV0m9JdOvWe0WVziIiiS92myeD+IxhjcGEumw7IgtxwUXRXLx2I/1d6jkXz9f3wh4h
- zY5TQ+ezF5sr5/jC9Zkw==;
-Content-Type: multipart/alternative;
- boundary="------------thf3mM1wYbKEu0WjilX0hsWe"
-Message-ID: <fd47cda6-e120-4849-b77b-b58802eb2b9f@gnu.org>
-Date: Sat, 16 Nov 2024 11:44:55 +0100
+Received: from perceval.ideasonboard.com (perceval.ideasonboard.com
+ [213.167.242.64])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 76A9E10E1F5;
+ Sun, 17 Nov 2024 20:54:37 +0000 (UTC)
+Received: from pendragon.ideasonboard.com (81-175-209-231.bb.dnainternet.fi
+ [81.175.209.231])
+ by perceval.ideasonboard.com (Postfix) with ESMTPSA id 701F57FE;
+ Sun, 17 Nov 2024 21:54:19 +0100 (CET)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=ideasonboard.com;
+ s=mail; t=1731876859;
+ bh=w9SUo0onmIEsCbHLk8aWeLWWcw+C7sEI352gJsh+oTo=;
+ h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
+ b=XZe5vUJIolLfMAXIsVhz7GffiGmYnhewBuHdpxEvyTaXOd4N0DgZ4tZSXv4c2lG6W
+ P1rY+Y4mit0F7L7b6m1SfRmXQEUS7GNzudoX7LQ8FZPzyXf8+sXDu7C268CgkZxL7P
+ /8QQwAwE2VSY81CTqI8e/nIrkb9w4cBk5Zd/KEKQ=
+Date: Sun, 17 Nov 2024 22:54:26 +0200
+From: Laurent Pinchart <laurent.pinchart@ideasonboard.com>
+To: Dmitry Baryshkov <dmitry.baryshkov@linaro.org>
+Cc: Jani Nikula <jani.nikula@linux.intel.com>,
+ Rodrigo Vivi <rodrigo.vivi@intel.com>,
+ Joonas Lahtinen <joonas.lahtinen@linux.intel.com>,
+ Tvrtko Ursulin <tursulin@ursulin.net>,
+ David Airlie <airlied@gmail.com>, Simona Vetter <simona@ffwll.ch>,
+ Maarten Lankhorst <maarten.lankhorst@linux.intel.com>,
+ Maxime Ripard <mripard@kernel.org>,
+ Thomas Zimmermann <tzimmermann@suse.de>,
+ Karol Herbst <kherbst@redhat.com>, Lyude Paul <lyude@redhat.com>,
+ Danilo Krummrich <dakr@redhat.com>,
+ Harry Wentland <harry.wentland@amd.com>, Leo Li <sunpeng.li@amd.com>,
+ Rodrigo Siqueira <Rodrigo.Siqueira@amd.com>,
+ Alex Deucher <alexander.deucher@amd.com>,
+ Christian =?utf-8?B?S8O2bmln?= <christian.koenig@amd.com>,
+ Xinhui Pan <Xinhui.Pan@amd.com>, Alain Volmat <alain.volmat@foss.st.com>,
+ Raphael Gallais-Pou <rgallaispou@gmail.com>,
+ Liviu Dudau <liviu.dudau@arm.com>, Andrzej Hajda <andrzej.hajda@intel.com>,
+ Neil Armstrong <neil.armstrong@linaro.org>,
+ Robert Foss <rfoss@kernel.org>, Jonas Karlman <jonas@kwiboo.se>,
+ Jernej Skrabec <jernej.skrabec@gmail.com>,
+ Peter Senna Tschudin <peter.senna@gmail.com>, Ian Ray <ian.ray@ge.com>,
+ Martyn Welch <martyn.welch@collabora.co.uk>,
+ Inki Dae <inki.dae@samsung.com>, Seung-Woo Kim <sw0312.kim@samsung.com>,
+ Kyungmin Park <kyungmin.park@samsung.com>,
+ Krzysztof Kozlowski <krzk@kernel.org>,
+ Alim Akhtar <alim.akhtar@samsung.com>,
+ Stefan Agner <stefan@agner.ch>, Alison Wang <alison.wang@nxp.com>,
+ Patrik Jakobsson <patrik.r.jakobsson@gmail.com>,
+ Philipp Zabel <p.zabel@pengutronix.de>, Shawn Guo <shawnguo@kernel.org>,
+ Sascha Hauer <s.hauer@pengutronix.de>,
+ Pengutronix Kernel Team <kernel@pengutronix.de>,
+ Fabio Estevam <festevam@gmail.com>, Rob Clark <robdclark@gmail.com>,
+ Abhinav Kumar <quic_abhinavk@quicinc.com>, Sean Paul <sean@poorly.run>,
+ Marijn Suijten <marijn.suijten@somainline.org>,
+ Dave Airlie <airlied@redhat.com>, Gerd Hoffmann <kraxel@redhat.com>,
+ Sandy Huang <hjc@rock-chips.com>,
+ Heiko =?utf-8?Q?St=C3=BCbner?= <heiko@sntech.de>,
+ Andy Yan <andy.yan@rock-chips.com>, Chen-Yu Tsai <wens@csie.org>,
+ Samuel Holland <samuel@sholland.org>,
+ Thierry Reding <thierry.reding@gmail.com>,
+ Mikko Perttunen <mperttunen@nvidia.com>,
+ Jonathan Hunter <jonathanh@nvidia.com>,
+ Dave Stevenson <dave.stevenson@raspberrypi.com>,
+ =?utf-8?B?TWHDrXJh?= Canal <mcanal@igalia.com>,
+ Raspberry Pi Kernel Maintenance <kernel-list@raspberrypi.com>,
+ Gurchetan Singh <gurchetansingh@chromium.org>,
+ Chia-I Wu <olvaffe@gmail.com>, Zack Rusin <zack.rusin@broadcom.com>,
+ Broadcom internal kernel review list <bcm-kernel-feedback-list@broadcom.com>, 
+ intel-gfx@lists.freedesktop.org, intel-xe@lists.freedesktop.org,
+ dri-devel@lists.freedesktop.org, linux-kernel@vger.kernel.org,
+ nouveau@lists.freedesktop.org, amd-gfx@lists.freedesktop.org,
+ linux-arm-kernel@lists.infradead.org,
+ linux-samsung-soc@vger.kernel.org, imx@lists.linux.dev,
+ linux-arm-msm@vger.kernel.org, freedreno@lists.freedesktop.org,
+ virtualization@lists.linux.dev, spice-devel@lists.freedesktop.org,
+ linux-rockchip@lists.infradead.org, linux-sunxi@lists.linux.dev,
+ linux-tegra@vger.kernel.org
+Subject: Re: [PATCH 1/5] drm/encoder_slave: make mode_valid accept const
+ struct drm_display_mode
+Message-ID: <20241117205426.GE12409@pendragon.ideasonboard.com>
+References: <20241115-drm-connector-mode-valid-const-v1-0-b1b523156f71@linaro.org>
+ <20241115-drm-connector-mode-valid-const-v1-1-b1b523156f71@linaro.org>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Content-Language: en-US
-From: David Hedlund <davidh@gnu.org>
-To: nouveau@lists.freedesktop.org
-Subject: Inquiry on Nouveau driver compatibility and documentation updates
+Content-Type: text/plain; charset=utf-8
+Content-Disposition: inline
+In-Reply-To: <20241115-drm-connector-mode-valid-const-v1-1-b1b523156f71@linaro.org>
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -51,113 +110,88 @@ List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-This is a multi-part message in MIME format.
---------------thf3mM1wYbKEu0WjilX0hsWe
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 8bit
+Hi Dmitry,
 
-Dear Nouveau community,I have a few inquiries regarding Nouveau driver 
-compatibility and documentation:
+Thank you for the patch.
 
- 1. Is there a comprehensive list of graphics cards compatible with
-    Trisquel 11.0.1 and the Nouveau driver?[1]
- 2. Would it be beneficial to include version compatibility information
-    in the tables on the CodeNames page
-    (https://nouveau.freedesktop.org/CodeNames.htm
-    <https://nouveau.freedesktop.org/CodeNames.htm>)?
- 3. The CodeNames page suggests using |dmesg | grep -i chipset|to
-    identify the chipset. However, this command yields no output on my
-    system. I found that |lspci -v | grep -A 12 VGA|provides the
-    necessary information. Could this alternative command be added to
-    the documentation for users experiencing similar issues?
+On Fri, Nov 15, 2024 at 11:09:26PM +0200, Dmitry Baryshkov wrote:
+> The mode_valid() callbacks of drm_encoder, drm_crtc and drm_bridge
+> accept const struct drm_display_mode argument. Change the mode_valid
+> callback of drm_encoder_slave to also accept const argument.
+> 
+> Signed-off-by: Dmitry Baryshkov <dmitry.baryshkov@linaro.org>
 
-|
-|
+Reviewed-by: Laurent Pinchart <laurent.pinchart+renesas@ideasonboard.com>
 
-Thank you for your attention to these matters. Your assistance in 
-improving the documentation and clarifying compatibility information 
-would be greatly appreciated.
+On a side note, there's only two I2C slave encoder drivers left... I
+wonder if we could so something about them. The ch7006 and sil164
+drivers seem to be used by nouveau only, could they be moved to
+drivers/gpu/drm/nouveau/ ? We would move the whole drm_encoder_slave
+implementation there too, and leave it to die (or get taken out of limbo
+and fixed) with dispnv04.
 
-References:
+> ---
+>  drivers/gpu/drm/i2c/ch7006_drv.c          | 2 +-
+>  drivers/gpu/drm/i2c/sil164_drv.c          | 2 +-
+>  drivers/gpu/drm/nouveau/dispnv04/tvnv17.c | 2 +-
+>  include/drm/drm_encoder_slave.h           | 2 +-
+>  4 files changed, 4 insertions(+), 4 deletions(-)
+> 
+> diff --git a/drivers/gpu/drm/i2c/ch7006_drv.c b/drivers/gpu/drm/i2c/ch7006_drv.c
+> index 131512a5f3bd996ad1e2eb869ffa09837daba0c7..a57f0a41c1a9e2006142fe0bad2914b0c344c82a 100644
+> --- a/drivers/gpu/drm/i2c/ch7006_drv.c
+> +++ b/drivers/gpu/drm/i2c/ch7006_drv.c
+> @@ -104,7 +104,7 @@ static bool ch7006_encoder_mode_fixup(struct drm_encoder *encoder,
+>  }
+>  
+>  static int ch7006_encoder_mode_valid(struct drm_encoder *encoder,
+> -				     struct drm_display_mode *mode)
+> +				     const struct drm_display_mode *mode)
+>  {
+>  	if (ch7006_lookup_mode(encoder, mode))
+>  		return MODE_OK;
+> diff --git a/drivers/gpu/drm/i2c/sil164_drv.c b/drivers/gpu/drm/i2c/sil164_drv.c
+> index ff23422727fce290a188e495d343e32bc2c373ec..708e119072fcb50c31b5596b75dc341429b93697 100644
+> --- a/drivers/gpu/drm/i2c/sil164_drv.c
+> +++ b/drivers/gpu/drm/i2c/sil164_drv.c
+> @@ -255,7 +255,7 @@ sil164_encoder_restore(struct drm_encoder *encoder)
+>  
+>  static int
+>  sil164_encoder_mode_valid(struct drm_encoder *encoder,
+> -			  struct drm_display_mode *mode)
+> +			  const struct drm_display_mode *mode)
+>  {
+>  	struct sil164_priv *priv = to_sil164_priv(encoder);
+>  
+> diff --git a/drivers/gpu/drm/nouveau/dispnv04/tvnv17.c b/drivers/gpu/drm/nouveau/dispnv04/tvnv17.c
+> index 3ecb101d23e949b753b873d24eec01ad6fe7f5d6..35ad4e10d27323c87704a3ff35b7dc26462c82bd 100644
+> --- a/drivers/gpu/drm/nouveau/dispnv04/tvnv17.c
+> +++ b/drivers/gpu/drm/nouveau/dispnv04/tvnv17.c
+> @@ -308,7 +308,7 @@ static int nv17_tv_get_modes(struct drm_encoder *encoder,
+>  }
+>  
+>  static int nv17_tv_mode_valid(struct drm_encoder *encoder,
+> -			      struct drm_display_mode *mode)
+> +			      const struct drm_display_mode *mode)
+>  {
+>  	struct nv17_tv_norm_params *tv_norm = get_tv_norm(encoder);
+>  
+> diff --git a/include/drm/drm_encoder_slave.h b/include/drm/drm_encoder_slave.h
+> index 49172166a164474f43e4afb2eeeb3cde8ae7c61a..b526643833dcf78bae29f9fbbe27de3f730b55d8 100644
+> --- a/include/drm/drm_encoder_slave.h
+> +++ b/include/drm/drm_encoder_slave.h
+> @@ -85,7 +85,7 @@ struct drm_encoder_slave_funcs {
+>  	 * @mode_valid: Analogous to &drm_encoder_helper_funcs @mode_valid.
+>  	 */
+>  	int (*mode_valid)(struct drm_encoder *encoder,
+> -			  struct drm_display_mode *mode);
+> +			  const struct drm_display_mode *mode);
+>  	/**
+>  	 * @mode_set: Analogous to &drm_encoder_helper_funcs @mode_set
+>  	 * callback. Wrapped by drm_i2c_encoder_mode_set().
+> 
 
-|1: |Nouveau-related packages installed on my system:
+-- 
+Regards,
 
-$ dpkg -l | grep nouveau
-ii  libdrm-nouveau2:amd64 
-2.4.113-2~ubuntu0.22.04.1                             amd64 Userspace 
-interface to nouveau-specific kernel DRM services -- runtime
-ii  libdrm-nouveau2:i386 
-2.4.113-2~ubuntu0.22.04.1                             i386 Userspace 
-interface to nouveau-specific kernel DRM services -- runtime
-ii  xserver-xorg-video-nouveau 
-1:1.0.17-2build1                                      amd64 X.Org X 
-server -- Nouveau display driver
-
-
---------------thf3mM1wYbKEu0WjilX0hsWe
-Content-Type: text/html; charset=UTF-8
-Content-Transfer-Encoding: 8bit
-
-<!DOCTYPE html>
-<html data-lt-installed="true">
-  <head>
-
-    <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-  </head>
-  <body style="padding-bottom: 1px;">
-    <span>Dear Nouveau community,</span><span class="mt-md block"></span>
-    <span>I have a few inquiries regarding Nouveau driver compatibility
-      and documentation:</span>
-    <ol class="marker:text-textOff list-decimal pl-8">
-      <li><span>
-        </span><span><span>Is there a comprehensive list of graphics
-            cards compatible with Trisquel 11.0.1 and the Nouveau
-            driver?[1]</span></span></li>
-      <li><span>
-        </span><span><span>Would it be beneficial to include version
-            compatibility information in the tables on the CodeNames
-            page (</span><span><a target="_blank"
-              rel="nofollow noopener"
-class="break-word hover:text-super hover:decoration-super dark:hover:text-superDark dark:hover:decoration-superDark underline decoration-from-font underline-offset-1 transition-all duration-300 moz-txt-link-freetext"
-              href="https://nouveau.freedesktop.org/CodeNames.htm">https://nouveau.freedesktop.org/CodeNames.htm</a></span><span>)?</span></span><span>
-        </span></li>
-      <li><span>
-        </span><span><span>The CodeNames page suggests using </span><span><code>dmesg
-              | grep -i chipset</code></span><span> to identify the
-            chipset. However, this command yields no output on my
-            system. I found that </span><span><code>lspci -v | grep -A
-              12 VGA</code></span><span> provides the necessary
-            information. Could this alternative command be added to the
-            documentation for users experiencing similar issues?</span></span></li>
-    </ol>
-    <p><code><br>
-      </code></p>
-    <p><span>Thank you for your attention to these matters. Your
-        assistance in improving the documentation and clarifying
-        compatibility information would be greatly appreciated.</span></p>
-    <span><span>References:</span></span>
-    <p><code>1: </code><span>Nouveau-related packages installed on my
-        system:</span>
-    </p>
-    <p></p>
-    <p>$ dpkg -l | grep nouveau<br>
-      ii  libdrm-nouveau2:amd64                        
-      2.4.113-2~ubuntu0.22.04.1                             amd64       
-      Userspace interface to nouveau-specific kernel DRM services --
-      runtime<br>
-      ii  libdrm-nouveau2:i386                         
-      2.4.113-2~ubuntu0.22.04.1                             i386        
-      Userspace interface to nouveau-specific kernel DRM services --
-      runtime<br>
-      ii  xserver-xorg-video-nouveau                   
-      1:1.0.17-2build1                                      amd64       
-      X.Org X server -- Nouveau display driver</p>
-    <p>
-      <span><br>
-      </span>
-    </p>
-  </body>
-  <lt-container></lt-container>
-</html>
-
---------------thf3mM1wYbKEu0WjilX0hsWe--
+Laurent Pinchart
