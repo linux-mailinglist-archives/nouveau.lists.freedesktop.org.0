@@ -2,130 +2,134 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id ECBFD9D119C
-	for <lists+nouveau@lfdr.de>; Mon, 18 Nov 2024 14:17:44 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id D0C0D9D2FF6
+	for <lists+nouveau@lfdr.de>; Tue, 19 Nov 2024 22:19:12 +0100 (CET)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 6E9EC10E4D3;
-	Mon, 18 Nov 2024 13:17:38 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 0FF5D10E360;
+	Tue, 19 Nov 2024 21:19:11 +0000 (UTC)
 Authentication-Results: gabe.freedesktop.org;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="WIcCP9E5";
+	dkim=pass (2048-bit key; unprotected) header.d=Nvidia.com header.i=@Nvidia.com header.b="Zz8mArkH";
 	dkim-atps=neutral
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from mail-lf1-f45.google.com (mail-lf1-f45.google.com
- [209.85.167.45])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 6D68F10E4DB
- for <nouveau@lists.freedesktop.org>; Mon, 18 Nov 2024 13:17:37 +0000 (UTC)
-Received: by mail-lf1-f45.google.com with SMTP id
- 2adb3069b0e04-539e8607c2aso4311839e87.3
- for <nouveau@lists.freedesktop.org>; Mon, 18 Nov 2024 05:17:37 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1731935855; x=1732540655; darn=lists.freedesktop.org;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=QEQ0UnPHgL8X1IzKLkITrqLzsus1TunLlu+R1N5lrJc=;
- b=WIcCP9E5yB4BhQneZ6ay16LOBRQ1t5RfEyuX9y4RAbRJ4TDwrZoK0Qw/u48eWAbSKQ
- 2I971De8G99/8QX8dBDGXou0lK9X0x0GmoQF+NLMRVWKCuolwga7WsAeeCheBYm6vKHv
- 6sTBMuTH6KszIqAgsE54G0WU1Wu9+KV+wDNxUX6rMHjsTygph4fCpERbhP7ItmGAo70a
- 3M3mGeuSBy17ZL3SK/jPLlFZJCNul3vA05jsPRFrY9baEtZoaVjqMXkqKeQlh7ercMAh
- wjl7+VuWfcOil3JzoEf6lVE/nRcCqKqNqt9lyOFKeMs/7IoU1Z8TqrwWmzrAe1mkvy8p
- +E1A==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1731935855; x=1732540655;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=QEQ0UnPHgL8X1IzKLkITrqLzsus1TunLlu+R1N5lrJc=;
- b=vyTZYd8lFbG7L34dmHmCPw977nGKKuqztuugLLrirZUDbXzwyJs/c1MEy4QnQDY46L
- 8aZzQ44j9hii7FFy0gQ8VazV2MG9BAI7SMVYRIakYI2YdXNvAMQjBCHKiCK0QkRbn32e
- ArdCIJ0jqCYwuY0cIBx1dzQfp4eYtGg/UjdTyquWkIMZKrEauqAwhsuTH2UQYnryS8Eh
- QclA95fOSn2+9bjnfkvnO70bxumz31qwmvyXptXdJmuSjLoMILraNqCk33BMN7CXiDD4
- fewiWl9/tpX/eq0t2j57b9mcwpQeFZop3x/RYJjnp1/jM3SOt7K0lh74ztIEp8/utoZn
- XL8A==
-X-Forwarded-Encrypted: i=1;
- AJvYcCX4d7wfn6mMg9Jt0mrRkW9LnmI7FM+XeM+9c2tA7iXodp7YCJdfV44+32OdXCBhaefsWXNQO7aV@lists.freedesktop.org
-X-Gm-Message-State: AOJu0Yy1BmNcKfSS2Xs5Ygb8ipKeTyH6WuyO5gUt8oVRoXVqLDj3l8Gi
- drOWJ1z/cBB18ry9hEmAtHeABFD8SnvgfOZWsEvYtfhZAchO3sq0euLtpYSya7g=
-X-Google-Smtp-Source: AGHT+IGdzRCE2acExYOAR/Q1TPJs2CyZISyIMx5j4q3L/H9VxSQ26s/Ffm8H90fecvqfEbJsuGZxrw==
-X-Received: by 2002:a05:6512:3e07:b0:536:55a9:caf0 with SMTP id
- 2adb3069b0e04-53dab25f7c9mr4511337e87.0.1731935855301; 
- Mon, 18 Nov 2024 05:17:35 -0800 (PST)
-Received: from eriador.lumag.spb.ru
- (2001-14ba-a0c3-3a00--7a1.rev.dnainternet.fi. [2001:14ba:a0c3:3a00::7a1])
- by smtp.gmail.com with ESMTPSA id
- 2adb3069b0e04-53da64f8cafsm1591434e87.54.2024.11.18.05.17.32
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 18 Nov 2024 05:17:33 -0800 (PST)
-Date: Mon, 18 Nov 2024 15:17:31 +0200
-From: Dmitry Baryshkov <dmitry.baryshkov@linaro.org>
-To: Jani Nikula <jani.nikula@linux.intel.com>
-Cc: Laurent Pinchart <laurent.pinchart@ideasonboard.com>, 
- Rodrigo Vivi <rodrigo.vivi@intel.com>,
- Joonas Lahtinen <joonas.lahtinen@linux.intel.com>, 
- Tvrtko Ursulin <tursulin@ursulin.net>, David Airlie <airlied@gmail.com>, 
- Simona Vetter <simona@ffwll.ch>,
- Maarten Lankhorst <maarten.lankhorst@linux.intel.com>, 
- Maxime Ripard <mripard@kernel.org>, Thomas Zimmermann <tzimmermann@suse.de>, 
- Karol Herbst <kherbst@redhat.com>, Lyude Paul <lyude@redhat.com>, 
- Danilo Krummrich <dakr@redhat.com>, Harry Wentland <harry.wentland@amd.com>, 
- Leo Li <sunpeng.li@amd.com>, Rodrigo Siqueira <Rodrigo.Siqueira@amd.com>, 
- Alex Deucher <alexander.deucher@amd.com>,
- Christian =?utf-8?B?S8O2bmln?= <christian.koenig@amd.com>, 
- Xinhui Pan <Xinhui.Pan@amd.com>, Alain Volmat <alain.volmat@foss.st.com>, 
- Raphael Gallais-Pou <rgallaispou@gmail.com>, Liviu Dudau <liviu.dudau@arm.com>,
- Andrzej Hajda <andrzej.hajda@intel.com>,
- Neil Armstrong <neil.armstrong@linaro.org>, 
- Robert Foss <rfoss@kernel.org>, Jonas Karlman <jonas@kwiboo.se>, 
- Jernej Skrabec <jernej.skrabec@gmail.com>,
- Peter Senna Tschudin <peter.senna@gmail.com>, 
- Ian Ray <ian.ray@ge.com>, Martyn Welch <martyn.welch@collabora.co.uk>, 
- Inki Dae <inki.dae@samsung.com>, Seung-Woo Kim <sw0312.kim@samsung.com>, 
- Kyungmin Park <kyungmin.park@samsung.com>,
- Krzysztof Kozlowski <krzk@kernel.org>, 
- Alim Akhtar <alim.akhtar@samsung.com>, Stefan Agner <stefan@agner.ch>, 
- Alison Wang <alison.wang@nxp.com>,
- Patrik Jakobsson <patrik.r.jakobsson@gmail.com>, 
- Philipp Zabel <p.zabel@pengutronix.de>, Shawn Guo <shawnguo@kernel.org>, 
- Sascha Hauer <s.hauer@pengutronix.de>,
- Pengutronix Kernel Team <kernel@pengutronix.de>, 
- Fabio Estevam <festevam@gmail.com>, Rob Clark <robdclark@gmail.com>, 
- Abhinav Kumar <quic_abhinavk@quicinc.com>, Sean Paul <sean@poorly.run>, 
- Marijn Suijten <marijn.suijten@somainline.org>,
- Dave Airlie <airlied@redhat.com>, 
- Gerd Hoffmann <kraxel@redhat.com>, Sandy Huang <hjc@rock-chips.com>, 
- Heiko =?utf-8?Q?St=C3=BCbner?= <heiko@sntech.de>,
- Andy Yan <andy.yan@rock-chips.com>, Chen-Yu Tsai <wens@csie.org>, 
- Samuel Holland <samuel@sholland.org>, Thierry Reding <thierry.reding@gmail.com>,
- Mikko Perttunen <mperttunen@nvidia.com>, Jonathan Hunter <jonathanh@nvidia.com>,
- Dave Stevenson <dave.stevenson@raspberrypi.com>,
- =?utf-8?B?TWHDrXJh?= Canal <mcanal@igalia.com>, 
- Raspberry Pi Kernel Maintenance <kernel-list@raspberrypi.com>,
- Gurchetan Singh <gurchetansingh@chromium.org>, 
- Chia-I Wu <olvaffe@gmail.com>, Zack Rusin <zack.rusin@broadcom.com>, 
- Broadcom internal kernel review list <bcm-kernel-feedback-list@broadcom.com>,
- intel-gfx@lists.freedesktop.org, intel-xe@lists.freedesktop.org, 
- dri-devel@lists.freedesktop.org, linux-kernel@vger.kernel.org,
- nouveau@lists.freedesktop.org, 
- amd-gfx@lists.freedesktop.org, linux-arm-kernel@lists.infradead.org, 
- linux-samsung-soc@vger.kernel.org, imx@lists.linux.dev,
- linux-arm-msm@vger.kernel.org, 
- freedreno@lists.freedesktop.org, virtualization@lists.linux.dev, 
- spice-devel@lists.freedesktop.org, linux-rockchip@lists.infradead.org,
- linux-sunxi@lists.linux.dev, linux-tegra@vger.kernel.org
-Subject: Re: [PATCH 1/5] drm/encoder_slave: make mode_valid accept const
- struct drm_display_mode
-Message-ID: <4prwsjl7nhg4u4tgyqdmgt6am5ryewslosmbezkfmyxgh2oket@zglhp7zqhfwe>
-References: <20241115-drm-connector-mode-valid-const-v1-0-b1b523156f71@linaro.org>
- <20241115-drm-connector-mode-valid-const-v1-1-b1b523156f71@linaro.org>
- <20241117205426.GE12409@pendragon.ideasonboard.com>
- <CAA8EJpr=4AQVRKbtR2MaCQfguGW0a=3ay-ttew-mFR4f086Uyg@mail.gmail.com>
- <20241117233250.GK12409@pendragon.ideasonboard.com>
- <CAA8EJpq6Gkp4W=rGbpY6ASPgoDt=64HTFDk4_OZsTmbSUxhhGw@mail.gmail.com>
- <87plms51w4.fsf@intel.com>
+Received: from NAM11-DM6-obe.outbound.protection.outlook.com
+ (mail-dm6nam11on2064.outbound.protection.outlook.com [40.107.223.64])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 28EB710E360
+ for <nouveau@lists.freedesktop.org>; Tue, 19 Nov 2024 21:19:09 +0000 (UTC)
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=Enpky8QRDA7M2t3cfAFG8CXjArSIvoJEJYMp6/Gue2nm99b0z1kdLPWIWpFrhsoZVKg5TCcxNWyJWuzQMzyLNPZbfVYuU8+mPOKUe08LVYQKA5IbOmV61bh7yq6BPUghhm9lHGsD9Mb9gEbYqXUYEI3DCZyP8UPlsE080JPD29e27AS+Bq9ZGqxfY94a7VKTDZVP94ouDhzwsKLdWyzB0NXhm66NxiVPGLK8/dwiShQlTRU3BUI7LYfsLQ8a1XrQbe1u67ZlrrGmzFkqAoGD6NrX1fLKByB9CeyYadWC5bBhcm2LJAmicxG8hmdYIlXe0iz+YbqpBYQOlqq5gNLjPg==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=Nml330ASmhI5MjeXJ1iak7o5WtH68Js5fMKOf4KnJXc=;
+ b=aOV4sbfZnvMqx6KtEXnosP8YRWPHiH2Ocnst3ePPAXtF7Qiwvl09za90mqjmrdIEhkVDGF61e2dSEhyIJsX3zEhDv7tjtaeQWVXMpjFtz0XMVfGR1vY8IYNj4OaFc6v5Uv9j6CtIE/mZZxOqnoaFFz79CmB8PFK0Yb688rnt7KJOtcobeuLkjH/WT1uCwQ9KFrjfb7PG+oN1xXLYbedDZaLis5S9gSgFb+5fpKkUKsAUuOVehZBq/fzXC598t7ofUkUhmOUzOQnnJ4Qnd5oG4q9dUEiIxdxauzZmpclaIwr9eGnpkr6yLkCAiUnV0U4x6FqmMKiHpgMD9LIJwi9qqA==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
+ 216.228.117.160) smtp.rcpttodomain=lists.freedesktop.org
+ smtp.mailfrom=nvidia.com; dmarc=pass (p=reject sp=reject pct=100) action=none
+ header.from=nvidia.com; dkim=none (message not signed); arc=none (0)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=Nvidia.com;
+ s=selector2;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=Nml330ASmhI5MjeXJ1iak7o5WtH68Js5fMKOf4KnJXc=;
+ b=Zz8mArkH2c7uhwgyn5gAhWSoNDril4MHNwDyi/F+Aubv/AA47QA/kh/N7OmRTuxoncRuQwmQcfw+TToH5hf6d7VzGvTh5EEhnq7NNvTObiMeUmsqLyIczsxNAyP1n2I3wbnetfamX7VlvQJJ3atnX0QHWMnIKrOX5fQY6v0tFZgN1Mw/a6YwAj4iH2xtBfGcFAvHgzrPlkCBFENJMhZUpkno3emEslhhMud+zIagocdVCtME9ZDL9AyG5Wg9uqkZVV9pmSn3rK3RJINCX2cc/oK/TZsbDxxjeebXwvp8Hrg7JxcsmiKpDLaKH7ZE3fLIeQrQKgOLPyb2bcJOV7U4CA==
+Received: from CH0P223CA0016.NAMP223.PROD.OUTLOOK.COM (2603:10b6:610:116::34)
+ by SA0PR12MB4350.namprd12.prod.outlook.com (2603:10b6:806:92::15)
+ with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.8158.24; Tue, 19 Nov
+ 2024 21:19:06 +0000
+Received: from CH3PEPF00000012.namprd21.prod.outlook.com
+ (2603:10b6:610:116:cafe::13) by CH0P223CA0016.outlook.office365.com
+ (2603:10b6:610:116::34) with Microsoft SMTP Server (version=TLS1_3,
+ cipher=TLS_AES_256_GCM_SHA384) id 15.20.8158.24 via Frontend Transport; Tue,
+ 19 Nov 2024 21:19:06 +0000
+X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 216.228.117.160)
+ smtp.mailfrom=nvidia.com;
+ dkim=none (message not signed)
+ header.d=none;dmarc=pass action=none header.from=nvidia.com;
+Received-SPF: Pass (protection.outlook.com: domain of nvidia.com designates
+ 216.228.117.160 as permitted sender) receiver=protection.outlook.com;
+ client-ip=216.228.117.160; helo=mail.nvidia.com; pr=C
+Received: from mail.nvidia.com (216.228.117.160) by
+ CH3PEPF00000012.mail.protection.outlook.com (10.167.244.117) with Microsoft
+ SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ 15.20.8207.0 via Frontend Transport; Tue, 19 Nov 2024 21:19:06 +0000
+Received: from rnnvmail201.nvidia.com (10.129.68.8) by mail.nvidia.com
+ (10.129.200.66) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.1544.4; Tue, 19 Nov
+ 2024 13:18:52 -0800
+Received: from [172.20.206.173] (10.126.231.35) by rnnvmail201.nvidia.com
+ (10.129.68.8) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.1544.4; Tue, 19 Nov
+ 2024 13:18:51 -0800
+Message-ID: <99502728-807d-4574-9e5a-247de5e1faab@nvidia.com>
+Date: Wed, 20 Nov 2024 07:18:43 +1000
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <87plms51w4.fsf@intel.com>
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH 1/2] nouveau: handle EBUSY and EAGAIN for GSP aux errors.
+To: <nouveau@lists.freedesktop.org>
+References: <20241111034126.2028401-1-airlied@gmail.com>
+Content-Language: en-US
+From: Ben Skeggs <bskeggs@nvidia.com>
+In-Reply-To: <20241111034126.2028401-1-airlied@gmail.com>
+Content-Type: text/plain; charset="UTF-8"; format=flowed
+Content-Transfer-Encoding: 7bit
+X-Originating-IP: [10.126.231.35]
+X-ClientProxiedBy: rnnvmail202.nvidia.com (10.129.68.7) To
+ rnnvmail201.nvidia.com (10.129.68.8)
+X-EOPAttributedMessage: 0
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: CH3PEPF00000012:EE_|SA0PR12MB4350:EE_
+X-MS-Office365-Filtering-Correlation-Id: 53481973-df1b-497b-4bb1-08dd08dfccc3
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: BCL:0;
+ ARA:13230040|376014|1800799024|82310400026|36860700013; 
+X-Microsoft-Antispam-Message-Info: =?utf-8?B?VldodDEvWVlCZXU3M2w5ZDFuL2s5WmdLaGlPWURmc3FxOUp5aFBHN3hDZm9k?=
+ =?utf-8?B?ZDYyR2JybGplWktoSmFjUkpmam5wZCtRd1piMVNMUnd4bUZDbHFnWVNISmo2?=
+ =?utf-8?B?ZUVlTExLVlN6ZThNS3M4WDlmaHNkOFIxZFRCeHJGaENxZi9jeVRRaW1JbmQ0?=
+ =?utf-8?B?VWxxZEJIYndwODBzaHUzdnd6Y2V1Z0xvdWVmd3cyMXFNOXhZL043cGp4elpo?=
+ =?utf-8?B?b2s4dldFYkl3QTlmQndSS3FIck1ObXdROUFWRzZVYjRpdEtxUW1sVkVoOU5I?=
+ =?utf-8?B?alpHanZMZUFnck1lL2lnb3FMUnEvN1dxbUNhSWdDUHIwZEM2S1UxaXJLdFp6?=
+ =?utf-8?B?TnVjRTJ2bkhMT0lieXhtcDFUdzVTYzlWUWEyWVI0UTRiMG5oZFZpS1U0Q3dx?=
+ =?utf-8?B?L1hZclBJRFB6YkxHeW9ka29QdnhnZW94Z3U4UzZRdml0V3ljK25pUUIwbW5Q?=
+ =?utf-8?B?RTZiRUtmd1dCMjh0M0JweStuNXo2WURPbFdmZ0xkS0xHNmlkaDZzSlRBUldq?=
+ =?utf-8?B?SzU3R0s4VjliZE12STd2blFUa3ZhVnViT1FVVksxZlJLazFJYjBBR0tVUXUr?=
+ =?utf-8?B?WENBU0pBMjhaMlBkN2xHYnU2ckdjWjkvZDZoNHNJNXk1VmtscHgyRi80MmhV?=
+ =?utf-8?B?WUEvNXptbzVlRGJPRUJXSXB2OTlac1ZtS3lhNjZXZUZUS1k1SW9CR0ZEd3Vx?=
+ =?utf-8?B?bEhaTEt1bi8yZ1p5Y1ZCLzZFQzI1YzJGQ0ZJMDNrYzdIT1JaMEV2MHl5dmI2?=
+ =?utf-8?B?WERDWGxmRkpUZlZaQmxmTWFadlRESzBhR2JNME56SkpwNEdaVzYvSmp6VHJN?=
+ =?utf-8?B?bDBQMWpGN3hzN2V2MCs2eGJ5eG5sMGIyZW81V25FdFlURk1USWd4VFIzYlNY?=
+ =?utf-8?B?NFNRcE9hckpnQWtxWTVnOWptdU5pZHZOZlR0TEJYaEdWb25ZK2ZIajFONHhM?=
+ =?utf-8?B?d3NQSjF4MWpYeWxRUDNUODU2dzkrRWZSNy9oZGVEK3F0VHFZOUlzSnNBUlNB?=
+ =?utf-8?B?R0thMFU4ZnFPbWN5RFJSSG9wd2ZlUkFxOWxuSTlNWFhVbXRKVU50b3pxZ3ZI?=
+ =?utf-8?B?WTdCT1lyQm9iaXlBeENXQ3VkNmdQSjY5VTdzd2diTGVpTEdBVktKSXZZaGZY?=
+ =?utf-8?B?cllwcUpvUk9aVzl1RC90UXI5UW5WUk10US9QdXN5QUQzZTMrU2sySEhNSDN3?=
+ =?utf-8?B?K3NCN2h1ejE4R05TWkZxV2JWN3ArcE5ibDJRNXY1c0N1UzFsRkhDVEZjS0Vo?=
+ =?utf-8?B?d3dCWXNrOHVTRmlGeDNFYUtOUG9yWEVIeGovU1h0V1JiRmt5UWJ3UzUra1c5?=
+ =?utf-8?B?RzhFUkN5TFBZRGZoQVg4WVdETU95Uyt1RU4zSURnUnprOUFua2JQNXpVWTlw?=
+ =?utf-8?B?eGRldHdRUEJrVThjS0ZwLzNsbkc1eHFKUEI5YzZsS21Fd3UwRVQ2WnpzK01k?=
+ =?utf-8?B?RXhYSkZRS3lrME1Lc1oydU1FVmJDNkVEVGZ3TU1IRVVMcG9jNGJ3NnErb3Uv?=
+ =?utf-8?B?azNucllXb1FpZUVSSjdOSFdDWXp4ZXd0V01ZTDZDT1lsOHcwcWd6OWd2cGRO?=
+ =?utf-8?B?NmRoYmZWbzAybUtwTWwxK2d2V3pINjUxNFFBT21QTnIvb1F5djZINXV1V0ho?=
+ =?utf-8?B?QjQwL0dEYm5iZE9SbEhPdmVvZjFwWkVEdDJZWGVqRnQ3bmpqbmkwUkQrN25U?=
+ =?utf-8?B?bGlJOVVNemxaMUU5cGNmRTdMZWNhRm1DVkNIcnlrZkw1Y1QvaGpvaXBobWpQ?=
+ =?utf-8?B?VlFCMUhXY0hqSFdNdDQxVkJPRG8yRFFmS3oyWm90MTM1RVVlY3oyT242SUlk?=
+ =?utf-8?B?VjBvSmNLM29ITjlBTks3ZlFrdGYrSUZVU09KcUJISDBuTTNKYmlIcU1ZUk9a?=
+ =?utf-8?B?N0dkYjFUUjlrL04yRDFwLzVuaXRIRGdTTkFDQ0FsZzR5TlE9PQ==?=
+X-Forefront-Antispam-Report: CIP:216.228.117.160; CTRY:US; LANG:en; SCL:1; SRV:;
+ IPV:NLI; SFV:NSPM; H:mail.nvidia.com; PTR:dc6edge1.nvidia.com; CAT:NONE;
+ SFS:(13230040)(376014)(1800799024)(82310400026)(36860700013); DIR:OUT;
+ SFP:1101; 
+X-OriginatorOrg: Nvidia.com
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 19 Nov 2024 21:19:06.0839 (UTC)
+X-MS-Exchange-CrossTenant-Network-Message-Id: 53481973-df1b-497b-4bb1-08dd08dfccc3
+X-MS-Exchange-CrossTenant-Id: 43083d15-7273-40c1-b7db-39efd9ccc17a
+X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=43083d15-7273-40c1-b7db-39efd9ccc17a; Ip=[216.228.117.160];
+ Helo=[mail.nvidia.com]
+X-MS-Exchange-CrossTenant-AuthSource: CH3PEPF00000012.namprd21.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Anonymous
+X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: SA0PR12MB4350
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -140,48 +144,69 @@ List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-On Mon, Nov 18, 2024 at 11:26:03AM +0200, Jani Nikula wrote:
-> On Mon, 18 Nov 2024, Dmitry Baryshkov <dmitry.baryshkov@linaro.org> wrote:
-> > On Mon, 18 Nov 2024 at 01:33, Laurent Pinchart
-> > <laurent.pinchart@ideasonboard.com> wrote:
-> >>
-> >> On Mon, Nov 18, 2024 at 01:22:12AM +0200, Dmitry Baryshkov wrote:
-> >> > On Sun, 17 Nov 2024 at 22:54, Laurent Pinchart wrote:
-> >> > > On Fri, Nov 15, 2024 at 11:09:26PM +0200, Dmitry Baryshkov wrote:
-> >> > > > The mode_valid() callbacks of drm_encoder, drm_crtc and drm_bridge
-> >> > > > accept const struct drm_display_mode argument. Change the mode_valid
-> >> > > > callback of drm_encoder_slave to also accept const argument.
-> >> > > >
-> >> > > > Signed-off-by: Dmitry Baryshkov <dmitry.baryshkov@linaro.org>
-> >> > >
-> >> > > Reviewed-by: Laurent Pinchart <laurent.pinchart+renesas@ideasonboard.com>
-> >> > >
-> >> > > On a side note, there's only two I2C slave encoder drivers left... I
-> >> > > wonder if we could so something about them. The ch7006 and sil164
-> >> > > drivers seem to be used by nouveau only, could they be moved to
-> >> > > drivers/gpu/drm/nouveau/ ? We would move the whole drm_encoder_slave
-> >> > > implementation there too, and leave it to die (or get taken out of limbo
-> >> > > and fixed) with dispnv04.
-> >> >
-> >> > Or it might be better to switch to drm_bridge. Currently we also have
-> >> > sil164 (sub)drivers in ast and i915 drivers. I don't know if there is
-> >> > any common code to share or not. If there is some, it might be nice to
-> >> > use common framework.
-> >>
-> >> That would require porting nouveau and i915 to drm_bridge. As much as
-> >> I'd love to see that happening, I won't hold my breath.
-> >
-> > Me neither. Probably moving those two and drm_encoder_slave to nouveau
-> > is really the best course for now.
-> 
-> Granted, the dvo part of i915 is ugly, but it's also only relevant for
-> the oldest hardware i915 supports. Like 20 years old. Not sure there's
-> much return on investment in big refactoring, more risk that it breaks
-> without nobody noticing. Just let it be in i915?
+On 11/11/24 13:41, Dave Airlie wrote:
 
-Agreed
+> From: Dave Airlie <airlied@redhat.com>
+>
+> The upper layer transfer functions expect EBUSY as a return
+> for when retries should be done.
+>
+> Fix the AUX error translation, but also check for both errors
+> in a few places.
+>
+> Fixes: eb284f4b3781 ("drm/nouveau/dp: Honor GSP link training retry timeouts")
+> Signed-off-by: Dave Airlie <airlied@redhat.com>
+> ---
+>   drivers/gpu/drm/nouveau/nvkm/engine/disp/r535.c | 2 +-
+>   drivers/gpu/drm/nouveau/nvkm/subdev/gsp/r535.c  | 6 +++---
+>   2 files changed, 4 insertions(+), 4 deletions(-)
+>
+> diff --git a/drivers/gpu/drm/nouveau/nvkm/engine/disp/r535.c b/drivers/gpu/drm/nouveau/nvkm/engine/disp/r535.c
+> index 027867c2a8c5..8f9aa3463c3c 100644
+> --- a/drivers/gpu/drm/nouveau/nvkm/engine/disp/r535.c
+> +++ b/drivers/gpu/drm/nouveau/nvkm/engine/disp/r535.c
+> @@ -992,7 +992,7 @@ r535_dp_train_target(struct nvkm_outp *outp, u8 target, bool mst, u8 link_nr, u8
+>   		ctrl->data = data;
+>   
+>   		ret = nvkm_gsp_rm_ctrl_push(&disp->rm.objcom, &ctrl, sizeof(*ctrl));
+> -		if (ret == -EAGAIN && ctrl->retryTimeMs) {
+> +		if ((ret == -EAGAIN || ret == -EBUSY) && ctrl->retryTimeMs) {
 
+You can remove handling of -EAGAIN here (and the cases below), as 
+nothing can return it after the change to r535_rpc_status_to_errno() in 
+this commit.
 
--- 
-With best wishes
-Dmitry
+>   			/*
+>   			 * Device (likely an eDP panel) isn't ready yet, wait for the time specified
+>   			 * by GSP before retrying again
+> diff --git a/drivers/gpu/drm/nouveau/nvkm/subdev/gsp/r535.c b/drivers/gpu/drm/nouveau/nvkm/subdev/gsp/r535.c
+> index cf58f9da9139..d586aea30898 100644
+> --- a/drivers/gpu/drm/nouveau/nvkm/subdev/gsp/r535.c
+> +++ b/drivers/gpu/drm/nouveau/nvkm/subdev/gsp/r535.c
+> @@ -78,7 +78,7 @@ r535_rpc_status_to_errno(uint32_t rpc_status)
+>   	switch (rpc_status) {
+>   	case 0x55: /* NV_ERR_NOT_READY */
+>   	case 0x66: /* NV_ERR_TIMEOUT_RETRY */
+> -		return -EAGAIN;
+> +		return -EBUSY;
+>   	case 0x51: /* NV_ERR_NO_MEMORY */
+>   		return -ENOMEM;
+>   	default:
+> @@ -601,7 +601,7 @@ r535_gsp_rpc_rm_alloc_push(struct nvkm_gsp_object *object, void *argv, u32 repc)
+>   
+>   	if (rpc->status) {
+>   		ret = ERR_PTR(r535_rpc_status_to_errno(rpc->status));
+> -		if (PTR_ERR(ret) != -EAGAIN)
+> +		if (PTR_ERR(ret) != -EAGAIN && PTR_ERR(ret) != -EBUSY)
+>   			nvkm_error(&gsp->subdev, "RM_ALLOC: 0x%x\n", rpc->status);
+>   	} else {
+>   		ret = repc ? rpc->params : NULL;
+> @@ -660,7 +660,7 @@ r535_gsp_rpc_rm_ctrl_push(struct nvkm_gsp_object *object, void **argv, u32 repc)
+>   
+>   	if (rpc->status) {
+>   		ret = r535_rpc_status_to_errno(rpc->status);
+> -		if (ret != -EAGAIN)
+> +		if (ret != -EAGAIN && ret != -EBUSY)
+>   			nvkm_error(&gsp->subdev, "cli:0x%08x obj:0x%08x ctrl cmd:0x%08x failed: 0x%08x\n",
+>   				   object->client->object.handle, object->handle, rpc->cmd, rpc->status);
+>   	}
