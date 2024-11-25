@@ -2,46 +2,50 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id 8C4289D87E2
-	for <lists+nouveau@lfdr.de>; Mon, 25 Nov 2024 15:26:49 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id A81599D8AA1
+	for <lists+nouveau@lfdr.de>; Mon, 25 Nov 2024 17:50:43 +0100 (CET)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 382A210E66D;
-	Mon, 25 Nov 2024 14:26:47 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 44EAE10E153;
+	Mon, 25 Nov 2024 16:50:39 +0000 (UTC)
 Authentication-Results: gabe.freedesktop.org;
-	dkim=pass (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="G/PoCBt1";
+	dkim=pass (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="Zwc5kr0Y";
 	dkim-atps=neutral
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from dfw.source.kernel.org (dfw.source.kernel.org [139.178.84.217])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 4C18B10E66D
- for <nouveau@lists.freedesktop.org>; Mon, 25 Nov 2024 14:26:46 +0000 (UTC)
+Received: from nyc.source.kernel.org (nyc.source.kernel.org [147.75.193.91])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id B608C10E6C1
+ for <nouveau@lists.freedesktop.org>; Mon, 25 Nov 2024 16:50:38 +0000 (UTC)
 Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by dfw.source.kernel.org (Postfix) with ESMTP id ED1145C0375;
- Mon, 25 Nov 2024 14:26:01 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 32AD9C4CECE;
- Mon, 25 Nov 2024 14:26:44 +0000 (UTC)
+ by nyc.source.kernel.org (Postfix) with ESMTP id DEAD1A41865;
+ Mon, 25 Nov 2024 16:48:44 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 039C8C4CECE;
+ Mon, 25 Nov 2024 16:50:34 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1732544805;
- bh=4/1wTwjwgHWxYZ5E/+HKIfozXpk1jsOdarTYOtxpw/o=;
- h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
- b=G/PoCBt1ualYxYYo+pX1RSxHr9yQZ7Wh9dCV1zecKrOxrzoajklQJ7XOiEtWR20uL
- B2O/+DM91k+TSXJlLOg6XCmvYq54ltQ9gBga3TA5AGhV2kGqQGKyUB1ccD2S3jnHoS
- 2ayd6xEXApaOXeuhsh9h48Nb8Uwwg++PladR9jrTxA3CeaNuQLXLzPak95Jw51/4vh
- x4E7Ml0r3PeUz9osyxoA8K43+uS3JUNKn1aGghxqJsax/wHobm6tki6/xwwk3ymLgB
- ddhNu/bGPlNDoWThpH3d7VMd4/lrgWjmhHOG48T7lQ52sefgKtkVbyhJbi49IrP1Ku
- /RwSw4DQU6jlQ==
-From: Danilo Krummrich <dakr@kernel.org>
-To: ttabi@nvidia.com
-Cc: nouveau@lists.freedesktop.org,
-	Danilo Krummrich <dakr@kernel.org>
-Subject: [PATCH] drm/nouveau: create module debugfs root
-Date: Mon, 25 Nov 2024 15:25:49 +0100
-Message-ID: <20241125142639.9126-1-dakr@kernel.org>
-X-Mailer: git-send-email 2.47.0
-In-Reply-To: <20241030202952.694055-2-ttabi@nvidia.com>
-References: <20241030202952.694055-2-ttabi@nvidia.com>
+ s=k20201202; t=1732553437;
+ bh=Yk0mXXn+0C2rSFT/jNyC+/4o0CeXEbP4rRZpe4HGel0=;
+ h=Date:Subject:To:Cc:References:From:In-Reply-To:From;
+ b=Zwc5kr0Y+TXDiIBDGTGIlSdfYStkXrcsp/+pDc25r4pV4eLFeey4OLs7t3SSWif+U
+ S8dSl+WiZVQQSIqo5nnnzWuVG+KQDhNzWhMjOywSZZwks5GHUOX2sKQGSgE5GiBFei
+ tPMKSdbajtgk/eUSC0XJ97vkTvirC/a8q6NnRFV4hoeTspJ0eunX1B0yUI+v7fQe5v
+ juwIV3C6Xe4u950n+aSj7gjvCV6uXyJJorPQGyfy0vm6EHxrUJQi0n+QeP6BYavBlA
+ 0Y28UBNjnwpEY6ukaRkYfkANacdRPALs6i7EcIDP9sFT1WDEoPHkl13W55cxArY9gR
+ wHuoMQ9sXLr+g==
+Message-ID: <5dfea7e0-9b05-43fa-b5d2-c99ea7ac6a18@kernel.org>
+Date: Mon, 25 Nov 2024 17:50:32 +0100
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH 0/3] NVKM GSP RPC fixes
+To: Zhi Wang <zhiw@nvidia.com>
+Cc: nouveau@lists.freedesktop.org, airlied@gmail.com, daniel@ffwll.ch,
+ bskeggs@nvidia.com, acurrid@nvidia.com, cjia@nvidia.com, smitra@nvidia.com,
+ ankita@nvidia.com, aniketa@nvidia.com, kwankhede@nvidia.com,
+ targupta@nvidia.com, zhiwang@kernel.org
+References: <20241017071922.2518724-1-zhiw@nvidia.com>
+From: Danilo Krummrich <dakr@kernel.org>
+Content-Language: en-US
+In-Reply-To: <20241017071922.2518724-1-zhiw@nvidia.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -56,143 +60,42 @@ List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-Typically DRM drivers use the DRM debugfs root entry. However, since
-Nouveau is heading towards a split into a core and a DRM driver, create
-a module specific debugfs root directory.
+On 10/17/24 9:19 AM, Zhi Wang wrote:
+> Hi folks:
+> 
+> Here are some fixes of weird bugs I encountered when I was enabling vGPU [1] on
+> core-driver aka NVKM. They are exposed because of the new RPCs required by
+> vGPU.
+> 
+> For testing, I tried to run Uniengine Heaven[2] on my RTX 4060 for 8 hours and
+> the GL CTS runner[3] (commandline: ./cts-runner --type-gl40) from Khronos
+> without any problem.
+> 
+> v2:
+> 
+> - Remove the Fixes: tags as the vanilla nouveau aren't going to hit these bugs. (Danilo)
+> - Test the patchset on VK-GL-CTS. (Danilo)
+> - Remove the ambiguous empty line in PATCH 2. (Danilo)
+> - Rename the r535_gsp_msgq_wait to gsp_msgq_recv. (Danilo)
+> - Introduce a data structure to hold the params of gsp_msgq_recv(). (Danilo)
+> - Document the params and the states they are related to. (Danilo)
+> 
+> [1] https://lore.kernel.org/kvm/20240922124951.1946072-1-zhiw@nvidia.com/T/#t
+> [2] https://benchmark.unigine.com/heaven
+> [3] https://github.com/KhronosGroup/VK-GL-CTS
+> 
+> Zhi Wang (3):
+>    nvkm/gsp: correctly advance the read pointer of GSP message queue
+>    nvkm: correctly calculate the available space of the GSP cmdq buffer
 
-Subsequent patches make use of this new debugfs root in order to store
-GSP-RM log bufferes (optionally beyond a device driver binding).
+Applied patches 1 and 2 to drm-misc-next, thanks!
 
-Signed-off-by: Danilo Krummrich <dakr@kernel.org>
----
-Unless there are any concerns, I'll pick this patch and rebase Timur's patches
-on top of it.
----
- drivers/gpu/drm/nouveau/nouveau_debugfs.c | 16 ++++++++++++++++
- drivers/gpu/drm/nouveau/nouveau_debugfs.h | 16 ++++++++++++++++
- drivers/gpu/drm/nouveau/nouveau_drm.c     | 22 +++++++++++++++++++---
- 3 files changed, 51 insertions(+), 3 deletions(-)
+Sorry for the delay,
+Danilo
 
-diff --git a/drivers/gpu/drm/nouveau/nouveau_debugfs.c b/drivers/gpu/drm/nouveau/nouveau_debugfs.c
-index e83db051e851..200e65a7cefc 100644
---- a/drivers/gpu/drm/nouveau/nouveau_debugfs.c
-+++ b/drivers/gpu/drm/nouveau/nouveau_debugfs.c
-@@ -313,3 +313,19 @@ nouveau_debugfs_fini(struct nouveau_drm *drm)
- 	kfree(drm->debugfs);
- 	drm->debugfs = NULL;
- }
-+
-+int
-+nouveau_module_debugfs_init(void)
-+{
-+	nouveau_debugfs_root = debugfs_create_dir("nouveau", NULL);
-+	if (IS_ERR(nouveau_debugfs_root))
-+		return PTR_ERR(nouveau_debugfs_root);
-+
-+	return 0;
-+}
-+
-+void
-+nouveau_module_debugfs_fini(void)
-+{
-+	debugfs_remove(nouveau_debugfs_root);
-+}
-diff --git a/drivers/gpu/drm/nouveau/nouveau_debugfs.h b/drivers/gpu/drm/nouveau/nouveau_debugfs.h
-index 77f0323b38ba..b7617b344ee2 100644
---- a/drivers/gpu/drm/nouveau/nouveau_debugfs.h
-+++ b/drivers/gpu/drm/nouveau/nouveau_debugfs.h
-@@ -21,6 +21,11 @@ nouveau_debugfs(struct drm_device *dev)
- extern void  nouveau_drm_debugfs_init(struct drm_minor *);
- extern int  nouveau_debugfs_init(struct nouveau_drm *);
- extern void nouveau_debugfs_fini(struct nouveau_drm *);
-+
-+extern struct dentry *nouveau_debugfs_root;
-+
-+int  nouveau_module_debugfs_init(void);
-+void nouveau_module_debugfs_fini(void);
- #else
- static inline void
- nouveau_drm_debugfs_init(struct drm_minor *minor)
-@@ -37,6 +42,17 @@ nouveau_debugfs_fini(struct nouveau_drm *drm)
- {
- }
- 
-+static inline int
-+nouveau_module_debugfs_init(void)
-+{
-+	return 0;
-+}
-+
-+static inline void
-+nouveau_module_debugfs_fini(void)
-+{
-+}
-+
- #endif
- 
- #endif
-diff --git a/drivers/gpu/drm/nouveau/nouveau_drm.c b/drivers/gpu/drm/nouveau/nouveau_drm.c
-index a99c1d9855c9..911c57a0654e 100644
---- a/drivers/gpu/drm/nouveau/nouveau_drm.c
-+++ b/drivers/gpu/drm/nouveau/nouveau_drm.c
-@@ -113,6 +113,10 @@ static struct drm_driver driver_stub;
- static struct drm_driver driver_pci;
- static struct drm_driver driver_platform;
- 
-+#ifdef CONFIG_DEBUG_FS
-+struct dentry *nouveau_debugfs_root;
-+#endif
-+
- static u64
- nouveau_pci_name(struct pci_dev *pdev)
- {
-@@ -1423,6 +1427,8 @@ nouveau_platform_device_create(const struct nvkm_device_tegra_func *func,
- static int __init
- nouveau_drm_init(void)
- {
-+	int ret;
-+
- 	driver_pci = driver_stub;
- 	driver_platform = driver_stub;
- 
-@@ -1436,6 +1442,10 @@ nouveau_drm_init(void)
- 	if (!nouveau_modeset)
- 		return 0;
- 
-+	ret = nouveau_module_debugfs_init();
-+	if (ret)
-+		return ret;
-+
- #ifdef CONFIG_NOUVEAU_PLATFORM_DRIVER
- 	platform_driver_register(&nouveau_platform_driver);
- #endif
-@@ -1444,10 +1454,14 @@ nouveau_drm_init(void)
- 	nouveau_backlight_ctor();
- 
- #ifdef CONFIG_PCI
--	return pci_register_driver(&nouveau_drm_pci_driver);
--#else
--	return 0;
-+	ret = pci_register_driver(&nouveau_drm_pci_driver);
-+	if (ret) {
-+		nouveau_module_debugfs_fini();
-+		return ret;
-+	}
- #endif
-+
-+	return 0;
- }
- 
- static void __exit
-@@ -1467,6 +1481,8 @@ nouveau_drm_exit(void)
- #endif
- 	if (IS_ENABLED(CONFIG_DRM_NOUVEAU_SVM))
- 		mmu_notifier_synchronize();
-+
-+	nouveau_module_debugfs_fini();
- }
- 
- module_init(nouveau_drm_init);
--- 
-2.47.0
+>    nvkm: handle the return of large RPC
+> 
+>   .../gpu/drm/nouveau/nvkm/subdev/gsp/r535.c    | 251 +++++++++++++-----
+>   1 file changed, 184 insertions(+), 67 deletions(-)
+> 
 
