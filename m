@@ -2,45 +2,47 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id BAD5D9D8AB9
-	for <lists+nouveau@lfdr.de>; Mon, 25 Nov 2024 17:55:57 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 286599D8AD9
+	for <lists+nouveau@lfdr.de>; Mon, 25 Nov 2024 18:00:32 +0100 (CET)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 5A34510E6C4;
-	Mon, 25 Nov 2024 16:55:55 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id EAC0A10E18A;
+	Mon, 25 Nov 2024 17:00:19 +0000 (UTC)
 Authentication-Results: gabe.freedesktop.org;
-	dkim=pass (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="WjGatPso";
+	dkim=pass (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="mjUoHiAi";
 	dkim-atps=neutral
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
 Received: from nyc.source.kernel.org (nyc.source.kernel.org [147.75.193.91])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 2D6AF10E6B8;
- Mon, 25 Nov 2024 16:55:54 +0000 (UTC)
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 8F4B310E18A
+ for <nouveau@lists.freedesktop.org>; Mon, 25 Nov 2024 17:00:18 +0000 (UTC)
 Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by nyc.source.kernel.org (Postfix) with ESMTP id 4A9D5A4188B;
- Mon, 25 Nov 2024 16:54:00 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 4466BC4CECF;
- Mon, 25 Nov 2024 16:55:52 +0000 (UTC)
+ by nyc.source.kernel.org (Postfix) with ESMTP id AB6EDA4188B;
+ Mon, 25 Nov 2024 16:58:24 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id CFA90C4CECE;
+ Mon, 25 Nov 2024 17:00:16 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1732553753;
- bh=1yOfnf2sdQigh49jUpG7wRe5NhaEpgvcUzRBP7X0APE=;
+ s=k20201202; t=1732554017;
+ bh=BslX02ysV0l06v/oBy5uRjRx4lZqmrhZFOxXKtA54Tc=;
  h=Date:Subject:To:Cc:References:From:In-Reply-To:From;
- b=WjGatPsohAWWwdcabMqLnvmRZ19+iYJP2szS2k4pWUAjHDucmFMWxnjmVLHTlgKCX
- 1fpO5p2KNySAu6CU79Z5yABWS5767XW77djm2KcqjV4/b99DpjEGZ06amFtnIAsypM
- qqQkRrNekug/WmPm7YRjtduj3Eq+hEgsx5VF3zFFR37NdIbhax9dtLYVBAKLa7ybVL
- SRujKiKXCLD55nAfmxZ4M2lexQb4cJ9pz/S26JiSEsI3vtj/Nwpe4caGCTWY9vyus3
- ZrKE+5W3FvlAQdGJKWb519xvOl6BUAojuOxArYEmVLy3oM1TpJnOSERSVAfn5BX7Z7
- sh7lSOgVCQlSg==
-Message-ID: <f4e39af3-ada1-4bbd-ade1-90bfaf3899da@kernel.org>
-Date: Mon, 25 Nov 2024 17:55:50 +0100
+ b=mjUoHiAiBnVs+CYUDKz3/3HBD5mqWXz872+iLzIOE7OwOdRKfhleJLeea0QT1jmfz
+ drvKWpJO6ytaher9mfO1iifes2L2UDfItDMtraUCup4JDGj4Yyl0O5ld+NFH0pt6TA
+ kNn+aZWebV6hcjIIWTT7mNOLB+JuzZMHkPO26fdrzscB+Jzdwd3pCWdDtux5iLFKbY
+ nTO2La24/hPi8CO+/4it7RBPpEw7vHeQ0TpIeFHfbIKjM2FU74NfQCgXu0XUAbv6bb
+ aambP2tCY1rHyXYOssTmwO3SW8qawxY/6kO0XdBwWZArB2Tf+t1ntco2+LZ6gffnpD
+ RhilutDhEe5TQ==
+Message-ID: <c54dae67-21c8-4fa1-90f1-12fdfb302c95@kernel.org>
+Date: Mon, 25 Nov 2024 18:00:15 +0100
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH] nouveau: fw: sync dma after setup is called.
-To: Dave Airlie <airlied@gmail.com>
-Cc: dri-devel@lists.freedesktop.org, nouveau@lists.freedesktop.org
-References: <20241114004603.3095485-1-airlied@gmail.com>
+Subject: Re: [PATCH] drm/nouveau: create module debugfs root
+To: Timur Tabi <ttabi@nvidia.com>
+Cc: "nouveau@lists.freedesktop.org" <nouveau@lists.freedesktop.org>
+References: <20241030202952.694055-2-ttabi@nvidia.com>
+ <20241125142639.9126-1-dakr@kernel.org>
+ <1b289bc781c587de41ea489f9a014ca4c3f58491.camel@nvidia.com>
 From: Danilo Krummrich <dakr@kernel.org>
 Content-Language: en-US
-In-Reply-To: <20241114004603.3095485-1-airlied@gmail.com>
+In-Reply-To: <1b289bc781c587de41ea489f9a014ca4c3f58491.camel@nvidia.com>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
 X-BeenThere: nouveau@lists.freedesktop.org
@@ -57,52 +59,28 @@ List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-On 11/14/24 1:46 AM, Dave Airlie wrote:
-> From: Dave Airlie <airlied@redhat.com>
+On 11/25/24 5:55 PM, Timur Tabi wrote:
+> On Mon, 2024-11-25 at 15:25 +0100, Danilo Krummrich wrote:
+>> Typically DRM drivers use the DRM debugfs root entry. However, since
+>> Nouveau is heading towards a split into a core and a DRM driver, create
+>> a module specific debugfs root directory.
+>>
+>> Subsequent patches make use of this new debugfs root in order to store
+>> GSP-RM log bufferes (optionally beyond a device driver binding).
 > 
-> When this code moved to non-coherent allocator the sync was put too
-> early for some firmwares which called the setup function, move the
-> sync down after the setup function.
+> "buffers">
+>>
+>> Signed-off-by: Danilo Krummrich <dakr@kernel.org>
+>> ---
+>> Unless there are any concerns, I'll pick this patch and rebase Timur's patches
+>> on top of it.
 > 
-> Reported-by: Diogo Ivo <diogo.ivo@tecnico.ulisboa.pt>
+> Well, my only concern is that my code assumes that it is the creator and
+> destroyer of /sys/kernel/debug/nouveau, so I don't think it's going to be a
+> simple rebase.
 
-Do you have a link of where this issue has been reported?
+I already did the rebase; no action for you.
 
-> Tested-by: Diogo Ivo <diogo.ivo@tecnico.ulisboa.pt>
-> Fixes: 9b340aeb26d5 ("nouveau/firmware: use dma non-coherent allocator")
-> Cc: stable@vger.kernel.org
-> Signed-off-by: Dave Airlie <airlied@redhat.com>
-> ---
->   drivers/gpu/drm/nouveau/nvkm/falcon/fw.c | 11 ++++++-----
->   1 file changed, 6 insertions(+), 5 deletions(-)
-> 
-> diff --git a/drivers/gpu/drm/nouveau/nvkm/falcon/fw.c b/drivers/gpu/drm/nouveau/nvkm/falcon/fw.c
-> index a1c8545f1249..cac6d64ab67d 100644
-> --- a/drivers/gpu/drm/nouveau/nvkm/falcon/fw.c
-> +++ b/drivers/gpu/drm/nouveau/nvkm/falcon/fw.c
-> @@ -89,11 +89,6 @@ nvkm_falcon_fw_boot(struct nvkm_falcon_fw *fw, struct nvkm_subdev *user,
->   		nvkm_falcon_fw_dtor_sigs(fw);
->   	}
->   
-> -	/* after last write to the img, sync dma mappings */
-> -	dma_sync_single_for_device(fw->fw.device->dev,
-> -				   fw->fw.phys,
-> -				   sg_dma_len(&fw->fw.mem.sgl),
-> -				   DMA_TO_DEVICE);
->   
->   	FLCNFW_DBG(fw, "resetting");
->   	fw->func->reset(fw);
-> @@ -105,6 +100,12 @@ nvkm_falcon_fw_boot(struct nvkm_falcon_fw *fw, struct nvkm_subdev *user,
->   			goto done;
->   	}
->   
-> +	/* after last write to the img, sync dma mappings */
-> +	dma_sync_single_for_device(fw->fw.device->dev,
-> +				   fw->fw.phys,
-> +				   sg_dma_len(&fw->fw.mem.sgl),
-> +				   DMA_TO_DEVICE);
-> +
->   	ret = fw->func->load(fw);
->   	if (ret)
->   		goto done;
-
+Lifetime wise we're good. We create the debugfs root entry before the driver is 
+registered in module_init() and it's removed after the driver is unregistered in 
+module_exit().
