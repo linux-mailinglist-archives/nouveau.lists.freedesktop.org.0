@@ -2,38 +2,38 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id 53F3A9ECED5
-	for <lists+nouveau@lfdr.de>; Wed, 11 Dec 2024 15:42:29 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id C30769ECF2A
+	for <lists+nouveau@lfdr.de>; Wed, 11 Dec 2024 15:56:56 +0100 (CET)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id E6F6F10E1A3;
-	Wed, 11 Dec 2024 14:42:26 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 63D5F10EB7A;
+	Wed, 11 Dec 2024 14:56:53 +0000 (UTC)
 Authentication-Results: gabe.freedesktop.org;
-	dkim=pass (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="Fkdcp6d2";
+	dkim=pass (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="Hqna+FOR";
 	dkim-atps=neutral
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from dfw.source.kernel.org (dfw.source.kernel.org [139.178.84.217])
- by gabe.freedesktop.org (Postfix) with ESMTPS id D9D8F10E1A3;
- Wed, 11 Dec 2024 14:42:25 +0000 (UTC)
+Received: from nyc.source.kernel.org (nyc.source.kernel.org [147.75.193.91])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id E85B210E1C8;
+ Wed, 11 Dec 2024 14:56:51 +0000 (UTC)
 Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by dfw.source.kernel.org (Postfix) with ESMTP id 8F8905C606D;
- Wed, 11 Dec 2024 14:41:42 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id AFCE4C4CED2;
- Wed, 11 Dec 2024 14:42:24 +0000 (UTC)
+ by nyc.source.kernel.org (Postfix) with ESMTP id AC0F0A42339;
+ Wed, 11 Dec 2024 14:54:59 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id A5AA8C4CED4;
+ Wed, 11 Dec 2024 14:56:50 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1733928144;
- bh=RJoGGBFcL+sQrgvZ8+9BKYWDJWcgBpREZ6n8Z69Zl9c=;
+ s=k20201202; t=1733929010;
+ bh=OREpjiujqd4SpEZvxAc06dWhF5wUZtZuOpJQ2zmJ8fo=;
  h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
- b=Fkdcp6d25g6ET2VUFeJgANhn0OzBzTp74DQddva1BycAheDOFS1hA76M0cG8a1lco
- GiF+wGC8KuSSiiksMidE9H02hUmQ0Ey5QdFXdPFf/dIbCFM949pMOUVI4OnnJ/KY9z
- 8ne5hNVbTCxbkBQAwhg+mUFZ37yOrf3Gohgeo83LhkXN32EFDm2ON53j5wwL4JXq6n
- Z1stje4hyUGIKnHj5mYVbgXf6JnmM/LPNeCzyHoc6gdVQZShSJ8zniEJ4+X8TfLaXo
- mkPA9cS0HTj/ohUY/+SOZBz5fvs2mPhGWcZ18xgISbMcx59BA7q+gkp55/d/vELH5k
- QqclZZ/0OfjVg==
+ b=Hqna+FORRl5s+hoVNX1PHcAkrXrpDQAzfv3NlWXzozI+wZiDZ9WBguGPAcyZkoVQ5
+ 0CtxxAowC8RaEdJMSlzLkrp3IUwDW3JMLdjLrSs41emwNl+Y6yzhrDM546MppyN+Yl
+ nnw8RlLR7bspvO+J+GDQsGPpmPxzMB7JWfnwOtasrvSfgVWx91ff+nLOU0TIihH8wJ
+ nLGG/wQEzgYZ2vliQ3sVwcAHKGmrmcW356DKkU4Spduc1T7ehj0yZm5P5bkqDMHsdq
+ RwyjSvRidsZIryVplu/6/gBL92iRjHH0Jt5G7eu/eUprRLUrfMYIZXTKJePQiOOk24
+ TPuRWRdoA1Dag==
 Received: from johan by xi.lan with local (Exim 4.97.1)
- (envelope-from <johan@kernel.org>) id 1tLNv1-000000002rx-1zMb;
- Wed, 11 Dec 2024 15:42:28 +0100
-Date: Wed, 11 Dec 2024 15:42:27 +0100
+ (envelope-from <johan@kernel.org>) id 1tLO8z-000000003BN-11Dy;
+ Wed, 11 Dec 2024 15:56:53 +0100
+Date: Wed, 11 Dec 2024 15:56:53 +0100
 From: Johan Hovold <johan@kernel.org>
 To: Abel Vesa <abel.vesa@linaro.org>
 Cc: Maarten Lankhorst <maarten.lankhorst@linux.intel.com>,
@@ -56,15 +56,14 @@ Cc: Maarten Lankhorst <maarten.lankhorst@linux.intel.com>,
  nouveau@lists.freedesktop.org, intel-gfx@lists.freedesktop.org,
  intel-xe@lists.freedesktop.org, linux-arm-msm@vger.kernel.org,
  freedreno@lists.freedesktop.org
-Subject: Re: [PATCH v2 1/4] drm/dp: Add helper to set LTTPRs in transparent
- mode
-Message-ID: <Z1mk08SHEd5_vc99@hovoldconsulting.com>
+Subject: Re: [PATCH v2 4/4] drm/msm/dp: Add support for LTTPR handling
+Message-ID: <Z1moNToiIIB9auSl@hovoldconsulting.com>
 References: <20241211-drm-dp-msm-add-lttpr-transparent-mode-set-v2-0-d5906ed38b28@linaro.org>
- <20241211-drm-dp-msm-add-lttpr-transparent-mode-set-v2-1-d5906ed38b28@linaro.org>
+ <20241211-drm-dp-msm-add-lttpr-transparent-mode-set-v2-4-d5906ed38b28@linaro.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
-In-Reply-To: <20241211-drm-dp-msm-add-lttpr-transparent-mode-set-v2-1-d5906ed38b28@linaro.org>
+In-Reply-To: <20241211-drm-dp-msm-add-lttpr-transparent-mode-set-v2-4-d5906ed38b28@linaro.org>
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -79,82 +78,46 @@ List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-On Wed, Dec 11, 2024 at 03:04:12PM +0200, Abel Vesa wrote:
+On Wed, Dec 11, 2024 at 03:04:15PM +0200, Abel Vesa wrote:
  
-> +/**
-> + * drm_dp_lttpr_set_transparent_mode - set the LTTPR in transparent mode
-> + * @aux: DisplayPort AUX channel
-> + * @enable: Enable or disable transparent mode
-> + *
-> + * Returns 0 on success or a negative error code on failure.
-> + */
-> +int drm_dp_lttpr_set_transparent_mode(struct drm_dp_aux *aux, bool enable)
+> +static void msm_dp_display_lttpr_init(struct msm_dp_display_private *dp)
 > +{
-> +	u8 val = enable ? DP_PHY_REPEATER_MODE_TRANSPARENT :
-> +			  DP_PHY_REPEATER_MODE_NON_TRANSPARENT;
-> +	int ret = drm_dp_dpcd_writeb(aux, DP_PHY_REPEATER_MODE, val);
+> +	int lttpr_count;
 > +
-> +	return ret == 1 ? 0 : ret;
+> +	if (drm_dp_read_lttpr_common_caps(dp->aux, dp->panel->dpcd,
+> +					  dp->lttpr_caps))
+> +		return;
+> +
+> +	lttpr_count = drm_dp_lttpr_count(dp->lttpr_caps);
 
-This looks correct, but I had to go look at drm_dp_dpcd_writeb() to make
-sure it never returns 0 (for short transfers).
+I was gonna say shouldn't you handle errors here, but that explains the
+non-negative check I commented on the first patch in the series.
 
+This looks error prone, but I think you should at least update the
+kernel doc comment to drm_dp_lttpr_init() in the first patch so that
+it's clear that you pass in the number of LTTPRs *or* an errno.
+
+> +
+> +	drm_dp_lttpr_init(dp->aux, lttpr_count);
 > +}
-> +EXPORT_SYMBOL(drm_dp_lttpr_set_transparent_mode);
+> +
+>  static int msm_dp_display_process_hpd_high(struct msm_dp_display_private *dp)
+>  {
+>  	struct drm_connector *connector = dp->msm_dp_display.connector;
+>  	const struct drm_display_info *info = &connector->display_info;
+>  	int rc = 0;
+>  
+> +	msm_dp_display_lttpr_init(dp);
 
-This appears to be what the driver currently uses, but why not
-EXPORT_SYMBOL_GPL?
+It looks like you ignore errors on purpose so I guess that's fine.
 
 > +
-> +/**
-> + * drm_dp_lttpr_init - init LTTPR transparency mode according to DP standard
-> + *
-> + * @aux: DisplayPort AUX channel
-> + * @lttpr_count: Number of LTTPRs
-> + *
-> + * Returns 0 on success or a negative error code on failure.
-> + */
-> +int drm_dp_lttpr_init(struct drm_dp_aux *aux, int lttpr_count)
-> +{
-> +	if (!lttpr_count)
-> +		return 0;
-> +
-> +	/*
-> +	 * See DP Standard v2.0 3.6.6.1 about the explicit disabling of
-> +	 * non-transparent mode and the disable->enable non-transparent mode
-> +	 * sequence.
-> +	 */
-> +	drm_dp_lttpr_set_transparent_mode(aux, true);
+>  	rc = msm_dp_panel_read_sink_caps(dp->panel, connector);
+>  	if (rc)
+>  		goto end;
 
-Error handling?
-
-> +
-> +	if (lttpr_count > 0 && !drm_dp_lttpr_set_transparent_mode(aux, false))
-
-No need to check lttpr_count again here.
-
-> +		return 0;
-
-I'd check for errors instead of success here and do the rollback before
-returning -EINVAL.
-
-> +
-> +	/*
-> +	 * Roll-back to tranparent mode if setting non-tranparent mode failed or
-> +	 * the number of LTTPRs is invalid
-> +	 */
-> +	drm_dp_lttpr_set_transparent_mode(aux, true);
-> +
-> +	return -EINVAL;
-
-And return 0 explicitly here.
-
-> +}
-> +EXPORT_SYMBOL(drm_dp_lttpr_init);
-
-In any case this works well and is needed for external display on the
-Lenovo ThinkPad T14s, while not breaking the X13s which does not need
-it:
+Either way, this is needed for external display on my x1e80100 machines,
+while not breaking the X13s:
 
 Tested-by: Johan Hovold <johan+linaro@kernel.org>
 
