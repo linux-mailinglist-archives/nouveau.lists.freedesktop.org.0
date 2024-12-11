@@ -2,49 +2,69 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id D28CA9ECCF6
-	for <lists+nouveau@lfdr.de>; Wed, 11 Dec 2024 14:16:29 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 53F3A9ECED5
+	for <lists+nouveau@lfdr.de>; Wed, 11 Dec 2024 15:42:29 +0100 (CET)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 9496110E038;
-	Wed, 11 Dec 2024 13:16:22 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id E6F6F10E1A3;
+	Wed, 11 Dec 2024 14:42:26 +0000 (UTC)
 Authentication-Results: gabe.freedesktop.org;
-	dkim=pass (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="a4jA6Oef";
+	dkim=pass (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="Fkdcp6d2";
 	dkim-atps=neutral
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from nyc.source.kernel.org (nyc.source.kernel.org [147.75.193.91])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 968F010E038
- for <nouveau@lists.freedesktop.org>; Wed, 11 Dec 2024 13:16:21 +0000 (UTC)
+Received: from dfw.source.kernel.org (dfw.source.kernel.org [139.178.84.217])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id D9D8F10E1A3;
+ Wed, 11 Dec 2024 14:42:25 +0000 (UTC)
 Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by nyc.source.kernel.org (Postfix) with ESMTP id A2F2DA420F8;
- Wed, 11 Dec 2024 13:14:28 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id A855BC4CED2;
- Wed, 11 Dec 2024 13:16:16 +0000 (UTC)
+ by dfw.source.kernel.org (Postfix) with ESMTP id 8F8905C606D;
+ Wed, 11 Dec 2024 14:41:42 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id AFCE4C4CED2;
+ Wed, 11 Dec 2024 14:42:24 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1733922979;
- bh=roSmOEVqZYKjxv0XTSHffNybGnh0jNKpaYIcDO96HXQ=;
+ s=k20201202; t=1733928144;
+ bh=RJoGGBFcL+sQrgvZ8+9BKYWDJWcgBpREZ6n8Z69Zl9c=;
  h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
- b=a4jA6OefUE+oLywggbSPqrl4/z+h9rsw7krAwY4nBDt+UeyGsgmg6tgCz6S5fFcoa
- wzeC8YpMGOoS3qT+l/pXYHfaE35a6M1BGsEBPEV2Cv6fVr63tOvCB/Uz3NDZRDUDmh
- 5iNMQiPn7UsQonBjSiPPUKMgf0LJFcR+uV1TzCelekEPI3RI7yEL0Lgf6F+F9KcgkD
- WHS/sbmsFxUR1YN8+e7FO8bRGC8WMJE2v+b8i3HWxC/f/2ymohaNVFoRyrrGl+ctfQ
- tmSGpd77wH6h5TVOXumO22Nd/ugz1i3cP6BicIAkP8QIt3t1El8LC6amAmMxIGiYFt
- Cs6y5D2phgcHg==
-Date: Wed, 11 Dec 2024 14:16:14 +0100
-From: Danilo Krummrich <dakr@kernel.org>
-To: Zhi Wang <zhiw@nvidia.com>
-Cc: nouveau@lists.freedesktop.org, airlied@gmail.com, daniel@ffwll.ch,
- bskeggs@nvidia.com, acurrid@nvidia.com, cjia@nvidia.com,
- smitra@nvidia.com, ankita@nvidia.com, aniketa@nvidia.com,
- kwankhede@nvidia.com, targupta@nvidia.com, zhiwang@kernel.org
-Subject: Re: [PATCH v3 12/15] nvkm: factor out r535_gsp_msgq_peek()
-Message-ID: <Z1mQnekcq1b7kCfA@pollux.localdomain>
-References: <20241031085250.2941482-1-zhiw@nvidia.com>
- <20241031085250.2941482-13-zhiw@nvidia.com>
+ b=Fkdcp6d25g6ET2VUFeJgANhn0OzBzTp74DQddva1BycAheDOFS1hA76M0cG8a1lco
+ GiF+wGC8KuSSiiksMidE9H02hUmQ0Ey5QdFXdPFf/dIbCFM949pMOUVI4OnnJ/KY9z
+ 8ne5hNVbTCxbkBQAwhg+mUFZ37yOrf3Gohgeo83LhkXN32EFDm2ON53j5wwL4JXq6n
+ Z1stje4hyUGIKnHj5mYVbgXf6JnmM/LPNeCzyHoc6gdVQZShSJ8zniEJ4+X8TfLaXo
+ mkPA9cS0HTj/ohUY/+SOZBz5fvs2mPhGWcZ18xgISbMcx59BA7q+gkp55/d/vELH5k
+ QqclZZ/0OfjVg==
+Received: from johan by xi.lan with local (Exim 4.97.1)
+ (envelope-from <johan@kernel.org>) id 1tLNv1-000000002rx-1zMb;
+ Wed, 11 Dec 2024 15:42:28 +0100
+Date: Wed, 11 Dec 2024 15:42:27 +0100
+From: Johan Hovold <johan@kernel.org>
+To: Abel Vesa <abel.vesa@linaro.org>
+Cc: Maarten Lankhorst <maarten.lankhorst@linux.intel.com>,
+ Maxime Ripard <mripard@kernel.org>,
+ Thomas Zimmermann <tzimmermann@suse.de>,
+ David Airlie <airlied@gmail.com>, Simona Vetter <simona@ffwll.ch>,
+ Karol Herbst <kherbst@redhat.com>, Lyude Paul <lyude@redhat.com>,
+ Danilo Krummrich <dakr@redhat.com>,
+ Jani Nikula <jani.nikula@linux.intel.com>,
+ Rodrigo Vivi <rodrigo.vivi@intel.com>,
+ Joonas Lahtinen <joonas.lahtinen@linux.intel.com>,
+ Tvrtko Ursulin <tursulin@ursulin.net>, Rob Clark <robdclark@gmail.com>,
+ Abhinav Kumar <quic_abhinavk@quicinc.com>,
+ Dmitry Baryshkov <dmitry.baryshkov@linaro.org>,
+ Sean Paul <sean@poorly.run>,
+ Marijn Suijten <marijn.suijten@somainline.org>,
+ Bjorn Andersson <andersson@kernel.org>,
+ Konrad Dybcio <konradybcio@kernel.org>,
+ dri-devel@lists.freedesktop.org, linux-kernel@vger.kernel.org,
+ nouveau@lists.freedesktop.org, intel-gfx@lists.freedesktop.org,
+ intel-xe@lists.freedesktop.org, linux-arm-msm@vger.kernel.org,
+ freedreno@lists.freedesktop.org
+Subject: Re: [PATCH v2 1/4] drm/dp: Add helper to set LTTPRs in transparent
+ mode
+Message-ID: <Z1mk08SHEd5_vc99@hovoldconsulting.com>
+References: <20241211-drm-dp-msm-add-lttpr-transparent-mode-set-v2-0-d5906ed38b28@linaro.org>
+ <20241211-drm-dp-msm-add-lttpr-transparent-mode-set-v2-1-d5906ed38b28@linaro.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
-In-Reply-To: <20241031085250.2941482-13-zhiw@nvidia.com>
+In-Reply-To: <20241211-drm-dp-msm-add-lttpr-transparent-mode-set-v2-1-d5906ed38b28@linaro.org>
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -59,154 +79,83 @@ List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-On Thu, Oct 31, 2024 at 01:52:47AM -0700, Zhi Wang wrote:
-> To receive a GSP message queue element from the GSP status queue, the
-> driver needs to make sure there are available elements in the queue.
-> 
-> The previous r535_gsp_msgq_wait() consists of three functions, which is
-> a little too complicated for a single function:
-> - wait for an available element.
-> - peek the message element header in the queue.
-> - recevice the element from the queue.
-> 
-> Factor out r535_gsp_msgq_peek() and divide the functions in
-> r535_gsp_msgq_wait() into three functions.
-> 
-> No functional change is intended.
-> 
-> Signed-off-by: Zhi Wang <zhiw@nvidia.com>
-> ---
->  .../gpu/drm/nouveau/nvkm/subdev/gsp/r535.c    | 68 ++++++++++++-------
->  1 file changed, 45 insertions(+), 23 deletions(-)
-> 
-> diff --git a/drivers/gpu/drm/nouveau/nvkm/subdev/gsp/r535.c b/drivers/gpu/drm/nouveau/nvkm/subdev/gsp/r535.c
-> index 8b507858a63d..7818c0be41f2 100644
-> --- a/drivers/gpu/drm/nouveau/nvkm/subdev/gsp/r535.c
-> +++ b/drivers/gpu/drm/nouveau/nvkm/subdev/gsp/r535.c
-> @@ -146,20 +146,16 @@ r535_rpc_status_to_errno(uint32_t rpc_status)
->  	}
->  }
->  
-> -static void *
-> -r535_gsp_msgq_wait(struct nvkm_gsp *gsp, u32 gsp_rpc_len, u32 *prepc,
-> -		   int *ptime)
-> +static int
-> +r535_gsp_msgq_wait(struct nvkm_gsp *gsp, u32 gsp_rpc_len, int *ptime)
->  {
-> -	struct r535_gsp_msg *mqe;
->  	u32 size, rptr = *gsp->msgq.rptr;
->  	int used;
-> -	u8 *msg;
-> -	u32 len;
->  
->  	size = DIV_ROUND_UP(GSP_MSG_HDR_SIZE + gsp_rpc_len,
->  			    GSP_PAGE_SIZE);
->  	if (WARN_ON(!size || size >= gsp->msgq.cnt))
-> -		return ERR_PTR(-EINVAL);
-> +		return -EINVAL;
->  
->  	do {
->  		u32 wptr = *gsp->msgq.wptr;
-> @@ -174,15 +170,48 @@ r535_gsp_msgq_wait(struct nvkm_gsp *gsp, u32 gsp_rpc_len, u32 *prepc,
->  	} while (--(*ptime));
->  
->  	if (WARN_ON(!*ptime))
-> -		return ERR_PTR(-ETIMEDOUT);
-> +		return -ETIMEDOUT;
->  
-> -	mqe = (void *)((u8 *)gsp->shm.msgq.ptr + 0x1000 + rptr * 0x1000);
-> +	return used;
-> +}
->  
-> -	if (prepc) {
-> -		*prepc = (used * GSP_PAGE_SIZE) - sizeof(*mqe);
-> -		return mqe->data;
-> -	}
-> +static struct r535_gsp_msg *
-> +r535_gsp_msgq_get_entry(struct nvkm_gsp *gsp)
+On Wed, Dec 11, 2024 at 03:04:12PM +0200, Abel Vesa wrote:
+ 
+> +/**
+> + * drm_dp_lttpr_set_transparent_mode - set the LTTPR in transparent mode
+> + * @aux: DisplayPort AUX channel
+> + * @enable: Enable or disable transparent mode
+> + *
+> + * Returns 0 on success or a negative error code on failure.
+> + */
+> +int drm_dp_lttpr_set_transparent_mode(struct drm_dp_aux *aux, bool enable)
 > +{
-> +	u32 rptr = *gsp->msgq.rptr;
->  
-> +	return (void *)((u8 *)gsp->shm.msgq.ptr + 0x1000 + rptr * 0x1000);
+> +	u8 val = enable ? DP_PHY_REPEATER_MODE_TRANSPARENT :
+> +			  DP_PHY_REPEATER_MODE_NON_TRANSPARENT;
+> +	int ret = drm_dp_dpcd_writeb(aux, DP_PHY_REPEATER_MODE, val);
+> +
+> +	return ret == 1 ? 0 : ret;
 
-I know you did not introduce this, but since you're at it, can you please add
-a brief comment about why we need to add does offsets?
-
-Also, I'd replace 0x1000 with GSP_PAGE_SIZE.
+This looks correct, but I had to go look at drm_dp_dpcd_writeb() to make
+sure it never returns 0 (for short transfers).
 
 > +}
+> +EXPORT_SYMBOL(drm_dp_lttpr_set_transparent_mode);
+
+This appears to be what the driver currently uses, but why not
+EXPORT_SYMBOL_GPL?
+
 > +
-> +static void *
-> +r535_gsp_msgq_peek(struct nvkm_gsp *gsp, u32 gsp_rpc_len, int *retries)
+> +/**
+> + * drm_dp_lttpr_init - init LTTPR transparency mode according to DP standard
+> + *
+> + * @aux: DisplayPort AUX channel
+> + * @lttpr_count: Number of LTTPRs
+> + *
+> + * Returns 0 on success or a negative error code on failure.
+> + */
+> +int drm_dp_lttpr_init(struct drm_dp_aux *aux, int lttpr_count)
 > +{
-> +	struct r535_gsp_msg *mqe;
-> +	int ret;
+> +	if (!lttpr_count)
+> +		return 0;
 > +
-> +	ret = r535_gsp_msgq_wait(gsp, gsp_rpc_len, retries);
-> +	if (ret < 0)
-> +		return ERR_PTR(ret);
+> +	/*
+> +	 * See DP Standard v2.0 3.6.6.1 about the explicit disabling of
+> +	 * non-transparent mode and the disable->enable non-transparent mode
+> +	 * sequence.
+> +	 */
+> +	drm_dp_lttpr_set_transparent_mode(aux, true);
+
+Error handling?
+
 > +
-> +	mqe = r535_gsp_msgq_get_entry(gsp);
+> +	if (lttpr_count > 0 && !drm_dp_lttpr_set_transparent_mode(aux, false))
+
+No need to check lttpr_count again here.
+
+> +		return 0;
+
+I'd check for errors instead of success here and do the rollback before
+returning -EINVAL.
+
 > +
-> +	return mqe->data;
+> +	/*
+> +	 * Roll-back to tranparent mode if setting non-tranparent mode failed or
+> +	 * the number of LTTPRs is invalid
+> +	 */
+> +	drm_dp_lttpr_set_transparent_mode(aux, true);
+> +
+> +	return -EINVAL;
+
+And return 0 explicitly here.
+
 > +}
-> +
-> +static void *
-> +r535_gsp_msgq_recv(struct nvkm_gsp *gsp, u32 gsp_rpc_len, int *retries)
+> +EXPORT_SYMBOL(drm_dp_lttpr_init);
 
-I think it would be good to document how this differs from peek(), i.e. memory
-is allocated, the message is copied, the queue pointer is advanced...
+In any case this works well and is needed for external display on the
+Lenovo ThinkPad T14s, while not breaking the X13s which does not need
+it:
 
-I'd also document who's in charge to free the memory allocated by this function,
-and how this should be done, i.e. r535_gsp_msg_done().
+Tested-by: Johan Hovold <johan+linaro@kernel.org>
 
-> +{
-> +	u32 rptr = *gsp->msgq.rptr;
-> +	struct r535_gsp_msg *mqe;
-> +	u32 size, len;
-> +	u8 *msg;
-> +	int ret;
-> +
-> +	ret = r535_gsp_msgq_wait(gsp, gsp_rpc_len, retries);
-> +	if (ret < 0)
-> +		return ERR_PTR(ret);
-> +
-> +	mqe = r535_gsp_msgq_get_entry(gsp);
->  	size = ALIGN(gsp_rpc_len + GSP_MSG_HDR_SIZE, GSP_PAGE_SIZE);
->  
->  	msg = kvmalloc(gsp_rpc_len, GFP_KERNEL);
-> @@ -207,12 +236,6 @@ r535_gsp_msgq_wait(struct nvkm_gsp *gsp, u32 gsp_rpc_len, u32 *prepc,
->  	return msg;
->  }
->  
-> -static void *
-> -r535_gsp_msgq_recv(struct nvkm_gsp *gsp, u32 gsp_rpc_len, int *ptime)
-> -{
-> -	return r535_gsp_msgq_wait(gsp, gsp_rpc_len, NULL, ptime);
-> -}
-> -
->  static int
->  r535_gsp_cmdq_push(struct nvkm_gsp *gsp, void *rpc)
->  {
-> @@ -337,15 +360,14 @@ r535_gsp_msg_recv(struct nvkm_gsp *gsp, int fn, u32 gsp_rpc_len)
->  {
->  	struct nvkm_subdev *subdev = &gsp->subdev;
->  	struct nvfw_gsp_rpc *rpc;
-> -	int time = 4000000, i;
-> -	u32 size;
-> +	int retries = 4000000, i;
->  
->  retry:
-> -	rpc = r535_gsp_msgq_wait(gsp, sizeof(*rpc), &size, &time);
-> +	rpc = r535_gsp_msgq_peek(gsp, sizeof(*rpc), &retries);
->  	if (IS_ERR_OR_NULL(rpc))
->  		return rpc;
->  
-> -	rpc = r535_gsp_msgq_recv(gsp, rpc->length, &time);
-> +	rpc = r535_gsp_msgq_recv(gsp, rpc->length, &retries);
->  	if (IS_ERR_OR_NULL(rpc))
->  		return rpc;
->  
-> -- 
-> 2.34.1
-> 
+Johan
