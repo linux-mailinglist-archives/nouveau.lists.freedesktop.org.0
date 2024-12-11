@@ -2,107 +2,49 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id 25C989ECCC8
-	for <lists+nouveau@lfdr.de>; Wed, 11 Dec 2024 14:04:50 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id D28CA9ECCF6
+	for <lists+nouveau@lfdr.de>; Wed, 11 Dec 2024 14:16:29 +0100 (CET)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 7EA0210EB50;
-	Wed, 11 Dec 2024 13:04:40 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 9496110E038;
+	Wed, 11 Dec 2024 13:16:22 +0000 (UTC)
 Authentication-Results: gabe.freedesktop.org;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="PHQ61rZl";
+	dkim=pass (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="a4jA6Oef";
 	dkim-atps=neutral
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from mail-wm1-f44.google.com (mail-wm1-f44.google.com
- [209.85.128.44])
- by gabe.freedesktop.org (Postfix) with ESMTPS id ABEAB10EB4B
- for <nouveau@lists.freedesktop.org>; Wed, 11 Dec 2024 13:04:38 +0000 (UTC)
-Received: by mail-wm1-f44.google.com with SMTP id
- 5b1f17b1804b1-4361d5dcf5bso7315575e9.3
- for <nouveau@lists.freedesktop.org>; Wed, 11 Dec 2024 05:04:38 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1733922277; x=1734527077; darn=lists.freedesktop.org;
- h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
- :mime-version:subject:date:from:from:to:cc:subject:date:message-id
- :reply-to; bh=28bZGkoWiLyO5A4XpJ79KUw0LbLMW2C62tX+fuihWns=;
- b=PHQ61rZlId43KcXV5ucHLEzmupxL0Um8FXEo0sTRaoNrlrD+9cIhgI91oxflysmPh5
- gE+vTYH0hwrbJyhw8/BdpoAc4RqwbYJvL1/et/RnH9/TTtCOO79yKx8kxgCVgTA7iH5C
- HpSPy2aXgCZwYa1R8cDEzT0U5sZPIfDk/I+Q11wVDjNyWOrjBzGCVUaYhqCeH7WTr+uQ
- XbJHu6k35sv+gm3AFuZEI8hu9kfrZ+9hc41D1QG4mfSkgM58zekcbHQwhxR8bPu1RzUN
- uUJUBIQqUxKw0qCEx8mU2upRjf9cnKoRJi3qL18Qh6ZPhlyJLFKt4QKrTZu0iJu4ULyU
- Ekuw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1733922277; x=1734527077;
- h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
- :mime-version:subject:date:from:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=28bZGkoWiLyO5A4XpJ79KUw0LbLMW2C62tX+fuihWns=;
- b=uo+eycth08uJ/VrIs/jNUM/tdp0Y+L8UABpN/Gc5DMTAVXy1q8404LDV7LgaPdv6xA
- t7ONFVKUwaeAvWv+myuUA5g56fJKpT0IuIyqSJt1Q2nuOI9p97TBrGieoSgG5NfZ686T
- qP4NzFxiC9cGI4Uiup4XHxX9ubgpJxjmTvUZ3F2LecCIiCdhciyCr5P0b8U0Eyi9ejqc
- W16itLCkcOVfCkT0j5KV7I/J+eTjw+hQwABtY/OVPW4hp/NXehxjrYkNgmRUOXQb6tF6
- E7zkLPgRTfYPCq6rqlMOIOYqUHBv7XgF1w64fyeNSphxPb7ei7jxSQBhaD5DpxqZn0yF
- QNoA==
-X-Forwarded-Encrypted: i=1;
- AJvYcCUUFDYuufBU1YvphTlTTtbWGVpn4f9vkmgGh0Cm7TJ//Jy3p2WEYgbFkn7/fIbFg+ekQUg/DNCI@lists.freedesktop.org
-X-Gm-Message-State: AOJu0YxNqc+Gbqcxzj357hGoACZ2c9dEHdGLSrYrS5nU5tFV+fKWtw/E
- YEWGnMEyshoKmJvyEdCgss355ozcjWMgwyTa0baVHoLGNi9hiuBANCVcI0FTcXw=
-X-Gm-Gg: ASbGncultD0YnYy6cg1iTTdlExjtixiX340Ooam8jgddXGTlEgKOAx9sA4PBYrSr1Ga
- TGuNDVFfXz8AXjcZnCw8GjcWF2YLp6Yx5KOEnsi1xkoUGMWD9eSjLy7Dp+KDO27WkygdAWmKREi
- YhIL14HDEIScLF+mDDJRtb9Po8UN17Q6qxnSQBeQ/JyPhC6LOc5Qg6PmWBrGqFE4TRA5o0CoXEc
- uMUClbv20FqJhw62EZ8GzrdlGUei2mBlwnRDUma4XLW2racL//XJQ==
-X-Google-Smtp-Source: AGHT+IFZXSfLm1b/QrF6/gmf0rL4rQkDB8lDObG2xoYYrC2PbfvXR4plcwl4l0GsTbAHftPRAcd2vQ==
-X-Received: by 2002:a05:600c:3b9b:b0:434:fa61:fdfb with SMTP id
- 5b1f17b1804b1-4361c3c6dd9mr21544895e9.18.1733922276963; 
- Wed, 11 Dec 2024 05:04:36 -0800 (PST)
-Received: from [127.0.1.1] ([82.76.168.176]) by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-3878248e633sm1288081f8f.4.2024.12.11.05.04.35
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 11 Dec 2024 05:04:36 -0800 (PST)
-From: Abel Vesa <abel.vesa@linaro.org>
-Date: Wed, 11 Dec 2024 15:04:15 +0200
-Subject: [PATCH v2 4/4] drm/msm/dp: Add support for LTTPR handling
+Received: from nyc.source.kernel.org (nyc.source.kernel.org [147.75.193.91])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 968F010E038
+ for <nouveau@lists.freedesktop.org>; Wed, 11 Dec 2024 13:16:21 +0000 (UTC)
+Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
+ by nyc.source.kernel.org (Postfix) with ESMTP id A2F2DA420F8;
+ Wed, 11 Dec 2024 13:14:28 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id A855BC4CED2;
+ Wed, 11 Dec 2024 13:16:16 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+ s=k20201202; t=1733922979;
+ bh=roSmOEVqZYKjxv0XTSHffNybGnh0jNKpaYIcDO96HXQ=;
+ h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
+ b=a4jA6OefUE+oLywggbSPqrl4/z+h9rsw7krAwY4nBDt+UeyGsgmg6tgCz6S5fFcoa
+ wzeC8YpMGOoS3qT+l/pXYHfaE35a6M1BGsEBPEV2Cv6fVr63tOvCB/Uz3NDZRDUDmh
+ 5iNMQiPn7UsQonBjSiPPUKMgf0LJFcR+uV1TzCelekEPI3RI7yEL0Lgf6F+F9KcgkD
+ WHS/sbmsFxUR1YN8+e7FO8bRGC8WMJE2v+b8i3HWxC/f/2ymohaNVFoRyrrGl+ctfQ
+ tmSGpd77wH6h5TVOXumO22Nd/ugz1i3cP6BicIAkP8QIt3t1El8LC6amAmMxIGiYFt
+ Cs6y5D2phgcHg==
+Date: Wed, 11 Dec 2024 14:16:14 +0100
+From: Danilo Krummrich <dakr@kernel.org>
+To: Zhi Wang <zhiw@nvidia.com>
+Cc: nouveau@lists.freedesktop.org, airlied@gmail.com, daniel@ffwll.ch,
+ bskeggs@nvidia.com, acurrid@nvidia.com, cjia@nvidia.com,
+ smitra@nvidia.com, ankita@nvidia.com, aniketa@nvidia.com,
+ kwankhede@nvidia.com, targupta@nvidia.com, zhiwang@kernel.org
+Subject: Re: [PATCH v3 12/15] nvkm: factor out r535_gsp_msgq_peek()
+Message-ID: <Z1mQnekcq1b7kCfA@pollux.localdomain>
+References: <20241031085250.2941482-1-zhiw@nvidia.com>
+ <20241031085250.2941482-13-zhiw@nvidia.com>
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 7bit
-Message-Id: <20241211-drm-dp-msm-add-lttpr-transparent-mode-set-v2-4-d5906ed38b28@linaro.org>
-References: <20241211-drm-dp-msm-add-lttpr-transparent-mode-set-v2-0-d5906ed38b28@linaro.org>
-In-Reply-To: <20241211-drm-dp-msm-add-lttpr-transparent-mode-set-v2-0-d5906ed38b28@linaro.org>
-To: Maarten Lankhorst <maarten.lankhorst@linux.intel.com>, 
- Maxime Ripard <mripard@kernel.org>, Thomas Zimmermann <tzimmermann@suse.de>, 
- David Airlie <airlied@gmail.com>, Simona Vetter <simona@ffwll.ch>, 
- Karol Herbst <kherbst@redhat.com>, Lyude Paul <lyude@redhat.com>, 
- Danilo Krummrich <dakr@redhat.com>, 
- Jani Nikula <jani.nikula@linux.intel.com>, 
- Rodrigo Vivi <rodrigo.vivi@intel.com>, 
- Joonas Lahtinen <joonas.lahtinen@linux.intel.com>, 
- Tvrtko Ursulin <tursulin@ursulin.net>, Rob Clark <robdclark@gmail.com>, 
- Abhinav Kumar <quic_abhinavk@quicinc.com>, 
- Dmitry Baryshkov <dmitry.baryshkov@linaro.org>, Sean Paul <sean@poorly.run>, 
- Marijn Suijten <marijn.suijten@somainline.org>
-Cc: Bjorn Andersson <andersson@kernel.org>, 
- Konrad Dybcio <konradybcio@kernel.org>, Johan Hovold <johan@kernel.org>, 
- dri-devel@lists.freedesktop.org, linux-kernel@vger.kernel.org, 
- nouveau@lists.freedesktop.org, intel-gfx@lists.freedesktop.org, 
- intel-xe@lists.freedesktop.org, linux-arm-msm@vger.kernel.org, 
- freedreno@lists.freedesktop.org, Abel Vesa <abel.vesa@linaro.org>
-X-Mailer: b4 0.15-dev-dedf8
-X-Developer-Signature: v=1; a=openpgp-sha256; l=3196; i=abel.vesa@linaro.org; 
- h=from:subject:message-id;
- bh=yJyF2pRWoU6DoNOFceA6M5EvvSsiRr5WvZMjlqLU/hw=; 
- b=owEBbQKS/ZANAwAKARtfRMkAlRVWAcsmYgBnWY3ZmjK9nP2mI5vRrJF2OoY0F6I9GZVuOIkuE
- U9JJNJfAXOJAjMEAAEKAB0WIQRO8+4RTnqPKsqn0bgbX0TJAJUVVgUCZ1mN2QAKCRAbX0TJAJUV
- VqA/EAC5MeQnOtUM3E6JKASMby2RnxPkjX1cJM9tj9E1A01ZNC8qGF4pIjpJImpXaSxPWi2XB1O
- 10dxLgkhDegiDtFYJ2Z1U/fL+hi2prXQccQUrALOPl9VBvg/lqLGigcJNcj51MikceOQOifC9la
- Cpwn9N4Qss+kTr1IlOz0KjGeIqZpGT4+EoA8Ti2Ity8TVRneorf7FXdbwmeawO1SXX15W32DI/e
- C4+4xVdQmeE3Aq/rZXCxHnHNhqv2K2EYqwebsVbhbjAEg2yIRK8BD++k8a9cnROEZ2HTd80wCok
- QWUbs1jiNHeznKyDQKUe3nb4hAXGisDXjL467VuiimNUnZ3ZEvhzmwYJGxA30qmrvf75NPeEW6m
- gUKlIQHk/YmyYiT6a8Rw9Ja5DQjvRKdjE1vyr0dzZqhIW5969Qo+fvSZySqymcTrv0HX/Gy+Frs
- x7KogH+1zd8Q5ubpPrTpvv/2Ntxetgey1kr9o+WhfBvDz8lEenqhy4voXOTrDmZlwQBbUkApbRD
- e5u52Wm0mfFYYv/klst3rYRyHusbQ/a8A7uuLRoGnHU5yjlwOiBXNgpVw20k5AXuSzcdyyZqfoD
- g8iFwlwnWlptrdtgsQ21zXF7Mj65ksD9pukcnrM+e3e7uJe/bHgFFkY8yQ5YjJ/FvJiVzQEkNWc
- g9ko+QTKP4o5Khw==
-X-Developer-Key: i=abel.vesa@linaro.org; a=openpgp;
- fpr=6AFF162D57F4223A8770EF5AF7BF214136F41FAE
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <20241031085250.2941482-13-zhiw@nvidia.com>
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -117,88 +59,154 @@ List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-Link Training Tunable PHY Repeaters (LTTPRs) are defined in DisplayPort
-1.4a specification. As the name suggests, these PHY repeaters are
-capable of adjusting their output for link training purposes.
+On Thu, Oct 31, 2024 at 01:52:47AM -0700, Zhi Wang wrote:
+> To receive a GSP message queue element from the GSP status queue, the
+> driver needs to make sure there are available elements in the queue.
+> 
+> The previous r535_gsp_msgq_wait() consists of three functions, which is
+> a little too complicated for a single function:
+> - wait for an available element.
+> - peek the message element header in the queue.
+> - recevice the element from the queue.
+> 
+> Factor out r535_gsp_msgq_peek() and divide the functions in
+> r535_gsp_msgq_wait() into three functions.
+> 
+> No functional change is intended.
+> 
+> Signed-off-by: Zhi Wang <zhiw@nvidia.com>
+> ---
+>  .../gpu/drm/nouveau/nvkm/subdev/gsp/r535.c    | 68 ++++++++++++-------
+>  1 file changed, 45 insertions(+), 23 deletions(-)
+> 
+> diff --git a/drivers/gpu/drm/nouveau/nvkm/subdev/gsp/r535.c b/drivers/gpu/drm/nouveau/nvkm/subdev/gsp/r535.c
+> index 8b507858a63d..7818c0be41f2 100644
+> --- a/drivers/gpu/drm/nouveau/nvkm/subdev/gsp/r535.c
+> +++ b/drivers/gpu/drm/nouveau/nvkm/subdev/gsp/r535.c
+> @@ -146,20 +146,16 @@ r535_rpc_status_to_errno(uint32_t rpc_status)
+>  	}
+>  }
+>  
+> -static void *
+> -r535_gsp_msgq_wait(struct nvkm_gsp *gsp, u32 gsp_rpc_len, u32 *prepc,
+> -		   int *ptime)
+> +static int
+> +r535_gsp_msgq_wait(struct nvkm_gsp *gsp, u32 gsp_rpc_len, int *ptime)
+>  {
+> -	struct r535_gsp_msg *mqe;
+>  	u32 size, rptr = *gsp->msgq.rptr;
+>  	int used;
+> -	u8 *msg;
+> -	u32 len;
+>  
+>  	size = DIV_ROUND_UP(GSP_MSG_HDR_SIZE + gsp_rpc_len,
+>  			    GSP_PAGE_SIZE);
+>  	if (WARN_ON(!size || size >= gsp->msgq.cnt))
+> -		return ERR_PTR(-EINVAL);
+> +		return -EINVAL;
+>  
+>  	do {
+>  		u32 wptr = *gsp->msgq.wptr;
+> @@ -174,15 +170,48 @@ r535_gsp_msgq_wait(struct nvkm_gsp *gsp, u32 gsp_rpc_len, u32 *prepc,
+>  	} while (--(*ptime));
+>  
+>  	if (WARN_ON(!*ptime))
+> -		return ERR_PTR(-ETIMEDOUT);
+> +		return -ETIMEDOUT;
+>  
+> -	mqe = (void *)((u8 *)gsp->shm.msgq.ptr + 0x1000 + rptr * 0x1000);
+> +	return used;
+> +}
+>  
+> -	if (prepc) {
+> -		*prepc = (used * GSP_PAGE_SIZE) - sizeof(*mqe);
+> -		return mqe->data;
+> -	}
+> +static struct r535_gsp_msg *
+> +r535_gsp_msgq_get_entry(struct nvkm_gsp *gsp)
+> +{
+> +	u32 rptr = *gsp->msgq.rptr;
+>  
+> +	return (void *)((u8 *)gsp->shm.msgq.ptr + 0x1000 + rptr * 0x1000);
 
-According to the DisplayPort standard, LTTPRs have two operating
-modes:
- - non-transparent - it replies to DPCD LTTPR field specific AUX
-   requests, while passes through all other AUX requests
- - transparent - it passes through all AUX requests.
+I know you did not introduce this, but since you're at it, can you please add
+a brief comment about why we need to add does offsets?
 
-Switching between this two modes is done by the DPTX by issuing
-an AUX write to the DPCD PHY_REPEATER_MODE register.
+Also, I'd replace 0x1000 with GSP_PAGE_SIZE.
 
-The msm DP driver is currently lacking any handling of LTTPRs.
-This means that if at least one LTTPR is found between DPTX and DPRX,
-the link training would fail if that LTTPR was not already configured
-in transparent mode.
+> +}
+> +
+> +static void *
+> +r535_gsp_msgq_peek(struct nvkm_gsp *gsp, u32 gsp_rpc_len, int *retries)
+> +{
+> +	struct r535_gsp_msg *mqe;
+> +	int ret;
+> +
+> +	ret = r535_gsp_msgq_wait(gsp, gsp_rpc_len, retries);
+> +	if (ret < 0)
+> +		return ERR_PTR(ret);
+> +
+> +	mqe = r535_gsp_msgq_get_entry(gsp);
+> +
+> +	return mqe->data;
+> +}
+> +
+> +static void *
+> +r535_gsp_msgq_recv(struct nvkm_gsp *gsp, u32 gsp_rpc_len, int *retries)
 
-The section 3.6.6.1 from the DisplayPort v2.0 specification mandates
-that before link training with the LTTPR is started, the DPTX may place
-the LTTPR in non-transparent mode by first switching to transparent mode
-and then to non-transparent mode. This operation seems to be needed only
-on first link training and doesn't need to be done again until device is
-unplugged.
+I think it would be good to document how this differs from peek(), i.e. memory
+is allocated, the message is copied, the queue pointer is advanced...
 
-It has been observed on a few X Elite-based platforms which have
-such LTTPRs in their board design that the DPTX needs to follow the
-procedure described above in order for the link training to be successful.
+I'd also document who's in charge to free the memory allocated by this function,
+and how this should be done, i.e. r535_gsp_msg_done().
 
-So add support for reading the LTTPR DPCD caps to figure out the number
-of such LTTPRs first. Then, for platforms (or Type-C dongles) that have
-at least one such an LTTPR, set its operation mode to transparent mode
-first and then to non-transparent, just like the mentioned section of
-the specification mandates.
-
-Signed-off-by: Abel Vesa <abel.vesa@linaro.org>
----
- drivers/gpu/drm/msm/dp/dp_display.c | 17 +++++++++++++++++
- 1 file changed, 17 insertions(+)
-
-diff --git a/drivers/gpu/drm/msm/dp/dp_display.c b/drivers/gpu/drm/msm/dp/dp_display.c
-index aff51bb973ebe0835c96420d16547ebae0c6c0f2..a8d5563538bbcd83cf88a159dc86080e2c897fe1 100644
---- a/drivers/gpu/drm/msm/dp/dp_display.c
-+++ b/drivers/gpu/drm/msm/dp/dp_display.c
-@@ -107,6 +107,8 @@ struct msm_dp_display_private {
- 	struct msm_dp_event event_list[DP_EVENT_Q_MAX];
- 	spinlock_t event_lock;
- 
-+	u8 lttpr_caps[DP_LTTPR_COMMON_CAP_SIZE];
-+
- 	bool wide_bus_supported;
- 
- 	struct msm_dp_audio *audio;
-@@ -367,12 +369,27 @@ static int msm_dp_display_send_hpd_notification(struct msm_dp_display_private *d
- 	return 0;
- }
- 
-+static void msm_dp_display_lttpr_init(struct msm_dp_display_private *dp)
-+{
-+	int lttpr_count;
-+
-+	if (drm_dp_read_lttpr_common_caps(dp->aux, dp->panel->dpcd,
-+					  dp->lttpr_caps))
-+		return;
-+
-+	lttpr_count = drm_dp_lttpr_count(dp->lttpr_caps);
-+
-+	drm_dp_lttpr_init(dp->aux, lttpr_count);
-+}
-+
- static int msm_dp_display_process_hpd_high(struct msm_dp_display_private *dp)
- {
- 	struct drm_connector *connector = dp->msm_dp_display.connector;
- 	const struct drm_display_info *info = &connector->display_info;
- 	int rc = 0;
- 
-+	msm_dp_display_lttpr_init(dp);
-+
- 	rc = msm_dp_panel_read_sink_caps(dp->panel, connector);
- 	if (rc)
- 		goto end;
-
--- 
-2.34.1
-
+> +{
+> +	u32 rptr = *gsp->msgq.rptr;
+> +	struct r535_gsp_msg *mqe;
+> +	u32 size, len;
+> +	u8 *msg;
+> +	int ret;
+> +
+> +	ret = r535_gsp_msgq_wait(gsp, gsp_rpc_len, retries);
+> +	if (ret < 0)
+> +		return ERR_PTR(ret);
+> +
+> +	mqe = r535_gsp_msgq_get_entry(gsp);
+>  	size = ALIGN(gsp_rpc_len + GSP_MSG_HDR_SIZE, GSP_PAGE_SIZE);
+>  
+>  	msg = kvmalloc(gsp_rpc_len, GFP_KERNEL);
+> @@ -207,12 +236,6 @@ r535_gsp_msgq_wait(struct nvkm_gsp *gsp, u32 gsp_rpc_len, u32 *prepc,
+>  	return msg;
+>  }
+>  
+> -static void *
+> -r535_gsp_msgq_recv(struct nvkm_gsp *gsp, u32 gsp_rpc_len, int *ptime)
+> -{
+> -	return r535_gsp_msgq_wait(gsp, gsp_rpc_len, NULL, ptime);
+> -}
+> -
+>  static int
+>  r535_gsp_cmdq_push(struct nvkm_gsp *gsp, void *rpc)
+>  {
+> @@ -337,15 +360,14 @@ r535_gsp_msg_recv(struct nvkm_gsp *gsp, int fn, u32 gsp_rpc_len)
+>  {
+>  	struct nvkm_subdev *subdev = &gsp->subdev;
+>  	struct nvfw_gsp_rpc *rpc;
+> -	int time = 4000000, i;
+> -	u32 size;
+> +	int retries = 4000000, i;
+>  
+>  retry:
+> -	rpc = r535_gsp_msgq_wait(gsp, sizeof(*rpc), &size, &time);
+> +	rpc = r535_gsp_msgq_peek(gsp, sizeof(*rpc), &retries);
+>  	if (IS_ERR_OR_NULL(rpc))
+>  		return rpc;
+>  
+> -	rpc = r535_gsp_msgq_recv(gsp, rpc->length, &time);
+> +	rpc = r535_gsp_msgq_recv(gsp, rpc->length, &retries);
+>  	if (IS_ERR_OR_NULL(rpc))
+>  		return rpc;
+>  
+> -- 
+> 2.34.1
+> 
