@@ -2,94 +2,75 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
-	by mail.lfdr.de (Postfix) with ESMTPS id B70739ED663
-	for <lists+nouveau@lfdr.de>; Wed, 11 Dec 2024 20:22:14 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id E27349EE10E
+	for <lists+nouveau@lfdr.de>; Thu, 12 Dec 2024 09:18:44 +0100 (CET)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 532DF10EBF6;
-	Wed, 11 Dec 2024 19:22:07 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 5442C10ECE9;
+	Thu, 12 Dec 2024 08:18:42 +0000 (UTC)
 Authentication-Results: gabe.freedesktop.org;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="B0AeIbHI";
+	dkim=pass (2048-bit key; unprotected) header.d=intel.com header.i=@intel.com header.b="N/QLTTsZ";
 	dkim-atps=neutral
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from mail-lj1-x22b.google.com (mail-lj1-x22b.google.com
- [IPv6:2a00:1450:4864:20::22b])
- by gabe.freedesktop.org (Postfix) with ESMTPS id A18B010E40E
- for <nouveau@lists.freedesktop.org>; Wed, 11 Dec 2024 19:22:06 +0000 (UTC)
-Received: by mail-lj1-x22b.google.com with SMTP id
- 38308e7fff4ca-2ffa8df8850so70978331fa.3
- for <nouveau@lists.freedesktop.org>; Wed, 11 Dec 2024 11:22:06 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1733944925; x=1734549725; darn=lists.freedesktop.org;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=fhMIxqS4yJy4TMfF6IpImxcWZLV7gqt0icqJ+XQLDEs=;
- b=B0AeIbHIUSq607/t+edx4VpnmVxnTqcSM2ZAGouPVa7UiSTtwttVn/2baRFBp2ZYc9
- tvGE8mJOm+SZztkPHvaulvx4Md22eZhCHo2BnsuUxgMhrBED6d8qQeVTkEqQ60HuVn2g
- atM9j+3GiBJnoc4wRjRgSAINLLSrFP2a6ajW7BYgZ2nKiO0SUEmFLU5yqipNzxvolOuI
- ssBjQbpaX7tz//97szhwM7zDtv80Kdmrp9SJaHJSENn1Bj9e7COtqWDekdGpsyslAQMk
- kKYPQz+NFg/aEDl8bD8P/5FhqBWuOjgT0aQgtirioX9dQC9EE0p09mUFOu5C8F+JobIw
- B6RQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1733944925; x=1734549725;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=fhMIxqS4yJy4TMfF6IpImxcWZLV7gqt0icqJ+XQLDEs=;
- b=qyFemgOn729aHmEatMcwU1uKknaNY9FbLsvaqIxehsOsL8KJmayMXEFy5lqsW4Xwqs
- 9HupIWVyW8AIhO3Y+uSFYJIsZaioUXkUBQyebjoOnsbCL0i/MBX6J04l1EQZcUFNgubq
- O+bXgjgH10qI065L40/d+bJFdmnZG33oaSvXoRUiNx+7G05EtiM/azJ6ufjQhQhje2Gu
- XjuAXC7lT0A6Ya2Ha7/vdvR3nhLBybObxkmBqukOCGNbOS5fYiCWQc8Fb0a7QsjVeLwe
- oKhpQCqHausnNtzi82EeWY2wpsGLuzH+fMpohBV/igxQtxmVxdEwirsNU7mJ2DBIY2C9
- HM+w==
-X-Forwarded-Encrypted: i=1;
- AJvYcCWWHd6QV3CnkvcrziEXdILNpXmIRQonNVXNE0jdGt+FaAOkjrQKtCVuHEfoPC5kCUHGWd+04JK0@lists.freedesktop.org
-X-Gm-Message-State: AOJu0YyQzoOWZoRbRHMlF+0J9lzLp9gyrGViJ1Kp4IqRlYKUrLkuXaUh
- O6XcO15pxDvtiutzSTas49ueZltDlguZKuYhH26+8GjVEZ/wEerL9NzgVknd7Xw=
-X-Gm-Gg: ASbGncvJXvNWVfwTJ4bYCY5EwQKbK1+jfsY4wF1dFt/nYiG1hveV2e4uw20j9kjks58
- LRzVZm0ty89EFmp88tV0q1XkyTK4JEZR12s8lL789M+O2v2BpQMjdyL94V834wfkm3C0dmb2PaE
- kS+CoA8sv5fJH/gIpBewmCz9Ym5zN47iwc4qfDGZkcIJ2VpTzDd+Q6hUKCAY0x5pA2WaoFlpjoj
- rpj/leWFxEpZ8F00FUSQ+JWnbL1pto00dlha3x8xJ4chrGIPEQ9FPYwipQIoj3C1Bxj3j/6iRIE
- 93Rz54f/i1WGa1RSW82KTRBzi5ScwoyqsQ==
-X-Google-Smtp-Source: AGHT+IE7tOuuyi7X6war4XV8L7zXaUOuiy/zuezb7qOEEGBSx8kQ05R5q5SvNGFQfCAc2tJou2uPgw==
-X-Received: by 2002:a19:8c1c:0:b0:540:2ff1:309d with SMTP id
- 2adb3069b0e04-5402ff1319cmr40692e87.34.1733944924716; 
- Wed, 11 Dec 2024 11:22:04 -0800 (PST)
-Received: from eriador.lumag.spb.ru
- (2001-14ba-a0c3-3a00--b8c.rev.dnainternet.fi. [2001:14ba:a0c3:3a00::b8c])
- by smtp.gmail.com with ESMTPSA id
- 2adb3069b0e04-53e38dcdd1esm1617171e87.124.2024.12.11.11.22.02
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 11 Dec 2024 11:22:03 -0800 (PST)
-Date: Wed, 11 Dec 2024 21:22:00 +0200
-From: Dmitry Baryshkov <dmitry.baryshkov@linaro.org>
-To: Abel Vesa <abel.vesa@linaro.org>
-Cc: Maarten Lankhorst <maarten.lankhorst@linux.intel.com>, 
- Maxime Ripard <mripard@kernel.org>, Thomas Zimmermann <tzimmermann@suse.de>, 
- David Airlie <airlied@gmail.com>, Simona Vetter <simona@ffwll.ch>, 
- Karol Herbst <kherbst@redhat.com>, Lyude Paul <lyude@redhat.com>, 
- Danilo Krummrich <dakr@redhat.com>, Jani Nikula <jani.nikula@linux.intel.com>, 
- Rodrigo Vivi <rodrigo.vivi@intel.com>,
- Joonas Lahtinen <joonas.lahtinen@linux.intel.com>, 
- Tvrtko Ursulin <tursulin@ursulin.net>, Rob Clark <robdclark@gmail.com>, 
- Abhinav Kumar <quic_abhinavk@quicinc.com>, Sean Paul <sean@poorly.run>, 
- Marijn Suijten <marijn.suijten@somainline.org>,
- Bjorn Andersson <andersson@kernel.org>, 
- Konrad Dybcio <konradybcio@kernel.org>, Johan Hovold <johan@kernel.org>,
- dri-devel@lists.freedesktop.org, 
+Received: from mgamail.intel.com (mgamail.intel.com [198.175.65.15])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 39E5F10E20A;
+ Thu, 12 Dec 2024 08:18:41 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
+ d=intel.com; i=@intel.com; q=dns/txt; s=Intel;
+ t=1733991521; x=1765527521;
+ h=from:to:cc:subject:in-reply-to:references:date:
+ message-id:mime-version;
+ bh=dVHHLoWyfFDn4SykayA6jpY7XugJsCld6W0h27L/1oo=;
+ b=N/QLTTsZ5sPUx3LVxIO4pLi5GS1T0ZyV9b9QThbJZvExwsLGtPQuYLNG
+ N3nAeRBDZoHN5tWJnStvzToGV1uhGCPExQB04wg/VGYyHykkwoTnWh2qN
+ yVQ/dcuSchgIfRnza9hGEwsS2Vua5j79yOerul/avUcIu3Fi/6yPZ1mWg
+ lKyEiHR/48BvSE0dUEjdbZOoeiISH+JMKGzNEsZ+BJFzevuq0xvmPa/Wf
+ XWKmEHuzKw3p1IkAcK4Mq4eB8jIl+UxBe1emO3YmquH+XHtlHLE5hE16u
+ XfOQ96O+ewdk3CSafOpY6IRdLLVhg7JhMjp5j9ss7JWUQZQKi+I7+9U6X g==;
+X-CSE-ConnectionGUID: pJ6q5DxpTtaSXM7CeVeNuQ==
+X-CSE-MsgGUID: LPZ8zC+gTFGYKfoAl44vbw==
+X-IronPort-AV: E=McAfee;i="6700,10204,11283"; a="38086245"
+X-IronPort-AV: E=Sophos;i="6.12,227,1728975600"; d="scan'208";a="38086245"
+Received: from fmviesa008.fm.intel.com ([10.60.135.148])
+ by orvoesa107.jf.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
+ 12 Dec 2024 00:18:41 -0800
+X-CSE-ConnectionGUID: AIQA0pf8S+KINcKZiVC2wA==
+X-CSE-MsgGUID: 5JT1BapkSSCqRnj0Cwzaiw==
+X-ExtLoop1: 1
+X-IronPort-AV: E=Sophos;i="6.12,227,1728975600"; d="scan'208";a="96397015"
+Received: from klitkey1-mobl1.ger.corp.intel.com (HELO localhost)
+ ([10.245.246.101])
+ by fmviesa008-auth.fm.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
+ 12 Dec 2024 00:18:33 -0800
+From: Jani Nikula <jani.nikula@linux.intel.com>
+To: Dmitry Baryshkov <dmitry.baryshkov@linaro.org>, Johan Hovold
+ <johan@kernel.org>
+Cc: Abel Vesa <abel.vesa@linaro.org>, Maarten Lankhorst
+ <maarten.lankhorst@linux.intel.com>, Maxime Ripard <mripard@kernel.org>,
+ Thomas Zimmermann <tzimmermann@suse.de>, David Airlie <airlied@gmail.com>,
+ Simona Vetter <simona@ffwll.ch>, Karol Herbst <kherbst@redhat.com>, Lyude
+ Paul <lyude@redhat.com>, Danilo Krummrich <dakr@redhat.com>, Rodrigo Vivi
+ <rodrigo.vivi@intel.com>, Joonas Lahtinen
+ <joonas.lahtinen@linux.intel.com>, Tvrtko Ursulin <tursulin@ursulin.net>,
+ Rob Clark <robdclark@gmail.com>, Abhinav Kumar
+ <quic_abhinavk@quicinc.com>, Sean Paul <sean@poorly.run>, Marijn Suijten
+ <marijn.suijten@somainline.org>, Bjorn Andersson <andersson@kernel.org>,
+ Konrad Dybcio <konradybcio@kernel.org>, dri-devel@lists.freedesktop.org,
  linux-kernel@vger.kernel.org, nouveau@lists.freedesktop.org,
- intel-gfx@lists.freedesktop.org, 
- intel-xe@lists.freedesktop.org, linux-arm-msm@vger.kernel.org,
- freedreno@lists.freedesktop.org
+ intel-gfx@lists.freedesktop.org, intel-xe@lists.freedesktop.org,
+ linux-arm-msm@vger.kernel.org, freedreno@lists.freedesktop.org
 Subject: Re: [PATCH v2 1/4] drm/dp: Add helper to set LTTPRs in transparent
  mode
-Message-ID: <o6xcm7jdcay77b6kltj7zownk6je6umqlmxsuscbbubw4jlr5v@w4zuusufajwx>
+In-Reply-To: <3omcjrgfkdmw466ok7gej2jge25vtwzaiycwz2xgejwppyvkza@rhssgk7xz4hj>
+Organization: Intel Finland Oy - BIC 0357606-4 - Westendinkatu 7, 02160 Espoo
 References: <20241211-drm-dp-msm-add-lttpr-transparent-mode-set-v2-0-d5906ed38b28@linaro.org>
  <20241211-drm-dp-msm-add-lttpr-transparent-mode-set-v2-1-d5906ed38b28@linaro.org>
+ <Z1mk08SHEd5_vc99@hovoldconsulting.com>
+ <3omcjrgfkdmw466ok7gej2jge25vtwzaiycwz2xgejwppyvkza@rhssgk7xz4hj>
+Date: Thu, 12 Dec 2024 10:18:30 +0200
+Message-ID: <87pllxxqjt.fsf@intel.com>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <20241211-drm-dp-msm-add-lttpr-transparent-mode-set-v2-1-d5906ed38b28@linaro.org>
+Content-Type: text/plain
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -104,70 +85,44 @@ List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-On Wed, Dec 11, 2024 at 03:04:12PM +0200, Abel Vesa wrote:
-> According to the DisplayPort standard, LTTPRs have two operating
-> modes:
->  - non-transparent - it replies to DPCD LTTPR field specific AUX
->    requests, while passes through all other AUX requests
->  - transparent - it passes through all AUX requests.
-> 
-> Switching between this two modes is done by the DPTX by issuing
-> an AUX write to the DPCD PHY_REPEATER_MODE register.
-> 
-> Add a generic helper that allows switching between these modes.
-> 
-> Also add a generic wrapper for the helper that handles the explicit
-> disabling of non-transparent mode and its disable->enable sequence
-> mentioned in the DP Standard v2.0 section 3.6.6.1. Do this in order
-> to move this handling out of the vendor specific driver implementation
-> into the generic framework.
-> 
-> Signed-off-by: Abel Vesa <abel.vesa@linaro.org>
-> ---
->  drivers/gpu/drm/display/drm_dp_helper.c | 50 +++++++++++++++++++++++++++++++++
->  include/drm/display/drm_dp_helper.h     |  2 ++
->  2 files changed, 52 insertions(+)
-> 
+On Wed, 11 Dec 2024, Dmitry Baryshkov <dmitry.baryshkov@linaro.org> wrote:
+> On Wed, Dec 11, 2024 at 03:42:27PM +0100, Johan Hovold wrote:
+>> On Wed, Dec 11, 2024 at 03:04:12PM +0200, Abel Vesa wrote:
+>>  
+>> > +/**
+>> > + * drm_dp_lttpr_set_transparent_mode - set the LTTPR in transparent mode
+>> > + * @aux: DisplayPort AUX channel
+>> > + * @enable: Enable or disable transparent mode
+>> > + *
+>> > + * Returns 0 on success or a negative error code on failure.
+>> > + */
+>> > +int drm_dp_lttpr_set_transparent_mode(struct drm_dp_aux *aux, bool enable)
+>> > +{
+>> > +	u8 val = enable ? DP_PHY_REPEATER_MODE_TRANSPARENT :
+>> > +			  DP_PHY_REPEATER_MODE_NON_TRANSPARENT;
+>> > +	int ret = drm_dp_dpcd_writeb(aux, DP_PHY_REPEATER_MODE, val);
+>> > +
+>> > +	return ret == 1 ? 0 : ret;
+>> 
+>> This looks correct, but I had to go look at drm_dp_dpcd_writeb() to make
+>> sure it never returns 0 (for short transfers).
+>> 
+>> > +}
+>> > +EXPORT_SYMBOL(drm_dp_lttpr_set_transparent_mode);
+>> 
+>> This appears to be what the driver currently uses, but why not
+>> EXPORT_SYMBOL_GPL?
+>
+> $ git grep EXPORT_SYMBOL drivers/gpu/drm/*.c | wc -l
+> 962
+> $ git grep EXPORT_SYMBOL_GPL drivers/gpu/drm/*.c | wc -l
+> 93
 
+It's even more tilted under display/.
 
-> +/**
-> + * drm_dp_lttpr_init - init LTTPR transparency mode according to DP standard
-> + *
-> + * @aux: DisplayPort AUX channel
-> + * @lttpr_count: Number of LTTPRs
-> + *
-> + * Returns 0 on success or a negative error code on failure.
-> + */
-> +int drm_dp_lttpr_init(struct drm_dp_aux *aux, int lttpr_count)
-> +{
-> +	if (!lttpr_count)
-> +		return 0;
-> +
-> +	/*
-> +	 * See DP Standard v2.0 3.6.6.1 about the explicit disabling of
-> +	 * non-transparent mode and the disable->enable non-transparent mode
-> +	 * sequence.
-> +	 */
-> +	drm_dp_lttpr_set_transparent_mode(aux, true);
-> +
-> +	if (lttpr_count > 0 && !drm_dp_lttpr_set_transparent_mode(aux, false))
-> +		return 0;
-> +
-> +	/*
-> +	 * Roll-back to tranparent mode if setting non-tranparent mode failed or
-> +	 * the number of LTTPRs is invalid
-> +	 */
-> +	drm_dp_lttpr_set_transparent_mode(aux, true);
+BR,
+Jani.
 
-This means that if lttpr_count < 0, then there will be two requests to
-set LTTPRs to a transparent mode. Is that expected?
-
-> +
-> +	return -EINVAL;
-> +}
-> +EXPORT_SYMBOL(drm_dp_lttpr_init);
-> +
 
 -- 
-With best wishes
-Dmitry
+Jani Nikula, Intel
