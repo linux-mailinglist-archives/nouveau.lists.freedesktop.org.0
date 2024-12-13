@@ -2,42 +2,83 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id 79FCECBABD4
-	for <lists+nouveau@lfdr.de>; Sat, 13 Dec 2025 13:43:24 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 4695DCBABE9
+	for <lists+nouveau@lfdr.de>; Sat, 13 Dec 2025 13:43:29 +0100 (CET)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id D187B10EB1B;
-	Sat, 13 Dec 2025 12:41:05 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 998B510EA8F;
+	Sat, 13 Dec 2025 12:41:06 +0000 (UTC)
+Authentication-Results: gabe.freedesktop.org;
+	dkim=permerror (0-bit key) header.d=gmail.com header.i=@gmail.com header.b="FM/iQDg7";
+	dkim-atps=neutral
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-X-Greylist: delayed 367 seconds by postgrey-1.36 at gabe;
- Tue, 10 Dec 2024 06:27:13 UTC
-Received: from mail.nfschina.com (unknown [42.101.60.213])
- by gabe.freedesktop.org (Postfix) with SMTP id C078C10E021;
- Tue, 10 Dec 2024 06:27:13 +0000 (UTC)
-Received: from 127.0.0.1 (unknown [40.50.50.41])
- by mail.nfschina.com (MailData Gateway V2.8.8) with ESMTPA id 840C9606A5D50;
- Tue, 10 Dec 2024 14:20:40 +0800 (CST)
-Date: Tue, 10 Dec 2024 14:20:40 +0800 (CST)
-X-MD-Sfrom: zhanxin@nfschina.com
-X-MD-SrcIP: 40.50.50.41
-From: zhanxin <zhanxin@nfschina.com>
-To: kherbst <kherbst@redhat.com>, lyude <lyude@redhat.com>,
- dakr <dakr@redhat.com>, airlied <airlied@gmail.com>,
- simona <simona@ffwll.ch>
-Cc: dri-devel <dri-devel@lists.freedesktop.org>,
- nouveau <nouveau@lists.freedesktop.org>,
- linux-kernel <linux-kernel@vger.kernel.org>
-Message-ID: <1722060220.392.1733811640530@127.0.0.1>
-Subject: [PATCH] drm/nouveau: Fix memory leak in nvbios_iccsense_parse
+Received: from mail-pl1-x636.google.com (mail-pl1-x636.google.com
+ [IPv6:2607:f8b0:4864:20::636])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 428E110E074;
+ Fri, 13 Dec 2024 05:46:44 +0000 (UTC)
+Received: by mail-pl1-x636.google.com with SMTP id
+ d9443c01a7336-2156e078563so10800195ad.2; 
+ Thu, 12 Dec 2024 21:46:44 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=gmail.com; s=20230601; t=1734068804; x=1734673604; darn=lists.freedesktop.org;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=9nDBDHl8OkOEbonP7/O/xeWGAuqOftf+4IMvf+gS1cw=;
+ b=FM/iQDg7KC4a/755IIO7QtW7lGZizb9Ij12tusXglECWpyQ9nvOTMHAcDQwxPnjnYo
+ eTsmAPsuz79GW2gDJB31OVGRJSLIvIdoV//6LhZKavKhZUdkvG49eXuYeH7FM/LeRfjP
+ hpHU4RxyoJvFZIZ5WFJINR8gs5wgEdI874DfumKMva7Hez/g9dQjQvSD0GxM57ZqiRUn
+ Ze68Q8GAR8BO+Otz3EB8MyMegI37Yf180KgHlGvecTr7RT6Z/zQ5ifdva8QEAGqA9rxV
+ 5k8tF13tb13nM2JEThwqXq215k7y81rAhUluLZI9l+xXAdlzqxQuOL4CGYB6RCQ+9rtm
+ R0aw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1734068804; x=1734673604;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=9nDBDHl8OkOEbonP7/O/xeWGAuqOftf+4IMvf+gS1cw=;
+ b=mFWDB/eHGMLYTkaKvVKZ60/txoFkAnA43c4hJyKomRRG88tb4QvFogw4OsBvUIi5Vu
+ QOA8BiD/ML7hvLNsYYv1y76T6dbHHOGIsgr8EpdSQiUciT9fKaT7iu6CdSdosuYtPkw5
+ 7ZsJ9p1VmmQ9jEF20YLao+0dw8dSsHzdBGVWM+PFvLfVH4ZGFOSTwuBPh2FjbEE8/CZH
+ 2lsLwyvnIkJbBT/TAQhitGsdmuooeqm5zWKs2hTprneecYU12Y/AULYcgNn9J+wj7emC
+ uJ8yJfX211t7igSyOVZyJ0JEVpbKBTaILhPtggFQygO3LlvE+qtzr3K7CBAttlu25Dwi
+ bZHg==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCVuNV/C7KDZ61vdMumNzJGhNjpMAlyZS/AhlZd4MRE3HobeUI7E6xaybrgbdXf0oeOuAQfTE9O7Q8o=@lists.freedesktop.org,
+ AJvYcCWS6LZqKveP7bsekch4g5LppcXizEU5XoTm8x26xqOm74sc+ymQcqpR+ZsPSIK/l9G4O/r2a9TBwEw=@lists.freedesktop.org,
+ AJvYcCX1nmu/3KwyscWOAguGfYweWt8GgaEE63J/Mv4yirjKB47QZeYaOYR6633KAxKNpvUJ8FCfecaQFZbl@lists.freedesktop.org,
+ AJvYcCXHM+EdtG+QH1Y0pzz6C3N1W4Ht+sgm3K+k+QTFPLB6MDAhZbO6XMyZQIrMA7ohfrnIHiXdwRg/Vw==@lists.freedesktop.org
+X-Gm-Message-State: AOJu0YyuXR864N1lZGhEEgmYBdzJda9RMNp1aqTsCT+X4sCmUoEV9qJ5
+ mkcfAIkMKDbxUYZyAKXwTTN5LjhLbRkGq+1bDN8+prts/1ZJn/MaLsk0ziHZoGk=
+X-Gm-Gg: ASbGncsKUZK8Aboj2I69p6dCvLNo9vla2jLf07xDz2WOGJ/DMCfLjVFYERktOyE4Vt1
+ 1LBpFoIqYz9PoW40OY3QFSQXU63CBL4fUA0xOL4s9NUczjx8krGa34kIlIGEBi9BSVyBFaPVoih
+ 2BlZo8F85exj9cvo3MyGc4T9ZAqILbfUCdV85UypY+nX5lRCky69tY/cqE76hth3D9RaLKumHfv
+ m0Ct3JNbdWgQGRPvsKjZrRxqhOgspaV4r49ieGReupJvjLjjan/a52yy442Ls55tVTWhxXfL+6R
+ hsT2R6s=
+X-Google-Smtp-Source: AGHT+IHVKByQs8aQw9nFW65MyCdke95tovLrIe/teYLFc9u83Eik6guIs9oKZyvf6Ts5Rmy4R5h3SA==
+X-Received: by 2002:a17:902:ccd2:b0:216:26f1:530b with SMTP id
+ d9443c01a7336-21892a70579mr20915305ad.51.1734068803702; 
+ Thu, 12 Dec 2024 21:46:43 -0800 (PST)
+Received: from localhost.localdomain ([180.159.118.224])
+ by smtp.gmail.com with ESMTPSA id
+ d9443c01a7336-216483dd292sm82564985ad.226.2024.12.12.21.46.38
+ (version=TLS1_3 cipher=TLS_CHACHA20_POLY1305_SHA256 bits=256/256);
+ Thu, 12 Dec 2024 21:46:43 -0800 (PST)
+From: Yafang Shao <laoar.shao@gmail.com>
+To: torvalds@linux-foundation.org,
+	akpm@linux-foundation.org
+Cc: linux-kernel@vger.kernel.org, linux-security-module@vger.kernel.org,
+ x86@kernel.org, linux-snps-arc@lists.infradead.org,
+ linux-wireless@vger.kernel.org, intel-gfx@lists.freedesktop.org,
+ intel-xe@lists.freedesktop.org, nouveau@lists.freedesktop.org,
+ dri-devel@lists.freedesktop.org, ocfs2-devel@lists.linux.dev,
+ Yafang Shao <laoar.shao@gmail.com>
+Subject: [PATCH 0/7] vsprintf: Add %pTN to print Task Name 
+Date: Fri, 13 Dec 2024 13:46:03 +0800
+Message-Id: <20241213054610.55843-1-laoar.shao@gmail.com>
+X-Mailer: git-send-email 2.37.1 (Apple Git-137.1)
 MIME-Version: 1.0
-Content-Type: multipart/mixed; 
- boundary="----=_Part_390_769418950.1733811640517"
-X-Priority: 3
-X-NFS-GUID: PNrdZJdcGdfhQmGbW1mQ
-X-ISRICH: 1
-Content-ID: 53ed85b6-b98c-4938-a21f-5ff90b033fe9
-X-Mail-src: 1291
-X-Mailman-Approved-At: Sat, 13 Dec 2025 12:40:43 +0000
+Content-Transfer-Encoding: 8bit
+X-Mailman-Approved-At: Sat, 13 Dec 2025 12:40:48 +0000
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -49,65 +90,48 @@ List-Post: <mailto:nouveau@lists.freedesktop.org>
 List-Help: <mailto:nouveau-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
  <mailto:nouveau-request@lists.freedesktop.org?subject=subscribe>
-Reply-To: zhanxin@nfschina.com
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-------=_Part_390_769418950.1733811640517
-Content-Type: multipart/alternative; 
-	boundary="----=_Part_389_1713214656.1733811640517"
+Since task->comm is guaranteed to be NUL-terminated, it can be printed
+directly. This patch introduces a new vsnprintf format specifier, %pTN, to
+print a task's name. In this specifier, p represents the task pointer, T
+stands for "Task," and N denotes "Name." With this abstraction, users no
+longer need to manually retrieve the task name for printing purposes.
 
-------=_Part_389_1713214656.1733811640517
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
+In this patchset, all instances of get_task_comm() used for printing the
+task name have been replaced with the new %pTN specifier. The raw uses of
+'xyz->comm' for printouts will be addressed in a subsequent patch.
 
+Suggested-by: Linus Torvalds <torvalds@linux-foundation.org>
+Link: https://lore.kernel.org/bpf/CAHk-=wgqrwFXK-CO8-V4fwUh5ymnUZ=wJnFyufV1dM9rC1t3Lg@mail.gmail.com 
 
-------=_Part_389_1713214656.1733811640517
-Content-Type: text/html; charset=UTF-8
-Content-Transfer-Encoding: 7bit
+Yafang Shao (7):
+  vsprintf: Add %pTN to print task name
+  kernel: Replace get_task_comm() with %pTN
+  arch: Replace get_task_comm() with %pTN
+  net: Replace get_task_comm() with %pTN
+  security: Replace get_task_comm() with %pTN
+  drivers: Repace get_task_comm() with %pTN
+  fs: Use %pTN to print task name
 
+ arch/arc/kernel/unaligned.c                    |  9 ++++-----
+ arch/x86/kernel/vm86_32.c                      |  5 ++---
+ drivers/accel/habanalabs/common/context.c      |  5 ++---
+ .../accel/habanalabs/common/habanalabs_ioctl.c | 15 +++++----------
+ .../drm/i915/display/intel_display_driver.c    | 10 ++++------
+ drivers/gpu/drm/nouveau/nouveau_chan.c         |  4 +---
+ drivers/gpu/drm/nouveau/nouveau_drm.c          |  7 +++----
+ drivers/tty/tty_io.c                           |  5 ++---
+ fs/ocfs2/cluster/netdebug.c                    |  5 ++---
+ kernel/capability.c                            | 12 ++++--------
+ kernel/futex/waitwake.c                        |  5 ++---
+ lib/vsprintf.c                                 | 18 ++++++++++++++++++
+ net/wireless/wext-core.c                       |  6 ++----
+ scripts/checkpatch.pl                          |  6 ++++--
+ security/yama/yama_lsm.c                       |  6 ++----
+ 15 files changed, 57 insertions(+), 61 deletions(-)
 
-------=_Part_389_1713214656.1733811640517--
-
-------=_Part_390_769418950.1733811640517
-Content-Type: application/octet-stream; 
-	name=0001-drm-nouveau-Fix-memory-leak-in-nvbios_iccsense_parse.patch
-Content-Transfer-Encoding: 7bit
-Content-Disposition: attachment; 
-	filename=0001-drm-nouveau-Fix-memory-leak-in-nvbios_iccsense_parse.patch
-Content-ID: <d136119c-4913-48be-9d47-02fc4529b2e7>
-Content-uid: 1733811638148
-
-From 895d436242c94c56a1d696c713016cc1504b9b83 Mon Sep 17 00:00:00 2001
-From: Zhanxin Qi <zhanxin0@outlook.com>
-Date: Tue, 10 Dec 2024 13:12:04 +0800
-Subject: [PATCH] drm/nouveau: Fix memory leak in nvbios_iccsense_parse
-
-The nvbios_iccsense_parse function allocates memory for sensor data
-but fails to free it when the function exits, leading to a memory
-leak. Add proper cleanup to free the allocated memory.
-
-Signed-off-by: Zhanxin Qi <zhanxin0@outlook.com>
----
- drivers/gpu/drm/nouveau/nvkm/subdev/iccsense/base.c | 3 +++
- 1 file changed, 3 insertions(+)
-
-diff --git a/drivers/gpu/drm/nouveau/nvkm/subdev/iccsense/base.c b/drivers/gpu/drm/nouveau/nvkm/subdev/iccsense/base.c
-index 8f0ccd3664eb..502608d575f7 100644
---- a/drivers/gpu/drm/nouveau/nvkm/subdev/iccsense/base.c
-+++ b/drivers/gpu/drm/nouveau/nvkm/subdev/iccsense/base.c
-@@ -291,6 +291,9 @@ nvkm_iccsense_oneinit(struct nvkm_subdev *subdev)
- 			list_add_tail(&rail->head, &iccsense->rails);
- 		}
- 	}
-+
-+	kfree(stbl.rail);
-+
- 	return 0;
- }
- 
 -- 
-2.30.2
+2.43.5
 
-
-------=_Part_390_769418950.1733811640517--
