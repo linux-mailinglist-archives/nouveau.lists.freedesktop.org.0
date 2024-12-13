@@ -1,60 +1,78 @@
 Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
-Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
-	by mail.lfdr.de (Postfix) with ESMTPS id 495259F0669
-	for <lists+nouveau@lfdr.de>; Fri, 13 Dec 2024 09:35:16 +0100 (CET)
+Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
+	by mail.lfdr.de (Postfix) with ESMTPS id C71859F0D5E
+	for <lists+nouveau@lfdr.de>; Fri, 13 Dec 2024 14:36:05 +0100 (CET)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 2EA0110EF58;
-	Fri, 13 Dec 2024 08:35:13 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 7E56310E323;
+	Fri, 13 Dec 2024 13:36:03 +0000 (UTC)
 Authentication-Results: gabe.freedesktop.org;
-	dkim=pass (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="jT2prM+g";
+	dkim=pass (4096-bit key; unprotected) header.d=alien8.de header.i=@alien8.de header.b="TCdKp5dG";
 	dkim-atps=neutral
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from dfw.source.kernel.org (dfw.source.kernel.org [139.178.84.217])
- by gabe.freedesktop.org (Postfix) with ESMTPS id EA1FF10EF51;
- Fri, 13 Dec 2024 08:35:10 +0000 (UTC)
-Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by dfw.source.kernel.org (Postfix) with ESMTP id E2DD85C5F33;
- Fri, 13 Dec 2024 08:34:27 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 048BCC4CED0;
- Fri, 13 Dec 2024 08:35:05 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1734078909;
- bh=QP1IcOeCvYcZ0atShD+bUuKM45SXUGPe32/BoheXswE=;
- h=From:To:Cc:Subject:References:Date:In-Reply-To:From;
- b=jT2prM+gHqgOY35eQxxtPZwHA84An0lqy+jJ4VjIx/MgK1xmiD1DupxMjf1BS03DE
- jZKWiIDCMt1Dut/x6m5L9fRJeEudaFG0io8G3ncIqNeuSovHHU6r1ld8RMRlNvYDpa
- xrevaMDxiqOpjSDNbOBuOR7Vzdc+lUvOs1EjKeGIVmo5CDYD8xMYam7fQYbJQZ4t5y
- 65QYPQFntmM6u8+bZMdZspFgP3N8nup2XcikiW16KkJNw/jEEdh3qWOP86QD6gwI1C
- TDF9UTrcZ/Kf8aeh/E/rxyUESdoujS5qHrLHpERCndLqc6ZpUushFrg5pfoKhQ2Mp/
- erc2nOq42tNsg==
-From: Kalle Valo <kvalo@kernel.org>
-To: Petr Mladek <pmladek@suse.com>
-Cc: Yafang Shao <laoar.shao@gmail.com>,  torvalds@linux-foundation.org,
- akpm@linux-foundation.org,  linux-kernel@vger.kernel.org,
- linux-security-module@vger.kernel.org,  x86@kernel.org,
- linux-snps-arc@lists.infradead.org,  linux-wireless@vger.kernel.org,
- intel-gfx@lists.freedesktop.org,  intel-xe@lists.freedesktop.org,
- nouveau@lists.freedesktop.org,  dri-devel@lists.freedesktop.org,
- ocfs2-devel@lists.linux.dev,  Steven Rostedt <rostedt@goodmis.org>,  Andy
- Shevchenko <andriy.shevchenko@linux.intel.com>,  Rasmus Villemoes
- <linux@rasmusvillemoes.dk>,  Sergey Senozhatsky
- <senozhatsky@chromium.org>,  Andy Whitcroft <apw@canonical.com>,  Joe
- Perches <joe@perches.com>,  Dwaipayan Ray <dwaipayanray1@gmail.com>,
+X-Greylist: delayed 492 seconds by postgrey-1.36 at gabe;
+ Fri, 13 Dec 2024 13:36:02 UTC
+Received: from mail.alien8.de (mail.alien8.de [65.109.113.108])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 3DE4A10E323;
+ Fri, 13 Dec 2024 13:36:02 +0000 (UTC)
+Received: from localhost (localhost.localdomain [127.0.0.1])
+ by mail.alien8.de (SuperMail on ZX Spectrum 128k) with ESMTP id B0D4540E0169; 
+ Fri, 13 Dec 2024 13:27:47 +0000 (UTC)
+X-Virus-Scanned: Debian amavisd-new at mail.alien8.de
+Authentication-Results: mail.alien8.de (amavisd-new); dkim=pass (4096-bit key)
+ header.d=alien8.de
+Received: from mail.alien8.de ([127.0.0.1])
+ by localhost (mail.alien8.de [127.0.0.1]) (amavisd-new, port 10026)
+ with ESMTP id sGcE60KnN3ec; Fri, 13 Dec 2024 13:27:44 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=alien8.de; s=alien8;
+ t=1734096462; bh=fx6NJswxnApctvUDdLiVKEkcBeLJJ6f/OgTP8Pi/0ME=;
+ h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
+ b=TCdKp5dGfLFekVy98Z5cRjbFBjMfVvYyRYfkhUYQV27uBBXCYYZh9p+mOk9Fgf+Os
+ pQnkema3VHjYt9PUh0meOBj5NrPk/zKO+QDenixpK9n+dz4n1W1+s+KDo+a/POiJM5
+ Jf6qn/XogPW/5jtU4WaIDhZKUdouklEFEDqlqUxQY/zqmsi+ilibsowZBZAyXy4Y1x
+ TpfygtsV0EIon2P3uQJgohoT4cvoEShfdG4TimQLth0mosUPdNeCeUnCPY7vJpG8jp
+ FMDw44tc9UZ8zLBh5SjSjW+tYFB4s0xcTFhxdZaxrRiBX6ofb+4X6HzSOYzqwyuH19
+ 3Gkh2PB0uUC+JXk2zhzsze0kIwSidQFUGAMJuPIsUXASeoSmC8/pKQYSSGpe+44W7X
+ wfaRwlYuRha6hXFbAGc3543MSmoNrbjsNXBdfC4dqq55iCvp1sGLVzoHBrZ6ElvUth
+ Xr+52lDoTAkJQ9VOWavMmRSsyh9669yeE7txdySAT/BnY2u4V0QitRMiF/v+BjKPP3
+ KRaaFCcHHir2sRjQSC0fOS2DqMpzcB0re3ld0RlRsARj0Xcy3Re1L5ZPKAiOs62UDt
+ Jv74MNH+taDciFgIldizxt2pc4BNlWyyNgb6b/mcvo5h8L2N4EtjOHDklrGej/mcSh
+ CG5OdhA4dM08z1FXqQoO86yE=
+Received: from zn.tnic (p200300ea971f9372329c23fffea6a903.dip0.t-ipconnect.de
+ [IPv6:2003:ea:971f:9372:329c:23ff:fea6:a903])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange ECDHE (P-256) server-signature ECDSA (P-256) server-digest
+ SHA256) (No client certificate requested)
+ by mail.alien8.de (SuperMail on ZX Spectrum 128k) with ESMTPSA id 2E54840E015F;
+ Fri, 13 Dec 2024 13:27:19 +0000 (UTC)
+Date: Fri, 13 Dec 2024 14:27:09 +0100
+From: Borislav Petkov <bp@alien8.de>
+To: Kalle Valo <kvalo@kernel.org>
+Cc: Petr Mladek <pmladek@suse.com>, Yafang Shao <laoar.shao@gmail.com>,
+ torvalds@linux-foundation.org, akpm@linux-foundation.org,
+ linux-kernel@vger.kernel.org, linux-security-module@vger.kernel.org,
+ x86@kernel.org, linux-snps-arc@lists.infradead.org,
+ linux-wireless@vger.kernel.org, intel-gfx@lists.freedesktop.org,
+ intel-xe@lists.freedesktop.org, nouveau@lists.freedesktop.org,
+ dri-devel@lists.freedesktop.org, ocfs2-devel@lists.linux.dev,
+ Steven Rostedt <rostedt@goodmis.org>,
+ Andy Shevchenko <andriy.shevchenko@linux.intel.com>,
+ Rasmus Villemoes <linux@rasmusvillemoes.dk>,
+ Sergey Senozhatsky <senozhatsky@chromium.org>,
+ Andy Whitcroft <apw@canonical.com>, Joe Perches <joe@perches.com>,
+ Dwaipayan Ray <dwaipayanray1@gmail.com>,
  Lukas Bulwahn <lukas.bulwahn@gmail.com>
 Subject: Re: [PATCH 1/7] vsprintf: Add %pTN to print task name
+Message-ID: <20241213132709.GAZ1w2LW4LgHi-6XfZ@fat_crate.local>
 References: <20241213054610.55843-1-laoar.shao@gmail.com>
  <20241213054610.55843-2-laoar.shao@gmail.com>
- <Z1vq2-V7vB5KhBR9@pathway.suse.cz>
-Date: Fri, 13 Dec 2024 10:35:03 +0200
-In-Reply-To: <Z1vq2-V7vB5KhBR9@pathway.suse.cz> (Petr Mladek's message of
- "Fri, 13 Dec 2024 09:05:47 +0100")
-Message-ID: <87r06crnew.fsf@kernel.org>
-User-Agent: Gnus/5.13 (Gnus v5.13) Emacs/28.2 (gnu/linux)
+ <Z1vq2-V7vB5KhBR9@pathway.suse.cz> <87r06crnew.fsf@kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain
+Content-Type: text/plain; charset=utf-8
+Content-Disposition: inline
+In-Reply-To: <87r06crnew.fsf@kernel.org>
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -69,35 +87,14 @@ List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-Petr Mladek <pmladek@suse.com> writes:
+On Fri, Dec 13, 2024 at 10:35:03AM +0200, Kalle Valo wrote:
+> I agree, it makes the code harder to read for someone who is not
+> familiar with all the %p magic we have (like me).
 
-> On Fri 2024-12-13 13:46:04, Yafang Shao wrote:
->> Since the task->comm is guaranteed to be NUL-ternimated, we can print it
->> directly. Add a new vsnprintf format specifier "%pTN" to print task comm,
->> where 'p' represents the task Pointer, 'T' stands for Task, and 'N' denots
->> Name. With this abstraction, the user no longer needs to care about
->> retrieving task name.
->
-> What is the advantage, please?
->
-> Honestly, I believe that the meaning of
->
-> 	printk("%s\n", task->comm);
->
-> is much more clear than using a cryptic %pXYZ modifier:
->
-> 	printk("%pTN\n", task);
->
->
-> The %pXYZ modifiers makes sense only when the formatting of the printed
-> information needs some processing. But this is a plain string.
-> IMHO, it is not worth it. In fact, I believe that it is a
-> counter productive.
-
-I agree, it makes the code harder to read for someone who is not
-familiar with all the %p magic we have (like me).
++1
 
 -- 
-https://patchwork.kernel.org/project/linux-wireless/list/
+Regards/Gruss,
+    Boris.
 
-https://wireless.wiki.kernel.org/en/developers/documentation/submittingpatches
+https://people.kernel.org/tglx/notes-about-netiquette
