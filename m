@@ -2,87 +2,52 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
-	by mail.lfdr.de (Postfix) with ESMTPS id 49A0D9F2D36
-	for <lists+nouveau@lfdr.de>; Mon, 16 Dec 2024 10:45:33 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id A98D09F2FB2
+	for <lists+nouveau@lfdr.de>; Mon, 16 Dec 2024 12:45:25 +0100 (CET)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id AF2D710E56A;
-	Mon, 16 Dec 2024 09:45:31 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 114A010E5D0;
+	Mon, 16 Dec 2024 11:45:24 +0000 (UTC)
 Authentication-Results: gabe.freedesktop.org;
-	dkim=pass (1024-bit key; unprotected) header.d=redhat.com header.i=@redhat.com header.b="QM3Vol3G";
+	dkim=pass (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="HBtpCDPi";
 	dkim-atps=neutral
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from us-smtp-delivery-124.mimecast.com
- (us-smtp-delivery-124.mimecast.com [170.10.133.124])
- by gabe.freedesktop.org (Postfix) with ESMTPS id D08E310E56C
- for <nouveau@lists.freedesktop.org>; Mon, 16 Dec 2024 09:45:30 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1734342329;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- in-reply-to:in-reply-to:references:references;
- bh=mUEqVhqEm411y2btyANp0nQYhhxxqt+IdHIRX6Fy7yA=;
- b=QM3Vol3GXTJ7BNjcP+KwoJhydUdIpmJ2UB6dA1/xZBrnPxDEguuG7cx3+AMd6KhXh0C9Jm
- 3XDL2elXlu4qSKfGBib8csQXg5yzOsmjzkytQecgpg4CKQwWg2goK/yDKbTYq1snsx1Xlt
- sHkrZ6sR6bFsbNIbPYRUUtsrPHr5w7o=
-Received: from mail-ej1-f69.google.com (mail-ej1-f69.google.com
- [209.85.218.69]) by relay.mimecast.com with ESMTP with STARTTLS
- (version=TLSv1.3, cipher=TLS_AES_256_GCM_SHA384) id
- us-mta-316-SURTyEPNOvmcfB52QpPpzw-1; Mon, 16 Dec 2024 04:45:28 -0500
-X-MC-Unique: SURTyEPNOvmcfB52QpPpzw-1
-X-Mimecast-MFC-AGG-ID: SURTyEPNOvmcfB52QpPpzw
-Received: by mail-ej1-f69.google.com with SMTP id
- a640c23a62f3a-aa6a6dcf9a3so105604266b.0
- for <nouveau@lists.freedesktop.org>; Mon, 16 Dec 2024 01:45:28 -0800 (PST)
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1734342326; x=1734947126;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=mUEqVhqEm411y2btyANp0nQYhhxxqt+IdHIRX6Fy7yA=;
- b=C1pMr/xBKF4dA5Vdp4z82LjIycsg+3OvRhLji5X6xXJWGzkLnvNajtODQwDBdcxxJr
- YhkshxQp0K2Bae+S6W+mjwiSwn7zA7sUKibYJMFrTS7l8PQgfRuTO28cpVabAWGZrhH6
- j6HNZ9fPR741wmDP6e2T7NCwFir2BM2Lq3ACeYrjnjQztknFmBxQBiRtK9+HBl6/+I9/
- xEKXL3nrmfQ8CT2yV+vEvPn1R1rSNZcqxyFUfIKyIfksI3M5QpMkDuWkhbi1+S2AS2x5
- yDzMUlNJA47IDMkDG5hv/hOYL2jHDJDB54MpV/jq4Gwa7NgfNlBJ2sS7ulwXYm810gPl
- aI7A==
-X-Forwarded-Encrypted: i=1;
- AJvYcCX3UDESw25Q9WKpyWtAgrXglS8wZ0B/LVspo3xZKIz65W9SFN+wqINTO2SWOsasIm4/FisHcwXW@lists.freedesktop.org
-X-Gm-Message-State: AOJu0YxME9rWphblZKgk3L23XQ4tWiNj+9eoYx7Rn1v+DepFMnZtV1V0
- mkl6zZ65wFK58yAnSR6IKGU6lM25qZAClz7rK6q6E+ai5bRkwAy1b0qvgjHRXSRIknhdpfx+FX2
- 7SnMJrFLQU1VU/rbseuMRUmFAnihXUJSmHOk0YKoCLyL298GbNlnsJjPZu8I5xmVPyWqAfwQ=
-X-Gm-Gg: ASbGncs1LEEHIpp1Z2V1jP/fWsO4ctzws0FCpp6vwuMjdqSkTDMC7lGddsqdqn+ImUJ
- iKqoY9CedzpA7vrmwycQrTD0PKCzwBzWFXYe45wqAEgwGVCLy6f4BVwWtI6TaPbJPMdoc3tWhF4
- y4yEwfdrs5wJmf5iUDJBdInNnHc4ayq+5tD4ON5QFNi4jkFm3X/oaUbTnTuy/Yrh5afe4VKrGs5
- AWqTLwFXcI7ec4fCWscztnhWveqBwjkN6gKepQ+SJ53z6Sqgfzd
-X-Received: by 2002:a17:906:3289:b0:aa6:7470:8efe with SMTP id
- a640c23a62f3a-aab77907930mr922253266b.13.1734342326548; 
- Mon, 16 Dec 2024 01:45:26 -0800 (PST)
-X-Google-Smtp-Source: AGHT+IHZ1z2lzdh2iwu9u26o1qjT8nMT8Dfj1jXT3HMa99NlV9SwaueXBmTZhsa9d+oTc6bnLe3cWQ==
-X-Received: by 2002:a17:906:3289:b0:aa6:7470:8efe with SMTP id
- a640c23a62f3a-aab77907930mr922251066b.13.1734342326159; 
- Mon, 16 Dec 2024 01:45:26 -0800 (PST)
-Received: from cassiopeiae ([2a00:79c0:644:6900:642:1aff:fe31:a19f])
- by smtp.gmail.com with ESMTPSA id
- 4fb4d7f45d1cf-5d652f35365sm3093068a12.80.2024.12.16.01.45.23
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 16 Dec 2024 01:45:25 -0800 (PST)
-Date: Mon, 16 Dec 2024 10:45:22 +0100
-From: Danilo Krummrich <dakr@redhat.com>
-To: Zhanxin Qi <zhanxin@nfschina.com>
-Cc: kherbst@redhat.com, lyude@redhat.com, airlied@gmail.com,
- simona@ffwll.ch, dri-devel@lists.freedesktop.org,
- nouveau@lists.freedesktop.org, linux-kernel@vger.kernel.org
-Subject: Re: [PATCH] drm/nouveau: Fix memory leak in nvbios_iccsense_parse
-Message-ID: <Z1_2sugsla44LgIz@cassiopeiae>
-References: <20241216015246.141006-1-zhanxin@nfschina.com>
+Received: from dfw.source.kernel.org (dfw.source.kernel.org [139.178.84.217])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 24A8210E5D0;
+ Mon, 16 Dec 2024 11:45:23 +0000 (UTC)
+Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
+ by dfw.source.kernel.org (Postfix) with ESMTP id 847675C5C19;
+ Mon, 16 Dec 2024 11:44:39 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id D6361C4CED0;
+ Mon, 16 Dec 2024 11:45:18 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+ s=k20201202; t=1734349521;
+ bh=WTOoaCm/YBEOFwnlmetmHLAw1bQPebroxLWPCI/KuzE=;
+ h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
+ b=HBtpCDPiiLGdhIMrs2nzQ0gaX8GQiSsbg9IRMMdwgeEWTJCnNRfPkkmDlopn93+fP
+ u5oSbwSqUdfqmE7hS5WiQX1dzbzp45l3N5c4e1ehPquM9rmKBbnMys3d+m7/y4n1H5
+ bQ8ad1/0Pm75iGknuobmgc+RpZi27qyyPKi2Hgc6wOPPiSkZnW2oVouZWDszqNicHG
+ XCZdZTb6GR2y6wanoeCcIoaaSmBmm7B3dgC5u0IThQejxFZQO1OcPn1+wAVQD92V/c
+ UHnZVrhmspfqU2KxRdnpsLGXuFBB6DvgjYcHmDphhnmKJHYNmqUFcotBPusfs+7u2B
+ vqn1QQEUnY/vg==
+Date: Mon, 16 Dec 2024 12:45:15 +0100
+From: Danilo Krummrich <dakr@kernel.org>
+To: Dmitry Baryshkov <dmitry.baryshkov@linaro.org>
+Cc: Maarten Lankhorst <maarten.lankhorst@linux.intel.com>,
+ Maxime Ripard <mripard@kernel.org>,
+ Thomas Zimmermann <tzimmermann@suse.de>,
+ David Airlie <airlied@gmail.com>, Simona Vetter <simona@ffwll.ch>,
+ Karol Herbst <kherbst@redhat.com>, Lyude Paul <lyude@redhat.com>,
+ dri-devel@lists.freedesktop.org, linux-kernel@vger.kernel.org,
+ nouveau@lists.freedesktop.org,
+ Laurent Pinchart <laurent.pinchart@ideasonboard.com>
+Subject: Re: [PATCH v2 0/2] drm/nouveau: remove drm_encoder_slave interface
+Message-ID: <Z2ASy3TQ4suupdvd@cassiopeiae>
+References: <20241215-nouveau-encoder-slave-v2-0-ef7a0e687242@linaro.org>
 MIME-Version: 1.0
-In-Reply-To: <20241216015246.141006-1-zhanxin@nfschina.com>
-X-Mimecast-Spam-Score: 0
-X-Mimecast-MFC-PROC-ID: QEuU61czsg78UmSNkNfrSa3L2tEXAJStF3LUj8nXC1c_1734342327
-X-Mimecast-Originator: redhat.com
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
+In-Reply-To: <20241215-nouveau-encoder-slave-v2-0-ef7a0e687242@linaro.org>
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -97,45 +62,69 @@ List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-Thanks for the patch, some notes below.
+On Sun, Dec 15, 2024 at 12:19:22PM +0200, Dmitry Baryshkov wrote:
+> The nouveau driver is the only user of the drm_encoder_slave interface.
+> Demote it from KMS helpers module to the nouveau driver itself, moving
+> corresponding I2C encoders to be handled by nouveau driver too.
 
-On Mon, Dec 16, 2024 at 09:52:46AM +0800, Zhanxin Qi wrote:
-> The nvbios_iccsense_parse function allocates memory for sensor data
-> but fails to free it when the function exits, leading to a memory
-> leak. Add proper cleanup to free the allocated memory.
+I understand nouveau is the only driver using this interface (and the
+corresponding i2c encoders).
+
+However, I'm not quite seeing the advantage of folding the interface (including
+the two i2c drivers) into nouveau. I don't think this legacy interface does harm
+the subsystem in any way / does prevent the subsystem from moving forward.
+
+Can't we just keep it as it is?
+
 > 
-> Signed-off-by: Zhanxin Qi <zhanxin@nfschina.com>
+> Ideally those two drivers should be converted to the drm_bridge
+> interface, but it's unclear if it's worth spending time on that.
 
-Please also add a "Fixes:" tag and "Cc: stable@vger.kernel.org" for this.
+Probably not.
 
+> 
+> Signed-off-by: Dmitry Baryshkov <dmitry.baryshkov@linaro.org>
 > ---
->  drivers/gpu/drm/nouveau/nvkm/subdev/iccsense/base.c | 3 +++
->  1 file changed, 3 insertions(+)
+> Changes in v2:
+> - Renamed symbols in defconfig (Laurent)
+> - Added missing Kbuild file (Laurent, LKP)
+> - Renamed guarding defines in include files.
+> - Dropped mentions of two removed functions.
+> - Link to v1: https://lore.kernel.org/r/20241214-nouveau-encoder-slave-v1-0-beda767472e3@linaro.org
 > 
-> diff --git a/drivers/gpu/drm/nouveau/nvkm/subdev/iccsense/base.c b/drivers/gpu/drm/nouveau/nvkm/subdev/iccsense/base.c
-> index 8f0ccd3664eb..502608d575f7 100644
-> --- a/drivers/gpu/drm/nouveau/nvkm/subdev/iccsense/base.c
-> +++ b/drivers/gpu/drm/nouveau/nvkm/subdev/iccsense/base.c
-> @@ -291,6 +291,9 @@ nvkm_iccsense_oneinit(struct nvkm_subdev *subdev)
->  			list_add_tail(&rail->head, &iccsense->rails);
->  		}
->  	}
-> +
-> +	kfree(stbl.rail);
-
-I think it's a bit subtile why this is needed here; better add a new inline
-function (nvbios_iccsense_cleanup()) to include/nvkm/subdev/bios/iccsense.h that
-frees the memory and call this one instead.
-
-While at it, you may also want to send a separate patch, adding a brief comment
-to nvbios_iccsense_parse() which notes, that after a successful call to
-nvbios_iccsense_parse() it must be cleaned up with nvbios_iccsense_cleanup().
-
-> +
->  	return 0;
->  }
->  
+> ---
+> Dmitry Baryshkov (2):
+>       drm/nouveau: incorporate I2C TV encoder drivers
+>       drm/nouveau: vendor in drm_encoder_slave API
+> 
+>  arch/arm/configs/multi_v7_defconfig                |   4 +-
+>  arch/parisc/configs/generic-32bit_defconfig        |   4 +-
+>  arch/parisc/configs/generic-64bit_defconfig        |   4 +-
+>  drivers/gpu/drm/Makefile                           |   1 -
+>  drivers/gpu/drm/i2c/Kconfig                        |  18 ----
+>  drivers/gpu/drm/i2c/Makefile                       |   6 --
+>  drivers/gpu/drm/nouveau/Kconfig                    |  20 ++++
+>  drivers/gpu/drm/nouveau/dispnv04/Kbuild            |   3 +
+>  drivers/gpu/drm/nouveau/dispnv04/dfp.c             |  12 +--
+>  drivers/gpu/drm/nouveau/dispnv04/i2c/Kbuild        |   5 +
+>  .../drm/{ => nouveau/dispnv04}/i2c/ch7006_drv.c    |  30 +++---
+>  .../drm/{ => nouveau/dispnv04}/i2c/ch7006_mode.c   |   8 +-
+>  .../drm/{ => nouveau/dispnv04}/i2c/ch7006_priv.h   |  11 ++-
+>  .../drm/{ => nouveau/dispnv04}/i2c/sil164_drv.c    |  33 ++++---
+>  .../dispnv04/nouveau_i2c_encoder.c}                |  85 +++++-----------
+>  drivers/gpu/drm/nouveau/dispnv04/tvnv04.c          |  20 ++--
+>  drivers/gpu/drm/nouveau/dispnv04/tvnv17.c          |   4 +-
+>  .../gpu/drm/nouveau/include}/i2c/ch7006.h          |   4 +-
+>  .../gpu/drm/nouveau/include/i2c/encoder_i2c.h      | 109 ++++++++-------------
+>  .../gpu/drm/nouveau/include}/i2c/sil164.h          |   4 +-
+>  drivers/gpu/drm/nouveau/nouveau_connector.c        |   6 +-
+>  drivers/gpu/drm/nouveau/nouveau_encoder.h          |  13 +--
+>  22 files changed, 172 insertions(+), 232 deletions(-)
+> ---
+> base-commit: 4176cf5c5651c33769de83bb61b0287f4ec7719f
+> change-id: 20241214-nouveau-encoder-slave-a6dd422fa4a9
+> 
+> Best regards,
 > -- 
-> 2.30.2
+> Dmitry Baryshkov <dmitry.baryshkov@linaro.org>
 > 
-
