@@ -2,57 +2,53 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
-	by mail.lfdr.de (Postfix) with ESMTPS id 90C0B9F3185
-	for <lists+nouveau@lfdr.de>; Mon, 16 Dec 2024 14:31:08 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 190DD9F31C9
+	for <lists+nouveau@lfdr.de>; Mon, 16 Dec 2024 14:43:23 +0100 (CET)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 3075C10E679;
-	Mon, 16 Dec 2024 13:31:04 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 4641810E68A;
+	Mon, 16 Dec 2024 13:43:21 +0000 (UTC)
 Authentication-Results: gabe.freedesktop.org;
-	dkim=pass (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="d3yjP0Cl";
+	dkim=pass (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="Hb1upfRo";
 	dkim-atps=neutral
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from nyc.source.kernel.org (nyc.source.kernel.org [147.75.193.91])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 51DE210E12D;
- Mon, 16 Dec 2024 13:31:02 +0000 (UTC)
+Received: from dfw.source.kernel.org (dfw.source.kernel.org [139.178.84.217])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 3CDAF10E687;
+ Mon, 16 Dec 2024 13:43:20 +0000 (UTC)
 Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by nyc.source.kernel.org (Postfix) with ESMTP id B1A65A40F38;
- Mon, 16 Dec 2024 13:29:10 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id AF9ECC4CEDE;
- Mon, 16 Dec 2024 13:30:58 +0000 (UTC)
+ by dfw.source.kernel.org (Postfix) with ESMTP id 1A7845C4299;
+ Mon, 16 Dec 2024 13:42:37 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 88EC4C4CED0;
+ Mon, 16 Dec 2024 13:43:16 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1734355861;
- bh=hBw7RRtzB4nbDxsid/Mm8Wl2admJ4GL8pyzglKXg2xU=;
+ s=k20201202; t=1734356599;
+ bh=e2opvldajuZelV/o6BcZbkHj/D8nGe5IIPLsT48a3kA=;
  h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
- b=d3yjP0Cl53AVXVcQEDyPQI6GJR3n6ckCK7SopJur72blRDZiPwibK8Mm+K8aE/1XZ
- ZPdCV+uwbu1CY3hfAZzzSkdgAXxrORNR4GziMlpis/R1vgcJ19OiFdUT7cc8nDQ8ah
- H5n19MZUmjtt1nTAxf77hk24/zu+Sp1qN18qnvpPk9ad+VZTTs1+e0A2T1NQC1JB4f
- 2DhJR87A3rEhWUcQkqTxOZI/hkGxAETkJ8TAcp3L73tbiy5MI/pms9F+DN20vnXFX8
- c/x1BqYASNjNHM+GeQinYAP8SHTnUT11d5bodTsJgifMCSZRY6dUTUXcWknwXwnpWM
- DTG/GK1cvwHvg==
-Date: Mon, 16 Dec 2024 14:30:55 +0100
+ b=Hb1upfRoPQAyrn/M5Mff3OXQCfmQFPW+gJolS8uBi76DkLLsxPQ1BnLMzDKyG5YJH
+ k6ynsWFgSIc4pahXCvIZcz6SzWKLqhzBE2+57EzXrCsNjkSvz4WVo8dKs5l+8Fo2lb
+ hkO+Jq9B69NWbnUs3spA625Wz54Cp7El1Fimapvu0t/bBIUUxBlqUqr2/cF7zvheN3
+ NR+pNTJ01NC6O3DDEOag6Hm+fJImFM/5RAee0F77oiuxdSb50TpQdBVU6aM1NEIiRH
+ SQXnNFtNE/MmioHDJinbITT+hXEeX0+1p3ZjXLi6DRiAzi9LbIFrZuyQmPOxTzRSnj
+ J25rvpJ0PWusA==
+Date: Mon, 16 Dec 2024 14:43:13 +0100
 From: Danilo Krummrich <dakr@kernel.org>
 To: Dmitry Baryshkov <dmitry.baryshkov@linaro.org>
-Cc: Laurent Pinchart <laurent.pinchart@ideasonboard.com>,
- Maarten Lankhorst <maarten.lankhorst@linux.intel.com>,
+Cc: Maarten Lankhorst <maarten.lankhorst@linux.intel.com>,
  Maxime Ripard <mripard@kernel.org>,
  Thomas Zimmermann <tzimmermann@suse.de>,
  David Airlie <airlied@gmail.com>, Simona Vetter <simona@ffwll.ch>,
  Karol Herbst <kherbst@redhat.com>, Lyude Paul <lyude@redhat.com>,
  dri-devel@lists.freedesktop.org, linux-kernel@vger.kernel.org,
- nouveau@lists.freedesktop.org
-Subject: Re: [PATCH v2 0/2] drm/nouveau: remove drm_encoder_slave interface
-Message-ID: <Z2Arj_cLW-aY5cnD@cassiopeiae>
+ nouveau@lists.freedesktop.org,
+ Laurent Pinchart <laurent.pinchart@ideasonboard.com>
+Subject: Re: [PATCH v2 1/2] drm/nouveau: incorporate I2C TV encoder drivers
+Message-ID: <Z2AucVR_QAWQp27S@cassiopeiae>
 References: <20241215-nouveau-encoder-slave-v2-0-ef7a0e687242@linaro.org>
- <Z2ASy3TQ4suupdvd@cassiopeiae>
- <fw7i3kusogrrsslb5sjdid27uqnwey5qa5yhyrfa677n4iqqhq@tfh5s6bmqgna>
- <20241216121651.GP32204@pendragon.ideasonboard.com>
- <Z2AgFHV2BaaZYGTx@cassiopeiae>
- <2p2rx6zmuph4bdwjork5aqp5n3xkho7cohapvgfijka64vbpop@nse4i55pkyy7>
+ <20241215-nouveau-encoder-slave-v2-1-ef7a0e687242@linaro.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
-In-Reply-To: <2p2rx6zmuph4bdwjork5aqp5n3xkho7cohapvgfijka64vbpop@nse4i55pkyy7>
+In-Reply-To: <20241215-nouveau-encoder-slave-v2-1-ef7a0e687242@linaro.org>
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -67,125 +63,302 @@ List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-On Mon, Dec 16, 2024 at 02:58:59PM +0200, Dmitry Baryshkov wrote:
-> On Mon, Dec 16, 2024 at 01:41:56PM +0100, Danilo Krummrich wrote:
-> > On Mon, Dec 16, 2024 at 02:16:51PM +0200, Laurent Pinchart wrote:
-> > > On Mon, Dec 16, 2024 at 02:11:41PM +0200, Dmitry Baryshkov wrote:
-> > > > On Mon, Dec 16, 2024 at 12:45:15PM +0100, Danilo Krummrich wrote:
-> > > > > On Sun, Dec 15, 2024 at 12:19:22PM +0200, Dmitry Baryshkov wrote:
-> > > > > > The nouveau driver is the only user of the drm_encoder_slave interface.
-> > > > > > Demote it from KMS helpers module to the nouveau driver itself, moving
-> > > > > > corresponding I2C encoders to be handled by nouveau driver too.
-> > > > > 
-> > > > > I understand nouveau is the only driver using this interface (and the
-> > > > > corresponding i2c encoders).
-> > > > > 
-> > > > > However, I'm not quite seeing the advantage of folding the interface (including
-> > > > > the two i2c drivers) into nouveau. I don't think this legacy interface does harm
-> > > > > the subsystem in any way / does prevent the subsystem from moving forward.
-> > > > > 
-> > > > > Can't we just keep it as it is?
-> > > > 
-> > > > Well, drm_encoder_slave is a part of the DRM KMS helpers module, so it
-> > > > take (a little bit) of space on every system. The nouveau situation
-> > > > isn't unique, other drivers (i915, ast) also incorporate the code for
-> > > > I2C backends. For the further discussion see the thread starting from
-> > > > Laurent's email ([1]).
-> > > > 
-> > > > [1] https://lore.kernel.org/all/20241117205426.GE12409@pendragon.ideasonboard.com/
-> > 
-> > The drm_encoder_slave code it's rather small, but I guess this can be used as
-> > argument for both, keeping it where it is and moving it.
-> > 
-> > If you want to move it to nouveau, I'm not going to object. But please fold the
-> > helper code, such that we aren't left with unused functions and unnecessary
-> > function pointer indirections through struct drm_encoder_slave_funcs.
+On Sun, Dec 15, 2024 at 12:19:23PM +0200, Dmitry Baryshkov wrote:
+> Chrontel CH7006 and Silicon Image sil164 drivers use drm_encoder_slave
+> interface which is being used only by the nouveau driver. It doesn't
+> make sense to keep this interface inside the DRM subsystem. In
+> preparation to moving this set of helpers to the nouveau driver, move
+> the only two I2C driver that use that interface to the nouveau driver
+> too.
 > 
-> This is more or less what I've done. Or would you prefer to keep the
-> wrapping functions that just execute the callback? I can change the
-> patchset accordingly.
+> Suggested-by: Laurent Pinchart <laurent.pinchart@ideasonboard.com>
+> Signed-off-by: Dmitry Baryshkov <dmitry.baryshkov@linaro.org>
+> ---
+>  arch/arm/configs/multi_v7_defconfig                  |  4 ++--
+>  arch/parisc/configs/generic-32bit_defconfig          |  4 ++--
+>  arch/parisc/configs/generic-64bit_defconfig          |  4 ++--
+>  drivers/gpu/drm/i2c/Kconfig                          | 18 ------------------
+>  drivers/gpu/drm/i2c/Makefile                         |  6 ------
+>  drivers/gpu/drm/nouveau/Kconfig                      | 20 ++++++++++++++++++++
+>  drivers/gpu/drm/nouveau/dispnv04/Kbuild              |  2 ++
+>  drivers/gpu/drm/nouveau/dispnv04/dfp.c               |  2 +-
+>  drivers/gpu/drm/nouveau/dispnv04/i2c/Kbuild          |  5 +++++
+>  .../gpu/drm/{ => nouveau/dispnv04}/i2c/ch7006_drv.c  |  0
+>  .../gpu/drm/{ => nouveau/dispnv04}/i2c/ch7006_mode.c |  0
+>  .../gpu/drm/{ => nouveau/dispnv04}/i2c/ch7006_priv.h |  7 ++++---
+>  .../gpu/drm/{ => nouveau/dispnv04}/i2c/sil164_drv.c  |  3 ++-
+>  drivers/gpu/drm/nouveau/dispnv04/tvnv04.c            |  2 +-
+>  .../gpu/drm/nouveau/include}/i2c/ch7006.h            |  4 ++--
+>  .../gpu/drm/nouveau/include}/i2c/sil164.h            |  4 ++--
 
-No, I think it's good indeed -- st a first glance it looked like there's more to
-get rid of.
+Please move this one (and the one above) to include/dispnv04/i2c/ch7006.h
 
-There are just a few more nits, I'll go ahead and add comments in the
-corresponding patches.
-
+>  16 files changed, 45 insertions(+), 40 deletions(-)
 > 
-> > 
-> > > 
-> > > It's also a question of whether maintenance of this code based used by
-> > > the nouveau driver only should be the responsibility of the drm-misc
-> > > community or the nouveau driver maintainers.
-> > 
-> > Good question. It's common infrastructure; do we expect / require the last user
-> > of such infrastructure to take ownership?
-> 
-> Unfortunately it's more like 'the only one' :-( In other words, if we
+> diff --git a/arch/arm/configs/multi_v7_defconfig b/arch/arm/configs/multi_v7_defconfig
+> index 9d4336261e450ce5bf99a1aa53e603bd7c0037bb..7fb24a4fb9f697c0c726204d0ba3754e87000e6a 100644
+> --- a/arch/arm/configs/multi_v7_defconfig
+> +++ b/arch/arm/configs/multi_v7_defconfig
+> @@ -713,10 +713,10 @@ CONFIG_VIDEO_ADV7604_CEC=y
+>  CONFIG_VIDEO_ML86V7667=m
+>  CONFIG_IMX_IPUV3_CORE=m
+>  CONFIG_DRM=y
+> -# CONFIG_DRM_I2C_CH7006 is not set
+> -# CONFIG_DRM_I2C_SIL164 is not set
+>  CONFIG_DRM_I2C_NXP_TDA998X=m
+>  CONFIG_DRM_NOUVEAU=m
+> +# CONFIG_DRM_NOUVEAU_CH7006 is not set
+> +# CONFIG_DRM_NOUVEAU_SIL164 is not set
+>  CONFIG_DRM_EXYNOS=m
+>  CONFIG_DRM_EXYNOS_FIMD=y
+>  CONFIG_DRM_EXYNOS_MIXER=y
+> diff --git a/arch/parisc/configs/generic-32bit_defconfig b/arch/parisc/configs/generic-32bit_defconfig
+> index 5ce258f3fffaf0e3aac5f8f5450dd65bad305879..f5fffc24c3bc5baf0d77b845e3ac77fae49b276e 100644
+> --- a/arch/parisc/configs/generic-32bit_defconfig
+> +++ b/arch/parisc/configs/generic-32bit_defconfig
+> @@ -132,11 +132,11 @@ CONFIG_I2C=y
+>  CONFIG_HWMON=m
+>  CONFIG_DRM=m
+>  CONFIG_DRM_DISPLAY_DP_AUX_CEC=y
+> -# CONFIG_DRM_I2C_CH7006 is not set
+> -# CONFIG_DRM_I2C_SIL164 is not set
+>  CONFIG_DRM_RADEON=m
+>  CONFIG_DRM_NOUVEAU=m
+>  # CONFIG_DRM_NOUVEAU_BACKLIGHT is not set
+> +# CONFIG_DRM_NOUVEAU_CH7006 is not set
+> +# CONFIG_DRM_NOUVEAU_SIL164 is not set
+>  CONFIG_DRM_VGEM=m
+>  CONFIG_DRM_UDL=m
+>  CONFIG_DRM_MGAG200=m
+> diff --git a/arch/parisc/configs/generic-64bit_defconfig b/arch/parisc/configs/generic-64bit_defconfig
+> index 19a804860ed5b355f82396c2314bd0d8f3fb768a..704f68fbf960fb865206c8f8ab1751c9f0db6de3 100644
+> --- a/arch/parisc/configs/generic-64bit_defconfig
+> +++ b/arch/parisc/configs/generic-64bit_defconfig
+> @@ -193,11 +193,11 @@ CONFIG_MEDIA_SUPPORT=m
+>  CONFIG_AGP=y
+>  CONFIG_AGP_PARISC=y
+>  CONFIG_DRM=y
+> -# CONFIG_DRM_I2C_CH7006 is not set
+> -# CONFIG_DRM_I2C_SIL164 is not set
+>  CONFIG_DRM_RADEON=y
+>  CONFIG_DRM_NOUVEAU=m
+>  # CONFIG_DRM_NOUVEAU_BACKLIGHT is not set
+> +# CONFIG_DRM_NOUVEAU_CH7006 is not set
+> +# CONFIG_DRM_NOUVEAU_SIL164 is not set
+>  CONFIG_DRM_MGAG200=m
+>  CONFIG_FB=y
+>  CONFIG_FB_PM2=m
+> diff --git a/drivers/gpu/drm/i2c/Kconfig b/drivers/gpu/drm/i2c/Kconfig
+> index 6f19e1c35e30b0e595c1a60628a6b8cf313fcabc..d5200f67958e68a8ec73401f1d3b79cbe0aa303d 100644
+> --- a/drivers/gpu/drm/i2c/Kconfig
+> +++ b/drivers/gpu/drm/i2c/Kconfig
+> @@ -2,24 +2,6 @@
+>  menu "I2C encoder or helper chips"
+>       depends on DRM && DRM_KMS_HELPER && I2C
+>  
+> -config DRM_I2C_CH7006
+> -	tristate "Chrontel ch7006 TV encoder"
+> -	default m if DRM_NOUVEAU
+> -	help
+> -	  Support for Chrontel ch7006 and similar TV encoders, found
+> -	  on some nVidia video cards.
+> -
+> -	  This driver is currently only useful if you're also using
+> -	  the nouveau driver.
+> -
+> -config DRM_I2C_SIL164
+> -	tristate "Silicon Image sil164 TMDS transmitter"
+> -	default m if DRM_NOUVEAU
+> -	help
+> -	  Support for sil164 and similar single-link (or dual-link
+> -	  when used in pairs) TMDS transmitters, used in some nVidia
+> -	  video cards.
+> -
+>  config DRM_I2C_NXP_TDA998X
+>  	tristate "NXP Semiconductors TDA998X HDMI encoder"
+>  	default m if DRM_TILCDC
+> diff --git a/drivers/gpu/drm/i2c/Makefile b/drivers/gpu/drm/i2c/Makefile
+> index a962f6f085686674ed33010345730db776815ebe..31fd35527d99d7eb23851d290175a3ff0c756772 100644
+> --- a/drivers/gpu/drm/i2c/Makefile
+> +++ b/drivers/gpu/drm/i2c/Makefile
+> @@ -1,10 +1,4 @@
+>  # SPDX-License-Identifier: GPL-2.0
+> -ch7006-y := ch7006_drv.o ch7006_mode.o
+> -obj-$(CONFIG_DRM_I2C_CH7006) += ch7006.o
+> -
+> -sil164-y := sil164_drv.o
+> -obj-$(CONFIG_DRM_I2C_SIL164) += sil164.o
+> -
+>  tda998x-y := tda998x_drv.o
+>  obj-$(CONFIG_DRM_I2C_NXP_TDA998X) += tda998x.o
+>  obj-$(CONFIG_DRM_I2C_NXP_TDA9950) += tda9950.o
+> diff --git a/drivers/gpu/drm/nouveau/Kconfig b/drivers/gpu/drm/nouveau/Kconfig
+> index ce840300578d8a4011c448b61caf830cef3805bf..4cffac26f90ae6130ef30ba389b2a8c9b732058c 100644
+> --- a/drivers/gpu/drm/nouveau/Kconfig
+> +++ b/drivers/gpu/drm/nouveau/Kconfig
+> @@ -109,3 +109,23 @@ config DRM_NOUVEAU_GSP_DEFAULT
+>  	help
+>  	  Say Y here if you want to use the GSP codepaths by default on
+>  	  Turing and Ampere GPUs.
+> +
+> +config DRM_NOUVEAU_CH7006
+> +	tristate "Chrontel ch7006 TV encoder"
+> +	depends on DRM_NOUVEAU
+> +	default m
+> +	help
+> +	  Support for Chrontel ch7006 and similar TV encoders, found
 
-I can't see a major difference between "last one" and "only one" in this
-context.
+This help text should probably end right after "TV encoders".
 
-> were expecting other users, there would not be such a move. But
-> hopefully all new drivers will use bridges infrastructure.
+> +	  on some nVidia video cards.
+> +
+> +	  This driver is currently only useful if you're also using
+> +	  the nouveau driver.
+> +
+> +config DRM_NOUVEAU_SIL164
+> +	tristate "Silicon Image sil164 TMDS transmitter"
+> +	depends on DRM_NOUVEAU
+> +	default m
+> +	help
+> +	  Support for sil164 and similar single-link (or dual-link
+> +	  when used in pairs) TMDS transmitters, used in some nVidia
+> +	  video cards.
 
-Agreed, but I don't think it answers my question.
+I think we can remove everything after "TMDS transmitters".
 
-> 
-> > 
-> > > 
-> > > > > > Ideally those two drivers should be converted to the drm_bridge
-> > > > > > interface, but it's unclear if it's worth spending time on that.
-> > > > > 
-> > > > > Probably not.
-> > > > > 
-> > > > > > 
-> > > > > > Signed-off-by: Dmitry Baryshkov <dmitry.baryshkov@linaro.org>
-> > > > > > ---
-> > > > > > Changes in v2:
-> > > > > > - Renamed symbols in defconfig (Laurent)
-> > > > > > - Added missing Kbuild file (Laurent, LKP)
-> > > > > > - Renamed guarding defines in include files.
-> > > > > > - Dropped mentions of two removed functions.
-> > > > > > - Link to v1: https://lore.kernel.org/r/20241214-nouveau-encoder-slave-v1-0-beda767472e3@linaro.org
-> > > > > > 
-> > > > > > ---
-> > > > > > Dmitry Baryshkov (2):
-> > > > > >       drm/nouveau: incorporate I2C TV encoder drivers
-> > > > > >       drm/nouveau: vendor in drm_encoder_slave API
-> > > > > > 
-> > > > > >  arch/arm/configs/multi_v7_defconfig                |   4 +-
-> > > > > >  arch/parisc/configs/generic-32bit_defconfig        |   4 +-
-> > > > > >  arch/parisc/configs/generic-64bit_defconfig        |   4 +-
-> > > > > >  drivers/gpu/drm/Makefile                           |   1 -
-> > > > > >  drivers/gpu/drm/i2c/Kconfig                        |  18 ----
-> > > > > >  drivers/gpu/drm/i2c/Makefile                       |   6 --
-> > > > > >  drivers/gpu/drm/nouveau/Kconfig                    |  20 ++++
-> > > > > >  drivers/gpu/drm/nouveau/dispnv04/Kbuild            |   3 +
-> > > > > >  drivers/gpu/drm/nouveau/dispnv04/dfp.c             |  12 +--
-> > > > > >  drivers/gpu/drm/nouveau/dispnv04/i2c/Kbuild        |   5 +
-> > > > > >  .../drm/{ => nouveau/dispnv04}/i2c/ch7006_drv.c    |  30 +++---
-> > > > > >  .../drm/{ => nouveau/dispnv04}/i2c/ch7006_mode.c   |   8 +-
-> > > > > >  .../drm/{ => nouveau/dispnv04}/i2c/ch7006_priv.h   |  11 ++-
-> > > > > >  .../drm/{ => nouveau/dispnv04}/i2c/sil164_drv.c    |  33 ++++---
-> > > > > >  .../dispnv04/nouveau_i2c_encoder.c}                |  85 +++++-----------
-> > > > > >  drivers/gpu/drm/nouveau/dispnv04/tvnv04.c          |  20 ++--
-> > > > > >  drivers/gpu/drm/nouveau/dispnv04/tvnv17.c          |   4 +-
-> > > > > >  .../gpu/drm/nouveau/include}/i2c/ch7006.h          |   4 +-
-> > > > > >  .../gpu/drm/nouveau/include/i2c/encoder_i2c.h      | 109 ++++++++-------------
-> > > > > >  .../gpu/drm/nouveau/include}/i2c/sil164.h          |   4 +-
-> > > > > >  drivers/gpu/drm/nouveau/nouveau_connector.c        |   6 +-
-> > > > > >  drivers/gpu/drm/nouveau/nouveau_encoder.h          |  13 +--
-> > > > > >  22 files changed, 172 insertions(+), 232 deletions(-)
-> > > > > > ---
-> > > > > > base-commit: 4176cf5c5651c33769de83bb61b0287f4ec7719f
-> > > > > > change-id: 20241214-nouveau-encoder-slave-a6dd422fa4a9
-> > > 
-> > > -- 
-> > > Regards,
-> > > 
-> > > Laurent Pinchart
+> diff --git a/drivers/gpu/drm/nouveau/dispnv04/Kbuild b/drivers/gpu/drm/nouveau/dispnv04/Kbuild
+> index 975c4e2269366d57e928eedbbbc669d24744379f..949802882ebd53c15e124c218a092af9693d36bc 100644
+> --- a/drivers/gpu/drm/nouveau/dispnv04/Kbuild
+> +++ b/drivers/gpu/drm/nouveau/dispnv04/Kbuild
+> @@ -10,3 +10,5 @@ nouveau-y += dispnv04/overlay.o
+>  nouveau-y += dispnv04/tvmodesnv17.o
+>  nouveau-y += dispnv04/tvnv04.o
+>  nouveau-y += dispnv04/tvnv17.o
+> +
+> +include $(src)/dispnv04/i2c/Kbuild
+> diff --git a/drivers/gpu/drm/nouveau/dispnv04/dfp.c b/drivers/gpu/drm/nouveau/dispnv04/dfp.c
+> index 504c421aa176ef3d944592a0109cb72e21fd47b7..28a42ab5cb900ebe8a526e154f9e90598333356c 100644
+> --- a/drivers/gpu/drm/nouveau/dispnv04/dfp.c
+> +++ b/drivers/gpu/drm/nouveau/dispnv04/dfp.c
+> @@ -35,7 +35,7 @@
+>  #include "hw.h"
+>  #include "nvreg.h"
+>  
+> -#include <drm/i2c/sil164.h>
+> +#include <i2c/sil164.h>
+>  
+>  #include <subdev/i2c.h>
+>  
+> diff --git a/drivers/gpu/drm/nouveau/dispnv04/i2c/Kbuild b/drivers/gpu/drm/nouveau/dispnv04/i2c/Kbuild
+> new file mode 100644
+> index 0000000000000000000000000000000000000000..3fddfc97bcb399ef3821c6065e5868363883ac74
+> --- /dev/null
+> +++ b/drivers/gpu/drm/nouveau/dispnv04/i2c/Kbuild
+> @@ -0,0 +1,5 @@
+> +ch7006-y := dispnv04/i2c/ch7006_drv.o dispnv04/i2c/ch7006_mode.o
+> +obj-$(CONFIG_DRM_NOUVEAU_CH7006) += ch7006.o
+> +
+> +sil164-y := dispnv04/i2c/sil164_drv.o
+> +obj-$(CONFIG_DRM_NOUVEAU_SIL164) += sil164.o
+> diff --git a/drivers/gpu/drm/i2c/ch7006_drv.c b/drivers/gpu/drm/nouveau/dispnv04/i2c/ch7006_drv.c
+> similarity index 100%
+> rename from drivers/gpu/drm/i2c/ch7006_drv.c
+> rename to drivers/gpu/drm/nouveau/dispnv04/i2c/ch7006_drv.c
+> diff --git a/drivers/gpu/drm/i2c/ch7006_mode.c b/drivers/gpu/drm/nouveau/dispnv04/i2c/ch7006_mode.c
+> similarity index 100%
+> rename from drivers/gpu/drm/i2c/ch7006_mode.c
+> rename to drivers/gpu/drm/nouveau/dispnv04/i2c/ch7006_mode.c
+> diff --git a/drivers/gpu/drm/i2c/ch7006_priv.h b/drivers/gpu/drm/nouveau/dispnv04/i2c/ch7006_priv.h
+> similarity index 99%
+> rename from drivers/gpu/drm/i2c/ch7006_priv.h
+> rename to drivers/gpu/drm/nouveau/dispnv04/i2c/ch7006_priv.h
+> index 052bdc48a339df47073ab305f224f96c8630d66c..8136f8cd8f9b859ccf915e295c783f9fc8321c2e 100644
+> --- a/drivers/gpu/drm/i2c/ch7006_priv.h
+> +++ b/drivers/gpu/drm/nouveau/dispnv04/i2c/ch7006_priv.h
+> @@ -24,12 +24,13 @@
+>   *
+>   */
+>  
+> -#ifndef __DRM_I2C_CH7006_PRIV_H__
+> -#define __DRM_I2C_CH7006_PRIV_H__
+> +#ifndef __NOUVEAU_I2C_CH7006_PRIV_H__
+> +#define __NOUVEAU_I2C_CH7006_PRIV_H__
+>  
+>  #include <drm/drm_encoder_slave.h>
+>  #include <drm/drm_probe_helper.h>
+> -#include <drm/i2c/ch7006.h>
+> +
+> +#include <i2c/ch7006.h>
+>  
+>  typedef int64_t fixed;
+>  #define fixed1 (1LL << 32)
+> diff --git a/drivers/gpu/drm/i2c/sil164_drv.c b/drivers/gpu/drm/nouveau/dispnv04/i2c/sil164_drv.c
+> similarity index 99%
+> rename from drivers/gpu/drm/i2c/sil164_drv.c
+> rename to drivers/gpu/drm/nouveau/dispnv04/i2c/sil164_drv.c
+> index ff23422727fce290a188e495d343e32bc2c373ec..74fc961c0d0de06f1fe8dd93d351452cd20cead7 100644
+> --- a/drivers/gpu/drm/i2c/sil164_drv.c
+> +++ b/drivers/gpu/drm/nouveau/dispnv04/i2c/sil164_drv.c
+> @@ -30,7 +30,8 @@
+>  #include <drm/drm_encoder_slave.h>
+>  #include <drm/drm_print.h>
+>  #include <drm/drm_probe_helper.h>
+> -#include <drm/i2c/sil164.h>
+> +
+> +#include <i2c/sil164.h>
+>  
+>  struct sil164_priv {
+>  	struct sil164_encoder_params config;
+> diff --git a/drivers/gpu/drm/nouveau/dispnv04/tvnv04.c b/drivers/gpu/drm/nouveau/dispnv04/tvnv04.c
+> index d3014027a8122be499b85459b038fdcce5800720..67f3e0ac0e109b223ca8ec4ddc4e688247373b2e 100644
+> --- a/drivers/gpu/drm/nouveau/dispnv04/tvnv04.c
+> +++ b/drivers/gpu/drm/nouveau/dispnv04/tvnv04.c
+> @@ -32,7 +32,7 @@
+>  #include "hw.h"
+>  #include <drm/drm_modeset_helper_vtables.h>
+>  
+> -#include <drm/i2c/ch7006.h>
+> +#include <i2c/ch7006.h>
+>  
+>  static struct nvkm_i2c_bus_probe nv04_tv_encoder_info[] = {
+>  	{
+> diff --git a/include/drm/i2c/ch7006.h b/drivers/gpu/drm/nouveau/include/i2c/ch7006.h
+> similarity index 97%
+> rename from include/drm/i2c/ch7006.h
+> rename to drivers/gpu/drm/nouveau/include/i2c/ch7006.h
+> index 5305b9797f938626c8f6c464ddc9bf424a39b4a0..1a6fa405f85b2a0d0f9a4d1c786defc527fa1d3b 100644
+> --- a/include/drm/i2c/ch7006.h
+> +++ b/drivers/gpu/drm/nouveau/include/i2c/ch7006.h
+> @@ -24,8 +24,8 @@
+>   *
+>   */
+>  
+> -#ifndef __DRM_I2C_CH7006_H__
+> -#define __DRM_I2C_CH7006_H__
+> +#ifndef __NOUVEAU_I2C_CH7006_H__
+> +#define __NOUVEAU_I2C_CH7006_H__
+>  
+>  /**
+>   * struct ch7006_encoder_params
+> diff --git a/include/drm/i2c/sil164.h b/drivers/gpu/drm/nouveau/include/i2c/sil164.h
+> similarity index 96%
+> rename from include/drm/i2c/sil164.h
+> rename to drivers/gpu/drm/nouveau/include/i2c/sil164.h
+> index ddf248693c8be8809777723c272f82af8d334c99..b86750d7abe1c2e7142eac32898398475fd42531 100644
+> --- a/include/drm/i2c/sil164.h
+> +++ b/drivers/gpu/drm/nouveau/include/i2c/sil164.h
+> @@ -24,8 +24,8 @@
+>   *
+>   */
+>  
+> -#ifndef __DRM_I2C_SIL164_H__
+> -#define __DRM_I2C_SIL164_H__
+> +#ifndef __NOUVEAU_I2C_SIL164_H__
+> +#define __NOUVEAU_I2C_SIL164_H__
+>  
+>  /**
+>   * struct sil164_encoder_params
 > 
 > -- 
-> With best wishes
-> Dmitry
+> 2.39.5
+> 
