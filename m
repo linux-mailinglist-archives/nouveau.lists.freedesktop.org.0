@@ -2,141 +2,73 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id 42D549FDA93
-	for <lists+nouveau@lfdr.de>; Sat, 28 Dec 2024 13:38:58 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 4450D9FE62B
+	for <lists+nouveau@lfdr.de>; Mon, 30 Dec 2024 14:18:52 +0100 (CET)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 67DC110E16C;
-	Sat, 28 Dec 2024 12:38:56 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 30B7D10E4CB;
+	Mon, 30 Dec 2024 13:18:50 +0000 (UTC)
 Authentication-Results: gabe.freedesktop.org;
-	dkim=pass (2048-bit key; unprotected) header.d=hotmail.com header.i=@hotmail.com header.b="YcXucDcE";
+	dkim=pass (2048-bit key; unprotected) header.d=intel.com header.i=@intel.com header.b="cE7zJ+u3";
 	dkim-atps=neutral
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from EUR03-DBA-obe.outbound.protection.outlook.com
- (mail-dbaeur03olkn2012.outbound.protection.outlook.com [40.92.58.12])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 2992810E16C;
- Sat, 28 Dec 2024 12:38:55 +0000 (UTC)
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=X/C+uQwbwNPWCsOM5RrPCnT/rI5L5styjb+1kXjokrLQvSCr+tLn6BnTK8/TGsKorAi6TU8s6ywtdMikn5eHJj9d60D2bQB+Y56CjSh8r3w4CY4ziv6QC4MQHTLlv/RJxhZNeRwrI1K/DaFQJH5ZlDfVcuQVyl7KNRPSQ3ptut1cfyy1GgIvZ9XgWYue13M3sNetI2fcSmCP1xBM6h6bAuqY8+Fevg5fF/6DXC9yuwrCPE9YO8ydqhbC7ZtFc5IDJrZSdMwutaGzGZd/ptR7ERK4Hv12ANsZNfqkSYoubDL4erheHecKW2056ry96VpD7NmjZnheqRA5TZW9VGngDQ==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=K93coqnW/CXleUZ0Pm1toyrG25RRLJbg1Qv8hrJyYMA=;
- b=Sa2KyPM7XhTtp+11loVL9Tuz3z0sWieRj6BHbBydClXYUU0xoF9K/d6+RSlcA1lFzuiFxyHqvYAhtnwMwc6X3O/Jq8yfGjegoti1F32/05qFXJ34dWCwtLteGNwhknMXvw7q8FOTIlWUL516D8JNiLgrAbmaDMpWlzg1iggUScdVSPbzgXgOugmqFTtRiW2Nojp/+Lqj+KhRTt7hBNXA+H8FOy3y0W6kyr2FpN7h3nRO5OFt+VZj0Gos1U2wX0fzH9b3BbYOQCuGq3LCoVIPaYOBzhr9Tt1CahnbGyu+chrYKXm/zwH9ZYWnQt99a+NYwQ2EkQxRaSYBT1ODyURsSA==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=none; dmarc=none;
- dkim=none; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=hotmail.com;
- s=selector1;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=K93coqnW/CXleUZ0Pm1toyrG25RRLJbg1Qv8hrJyYMA=;
- b=YcXucDcE4wZ/SEIG4KrcioKxSZtcAcriujkzq0dljaFUKZFRjAUsqP/lGL9dnKsCEpwu4Pe8CrcLbDbGPZlnLebNBFDC+itDcOPyPrQ3fsI8dARV+6cQA4ca+ALMAMlLdy8ETYqrUyfJubV7oS8X1O6rHkEsUyZoCsa9dimgLs45AUjiSjibfjFeI/p7zN+CVJ45bUSdjERWB2LMGI1fegPbz/AYsMnqL5sQ7gkzR9ia+P3yjPrG6Vrhci+RT2FDzz+f6g1w4LN4DnFPrKtYN8gqQav3zKYTveHmZ9rZQyX78udfCcf+KwK+RieVsDzYpEUyF8Uu92cBvuNoCYugew==
-Received: from DUZPR10MB8267.EURPRD10.PROD.OUTLOOK.COM (2603:10a6:10:4ae::7)
- by PAXPR10MB5613.EURPRD10.PROD.OUTLOOK.COM (2603:10a6:102:243::14) with
- Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.8314.7; Sat, 28 Dec
- 2024 12:38:53 +0000
-Received: from DUZPR10MB8267.EURPRD10.PROD.OUTLOOK.COM
- ([fe80::64e4:38c6:256:36f1]) by DUZPR10MB8267.EURPRD10.PROD.OUTLOOK.COM
- ([fe80::64e4:38c6:256:36f1%4]) with mapi id 15.20.8314.001; Sat, 28 Dec 2024
- 12:38:53 +0000
-Message-ID: <DUZPR10MB82674B5F711950D71C0411B98E0F2@DUZPR10MB8267.EURPRD10.PROD.OUTLOOK.COM>
-Date: Sat, 28 Dec 2024 13:38:52 +0100
-User-Agent: Mozilla Thunderbird
-Subject: Re: Kernel problem with multiseat on one card - more than 1 user
- simultaneously on 1 video card
-From: Gert Vanhaerents <gert.vanhaerents@hotmail.com>
-To: Timur Tabi <ttabi@nvidia.com>,
- "dri-devel@lists.freedesktop.org" <dri-devel@lists.freedesktop.org>,
- "nouveau@lists.freedesktop.org" <nouveau@lists.freedesktop.org>,
- "linux-kernel@vger.kernel.org" <linux-kernel@vger.kernel.org>,
- "bagasdotme@gmail.com" <bagasdotme@gmail.com>
-References: <AM7PR10MB39235DD53D163910E88FDB938E82A@AM7PR10MB3923.EURPRD10.PROD.OUTLOOK.COM>
- <AM7PR10MB3923E07D6024434077E95EBA8E82A@AM7PR10MB3923.EURPRD10.PROD.OUTLOOK.COM>
- <ZWsuiq7zrYS-pDli@archie.me>
- <655a02097e9b49c2da7a2be60d7c154a48a916f4.camel@nvidia.com>
- <AM7PR10MB39235076485E2E3905F422508E86A@AM7PR10MB3923.EURPRD10.PROD.OUTLOOK.COM>
- <e046050c7e9be5d4f816d33dd1a9dd50e2de3308.camel@nvidia.com>
- <DUZPR10MB8267520A4F44DA38339969A78E93A@DUZPR10MB8267.EURPRD10.PROD.OUTLOOK.COM>
-Content-Language: en-US
-In-Reply-To: <DUZPR10MB8267520A4F44DA38339969A78E93A@DUZPR10MB8267.EURPRD10.PROD.OUTLOOK.COM>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 8bit
-X-ClientProxiedBy: AM8P251CA0016.EURP251.PROD.OUTLOOK.COM
- (2603:10a6:20b:21b::21) To DUZPR10MB8267.EURPRD10.PROD.OUTLOOK.COM
- (2603:10a6:10:4ae::7)
-X-Microsoft-Original-Message-ID: <bc1c5708-6df5-426e-b37a-2140366bafbb@hotmail.com>
+Received: from mgamail.intel.com (mgamail.intel.com [192.198.163.9])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id E88C010E4C9;
+ Mon, 30 Dec 2024 13:18:47 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
+ d=intel.com; i=@intel.com; q=dns/txt; s=Intel;
+ t=1735564728; x=1767100728;
+ h=from:to:cc:subject:in-reply-to:references:date:
+ message-id:mime-version;
+ bh=F5ZAj3LKhwurq6s36HWd56Hq5EJ47jKU4wzqeBVlBYg=;
+ b=cE7zJ+u3j23mfDy/5Op/7Q+pQ2+BTeo8JE1u7uwPIHiKXpulUCnoMKZo
+ +yvu0mUQe37YV52nBAQ3M0ples1Ki9IsR+6HTeAMibEa44sjJNAlFI0nq
+ F5Mo6X6TuPdo+eQQuq7743tvjzEd0FUZ0DIRh6zHOBu6RVVxEWF8Cg892
+ oVU+pJDjrq3Ygm0zY8+Zwszk0BKOYVjHCna8fY46DA2Ejb7rRQO1Ga6Zp
+ VbN0Hi1IEVSyg4hBvmIKe59P4FTrsBSpl+ukki+JEv70jZSPiUv3uBocA
+ a/K/nrPAAXdbpQFOnPXBw2JbItOSNqvC+maRTDs1/hL+an/mVD3eM+B9Z A==;
+X-CSE-ConnectionGUID: IldzORvgRz234F25BY6VVg==
+X-CSE-MsgGUID: 8B2PZzacStuTHHWjJVuFWA==
+X-IronPort-AV: E=McAfee;i="6700,10204,11301"; a="46534360"
+X-IronPort-AV: E=Sophos;i="6.12,276,1728975600"; d="scan'208";a="46534360"
+Received: from fmviesa008.fm.intel.com ([10.60.135.148])
+ by fmvoesa103.fm.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
+ 30 Dec 2024 05:18:47 -0800
+X-CSE-ConnectionGUID: 1OB6ph2LSQ6avqBsaXEV/w==
+X-CSE-MsgGUID: UwVTQ3BoRMSuV3toABd3cw==
+X-ExtLoop1: 1
+X-IronPort-AV: E=Sophos;i="6.12,276,1728975600"; d="scan'208";a="100975369"
+Received: from ncintean-mobl1.ger.corp.intel.com (HELO localhost)
+ ([10.245.246.167])
+ by fmviesa008-auth.fm.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
+ 30 Dec 2024 05:18:38 -0800
+From: Jani Nikula <jani.nikula@linux.intel.com>
+To: Abel Vesa <abel.vesa@linaro.org>, Johan Hovold <johan@kernel.org>
+Cc: Maarten Lankhorst <maarten.lankhorst@linux.intel.com>, Maxime Ripard
+ <mripard@kernel.org>, Thomas Zimmermann <tzimmermann@suse.de>, David
+ Airlie <airlied@gmail.com>, Simona Vetter <simona@ffwll.ch>, Karol Herbst
+ <kherbst@redhat.com>, Lyude Paul <lyude@redhat.com>, Danilo Krummrich
+ <dakr@redhat.com>, Rodrigo Vivi <rodrigo.vivi@intel.com>, Joonas Lahtinen
+ <joonas.lahtinen@linux.intel.com>, Tvrtko Ursulin <tursulin@ursulin.net>,
+ Rob Clark <robdclark@gmail.com>, Abhinav Kumar
+ <quic_abhinavk@quicinc.com>, Dmitry Baryshkov
+ <dmitry.baryshkov@linaro.org>, Sean Paul <sean@poorly.run>, Marijn Suijten
+ <marijn.suijten@somainline.org>, Bjorn Andersson <andersson@kernel.org>,
+ Konrad Dybcio <konradybcio@kernel.org>, dri-devel@lists.freedesktop.org,
+ linux-kernel@vger.kernel.org, nouveau@lists.freedesktop.org,
+ intel-gfx@lists.freedesktop.org, intel-xe@lists.freedesktop.org,
+ linux-arm-msm@vger.kernel.org, freedreno@lists.freedesktop.org
+Subject: Re: [PATCH v2 1/4] drm/dp: Add helper to set LTTPRs in transparent
+ mode
+In-Reply-To: <Z21VD82XCOVgVJUh@linaro.org>
+Organization: Intel Finland Oy - BIC 0357606-4 - Westendinkatu 7, 02160 Espoo
+References: <20241211-drm-dp-msm-add-lttpr-transparent-mode-set-v2-0-d5906ed38b28@linaro.org>
+ <20241211-drm-dp-msm-add-lttpr-transparent-mode-set-v2-1-d5906ed38b28@linaro.org>
+ <Z1mk08SHEd5_vc99@hovoldconsulting.com> <Z21VD82XCOVgVJUh@linaro.org>
+Date: Mon, 30 Dec 2024 15:18:35 +0200
+Message-ID: <877c7hpavo.fsf@intel.com>
 MIME-Version: 1.0
-X-MS-Exchange-MessageSentRepresentingType: 1
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: DUZPR10MB8267:EE_|PAXPR10MB5613:EE_
-X-MS-Office365-Filtering-Correlation-Id: 9c7a8231-87fb-4161-c944-08dd273c9637
-X-Microsoft-Antispam: BCL:0;
- ARA:14566002|6090799003|8060799006|461199028|5072599009|15080799006|19110799003|7092599003|3412199025|440099028;
-X-Microsoft-Antispam-Message-Info: =?utf-8?B?Z0d5MGFhUU9Gc2V3WUZwSHMzbnBNWWZ2REpyZGFTMHNhU1dacUQ3U3JtQlhC?=
- =?utf-8?B?NksrZ3BoNUxhV3JtTVE2TERPWENhdHJPZXR1eitwS0NHZ2ZjbzJuenpJekdM?=
- =?utf-8?B?TE9tQWZsdnhHWTBtUXdhNGdCMytIbFNCYTVCQnB5WldnSnVaUjc0OVNVUE5H?=
- =?utf-8?B?YWRkTXBseG5NNnRrTTkyeitTRkkzL1BUS1RGRDJmK1dKazg5NTluKzdnSGdw?=
- =?utf-8?B?cFAwVHMrU0ZJcGE3R2RXM093Q0JRc0xmci9qTHhyalRpODJKRnIzVlhnQVRF?=
- =?utf-8?B?TWpyV0JVdllIOFdhbGswa1hscjk0bkVTbU1YV3pXMnFXenpRTmNCd2tOUVhh?=
- =?utf-8?B?aGZYaW42MjA5SEM0amp2ZmZPVUZJU0diZzV1VTcvTFFtRmM1RE1sUFhiQnMr?=
- =?utf-8?B?eWhrUyt2UDFYWHAyL1o0dkpZQ3c0NHFCdDZzTDM0Qk9vdE5TQ1FZSWJPTmhG?=
- =?utf-8?B?UDh2ZG5uY09XOURLcVJMQmpXM2JoQkdtMnQ3RGRKaEpXNGpWc015NlNwK2FE?=
- =?utf-8?B?bS9SM3FUN1NEeFhaOEIyeFJDNmUzUGZuSFJIUXdwMS9SZXFKL0dHcllPTEVW?=
- =?utf-8?B?OHB0ZmlBOUpld2p1K3FJc3MydEl2eTJvTXcwckttaCtlbllSeGhPbDZUZmZI?=
- =?utf-8?B?Z3BaS0hzMkJ6bndXYk9QWWZpTzhUWHJWRm9peFZ1djduTEkzN2Uyc2tGZWJB?=
- =?utf-8?B?d3g1UFJRVTUybnFzcFh3ZVRXZGJacDlDdHdNeWpmeXloOStuZXFsYThIQWZm?=
- =?utf-8?B?KzhrRFVFYnVzZ0U3YnRYb284RzZDUmVGejZFK2lVUGpkNmlQMHQxREhVT21h?=
- =?utf-8?B?dXFGUWJPY3NlVDZqM0o2Kytqa3B3RU9ETjkrQkp5c0xRWnNoWmpvSEJpa0Vy?=
- =?utf-8?B?YTRaOEdUdXZiOEFVM0lvbXNQc3hsdEpMVWlyTWcyUFlaL3d5c3daeTcwK25J?=
- =?utf-8?B?YXlNaXpOZWdVbTFVeUJaV052MFRYZmRIQVh0WFdFTHdqak1NVll5Y1JNZTVR?=
- =?utf-8?B?b0xtMXNtSStrcHNOb043NnkwajJxNXhaUGdxVC9zSitlUkFVU1hCSlV2Z05l?=
- =?utf-8?B?aklGQXNTVGd0U1Y1YTVmMzc5cUlNbXdwLzRqbkZvdnhOMUhxSG55S0drbGEz?=
- =?utf-8?B?RVhwOGRSZWExTkhSVHRSUW9zZy9DVlMzNmgzalprMHRHZHNPczI0WVptU3BZ?=
- =?utf-8?B?c2Jxaklaek5qNGFlSU5UQlY3THVWK0pndzVtSFFuWWRBaTZGNWxtUFhNUGVY?=
- =?utf-8?B?Q1BRTm05YTlVT0hjV09YcFRod3ZjUHhua3RQQVZPOEVIR21Ob1RKeHZzK1Er?=
- =?utf-8?B?Y1QzMXIyQ3lnRWptS0FrdWxvOTU4R3lZZUJobmdqeGFvRE5reVBrd1Y4bVBw?=
- =?utf-8?B?RURxN1BWeFVqT2NIaWVKbXJnU2ltYVd5Z3FXUDJ3cjd4Ris3ay9mWmpIRnJm?=
- =?utf-8?B?T0VVWHRIUTJNQUFBTWVkT2tsSHh5UUtFblJVclNWM3BYMEpCSXp4RjIrbTNB?=
- =?utf-8?Q?XM+w6w=3D?=
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?TytUM3VGcDBnUmdzVnBKQS9mdXJReTMwZzNneWFadmNyUEh2citQUE9NUEUv?=
- =?utf-8?B?cmtlZTVMYWt6TTJ6NW0xMGE4eVF6WHZVbTJZSkYyVi9HUGo3WU5Oc016RVRx?=
- =?utf-8?B?cVVVbGNnU2ptTmdXR2dQS2YwZ1RsdkUrS0VlRDdXZ3VQVUxZL1V6UVIrdU1N?=
- =?utf-8?B?M3VaSHltMnhXV0luR21KQlNyRjFLY3JNUkgxYm0wRnFxU21SdGRMYzV0c1lM?=
- =?utf-8?B?OFhXdjZsZTFVamxtSklwamVrdUw0eEJtaWp3VXhQWkI4WDhMUkhpbnd4VTBG?=
- =?utf-8?B?K1RNRkhBR0RRd0FaQ2NQcWR4VWxCZlZIdGpBT2Ftb3pGamt6NTR3cmUwdHJy?=
- =?utf-8?B?NnZNTktCL2U1SzM5dmd0dnZGbVhybFFvY2FMdHJSbXpweEpFLzFQaFdEM2Vy?=
- =?utf-8?B?bE11Mi9Uc1hZbnY0MWxmcTdNS3Q0ZWlyYVR4dGZkOXg5S0s2R0pXaGtBbVJs?=
- =?utf-8?B?VXQzd3NpR2RQT3dSblVoSUxMZ0g5eXdlY0RJRkpxR3ZodkZVMVdiMGMxcGFJ?=
- =?utf-8?B?TkNQNE1Iak44UlE4SisxaDlBYXdNTDNlTFpDYnVKWVFmelZndmlxVmliMjNi?=
- =?utf-8?B?SzdqRFQ3d1lhcC9iQUhXcG1GWUp1REtJQWdJa3l1UWxIQ0pDOWpLZXlyRzBE?=
- =?utf-8?B?YVRwY21zOVFiTmNTeXNuOWlkQjdwZmVCT0hiRjlERVFYSGRsSXh5V3lpeVRp?=
- =?utf-8?B?UG5IUnpUa1pwZEhrc2tjYWpxY1NhbFA2aTdYVU8zRkloTHJxbndBeWpncm9h?=
- =?utf-8?B?QmNwVmEwb2lHcUN3OGY4SGpNaENBeUEzY09qSlp1V3dMZ05INFk2eStrWVQ5?=
- =?utf-8?B?dkhBNnVPNWhQdmFsTUIyMWJiNEEyZGFmQ0hCaTM4bE9VV0Z0SVlMdDBXZEgv?=
- =?utf-8?B?Tis5ei80WFVEM09ZdzZaSWNLZ3d2UWNjNXlOV0VxVkxHZEdpYlRrODVVQ2dK?=
- =?utf-8?B?Sk5LbFlLQkp0cHpXTmdGR3h1UHVrUUJpVFJoMFVuS0VWRXJ0UEJnTXZOYU1B?=
- =?utf-8?B?RVV1QzRWcXZGaGtrRXhwUnlTeHIwRVJpbHl3aEtnc3d2WHpSUVl1aTN2N0lO?=
- =?utf-8?B?dXJNbzJkMDYxT1U0TlVuQ2cxejR2aGppbG5JSEpzOWFjampNQjlyakttblZP?=
- =?utf-8?B?QzFiZUd6VUJoY2QvZDkzVHlqUWhKeTRFbVBPK3N1VFBSclRyY1FON0F4T1RK?=
- =?utf-8?B?dWdjUGlTZ0hDY0xaMjcweHBkS3pGSDZKVG5mTkNxVmsxbm44ZGJhN2tLN1NF?=
- =?utf-8?B?MnZMU0lta0gvcjB3cW9YeWNQQ3J5cm96UHk3MXlUUWRyVHVVaVFQa1JUZjJG?=
- =?utf-8?B?OVBKd1UrZXNHaTY4WFg5c1kydW5EZXlueStNNGhQSElWdGFPbjlPOGlPTEQ5?=
- =?utf-8?B?WXBBUFUwT2hOV0x3a1p4RzU1OFJqRW9CM1o4dlQyY01hcU1mNHRMd1g3WU5P?=
- =?utf-8?B?WEZGdUNYMnpPcmVPdVN3Rk5pOHIwTGpMTW5wRHF5Z2UyNC95WVJ1NFhDVDRB?=
- =?utf-8?B?ckVDSXQycjJrTU1ibHMvQmpoV2xDb1FIc09WOW9xRTl2VTROZWwyR2d1Ny9s?=
- =?utf-8?B?c29JRExBd0p5ZVlDd2ErbTQzV2J6VWcvU1VsY3pHVGVnd08xdUtEakVYU1Ny?=
- =?utf-8?B?TXcrWkJ6aEdlNlZRRjhraXI5ckhZUTJwSm1wVjE1amVkQ3p3bEY4eURQOVBz?=
- =?utf-8?Q?IBZVl5Z7ArxX8ZHyl3Hx?=
-X-OriginatorOrg: sct-15-20-7719-20-msonline-outlook-4359a.templateTenant
-X-MS-Exchange-CrossTenant-Network-Message-Id: 9c7a8231-87fb-4161-c944-08dd273c9637
-X-MS-Exchange-CrossTenant-AuthSource: DUZPR10MB8267.EURPRD10.PROD.OUTLOOK.COM
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 28 Dec 2024 12:38:52.9698 (UTC)
-X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
-X-MS-Exchange-CrossTenant-Id: 84df9e7f-e9f6-40af-b435-aaaaaaaaaaaa
-X-MS-Exchange-CrossTenant-RMS-PersistedConsumerOrg: 00000000-0000-0000-0000-000000000000
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: PAXPR10MB5613
+Content-Type: text/plain
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -151,93 +83,146 @@ List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-In the meantime I have contacted everyone who could have something to do 
-with it:
-Kernel groups
-System D
-Nvidia
-And gues:  Everyone says it's not their fault.
+On Thu, 26 Dec 2024, Abel Vesa <abel.vesa@linaro.org> wrote:
+> On 24-12-11 15:42:27, Johan Hovold wrote:
+>> On Wed, Dec 11, 2024 at 03:04:12PM +0200, Abel Vesa wrote:
+>>  
+>> > +/**
+>> > + * drm_dp_lttpr_set_transparent_mode - set the LTTPR in transparent mode
+>> > + * @aux: DisplayPort AUX channel
+>> > + * @enable: Enable or disable transparent mode
+>> > + *
+>> > + * Returns 0 on success or a negative error code on failure.
+>> > + */
+>> > +int drm_dp_lttpr_set_transparent_mode(struct drm_dp_aux *aux, bool enable)
+>> > +{
+>> > +	u8 val = enable ? DP_PHY_REPEATER_MODE_TRANSPARENT :
+>> > +			  DP_PHY_REPEATER_MODE_NON_TRANSPARENT;
+>> > +	int ret = drm_dp_dpcd_writeb(aux, DP_PHY_REPEATER_MODE, val);
+>> > +
+>> > +	return ret == 1 ? 0 : ret;
+>> 
+>> This looks correct, but I had to go look at drm_dp_dpcd_writeb() to make
+>> sure it never returns 0 (for short transfers).
+>
+> Will follow Dmitry's proposal here.
+>
+> 	if (ret < 0)
+>         	return ret;
+>
+> 	return (ret == 1) ? 0 : -EIO;
 
-But we don't give up. Linux is such a beautiful and solid system. Why 
-would it work with Windows and not Linux?
+Arguably this (well, with ret == len) is what we should've done with
+*all* of the drm_dp_dpcd_*() functions. I don't think there's a single
+case where we'd actually need to know that some but not all data was
+transferred. And if there are, they could be special cased. Now we have
+hundreds of cases where we check against length and it's just cumbersome
+all over the place.
 
-Our analysis has now discovered that the problem does indeed come from 
-the kernel. The kernel does not allow several users to access a graphics 
-card at the same time. Indeed, to use it, several users need access to 
-the graphics card at the same time.
+The question is, how confusing is it going to be to have some of the new
+functions return 0 instead of len? Very? Extremely?
 
-Can this simultaneous access be allowed by the kernel after all?
-Or can the kernel be adjusted so that this would be possible?
+As painful as it would be, I'd be in favor of changing them all to
+return 0 on ret == len. If we find a volunteer.
 
-In the meantime I am also working with a multiseat company to search 
-together for a solution for multiseat under Linux. This company is 
-working on creating an easy and user-friendly program to work via a 
-multiseat with Linux, and they have already a high-selling multiseat 
-program for Windows. The intention would be to create a program that 
-works like some multiseat programs in Windows: install, drag mice and 
-keyboards to the right screen, restart and it works as multiseat.
-But such a program is only interesting if it can work for different 
-users on 1 video card. For example, for a multiseat of 6 users you need 
-3 video cards with 2 outputs each.
-For now the programmers has a good béta program, but with the 
-restriction only one workstation on one video card, but then it's not 
-interesting at all.
+BR,
+Jani.
 
 
-Op 15/12/2023 om 10:59 schreef Gert Vanhaerents:
->
-> Op 4/12/2023 om 15:11 schreef Timur Tabi:
->> On Mon, 2023-12-04 at 09:51 +0100, Gert Vanhaerents wrote:
->>> OK  i will report it to nvidia. But with the nouveau drivers it's 
->>> also not
->>> working. Are you sure it's not a kernel problem?
->>> Because according to systemd it would be a kernel problem. 
->>> (personaly i am
->>> also thinking it's a driver problem)
->> Unfortunately, it's not easy for Nouveau to debug problems with GSP-RM.
->> However, if the problem exists in the proprietary driver, then Nvidia 
->> could
->> fix it.  That would then lead to a new version of OpenRM that Nouveau 
->> could
->> use.
->
-> I have contacted Nvidia and now i can see the outputs such like this:
->
-> ─/sys/devices/pci0000:00/0000:00:03.1/0000:08:00.0/drm/card0
->           │ [MASTER] drm:card0
->           │ 
-> ├─/sys/devices/pci0000:00/0000:00:03.1/0000:08:00.0/drm/card0/card0-DVI-D-1
->           │ │ [MASTER] drm:card0-DVI-D-1
->           │ 
-> ├─/sys/devices/pci0000:00/0000:00:03.1/0000:08:00.0/drm/card0/card0-HDMI-A-1
->           │ │ [MASTER] drm:card0-HDMI-A-1
->           │ 
-> └─/sys/devices/pci0000:00/0000:00:03.1/0000:08:00.0/drm/card0/card0-VGA-1
->           │   [MASTER] drm:card0-VGA-1
->
-> But the problem is now the same of with the Nouveau driver. When you 
-> do this:
->
-> loginctl attach seat1 
-> /sys/devices/pci0000:00/0000:00:03.1/0000:08:00.0/drm/card0/card0-VGA-1
->
-> For the seat1 (the VGA d-sub output for seat1 and the other HDMI 
-> output for seat0) and of course the mouse and keyboard.
->
-> When you do this, all the graphics outputs are on the second seat 
-> (seat1) and not anymore on the first seat. So i need to move only the 
-> VGA output to seat1 and not all the outputs.
 >
 >
-> The problem is that linux can not start 2 or more window managers on 
-> one card (even if you don't need a multiseat, but use only one mouse 
-> and keyboard).
+>> 
+>> > +}
+>> > +EXPORT_SYMBOL(drm_dp_lttpr_set_transparent_mode);
+>> 
+>> This appears to be what the driver currently uses, but why not
+>> EXPORT_SYMBOL_GPL?
+>> 
+>> > +
+>> > +/**
+>> > + * drm_dp_lttpr_init - init LTTPR transparency mode according to DP standard
+>> > + *
+>> > + * @aux: DisplayPort AUX channel
+>> > + * @lttpr_count: Number of LTTPRs
+>> > + *
+>> > + * Returns 0 on success or a negative error code on failure.
+>> > + */
+>> > +int drm_dp_lttpr_init(struct drm_dp_aux *aux, int lttpr_count)
+>> > +{
+>> > +	if (!lttpr_count)
+>> > +		return 0;
+>> > +
+>> > +	/*
+>> > +	 * See DP Standard v2.0 3.6.6.1 about the explicit disabling of
+>> > +	 * non-transparent mode and the disable->enable non-transparent mode
+>> > +	 * sequence.
+>> > +	 */
+>> > +	drm_dp_lttpr_set_transparent_mode(aux, true);
+>> 
+>> Error handling?
 >
-> So how can i fix that i can use more than one window manager on one 
-> physical graphics card? (without Xephyr or something because they are 
-> to outdated and works not good).
+> Yes, this makes sense. But other than throwing an error I don't think
+> there is much to be done. I'll add an drm_err here just in case. 
 >
-> I have tried with: Linux Mint, Ubuntu and Debian all the same problem.
+>> 
+>> > +
+>> > +	if (lttpr_count > 0 && !drm_dp_lttpr_set_transparent_mode(aux, false))
+>> 
+>> No need to check lttpr_count again here.
 >
+> So the logic behind lttpr_count and this transparency mode changing, as
+> specified in the DP standard, is as follows:
+>
+> - If there are 0 LTTPRs counted, then nothing to be done, otherwise set to
+> transparent mode.
+>
+> - Then, if there are between 0 and 8 LTTPRs counted, set non-transparent
+> mode successfully.
+>
+> - Otherwise, rollback to transparent mode.
+>
+> This last rollback might result in two transparent mode settings without
+> a non-transparent one in between, but AFAIU, that is OK. Making sure this
+> doesn't happen would just make the implementation more ugly without any
+> benefit, IMO.
+>
+>> 
+>> > +		return 0;
+>> 
+>> I'd check for errors instead of success here and do the rollback before
+>> returning -EINVAL.
+>> 
+>
+> Yes, I think it would be more cleaner. Will do that.
+>
+>> > +
+>> > +	/*
+>> > +	 * Roll-back to tranparent mode if setting non-tranparent mode failed or
+>> > +	 * the number of LTTPRs is invalid
+>> > +	 */
+>> > +	drm_dp_lttpr_set_transparent_mode(aux, true);
+>> > +
+>> > +	return -EINVAL;
+>> 
+>> And return 0 explicitly here.
+>
+> Yes. Will do that.
+>
+>> 
+>> > +}
+>> > +EXPORT_SYMBOL(drm_dp_lttpr_init);
+>> 
+>> In any case this works well and is needed for external display on the
+>> Lenovo ThinkPad T14s, while not breaking the X13s which does not need
+>> it:
+>> 
+>> Tested-by: Johan Hovold <johan+linaro@kernel.org>
+>> 
+>> Johan
+>
+> Thanks for reviewing and testing!
+> Abel
 >
 
+-- 
+Jani Nikula, Intel
