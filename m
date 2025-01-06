@@ -2,100 +2,66 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id 0F972A01C73
-	for <lists+nouveau@lfdr.de>; Mon,  6 Jan 2025 00:19:01 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 15086A01DED
+	for <lists+nouveau@lfdr.de>; Mon,  6 Jan 2025 04:00:57 +0100 (CET)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id CB95E10E173;
-	Sun,  5 Jan 2025 23:18:58 +0000 (UTC)
-Authentication-Results: gabe.freedesktop.org;
-	dkim=pass (1024-bit key; unprotected) header.d=ideasonboard.com header.i=@ideasonboard.com header.b="UeDysJQP";
-	dkim-atps=neutral
+	by gabe.freedesktop.org (Postfix) with ESMTP id E9A4510E55B;
+	Mon,  6 Jan 2025 03:00:54 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from perceval.ideasonboard.com (perceval.ideasonboard.com
- [213.167.242.64])
- by gabe.freedesktop.org (Postfix) with ESMTPS id C856A10E173;
- Sun,  5 Jan 2025 23:18:57 +0000 (UTC)
-Received: from pendragon.ideasonboard.com (81-175-209-231.bb.dnainternet.fi
- [81.175.209.231])
- by perceval.ideasonboard.com (Postfix) with ESMTPSA id 8DC5E7E9;
- Mon,  6 Jan 2025 00:18:04 +0100 (CET)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=ideasonboard.com;
- s=mail; t=1736119085;
- bh=eN3aRIQ/gGCSrh9ouIKHrFhOanrFncaqzRShN6d8pSM=;
- h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
- b=UeDysJQP/8Oa1/DV3kQKsywDTYtozyWwBNwdqtX1NaCn147rROcOhgDgaBzpl9UCN
- dkXrg5A0RWNQK6dEu/jHI3f++kMLiO8kBcwCiPgwkrE+/NNE7iR+kBs+koVfsvkkE+
- 0++Ipy4b9rU2Z58OdadDTjM+gkVR9C1lYmx7Vl1g=
-Date: Mon, 6 Jan 2025 01:18:53 +0200
-From: Laurent Pinchart <laurent.pinchart@ideasonboard.com>
-To: Dmitry Baryshkov <dmitry.baryshkov@linaro.org>
-Cc: Jani Nikula <jani.nikula@linux.intel.com>,
- Rodrigo Vivi <rodrigo.vivi@intel.com>,
- Joonas Lahtinen <joonas.lahtinen@linux.intel.com>,
- Tvrtko Ursulin <tursulin@ursulin.net>,
- David Airlie <airlied@gmail.com>, Simona Vetter <simona@ffwll.ch>,
- Maarten Lankhorst <maarten.lankhorst@linux.intel.com>,
- Maxime Ripard <mripard@kernel.org>,
- Thomas Zimmermann <tzimmermann@suse.de>,
- Karol Herbst <kherbst@redhat.com>, Lyude Paul <lyude@redhat.com>,
- Danilo Krummrich <dakr@redhat.com>,
- Harry Wentland <harry.wentland@amd.com>, Leo Li <sunpeng.li@amd.com>,
- Rodrigo Siqueira <Rodrigo.Siqueira@amd.com>,
- Alex Deucher <alexander.deucher@amd.com>,
- Christian =?utf-8?B?S8O2bmln?= <christian.koenig@amd.com>,
- Xinhui Pan <Xinhui.Pan@amd.com>, Alain Volmat <alain.volmat@foss.st.com>,
- Raphael Gallais-Pou <rgallaispou@gmail.com>,
- Liviu Dudau <liviu.dudau@arm.com>, Andrzej Hajda <andrzej.hajda@intel.com>,
- Neil Armstrong <neil.armstrong@linaro.org>,
- Robert Foss <rfoss@kernel.org>, Jonas Karlman <jonas@kwiboo.se>,
- Jernej Skrabec <jernej.skrabec@gmail.com>,
- Peter Senna Tschudin <peter.senna@gmail.com>, Ian Ray <ian.ray@ge.com>,
- Martyn Welch <martyn.welch@collabora.co.uk>,
- Inki Dae <inki.dae@samsung.com>, Seung-Woo Kim <sw0312.kim@samsung.com>,
- Kyungmin Park <kyungmin.park@samsung.com>,
- Krzysztof Kozlowski <krzk@kernel.org>,
- Alim Akhtar <alim.akhtar@samsung.com>,
- Stefan Agner <stefan@agner.ch>, Alison Wang <alison.wang@nxp.com>,
- Patrik Jakobsson <patrik.r.jakobsson@gmail.com>,
- Philipp Zabel <p.zabel@pengutronix.de>, Shawn Guo <shawnguo@kernel.org>,
- Sascha Hauer <s.hauer@pengutronix.de>,
- Pengutronix Kernel Team <kernel@pengutronix.de>,
- Fabio Estevam <festevam@gmail.com>, Rob Clark <robdclark@gmail.com>,
- Abhinav Kumar <quic_abhinavk@quicinc.com>, Sean Paul <sean@poorly.run>,
- Marijn Suijten <marijn.suijten@somainline.org>,
- Dave Airlie <airlied@redhat.com>, Gerd Hoffmann <kraxel@redhat.com>,
- Sandy Huang <hjc@rock-chips.com>,
- Heiko =?utf-8?Q?St=C3=BCbner?= <heiko@sntech.de>,
- Andy Yan <andy.yan@rock-chips.com>, Chen-Yu Tsai <wens@csie.org>,
- Samuel Holland <samuel@sholland.org>,
- Thierry Reding <thierry.reding@gmail.com>,
- Mikko Perttunen <mperttunen@nvidia.com>,
- Jonathan Hunter <jonathanh@nvidia.com>,
- Dave Stevenson <dave.stevenson@raspberrypi.com>,
- =?utf-8?B?TWHDrXJh?= Canal <mcanal@igalia.com>,
- Raspberry Pi Kernel Maintenance <kernel-list@raspberrypi.com>,
- Gurchetan Singh <gurchetansingh@chromium.org>,
- Chia-I Wu <olvaffe@gmail.com>, Zack Rusin <zack.rusin@broadcom.com>,
- Broadcom internal kernel review list <bcm-kernel-feedback-list@broadcom.com>, 
- intel-gfx@lists.freedesktop.org, intel-xe@lists.freedesktop.org,
- dri-devel@lists.freedesktop.org, linux-kernel@vger.kernel.org,
- nouveau@lists.freedesktop.org, amd-gfx@lists.freedesktop.org,
- linux-arm-kernel@lists.infradead.org,
- linux-samsung-soc@vger.kernel.org, imx@lists.linux.dev,
- linux-arm-msm@vger.kernel.org, freedreno@lists.freedesktop.org,
- virtualization@lists.linux.dev, spice-devel@lists.freedesktop.org,
- linux-rockchip@lists.infradead.org, linux-sunxi@lists.linux.dev,
- linux-tegra@vger.kernel.org, Jani Nikula <jani.nikula@intel.com>
-Subject: Re: [PATCH v2 0/5] drm/connector: make mode_valid() callback accept
- const mode pointer
-Message-ID: <20250105231853.GA21164@pendragon.ideasonboard.com>
-References: <20241214-drm-connector-mode-valid-const-v2-0-4f9498a4c822@linaro.org>
- <76ho36jqcraehnsgpjralpye52w7ryshhgizekn4qqfsikiojd@3yyorbvjkc7b>
+Received: from mail-vs1-f46.google.com (mail-vs1-f46.google.com
+ [209.85.217.46])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 464C610E55B;
+ Mon,  6 Jan 2025 03:00:52 +0000 (UTC)
+Received: by mail-vs1-f46.google.com with SMTP id
+ ada2fe7eead31-4afe4f1ce18so3979516137.3; 
+ Sun, 05 Jan 2025 19:00:52 -0800 (PST)
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1736132452; x=1736737252;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=D1B/wfmME6f27/FASU0kRKyN+yxl9V3tn3gXA8xt9Kk=;
+ b=TmXAvRnAHo83IoNdpOFrP/O3RrwSukOJmWvsVJMrS1uZXGPajKNcE6PbDbcxbd02Jw
+ rK40Kus9E7RpzJVo77BRdw4uQcMTn5LKaal13B7GYbEvMOUw/xdtoljkcNV5wM7SJ9KJ
+ +LgtgdAtSO98LlDRX2sRBpW84v9GUVupJ4cpjkcTMX0QYTZFyEIt6rEl1wdlbc0WhHs4
+ BFzf76NMeew5tiymp8bFWqEi88Q2I+G7Mg89BrT0FNO0jZqouJszykpZlz+A7l4nCKk7
+ 5kK4BmEoWyMsV5RCiAjhbX1WQePWAVxOkFs2X3GF5z2fE41dqs4Zn+hgzImMLjr6mnfc
+ cKFg==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCWbGeccT+Pq1iqqN3MZyPTEgQzfZeHs5yGJnG+Qt8Ox4Z/MHLoRlF7BmCSkiirBlKoTNyma+yTqCg==@lists.freedesktop.org,
+ AJvYcCX/kXknftc8NmmJMuKDT+/4k51QoTsa6La7YKEJN6NqUUePhxuz6ObLI3c1pweZTiMYRAWCZLYX0Y0=@lists.freedesktop.org
+X-Gm-Message-State: AOJu0YxKk6WYrpv9A54vezEk7BG8Z5Lst4z3R4wD5Su6bguiKvO9iDD4
+ PRxJOVZIfukMZwz0F2kYZYf1aY1oOmMRl00FMvMxLQADixLADhVynjcGkNLGO2j93gtyfCNDHL2
+ TCzudvJFgNrjRTQn+abpyD4ODT+8=
+X-Gm-Gg: ASbGncs+m1k78uwj80BctKok6yvB7e4TJ7J8CxXTmUk02nuZ5XLOBfVr+2tAwiK38Yn
+ iby7h4I4NO95YmHxBCzlNj/Z0ylkHC78ZqyYdfbgjwglsMAAIw6rRfC0zi5B7GCRZn05WRnqs
+X-Google-Smtp-Source: AGHT+IGZHub59sjOW8FEpQJ700xmJWlOibnhtSwoIENnT7LrGf4fYegDhOiJgZWR4sw3yvPQQVbTjGcgUM2D529peBA=
+X-Received: by 2002:a05:6102:6e88:b0:4b2:cc94:1881 with SMTP id
+ ada2fe7eead31-4b2cc941e4cmr30717120137.21.1736132451988; Sun, 05 Jan 2025
+ 19:00:51 -0800 (PST)
 MIME-Version: 1.0
-Content-Type: text/plain; charset=utf-8
-Content-Disposition: inline
-In-Reply-To: <76ho36jqcraehnsgpjralpye52w7ryshhgizekn4qqfsikiojd@3yyorbvjkc7b>
+References: <AM7PR10MB39235DD53D163910E88FDB938E82A@AM7PR10MB3923.EURPRD10.PROD.OUTLOOK.COM>
+ <AM7PR10MB3923E07D6024434077E95EBA8E82A@AM7PR10MB3923.EURPRD10.PROD.OUTLOOK.COM>
+ <ZWsuiq7zrYS-pDli@archie.me>
+ <655a02097e9b49c2da7a2be60d7c154a48a916f4.camel@nvidia.com>
+ <AM7PR10MB39235076485E2E3905F422508E86A@AM7PR10MB3923.EURPRD10.PROD.OUTLOOK.COM>
+ <e046050c7e9be5d4f816d33dd1a9dd50e2de3308.camel@nvidia.com>
+ <DUZPR10MB8267520A4F44DA38339969A78E93A@DUZPR10MB8267.EURPRD10.PROD.OUTLOOK.COM>
+ <DUZPR10MB82674B5F711950D71C0411B98E0F2@DUZPR10MB8267.EURPRD10.PROD.OUTLOOK.COM>
+In-Reply-To: <DUZPR10MB82674B5F711950D71C0411B98E0F2@DUZPR10MB8267.EURPRD10.PROD.OUTLOOK.COM>
+From: Ilia Mirkin <imirkin@alum.mit.edu>
+Date: Sun, 5 Jan 2025 22:00:40 -0500
+Message-ID: <CAKb7UviDRfOLBo5acx8uCKbA2R9Ds3JBho1UwyaJBXb5trsVGQ@mail.gmail.com>
+Subject: Re: Kernel problem with multiseat on one card - more than 1 user
+ simultaneously on 1 video card
+To: Gert Vanhaerents <gert.vanhaerents@hotmail.com>
+Cc: Timur Tabi <ttabi@nvidia.com>, 
+ "dri-devel@lists.freedesktop.org" <dri-devel@lists.freedesktop.org>, 
+ "nouveau@lists.freedesktop.org" <nouveau@lists.freedesktop.org>, 
+ "linux-kernel@vger.kernel.org" <linux-kernel@vger.kernel.org>, 
+ "bagasdotme@gmail.com" <bagasdotme@gmail.com>
+Content-Type: multipart/alternative; boundary="000000000000157c07062b00d631"
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -110,124 +76,115 @@ List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-On Mon, Jan 06, 2025 at 12:47:07AM +0200, Dmitry Baryshkov wrote:
-> On Sat, Dec 14, 2024 at 03:37:04PM +0200, Dmitry Baryshkov wrote:
-> > While working on the generic mode_valid() implementation for the HDMI
-> > Connector framework I noticed that unlike other DRM objects
-> > drm_connector accepts non-const pointer to struct drm_display_mode,
-> > while obviously mode_valid() isn't expected to modify the argument.
-> > 
-> > Mass-change the DRM framework code to pass const argument to that
-> > callback.
-> > 
-> > The series has been compile-tested with defconfig for x86-64, arm and
-> > arm64.
-> > 
-> > Note: yes, I understand that this change might be hard to review and
-> > merge. The only viable option that I foresee is to add new callback,
-> > having the const argument and migrate drivers into using it one by one.
-> 
-> Colleagues, I'd like to graciously ping regarding this series. Should it
-> be merged as is (possibly requiring more R-B's)? Or should I rework it
-> adding something like .mode_valid_new() callback which takes const
-> argument?
+--000000000000157c07062b00d631
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 
-I personally like the end result. The diffstat isn't very big, I don't
-think it's that hard to review.
+On Sat, Dec 28, 2024 at 7:39=E2=80=AFAM Gert Vanhaerents <
+gert.vanhaerents@hotmail.com> wrote:
 
-> > Signed-off-by: Dmitry Baryshkov <dmitry.baryshkov@linaro.org>
-> > ---
-> > Changes in v2:
-> > - Rebased on top of linux-next
-> > - Replaced 'accept const argument' with 'take a const arugment'
-> >   (Laurent)
-> > - Link to v1: https://lore.kernel.org/r/20241115-drm-connector-mode-valid-const-v1-0-b1b523156f71@linaro.org
-> > 
-> > ---
-> > Dmitry Baryshkov (5):
-> >       drm/encoder_slave: make mode_valid accept const struct drm_display_mode
-> >       drm/amdgpu: don't change mode in amdgpu_dm_connector_mode_valid()
-> >       drm/sti: hda: pass const struct drm_display_mode* to hda_get_mode_idx()
-> >       drm/connector: make mode_valid_ctx take a const struct drm_display_mode
-> >       drm/connector: make mode_valid take a const struct drm_display_mode
-> > 
-> >  drivers/gpu/drm/amd/amdgpu/amdgpu_connectors.c           |  8 ++++----
-> >  drivers/gpu/drm/amd/amdgpu/atombios_dp.c                 |  2 +-
-> >  drivers/gpu/drm/amd/amdgpu/atombios_dp.h                 |  2 +-
-> >  drivers/gpu/drm/amd/display/amdgpu_dm/amdgpu_dm.c        | 12 +++++++++---
-> >  drivers/gpu/drm/amd/display/amdgpu_dm/amdgpu_dm.h        |  2 +-
-> >  drivers/gpu/drm/arm/display/komeda/komeda_wb_connector.c |  2 +-
-> >  drivers/gpu/drm/arm/malidp_mw.c                          |  2 +-
-> >  drivers/gpu/drm/bridge/adv7511/adv7511_drv.c             |  2 +-
-> >  drivers/gpu/drm/bridge/cadence/cdns-mhdp8546-core.c      |  2 +-
-> >  drivers/gpu/drm/bridge/megachips-stdpxxxx-ge-b850v3-fw.c |  7 -------
-> >  drivers/gpu/drm/display/drm_bridge_connector.c           |  2 +-
-> >  drivers/gpu/drm/display/drm_hdmi_state_helper.c          |  2 +-
-> >  drivers/gpu/drm/drm_crtc_helper_internal.h               |  2 +-
-> >  drivers/gpu/drm/drm_probe_helper.c                       |  2 +-
-> >  drivers/gpu/drm/exynos/exynos_hdmi.c                     |  2 +-
-> >  drivers/gpu/drm/fsl-dcu/fsl_dcu_drm_rgb.c                |  2 +-
-> >  drivers/gpu/drm/gma500/cdv_intel_crt.c                   |  2 +-
-> >  drivers/gpu/drm/gma500/cdv_intel_dp.c                    |  2 +-
-> >  drivers/gpu/drm/gma500/cdv_intel_hdmi.c                  |  2 +-
-> >  drivers/gpu/drm/gma500/cdv_intel_lvds.c                  |  2 +-
-> >  drivers/gpu/drm/gma500/oaktrail_hdmi.c                   |  2 +-
-> >  drivers/gpu/drm/gma500/psb_intel_drv.h                   |  2 +-
-> >  drivers/gpu/drm/gma500/psb_intel_lvds.c                  |  2 +-
-> >  drivers/gpu/drm/gma500/psb_intel_sdvo.c                  |  2 +-
-> >  drivers/gpu/drm/i2c/ch7006_drv.c                         |  2 +-
-> >  drivers/gpu/drm/i2c/sil164_drv.c                         |  2 +-
-> >  drivers/gpu/drm/i915/display/dvo_ch7017.c                |  2 +-
-> >  drivers/gpu/drm/i915/display/dvo_ch7xxx.c                |  2 +-
-> >  drivers/gpu/drm/i915/display/dvo_ivch.c                  |  2 +-
-> >  drivers/gpu/drm/i915/display/dvo_ns2501.c                |  2 +-
-> >  drivers/gpu/drm/i915/display/dvo_sil164.c                |  2 +-
-> >  drivers/gpu/drm/i915/display/dvo_tfp410.c                |  2 +-
-> >  drivers/gpu/drm/i915/display/icl_dsi.c                   |  2 +-
-> >  drivers/gpu/drm/i915/display/intel_crt.c                 |  2 +-
-> >  drivers/gpu/drm/i915/display/intel_dp.c                  |  2 +-
-> >  drivers/gpu/drm/i915/display/intel_dp_mst.c              |  2 +-
-> >  drivers/gpu/drm/i915/display/intel_dsi.c                 |  2 +-
-> >  drivers/gpu/drm/i915/display/intel_dsi.h                 |  2 +-
-> >  drivers/gpu/drm/i915/display/intel_dvo.c                 |  2 +-
-> >  drivers/gpu/drm/i915/display/intel_dvo_dev.h             |  2 +-
-> >  drivers/gpu/drm/i915/display/intel_hdmi.c                |  2 +-
-> >  drivers/gpu/drm/i915/display/intel_lvds.c                |  2 +-
-> >  drivers/gpu/drm/i915/display/intel_sdvo.c                |  2 +-
-> >  drivers/gpu/drm/i915/display/intel_tv.c                  |  2 +-
-> >  drivers/gpu/drm/i915/display/vlv_dsi.c                   |  2 +-
-> >  drivers/gpu/drm/imx/ipuv3/imx-tve.c                      |  2 +-
-> >  drivers/gpu/drm/msm/disp/mdp4/mdp4_lvds_connector.c      |  2 +-
-> >  drivers/gpu/drm/nouveau/dispnv04/tvnv17.c                |  2 +-
-> >  drivers/gpu/drm/nouveau/dispnv50/disp.c                  |  2 +-
-> >  drivers/gpu/drm/nouveau/nouveau_connector.c              |  2 +-
-> >  drivers/gpu/drm/qxl/qxl_display.c                        |  2 +-
-> >  drivers/gpu/drm/radeon/atombios_dp.c                     |  2 +-
-> >  drivers/gpu/drm/radeon/radeon_connectors.c               | 10 +++++-----
-> >  drivers/gpu/drm/radeon/radeon_mode.h                     |  2 +-
-> >  drivers/gpu/drm/rockchip/cdn-dp-core.c                   |  2 +-
-> >  drivers/gpu/drm/rockchip/inno_hdmi.c                     |  4 ++--
-> >  drivers/gpu/drm/rockchip/rk3066_hdmi.c                   |  2 +-
-> >  drivers/gpu/drm/sti/sti_dvo.c                            |  2 +-
-> >  drivers/gpu/drm/sti/sti_hda.c                            | 12 ++++++------
-> >  drivers/gpu/drm/sti/sti_hdmi.c                           |  2 +-
-> >  drivers/gpu/drm/tegra/dsi.c                              |  2 +-
-> >  drivers/gpu/drm/tegra/hdmi.c                             |  2 +-
-> >  drivers/gpu/drm/tegra/sor.c                              |  2 +-
-> >  drivers/gpu/drm/vc4/vc4_txp.c                            |  2 +-
-> >  drivers/gpu/drm/virtio/virtgpu_display.c                 |  2 +-
-> >  drivers/gpu/drm/vmwgfx/vmwgfx_kms.c                      |  2 +-
-> >  drivers/gpu/drm/vmwgfx/vmwgfx_kms.h                      |  2 +-
-> >  drivers/gpu/drm/vmwgfx/vmwgfx_stdu.c                     |  2 +-
-> >  include/drm/display/drm_hdmi_state_helper.h              |  2 +-
-> >  include/drm/drm_encoder_slave.h                          |  2 +-
-> >  include/drm/drm_modeset_helper_vtables.h                 |  4 ++--
-> >  71 files changed, 92 insertions(+), 93 deletions(-)
-> > ---
-> > base-commit: 4176cf5c5651c33769de83bb61b0287f4ec7719f
-> > change-id: 20241115-drm-connector-mode-valid-const-ae3db0ef6cb7
+> In the meantime I have contacted everyone who could have something to do
+> with it:
+> Kernel groups
+> System D
+> Nvidia
+> And gues:  Everyone says it's not their fault.
+>
+> But we don't give up. Linux is such a beautiful and solid system. Why
+> would it work with Windows and not Linux?u
+>
+> Our analysis has now discovered that the problem does indeed come from
+> the kernel. The kernel does not allow several users to access a graphics
+> card at the same time. Indeed, to use it, several users need access to
+> the graphics card at the same time.
+>
+> Can this simultaneous access be allowed by the kernel after all?
+> Or can the kernel be adjusted so that this would be possible?
+>
+> In the meantime I am also working with a multiseat company to search
+> together for a solution for multiseat under Linux. This company is
+> working on creating an easy and user-friendly program to work via a
+> multiseat with Linux, and they have already a high-selling multiseat
+> program for Windows. The intention would be to create a program that
+> works like some multiseat programs in Windows: install, drag mice and
+> keyboards to the right screen, restart and it works as multiseat.
+> But such a program is only interesting if it can work for different
+> users on 1 video card. For example, for a multiseat of 6 users you need
+> 3 video cards with 2 outputs each.
+> For now the programmers has a good b=C3=A9ta program, but with the
+> restriction only one workstation on one video card, but then it's not
+> interesting at all.
 
--- 
-Regards,
 
-Laurent Pinchart
+You don't mention which GPU you have. Pre-Kepler GPUs can only scan out 2
+outputs at a time, so even if you have 3+ connectors on the board, you can
+still only have 2 of them active at a time. This is a hardware restriction.
+Kepler+ enables 4.
+
+If you check "lspci -nn -d 10de:" it should give you all the NVIDIA
+hardware in your machine.
+
+Cheers,
+
+  -ilia
+
+P.S. Looks like I provided this very same advice to you without response on
+Jan 16, 2024. So it's an annual thing?
+
+--000000000000157c07062b00d631
+Content-Type: text/html; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+
+<div dir=3D"ltr"><div dir=3D"ltr"><div dir=3D"ltr"><div dir=3D"ltr">On Sat,=
+ Dec 28, 2024 at 7:39=E2=80=AFAM Gert Vanhaerents &lt;<a href=3D"mailto:ger=
+t.vanhaerents@hotmail.com" target=3D"_blank">gert.vanhaerents@hotmail.com</=
+a>&gt; wrote:</div><div class=3D"gmail_quote"><blockquote class=3D"gmail_qu=
+ote" style=3D"margin:0px 0px 0px 0.8ex;border-left:1px solid rgb(204,204,20=
+4);padding-left:1ex">In the meantime I have contacted everyone who could ha=
+ve something to do <br>
+with it:<br>
+Kernel groups<br>
+System D<br>
+Nvidia<br>
+And gues:=C2=A0 Everyone says it&#39;s not their fault.<br>
+<br>
+But we don&#39;t give up. Linux is such a beautiful and solid system. Why <=
+br>
+would it work with Windows and not Linux?u<br>
+<br>
+Our analysis has now discovered that the problem does indeed come from <br>
+the kernel. The kernel does not allow several users to access a graphics <b=
+r>
+card at the same time. Indeed, to use it, several users need access to <br>
+the graphics card at the same time.<br>
+<br>
+Can this simultaneous access be allowed by the kernel after all?<br>
+Or can the kernel be adjusted so that this would be possible?<br>
+<br>
+In the meantime I am also working with a multiseat company to search <br>
+together for a solution for multiseat under Linux. This company is <br>
+working on creating an easy and user-friendly program to work via a <br>
+multiseat with Linux, and they have already a high-selling multiseat <br>
+program for Windows. The intention would be to create a program that <br>
+works like some multiseat programs in Windows: install, drag mice and <br>
+keyboards to the right screen, restart and it works as multiseat.<br>
+But such a program is only interesting if it can work for different <br>
+users on 1 video card. For example, for a multiseat of 6 users you need <br=
+>
+3 video cards with 2 outputs each.<br>
+For now the programmers has a good b=C3=A9ta program, but with the <br>
+restriction only one workstation on one video card, but then it&#39;s not <=
+br>
+interesting at all.</blockquote><div><br></div><div dir=3D"ltr">You don&#39=
+;t mention which GPU you have. Pre-Kepler GPUs can only scan out 2 outputs =
+at a time, so even if you have 3+ connectors on the board, you can still on=
+ly have 2 of them active at a time. This is a hardware restriction. Kepler+=
+ enables 4.<div><br></div><div>If you check &quot;lspci -nn -d 10de:&quot; =
+it should give you all the NVIDIA hardware in your machine.</div><div><br><=
+/div><div>Cheers,</div><div><br></div><div>=C2=A0 -ilia</div><div><br></div=
+><div>P.S. Looks like I provided this very same advice to you without respo=
+nse on Jan 16, 2024. So it&#39;s an annual thing?</div></div></div></div>
+</div>
+</div>
+
+--000000000000157c07062b00d631--
