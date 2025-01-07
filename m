@@ -2,54 +2,48 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id 4B9C9A042B4
-	for <lists+nouveau@lfdr.de>; Tue,  7 Jan 2025 15:38:08 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id B2C47A04316
+	for <lists+nouveau@lfdr.de>; Tue,  7 Jan 2025 15:48:21 +0100 (CET)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 0054510E3D9;
-	Tue,  7 Jan 2025 14:38:06 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id B834510EAE4;
+	Tue,  7 Jan 2025 14:48:18 +0000 (UTC)
 Authentication-Results: gabe.freedesktop.org;
-	dkim=pass (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="RzJMcPYQ";
+	dkim=pass (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="lXi+wx3h";
 	dkim-atps=neutral
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from dfw.source.kernel.org (dfw.source.kernel.org [139.178.84.217])
- by gabe.freedesktop.org (Postfix) with ESMTPS id EC48010E3D9;
- Tue,  7 Jan 2025 14:38:05 +0000 (UTC)
+Received: from nyc.source.kernel.org (nyc.source.kernel.org [147.75.193.91])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 7069910E330;
+ Tue,  7 Jan 2025 14:48:17 +0000 (UTC)
 Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by dfw.source.kernel.org (Postfix) with ESMTP id 50A665C630D;
- Tue,  7 Jan 2025 14:37:24 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id CDEABC4CED6;
- Tue,  7 Jan 2025 14:38:01 +0000 (UTC)
+ by nyc.source.kernel.org (Postfix) with ESMTP id CF091A416DD;
+ Tue,  7 Jan 2025 14:46:27 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id D25DDC4CEDD;
+ Tue,  7 Jan 2025 14:48:14 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1736260685;
- bh=q1lYaEr0dqb+piQWDLCGtCOJiuUuHbTSk0/Gq064y3g=;
+ s=k20201202; t=1736261296;
+ bh=xxaRG9lwJbdVbuVlu8ldeSeKaq8OrnocA6ebMdDf7kQ=;
  h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
- b=RzJMcPYQ1xOITG8Xhogrge775rj20I/2xPdkh7phzjWBk0juCTiNbQnXsvWa+wrdH
- ddyPfhjdU5SkBFzn3XMXxZ3ckM0b4+Ft+Sa2lqtlFJNte1zOcYmjWMjplQTYSWEaZv
- mJWRKXedsL5XILhCcIS/D+8ioOcbYnWhLSvO1Aw/wne47LQ1imiZIGCES9T2AvTNdc
- mR7aMsjYe2vkvi9Xos9jp2Sqa4nET2SbbDyLkS+H+qO851TAIZ8WWaADFrf7DQKuYp
- pLs/HoCoQ3R9R4/TODiHTHwygNXx4KRdXjYNVThVj8pQd2HGIEe8MJ9RJJP6rOomsm
- 6dhdo6MjZG6/g==
-Date: Tue, 7 Jan 2025 15:37:58 +0100
+ b=lXi+wx3halfF7o1dogppSLKUwKIVX1NeBO6hrgFOVlIMKrPEtYuMMhMT2pPM4bKuR
+ kkW+KSAYGIc8hgCPZqcJcNbd8P55njCGCiZT+50Rta50f3lVamuvkw68DECW8Hr811
+ yPW/PJkvdooDPP4D2Dy/2zJr+N+qEBclR8G9Q/vcF+qXEAu+n81f2DOfuRV1Qr3+zD
+ yf501+TG22KnCp0mfm+NclToTrVuG4mitEZCcG9fwttb4t0eqGrCL4T4+/XTVaOnW0
+ P2kRygVO7RChD/AovRswn8XelpVHhhnO83h3QTY9VudtRyTdw4gFtoZbM8aNvAkUZv
+ BmfFLDPWAXYAw==
+Date: Tue, 7 Jan 2025 15:48:12 +0100
 From: Danilo Krummrich <dakr@kernel.org>
-To: Dmitry Baryshkov <dmitry.baryshkov@linaro.org>
-Cc: Maarten Lankhorst <maarten.lankhorst@linux.intel.com>,
- Maxime Ripard <mripard@kernel.org>,
- Thomas Zimmermann <tzimmermann@suse.de>,
- David Airlie <airlied@gmail.com>, Simona Vetter <simona@ffwll.ch>,
- Karol Herbst <kherbst@redhat.com>, Lyude Paul <lyude@redhat.com>,
- "James E.J. Bottomley" <James.Bottomley@hansenpartnership.com>,
- Helge Deller <deller@gmx.de>, Danilo Krummrich <dakr@redhat.com>,
- dri-devel@lists.freedesktop.org, linux-kernel@vger.kernel.org,
- nouveau@lists.freedesktop.org, linux-arm-kernel@lists.infradead.org,
- Laurent Pinchart <laurent.pinchart@ideasonboard.com>
-Subject: Re: [PATCH v3 0/2] drm/nouveau: remove drm_encoder_slave interface
-Message-ID: <Z308RoMdP2U64Dfx@pollux>
-References: <20250106-nouveau-encoder-slave-v3-0-1d37d2f2c67f@linaro.org>
+To: Takashi Iwai <tiwai@suse.de>
+Cc: dri-devel@lists.freedesktop.org, Karol Herbst <kherbst@redhat.com>,
+ Lyude Paul <lyude@redhat.com>, nouveau@lists.freedesktop.org,
+ linux-kernel@vger.kernel.org
+Subject: Re: [PATCH RESEND] drm/nouveau/disp: Fix missing backlight control
+ on Macbook 5,1
+Message-ID: <Z30-rE1KvMQv8_Lc@pollux>
+References: <20250102114944.11499-1-tiwai@suse.de>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
-In-Reply-To: <20250106-nouveau-encoder-slave-v3-0-1d37d2f2c67f@linaro.org>
+In-Reply-To: <20250102114944.11499-1-tiwai@suse.de>
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -64,68 +58,43 @@ List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-On Mon, Jan 06, 2025 at 01:00:12AM +0200, Dmitry Baryshkov wrote:
-> The nouveau driver is the only user of the drm_encoder_slave interface.
-> Demote it from KMS helpers module to the nouveau driver itself, moving
-> corresponding I2C encoders to be handled by nouveau driver too.
+On Thu, Jan 02, 2025 at 12:49:36PM +0100, Takashi Iwai wrote:
+> Macbook 5,1 with MCP79 lost its backlight control since the recent
+> change for supporting GFP-RM; it rewrote the whole nv50 backlight
+> control code and each display engine is supposed to have an entry for
+> IOR bl callback, but it didn't cover mcp77.
 > 
-> Ideally those two drivers should be converted to the drm_bridge
-> interface, but it's unclear if it's worth spending time on that.
+> This patch adds the missing bl entry initialization for mcp77 display
+> engine to recover the backlight control.
 > 
-> Signed-off-by: Dmitry Baryshkov <dmitry.baryshkov@linaro.org>
+> Fixes: 2274ce7e3681 ("drm/nouveau/disp: add output backlight control methods")
+> Cc: <stable@vger.kernel.org>
+> Link: https://bugzilla.suse.com/show_bug.cgi?id=1223838
+> Signed-off-by: Takashi Iwai <tiwai@suse.de>
 
-Applied to drm-misc-next, thanks!
+Applied to drm-misc-fixes, thanks!
 
 > ---
-> Changes in v3:
-> - Moved includes to drivers/gpu/drm/nouveau/include/dispnv04/i2c/
->   (Danilo)
-> - Trimmed Kconfig entries to remove mentions of "some nVidia cards"
->   (Danilo)
-> - Fixed checkpatch issues related to alignment and code formatting
->   (Danilo)
-> - Link to v2: https://lore.kernel.org/r/20241215-nouveau-encoder-slave-v2-0-ef7a0e687242@linaro.org
 > 
-> Changes in v2:
-> - Renamed symbols in defconfig (Laurent)
-> - Added missing Kbuild file (Laurent, LKP)
-> - Renamed guarding defines in include files.
-> - Dropped mentions of two removed functions.
-> - Link to v1: https://lore.kernel.org/r/20241214-nouveau-encoder-slave-v1-0-beda767472e3@linaro.org
+> The previous submission seemed fallin in a crack:
+>   https://lore.kernel.org/all/20240517110853.8481-1-tiwai@suse.de/
+> so just resending it.
 > 
-> ---
-> Dmitry Baryshkov (2):
->       drm/nouveau: incorporate I2C TV encoder drivers
->       drm/nouveau: vendor in drm_encoder_slave API
+>  drivers/gpu/drm/nouveau/nvkm/engine/disp/mcp77.c | 1 +
+>  1 file changed, 1 insertion(+)
 > 
->  arch/arm/configs/multi_v7_defconfig                |   4 +-
->  arch/parisc/configs/generic-32bit_defconfig        |   4 +-
->  arch/parisc/configs/generic-64bit_defconfig        |   4 +-
->  drivers/gpu/drm/Makefile                           |   1 -
->  drivers/gpu/drm/i2c/Kconfig                        |  18 ---
->  drivers/gpu/drm/i2c/Makefile                       |   6 -
->  drivers/gpu/drm/nouveau/Kconfig                    |  18 +++
->  drivers/gpu/drm/nouveau/dispnv04/Kbuild            |   3 +
->  drivers/gpu/drm/nouveau/dispnv04/dfp.c             |  17 +--
->  drivers/gpu/drm/nouveau/dispnv04/i2c/Kbuild        |   5 +
->  .../drm/{ => nouveau/dispnv04}/i2c/ch7006_drv.c    |  30 ++---
->  .../drm/{ => nouveau/dispnv04}/i2c/ch7006_mode.c   |   8 +-
->  .../drm/{ => nouveau/dispnv04}/i2c/ch7006_priv.h   |  11 +-
->  .../drm/{ => nouveau/dispnv04}/i2c/sil164_drv.c    |  33 +++---
->  .../dispnv04/nouveau_i2c_encoder.c}                |  95 +++++-----------
->  drivers/gpu/drm/nouveau/dispnv04/tvnv04.c          |  24 ++--
->  drivers/gpu/drm/nouveau/dispnv04/tvnv17.c          |   4 +-
->  .../gpu/drm/nouveau/include/dispnv04}/i2c/ch7006.h |   4 +-
->  .../drm/nouveau/include/dispnv04/i2c/encoder_i2c.h | 121 +++++++++------------
->  .../gpu/drm/nouveau/include/dispnv04}/i2c/sil164.h |   4 +-
->  drivers/gpu/drm/nouveau/nouveau_connector.c        |  10 +-
->  drivers/gpu/drm/nouveau/nouveau_encoder.h          |  13 +--
->  22 files changed, 190 insertions(+), 247 deletions(-)
-> ---
-> base-commit: 938fbb16aba8f7b88e0fdcf56f315a5bbad41aad
-> change-id: 20241214-nouveau-encoder-slave-a6dd422fa4a9
-> 
-> Best regards,
+> diff --git a/drivers/gpu/drm/nouveau/nvkm/engine/disp/mcp77.c b/drivers/gpu/drm/nouveau/nvkm/engine/disp/mcp77.c
+> index 841e3b69fcaf..5a0c9b8a79f3 100644
+> --- a/drivers/gpu/drm/nouveau/nvkm/engine/disp/mcp77.c
+> +++ b/drivers/gpu/drm/nouveau/nvkm/engine/disp/mcp77.c
+> @@ -31,6 +31,7 @@ mcp77_sor = {
+>  	.state = g94_sor_state,
+>  	.power = nv50_sor_power,
+>  	.clock = nv50_sor_clock,
+> +	.bl = &nv50_sor_bl,
+>  	.hdmi = &g84_sor_hdmi,
+>  	.dp = &g94_sor_dp,
+>  };
 > -- 
-> Dmitry Baryshkov <dmitry.baryshkov@linaro.org>
+> 2.43.0
 > 
