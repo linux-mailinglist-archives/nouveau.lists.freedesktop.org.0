@@ -2,48 +2,69 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id 8CCFBA0381E
-	for <lists+nouveau@lfdr.de>; Tue,  7 Jan 2025 07:46:15 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id C30F5A03B20
+	for <lists+nouveau@lfdr.de>; Tue,  7 Jan 2025 10:30:37 +0100 (CET)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 2C48510E3B2;
-	Tue,  7 Jan 2025 06:46:11 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 27B2010E3CB;
+	Tue,  7 Jan 2025 09:30:35 +0000 (UTC)
+Authentication-Results: gabe.freedesktop.org;
+	dkim=pass (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="sQIB3sMw";
+	dkim-atps=neutral
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from us-smtp-delivery-44.mimecast.com
- (us-smtp-delivery-44.mimecast.com [205.139.111.44])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 6D44F10E3B2
- for <nouveau@lists.freedesktop.org>; Tue,  7 Jan 2025 06:46:09 +0000 (UTC)
-Received: from mx-prod-mc-03.mail-002.prod.us-west-2.aws.redhat.com
- (ec2-54-186-198-63.us-west-2.compute.amazonaws.com [54.186.198.63]) by
- relay.mimecast.com with ESMTP with STARTTLS (version=TLSv1.3,
- cipher=TLS_AES_256_GCM_SHA384) id us-mta-246-2b8_qfueMdmshlCA4izSug-1; Tue,
- 07 Jan 2025 01:46:05 -0500
-X-MC-Unique: 2b8_qfueMdmshlCA4izSug-1
-X-Mimecast-MFC-AGG-ID: 2b8_qfueMdmshlCA4izSug
-Received: from mx-prod-int-01.mail-002.prod.us-west-2.aws.redhat.com
- (mx-prod-int-01.mail-002.prod.us-west-2.aws.redhat.com [10.30.177.4])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
- (No client certificate requested)
- by mx-prod-mc-03.mail-002.prod.us-west-2.aws.redhat.com (Postfix) with ESMTPS
- id BFF9E19560B2; Tue,  7 Jan 2025 06:46:04 +0000 (UTC)
-Received: from dreadlord.redhat.com (unknown [10.64.136.7])
- by mx-prod-int-01.mail-002.prod.us-west-2.aws.redhat.com (Postfix) with ESMTP
- id EB37B3000706; Tue,  7 Jan 2025 06:46:02 +0000 (UTC)
-From: Dave Airlie <airlied@gmail.com>
-To: dri-devel@lists.freedesktop.org
-Cc: nouveau@lists.freedesktop.org,
-	dakr@kernel.org
-Subject: [PATCH] [RFC] nouveau: hack fix for regression from 6.2
-Date: Tue,  7 Jan 2025 16:46:00 +1000
-Message-ID: <20250107064600.536897-1-airlied@gmail.com>
+Received: from nyc.source.kernel.org (nyc.source.kernel.org [147.75.193.91])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 85A9A10E18B;
+ Tue,  7 Jan 2025 09:30:33 +0000 (UTC)
+Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
+ by nyc.source.kernel.org (Postfix) with ESMTP id ADE99A40DB0;
+ Tue,  7 Jan 2025 09:28:43 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 1B85FC4CED6;
+ Tue,  7 Jan 2025 09:30:32 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+ s=k20201202; t=1736242232;
+ bh=faHcSgdF3E9ljSXlRVOQi+PPa9Gd2RrArQ5HFzl15S4=;
+ h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
+ b=sQIB3sMw4gmVXtgD+5YdawMKFcDfJQVad1wMKc39QsPkKJ0w8LVl6+ToWwqpZ3D8i
+ wSNFNWwzNBrkx4vfNK/xL/y8JgZBvym4lF1OVs3GwkOU7eDnipCzJR4/M9RdIHKYH5
+ 8s2OfJOE01m/31DOaaWHdvgKkN1PkrZWsMd/i6I8jdD6H5XdzqWu40lJV20vVrCuxA
+ PIeOwWft41rEhREQEvmOKfp50+xrvnjvYcqHJpYhiYn/XVNVCvtNSpHtS6SKgH0mzD
+ VJkbuxzF1cQuZu5mG3+tSVPYkM0XupewkMn/wybdO8AhxjR9HqFoakeN0kcHysOBFQ
+ QPiF1ADxK2kJA==
+Received: from johan by xi.lan with local (Exim 4.97.1)
+ (envelope-from <johan@kernel.org>) id 1tV5uv-000000006q9-3HKE;
+ Tue, 07 Jan 2025 10:30:29 +0100
+Date: Tue, 7 Jan 2025 10:30:29 +0100
+From: Johan Hovold <johan@kernel.org>
+To: Abel Vesa <abel.vesa@linaro.org>
+Cc: Maarten Lankhorst <maarten.lankhorst@linux.intel.com>,
+ Maxime Ripard <mripard@kernel.org>,
+ Thomas Zimmermann <tzimmermann@suse.de>,
+ David Airlie <airlied@gmail.com>, Simona Vetter <simona@ffwll.ch>,
+ Karol Herbst <kherbst@redhat.com>, Lyude Paul <lyude@redhat.com>,
+ Danilo Krummrich <dakr@redhat.com>,
+ Jani Nikula <jani.nikula@linux.intel.com>,
+ Rodrigo Vivi <rodrigo.vivi@intel.com>,
+ Joonas Lahtinen <joonas.lahtinen@linux.intel.com>,
+ Tvrtko Ursulin <tursulin@ursulin.net>, Rob Clark <robdclark@gmail.com>,
+ Abhinav Kumar <quic_abhinavk@quicinc.com>,
+ Dmitry Baryshkov <dmitry.baryshkov@linaro.org>,
+ Sean Paul <sean@poorly.run>,
+ Marijn Suijten <marijn.suijten@somainline.org>,
+ Bjorn Andersson <andersson@kernel.org>,
+ Konrad Dybcio <konradybcio@kernel.org>,
+ dri-devel@lists.freedesktop.org, linux-kernel@vger.kernel.org,
+ nouveau@lists.freedesktop.org, intel-gfx@lists.freedesktop.org,
+ intel-xe@lists.freedesktop.org, linux-arm-msm@vger.kernel.org,
+ freedreno@lists.freedesktop.org, Johan Hovold <johan+linaro@kernel.org>
+Subject: Re: [PATCH v3 1/4] drm/dp: Add helper to set LTTPRs in transparent
+ mode
+Message-ID: <Z3z0NcDhmwOoQhlG@hovoldconsulting.com>
+References: <20250103-drm-dp-msm-add-lttpr-transparent-mode-set-v3-0-5c367f4b0763@linaro.org>
+ <20250103-drm-dp-msm-add-lttpr-transparent-mode-set-v3-1-5c367f4b0763@linaro.org>
 MIME-Version: 1.0
-X-Scanned-By: MIMEDefang 3.4.1 on 10.30.177.4
-X-Mimecast-Spam-Score: 0
-X-Mimecast-MFC-PROC-ID: GkTBlqMaWp8ViGGH97lvG6q4e-9sev7iQrWeFGh69Nk_1736232364
-X-Mimecast-Originator: gmail.com
-Content-Transfer-Encoding: quoted-printable
-content-type: text/plain; charset=WINDOWS-1252; x-default=true
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <20250103-drm-dp-msm-add-lttpr-transparent-mode-set-v3-1-5c367f4b0763@linaro.org>
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -58,50 +79,75 @@ List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-From: Dave Airlie <airlied@redhat.com>
+On Fri, Jan 03, 2025 at 02:58:15PM +0200, Abel Vesa wrote:
+> According to the DisplayPort standard, LTTPRs have two operating
+> modes:
+>  - non-transparent - it replies to DPCD LTTPR field specific AUX
+>    requests, while passes through all other AUX requests
+>  - transparent - it passes through all AUX requests.
+> 
+> Switching between this two modes is done by the DPTX by issuing
+> an AUX write to the DPCD PHY_REPEATER_MODE register.
+> 
+> Add a generic helper that allows switching between these modes.
+> 
+> Also add a generic wrapper for the helper that handles the explicit
+> disabling of non-transparent mode and its disable->enable sequence
+> mentioned in the DP Standard v2.0 section 3.6.6.1. Do this in order
+> to move this handling out of the vendor specific driver implementation
+> into the generic framework.
+> 
+> Tested-by: Johan Hovold <johan+linaro@kernel.org>
+> Signed-off-by: Abel Vesa <abel.vesa@linaro.org>
 
-I recently got a regression report for RHEL 8.10 with a multi-card
-GP106 setup. This led me down a rabbit hole of a few problems,
-I've sent the cross-fence device fix but this is also needed to
-make things work properly.
+> +/**
+> + * drm_dp_lttpr_init - init LTTPR transparency mode according to DP standard
+> + *
+> + * @aux: DisplayPort AUX channel
+> + * @lttpr_count: Number of LTTPRs. Between 0 and 8, according to DP standard.
+> + *               Negative error code for any non-valid number.
+> + *               See drm_dp_lttpr_count().
+> + *
+> + * Returns 0 on success or a negative error code on failure.
+> + */
+> +int drm_dp_lttpr_init(struct drm_dp_aux *aux, int lttpr_count)
+> +{
+> +	int ret;
+> +
+> +	if (!lttpr_count)
+> +		return 0;
+> +
+> +	/*
+> +	 * See DP Standard v2.0 3.6.6.1 about the explicit disabling of
+> +	 * non-transparent mode and the disable->enable non-transparent mode
+> +	 * sequence.
+> +	 */
+> +	ret = drm_dp_lttpr_set_transparent_mode(aux, true);
+> +	if (ret)
+> +		return ret;
+> +
+> +	if (lttpr_count < 0)
+> +		return -ENODEV;
+> +
+> +	/*
+> +	 * Roll-back to tranparent mode if setting non-tranparent mode failed
 
-Hopefully I can at least work out how to restrict this to pre-Ampere
-maybe? or find something else
+typo: transparent (2x)
 
-This reverts 6762510bc8447dc4eb4c3d99541de6b31843e649
-Author: Ben Skeggs <bskeggs@redhat.com>
-Date:   Wed Jun 1 20:48:08 2022 +1000
+> +	 */
 
-    drm/nouveau/gr/gf100-: call FECS WFI_GOLDEN_SAVE method
+I think this comment now needs to go inside the conditional, if you want
+to keep it at all.
 
-The symptoms are on a dual GPU (turing and pascal) gnome-shell
-gets a lot of
+> +	if (drm_dp_lttpr_set_transparent_mode(aux, false)) {
+> +		drm_dp_lttpr_set_transparent_mode(aux, true);
+> +		return -EINVAL;
+> +	}
+> +
+> +	return 0;
+> +}
+> +EXPORT_SYMBOL(drm_dp_lttpr_init);
 
-nouveau 0000:01:00.0: gr: DATA_ERROR 0000009c [] ch 2 [017fd2f000 gnome-she=
-ll[1554]] subc 0 class c597 mthd 0d78 data 00000004
+This looks much better to me now, so with the above addressed: 
 
-and nothing renders on the second GPU (the data errors are on the primary G=
-PU).
----
- drivers/gpu/drm/nouveau/nvkm/engine/gr/ctxgf100.c | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
-
-diff --git a/drivers/gpu/drm/nouveau/nvkm/engine/gr/ctxgf100.c b/drivers/gp=
-u/drm/nouveau/nvkm/engine/gr/ctxgf100.c
-index cb390e0134a23..fa4c2174ea089 100644
---- a/drivers/gpu/drm/nouveau/nvkm/engine/gr/ctxgf100.c
-+++ b/drivers/gpu/drm/nouveau/nvkm/engine/gr/ctxgf100.c
-@@ -1514,7 +1514,7 @@ gf100_grctx_generate(struct gf100_gr *gr, struct gf10=
-0_gr_chan *chan, struct nvk
-=20
- =09grctx->main(chan);
-=20
--=09if (!gr->firmware) {
-+=09if (1) {// {!gr->firmware) {
- =09=09/* Trigger a context unload by unsetting the "next channel valid" bi=
-t
- =09=09 * and faking a context switch interrupt.
- =09=09 */
---=20
-2.43.0
-
+Reviewed-by: Johan Hovold <johan+linaro@kernel.org>
