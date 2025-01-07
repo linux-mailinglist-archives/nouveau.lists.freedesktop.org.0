@@ -2,47 +2,45 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id 9E886A0379E
-	for <lists+nouveau@lfdr.de>; Tue,  7 Jan 2025 07:05:11 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 8CCFBA0381E
+	for <lists+nouveau@lfdr.de>; Tue,  7 Jan 2025 07:46:15 +0100 (CET)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 6C4B510E2EB;
-	Tue,  7 Jan 2025 06:05:07 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 2C48510E3B2;
+	Tue,  7 Jan 2025 06:46:11 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-X-Greylist: delayed 370 seconds by postgrey-1.36 at gabe;
- Tue, 07 Jan 2025 06:05:05 UTC
 Received: from us-smtp-delivery-44.mimecast.com
  (us-smtp-delivery-44.mimecast.com [205.139.111.44])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 69FC610E2EB
- for <nouveau@lists.freedesktop.org>; Tue,  7 Jan 2025 06:05:05 +0000 (UTC)
-Received: from mx-prod-mc-05.mail-002.prod.us-west-2.aws.redhat.com
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 6D44F10E3B2
+ for <nouveau@lists.freedesktop.org>; Tue,  7 Jan 2025 06:46:09 +0000 (UTC)
+Received: from mx-prod-mc-03.mail-002.prod.us-west-2.aws.redhat.com
  (ec2-54-186-198-63.us-west-2.compute.amazonaws.com [54.186.198.63]) by
  relay.mimecast.com with ESMTP with STARTTLS (version=TLSv1.3,
- cipher=TLS_AES_256_GCM_SHA384) id us-mta-80-VDkKrUhtPpyaxdSYzwfX6Q-1; Tue,
- 07 Jan 2025 00:58:51 -0500
-X-MC-Unique: VDkKrUhtPpyaxdSYzwfX6Q-1
-X-Mimecast-MFC-AGG-ID: VDkKrUhtPpyaxdSYzwfX6Q
-Received: from mx-prod-int-05.mail-002.prod.us-west-2.aws.redhat.com
- (mx-prod-int-05.mail-002.prod.us-west-2.aws.redhat.com [10.30.177.17])
+ cipher=TLS_AES_256_GCM_SHA384) id us-mta-246-2b8_qfueMdmshlCA4izSug-1; Tue,
+ 07 Jan 2025 01:46:05 -0500
+X-MC-Unique: 2b8_qfueMdmshlCA4izSug-1
+X-Mimecast-MFC-AGG-ID: 2b8_qfueMdmshlCA4izSug
+Received: from mx-prod-int-01.mail-002.prod.us-west-2.aws.redhat.com
+ (mx-prod-int-01.mail-002.prod.us-west-2.aws.redhat.com [10.30.177.4])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
  (No client certificate requested)
- by mx-prod-mc-05.mail-002.prod.us-west-2.aws.redhat.com (Postfix) with ESMTPS
- id 8DAE11956048; Tue,  7 Jan 2025 05:58:50 +0000 (UTC)
+ by mx-prod-mc-03.mail-002.prod.us-west-2.aws.redhat.com (Postfix) with ESMTPS
+ id BFF9E19560B2; Tue,  7 Jan 2025 06:46:04 +0000 (UTC)
 Received: from dreadlord.redhat.com (unknown [10.64.136.7])
- by mx-prod-int-05.mail-002.prod.us-west-2.aws.redhat.com (Postfix) with ESMTP
- id B6ED41955F4A; Tue,  7 Jan 2025 05:58:48 +0000 (UTC)
+ by mx-prod-int-01.mail-002.prod.us-west-2.aws.redhat.com (Postfix) with ESMTP
+ id EB37B3000706; Tue,  7 Jan 2025 06:46:02 +0000 (UTC)
 From: Dave Airlie <airlied@gmail.com>
 To: dri-devel@lists.freedesktop.org
 Cc: nouveau@lists.freedesktop.org,
 	dakr@kernel.org
-Subject: [PATCH] nouveau/fence: handle cross device fences properly.
-Date: Tue,  7 Jan 2025 15:58:46 +1000
-Message-ID: <20250107055846.536589-1-airlied@gmail.com>
+Subject: [PATCH] [RFC] nouveau: hack fix for regression from 6.2
+Date: Tue,  7 Jan 2025 16:46:00 +1000
+Message-ID: <20250107064600.536897-1-airlied@gmail.com>
 MIME-Version: 1.0
-X-Scanned-By: MIMEDefang 3.0 on 10.30.177.17
+X-Scanned-By: MIMEDefang 3.4.1 on 10.30.177.4
 X-Mimecast-Spam-Score: 0
-X-Mimecast-MFC-PROC-ID: tGDH22BpeasIaLynhnACUzPd7VgWScO-AAK2s2jBjaI_1736229530
+X-Mimecast-MFC-PROC-ID: GkTBlqMaWp8ViGGH97lvG6q4e-9sev7iQrWeFGh69Nk_1736232364
 X-Mimecast-Originator: gmail.com
 Content-Transfer-Encoding: quoted-printable
 content-type: text/plain; charset=WINDOWS-1252; x-default=true
@@ -62,40 +60,48 @@ Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
 From: Dave Airlie <airlied@redhat.com>
 
-If we have two nouveau controlled devices and one passes a dma-fence
-to the other, when we hit the sync path it can cause the second device
-to try and put a sync wait in it's pushbuf for the seqno of the context
-on the first device.
+I recently got a regression report for RHEL 8.10 with a multi-card
+GP106 setup. This led me down a rabbit hole of a few problems,
+I've sent the cross-fence device fix but this is also needed to
+make things work properly.
 
-Since fence contexts are vmm bound, check the if vmm's match between
-both users, this should ensure that fence seqnos don't get used wrongly
-on incorrect channels.
+Hopefully I can at least work out how to restrict this to pre-Ampere
+maybe? or find something else
 
-This seems to happen fairly spuriously and I found it tracking down
-a multi-card regression report, that seems to work by luck before this.
+This reverts 6762510bc8447dc4eb4c3d99541de6b31843e649
+Author: Ben Skeggs <bskeggs@redhat.com>
+Date:   Wed Jun 1 20:48:08 2022 +1000
 
-Signed-off-by: Dave Airlie <airlied@redhat.com>
-Cc: stable@vger.kernel.org
+    drm/nouveau/gr/gf100-: call FECS WFI_GOLDEN_SAVE method
+
+The symptoms are on a dual GPU (turing and pascal) gnome-shell
+gets a lot of
+
+nouveau 0000:01:00.0: gr: DATA_ERROR 0000009c [] ch 2 [017fd2f000 gnome-she=
+ll[1554]] subc 0 class c597 mthd 0d78 data 00000004
+
+and nothing renders on the second GPU (the data errors are on the primary G=
+PU).
 ---
- drivers/gpu/drm/nouveau/nouveau_fence.c | 3 ++-
- 1 file changed, 2 insertions(+), 1 deletion(-)
+ drivers/gpu/drm/nouveau/nvkm/engine/gr/ctxgf100.c | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/drivers/gpu/drm/nouveau/nouveau_fence.c b/drivers/gpu/drm/nouv=
-eau/nouveau_fence.c
-index ee5e9d40c166f..5743c82f4094b 100644
---- a/drivers/gpu/drm/nouveau/nouveau_fence.c
-+++ b/drivers/gpu/drm/nouveau/nouveau_fence.c
-@@ -370,7 +370,8 @@ nouveau_fence_sync(struct nouveau_bo *nvbo, struct nouv=
-eau_channel *chan,
+diff --git a/drivers/gpu/drm/nouveau/nvkm/engine/gr/ctxgf100.c b/drivers/gp=
+u/drm/nouveau/nvkm/engine/gr/ctxgf100.c
+index cb390e0134a23..fa4c2174ea089 100644
+--- a/drivers/gpu/drm/nouveau/nvkm/engine/gr/ctxgf100.c
++++ b/drivers/gpu/drm/nouveau/nvkm/engine/gr/ctxgf100.c
+@@ -1514,7 +1514,7 @@ gf100_grctx_generate(struct gf100_gr *gr, struct gf10=
+0_gr_chan *chan, struct nvk
 =20
- =09=09=09=09rcu_read_lock();
- =09=09=09=09prev =3D rcu_dereference(f->channel);
--=09=09=09=09if (prev && (prev =3D=3D chan ||
-+=09=09=09=09if (prev && (prev->vmm =3D=3D chan->vmm) &&
-+=09=09=09=09    (prev =3D=3D chan ||
- =09=09=09=09=09     fctx->sync(f, prev, chan) =3D=3D 0))
- =09=09=09=09=09must_wait =3D false;
- =09=09=09=09rcu_read_unlock();
+ =09grctx->main(chan);
+=20
+-=09if (!gr->firmware) {
++=09if (1) {// {!gr->firmware) {
+ =09=09/* Trigger a context unload by unsetting the "next channel valid" bi=
+t
+ =09=09 * and faking a context switch interrupt.
+ =09=09 */
 --=20
 2.43.0
 
