@@ -2,48 +2,45 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id B2C47A04316
-	for <lists+nouveau@lfdr.de>; Tue,  7 Jan 2025 15:48:21 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id AA362A04561
+	for <lists+nouveau@lfdr.de>; Tue,  7 Jan 2025 17:02:14 +0100 (CET)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id B834510EAE4;
-	Tue,  7 Jan 2025 14:48:18 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id F00A210E719;
+	Tue,  7 Jan 2025 16:02:12 +0000 (UTC)
 Authentication-Results: gabe.freedesktop.org;
-	dkim=pass (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="lXi+wx3h";
+	dkim=pass (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="lIJzqc96";
 	dkim-atps=neutral
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
 Received: from nyc.source.kernel.org (nyc.source.kernel.org [147.75.193.91])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 7069910E330;
- Tue,  7 Jan 2025 14:48:17 +0000 (UTC)
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 7548210E719;
+ Tue,  7 Jan 2025 16:02:11 +0000 (UTC)
 Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by nyc.source.kernel.org (Postfix) with ESMTP id CF091A416DD;
- Tue,  7 Jan 2025 14:46:27 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id D25DDC4CEDD;
- Tue,  7 Jan 2025 14:48:14 +0000 (UTC)
+ by nyc.source.kernel.org (Postfix) with ESMTP id 230FFA418A3;
+ Tue,  7 Jan 2025 16:00:21 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id ADDB6C4CEDE;
+ Tue,  7 Jan 2025 16:02:08 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1736261296;
- bh=xxaRG9lwJbdVbuVlu8ldeSeKaq8OrnocA6ebMdDf7kQ=;
+ s=k20201202; t=1736265729;
+ bh=LtQLZTgegXJjeN7LKmzZB8Z9V7vdz01Osf6H4CQUUD4=;
  h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
- b=lXi+wx3halfF7o1dogppSLKUwKIVX1NeBO6hrgFOVlIMKrPEtYuMMhMT2pPM4bKuR
- kkW+KSAYGIc8hgCPZqcJcNbd8P55njCGCiZT+50Rta50f3lVamuvkw68DECW8Hr811
- yPW/PJkvdooDPP4D2Dy/2zJr+N+qEBclR8G9Q/vcF+qXEAu+n81f2DOfuRV1Qr3+zD
- yf501+TG22KnCp0mfm+NclToTrVuG4mitEZCcG9fwttb4t0eqGrCL4T4+/XTVaOnW0
- P2kRygVO7RChD/AovRswn8XelpVHhhnO83h3QTY9VudtRyTdw4gFtoZbM8aNvAkUZv
- BmfFLDPWAXYAw==
-Date: Tue, 7 Jan 2025 15:48:12 +0100
+ b=lIJzqc963riTqysHsY6Ulo3BBaGQK0VFL+NjCkPhsFlsTpXWHTwO9sfN16oJ8nGJG
+ IOzlvYr8epsHlyU25KEtAEzZJ2NTGWcG7gDKVAvVu8e9m/ZsTqnaLpan+uU+ev5+w7
+ 1xrXMhFV5PLFMnFBV34WyO72kPuXgFDKfoh2RhLuWhYNdgZIRUThM5cHysgkcgveI3
+ 3UnLbuZvP81je3LfcxdGRHB0puSoEIuEywkEfmQGE+Lcgfg54Q5ynUJDNrXzrRiRSG
+ YMzD91oouhbdcJ+EOAiExwr8ArXXJF44JBZYnxYMGjL7epmxXLCZhDTm4YqBcBkiv7
+ D2v7WviKZJpCQ==
+Date: Tue, 7 Jan 2025 17:02:05 +0100
 From: Danilo Krummrich <dakr@kernel.org>
-To: Takashi Iwai <tiwai@suse.de>
-Cc: dri-devel@lists.freedesktop.org, Karol Herbst <kherbst@redhat.com>,
- Lyude Paul <lyude@redhat.com>, nouveau@lists.freedesktop.org,
- linux-kernel@vger.kernel.org
-Subject: Re: [PATCH RESEND] drm/nouveau/disp: Fix missing backlight control
- on Macbook 5,1
-Message-ID: <Z30-rE1KvMQv8_Lc@pollux>
-References: <20250102114944.11499-1-tiwai@suse.de>
+To: Dave Airlie <airlied@gmail.com>
+Cc: dri-devel@lists.freedesktop.org, nouveau@lists.freedesktop.org
+Subject: Re: [PATCH] nouveau/fence: handle cross device fences properly.
+Message-ID: <Z31P_Wp4qMzIlv88@pollux>
+References: <20250107055846.536589-1-airlied@gmail.com>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
-In-Reply-To: <20250102114944.11499-1-tiwai@suse.de>
+In-Reply-To: <20250107055846.536589-1-airlied@gmail.com>
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -58,43 +55,59 @@ List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-On Thu, Jan 02, 2025 at 12:49:36PM +0100, Takashi Iwai wrote:
-> Macbook 5,1 with MCP79 lost its backlight control since the recent
-> change for supporting GFP-RM; it rewrote the whole nv50 backlight
-> control code and each display engine is supposed to have an entry for
-> IOR bl callback, but it didn't cover mcp77.
+On Tue, Jan 07, 2025 at 03:58:46PM +1000, Dave Airlie wrote:
+> From: Dave Airlie <airlied@redhat.com>
 > 
-> This patch adds the missing bl entry initialization for mcp77 display
-> engine to recover the backlight control.
+> If we have two nouveau controlled devices and one passes a dma-fence
+> to the other, when we hit the sync path it can cause the second device
+> to try and put a sync wait in it's pushbuf for the seqno of the context
+> on the first device.
 > 
-> Fixes: 2274ce7e3681 ("drm/nouveau/disp: add output backlight control methods")
-> Cc: <stable@vger.kernel.org>
-> Link: https://bugzilla.suse.com/show_bug.cgi?id=1223838
-> Signed-off-by: Takashi Iwai <tiwai@suse.de>
+> Since fence contexts are vmm bound, check the if vmm's match between
+> both users, this should ensure that fence seqnos don't get used wrongly
+> on incorrect channels.
 
-Applied to drm-misc-fixes, thanks!
+The fence sequence number is global, i.e. per device, hence checking the vmm
+context seems too restrictive.
 
+Wouldn't it be better to ensure that `prev->cli->drm == chan->cli->drm`?
+
+This way we can still optimize where dependencies are between different
+applications, but on the same device.
+
+> 
+> This seems to happen fairly spuriously and I found it tracking down
+> a multi-card regression report, that seems to work by luck before this.
+> 
+> Signed-off-by: Dave Airlie <airlied@redhat.com>
+> Cc: stable@vger.kernel.org
 > ---
+>  drivers/gpu/drm/nouveau/nouveau_fence.c | 3 ++-
+>  1 file changed, 2 insertions(+), 1 deletion(-)
 > 
-> The previous submission seemed fallin in a crack:
->   https://lore.kernel.org/all/20240517110853.8481-1-tiwai@suse.de/
-> so just resending it.
-> 
->  drivers/gpu/drm/nouveau/nvkm/engine/disp/mcp77.c | 1 +
->  1 file changed, 1 insertion(+)
-> 
-> diff --git a/drivers/gpu/drm/nouveau/nvkm/engine/disp/mcp77.c b/drivers/gpu/drm/nouveau/nvkm/engine/disp/mcp77.c
-> index 841e3b69fcaf..5a0c9b8a79f3 100644
-> --- a/drivers/gpu/drm/nouveau/nvkm/engine/disp/mcp77.c
-> +++ b/drivers/gpu/drm/nouveau/nvkm/engine/disp/mcp77.c
-> @@ -31,6 +31,7 @@ mcp77_sor = {
->  	.state = g94_sor_state,
->  	.power = nv50_sor_power,
->  	.clock = nv50_sor_clock,
-> +	.bl = &nv50_sor_bl,
->  	.hdmi = &g84_sor_hdmi,
->  	.dp = &g94_sor_dp,
->  };
+> diff --git a/drivers/gpu/drm/nouveau/nouveau_fence.c b/drivers/gpu/drm/nouveau/nouveau_fence.c
+> index ee5e9d40c166f..5743c82f4094b 100644
+> --- a/drivers/gpu/drm/nouveau/nouveau_fence.c
+> +++ b/drivers/gpu/drm/nouveau/nouveau_fence.c
+> @@ -370,7 +370,8 @@ nouveau_fence_sync(struct nouveau_bo *nvbo, struct nouveau_channel *chan,
+>  
+>  				rcu_read_lock();
+>  				prev = rcu_dereference(f->channel);
+> -				if (prev && (prev == chan ||
+> +				if (prev && (prev->vmm == chan->vmm) &&
+> +				    (prev == chan ||
+
+Maybe better break it down a bit, e.g.
+
+bool local = prev && (prev->... == chan->...);
+
+if (local && ...) {
+...
+}
+
+>  					     fctx->sync(f, prev, chan) == 0))
+>  					must_wait = false;
+>  				rcu_read_unlock();
 > -- 
 > 2.43.0
 > 
