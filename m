@@ -2,68 +2,134 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id 59876A03B2C
-	for <lists+nouveau@lfdr.de>; Tue,  7 Jan 2025 10:32:10 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 514F2A03DC6
+	for <lists+nouveau@lfdr.de>; Tue,  7 Jan 2025 12:32:36 +0100 (CET)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 07944890C7;
-	Tue,  7 Jan 2025 09:32:09 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 09E1F10E403;
+	Tue,  7 Jan 2025 11:32:35 +0000 (UTC)
 Authentication-Results: gabe.freedesktop.org;
-	dkim=pass (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="dunb71L4";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="R5HlCX9P";
 	dkim-atps=neutral
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from nyc.source.kernel.org (nyc.source.kernel.org [147.75.193.91])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 53871890C7;
- Tue,  7 Jan 2025 09:32:08 +0000 (UTC)
-Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by nyc.source.kernel.org (Postfix) with ESMTP id 0A79FA40D18;
- Tue,  7 Jan 2025 09:30:18 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 67D1AC4CED6;
- Tue,  7 Jan 2025 09:32:06 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1736242326;
- bh=Z04SMetCAyONcsQpiAvLBR9WZBMDFQ22D6JX10y+mQk=;
- h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
- b=dunb71L48IxppxhholJtBo/tHH/H3XeYlump+Vc4UGuKPypVxMWnP6XPQ7WvZ0p6W
- fm4H0dI0z8pFslajPWV527iBhCD8/3LwaBr4zQugVix0ajuvJzd3NIfWUKYe3Zd0h7
- 6/BI9+VOG5ra11AtnFB6+Jza6adYFFZ0qlnVLjfuOufc9U/UY4NjggYme1EO9AC/a+
- ggO8Ae00nIWfiyEeAFJlBmhuXQp9JIKFPD5nF7TZQTuTWqox5739t7cP9kqjfd8yp0
- cbtm4/pGobUaspZYtv2sOirgq+PrEcAQCbZj5wUapEM5fEBYOYD7mH1pTBiLNMDOg4
- pU9sUIgf7WwQw==
-Received: from johan by xi.lan with local (Exim 4.97.1)
- (envelope-from <johan@kernel.org>) id 1tV5wS-000000006sK-0WjG;
- Tue, 07 Jan 2025 10:32:04 +0100
-Date: Tue, 7 Jan 2025 10:32:04 +0100
-From: Johan Hovold <johan@kernel.org>
-To: Abel Vesa <abel.vesa@linaro.org>
-Cc: Maarten Lankhorst <maarten.lankhorst@linux.intel.com>,
- Maxime Ripard <mripard@kernel.org>,
- Thomas Zimmermann <tzimmermann@suse.de>,
- David Airlie <airlied@gmail.com>, Simona Vetter <simona@ffwll.ch>,
- Karol Herbst <kherbst@redhat.com>, Lyude Paul <lyude@redhat.com>,
- Danilo Krummrich <dakr@redhat.com>,
- Jani Nikula <jani.nikula@linux.intel.com>,
+Received: from mail-lf1-f50.google.com (mail-lf1-f50.google.com
+ [209.85.167.50])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id B21D110E408
+ for <nouveau@lists.freedesktop.org>; Tue,  7 Jan 2025 11:32:34 +0000 (UTC)
+Received: by mail-lf1-f50.google.com with SMTP id
+ 2adb3069b0e04-540218726d5so15902438e87.2
+ for <nouveau@lists.freedesktop.org>; Tue, 07 Jan 2025 03:32:34 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=linaro.org; s=google; t=1736249493; x=1736854293; darn=lists.freedesktop.org;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=G3N5s5fdL2YNf7soMuvHTeYgJ8vy52pHoEfk/tcGSD8=;
+ b=R5HlCX9P2+IGbW3aQGV6h+SpZEdmyeGZPruuB5C0nX7QtXnh5uBl4Cf9cg9TqezUuS
+ GbEdiF1M3qxqdSk8JPJCqv86EJjI14TnJEmjNy0GBpxgis4h1cHbsdvkTr5D3hdoNbw3
+ R5GCqh+/uXz4eOb6qRmUPH/aVfqYRnd337qs1sqqEeVdUfwrgfxShOtTCqKq5wFKimgI
+ ZGnQfja2tN95ZydphVDeEvKgBggkkbvPjql5BoXSo/4r9iLkHJZmpS5RUaFrgLgzhdwi
+ KnX9hKWQQDnqySmG9tEOxWN3b3BW0yVJi+Yu/unG+jcqDqxq5euOtAL2FZ+GaHBFwsLe
+ FYXw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1736249493; x=1736854293;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=G3N5s5fdL2YNf7soMuvHTeYgJ8vy52pHoEfk/tcGSD8=;
+ b=NtShew2RNjs5/uuHAUXKiIwT4HMMUfXYrcEWyC8d+aCls5tPcYzJq8i5BrI4xXwTmN
+ byUDCvE+9nG7AmEHg6aolRD7R8qruYgrN19StQk5pdxoqMpNgM9wejD/JJSx9vGrSaDN
+ +rv9KcvR1B75JrylhxHPwU2x3HJ+9JUP4EGc1T7CZIK8dzNUWZrHMbWi7ByLsg7BS+vL
+ 5VkdrWXGD6XaBMSxSvCod3UbPrLr1Dp4W9EbICE95Iv2nUjqJiHVvXfjQjrI5alnOrdU
+ uuBm9C78rvEB5WF4YVY6VVKzhdJ/bvSHHs578CKhjCLTrvsB48ud0bLhW0iZG/gaJJuv
+ assA==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCVn0tE7GNs3HgdwWavz9DZA+Xh8qEwFUEqDD1iSaSAZOdu+eJP0Y7X1IQw+8pZ2+VLq9K0y6PSW@lists.freedesktop.org
+X-Gm-Message-State: AOJu0YztugomlBjDq0Y78yCz4oDLb8TwqsZfk0X+2QjZIZWQVojYkbRo
+ KQuh3+m+k9udwd04d37OJpGeod+I3WlPs4LldO4OyQGo8j/qpxpAyXeTHJR1npE=
+X-Gm-Gg: ASbGncsXz3n662BGvR30dJ37V6q6PsVg/De2wEbylSMa1fMeKXFA6rkzbphcbmWneHq
+ 00jbvnkSqMH4KNrtxsLg5R3ZuQSx2dZoURDY1ksGt3D9ygJd4sIk9SgODj5H0C+Ke1cqiI+u6xQ
+ ghtwf7KUaFpTKJ4He1VbZYRvPQt/HI+yKKILDgZ6mnZzXxGzD7UrdGM45BgIwLQjMMYZPo1roWX
+ 9nbGpLtf249LG4NVFQwtP4tb8cHQ4CnGmsY8k/wsYXbrbd1M+Fnp/SaoZSmvNZy9533vWSNa1Oo
+ F7DDRL/yjF8L7OoVlLHwjlXA
+X-Google-Smtp-Source: AGHT+IENf5iIM0eyUUKKI+rIQnGA5rELVSy2jGiVzJtZlwGnyitqzrPGGRO+n/bqFHmHqnjQEDg7ZA==
+X-Received: by 2002:ac2:4c4c:0:b0:542:7217:361a with SMTP id
+ 2adb3069b0e04-54272173890mr3514721e87.10.1736249493006; 
+ Tue, 07 Jan 2025 03:31:33 -0800 (PST)
+Received: from eriador.lan (2001-14ba-a0c3-3a00--b8c.rev.dnainternet.fi.
+ [2001:14ba:a0c3:3a00::b8c]) by smtp.gmail.com with ESMTPSA id
+ 2adb3069b0e04-542235f658csm5169219e87.44.2025.01.07.03.31.30
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Tue, 07 Jan 2025 03:31:31 -0800 (PST)
+From: Dmitry Baryshkov <dmitry.baryshkov@linaro.org>
+To: Jani Nikula <jani.nikula@linux.intel.com>,
  Rodrigo Vivi <rodrigo.vivi@intel.com>,
  Joonas Lahtinen <joonas.lahtinen@linux.intel.com>,
- Tvrtko Ursulin <tursulin@ursulin.net>, Rob Clark <robdclark@gmail.com>,
- Abhinav Kumar <quic_abhinavk@quicinc.com>,
- Dmitry Baryshkov <dmitry.baryshkov@linaro.org>,
- Sean Paul <sean@poorly.run>,
+ Tvrtko Ursulin <tursulin@ursulin.net>, David Airlie <airlied@gmail.com>,
+ Simona Vetter <simona@ffwll.ch>,
+ Maarten Lankhorst <maarten.lankhorst@linux.intel.com>,
+ Maxime Ripard <mripard@kernel.org>,
+ Thomas Zimmermann <tzimmermann@suse.de>, Karol Herbst <kherbst@redhat.com>,
+ Lyude Paul <lyude@redhat.com>, Danilo Krummrich <dakr@redhat.com>,
+ Harry Wentland <harry.wentland@amd.com>, Leo Li <sunpeng.li@amd.com>,
+ Rodrigo Siqueira <Rodrigo.Siqueira@amd.com>,
+ Alex Deucher <alexander.deucher@amd.com>,
+ =?UTF-8?q?Christian=20K=C3=B6nig?= <christian.koenig@amd.com>,
+ Xinhui Pan <Xinhui.Pan@amd.com>, Alain Volmat <alain.volmat@foss.st.com>,
+ Raphael Gallais-Pou <rgallaispou@gmail.com>,
+ Liviu Dudau <liviu.dudau@arm.com>, Andrzej Hajda <andrzej.hajda@intel.com>,
+ Neil Armstrong <neil.armstrong@linaro.org>, Robert Foss <rfoss@kernel.org>,
+ Laurent Pinchart <Laurent.pinchart@ideasonboard.com>,
+ Jonas Karlman <jonas@kwiboo.se>, Jernej Skrabec <jernej.skrabec@gmail.com>,
+ Peter Senna Tschudin <peter.senna@gmail.com>, Ian Ray <ian.ray@ge.com>,
+ Martyn Welch <martyn.welch@collabora.co.uk>,
+ Inki Dae <inki.dae@samsung.com>, Seung-Woo Kim <sw0312.kim@samsung.com>,
+ Kyungmin Park <kyungmin.park@samsung.com>,
+ Krzysztof Kozlowski <krzk@kernel.org>,
+ Alim Akhtar <alim.akhtar@samsung.com>, Stefan Agner <stefan@agner.ch>,
+ Alison Wang <alison.wang@nxp.com>,
+ Patrik Jakobsson <patrik.r.jakobsson@gmail.com>,
+ Philipp Zabel <p.zabel@pengutronix.de>, Shawn Guo <shawnguo@kernel.org>,
+ Sascha Hauer <s.hauer@pengutronix.de>,
+ Pengutronix Kernel Team <kernel@pengutronix.de>,
+ Fabio Estevam <festevam@gmail.com>, Rob Clark <robdclark@gmail.com>,
+ Abhinav Kumar <quic_abhinavk@quicinc.com>, Sean Paul <sean@poorly.run>,
  Marijn Suijten <marijn.suijten@somainline.org>,
- Bjorn Andersson <andersson@kernel.org>,
- Konrad Dybcio <konradybcio@kernel.org>,
+ Dave Airlie <airlied@redhat.com>, Gerd Hoffmann <kraxel@redhat.com>,
+ Sandy Huang <hjc@rock-chips.com>,
+ =?UTF-8?q?Heiko=20St=C3=BCbner?= <heiko@sntech.de>,
+ Andy Yan <andy.yan@rock-chips.com>, Chen-Yu Tsai <wens@csie.org>,
+ Samuel Holland <samuel@sholland.org>,
+ Thierry Reding <thierry.reding@gmail.com>,
+ Mikko Perttunen <mperttunen@nvidia.com>,
+ Jonathan Hunter <jonathanh@nvidia.com>,
+ Dave Stevenson <dave.stevenson@raspberrypi.com>,
+ =?UTF-8?q?Ma=C3=ADra=20Canal?= <mcanal@igalia.com>,
+ Raspberry Pi Kernel Maintenance <kernel-list@raspberrypi.com>,
+ Gurchetan Singh <gurchetansingh@chromium.org>,
+ Chia-I Wu <olvaffe@gmail.com>, Zack Rusin <zack.rusin@broadcom.com>,
+ Broadcom internal kernel review list <bcm-kernel-feedback-list@broadcom.com>, 
+ Dmitry Baryshkov <dmitry.baryshkov@linaro.org>
+Cc: intel-gfx@lists.freedesktop.org, intel-xe@lists.freedesktop.org,
  dri-devel@lists.freedesktop.org, linux-kernel@vger.kernel.org,
- nouveau@lists.freedesktop.org, intel-gfx@lists.freedesktop.org,
- intel-xe@lists.freedesktop.org, linux-arm-msm@vger.kernel.org,
- freedreno@lists.freedesktop.org, Johan Hovold <johan+linaro@kernel.org>
-Subject: Re: [PATCH v3 4/4] drm/msm/dp: Add support for LTTPR handling
-Message-ID: <Z3z0lLMTZqmOQ7Ag@hovoldconsulting.com>
-References: <20250103-drm-dp-msm-add-lttpr-transparent-mode-set-v3-0-5c367f4b0763@linaro.org>
- <20250103-drm-dp-msm-add-lttpr-transparent-mode-set-v3-4-5c367f4b0763@linaro.org>
+ nouveau@lists.freedesktop.org, amd-gfx@lists.freedesktop.org,
+ linux-arm-kernel@lists.infradead.org, linux-samsung-soc@vger.kernel.org,
+ imx@lists.linux.dev, linux-arm-msm@vger.kernel.org,
+ freedreno@lists.freedesktop.org, virtualization@lists.linux.dev,
+ spice-devel@lists.freedesktop.org, linux-rockchip@lists.infradead.org,
+ linux-sunxi@lists.linux.dev, linux-tegra@vger.kernel.org,
+ Laurent Pinchart <laurent.pinchart+renesas@ideasonboard.com>,
+ Jani Nikula <jani.nikula@intel.com>
+Subject: Re: [PATCH v2 0/5] drm/connector: make mode_valid() callback accept
+ const mode pointer
+Date: Tue,  7 Jan 2025 13:31:28 +0200
+Message-ID: <173624946815.1500596.321177900833598022.b4-ty@linaro.org>
+X-Mailer: git-send-email 2.45.2
+In-Reply-To: <20241214-drm-connector-mode-valid-const-v2-0-4f9498a4c822@linaro.org>
+References: <20241214-drm-connector-mode-valid-const-v2-0-4f9498a4c822@linaro.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <20250103-drm-dp-msm-add-lttpr-transparent-mode-set-v3-4-5c367f4b0763@linaro.org>
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 8bit
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -78,43 +144,32 @@ List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-On Fri, Jan 03, 2025 at 02:58:18PM +0200, Abel Vesa wrote:
-> Link Training Tunable PHY Repeaters (LTTPRs) are defined in DisplayPort
-> 1.4a specification. As the name suggests, these PHY repeaters are
-> capable of adjusting their output for link training purposes.
+On Sat, 14 Dec 2024 15:37:04 +0200, Dmitry Baryshkov wrote:
+> While working on the generic mode_valid() implementation for the HDMI
+> Connector framework I noticed that unlike other DRM objects
+> drm_connector accepts non-const pointer to struct drm_display_mode,
+> while obviously mode_valid() isn't expected to modify the argument.
 > 
-> According to the DisplayPort standard, LTTPRs have two operating
-> modes:
->  - non-transparent - it replies to DPCD LTTPR field specific AUX
->    requests, while passes through all other AUX requests
->  - transparent - it passes through all AUX requests.
+> Mass-change the DRM framework code to pass const argument to that
+> callback.
 > 
-> Switching between this two modes is done by the DPTX by issuing
-> an AUX write to the DPCD PHY_REPEATER_MODE register.
-> 
-> The msm DP driver is currently lacking any handling of LTTPRs.
-> This means that if at least one LTTPR is found between DPTX and DPRX,
-> the link training would fail if that LTTPR was not already configured
-> in transparent mode.
-> 
-> The section 3.6.6.1 from the DisplayPort v2.0 specification mandates
-> that before link training with the LTTPR is started, the DPTX may place
-> the LTTPR in non-transparent mode by first switching to transparent mode
-> and then to non-transparent mode. This operation seems to be needed only
-> on first link training and doesn't need to be done again until device is
-> unplugged.
-> 
-> It has been observed on a few X Elite-based platforms which have
-> such LTTPRs in their board design that the DPTX needs to follow the
-> procedure described above in order for the link training to be successful.
-> 
-> So add support for reading the LTTPR DPCD caps to figure out the number
-> of such LTTPRs first. Then, for platforms (or Type-C dongles) that have
-> at least one such an LTTPR, set its operation mode to transparent mode
-> first and then to non-transparent, just like the mentioned section of
-> the specification mandates.
-> 
-> Tested-by: Johan Hovold <johan+linaro@kernel.org>
-> Signed-off-by: Abel Vesa <abel.vesa@linaro.org>
+> [...]
 
-Reviewed-by: Johan Hovold <johan+linaro@kernel.org>
+Applied to drm-misc-next, thanks!
+
+[1/5] drm/encoder_slave: make mode_valid accept const struct drm_display_mode
+      commit: 7a5cd45fab0a2671aa4ea6d8fb80cea268387176
+[2/5] drm/amdgpu: don't change mode in amdgpu_dm_connector_mode_valid()
+      commit: b255ce4388e09f14311e7912d0ccd45a14a08d66
+[3/5] drm/sti: hda: pass const struct drm_display_mode* to hda_get_mode_idx()
+      commit: 5f011b442006ccb29044263df10843de80fc0b14
+[4/5] drm/connector: make mode_valid_ctx take a const struct drm_display_mode
+      commit: 66df9debcb29d14802912ed79a9cf9ba721b51a4
+[5/5] drm/connector: make mode_valid take a const struct drm_display_mode
+      commit: 26d6fd81916e62d2b0568d9756e5f9c33f0f9b7a
+
+Best regards,
+-- 
+With best wishes
+Dmitry
+
