@@ -2,45 +2,69 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id AA362A04561
-	for <lists+nouveau@lfdr.de>; Tue,  7 Jan 2025 17:02:14 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 874B0A04E8A
+	for <lists+nouveau@lfdr.de>; Wed,  8 Jan 2025 02:05:37 +0100 (CET)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id F00A210E719;
-	Tue,  7 Jan 2025 16:02:12 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 23D5010E41E;
+	Wed,  8 Jan 2025 01:05:35 +0000 (UTC)
 Authentication-Results: gabe.freedesktop.org;
-	dkim=pass (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="lIJzqc96";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="mOIabX0M";
 	dkim-atps=neutral
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from nyc.source.kernel.org (nyc.source.kernel.org [147.75.193.91])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 7548210E719;
- Tue,  7 Jan 2025 16:02:11 +0000 (UTC)
-Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by nyc.source.kernel.org (Postfix) with ESMTP id 230FFA418A3;
- Tue,  7 Jan 2025 16:00:21 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id ADDB6C4CEDE;
- Tue,  7 Jan 2025 16:02:08 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1736265729;
- bh=LtQLZTgegXJjeN7LKmzZB8Z9V7vdz01Osf6H4CQUUD4=;
- h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
- b=lIJzqc963riTqysHsY6Ulo3BBaGQK0VFL+NjCkPhsFlsTpXWHTwO9sfN16oJ8nGJG
- IOzlvYr8epsHlyU25KEtAEzZJ2NTGWcG7gDKVAvVu8e9m/ZsTqnaLpan+uU+ev5+w7
- 1xrXMhFV5PLFMnFBV34WyO72kPuXgFDKfoh2RhLuWhYNdgZIRUThM5cHysgkcgveI3
- 3UnLbuZvP81je3LfcxdGRHB0puSoEIuEywkEfmQGE+Lcgfg54Q5ynUJDNrXzrRiRSG
- YMzD91oouhbdcJ+EOAiExwr8ArXXJF44JBZYnxYMGjL7epmxXLCZhDTm4YqBcBkiv7
- D2v7WviKZJpCQ==
-Date: Tue, 7 Jan 2025 17:02:05 +0100
-From: Danilo Krummrich <dakr@kernel.org>
-To: Dave Airlie <airlied@gmail.com>
-Cc: dri-devel@lists.freedesktop.org, nouveau@lists.freedesktop.org
-Subject: Re: [PATCH] nouveau/fence: handle cross device fences properly.
-Message-ID: <Z31P_Wp4qMzIlv88@pollux>
-References: <20250107055846.536589-1-airlied@gmail.com>
+Received: from mail-ej1-f53.google.com (mail-ej1-f53.google.com
+ [209.85.218.53])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id A4C5F10E41E;
+ Wed,  8 Jan 2025 01:05:34 +0000 (UTC)
+Received: by mail-ej1-f53.google.com with SMTP id
+ a640c23a62f3a-aa684b6d9c7so2663736766b.2; 
+ Tue, 07 Jan 2025 17:05:34 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=gmail.com; s=20230601; t=1736298273; x=1736903073; darn=lists.freedesktop.org;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=BFRpOVVEyZDwWW7S29zceUmPpuxv5eNMBA/Dkqrr8jg=;
+ b=mOIabX0Mx4ABXMjtOQWd0g2JrvYoUMznPfMvMy/cTm3gQWWTzJe7g3e9aZ4BAynavz
+ qZ2uzGHLnXqILToO1rT3Wg648+eDkclO1BLfyUMVVB6T6S8cuZiEfb0TMQ+cPj7UbW0D
+ +bSo8y8tYtYNdMufJ9Bc8uT7neKebsgiV3XwQ5enDiLcICY+yHRw5qNpjW1zix2T4uAg
+ CXY0we8v1N6s9p9tlz8MlTWzmdLpTAJm8YPtfJ7QGHwYs6ZPMdml9qclaZklyQOPeCdE
+ cdq3kKBlT2cnFf12rRG8JPbvzfVMqo9z4xGi+BgxkRjB/C3cd+Hw9mxCQ9WplQPiEZz2
+ jaSQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1736298273; x=1736903073;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=BFRpOVVEyZDwWW7S29zceUmPpuxv5eNMBA/Dkqrr8jg=;
+ b=T1S6GQrpLMXsww5tIxJKKg8PYdfzNR1tK1s4D5xGjjDnruCt381OxvOTfHUxLvPY3m
+ O9ma/tf/P8hQVwFxop2c4G7iPBBiZj19Ot1NmZ/2UMl/Wj6eSbDF3ydt6eXW/GqjN4bO
+ 9pDTms+NE1JGNRx4aFj6C729tctNRMrliCAIbAY0Opq55sYd7lSvFtu0qS0ujo+5SVPo
+ 13Y/fYOgL4TgRNmavwAMskKsIUsAVvAW/m8ClGXxK7KFzQ1OuTLmgbwwr3UY3BCccRIg
+ z5Wu2pAqjxuHE1xZsy3NHoOObCnAvLWf1PKlK464pn1twv0LdKOFUkmFWnUYI2Ub1a+k
+ An3Q==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCUxkLNhbfTP5nKf0/t9B+lh9rR2UzAD5nrfiVmxLvopjZ3TqmdKeenIpD/7OL84jMvLVf4glcB1@lists.freedesktop.org
+X-Gm-Message-State: AOJu0YwmxmLTHgj7JdKhmP60k0Y3VaIhZDZpGH0GlRA896R3EIYx4zqN
+ esuPyUDVTJkODKa/dvZhFH0ZFg2h0+JUpv84RoxZB/li7fwMdx9pTTUzud3joDsbojvgDfVKEpO
+ EhhYPKf0uAy1G5vLqMWnuhGe6rFYqq4+X
+X-Gm-Gg: ASbGncvkG6+LREP8SFYMBijn6dEADWXKOpJGM9PFYuopnu1bmDqq/B8B9d0/l94UuG6
+ lzx0va8FylD+Na7qqdb71Xlj4cSQHU3Zqrbm/
+X-Google-Smtp-Source: AGHT+IHvL6KJToeOzgdZ2o6X3wMIb7VkR5mA+dkxqC57iUb7vLJOL787QzBEMqu6FP7Hd8VhJH5p7cig4IHvpvodATo=
+X-Received: by 2002:a17:906:ef0b:b0:aa6:88ae:22a with SMTP id
+ a640c23a62f3a-ab2abc6f22dmr56579866b.37.1736298272636; Tue, 07 Jan 2025
+ 17:04:32 -0800 (PST)
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <20250107055846.536589-1-airlied@gmail.com>
+References: <20250107055846.536589-1-airlied@gmail.com>
+ <Z31P_Wp4qMzIlv88@pollux>
+In-Reply-To: <Z31P_Wp4qMzIlv88@pollux>
+From: Dave Airlie <airlied@gmail.com>
+Date: Wed, 8 Jan 2025 11:04:21 +1000
+X-Gm-Features: AbW1kvbEo7x_Sn0vEF1FHhBgeHVyVjN5RqP7SRpTkKkSuFPMMEFvtdPF8JQHRsY
+Message-ID: <CAPM=9twK4UUnrOc1rB7bZLgWG534HH14vsdyCgUcKX1YLrnNDg@mail.gmail.com>
+Subject: Re: [PATCH] nouveau/fence: handle cross device fences properly.
+To: Danilo Krummrich <dakr@kernel.org>
+Cc: dri-devel@lists.freedesktop.org, nouveau@lists.freedesktop.org
+Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -55,59 +79,58 @@ List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-On Tue, Jan 07, 2025 at 03:58:46PM +1000, Dave Airlie wrote:
-> From: Dave Airlie <airlied@redhat.com>
-> 
-> If we have two nouveau controlled devices and one passes a dma-fence
-> to the other, when we hit the sync path it can cause the second device
-> to try and put a sync wait in it's pushbuf for the seqno of the context
-> on the first device.
-> 
-> Since fence contexts are vmm bound, check the if vmm's match between
-> both users, this should ensure that fence seqnos don't get used wrongly
-> on incorrect channels.
+On Wed, 8 Jan 2025 at 02:02, Danilo Krummrich <dakr@kernel.org> wrote:
+>
+> On Tue, Jan 07, 2025 at 03:58:46PM +1000, Dave Airlie wrote:
+> > From: Dave Airlie <airlied@redhat.com>
+> >
+> > If we have two nouveau controlled devices and one passes a dma-fence
+> > to the other, when we hit the sync path it can cause the second device
+> > to try and put a sync wait in it's pushbuf for the seqno of the context
+> > on the first device.
+> >
+> > Since fence contexts are vmm bound, check the if vmm's match between
+> > both users, this should ensure that fence seqnos don't get used wrongly
+> > on incorrect channels.
+>
+> The fence sequence number is global, i.e. per device, hence checking the vmm
+> context seems too restrictive.
+>
+> Wouldn't it be better to ensure that `prev->cli->drm == chan->cli->drm`?
 
-The fence sequence number is global, i.e. per device, hence checking the vmm
-context seems too restrictive.
+Can you prove that? I thought the same and I've gone around a few
+times yesterday/today and convinced myself what I wrote is right.
 
-Wouldn't it be better to ensure that `prev->cli->drm == chan->cli->drm`?
+dma_fence_init gets passed the seqno which comes from fctx->sequence,
+which is nouveau_fence_chan, which gets allocated for each channel.
 
-This way we can still optimize where dependencies are between different
-applications, but on the same device.
+So we should hit this path if we have 2 userspace submits, one with
+say graphics, the one with copy engine contexts, otherwise we should
+wait on the CPU.
 
-> 
-> This seems to happen fairly spuriously and I found it tracking down
-> a multi-card regression report, that seems to work by luck before this.
-> 
-> Signed-off-by: Dave Airlie <airlied@redhat.com>
-> Cc: stable@vger.kernel.org
-> ---
->  drivers/gpu/drm/nouveau/nouveau_fence.c | 3 ++-
->  1 file changed, 2 insertions(+), 1 deletion(-)
-> 
-> diff --git a/drivers/gpu/drm/nouveau/nouveau_fence.c b/drivers/gpu/drm/nouveau/nouveau_fence.c
-> index ee5e9d40c166f..5743c82f4094b 100644
-> --- a/drivers/gpu/drm/nouveau/nouveau_fence.c
-> +++ b/drivers/gpu/drm/nouveau/nouveau_fence.c
-> @@ -370,7 +370,8 @@ nouveau_fence_sync(struct nouveau_bo *nvbo, struct nouveau_channel *chan,
->  
->  				rcu_read_lock();
->  				prev = rcu_dereference(f->channel);
-> -				if (prev && (prev == chan ||
-> +				if (prev && (prev->vmm == chan->vmm) &&
-> +				    (prev == chan ||
+> >  drivers/gpu/drm/nouveau/nouveau_fence.c | 3 ++-
+> >  1 file changed, 2 insertions(+), 1 deletion(-)
+> >
+> > diff --git a/drivers/gpu/drm/nouveau/nouveau_fence.c b/drivers/gpu/drm/nouveau/nouveau_fence.c
+> > index ee5e9d40c166f..5743c82f4094b 100644
+> > --- a/drivers/gpu/drm/nouveau/nouveau_fence.c
+> > +++ b/drivers/gpu/drm/nouveau/nouveau_fence.c
+> > @@ -370,7 +370,8 @@ nouveau_fence_sync(struct nouveau_bo *nvbo, struct nouveau_channel *chan,
+> >
+> >                               rcu_read_lock();
+> >                               prev = rcu_dereference(f->channel);
+> > -                             if (prev && (prev == chan ||
+> > +                             if (prev && (prev->vmm == chan->vmm) &&
+> > +                                 (prev == chan ||
+>
+> Maybe better break it down a bit, e.g.
+>
+> bool local = prev && (prev->... == chan->...);
+>
+> if (local && ...) {
+> ...
+> }
 
-Maybe better break it down a bit, e.g.
+I'll update that once we resolve the above.
 
-bool local = prev && (prev->... == chan->...);
-
-if (local && ...) {
-...
-}
-
->  					     fctx->sync(f, prev, chan) == 0))
->  					must_wait = false;
->  				rcu_read_unlock();
-> -- 
-> 2.43.0
-> 
+Dave.
