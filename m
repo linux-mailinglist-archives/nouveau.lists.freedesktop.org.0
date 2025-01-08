@@ -2,95 +2,48 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id 9E203A06899
-	for <lists+nouveau@lfdr.de>; Wed,  8 Jan 2025 23:43:40 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 3275AA068C0
+	for <lists+nouveau@lfdr.de>; Wed,  8 Jan 2025 23:49:41 +0100 (CET)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 54D5C10E05C;
-	Wed,  8 Jan 2025 22:43:39 +0000 (UTC)
-Authentication-Results: gabe.freedesktop.org;
-	dkim=pass (2048-bit key; unprotected) header.d=quicinc.com header.i=@quicinc.com header.b="cTQFf1Fr";
-	dkim-atps=neutral
+	by gabe.freedesktop.org (Postfix) with ESMTP id A3F8410E95B;
+	Wed,  8 Jan 2025 22:49:39 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from mx0b-0031df01.pphosted.com (mx0b-0031df01.pphosted.com
- [205.220.180.131])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 56CE110E05C;
- Wed,  8 Jan 2025 22:43:38 +0000 (UTC)
-Received: from pps.filterd (m0279872.ppops.net [127.0.0.1])
- by mx0a-0031df01.pphosted.com (8.18.1.2/8.18.1.2) with ESMTP id 508HMlxa014796;
- Wed, 8 Jan 2025 22:43:31 GMT
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=quicinc.com; h=
- cc:content-transfer-encoding:content-type:date:from:in-reply-to
- :message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
- pe4G+UyYb8cZtDj+ltdkPSaWk2YVBHhcyJrZWNEnXxg=; b=cTQFf1FrybgrKyii
- TEz9QmPqOAKYMBdZHoM8l8zluabyB8DGidjRZ1rDRNGn1RRpjUkhF+D9meZIAF3V
- pz+aXaSAyzCLIjDj1WvENwnU1FDxRhj7iO4J7hkXA5An9pgYZFtghKaHgZ3jPIlL
- kGJsn3VwiuqbD5q+4Rapt4w1pQVKG3GblTRh2cxROpSY8jI/ccwoB3/8CbwtadeJ
- wLWnckYSpuyQnco9qra/wG/HawBRjEDfTki1iyJbIlTozUfqYhY4JP/ITrxnJbbP
- mGmJeBdSzrJZJH5uN1PMoHBDOKDp1hHbQMVCC1Lwcxh8MZVlOhO9tZ7GcZH27zZu
- f82rpw==
-Received: from nalasppmta05.qualcomm.com (Global_NAT1.qualcomm.com
- [129.46.96.20])
- by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 441wq50pke-1
- (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
- Wed, 08 Jan 2025 22:43:31 +0000 (GMT)
-Received: from nalasex01a.na.qualcomm.com (nalasex01a.na.qualcomm.com
- [10.47.209.196])
- by NALASPPMTA05.qualcomm.com (8.18.1.2/8.18.1.2) with ESMTPS id 508MhUd5021460
- (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
- Wed, 8 Jan 2025 22:43:30 GMT
-Received: from [10.71.108.79] (10.80.80.8) by nalasex01a.na.qualcomm.com
- (10.47.209.196) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.1544.9; Wed, 8 Jan 2025
- 14:43:29 -0800
-Message-ID: <48c109bc-58c2-416a-ba6a-a15ca754f16d@quicinc.com>
-Date: Wed, 8 Jan 2025 14:43:28 -0800
+Received: from us-smtp-delivery-44.mimecast.com
+ (us-smtp-delivery-44.mimecast.com [205.139.111.44])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 7496610E95B
+ for <nouveau@lists.freedesktop.org>; Wed,  8 Jan 2025 22:49:38 +0000 (UTC)
+Received: from mx-prod-mc-04.mail-002.prod.us-west-2.aws.redhat.com
+ (ec2-54-186-198-63.us-west-2.compute.amazonaws.com [54.186.198.63]) by
+ relay.mimecast.com with ESMTP with STARTTLS (version=TLSv1.3,
+ cipher=TLS_AES_256_GCM_SHA384) id us-mta-620-MXEgMaHnNku7JH_KAJgf_A-1; Wed,
+ 08 Jan 2025 17:49:35 -0500
+X-MC-Unique: MXEgMaHnNku7JH_KAJgf_A-1
+X-Mimecast-MFC-AGG-ID: MXEgMaHnNku7JH_KAJgf_A
+Received: from mx-prod-int-01.mail-002.prod.us-west-2.aws.redhat.com
+ (mx-prod-int-01.mail-002.prod.us-west-2.aws.redhat.com [10.30.177.4])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
+ (No client certificate requested)
+ by mx-prod-mc-04.mail-002.prod.us-west-2.aws.redhat.com (Postfix) with ESMTPS
+ id E94DC1955BED; Wed,  8 Jan 2025 22:49:33 +0000 (UTC)
+Received: from dreadlord.redhat.com (unknown [10.64.136.7])
+ by mx-prod-int-01.mail-002.prod.us-west-2.aws.redhat.com (Postfix) with ESMTP
+ id 40EC13000199; Wed,  8 Jan 2025 22:49:31 +0000 (UTC)
+From: Dave Airlie <airlied@gmail.com>
+To: dri-devel@lists.freedesktop.org
+Cc: nouveau@lists.freedesktop.org,
+	dakr@kernel.org
+Subject: [PATCH] nouveau/fence: handle cross cli fences properly.
+Date: Thu,  9 Jan 2025 08:49:29 +1000
+Message-ID: <20250108224930.596928-1-airlied@gmail.com>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v4 1/4] drm/dp: Add helper to set LTTPRs in transparent
- mode
-To: Abel Vesa <abel.vesa@linaro.org>, Maarten Lankhorst
- <maarten.lankhorst@linux.intel.com>, Maxime Ripard <mripard@kernel.org>,
- Thomas Zimmermann <tzimmermann@suse.de>,
- David Airlie <airlied@gmail.com>, Simona Vetter <simona@ffwll.ch>,
- Karol Herbst <kherbst@redhat.com>, Lyude Paul <lyude@redhat.com>,
- Danilo Krummrich <dakr@redhat.com>, Jani Nikula
- <jani.nikula@linux.intel.com>, Rodrigo Vivi <rodrigo.vivi@intel.com>,
- Joonas Lahtinen <joonas.lahtinen@linux.intel.com>, Tvrtko Ursulin
- <tursulin@ursulin.net>, Rob Clark <robdclark@gmail.com>, Dmitry Baryshkov
- <dmitry.baryshkov@linaro.org>, Sean Paul <sean@poorly.run>, Marijn Suijten
- <marijn.suijten@somainline.org>
-CC: Bjorn Andersson <andersson@kernel.org>, Konrad Dybcio
- <konradybcio@kernel.org>,
- Johan Hovold <johan@kernel.org>, <dri-devel@lists.freedesktop.org>,
- <linux-kernel@vger.kernel.org>, <nouveau@lists.freedesktop.org>,
- <intel-gfx@lists.freedesktop.org>, <intel-xe@lists.freedesktop.org>,
- <linux-arm-msm@vger.kernel.org>, <freedreno@lists.freedesktop.org>,
- Johan Hovold <johan+linaro@kernel.org>
-References: <20250108-drm-dp-msm-add-lttpr-transparent-mode-set-v4-0-918949bc2e3a@linaro.org>
- <20250108-drm-dp-msm-add-lttpr-transparent-mode-set-v4-1-918949bc2e3a@linaro.org>
-Content-Language: en-US
-From: Abhinav Kumar <quic_abhinavk@quicinc.com>
-In-Reply-To: <20250108-drm-dp-msm-add-lttpr-transparent-mode-set-v4-1-918949bc2e3a@linaro.org>
-Content-Type: text/plain; charset="UTF-8"; format=flowed
-Content-Transfer-Encoding: 7bit
-X-Originating-IP: [10.80.80.8]
-X-ClientProxiedBy: nasanex01b.na.qualcomm.com (10.46.141.250) To
- nalasex01a.na.qualcomm.com (10.47.209.196)
-X-QCInternal: smtphost
-X-Proofpoint-Virus-Version: vendor=nai engine=6200 definitions=5800
- signatures=585085
-X-Proofpoint-GUID: R1XT-ytBRZAZ1E1Tb4N3fk9CX-hEtAs7
-X-Proofpoint-ORIG-GUID: R1XT-ytBRZAZ1E1Tb4N3fk9CX-hEtAs7
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.293,Aquarius:18.0.1039,Hydra:6.0.680,FMLib:17.12.60.29
- definitions=2024-09-06_09,2024-09-06_01,2024-09-02_01
-X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- mlxscore=0 priorityscore=1501
- suspectscore=0 lowpriorityscore=0 impostorscore=0 bulkscore=0 spamscore=0
- clxscore=1011 malwarescore=0 mlxlogscore=970 adultscore=0 phishscore=0
- classifier=spam adjust=0 reason=mlx scancount=1 engine=8.19.0-2411120000
- definitions=main-2501080186
+X-Scanned-By: MIMEDefang 3.4.1 on 10.30.177.4
+X-Mimecast-Spam-Score: 0
+X-Mimecast-MFC-PROC-ID: 5OxSD-9_YuSpGG2tJn-sX3hE1Hla-Gx8G8wXKWIIh54_1736376574
+X-Mimecast-Originator: gmail.com
+Content-Transfer-Encoding: quoted-printable
+content-type: text/plain; charset=WINDOWS-1252; x-default=true
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -105,34 +58,49 @@ List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
+From: Dave Airlie <airlied@redhat.com>
 
+The fence sync logic doesn't properly account for cases where
+the syncing is between two different client spaces, whether
+this be on a single device or multi-device.
 
-On 1/8/2025 6:31 AM, Abel Vesa wrote:
-> According to the DisplayPort standard, LTTPRs have two operating
-> modes:
->   - non-transparent - it replies to DPCD LTTPR field specific AUX
->     requests, while passes through all other AUX requests
->   - transparent - it passes through all AUX requests.
-> 
-> Switching between this two modes is done by the DPTX by issuing
-> an AUX write to the DPCD PHY_REPEATER_MODE register.
-> 
-> Add a generic helper that allows switching between these modes.
-> 
-> Also add a generic wrapper for the helper that handles the explicit
-> disabling of non-transparent mode and its disable->enable sequence
-> mentioned in the DP Standard v2.0 section 3.6.6.1. Do this in order
-> to move this handling out of the vendor specific driver implementation
-> into the generic framework.
-> 
-> Tested-by: Johan Hovold <johan+linaro@kernel.org>
-> Reviewed-by: Dmitry Baryshkov <dmitry.baryshkov@linaro.org>
-> Reviewed-by: Johan Hovold <johan+linaro@kernel.org>
-> Signed-off-by: Abel Vesa <abel.vesa@linaro.org>
-> ---
->   drivers/gpu/drm/display/drm_dp_helper.c | 62 +++++++++++++++++++++++++++++++++
->   include/drm/display/drm_dp_helper.h     |  2 ++
->   2 files changed, 64 insertions(+)
-> 
+In the pre-nv84 case this code might work, but post nv84
+the fence context vma is used to work out the addr, which means
+the vmm would have to match for the sync to work properly, it
+should be fine to always just check if the vmm's match before
+using the sync path.
 
-Reviewed-by: Abhinav Kumar <quic_abhinavk@quicinc.com>
+This seems to happen fairly spuriously and I found it tracking down
+a multi-card regression report, that seems to work by luck before this.
+
+Signed-off-by: Dave Airlie <airlied@redhat.com>
+Cc: stable@vger.kernel.org
+---
+ drivers/gpu/drm/nouveau/nouveau_fence.c | 6 ++++--
+ 1 file changed, 4 insertions(+), 2 deletions(-)
+
+diff --git a/drivers/gpu/drm/nouveau/nouveau_fence.c b/drivers/gpu/drm/nouv=
+eau/nouveau_fence.c
+index ee5e9d40c166f..7b55ede567d84 100644
+--- a/drivers/gpu/drm/nouveau/nouveau_fence.c
++++ b/drivers/gpu/drm/nouveau/nouveau_fence.c
+@@ -367,11 +367,13 @@ nouveau_fence_sync(struct nouveau_bo *nvbo, struct no=
+uveau_channel *chan,
+ =09=09=09if (f) {
+ =09=09=09=09struct nouveau_channel *prev;
+ =09=09=09=09bool must_wait =3D true;
++=09=09=09=09bool local;
+=20
+ =09=09=09=09rcu_read_lock();
+ =09=09=09=09prev =3D rcu_dereference(f->channel);
+-=09=09=09=09if (prev && (prev =3D=3D chan ||
+-=09=09=09=09=09     fctx->sync(f, prev, chan) =3D=3D 0))
++=09=09=09=09local =3D prev && prev->vmm =3D=3D chan->vmm;
++=09=09=09=09if (local && (prev =3D=3D chan ||
++=09=09=09=09=09      fctx->sync(f, prev, chan) =3D=3D 0))
+ =09=09=09=09=09must_wait =3D false;
+ =09=09=09=09rcu_read_unlock();
+ =09=09=09=09if (!must_wait)
+--=20
+2.43.0
+
