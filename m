@@ -2,74 +2,30 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id 880AFA07E75
-	for <lists+nouveau@lfdr.de>; Thu,  9 Jan 2025 18:15:27 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id EE3EBA08082
+	for <lists+nouveau@lfdr.de>; Thu,  9 Jan 2025 20:17:31 +0100 (CET)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 4323510EEDE;
-	Thu,  9 Jan 2025 17:15:26 +0000 (UTC)
-Authentication-Results: gabe.freedesktop.org;
-	dkim=pass (2048-bit key; unprotected) header.d=intel.com header.i=@intel.com header.b="R0mEQ+Wu";
-	dkim-atps=neutral
+	by gabe.freedesktop.org (Postfix) with ESMTP id D701810EF10;
+	Thu,  9 Jan 2025 19:17:29 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from mgamail.intel.com (mgamail.intel.com [198.175.65.19])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 63E3910EEB3;
- Thu,  9 Jan 2025 17:15:25 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
- d=intel.com; i=@intel.com; q=dns/txt; s=Intel;
- t=1736442926; x=1767978926;
- h=message-id:date:mime-version:subject:to:cc:references:
- from:in-reply-to:content-transfer-encoding;
- bh=iHe0e5c+fmzIEFb4JwfVINvpf7LWF6/4nvNtj0QRgPQ=;
- b=R0mEQ+WuUaHa5xHsD1YsYxKojJgiuLbG7KgDusO19vIqAqLmP+cTqSwz
- LfRIh+glbMsbVuJUi3jpL6ZBCDcehOwtV9cJgwIBIMg15JEUL3x4E8G1o
- lpwJ/VJIDKIDtPHOQS7yk61zH9xneX1RDTLpMcdppznHK6wBPuw2t1JML
- L7YkAbgzQxUYbircwgDBGXzhrcBz6KIvKdC4a/+qV6/Q+YtCuwCqYG21f
- 5SOcVm79KzpOdZWsUUlFggDHFv+yFLrGXwNiVdOeZlxFWjUg8jFkc+QsM
- 56bkzb6lj1qK/XBAtbWxQd5p9HU1GBfD3UdT86inl66/Oi4zaJq2YmPWL Q==;
-X-CSE-ConnectionGUID: YFaFgxkTT6GVrRBin2NliA==
-X-CSE-MsgGUID: eWjNcouaQN+0YqSeAxQxnA==
-X-IronPort-AV: E=McAfee;i="6700,10204,11310"; a="36604454"
-X-IronPort-AV: E=Sophos;i="6.12,301,1728975600"; d="scan'208";a="36604454"
-Received: from orviesa001.jf.intel.com ([10.64.159.141])
- by orvoesa111.jf.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
- 09 Jan 2025 09:15:26 -0800
-X-CSE-ConnectionGUID: sCHGnpr3S22msRSMnEsaNw==
-X-CSE-MsgGUID: Kiw4VfoXQbSJcARHoMEU4w==
-X-ExtLoop1: 1
-X-IronPort-AV: E=Sophos;i="6.12,224,1728975600"; d="scan'208";a="140776648"
-Received: from bergbenj-mobl1.ger.corp.intel.com (HELO [10.245.245.241])
- ([10.245.245.241])
- by smtpauth.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
- 09 Jan 2025 09:15:20 -0800
-Message-ID: <ec240a46-3fe1-46fa-84bc-2f962d7441ce@intel.com>
-Date: Thu, 9 Jan 2025 17:15:17 +0000
+X-Greylist: delayed 593 seconds by postgrey-1.36 at gabe;
+ Thu, 09 Jan 2025 19:17:28 UTC
+Received: from hs01.dakr.org (hs01.dakr.org [173.249.23.66])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id CF9BF10EF10
+ for <nouveau@lists.freedesktop.org>; Thu,  9 Jan 2025 19:17:28 +0000 (UTC)
+Message-ID: <dc9f1703-34a2-4c9e-8df7-2c85092d56c2@dakr.org>
+Date: Thu, 9 Jan 2025 20:07:32 +0100
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v2 23/25] drm/xe: Compute dumb-buffer sizes with
- drm_mode_size_dumb()
-To: Thomas Zimmermann <tzimmermann@suse.de>,
- maarten.lankhorst@linux.intel.com, mripard@kernel.org, airlied@gmail.com,
- simona@ffwll.ch
-Cc: dri-devel@lists.freedesktop.org, linux-mediatek@lists.infradead.org,
- freedreno@lists.freedesktop.org, linux-arm-msm@vger.kernel.org,
- imx@lists.linux.dev, linux-samsung-soc@vger.kernel.org,
- nouveau@lists.freedesktop.org, virtualization@lists.linux.dev,
- spice-devel@lists.freedesktop.org, linux-renesas-soc@vger.kernel.org,
- linux-rockchip@lists.infradead.org, linux-tegra@vger.kernel.org,
- intel-xe@lists.freedesktop.org, xen-devel@lists.xenproject.org,
- Lucas De Marchi <lucas.demarchi@intel.com>,
- =?UTF-8?Q?Thomas_Hellstr=C3=B6m?= <thomas.hellstrom@linux.intel.com>,
- Rodrigo Vivi <rodrigo.vivi@intel.com>
-References: <20250109150310.219442-1-tzimmermann@suse.de>
- <20250109150310.219442-24-tzimmermann@suse.de>
- <91c904f8-ba47-4595-be65-6fb57dcc9c64@intel.com>
- <6666af19-a98d-41d7-8329-7b50807c04a9@suse.de>
-Content-Language: en-GB
-From: Matthew Auld <matthew.auld@intel.com>
-In-Reply-To: <6666af19-a98d-41d7-8329-7b50807c04a9@suse.de>
+Subject: Re: [PATCH] [drm-misc-next] drm/nouveau: fix kernel-doc comments
+To: Timur Tabi <ttabi@nvidia.com>
+References: <20250108234329.842256-1-ttabi@nvidia.com>
+From: Danilo Krummrich <kernel@dakr.org>
+Cc: Dave Airlie <airlied@redhat.com>, nouveau@lists.freedesktop.org
+Content-Language: en-US
+In-Reply-To: <20250108234329.842256-1-ttabi@nvidia.com>
 Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 8bit
+Content-Transfer-Encoding: 7bit
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -84,81 +40,90 @@ List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-On 09/01/2025 16:26, Thomas Zimmermann wrote:
-> Hi
+On 1/9/25 12:43 AM, Timur Tabi wrote:
+> Fix some malformed kernel-doc comments that were added in a recent commit.
 > 
+> Also, kernel-doc does not support global variables, so change those
+> kernel-doc comments into regular comments.
 > 
-> Am 09.01.25 um 17:05 schrieb Matthew Auld:
->> On 09/01/2025 14:57, Thomas Zimmermann wrote:
->>> Call drm_mode_size_dumb() to compute dumb-buffer scanline pitch
->>> and buffer size. Align the pitch to a multiple of 8. Align the
->>> buffer size according to hardware requirements.
->>>
->>> Signed-off-by: Thomas Zimmermann <tzimmermann@suse.de>
->>> Cc: Lucas De Marchi <lucas.demarchi@intel.com>
->>> Cc: "Thomas Hellström" <thomas.hellstrom@linux.intel.com>
->>> Cc: Rodrigo Vivi <rodrigo.vivi@intel.com>
->>> ---
->>>   drivers/gpu/drm/xe/xe_bo.c | 8 ++++----
->>>   1 file changed, 4 insertions(+), 4 deletions(-)
->>>
->>> diff --git a/drivers/gpu/drm/xe/xe_bo.c b/drivers/gpu/drm/xe/xe_bo.c
->>> index e6c896ad5602..d75e3c39ab14 100644
->>> --- a/drivers/gpu/drm/xe/xe_bo.c
->>> +++ b/drivers/gpu/drm/xe/xe_bo.c
->>> @@ -8,6 +8,7 @@
->>>   #include <linux/dma-buf.h>
->>>     #include <drm/drm_drv.h>
->>> +#include <drm/drm_dumb_buffers.h>
->>>   #include <drm/drm_gem_ttm_helper.h>
->>>   #include <drm/drm_managed.h>
->>>   #include <drm/ttm/ttm_device.h>
->>> @@ -2535,14 +2536,13 @@ int xe_bo_dumb_create(struct drm_file 
->>> *file_priv,
->>>       struct xe_device *xe = to_xe_device(dev);
->>>       struct xe_bo *bo;
->>>       uint32_t handle;
->>> -    int cpp = DIV_ROUND_UP(args->bpp, 8);
->>>       int err;
->>>       u32 page_size = max_t(u32, PAGE_SIZE,
->>>           xe->info.vram_flags & XE_VRAM_FLAGS_NEED64K ? SZ_64K : SZ_4K);
->>>   -    args->pitch = ALIGN(args->width * cpp, 64);
->>> -    args->size = ALIGN(mul_u32_u32(args->pitch, args->height),
->>> -               page_size);
->>> +    err = drm_mode_size_dumb(dev, args, SZ_64, page_size);
->>
->> AFAICT this looks to change the behaviour, where u64 size was 
->> technically possible and was allowed given that args->size is u64, but 
->> this helper is limiting the size to u32. Is that intentional? If so, 
->> we should probably make that clear in the commit message.
+> Fixes: 214c9539cf2f ("drm/nouveau: expose GSP-RM logging buffers via debugfs")
+> Reported-by: kernel test robot <lkp@intel.com>
+> Closes: https://lore.kernel.org/oe-kbuild-all/202412310834.jtCJj4oz-lkp@intel.com/
 > 
-> That's an interesting observation; thanks. The ioctl's internal checks 
-> have always limited the size to 32 bit. [1] I think it is not supposed 
-> to be larger than that. We can change the helper to support 64-bit sizes 
-> as well.
+> Signed-off-by: Timur Tabi <ttabi@nvidia.com>
 
-Ah, I missed the internal check.
+Applied to drm-misc-next, thanks!
 
+> ---
+>   drivers/gpu/drm/nouveau/nouveau_drm.c          |  2 +-
+>   drivers/gpu/drm/nouveau/nvkm/subdev/gsp/r535.c | 12 ++++++++----
+>   2 files changed, 9 insertions(+), 5 deletions(-)
 > 
-> Having said that, is there any use case? Dumb buffers are for software 
-> rendering only. Allocating more than a few dozen MiB seems like a 
-> mistake. Maybe we should rather limit the allowed allocation size instead?
-
-Yeah, I doubt there are any real users. Given the existing internal 
-check, limiting to u32 makes sense to me.
-
+> diff --git a/drivers/gpu/drm/nouveau/nouveau_drm.c b/drivers/gpu/drm/nouveau/nouveau_drm.c
+> index 21d2d9ca5e85..8c970f018c00 100644
+> --- a/drivers/gpu/drm/nouveau/nouveau_drm.c
+> +++ b/drivers/gpu/drm/nouveau/nouveau_drm.c
+> @@ -118,7 +118,7 @@ static struct drm_driver driver_platform;
+>   #ifdef CONFIG_DEBUG_FS
+>   struct dentry *nouveau_debugfs_root;
+>   
+> -/**
+> +/*
+>    * gsp_logs - list of nvif_log GSP-RM logging buffers
+>    *
+>    * Head pointer to a a list of nvif_log buffers that is created for each GPU
+> diff --git a/drivers/gpu/drm/nouveau/nvkm/subdev/gsp/r535.c b/drivers/gpu/drm/nouveau/nvkm/subdev/gsp/r535.c
+> index 58502102926b..10fe2d15b5ce 100644
+> --- a/drivers/gpu/drm/nouveau/nvkm/subdev/gsp/r535.c
+> +++ b/drivers/gpu/drm/nouveau/nvkm/subdev/gsp/r535.c
+> @@ -1111,7 +1111,7 @@ enum registry_type {
+>   #define REGISTRY_MAX_KEY_LENGTH		64
+>   
+>   /**
+> - * registry_list_entry - linked list member for a registry key/value
+> + * struct registry_list_entry - linked list member for a registry key/value
+>    * @head: list_head struct
+>    * @type: dword, binary, or string
+>    * @klen: the length of name of the key
+> @@ -1327,7 +1327,7 @@ struct nv_gsp_registry_entries {
+>   	u32 value;
+>   };
+>   
+> -/**
+> +/*
+>    * r535_registry_entries - required registry entries for GSP-RM
+>    *
+>    * This array lists registry entries that are required for GSP-RM to
+> @@ -2101,7 +2101,7 @@ MODULE_PARM_DESC(keep_gsp_logging,
+>   #define NV_GSP_MSG_EVENT_UCODE_LIBOS_CLASS_PMU		0xf3d722
+>   
+>   /**
+> - * rpc_ucode_libos_print_v1E_08 - RPC payload for libos print buffers
+> + * struct rpc_ucode_libos_print_v1e_08 - RPC payload for libos print buffers
+>    * @ucode_eng_desc: the engine descriptor
+>    * @libos_print_buf_size: the size of the libos_print_buf[]
+>    * @libos_print_buf: the actual buffer
+> @@ -2162,7 +2162,7 @@ r535_gsp_msg_libos_print(void *priv, u32 fn, void *repv, u32 repc)
+>   }
+>   
+>   /**
+> - * create_debufgs - create a blob debugfs entry
+> + * create_debugfs - create a blob debugfs entry
+>    * @gsp: gsp pointer
+>    * @name: name of this dentry
+>    * @blob: blob wrapper
+> @@ -2788,6 +2788,10 @@ static bool is_empty(const struct debugfs_blob_wrapper *b)
+>   
+>   /**
+>    * r535_gsp_copy_log - preserve the logging buffers in a blob
+> + * @parent: the top-level dentry for this GPU
+> + * @name: name of debugfs entry to create
+> + * @s: original wrapper object to copy from
+> + * @t: new wrapper object to copy to
+>    *
+>    * When GSP shuts down, the nvkm_gsp object and all its memory is deleted.
+>    * To preserve the logging buffers, the buffers need to be copied, but only
 > 
-> Best regards
-> Thomas
-> 
-> [1] https://elixir.bootlin.com/linux/v6.12.6/source/drivers/gpu/drm/ 
-> drm_dumb_buffers.c#L82
-> 
->>
->>> +    if (err)
->>> +        return err;
->>>         bo = xe_bo_create_user(xe, NULL, NULL, args->size,
->>>                      DRM_XE_GEM_CPU_CACHING_WC,
->>
-> 
+> base-commit: 5d40d4fae6f2fb789f48207a9d4772bbee970b5c
+> prerequisite-patch-id: dbfbf26b276d26be3dbeec57723c6ac0aec4a102
 
