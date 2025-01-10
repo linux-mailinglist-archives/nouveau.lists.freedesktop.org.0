@@ -2,61 +2,59 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id 5698AA0839C
-	for <lists+nouveau@lfdr.de>; Fri, 10 Jan 2025 00:39:53 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id A4295A08553
+	for <lists+nouveau@lfdr.de>; Fri, 10 Jan 2025 03:29:25 +0100 (CET)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 6CA6210E3B1;
-	Thu,  9 Jan 2025 23:39:51 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 7529A10EF77;
+	Fri, 10 Jan 2025 02:29:23 +0000 (UTC)
 Authentication-Results: gabe.freedesktop.org;
-	dkim=fail reason="signature verification failed" (2048-bit key; secure) header.d=sntech.de header.i=@sntech.de header.b="s+jwsQH2";
+	dkim=pass (2048-bit key; unprotected) header.d=intel.com header.i=@intel.com header.b="ll/mYVIU";
 	dkim-atps=neutral
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-X-Greylist: delayed 2408 seconds by postgrey-1.36 at gabe;
- Thu, 09 Jan 2025 23:39:49 UTC
-Received: from gloria.sntech.de (gloria.sntech.de [185.11.138.130])
- by gabe.freedesktop.org (Postfix) with ESMTPS id E752B10E388;
- Thu,  9 Jan 2025 23:39:49 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sntech.de; 
- s=gloria202408;
- h=Content-Type:Content-Transfer-Encoding:MIME-Version:
- References:In-Reply-To:Message-ID:Date:Subject:Cc:To:From:Sender:Reply-To:
- Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
- Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
- List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=5X3Tmvihn3grkA7Jge4RjfqiSvPeilgE9yOD+d9FpVI=; b=s+jwsQH2++ZJTa21jBBjugQMXI
- 4bHOZkHr3BtbA6u/uOhHobPv3MGeFWhNFGUl43iw9TYIyTjmoijwv6stOdPuOX44mYtM+Ex4veIlv
- GanP8Ltk9SSPFArY9HIjzDL6w9HBmiDH9lkAf/YRbJ76vQtfeMTBh+9CdrFBgxC6jT1PLksF27MCM
- uT5h6cp1P/vX38GEwJikltALOY4zAv1uVLPRdaX6J8i+zNB6LmK+4A346bu7woaR2Pb1GBGscGht6
- qpjxlF/C8UEv09LkPOGTvCxTCmWsQsAVjWgo7DBUgDUT6zw9zcZF7Od+phqWlT6xPgO3SWYExc5bS
- MfLPLsiA==;
-Received: from i5e860d05.versanet.de ([94.134.13.5] helo=diego.localnet)
- by gloria.sntech.de with esmtpsa (TLS1.3) tls
- TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.94.2)
- (envelope-from <heiko@sntech.de>)
- id 1tW1Uq-0005mI-C2; Thu, 09 Jan 2025 23:59:24 +0100
-From: Heiko =?ISO-8859-1?Q?St=FCbner?= <heiko@sntech.de>
-To: maarten.lankhorst@linux.intel.com, mripard@kernel.org, airlied@gmail.com, 
- simona@ffwll.ch, Thomas Zimmermann <tzimmermann@suse.de>
-Cc: dri-devel@lists.freedesktop.org, linux-mediatek@lists.infradead.org,
- freedreno@lists.freedesktop.org, linux-arm-msm@vger.kernel.org,
- imx@lists.linux.dev, linux-samsung-soc@vger.kernel.org,
- nouveau@lists.freedesktop.org, virtualization@lists.linux.dev,
- spice-devel@lists.freedesktop.org, linux-renesas-soc@vger.kernel.org,
- linux-rockchip@lists.infradead.org, linux-tegra@vger.kernel.org,
- intel-xe@lists.freedesktop.org, xen-devel@lists.xenproject.org,
- Thomas Zimmermann <tzimmermann@suse.de>, Sandy Huang <hjc@rock-chips.com>,
- Andy Yan <andy.yan@rock-chips.com>
-Subject: Re: [PATCH v2 19/25] drm/rockchip: Compute dumb-buffer sizes with
- drm_mode_size_dumb()
-Date: Thu, 09 Jan 2025 23:59:23 +0100
-Message-ID: <3227546.fEcJ0Lxnt5@diego>
-In-Reply-To: <20250109150310.219442-20-tzimmermann@suse.de>
-References: <20250109150310.219442-1-tzimmermann@suse.de>
- <20250109150310.219442-20-tzimmermann@suse.de>
+Received: from mgamail.intel.com (mgamail.intel.com [192.198.163.18])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id DAE8A10EF73;
+ Fri, 10 Jan 2025 02:29:21 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
+ d=intel.com; i=@intel.com; q=dns/txt; s=Intel;
+ t=1736476162; x=1768012162;
+ h=date:from:to:cc:subject:message-id:references:
+ mime-version:in-reply-to;
+ bh=2e4NUqNMR+8tCxvxRNqVHQBg8ursswlcpfpui8hI55Y=;
+ b=ll/mYVIUwe2dw9+y5X4ZEjWb8Aqe3k/L8dswbDgY+VW/b9+A+w79ZYhV
+ zERMVUp+sw91kTNvPDETgeHf1g803AI9rRWSHGQ+5ZSH1eTUX2ldFbMpk
+ JtXHujF0qEfDQ+yz00KekzaD/H6L+R+WfsMYBq1a6PWW9/OyTwX/AejRY
+ p9r8Am4fTFfsSy2O5FeUQHaMDaVW1ZBWH/eWQ683ZTHRWvE36KpwamP+N
+ 2Le3r3r7Xk1oHzZccoSmVgYodb8cFL8bhfG2vmszjqqK7CrsoQJd9X0lR
+ kWpRor5ul1hbohQ+U18o5H0d58PKpGXli40DtqZ8rXjU9NJ7mb+Deu++F Q==;
+X-CSE-ConnectionGUID: IegklJgbTtugI+v0C7rhnA==
+X-CSE-MsgGUID: CTpHtjCVSHCCN9pe1/IQeg==
+X-IronPort-AV: E=McAfee;i="6700,10204,11310"; a="36048677"
+X-IronPort-AV: E=Sophos;i="6.12,302,1728975600"; d="scan'208";a="36048677"
+Received: from fmviesa006.fm.intel.com ([10.60.135.146])
+ by fmvoesa112.fm.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
+ 09 Jan 2025 18:29:21 -0800
+X-CSE-ConnectionGUID: EkNBlxT7TLyDNjhJQz77lw==
+X-CSE-MsgGUID: SYhPZIY+Rfa6UT2NCmfu3w==
+X-ExtLoop1: 1
+X-IronPort-AV: E=Sophos;i="6.12,302,1728975600"; d="scan'208";a="103405332"
+Received: from lkp-server01.sh.intel.com (HELO d63d4d77d921) ([10.239.97.150])
+ by fmviesa006.fm.intel.com with ESMTP; 09 Jan 2025 18:29:20 -0800
+Received: from kbuild by d63d4d77d921 with local (Exim 4.96)
+ (envelope-from <lkp@intel.com>) id 1tW4lx-000IQL-2K;
+ Fri, 10 Jan 2025 02:29:17 +0000
+Date: Fri, 10 Jan 2025 10:28:22 +0800
+From: kernel test robot <lkp@intel.com>
+To: Dave Airlie <airlied@gmail.com>, dri-devel@lists.freedesktop.org
+Cc: oe-kbuild-all@lists.linux.dev, nouveau@lists.freedesktop.org,
+ dakr@kernel.org
+Subject: Re: [PATCH] nouveau/fence: handle cross device fences properly. (v3)
+Message-ID: <202501101033.wlEjeZwK-lkp@intel.com>
+References: <20250109005553.623947-1-airlied@gmail.com>
 MIME-Version: 1.0
-Content-Transfer-Encoding: quoted-printable
-Content-Type: text/plain; charset="iso-8859-1"
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <20250109005553.623947-1-airlied@gmail.com>
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -71,70 +69,99 @@ List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-Am Donnerstag, 9. Januar 2025, 15:57:13 CET schrieb Thomas Zimmermann:
-> Call drm_mode_size_dumb() to compute dumb-buffer scanline pitch and
-> buffer size. Align the pitch to a multiple of 64.
->=20
-> Signed-off-by: Thomas Zimmermann <tzimmermann@suse.de>
-> Cc: Sandy Huang <hjc@rock-chips.com>
-> Cc: "Heiko St=FCbner" <heiko@sntech.de>
-> Cc: Andy Yan <andy.yan@rock-chips.com>
+Hi Dave,
 
-I've looked up the patch implementing the new functionality - patch2 of
-this series [0] and that looks really nice to get proper helpers and not
-having many drivers open-coding the same functionality in different ways.
+kernel test robot noticed the following build errors:
 
-So for the Rockchip adaptation:
+[auto build test ERROR on linus/master]
+[also build test ERROR on drm-misc/drm-misc-next drm-tip/drm-tip v6.13-rc6 next-20250109]
+[If your patch is applied to the wrong git tree, kindly drop us a note.
+And when submitting patch, we suggest to use '--base' as documented in
+https://git-scm.com/docs/git-format-patch#_base_tree_information]
 
-Acked-by: Heiko Stuebner <heiko@sntech.de>
+url:    https://github.com/intel-lab-lkp/linux/commits/Dave-Airlie/nouveau-fence-handle-cross-device-fences-properly-v3/20250109-085805
+base:   linus/master
+patch link:    https://lore.kernel.org/r/20250109005553.623947-1-airlied%40gmail.com
+patch subject: [PATCH] nouveau/fence: handle cross device fences properly. (v3)
+config: loongarch-randconfig-002-20250110 (https://download.01.org/0day-ci/archive/20250110/202501101033.wlEjeZwK-lkp@intel.com/config)
+compiler: loongarch64-linux-gcc (GCC) 14.2.0
+reproduce (this is a W=1 build): (https://download.01.org/0day-ci/archive/20250110/202501101033.wlEjeZwK-lkp@intel.com/reproduce)
 
-and looking forward to this getting merged :-)
+If you fix the issue in a separate patch/commit (i.e. not just a new version of
+the same patch/commit), kindly add following tags
+| Reported-by: kernel test robot <lkp@intel.com>
+| Closes: https://lore.kernel.org/oe-kbuild-all/202501101033.wlEjeZwK-lkp@intel.com/
 
-Thanks a lot for working on that
-Heiko
+All errors (new ones prefixed by >>):
 
-[0] https://patchwork.kernel.org/project/linux-rockchip/patch/2025010915031=
-0.219442-3-tzimmermann@suse.de/
-
-> ---
->  drivers/gpu/drm/rockchip/rockchip_drm_gem.c | 12 ++++++------
->  1 file changed, 6 insertions(+), 6 deletions(-)
->=20
-> diff --git a/drivers/gpu/drm/rockchip/rockchip_drm_gem.c b/drivers/gpu/dr=
-m/rockchip/rockchip_drm_gem.c
-> index 6330b883efc3..3bd06202e232 100644
-> --- a/drivers/gpu/drm/rockchip/rockchip_drm_gem.c
-> +++ b/drivers/gpu/drm/rockchip/rockchip_drm_gem.c
-> @@ -9,6 +9,7 @@
->  #include <linux/vmalloc.h>
-> =20
->  #include <drm/drm.h>
-> +#include <drm/drm_dumb_buffers.h>
->  #include <drm/drm_fb_helper.h>
->  #include <drm/drm_gem.h>
->  #include <drm/drm_gem_dma_helper.h>
-> @@ -403,13 +404,12 @@ int rockchip_gem_dumb_create(struct drm_file *file_=
-priv,
->  			     struct drm_mode_create_dumb *args)
->  {
->  	struct rockchip_gem_object *rk_obj;
-> -	int min_pitch =3D DIV_ROUND_UP(args->width * args->bpp, 8);
-> +	int ret;
-> =20
-> -	/*
-> -	 * align to 64 bytes since Mali requires it.
-> -	 */
-> -	args->pitch =3D ALIGN(min_pitch, 64);
-> -	args->size =3D args->pitch * args->height;
-> +	/* 64-byte alignment required by Mali */
-> +	ret =3D drm_mode_size_dumb(dev, args, SZ_64, 0);
-> +	if (ret)
-> +		return ret;
-> =20
->  	rk_obj =3D rockchip_gem_create_with_handle(file_priv, dev, args->size,
->  						 &args->handle);
->=20
+   drivers/gpu/drm/nouveau/nouveau_fence.c: In function 'nouveau_fence_sync':
+>> drivers/gpu/drm/nouveau/nouveau_fence.c:394:53: error: 'struct nouveau_channel' has no member named 'drm'
+     394 |                                 local = prev && prev->drm == chan->drm;
+         |                                                     ^~
+   drivers/gpu/drm/nouveau/nouveau_fence.c:394:66: error: 'struct nouveau_channel' has no member named 'drm'
+     394 |                                 local = prev && prev->drm == chan->drm;
+         |                                                                  ^~
 
 
+vim +394 drivers/gpu/drm/nouveau/nouveau_fence.c
 
+   356	
+   357	int
+   358	nouveau_fence_sync(struct nouveau_bo *nvbo, struct nouveau_channel *chan,
+   359			   bool exclusive, bool intr)
+   360	{
+   361		struct nouveau_fence_chan *fctx = chan->fence;
+   362		struct dma_resv *resv = nvbo->bo.base.resv;
+   363		int i, ret;
+   364	
+   365		ret = dma_resv_reserve_fences(resv, 1);
+   366		if (ret)
+   367			return ret;
+   368	
+   369		/* Waiting for the writes first causes performance regressions
+   370		 * under some circumstances. So manually wait for the reads first.
+   371		 */
+   372		for (i = 0; i < 2; ++i) {
+   373			struct dma_resv_iter cursor;
+   374			struct dma_fence *fence;
+   375	
+   376			dma_resv_for_each_fence(&cursor, resv,
+   377						dma_resv_usage_rw(exclusive),
+   378						fence) {
+   379				enum dma_resv_usage usage;
+   380				struct nouveau_fence *f;
+   381	
+   382				usage = dma_resv_iter_usage(&cursor);
+   383				if (i == 0 && usage == DMA_RESV_USAGE_WRITE)
+   384					continue;
+   385	
+   386				f = nouveau_local_fence(fence, chan->cli->drm);
+   387				if (f) {
+   388					struct nouveau_channel *prev;
+   389					bool must_wait = true;
+   390					bool local;
+   391	
+   392					rcu_read_lock();
+   393					prev = rcu_dereference(f->channel);
+ > 394					local = prev && prev->drm == chan->drm;
+   395					if (local && (prev == chan ||
+   396						      fctx->sync(f, prev, chan) == 0))
+   397						must_wait = false;
+   398					rcu_read_unlock();
+   399					if (!must_wait)
+   400						continue;
+   401				}
+   402	
+   403				ret = dma_fence_wait(fence, intr);
+   404				if (ret)
+   405					return ret;
+   406			}
+   407		}
+   408	
+   409		return 0;
+   410	}
+   411	
 
+-- 
+0-DAY CI Kernel Test Service
+https://github.com/intel/lkp-tests/wiki
