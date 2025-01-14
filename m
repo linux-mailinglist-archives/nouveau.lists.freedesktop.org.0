@@ -2,49 +2,94 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id DAABAA0BAA8
-	for <lists+nouveau@lfdr.de>; Mon, 13 Jan 2025 15:56:46 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 95857A1038E
+	for <lists+nouveau@lfdr.de>; Tue, 14 Jan 2025 11:02:29 +0100 (CET)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id A021110E6CA;
-	Mon, 13 Jan 2025 14:56:42 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 4274210E09D;
+	Tue, 14 Jan 2025 10:02:27 +0000 (UTC)
 Authentication-Results: gabe.freedesktop.org;
-	dkim=pass (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="iz9WZarH";
+	dkim=pass (1024-bit key; unprotected) header.d=suse.de header.i=@suse.de header.b="bN7HVe8P";
+	dkim=permerror (0-bit key) header.d=suse.de header.i=@suse.de header.b="P8I56x3g";
+	dkim=pass (1024-bit key) header.d=suse.de header.i=@suse.de header.b="GOm01msO";
+	dkim=permerror (0-bit key) header.d=suse.de header.i=@suse.de header.b="0D4pMjW6";
 	dkim-atps=neutral
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from dfw.source.kernel.org (dfw.source.kernel.org
- [IPv6:2604:1380:4641:c500::1])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 6FF9A10E6C9;
- Mon, 13 Jan 2025 14:56:40 +0000 (UTC)
-Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by dfw.source.kernel.org (Postfix) with ESMTP id C02085C5439;
- Mon, 13 Jan 2025 14:55:58 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id A25DAC4CED6;
- Mon, 13 Jan 2025 14:56:38 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1736780199;
- bh=WQwU4HWk7Y8b0EsHJA0kt+CkA2ILWJfO1qw9MW86I9w=;
- h=Date:Subject:From:To:Cc:References:In-Reply-To:From;
- b=iz9WZarHHO99P8oVBf8AAJ38E68CUbLb5k16F9CpyDx813fP3SkJKMMJ+YUjiAcO9
- Cj3kg3cK1Po55oRDO9o3VxCM7AONMWvsXub9fmP92/XVCugih6BBwflFpIw3iYEAN7
- e4b+c7Hr3Pv3BLqmNXNVGdQxjbRraBD/TPvr0SIiSg3WNhKBqHhzHLnfK8YrdbOQl9
- e1xsYyP/8hdAvbekzzUDqiFiYAG+Y54SpKlSjMSgJ5Q2UVpT9hSgX5DOjBZr0SkAOp
- NeMpMdLNJUYoVcm3qqUP927sXW1cztdU40qR4DZsKfD29rMbhXxl1qmhxw2hO5fjxV
- hgWaomjXsXvFA==
-Message-ID: <460ab763-12ed-4842-9811-9e9da64ac6ec@kernel.org>
-Date: Mon, 13 Jan 2025 15:56:37 +0100
+Received: from smtp-out1.suse.de (smtp-out1.suse.de [195.135.223.130])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 2F3F010E05A;
+ Tue, 14 Jan 2025 10:02:26 +0000 (UTC)
+Received: from imap1.dmz-prg2.suse.org (unknown [10.150.64.97])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
+ (No client certificate requested)
+ by smtp-out1.suse.de (Postfix) with ESMTPS id C64992116E;
+ Tue, 14 Jan 2025 10:02:24 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.de; s=susede2_rsa;
+ t=1736848945; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
+ mime-version:mime-version: content-transfer-encoding:content-transfer-encoding;
+ bh=bwCeXOJvfil2xzPuZSmpO3SwkXvCyVPrzXWCShqoEGY=;
+ b=bN7HVe8PAbsl56Ih8T4gA1LACLHbj6YzVgpkR2miEM327WMgQvXc6Vq6MQqTMqlZFeoKHZ
+ LJinVLwPUYdjaGZLqUzJiO+K4Q/BNThwfBNd5mBAmwT3mxNhvU3MG5J1AwuSaFrOtzxuSv
+ LH95cPsGe1dLQbCCBMJKXy1QFSKKmVU=
+DKIM-Signature: v=1; a=ed25519-sha256; c=relaxed/relaxed; d=suse.de;
+ s=susede2_ed25519; t=1736848945;
+ h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
+ mime-version:mime-version: content-transfer-encoding:content-transfer-encoding;
+ bh=bwCeXOJvfil2xzPuZSmpO3SwkXvCyVPrzXWCShqoEGY=;
+ b=P8I56x3gIctv92YkPfWJMKkUoVyBQX9if+CNi2s2ysfJtd4Y6Mej3wCxsveq2gEEuirLgE
+ IxnIDxx8plJqKwDw==
+Authentication-Results: smtp-out1.suse.de;
+	none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.de; s=susede2_rsa;
+ t=1736848944; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
+ mime-version:mime-version: content-transfer-encoding:content-transfer-encoding;
+ bh=bwCeXOJvfil2xzPuZSmpO3SwkXvCyVPrzXWCShqoEGY=;
+ b=GOm01msOgLczl08XHD6iU/Y4G/YKmF/jyzC/s9fnf8HiGJSRBxKJbsl1NpwUi4Dq90XouX
+ DwqmDTTeIB804Wd1OJuQ8LJw/gv4IW10k7D9mghNH69r0NZyasgY4Hj3b5D72j10EdgYKw
+ TMxPrLKdPzF7kDwQlaso2NF7YK7KiqY=
+DKIM-Signature: v=1; a=ed25519-sha256; c=relaxed/relaxed; d=suse.de;
+ s=susede2_ed25519; t=1736848944;
+ h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
+ mime-version:mime-version: content-transfer-encoding:content-transfer-encoding;
+ bh=bwCeXOJvfil2xzPuZSmpO3SwkXvCyVPrzXWCShqoEGY=;
+ b=0D4pMjW6pZVntYApXC1fRFUOg/eUaJ65/z4CwCfyD+NV54RAyL9DvUQWAVf8bp9r0RAM1A
+ sLmf0ovwsmv29wDw==
+Received: from imap1.dmz-prg2.suse.org (localhost [127.0.0.1])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
+ (No client certificate requested)
+ by imap1.dmz-prg2.suse.org (Postfix) with ESMTPS id 8A9E7139CB;
+ Tue, 14 Jan 2025 10:02:24 +0000 (UTC)
+Received: from dovecot-director2.suse.de ([2a07:de40:b281:106:10:150:64:167])
+ by imap1.dmz-prg2.suse.org with ESMTPSA id ZRNqIDA2hmerBAAAD6G6ig
+ (envelope-from <tzimmermann@suse.de>); Tue, 14 Jan 2025 10:02:24 +0000
+From: Thomas Zimmermann <tzimmermann@suse.de>
+To: kherbst@redhat.com, lyude@redhat.com, dakr@kernel.org, airlied@gmail.com,
+ simona@ffwll.ch
+Cc: dri-devel@lists.freedesktop.org, nouveau@lists.freedesktop.org,
+ Thomas Zimmermann <tzimmermann@suse.de>
+Subject: [PATCH] drm/nouveau: Do not override forced connector status
+Date: Tue, 14 Jan 2025 10:57:25 +0100
+Message-ID: <20250114100214.195386-1-tzimmermann@suse.de>
+X-Mailer: git-send-email 2.47.1
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH] nouveau/fence: handle cross device fences properly. (v3)
-Content-Language: en-US
-From: Danilo Krummrich <dakr@kernel.org>
-To: Dave Airlie <airlied@gmail.com>
-Cc: dri-devel@lists.freedesktop.org, nouveau@lists.freedesktop.org
-References: <20250109005553.623947-1-airlied@gmail.com>
- <Z4AATjxamye7yq4E@cassiopeiae>
-In-Reply-To: <Z4AATjxamye7yq4E@cassiopeiae>
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
+Content-Transfer-Encoding: 8bit
+X-Spam-Score: -2.80
+X-Spamd-Result: default: False [-2.80 / 50.00]; BAYES_HAM(-3.00)[100.00%];
+ MID_CONTAINS_FROM(1.00)[]; NEURAL_HAM_LONG(-1.00)[-1.000];
+ R_MISSING_CHARSET(0.50)[]; NEURAL_HAM_SHORT(-0.20)[-1.000];
+ MIME_GOOD(-0.10)[text/plain]; TO_MATCH_ENVRCPT_ALL(0.00)[];
+ RCVD_VIA_SMTP_AUTH(0.00)[]; FROM_EQ_ENVFROM(0.00)[];
+ ARC_NA(0.00)[]; MIME_TRACE(0.00)[0:+]; FROM_HAS_DN(0.00)[];
+ DBL_BLOCKED_OPENRESOLVER(0.00)[suse.de:mid,suse.de:email];
+ FREEMAIL_TO(0.00)[redhat.com,kernel.org,gmail.com,ffwll.ch];
+ RCVD_TLS_ALL(0.00)[]; RCVD_COUNT_TWO(0.00)[2];
+ RCPT_COUNT_SEVEN(0.00)[8]; FUZZY_BLOCKED(0.00)[rspamd.com];
+ TO_DN_SOME(0.00)[];
+ DKIM_SIGNED(0.00)[suse.de:s=susede2_rsa,suse.de:s=susede2_ed25519];
+ FREEMAIL_ENVRCPT(0.00)[gmail.com]
+X-Spam-Flag: NO
+X-Spam-Level: 
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -59,66 +104,31 @@ List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
+Keep user-forced connector status even if it cannot be programmed. Same
+behavior as for the rest of the drivers.
 
-On 09.01.2025 17:58, Danilo Krummrich wrote:
-> On Thu, Jan 09, 2025 at 10:55:53AM +1000, Dave Airlie wrote:
->> From: Dave Airlie <airlied@redhat.com>
->>
->> This is the 3rd iteration of this after talking to Ben and
->> Danilo, I think this makes sense now.
->>
->> The fence sync logic doesn't handle a fence sync across devices
->> as it tries to write to a channel offset from one device into
->> the fence bo from a different device, which won't work so well.
->>
->> This patch fixes that to avoid using the sync path in the case
->> where the fences come from different nouveau drm devices.
->>
->> This works fine on a single device as the fence bo is shared
->> across the devices, and mapped into each channels vma space,
->> the channel offsets are therefore okay to pass between sides,
->> so one channel can sync on the seqnos from the other by using
->> the offset into it's vma.
-> 
-> Huh, they indeed all share and map drm->fence->bo, good catch.
-> 
->>
->> Signed-off-by: Dave Airlie <airlied@redhat.com>
->> Cc: stable@vger.kernel.org
->> ---
->>  drivers/gpu/drm/nouveau/nouveau_fence.c | 6 ++++--
->>  1 file changed, 4 insertions(+), 2 deletions(-)
->>
->> diff --git a/drivers/gpu/drm/nouveau/nouveau_fence.c b/drivers/gpu/drm/nouveau/nouveau_fence.c
->> index ee5e9d40c166..a3eb1f447a29 100644
->> --- a/drivers/gpu/drm/nouveau/nouveau_fence.c
->> +++ b/drivers/gpu/drm/nouveau/nouveau_fence.c
->> @@ -367,11 +367,13 @@ nouveau_fence_sync(struct nouveau_bo *nvbo, struct nouveau_channel *chan,
->>  			if (f) {
->>  				struct nouveau_channel *prev;
->>  				bool must_wait = true;
->> +				bool local;
->>  
->>  				rcu_read_lock();
->>  				prev = rcu_dereference(f->channel);
->> -				if (prev && (prev == chan ||
->> -					     fctx->sync(f, prev, chan) == 0))
->> +				local = prev && prev->drm == chan->drm;
-> 
-> struct nouveau_channel has no pointer to a struct nouveau_drm, this should be
-> prev->cli->drm and chan->cli->drm instead.
-> 
-> No need to resend, I can fix it when applying the patch if you want.
+Signed-off-by: Thomas Zimmermann <tzimmermann@suse.de>
+---
+This patch is in preparation of
+https://patchwork.freedesktop.org/series/139879/. The series improves
+internal handling of the connector status. That first requires fixes in
+several drivers; including nouveau.
+---
+ drivers/gpu/drm/nouveau/nouveau_connector.c | 1 -
+ 1 file changed, 1 deletion(-)
 
-Applied to drm-misc-fixes.
-
-> 
->> +				if (local && (prev == chan ||
->> +					      fctx->sync(f, prev, chan) == 0))
->>  					must_wait = false;
->>  				rcu_read_unlock();
->>  				if (!must_wait)
->> -- 
->> 2.43.0
->>
+diff --git a/drivers/gpu/drm/nouveau/nouveau_connector.c b/drivers/gpu/drm/nouveau/nouveau_connector.c
+index 6fb9719d721f7..1b10c6c12f468 100644
+--- a/drivers/gpu/drm/nouveau/nouveau_connector.c
++++ b/drivers/gpu/drm/nouveau/nouveau_connector.c
+@@ -775,7 +775,6 @@ nouveau_connector_force(struct drm_connector *connector)
+ 	if (!nv_encoder) {
+ 		NV_ERROR(drm, "can't find encoder to force %s on!\n",
+ 			 connector->name);
+-		connector->status = connector_status_disconnected;
+ 		return;
+ 	}
+ 
+-- 
+2.47.1
 
