@@ -2,50 +2,71 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id 7DFBDA1376E
-	for <lists+nouveau@lfdr.de>; Thu, 16 Jan 2025 11:07:59 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id DAF20A137A1
+	for <lists+nouveau@lfdr.de>; Thu, 16 Jan 2025 11:18:10 +0100 (CET)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id ABCF210E921;
-	Thu, 16 Jan 2025 10:07:56 +0000 (UTC)
-Authentication-Results: gabe.freedesktop.org;
-	dkim=pass (1024-bit key; unprotected) header.d=ideasonboard.com header.i=@ideasonboard.com header.b="GC4JgPWO";
-	dkim-atps=neutral
+	by gabe.freedesktop.org (Postfix) with ESMTP id 37C5910E92D;
+	Thu, 16 Jan 2025 10:18:06 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from perceval.ideasonboard.com (perceval.ideasonboard.com
- [213.167.242.64])
- by gabe.freedesktop.org (Postfix) with ESMTPS id F154310E4CD;
- Thu, 16 Jan 2025 10:07:54 +0000 (UTC)
-Received: from [192.168.88.20] (91-158-153-178.elisa-laajakaista.fi
- [91.158.153.178])
- by perceval.ideasonboard.com (Postfix) with ESMTPSA id 5E9B9169;
- Thu, 16 Jan 2025 11:06:54 +0100 (CET)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=ideasonboard.com;
- s=mail; t=1737022015;
- bh=5iBWzPVmw+7VsrlU5C002xE3DHz4wSYEG2lvi9WrW80=;
- h=Date:Subject:To:Cc:References:From:In-Reply-To:From;
- b=GC4JgPWOpTh5fUSUYxE2btYpeplZmk/wc1/y1hysA5w7Ekqjjovy5AnVu0+UP/8PB
- WuoMl50q34IhSbq2JjW5zgTeNPTY5ITtuywUrB98SjdmT56zJthdugncYjNOwHs207
- UGK7kRU9a0swMfzHVM6e3yIQ8OXcNHWB1aTeIVnk=
-Message-ID: <e8125edc-928a-47b4-80a3-224c945f6d68@ideasonboard.com>
-Date: Thu, 16 Jan 2025 12:07:49 +0200
+Received: from mail-vk1-f180.google.com (mail-vk1-f180.google.com
+ [209.85.221.180])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 27DC910E172;
+ Thu, 16 Jan 2025 10:18:05 +0000 (UTC)
+Received: by mail-vk1-f180.google.com with SMTP id
+ 71dfb90a1353d-5162571e761so152078e0c.2; 
+ Thu, 16 Jan 2025 02:18:05 -0800 (PST)
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1737022683; x=1737627483;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=hEBC4YtYCJgyImQmIlExzdfeh9O+mJTPH+y0EtpZi1E=;
+ b=etYm8cxJEEsGbZ8gcfOnYTiHP3JH9PUb4SOMjfN1GIZJXWIdqBGkxNVGYnV0/E80tw
+ lgJvfk8NF7oIilodvhoMkMaWtGysSBDsefkPJ7a1s41qNwBs9YxnZu/4+MT5zAstYzC3
+ fib8BefTzOri5Un9wq83LP4Mwq6JeMfUQj+Q/ddx3fYhFP2IeuBKqizNhhwNcK2SR1Yk
+ xdtMXUgr/SGJlSbqQnzNxQ/jCo0W8vWgWH6v5FfJfgOcQur9t8Csvh88dZTb8U5AuMQM
+ wJeUuTPXzWP3J9Rz2NDIKjhWyvUOMH3KZGhNPeibU4YOKArvI2cQ36axCshApvss8aHF
+ yKtg==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCUmKeoiOPptT9/3s0u2+2vnSbSbcJzA7CsOzpho+Gx6oxHZ0W7tTBfymXPDNC/h+XRbDqnucAGaqrUcllE=@lists.freedesktop.org,
+ AJvYcCVQXsmjlO06UI0ZwgLjQK0cjaO601Yg1v5WYT3zuCeEjljnMbcyUff7KygciAfARQkJcj/w7Vp1mfOO@lists.freedesktop.org,
+ AJvYcCVXZl4+S3CFzmuKw6XG3hqMpn0/6XmRG3QgBWORaVa32/MmljzVgZTH1zszlw4kzvCSJWzQ0GBTuww=@lists.freedesktop.org,
+ AJvYcCX1DqAWmnvEnyU7O8KYC5X/trrgw4DR+FFcCOwC5f6F9Npmr5bUsr5z1L9NXsPQAuuQ8HDcCZuFNQ==@lists.freedesktop.org,
+ AJvYcCXeK1V1SC/AAm9ZWRsJ5lqNlXNhq+OtvKmeqWw2LJBZY/tCMV8bHtH518dht6dO7YNQM1EvrPPlHHs=@lists.freedesktop.org
+X-Gm-Message-State: AOJu0YwWR6sqxPS+JcalIHuU7HzT+QUoCC3rmGUVPOJptwCZiFcsvH1P
+ z10jdaqkeks138Wm2fcymW638ukaFRGqShZQDVb6PFH2rViYaz1Pyafx83yBlqY=
+X-Gm-Gg: ASbGnctryj/aaC9q9rhx54z4PHbodUb068XXgXfG1L4Tf9j1ck7usdayxUcFvEr1DhD
+ WiZeebcqW5FDUf8M+XinCwHsd9XuXDvOMpackyAAsbpR6VgAsFDnJs66GNWWM2F7B4SVR+jCDJD
+ kKbMRWw5AsJIo1R2QNeV5dEgdTf1ABBFUG2wGngUbr1HbBCe2eNoXR2fwdleN/YqGFYYiIRPyOK
+ sClSvQV2SiRUNQ06vR7wYInLS3pogDLonJezTR42Wx+s7qOL4jXgcTZFuFNiDxnNvSAwhhQ4CKc
+ Zd4poy6Ys/LmzEYKDTc=
+X-Google-Smtp-Source: AGHT+IF9TFgOodKBAt0OPJ5TzU4xOCCmK1Q8WOWt2LByYPbEJIP3tweQ28RoRA3MxBcWMbq3JBJd+w==
+X-Received: by 2002:a05:6102:26c8:b0:4af:bb06:62d with SMTP id
+ ada2fe7eead31-4b3d0d9fd51mr31667011137.11.1737022682780; 
+ Thu, 16 Jan 2025 02:18:02 -0800 (PST)
+Received: from mail-vs1-f51.google.com (mail-vs1-f51.google.com.
+ [209.85.217.51]) by smtp.gmail.com with ESMTPSA id
+ ada2fe7eead31-4b608f4cb2fsm5326798137.12.2025.01.16.02.18.02
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Thu, 16 Jan 2025 02:18:02 -0800 (PST)
+Received: by mail-vs1-f51.google.com with SMTP id
+ ada2fe7eead31-4afefc876c6so133633137.2; 
+ Thu, 16 Jan 2025 02:18:02 -0800 (PST)
+X-Forwarded-Encrypted: i=1;
+ AJvYcCU828ssXUtb/1MrPBNkZCgVdGP/s+pFRmGmKx80At/kijrCu1+G8ToaGykN5tLyKWNFFTtf6569PJ5O@lists.freedesktop.org,
+ AJvYcCUp+AHGxuj0JtDMYvCaMlpqeSXTL5TUjrLc3vY0Uo4pYF1mFe1r64KqosvowekS9Sb8Cs6yGsaG388=@lists.freedesktop.org,
+ AJvYcCVNv7VmTMVw9VPtcwqvw10Me7s8m5AtRPjOBTfFlRM3U2nfUAv4G+NZMte3t12/CVqDzRBeE3S8IQ==@lists.freedesktop.org,
+ AJvYcCX61Vrq6QmUkTEfaCRtbPGBizsDMUFhH32FzpseeHNgcoHuZpNR/cTXpLExtkS0pnSR3epu2/iKkvQ=@lists.freedesktop.org,
+ AJvYcCXqVppzdMx1LNDZuEBMO+MuLResNebQ8jCY5oSL9K9xivsd+jPZCC+m732KonIeZSNX73JsE8rhHsuVqjU=@lists.freedesktop.org
+X-Received: by 2002:a05:6102:3a14:b0:4b2:5c2a:cc9d with SMTP id
+ ada2fe7eead31-4b3d0dc0215mr29032050137.16.1737022681773; Thu, 16 Jan 2025
+ 02:18:01 -0800 (PST)
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v2 25/25] drm/xlnx: Compute dumb-buffer sizes with
- drm_mode_size_dumb()
-To: Laurent Pinchart <laurent.pinchart@ideasonboard.com>,
- Daniel Stone <daniel@fooishbar.org>
-Cc: Thomas Zimmermann <tzimmermann@suse.de>,
- maarten.lankhorst@linux.intel.com, mripard@kernel.org, airlied@gmail.com,
- simona@ffwll.ch, dri-devel@lists.freedesktop.org,
- linux-mediatek@lists.infradead.org, freedreno@lists.freedesktop.org,
- linux-arm-msm@vger.kernel.org, imx@lists.linux.dev,
- linux-samsung-soc@vger.kernel.org, nouveau@lists.freedesktop.org,
- virtualization@lists.linux.dev, spice-devel@lists.freedesktop.org,
- linux-renesas-soc@vger.kernel.org, linux-rockchip@lists.infradead.org,
- linux-tegra@vger.kernel.org, intel-xe@lists.freedesktop.org,
- xen-devel@lists.xenproject.org, Andy Yan <andyshrk@163.com>
-References: <bc97b92e-7f8a-4b92-af8a-20fa165ead55@suse.de>
+References: <20250109150310.219442-1-tzimmermann@suse.de>
+ <20250109150310.219442-26-tzimmermann@suse.de>
+ <cdbe483d-0895-47aa-8c83-1c28220f4a02@ideasonboard.com>
+ <bc97b92e-7f8a-4b92-af8a-20fa165ead55@suse.de>
  <f3ba05c7-6e49-4641-a3f9-ba418ebdb7c3@ideasonboard.com>
  <c6735280-7c32-4319-8ca9-a7305d8117c3@suse.de>
  <d67adb03-5cd0-4ac9-af58-cf4446dacee3@ideasonboard.com>
@@ -53,57 +74,30 @@ References: <bc97b92e-7f8a-4b92-af8a-20fa165ead55@suse.de>
  <f35cb350-6be9-48ca-ad7e-e9dd418281d5@ideasonboard.com>
  <4af0b6a7-c16a-4187-bbf5-365a9c86de21@suse.de>
  <e327ad84-b5c9-4480-b873-dc3aca605538@ideasonboard.com>
- <CAPj87rOn=RQ615zyaEdFT2ADfPztU7+heVi0G34Rdg-=QO1cCw@mail.gmail.com>
- <20250116084340.GF6754@pendragon.ideasonboard.com>
- <20250116093854.GG6754@pendragon.ideasonboard.com>
-Content-Language: en-US
-From: Tomi Valkeinen <tomi.valkeinen@ideasonboard.com>
-Autocrypt: addr=tomi.valkeinen@ideasonboard.com; keydata=
- xsFNBE6ms0cBEACyizowecZqXfMZtnBniOieTuFdErHAUyxVgtmr0f5ZfIi9Z4l+uUN4Zdw2
- wCEZjx3o0Z34diXBaMRJ3rAk9yB90UJAnLtb8A97Oq64DskLF81GCYB2P1i0qrG7UjpASgCA
- Ru0lVvxsWyIwSfoYoLrazbT1wkWRs8YBkkXQFfL7Mn3ZMoGPcpfwYH9O7bV1NslbmyJzRCMO
- eYV258gjCcwYlrkyIratlHCek4GrwV8Z9NQcjD5iLzrONjfafrWPwj6yn2RlL0mQEwt1lOvn
- LnI7QRtB3zxA3yB+FLsT1hx0va6xCHpX3QO2gBsyHCyVafFMrg3c/7IIWkDLngJxFgz6DLiA
- G4ld1QK/jsYqfP2GIMH1mFdjY+iagG4DqOsjip479HCWAptpNxSOCL6z3qxCU8MCz8iNOtZk
- DYXQWVscM5qgYSn+fmMM2qN+eoWlnCGVURZZLDjg387S2E1jT/dNTOsM/IqQj+ZROUZuRcF7
- 0RTtuU5q1HnbRNwy+23xeoSGuwmLQ2UsUk7Q5CnrjYfiPo3wHze8avK95JBoSd+WIRmV3uoO
- rXCoYOIRlDhg9XJTrbnQ3Ot5zOa0Y9c4IpyAlut6mDtxtKXr4+8OzjSVFww7tIwadTK3wDQv
- Bus4jxHjS6dz1g2ypT65qnHen6mUUH63lhzewqO9peAHJ0SLrQARAQABzTBUb21pIFZhbGtl
- aW5lbiA8dG9taS52YWxrZWluZW5AaWRlYXNvbmJvYXJkLmNvbT7CwY4EEwEIADgWIQTEOAw+
- ll79gQef86f6PaqMvJYe9QUCX/HruAIbAwULCQgHAgYVCgkICwIEFgIDAQIeAQIXgAAKCRD6
- PaqMvJYe9WmFD/99NGoD5lBJhlFDHMZvO+Op8vCwnIRZdTsyrtGl72rVh9xRfcSgYPZUvBuT
- VDxE53mY9HaZyu1eGMccYRBaTLJSfCXl/g317CrMNdY0k40b9YeIX10feiRYEWoDIPQ3tMmA
- 0nHDygzcnuPiPT68JYZ6tUOvAt7r6OX/litM+m2/E9mtp8xCoWOo/kYO4mOAIoMNvLB8vufi
- uBB4e/AvAjtny4ScuNV5c5q8MkfNIiOyag9QCiQ/JfoAqzXRjVb4VZG72AKaElwipiKCWEcU
- R4+Bu5Qbaxj7Cd36M/bI54OrbWWETJkVVSV1i0tghCd6HHyquTdFl7wYcz6cL1hn/6byVnD+
- sR3BLvSBHYp8WSwv0TCuf6tLiNgHAO1hWiQ1pOoXyMEsxZlgPXT+wb4dbNVunckwqFjGxRbl
- Rz7apFT/ZRwbazEzEzNyrBOfB55xdipG/2+SmFn0oMFqFOBEszXLQVslh64lI0CMJm2OYYe3
- PxHqYaztyeXsx13Bfnq9+bUynAQ4uW1P5DJ3OIRZWKmbQd/Me3Fq6TU57LsvwRgE0Le9PFQs
- dcP2071rMTpqTUteEgODJS4VDf4lXJfY91u32BJkiqM7/62Cqatcz5UWWHq5xeF03MIUTqdE
- qHWk3RJEoWHWQRzQfcx6Fn2fDAUKhAddvoopfcjAHfpAWJ+ENc7BTQROprNHARAAx0aat8GU
- hsusCLc4MIxOQwidecCTRc9Dz/7U2goUwhw2O5j9TPqLtp57VITmHILnvZf6q3QAho2QMQyE
- DDvHubrdtEoqaaSKxKkFie1uhWNNvXPhwkKLYieyL9m2JdU+b88HaDnpzdyTTR4uH7wk0bBa
- KbTSgIFDDe5lXInypewPO30TmYNkFSexnnM3n1PBCqiJXsJahE4ZQ+WnV5FbPUj8T2zXS2xk
- 0LZ0+DwKmZ0ZDovvdEWRWrz3UzJ8DLHb7blPpGhmqj3ANXQXC7mb9qJ6J/VSl61GbxIO2Dwb
- xPNkHk8fwnxlUBCOyBti/uD2uSTgKHNdabhVm2dgFNVuS1y3bBHbI/qjC3J7rWE0WiaHWEqy
- UVPk8rsph4rqITsj2RiY70vEW0SKePrChvET7D8P1UPqmveBNNtSS7In+DdZ5kUqLV7rJnM9
- /4cwy+uZUt8cuCZlcA5u8IsBCNJudxEqBG10GHg1B6h1RZIz9Q9XfiBdaqa5+CjyFs8ua01c
- 9HmyfkuhXG2OLjfQuK+Ygd56mV3lq0aFdwbaX16DG22c6flkkBSjyWXYepFtHz9KsBS0DaZb
- 4IkLmZwEXpZcIOQjQ71fqlpiXkXSIaQ6YMEs8WjBbpP81h7QxWIfWtp+VnwNGc6nq5IQDESH
- mvQcsFS7d3eGVI6eyjCFdcAO8eMAEQEAAcLBXwQYAQIACQUCTqazRwIbDAAKCRD6PaqMvJYe
- 9fA7EACS6exUedsBKmt4pT7nqXBcRsqm6YzT6DeCM8PWMTeaVGHiR4TnNFiT3otD5UpYQI7S
- suYxoTdHrrrBzdlKe5rUWpzoZkVK6p0s9OIvGzLT0lrb0HC9iNDWT3JgpYDnk4Z2mFi6tTbq
- xKMtpVFRA6FjviGDRsfkfoURZI51nf2RSAk/A8BEDDZ7lgJHskYoklSpwyrXhkp9FHGMaYII
- m9EKuUTX9JPDG2FTthCBrdsgWYPdJQvM+zscq09vFMQ9Fykbx5N8z/oFEUy3ACyPqW2oyfvU
- CH5WDpWBG0s5BALp1gBJPytIAd/pY/5ZdNoi0Cx3+Z7jaBFEyYJdWy1hGddpkgnMjyOfLI7B
- CFrdecTZbR5upjNSDvQ7RG85SnpYJTIin+SAUazAeA2nS6gTZzumgtdw8XmVXZwdBfF+ICof
- 92UkbYcYNbzWO/GHgsNT1WnM4sa9lwCSWH8Fw1o/3bX1VVPEsnESOfxkNdu+gAF5S6+I6n3a
- ueeIlwJl5CpT5l8RpoZXEOVtXYn8zzOJ7oGZYINRV9Pf8qKGLf3Dft7zKBP832I3PQjeok7F
- yjt+9S+KgSFSHP3Pa4E7lsSdWhSlHYNdG/czhoUkSCN09C0rEK93wxACx3vtxPLjXu6RptBw
- 3dRq7n+mQChEB1am0BueV1JZaBboIL0AGlSJkm23kw==
-In-Reply-To: <20250116093854.GG6754@pendragon.ideasonboard.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
+ <a2bbeb47-2569-4ee0-9265-92bab139bdc6@suse.de>
+ <f3833771-fcd7-45dc-9019-1525fef34429@ideasonboard.com>
+In-Reply-To: <f3833771-fcd7-45dc-9019-1525fef34429@ideasonboard.com>
+From: Geert Uytterhoeven <geert@linux-m68k.org>
+Date: Thu, 16 Jan 2025 11:17:50 +0100
+X-Gmail-Original-Message-ID: <CAMuHMdXxYa+Na3XxpLTy=-eUL_zQ9kAiUKYu-E04u3KWApusSA@mail.gmail.com>
+X-Gm-Features: AbW1kvbCtGVmgNJ1oRyFqRTMVO1bCUCk0WwRoRvrPqq521tQuGLKMDrWmAM4CG4
+Message-ID: <CAMuHMdXxYa+Na3XxpLTy=-eUL_zQ9kAiUKYu-E04u3KWApusSA@mail.gmail.com>
+Subject: Re: [PATCH v2 25/25] drm/xlnx: Compute dumb-buffer sizes with
+ drm_mode_size_dumb()
+To: Tomi Valkeinen <tomi.valkeinen@ideasonboard.com>
+Cc: Thomas Zimmermann <tzimmermann@suse.de>, maarten.lankhorst@linux.intel.com,
+ mripard@kernel.org, airlied@gmail.com, simona@ffwll.ch, 
+ dri-devel@lists.freedesktop.org, linux-mediatek@lists.infradead.org, 
+ freedreno@lists.freedesktop.org, linux-arm-msm@vger.kernel.org, 
+ imx@lists.linux.dev, linux-samsung-soc@vger.kernel.org, 
+ nouveau@lists.freedesktop.org, virtualization@lists.linux.dev, 
+ spice-devel@lists.freedesktop.org, linux-renesas-soc@vger.kernel.org, 
+ linux-rockchip@lists.infradead.org, linux-tegra@vger.kernel.org, 
+ intel-xe@lists.freedesktop.org, xen-devel@lists.xenproject.org, 
+ Laurent Pinchart <laurent.pinchart@ideasonboard.com>,
+ Andy Yan <andyshrk@163.com>, Daniel Stone <daniel@fooishbar.org>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -118,46 +112,77 @@ List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-Hi,
+On Thu, Jan 16, 2025 at 11:03=E2=80=AFAM Tomi Valkeinen
+<tomi.valkeinen@ideasonboard.com> wrote:
+> On 16/01/2025 10:09, Thomas Zimmermann wrote:
+> > Am 15.01.25 um 15:20 schrieb Tomi Valkeinen:
+> > [...]
+> >>
+> >> My point is that we have the current UAPI, and we have userspace using
+> >> it, but we don't have clear rules what the ioctl does with specific
+> >> parameters, and we don't document how it has to be used.
+> >>
+> >> Perhaps the situation is bad, and all we can really say is that
+> >> CREATE_DUMB only works for use with simple RGB formats, and the
+> >> behavior for all other formats is platform specific. But I think even
+> >> that would be valuable in the UAPI docs.
+> >
+> > To be honest, I would not want to specify behavior for anything but the
+> > linear RGB formats. If anything, I'd take Daniel's reply mail for
+> > documentation as-is. Anyone stretching the UAPI beyond RGB is on their =
+own.
+> >
+> >> Thinking about this, I wonder if this change is good for omapdrm or
+> >> xilinx (probably other platforms too that support non-simple non-RGB
+> >> formats via dumb buffers): without this patch, in both drivers, the
+> >> pitch calculations just take the bpp as bit-per-pixels, align it up,
+> >> and that's it.
+> >>
+> >> With this patch we end up using drm_driver_color_mode_format(), and
+> >> aligning buffers according to RGB formats figured out via heuristics.
+> >> It does happen to work, for the formats I tested, but it sounds like
+> >> something that might easily not work, as it's doing adjustments based
+> >> on wrong format.
+> >>
+> >> Should we have another version of drm_mode_size_dumb() which just
+> >> calculates using the bpp, without the drm_driver_color_mode_format()
+> >> path? Or does the drm_driver_color_mode_format() path provide some
+> >> value for the drivers that do not currently do anything similar?
+> >
+> > With the RGB-only rule, using drm_driver_color_mode_format() makes
+> > sense. It aligns dumb buffers and video=3D, provides error checking, an=
+d
+> > overall harmonizes code. The fallback is only required because of the
+> > existing odd cases that already bend the UAPI's rules.
+>
+> I have to disagree here.
+>
+> On the platforms I have been using (omap, tidss, xilinx, rcar) the dumb
+> buffers are the only buffers you can get from the DRM driver. The dumb
+> buffers have been used to allocate linear and multiplanar YUV buffers
+> for a very long time on those platforms.
+>
+> I tried to look around, but I did not find any mentions that CREATE_DUMB
+> should only be used for RGB buffers. Is anyone outside the core
+> developers even aware of it?
+>
+> If we don't use dumb buffers there, where do we get the buffers? Maybe
+> from a v4l2 device or from a gpu device, but often you don't have those.
+> DMA_HEAP is there, of course.
 
-On 16/01/2025 11:38, Laurent Pinchart wrote:
-> On Thu, Jan 16, 2025 at 10:43:40AM +0200, Laurent Pinchart wrote:
->> On Wed, Jan 15, 2025 at 02:34:26PM +0000, Daniel Stone wrote:
->>> On Wed, 15 Jan 2025 at 14:20, Tomi Valkeinen wrote:
->>>> No disagreement there, we need CREATE_DUMB2.
->>>>
->>>> My point is that we have the current UAPI, and we have userspace using
->>>> it, but we don't have clear rules what the ioctl does with specific
->>>> parameters, and we don't document how it has to be used.
->>>>
->>>> Perhaps the situation is bad, and all we can really say is that
->>>> CREATE_DUMB only works for use with simple RGB formats, and the behavior
->>>> for all other formats is platform specific. But I think even that would
->>>> be valuable in the UAPI docs.
->>>
->>> Yeah, CREATE_DUMB only works for use with simple RGB formats in a
->>> linear layout. Not monochrome or YUV or tiled or displayed rotated or
->>> whatever.
->>>
->>> If it happens to accidentally work for other uses, that's fine, but
->>> it's not generically reliable for anything other than simple linear
->>> RGB. It's intended to let you do splash screens, consoles, recovery
->>> password entries, and software-rendered compositors if you really
->>> want. Anything more than that isn't 'dumb'.
->>
->> We have lots of software out there that rely on CREATE_DUMB supporting
->> YUV linear formats, and lots of drivers (mostly on Arm I suppose) that
->> implement YUV support in CREATE_DUMB. I'm fine replacing it with
->> something better, but I think we need a standard ioctl that can create
->> linear YUV buffers. I've been told many times that DRM doesn't want to
->> standardize buffer allocation further than what CREATE_DUMB is made for.
->> Can we reconsider this rule then ?
-> 
-> Actually... Instead of adding a CREATE_DUMB2, it would be best on trying
-> to leverage DMA heaps and deprecate allocating from the KMS device.
+Why can't there be a variant that takes a proper fourcc format instead of
+an imprecise bpp value?
 
-If we allocate from DMA heaps, I think we then need a DRM ioctl which 
-will tell you how big buffer(s) you need, based on the size and format.
+Gr{oetje,eeting}s,
 
-  Tomi
+                        Geert
 
+--=20
+Geert Uytterhoeven -- There's lots of Linux beyond ia32 -- geert@linux-m68k=
+.org
+
+In personal conversations with technical people, I call myself a hacker. Bu=
+t
+when I'm talking to journalists I just say "programmer" or something like t=
+hat.
+                                -- Linus Torvalds
