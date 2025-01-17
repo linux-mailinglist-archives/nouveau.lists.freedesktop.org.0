@@ -2,35 +2,36 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id D6A19A152CF
-	for <lists+nouveau@lfdr.de>; Fri, 17 Jan 2025 16:24:24 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id B06A4A152DA
+	for <lists+nouveau@lfdr.de>; Fri, 17 Jan 2025 16:28:04 +0100 (CET)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 92B9D10EAF4;
-	Fri, 17 Jan 2025 15:24:23 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id ECC5610EB1B;
+	Fri, 17 Jan 2025 15:28:02 +0000 (UTC)
 Authentication-Results: gabe.freedesktop.org;
-	dkim=pass (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="p5tltN92";
+	dkim=pass (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="iwdDTcMR";
 	dkim-atps=neutral
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from nyc.source.kernel.org (nyc.source.kernel.org [147.75.193.91])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 53FAD10EB1C
- for <nouveau@lists.freedesktop.org>; Fri, 17 Jan 2025 15:24:22 +0000 (UTC)
+Received: from nyc.source.kernel.org (nyc.source.kernel.org
+ [IPv6:2604:1380:45d1:ec00::3])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id B62CD10EB1A
+ for <nouveau@lists.freedesktop.org>; Fri, 17 Jan 2025 15:28:01 +0000 (UTC)
 Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by nyc.source.kernel.org (Postfix) with ESMTP id 9AC3EA43101;
- Fri, 17 Jan 2025 15:22:33 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 2F7C6C4CEDD;
- Fri, 17 Jan 2025 15:24:17 +0000 (UTC)
+ by nyc.source.kernel.org (Postfix) with ESMTP id 168B1A43130;
+ Fri, 17 Jan 2025 15:26:13 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 81ED6C4CEDD;
+ Fri, 17 Jan 2025 15:27:57 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1737127461;
- bh=LAPCByrbLFbwHBMRKAWpW2PZX1G+a0hiGeb2ceOS8Rw=;
+ s=k20201202; t=1737127680;
+ bh=W9DEelYIaZWF2K42s8972K38PJvf2xoG5DWzJ+nYlQs=;
  h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
- b=p5tltN92WOsRoMAXqEyjPv9SHJbsbT/YeZuJb8DqaHxiPN6DSPYKqymWxCfP3X7Yl
- 9i8LOaAogNbw2QDbx3lLzUilfCQHg7Yf+wkdE60YJlWix417BuFDiNhkmBab/UdNJp
- EokAPOOB7tNsQbOOkFOLHGtDrmgk/orwoY4yfR4L1AYccUjlbVwRU7YkqzEReU+TvE
- TWJhjsqst3uD21CahvAHPAUMjVNzBOVcmhWgnstUGtCVugG7pbYcWH5CuXrFDiPamR
- vq7dK1Mc9gpOOqhQpPxAzCzG+ra7QUDhPXvXj/GiVeSk/GMoGg365LD2f7gbYLTx+j
- CUdNEGotmMn4w==
-Date: Fri, 17 Jan 2025 16:24:15 +0100
+ b=iwdDTcMRwN3LuAfNxl0XOUZXV4A2LHPhI5lZwQuFk6k5qAl1glYjNIHwPKgLFD1VF
+ tL2c6b03L7sv+VrJGWNDg6QA6GAm9Zmm5vXSPM/YUGz+2LxKILE2D/xWe0jNISCpKD
+ /MumhgoBH4N5E1R180qVQH0nBLOqVnplj2XAOXVc1KOMudH2gQzeC2bTG9Qlij9Lj3
+ hnKZ1bpdc4E6+mWiHIt8HRKTakcjMd1+o5z41dzx+9eYYfagvILiqemGVEpDis0GQ+
+ ZpXDDYBAXfbCQM2NQ1LSLK9KGhhOAwFbrGHMq0SNyxT6m2JaRnW7Cuz977dKGwUpPf
+ Uebk2t74vJ3RQ==
+Date: Fri, 17 Jan 2025 16:27:54 +0100
 From: Danilo Krummrich <dakr@kernel.org>
 To: Zhi Wang <zhiw@nvidia.com>
 Cc: nouveau@lists.freedesktop.org, airlied@gmail.com, daniel@ffwll.ch,
@@ -38,15 +39,15 @@ Cc: nouveau@lists.freedesktop.org, airlied@gmail.com, daniel@ffwll.ch,
  acurrid@nvidia.com, cjia@nvidia.com, smitra@nvidia.com,
  ankita@nvidia.com, aniketa@nvidia.com, kwankhede@nvidia.com,
  targupta@nvidia.com, zhiwang@kernel.org
-Subject: Re: [RFC 7/8] drm/nouveau: set max supported vGPU count when SRIOV
- is supported
-Message-ID: <Z4p2H40xQonsQWRY@pollux>
+Subject: Re: [RFC 8/8] drm/nouveau: introduce the scrubber on Ada in a kernel
+ doc
+Message-ID: <Z4p2-v1RhQwMZ149@pollux>
 References: <20241122125712.3653406-1-zhiw@nvidia.com>
- <20241122125712.3653406-8-zhiw@nvidia.com>
+ <20241122125712.3653406-9-zhiw@nvidia.com>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
-In-Reply-To: <20241122125712.3653406-8-zhiw@nvidia.com>
+In-Reply-To: <20241122125712.3653406-9-zhiw@nvidia.com>
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -61,62 +62,46 @@ List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-On Fri, Nov 22, 2024 at 04:57:11AM -0800, Zhi Wang wrote:
-> Set the max supported vGPU count according to the number of VFs when
-> SRIOV is supported on Ada.
+On Fri, Nov 22, 2024 at 04:57:12AM -0800, Zhi Wang wrote:
+> Introduce a kernel doc to explain the scrubber on Ada.
 > 
-> Suggested-by: Jason Gunthorpe <jgg@nvidia.com>
-> Cc: Surath Mitra <smitra@nvidia.com>
+> Cc: Milos Tijanic <mtijanic@nvidia.com>
 > Signed-off-by: Zhi Wang <zhiw@nvidia.com>
 > ---
->  drivers/gpu/drm/nouveau/include/nvkm/subdev/gsp.h | 1 +
->  drivers/gpu/drm/nouveau/nvkm/subdev/gsp/ad102.c   | 4 +++-
->  drivers/gpu/drm/nouveau/nvkm/subdev/gsp/r535.c    | 1 +
->  3 files changed, 5 insertions(+), 1 deletion(-)
+>  drivers/gpu/drm/nouveau/nvkm/subdev/gsp/ad102.c | 14 ++++++++++++++
+>  1 file changed, 14 insertions(+)
 > 
-> diff --git a/drivers/gpu/drm/nouveau/include/nvkm/subdev/gsp.h b/drivers/gpu/drm/nouveau/include/nvkm/subdev/gsp.h
-> index c6fe2d9d47de..6e244af1e815 100644
-> --- a/drivers/gpu/drm/nouveau/include/nvkm/subdev/gsp.h
-> +++ b/drivers/gpu/drm/nouveau/include/nvkm/subdev/gsp.h
-> @@ -64,6 +64,7 @@ struct nvkm_gsp {
->  			} frts, boot, elf, heap;
->  			u64 addr;
->  			u64 size;
-> +			u64 max_vgpu_count;
->  		} wpr2;
->  		struct {
->  			u64 addr;
 > diff --git a/drivers/gpu/drm/nouveau/nvkm/subdev/gsp/ad102.c b/drivers/gpu/drm/nouveau/nvkm/subdev/gsp/ad102.c
-> index 1e403dbd7323..80d6d73fe352 100644
+> index 80d6d73fe352..327e733e3e8b 100644
 > --- a/drivers/gpu/drm/nouveau/nvkm/subdev/gsp/ad102.c
 > +++ b/drivers/gpu/drm/nouveau/nvkm/subdev/gsp/ad102.c
-> @@ -69,8 +69,10 @@ ad102_gsp_init_fw_heap(struct nvkm_gsp *gsp)
->  	num_vfs = pci_sriov_get_totalvfs(device_pci->pdev);
->  	if (!num_vfs)
->  		nvkm_gsp_init_fw_heap(gsp, 0);
-> -	else
-> +	else {
->  		nvkm_gsp_init_fw_heap(gsp, 576 * SZ_1M);
-> +		gsp->fb.wpr2.max_vgpu_count = num_vfs;
-> +	}
-
-Please also add braces on the if block.
-
+> @@ -24,6 +24,20 @@
+>  #include <engine/sec2.h>
+>  #include "priv.h"
 >  
->  	if (gsp->fb.wpr2.heap.size <= SZ_256M)
->  		return 0;
-> diff --git a/drivers/gpu/drm/nouveau/nvkm/subdev/gsp/r535.c b/drivers/gpu/drm/nouveau/nvkm/subdev/gsp/r535.c
-> index 5a47201bf0c4..2647a83773d2 100644
-> --- a/drivers/gpu/drm/nouveau/nvkm/subdev/gsp/r535.c
-> +++ b/drivers/gpu/drm/nouveau/nvkm/subdev/gsp/r535.c
-> @@ -1968,6 +1968,7 @@ r535_gsp_wpr_meta_init(struct nvkm_gsp *gsp)
->  	meta->partitionRpcAddr = 0;
->  	meta->partitionRpcRequestOffset = 0;
->  	meta->partitionRpcReplyOffset = 0;
-> +	meta->gspFwHeapVfPartitionCount = gsp->fb.wpr2.max_vgpu_count;
->  	meta->verified = 0;
->  	return 0;
->  }
+> +/*
+> + * DOC: Pre-scrubbed FB memory on Ada
+> + *
+> + * https://github.com/NVIDIA/open-gpu-kernel-modules/blob/565.57.01/src/nvidia/src/kernel/gpu/gsp/kernel_gsp.c#L3151
+> + *
+> + * The size of the pre-scrubbed FB memory on Ada is 256MB. When allocating
+> + * a GSP WPR2 heap larger than 256MB, the scrubber ucode image is required
+> + * to be exeucted before executing any other ucode images. Or, GSP
+> + * firmware hangs when booting.
+> + *
+> + * The large GSP WPR2 heap is required especially by vGPU when supporting
+> + * max vGPU count. The required size on Ada is at least 549MB.
+> + */
+
+Thanks for adding this, forget my comment from patch 6 then.
+
+Do we expect this only to be a thing for Ada? If something similar is needed for
+Blackwell too, we should probably generalize the code?
+
+> +
+>  static bool is_scrubber_completed(struct nvkm_gsp *gsp)
+>  {
+>  	return ((nvkm_rd32(gsp->subdev.device, 0x001180fc) >> 29) >= 0x3);
 > -- 
 > 2.34.1
 > 
