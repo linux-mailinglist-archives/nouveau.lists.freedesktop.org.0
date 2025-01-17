@@ -2,95 +2,59 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id 7CE08A139E2
-	for <lists+nouveau@lfdr.de>; Thu, 16 Jan 2025 13:25:02 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 21700A15239
+	for <lists+nouveau@lfdr.de>; Fri, 17 Jan 2025 15:54:40 +0100 (CET)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id BD6B310E0AC;
-	Thu, 16 Jan 2025 12:25:00 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id C1CA510EB10;
+	Fri, 17 Jan 2025 14:54:38 +0000 (UTC)
 Authentication-Results: gabe.freedesktop.org;
-	dkim=pass (2048-bit key; unprotected) header.d=fooishbar.org header.i=@fooishbar.org header.b="XytIKbd3";
+	dkim=pass (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="HxZZXBDN";
 	dkim-atps=neutral
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from mail-qv1-xf33.google.com (mail-qv1-xf33.google.com
- [IPv6:2607:f8b0:4864:20::f33])
- by gabe.freedesktop.org (Postfix) with ESMTPS id A415C10E0AC
- for <nouveau@lists.freedesktop.org>; Thu, 16 Jan 2025 12:24:59 +0000 (UTC)
-Received: by mail-qv1-xf33.google.com with SMTP id
- 6a1803df08f44-6dd0d09215aso8147756d6.2
- for <nouveau@lists.freedesktop.org>; Thu, 16 Jan 2025 04:24:59 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=fooishbar.org; s=google; t=1737030298; x=1737635098;
- darn=lists.freedesktop.org; 
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=GBwF2KOXlFDp1MGeRltem3iAJtpX3AYE0x8w+f0gonM=;
- b=XytIKbd3ZFvDus7n7Yrf1Drebq17fFh3n9IpmL75K4ARxTDYxXYfeDvezWxR6hc0iH
- 7K0UwM99LRGfoK9aU2EVUK6Ex2dwP9J3pfAMg9o6EQYeIMUhHcWSp0Q2EZXXdCPg9LnP
- HffaAG/4wlhXMJDTyjSRsGL4AAwT1qgYJiUln0WmfmfhpdmlXGeJ6l+6g4szfm+lxtNO
- GlWumhFbOT8c8CmUtJYNUeSLi3N2b0XFMvVaqTURC084KNwnFcG03KaK7FB9BpC1RnEj
- Mhx4bYNDWJnB5UuEdhsXrn82XXlxzlFUCOvOlN63CVze0kMoIArQBuWCiRvWdZhCj+a5
- 0cHA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1737030299; x=1737635099;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=GBwF2KOXlFDp1MGeRltem3iAJtpX3AYE0x8w+f0gonM=;
- b=M/g1Fr6gzsEj04Ef2N3me0wdRY3WrAHhKJFn/q8EWkhcIqjA691IbG54QgOR7nrqBz
- Dl4XWs/OI1Eo/SnrC+sxBDpxEatOwEAnrSnQUk2B6rGTeTBaq/BjHcM5jwWSBXlQSKgX
- 6PCMXdFR2m6DfpkE5/xZ1jbZMMKROh53IAyjvA4BDdrKQj4k68RnzUIi4MqLIFzrMQnW
- U58rPIcr9WQOqdNSjovEaVFBADBwbY4TbDLCrWKanfbg9j3rZz3tC/pTCK4EwZ6OA+Y8
- xAEipfviz6IY3XK/fMQHv/1/9do/hX/1VywKvZ+Kdl26LLpptFfI8zff/vuosUh6kgOQ
- ZtOw==
-X-Forwarded-Encrypted: i=1;
- AJvYcCXO6VbXwPiLHAqwF+BnA5RbGP/eG+9hF91Z0W1FgOmR6e5I7cqsMEl7GU1m6BjEyqxBixBkPzjX@lists.freedesktop.org
-X-Gm-Message-State: AOJu0Yw/fQwLDbxgd3F6Vub4r/z+EBwyJg3coudtz3SPA+HQmPtUWL+y
- ntreIjoANKmemVNdOkqtAbW7tm0QBDNIzv9P19ZGBxk40mAnkroAJg3wM/ZOmevEfl0xynCp2tQ
- EEsThNuH4oEixXNGVN7vk4LJ8ZM6X0COgnHNE1Q==
-X-Gm-Gg: ASbGncuxstC0OP6bIk8L+kzz97uR4heex+psQr9axFyriEJnfhSAkVJ49n53W8jkDNn
- 59pUTTJSGY81SAf0hVEWXV31bJPWaypAZbOA=
-X-Google-Smtp-Source: AGHT+IHYPoThOqCGG0mIrocl9o1givl0D/RoYwWOKY0kUiZ64KPF9cSvP+6N1Rd6ke2PYtdS9xOibflODkJbaGvT990=
-X-Received: by 2002:a05:6214:528e:b0:6d9:3016:d0e7 with SMTP id
- 6a1803df08f44-6df9b2b1a21mr442378366d6.29.1737030298608; Thu, 16 Jan 2025
- 04:24:58 -0800 (PST)
+Received: from dfw.source.kernel.org (dfw.source.kernel.org
+ [IPv6:2604:1380:4641:c500::1])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 6E75810EB10
+ for <nouveau@lists.freedesktop.org>; Fri, 17 Jan 2025 14:54:38 +0000 (UTC)
+Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
+ by dfw.source.kernel.org (Postfix) with ESMTP id 3BCCF5C62F8;
+ Fri, 17 Jan 2025 14:53:57 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 84EB2C4CEDD;
+ Fri, 17 Jan 2025 14:54:34 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+ s=k20201202; t=1737125677;
+ bh=JSHvEoM4+Qj+sKhzuS8a+HcdLXFq5kdzE4UjHJaB1zw=;
+ h=Date:Subject:To:Cc:References:From:In-Reply-To:From;
+ b=HxZZXBDNS4gChZ9QZVUEm2nQwRn7c0BHQ4VMQfRB7vYcAas02sF7vzK/0ckLAIcQC
+ +Nh4Vm+76b22SZCGebBGB6PVr7EHunnTGdR9U42vNFaCbrxw8qjKNEyjo0iJwhqW28
+ lwLrWOmFtvkjQKBd0cznujG90m7o7jbBeZU9sAFOXnbB/OqyPiVnkQmzWphtCCigXr
+ 8jEO8xKaf1iSatWbh9BLMWvXXLTTPt0GaPZmHjzEp51YM/wI0IctgqqaLf/nInkQh1
+ Tii3sa27UDYb+oB2ImFzp7RdXwccg1SvmT5m0YXbA/g2qLb7BHwaVM2PK0lThZP0gj
+ pDrMc/Ezz7M6w==
+Message-ID: <d1c228cb-601a-4655-b9d1-b7e589a74313@kernel.org>
+Date: Fri, 17 Jan 2025 15:54:32 +0100
 MIME-Version: 1.0
-References: <f3ba05c7-6e49-4641-a3f9-ba418ebdb7c3@ideasonboard.com>
- <c6735280-7c32-4319-8ca9-a7305d8117c3@suse.de>
- <d67adb03-5cd0-4ac9-af58-cf4446dacee3@ideasonboard.com>
- <0ea6be58-0e04-4172-87cd-064a3e4a43bc@suse.de>
- <f35cb350-6be9-48ca-ad7e-e9dd418281d5@ideasonboard.com>
- <4af0b6a7-c16a-4187-bbf5-365a9c86de21@suse.de>
- <e327ad84-b5c9-4480-b873-dc3aca605538@ideasonboard.com>
- <a2bbeb47-2569-4ee0-9265-92bab139bdc6@suse.de>
- <f3833771-fcd7-45dc-9019-1525fef34429@ideasonboard.com>
- <CAMuHMdXxYa+Na3XxpLTy=-eUL_zQ9kAiUKYu-E04u3KWApusSA@mail.gmail.com>
- <xz5ncq67bgmdase2jg3cfvyaxpiwhol2eqpfzow6dqpauvslo5@2w3rw27lhnxo>
-In-Reply-To: <xz5ncq67bgmdase2jg3cfvyaxpiwhol2eqpfzow6dqpauvslo5@2w3rw27lhnxo>
-From: Daniel Stone <daniel@fooishbar.org>
-Date: Thu, 16 Jan 2025 12:24:47 +0000
-X-Gm-Features: AbW1kvarRJv1VyJjUo1t8ScK0brJ2o4-Qq6ABYK10edUo6rgOW2PAccCb4uQWlM
-Message-ID: <CAPj87rNS7quwfqDmxyrW8_vQ6tnrcfWUn=81aTduDXtmdVkkAg@mail.gmail.com>
-Subject: Re: [PATCH v2 25/25] drm/xlnx: Compute dumb-buffer sizes with
- drm_mode_size_dumb()
-To: Dmitry Baryshkov <dmitry.baryshkov@linaro.org>
-Cc: Geert Uytterhoeven <geert@linux-m68k.org>,
- Tomi Valkeinen <tomi.valkeinen@ideasonboard.com>, 
- Thomas Zimmermann <tzimmermann@suse.de>, maarten.lankhorst@linux.intel.com,
- mripard@kernel.org, 
- airlied@gmail.com, simona@ffwll.ch, dri-devel@lists.freedesktop.org, 
- linux-mediatek@lists.infradead.org, freedreno@lists.freedesktop.org, 
- linux-arm-msm@vger.kernel.org, imx@lists.linux.dev, 
- linux-samsung-soc@vger.kernel.org, nouveau@lists.freedesktop.org, 
- virtualization@lists.linux.dev, spice-devel@lists.freedesktop.org, 
- linux-renesas-soc@vger.kernel.org, linux-rockchip@lists.infradead.org, 
- linux-tegra@vger.kernel.org, intel-xe@lists.freedesktop.org, 
- xen-devel@lists.xenproject.org, 
- Laurent Pinchart <laurent.pinchart@ideasonboard.com>,
- Andy Yan <andyshrk@163.com>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+User-Agent: Mozilla Thunderbird
+Subject: Re: [RFC 4/8] drm/nouveau: scrub the FB memory when scrubber firmware
+ is loaded
+To: Timur Tabi <ttabi@nvidia.com>
+Cc: "nouveau@lists.freedesktop.org" <nouveau@lists.freedesktop.org>,
+ Zhi Wang <zhiw@nvidia.com>, Jason Gunthorpe <jgg@nvidia.com>,
+ Kirti Wankhede <kwankhede@nvidia.com>, Surath Mitra <smitra@nvidia.com>,
+ Andy Currid <acurrid@nvidia.com>, Ankit Agrawal <ankita@nvidia.com>,
+ Milos Tijanic <mtijanic@nvidia.com>, "airlied@gmail.com"
+ <airlied@gmail.com>, "Tarun Gupta (SW-GPU)" <targupta@nvidia.com>,
+ "zhiwang@kernel.org" <zhiwang@kernel.org>, Aniket Agashe
+ <aniketa@nvidia.com>, "daniel@ffwll.ch" <daniel@ffwll.ch>,
+ Neo Jia <cjia@nvidia.com>, Ben Skeggs <bskeggs@nvidia.com>
+References: <20241122125712.3653406-1-zhiw@nvidia.com>
+ <20241122125712.3653406-5-zhiw@nvidia.com>
+ <3df5a9c78e79d46680812fa6354fa9606b3166b2.camel@nvidia.com>
+From: Danilo Krummrich <dakr@kernel.org>
+Content-Language: en-US
+In-Reply-To: <3df5a9c78e79d46680812fa6354fa9606b3166b2.camel@nvidia.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 8bit
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -105,45 +69,24 @@ List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-On Thu, 16 Jan 2025 at 10:35, Dmitry Baryshkov
-<dmitry.baryshkov@linaro.org> wrote:
-> On Thu, Jan 16, 2025 at 11:17:50AM +0100, Geert Uytterhoeven wrote:
-> > On Thu, Jan 16, 2025 at 11:03=E2=80=AFAM Tomi Valkeinen
-> > <tomi.valkeinen@ideasonboard.com> wrote:
-> > > On the platforms I have been using (omap, tidss, xilinx, rcar) the du=
-mb
-> > > buffers are the only buffers you can get from the DRM driver. The dum=
-b
-> > > buffers have been used to allocate linear and multiplanar YUV buffers
-> > > for a very long time on those platforms.
-> > >
-> > > I tried to look around, but I did not find any mentions that CREATE_D=
-UMB
-> > > should only be used for RGB buffers. Is anyone outside the core
-> > > developers even aware of it?
-> > >
-> > > If we don't use dumb buffers there, where do we get the buffers? Mayb=
-e
-> > > from a v4l2 device or from a gpu device, but often you don't have tho=
-se.
-> > > DMA_HEAP is there, of course.
-> >
-> > Why can't there be a variant that takes a proper fourcc format instead =
-of
-> > an imprecise bpp value?
->
-> Backwards compatibility. We can add an IOCTL for YUV / etc. But
-> userspace must be able to continue allocating YUV buffers through
-> CREATE_DUMB.
+On 1/9/25 11:58 PM, Timur Tabi wrote:
+> On Fri, 2024-11-22 at 04:57 -0800, Zhi Wang wrote:
+>> +static int
+>> +ad102_execute_scrubber(struct nvkm_gsp *gsp)
+>> +{
+>> +	struct nvkm_falcon_fw fw = {0};
+>> +	struct nvkm_subdev *subdev = &gsp->subdev;
+>> +	struct nvkm_device *device = subdev->device;
+>> +	int ret;
+>> +
+>> +	if (!gsp->fws.scrubber || is_scrubber_completed(gsp))
+>> +		return 0;
+> 
+> Shouldn't it be a bug if fws.scrubber is not defined?  If we need the
+> scrubber and it doesn't exist, then I don't think it should silently fail.
 
-Right. If allocating YUYV dumb buffers works on AM68 today, then we
-need to keep that working. But it doesn't mean we should go out of our
-way to make CREATE_DUMB work for every YUV format on every device.
+I think already bail out in ad102_gsp_init_fw_heap() when we failt to load the 
+firmware.
 
-Currently, drivers are free to implement their own ioctls for anything
-specific they have. But like Laurent said, standardising on heaps and
-how to communicate requirements to userspace wrt heap selection / size
-/ alignment / etc is imo a better path forward for something generic.
-
-Cheers,
-Daniel
+This check seems necessary, since gsp->fb.wpr2.heap.size might be smaller than 
+256M and then we never load the scrubber fw.
