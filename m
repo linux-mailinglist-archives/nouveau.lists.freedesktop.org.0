@@ -2,60 +2,70 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id 55FB6A15E79
-	for <lists+nouveau@lfdr.de>; Sat, 18 Jan 2025 19:25:08 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 5F168A16166
+	for <lists+nouveau@lfdr.de>; Sun, 19 Jan 2025 12:38:27 +0100 (CET)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id E243F10E22A;
-	Sat, 18 Jan 2025 18:25:04 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 908A710E055;
+	Sun, 19 Jan 2025 11:38:23 +0000 (UTC)
+Authentication-Results: gabe.freedesktop.org;
+	dkim=pass (1024-bit key; unprotected) header.d=linux.dev header.i=@linux.dev header.b="xMqoqpXw";
+	dkim-atps=neutral
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from mail-il1-f197.google.com (mail-il1-f197.google.com
- [209.85.166.197])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 0376510E02A
- for <nouveau@lists.freedesktop.org>; Sat, 18 Jan 2025 18:25:02 +0000 (UTC)
-Received: by mail-il1-f197.google.com with SMTP id
- e9e14a558f8ab-3a9c9b37244so55315005ab.1
- for <nouveau@lists.freedesktop.org>; Sat, 18 Jan 2025 10:25:02 -0800 (PST)
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1737224702; x=1737829502;
- h=content-transfer-encoding:to:from:subject:message-id:in-reply-to
- :date:mime-version:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=R0HJ5W0kZMJIQYU70k9zjOsn00gywfDA+PBSDDRePKw=;
- b=bsPMgEEmybk3vxGlIZqkThuXu2xHT8ojazdJGQ8IzdYVcGl4b9jpYEdXcGdMDoo2EJ
- wS+P9m3ut9LVflxrXOhX7//VwHwi4kmBdG13ypPsZr4oEys/+Px9M7z3BIYQ+UjVfSJM
- 2PgAAydW83A1zgieNfY3N8DNjvI+ETv+29VEUk46X1ds6SzBqU8RNXPA4KfAxpieZAEl
- ZNhvCMBH9S7M3aQ5hU6mv88d+nVejkADaOKKlK0WXslUhd9p5ofXIlkVjEJWhlmksW5b
- XLt3s+J7W+dch+buc3XiB4Si8O3xK3KYoetrbX9j2BI+VxmB1Ocl29AentuNqyOOnbPe
- FqiA==
-X-Forwarded-Encrypted: i=1;
- AJvYcCXsFO5u5wtQJMtNgTWNwt/xhqcy3Ei1kYuumoS6Du0IOECnJvlegVmjZ8dDhIEk6EOKdcOnTgGk@lists.freedesktop.org
-X-Gm-Message-State: AOJu0YxSqHmlitL1915epjsjJ3zkALk+WWn6+/WwbtiOig7JupL+aB6E
- BzAuI+viBAnM9v8mJGtQDwDbuz/HUMGtuy5yMzTxZ7wO6ajgyO1gmtL/hsOtse09IZe3+u1jsYG
- izI/qUAbg757f7R+59vxUV+h78Jtt1QBLcnPg+1DaHysrzFVo7gharY8=
-X-Google-Smtp-Source: AGHT+IHH2UZ24a1vVSc4JnsX0rFy8xiob1jrG+ea8/xUTIzY/BFM7f7FTUMe1TTcaEfeS6i/dhKbK5rGu1tBCpusren4QEUxjOh3
+X-Greylist: delayed 489 seconds by postgrey-1.36 at gabe;
+ Sun, 19 Jan 2025 11:38:16 UTC
+Received: from out-183.mta1.migadu.com (out-183.mta1.migadu.com
+ [95.215.58.183])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id E798F10E05A
+ for <nouveau@lists.freedesktop.org>; Sun, 19 Jan 2025 11:38:16 +0000 (UTC)
+Message-ID: <b97fcd2f-516a-4172-aef3-631418564cfa@linux.dev>
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linux.dev; s=key1;
+ t=1737286164;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ content-transfer-encoding:content-transfer-encoding:
+ in-reply-to:in-reply-to:references:references;
+ bh=uuK0LkbEgQqPgK0yPnR5LzoggyynezSlKlKR/CKdeTY=;
+ b=xMqoqpXwM+10B3buteMukau9UQmlGuAXyj0ur9aXSA7WbWzwRnMniPiQaxTWp6qqTY2fRw
+ kdeVaGsloeyKfqel8VbZAIHcFFD77zLC4uiMyod2/pw8443jMEAy0AngMSBb8Lp3KLn9lX
+ baphMPg1zk5Qs828ODB8iVWTCpuol5w=
+Date: Sun, 19 Jan 2025 19:29:14 +0800
 MIME-Version: 1.0
-X-Received: by 2002:a05:6e02:13a8:b0:3ce:7cf3:27be with SMTP id
- e9e14a558f8ab-3cf743e096amr62226885ab.4.1737224702243; Sat, 18 Jan 2025
- 10:25:02 -0800 (PST)
-Date: Sat, 18 Jan 2025 10:25:02 -0800
-In-Reply-To: <000000000000bf0b1f060a2d9bea@google.com>
-X-Google-Appengine-App-Id: s~syzkaller
-X-Google-Appengine-App-Id-Alias: syzkaller
-Message-ID: <678bf1fe.050a0220.303755.002c.GAE@google.com>
-Subject: Re: [syzbot] [dri?] divide error in drm_mode_debug_printmodeline
-From: syzbot <syzbot+2e93e6fb36e6fdc56574@syzkaller.appspotmail.com>
-To: airlied@gmail.com, airlied@linux.ie, dakr@redhat.com, 
- daniel.vetter@ffwll.ch, daniel.vetter@intel.com, daniel@ffwll.ch, 
- dri-devel@lists.freedesktop.org, eadavis@qq.com, jani.nikula@intel.com, 
- jani.nikula@linux.intel.com, kherbst@redhat.com, linux-kernel@vger.kernel.org, 
- lizhi.xu@windriver.com, lyude@redhat.com, maarten.lankhorst@linux.intel.com, 
- mazinalhaddad05@gmail.com, melissa.srw@gmail.com, mripard@kernel.org, 
- nouveau@lists.freedesktop.org, simona@ffwll.ch, 
- syzkaller-bugs@googlegroups.com, tzimmermann@suse.de, 
- ville.syrjala@linux.intel.com
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+Subject: Re: [PATCH v2 25/25] drm/xlnx: Compute dumb-buffer sizes with
+ drm_mode_size_dumb()
+To: Dmitry Baryshkov <dmitry.baryshkov@linaro.org>,
+ Geert Uytterhoeven <geert@linux-m68k.org>
+Cc: Tomi Valkeinen <tomi.valkeinen@ideasonboard.com>,
+ Thomas Zimmermann <tzimmermann@suse.de>, maarten.lankhorst@linux.intel.com,
+ mripard@kernel.org, airlied@gmail.com, simona@ffwll.ch,
+ dri-devel@lists.freedesktop.org, linux-mediatek@lists.infradead.org,
+ freedreno@lists.freedesktop.org, linux-arm-msm@vger.kernel.org,
+ imx@lists.linux.dev, linux-samsung-soc@vger.kernel.org,
+ nouveau@lists.freedesktop.org, virtualization@lists.linux.dev,
+ spice-devel@lists.freedesktop.org, linux-renesas-soc@vger.kernel.org,
+ linux-rockchip@lists.infradead.org, linux-tegra@vger.kernel.org,
+ intel-xe@lists.freedesktop.org, xen-devel@lists.xenproject.org,
+ Laurent Pinchart <laurent.pinchart@ideasonboard.com>,
+ Andy Yan <andyshrk@163.com>, Daniel Stone <daniel@fooishbar.org>
+References: <f3ba05c7-6e49-4641-a3f9-ba418ebdb7c3@ideasonboard.com>
+ <c6735280-7c32-4319-8ca9-a7305d8117c3@suse.de>
+ <d67adb03-5cd0-4ac9-af58-cf4446dacee3@ideasonboard.com>
+ <0ea6be58-0e04-4172-87cd-064a3e4a43bc@suse.de>
+ <f35cb350-6be9-48ca-ad7e-e9dd418281d5@ideasonboard.com>
+ <4af0b6a7-c16a-4187-bbf5-365a9c86de21@suse.de>
+ <e327ad84-b5c9-4480-b873-dc3aca605538@ideasonboard.com>
+ <a2bbeb47-2569-4ee0-9265-92bab139bdc6@suse.de>
+ <f3833771-fcd7-45dc-9019-1525fef34429@ideasonboard.com>
+ <CAMuHMdXxYa+Na3XxpLTy=-eUL_zQ9kAiUKYu-E04u3KWApusSA@mail.gmail.com>
+ <xz5ncq67bgmdase2jg3cfvyaxpiwhol2eqpfzow6dqpauvslo5@2w3rw27lhnxo>
+Content-Language: en-US
+X-Report-Abuse: Please report any abuse attempt to abuse@migadu.com and
+ include these headers.
+From: Sui Jingfeng <sui.jingfeng@linux.dev>
+In-Reply-To: <xz5ncq67bgmdase2jg3cfvyaxpiwhol2eqpfzow6dqpauvslo5@2w3rw27lhnxo>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 8bit
+X-Migadu-Flow: FLOW_OUT
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -70,31 +80,133 @@ List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-syzbot suspects this issue was fixed by commit:
+Hi,
 
-commit 9398332f23fab10c5ec57c168b44e72997d6318e
-Author: Ville Syrj=C3=A4l=C3=A4 <ville.syrjala@linux.intel.com>
-Date:   Fri Nov 29 04:26:28 2024 +0000
+On 2025/1/16 18:35, Dmitry Baryshkov wrote:
+> On Thu, Jan 16, 2025 at 11:17:50AM +0100, Geert Uytterhoeven wrote:
+>> On Thu, Jan 16, 2025 at 11:03 AM Tomi Valkeinen
+>> <tomi.valkeinen@ideasonboard.com> wrote:
+>>> On 16/01/2025 10:09, Thomas Zimmermann wrote:
+>>>> Am 15.01.25 um 15:20 schrieb Tomi Valkeinen:
+>>>> [...]
+>>>>> My point is that we have the current UAPI, and we have userspace using
+>>>>> it, but we don't have clear rules what the ioctl does with specific
+>>>>> parameters, and we don't document how it has to be used.
+>>>>>
+>>>>> Perhaps the situation is bad, and all we can really say is that
+>>>>> CREATE_DUMB only works for use with simple RGB formats, and the
+>>>>> behavior for all other formats is platform specific. But I think even
+>>>>> that would be valuable in the UAPI docs.
+>>>> To be honest, I would not want to specify behavior for anything but the
+>>>> linear RGB formats. If anything, I'd take Daniel's reply mail for
+>>>> documentation as-is. Anyone stretching the UAPI beyond RGB is on their own.
+>>>>
+>>>>> Thinking about this, I wonder if this change is good for omapdrm or
+>>>>> xilinx (probably other platforms too that support non-simple non-RGB
+>>>>> formats via dumb buffers): without this patch, in both drivers, the
+>>>>> pitch calculations just take the bpp as bit-per-pixels, align it up,
+>>>>> and that's it.
+>>>>>
+>>>>> With this patch we end up using drm_driver_color_mode_format(), and
+>>>>> aligning buffers according to RGB formats figured out via heuristics.
+>>>>> It does happen to work, for the formats I tested, but it sounds like
+>>>>> something that might easily not work, as it's doing adjustments based
+>>>>> on wrong format.
+>>>>>
+>>>>> Should we have another version of drm_mode_size_dumb() which just
+>>>>> calculates using the bpp, without the drm_driver_color_mode_format()
+>>>>> path? Or does the drm_driver_color_mode_format() path provide some
+>>>>> value for the drivers that do not currently do anything similar?
+>>>> With the RGB-only rule, using drm_driver_color_mode_format() makes
+>>>> sense. It aligns dumb buffers and video=, provides error checking, and
+>>>> overall harmonizes code. The fallback is only required because of the
+>>>> existing odd cases that already bend the UAPI's rules.
+>>> I have to disagree here.
+>>>
+>>> On the platforms I have been using (omap, tidss, xilinx, rcar) the dumb
+>>> buffers are the only buffers you can get from the DRM driver. The dumb
+>>> buffers have been used to allocate linear and multiplanar YUV buffers
+>>> for a very long time on those platforms.
+>>>
+>>> I tried to look around, but I did not find any mentions that CREATE_DUMB
+>>> should only be used for RGB buffers. Is anyone outside the core
+>>> developers even aware of it?
+>>>
+>>> If we don't use dumb buffers there, where do we get the buffers? Maybe
+>>> from a v4l2 device or from a gpu device, but often you don't have those.
+>>> DMA_HEAP is there, of course.
+>> Why can't there be a variant that takes a proper fourcc format instead of
+>> an imprecise bpp value?
+> Backwards compatibility. We can add an IOCTL for YUV / etc.
 
-    drm/modes: Avoid divide by zero harder in drm_mode_vrefresh()
+[...]
 
-bisection log:  https://syzkaller.appspot.com/x/bisect.txt?x=3D11797a185800=
-00
-start commit:   ac347a0655db Merge tag 'arm64-fixes' of git://git.kernel.o.=
-.
-git tree:       upstream
-kernel config:  https://syzkaller.appspot.com/x/.config?x=3D88e7ba51eecd9cd=
-6
-dashboard link: https://syzkaller.appspot.com/bug?extid=3D2e93e6fb36e6fdc56=
-574
-syz repro:      https://syzkaller.appspot.com/x/repro.syz?x=3D11252f9768000=
-0
-C reproducer:   https://syzkaller.appspot.com/x/repro.c?x=3D10fd2498e80000
+> But userspace must be able to continue allocating YUV buffers through
+> CREATE_DUMB.
 
-If the result looks correct, please mark the issue as fixed by replying wit=
-h:
+I think, allocating YUV buffers through CREATE_DUMB interface is just
+an *abuse* and *misuse* of this API for now.
 
-#syz fix: drm/modes: Avoid divide by zero harder in drm_mode_vrefresh()
+Take the NV12 format as an example, NV12 is YUV420 planar format, have
+two planar: the Y-planar and the UV-planar. The Y-planar appear first
+in memory as an array of unsigned char values. The Y-planar is followed
+immediately by the UV-planar, which is also an array of unsigned char
+values that contains packed U (Cb) and V (Cr) samples.
 
-For information about bisection process see: https://goo.gl/tpsmEJ#bisectio=
-n
+But the 'drm_mode_create_dumb' structure is only intend to provide
+descriptions for *one* planar.
+
+struct drm_mode_create_dumb {
+     __u32 height;
+     __u32 width;
+     __u32 bpp;
+     __u32 flags;
+     __u32 handle;
+     __u32 pitch;
+     __u64 size;
+};
+
+An width x height NV12 image takes up width*height*(1 + 1/4 + 1/4) bytes.
+
+So we can allocate an *equivalent* sized buffer to store the NV12 raw data.
+
+Either 'width * (height * 3/2)' where each pixel take up 8 bits,
+or just 'with * height' where each pixels take up 12 bits.
+
+However, all those math are just equivalents description to the original
+NV12 format, neither are concrete correct physical description.
+
+Therefore, allocating YUV buffers through the dumb interface is just an
+abuse for that API. We certainly can abuse more by allocating two dumb
+buffers, one for Y-planer, another one for the UV-planer. But again,dumb buffers can be (and must be) used for *scanout* directly. What will yield if I commit the YUV buffers you allocated to the CRTC directly?
+
+In other words, You can allocated buffers via the dumb APIs to store anything,
+but the key point is that how can we interpret it.
+
+As Daniel puts it, the semantics of that API is well defined for simple RGB
+formats. Usages on non linear RGB dumb buffers are considered as undefined
+behavior.
+
+Peoples can still abusing it at the user-space though, but the kernel don't
+have to guarantee that the user-space *must* to be able to continue doing
+balabala..., That's it.
+
+
+Best regards,
+Sui
+
+>> Gr{oetje,eeting}s,
+>>
+>>                          Geert
+>>
+>> -- 
+>> Geert Uytterhoeven -- There's lots of Linux beyond ia32 -- geert@linux-m68k.org
+>>
+>> In personal conversations with technical people, I call myself a hacker. But
+>> when I'm talking to journalists I just say "programmer" or something like that.
+>>                                  -- Linus Torvalds
+
+-- 
+Best regards,
+Sui
+
