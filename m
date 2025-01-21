@@ -2,164 +2,140 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id 1A8B9A16882
-	for <lists+nouveau@lfdr.de>; Mon, 20 Jan 2025 09:57:46 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 941D6A179E3
+	for <lists+nouveau@lfdr.de>; Tue, 21 Jan 2025 10:13:06 +0100 (CET)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id BCC6610E376;
-	Mon, 20 Jan 2025 08:57:41 +0000 (UTC)
-Authentication-Results: gabe.freedesktop.org;
-	dkim=pass (1024-bit key; unprotected) header.d=suse.de header.i=@suse.de header.b="kW3Pr8f9";
-	dkim=permerror (0-bit key) header.d=suse.de header.i=@suse.de header.b="VlO1OePa";
-	dkim=pass (1024-bit key) header.d=suse.de header.i=@suse.de header.b="kW3Pr8f9";
-	dkim=permerror (0-bit key) header.d=suse.de header.i=@suse.de header.b="VlO1OePa";
-	dkim-atps=neutral
+	by gabe.freedesktop.org (Postfix) with ESMTP id 317B010E507;
+	Tue, 21 Jan 2025 09:13:05 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from smtp-out2.suse.de (smtp-out2.suse.de
- [IPv6:2a07:de40:b251:101:10:150:64:2])
- by gabe.freedesktop.org (Postfix) with ESMTPS id DAB4910E373;
- Mon, 20 Jan 2025 08:57:39 +0000 (UTC)
-Received: from imap1.dmz-prg2.suse.org (imap1.dmz-prg2.suse.org
- [IPv6:2a07:de40:b281:104:10:150:64:97])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
- (No client certificate requested)
- by smtp-out2.suse.de (Postfix) with ESMTPS id 45D501F7A5;
- Mon, 20 Jan 2025 08:57:38 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.de; s=susede2_rsa;
- t=1737363458; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
- mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references:autocrypt:autocrypt;
- bh=UxuzgDcZRRA2/FviISYwEq2AIPpj8Irf9o88aWv1Nug=;
- b=kW3Pr8f901Z7ow0UHFahd4SLynjHr1wROdXiToHoUzdZtS0UDlBfei6zyIhlrIvzjk3tTp
- 1yl9BBLd/wW4AIbYNxR4/K1qnpxSQzwOXdAtcjJfXqEvwzk6HOTU7pxJDjvQKvk3vSEC+G
- +gkt4/bJ2a6edrgg2+jIR/ApD6tqgY4=
-DKIM-Signature: v=1; a=ed25519-sha256; c=relaxed/relaxed; d=suse.de;
- s=susede2_ed25519; t=1737363458;
- h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
- mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references:autocrypt:autocrypt;
- bh=UxuzgDcZRRA2/FviISYwEq2AIPpj8Irf9o88aWv1Nug=;
- b=VlO1OePapx4jPwQ9JJ2gQmbCi/5qM66D0h4jEtVFfdhS3PQIpAi47mvrbt89crlhSXbRc0
- E8Wy/g/yidV+kRBQ==
-Authentication-Results: smtp-out2.suse.de;
- dkim=pass header.d=suse.de header.s=susede2_rsa header.b=kW3Pr8f9;
- dkim=pass header.d=suse.de header.s=susede2_ed25519 header.b=VlO1OePa
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.de; s=susede2_rsa;
- t=1737363458; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
- mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references:autocrypt:autocrypt;
- bh=UxuzgDcZRRA2/FviISYwEq2AIPpj8Irf9o88aWv1Nug=;
- b=kW3Pr8f901Z7ow0UHFahd4SLynjHr1wROdXiToHoUzdZtS0UDlBfei6zyIhlrIvzjk3tTp
- 1yl9BBLd/wW4AIbYNxR4/K1qnpxSQzwOXdAtcjJfXqEvwzk6HOTU7pxJDjvQKvk3vSEC+G
- +gkt4/bJ2a6edrgg2+jIR/ApD6tqgY4=
-DKIM-Signature: v=1; a=ed25519-sha256; c=relaxed/relaxed; d=suse.de;
- s=susede2_ed25519; t=1737363458;
- h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
- mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references:autocrypt:autocrypt;
- bh=UxuzgDcZRRA2/FviISYwEq2AIPpj8Irf9o88aWv1Nug=;
- b=VlO1OePapx4jPwQ9JJ2gQmbCi/5qM66D0h4jEtVFfdhS3PQIpAi47mvrbt89crlhSXbRc0
- E8Wy/g/yidV+kRBQ==
-Received: from imap1.dmz-prg2.suse.org (localhost [127.0.0.1])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
- (No client certificate requested)
- by imap1.dmz-prg2.suse.org (Postfix) with ESMTPS id B6E2E139CB;
- Mon, 20 Jan 2025 08:57:37 +0000 (UTC)
-Received: from dovecot-director2.suse.de ([2a07:de40:b281:106:10:150:64:167])
- by imap1.dmz-prg2.suse.org with ESMTPSA id GIpkKwEQjmc1bAAAD6G6ig
- (envelope-from <tzimmermann@suse.de>); Mon, 20 Jan 2025 08:57:37 +0000
-Message-ID: <dce0191b-8df0-4239-bdee-08a34c4b28d2@suse.de>
-Date: Mon, 20 Jan 2025 09:57:37 +0100
+Received: from mail-qk1-f174.google.com (mail-qk1-f174.google.com
+ [209.85.222.174])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 2D89C10E507;
+ Tue, 21 Jan 2025 09:13:04 +0000 (UTC)
+Received: by mail-qk1-f174.google.com with SMTP id
+ af79cd13be357-7b6ef047e9bso496089085a.1; 
+ Tue, 21 Jan 2025 01:13:04 -0800 (PST)
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1737450783; x=1738055583;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=h0F66BpcncnDZq8+yac2PqIUMY5KsLdGVzSelKc0x5s=;
+ b=Cc+l1wjin+suCCFHL+z+I1gEu0IuCge7UB11MxXgUMoBBzF0zYjrdF9O+9hwU+uhCd
+ C3oLQOgFsYzfmcDTyhEBci7gOL7gdf2XtTq4Vmhr+l2Ya6EsFYDZVZ4kZNv5yA6NrIVp
+ nOP0CF1qwkM/FyH3BgsStpD3Wxqld+3EgAvXutLLF44Uawx4LPDrRWVKfH/pNmEffN+w
+ wJvM3z5Jmu+bpjA3msJOuMLdr3R73oTz+65oOjkBymXVjM7ODTqWTi4W5G/M32be5yPp
+ TMya6Rh2sYxvxCtybr9Bd7hkVUfEOLRGQ5f/ZE4dZzSdZodxIb+oXun7dMO+8UcykMSv
+ uijQ==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCUFX15iyT0BFJMUKofn0XY8F8Nf60CUyfNKoG6RfVKP3PHygVH5dsFp2E/9ogEJxnH0F6RlN9lhZ5ub@lists.freedesktop.org,
+ AJvYcCUo6+Eb/EYwEAhKFpihcaGhggUMxboCqZR0zAqaK2hO0Lf5k3UtIU/IjFBaYxiSZYxx3kvYfNxn6RM=@lists.freedesktop.org,
+ AJvYcCUre7AtHKTk3FFjRM+VwbB6AqPniaWjwoGqtEPohLqM1Tw5sRsPgKeXXPiRA8AoVzNAnkSLVCrQ7HHP@lists.freedesktop.org,
+ AJvYcCVLZTx7RyMdm1iePYnJedzOjoh4tctAPwCbOSJPHKoikcweZiwGJRpDsaYDu555afbE+j6whDXLRh0yBeY=@lists.freedesktop.org,
+ AJvYcCVQbIo6jWusCh93YLTAZ+5w5P7B3HNoZUatt78pasDGyVybUSgoxrDScG3yu3nTgDPzQGLd3egc@lists.freedesktop.org,
+ AJvYcCXK28d7MKEW7TXrJYhlAzAQOx6eCysJIcrBg8fs9M3jR7hFLWbT0w719Wb6JjhMxUJwR6tRMPBqdQth@lists.freedesktop.org,
+ AJvYcCXzY8iLbtvYB2ZTDeEWu2kzHBPKF55ypcObrmiaekc5J5jCITW0T72fNTtSS5UzJUC+5+acBi4fuw==@lists.freedesktop.org
+X-Gm-Message-State: AOJu0YwbPJleWF0OAFcmh38cx7+br942aa5X03313imBQu/kqaiia/Pk
+ A95rqfNllJszEFwKn4D0Ly7wfwQbbTRu36Z2S3Lpun1Lv8opqOAIe+pYratc
+X-Gm-Gg: ASbGncu985qL2Y0uyZTUv90FJ7APpHzSIVz/3sblfR4tYYAouTHS2hXhknZcPCG9G/R
+ OOmfTGWIygMdRjzCZYSh0MMDt2aHbQEj1m59AtEvGm/MQHRsNcl71HanItf1H2U2HBzetPBj0UT
+ tl8xfS3G5zsegzoLEsJzKS4dlfp7xGp7XEHEIRbLqWpfptKt6ZEgoGsvOTVHhy2HYokLz+21suJ
+ X/enIUfz4q71ISa8mV3Ta0LjcB27Xe9j2TcUBPXyWYhe5WtBnfCN5TzLc4KiEI1vX3SgYoUOZpr
+ D7PDLjYUnAnrV/CuavCZt0ztZDJWmDoIxBUe
+X-Google-Smtp-Source: AGHT+IFOcUPptTQCvOMHiebMmKIO51iRtzt6r6HM+NEQ7x3Abwl+WNcxNE8vKqEDySENGLdt14ukKg==
+X-Received: by 2002:a05:620a:43a2:b0:7b1:7508:9f38 with SMTP id
+ af79cd13be357-7be523e2a07mr3876635885a.16.1737450782825; 
+ Tue, 21 Jan 2025 01:13:02 -0800 (PST)
+Received: from mail-qk1-f174.google.com (mail-qk1-f174.google.com.
+ [209.85.222.174]) by smtp.gmail.com with ESMTPSA id
+ af79cd13be357-7be614ef1a5sm532894685a.102.2025.01.21.01.13.02
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Tue, 21 Jan 2025 01:13:02 -0800 (PST)
+Received: by mail-qk1-f174.google.com with SMTP id
+ af79cd13be357-7b6ef047e9bso496088185a.1; 
+ Tue, 21 Jan 2025 01:13:02 -0800 (PST)
+X-Forwarded-Encrypted: i=1;
+ AJvYcCVQJWqNelfcLtnJaBP04o7uW2LCL7GrCXS5T7TRGvoqXVGM+/zvO/5xClBIlvNdhVh9GXCPzi/YMEbMGgY=@lists.freedesktop.org,
+ AJvYcCVYYfWcsLEVspvqfRAlEaf6Fb8/sOZJcclQYSNb9rBzJcyDumPDlkcG8j2NRuYxvTUgxyMs4kpAuTAD@lists.freedesktop.org,
+ AJvYcCW22fC3GKgVtmoBbUOdboA2bkKm1M/Qobm4DJ9o0kNf6ivIif6QCdPJ7tIGYNqbI28149Xn5cjgMWZm@lists.freedesktop.org,
+ AJvYcCW6c2SEePq4y4697mOeGlZ0HbYtKZil/yI/BufMykOgMtFGVLMp/KmQ+Yc/2Ug5OYmvvGAVq5DSZV46@lists.freedesktop.org,
+ AJvYcCWNCpJJ4QJ8EBFfznn5s+mtKP7vEIH6Q5E/laUT8gE4rkU9ZIJHNbB4eSKvK8Kc9JFY8GHQLJMZ@lists.freedesktop.org,
+ AJvYcCXKgArUnzx80sKf5StLAw7gTcyqL+RSpPgoc6pxqQUVQEPjJmqR1iVxUnB7xJNowbEN6jViCj18BA==@lists.freedesktop.org,
+ AJvYcCXLoBu21VlAlq90XjxzuKrv11kwx91gwKS+UeqBStgBFhuQbCCLj57S6R7zx/a8kyVqx9BtGjE+Fsk=@lists.freedesktop.org
+X-Received: by 2002:a05:6122:1783:b0:517:e7b7:d04b with SMTP id
+ 71dfb90a1353d-51cd983d39emr19246646e0c.5.1737450357663; Tue, 21 Jan 2025
+ 01:05:57 -0800 (PST)
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v2 25/25] drm/xlnx: Compute dumb-buffer sizes with
- drm_mode_size_dumb()
-To: Tomi Valkeinen <tomi.valkeinen@ideasonboard.com>,
- maarten.lankhorst@linux.intel.com, mripard@kernel.org, airlied@gmail.com,
- simona@ffwll.ch
-Cc: dri-devel@lists.freedesktop.org, linux-mediatek@lists.infradead.org,
- freedreno@lists.freedesktop.org, linux-arm-msm@vger.kernel.org,
- imx@lists.linux.dev, linux-samsung-soc@vger.kernel.org,
- nouveau@lists.freedesktop.org, virtualization@lists.linux.dev,
- spice-devel@lists.freedesktop.org, linux-renesas-soc@vger.kernel.org,
- linux-rockchip@lists.infradead.org, linux-tegra@vger.kernel.org,
- intel-xe@lists.freedesktop.org, xen-devel@lists.xenproject.org,
- Laurent Pinchart <laurent.pinchart@ideasonboard.com>,
- Andy Yan <andyshrk@163.com>, Daniel Stone <daniel@fooishbar.org>
-References: <20250109150310.219442-1-tzimmermann@suse.de>
- <20250109150310.219442-26-tzimmermann@suse.de>
- <cdbe483d-0895-47aa-8c83-1c28220f4a02@ideasonboard.com>
- <bc97b92e-7f8a-4b92-af8a-20fa165ead55@suse.de>
- <f3ba05c7-6e49-4641-a3f9-ba418ebdb7c3@ideasonboard.com>
- <c6735280-7c32-4319-8ca9-a7305d8117c3@suse.de>
- <d67adb03-5cd0-4ac9-af58-cf4446dacee3@ideasonboard.com>
- <0ea6be58-0e04-4172-87cd-064a3e4a43bc@suse.de>
- <f35cb350-6be9-48ca-ad7e-e9dd418281d5@ideasonboard.com>
- <4af0b6a7-c16a-4187-bbf5-365a9c86de21@suse.de>
- <e327ad84-b5c9-4480-b873-dc3aca605538@ideasonboard.com>
- <a2bbeb47-2569-4ee0-9265-92bab139bdc6@suse.de>
- <f3833771-fcd7-45dc-9019-1525fef34429@ideasonboard.com>
- <156804a9-3095-4c93-888f-d9041f523da6@suse.de>
- <469daa7f-123b-41cb-a99c-4441436d82dc@ideasonboard.com>
-Content-Language: en-US
-From: Thomas Zimmermann <tzimmermann@suse.de>
-Autocrypt: addr=tzimmermann@suse.de; keydata=
- xsBNBFs50uABCADEHPidWt974CaxBVbrIBwqcq/WURinJ3+2WlIrKWspiP83vfZKaXhFYsdg
- XH47fDVbPPj+d6tQrw5lPQCyqjwrCPYnq3WlIBnGPJ4/jreTL6V+qfKRDlGLWFjZcsrPJGE0
- BeB5BbqP5erN1qylK9i3gPoQjXGhpBpQYwRrEyQyjuvk+Ev0K1Jc5tVDeJAuau3TGNgah4Yc
- hdHm3bkPjz9EErV85RwvImQ1dptvx6s7xzwXTgGAsaYZsL8WCwDaTuqFa1d1jjlaxg6+tZsB
- 9GluwvIhSezPgnEmimZDkGnZRRSFiGP8yjqTjjWuf0bSj5rUnTGiyLyRZRNGcXmu6hjlABEB
- AAHNJ1Rob21hcyBaaW1tZXJtYW5uIDx0emltbWVybWFubkBzdXNlLmRlPsLAjgQTAQgAOAIb
- AwULCQgHAgYVCgkICwIEFgIDAQIeAQIXgBYhBHIX+6yM6c9jRKFo5WgNwR1TC3ojBQJftODH
- AAoJEGgNwR1TC3ojx1wH/0hKGWugiqDgLNXLRD/4TfHBEKmxIrmfu9Z5t7vwUKfwhFL6hqvo
- lXPJJKQpQ2z8+X2vZm/slsLn7J1yjrOsoJhKABDi+3QWWSGkaGwRJAdPVVyJMfJRNNNIKwVb
- U6B1BkX2XDKDGffF4TxlOpSQzdtNI/9gleOoUA8+jy8knnDYzjBNOZqLG2FuTdicBXblz0Mf
- vg41gd9kCwYXDnD91rJU8tzylXv03E75NCaTxTM+FBXPmsAVYQ4GYhhgFt8S2UWMoaaABLDe
- 7l5FdnLdDEcbmd8uLU2CaG4W2cLrUaI4jz2XbkcPQkqTQ3EB67hYkjiEE6Zy3ggOitiQGcqp
- j//OwE0EWznS4AEIAMYmP4M/V+T5RY5at/g7rUdNsLhWv1APYrh9RQefODYHrNRHUE9eosYb
- T6XMryR9hT8XlGOYRwKWwiQBoWSDiTMo/Xi29jUnn4BXfI2px2DTXwc22LKtLAgTRjP+qbU6
- 3Y0xnQN29UGDbYgyyK51DW3H0If2a3JNsheAAK+Xc9baj0LGIc8T9uiEWHBnCH+RdhgATnWW
- GKdDegUR5BkDfDg5O/FISymJBHx2Dyoklv5g4BzkgqTqwmaYzsl8UxZKvbaxq0zbehDda8lv
- hFXodNFMAgTLJlLuDYOGLK2AwbrS3Sp0AEbkpdJBb44qVlGm5bApZouHeJ/+n+7r12+lqdsA
- EQEAAcLAdgQYAQgAIAIbDBYhBHIX+6yM6c9jRKFo5WgNwR1TC3ojBQJftOH6AAoJEGgNwR1T
- C3ojVSkIALpAPkIJPQoURPb1VWjh34l0HlglmYHvZszJWTXYwavHR8+k6Baa6H7ufXNQtThR
- yIxJrQLW6rV5lm7TjhffEhxVCn37+cg0zZ3j7zIsSS0rx/aMwi6VhFJA5hfn3T0TtrijKP4A
- SAQO9xD1Zk9/61JWk8OysuIh7MXkl0fxbRKWE93XeQBhIJHQfnc+YBLprdnxR446Sh8Wn/2D
- Ya8cavuWf2zrB6cZurs048xe0UbSW5AOSo4V9M0jzYI4nZqTmPxYyXbm30Kvmz0rYVRaitYJ
- 4kyYYMhuULvrJDMjZRvaNe52tkKAvMevcGdt38H4KSVXAylqyQOW5zvPc4/sq9c=
-In-Reply-To: <469daa7f-123b-41cb-a99c-4441436d82dc@ideasonboard.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 8bit
-X-Rspamd-Queue-Id: 45D501F7A5
-X-Spam-Level: 
-X-Spamd-Result: default: False [-3.01 / 50.00]; BAYES_HAM(-3.00)[100.00%];
- SUSPICIOUS_RECIPS(1.50)[]; NEURAL_HAM_LONG(-1.00)[-1.000];
- R_DKIM_ALLOW(-0.20)[suse.de:s=susede2_rsa,suse.de:s=susede2_ed25519];
- NEURAL_HAM_SHORT(-0.20)[-1.000]; MIME_GOOD(-0.10)[text/plain];
- MX_GOOD(-0.01)[]; FUZZY_BLOCKED(0.00)[rspamd.com];
- FREEMAIL_ENVRCPT(0.00)[163.com,gmail.com];
- RCVD_TLS_ALL(0.00)[]; RCVD_VIA_SMTP_AUTH(0.00)[];
- ARC_NA(0.00)[]; RCPT_COUNT_TWELVE(0.00)[22];
- MIME_TRACE(0.00)[0:+];
- FREEMAIL_TO(0.00)[ideasonboard.com,linux.intel.com,kernel.org,gmail.com,ffwll.ch];
- MID_RHS_MATCH_FROM(0.00)[];
- DKIM_SIGNED(0.00)[suse.de:s=susede2_rsa,suse.de:s=susede2_ed25519];
- FROM_HAS_DN(0.00)[];
- FREEMAIL_CC(0.00)[lists.freedesktop.org,lists.infradead.org,vger.kernel.org,lists.linux.dev,lists.xenproject.org,ideasonboard.com,163.com,fooishbar.org];
- TO_DN_SOME(0.00)[]; FROM_EQ_ENVFROM(0.00)[];
- TO_MATCH_ENVRCPT_ALL(0.00)[];
- DBL_BLOCKED_OPENRESOLVER(0.00)[suse.de:dkim,suse.de:mid,imap1.dmz-prg2.suse.org:helo,imap1.dmz-prg2.suse.org:rdns];
- RCVD_COUNT_TWO(0.00)[2]; DKIM_TRACE(0.00)[suse.de:+]
-X-Rspamd-Server: rspamd2.dmz-prg2.suse.org
-X-Rspamd-Action: no action
-X-Spam-Score: -3.01
-X-Spam-Flag: NO
+References: <20241214-drm-connector-mode-valid-const-v2-0-4f9498a4c822@linaro.org>
+ <173624946815.1500596.321177900833598022.b4-ty@linaro.org>
+In-Reply-To: <173624946815.1500596.321177900833598022.b4-ty@linaro.org>
+From: Geert Uytterhoeven <geert@linux-m68k.org>
+Date: Tue, 21 Jan 2025 10:05:45 +0100
+X-Gmail-Original-Message-ID: <CAMuHMdVwcaY2Fgpf7GYhBrE5B+AEg=v0BH4OjMXgnp=wqjxmKg@mail.gmail.com>
+X-Gm-Features: AbW1kvaysGolt62WeN4DkS2DNKlSt5oN-0lBeK1j4PwxsWLIrFBPjsQ9bnC7ZcA
+Message-ID: <CAMuHMdVwcaY2Fgpf7GYhBrE5B+AEg=v0BH4OjMXgnp=wqjxmKg@mail.gmail.com>
+Subject: Re: [PATCH v2 0/5] drm/connector: make mode_valid() callback accept
+ const mode pointer
+To: Dmitry Baryshkov <dmitry.baryshkov@linaro.org>
+Cc: Jani Nikula <jani.nikula@linux.intel.com>,
+ Rodrigo Vivi <rodrigo.vivi@intel.com>, 
+ Joonas Lahtinen <joonas.lahtinen@linux.intel.com>,
+ Tvrtko Ursulin <tursulin@ursulin.net>, 
+ David Airlie <airlied@gmail.com>, Simona Vetter <simona@ffwll.ch>, 
+ Maarten Lankhorst <maarten.lankhorst@linux.intel.com>,
+ Maxime Ripard <mripard@kernel.org>, 
+ Thomas Zimmermann <tzimmermann@suse.de>, Karol Herbst <kherbst@redhat.com>,
+ Lyude Paul <lyude@redhat.com>, 
+ Danilo Krummrich <dakr@redhat.com>, Harry Wentland <harry.wentland@amd.com>,
+ Leo Li <sunpeng.li@amd.com>, Rodrigo Siqueira <Rodrigo.Siqueira@amd.com>,
+ Alex Deucher <alexander.deucher@amd.com>, 
+ =?UTF-8?Q?Christian_K=C3=B6nig?= <christian.koenig@amd.com>, 
+ Xinhui Pan <Xinhui.Pan@amd.com>, Alain Volmat <alain.volmat@foss.st.com>, 
+ Raphael Gallais-Pou <rgallaispou@gmail.com>, Liviu Dudau <liviu.dudau@arm.com>,
+ Andrzej Hajda <andrzej.hajda@intel.com>,
+ Neil Armstrong <neil.armstrong@linaro.org>, 
+ Robert Foss <rfoss@kernel.org>,
+ Laurent Pinchart <Laurent.pinchart@ideasonboard.com>, 
+ Jonas Karlman <jonas@kwiboo.se>, Jernej Skrabec <jernej.skrabec@gmail.com>, 
+ Peter Senna Tschudin <peter.senna@gmail.com>, Ian Ray <ian.ray@ge.com>, 
+ Martyn Welch <martyn.welch@collabora.co.uk>, Inki Dae <inki.dae@samsung.com>, 
+ Seung-Woo Kim <sw0312.kim@samsung.com>,
+ Kyungmin Park <kyungmin.park@samsung.com>, 
+ Krzysztof Kozlowski <krzk@kernel.org>, Alim Akhtar <alim.akhtar@samsung.com>, 
+ Stefan Agner <stefan@agner.ch>, Alison Wang <alison.wang@nxp.com>, 
+ Patrik Jakobsson <patrik.r.jakobsson@gmail.com>,
+ Philipp Zabel <p.zabel@pengutronix.de>, 
+ Shawn Guo <shawnguo@kernel.org>, Sascha Hauer <s.hauer@pengutronix.de>, 
+ Pengutronix Kernel Team <kernel@pengutronix.de>,
+ Fabio Estevam <festevam@gmail.com>, 
+ Rob Clark <robdclark@gmail.com>, Abhinav Kumar <quic_abhinavk@quicinc.com>, 
+ Sean Paul <sean@poorly.run>, Marijn Suijten <marijn.suijten@somainline.org>, 
+ Dave Airlie <airlied@redhat.com>, Gerd Hoffmann <kraxel@redhat.com>,
+ Sandy Huang <hjc@rock-chips.com>, 
+ =?UTF-8?Q?Heiko_St=C3=BCbner?= <heiko@sntech.de>, 
+ Andy Yan <andy.yan@rock-chips.com>, Chen-Yu Tsai <wens@csie.org>, 
+ Samuel Holland <samuel@sholland.org>, Thierry Reding <thierry.reding@gmail.com>,
+ Mikko Perttunen <mperttunen@nvidia.com>, Jonathan Hunter <jonathanh@nvidia.com>,
+ Dave Stevenson <dave.stevenson@raspberrypi.com>,
+ =?UTF-8?B?TWHDrXJhIENhbmFs?= <mcanal@igalia.com>, 
+ Raspberry Pi Kernel Maintenance <kernel-list@raspberrypi.com>,
+ Gurchetan Singh <gurchetansingh@chromium.org>, 
+ Chia-I Wu <olvaffe@gmail.com>, Zack Rusin <zack.rusin@broadcom.com>, 
+ Broadcom internal kernel review list <bcm-kernel-feedback-list@broadcom.com>,
+ intel-gfx@lists.freedesktop.org, 
+ intel-xe@lists.freedesktop.org, dri-devel@lists.freedesktop.org, 
+ linux-kernel@vger.kernel.org, nouveau@lists.freedesktop.org, 
+ amd-gfx@lists.freedesktop.org, linux-arm-kernel@lists.infradead.org, 
+ linux-samsung-soc@vger.kernel.org, imx@lists.linux.dev, 
+ linux-arm-msm@vger.kernel.org, freedreno@lists.freedesktop.org, 
+ virtualization@lists.linux.dev, spice-devel@lists.freedesktop.org, 
+ linux-rockchip@lists.infradead.org, linux-sunxi@lists.linux.dev, 
+ linux-tegra@vger.kernel.org, 
+ Laurent Pinchart <laurent.pinchart+renesas@ideasonboard.com>, 
+ Jani Nikula <jani.nikula@intel.com>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -174,49 +150,56 @@ List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-Hi
+Hi Dmitry,
 
-
-Am 20.01.25 um 09:51 schrieb Tomi Valkeinen:
-> Hi,
+On Tue, Jan 7, 2025 at 12:31=E2=80=AFPM Dmitry Baryshkov
+<dmitry.baryshkov@linaro.org> wrote:
+> On Sat, 14 Dec 2024 15:37:04 +0200, Dmitry Baryshkov wrote:
+> > While working on the generic mode_valid() implementation for the HDMI
+> > Connector framework I noticed that unlike other DRM objects
+> > drm_connector accepts non-const pointer to struct drm_display_mode,
+> > while obviously mode_valid() isn't expected to modify the argument.
+> >
+> > Mass-change the DRM framework code to pass const argument to that
+> > callback.
+> >
+> > [...]
 >
-> On 20/01/2025 09:49, Thomas Zimmermann wrote:
->> Hi
->>
->>
->> Am 16.01.25 um 11:03 schrieb Tomi Valkeinen:
->> [...]
->>> Aligning video= and dumb buffers almost sounds like going backwards. 
->>> video= parameter is bad,
->>
->> Who told you that? Video= is still the way to specify an initial 
->> display mode to the kernel and it will remain so.
+> Applied to drm-misc-next, thanks!
 >
-> You did =). "It aligns dumb buffers and video=". 
+> [1/5] drm/encoder_slave: make mode_valid accept const struct drm_display_=
+mode
+>       commit: 7a5cd45fab0a2671aa4ea6d8fb80cea268387176
+> [2/5] drm/amdgpu: don't change mode in amdgpu_dm_connector_mode_valid()
+>       commit: b255ce4388e09f14311e7912d0ccd45a14a08d66
+> [3/5] drm/sti: hda: pass const struct drm_display_mode* to hda_get_mode_i=
+dx()
+>       commit: 5f011b442006ccb29044263df10843de80fc0b14
+> [4/5] drm/connector: make mode_valid_ctx take a const struct drm_display_=
+mode
+>       commit: 66df9debcb29d14802912ed79a9cf9ba721b51a4
+> [5/5] drm/connector: make mode_valid take a const struct drm_display_mode
+>       commit: 26d6fd81916e62d2b0568d9756e5f9c33f0f9b7a
 
-I did not tell you "video= parameter is bad".
+I cannot find these in drm-misc or drm-next, but they are in drm-tip?
+The last one due to commit 2bdc721917cf141f ("Merge remote-tracking
+branch 'drm-misc/drm-misc-next' into drm-tip").
 
-Best regards
-Thomas
+What am I missing?
+Thanks!
 
-> I understand the need for drm_driver_color_mode_format() for video=. 
-> But I think it's bad for CREATE_DUMB, at least for the platforms which 
-> have never aimed for "RGB-only".
->
-> So you're not in favor of a drm_mode_size_dumb() version that does not 
-> use drm_driver_color_mode_format(), for these platforms? I'm still at 
-> loss as to why we would want to change the behavior of CREATE_DUMB. I 
-> see no upside, but I see the chance of regressions.
->
->  Tomi
->
+P.S. Sima: noticed while resolving a merge conflict using drm-tip. Thx!
 
--- 
---
-Thomas Zimmermann
-Graphics Driver Developer
-SUSE Software Solutions Germany GmbH
-Frankenstrasse 146, 90461 Nuernberg, Germany
-GF: Ivo Totev, Andrew Myers, Andrew McDonald, Boudien Moerman
-HRB 36809 (AG Nuernberg)
+Gr{oetje,eeting}s,
 
+                        Geert
+
+--=20
+Geert Uytterhoeven -- There's lots of Linux beyond ia32 -- geert@linux-m68k=
+.org
+
+In personal conversations with technical people, I call myself a hacker. Bu=
+t
+when I'm talking to journalists I just say "programmer" or something like t=
+hat.
+                                -- Linus Torvalds
