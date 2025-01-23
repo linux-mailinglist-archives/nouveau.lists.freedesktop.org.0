@@ -2,80 +2,88 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id 17443A2B827
-	for <lists+nouveau@lfdr.de>; Fri,  7 Feb 2025 02:42:17 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id E2F88A2B841
+	for <lists+nouveau@lfdr.de>; Fri,  7 Feb 2025 02:44:30 +0100 (CET)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 695E510E9DC;
-	Fri,  7 Feb 2025 01:42:15 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 75A8010E9E5;
+	Fri,  7 Feb 2025 01:44:25 +0000 (UTC)
 Authentication-Results: gabe.freedesktop.org;
-	dkim=permerror (0-bit key) header.d=ffwll.ch header.i=@ffwll.ch header.b="MWw6jy7t";
+	dkim=permerror (0-bit key) header.d=ffwll.ch header.i=@ffwll.ch header.b="KWdCV3WM";
 	dkim-atps=neutral
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from mail-wm1-f54.google.com (mail-wm1-f54.google.com
- [209.85.128.54])
- by gabe.freedesktop.org (Postfix) with ESMTPS id B2A0110E581
- for <nouveau@lists.freedesktop.org>; Tue,  3 Sep 2024 12:39:57 +0000 (UTC)
-Received: by mail-wm1-f54.google.com with SMTP id
- 5b1f17b1804b1-4280ca0791bso45681185e9.1
- for <nouveau@lists.freedesktop.org>; Tue, 03 Sep 2024 05:39:57 -0700 (PDT)
+Received: from mail-wm1-f45.google.com (mail-wm1-f45.google.com
+ [209.85.128.45])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 40B0810E0A5
+ for <nouveau@lists.freedesktop.org>; Thu, 23 Jan 2025 15:08:20 +0000 (UTC)
+Received: by mail-wm1-f45.google.com with SMTP id
+ 5b1f17b1804b1-4361f796586so10980935e9.3
+ for <nouveau@lists.freedesktop.org>; Thu, 23 Jan 2025 07:08:20 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=ffwll.ch; s=google; t=1725367196; x=1725971996; darn=lists.freedesktop.org; 
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=eS0iv/n7MbSe6dw0/hr9KhntehZWi/UAfId00tU1FBU=;
- b=MWw6jy7ty8vP7lhfVlUseJu5rbz896iWmgkjF4y1SsC454FkHpewl7IaNZEOyzAqrf
- pmIbtOqqLWrbdSsSpcoSwx9dVq7RBDZverYLwE5btxWLOE7fYR/L/MPgyc82hgJ1WaaQ
- LqLPOuutkd0q/Y8lvvbwDrj+HzLo/tOahsG+M=
+ d=ffwll.ch; s=google; t=1737644899; x=1738249699; darn=lists.freedesktop.org; 
+ h=in-reply-to:content-disposition:mime-version:references
+ :mail-followup-to:message-id:subject:cc:to:from:date:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=vnvF918MExGqpW1JhPiFqDMhjdc3YrQOLeaZRhdmR1k=;
+ b=KWdCV3WMC9xRLdi20guqKEi05oRWqnEo0mfpK4wPHRhLlTZlrsNnlk6z+dxY0kMnNc
+ 0nHZf//t8NNp5Tg5rw/12Or5TqxPV6khTHfS52JbrwUJrLhMdvDOlDyM2+uEFhOtzMr/
+ dWo5A1hpEU0y2s5IdWMTIRe7hb4LW5GLBP1yg=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1725367196; x=1725971996;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=eS0iv/n7MbSe6dw0/hr9KhntehZWi/UAfId00tU1FBU=;
- b=XIjbrseBHPNxYr8AOlhaQuA7fDrQacIRsx1rZ1s7UEG+42vnwmYzoh243Hx4aRJW8l
- IiKGU0Ou/55Kg7gymc39ZZoe9bWVjFeqBkuk95vokLyr5XmrxUY2RfaaNveoHKvHQr++
- 7FmVcuK/wSi/G9fuVxIGHxkvesCyHUZmbGIsOjYCoAnvDuqYamh4TNEDU//Kcxz8sGHW
- LBOUrpqFUjGrltqng+Jr7apTmtalDYRfAqTXxJyWGcNITEncAhm4E8BDsN77dbJHI99a
- xNTSJv+E8eR+T9KrwGS4ORzTMfj01LKpP7qOYZQLPKmFzdLzPSUCP1cuy8U7pg6gqy/I
- C0BA==
+ d=1e100.net; s=20230601; t=1737644899; x=1738249699;
+ h=in-reply-to:content-disposition:mime-version:references
+ :mail-followup-to:message-id:subject:cc:to:from:date
+ :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+ bh=vnvF918MExGqpW1JhPiFqDMhjdc3YrQOLeaZRhdmR1k=;
+ b=YaXCo2kA5f7oGREA311LQcNgUfjguir0pvAEdgCR8WyIBrb6Fm695GVc2cBiXMDGr2
+ qIgqJzgV3HlG/jpdclyMs1G70sTcmlufDD/xYR+9nfIB1qmnpUpVoBDF1NtOTDSutBxF
+ sZegWMdIylwgWb1ieK4coHoVpppwufJfJNJJENk4aK7lPIvb2itA5+jj1faeommhkEi8
+ WJHtMp5QUbd8vsJ/2xdqFevjXOGhrRnLk95JvOTtEvyt1jVrlfF4HxktI5+4Sq2WSJuT
+ j9BVWZ3RyS77YwN/PGpWX9lddcZ+woZiADXnXf0yYFzjsMAzri6Fr/ruQysKO4Y4zwby
+ 4euQ==
 X-Forwarded-Encrypted: i=1;
- AJvYcCVmjKx6k2v1R38c2NLRRw/4ce3k1poRxwjEmfNa9QMWm1Lu1Mzr4SDrlvgy6v7Z/IyyJ0Abn9eK@lists.freedesktop.org
-X-Gm-Message-State: AOJu0YyB4XXV+qwHyPzea46/KXJaxTP5B4xnpgnIrO1wqWkSf9iISm44
- lA/y1NLq5HExjIAtuWggTJQYHc9XV87kAX6EGm/4gXsx/DVYeA0LnNsM2RIh0R0=
-X-Google-Smtp-Source: AGHT+IHNhD+r/CPo523w/8HFM2TuVsrQ7AuT5zWQJdKE4RvYIw+abb1WIkixGF9ybaxSUJ7T3j7prg==
-X-Received: by 2002:a05:600c:3150:b0:426:6eae:6596 with SMTP id
- 5b1f17b1804b1-42c8de9dd30mr4970165e9.25.1725367195774; 
- Tue, 03 Sep 2024 05:39:55 -0700 (PDT)
+ AJvYcCUZ7N1c+HyTDaxoNJaS3mdmazq+lXtSW8zQ8Bf1ePJWncDNEP8oGaLIS2/vlbfBUZYjyONEBI/m@lists.freedesktop.org
+X-Gm-Message-State: AOJu0YyJ6vZxk9C65UDmwgf/QbYMQ6JXeyoxiK7AMjybnLc1SInGYUdq
+ q7vN4cWJwNVg5wgwedW+r9zU+bWGF4cQWgDtP4B9T8bkjjIuGZuHzyohwTLuDRo=
+X-Gm-Gg: ASbGnctDghU5MVSbYqoKeCafpM5Bz71KfpJ7/4RBbc25fgY4e9v5jjPrblgDstPGbaS
+ L0kOFdkP0qz76UltFBiA1emWjNm/0fglrAtN9I9m5+4VcCUpIa97JlyeD0Q2xuUOtw8AH6f7b9N
+ qizZi40n1N8q2d7881ZsJyQrHk0fy8UzIBQobTcT8aMPJxNDgmcF0eIJmSDo5jOyHIjG7yuT/0L
+ JD+jYRouJcoDZ3NpnMOQib78eZ97X4iJnIqcXUofjXATA5Rrrw1Q6GHdg2Xd4OrSUS+smzURDWF
+ UsLc5MKUr8skoaGY
+X-Google-Smtp-Source: AGHT+IFe5bvrufD5E2WCU0xgHozwkEfe52bL8rsuxcBOdIdAdnpMPzPUDgbaIWl03oauCdgHt4m7yA==
+X-Received: by 2002:a05:600c:4e06:b0:434:fddf:5c0c with SMTP id
+ 5b1f17b1804b1-438913c60e1mr250217565e9.4.1737644898467; 
+ Thu, 23 Jan 2025 07:08:18 -0800 (PST)
 Received: from phenom.ffwll.local ([2a02:168:57f4:0:5485:d4b2:c087:b497])
  by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-42ba63abea3sm208229195e9.28.2024.09.03.05.39.54
+ 5b1f17b1804b1-438b31ae155sm64915825e9.20.2025.01.23.07.08.17
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 03 Sep 2024 05:39:55 -0700 (PDT)
-Date: Tue, 3 Sep 2024 14:39:52 +0200
+ Thu, 23 Jan 2025 07:08:18 -0800 (PST)
+Date: Thu, 23 Jan 2025 16:08:16 +0100
 From: Simona Vetter <simona.vetter@ffwll.ch>
-To: Danilo Krummrich <dakr@kernel.org>
-Cc: Daniel Vetter <daniel.vetter@ffwll.ch>, Danilo Krummrich <dakr@redhat.com>,
- maarten.lankhorst@linux.intel.com, mripard@kernel.org,
- tzimmermann@suse.de, airlied@gmail.com, daniel@ffwll.ch,
- ojeda@kernel.org, alex.gaynor@gmail.com, wedsonaf@gmail.com,
- boqun.feng@gmail.com, gary@garyguo.net, bjorn3_gh@protonmail.com,
- benno.lossin@proton.me, a.hindborg@samsung.com,
- aliceryhl@google.com, lina@asahilina.net, pstanner@redhat.com,
- ajanulgu@redhat.com, lyude@redhat.com, gregkh@linuxfoundation.org,
- robh@kernel.org, daniel.almeida@collabora.com,
- rust-for-linux@vger.kernel.org, dri-devel@lists.freedesktop.org,
- nouveau@lists.freedesktop.org
-Subject: Re: [PATCH v2 3/8] rust: drm: add driver abstractions
-Message-ID: <ZtcDmPf9Zr9wPcjo@phenom.ffwll.local>
-References: <20240618233324.14217-1-dakr@redhat.com>
- <20240618233324.14217-4-dakr@redhat.com>
- <ZtXn0hesji0s_45x@phenom.ffwll.local> <Ztbu-wUkH0l3nbUm@pollux>
+To: David Hildenbrand <david@redhat.com>
+Cc: "linux-mm@kvack.org" <linux-mm@kvack.org>,
+ John Hubbard <jhubbard@nvidia.com>, nouveau@lists.freedesktop.org,
+ Jason Gunthorpe <jgg@nvidia.com>, Alistair Popple <apopple@nvidia.com>,
+ DRI Development <dri-devel@lists.freedesktop.org>,
+ Karol Herbst <kherbst@redhat.com>, Lyude Paul <lyude@redhat.com>,
+ Danilo Krummrich <dakr@kernel.org>
+Subject: Re: [Question] Are "device exclusive non-swap entries" / "SVM
+ atomics in Nouveau" still getting used in practice?
+Message-ID: <Z5JbYC2-slPU0l3n@phenom.ffwll.local>
+Mail-Followup-To: David Hildenbrand <david@redhat.com>,
+ "linux-mm@kvack.org" <linux-mm@kvack.org>,
+ John Hubbard <jhubbard@nvidia.com>, nouveau@lists.freedesktop.org,
+ Jason Gunthorpe <jgg@nvidia.com>,
+ Alistair Popple <apopple@nvidia.com>,
+ DRI Development <dri-devel@lists.freedesktop.org>,
+ Karol Herbst <kherbst@redhat.com>, Lyude Paul <lyude@redhat.com>,
+ Danilo Krummrich <dakr@kernel.org>
+References: <346518a4-a090-4eaa-bc04-634388fd4ca3@redhat.com>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
-In-Reply-To: <Ztbu-wUkH0l3nbUm@pollux>
-X-Operating-System: Linux phenom 6.9.12-amd64 
+In-Reply-To: <346518a4-a090-4eaa-bc04-634388fd4ca3@redhat.com>
+X-Operating-System: Linux phenom 6.12.3-amd64 
 X-Mailman-Approved-At: Fri, 07 Feb 2025 01:42:11 +0000
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
@@ -91,260 +99,46 @@ List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-On Tue, Sep 03, 2024 at 01:11:55PM +0200, Danilo Krummrich wrote:
-> On Mon, Sep 02, 2024 at 06:29:06PM +0200, Daniel Vetter wrote:
-> > On Wed, Jun 19, 2024 at 01:31:39AM +0200, Danilo Krummrich wrote:
-> > > Implement the DRM driver abstractions.
-> > > 
-> > > The `Driver` trait provides the interface to the actual driver to fill
-> > > in the driver specific data, such as the `DriverInfo`, driver features
-> > > and IOCTLs.
-> > > 
-> > > Co-developed-by: Asahi Lina <lina@asahilina.net>
-> > > Signed-off-by: Asahi Lina <lina@asahilina.net>
-> > > Signed-off-by: Danilo Krummrich <dakr@redhat.com>
-> > > ---
-> > >  rust/bindings/bindings_helper.h |   1 +
-> > >  rust/kernel/drm/drv.rs          | 141 ++++++++++++++++++++++++++++++++
-> > >  rust/kernel/drm/mod.rs          |   1 +
-> > >  3 files changed, 143 insertions(+)
-> > >  create mode 100644 rust/kernel/drm/drv.rs
-> > > 
-> > > diff --git a/rust/bindings/bindings_helper.h b/rust/bindings/bindings_helper.h
-> > > index ed25b686748e..dc19cb789536 100644
-> > > --- a/rust/bindings/bindings_helper.h
-> > > +++ b/rust/bindings/bindings_helper.h
-> > > @@ -6,6 +6,7 @@
-> > >   * Sorted alphabetically.
-> > >   */
-> > >  
-> > > +#include <drm/drm_drv.h>
-> > >  #include <drm/drm_ioctl.h>
-> > >  #include <kunit/test.h>
-> > >  #include <linux/errname.h>
-> > > diff --git a/rust/kernel/drm/drv.rs b/rust/kernel/drm/drv.rs
-> > > new file mode 100644
-> > > index 000000000000..cd594a32f9e4
-> > > --- /dev/null
-> > > +++ b/rust/kernel/drm/drv.rs
-> > > @@ -0,0 +1,141 @@
-> > > +// SPDX-License-Identifier: GPL-2.0 OR MIT
-> > > +
-> > > +//! DRM driver core.
-> > > +//!
-> > > +//! C header: [`include/linux/drm/drm_drv.h`](srctree/include/linux/drm/drm_drv.h)
-> > > +
-> > > +use crate::{bindings, drm, private::Sealed, str::CStr, types::ForeignOwnable};
-> > > +use macros::vtable;
-> > > +
-> > > +/// Driver use the GEM memory manager. This should be set for all modern drivers.
-> > > +pub const FEAT_GEM: u32 = bindings::drm_driver_feature_DRIVER_GEM;
-> > > +/// Driver supports mode setting interfaces (KMS).
-> > > +pub const FEAT_MODESET: u32 = bindings::drm_driver_feature_DRIVER_MODESET;
-> > > +/// Driver supports dedicated render nodes.
-> > > +pub const FEAT_RENDER: u32 = bindings::drm_driver_feature_DRIVER_RENDER;
-> > > +/// Driver supports the full atomic modesetting userspace API.
-> > > +///
-> > > +/// Drivers which only use atomic internally, but do not support the full userspace API (e.g. not
-> > > +/// all properties converted to atomic, or multi-plane updates are not guaranteed to be tear-free)
-> > > +/// should not set this flag.
-> > > +pub const FEAT_ATOMIC: u32 = bindings::drm_driver_feature_DRIVER_ATOMIC;
-> > > +/// Driver supports DRM sync objects for explicit synchronization of command submission.
-> > > +pub const FEAT_SYNCOBJ: u32 = bindings::drm_driver_feature_DRIVER_SYNCOBJ;
-> > > +/// Driver supports the timeline flavor of DRM sync objects for explicit synchronization of command
-> > > +/// submission.
-> > > +pub const FEAT_SYNCOBJ_TIMELINE: u32 = bindings::drm_driver_feature_DRIVER_SYNCOBJ_TIMELINE;
-> > > +/// Driver supports compute acceleration devices. This flag is mutually exclusive with `FEAT_RENDER`
-> > > +/// and `FEAT_MODESET`. Devices that support both graphics and compute acceleration should be
-> > > +/// handled by two drivers that are connected using auxiliary bus.
-> > > +pub const FEAT_COMPUTE_ACCEL: u32 = bindings::drm_driver_feature_DRIVER_COMPUTE_ACCEL;
-> > > +/// Driver supports user defined GPU VA bindings for GEM objects.
-> > > +pub const FEAT_GEM_GPUVA: u32 = bindings::drm_driver_feature_DRIVER_GEM_GPUVA;
-> > > +/// Driver supports and requires cursor hotspot information in the cursor plane (e.g. cursor plane
-> > > +/// has to actually track the mouse cursor and the clients are required to set hotspot in order for
-> > > +/// the cursor planes to work correctly).
-> > > +pub const FEAT_CURSOR_HOTSPOT: u32 = bindings::drm_driver_feature_DRIVER_CURSOR_HOTSPOT;
-> > > +
-> > > +/// Information data for a DRM Driver.
-> > > +pub struct DriverInfo {
-> > > +    /// Driver major version.
-> > > +    pub major: i32,
-> > > +    /// Driver minor version.
-> > > +    pub minor: i32,
-> > > +    /// Driver patchlevel version.
-> > > +    pub patchlevel: i32,
-> > > +    /// Driver name.
-> > > +    pub name: &'static CStr,
-> > > +    /// Driver description.
-> > > +    pub desc: &'static CStr,
-> > > +    /// Driver date.
-> > > +    pub date: &'static CStr,
-> > > +}
-> > > +
-> > > +/// Internal memory management operation set, normally created by memory managers (e.g. GEM).
-> > > +///
-> > > +/// See `kernel::drm::gem` and `kernel::drm::gem::shmem`.
-> > > +pub struct AllocOps {
-> > > +    pub(crate) gem_create_object: Option<
-> > > +        unsafe extern "C" fn(
-> > > +            dev: *mut bindings::drm_device,
-> > > +            size: usize,
-> > > +        ) -> *mut bindings::drm_gem_object,
-> > > +    >,
-> > > +    pub(crate) prime_handle_to_fd: Option<
-> > > +        unsafe extern "C" fn(
-> > > +            dev: *mut bindings::drm_device,
-> > > +            file_priv: *mut bindings::drm_file,
-> > > +            handle: u32,
-> > > +            flags: u32,
-> > > +            prime_fd: *mut core::ffi::c_int,
-> > > +        ) -> core::ffi::c_int,
-> > > +    >,
-> > > +    pub(crate) prime_fd_to_handle: Option<
-> > > +        unsafe extern "C" fn(
-> > > +            dev: *mut bindings::drm_device,
-> > > +            file_priv: *mut bindings::drm_file,
-> > > +            prime_fd: core::ffi::c_int,
-> > > +            handle: *mut u32,
-> > > +        ) -> core::ffi::c_int,
-> > > +    >,
-> > > +    pub(crate) gem_prime_import: Option<
-> > > +        unsafe extern "C" fn(
-> > > +            dev: *mut bindings::drm_device,
-> > > +            dma_buf: *mut bindings::dma_buf,
-> > > +        ) -> *mut bindings::drm_gem_object,
-> > > +    >,
-> > > +    pub(crate) gem_prime_import_sg_table: Option<
-> > > +        unsafe extern "C" fn(
-> > > +            dev: *mut bindings::drm_device,
-> > > +            attach: *mut bindings::dma_buf_attachment,
-> > > +            sgt: *mut bindings::sg_table,
-> > > +        ) -> *mut bindings::drm_gem_object,
-> > > +    >,
-> > > +    pub(crate) dumb_create: Option<
-> > > +        unsafe extern "C" fn(
-> > > +            file_priv: *mut bindings::drm_file,
-> > > +            dev: *mut bindings::drm_device,
-> > > +            args: *mut bindings::drm_mode_create_dumb,
-> > > +        ) -> core::ffi::c_int,
-> > > +    >,
-> > > +    pub(crate) dumb_map_offset: Option<
-> > > +        unsafe extern "C" fn(
-> > > +            file_priv: *mut bindings::drm_file,
-> > > +            dev: *mut bindings::drm_device,
-> > > +            handle: u32,
-> > > +            offset: *mut u64,
-> > > +        ) -> core::ffi::c_int,
-> > > +    >,
-> > > +}
-> > > +
-> > > +/// Trait for memory manager implementations. Implemented internally.
-> > > +pub trait AllocImpl: Sealed {
-> > > +    /// The C callback operations for this memory manager.
-> > > +    const ALLOC_OPS: AllocOps;
-> > > +}
-> > > +
-> > > +/// The DRM `Driver` trait.
-> > > +///
-> > > +/// This trait must be implemented by drivers in order to create a `struct drm_device` and `struct
-> > > +/// drm_driver` to be registered in the DRM subsystem.
-> > > +#[vtable]
-> > > +pub trait Driver {
-> > > +    /// Context data associated with the DRM driver
-> > > +    ///
-> > > +    /// Determines the type of the context data passed to each of the methods of the trait.
-> > > +    type Data: ForeignOwnable + Sync + Send;
-> > > +
-> > > +    /// The type used to manage memory for this driver.
-> > > +    ///
-> > > +    /// Should be either `drm::gem::Object<T>` or `drm::gem::shmem::Object<T>`.
-> > > +    type Object: AllocImpl;
-> > 
-> > Bit similar comment to what I discussed at length with lyude, drivers
-> > might have a need for different implementations. But I think from the kms
-> > discussions we have solid solution for that, so I think we should be fine.
-> > 
-> > > +
-> > > +    /// Driver metadata
-> > > +    const INFO: DriverInfo;
-> > > +
-> > > +    /// Feature flags
-> > > +    const FEATURES: u32;
-> > 
-> > I think there's a type safety issue here with allowing drivers to muck
-> > with these directly. Example:
-> > 
-> > - If you don't set FEAT_GEM but try to use gem C functions, stuff blows up
-> >   because the core doesn't call drm_gem_init() in that case.
+On Thu, Jan 23, 2025 at 11:20:37AM +0100, David Hildenbrand wrote:
+> Hi,
 > 
-> Indeed. Ideally, we'd want the feature flags to be automatically set, when a
-> corresponding implementation is provided by the driver.
+> I keep finding issues in our implementation of "device exclusive non-swap
+> entries", and the way it messes with mapcounts is disgusting.
 > 
-> For now, as you say, GEM can just be mandatory I think.
+> As a reminder, what we do here is to replace a PTE pointing to an anonymous
+> page by a "device exclusive non-swap entry".
 > 
-> > 
-> > - For modesetting it's more fun because there mandatory init functions are
-> >   meant to be called by the driver, in the right sequence, interleaved
-> >   with other driver setup code for all the right modeset objects. If you
-> >   get it wrong you go boom.
+> As long as the original PTE is in place, the only CPU can access it, as soon
+> as the "device exclusive non-swap entry" is in place, only the device can
+> access it. Conversion back and forth is triggered by CPU / device faults.
 > 
-> My proposal was to just have another associated `Kms` type for `Driver` that
-> provides the corresponding callbacks for initialization. KMS initialization
-> functions could then be exposed only through those callbacks, such that they
-> can't be called after registration.
+> I have fixes/reworks/simplifications for most things, but as there is only a
+> "real" single user in-tree of make_device_exclusive():
+> 
+> 	drivers/gpu/drm/nouveau/nouveau_svm.c
+> 
+> to "support SVM atomics in Nouveau [1]"
+> 
+> naturally I am wondering: is this still a thing on actual hardware, or is it
+> already stale on recent hardware and not really required anymore?
+> 
+> 
+> [1] https://lore.kernel.org/linux-kernel//6621654.gmDyfcmpjF@nvdebian/T/
 
-Hm yeah I guess callbacks works too. No idea whether that's the rust way
-or not though, at least on the C side callbacks for init are kinda
-midlayer smell and tend to be in the way.
--Sima
+As long as you don't have a coherent interconnect it's needed. On intel
+discrete device atomics require device memory, so they need full hmm
+migration (and hence wont use this function even once we land intel gpu
+svm code in upstream). On integrated the gpu is tied into the coherency
+fabric, so there it's not needed.
 
-> 
-> > 
-> > For the modeset side of things I've dumped a pile of comments on lyude's
-> > patches already: Essentially during registration I think we need a special
-> > drmKmsDriverInit object or phantom type or so, so that you can proof
-> > you're registering kms objects at the right time, with the rust
-> > abstraction calling all the other functions around that in the right
-> > order.
-> > 
-> > For gem I think we should flat out not allow non-gem drivers in rust. At
-> > least until someone comes up with a need for a non-gem driver.
-> > 
-> > For some of the values like hotspot cursor support we might need to change
-> > the rust abstraction to compute these at runtime driver init, and then set
-> > them somewhere in the runtime data structure instead of having them
-> > statically sepcified in drm_driver->features.
-> > 
-> > In general these feature flag are midlayer design and that tends to be
-> > bad, rust is just the messenger here.
-> > 
-> > Cheers, Sima
-> > 
-> > 
-> > > +
-> > > +    /// IOCTL list. See `kernel::drm::ioctl::declare_drm_ioctls!{}`.
-> > > +    const IOCTLS: &'static [drm::ioctl::DrmIoctlDescriptor];
-> > > +}
-> > > diff --git a/rust/kernel/drm/mod.rs b/rust/kernel/drm/mod.rs
-> > > index 9ec6d7cbcaf3..d987c56b3cec 100644
-> > > --- a/rust/kernel/drm/mod.rs
-> > > +++ b/rust/kernel/drm/mod.rs
-> > > @@ -2,4 +2,5 @@
-> > >  
-> > >  //! DRM subsystem abstractions.
-> > >  
-> > > +pub mod drv;
-> > >  pub mod ioctl;
-> > > -- 
-> > > 2.45.1
-> > > 
-> > 
-> > -- 
-> > Simona Vetter
-> > Software Engineer, Intel Corporation
-> > http://blog.ffwll.ch
-> > 
+I think the more fundamental question with both this function here and
+with forced migration to device memory is that there's no guarantee it
+will work out. At least that's my understanding. And for this gpu device
+atomics without coherent interconnect idea to work, we'd need to be able
+to guarantee that we can make any page device exclusive. So from my side I
+have some pretty big question marks on this entire thing overall.
 
+Cheers, Sima
 -- 
 Simona Vetter
 Software Engineer, Intel Corporation
