@@ -2,94 +2,131 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id C0E86A1BBF2
-	for <lists+nouveau@lfdr.de>; Fri, 24 Jan 2025 19:15:39 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id A5386A1BC11
+	for <lists+nouveau@lfdr.de>; Fri, 24 Jan 2025 19:30:48 +0100 (CET)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 4BC8B10EA02;
-	Fri, 24 Jan 2025 18:15:38 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 57FF310E135;
+	Fri, 24 Jan 2025 18:30:47 +0000 (UTC)
 Authentication-Results: gabe.freedesktop.org;
-	dkim=pass (1024-bit key; unprotected) header.d=redhat.com header.i=@redhat.com header.b="DeuX3VKD";
+	dkim=pass (2048-bit key; unprotected) header.d=Nvidia.com header.i=@Nvidia.com header.b="HFKLoTck";
 	dkim-atps=neutral
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from us-smtp-delivery-124.mimecast.com
- (us-smtp-delivery-124.mimecast.com [170.10.129.124])
- by gabe.freedesktop.org (Postfix) with ESMTPS id C467B10EA04
- for <nouveau@lists.freedesktop.org>; Fri, 24 Jan 2025 18:15:36 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1737742536;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references;
- bh=bGWmGPJRu/Y2vFGNU2CYSMtLnSZ1JIf2dBRRTduba1I=;
- b=DeuX3VKD6X2CR9nhfcDu4515M6XPpf2Gn18s5hft2ddi6RADOO+IgmliF6sP8RS+TWZhKX
- 0Q/wmZ0nubbLJNEiHi2R6Edrh08PX3O2vXQAf8r9XBSuaVVfyhE8DLfUyT+npemt+y4xPF
- 2F6DvFUSNn/f6P8vdHJqFyXI23t1hf8=
-Received: from mail-wm1-f70.google.com (mail-wm1-f70.google.com
- [209.85.128.70]) by relay.mimecast.com with ESMTP with STARTTLS
- (version=TLSv1.3, cipher=TLS_AES_256_GCM_SHA384) id
- us-mta-683--JdWMSooM2CGMsoleP6kpw-1; Fri, 24 Jan 2025 13:15:34 -0500
-X-MC-Unique: -JdWMSooM2CGMsoleP6kpw-1
-X-Mimecast-MFC-AGG-ID: -JdWMSooM2CGMsoleP6kpw
-Received: by mail-wm1-f70.google.com with SMTP id
- 5b1f17b1804b1-4362552ce62so11491475e9.0
- for <nouveau@lists.freedesktop.org>; Fri, 24 Jan 2025 10:15:34 -0800 (PST)
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1737742533; x=1738347333;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=bGWmGPJRu/Y2vFGNU2CYSMtLnSZ1JIf2dBRRTduba1I=;
- b=hqX410vKc88g6U7qcOLPHXjCpz2I8kZ57z+RMHzGK/bU3+yNAWceCaqI3Lbdtzj51G
- pqYINdS7OabQH38cWaTfU9cAz13O+DH8w9CfhRuLcgLvz/QELAYv3vC+W9qKMiiaVXuJ
- qY3dC1MEqGVCRhlRQEwXyZ/G/IUS3YBDXU/DGtOJ9OeoQgbUGB9X5/mVP+z8XkLVq/d0
- Uc+/NGj7t7dng5VAnB2eVj58eJmrNNMN5/A46YjnCg+aMeAH744xfZAc2jD9Y7uYulk4
- ma49mt9743SNUR4L3h5J9ev3ZNxnz5rxBwr2gH9GHbrv8Dhw2KOHH3+A5wfqy9jt0vxZ
- xCIw==
-X-Forwarded-Encrypted: i=1;
- AJvYcCXfFuwljsPfsbo51jbYaZPfNvZYPdY54AQo72JmGtOfsWnGWHA6wdW/t5KagvNkRQ88nmUcWOlV@lists.freedesktop.org
-X-Gm-Message-State: AOJu0Yx9nmbWM1i84BOX8+c/6V0LoEhEh6hilyRg5g57vX/eLZHAfTsp
- 6NeSppkW/4Rr4FihST9l8aDzCyF7ISEDLpOeq9D8L9TqDPSZLh4xrrq/T5z5APScDWYtwZuGHPm
- nnyva6dX4QXMfCcH+h5ssLFtGBQB9aDK7rQLHT9+AedOlq/NHM0onYXXHreS6JC2NGxiWTz2UKA
- ==
-X-Gm-Gg: ASbGnct/GHdRsd9gxC3ansIIM7UOi6lG36NhygtSs+8l03NxQssSXlUz1WBtfj4yDgT
- hp5AOhVoRyqu8+fXLzC6ztzqb09bUD+rKXnYyZKTp57O4tGAIW7ApRgULWgLgNoUEWlCDP7tzM/
- Lm5SVQcouJPK63XiZ1oxMM2iaR8dWPCxOhCThCs4TDELkFp1r2IzhG8atVeNMLSQJFOgI4KsYij
- x/Q2DiUx+5nusAx5p5PdDtP9vyfZUP98+aJixWPlG98RDX4sVokqodhAqrYwu+5lAE5nsUyLcol
- irzpVz8y9WBrKGfCqRs=
-X-Received: by 2002:a05:600c:1c93:b0:434:fbda:1f36 with SMTP id
- 5b1f17b1804b1-438914299bdmr277981805e9.20.1737742533459; 
- Fri, 24 Jan 2025 10:15:33 -0800 (PST)
-X-Google-Smtp-Source: AGHT+IEji4W7ofEq55B5EikqJKy4d9Ug9AcG71r3tdNdvx7LPEmUH0Fw6EvB8CqjN3UgoYb9Od7iww==
-X-Received: by 2002:a05:600c:1c93:b0:434:fbda:1f36 with SMTP id
- 5b1f17b1804b1-438914299bdmr277981605e9.20.1737742533104; 
- Fri, 24 Jan 2025 10:15:33 -0800 (PST)
-Received: from localhost (p4ff2332e.dip0.t-ipconnect.de. [79.242.51.46])
- by smtp.gmail.com with UTF8SMTPSA id
- 5b1f17b1804b1-438bd5023acsm35577375e9.16.2025.01.24.10.15.31
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Fri, 24 Jan 2025 10:15:31 -0800 (PST)
-From: David Hildenbrand <david@redhat.com>
-To: linux-kernel@vger.kernel.org
-Cc: dri-devel@lists.freedesktop.org, nouveau@lists.freedesktop.org,
- David Hildenbrand <david@redhat.com>, Karol Herbst <kherbst@redhat.com>,
- Lyude Paul <lyude@redhat.com>, Danilo Krummrich <dakr@kernel.org>,
- David Airlie <airlied@gmail.com>, Simona Vetter <simona@ffwll.ch>,
- Alistair Popple <apopple@nvidia.com>
-Subject: [PATCH v1 2/2] nouveau/svm: don't initialize ret in
- nouveau_atomic_range_fault()
-Date: Fri, 24 Jan 2025 19:15:24 +0100
-Message-ID: <20250124181524.3584236-3-david@redhat.com>
-X-Mailer: git-send-email 2.47.1
-In-Reply-To: <20250124181524.3584236-1-david@redhat.com>
-References: <20250124181524.3584236-1-david@redhat.com>
+Received: from NAM10-MW2-obe.outbound.protection.outlook.com
+ (mail-mw2nam10on2089.outbound.protection.outlook.com [40.107.94.89])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 6177C10E135
+ for <nouveau@lists.freedesktop.org>; Fri, 24 Jan 2025 18:30:45 +0000 (UTC)
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=j0gVHh+gTvNv0roEzO9dOcktfQnrudfPtR0MVvRkKaCYWrCv5oLaVK++dhCcPrRRy9AwSDwuZEhFmcDNmeWaVJQ8MKqC528r0dovQt7R21UUchO5nw5H/jXwzgEwJYx/PdURkwP+0Qq16yJxQ6EZdrh2SBYTnAIm0R0fW8PmwId3CH9Kqqpn4ABieX6eT2q5RR3XqbHOy4kDg3QDf6FSy6ExfTrV94IAuq1XmD5blGfqry7EX4k7X3XCWs1V6JvpBC96I8YOlRfh0hn1GoeWXNFCbwXn9If6M3uu2lTIidfK0SYXtHBdRO0MyKi3sj13fAzdUFn1JGmp/GUN1w4tuw==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=SSn4Qna5V1qnaD/25gyWYitR64Mtr8qupMER2xf1/ZY=;
+ b=mWPxsuW44WgreIaaFi6iZIJFgjbsmiXJRlK6fIL1Au67vA8XOfjqTTbYhTznXYMKDoXtaaR3TNOL+d49BRfYpAnaCt5RrJydp1LmiI7WKZM0GgRy+unra1PLsE28W+Kx/Hguq3l6sOzAynL4bKaIZ8U5ilkJy3/DxQR6/FH2uhe2f+YDmiA38FrTG4Yff4GXgmIJrXOjtiTfqCBneJqFHF9K7/kzzsnn5tcmLj862nF85pfL5Zftaf8vkTuJjVQp1gR8U5bW+3EDNutnkRd7JQMP1StOFCxD0EN82pBxYl5hyd4iNUvuNz137jiWteexFym4QErY4ZSbCKyMJv4Cjg==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
+ 216.228.117.161) smtp.rcpttodomain=lists.freedesktop.org
+ smtp.mailfrom=nvidia.com; dmarc=pass (p=reject sp=reject pct=100) action=none
+ header.from=nvidia.com; dkim=none (message not signed); arc=none (0)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=Nvidia.com;
+ s=selector2;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=SSn4Qna5V1qnaD/25gyWYitR64Mtr8qupMER2xf1/ZY=;
+ b=HFKLoTckMj4cnYAx5q7/HO5GUB6JXbzJ8NSeTGaE+uDsxLGJUB1QB/baBzAXC8Wy/MjYPcwuEA0KLrxtPnTz+V62Ky4xobWcSKdvLxCb/Ysu1Ik2Mggwk3nXlXnOc9GnZZntMG/d4a18f4mp0xTmmNBnj+zMcWRxbtdRgoWJn8euMUIO8VXyKCvnWtZ+nqh6KpxwNmDDPH6RnYdYR3cMSH8HA4NIWMxdddH9Q5uC8dDTZaMJwrWNU0XCfOfJcKV9d+6g1RrgD0jlcL2V5Fo5FMo7cAYlLAkwoTlE3QhmwtSeQgUNrikkMJepT2yMcP53j4JjvGBoKfQ5npmUdPbt9w==
+Received: from DS7PR03CA0035.namprd03.prod.outlook.com (2603:10b6:5:3b5::10)
+ by BL1PR12MB5756.namprd12.prod.outlook.com (2603:10b6:208:393::6) with
+ Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.8377.19; Fri, 24 Jan
+ 2025 18:30:39 +0000
+Received: from DS3PEPF000099D4.namprd04.prod.outlook.com
+ (2603:10b6:5:3b5:cafe::f1) by DS7PR03CA0035.outlook.office365.com
+ (2603:10b6:5:3b5::10) with Microsoft SMTP Server (version=TLS1_3,
+ cipher=TLS_AES_256_GCM_SHA384) id 15.20.8377.19 via Frontend Transport; Fri,
+ 24 Jan 2025 18:30:39 +0000
+X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 216.228.117.161)
+ smtp.mailfrom=nvidia.com;
+ dkim=none (message not signed)
+ header.d=none;dmarc=pass action=none header.from=nvidia.com;
+Received-SPF: Pass (protection.outlook.com: domain of nvidia.com designates
+ 216.228.117.161 as permitted sender) receiver=protection.outlook.com;
+ client-ip=216.228.117.161; helo=mail.nvidia.com; pr=C
+Received: from mail.nvidia.com (216.228.117.161) by
+ DS3PEPF000099D4.mail.protection.outlook.com (10.167.17.5) with Microsoft SMTP
+ Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ 15.20.8377.8 via Frontend Transport; Fri, 24 Jan 2025 18:30:39 +0000
+Received: from rnnvmail205.nvidia.com (10.129.68.10) by mail.nvidia.com
+ (10.129.200.67) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.1544.4; Fri, 24 Jan
+ 2025 10:30:24 -0800
+Received: from rnnvmail204.nvidia.com (10.129.68.6) by rnnvmail205.nvidia.com
+ (10.129.68.10) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.1544.4; Fri, 24 Jan
+ 2025 10:30:24 -0800
+Received: from inno-linux.nvidia.com (10.127.8.13) by mail.nvidia.com
+ (10.129.68.6) with Microsoft SMTP Server id 15.2.1544.4 via Frontend
+ Transport; Fri, 24 Jan 2025 10:30:24 -0800
+From: Zhi Wang <zhiw@nvidia.com>
+To: <nouveau@lists.freedesktop.org>
+CC: <airlied@gmail.com>, <daniel@ffwll.ch>, <dakr@kernel.org>,
+ <bskeggs@nvidia.com>, <acurrid@nvidia.com>, <cjia@nvidia.com>,
+ <smitra@nvidia.com>, <ankita@nvidia.com>, <aniketa@nvidia.com>,
+ <kwankhede@nvidia.com>, <targupta@nvidia.com>, <zhiw@nvidia.com>,
+ <zhiwang@kernel.org>
+Subject: [PATCH v4 00/15] NVKM GSP RPC kernel docs, cleanups and fixes
+Date: Fri, 24 Jan 2025 10:29:43 -0800
+Message-ID: <20250124182958.2040494-1-zhiw@nvidia.com>
+X-Mailer: git-send-email 2.34.1
 MIME-Version: 1.0
-X-Mimecast-Spam-Score: 0
-X-Mimecast-MFC-PROC-ID: d2X1vFHO9zLxlSQnPQrL4nyHnojiXagsnw4UWy5iQv8_1737742533
-X-Mimecast-Originator: redhat.com
 Content-Transfer-Encoding: 8bit
-content-type: text/plain; charset="US-ASCII"; x-default=true
+Content-Type: text/plain
+X-NV-OnPremToCloud: AnonymousSubmission
+X-EOPAttributedMessage: 0
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: DS3PEPF000099D4:EE_|BL1PR12MB5756:EE_
+X-MS-Office365-Filtering-Correlation-Id: 3a3e6123-e390-4cf1-76b0-08dd3ca53405
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: BCL:0;
+ ARA:13230040|36860700013|82310400026|376014|1800799024|13003099007; 
+X-Microsoft-Antispam-Message-Info: =?us-ascii?Q?R6OPwNk88ksQP6gByCsdQWRAW0sIlIQ8N9klxSL+apZ0UkMFzHSeWaJW+CO0?=
+ =?us-ascii?Q?/4FjiZ8Im7DWc7amt0mlSeE3YekmDizknn3V8vkOBRWotgfjcx9nlQ7SblW4?=
+ =?us-ascii?Q?herPtzZJK5XYX5KAph5y3LtcVo42xDHlsbX4nK7X8JVYBmSOwXYilsEYkia4?=
+ =?us-ascii?Q?eK0qodoPDWbFteFgjnZrWUfcFIyaU6RVh7ZyZSqkci/x85uhbfeCZSdSOEzv?=
+ =?us-ascii?Q?6krn3lWwmA7bxcsrCdJEhYYPYvoS7wL4GppQ7yl/Mp3/h5BuHrkEwDM/Y14p?=
+ =?us-ascii?Q?3L9sG7AQn5c2Xzfi0/TTcH2WQ4+7TxgOIicbKFInE9VWk2KQDfAn4o5KuSzX?=
+ =?us-ascii?Q?9AXpQ/Z43KY61cU7ApFVqwV4ufIuKpaU2s8msKLw0yZ0KNi4xUECQf0JJqTQ?=
+ =?us-ascii?Q?SqxAVuHgUhjKTJCXN4xm5DjpJJ0IUgpVANUqSfmsecp012KC0yJG/H3NVeg1?=
+ =?us-ascii?Q?PiFN+RiWhjWYW27pXMjON0Gn3YCJa57XtJ6de9Hp667m+8EBHa0XQ/832NFR?=
+ =?us-ascii?Q?HsGTeFaDHqA8Ei8ZsX4d1NzfUI1WzIydveGYf4+42W22oqur6vULp8PE33SX?=
+ =?us-ascii?Q?3Qx5UdG3wn8C8tmC5cWWKmSLkjhQInSeDxY2PND1GxGsO/ywCuGhr3JH7ma1?=
+ =?us-ascii?Q?4cpTUOyLYU4PSwvS37/AqFyBnCfCl460/gikmeNf8i8Uu+eSz2rqkHy5zthq?=
+ =?us-ascii?Q?/bzT8zFq8ldfdhWy8QzrwG83ZCkHjkNfXT6YzPHTze7bPJ7bbZ/xfeIy8rCY?=
+ =?us-ascii?Q?IvxKEA8cHfBUjEMX0+dtzW+dhcG2fd02lrTmKdXDfyE7TvKjn/86qoqzrcPT?=
+ =?us-ascii?Q?vfvmGNydaRmQL4a2dx9tsdLK5m+3Aadu8o8Y7AENQsNDkNc7yHhYQyGJ3h8h?=
+ =?us-ascii?Q?x1figPGttDKKgGxU5FhfYStxDE7tMP1Tt6W6RnosgETx1duEjVkbyUAI4Z4k?=
+ =?us-ascii?Q?FMbnk3ol/xIL/ijvf8QWdFqaJmtdKfmwVsvbnWU4Gsdf//ZEtvNV3d6Y0YPS?=
+ =?us-ascii?Q?I66LF0gQ6Uu88npu72M1zIdqgWziyyOvss9Gl/8h4Jejwt2OxR2v6CfUG0HB?=
+ =?us-ascii?Q?bzFtpDhGUXB0e3rUlf94KcE9bbzbBKFotGs+5Wmq3GBb+sYVPubIGqsXKr5n?=
+ =?us-ascii?Q?RQpUxr0TZEPH3bSACqhgw6Pji+Xk5icfdaPqiXaA/haZFny+d6jfIAnmIQfJ?=
+ =?us-ascii?Q?QpUi9g4wD1d7J/lQXVEjqKqsJgEnqc2gzbaaKqE4cr4WWPjkqvoHthkie8Ua?=
+ =?us-ascii?Q?AE+S2vKyXcm8GqXAONfERw+U66qIwVH/IHk/9tOqXg2uQU66nem0IBzFpfn1?=
+ =?us-ascii?Q?p+6e/qqobBBlReXfrdRjv1Je8Q4lWCh1/XHpJUOnGElYMEkW3rmkyd6ZfEZG?=
+ =?us-ascii?Q?wilg86Mx5lDb0jnbTgDdPnOw43Qgfn9TUVOFItvcmfvTXqt58CkVFSwKMy0R?=
+ =?us-ascii?Q?RsPLlwpqtgRXKENASCp/ZcJpW7F6y+gSPCcuSVEtRpTiMYHxXKFCiDnqZXFF?=
+ =?us-ascii?Q?lrm7K9jK2oUsYMg=3D?=
+X-Forefront-Antispam-Report: CIP:216.228.117.161; CTRY:US; LANG:en; SCL:1; SRV:;
+ IPV:NLI; SFV:NSPM; H:mail.nvidia.com; PTR:dc6edge2.nvidia.com; CAT:NONE;
+ SFS:(13230040)(36860700013)(82310400026)(376014)(1800799024)(13003099007);
+ DIR:OUT; SFP:1101; 
+X-OriginatorOrg: Nvidia.com
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 24 Jan 2025 18:30:39.5115 (UTC)
+X-MS-Exchange-CrossTenant-Network-Message-Id: 3a3e6123-e390-4cf1-76b0-08dd3ca53405
+X-MS-Exchange-CrossTenant-Id: 43083d15-7273-40c1-b7db-39efd9ccc17a
+X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=43083d15-7273-40c1-b7db-39efd9ccc17a; Ip=[216.228.117.161];
+ Helo=[mail.nvidia.com]
+X-MS-Exchange-CrossTenant-AuthSource: DS3PEPF000099D4.namprd04.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Anonymous
+X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: BL1PR12MB5756
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -104,26 +141,83 @@ List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-ret will be modified immediately afterwards.
+Hi folks:
 
-Signed-off-by: David Hildenbrand <david@redhat.com>
----
- drivers/gpu/drm/nouveau/nouveau_svm.c | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+Here is another re-spin of handling the large GSP message return.
 
-diff --git a/drivers/gpu/drm/nouveau/nouveau_svm.c b/drivers/gpu/drm/nouveau/nouveau_svm.c
-index 8ea98f06d39af..2f8b8b978fc08 100644
---- a/drivers/gpu/drm/nouveau/nouveau_svm.c
-+++ b/drivers/gpu/drm/nouveau/nouveau_svm.c
-@@ -594,7 +594,7 @@ static int nouveau_atomic_range_fault(struct nouveau_svmm *svmm,
- 	struct page *page;
- 	unsigned long start = args->p.addr;
- 	unsigned long notifier_seq;
--	int ret = 0;
-+	int ret;
- 
- 	ret = mmu_interval_notifier_insert(&notifier->notifier, mm,
- 					args->p.addr, args->p.size,
+Besides the support of the large GSP message, kernel doc and many cleanups
+are introduced according to the comments in the previous spin [1].
+
+For testing, I tried the following without any problem:
+
+- run Uniengine Heaven [2] on my RTX 4060 for 8 hours
+- the GL CTS runner [3] (commandline: ./cts-runner --type-gl40) from
+Khronos
+- with the vGPU RFC patches [4], boot up a ubuntu VM with a vGPU on a L40
+and run glmark2.
+
+v4:
+- Introduce a documentation in Documentation/gpu/nouveau.rst.
+- Fix the reference link of NVIDIA SDK headers in the document.
+- Replace the "decoders" term with "terminology".
+- Explain the adding offset in r535_gsp_msgq_get_entry().
+- Replace the magic number 0x1000 with GSP_PAGE_SIZE in the re-factor.
+- Introduce a DOC to explain the GSP message receiving flow.
+
+v3:
+
+- Add a kernel doc and chart to introduce the GSP message and denote the
+memory layout.
+- Add a decoder section in the kernel doc to explain the terms in the code.
+- Refine the many confusing variable names to align with the terms in the
+kernel doc.
+- Introduce the continaution records in the kernel doc.
+- Re-factor the complicated function r535_gsp_msgq_wait().
+- Other minor cleanups.
+
+v2:
+
+- Remove the Fixes: tags as the vanilla nouveau aren't going to hit these bugs. (Danilo)
+- Test the patchset on VK-GL-CTS. (Danilo)
+- Remove the ambiguous empty line in PATCH 2. (Danilo)
+- Rename the r535_gsp_msgq_wait to gsp_msgq_recv. (Danilo)
+- Introduce a data structure to hold the params of gsp_msgq_recv(). (Danilo)
+- Document the params and the states they are related to. (Danilo)
+
+[1] https://lore.kernel.org/nouveau/20241031085250.2941482-1-zhiw@nvidia.com/
+[2] https://benchmark.unigine.com/heaven
+[3] https://github.com/KhronosGroup/VK-GL-CTS
+[4] https://lore.kernel.org/kvm/20240922124951.1946072-1-zhiw@nvidia.com/T/#t
+
+
+Zhi Wang (15):
+  drm/nouveau: add a kernel doc to introduce the GSP RPC
+  drm/nouveau: rename "repc" to "gsp_rpc_len" on the GSP message recv
+    path
+  drm/nouveau: rename "argv" to what it represents on the GSP message
+    send path
+  drm/nouveau: remove unused param repc in *rm_alloc_push()
+  drm/nouveau: rename "argv" to what it represents in *rm_{alloc,
+    ctrl}_*()
+  drm/nouveau: rename "argc" to what it represents in GSP RPC routines
+  drm/nouveau: fix the broken marco GSP_MSG_MAX_SIZE
+  drm/nouveau: remove the magic number in r535_gsp_rpc_push()
+  drm/nouveau: refine the variable names in r535_gsp_rpc_push()
+  drm/nouveau: refine the variable names in r535_gsp_msg_recv()
+  drm/nouveau: rename the variable "cmd" to "msg" in r535_gsp_cmdq_{get,
+    push}()
+  drm/nouveau: factor out r535_gsp_msgq_peek()
+  drm/nouveau: factor out r535_gsp_msgq_recv_one_elem()
+  drm/nouveau: support handling the return of large GSP message
+  drm/nouveau: consume the return of large GSP message
+
+ Documentation/gpu/drivers.rst                 |   1 +
+ Documentation/gpu/nouveau.rst                 |  27 +
+ .../gpu/drm/nouveau/include/nvkm/subdev/gsp.h |   8 +-
+ .../gpu/drm/nouveau/nvkm/subdev/gsp/r535.c    | 526 +++++++++++++-----
+ 4 files changed, 409 insertions(+), 153 deletions(-)
+ create mode 100644 Documentation/gpu/nouveau.rst
+
 -- 
-2.47.1
+2.34.1
 
