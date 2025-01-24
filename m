@@ -2,92 +2,90 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id B3F99A1B7FA
-	for <lists+nouveau@lfdr.de>; Fri, 24 Jan 2025 15:40:19 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 2EBCEA1BBC6
+	for <lists+nouveau@lfdr.de>; Fri, 24 Jan 2025 18:54:12 +0100 (CET)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 661D210E98F;
-	Fri, 24 Jan 2025 14:40:18 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 1247310E12A;
+	Fri, 24 Jan 2025 17:54:10 +0000 (UTC)
 Authentication-Results: gabe.freedesktop.org;
-	dkim=pass (1024-bit key; unprotected) header.d=redhat.com header.i=@redhat.com header.b="ahO3J0r4";
+	dkim=pass (1024-bit key; unprotected) header.d=redhat.com header.i=@redhat.com header.b="NDz8YqIO";
 	dkim-atps=neutral
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
 Received: from us-smtp-delivery-124.mimecast.com
- (us-smtp-delivery-124.mimecast.com [170.10.133.124])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 454D010E98E
- for <nouveau@lists.freedesktop.org>; Fri, 24 Jan 2025 14:39:36 +0000 (UTC)
+ (us-smtp-delivery-124.mimecast.com [170.10.129.124])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 1388410E12A
+ for <nouveau@lists.freedesktop.org>; Fri, 24 Jan 2025 17:54:08 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1737729575;
+ s=mimecast20190719; t=1737741247;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ to:to:cc:mime-version:mime-version:content-type:content-type:
  content-transfer-encoding:content-transfer-encoding:
  in-reply-to:in-reply-to:references:references:autocrypt:autocrypt;
- bh=JXjIelSfZzKQdcaM/jvKrJm9ctIdFXiuVvcs+iWziAM=;
- b=ahO3J0r4Hwvhpb72/51UPBiTyEyEh5avXn0FlXRWMVMgTTOYoUoBABFkkzPb67hiD7et3z
- l9npbxsv5onuZOX9c1bndUJxAnbJMm25PhwUmXCNJ868Mx8Y232C3rFrBWO7zFcNzyGDTp
- rsJzYK+zW3XFTpnf+BkhhnHnUAbJfHs=
-Received: from mail-wm1-f69.google.com (mail-wm1-f69.google.com
- [209.85.128.69]) by relay.mimecast.com with ESMTP with STARTTLS
+ bh=xXQ7dANw+aXD8Z/3pfZjrBjGgQVABdk/UizC4Pow++E=;
+ b=NDz8YqIO9UzfV+1TU+5md8Jwn1ijQUR2PTtlM0v5FUSISYtYBhqKqtWrDTojoyPuFHFNED
+ //Nzky1cxGeOi3wDbWjklQrELySwZYqAKEW1bGnnv8Z8+5xpt3+gvshJ0M0Jn10aVWaC8H
+ FK4+s73kk3qNch7RrY00iS0UFjgKDEE=
+Received: from mail-wm1-f72.google.com (mail-wm1-f72.google.com
+ [209.85.128.72]) by relay.mimecast.com with ESMTP with STARTTLS
  (version=TLSv1.3, cipher=TLS_AES_256_GCM_SHA384) id
- us-mta-20-clM16Nb2Oj24if8RDyBY6Q-1; Fri, 24 Jan 2025 09:39:26 -0500
-X-MC-Unique: clM16Nb2Oj24if8RDyBY6Q-1
-X-Mimecast-MFC-AGG-ID: clM16Nb2Oj24if8RDyBY6Q
-Received: by mail-wm1-f69.google.com with SMTP id
- 5b1f17b1804b1-4361ac8b25fso12099325e9.2
- for <nouveau@lists.freedesktop.org>; Fri, 24 Jan 2025 06:39:25 -0800 (PST)
+ us-mta-437-VrJO1bWBM4WrB4Si_I8hZg-1; Fri, 24 Jan 2025 12:54:05 -0500
+X-MC-Unique: VrJO1bWBM4WrB4Si_I8hZg-1
+X-Mimecast-MFC-AGG-ID: VrJO1bWBM4WrB4Si_I8hZg
+Received: by mail-wm1-f72.google.com with SMTP id
+ 5b1f17b1804b1-436723bf7ffso17445885e9.3
+ for <nouveau@lists.freedesktop.org>; Fri, 24 Jan 2025 09:54:05 -0800 (PST)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1737729561; x=1738334361;
+ d=1e100.net; s=20230601; t=1737741244; x=1738346044;
  h=content-transfer-encoding:in-reply-to:organization:autocrypt
- :content-language:from:references:cc:to:subject:user-agent
- :mime-version:date:message-id:x-gm-message-state:from:to:cc:subject
- :date:message-id:reply-to;
- bh=JXjIelSfZzKQdcaM/jvKrJm9ctIdFXiuVvcs+iWziAM=;
- b=HUgbJ77pGw0jCz/ODcUxv1V8xu/HZJMgMPqj5jxlpz3tXsECgKm3w5HGn1egdMwepb
- 5d3BKVPCc0CHqGgYr54LlwncLG5mbK7yWwRDrdi/TnjNIp2CbnMSyUTDfq+P50SmeYsN
- W7W/IG4d0qQ0CvEisNDZ4Y/FVN4ys1yeLXFVcryaqG9LA6Wg3l/1/81WcW0SYPwElLZo
- C2enuv1tV/rVhamVcMe0vUk/J5cUL0Zt9OhAWmNkVdCQ0JoKJwxuaO+n9EkiOD9zZmDg
- gkdlRyUsLCZwf4t4ml2tIbId9ukWHJv8u7CSac53tPylfK3BFuU7dyHjWOgydTAQFBE2
- 32xQ==
+ :content-language:from:references:to:subject:user-agent:mime-version
+ :date:message-id:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=xXQ7dANw+aXD8Z/3pfZjrBjGgQVABdk/UizC4Pow++E=;
+ b=jZEyDuaBc2Sa2zlUoYxjliwLZD75+0kbeZ39gWLoZ6XNmF2+4lVDSBPkQx23xw9f0c
+ muqXkBW95f73VcWZQ/wJMsmUVTJxtXQyn/+hC6RhibmUY+RamBoOl/Gc5g0IcD2b5Jh2
+ /YK+Opv4bReBokB/JzW5FLAxH1Ov6FsfoI+1JQ7Ay11pMFq92Tb84fOc8L8ROMN+tjr4
+ Xp551myibvohzpRqT3fccNvnpdzMYo6UFLwvVgVbV+iyMxf98f2K1+0tyDDuwVQFH1UT
+ IrOexnA+nVe2GMZifLM0TJ/YFUK2YH9vM62qhfk9xDbEjmnTtxsbZNJPhKgQiUM7gno/
+ Gv/g==
 X-Forwarded-Encrypted: i=1;
- AJvYcCVL35PPDvEq6kmdzyFYJ+V3sTVPSSDRfqIkZx1g9qj/GS8ja1GRwEZdtD3y75P2DtseBEcZ40bQ@lists.freedesktop.org
-X-Gm-Message-State: AOJu0YycYW9lpB3lQK2zdMPMQlivOVeL2V7+WtTe88d0XFMa33kmNzE5
- hAGd2YA0UMGP/2l61EVKo7YI22KrZ97ml6zuoi7b51UGyR6xHfkIXnwpkVmYVwZuSe/mKPuoY0J
- klUI73i5514yn3xXPGSLvrHAqzKD4xR8UiGtuRxQrhA0aFxq6KWtKRpq+JTWHdQY=
-X-Gm-Gg: ASbGnctfhFF3xb175SQ5zvQIpnMPy1DCpt0cHAhGCZU/IqgaUJEM9EtjqPayXGVY4mU
- drmnw0seT2+qDtJGMFwfChO+VkNrT70luw3J0tN2MoBixJGRSqV8XaHheMkraWTH08OziupSsbJ
- qgNQR9PrQvbmOFDTlq8REDQ114ZDTP3TpgJP4U35q96TSPkGDWJUH4DBGKNMiUJiKN8Y1jz+4qf
- Vq929xpXAN9yV6iuohK8CCo4PV4udcJrWDIz/YHPycavWWRiZgeJPQXg0YY/2aje9ByzbozJLbu
- BGaKgSBuB+jBV3EBbtwEihh5wmnBWy1CjTA=
-X-Received: by 2002:a05:600c:1f0d:b0:431:3bf9:3ebb with SMTP id
- 5b1f17b1804b1-4389143923bmr258333895e9.24.1737729561057; 
- Fri, 24 Jan 2025 06:39:21 -0800 (PST)
-X-Google-Smtp-Source: AGHT+IFeLyI0tyajaShR1GLt5oyhwZhAl4H7mI/frvs0Ecdcv9h2bmHBE2LWQaYOJbhpUYv/tplSMQ==
-X-Received: by 2002:a05:600c:1f0d:b0:431:3bf9:3ebb with SMTP id
- 5b1f17b1804b1-4389143923bmr258333605e9.24.1737729560727; 
- Fri, 24 Jan 2025 06:39:20 -0800 (PST)
-Received: from ?IPV6:2a01:599:922:1046:67aa:7b35:f780:c8fc?
- ([2a01:599:922:1046:67aa:7b35:f780:c8fc])
+ AJvYcCX5rJWYDnwCJSB0I2Mink0rNcU29xh5780ubYKsFc8p+aaHwp5r3+P3mX0DnM+bWauN57a9qO37@lists.freedesktop.org
+X-Gm-Message-State: AOJu0YxKF++AJY7WHpNjjJyfPAV1AsonObmNebptdPzzVtTmxlPa4rbw
+ cyOwQYucx+/UvuyQQ6/Q9viIV+8gBGoPIEyhTVGGV8vveePWUdcT220vgS1J1AypHp83QUMqquT
+ Wl0xzKYSblPm3XoIAoOAtYxsoBRki4cGmp43FUJT46DKCxfpaDd43s3d4p0ztfd8=
+X-Gm-Gg: ASbGncuqungDDJ8I5ZqC7i/3bU688O2dfFG17kppVlJy68PkaF/uXzJ16Jl7fx4++BK
+ nhTWebb8jZk0KuU2Q4vUC0ZCFBvuubyiIr6LpasyvjVve49//ft7jgaFkw0shvj12x3h6a+i9x5
+ /SI/6gORrQhYwfPMQDSlVf7Mu0AgDNNFy7diVK99rOC7bGR0WP55H7ktpBbvkGIzKCYaW2WDCWf
+ 4MBG13Jdm5nykRgTOj7Wx5kyMpyyaB8hpU5YSrier8Lc6czBSUEQR2ABBTCzFzb2VXI8RCkJ7z0
+ 8iu+clrfNvwdzVZWS6L3rS0=
+X-Received: by 2002:a05:600c:3495:b0:431:5c3d:1700 with SMTP id
+ 5b1f17b1804b1-4389143b450mr254508245e9.21.1737741244635; 
+ Fri, 24 Jan 2025 09:54:04 -0800 (PST)
+X-Google-Smtp-Source: AGHT+IHsUUZXZcu35hKI8nL/0bwMoEgyUei6dQJrQY1Atd50NPrlYq9dLLihNiR4OkNeQLP/cStOeg==
+X-Received: by 2002:a05:600c:3495:b0:431:5c3d:1700 with SMTP id
+ 5b1f17b1804b1-4389143b450mr254508065e9.21.1737741244202; 
+ Fri, 24 Jan 2025 09:54:04 -0800 (PST)
+Received: from [192.168.3.141] (p4ff2332e.dip0.t-ipconnect.de. [79.242.51.46])
  by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-38c2a1bb101sm2947300f8f.66.2025.01.24.06.39.18
+ ffacd0b85a97d-38c2a1bad92sm3327090f8f.61.2025.01.24.09.54.02
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Fri, 24 Jan 2025 06:39:19 -0800 (PST)
-Message-ID: <d4e234c1-d200-42ec-8667-031f6e4953f1@redhat.com>
-Date: Fri, 24 Jan 2025 15:39:18 +0100
+ Fri, 24 Jan 2025 09:54:03 -0800 (PST)
+Message-ID: <f2f059a3-0c95-44cf-b79a-8c01e9334919@redhat.com>
+Date: Fri, 24 Jan 2025 18:54:02 +0100
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
 Subject: Re: [Question] Are "device exclusive non-swap entries" / "SVM atomics
  in Nouveau" still getting used in practice?
-To: Jason Gunthorpe <jgg@nvidia.com>
-Cc: "linux-mm@kvack.org" <linux-mm@kvack.org>,
+To: "linux-mm@kvack.org" <linux-mm@kvack.org>,
  John Hubbard <jhubbard@nvidia.com>, nouveau@lists.freedesktop.org,
- Alistair Popple <apopple@nvidia.com>,
+ Jason Gunthorpe <jgg@nvidia.com>, Alistair Popple <apopple@nvidia.com>,
  DRI Development <dri-devel@lists.freedesktop.org>,
  Karol Herbst <kherbst@redhat.com>, Lyude Paul <lyude@redhat.com>,
  Danilo Krummrich <dakr@kernel.org>
 References: <346518a4-a090-4eaa-bc04-634388fd4ca3@redhat.com>
  <Z5JbYC2-slPU0l3n@phenom.ffwll.local>
  <8c6f3838-f194-4a42-845d-10011192a234@redhat.com>
- <20250124141121.GY5556@nvidia.com>
+ <Z5OxuGMGT-OvMy5P@phenom.ffwll.local>
 From: David Hildenbrand <david@redhat.com>
 Autocrypt: addr=david@redhat.com; keydata=
  xsFNBFXLn5EBEAC+zYvAFJxCBY9Tr1xZgcESmxVNI/0ffzE/ZQOiHJl6mGkmA1R7/uUpiCjJ
@@ -134,9 +132,9 @@ Autocrypt: addr=david@redhat.com; keydata=
  jPrnvUsUUsjRoRNJjKKA/REq+sAnhkNPPZ/NNMjaZ5b8Tovi8C0tmxiCHaQYqj7G2rgnT0kt
  WNyWQQ==
 Organization: Red Hat
-In-Reply-To: <20250124141121.GY5556@nvidia.com>
+In-Reply-To: <Z5OxuGMGT-OvMy5P@phenom.ffwll.local>
 X-Mimecast-Spam-Score: 0
-X-Mimecast-MFC-PROC-ID: OXQbeNA8egAXBE9hMxkpjkkiMZHxtOKCC-kRuhDZkuE_1737729561
+X-Mimecast-MFC-PROC-ID: bwGbWeQY1EsNcK61GCkN54MsEoVkCUmkt1nKpK105HI_1737741245
 X-Mimecast-Originator: redhat.com
 Content-Language: en-US
 Content-Type: text/plain; charset=UTF-8; format=flowed
@@ -155,25 +153,81 @@ List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-On 24.01.25 15:11, Jason Gunthorpe wrote:
-> On Fri, Jan 24, 2025 at 11:44:28AM +0100, David Hildenbrand wrote:
+>>> On integrated the gpu is tied into the coherency
+>>> fabric, so there it's not needed.
+>>>
+>>> I think the more fundamental question with both this function here and
+>>> with forced migration to device memory is that there's no guarantee it
+>>> will work out.
+>>
+>> Yes, in particular with device-exclusive, it doesn't really work with THP
+>> and is only limited to anonymous memory. I have patches to at least make it
+>> work reliably with THP.
 > 
+> I should have crawled through the implementation first before replying.
+> Since it only looks at folio_mapcount() make_device_exclusive() should at
+> least in theory work reliably on anon memory, and not be impacted by
+> elevated refcounts due to migration/ksm/thp/whatever.
+
+Yes, there is -- in theory -- nothing blocking the conversion except the 
+folio lock. That's different than page migration.
+
+[...]
+
+> 
+>> Then, we seem to give up too easily if we cannot lock the folio when wanting
+>> to convert to device-exclusive, which also looks rather odd. But well, maybe
+>> it just works good enough in the common case, or there is some other retry
+>> logic that makes it fly.
+> 
+> I've crawled through the path to migrate pages from device memory back to
+> system memory a few months ago, and found some livelock issues in there.
+> Wouldn't be surprised if m_d_e has some of the same, but I didn't dig
+> through it (least because intel can't use it because not-so-great hw
+> design).
+
+Yes, that might be possible. Maybe something keeps spinning while the 
+folio is locked instead of properly waiting for the lock.
+
+... or someone is trying to convert a tail page of a THP, in which case 
+we will also keep failing the conversion right now.
+
 >> There are other concerns I have (what if the page is pinned and access
 >> outside of the user space page tables?). Maybe there was not need to handle
 >> these cases so far.
 > 
-> I think alot of this depends on userspace following some restrictions
-> so that the pages are always convertible. Presumably if the userspace
-> breaks things then their atomic using GPU kernels will fault.
-> 
-> So, from a kernel perspective, I'd suggest that creating a reasonable
-> set of conditions that userspace can follow to have it work reliably
-> is a reasonable goal.
+> I think that's also ok, but might be good to document this clearly that
+> concurrent direct i/o or rdma registered buffer or whatever will mess with
+> this. The promise is only between the gpu and the cpu, not anything else,
+> in current apis. At least to my knowledge.
 
-Yes, that's my assumption as well. If you register a page using io_uring 
-as a fixed buffer and then trigger "device_exclusive" access, the page 
-can still be read/written using io_uring and atomics might not work as 
-expected. "Not supported".
+Well, the issue is that e.g., iouring fixed buffers can be accessed from 
+the CPU using the direct map from the CPU, not necessarily using DMA 
+from a device.
+
+In any case, I'm planning on adding some code-level documentation for 
+that and look into extending the high-level doc while at it.
+
+> 
+>> So best I can do is make anonymous memory more reliable with
+>> device-exclusive and fixup some of the problematic parts that I see (e.g.,
+>> broken page reclaim, page migration, ...).
+>>
+>> But before starting to cleanup+improve the existing handling of anonymous
+>> memory, I was wondering if this whole thing is getting used at all.
+> 
+> Yeah if this can be made reliable (under the limitation of only anon
+> memory and only excluding userspace access) then I expect we'll need this
+> for a very long time. I just had no idea whether even that is possible.
+> 
+> What isn't good is if it's only mostly reliable, like the current
+> pgmap->ops->migrate_to_ram() path in do_swap_page() still is.
+
+I'll cc you on patches once I figure out some details on how to fix some 
+page table walkers that really don't expect these non-swap entries.
+
+Fortunately, the hmm test device is in place to trigger some shaky 
+scenarios.
 
 -- 
 Cheers,
