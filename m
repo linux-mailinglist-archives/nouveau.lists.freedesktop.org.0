@@ -2,82 +2,143 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id CCD91A1A44F
-	for <lists+nouveau@lfdr.de>; Thu, 23 Jan 2025 13:30:59 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 863A9A1B3AF
+	for <lists+nouveau@lfdr.de>; Fri, 24 Jan 2025 11:44:38 +0100 (CET)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id A0FE710E7FA;
-	Thu, 23 Jan 2025 12:30:56 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 41D7C10E946;
+	Fri, 24 Jan 2025 10:44:36 +0000 (UTC)
 Authentication-Results: gabe.freedesktop.org;
-	dkim=fail reason="signature verification failed" (2048-bit key; unprotected) header.d=igalia.com header.i=@igalia.com header.b="XYGI59eM";
+	dkim=pass (1024-bit key; unprotected) header.d=redhat.com header.i=@redhat.com header.b="hSA0wlde";
 	dkim-atps=neutral
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from fanzine2.igalia.com (fanzine.igalia.com [178.60.130.6])
- by gabe.freedesktop.org (Postfix) with ESMTPS id F14F710E3BC;
- Thu, 23 Jan 2025 12:30:51 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=igalia.com; 
- s=20170329;
- h=Content-Transfer-Encoding:Content-Type:In-Reply-To:From:
- References:Cc:To:Subject:MIME-Version:Date:Message-ID:Sender:Reply-To:
- Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
- Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
- List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=Z8XUxzm8dLi8p/kAybuPHg87486j0vTg3MwMyxsqGrU=; b=XYGI59eM5sIdZT+1c4SFmCibW7
- RRE+aVBPBmsDmfNDKoRUqCep+gcU1Ft51Kl6Y6ZAf1xmC8NVPIIaW9D9hHF+9rX+ldxCDZLDFzp+n
- qqQoo8nzU9NTkiZYzSYN3tO9xWSldqg8/Fp1G5reECLGSox+YMlp07KtvSCfDJgc07FgDCw9BzHsy
- d2YUzFCg2sjwf77nMZK8DVdXUBKLLm/dANiOqqwxZjoOF/ybUVWF2G0O3K2vp7A6WQhWS20Y2Slzc
- zLeoQUd0u4rjxt1/2oNGIx73fdAOdUurYFIwFQCj7oVrz4Z+nJwgQmKIP4rEMzHKQIS8IeWMJBQpZ
- kOkflMXg==;
-Received: from [187.36.213.55] (helo=[192.168.1.103])
- by fanzine2.igalia.com with esmtpsa 
- (Cipher TLS1.3:ECDHE_X25519__RSA_PSS_RSAE_SHA256__AES_128_GCM:128) (Exim)
- id 1tawLh-001C6o-BU; Thu, 23 Jan 2025 13:30:17 +0100
-Message-ID: <a58da040-2bef-4af0-afae-f2447896080e@igalia.com>
-Date: Thu, 23 Jan 2025 09:29:57 -0300
+Received: from us-smtp-delivery-124.mimecast.com
+ (us-smtp-delivery-124.mimecast.com [170.10.133.124])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 3407410E32E
+ for <nouveau@lists.freedesktop.org>; Fri, 24 Jan 2025 10:44:35 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
+ s=mimecast20190719; t=1737715474;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:mime-version:mime-version:content-type:content-type:
+ content-transfer-encoding:content-transfer-encoding:
+ in-reply-to:in-reply-to:references:references:autocrypt:autocrypt;
+ bh=9LGicVHjVXKCgFdIoAFwldRTveMxoGLLdTcV9/dVeF4=;
+ b=hSA0wldeCumisQimzvfv+75K8lSiplubqmLxm8/U1yTF95Tem8kio3RUJCujr1CpoIhnGg
+ G0JZveB1R2qN16AFrKo6pWieCpQxgIhJCHMgYHIxahYNgKKb6cfeWvVsqKHxmN98lmRbF8
+ TZzYgKtKW25effU5Vq9S/daBr/wrKUQ=
+Received: from mail-wm1-f71.google.com (mail-wm1-f71.google.com
+ [209.85.128.71]) by relay.mimecast.com with ESMTP with STARTTLS
+ (version=TLSv1.3, cipher=TLS_AES_256_GCM_SHA384) id
+ us-mta-324-qVNkDHRzNe-fh7q6nbSujw-1; Fri, 24 Jan 2025 05:44:32 -0500
+X-MC-Unique: qVNkDHRzNe-fh7q6nbSujw-1
+X-Mimecast-MFC-AGG-ID: qVNkDHRzNe-fh7q6nbSujw
+Received: by mail-wm1-f71.google.com with SMTP id
+ 5b1f17b1804b1-43619b135bcso9100335e9.1
+ for <nouveau@lists.freedesktop.org>; Fri, 24 Jan 2025 02:44:32 -0800 (PST)
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1737715471; x=1738320271;
+ h=content-transfer-encoding:in-reply-to:organization:autocrypt
+ :content-language:from:references:to:subject:user-agent:mime-version
+ :date:message-id:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=9LGicVHjVXKCgFdIoAFwldRTveMxoGLLdTcV9/dVeF4=;
+ b=F9BLlVpnjdkX1P3+KvpY1OIPdlf7VmLc5NnQyGhQfXPSD5LJDExB+uirbuZUumhbau
+ CH6RRuhQO/QAWxTBPjoPmdjLxEc4HWZWytMFfHxadmkP8xrVY/L5//E0suCo3o7c34HE
+ H+H56Jl7UsQbQn1aVbtGhEw1cypCZ8YAcg99xgLG2wsTrxVivrJ5taNUR0hH0aIs+h//
+ 737rXVw2J88GSryynso+MS+mvgfivRU7Rethml/dA4GwxYu62v8UbWxUSVjxwLZGLhOL
+ 0e4uHbvB18pTZZ8g7B04Fgj/BHrzJyzi/lnr6t1QccAGi/2OQJkzDie6lcNNuLxBQ9wH
+ JQqg==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCWT7uoMOWX+eWawca9XBrmjEUwM9fOap/QBWCHfXhQvimZOKocULjQge900MHfbBkJ7y7Jecbvz@lists.freedesktop.org
+X-Gm-Message-State: AOJu0YzKD5R2Xh3g92MNCajJxEKYV6BtwqFIUpGMJwECyixLxdxZfAul
+ xzveJeXXFe39tsmOq+xgfACUQeo0YRc257A9k/HNRvtlDPtBiriuvhHdbt6yptgVe4O/EG5kEz0
+ uXh1ARM4yOWf+ULlLBEgoJd4IkR8QjFF22dtxPA2n9J2gd8fj6LWaEfH18A3cDAyHxED6Or2Sgc
+ yz
+X-Gm-Gg: ASbGncvkTao9Eii3Ewmsvj4xx3oBfhjgQYb03bRWQp+Lp4gYTwaCNwMoRRpzSMZWP70
+ jbN/AwTDS58Fqlr8f/18Mnuj+s66DY2MWBmAQYtGCvaF5QVu50h+pmHGpElBMurpG3ZKQaNDRkC
+ uuAybAzFNMc1nEQXg3cqZkDdHNx+pe5cgCB0M7wSDqTf4mENB4wbok0AvZIHE0NkOW28XekAOR7
+ zadWJqViz6OU4Fcoq8wNps/N05G3tJSy2EBeCaKFlTWN+Fvmj76UecdKffCtkSooj9JTIITV1wP
+ CrNXbCCOBYHzTsVe1DXuprBDhNdj
+X-Received: by 2002:adf:fd84:0:b0:385:faf5:eb9f with SMTP id
+ ffacd0b85a97d-38bf57c91e7mr28813768f8f.48.1737715471557; 
+ Fri, 24 Jan 2025 02:44:31 -0800 (PST)
+X-Google-Smtp-Source: AGHT+IEKstrH5UL8LgQDwA4DkXTRFLjT6VqmqvDWzIKYlE7kR/ewYGg5Hi2VcNrw25AxqdO1qrWvQg==
+X-Received: by 2002:adf:fd84:0:b0:385:faf5:eb9f with SMTP id
+ ffacd0b85a97d-38bf57c91e7mr28813740f8f.48.1737715471211; 
+ Fri, 24 Jan 2025 02:44:31 -0800 (PST)
+Received: from ?IPV6:2a09:80c0:192:0:5dac:bf3d:c41:c3e7?
+ ([2a09:80c0:192:0:5dac:bf3d:c41:c3e7])
+ by smtp.gmail.com with ESMTPSA id
+ ffacd0b85a97d-38c2a18931esm2342703f8f.60.2025.01.24.02.44.28
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Fri, 24 Jan 2025 02:44:30 -0800 (PST)
+Message-ID: <8c6f3838-f194-4a42-845d-10011192a234@redhat.com>
+Date: Fri, 24 Jan 2025 11:44:28 +0100
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH] drm/sched: Use struct for drm_sched_init() params
-To: phasta@kernel.org, Alex Deucher <alexander.deucher@amd.com>,
- =?UTF-8?Q?Christian_K=C3=B6nig?= <christian.koenig@amd.com>,
- Xinhui Pan <Xinhui.Pan@amd.com>, David Airlie <airlied@gmail.com>,
- Simona Vetter <simona@ffwll.ch>, Lucas Stach <l.stach@pengutronix.de>,
- Russell King <linux+etnaviv@armlinux.org.uk>,
- Christian Gmeiner <christian.gmeiner@gmail.com>,
- Frank Binns <frank.binns@imgtec.com>, Matt Coster <matt.coster@imgtec.com>,
- Maarten Lankhorst <maarten.lankhorst@linux.intel.com>,
- Maxime Ripard <mripard@kernel.org>, Thomas Zimmermann <tzimmermann@suse.de>,
- Qiang Yu <yuq825@gmail.com>, Rob Clark <robdclark@gmail.com>,
- Sean Paul <sean@poorly.run>, Konrad Dybcio <konradybcio@kernel.org>,
- Abhinav Kumar <quic_abhinavk@quicinc.com>,
- Dmitry Baryshkov <dmitry.baryshkov@linaro.org>,
- Marijn Suijten <marijn.suijten@somainline.org>,
+Subject: Re: [Question] Are "device exclusive non-swap entries" / "SVM atomics
+ in Nouveau" still getting used in practice?
+To: "linux-mm@kvack.org" <linux-mm@kvack.org>,
+ John Hubbard <jhubbard@nvidia.com>, nouveau@lists.freedesktop.org,
+ Jason Gunthorpe <jgg@nvidia.com>, Alistair Popple <apopple@nvidia.com>,
+ DRI Development <dri-devel@lists.freedesktop.org>,
  Karol Herbst <kherbst@redhat.com>, Lyude Paul <lyude@redhat.com>,
- Danilo Krummrich <dakr@kernel.org>,
- Boris Brezillon <boris.brezillon@collabora.com>,
- Rob Herring <robh@kernel.org>, Steven Price <steven.price@arm.com>,
- Liviu Dudau <liviu.dudau@arm.com>, Luben Tuikov <ltuikov89@gmail.com>,
- Matthew Brost <matthew.brost@intel.com>, Melissa Wen <mwen@igalia.com>,
- Lucas De Marchi <lucas.demarchi@intel.com>,
- =?UTF-8?Q?Thomas_Hellstr=C3=B6m?= <thomas.hellstrom@linux.intel.com>,
- Rodrigo Vivi <rodrigo.vivi@intel.com>, Sunil Khatri <sunil.khatri@amd.com>,
- Lijo Lazar <lijo.lazar@amd.com>,
- Mario Limonciello <mario.limonciello@amd.com>, Ma Jun <Jun.Ma2@amd.com>,
- Yunxiang Li <Yunxiang.Li@amd.com>
-Cc: amd-gfx@lists.freedesktop.org, dri-devel@lists.freedesktop.org,
- linux-kernel@vger.kernel.org, etnaviv@lists.freedesktop.org,
- lima@lists.freedesktop.org, linux-arm-msm@vger.kernel.org,
- freedreno@lists.freedesktop.org, nouveau@lists.freedesktop.org,
- intel-xe@lists.freedesktop.org, mcanal@igalia.com
-References: <20250122140818.45172-3-phasta@kernel.org>
- <24f1c52f-1768-47de-88e3-d4104969d0a9@igalia.com>
- <9713798aa175aef2041e6d688ac4814006f789bc.camel@redhat.com>
- <ec4bb0f6-c366-40e7-a1df-332458b08eec@igalia.com>
- <e7414579afbfc25d4027471bc265ee48e7d25932.camel@mailbox.org>
+ Danilo Krummrich <dakr@kernel.org>
+References: <346518a4-a090-4eaa-bc04-634388fd4ca3@redhat.com>
+ <Z5JbYC2-slPU0l3n@phenom.ffwll.local>
+From: David Hildenbrand <david@redhat.com>
+Autocrypt: addr=david@redhat.com; keydata=
+ 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
+ WNyWQQ==
+Organization: Red Hat
+In-Reply-To: <Z5JbYC2-slPU0l3n@phenom.ffwll.local>
+X-Mimecast-Spam-Score: 0
+X-Mimecast-MFC-PROC-ID: k10UG4-cd8qzRgZ3cGQb3sSleQCX_o6Q-YCKeEULCQ8_1737715472
+X-Mimecast-Originator: redhat.com
 Content-Language: en-US
-From: =?UTF-8?Q?Ma=C3=ADra_Canal?= <mcanal@igalia.com>
-In-Reply-To: <e7414579afbfc25d4027471bc265ee48e7d25932.camel@mailbox.org>
 Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 8bit
+Content-Transfer-Encoding: 7bit
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -92,201 +153,86 @@ List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-Hi Philipp,
-
-On 23/01/25 09:13, Philipp Stanner wrote:
-> On Thu, 2025-01-23 at 08:10 -0300, Maíra Canal wrote:
->> Hi Philipp,
+On 23.01.25 16:08, Simona Vetter wrote:
+> On Thu, Jan 23, 2025 at 11:20:37AM +0100, David Hildenbrand wrote:
+>> Hi,
 >>
->> On 23/01/25 05:10, Philipp Stanner wrote:
->>> On Wed, 2025-01-22 at 19:07 -0300, Maíra Canal wrote:
->>>> Hi Philipp,
->>>>
->>>> On 22/01/25 11:08, Philipp Stanner wrote:
->>>>> drm_sched_init() has a great many parameters and upcoming new
->>>>> functionality for the scheduler might add even more. Generally,
->>>>> the
->>>>> great number of parameters reduces readability and has already
->>>>> caused
->>>>> one missnaming in:
->>>>>
->>>>> commit 6f1cacf4eba7 ("drm/nouveau: Improve variable name in
->>>>> nouveau_sched_init()").
->>>>>
->>>>> Introduce a new struct for the scheduler init parameters and
->>>>> port
->>>>> all
->>>>> users.
->>>>>
->>>>> Signed-off-by: Philipp Stanner <phasta@kernel.org>
+>> I keep finding issues in our implementation of "device exclusive non-swap
+>> entries", and the way it messes with mapcounts is disgusting.
 >>
->> [...]
+>> As a reminder, what we do here is to replace a PTE pointing to an anonymous
+>> page by a "device exclusive non-swap entry".
 >>
->>>>
->>>>> diff --git a/drivers/gpu/drm/v3d/v3d_sched.c
->>>>> b/drivers/gpu/drm/v3d/v3d_sched.c
->>>>> index 99ac4995b5a1..716e6d074d87 100644
->>>>> --- a/drivers/gpu/drm/v3d/v3d_sched.c
->>>>> +++ b/drivers/gpu/drm/v3d/v3d_sched.c
->>>>> @@ -814,67 +814,124 @@ static const struct
->>>>> drm_sched_backend_ops
->>>>> v3d_cpu_sched_ops = {
->>>>>     	.free_job = v3d_cpu_job_free
->>>>>     };
->>>>>     
->>>>> +/*
->>>>> + * v3d's scheduler instances are all identical, except for ops
->>>>> and
->>>>> name.
->>>>> + */
->>>>> +static void
->>>>> +v3d_common_sched_init(struct drm_sched_init_params *params,
->>>>> struct
->>>>> device *dev)
->>>>> +{
->>>>> +	memset(params, 0, sizeof(struct
->>>>> drm_sched_init_params));
->>>>> +
->>>>> +	params->submit_wq = NULL; /* Use the system_wq. */
->>>>> +	params->num_rqs = DRM_SCHED_PRIORITY_COUNT;
->>>>> +	params->credit_limit = 1;
->>>>> +	params->hang_limit = 0;
->>>>> +	params->timeout = msecs_to_jiffies(500);
->>>>> +	params->timeout_wq = NULL; /* Use the system_wq. */
->>>>> +	params->score = NULL;
->>>>> +	params->dev = dev;
->>>>> +}
->>>>
->>>> Could we use only one function that takes struct v3d_dev *v3d,
->>>> enum
->>>> v3d_queue, and sched_ops as arguments (instead of one function
->>>> per
->>>> queue)? You can get the name of the scheduler by concatenating
->>>> "v3d_"
->>>> to
->>>> the return of v3d_queue_to_string().
->>>>
->>>> I believe it would make the code much simpler.
->>>
->>> Hello,
->>>
->>> so just to get that right:
->>> You'd like to have one universal function that switch-cases over an
->>> enum, sets the ops and creates the name with string concatenation?
->>>
->>> I'm not convinced that this is simpler than a few small functions,
->>> but
->>> it's not my component, so…
->>>
->>> Whatever we'll do will be simpler than the existing code, though.
->>> Right
->>> now no reader can see at first glance whether all those schedulers
->>> are
->>> identically parametrized or not.
->>>
+>> As long as the original PTE is in place, the only CPU can access it, as soon
+>> as the "device exclusive non-swap entry" is in place, only the device can
+>> access it. Conversion back and forth is triggered by CPU / device faults.
 >>
->> This is my proposal (just a quick draft, please check if it
->> compiles):
+>> I have fixes/reworks/simplifications for most things, but as there is only a
+>> "real" single user in-tree of make_device_exclusive():
 >>
->> diff --git a/drivers/gpu/drm/v3d/v3d_sched.c
->> b/drivers/gpu/drm/v3d/v3d_sched.c
->> index 961465128d80..7cc45a0c6ca0 100644
->> --- a/drivers/gpu/drm/v3d/v3d_sched.c
->> +++ b/drivers/gpu/drm/v3d/v3d_sched.c
->> @@ -820,67 +820,62 @@ static const struct drm_sched_backend_ops
->> v3d_cpu_sched_ops = {
->>           .free_job = v3d_cpu_job_free
->>    };
+>> 	drivers/gpu/drm/nouveau/nouveau_svm.c
 >>
->> +static int
->> +v3d_sched_queue_init(struct v3d_dev *v3d, enum v3d_queue queue,
->> +                    const struct drm_sched_backend_ops *ops, const
-> 
-> Is it a queue, though?
-
-In V3D, we use the abstraction of a queue for everything related to job
-submission. For each queue, we have a scheduler instance, a different
-IOCTL and such. The queues work independently and the synchronization
-between them can be done through syncobjs.
-
-> 
-> How about _v3d_sched_init()?
+>> to "support SVM atomics in Nouveau [1]"
+>>
+>> naturally I am wondering: is this still a thing on actual hardware, or is it
+>> already stale on recent hardware and not really required anymore?
+>>
+>>
+>> [1] https://lore.kernel.org/linux-kernel//6621654.gmDyfcmpjF@nvdebian/T/
 > 
 
-I'd prefer if you use a function name related to "queue", as it would
-make more sense semantically.
+Thanks for your answer!
 
-Best Regards,
-- Maíra
+Nvidia folks told me on a different channel that it's still getting used.
 
-> P.
+> As long as you don't have a coherent interconnect it's needed. On intel
+> discrete device atomics require device memory, so they need full hmm
+> migration (and hence wont use this function even once we land intel gpu
+> svm code in upstream).
+
+Makes sense.
+
+> On integrated the gpu is tied into the coherency
+> fabric, so there it's not needed.
 > 
->> char
->> *name)
->> +{
->> +       struct drm_sched_init_params params = {
->> +               .submit_wq = NULL,
->> +               .num_rqs = DRM_SCHED_PRIORITY_COUNT,
->> +               .credit_limit = 1,
->> +               .hang_limit = 0,
->> +               .timeout = msecs_to_jiffies(500),
->> +               .timeout_wq = NULL,
->> +               .score = NULL,
->> +               .dev = v3d->drm.dev,
->> +       };
->> +
->> +       params.ops = ops;
->> +       params.name = name;
->> +
->> +       return drm_sched_init(&v3d->queue[queue].sched, &params);
->> +}
->> +
->>    int
->>    v3d_sched_init(struct v3d_dev *v3d)
->>    {
->> -       int hw_jobs_limit = 1;
->> -       int job_hang_limit = 0;
->> -       int hang_limit_ms = 500;
->>           int ret;
->>
->> -       ret = drm_sched_init(&v3d->queue[V3D_BIN].sched,
->> -                            &v3d_bin_sched_ops, NULL,
->> -                            DRM_SCHED_PRIORITY_COUNT,
->> -                            hw_jobs_limit, job_hang_limit,
->> -                            msecs_to_jiffies(hang_limit_ms), NULL,
->> -                            NULL, "v3d_bin", v3d->drm.dev);
->> +       ret = v3d_sched_queue_init(v3d, V3D_BIN, &v3d_bin_sched_ops,
->> +                                  "v3d_bin");
->>           if (ret)
->>                   return ret;
->>
->> -       ret = drm_sched_init(&v3d->queue[V3D_RENDER].sched,
->> -                            &v3d_render_sched_ops, NULL,
->> -                            DRM_SCHED_PRIORITY_COUNT,
->> -                            hw_jobs_limit, job_hang_limit,
->> -                            msecs_to_jiffies(hang_limit_ms), NULL,
->> -                            NULL, "v3d_render", v3d->drm.dev);
->> +       ret = v3d_sched_queue_init(v3d, V3D_RENDER,
->> &v3d_render_sched_ops,
->> +                                  "v3d_render");
->>           if (ret)
->>                   goto fail;
->>
->> [...]
->>
->> At least for me, this looks much simpler than one function for each
->> V3D queue.
->>
->> Best Regards,
->> - Maíra
->>
->>> P.
->>>
->>>
->>>>
->>>> Best Regards,
->>>> - Maíra
->>>>
->>
-> 
+> I think the more fundamental question with both this function here and
+> with forced migration to device memory is that there's no guarantee it
+> will work out.
+
+Yes, in particular with device-exclusive, it doesn't really work with 
+THP and is only limited to anonymous memory. I have patches to at least 
+make it work reliably with THP.
+
+Then, we seem to give up too easily if we cannot lock the folio when 
+wanting to convert to device-exclusive, which also looks rather odd. But 
+well, maybe it just works good enough in the common case, or there is 
+some other retry logic that makes it fly.
+
+> At least that's my understanding. And for this gpu device
+> atomics without coherent interconnect idea to work, we'd need to be able
+> to guarantee that we can make any page device exclusive. So from my side I
+> have some pretty big question marks on this entire thing overall.
+
+I don't think other memory (shmem/file/...) is really feasible as soon 
+as other processes (not the current process) map/write/read file pages.
+
+We could really only handle if we converted a single PTE and that PTE is 
+getting converted back again.
+
+There are other concerns I have (what if the page is pinned and access 
+outside of the user space page tables?). Maybe there was not need to 
+handle these cases so far.
+
+So best I can do is make anonymous memory more reliable with 
+device-exclusive and fixup some of the problematic parts that I see 
+(e.g., broken page reclaim, page migration, ...).
+
+But before starting to cleanup+improve the existing handling of 
+anonymous memory, I was wondering if this whole thing is getting used at 
+all.
+
+-- 
+Cheers,
+
+David / dhildenb
 
