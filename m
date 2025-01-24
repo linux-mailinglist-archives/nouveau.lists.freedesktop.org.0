@@ -2,68 +2,68 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id C33D9A1BC20
-	for <lists+nouveau@lfdr.de>; Fri, 24 Jan 2025 19:31:02 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id D5BC2A1BC14
+	for <lists+nouveau@lfdr.de>; Fri, 24 Jan 2025 19:30:53 +0100 (CET)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 7B2BF10EA1A;
-	Fri, 24 Jan 2025 18:31:01 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 62D9B10EA09;
+	Fri, 24 Jan 2025 18:30:50 +0000 (UTC)
 Authentication-Results: gabe.freedesktop.org;
-	dkim=pass (2048-bit key; unprotected) header.d=Nvidia.com header.i=@Nvidia.com header.b="DWjRbwLj";
+	dkim=pass (2048-bit key; unprotected) header.d=Nvidia.com header.i=@Nvidia.com header.b="uPt+kvp/";
 	dkim-atps=neutral
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from NAM11-DM6-obe.outbound.protection.outlook.com
- (mail-dm6nam11on2087.outbound.protection.outlook.com [40.107.223.87])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 6178710EA08
- for <nouveau@lists.freedesktop.org>; Fri, 24 Jan 2025 18:30:54 +0000 (UTC)
+Received: from NAM12-DM6-obe.outbound.protection.outlook.com
+ (mail-dm6nam12on2066.outbound.protection.outlook.com [40.107.243.66])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id B6ECB10EA04
+ for <nouveau@lists.freedesktop.org>; Fri, 24 Jan 2025 18:30:48 +0000 (UTC)
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=hXnywoa/eTiibam35c4CXR8KEuq78Ih1TxUEgN6eL52bLMQyxVwJ90aEhwvBqU8MrtyjBzfGFc2FeWugbbEz+XbH+tbgZwKa6pJM69b3TmJSFmz15AjfASFiZrGyhLScLmVKeNIXk1VeTD6uPtZMfMTrf1pleEY6qv7nMgHFt6GwvNdtJHR6gMpiAawrHSSv8kztWzltJIldcEVG9WZDWpxOSeAIy4i4j7fZdRHMf7sXf7+toky6TFkP80lR+cjmvDUXWOrSABh5R2QdBgkIZWhsuKWnu9jiMHtlQnhILr7dhvE5ZKAhO6lubW6a9+oQH/sJ+9P8kZ9Xt9+DtCGAzQ==
+ b=EoIEnuNbqapWbLJ4LD61ep/v+bLZdPoSZL0qC92DgOT7X0S6kGMDdpGjlhQNCJ6M1R5AUYUowxZRB/jdPNvTDdDI5wC8Qm5hoUmCS7QMe/JFnMbGkmgfME13cDcZi7P5o6DoQvAaVTGAShySDJzQcLJaBSoPX3r8KgChc+IwTpWRF0eGi7MDt8vOFQGeo3ZX5pPIL9bSYa30qZ5RrTEhcpOJ2gYkV+SVw9s1ci1mrJwbcxJwpRH9M64HSd6pWaZuaAv8CbImrXdggYZGkbellyHPyTJAf9/bYORtA6hn9kM1dfMrdzzsS+xIsCIlnkJNaBgNlq7i6P6H4WZd+lypVA==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
  s=arcselector10001;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=Dawjaose7pgWmZ9l5CKgZ1+BW0/gF3D6W/FoegiQE8M=;
- b=SU0eFWw21qcPAGwwXNoi3g6+sIKZNG4mWacHvQB3V5W7XWOSp9Sqqq8NYssBdGvJG555DEYknkB7MtqBa8i+b/YcizDs97cViEd7o0bvKqZY15j46t5V6Q6Cax3t4JdbHgPMWt2W+53UCQzf5CclSNsuLUyY+aDcyyg1CC141EBMyZoAAtRfBRW/A3x0hnzIIhAxpUSxvOjY96mTHv0DCZkUIPZNpkIqqGb/Nfjkxv0Fi2ublEBu/rvaxGf4Vo23kG/rA3Ky06bb1G9qb80z3VxQm+DE0cb3oNmlA1RinPZXeDjYcoQH2+ODFOUPJp5TG7YetShrhl2UVsHWtW5jDQ==
+ bh=/0Y64xIQU0b35qAdORwWkif1zMmPSWo51Lcrwu3GZ3M=;
+ b=YxsFL+76rbMqwyMYvCCUwwtpc3a3CpJYx962/7dV5JtSYuM2GMM0qP51HNlTmBFXsIKQK6TbfWiBJZLHgzRAyVjkNfDbWF0r/mj5esM8DJJi/1X2V1aVfH4FGqlLgSwPDF39Q47tLY3JjVksNDc0LIA2Fc9714xZh0cc8OWf0vGdeU0/BjZCZmRdZB87jgl6W4AOH8uojND+iSA8DyW3CdbjqrHSq1lE+ARg3KsXgneow4bcaB4vQ+DISvr2eXx3SUJNtlhb3Gb1KZ2QK8Glczb03iLYSFf1Ukuo6bQBy3tXfQtBmhY1hvOAWbpdSZ2H2jX9ZLQQhEWkkumTAmSXDg==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
- 216.228.117.161) smtp.rcpttodomain=lists.freedesktop.org
+ 216.228.117.160) smtp.rcpttodomain=lists.freedesktop.org
  smtp.mailfrom=nvidia.com; dmarc=pass (p=reject sp=reject pct=100) action=none
  header.from=nvidia.com; dkim=none (message not signed); arc=none (0)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=Nvidia.com;
  s=selector2;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=Dawjaose7pgWmZ9l5CKgZ1+BW0/gF3D6W/FoegiQE8M=;
- b=DWjRbwLjI9w12rnfH68dlKzht/9A7qPXc0sLZCKjZK3BicWgaa1pmIwFQaTToFygy3EUr13BR18/rcWKL0FMGQGKDPXKXRUxyTqPrScu2taVR2aa/0W2Qi0WpXE/fl+t4zUSVw02h5fVTr6pP1C1LnVdDFCD2WDSFKFctdy2+9OMIEdAsaL8lBzf6B4p7mBMrXThgfccQ3rvGXJ6gYWmr6C1nhMIJatrmaVvBsUnmsSF+aa+LzIRupTw6nAIQBj2/Q6lmrgQ2BadSoAp1hNDL6pnBe92vKY1Qj3Lu5xg1wQAv3rH7YFVDgbMcIgBUJer1aMdvMgCs4pPiLYi/+kpnA==
-Received: from DS7PR03CA0031.namprd03.prod.outlook.com (2603:10b6:5:3b5::6) by
- DS7PR12MB5864.namprd12.prod.outlook.com (2603:10b6:8:7b::18) with
- Microsoft
- SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.20.8377.18; Fri, 24 Jan 2025 18:30:49 +0000
-Received: from DS3PEPF000099D4.namprd04.prod.outlook.com
- (2603:10b6:5:3b5:cafe::6d) by DS7PR03CA0031.outlook.office365.com
- (2603:10b6:5:3b5::6) with Microsoft SMTP Server (version=TLS1_3,
- cipher=TLS_AES_256_GCM_SHA384) id 15.20.8377.18 via Frontend Transport; Fri,
- 24 Jan 2025 18:30:49 +0000
-X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 216.228.117.161)
+ bh=/0Y64xIQU0b35qAdORwWkif1zMmPSWo51Lcrwu3GZ3M=;
+ b=uPt+kvp/iALX1oNHeqfhtdeMr47fJqApkoJv9eWC/1JFkfOHrxqfE4JdqfM0vV1jLyIxpG15lfBZClnNu1oAKz3tF4EjJNeHotDKCBHFb8OlJYLFpl5x0pEn/Qu871WuFJSZvhSIZzAe4YEYWMcyNjjL7tAUdq7vWMnWOu7b5pnYvF6wEyoSR+UIIojDPRzE/yIAMudrwKoTRg+37HC0LdE/5MnUksebWdifjObPVpNmCQEbJOK5BkxxHjkjoBBomlifXI77Fy37Jr+MRxb8jrhvOnQ2bDvBfpzpg8aPBPrFre5+RHMBrEVpGarNcHXHUDwLSIUmCLboCJgLAkrCQA==
+Received: from BYAPR01CA0021.prod.exchangelabs.com (2603:10b6:a02:80::34) by
+ MW6PR12MB8952.namprd12.prod.outlook.com (2603:10b6:303:246::17) with
+ Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.8356.21; Fri, 24 Jan
+ 2025 18:30:45 +0000
+Received: from SJ1PEPF00002320.namprd03.prod.outlook.com
+ (2603:10b6:a02:80:cafe::86) by BYAPR01CA0021.outlook.office365.com
+ (2603:10b6:a02:80::34) with Microsoft SMTP Server (version=TLS1_3,
+ cipher=TLS_AES_256_GCM_SHA384) id 15.20.8377.14 via Frontend Transport; Fri,
+ 24 Jan 2025 18:30:45 +0000
+X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 216.228.117.160)
  smtp.mailfrom=nvidia.com;
  dkim=none (message not signed)
  header.d=none;dmarc=pass action=none header.from=nvidia.com;
 Received-SPF: Pass (protection.outlook.com: domain of nvidia.com designates
- 216.228.117.161 as permitted sender) receiver=protection.outlook.com;
- client-ip=216.228.117.161; helo=mail.nvidia.com; pr=C
-Received: from mail.nvidia.com (216.228.117.161) by
- DS3PEPF000099D4.mail.protection.outlook.com (10.167.17.5) with Microsoft SMTP
- Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.20.8377.8 via Frontend Transport; Fri, 24 Jan 2025 18:30:49 +0000
+ 216.228.117.160 as permitted sender) receiver=protection.outlook.com;
+ client-ip=216.228.117.160; helo=mail.nvidia.com; pr=C
+Received: from mail.nvidia.com (216.228.117.160) by
+ SJ1PEPF00002320.mail.protection.outlook.com (10.167.242.86) with Microsoft
+ SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ 15.20.8377.8 via Frontend Transport; Fri, 24 Jan 2025 18:30:45 +0000
 Received: from rnnvmail201.nvidia.com (10.129.68.8) by mail.nvidia.com
- (10.129.200.67) with Microsoft SMTP Server (version=TLS1_2,
+ (10.129.200.66) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.1544.4; Fri, 24 Jan
- 2025 10:30:31 -0800
+ 2025 10:30:32 -0800
 Received: from rnnvmail204.nvidia.com (10.129.68.6) by rnnvmail201.nvidia.com
  (10.129.68.8) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.1544.4; Fri, 24 Jan
  2025 10:30:31 -0800
 Received: from inno-linux.nvidia.com (10.127.8.13) by mail.nvidia.com
  (10.129.68.6) with Microsoft SMTP Server id 15.2.1544.4 via Frontend
- Transport; Fri, 24 Jan 2025 10:30:30 -0800
+ Transport; Fri, 24 Jan 2025 10:30:31 -0800
 From: Zhi Wang <zhiw@nvidia.com>
 To: <nouveau@lists.freedesktop.org>
 CC: <airlied@gmail.com>, <daniel@ffwll.ch>, <dakr@kernel.org>,
@@ -71,10 +71,10 @@ CC: <airlied@gmail.com>, <daniel@ffwll.ch>, <dakr@kernel.org>,
  <smitra@nvidia.com>, <ankita@nvidia.com>, <aniketa@nvidia.com>,
  <kwankhede@nvidia.com>, <targupta@nvidia.com>, <zhiw@nvidia.com>,
  <zhiwang@kernel.org>
-Subject: [PATCH v4 10/15] drm/nouveau: refine the variable names in
- r535_gsp_msg_recv()
-Date: Fri, 24 Jan 2025 10:29:53 -0800
-Message-ID: <20250124182958.2040494-11-zhiw@nvidia.com>
+Subject: [PATCH v4 11/15] drm/nouveau: rename the variable "cmd" to "msg" in
+ r535_gsp_cmdq_{get, push}()
+Date: Fri, 24 Jan 2025 10:29:54 -0800
+Message-ID: <20250124182958.2040494-12-zhiw@nvidia.com>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <20250124182958.2040494-1-zhiw@nvidia.com>
 References: <20250124182958.2040494-1-zhiw@nvidia.com>
@@ -84,52 +84,52 @@ Content-Type: text/plain
 X-NV-OnPremToCloud: AnonymousSubmission
 X-EOPAttributedMessage: 0
 X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: DS3PEPF000099D4:EE_|DS7PR12MB5864:EE_
-X-MS-Office365-Filtering-Correlation-Id: e4a489bf-e63d-4127-5a94-08dd3ca539dc
+X-MS-TrafficTypeDiagnostic: SJ1PEPF00002320:EE_|MW6PR12MB8952:EE_
+X-MS-Office365-Filtering-Correlation-Id: 3dc510a8-79e5-490a-45d4-08dd3ca537af
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
 X-Microsoft-Antispam: BCL:0;
  ARA:13230040|82310400026|36860700013|1800799024|376014; 
-X-Microsoft-Antispam-Message-Info: =?us-ascii?Q?AIB7MYmNdxEyYVngJ6fVagbeMwAgDTCgJlHtj+flBpUBl863/+lRYnLza7e2?=
- =?us-ascii?Q?SATDyWy8zgkncITi84TyKrspZrw5qCC7fDrRXkR0SolanE4SQ14rh0ZLwYmK?=
- =?us-ascii?Q?3j60Fov0IuNuQiLpei3D1nB7WVf1+FiONJdCKqhmlWnGuyomCqbPdzG163AY?=
- =?us-ascii?Q?owuq8QaP0zxG6+yWcKfGdzSDy7zjWjoR2w3e6DyUn32n+KWb1CPlU+kHpkKl?=
- =?us-ascii?Q?QOjscDFaRce9pAs65bRXeQtT5GL2IB+zPwAGrI1LOI4G+N4kad/AbfllyFZL?=
- =?us-ascii?Q?6drcrHCMw0PN/kJMfhuVe/kzUs8mP/zTc8udKpoKEuKXPfSBoioLQVALYq1u?=
- =?us-ascii?Q?WptsGEyDuX6rUKb7nDFVmyqj5DfzplrCQTXfkMM02ittsw+hiNnjG6BvHYvu?=
- =?us-ascii?Q?Fj7jZXHPsilhcaxrRGBkAFJw1wRgr8jX4VSsevvqlE03Fs9OILEgs443O7xS?=
- =?us-ascii?Q?9weoRm7nlj+x4mAWOKYLGNRler8OVqClOrFZqcmk1AcsPvac1faZWqsDz0f3?=
- =?us-ascii?Q?YPog69k8qiTYqXkIP9/Xch0UOcfL/6mjLiheoCOzYHkiI62Cid4ZS1iFBr+F?=
- =?us-ascii?Q?oXFgRCPIzRq24l7YF9wqieTtPPEjK9oj8IqZq1Li9D8D4+1QIw72LksbYZY4?=
- =?us-ascii?Q?3hiN0I2LCjYWvqKQRNlLMJk1TsG6A9gGCkn+Ajco1UjLe5TnzlwOzMb6pzgO?=
- =?us-ascii?Q?iApB3MkzVpjvLNP6UpoDE+O8VFT60kLoH49+sMTRYB4ItO78iARcVoC1shCp?=
- =?us-ascii?Q?GjcRLcpJGcjlO9op8fQOQa2dVMuNBmkXY7x0W7+0dGEVrMN/kKkiPBnRIPv9?=
- =?us-ascii?Q?nrQPBwwBkd2ACFBiR7zRTcyUyat6hZ6p/erWOuNiWkrIvb5NipmF+LditsDq?=
- =?us-ascii?Q?NHyMCUWl5WNxbwzct3Q2fiTnPiQSQsFpeVoZ+14yTJyNtaSuPUU/hxYDkVhC?=
- =?us-ascii?Q?BlTx1QglCtt9XqygMnRIozTMSJ7txL5mE61zKCYQAHkpUi2xmOLFgkn87Mp1?=
- =?us-ascii?Q?IR03I+YnMXy1pNHwt6/mIXgpj5g2eai8SSUoocxjMUsXKvRrGgRaoaHm9nbf?=
- =?us-ascii?Q?CDnukttIvh83mQLZjzZzdkQFa7mCeSBlxD1WW1YGxSLmVVKZmfa6IUQIzgOU?=
- =?us-ascii?Q?TY8n9q/rrK04TyydXP3ckuUyBIcYs7TM26zm6oQUrpFcWQaCXgNKBu4zkaTi?=
- =?us-ascii?Q?vAgnGkqGIMB1MJEDbdKqWhp6VudxTk0O6d9SYPrg36BUCzwqmpdB1CGzFdGc?=
- =?us-ascii?Q?6f1qu7Q/sg2efItN+f7biX4FazZnPeSUwtVBfKvZap0A6NaQ/ObfzI6ozi4l?=
- =?us-ascii?Q?E7ziR7NhU0M2UM9+fduVQXYpnu7sDjkdRLTmXX3ofZ3kwKUIxQme8KJayCXp?=
- =?us-ascii?Q?oOTOyiJpmotd++K25gWmT/E5+2z8LHaoK9Jr83eJioU6jqIGr9cLhPNbokAh?=
- =?us-ascii?Q?bDANK0n/IcCDg7GfvENkRcTGCuKDQI8mhxCYT3gsPRShoSbsM5dBKoaS7wtV?=
- =?us-ascii?Q?aeZUqGn8SCL5JQY=3D?=
-X-Forefront-Antispam-Report: CIP:216.228.117.161; CTRY:US; LANG:en; SCL:1; SRV:;
- IPV:NLI; SFV:NSPM; H:mail.nvidia.com; PTR:dc6edge2.nvidia.com; CAT:NONE;
+X-Microsoft-Antispam-Message-Info: =?us-ascii?Q?H0knwMCsZulj5TuGAihpC5ZjJfgYF+LwON8fQi6huueXhCja45bTHNjliEL5?=
+ =?us-ascii?Q?48Xvf8g5t7INcU86HIRZOi9r2bRWF8AblyMTVWh49ecInY6qCOqgO11skHkm?=
+ =?us-ascii?Q?I7xQOsxBtRllNBNnx5dwUkdrd9EOwsRT2BoYrs3OIxIgBFK3Kb7eAljDJTRR?=
+ =?us-ascii?Q?Rz6O0n20XHB5FlRFWjdmXRUB+pO3SF7xt8Qe5vzbLCtAp+2nd8AzF47P3CYc?=
+ =?us-ascii?Q?ZmP6qvksrsLqm03NbOWEKpHVdrqgUOXibPT0cFxaeOhJcQF9ZUFYWmj2Fo48?=
+ =?us-ascii?Q?LLCM5Ag5ZpMgZTuIlibG3VfcrbCNKkYV3EmUdgTkg3TKmzxxiCUhmjPGj2Bn?=
+ =?us-ascii?Q?QDYpqs3w8v64rvDLdz4U07eXFYZu5lVQUf8+AzXgT//hv6Db8TJRLeycsua8?=
+ =?us-ascii?Q?B9TXs0G/GSj2uH4f9W4IRJuRq3eBejqojEGLbbZdn+PE9Gv3/IQOdkyaVHZZ?=
+ =?us-ascii?Q?VVj2OBUuO0Qsj+IPWGp6LIF796h79V3G74GRbYJK8/NLYz2COADMFuEaQGTI?=
+ =?us-ascii?Q?iOO/KLvod41ZfvGzCz7UK2xADYUbSiDj9wAf7+MvnJ7tSyKq8u6oWTcGXX6Z?=
+ =?us-ascii?Q?R4liBwJENr0qzUtVVgua/WXeydNzyxtMkx+IYMHSpJ+Q03+0WDQzMUa8ACQc?=
+ =?us-ascii?Q?147E39/mWsbzUIlwnzc58w23wpQnJ/AJXQoTCFrANMiNX+ZzDYjtUA3jn8lF?=
+ =?us-ascii?Q?JpeH2PuNwhdn3Mc8VjpBgprYgLXK2RxwNLyzSjkzdoBkhm01XZlbQdOGA/n+?=
+ =?us-ascii?Q?FuPL1tCeZc9KrlT1W1r/8aeCfb9oJ/gHMkfG+ZoxMj94O/UPpdt9IPkse//I?=
+ =?us-ascii?Q?KLqwQ2x2mGZq0JtqYV1pLtYN50yMqesBvA7Sl7NkeSgJ3VUsTFBoGWfL4BSi?=
+ =?us-ascii?Q?W6e3Ei69b3kSwTzFtzJ7QgoPrC7jCtuA4/GakyIUFdvUi3UbayW4ii/dVKnm?=
+ =?us-ascii?Q?xUUS4CowhEIE7IS/cZQRpzYZx06nm6VnZ0c9rO97eLlHGRxZZUea4TeoA+eY?=
+ =?us-ascii?Q?TcqjZMrXh24TRzSOAKxvZtcpabg19/KnBuBjT/AIY9mE8bh+oT7/TE9feemb?=
+ =?us-ascii?Q?zbTUqZwBnZcAGPPiyRSGxN4lMmFq7oRotJPseFObA/OqbQr+D0bGVUfJq+Ll?=
+ =?us-ascii?Q?b9z2xz3P5CVesAchkBFh5ZZ4RDGflzy5QRXVZgBN0oEHxgkzjpsfuKGg+zli?=
+ =?us-ascii?Q?2+G8XY/SG4brTDLhH29jiaFmSTKWbzRUOvjhwZiuysQqtCTb8LJIyHL4qGAk?=
+ =?us-ascii?Q?oubighvb1Res2U1pu0joCldPhC1i8xYH41YnVBplQIFDuQVQJDCDKMJAfkuB?=
+ =?us-ascii?Q?d3f4wsMb7HPL2zQF3lRSuWJFASr3i0O0l5atMQ5dI0JfOSZayQVmIC2oWRDj?=
+ =?us-ascii?Q?D26M6VEJBti8XTV91pO04FuXxQmJwhYdwjfHJxzUsArSlU72wkmnvXFn4wSJ?=
+ =?us-ascii?Q?3vzDc+758seamr/B9OBPwxjf+LoQuOfgAe1Nx0Mtwmz0/yAJ60/1dziqOh1X?=
+ =?us-ascii?Q?Ph4cQezSBp6s668=3D?=
+X-Forefront-Antispam-Report: CIP:216.228.117.160; CTRY:US; LANG:en; SCL:1; SRV:;
+ IPV:NLI; SFV:NSPM; H:mail.nvidia.com; PTR:dc6edge1.nvidia.com; CAT:NONE;
  SFS:(13230040)(82310400026)(36860700013)(1800799024)(376014); DIR:OUT;
  SFP:1101; 
 X-OriginatorOrg: Nvidia.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 24 Jan 2025 18:30:49.3085 (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: e4a489bf-e63d-4127-5a94-08dd3ca539dc
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 24 Jan 2025 18:30:45.7670 (UTC)
+X-MS-Exchange-CrossTenant-Network-Message-Id: 3dc510a8-79e5-490a-45d4-08dd3ca537af
 X-MS-Exchange-CrossTenant-Id: 43083d15-7273-40c1-b7db-39efd9ccc17a
-X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=43083d15-7273-40c1-b7db-39efd9ccc17a; Ip=[216.228.117.161];
+X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=43083d15-7273-40c1-b7db-39efd9ccc17a; Ip=[216.228.117.160];
  Helo=[mail.nvidia.com]
-X-MS-Exchange-CrossTenant-AuthSource: DS3PEPF000099D4.namprd04.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthSource: SJ1PEPF00002320.namprd03.prod.outlook.com
 X-MS-Exchange-CrossTenant-AuthAs: Anonymous
 X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: DS7PR12MB5864
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: MW6PR12MB8952
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -144,105 +144,102 @@ List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-The variable "msg" in r535_gsp_msg_recv() actually means the GSP RPC.
-
-Refine the names to align with the terms in the kernel doc.
+Refine the name to align with the terms in the kernel doc.
 
 No functional change is intended.
 
 Signed-off-by: Zhi Wang <zhiw@nvidia.com>
 ---
- .../gpu/drm/nouveau/nvkm/subdev/gsp/r535.c    | 47 ++++++++++---------
- 1 file changed, 24 insertions(+), 23 deletions(-)
+ .../gpu/drm/nouveau/nvkm/subdev/gsp/r535.c    | 32 +++++++++----------
+ 1 file changed, 16 insertions(+), 16 deletions(-)
 
 diff --git a/drivers/gpu/drm/nouveau/nvkm/subdev/gsp/r535.c b/drivers/gpu/drm/nouveau/nvkm/subdev/gsp/r535.c
-index 49dfc1475973..3b1c648aad46 100644
+index 3b1c648aad46..864bacbd0ab9 100644
 --- a/drivers/gpu/drm/nouveau/nvkm/subdev/gsp/r535.c
 +++ b/drivers/gpu/drm/nouveau/nvkm/subdev/gsp/r535.c
-@@ -336,59 +336,60 @@ static struct nvfw_gsp_rpc *
- r535_gsp_msg_recv(struct nvkm_gsp *gsp, int fn, u32 gsp_rpc_len)
+@@ -218,10 +218,10 @@ r535_gsp_msgq_recv(struct nvkm_gsp *gsp, u32 gsp_rpc_len, int *ptime)
+ static int
+ r535_gsp_cmdq_push(struct nvkm_gsp *gsp, void *rpc)
  {
- 	struct nvkm_subdev *subdev = &gsp->subdev;
--	struct nvfw_gsp_rpc *msg;
-+	struct nvfw_gsp_rpc *rpc;
- 	int time = 4000000, i;
- 	u32 size;
+-	struct r535_gsp_msg *cmd = to_gsp_hdr(rpc, cmd);
++	struct r535_gsp_msg *msg = to_gsp_hdr(rpc, msg);
+ 	struct r535_gsp_msg *cqe;
+-	u32 gsp_rpc_len = cmd->checksum;
+-	u64 *ptr = (void *)cmd;
++	u32 gsp_rpc_len = msg->checksum;
++	u64 *ptr = (void *)msg;
+ 	u64 *end;
+ 	u64 csum = 0;
+ 	int free, time = 1000000;
+@@ -231,15 +231,15 @@ r535_gsp_cmdq_push(struct nvkm_gsp *gsp, void *rpc)
+ 	len = ALIGN(GSP_MSG_HDR_SIZE + gsp_rpc_len, GSP_PAGE_SIZE);
  
- retry:
--	msg = r535_gsp_msgq_wait(gsp, sizeof(*msg), &size, &time);
--	if (IS_ERR_OR_NULL(msg))
--		return msg;
-+	rpc = r535_gsp_msgq_wait(gsp, sizeof(*rpc), &size, &time);
-+	if (IS_ERR_OR_NULL(rpc))
-+		return rpc;
+ 	end = (u64 *)((char *)ptr + len);
+-	cmd->pad = 0;
+-	cmd->checksum = 0;
+-	cmd->sequence = gsp->cmdq.seq++;
+-	cmd->elem_count = DIV_ROUND_UP(len, 0x1000);
++	msg->pad = 0;
++	msg->checksum = 0;
++	msg->sequence = gsp->cmdq.seq++;
++	msg->elem_count = DIV_ROUND_UP(len, 0x1000);
  
--	msg = r535_gsp_msgq_recv(gsp, msg->length, &time);
--	if (IS_ERR_OR_NULL(msg))
--		return msg;
-+	rpc = r535_gsp_msgq_recv(gsp, rpc->length, &time);
-+	if (IS_ERR_OR_NULL(rpc))
-+		return rpc;
+ 	while (ptr < end)
+ 		csum ^= *ptr++;
  
--	if (msg->rpc_result) {
--		r535_gsp_msg_dump(gsp, msg, NV_DBG_ERROR);
--		r535_gsp_msg_done(gsp, msg);
-+	if (rpc->rpc_result) {
-+		r535_gsp_msg_dump(gsp, rpc, NV_DBG_ERROR);
-+		r535_gsp_msg_done(gsp, rpc);
- 		return ERR_PTR(-EINVAL);
- 	}
+-	cmd->checksum = upper_32_bits(csum) ^ lower_32_bits(csum);
++	msg->checksum = upper_32_bits(csum) ^ lower_32_bits(csum);
  
--	r535_gsp_msg_dump(gsp, msg, NV_DBG_TRACE);
-+	r535_gsp_msg_dump(gsp, rpc, NV_DBG_TRACE);
+ 	wptr = *gsp->cmdq.wptr;
+ 	do {
+@@ -254,7 +254,7 @@ r535_gsp_cmdq_push(struct nvkm_gsp *gsp, void *rpc)
+ 		} while(--time);
  
--	if (fn && msg->function == fn) {
-+	if (fn && rpc->function == fn) {
- 		if (gsp_rpc_len) {
--			if (msg->length < sizeof(*msg) + gsp_rpc_len) {
--				nvkm_error(subdev, "msg len %d < %zd\n",
--					   msg->length, sizeof(*msg) +
-+			if (rpc->length < sizeof(*rpc) + gsp_rpc_len) {
-+				nvkm_error(subdev, "rpc len %d < %zd\n",
-+					   rpc->length, sizeof(*rpc) +
- 					   gsp_rpc_len);
--				r535_gsp_msg_dump(gsp, msg, NV_DBG_ERROR);
--				r535_gsp_msg_done(gsp, msg);
-+				r535_gsp_msg_dump(gsp, rpc, NV_DBG_ERROR);
-+				r535_gsp_msg_done(gsp, rpc);
- 				return ERR_PTR(-EIO);
- 			}
- 
--			return msg;
-+			return rpc;
+ 		if (WARN_ON(!time)) {
+-			kvfree(cmd);
++			kvfree(msg);
+ 			return -ETIMEDOUT;
  		}
  
--		r535_gsp_msg_done(gsp, msg);
-+		r535_gsp_msg_done(gsp, rpc);
- 		return NULL;
- 	}
+@@ -262,7 +262,7 @@ r535_gsp_cmdq_push(struct nvkm_gsp *gsp, void *rpc)
+ 		step = min_t(u32, free, (gsp->cmdq.cnt - wptr));
+ 		size = min_t(u32, len, step * GSP_PAGE_SIZE);
  
- 	for (i = 0; i < gsp->msgq.ntfy_nr; i++) {
- 		struct nvkm_gsp_msgq_ntfy *ntfy = &gsp->msgq.ntfy[i];
+-		memcpy(cqe, (u8 *)cmd + off, size);
++		memcpy(cqe, (u8 *)msg + off, size);
  
--		if (ntfy->fn == msg->function) {
-+		if (ntfy->fn == rpc->function) {
- 			if (ntfy->func)
--				ntfy->func(ntfy->priv, ntfy->fn, msg->data, msg->length - sizeof(*msg));
-+				ntfy->func(ntfy->priv, ntfy->fn, rpc->data,
-+					   rpc->length - sizeof(*rpc));
- 			break;
- 		}
- 	}
+ 		wptr += DIV_ROUND_UP(size, 0x1000);
+ 		if (wptr == gsp->cmdq.cnt)
+@@ -279,23 +279,23 @@ r535_gsp_cmdq_push(struct nvkm_gsp *gsp, void *rpc)
  
- 	if (i == gsp->msgq.ntfy_nr)
--		r535_gsp_msg_dump(gsp, msg, NV_DBG_WARN);
-+		r535_gsp_msg_dump(gsp, rpc, NV_DBG_WARN);
+ 	nvkm_falcon_wr32(&gsp->falcon, 0xc00, 0x00000000);
  
--	r535_gsp_msg_done(gsp, msg);
-+	r535_gsp_msg_done(gsp, rpc);
- 	if (fn)
- 		goto retry;
+-	kvfree(cmd);
++	kvfree(msg);
+ 	return 0;
+ }
  
+ static void *
+ r535_gsp_cmdq_get(struct nvkm_gsp *gsp, u32 gsp_rpc_len)
+ {
+-	struct r535_gsp_msg *cmd;
++	struct r535_gsp_msg *msg;
+ 	u32 size = GSP_MSG_HDR_SIZE + gsp_rpc_len;
+ 
+ 	size = ALIGN(size, GSP_MSG_MIN_SIZE);
+-	cmd = kvzalloc(size, GFP_KERNEL);
+-	if (!cmd)
++	msg = kvzalloc(size, GFP_KERNEL);
++	if (!msg)
+ 		return ERR_PTR(-ENOMEM);
+ 
+-	cmd->checksum = gsp_rpc_len;
+-	return cmd->data;
++	msg->checksum = gsp_rpc_len;
++	return msg->data;
+ }
+ 
+ struct nvfw_gsp_rpc {
 -- 
 2.34.1
 
