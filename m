@@ -2,70 +2,93 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id 00828A20E9E
-	for <lists+nouveau@lfdr.de>; Tue, 28 Jan 2025 17:32:36 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 42CD2A20F84
+	for <lists+nouveau@lfdr.de>; Tue, 28 Jan 2025 18:21:33 +0100 (CET)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 6284110E6C9;
-	Tue, 28 Jan 2025 16:32:32 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id B718110E0E4;
+	Tue, 28 Jan 2025 17:21:27 +0000 (UTC)
 Authentication-Results: gabe.freedesktop.org;
-	dkim=pass (2048-bit key; unprotected) header.d=intel.com header.i=@intel.com header.b="P+9Wv4LL";
+	dkim=pass (2048-bit key; secure) header.d=ziepe.ca header.i=@ziepe.ca header.b="Arfb5DgB";
 	dkim-atps=neutral
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from mgamail.intel.com (mgamail.intel.com [198.175.65.10])
- by gabe.freedesktop.org (Postfix) with ESMTPS id DAF4D10E6C5;
- Tue, 28 Jan 2025 16:32:30 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
- d=intel.com; i=@intel.com; q=dns/txt; s=Intel;
- t=1738081952; x=1769617952;
- h=message-id:subject:from:to:cc:date:in-reply-to:
- references:content-transfer-encoding:mime-version;
- bh=QmV+7gtGvGbC0D7AD0FZxKqZ+uJvTV+fE2kcgk9KYwM=;
- b=P+9Wv4LLVeIHLm58vR54XJbVSfq1pE3fG0ZY/muvRXDu0GaxkgaSmEKZ
- AZB++9/Gn/JSY4MQajT331tzlxtDLNyoU2Au4r2LoemXYOyHNnqY4wVK1
- lT1XawN/SSb7XN1DW3pG2eEA+BCfQUPBfMPtZfnaq5yBSyg2642mYiIV3
- WHJ5D/hUhQdAvraqRLyHVTM8hfKg3VGTFNrmbTpvGo1A3Rq+4bjsAmkzd
- Tkujn61/S52Sm7amQbrv3u6tt5ovDal6X+a9QDqf+532lGFHg7ZXVcUPg
- 9jQAEfJs1tCYbj4JShdTIKEN0bodYlEUq5qflLuk/6wreolBnVA8FDHo5 w==;
-X-CSE-ConnectionGUID: L5Ez5CunQ+Ghx2weFJI/mA==
-X-CSE-MsgGUID: udGTMuqzTvi4QGFdppxyaA==
-X-IronPort-AV: E=McAfee;i="6700,10204,11329"; a="56000669"
-X-IronPort-AV: E=Sophos;i="6.13,241,1732608000"; d="scan'208";a="56000669"
-Received: from orviesa002.jf.intel.com ([10.64.159.142])
- by orvoesa102.jf.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
- 28 Jan 2025 08:32:31 -0800
-X-CSE-ConnectionGUID: WBIIBAoqTTGl0aER7KaBzg==
-X-CSE-MsgGUID: ZX7aVbzyShGdDSqqUk7gUw==
-X-ExtLoop1: 1
-X-IronPort-AV: E=Sophos;i="6.13,241,1732608000"; d="scan'208";a="139672331"
-Received: from mwiniars-desk2.ger.corp.intel.com (HELO [10.245.246.161])
- ([10.245.246.161])
- by orviesa002-auth.jf.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
- 28 Jan 2025 08:32:26 -0800
-Message-ID: <b78d32e13811ef1fa57b0535749c811f2afb4dcd.camel@linux.intel.com>
+Received: from mail-qv1-f48.google.com (mail-qv1-f48.google.com
+ [209.85.219.48])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id ACA7010E6DF
+ for <nouveau@lists.freedesktop.org>; Tue, 28 Jan 2025 17:21:25 +0000 (UTC)
+Received: by mail-qv1-f48.google.com with SMTP id
+ 6a1803df08f44-6d8e8cb8605so30447116d6.0
+ for <nouveau@lists.freedesktop.org>; Tue, 28 Jan 2025 09:21:25 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=ziepe.ca; s=google; t=1738084884; x=1738689684; darn=lists.freedesktop.org; 
+ h=in-reply-to:content-transfer-encoding:content-disposition
+ :mime-version:references:message-id:subject:cc:to:from:date:from:to
+ :cc:subject:date:message-id:reply-to;
+ bh=WQb9VqqmKpGrKRk3ww/ULOiy6hcfV9wcFh+Cwya87Xc=;
+ b=Arfb5DgBAMrX0nRdBzXD9pLpgjpqxo6fG8KrGPuxj//hfgWj1ooRaFFb8RTuxapdD+
+ QkUHTVwyN8RkT5dCQ5fuPIXLe1FILzuxSFyFnRO1T5p6ie6EEnarWUHIBt7qwl0vBNsi
+ /m0RSvQ8QVW2lWEg0JbU6YiFdEjA0/y6nE6D9pbAiahdCMpGgL+qGdGAMHP61vMMIkNT
+ 2t4DjOr76Ncy1uMeWkhh6aXV/RvC61+Me5q4Mjb/i7uwIPOMaj2O2HnpmZUboJ/135pV
+ dulE52b00pJov+QUOGSbpJeOjIrkLagI+flr8G/A0oFGXQ8NSn5dnxVJeku829hw3DtN
+ sZ0A==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1738084884; x=1738689684;
+ h=in-reply-to:content-transfer-encoding:content-disposition
+ :mime-version:references:message-id:subject:cc:to:from:date
+ :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+ bh=WQb9VqqmKpGrKRk3ww/ULOiy6hcfV9wcFh+Cwya87Xc=;
+ b=BvCiS4Aw/ktHLJXFN+WTJqQrvAwFndELaalNtcW+CUvayxMBjOWJz8FhxsytSb97B4
+ HFRp2ibNgkN4+LPKfzK0p26b4UVHmwhKVZlu3tyATFUaxcC2efw/9Tu6j8SNqVmZTUSi
+ /h44CjhiI1IVC55Xgeays1wDbVvV+WF2JDM7LE0uUHRRj7p5RgwJLgUqj6cz4lif/qXA
+ 0cOiZWG4l+etupLXyNAQivH/8n0nzAX3Z6GN52DMlgJxkPSA2h2hJSEvnv5q4TbtzfhK
+ F43recRCVrSsy5OONPDF/8UArKOLFp7k1Hxz8b6FmqYgFUoJJVi2ulQ0ZwRzuWzO9k9H
+ c+gQ==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCUQRoUDct/qDq4MbwPIyZOq4gcJAXxZR94AK/0rqYv1ke465aOy+Yet3B85KQIsKB7zwzdR0umv@lists.freedesktop.org
+X-Gm-Message-State: AOJu0YwiYfHA/XSWorSbWd37K5ZdEiubxBAWQf0LXFI+lSl2cnbWJuVZ
+ 4eRR1eu17XozU/QUSN4xOnFkUVX9ogHmOa6jyE8Kk2M5Qh57YWcHu+l+r2s7ILU=
+X-Gm-Gg: ASbGnct+wYMs5Z8jMKgdvbdrRuQEo4sQY+v5aGwglG+Vy4bDg3z0QO1XKxVfcitzxrG
+ 9h5xKWP0fGCIHwzt9nHoJwf3goCGs7RDo/tiNiiwwseU0+zZCHaxXa9mcCXNDXSFmJbQpyzJ5HS
+ PQ17GotMTnuzQkUWJoUjW8fAO2WkgoQ39WBukIIXdAM3geiFRPpio6TSki3BRNSPvd6be6x5YV1
+ gn2ylnqSw63yxD1XIaQXx3Ifz4InorsLYQjDpiLEtCYXy6nNfF2aO5fEeRGPUFIr0liDsUW5SSq
+ V8iLrFVCtyo5LvnOB51D3UG+sqPFhUah59R2aKPky8kS3jUmgNzdqghQ1uMQiHLV
+X-Google-Smtp-Source: AGHT+IFAz/5UyS+F0PBK9pFt62lYn0eXOpLs0OowxWjeV7IrxMQsEK70VEddYKwgKGQF4XA2ZTXc8w==
+X-Received: by 2002:a05:6214:260a:b0:6d8:8a60:ef2c with SMTP id
+ 6a1803df08f44-6e1b2140cadmr656249486d6.2.1738084884552; 
+ Tue, 28 Jan 2025 09:21:24 -0800 (PST)
+Received: from ziepe.ca
+ (hlfxns017vw-142-68-128-5.dhcp-dynamic.fibreop.ns.bellaliant.net.
+ [142.68.128.5]) by smtp.gmail.com with ESMTPSA id
+ 6a1803df08f44-6e2057a8ab6sm47105096d6.81.2025.01.28.09.21.23
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Tue, 28 Jan 2025 09:21:24 -0800 (PST)
+Received: from jgg by wakko with local (Exim 4.97)
+ (envelope-from <jgg@ziepe.ca>) id 1tcpH9-00000007f7z-2OLv;
+ Tue, 28 Jan 2025 13:21:23 -0400
+Date: Tue, 28 Jan 2025 13:21:23 -0400
+From: Jason Gunthorpe <jgg@ziepe.ca>
+To: Thomas =?utf-8?Q?Hellstr=C3=B6m?= <thomas.hellstrom@linux.intel.com>
+Cc: Yonatan Maman <ymaman@nvidia.com>, kherbst@redhat.com, lyude@redhat.com,
+ dakr@redhat.com, airlied@gmail.com, simona@ffwll.ch,
+ leon@kernel.org, jglisse@redhat.com, akpm@linux-foundation.org,
+ GalShalom@nvidia.com, dri-devel@lists.freedesktop.org,
+ nouveau@lists.freedesktop.org, linux-kernel@vger.kernel.org,
+ linux-rdma@vger.kernel.org, linux-mm@kvack.org, linux-tegra@vger.kernel.org
 Subject: Re: [RFC 1/5] mm/hmm: HMM API to enable P2P DMA for device private
  pages
-From: Thomas =?ISO-8859-1?Q?Hellstr=F6m?= <thomas.hellstrom@linux.intel.com>
-To: Jason Gunthorpe <jgg@ziepe.ca>
-Cc: Yonatan Maman <ymaman@nvidia.com>, kherbst@redhat.com, lyude@redhat.com,
- dakr@redhat.com, airlied@gmail.com, simona@ffwll.ch, leon@kernel.org, 
- jglisse@redhat.com, akpm@linux-foundation.org, GalShalom@nvidia.com, 
- dri-devel@lists.freedesktop.org, nouveau@lists.freedesktop.org, 
- linux-kernel@vger.kernel.org, linux-rdma@vger.kernel.org,
- linux-mm@kvack.org, 	linux-tegra@vger.kernel.org
-Date: Tue, 28 Jan 2025 17:32:23 +0100
-In-Reply-To: <20250128151610.GC1524382@ziepe.ca>
+Message-ID: <20250128172123.GD1524382@ziepe.ca>
 References: <20241201103659.420677-1-ymaman@nvidia.com>
  <20241201103659.420677-2-ymaman@nvidia.com>
  <7282ac68c47886caa2bc2a2813d41a04adf938e1.camel@linux.intel.com>
  <20250128132034.GA1524382@ziepe.ca>
  <de293a7e9b4c44eab8792b31a4605cc9e93b2bf5.camel@linux.intel.com>
  <20250128151610.GC1524382@ziepe.ca>
-Organization: Intel Sweden AB, Registration Number: 556189-6027
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-User-Agent: Evolution 3.54.3 (3.54.3-1.fc41) 
+ <b78d32e13811ef1fa57b0535749c811f2afb4dcd.camel@linux.intel.com>
 MIME-Version: 1.0
+Content-Type: text/plain; charset=utf-8
+Content-Disposition: inline
+Content-Transfer-Encoding: 8bit
+In-Reply-To: <b78d32e13811ef1fa57b0535749c811f2afb4dcd.camel@linux.intel.com>
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -80,152 +103,64 @@ List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-On Tue, 2025-01-28 at 11:16 -0400, Jason Gunthorpe wrote:
-> On Tue, Jan 28, 2025 at 03:48:54PM +0100, Thomas Hellstr=C3=B6m wrote:
-> > On Tue, 2025-01-28 at 09:20 -0400, Jason Gunthorpe wrote:
-> > > On Tue, Jan 28, 2025 at 09:51:52AM +0100, Thomas Hellstr=C3=B6m wrote=
-:
-> > >=20
-> > > > How would the pgmap device know whether P2P is actually
-> > > > possible
-> > > > without knowing the client device, (like calling
-> > > > pci_p2pdma_distance)
-> > > > and also if looking into access control, whether it is allowed?
-> > >=20
-> > > The DMA API will do this, this happens after this patch is put on
-> > > top
-> > > of Leon's DMA API patches. The mapping operation will fail and it
-> > > will
-> > > likely be fatal to whatever is going on.
-> > > =C2=A0
-> > > get_dma_pfn_for_device() returns a new PFN, but that is not a DMA
-> > > mapped address, it is just a PFN that has another struct page
-> > > under
-> > > it.
-> > >=20
-> > > There is an implicit assumption here that P2P will work and we
-> > > don't
-> > > need a 3rd case to handle non-working P2P..
-> >=20
-> > OK. We will have the case where we want pfnmaps with driver-private
-> > fast interconnects to return "interconnect possible, don't migrate"
-> > whereas possibly other gpus and other devices would return
-> > "interconnect unsuitable, do migrate", so (as I understand it)
-> > something requiring a more flexible interface than this.
->=20
-> I'm not sure this doesn't handle that case?
->=20
-> Here we are talking about having DEVICE_PRIVATE struct page
-> mappings. On a GPU this should represent GPU local memory that is
-> non-coherent with the CPU, and not mapped into the CPU.
->=20
-> This series supports three case:
->=20
-> =C2=A01) pgmap->owner =3D=3D range->dev_private_owner
-> =C2=A0=C2=A0=C2=A0 This is "driver private fast interconnect" in this cas=
-e HMM
-> should
-> =C2=A0=C2=A0=C2=A0 immediately return the page. The calling driver unders=
-tands the
-> =C2=A0=C2=A0=C2=A0 private parts of the pgmap and computes the private in=
-terconnect
-> =C2=A0=C2=A0=C2=A0 address.
->=20
-> =C2=A0=C2=A0=C2=A0 This requires organizing your driver so that all priva=
-te
-> =C2=A0=C2=A0=C2=A0 interconnect has the same pgmap->owner.
+On Tue, Jan 28, 2025 at 05:32:23PM +0100, Thomas Hellström wrote:
+> > This series supports three case:
+> > 
+> >  1) pgmap->owner == range->dev_private_owner
+> >     This is "driver private fast interconnect" in this case HMM
+> > should
+> >     immediately return the page. The calling driver understands the
+> >     private parts of the pgmap and computes the private interconnect
+> >     address.
+> > 
+> >     This requires organizing your driver so that all private
+> >     interconnect has the same pgmap->owner.
+> 
+> Yes, although that makes this map static, since pgmap->owner has to be
+> set at pgmap creation time. and we were during initial discussions
+> looking at something dynamic here. However I think we can probably do
+> with a per-driver owner for now and get back if that's not sufficient.
 
-Yes, although that makes this map static, since pgmap->owner has to be
-set at pgmap creation time. and we were during initial discussions
-looking at something dynamic here. However I think we can probably do
-with a per-driver owner for now and get back if that's not sufficient.
+The pgmap->owner doesn't *have* to fixed, certainly during early boot before
+you hand out any page references it can be changed. I wouldn't be
+surprised if this is useful to some requirements to build up the
+private interconnect topology?
 
->=20
-> =C2=A02) The page is DEVICE_PRIVATE and get_dma_pfn_for_device() exists.
-> =C2=A0=C2=A0=C2=A0 The exporting driver has the option to return a P2P st=
-ruct page
-> =C2=A0=C2=A0=C2=A0 that can be used for PCI P2P without any migration. In=
- a PCI GPU
-> =C2=A0=C2=A0=C2=A0 context this means the GPU has mapped its local memory=
- to a PCI
-> =C2=A0=C2=A0=C2=A0 address. The assumption is that P2P always works and s=
-o this
-> =C2=A0=C2=A0=C2=A0 address can be DMA'd from.
+> >  2) The page is DEVICE_PRIVATE and get_dma_pfn_for_device() exists.
+> >     The exporting driver has the option to return a P2P struct page
+> >     that can be used for PCI P2P without any migration. In a PCI GPU
+> >     context this means the GPU has mapped its local memory to a PCI
+> >     address. The assumption is that P2P always works and so this
+> >     address can be DMA'd from.
+> 
+> So do I understand it correctly, that the driver then needs to set up
+> one device_private struct page and one pcie_p2p struct page for each
+> page of device memory participating in this way?
 
-So do I understand it correctly, that the driver then needs to set up
-one device_private struct page and one pcie_p2p struct page for each
-page of device memory participating in this way?
+Yes, for now. I hope to remove the p2p page eventually.
 
->=20
-> =C2=A03) Migrate back to CPU memory - then eveything works.
->=20
-> Is that not enough? Where do you want something different?
->=20
-> > > > but leaves any dma- mapping or pfn mangling to be done after
-> > > > the
-> > > > call to hmm_range_fault(), since hmm_range_fault() really only
-> > > > needs
-> > > > to know whether it has to migrate to system or not.
-> > >=20
-> > > See above, this is already the case..
-> >=20
-> > Well what I meant was at hmm_range_fault() time only consider
-> > whether
-> > to migrate or not. Afterwards at dma-mapping time you'd expose the
-> > alternative pfns that could be used for dma-mapping.
->=20
-> That sounds like you are talking about multipath, we are not really
-> ready to tackle general multipath yet at the DMA API level, IMHO.
->=20
-> If you are just talking about your private multi-path, then that is
-> already handled..
+> > If you are just talking about your private multi-path, then that is
+> > already handled..
+> 
+> No, the issue I'm having with this is really why would
+> hmm_range_fault() need the new pfn when it could easily be obtained
+> from the device-private pfn by the hmm_range_fault() caller? 
 
-No, the issue I'm having with this is really why would
-hmm_range_fault() need the new pfn when it could easily be obtained
-from the device-private pfn by the hmm_range_fault() caller? The only
-thing hmm_range_fault() needs to know is, again, whether to migrate or
-not. But I guess if the plan is to have hmm_range_fault() call
-pci_p2pdma_distance() on it, and we don't want the exporter to do that,
-it makes sense.
+That isn't the API of HMM, the caller uses hmm to get PFNs it can use.
 
->=20
-> > We were actually looking at a solution where the pagemap implements
-> > something along
-> >=20
-> > bool devmem_allowed(pagemap, client); //for hmm_range_fault
-> >=20
-> > plus dma_map() and dma_unmap() methods.
->=20
-> This sounds like dmabuf philosophy, and I don't think we should go in
-> this direction. The hmm caller should always be responsible for dma
-> mapping and we need to improve the DMA API to make this work better,
-> not build side hacks like this.
->=20
-> You can read my feelings and reasoning on this topic within this huge
-> thread:
->=20
-> https://lore.kernel.org/dri-devel/20250108132358.GP5556@nvidia.com/
->=20
-> > In this way you'd don't need to expose special p2p dma pages and
-> > the
->=20
-> Removing the "special p2p dma pages" has to be done by improving the
-> DMA API to understand how to map phsyical addresses without struct
-> page. We are working toward this, slowly.
+Deliberately returning PFNs the caller cannot use is nonsensical to
+it's purpose :)
 
-> pgmap->ops->dma_map/unmap() ideas just repeat the DMABUF mistake
-> of mis-using the DMA API for P2P cases. Today you cannot correctly
-> DMA
-> map P2P memory without the struct page.
+> So anyway what we'll do is to try to use an interconnect-common owner
+> for now and revisit the problem if that's not sufficient so we can come
+> up with an acceptable solution.
 
-Yeah, I don't want to drag hmm into that discussion, although
-admittedly the idea of pgmap->ops->dma_map/unmap mimics the dma-buf
-behaviour.
+That is the intention for sure. The idea was that the drivers under
+the private pages would somehow generate unique owners for shared
+private interconnect segments.
 
-So anyway what we'll do is to try to use an interconnect-common owner
-for now and revisit the problem if that's not sufficient so we can come
-up with an acceptable solution.
+I wouldn't say this is the end all of the idea, if there are better
+ways to handle accepting private pages they can certainly be
+explored..
 
-
-/Thomas
-
+Jason
