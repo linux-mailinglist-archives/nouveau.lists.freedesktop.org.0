@@ -2,54 +2,142 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id 26420A1C903
-	for <lists+nouveau@lfdr.de>; Sun, 26 Jan 2025 15:55:11 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 28259A2025C
+	for <lists+nouveau@lfdr.de>; Tue, 28 Jan 2025 01:09:47 +0100 (CET)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id CA73710E3DA;
-	Sun, 26 Jan 2025 14:55:09 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id CE1E010E21C;
+	Tue, 28 Jan 2025 00:09:44 +0000 (UTC)
 Authentication-Results: gabe.freedesktop.org;
-	dkim=pass (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="fk/Ieui9";
+	dkim=pass (2048-bit key; unprotected) header.d=Nvidia.com header.i=@Nvidia.com header.b="Ja2C4mlC";
 	dkim-atps=neutral
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from dfw.source.kernel.org (dfw.source.kernel.org [139.178.84.217])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 07FD110E3DA;
- Sun, 26 Jan 2025 14:55:05 +0000 (UTC)
-Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by dfw.source.kernel.org (Postfix) with ESMTP id 4D4085C6042;
- Sun, 26 Jan 2025 14:54:24 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 98E44C4CEE3;
- Sun, 26 Jan 2025 14:55:02 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1737903304;
- bh=VTjyeorcOf1FzOSgX8zSDbNAezYw1KGyicj9ZOjba9w=;
- h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
- b=fk/Ieui9VE9tMeC78yDGPCOiL3LNszDoQErrM0L8DgOVUFEvKm4hgC6KTM2PwMXxI
- OUqhf6xNSrQ/p/m4JWoZfY8Y8ZGUukYsDeuwYt7NAcVEiNMVj9EDkhG6TSsZeCgtnl
- 3A1fX9Yq6jSJkO/r0IlfNnqnwRklkBR+FUo53mq5lw27i2JB4KxJM0w+1V+9gtfiib
- gSQtLInCwSG4GDqzt1rXgZ3yRxaMQ7H6GcBs8jCE+zjdDxkv1/Qfl1Geedl2jXzMB9
- b4Ri/ULpgnYIfsmqF1jaHKgfj80zq/gmbgFZJopx1WisHf4t72tDuZf1gNh1HRg6wT
- JlWkEjIb27n1g==
-From: Sasha Levin <sashal@kernel.org>
-To: linux-kernel@vger.kernel.org,
-	stable@vger.kernel.org
-Cc: Zhi Wang <zhiw@nvidia.com>, Danilo Krummrich <dakr@kernel.org>,
- Sasha Levin <sashal@kernel.org>, kherbst@redhat.com, lyude@redhat.com,
- airlied@gmail.com, simona@ffwll.ch, ttabi@nvidia.com, airlied@redhat.com,
- kees@kernel.org, sidpranjale127@protonmail.com,
- dri-devel@lists.freedesktop.org, nouveau@lists.freedesktop.org
-Subject: [PATCH AUTOSEL 6.12 06/31] nvkm: correctly calculate the available
- space of the GSP cmdq buffer
-Date: Sun, 26 Jan 2025 09:54:22 -0500
-Message-Id: <20250126145448.930220-6-sashal@kernel.org>
-X-Mailer: git-send-email 2.39.5
-In-Reply-To: <20250126145448.930220-1-sashal@kernel.org>
-References: <20250126145448.930220-1-sashal@kernel.org>
+Received: from NAM10-DM6-obe.outbound.protection.outlook.com
+ (mail-dm6nam10on2060.outbound.protection.outlook.com [40.107.93.60])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 3E60810E21C;
+ Tue, 28 Jan 2025 00:09:43 +0000 (UTC)
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=cjRkTXeo5pnv+R2u/HrXO7v6BypLy9KKCGGbRfC4wSYkPbM1gvKGZaWYSdSlrSCafl2gbFc6ikUWbA8uNJUQivu+4mS6lMwDR7n/sqiAf+FBgTthTS86nT+RRL8NhGt+c2eOwc8X+p/ZZjkBy9asRU5Q25hsdFn7OjGyL7tVkznDMsvFLbCxIIZepGrivILVGCnjDZlJIzpQAn3hiyyjPW9LMA0K6MCLrgRZr9LRhX3/OZvYYGlhVo2QDvGp41t2H8xnHgkEu2PGlPVlhbUw4rfzUT0MGwBqkUtbpsdQkWFOKNN97PaA140fvgFCNzTroe/KKpFk1XKNIPsD0Wa8SA==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=maOOL1QAxSm7yyhdSn7WuPHHrWf7Vc6twKcDfL5uOLY=;
+ b=J1Z5FTC2X6Nt2u15MQB3hscapq5F+jvO03StxhFZljDJVo2nM42sTD+0Bif/S1A4Ii0iil2sPUH5+cJ53pOrz2f+gs1MDggwmdNmWHzRfgSyeksMGiBMK/UMxrc74qJmdBCpKVbur1b/j7RiS564knnU8Aq94f41ZjMFrYnPpLQSJLE7cc+IDLnDzS9Sm3+uNUgcc0ccgU7Ge5tsHtgfAu3MH/l0LZcPZeXzosn4Ef5cYJvVDRpIe3geYYY092HBBGON49ukfBbaoc/vRDJ0T7/arG0dTwdX5hSzF8YBZONrIXGH4AtI9QqZstTajacclsxkpnv/kcVOOAefFD86/A==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=nvidia.com; dmarc=pass action=none header.from=nvidia.com;
+ dkim=pass header.d=nvidia.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=Nvidia.com;
+ s=selector2;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=maOOL1QAxSm7yyhdSn7WuPHHrWf7Vc6twKcDfL5uOLY=;
+ b=Ja2C4mlCgXSsuRsgvjt2VlgZs5wxqgIlGqz/3O+Xy3Ar6KGeZuBBe+isnBmqtlf7T2ftjGBdkTtTvFJOMgx8im3ShHMsPO+0g9WbkiQCs8WC9SX5Nlh/7ex8w1znm/aXGl/zZjtJjyYFxg5WF2g3PEaGimm7gTOcI+YKbUMGaan5aRRaQAMiZRmKZGPf6hrzY4W7OF3v+fq+60PhTXrT+tpvaqAqvwJhXL4/No3ZAAFWFPFIFUxWTThTDVgHtn7NIJyIIsHmFlSNi1hldrOvQOPSApQ9PmPQRx5jKfVOfVhhsAnUSVGLcXSqxdZVs5XPSzQOsHP8P/9f+djv5sHOQQ==
+Authentication-Results: dkim=none (message not signed)
+ header.d=none;dmarc=none action=none header.from=nvidia.com;
+Received: from DS0PR12MB7726.namprd12.prod.outlook.com (2603:10b6:8:130::6) by
+ IA1PR12MB8221.namprd12.prod.outlook.com (2603:10b6:208:3f0::19) with
+ Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.8377.22; Tue, 28 Jan
+ 2025 00:09:40 +0000
+Received: from DS0PR12MB7726.namprd12.prod.outlook.com
+ ([fe80::953f:2f80:90c5:67fe]) by DS0PR12MB7726.namprd12.prod.outlook.com
+ ([fe80::953f:2f80:90c5:67fe%7]) with mapi id 15.20.8377.009; Tue, 28 Jan 2025
+ 00:09:40 +0000
+Date: Tue, 28 Jan 2025 11:09:24 +1100
+From: Alistair Popple <apopple@nvidia.com>
+To: David Hildenbrand <david@redhat.com>
+Cc: "linux-mm@kvack.org" <linux-mm@kvack.org>, 
+ John Hubbard <jhubbard@nvidia.com>, nouveau@lists.freedesktop.org,
+ Jason Gunthorpe <jgg@nvidia.com>, 
+ DRI Development <dri-devel@lists.freedesktop.org>,
+ Karol Herbst <kherbst@redhat.com>, Lyude Paul <lyude@redhat.com>, 
+ Danilo Krummrich <dakr@kernel.org>
+Subject: Re: [Question] Are "device exclusive non-swap entries" / "SVM
+ atomics in Nouveau" still getting used in practice?
+Message-ID: <fbwjse2zexcsxuro5w3a5vs2rq4eabpccfkbd3buc4qmkgoo7z@xpdtyukllzvo>
+References: <346518a4-a090-4eaa-bc04-634388fd4ca3@redhat.com>
+ <Z5JbYC2-slPU0l3n@phenom.ffwll.local>
+ <8c6f3838-f194-4a42-845d-10011192a234@redhat.com>
+ <Z5OxuGMGT-OvMy5P@phenom.ffwll.local>
+ <f2f059a3-0c95-44cf-b79a-8c01e9334919@redhat.com>
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <f2f059a3-0c95-44cf-b79a-8c01e9334919@redhat.com>
+X-ClientProxiedBy: SY5P282CA0086.AUSP282.PROD.OUTLOOK.COM
+ (2603:10c6:10:201::7) To DS0PR12MB7726.namprd12.prod.outlook.com
+ (2603:10b6:8:130::6)
 MIME-Version: 1.0
-X-stable: review
-X-Patchwork-Hint: Ignore
-X-stable-base: Linux 6.12.11
-Content-Transfer-Encoding: quoted-printable
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: DS0PR12MB7726:EE_|IA1PR12MB8221:EE_
+X-MS-Office365-Filtering-Correlation-Id: fb5a6f37-495c-4500-ca55-08dd3f300ee7
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: BCL:0;ARA:13230040|1800799024|366016|376014|27256017;
+X-Microsoft-Antispam-Message-Info: =?us-ascii?Q?l8LvocHzWzVucGkK3RVpFuAJKcyseEWGPsTIOp8plteqWI/klGIvybTUf6xZ?=
+ =?us-ascii?Q?d888Sy6170NbEuqohRqIaZOrQnMEvobtc/0Tj58EK9a415QwYQiqhZP6PBb5?=
+ =?us-ascii?Q?cJG04nwSMSvGEiu+DbOPACf6xQLwyo3T8RtEcZGtQiW/eZbSQrQpWtTIvkzj?=
+ =?us-ascii?Q?R/ot0//PMwfh171Zaz/AlipX9IkkDglw0PzS+nvP6/gCYuKP/zAm+tzG2H5O?=
+ =?us-ascii?Q?vkEbcZzLqZDyNsvvMoTnDv8Q1OftfMvVLkh4eUlCLldO8N3IxGBkYroARZ9z?=
+ =?us-ascii?Q?UiCl7Lh7QLigzGnZwdTOG6l7vZffVUg/Oqo9YNhE6M16Rk/Fq8zzM53Aa/Gz?=
+ =?us-ascii?Q?XxDSo2VtmNM6m9RF0I9uEifSrYOTXJhAD1JK9ISOSUMPFPdnrts7gOBtf8I3?=
+ =?us-ascii?Q?D9Y9nzymAl4jv/14hC47NMI0lI6Hmx1d/2Z5c+rH1dsek0cQMfVnCHR/IU5M?=
+ =?us-ascii?Q?1xKBCpKuMUo40cQ8TTTkhLQr6vcSCD2i7LjG21Om0dcgye2QsKDHr+oT61OI?=
+ =?us-ascii?Q?mU4znGqq8ThwxRLlbC8lJO/unke2VC5sAL0ASXYs3mcZUny9yX9R5W4ZPycQ?=
+ =?us-ascii?Q?9TaDSqJmn3ANcYzAyInCBwHCOm2J9GP57pzY5tFOQwIJWqqQtrtFgWN6r20r?=
+ =?us-ascii?Q?fAkbI145ls3DZ4cPsAvG+H8fXdy3ChIXNOgcW+lxjoRVNrQAB/eu6smdFHs/?=
+ =?us-ascii?Q?osYHq1GmdBSJ67e+qANiJs8e1eA36otMMNIDQXyD55I1wuTJAPPTwLGU3/VT?=
+ =?us-ascii?Q?OXRbAVnnXitpUUINGdoFaJochN80Rtm0TFeNrOip+33liKvSCBGZ8/Ny4Ke+?=
+ =?us-ascii?Q?gW8wLABgkYB0JcmzBcKoIOW9EXyJ8yeQ/M8r1H9J3Svu1/8bVO6XK0mFFxS8?=
+ =?us-ascii?Q?QWf4oRfbX7RllkcQatYOQIOACPk6rmmWu3Ah16VA9GcL3R11Mxu6+udfnGBi?=
+ =?us-ascii?Q?kH6y6V0MuMl4836iCiTCxQv0nyq2xUtxZChPLs9EVovxTOkltYqKkBxNMIIo?=
+ =?us-ascii?Q?AKpPh0kWxmnkSADB9OzYWTfwXtxdvbC4z5BwKHE7RL6Dero9FzQvNRCIoNK9?=
+ =?us-ascii?Q?jAfKwrN/Mgo6qF8Tv1OUxE2+UNefRE4zIHx+wVJ2GShLzODpghfUnOjJobxB?=
+ =?us-ascii?Q?/QF6DUpbOFJzTyiDlPeblKp78NIJrWtWR/SpoXM1LHcZS+WYWkzVUllJVlOA?=
+ =?us-ascii?Q?f2jxdOsVoQYJbheFAdMM/bMh/SYKoZzsFbVvW/FrrTo6nOjmLBhxtxgBij5B?=
+ =?us-ascii?Q?juig+GLSypTi5eOHl5NnswtsviXPYQ9rZkiQXRoaK2gTfBjP1swDIqIXujJQ?=
+ =?us-ascii?Q?O1+qKdKUA12/exs1daWJdbI1b4XzH3fGE9ErR8y8dYUMt3cpw6Oc9ZB6F538?=
+ =?us-ascii?Q?U0ZN2LsKXybK3RZZyQnlGvEu+hLXUXgLniliJcF1RatcrmCCiq7mg+lnrVCN?=
+ =?us-ascii?Q?6/52reZioSKpk5UPhD2aNUOpF0plUID1?=
+X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
+ IPV:NLI; SFV:NSPM; H:DS0PR12MB7726.namprd12.prod.outlook.com; PTR:; CAT:NONE;
+ SFS:(13230040)(1800799024)(366016)(376014)(27256017); DIR:OUT; SFP:1101; 
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0: =?us-ascii?Q?uOKaeuDl/IvASdnsHNEyWMvoj4+ZMxSC6gPswbKQr4B7xgQ/8+zLtowedWVo?=
+ =?us-ascii?Q?OPb8nJhmLIOMbgC8McTSlW8gynLK+SxSUHictmHmSDVLvN487wv0CZWDX3Qp?=
+ =?us-ascii?Q?7+FrDpezytsPKKL/o2dayuYLjgqonESOi2Q01BCZqtcrI9I9/KBZiuCmtNVE?=
+ =?us-ascii?Q?xpAU/0Vti3Lhij5fTvNAIwwUxW9QoaO4/qQcs9DjuDqSgbqUsSOkxUERMs9t?=
+ =?us-ascii?Q?vS0kKw4DUJm3hnjKqQlmA9O4VZW0E6tsD4QWWRxkKJNKq9+dzptrAMQzZxTU?=
+ =?us-ascii?Q?ZxsO/3+TB73doqtzu2yop/o1t++slBZSPifHIeorCIad4DNz+2NxzxaEG0ED?=
+ =?us-ascii?Q?abv2hpG6w91EcbINV+1gpX3mdntNOYvsU4c+w++ZXyZfo1KI5IQ27frw+Yx6?=
+ =?us-ascii?Q?v8SM601s44ciEIoa0AjKUsuZ8sfwvuaQ6+3LhBQifT3xia4aI5lfTOBbm+Dc?=
+ =?us-ascii?Q?nAfETVwwrcAPN7lSTJ+TFfif1/Y5/sdepyhzlmMl8O1Go2fm7aia4gL7HBIz?=
+ =?us-ascii?Q?d2j2LNtcmZbPJfnh7V4i8YtggiwYdyCJm2QmM0weE65B6MFFQSzCzWRG6skM?=
+ =?us-ascii?Q?9lg57N6GOmzzvk2Se4wwr1owqRV+yiKvcMy1McJZwqR5siOvpfPx5xT11Eot?=
+ =?us-ascii?Q?WacIIwmMTvWmX2Jolqdfo3qIWAGggTc/knDfhbr/1azq2sqUjRYAfd5Erf7y?=
+ =?us-ascii?Q?97r8IMcPMkqeZxlIHSPlazWzoLIJXQ/uoN+NepABSgB2jKcG1dDlPQbpLW8h?=
+ =?us-ascii?Q?2HHWPx+3OPALco3t85HA7Bg3xbLC/GvzGZedWq63ISd2GkRjtbLcGDcFdqvh?=
+ =?us-ascii?Q?p14w7RtWE1gO+JTPczJ3yvXbtqESOP/lIwgMf2b3atsuCCoNzD9jP7avfalB?=
+ =?us-ascii?Q?jwvzr3+xBmvgYRhdpRKrQb8CMGEd03JPjQ7d6TQIXGNvKkDC3sHpEs0lVABg?=
+ =?us-ascii?Q?QGI36r7TX5972feDMP5/DCaV7xeM3T7dlq41cqKSkjgwTe8QIxQcLcEPik3H?=
+ =?us-ascii?Q?uZAJT6emMX5nmxbKyxMRlU/HM2UiwOEKtnLVms+ddARQTYfTPJ+Yp1ZLK90J?=
+ =?us-ascii?Q?RtyvTycJv63LoGIE1R+yd0dZ3Ila9zqxGxXt4KN4HqkWgCAF2X20PmSFeMIy?=
+ =?us-ascii?Q?5VwUikmpi+CdhbLVkuP2PlRt9hkICwxBQirqj6ehK+mNChVfRh+P1WRGr9/s?=
+ =?us-ascii?Q?MP+AmRTp1uHNBuS0yAIfnHvuErVKbimNViYc29PZAlDOLxZjm79RZ2IERJcY?=
+ =?us-ascii?Q?XCTCn+2xsJgKWwqX5d70diQLBOH+wix/Hp9AhSQ2OarLDsLFgJhmqs0AyG0O?=
+ =?us-ascii?Q?ZRZzeYbGGXS1o+0JdYtHrHdpjgNSb1m1TUfKMOql16MHMgv1dbABeHf+bBcL?=
+ =?us-ascii?Q?+U+i+G0Gdfo9ellump0xbIGPzeAn4LLimNr49JpDaOxayk9PO6sxHA+96Bzf?=
+ =?us-ascii?Q?xRRmSDII3NWbk79RM6wuyJcgQSugU1Nte3XUjOATDPmQ1/LnAwxSwxGdFKim?=
+ =?us-ascii?Q?dLWDtkeRmC62+bY9Z3FRAgAEy90Cv+8Gq9cYuKpRrjaAJPwIsFN2QXvpWWiw?=
+ =?us-ascii?Q?bkezw6SjCIm39ZjGftabLY6TyII01wWp/M3Lb32h?=
+X-OriginatorOrg: Nvidia.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: fb5a6f37-495c-4500-ca55-08dd3f300ee7
+X-MS-Exchange-CrossTenant-AuthSource: DS0PR12MB7726.namprd12.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 28 Jan 2025 00:09:40.1240 (UTC)
+X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
+X-MS-Exchange-CrossTenant-Id: 43083d15-7273-40c1-b7db-39efd9ccc17a
+X-MS-Exchange-CrossTenant-MailboxType: HOSTED
+X-MS-Exchange-CrossTenant-UserPrincipalName: EiL2pjvH2zWdGrF8LUu7733e9gQzIy/a7gVOfRHCmpyrBe74WEI54JlY7anHBwTEtoXgGv8rcY87gDmrs0DiqA==
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: IA1PR12MB8221
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -64,135 +152,107 @@ List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-From: Zhi Wang <zhiw@nvidia.com>
+On Fri, Jan 24, 2025 at 06:54:02PM +0100, David Hildenbrand wrote:
+> > > > On integrated the gpu is tied into the coherency
+> > > > fabric, so there it's not needed.
+> > > > 
+> > > > I think the more fundamental question with both this function here and
+> > > > with forced migration to device memory is that there's no guarantee it
+> > > > will work out.
+> > > 
+> > > Yes, in particular with device-exclusive, it doesn't really work with THP
+> > > and is only limited to anonymous memory. I have patches to at least make it
+> > > work reliably with THP.
+> > 
+> > I should have crawled through the implementation first before replying.
+> > Since it only looks at folio_mapcount() make_device_exclusive() should at
+> > least in theory work reliably on anon memory, and not be impacted by
+> > elevated refcounts due to migration/ksm/thp/whatever.
+> 
+> Yes, there is -- in theory -- nothing blocking the conversion except the
+> folio lock. That's different than page migration.
 
-[ Upstream commit 01ed662bdd6fce4f59c1804b334610d710d79fa0 ]
+Indeed - this was the entire motivation for make_device_exclusive() - that we
+needed a way to reliably exclude CPU access that couldn't be blocked in the same
+way page migration can (otherwise we could have just migrated to a device page,
+even if that may have added unwanted overhead).
+> [...]
+> 
+> > 
+> > > Then, we seem to give up too easily if we cannot lock the folio when wanting
+> > > to convert to device-exclusive, which also looks rather odd. But well, maybe
+> > > it just works good enough in the common case, or there is some other retry
+> > > logic that makes it fly.
+> > 
+> > I've crawled through the path to migrate pages from device memory back to
+> > system memory a few months ago, and found some livelock issues in there.
+> > Wouldn't be surprised if m_d_e has some of the same, but I didn't dig
+> > through it (least because intel can't use it because not-so-great hw
+> > design).
+> 
+> Yes, that might be possible. Maybe something keeps spinning while the folio
+> is locked instead of properly waiting for the lock.
+> 
+> ... or someone is trying to convert a tail page of a THP, in which case we
+> will also keep failing the conversion right now.
+>
+> > > There are other concerns I have (what if the page is pinned and access
+> > > outside of the user space page tables?). Maybe there was not need to handle
+> > > these cases so far.
+> > 
+> > I think that's also ok, but might be good to document this clearly that
+> > concurrent direct i/o or rdma registered buffer or whatever will mess with
+> > this. The promise is only between the gpu and the cpu, not anything else,
+> > in current apis. At least to my knowledge.
 
-r535_gsp_cmdq_push() waits for the available page in the GSP cmdq
-buffer when handling a large RPC request. When it sees at least one
-available page in the cmdq, it quits the waiting with the amount of
-free buffer pages in the queue.
+That is correct - we never came up with a good solution for direct i/o or
+rdma so the promise is only between cpu and gpu. That said direct i/o probably
+implies a shared filebacked mapping. We weren't convinced there was a useful use
+case there because anything could potentially map a file and use non-atomic CPU
+instructions to access shared the shared mapping anyway.
 
-Unfortunately, it always takes the [write pointer, buf_size) as
-available buffer pages before rolling back and wrongly calculates the
-size of the data should be copied. Thus, it can overwrite the RPC
-request that GSP is currently reading, which causes GSP hang due
-to corrupted RPC request:
+> Well, the issue is that e.g., iouring fixed buffers can be accessed from the
+> CPU using the direct map from the CPU, not necessarily using DMA from a
+> device.
 
-[  549.209389] ------------[ cut here ]------------
-[  549.214010] WARNING: CPU: 8 PID: 6314 at drivers/gpu/drm/nouveau/nvkm/su=
-bdev/gsp/r535.c:116 r535_gsp_msgq_wait+0xd0/0x190 [nvkm]
-[  549.225678] Modules linked in: nvkm(E+) gsp_log(E) snd_seq_dummy(E) snd_=
-hrtimer(E) snd_seq(E) snd_timer(E) snd_seq_device(E) snd(E) soundcore(E) rf=
-kill(E) qrtr(E) vfat(E) fat(E) ipmi_ssif(E) amd_atl(E) intel_rapl_msr(E) in=
-tel_rapl_common(E) mlx5_ib(E) amd64_edac(E) edac_mce_amd(E) kvm_amd(E) ib_u=
-verbs(E) kvm(E) ib_core(E) acpi_ipmi(E) ipmi_si(E) mxm_wmi(E) ipmi_devintf(=
-E) rapl(E) i2c_piix4(E) wmi_bmof(E) joydev(E) ptdma(E) acpi_cpufreq(E) k10t=
-emp(E) pcspkr(E) ipmi_msghandler(E) xfs(E) libcrc32c(E) ast(E) i2c_algo_bit=
-(E) crct10dif_pclmul(E) drm_shmem_helper(E) nvme_tcp(E) crc32_pclmul(E) ahc=
-i(E) drm_kms_helper(E) libahci(E) nvme_fabrics(E) crc32c_intel(E) nvme(E) c=
-dc_ether(E) mlx5_core(E) nvme_core(E) usbnet(E) drm(E) libata(E) ccp(E) gha=
-sh_clmulni_intel(E) mii(E) t10_pi(E) mlxfw(E) sp5100_tco(E) psample(E) pci_=
-hyperv_intf(E) wmi(E) dm_multipath(E) sunrpc(E) dm_mirror(E) dm_region_hash=
-(E) dm_log(E) dm_mod(E) be2iscsi(E) bnx2i(E) cnic(E) uio(E) cxgb4i(E) cxgb4=
-(E) tls(E) libcxgbi(E) libcxgb(E) qla4xxx(E)
-[  549.225752]  iscsi_boot_sysfs(E) iscsi_tcp(E) libiscsi_tcp(E) libiscsi(E=
-) scsi_transport_iscsi(E) fuse(E) [last unloaded: gsp_log(E)]
-[  549.326293] CPU: 8 PID: 6314 Comm: insmod Tainted: G            E      6=
-.9.0-rc6+ #1
-[  549.334039] Hardware name: ASRockRack 1U1G-MILAN/N/ROMED8-NL, BIOS L3.12=
-E 09/06/2022
-[  549.341781] RIP: 0010:r535_gsp_msgq_wait+0xd0/0x190 [nvkm]
-[  549.347343] Code: 08 00 00 89 da c1 e2 0c 48 8d ac 11 00 10 00 00 48 8b =
-0c 24 48 85 c9 74 1f c1 e0 0c 4c 8d 6d 30 83 e8 30 89 01 e9 68 ff ff ff <0f=
-> 0b 49 c7 c5 92 ff ff ff e9 5a ff ff ff ba ff ff ff ff be c0 0c
-[  549.366090] RSP: 0018:ffffacbccaaeb7d0 EFLAGS: 00010246
-[  549.371315] RAX: 0000000000000000 RBX: 0000000000000012 RCX: 00000000009=
-23e28
-[  549.378451] RDX: 0000000000000000 RSI: 0000000055555554 RDI: ffffacbccaa=
-eb730
-[  549.385590] RBP: 0000000000000001 R08: ffff8bd14d235f70 R09: ffff8bd14d2=
-35f70
-[  549.392721] R10: 0000000000000002 R11: ffff8bd14d233864 R12: 00000000000=
-00020
-[  549.399854] R13: ffffacbccaaeb818 R14: 0000000000000020 R15: ffff8bb298c=
-67000
-[  549.406988] FS:  00007f5179244740(0000) GS:ffff8bd14d200000(0000) knlGS:=
-0000000000000000
-[  549.415076] CS:  0010 DS: 0000 ES: 0000 CR0: 0000000080050033
-[  549.420829] CR2: 00007fa844000010 CR3: 00000001567dc005 CR4: 00000000007=
-70ef0
-[  549.427963] PKRU: 55555554
-[  549.430672] Call Trace:
-[  549.433126]  <TASK>
-[  549.435233]  ? __warn+0x7f/0x130
-[  549.438473]  ? r535_gsp_msgq_wait+0xd0/0x190 [nvkm]
-[  549.443426]  ? report_bug+0x18a/0x1a0
-[  549.447098]  ? handle_bug+0x3c/0x70
-[  549.450589]  ? exc_invalid_op+0x14/0x70
-[  549.454430]  ? asm_exc_invalid_op+0x16/0x20
-[  549.458619]  ? r535_gsp_msgq_wait+0xd0/0x190 [nvkm]
-[  549.463565]  r535_gsp_msg_recv+0x46/0x230 [nvkm]
-[  549.468257]  r535_gsp_rpc_push+0x106/0x160 [nvkm]
-[  549.473033]  r535_gsp_rpc_rm_ctrl_push+0x40/0x130 [nvkm]
-[  549.478422]  nvidia_grid_init_vgpu_types+0xbc/0xe0 [nvkm]
-[  549.483899]  nvidia_grid_init+0xb1/0xd0 [nvkm]
-[  549.488420]  ? srso_alias_return_thunk+0x5/0xfbef5
-[  549.493213]  nvkm_device_pci_probe+0x305/0x420 [nvkm]
-[  549.498338]  local_pci_probe+0x46/0xa0
-[  549.502096]  pci_call_probe+0x56/0x170
-[  549.505851]  pci_device_probe+0x79/0xf0
-[  549.509690]  ? driver_sysfs_add+0x59/0xc0
-[  549.513702]  really_probe+0xd9/0x380
-[  549.517282]  __driver_probe_device+0x78/0x150
-[  549.521640]  driver_probe_device+0x1e/0x90
-[  549.525746]  __driver_attach+0xd2/0x1c0
-[  549.529594]  ? __pfx___driver_attach+0x10/0x10
-[  549.534045]  bus_for_each_dev+0x78/0xd0
-[  549.537893]  bus_add_driver+0x112/0x210
-[  549.541750]  driver_register+0x5c/0x120
-[  549.545596]  ? __pfx_nvkm_init+0x10/0x10 [nvkm]
-[  549.550224]  do_one_initcall+0x44/0x300
-[  549.554063]  ? do_init_module+0x23/0x240
-[  549.557989]  do_init_module+0x64/0x240
+Right. This was all targetted at private anonymous memory and it's assumed that
+both cpu and gpu are using atomic operations. As soon as you're talking shared
+non-anonymous mappings it seems impossible for userspace to guarantee nothing
+is accessing that memory with non-atomic ops anyway, even with a coherent
+interconnect.
 
-Calculate the available buffer page before rolling back based on
-the result from the waiting.
+> In any case, I'm planning on adding some code-level documentation for that
+> and look into extending the high-level doc while at it.
 
-Signed-off-by: Zhi Wang <zhiw@nvidia.com>
-Signed-off-by: Danilo Krummrich <dakr@kernel.org>
-Link: https://patchwork.freedesktop.org/patch/msgid/20241017071922.2518724-=
-3-zhiw@nvidia.com
-Signed-off-by: Sasha Levin <sashal@kernel.org>
----
- drivers/gpu/drm/nouveau/nvkm/subdev/gsp/r535.c | 6 ++++--
- 1 file changed, 4 insertions(+), 2 deletions(-)
+Thanks! Please CC me in.
+ 
+> > 
+> > > So best I can do is make anonymous memory more reliable with
+> > > device-exclusive and fixup some of the problematic parts that I see (e.g.,
+> > > broken page reclaim, page migration, ...).
+> > > 
+> > > But before starting to cleanup+improve the existing handling of anonymous
+> > > memory, I was wondering if this whole thing is getting used at all.
+> > 
+> > Yeah if this can be made reliable (under the limitation of only anon
+> > memory and only excluding userspace access) then I expect we'll need this
+> > for a very long time. I just had no idea whether even that is possible.
+> > 
+> > What isn't good is if it's only mostly reliable, like the current
+> > pgmap->ops->migrate_to_ram() path in do_swap_page() still is.
 
-diff --git a/drivers/gpu/drm/nouveau/nvkm/subdev/gsp/r535.c b/drivers/gpu/d=
-rm/nouveau/nvkm/subdev/gsp/r535.c
-index bd4b5d6a7bd36..9c83bab0a5309 100644
---- a/drivers/gpu/drm/nouveau/nvkm/subdev/gsp/r535.c
-+++ b/drivers/gpu/drm/nouveau/nvkm/subdev/gsp/r535.c
-@@ -161,7 +161,7 @@ r535_gsp_cmdq_push(struct nvkm_gsp *gsp, void *argv)
- 	u64 *end;
- 	u64 csum =3D 0;
- 	int free, time =3D 1000000;
--	u32 wptr, size;
-+	u32 wptr, size, step;
- 	u32 off =3D 0;
-=20
- 	argc =3D ALIGN(GSP_MSG_HDR_SIZE + argc, GSP_PAGE_SIZE);
-@@ -195,7 +195,9 @@ r535_gsp_cmdq_push(struct nvkm_gsp *gsp, void *argv)
- 		}
-=20
- 		cqe =3D (void *)((u8 *)gsp->shm.cmdq.ptr + 0x1000 + wptr * 0x1000);
--		size =3D min_t(u32, argc, (gsp->cmdq.cnt - wptr) * GSP_PAGE_SIZE);
-+		step =3D min_t(u32, free, (gsp->cmdq.cnt - wptr));
-+		size =3D min_t(u32, argc, step * GSP_PAGE_SIZE);
-+
- 		memcpy(cqe, (u8 *)cmd + off, size);
-=20
- 		wptr +=3D DIV_ROUND_UP(size, 0x1000);
---=20
-2.39.5
+Right. This is _supposed_ to be 100% reliable under those limitations although
+I will admit I didn't consider THP deeply as that is not supported for
+DEVICE_PRIVATE anyway.
 
+> I'll cc you on patches once I figure out some details on how to fix some
+> page table walkers that really don't expect these non-swap entries.
+> 
+> Fortunately, the hmm test device is in place to trigger some shaky
+> scenarios.
+> 
+> -- 
+> Cheers,
+> 
+> David / dhildenb
+> 
