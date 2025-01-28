@@ -2,136 +2,65 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id 9A38DA20272
-	for <lists+nouveau@lfdr.de>; Tue, 28 Jan 2025 01:13:21 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id ACFFDA2068E
+	for <lists+nouveau@lfdr.de>; Tue, 28 Jan 2025 09:52:15 +0100 (CET)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id BBEB710E095;
-	Tue, 28 Jan 2025 00:13:19 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 8373310E25D;
+	Tue, 28 Jan 2025 08:52:08 +0000 (UTC)
 Authentication-Results: gabe.freedesktop.org;
-	dkim=pass (2048-bit key; unprotected) header.d=Nvidia.com header.i=@Nvidia.com header.b="P4HhRzlW";
+	dkim=pass (2048-bit key; unprotected) header.d=intel.com header.i=@intel.com header.b="l4og8gwm";
 	dkim-atps=neutral
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from NAM10-BN7-obe.outbound.protection.outlook.com
- (mail-bn7nam10on2080.outbound.protection.outlook.com [40.107.92.80])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 667D810E095;
- Tue, 28 Jan 2025 00:13:18 +0000 (UTC)
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=v+CKS/QoRTgKRRwMbU6Pu7HUCeVav3vPQ5W3oqTd0P+BhaBMHkJ9wYbqY+VNpjOOzlJrGzY0xgv0WnJ7sgELzf8Sg94vcn2Y8iF7EpY/5MddDJ64IumSkG45zz6R1M9R89xWQtb7XcYW7hdWEfk4LzOI6nVCJzlTr26MmOoCPKB1uQWJ0s9V5HD2lXRpsjCZj7UHugrh8w0WBKvcnWDkBayeNZw+SfxjLWgXSfb8zT0C8Ze5bWK1tu4lvlvQANvFFVTMLmcCShMFHoHEtu9ao4bo1m78yFKQ0pQWH34FvlC+ON9LnGCV5g3hNH8CW5Wtw18un/r+bidRej5XTB/ohA==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=rzgsqihxoh+/6ryP4RQNybx0hBTm68O0L5ehyFyBsm8=;
- b=mAYFt9NdgX47qfxlioFYQf1MpWSgbXTLxeLJ5q+ukdCOuaUme4CNVQtQJU32OHR1W7WnEA0gXH2+8C+9gZhemPmDHNdo0yD7lLjqSH4hvLvq0+3Rkh6Q1O4jybQVYARATbLxHRfedBu0yeuIyxAxuOOhODwGB3lnJH6snrlnpUwf6L89SGzKrOPDwF0TqcWQRoAh353OiEv7EjD3Y5hGfJUWjff83BSIlDEVMdHP2bLq2sAmFcpgzA7iHplyi5HofTLtt2O1YQayxKQo9WcOxuN/UiFERV9UlYbHeXJmHWpG/Mp54aHGQQSGeA8zyuwIVfFV50R3XyaGLNbh+eHQ/g==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=nvidia.com; dmarc=pass action=none header.from=nvidia.com;
- dkim=pass header.d=nvidia.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=Nvidia.com;
- s=selector2;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=rzgsqihxoh+/6ryP4RQNybx0hBTm68O0L5ehyFyBsm8=;
- b=P4HhRzlWToBcunfbioHUKUao4nOhKhv5dDeS/uyZFNaErEcinVfgZbre2CyQjhKqt4QXaHLItRPls563q9OseS0vvyw5kEB7LXdPUhwiJi1BYiZJ96pHN9SgcYxzhtXCZPeunV7gXENtbApoE+Jku+CWC+m2aGp2a0KSOx1zNMsaZ6Va4zErkSifxrZufM00VosDDBrF0+XPgNSq5qgKoJwNbipkCDLuM9sOsbT2VyOwf/3GhSVcnXHVNiIEgyjLCcnzDUmlynsSSxdIz9NHpzsRnbiWcBdV6yZvpMrSLSWEI0uWCOhcJ6bML/r9K3HUoxWhu9RJi9FL5fxRVzL5WQ==
-Authentication-Results: dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=nvidia.com;
-Received: from DS0PR12MB7726.namprd12.prod.outlook.com (2603:10b6:8:130::6) by
- IA1PR12MB8221.namprd12.prod.outlook.com (2603:10b6:208:3f0::19) with
- Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.8377.22; Tue, 28 Jan
- 2025 00:13:14 +0000
-Received: from DS0PR12MB7726.namprd12.prod.outlook.com
- ([fe80::953f:2f80:90c5:67fe]) by DS0PR12MB7726.namprd12.prod.outlook.com
- ([fe80::953f:2f80:90c5:67fe%7]) with mapi id 15.20.8377.009; Tue, 28 Jan 2025
- 00:13:14 +0000
-Date: Tue, 28 Jan 2025 11:13:03 +1100
-From: Alistair Popple <apopple@nvidia.com>
-To: David Hildenbrand <david@redhat.com>
-Cc: linux-kernel@vger.kernel.org, dri-devel@lists.freedesktop.org, 
- nouveau@lists.freedesktop.org, Karol Herbst <kherbst@redhat.com>,
- Lyude Paul <lyude@redhat.com>, 
- Danilo Krummrich <dakr@kernel.org>, David Airlie <airlied@gmail.com>, 
- Simona Vetter <simona@ffwll.ch>
-Subject: Re: [PATCH v1 0/2] nouveau/svm: fix + cleanup for
- nouveau_atomic_range_fault()
-Message-ID: <76jkxgubetbevbwbgq6onjwl4pu32bq3nrqmtj5zt23kkdculn@ez6bpprj2uan>
-References: <20250124181524.3584236-1-david@redhat.com>
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <20250124181524.3584236-1-david@redhat.com>
-X-ClientProxiedBy: SY0PR01CA0005.ausprd01.prod.outlook.com
- (2603:10c6:10:1bb::16) To DS0PR12MB7726.namprd12.prod.outlook.com
- (2603:10b6:8:130::6)
+Received: from mgamail.intel.com (mgamail.intel.com [192.198.163.19])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id A171910E20D;
+ Tue, 28 Jan 2025 08:52:06 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
+ d=intel.com; i=@intel.com; q=dns/txt; s=Intel;
+ t=1738054326; x=1769590326;
+ h=message-id:subject:from:to:date:in-reply-to:references:
+ content-transfer-encoding:mime-version;
+ bh=arBYayUBa7gh3GjVgWUJEeFHyqwuLt462GaAYBUJ17A=;
+ b=l4og8gwmAe3EYYUkzaATZRxK+xnEmkjVpm6amWYnksjyJW4OiQDmR/Za
+ Jf8dyjDGvSh+D5RILsm5LqV07EuMK7O06UhZSbm/RNpH8rzHvbhFBxXYI
+ U47d2cnjQFkn4sUHrq93BeMxzmJyIt7zUXaLxptyNfW5tkZtRpE6UHL8y
+ tK9ynbP5eAbjjLKeElVxpBP23vud5xQ/VshlA1h6Ee0pmidiifzer3wtw
+ Hrb9Xk8kfuHUVNgg9/brzMMbAVfyFROnjO6sGGNVZTz2mBsswZo2N5BZc
+ A2YYZXoOW8Uc30mYm/NxyPlnpY2BU4zPoRi2VEO6rC8RrygmpsGL/NN9v A==;
+X-CSE-ConnectionGUID: v+uafKWhRTK+q6NRCluQTg==
+X-CSE-MsgGUID: NEjlURU1Q1ClEA79YwqtTQ==
+X-IronPort-AV: E=McAfee;i="6700,10204,11328"; a="37732175"
+X-IronPort-AV: E=Sophos;i="6.13,240,1732608000"; d="scan'208";a="37732175"
+Received: from fmviesa003.fm.intel.com ([10.60.135.143])
+ by fmvoesa113.fm.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
+ 28 Jan 2025 00:52:06 -0800
+X-CSE-ConnectionGUID: uiA469o4TnK3CjMIkAHeng==
+X-CSE-MsgGUID: x/aKlPa3TA6n/e4E80RdBA==
+X-ExtLoop1: 1
+X-IronPort-AV: E=Sophos;i="6.12,224,1728975600"; d="scan'208";a="112680230"
+Received: from lfiedoro-mobl.ger.corp.intel.com (HELO [10.245.246.120])
+ ([10.245.246.120])
+ by fmviesa003-auth.fm.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
+ 28 Jan 2025 00:52:02 -0800
+Message-ID: <7282ac68c47886caa2bc2a2813d41a04adf938e1.camel@linux.intel.com>
+Subject: Re: [RFC 1/5] mm/hmm: HMM API to enable P2P DMA for device private
+ pages
+From: Thomas =?ISO-8859-1?Q?Hellstr=F6m?= <thomas.hellstrom@linux.intel.com>
+To: Yonatan Maman <ymaman@nvidia.com>, kherbst@redhat.com, lyude@redhat.com,
+ dakr@redhat.com, airlied@gmail.com, simona@ffwll.ch, jgg@ziepe.ca,
+ leon@kernel.org, 	jglisse@redhat.com, akpm@linux-foundation.org,
+ GalShalom@Nvidia.com, 	dri-devel@lists.freedesktop.org,
+ nouveau@lists.freedesktop.org, 	linux-kernel@vger.kernel.org,
+ linux-rdma@vger.kernel.org, linux-mm@kvack.org, 	linux-tegra@vger.kernel.org
+Date: Tue, 28 Jan 2025 09:51:52 +0100
+In-Reply-To: <20241201103659.420677-2-ymaman@nvidia.com>
+References: <20241201103659.420677-1-ymaman@nvidia.com>
+ <20241201103659.420677-2-ymaman@nvidia.com>
+Organization: Intel Sweden AB, Registration Number: 556189-6027
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+User-Agent: Evolution 3.54.3 (3.54.3-1.fc41) 
 MIME-Version: 1.0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: DS0PR12MB7726:EE_|IA1PR12MB8221:EE_
-X-MS-Office365-Filtering-Correlation-Id: f06f87c1-052f-4fd3-d050-08dd3f308e93
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0;ARA:13230040|1800799024|366016|376014;
-X-Microsoft-Antispam-Message-Info: =?us-ascii?Q?+cly44Ov01smhERDeWaT0QQPSczAJ5fHwON5+2GwpYAIyTsmQap53RukEi9g?=
- =?us-ascii?Q?9oUE6XKVC/5jDuRAxzsd0Ofiez7QNtB8s8UHDETXrwhwV09MrK79TCks3UcQ?=
- =?us-ascii?Q?GAGKcXLmuwcL0lgGG58tOWYxj6Ndoo64vIJaFIBlLuhClFYDLrVvOReZMbm+?=
- =?us-ascii?Q?+EyfAxTSQmgZUA7/3z6L71lWxjCN/Tg0VklYADOhrRIRmbyO8Cy7oHaPJAnm?=
- =?us-ascii?Q?T+qhq0o9RDW5MwybnyKzvZ9irquxu8hBv/WoNxYvQFWxOpIx2496k2V3RLVb?=
- =?us-ascii?Q?/02L04IAOOkaGbJdH9imRe5RR2NtgXSHKoOctpT49RP59wLFNiHb/mSnDaGs?=
- =?us-ascii?Q?pRyXAjwLqS/WKYZPjILBcT8MkfWQTUDkvE5rCtiOJCXUENIKCIZEgKhSD27w?=
- =?us-ascii?Q?d2kz9o/VPLcA4ufhEetHShsESQhZpjgPGJHLDn+fCB4L2wUUJIgcwlO6O72X?=
- =?us-ascii?Q?7YfSL7a8oSjPnuNp1oxya/BDwMbdZPmZMW5fBjLsn4ThQdX1/OJdCywtXSzc?=
- =?us-ascii?Q?4ju51Sy5RmjPzID1JiMzNuBxYvt7GRibiqGV/YeGhUf5IccyIbeIKEmxkq+T?=
- =?us-ascii?Q?1rsaCKKAgUU1mVqw0rWZ566cXV1YOZRqU11UUKm9dwq32A/OgVkkb8SHVy/G?=
- =?us-ascii?Q?Q6c2HaB5phUZQx5It9sFvxsXFuzPQhUMj6TvodMUtpaAdvq4MQjOmu3EkwCP?=
- =?us-ascii?Q?E1Ud3VuGhGNWAUG58Z+SQjTTf0iNSyGh3F889VfYEhfJz0pyC/IyaZ2sF20h?=
- =?us-ascii?Q?9arTYS6YsBkbiVuE7nvhTVaDM8hyC+91TCASXX8D/uXHQKZO2VQZPa2QM9Aj?=
- =?us-ascii?Q?appqoNH/UlsYuBWL7suarJyQMPUIRvLsX3+X/4UDkjRPOR/6LWoBLvUWUMn2?=
- =?us-ascii?Q?JDxqCnrbqYOlxWo1s4BQitnRo7JsHx5SgjdtoryhOmdu++fl6KF3qcmECbKA?=
- =?us-ascii?Q?e5MsLcp4XAXojTkX399D/ex7VJRTddwB3YtRSWSy7kfubzjqJbO/691MxI0d?=
- =?us-ascii?Q?5JrS6MG0/A1iD3uOJHQBK0rC6tnuqzhJ3owNmYOODshUxrJINZ5SjxNI6l/Q?=
- =?us-ascii?Q?CEm6lth5IaEJ315ZA41OQfT1ozQhdJZziq1ZRMqDWavO6IOY83U6zd9tQNV6?=
- =?us-ascii?Q?fz99d2BchC7Oby8CdrpC03UUhBhpIba1CcdOWgqHPN5I9thr/iCFenOAELsV?=
- =?us-ascii?Q?68aH1HTEdkLqdlRe7N3OFGloOX4Cgf+nsjaCYjC7D5nhHfMXUS37yBkoiUsn?=
- =?us-ascii?Q?xNr69eOz3B17kkvlW3FQxw6p0rnWMf42LedsRlBA/FQGiil0V+CRBLIVibZC?=
- =?us-ascii?Q?mNx4f13erHQY7lWN4ZCZ2QOpaHek4O5Lze2w7jOwXDFqDRe0DvFRr3vzPCr9?=
- =?us-ascii?Q?IKyluTlhFLoygCuV7zYCEicuoPT/?=
-X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
- IPV:NLI; SFV:NSPM; H:DS0PR12MB7726.namprd12.prod.outlook.com; PTR:; CAT:NONE;
- SFS:(13230040)(1800799024)(366016)(376014); DIR:OUT; SFP:1101; 
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: =?us-ascii?Q?2sk7WsKIw93cV/mAARTqVeB9N8zAK/m6ezlbgc9zYdoulfHjOVnqiPIMr58H?=
- =?us-ascii?Q?kyaL+0f1kUGwRXW0UhpUqwwI3+QhRB70xvyZDeKctV9IMCvjxv4gZqd6Ywdi?=
- =?us-ascii?Q?BAMWdrvFWpFm5LzT/yvDgnaZIgejcAgow5fH+C6vWF+PvF3PECTry79wv/9Q?=
- =?us-ascii?Q?ZuzK2SN9xA0jBTIqUYi4jP93CwWxLBNiIbyCaZV2XY0HFi1X+yqCBtw60n9Q?=
- =?us-ascii?Q?+QSoXt91ZdxZDjPap+s6NriLZ9T+Zrw6ACcQCVja+CvaztUmIDiaRc+xJvPb?=
- =?us-ascii?Q?8P2w5ncF1NEW3YUGOo569xjX1UJLlMbHc13e7WmaFxNF3nygOSH13++MNeQN?=
- =?us-ascii?Q?VcKiQEXe1Wb7Oao+jppgt1s5LctMO0MN9Y4JBeILyTMZM5jRumvDOCy6XrUQ?=
- =?us-ascii?Q?qZ46ecY+YZIm01rSOAsaBxJPAhG1AEPbMPymCNU7eWj2GcYwvv++2JT8nQoU?=
- =?us-ascii?Q?FhcFb91vOiKKOxOHIoMOjQXaSpJkGXDLGvKVo69ocRMN4BIgNTygUHAkrivh?=
- =?us-ascii?Q?F00DaO4mpli2I+jl4TDq9nlJ1eCNQ5bO1NpAk2wgLPImPFbqv9RoGqj8T6S7?=
- =?us-ascii?Q?yRcI/S9FwxgzP43TAnM5nckCJ7OuxnyWuJiGkdsIGvi7NWNMlivE431tzNNf?=
- =?us-ascii?Q?p8ksPkvy/aChG582bu6z1OkjN36NMN1zSApSKA8UkbNxDiHvtX7wfNCWSKhk?=
- =?us-ascii?Q?zKGHXF93w38XIQB/Z/FLSfDx+v49vl6oK7xm2RlmMHixnuc/V7CxNDT+ULWp?=
- =?us-ascii?Q?9uqkQCqRytG53QxmSSw9vY8uc9TpHM/1cOOtchqINoFJJYA1mTn9G7iZd7C/?=
- =?us-ascii?Q?lafH1uSXMR/g/00O6cXpMRTS3nsdBzEtuZ2mrqmSPgEzswZxgnxxOltDLUbv?=
- =?us-ascii?Q?F5bAhoSTEfOJaa3Y1WriifwUBkyNmlBGfs0dY2HxiXN7/Wqjg8tVlEwFP2mP?=
- =?us-ascii?Q?Bo0s5hFl0nm0Mg6tVpnv3B6W7+hwGZJGEo8IyA24uB/p6YJRdvg3DkZAfWCm?=
- =?us-ascii?Q?/k6Jik9i8lgNzY8CkQAbV3S1TwPlupKdf3vmC1uGK/frV3TMkCEYrLvKECj+?=
- =?us-ascii?Q?24D44agqBin/Vw62yfz/NJAIuMMCYr6BhqcyjxgMg0k0M21KuoQfCSzxUW8v?=
- =?us-ascii?Q?xPxm63C53AbC7RlntCUYyLP9UDycZi9fry9Ff0hVHqhryv+Pj3SZNennVfPV?=
- =?us-ascii?Q?kiXIffjxJ9s5bMCuJTkjetNqs0xbCwum37EeJ9AAW4MljL0imJGoX2nDfCQC?=
- =?us-ascii?Q?zFU+bPkGGmQ7QcTRSJp+Bmwv/OobcpkVI0XcBOelwe3D1WqTwKKd3vHMLzic?=
- =?us-ascii?Q?OXYC9ioZV/lK2RM6QYlJnV1OTPtsfYKJ4jDyTpvpJkIy+JF2cOcK1qQWdMu9?=
- =?us-ascii?Q?VIY7agB9Jlh+jpOpQAuOagBixT6SD6i5xLffgKV0tx/WPeDueFNh6ZNHy0W4?=
- =?us-ascii?Q?xsZWrVAoEOLiuvARZ9F2gLbm35P1fGXSg7j7eFDzG7U8PY98SuK9f8bx+FMk?=
- =?us-ascii?Q?PjHux2AtjlSBh+/Kqr3ymHB3vrk0G6TfSGJTu63xRQIvT1SChvpc3+2BUazl?=
- =?us-ascii?Q?kHFONBKXrgcz+5oUqtysIANZKV3fQjdAzkbUAUlH?=
-X-OriginatorOrg: Nvidia.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: f06f87c1-052f-4fd3-d050-08dd3f308e93
-X-MS-Exchange-CrossTenant-AuthSource: DS0PR12MB7726.namprd12.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 28 Jan 2025 00:13:14.1022 (UTC)
-X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
-X-MS-Exchange-CrossTenant-Id: 43083d15-7273-40c1-b7db-39efd9ccc17a
-X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: O/UacTUU5IUQY/ov8F6IAxQNWhlgSX2L9iMbvy+4OVda9rajUVz6+QBOYY9BdV4MesaLq9e1zgCo1uXK5hoFhg==
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: IA1PR12MB8221
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -146,32 +75,267 @@ List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-On Fri, Jan 24, 2025 at 07:15:22PM +0100, David Hildenbrand wrote:
-> One fix and a minor cleanup.
-> 
-> Only compile-tested due to lack of HW, so I'd be happy if someone with
-> access to HW could test. But not sure how easy this is to trigger. Likely
-> some concurrent MADV_DONTNEED on the PTE we just converted might be able
-> to trigger it.
+Hi, Jonatan
 
-I have this setup so will certainly test it and see if I can trigger the bug
-as well. Thanks for the fixes.
- 
-> Cc: Karol Herbst <kherbst@redhat.com>
-> Cc: Lyude Paul <lyude@redhat.com>
-> Cc: Danilo Krummrich <dakr@kernel.org>
-> Cc: David Airlie <airlied@gmail.com>
-> Cc: Simona Vetter <simona@ffwll.ch>
-> Cc: Alistair Popple <apopple@nvidia.com>
-> 
-> David Hildenbrand (2):
->   nouveau/svm: fix missing folio unlock + put after
->     make_device_exclusive_range()
->   nouveau/svm: don't initialize ret in nouveau_atomic_range_fault()
-> 
->  drivers/gpu/drm/nouveau/nouveau_svm.c | 11 ++++++++---
->  1 file changed, 8 insertions(+), 3 deletions(-)
-> 
-> -- 
-> 2.47.1
-> 
+
+On Sun, 2024-12-01 at 12:36 +0200, Yonatan Maman wrote:
+> From: Yonatan Maman <Ymaman@Nvidia.com>
+>=20
+> hmm_range_fault() by default triggered a page fault on device private
+> when HMM_PFN_REQ_FAULT flag was set. pages, migrating them to RAM. In
+> some
+> cases, such as with RDMA devices, the migration overhead between the
+> device (e.g., GPU) and the CPU, and vice-versa, significantly
+> degrades
+> performance. Thus, enabling Peer-to-Peer (P2P) DMA access for device
+> private page might be crucial for minimizing data transfer overhead.
+>=20
+> Introduced an API to support P2P DMA for device private
+> pages,includes:
+> =C2=A0- Leveraging the struct pagemap_ops for P2P Page Callbacks. This
+> callback
+> =C2=A0=C2=A0 involves mapping the page for P2P DMA and returning the
+> corresponding
+> =C2=A0=C2=A0 PCI_P2P page.
+>=20
+> =C2=A0- Utilizing hmm_range_fault for initializing P2P DMA. The API
+> =C2=A0=C2=A0 also adds the HMM_PFN_REQ_TRY_P2P flag option for the
+> =C2=A0=C2=A0 hmm_range_fault caller to initialize P2P. If set, hmm_range_=
+fault
+> =C2=A0=C2=A0 attempts initializing the P2P connection first, if the owner
+> device
+> =C2=A0=C2=A0 supports P2P, using p2p_page. In case of failure or lack of
+> support,
+> =C2=A0=C2=A0 hmm_range_fault will continue with the regular flow of migra=
+ting
+> the
+> =C2=A0=C2=A0 page to RAM.
+>=20
+> This change does not affect previous use-cases of hmm_range_fault,
+> because both the caller and the page owner must explicitly request
+> and
+> support it to initialize P2P connection.
+>=20
+> Signed-off-by: Yonatan Maman <Ymaman@Nvidia.com>
+> Signed-off-by: Gal Shalom <GalShalom@Nvidia.com>
+> ---
+> =C2=A0include/linux/hmm.h=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 |=C2=A0 3 ++-
+> =C2=A0include/linux/memremap.h |=C2=A0 8 ++++++
+> =C2=A0mm/hmm.c=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=
+=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 | 57 ++++++++++++++++++++++++++++++=
++++-----
+> --
+> =C2=A03 files changed, 57 insertions(+), 11 deletions(-)
+
+It appears we're working on a very similar thing, (In fact the original
+proposals were sent out the same day. I have a couple of questions).
+
+
+>=20
+> diff --git a/include/linux/hmm.h b/include/linux/hmm.h
+> index 62980ca8f3c5..017f22cef893 100644
+> --- a/include/linux/hmm.h
+> +++ b/include/linux/hmm.h
+> @@ -26,6 +26,7 @@ struct mmu_interval_notifier;
+> =C2=A0 * HMM_PFN_DMA_MAPPED - Flag preserved on input-to-output
+> transformation
+> =C2=A0 *=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=
+=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 to mark tha=
+t page is already DMA mapped
+> + * HMM_PFN_ALLOW_P2P - Allow returning PCI P2PDMA page
+> =C2=A0 *
+> =C2=A0 * On input:
+> =C2=A0 * 0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=
+=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 - Return the current state of the page, d=
+o not
+> fault it.
+> @@ -41,7 +42,7 @@ enum hmm_pfn_flags {
+> =C2=A0	HMM_PFN_ERROR =3D 1UL << (BITS_PER_LONG - 3),
+> =C2=A0
+> =C2=A0	/* Sticky flag, carried from Input to Output */
+> +	HMM_PFN_ALLOW_P2P =3D 1UL << (BITS_PER_LONG - 6),
+> =C2=A0	HMM_PFN_DMA_MAPPED =3D 1UL << (BITS_PER_LONG - 7),
+> =C2=A0
+> =C2=A0	HMM_PFN_ORDER_SHIFT =3D (BITS_PER_LONG - 8),
+> diff --git a/include/linux/memremap.h b/include/linux/memremap.h
+> index 3f7143ade32c..cdf5189be5e9 100644
+> --- a/include/linux/memremap.h
+> +++ b/include/linux/memremap.h
+> @@ -89,6 +89,14 @@ struct dev_pagemap_ops {
+> =C2=A0	 */
+> =C2=A0	vm_fault_t (*migrate_to_ram)(struct vm_fault *vmf);
+> =C2=A0
+> +	/*
+> +	 * Used for private (un-addressable) device memory only.
+> Return a
+> +	 * corresponding PFN for a page that can be mapped to device
+> +	 * (e.g using dma_map_page)
+> +	 */
+> +	int (*get_dma_pfn_for_device)(struct page *private_page,
+> +				=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 unsigned long *dma_pfn);
+> +
+> =C2=A0	/*
+> =C2=A0	 * Handle the memory failure happens on a range of pfns.=C2=A0
+> Notify the
+> =C2=A0	 * processes who are using these pfns, and try to recover
+> the data on
+> diff --git a/mm/hmm.c b/mm/hmm.c
+> index a852d8337c73..1c080bc00ee8 100644
+> --- a/mm/hmm.c
+> +++ b/mm/hmm.c
+> @@ -226,6 +226,51 @@ static inline unsigned long
+> pte_to_hmm_pfn_flags(struct hmm_range *range,
+> =C2=A0	return pte_write(pte) ? (HMM_PFN_VALID | HMM_PFN_WRITE) :
+> HMM_PFN_VALID;
+> =C2=A0}
+> =C2=A0
+> +static bool hmm_handle_device_private(struct hmm_range *range,
+> +				=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 unsigned long pfn_req_flags,
+> +				=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 swp_entry_t entry,
+> +				=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 unsigned long *hmm_pfn)
+> +{
+> +	struct page *page =3D pfn_swap_entry_to_page(entry);
+> +	struct dev_pagemap *pgmap =3D page->pgmap;
+> +	int ret;
+>=20
+> +	pfn_req_flags &=3D range->pfn_flags_mask;
+> +	pfn_req_flags |=3D range->default_flags;
+> +
+> +	/*
+> +	 * Don't fault in device private pages owned by the caller,
+> +	 * just report the PFN.
+> +	 */
+> +	if (pgmap->owner =3D=3D range->dev_private_owner) {
+> +		*hmm_pfn =3D swp_offset_pfn(entry);
+> +		goto found;
+> +	}
+> +
+> +	/*
+> +	 * P2P for supported pages, and according to caller request
+> +	 * translate the private page to the match P2P page if it
+> fails
+> +	 * continue with the regular flow
+> +	 */
+> +	if (pfn_req_flags & HMM_PFN_ALLOW_P2P &&
+> +	=C2=A0=C2=A0=C2=A0 pgmap->ops->get_dma_pfn_for_device) {
+> +		ret =3D pgmap->ops->get_dma_pfn_for_device(page,
+> hmm_pfn);
+
+How would the pgmap device know whether P2P is actually possible
+without knowing the client device, (like calling pci_p2pdma_distance)
+and also if looking into access control, whether it is allowed?
+
+I wonder whether you could consider using something that is a little
+more generic that would fit also our use-case. Here the caller provides
+a callback as to whether devmem access is allowed, but leaves any dma-
+mapping or pfn mangling to be done after the call to hmm_range_fault(),
+since hmm_range_fault() really only needs to know whether it has to
+migrate to system or not. One benefit of using this alternative
+approach is that struct hmm_range can be subclassed by the caller and
+for example cache device pairs for which p2p is allowed.
+
+Current version (after the feedback from Jason looks like this). It
+looks like your use-case could easily be made to fit this one, but, as
+I understand it, not vice versa: (Could send this as a separate patch
+if needed).
+
+Thanks,
+Thomas
+
+
+diff --git a/include/linux/hmm.h b/include/linux/hmm.h
+index 126a36571667..8ac1f4125e30 100644
+--- a/include/linux/hmm.h
++++ b/include/linux/hmm.h
+@@ -76,6 +76,21 @@ static inline unsigned int
+hmm_pfn_to_map_order(unsigned long hmm_pfn)
+ 	return (hmm_pfn >> HMM_PFN_ORDER_SHIFT) & 0x1F;
+ }
+=20
++struct hmm_range;
++
++/**
++ * struct hmm_range_ops - Functions for detailed cross-device access.
++ */
++struct hmm_range_ops {
++	/**
++	 * @devmem_allow: Whether to allow cross-device access to
+device_private pages.
++	 * @hrange: Pointer to a struct hmm_range. Typically
+subclassed by the caller
++	 * to provide needed information.
++	 * @page: The page being queried.
++	 */
++	bool (*devmem_allow)(struct hmm_range *hrange, struct page
+*page);
++};
++
+ /*
+  * struct hmm_range - track invalidation lock on virtual address range
+  *
+@@ -87,6 +102,7 @@ static inline unsigned int
+hmm_pfn_to_map_order(unsigned long hmm_pfn)
+  * @default_flags: default flags for the range (write, read, ... see
+hmm doc)
+  * @pfn_flags_mask: allows to mask pfn flags so that only
+default_flags matter
+  * @dev_private_owner: owner of device private pages
++ * @ops: Pointer to a struct hmm_range_ops or NULL if no ops provided.
+  */
+ struct hmm_range {
+ 	struct mmu_interval_notifier *notifier;
+@@ -97,6 +113,7 @@ struct hmm_range {
+ 	unsigned long		default_flags;
+ 	unsigned long		pfn_flags_mask;
+ 	void			*dev_private_owner;
++	const struct hmm_range_ops *ops;
+ };
+=20
+ /*
+diff --git a/mm/hmm.c b/mm/hmm.c
+index 7e0229ae4a5a..ea4e08caa14a 100644
+--- a/mm/hmm.c
++++ b/mm/hmm.c
+@@ -220,6 +220,15 @@ static inline unsigned long
+pte_to_hmm_pfn_flags(struct hmm_range *range,
+ 	return pte_write(pte) ? (HMM_PFN_VALID | HMM_PFN_WRITE) :
+HMM_PFN_VALID;
+ }
+=20
++static bool hmm_devmem_allow(struct hmm_range *range, struct page
+*page)
++{
++	if (likely(page->pgmap->owner =3D=3D range->dev_private_owner))
++		return true;
++	if (likely(!range->ops))
++		return false;
++	return range->ops->devmem_allow(range, page);
++}
++
+ static int hmm_vma_handle_pte(struct mm_walk *walk, unsigned long
+addr,
+ 			      unsigned long end, pmd_t *pmdp, pte_t
+*ptep,
+ 			      unsigned long *hmm_pfn)
+@@ -245,11 +254,10 @@ static int hmm_vma_handle_pte(struct mm_walk
+*walk, unsigned long addr,
+=20
+ 		/*
+ 		 * Don't fault in device private pages owned by the
+caller,
+-		 * just report the PFN.
++		 * or that are accessible to the caller. Just report
+the PFN.
+ 		 */
+ 		if (is_device_private_entry(entry) &&
+-		    pfn_swap_entry_to_page(entry)->pgmap->owner =3D=3D
+-		    range->dev_private_owner) {
++		    hmm_devmem_allow(range,
+pfn_swap_entry_to_page(entry))) {
+ 			cpu_flags =3D HMM_PFN_VALID;
+ 			if (is_writable_device_private_entry(entry))
+ 				cpu_flags |=3D HMM_PFN_WRITE;
+--=20
+2.48.1
+
+
