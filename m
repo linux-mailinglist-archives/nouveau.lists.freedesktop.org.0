@@ -2,103 +2,94 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id 83A8DA21CD6
-	for <lists+nouveau@lfdr.de>; Wed, 29 Jan 2025 12:58:26 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 3BA45A21E21
+	for <lists+nouveau@lfdr.de>; Wed, 29 Jan 2025 14:48:06 +0100 (CET)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id C532910E7DC;
-	Wed, 29 Jan 2025 11:58:22 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 83E6D10E06C;
+	Wed, 29 Jan 2025 13:48:01 +0000 (UTC)
 Authentication-Results: gabe.freedesktop.org;
-	dkim=pass (1024-bit key; unprotected) header.d=redhat.com header.i=@redhat.com header.b="YAHcztfy";
+	dkim=pass (2048-bit key; secure) header.d=ziepe.ca header.i=@ziepe.ca header.b="XWC0ytNF";
 	dkim-atps=neutral
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from us-smtp-delivery-124.mimecast.com
- (us-smtp-delivery-124.mimecast.com [170.10.129.124])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 5679610E7DA
- for <nouveau@lists.freedesktop.org>; Wed, 29 Jan 2025 11:58:21 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1738151900;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references;
- bh=FOqcQk5sbfQYMqiwFwVZu0o4Vgt4WnJhwl3OPDX2fpI=;
- b=YAHcztfyQgRI213DyDuuD9Xe8Wsi6bt2l8F4bXnlyLIb4gjzpLgy7LIykkuQUHTFPQIpVe
- WbVV+rkuABPb3UO8m5N4tPE1BfldGKngpC2EKrzxCvM1Bv62DFi0E8IY1OL+itK2kUm0F4
- I69Q/AfokvqlKCxnEimsRq2L0rqonPI=
-Received: from mail-wm1-f71.google.com (mail-wm1-f71.google.com
- [209.85.128.71]) by relay.mimecast.com with ESMTP with STARTTLS
- (version=TLSv1.3, cipher=TLS_AES_256_GCM_SHA384) id
- us-mta-497-WV8AAseuPiOBIVMQ5ar7DA-1; Wed, 29 Jan 2025 06:58:19 -0500
-X-MC-Unique: WV8AAseuPiOBIVMQ5ar7DA-1
-X-Mimecast-MFC-AGG-ID: WV8AAseuPiOBIVMQ5ar7DA
-Received: by mail-wm1-f71.google.com with SMTP id
- 5b1f17b1804b1-4388eee7073so3083185e9.0
- for <nouveau@lists.freedesktop.org>; Wed, 29 Jan 2025 03:58:19 -0800 (PST)
+Received: from mail-qt1-f182.google.com (mail-qt1-f182.google.com
+ [209.85.160.182])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 19F1410E09D
+ for <nouveau@lists.freedesktop.org>; Wed, 29 Jan 2025 13:47:59 +0000 (UTC)
+Received: by mail-qt1-f182.google.com with SMTP id
+ d75a77b69052e-467a3f1e667so41886771cf.0
+ for <nouveau@lists.freedesktop.org>; Wed, 29 Jan 2025 05:47:59 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=ziepe.ca; s=google; t=1738158479; x=1738763279; darn=lists.freedesktop.org; 
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=TGxs1D5kHZWfV3TMw8ydKze6LYDZn037JbgBy8rBgVo=;
+ b=XWC0ytNFtdHYpPu1IhbMjjVcjVyUgdC+oq3yfh6bErdKGIkhBSKV1WZbcFjnYLitBq
+ 77vYJOuMrPAeHfHUBH/1hwvz/ymG2mAgfy/VnZ+zJomtjXYwmRXiNcHV5eCfZHlfHmuF
+ DbPxw7MunzVhnORcMrz9C9ZJG85UwxQ8YSD82wxKJqetlAdunrxfK0qfVCExWdVBh8qG
+ plJLTW7bzxji1cvez5oL8T64Ma9sRL9e1bc7+ffw+mUDCwy3gRGPy8ExOTemR+xwB3gC
+ 6IUhQJxULZPLZ5Pni6PuwkHb9wTgwvAvdPPLoa+Qpz90AheuKrfjNyBBWuAbljqWDs1h
+ gEQA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1738151898; x=1738756698;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=FOqcQk5sbfQYMqiwFwVZu0o4Vgt4WnJhwl3OPDX2fpI=;
- b=JBUYNRdjhA+KeVV93LFnG6Itay9s8Wg8ctFngf15PE4IKCyxwRZgt8O9NNSFazzVMp
- ESMPMXu4dgapqdKll8sMhvNLwFxVcn+e0u3DEE+P47sCUe7BtjYpjf1XNJCfCH5czG3d
- dcdgwLBq/9ql8E3mCd1Md1dzU9sW3O20lxLlS5pmfIQ/4UxxU1o3rPDVedhlTK9iDMLB
- tei446Je3xC3pywtghvJ3fC/cmsUSh+QBQeogA0WNGTWnDZmch/+IRbpGWg7VHvphN55
- lkPOCqvXBgVpwCMF9whBGls4phdXXAp8mW1TBHTQtittp56fTTRzaZervIXFI8s8UVly
- jabg==
+ d=1e100.net; s=20230601; t=1738158479; x=1738763279;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:to:from:date:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=TGxs1D5kHZWfV3TMw8ydKze6LYDZn037JbgBy8rBgVo=;
+ b=Vdr22sq1kwzi1VYF4djPNK1fE+8w8gJiNX/e9asW4aE1rz9JfsqhnH/ihsI3FxnIjP
+ LraaFWvMJKJesItUrnU8nmwhHaDTSdqFvPEiQ93FXnY+KuoRQPHknuWgllNbK5zuwu5p
+ F/5a7K4Zua2HNu6L0jvps3el5q+znBErnVSmz0DSRhvtZnFmYAChbA7qug21PP8UIssU
+ FVyvnrsOTWPNi9k3NLmhc0ltwjuOZs592WEA2qsy7+pKXjiQS6jAWEUHsCxETULy1Tb5
+ yE8h73mQJRO/iATqjwT6hnjy8IAuOkwcJtXlCfyS/iVV7hGYfQdfkza3qqnGTUNMe4BV
+ gd3w==
 X-Forwarded-Encrypted: i=1;
- AJvYcCWVldo6VQHH1q1ZV5hhhKbPpuX6KYuDhCuaV3rMa5ZR0SUORB7SQwjmGVaDVlfzOLedJShDBhpv@lists.freedesktop.org
-X-Gm-Message-State: AOJu0Yz6lV80GJzWzXflijjicOkKrLZeiDaUMTAc1NbbkeG3tBWIY2cR
- 0fo1L8keIynllwHTkDMVFtZgGbv1g6nlwMNXutz5YcA//KIF0mMw9NARTYkV/XjZmEaxVYvfw10
- mMe7Qles1Flix4qMKeY9LgzdhSMmSwmOrStdkhkQrUK38Lg398UBjgQu6KKrLybk=
-X-Gm-Gg: ASbGncu85WTw4zJmNUc6ErMZfU0oCO6X/hXFF9cUV9Zf/GM6GbZfg2TxJVhsfaJ0BVJ
- pP8GEu2JH9Lv0TXfKqNSVAf76azDRRzG/HBxs32ErRK410rxUBDzZmhsgYkRKd0coMrgKqj2Rep
- s/6IDM2p9b8a4xdlotVGAtzj1iGBIETNTQ2xGwc6bqDs6Z28DXR0xSlwlPZftwTsmlivP/OsOE0
- pvioG5TiUsVW+IBmgSPlkGwuFc29yyqLi1FHpPJTOcVFJYXeXsEdoDWIqAq+ceH0vPPs06OF6fK
- OWncYLu7EYvXOP3/8TdTCAr1k43ehoosf4IqysNYuN+LlwqgzxkdWqvO6/B4HcjBtA==
-X-Received: by 2002:a05:600c:3d87:b0:436:1b0b:2633 with SMTP id
- 5b1f17b1804b1-438dbe9a124mr27335715e9.9.1738151898328; 
- Wed, 29 Jan 2025 03:58:18 -0800 (PST)
-X-Google-Smtp-Source: AGHT+IEUOJXNPPQ6xLco9EGZUl9hRUezUN+y2Deyf0uuUDDMY6E4w4fKpt4O5zyjSgxt4LyQtnHPOg==
-X-Received: by 2002:a05:600c:3d87:b0:436:1b0b:2633 with SMTP id
- 5b1f17b1804b1-438dbe9a124mr27335535e9.9.1738151897999; 
- Wed, 29 Jan 2025 03:58:17 -0800 (PST)
-Received: from localhost
- (p200300cbc7053b0064b867195794bf13.dip0.t-ipconnect.de.
- [2003:cb:c705:3b00:64b8:6719:5794:bf13])
- by smtp.gmail.com with UTF8SMTPSA id
- 5b1f17b1804b1-438dcc33e04sm20207605e9.29.2025.01.29.03.58.16
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Wed, 29 Jan 2025 03:58:17 -0800 (PST)
-From: David Hildenbrand <david@redhat.com>
-To: linux-kernel@vger.kernel.org
-Cc: linux-doc@vger.kernel.org, dri-devel@lists.freedesktop.org,
- linux-mm@kvack.org, nouveau@lists.freedesktop.org,
- David Hildenbrand <david@redhat.com>,
- Andrew Morton <akpm@linux-foundation.org>,
- =?UTF-8?q?J=C3=A9r=C3=B4me=20Glisse?= <jglisse@redhat.com>,
- Jonathan Corbet <corbet@lwn.net>, Alex Shi <alexs@kernel.org>,
- Yanteng Si <si.yanteng@linux.dev>, Karol Herbst <kherbst@redhat.com>,
- Lyude Paul <lyude@redhat.com>, Danilo Krummrich <dakr@kernel.org>,
- David Airlie <airlied@gmail.com>, Simona Vetter <simona@ffwll.ch>,
- "Liam R. Howlett" <Liam.Howlett@oracle.com>,
- Lorenzo Stoakes <lorenzo.stoakes@oracle.com>,
- Vlastimil Babka <vbabka@suse.cz>, Jann Horn <jannh@google.com>,
- Pasha Tatashin <pasha.tatashin@soleen.com>, Peter Xu <peterx@redhat.com>,
- Alistair Popple <apopple@nvidia.com>, Jason Gunthorpe <jgg@nvidia.com>
-Subject: [PATCH v1 4/4] mm/memory: document restore_exclusive_pte()
-Date: Wed, 29 Jan 2025 12:58:02 +0100
-Message-ID: <20250129115803.2084769-5-david@redhat.com>
-X-Mailer: git-send-email 2.48.1
-In-Reply-To: <20250129115803.2084769-1-david@redhat.com>
-References: <20250129115803.2084769-1-david@redhat.com>
+ AJvYcCWBcjG4GjuYLg+oFJHGvgIwdFMLqps+KK2qu8MNNUsTBe3fy+rQLh5E05FwMreZeFGbB3HR1Pa8@lists.freedesktop.org
+X-Gm-Message-State: AOJu0Ywpoy7DDZyMc3NREu2Sg/STwL8ncT/TIO87SlBSif9WiCXOSZJL
+ yVybk6+kvxdTbYX6Jp8Ai5Pub1Q5FvmehqvoCfvRvGycRtXOGiUDcqQz/6Ym+9Q=
+X-Gm-Gg: ASbGncslSXwEF+rr02x90YeWQSiXpG08DJSKZG8GqfMVZatz2pB2HLsx7u2bKjKZ958
+ YyfXojvaGxtWN4TaRUY+/RmwsTHn545C4RUwfCjzk0vy7yeA76Z33mztds3T2+s+NAyfdHdxMwY
+ Aa5vJt1pKAvYuO/bVKCCSz2b6VIbvc1CH2ATpEeD0NGmbE7SwY/M8kf8NzqA8D8UZ5cGSeCOz96
+ V+BEl3LzIyPWF/cjXmlwJf3IdJpK7w6aX1r5tXgBZ/95x/UbpsiKtyuXt+af98eo73u5yYvpuMI
+ 4Jutdz2NL4FFbc1vuGnfzxm1WhwTiG65AiYvCR/oTf8+5AHnOXYXqJIW1balObqG
+X-Google-Smtp-Source: AGHT+IHuYCAk+wYHqjFRDvmI1uuhKYfRXYz+H9jof+ajiAjSs3miFEirWAObJrrIBPKksD6vvP2lVg==
+X-Received: by 2002:ac8:5a08:0:b0:46c:782f:5f85 with SMTP id
+ d75a77b69052e-46fd0b98596mr53288201cf.52.1738158478735; 
+ Wed, 29 Jan 2025 05:47:58 -0800 (PST)
+Received: from ziepe.ca
+ (hlfxns017vw-142-68-128-5.dhcp-dynamic.fibreop.ns.bellaliant.net.
+ [142.68.128.5]) by smtp.gmail.com with ESMTPSA id
+ d75a77b69052e-46e66b67680sm62281881cf.60.2025.01.29.05.47.57
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Wed, 29 Jan 2025 05:47:58 -0800 (PST)
+Received: from jgg by wakko with local (Exim 4.97)
+ (envelope-from <jgg@ziepe.ca>) id 1td8Q9-00000009BlF-1by8;
+ Wed, 29 Jan 2025 09:47:57 -0400
+Date: Wed, 29 Jan 2025 09:47:57 -0400
+From: Jason Gunthorpe <jgg@ziepe.ca>
+To: Thomas =?utf-8?Q?Hellstr=C3=B6m?= <thomas.hellstrom@linux.intel.com>,
+ Yonatan Maman <ymaman@nvidia.com>, kherbst@redhat.com,
+ lyude@redhat.com, dakr@redhat.com, airlied@gmail.com,
+ simona@ffwll.ch, leon@kernel.org, jglisse@redhat.com,
+ akpm@linux-foundation.org, GalShalom@nvidia.com,
+ dri-devel@lists.freedesktop.org, nouveau@lists.freedesktop.org,
+ linux-kernel@vger.kernel.org, linux-rdma@vger.kernel.org,
+ linux-mm@kvack.org, linux-tegra@vger.kernel.org
+Subject: Re: [RFC 1/5] mm/hmm: HMM API to enable P2P DMA for device private
+ pages
+Message-ID: <20250129134757.GA2120662@ziepe.ca>
+References: <20241201103659.420677-1-ymaman@nvidia.com>
+ <20241201103659.420677-2-ymaman@nvidia.com>
+ <7282ac68c47886caa2bc2a2813d41a04adf938e1.camel@linux.intel.com>
+ <20250128132034.GA1524382@ziepe.ca>
+ <de293a7e9b4c44eab8792b31a4605cc9e93b2bf5.camel@linux.intel.com>
+ <20250128151610.GC1524382@ziepe.ca>
+ <b78d32e13811ef1fa57b0535749c811f2afb4dcd.camel@linux.intel.com>
+ <20250128172123.GD1524382@ziepe.ca>
+ <Z5ovcnX2zVoqdomA@phenom.ffwll.local>
 MIME-Version: 1.0
-X-Mimecast-Spam-Score: 0
-X-Mimecast-MFC-PROC-ID: xOP42LZ00avtsCkmKmnT1bnKjN0TchSbAwHlWMXOVb8_1738151898
-X-Mimecast-Originator: redhat.com
-Content-Transfer-Encoding: 8bit
-content-type: text/plain; charset="US-ASCII"; x-default=true
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <Z5ovcnX2zVoqdomA@phenom.ffwll.local>
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -113,50 +104,41 @@ List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-Let's document how this function is to be used, and why the requirement
-for the folio lock might maybe be dropped in the future.
+On Wed, Jan 29, 2025 at 02:38:58PM +0100, Simona Vetter wrote:
 
-Signed-off-by: David Hildenbrand <david@redhat.com>
----
- mm/memory.c | 25 +++++++++++++++++++++++++
- 1 file changed, 25 insertions(+)
+> > The pgmap->owner doesn't *have* to fixed, certainly during early boot before
+> > you hand out any page references it can be changed. I wouldn't be
+> > surprised if this is useful to some requirements to build up the
+> > private interconnect topology?
+> 
+> The trouble I'm seeing is device probe and the fundemantal issue that you
+> never know when you're done. And so if we entirely rely on pgmap->owner to
+> figure out the driver private interconnect topology, that's going to be
+> messy. That's why I'm also leaning towards both comparing owners and
+> having an additional check whether the interconnect is actually there or
+> not yet.
 
-diff --git a/mm/memory.c b/mm/memory.c
-index 46956994aaff..caaae8df11a9 100644
---- a/mm/memory.c
-+++ b/mm/memory.c
-@@ -718,6 +718,31 @@ struct folio *vm_normal_folio_pmd(struct vm_area_struct *vma,
- }
- #endif
- 
-+/**
-+ * restore_exclusive_pte - Restore a device-exclusive entry
-+ * @vma: VMA covering @address
-+ * @folio: the mapped folio
-+ * @page: the mapped folio page
-+ * @address: the virtual address
-+ * @ptep: PTE pointer into the locked page table mapping the folio page
-+ * @orig_pte: PTE value at @ptep
-+ *
-+ * Restore a device-exclusive non-swap entry to an ordinary present PTE.
-+ *
-+ * The folio and the page table must be locked, and MMU notifiers must have
-+ * been called to invalidate any (exclusive) device mappings. In case of
-+ * fork(), MMU_NOTIFY_PROTECTION_PAGE is triggered, and in case of a page
-+ * fault MMU_NOTIFY_EXCLUSIVE is triggered.
-+ *
-+ * Locking the folio makes sure that anybody who just converted the PTE to
-+ * a device-private entry can map it into the device, before unlocking it; so
-+ * the folio lock prevents concurrent conversion to device-exclusive.
-+ *
-+ * TODO: the folio lock does not protect against all cases of concurrent
-+ * page table modifications (e.g., MADV_DONTNEED, mprotect), so device drivers
-+ * must already use MMU notifiers to sync against any concurrent changes
-+ * Maybe the requirement for the folio lock can be dropped in the future.
-+ */
- static void restore_exclusive_pte(struct vm_area_struct *vma,
- 		struct folio *folio, struct page *page, unsigned long address,
- 		pte_t *ptep, pte_t orig_pte)
--- 
-2.48.1
+Hoenstely, I'd rather invest more effort into being able to update
+owner for those special corner cases than to slow down the fast path
+in hmm_range_fault..
 
+The notion is that owner should represent a contiguous region of
+connectivity. IMHO you can always create this, but I suppose there
+could be corner cases where you need to split/merge owners.
+
+But again, this isn't set in stone, if someone has a better way to
+match the private interconnects without going to driver callbacks then
+try that too.
+
+I think driver callbacks inside hmm_range_fault should be the last resort..
+
+> You can fake that by doing these checks after hmm_range_fault returned,
+> and if you get a bunch of unsuitable pages, toss it back to
+> hmm_range_fault asking for an unconditional migration to system memory for
+> those. But that's kinda not great and I think goes at least against the
+> spirit of how you want to handle pci p2p in step 2 below?
+
+Right, hmm_range_fault should return pages that can be used and you
+should not call it twice.
+
+Jason
