@@ -2,94 +2,79 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id 3BA45A21E21
-	for <lists+nouveau@lfdr.de>; Wed, 29 Jan 2025 14:48:06 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id C8206A21FC3
+	for <lists+nouveau@lfdr.de>; Wed, 29 Jan 2025 15:54:49 +0100 (CET)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 83E6D10E06C;
-	Wed, 29 Jan 2025 13:48:01 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 65CEA10E836;
+	Wed, 29 Jan 2025 14:54:45 +0000 (UTC)
 Authentication-Results: gabe.freedesktop.org;
-	dkim=pass (2048-bit key; secure) header.d=ziepe.ca header.i=@ziepe.ca header.b="XWC0ytNF";
+	dkim=fail reason="signature verification failed" (2048-bit key; unprotected) header.d=igalia.com header.i=@igalia.com header.b="Kr81Qjcg";
 	dkim-atps=neutral
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from mail-qt1-f182.google.com (mail-qt1-f182.google.com
- [209.85.160.182])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 19F1410E09D
- for <nouveau@lists.freedesktop.org>; Wed, 29 Jan 2025 13:47:59 +0000 (UTC)
-Received: by mail-qt1-f182.google.com with SMTP id
- d75a77b69052e-467a3f1e667so41886771cf.0
- for <nouveau@lists.freedesktop.org>; Wed, 29 Jan 2025 05:47:59 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=ziepe.ca; s=google; t=1738158479; x=1738763279; darn=lists.freedesktop.org; 
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=TGxs1D5kHZWfV3TMw8ydKze6LYDZn037JbgBy8rBgVo=;
- b=XWC0ytNFtdHYpPu1IhbMjjVcjVyUgdC+oq3yfh6bErdKGIkhBSKV1WZbcFjnYLitBq
- 77vYJOuMrPAeHfHUBH/1hwvz/ymG2mAgfy/VnZ+zJomtjXYwmRXiNcHV5eCfZHlfHmuF
- DbPxw7MunzVhnORcMrz9C9ZJG85UwxQ8YSD82wxKJqetlAdunrxfK0qfVCExWdVBh8qG
- plJLTW7bzxji1cvez5oL8T64Ma9sRL9e1bc7+ffw+mUDCwy3gRGPy8ExOTemR+xwB3gC
- 6IUhQJxULZPLZ5Pni6PuwkHb9wTgwvAvdPPLoa+Qpz90AheuKrfjNyBBWuAbljqWDs1h
- gEQA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1738158479; x=1738763279;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:to:from:date:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=TGxs1D5kHZWfV3TMw8ydKze6LYDZn037JbgBy8rBgVo=;
- b=Vdr22sq1kwzi1VYF4djPNK1fE+8w8gJiNX/e9asW4aE1rz9JfsqhnH/ihsI3FxnIjP
- LraaFWvMJKJesItUrnU8nmwhHaDTSdqFvPEiQ93FXnY+KuoRQPHknuWgllNbK5zuwu5p
- F/5a7K4Zua2HNu6L0jvps3el5q+znBErnVSmz0DSRhvtZnFmYAChbA7qug21PP8UIssU
- FVyvnrsOTWPNi9k3NLmhc0ltwjuOZs592WEA2qsy7+pKXjiQS6jAWEUHsCxETULy1Tb5
- yE8h73mQJRO/iATqjwT6hnjy8IAuOkwcJtXlCfyS/iVV7hGYfQdfkza3qqnGTUNMe4BV
- gd3w==
-X-Forwarded-Encrypted: i=1;
- AJvYcCWBcjG4GjuYLg+oFJHGvgIwdFMLqps+KK2qu8MNNUsTBe3fy+rQLh5E05FwMreZeFGbB3HR1Pa8@lists.freedesktop.org
-X-Gm-Message-State: AOJu0Ywpoy7DDZyMc3NREu2Sg/STwL8ncT/TIO87SlBSif9WiCXOSZJL
- yVybk6+kvxdTbYX6Jp8Ai5Pub1Q5FvmehqvoCfvRvGycRtXOGiUDcqQz/6Ym+9Q=
-X-Gm-Gg: ASbGncslSXwEF+rr02x90YeWQSiXpG08DJSKZG8GqfMVZatz2pB2HLsx7u2bKjKZ958
- YyfXojvaGxtWN4TaRUY+/RmwsTHn545C4RUwfCjzk0vy7yeA76Z33mztds3T2+s+NAyfdHdxMwY
- Aa5vJt1pKAvYuO/bVKCCSz2b6VIbvc1CH2ATpEeD0NGmbE7SwY/M8kf8NzqA8D8UZ5cGSeCOz96
- V+BEl3LzIyPWF/cjXmlwJf3IdJpK7w6aX1r5tXgBZ/95x/UbpsiKtyuXt+af98eo73u5yYvpuMI
- 4Jutdz2NL4FFbc1vuGnfzxm1WhwTiG65AiYvCR/oTf8+5AHnOXYXqJIW1balObqG
-X-Google-Smtp-Source: AGHT+IHuYCAk+wYHqjFRDvmI1uuhKYfRXYz+H9jof+ajiAjSs3miFEirWAObJrrIBPKksD6vvP2lVg==
-X-Received: by 2002:ac8:5a08:0:b0:46c:782f:5f85 with SMTP id
- d75a77b69052e-46fd0b98596mr53288201cf.52.1738158478735; 
- Wed, 29 Jan 2025 05:47:58 -0800 (PST)
-Received: from ziepe.ca
- (hlfxns017vw-142-68-128-5.dhcp-dynamic.fibreop.ns.bellaliant.net.
- [142.68.128.5]) by smtp.gmail.com with ESMTPSA id
- d75a77b69052e-46e66b67680sm62281881cf.60.2025.01.29.05.47.57
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 29 Jan 2025 05:47:58 -0800 (PST)
-Received: from jgg by wakko with local (Exim 4.97)
- (envelope-from <jgg@ziepe.ca>) id 1td8Q9-00000009BlF-1by8;
- Wed, 29 Jan 2025 09:47:57 -0400
-Date: Wed, 29 Jan 2025 09:47:57 -0400
-From: Jason Gunthorpe <jgg@ziepe.ca>
-To: Thomas =?utf-8?Q?Hellstr=C3=B6m?= <thomas.hellstrom@linux.intel.com>,
- Yonatan Maman <ymaman@nvidia.com>, kherbst@redhat.com,
- lyude@redhat.com, dakr@redhat.com, airlied@gmail.com,
- simona@ffwll.ch, leon@kernel.org, jglisse@redhat.com,
- akpm@linux-foundation.org, GalShalom@nvidia.com,
- dri-devel@lists.freedesktop.org, nouveau@lists.freedesktop.org,
- linux-kernel@vger.kernel.org, linux-rdma@vger.kernel.org,
- linux-mm@kvack.org, linux-tegra@vger.kernel.org
-Subject: Re: [RFC 1/5] mm/hmm: HMM API to enable P2P DMA for device private
- pages
-Message-ID: <20250129134757.GA2120662@ziepe.ca>
-References: <20241201103659.420677-1-ymaman@nvidia.com>
- <20241201103659.420677-2-ymaman@nvidia.com>
- <7282ac68c47886caa2bc2a2813d41a04adf938e1.camel@linux.intel.com>
- <20250128132034.GA1524382@ziepe.ca>
- <de293a7e9b4c44eab8792b31a4605cc9e93b2bf5.camel@linux.intel.com>
- <20250128151610.GC1524382@ziepe.ca>
- <b78d32e13811ef1fa57b0535749c811f2afb4dcd.camel@linux.intel.com>
- <20250128172123.GD1524382@ziepe.ca>
- <Z5ovcnX2zVoqdomA@phenom.ffwll.local>
+Received: from fanzine2.igalia.com (fanzine.igalia.com [178.60.130.6])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 2236C10E819;
+ Wed, 29 Jan 2025 14:54:43 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=igalia.com; 
+ s=20170329;
+ h=Content-Transfer-Encoding:Content-Type:In-Reply-To:From:
+ References:Cc:To:Subject:MIME-Version:Date:Message-ID:Sender:Reply-To:
+ Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
+ Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
+ List-Subscribe:List-Post:List-Owner:List-Archive;
+ bh=ATdtI6Dd3DoUOYZ07wKSkHu7Owxf4k55Pq91Q66IojI=; b=Kr81QjcgK6UcWQra5TY/YKkye5
+ gxtg82HR7U34vK8NxfC9/BT4IxNPjjQrc0uhiNUyrv0fdLE6HpwrjFwtUGF59YB7uKNYOrpRl9ZyT
+ Xd2DpdST9ZiJTU/CEeBz7h0AH6hQIqCYNGVp9icPhR3guTEkX5MjRFUm/YJWgYhRTUr6z/SMnD9Bd
+ RzVpevEoWEkTluuTEn14W1AImKGAewSb6JZ9qf8zllJ3pJt+gE5YPZEx4/AS8z399cyCPRgG8cHRt
+ neJZKUOvfdu4n9a4/09nP5Oa/ihfliclagdSPdhu85WE6FMofNcFJ6+3ksV+0/h7FcMLziY/Y4AQV
+ GCU5uudg==;
+Received: from [187.36.213.55] (helo=[192.168.1.103])
+ by fanzine2.igalia.com with esmtpsa 
+ (Cipher TLS1.3:ECDHE_X25519__RSA_PSS_RSAE_SHA256__AES_128_GCM:128) (Exim)
+ id 1td9S5-000ck3-Qz; Wed, 29 Jan 2025 15:54:07 +0100
+Message-ID: <d3ab5057-22fe-43d5-baea-4dec091fb303@igalia.com>
+Date: Wed, 29 Jan 2025 11:53:47 -0300
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <Z5ovcnX2zVoqdomA@phenom.ffwll.local>
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v2] drm/sched: Use struct for drm_sched_init() params
+To: phasta@kernel.org, Alex Deucher <alexander.deucher@amd.com>,
+ =?UTF-8?Q?Christian_K=C3=B6nig?= <christian.koenig@amd.com>,
+ Xinhui Pan <Xinhui.Pan@amd.com>, David Airlie <airlied@gmail.com>,
+ Simona Vetter <simona@ffwll.ch>, Lucas Stach <l.stach@pengutronix.de>,
+ Russell King <linux+etnaviv@armlinux.org.uk>,
+ Christian Gmeiner <christian.gmeiner@gmail.com>,
+ Frank Binns <frank.binns@imgtec.com>, Matt Coster <matt.coster@imgtec.com>,
+ Maarten Lankhorst <maarten.lankhorst@linux.intel.com>,
+ Maxime Ripard <mripard@kernel.org>, Thomas Zimmermann <tzimmermann@suse.de>,
+ Qiang Yu <yuq825@gmail.com>, Rob Clark <robdclark@gmail.com>,
+ Sean Paul <sean@poorly.run>, Konrad Dybcio <konradybcio@kernel.org>,
+ Abhinav Kumar <quic_abhinavk@quicinc.com>,
+ Dmitry Baryshkov <dmitry.baryshkov@linaro.org>,
+ Marijn Suijten <marijn.suijten@somainline.org>,
+ Karol Herbst <kherbst@redhat.com>, Lyude Paul <lyude@redhat.com>,
+ Danilo Krummrich <dakr@redhat.com>,
+ Boris Brezillon <boris.brezillon@collabora.com>,
+ Rob Herring <robh@kernel.org>, Steven Price <steven.price@arm.com>,
+ Liviu Dudau <liviu.dudau@arm.com>, Matthew Brost <matthew.brost@intel.com>,
+ Melissa Wen <mwen@igalia.com>, Lucas De Marchi <lucas.demarchi@intel.com>,
+ =?UTF-8?Q?Thomas_Hellstr=C3=B6m?= <thomas.hellstrom@linux.intel.com>,
+ Rodrigo Vivi <rodrigo.vivi@intel.com>, Sunil Khatri <sunil.khatri@amd.com>,
+ Lijo Lazar <lijo.lazar@amd.com>, Hawking Zhang <Hawking.Zhang@amd.com>,
+ Mario Limonciello <mario.limonciello@amd.com>, Ma Jun <Jun.Ma2@amd.com>,
+ Yunxiang Li <Yunxiang.Li@amd.com>
+Cc: amd-gfx@lists.freedesktop.org, dri-devel@lists.freedesktop.org,
+ linux-kernel@vger.kernel.org, etnaviv@lists.freedesktop.org,
+ lima@lists.freedesktop.org, linux-arm-msm@vger.kernel.org,
+ freedreno@lists.freedesktop.org, nouveau@lists.freedesktop.org,
+ intel-xe@lists.freedesktop.org
+References: <20250128142927.103290-2-phasta@kernel.org>
+ <f8c9a876-4616-454d-a816-bb3c90960245@igalia.com>
+ <c5c3791df54b7ae4ba1a31159a4beda0b44d00cf.camel@mailbox.org>
+Content-Language: en-US
+From: =?UTF-8?Q?Ma=C3=ADra_Canal?= <mcanal@igalia.com>
+In-Reply-To: <c5c3791df54b7ae4ba1a31159a4beda0b44d00cf.camel@mailbox.org>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 8bit
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -104,41 +89,189 @@ List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-On Wed, Jan 29, 2025 at 02:38:58PM +0100, Simona Vetter wrote:
+Hi Philipp,
 
-> > The pgmap->owner doesn't *have* to fixed, certainly during early boot before
-> > you hand out any page references it can be changed. I wouldn't be
-> > surprised if this is useful to some requirements to build up the
-> > private interconnect topology?
+On 29/01/25 09:39, Philipp Stanner wrote:
+> On Wed, 2025-01-29 at 07:53 -0300, Maíra Canal wrote:
+>> Hi Philipp,
+>>
+>> On 28/01/25 11:29, Philipp Stanner wrote:
+>>> drm_sched_init() has a great many parameters and upcoming new
+>>> functionality for the scheduler might add even more. Generally, the
+>>> great number of parameters reduces readability and has already
+>>> caused
+>>> one missnaming in:
+>>>
+>>> commit 6f1cacf4eba7 ("drm/nouveau: Improve variable name in
+>>> nouveau_sched_init()").
+>>>
+>>> Introduce a new struct for the scheduler init parameters and port
+>>> all
+>>> users.
+>>>
+>>> Signed-off-by: Philipp Stanner <phasta@kernel.org>
+>>> ---
+>>> Changes in v2:
+>>>     - Point out that the hang-limit is deprecated. (Christian)
+>>>     - Initialize the structs to 0 at declaration. (Planet Earth)
+>>>     - Don't set stuff explicitly to 0 / NULL. (Tvrtko)
+>>>     - Make the structs const where possible. (Boris)
+>>>     - v3d: Use just 1, universal, function for sched-init. (Maíra)
+>>> ---
+>>>    drivers/gpu/drm/amd/amdgpu/amdgpu_device.c | 18 ++++--
+>>>    drivers/gpu/drm/etnaviv/etnaviv_sched.c    | 20 +++----
+>>>    drivers/gpu/drm/imagination/pvr_queue.c    | 18 ++++--
+>>>    drivers/gpu/drm/lima/lima_sched.c          | 16 +++--
+>>>    drivers/gpu/drm/msm/msm_ringbuffer.c       | 17 +++---
+>>>    drivers/gpu/drm/nouveau/nouveau_sched.c    | 15 +++--
+>>>    drivers/gpu/drm/panfrost/panfrost_job.c    | 20 ++++---
+>>>    drivers/gpu/drm/panthor/panthor_mmu.c      | 16 +++--
+>>>    drivers/gpu/drm/panthor/panthor_sched.c    | 29 +++++----
+>>>    drivers/gpu/drm/scheduler/sched_main.c     | 50 ++++++----------
+>>>    drivers/gpu/drm/v3d/v3d_sched.c            | 68 +++++++++--------
+>>> -----
+>>>    drivers/gpu/drm/xe/xe_execlist.c           | 16 +++--
+>>>    drivers/gpu/drm/xe/xe_gpu_scheduler.c      | 17 +++++-
+>>>    include/drm/gpu_scheduler.h                | 37 ++++++++++--
+>>>    14 files changed, 206 insertions(+), 151 deletions(-)
+>>>
+>>
+>> [...]
+>>
+>>> diff --git a/drivers/gpu/drm/panthor/panthor_sched.c
+>>> b/drivers/gpu/drm/panthor/panthor_sched.c
+>>> index 5844a7f639e0..44713cfdcd74 100644
+>>> --- a/drivers/gpu/drm/panthor/panthor_sched.c
+>>> +++ b/drivers/gpu/drm/panthor/panthor_sched.c
+>>> @@ -3284,6 +3284,22 @@ static struct panthor_queue *
+>>>    group_create_queue(struct panthor_group *group,
+>>>    		   const struct drm_panthor_queue_create *args)
+>>>    {
+>>> +	const struct drm_sched_init_args sched_args = {
+>>> +		.ops = &panthor_queue_sched_ops,
+>>> +		.submit_wq = group->ptdev->scheduler->wq,
+>>> +		.num_rqs = 1,
+>>> +		/*
+>>> +		 * The credit limit argument tells us the total
+>>> number of
+>>> +		 * instructions across all CS slots in the
+>>> ringbuffer, with
+>>> +		 * some jobs requiring twice as many as others,
+>>> depending on
+>>> +		 * their profiling status.
+>>> +		 */
+>>> +		.credit_limit = args->ringbuf_size / sizeof(u64),
+>>> +		.timeout = msecs_to_jiffies(JOB_TIMEOUT_MS),
+>>> +		.timeout_wq = group->ptdev->reset.wq,
+>>> +		.name = "panthor-queue",
+>>> +		.dev = group->ptdev->base.dev
+>>> +	};
+>>>    	struct drm_gpu_scheduler *drm_sched;
+>>>    	struct panthor_queue *queue;
+>>>    	int ret;
+>>> @@ -3354,17 +3370,8 @@ group_create_queue(struct panthor_group
+>>> *group,
+>>>    	if (ret)
+>>>    		goto err_free_queue;
+>>>    
+>>> -	/*
+>>> -	 * Credit limit argument tells us the total number of
+>>> instructions
+>>> -	 * across all CS slots in the ringbuffer, with some jobs
+>>> requiring
+>>> -	 * twice as many as others, depending on their profiling
+>>> status.
+>>> -	 */
+>>> -	ret = drm_sched_init(&queue->scheduler,
+>>> &panthor_queue_sched_ops,
+>>> -			     group->ptdev->scheduler->wq, 1,
+>>> -			     args->ringbuf_size / sizeof(u64),
+>>> -			     0, msecs_to_jiffies(JOB_TIMEOUT_MS),
+>>> -			     group->ptdev->reset.wq,
+>>> -			     NULL, "panthor-queue", group->ptdev-
+>>>> base.dev);
+>>> +
+>>
+>> Please don't use multiple blank lines.
+>>
+>>> +	ret = drm_sched_init(&queue->scheduler, &sched_args);
+>>>    	if (ret)
+>>>    		goto err_free_queue;
+>>>    
+>>> diff --git a/drivers/gpu/drm/scheduler/sched_main.c
+>>> b/drivers/gpu/drm/scheduler/sched_main.c
+>>> index a48be16ab84f..6295b2654a7c 100644
+>>> --- a/drivers/gpu/drm/scheduler/sched_main.c
+>>> +++ b/drivers/gpu/drm/scheduler/sched_main.c
+>>> @@ -1244,40 +1244,24 @@ static void drm_sched_run_job_work(struct
+>>> work_struct *w)
+>>>     * drm_sched_init - Init a gpu scheduler instance
+>>>     *
+>>>     * @sched: scheduler instance
+>>> - * @ops: backend operations for this scheduler
+>>> - * @submit_wq: workqueue to use for submission. If NULL, an
+>>> ordered wq is
+>>> - *	       allocated and used
+>>> - * @num_rqs: number of runqueues, one for each priority, up to
+>>> DRM_SCHED_PRIORITY_COUNT
+>>> - * @credit_limit: the number of credits this scheduler can hold
+>>> from all jobs
+>>> - * @hang_limit: number of times to allow a job to hang before
+>>> dropping it
+>>> - * @timeout: timeout value in jiffies for the scheduler
+>>> - * @timeout_wq: workqueue to use for timeout work. If NULL, the
+>>> system_wq is
+>>> - *		used
+>>> - * @score: optional score atomic shared with other schedulers
+>>> - * @name: name used for debugging
+>>> - * @dev: target &struct device
+>>> + * @args: scheduler initialization arguments
+>>>     *
+>>>     * Return 0 on success, otherwise error code.
+>>>     */
+>>> -int drm_sched_init(struct drm_gpu_scheduler *sched,
+>>> -		   const struct drm_sched_backend_ops *ops,
+>>> -		   struct workqueue_struct *submit_wq,
+>>> -		   u32 num_rqs, u32 credit_limit, unsigned int
+>>> hang_limit,
+>>> -		   long timeout, struct workqueue_struct
+>>> *timeout_wq,
+>>> -		   atomic_t *score, const char *name, struct
+>>> device *dev)
+>>> +int drm_sched_init(struct drm_gpu_scheduler *sched, const struct
+>>> drm_sched_init_args *args)
+>>>    {
+>>>    	int i;
+>>>    
+>>> -	sched->ops = ops;
+>>> -	sched->credit_limit = credit_limit;
+>>> -	sched->name = name;
+>>> -	sched->timeout = timeout;
+>>> -	sched->timeout_wq = timeout_wq ? : system_wq;
+>>> -	sched->hang_limit = hang_limit;
+>>> -	sched->score = score ? score : &sched->_score;
+>>> -	sched->dev = dev;
+>>> +	sched->ops = args->ops;
+>>> +	sched->credit_limit = args->credit_limit;
+>>> +	sched->name = args->name;
+>>> +	sched->timeout = args->timeout;
+>>> +	sched->timeout_wq = args->timeout_wq ? : system_wq;
+>>> +	sched->hang_limit = args->hang_limit;
+>>> +	sched->score = args->score ? args->score : &sched->_score;
+>>
+>> Could we keep it consistent and use the Elvis Operator here as well?
+>> Just like `sched->timeout_wq`.
 > 
-> The trouble I'm seeing is device probe and the fundemantal issue that you
-> never know when you're done. And so if we entirely rely on pgmap->owner to
-> figure out the driver private interconnect topology, that's going to be
-> messy. That's why I'm also leaning towards both comparing owners and
-> having an additional check whether the interconnect is actually there or
-> not yet.
+> This is literally just the old code.
+> 
+> And if at all, this insanely stupid GCC extension should not be used.
+> It's one of the typical compiler people rampages that make the C
+> language so terrible.
 
-Hoenstely, I'd rather invest more effort into being able to update
-owner for those special corner cases than to slow down the fast path
-in hmm_range_fault..
+Not a problem to me, we can remove the Elvis Operator from `sched-
+ >timeout_wq`. My idea is just to do things consistently in variable
+assignment.
 
-The notion is that owner should represent a contiguous region of
-connectivity. IMHO you can always create this, but I suppose there
-could be corner cases where you need to split/merge owners.
+Best Regards,
+- Maíra
 
-But again, this isn't set in stone, if someone has a better way to
-match the private interconnects without going to driver callbacks then
-try that too.
-
-I think driver callbacks inside hmm_range_fault should be the last resort..
-
-> You can fake that by doing these checks after hmm_range_fault returned,
-> and if you get a bunch of unsuitable pages, toss it back to
-> hmm_range_fault asking for an unconditional migration to system memory for
-> those. But that's kinda not great and I think goes at least against the
-> spirit of how you want to handle pci p2p in step 2 below?
-
-Right, hmm_range_fault should return pages that can be used and you
-should not call it twice.
-
-Jason
