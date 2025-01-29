@@ -2,75 +2,75 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id 8EE35A21C9E
+	by mail.lfdr.de (Postfix) with ESMTPS id DD84DA21C9F
 	for <lists+nouveau@lfdr.de>; Wed, 29 Jan 2025 12:54:41 +0100 (CET)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 1DF3F10E7C5;
+	by gabe.freedesktop.org (Postfix) with ESMTP id 5302510E7CC;
 	Wed, 29 Jan 2025 11:54:40 +0000 (UTC)
 Authentication-Results: gabe.freedesktop.org;
-	dkim=pass (1024-bit key; unprotected) header.d=redhat.com header.i=@redhat.com header.b="LKUWO0PY";
+	dkim=pass (1024-bit key; unprotected) header.d=redhat.com header.i=@redhat.com header.b="awURBN+K";
 	dkim-atps=neutral
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
 Received: from us-smtp-delivery-124.mimecast.com
- (us-smtp-delivery-124.mimecast.com [170.10.133.124])
- by gabe.freedesktop.org (Postfix) with ESMTPS id F01AA10E7C7
- for <nouveau@lists.freedesktop.org>; Wed, 29 Jan 2025 11:54:34 +0000 (UTC)
+ (us-smtp-delivery-124.mimecast.com [170.10.129.124])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 680FB10E7C5
+ for <nouveau@lists.freedesktop.org>; Wed, 29 Jan 2025 11:54:39 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1738151674;
+ s=mimecast20190719; t=1738151678;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:content-type:content-type:
  content-transfer-encoding:content-transfer-encoding:
  in-reply-to:in-reply-to:references:references;
- bh=bwRdkJe7S5eVWCBWfyg7xh/8u+L2oGZrd41rkCVbduE=;
- b=LKUWO0PYGzc9dUy1UErMnP8OYzjxyiNMxuix/cKwbPyIYHzTWSCZCK/Ib22baSZ9WegrhN
- ldpZLa/hVFB859ju/s4ficWmRE3y6m/T5i8guJeslw1W7X2ECh7t6EfQIgmSCK2Y2tpH3O
- MtgNE6Qmg5ZnLmmDXl36+UQx08cRwOI=
-Received: from mail-wm1-f69.google.com (mail-wm1-f69.google.com
- [209.85.128.69]) by relay.mimecast.com with ESMTP with STARTTLS
+ bh=SXa0V5qonctJf7EFSiCmTQng5dHGkyNA7f/zw6SOSBk=;
+ b=awURBN+KfDqWaX+xU6/9Dzk8NZPW56HPsJTSmeQaf6HFBWVWIIEjMoFxdEpUdWOHKdl2gf
+ ZfWEpQCTdGoTLp0mZiQDsuFbVzS28uCflX1jQhLbaWYyICQcFCKQsceUFWnSrJF30rPU3c
+ HNLnf4yNA+sExmOcS+4TaEudZgQvxh8=
+Received: from mail-wr1-f70.google.com (mail-wr1-f70.google.com
+ [209.85.221.70]) by relay.mimecast.com with ESMTP with STARTTLS
  (version=TLSv1.3, cipher=TLS_AES_256_GCM_SHA384) id
- us-mta-576-7BPZWGE0PQKEGbj5hNvZwQ-1; Wed, 29 Jan 2025 06:54:32 -0500
-X-MC-Unique: 7BPZWGE0PQKEGbj5hNvZwQ-1
-X-Mimecast-MFC-AGG-ID: 7BPZWGE0PQKEGbj5hNvZwQ
-Received: by mail-wm1-f69.google.com with SMTP id
- 5b1f17b1804b1-436723db6c4so46630045e9.3
- for <nouveau@lists.freedesktop.org>; Wed, 29 Jan 2025 03:54:32 -0800 (PST)
+ us-mta-453-PtFszvSyP-iRrDwj7KY6AQ-1; Wed, 29 Jan 2025 06:54:35 -0500
+X-MC-Unique: PtFszvSyP-iRrDwj7KY6AQ-1
+X-Mimecast-MFC-AGG-ID: PtFszvSyP-iRrDwj7KY6AQ
+Received: by mail-wr1-f70.google.com with SMTP id
+ ffacd0b85a97d-38a684a096eso3012809f8f.2
+ for <nouveau@lists.freedesktop.org>; Wed, 29 Jan 2025 03:54:35 -0800 (PST)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1738151671; x=1738756471;
+ d=1e100.net; s=20230601; t=1738151674; x=1738756474;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=bwRdkJe7S5eVWCBWfyg7xh/8u+L2oGZrd41rkCVbduE=;
- b=DyW/gCLk8wDv2IH95ta7xndUdQ2rxJqN3KRifz8V4uGC823EaBNfyAP1Re1Ln+cX50
- 4YNbnLw/PzGgRV+J1B0pG6ACnn2C7JIbRhxMXsyB2aEvNgX9TkXDkTDO9hmfbpcvtJw7
- M0nLIYIG/4cSpXW/TRb6/g9iUTTx8aTCVREkxCixaoia4DGdeDOQeTHaxW6xonRhDcoc
- ueeJIaAsuZshV2sPBdv/sNyJuEnWnHBgX9ix4aOUozQoEzpdFWkvGTFM2ctjsKJFh3SO
- Tlty9jvPODNcPeFFunTSYNYvZcDPgeGvKySE3FfwZEPkSuFGueas0FuZ9WMnkkHOMGWm
- nihg==
+ bh=SXa0V5qonctJf7EFSiCmTQng5dHGkyNA7f/zw6SOSBk=;
+ b=KeOBnWxVa1de1Pmz+x/gN9Dfmw7U4CQRMPq1L9h4ZnuB9FpsTFJG5vPW92WREBlLKJ
+ hayiaBrLbwT2fKaIv8IaoAVmzYOwAzi4vsUOkwxF8kD5Lv3ypiPEzA7x6L0hlTVhlx/y
+ J7X4CPi0bY2F5QAFQyBbG6FyQYuOKOldCo4U3nQQFySOZTNs1qvJJT/jKZEb7sfMFbEv
+ i0mrs2IvMlvFTR+K7bP6plC+rGxnnnLHxnDasVMSQ6p+5170bj02b0QO572MU0fv8iBz
+ GsNy64cve24uApO9itqzPIWnN9a1h1Ff+b9ZfL9HtlpBpjFiHBVnSq+Ovc9so30ZnSls
+ ITiA==
 X-Forwarded-Encrypted: i=1;
- AJvYcCVVZFOopJhEZXWyuCi9xWjZnfO3NM4xntr/v8B9v3cUdY8PaEErRjEaqBSIVE9TvSyT/A3Ex+QJ@lists.freedesktop.org
-X-Gm-Message-State: AOJu0YylsIX9HvViQI3hipqliSpKgJToRtPAY/YsscdW+W3hrsFXXTU/
- WPqKMi/TCbGE39Oxs1mh6PP6ewUCSmIHV44ehWw8QN5hLt9613Ci3fzLDzsDCFDkiJbU8JLkhy9
- OhHyZCqR0nmZAuJc7MOFLqnU0JajpB3qJf7BC9aV4gSkStz4GsYB8lHWDNHSBUdo=
-X-Gm-Gg: ASbGncsQCAxVs/A34WwY7LzCxnQjPMAFmOuWMxnk2dLZ2jzVgcqTouYQ9ROQyXUWahs
- /oSXVPAequB4MAkefak8dZx8e++nJK3hrqp6Dy/U1E4Kg4i/9e3JEoikw3vlkraBafNsCe29iNn
- +YAzx1en3Z67IVRW4URwheHzSQtBAxOO5EsBi8uxlMsbqcJBDoKpDFeNzQK8jh4bYZrZdGD8cq+
- a7HFXxlJsRj+QDi8KnhiW+DmEBy61eNvc8FDxdLT6OWnkU9tVU0mw0Ge/pQv4SIkXhYGpEAirDY
- QxTkkTYdWErMGCEm6zINYXCjr7fN9JdwPu0CURtGDAanHiyDFhdjB54u9emyBBDl/A==
-X-Received: by 2002:a05:600c:1c1a:b0:434:f9c4:a850 with SMTP id
- 5b1f17b1804b1-438dc3c4623mr25664755e9.10.1738151671646; 
- Wed, 29 Jan 2025 03:54:31 -0800 (PST)
-X-Google-Smtp-Source: AGHT+IEhuPkSFqdGYqW92VDVvy4lKssWj+By02GdvgYFn3sg13RZ9e45UT5b96yUwTD+A2GCuT4qDg==
-X-Received: by 2002:a05:600c:1c1a:b0:434:f9c4:a850 with SMTP id
- 5b1f17b1804b1-438dc3c4623mr25664525e9.10.1738151671268; 
- Wed, 29 Jan 2025 03:54:31 -0800 (PST)
+ AJvYcCWdPSTluyKnHA//bVS59ZMVv03/fTPIGta68ySF+D8fvw1OzunF+VcqS1yqHxNoX4VT3Z3kUJR7@lists.freedesktop.org
+X-Gm-Message-State: AOJu0YwLD8tOdNYBed+TXvYdGjwxOShS3ToKtjiRCuP0nr4QeWC4/QQA
+ g8g5Bc6FcyP0q6MIxciOI2MxcKLhZVdghKT1o2W8kD22I6HER06GH5bI6W3+8rMO7ancCzCJJPj
+ I9C2EkX8KaOM9zgtmnQboQH4pVIrRJ52nIyTbSAgVSNcaN3Zj5yazl7R9bEkV82Y=
+X-Gm-Gg: ASbGnctpcxmhqg6DcH+G/9fUW7ELBwVf+iOQlWIHkAV/GPCQV9DrdrxrLfx90B1deAs
+ DwA12/pahHDbtLsePPfspCfL9ScthxLPeOonV8mGwqPuzvf5o8np0PbqllGk0dVltvKta8PAHBY
+ 7y+BUd4udTUHBeXtdeVGFgPYQtaKapfJWFL+aPRyZhnsqpsqG1LsN1ZY9aFLB2ctsoQN54KMI92
+ Sd4H56t3ZDPR1bVNKIgCB+12brn0B8efftSZcMvWAR/JXSXwdX7Km7BfMUU06jn6xW0qbBTOYtd
+ jA/HYUTvNcVeiwazwTpgD89fppALWgrHoVxmwQkTFCqrUrBZgeHWSbdth49lhpW7DQ==
+X-Received: by 2002:a5d:61cd:0:b0:385:f7ef:a57f with SMTP id
+ ffacd0b85a97d-38c519744d5mr2113615f8f.27.1738151674156; 
+ Wed, 29 Jan 2025 03:54:34 -0800 (PST)
+X-Google-Smtp-Source: AGHT+IGYVCfHEVHB5xz9x9tgAenDwJY8DuXR9neg40xsYB0gvwDn7frPxCs2ZGd0+jvQzBFPN5gg9A==
+X-Received: by 2002:a5d:61cd:0:b0:385:f7ef:a57f with SMTP id
+ ffacd0b85a97d-38c519744d5mr2113590f8f.27.1738151673837; 
+ Wed, 29 Jan 2025 03:54:33 -0800 (PST)
 Received: from localhost
  (p200300cbc7053b0064b867195794bf13.dip0.t-ipconnect.de.
  [2003:cb:c705:3b00:64b8:6719:5794:bf13])
  by smtp.gmail.com with UTF8SMTPSA id
- 5b1f17b1804b1-438dcc24e73sm20192895e9.16.2025.01.29.03.54.28
+ ffacd0b85a97d-38c2a1bb040sm16943248f8f.67.2025.01.29.03.54.31
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Wed, 29 Jan 2025 03:54:30 -0800 (PST)
+ Wed, 29 Jan 2025 03:54:32 -0800 (PST)
 From: David Hildenbrand <david@redhat.com>
 To: linux-kernel@vger.kernel.org
 Cc: linux-doc@vger.kernel.org, dri-devel@lists.freedesktop.org,
@@ -87,15 +87,16 @@ Cc: linux-doc@vger.kernel.org, dri-devel@lists.freedesktop.org,
  Vlastimil Babka <vbabka@suse.cz>, Jann Horn <jannh@google.com>,
  Pasha Tatashin <pasha.tatashin@soleen.com>, Peter Xu <peterx@redhat.com>,
  Alistair Popple <apopple@nvidia.com>, Jason Gunthorpe <jgg@nvidia.com>
-Subject: [PATCH v1 06/12] mm: use single SWP_DEVICE_EXCLUSIVE entry type
-Date: Wed, 29 Jan 2025 12:54:04 +0100
-Message-ID: <20250129115411.2077152-7-david@redhat.com>
+Subject: [PATCH v1 07/12] mm/page_vma_mapped: device-private entries are not
+ migration entries
+Date: Wed, 29 Jan 2025 12:54:05 +0100
+Message-ID: <20250129115411.2077152-8-david@redhat.com>
 X-Mailer: git-send-email 2.48.1
 In-Reply-To: <20250129115411.2077152-1-david@redhat.com>
 References: <20250129115411.2077152-1-david@redhat.com>
 MIME-Version: 1.0
 X-Mimecast-Spam-Score: 0
-X-Mimecast-MFC-PROC-ID: 7FZTIZnN1kVfmOuW5YRlQdNrkF1XZ2qmmvK83kufV-I_1738151672
+X-Mimecast-MFC-PROC-ID: 5Acf8AcC51soGomi71Oiy3CiQc91PkbXvnnb8cpiW4o_1738151674
 X-Mimecast-Originator: redhat.com
 Content-Transfer-Encoding: 8bit
 content-type: text/plain; charset="US-ASCII"; x-default=true
@@ -113,148 +114,34 @@ List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-There is no need for the distinction anymore; let's merge the readable
-and writable device-exclusive entries into a single device-exclusive
-entry type.
+It's unclear why they would be considered migration entries; they are
+not.
 
+Likely we'll never really trigger that case in practice, because
+migration (including folio split) of a folio that has device-private
+entries is never started, as we would detect "additional references":
+device-private entries adjust the mapcount, but not the refcount.
+
+Fixes: b756a3b5e7ea ("mm: device exclusive memory access")
 Signed-off-by: David Hildenbrand <david@redhat.com>
 ---
- include/linux/swap.h    |  7 +++----
- include/linux/swapops.h | 27 ++++-----------------------
- mm/mprotect.c           |  8 --------
- mm/page_table_check.c   |  5 ++---
- mm/rmap.c               |  2 +-
- 5 files changed, 10 insertions(+), 39 deletions(-)
+ mm/page_vma_mapped.c | 3 +--
+ 1 file changed, 1 insertion(+), 2 deletions(-)
 
-diff --git a/include/linux/swap.h b/include/linux/swap.h
-index 91b30701274e..9a48e79a0a52 100644
---- a/include/linux/swap.h
-+++ b/include/linux/swap.h
-@@ -74,14 +74,13 @@ static inline int current_is_kswapd(void)
-  * to a special SWP_DEVICE_{READ|WRITE} entry.
-  *
-  * When a page is mapped by the device for exclusive access we set the CPU page
-- * table entries to special SWP_DEVICE_EXCLUSIVE_* entries.
-+ * table entries to a special SWP_DEVICE_EXCLUSIVE entry.
-  */
- #ifdef CONFIG_DEVICE_PRIVATE
--#define SWP_DEVICE_NUM 4
-+#define SWP_DEVICE_NUM 3
- #define SWP_DEVICE_WRITE (MAX_SWAPFILES+SWP_HWPOISON_NUM+SWP_MIGRATION_NUM)
- #define SWP_DEVICE_READ (MAX_SWAPFILES+SWP_HWPOISON_NUM+SWP_MIGRATION_NUM+1)
--#define SWP_DEVICE_EXCLUSIVE_WRITE (MAX_SWAPFILES+SWP_HWPOISON_NUM+SWP_MIGRATION_NUM+2)
--#define SWP_DEVICE_EXCLUSIVE_READ (MAX_SWAPFILES+SWP_HWPOISON_NUM+SWP_MIGRATION_NUM+3)
-+#define SWP_DEVICE_EXCLUSIVE (MAX_SWAPFILES+SWP_HWPOISON_NUM+SWP_MIGRATION_NUM+2)
- #else
- #define SWP_DEVICE_NUM 0
- #endif
-diff --git a/include/linux/swapops.h b/include/linux/swapops.h
-index 96f26e29fefe..64ea151a7ae3 100644
---- a/include/linux/swapops.h
-+++ b/include/linux/swapops.h
-@@ -186,26 +186,16 @@ static inline bool is_writable_device_private_entry(swp_entry_t entry)
- 	return unlikely(swp_type(entry) == SWP_DEVICE_WRITE);
- }
+diff --git a/mm/page_vma_mapped.c b/mm/page_vma_mapped.c
+index 81839a9e74f1..32679be22d30 100644
+--- a/mm/page_vma_mapped.c
++++ b/mm/page_vma_mapped.c
+@@ -111,8 +111,7 @@ static bool check_pte(struct page_vma_mapped_walk *pvmw)
+ 			return false;
+ 		entry = pte_to_swp_entry(ptent);
  
--static inline swp_entry_t make_readable_device_exclusive_entry(pgoff_t offset)
-+static inline swp_entry_t make_device_exclusive_entry(pgoff_t offset)
- {
--	return swp_entry(SWP_DEVICE_EXCLUSIVE_READ, offset);
--}
--
--static inline swp_entry_t make_writable_device_exclusive_entry(pgoff_t offset)
--{
--	return swp_entry(SWP_DEVICE_EXCLUSIVE_WRITE, offset);
-+	return swp_entry(SWP_DEVICE_EXCLUSIVE, offset);
- }
+-		if (!is_migration_entry(entry) &&
+-		    !is_device_exclusive_entry(entry))
++		if (!is_migration_entry(entry))
+ 			return false;
  
- static inline bool is_device_exclusive_entry(swp_entry_t entry)
- {
--	return swp_type(entry) == SWP_DEVICE_EXCLUSIVE_READ ||
--		swp_type(entry) == SWP_DEVICE_EXCLUSIVE_WRITE;
-+	return swp_type(entry) == SWP_DEVICE_EXCLUSIVE;
- }
- 
--static inline bool is_writable_device_exclusive_entry(swp_entry_t entry)
--{
--	return unlikely(swp_type(entry) == SWP_DEVICE_EXCLUSIVE_WRITE);
--}
- #else /* CONFIG_DEVICE_PRIVATE */
- static inline swp_entry_t make_readable_device_private_entry(pgoff_t offset)
- {
-@@ -227,12 +217,7 @@ static inline bool is_writable_device_private_entry(swp_entry_t entry)
- 	return false;
- }
- 
--static inline swp_entry_t make_readable_device_exclusive_entry(pgoff_t offset)
--{
--	return swp_entry(0, 0);
--}
--
--static inline swp_entry_t make_writable_device_exclusive_entry(pgoff_t offset)
-+static inline swp_entry_t make_device_exclusive_entry(pgoff_t offset)
- {
- 	return swp_entry(0, 0);
- }
-@@ -242,10 +227,6 @@ static inline bool is_device_exclusive_entry(swp_entry_t entry)
- 	return false;
- }
- 
--static inline bool is_writable_device_exclusive_entry(swp_entry_t entry)
--{
--	return false;
--}
- #endif /* CONFIG_DEVICE_PRIVATE */
- 
- #ifdef CONFIG_MIGRATION
-diff --git a/mm/mprotect.c b/mm/mprotect.c
-index 516b1d847e2c..9cb6ab7c4048 100644
---- a/mm/mprotect.c
-+++ b/mm/mprotect.c
-@@ -225,14 +225,6 @@ static long change_pte_range(struct mmu_gather *tlb,
- 				newpte = swp_entry_to_pte(entry);
- 				if (pte_swp_uffd_wp(oldpte))
- 					newpte = pte_swp_mkuffd_wp(newpte);
--			} else if (is_writable_device_exclusive_entry(entry)) {
--				entry = make_readable_device_exclusive_entry(
--							swp_offset(entry));
--				newpte = swp_entry_to_pte(entry);
--				if (pte_swp_soft_dirty(oldpte))
--					newpte = pte_swp_mksoft_dirty(newpte);
--				if (pte_swp_uffd_wp(oldpte))
--					newpte = pte_swp_mkuffd_wp(newpte);
- 			} else if (is_pte_marker_entry(entry)) {
- 				/*
- 				 * Ignore error swap entries unconditionally,
-diff --git a/mm/page_table_check.c b/mm/page_table_check.c
-index 509c6ef8de40..c2b3600429a0 100644
---- a/mm/page_table_check.c
-+++ b/mm/page_table_check.c
-@@ -196,9 +196,8 @@ EXPORT_SYMBOL(__page_table_check_pud_clear);
- /* Whether the swap entry cached writable information */
- static inline bool swap_cached_writable(swp_entry_t entry)
- {
--	return is_writable_device_exclusive_entry(entry) ||
--	    is_writable_device_private_entry(entry) ||
--	    is_writable_migration_entry(entry);
-+	return is_writable_device_private_entry(entry) ||
-+	       is_writable_migration_entry(entry);
- }
- 
- static inline void page_table_check_pte_flags(pte_t pte)
-diff --git a/mm/rmap.c b/mm/rmap.c
-index 49ffac6d27f8..65d9bbea16d0 100644
---- a/mm/rmap.c
-+++ b/mm/rmap.c
-@@ -2470,7 +2470,7 @@ struct page *make_device_exclusive(struct mm_struct *mm, unsigned long addr,
- 	 * do_swap_page() will trigger the conversion back while holding the
- 	 * folio lock.
- 	 */
--	entry = make_writable_device_exclusive_entry(page_to_pfn(page));
-+	entry = make_device_exclusive_entry(page_to_pfn(page));
- 	swp_pte = swp_entry_to_pte(entry);
- 	if (pte_soft_dirty(fw.pte))
- 		swp_pte = pte_swp_mksoft_dirty(swp_pte);
+ 		pfn = swp_offset_pfn(entry);
 -- 
 2.48.1
 
