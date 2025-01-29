@@ -2,75 +2,75 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id 41890A21C8E
-	for <lists+nouveau@lfdr.de>; Wed, 29 Jan 2025 12:54:25 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 4267BA21C92
+	for <lists+nouveau@lfdr.de>; Wed, 29 Jan 2025 12:54:27 +0100 (CET)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 1CA6D10E7B0;
-	Wed, 29 Jan 2025 11:54:21 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id DBF9910E7BC;
+	Wed, 29 Jan 2025 11:54:25 +0000 (UTC)
 Authentication-Results: gabe.freedesktop.org;
-	dkim=pass (1024-bit key; unprotected) header.d=redhat.com header.i=@redhat.com header.b="QRxQBC4G";
+	dkim=pass (1024-bit key; unprotected) header.d=redhat.com header.i=@redhat.com header.b="bwRzM+2u";
 	dkim-atps=neutral
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
 Received: from us-smtp-delivery-124.mimecast.com
  (us-smtp-delivery-124.mimecast.com [170.10.129.124])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 432B910E7BC
- for <nouveau@lists.freedesktop.org>; Wed, 29 Jan 2025 11:54:20 +0000 (UTC)
+ by gabe.freedesktop.org (Postfix) with ESMTPS id E7C1410E7C2
+ for <nouveau@lists.freedesktop.org>; Wed, 29 Jan 2025 11:54:23 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1738151659;
+ s=mimecast20190719; t=1738151663;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:content-type:content-type:
  content-transfer-encoding:content-transfer-encoding:
  in-reply-to:in-reply-to:references:references;
- bh=hZQr+sWP4JJuuRk9zHd8B8Ps+AYS2S2IVxxQCmOGAGE=;
- b=QRxQBC4Gvv3LeLJDN6XffFnhQq2gUXBzy10P6j5xBouUcKzkpq76oeXt5JEQO6iK7fgO4K
- 9oxmmUp2pOojiSw7uDlqOQ8JD6Mw2dNvl4FFcF8g7eTnEubx71Q0ebOGtFYOg88N3iFV5C
- r7QkZD01Sm/gocvkvaONHW5ujvzIc9A=
-Received: from mail-wm1-f69.google.com (mail-wm1-f69.google.com
- [209.85.128.69]) by relay.mimecast.com with ESMTP with STARTTLS
+ bh=herznK9N3+37fO8/yUnjjPI+kU1qrhYMSQrHDNQrbI8=;
+ b=bwRzM+2uHt+qpeD9N2r4zABp2V7qI3JuItDa+rgIv2ZxuThcC/qQb5dBpcM88ZQ5s0ap2x
+ Yt+/7i5b+Vrmqr7fMlXFG+AGyO+gOiIMeAlO/IEKTTAPIEybzSjTCZLb3CUsEbzs4DFULI
+ OBxlXMAKhtEm3syBc58h2UDvsnPdjyo=
+Received: from mail-wm1-f72.google.com (mail-wm1-f72.google.com
+ [209.85.128.72]) by relay.mimecast.com with ESMTP with STARTTLS
  (version=TLSv1.3, cipher=TLS_AES_256_GCM_SHA384) id
- us-mta-103-2rkr1ckqNJ-gcWg4-SZJ2g-1; Wed, 29 Jan 2025 06:54:18 -0500
-X-MC-Unique: 2rkr1ckqNJ-gcWg4-SZJ2g-1
-X-Mimecast-MFC-AGG-ID: 2rkr1ckqNJ-gcWg4-SZJ2g
-Received: by mail-wm1-f69.google.com with SMTP id
- 5b1f17b1804b1-4362153dcd6so34330585e9.2
- for <nouveau@lists.freedesktop.org>; Wed, 29 Jan 2025 03:54:18 -0800 (PST)
+ us-mta-295-1Q-JyPr0NnuIbRmMB5F1QA-1; Wed, 29 Jan 2025 06:54:21 -0500
+X-MC-Unique: 1Q-JyPr0NnuIbRmMB5F1QA-1
+X-Mimecast-MFC-AGG-ID: 1Q-JyPr0NnuIbRmMB5F1QA
+Received: by mail-wm1-f72.google.com with SMTP id
+ 5b1f17b1804b1-4361ac8b25fso36453185e9.2
+ for <nouveau@lists.freedesktop.org>; Wed, 29 Jan 2025 03:54:21 -0800 (PST)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1738151657; x=1738756457;
+ d=1e100.net; s=20230601; t=1738151661; x=1738756461;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=hZQr+sWP4JJuuRk9zHd8B8Ps+AYS2S2IVxxQCmOGAGE=;
- b=cjO12p6i1hxJT/JDYKeQGjTQnKzfZzpkCttPOAkQFVYem6eFV2J3Sk1qPclxmn4/UL
- 1UVmHUCBOYFTqLRponzEI42y02rUEGhjRxCPnuAQ4xBEtvF5D/s9jWsYitEpACuPwy8l
- 3AHIkA1k6kUlp7DzCASYHys59nc+iSVcRCzUq0pTm3S8nkUOvd2KE0zYqh0cf/A61zSN
- BJvB8wyMfwJOl2QeCRjzGAEX1MSEOR9pAmi5qv9j/NhZa2RpxI6+Q1K04BOMNuxrM0Yg
- 9gaNSjFKloBIiUxTsWMRh6oif1XVaBUbu3Zk608/xWiUF/8CSYPhgu4uGhY398vbl1KP
- 9OLQ==
+ bh=herznK9N3+37fO8/yUnjjPI+kU1qrhYMSQrHDNQrbI8=;
+ b=h5tetaj+ri2V4tj9sx+Xq84zqjloxXffYhoO8LXAVGLMu1ErrgACVbggRrWCcqwNN8
+ xeNOO/SSWOWMZ5bDzJZ0sgv+rXcpd63esr/vn7AwUhCUVm8nJvXsxAyebFJMWM0K7FRF
+ REAt234e/JsOU7yPjbZsR8K3BfGjGFXbugNLxzN5eioK1OrupmupzAWJlIslXMzoVG4M
+ BIFH/z2U7FSK6u8modpvXckE6aacGMZx3ihApbwf7664J1TB2lFdQb19tdV7n+Rtz26u
+ 3F1n3smOQkr0K6Ni1WhAnLv6FhhNful4ReUMw3Rcs1iqwzXfBqiNOuCHx62YnNi0CL5X
+ /YcA==
 X-Forwarded-Encrypted: i=1;
- AJvYcCUI786kmofVWcMkSZxqo7P66fwvIUcLu7xEJH5u2oG3QFa/4Nr+iRDJzGRHS7BzeLbxJk1m+8hJ@lists.freedesktop.org
-X-Gm-Message-State: AOJu0YyBihmtoAehxOGkO5rSn76X2AlFvO7XOx4VRSfGeshtOIRVd0kr
- ego3mQ7a8utUelgnN9/qNl4dvxSsMXcIDPeNeYPDuPJgfZxK6mWLT13FAf6q3vnX3U1k4af4la0
- pWHq1H/FeW2cve/UkDoYdX4Mb40gBB2/0Xknec2fjV0z9pkONFl7DgCHcfnNUfs8=
-X-Gm-Gg: ASbGncvuN7mCRuwR8kNVmswtRZ7ZWhNpEdSod69txLmS0OymOwCYpgDlFiL687JVtAZ
- VBUq+8aY6r4r0FvM2T6zMrJqxo0HYfsk8RR6KH+eeaOfQTshV3SKLbhnoIYnDo9hVAUM6WeEgZy
- wfybfRluYWsCEfwVpEakOzrKFl8OiPp7aUSMvHp8gJxaQfPXHkCzrSNsBQX4Z6+HWzn3Lkw2jkB
- lqTjA6kuktGIi5xpPlFf/oRQywnQKt9eulQgIJOwc/b+l5e19kmMBpiHpojTzuYWVpO2HjmdYnU
- wbDXnwDmwDH173ii+f0h+/3TenVEHGILzWlfpEf1KSop6+VjHVz+v6Cyt8vyYiJlWA==
-X-Received: by 2002:a05:600c:cce:b0:434:ff9d:a370 with SMTP id
- 5b1f17b1804b1-438dc3366f8mr24658555e9.0.1738151657111; 
- Wed, 29 Jan 2025 03:54:17 -0800 (PST)
-X-Google-Smtp-Source: AGHT+IEIkSHUg8u1CZ6d8yOIa8EuB96MLk/b/TKJcDJCOFvAxggFPdf4ivg/UC1RFEcPGInF41YvMw==
-X-Received: by 2002:a05:600c:cce:b0:434:ff9d:a370 with SMTP id
- 5b1f17b1804b1-438dc3366f8mr24658175e9.0.1738151656750; 
- Wed, 29 Jan 2025 03:54:16 -0800 (PST)
+ AJvYcCVrVVPp6+V7qao5vhY5Gyyw+fRk3IOTDrCAbkTHa5gSUsi+c0PbnSpPzry4wrsZovPoWc6OsHUl@lists.freedesktop.org
+X-Gm-Message-State: AOJu0YzgIuF8Hm5l2QY9IIomIt396CQ6+I9RSUks28Oc7E9emXjI9cYJ
+ fWk3PbvL+G17/I9rzJ0qAELFph32BKshDK5Lme1dInhFjAplG/tuBxOVHHwqvWWN5x5po2qGWJh
+ 2/8xThoILi+7VpeNMQp2gP2ahx5HPeaS7B4nDuCzbBoHlv9QwxW6N3nvdX46AaQQ=
+X-Gm-Gg: ASbGncvGzvsG0fWV2NPiE3w/6x6bKHqTvTY8+0dlB4Fp69IJ+udjqJEBSyw/pZMbD6i
+ wJ/MIQ/yWwqUmcntYTlsMUEmH0QVRIgi/bivPYMXlnMTl7a3C8eEqEPQCP/Q+YiJIZqZbMq5KYQ
+ 2xvhEdSZfKj61Oo3NKraDBg1tN9yTSkfK0+8505QU+dN4Y2hX/ZyQXwX2IwA27Mj6g78EYTQikB
+ zOat+W8EQAxC9vzntrN3ITvxXeyL9KV+pP9R2iDElwiS3oZDHl207qieovo2VzElo3hC07VERIS
+ s4SkBm1ZnPp5N9s/sJSfrC9bXokO9B/jDWL+rDvtUR5Dg4ULToSVCcC9UeonX7AUwA==
+X-Received: by 2002:a05:600c:5486:b0:433:c76d:d57e with SMTP id
+ 5b1f17b1804b1-438dc3a40d3mr26190635e9.5.1738151660702; 
+ Wed, 29 Jan 2025 03:54:20 -0800 (PST)
+X-Google-Smtp-Source: AGHT+IEopxoArzHie066mjWjUvNKTSc/02V79PTjUrPj2QcjbwdMpR1m12X2+qvEI4pAjYXanIEeWA==
+X-Received: by 2002:a05:600c:5486:b0:433:c76d:d57e with SMTP id
+ 5b1f17b1804b1-438dc3a40d3mr26190115e9.5.1738151660040; 
+ Wed, 29 Jan 2025 03:54:20 -0800 (PST)
 Received: from localhost
  (p200300cbc7053b0064b867195794bf13.dip0.t-ipconnect.de.
  [2003:cb:c705:3b00:64b8:6719:5794:bf13])
  by smtp.gmail.com with UTF8SMTPSA id
- ffacd0b85a97d-38c2a1bad92sm16868229f8f.61.2025.01.29.03.54.14
+ 5b1f17b1804b1-438dcbbc52dsm21427725e9.0.2025.01.29.03.54.17
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Wed, 29 Jan 2025 03:54:15 -0800 (PST)
+ Wed, 29 Jan 2025 03:54:18 -0800 (PST)
 From: David Hildenbrand <david@redhat.com>
 To: linux-kernel@vger.kernel.org
 Cc: linux-doc@vger.kernel.org, dri-devel@lists.freedesktop.org,
@@ -88,15 +88,16 @@ Cc: linux-doc@vger.kernel.org, dri-devel@lists.freedesktop.org,
  Pasha Tatashin <pasha.tatashin@soleen.com>, Peter Xu <peterx@redhat.com>,
  Alistair Popple <apopple@nvidia.com>, Jason Gunthorpe <jgg@nvidia.com>,
  stable@vger.kernel.org
-Subject: [PATCH v1 01/12] mm/gup: reject FOLL_SPLIT_PMD with hugetlb VMAs
-Date: Wed, 29 Jan 2025 12:53:59 +0100
-Message-ID: <20250129115411.2077152-2-david@redhat.com>
+Subject: [PATCH v1 02/12] mm/rmap: reject hugetlb folios in
+ folio_make_device_exclusive()
+Date: Wed, 29 Jan 2025 12:54:00 +0100
+Message-ID: <20250129115411.2077152-3-david@redhat.com>
 X-Mailer: git-send-email 2.48.1
 In-Reply-To: <20250129115411.2077152-1-david@redhat.com>
 References: <20250129115411.2077152-1-david@redhat.com>
 MIME-Version: 1.0
 X-Mimecast-Spam-Score: 0
-X-Mimecast-MFC-PROC-ID: -vS4NKbuYSk4OCb5z9Pfd_nNHicdif-EEb8CCMIZTE4_1738151657
+X-Mimecast-MFC-PROC-ID: OecoDk8026vxypkXhlDnAXB7_M-acNSTlFtiCxBp-Ko_1738151661
 X-Mimecast-Originator: redhat.com
 Content-Transfer-Encoding: 8bit
 content-type: text/plain; charset="US-ASCII"; x-default=true
@@ -114,85 +115,37 @@ List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-We only have two FOLL_SPLIT_PMD users. While uprobe refuses hugetlb
-early, make_device_exclusive_range() can end up getting called on
-hugetlb VMAs.
+Even though FOLL_SPLIT_PMD on hugetlb now always fails with -EOPNOTSUPP,
+let's add a safety net in case FOLL_SPLIT_PMD usage would ever be reworked.
 
-Right now, this means that with a PMD-sized hugetlb page, we can end
-up calling split_huge_pmd(), because pmd_trans_huge() also succeeds
-with hugetlb PMDs.
+In particular, before commit 9cb28da54643 ("mm/gup: handle hugetlb in the
+generic follow_page_mask code"), GUP(FOLL_SPLIT_PMD) would just have
+returned a page. In particular, hugetlb folios that are not PMD-sized
+would never have been prone to FOLL_SPLIT_PMD.
 
-For example, using a modified hmm-test selftest one can trigger:
+hugetlb folios can be anonymous, and page_make_device_exclusive_one() is
+not really prepared for handling them at all. So let's spell that out.
 
-[  207.017134][T14945] ------------[ cut here ]------------
-[  207.018614][T14945] kernel BUG at mm/page_table_check.c:87!
-[  207.019716][T14945] Oops: invalid opcode: 0000 [#1] PREEMPT SMP KASAN NOPTI
-[  207.021072][T14945] CPU: 3 UID: 0 PID: ...
-[  207.023036][T14945] Hardware name: QEMU Standard PC (Q35 + ICH9, 2009), BIOS 1.16.3-2.fc40 04/01/2014
-[  207.024834][T14945] RIP: 0010:page_table_check_clear.part.0+0x488/0x510
-[  207.026128][T14945] Code: ...
-[  207.029965][T14945] RSP: 0018:ffffc9000cb8f348 EFLAGS: 00010293
-[  207.031139][T14945] RAX: 0000000000000000 RBX: 00000000ffffffff RCX: ffffffff8249a0cd
-[  207.032649][T14945] RDX: ffff88811e883c80 RSI: ffffffff8249a357 RDI: ffff88811e883c80
-[  207.034183][T14945] RBP: ffff888105c0a050 R08: 0000000000000005 R09: 0000000000000000
-[  207.035688][T14945] R10: 00000000ffffffff R11: 0000000000000003 R12: 0000000000000001
-[  207.037203][T14945] R13: 0000000000000200 R14: 0000000000000001 R15: dffffc0000000000
-[  207.038711][T14945] FS:  00007f2783275740(0000) GS:ffff8881f4980000(0000) knlGS:0000000000000000
-[  207.040407][T14945] CS:  0010 DS: 0000 ES: 0000 CR0: 0000000080050033
-[  207.041660][T14945] CR2: 00007f2782c00000 CR3: 0000000132356000 CR4: 0000000000750ef0
-[  207.043196][T14945] PKRU: 55555554
-[  207.043880][T14945] Call Trace:
-[  207.044506][T14945]  <TASK>
-[  207.045086][T14945]  ? __die+0x51/0x92
-[  207.045864][T14945]  ? die+0x29/0x50
-[  207.046596][T14945]  ? do_trap+0x250/0x320
-[  207.047430][T14945]  ? do_error_trap+0xe7/0x220
-[  207.048346][T14945]  ? page_table_check_clear.part.0+0x488/0x510
-[  207.049535][T14945]  ? handle_invalid_op+0x34/0x40
-[  207.050494][T14945]  ? page_table_check_clear.part.0+0x488/0x510
-[  207.051681][T14945]  ? exc_invalid_op+0x2e/0x50
-[  207.052589][T14945]  ? asm_exc_invalid_op+0x1a/0x20
-[  207.053596][T14945]  ? page_table_check_clear.part.0+0x1fd/0x510
-[  207.054790][T14945]  ? page_table_check_clear.part.0+0x487/0x510
-[  207.055993][T14945]  ? page_table_check_clear.part.0+0x488/0x510
-[  207.057195][T14945]  ? page_table_check_clear.part.0+0x487/0x510
-[  207.058384][T14945]  __page_table_check_pmd_clear+0x34b/0x5a0
-[  207.059524][T14945]  ? __pfx___page_table_check_pmd_clear+0x10/0x10
-[  207.060775][T14945]  ? __pfx___mutex_unlock_slowpath+0x10/0x10
-[  207.061940][T14945]  ? __pfx___lock_acquire+0x10/0x10
-[  207.062967][T14945]  pmdp_huge_clear_flush+0x279/0x360
-[  207.064024][T14945]  split_huge_pmd_locked+0x82b/0x3750
-...
-
-Before commit 9cb28da54643 ("mm/gup: handle hugetlb in the generic
-follow_page_mask code"), we would have ignored the flag; instead, let's
-simply refuse the combination completely in check_vma_flags(): the
-caller is likely not prepared to handle any hugetlb folios.
-
-We'll teach make_device_exclusive_range() separately to ignore any hugetlb
-folios as a future-proof safety net.
-
-Fixes: 9cb28da54643 ("mm/gup: handle hugetlb in the generic follow_page_mask code")
+Fixes: b756a3b5e7ea ("mm: device exclusive memory access")
 Cc: <stable@vger.kernel.org>
 Signed-off-by: David Hildenbrand <david@redhat.com>
 ---
- mm/gup.c | 3 +++
- 1 file changed, 3 insertions(+)
+ mm/rmap.c | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/mm/gup.c b/mm/gup.c
-index 3883b307780e..61e751baf862 100644
---- a/mm/gup.c
-+++ b/mm/gup.c
-@@ -1283,6 +1283,9 @@ static int check_vma_flags(struct vm_area_struct *vma, unsigned long gup_flags)
- 	if ((gup_flags & FOLL_LONGTERM) && vma_is_fsdax(vma))
- 		return -EOPNOTSUPP;
+diff --git a/mm/rmap.c b/mm/rmap.c
+index c6c4d4ea29a7..17fbfa61f7ef 100644
+--- a/mm/rmap.c
++++ b/mm/rmap.c
+@@ -2499,7 +2499,7 @@ static bool folio_make_device_exclusive(struct folio *folio,
+ 	 * Restrict to anonymous folios for now to avoid potential writeback
+ 	 * issues.
+ 	 */
+-	if (!folio_test_anon(folio))
++	if (!folio_test_anon(folio) || folio_test_hugetlb(folio))
+ 		return false;
  
-+	if ((gup_flags & FOLL_SPLIT_PMD) && is_vm_hugetlb_page(vma))
-+		return -EOPNOTSUPP;
-+
- 	if (vma_is_secretmem(vma))
- 		return -EFAULT;
- 
+ 	rmap_walk(folio, &rwc);
 -- 
 2.48.1
 
