@@ -2,77 +2,77 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id 44DC8A22A13
-	for <lists+nouveau@lfdr.de>; Thu, 30 Jan 2025 10:12:36 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 49DBFA22A34
+	for <lists+nouveau@lfdr.de>; Thu, 30 Jan 2025 10:24:46 +0100 (CET)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 54C7510E2DB;
-	Thu, 30 Jan 2025 09:12:33 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 059A110E900;
+	Thu, 30 Jan 2025 09:24:45 +0000 (UTC)
 Authentication-Results: gabe.freedesktop.org;
-	dkim=pass (1024-bit key; unprotected) header.d=redhat.com header.i=@redhat.com header.b="bYUIEh9i";
+	dkim=pass (1024-bit key; unprotected) header.d=redhat.com header.i=@redhat.com header.b="ZXUjDXPi";
 	dkim-atps=neutral
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
 Received: from us-smtp-delivery-124.mimecast.com
- (us-smtp-delivery-124.mimecast.com [170.10.133.124])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 0462010E2F6
- for <nouveau@lists.freedesktop.org>; Thu, 30 Jan 2025 09:12:32 +0000 (UTC)
+ (us-smtp-delivery-124.mimecast.com [170.10.129.124])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id B699110E900
+ for <nouveau@lists.freedesktop.org>; Thu, 30 Jan 2025 09:24:43 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1738228352;
+ s=mimecast20190719; t=1738229082;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:content-type:content-type:
  content-transfer-encoding:content-transfer-encoding:
  in-reply-to:in-reply-to:references:references:autocrypt:autocrypt;
- bh=rLOz0obAD+oiqNRoo0TPuKVd7dXq0sfd2ABPZioYnD4=;
- b=bYUIEh9ihM6bnEuaC+ue0br3WUuEPCLMc5iJngkDjwHs4kYGJ/EE55OW5B8gKNOUXFM+et
- iyEw8pnK3MbDUxE99rIqsqKJ3AeOOe0nPRifUJMFkSsUiWiXR2NKxGLPs3PkuLNNv2y0pW
- j/kOgUjvAOSA0qIoI8JJP7cAj7rGdJI=
-Received: from mail-wm1-f69.google.com (mail-wm1-f69.google.com
- [209.85.128.69]) by relay.mimecast.com with ESMTP with STARTTLS
+ bh=AgWsEgCc4GvIDD2B+IjlgI9qdTH1nhae1Uz1TWiWBYA=;
+ b=ZXUjDXPi1KtLY/hQuXZMMaV4f6y7a3Y0IyIH1yMvfQBU8dkW3Leq1zB3tWuGCRqweopq90
+ lUy1YV5hTsYcm9gpQhJWdxN4XE9+Wwx0dNZhnXxKoAOcMRVrsnp+hzyPh8X9w/fii4irHA
+ k+Wb6nxfGV7ixP8YoV5CJ9tIF3yuwUc=
+Received: from mail-wr1-f71.google.com (mail-wr1-f71.google.com
+ [209.85.221.71]) by relay.mimecast.com with ESMTP with STARTTLS
  (version=TLSv1.3, cipher=TLS_AES_256_GCM_SHA384) id
- us-mta-244-650hUbqvPMy0AihgOU2VCQ-1; Thu, 30 Jan 2025 04:12:28 -0500
-X-MC-Unique: 650hUbqvPMy0AihgOU2VCQ-1
-X-Mimecast-MFC-AGG-ID: 650hUbqvPMy0AihgOU2VCQ
-Received: by mail-wm1-f69.google.com with SMTP id
- 5b1f17b1804b1-4362f893bfaso2455555e9.1
- for <nouveau@lists.freedesktop.org>; Thu, 30 Jan 2025 01:12:28 -0800 (PST)
+ us-mta-61-zmsLBtBTMpK_7uJKYL4KYA-1; Thu, 30 Jan 2025 04:24:41 -0500
+X-MC-Unique: zmsLBtBTMpK_7uJKYL4KYA-1
+X-Mimecast-MFC-AGG-ID: zmsLBtBTMpK_7uJKYL4KYA
+Received: by mail-wr1-f71.google.com with SMTP id
+ ffacd0b85a97d-385dcadffebso254352f8f.0
+ for <nouveau@lists.freedesktop.org>; Thu, 30 Jan 2025 01:24:41 -0800 (PST)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1738228347; x=1738833147;
+ d=1e100.net; s=20230601; t=1738229080; x=1738833880;
  h=content-transfer-encoding:in-reply-to:organization:autocrypt
  :content-language:references:cc:to:from:subject:user-agent
  :mime-version:date:message-id:x-gm-message-state:from:to:cc:subject
  :date:message-id:reply-to;
- bh=rLOz0obAD+oiqNRoo0TPuKVd7dXq0sfd2ABPZioYnD4=;
- b=A3SlgHj8eVzAD5bB4EMgj36v4h0IexSocq87+d8dD7bRU/wFcmJBJtY38HSKkRRztE
- dM+GZR+UbEN8lWt1ZijhyoMlVyEApHHIJLX6vLcGx4Shj3Ti4NmM2X1XFiT7iZpdTVij
- 6foNePuqHKQQbWYDO+EoQA6f2odIfwwhuD9fr7UN1QV42vTHu3QNQCDGAzff9s+XKYHC
- SIKCINbsQkSwNxRc8Zifx/+tpJ6isGkDIoGTLCAElwCM6uQJAMPSnPXyzfHpMJDqspQL
- r2Vc/UKj7wwHzwU4er7cgB4PqkWyXT+FgHZeEgSVvYHc9by/qB7k2na66wuxyfrL3I6E
- LmKg==
+ bh=AgWsEgCc4GvIDD2B+IjlgI9qdTH1nhae1Uz1TWiWBYA=;
+ b=WT8YuXBlUn/vifVEEH2q1HPLtin0K243EyVhZbwPk9zsSuTCJ3t6uucNadfMnq5uoc
+ F20f4AgFbc0QG51sCsDSDg7tre2W7Rv05PXRLZTI3/EZZmeyHIiAjMgVKVM7lV7Hzfwg
+ CL0KyBsDXTmJnEaQTZI1UVq4ee0Iodqm14TmA4fAuJjC6gn7/9uBAXtRVTJ4+l+cqQmr
+ 5L7OTMcBy7nhtcZzlwn930G1OicUfSMWAvWpzg1U+LCUv907jmFLNzVQ2BWM5A1x4PA5
+ UcU7xujvDXSNq5oaZfRaPvBwqLR0jHackpFJ2frOkR2Ie6PCqOkwcW8HGXVXdVK+x+YH
+ 3ugw==
 X-Forwarded-Encrypted: i=1;
- AJvYcCXw+uzlGVXG+sQhpt41EFMJ/pVhqdbsU4i+ekJPXqC5xOHsmsjte4RBtD07tLTRWbVc41KkQR0t@lists.freedesktop.org
-X-Gm-Message-State: AOJu0YzH+OKTonUnx0AOFziXOjAuGuz3Z56hLV8yPMxV0U85WcJQyN0m
- HdwomEvRDPUHoWK0zqQ8iEM4H+VZc+oF7MGbi6LPOCvsjxq3Wa9xh23bYFShhaGNMd9BcsIZsVw
- qtUEHwMv7dyWynktFML93WsqtbYsGue/5YgtTsRF3SWAjKmuPg9QK6mhzt9GLlg4=
-X-Gm-Gg: ASbGncsX4c6W+A3WZi+PP7uV8vjAuL8zzq3lOmhVdd5w7tLexYB7/Rb6B7xJQp/MNp1
- 8vU7Om0RQGtEAXTd2XcZcufi7KMhxtwTrl6E7pti/qHAF3txa7Mxgdz3YYVuLTE2oWvP8NeXrTT
- U5aOBCxQr7o3Nw6wMB8sEkmkcf8KIF3FM0vVFzTNkjUzrF8hP8EIAl6CkuCH+tRGADfY4rKHnXo
- MjpkskwFYqdTILAS6FPcm9Tt5e3uyUenUkAW1ehfOoMq2IQcIXb3oQ77JmG1dAzmtqWRFTRPVCu
- cO+PwxtlDKnCqaHKZb1fK8rMXH7+U63SbSpEeZ+8kLFU
-X-Received: by 2002:a05:600c:3585:b0:435:192:63ca with SMTP id
- 5b1f17b1804b1-438dc3fc57cmr47679925e9.21.1738228347407; 
- Thu, 30 Jan 2025 01:12:27 -0800 (PST)
-X-Google-Smtp-Source: AGHT+IGwVJCk7i8Wi+y4cB3+BrJijTjRz9/U6vW5B3DRIl8pEv+r5QnVS78KcctKOfglkPsCjp7UdA==
-X-Received: by 2002:a05:600c:3585:b0:435:192:63ca with SMTP id
- 5b1f17b1804b1-438dc3fc57cmr47679455e9.21.1738228346964; 
- Thu, 30 Jan 2025 01:12:26 -0800 (PST)
+ AJvYcCVDszyDhd1j18+xH2E/LjJXgpUa3n1ivsNxHZjF7jygNO+8cz0ljBTZDJz0EkRwlFTGzw8fljS4@lists.freedesktop.org
+X-Gm-Message-State: AOJu0YzIqdhdcRyg4B0ylEv8j9q2mbU7Z8qbuIJ/CP0yypBcLhwowjHg
+ fzMvwwpL2P8mp1HxI3htaVZi5/EPSbii2xH14TQtnx77EnEF72uPpGpfFAe5IcYuhG4d9oSedL8
+ I/bdXJxqE+I+qC212O5NOE9/e+VS1aPctkmFuvyClEVV20dWmwGS9500nPYlUF9s=
+X-Gm-Gg: ASbGncv9QIYuxIXebyBiAcCJcLRIaM2SM6INgfVdQXUSrqK2+lHHGYFVBkp32aznpsV
+ gVmInCIOw78a06qsjKvvtx7wMPtaGk4wvjm4yLcTdxbYzQnIyaqz8P9O3pqoCttMdjzUMDy/Nyn
+ Xeq4PDjP7zaDcmMbIMNz+oaeXgv+hlP40p+Ox7zH2tCO/btEqz26nd+9hU3z4VQ89iroSc6XGTQ
+ oo4/M7C78u4W0ltkhajGaKnxkLO5IAj0Mw/mC4QmPDS7U+iahZ0qYG5TL+N+d/v+1Htn3gjpPRQ
+ pk2//iDoojiiuqI3iSpkta4m+2+X7RNCgMTCIoYCy/fR
+X-Received: by 2002:a5d:47c5:0:b0:385:f092:e00 with SMTP id
+ ffacd0b85a97d-38c520975b7mr5464504f8f.50.1738229080248; 
+ Thu, 30 Jan 2025 01:24:40 -0800 (PST)
+X-Google-Smtp-Source: AGHT+IGPsT0tp7MlPmJ5d1a4j+wbYUvfNepMnGtnz6DBjlfLio8haZQowpOaHS464RFpM5lmeYL4CQ==
+X-Received: by 2002:a5d:47c5:0:b0:385:f092:e00 with SMTP id
+ ffacd0b85a97d-38c520975b7mr5464464f8f.50.1738229079878; 
+ Thu, 30 Jan 2025 01:24:39 -0800 (PST)
 Received: from ?IPV6:2a01:599:904:96e0:a245:aa9f:6c57:eb41?
  ([2a01:599:904:96e0:a245:aa9f:6c57:eb41])
  by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-38c5c0ec35asm1397002f8f.15.2025.01.30.01.12.25
+ ffacd0b85a97d-38c5c1b5492sm1389915f8f.73.2025.01.30.01.24.37
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Thu, 30 Jan 2025 01:12:26 -0800 (PST)
-Message-ID: <547f6335-ceb4-4160-ba72-5214bf5c82f3@redhat.com>
-Date: Thu, 30 Jan 2025 10:12:24 +0100
+ Thu, 30 Jan 2025 01:24:38 -0800 (PST)
+Message-ID: <c5befaa4-bd00-4784-ae66-ddbf16dfe1d9@redhat.com>
+Date: Thu, 30 Jan 2025 10:24:37 +0100
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
 Subject: Re: [PATCH v1 04/12] mm/rmap: implement make_device_exclusive() using
@@ -143,7 +143,7 @@ Autocrypt: addr=david@redhat.com; keydata=
 Organization: Red Hat
 In-Reply-To: <180e9c2f-51fe-44ba-ac68-5aa7b7918ab0@redhat.com>
 X-Mimecast-Spam-Score: 0
-X-Mimecast-MFC-PROC-ID: 64Tacae68G73uSWAPRUdjbUkR9D-28c9r8NKLQ8kxrI_1738228347
+X-Mimecast-MFC-PROC-ID: pkMFx3jrKLvvu10aBFczVT9354Zqx7pKYU8T4Ovfmog_1738229080
 X-Mimecast-Originator: redhat.com
 Content-Language: en-US
 Content-Type: text/plain; charset=UTF-8; format=flowed
@@ -193,75 +193,28 @@ On 30.01.25 10:01, David Hildenbrand wrote:
 > 
 > "MMU_NOTIFY_EXCLUSIVE: to signal a device driver that the device will no
 > longer have exclusive access to the page."
-> 
-> That's simply not true in the scenario you describe, because nobody had
-> exclusive access.
-> 
-> But what you are saying is, that we need to inform others (e.g., KVM)
-> that we are converting it to a device-exclusive entry, such that they
-> stop accessing it.
-> 
-> That makes sense to me (and the cleanup patch in the cleanup series
-> would have to go as well to prevent the livelock).
-> 
-> So we would have to update the documentation of MMU_NOTIFY_EXCLUSIVE
-> that it is also trigger on conversion from non-exclusive to exclusive.
-> 
-> Does that make sense?
 
-Something like that on top:
+So the second sentence actually describes the other condition. Likely we
+should make that clearer:
 
-diff --git a/mm/rmap.c b/mm/rmap.c
-index 49ffac6d27f8..fd6dfe67ce7b 100644
---- a/mm/rmap.c
-+++ b/mm/rmap.c
-@@ -2405,6 +2405,7 @@ void try_to_migrate(struct folio *folio, enum ttu_flags flags)
-  struct page *make_device_exclusive(struct mm_struct *mm, unsigned long addr,
-                 void *owner, struct folio **foliop)
-  {
-+       struct mmu_notifier_range range;
-         struct folio *folio, *fw_folio;
-         struct vm_area_struct *vma;
-         struct folio_walk fw;
-@@ -2413,6 +2414,7 @@ struct page *make_device_exclusive(struct mm_struct *mm, unsigned long addr,
-         pte_t swp_pte;
-  
-         mmap_assert_locked(mm);
-+       addr = PAGE_ALIGN_DOWN(addr);
-  
-         /*
-          * Fault in the page writable and try to lock it; note that if the
-@@ -2440,6 +2442,14 @@ struct page *make_device_exclusive(struct mm_struct *mm, unsigned long addr,
-                 return ERR_PTR(-EBUSY);
-         }
-  
-+       /*
-+        * Inform secondary MMUs that we are going to convert this PTE to
-+        * device-exclusive, such that they unmap it now.
-+        */
-+       mmu_notifier_range_init_owner(&range, MMU_NOTIFY_EXCLUSIVE, 0,
-+                                     mm, addr, addr + PAGE_SIZE, owner);
-+       mmu_notifier_invalidate_range_start(&range);
-+
-         /*
-          * Let's do a second walk and make sure we still find the same page
-          * mapped writable. If we don't find what we expect, we will trigger
-@@ -2452,6 +2462,7 @@ struct page *make_device_exclusive(struct mm_struct *mm, unsigned long addr,
-             fw.level != FW_LEVEL_PTE || !pte_write(fw.pte)) {
-                 if (fw_folio)
-                         folio_walk_end(&fw, vma);
-+               mmu_notifier_invalidate_range_end(&range);
-                 folio_unlock(folio);
-                 folio_put(folio);
-                 return ERR_PTR(-EBUSY);
-@@ -2485,6 +2496,7 @@ struct page *make_device_exclusive(struct mm_struct *mm, unsigned long addr,
-         folio_remove_rmap_pte(folio, page, vma);
-  
-         folio_walk_end(&fw, vma);
-+       mmu_notifier_invalidate_range_end(&range);
-         *foliop = folio;
-         return page;
-  }
+--- a/include/linux/mmu_notifier.h
++++ b/include/linux/mmu_notifier.h
+@@ -43,10 +43,11 @@ struct mmu_interval_notifier;
+   * a device driver to possibly ignore the invalidation if the
+   * owner field matches the driver's device private pgmap owner.
+   *
+- * @MMU_NOTIFY_EXCLUSIVE: to signal a device driver that the device will no
+- * longer have exclusive access to the page. When sent during creation of an
+- * exclusive range the owner will be initialised to the value provided by the
+- * caller of make_device_exclusive(), otherwise the owner will be NULL.
++ * @MMU_NOTIFY_EXCLUSIVE: (1) to signal a device driver that the device will no
++ * longer have exclusive access to the page; and (2) to signal that a page will
++ * be made exclusive to a device. During (1), the owner will be NULL, during
++ * (2), the owner will be initialised to the value provided by the caller of
++ * make_device_exclusive().
+   */
+  enum mmu_notifier_event {
+         MMU_NOTIFY_UNMAP = 0,
 
 
 -- 
