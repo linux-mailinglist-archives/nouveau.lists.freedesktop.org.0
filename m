@@ -2,82 +2,81 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id 49DBFA22A34
-	for <lists+nouveau@lfdr.de>; Thu, 30 Jan 2025 10:24:46 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 0FF70A22A4D
+	for <lists+nouveau@lfdr.de>; Thu, 30 Jan 2025 10:28:12 +0100 (CET)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 059A110E900;
-	Thu, 30 Jan 2025 09:24:45 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id CE94310E905;
+	Thu, 30 Jan 2025 09:28:08 +0000 (UTC)
 Authentication-Results: gabe.freedesktop.org;
-	dkim=pass (1024-bit key; unprotected) header.d=redhat.com header.i=@redhat.com header.b="ZXUjDXPi";
+	dkim=pass (1024-bit key; unprotected) header.d=redhat.com header.i=@redhat.com header.b="f2UF8e64";
 	dkim-atps=neutral
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
 Received: from us-smtp-delivery-124.mimecast.com
- (us-smtp-delivery-124.mimecast.com [170.10.129.124])
- by gabe.freedesktop.org (Postfix) with ESMTPS id B699110E900
- for <nouveau@lists.freedesktop.org>; Thu, 30 Jan 2025 09:24:43 +0000 (UTC)
+ (us-smtp-delivery-124.mimecast.com [170.10.133.124])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 1854A10E904
+ for <nouveau@lists.freedesktop.org>; Thu, 30 Jan 2025 09:28:07 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1738229082;
+ s=mimecast20190719; t=1738229286;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:content-type:content-type:
  content-transfer-encoding:content-transfer-encoding:
  in-reply-to:in-reply-to:references:references:autocrypt:autocrypt;
- bh=AgWsEgCc4GvIDD2B+IjlgI9qdTH1nhae1Uz1TWiWBYA=;
- b=ZXUjDXPi1KtLY/hQuXZMMaV4f6y7a3Y0IyIH1yMvfQBU8dkW3Leq1zB3tWuGCRqweopq90
- lUy1YV5hTsYcm9gpQhJWdxN4XE9+Wwx0dNZhnXxKoAOcMRVrsnp+hzyPh8X9w/fii4irHA
- k+Wb6nxfGV7ixP8YoV5CJ9tIF3yuwUc=
-Received: from mail-wr1-f71.google.com (mail-wr1-f71.google.com
- [209.85.221.71]) by relay.mimecast.com with ESMTP with STARTTLS
+ bh=8a2uS8Wdref7tlZzoBWWMkEGl9+CP1s01bTe+snzNOI=;
+ b=f2UF8e647DvRqz9PG6MNubc9gGF2U5ORIooh+QrwHTxvhxyXizZKbl2i/YoY6hsCmT+Zyf
+ UqYLhok80d03SiqcFwPP5WtQmIneWn/EBGrBjet2DUtoDxnK3G8Duj2aX004e0Dr+BXhVc
+ oXjPQgF2BqrDs/WLZOe2X0/QxhJOk5k=
+Received: from mail-wm1-f69.google.com (mail-wm1-f69.google.com
+ [209.85.128.69]) by relay.mimecast.com with ESMTP with STARTTLS
  (version=TLSv1.3, cipher=TLS_AES_256_GCM_SHA384) id
- us-mta-61-zmsLBtBTMpK_7uJKYL4KYA-1; Thu, 30 Jan 2025 04:24:41 -0500
-X-MC-Unique: zmsLBtBTMpK_7uJKYL4KYA-1
-X-Mimecast-MFC-AGG-ID: zmsLBtBTMpK_7uJKYL4KYA
-Received: by mail-wr1-f71.google.com with SMTP id
- ffacd0b85a97d-385dcadffebso254352f8f.0
- for <nouveau@lists.freedesktop.org>; Thu, 30 Jan 2025 01:24:41 -0800 (PST)
+ us-mta-662-M_73KwgIPJCjxHMfdpapOg-1; Thu, 30 Jan 2025 04:28:04 -0500
+X-MC-Unique: M_73KwgIPJCjxHMfdpapOg-1
+X-Mimecast-MFC-AGG-ID: M_73KwgIPJCjxHMfdpapOg
+Received: by mail-wm1-f69.google.com with SMTP id
+ 5b1f17b1804b1-4362f893bfaso2536175e9.1
+ for <nouveau@lists.freedesktop.org>; Thu, 30 Jan 2025 01:28:04 -0800 (PST)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1738229080; x=1738833880;
+ d=1e100.net; s=20230601; t=1738229283; x=1738834083;
  h=content-transfer-encoding:in-reply-to:organization:autocrypt
- :content-language:references:cc:to:from:subject:user-agent
+ :content-language:from:references:cc:to:subject:user-agent
  :mime-version:date:message-id:x-gm-message-state:from:to:cc:subject
  :date:message-id:reply-to;
- bh=AgWsEgCc4GvIDD2B+IjlgI9qdTH1nhae1Uz1TWiWBYA=;
- b=WT8YuXBlUn/vifVEEH2q1HPLtin0K243EyVhZbwPk9zsSuTCJ3t6uucNadfMnq5uoc
- F20f4AgFbc0QG51sCsDSDg7tre2W7Rv05PXRLZTI3/EZZmeyHIiAjMgVKVM7lV7Hzfwg
- CL0KyBsDXTmJnEaQTZI1UVq4ee0Iodqm14TmA4fAuJjC6gn7/9uBAXtRVTJ4+l+cqQmr
- 5L7OTMcBy7nhtcZzlwn930G1OicUfSMWAvWpzg1U+LCUv907jmFLNzVQ2BWM5A1x4PA5
- UcU7xujvDXSNq5oaZfRaPvBwqLR0jHackpFJ2frOkR2Ie6PCqOkwcW8HGXVXdVK+x+YH
- 3ugw==
+ bh=8a2uS8Wdref7tlZzoBWWMkEGl9+CP1s01bTe+snzNOI=;
+ b=orzil0Lu2amH75Abs322RNOO8fBAXHVdcvIzxcvAmjndWE2EocCvBBi2nA0L1I062r
+ ji5Rj579K/UqRg68gNpprXT6FzzVZwP+evDgVE+JAH73CxHYy4KBv+t/zqCk/qCC8RBB
+ KYOWN17/4mNdd5cKKMpzE7Y5UTrQx3xkqQ7mONFGkpl0pmsjeGFET0X0R6dD4m2P5R6D
+ noa5UspZ7St9EJ+CxsueM9nzVHTgSLoqWBYuLB3wrxyvJ3TFta4XiC/grEQsMWsdf2HL
+ nDgFprzPbj3DsPhkt3z3WR+1AiTyXR8hr+q2cGpARMY8IrliNZZoXC75PLhxMk1cIWSN
+ ReLA==
 X-Forwarded-Encrypted: i=1;
- AJvYcCVDszyDhd1j18+xH2E/LjJXgpUa3n1ivsNxHZjF7jygNO+8cz0ljBTZDJz0EkRwlFTGzw8fljS4@lists.freedesktop.org
-X-Gm-Message-State: AOJu0YzIqdhdcRyg4B0ylEv8j9q2mbU7Z8qbuIJ/CP0yypBcLhwowjHg
- fzMvwwpL2P8mp1HxI3htaVZi5/EPSbii2xH14TQtnx77EnEF72uPpGpfFAe5IcYuhG4d9oSedL8
- I/bdXJxqE+I+qC212O5NOE9/e+VS1aPctkmFuvyClEVV20dWmwGS9500nPYlUF9s=
-X-Gm-Gg: ASbGncv9QIYuxIXebyBiAcCJcLRIaM2SM6INgfVdQXUSrqK2+lHHGYFVBkp32aznpsV
- gVmInCIOw78a06qsjKvvtx7wMPtaGk4wvjm4yLcTdxbYzQnIyaqz8P9O3pqoCttMdjzUMDy/Nyn
- Xeq4PDjP7zaDcmMbIMNz+oaeXgv+hlP40p+Ox7zH2tCO/btEqz26nd+9hU3z4VQ89iroSc6XGTQ
- oo4/M7C78u4W0ltkhajGaKnxkLO5IAj0Mw/mC4QmPDS7U+iahZ0qYG5TL+N+d/v+1Htn3gjpPRQ
- pk2//iDoojiiuqI3iSpkta4m+2+X7RNCgMTCIoYCy/fR
-X-Received: by 2002:a5d:47c5:0:b0:385:f092:e00 with SMTP id
- ffacd0b85a97d-38c520975b7mr5464504f8f.50.1738229080248; 
- Thu, 30 Jan 2025 01:24:40 -0800 (PST)
-X-Google-Smtp-Source: AGHT+IGPsT0tp7MlPmJ5d1a4j+wbYUvfNepMnGtnz6DBjlfLio8haZQowpOaHS464RFpM5lmeYL4CQ==
-X-Received: by 2002:a5d:47c5:0:b0:385:f092:e00 with SMTP id
- ffacd0b85a97d-38c520975b7mr5464464f8f.50.1738229079878; 
- Thu, 30 Jan 2025 01:24:39 -0800 (PST)
+ AJvYcCXt4FmCLc25Ws30DwY4VoNG4ZbRFnS3D/8GJsRtjsuiLoox0jfBh3kljwyLan4puvgHc+ev0IQy@lists.freedesktop.org
+X-Gm-Message-State: AOJu0YysXZekNfq5np7ZInemyf/PLWGvk6h+28RBR1jbz9OmSHmh9OUt
+ HZa8JMkA4R+ZxwezzHfVPFWGN6Fz9LHLkonmf/gzcJuV4+iNNLwpER1V8+6kxpL9mZpwMmfIVZT
+ T/HOUr1yln2yNqE6AdErOaDjKDD4txNEarFoxpE1sNsyHolFklYSSjDze+J3Ssuw=
+X-Gm-Gg: ASbGncsoJze6LVoH8ZL0PkFQQE+ESnjLaAmm2nd+hrW63JGS5PFZ0yFh01ipHYH+ZY8
+ blJY1+H/wBW6ynnxs759YhKGuk/dlUVP2kgydyrhxmWGVBn8SGDE3ov8DtKLdnqXxltZSIIPlLJ
+ YstHMhzBEC2GuY9HtunMw3tqdP5fUuk/E0IcuhuoYBIL89+cEeUoEV5ja8o+OhdOJ9xBu/9eja8
+ siabVd94Uo5bpQ4WWSGdAN/ou9Ia3GdHOYpbdVfbeHAENJpxBhdQd8ONLKvJzedcsnQp4h9238h
+ aOyYVx11gsPty0tP9vwZMXgL+VgtKRk4jLl5hTMMDi+o
+X-Received: by 2002:a05:600c:1e21:b0:434:fec5:4ef5 with SMTP id
+ 5b1f17b1804b1-438dc3c3287mr61472865e9.14.1738229283568; 
+ Thu, 30 Jan 2025 01:28:03 -0800 (PST)
+X-Google-Smtp-Source: AGHT+IEVv9sk0PSOraNHCtifr1n2WcH7tWWGxI7ZU8RxZfSrxnyJnI+Uc52lsNZOLN2ReMg84oUVgA==
+X-Received: by 2002:a05:600c:1e21:b0:434:fec5:4ef5 with SMTP id
+ 5b1f17b1804b1-438dc3c3287mr61472565e9.14.1738229283230; 
+ Thu, 30 Jan 2025 01:28:03 -0800 (PST)
 Received: from ?IPV6:2a01:599:904:96e0:a245:aa9f:6c57:eb41?
  ([2a01:599:904:96e0:a245:aa9f:6c57:eb41])
  by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-38c5c1b5492sm1389915f8f.73.2025.01.30.01.24.37
+ 5b1f17b1804b1-438e23d42d4sm17055365e9.6.2025.01.30.01.28.01
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Thu, 30 Jan 2025 01:24:38 -0800 (PST)
-Message-ID: <c5befaa4-bd00-4784-ae66-ddbf16dfe1d9@redhat.com>
-Date: Thu, 30 Jan 2025 10:24:37 +0100
+ Thu, 30 Jan 2025 01:28:02 -0800 (PST)
+Message-ID: <eab05949-efc8-4c04-ace1-b4435ec894e6@redhat.com>
+Date: Thu, 30 Jan 2025 10:28:00 +0100
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v1 04/12] mm/rmap: implement make_device_exclusive() using
- folio_walk instead of rmap walk
-From: David Hildenbrand <david@redhat.com>
+Subject: Re: [PATCH v1 2/4] mm/mmu_notifier: drop owner from
+ MMU_NOTIFY_EXCLUSIVE
 To: Alistair Popple <apopple@nvidia.com>
 Cc: linux-kernel@vger.kernel.org, linux-doc@vger.kernel.org,
  dri-devel@lists.freedesktop.org, linux-mm@kvack.org,
@@ -92,10 +91,10 @@ Cc: linux-kernel@vger.kernel.org, linux-doc@vger.kernel.org,
  Vlastimil Babka <vbabka@suse.cz>, Jann Horn <jannh@google.com>,
  Pasha Tatashin <pasha.tatashin@soleen.com>, Peter Xu <peterx@redhat.com>,
  Jason Gunthorpe <jgg@nvidia.com>
-References: <20250129115411.2077152-1-david@redhat.com>
- <20250129115411.2077152-5-david@redhat.com>
- <7tzcpx23vufmp5cxutnzhjgdj7kwqrw5drwochpv5ern7zknhj@h2s6y2qjbr3f>
- <180e9c2f-51fe-44ba-ac68-5aa7b7918ab0@redhat.com>
+References: <20250129115803.2084769-1-david@redhat.com>
+ <20250129115803.2084769-3-david@redhat.com>
+ <h4dnoixvp2kjeao6mzcpze4zx6t34ebpltqadkjl5zxcjhddkf@lbzo2yhzu5sz>
+From: David Hildenbrand <david@redhat.com>
 Autocrypt: addr=david@redhat.com; keydata=
  xsFNBFXLn5EBEAC+zYvAFJxCBY9Tr1xZgcESmxVNI/0ffzE/ZQOiHJl6mGkmA1R7/uUpiCjJ
  dBrn+lhhOYjjNefFQou6478faXE6o2AhmebqT4KiQoUQFV4R7y1KMEKoSyy8hQaK1umALTdL
@@ -141,9 +140,9 @@ Autocrypt: addr=david@redhat.com; keydata=
  jPrnvUsUUsjRoRNJjKKA/REq+sAnhkNPPZ/NNMjaZ5b8Tovi8C0tmxiCHaQYqj7G2rgnT0kt
  WNyWQQ==
 Organization: Red Hat
-In-Reply-To: <180e9c2f-51fe-44ba-ac68-5aa7b7918ab0@redhat.com>
+In-Reply-To: <h4dnoixvp2kjeao6mzcpze4zx6t34ebpltqadkjl5zxcjhddkf@lbzo2yhzu5sz>
 X-Mimecast-Spam-Score: 0
-X-Mimecast-MFC-PROC-ID: pkMFx3jrKLvvu10aBFczVT9354Zqx7pKYU8T4Ovfmog_1738229080
+X-Mimecast-MFC-PROC-ID: oTfr6XoozEgzXOYgZd1r8zwTCU7h4T2rbRihHXPiG4M_1738229284
 X-Mimecast-Originator: redhat.com
 Content-Language: en-US
 Content-Type: text/plain; charset=UTF-8; format=flowed
@@ -162,60 +161,59 @@ List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-On 30.01.25 10:01, David Hildenbrand wrote:
-> On 30.01.25 07:11, Alistair Popple wrote:
->> On Wed, Jan 29, 2025 at 12:54:02PM +0100, David Hildenbrand wrote:
->>> We require a writable PTE and only support anonymous folio: we can only
->>> have exactly one PTE pointing at that page, which we can just lookup
->>> using a folio walk, avoiding the rmap walk and the anon VMA lock.
->>>
->>> So let's stop doing an rmap walk and perform a folio walk instead, so we
->>> can easily just modify a single PTE and avoid relying on rmap/mapcounts.
->>>
->>> We now effectively work on a single PTE instead of multiple PTEs of
->>> a large folio, allowing for conversion of individual PTEs from
->>> non-exclusive to device-exclusive -- note that the other way always
->>> worked on single PTEs.
->>>
->>> We can drop the MMU_NOTIFY_EXCLUSIVE MMU notifier call and document why
->>> that is not required: GUP will already take care of the
->>> MMU_NOTIFY_EXCLUSIVE call if required (there is already a device-exclusive
->>> entry) when not finding a present PTE and having to trigger a fault and
->>> ending up in remove_device_exclusive_entry().
+On 30.01.25 06:34, Alistair Popple wrote:
+> On Wed, Jan 29, 2025 at 12:58:00PM +0100, David Hildenbrand wrote:
+>> We no longer get a MMU_NOTIFY_EXCLUSIVE on conversion with the owner set
+>> that one has to filter out: if there already *is* a device-exclusive
+>> entry (e.g., other device, we don't have that information), GUP will
+>> convert it back to an ordinary PTE and notify via
+>> remove_device_exclusive_entry().
+> 
+> What tree is this against? I tried applying to v6.13 and Linus current master
+> but neither applied cleanly.
+
+See the cover letter. This is on top of the fixes series, which is based 
+on mm-unstable from yesterday.
+
+>   
+>> Signed-off-by: David Hildenbrand <david@redhat.com>
+>> ---
+>>   drivers/gpu/drm/nouveau/nouveau_svm.c | 6 +-----
+>>   include/linux/mmu_notifier.h          | 4 +---
+>>   include/linux/rmap.h                  | 2 +-
+>>   lib/test_hmm.c                        | 2 +-
+>>   mm/rmap.c                             | 3 +--
+>>   5 files changed, 5 insertions(+), 12 deletions(-)
 >>
->> I will have to look at this a bit more closely tomorrow but this doesn't seem
->> right to me. We may be transitioning from a present PTE (ie. a writable
->> anonymous mapping) to a non-present PTE (ie. a device-exclusive entry) and
->> therefore any secondary processors (eg. other GPUs, iommus, etc.) will need to
->> update their copies of the PTE. So I think the notifier call is needed.
+>> diff --git a/drivers/gpu/drm/nouveau/nouveau_svm.c b/drivers/gpu/drm/nouveau/nouveau_svm.c
+>> index 39e3740980bb..4758fee182b4 100644
+>> --- a/drivers/gpu/drm/nouveau/nouveau_svm.c
+>> +++ b/drivers/gpu/drm/nouveau/nouveau_svm.c
+>> @@ -510,10 +510,6 @@ static bool nouveau_svm_range_invalidate(struct mmu_interval_notifier *mni,
+>>   	struct svm_notifier *sn =
+>>   		container_of(mni, struct svm_notifier, notifier);
+>>   
+>> -	if (range->event == MMU_NOTIFY_EXCLUSIVE &&
+>> -	    range->owner == sn->svmm->vmm->cli->drm->dev)
+>> -		return true;
 > 
-> Then it is all very confusing:
+> I think this will cause a live-lock because make_device_exclusive_range()
+> will call the notifier which without the filtering will increment the sequence
+> count and cause endless retries of the loop in nouveau_atomic_range_fault().
+> The notifier needs to be able to figure out if it was called in response to
+> something this thread did (ie. make_device_exclusive_range) and can therefore
+> ignore the invalidation, or from some other thread.
+
+Yes, as discussed in the other patch, this must stay to inform secondary 
+MMUs about the conversion *to* device exclusive.
+
 > 
-> "MMU_NOTIFY_EXCLUSIVE: to signal a device driver that the device will no
-> longer have exclusive access to the page."
+> Looking at hmm_test I see that doesn't use the sequence counter to ensure
+> the PTE remains valid whilst it is mapped. I think that is probably wrong, so
+> apologies if that lead you astray.
 
-So the second sentence actually describes the other condition. Likely we
-should make that clearer:
-
---- a/include/linux/mmu_notifier.h
-+++ b/include/linux/mmu_notifier.h
-@@ -43,10 +43,11 @@ struct mmu_interval_notifier;
-   * a device driver to possibly ignore the invalidation if the
-   * owner field matches the driver's device private pgmap owner.
-   *
-- * @MMU_NOTIFY_EXCLUSIVE: to signal a device driver that the device will no
-- * longer have exclusive access to the page. When sent during creation of an
-- * exclusive range the owner will be initialised to the value provided by the
-- * caller of make_device_exclusive(), otherwise the owner will be NULL.
-+ * @MMU_NOTIFY_EXCLUSIVE: (1) to signal a device driver that the device will no
-+ * longer have exclusive access to the page; and (2) to signal that a page will
-+ * be made exclusive to a device. During (1), the owner will be NULL, during
-+ * (2), the owner will be initialised to the value provided by the caller of
-+ * make_device_exclusive().
-   */
-  enum mmu_notifier_event {
-         MMU_NOTIFY_UNMAP = 0,
-
+Yes, the hmm_test does not completely follow the same model the nouveau 
+implementation does; so it might not be completely correct.
 
 -- 
 Cheers,
