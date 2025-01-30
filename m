@@ -2,149 +2,146 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id AC0A8A225EB
-	for <lists+nouveau@lfdr.de>; Wed, 29 Jan 2025 22:43:09 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 5D6E1A2272A
+	for <lists+nouveau@lfdr.de>; Thu, 30 Jan 2025 01:27:49 +0100 (CET)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 586E110E198;
-	Wed, 29 Jan 2025 21:43:05 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 5894210E1FD;
+	Thu, 30 Jan 2025 00:27:47 +0000 (UTC)
 Authentication-Results: gabe.freedesktop.org;
-	dkim=pass (2048-bit key; unprotected) header.d=Nvidia.com header.i=@Nvidia.com header.b="JRUuLpvJ";
+	dkim=pass (2048-bit key; unprotected) header.d=Nvidia.com header.i=@Nvidia.com header.b="VvnHQWQc";
 	dkim-atps=neutral
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from NAM02-SN1-obe.outbound.protection.outlook.com
- (mail-sn1nam02on2081.outbound.protection.outlook.com [40.107.96.81])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 7893910E16F;
- Wed, 29 Jan 2025 21:43:04 +0000 (UTC)
+Received: from NAM11-DM6-obe.outbound.protection.outlook.com
+ (mail-dm6nam11on2067.outbound.protection.outlook.com [40.107.223.67])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 05AE710E1FD;
+ Thu, 30 Jan 2025 00:27:45 +0000 (UTC)
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=l/Y3ozbiHXo06gnlgQYCRD5KoWnyCjilBIq762rJnj/qlO40G5AU1oyAdpkpZzyOrDytFk4Xqz/8mhTI1IJeGBZpgc1eRh8+/Z5tSi/gvztE0VM75s12US7wD0lyIiH2sQVDxFx6jX0J7C/7KEPgwKo/6Db/XgHX8woFAoz+YZO7t4iypjV3GjLHt/PUD0BxjwEUC5eZqITOlB9VDdTtZRkeoXL1Q5AtEZqaIBh9aO9whtuPz1Nif+jdM6EIqAPknZn+BygALNinRYPz4eT4ZaShfvJ1ZJt5gFSyt9kJP6Z8MWUS8H9dUxnVgWeO1okn8hT5J/f1ml5C3rFVZMLYBg==
+ b=VZPAlUxCZ0VJvl2hl6f1HZv/SvYKLwW5hrtSsrrRbW2pKhcwHNAFD+BIrmHPh+Ysf5ZgqFfNVj8RNYEdKMYGOb6aLZ8D1RMrFrENIXYdRfkjMpXh8BREa+F54V0n9AASzMvbr0XCatQz0/3iutyYx0HGIuMZesgTVi/+uEpby1RS+kIpNaT324xt4Qm6VJbrWx/nWHd94nn6ie5dTpILvq3uv2pxrPlOG02/TXLy5XhqXint4EQbLI/9fRlAT14ZlsACqxNBzv1WMiBZAXjqteQeQzUcullIxvL1ebUSzeWFwbiUwfDznoBtXlH2ZvPQiwU/3+BWdZeLB6wLV0L/eA==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
  s=arcselector10001;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=Y+xm6bZ4u2WVBXmjdGFsWMI8eKqdH839TUVOVN7HUSc=;
- b=cG5m9e6E98n2u+3jXAQE4iGajDTnYRVXouIHRmO0qBq5lgCX8BwcZcJNAGDs5LO7b/XfeCebWeK1RX/qp1/hh32EOE5n7YHiBFCmHRIjchtMObBAV3oqb3+o5AeBT95+/zN6Ge6fxydHL6gp4Ww78rD3kmw7/eJizQHBUqi9zMlPU4BnrdfRmpUsKSrYb7HltxOdcesK1AjeUmLR1az2j1r0VvRsN1fHXXEKdhRpALkByPNLj5Alk369MJeIfPCMsEWA+rvQxlxAT8lkyVAv0V8fKtN/4NjXXIxGpC8fWuxn89yrZN1T9YMTv2hlOUpozHAD/a3EBUh2rIC7vhijIA==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
- 216.228.117.160) smtp.rcpttodomain=redhat.com smtp.mailfrom=nvidia.com;
- dmarc=pass (p=reject sp=reject pct=100) action=none header.from=nvidia.com;
- dkim=none (message not signed); arc=none (0)
+ bh=eUdYHVup223LwPG4t1221TE0aH77iwGDq4JZaHKQ1Xs=;
+ b=v75dQzmjGzb/781B0hBYij+0l4CmJ6EKxaydAGvO98v22OvQWNm9VZ4fssU8gLNm4F95tiTnWANq0W5GS8jeSY34y15fUNkvYerhTG3SppO9Zi133cRfoRysF4V/qtsJKeYg79fRScbyy1ly+HVjgwHTMNfcje0ZAmNaiWQfRVk3GUdiT3kyqqCnvi488Ebqdl5oVFi2HwgOd2HI6VaPLh2CZ8dzEtmPiL8VwQyMd3aEiBQ1sy7I8PXbCDN2/ukW/fB9zzG7tcDLk6LKamJIhqqTMJKjAxNrWBNvSKtUtA/Z64u/XEoGSqSG87qogKK8bUaWiRix0Bnm+bPLP+OV4A==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=nvidia.com; dmarc=pass action=none header.from=nvidia.com;
+ dkim=pass header.d=nvidia.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=Nvidia.com;
  s=selector2;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=Y+xm6bZ4u2WVBXmjdGFsWMI8eKqdH839TUVOVN7HUSc=;
- b=JRUuLpvJDBbNQd+IpiCs/0NwO8pdUvRNBalOO7XgR2Gq1/112IVZE2YfFAk/n16Xwq1ucAPJxC3YUqfTheYOfDTEwX+rkTThwrSLJLwl4XJnvdbWEXhEtjXbcRDLo8+KRxy7iuJQTb4k3k3Ix0+edeVALMf+ncGknvRjsNouQ8qkhq30/aAdxM95ov2pwZRQwyoNrxK1jIWWtAX5WY6WPRyH3jHdOF9ST5lQ1/0LU9UfOjuuJawquZyC7aaoqIMuAccCrZ6UBJcGyu8mUB4uQYfJobCQDEJqocwVWX8PVtdsImoRylwUP0USRJQHfjJ3zeh13/3ulU6ZGjiEd7g0SQ==
-Received: from IA1P220CA0024.NAMP220.PROD.OUTLOOK.COM (2603:10b6:208:464::12)
- by PH7PR12MB8055.namprd12.prod.outlook.com (2603:10b6:510:268::10)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.8377.23; Wed, 29 Jan
- 2025 21:42:59 +0000
-Received: from BL02EPF00029929.namprd02.prod.outlook.com
- (2603:10b6:208:464:cafe::76) by IA1P220CA0024.outlook.office365.com
- (2603:10b6:208:464::12) with Microsoft SMTP Server (version=TLS1_3,
- cipher=TLS_AES_256_GCM_SHA384) id 15.20.8398.17 via Frontend Transport; Wed,
- 29 Jan 2025 21:42:59 +0000
-X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 216.228.117.160)
- smtp.mailfrom=nvidia.com;
- dkim=none (message not signed)
- header.d=none;dmarc=pass action=none header.from=nvidia.com;
-Received-SPF: Pass (protection.outlook.com: domain of nvidia.com designates
- 216.228.117.160 as permitted sender) receiver=protection.outlook.com;
- client-ip=216.228.117.160; helo=mail.nvidia.com; pr=C
-Received: from mail.nvidia.com (216.228.117.160) by
- BL02EPF00029929.mail.protection.outlook.com (10.167.249.54) with Microsoft
- SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.20.8398.14 via Frontend Transport; Wed, 29 Jan 2025 21:42:58 +0000
-Received: from rnnvmail201.nvidia.com (10.129.68.8) by mail.nvidia.com
- (10.129.200.66) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.1544.4; Wed, 29 Jan
- 2025 13:42:44 -0800
-Received: from [10.110.48.28] (10.126.230.35) by rnnvmail201.nvidia.com
- (10.129.68.8) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.1544.14; Wed, 29 Jan
- 2025 13:42:43 -0800
-Message-ID: <24e88fec-65b5-47ad-8833-67257f86fde5@nvidia.com>
-Date: Wed, 29 Jan 2025 13:42:41 -0800
+ bh=eUdYHVup223LwPG4t1221TE0aH77iwGDq4JZaHKQ1Xs=;
+ b=VvnHQWQcF9ZbIWbfB/dgGtv/3iNNJBIKS3qT2zIt+0nA+B8Ftn77ml4hyyiwDiOArMZKUyTgh1OFDzd5G3vBr70F6hBemWI3ol8fi8dl6CAE2K7/7P2lpMs6EI6oqwERtFygqHEX7wd2PpkQVgtFPlVALUM02l0KFqccPTtlQj6TOsGi7qh8Gnu+aCAoJmMEIvSO2kfu5movK1HALLBWW1W0uDR0IxAyUvkW12/4SCgPyFWTwt1PqZ1jVdR23xyKW3R4FsTs2iUK6IysAAzwPXxdw2vOhQS0n47FbE2Nhf5Rqdpq6Hoezhr3DUCbV6viPWis2nJttizp+vFGaMjK9g==
+Authentication-Results: dkim=none (message not signed)
+ header.d=none;dmarc=none action=none header.from=nvidia.com;
+Received: from CY8PR12MB7705.namprd12.prod.outlook.com (2603:10b6:930:84::9)
+ by SA1PR12MB8844.namprd12.prod.outlook.com (2603:10b6:806:378::6) with
+ Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.8398.18; Thu, 30 Jan
+ 2025 00:27:42 +0000
+Received: from CY8PR12MB7705.namprd12.prod.outlook.com
+ ([fe80::4b06:5351:3db4:95f6]) by CY8PR12MB7705.namprd12.prod.outlook.com
+ ([fe80::4b06:5351:3db4:95f6%6]) with mapi id 15.20.8398.017; Thu, 30 Jan 2025
+ 00:27:42 +0000
+Date: Thu, 30 Jan 2025 11:27:37 +1100
+From: Alistair Popple <apopple@nvidia.com>
+To: David Hildenbrand <david@redhat.com>
+Cc: linux-kernel@vger.kernel.org, linux-doc@vger.kernel.org, 
+ dri-devel@lists.freedesktop.org, linux-mm@kvack.org,
+ nouveau@lists.freedesktop.org, Andrew Morton <akpm@linux-foundation.org>,
+ =?utf-8?B?SsOpcsO0bWU=?= Glisse <jglisse@redhat.com>, 
+ Jonathan Corbet <corbet@lwn.net>, Alex Shi <alexs@kernel.org>,
+ Yanteng Si <si.yanteng@linux.dev>, 
+ Karol Herbst <kherbst@redhat.com>, Lyude Paul <lyude@redhat.com>, 
+ Danilo Krummrich <dakr@kernel.org>, David Airlie <airlied@gmail.com>, 
+ Simona Vetter <simona@ffwll.ch>, "Liam R. Howlett" <Liam.Howlett@oracle.com>, 
+ Lorenzo Stoakes <lorenzo.stoakes@oracle.com>, Vlastimil Babka <vbabka@suse.cz>,
+ Jann Horn <jannh@google.com>, 
+ Pasha Tatashin <pasha.tatashin@soleen.com>, Peter Xu <peterx@redhat.com>,
+ Jason Gunthorpe <jgg@nvidia.com>
+Subject: Re: [PATCH v1 4/4] mm/memory: document restore_exclusive_pte()
+Message-ID: <7vejbjs7btkof4iguvn3nqvozxqpnzbymxbumd7pant4zi4ac4@3ozuzfzsm5tp>
+References: <20250129115803.2084769-1-david@redhat.com>
+ <20250129115803.2084769-5-david@redhat.com>
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <20250129115803.2084769-5-david@redhat.com>
+X-ClientProxiedBy: SY5P282CA0025.AUSP282.PROD.OUTLOOK.COM
+ (2603:10c6:10:202::10) To DS0PR12MB7726.namprd12.prod.outlook.com
+ (2603:10b6:8:130::6)
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v1 01/12] mm/gup: reject FOLL_SPLIT_PMD with hugetlb VMAs
-To: David Hildenbrand <david@redhat.com>, <linux-kernel@vger.kernel.org>
-CC: <linux-doc@vger.kernel.org>, <dri-devel@lists.freedesktop.org>,
- <linux-mm@kvack.org>, <nouveau@lists.freedesktop.org>, Andrew Morton
- <akpm@linux-foundation.org>, =?UTF-8?B?SsOpcsO0bWUgR2xpc3Nl?=
- <jglisse@redhat.com>, Jonathan Corbet <corbet@lwn.net>, Alex Shi
- <alexs@kernel.org>, Yanteng Si <si.yanteng@linux.dev>, Karol Herbst
- <kherbst@redhat.com>, Lyude Paul <lyude@redhat.com>, Danilo Krummrich
- <dakr@kernel.org>, David Airlie <airlied@gmail.com>, Simona Vetter
- <simona@ffwll.ch>, "Liam R. Howlett" <Liam.Howlett@oracle.com>, "Lorenzo
- Stoakes" <lorenzo.stoakes@oracle.com>, Vlastimil Babka <vbabka@suse.cz>,
- "Jann Horn" <jannh@google.com>, Pasha Tatashin <pasha.tatashin@soleen.com>,
- Peter Xu <peterx@redhat.com>, Alistair Popple <apopple@nvidia.com>, Jason
- Gunthorpe <jgg@nvidia.com>, <stable@vger.kernel.org>
-References: <20250129115411.2077152-1-david@redhat.com>
- <20250129115411.2077152-2-david@redhat.com>
-Content-Language: en-US
-From: John Hubbard <jhubbard@nvidia.com>
-In-Reply-To: <20250129115411.2077152-2-david@redhat.com>
-Content-Type: text/plain; charset="UTF-8"; format=flowed
-Content-Transfer-Encoding: 7bit
-X-Originating-IP: [10.126.230.35]
-X-ClientProxiedBy: rnnvmail201.nvidia.com (10.129.68.8) To
- rnnvmail201.nvidia.com (10.129.68.8)
-X-EOPAttributedMessage: 0
 X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: BL02EPF00029929:EE_|PH7PR12MB8055:EE_
-X-MS-Office365-Filtering-Correlation-Id: 96a907b1-641c-4b57-74d7-08dd40ade62f
+X-MS-TrafficTypeDiagnostic: CY8PR12MB7705:EE_|SA1PR12MB8844:EE_
+X-MS-Office365-Filtering-Correlation-Id: 6ad70f6b-1627-40b2-734d-08dd40c4e8b2
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
 X-Microsoft-Antispam: BCL:0;
- ARA:13230040|82310400026|36860700013|1800799024|7416014|376014; 
-X-Microsoft-Antispam-Message-Info: =?utf-8?B?SURZSXBVanNRMlNZNlJ5T2FvbGF5OWl5bTJXa0pMTzNsSXZMMDBlcEllbng0?=
- =?utf-8?B?Z1VWTzFseVNjUVhyNXU1ck9PdFBYdkI2dEJLQTIrbkEwRmM4UVgyRS9aTkpG?=
- =?utf-8?B?TFVzOWFxbG5aN2dWeVNxcU9RL29jVVFtZWc5VGxCSDJSTTN3WTU1TFlmOFBa?=
- =?utf-8?B?ajdqVzU2RktBU1NyY3NCUHJBQjdQNmdURmw1SXN5ZlNZUlNuN0xXTWZoMDl5?=
- =?utf-8?B?WTl3bVR0Rlg4OEc0L2U5SHA2OC83L0gwY2lzbDgwemhsRzhhelR1VGsyK2Ey?=
- =?utf-8?B?OWF1dmFyUFRnWFNzSFFCbU1MWmQrdTFXUVA3eHBicVpaZ28zeGt0WDBBS01M?=
- =?utf-8?B?T2dYNVBSWmpETm9IUDdJMnRpbmFIT2kyZ2dPRytBVkZiMXNqcVVaaCttMDho?=
- =?utf-8?B?M2ZUM2FvVW0xR2ZtTVZnNVh2NG8zR2JjM1VRZkhRUnoxc1BDMy8yL1VhZllJ?=
- =?utf-8?B?RXF0YUxVWjFNaGhzMVNVMUFhT3NlWU9SOWFIWnNEaXpXWjNIWFNNa0ZHbEpL?=
- =?utf-8?B?cjBsOXNwOW9BbkMxZnFybkNDQmhLTEZEOWtIVWtNclJMSkFObnVpaDNRY2l6?=
- =?utf-8?B?UzVObmdCRlZ0eThKNGZyaDN2UVhCdzhPR1ozVFBDekZsTXMveXgxb1hpMHFO?=
- =?utf-8?B?cHE5bmtKK0NwQUdFOGNER2x2RjFtazB0dnRrZWhIZWZzUkdPODBkemJSM3Zj?=
- =?utf-8?B?THBsNWJBeTYwVzc3eHRodHprbEI4WEFZQzRTUWdwMzZmamRlbDdoVFZrTEhy?=
- =?utf-8?B?V3dHV2M5ZTNrUHViNFdZZTBia1RDSG93bUVVcElTalhwVllDVGkzWXNtZHZG?=
- =?utf-8?B?TlBGM09hbHM0eVAwcm81VXVsMW0yd0t5Y0lNNkpOclRZREQ4aHVxbnZUQlpE?=
- =?utf-8?B?d0dYcFY5ZHpmVWtnOGwwYjR2ZVlZL2R5ZEhWVGRJTTVqUFNxVjNKaXQ2Z2pL?=
- =?utf-8?B?Tzc5Wk1EeTAxaGpRNm5vb0Q4MXF0Y0JheFk1QVdCbzluTUxjU3RXNWVxYkxZ?=
- =?utf-8?B?M0hucEw0bERNMUU3MU1iRlVLTDhVaFlOdWc4em9SajloRVZSdkw5Q0NPb25K?=
- =?utf-8?B?ek5kcldLNnhEVDV5U1RCeWxRUGxYMjd2d0lYRFZ1aXprc2dUNE10R0ZLbmFh?=
- =?utf-8?B?dGg4S3dFb2hXd0pHZ1NWTFduampIRDdneXV2YlIxQlRPdmlsZGFkZkZKc1Ax?=
- =?utf-8?B?UTRVTzBlNlovbWNiM3o0V1RlK0VYS1ord2FmYUh5c1dCb3lDSGU5dDArNFhz?=
- =?utf-8?B?djBreUxlNTlXVWpnU1cwQ0UzOGQwUzk4clR6Ry9wUnRqRit3UHhCU2FuZHlm?=
- =?utf-8?B?UkExdVptVEpsUVk1WWc1SlF6VVhjTTNiNWh2YnN2UE14WWRYQjU0ZVcxdm5C?=
- =?utf-8?B?b2g5c3VXcU15QkhwQVJPVEhuUU0vTWlkUzNXaHQ5UXlsMkZzUkY3S1c5L2p3?=
- =?utf-8?B?Tmt4LzdqRFYwenVrOWxVNFNtWGlvZEFVbHk1dXdRa3h4ZUd4Y2UrRjFhTkNJ?=
- =?utf-8?B?VVV1bGJ0dnZjRnJxZkt3TGJ2VFI5bzVZNXMzV2hZQjhXN3loNXNOeERFcStp?=
- =?utf-8?B?NHRlOE0yRFU5TnRLL0RoTHBPTWt3SkdxWCtVRDc5NTh4L0pzSnV1S3Y0OS92?=
- =?utf-8?B?b3RUOWF1SkpxcjRiMHg3QTE5elZwWE9pQlRFT2RLK28weW5CTnlIejkxaFk2?=
- =?utf-8?B?SGVzTW9CY3J4S0gvYlU0a1BLSG1ENHVnNjZDaXhrKzd4YkgvNEJnb1FXNFR1?=
- =?utf-8?B?SDBCcmZLMktpUXZnaDB5TkljejBBTmhyMlhCN3JWZy9scTlUUlBUQlRiWmhR?=
- =?utf-8?B?UUdqR2VwRTlCNzRQeGZjcm1yZ1l6Wm1JdW9Wci9wYzJaRm1qWnRPTmE2VXdT?=
- =?utf-8?B?cUhoTHdSdHVoUlA4alNvb29EYzFHY2tBdmYvOXNkRCtLNWlqdVBrRTNEaW93?=
- =?utf-8?B?ZXRIWlUrRkwwbnlhSDA3MG9EYkR1SjFZZlZoVGtRU0cvdzJ2UlhCZU9uUHVX?=
- =?utf-8?Q?l/sAhJxrTdvB+PJU/25XUiCUw6AQog=3D?=
-X-Forefront-Antispam-Report: CIP:216.228.117.160; CTRY:US; LANG:en; SCL:1; SRV:;
- IPV:NLI; SFV:NSPM; H:mail.nvidia.com; PTR:dc6edge1.nvidia.com; CAT:NONE;
- SFS:(13230040)(82310400026)(36860700013)(1800799024)(7416014)(376014); DIR:OUT;
+ ARA:13230040|366016|1800799024|376014|7416014|7053199007; 
+X-Microsoft-Antispam-Message-Info: =?us-ascii?Q?oqx6zFvBozuXs4+q/BKT8+PYxVxoE7geH/zKtX+4UQ9IZ3HrD/nqr2vP+KGv?=
+ =?us-ascii?Q?XDJFomq3JS55jLRqKDUk23EBWVcfDjE2fbItzmAIT3/OuIIk5PDi4AD4YSmO?=
+ =?us-ascii?Q?NCGu43xk7FcGS/A4giMoQAN7y0Aw8RcVsuPgftbErch2ts5CIALZHYsg2DPn?=
+ =?us-ascii?Q?DvcyTAIcPmM2a33bx8BXsC7K71pJ7hF9qPD+M1ZLYcc3FML63YrS76VJpLNy?=
+ =?us-ascii?Q?DKPT9MksENzXmHPV+7/8TuSQI8B+TsqqAdwLuaq2KhD//w59J38T2rXlpLig?=
+ =?us-ascii?Q?EJV2gbFfmMHDHGPufQaeHt7fM0ppp5Gxhp4dwdxhtOz0ygPo2TLU8JhuG/DR?=
+ =?us-ascii?Q?jbtlcHBnPZDjk4nElNQuAwu5tebb3nfiqwSCwZpPyQGogLtVzlz1F9LM0tvk?=
+ =?us-ascii?Q?ifLvwzd90unGVZIph9VF7vOvjoX1+YcqjX2ZwNMFk84ZIwFhb3H3r4iYg0hl?=
+ =?us-ascii?Q?rcYO3upP50YYiqMoNgpeEDX/CLVgg2qNVx/br/gn5i/rDu/fn/h6vkPWG/mZ?=
+ =?us-ascii?Q?W/rk8BVx6mZDe4IJBKdXzY4xoImqRFWLSnt/ARt/4Aa3H9Kdp1ZpPkOr7HYC?=
+ =?us-ascii?Q?n0zpewWM4ZF6dXuDWOR3UogFGRpFTXiAWPqY/v3qe09q0oEmjSDFh/1U9VQ3?=
+ =?us-ascii?Q?9OxDP3EZPqALOkpsxfO6sHkJ6IL4cujRWdh4B99xGe26bM1j3DIwVE+TjLfB?=
+ =?us-ascii?Q?n0zI8+ZJEHtujPr06zy9s7uALt04VPPrxy2KfcxogK+tAseabHYgLR4kKUXb?=
+ =?us-ascii?Q?Y1vYlx9I5KfvMUSbLK3WzQsF4rte6QukYJHNnHpLWpHrIyaKBiIIBTyBi37d?=
+ =?us-ascii?Q?Oq5O97VCo6FWLBO/lQRAy6hLbd15VtIDp8/MOU8gEnXumrRzaODdPfzR3BvW?=
+ =?us-ascii?Q?lMvsfm/QgUpN9Sf0+J7HOEdcTdP0VDmtyLTg+UjMhUgFrl/4GnCwM/JLG/lS?=
+ =?us-ascii?Q?Kkily71CM2tA8R8vZqnPQzj0Lrkf4CWMJrMU5ZhG0WL8LiZmh5eZ1kaSyOS9?=
+ =?us-ascii?Q?TBcYm5wZELkeO2t4qUYdhWk3wy7zuadmy3fURAZOHv9nKMOrWVBlbZyCfnEk?=
+ =?us-ascii?Q?F6VmLfUfIXeNluOdkW5nTmYaq+0xZ1EszMChU+uUevwZXoANy3ejryvWQIYB?=
+ =?us-ascii?Q?pSkGJKgkj0lK+paKdKZPsHxP6Fmeaby4ph50ZsUHIpcpOID8OY9cMF6PVnXe?=
+ =?us-ascii?Q?/khwR2BcgTRAu5ovbb1GEvx8xQOUQaTvMdFSyzqUyNRg9bXUa9rTJR30YB4B?=
+ =?us-ascii?Q?2dQ2TKajjrYLlumrSdm/L4WiDnV/+1dhg4wSh2QCr4g1Yzl99Z3Dv1FtH3f9?=
+ =?us-ascii?Q?K5qj/NX4vY0SQV0Nr2zrB0AoL+fIEosVr5uA1KkJH5Ee4nzpwtu67jeUebLy?=
+ =?us-ascii?Q?8Ze7upXAYbJ94eDdHEFRwsAWNdgs?=
+X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
+ IPV:NLI; SFV:NSPM; H:CY8PR12MB7705.namprd12.prod.outlook.com; PTR:; CAT:NONE;
+ SFS:(13230040)(366016)(1800799024)(376014)(7416014)(7053199007); DIR:OUT;
  SFP:1101; 
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0: =?us-ascii?Q?BUbg/FPrBdCuvp+X9Ywg6+ZsrGALFYI0K8ncVNAyZWB2ctBitgrtlKG0gr+M?=
+ =?us-ascii?Q?d6bBCpXEB8QhEO+3LTS7cSpZHIRlh60vHMj+QbTjxNq2AFINtcM/rPBH78qZ?=
+ =?us-ascii?Q?KAFn01WLshQPYEPAa/uPOFdjP24eJMz4wZbS9osb1w0eKC4JWFqR2UZamxpt?=
+ =?us-ascii?Q?uA2yV+U3cNHhPj6MnuwxcTJNRJZ+gqRi8IJzcGX5SLvH9D7Ne2qfINfiL17o?=
+ =?us-ascii?Q?q5DAkWHGFsozTl51uxgF1MkNTlQHTBG3pZsGDuNkA8UGdGxfOvJb4Boe7XdL?=
+ =?us-ascii?Q?L207U8IJUt8mkr5yLdZeKwOtD+gob71KxPl0e9EDZsFK732OkSO8/b/ngekM?=
+ =?us-ascii?Q?1uANVjL5u8slD8irrYpC4RODog+CPmYIS8vf6MeURT7k7T9lxe2pSDh/TITW?=
+ =?us-ascii?Q?eVUAfMTDT6grYK1K1M4V4/1SNuCWNrwpZe+OL3X3JZK6EDBQ4IKr3MbgoeEs?=
+ =?us-ascii?Q?DBHxqSW/bdNcjWe6Dr+O1TRMqzo1YPs9XYqrjzEVCb++vjyljcswFULTIB/5?=
+ =?us-ascii?Q?k6E0f50lt883LYvUUGwJEMoyVT6DbxiDcOi7eL1ijcJ3Wbf0bndkSSxgbPAI?=
+ =?us-ascii?Q?h4eewKZFxzejg4il3FA/qrIKeLs2JUpmiC7X1aSMAovbBSEEEKdBIV7VSqgb?=
+ =?us-ascii?Q?iIYWmSurWzFYviwXNd5PGyiZuusvzO+PGKBZc+laRMGF45yXttVD/lsmoZ5c?=
+ =?us-ascii?Q?RcE0ydocQdOOW0fGi3dvGHDO49OxIvdXb5nlryH4Lb/7C0Gc/Y0j7SYWB8vm?=
+ =?us-ascii?Q?oLO0Wa782hqzcEM06lyy3iLfe1tXzvqxsnOgFJZ0oAPcLQnBEpNSb2fV6cgH?=
+ =?us-ascii?Q?REpN+mOfC7VsnwlOhr3dfOoxr2kcbOKemAcG31zCuZTpSSdyfaCYqSX84cH/?=
+ =?us-ascii?Q?jRq9o44B8e4VjkS0slV/Kfen1+JMq88VwlZteu9xvy/dkSvN8H1iOGw0ahoP?=
+ =?us-ascii?Q?kruLwNwFwORQUWx7TWMMLx5uTHQjOpEbf/wlkOQk2928qM+K4swq6uHkPnIR?=
+ =?us-ascii?Q?IZUPWO3TKGdH4c4HkCK9CC7rhQUtAta+sGZd/dqozNFR04qBnPzVpYDYF7jp?=
+ =?us-ascii?Q?YcjlB/lulelSA9RodmSb8UTqh/YVQmy1zp2axd/5Lo9Vrmvrx4RCDCWGSxks?=
+ =?us-ascii?Q?suPNdJN/Joaz3WvuOJsvRKd9vpaiK9Z2oE67Qjjr+iYqGXDmMfpGo7TkG4lC?=
+ =?us-ascii?Q?w4ulLsf4PDfXvhRdB9WtUhTG3bgeCCeia4a71ETSfFDWP/ZyNIrIeVUAAxCL?=
+ =?us-ascii?Q?mokUqGCLbRAkEImYkN1W63YLx+1NsX0UQ9n8F4Ne2C6K4s+K/U0sBXEqwjJF?=
+ =?us-ascii?Q?oe/M5kg54yXNqPE+uPcypBG6jHJGOVLeGKmrr1d4KzJTtaNnU1k6LHrA+7mg?=
+ =?us-ascii?Q?jeat5btSqS1mMpBhhFGa76G9a8BN0+s7LFuM5R02FLqGgzttGTqgO2jEUk4z?=
+ =?us-ascii?Q?DsArgHlcqnKWJmoagzoXPB0t/XWBjw6009yTO6I4hoZ4GcIGHBByX5fgHgep?=
+ =?us-ascii?Q?wOc/dEuoy9x+prfE7SOyjVeXXB5XkwrK5aafGO/rxyZlACpdw5R5qBoMUWyC?=
+ =?us-ascii?Q?OvLDTpiZ+s7d7cj20ECWJVLp9eminRdOzbNfxjw3?=
 X-OriginatorOrg: Nvidia.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 29 Jan 2025 21:42:58.9836 (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: 96a907b1-641c-4b57-74d7-08dd40ade62f
+X-MS-Exchange-CrossTenant-Network-Message-Id: 6ad70f6b-1627-40b2-734d-08dd40c4e8b2
+X-MS-Exchange-CrossTenant-AuthSource: DS0PR12MB7726.namprd12.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 30 Jan 2025 00:27:42.5678 (UTC)
+X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
 X-MS-Exchange-CrossTenant-Id: 43083d15-7273-40c1-b7db-39efd9ccc17a
-X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=43083d15-7273-40c1-b7db-39efd9ccc17a; Ip=[216.228.117.160];
- Helo=[mail.nvidia.com]
-X-MS-Exchange-CrossTenant-AuthSource: BL02EPF00029929.namprd02.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Anonymous
-X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: PH7PR12MB8055
+X-MS-Exchange-CrossTenant-MailboxType: HOSTED
+X-MS-Exchange-CrossTenant-UserPrincipalName: +5Zh4RaA2OhZ6VjrGxzRplZEPcrBh1F8bV7lGDu+0kVDk4HEANrc6XJOo7l1nvUeQIBqRpdbaaBuVFUo+hEmjQ==
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: SA1PR12MB8844
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -159,103 +156,74 @@ List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-On 1/29/25 3:53 AM, David Hildenbrand wrote:
-> We only have two FOLL_SPLIT_PMD users. While uprobe refuses hugetlb
-> early, make_device_exclusive_range() can end up getting called on
-> hugetlb VMAs.
-> 
-> Right now, this means that with a PMD-sized hugetlb page, we can end
-> up calling split_huge_pmd(), because pmd_trans_huge() also succeeds
-> with hugetlb PMDs.
-> 
-> For example, using a modified hmm-test selftest one can trigger:
-> 
-> [  207.017134][T14945] ------------[ cut here ]------------
-> [  207.018614][T14945] kernel BUG at mm/page_table_check.c:87!
-> [  207.019716][T14945] Oops: invalid opcode: 0000 [#1] PREEMPT SMP KASAN NOPTI
-> [  207.021072][T14945] CPU: 3 UID: 0 PID: ...
-> [  207.023036][T14945] Hardware name: QEMU Standard PC (Q35 + ICH9, 2009), BIOS 1.16.3-2.fc40 04/01/2014
-> [  207.024834][T14945] RIP: 0010:page_table_check_clear.part.0+0x488/0x510
-> [  207.026128][T14945] Code: ...
-> [  207.029965][T14945] RSP: 0018:ffffc9000cb8f348 EFLAGS: 00010293
-> [  207.031139][T14945] RAX: 0000000000000000 RBX: 00000000ffffffff RCX: ffffffff8249a0cd
-> [  207.032649][T14945] RDX: ffff88811e883c80 RSI: ffffffff8249a357 RDI: ffff88811e883c80
-> [  207.034183][T14945] RBP: ffff888105c0a050 R08: 0000000000000005 R09: 0000000000000000
-> [  207.035688][T14945] R10: 00000000ffffffff R11: 0000000000000003 R12: 0000000000000001
-> [  207.037203][T14945] R13: 0000000000000200 R14: 0000000000000001 R15: dffffc0000000000
-> [  207.038711][T14945] FS:  00007f2783275740(0000) GS:ffff8881f4980000(0000) knlGS:0000000000000000
-> [  207.040407][T14945] CS:  0010 DS: 0000 ES: 0000 CR0: 0000000080050033
-> [  207.041660][T14945] CR2: 00007f2782c00000 CR3: 0000000132356000 CR4: 0000000000750ef0
-> [  207.043196][T14945] PKRU: 55555554
-> [  207.043880][T14945] Call Trace:
-> [  207.044506][T14945]  <TASK>
-> [  207.045086][T14945]  ? __die+0x51/0x92
-> [  207.045864][T14945]  ? die+0x29/0x50
-> [  207.046596][T14945]  ? do_trap+0x250/0x320
-> [  207.047430][T14945]  ? do_error_trap+0xe7/0x220
-> [  207.048346][T14945]  ? page_table_check_clear.part.0+0x488/0x510
-> [  207.049535][T14945]  ? handle_invalid_op+0x34/0x40
-> [  207.050494][T14945]  ? page_table_check_clear.part.0+0x488/0x510
-> [  207.051681][T14945]  ? exc_invalid_op+0x2e/0x50
-> [  207.052589][T14945]  ? asm_exc_invalid_op+0x1a/0x20
-> [  207.053596][T14945]  ? page_table_check_clear.part.0+0x1fd/0x510
-> [  207.054790][T14945]  ? page_table_check_clear.part.0+0x487/0x510
-> [  207.055993][T14945]  ? page_table_check_clear.part.0+0x488/0x510
-> [  207.057195][T14945]  ? page_table_check_clear.part.0+0x487/0x510
-> [  207.058384][T14945]  __page_table_check_pmd_clear+0x34b/0x5a0
-> [  207.059524][T14945]  ? __pfx___page_table_check_pmd_clear+0x10/0x10
-> [  207.060775][T14945]  ? __pfx___mutex_unlock_slowpath+0x10/0x10
-> [  207.061940][T14945]  ? __pfx___lock_acquire+0x10/0x10
-> [  207.062967][T14945]  pmdp_huge_clear_flush+0x279/0x360
-> [  207.064024][T14945]  split_huge_pmd_locked+0x82b/0x3750
-> ...
-> 
-> Before commit 9cb28da54643 ("mm/gup: handle hugetlb in the generic
-> follow_page_mask code"), we would have ignored the flag; instead, let's
+On Wed, Jan 29, 2025 at 12:58:02PM +0100, David Hildenbrand wrote:
+> Let's document how this function is to be used, and why the requirement
+> for the folio lock might maybe be dropped in the future.
 
-...and so after that commit (which doesn't touch FOLL_SPLIT_PMD, we no
-longer ignore the flag? At a first look at that commit, I don't quite
-understand the connection, can you clarify just a bit for me?
+Sorry, only just catching up on your other thread. The folio lock was to ensure
+the GPU got a chance to make forward progress by mapping the page. Without it
+the CPU could immediately invalidate the entry before the GPU had a chance to
+retry the fault.
 
-> simply refuse the combination completely in check_vma_flags(): the
-> caller is likely not prepared to handle any hugetlb folios.
+Obviously performance wise having such thrashing is terrible, so should
+really be avoided by userspace, but the lock at least allowed such programs
+to complete.
 
-Yes.
-
-> 
-> We'll teach make_device_exclusive_range() separately to ignore any hugetlb
-> folios as a future-proof safety net.
-> 
-> Fixes: 9cb28da54643 ("mm/gup: handle hugetlb in the generic follow_page_mask code")
-> Cc: <stable@vger.kernel.org>
 > Signed-off-by: David Hildenbrand <david@redhat.com>
 > ---
->   mm/gup.c | 3 +++
->   1 file changed, 3 insertions(+)
+>  mm/memory.c | 25 +++++++++++++++++++++++++
+>  1 file changed, 25 insertions(+)
 > 
-> diff --git a/mm/gup.c b/mm/gup.c
-> index 3883b307780e..61e751baf862 100644
-> --- a/mm/gup.c
-> +++ b/mm/gup.c
-> @@ -1283,6 +1283,9 @@ static int check_vma_flags(struct vm_area_struct *vma, unsigned long gup_flags)
->   	if ((gup_flags & FOLL_LONGTERM) && vma_is_fsdax(vma))
->   		return -EOPNOTSUPP;
->   
-> +	if ((gup_flags & FOLL_SPLIT_PMD) && is_vm_hugetlb_page(vma))
-> +		return -EOPNOTSUPP;
-> +
+> diff --git a/mm/memory.c b/mm/memory.c
+> index 46956994aaff..caaae8df11a9 100644
+> --- a/mm/memory.c
+> +++ b/mm/memory.c
+> @@ -718,6 +718,31 @@ struct folio *vm_normal_folio_pmd(struct vm_area_struct *vma,
+>  }
+>  #endif
+>  
+> +/**
+> + * restore_exclusive_pte - Restore a device-exclusive entry
+> + * @vma: VMA covering @address
+> + * @folio: the mapped folio
+> + * @page: the mapped folio page
+> + * @address: the virtual address
+> + * @ptep: PTE pointer into the locked page table mapping the folio page
+> + * @orig_pte: PTE value at @ptep
+> + *
+> + * Restore a device-exclusive non-swap entry to an ordinary present PTE.
+> + *
+> + * The folio and the page table must be locked, and MMU notifiers must have
+> + * been called to invalidate any (exclusive) device mappings. In case of
+> + * fork(), MMU_NOTIFY_PROTECTION_PAGE is triggered, and in case of a page
+> + * fault MMU_NOTIFY_EXCLUSIVE is triggered.
+> + *
+> + * Locking the folio makes sure that anybody who just converted the PTE to
+> + * a device-private entry can map it into the device, before unlocking it; so
+> + * the folio lock prevents concurrent conversion to device-exclusive.
 
-This seems correct by inspection, as one cannot split a hugetlbfs page, so:
+I don't quite follow this - a concurrent conversion would already fail
+because the GUP in make_device_exclusive_range() would most likely cause
+an unexpected reference during the migration. And if a migration entry
+has already been installed for the device private PTE conversion then
+make_device_exclusive_range() will skip it as a non-present entry anyway.
 
-Reviewed-by: John Hubbard <jhubbard@nvidia.com>
+However s/device-private/device-exclusive/ makes sense - the intent was to allow
+the device to map it before a call to restore_exclusive_pte() (ie. a CPU fault)
+could convert it back to a normal PTE.
 
+> + * TODO: the folio lock does not protect against all cases of concurrent
+> + * page table modifications (e.g., MADV_DONTNEED, mprotect), so device drivers
+> + * must already use MMU notifiers to sync against any concurrent changes
 
-thanks,
--- 
-John Hubbard
+Right. It's expected drivers are using MMU notifiers to keep page tables in
+sync, same as for hmm_range_fault().
 
->   	if (vma_is_secretmem(vma))
->   		return -EFAULT;
->   
-
-
+> + * Maybe the requirement for the folio lock can be dropped in the future.
+> + */
+>  static void restore_exclusive_pte(struct vm_area_struct *vma,
+>  		struct folio *folio, struct page *page, unsigned long address,
+>  		pte_t *ptep, pte_t orig_pte)
+> -- 
+> 2.48.1
+> 
