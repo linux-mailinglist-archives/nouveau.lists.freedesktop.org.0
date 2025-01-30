@@ -2,84 +2,83 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id 1AE2BA2312F
-	for <lists+nouveau@lfdr.de>; Thu, 30 Jan 2025 16:52:40 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id BEC01A2313F
+	for <lists+nouveau@lfdr.de>; Thu, 30 Jan 2025 16:57:04 +0100 (CET)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id A207F10E35D;
-	Thu, 30 Jan 2025 15:52:37 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id AB64010E36B;
+	Thu, 30 Jan 2025 15:57:02 +0000 (UTC)
 Authentication-Results: gabe.freedesktop.org;
-	dkim=pass (1024-bit key; unprotected) header.d=redhat.com header.i=@redhat.com header.b="B3m8gra7";
+	dkim=pass (1024-bit key; unprotected) header.d=redhat.com header.i=@redhat.com header.b="iQCcRxgJ";
 	dkim-atps=neutral
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
 Received: from us-smtp-delivery-124.mimecast.com
- (us-smtp-delivery-124.mimecast.com [170.10.133.124])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 0A93E10E9A4
- for <nouveau@lists.freedesktop.org>; Thu, 30 Jan 2025 15:52:36 +0000 (UTC)
+ (us-smtp-delivery-124.mimecast.com [170.10.129.124])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 3A16310E36B
+ for <nouveau@lists.freedesktop.org>; Thu, 30 Jan 2025 15:57:01 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1738252356;
+ s=mimecast20190719; t=1738252620;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:mime-version:mime-version:content-type:content-type:
  content-transfer-encoding:content-transfer-encoding:
  in-reply-to:in-reply-to:references:references:autocrypt:autocrypt;
- bh=TsPelXXasc7TSuPc4lSN7EB9eFx6gV0MKgk7ChJm0z4=;
- b=B3m8gra7HcG6KlP75om+LHuP/HmZt3hggY74rulCL+AuzYmgbPBUu/Kl4lgi+/pwLB36LO
- cjiN5T0tx5h9KpwbrDUkK1c5LBwl5G+cU5nmmC5eA6/Qnc7KBgFn1wSgk7lnkqiJ1cS75M
- 8b2aVEygEAcPPj1EUPO9LcDrsQfv6E0=
-Received: from mail-wr1-f69.google.com (mail-wr1-f69.google.com
- [209.85.221.69]) by relay.mimecast.com with ESMTP with STARTTLS
+ bh=qM4w+1es2FaHKiaH8UoDw9Cy8vwIlmWEd0tDR6y0hSI=;
+ b=iQCcRxgJgGE5cSsmAfrJp4Piz3MZFHrKeDUxe77SJy5PRoSg6Q6WQjRBTB9tyrQwzOZQi6
+ x/PtudvrKAiDCo+H15RP7ZUnQZwqvjiBvSeIBk0Dxte/7HmQiUDhVo/YJs1y4hLTaZ93l3
+ J8khh9wZJ3Q3ZImRuI6l+i3pkc45EA8=
+Received: from mail-wm1-f70.google.com (mail-wm1-f70.google.com
+ [209.85.128.70]) by relay.mimecast.com with ESMTP with STARTTLS
  (version=TLSv1.3, cipher=TLS_AES_256_GCM_SHA384) id
- us-mta-608-K87nqgB9MAKPeOoMPwLDQA-1; Thu, 30 Jan 2025 10:52:32 -0500
-X-MC-Unique: K87nqgB9MAKPeOoMPwLDQA-1
-X-Mimecast-MFC-AGG-ID: K87nqgB9MAKPeOoMPwLDQA
-Received: by mail-wr1-f69.google.com with SMTP id
- ffacd0b85a97d-38bee9ae3b7so628924f8f.1
- for <nouveau@lists.freedesktop.org>; Thu, 30 Jan 2025 07:52:32 -0800 (PST)
+ us-mta-623-D1mdKnFKPZKtOyFVmqcqvQ-1; Thu, 30 Jan 2025 10:56:58 -0500
+X-MC-Unique: D1mdKnFKPZKtOyFVmqcqvQ-1
+X-Mimecast-MFC-AGG-ID: D1mdKnFKPZKtOyFVmqcqvQ
+Received: by mail-wm1-f70.google.com with SMTP id
+ 5b1f17b1804b1-4361a8fc3bdso4634055e9.2
+ for <nouveau@lists.freedesktop.org>; Thu, 30 Jan 2025 07:56:58 -0800 (PST)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1738252351; x=1738857151;
+ d=1e100.net; s=20230601; t=1738252617; x=1738857417;
  h=content-transfer-encoding:in-reply-to:organization:autocrypt
  :content-language:from:references:to:subject:user-agent:mime-version
  :date:message-id:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to;
- bh=TsPelXXasc7TSuPc4lSN7EB9eFx6gV0MKgk7ChJm0z4=;
- b=mFof2H7hDqLbyD9mcTYcA3CH2oSkM8wPQo5rpjiik0+HJSKpo85cQM1oTIcUR678uF
- 1WDGXZTGaPR6UoDtWjh73wYBrUGavNZOtPe1puSuy1IK+WgaJJBC10ZwIc/+o+ecFBDG
- VhJaUM9zLe68Y7DIKEH/hPCJPlY7vY6HiRU3gzoalxOGgfpBcq0SBN4ZVKsSeneGFC6V
- LbTQcyKlh1sDQtjerwC0BpIzuIdy7sZiKlp1tJ3GzmZV6yk2IXJDtw/KlmdNeV7WuoH+
- ySntsYREdmRlFqB1AwxnrNnKM4Z4Nd2+sr1rmwBNzjUcZDPOgBIivowJoIEEaJvdK9fL
- R7qQ==
+ bh=qM4w+1es2FaHKiaH8UoDw9Cy8vwIlmWEd0tDR6y0hSI=;
+ b=DDmusj4nldiUiSUeHk3Kb20PR6QYc5owOfVJzcBuMM53CuGTiiSj9335b+KFlMWV+B
+ JozvGvVpGTqbTt1WwRZ1fwpVN0sgbZ9DAvytA3rOCV2ZTEakl+rt7aRbBPnFFNzmuvm2
+ 53PU++RVawcI3p5QZ4JtbNzhoYS5C6Fgs1bJ5bRVpHS4nbeAtnXeOqLZ/ByTRFNGBvM3
+ SAg04YHndzlwovS7wSpijuI9fC8wGtW09LIazzVN+pVeQw2QZfEikHxreNuiixlGwNtK
+ kMzyGih6ZuEc5asI+tezpRTsP1nygZDTgyOG3d1OWVcd5voqW2nUmv2X7gDbEZy1hJY4
+ p9/w==
 X-Forwarded-Encrypted: i=1;
- AJvYcCWdlGT0VH34Yaq5Q4XQP3etE82Buz/w6looXsTNtgU0tgNGdLKRQjAngdbTwd0SkMn7cKcRBp0V@lists.freedesktop.org
-X-Gm-Message-State: AOJu0YyssJztNzpdmzG7lBuIOVp94DNt+NQBrjILpP62+5t7JNRHcE+N
- AmfY7WMIi8FUL9smVfTr3NUjqBIWPu45M6IC7yBW+HNU86d1IZ1cRCnYaYV5+8BiYJP4kb64+ny
- I7e3I3Nk6hr4eOUMJJKNFpu9oRZPleeRqSPjGF9at++MQfDAHmxqLZ89sBEIRZsa2v6FRvKFzch
- lX
-X-Gm-Gg: ASbGncurzJoXtotDsadUa0XwzgqMQyiIPxf6fz1YSznRZ13VVu+QvY1kDCzzCl7ocyx
- LL/hdMcE6rWNy6fA+mOjHZ0R5jrwvMcMi3MevoTRtuzKaeJuITS9/ld+YHJh6YvIUozl7CE4KfE
- L6CMyV3aUW6qnGgcZnSXWgYRSmRY7ENmP9+XXkMEV55hE3MwgVZqKKpaQODMQJkMC4KyVJxlamA
- TSWyHAgOcQHW+LaaXUr8TW0L3ioaupexAkGUWNhIAy8CFCJhjmrSLxg36QeAB9ufZWh2oncZjXW
- mUT63gceT9VjleswtDMLS9AvYQc6+o/lmDGIjkzdv94rPrr1faaXb0yHnnEEkgZ22AomP7mVBgJ
- zRgVVqed/JZ+K8m3Z24Npw+WXwu6C80Vx
-X-Received: by 2002:a05:600c:19d2:b0:435:330d:de86 with SMTP id
- 5b1f17b1804b1-438dc34b37bmr77183515e9.0.1738252351141; 
- Thu, 30 Jan 2025 07:52:31 -0800 (PST)
-X-Google-Smtp-Source: AGHT+IFLc0GSKvGNrlFwZzVzr9jAXl07EKtr7grPLdJmtHhU8CpAS0lhJAYux5tQ0FGwaQWq8rUmUA==
-X-Received: by 2002:a05:600c:19d2:b0:435:330d:de86 with SMTP id
- 5b1f17b1804b1-438dc34b37bmr77183245e9.0.1738252350748; 
- Thu, 30 Jan 2025 07:52:30 -0800 (PST)
+ AJvYcCWVbYfoF3TpbBo1Jq3SaEN2wgaQ+XjJLDVUH8dDbHqrPMqKpugEkPLXNsePSPQXktbacDW6mn71@lists.freedesktop.org
+X-Gm-Message-State: AOJu0YxBURWZfSXrlNXYPzQpQwiZ+BFu0tGebxI3xi859BpL68fdhdmS
+ /phBmjtTe5EAHMhsR7NXM0UZM+kF6przqt3S4ZzUOAjaHedD3h0qHTXtG+cyUoQ6qH0QD5u3zXY
+ T28T+hxdb4UnPLiuM8f5vYDqTmsRSHSEsIlntxvoyw4zxLQo78JHLCz0U1Ac4Jt0=
+X-Gm-Gg: ASbGncvsO2zY54eyHlgKOgf5l20JHJqOU6ODCgOaKvlnGfO1vTkmp/JJkCW5R1G2meZ
+ P2NwucPZMVYs7LFqRi03uAPiFry13QlsM/XRBmFHt+N0JZgY9ff/Sm6UBslAumgNpazKfi4Ep3M
+ eO8AC/JAG0cg2aTCSc02ci3TisewUMBaGNvVfRtwIWnWHwI2KJ0u9bOa4D81yhUTf2AnyR4sBSU
+ ztbzHNsvi01x7o/yAJ4XirCLPU3iI/Cn/2NXRDw8tnkgp7MHDar7YTQ5zqrBvkrtT+HYqUVU9/P
+ mJoizexi04Z8HmLdYajsNN7ghLCtnuTieWEo4SxbWlX0gft+tCviB3pjEydUbi4QBUifS6xf48K
+ dju4sPOKbDkMPABeEMj6XBDJGHJYapXJe
+X-Received: by 2002:a05:600c:154f:b0:434:a367:2bd9 with SMTP id
+ 5b1f17b1804b1-438dc3ca79fmr78295535e9.14.1738252616889; 
+ Thu, 30 Jan 2025 07:56:56 -0800 (PST)
+X-Google-Smtp-Source: AGHT+IFLqpKxoaB1vnd8r+/yn1qDNliwYunVoFg0sF0T9rGcNmbMw4yKk/QmEFTvnqEpMXpqQwFnhg==
+X-Received: by 2002:a05:600c:154f:b0:434:a367:2bd9 with SMTP id
+ 5b1f17b1804b1-438dc3ca79fmr78295145e9.14.1738252616483; 
+ Thu, 30 Jan 2025 07:56:56 -0800 (PST)
 Received: from ?IPV6:2003:cb:c713:3b00:16ce:8f1c:dd50:90fb?
  (p200300cbc7133b0016ce8f1cdd5090fb.dip0.t-ipconnect.de.
  [2003:cb:c713:3b00:16ce:8f1c:dd50:90fb])
  by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-438d755375bsm63310815e9.0.2025.01.30.07.52.27
+ 5b1f17b1804b1-438dcc6dfb5sm64700345e9.31.2025.01.30.07.56.53
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Thu, 30 Jan 2025 07:52:29 -0800 (PST)
-Message-ID: <0b3a38cc-b956-4db4-8b13-c8180926d2a3@redhat.com>
-Date: Thu, 30 Jan 2025 16:52:27 +0100
+ Thu, 30 Jan 2025 07:56:55 -0800 (PST)
+Message-ID: <84bc05e7-f47a-4941-a151-a3b2ab18ad62@redhat.com>
+Date: Thu, 30 Jan 2025 16:56:52 +0100
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v1 08/12] mm/rmap: handle device-exclusive entries
- correctly in try_to_unmap_one()
+Subject: Re: [PATCH v1 03/12] mm/rmap: convert make_device_exclusive_range()
+ to make_device_exclusive()
 To: linux-kernel@vger.kernel.org, linux-doc@vger.kernel.org,
  dri-devel@lists.freedesktop.org, linux-mm@kvack.org,
  nouveau@lists.freedesktop.org, Andrew Morton <akpm@linux-foundation.org>,
@@ -94,10 +93,8 @@ To: linux-kernel@vger.kernel.org, linux-doc@vger.kernel.org,
  Pasha Tatashin <pasha.tatashin@soleen.com>, Peter Xu <peterx@redhat.com>,
  Alistair Popple <apopple@nvidia.com>, Jason Gunthorpe <jgg@nvidia.com>
 References: <20250129115411.2077152-1-david@redhat.com>
- <20250129115411.2077152-9-david@redhat.com>
- <Z5tQL60SNNGCkfQR@phenom.ffwll.local>
- <59feb709-dadc-4d19-857e-49320cca3d98@redhat.com>
- <Z5t5RKFwl34vpqU4@phenom.ffwll.local>
+ <20250129115411.2077152-4-david@redhat.com>
+ <Z5uCw9nzN81B4N8Z@phenom.ffwll.local>
 From: David Hildenbrand <david@redhat.com>
 Autocrypt: addr=david@redhat.com; keydata=
  xsFNBFXLn5EBEAC+zYvAFJxCBY9Tr1xZgcESmxVNI/0ffzE/ZQOiHJl6mGkmA1R7/uUpiCjJ
@@ -144,9 +141,9 @@ Autocrypt: addr=david@redhat.com; keydata=
  jPrnvUsUUsjRoRNJjKKA/REq+sAnhkNPPZ/NNMjaZ5b8Tovi8C0tmxiCHaQYqj7G2rgnT0kt
  WNyWQQ==
 Organization: Red Hat
-In-Reply-To: <Z5t5RKFwl34vpqU4@phenom.ffwll.local>
+In-Reply-To: <Z5uCw9nzN81B4N8Z@phenom.ffwll.local>
 X-Mimecast-Spam-Score: 0
-X-Mimecast-MFC-PROC-ID: AvMakUR22H4N_1h95loDnjEf6b_R6qfxX9W8o5qZPwE_1738252351
+X-Mimecast-MFC-PROC-ID: 3GXGLcgrTqZCW17KdQt6X7Pt57sLNstQGERmmTDOKFo_1738252617
 X-Mimecast-Originator: redhat.com
 Content-Language: en-US
 Content-Type: text/plain; charset=UTF-8; format=flowed
@@ -165,51 +162,44 @@ List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-On 30.01.25 14:06, Simona Vetter wrote:
-> On Thu, Jan 30, 2025 at 12:08:42PM +0100, David Hildenbrand wrote:
->> On 30.01.25 11:10, Simona Vetter wrote:
->>> On Wed, Jan 29, 2025 at 12:54:06PM +0100, David Hildenbrand wrote:
->>>> Ever since commit b756a3b5e7ea ("mm: device exclusive memory access")
->>>> we can return with a device-exclusive entry from page_vma_mapped_walk().
->>>>
->>>> try_to_unmap_one() is not prepared for that, so teach it about these
->>>> non-present nonswap PTEs.
->>>>
->>>> Before that, could we also have triggered this case with device-private
->>>> entries? Unlikely.
->>>
->>> Just quick comment on this, I'm still pondering all the other aspects.
->>>
->>> device-private memory is entirely owned by the driver, the core mm isn't
->>> supposed to touch these beyond migrating it back to system memory in
->>> do_swap_page. Plus using rmap when the driver asks for invalidating
->>> mappings as needed.
->>>
->>> So no lru, thp, migration or anything initiated by core mm should ever
->>> happen on these device private pages. If it does, it'd be a bug.
+On 30.01.25 14:46, Simona Vetter wrote:
+> On Wed, Jan 29, 2025 at 12:54:01PM +0100, David Hildenbrand wrote:
+>> The single "real" user in the tree of make_device_exclusive_range() always
+>> requests making only a single address exclusive. The current implementation
+>> is hard to fix for properly supporting anonymous THP / large folios and
+>> for avoiding messing with rmap walks in weird ways.
 >>
->> I was not 100% sure about HWPoison handling, that's why I added that
->> comment. In other regards I agree: reclaim etc. does not apply.
+>> So let's always process a single address/page and return folio + page to
+>> minimize page -> folio lookups. This is a preparation for further
+>> changes.
+>>
+>> Reject any non-anonymous or hugetlb folios early, directly after GUP.
+>>
+>> Signed-off-by: David Hildenbrand <david@redhat.com>
 > 
-> So maybe I'm just entirely lost, but unless you have a coherent
-> interconnect I don't think hwpoisin should get involved with device
-> private memory? And for a coherent interconnect it's just device memory,
-> which isn't treated very special.
-
-I would have thought that in a scenario Jason describes, that you would 
-still want to zap the page from the page table (try_to_unmap()) and 
-install a hwpoison entry instead.
-
-But yes, right now this should never ever happen: memory_failure() does 
-some ZONE_DEVICE specific things, but likely doesn't call try_to_unmap() 
-on these folios.
-
+> Yeah this makes sense. Even for pmd entries I think we want to make this
+> very explicit with an explicit hugetlb opt-in I think.
 > 
-> Also to clarify, I meant this as a general comment for all subsequent
-> patches that have the same paragraph.
+> Acked-by: Simona Vetter <simona.vetter@ffwll.ch>
 
-Yeah, I'll rephrase that to "We'll never hit that case for special 
-device-private pages."
+Thanks, I'll fold in the following:
+
+diff --git a/mm/rmap.c b/mm/rmap.c
+index 676df4fba5b0..94256925682d 100644
+--- a/mm/rmap.c
++++ b/mm/rmap.c
+@@ -2525,6 +2525,10 @@ static bool folio_make_device_exclusive(struct folio *folio,
+   * programming is complete it should drop the page lock and reference after
+   * which point CPU access to the page will revoke the exclusive access.
+   *
++ * Note: This function always operates on individual PTEs mapping individual
++ * pages. PMD-sized THPs are first remapped to be mapped by PTEs before the
++ * conversion happens on a single PTE corresponding to @addr.
++ *
+   * Returns: pointer to mapped page on success, otherwise a negative error.
+   */
+  struct page *make_device_exclusive(struct mm_struct *mm, unsigned long addr,
+
 
 -- 
 Cheers,
