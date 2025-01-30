@@ -2,99 +2,102 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id BEC01A2313F
-	for <lists+nouveau@lfdr.de>; Thu, 30 Jan 2025 16:57:04 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id EBCC3A23157
+	for <lists+nouveau@lfdr.de>; Thu, 30 Jan 2025 16:59:29 +0100 (CET)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id AB64010E36B;
-	Thu, 30 Jan 2025 15:57:02 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 5F13F10E9BB;
+	Thu, 30 Jan 2025 15:59:26 +0000 (UTC)
 Authentication-Results: gabe.freedesktop.org;
-	dkim=pass (1024-bit key; unprotected) header.d=redhat.com header.i=@redhat.com header.b="iQCcRxgJ";
+	dkim=pass (1024-bit key; unprotected) header.d=redhat.com header.i=@redhat.com header.b="KFQLE0+x";
 	dkim-atps=neutral
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
 Received: from us-smtp-delivery-124.mimecast.com
  (us-smtp-delivery-124.mimecast.com [170.10.129.124])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 3A16310E36B
- for <nouveau@lists.freedesktop.org>; Thu, 30 Jan 2025 15:57:01 +0000 (UTC)
+ by gabe.freedesktop.org (Postfix) with ESMTPS id AB88510E9A6
+ for <nouveau@lists.freedesktop.org>; Thu, 30 Jan 2025 15:59:24 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1738252620;
+ s=mimecast20190719; t=1738252763;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:mime-version:mime-version:content-type:content-type:
  content-transfer-encoding:content-transfer-encoding:
  in-reply-to:in-reply-to:references:references:autocrypt:autocrypt;
- bh=qM4w+1es2FaHKiaH8UoDw9Cy8vwIlmWEd0tDR6y0hSI=;
- b=iQCcRxgJgGE5cSsmAfrJp4Piz3MZFHrKeDUxe77SJy5PRoSg6Q6WQjRBTB9tyrQwzOZQi6
- x/PtudvrKAiDCo+H15RP7ZUnQZwqvjiBvSeIBk0Dxte/7HmQiUDhVo/YJs1y4hLTaZ93l3
- J8khh9wZJ3Q3ZImRuI6l+i3pkc45EA8=
+ bh=DsnUIxFI2s6Rz4ZTdh0EYdszbaLS5S9D8bAJj6V8Zjk=;
+ b=KFQLE0+xwllXgNWe0mWuVPWjyLs4+z0poanetdkeErLALxAZqoVnMfPTHYqL3M92OhiHdt
+ Qft+OLXyTiIEGyTrQlmG2+ESbrxP3coHXbnlZsJ3yUSw/S4yliRokhDggyXnf/hyH+XhsD
+ WwCkGDLEfwUXbwcmPs38ZtNqcWxuj8Y=
 Received: from mail-wm1-f70.google.com (mail-wm1-f70.google.com
  [209.85.128.70]) by relay.mimecast.com with ESMTP with STARTTLS
  (version=TLSv1.3, cipher=TLS_AES_256_GCM_SHA384) id
- us-mta-623-D1mdKnFKPZKtOyFVmqcqvQ-1; Thu, 30 Jan 2025 10:56:58 -0500
-X-MC-Unique: D1mdKnFKPZKtOyFVmqcqvQ-1
-X-Mimecast-MFC-AGG-ID: D1mdKnFKPZKtOyFVmqcqvQ
+ us-mta-513-mgLuzGQvN9yt4nqDvipk3w-1; Thu, 30 Jan 2025 10:59:22 -0500
+X-MC-Unique: mgLuzGQvN9yt4nqDvipk3w-1
+X-Mimecast-MFC-AGG-ID: mgLuzGQvN9yt4nqDvipk3w
 Received: by mail-wm1-f70.google.com with SMTP id
- 5b1f17b1804b1-4361a8fc3bdso4634055e9.2
- for <nouveau@lists.freedesktop.org>; Thu, 30 Jan 2025 07:56:58 -0800 (PST)
+ 5b1f17b1804b1-43625ceae52so4983155e9.0
+ for <nouveau@lists.freedesktop.org>; Thu, 30 Jan 2025 07:59:22 -0800 (PST)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1738252617; x=1738857417;
+ d=1e100.net; s=20230601; t=1738252760; x=1738857560;
  h=content-transfer-encoding:in-reply-to:organization:autocrypt
  :content-language:from:references:to:subject:user-agent:mime-version
  :date:message-id:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to;
- bh=qM4w+1es2FaHKiaH8UoDw9Cy8vwIlmWEd0tDR6y0hSI=;
- b=DDmusj4nldiUiSUeHk3Kb20PR6QYc5owOfVJzcBuMM53CuGTiiSj9335b+KFlMWV+B
- JozvGvVpGTqbTt1WwRZ1fwpVN0sgbZ9DAvytA3rOCV2ZTEakl+rt7aRbBPnFFNzmuvm2
- 53PU++RVawcI3p5QZ4JtbNzhoYS5C6Fgs1bJ5bRVpHS4nbeAtnXeOqLZ/ByTRFNGBvM3
- SAg04YHndzlwovS7wSpijuI9fC8wGtW09LIazzVN+pVeQw2QZfEikHxreNuiixlGwNtK
- kMzyGih6ZuEc5asI+tezpRTsP1nygZDTgyOG3d1OWVcd5voqW2nUmv2X7gDbEZy1hJY4
- p9/w==
+ bh=DsnUIxFI2s6Rz4ZTdh0EYdszbaLS5S9D8bAJj6V8Zjk=;
+ b=RgqnuptOXvz3HjnArBznidtRkdXCJSW95E75EoAKSQX3NJqmLBqsLHOdNFl1hn4rk5
+ 0+WcAFVSyR1e8CBOkVmmr4tApH6XC1A/9OwDgSnCaNJP45+w+RCVlHDBLEC+APCkvuHQ
+ 0+17K6N9a3isnCAeZg2N9LQFT2xXY1i3LBN770EhAiqpnn4UDObZ5T00yAYaGyil/xOg
+ 5Q58WN3chup2E5R4+BPg2FhLrOvFjtvOniRtrFo0V6fMzX6JZDXwWpWkTiohO+55eN0v
+ U0rzrPvnPik62XCD6q0hRdCWAsQZ4MCR7J+RPTAIPL1JrNvGIIHLiv1FQlJgK/BvgLbj
+ jvRg==
 X-Forwarded-Encrypted: i=1;
- AJvYcCWVbYfoF3TpbBo1Jq3SaEN2wgaQ+XjJLDVUH8dDbHqrPMqKpugEkPLXNsePSPQXktbacDW6mn71@lists.freedesktop.org
-X-Gm-Message-State: AOJu0YxBURWZfSXrlNXYPzQpQwiZ+BFu0tGebxI3xi859BpL68fdhdmS
- /phBmjtTe5EAHMhsR7NXM0UZM+kF6przqt3S4ZzUOAjaHedD3h0qHTXtG+cyUoQ6qH0QD5u3zXY
- T28T+hxdb4UnPLiuM8f5vYDqTmsRSHSEsIlntxvoyw4zxLQo78JHLCz0U1Ac4Jt0=
-X-Gm-Gg: ASbGncvsO2zY54eyHlgKOgf5l20JHJqOU6ODCgOaKvlnGfO1vTkmp/JJkCW5R1G2meZ
- P2NwucPZMVYs7LFqRi03uAPiFry13QlsM/XRBmFHt+N0JZgY9ff/Sm6UBslAumgNpazKfi4Ep3M
- eO8AC/JAG0cg2aTCSc02ci3TisewUMBaGNvVfRtwIWnWHwI2KJ0u9bOa4D81yhUTf2AnyR4sBSU
- ztbzHNsvi01x7o/yAJ4XirCLPU3iI/Cn/2NXRDw8tnkgp7MHDar7YTQ5zqrBvkrtT+HYqUVU9/P
- mJoizexi04Z8HmLdYajsNN7ghLCtnuTieWEo4SxbWlX0gft+tCviB3pjEydUbi4QBUifS6xf48K
- dju4sPOKbDkMPABeEMj6XBDJGHJYapXJe
-X-Received: by 2002:a05:600c:154f:b0:434:a367:2bd9 with SMTP id
- 5b1f17b1804b1-438dc3ca79fmr78295535e9.14.1738252616889; 
- Thu, 30 Jan 2025 07:56:56 -0800 (PST)
-X-Google-Smtp-Source: AGHT+IFLqpKxoaB1vnd8r+/yn1qDNliwYunVoFg0sF0T9rGcNmbMw4yKk/QmEFTvnqEpMXpqQwFnhg==
-X-Received: by 2002:a05:600c:154f:b0:434:a367:2bd9 with SMTP id
- 5b1f17b1804b1-438dc3ca79fmr78295145e9.14.1738252616483; 
- Thu, 30 Jan 2025 07:56:56 -0800 (PST)
+ AJvYcCXRECT3kqnoGMfAPGk9kwKiQs5TzoJIHpfyYq6i17JW9OsSq0Wq0/HmF8kmKarp2ZEKivcYipnD@lists.freedesktop.org
+X-Gm-Message-State: AOJu0Ywl/TEypUVYWwxTgOkhYs6N6NzuILe6XlyWlGOi7MUB32BVKDVj
+ YO7npAD5flZLz8pciWUjbRBhCqvrAam0NCTQ1e1UhSrxMR2vluIe6xwz/ZeFgjcrJtJdHh+icId
+ cv48D146qxggxKoxlB+6Ebc4nKH2iPcXCLPZ51gZJ1uJvusteev4TW0zQLD6D3AY=
+X-Gm-Gg: ASbGnctFjKA83UNXg9yTEucVwdnTxcpAAAhUBjUDDySAITcHV3PDFuE72hCb57OzvmP
+ /CxYota2R1d+wU0wweFUu6fwXjfTWv0fLUmY4hKYeAn7/R5n58zhok7BGejQvOAEV9Rdh/+WiwH
+ IV47DIuoHDHYvaoj/VMfdRKUxXM25huuuClOC+oPnalppFRNwc2u8H6P81PU+XU8pM6KlGIPvHA
+ IfnQ+GZ9kk81B1mb9GCphjtiA6rJ3Gb5t1guJ27B54H+dK5tA+6VP0LB5ICcgyBRb43RB3jkd/+
+ 4P/HUOqGyPYGRVXMGTp/PlYC3AyFWbTrLSXIZiZNh9XglfefY7Z2OogPEDxSMse/IdGpQKrwwZB
+ UaLTN5igZAg4VX5RO0E/A4MjJuz344DH0
+X-Received: by 2002:a05:600c:4e52:b0:434:9dfe:20e6 with SMTP id
+ 5b1f17b1804b1-438dc3fc2b0mr67980715e9.23.1738252760129; 
+ Thu, 30 Jan 2025 07:59:20 -0800 (PST)
+X-Google-Smtp-Source: AGHT+IG3rx1FCxTfK9dT4GZUYFii4gIoyAgygN9uLXGcwSeyv5w8U63P6tIrS8/LxKqXr0qRCsRl9g==
+X-Received: by 2002:a05:600c:4e52:b0:434:9dfe:20e6 with SMTP id
+ 5b1f17b1804b1-438dc3fc2b0mr67980555e9.23.1738252759687; 
+ Thu, 30 Jan 2025 07:59:19 -0800 (PST)
 Received: from ?IPV6:2003:cb:c713:3b00:16ce:8f1c:dd50:90fb?
  (p200300cbc7133b0016ce8f1cdd5090fb.dip0.t-ipconnect.de.
  [2003:cb:c713:3b00:16ce:8f1c:dd50:90fb])
  by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-438dcc6dfb5sm64700345e9.31.2025.01.30.07.56.53
+ 5b1f17b1804b1-438e245f41esm27323025e9.36.2025.01.30.07.59.16
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Thu, 30 Jan 2025 07:56:55 -0800 (PST)
-Message-ID: <84bc05e7-f47a-4941-a151-a3b2ab18ad62@redhat.com>
-Date: Thu, 30 Jan 2025 16:56:52 +0100
+ Thu, 30 Jan 2025 07:59:18 -0800 (PST)
+Message-ID: <9f59b475-232f-41d4-bd6f-7f84111062ac@redhat.com>
+Date: Thu, 30 Jan 2025 16:59:16 +0100
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v1 03/12] mm/rmap: convert make_device_exclusive_range()
- to make_device_exclusive()
-To: linux-kernel@vger.kernel.org, linux-doc@vger.kernel.org,
- dri-devel@lists.freedesktop.org, linux-mm@kvack.org,
- nouveau@lists.freedesktop.org, Andrew Morton <akpm@linux-foundation.org>,
- =?UTF-8?B?SsOpcsO0bWUgR2xpc3Nl?= <jglisse@redhat.com>,
- Jonathan Corbet <corbet@lwn.net>, Alex Shi <alexs@kernel.org>,
- Yanteng Si <si.yanteng@linux.dev>, Karol Herbst <kherbst@redhat.com>,
- Lyude Paul <lyude@redhat.com>, Danilo Krummrich <dakr@kernel.org>,
- David Airlie <airlied@gmail.com>, Simona Vetter <simona@ffwll.ch>,
- "Liam R. Howlett" <Liam.Howlett@oracle.com>,
- Lorenzo Stoakes <lorenzo.stoakes@oracle.com>,
+Subject: Re: [PATCH v1 04/12] mm/rmap: implement make_device_exclusive() using
+ folio_walk instead of rmap walk
+To: Alistair Popple <apopple@nvidia.com>, linux-kernel@vger.kernel.org,
+ linux-doc@vger.kernel.org, dri-devel@lists.freedesktop.org,
+ linux-mm@kvack.org, nouveau@lists.freedesktop.org,
+ Andrew Morton <akpm@linux-foundation.org>, =?UTF-8?B?SsOpcsO0bWUgR2xpc3Nl?=
+ <jglisse@redhat.com>, Jonathan Corbet <corbet@lwn.net>,
+ Alex Shi <alexs@kernel.org>, Yanteng Si <si.yanteng@linux.dev>,
+ Karol Herbst <kherbst@redhat.com>, Lyude Paul <lyude@redhat.com>,
+ Danilo Krummrich <dakr@kernel.org>, David Airlie <airlied@gmail.com>,
+ Simona Vetter <simona@ffwll.ch>, "Liam R. Howlett"
+ <Liam.Howlett@oracle.com>, Lorenzo Stoakes <lorenzo.stoakes@oracle.com>,
  Vlastimil Babka <vbabka@suse.cz>, Jann Horn <jannh@google.com>,
  Pasha Tatashin <pasha.tatashin@soleen.com>, Peter Xu <peterx@redhat.com>,
- Alistair Popple <apopple@nvidia.com>, Jason Gunthorpe <jgg@nvidia.com>
+ Jason Gunthorpe <jgg@nvidia.com>
 References: <20250129115411.2077152-1-david@redhat.com>
- <20250129115411.2077152-4-david@redhat.com>
- <Z5uCw9nzN81B4N8Z@phenom.ffwll.local>
+ <20250129115411.2077152-5-david@redhat.com>
+ <7tzcpx23vufmp5cxutnzhjgdj7kwqrw5drwochpv5ern7zknhj@h2s6y2qjbr3f>
+ <Z5tI-cOSyzdLjoe_@phenom.ffwll.local>
+ <54a55ff7-38c8-42c2-886f-d6d1985072a9@redhat.com>
+ <Z5t34-0K9FJKVQe6@phenom.ffwll.local>
 From: David Hildenbrand <david@redhat.com>
 Autocrypt: addr=david@redhat.com; keydata=
  xsFNBFXLn5EBEAC+zYvAFJxCBY9Tr1xZgcESmxVNI/0ffzE/ZQOiHJl6mGkmA1R7/uUpiCjJ
@@ -141,9 +144,9 @@ Autocrypt: addr=david@redhat.com; keydata=
  jPrnvUsUUsjRoRNJjKKA/REq+sAnhkNPPZ/NNMjaZ5b8Tovi8C0tmxiCHaQYqj7G2rgnT0kt
  WNyWQQ==
 Organization: Red Hat
-In-Reply-To: <Z5uCw9nzN81B4N8Z@phenom.ffwll.local>
+In-Reply-To: <Z5t34-0K9FJKVQe6@phenom.ffwll.local>
 X-Mimecast-Spam-Score: 0
-X-Mimecast-MFC-PROC-ID: 3GXGLcgrTqZCW17KdQt6X7Pt57sLNstQGERmmTDOKFo_1738252617
+X-Mimecast-MFC-PROC-ID: VsLTcleQRmWPOIiku2UrgG5EIHBJeJXTZ-0G805zuZ0_1738252761
 X-Mimecast-Originator: redhat.com
 Content-Language: en-US
 Content-Type: text/plain; charset=UTF-8; format=flowed
@@ -162,44 +165,61 @@ List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-On 30.01.25 14:46, Simona Vetter wrote:
-> On Wed, Jan 29, 2025 at 12:54:01PM +0100, David Hildenbrand wrote:
->> The single "real" user in the tree of make_device_exclusive_range() always
->> requests making only a single address exclusive. The current implementation
->> is hard to fix for properly supporting anonymous THP / large folios and
->> for avoiding messing with rmap walks in weird ways.
+>>>>> Note that the PTE is
+>>>>> always writable, and we can always create a writable-device-exclusive
+>>>>> entry.
+>>>>>
+>>>>> With this change, device-exclusive is fully compatible with THPs /
+>>>>> large folios. We still require PMD-sized THPs to get PTE-mapped, and
+>>>>> supporting PMD-mapped THP (without the PTE-remapping) is a different
+>>>>> endeavour that might not be worth it at this point.
+>>>
+>>> I'm not sure we actually want hugepages for device exclusive, since it has
+>>> an impact on what's allowed and what not. If we only ever do 4k entries
+>>> then userspace can assume that as long atomics are separated by a 4k page
+>>> there's no issue when both the gpu and cpu hammer on them. If we try to
+>>> keep thp entries then suddenly a workload that worked before will result
+>>> in endless ping-pong between gpu and cpu because the separate atomic
+>>> counters (or whatever) now all sit in the same 2m page.
 >>
->> So let's always process a single address/page and return folio + page to
->> minimize page -> folio lookups. This is a preparation for further
->> changes.
+>> Agreed. And the conversion + mapping into the device gets trickier.
 >>
->> Reject any non-anonymous or hugetlb folios early, directly after GUP.
+>>>
+>>> So going with thp might result in userspace having to spread out atomics
+>>> even more, which is just wasting memory and not saving any tlb entries
+>>> since often you don't need that many.
+>>>
+>>> tldr; I think not supporting thp entries for device exclusive is a
+>>> feature, not a bug.
 >>
->> Signed-off-by: David Hildenbrand <david@redhat.com>
+>> So, you agree with my "different endeavour that might not be worth it"
+>> statement?
 > 
-> Yeah this makes sense. Even for pmd entries I think we want to make this
-> very explicit with an explicit hugetlb opt-in I think.
+> Yes.
 > 
-> Acked-by: Simona Vetter <simona.vetter@ffwll.ch>
+> Well I think we should go further and clearly document that we
+> intentionally return split pages. Because it's part of the uapi contract
+> with users of all this.
 
-Thanks, I'll fold in the following:
+Yes, see my reply to patch #3/
 
-diff --git a/mm/rmap.c b/mm/rmap.c
-index 676df4fba5b0..94256925682d 100644
---- a/mm/rmap.c
-+++ b/mm/rmap.c
-@@ -2525,6 +2525,10 @@ static bool folio_make_device_exclusive(struct folio *folio,
-   * programming is complete it should drop the page lock and reference after
-   * which point CPU access to the page will revoke the exclusive access.
-   *
-+ * Note: This function always operates on individual PTEs mapping individual
-+ * pages. PMD-sized THPs are first remapped to be mapped by PTEs before the
-+ * conversion happens on a single PTE corresponding to @addr.
-+ *
-   * Returns: pointer to mapped page on success, otherwise a negative error.
-   */
-  struct page *make_device_exclusive(struct mm_struct *mm, unsigned long addr,
+> 
+> And if someone needs pmd entries for performance or whatever, we need two
+> things:
+> 
+> a) userspace must mmap that memory as hugepage memory, to clearly signal
+> the promise that atomics are split up on hugepage sizes and not just page
+> size
+> 
+> b) we need to extend make_device_exclusive and drivers to handle the
+> hugetlb folio case
+> 
+> I think thp is simply not going to work here, it's impossible (without
+> potentially causing fault storms) to figure out what userspace might want.
 
+Right, I added a link to this discussion in the patch.
+
+Thanks!
 
 -- 
 Cheers,
