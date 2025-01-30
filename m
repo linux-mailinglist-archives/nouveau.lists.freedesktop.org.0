@@ -2,47 +2,47 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id BDA83A2273A
-	for <lists+nouveau@lfdr.de>; Thu, 30 Jan 2025 01:30:21 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 4C894A22896
+	for <lists+nouveau@lfdr.de>; Thu, 30 Jan 2025 06:34:47 +0100 (CET)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 5A15310E8CE;
-	Thu, 30 Jan 2025 00:29:59 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 35EFF10E263;
+	Thu, 30 Jan 2025 05:34:43 +0000 (UTC)
 Authentication-Results: gabe.freedesktop.org;
-	dkim=pass (2048-bit key; unprotected) header.d=Nvidia.com header.i=@Nvidia.com header.b="p2Mi6g1g";
+	dkim=pass (2048-bit key; unprotected) header.d=Nvidia.com header.i=@Nvidia.com header.b="Dg6ngUpm";
 	dkim-atps=neutral
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from NAM11-CO1-obe.outbound.protection.outlook.com
- (mail-co1nam11on2070.outbound.protection.outlook.com [40.107.220.70])
- by gabe.freedesktop.org (Postfix) with ESMTPS id EF26D10E8CC;
- Thu, 30 Jan 2025 00:29:57 +0000 (UTC)
+Received: from NAM02-SN1-obe.outbound.protection.outlook.com
+ (mail-sn1nam02on2044.outbound.protection.outlook.com [40.107.96.44])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id B1E5F10E24E;
+ Thu, 30 Jan 2025 05:34:41 +0000 (UTC)
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=q3oVXNe8MF81vRdKodvvOV4JJXvxIMgtVatFWSWB3JwUVXlsH8okoMVx8uiMbvQf9iCyYsy2ICLbCiQxOnWPz5iw2r6jMqdn7uuLBR4GZRkQ72+nigqbdI6Db0fMFfGav1ZIQzpk/jtSd/3Ti1V1Z4jyY7SfR6CTFifEnAMXMTW1TSa2UryuEa+xFBW3WXq0ikSFzORrC+T05NmMLV5mDXnE8EDjZrVHC9mFkZRuJjzs9qH263LYzhhdeAEK0cvFyIgyipud2AVW7rwSVkLAaQVPnnYZJnLaNbog8+7CLm1s1hZtZ4x3JrFVn7eIoXFcMGqPC95qmT4aVhiNerLeug==
+ b=XximfT1qh/JzV65LcKSBhXFrr40DByBXw6SJ2Pdf5C2t3p1BmOM/btrDHp9cSD0r/BRCdmmZfrkPfsgAlK3a+wz9aZVo/Thz8M4lTIObqAEcUtVqwQPvT7BEeHVwmYGKwqXwq2ipm7Fu2yzehNnUoAwoiVv040QRIT3EmHB/PS1sKGsfYJyKtUeeDAVhFolShLUozDA/e9cDkKuqRyZ5xQ1EPOzWfwN26CgExmVxi2rVaJB0IdPWiZcU9UiVqj/+Wjat5vsfyu6dxjPQSOnwFUDK74kQAZlgNjyO4JK3avALT145gS/Rh29pHgHA2+gWHvcLiHeftflTLWIKCf2pBQ==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
  s=arcselector10001;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=02O4URxI+UKEqwzt7KPDV+TGINmQl1F6/t4to/7U9Jw=;
- b=DANO+U4CX4hlzOXbgvJh0DDt0qbHseKUA11aUsIm/i7zC89k3sZRCpigE76I0LXfkDvu3v6P3L0usaQn9puGF9I99UN39IhvWakchmWlV3hEHRz9vp4d/MlMo7dBeXZcIVRl+KhVQi6QZr7UeMS7dkiWi3JK7wUoP4ti1RX9RIkda70xD+gujPi8hrZRJrBvbNiZLEasMgZNQnOR6zvichtGVae3CtrO2pYa20fuYeTRBNC0Pks0mhVj9c7tuXRTBKUyhNKPfJ2BVv6ilxm7O8bTmXx07FDD5IM7zonGtiGkh9KAISRKymbYxevHL4OhhWRbD295/mWTwosv0BM4uQ==
+ bh=5xwbbTRnw01EQia5O9RC+bIjzAa+VrXUMzKToWKJxBM=;
+ b=pgis1xqBt8xx34l5HKQ3WjUfgD1S5HfA8xECOarX7twUiE4j0tYgtxb6t/TG7LU1wwbWDNbsxCfiBkWIxmlZj8/ZaccMV2CIBHGZLyPuDmfPFpCENBQhBCzPpMulTB9skOoLWxFJj4HPvErbWca74t80jtuNOAI5qo4xV9rreYIdW886KkcIgEn2QKpiQOYHd1AC1JfKbbQw6wKIPPqoKW1XDxfnou/EIGWtB8jX8IlViq4ccfrKCxMBN9ibVajFwpYSxGyoKdp9yI6nW0dZTLaahjOWqHxVcDifKVMINVEZ/Hvn0vB9fmTDaVrX2fIZv5by52PhyPnLm6vlBy3wng==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
  smtp.mailfrom=nvidia.com; dmarc=pass action=none header.from=nvidia.com;
  dkim=pass header.d=nvidia.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=Nvidia.com;
  s=selector2;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=02O4URxI+UKEqwzt7KPDV+TGINmQl1F6/t4to/7U9Jw=;
- b=p2Mi6g1giVlSQ6DbMe5HnvIhiXe4JifevgHenS4FU0Jg+2NfnpOdfJdhBW3icA5V763vW+S5slphJoZTcbxob8ynsFLhDkNvVlhoXW4NYNNSzhtLHtOwCSUB7R+ImZwjgW10K78MnOqgp8cRHIo5+gSn6dZmOAU1Lfg6DSFnEZyPAqQoBxGg+PchPXoHM3c5K9/ohUR1civf1feiZTGOUpB6xz2K/CJBzJ41MKvQsibvO6rYoFSXGH7BBWDzdXsLyU8rT31VM72niLRpJGWRzXClE+lANTIhUAbHqu9BhX2N06WIUusrYPFsHBYU/6RWqg0SrAdEa9KVkDxQIJ1Rkg==
+ bh=5xwbbTRnw01EQia5O9RC+bIjzAa+VrXUMzKToWKJxBM=;
+ b=Dg6ngUpmavcwxKastpgAPVV9BdVFU67RjgB1P+d0vunJNpvfnfjxu9g8ZGT05y/PNIjT5ZP3eS1XOj0mAzYHzG0f3WHDT4Izf49qz0vT4Ke+LHtxn9w70ioFfSIjiLLi/+3SMNTpUaDzE3Hv3/H/bhZwCK8iI2gNyXtgB3xU5i/QeBDWEDAHV7Z6rTnw8fft41DJllQ+q8ILnHznuuBL0UssWxJPCDh1/F9saT3dg0xW9DIv2kcGvUAs8lzjBib3gqZZnZzxd3/5iaUSyXraC6pkz6YWYfd2sSboMaaqw3VKQO8NKpg4aS5VZWXA76rbPpsr4x5wdSkcgT+1iZdEIw==
 Authentication-Results: dkim=none (message not signed)
  header.d=none;dmarc=none action=none header.from=nvidia.com;
-Received: from CY8PR12MB7705.namprd12.prod.outlook.com (2603:10b6:930:84::9)
- by SA1PR12MB8844.namprd12.prod.outlook.com (2603:10b6:806:378::6) with
- Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.8398.18; Thu, 30 Jan
- 2025 00:29:54 +0000
-Received: from CY8PR12MB7705.namprd12.prod.outlook.com
- ([fe80::4b06:5351:3db4:95f6]) by CY8PR12MB7705.namprd12.prod.outlook.com
- ([fe80::4b06:5351:3db4:95f6%6]) with mapi id 15.20.8398.017; Thu, 30 Jan 2025
- 00:29:54 +0000
-Date: Thu, 30 Jan 2025 11:29:48 +1100
+Received: from DS0PR12MB7726.namprd12.prod.outlook.com (2603:10b6:8:130::6) by
+ MW6PR12MB7071.namprd12.prod.outlook.com (2603:10b6:303:238::8) with
+ Microsoft
+ SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ 15.20.8398.18; Thu, 30 Jan 2025 05:34:37 +0000
+Received: from DS0PR12MB7726.namprd12.prod.outlook.com
+ ([fe80::953f:2f80:90c5:67fe]) by DS0PR12MB7726.namprd12.prod.outlook.com
+ ([fe80::953f:2f80:90c5:67fe%7]) with mapi id 15.20.8398.017; Thu, 30 Jan 2025
+ 05:34:37 +0000
+Date: Thu, 30 Jan 2025 16:34:32 +1100
 From: Alistair Popple <apopple@nvidia.com>
 To: David Hildenbrand <david@redhat.com>
 Cc: linux-kernel@vger.kernel.org, linux-doc@vger.kernel.org, 
@@ -58,91 +58,91 @@ Cc: linux-kernel@vger.kernel.org, linux-doc@vger.kernel.org,
  Jann Horn <jannh@google.com>, 
  Pasha Tatashin <pasha.tatashin@soleen.com>, Peter Xu <peterx@redhat.com>,
  Jason Gunthorpe <jgg@nvidia.com>
-Subject: Re: [PATCH v1 1/4] lib/test_hmm: make dmirror_atomic_map() consume a
- single page
-Message-ID: <l5keslqv77nju4p5rtroqm5w462nux6thgk2kqrxvtu4eljf5t@n6srj4v7ps5a>
+Subject: Re: [PATCH v1 2/4] mm/mmu_notifier: drop owner from
+ MMU_NOTIFY_EXCLUSIVE
+Message-ID: <h4dnoixvp2kjeao6mzcpze4zx6t34ebpltqadkjl5zxcjhddkf@lbzo2yhzu5sz>
 References: <20250129115803.2084769-1-david@redhat.com>
- <20250129115803.2084769-2-david@redhat.com>
+ <20250129115803.2084769-3-david@redhat.com>
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
-In-Reply-To: <20250129115803.2084769-2-david@redhat.com>
-X-ClientProxiedBy: SY5PR01CA0069.ausprd01.prod.outlook.com
- (2603:10c6:10:1f4::20) To DS0PR12MB7726.namprd12.prod.outlook.com
+In-Reply-To: <20250129115803.2084769-3-david@redhat.com>
+X-ClientProxiedBy: SY5P282CA0182.AUSP282.PROD.OUTLOOK.COM
+ (2603:10c6:10:249::13) To DS0PR12MB7726.namprd12.prod.outlook.com
  (2603:10b6:8:130::6)
 MIME-Version: 1.0
 X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: CY8PR12MB7705:EE_|SA1PR12MB8844:EE_
-X-MS-Office365-Filtering-Correlation-Id: 0ad4629a-77b8-4993-5c9a-08dd40c5374d
+X-MS-TrafficTypeDiagnostic: DS0PR12MB7726:EE_|MW6PR12MB7071:EE_
+X-MS-Office365-Filtering-Correlation-Id: 15d50167-ef75-4c2b-58d0-08dd40efc8ea
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
 X-Microsoft-Antispam: BCL:0;
- ARA:13230040|366016|1800799024|376014|7416014|7053199007; 
-X-Microsoft-Antispam-Message-Info: =?us-ascii?Q?D2crkQ807fxWgSTOVMIf4LOte5qraGv8+KeTd5mcM7Ul4M+Ugr6tLIWpnh+5?=
- =?us-ascii?Q?Z7GPOx29t/4OEZI8Hp2wv8qjeG3cwAs9aEHEcuF4HWY62tFQ/FS8zZuPGrzF?=
- =?us-ascii?Q?AMkLc4COGpultzk4AVTfJHTFtVe5+WjGn4nM445YC1pV28SWJneT2pU53/pA?=
- =?us-ascii?Q?yfblz8+YLqD62gIATyAfb9d2IglpXzpZn9SOh5/iVj49gu1iheL8g0FmH5MA?=
- =?us-ascii?Q?7utnLEbUpfzxvALjAVRqjIxt8sFQnEFj4mCt7Wqvqzb+3P6/Wbm3J47JWpgu?=
- =?us-ascii?Q?lzN8elYsud7vAVDO2PXf1yivGkgWpzw8So7FlPUhwW0xEwLROPZKvD4ser1w?=
- =?us-ascii?Q?POE5umVzMcOe2K3cLxoiZ7UToqs9iRGbY39FU+JKZ1RVhlFd1je5WpmIXxnD?=
- =?us-ascii?Q?EErzZMVaObWo2dDZZzjutI6V1in9JKHNcgape2KZoOn9XTAVJQm7OAgTFREW?=
- =?us-ascii?Q?o+WTeIaOcPGPt/K8tgQ+Y97rg+Ntqzb9nkIiFH4ttBsmZTXVHjzWqz79WD6M?=
- =?us-ascii?Q?pnvQ0rC3/RS+0rTI4AcvxS6FqOHg0Bc4wr5Hq7exCeBZu1g68RQU/5QKoBqt?=
- =?us-ascii?Q?MALftukbhrQrqd5WJxFkBNLXMZufrWl/Djs6y+8/6XO4vcwplBCz6sSQvktv?=
- =?us-ascii?Q?ZXclSOetKY7rJwqU+m+spZTRl22SBDtnI7hZKS3QPhbZAObn5sn0i9WuAkAK?=
- =?us-ascii?Q?47whuXRk5Kt9WAQLZoQQtUH8PijX1iHM/qE4VefLZnEmp4gOqh90WJ2zJ3IA?=
- =?us-ascii?Q?+sQ73GveuAH1WTYzOpoAnESOaV3C5cp/BfZptBiP8VYsXNpp7+cpdm81RciH?=
- =?us-ascii?Q?yTjvusjtXe6/dpxOWIUdEXtuSL+1WfnAj7axU8j9QGMqc2zBsrbS6n0Lbmf4?=
- =?us-ascii?Q?57lrKjZ4GQ2LEPs8jHS7j79vVs0Lt7JLvL3CgPjtXhD45mngE/LxwycEUzBD?=
- =?us-ascii?Q?u8LisPnACjnl+TUAquHYgKmUMSBgzByfPH/7WLMl3LH2yVdqh3rfBB/ge351?=
- =?us-ascii?Q?uZvZaWwRUqvhisP/59+q4B3fNWZWCATRJcAxVcLZ+KSp4hDhEvuPUOIW4M6y?=
- =?us-ascii?Q?t3VR3gF2VfGvUPuXPa3LOHm2KIbl6oEaq/clrYyPFH1CDDR5OSJljGLIFkei?=
- =?us-ascii?Q?kK9UZHunz7p3HPVoOn0ztGnENxYpp9oZcqxYHxdiGpgll4tD92eek9zL0+PC?=
- =?us-ascii?Q?EHammxLnBvdWsudawHUtPTLzOpDQRJJ7sF/tT98gYsYOun9wFQJdVb+GNFlS?=
- =?us-ascii?Q?K5UJb6VJYBiDhqcQFPpxRXiuIRZqSH2VsgqbDT1e5Oqp7/Omj3wj6hXze4wO?=
- =?us-ascii?Q?k4ZrxuUUqsKGlytnr3c7bS5nrwWXh9UMqrUR/w8pjgaGdUwn1oRZ/Pqo13Ro?=
- =?us-ascii?Q?rjA557tZQnRsbOVc4Tr0S48awZ6F?=
+ ARA:13230040|1800799024|376014|7416014|366016|7053199007; 
+X-Microsoft-Antispam-Message-Info: =?us-ascii?Q?NZo0dI6r/l2D63NRQFDlejTFTj8r1kndlMF2ebgZUdqZWWAazw8K0/iUyWpi?=
+ =?us-ascii?Q?X978sLHxDr3wH12yM2RLwvXcuAjDSTGBU7re4tYk6erzXGXY7VMS/52ngGyR?=
+ =?us-ascii?Q?jDrBNx/OB4MCI20cQyQrrJfMurJ/cCNmAoPcrvxhprdwzCWV8kyIsD0UQHil?=
+ =?us-ascii?Q?Hf94pRGUdiYKjvOjtlPZGhnyY/Oyx9ULOYJywBshoVoSqJ1ua7owv7zdQXID?=
+ =?us-ascii?Q?eyDlIhp/VTQz53wNG7j6BBB+HoxIUCYWE73lhUdh2LLLzocnhTLsN1ai21Xn?=
+ =?us-ascii?Q?cxnk9r5NbOo2pRl4CA4XU4Zg0rD/1xOjwZpPCxGqBXe2NqS36oZrjXrMNOeY?=
+ =?us-ascii?Q?JswQ8VRT3NZKTFjmsXxKXsm7VnGaCJhRQaDgRb5825B8RCAs28xzw12I4DSv?=
+ =?us-ascii?Q?SylVItsjDQFzjH7bRDGVwHfgBXN4HGeaz9i2gURg2gdLU/dHfDFCTt2QhJjC?=
+ =?us-ascii?Q?XbcFwyFLIkkTWTpqNiogHqG1g7DMZZj7pwG7rXWct+x3Zw8pUeRNA1/kl7ku?=
+ =?us-ascii?Q?xyDlFli1tkn0XaVljXP+QnSousy+LSF+hpKaq3Wn4XRJqs+uuj1qspd4TvmP?=
+ =?us-ascii?Q?y/4dsIWBbj9XqGxYAoZ4wpW2HmFPg2XfWuSA0eGgYwfrQx4oZWxfodH6dSnf?=
+ =?us-ascii?Q?+E0Y7QfXFlmyavEKlfegBFR4YdvivN5vnwXvmEYZ0pdeUPssSSWGkVhTonM8?=
+ =?us-ascii?Q?1HHcVgfEg6molJpNBHbTW0JfsK/G3DHeZ0mqyb56wEHU+mnuOyxMFFeXBKx3?=
+ =?us-ascii?Q?bISw1yeIo/d0bQRZceul2Ku0OR8HA9RHe9OrwtVyEWxMIHJwKupN1wRUth/B?=
+ =?us-ascii?Q?M02+D+B89OqKxapDdBy7jp5EkdfXDPD60ut9uwtsal88wPyRswn4LNbkcW5u?=
+ =?us-ascii?Q?gSZqlfubEHMu++sovaKXnMQtIVpWnYv99WOKCtjwkTF/qmqVG+gW60JK+vPL?=
+ =?us-ascii?Q?uvSVD1ken2BrAMYnmQhpphk8cW1tbrKZdREktk7CkKuCe3weapzG0n6mPdd8?=
+ =?us-ascii?Q?CLLYaUhMfuXTb1fks6a0LCizgdP9iupHr6/25l3+bZ+TedAWPDUzGcQc+/4B?=
+ =?us-ascii?Q?P8hpUaZEQYw0ty+jqf2l8UKlyfFRu7MSFQXktSM9eSjK1l1dL9GvYlxtXPZ6?=
+ =?us-ascii?Q?rwl/uttMCINuF5U1sHCHgwDvpjQbgr1RD6Qal72npPB5fmJ9Fsn+9SvEeisz?=
+ =?us-ascii?Q?aUBg7LVfw0X2/RMn5KPnHFgqeiMXL6TmnysdEYTEEhhoGSaiImeSzO0ThEHJ?=
+ =?us-ascii?Q?cngSvtAXrwvhIvs9ghMnyOOb9/wEEZ/ewZSwXQ/bqyNUtSofpvbcTeXoJX5T?=
+ =?us-ascii?Q?KFxyUXjLSro/se17pyUIDOIN16gUcspL3F0DUJwBLjZSGFqKv2UAVxyymWNz?=
+ =?us-ascii?Q?AwGjnXPaDv/UbfiV3HUYYMdeLV5K?=
 X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
- IPV:NLI; SFV:NSPM; H:CY8PR12MB7705.namprd12.prod.outlook.com; PTR:; CAT:NONE;
- SFS:(13230040)(366016)(1800799024)(376014)(7416014)(7053199007); DIR:OUT;
+ IPV:NLI; SFV:NSPM; H:DS0PR12MB7726.namprd12.prod.outlook.com; PTR:; CAT:NONE;
+ SFS:(13230040)(1800799024)(376014)(7416014)(366016)(7053199007); DIR:OUT;
  SFP:1101; 
 X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: =?us-ascii?Q?l9QdbohBVuKK5Xs892oc3FJILRvM5eJ4qS8Tgf7p5hP4SG3U+9Le2d6CTcBu?=
- =?us-ascii?Q?Z9uySVT5FDmWEj0BbwDA/qitg+Roe638ojFhUYeZytgObAqPm3b4FSUJxP3s?=
- =?us-ascii?Q?5Yi0xuqJL8n07YcDVQfRAiu+udkD9S1qugKY7l1du3wiZntQcx7q1+cGtNGB?=
- =?us-ascii?Q?APPkZqOogcrNeNevsxc5xJxpzlKqBSbTyMT/afB2wzcXnKqwmXwFXRMTZbSU?=
- =?us-ascii?Q?+Lo0ynXHpAIZvztoF2pI6yGxnOtrfq7w27DgocxqenTehdeSiUEVR1A2e8qI?=
- =?us-ascii?Q?6oXdUp9//8xOHl40Ae8Atx42TYgFfrjGQY/jYFnrW0qqfcPzWy/KvLix71hF?=
- =?us-ascii?Q?prJ8FIOvI8V5hAeZJEEfUQhDBYKwUNJWU9l+NmFz02CKwMr5MRXJQuIXHBLt?=
- =?us-ascii?Q?943dIQmGjxIGV7dZZZL85elplXOeJBFjJAhQbVbMSReCf7d8iTN4KZmyskcJ?=
- =?us-ascii?Q?/wMTxIp0ZvdYl5GsoM+GmDP0MOy/5y4o28mQlXOZ94c+4PxQyhKUoXdL30up?=
- =?us-ascii?Q?px3emy2uyfv59F+NBDqo1crQpbUUgDCLLNbFSPcXxXp4QLZs83AJ70gcDgOd?=
- =?us-ascii?Q?8Iq0JCTA2yVKNrHe7LWS/i3Lovqh07L+2kOsx3+znSTyW1BQ/Oiqv/jQH0/5?=
- =?us-ascii?Q?isvQRKHqtkaHiKYVwnnPp448wodO0yC5xNERhnE3oHxn3MaM+WV0jjB9Vt27?=
- =?us-ascii?Q?ZT/aHLr0AP2VtbwPWS77V6LXGBlqhuFJFwpbOGU/IUZqyeD+RI7Tjkydc6MU?=
- =?us-ascii?Q?7ntasTdxMqTkUDthcTiDspHyCFgsO/s8+AdHlAPVXzuEpYEndrGmBXy8KCZl?=
- =?us-ascii?Q?E/SpUPzU8rqAmpS3NaNWjXIQyCCJfZTUsqJETgygE8jR6A/geh9h0q68Sq0a?=
- =?us-ascii?Q?vl1LHyXBUBofqG+IbMfxFzHG1nEF1uhEZtQhpGLJh9Z9suLT3ZUTYIcCZpjz?=
- =?us-ascii?Q?GGNjVWHNWqAQ+aLhiznDwBp+tBUf/iQfinKrg4Ja6u532n3lqIk1Z+NoZ9c5?=
- =?us-ascii?Q?MPWFfE8o/yk6X26JZ9Pqp6iQyec/Ne4OAYpqs9qM9scmljENCROs3PGXgPU/?=
- =?us-ascii?Q?vba1Lf0jr1BnadwcxWsHF7biKa+oshOIt2zjdkwUKstzQhdBb55Ygq5WDOhK?=
- =?us-ascii?Q?c+SY7cldL4Ir90p/dNuVUNH7PRfxqkV1cMpH0PYVuB1kpKuiCfRPgq0tr4wU?=
- =?us-ascii?Q?2m6dNEmneQ26afCSytWTU6vnpBdZ4dbLgQIrQUKKmRRlcWNI0rrRKL7OQmwE?=
- =?us-ascii?Q?e1QDBQkZMn4cjnOGBNftGj8D8mmoJgO89+x90JdIHU/zEMjNrgXnEirgjr5V?=
- =?us-ascii?Q?jq0hij7hEokOvsYXlxKKujGcrY63MFKSGg72py5Xkl4IzMPrAIE9M+9h/XDS?=
- =?us-ascii?Q?iJc8XqYxXR4f1qRWOjegDo1V8derw3jwqLpx4K0Xw5VyugrMI0zuE6lvuM4H?=
- =?us-ascii?Q?BgAf+NswDrEUq4qhfUJSKDDcNIpUHMDU790QggeTPBg038/dOfdP/haDe+AS?=
- =?us-ascii?Q?Dr7Sl9WRfV+B0ODL/Hi+KoB6GD8NLr43B26TXGT3EHeRde3iIAbEalXK3T0X?=
- =?us-ascii?Q?Xe8iUN8sdc5GQmtaIAQBv47m/6jbxaXouCx4F514?=
+X-MS-Exchange-AntiSpam-MessageData-0: =?us-ascii?Q?Dwg0nPU6gThfqtK1FD5MeX56s+iE4fgnJoR+F+VQCefq3p+QCApfycw4jVOe?=
+ =?us-ascii?Q?EcZsFGvCMbKjdPypxDEV2BNxZyRR1jSj7/SZbICOXt7FgFFGEsicUMhSEhhc?=
+ =?us-ascii?Q?ggy3jq5UQ0RYWiMZEIVIT6iAk+zrbtDK013lKvYFU45sh90wqZhqfkUOqWZT?=
+ =?us-ascii?Q?xityvWbixGfC04xBOwG9qgJge13XrJvVv5rU0beWp3R9EnuFgGkObLUOYWWW?=
+ =?us-ascii?Q?Gk+NqGRg0oo88QrimuoZaE+2t5m1mOc3148eGsqnCIEhVdY6+rR17mkT0Mcv?=
+ =?us-ascii?Q?oYZvWLdIHhQzchLrFocg5A2VXEofK8e1GO4ZZbDNkiTtYMhDDoS7Gz7pfQd7?=
+ =?us-ascii?Q?Yq6R8xOGFPtl6yVHZqPCBx2U8k2MteMOz/novS25nU6ujowxJ1WbzJeS+grl?=
+ =?us-ascii?Q?0ejCnvVtAXufFUV3hMac5wLYKKwuN8RNpfKxP6squ4fib7TIpIF+SeDg7344?=
+ =?us-ascii?Q?SazUCsn6AgTnYH0/nuprxXA7xMMTBHHvMCOGy9F5551tB9cKZh9amKDHHdhz?=
+ =?us-ascii?Q?dOMfp+FXPIvXBM+XpdTTKZ5OvkUFNkeAKult9qXbmFZYMmeqlZSlhKwtldu2?=
+ =?us-ascii?Q?v2gmznF8zHBppfkuxFZ/zI1WFNo56c0t4Qbg+0vWM0ypGQ/3Qk+e/cdmymeC?=
+ =?us-ascii?Q?ER283ErLzw84I0iQxtXEXglXS6p5Phir9tfZajuiy0e2DxBjOvpD9NjKfhcN?=
+ =?us-ascii?Q?X2WkC5c+wXhPk87sZGVfvmwR/1n2AtGRySgyU++D28CAhbBB7kGpHpAcFexZ?=
+ =?us-ascii?Q?fic3IkMLFKKKZED1p48Qmv5fZKda5c5ReYvQaC1ekKWw4qy2F7kulTpIqIcQ?=
+ =?us-ascii?Q?xybqlWh1rrJFPwrkxgE2i/iOg6IrSN6iScfh90QWbV41LMVbwMFG8JcUDwwb?=
+ =?us-ascii?Q?B9ves7ISfFzIFdBxIppWQFPF10PrH2isTfjRyIaFg67k3THn30yZvS93cjMN?=
+ =?us-ascii?Q?N32Kg3Gfk6jGXesgnaRR12ifRnSzaKbFRdufO3xuBaqwoZZUsVgr/Hy/Jkyo?=
+ =?us-ascii?Q?WaLvv73MlNDXV7VIT7P4YU4a4+I98Bj80f+S6bkknpmxqqBYFCAwQit8Eim2?=
+ =?us-ascii?Q?VnL7u/VSJlpip8yQ3fAQxi/JnAHGAH8bwUggav38haIOby+lqAjsG027qwFx?=
+ =?us-ascii?Q?BPdsdmO21x2bAhAsG/gCmUEBZzyzTZibhzPdPRaLjWYrGVcBBY63RKeJpGRY?=
+ =?us-ascii?Q?CWoXsjhYPmatqs6e7d1IT+weMZ3sazKXfa6Dsk9/oYHwcRmkoYDxdrJ2nWmM?=
+ =?us-ascii?Q?hIhcUBjP5CNmQkudZFxa9sY5ZzkyB16PyuqxkMpjI/3Z4XiM2aQSpLllpj/V?=
+ =?us-ascii?Q?3rCBaxAKScSvSkNw3Ul+hStGGR/0AjsVNrq52eXcXgmppdoMm5K/GdP8UZrm?=
+ =?us-ascii?Q?PgQJvjhs37IRqmhC84YpoqPzkYOWzDEBD4qCMwlTHpGu8WFuDypvugKec1M7?=
+ =?us-ascii?Q?M8mW+q5+7HuTdSpZdey6nm+vAZViFyho7FmduwJSgxMPgcwz3A5CaBk6nBpr?=
+ =?us-ascii?Q?gkSvwMTiDna9Je3p13NJRqGk0wCrnHUEgHIkyjLXAVJ8FBQxIEhn772zYIru?=
+ =?us-ascii?Q?feHOwGm/psJ2XXz+kfAhLeQRIXJNpc3MgQwBH6Ch?=
 X-OriginatorOrg: Nvidia.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 0ad4629a-77b8-4993-5c9a-08dd40c5374d
+X-MS-Exchange-CrossTenant-Network-Message-Id: 15d50167-ef75-4c2b-58d0-08dd40efc8ea
 X-MS-Exchange-CrossTenant-AuthSource: DS0PR12MB7726.namprd12.prod.outlook.com
 X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 30 Jan 2025 00:29:54.3351 (UTC)
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 30 Jan 2025 05:34:37.1850 (UTC)
 X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
 X-MS-Exchange-CrossTenant-Id: 43083d15-7273-40c1-b7db-39efd9ccc17a
 X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: XH++Rd7o6lilXzZQ60ikPKCWe8Yc3pfXxqjFZggz7zUZ4r3TwWQqTvr9F9uN66z2vnVs6Mo1Vke61VUTDirT4g==
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: SA1PR12MB8844
+X-MS-Exchange-CrossTenant-UserPrincipalName: S2Umme52R3RcFsYALty1TlmXGJmClKrA1mAyPzc9LgUQeQmCgJfLqo7NnhkyugL5U8/Xbk3pLOxKGk7rCRDRtg==
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: MW6PR12MB7071
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -157,78 +157,122 @@ List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-On Wed, Jan 29, 2025 at 12:57:59PM +0100, David Hildenbrand wrote:
-> The caller now always passes a single page; let's simplify, and return
-> "0" on success.
+On Wed, Jan 29, 2025 at 12:58:00PM +0100, David Hildenbrand wrote:
+> We no longer get a MMU_NOTIFY_EXCLUSIVE on conversion with the owner set
+> that one has to filter out: if there already *is* a device-exclusive
+> entry (e.g., other device, we don't have that information), GUP will
+> convert it back to an ordinary PTE and notify via
+> remove_device_exclusive_entry().
 
-Thanks for cleaning that up.
-
-Reviewed-by: Alistair Popple <apopple@nvidia.com>
-
+What tree is this against? I tried applying to v6.13 and Linus current master
+but neither applied cleanly.
+ 
 > Signed-off-by: David Hildenbrand <david@redhat.com>
 > ---
->  lib/test_hmm.c | 33 ++++++++++-----------------------
->  1 file changed, 10 insertions(+), 23 deletions(-)
+>  drivers/gpu/drm/nouveau/nouveau_svm.c | 6 +-----
+>  include/linux/mmu_notifier.h          | 4 +---
+>  include/linux/rmap.h                  | 2 +-
+>  lib/test_hmm.c                        | 2 +-
+>  mm/rmap.c                             | 3 +--
+>  5 files changed, 5 insertions(+), 12 deletions(-)
 > 
+> diff --git a/drivers/gpu/drm/nouveau/nouveau_svm.c b/drivers/gpu/drm/nouveau/nouveau_svm.c
+> index 39e3740980bb..4758fee182b4 100644
+> --- a/drivers/gpu/drm/nouveau/nouveau_svm.c
+> +++ b/drivers/gpu/drm/nouveau/nouveau_svm.c
+> @@ -510,10 +510,6 @@ static bool nouveau_svm_range_invalidate(struct mmu_interval_notifier *mni,
+>  	struct svm_notifier *sn =
+>  		container_of(mni, struct svm_notifier, notifier);
+>  
+> -	if (range->event == MMU_NOTIFY_EXCLUSIVE &&
+> -	    range->owner == sn->svmm->vmm->cli->drm->dev)
+> -		return true;
+
+I think this will cause a live-lock because make_device_exclusive_range()
+will call the notifier which without the filtering will increment the sequence
+count and cause endless retries of the loop in nouveau_atomic_range_fault().
+The notifier needs to be able to figure out if it was called in response to
+something this thread did (ie. make_device_exclusive_range) and can therefore
+ignore the invalidation, or from some other thread.
+
+Looking at hmm_test I see that doesn't use the sequence counter to ensure
+the PTE remains valid whilst it is mapped. I think that is probably wrong, so
+apologies if that lead you astray.
+
+>  	/*
+>  	 * serializes the update to mni->invalidate_seq done by caller and
+>  	 * prevents invalidation of the PTE from progressing while HW is being
+> @@ -609,7 +605,7 @@ static int nouveau_atomic_range_fault(struct nouveau_svmm *svmm,
+>  
+>  		notifier_seq = mmu_interval_read_begin(&notifier->notifier);
+>  		mmap_read_lock(mm);
+> -		page = make_device_exclusive(mm, start, drm->dev, &folio);
+> +		page = make_device_exclusive(mm, start, &folio);
+>  		mmap_read_unlock(mm);
+>  		if (IS_ERR(page)) {
+>  			ret = -EINVAL;
+> diff --git a/include/linux/mmu_notifier.h b/include/linux/mmu_notifier.h
+> index d4e714661826..bac2385099dd 100644
+> --- a/include/linux/mmu_notifier.h
+> +++ b/include/linux/mmu_notifier.h
+> @@ -44,9 +44,7 @@ struct mmu_interval_notifier;
+>   * owner field matches the driver's device private pgmap owner.
+>   *
+>   * @MMU_NOTIFY_EXCLUSIVE: to signal a device driver that the device will no
+> - * longer have exclusive access to the page. When sent during creation of an
+> - * exclusive range the owner will be initialised to the value provided by the
+> - * caller of make_device_exclusive(), otherwise the owner will be NULL.
+> + * longer have exclusive access to the page.
+>   */
+>  enum mmu_notifier_event {
+>  	MMU_NOTIFY_UNMAP = 0,
+> diff --git a/include/linux/rmap.h b/include/linux/rmap.h
+> index 86425d42c1a9..3b216b91d2e5 100644
+> --- a/include/linux/rmap.h
+> +++ b/include/linux/rmap.h
+> @@ -664,7 +664,7 @@ void try_to_migrate(struct folio *folio, enum ttu_flags flags);
+>  void try_to_unmap(struct folio *, enum ttu_flags flags);
+>  
+>  struct page *make_device_exclusive(struct mm_struct *mm, unsigned long addr,
+> -		void *owner, struct folio **foliop);
+> +		struct folio **foliop);
+>  
+>  /* Avoid racy checks */
+>  #define PVMW_SYNC		(1 << 0)
 > diff --git a/lib/test_hmm.c b/lib/test_hmm.c
-> index 9e1b07a227a3..1c0a58279db9 100644
+> index 1c0a58279db9..8520c1d1b21b 100644
 > --- a/lib/test_hmm.c
 > +++ b/lib/test_hmm.c
-> @@ -706,34 +706,23 @@ static int dmirror_check_atomic(struct dmirror *dmirror, unsigned long start,
->  	return 0;
->  }
+> @@ -786,7 +786,7 @@ static int dmirror_exclusive(struct dmirror *dmirror,
+>  		struct folio *folio;
+>  		struct page *page;
 >  
-> -static int dmirror_atomic_map(unsigned long start, unsigned long end,
-> -			      struct page **pages, struct dmirror *dmirror)
-> +static int dmirror_atomic_map(unsigned long addr, struct page *page,
-> +		struct dmirror *dmirror)
->  {
-> -	unsigned long pfn, mapped = 0;
-> -	int i;
-> +	void *entry;
->  
->  	/* Map the migrated pages into the device's page tables. */
->  	mutex_lock(&dmirror->mutex);
->  
-> -	for (i = 0, pfn = start >> PAGE_SHIFT; pfn < (end >> PAGE_SHIFT); pfn++, i++) {
-> -		void *entry;
-> -
-> -		if (!pages[i])
-> -			continue;
-> -
-> -		entry = pages[i];
-> -		entry = xa_tag_pointer(entry, DPT_XA_TAG_ATOMIC);
-> -		entry = xa_store(&dmirror->pt, pfn, entry, GFP_ATOMIC);
-> -		if (xa_is_err(entry)) {
-> -			mutex_unlock(&dmirror->mutex);
-> -			return xa_err(entry);
-> -		}
-> -
-> -		mapped++;
-> +	entry = xa_tag_pointer(page, DPT_XA_TAG_ATOMIC);
-> +	entry = xa_store(&dmirror->pt, addr >> PAGE_SHIFT, entry, GFP_ATOMIC);
-> +	if (xa_is_err(entry)) {
-> +		mutex_unlock(&dmirror->mutex);
-> +		return xa_err(entry);
->  	}
->  
->  	mutex_unlock(&dmirror->mutex);
-> -	return mapped;
-> +	return 0;
->  }
->  
->  static int dmirror_migrate_finalize_and_map(struct migrate_vma *args,
-> @@ -803,9 +792,7 @@ static int dmirror_exclusive(struct dmirror *dmirror,
+> -		page = make_device_exclusive(mm, addr, &folio, NULL);
+> +		page = make_device_exclusive(mm, addr, &folio);
+>  		if (IS_ERR(page)) {
+>  			ret = PTR_ERR(page);
 >  			break;
->  		}
->  
-> -		ret = dmirror_atomic_map(addr, addr + PAGE_SIZE, &page, dmirror);
-> -		if (!ret)
-> -			ret = -EBUSY;
-> +		ret = dmirror_atomic_map(addr, page, dmirror);
->  		folio_unlock(folio);
->  		folio_put(folio);
->  
+> diff --git a/mm/rmap.c b/mm/rmap.c
+> index 4acc9f6d743a..d99dbf59adc6 100644
+> --- a/mm/rmap.c
+> +++ b/mm/rmap.c
+> @@ -2397,7 +2397,6 @@ void try_to_migrate(struct folio *folio, enum ttu_flags flags)
+>   * make_device_exclusive() - Mark an address for exclusive use by a device
+>   * @mm: mm_struct of associated target process
+>   * @addr: the virtual address to mark for exclusive device access
+> - * @owner: passed to MMU_NOTIFY_EXCLUSIVE range notifier to allow filtering
+>   * @foliop: folio pointer will be stored here on success.
+>   *
+>   * This function looks up the page mapped at the given address, grabs a
+> @@ -2421,7 +2420,7 @@ void try_to_migrate(struct folio *folio, enum ttu_flags flags)
+>   * Returns: pointer to mapped page on success, otherwise a negative error.
+>   */
+>  struct page *make_device_exclusive(struct mm_struct *mm, unsigned long addr,
+> -		void *owner, struct folio **foliop)
+> +		struct folio **foliop)
+>  {
+>  	struct folio *folio, *fw_folio;
+>  	struct vm_area_struct *vma;
 > -- 
 > 2.48.1
 > 
