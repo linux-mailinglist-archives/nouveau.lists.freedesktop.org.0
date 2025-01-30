@@ -2,108 +2,99 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id AEE84A2B847
-	for <lists+nouveau@lfdr.de>; Fri,  7 Feb 2025 02:44:33 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 6F8CBA2B826
+	for <lists+nouveau@lfdr.de>; Fri,  7 Feb 2025 02:42:16 +0100 (CET)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id DEDE110E9EF;
-	Fri,  7 Feb 2025 01:44:25 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 25E5B10E9DA;
+	Fri,  7 Feb 2025 01:42:15 +0000 (UTC)
 Authentication-Results: gabe.freedesktop.org;
-	dkim=permerror (0-bit key) header.d=ffwll.ch header.i=@ffwll.ch header.b="Wfj7wTQF";
+	dkim=permerror (0-bit key) header.d=ffwll.ch header.i=@ffwll.ch header.b="dpSKOgC6";
 	dkim-atps=neutral
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from mail-wr1-f45.google.com (mail-wr1-f45.google.com
- [209.85.221.45])
- by gabe.freedesktop.org (Postfix) with ESMTPS id B139810E977
- for <nouveau@lists.freedesktop.org>; Thu, 30 Jan 2025 13:46:47 +0000 (UTC)
-Received: by mail-wr1-f45.google.com with SMTP id
- ffacd0b85a97d-3863c36a731so669400f8f.1
- for <nouveau@lists.freedesktop.org>; Thu, 30 Jan 2025 05:46:47 -0800 (PST)
+Received: from mail-wm1-f54.google.com (mail-wm1-f54.google.com
+ [209.85.128.54])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 8884A10E9AB
+ for <nouveau@lists.freedesktop.org>; Thu, 30 Jan 2025 16:09:49 +0000 (UTC)
+Received: by mail-wm1-f54.google.com with SMTP id
+ 5b1f17b1804b1-436a03197b2so7254155e9.2
+ for <nouveau@lists.freedesktop.org>; Thu, 30 Jan 2025 08:09:49 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=ffwll.ch; s=google; t=1738244806; x=1738849606; darn=lists.freedesktop.org; 
- h=in-reply-to:content-transfer-encoding:content-disposition
- :mime-version:references:mail-followup-to:message-id:subject:cc:to
- :from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=mJasIAc+/5zQ/00OMGOHTFdf8ftgo8VLUZwOmGiXO6w=;
- b=Wfj7wTQF2notMTe3AXfulPZ/6Ruwn+pDfItaszgsjHdiYqgpvOSVoHBfaqKuuPlo9u
- jziiMGqYs5tZ8Nm+/1vWcy4CB/NDCfA5FatFgJZ4OJcviWl1lzi7vRcI0Ej1fNdQyezc
- VmlCGfMimKXFysrmPhJ73LzU2/jzBOiQkTF/4=
+ d=ffwll.ch; s=google; t=1738253388; x=1738858188; darn=lists.freedesktop.org; 
+ h=in-reply-to:content-disposition:mime-version:references
+ :mail-followup-to:message-id:subject:cc:to:from:date:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=DHjECDXWr9DtzEWz0JXb8DxrPMtRT+1WnFwQ9T4qTYY=;
+ b=dpSKOgC6QI62i9gw4CbPr9/y+tMNWBEX/lKXC/rApPeCgZ4Q6Ihx6ummAr5Sp5i6KZ
+ lKYHLYnHQzw7CT7lctoqypYW0YNzl4Yh8jQzhtgTP9NPtSfF+7n43skylIn81Kn7vUdg
+ mEqiOgjW6gALIiQEoa2wHzpfB8zFH7q/z35J0=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1738244806; x=1738849606;
- h=in-reply-to:content-transfer-encoding:content-disposition
- :mime-version:references:mail-followup-to:message-id:subject:cc:to
- :from:date:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=mJasIAc+/5zQ/00OMGOHTFdf8ftgo8VLUZwOmGiXO6w=;
- b=qyr2aHKQ5Ck7ztoskgNj9DJ6IRRCB36d5cB8kND5qjknYxeObKHOpx+J7qIkpASXty
- kJTtlQUDXcdw8Rz8xt+htuaf7okQ98c24mTvnMerDaSvTBpxHfLNZiaSj+BsDspWXbQn
- hCP+iE3lUXLjPCbNqpdeamveFsF+/FQLgHMNEVT7qtXWRyPnnDgybX8OZuVeI9DEN/fV
- diajZ6uGQb8p4nwPWzDeWqRdlUOEqjED2XlHFOFIpbR+8xo6dpU/LgxjWd8mVSEjvvp5
- DXt/eVEgKr2tVhYqAJy5UeSqac2/23bmDTPc77sVCRh6Mr0pQT8HDtA6tlOZwFJ4q5HH
- 58OA==
+ d=1e100.net; s=20230601; t=1738253388; x=1738858188;
+ h=in-reply-to:content-disposition:mime-version:references
+ :mail-followup-to:message-id:subject:cc:to:from:date
+ :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+ bh=DHjECDXWr9DtzEWz0JXb8DxrPMtRT+1WnFwQ9T4qTYY=;
+ b=EKyf9NdyC8Kehh56UdqgbJPMlBc646wPRvEIKTO6X60GA8it0oZTSLlJJYhit5mgs0
+ iz89euejR0wJ5D/IES4C4vyDPfM/hzM64121/MnlSMkNp1l8tc1ud6jRafUHWK7ZoiCO
+ Ukb6xgW+XZ1CJA8HiMYTqeSGrFhVD6WlLopboTff/SYYknRqoixR6CKPbAaTfTUdyvKb
+ VNAW5mddeprJh6duP9s+aK6Nujd+K5xVNvpqhGmK39soIRqZBLM8h9zfjttsNRCs24Gt
+ WuUqw+OA045eNu8tfnhBS+AJBWVFowU2/2vpavH4G9fCVKWvpaCLPUWZoxGfWBqEyLGe
+ YCFw==
 X-Forwarded-Encrypted: i=1;
- AJvYcCUN8VpKqc66OORhWVn+a6HX1VHttxrWM+MDJdGpGnqpDggO5E8NBA8bq1UvQ1cbZU7qHtCZpo4f@lists.freedesktop.org
-X-Gm-Message-State: AOJu0Yw56ipIi2lMXju1cQ5eKYeIAi47k1BW4ssFRGsreoPKxUB/+5i3
- qZgmXeeKvpz4DIRhQKxI+6M4ivqK2ecmZUctLJ2PjMLETO6g6K2BpTmW5Uj24ac=
-X-Gm-Gg: ASbGncvkGdGoO+T5KOeCjW5cPugB0OYfnqSqlvoWCXjsWGbv0lx7eI+emXEyjKu2Egs
- jHiIhZoWpCboBDd/U2pXImklsQBsKdR6BMMOT4JsuqitYX3aDDq++uyjIB+XJpDPaw5mOlXx0aZ
- 52wHtvNC0vZZB4oOOSmta/wl6j/xDO7kudhMi6ueYTWnUaqDCwt24lNsYrZgHNrAphZPacjjXFI
- E8n+UaFDD4TijwPED6YBj11ZvCksACyksWSId01YLo3yjVqDuIeRXUEJ6tPoO/LGH7Ix7RDxmUE
- UavyaY01Wc79MgSM2jxTbql7mes=
-X-Google-Smtp-Source: AGHT+IGdSZfZLQOHVK1r21iqNOl4e23FuuYaVf3iprdHv7WZNXjSKvTKz/U04S+uJRtaOX2SQzHhsw==
-X-Received: by 2002:a5d:5988:0:b0:385:fd07:8616 with SMTP id
- ffacd0b85a97d-38c5167d80bmr6660415f8f.0.1738244806033; 
- Thu, 30 Jan 2025 05:46:46 -0800 (PST)
+ AJvYcCUo164requZ/jYvMXysO2X0SxZMlQpItko6E6NWKzxRqkNQogUI9ZF2d3wjdvbYZYW345PUa4Sw@lists.freedesktop.org
+X-Gm-Message-State: AOJu0Yw/TYYA2XTbR5OEJYHy6uKeRtHhWnU6gn2Xfxz44IPjomme/qL4
+ MExysofjzna3LOKUb71yFGrPE+PU0RcQghODLgoqWaOTM9WGk6XoXsU6PAjDZHM=
+X-Gm-Gg: ASbGncu9TU4wSaKb1Bt627rst/+zB0QItkVabkJB2+C5ZW6haySWbo7L7teYlfK/1OD
+ YJf7JHfhSf+Fnxt5JPrbfn3mwFCltym3790bLb7203SaSP/U60t/CpMyP1nK7hf52H1N+XFpbKT
+ GLSfu4vwTMocR+yZHJaukAxd/VHW7WfhlmITq/Q+CqmvMPKDt9l3NV4WJd6tjL1FN+mehsvT7PU
+ nkQ3KZoCZFvEpwZ8FHm0QuCQluRgsACL3tNfF0TT7K4+5Ne4SgAufOA/ar4C5CWklD70I6jzTuR
+ D0t5vOn95WdikM61xQnx9yZ+dwg=
+X-Google-Smtp-Source: AGHT+IHzkAlG33CPN/kMrEln846pAhOyRPiLkWV/nev8K+POyx7veXX/IQAiWwM1YsBE7oYiCeZW/A==
+X-Received: by 2002:a05:600c:1e0d:b0:436:f960:3427 with SMTP id
+ 5b1f17b1804b1-438dc40ffbbmr65699075e9.22.1738253387756; 
+ Thu, 30 Jan 2025 08:09:47 -0800 (PST)
 Received: from phenom.ffwll.local ([2a02:168:57f4:0:5485:d4b2:c087:b497])
  by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-38c5c0ec7e6sm2072886f8f.19.2025.01.30.05.46.44
+ 5b1f17b1804b1-438dcc2ef08sm64120395e9.22.2025.01.30.08.09.46
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 30 Jan 2025 05:46:45 -0800 (PST)
-Date: Thu, 30 Jan 2025 14:46:43 +0100
+ Thu, 30 Jan 2025 08:09:46 -0800 (PST)
+Date: Thu, 30 Jan 2025 17:09:44 +0100
 From: Simona Vetter <simona.vetter@ffwll.ch>
-To: David Hildenbrand <david@redhat.com>
-Cc: linux-kernel@vger.kernel.org, linux-doc@vger.kernel.org,
- dri-devel@lists.freedesktop.org, linux-mm@kvack.org,
- nouveau@lists.freedesktop.org, Andrew Morton <akpm@linux-foundation.org>,
- =?iso-8859-1?B?Suly9G1l?= Glisse <jglisse@redhat.com>,
- Jonathan Corbet <corbet@lwn.net>, Alex Shi <alexs@kernel.org>,
- Yanteng Si <si.yanteng@linux.dev>,
- Karol Herbst <kherbst@redhat.com>, Lyude Paul <lyude@redhat.com>,
- Danilo Krummrich <dakr@kernel.org>,
- David Airlie <airlied@gmail.com>, Simona Vetter <simona@ffwll.ch>,
- "Liam R. Howlett" <Liam.Howlett@oracle.com>,
- Lorenzo Stoakes <lorenzo.stoakes@oracle.com>,
- Vlastimil Babka <vbabka@suse.cz>, Jann Horn <jannh@google.com>,
- Pasha Tatashin <pasha.tatashin@soleen.com>,
- Peter Xu <peterx@redhat.com>, Alistair Popple <apopple@nvidia.com>,
- Jason Gunthorpe <jgg@nvidia.com>
-Subject: Re: [PATCH v1 03/12] mm/rmap: convert make_device_exclusive_range()
- to make_device_exclusive()
-Message-ID: <Z5uCw9nzN81B4N8Z@phenom.ffwll.local>
-Mail-Followup-To: David Hildenbrand <david@redhat.com>,
- linux-kernel@vger.kernel.org, linux-doc@vger.kernel.org,
- dri-devel@lists.freedesktop.org, linux-mm@kvack.org,
- nouveau@lists.freedesktop.org,
- Andrew Morton <akpm@linux-foundation.org>,
- =?iso-8859-1?B?Suly9G1l?= Glisse <jglisse@redhat.com>,
- Jonathan Corbet <corbet@lwn.net>, Alex Shi <alexs@kernel.org>,
- Yanteng Si <si.yanteng@linux.dev>,
- Karol Herbst <kherbst@redhat.com>, Lyude Paul <lyude@redhat.com>,
- Danilo Krummrich <dakr@kernel.org>,
- David Airlie <airlied@gmail.com>, Simona Vetter <simona@ffwll.ch>,
- "Liam R. Howlett" <Liam.Howlett@oracle.com>,
- Lorenzo Stoakes <lorenzo.stoakes@oracle.com>,
- Vlastimil Babka <vbabka@suse.cz>, Jann Horn <jannh@google.com>,
- Pasha Tatashin <pasha.tatashin@soleen.com>,
- Peter Xu <peterx@redhat.com>, Alistair Popple <apopple@nvidia.com>,
- Jason Gunthorpe <jgg@nvidia.com>
-References: <20250129115411.2077152-1-david@redhat.com>
- <20250129115411.2077152-4-david@redhat.com>
+To: Jason Gunthorpe <jgg@ziepe.ca>
+Cc: Thomas =?iso-8859-1?Q?Hellstr=F6m?= <thomas.hellstrom@linux.intel.com>,
+ Yonatan Maman <ymaman@nvidia.com>, kherbst@redhat.com,
+ lyude@redhat.com, dakr@redhat.com, airlied@gmail.com,
+ simona@ffwll.ch, leon@kernel.org, jglisse@redhat.com,
+ akpm@linux-foundation.org, GalShalom@nvidia.com,
+ dri-devel@lists.freedesktop.org, nouveau@lists.freedesktop.org,
+ linux-kernel@vger.kernel.org, linux-rdma@vger.kernel.org,
+ linux-mm@kvack.org, linux-tegra@vger.kernel.org
+Subject: Re: [RFC 1/5] mm/hmm: HMM API to enable P2P DMA for device private
+ pages
+Message-ID: <Z5ukSNjvmQcXsZTm@phenom.ffwll.local>
+Mail-Followup-To: Jason Gunthorpe <jgg@ziepe.ca>,
+ Thomas =?iso-8859-1?Q?Hellstr=F6m?= <thomas.hellstrom@linux.intel.com>,
+ Yonatan Maman <ymaman@nvidia.com>, kherbst@redhat.com,
+ lyude@redhat.com, dakr@redhat.com, airlied@gmail.com,
+ simona@ffwll.ch, leon@kernel.org, jglisse@redhat.com,
+ akpm@linux-foundation.org, GalShalom@nvidia.com,
+ dri-devel@lists.freedesktop.org, nouveau@lists.freedesktop.org,
+ linux-kernel@vger.kernel.org, linux-rdma@vger.kernel.org,
+ linux-mm@kvack.org, linux-tegra@vger.kernel.org
+References: <7282ac68c47886caa2bc2a2813d41a04adf938e1.camel@linux.intel.com>
+ <20250128132034.GA1524382@ziepe.ca>
+ <de293a7e9b4c44eab8792b31a4605cc9e93b2bf5.camel@linux.intel.com>
+ <20250128151610.GC1524382@ziepe.ca>
+ <b78d32e13811ef1fa57b0535749c811f2afb4dcd.camel@linux.intel.com>
+ <20250128172123.GD1524382@ziepe.ca>
+ <Z5ovcnX2zVoqdomA@phenom.ffwll.local>
+ <20250129134757.GA2120662@ziepe.ca>
+ <Z5tZc0OQukfZEr3H@phenom.ffwll.local>
+ <20250130132317.GG2120662@ziepe.ca>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=utf-8
+Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
-Content-Transfer-Encoding: 8bit
-In-Reply-To: <20250129115411.2077152-4-david@redhat.com>
+In-Reply-To: <20250130132317.GG2120662@ziepe.ca>
 X-Operating-System: Linux phenom 6.12.11-amd64 
 X-Mailman-Approved-At: Fri, 07 Feb 2025 01:42:11 +0000
 X-BeenThere: nouveau@lists.freedesktop.org
@@ -120,307 +111,80 @@ List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-On Wed, Jan 29, 2025 at 12:54:01PM +0100, David Hildenbrand wrote:
-> The single "real" user in the tree of make_device_exclusive_range() always
-> requests making only a single address exclusive. The current implementation
-> is hard to fix for properly supporting anonymous THP / large folios and
-> for avoiding messing with rmap walks in weird ways.
+On Thu, Jan 30, 2025 at 09:23:17AM -0400, Jason Gunthorpe wrote:
+> On Thu, Jan 30, 2025 at 11:50:27AM +0100, Simona Vetter wrote:
+> > On Wed, Jan 29, 2025 at 09:47:57AM -0400, Jason Gunthorpe wrote:
+> > > On Wed, Jan 29, 2025 at 02:38:58PM +0100, Simona Vetter wrote:
+> > > 
+> > > > > The pgmap->owner doesn't *have* to fixed, certainly during early boot before
+> > > > > you hand out any page references it can be changed. I wouldn't be
+> > > > > surprised if this is useful to some requirements to build up the
+> > > > > private interconnect topology?
+> > > > 
+> > > > The trouble I'm seeing is device probe and the fundemantal issue that you
+> > > > never know when you're done. And so if we entirely rely on pgmap->owner to
+> > > > figure out the driver private interconnect topology, that's going to be
+> > > > messy. That's why I'm also leaning towards both comparing owners and
+> > > > having an additional check whether the interconnect is actually there or
+> > > > not yet.
+> > > 
+> > > Hoenstely, I'd rather invest more effort into being able to update
+> > > owner for those special corner cases than to slow down the fast path
+> > > in hmm_range_fault..
+> > 
+> > I'm not sure how you want to make the owner mutable.
 > 
-> So let's always process a single address/page and return folio + page to
-> minimize page -> folio lookups. This is a preparation for further
-> changes.
+> You'd probably have to use a system where you never free them until
+> all the page maps are destroyed.
 > 
-> Reject any non-anonymous or hugetlb folios early, directly after GUP.
+> You could also use an integer instead of a pointer to indicate the
+> cluster of interconnect, I think there are many options..
+
+Hm yeah I guess an integer allocater of the atomic_inc kind plus "surely
+32bit is enough" could work. But I don't think it's needed, if we can
+reliable just unregister the entire dev_pagemap and then just set up a new
+one. Plus that avoids thinking about which barriers we might need where
+exactly all over mm code that looks at the owner field.
+
+> > And I've looked at the lifetime fun of unregistering a dev_pagemap for
+> > device hotunplug and pretty firmly concluded it's unfixable and that I
+> > should run away to do something else :-P
 > 
-> Signed-off-by: David Hildenbrand <david@redhat.com>
+> ? It is supposed to work, it blocks until all the pages are freed, but
+> AFAIK ther is no fundamental life time issue. The driver is
+> responsible to free all its usage.
 
-Yeah this makes sense. Even for pmd entries I think we want to make this
-very explicit with an explicit hugetlb opt-in I think.
+Hm I looked at it again, and I guess with the fixes to make migration to
+system memory work reliable in Matt Brost's latest series it should indeed
+work reliable. The devm_ version still freaks me out because of how easily
+people misuse these for things that are memory allocations.
 
-Acked-by: Simona Vetter <simona.vetter@ffwll.ch>
-
-
-> ---
->  Documentation/mm/hmm.rst                    |  2 +-
->  Documentation/translations/zh_CN/mm/hmm.rst |  2 +-
->  drivers/gpu/drm/nouveau/nouveau_svm.c       |  5 +-
->  include/linux/mmu_notifier.h                |  2 +-
->  include/linux/rmap.h                        |  5 +-
->  lib/test_hmm.c                              | 45 +++++------
->  mm/rmap.c                                   | 90 +++++++++++----------
->  7 files changed, 75 insertions(+), 76 deletions(-)
+> > An optional callback is a lot less scary to me here (or redoing
+> > hmm_range_fault or whacking the migration helpers a few times) looks a lot
+> > less scary than making pgmap->owner mutable in some fashion.
 > 
-> diff --git a/Documentation/mm/hmm.rst b/Documentation/mm/hmm.rst
-> index f6d53c37a2ca..7d61b7a8b65b 100644
-> --- a/Documentation/mm/hmm.rst
-> +++ b/Documentation/mm/hmm.rst
-> @@ -400,7 +400,7 @@ Exclusive access memory
->  Some devices have features such as atomic PTE bits that can be used to implement
->  atomic access to system memory. To support atomic operations to a shared virtual
->  memory page such a device needs access to that page which is exclusive of any
-> -userspace access from the CPU. The ``make_device_exclusive_range()`` function
-> +userspace access from the CPU. The ``make_device_exclusive()`` function
->  can be used to make a memory range inaccessible from userspace.
->  
->  This replaces all mappings for pages in the given range with special swap
-> diff --git a/Documentation/translations/zh_CN/mm/hmm.rst b/Documentation/translations/zh_CN/mm/hmm.rst
-> index 0669f947d0bc..22c210f4e94f 100644
-> --- a/Documentation/translations/zh_CN/mm/hmm.rst
-> +++ b/Documentation/translations/zh_CN/mm/hmm.rst
-> @@ -326,7 +326,7 @@ devm_memunmap_pages() 和 devm_release_mem_region() 当资源可以绑定到 ``s
->  
->  一些设备具有诸如原子PTE位的功能，可以用来实现对系统内存的原子访问。为了支持对一
->  个共享的虚拟内存页的原子操作，这样的设备需要对该页的访问是排他的，而不是来自CPU
-> -的任何用户空间访问。  ``make_device_exclusive_range()`` 函数可以用来使一
-> +的任何用户空间访问。  ``make_device_exclusive()`` 函数可以用来使一
->  个内存范围不能从用户空间访问。
->  
->  这将用特殊的交换条目替换给定范围内的所有页的映射。任何试图访问交换条目的行为都会
-> diff --git a/drivers/gpu/drm/nouveau/nouveau_svm.c b/drivers/gpu/drm/nouveau/nouveau_svm.c
-> index b4da82ddbb6b..39e3740980bb 100644
-> --- a/drivers/gpu/drm/nouveau/nouveau_svm.c
-> +++ b/drivers/gpu/drm/nouveau/nouveau_svm.c
-> @@ -609,10 +609,9 @@ static int nouveau_atomic_range_fault(struct nouveau_svmm *svmm,
->  
->  		notifier_seq = mmu_interval_read_begin(&notifier->notifier);
->  		mmap_read_lock(mm);
-> -		ret = make_device_exclusive_range(mm, start, start + PAGE_SIZE,
-> -					    &page, drm->dev);
-> +		page = make_device_exclusive(mm, start, drm->dev, &folio);
->  		mmap_read_unlock(mm);
-> -		if (ret <= 0 || !page) {
-> +		if (IS_ERR(page)) {
->  			ret = -EINVAL;
->  			goto out;
->  		}
-> diff --git a/include/linux/mmu_notifier.h b/include/linux/mmu_notifier.h
-> index e2dd57ca368b..d4e714661826 100644
-> --- a/include/linux/mmu_notifier.h
-> +++ b/include/linux/mmu_notifier.h
-> @@ -46,7 +46,7 @@ struct mmu_interval_notifier;
->   * @MMU_NOTIFY_EXCLUSIVE: to signal a device driver that the device will no
->   * longer have exclusive access to the page. When sent during creation of an
->   * exclusive range the owner will be initialised to the value provided by the
-> - * caller of make_device_exclusive_range(), otherwise the owner will be NULL.
-> + * caller of make_device_exclusive(), otherwise the owner will be NULL.
->   */
->  enum mmu_notifier_event {
->  	MMU_NOTIFY_UNMAP = 0,
-> diff --git a/include/linux/rmap.h b/include/linux/rmap.h
-> index 683a04088f3f..86425d42c1a9 100644
-> --- a/include/linux/rmap.h
-> +++ b/include/linux/rmap.h
-> @@ -663,9 +663,8 @@ int folio_referenced(struct folio *, int is_locked,
->  void try_to_migrate(struct folio *folio, enum ttu_flags flags);
->  void try_to_unmap(struct folio *, enum ttu_flags flags);
->  
-> -int make_device_exclusive_range(struct mm_struct *mm, unsigned long start,
-> -				unsigned long end, struct page **pages,
-> -				void *arg);
-> +struct page *make_device_exclusive(struct mm_struct *mm, unsigned long addr,
-> +		void *owner, struct folio **foliop);
->  
->  /* Avoid racy checks */
->  #define PVMW_SYNC		(1 << 0)
-> diff --git a/lib/test_hmm.c b/lib/test_hmm.c
-> index 056f2e411d7b..9e1b07a227a3 100644
-> --- a/lib/test_hmm.c
-> +++ b/lib/test_hmm.c
-> @@ -780,10 +780,8 @@ static int dmirror_exclusive(struct dmirror *dmirror,
->  	unsigned long start, end, addr;
->  	unsigned long size = cmd->npages << PAGE_SHIFT;
->  	struct mm_struct *mm = dmirror->notifier.mm;
-> -	struct page *pages[64];
->  	struct dmirror_bounce bounce;
-> -	unsigned long next;
-> -	int ret;
-> +	int ret = 0;
->  
->  	start = cmd->addr;
->  	end = start + size;
-> @@ -795,36 +793,31 @@ static int dmirror_exclusive(struct dmirror *dmirror,
->  		return -EINVAL;
->  
->  	mmap_read_lock(mm);
-> -	for (addr = start; addr < end; addr = next) {
-> -		unsigned long mapped = 0;
-> -		int i;
-> -
-> -		next = min(end, addr + (ARRAY_SIZE(pages) << PAGE_SHIFT));
-> +	for (addr = start; addr < end; addr += PAGE_SIZE) {
-> +		struct folio *folio;
-> +		struct page *page;
->  
-> -		ret = make_device_exclusive_range(mm, addr, next, pages, NULL);
-> -		/*
-> -		 * Do dmirror_atomic_map() iff all pages are marked for
-> -		 * exclusive access to avoid accessing uninitialized
-> -		 * fields of pages.
-> -		 */
-> -		if (ret == (next - addr) >> PAGE_SHIFT)
-> -			mapped = dmirror_atomic_map(addr, next, pages, dmirror);
-> -		for (i = 0; i < ret; i++) {
-> -			if (pages[i]) {
-> -				unlock_page(pages[i]);
-> -				put_page(pages[i]);
-> -			}
-> +		page = make_device_exclusive(mm, addr, &folio, NULL);
-> +		if (IS_ERR(page)) {
-> +			ret = PTR_ERR(page);
-> +			break;
->  		}
->  
-> -		if (addr + (mapped << PAGE_SHIFT) < next) {
-> -			mmap_read_unlock(mm);
-> -			mmput(mm);
-> -			return -EBUSY;
-> -		}
-> +		ret = dmirror_atomic_map(addr, addr + PAGE_SIZE, &page, dmirror);
-> +		if (!ret)
-> +			ret = -EBUSY;
-> +		folio_unlock(folio);
-> +		folio_put(folio);
-> +
-> +		if (ret)
-> +			break;
->  	}
->  	mmap_read_unlock(mm);
->  	mmput(mm);
->  
-> +	if (ret)
-> +		return -EBUSY;
-> +
->  	/* Return the migrated data for verification. */
->  	ret = dmirror_bounce_init(&bounce, start, size);
->  	if (ret)
-> diff --git a/mm/rmap.c b/mm/rmap.c
-> index 17fbfa61f7ef..676df4fba5b0 100644
-> --- a/mm/rmap.c
-> +++ b/mm/rmap.c
-> @@ -2495,70 +2495,78 @@ static bool folio_make_device_exclusive(struct folio *folio,
->  		.arg = &args,
->  	};
->  
-> -	/*
-> -	 * Restrict to anonymous folios for now to avoid potential writeback
-> -	 * issues.
-> -	 */
-> -	if (!folio_test_anon(folio) || folio_test_hugetlb(folio))
-> -		return false;
-> -
->  	rmap_walk(folio, &rwc);
->  
->  	return args.valid && !folio_mapcount(folio);
->  }
->  
->  /**
-> - * make_device_exclusive_range() - Mark a range for exclusive use by a device
-> + * make_device_exclusive() - Mark an address for exclusive use by a device
->   * @mm: mm_struct of associated target process
-> - * @start: start of the region to mark for exclusive device access
-> - * @end: end address of region
-> - * @pages: returns the pages which were successfully marked for exclusive access
-> + * @addr: the virtual address to mark for exclusive device access
->   * @owner: passed to MMU_NOTIFY_EXCLUSIVE range notifier to allow filtering
-> + * @foliop: folio pointer will be stored here on success.
-> + *
-> + * This function looks up the page mapped at the given address, grabs a
-> + * folio reference, locks the folio and replaces the PTE with special
-> + * device-exclusive non-swap entry, preventing userspace CPU access. The
-> + * function will return with the folio locked and referenced.
->   *
-> - * Returns: number of pages found in the range by GUP. A page is marked for
-> - * exclusive access only if the page pointer is non-NULL.
-> + * On fault these special device-exclusive entries are replaced with the
-> + * original PTE under folio lock, after calling MMU notifiers.
->   *
-> - * This function finds ptes mapping page(s) to the given address range, locks
-> - * them and replaces mappings with special swap entries preventing userspace CPU
-> - * access. On fault these entries are replaced with the original mapping after
-> - * calling MMU notifiers.
-> + * Only anonymous non-hugetlb folios are supported and the VMA must have
-> + * write permissions such that we can fault in the anonymous page writable
-> + * in order to mark it exclusive. The caller must hold the mmap_lock in read
-> + * mode.
->   *
->   * A driver using this to program access from a device must use a mmu notifier
->   * critical section to hold a device specific lock during programming. Once
->   * programming is complete it should drop the page lock and reference after
->   * which point CPU access to the page will revoke the exclusive access.
-> + *
-> + * Returns: pointer to mapped page on success, otherwise a negative error.
->   */
-> -int make_device_exclusive_range(struct mm_struct *mm, unsigned long start,
-> -				unsigned long end, struct page **pages,
-> -				void *owner)
-> +struct page *make_device_exclusive(struct mm_struct *mm, unsigned long addr,
-> +		void *owner, struct folio **foliop)
->  {
-> -	long npages = (end - start) >> PAGE_SHIFT;
-> -	long i;
-> +	struct folio *folio;
-> +	struct page *page;
-> +	long npages;
-> +
-> +	mmap_assert_locked(mm);
->  
-> -	npages = get_user_pages_remote(mm, start, npages,
-> +	/*
-> +	 * Fault in the page writable and try to lock it; note that if the
-> +	 * address would already be marked for exclusive use by the device,
-> +	 * the GUP call would undo that first by triggering a fault.
-> +	 */
-> +	npages = get_user_pages_remote(mm, addr, 1,
->  				       FOLL_GET | FOLL_WRITE | FOLL_SPLIT_PMD,
-> -				       pages, NULL);
-> -	if (npages < 0)
-> -		return npages;
-> -
-> -	for (i = 0; i < npages; i++, start += PAGE_SIZE) {
-> -		struct folio *folio = page_folio(pages[i]);
-> -		if (PageTail(pages[i]) || !folio_trylock(folio)) {
-> -			folio_put(folio);
-> -			pages[i] = NULL;
-> -			continue;
-> -		}
-> +				       &page, NULL);
-> +	if (npages != 1)
-> +		return ERR_PTR(npages);
-> +	folio = page_folio(page);
->  
-> -		if (!folio_make_device_exclusive(folio, mm, start, owner)) {
-> -			folio_unlock(folio);
-> -			folio_put(folio);
-> -			pages[i] = NULL;
-> -		}
-> +	if (!folio_test_anon(folio) || folio_test_hugetlb(folio)) {
-> +		folio_put(folio);
-> +		return ERR_PTR(-EOPNOTSUPP);
-> +	}
-> +
-> +	if (!folio_trylock(folio)) {
-> +		folio_put(folio);
-> +		return ERR_PTR(-EBUSY);
->  	}
->  
-> -	return npages;
-> +	if (!folio_make_device_exclusive(folio, mm, addr, owner)) {
-> +		folio_unlock(folio);
-> +		folio_put(folio);
-> +		return ERR_PTR(-EBUSY);
-> +	}
-> +	*foliop = folio;
-> +	return page;
->  }
-> -EXPORT_SYMBOL_GPL(make_device_exclusive_range);
-> +EXPORT_SYMBOL_GPL(make_device_exclusive);
->  #endif
->  
->  void __put_anon_vma(struct anon_vma *anon_vma)
-> -- 
-> 2.48.1
+> It extra for every single 4k page on every user :\
 > 
+> And what are you going to do better inside this callback?
 
+Having more comfy illusions :-P
+
+Slightly more seriously, I can grab some locks and make life easier,
+whereas sprinkling locking or even barriers over pgmap->owner in core mm
+is not going to fly. Plus more flexibility, e.g. when the interconnect
+doesn't work for atomics or some other funny reason it only works for some
+of the traffic, where you need to more dynamically decide where memory is
+ok to sit. Or checking p2pdma connectivity and all that stuff.
+
+But we can also do all that stuff by checking afterwards or migrating
+memory around as needed. At least for drivers who cooperate and all set
+the same owner, which I think is Thomas' current plan.
+
+Also note that fundamentally you can't protect against the hotunplug or
+driver unload case for hardware access. So some access will go to nowhere
+when that happens, until we've torn down all the mappings and migrated
+memory out.
+-Sima
 -- 
 Simona Vetter
 Software Engineer, Intel Corporation
