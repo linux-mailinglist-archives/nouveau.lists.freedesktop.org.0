@@ -2,98 +2,106 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id 00363A2B84D
-	for <lists+nouveau@lfdr.de>; Fri,  7 Feb 2025 02:44:37 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 300F0A2B83D
+	for <lists+nouveau@lfdr.de>; Fri,  7 Feb 2025 02:44:28 +0100 (CET)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 72E0E10E9EE;
-	Fri,  7 Feb 2025 01:44:36 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 3707310E9DF;
+	Fri,  7 Feb 2025 01:44:25 +0000 (UTC)
 Authentication-Results: gabe.freedesktop.org;
-	dkim=permerror (0-bit key) header.d=ffwll.ch header.i=@ffwll.ch header.b="kjCIKJ4V";
+	dkim=permerror (0-bit key) header.d=ffwll.ch header.i=@ffwll.ch header.b="C6r6Zbw9";
 	dkim-atps=neutral
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from mail-wm1-f41.google.com (mail-wm1-f41.google.com
- [209.85.128.41])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 8B0E510E2C3
- for <nouveau@lists.freedesktop.org>; Thu, 30 Jan 2025 08:55:32 +0000 (UTC)
-Received: by mail-wm1-f41.google.com with SMTP id
- 5b1f17b1804b1-43618283d48so3469525e9.1
- for <nouveau@lists.freedesktop.org>; Thu, 30 Jan 2025 00:55:32 -0800 (PST)
+Received: from mail-wm1-f48.google.com (mail-wm1-f48.google.com
+ [209.85.128.48])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 5CDD710E90F
+ for <nouveau@lists.freedesktop.org>; Thu, 30 Jan 2025 09:40:14 +0000 (UTC)
+Received: by mail-wm1-f48.google.com with SMTP id
+ 5b1f17b1804b1-43635796b48so3162215e9.0
+ for <nouveau@lists.freedesktop.org>; Thu, 30 Jan 2025 01:40:14 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=ffwll.ch; s=google; t=1738227330; x=1738832130; darn=lists.freedesktop.org; 
+ d=ffwll.ch; s=google; t=1738230012; x=1738834812; darn=lists.freedesktop.org; 
  h=in-reply-to:content-disposition:mime-version:references
  :mail-followup-to:message-id:subject:cc:to:from:date:from:to:cc
  :subject:date:message-id:reply-to;
- bh=hIslw6ufQaCzkTDQo2Y7rnWGVXJFTGegVErKgzJce74=;
- b=kjCIKJ4VjDEC4tGG25ey0geXiR/N9A/unjwkVRyFYMJXBe5MFqiS/wmq9yYBk8Yg6h
- eQD7xWY3ifR41qbfEI96wAb4x4HbpaHWyAdEdiodz1a25NFBGyEReR+14OLId3eSpe0Z
- APPGT9hHVrBCs3o5EK1Rs9QAZBfSi7qV1E91g=
+ bh=i//528DJ0ZQ/PMRElAHDERTNirRnwgk7bcm+UBSh/UY=;
+ b=C6r6Zbw9oZSf5/NOzY2+osJlIs8dt7jff1aqiaVAmO9qPl6J5tZY4n5UPaY+A2M+3Y
+ 8JYFW0vXlsKxtGLuFNFaNkt5tglGBUkls5lwciBTpnjooOhN8/CcoMMHnvAu0FzG2wBm
+ ngKpGdYd5QwaZIGfOZJ2JdjkNVEWvBOwdXE34=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1738227330; x=1738832130;
+ d=1e100.net; s=20230601; t=1738230012; x=1738834812;
  h=in-reply-to:content-disposition:mime-version:references
  :mail-followup-to:message-id:subject:cc:to:from:date
  :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=hIslw6ufQaCzkTDQo2Y7rnWGVXJFTGegVErKgzJce74=;
- b=V+N5aiuVWqc48PUDjNC4fSlnOi5rG4xPh3Jm0O/jP8SZcysLPFFmXSD4toTlBGsvfP
- x09Ween+MHWxjRhtHlUiIpcPkSFZhzqbyg2R/W6k44p5D169jn62b4NeBPBnSpEV8lqd
- /t6rdvL6KTHSJv5YEHHV2Q/oqoXvJhDxaG0L3R1sC/czF/RW2h8m51PGQpLFfAtFiSlx
- a+KDqQRJ3WlVBDSFJ+50DxO6Wr23ptx/Jp8pHC0TqkEH2IxZIQRJHpc7RMAXrdhLHQww
- MAur5spK1R6Mu2lEcBqv/hfRAJ28QZjXJRyvZrBTS+1Rj6ogtm/Qc9eiQAXWPwoVI+qN
- lHkg==
+ bh=i//528DJ0ZQ/PMRElAHDERTNirRnwgk7bcm+UBSh/UY=;
+ b=uHM+a8gUU1kcAGlQfNZYfU6mFHCi+M3QeYn2XHLBvQitzbZThPiHQ35OT/I5qw/NJS
+ ca5/CBTwzNrivLW712es2ImdtJvng1bcTvW5g1oBrkIIZMw1c9jQR4aQ6xbHffu3szWO
+ LhKM4eDPQa5tTYnWjAkmF9WMYtRhdzemJoO8l+nNdi3KBhrhlH0w+0HRpfcuu2Y9tOf/
+ oWXMKVg2LC+jC5qRujh9BuLvpjHAWiuv2rgXk5xDfzwBeWgr+izzgFpwavpUZqa4nil9
+ vkwSMQK6E7oiiJg2wAErxdJR4PWYhVlDoWuCYJ54i3qm5Cbs8/H3O+xAe3uZxiTWbOsH
+ m8bw==
 X-Forwarded-Encrypted: i=1;
- AJvYcCUXlFraMCCK1/KTF9QwBkNGPce3x9xwKkUAWbcmNTqLwwTI4qDA5IAzpFXa7Z7ambEmhMxtJcen@lists.freedesktop.org
-X-Gm-Message-State: AOJu0Yz8Ytzuq6GrKVkpqvHXI1V4VXH15Lyfv+04dv6HRd5ulkW0nxNx
- E+6I28qUzbAti4VRlX9E2iY78hhhFYuzmG/UMLOQVhuzXQd3VXaO8CV8hTnxLfeoC7O60pLO52E
- V
-X-Gm-Gg: ASbGncvvK04+bOzAqz/RxikKNDDd87sOu9P9eVYE9RX7flZtaQuwToAIABYQyMOe32M
- xPdv65cFAl54zMgcJ/KztEB8+Dgkw3OHzMWNIN68fjJNucpXlsfyLTbweg0JG0UEBnCBuaNce7/
- Ud+2IGmPBqR0llNups0s+tKoST/PdykIP+p1J05SVKZSYPxgUDMn6qEkY41CIUTEXPMDGev/vtM
- tyP2XvzcgYYzQXOlNeQ4UrEtsAOsHom4Vrzy7v2MPQBZ3lBJRLhOUFunve+cJWJraLk9P06meJp
- UDoGt0+oOOFQg07DLvUsy/p+YVs=
-X-Google-Smtp-Source: AGHT+IFyLToZ0gdk5jIE+m1EP+tgN9TteTZIvDJwNmgzXNNu1UsMwvchAhqyIMVoSY01MWwiaZ6shA==
-X-Received: by 2002:a05:600c:138f:b0:434:f1e9:afae with SMTP id
- 5b1f17b1804b1-438dc3aa785mr46269975e9.1.1738227330367; 
- Thu, 30 Jan 2025 00:55:30 -0800 (PST)
+ AJvYcCWvxI+nCG90xlA9I9lg1K65/VSBTdhSjAlmOlcRa6kZxKSt0WWrsPkkDZVhbGrCYEXA9pytmiqB@lists.freedesktop.org
+X-Gm-Message-State: AOJu0YyBmcZL0MigakJ7yEk+osFIWxfNnvlS440JdywJSLxXzRbV7X9z
+ U6JK939u2HpXYrN+GJWMkFViQb1qO4BEnuVM6C2d5fs4653gKOkPyLgjF2U68bg=
+X-Gm-Gg: ASbGncvr+ygWGx09+WJ/dE/sH2AYRJnLG6J7Tz3aOd6hODBiqgkzo73SyHjXqcDn/UW
+ k0iFV7xLaialK2Aosf3+FR6YQ+cJd356aDJUs62jHHM1cfMKrYHH0xBjyYdtl1KZvtCOhSX4e74
+ 0DxnikSR9cL3B7IKyiOGFrK38o3PjrE92pWrFK6QByI9Kcs5eSZ56hWSvMaE2VE7AMRab+dUU8L
+ aNM4OsOebeVM05ABDNH8CEnn4+C+60qTPFq3/x6VAEso5FjqGqZ8kvCjPkcKYMdk50k9OhDdgQf
+ 1c765NDx36lpxVEtu26/T0dafoU=
+X-Google-Smtp-Source: AGHT+IHELNdPunqNgpdAjDR3NKuJWudzqHHVDYg/asujGGhvRfTPwZ1lEqRiXSYsTCFWsh5kt+/SYQ==
+X-Received: by 2002:a05:600c:4e03:b0:434:f9ad:7222 with SMTP id
+ 5b1f17b1804b1-438e15ee101mr21454555e9.7.1738230012440; 
+ Thu, 30 Jan 2025 01:40:12 -0800 (PST)
 Received: from phenom.ffwll.local ([2a02:168:57f4:0:5485:d4b2:c087:b497])
  by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-438e244f0d2sm15613675e9.30.2025.01.30.00.55.29
+ 5b1f17b1804b1-438e244ed3fsm16976735e9.31.2025.01.30.01.40.11
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 30 Jan 2025 00:55:29 -0800 (PST)
-Date: Thu, 30 Jan 2025 09:55:27 +0100
+ Thu, 30 Jan 2025 01:40:11 -0800 (PST)
+Date: Thu, 30 Jan 2025 10:40:09 +0100
 From: Simona Vetter <simona.vetter@ffwll.ch>
-To: David Hildenbrand <david@redhat.com>
-Cc: Alistair Popple <apopple@nvidia.com>,
- "linux-mm@kvack.org" <linux-mm@kvack.org>,
- John Hubbard <jhubbard@nvidia.com>, nouveau@lists.freedesktop.org,
- Jason Gunthorpe <jgg@nvidia.com>,
- DRI Development <dri-devel@lists.freedesktop.org>,
+To: Alistair Popple <apopple@nvidia.com>
+Cc: David Hildenbrand <david@redhat.com>, linux-kernel@vger.kernel.org,
+ linux-doc@vger.kernel.org, dri-devel@lists.freedesktop.org,
+ linux-mm@kvack.org, nouveau@lists.freedesktop.org,
+ Andrew Morton <akpm@linux-foundation.org>,
+ =?iso-8859-1?B?Suly9G1l?= Glisse <jglisse@redhat.com>,
+ Jonathan Corbet <corbet@lwn.net>, Alex Shi <alexs@kernel.org>,
+ Yanteng Si <si.yanteng@linux.dev>,
  Karol Herbst <kherbst@redhat.com>, Lyude Paul <lyude@redhat.com>,
- Danilo Krummrich <dakr@kernel.org>
-Subject: Re: [Question] Are "device exclusive non-swap entries" / "SVM
- atomics in Nouveau" still getting used in practice?
-Message-ID: <Z5s-f6UcT3VLVBFN@phenom.ffwll.local>
-Mail-Followup-To: David Hildenbrand <david@redhat.com>,
- Alistair Popple <apopple@nvidia.com>,
- "linux-mm@kvack.org" <linux-mm@kvack.org>,
- John Hubbard <jhubbard@nvidia.com>, nouveau@lists.freedesktop.org,
- Jason Gunthorpe <jgg@nvidia.com>,
- DRI Development <dri-devel@lists.freedesktop.org>,
+ Danilo Krummrich <dakr@kernel.org>,
+ David Airlie <airlied@gmail.com>, Simona Vetter <simona@ffwll.ch>,
+ "Liam R. Howlett" <Liam.Howlett@oracle.com>,
+ Lorenzo Stoakes <lorenzo.stoakes@oracle.com>,
+ Vlastimil Babka <vbabka@suse.cz>, Jann Horn <jannh@google.com>,
+ Pasha Tatashin <pasha.tatashin@soleen.com>,
+ Peter Xu <peterx@redhat.com>, Jason Gunthorpe <jgg@nvidia.com>
+Subject: Re: [PATCH v1 04/12] mm/rmap: implement make_device_exclusive()
+ using folio_walk instead of rmap walk
+Message-ID: <Z5tI-cOSyzdLjoe_@phenom.ffwll.local>
+Mail-Followup-To: Alistair Popple <apopple@nvidia.com>,
+ David Hildenbrand <david@redhat.com>, linux-kernel@vger.kernel.org,
+ linux-doc@vger.kernel.org, dri-devel@lists.freedesktop.org,
+ linux-mm@kvack.org, nouveau@lists.freedesktop.org,
+ Andrew Morton <akpm@linux-foundation.org>,
+ =?iso-8859-1?B?Suly9G1l?= Glisse <jglisse@redhat.com>,
+ Jonathan Corbet <corbet@lwn.net>, Alex Shi <alexs@kernel.org>,
+ Yanteng Si <si.yanteng@linux.dev>,
  Karol Herbst <kherbst@redhat.com>, Lyude Paul <lyude@redhat.com>,
- Danilo Krummrich <dakr@kernel.org>
-References: <Z5OxuGMGT-OvMy5P@phenom.ffwll.local>
- <f2f059a3-0c95-44cf-b79a-8c01e9334919@redhat.com>
- <fbwjse2zexcsxuro5w3a5vs2rq4eabpccfkbd3buc4qmkgoo7z@xpdtyukllzvo>
- <Z5k6w1OZ1ttgTGRo@phenom.ffwll.local>
- <ded68896-d682-4fb3-8693-4657aa90b313@redhat.com>
- <Z5oHY1pjjwBfRN1g@phenom.ffwll.local>
- <Z5oQ2YV1cRUc0KnD@phenom.ffwll.local>
- <c7891b99-3001-4d70-8673-8a76357db0bf@redhat.com>
- <Z5o1taCb6moJdPXW@phenom.ffwll.local>
- <8dfe1dd5-f4a7-4b8a-92c7-278519ee4c58@redhat.com>
+ Danilo Krummrich <dakr@kernel.org>,
+ David Airlie <airlied@gmail.com>, Simona Vetter <simona@ffwll.ch>,
+ "Liam R. Howlett" <Liam.Howlett@oracle.com>,
+ Lorenzo Stoakes <lorenzo.stoakes@oracle.com>,
+ Vlastimil Babka <vbabka@suse.cz>, Jann Horn <jannh@google.com>,
+ Pasha Tatashin <pasha.tatashin@soleen.com>,
+ Peter Xu <peterx@redhat.com>, Jason Gunthorpe <jgg@nvidia.com>
+References: <20250129115411.2077152-1-david@redhat.com>
+ <20250129115411.2077152-5-david@redhat.com>
+ <7tzcpx23vufmp5cxutnzhjgdj7kwqrw5drwochpv5ern7zknhj@h2s6y2qjbr3f>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
-In-Reply-To: <8dfe1dd5-f4a7-4b8a-92c7-278519ee4c58@redhat.com>
+In-Reply-To: <7tzcpx23vufmp5cxutnzhjgdj7kwqrw5drwochpv5ern7zknhj@h2s6y2qjbr3f>
 X-Operating-System: Linux phenom 6.12.11-amd64 
 X-Mailman-Approved-At: Fri, 07 Feb 2025 01:42:11 +0000
 X-BeenThere: nouveau@lists.freedesktop.org
@@ -110,171 +118,301 @@ List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-On Wed, Jan 29, 2025 at 05:13:41PM +0100, David Hildenbrand wrote:
-> On 29.01.25 15:05, Simona Vetter wrote:
-> > On Wed, Jan 29, 2025 at 12:31:14PM +0100, David Hildenbrand wrote:
-> > > On 29.01.25 12:28, Simona Vetter wrote:
-> > > > On Wed, Jan 29, 2025 at 11:48:03AM +0100, Simona Vetter wrote:
-> > > > > On Tue, Jan 28, 2025 at 09:24:33PM +0100, David Hildenbrand wrote:
-> > > > > > On 28.01.25 21:14, Simona Vetter wrote:
-> > > > > > > On Tue, Jan 28, 2025 at 11:09:24AM +1100, Alistair Popple wrote:
-> > > > > > > > On Fri, Jan 24, 2025 at 06:54:02PM +0100, David Hildenbrand wrote:
-> > > > > > > > > > > > On integrated the gpu is tied into the coherency
-> > > > > > > > > > > > fabric, so there it's not needed.
-> > > > > > > > > > > > 
-> > > > > > > > > > > > I think the more fundamental question with both this function here and
-> > > > > > > > > > > > with forced migration to device memory is that there's no guarantee it
-> > > > > > > > > > > > will work out.
-> > > > > > > > > > > 
-> > > > > > > > > > > Yes, in particular with device-exclusive, it doesn't really work with THP
-> > > > > > > > > > > and is only limited to anonymous memory. I have patches to at least make it
-> > > > > > > > > > > work reliably with THP.
-> > > > > > > > > > 
-> > > > > > > > > > I should have crawled through the implementation first before replying.
-> > > > > > > > > > Since it only looks at folio_mapcount() make_device_exclusive() should at
-> > > > > > > > > > least in theory work reliably on anon memory, and not be impacted by
-> > > > > > > > > > elevated refcounts due to migration/ksm/thp/whatever.
-> > > > > > > > > 
-> > > > > > > > > Yes, there is -- in theory -- nothing blocking the conversion except the
-> > > > > > > > > folio lock. That's different than page migration.
-> > > > > > > > 
-> > > > > > > > Indeed - this was the entire motivation for make_device_exclusive() - that we
-> > > > > > > > needed a way to reliably exclude CPU access that couldn't be blocked in the same
-> > > > > > > > way page migration can (otherwise we could have just migrated to a device page,
-> > > > > > > > even if that may have added unwanted overhead).
-> > > > > > > 
-> > > > > > > The folio_trylock worries me a bit. I guess this is to avoid deadlocks
-> > > > > > > when locking multiple folios, but I think at least on the first one we
-> > > > > > > need an unconditional folio_lock to guarantee forward progress.
-> > > > > > 
-> > > > > > At least on the hmm path I was able to trigger the EBUSY a couple of times
-> > > > > > due to concurrent swapout. But the hmm-tests selftest fails immediately
-> > > > > > instead of retrying.
-> > > > > 
-> > > > > My worries with just retrying is that it's very hard to assess whether
-> > > > > there's a livelock or whether the retry has a good chance of success. As
-> > > > > an example the ->migrate_to_ram path has some trylocks, and the window
-> > > > > where all other threads got halfway and then fail the trylock is big
-> > > > > enough that once you pile up enough threads that spin through there,
-> > > > > you're stuck forever. Which isn't great.
-> > > > > 
-> > > > > So if we could convert at least the first folio_trylock into a plain lock
-> > > > > then forward progress is obviously assured and there's no need to crawl
-> > > > > through large chunks of mm/ code to hunt for corner cases where we could
-> > > > > be too unlucky to ever win the race.
-> > > > > 
-> > > > > > > Since
-> > > > > > > atomics can't cross 4k boundaries (or the hw is just really broken) this
-> > > > > > > should be enough to avoid being stuck in a livelock. I'm also not seeing
-> > > > > > > any other reason why a folio_lock shouldn't work here, but then my
-> > > > > > > understanding of mm/ stuff is really just scratching the surface.
-> > > > > > > 
-> > > > > > > I did crawl through all the other code and it looks like everything else
-> > > > > > > is unconditional locks. So looks all good and I didn't spot anything else
-> > > > > > > that seemed problematic.
-> > > > > > > 
-> > > > > > > Somewhat aside, I do wonder whether we really want to require callers to
-> > > > > > > hold the mmap lock, or whether with all the work towards lockless fastpath
-> > > > > > > that shouldn't instead just be an implementation detail.
-> > > > > > 
-> > > > > > We might be able to use the VMA lock in the future, but that will require
-> > > > > > GUP support and a bunch more. Until then, the mm_lock in read mode is
-> > > > > > required.
-> > > > > 
-> > > > > Yup. I also don't think we should try to improve before benchmarks show an
-> > > > > actual need. It's more about future proofing and making sure mmap_lock
-> > > > > doesn't leak into driver data structures that I'm worried about. Because
-> > > > > I've seen some hmm/gpu rfc patches that heavily relied on mmap_lock to
-> > > > > keep everything correct on the driver side, which is not a clean design.
-> > > > > 
-> > > > > > I was not able to convince myself that we'll really need the folio lock, but
-> > > > > > that's also a separate discussion.
-> > > > > 
-> > > > > This is way above my pay understanding of mm/ unfortunately.
-> > > > 
-> > > > I pondered this some more, and I think it's to make sure we get a stable
-> > > > reading of folio_mapcount() and are not racing with new rmaps being
-> > > > established. But I also got lost a few times in the maze ...
-> > > 
-> > > That mapcount handling is all messed up and I'll remove that along with
-> > > the rmap walk. Also, the folio lock does not stabilize the mapcount at all ...
+On Thu, Jan 30, 2025 at 05:11:49PM +1100, Alistair Popple wrote:
+> On Wed, Jan 29, 2025 at 12:54:02PM +0100, David Hildenbrand wrote:
+> > We require a writable PTE and only support anonymous folio: we can only
+> > have exactly one PTE pointing at that page, which we can just lookup
+> > using a folio walk, avoiding the rmap walk and the anon VMA lock.
 > > 
-> > Hm ... also rethinking this all, we don't need a lot of guarantees here.
-> > Anything userspace does that re-elevates the mapcount or otherwise could
-> > starve out make_device_exclusive is I think a case of "don't do that".
+> > So let's stop doing an rmap walk and perform a folio walk instead, so we
+> > can easily just modify a single PTE and avoid relying on rmap/mapcounts.
 > > 
-> > I think the only guarantee we need is that make_device_exclusive succeeds
-> > against other kernel stuff like thp/migration/ksm and all those things, at
-> > least reliably when you retry. And maybe also that concurrent
-> > make_device_exclusive calls don't starve each another but eventually get
-> > the job done (but only if it's the same owner).
+> > We now effectively work on a single PTE instead of multiple PTEs of
+> > a large folio, allowing for conversion of individual PTEs from
+> > non-exclusive to device-exclusive -- note that the other way always
+> > worked on single PTEs.
 > > 
-> > > Here is my understanding:
-> > > 
-> > > commit e2dca6db09186534c7e6082b77be6e17d8920f10
-> > > Author: David Hildenbrand <david@redhat.com>
-> > > Date:   Tue Jan 28 15:25:37 2025 +0100
-> > > 
-> > >      mm/memory: document restore_exclusive_pte()
-> > >      Let's document how this function is to be used, and why the requirement
-> > >      for the folio lock might maybe be dropped in the future.
-> > >      Signed-off-by: David Hildenbrand <david@redhat.com>
-> > > 
-> > > diff --git a/mm/memory.c b/mm/memory.c
-> > > index 46956994aaff..caaae8df11a9 100644
-> > > --- a/mm/memory.c
-> > > +++ b/mm/memory.c
-> > > @@ -718,6 +718,31 @@ struct folio *vm_normal_folio_pmd(struct vm_area_struct *vma,
-> > >   }
-> > >   #endif
-> > > +/**
-> > > + * restore_exclusive_pte - Restore a device-exclusive entry
-> > > + * @vma: VMA covering @address
-> > > + * @folio: the mapped folio
-> > > + * @page: the mapped folio page
-> > > + * @address: the virtual address
-> > > + * @ptep: PTE pointer into the locked page table mapping the folio page
-> > > + * @orig_pte: PTE value at @ptep
-> > > + *
-> > > + * Restore a device-exclusive non-swap entry to an ordinary present PTE.
-> > > + *
-> > > + * The folio and the page table must be locked, and MMU notifiers must have
-> > > + * been called to invalidate any (exclusive) device mappings. In case of
-> > > + * fork(), MMU_NOTIFY_PROTECTION_PAGE is triggered, and in case of a page
-> > > + * fault MMU_NOTIFY_EXCLUSIVE is triggered.
-> > > + *
-> > > + * Locking the folio makes sure that anybody who just converted the PTE to
-> > > + * a device-private entry can map it into the device, before unlocking it; so
-> > > + * the folio lock prevents concurrent conversion to device-exclusive.
-> > > + *
-> > > + * TODO: the folio lock does not protect against all cases of concurrent
-> > > + * page table modifications (e.g., MADV_DONTNEED, mprotect), so device drivers
-> > > + * must already use MMU notifiers to sync against any concurrent changes
-> > > + * Maybe the requirement for the folio lock can be dropped in the future.
-> > 
-> > Hm yeah I was a bit confused why this would work at first. But since we
-> > break cow with FOLL_WRITE there shouldn't be any other mappings around.
-> > Therefore relying on the mmu notifier for that mm_struct is enough, and we
-> > don't need to hold the folio_lock in callers.
+> > We can drop the MMU_NOTIFY_EXCLUSIVE MMU notifier call and document why
+> > that is not required: GUP will already take care of the
+> > MMU_NOTIFY_EXCLUSIVE call if required (there is already a device-exclusive
+> > entry) when not finding a present PTE and having to trigger a fault and
+> > ending up in remove_device_exclusive_entry().
 > 
-> Right; the devil is in the detail here; I looked at the SVM code and it
-> registers an MMU notifier around that code to catch any invalidations that
-> are happening while mapping the page. And it has another one to handle
-> invalidations in general. I did not completely digest why two notifiers are
-> required ... there likely is a good reason.
+> I will have to look at this a bit more closely tomorrow but this doesn't seem
+> right to me. We may be transitioning from a present PTE (ie. a writable
+> anonymous mapping) to a non-present PTE (ie. a device-exclusive entry) and
+> therefore any secondary processors (eg. other GPUs, iommus, etc.) will need to
+> update their copies of the PTE. So I think the notifier call is needed.
 
-At least as a fallback you need a notifier for exactly only the fault, to
-make sure you don't retry due to spurious invalidations. Otherwise if
-userspace is hammering an adjacent page from the cpu we would not make
-forward progress, and that's a correctness issue.
+I guess this is a question of semantics we want, for multiple gpus do we
+require that device-exclusive also excludes other gpus or not. I'm leaning
+towards agreeing with you here.
 
-Now always inserting a new notifier for every fault in all cases isn't
-great because it incurs a stall. But I discussed this issue with Thomas
-Hellstrom a while back and there's a bunch of tricks we could deploy if
-this ever becomes a performance issue.
+> > Note that the PTE is
+> > always writable, and we can always create a writable-device-exclusive
+> > entry.
+> > 
+> > With this change, device-exclusive is fully compatible with THPs /
+> > large folios. We still require PMD-sized THPs to get PTE-mapped, and
+> > supporting PMD-mapped THP (without the PTE-remapping) is a different
+> > endeavour that might not be worth it at this point.
 
-So this all looks ok to me.
--Sima
+I'm not sure we actually want hugepages for device exclusive, since it has
+an impact on what's allowed and what not. If we only ever do 4k entries
+then userspace can assume that as long atomics are separated by a 4k page
+there's no issue when both the gpu and cpu hammer on them. If we try to
+keep thp entries then suddenly a workload that worked before will result
+in endless ping-pong between gpu and cpu because the separate atomic
+counters (or whatever) now all sit in the same 2m page.
+
+So going with thp might result in userspace having to spread out atomics
+even more, which is just wasting memory and not saving any tlb entries
+since often you don't need that many.
+
+tldr; I think not supporting thp entries for device exclusive is a
+feature, not a bug.
+
+Cheers, Sima
+
+> > This gets rid of the "folio_mapcount()" usage and let's us fix ordinary
+> > rmap walks (migration/swapout) next. Spell out that messing with the
+> > mapcount is wrong and must be fixed.
+> > 
+> > Signed-off-by: David Hildenbrand <david@redhat.com>
+> > ---
+> >  mm/rmap.c | 188 ++++++++++++++++--------------------------------------
+> >  1 file changed, 55 insertions(+), 133 deletions(-)
+> > 
+> > diff --git a/mm/rmap.c b/mm/rmap.c
+> > index 676df4fba5b0..49ffac6d27f8 100644
+> > --- a/mm/rmap.c
+> > +++ b/mm/rmap.c
+> > @@ -2375,131 +2375,6 @@ void try_to_migrate(struct folio *folio, enum ttu_flags flags)
+> >  }
+> >  
+> >  #ifdef CONFIG_DEVICE_PRIVATE
+> > -struct make_exclusive_args {
+> > -	struct mm_struct *mm;
+> > -	unsigned long address;
+> > -	void *owner;
+> > -	bool valid;
+> > -};
+> > -
+> > -static bool page_make_device_exclusive_one(struct folio *folio,
+> > -		struct vm_area_struct *vma, unsigned long address, void *priv)
+> > -{
+> > -	struct mm_struct *mm = vma->vm_mm;
+> > -	DEFINE_FOLIO_VMA_WALK(pvmw, folio, vma, address, 0);
+> > -	struct make_exclusive_args *args = priv;
+> > -	pte_t pteval;
+> > -	struct page *subpage;
+> > -	bool ret = true;
+> > -	struct mmu_notifier_range range;
+> > -	swp_entry_t entry;
+> > -	pte_t swp_pte;
+> > -	pte_t ptent;
+> > -
+> > -	mmu_notifier_range_init_owner(&range, MMU_NOTIFY_EXCLUSIVE, 0,
+> > -				      vma->vm_mm, address, min(vma->vm_end,
+> > -				      address + folio_size(folio)),
+> > -				      args->owner);
+> > -	mmu_notifier_invalidate_range_start(&range);
+> > -
+> > -	while (page_vma_mapped_walk(&pvmw)) {
+> > -		/* Unexpected PMD-mapped THP? */
+> > -		VM_BUG_ON_FOLIO(!pvmw.pte, folio);
+> > -
+> > -		ptent = ptep_get(pvmw.pte);
+> > -		if (!pte_present(ptent)) {
+> > -			ret = false;
+> > -			page_vma_mapped_walk_done(&pvmw);
+> > -			break;
+> > -		}
+> > -
+> > -		subpage = folio_page(folio,
+> > -				pte_pfn(ptent) - folio_pfn(folio));
+> > -		address = pvmw.address;
+> > -
+> > -		/* Nuke the page table entry. */
+> > -		flush_cache_page(vma, address, pte_pfn(ptent));
+> > -		pteval = ptep_clear_flush(vma, address, pvmw.pte);
+> > -
+> > -		/* Set the dirty flag on the folio now the pte is gone. */
+> > -		if (pte_dirty(pteval))
+> > -			folio_mark_dirty(folio);
+> > -
+> > -		/*
+> > -		 * Check that our target page is still mapped at the expected
+> > -		 * address.
+> > -		 */
+> > -		if (args->mm == mm && args->address == address &&
+> > -		    pte_write(pteval))
+> > -			args->valid = true;
+> > -
+> > -		/*
+> > -		 * Store the pfn of the page in a special migration
+> > -		 * pte. do_swap_page() will wait until the migration
+> > -		 * pte is removed and then restart fault handling.
+> > -		 */
+> > -		if (pte_write(pteval))
+> > -			entry = make_writable_device_exclusive_entry(
+> > -							page_to_pfn(subpage));
+> > -		else
+> > -			entry = make_readable_device_exclusive_entry(
+> > -							page_to_pfn(subpage));
+> > -		swp_pte = swp_entry_to_pte(entry);
+> > -		if (pte_soft_dirty(pteval))
+> > -			swp_pte = pte_swp_mksoft_dirty(swp_pte);
+> > -		if (pte_uffd_wp(pteval))
+> > -			swp_pte = pte_swp_mkuffd_wp(swp_pte);
+> > -
+> > -		set_pte_at(mm, address, pvmw.pte, swp_pte);
+> > -
+> > -		/*
+> > -		 * There is a reference on the page for the swap entry which has
+> > -		 * been removed, so shouldn't take another.
+> > -		 */
+> > -		folio_remove_rmap_pte(folio, subpage, vma);
+> > -	}
+> > -
+> > -	mmu_notifier_invalidate_range_end(&range);
+> > -
+> > -	return ret;
+> > -}
+> > -
+> > -/**
+> > - * folio_make_device_exclusive - Mark the folio exclusively owned by a device.
+> > - * @folio: The folio to replace page table entries for.
+> > - * @mm: The mm_struct where the folio is expected to be mapped.
+> > - * @address: Address where the folio is expected to be mapped.
+> > - * @owner: passed to MMU_NOTIFY_EXCLUSIVE range notifier callbacks
+> > - *
+> > - * Tries to remove all the page table entries which are mapping this
+> > - * folio and replace them with special device exclusive swap entries to
+> > - * grant a device exclusive access to the folio.
+> > - *
+> > - * Context: Caller must hold the folio lock.
+> > - * Return: false if the page is still mapped, or if it could not be unmapped
+> > - * from the expected address. Otherwise returns true (success).
+> > - */
+> > -static bool folio_make_device_exclusive(struct folio *folio,
+> > -		struct mm_struct *mm, unsigned long address, void *owner)
+> > -{
+> > -	struct make_exclusive_args args = {
+> > -		.mm = mm,
+> > -		.address = address,
+> > -		.owner = owner,
+> > -		.valid = false,
+> > -	};
+> > -	struct rmap_walk_control rwc = {
+> > -		.rmap_one = page_make_device_exclusive_one,
+> > -		.done = folio_not_mapped,
+> > -		.anon_lock = folio_lock_anon_vma_read,
+> > -		.arg = &args,
+> > -	};
+> > -
+> > -	rmap_walk(folio, &rwc);
+> > -
+> > -	return args.valid && !folio_mapcount(folio);
+> > -}
+> > -
+> >  /**
+> >   * make_device_exclusive() - Mark an address for exclusive use by a device
+> >   * @mm: mm_struct of associated target process
+> > @@ -2530,9 +2405,12 @@ static bool folio_make_device_exclusive(struct folio *folio,
+> >  struct page *make_device_exclusive(struct mm_struct *mm, unsigned long addr,
+> >  		void *owner, struct folio **foliop)
+> >  {
+> > -	struct folio *folio;
+> > +	struct folio *folio, *fw_folio;
+> > +	struct vm_area_struct *vma;
+> > +	struct folio_walk fw;
+> >  	struct page *page;
+> > -	long npages;
+> > +	swp_entry_t entry;
+> > +	pte_t swp_pte;
+> >  
+> >  	mmap_assert_locked(mm);
+> >  
+> > @@ -2540,12 +2418,16 @@ struct page *make_device_exclusive(struct mm_struct *mm, unsigned long addr,
+> >  	 * Fault in the page writable and try to lock it; note that if the
+> >  	 * address would already be marked for exclusive use by the device,
+> >  	 * the GUP call would undo that first by triggering a fault.
+> > +	 *
+> > +	 * If any other device would already map this page exclusively, the
+> > +	 * fault will trigger a conversion to an ordinary
+> > +	 * (non-device-exclusive) PTE and issue a MMU_NOTIFY_EXCLUSIVE.
+> >  	 */
+> > -	npages = get_user_pages_remote(mm, addr, 1,
+> > -				       FOLL_GET | FOLL_WRITE | FOLL_SPLIT_PMD,
+> > -				       &page, NULL);
+> > -	if (npages != 1)
+> > -		return ERR_PTR(npages);
+> > +	page = get_user_page_vma_remote(mm, addr,
+> > +					FOLL_GET | FOLL_WRITE | FOLL_SPLIT_PMD,
+> > +					&vma);
+> > +	if (IS_ERR(page))
+> > +		return page;
+> >  	folio = page_folio(page);
+> >  
+> >  	if (!folio_test_anon(folio) || folio_test_hugetlb(folio)) {
+> > @@ -2558,11 +2440,51 @@ struct page *make_device_exclusive(struct mm_struct *mm, unsigned long addr,
+> >  		return ERR_PTR(-EBUSY);
+> >  	}
+> >  
+> > -	if (!folio_make_device_exclusive(folio, mm, addr, owner)) {
+> > +	/*
+> > +	 * Let's do a second walk and make sure we still find the same page
+> > +	 * mapped writable. If we don't find what we expect, we will trigger
+> > +	 * GUP again to fix it up. Note that a page of an anonymous folio can
+> > +	 * only be mapped writable using exactly one page table mapping
+> > +	 * ("exclusive"), so there cannot be other mappings.
+> > +	 */
+> > +	fw_folio = folio_walk_start(&fw, vma, addr, 0);
+> > +	if (fw_folio != folio || fw.page != page ||
+> > +	    fw.level != FW_LEVEL_PTE || !pte_write(fw.pte)) {
+> > +		if (fw_folio)
+> > +			folio_walk_end(&fw, vma);
+> >  		folio_unlock(folio);
+> >  		folio_put(folio);
+> >  		return ERR_PTR(-EBUSY);
+> >  	}
+> > +
+> > +	/* Nuke the page table entry so we get the uptodate dirty bit. */
+> > +	flush_cache_page(vma, addr, page_to_pfn(page));
+> > +	fw.pte = ptep_clear_flush(vma, addr, fw.ptep);
+> > +
+> > +	/* Set the dirty flag on the folio now the pte is gone. */
+> > +	if (pte_dirty(fw.pte))
+> > +		folio_mark_dirty(folio);
+> > +
+> > +	/*
+> > +	 * Store the pfn of the page in a special device-exclusive non-swap pte.
+> > +	 * do_swap_page() will trigger the conversion back while holding the
+> > +	 * folio lock.
+> > +	 */
+> > +	entry = make_writable_device_exclusive_entry(page_to_pfn(page));
+> > +	swp_pte = swp_entry_to_pte(entry);
+> > +	if (pte_soft_dirty(fw.pte))
+> > +		swp_pte = pte_swp_mksoft_dirty(swp_pte);
+> > +	/* The pte is writable, uffd-wp does not apply. */
+> > +	set_pte_at(mm, addr, fw.ptep, swp_pte);
+> > +
+> > +	/*
+> > +	 * TODO: The device-exclusive non-swap PTE holds a folio reference but
+> > +	 * does not count as a mapping (mapcount), which is wrong and must be
+> > +	 * fixed, otherwise RMAP walks don't behave as expected.
+> > +	 */
+> > +	folio_remove_rmap_pte(folio, page, vma);
+> > +
+> > +	folio_walk_end(&fw, vma);
+> >  	*foliop = folio;
+> >  	return page;
+> >  }
+> > -- 
+> > 2.48.1
+> > 
+
 -- 
 Simona Vetter
 Software Engineer, Intel Corporation
