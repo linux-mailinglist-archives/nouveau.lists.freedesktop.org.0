@@ -2,63 +2,63 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id B235BA2B83F
-	for <lists+nouveau@lfdr.de>; Fri,  7 Feb 2025 02:44:29 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 01A5EA2B83B
+	for <lists+nouveau@lfdr.de>; Fri,  7 Feb 2025 02:44:26 +0100 (CET)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 662D610E9DB;
-	Fri,  7 Feb 2025 01:44:25 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id A3BD910E9D7;
+	Fri,  7 Feb 2025 01:44:24 +0000 (UTC)
 Authentication-Results: gabe.freedesktop.org;
-	dkim=permerror (0-bit key) header.d=ffwll.ch header.i=@ffwll.ch header.b="gELzBhjP";
+	dkim=permerror (0-bit key) header.d=ffwll.ch header.i=@ffwll.ch header.b="Yu0cvH1e";
 	dkim-atps=neutral
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from mail-wm1-f52.google.com (mail-wm1-f52.google.com
- [209.85.128.52])
- by gabe.freedesktop.org (Postfix) with ESMTPS id D143410E969
- for <nouveau@lists.freedesktop.org>; Thu, 30 Jan 2025 13:29:25 +0000 (UTC)
-Received: by mail-wm1-f52.google.com with SMTP id
- 5b1f17b1804b1-43675b1155bso9135895e9.2
- for <nouveau@lists.freedesktop.org>; Thu, 30 Jan 2025 05:29:25 -0800 (PST)
+Received: from mail-wr1-f52.google.com (mail-wr1-f52.google.com
+ [209.85.221.52])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id D2F9E10E96B
+ for <nouveau@lists.freedesktop.org>; Thu, 30 Jan 2025 13:31:53 +0000 (UTC)
+Received: by mail-wr1-f52.google.com with SMTP id
+ ffacd0b85a97d-3863c36a731so652634f8f.1
+ for <nouveau@lists.freedesktop.org>; Thu, 30 Jan 2025 05:31:53 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=ffwll.ch; s=google; t=1738243764; x=1738848564; darn=lists.freedesktop.org; 
+ d=ffwll.ch; s=google; t=1738243912; x=1738848712; darn=lists.freedesktop.org; 
  h=in-reply-to:content-disposition:mime-version:references
  :mail-followup-to:message-id:subject:cc:to:from:date:from:to:cc
  :subject:date:message-id:reply-to;
- bh=6CwN17MyPFKvtC6C01wmuj8jHUuL8qlluAzeR7k1VHs=;
- b=gELzBhjP5rj9u0V3C3KxvU1RPhE1C3tEK4B5kyz4ACcUljKWwZuFhPZZCPQLF1HiP0
- kWJM6i9nqdm4t5qoLsplKzNKMe9DMJZjYbkfj7r+N18RbSp6UBNpcQKqNz+5anBiCGxl
- yUGtdjXq0LWYngu0zIEFcFCeRp3AyWo37fKMI=
+ bh=+HfypuIQboTZvpun4E8zdORtqN9UpDgcxhaup4sp9X8=;
+ b=Yu0cvH1eMM2R46+xVd1vFRtydP/K21WQMCvHXgJE3pRuojPuPrtZbtZgr6qDrSj4/T
+ vkGy4E8A3RfcvQTSmLl9od3uAn8EQjACDLFR6OG6PgNRgNoNGKWGuTKll9+S6hmIfPMj
+ wAmzNcjy13sx+uCBCCyoZKH24Sbo/nR0Z2NU4=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1738243764; x=1738848564;
+ d=1e100.net; s=20230601; t=1738243912; x=1738848712;
  h=in-reply-to:content-disposition:mime-version:references
  :mail-followup-to:message-id:subject:cc:to:from:date
  :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=6CwN17MyPFKvtC6C01wmuj8jHUuL8qlluAzeR7k1VHs=;
- b=ZeppoBjjxLsjOou06/l7WPe2v4G6Doj2yyXioyRrsayI8y+x/PHC5fUbllEUjJD7pT
- rk0xeBTcQEBt8ErAOi7H4JNnZzA4W9EMkkkB6oUZCQ7BbFDWYN9H4TKjvDyEkGRy+LF8
- 1CgS5/DX/wj1aJVQ9Z4gbLf6x33H9omvhjLEBE3Br0tmhtn1uGB2AePPRsrmRNrALfLv
- ABaYXLZdZDXSgbO6IeXlOf5b5SC1kpcGD0MmeUJ6ObY2uR+oXqGinTavAxqmcSpkX9qI
- t4rrPIZljVr09PQZfsThu2eTToIH3Q5UkYpkZ67eN9NTY4BVkbFMtbMPlTQxeiHOzoh5
- /csA==
+ bh=+HfypuIQboTZvpun4E8zdORtqN9UpDgcxhaup4sp9X8=;
+ b=cQ+ssSrHy1g3g4Cm8sUAopjioWfiFfZeFV9ZppCRdcf5KXxsUtO4kR/GGkrhZfObrD
+ BfFOpq1RJ7kXkCHvUlhc8n3PQElN4bsgV1o2fjxCetQVoqgLN7bNymEt7ZLevG2dPkiL
+ VTE90lc/L99qalwIWqm7c8jLeT1LdnfqYnGHhGarU+ZBpkxlXFIvyZv3Os/eCgnDAwla
+ 28Vm9XlpOPyHdyzUcNQVzFtVHljvJdGasbBGdKH1G3rkaOkVdUCAb51RT+h9EJ+qDeKm
+ 7tWf4jC4cIDcFGuOlfh3WSl0OmQnG5tFmQOvoejHLilw4BIJerxpANuueOzMJHp8Lv0c
+ IHiQ==
 X-Forwarded-Encrypted: i=1;
- AJvYcCWzsSYCmHsDmbg9Cq3W+6FRyPX2Y/8TPT9h1gG0AO7OPhijmqCgYiAlUkLzm7MIx6Y7jItAmZDZ@lists.freedesktop.org
-X-Gm-Message-State: AOJu0YzNEX8SUmR09R/TorMeHjRFELwd1LZehX+RwnyoTFBpFSIraAT2
- xly8xrXB983UQsWVf82lxqK9kqx1CEKiXVE2gVhQyPE/h6wgI7Zrb42UMX1uvKQ=
-X-Gm-Gg: ASbGnctBAz3mCaXGEc+6msV/Pqv/v3ylMFqi9hagLpwCf8EeKnMANT4ld2wUQOWx1h4
- SGqzm0VX019sGjWtJSYN9/EejBM3nukAdavKgfeJPF/Dll3wbt4YXx9NDv8tyXcfFO/SqemIzs9
- krdF3S3/XS5RNSsO6X7381YlH7OFBR//V2Z8DirlujlibhBY99e94FYWm/d33HaGxVVi0PiOVAT
- zRM7Gbpi8LsHNw43slTmRQOlPn0gzg5mb6vMCHjLh2YU6V1f72rb59/gXl2kIi/Nvgs0ELleKh+
- ccbdqJ+3MFHt7AD6c8ZwA+NDdRI=
-X-Google-Smtp-Source: AGHT+IHdrFYxzPnGyvPL9diVxB5aO5ood/KWzCJUp9hx1GIy5lqLPzKFdL5gi+Wc6C+yM8JgD/EQ9Q==
-X-Received: by 2002:a05:6000:2ce:b0:38c:3eab:2e13 with SMTP id
- ffacd0b85a97d-38c52093f22mr6600046f8f.46.1738243764347; 
- Thu, 30 Jan 2025 05:29:24 -0800 (PST)
+ AJvYcCUJFH3KKBJ3SRte/qdspStHFV4fCD+FIEuOiH+nTDO1Py9uvIQyPzddaTtmzUNJQiUN3avtAHIp@lists.freedesktop.org
+X-Gm-Message-State: AOJu0YwVVQtRKfSqI0XdY1XXV7l6Lam3VUen/Ci2QkmEObyvK5Og2JBA
+ Xot0q/rmQHu0EOAPv4hewQG7uaduwxzxOfFnIz4xJ0CANmixKtPMNNDb01J5Zjs=
+X-Gm-Gg: ASbGncuS3QutJ87xReQRFfi21/Hky9KgmcEdRewbuIrTmZ4VEfhlTkNsRoHocBoYCgZ
+ l6JtJjUzPyxR2UekayxfcQaEL1WxELMRh/bsmUq9FpZz7Hvs2IqCb2KplsI78KrCO5U4ppgf4V5
+ OsET0jZgnNT6VtPPGpv8rlKKYA0TfVzcFfrcMd0z0VQuHfh5Vawmt2MSoRYGhCddAJEbBENoZqF
+ zs7zkTRAGInrhKV+kUOcGuWNhEUt1oymNK96MvhBg9kwyaOImgsXQhYU0rPWUfznUldxrJ3E8Pv
+ L3wDCgkLFm0K99u/A52mhWiM5rU=
+X-Google-Smtp-Source: AGHT+IFMswZ2dc1PUK9As+fnPUJ+YPXY0lrKZKSyFsUE3i9ImUyvh7RLGwzxoWBETKt22tExTSNKvA==
+X-Received: by 2002:a5d:6c65:0:b0:38a:4b8a:e477 with SMTP id
+ ffacd0b85a97d-38c51969b28mr5731448f8f.22.1738243912301; 
+ Thu, 30 Jan 2025 05:31:52 -0800 (PST)
 Received: from phenom.ffwll.local ([2a02:168:57f4:0:5485:d4b2:c087:b497])
  by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-38c5c13a0efsm2028563f8f.60.2025.01.30.05.29.22
+ ffacd0b85a97d-38c5c1cf831sm2033238f8f.90.2025.01.30.05.31.51
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 30 Jan 2025 05:29:23 -0800 (PST)
-Date: Thu, 30 Jan 2025 14:29:20 +0100
+ Thu, 30 Jan 2025 05:31:51 -0800 (PST)
+Date: Thu, 30 Jan 2025 14:31:49 +0100
 From: Simona Vetter <simona.vetter@ffwll.ch>
 To: David Hildenbrand <david@redhat.com>
 Cc: Alistair Popple <apopple@nvidia.com>, linux-kernel@vger.kernel.org,
@@ -76,9 +76,8 @@ Cc: Alistair Popple <apopple@nvidia.com>, linux-kernel@vger.kernel.org,
  Vlastimil Babka <vbabka@suse.cz>, Jann Horn <jannh@google.com>,
  Pasha Tatashin <pasha.tatashin@soleen.com>,
  Peter Xu <peterx@redhat.com>, Jason Gunthorpe <jgg@nvidia.com>
-Subject: Re: [PATCH v1 2/4] mm/mmu_notifier: drop owner from
- MMU_NOTIFY_EXCLUSIVE
-Message-ID: <Z5t-sFymrz5kFafV@phenom.ffwll.local>
+Subject: Re: [PATCH v1 4/4] mm/memory: document restore_exclusive_pte()
+Message-ID: <Z5t_RebEx6Mj-KlT@phenom.ffwll.local>
 Mail-Followup-To: David Hildenbrand <david@redhat.com>,
  Alistair Popple <apopple@nvidia.com>, linux-kernel@vger.kernel.org,
  linux-doc@vger.kernel.org, dri-devel@lists.freedesktop.org,
@@ -96,13 +95,13 @@ Mail-Followup-To: David Hildenbrand <david@redhat.com>,
  Pasha Tatashin <pasha.tatashin@soleen.com>,
  Peter Xu <peterx@redhat.com>, Jason Gunthorpe <jgg@nvidia.com>
 References: <20250129115803.2084769-1-david@redhat.com>
- <20250129115803.2084769-3-david@redhat.com>
- <h4dnoixvp2kjeao6mzcpze4zx6t34ebpltqadkjl5zxcjhddkf@lbzo2yhzu5sz>
- <eab05949-efc8-4c04-ace1-b4435ec894e6@redhat.com>
+ <20250129115803.2084769-5-david@redhat.com>
+ <7vejbjs7btkof4iguvn3nqvozxqpnzbymxbumd7pant4zi4ac4@3ozuzfzsm5tp>
+ <cfc4f8ac-80c4-472f-85fc-36ffcd212441@redhat.com>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
-In-Reply-To: <eab05949-efc8-4c04-ace1-b4435ec894e6@redhat.com>
+In-Reply-To: <cfc4f8ac-80c4-472f-85fc-36ffcd212441@redhat.com>
 X-Operating-System: Linux phenom 6.12.11-amd64 
 X-Mailman-Approved-At: Fri, 07 Feb 2025 01:42:11 +0000
 X-BeenThere: nouveau@lists.freedesktop.org
@@ -119,24 +118,33 @@ List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-On Thu, Jan 30, 2025 at 10:28:00AM +0100, David Hildenbrand wrote:
-> On 30.01.25 06:34, Alistair Popple wrote:
-> > Looking at hmm_test I see that doesn't use the sequence counter to ensure
-> > the PTE remains valid whilst it is mapped. I think that is probably wrong, so
-> > apologies if that lead you astray.
+On Thu, Jan 30, 2025 at 10:37:06AM +0100, David Hildenbrand wrote:
+> On 30.01.25 01:27, Alistair Popple wrote:
+> > On Wed, Jan 29, 2025 at 12:58:02PM +0100, David Hildenbrand wrote:
+> > > Let's document how this function is to be used, and why the requirement
+> > > for the folio lock might maybe be dropped in the future.
+> > 
+> > Sorry, only just catching up on your other thread. The folio lock was to ensure
+> > the GPU got a chance to make forward progress by mapping the page. Without it
+> > the CPU could immediately invalidate the entry before the GPU had a chance to
+> > retry the fault.
+> > > Obviously performance wise having such thrashing is terrible, so should
+> > really be avoided by userspace, but the lock at least allowed such programs
+> > to complete.
 > 
-> Yes, the hmm_test does not completely follow the same model the nouveau
-> implementation does; so it might not be completely correct.
+> Thanks for the clarification. So it's relevant that the MMU notifier in
+> remove_device_exclusive_entry() is sent after taking the folio lock.
+> 
+> However, as soon as we drop the folio lock, remove_device_exclusive_entry()
+> will become active, lock the folio and trigger the MMU notifier.
+> 
+> So the time it is actually mapped into the device is rather
 
-But unrelated but just crossed my mind:
-
-I guess another crucial difference is that the hw (probably, not sure)
-will restart the fault if we don't repair it to its liking. So the
-hmm-test does need some kind of retry loop too somewhere to match that.
-But might be good to also still land some of the other improvements
-discussed in these threads to make make_device_exclusive a bit more
-reliable instead of relying on busy-looping throug the hw fault handler
-for everything.
+Looks like you cut off a bit here (or mail transport did that somewhere),
+but see my other reply I don't think this is a legit use-case. So we don't
+have to worry. Well beyond documenting that if userspace concurrently thrashes
+the same page with both device atomics and cpu access it will stall real
+bad.
 -Sima
 -- 
 Simona Vetter
