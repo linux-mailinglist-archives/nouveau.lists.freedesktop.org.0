@@ -2,81 +2,83 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id 1BBFDA22B0D
-	for <lists+nouveau@lfdr.de>; Thu, 30 Jan 2025 10:59:00 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 40325A22C29
+	for <lists+nouveau@lfdr.de>; Thu, 30 Jan 2025 12:08:51 +0100 (CET)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 8AFA910E91F;
-	Thu, 30 Jan 2025 09:58:58 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id EBA2210E938;
+	Thu, 30 Jan 2025 11:08:49 +0000 (UTC)
 Authentication-Results: gabe.freedesktop.org;
-	dkim=pass (1024-bit key; unprotected) header.d=redhat.com header.i=@redhat.com header.b="bNoSLVwM";
+	dkim=pass (1024-bit key; unprotected) header.d=redhat.com header.i=@redhat.com header.b="bJr3M7nH";
 	dkim-atps=neutral
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
 Received: from us-smtp-delivery-124.mimecast.com
  (us-smtp-delivery-124.mimecast.com [170.10.129.124])
- by gabe.freedesktop.org (Postfix) with ESMTPS id F00C610E91F
- for <nouveau@lists.freedesktop.org>; Thu, 30 Jan 2025 09:58:57 +0000 (UTC)
+ by gabe.freedesktop.org (Postfix) with ESMTPS id A89F710E938
+ for <nouveau@lists.freedesktop.org>; Thu, 30 Jan 2025 11:08:48 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1738231136;
+ s=mimecast20190719; t=1738235327;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:mime-version:mime-version:content-type:content-type:
  content-transfer-encoding:content-transfer-encoding:
  in-reply-to:in-reply-to:references:references:autocrypt:autocrypt;
- bh=FUEZfcfVLbYRN/NAsi1VmnFF+mk13nz+2s9oetN07Fc=;
- b=bNoSLVwMrec6Sq2T1Y8BBV3etDtpKlZHT3RU2miIrJcHeYDlWHwEJ3ekETxVL+ZNdAKzyy
- iG+tm9VAhhID877iRPTabQAAHEOb3WHbeWVwMSgjE4FGezYc14/lT9Vcar0cgJxHQeul4r
- XX9aLQ7BGzLDIxJtHv/Jwc1FiRVAg4g=
-Received: from mail-wm1-f70.google.com (mail-wm1-f70.google.com
- [209.85.128.70]) by relay.mimecast.com with ESMTP with STARTTLS
+ bh=hRyAgd3cBvQHsVuEfrhD/VealxKoGbpl8JEiOYT4zok=;
+ b=bJr3M7nH9opKHZI/HI52rkkAAy/CuwH6po+BBewvAVmTHCnqA8tw/XA1jPAanbxNegxdXJ
+ yOXeaSbIkyC55wgrgYc286qECtd/eGBX0f2nZCD7cPDnSMPNIhaTGLMSf5ddssAjDS1E2p
+ WusX4COqWde1nVlbE3ADFYGF4opd7r0=
+Received: from mail-wr1-f72.google.com (mail-wr1-f72.google.com
+ [209.85.221.72]) by relay.mimecast.com with ESMTP with STARTTLS
  (version=TLSv1.3, cipher=TLS_AES_256_GCM_SHA384) id
- us-mta-513-CieFqeomPpSwB2TcxciY8A-1; Thu, 30 Jan 2025 04:58:55 -0500
-X-MC-Unique: CieFqeomPpSwB2TcxciY8A-1
-X-Mimecast-MFC-AGG-ID: CieFqeomPpSwB2TcxciY8A
-Received: by mail-wm1-f70.google.com with SMTP id
- 5b1f17b1804b1-4361eb83f46so3922015e9.3
- for <nouveau@lists.freedesktop.org>; Thu, 30 Jan 2025 01:58:55 -0800 (PST)
+ us-mta-549-BEJwpqytOa6wJ_hE-ukdpA-1; Thu, 30 Jan 2025 06:08:46 -0500
+X-MC-Unique: BEJwpqytOa6wJ_hE-ukdpA-1
+X-Mimecast-MFC-AGG-ID: BEJwpqytOa6wJ_hE-ukdpA
+Received: by mail-wr1-f72.google.com with SMTP id
+ ffacd0b85a97d-3862f3ccf4fso277456f8f.0
+ for <nouveau@lists.freedesktop.org>; Thu, 30 Jan 2025 03:08:46 -0800 (PST)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1738231134; x=1738835934;
+ d=1e100.net; s=20230601; t=1738235325; x=1738840125;
  h=content-transfer-encoding:in-reply-to:organization:autocrypt
  :content-language:from:references:to:subject:user-agent:mime-version
  :date:message-id:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to;
- bh=FUEZfcfVLbYRN/NAsi1VmnFF+mk13nz+2s9oetN07Fc=;
- b=TXm7ip1nmqy2ngSZqh7uMrxNDjsihqY/a78f0zNLXfcvhRD0xKh8qc7M52q1RW2c31
- mXYDnmG9HNXyvgLT2M6WNwob0eZizD9gqOeEp2SL27ORQDt4I9XlfPpNvVMMlv7h8XQd
- EHJAv6tjimG+A1Z/Q6EY2+XUBanQcBS1DuQdZh/3+QgtTuNmbghulWZBFMiLqU9NIT3G
- dVjBzN5IOiHjD9AkFPX7PntoTPHGupxjYykPzaKGXC7UeYjcRGM2aE3oHOrTRtRDsvlB
- GKUph5cnVvuKes/ORSyoVERLV1eMOKRydEWqgXG2gljSLpqfCiFLm8ECDNBzuCjBIW3B
- S1OA==
+ bh=hRyAgd3cBvQHsVuEfrhD/VealxKoGbpl8JEiOYT4zok=;
+ b=MSeG1wi2gdNcM9zbGk7pLuZkHt5UeTkjaxp6XZFPc8b/iKe3c5kAMIbu74mp6RKUqi
+ wKJGur7mVF2lvQlAQtWCuOT1bXE4D7Ijv4tEagguwZ1pX6WwbzSVUR1kX5zRkAx793Q0
+ oH1T5dyGXnW1OVUTnKkplf3zatN9g1wMvdnPVHMGTohRYk5SBdnz4XRIvQwrgV9KBuzw
+ v4DpSjCQBdqzBGXRO8Ylt1P88t3mTQ7LX2ogzVFAW4WoQML3Kuma4x8aRuSJluRY2zqW
+ XXMfUZgJix3UORyOvfGGqyqOLvOXi2GghWwtG11Qx4fmLxkeD8LNFXT68Q2lfb6VAtuB
+ Fg8w==
 X-Forwarded-Encrypted: i=1;
- AJvYcCW09JxbSqL0E/zroM4h3NcsaX9LYSyiDXbFI1s7zxfRNqaE/iKYqD2WCkJur2AEzgKhXoK16W5u@lists.freedesktop.org
-X-Gm-Message-State: AOJu0YxzaoDYXjhVTTBxumQQdrizRZMmF6uk3QTLvcD2BC0dlXRFNlPJ
- gXwBYacYnZKDCWQiNLiqqWKOCFuyzDwX9lZlIoUQ4ggWLXSDdtPI0iGgrZDjcOXLoi0zsptNde9
- rmIQ5n7SKj96lZX4nz/ggPt6Hct+KNetjQ0oTuo5lFZ+RjlabWer5fCAdDehkMeA=
-X-Gm-Gg: ASbGnctoquEXFjyy6lq0wiKO3jWNh0VwvPo3N0shprZKQSChpNAAzAMrRl5ggIcna4V
- c3DP5iRdB0So5G41nQvDs27mdcYw43M4xEwr2D0xndZowmMl1F/hm3Cg30ZkTKFGRBI2sHCKMIj
- DErWTJZ70tM1UQq1YbO7Wo5/dbWiQoG7wDH2LLD0X4YYXq8dHQAV7v3Ty/j9Q85iFyMX5j5nqWc
- wro4jhJmuqx/HdXECW5aW2Gr3cGzkkS5JgJLhbm7NXsxMXVnVJj3hf+TjzI00BjjQytpoDqoMgA
- 5bYFea0A7DFTQyqDXQ00LOXWQXHAqV3JU8LzzA9n0UPO
-X-Received: by 2002:a05:600c:4f83:b0:436:713b:cb31 with SMTP id
- 5b1f17b1804b1-438dc3a904cmr53453035e9.3.1738231134312; 
- Thu, 30 Jan 2025 01:58:54 -0800 (PST)
-X-Google-Smtp-Source: AGHT+IEqgIQqKr43IrI1fX0tpLwZlRgUsdNhX+UslE5goA732BQskQeY8sZku5RbN2jwnY4mL7r0Gw==
-X-Received: by 2002:a05:600c:4f83:b0:436:713b:cb31 with SMTP id
- 5b1f17b1804b1-438dc3a904cmr53452735e9.3.1738231133913; 
- Thu, 30 Jan 2025 01:58:53 -0800 (PST)
-Received: from ?IPV6:2a01:599:904:96e0:a245:aa9f:6c57:eb41?
- ([2a01:599:904:96e0:a245:aa9f:6c57:eb41])
+ AJvYcCV2mZTbCOl9H8OMQPjB2uefSNbQJT+CL8reFem5XgYjgyehd7qkHWhwdTr6uMQj1/VlVbA8hZUo@lists.freedesktop.org
+X-Gm-Message-State: AOJu0YxWmpiVicX6Pk2PfBLD+8L6WgZltBWu4YNSPi8q9weZfYqWLAYx
+ ZH2NlzLKyd3AfW9poix+LCcra3Zm13EqDuDJbr7GQi62+YemCf6FswCFgi5VeQ4bQUR05br97Hd
+ 2d3FYySiKbOcE2D8iAwo+ITCvTksBV+x0EwZ6u5VbLZKJV9Rf9Bhf8jX26dIADRA=
+X-Gm-Gg: ASbGncvNaftvwLy6/dstDg9dA8+Qe+gYqwNemR/yJHw1QyLRCjTs8hy1bkwxHrzZl5T
+ wSu07EZmSTQODL7qLmIMHYmd/OE2dcTAxR60Z+7l7TXf7CqjRF+8l3px9itSB24Cs/nXjTRdrXT
+ SA3AtYMUmkd2lW7eHvwaIt4Dz9WXtTMamKksPo0R6rKd/bpkk3jO8+/VlPvb4IkJDLb/xDvrYz1
+ KvhePIGLxLPBgaAbK5mtKb/HD/8FfHPFk/n9ICbF52zbuUko0hTDAem5+qJ76Tp13idzwtgIe+u
+ aubrAjQ3MkBH4JngdgTrzyu082LRJUEU/KHurRTXrh+Ozv5vQB55kbcsHvSa9gto/mkCzpLrZv5
+ sxtg5V8Ck/Kly0LfN+kNS3saUSvUpoWQ=
+X-Received: by 2002:a5d:6d86:0:b0:38b:ef22:d8c3 with SMTP id
+ ffacd0b85a97d-38c5209395cmr7569846f8f.35.1738235325427; 
+ Thu, 30 Jan 2025 03:08:45 -0800 (PST)
+X-Google-Smtp-Source: AGHT+IF8Jaj7pR0+ZuRLv9i3VWlgl8F3HqPDaZn5mScaXDv//sxwlV18Dtu62XjbQ4yrxQNHvUAKBA==
+X-Received: by 2002:a5d:6d86:0:b0:38b:ef22:d8c3 with SMTP id
+ ffacd0b85a97d-38c5209395cmr7569801f8f.35.1738235325088; 
+ Thu, 30 Jan 2025 03:08:45 -0800 (PST)
+Received: from ?IPV6:2003:cb:c713:3b00:16ce:8f1c:dd50:90fb?
+ (p200300cbc7133b0016ce8f1cdd5090fb.dip0.t-ipconnect.de.
+ [2003:cb:c713:3b00:16ce:8f1c:dd50:90fb])
  by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-38c5c0ec2f4sm1517326f8f.11.2025.01.30.01.58.52
+ ffacd0b85a97d-38c5c1b4e99sm1645539f8f.74.2025.01.30.03.08.42
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Thu, 30 Jan 2025 01:58:53 -0800 (PST)
-Message-ID: <2670f65f-e973-483e-aed6-526d00125ad7@redhat.com>
-Date: Thu, 30 Jan 2025 10:58:51 +0100
+ Thu, 30 Jan 2025 03:08:44 -0800 (PST)
+Message-ID: <59feb709-dadc-4d19-857e-49320cca3d98@redhat.com>
+Date: Thu, 30 Jan 2025 12:08:42 +0100
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v1 05/12] mm/memory: detect writability in
- restore_exclusive_pte() through can_change_pte_writable()
+Subject: Re: [PATCH v1 08/12] mm/rmap: handle device-exclusive entries
+ correctly in try_to_unmap_one()
 To: linux-kernel@vger.kernel.org, linux-doc@vger.kernel.org,
  dri-devel@lists.freedesktop.org, linux-mm@kvack.org,
  nouveau@lists.freedesktop.org, Andrew Morton <akpm@linux-foundation.org>,
@@ -91,8 +93,8 @@ To: linux-kernel@vger.kernel.org, linux-doc@vger.kernel.org,
  Pasha Tatashin <pasha.tatashin@soleen.com>, Peter Xu <peterx@redhat.com>,
  Alistair Popple <apopple@nvidia.com>, Jason Gunthorpe <jgg@nvidia.com>
 References: <20250129115411.2077152-1-david@redhat.com>
- <20250129115411.2077152-6-david@redhat.com>
- <Z5tLmYOQaZrdWQHN@phenom.ffwll.local>
+ <20250129115411.2077152-9-david@redhat.com>
+ <Z5tQL60SNNGCkfQR@phenom.ffwll.local>
 From: David Hildenbrand <david@redhat.com>
 Autocrypt: addr=david@redhat.com; keydata=
  xsFNBFXLn5EBEAC+zYvAFJxCBY9Tr1xZgcESmxVNI/0ffzE/ZQOiHJl6mGkmA1R7/uUpiCjJ
@@ -139,9 +141,9 @@ Autocrypt: addr=david@redhat.com; keydata=
  jPrnvUsUUsjRoRNJjKKA/REq+sAnhkNPPZ/NNMjaZ5b8Tovi8C0tmxiCHaQYqj7G2rgnT0kt
  WNyWQQ==
 Organization: Red Hat
-In-Reply-To: <Z5tLmYOQaZrdWQHN@phenom.ffwll.local>
+In-Reply-To: <Z5tQL60SNNGCkfQR@phenom.ffwll.local>
 X-Mimecast-Spam-Score: 0
-X-Mimecast-MFC-PROC-ID: hfqeE_gN8C6JNcPfRhDZMAf7f47RO72lZG31bra8w9M_1738231134
+X-Mimecast-MFC-PROC-ID: gC3UDoqtf2kv98PXzc1qeA5BecQ8HgxOkDsz_49GACw_1738235325
 X-Mimecast-Originator: redhat.com
 Content-Language: en-US
 Content-Type: text/plain; charset=UTF-8; format=flowed
@@ -160,32 +162,29 @@ List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-On 30.01.25 10:51, Simona Vetter wrote:
-> On Wed, Jan 29, 2025 at 12:54:03PM +0100, David Hildenbrand wrote:
->> Let's do it just like mprotect write-upgrade or during NUMA-hinting
->> faults on PROT_NONE PTEs: detect if the PTE can be writable by using
->> can_change_pte_writable().
+On 30.01.25 11:10, Simona Vetter wrote:
+> On Wed, Jan 29, 2025 at 12:54:06PM +0100, David Hildenbrand wrote:
+>> Ever since commit b756a3b5e7ea ("mm: device exclusive memory access")
+>> we can return with a device-exclusive entry from page_vma_mapped_walk().
 >>
->> Set the PTE only dirty if the folio is dirty: we might not
->> necessarily have a write access, and setting the PTE writable doesn't
->> require setting the PTE dirty.
+>> try_to_unmap_one() is not prepared for that, so teach it about these
+>> non-present nonswap PTEs.
+>>
+>> Before that, could we also have triggered this case with device-private
+>> entries? Unlikely.
 > 
-> Not sure whether there's much difference in practice, since a device
-> exclusive access means a write, so the folio better be dirty (unless we
-> aborted halfway through). But then I couldn't find the code in nouveau to
-> do that, so now I'm confused.
+> Just quick comment on this, I'm still pondering all the other aspects.
+> 
+> device-private memory is entirely owned by the driver, the core mm isn't
+> supposed to touch these beyond migrating it back to system memory in
+> do_swap_page. Plus using rmap when the driver asks for invalidating
+> mappings as needed.
+> 
+> So no lru, thp, migration or anything initiated by core mm should ever
+> happen on these device private pages. If it does, it'd be a bug.
 
-That confused me as well. Requiring the PTE to be writable does not 
-imply that it is dirty.
-
-So something must either set the PTE or the folio dirty.
-
-( In practice, most anonymous folios are dirty most of the time ... )
-
-If we assume that "device-exclusive entries" are always dirty, then it 
-doesn't make sense to set the folio dirty when creating device-exclusive 
-entries. We'd always have to set the PTE dirty when restoring the 
-exclusive pte.
+I was not 100% sure about HWPoison handling, that's why I added that 
+comment. In other regards I agree: reclaim etc. does not apply.
 
 -- 
 Cheers,
