@@ -2,152 +2,95 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id 1E6F9A22CA8
-	for <lists+nouveau@lfdr.de>; Thu, 30 Jan 2025 12:42:36 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 00A31A22DA3
+	for <lists+nouveau@lfdr.de>; Thu, 30 Jan 2025 14:23:22 +0100 (CET)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id EAB3510E14C;
-	Thu, 30 Jan 2025 11:42:33 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id A9EE510E33B;
+	Thu, 30 Jan 2025 13:23:21 +0000 (UTC)
 Authentication-Results: gabe.freedesktop.org;
-	dkim=pass (1024-bit key; unprotected) header.d=redhat.com header.i=@redhat.com header.b="AhZIKnG7";
+	dkim=pass (2048-bit key; secure) header.d=ziepe.ca header.i=@ziepe.ca header.b="iQadx/uK";
 	dkim-atps=neutral
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from us-smtp-delivery-124.mimecast.com
- (us-smtp-delivery-124.mimecast.com [170.10.129.124])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 3FE7F10E14C
- for <nouveau@lists.freedesktop.org>; Thu, 30 Jan 2025 11:42:32 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1738237351;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references:autocrypt:autocrypt;
- bh=OvJKFUs/4w46Q4QG1QX7ObxGqlReY0noE2BTZvNWIjA=;
- b=AhZIKnG7L989UX7EV7EgfHHGj4MU/81EjFeZ8KPz0apbtngn7KpxSKlSl9oS0Xu3CZRHLx
- EF0a1sLvR25eQtAMivO0pPSNaiV8BUC+/Wuh9AY7LcSSUMkygXIEqjyYhjl/mJqrb4Cwge
- 6WQbH3Vw+ahL1KO6P5OIlByPO+2hkcE=
-Received: from mail-wm1-f72.google.com (mail-wm1-f72.google.com
- [209.85.128.72]) by relay.mimecast.com with ESMTP with STARTTLS
- (version=TLSv1.3, cipher=TLS_AES_256_GCM_SHA384) id
- us-mta-611-UdJ_aMkyNJOQhkacmvmsMg-1; Thu, 30 Jan 2025 06:42:30 -0500
-X-MC-Unique: UdJ_aMkyNJOQhkacmvmsMg-1
-X-Mimecast-MFC-AGG-ID: UdJ_aMkyNJOQhkacmvmsMg
-Received: by mail-wm1-f72.google.com with SMTP id
- 5b1f17b1804b1-43582d49dacso4509155e9.2
- for <nouveau@lists.freedesktop.org>; Thu, 30 Jan 2025 03:42:30 -0800 (PST)
+Received: from mail-qv1-f51.google.com (mail-qv1-f51.google.com
+ [209.85.219.51])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id EC35610E34D
+ for <nouveau@lists.freedesktop.org>; Thu, 30 Jan 2025 13:23:19 +0000 (UTC)
+Received: by mail-qv1-f51.google.com with SMTP id
+ 6a1803df08f44-6dcd4f1aaccso10887406d6.2
+ for <nouveau@lists.freedesktop.org>; Thu, 30 Jan 2025 05:23:19 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=ziepe.ca; s=google; t=1738243399; x=1738848199; darn=lists.freedesktop.org; 
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=Z4xPSZzw/OoNchPOgrFnhgjUTxZA4+QRO6/LNv63tO8=;
+ b=iQadx/uKf9wswHn5dsfoDpneGipPAMnDKUPsOfCNwwOOA9XZfBPssLMOrWafbTAk7j
+ oe+4rlmQL6LUL2i1DsWECQVSPIwzA26Tb5rns48pPE/pYwxMjr4MVq/dr8V4EspdO+yj
+ fSMiwuIBqtU2k6JwY+XOUz8Rsh2b9Oa0ilOercw5SRNKPOuknpl3f1QeZDZUsR/ihO5b
+ 5C6tVs3VEp9m4E5GjlvgrB3eGlm56ZW9RAG2PbdH1nM4Gqpwy+UjqkhKhuAz0UicBWrG
+ mW8SgggJ0azXYiS3gYwhYFafKgnvIuVy/JeCKlFY2ME+XeQpblqN31xRHzyF66kFhnkW
+ FrEw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1738237349; x=1738842149;
- h=content-transfer-encoding:in-reply-to:organization:autocrypt
- :content-language:from:references:to:subject:user-agent:mime-version
- :date:message-id:x-gm-message-state:from:to:cc:subject:date
+ d=1e100.net; s=20230601; t=1738243399; x=1738848199;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:to:from:date:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to;
- bh=OvJKFUs/4w46Q4QG1QX7ObxGqlReY0noE2BTZvNWIjA=;
- b=I0cl0LdWv/CKulj5p7joxHFvVqEQN6QP4vwQZlNeWrEmYbyBK9xY8H+vnntQiGWp+V
- QW/2LjG0mnZF23O/p4f4Vsd81P11qaS0l8B1opIq3aIpMWcpMTS0cLz0qqrr0RARZrNe
- 3TnMS2yw4VOJwUL7QG02mP3DvwKOoCPhDOwbYY4wedKx7dJI//HTbDsE6tu4ES7RgV0E
- fnxzzlcC16js/s6YRXUej6Y1VIJ1xfsGbZk5h+nj4r1xRB9NRLFprC5rm1ag/LweN8LQ
- kwDjdKnBOMSZO+1GomHBYX2fntg6Q+gCCgnLiUieT7cOpEmBcd93E1yS+nRFRi66PrMn
- 4deQ==
+ bh=Z4xPSZzw/OoNchPOgrFnhgjUTxZA4+QRO6/LNv63tO8=;
+ b=dGgWCBlAX9dLSwxmyzFjls/zq7kaxj7S1qmmHJ1Q/dBS0eZgaF6/d/Pc/5q05OOerR
+ XIiH7UH+VdGmkjpmWY1K6Uev6NdIwta28h1wFTRPBgnMj/lPlLuYhzQHnsHOzje0Czs2
+ 8LXUoI/MsWT4OS86J5amLNA2AxnJF+vqSHNd6RHFxwLkeB6QuIrb9dzxctqLOzOcBxmu
+ i9larZCf2grZHugzJKzF4j7y6HxNDuy4z9RnDdxzXV8BB5g+h1faof2/iQz3GNWz8W0V
+ 6BlXgIT6OOxr2Su2Awcm7ysADuZGLaAjSHbGmBjxN4VwaWyx+hPIoYBn4XRYvfaHimXv
+ ZzuA==
 X-Forwarded-Encrypted: i=1;
- AJvYcCV80puXnnST66AhK2XHD8KEyB4ZuqXUY+moEyF/ghRBDHVt/oy2whkIGuWmtXdJ5/Da9rA7ejW0@lists.freedesktop.org
-X-Gm-Message-State: AOJu0YyjZOcfWO/AbTRvwFF0JafyXoIgKS+Ug65RB8NEECGLQoASm8r8
- 97JSj+46FPt2UwIzVlt6Y0aVB/qNeTxc1lezPG1LDJrlOOOgpg/QO1aY+RHqxBkjU41jNv/5tPy
- SrxaEBc/axT8avCxO8xpMlB3mITxXjTpH+PtkTfOIL3Jl78nk6+EdwJXO17skpyU=
-X-Gm-Gg: ASbGncsnzs5uN5dDW8lw22xS3kQaeYsG1GGa9PE98Kn4bbp6SEXJ0COVZDj5ywBVQta
- uo/CnmLuw3qcfJEdtUZ+9eHtuorna7sAdBWfAe+B5QfmLSwJj59sDLm1RofPQQ8wpjUsNbGjfGh
- luiZ9nr893oxtHmO0ExA4iGO8sV6LWII/hoDD5S3yTEuFJvS7UmRq88v9DBK12hzqLcLs5NQMF0
- NnaSWwE8tk5pf4X//jey9NdZ+R3qPzsH9vDoMjp+yVSlwOLjfPlALNAy9Bho+IQySUVwuAP8GFF
- 87HPS9UGk5VKXR78kMhXzIWMobX+LpKCFYMB2FFfJQnV6qdWa7UoKweKkv6aAj7cn87qRf6E+hc
- Bp/ZQhCcXG4q2mZl9A63D3RO+2NPkMgEE
-X-Received: by 2002:a05:600c:b89:b0:432:cbe5:4f09 with SMTP id
- 5b1f17b1804b1-438dc3bb62fmr58827095e9.4.1738237349112; 
- Thu, 30 Jan 2025 03:42:29 -0800 (PST)
-X-Google-Smtp-Source: AGHT+IGY9Z+9uBiFOagJR/rgrq8LfD84ufQR1bgPvqm2p4jGDLTMjXvAkn0iuB45i+xIkXC9mFPx6g==
-X-Received: by 2002:a05:600c:b89:b0:432:cbe5:4f09 with SMTP id
- 5b1f17b1804b1-438dc3bb62fmr58826765e9.4.1738237348745; 
- Thu, 30 Jan 2025 03:42:28 -0800 (PST)
-Received: from ?IPV6:2003:cb:c713:3b00:16ce:8f1c:dd50:90fb?
- (p200300cbc7133b0016ce8f1cdd5090fb.dip0.t-ipconnect.de.
- [2003:cb:c713:3b00:16ce:8f1c:dd50:90fb])
- by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-438e23de772sm20187955e9.13.2025.01.30.03.42.26
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Thu, 30 Jan 2025 03:42:28 -0800 (PST)
-Message-ID: <887df26d-b8bb-48df-af2f-21b220ef22e6@redhat.com>
-Date: Thu, 30 Jan 2025 12:42:26 +0100
+ AJvYcCWaAbZL74ChSrjcpx7nV82l4Di1S0wqAbKh82K7IcQIWwXkGgmyNQMmDMjP+8fIQCZa8bKFdwxm@lists.freedesktop.org
+X-Gm-Message-State: AOJu0YzFrT+VQlQRx3k2C8Qi4WDZwq/INt0oFsay+Rd+05B9Kc2qQBm3
+ nJeN2Isbm5mzxaOKqv9FBX9LCv+wSJ9rbKyCsqE7dLLBSaoKs69tDnODZ7TyNco=
+X-Gm-Gg: ASbGncsoFobask6UCfzPq+zE+Nq4NFBT0pBSlqZC8P63tUmPaHGcr8+nn74VNFLnKcy
+ HtEMKWiwjxdtZgl+XYOTjEUzECkUrWB3FGX4UATJ1eHFPVpu5DTxrOWdv8HdU/oLgW5aj4lB68M
+ Z7LvIwk2r5pCExP/OPzWOBqUi2sXja8DIBw1EAEY8KaJR9cKVhCNWU5HWA6foa/SewDifmEk7Ga
+ 54AsYmNlarNIuVS+l+/Gk+4f+DFUap+5rIIPT2mkA3tDrphJcnZ577o+cFXefDFVcpfjjHuhpV4
+ eelzs9Fh9sCz9dBURYggSKhsEJhQmQs1WrY0oY6VmTMZUITglX3OwpKX5hu+tfHf
+X-Google-Smtp-Source: AGHT+IGu3gG6c418DyCLyq64UOVytvPPjptyLj9HsxmCFyjptBXKcCidLbQRWokyMo3VhHjgkQmzrQ==
+X-Received: by 2002:ad4:5d63:0:b0:6d8:aa45:a8a2 with SMTP id
+ 6a1803df08f44-6e243bbbb2bmr94974656d6.11.1738243398854; 
+ Thu, 30 Jan 2025 05:23:18 -0800 (PST)
+Received: from ziepe.ca
+ (hlfxns017vw-142-68-128-5.dhcp-dynamic.fibreop.ns.bellaliant.net.
+ [142.68.128.5]) by smtp.gmail.com with ESMTPSA id
+ 6a1803df08f44-6e2549222cesm6056236d6.83.2025.01.30.05.23.18
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Thu, 30 Jan 2025 05:23:18 -0800 (PST)
+Received: from jgg by wakko with local (Exim 4.97)
+ (envelope-from <jgg@ziepe.ca>) id 1tdUVp-00000009YDe-2eaQ;
+ Thu, 30 Jan 2025 09:23:17 -0400
+Date: Thu, 30 Jan 2025 09:23:17 -0400
+From: Jason Gunthorpe <jgg@ziepe.ca>
+To: Thomas =?utf-8?Q?Hellstr=C3=B6m?= <thomas.hellstrom@linux.intel.com>,
+ Yonatan Maman <ymaman@nvidia.com>, kherbst@redhat.com,
+ lyude@redhat.com, dakr@redhat.com, airlied@gmail.com,
+ simona@ffwll.ch, leon@kernel.org, jglisse@redhat.com,
+ akpm@linux-foundation.org, GalShalom@nvidia.com,
+ dri-devel@lists.freedesktop.org, nouveau@lists.freedesktop.org,
+ linux-kernel@vger.kernel.org, linux-rdma@vger.kernel.org,
+ linux-mm@kvack.org, linux-tegra@vger.kernel.org
+Subject: Re: [RFC 1/5] mm/hmm: HMM API to enable P2P DMA for device private
+ pages
+Message-ID: <20250130132317.GG2120662@ziepe.ca>
+References: <20241201103659.420677-2-ymaman@nvidia.com>
+ <7282ac68c47886caa2bc2a2813d41a04adf938e1.camel@linux.intel.com>
+ <20250128132034.GA1524382@ziepe.ca>
+ <de293a7e9b4c44eab8792b31a4605cc9e93b2bf5.camel@linux.intel.com>
+ <20250128151610.GC1524382@ziepe.ca>
+ <b78d32e13811ef1fa57b0535749c811f2afb4dcd.camel@linux.intel.com>
+ <20250128172123.GD1524382@ziepe.ca>
+ <Z5ovcnX2zVoqdomA@phenom.ffwll.local>
+ <20250129134757.GA2120662@ziepe.ca>
+ <Z5tZc0OQukfZEr3H@phenom.ffwll.local>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v1 12/12] mm/rmap: keep mapcount untouched for
- device-exclusive entries
-To: linux-kernel@vger.kernel.org, linux-doc@vger.kernel.org,
- dri-devel@lists.freedesktop.org, linux-mm@kvack.org,
- nouveau@lists.freedesktop.org, Andrew Morton <akpm@linux-foundation.org>,
- =?UTF-8?B?SsOpcsO0bWUgR2xpc3Nl?= <jglisse@redhat.com>,
- Jonathan Corbet <corbet@lwn.net>, Alex Shi <alexs@kernel.org>,
- Yanteng Si <si.yanteng@linux.dev>, Karol Herbst <kherbst@redhat.com>,
- Lyude Paul <lyude@redhat.com>, Danilo Krummrich <dakr@kernel.org>,
- David Airlie <airlied@gmail.com>, Simona Vetter <simona@ffwll.ch>,
- "Liam R. Howlett" <Liam.Howlett@oracle.com>,
- Lorenzo Stoakes <lorenzo.stoakes@oracle.com>,
- Vlastimil Babka <vbabka@suse.cz>, Jann Horn <jannh@google.com>,
- Pasha Tatashin <pasha.tatashin@soleen.com>, Peter Xu <peterx@redhat.com>,
- Alistair Popple <apopple@nvidia.com>, Jason Gunthorpe <jgg@nvidia.com>
-References: <20250129115411.2077152-1-david@redhat.com>
- <20250129115411.2077152-13-david@redhat.com>
- <Z5tWYpwpUfgEmeKj@phenom.ffwll.local>
-From: David Hildenbrand <david@redhat.com>
-Autocrypt: addr=david@redhat.com; keydata=
- xsFNBFXLn5EBEAC+zYvAFJxCBY9Tr1xZgcESmxVNI/0ffzE/ZQOiHJl6mGkmA1R7/uUpiCjJ
- dBrn+lhhOYjjNefFQou6478faXE6o2AhmebqT4KiQoUQFV4R7y1KMEKoSyy8hQaK1umALTdL
- QZLQMzNE74ap+GDK0wnacPQFpcG1AE9RMq3aeErY5tujekBS32jfC/7AnH7I0v1v1TbbK3Gp
- XNeiN4QroO+5qaSr0ID2sz5jtBLRb15RMre27E1ImpaIv2Jw8NJgW0k/D1RyKCwaTsgRdwuK
- Kx/Y91XuSBdz0uOyU/S8kM1+ag0wvsGlpBVxRR/xw/E8M7TEwuCZQArqqTCmkG6HGcXFT0V9
- PXFNNgV5jXMQRwU0O/ztJIQqsE5LsUomE//bLwzj9IVsaQpKDqW6TAPjcdBDPLHvriq7kGjt
- WhVhdl0qEYB8lkBEU7V2Yb+SYhmhpDrti9Fq1EsmhiHSkxJcGREoMK/63r9WLZYI3+4W2rAc
- UucZa4OT27U5ZISjNg3Ev0rxU5UH2/pT4wJCfxwocmqaRr6UYmrtZmND89X0KigoFD/XSeVv
- jwBRNjPAubK9/k5NoRrYqztM9W6sJqrH8+UWZ1Idd/DdmogJh0gNC0+N42Za9yBRURfIdKSb
- B3JfpUqcWwE7vUaYrHG1nw54pLUoPG6sAA7Mehl3nd4pZUALHwARAQABzSREYXZpZCBIaWxk
- ZW5icmFuZCA8ZGF2aWRAcmVkaGF0LmNvbT7CwZgEEwEIAEICGwMGCwkIBwMCBhUIAgkKCwQW
- AgMBAh4BAheAAhkBFiEEG9nKrXNcTDpGDfzKTd4Q9wD/g1oFAl8Ox4kFCRKpKXgACgkQTd4Q
- 9wD/g1oHcA//a6Tj7SBNjFNM1iNhWUo1lxAja0lpSodSnB2g4FCZ4R61SBR4l/psBL73xktp
- rDHrx4aSpwkRP6Epu6mLvhlfjmkRG4OynJ5HG1gfv7RJJfnUdUM1z5kdS8JBrOhMJS2c/gPf
- wv1TGRq2XdMPnfY2o0CxRqpcLkx4vBODvJGl2mQyJF/gPepdDfcT8/PY9BJ7FL6Hrq1gnAo4
- 3Iv9qV0JiT2wmZciNyYQhmA1V6dyTRiQ4YAc31zOo2IM+xisPzeSHgw3ONY/XhYvfZ9r7W1l
- pNQdc2G+o4Di9NPFHQQhDw3YTRR1opJaTlRDzxYxzU6ZnUUBghxt9cwUWTpfCktkMZiPSDGd
- KgQBjnweV2jw9UOTxjb4LXqDjmSNkjDdQUOU69jGMUXgihvo4zhYcMX8F5gWdRtMR7DzW/YE
- BgVcyxNkMIXoY1aYj6npHYiNQesQlqjU6azjbH70/SXKM5tNRplgW8TNprMDuntdvV9wNkFs
- 9TyM02V5aWxFfI42+aivc4KEw69SE9KXwC7FSf5wXzuTot97N9Phj/Z3+jx443jo2NR34XgF
- 89cct7wJMjOF7bBefo0fPPZQuIma0Zym71cP61OP/i11ahNye6HGKfxGCOcs5wW9kRQEk8P9
- M/k2wt3mt/fCQnuP/mWutNPt95w9wSsUyATLmtNrwccz63XOwU0EVcufkQEQAOfX3n0g0fZz
- Bgm/S2zF/kxQKCEKP8ID+Vz8sy2GpDvveBq4H2Y34XWsT1zLJdvqPI4af4ZSMxuerWjXbVWb
- T6d4odQIG0fKx4F8NccDqbgHeZRNajXeeJ3R7gAzvWvQNLz4piHrO/B4tf8svmRBL0ZB5P5A
- 2uhdwLU3NZuK22zpNn4is87BPWF8HhY0L5fafgDMOqnf4guJVJPYNPhUFzXUbPqOKOkL8ojk
- CXxkOFHAbjstSK5Ca3fKquY3rdX3DNo+EL7FvAiw1mUtS+5GeYE+RMnDCsVFm/C7kY8c2d0G
- NWkB9pJM5+mnIoFNxy7YBcldYATVeOHoY4LyaUWNnAvFYWp08dHWfZo9WCiJMuTfgtH9tc75
- 7QanMVdPt6fDK8UUXIBLQ2TWr/sQKE9xtFuEmoQGlE1l6bGaDnnMLcYu+Asp3kDT0w4zYGsx
- 5r6XQVRH4+5N6eHZiaeYtFOujp5n+pjBaQK7wUUjDilPQ5QMzIuCL4YjVoylWiBNknvQWBXS
- lQCWmavOT9sttGQXdPCC5ynI+1ymZC1ORZKANLnRAb0NH/UCzcsstw2TAkFnMEbo9Zu9w7Kv
- AxBQXWeXhJI9XQssfrf4Gusdqx8nPEpfOqCtbbwJMATbHyqLt7/oz/5deGuwxgb65pWIzufa
- N7eop7uh+6bezi+rugUI+w6DABEBAAHCwXwEGAEIACYCGwwWIQQb2cqtc1xMOkYN/MpN3hD3
- AP+DWgUCXw7HsgUJEqkpoQAKCRBN3hD3AP+DWrrpD/4qS3dyVRxDcDHIlmguXjC1Q5tZTwNB
- boaBTPHSy/Nksu0eY7x6HfQJ3xajVH32Ms6t1trDQmPx2iP5+7iDsb7OKAb5eOS8h+BEBDeq
- 3ecsQDv0fFJOA9ag5O3LLNk+3x3q7e0uo06XMaY7UHS341ozXUUI7wC7iKfoUTv03iO9El5f
- XpNMx/YrIMduZ2+nd9Di7o5+KIwlb2mAB9sTNHdMrXesX8eBL6T9b+MZJk+mZuPxKNVfEQMQ
- a5SxUEADIPQTPNvBewdeI80yeOCrN+Zzwy/Mrx9EPeu59Y5vSJOx/z6OUImD/GhX7Xvkt3kq
- Er5KTrJz3++B6SH9pum9PuoE/k+nntJkNMmQpR4MCBaV/J9gIOPGodDKnjdng+mXliF3Ptu6
- 3oxc2RCyGzTlxyMwuc2U5Q7KtUNTdDe8T0uE+9b8BLMVQDDfJjqY0VVqSUwImzTDLX9S4g/8
- kC4HRcclk8hpyhY2jKGluZO0awwTIMgVEzmTyBphDg/Gx7dZU1Xf8HFuE+UZ5UDHDTnwgv7E
- th6RC9+WrhDNspZ9fJjKWRbveQgUFCpe1sa77LAw+XFrKmBHXp9ZVIe90RMe2tRL06BGiRZr
- jPrnvUsUUsjRoRNJjKKA/REq+sAnhkNPPZ/NNMjaZ5b8Tovi8C0tmxiCHaQYqj7G2rgnT0kt
- WNyWQQ==
-Organization: Red Hat
-In-Reply-To: <Z5tWYpwpUfgEmeKj@phenom.ffwll.local>
-X-Mimecast-Spam-Score: 0
-X-Mimecast-MFC-PROC-ID: XEDCE6emOCPXqERIRDKx2bgLlWYV6n0pkcXqsB0qykM_1738237349
-X-Mimecast-Originator: redhat.com
-Content-Language: en-US
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <Z5tZc0OQukfZEr3H@phenom.ffwll.local>
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -162,110 +105,48 @@ List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-On 30.01.25 11:37, Simona Vetter wrote:
-> On Wed, Jan 29, 2025 at 12:54:10PM +0100, David Hildenbrand wrote:
->> Now that conversion to device-exclusive does no longer perform an
->> rmap walk and the main page_vma_mapped_walk() users were taught to
->> properly handle nonswap entries, let's treat device-exclusive entries just
->> as if they would be present, similar to how we handle device-private
->> entries already.
+On Thu, Jan 30, 2025 at 11:50:27AM +0100, Simona Vetter wrote:
+> On Wed, Jan 29, 2025 at 09:47:57AM -0400, Jason Gunthorpe wrote:
+> > On Wed, Jan 29, 2025 at 02:38:58PM +0100, Simona Vetter wrote:
+> > 
+> > > > The pgmap->owner doesn't *have* to fixed, certainly during early boot before
+> > > > you hand out any page references it can be changed. I wouldn't be
+> > > > surprised if this is useful to some requirements to build up the
+> > > > private interconnect topology?
+> > > 
+> > > The trouble I'm seeing is device probe and the fundemantal issue that you
+> > > never know when you're done. And so if we entirely rely on pgmap->owner to
+> > > figure out the driver private interconnect topology, that's going to be
+> > > messy. That's why I'm also leaning towards both comparing owners and
+> > > having an additional check whether the interconnect is actually there or
+> > > not yet.
+> > 
+> > Hoenstely, I'd rather invest more effort into being able to update
+> > owner for those special corner cases than to slow down the fast path
+> > in hmm_range_fault..
 > 
-> So the reason for handling device-private entries in rmap is so that
-> drivers can rely on try_to_migrate and related code to invalidate all the
-> various ptes even for device private memory. Otherwise no one should hit
-> this path, at least if my understanding is correct.
+> I'm not sure how you want to make the owner mutable.
 
-Right, device-private probably only happen to be seen on the migration 
-path so far.
+You'd probably have to use a system where you never free them until
+all the page maps are destroyed.
 
-> 
-> So I'm very much worried about opening a can of worms here because I think
-> this adds a genuine new case to all the various callers.
+You could also use an integer instead of a pointer to indicate the
+cluster of interconnect, I think there are many options..
 
-To be clear: it can all already happen.
+> And I've looked at the lifetime fun of unregistering a dev_pagemap for
+> device hotunplug and pretty firmly concluded it's unfixable and that I
+> should run away to do something else :-P
 
-Assume you have a THP (or any mTHP today). You can easily trigger the 
-scenario that folio_mapcount() != 0 with active device-exclusive 
-entries, and you start doing rmap walks and stumble over these 
-device-exclusive entries and *not* handle them properly. Note that more 
-and more systems are configured to just give you THP unless you 
-explicitly opted-out using MADV_NOHUGEPAGE early.
+? It is supposed to work, it blocks until all the pages are freed, but
+AFAIK ther is no fundamental life time issue. The driver is
+responsible to free all its usage.
 
-Note that b756a3b5e7ea added that hunk that still walks these 
-device-exclusive entries in rmap code, but didn't actually update the 
-rmap walkers:
+> An optional callback is a lot less scary to me here (or redoing
+> hmm_range_fault or whacking the migration helpers a few times) looks a lot
+> less scary than making pgmap->owner mutable in some fashion.
 
-@@ -102,7 +104,8 @@ static bool check_pte(struct page_vma_mapped_walk *pvmw)
+It extra for every single 4k page on every user :\
 
-                 /* Handle un-addressable ZONE_DEVICE memory */
-                 entry = pte_to_swp_entry(*pvmw->pte);
--               if (!is_device_private_entry(entry))
-+               if (!is_device_private_entry(entry) &&
-+                   !is_device_exclusive_entry(entry))
-                         return false;
+And what are you going to do better inside this callback?
 
-                 pfn = swp_offset(entry);
-
-That was the right thing to do, because they resemble PROT_NONE entries 
-and not migration entries or anything else that doesn't hold a folio 
-reference).
-
-Fortunately, it's only the page_vma_mapped_walk() callers that need care.
-
-mm/rmap.c is handled with this series.
-
-mm/page_vma_mapped.c should work already.
-
-mm/migrate.c: does not apply
-
-mm/page_idle.c: likely should just skip !pte_present().
-
-mm/ksm.c might be fine, but likely we should just reject !pte_present().
-
-kernel/events/uprobes.c likely should reject !pte_present().
-
-mm/damon/paddr.c likely should reject !pte_present().
-
-
-I briefly though about a flag to indicate if a page_vma_mapped_walk() 
-supports these non-present entries, but likely just fixing them up is 
-easier+cleaner.
-
-Now that I looked at all, I might just write patches for them.
-
-> 
->> This fixes swapout/migration of folios with device-exclusive entries.
->>
->> Likely there are still some page_vma_mapped_walk() callers that are not
->> fully prepared for these entries, and where we simply want to refuse
->> !pte_present() entries. They have to be fixed independently; the ones in
->> mm/rmap.c are prepared.
-> 
-> The other worry is that maybe breaking migration is a feature, at least in
-> parts. 
-
-Maybe breaking swap and migration is a feature in some reality, in this 
-reality it's a BUG :)
-
-If thp constantly reassembles a pmd entry because hey all the
-> memory is contig and userspace allocated a chunk of memory to place
-> atomics that alternate between cpu and gpu nicely separated by 4k pages,
-> then we'll thrash around invalidating ptes to no end. So might be more
-> fallout here.
-
-khugepaged will back off once it sees an exclusive entry, so collapsing 
-could only happen once everything is non-exclusive. See 
-__collapse_huge_page_isolate() as an example.
-
-It's really only page_vma_mapped_walk() callers that are affected by 
-this change, not any other page table walkers.
-
-
-It's unfortunate that we now have to fix it all up, that original series 
-should have never been merged that way.
-
--- 
-Cheers,
-
-David / dhildenb
-
+Jason
