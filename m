@@ -2,149 +2,146 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id C9C4AA2379D
-	for <lists+nouveau@lfdr.de>; Fri, 31 Jan 2025 00:07:09 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id A39C1A237CD
+	for <lists+nouveau@lfdr.de>; Fri, 31 Jan 2025 00:28:40 +0100 (CET)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 2CCBC10E9F6;
-	Thu, 30 Jan 2025 23:07:04 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 43C0C10E9EE;
+	Thu, 30 Jan 2025 23:28:39 +0000 (UTC)
 Authentication-Results: gabe.freedesktop.org;
-	dkim=pass (2048-bit key; unprotected) header.d=Nvidia.com header.i=@Nvidia.com header.b="qZ5t1y15";
+	dkim=pass (2048-bit key; unprotected) header.d=Nvidia.com header.i=@Nvidia.com header.b="kYMtaWze";
 	dkim-atps=neutral
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from NAM12-DM6-obe.outbound.protection.outlook.com
- (mail-dm6nam12on2064.outbound.protection.outlook.com [40.107.243.64])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 8B19910E029;
- Thu, 30 Jan 2025 23:07:02 +0000 (UTC)
+Received: from NAM12-BN8-obe.outbound.protection.outlook.com
+ (mail-bn8nam12on2043.outbound.protection.outlook.com [40.107.237.43])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 2C3BF10E9EE;
+ Thu, 30 Jan 2025 23:28:38 +0000 (UTC)
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=FnoX3AV+VsDP6iNYLdFp7Lj4m5invGLTN9toOgB+yjH22O+sDqtUiCpeT4iX7n+bYoe7M9sYqzBSz+dOGGQTR47IgSO4oCwuMsUDPStY1FALjy1+m2XuL8niQ1DMNS1y1kMX2iIRbKm8TOdUstRsI0wmnLUK00HYzygsVjlJzmZljJ5pqw6B85iADnlb+0RHR5IRM+kG8DbxiQKfygx0a/8IXH4l4n/ZreR8mgJtcR0DZU/SMvWdnD55tHeLLkuxvghkxh0F0LO7xabqOBpfvkZsRj9dAV+9ulev2j+/NT9zF4vBj4aI2gkFsxQMXDy+TNv2LtqcGNoxTWKB4jVusg==
+ b=XUWLRB4OtSdGCAuZUZVfASOuvaLu3NXy2lcaKJlwpyNkG+PqVz7SqBPF1DDxuDB4d3omqq9eqZ47nT55fpL013ePN/URzVWPi+ND8WJh2twcN/1qFgPLXR5+IRalZIj9jpO+ezMMFp/2QYGFwgTNq5j2w8t4/93080A9sH6GmslCtsONQfvo6x/2mvoqjUsgmrkvpgiMbkyF/fL0enjVRywILT149WH7+9FChvG72JhPFJO10vWw3yck5tcm3CKpfGSh51BLiAeOjdZiGNQkS8hMmSBCPLgv+9buGr/N46c14W559mbVdX/SjjcJQpGT2R3RQR7oEUuAhYk106uaVA==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
  s=arcselector10001;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=ckLczTdbd6CcujBvy0iAGAoEK8vq7yYEAR8Q9iGHm+Q=;
- b=nxTSYwd+JXk0di2hJ5nX9tsrvOt66vYW0MrQvG0fd/VYDRdLe74f80PxBfxLJy0QKioKmZbAlri5Asdx/D8LNIDjADDpxB8sOkOfZ9GV1+JLfdyDBYJSzkk/Qf8QBigPAHPH1OQc4rqXT74s5jzt90uA7NLoUQlJQMe5XxMNKDM8cElMeuD5qdBsaJNPntQogZfA6OpNslj6PVpIK/sh4lajmrNc2HAVl2Q0ODKvDfKen3aN9HkpMcNpXx1a+O4H5eZ2MmK5RRm8oxzqoUk6F0+YHvA1Tv92lpf/mEzeqRwWEzRoVVzA+oUtT0RN3bWd0oRiBPNLwMZ1MCo0uvYjpg==
+ bh=i62BICeCmMsX+SSgaFMLacWhxpQwoY4mnKKbhV+O+18=;
+ b=J8MyhESoLqDAqn+cKxhuJ2AtGgdZTkcC0VIUwwSQ4wWagII1GP2m4xwDnQyFokS86qan3reWvfKz37Bx93bM3IwIUO5pgm+m9cQNhTV9K89UGVc631ebcHcPhMe5mNNZXCapsLUgmBOD1PqHBzNfhtBx2vtrpxgaAViKVg2+E1b5Mhh1Qo6TfHVeKZY5BTLbVz2JKl2hULci/7dSCDB2o4KwxGgjbbcYlpU0jXielXDJGpLk29BmBiTt8jC3+bDt6tfSY3b/U2e1rE1RSu2/P/5vlQ5YollwfC+qvrWnW4CRM7OxxQw0dbQsyOzQCe+EMaw02nwghdBSO6Nyx6C0xw==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
  smtp.mailfrom=nvidia.com; dmarc=pass action=none header.from=nvidia.com;
  dkim=pass header.d=nvidia.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=Nvidia.com;
  s=selector2;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=ckLczTdbd6CcujBvy0iAGAoEK8vq7yYEAR8Q9iGHm+Q=;
- b=qZ5t1y15zYaQ5UIO+SCrCOSQ7mEiyMpK/RHndiWvdq6HPxBL/a8YFbPCtCsOXWiNsBMKZod6rQeMIAiXPLTwXWoXN+NHV3AdP7ZoXPaqguEbfpl7lAknbef8sSr+wpuhzZ5KfZ2yQH/Ff67okhCoiVaxE6E3b6ItBs16zlz0Je0wpaSX4L0ajTMK+ATBvHGPX29qMUwhQhDl+lUC/EyNnOkXYCl/UZq3SF/hgBpudc6sJ63RcNVSAiJcLUyYDXkhAuKiPrKovf9/7GoXFM2TxCLplv/zWbSZdL84I0neoRnkONf4Xp4m9Ex1D6i52yLMNzV8YC84AbEuOyc6Z8LK7Q==
+ bh=i62BICeCmMsX+SSgaFMLacWhxpQwoY4mnKKbhV+O+18=;
+ b=kYMtaWzeDg2IiWvet+U+xjp5ALwtcZ1Svgf/ANhiv0hpYWzu7c1xegBCt8Jf7kcVWwTMv+m02I2GpPF1LhBievYm0lgXLxWpg7P1F3hVoHmVq60aRHj3zOzfJQ9G2v30rmYaVuzyyC72UNenEHKwcKjLHfNbgMkcIRE1NyDCNB5VFX/Ke4kcsgI9oJxxnq0yyyifWc/myVSz/7b/efzUe25TKt1O2sTENaMi4OwNSqbtoGNGkqcMltd2kFCe6BCLUf+53vbcx1uE85B9AwplkCuFvgAITV10gEGDiZftrSkshcXhEj5g3FWIr33UD/mXLUOiwWzl0hogzatD6Xhusg==
 Authentication-Results: dkim=none (message not signed)
  header.d=none;dmarc=none action=none header.from=nvidia.com;
 Received: from DS0PR12MB7726.namprd12.prod.outlook.com (2603:10b6:8:130::6) by
- PH8PR12MB7351.namprd12.prod.outlook.com (2603:10b6:510:215::16) with
+ IA1PR12MB8407.namprd12.prod.outlook.com (2603:10b6:208:3d9::17) with
  Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.8377.23; Thu, 30 Jan
- 2025 23:06:58 +0000
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.8398.20; Thu, 30 Jan
+ 2025 23:28:33 +0000
 Received: from DS0PR12MB7726.namprd12.prod.outlook.com
  ([fe80::953f:2f80:90c5:67fe]) by DS0PR12MB7726.namprd12.prod.outlook.com
  ([fe80::953f:2f80:90c5:67fe%7]) with mapi id 15.20.8398.017; Thu, 30 Jan 2025
- 23:06:58 +0000
-Date: Fri, 31 Jan 2025 10:06:53 +1100
+ 23:28:32 +0000
+Date: Fri, 31 Jan 2025 10:28:28 +1100
 From: Alistair Popple <apopple@nvidia.com>
-To: David Hildenbrand <david@redhat.com>, linux-kernel@vger.kernel.org, 
- linux-doc@vger.kernel.org, dri-devel@lists.freedesktop.org, linux-mm@kvack.org,
- nouveau@lists.freedesktop.org, Andrew Morton <akpm@linux-foundation.org>, 
- =?utf-8?B?SsOpcsO0bWU=?= Glisse <jglisse@redhat.com>,
- Jonathan Corbet <corbet@lwn.net>, Alex Shi <alexs@kernel.org>, 
- Yanteng Si <si.yanteng@linux.dev>, Karol Herbst <kherbst@redhat.com>,
- Lyude Paul <lyude@redhat.com>, 
+To: David Hildenbrand <david@redhat.com>
+Cc: linux-kernel@vger.kernel.org, linux-doc@vger.kernel.org, 
+ dri-devel@lists.freedesktop.org, linux-mm@kvack.org,
+ nouveau@lists.freedesktop.org, Andrew Morton <akpm@linux-foundation.org>,
+ =?utf-8?B?SsOpcsO0bWU=?= Glisse <jglisse@redhat.com>, 
+ Jonathan Corbet <corbet@lwn.net>, Alex Shi <alexs@kernel.org>,
+ Yanteng Si <si.yanteng@linux.dev>, 
+ Karol Herbst <kherbst@redhat.com>, Lyude Paul <lyude@redhat.com>, 
  Danilo Krummrich <dakr@kernel.org>, David Airlie <airlied@gmail.com>, 
  Simona Vetter <simona@ffwll.ch>, "Liam R. Howlett" <Liam.Howlett@oracle.com>, 
  Lorenzo Stoakes <lorenzo.stoakes@oracle.com>, Vlastimil Babka <vbabka@suse.cz>,
  Jann Horn <jannh@google.com>, 
  Pasha Tatashin <pasha.tatashin@soleen.com>, Peter Xu <peterx@redhat.com>,
  Jason Gunthorpe <jgg@nvidia.com>
-Subject: Re: [PATCH v1 05/12] mm/memory: detect writability in
- restore_exclusive_pte() through can_change_pte_writable()
-Message-ID: <z7s7xb2ftv5hqg3uzjqkou6enguleazwwehxbi5zulbkar2aej@zlbdh2kdewdn>
+Subject: Re: [PATCH v1 06/12] mm: use single SWP_DEVICE_EXCLUSIVE entry type
+Message-ID: <5rsaabu5vznqejwwcntwabyqjjmxm325x4rz335jrjozvqvsij@mt4eobxi6j5e>
 References: <20250129115411.2077152-1-david@redhat.com>
- <20250129115411.2077152-6-david@redhat.com>
- <Z5tLmYOQaZrdWQHN@phenom.ffwll.local>
- <2670f65f-e973-483e-aed6-526d00125ad7@redhat.com>
- <Z5t4rrkRiOsRY2jH@phenom.ffwll.local>
+ <20250129115411.2077152-7-david@redhat.com>
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
-In-Reply-To: <Z5t4rrkRiOsRY2jH@phenom.ffwll.local>
-X-ClientProxiedBy: SY6PR01CA0054.ausprd01.prod.outlook.com
- (2603:10c6:10:e9::23) To DS0PR12MB7726.namprd12.prod.outlook.com
+In-Reply-To: <20250129115411.2077152-7-david@redhat.com>
+X-ClientProxiedBy: SY5P282CA0012.AUSP282.PROD.OUTLOOK.COM
+ (2603:10c6:10:208::13) To DS0PR12MB7726.namprd12.prod.outlook.com
  (2603:10b6:8:130::6)
 MIME-Version: 1.0
 X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: DS0PR12MB7726:EE_|PH8PR12MB7351:EE_
-X-MS-Office365-Filtering-Correlation-Id: f162f837-9ada-4f2b-8409-08dd4182cbba
+X-MS-TrafficTypeDiagnostic: DS0PR12MB7726:EE_|IA1PR12MB8407:EE_
+X-MS-Office365-Filtering-Correlation-Id: a07de21c-657e-41a5-0882-08dd4185cf76
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
 X-Microsoft-Antispam: BCL:0;
- ARA:13230040|376014|7416014|1800799024|366016|921020; 
-X-Microsoft-Antispam-Message-Info: =?us-ascii?Q?YXxpvTey15wY/Xfa9/aorMzqaA2z7d8So5onz50z2sltb1SBzoLETaNP3cd+?=
- =?us-ascii?Q?7kuChZ3wuCMqfSGBYIZC/zw3oQIHPMqCKxkXE35QZ+uLswou/6mF22W2SR20?=
- =?us-ascii?Q?wu/tp6sgAG1/mJQlcAqM2+lSbMoqO5nL9NR6I9noivHK2OBZDNAxaUXv+luF?=
- =?us-ascii?Q?hdK86/8yLHEmU0rYa2IYJuswrFCjJaorh1D6P9YwTPAAFS3z4gzgMrZZ/8mT?=
- =?us-ascii?Q?bgaYqXG5Pkn+LHE3imY1yHz4+CJBnvppPOI7hLIJgyRobcEpigM7yymvkNiq?=
- =?us-ascii?Q?yoWViAm2xvsLGbqAHZso/LUC/fcQhzDcc9oW34mXSgCND4uzA7exyG6vXHvD?=
- =?us-ascii?Q?Ei+oSuMaNUa/UYP/X0gUoiAg7DfC3CPz4JOfm+8j0gHO4UVLYNe4tkQ3vIuZ?=
- =?us-ascii?Q?9j5L/cg0q5zf+qSkpe7qhoYBuOLWwOUoDApM7sc4vBByCynKYz0PEcYe1z5a?=
- =?us-ascii?Q?oJLfZVvZ42S1Jvz3icxprDCxotHA+OeH8ytkYf5Za+Lzg3GoI71vXNQa1jzd?=
- =?us-ascii?Q?U6OPgHLSEKaPzNADBj8LUFlkdpsDmWDq7BJ29Fc2Wt/qOe18gWQIyTwKURXv?=
- =?us-ascii?Q?ixlD3EptaoeT7GcarLXDz+UWT+jTuoSeR/0AZb25CngcIICEmMQMlbeK6mur?=
- =?us-ascii?Q?Y4K4grzZzQMdySfYgBFT925mVxRi4GA+4DwTnyD8EjnDR9MPKH1WVesCED4F?=
- =?us-ascii?Q?FGffZ+gt+6qWiib0f1GEsV3wzDU4E23efPHsDQG551iDNbL785MvOH+IbETz?=
- =?us-ascii?Q?9Nc/TghcUpPxsYWRHXJ1RBsP85DNU87JKrjS/YyO3USktqpHIOI3fTYuX0FX?=
- =?us-ascii?Q?nQ/SvS3/+ZJTvRcDTblArbmKquYSU6e8SWnsN5YawXYqVNFU1scFiyVuAz7Z?=
- =?us-ascii?Q?07O8/53HGJEgoixqzUj/Apq9lFWIwILKv0fYTQvWkglTcjLaX1vqt47N+pd8?=
- =?us-ascii?Q?kUeV8GooUTcXrTMRnjrHJwIQ/TD9jsvUl3dF4VPgeGixVzczRSixDfNhOIAi?=
- =?us-ascii?Q?auB5pNHZAGXCN4Qbg6eQPqjrgYr8eBqHIdFKfOcull8l+NThd/RTrGbo/ngW?=
- =?us-ascii?Q?RWW3uqjA9gtjITKBzfwJnB1c1Ikm5OfqGRD+zFjjH5qNyma9obyhDqa0PuYI?=
- =?us-ascii?Q?l9kFe4PZBqS26QGbPfUYgR/voEYdDH/KHq3wN4wT3E/vbfXxwXSx+vmyC3d7?=
- =?us-ascii?Q?YTBnb4B/0UwIFqLJr2an4JbqdUpM2hAMHTciyhqjVhmoUxRcSj/reEeMibgB?=
- =?us-ascii?Q?02JK9L/2IEfjDDOPv+isU2uPHWTLhCIIHKIl3Dg6DDXDZqMrxDeOtHaqzAlR?=
- =?us-ascii?Q?XvHBMmkVlccU78g+l3yoc5GYHKe7FC/L7wkG/z8kn+spoJUGTBWy0lhAnqt+?=
- =?us-ascii?Q?ATBVUrxpxBncXg7FfYahy/O3u8aKHoprcAZwS0deTXX3+V5E3QZkSWz8ogKl?=
- =?us-ascii?Q?mTkKwA5zcbg=3D?=
+ ARA:13230040|1800799024|366016|7416014|376014|7053199007; 
+X-Microsoft-Antispam-Message-Info: =?us-ascii?Q?XmSo4EF5xRbmruY8k2F4rUhUjFlani/Vp056iMUY6D9xk74PbnJq/z/TX5ds?=
+ =?us-ascii?Q?m3Fp03/0BEmOn8U2Gz8OApsqm77TWEempMVJrul5iUuZMOnV/BggTxauZ2vz?=
+ =?us-ascii?Q?uxmFRefiChn40FnXK7y6CJQszZiXMr3XqCwzDDF56WdvGY7LwKKJ6kgszjlS?=
+ =?us-ascii?Q?ubtdEc2ISJLzOTdF+Wwy2Gw4A3bTrUb9JHcxq8aQopXD2hcy/YO656Y3QxBr?=
+ =?us-ascii?Q?Fd4aPQcZzI5+Lf1FAWr4k7TMCtAGet7TMamiYoee04yJ8bwtRZCJnFCc9uTB?=
+ =?us-ascii?Q?VRCR4jx+GQOlhXHai6WVC6RNO2d3/dMJmpYNsf3fLJhRDJaZLsIOUqkNKhvR?=
+ =?us-ascii?Q?svP1w9mQ4lRfI20zeJQWqtyNfhEbV7y3bpnuquUWLSGZqW+GDqUl/DO7YDbf?=
+ =?us-ascii?Q?Q9zihg9NZ1jTneJEkPN4ikp0ENbyj2TP1lk4bF/LZJiD274QN83+FxMWL+BK?=
+ =?us-ascii?Q?/+ow2tXbGI6x91t5yOhrRcHlfLeElV0UVkcXHY4s5cgm4xQ9qkeHZ2824xKy?=
+ =?us-ascii?Q?R85qbBr7s8ggM7LHLE+8ezZYvinuunr3+GarTm2Chuotu5V8pPsnnSS3vI9s?=
+ =?us-ascii?Q?mtY/NEQkvJpSt1dSk3k2oor5ngt1iizzAFQARpuV0WxrMO8bKh+z2NNEYWvY?=
+ =?us-ascii?Q?r+whrzmz44N1ybDSG8UolJ0Arz/AGt8chm4xVvY71se805DdImKVqU760f1e?=
+ =?us-ascii?Q?v4KqvvCHMa0QRARlUpqfSfvWw2/MzY2A/zLDCVBQk9lLqPu2QmMMBb8BcAha?=
+ =?us-ascii?Q?VKxrhyiWVJIZzEiVkR5dS3EjaylFmXsOoxPmkCy+FdkI1RlOhkQJatx+Dbkd?=
+ =?us-ascii?Q?FK0vgPU47bAcFKGAnnxi8i2TcCnNPX/CMT9gGfULdxSbEJ89yhw4zS1VXN4l?=
+ =?us-ascii?Q?H3lWYQw4HgN/LaHNz6KPQhdQgpU9MEBnSDhWtqXkkMPRup1bTKnKMGlXfRWc?=
+ =?us-ascii?Q?jhBAO/3dRKKR7sjjekuX9k1sgYTJjyhwhscr17YdU2mGMxEqv7tVL+aqyauw?=
+ =?us-ascii?Q?SzckFEEdLm5LNMFiZl3h4x09cpnChWSr93RvAPONl07AqvssmJbQs7GSpeoW?=
+ =?us-ascii?Q?9SIQB0uNe8a8ArkIpWX5Xr0NFjqpsMBAhPK3xpAhN/sh8a4mwZS27cjG5xRp?=
+ =?us-ascii?Q?Zp8kQHC3hIl9R580y0yDpHQjLAjFn9uMQY7VHgdkcrg/MSSgmYHLx5acBest?=
+ =?us-ascii?Q?yjNnz3qQe6IRoepsKtCO4soD0voIYgUCQoU9BIF614qSqbHfW/T9N8+hM+3H?=
+ =?us-ascii?Q?CcN/AoyU8e1iYijuGGbCLmTwy7AC0qwqgcDPR3izuYWQcFta2e0qiXuxDjLJ?=
+ =?us-ascii?Q?RNaESreSxp9U9QKpubkAFwmf3jr8Dqvi58vKPPwqGQxiH+f5Z6eHkBDUBuCy?=
+ =?us-ascii?Q?3zAxHvqeLHCALeUTWaJIJZwOSFMA?=
 X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
  IPV:NLI; SFV:NSPM; H:DS0PR12MB7726.namprd12.prod.outlook.com; PTR:; CAT:NONE;
- SFS:(13230040)(376014)(7416014)(1800799024)(366016)(921020); DIR:OUT; SFP:1101;
+ SFS:(13230040)(1800799024)(366016)(7416014)(376014)(7053199007); DIR:OUT;
+ SFP:1101; 
 X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: =?us-ascii?Q?Yh3hdTIYL2UfTWGCfTn9/h00nRMnfxLhgz8mQlM36pu/wHrzMmkb1lmk7A7U?=
- =?us-ascii?Q?aobTBSDmaAMAj56rTFdTopgPCXSPQc8sfUVPoalRnj7XZmrdKvoO/ITCZCGr?=
- =?us-ascii?Q?UCjI76zH+Ibq29fPz2sFJYJGLD3spas6gdIK4s7kX0JvshZvYZWdvif9iKBg?=
- =?us-ascii?Q?HOnr6FD3RPybUDyNuFuyCUud0H0MNIs2awIcIlnM94Uyby7ys1YpYkZkanQr?=
- =?us-ascii?Q?d3HPLFPTLA5Uc0GaFBz9bb7zfMruU6Mg8hnihfeIkDno/FHKkY4H1WbIaKW4?=
- =?us-ascii?Q?Oihi5TgkM/r6xiZh4Ahd5qAImYir5B2Iay4oO96F/jEN9Lt/GQ1GVDUExTJ8?=
- =?us-ascii?Q?wA0jeOExMCpPA2qceIGTrD/14tWlRz77M4nqRTMrcvyyy0CAKpwZGG9VPtOC?=
- =?us-ascii?Q?CabRJiwxT1Uyj30hS+IsTOMTFNGgJ75AWvO+8slPjCPKv5khX4MVAjoK+xZo?=
- =?us-ascii?Q?oiAduqJBSbMGufBHDrDlW/zjpEYe1kwmaIdmDvbGgq0AKMAsKnKku8UpECTn?=
- =?us-ascii?Q?nl0+cLtzeySaanqLU5BNNB1Lw0sZZua/etFkeL2wk8mUXEe48f7qyBnXZL1n?=
- =?us-ascii?Q?9p9hD7y7ZNMFdzKF1RljEDuT3WzJaIGz0KeSUt9lZkht9KMAzhWZ+zC/QoQV?=
- =?us-ascii?Q?nhj18wHseyPkyM+tj5jOutRqOeAK1YwHtvoGnTbWuXq4Ja6E4cyf19uL5ENK?=
- =?us-ascii?Q?9rbpq7MDXjY3KzvZ5CFePlHtj/2rfEUWJ7fX1MY+qrtVTdKlh6Ik6jRoG3KH?=
- =?us-ascii?Q?rOxUTi4bXH/GvT5dY0IhT+OpqKVpB0Qzn7qHg84VPFGhfqGW+/RGgHZjxlpQ?=
- =?us-ascii?Q?FPX0/fm4IgSr3POMVL1CjjtK+uV67q+CVOr8oVdCOlWNpDQ8rfLme6sDx7NQ?=
- =?us-ascii?Q?wNQjWWMDxTfESb4gRAE6nfyWpEu7U49D2UGOLkpROw6rtuukee4hjZlbrAdS?=
- =?us-ascii?Q?3sCPbae6vDIkLqZZXthMkyjSPRx3FnAmr4idaAtcStNKxsP5rm4rm2QDLkmr?=
- =?us-ascii?Q?rdx9CqgNyuQ5AkV0vcVIEcXryLEvP+bVstCt7vCMlponAXyIp225JlSlLJAW?=
- =?us-ascii?Q?6mXi23EuX0q6oBykdOhFgucYsvP3kFDvyNkd+5QdDn5Z3iNtd8GJvj6aSafe?=
- =?us-ascii?Q?dtioK6XShf50QfVVU2w7X+eHJy9q0App2r7oRgawkOBZQRxkJfXE/DYauTqE?=
- =?us-ascii?Q?xO6TdQmE1c/rv40CDfaVszwKTsK3UdewPv6yrZsuHS11phWwrmWb9XPZSWS/?=
- =?us-ascii?Q?3ds+hsz+7va0rFcyHUfNR4wDXWidU0zrewOet794PPbrBgPfIHxs7hv4RQX3?=
- =?us-ascii?Q?qQ1jP+yEL0RvNbtAF3GUgCSkwjLUsMonhxAvpLZbbXpgrEqzSWEaRozTTGq/?=
- =?us-ascii?Q?wPgQphB+Z0h2ZFODWE3A8NI2LrwcFw6HDi+MbwFqDFQDhemhGizx8lToyluG?=
- =?us-ascii?Q?k6rigDo/PW8MiuaNNy6zdvBuPUJ5SGHLUX3RJfRflQ5jOcezDiol/ySIExW7?=
- =?us-ascii?Q?juiSlIDRcgdGzc9lE64DosNOUEUBvu1iN7zyo1Fapx0igViXC/xQidLR9n4J?=
- =?us-ascii?Q?XQm6JvJ0iJ+TlCHrMxyGFAaQJLeqzOVcUI2tXdQ3?=
+X-MS-Exchange-AntiSpam-MessageData-0: =?us-ascii?Q?ILhu+6xPTTelzAzwzTXy2SgdbTvWVsvMZC+NPvVJ4A43C/qz7HT6Kw3XmDg1?=
+ =?us-ascii?Q?NfUQY8ER/CCDMW+EJ6SZjp3biVhDv1ht0IGGG9welrRkM7Ddv/OCq3Hcr8Y2?=
+ =?us-ascii?Q?CKiKciVRPAvp3Ibbl3lNGrLITR8OUy6ewSq9ZiLqoVBTyiRt1r5cML/oGQE7?=
+ =?us-ascii?Q?RFZ45DkxT62GnzwFfFmTRdSaiDQQMWsvDPYrD1HNcDtGc+SssxPog3irVIaK?=
+ =?us-ascii?Q?bVpu5BkRUUUekDHjfO55w4IcoHPs9ZS1JR8jMpyxIiQUNZ6un1fF3WS2IxA4?=
+ =?us-ascii?Q?f11vSOZ6+oIK9R9a+u+h+r4IvZcPWYA2iJiAdYTGL22FjCfe8emR4Ce5UjiE?=
+ =?us-ascii?Q?O0Zpb3A88NYHsHt6OO0oXyzZL3YS0UeAH1n5Ta9fzzFgDmCP1T7pLsV2U66M?=
+ =?us-ascii?Q?WJO6K1s+aqO61978fAZhJc1PEOPN2Kwg4dDrHn9Xu8glGvx9ZhJjUaNTKzzb?=
+ =?us-ascii?Q?7+jhQY7cq8WNRVC4Xh4Q9z/ejcovkWcPHBa8LIJL2MIjwz5+ze125aRh1Og9?=
+ =?us-ascii?Q?XzgsBVtNQX2Oowlv8aB68nqK3gffV0zEk2PYCG6OcQJ31kuYxd3/2Lj26mJx?=
+ =?us-ascii?Q?/wJze3CE0W0DatJIsxog06QcDZISiH8tSrQpXtusObZN82a2xSpCQLzER9Mz?=
+ =?us-ascii?Q?doLaropWmbBjjq//OeV6HeBcQMNSeaAhucOztYKFpEuC24bqeySG3R+9KMR/?=
+ =?us-ascii?Q?f5YpeZWLHRIPS2hi3s204A/k/2LR4n74sIZ8I7xFpwThOCQck/g0y7B1DbZT?=
+ =?us-ascii?Q?inXmWCXKE3lTA7SscasFVCTDsqfmd0JT4fjHeVgyeROuCkJjWIIp33Ce9J04?=
+ =?us-ascii?Q?p2I+o9mVGUNpC/b5gZqAS8vpMy2bZG9aZ1EEgGCie8AZFa6VenzH1If+M1UA?=
+ =?us-ascii?Q?MTbEoqwEREGI8OkxBXw9m7iJm4+lrQbh4kn7SKlT8/7vzOEQcV/tesIYu9aY?=
+ =?us-ascii?Q?8n9bf1dymx/3tmZ9Ppb1p87O7FZfUt/EKMYClNO3uajaImlzQYigQetKmQUn?=
+ =?us-ascii?Q?0O/OaCjjdu7A1vJfHMAZDYOfKPFyA2/eH3j0u7at3ueUbaiFBNCrEVxPLicw?=
+ =?us-ascii?Q?wuWd6a99R9YrfFV4RLUMhEPFyrODI4Kr049NgKZk4kRDuZGkjRW/uL3qs2vz?=
+ =?us-ascii?Q?nkHJJYg4UVatorOFbRhGr4XYx7DcGrFgfqhEdjYDIZI/QnKyNEpDpJwpJU+J?=
+ =?us-ascii?Q?SVM0KKaYjETl+/LRsw8E21pKYFYHnjid/YCEYZQL5qwpVq/ZcN/kwxWCsagS?=
+ =?us-ascii?Q?bfcxjjaBlBA4hi6xmFZybwe/zcaGV88oI8JCg54lfna3gEZ9J0N2riHUyVtI?=
+ =?us-ascii?Q?qfuOF0uomwcYrK6StbbzO39A5Ywdjgw9a1IxK5gPf6zTqhA2uPg7ztg33eyy?=
+ =?us-ascii?Q?6VTvM4q1H7Z/tb7POH1PFuWtL5M+uH2nOootcOIgObMmvgzRVbA+JU7PJcmv?=
+ =?us-ascii?Q?iHNCuLdAMXQFnZ4BhKL89KiEBe4Gpb1Bx2dRk/SCetekXVdsRxGyGMN9lyU6?=
+ =?us-ascii?Q?aR9k0p25zaq8lZswz0srfCgF1sqvrw9MkBdB9EouJdCQAdJZmGj6IPlG44UV?=
+ =?us-ascii?Q?qAfJsUsEPKvhhePYLr+sU5SVS/i/UlBlF3lhXMMU?=
 X-OriginatorOrg: Nvidia.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: f162f837-9ada-4f2b-8409-08dd4182cbba
+X-MS-Exchange-CrossTenant-Network-Message-Id: a07de21c-657e-41a5-0882-08dd4185cf76
 X-MS-Exchange-CrossTenant-AuthSource: DS0PR12MB7726.namprd12.prod.outlook.com
 X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 30 Jan 2025 23:06:57.9814 (UTC)
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 30 Jan 2025 23:28:32.7099 (UTC)
 X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
 X-MS-Exchange-CrossTenant-Id: 43083d15-7273-40c1-b7db-39efd9ccc17a
 X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: 9nCNQ6X0WHfXqhG4nqssBHabqcw9AHPag1NlpGPLm3cjkBHNkZrA14kTkXzxFWwJeqtPhyyaMNLvWgv253pQew==
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: PH8PR12MB7351
+X-MS-Exchange-CrossTenant-UserPrincipalName: G/4y8ymVRLmqbJCefOn4ZG+H2GjTQBuKntlDInWjK2gXgSbmjhCT5AckkodFx/80MIl7z64BHOz65JSHtdlzcg==
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: IA1PR12MB8407
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -159,56 +156,156 @@ List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-On Thu, Jan 30, 2025 at 02:03:42PM +0100, Simona Vetter wrote:
-> On Thu, Jan 30, 2025 at 10:58:51AM +0100, David Hildenbrand wrote:
-> > On 30.01.25 10:51, Simona Vetter wrote:
-> > > On Wed, Jan 29, 2025 at 12:54:03PM +0100, David Hildenbrand wrote:
-> > > > Let's do it just like mprotect write-upgrade or during NUMA-hinting
-> > > > faults on PROT_NONE PTEs: detect if the PTE can be writable by using
-> > > > can_change_pte_writable().
-> > > > 
-> > > > Set the PTE only dirty if the folio is dirty: we might not
-> > > > necessarily have a write access, and setting the PTE writable doesn't
-> > > > require setting the PTE dirty.
-> > > 
-> > > Not sure whether there's much difference in practice, since a device
-> > > exclusive access means a write, so the folio better be dirty (unless we
-> > > aborted halfway through). But then I couldn't find the code in nouveau to
-> > > do that, so now I'm confused.
-> > 
-> > That confused me as well. Requiring the PTE to be writable does not imply
-> > that it is dirty.
-> > 
-> > So something must either set the PTE or the folio dirty.
+On Wed, Jan 29, 2025 at 12:54:04PM +0100, David Hildenbrand wrote:
+> There is no need for the distinction anymore; let's merge the readable
+> and writable device-exclusive entries into a single device-exclusive
+> entry type.
 > 
-> Yeah I'm not finding that something.
+> Signed-off-by: David Hildenbrand <david@redhat.com>
+> ---
+>  include/linux/swap.h    |  7 +++----
+>  include/linux/swapops.h | 27 ++++-----------------------
+>  mm/mprotect.c           |  8 --------
+>  mm/page_table_check.c   |  5 ++---
+>  mm/rmap.c               |  2 +-
+>  5 files changed, 10 insertions(+), 39 deletions(-)
 > 
-> > ( In practice, most anonymous folios are dirty most of the time ... )
-> 
-> And yup that's why I think it hasn't blown up yet.
-> 
-> > If we assume that "device-exclusive entries" are always dirty, then it
-> > doesn't make sense to set the folio dirty when creating device-exclusive
-> > entries. We'd always have to set the PTE dirty when restoring the exclusive
-> > pte.
-> 
-> I do agree with your change, I think it's correct to put this
-> responsibility onto drivers. It's just that nouveau seems to not be
-> entirely correct.
+> diff --git a/include/linux/swap.h b/include/linux/swap.h
+> index 91b30701274e..9a48e79a0a52 100644
+> --- a/include/linux/swap.h
+> +++ b/include/linux/swap.h
+> @@ -74,14 +74,13 @@ static inline int current_is_kswapd(void)
+>   * to a special SWP_DEVICE_{READ|WRITE} entry.
+>   *
+>   * When a page is mapped by the device for exclusive access we set the CPU page
+> - * table entries to special SWP_DEVICE_EXCLUSIVE_* entries.
+> + * table entries to a special SWP_DEVICE_EXCLUSIVE entry.
+>   */
+>  #ifdef CONFIG_DEVICE_PRIVATE
+> -#define SWP_DEVICE_NUM 4
+> +#define SWP_DEVICE_NUM 3
+>  #define SWP_DEVICE_WRITE (MAX_SWAPFILES+SWP_HWPOISON_NUM+SWP_MIGRATION_NUM)
+>  #define SWP_DEVICE_READ (MAX_SWAPFILES+SWP_HWPOISON_NUM+SWP_MIGRATION_NUM+1)
+> -#define SWP_DEVICE_EXCLUSIVE_WRITE (MAX_SWAPFILES+SWP_HWPOISON_NUM+SWP_MIGRATION_NUM+2)
+> -#define SWP_DEVICE_EXCLUSIVE_READ (MAX_SWAPFILES+SWP_HWPOISON_NUM+SWP_MIGRATION_NUM+3)
+> +#define SWP_DEVICE_EXCLUSIVE (MAX_SWAPFILES+SWP_HWPOISON_NUM+SWP_MIGRATION_NUM+2)
+>  #else
+>  #define SWP_DEVICE_NUM 0
+>  #endif
+> diff --git a/include/linux/swapops.h b/include/linux/swapops.h
+> index 96f26e29fefe..64ea151a7ae3 100644
+> --- a/include/linux/swapops.h
+> +++ b/include/linux/swapops.h
+> @@ -186,26 +186,16 @@ static inline bool is_writable_device_private_entry(swp_entry_t entry)
+>  	return unlikely(swp_type(entry) == SWP_DEVICE_WRITE);
+>  }
+>  
+> -static inline swp_entry_t make_readable_device_exclusive_entry(pgoff_t offset)
+> +static inline swp_entry_t make_device_exclusive_entry(pgoff_t offset)
+>  {
+> -	return swp_entry(SWP_DEVICE_EXCLUSIVE_READ, offset);
+> -}
+> -
+> -static inline swp_entry_t make_writable_device_exclusive_entry(pgoff_t offset)
+> -{
+> -	return swp_entry(SWP_DEVICE_EXCLUSIVE_WRITE, offset);
+> +	return swp_entry(SWP_DEVICE_EXCLUSIVE, offset);
+>  }
+>  
+>  static inline bool is_device_exclusive_entry(swp_entry_t entry)
+>  {
+> -	return swp_type(entry) == SWP_DEVICE_EXCLUSIVE_READ ||
+> -		swp_type(entry) == SWP_DEVICE_EXCLUSIVE_WRITE;
+> +	return swp_type(entry) == SWP_DEVICE_EXCLUSIVE;
+>  }
+>  
+> -static inline bool is_writable_device_exclusive_entry(swp_entry_t entry)
+> -{
+> -	return unlikely(swp_type(entry) == SWP_DEVICE_EXCLUSIVE_WRITE);
+> -}
+>  #else /* CONFIG_DEVICE_PRIVATE */
+>  static inline swp_entry_t make_readable_device_private_entry(pgoff_t offset)
+>  {
+> @@ -227,12 +217,7 @@ static inline bool is_writable_device_private_entry(swp_entry_t entry)
+>  	return false;
+>  }
+>  
+> -static inline swp_entry_t make_readable_device_exclusive_entry(pgoff_t offset)
+> -{
+> -	return swp_entry(0, 0);
+> -}
+> -
+> -static inline swp_entry_t make_writable_device_exclusive_entry(pgoff_t offset)
+> +static inline swp_entry_t make_device_exclusive_entry(pgoff_t offset)
+>  {
+>  	return swp_entry(0, 0);
+>  }
+> @@ -242,10 +227,6 @@ static inline bool is_device_exclusive_entry(swp_entry_t entry)
+>  	return false;
+>  }
+>  
+> -static inline bool is_writable_device_exclusive_entry(swp_entry_t entry)
+> -{
+> -	return false;
+> -}
+>  #endif /* CONFIG_DEVICE_PRIVATE */
+>  
+>  #ifdef CONFIG_MIGRATION
+> diff --git a/mm/mprotect.c b/mm/mprotect.c
+> index 516b1d847e2c..9cb6ab7c4048 100644
+> --- a/mm/mprotect.c
+> +++ b/mm/mprotect.c
+> @@ -225,14 +225,6 @@ static long change_pte_range(struct mmu_gather *tlb,
+>  				newpte = swp_entry_to_pte(entry);
+>  				if (pte_swp_uffd_wp(oldpte))
+>  					newpte = pte_swp_mkuffd_wp(newpte);
+> -			} else if (is_writable_device_exclusive_entry(entry)) {
+> -				entry = make_readable_device_exclusive_entry(
+> -							swp_offset(entry));
+> -				newpte = swp_entry_to_pte(entry);
+> -				if (pte_swp_soft_dirty(oldpte))
+> -					newpte = pte_swp_mksoft_dirty(newpte);
+> -				if (pte_swp_uffd_wp(oldpte))
+> -					newpte = pte_swp_mkuffd_wp(newpte);
 
-Yeah, agree it should be a driver responsibility but also can't see how nouveau
-is correct there either. I might see if I can get it to blow up...
+So just to check my understanding the idea is we now check vma->vm_flags in
+restore_exclusive_pte() to restore them as read-only in the case of mprotect()
+write protecting the range? That makes sense to me, so assuming that's true:
 
-> And thinking about this I have vague memories that I've discussed the case
-> of the missing folio_set_dirty in noveau hmm code before, maybe with
-> Alistair. But quick search in archives didn't turn up anything.
+Reviewed-by: Alistair Popple <apopple@nvidia.com>
 
-I have vague recollections of that, but I could be confusing it with some of the
-migrate_vma_*() issues we had dropping dirty bits (see
-https://lkml.kernel.org/r/dd48e4882ce859c295c1a77612f66d198b0403f9.1662078528.git-series.apopple@nvidia.com)
-
-> -Sima
+>  			} else if (is_pte_marker_entry(entry)) {
+>  				/*
+>  				 * Ignore error swap entries unconditionally,
+> diff --git a/mm/page_table_check.c b/mm/page_table_check.c
+> index 509c6ef8de40..c2b3600429a0 100644
+> --- a/mm/page_table_check.c
+> +++ b/mm/page_table_check.c
+> @@ -196,9 +196,8 @@ EXPORT_SYMBOL(__page_table_check_pud_clear);
+>  /* Whether the swap entry cached writable information */
+>  static inline bool swap_cached_writable(swp_entry_t entry)
+>  {
+> -	return is_writable_device_exclusive_entry(entry) ||
+> -	    is_writable_device_private_entry(entry) ||
+> -	    is_writable_migration_entry(entry);
+> +	return is_writable_device_private_entry(entry) ||
+> +	       is_writable_migration_entry(entry);
+>  }
+>  
+>  static inline void page_table_check_pte_flags(pte_t pte)
+> diff --git a/mm/rmap.c b/mm/rmap.c
+> index 49ffac6d27f8..65d9bbea16d0 100644
+> --- a/mm/rmap.c
+> +++ b/mm/rmap.c
+> @@ -2470,7 +2470,7 @@ struct page *make_device_exclusive(struct mm_struct *mm, unsigned long addr,
+>  	 * do_swap_page() will trigger the conversion back while holding the
+>  	 * folio lock.
+>  	 */
+> -	entry = make_writable_device_exclusive_entry(page_to_pfn(page));
+> +	entry = make_device_exclusive_entry(page_to_pfn(page));
+>  	swp_pte = swp_entry_to_pte(entry);
+>  	if (pte_soft_dirty(fw.pte))
+>  		swp_pte = pte_swp_mksoft_dirty(swp_pte);
 > -- 
-> Simona Vetter
-> Software Engineer, Intel Corporation
-> http://blog.ffwll.ch
+> 2.48.1
+> 
