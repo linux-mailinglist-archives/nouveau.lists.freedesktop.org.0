@@ -2,151 +2,154 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id 880E1A22EB1
-	for <lists+nouveau@lfdr.de>; Thu, 30 Jan 2025 15:08:45 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id D7ED2A230FC
+	for <lists+nouveau@lfdr.de>; Thu, 30 Jan 2025 16:27:02 +0100 (CET)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 9DE5710E98E;
-	Thu, 30 Jan 2025 14:08:41 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id D5F2610E042;
+	Thu, 30 Jan 2025 15:26:59 +0000 (UTC)
 Authentication-Results: gabe.freedesktop.org;
-	dkim=pass (2048-bit key; unprotected) header.d=Nvidia.com header.i=@Nvidia.com header.b="iO5lIBQB";
+	dkim=pass (1024-bit key; unprotected) header.d=redhat.com header.i=@redhat.com header.b="MRGgMZPS";
 	dkim-atps=neutral
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from NAM12-MW2-obe.outbound.protection.outlook.com
- (mail-mw2nam12on2082.outbound.protection.outlook.com [40.107.244.82])
- by gabe.freedesktop.org (Postfix) with ESMTPS id F095510E98D;
- Thu, 30 Jan 2025 14:08:39 +0000 (UTC)
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=qMF5W+o/NSy0Qn4SFOIhe9Dnw/5Pp+uSpDRr78d7Q9kcvjnSsJtT4xVsyK1oOA9mp2dpNiFa+fw+g8BBOIue1HqbP/GhVeGgccCZpfhORPZMwzqMzfluYMPKur/cZYH4Si7JzylhkJTo7fbloYSi2sF1iyNiM/xlUz4dn7pk72pIeOv/eIKwt/oBmVU9Egl20UG7H00TGcdtUxItTgtSlf3Lve5gMU58TMkK5WgqY2rxqyPPxOBz5u0WHpTCcetKXW9JsC/cfN8oyVv95bU23T1IBzYZPBFlCyIlNDYjvtc5M0e1fHpj3Pi7n1dmBSvi/BVR+GWjSFNK0lQDG3644w==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=aVKrKUm2zojmnP7ZlMPfQYyg8t657KC/bf1LMjJaFf0=;
- b=HR5qkrBU/Z/eQGui4v/6d/B7LNAiwEW85FCI0pMXq+LnhmV5L6ZQfN1qjR9P+HWaI+RgIHbM36OYxZ8HwAIPssdzHp1hGyN3LO8HgOMcdt1IDiQTrnW0pLjTO2PmVUiTNLMGJK8tRpIgtQb3RTTWZJ6QEbF5SRMEm9lt1qKD860wTadYsYZDjDqPnOqADpzNvrxkcwBaLYj9Igsc+9l6aiULR54gSz9NewhxHvg6LE/7CBhE2AiOOsMRwArld3A4qakZivmHzoxklhw5MR5D6+BTZIzded/FjuDCdGa2Ssjn+/1WA1Ry/QfcwupLY72XtzPysVIc5jzBWs3cC2Fq2Q==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=nvidia.com; dmarc=pass action=none header.from=nvidia.com;
- dkim=pass header.d=nvidia.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=Nvidia.com;
- s=selector2;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=aVKrKUm2zojmnP7ZlMPfQYyg8t657KC/bf1LMjJaFf0=;
- b=iO5lIBQBsmSn1C042Du7xRDH9T3dq4Oc50ayyDs8670LUgXib1M0HSm5x5hBYyTCcRAvAKx0Yd6KhRW1xWufo7NtfQwaiRBknEI+Ggk+eIk8GIc01I4VMH9wyxCI7+WTy68FjCh2GTo0kGzTZyq3yk9lzTMOjnQ7tVdmV2BDTvwERO/nALsq2XNgbf8A9JAldTzsUy4eJmFVvc+AnDP/uo3Emo001Gc9orexej/eGstEi0ewXjJqKA4h+A8yWUyXUBFvz3LwnucXMOr0932eYuFT9ShNPmDQ7XI5QAGEchHr6q8ntTcluPs3CVVBMr8v5otXfdYEX04JvL7OI2QRrA==
-Authentication-Results: dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=nvidia.com;
-Received: from CH3PR12MB8659.namprd12.prod.outlook.com (2603:10b6:610:17c::13)
- by SJ2PR12MB8012.namprd12.prod.outlook.com (2603:10b6:a03:4c7::9)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.8398.18; Thu, 30 Jan
- 2025 14:08:33 +0000
-Received: from CH3PR12MB8659.namprd12.prod.outlook.com
- ([fe80::6eb6:7d37:7b4b:1732]) by CH3PR12MB8659.namprd12.prod.outlook.com
- ([fe80::6eb6:7d37:7b4b:1732%5]) with mapi id 15.20.8377.021; Thu, 30 Jan 2025
- 14:08:33 +0000
-Date: Thu, 30 Jan 2025 10:08:32 -0400
-From: Jason Gunthorpe <jgg@nvidia.com>
-To: David Hildenbrand <david@redhat.com>, linux-kernel@vger.kernel.org,
+Received: from us-smtp-delivery-124.mimecast.com
+ (us-smtp-delivery-124.mimecast.com [170.10.129.124])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 3315010E042
+ for <nouveau@lists.freedesktop.org>; Thu, 30 Jan 2025 15:26:58 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
+ s=mimecast20190719; t=1738250817;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:mime-version:mime-version:content-type:content-type:
+ content-transfer-encoding:content-transfer-encoding:
+ in-reply-to:in-reply-to:references:references:autocrypt:autocrypt;
+ bh=6EfvH24Zk4QAYrENk+aBxb1nppjMz5tPj3khOZvqEvA=;
+ b=MRGgMZPSYZHPh1xrNMQ2NbxOqIRNOiIZ+MBYfBhz8oZn/YxvS06Kj2ITtyDerHtkHcfno4
+ yz4nn4r3R3f5oSF4Fu0mQMISKuXTlal02nZwylKPjSmlnU0NzaPZDb2RXvcBIdnDT/6L3M
+ x9viHm8T9x0hlwfWYB2cIPjgkPZQgEk=
+Received: from mail-wm1-f70.google.com (mail-wm1-f70.google.com
+ [209.85.128.70]) by relay.mimecast.com with ESMTP with STARTTLS
+ (version=TLSv1.3, cipher=TLS_AES_256_GCM_SHA384) id
+ us-mta-255-slCC6KIRPdiRwPG6xuih-w-1; Thu, 30 Jan 2025 10:26:54 -0500
+X-MC-Unique: slCC6KIRPdiRwPG6xuih-w-1
+X-Mimecast-MFC-AGG-ID: slCC6KIRPdiRwPG6xuih-w
+Received: by mail-wm1-f70.google.com with SMTP id
+ 5b1f17b1804b1-438e4e9a53fso4276525e9.1
+ for <nouveau@lists.freedesktop.org>; Thu, 30 Jan 2025 07:26:53 -0800 (PST)
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1738250813; x=1738855613;
+ h=content-transfer-encoding:in-reply-to:organization:autocrypt
+ :content-language:from:references:to:subject:user-agent:mime-version
+ :date:message-id:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=6EfvH24Zk4QAYrENk+aBxb1nppjMz5tPj3khOZvqEvA=;
+ b=kD2pAqPJIVjJsLHORRMJhRIJ1Bpdz15Wc1D+8tlKgeI4oh/MK0+z0iiuErtkCJc57K
+ NmIz/+77YMKRGWwvh9TZUKk2MEsZQgUIsL+9S/OTV1zKIvJWDDbX2kCIILWVr9hflacC
+ qwBVC9UAxpddnIicdpvUFgMcaqK2wtYVW26DCPICl2gUKKC5rvejQIa+y6XRhA+iviM0
+ gsSOBFCuP4qW02hf7+Moow+FUO1R76lUhOuu9v6rOfy0ywZ1i52qpwc4RIZqyy4UMtBt
+ K18EpiCwSgc7I3uZNGt94EprKLWkBqT09hh8YbJk7u8llbUJ/AL8flQ56v6sqb8+yjI+
+ I24A==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCV/VtdlmQfWROhRo2YDdNuVAX1EyE/jZITaqgJNQuqiAloXAktAv9FLDsQLeYRvpK/P8JErRuND@lists.freedesktop.org
+X-Gm-Message-State: AOJu0YwTllwBflW5t3APuXa7Oq3JOEXliDjgMTHHFRBRdof6ncbQVRMi
+ jiEoDHv3aXSb52DxZc8l0VpE1m228RFuNn0Mw28d3qV1K263SqEVWeaz74x9Q/MX5yqgcbdLoNV
+ Oeb0QScGSZHIsF9p9xrIVZQcz8zaE7z4ftzGiiEso7AOYtem8pnLPhMT58S2jdNA=
+X-Gm-Gg: ASbGncsMm9LCN9TLMjvv/Z2nshowtKOSrjmJKa+BudEffMrTP3XRikH6UIDfWW65Nn+
+ m8r+wlMNXHWqjTDxCl1sIi632az0HxitGZaAIiHsiHXiFd0E2Mt0OUqVw95F/KVt+9nCy3/qlwh
+ suscQYwtcAR9rzCIMUkBPfWL+8Hb5WO5MAcmDF432/7rVtanQmceuBeJx7SK5bZBTP5gMJEVsId
+ CbIFyqfKe63swMTvpVFaeV3yHPnxqvgVrJ1+I4GHWquLzRxnDqdWLR7DRXj/xPQF4aSOofyqLAL
+ YkBxGn91gaDfyBnLVghzy642pxF/0o6dwt6YR3CupqKHAXh7yh7lohQJ+Ksq7ErsqZZjDD269eD
+ Re5usRJL2GnPo1kND22qGCbb35hVkt9Jo
+X-Received: by 2002:a05:600c:154f:b0:436:30e4:459b with SMTP id
+ 5b1f17b1804b1-438dc3ca451mr67421105e9.18.1738250812879; 
+ Thu, 30 Jan 2025 07:26:52 -0800 (PST)
+X-Google-Smtp-Source: AGHT+IF5i55LyvroBppi5sagXhnryW5jxU5Q3lAVRCCxKZvooKz6TsR04LsBL0jQxaaSe4iNmLMxgA==
+X-Received: by 2002:a05:600c:154f:b0:436:30e4:459b with SMTP id
+ 5b1f17b1804b1-438dc3ca451mr67420875e9.18.1738250812484; 
+ Thu, 30 Jan 2025 07:26:52 -0800 (PST)
+Received: from ?IPV6:2003:cb:c713:3b00:16ce:8f1c:dd50:90fb?
+ (p200300cbc7133b0016ce8f1cdd5090fb.dip0.t-ipconnect.de.
+ [2003:cb:c713:3b00:16ce:8f1c:dd50:90fb])
+ by smtp.gmail.com with ESMTPSA id
+ 5b1f17b1804b1-438e23deedfsm27026195e9.16.2025.01.30.07.26.49
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Thu, 30 Jan 2025 07:26:51 -0800 (PST)
+Message-ID: <10e0b904-1ddb-429e-bcfa-22b360a841b3@redhat.com>
+Date: Thu, 30 Jan 2025 16:26:49 +0100
+MIME-Version: 1.0
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v1 2/4] mm/mmu_notifier: drop owner from
+ MMU_NOTIFY_EXCLUSIVE
+To: Alistair Popple <apopple@nvidia.com>, linux-kernel@vger.kernel.org,
  linux-doc@vger.kernel.org, dri-devel@lists.freedesktop.org,
  linux-mm@kvack.org, nouveau@lists.freedesktop.org,
- Andrew Morton <akpm@linux-foundation.org>,
- =?utf-8?B?SsOpcsO0bWU=?= Glisse <jglisse@redhat.com>,
- Jonathan Corbet <corbet@lwn.net>, Alex Shi <alexs@kernel.org>,
- Yanteng Si <si.yanteng@linux.dev>,
+ Andrew Morton <akpm@linux-foundation.org>, =?UTF-8?B?SsOpcsO0bWUgR2xpc3Nl?=
+ <jglisse@redhat.com>, Jonathan Corbet <corbet@lwn.net>,
+ Alex Shi <alexs@kernel.org>, Yanteng Si <si.yanteng@linux.dev>,
  Karol Herbst <kherbst@redhat.com>, Lyude Paul <lyude@redhat.com>,
- Danilo Krummrich <dakr@kernel.org>,
- David Airlie <airlied@gmail.com>, Simona Vetter <simona@ffwll.ch>,
- "Liam R. Howlett" <Liam.Howlett@oracle.com>,
- Lorenzo Stoakes <lorenzo.stoakes@oracle.com>,
+ Danilo Krummrich <dakr@kernel.org>, David Airlie <airlied@gmail.com>,
+ Simona Vetter <simona@ffwll.ch>, "Liam R. Howlett"
+ <Liam.Howlett@oracle.com>, Lorenzo Stoakes <lorenzo.stoakes@oracle.com>,
  Vlastimil Babka <vbabka@suse.cz>, Jann Horn <jannh@google.com>,
- Pasha Tatashin <pasha.tatashin@soleen.com>,
- Peter Xu <peterx@redhat.com>, Alistair Popple <apopple@nvidia.com>
-Subject: Re: [PATCH v1 08/12] mm/rmap: handle device-exclusive entries
- correctly in try_to_unmap_one()
-Message-ID: <20250130140832.GM5556@nvidia.com>
-References: <20250129115411.2077152-1-david@redhat.com>
- <20250129115411.2077152-9-david@redhat.com>
- <Z5tQL60SNNGCkfQR@phenom.ffwll.local>
- <59feb709-dadc-4d19-857e-49320cca3d98@redhat.com>
- <Z5t5RKFwl34vpqU4@phenom.ffwll.local>
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <Z5t5RKFwl34vpqU4@phenom.ffwll.local>
-X-ClientProxiedBy: BN8PR16CA0016.namprd16.prod.outlook.com
- (2603:10b6:408:4c::29) To CH3PR12MB8659.namprd12.prod.outlook.com
- (2603:10b6:610:17c::13)
-MIME-Version: 1.0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: CH3PR12MB8659:EE_|SJ2PR12MB8012:EE_
-X-MS-Office365-Filtering-Correlation-Id: d0efc02c-3544-444b-b6b4-08dd413794a6
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0;
- ARA:13230040|366016|1800799024|376014|7416014|921020; 
-X-Microsoft-Antispam-Message-Info: =?us-ascii?Q?OLIQX0gZGMGbWzgw8aVl0nO0rJvPrGr2aMYu/TkGErm9ehthl7FcLyqlhdMT?=
- =?us-ascii?Q?mZcPiO1nSxkvXZWyhIMLLD9LPEcpQ0OEBdVaHNpcgQ5Dhm5WunF/Y1Jh4BxH?=
- =?us-ascii?Q?Kvd8ABb/TjgGu/kFihfb+gWjGPSov0oCXWK0NFC5+IH/M0Yx+kFWOu5r+mWg?=
- =?us-ascii?Q?pnCmJkJkzeKJdNko2AkfhdBbWBCesXfvdcAWv/lzKWChQM74+WD+TynEv1RQ?=
- =?us-ascii?Q?SQlsoYcum72AKJ0Cxff+fH1w3lVVc4RilRCnS46K9Wf7lBZPggMwy+RT2mDO?=
- =?us-ascii?Q?CBhjI3tjls9KgVN+Vuvi9DO68QOQvvMKq+9zLuKfukaBg7ttD5Ju/GDv5CHX?=
- =?us-ascii?Q?RkLyZBTUiyyMJXFZ7wQeWZVHunKvFa+FmluLzcMWH9KitfJNDtyw3cpNfXR6?=
- =?us-ascii?Q?O12CoR+lDL33UnB3drRTsY14clUiAda/iBZLymRNzkQQ7w+7lOPiEN8inT62?=
- =?us-ascii?Q?8SLolQEWSAWUfcy5mmKLdpQPypLQQJYNtzFFxg9aeMtqFvmRazBXF6SQpuvi?=
- =?us-ascii?Q?E/lOkoBcvmeJsu3arNFQFwtrBkA6CKLT1WE4rHQb7vjWEETQaYHNn3N6dIo3?=
- =?us-ascii?Q?UIBAz9BwzF2CSSKieRHzwJDluAeD2N6ZoMuU0dBiobdRliU/dzkAqLaQigy8?=
- =?us-ascii?Q?KPwfu0l1KXykDsrGzYB85JJcqPXcu3OiumU1dAkueG71qR33Q05YEaVkVAq5?=
- =?us-ascii?Q?+G+/o6UoAVvQ3CH1//n6k8R6RNt8Oi1iiXwRRkgw9w9mjLqkXlvsHexQcdl+?=
- =?us-ascii?Q?C/VXx8C9HQQD53zlpt5yMUZuk2VCIi7xzFZdwCkkI8ah9Fw6WLHs8LeUkB7W?=
- =?us-ascii?Q?ydsleJ2s4CHkp5i0PMyiDIildJp9hR61vJgwhMryDhwgcw7OrBQNev68BzOq?=
- =?us-ascii?Q?8QQ5Ex5X2gAkx9UYxL/3zRuRgBZNlvfTQ8TGvc5SizWKdMFPYLDmaP5Nkz1Z?=
- =?us-ascii?Q?7KwtHWi23FHNa9jDkNnokI8Poy3wOJw7gcUfAZryrf9o0zyVtXb7QVUDpH7w?=
- =?us-ascii?Q?/Zg49WUkLZGJwmZZXngwL6Z3lSF8uVv7hCoYr6bia+9uc9NU061m/Kmhet/q?=
- =?us-ascii?Q?Fus4FPaIYyTKU+n2Ws7FSWj2gp3ZRFuoUKB0KQEc0g/C4XtZCTH81Mq9fl6E?=
- =?us-ascii?Q?u4AylSy+rH8u6CA50aUtFu1186fX5zs/DRqc1hHyBHF0/5VpzMbFmrAkFWOA?=
- =?us-ascii?Q?H6GaD2Bo2s+s3LqJ/xyvmqzn5y05S9kqCvxE2qQk1vcG3EB/mk81YympCZ4y?=
- =?us-ascii?Q?KTT9Oa41m1J6OcUvaiXhSd2k0sJ0GEj3ilKYN/JXs6JJO3pOH8n49IT0t7/a?=
- =?us-ascii?Q?0fbFf7vy98SQg+CQF0wGAc8gyaS/ebstiQkX5TCe3VLihP30b3ab1MO50GWa?=
- =?us-ascii?Q?QJYNufpfXgdtBMn+l7WYFAAWYKF5S0BwOPdboQMRLJ7v/+bgcqbajxdSKOMN?=
- =?us-ascii?Q?t4cyQIBnleg=3D?=
-X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
- IPV:NLI; SFV:NSPM; H:CH3PR12MB8659.namprd12.prod.outlook.com; PTR:; CAT:NONE;
- SFS:(13230040)(366016)(1800799024)(376014)(7416014)(921020); DIR:OUT; SFP:1101;
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: =?us-ascii?Q?lvqYAbFMzlZXIiM1Eh0WMAWPrmx2bOgsKGtsLN4qSvnDa2o29/zuWwn9YlQo?=
- =?us-ascii?Q?Q+SDF0rkpaYR3pxZgC23vr7znjhlMuG76B9Mi0vkoM8qxnh52oQ7kAkeNMAD?=
- =?us-ascii?Q?eETfswwoG8/+da/Nc+0f7jCNRH6vSBIHQtDHIsg2OGqWBpyPhG7Iq28CVka1?=
- =?us-ascii?Q?/0FOe1oof965yjoBH4xW9x/o1SiNlTm0NgShyWr447nntGiIGeI/UQfkKdic?=
- =?us-ascii?Q?dU5f32ZwidyHnmo5PlRR1fghpCO5BbcAux+Pq5nmOcSeeOVvXxCaWrBQRQ5s?=
- =?us-ascii?Q?zDJBASRy7vHJJ1FfnnAR6JLMfIYOeN9TELPsCIj2R4eMz9Ty4x9U+uSPku6B?=
- =?us-ascii?Q?aK4jwIecMOCuSDiQKEWhDREeoCLt8D7W/xo1sSzspqKY+XivhP/jcQNLryug?=
- =?us-ascii?Q?+EPgu2VXLB6hBnGCCQeiCysQCzIr791UWxZbSQYj6gwR5m29oHvW4qC1ideB?=
- =?us-ascii?Q?TRRfsVDkXhvMTJ+p3+V30u4GTSN7v7o3JRNGk9q3jbh7vtZsAL1F6hym2tnJ?=
- =?us-ascii?Q?bNnomuTno/5gyXk5B1s1fPZLsrfE0Hr0Evea3bkGW5ASchnxzxFbdK5Cs8lO?=
- =?us-ascii?Q?8dcBinJVyHFOo13xQROkPpPVkolva7LxhMWTzNVz6o5zELx5m7WHhnLSEa5x?=
- =?us-ascii?Q?y6d6zoLcHXqWvIbRsR5Tz1hbEJBgn2ZI4VpOUJZwXRfcwtO1eUmTQZi4Nl3c?=
- =?us-ascii?Q?ab60FlVWIJAxHlXnJU3K38TBgCBlPwFVit5vhKq91gZeqUZ7rOTgz0jeZsGa?=
- =?us-ascii?Q?i9j2CpZC2jPaoTAoNVFEzFfPHTYH7bUAQdf3O0rdTr02ZZa/+OC2FnztKhMm?=
- =?us-ascii?Q?diNOvJDlMPYed7PE0jBycDXpVqlG2GogO9xbeD0VLeX4WqsbH2/tmSR0aNd/?=
- =?us-ascii?Q?RJ/V7OyUeChPpTp+8A/mp2dD/jGLDOZCKs1EZS0BF9WAPzY0WfI2SvIZpDtp?=
- =?us-ascii?Q?Bkbsuf/89d/G92ZNlKAtaBP/C7VqufODHaCbw0H3H9/x82Dabg7UDpMXuJHi?=
- =?us-ascii?Q?2bo3WlrHp5iTVBZ0cqqIAUfz8wEXT+0ekNBnsiQnXAQxRAKM4kv7guJBluxt?=
- =?us-ascii?Q?cz2xl4PK1R2ycrGigu/a+BsjlU085EbpJWbJ0113TAwfbXR0o1SkjJKD42Qy?=
- =?us-ascii?Q?wAMhU9uQhFNNNs5y2/wzsJBqmfNyPvun2qgaTWz4tflZCwjA5y8P7OE8HIMJ?=
- =?us-ascii?Q?wu0Ut9a44Jv6Mc2Rc26ZUxUZqOsS67wFdLpe2KZ+cB11EL8K6W8NwfsRSKYn?=
- =?us-ascii?Q?F/i28/zkruZ3+ExvYuLzSalb1IpGF3blQPQ92PxP+MYQCBwpv/9xgpySoKM6?=
- =?us-ascii?Q?/clXtQ6z1BXA5J7vyZpBs+JPP2Vvqq5HAttAAGN4f+VqcZLUV+2EjOUn8wTX?=
- =?us-ascii?Q?VZnmTVnnyx1GcXRzIWBMuhvDI7lVG82xZrp7qCF5ZIfvBZk59Muz+7kvr4uP?=
- =?us-ascii?Q?/lzOPdDGFPhT2bx2bu1RaTOG0GuupjOfZ+HsImp/jUVB2WsBSfp1LmZxiRHl?=
- =?us-ascii?Q?UZTbJFMggZHsgIDTG4ooacW6u+GAe7yslsyu34miTQGqdYDdxhEehPiLWqbS?=
- =?us-ascii?Q?tiV/2cVKHDtPjEQIeDE=3D?=
-X-OriginatorOrg: Nvidia.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: d0efc02c-3544-444b-b6b4-08dd413794a6
-X-MS-Exchange-CrossTenant-AuthSource: CH3PR12MB8659.namprd12.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 30 Jan 2025 14:08:33.2140 (UTC)
-X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
-X-MS-Exchange-CrossTenant-Id: 43083d15-7273-40c1-b7db-39efd9ccc17a
-X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: JclOrCHgiypMNGIsI2Na4bCaOuwa861AOxikFXw4wDOpzKtmA1Gm/2/mHuZpGquJ
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: SJ2PR12MB8012
+ Pasha Tatashin <pasha.tatashin@soleen.com>, Peter Xu <peterx@redhat.com>,
+ Jason Gunthorpe <jgg@nvidia.com>
+References: <20250129115803.2084769-1-david@redhat.com>
+ <20250129115803.2084769-3-david@redhat.com>
+ <h4dnoixvp2kjeao6mzcpze4zx6t34ebpltqadkjl5zxcjhddkf@lbzo2yhzu5sz>
+ <eab05949-efc8-4c04-ace1-b4435ec894e6@redhat.com>
+ <Z5t-sFymrz5kFafV@phenom.ffwll.local>
+From: David Hildenbrand <david@redhat.com>
+Autocrypt: addr=david@redhat.com; keydata=
+ xsFNBFXLn5EBEAC+zYvAFJxCBY9Tr1xZgcESmxVNI/0ffzE/ZQOiHJl6mGkmA1R7/uUpiCjJ
+ dBrn+lhhOYjjNefFQou6478faXE6o2AhmebqT4KiQoUQFV4R7y1KMEKoSyy8hQaK1umALTdL
+ QZLQMzNE74ap+GDK0wnacPQFpcG1AE9RMq3aeErY5tujekBS32jfC/7AnH7I0v1v1TbbK3Gp
+ XNeiN4QroO+5qaSr0ID2sz5jtBLRb15RMre27E1ImpaIv2Jw8NJgW0k/D1RyKCwaTsgRdwuK
+ Kx/Y91XuSBdz0uOyU/S8kM1+ag0wvsGlpBVxRR/xw/E8M7TEwuCZQArqqTCmkG6HGcXFT0V9
+ PXFNNgV5jXMQRwU0O/ztJIQqsE5LsUomE//bLwzj9IVsaQpKDqW6TAPjcdBDPLHvriq7kGjt
+ WhVhdl0qEYB8lkBEU7V2Yb+SYhmhpDrti9Fq1EsmhiHSkxJcGREoMK/63r9WLZYI3+4W2rAc
+ UucZa4OT27U5ZISjNg3Ev0rxU5UH2/pT4wJCfxwocmqaRr6UYmrtZmND89X0KigoFD/XSeVv
+ jwBRNjPAubK9/k5NoRrYqztM9W6sJqrH8+UWZ1Idd/DdmogJh0gNC0+N42Za9yBRURfIdKSb
+ B3JfpUqcWwE7vUaYrHG1nw54pLUoPG6sAA7Mehl3nd4pZUALHwARAQABzSREYXZpZCBIaWxk
+ ZW5icmFuZCA8ZGF2aWRAcmVkaGF0LmNvbT7CwZgEEwEIAEICGwMGCwkIBwMCBhUIAgkKCwQW
+ AgMBAh4BAheAAhkBFiEEG9nKrXNcTDpGDfzKTd4Q9wD/g1oFAl8Ox4kFCRKpKXgACgkQTd4Q
+ 9wD/g1oHcA//a6Tj7SBNjFNM1iNhWUo1lxAja0lpSodSnB2g4FCZ4R61SBR4l/psBL73xktp
+ rDHrx4aSpwkRP6Epu6mLvhlfjmkRG4OynJ5HG1gfv7RJJfnUdUM1z5kdS8JBrOhMJS2c/gPf
+ wv1TGRq2XdMPnfY2o0CxRqpcLkx4vBODvJGl2mQyJF/gPepdDfcT8/PY9BJ7FL6Hrq1gnAo4
+ 3Iv9qV0JiT2wmZciNyYQhmA1V6dyTRiQ4YAc31zOo2IM+xisPzeSHgw3ONY/XhYvfZ9r7W1l
+ pNQdc2G+o4Di9NPFHQQhDw3YTRR1opJaTlRDzxYxzU6ZnUUBghxt9cwUWTpfCktkMZiPSDGd
+ KgQBjnweV2jw9UOTxjb4LXqDjmSNkjDdQUOU69jGMUXgihvo4zhYcMX8F5gWdRtMR7DzW/YE
+ BgVcyxNkMIXoY1aYj6npHYiNQesQlqjU6azjbH70/SXKM5tNRplgW8TNprMDuntdvV9wNkFs
+ 9TyM02V5aWxFfI42+aivc4KEw69SE9KXwC7FSf5wXzuTot97N9Phj/Z3+jx443jo2NR34XgF
+ 89cct7wJMjOF7bBefo0fPPZQuIma0Zym71cP61OP/i11ahNye6HGKfxGCOcs5wW9kRQEk8P9
+ M/k2wt3mt/fCQnuP/mWutNPt95w9wSsUyATLmtNrwccz63XOwU0EVcufkQEQAOfX3n0g0fZz
+ Bgm/S2zF/kxQKCEKP8ID+Vz8sy2GpDvveBq4H2Y34XWsT1zLJdvqPI4af4ZSMxuerWjXbVWb
+ T6d4odQIG0fKx4F8NccDqbgHeZRNajXeeJ3R7gAzvWvQNLz4piHrO/B4tf8svmRBL0ZB5P5A
+ 2uhdwLU3NZuK22zpNn4is87BPWF8HhY0L5fafgDMOqnf4guJVJPYNPhUFzXUbPqOKOkL8ojk
+ CXxkOFHAbjstSK5Ca3fKquY3rdX3DNo+EL7FvAiw1mUtS+5GeYE+RMnDCsVFm/C7kY8c2d0G
+ NWkB9pJM5+mnIoFNxy7YBcldYATVeOHoY4LyaUWNnAvFYWp08dHWfZo9WCiJMuTfgtH9tc75
+ 7QanMVdPt6fDK8UUXIBLQ2TWr/sQKE9xtFuEmoQGlE1l6bGaDnnMLcYu+Asp3kDT0w4zYGsx
+ 5r6XQVRH4+5N6eHZiaeYtFOujp5n+pjBaQK7wUUjDilPQ5QMzIuCL4YjVoylWiBNknvQWBXS
+ lQCWmavOT9sttGQXdPCC5ynI+1ymZC1ORZKANLnRAb0NH/UCzcsstw2TAkFnMEbo9Zu9w7Kv
+ AxBQXWeXhJI9XQssfrf4Gusdqx8nPEpfOqCtbbwJMATbHyqLt7/oz/5deGuwxgb65pWIzufa
+ N7eop7uh+6bezi+rugUI+w6DABEBAAHCwXwEGAEIACYCGwwWIQQb2cqtc1xMOkYN/MpN3hD3
+ AP+DWgUCXw7HsgUJEqkpoQAKCRBN3hD3AP+DWrrpD/4qS3dyVRxDcDHIlmguXjC1Q5tZTwNB
+ boaBTPHSy/Nksu0eY7x6HfQJ3xajVH32Ms6t1trDQmPx2iP5+7iDsb7OKAb5eOS8h+BEBDeq
+ 3ecsQDv0fFJOA9ag5O3LLNk+3x3q7e0uo06XMaY7UHS341ozXUUI7wC7iKfoUTv03iO9El5f
+ XpNMx/YrIMduZ2+nd9Di7o5+KIwlb2mAB9sTNHdMrXesX8eBL6T9b+MZJk+mZuPxKNVfEQMQ
+ a5SxUEADIPQTPNvBewdeI80yeOCrN+Zzwy/Mrx9EPeu59Y5vSJOx/z6OUImD/GhX7Xvkt3kq
+ Er5KTrJz3++B6SH9pum9PuoE/k+nntJkNMmQpR4MCBaV/J9gIOPGodDKnjdng+mXliF3Ptu6
+ 3oxc2RCyGzTlxyMwuc2U5Q7KtUNTdDe8T0uE+9b8BLMVQDDfJjqY0VVqSUwImzTDLX9S4g/8
+ kC4HRcclk8hpyhY2jKGluZO0awwTIMgVEzmTyBphDg/Gx7dZU1Xf8HFuE+UZ5UDHDTnwgv7E
+ th6RC9+WrhDNspZ9fJjKWRbveQgUFCpe1sa77LAw+XFrKmBHXp9ZVIe90RMe2tRL06BGiRZr
+ jPrnvUsUUsjRoRNJjKKA/REq+sAnhkNPPZ/NNMjaZ5b8Tovi8C0tmxiCHaQYqj7G2rgnT0kt
+ WNyWQQ==
+Organization: Red Hat
+In-Reply-To: <Z5t-sFymrz5kFafV@phenom.ffwll.local>
+X-Mimecast-Spam-Score: 0
+X-Mimecast-MFC-PROC-ID: 4pxMfsp2WwRf4Epr35Pe8CUTMzjRFYnyaPGXUvGe4ZA_1738250813
+X-Mimecast-Originator: redhat.com
+Content-Language: en-US
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -161,43 +164,35 @@ List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-On Thu, Jan 30, 2025 at 02:06:12PM +0100, Simona Vetter wrote:
-> On Thu, Jan 30, 2025 at 12:08:42PM +0100, David Hildenbrand wrote:
-> > On 30.01.25 11:10, Simona Vetter wrote:
-> > > On Wed, Jan 29, 2025 at 12:54:06PM +0100, David Hildenbrand wrote:
-> > > > Ever since commit b756a3b5e7ea ("mm: device exclusive memory access")
-> > > > we can return with a device-exclusive entry from page_vma_mapped_walk().
-> > > > 
-> > > > try_to_unmap_one() is not prepared for that, so teach it about these
-> > > > non-present nonswap PTEs.
-> > > > 
-> > > > Before that, could we also have triggered this case with device-private
-> > > > entries? Unlikely.
-> > > 
-> > > Just quick comment on this, I'm still pondering all the other aspects.
-> > > 
-> > > device-private memory is entirely owned by the driver, the core mm isn't
-> > > supposed to touch these beyond migrating it back to system memory in
-> > > do_swap_page. Plus using rmap when the driver asks for invalidating
-> > > mappings as needed.
-> > > 
-> > > So no lru, thp, migration or anything initiated by core mm should ever
-> > > happen on these device private pages. If it does, it'd be a bug.
-> > 
-> > I was not 100% sure about HWPoison handling, that's why I added that
-> > comment. In other regards I agree: reclaim etc. does not apply.
+On 30.01.25 14:29, Simona Vetter wrote:
+> On Thu, Jan 30, 2025 at 10:28:00AM +0100, David Hildenbrand wrote:
+>> On 30.01.25 06:34, Alistair Popple wrote:
+>>> Looking at hmm_test I see that doesn't use the sequence counter to ensure
+>>> the PTE remains valid whilst it is mapped. I think that is probably wrong, so
+>>> apologies if that lead you astray.
+>>
+>> Yes, the hmm_test does not completely follow the same model the nouveau
+>> implementation does; so it might not be completely correct.
 > 
-> So maybe I'm just entirely lost, but unless you have a coherent
-> interconnect I don't think hwpoisin should get involved with device
-> private memory? And for a coherent interconnect it's just device memory,
-> which isn't treated very special.
+> But unrelated but just crossed my mind:
+> 
+> I guess another crucial difference is that the hw (probably, not sure)
+> will restart the fault if we don't repair it to its liking. So the
+> hmm-test does need some kind of retry loop too somewhere to match that.
 
-I'm not sure it is meaningful, but in principle a driver could keep
-track of the poisoned private memory using that struct page
-bit. Perhaps in that sense it is more of a driver private flag than
-something the core MM would touch.
+Yes. Especially for the folio lock spinning is a rather suboptimal 
+approach. So we likely would want the option to just lock it instead of 
+try-locking it. (or getting rid of it entirely :) )
 
-If you have a coherent interconnect then you should not be using
-device private.
+> But might be good to also still land some of the other improvements
+> discussed in these threads to make make_device_exclusive a bit more
+> reliable instead of relying on busy-looping throug the hw fault handler
+> for everything.
 
-Jason
+Right.
+
+-- 
+Cheers,
+
+David / dhildenb
+
