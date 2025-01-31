@@ -2,153 +2,88 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id B4EFBA23CB9
-	for <lists+nouveau@lfdr.de>; Fri, 31 Jan 2025 12:07:00 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id BB488A23E2D
+	for <lists+nouveau@lfdr.de>; Fri, 31 Jan 2025 14:12:38 +0100 (CET)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 3E70710EA73;
-	Fri, 31 Jan 2025 11:06:51 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 8155310EAB1;
+	Fri, 31 Jan 2025 13:12:35 +0000 (UTC)
 Authentication-Results: gabe.freedesktop.org;
-	dkim=pass (1024-bit key; unprotected) header.d=redhat.com header.i=@redhat.com header.b="UjiXCco3";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="nP+czKJs";
 	dkim-atps=neutral
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from us-smtp-delivery-124.mimecast.com
- (us-smtp-delivery-124.mimecast.com [170.10.133.124])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 42B7510EA73
- for <nouveau@lists.freedesktop.org>; Fri, 31 Jan 2025 11:06:50 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1738321609;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references:autocrypt:autocrypt;
- bh=ptBTE/j9Ief471JDveY+5Ixgr7ekpcVIWvNqXG+KHaU=;
- b=UjiXCco3lIkYZMANt/kP86DxjvjaSfPJit+43bJAzyCszruV3eFoHWhC0KuC9GoirhWhTn
- wcN31bxL4gzx0XIy7cX+8awYRJebKuwwwGsD8hOYqKXBElYiPhMUJ2BqQb+4rwwDJLZUwo
- MKSVd15aUVIV4eUHRnNjB5oDghM0R3I=
-Received: from mail-wm1-f71.google.com (mail-wm1-f71.google.com
- [209.85.128.71]) by relay.mimecast.com with ESMTP with STARTTLS
- (version=TLSv1.3, cipher=TLS_AES_256_GCM_SHA384) id
- us-mta-654-VsMET9F0MPGoyn1E147cvA-1; Fri, 31 Jan 2025 06:06:47 -0500
-X-MC-Unique: VsMET9F0MPGoyn1E147cvA-1
-X-Mimecast-MFC-AGG-ID: VsMET9F0MPGoyn1E147cvA
-Received: by mail-wm1-f71.google.com with SMTP id
- 5b1f17b1804b1-4388eee7073so13218965e9.0
- for <nouveau@lists.freedesktop.org>; Fri, 31 Jan 2025 03:06:47 -0800 (PST)
+Received: from mail-wr1-f51.google.com (mail-wr1-f51.google.com
+ [209.85.221.51])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id CE15910EAAD;
+ Fri, 31 Jan 2025 13:12:33 +0000 (UTC)
+Received: by mail-wr1-f51.google.com with SMTP id
+ ffacd0b85a97d-3862b40a6e0so1268975f8f.0; 
+ Fri, 31 Jan 2025 05:12:33 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=gmail.com; s=20230601; t=1738329152; x=1738933952; darn=lists.freedesktop.org;
+ h=content-transfer-encoding:in-reply-to:from:content-language
+ :references:cc:to:subject:user-agent:mime-version:date:message-id
+ :from:to:cc:subject:date:message-id:reply-to;
+ bh=8Qf5Ag+gkCkodLzQTGh44JB0E7mlh4X9B+GfpD3S+A8=;
+ b=nP+czKJsxHNOFGSVQFQHdpT/+kE32LXIHf42AxZqyucSo5BwS5BXonmWVZaJzSqMBp
+ b4ytEwt92dVLwQr8rRG0ocDukBPJWu9l5328lgXsuMOzaD2OUcfGUxMmhXEllu3VBiXT
+ 8ICAZfst/4mt1+hVdeuc8x0NZUmDEX7Gf8DIzdrhH9p8TmHMT0UjeXc5AJ9rfhRIsMiq
+ VtGW1xBvOGXxIKXu/0R+EmTQW7nldmvTqp8Zl8nDRXWCz3LCgWvbuZ9kjIipr4itPIuq
+ 4y1z7creLLJRIKO7l2nx6zx+eKIUlc9yZhlZHAGNTD7kmyl1kMg+SpPc4fFX0oNkExXG
+ JjNw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1738321606; x=1738926406;
- h=content-transfer-encoding:in-reply-to:organization:autocrypt
- :content-language:from:references:cc:to:subject:user-agent
- :mime-version:date:message-id:x-gm-message-state:from:to:cc:subject
- :date:message-id:reply-to;
- bh=ptBTE/j9Ief471JDveY+5Ixgr7ekpcVIWvNqXG+KHaU=;
- b=bdBynm7wuvjarTfzQrZEkgpEPdKPP62nuVbznq/k0yzqiYOkoasH/9fdFoxOMIghlU
- eKdR2adclj8Ly52PJpxv1O4zX9El2umkrv0VyzYbnI3pjMXQ4hB0Qtsa4RIfe5bLgGIQ
- eiWTPTWpnWo+fxPRUpMaAMANqAzU/K04OGERxxc+90/LXcDAxL0nZC4T9vZunKOEiSey
- CvaFHrLPvCqJKSN9u5+T9fsfbVAe0PfliebrGuNh9OJWQOUwh4XHK2qsVT6Rdc9SGJ3S
- NtMfBEi+MehNhv3INN9csNi2hVRaTt0i2UmcszpDqNt88b9zAIPdRp7/7ri/InnrBwGR
- EaVA==
+ d=1e100.net; s=20230601; t=1738329152; x=1738933952;
+ h=content-transfer-encoding:in-reply-to:from:content-language
+ :references:cc:to:subject:user-agent:mime-version:date:message-id
+ :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+ bh=8Qf5Ag+gkCkodLzQTGh44JB0E7mlh4X9B+GfpD3S+A8=;
+ b=HgfkeergWDBiuLs4/IQyTN4iCir043oq9G2qBOqJKsIVWoK6lRKXZVgcR8us/ydTdg
+ +7KB3s8CEOqZlHGp72OHcj7s3MakoCFY2tfcC0/D0xotD2lFTlUa4v2pRkB8eB0VACiL
+ opZfNCgq7teZ4PnhO3LfP9yf1R9iPvO0r9XR981rOnsaqC+FZVi9lQGxlv7d52UgqwVS
+ MDl/H8m+KCvjrar87xsWBVRa8PALPIfo8zkT0NZ3jE2ABTF6I46+GUpZN6E+ZM3WFckV
+ 8XCEsW7sBmohqCO5UYpAY4h92X8jxQj0j8tCoNpr8n4Kc0OEzr6cEWhj0QL7m+8jk8NO
+ xhjA==
 X-Forwarded-Encrypted: i=1;
- AJvYcCVtiJ5Yj1N/FfwCHrOw1KH05f/H9B5UUDIyKTUYjQKVNdAP30XQtsEAoI0z67SmLsuCbnt/Ero/@lists.freedesktop.org
-X-Gm-Message-State: AOJu0Yy/HgaGo8MIVEMr52Lxi/zgTaKUa/yJjRy/UgI7VXs58pjW6NVC
- IiHvnAlhK408CGPcuN5xb7fTLFPPOwekbfEE2Z/xcbulaEjOesQMhOtj0i5lQ5Rdtp2YOw6xHrE
- jP7kQhecrNMqZIb8MkqeZEAkVuV3gHjUqNKOc5E3hT4UB9Vo6oSIMSLvb/AMYOZU=
-X-Gm-Gg: ASbGncvk7sUCOOutUOPvGhUBwC6W0i1OW5ODHGIBQyLnb6Xb+NmXrgOexpFJdUUZdUH
- R4QqZ+nZgy7gk2r7kg3H93ZnlD03tocfOjmvrGYob6Uu5rTOwnxtxaTi8xMkUUOtgKLU4vWjItH
- +OvwkKMRvS/FR6mohlTyaOVeqIK9hzxoMys2VaRWE1Ok3JSKhw6M7U3Hobrg+dKbyjsultG9e+h
- Glvot7dhB/VCg+2GQGhK70Ur6um5UaQElR1mAZBmhP50q8GlZmdvp8phryZM6JUqsgMDSFuWKRi
- Xr5SeB05Sj4zNck1DRHBbe0euR0t5373u69t5n3//3yMFn744NEsD0ItkAhh1q/htCh5387B2zT
- RBLgzh7/OMSDZkDwfTSeKlJIT2HHDsgbc
-X-Received: by 2002:a05:600c:1c9b:b0:434:fc5d:179c with SMTP id
- 5b1f17b1804b1-438e1705f38mr61309825e9.13.1738321606659; 
- Fri, 31 Jan 2025 03:06:46 -0800 (PST)
-X-Google-Smtp-Source: AGHT+IHvI25JKGadHoBsKNpaNligj01qj4xJdVU/Z3aCpJkv3iDtFRRerBqry12mhnck6BMQkG+OlA==
-X-Received: by 2002:a05:600c:1c9b:b0:434:fc5d:179c with SMTP id
- 5b1f17b1804b1-438e1705f38mr61309445e9.13.1738321606312; 
- Fri, 31 Jan 2025 03:06:46 -0800 (PST)
-Received: from ?IPV6:2003:cb:c70a:1c00:b8d4:bc62:e7ed:ec0e?
- (p200300cbc70a1c00b8d4bc62e7edec0e.dip0.t-ipconnect.de.
- [2003:cb:c70a:1c00:b8d4:bc62:e7ed:ec0e])
+ AJvYcCU6Gu7rNNL8YaeNpdBNliYImydXbr3yd8eHqmO63NRrgSqCxMqTKpFI0m2oTBf2CSBSXCopy2P8V0Y=@lists.freedesktop.org,
+ AJvYcCUK/pandPRx7cIbhgvcTwo+fj5q54PhZmyOp3wZpupNyzjs9o6VGliZSrkWelHoLWj63SHQndQUPFE=@lists.freedesktop.org,
+ AJvYcCVAKh3QX8ENut49+SnaRGP6bFYWiWAnKw9vR2SHPDz8UHxX4uoLocApcU95XVHmOh4eA6+pnw==@lists.freedesktop.org,
+ AJvYcCVe62XdqrKI61xSRUImfmG4SymYJpbU8Mz6B6gpcbt3h+eHH9TbscEXPE+3zldrhz1SNIhrSYUh0g==@lists.freedesktop.org,
+ AJvYcCWaQPTsCjanua9piLkJNaeUMhnVaUPTFFnJef0shkJ5PgkB8oSpdfADWEjcw26jvoYFoftsOtnP71jA@lists.freedesktop.org,
+ AJvYcCXDpfbC/We0AGxGNaB5ryBhmLo42FVFQ9jRp5kjbpHihDHk3W+asBVpgMB0oibntO+cux9GuL/TZw==@lists.freedesktop.org
+X-Gm-Message-State: AOJu0Yz8jm8CLa155e22e2+teyh5B5BCJAP8SGHXswOsycJM32ihqwSS
+ 4mNvuhdZTr6KAdz2Xc7ggUd4S1kF06eF4J++CxSinObnUxYAFvxf
+X-Gm-Gg: ASbGncsNaFD9KEnDo7Ur7R5vsusmXxye1ZjIvyRmHpOUoEapr4tlKgGpSAy12cXkTrG
+ piifCW9pcTWK7ttqjHsVpHVeAeIaO1lEtELgM8bCZQFR9bd8NwcFefl0SjqH5o5k3e+MMiOJNTd
+ PmEOrv9NYOlZfTKpSWzHUQJoqO8edtuukyETvVpgtLw/dKRCJxs0csi4IRXsgbbDuVZzFc/pqP1
+ Q+gTfeYxKvupIKVjxuIMkqw1pOkU/ebJRAQNCsKZ8QAofcI7yuw3yOadch2CqXzEPYon1YnyLuK
+ e6gHqeo4EU/CQ4E+bAGt2TJHCguBN5zaoKLZv7UhiH7v
+X-Google-Smtp-Source: AGHT+IGKBtM8zdX0f/k9fSlmikQgi6UfU2qNH1ycY66SNDkJyOrXViqSqC8f4KUEz2AE7pAcFmrXww==
+X-Received: by 2002:a5d:59a6:0:b0:385:f1f2:13f1 with SMTP id
+ ffacd0b85a97d-38c51951c51mr9664356f8f.22.1738329150361; 
+ Fri, 31 Jan 2025 05:12:30 -0800 (PST)
+Received: from [10.254.108.83] (munvpn.amd.com. [165.204.72.6])
  by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-438d7b5eaecsm59983415e9.3.2025.01.31.03.06.43
+ 5b1f17b1804b1-438dcc263f0sm90055545e9.9.2025.01.31.05.12.29
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Fri, 31 Jan 2025 03:06:44 -0800 (PST)
-Message-ID: <cab05891-cfce-4d64-a05f-b90038d5ee9f@redhat.com>
-Date: Fri, 31 Jan 2025 12:06:42 +0100
+ Fri, 31 Jan 2025 05:12:29 -0800 (PST)
+Message-ID: <0b20e88a-9009-4fa2-b5cb-ab78ce834587@gmail.com>
+Date: Fri, 31 Jan 2025 14:12:28 +0100
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v1 07/12] mm/page_vma_mapped: device-private entries are
- not migration entries
-To: Alistair Popple <apopple@nvidia.com>
-Cc: linux-kernel@vger.kernel.org, linux-doc@vger.kernel.org,
- dri-devel@lists.freedesktop.org, linux-mm@kvack.org,
- nouveau@lists.freedesktop.org, Andrew Morton <akpm@linux-foundation.org>,
- =?UTF-8?B?SsOpcsO0bWUgR2xpc3Nl?= <jglisse@redhat.com>,
- Jonathan Corbet <corbet@lwn.net>, Alex Shi <alexs@kernel.org>,
- Yanteng Si <si.yanteng@linux.dev>, Karol Herbst <kherbst@redhat.com>,
- Lyude Paul <lyude@redhat.com>, Danilo Krummrich <dakr@kernel.org>,
- David Airlie <airlied@gmail.com>, Simona Vetter <simona@ffwll.ch>,
- "Liam R. Howlett" <Liam.Howlett@oracle.com>,
- Lorenzo Stoakes <lorenzo.stoakes@oracle.com>,
- Vlastimil Babka <vbabka@suse.cz>, Jann Horn <jannh@google.com>,
- Pasha Tatashin <pasha.tatashin@soleen.com>, Peter Xu <peterx@redhat.com>,
- Jason Gunthorpe <jgg@nvidia.com>
-References: <20250129115411.2077152-1-david@redhat.com>
- <20250129115411.2077152-8-david@redhat.com>
- <baraw2czilsofpedok3jtxxshfaxjrmef6u42pitibtcst6mel@scoukpiwnvvc>
-From: David Hildenbrand <david@redhat.com>
-Autocrypt: addr=david@redhat.com; keydata=
- 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
- WNyWQQ==
-Organization: Red Hat
-In-Reply-To: <baraw2czilsofpedok3jtxxshfaxjrmef6u42pitibtcst6mel@scoukpiwnvvc>
-X-Mimecast-Spam-Score: 0
-X-Mimecast-MFC-PROC-ID: BkWuW4ISNWd3dAUTDKNQQkjByjMDqTeAwvmpTroov8M_1738321607
-X-Mimecast-Originator: redhat.com
+Subject: Re: [PATCH v7 0/7] Improve gpu_scheduler trace events + uAPI
+To: Pierre-Eric Pelloux-Prayer <pierre-eric.pelloux-prayer@amd.com>
+Cc: amd-gfx@lists.freedesktop.org, dri-devel@lists.freedesktop.org,
+ etnaviv@lists.freedesktop.org, freedreno@lists.freedesktop.org,
+ intel-xe@lists.freedesktop.org, lima@lists.freedesktop.org,
+ linaro-mm-sig@lists.linaro.org, linux-arm-msm@vger.kernel.org,
+ linux-doc@vger.kernel.org, linux-kernel@vger.kernel.org,
+ linux-media@vger.kernel.org, nouveau@lists.freedesktop.org
+References: <20250131110328.706695-1-pierre-eric.pelloux-prayer@amd.com>
 Content-Language: en-US
+From: =?UTF-8?Q?Christian_K=C3=B6nig?= <ckoenig.leichtzumerken@gmail.com>
+In-Reply-To: <20250131110328.706695-1-pierre-eric.pelloux-prayer@amd.com>
 Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
+Content-Transfer-Encoding: 8bit
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -163,24 +98,87 @@ List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-On 31.01.25 00:36, Alistair Popple wrote:
-> On Wed, Jan 29, 2025 at 12:54:05PM +0100, David Hildenbrand wrote:
->> It's unclear why they would be considered migration entries; they are
->> not.
-> 
-> Yeah, I agree that doesn't seem right. I suspect I was initially modelling
-> device exclusive entries similar to migration entries but obviously went too
-> far. So thanks for fixing:
-> 
-> Reviewed-by: Alistair Popple <apopple@nvidia.com>
+I can't see patch #1 in my inbox for some reason, but I already know 
+what it does from your repository.
 
-Thanks ... fixing all the wrong use of "device-private" in the 
-subject+description ... not sure what my mind was doing there.
+Feel free to add Reviewed-by: Christian König <christian.koenig@amd.com> 
+to the entire series.
 
-It's all about "device-exclusive" of course.
+Regards,
+Christian.
 
--- 
-Cheers,
-
-David / dhildenb
+Am 31.01.25 um 12:02 schrieb Pierre-Eric Pelloux-Prayer:
+> Hi,
+>
+> The initial goal of this series was to improve the drm and amdgpu
+> trace events to be able to expose more of the inner workings of
+> the scheduler and drivers to developers via tools.
+>
+> Then, the series evolved to become focused only on gpu_scheduler.
+> The changes around vblank events will be part of a different
+> series, as well as the amdgpu ones.
+>
+> Moreover Sima suggested to make some trace events stable uAPI,
+> so tools can rely on them long term.
+>
+> The first patches extend and cleanup the gpu scheduler events.
+>
+> The last one adds a documentation entry in drm-uapi.rst.
+>
+> Changes since v6:
+> * Addressed comments from Philipp, Tvrtko, Steven
+> * The commit storing drm_client_id in sched_fence adds an extra
+> field which looks like a duplicate of the owner field. Currently
+> amdgpu uses the owner field with some magic values, so we have to
+> have 2 separate fields for now, but ultimately one could be removed.
+> Similarly storing the drm_client_id in the sched_entity is not
+> really possible as there's nothing preventing a driver to use a
+> sched_entity with multiple drm_file instances.
+>
+>
+> Useful links:
+> - userspace tool using the updated events:
+> https://gitlab.freedesktop.org/tomstdenis/umr/-/merge_requests/37
+> - v6:
+> https://lists.freedesktop.org/archives/dri-devel/2024-November/477644.html
+>
+> Pierre-Eric Pelloux-Prayer (7):
+>    drm/debugfs: output client_id in in drm_clients_info
+>    drm/sched: store the drm client_id in drm_sched_fence
+>    drm/sched: add device name to the drm_sched_process_job event
+>    drm/sched: cleanup gpu_scheduler trace events
+>    drm/sched: trace dependencies for gpu jobs
+>    drm/sched: add the drm_client_id to the drm_sched_run/exec_job events
+>    drm/doc: document some tracepoints as uAPI
+>
+>   Documentation/gpu/drm-uapi.rst                |  19 +++
+>   drivers/accel/amdxdna/aie2_ctx.c              |   3 +-
+>   drivers/gpu/drm/amd/amdgpu/amdgpu_amdkfd.c    |   2 +-
+>   drivers/gpu/drm/amd/amdgpu/amdgpu_cs.c        |   3 +-
+>   drivers/gpu/drm/amd/amdgpu/amdgpu_job.c       |   8 +-
+>   drivers/gpu/drm/amd/amdgpu/amdgpu_job.h       |   3 +-
+>   drivers/gpu/drm/drm_debugfs.c                 |  10 +-
+>   drivers/gpu/drm/etnaviv/etnaviv_gem_submit.c  |   2 +-
+>   drivers/gpu/drm/imagination/pvr_job.c         |   2 +-
+>   drivers/gpu/drm/imagination/pvr_queue.c       |   5 +-
+>   drivers/gpu/drm/imagination/pvr_queue.h       |   2 +-
+>   drivers/gpu/drm/lima/lima_gem.c               |   2 +-
+>   drivers/gpu/drm/lima/lima_sched.c             |   6 +-
+>   drivers/gpu/drm/lima/lima_sched.h             |   3 +-
+>   drivers/gpu/drm/msm/msm_gem_submit.c          |   8 +-
+>   drivers/gpu/drm/nouveau/nouveau_sched.c       |   3 +-
+>   drivers/gpu/drm/panfrost/panfrost_drv.c       |   2 +-
+>   drivers/gpu/drm/panthor/panthor_drv.c         |   3 +-
+>   drivers/gpu/drm/panthor/panthor_mmu.c         |   2 +-
+>   drivers/gpu/drm/panthor/panthor_sched.c       |   5 +-
+>   drivers/gpu/drm/panthor/panthor_sched.h       |   3 +-
+>   .../gpu/drm/scheduler/gpu_scheduler_trace.h   | 123 ++++++++++++++----
+>   drivers/gpu/drm/scheduler/sched_entity.c      |   8 +-
+>   drivers/gpu/drm/scheduler/sched_fence.c       |   4 +-
+>   drivers/gpu/drm/scheduler/sched_main.c        |   8 +-
+>   drivers/gpu/drm/v3d/v3d_submit.c              |   2 +-
+>   drivers/gpu/drm/xe/xe_sched_job.c             |   3 +-
+>   include/drm/gpu_scheduler.h                   |  12 +-
+>   28 files changed, 192 insertions(+), 64 deletions(-)
+>
 
