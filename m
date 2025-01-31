@@ -2,98 +2,102 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id BED16A23B6D
-	for <lists+nouveau@lfdr.de>; Fri, 31 Jan 2025 10:30:16 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id EA1EFA23C8B
+	for <lists+nouveau@lfdr.de>; Fri, 31 Jan 2025 11:56:15 +0100 (CET)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id C9B7410EA47;
-	Fri, 31 Jan 2025 09:30:14 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 73CF110E1C2;
+	Fri, 31 Jan 2025 10:56:11 +0000 (UTC)
 Authentication-Results: gabe.freedesktop.org;
-	dkim=pass (1024-bit key; unprotected) header.d=redhat.com header.i=@redhat.com header.b="IXMndzm0";
+	dkim=pass (1024-bit key; unprotected) header.d=redhat.com header.i=@redhat.com header.b="SsH01pe0";
 	dkim-atps=neutral
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
 Received: from us-smtp-delivery-124.mimecast.com
  (us-smtp-delivery-124.mimecast.com [170.10.129.124])
- by gabe.freedesktop.org (Postfix) with ESMTPS id C4F6E10EA56
- for <nouveau@lists.freedesktop.org>; Fri, 31 Jan 2025 09:30:13 +0000 (UTC)
+ by gabe.freedesktop.org (Postfix) with ESMTPS id C628F10E1C2
+ for <nouveau@lists.freedesktop.org>; Fri, 31 Jan 2025 10:56:09 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1738315813;
+ s=mimecast20190719; t=1738320969;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ to:to:cc:mime-version:mime-version:content-type:content-type:
  content-transfer-encoding:content-transfer-encoding:
  in-reply-to:in-reply-to:references:references:autocrypt:autocrypt;
- bh=6JX/RWwIhNXl3m6w98kdtL5L38gt1l8nq6fffLr0F0g=;
- b=IXMndzm0stz3lph4j5NsphtstOp6VhI4UDD/RadLTWM1gGGo+PXoddzSHIjkQjrIuuOgwL
- rJ15V+tN//I8JuJtgY6n0KNKG9k0kwgKSzsogVO/bDjPoYvQyKq3fDp/CSYSUEhWc9g3Tl
- uAJn9NlHHn8b8qE5qI8RSJUR3hcnLSw=
+ bh=Q3RpfUrdZBCMnrOyM0k8HuSUcAta7Y636lLqMrYrWx8=;
+ b=SsH01pe0MxZrQQJDVXTOY7/itGqNZ24qhWI2Xt63e9OrFkxxjSGN6dIEJ7tXlZXWN3Pu10
+ nNGngeCtGyxOlZSnfHLd8i6xSH6HX2kb27GsKQ22jWtk49R018NUeYU3A6bZB4WQ8J33QM
+ xQKmiDC2BrCRD5bIA0X0m9czMScTDOg=
 Received: from mail-wr1-f71.google.com (mail-wr1-f71.google.com
  [209.85.221.71]) by relay.mimecast.com with ESMTP with STARTTLS
  (version=TLSv1.3, cipher=TLS_AES_256_GCM_SHA384) id
- us-mta-59-CegLlWIeN_qG4pZWyCsPmw-1; Fri, 31 Jan 2025 04:30:11 -0500
-X-MC-Unique: CegLlWIeN_qG4pZWyCsPmw-1
-X-Mimecast-MFC-AGG-ID: CegLlWIeN_qG4pZWyCsPmw
+ us-mta-335-xefhATWFO6e-hMZbwQItYg-1; Fri, 31 Jan 2025 05:56:07 -0500
+X-MC-Unique: xefhATWFO6e-hMZbwQItYg-1
+X-Mimecast-MFC-AGG-ID: xefhATWFO6e-hMZbwQItYg
 Received: by mail-wr1-f71.google.com with SMTP id
- ffacd0b85a97d-38c5d9530ebso1012895f8f.1
- for <nouveau@lists.freedesktop.org>; Fri, 31 Jan 2025 01:30:11 -0800 (PST)
+ ffacd0b85a97d-3862e986d17so702320f8f.3
+ for <nouveau@lists.freedesktop.org>; Fri, 31 Jan 2025 02:56:06 -0800 (PST)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1738315810; x=1738920610;
+ d=1e100.net; s=20230601; t=1738320966; x=1738925766;
  h=content-transfer-encoding:in-reply-to:organization:autocrypt
- :content-language:from:references:cc:to:subject:user-agent
- :mime-version:date:message-id:x-gm-message-state:from:to:cc:subject
- :date:message-id:reply-to;
- bh=6JX/RWwIhNXl3m6w98kdtL5L38gt1l8nq6fffLr0F0g=;
- b=qpESK02PE3C7preQWCyLuz48P/fSsKTIRqbOmrZPeQ4T2CkJaAfHQzFwBrmPXJX6Xz
- OBwevrCkOq3OULbLmX2CU1VC5ILL1hRbe4qlz5fWKE1k4WExj6s6fU3QM1JU3QxYYUD9
- iBVW+/bp1+UlbOPGFmVOO9q9B0rPKfB3pnQGhsHax+s8x1/KTj+MEZxaHZkajWvrPqM9
- RuOAD7h43UvTosm50rWI9DeuLrwVhrqWm0MTcOjB8igx7BWhN83BHINDnACv0Lhr0ZIF
- Wsgfnx1lCd5Zl/k1PHPp5+SeVncPVtW9LInmlVMgO/8eqw9Q0LzwqOa0Bp/24p27FH72
- VDkg==
+ :content-language:from:references:to:subject:user-agent:mime-version
+ :date:message-id:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=Q3RpfUrdZBCMnrOyM0k8HuSUcAta7Y636lLqMrYrWx8=;
+ b=fgUCHGqgIPAgCzfw79lmGpos48z9C9Z/Atci+x+i+UnCaZoofd7DGXuYuLeNdB/1ja
+ TRn4FIIknpDjYOFL3Kbe2ajuQLBbvpreeKPbTQ/zCmIyhzFlkpJVi5maWFVAZ29WPqUy
+ rClvsCuJJfZA0nEG1akvLWBGpkg6hKVNA8loBlJrjQXBzxvC9ncUv9vto6CB/PAIt5cB
+ SE0UzJ6pbXtLpP7gcEvb787lHXGvQYu4BahWIuNOCNj4u1C8R+o0IWYMKZZzDnFvUHRn
+ ykV0uyJyJ2r3MfTVB91fumfjp8EEk7rgQ5IhgBV10fO3iZmiBlbTw/7oMIup4VOMD55I
+ 890Q==
 X-Forwarded-Encrypted: i=1;
- AJvYcCVEsepxERT2MlpV3X6w3N2Dgk72lcgFPeF53l7NpaK8Nc6Q/3DaWtFe0w5tNPIU3IVqJeZ1mtbZ@lists.freedesktop.org
-X-Gm-Message-State: AOJu0Yz6nEcWXX0kLAcZTZNebdjjAql1BPDw7iKdE1gHUEPNMohTIrgh
- OOJE5/u2GekvwLry5o+iQhc6avOu5YZxBQJvi7D0PxABN6xZsNM5RzIGj3CRVuKEX20rTnCA87C
- jQkO6UdiWxwfWsB142fHmncBUwvCADTgFWwyEMOV3v6l7/5epIMxOModS2utqqPc=
-X-Gm-Gg: ASbGncvR7VTmtRwFaybqb9EXlaO1crfn+8ArwqZRSLrtyGD6KOynHdf6/4E9oPwhIID
- u4ygOcqoY+w/X4WlkGsyH1sB9kP+N2E7R+NINKdEilYsbu62E+Kz6OmOdCfqn5Ng47nsLWNFWA/
- BoOFcXB01o4CwgROGvjUztYwCVuIX/8+bCMnQPDKaqliRWKWxds1VkusntdqCYYcU7DLFaAISbw
- u6hgJKZ6SwqQRxAygax28sma4vHHEMjonMAuMgT3ngxUSglmhRYHaq7WR6xNhz70TSjCJspwU11
- 78NKIOKCg5+d/5Nm9dHvHN3q8TPhN0ja
-X-Received: by 2002:a5d:5f93:0:b0:386:3213:5b9b with SMTP id
- ffacd0b85a97d-38c51e8e12fmr9404968f8f.43.1738315810058; 
- Fri, 31 Jan 2025 01:30:10 -0800 (PST)
-X-Google-Smtp-Source: AGHT+IF/lPrwSVroidbMiKYfbD1/nXp46l+US2HSio5xTQO5OhxfVSCZ2fT04LU5R2PHsMKzzXSdnQ==
-X-Received: by 2002:a5d:5f93:0:b0:386:3213:5b9b with SMTP id
- ffacd0b85a97d-38c51e8e12fmr9404919f8f.43.1738315809686; 
- Fri, 31 Jan 2025 01:30:09 -0800 (PST)
-Received: from [192.168.3.141] (p5b0c6e05.dip0.t-ipconnect.de. [91.12.110.5])
+ AJvYcCXqG0ka2OIcYjrHhsqxfM6X55tiK8VQkSbZfgix/VnL/sCekQzyIcWW7lZM/89lyRXwmfM88uCV@lists.freedesktop.org
+X-Gm-Message-State: AOJu0YyADHwcDz58xcrfYv010uu+WeXKIKyo/eroN2T2TGuaVIOC0rMS
+ 4ZP0OqyeGkrpuqgK1LuUCpawTegL3AQbLmrtVoP7mvhcaPjaYmy7sAhA6ic9fPG/wxZnVfN0FoF
+ I/+EMwi6tYho4o7cyrnBIUkc0clrBWUk9VcX5j6Lju24wr5FdMdebDousr0jak8c=
+X-Gm-Gg: ASbGncs/lYY6A1bBISp4F5jUY5tqi3c2m7Uhbeelr6/hYIicjYLpkTjvYBaxyoSUWa0
+ pWs8dqth3+e3VzNtyOKn1qmNdhTlxz2Yek53kDX0X5hhehjoA8/9BKCUyhaFL5IDTrcMhFCRNL7
+ W9vZRdAWCmAdBmCndZ298t7C1AXn4nGhsLDCYT3ZsHbECIXGSOXQdO08NYKZPmYC3F3PPrUfRoV
+ SCGhtMo4ggChiJ5mPqeb19wq188y6Jyp791Uko/BpuwVieTWVnJx0LRiQrd54xeVz+g3DckbyET
+ +2uyW8o9CSPFK9wVTu65QqHPj4pG9CP+DNBNcczXrCXv1hY4x4e8ZgWaJywcmvtJDCCRe+XZSB0
+ MHZkMOlHzdH+GKm+mhIJ7bl8HtZcZu2g9
+X-Received: by 2002:a05:6000:1a8b:b0:385:f47b:1501 with SMTP id
+ ffacd0b85a97d-38c5195fd82mr8250983f8f.32.1738320965943; 
+ Fri, 31 Jan 2025 02:56:05 -0800 (PST)
+X-Google-Smtp-Source: AGHT+IH+I+ynCeZEHXX+6WrhMhXHSL94RRp5D9nLI6LDBxYzej6H/Ex/I2OwQyT0gbWRqDVNDvdr0w==
+X-Received: by 2002:a05:6000:1a8b:b0:385:f47b:1501 with SMTP id
+ ffacd0b85a97d-38c5195fd82mr8250948f8f.32.1738320965490; 
+ Fri, 31 Jan 2025 02:56:05 -0800 (PST)
+Received: from ?IPV6:2003:cb:c70a:1c00:b8d4:bc62:e7ed:ec0e?
+ (p200300cbc70a1c00b8d4bc62e7edec0e.dip0.t-ipconnect.de.
+ [2003:cb:c70a:1c00:b8d4:bc62:e7ed:ec0e])
  by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-438e23e5e53sm48600365e9.17.2025.01.31.01.29.58
+ ffacd0b85a97d-38c5c102fcasm4451251f8f.38.2025.01.31.02.55.56
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Fri, 31 Jan 2025 01:29:58 -0800 (PST)
-Message-ID: <2985fbe9-8af8-44c9-bb9e-b3ab3131981a@redhat.com>
-Date: Fri, 31 Jan 2025 10:29:57 +0100
+ Fri, 31 Jan 2025 02:55:58 -0800 (PST)
+Message-ID: <d552cc03-b7af-44be-bcaf-13da720a2226@redhat.com>
+Date: Fri, 31 Jan 2025 11:55:55 +0100
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v1 03/12] mm/rmap: convert make_device_exclusive_range()
- to make_device_exclusive()
-To: Alistair Popple <apopple@nvidia.com>
-Cc: linux-kernel@vger.kernel.org, linux-doc@vger.kernel.org,
- dri-devel@lists.freedesktop.org, linux-mm@kvack.org,
- nouveau@lists.freedesktop.org, Andrew Morton <akpm@linux-foundation.org>,
- =?UTF-8?B?SsOpcsO0bWUgR2xpc3Nl?= <jglisse@redhat.com>,
- Jonathan Corbet <corbet@lwn.net>, Alex Shi <alexs@kernel.org>,
- Yanteng Si <si.yanteng@linux.dev>, Karol Herbst <kherbst@redhat.com>,
- Lyude Paul <lyude@redhat.com>, Danilo Krummrich <dakr@kernel.org>,
- David Airlie <airlied@gmail.com>, Simona Vetter <simona@ffwll.ch>,
- "Liam R. Howlett" <Liam.Howlett@oracle.com>,
- Lorenzo Stoakes <lorenzo.stoakes@oracle.com>,
+Subject: Re: [PATCH v1 05/12] mm/memory: detect writability in
+ restore_exclusive_pte() through can_change_pte_writable()
+To: Alistair Popple <apopple@nvidia.com>, linux-kernel@vger.kernel.org,
+ linux-doc@vger.kernel.org, dri-devel@lists.freedesktop.org,
+ linux-mm@kvack.org, nouveau@lists.freedesktop.org,
+ Andrew Morton <akpm@linux-foundation.org>, =?UTF-8?B?SsOpcsO0bWUgR2xpc3Nl?=
+ <jglisse@redhat.com>, Jonathan Corbet <corbet@lwn.net>,
+ Alex Shi <alexs@kernel.org>, Yanteng Si <si.yanteng@linux.dev>,
+ Karol Herbst <kherbst@redhat.com>, Lyude Paul <lyude@redhat.com>,
+ Danilo Krummrich <dakr@kernel.org>, David Airlie <airlied@gmail.com>,
+ Simona Vetter <simona@ffwll.ch>, "Liam R. Howlett"
+ <Liam.Howlett@oracle.com>, Lorenzo Stoakes <lorenzo.stoakes@oracle.com>,
  Vlastimil Babka <vbabka@suse.cz>, Jann Horn <jannh@google.com>,
  Pasha Tatashin <pasha.tatashin@soleen.com>, Peter Xu <peterx@redhat.com>,
  Jason Gunthorpe <jgg@nvidia.com>
 References: <20250129115411.2077152-1-david@redhat.com>
- <20250129115411.2077152-4-david@redhat.com>
- <b3stuhf2s6236zawaa6zt6x3fg6oamrtj3pwajlyoxlaxdmdtf@arqxcoemsjfg>
- <dibd7n5uhmpjvy2welm2lrxnrpxd3h2qkzgboca4xq634ib5dl@oojnkmmi7frl>
+ <20250129115411.2077152-6-david@redhat.com>
+ <Z5tLmYOQaZrdWQHN@phenom.ffwll.local>
+ <2670f65f-e973-483e-aed6-526d00125ad7@redhat.com>
+ <Z5t4rrkRiOsRY2jH@phenom.ffwll.local>
+ <z7s7xb2ftv5hqg3uzjqkou6enguleazwwehxbi5zulbkar2aej@zlbdh2kdewdn>
 From: David Hildenbrand <david@redhat.com>
 Autocrypt: addr=david@redhat.com; keydata=
  xsFNBFXLn5EBEAC+zYvAFJxCBY9Tr1xZgcESmxVNI/0ffzE/ZQOiHJl6mGkmA1R7/uUpiCjJ
@@ -140,9 +144,9 @@ Autocrypt: addr=david@redhat.com; keydata=
  jPrnvUsUUsjRoRNJjKKA/REq+sAnhkNPPZ/NNMjaZ5b8Tovi8C0tmxiCHaQYqj7G2rgnT0kt
  WNyWQQ==
 Organization: Red Hat
-In-Reply-To: <dibd7n5uhmpjvy2welm2lrxnrpxd3h2qkzgboca4xq634ib5dl@oojnkmmi7frl>
+In-Reply-To: <z7s7xb2ftv5hqg3uzjqkou6enguleazwwehxbi5zulbkar2aej@zlbdh2kdewdn>
 X-Mimecast-Spam-Score: 0
-X-Mimecast-MFC-PROC-ID: A4I-HeaLncINN4tubGeSknDJXX_SF4XnmwIQQr5avDU_1738315810
+X-Mimecast-MFC-PROC-ID: NQXq4beZjZtW9SgGcDYcK-MUZqra3dem5darV56I6wc_1738320966
 X-Mimecast-Originator: redhat.com
 Content-Language: en-US
 Content-Type: text/plain; charset=UTF-8; format=flowed
@@ -161,68 +165,63 @@ List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-On 31.01.25 01:28, Alistair Popple wrote:
-> On Thu, Jan 30, 2025 at 04:57:39PM +1100, Alistair Popple wrote:
->> On Wed, Jan 29, 2025 at 12:54:01PM +0100, David Hildenbrand wrote:
+On 31.01.25 00:06, Alistair Popple wrote:
+> On Thu, Jan 30, 2025 at 02:03:42PM +0100, Simona Vetter wrote:
+>> On Thu, Jan 30, 2025 at 10:58:51AM +0100, David Hildenbrand wrote:
+>>> On 30.01.25 10:51, Simona Vetter wrote:
+>>>> On Wed, Jan 29, 2025 at 12:54:03PM +0100, David Hildenbrand wrote:
+>>>>> Let's do it just like mprotect write-upgrade or during NUMA-hinting
+>>>>> faults on PROT_NONE PTEs: detect if the PTE can be writable by using
+>>>>> can_change_pte_writable().
+>>>>>
+>>>>> Set the PTE only dirty if the folio is dirty: we might not
+>>>>> necessarily have a write access, and setting the PTE writable doesn't
+>>>>> require setting the PTE dirty.
+>>>>
+>>>> Not sure whether there's much difference in practice, since a device
+>>>> exclusive access means a write, so the folio better be dirty (unless we
+>>>> aborted halfway through). But then I couldn't find the code in nouveau to
+>>>> do that, so now I'm confused.
+>>>
+>>> That confused me as well. Requiring the PTE to be writable does not imply
+>>> that it is dirty.
+>>>
+>>> So something must either set the PTE or the folio dirty.
+>>
+>> Yeah I'm not finding that something.
+>>
+>>> ( In practice, most anonymous folios are dirty most of the time ... )
+>>
+>> And yup that's why I think it hasn't blown up yet.
+>>
+>>> If we assume that "device-exclusive entries" are always dirty, then it
+>>> doesn't make sense to set the folio dirty when creating device-exclusive
+>>> entries. We'd always have to set the PTE dirty when restoring the exclusive
+>>> pte.
+>>
+>> I do agree with your change, I think it's correct to put this
+>> responsibility onto drivers. It's just that nouveau seems to not be
+>> entirely correct.
 > 
-> [...]
-> 
->>> -int make_device_exclusive_range(struct mm_struct *mm, unsigned long start,
->>> -				unsigned long end, struct page **pages,
->>> -				void *owner)
->>> +struct page *make_device_exclusive(struct mm_struct *mm, unsigned long addr,
->>> +		void *owner, struct folio **foliop)
->>>   {
->>> -	long npages = (end - start) >> PAGE_SHIFT;
->>> -	long i;
->>> +	struct folio *folio;
->>> +	struct page *page;
->>> +	long npages;
->>> +
->>> +	mmap_assert_locked(mm);
->>>   
->>> -	npages = get_user_pages_remote(mm, start, npages,
->>> +	/*
->>> +	 * Fault in the page writable and try to lock it; note that if the
->>> +	 * address would already be marked for exclusive use by the device,
->>> +	 * the GUP call would undo that first by triggering a fault.
->>> +	 */
->>> +	npages = get_user_pages_remote(mm, addr, 1,
->>>   				       FOLL_GET | FOLL_WRITE | FOLL_SPLIT_PMD,
->>> -				       pages, NULL);
->>> -	if (npages < 0)
->>> -		return npages;
->>> -
->>> -	for (i = 0; i < npages; i++, start += PAGE_SIZE) {
->>> -		struct folio *folio = page_folio(pages[i]);
->>> -		if (PageTail(pages[i]) || !folio_trylock(folio)) {
->>> -			folio_put(folio);
->>> -			pages[i] = NULL;
->>> -			continue;
->>> -		}
->>> +				       &page, NULL);
->>> +	if (npages != 1)
->>> +		return ERR_PTR(npages);
->>> +	folio = page_folio(page);
->>>   
->>> -		if (!folio_make_device_exclusive(folio, mm, start, owner)) {
->>> -			folio_unlock(folio);
->>> -			folio_put(folio);
->>> -			pages[i] = NULL;
->>> -		}
->>> +	if (!folio_test_anon(folio) || folio_test_hugetlb(folio)) {
->>> +		folio_put(folio);
->>> +		return ERR_PTR(-EOPNOTSUPP);
->>> +	}
->>> +
->>> +	if (!folio_trylock(folio)) {
-> 
-> Actually I think we can make this folio_lock(folio) now. The only reason for
-> the trylock was to avoid deadlock between other threads looping over a range
-> of folios while holding folio locks which is something the migration code also
-> does.
+> Yeah, agree it should be a driver responsibility but also can't see how nouveau
+> is correct there either. I might see if I can get it to blow up...
 
-Okay, let me do that in a separate patch. Thanks!
+(in context of the rmap walkers) The question is, how do we consider 
+device-exclusive entries:
+
+(1) dirty? Not from a CPU perspective.
+(2) referenced? Not from a CPU perspective.
+
+If the answer is always "no" to all questions, then memory notifiers 
+must handle it, because we'd be answering the question from the CPU 
+point of view.
+
+If the answer is always "yes", there is a problem: we can only make it 
+clean/young by converting it to an ordinary PTE first (requiring MMU 
+notifiers etc.), which makes it quite nasty.
+
+Mixed answers are not possible, because we don't know just from staring 
+at the entry.
 
 -- 
 Cheers,
