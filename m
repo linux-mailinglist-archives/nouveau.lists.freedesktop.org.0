@@ -2,100 +2,98 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id 4D49CA23B25
-	for <lists+nouveau@lfdr.de>; Fri, 31 Jan 2025 10:16:03 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id BED16A23B6D
+	for <lists+nouveau@lfdr.de>; Fri, 31 Jan 2025 10:30:16 +0100 (CET)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 4E0F710E166;
-	Fri, 31 Jan 2025 09:16:01 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id C9B7410EA47;
+	Fri, 31 Jan 2025 09:30:14 +0000 (UTC)
 Authentication-Results: gabe.freedesktop.org;
-	dkim=pass (1024-bit key; unprotected) header.d=redhat.com header.i=@redhat.com header.b="UaS3rueD";
+	dkim=pass (1024-bit key; unprotected) header.d=redhat.com header.i=@redhat.com header.b="IXMndzm0";
 	dkim-atps=neutral
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
 Received: from us-smtp-delivery-124.mimecast.com
- (us-smtp-delivery-124.mimecast.com [170.10.133.124])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 54C6110EA3B
- for <nouveau@lists.freedesktop.org>; Fri, 31 Jan 2025 09:16:00 +0000 (UTC)
+ (us-smtp-delivery-124.mimecast.com [170.10.129.124])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id C4F6E10EA56
+ for <nouveau@lists.freedesktop.org>; Fri, 31 Jan 2025 09:30:13 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1738314959;
+ s=mimecast20190719; t=1738315813;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:mime-version:mime-version:content-type:content-type:
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
  content-transfer-encoding:content-transfer-encoding:
  in-reply-to:in-reply-to:references:references:autocrypt:autocrypt;
- bh=HzaOmWcSL+l/lizA+4IKEkVZYK5BRi2x1EBU9BNH+gQ=;
- b=UaS3rueDbLNY7Vd3DTPE9lUM+vS+U6iw1sJEA0Tn+r/tB5KAUH/n6nuM4zixue/ir1xzG/
- afoUZpFTx/ouApAUFine+00TMEp9agsGLxqS86QzKQW9MQDM4f0sepl4YpJxGHoyapaI88
- OFKOLFuRSukbL48fphd2MrObze7p21k=
-Received: from mail-wm1-f71.google.com (mail-wm1-f71.google.com
- [209.85.128.71]) by relay.mimecast.com with ESMTP with STARTTLS
+ bh=6JX/RWwIhNXl3m6w98kdtL5L38gt1l8nq6fffLr0F0g=;
+ b=IXMndzm0stz3lph4j5NsphtstOp6VhI4UDD/RadLTWM1gGGo+PXoddzSHIjkQjrIuuOgwL
+ rJ15V+tN//I8JuJtgY6n0KNKG9k0kwgKSzsogVO/bDjPoYvQyKq3fDp/CSYSUEhWc9g3Tl
+ uAJn9NlHHn8b8qE5qI8RSJUR3hcnLSw=
+Received: from mail-wr1-f71.google.com (mail-wr1-f71.google.com
+ [209.85.221.71]) by relay.mimecast.com with ESMTP with STARTTLS
  (version=TLSv1.3, cipher=TLS_AES_256_GCM_SHA384) id
- us-mta-98-Vjzz1AYyOqe7MpDnyInhgA-1; Fri, 31 Jan 2025 04:15:57 -0500
-X-MC-Unique: Vjzz1AYyOqe7MpDnyInhgA-1
-X-Mimecast-MFC-AGG-ID: Vjzz1AYyOqe7MpDnyInhgA
-Received: by mail-wm1-f71.google.com with SMTP id
- 5b1f17b1804b1-438e4e9a53fso10682415e9.1
- for <nouveau@lists.freedesktop.org>; Fri, 31 Jan 2025 01:15:57 -0800 (PST)
+ us-mta-59-CegLlWIeN_qG4pZWyCsPmw-1; Fri, 31 Jan 2025 04:30:11 -0500
+X-MC-Unique: CegLlWIeN_qG4pZWyCsPmw-1
+X-Mimecast-MFC-AGG-ID: CegLlWIeN_qG4pZWyCsPmw
+Received: by mail-wr1-f71.google.com with SMTP id
+ ffacd0b85a97d-38c5d9530ebso1012895f8f.1
+ for <nouveau@lists.freedesktop.org>; Fri, 31 Jan 2025 01:30:11 -0800 (PST)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1738314956; x=1738919756;
+ d=1e100.net; s=20230601; t=1738315810; x=1738920610;
  h=content-transfer-encoding:in-reply-to:organization:autocrypt
- :content-language:from:references:to:subject:user-agent:mime-version
- :date:message-id:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=HzaOmWcSL+l/lizA+4IKEkVZYK5BRi2x1EBU9BNH+gQ=;
- b=kvyBc2LZy+qeeh+Rc03wOl706YMlGDD6hoZyOcmJraWrha3WgN+cyCEpACUUce9K1p
- wqB6SslhcoZNifm/jdS+pqEUvqrRnShkNngha0jXvS6i8YPwTpXgQzKkUtd38EOUkL1m
- ODbRwZnBDh3hbgVdILgT0/Q49B7IK6+Clt5n1vS2dg35G0GDLAY6rrSBBHmMom4lYXEM
- leDj5hurVPF32heyEbYO/tJEgl6vlIjm5btTfquR7V8RUoCANHf2xdtY5MFxh29stbwb
- qx7vf1jMcbM/Kj5b+VBuj0s0/MHKGi778r8k662h9CVT75eqmckb0yqKWHwGRg1ohpMz
- yUMw==
+ :content-language:from:references:cc:to:subject:user-agent
+ :mime-version:date:message-id:x-gm-message-state:from:to:cc:subject
+ :date:message-id:reply-to;
+ bh=6JX/RWwIhNXl3m6w98kdtL5L38gt1l8nq6fffLr0F0g=;
+ b=qpESK02PE3C7preQWCyLuz48P/fSsKTIRqbOmrZPeQ4T2CkJaAfHQzFwBrmPXJX6Xz
+ OBwevrCkOq3OULbLmX2CU1VC5ILL1hRbe4qlz5fWKE1k4WExj6s6fU3QM1JU3QxYYUD9
+ iBVW+/bp1+UlbOPGFmVOO9q9B0rPKfB3pnQGhsHax+s8x1/KTj+MEZxaHZkajWvrPqM9
+ RuOAD7h43UvTosm50rWI9DeuLrwVhrqWm0MTcOjB8igx7BWhN83BHINDnACv0Lhr0ZIF
+ Wsgfnx1lCd5Zl/k1PHPp5+SeVncPVtW9LInmlVMgO/8eqw9Q0LzwqOa0Bp/24p27FH72
+ VDkg==
 X-Forwarded-Encrypted: i=1;
- AJvYcCV0Q2469Hcgm0DPoOdSY7JgXvDeLz/Vd7dvJSv3CiGlFlpNoi6V+I/6Md+mwIE3Vbcgp3ezyCVO@lists.freedesktop.org
-X-Gm-Message-State: AOJu0YxYbuhdAWOcyFIOaGWQL7y82yr6w5BKqACBaLUwJH7UK86LQUJQ
- o9nIOn3DeRUXwMurBDfzaPH5rk/sxBrRYbIb8vGGpO0QMqp73+nGPUVmLM98YH6qcV8EBChc5av
- igAIkYanZmoAr1ph4WL9Pq35ZIqChRnr9vaM9LeHL8ZDjluZI0+SHYZgAp1dmKCo=
-X-Gm-Gg: ASbGncsDPWw/1t+qp7CQ0Fbu1iQhVSAvYc//2GT9naqfJaXDLoGidmxLFN+JfjtQ1Ff
- ezPWhhuGXOrY8AtLfd2RCoO0mEMU3ot8mt5osdihYz7H48fwCTVDNc9dV68UjL3YIv+B8jRAigr
- sxQeu0WwZxoLdQGasDVUUs1AnjbTMrlUvZXdUGXsdon73pQ984ifM+c6O9elgWVveo3qICdZZxb
- ZSkiO5HH39iX0FNKfK89Od5EY1jIAp8oQbb6sCvkxFNnZsL4m2iaFkTv/51pFFBnTpcAcNdotun
- 9gLmB9GU3k72fpHuHqVriVoiaIyWqE9ALGoBhMLYh6tch/7YvsOQL7pNRlKGs9sdK/1tq8pp0ek
- 2H5xFxBqB0zPmD/4+BDqJHXGetE4wNHPF
-X-Received: by 2002:a05:600c:3c9f:b0:434:a684:9b1 with SMTP id
- 5b1f17b1804b1-438dc3a90d4mr90257195e9.4.1738314956652; 
- Fri, 31 Jan 2025 01:15:56 -0800 (PST)
-X-Google-Smtp-Source: AGHT+IGScYGuxXjKtihBe+hdO9xjhNcFnSB8wvV9N01bOdfpX49RMhXyL6h1mpb+YeLUidK0rGazGw==
-X-Received: by 2002:a05:600c:3c9f:b0:434:a684:9b1 with SMTP id
- 5b1f17b1804b1-438dc3a90d4mr90256745e9.4.1738314956112; 
- Fri, 31 Jan 2025 01:15:56 -0800 (PST)
-Received: from ?IPV6:2003:cb:c70a:1c00:b8d4:bc62:e7ed:ec0e?
- (p200300cbc70a1c00b8d4bc62e7edec0e.dip0.t-ipconnect.de.
- [2003:cb:c70a:1c00:b8d4:bc62:e7ed:ec0e])
+ AJvYcCVEsepxERT2MlpV3X6w3N2Dgk72lcgFPeF53l7NpaK8Nc6Q/3DaWtFe0w5tNPIU3IVqJeZ1mtbZ@lists.freedesktop.org
+X-Gm-Message-State: AOJu0Yz6nEcWXX0kLAcZTZNebdjjAql1BPDw7iKdE1gHUEPNMohTIrgh
+ OOJE5/u2GekvwLry5o+iQhc6avOu5YZxBQJvi7D0PxABN6xZsNM5RzIGj3CRVuKEX20rTnCA87C
+ jQkO6UdiWxwfWsB142fHmncBUwvCADTgFWwyEMOV3v6l7/5epIMxOModS2utqqPc=
+X-Gm-Gg: ASbGncvR7VTmtRwFaybqb9EXlaO1crfn+8ArwqZRSLrtyGD6KOynHdf6/4E9oPwhIID
+ u4ygOcqoY+w/X4WlkGsyH1sB9kP+N2E7R+NINKdEilYsbu62E+Kz6OmOdCfqn5Ng47nsLWNFWA/
+ BoOFcXB01o4CwgROGvjUztYwCVuIX/8+bCMnQPDKaqliRWKWxds1VkusntdqCYYcU7DLFaAISbw
+ u6hgJKZ6SwqQRxAygax28sma4vHHEMjonMAuMgT3ngxUSglmhRYHaq7WR6xNhz70TSjCJspwU11
+ 78NKIOKCg5+d/5Nm9dHvHN3q8TPhN0ja
+X-Received: by 2002:a5d:5f93:0:b0:386:3213:5b9b with SMTP id
+ ffacd0b85a97d-38c51e8e12fmr9404968f8f.43.1738315810058; 
+ Fri, 31 Jan 2025 01:30:10 -0800 (PST)
+X-Google-Smtp-Source: AGHT+IF/lPrwSVroidbMiKYfbD1/nXp46l+US2HSio5xTQO5OhxfVSCZ2fT04LU5R2PHsMKzzXSdnQ==
+X-Received: by 2002:a5d:5f93:0:b0:386:3213:5b9b with SMTP id
+ ffacd0b85a97d-38c51e8e12fmr9404919f8f.43.1738315809686; 
+ Fri, 31 Jan 2025 01:30:09 -0800 (PST)
+Received: from [192.168.3.141] (p5b0c6e05.dip0.t-ipconnect.de. [91.12.110.5])
  by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-38c5c139bafsm4178523f8f.58.2025.01.31.01.15.53
+ 5b1f17b1804b1-438e23e5e53sm48600365e9.17.2025.01.31.01.29.58
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Fri, 31 Jan 2025 01:15:54 -0800 (PST)
-Message-ID: <05c387f0-25b7-47f3-88a8-36f6b5b1a736@redhat.com>
-Date: Fri, 31 Jan 2025 10:15:52 +0100
+ Fri, 31 Jan 2025 01:29:58 -0800 (PST)
+Message-ID: <2985fbe9-8af8-44c9-bb9e-b3ab3131981a@redhat.com>
+Date: Fri, 31 Jan 2025 10:29:57 +0100
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v1 4/4] mm/memory: document restore_exclusive_pte()
-To: Alistair Popple <apopple@nvidia.com>, linux-kernel@vger.kernel.org,
- linux-doc@vger.kernel.org, dri-devel@lists.freedesktop.org,
- linux-mm@kvack.org, nouveau@lists.freedesktop.org,
- Andrew Morton <akpm@linux-foundation.org>, =?UTF-8?B?SsOpcsO0bWUgR2xpc3Nl?=
- <jglisse@redhat.com>, Jonathan Corbet <corbet@lwn.net>,
- Alex Shi <alexs@kernel.org>, Yanteng Si <si.yanteng@linux.dev>,
- Karol Herbst <kherbst@redhat.com>, Lyude Paul <lyude@redhat.com>,
- Danilo Krummrich <dakr@kernel.org>, David Airlie <airlied@gmail.com>,
- Simona Vetter <simona@ffwll.ch>, "Liam R. Howlett"
- <Liam.Howlett@oracle.com>, Lorenzo Stoakes <lorenzo.stoakes@oracle.com>,
+Subject: Re: [PATCH v1 03/12] mm/rmap: convert make_device_exclusive_range()
+ to make_device_exclusive()
+To: Alistair Popple <apopple@nvidia.com>
+Cc: linux-kernel@vger.kernel.org, linux-doc@vger.kernel.org,
+ dri-devel@lists.freedesktop.org, linux-mm@kvack.org,
+ nouveau@lists.freedesktop.org, Andrew Morton <akpm@linux-foundation.org>,
+ =?UTF-8?B?SsOpcsO0bWUgR2xpc3Nl?= <jglisse@redhat.com>,
+ Jonathan Corbet <corbet@lwn.net>, Alex Shi <alexs@kernel.org>,
+ Yanteng Si <si.yanteng@linux.dev>, Karol Herbst <kherbst@redhat.com>,
+ Lyude Paul <lyude@redhat.com>, Danilo Krummrich <dakr@kernel.org>,
+ David Airlie <airlied@gmail.com>, Simona Vetter <simona@ffwll.ch>,
+ "Liam R. Howlett" <Liam.Howlett@oracle.com>,
+ Lorenzo Stoakes <lorenzo.stoakes@oracle.com>,
  Vlastimil Babka <vbabka@suse.cz>, Jann Horn <jannh@google.com>,
  Pasha Tatashin <pasha.tatashin@soleen.com>, Peter Xu <peterx@redhat.com>,
  Jason Gunthorpe <jgg@nvidia.com>
-References: <20250129115803.2084769-1-david@redhat.com>
- <20250129115803.2084769-5-david@redhat.com>
- <7vejbjs7btkof4iguvn3nqvozxqpnzbymxbumd7pant4zi4ac4@3ozuzfzsm5tp>
- <Z5tXzV0vcKJg_wuM@phenom.ffwll.local>
- <6moaipt4rmc62ijy2rtjbmzb5phgjpygxgqeic3bljydlwhxls@qqzuqbvs5gnh>
+References: <20250129115411.2077152-1-david@redhat.com>
+ <20250129115411.2077152-4-david@redhat.com>
+ <b3stuhf2s6236zawaa6zt6x3fg6oamrtj3pwajlyoxlaxdmdtf@arqxcoemsjfg>
+ <dibd7n5uhmpjvy2welm2lrxnrpxd3h2qkzgboca4xq634ib5dl@oojnkmmi7frl>
 From: David Hildenbrand <david@redhat.com>
 Autocrypt: addr=david@redhat.com; keydata=
  xsFNBFXLn5EBEAC+zYvAFJxCBY9Tr1xZgcESmxVNI/0ffzE/ZQOiHJl6mGkmA1R7/uUpiCjJ
@@ -142,9 +140,9 @@ Autocrypt: addr=david@redhat.com; keydata=
  jPrnvUsUUsjRoRNJjKKA/REq+sAnhkNPPZ/NNMjaZ5b8Tovi8C0tmxiCHaQYqj7G2rgnT0kt
  WNyWQQ==
 Organization: Red Hat
-In-Reply-To: <6moaipt4rmc62ijy2rtjbmzb5phgjpygxgqeic3bljydlwhxls@qqzuqbvs5gnh>
+In-Reply-To: <dibd7n5uhmpjvy2welm2lrxnrpxd3h2qkzgboca4xq634ib5dl@oojnkmmi7frl>
 X-Mimecast-Spam-Score: 0
-X-Mimecast-MFC-PROC-ID: pde0SeaT8c7yIDD8-cjpMgniZrgk1atK6NcsMLKoJjg_1738314957
+X-Mimecast-MFC-PROC-ID: A4I-HeaLncINN4tubGeSknDJXX_SF4XnmwIQQr5avDU_1738315810
 X-Mimecast-Originator: redhat.com
 Content-Language: en-US
 Content-Type: text/plain; charset=UTF-8; format=flowed
@@ -163,37 +161,68 @@ List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-On 31.01.25 01:20, Alistair Popple wrote:
-> On Thu, Jan 30, 2025 at 11:43:25AM +0100, Simona Vetter wrote:
->> On Thu, Jan 30, 2025 at 11:27:37AM +1100, Alistair Popple wrote:
->>> On Wed, Jan 29, 2025 at 12:58:02PM +0100, David Hildenbrand wrote:
->>>> Let's document how this function is to be used, and why the requirement
->>>> for the folio lock might maybe be dropped in the future.
->>>
->>> Sorry, only just catching up on your other thread. The folio lock was to ensure
->>> the GPU got a chance to make forward progress by mapping the page. Without it
->>> the CPU could immediately invalidate the entry before the GPU had a chance to
->>> retry the fault.
->>>
->>> Obviously performance wise having such thrashing is terrible, so should
->>> really be avoided by userspace, but the lock at least allowed such programs
->>> to complete.
->>
->> Imo this is not a legit use-case. If userspace concurrently (instead of
->> clearly alternating) uses the same 4k page for gpu atomics and on the cpu,
->> it just gets to keep the fallout.
->>
->> Plus there's no guarantee that we hold the folio_lock long enough for the
->> gpu to actually complete the atomic, so this isn't even really helping
->> with forward progress even if this somehow would be a legit usecase.
+On 31.01.25 01:28, Alistair Popple wrote:
+> On Thu, Jan 30, 2025 at 04:57:39PM +1100, Alistair Popple wrote:
+>> On Wed, Jan 29, 2025 at 12:54:01PM +0100, David Hildenbrand wrote:
 > 
-> Yes, agree it's not a legit real world use case. In practice though it was
-> useful for testing this and other driver code by thrashing to generate a lot
-> device/cpu faults and invalidations. Obviously "just for testing" is not a great
-> justification though, so if it's causing problems we could get rid of it.
+> [...]
+> 
+>>> -int make_device_exclusive_range(struct mm_struct *mm, unsigned long start,
+>>> -				unsigned long end, struct page **pages,
+>>> -				void *owner)
+>>> +struct page *make_device_exclusive(struct mm_struct *mm, unsigned long addr,
+>>> +		void *owner, struct folio **foliop)
+>>>   {
+>>> -	long npages = (end - start) >> PAGE_SHIFT;
+>>> -	long i;
+>>> +	struct folio *folio;
+>>> +	struct page *page;
+>>> +	long npages;
+>>> +
+>>> +	mmap_assert_locked(mm);
+>>>   
+>>> -	npages = get_user_pages_remote(mm, start, npages,
+>>> +	/*
+>>> +	 * Fault in the page writable and try to lock it; note that if the
+>>> +	 * address would already be marked for exclusive use by the device,
+>>> +	 * the GUP call would undo that first by triggering a fault.
+>>> +	 */
+>>> +	npages = get_user_pages_remote(mm, addr, 1,
+>>>   				       FOLL_GET | FOLL_WRITE | FOLL_SPLIT_PMD,
+>>> -				       pages, NULL);
+>>> -	if (npages < 0)
+>>> -		return npages;
+>>> -
+>>> -	for (i = 0; i < npages; i++, start += PAGE_SIZE) {
+>>> -		struct folio *folio = page_folio(pages[i]);
+>>> -		if (PageTail(pages[i]) || !folio_trylock(folio)) {
+>>> -			folio_put(folio);
+>>> -			pages[i] = NULL;
+>>> -			continue;
+>>> -		}
+>>> +				       &page, NULL);
+>>> +	if (npages != 1)
+>>> +		return ERR_PTR(npages);
+>>> +	folio = page_folio(page);
+>>>   
+>>> -		if (!folio_make_device_exclusive(folio, mm, start, owner)) {
+>>> -			folio_unlock(folio);
+>>> -			folio_put(folio);
+>>> -			pages[i] = NULL;
+>>> -		}
+>>> +	if (!folio_test_anon(folio) || folio_test_hugetlb(folio)) {
+>>> +		folio_put(folio);
+>>> +		return ERR_PTR(-EOPNOTSUPP);
+>>> +	}
+>>> +
+>>> +	if (!folio_trylock(folio)) {
+> 
+> Actually I think we can make this folio_lock(folio) now. The only reason for
+> the trylock was to avoid deadlock between other threads looping over a range
+> of folios while holding folio locks which is something the migration code also
+> does.
 
-Okay, I'll make that clear in the documentation. Getting rid of the 
-folio lock might be really beneficial in some cases.
+Okay, let me do that in a separate patch. Thanks!
 
 -- 
 Cheers,
