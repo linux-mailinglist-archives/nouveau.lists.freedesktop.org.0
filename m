@@ -2,54 +2,147 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id 02CE5A24508
-	for <lists+nouveau@lfdr.de>; Fri, 31 Jan 2025 23:04:53 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 4D5B8A246F6
+	for <lists+nouveau@lfdr.de>; Sat,  1 Feb 2025 05:01:28 +0100 (CET)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id A94C510E212;
-	Fri, 31 Jan 2025 22:04:51 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 3913C10E0F3;
+	Sat,  1 Feb 2025 04:01:25 +0000 (UTC)
 Authentication-Results: gabe.freedesktop.org;
-	dkim=pass (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="YDXP0k0A";
+	dkim=pass (2048-bit key; unprotected) header.d=Nvidia.com header.i=@Nvidia.com header.b="UDL6Xuiz";
 	dkim-atps=neutral
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from dfw.source.kernel.org (dfw.source.kernel.org [139.178.84.217])
- by gabe.freedesktop.org (Postfix) with ESMTPS id EC96510E212;
- Fri, 31 Jan 2025 22:04:49 +0000 (UTC)
-Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by dfw.source.kernel.org (Postfix) with ESMTP id C17C25C5E54;
- Fri, 31 Jan 2025 22:04:08 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id B74ABC4CEE6;
- Fri, 31 Jan 2025 22:04:42 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1738361088;
- bh=B6G4b/O582O6YvLqM2tEthOf5TTtkraqY5ut/gS2AJ0=;
- h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
- b=YDXP0k0AjEGS11YHrcFRKSPoXBFrkDk1uLOtJ+cEBwuTgisXAOqzij98hA/FxN7Oj
- GIuErmnTWqPcRNTp0wal9X4IabtfBJfHKqpmE+CSBdOt/0hoSE03SdVwqHCwo6RDrx
- +5gW30L3nCJy7mgDHUNGkcrGSSOO6/oGU48R+FkTNdLz4O6V59LL5XZiwvXAs5ed1f
- 1OCnc9sYZ13D5TEiLe51e/ui8UjQF13DIqDmbYaDBr333hAMw6B7PrVcFEyPUb4Yh3
- Xr8FRx+G+azobFOVm1SepTIIpAqd2tLkb9JfS8vM3jyhc3fZ339rJisBiZN2tbF2QF
- 9E3NQMTlvywnA==
-From: Danilo Krummrich <dakr@kernel.org>
-To: airlied@gmail.com, simona@ffwll.ch, corbet@lwn.net,
- maarten.lankhorst@linux.intel.com, mripard@kernel.org, tzimmermann@suse.de,
- ajanulgu@redhat.com, lyude@redhat.com, pstanner@redhat.com,
- zhiw@nvidia.com, cjia@nvidia.com, jhubbard@nvidia.com, bskeggs@nvidia.com,
- acurrid@nvidia.com
-Cc: ojeda@kernel.org, alex.gaynor@gmail.com, boqun.feng@gmail.com,
- gary@garyguo.net, bjorn3_gh@protonmail.com, benno.lossin@proton.me,
- a.hindborg@kernel.org, aliceryhl@google.com, tmgross@umich.edu,
- dri-devel@lists.freedesktop.org, linux-doc@vger.kernel.org,
- linux-kernel@vger.kernel.org, nouveau@lists.freedesktop.org,
- rust-for-linux@vger.kernel.org, Danilo Krummrich <dakr@kernel.org>
-Subject: [PATCH 2/2] gpu: nova-core: add initial documentation
-Date: Fri, 31 Jan 2025 23:04:25 +0100
-Message-ID: <20250131220432.17717-2-dakr@kernel.org>
-X-Mailer: git-send-email 2.48.1
-In-Reply-To: <20250131220432.17717-1-dakr@kernel.org>
-References: <20250131220432.17717-1-dakr@kernel.org>
+Received: from NAM11-DM6-obe.outbound.protection.outlook.com
+ (mail-dm6nam11on2077.outbound.protection.outlook.com [40.107.223.77])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 29D0010E0F3;
+ Sat,  1 Feb 2025 04:01:24 +0000 (UTC)
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=sA0IxO/E1nOIyo2kPAOq9stKKxCOP3j134y32Ad/QZZWgVwTK9O6xUrYCI4T9AQerF6L8045TT7z9ZTAjbtcVG8/uB+k0RjlI5VsF9nb7mg6U5fBEW29fMXkjWkEtkMJaKAI2dyduoUSRbz/eRGmh6KEGAexjdX2FIwvKFBqHkVx689PlWDhunSMxpDIiKMRSodMvHSniVfgaeQj4RcGvgjTPQWdpogLbaVSSJxLifz1VLbFnpZ/cO6KBMK37sz/E5qw+a1R1w9bIUIHKvVEH9RfwXBUWu0geNr1Q/K08CIRX6Ev+HtFdkt/VYbJHbU4ySXOs3nWvMbVouaLqG/cTQ==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=FuaR70T4EUUKwmWayD1XQ7bsEXjkxrKieCoYrV89taw=;
+ b=IxLwbf2cHcv9fHFUHm7VSwaQHo78Hee7JAfwHqoYvdl2USY9XZ5qm4m3oXfj2mWj75f4ialJNVxrX1c8PzbsbF7Q1tdSI4QT8vMm3kzyxt5bM8wbznlvdF6LVUxGhCPSJUX7b3anfueb0VZlrEHwPo6XDrt4fRJyK+tha8qP4YczvtJ0WZ8q8AwV0q9XjwcePemdo/Z4g+ejki21KbvHtQsnbgj3HkaA5Ox/57evxQJRZaLmkPZB0dwH8LuRzvXSopSahqu7acLDXhMaSiBymKyns9+33sZrS5sZTj6jqT3VB9j+pym2O1DD22ATqdibURxA7LTVoPVFOvIFehNzOA==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
+ 216.228.117.161) smtp.rcpttodomain=kernel.org smtp.mailfrom=nvidia.com;
+ dmarc=pass (p=reject sp=reject pct=100) action=none header.from=nvidia.com;
+ dkim=none (message not signed); arc=none (0)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=Nvidia.com;
+ s=selector2;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=FuaR70T4EUUKwmWayD1XQ7bsEXjkxrKieCoYrV89taw=;
+ b=UDL6XuizKmNpui2rr53G4VL0uJEBa6haBEFUKnLnacHJKV5JCWff7GnuVrEvTamrz7Qt82l50CRCUWqEFJrrYoQlwJM0RgFyMPqHijt2CJplOkPoy5QDE+WzpSsPo6H5sqztQWfDbrnKF5w75vbDLY9BhImuTOw62okTiHHT71j1mtGHqSrIIqzoERqph166Got/I5G9isgP3A/KMRIEG69eHM+49ZTtNbkMdQDnVJu0EqSP8grchFEddh90E1RaI0aiMTTFGe/TjscM/6yB0YYbOWMar+4MjyN3u0Y/LZe17do0jOeobqLtT41W82n7D7ZzKNqYZ6UsWuhMEa4Siw==
+Received: from DS7PR03CA0205.namprd03.prod.outlook.com (2603:10b6:5:3b6::30)
+ by CH3PR12MB9147.namprd12.prod.outlook.com (2603:10b6:610:19a::9) with
+ Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.8398.17; Sat, 1 Feb
+ 2025 04:01:18 +0000
+Received: from CY4PEPF0000E9D0.namprd03.prod.outlook.com
+ (2603:10b6:5:3b6:cafe::d8) by DS7PR03CA0205.outlook.office365.com
+ (2603:10b6:5:3b6::30) with Microsoft SMTP Server (version=TLS1_3,
+ cipher=TLS_AES_256_GCM_SHA384) id 15.20.8398.21 via Frontend Transport; Sat,
+ 1 Feb 2025 04:01:18 +0000
+X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 216.228.117.161)
+ smtp.mailfrom=nvidia.com;
+ dkim=none (message not signed)
+ header.d=none;dmarc=pass action=none header.from=nvidia.com;
+Received-SPF: Pass (protection.outlook.com: domain of nvidia.com designates
+ 216.228.117.161 as permitted sender) receiver=protection.outlook.com;
+ client-ip=216.228.117.161; helo=mail.nvidia.com; pr=C
+Received: from mail.nvidia.com (216.228.117.161) by
+ CY4PEPF0000E9D0.mail.protection.outlook.com (10.167.241.135) with Microsoft
+ SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ 15.20.8398.14 via Frontend Transport; Sat, 1 Feb 2025 04:01:18 +0000
+Received: from rnnvmail201.nvidia.com (10.129.68.8) by mail.nvidia.com
+ (10.129.200.67) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.1544.4; Fri, 31 Jan
+ 2025 20:01:01 -0800
+Received: from [10.110.48.28] (10.126.231.35) by rnnvmail201.nvidia.com
+ (10.129.68.8) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.1544.14; Fri, 31 Jan
+ 2025 20:01:00 -0800
+Message-ID: <35d74754-ed0c-4f6d-817e-86638ca2bb70@nvidia.com>
+Date: Fri, 31 Jan 2025 20:01:00 -0800
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH 1/2] gpu: nova-core: add initial driver stub
+To: Danilo Krummrich <dakr@kernel.org>, <airlied@gmail.com>,
+ <simona@ffwll.ch>, <corbet@lwn.net>, <maarten.lankhorst@linux.intel.com>,
+ <mripard@kernel.org>, <tzimmermann@suse.de>, <ajanulgu@redhat.com>,
+ <lyude@redhat.com>, <pstanner@redhat.com>, <zhiw@nvidia.com>,
+ <cjia@nvidia.com>, <bskeggs@nvidia.com>, <acurrid@nvidia.com>
+CC: <ojeda@kernel.org>, <alex.gaynor@gmail.com>, <boqun.feng@gmail.com>,
+ <gary@garyguo.net>, <bjorn3_gh@protonmail.com>, <benno.lossin@proton.me>,
+ <a.hindborg@kernel.org>, <aliceryhl@google.com>, <tmgross@umich.edu>,
+ <dri-devel@lists.freedesktop.org>, <linux-doc@vger.kernel.org>,
+ <linux-kernel@vger.kernel.org>, <nouveau@lists.freedesktop.org>,
+ <rust-for-linux@vger.kernel.org>
+References: <20250131220432.17717-1-dakr@kernel.org>
+Content-Language: en-US
+From: John Hubbard <jhubbard@nvidia.com>
+In-Reply-To: <20250131220432.17717-1-dakr@kernel.org>
+Content-Type: text/plain; charset="UTF-8"; format=flowed
+Content-Transfer-Encoding: 7bit
+X-Originating-IP: [10.126.231.35]
+X-ClientProxiedBy: rnnvmail203.nvidia.com (10.129.68.9) To
+ rnnvmail201.nvidia.com (10.129.68.8)
+X-EOPAttributedMessage: 0
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: CY4PEPF0000E9D0:EE_|CH3PR12MB9147:EE_
+X-MS-Office365-Filtering-Correlation-Id: 692f1f06-ec50-4aea-bc08-08dd427514a9
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: BCL:0;
+ ARA:13230040|376014|7416014|36860700013|82310400026|1800799024|7053199007|921020;
+X-Microsoft-Antispam-Message-Info: =?utf-8?B?eVF6UUhBTENyR1dMaGRyR0FIQ3JDVW1WRGFXb0VWbjlZc2FOblZtZUp0N2hG?=
+ =?utf-8?B?ekUrMjJyWjdEUmhSdEJ1aFBCNXZ3MzU1YWRxdzFmclM5SUlYQ0ZFUHMzWUVD?=
+ =?utf-8?B?M1FNanJyQmJWUHhML0R1WU5BY0pIcnF2YlhRNmlpNmVPS09GanY2S3NPQ0dY?=
+ =?utf-8?B?cW0xbGt1aUV0OGxUYktGK1VuUG9WYndqUnBRamlueThHUGN5WCtETjJqTzlk?=
+ =?utf-8?B?aXNlTktDQlpYQVV2RC9mOHcyam1hcDlLN1gxamQ2anZ3cjlzQlNNZk41TjdI?=
+ =?utf-8?B?bjQ5Q1dVNlZhMnlJWWFWWjFWeldGRXE3VFFCNW9qVlozSW1uMFZEcndmSzFk?=
+ =?utf-8?B?WFZPTWJkSUQ0YmxNQXY0bDc0T082cjBWVGlGVEJJZmNTUlBqZy80SzJjaEEy?=
+ =?utf-8?B?RStsL2RCV3BsMHMzaitVRXBaWVE0ZWYzbFFMeUQ2QXAzNWw1RWhvM2hSTHcw?=
+ =?utf-8?B?ckZBRU5WSzE3NmwyN1VlMnpkOVdxaStINFgrMzRvMThTMFFDMExBQm9YTSty?=
+ =?utf-8?B?b0o4UEtkR3c0VVU1bG5VNlRvTzZrak1DSmw3L3ZOZEcyOWc1RHVoV040eE1S?=
+ =?utf-8?B?Zm5iNTZjcUhTZXZIeDVYYkRBQnFHRGFiTUJVcWo5TTl6bm11S1dGV2J2SWV6?=
+ =?utf-8?B?aXJqcWRJTnd1dUZLbEJScVJNUjd2Sm94T2RNcUovTDVOQktZczQ1WFFFSXl0?=
+ =?utf-8?B?STRvOTNKaXo0d3pQTzF6aDhuV3czbUxTcjJTL0FFd0d6OWFHUG4zS0YvazlG?=
+ =?utf-8?B?eUU0ZGg0Q3loRXR0RDRuQW9uU0JLNU1iNlNoNHJWeE5XeFlJMDNlT2wraU1r?=
+ =?utf-8?B?NC9uaFg2OTdoV3Z3RGx1enQ5c1ZVRzF6RFgvM2U5YmNNblpxWCtEbXpLOEcw?=
+ =?utf-8?B?aFJJVFJCVjZUL3RnNFNqcDhPRWUwRVNiQjBxY1VvZ1FXdkNwZDlDcFhpcmwy?=
+ =?utf-8?B?Q3ljQ09lanZiVUk5WlVXQk9QazJocjZOVjdZTXpSdTNvZkRvclBrclUwZ09P?=
+ =?utf-8?B?Q2Y3aGRWc3JzV2NYZXQzUEJnd2VSaWs1ay82OWhEMkt2WGhHUUVkZFN4UEQz?=
+ =?utf-8?B?MzNJbHV4bnpGQkpwbHNBQkRLM0pnKytYOTNkdngwb1BhVkdCNldDY3RoakVZ?=
+ =?utf-8?B?TXpZREVQZ2tCaGhjWk5zZlo1eUltdUhGSjVVaUNIWnkwRnNGTkhGKzhGN0Vi?=
+ =?utf-8?B?ckRLdnRlVWYyQnNnaHdXV1VuSVhyVGg4VHo5N2xlSXU4cjgydExBZHdFa3RL?=
+ =?utf-8?B?RXFKc0dNQVZjRmlJOHhSMlM4UVJiSm1WQTlYSW5rbjhBR1d3aENwSFRUODNE?=
+ =?utf-8?B?ejZ3TGJuNmpnMGNIV2VTUDZtYTJ1ZkxDajhLSWcvZTB4RzBrL2lPRXhyR2xl?=
+ =?utf-8?B?TGRBODZaRVRPT1RaQUdjV2pWc0ZUWmNIVnJSMXdsakg5MkRsdFY5TGpLek8r?=
+ =?utf-8?B?ZkF1Y3RoSDJjREVlVHo0cjFaYVRHanZEWXhuRFg2VUpIaExsUGtiTzFYWUgz?=
+ =?utf-8?B?TDlYY2dHM0dpa2lXcUNaTkVQNHpVeURwS2hGT2pSYUFZdmhWWjdHK1VMUEdi?=
+ =?utf-8?B?QnJVaHVnR281QmNuSGtvWWFtNkkvZjB2WWwwOW4vZ0tiMGNSQ0RRUEs4NFZJ?=
+ =?utf-8?B?aENaczcvVlJiQ3JTWHVmNFVXNW95aytwa1laOEJKOUFROHRnTUUvdTBQYU9I?=
+ =?utf-8?B?OHJhYW9xZzNJWVdnYXVjYlJBUzNVZnl6OEdiY2ZEVjBYZmQvOUtlK0dWcEJy?=
+ =?utf-8?B?RlhYM040emNKUkJHeEVpeHVEbnA2dkx0cVR0YWR5M2N3QzdoRjhyZDNXR3VH?=
+ =?utf-8?B?L2VVdVdJTEFaRnZac3RBRk9IK3BnOXZndnd3R0x3dG94c3VJZHBZS2JGUnc0?=
+ =?utf-8?B?ZjhlcGxUT2o2VG1lWFNxdTJDOXFHL09tVDdSYVdlRHQ1OTN5czluTldHOHF0?=
+ =?utf-8?B?NjlSNFBVKzNzSlc0VkU1T2VVd2pmOEU4dTlqcWlrbmZ6WSs3M1hLK0RKcUFw?=
+ =?utf-8?B?MUtvWVBKVzVUWkkyOHYxNVU4S0FRYUdYbSs2WmN4VVArYVlwV21MSFZ3SU9X?=
+ =?utf-8?Q?FGNBLG?=
+X-Forefront-Antispam-Report: CIP:216.228.117.161; CTRY:US; LANG:en; SCL:1; SRV:;
+ IPV:NLI; SFV:NSPM; H:mail.nvidia.com; PTR:dc6edge2.nvidia.com; CAT:NONE;
+ SFS:(13230040)(376014)(7416014)(36860700013)(82310400026)(1800799024)(7053199007)(921020);
+ DIR:OUT; SFP:1101; 
+X-OriginatorOrg: Nvidia.com
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 01 Feb 2025 04:01:18.0659 (UTC)
+X-MS-Exchange-CrossTenant-Network-Message-Id: 692f1f06-ec50-4aea-bc08-08dd427514a9
+X-MS-Exchange-CrossTenant-Id: 43083d15-7273-40c1-b7db-39efd9ccc17a
+X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=43083d15-7273-40c1-b7db-39efd9ccc17a; Ip=[216.228.117.161];
+ Helo=[mail.nvidia.com]
+X-MS-Exchange-CrossTenant-AuthSource: CY4PEPF0000E9D0.namprd03.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Anonymous
+X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: CH3PR12MB9147
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -64,588 +157,424 @@ List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-Add the initial documentation of the Nova project.
+On 1/31/25 2:04 PM, Danilo Krummrich wrote:
+> Add the initial nova-core driver stub.
+> 
+> nova-core is intended to serve as a common base for nova-drm (the
+> corresponding DRM driver) and the vGPU manager VFIO driver, serving as a
+> hard- and firmware abstraction layer for GSP-based NVIDIA GPUs.
+> 
+> The Nova project, including nova-core and nova-drm, in the long term,
+> is intended to serve as the successor of Nouveau for all GSP-based GPUs.
+> 
+> The motivation for both, starting a successor project for Nouveau and
+> doing so using the Rust programming language, is documented in detail
+> through a previous post on the mailing list [1], an LWN article [2] and a
+> talk from LPC '24.
+> 
+> In order to avoid the chicken and egg problem to require a user to
+> upstream Rust abstractions, but at the same time require the Rust
+> abstractions to implement the driver, nova-core kicks off as a driver
+> stub and is subsequently developed upstream.
+> 
+> Link: https://lore.kernel.org/dri-devel/Zfsj0_tb-0-tNrJy@cassiopeiae/T/#u [1]
+> Link: https://lwn.net/Articles/990736/ [2]
+> Link: https://youtu.be/3Igmx28B3BQ?si=sBdSEer4tAPKGpOs [3]
+> Signed-off-by: Danilo Krummrich <dakr@kernel.org>
+> ---
+>   MAINTAINERS                        |  10 ++
+>   drivers/gpu/Makefile               |   1 +
+>   drivers/gpu/nova-core/Kconfig      |  13 +++
+>   drivers/gpu/nova-core/Makefile     |   3 +
+>   drivers/gpu/nova-core/driver.rs    |  47 ++++++++
+>   drivers/gpu/nova-core/gpu.rs       | 171 +++++++++++++++++++++++++++++
+>   drivers/gpu/nova-core/nova_core.rs |  14 +++
+>   drivers/video/Kconfig              |   1 +
+>   8 files changed, 260 insertions(+)
+>   create mode 100644 drivers/gpu/nova-core/Kconfig
+>   create mode 100644 drivers/gpu/nova-core/Makefile
+>   create mode 100644 drivers/gpu/nova-core/driver.rs
+>   create mode 100644 drivers/gpu/nova-core/gpu.rs
+>   create mode 100644 drivers/gpu/nova-core/nova_core.rs
 
-The initial project documentation consists out of a brief introduction
-of the project, as well as project guidelines both general and nova-core
-specific and a task list for nova-core specifically.
+Hi Danilo,
 
-The task list is divided into tasks for general Rust infrastructure
-required by the project, tasks regarding GSP enablement and firmware
-abstraction, general GPU driver tasks as well as tasks related to
-external API design and test infrastructure.
+This is pleasantly clean, and even elegant. I was pleasantly surprised at
+the level of firmware loading support in Rust, and how this approach takes
+advantage of our r535 firmware snapshot that is in Turing, Ampere, and Ada.
 
-Signed-off-by: Danilo Krummrich <dakr@kernel.org>
----
- Documentation/gpu/drivers.rst              |   1 +
- Documentation/gpu/nova/core/guidelines.rst |  24 ++
- Documentation/gpu/nova/core/todo.rst       | 382 +++++++++++++++++++++
- Documentation/gpu/nova/guidelines.rst      |  73 ++++
- Documentation/gpu/nova/index.rst           |  30 ++
- MAINTAINERS                                |   1 +
- 6 files changed, 511 insertions(+)
- create mode 100644 Documentation/gpu/nova/core/guidelines.rst
- create mode 100644 Documentation/gpu/nova/core/todo.rst
- create mode 100644 Documentation/gpu/nova/guidelines.rst
- create mode 100644 Documentation/gpu/nova/index.rst
+It loads up on my GA104 system and I've been poking around at it.
 
-diff --git a/Documentation/gpu/drivers.rst b/Documentation/gpu/drivers.rst
-index 1f17ad0790d7..7c2c5dcb5fd4 100644
---- a/Documentation/gpu/drivers.rst
-+++ b/Documentation/gpu/drivers.rst
-@@ -24,6 +24,7 @@ GPU Driver Documentation
-    panfrost
-    panthor
-    zynqmp
-+   nova/index
- 
- .. only::  subproject and html
- 
-diff --git a/Documentation/gpu/nova/core/guidelines.rst b/Documentation/gpu/nova/core/guidelines.rst
-new file mode 100644
-index 000000000000..a389d65d7982
---- /dev/null
-+++ b/Documentation/gpu/nova/core/guidelines.rst
-@@ -0,0 +1,24 @@
-+.. SPDX-License-Identifier: (GPL-2.0+ OR MIT)
-+
-+==========
-+Guidelines
-+==========
-+
-+This documents contains the guidelines for nova-core. Additionally, all common
-+guidelines of the Nova project do apply.
-+
-+Driver API
-+==========
-+
-+One main purpose of nova-core is to implement the abstraction around the
-+firmware interface of GSP and provide a firmware (version) independent API for
-+2nd level drivers, such as nova-drm or the vGPU manager VFIO driver.
-+
-+Therefore, it is not permitted to leak firmware (version) specifics, through the
-+driver API, to 2nd level drivers.
-+
-+Acceptance Criteria
-+===================
-+
-+- To the extend possible, patches submitted to nova-core must be tested for
-+  regressions with all 2nd level drivers.
-diff --git a/Documentation/gpu/nova/core/todo.rst b/Documentation/gpu/nova/core/todo.rst
-new file mode 100644
-index 000000000000..87a43302f03e
---- /dev/null
-+++ b/Documentation/gpu/nova/core/todo.rst
-@@ -0,0 +1,382 @@
-+.. SPDX-License-Identifier: (GPL-2.0+ OR MIT)
-+
-+=========
-+Task List
-+=========
-+
-+Tasks may have the following fields:
-+
-+- ``Complexity``: Describes the required familiarity with Rust and / or the
-+  corresponding kernel APIs or subsystems. There are four different complexities,
-+  ``Beginner``, ``Intermediate``, ``Advanced`` and ``Expert``.
-+- ``Reference``: References to other tasks.
-+- ``Link``: Links to external resources.
-+- ``Contact``: The person that can be contacted for further information about
-+  the task.
-+
-+Enablement (Rust)
-+=================
-+
-+Tasks that are not directly related to nova-core, but are preconditions in terms
-+of required APIs.
-+
-+FromPrimitive API
-+-----------------
-+
-+Sometimes the need arises to convert a number to a value of an enum or a
-+structure.
-+
-+A good example from nova-core would be the ``Chipset`` enum type, which defines
-+the value ``AD102``. When probing the GPU the value ``0x192`` can be read from a
-+certain register indication the chipset AD102. Hence, the enum value ``AD102``
-+should be derived from the number ``0x192``. Currently, nova-core uses a custom
-+implementation (``Chipset::from_u32`` for this.
-+
-+Instead, it would be desirable to have something like the ``FromPrimitive``
-+trait [1] from the num crate.
-+
-+Having this generalization also helps with implementing a generic macro that
-+automatically generates the corresponding mappings between a value and a number.
-+
-+| Complexity: Beginner
-+| Link: https://docs.rs/num/latest/num/trait.FromPrimitive.html
-+
-+Delay / Sleep abstractions
-+--------------------------
-+
-+Rust abstractions for the kernel's delay() and sleep() functions.
-+
-+There is some ongoing work from FUJITA Tomonori [1], which has not seen any updates
-+since Oct. 24.
-+
-+| Complexity: Beginner
-+| Link: https://lore.kernel.org/netdev/20241001112512.4861-2-fujita.tomonori@gmail.com/ [1]
-+
-+IRQ abstractions
-+----------------
-+
-+Rust abstractions for IRQ handling.
-+
-+There is active ongoing work from Daniel Almeida [1] for the "core" abstractions
-+to request IRQs.
-+
-+Besides optional review and testing work, the required ``pci::Device`` code
-+around those core abstractions needs to be worked out.
-+
-+| Complexity: Intermediate
-+| Link: https://lore.kernel.org/lkml/20250122163932.46697-1-daniel.almeida@collabora.com/ [1]
-+| Contact: Daniel Almeida
-+
-+Page abstraction for foreign pages
-+----------------------------------
-+
-+Rust abstractions for pages not created by the Rust page abstraction without
-+direct ownership.
-+
-+There is active onging work from Abdiel Janulgue [1].
-+
-+| Complexity: Advanced
-+| Link: https://lore.kernel.org/linux-mm/20241119112408.779243-1-abdiel.janulgue@gmail.com/ [1]
-+
-+Scatterlist / sg_table abstractions
-+-----------------------------------
-+
-+Rust abstractions for scatterlist / sg_table.
-+
-+There is preceding work from Abdiel Janulgue, which hasn't made it to the
-+mailing list yet.
-+
-+| Complexity: Intermediate
-+| Contact: Abdiel Janulgue
-+
-+ELF utils
-+---------
-+
-+Rust implementation of ELF header representation to retrieve section header
-+tables, names, and data from an ELF-formatted images.
-+
-+There is preceding work from Abdiel Janulgue, which hasn't made it to the
-+mailing list yet.
-+
-+| Complexity: Beginner
-+| Contact: Abdiel Janulgue
-+
-+PCI MISC APIs
-+-------------
-+
-+Extend the existing PCI device / driver abstractions by SR-IOV, config space,
-+capability, MSI API abstractions.
-+
-+| Complexity: Beginner
-+
-+Auxiliary bus abstractions
-+--------------------------
-+
-+Rust abstraction for the auxiliary bus APIs.
-+
-+This is needed to connect nova-core to the nova-drm driver.
-+
-+| Complexity: Intermediate
-+
-+Debugfs abstractions
-+--------------------
-+
-+Rust abstraction for debugfs APIs.
-+
-+| Reference: Export GSP log buffers
-+| Complexity: Beginner
-+
-+Vec extensions
-+--------------
-+
-+Implement ``Vec::truncate`` and ``Vec::resize``.
-+
-+Currently this is used for some experimental code to parse the vBIOS.
-+
-+| Reference vBIOS support
-+| Complexity: Beginner
-+
-+GPU (general)
-+=============
-+
-+Parse firmware headers
-+----------------------
-+
-+Parse ELF headers from the firmware files loaded from the filesystem.
-+
-+| Reference: ELF utils
-+| Complexity: Beginner
-+| Contact: Abdiel Janulgue
-+
-+Build radix3 page table
-+-----------------------
-+
-+Build the radix3 page table to map the firmware.
-+
-+| Complexity: Intermediate
-+| Contact: Abdiel Janulgue
-+
-+vBIOS support
-+-------------
-+
-+Parse the vBIOS and probe the structures required for driver initialization.
-+
-+| Contact: Dave Airlie
-+| Reference: Vec extensions
-+| Complexity: Intermediate
-+
-+Initial Devinit support
-+-----------------------
-+
-+Implement BIOS Device Initialization, i.e. memory sizing, waiting, PLL
-+configuration.
-+
-+| Contact: Dave Airlie
-+| Complexity: Beginner
-+
-+Boot Falcon controller
-+----------------------
-+
-+Infrastructure to load and execute falcon (sec2) firmware images; handle the
-+GSP falcon processor and fwsec loading.
-+
-+| Complexity: Advanced
-+| Contact: Dave Airlie
-+
-+GPU Timer support
-+-----------------
-+
-+Support for the GPU's internal timer peripheral.
-+
-+| Complexity: Beginner
-+| Contact: Dave Airlie
-+
-+MMU / PT management
-+-------------------
-+
-+Work out the architecture for MMU / page table management.
-+
-+We need to consider that nova-drm will need rather fine-grained control,
-+especially in terms of locking, in order to be able to implement asynchronous
-+Vulkan queues.
-+
-+While generally sharing the corresponding code is desirable, it needs to be
-+evaluated how (and if at all) sharing the corresponding code is expedient.
-+
-+| Complexity: Expert
-+
-+VRAM memory allocator
-+---------------------
-+
-+Investigate options for a VRAM memory allocator.
-+
-+Some possible options:
-+  - Rust abstractions for
-+    - RB tree (interval tree) / drm_mm
-+    - maple_tree
-+  - native Rust collections
-+
-+| Complexity: Advanced
-+
-+Instance Memory
-+---------------
-+
-+Implement support for instmem (bar2) used to store page tables.
-+
-+| Complexity: Intermediate
-+| Contact: Dave Airlie
-+
-+GPU System Processor (GSP)
-+==========================
-+
-+Export GSP log buffers
-+----------------------
-+
-+Recent patches from Timur Tabi [1] added support to expose GSP-RM log buffers
-+(even after failure to probe the driver) through debugfs.
-+
-+This is also an interesting feature for nova-core, especially in the early days.
-+
-+| Link: https://lore.kernel.org/nouveau/20241030202952.694055-2-ttabi@nvidia.com/ [1]
-+| Reference: Debugfs abstractions
-+| Complexity: Intermediate
-+
-+GSP firmware abstraction
-+------------------------
-+
-+The GSP-RM firmware API is unstable and may incompatibly change from version to
-+version, in terms of data structures and semantics.
-+
-+This problem is one of the big motivations for using Rust for nova-core, since
-+it turns out that Rust's procedural macro feature provides a rather elegant way
-+to address this issue:
-+
-+1. generate Rust structures from the C headers in a separate namespace per version
-+2. build abstraction structures (within a generic namespace) that implement the
-+   firmware interfaces; annotate the differences in implementation with version
-+   identifiers
-+3. use a procedural macro to generate the actual per version implementation out
-+   of this abstraction
-+4. instantiate the correct version type one on runtime (can be sure that all
-+   have the same interface because it's defined by a common trait)
-+
-+There is a PoC implementation of this pattern, in the context of the nova-core
-+PoC driver.
-+
-+This task aims at refining the feature and ideally generalize it, to be usable
-+by other drivers as well.
-+
-+| Complexity: Expert
-+
-+GSP message queue
-+-----------------
-+
-+Implement low level GSP message queue (command, status) for communication
-+between the kernel driver and GSP.
-+
-+| Complexity: Advanced
-+| Contact: Dave Airlie
-+
-+Bootstrap GSP
-+-------------
-+
-+Call the boot firmware to boot the GSP processor; execute initial control
-+messages.
-+
-+| Complexity: Intermediate
-+| Contact: Dave Airlie
-+
-+Client / Device APIs
-+--------------------
-+
-+Implement the GSP message interface for client / device allocation and the
-+corresponding client and device allocation APIs.
-+
-+| Complexity: Intermediate
-+| Contact: Dave Airlie
-+
-+Bar PDE handling
-+----------------
-+
-+Synchronize page table handling for BARs between the kernel driver and GSP.
-+
-+| Complexity: Beginner
-+| Contact: Dave Airlie
-+
-+FIFO engine
-+-----------
-+
-+Implement support for the FIFO engine, i.e. the corresponding GSP message
-+interface and provide an API for chid allocation and channel handling.
-+
-+| Complexity: Advanced
-+| Contact: Dave Airlie
-+
-+GR engine
-+---------
-+
-+Implement support for the graphics engine, i.e. the corresponding GSP message
-+interface and provide an API for (golden) context creation and promotion.
-+
-+| Complexity: Advanced
-+| Contact: Dave Airlie
-+
-+CE engine
-+---------
-+
-+Implement support for the copy engine, i.e. the corresponding GSP message
-+interface.
-+
-+| Complexity: Intermediate
-+| Contact: Dave Airlie
-+
-+VFN IRQ controller
-+------------------
-+
-+Support for the VFN interrupt controller.
-+
-+| Complexity: Intermediate
-+| Contact: Dave Airlie
-+
-+External APIs
-+=============
-+
-+nova-core base API
-+------------------
-+
-+Work out the common pieces of the API to connect 2nd level drivers, i.e. vGPU
-+manager and nova-drm.
-+
-+| Complexity: Advanced
-+
-+vGPU manager API
-+----------------
-+
-+Work out the API parts required by the vGPU manager, which are not covered by
-+the base API.
-+
-+| Complexity: Advanced
-+
-+nova-core C API
-+---------------
-+
-+Implement a C wrapper for the APIs required by the vGPU manager driver.
-+
-+| Complexity: Intermediate
-+
-+Testing
-+=======
-+
-+CI pipeline
-+-----------
-+
-+Investigate option for continuous integration testing.
-+
-+This can go from as simple as running KUnit tests over running (graphics) CTS to
-+booting up (multiple) guest VMs to test VFIO use-cases.
-+
-+It might also be worth to consider the introduction of a new test suite directly
-+sitting on top of the uAPI for more targeted testing and debugging. There may be
-+options for collaboration / shared code with the Mesa project.
-+
-+| Complexity: Advanced
-diff --git a/Documentation/gpu/nova/guidelines.rst b/Documentation/gpu/nova/guidelines.rst
-new file mode 100644
-index 000000000000..28a959f51c2c
---- /dev/null
-+++ b/Documentation/gpu/nova/guidelines.rst
-@@ -0,0 +1,73 @@
-+.. SPDX-License-Identifier: (GPL-2.0+ OR MIT)
-+
-+==========
-+Guidelines
-+==========
-+
-+This document describes the general project guidelines that apply to nova-core
-+and nova-drm.
-+
-+Language
-+========
-+
-+The Nova project uses the Rust programming language. In this context, the
-+following rules apply.
-+
-+- Unless technically necessary otherwise (e.g. uAPI), any driver code is written
-+  in Rust.
-+
-+- Direct FFI calls to C kernel APIs must be avoided; instead C kernel APIs
-+  should be accessed through shared Rust abstractions.
-+
-+- Unless technically necessary, unsafe Rust code must be avoided. In case of
-+  technical necessity, unsafe code should be isolated in a separate component
-+  providing a safe API for other driver code to use.
-+
-+Style
-+-----
-+
-+All rules of the Rust for Linux project as documented in
-+:doc:`../../rust/coding-guidelines` apply. Additionally, the following rules
-+apply.
-+
-+- Code must be formatted with the ``rustfmt`` make target.
-+
-+- Code submitted for inclusion into the Nova driver project must pass the Rust
-+  linter, which can be enabled with ``CLIPPY=1``.
-+
-+Documentation
-+=============
-+
-+The availability of proper documentation is essential in terms of scalability,
-+accessability for new contributors and maintainability of a project in general,
-+but especially for a driver running as complex hardware as Nova is targeting.
-+
-+Hence, adding documentation of any kind is very much encouraged by the project.
-+
-+Besides that, there are some minimum requirements.
-+
-+- Every non-private structure needs at least a brief doc comment explaining the
-+  semantical sense of the structure, as well as potential locking and lifetime
-+  requirements. It is encouraged to have the same minimum documentation for
-+  non-trivial private structures.
-+
-+- uAPIs must be fully documented with kernel-doc comments; additionally, the
-+  semantical behavior must be explained including potential special or corner
-+  cases.
-+
-+- The APIs connecting the 1st level driver (nova-core) with 2nd level drivers
-+  must be fully documented. This includes doc comments, potential locking and
-+  lifetime requirements, as well as example code if applicable.
-+
-+- Abbreviations must be explained when introduced; terminology must be uniquely
-+  defined.
-+
-+- Register addresses, layouts, shift values and masks must be defined properly;
-+  unless obvious, the semantical sense must be documented. This only applies if
-+  the author is able to obtain the corresponding information.
-+
-+Acceptance Criteria
-+===================
-+
-+- Patches must only be applied if reviewed by at least one other person on the
-+  mailing list; this also applies for maintainers.
-diff --git a/Documentation/gpu/nova/index.rst b/Documentation/gpu/nova/index.rst
-new file mode 100644
-index 000000000000..2701b3f4af35
---- /dev/null
-+++ b/Documentation/gpu/nova/index.rst
-@@ -0,0 +1,30 @@
-+.. SPDX-License-Identifier: (GPL-2.0+ OR MIT)
-+
-+=======================
-+nova NVIDIA GPU drivers
-+=======================
-+
-+The nova driver project consists out of two separate drivers nova-core and
-+nova-drm and intends to supersede the nouveau driver for NVIDIA GPUs based on
-+the GPU System Processor (GSP).
-+
-+The following documents apply to both nova-core and nova-drm.
-+
-+.. toctree::
-+   :titlesonly:
-+
-+   guidelines
-+
-+nova-core
-+=========
-+
-+The nova-core driver is the core driver for NVIDIA GPUs based on GSP. nova-core,
-+as the 1st level driver, provides an abstraction around the GPUs hard- and
-+firmware interfaces providing a common base for 2nd level drivers, such as the
-+vGPU manager VFIO driver and the nova-drm driver.
-+
-+.. toctree::
-+   :titlesonly:
-+
-+   core/guidelines
-+   core/todo
-diff --git a/MAINTAINERS b/MAINTAINERS
-index f7ddca7de0ef..07455c945834 100644
---- a/MAINTAINERS
-+++ b/MAINTAINERS
-@@ -7454,6 +7454,7 @@ Q:	https://patchwork.freedesktop.org/project/nouveau/
- B:	https://gitlab.freedesktop.org/drm/nova/-/issues
- C:	irc://irc.oftc.net/nouveau
- T:	git https://gitlab.freedesktop.org/drm/nova.git nova-next
-+F:	Documentation/gpu/nova/
- F:	drivers/gpu/nova-core/
- 
- DRM DRIVER FOR OLIMEX LCD-OLINUXINO PANELS
+Some minor comments below, but this looks like a very good starting "stub"
+to get merged.
+
+> 
+> diff --git a/MAINTAINERS b/MAINTAINERS
+> index d1086e53a317..f7ddca7de0ef 100644
+> --- a/MAINTAINERS
+> +++ b/MAINTAINERS
+> @@ -7446,6 +7446,16 @@ T:	git https://gitlab.freedesktop.org/drm/nouveau.git
+>   F:	drivers/gpu/drm/nouveau/
+>   F:	include/uapi/drm/nouveau_drm.h
+>   
+> +CORE DRIVER FOR NVIDIA GPUS [RUST]
+> +M:	Danilo Krummrich <dakr@kernel.org>
+> +L:	nouveau@lists.freedesktop.org
+> +S:	Supported
+> +Q:	https://patchwork.freedesktop.org/project/nouveau/
+
+Are you sure? I'm not sure how patchwork things work, but it seems
+unfortunate to confuse Nova and nouveau here.
+
+> +B:	https://gitlab.freedesktop.org/drm/nova/-/issues
+> +C:	irc://irc.oftc.net/nouveau
+> +T:	git https://gitlab.freedesktop.org/drm/nova.git nova-next
+> +F:	drivers/gpu/nova-core/
+> +
+>   DRM DRIVER FOR OLIMEX LCD-OLINUXINO PANELS
+>   M:	Stefan Mavrodiev <stefan@olimex.com>
+>   S:	Maintained
+> diff --git a/drivers/gpu/Makefile b/drivers/gpu/Makefile
+> index 8997f0096545..36a54d456630 100644
+> --- a/drivers/gpu/Makefile
+> +++ b/drivers/gpu/Makefile
+> @@ -5,3 +5,4 @@
+>   obj-y			+= host1x/ drm/ vga/
+>   obj-$(CONFIG_IMX_IPUV3_CORE)	+= ipu-v3/
+>   obj-$(CONFIG_TRACE_GPU_MEM)		+= trace/
+> +obj-$(CONFIG_NOVA_CORE)		+= nova-core/
+> diff --git a/drivers/gpu/nova-core/Kconfig b/drivers/gpu/nova-core/Kconfig
+> new file mode 100644
+> index 000000000000..33ac937b244a
+> --- /dev/null
+> +++ b/drivers/gpu/nova-core/Kconfig
+> @@ -0,0 +1,13 @@
+> +config NOVA_CORE
+> +	tristate "Nova Core GPU driver"
+> +	depends on PCI
+> +	depends on RUST
+> +	depends on RUST_FW_LOADER_ABSTRACTIONS
+> +	default n
+> +	help
+> +	  Choose this if you want to build the Nova Core driver for Nvidia
+> +	  GSP-based GPUs.
+
+Maybe a little note about what "GSP" is and how you know if you have it,
+would help. Turing and later architectures have GSP firmware. All the
+user might know is the GPU architecture, I wouldn't expect the user
+to know if it has a "GSP".
+
+> +
+> +	  This driver is work in progress and may not be functional.
+> +
+> +	  If M is selected, the module will be called nova-core.
+
+Or nova_core? I realize the driver core translates between "-" and "_",
+just trying to be consistent.
+
+It does show up as /sys/module/nova_core .
+
+
+> diff --git a/drivers/gpu/nova-core/Makefile b/drivers/gpu/nova-core/Makefile
+> new file mode 100644
+> index 000000000000..2d78c50126e1
+> --- /dev/null
+> +++ b/drivers/gpu/nova-core/Makefile
+> @@ -0,0 +1,3 @@
+> +# SPDX-License-Identifier: GPL-2.0
+> +
+> +obj-$(CONFIG_NOVA_CORE) += nova_core.o
+> diff --git a/drivers/gpu/nova-core/driver.rs b/drivers/gpu/nova-core/driver.rs
+> new file mode 100644
+> index 000000000000..2a2aa9b0630b
+> --- /dev/null
+> +++ b/drivers/gpu/nova-core/driver.rs
+> @@ -0,0 +1,47 @@
+> +// SPDX-License-Identifier: GPL-2.0
+> +
+> +use kernel::{bindings, c_str, pci, prelude::*};
+> +
+> +use crate::gpu::Gpu;
+> +
+> +#[pin_data]
+> +pub(crate) struct NovaCore {
+> +    #[pin]
+> +    pub(crate) gpu: Gpu,
+> +}
+> +
+> +const BAR0_SIZE: usize = 8;
+> +pub(crate) type Bar0 = pci::Bar<BAR0_SIZE>;
+> +
+> +kernel::pci_device_table!(
+> +    PCI_TABLE,
+> +    MODULE_PCI_TABLE,
+> +    <NovaCore as pci::Driver>::IdInfo,
+> +    [(
+> +        pci::DeviceId::from_id(bindings::PCI_VENDOR_ID_NVIDIA, bindings::PCI_ANY_ID as _),
+> +        ()
+> +    )]
+> +);
+> +
+> +impl pci::Driver for NovaCore {
+> +    type IdInfo = ();
+> +    const ID_TABLE: pci::IdTable<Self::IdInfo> = &PCI_TABLE;
+> +
+> +    fn probe(pdev: &mut pci::Device, _info: &Self::IdInfo) -> Result<Pin<KBox<Self>>> {
+> +        dev_dbg!(pdev.as_ref(), "Probe Nova Core GPU driver.\n");
+> +
+> +        pdev.enable_device_mem()?;
+> +        pdev.set_master();
+> +
+> +        let bar = pdev.iomap_region_sized::<BAR0_SIZE>(0, c_str!("nova-core"))?;
+
+Another question about whether it should be nova-core or nova_core.
+
+> +
+> +        let this = KBox::pin_init(
+> +            try_pin_init!(Self {
+> +                gpu <- Gpu::new(pdev, bar)?,
+> +            }),
+> +            GFP_KERNEL,
+> +        )?;
+> +
+> +        Ok(this)
+> +    }
+> +}
+> diff --git a/drivers/gpu/nova-core/gpu.rs b/drivers/gpu/nova-core/gpu.rs
+> new file mode 100644
+> index 000000000000..cf62390e72eb
+> --- /dev/null
+> +++ b/drivers/gpu/nova-core/gpu.rs
+> @@ -0,0 +1,171 @@
+> +// SPDX-License-Identifier: GPL-2.0
+> +
+> +use kernel::{
+> +    device, devres::Devres, error::code::*, firmware, fmt, pci, prelude::*, str::CString,
+> +};
+> +
+> +use crate::driver::Bar0;
+> +use core::fmt::Debug;
+> +
+> +/// Enum representation of the GPU chipset.
+> +#[derive(Debug)]
+> +pub(crate) enum Chipset {
+> +    TU102 = 0x162,
+> +    TU104 = 0x164,
+> +    TU106 = 0x166,
+> +    TU117 = 0x167,
+> +    TU116 = 0x168,
+> +    GA102 = 0x172,
+> +    GA103 = 0x173,
+> +    GA104 = 0x174,
+> +    GA106 = 0x176,
+> +    GA107 = 0x177,
+> +    AD102 = 0x192,
+> +    AD103 = 0x193,
+> +    AD104 = 0x194,
+> +    AD106 = 0x196,
+> +    AD107 = 0x197,
+> +}
+> +
+> +/// Enum representation of the GPU generation.
+> +#[derive(Debug)]
+> +pub(crate) enum CardType {
+> +    /// Turing
+> +    TU100 = 0x160,
+> +    /// Ampere
+> +    GA100 = 0x170,
+> +    /// Ada Lovelace
+> +    AD100 = 0x190,
+> +}
+> +
+> +/// Structure holding the metadata of the GPU.
+> +#[allow(dead_code)]
+> +pub(crate) struct GpuSpec {
+> +    /// Contents of the boot0 register.
+> +    boot0: u64,
+
+It is redundant to store boot0, when all of the following fields
+are deduced from boot0.
+
+> +    card_type: CardType,
+> +    chipset: Chipset,
+> +    /// The revision of the chipset.
+> +    chiprev: u8,
+> +}
+> +
+> +/// Structure encapsulating the firmware blobs required for the GPU to operate.
+> +#[allow(dead_code)]
+> +pub(crate) struct Firmware {
+> +    booter_load: firmware::Firmware,
+> +    booter_unload: firmware::Firmware,
+> +    gsp: firmware::Firmware,
+> +}
+> +
+> +/// Structure holding the resources required to operate the GPU.
+> +#[allow(dead_code)]
+> +#[pin_data]
+> +pub(crate) struct Gpu {
+> +    spec: GpuSpec,
+> +    /// MMIO mapping of PCI BAR 0
+> +    bar: Devres<Bar0>,
+> +    fw: Firmware,
+> +}
+> +
+> +// TODO replace with something like derive(FromPrimitive)
+> +impl Chipset {
+> +    fn from_u32(value: u32) -> Option<Chipset> {
+> +        match value {
+> +            0x162 => Some(Chipset::TU102),
+> +            0x164 => Some(Chipset::TU104),
+> +            0x166 => Some(Chipset::TU106),
+> +            0x167 => Some(Chipset::TU117),
+> +            0x168 => Some(Chipset::TU116),
+> +            0x172 => Some(Chipset::GA102),
+> +            0x173 => Some(Chipset::GA103),
+> +            0x174 => Some(Chipset::GA104),
+> +            0x176 => Some(Chipset::GA106),
+> +            0x177 => Some(Chipset::GA107),
+> +            0x192 => Some(Chipset::AD102),
+> +            0x193 => Some(Chipset::AD103),
+> +            0x194 => Some(Chipset::AD104),
+> +            0x196 => Some(Chipset::AD106),
+> +            0x197 => Some(Chipset::AD107),
+> +            _ => None,
+> +        }
+> +    }
+> +}
+> +
+> +// TODO replace with something like derive(FromPrimitive)
+> +impl CardType {
+> +    fn from_u32(value: u32) -> Option<CardType> {
+> +        match value {
+> +            0x160 => Some(CardType::TU100),
+> +            0x170 => Some(CardType::GA100),
+> +            0x190 => Some(CardType::AD100),
+
+Is this how nouveau does it too? I mean, classifying cards as GA100,
+and variants as TU102. It feels wrong to me, because we have for example
+GA100 GPUs. I mean, GA100 is the same kind of thing as a GA102: each is
+a GPU.
+
+If I were naming card types, I'd calling them by their architecture names:
+Turing, Ampere, Ada.
+
+> +            _ => None,
+> +        }
+> +    }
+> +}
+> +
+> +impl GpuSpec {
+> +    fn new(bar: &Devres<Bar0>) -> Result<GpuSpec> {
+> +        let bar = bar.try_access().ok_or(ENXIO)?;
+> +        let boot0 = u64::from_le(bar.readq(0));
+> +        let chip = ((boot0 & 0x1ff00000) >> 20) as u32;
+> +
+> +        if boot0 & 0x1f000000 == 0 {
+> +            return Err(ENODEV);
+> +        }
+> +
+> +        let Some(chipset) = Chipset::from_u32(chip) else {
+> +            return Err(ENODEV);
+> +        };
+> +
+> +        let Some(card_type) = CardType::from_u32(chip & 0x1f0) else {
+> +            return Err(ENODEV);
+> +        };
+> +
+> +        Ok(Self {
+> +            boot0,
+> +            card_type,
+> +            chipset,
+> +            chiprev: (boot0 & 0xff) as u8,
+> +        })
+> +    }
+> +}
+> +
+> +impl Firmware {
+> +    fn new(dev: &device::Device, spec: &GpuSpec, ver: &str) -> Result<Firmware> {
+> +        let mut chip_name = CString::try_from_fmt(fmt!("{:?}", spec.chipset))?;
+> +        chip_name.make_ascii_lowercase();
+> +
+> +        let fw_booter_load_path =
+> +            CString::try_from_fmt(fmt!("nvidia/{}/gsp/booter_load-{}.bin", &*chip_name, ver))?;
+> +        let fw_booter_unload_path =
+> +            CString::try_from_fmt(fmt!("nvidia/{}/gsp/booter_unload-{}.bin", &*chip_name, ver))?;
+> +        let fw_gsp_path =
+> +            CString::try_from_fmt(fmt!("nvidia/{}/gsp/gsp-{}.bin", &*chip_name, ver))?;
+> +
+> +        let booter_load = firmware::Firmware::request(&fw_booter_load_path, dev)?;
+> +        let booter_unload = firmware::Firmware::request(&fw_booter_unload_path, dev)?;
+> +        let gsp = firmware::Firmware::request(&fw_gsp_path, dev)?;
+> +
+> +        Ok(Firmware {
+> +            booter_load,
+> +            booter_unload,
+> +            gsp,
+> +        })
+> +    }
+> +}
+> +
+> +impl Gpu {
+> +    pub(crate) fn new(pdev: &pci::Device, bar: Devres<Bar0>) -> Result<impl PinInit<Self>> {
+> +        let spec = GpuSpec::new(&bar)?;
+> +        let fw = Firmware::new(pdev.as_ref(), &spec, "535.113.01")?;
+
+lol there it is: our one, "stable" set of GSP firmware. Maybe a one line comment
+above might be appropriate, to mention that this is hardcoded, but new firmware
+versions will not be. On the other hand, that's obvious. :)
+
+> +
+> +        dev_info!(
+> +            pdev.as_ref(),
+> +            "NVIDIA {:?} ({:#x})",
+> +            spec.chipset,
+> +            spec.boot0
+> +        );
+> +
+> +        Ok(pin_init!(Self { spec, bar, fw }))
+> +    }
+> +}
+> diff --git a/drivers/gpu/nova-core/nova_core.rs b/drivers/gpu/nova-core/nova_core.rs
+> new file mode 100644
+> index 000000000000..b130d9ca6a0f
+> --- /dev/null
+> +++ b/drivers/gpu/nova-core/nova_core.rs
+> @@ -0,0 +1,14 @@
+> +// SPDX-License-Identifier: GPL-2.0
+> +
+> +//! Nova Core GPU Driver
+> +
+> +mod driver;
+> +mod gpu;
+> +
+> +kernel::module_pci_driver! {
+> +    type: driver::NovaCore,
+> +    name: "NovaCore",
+> +    author: "Danilo Krummrich",
+> +    description: "Nova Core GPU driver",
+> +    license: "GPL v2",
+> +}
+> diff --git a/drivers/video/Kconfig b/drivers/video/Kconfig
+> index 44c9ef1435a2..5df981920a94 100644
+> --- a/drivers/video/Kconfig
+> +++ b/drivers/video/Kconfig
+> @@ -39,6 +39,7 @@ source "drivers/gpu/vga/Kconfig"
+>   
+>   source "drivers/gpu/host1x/Kconfig"
+>   source "drivers/gpu/ipu-v3/Kconfig"
+> +source "drivers/gpu/nova-core/Kconfig"
+>   
+>   source "drivers/gpu/drm/Kconfig"
+>   
+> 
+> base-commit: 69b8923f5003664e3ffef102e73333edfa2abdcf
+
+I'm always grateful when anyone uses "git format-patch --base", it makes
+life simpler.
+
+
+thanks,
 -- 
-2.48.1
+John Hubbard
 
