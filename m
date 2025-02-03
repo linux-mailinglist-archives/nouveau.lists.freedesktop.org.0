@@ -2,92 +2,63 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id 6FCF3A25DEC
-	for <lists+nouveau@lfdr.de>; Mon,  3 Feb 2025 16:08:11 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id F397DA26113
+	for <lists+nouveau@lfdr.de>; Mon,  3 Feb 2025 18:13:36 +0100 (CET)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id E986310E0F4;
-	Mon,  3 Feb 2025 15:08:09 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id E8B1B10E520;
+	Mon,  3 Feb 2025 17:13:32 +0000 (UTC)
 Authentication-Results: gabe.freedesktop.org;
-	dkim=pass (2048-bit key; secure) header.d=ziepe.ca header.i=@ziepe.ca header.b="BGBI2CnA";
+	dkim=pass (2048-bit key; unprotected) header.d=collabora.com header.i=@collabora.com header.b="TYpzovAX";
 	dkim-atps=neutral
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from mail-qk1-f173.google.com (mail-qk1-f173.google.com
- [209.85.222.173])
- by gabe.freedesktop.org (Postfix) with ESMTPS id D051B10E0D8
- for <nouveau@lists.freedesktop.org>; Mon,  3 Feb 2025 15:08:08 +0000 (UTC)
-Received: by mail-qk1-f173.google.com with SMTP id
- af79cd13be357-7b6e5c74cb7so371881285a.2
- for <nouveau@lists.freedesktop.org>; Mon, 03 Feb 2025 07:08:08 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=ziepe.ca; s=google; t=1738595287; x=1739200087; darn=lists.freedesktop.org; 
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=VIfqpXWa2saTTZIkeCGgjoPhbUp2hEhSFcQHJJf5WU0=;
- b=BGBI2CnAqg1nrtVPhbjl/uBO/sURhoQ3TaNAzrsqYqBLfwvgvj4sbo1e4cwz3ilIbN
- B3allo2yvmelueVfbnQjkntXwKHVy0OFAlDbNR/a48dk53iLvJO/XNj3e65Z0eoz7Vvo
- dKdHdjO7l+tU98kjipBJbNfMQa11my3BWALLka3VqvOo6BHOIPjr0MDXtQlqpGM7eXPG
- 1FfckFkeViDlnjt3r/v8e3VJszwxLwBBCi2y5OqeBxAyCriWXsRIzEqYfiqJ/wjHWhYZ
- beD2cyzBUVSOWTtUib6TKoX8MkjPk2CvV7SX0AO7d1KzxzEVxNUrPL3rFbdrqMVrV3tI
- aBMg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1738595287; x=1739200087;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:to:from:date:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=VIfqpXWa2saTTZIkeCGgjoPhbUp2hEhSFcQHJJf5WU0=;
- b=aPFfJEuke2r5NaBZxq3GxK+x8fxc34pyJfNt9uuvwIzx12Znw6XMRzKI3v3euZW+Xa
- 1YA5thfjfncgE29/bOsS8oZEd4BtJHlgOICFqG+rKVr/hWpZAO6Bops6NMh9yF6GThly
- VTodm96BN0B5Nm415DFz81TiVQYZu8zb+JW3lTSKVFS6ML9GCRo+RQLdrriwjBqjLDry
- cTMAtxtJcNVqHBhG3/5L6S70s65nDahdDIaMDwWp2V3xxoTm/yUmxnJyDVqdqPbkihWb
- 7nQ8JoQW52UEbQjVh7MmwkizwNAyHnvURUiO8xEiROh2ZjCXwBOej6PlMkI1SajMPooH
- +4lg==
-X-Forwarded-Encrypted: i=1;
- AJvYcCVm+Y3Xwg67+4+0nV5P0v1Vmf3BbZST03OyxoRGYwBKOknekgCkacQLhxiVbHc/A5tenC0IqOBQ@lists.freedesktop.org
-X-Gm-Message-State: AOJu0Yz5ZLxfyr9YX+rDzffanYgAaSEMdUvqDSzSa29KaiPMmIJMSIAE
- zp7GE3auwHEoZJrC6PSu2j7/gVFQbZBmrbT4myBJMcKeMmp10NHL6t4xSbSGuek=
-X-Gm-Gg: ASbGncufte9kM5ZB+XX/rP9z09g1LOJZtYxpINVOI+Yzk7Vx8JahxxSd3bWs6J2HQLl
- Iese2qhZ7+sdqkKyrU+mPtNcjiP5Ds7cW9qirxbuTavz9BH3OVHL6Plqj8RXoOmM7hNzrCM3JKv
- P+nhheJr5PIL9VaL/WcYCHZc0GMFisbx44gZ9DWFWeWmYJtjkN6i7/A2smhK2Otty/Spfy77Zxe
- DMuhtwokJvLZzaDW2jwEtYIOvXxF1j9rDeAmXtMwZzDoHa8aTaYAxRuwBe8V+wpOQ==
-X-Google-Smtp-Source: AGHT+IH/qa1lrVLcKxozjVl1Axtfg0S5tmpdY0Hz1inHc6vNMg7mQBJDuUSeOKIlGn70ib6W5YOi8A==
-X-Received: by 2002:a05:620a:19a8:b0:7b6:c540:9531 with SMTP id
- af79cd13be357-7bffcce8d01mr3518318185a.18.1738595287317; 
- Mon, 03 Feb 2025 07:08:07 -0800 (PST)
-Received: from ziepe.ca ([130.41.10.206]) by smtp.gmail.com with ESMTPSA id
- af79cd13be357-7c00a8d1280sm534889985a.45.2025.02.03.07.08.06
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 03 Feb 2025 07:08:06 -0800 (PST)
-Received: from jgg by wakko with local (Exim 4.97)
- (envelope-from <jgg@ziepe.ca>) id 1tey3R-0000000As1Z-1rVV;
- Mon, 03 Feb 2025 11:08:05 -0400
-Date: Mon, 3 Feb 2025 11:08:05 -0400
-From: Jason Gunthorpe <jgg@ziepe.ca>
-To: Thomas =?utf-8?Q?Hellstr=C3=B6m?= <thomas.hellstrom@linux.intel.com>,
- Yonatan Maman <ymaman@nvidia.com>, kherbst@redhat.com,
- lyude@redhat.com, dakr@redhat.com, airlied@gmail.com,
- simona@ffwll.ch, leon@kernel.org, jglisse@redhat.com,
- akpm@linux-foundation.org, GalShalom@nvidia.com,
- dri-devel@lists.freedesktop.org, nouveau@lists.freedesktop.org,
- linux-kernel@vger.kernel.org, linux-rdma@vger.kernel.org,
- linux-mm@kvack.org, linux-tegra@vger.kernel.org
-Subject: Re: [RFC 1/5] mm/hmm: HMM API to enable P2P DMA for device private
- pages
-Message-ID: <20250203150805.GC2296753@ziepe.ca>
-References: <20250128151610.GC1524382@ziepe.ca>
- <b78d32e13811ef1fa57b0535749c811f2afb4dcd.camel@linux.intel.com>
- <20250128172123.GD1524382@ziepe.ca>
- <Z5ovcnX2zVoqdomA@phenom.ffwll.local>
- <20250129134757.GA2120662@ziepe.ca>
- <Z5tZc0OQukfZEr3H@phenom.ffwll.local>
- <20250130132317.GG2120662@ziepe.ca>
- <Z5ukSNjvmQcXsZTm@phenom.ffwll.local>
- <20250130174217.GA2296753@ziepe.ca>
- <Z50BbuUQWIaDPRzK@phenom.ffwll.local>
+Received: from bali.collaboradmins.com (bali.collaboradmins.com
+ [148.251.105.195])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 4F95610E517;
+ Mon,  3 Feb 2025 17:13:31 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=collabora.com;
+ s=mail; t=1738602809;
+ bh=ndkb6szgntNxZ1m9AzaW8Vv16UmmpDx4y5UikG7Io34=;
+ h=Date:From:To:Cc:Subject:In-Reply-To:References:From;
+ b=TYpzovAXni3oTIHKsbrXT52QeFbQ7JCzdlo4ZsE2L5ilPPt4pB4EJWIITFgZ0YDxI
+ IU4cXOLO/cXPJb66JIWHWWHyVvwFVbsPs7oZUyCFUfTocxiv69pOdgZiVft+txaK1B
+ LG49HiPaP/XGPwv+U5G9OSCnUbX32q7XXyU8W99afOSXXjA7YIv+GMmeton0BX6r1Z
+ jyG6YmoU3ofsMz5kFzB0zmA2DqD9yJVTcuSwPTHg8tLmstNPVQsw4yUKXlzvmJ4BUw
+ 50iagQBD3YP4+b34D9cB3L3UtMFP95qENaAsRahy7kffzhKO9ybRwwGaZ6lZthg4Jn
+ hC4Us2/1hLO5A==
+Received: from localhost (unknown [IPv6:2a01:e0a:2c:6930:5cf4:84a1:2763:fe0d])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
+ (No client certificate requested) (Authenticated sender: bbrezillon)
+ by bali.collaboradmins.com (Postfix) with ESMTPSA id B1B9617E10C2;
+ Mon,  3 Feb 2025 18:13:28 +0100 (CET)
+Date: Mon, 3 Feb 2025 18:13:21 +0100
+From: Boris Brezillon <boris.brezillon@collabora.com>
+To: Asahi Lina <lina@asahilina.net>
+Cc: Danilo Krummrich <dakr@kernel.org>, asahi@lists.linux.dev, Maarten
+ Lankhorst <maarten.lankhorst@linux.intel.com>, Maxime Ripard
+ <mripard@kernel.org>, Thomas Zimmermann <tzimmermann@suse.de>, David Airlie
+ <airlied@gmail.com>, Simona Vetter <simona@ffwll.ch>, Frank Binns
+ <frank.binns@imgtec.com>, Matt Coster <matt.coster@imgtec.com>, Karol
+ Herbst <kherbst@redhat.com>, Lyude Paul <lyude@redhat.com>, Steven Price
+ <steven.price@arm.com>, Liviu Dudau <liviu.dudau@arm.com>, Lucas De Marchi
+ <lucas.demarchi@intel.com>, Thomas =?UTF-8?B?SGVsbHN0csO2bQ==?=
+ <thomas.hellstrom@linux.intel.com>, Rodrigo Vivi <rodrigo.vivi@intel.com>,
+ dri-devel@lists.freedesktop.org, linux-kernel@vger.kernel.org,
+ nouveau@lists.freedesktop.org, intel-xe@lists.freedesktop.org,
+ akash.goel@arm.com
+Subject: Re: [PATCH 0/4] drm/gpuvm: Add support for single-page-filled mappings
+Message-ID: <20250203181321.3d8a0f8c@collabora.com>
+In-Reply-To: <8659ac1f-3bb0-4891-b4ea-958a1a308c01@asahilina.net>
+References: <20250202-gpuvm-single-page-v1-0-8cbd44fdcbd4@asahilina.net>
+ <Z5-_O8vkCO0LXcl7@pollux.localdomain>
+ <20250203102153.145229e0@collabora.com>
+ <8659ac1f-3bb0-4891-b4ea-958a1a308c01@asahilina.net>
+Organization: Collabora
+X-Mailer: Claws Mail 4.3.0 (GTK 3.24.43; x86_64-redhat-linux-gnu)
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <Z50BbuUQWIaDPRzK@phenom.ffwll.local>
+Content-Type: text/plain; charset=US-ASCII
+Content-Transfer-Encoding: 7bit
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -102,46 +73,121 @@ List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-On Fri, Jan 31, 2025 at 05:59:26PM +0100, Simona Vetter wrote:
+On Mon, 3 Feb 2025 22:46:15 +0900
+Asahi Lina <lina@asahilina.net> wrote:
 
-> So one aspect where I don't like the pgmap->owner approach much is that
-> it's a big thing to get right, and it feels a bit to me that we don't yet
-> know the right questions.
+> Hi,
+> 
+> On 2/3/25 6:21 PM, Boris Brezillon wrote:
+> > +Akash with whom we've been discussing adding a 'REPEAT' mode to
+> > drm_gpuvm/panthor.
+> > 
+> > On Sun, 2 Feb 2025 19:53:47 +0100
+> > Danilo Krummrich <dakr@kernel.org> wrote:
+> >   
+> >> Hi Lina,
+> >>
+> >> On Sun, Feb 02, 2025 at 10:34:49PM +0900, Asahi Lina wrote:  
+> >>> Some hardware requires dummy page mappings to efficiently implement
+> >>> Vulkan sparse features. These mappings consist of the same physical
+> >>> memory page, repeated for a large range of address space (e.g. 16GiB).
+> >>>
+> >>> Add support for this to drm_gpuvm. Currently, drm_gpuvm expects BO
+> >>> ranges to correspond 1:1 to virtual memory ranges that are mapped, and
+> >>> does math on the BO offset accordingly. To make single page mappings
+> >>> work, we need a way to turn off that math, keeping the BO offset always
+> >>> constant and pointing to the same page (typically BO offset 0).
+> >>>
+> >>> To make this work, we need to handle all the corner cases when these
+> >>> mappings intersect with regular mappings. The rules are simply to never
+> >>> mix or merge a "regular" mapping with a single page mapping.
+> >>>
+> >>> drm_gpuvm has support for a flags field in drm_gpuva objects. This is
+> >>> normally managed by drivers directly. We can introduce a
+> >>> DRM_GPUVA_SINGLE_PAGE flag to handle this. However, to make it work,
+> >>> sm_map and friends need to know ahead of time whether the new mapping is
+> >>> a single page mapping or not. Therefore, we need to add an argument to
+> >>> these functions so drivers can provide the flags to be filled into
+> >>> drm_gpuva.flags.
+> >>>
+> >>> These changes should not affect any existing drivers that use drm_gpuvm
+> >>> other than the API change:
+> >>>
+> >>> - imagination: Does not use flags at all
+> >>> - nouveau: Only uses drm_gpuva_invalidate(), which is only called on
+> >>>   existing drm_gpuva objects (after the map steps)
+> >>> - panthor: Does not use flags at all
+> >>> - xe: Does not use drm_gpuva_init_from_op() or
+> >>>   drm_gpuva_remap()/drm_gpuva_map() (which call it). This means that the
+> >>> flags field of the gpuva object is managed by the driver only, so these
+> >>> changes cannot clobber it.
+> >>>
+> >>> Note that the way this is implemented, drm_gpuvm does not need to know
+> >>> the GPU page size. It only has to never do math on the BO offset to meet
+> >>> the requirements.
+> >>>
+> >>> I suspect that after this change there could be some cleanup possible in
+> >>> the xe driver (which right now passes flags around in various
+> >>> driver-specific ways from the map step through to drm_gpuva objects),
+> >>> but I'll leave that to the Xe folks.
+> >>>
+> >>> Signed-off-by: Asahi Lina <lina@asahilina.net>
+> >>> ---
+> >>> Asahi Lina (4):
+> >>>       drm/gpuvm: Add a flags argument to drm_gpuvm_sm_map[_*]
+> >>>       drm/gpuvm: Plumb through flags into drm_gpuva_op_map
+> >>>       drm/gpuvm: Add DRM_GPUVA_SINGLE_PAGE flag and logic
+> >>>       drm/gpuvm: Plumb through flags into drm_gpuva_init    
+> >>
+> >> Without looking into any details yet:
+> >>
+> >> This is a bit of tricky one, since we're not even close to having a user for
+> >> this new feature upstream yet, are we?  
+> > 
+> > Actually, we would be interesting in having this feature hooked up in
+> > panthor. One use case we have is Vulkan sparse bindings, of course. But
+> > we also have cases where we need to map a dummy page repeatedly on the
+> > FW side. The approach we've been considering is slightly different:
+> > pass a DRM_GPUVA_REPEAT_FLAG along with GEM range, so we can repeat a
+> > range of the GEM (see the below diff, which is completely untested by
+> > the way), but I think we'd be fine with this SINGLE_PAGE flag.  
+> 
+> That sounds similar, though your patch does not handle gpuva
+> splitting/remapping and all the other corner cases.
 
-Well, I would say it isn't really complete yet. No driver has yet
-attempted to use a private interconnect with these scheme. Probably it
-needs more work.
+Indeed, I didn't really consider the remapping could be in the middle
+of a repeated region, and I see how it complicates things.
 
-> A bit related is that we'll have to do some driver-specific migration
-> after hmm_range_fault anyway for allocation policies. With coherent
-> interconnect that'd be up to numactl, but for driver private it's all up
-> to the driver. And once we have that, we can also migrate memory around
-> that's misplaced for functional and not just performance reasons.
+> I think you'll find
+> that once you handle those, the logic will become significantly more
+> complicated, since you need to start storing the start offset within the
+> repeat range on GPUVAs to be able to split them while keeping the
+> mappings identical, and do modular arithmetic to keep it all consistent
+> across all the corner cases.
+> 
+> If SINGLE_PAGE works for you then I would advocate for that.
 
-Are you sure? This doesn't seem to what any hmm_range_fault() user
-should be doing. hmm_range_fault() is to help mirror the page table
-to a secondary, that is all. Migration policy shouldn't be part of it,
-just mirroring doesn't necessarily mean any access was performed, for
-instance.
+I'm perfectly fine with that.
 
-And mirroring doesn't track any access done by non-faulting cases either.
+> It keeps
+> complexity down to a minimum in drm_gpuvm. You can still have a range
+> that's greater than one page in practice, you'd just have to handle it
+> driver-internal and pass the desired range out of band as a flag or
+> other field. For example, you could decide that the mapping is always
+> congruent to the VA (GEM page offset = start offset + VA % range) and
+> always treat SINGLE_PAGE mappings like that when you actually set up the
+> page tables, or pass in an extra offset to be able to shift the phase of
+> the mapping to whatever you want. You just need to ensure that, if you
+> mix range sizes or other configuration, you don't do that for the same
+> GEM BO at the same offset, so that the drm_gpuvm core does not wrongly
+> consider them equivalent.
+> 
+> Maybe I should rename SINGLE_PAGE to something else, since it isn't
+> technically limited to that as far as gpuvm is concerned. Something like
+> FIXED_OFFSET?
 
-> The plan I discussed with Thomas a while back at least for gpus was to
-> have that as a drm_devpagemap library, 
-
-I would not be happy to see this. Please improve pagemap directly if
-you think you need more things.
-
-> which would have a common owner (or
-> maybe per driver or so as Thomas suggested). 
-
-Neither really match the expected design here. The owner should be
-entirely based on reachability. Devices that cannot reach each other
-directly should have different owners.
-
-> But upfront speccing all this out doesn't seem like a good idea to,
-> because I honestly don't know what we all need.
-
-This is why it is currently just void *owner  :)
-
-Jason
+FWIW, I think I prefer SINGLE_PAGE or REPEAT over FIXED_OFFSET. I mean,
+the documentation should clear any confusion, but I like when names are
+obvious enough that people can guess their purpose without having to go
+read the doc, and I don't think FIXED_OFFSET is clear enough in this
+regard.
