@@ -2,62 +2,84 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id 66CE0CBAFBB
-	for <lists+nouveau@lfdr.de>; Sat, 13 Dec 2025 13:47:26 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 716BBCBAC04
+	for <lists+nouveau@lfdr.de>; Sat, 13 Dec 2025 13:43:35 +0100 (CET)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 3AD9110ECA7;
-	Sat, 13 Dec 2025 12:42:24 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id BF64F10EB34;
+	Sat, 13 Dec 2025 12:41:06 +0000 (UTC)
 Authentication-Results: gabe.freedesktop.org;
-	dkim=temperror (0-bit key; unprotected) header.d=asahilina.net header.i=@asahilina.net header.b="AgsSq08p";
+	dkim=permerror (0-bit key) header.d=joelfernandes.org header.i=@joelfernandes.org header.b="HbQPH//O";
 	dkim-atps=neutral
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from mail.marcansoft.com (marcansoft.com [212.63.210.85])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 0BF8110E4D9;
- Mon,  3 Feb 2025 13:46:20 +0000 (UTC)
-Received: from [127.0.0.1] (localhost [127.0.0.1])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
- (No client certificate requested)
- (Authenticated sender: lina@asahilina.net)
- by mail.marcansoft.com (Postfix) with ESMTPSA id 2156342618;
- Mon,  3 Feb 2025 13:46:17 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=asahilina.net;
- s=default; t=1738590379;
- bh=FkYJgcwBTd7j7y1jIRC/Fd5cR+gWvCsgmp/VeKuIqLk=;
- h=Date:Subject:To:Cc:References:From:In-Reply-To;
- b=AgsSq08pyl7EduZ6jUnRfVz0S2J8MZtIjeB00TJa/XpKXAElZ250lzlcCWTdll3Ww
- o1OkVdkdUSPoYc7o8PaXfKw8JYrSgtofeNeDxRUwjlMP58H8bjXc6048Fj+KhtAVQy
- A6sTHeXSZ0WkuKxAqNvzrpjQSXiRUJeYYkq8Vs61Ng6Q5WJRfGh/TUEOaBlHeKhbNz
- ZkrxYoEfzWbd6HLlDvkuH8khnsmSMTRAWcHFWRjmEXhCIgOn9KVVCKfhd68bCLkQQI
- xHY5k4XMIqxDhCRd4Me2zAKsmuPUNB0QLyQPWaFyOPQpuZH9ZPdpVQ1EWFP506XzBs
- ogKpkfxYwbm8g==
-Message-ID: <8659ac1f-3bb0-4891-b4ea-958a1a308c01@asahilina.net>
-Date: Mon, 3 Feb 2025 22:46:15 +0900
-MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 0/4] drm/gpuvm: Add support for single-page-filled mappings
-To: Boris Brezillon <boris.brezillon@collabora.com>,
- Danilo Krummrich <dakr@kernel.org>, asahi@lists.linux.dev
-Cc: Maarten Lankhorst <maarten.lankhorst@linux.intel.com>,
- Maxime Ripard <mripard@kernel.org>, Thomas Zimmermann <tzimmermann@suse.de>,
- David Airlie <airlied@gmail.com>, Simona Vetter <simona@ffwll.ch>,
- Frank Binns <frank.binns@imgtec.com>, Matt Coster <matt.coster@imgtec.com>,
- Karol Herbst <kherbst@redhat.com>, Lyude Paul <lyude@redhat.com>,
- Steven Price <steven.price@arm.com>, Liviu Dudau <liviu.dudau@arm.com>,
- Lucas De Marchi <lucas.demarchi@intel.com>,
- =?UTF-8?Q?Thomas_Hellstr=C3=B6m?= <thomas.hellstrom@linux.intel.com>,
- Rodrigo Vivi <rodrigo.vivi@intel.com>, dri-devel@lists.freedesktop.org,
+Received: from mail-qk1-f179.google.com (mail-qk1-f179.google.com
+ [209.85.222.179])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id F34D310E561
+ for <nouveau@lists.freedesktop.org>; Mon,  3 Feb 2025 20:24:12 +0000 (UTC)
+Received: by mail-qk1-f179.google.com with SMTP id
+ af79cd13be357-7be8efa231aso494034285a.2
+ for <nouveau@lists.freedesktop.org>; Mon, 03 Feb 2025 12:24:12 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=joelfernandes.org; s=google; t=1738614252; x=1739219052;
+ darn=lists.freedesktop.org; 
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=e6Xb4Vhua6DOVXVMhZhn9gco2hHVBBy0OximdWiyFao=;
+ b=HbQPH//Oi2oVpwhKvYamXL9/akGQnKJ6JWoSoZC/OJGd19aQko1NWa2JRkWOZnNGt4
+ 7A858iWi1LOLbvV4oQBgHHWGhDyRVteek7Y9mIxPRkDAHIw9is5Czp5C0RQh5bb8qCft
+ nBZsDD0X+PuEPq6B/guv5NHsveJPTA3KuPV/Y=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1738614252; x=1739219052;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=e6Xb4Vhua6DOVXVMhZhn9gco2hHVBBy0OximdWiyFao=;
+ b=tzPkTAXhzVL0GMcQ2IK8bOZbZXynUjoDEJW34mC+dJQdfDF4yPsNdn7lRdfDBXV3Y1
+ QmS9yazvI5QzsRJD7mxxGWKI53TSnYt+ex9TWcSBr+I4Tqsp1zQq9aeJMSun/QyKyjTG
+ ClX1pRib7Xp4Q8fQcUf70nzot3hZDLpde9BMlzDh3urAfFNlibbolmkMJTOGDNe/gwk+
+ i8OSX+Ioy54WkW+L2p3ndsUDfPP5oeZI6wkrq5ZhO5Wu5AD1H5gPSJllww5IgsqvziU+
+ d7KAwCfFYYnr/qdxnijUXmNWlk1giLCzQZwe0iXehPL0KXBV2xWRlEHeK1P6FZRP8kiC
+ JXKA==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCXRD2aFvBhZcAbaEYQSu5Ide7XZqpUwV9ld3Uy57R1OJJA2jUmFezi/vwsnGuZ5ARD5J/nsb7ye@lists.freedesktop.org
+X-Gm-Message-State: AOJu0YyON37PeUOx4SVR/cTopU0bl6joMv2yHLv/aTqXSynQIQgW/V54
+ tIcJOzmuLMWO/rkxFILjVvjqEA6krrKK7HKXIGhk5yGc6Y334uY7ho9I3FwA0ow=
+X-Gm-Gg: ASbGncs+fX9bC6gyrRATJaGEwTpyt0xewiBXZfmPSmmSEYXjHSZeP5Kt/1BBtDhfDyi
+ XQKJQiADrWOK0S1E+jvyYymQQhzt6MVBDhntef12iiU2ZGu4sFKSk+a4EDvvaJgBAE8/6Akn7nk
+ j7g/oAX9XKVU4pXjK2oG23NpAIwKeoUjBmR+6rjlCNvvqE/zM9BiWD1Dp868yntZ8j17CQKgL0c
+ wTleWCzaimJJ7GrebYcyU+k2sijggrud6fnsxWjMIH87ok85RUdIc4WcgKVIu6tbzchGd3aRPGO
+ 95+sVq6zh2Z+Vbiu8y0W+Or2JcmWL7jiKCDWjCYGoWFSpLcHbNCeceDL
+X-Google-Smtp-Source: AGHT+IHJwBbQNy/YeELcPmOI7zX6eoLJ4YXXLZVqyVWNzadG1hUIGaAyCQNT7KDmH8wCurS/lwIGkg==
+X-Received: by 2002:a05:620a:6228:b0:7c0:a2:e689 with SMTP id
+ af79cd13be357-7c000a2e939mr2513414085a.31.1738614251706; 
+ Mon, 03 Feb 2025 12:24:11 -0800 (PST)
+Received: from localhost (c-73-251-172-144.hsd1.va.comcast.net.
+ [73.251.172.144]) by smtp.gmail.com with ESMTPSA id
+ af79cd13be357-7c00a8bc769sm565424885a.23.2025.02.03.12.24.10
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Mon, 03 Feb 2025 12:24:10 -0800 (PST)
+Date: Mon, 3 Feb 2025 15:24:10 -0500
+From: Joel Fernandes <joel@joelfernandes.org>
+To: Danilo Krummrich <dakr@kernel.org>
+Cc: airlied@gmail.com, simona@ffwll.ch, corbet@lwn.net,
+ maarten.lankhorst@linux.intel.com, mripard@kernel.org,
+ tzimmermann@suse.de, ajanulgu@redhat.com, lyude@redhat.com,
+ pstanner@redhat.com, zhiw@nvidia.com, cjia@nvidia.com,
+ jhubbard@nvidia.com, bskeggs@nvidia.com, acurrid@nvidia.com,
+ ojeda@kernel.org, alex.gaynor@gmail.com, boqun.feng@gmail.com,
+ gary@garyguo.net, bjorn3_gh@protonmail.com, benno.lossin@proton.me,
+ a.hindborg@kernel.org, aliceryhl@google.com, tmgross@umich.edu,
+ dri-devel@lists.freedesktop.org, linux-doc@vger.kernel.org,
  linux-kernel@vger.kernel.org, nouveau@lists.freedesktop.org,
- intel-xe@lists.freedesktop.org, akash.goel@arm.com
-References: <20250202-gpuvm-single-page-v1-0-8cbd44fdcbd4@asahilina.net>
- <Z5-_O8vkCO0LXcl7@pollux.localdomain> <20250203102153.145229e0@collabora.com>
-Content-Language: en-US
-From: Asahi Lina <lina@asahilina.net>
-In-Reply-To: <20250203102153.145229e0@collabora.com>
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
-X-Mailman-Approved-At: Sat, 13 Dec 2025 12:40:42 +0000
+ rust-for-linux@vger.kernel.org, joelagnelf@nvidia.com
+Subject: Re: [PATCH 1/2] gpu: nova-core: add initial driver stub
+Message-ID: <20250203202410.GA3936980@joelbox2>
+References: <20250131220432.17717-1-dakr@kernel.org>
+MIME-Version: 1.0
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <20250131220432.17717-1-dakr@kernel.org>
+X-Mailman-Approved-At: Sat, 13 Dec 2025 12:40:52 +0000
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -72,238 +94,371 @@ List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-Hi,
+Hi Danilo,
 
-On 2/3/25 6:21 PM, Boris Brezillon wrote:
-> +Akash with whom we've been discussing adding a 'REPEAT' mode to
-> drm_gpuvm/panthor.
+On Fri, Jan 31, 2025 at 11:04:24PM +0100, Danilo Krummrich wrote:
+> Add the initial nova-core driver stub.
 > 
-> On Sun, 2 Feb 2025 19:53:47 +0100
-> Danilo Krummrich <dakr@kernel.org> wrote:
+> nova-core is intended to serve as a common base for nova-drm (the
+> corresponding DRM driver) and the vGPU manager VFIO driver, serving as a
+> hard- and firmware abstraction layer for GSP-based NVIDIA GPUs.
 > 
->> Hi Lina,
->>
->> On Sun, Feb 02, 2025 at 10:34:49PM +0900, Asahi Lina wrote:
->>> Some hardware requires dummy page mappings to efficiently implement
->>> Vulkan sparse features. These mappings consist of the same physical
->>> memory page, repeated for a large range of address space (e.g. 16GiB).
->>>
->>> Add support for this to drm_gpuvm. Currently, drm_gpuvm expects BO
->>> ranges to correspond 1:1 to virtual memory ranges that are mapped, and
->>> does math on the BO offset accordingly. To make single page mappings
->>> work, we need a way to turn off that math, keeping the BO offset always
->>> constant and pointing to the same page (typically BO offset 0).
->>>
->>> To make this work, we need to handle all the corner cases when these
->>> mappings intersect with regular mappings. The rules are simply to never
->>> mix or merge a "regular" mapping with a single page mapping.
->>>
->>> drm_gpuvm has support for a flags field in drm_gpuva objects. This is
->>> normally managed by drivers directly. We can introduce a
->>> DRM_GPUVA_SINGLE_PAGE flag to handle this. However, to make it work,
->>> sm_map and friends need to know ahead of time whether the new mapping is
->>> a single page mapping or not. Therefore, we need to add an argument to
->>> these functions so drivers can provide the flags to be filled into
->>> drm_gpuva.flags.
->>>
->>> These changes should not affect any existing drivers that use drm_gpuvm
->>> other than the API change:
->>>
->>> - imagination: Does not use flags at all
->>> - nouveau: Only uses drm_gpuva_invalidate(), which is only called on
->>>   existing drm_gpuva objects (after the map steps)
->>> - panthor: Does not use flags at all
->>> - xe: Does not use drm_gpuva_init_from_op() or
->>>   drm_gpuva_remap()/drm_gpuva_map() (which call it). This means that the
->>> flags field of the gpuva object is managed by the driver only, so these
->>> changes cannot clobber it.
->>>
->>> Note that the way this is implemented, drm_gpuvm does not need to know
->>> the GPU page size. It only has to never do math on the BO offset to meet
->>> the requirements.
->>>
->>> I suspect that after this change there could be some cleanup possible in
->>> the xe driver (which right now passes flags around in various
->>> driver-specific ways from the map step through to drm_gpuva objects),
->>> but I'll leave that to the Xe folks.
->>>
->>> Signed-off-by: Asahi Lina <lina@asahilina.net>
->>> ---
->>> Asahi Lina (4):
->>>       drm/gpuvm: Add a flags argument to drm_gpuvm_sm_map[_*]
->>>       drm/gpuvm: Plumb through flags into drm_gpuva_op_map
->>>       drm/gpuvm: Add DRM_GPUVA_SINGLE_PAGE flag and logic
->>>       drm/gpuvm: Plumb through flags into drm_gpuva_init  
->>
->> Without looking into any details yet:
->>
->> This is a bit of tricky one, since we're not even close to having a user for
->> this new feature upstream yet, are we?
+> The Nova project, including nova-core and nova-drm, in the long term,
+> is intended to serve as the successor of Nouveau for all GSP-based GPUs.
 > 
-> Actually, we would be interesting in having this feature hooked up in
-> panthor. One use case we have is Vulkan sparse bindings, of course. But
-> we also have cases where we need to map a dummy page repeatedly on the
-> FW side. The approach we've been considering is slightly different:
-> pass a DRM_GPUVA_REPEAT_FLAG along with GEM range, so we can repeat a
-> range of the GEM (see the below diff, which is completely untested by
-> the way), but I think we'd be fine with this SINGLE_PAGE flag.
-
-That sounds similar, though your patch does not handle gpuva
-splitting/remapping and all the other corner cases. I think you'll find
-that once you handle those, the logic will become significantly more
-complicated, since you need to start storing the start offset within the
-repeat range on GPUVAs to be able to split them while keeping the
-mappings identical, and do modular arithmetic to keep it all consistent
-across all the corner cases.
-
-If SINGLE_PAGE works for you then I would advocate for that. It keeps
-complexity down to a minimum in drm_gpuvm. You can still have a range
-that's greater than one page in practice, you'd just have to handle it
-driver-internal and pass the desired range out of band as a flag or
-other field. For example, you could decide that the mapping is always
-congruent to the VA (GEM page offset = start offset + VA % range) and
-always treat SINGLE_PAGE mappings like that when you actually set up the
-page tables, or pass in an extra offset to be able to shift the phase of
-the mapping to whatever you want. You just need to ensure that, if you
-mix range sizes or other configuration, you don't do that for the same
-GEM BO at the same offset, so that the drm_gpuvm core does not wrongly
-consider them equivalent.
-
-Maybe I should rename SINGLE_PAGE to something else, since it isn't
-technically limited to that as far as gpuvm is concerned. Something like
-FIXED_OFFSET?
-
+> The motivation for both, starting a successor project for Nouveau and
+> doing so using the Rust programming language, is documented in detail
+> through a previous post on the mailing list [1], an LWN article [2] and a
+> talk from LPC '24.
 > 
-> --->8---
-> diff --git a/drivers/gpu/drm/drm_gpuvm.c b/drivers/gpu/drm/drm_gpuvm.c
-> index f9eb56f24bef..ea61f3ffaddf 100644
-> --- a/drivers/gpu/drm/drm_gpuvm.c
-> +++ b/drivers/gpu/drm/drm_gpuvm.c
-> @@ -2053,16 +2053,17 @@ EXPORT_SYMBOL_GPL(drm_gpuva_unmap);
->  
->  static int
->  op_map_cb(const struct drm_gpuvm_ops *fn, void *priv,
-> -      u64 addr, u64 range,
-> -      struct drm_gem_object *obj, u64 offset)
-> +      u64 addr, u64 va_range,
-> +      struct drm_gem_object *obj, u64 offset, u64 gem_range)
->  {
->      struct drm_gpuva_op op = {};
->  
->      op.op = DRM_GPUVA_OP_MAP;
->      op.map.va.addr = addr;
-> -    op.map.va.range = range;
-> +    op.map.va.range = va_range;
->      op.map.gem.obj = obj;
->      op.map.gem.offset = offset;
-> +    op.map.gem.range = gem_range;
->  
->      return fn->sm_step_map(&op, priv);
->  }
-> @@ -2102,7 +2103,8 @@ static int
->  __drm_gpuvm_sm_map(struct drm_gpuvm *gpuvm,
->             const struct drm_gpuvm_ops *ops, void *priv,
->             u64 req_addr, u64 req_range,
-> -           struct drm_gem_object *req_obj, u64 req_offset)
-> +           struct drm_gem_object *req_obj,
-> +           u64 req_offset, u64 req_gem_range)
->  {
->      struct drm_gpuva *va, *next;
->      u64 req_end = req_addr + req_range;
-> @@ -2237,7 +2239,7 @@ __drm_gpuvm_sm_map(struct drm_gpuvm *gpuvm,
->  
->      return op_map_cb(ops, priv,
->               req_addr, req_range,
-> -             req_obj, req_offset);
-> +             req_obj, req_offset, req_gem_range);
->  }
->  
->  static int
-> @@ -2344,10 +2346,43 @@ drm_gpuvm_sm_map(struct drm_gpuvm *gpuvm, void *priv,
->  
->      return __drm_gpuvm_sm_map(gpuvm, ops, priv,
->                    req_addr, req_range,
-> -                  req_obj, req_offset);
-> +                  req_obj, req_offset, 0);
->  }
->  EXPORT_SYMBOL_GPL(drm_gpuvm_sm_map);
->  
-> +/**
-> + * drm_gpuvm_sm_map_repeat() - repeatedly maps a GEM range over a VA range
-> + * @gpuvm: the &drm_gpuvm representing the GPU VA space
-> + * @priv: pointer to a driver private data structure
-> + * @req_addr: the start address of the new mapping
-> + * @req_range: the range of the new mapping
-> + * @req_obj: the &drm_gem_object to map
-> + * @req_offset: the offset within the &drm_gem_object
-> + * @req_gem_range: the offset within the &drm_gem_object
-> + *
-> + * Same as drm_gpuvm_sm_map() except it repeats a GEM range over a VA range
-> + *
-> + * Returns: 0 on success or a negative error code
-> + */
-> +int
-> +drm_gpuvm_sm_map_repeat(struct drm_gpuvm *gpuvm, void *priv,
-> +            u64 req_addr, u64 req_range,
-> +            struct drm_gem_object *req_obj,
-> +            u64 req_offset, u64 req_gem_range)
-> +{
-> +    const struct drm_gpuvm_ops *ops = gpuvm->ops;
+> In order to avoid the chicken and egg problem to require a user to
+> upstream Rust abstractions, but at the same time require the Rust
+> abstractions to implement the driver, nova-core kicks off as a driver
+> stub and is subsequently developed upstream.
+> 
+> Link: https://lore.kernel.org/dri-devel/Zfsj0_tb-0-tNrJy@cassiopeiae/T/#u [1]
+> Link: https://lwn.net/Articles/990736/ [2]
+> Link: https://youtu.be/3Igmx28B3BQ?si=sBdSEer4tAPKGpOs [3]
+> Signed-off-by: Danilo Krummrich <dakr@kernel.org>
+> ---
+>  MAINTAINERS                        |  10 ++
+>  drivers/gpu/Makefile               |   1 +
+[..]
+> diff --git a/drivers/gpu/Makefile b/drivers/gpu/Makefile
+> index 8997f0096545..36a54d456630 100644
+> --- a/drivers/gpu/Makefile
+> +++ b/drivers/gpu/Makefile
+> @@ -5,3 +5,4 @@
+>  obj-y			+= host1x/ drm/ vga/
+>  obj-$(CONFIG_IMX_IPUV3_CORE)	+= ipu-v3/
+>  obj-$(CONFIG_TRACE_GPU_MEM)		+= trace/
+> +obj-$(CONFIG_NOVA_CORE)		+= nova-core/
+> diff --git a/drivers/gpu/nova-core/Kconfig b/drivers/gpu/nova-core/Kconfig
+> new file mode 100644
+> index 000000000000..33ac937b244a
+> --- /dev/null
+> +++ b/drivers/gpu/nova-core/Kconfig
+> @@ -0,0 +1,13 @@
+> +config NOVA_CORE
+> +	tristate "Nova Core GPU driver"
+> +	depends on PCI
+> +	depends on RUST
+> +	depends on RUST_FW_LOADER_ABSTRACTIONS
+> +	default n
+> +	help
+> +	  Choose this if you want to build the Nova Core driver for Nvidia
+> +	  GSP-based GPUs.
 > +
-> +    if (unlikely(!(ops && ops->sm_step_map &&
-> +               ops->sm_step_remap &&
-> +               ops->sm_step_unmap)))
-> +        return -EINVAL;
+> +	  This driver is work in progress and may not be functional.
 > +
-> +    return __drm_gpuvm_sm_map(gpuvm, ops, priv,
-> +                  req_addr, req_range,
-> +                  req_obj, req_offset, req_gem_range);
+> +	  If M is selected, the module will be called nova-core.
+> diff --git a/drivers/gpu/nova-core/Makefile b/drivers/gpu/nova-core/Makefile
+> new file mode 100644
+> index 000000000000..2d78c50126e1
+> --- /dev/null
+> +++ b/drivers/gpu/nova-core/Makefile
+> @@ -0,0 +1,3 @@
+> +# SPDX-License-Identifier: GPL-2.0
+> +
+> +obj-$(CONFIG_NOVA_CORE) += nova_core.o
+> diff --git a/drivers/gpu/nova-core/driver.rs b/drivers/gpu/nova-core/driver.rs
+> new file mode 100644
+> index 000000000000..2a2aa9b0630b
+> --- /dev/null
+> +++ b/drivers/gpu/nova-core/driver.rs
+> @@ -0,0 +1,47 @@
+> +// SPDX-License-Identifier: GPL-2.0
+> +
+> +use kernel::{bindings, c_str, pci, prelude::*};
+> +
+> +use crate::gpu::Gpu;
+> +
+> +#[pin_data]
+> +pub(crate) struct NovaCore {
+> +    #[pin]
+> +    pub(crate) gpu: Gpu,
 > +}
-> +EXPORT_SYMBOL_GPL(drm_gpuvm_sm_map_repeat);
+
+I am curious what is the need for pinning here in the patch in its current
+form, is it for future-proofing?
+
+I looked through the sample PCI driver example you had posted and did not see
+pinning there [1]. Thanks for the clarification.
+[1] https://lore.kernel.org/all/20241219170425.12036-12-dakr@kernel.org/
+
 > +
->  /**
->   * drm_gpuvm_sm_unmap() - creates the &drm_gpuva_ops to split on unmap
->   * @gpuvm: the &drm_gpuvm representing the GPU VA space
-> @@ -2536,7 +2571,7 @@ drm_gpuvm_sm_map_ops_create(struct drm_gpuvm *gpuvm,
->  
->      ret = __drm_gpuvm_sm_map(gpuvm, &gpuvm_list_ops, &args,
->                   req_addr, req_range,
-> -                 req_obj, req_offset);
-> +                 req_obj, req_offset, 0);
->      if (ret)
->          goto err_free_ops;
->  
-> diff --git a/include/drm/drm_gpuvm.h b/include/drm/drm_gpuvm.h
-> index 00d4e43b76b6..8157ede365d1 100644
-> --- a/include/drm/drm_gpuvm.h
-> +++ b/include/drm/drm_gpuvm.h
-> @@ -846,6 +846,14 @@ struct drm_gpuva_op_map {
->           */
->          u64 offset;
->  
-> +        /**
-> +         * @gem.range: the range of the GEM to map
-> +         *
-> +         * If smaller than va.range, the GEM range should be mapped
-> +         * multiple times over the VA range.
-> +         */
-> +        u64 range;
+> +const BAR0_SIZE: usize = 8;
+> +pub(crate) type Bar0 = pci::Bar<BAR0_SIZE>;
 > +
->          /**
->           * @gem.obj: the &drm_gem_object to map
->           */
-> @@ -1203,6 +1211,11 @@ int drm_gpuvm_sm_map(struct drm_gpuvm *gpuvm, void *priv,
->               u64 addr, u64 range,
->               struct drm_gem_object *obj, u64 offset);
->  
-> +int drm_gpuvm_sm_map_repeat(struct drm_gpuvm *gpuvm, void *priv,
-> +                u64 addr, u64 range,
-> +                struct drm_gem_object *obj,
-> +                u64 offset, u64 gem_range);
+> +kernel::pci_device_table!(
+> +    PCI_TABLE,
+> +    MODULE_PCI_TABLE,
+> +    <NovaCore as pci::Driver>::IdInfo,
+> +    [(
+> +        pci::DeviceId::from_id(bindings::PCI_VENDOR_ID_NVIDIA, bindings::PCI_ANY_ID as _),
+
+Does this mean it will match even non-GSP Nvidia devices?
+
+> +        ()
+> +    )]
+> +);
 > +
->  int drm_gpuvm_sm_unmap(struct drm_gpuvm *gpuvm, void *priv,
->                 u64 addr, u64 range);
+> +impl pci::Driver for NovaCore {
+> +    type IdInfo = ();
+> +    const ID_TABLE: pci::IdTable<Self::IdInfo> = &PCI_TABLE;
+> +
+> +    fn probe(pdev: &mut pci::Device, _info: &Self::IdInfo) -> Result<Pin<KBox<Self>>> {
+> +        dev_dbg!(pdev.as_ref(), "Probe Nova Core GPU driver.\n");
+> +
+> +        pdev.enable_device_mem()?;
+> +        pdev.set_master();
+> +
+> +        let bar = pdev.iomap_region_sized::<BAR0_SIZE>(0, c_str!("nova-core"))?;
+> +
+> +        let this = KBox::pin_init(
+> +            try_pin_init!(Self {
+> +                gpu <- Gpu::new(pdev, bar)?,
+> +            }),
+> +            GFP_KERNEL,
+> +        )?;
+> +
+> +        Ok(this)
+> +    }
+> +}
+> diff --git a/drivers/gpu/nova-core/gpu.rs b/drivers/gpu/nova-core/gpu.rs
+> new file mode 100644
+> index 000000000000..cf62390e72eb
+> --- /dev/null
+> +++ b/drivers/gpu/nova-core/gpu.rs
+> @@ -0,0 +1,171 @@
+> +// SPDX-License-Identifier: GPL-2.0
+> +
+> +use kernel::{
+> +    device, devres::Devres, error::code::*, firmware, fmt, pci, prelude::*, str::CString,
+> +};
+> +
+> +use crate::driver::Bar0;
+> +use core::fmt::Debug;
+> +
+> +/// Enum representation of the GPU chipset.
+> +#[derive(Debug)]
+> +pub(crate) enum Chipset {
+> +    TU102 = 0x162,
+> +    TU104 = 0x164,
+> +    TU106 = 0x166,
+> +    TU117 = 0x167,
+> +    TU116 = 0x168,
+> +    GA102 = 0x172,
+> +    GA103 = 0x173,
+> +    GA104 = 0x174,
+> +    GA106 = 0x176,
+> +    GA107 = 0x177,
+> +    AD102 = 0x192,
+> +    AD103 = 0x193,
+> +    AD104 = 0x194,
+> +    AD106 = 0x196,
+> +    AD107 = 0x197,
+> +}
+> +
+> +/// Enum representation of the GPU generation.
+> +#[derive(Debug)]
+> +pub(crate) enum CardType {
+> +    /// Turing
+> +    TU100 = 0x160,
+> +    /// Ampere
+> +    GA100 = 0x170,
+> +    /// Ada Lovelace
+> +    AD100 = 0x190,
+> +}
+> +
+> +/// Structure holding the metadata of the GPU.
+> +#[allow(dead_code)]
+> +pub(crate) struct GpuSpec {
+> +    /// Contents of the boot0 register.
+> +    boot0: u64,
+> +    card_type: CardType,
+> +    chipset: Chipset,
+> +    /// The revision of the chipset.
+> +    chiprev: u8,
+> +}
+> +
+> +/// Structure encapsulating the firmware blobs required for the GPU to operate.
+> +#[allow(dead_code)]
+> +pub(crate) struct Firmware {
+> +    booter_load: firmware::Firmware,
+> +    booter_unload: firmware::Firmware,
+> +    gsp: firmware::Firmware,
+> +}
+> +
+> +/// Structure holding the resources required to operate the GPU.
+> +#[allow(dead_code)]
+> +#[pin_data]
+> +pub(crate) struct Gpu {
+> +    spec: GpuSpec,
+> +    /// MMIO mapping of PCI BAR 0
+> +    bar: Devres<Bar0>,
+> +    fw: Firmware,
+> +}
+
+Here, #[pin_data] is used on top of struct Gpu, but no #[pin] is used?
+
+According to [1]
+Place this macro on a struct definition and then #[pin] in front of the
+attributes of each field you want to structurally pin.
+
+[1]
+https://rust.docs.kernel.org/macros/attr.pin_data.html
+
+> +
+> +// TODO replace with something like derive(FromPrimitive)
+> +impl Chipset {
+> +    fn from_u32(value: u32) -> Option<Chipset> {
+> +        match value {
+> +            0x162 => Some(Chipset::TU102),
+> +            0x164 => Some(Chipset::TU104),
+> +            0x166 => Some(Chipset::TU106),
+> +            0x167 => Some(Chipset::TU117),
+> +            0x168 => Some(Chipset::TU116),
+> +            0x172 => Some(Chipset::GA102),
+> +            0x173 => Some(Chipset::GA103),
+> +            0x174 => Some(Chipset::GA104),
+> +            0x176 => Some(Chipset::GA106),
+> +            0x177 => Some(Chipset::GA107),
+> +            0x192 => Some(Chipset::AD102),
+> +            0x193 => Some(Chipset::AD103),
+> +            0x194 => Some(Chipset::AD104),
+> +            0x196 => Some(Chipset::AD106),
+> +            0x197 => Some(Chipset::AD107),
+> +            _ => None,
+> +        }
+> +    }
+> +}
+> +
+> +// TODO replace with something like derive(FromPrimitive)
+> +impl CardType {
+> +    fn from_u32(value: u32) -> Option<CardType> {
+> +        match value {
+> +            0x160 => Some(CardType::TU100),
+> +            0x170 => Some(CardType::GA100),
+> +            0x190 => Some(CardType::AD100),
+> +            _ => None,
+> +        }
+> +    }
+> +}
+> +
+> +impl GpuSpec {
+> +    fn new(bar: &Devres<Bar0>) -> Result<GpuSpec> {
+> +        let bar = bar.try_access().ok_or(ENXIO)?;
+> +        let boot0 = u64::from_le(bar.readq(0));
+> +        let chip = ((boot0 & 0x1ff00000) >> 20) as u32;
+> +
+> +        if boot0 & 0x1f000000 == 0 {
+> +            return Err(ENODEV);
+> +        }
+> +
+> +        let Some(chipset) = Chipset::from_u32(chip) else {
+> +            return Err(ENODEV);
+> +        };
+> +
+> +        let Some(card_type) = CardType::from_u32(chip & 0x1f0) else {
+> +            return Err(ENODEV);
+> +        };
+
+Can use ok_or() here as well?
+
+let chipset = Chipset::from_u32(chip).ok_or(ENODEV)?;
+let card_type = CardType::from_u32(chip & 0x1f0).ok_or(ENODEV)?;
+
+Or does it not work for some reason?
+
+thanks,
+
+ - Joel
+
+
+> +
+> +        Ok(Self {
+> +            boot0,
+> +            card_type,
+> +            chipset,
+> +            chiprev: (boot0 & 0xff) as u8,
+> +        })
+> +    }
+> +}
+> +
+> +impl Firmware {
+> +    fn new(dev: &device::Device, spec: &GpuSpec, ver: &str) -> Result<Firmware> {
+> +        let mut chip_name = CString::try_from_fmt(fmt!("{:?}", spec.chipset))?;
+> +        chip_name.make_ascii_lowercase();
+> +
+> +        let fw_booter_load_path =
+> +            CString::try_from_fmt(fmt!("nvidia/{}/gsp/booter_load-{}.bin", &*chip_name, ver))?;
+> +        let fw_booter_unload_path =
+> +            CString::try_from_fmt(fmt!("nvidia/{}/gsp/booter_unload-{}.bin", &*chip_name, ver))?;
+> +        let fw_gsp_path =
+> +            CString::try_from_fmt(fmt!("nvidia/{}/gsp/gsp-{}.bin", &*chip_name, ver))?;
+> +
+> +        let booter_load = firmware::Firmware::request(&fw_booter_load_path, dev)?;
+> +        let booter_unload = firmware::Firmware::request(&fw_booter_unload_path, dev)?;
+> +        let gsp = firmware::Firmware::request(&fw_gsp_path, dev)?;
+> +
+> +        Ok(Firmware {
+> +            booter_load,
+> +            booter_unload,
+> +            gsp,
+> +        })
+> +    }
+> +}
+> +
+> +impl Gpu {
+> +    pub(crate) fn new(pdev: &pci::Device, bar: Devres<Bar0>) -> Result<impl PinInit<Self>> {
+> +        let spec = GpuSpec::new(&bar)?;
+> +        let fw = Firmware::new(pdev.as_ref(), &spec, "535.113.01")?;
+> +
+> +        dev_info!(
+> +            pdev.as_ref(),
+> +            "NVIDIA {:?} ({:#x})",
+> +            spec.chipset,
+> +            spec.boot0
+> +        );
+> +
+> +        Ok(pin_init!(Self { spec, bar, fw }))
+> +    }
+> +}
+> diff --git a/drivers/gpu/nova-core/nova_core.rs b/drivers/gpu/nova-core/nova_core.rs
+> new file mode 100644
+> index 000000000000..b130d9ca6a0f
+> --- /dev/null
+> +++ b/drivers/gpu/nova-core/nova_core.rs
+> @@ -0,0 +1,14 @@
+> +// SPDX-License-Identifier: GPL-2.0
+> +
+> +//! Nova Core GPU Driver
+> +
+> +mod driver;
+> +mod gpu;
+> +
+> +kernel::module_pci_driver! {
+> +    type: driver::NovaCore,
+> +    name: "NovaCore",
+> +    author: "Danilo Krummrich",
+> +    description: "Nova Core GPU driver",
+> +    license: "GPL v2",
+> +}
+> diff --git a/drivers/video/Kconfig b/drivers/video/Kconfig
+> index 44c9ef1435a2..5df981920a94 100644
+> --- a/drivers/video/Kconfig
+> +++ b/drivers/video/Kconfig
+> @@ -39,6 +39,7 @@ source "drivers/gpu/vga/Kconfig"
+>  
+>  source "drivers/gpu/host1x/Kconfig"
+>  source "drivers/gpu/ipu-v3/Kconfig"
+> +source "drivers/gpu/nova-core/Kconfig"
+>  
+>  source "drivers/gpu/drm/Kconfig"
+>  
 > 
-
-~~ Lina
-
+> base-commit: 69b8923f5003664e3ffef102e73333edfa2abdcf
+> -- 
+> 2.48.1
+> 
