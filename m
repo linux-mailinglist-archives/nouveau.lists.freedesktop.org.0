@@ -2,60 +2,114 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id B7B51A255BA
-	for <lists+nouveau@lfdr.de>; Mon,  3 Feb 2025 10:22:11 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 1B2A7A2577C
+	for <lists+nouveau@lfdr.de>; Mon,  3 Feb 2025 11:58:23 +0100 (CET)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 3F2F010E3F9;
-	Mon,  3 Feb 2025 09:22:07 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id C64BC10E47C;
+	Mon,  3 Feb 2025 10:58:21 +0000 (UTC)
 Authentication-Results: gabe.freedesktop.org;
-	dkim=pass (2048-bit key; unprotected) header.d=collabora.com header.i=@collabora.com header.b="mZjjl17G";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="Kze+GGRy";
 	dkim-atps=neutral
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from bali.collaboradmins.com (bali.collaboradmins.com
- [148.251.105.195])
- by gabe.freedesktop.org (Postfix) with ESMTPS id D55CF10E2BE;
- Mon,  3 Feb 2025 09:22:04 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=collabora.com;
- s=mail; t=1738574522;
- bh=7U7Yl06go+bByThCK2iknqMhLcveevfT0vv3Dt817BE=;
- h=Date:From:To:Cc:Subject:In-Reply-To:References:From;
- b=mZjjl17G/l4cbQnyEM4LJ3L6AlSgH9HNznFxRBcOM+deSS9In+FxlBMtMNguZtZ7g
- ZKzfzSJ20gpG0ptp6q06ib3xOM8EmhNQzEBdcwwHXk2Zhq4OJga8AUfTo5kNJYuX43
- TmYli/TCRaQglmoMKZPfvX45JJPzsXBfytXYAHwEpBZWVybgj6HKTj0btx/Nti/kHB
- JkNdmhDK8LpB8r2GI8q8xjT6eGFUAbKnkWLbfE3qdJnd/8R79EB7+uzEF++k76rX//
- QShXOzJsCXJDsOTziqWjRfsqF/9GzNiiCyfh5FRFnup14+afaqwrhkVOlU8B6TrFkH
- Rmv7GLyGpHOpg==
-Received: from localhost (unknown [IPv6:2a01:e0a:2c:6930:5cf4:84a1:2763:fe0d])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
- (No client certificate requested) (Authenticated sender: bbrezillon)
- by bali.collaboradmins.com (Postfix) with ESMTPSA id 31D4917E07B3;
- Mon,  3 Feb 2025 10:22:01 +0100 (CET)
-Date: Mon, 3 Feb 2025 10:21:53 +0100
-From: Boris Brezillon <boris.brezillon@collabora.com>
-To: Danilo Krummrich <dakr@kernel.org>, asahi@lists.linux.dev
-Cc: Asahi Lina <lina@asahilina.net>, Maarten Lankhorst
- <maarten.lankhorst@linux.intel.com>, Maxime Ripard <mripard@kernel.org>,
- Thomas Zimmermann <tzimmermann@suse.de>, David Airlie <airlied@gmail.com>,
- Simona Vetter <simona@ffwll.ch>, Frank Binns <frank.binns@imgtec.com>, Matt
- Coster <matt.coster@imgtec.com>, Karol Herbst <kherbst@redhat.com>, Lyude
- Paul <lyude@redhat.com>, Steven Price <steven.price@arm.com>, Liviu Dudau
- <liviu.dudau@arm.com>, Lucas De Marchi <lucas.demarchi@intel.com>, Thomas
- =?UTF-8?B?SGVsbHN0csO2bQ==?= <thomas.hellstrom@linux.intel.com>, Rodrigo
- Vivi <rodrigo.vivi@intel.com>, dri-devel@lists.freedesktop.org,
- linux-kernel@vger.kernel.org, nouveau@lists.freedesktop.org,
- intel-xe@lists.freedesktop.org, akash.goel@arm.com
-Subject: Re: [PATCH 0/4] drm/gpuvm: Add support for single-page-filled mappings
-Message-ID: <20250203102153.145229e0@collabora.com>
-In-Reply-To: <Z5-_O8vkCO0LXcl7@pollux.localdomain>
-References: <20250202-gpuvm-single-page-v1-0-8cbd44fdcbd4@asahilina.net>
- <Z5-_O8vkCO0LXcl7@pollux.localdomain>
-Organization: Collabora
-X-Mailer: Claws Mail 4.3.0 (GTK 3.24.43; x86_64-redhat-linux-gnu)
+Received: from mail-wm1-f47.google.com (mail-wm1-f47.google.com
+ [209.85.128.47])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 2BA1210E47E
+ for <nouveau@lists.freedesktop.org>; Mon,  3 Feb 2025 10:58:21 +0000 (UTC)
+Received: by mail-wm1-f47.google.com with SMTP id
+ 5b1f17b1804b1-43626213fffso32373935e9.1
+ for <nouveau@lists.freedesktop.org>; Mon, 03 Feb 2025 02:58:21 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=linaro.org; s=google; t=1738580299; x=1739185099; darn=lists.freedesktop.org;
+ h=cc:to:content-transfer-encoding:mime-version:message-id:date
+ :subject:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=XLcAmb5imXFvDRB/VGg4Mua1A1e4qvmBbsZyq6NVDp0=;
+ b=Kze+GGRyITDqHixRawr+JeZ5csPm8PcxEGXIAryfXgc8GwsztkwiCTg68CWWOu556B
+ d/s/GvG+YAiCZIS2fBCs/zknvsqMvWAxRKlQ5cbVSsolANZufPxGd3VxC4hY//6Kifj/
+ Bk0v4azSzEsLovW4K//IuHNegfJvJjUkX0AFgx/hDcd9Y38zwFSAkMQZSV3HUCHYhyhD
+ gjRwL9IsQt1EIqskF9v7X7Mn2UIhTKkExICAtndXjbyrkHznCs8+lQc+vmbldBtXcdKE
+ 2Nio7PySReDwz2IpXe2hjMx/CEwloe6I5gHhfLcMJi/LV4GVzWNyCME4a4Tcefqk0bDz
+ UUtw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1738580299; x=1739185099;
+ h=cc:to:content-transfer-encoding:mime-version:message-id:date
+ :subject:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=XLcAmb5imXFvDRB/VGg4Mua1A1e4qvmBbsZyq6NVDp0=;
+ b=hLgWO6BkQpzNEvCt1ypxLhUCykKBT+qHMBARU79DZ3UOkfzGsVRVn0sBFAn9YfokNS
+ d14N2C/b+l8M0C+hltfAvTKkr5d89m1rLrt6lwffvsdhTbKnF6+2d9lSSrwyZSxdNlTW
+ d3Fex2tCv4FiFy2epcQJC7z4Bq57jC5Mwn36EnR+0y60Kur+ZFDE28HraQzJSC+6so+l
+ cCxXtVBImmJWHuuMjCISw5vyEx+0rMonITCVGtg9Jkn0B32S38rfQKQTlF5fTt+TXGRf
+ mEIO5zVtZXefhoG5NwPUugP81nqeQ7dbOktopsdEE/vMd12nC3QU+wzFX4Vgfe87eKIY
+ KYJA==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCVMyvAWtiUJflwJRER2h24xPgifACwhGWOp09bCuiH74Hl6RKO+oA2xZiwu7Lxt8OFs9R5B+6Xh@lists.freedesktop.org
+X-Gm-Message-State: AOJu0Yze5WVkVaOXjx/3NiCcYKMxGOAdBPXUsrRXTUVAYo0s60I1agdL
+ H6mWyeP6hCr7DR26VKW8VII3JY3ySzoJX5NwTT8MVbQwG7AFxayyIkPTuqoQ5Xg=
+X-Gm-Gg: ASbGncvcdFohcnaEclYzKic6lYj8ykyKCF6AsFNR8vy+7lo1hGTVtGIcaXg43lGMSUi
+ i9ylLjsQyKVJOcvmYEEyu3kxBGo/uJCsugSkZVMjUvuUQsbj9xdn8o5V2QcAT15mPSR5mMZA1rE
+ /Zs5fLxT0/+IdvPoKB02kGuH3DCY8WJf9chjPZZaB/sBXXbDss2lbJtRmSDKPLLyJWIHmfwm9lY
+ LTWkJvYFJnM92WWWWN82HbJ9jq5pkPG4T1SYmSYXJFB7EqP6ReyA0LNf5HofM2BVN3gdW+nyNsH
+ C4Adwd2Vw3jpKRQ=
+X-Google-Smtp-Source: AGHT+IHhr4klxCQY7Z9qoAXLzjjnoKLjWUAup4X7mSLv7b1sKOjwEc0f9wj6fXBkEb7M9qj8+FK/oA==
+X-Received: by 2002:adf:ea90:0:b0:385:fa30:4f87 with SMTP id
+ ffacd0b85a97d-38c5a86e2acmr11625798f8f.0.1738580299369; 
+ Mon, 03 Feb 2025 02:58:19 -0800 (PST)
+Received: from [127.0.1.1] ([86.123.96.125]) by smtp.gmail.com with ESMTPSA id
+ ffacd0b85a97d-38c5c13a0efsm12555083f8f.60.2025.02.03.02.58.17
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Mon, 03 Feb 2025 02:58:18 -0800 (PST)
+From: Abel Vesa <abel.vesa@linaro.org>
+Subject: [PATCH v5 0/4] drm/dp: Rework LTTPR transparent mode handling and
+ add support to msm driver
+Date: Mon, 03 Feb 2025 12:57:55 +0200
+Message-Id: <20250203-drm-dp-msm-add-lttpr-transparent-mode-set-v5-0-c865d0e56d6e@linaro.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=US-ASCII
+Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
+X-B4-Tracking: v=1; b=H4sIADOhoGcC/53Oy2rDMBCF4VcJWneKrrbUVd+jZKHLKBHElpGEa
+ Qh+9yqB0pas3OWZxffPjVQsCSt5O9xIwTXVlOc+1MuB+LOdTwgp9E045ZJRwSCUCcICU53AhgC
+ X1pYCrdi5Lrbg3GDKAaFiAyYGH5SLAelIurcUjOnz0fo49n1OteVyfaRXdr/+p7IyoOBtdM5op
+ aKk75c025JfczmRe2blPzRnu2je6aAMHTAI7bh+osU3rWh/ew8tOq28GMYoHR0H8UTL37TeQ8t
+ OG6aNNM5zFPYPvW3bF+HbYEf0AQAA
+X-Change-ID: 20241031-drm-dp-msm-add-lttpr-transparent-mode-set-136cd5bfde07
+To: Maarten Lankhorst <maarten.lankhorst@linux.intel.com>, 
+ Maxime Ripard <mripard@kernel.org>, Thomas Zimmermann <tzimmermann@suse.de>, 
+ David Airlie <airlied@gmail.com>, Simona Vetter <simona@ffwll.ch>, 
+ Karol Herbst <kherbst@redhat.com>, Lyude Paul <lyude@redhat.com>, 
+ Danilo Krummrich <dakr@redhat.com>, 
+ Jani Nikula <jani.nikula@linux.intel.com>, 
+ Rodrigo Vivi <rodrigo.vivi@intel.com>, 
+ Joonas Lahtinen <joonas.lahtinen@linux.intel.com>, 
+ Tvrtko Ursulin <tursulin@ursulin.net>, Rob Clark <robdclark@gmail.com>, 
+ Abhinav Kumar <quic_abhinavk@quicinc.com>, 
+ Dmitry Baryshkov <dmitry.baryshkov@linaro.org>, Sean Paul <sean@poorly.run>, 
+ Marijn Suijten <marijn.suijten@somainline.org>
+Cc: Bjorn Andersson <andersson@kernel.org>, 
+ Konrad Dybcio <konradybcio@kernel.org>, Johan Hovold <johan@kernel.org>, 
+ dri-devel@lists.freedesktop.org, linux-kernel@vger.kernel.org, 
+ nouveau@lists.freedesktop.org, intel-gfx@lists.freedesktop.org, 
+ intel-xe@lists.freedesktop.org, linux-arm-msm@vger.kernel.org, 
+ freedreno@lists.freedesktop.org, Abel Vesa <abel.vesa@linaro.org>, 
+ Johan Hovold <johan+linaro@kernel.org>, Imre Deak <imre.deak@intel.com>
+X-Mailer: b4 0.15-dev-dedf8
+X-Developer-Signature: v=1; a=openpgp-sha256; l=4677; i=abel.vesa@linaro.org; 
+ h=from:subject:message-id;
+ bh=cYlnnHTHnfX5A4NpE+h+NMGvTQWwaK7jU/pGGIU9lZs=; 
+ b=owEBbQKS/ZANAwAKARtfRMkAlRVWAcsmYgBnoKE/zDksHClkVHYccPshbzGhJ7fQegd+I76Dq
+ r6Yy+puSEWJAjMEAAEKAB0WIQRO8+4RTnqPKsqn0bgbX0TJAJUVVgUCZ6ChPwAKCRAbX0TJAJUV
+ VuBlD/9R3tniupZZRrrer07wVKnvqgs/DdiuT5gbx9NQtLkOQN54JRBFuse+PIyT0brughjVUES
+ lg+urfITYCZbkfpJbY7AGnIABKvI/AeQWMDEwQYPNoAZuTlr29AQ6wlv75z2h+jcvHUGwjYQrfN
+ XFWQW+ihQY97nLaWgs5SRuduxxNY3cH/QszKlbdsRZDHDfrYhnQpbRYyQQZbksfMtTM/TmBvZ9u
+ wJi+LAtZ2tZM7GRTF3bivkLgjs+xMT2YiPu0ID9joTDTOyxCbHQ4DNza8FWEgsb5FOCKjjEYFEZ
+ i/uJU9RJsxq48wMUMtr3LWkoIwwb+GVPuecGlrUZfG1MLDPCv9kLx5rlDKBpbzT/EsOdDODP+Rw
+ ize5zfxK7CeIc3VcVDjiAvs+2yopgTRPI3XwV0CSWnkTeFoYEKUwFXMe4ksg5MZCabigdq7yW12
+ hBYI5XYzywPC7qUzqo/M3sZ3bLVRprdYMWT7LbJ8iaBo8EkCWmALJSjNYukPRgoyE3k1Tlzy/NP
+ td35ZlzWBHvrYW9bMWzYjSrMlrmON+LjZ048uYmcV7YZgwn1SZuuMvFLHKNt1wSg8ufHv685KDd
+ vosvx3m1JZCrgOgXBd2CnNYOQ4JOw+qx8O6LKqwWAMoleQQtjMLDGPdkcg6HbH998ZpH2fGP4o4
+ p9kEREBVeZGFyyw==
+X-Developer-Key: i=abel.vesa@linaro.org; a=openpgp;
+ fpr=6AFF162D57F4223A8770EF5AF7BF214136F41FAE
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -70,205 +124,98 @@ List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-+Akash with whom we've been discussing adding a 'REPEAT' mode to
-drm_gpuvm/panthor.
+Looking at both i915 and nouveau DP drivers, both are setting the first
+LTTPR (if found) in transparent mode first and then in non-transparent
+mode, just like the DP v2.0 specification mentions in section 3.6.6.1.
 
-On Sun, 2 Feb 2025 19:53:47 +0100
-Danilo Krummrich <dakr@kernel.org> wrote:
+Being part of the standard, setting the LTTPR in a specific operation mode
+can be easily moved in the generic framework. So do that by adding a new
+helper.
 
-> Hi Lina,
-> 
-> On Sun, Feb 02, 2025 at 10:34:49PM +0900, Asahi Lina wrote:
-> > Some hardware requires dummy page mappings to efficiently implement
-> > Vulkan sparse features. These mappings consist of the same physical
-> > memory page, repeated for a large range of address space (e.g. 16GiB).
-> > 
-> > Add support for this to drm_gpuvm. Currently, drm_gpuvm expects BO
-> > ranges to correspond 1:1 to virtual memory ranges that are mapped, and
-> > does math on the BO offset accordingly. To make single page mappings
-> > work, we need a way to turn off that math, keeping the BO offset always
-> > constant and pointing to the same page (typically BO offset 0).
-> > 
-> > To make this work, we need to handle all the corner cases when these
-> > mappings intersect with regular mappings. The rules are simply to never
-> > mix or merge a "regular" mapping with a single page mapping.
-> > 
-> > drm_gpuvm has support for a flags field in drm_gpuva objects. This is
-> > normally managed by drivers directly. We can introduce a
-> > DRM_GPUVA_SINGLE_PAGE flag to handle this. However, to make it work,
-> > sm_map and friends need to know ahead of time whether the new mapping is
-> > a single page mapping or not. Therefore, we need to add an argument to
-> > these functions so drivers can provide the flags to be filled into
-> > drm_gpuva.flags.
-> > 
-> > These changes should not affect any existing drivers that use drm_gpuvm
-> > other than the API change:
-> > 
-> > - imagination: Does not use flags at all
-> > - nouveau: Only uses drm_gpuva_invalidate(), which is only called on
-> >   existing drm_gpuva objects (after the map steps)
-> > - panthor: Does not use flags at all
-> > - xe: Does not use drm_gpuva_init_from_op() or
-> >   drm_gpuva_remap()/drm_gpuva_map() (which call it). This means that the
-> > flags field of the gpuva object is managed by the driver only, so these
-> > changes cannot clobber it.
-> > 
-> > Note that the way this is implemented, drm_gpuvm does not need to know
-> > the GPU page size. It only has to never do math on the BO offset to meet
-> > the requirements.
-> > 
-> > I suspect that after this change there could be some cleanup possible in
-> > the xe driver (which right now passes flags around in various
-> > driver-specific ways from the map step through to drm_gpuva objects),
-> > but I'll leave that to the Xe folks.
-> > 
-> > Signed-off-by: Asahi Lina <lina@asahilina.net>
-> > ---
-> > Asahi Lina (4):
-> >       drm/gpuvm: Add a flags argument to drm_gpuvm_sm_map[_*]
-> >       drm/gpuvm: Plumb through flags into drm_gpuva_op_map
-> >       drm/gpuvm: Add DRM_GPUVA_SINGLE_PAGE flag and logic
-> >       drm/gpuvm: Plumb through flags into drm_gpuva_init  
-> 
-> Without looking into any details yet:
-> 
-> This is a bit of tricky one, since we're not even close to having a user for
-> this new feature upstream yet, are we?
+Then, the msm DP driver is lacking any kind of support for LTTPR handling,
+so add it by reading the LTTPR caps for figuring out the number of LTTPRs
+found on plug detect and then do exactly what the i915 and nouveau drivers
+do with respect to toggling through operating modes, just like the
+up-mentioned section from DP spec describes.
 
-Actually, we would be interesting in having this feature hooked up in
-panthor. One use case we have is Vulkan sparse bindings, of course. But
-we also have cases where we need to map a dummy page repeatedly on the
-FW side. The approach we've been considering is slightly different:
-pass a DRM_GPUVA_REPEAT_FLAG along with GEM range, so we can repeat a
-range of the GEM (see the below diff, which is completely untested by
-the way), but I think we'd be fine with this SINGLE_PAGE flag.
+At some point, link training per sub-segment will probably be needed, but
+for now, toggling the operating modes seems to be enough at least for the
+X Elite-based platforms that this patchset has been tested on.
 
---->8---
-diff --git a/drivers/gpu/drm/drm_gpuvm.c b/drivers/gpu/drm/drm_gpuvm.c
-index f9eb56f24bef..ea61f3ffaddf 100644
---- a/drivers/gpu/drm/drm_gpuvm.c
-+++ b/drivers/gpu/drm/drm_gpuvm.c
-@@ -2053,16 +2053,17 @@ EXPORT_SYMBOL_GPL(drm_gpuva_unmap);
- 
- static int
- op_map_cb(const struct drm_gpuvm_ops *fn, void *priv,
--      u64 addr, u64 range,
--      struct drm_gem_object *obj, u64 offset)
-+      u64 addr, u64 va_range,
-+      struct drm_gem_object *obj, u64 offset, u64 gem_range)
- {
-     struct drm_gpuva_op op = {};
- 
-     op.op = DRM_GPUVA_OP_MAP;
-     op.map.va.addr = addr;
--    op.map.va.range = range;
-+    op.map.va.range = va_range;
-     op.map.gem.obj = obj;
-     op.map.gem.offset = offset;
-+    op.map.gem.range = gem_range;
- 
-     return fn->sm_step_map(&op, priv);
- }
-@@ -2102,7 +2103,8 @@ static int
- __drm_gpuvm_sm_map(struct drm_gpuvm *gpuvm,
-            const struct drm_gpuvm_ops *ops, void *priv,
-            u64 req_addr, u64 req_range,
--           struct drm_gem_object *req_obj, u64 req_offset)
-+           struct drm_gem_object *req_obj,
-+           u64 req_offset, u64 req_gem_range)
- {
-     struct drm_gpuva *va, *next;
-     u64 req_end = req_addr + req_range;
-@@ -2237,7 +2239,7 @@ __drm_gpuvm_sm_map(struct drm_gpuvm *gpuvm,
- 
-     return op_map_cb(ops, priv,
-              req_addr, req_range,
--             req_obj, req_offset);
-+             req_obj, req_offset, req_gem_range);
- }
- 
- static int
-@@ -2344,10 +2346,43 @@ drm_gpuvm_sm_map(struct drm_gpuvm *gpuvm, void *priv,
- 
-     return __drm_gpuvm_sm_map(gpuvm, ops, priv,
-                   req_addr, req_range,
--                  req_obj, req_offset);
-+                  req_obj, req_offset, 0);
- }
- EXPORT_SYMBOL_GPL(drm_gpuvm_sm_map);
- 
-+/**
-+ * drm_gpuvm_sm_map_repeat() - repeatedly maps a GEM range over a VA range
-+ * @gpuvm: the &drm_gpuvm representing the GPU VA space
-+ * @priv: pointer to a driver private data structure
-+ * @req_addr: the start address of the new mapping
-+ * @req_range: the range of the new mapping
-+ * @req_obj: the &drm_gem_object to map
-+ * @req_offset: the offset within the &drm_gem_object
-+ * @req_gem_range: the offset within the &drm_gem_object
-+ *
-+ * Same as drm_gpuvm_sm_map() except it repeats a GEM range over a VA range
-+ *
-+ * Returns: 0 on success or a negative error code
-+ */
-+int
-+drm_gpuvm_sm_map_repeat(struct drm_gpuvm *gpuvm, void *priv,
-+            u64 req_addr, u64 req_range,
-+            struct drm_gem_object *req_obj,
-+            u64 req_offset, u64 req_gem_range)
-+{
-+    const struct drm_gpuvm_ops *ops = gpuvm->ops;
-+
-+    if (unlikely(!(ops && ops->sm_step_map &&
-+               ops->sm_step_remap &&
-+               ops->sm_step_unmap)))
-+        return -EINVAL;
-+
-+    return __drm_gpuvm_sm_map(gpuvm, ops, priv,
-+                  req_addr, req_range,
-+                  req_obj, req_offset, req_gem_range);
-+}
-+EXPORT_SYMBOL_GPL(drm_gpuvm_sm_map_repeat);
-+
- /**
-  * drm_gpuvm_sm_unmap() - creates the &drm_gpuva_ops to split on unmap
-  * @gpuvm: the &drm_gpuvm representing the GPU VA space
-@@ -2536,7 +2571,7 @@ drm_gpuvm_sm_map_ops_create(struct drm_gpuvm *gpuvm,
- 
-     ret = __drm_gpuvm_sm_map(gpuvm, &gpuvm_list_ops, &args,
-                  req_addr, req_range,
--                 req_obj, req_offset);
-+                 req_obj, req_offset, 0);
-     if (ret)
-         goto err_free_ops;
- 
-diff --git a/include/drm/drm_gpuvm.h b/include/drm/drm_gpuvm.h
-index 00d4e43b76b6..8157ede365d1 100644
---- a/include/drm/drm_gpuvm.h
-+++ b/include/drm/drm_gpuvm.h
-@@ -846,6 +846,14 @@ struct drm_gpuva_op_map {
-          */
-         u64 offset;
- 
-+        /**
-+         * @gem.range: the range of the GEM to map
-+         *
-+         * If smaller than va.range, the GEM range should be mapped
-+         * multiple times over the VA range.
-+         */
-+        u64 range;
-+
-         /**
-          * @gem.obj: the &drm_gem_object to map
-          */
-@@ -1203,6 +1211,11 @@ int drm_gpuvm_sm_map(struct drm_gpuvm *gpuvm, void *priv,
-              u64 addr, u64 range,
-              struct drm_gem_object *obj, u64 offset);
- 
-+int drm_gpuvm_sm_map_repeat(struct drm_gpuvm *gpuvm, void *priv,
-+                u64 addr, u64 range,
-+                struct drm_gem_object *obj,
-+                u64 offset, u64 gem_range);
-+
- int drm_gpuvm_sm_unmap(struct drm_gpuvm *gpuvm, void *priv,
-                u64 addr, u64 range);
+Signed-off-by: Abel Vesa <abel.vesa@linaro.org>
+---
+Changes in v5:
+- Added kernel-doc () suffix and semicolon after "Return" for
+  drm_dp_lttpr_set_transparent_mode, and dropped the extra blank
+  line from kernel-doc of drm_dp_lttpr_init, like Bjorn suggested
+- Picked up Abhinav's R-b tag.
+- Moved the lttpr_caps on stack, as suggested by Bjorn and Abhinav in
+  the msm implementation.
+- Moved the msm_dp_display_lttpr_init call after msm_dp_panel_read_sink_caps,
+  as Abhinav suggested.
+- Link to v4: https://lore.kernel.org/r/20250108-drm-dp-msm-add-lttpr-transparent-mode-set-v4-0-918949bc2e3a@linaro.org
+
+Changes in v4:
+- Picked up Dmitry's and Johan's R-b tags for the drm generic and drm
+  msm patches.
+- Moved the comment about the roll-back to transparent mode inside the
+  if statement and fixed the typos, like Johan suggested.
+- Added more details in the commit message for the i915 changes. Details
+  about the update that the lttpr_common_caps need w.r.t. rollback to
+  transparent mode in case of failure.
+- Link to v3: https://lore.kernel.org/r/20250103-drm-dp-msm-add-lttpr-transparent-mode-set-v3-0-5c367f4b0763@linaro.org
+
+Changes in v3:
+- Picked-up T-b tag from Johan for the drm/dp transparent mode set helper
+  patch
+- Re-worked the return value of the drm/dp transparet mode set helper
+- Added some more details about what the values of the lttpr_count arg
+  is expected to be for the drm_dp_lttpr_init(), like Johan suggested.
+- Re-worked the non-transparent mode disable->enable so that the rollback
+  doesn't happen unless enable failed.
+- Picked-up Lyude's R-b tag for the nouveau patch.
+- Dropped extra parantesis at the end of the drm_dp_lttpr_init() call in
+  i915 patch.
+- Picked-up Johan's T-b tag for the drm/msm/dp patch.
+- Added some error handling and an error message in the
+  msm_dp_display_lttpr_init(), while dropping the unnecessary lttpr_count
+  local variable.
+- Link to v2: https://lore.kernel.org/r/20241211-drm-dp-msm-add-lttpr-transparent-mode-set-v2-0-d5906ed38b28@linaro.org
+
+Changes in v2:
+- Added new wrapper over the set_transparent new helper in order to
+  move the non-transparent disable and the its enable->disable sequence
+  mentioned in the DP standard section 3.6.6.1 entirely in the generic
+  implemetation.
+- Switch all 3 drivers to use the new wrapper.
+- Fixed the return value of the helper to return 0 on success and
+  negative value on error.
+- Added explanation about the transparent/non-transparent modes into the
+  msm dp commit message.
+- Dropped the condition for non-eDP in msm DP driver since it is allowed
+  to try to get the number of LTTPRs even on eDP and it will be always
+  0 anyway.
+- Dropped the RFC prefix
+- Link to v1: https://lore.kernel.org/r/20241031-drm-dp-msm-add-lttpr-transparent-mode-set-v1-0-cafbb9855f40@linaro.org
+
+---
+Abel Vesa (4):
+      drm/dp: Add helper to set LTTPRs in transparent mode
+      drm/nouveau/dp: Use the generic helper to control LTTPR transparent mode
+      drm/i915/dp: Use the generic helper to control LTTPR transparent mode
+      drm/msm/dp: Add support for LTTPR handling
+
+ drivers/gpu/drm/display/drm_dp_helper.c            | 61 ++++++++++++++++++++++
+ .../gpu/drm/i915/display/intel_dp_link_training.c  | 24 ++-------
+ drivers/gpu/drm/msm/dp/dp_display.c                | 15 ++++++
+ drivers/gpu/drm/nouveau/nouveau_dp.c               | 17 +-----
+ include/drm/display/drm_dp_helper.h                |  2 +
+ 5 files changed, 85 insertions(+), 34 deletions(-)
+---
+base-commit: 00f3246adeeacbda0bd0b303604e46eb59c32e6e
+change-id: 20241031-drm-dp-msm-add-lttpr-transparent-mode-set-136cd5bfde07
+
+Best regards,
+-- 
+Abel Vesa <abel.vesa@linaro.org>
+
