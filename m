@@ -2,208 +2,148 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id D2D57A28670
-	for <lists+nouveau@lfdr.de>; Wed,  5 Feb 2025 10:24:12 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id CEA8CA28D12
+	for <lists+nouveau@lfdr.de>; Wed,  5 Feb 2025 14:57:24 +0100 (CET)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id B9D8D10E766;
-	Wed,  5 Feb 2025 09:24:07 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id BF1AB10E1EA;
+	Wed,  5 Feb 2025 13:57:20 +0000 (UTC)
 Authentication-Results: gabe.freedesktop.org;
-	dkim=pass (2048-bit key; unprotected) header.d=intel.com header.i=@intel.com header.b="fR0bzbCv";
+	dkim=pass (2048-bit key; unprotected) header.d=Nvidia.com header.i=@Nvidia.com header.b="ti4XGWFw";
 	dkim-atps=neutral
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from mgamail.intel.com (mgamail.intel.com [192.198.163.7])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 4709A10E762;
- Wed,  5 Feb 2025 09:24:05 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
- d=intel.com; i=@intel.com; q=dns/txt; s=Intel;
- t=1738747446; x=1770283446;
- h=from:to:cc:subject:date:message-id:references:
- in-reply-to:content-transfer-encoding:mime-version;
- bh=N/W7xBLWiRy6NTCFQsbPYY7PZ+Lot3YgLD5NtfKl2zk=;
- b=fR0bzbCv1B/ZIIMshnHkLmUw4hJjKirWo/1E7j0hSB9ghxqkqpNpbbwv
- Tf/caFY/BGwPgBLW261wx1XcFnfAvqCGBU1D2mrJtfpxQTn9LlWlhmX2q
- A5Uc4mI7YX8vENdqlIvaGEWjRJQEUKeDmkiIxxOdDz3xfKi0BhQ2YfxT5
- kZf2P9BqJkWv0QeOkJ+x3/rP1YFSeh5H6Kx+gVUZJFkDFS95SKOa4Ktt3
- Gptk0SgKjrSrGyFHOhcUovIHqyUIkg/JpzSHsgK+TbUxUKA6g6jGLzrQ+
- MHSbYRnLn7YNJxVyFydXERi+crZh8DRmJgyNOYy4IMbWCdieLdgg6XKq8 w==;
-X-CSE-ConnectionGUID: VTypwULxTim5s2uBNIy44A==
-X-CSE-MsgGUID: NNRlByFYSEa1B0cVpJsftA==
-X-IronPort-AV: E=McAfee;i="6700,10204,11336"; a="64662450"
-X-IronPort-AV: E=Sophos;i="6.13,261,1732608000"; d="scan'208";a="64662450"
-Received: from orviesa009.jf.intel.com ([10.64.159.149])
- by fmvoesa101.fm.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
- 05 Feb 2025 01:24:04 -0800
-X-CSE-ConnectionGUID: ICag8bvFTIm9DqVGv6sSdQ==
-X-CSE-MsgGUID: +S8sk8JdSG6AbfBry0+a7g==
-X-ExtLoop1: 1
-X-IronPort-AV: E=Sophos;i="6.13,261,1732608000"; d="scan'208";a="110641353"
-Received: from orsmsx601.amr.corp.intel.com ([10.22.229.14])
- by orviesa009.jf.intel.com with ESMTP/TLS/AES256-GCM-SHA384;
- 05 Feb 2025 01:24:04 -0800
-Received: from orsmsx601.amr.corp.intel.com (10.22.229.14) by
- ORSMSX601.amr.corp.intel.com (10.22.229.14) with Microsoft SMTP Server
- (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
- 15.1.2507.44; Wed, 5 Feb 2025 01:24:03 -0800
-Received: from orsedg603.ED.cps.intel.com (10.7.248.4) by
- orsmsx601.amr.corp.intel.com (10.22.229.14) with Microsoft SMTP Server
- (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
- 15.1.2507.44 via Frontend Transport; Wed, 5 Feb 2025 01:24:03 -0800
-Received: from NAM12-MW2-obe.outbound.protection.outlook.com (104.47.66.44) by
- edgegateway.intel.com (134.134.137.100) with Microsoft SMTP Server
- (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.1.2507.44; Wed, 5 Feb 2025 01:23:59 -0800
+Received: from NAM10-MW2-obe.outbound.protection.outlook.com
+ (mail-mw2nam10on2055.outbound.protection.outlook.com [40.107.94.55])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 8A60110E1EA;
+ Wed,  5 Feb 2025 13:57:19 +0000 (UTC)
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=QFxnMwEM1wRwqXd+ZRms8Kipn5DqcHAaPAAVKcUDLNOe8+5kON5ol+pqr9XYRcfEE9UC7Uu4ZeIdeRQ4gpFQmVej3gmsMmkEeIPCeLumNtnFAe+hSprBbNbh404mt/Ua3+bUZSmVixrqkMzqySA88/xrRXrV6oqB3cuhfrV5v6+ub52wTiy5jFaXCPWlcA2MkPXzubsyQ9i6keVthPEkXscPjds70thEgPPHUCNYlm8aM52NAOH3XwhQPciDRGSZOWitz8XvqHO2IshXbAYIrw7Y+boQ3XZs0ilSWU/9m38MVK96A8PqWDz7urjGnndZ6foE3IlSdLOBsFMw0MOHuQ==
+ b=VuOblGkJOeapPZ0wuOgUsZHr+JR+jtKHKCtW7RJrAv0kIxQC827lxcdeiZrf0v7gTdOTeK0wcGggJowBYxvkRVEDalfT6fgPbrMh03skxEJAPK29H6fc4ABQBkjvTNSXeo+SNDaXq19ObhQ6NlBA/NtO5cSHcDsgi5GTbRtg+Nlj+/2IjUO9qzu5j2tcsx68SNt3LkNRoFZZK6Q3LeewANrt+/CW86mGReEpwjUOgRnL4cgv1LSRVd1Uy1ddsznvdIboThahM3SmKFXAofRUChgpS1JleRyBF1Leowz9sEnrDB4zi1eFkqFZgfFT9q7NIrWnh0K06O47eKl9aa/yVA==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
  s=arcselector10001;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=N/W7xBLWiRy6NTCFQsbPYY7PZ+Lot3YgLD5NtfKl2zk=;
- b=ttMlRFy8O3imMcQYsYpFluoYH0mx5e8cIruWj7WJTnlhz4kusAYT3+uwh0HGgnpne2nB8ogegjGDPnVp1PgoYgydLuMFQ4MCVZEbBssU1yZjWIk+C8sG9nFYSvfQXkd9WAS997jHoOxljuLBamspoXQ6X/m5xYtEZltlRLlWru3VH8VCcal0dlOiPeERNAdT1ZofZuHmVN5TkuIWXhHYLj7pP+zuNlE8bteqwaPBeVHHTBx4OMH9A8P8lD+u3rDMs2rCGD+d7fNCv81sUW7otuQVS9HOOWKEW57R+TrAbd8yOEk/gNijDpd108r8R3oBH/lMI2PvJHU/nbHOdHTSMg==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=intel.com; dmarc=pass action=none header.from=intel.com;
- dkim=pass header.d=intel.com; arc=none
-Received: from SN7PR11MB6750.namprd11.prod.outlook.com (2603:10b6:806:266::21)
- by CO1PR11MB4932.namprd11.prod.outlook.com (2603:10b6:303:98::14)
+ bh=KG9Cz6cv5UJTe7nkxSACgZVZjH1AcRl43ztjDGbg32Y=;
+ b=BXYP67GDe9D6AKN2EMb7akiEsA95iS56pyoRGPfdM5tTh1jYgUSpJREBQr58jpcrp1TnB8Yhi/jAFVJs0c/bG1jUKhVObWy0Hpji+ZlOQJvj4jRCM/42pddTDjf2BWtfQ48S7tpa1nHa0nsjpae52sYmrRjIBUMYZYG5CuKqwDFObRS+F/TaXHJFOFxi4sL2h/ijsqyBTlGgRjEk50q8FdbQOctdoC4SUI9Pa3nDxtrCzKvJLsEQtw3yJImg/MBwbLWlugWoednix1Yt/BJfLsNsXJWcd+tWhA/MUwbFLYScEZybINcj5QHHcqXu32dFqXgYfUdf28duny1MpzaCIg==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
+ 216.228.117.161) smtp.rcpttodomain=kernel.org smtp.mailfrom=nvidia.com;
+ dmarc=pass (p=reject sp=reject pct=100) action=none header.from=nvidia.com;
+ dkim=none (message not signed); arc=none (0)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=Nvidia.com;
+ s=selector2;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=KG9Cz6cv5UJTe7nkxSACgZVZjH1AcRl43ztjDGbg32Y=;
+ b=ti4XGWFwe4i6KadOEkQ7+1bx/QcH0GBhyLZoJoEI14UovOERBZ1s+2pOn/hSSud0NR5TnPuTJ4m5i+cYSzfpnaOhaQ64ym3BdFt9DHBi7u264IuogOEA9BrUHsDt6PT1YzW4x7m1+4KfjKvKOgFuFfD2dIjvdposZi3nS8821nYesDu976CisPdPf0upB+eyNAflm0T438CRrDQnyjDDn98QqaUguFp8Rmq8XmeapNG6i8V7mdN0oukcCqoxF6SU/3Jv1FLkk3pxdBZ7kMAZDANqucQ8hPRCvQG7v36jhz9GrAhpmacAjL5oovIhA5GBApnClnIl7IGgu3Y99fDB6w==
+Received: from BN0PR04CA0080.namprd04.prod.outlook.com (2603:10b6:408:ea::25)
+ by CH3PR12MB8660.namprd12.prod.outlook.com (2603:10b6:610:177::5)
  with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.8398.24; Wed, 5 Feb
- 2025 09:23:53 +0000
-Received: from SN7PR11MB6750.namprd11.prod.outlook.com
- ([fe80::9570:169d:a0d5:527]) by SN7PR11MB6750.namprd11.prod.outlook.com
- ([fe80::9570:169d:a0d5:527%3]) with mapi id 15.20.8422.010; Wed, 5 Feb 2025
- 09:23:51 +0000
-From: "Kandpal, Suraj" <suraj.kandpal@intel.com>
-To: Abel Vesa <abel.vesa@linaro.org>, Maarten Lankhorst
- <maarten.lankhorst@linux.intel.com>, Maxime Ripard <mripard@kernel.org>,
- Thomas Zimmermann <tzimmermann@suse.de>, David Airlie <airlied@gmail.com>,
- Simona Vetter <simona@ffwll.ch>, Karol Herbst <kherbst@redhat.com>, "Lyude
- Paul" <lyude@redhat.com>, Danilo Krummrich <dakr@redhat.com>, Jani Nikula
- <jani.nikula@linux.intel.com>, "Vivi, Rodrigo" <rodrigo.vivi@intel.com>,
- Joonas Lahtinen <joonas.lahtinen@linux.intel.com>, Tvrtko Ursulin
- <tursulin@ursulin.net>, Rob Clark <robdclark@gmail.com>, Abhinav Kumar
- <quic_abhinavk@quicinc.com>, Dmitry Baryshkov <dmitry.baryshkov@linaro.org>,
- Sean Paul <sean@poorly.run>, Marijn Suijten <marijn.suijten@somainline.org>
-CC: Bjorn Andersson <andersson@kernel.org>, Konrad Dybcio
- <konradybcio@kernel.org>, Johan Hovold <johan@kernel.org>,
- "dri-devel@lists.freedesktop.org" <dri-devel@lists.freedesktop.org>,
- "linux-kernel@vger.kernel.org" <linux-kernel@vger.kernel.org>,
- "nouveau@lists.freedesktop.org" <nouveau@lists.freedesktop.org>,
- "intel-gfx@lists.freedesktop.org" <intel-gfx@lists.freedesktop.org>,
- "intel-xe@lists.freedesktop.org" <intel-xe@lists.freedesktop.org>,
- "linux-arm-msm@vger.kernel.org" <linux-arm-msm@vger.kernel.org>,
- "freedreno@lists.freedesktop.org" <freedreno@lists.freedesktop.org>, "Deak,
- Imre" <imre.deak@intel.com>
-Subject: RE: [PATCH v5 3/4] drm/i915/dp: Use the generic helper to control
- LTTPR transparent mode
-Thread-Topic: [PATCH v5 3/4] drm/i915/dp: Use the generic helper to control
- LTTPR transparent mode
-Thread-Index: AQHbdiqXYbyan+GiZUa6rXzMR96x3LM4coTw
-Date: Wed, 5 Feb 2025 09:23:51 +0000
-Message-ID: <SN7PR11MB67500488D041BD81053420E7E3F72@SN7PR11MB6750.namprd11.prod.outlook.com>
-References: <20250203-drm-dp-msm-add-lttpr-transparent-mode-set-v5-0-c865d0e56d6e@linaro.org>
- <20250203-drm-dp-msm-add-lttpr-transparent-mode-set-v5-3-c865d0e56d6e@linaro.org>
-In-Reply-To: <20250203-drm-dp-msm-add-lttpr-transparent-mode-set-v5-3-c865d0e56d6e@linaro.org>
-Accept-Language: en-US
-Content-Language: en-US
-X-MS-Has-Attach: 
-X-MS-TNEF-Correlator: 
-authentication-results: dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=intel.com;
-x-ms-publictraffictype: Email
-x-ms-traffictypediagnostic: SN7PR11MB6750:EE_|CO1PR11MB4932:EE_
-x-ms-office365-filtering-correlation-id: 84987d95-4381-47a6-7900-08dd45c6cddb
-x-ld-processed: 46c98d88-e344-4ed4-8496-4ed7712e255d,ExtAddr
-x-ms-exchange-senderadcheck: 1
-x-ms-exchange-antispam-relay: 0
-x-microsoft-antispam: BCL:0;
- ARA:13230040|366016|1800799024|7416014|376014|38070700018|921020; 
-x-microsoft-antispam-message-info: =?utf-8?B?N1NvNWVUTy9HWjFYbU1MeHI3eWc4bHhLZlBuMmNmVDFxTEZvQ2o2WGxoZ0VL?=
- =?utf-8?B?bEFqVVNHRDRFcW9vMXp5T1U0dXc3alUwOVo4VXoxaWFXaWozWmdFaE5EN3lw?=
- =?utf-8?B?NkZsUWk4YkhnQnNZR3FvdTJGZXQ2NFBac1FpeEVXS3laaE9wS3JOSW9yRk5S?=
- =?utf-8?B?Um9XRy9hZnByZVgxeHBZbG9iSmpGNjVveGZzMngwbkhmYnFjanFYWnlDc3J4?=
- =?utf-8?B?Lzh1L25kUUp0d3RQN2lNZ1V6MlM1Q3VnOXgyTUdQYVErV0xmK3VBVWE4bUh6?=
- =?utf-8?B?V3crY3NmZXAzVlJMUElXa0dGa3ZxOWFzenltQzZmVk5YbnBoZXZTSlQwYyt6?=
- =?utf-8?B?NnpOaXcwL1kwWWxIUk1ucCszTjd5YU1CeTU5SWRHVnRKRnN6cG9ubjJlU2JX?=
- =?utf-8?B?aVNZMWYxUkFoZXZHWE5BTGZ1dEZabEpSRERxd1NxNFNndm1YQ1hqS2kyeUpn?=
- =?utf-8?B?MldZLzFzTUVRVnN1a3gwYXB0ZlBNcGFnaVl3WXFuVGFUMFhVMkZTU21kNzVq?=
- =?utf-8?B?NGxSUzVjSVVrODg0bEN3TWZwdnpXS2Zjcy8wMEJDT0gyNC8wS21iemtLZnQ2?=
- =?utf-8?B?TGROcFRSeWdJbW12bDk5YUc0RlFlckJHT1JpMXV6bmV6RmNBMnZuTFB4TlpU?=
- =?utf-8?B?WnpuaUUvTWcxNFBheGtSMno0US9IZFRxeWdBc1B4YnV6UUdyZDJscnM1dC9O?=
- =?utf-8?B?bjBDTExVVDVDMXEyNC9uRDZVQ1RYZmh3NnpVc1pZSis4TzdodkU4SVpQZkFO?=
- =?utf-8?B?eXl5RGd6djZYU2RCN3VURXlDUlBtUkY3U1hjRXdqaFVTWnJ1SlE1SHdvU2pQ?=
- =?utf-8?B?Y01TZDdkSEVCbHhEcFU1VVc2dWYzRGsvNEh0RGZJRm5kNk5keHRVMGVzYjdR?=
- =?utf-8?B?YWo2Q3pXZkpaaVJyOWJ6QnFqNG5OVDQxaDVHY3RuTEcvVEYwYUUxNmI4QXox?=
- =?utf-8?B?TjFIOS9JWExOVmNQaG10S2dDU1lrRkZ4cjZVRTMzeFhMMjUxalRNNFpMN09s?=
- =?utf-8?B?aHlxZ0U1Yk1TS0N0aG1CZ0lwVUs5RXUzdCtyaGloZERFODF1aHBickVkN2Zy?=
- =?utf-8?B?OTFjYTloelFFdjJvS2JVQXJqeTB0ZGFEa2pGZktoSVlvWXhvOXlnbHF3L3Br?=
- =?utf-8?B?YkhON3F2Nmw2dGRFZ2R4UkZZWHJLWjllRzdoT0ViOVFyRUVxRlAyWkFrQ012?=
- =?utf-8?B?ejB3aVRWZm5WdTlGWU96a0U5Ujl3dGEwVnRvNjhkcmhtd09GeDhGWUhDQ3Qx?=
- =?utf-8?B?NGNTNUo3dUF6STFKSlllbmxubmdnUUszT3RQVGdWTkQyMnhiS3pWMWthOEd1?=
- =?utf-8?B?U25iaEdXREhXT1lkbTBuc1lSOGdVMGpHRmt0NXdMUC9YUHRIRUp3b0hna0h4?=
- =?utf-8?B?NFlENU9wRDlYQTBSb0tmVlRjSWowV245Vmp1NVBsd294ZEJWa3A3ZGYvSk1j?=
- =?utf-8?B?aVZ1S3M4aW1LZWtzVi9EYXRuQVRBaFlRTWRzK0pjTm5lby9aRXFkbmxFWE4w?=
- =?utf-8?B?anliVjhQeXlwUFNSYUJrMnJkYmo5M0ZIYzJMM1dVSHV4TGhRdkpsR3VIRXVv?=
- =?utf-8?B?b2toTjZSTVR1empWK0J3L2JvZEZGeFZoUzZyaStiRjgybjB5ZTZLQzAvTHcv?=
- =?utf-8?B?WlpnK3BScS9uam9rNjVDSlN3MWdPNUV4WHJScitFOHg4d0c0dUpTVmhOOXlm?=
- =?utf-8?B?TDhUa01ISE9KeEpwbENUM0xGeUZPVkFQc3pST1JzY3RnQnBlenpUczNHdUtP?=
- =?utf-8?B?YmJhS3VxNzlmNTRCV1VqYjMzNHYrcHJPMmRaMko0RlhGVGlHdEYrK3QvK2w2?=
- =?utf-8?B?Um8wNGUwcjQ5akdhWnZ1UjZvMTkzS0FwZmlXRU9CMGFDMXVDZGdQTFNHNVNK?=
- =?utf-8?B?dGdyMEh1ZFJRUzVUbkptUi8xNzhkQUhMOUtxOTc0Rk5xNjBubzZjK3prTnkx?=
- =?utf-8?Q?qIEqtVE2JCDO2QLwB/rv01znSpyelp5W?=
-x-forefront-antispam-report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
- IPV:NLI; SFV:NSPM; H:SN7PR11MB6750.namprd11.prod.outlook.com; PTR:; CAT:NONE;
- SFS:(13230040)(366016)(1800799024)(7416014)(376014)(38070700018)(921020);
- DIR:OUT; SFP:1101; 
-x-ms-exchange-antispam-messagedata-chunkcount: 1
-x-ms-exchange-antispam-messagedata-0: =?utf-8?B?RVZmSVVSQ3FiU3RRTnNDcTkvTTdhK2dGMGxMcU1iODErVUVUVmNEQTZ5UlJV?=
- =?utf-8?B?YzZHSWx5dGdHR25yZGtVMVlqSlhOUVh0aFFUb2kzTThuaTFyR2k2Z0NiajhH?=
- =?utf-8?B?NGdTRjh6cFFPeHR1NWZXYlVhZ2JZbThieFlrNkc0QXJZTElDUEF5dTJpQ1dm?=
- =?utf-8?B?bXl1dklmTGxRQ0QxaXlBWnIvWG12ZFRkcmwwckpNYVduWko1alYveWZJZmxq?=
- =?utf-8?B?MVp4N2pGN1FpejVzcFpnWFNSeXczd3c2QlduM2VLRVBpNFphYzF6dTBhTVk4?=
- =?utf-8?B?SjlySUFneHpHdThHa0RYNW9tU3FIdTNvUWdmQmRnRDZpbHVZVFA2MU1tSzhj?=
- =?utf-8?B?QmZmU2dxSFJiWnJwUy9DcjRkZjdzS2xKWk5vd1pLZE13SjVOQWdTTy8rZ21W?=
- =?utf-8?B?RHFQQk9UcmtMTFBoalo0YksrdGFLbEpGTncxSmRNZmNOb3V0YTYyc3FsaG1i?=
- =?utf-8?B?MDVuL1FreTVPeS91cm9xRURQWitZWi9ubFh2ZlE1N0VtN1cweWRiSGtzb1dQ?=
- =?utf-8?B?M3VGaGR1YWdaMUFxRDhOVHhEM3A1bkttazBUNEZrOTliengvUlQ4VGdVckwz?=
- =?utf-8?B?Y1ZxZDRkL3F6VU9mMnlEbTAvZDIzNnpaNjB2UHdTZjJLbThycHZ2WEtCUTE5?=
- =?utf-8?B?Zk52RW5GV0x4OVIxMXJDbUxoTFcxQk1lRTdWSVkzS3FwazdENXJ0RWkxY3VQ?=
- =?utf-8?B?MlNySHlINUI1YlY4N0ROT1VDUDFjRmhBeld3SEFGc0pjR0FURlBrVWNnTER2?=
- =?utf-8?B?R0M1RG9XSHRpVTdMNlJuWG1lT2pMc0R3LzBNL05LbGFzQjZ0UmZMRURlc21M?=
- =?utf-8?B?SXBzUHMzMUIyMTV1ME56OW9sTFFPYjc1dUtYSWVCOEdwZ0FWQTIraVhHdmVV?=
- =?utf-8?B?OEFCdXBINzh3cjVKUFBnWU5xR2hKT1NWdE1EUDBzTERLRFFwY2RxTnVzMDFu?=
- =?utf-8?B?RjhsbE4vTmZiZzJEdmN2cC9jbzhncG5ibi9FSnFvQklYZnQwd096V2JqZzBk?=
- =?utf-8?B?eFhVYnlkZU00VzZrTnJ4V29UNUVEbEpFVVdKZXdMQVVyd3JzWTFqWEgzLyt2?=
- =?utf-8?B?UW5VWlAwRFhtdjVnL2kxTm9CWWdiRGFFTU1reVNEQ2RWV3RVczFzdENPRElz?=
- =?utf-8?B?b3c2S3J0bWhKOHpKcVJDNjZjalNqenIvWkpBYVVsRlJTeGxITDBqYWl3cEFR?=
- =?utf-8?B?a05JdDRlclBmSFlneUVvaTJ2WElvYTNNUVdiOTJha29YQXRqeFdNVHFBYkhw?=
- =?utf-8?B?VXFUT0J4eThPL0hTZGVlajZ4SHljbVlqd0xFYmxHc0VQNUc5WVJuV09uRnYy?=
- =?utf-8?B?MzI2ZWhRYWZvOHByR29Lem9sTlZ6QXMrY2lPSXcwQlpDVW9nYmZTNGJaZkFS?=
- =?utf-8?B?K3FaY2g3QXpLSUhpOFZQYWRyNy9jQlYxZVZET0E1bThkeWhQV01ENnBtdGJC?=
- =?utf-8?B?ZUFRUzdOWUNJT2JmZS9NUDhjbCthQS9XdS85VkIrSHlBVkVGWU01ekN2dzVC?=
- =?utf-8?B?ZmNxeTNOOUpEbXV2WWZldHN0ODE1VElkd1d4N1ZvTm5Yd2I1U0RrY2pnbWtB?=
- =?utf-8?B?OEZiWTZuSXphTkdVZ2g0NFUzMElDN1Z1RUZjYzhjbWZkRTVCS3ppYkJYbnMv?=
- =?utf-8?B?bTZHdFE5QzRDYVNZRGFVYUxsS0djb2E5TWNpM2Vmc05OQ0xwTXJHK1Q3bDJB?=
- =?utf-8?B?WUYzZ0RQZFNHUDU3aDhwcGJiS05KMXoweVZNRU9CSW4wcEVFWUZFWm8yZitn?=
- =?utf-8?B?cHZ4SGFYOGZueitWb3dGd09GamF5enNSSTg4Y0VtbkZTRVl6RDhOODlzSzd3?=
- =?utf-8?B?bFdOQTFQNzI1d1RJb3YyWXZTSTYrTHBhYXlVM2JKVGt6ajQ4M2JiYUVSbmdJ?=
- =?utf-8?B?RTh4eVpPa0ZuVExlNUJyT0hFcHFTd2FPTHBMZFR0c2YvYnZXYVZISlZVK1I4?=
- =?utf-8?B?N01VWWErNlpXMEdBRUwzRnJSQlFrbldsQ2FKOFNRdld4RXcrcE1rM3F3OU91?=
- =?utf-8?B?TE1rcDJHZjVzS0N6SmM5WExQc2xFeGtBWFo2VFJjSVgrdU0wejJOZGEzeVlD?=
- =?utf-8?B?eElRejhud1cvbk9NSCtqNmFHNEpMRXU4czZISnN0cWVVdjRLcENNWkx4Q001?=
- =?utf-8?Q?7pLwX3Bdh85lJmGz5Ba0CyXnN?=
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.8398.25; Wed, 5 Feb
+ 2025 13:57:12 +0000
+Received: from BL02EPF0001A0FB.namprd03.prod.outlook.com
+ (2603:10b6:408:ea:cafe::68) by BN0PR04CA0080.outlook.office365.com
+ (2603:10b6:408:ea::25) with Microsoft SMTP Server (version=TLS1_3,
+ cipher=TLS_AES_256_GCM_SHA384) id 15.20.8398.20 via Frontend Transport; Wed,
+ 5 Feb 2025 13:57:12 +0000
+X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 216.228.117.161)
+ smtp.mailfrom=nvidia.com;
+ dkim=none (message not signed)
+ header.d=none;dmarc=pass action=none header.from=nvidia.com;
+Received-SPF: Pass (protection.outlook.com: domain of nvidia.com designates
+ 216.228.117.161 as permitted sender) receiver=protection.outlook.com;
+ client-ip=216.228.117.161; helo=mail.nvidia.com; pr=C
+Received: from mail.nvidia.com (216.228.117.161) by
+ BL02EPF0001A0FB.mail.protection.outlook.com (10.167.242.102) with Microsoft
+ SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ 15.20.8398.14 via Frontend Transport; Wed, 5 Feb 2025 13:57:11 +0000
+Received: from rnnvmail204.nvidia.com (10.129.68.6) by mail.nvidia.com
+ (10.129.200.67) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.1544.4; Wed, 5 Feb 2025
+ 05:56:53 -0800
+Received: from rnnvmail202.nvidia.com (10.129.68.7) by rnnvmail204.nvidia.com
+ (10.129.68.6) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.1544.14; Wed, 5 Feb
+ 2025 05:56:53 -0800
+Received: from localhost (10.127.8.14) by mail.nvidia.com (10.129.68.7) with
+ Microsoft SMTP Server id 15.2.1544.14 via Frontend Transport; Wed, 5 Feb 2025
+ 05:56:46 -0800
+Date: Wed, 5 Feb 2025 15:56:46 +0200
+From: Zhi Wang <zhiw@nvidia.com>
+To: Danilo Krummrich <dakr@kernel.org>
+CC: <airlied@gmail.com>, <simona@ffwll.ch>, <corbet@lwn.net>,
+ <maarten.lankhorst@linux.intel.com>, <mripard@kernel.org>,
+ <tzimmermann@suse.de>, <ajanulgu@redhat.com>, <lyude@redhat.com>,
+ <pstanner@redhat.com>, <cjia@nvidia.com>, <jhubbard@nvidia.com>,
+ <bskeggs@nvidia.com>, <acurrid@nvidia.com>, <ojeda@kernel.org>,
+ <alex.gaynor@gmail.com>, <boqun.feng@gmail.com>, <gary@garyguo.net>,
+ <bjorn3_gh@protonmail.com>, <benno.lossin@proton.me>,
+ <a.hindborg@kernel.org>, <aliceryhl@google.com>, <tmgross@umich.edu>,
+ <dri-devel@lists.freedesktop.org>, <linux-doc@vger.kernel.org>,
+ <linux-kernel@vger.kernel.org>, <nouveau@lists.freedesktop.org>,
+ <rust-for-linux@vger.kernel.org>
+Subject: Re: [PATCH v2 2/2] gpu: nova-core: add initial documentation
+Message-ID: <20250205155646.00003c2f@nvidia.com>
+In-Reply-To: <20250204190400.2550-2-dakr@kernel.org>
+References: <20250204190400.2550-1-dakr@kernel.org>
+ <20250204190400.2550-2-dakr@kernel.org>
+X-Mailer: Claws Mail 4.2.0 (GTK 3.24.38; x86_64-w64-mingw32)
 MIME-Version: 1.0
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-AuthSource: SN7PR11MB6750.namprd11.prod.outlook.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 84987d95-4381-47a6-7900-08dd45c6cddb
-X-MS-Exchange-CrossTenant-originalarrivaltime: 05 Feb 2025 09:23:51.5468 (UTC)
-X-MS-Exchange-CrossTenant-fromentityheader: Hosted
-X-MS-Exchange-CrossTenant-id: 46c98d88-e344-4ed4-8496-4ed7712e255d
-X-MS-Exchange-CrossTenant-mailboxtype: HOSTED
-X-MS-Exchange-CrossTenant-userprincipalname: N8VbzH2ic0J8nW2q/PtA2EUG/B9o7AcdP0lXuxovZ1hrKB6HDPYxYmi3Fu64nZHlBQeEre2l8ERkI0iUPaiIxg==
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: CO1PR11MB4932
-X-OriginatorOrg: intel.com
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+X-NV-OnPremToCloud: AnonymousSubmission
+X-EOPAttributedMessage: 0
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: BL02EPF0001A0FB:EE_|CH3PR12MB8660:EE_
+X-MS-Office365-Filtering-Correlation-Id: e9566676-b792-4bbb-7dc5-08dd45ecfd52
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: BCL:0;
+ ARA:13230040|36860700013|82310400026|7416014|1800799024|376014|7053199007; 
+X-Microsoft-Antispam-Message-Info: =?utf-8?B?SFkvQWtOMCtHNERzaGFlV2pUYmdKaVd1dUptMWVHN3BWWlZSM3NaZGZEVXZy?=
+ =?utf-8?B?dXEvektJaC84RmNYdm9aaHl3VU1zSUkvUkRHOHRield5bnQ2MjVEVzBNR1lt?=
+ =?utf-8?B?eUQ3TkJmWktKSmZQV0pGcUZkdkl5OElHT0cvMlJKUm5qY0NlUEIxUHAvSmg0?=
+ =?utf-8?B?Q0FPaDhuRFN1NWxreDFraWU0ZVY4WG1LK3lzaXVJNE9BVkl4T1JOdHdjM0JE?=
+ =?utf-8?B?SzhhdEVkaTc0cm9iRjI3VG9vLzMvQWtQZHUrOHErcGh0TnN2dzZzTzZDazJ2?=
+ =?utf-8?B?VkVlak5Fbm81NXFKUWN4UTU5aFo1bEgrVlRBdkJnbm5JZ05WZzV3YUY4NDNU?=
+ =?utf-8?B?TGZpbUd5VnhYcGxZUlc2d01Jeld6Sk1peHlKVmVCcEl5UVV0SUI1M0RjMFRx?=
+ =?utf-8?B?U0NtMDNKMXJKYktwZVFQV0J2ZHRINVZYTnNPc0JPdE1zWmZiRm11K1FWQXF4?=
+ =?utf-8?B?a3BzZjdIY0QvZTNoaHMzaDE5b3U0YkhjajNFYkhLVm1NVXdER0F2NVJFSlg0?=
+ =?utf-8?B?VU1OZEFGMWQ2NndsL0EzVzlhZDdOdU1pYmNQRElXZlhoS1I0OUlyeWxpSFpQ?=
+ =?utf-8?B?cDdNMkttbXk5OTBkc1FvVEhEcjJHVHBkaDNHQUZ4R3hVd2x4S2FqdUlDR002?=
+ =?utf-8?B?eXJseEtSRDJZOHBxdVhEblVjTlFUTjJtV1IwRDJBVktSMTJWOG0vT1A2MHFE?=
+ =?utf-8?B?akY3TDIzeCtkLyt2WS9XVnVFUnFxaDRLR3ZiUGp6T1J0UDQxNHd3RzBTZE1P?=
+ =?utf-8?B?Vm1zQW5yWC8xRFRyYWtJcnBkSm8raTZ0WENqOURVc1FNVzNJcG1wMHM5T3k5?=
+ =?utf-8?B?bmdwTDVGVG5zN3lyUXo2MFkyUGtOejhoRTZSd1VEYktoUXVHV3BodEFJSmpD?=
+ =?utf-8?B?bzBuTXIvU1lBRGlpc1dkVHp2bm9uUzVXd0FEcTk5VXBMYnJETXYrUm1DY2VV?=
+ =?utf-8?B?WTQ0WXJSbHpnUUhYa0VId1RrY1RZNmJpUFhndDdCMHlZQVppVi9mWHVlN1JQ?=
+ =?utf-8?B?Q0tKVzJXYkxHNUhxK1h5aDhEbWVkaTE5OEIwQjRXTVRSenoySk9MTHB6cUpR?=
+ =?utf-8?B?VXc0blhEczV6bGVCb0NUTEdhUittQmlBZlBTV2xzZ0JKMW9SeEx6bDVrWHdC?=
+ =?utf-8?B?NExhOVgrekZ0Rm5FcnhDK1hvaHYwYkpTQ3ZGK3hCajJOZkk3NE1XMzN5a3A5?=
+ =?utf-8?B?S01TSUc5VEFBWjJEQ2g3Q3haU2xTN0JPb0wvcVE0YXJ6aGp4ejlISDdOaVEx?=
+ =?utf-8?B?cDFybXZhdjNTU0tiN0FhVTlpbFUwNmpOTW0wSlpwbEhva3BGcHVKT1pUbWR6?=
+ =?utf-8?B?Y2hFMlJ5TmdkVWplYWYyaXJFS0F0MHBsb1lRc0RpQXNBY25ZSHBCT2hrYm0w?=
+ =?utf-8?B?L3grS2dLNG5VRkswbmJBVDNZQVFyKzBlMTVOQmxTajd0bWZJNWdYYTNDVkd6?=
+ =?utf-8?B?czZUN016Ukg2d0xJQ0plRmRBOUpPVm1HTjVNSjVraG04Wk01amVsY3hJeFJv?=
+ =?utf-8?B?ci9zb05VVWcxbnVtcElrSmowdXRhaWMxVFovdUVLMVpVYTdpQlRrN2dzdVJz?=
+ =?utf-8?B?TUNPcGw0OERXa0Z6WHZyZk5yVkc3TWJwQzlaZlc0dzZpT3FCaWdGZkVpY2s5?=
+ =?utf-8?B?OWNIZktaT0hCSU5BZGhCUEVvaGh5bk9CcCtwUU9jNkhDdW9MVm1qM2xoanYx?=
+ =?utf-8?B?c3Z5ZzF2MVA3dWhTd2FtZ25HbjZvWE9xaGY0LzZwU240YWpQRlQ0aXpjU3cw?=
+ =?utf-8?B?anRiNUV4aXpjMWViSzJwTmpWOW5MVG5vcHR5K3Y1RVBXeUxzQUJGeXFsMWJj?=
+ =?utf-8?B?dE1FcTRXaW1ieXhlYjZkNE1WUCtqTER0Z2R5Zi9SNFZjdFpaalU3bjhtRVlC?=
+ =?utf-8?B?RjZlNGdhbHFYZ3AzdUdLY0ZwM3FHZTNSb3pJaERLQ0s5UTRKS0E2WXlDVHl4?=
+ =?utf-8?B?SUg5eXJKT3YzdGovVjVVNzdDMC91d3NRUTNIVldWUFRqY1FtUmIvSUtqY2Zu?=
+ =?utf-8?Q?RBr804fJ7GXJDzwAM+RISV5pDylzxI=3D?=
+X-Forefront-Antispam-Report: CIP:216.228.117.161; CTRY:US; LANG:en; SCL:1; SRV:;
+ IPV:NLI; SFV:NSPM; H:mail.nvidia.com; PTR:dc6edge2.nvidia.com; CAT:NONE;
+ SFS:(13230040)(36860700013)(82310400026)(7416014)(1800799024)(376014)(7053199007);
+ DIR:OUT; SFP:1101; 
+X-OriginatorOrg: Nvidia.com
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 05 Feb 2025 13:57:11.9087 (UTC)
+X-MS-Exchange-CrossTenant-Network-Message-Id: e9566676-b792-4bbb-7dc5-08dd45ecfd52
+X-MS-Exchange-CrossTenant-Id: 43083d15-7273-40c1-b7db-39efd9ccc17a
+X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=43083d15-7273-40c1-b7db-39efd9ccc17a; Ip=[216.228.117.161];
+ Helo=[mail.nvidia.com]
+X-MS-Exchange-CrossTenant-AuthSource: BL02EPF0001A0FB.namprd03.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Anonymous
+X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: CH3PR12MB8660
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -218,87 +158,469 @@ List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-DQoNCj4gLS0tLS1PcmlnaW5hbCBNZXNzYWdlLS0tLS0NCj4gRnJvbTogZHJpLWRldmVsIDxkcmkt
-ZGV2ZWwtYm91bmNlc0BsaXN0cy5mcmVlZGVza3RvcC5vcmc+IE9uIEJlaGFsZiBPZiBBYmVsDQo+
-IFZlc2ENCj4gU2VudDogTW9uZGF5LCBGZWJydWFyeSAzLCAyMDI1IDQ6MjggUE0NCj4gVG86IE1h
-YXJ0ZW4gTGFua2hvcnN0IDxtYWFydGVuLmxhbmtob3JzdEBsaW51eC5pbnRlbC5jb20+OyBNYXhp
-bWUgUmlwYXJkDQo+IDxtcmlwYXJkQGtlcm5lbC5vcmc+OyBUaG9tYXMgWmltbWVybWFubiA8dHpp
-bW1lcm1hbm5Ac3VzZS5kZT47DQo+IERhdmlkIEFpcmxpZSA8YWlybGllZEBnbWFpbC5jb20+OyBT
-aW1vbmEgVmV0dGVyIDxzaW1vbmFAZmZ3bGwuY2g+OyBLYXJvbA0KPiBIZXJic3QgPGtoZXJic3RA
-cmVkaGF0LmNvbT47IEx5dWRlIFBhdWwgPGx5dWRlQHJlZGhhdC5jb20+OyBEYW5pbG8NCj4gS3J1
-bW1yaWNoIDxkYWtyQHJlZGhhdC5jb20+OyBKYW5pIE5pa3VsYSA8amFuaS5uaWt1bGFAbGludXgu
-aW50ZWwuY29tPjsNCj4gVml2aSwgUm9kcmlnbyA8cm9kcmlnby52aXZpQGludGVsLmNvbT47IEpv
-b25hcyBMYWh0aW5lbg0KPiA8am9vbmFzLmxhaHRpbmVuQGxpbnV4LmludGVsLmNvbT47IFR2cnRr
-byBVcnN1bGluIDx0dXJzdWxpbkB1cnN1bGluLm5ldD47DQo+IFJvYiBDbGFyayA8cm9iZGNsYXJr
-QGdtYWlsLmNvbT47IEFiaGluYXYgS3VtYXINCj4gPHF1aWNfYWJoaW5hdmtAcXVpY2luYy5jb20+
-OyBEbWl0cnkgQmFyeXNoa292DQo+IDxkbWl0cnkuYmFyeXNoa292QGxpbmFyby5vcmc+OyBTZWFu
-IFBhdWwgPHNlYW5AcG9vcmx5LnJ1bj47IE1hcmlqbg0KPiBTdWlqdGVuIDxtYXJpam4uc3VpanRl
-bkBzb21haW5saW5lLm9yZz4NCj4gQ2M6IEJqb3JuIEFuZGVyc3NvbiA8YW5kZXJzc29uQGtlcm5l
-bC5vcmc+OyBLb25yYWQgRHliY2lvDQo+IDxrb25yYWR5YmNpb0BrZXJuZWwub3JnPjsgSm9oYW4g
-SG92b2xkIDxqb2hhbkBrZXJuZWwub3JnPjsgZHJpLQ0KPiBkZXZlbEBsaXN0cy5mcmVlZGVza3Rv
-cC5vcmc7IGxpbnV4LWtlcm5lbEB2Z2VyLmtlcm5lbC5vcmc7DQo+IG5vdXZlYXVAbGlzdHMuZnJl
-ZWRlc2t0b3Aub3JnOyBpbnRlbC1nZnhAbGlzdHMuZnJlZWRlc2t0b3Aub3JnOyBpbnRlbC0NCj4g
-eGVAbGlzdHMuZnJlZWRlc2t0b3Aub3JnOyBsaW51eC1hcm0tbXNtQHZnZXIua2VybmVsLm9yZzsN
-Cj4gZnJlZWRyZW5vQGxpc3RzLmZyZWVkZXNrdG9wLm9yZzsgQWJlbCBWZXNhIDxhYmVsLnZlc2FA
-bGluYXJvLm9yZz47IERlYWssDQo+IEltcmUgPGltcmUuZGVha0BpbnRlbC5jb20+DQo+IFN1Ympl
-Y3Q6IFtQQVRDSCB2NSAzLzRdIGRybS9pOTE1L2RwOiBVc2UgdGhlIGdlbmVyaWMgaGVscGVyIHRv
-IGNvbnRyb2wgTFRUUFINCj4gdHJhbnNwYXJlbnQgbW9kZQ0KPiANCj4gTFRUUFJzIG9wZXJhdGlu
-ZyBtb2RlcyBhcmUgZGVmaW5lZCBieSB0aGUgRGlzcGxheVBvcnQgc3RhbmRhcmQgYW5kIHRoZQ0K
-PiBnZW5lcmljIGZyYW1ld29yayBub3cgcHJvdmlkZXMgYSBoZWxwZXIgdG8gc3dpdGNoIGJldHdl
-ZW4gdGhlbSwgd2hpY2ggaXMNCj4gaGFuZGxpbmcgdGhlIGV4cGxpY2l0IGRpc2FibGluZyBvZiBu
-b24tdHJhbnNwYXJlbnQgbW9kZSBhbmQgaXRzDQo+IGRpc2FibGUtPmVuYWJsZSBzZXF1ZW5jZSBt
-ZW50aW9uZWQgaW4gdGhlIERQIFN0YW5kYXJkIHYyLjAgc2VjdGlvbg0KPiAzLjYuNi4xLg0KPiAN
-Cj4gU28gdXNlIHRoZSBuZXcgZHJtIGdlbmVyaWMgaGVscGVyIGluc3RlYWQgYXMgaXQgbWFrZXMg
-dGhlIGNvZGUgYSBiaXQgY2xlYW5lci4NCj4gU2luY2UgdGhlIGRyaXZlciBzcGVjaWZpYyBpbXBs
-ZW1lbnRhdGlvbiBob2xkcyB0aGUgbHR0cnBfY29tbW9uX2NhcHMsIGlmIHRoZQ0KPiBjYWxsIHRv
-IHRoZSBkcm0gZ2VuZXJpYyBoZWxwZXIgZmFpbHMsIHRoZSBsdHRycF9jb21tb25fY2FwcyBuZWVk
-IHRvIGJlDQo+IHVwZGF0ZWQgYXMgdGhlIGhlbHBlciBoYXMgYWxyZWFkeSByb2xsZWQgYmFjayB0
-byB0cmFuc3BhcmVudCBtb2RlLg0KPiANCj4gQWNrZWQtYnk6IEltcmUgRGVhayA8aW1yZS5kZWFr
-QGludGVsLmNvbT4NCj4gU2lnbmVkLW9mZi1ieTogQWJlbCBWZXNhIDxhYmVsLnZlc2FAbGluYXJv
-Lm9yZz4NCg0KTEdUTSwNClJldmlld2VkLWJ5OiBTdXJhaiBLYW5kcGFsIDxzdXJhai5rYW5kcGFs
-QGludGVsLmNvbT4NCg0KPiAtLS0NCj4gIC4uLi9ncHUvZHJtL2k5MTUvZGlzcGxheS9pbnRlbF9k
-cF9saW5rX3RyYWluaW5nLmMgIHwgMjQgKysrKystLS0tLS0tLS0tLS0tLS0tLQ0KPiAgMSBmaWxl
-IGNoYW5nZWQsIDUgaW5zZXJ0aW9ucygrKSwgMTkgZGVsZXRpb25zKC0pDQo+IA0KPiBkaWZmIC0t
-Z2l0IGEvZHJpdmVycy9ncHUvZHJtL2k5MTUvZGlzcGxheS9pbnRlbF9kcF9saW5rX3RyYWluaW5n
-LmMNCj4gYi9kcml2ZXJzL2dwdS9kcm0vaTkxNS9kaXNwbGF5L2ludGVsX2RwX2xpbmtfdHJhaW5p
-bmcuYw0KPiBpbmRleA0KPiA4YjE5NzdjZmVjNTAzYzcwZjA3YWY3MTZlZTJjMDBlNzYwNWM2YWRm
-Li5jNWJhZDMxMWVkZjdiOWE1Y2ViYjYzM2I5DQo+IGU5NjkyYmFlMzk3ZjllZCAxMDA2NDQNCj4g
-LS0tIGEvZHJpdmVycy9ncHUvZHJtL2k5MTUvZGlzcGxheS9pbnRlbF9kcF9saW5rX3RyYWluaW5n
-LmMNCj4gKysrIGIvZHJpdmVycy9ncHUvZHJtL2k5MTUvZGlzcGxheS9pbnRlbF9kcF9saW5rX3Ry
-YWluaW5nLmMNCj4gQEAgLTExOSw5ICsxMTksNiBAQCBpbnRlbF9kcF9zZXRfbHR0cHJfdHJhbnNw
-YXJlbnRfbW9kZShzdHJ1Y3QgaW50ZWxfZHANCj4gKmludGVsX2RwLCBib29sIGVuYWJsZSkNCj4g
-IAl1OCB2YWwgPSBlbmFibGUgPyBEUF9QSFlfUkVQRUFURVJfTU9ERV9UUkFOU1BBUkVOVCA6DQo+
-ICAJCQkgIERQX1BIWV9SRVBFQVRFUl9NT0RFX05PTl9UUkFOU1BBUkVOVDsNCj4gDQo+IC0JaWYg
-KGRybV9kcF9kcGNkX3dyaXRlKCZpbnRlbF9kcC0+YXV4LCBEUF9QSFlfUkVQRUFURVJfTU9ERSwN
-Cj4gJnZhbCwgMSkgIT0gMSkNCj4gLQkJcmV0dXJuIGZhbHNlOw0KPiAtDQo+ICAJaW50ZWxfZHAt
-Pmx0dHByX2NvbW1vbl9jYXBzW0RQX1BIWV9SRVBFQVRFUl9NT0RFIC0NCj4gDQo+IERQX0xUX1RV
-TkFCTEVfUEhZX1JFUEVBVEVSX0ZJRUxEX0RBVEFfU1RSVUNUVVJFX1JFVl0gPSB2YWw7DQo+IA0K
-PiBAQCAtMTQ2LDYgKzE0Myw3IEBAIHN0YXRpYyBib29sDQo+IGludGVsX2RwX2x0dHByX3RyYW5z
-cGFyZW50X21vZGVfZW5hYmxlZChzdHJ1Y3QgaW50ZWxfZHAgKmludGVsX2RwKSAgc3RhdGljDQo+
-IGludCBpbnRlbF9kcF9pbml0X2x0dHByX3BoeXMoc3RydWN0IGludGVsX2RwICppbnRlbF9kcCwg
-Y29uc3QgdTgNCj4gZHBjZFtEUF9SRUNFSVZFUl9DQVBfU0laRV0pICB7DQo+ICAJaW50IGx0dHBy
-X2NvdW50Ow0KPiArCWludCByZXQ7DQo+IA0KPiAgCWlmICghaW50ZWxfZHBfcmVhZF9sdHRwcl9j
-b21tb25fY2FwcyhpbnRlbF9kcCwgZHBjZCkpDQo+ICAJCXJldHVybiAwOw0KPiBAQCAtMTcyLDIy
-ICsxNzAsOCBAQCBzdGF0aWMgaW50IGludGVsX2RwX2luaXRfbHR0cHJfcGh5cyhzdHJ1Y3QgaW50
-ZWxfZHANCj4gKmludGVsX2RwLCBjb25zdCB1OCBkcGNkW0RQXw0KPiAgCQlyZXR1cm4gbHR0cHJf
-Y291bnQ7DQo+ICAJfQ0KPiANCj4gLQkvKg0KPiAtCSAqIFNlZSBEUCBTdGFuZGFyZCB2Mi4wIDMu
-Ni42LjEuIGFib3V0IHRoZSBleHBsaWNpdCBkaXNhYmxpbmcgb2YNCj4gLQkgKiBub24tdHJhbnNw
-YXJlbnQgbW9kZSBhbmQgdGhlIGRpc2FibGUtPmVuYWJsZSBub24tdHJhbnNwYXJlbnQNCj4gbW9k
-ZQ0KPiAtCSAqIHNlcXVlbmNlLg0KPiAtCSAqLw0KPiAtCWludGVsX2RwX3NldF9sdHRwcl90cmFu
-c3BhcmVudF9tb2RlKGludGVsX2RwLCB0cnVlKTsNCj4gLQ0KPiAtCS8qDQo+IC0JICogSW4gY2Fz
-ZSBvZiB1bnN1cHBvcnRlZCBudW1iZXIgb2YgTFRUUFJzIG9yIGZhaWxpbmcgdG8gc3dpdGNoIHRv
-DQo+IC0JICogbm9uLXRyYW5zcGFyZW50IG1vZGUgZmFsbC1iYWNrIHRvIHRyYW5zcGFyZW50IGxp
-bmsgdHJhaW5pbmcgbW9kZSwNCj4gLQkgKiBzdGlsbCB0YWtpbmcgaW50byBhY2NvdW50IGFueSBM
-VFRQUiBjb21tb24gbGFuZS0gcmF0ZS9jb3VudCBsaW1pdHMuDQo+IC0JICovDQo+IC0JaWYgKGx0
-dHByX2NvdW50IDwgMCkNCj4gLQkJZ290byBvdXRfcmVzZXRfbHR0cHJfY291bnQ7DQo+IC0NCj4g
-LQlpZiAoIWludGVsX2RwX3NldF9sdHRwcl90cmFuc3BhcmVudF9tb2RlKGludGVsX2RwLCBmYWxz
-ZSkpIHsNCj4gKwlyZXQgPSBkcm1fZHBfbHR0cHJfaW5pdCgmaW50ZWxfZHAtPmF1eCwgbHR0cHJf
-Y291bnQpOw0KPiArCWlmIChyZXQpIHsNCj4gIAkJbHRfZGJnKGludGVsX2RwLCBEUF9QSFlfRFBS
-WCwNCj4gIAkJICAgICAgICJTd2l0Y2hpbmcgdG8gTFRUUFIgbm9uLXRyYW5zcGFyZW50IExUIG1v
-ZGUgZmFpbGVkLCBmYWxsLQ0KPiBiYWNrIHRvIHRyYW5zcGFyZW50IG1vZGVcbiIpOw0KPiANCj4g
-QEAgLTE5Niw2ICsxODAsOCBAQCBzdGF0aWMgaW50IGludGVsX2RwX2luaXRfbHR0cHJfcGh5cyhz
-dHJ1Y3QgaW50ZWxfZHANCj4gKmludGVsX2RwLCBjb25zdCB1OCBkcGNkW0RQXw0KPiAgCQlnb3Rv
-IG91dF9yZXNldF9sdHRwcl9jb3VudDsNCj4gIAl9DQo+IA0KPiArCWludGVsX2RwX3NldF9sdHRw
-cl90cmFuc3BhcmVudF9tb2RlKGludGVsX2RwLCBmYWxzZSk7DQo+ICsNCj4gIAlyZXR1cm4gbHR0
-cHJfY291bnQ7DQo+IA0KPiAgb3V0X3Jlc2V0X2x0dHByX2NvdW50Og0KPiANCj4gLS0NCj4gMi4z
-NC4xDQoNCg==
+On Tue,  4 Feb 2025 20:03:12 +0100
+Danilo Krummrich <dakr@kernel.org> wrote:
+
+> Add the initial documentation of the Nova project.
+>=20
+> The initial project documentation consists out of a brief introduction
+> of the project, as well as project guidelines both general and nova-core
+> specific and a task list for nova-core specifically.
+>=20
+> The task list is divided into tasks for general Rust infrastructure
+> required by the project, tasks regarding GSP enablement and firmware
+> abstraction, general GPU driver tasks as well as tasks related to
+> external API design and test infrastructure.
+>=20
+> Signed-off-by: Danilo Krummrich <dakr@kernel.org>
+> ---
+>   - Add task "Generic register abstraction".
+>   - Change complexity of "Debugfs abstractions".
+> ---
+>  Documentation/gpu/drivers.rst              |   1 +
+>  Documentation/gpu/nova/core/guidelines.rst |  24 ++
+>  Documentation/gpu/nova/core/todo.rst       | 445 +++++++++++++++++++++
+>  Documentation/gpu/nova/guidelines.rst      |  73 ++++
+>  Documentation/gpu/nova/index.rst           |  30 ++
+>  MAINTAINERS                                |   1 +
+>  6 files changed, 574 insertions(+)
+>  create mode 100644 Documentation/gpu/nova/core/guidelines.rst
+>  create mode 100644 Documentation/gpu/nova/core/todo.rst
+>  create mode 100644 Documentation/gpu/nova/guidelines.rst
+>  create mode 100644 Documentation/gpu/nova/index.rst
+>=20
+> diff --git a/Documentation/gpu/drivers.rst b/Documentation/gpu/drivers.rst
+> index 1f17ad0790d7..7c2c5dcb5fd4 100644
+> --- a/Documentation/gpu/drivers.rst
+> +++ b/Documentation/gpu/drivers.rst
+> @@ -24,6 +24,7 @@ GPU Driver Documentation
+>     panfrost
+>     panthor
+>     zynqmp
+> +   nova/index
+> =20
+>  .. only::  subproject and html
+> =20
+> diff --git a/Documentation/gpu/nova/core/guidelines.rst b/Documentation/g=
+pu/nova/core/guidelines.rst
+> new file mode 100644
+> index 000000000000..a389d65d7982
+> --- /dev/null
+> +++ b/Documentation/gpu/nova/core/guidelines.rst
+> @@ -0,0 +1,24 @@
+> +.. SPDX-License-Identifier: (GPL-2.0+ OR MIT)
+> +
+> +=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
+> +Guidelines
+> +=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
+> +
+> +This documents contains the guidelines for nova-core. Additionally, all =
+common
+> +guidelines of the Nova project do apply.
+> +
+> +Driver API
+> +=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
+> +
+> +One main purpose of nova-core is to implement the abstraction around the
+> +firmware interface of GSP and provide a firmware (version) independent A=
+PI for
+> +2nd level drivers, such as nova-drm or the vGPU manager VFIO driver.
+> +
+> +Therefore, it is not permitted to leak firmware (version) specifics, thr=
+ough the
+> +driver API, to 2nd level drivers.
+> +
+> +Acceptance Criteria
+> +=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
+> +
+> +- To the extend possible, patches submitted to nova-core must be tested =
+for
+> +  regressions with all 2nd level drivers.
+> diff --git a/Documentation/gpu/nova/core/todo.rst b/Documentation/gpu/nov=
+a/core/todo.rst
+> new file mode 100644
+> index 000000000000..5e66ec35c5e3
+> --- /dev/null
+> +++ b/Documentation/gpu/nova/core/todo.rst
+> @@ -0,0 +1,445 @@
+> +.. SPDX-License-Identifier: (GPL-2.0+ OR MIT)
+> +
+> +=3D=3D=3D=3D=3D=3D=3D=3D=3D
+> +Task List
+> +=3D=3D=3D=3D=3D=3D=3D=3D=3D
+> +
+
+...
+
+> +
+> +Generic register abstraction
+> +----------------------------
+> +
+> +Work out how register constants and structures can be automatically gene=
+rated
+> +through generalized macros.
+> +
+> +Example:
+> +
+> +.. code-block:: rust
+> +
+> +	register!(BOOT0, 0x0, u32, pci::Bar<SIZE>, Fields [
+> +	   MINOR_REVISION(3:0, RO),
+> +	   MAJOR_REVISION(7:4, RO),
+> +	   REVISION(7:0, RO), // Virtual register combining major and minor rev.
+> +	])
+> +
+
+I think it is better not to tie this to pci::Bar and its operations. It
+would be better to have a intermediate container as the macro param. The
+container holds the register region vaddr pointer, size, read/write traits.
+The macro expands it from there, thus, we can also use this on firmware
+memory structures, e.g. GSP WPR2 info.
+
+Probably we are looking for a even more generic solution/type for deferring
+a structure in the vaddr and generating the the accessing methods
+accordingly. It might also be useful later in GSP message queue
+manipulation, ELF header extraction, page table manipulation? (to avoid
+ambitious unsafe statements in the rust driver)
+
+> +This could expand to something like:
+> +
+> +.. code-block:: rust
+> +
+> +	const BOOT0_OFFSET: usize =3D 0x00000000;
+> +	const BOOT0_MINOR_REVISION_SHIFT: u8 =3D 0;
+> +	const BOOT0_MINOR_REVISION_MASK: u32 =3D 0x0000000f;
+> +	const BOOT0_MAJOR_REVISION_SHIFT: u8 =3D 4;
+> +	const BOOT0_MAJOR_REVISION_MASK: u32 =3D 0x000000f0;
+> +	const BOOT0_REVISION_SHIFT: u8 =3D BOOT0_MINOR_REVISION_SHIFT;
+> +	const BOOT0_REVISION_MASK: u32 =3D BOOT0_MINOR_REVISION_MASK | BOOT0_MA=
+JOR_REVISION_MASK;
+> +
+> +	struct Boot0(u32);
+> +
+> +	impl Boot0 {
+> +	   #[inline]
+> +	   fn read(bar: &RevocableGuard<'_, pci::Bar<SIZE>>) -> Self {
+> +	      Self(bar.readl(BOOT0_OFFSET))
+> +	   }
+> +
+> +	   #[inline]
+> +	   fn minor_revision(&self) -> u32 {
+> +	      (self.0 & BOOT0_MINOR_REVISION_MASK) >> BOOT0_MINOR_REVISION_SHIFT
+> +	   }
+> +
+> +	   #[inline]
+> +	   fn major_revision(&self) -> u32 {
+> +	      (self.0 & BOOT0_MAJOR_REVISION_MASK) >> BOOT0_MAJOR_REVISION_SHIFT
+> +	   }
+> +
+> +	   #[inline]
+> +	   fn revision(&self) -> u32 {
+> +	      (self.0 & BOOT0_REVISION_MASK) >> BOOT0_REVISION_SHIFT
+> +	   }
+> +	}
+> +
+> +Usage:
+> +
+> +.. code-block:: rust
+> +
+> +	let bar =3D bar.try_access().ok_or(ENXIO)?;
+> +
+> +	let boot0 =3D Boot0::read(&bar);
+> +	pr_info!("Revision: {}\n", boot0.revision());
+> +
+> +| Complexity: Advanced
+> +
+> +Delay / Sleep abstractions
+> +--------------------------
+
+...
+
+> +
+> +VRAM memory allocator
+> +---------------------
+> +
+> +Investigate options for a VRAM memory allocator.
+> +
+> +Some possible options:
+> +  - Rust abstractions for
+> +    - RB tree (interval tree) / drm_mm
+> +    - maple_tree
+> +  - native Rust collections
+> +
+> +| Complexity: Advanced
+> +
+
+I am leaning towards having the abstractions at a high level APIs, e.g.
+wrapping drm_mm and possibly the rust side can choose the backend type of
+drm_mm if it really needs a different type of data structure other
+than default supported by drm_mm. If we need more type of data structures,
+we can extend drm_mm in C side. That can save us some efforts.
+
+> +Instance Memory
+> +---------------
+> +
+> +Implement support for instmem (bar2) used to store page tables.
+> +
+> +| Complexity: Intermediate
+> +| Contact: Dave Airlie
+> +
+> +GPU System Processor (GSP)
+> +=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
+=3D=3D
+
+...
+
+> +
+> +External APIs
+> +=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
+> +
+> +nova-core base API
+> +------------------
+> +
+> +Work out the common pieces of the API to connect 2nd level drivers, i.e.=
+ vGPU
+> +manager and nova-drm.
+> +
+> +| Complexity: Advanced
+> +
+> +vGPU manager API
+> +----------------
+> +
+> +Work out the API parts required by the vGPU manager, which are not cover=
+ed by
+> +the base API.
+> +
+> +| Complexity: Advanced
+> +
+> +nova-core C API
+> +---------------
+> +
+> +Implement a C wrapper for the APIs required by the vGPU manager driver.
+> +
+> +| Complexity: Intermediate
+
+Thanks for calling this out.
+
+I believe the "vGPU manager API" is not a standalone task, as many of the
+required APIs will intersect with other components in nova-core.
+
+As one of nova-core=E2=80=99s users, vGPU represents the simplest use case =
+to get
+started with, offering significant value to both nova-core and its users
+in the near term.
+
+I was thinking that if we could align with the folks on making vGPU +
+nova-core our initial short-term goal, it would be beneficial for
+nova-drm's development, since the APIs required for nova-drm are a
+superset of those needed for vGPU.
+
+It would be valuable for us to be involved in key areas related to vGPU,
+including:
+
+- Task review
+- Design discussions
+- Unit testing
+
+Additionally, we are working on a vGPU requirements document that will
+outline the complete API needs for vGPU beyond those already covered in
+the RFC patches. Hope that will be published soon.
+
+> +
+> +Testing
+> +=3D=3D=3D=3D=3D=3D=3D
+> +
+> +CI pipeline
+> +-----------
+> +
+> +Investigate option for continuous integration testing.
+> +
+> +This can go from as simple as running KUnit tests over running (graphics=
+) CTS to
+> +booting up (multiple) guest VMs to test VFIO use-cases.
+> +
+> +It might also be worth to consider the introduction of a new test suite =
+directly
+> +sitting on top of the uAPI for more targeted testing and debugging. Ther=
+e may be
+> +options for collaboration / shared code with the Mesa project.
+> +
+> +| Complexity: Advanced
+> diff --git a/Documentation/gpu/nova/guidelines.rst b/Documentation/gpu/no=
+va/guidelines.rst
+> new file mode 100644
+> index 000000000000..28a959f51c2c
+> --- /dev/null
+> +++ b/Documentation/gpu/nova/guidelines.rst
+> @@ -0,0 +1,73 @@
+> +.. SPDX-License-Identifier: (GPL-2.0+ OR MIT)
+> +
+
+I think this will develop into a maintainer handbook in the future which
+reflects maintainer's requirements, thoughts, tips...maybe we can make it
+explicit? I think it is rules of book that we agree to follow.
+
+A similar one can be found here.
+https://lore.kernel.org/kvm/20230411171651.1067966-1-seanjc@google.com/
+
+> +=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
+> +Guidelines
+> +=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
+> +
+> +This document describes the general project guidelines that apply to nov=
+a-core
+> +and nova-drm.
+> +
+> +Language
+> +=3D=3D=3D=3D=3D=3D=3D=3D
+> +
+> +The Nova project uses the Rust programming language. In this context, the
+> +following rules apply.
+> +
+> +- Unless technically necessary otherwise (e.g. uAPI), any driver code is=
+ written
+> +  in Rust.
+> +
+> +- Direct FFI calls to C kernel APIs must be avoided; instead C kernel AP=
+Is
+> +  should be accessed through shared Rust abstractions.
+> +
+> +- Unless technically necessary, unsafe Rust code must be avoided. In cas=
+e of
+> +  technical necessity, unsafe code should be isolated in a separate comp=
+onent
+> +  providing a safe API for other driver code to use.
+
+Also need to comment why the unsafe is the last possible approach to go.
+the last thing we want to see is "unsafe" flying here and there in a rust
+driver. :)
+
+> +
+> +Style
+> +-----
+> +
+> +All rules of the Rust for Linux project as documented in
+> +:doc:`../../rust/coding-guidelines` apply. Additionally, the following r=
+ules
+> +apply.
+> +
+> +- Code must be formatted with the ``rustfmt`` make target.
+> +
+> +- Code submitted for inclusion into the Nova driver project must pass th=
+e Rust
+> +  linter, which can be enabled with ``CLIPPY=3D1``.
+> +
+
+It would be also helpful to make the process explicit. E.g. sharing your
+command lines used to checking the patches. So folks can align with the
+expected outcome, e.g. command line parameters.
+
+Z.
+
+> +Documentation
+> +=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
+> +
+> +The availability of proper documentation is essential in terms of scalab=
+ility,
+> +accessability for new contributors and maintainability of a project in g=
+eneral,
+> +but especially for a driver running as complex hardware as Nova is targe=
+ting.
+> +
+> +Hence, adding documentation of any kind is very much encouraged by the p=
+roject.
+> +
+> +Besides that, there are some minimum requirements.
+> +
+> +- Every non-private structure needs at least a brief doc comment explain=
+ing the
+> +  semantical sense of the structure, as well as potential locking and li=
+fetime
+> +  requirements. It is encouraged to have the same minimum documentation =
+for
+> +  non-trivial private structures.
+> +
+> +- uAPIs must be fully documented with kernel-doc comments; additionally,=
+ the
+> +  semantical behavior must be explained including potential special or c=
+orner
+> +  cases.
+> +
+> +- The APIs connecting the 1st level driver (nova-core) with 2nd level dr=
+ivers
+> +  must be fully documented. This includes doc comments, potential lockin=
+g and
+> +  lifetime requirements, as well as example code if applicable.
+> +
+> +- Abbreviations must be explained when introduced; terminology must be u=
+niquely
+> +  defined.
+> +
+> +- Register addresses, layouts, shift values and masks must be defined pr=
+operly;
+> +  unless obvious, the semantical sense must be documented. This only app=
+lies if
+> +  the author is able to obtain the corresponding information.
+> +
+> +Acceptance Criteria
+> +=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
+> +
+> +- Patches must only be applied if reviewed by at least one other person =
+on the
+> +  mailing list; this also applies for maintainers.
+> diff --git a/Documentation/gpu/nova/index.rst b/Documentation/gpu/nova/in=
+dex.rst
+> new file mode 100644
+> index 000000000000..2701b3f4af35
+> --- /dev/null
+> +++ b/Documentation/gpu/nova/index.rst
+> @@ -0,0 +1,30 @@
+> +.. SPDX-License-Identifier: (GPL-2.0+ OR MIT)
+> +
+> +=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
+> +nova NVIDIA GPU drivers
+> +=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
+> +
+> +The nova driver project consists out of two separate drivers nova-core a=
+nd
+> +nova-drm and intends to supersede the nouveau driver for NVIDIA GPUs bas=
+ed on
+> +the GPU System Processor (GSP).
+> +
+> +The following documents apply to both nova-core and nova-drm.
+> +
+> +.. toctree::
+> +   :titlesonly:
+> +
+> +   guidelines
+> +
+> +nova-core
+> +=3D=3D=3D=3D=3D=3D=3D=3D=3D
+> +
+> +The nova-core driver is the core driver for NVIDIA GPUs based on GSP. no=
+va-core,
+> +as the 1st level driver, provides an abstraction around the GPUs hard- a=
+nd
+> +firmware interfaces providing a common base for 2nd level drivers, such =
+as the
+> +vGPU manager VFIO driver and the nova-drm driver.
+> +
+> +.. toctree::
+> +   :titlesonly:
+> +
+> +   core/guidelines
+> +   core/todo
+> diff --git a/MAINTAINERS b/MAINTAINERS
+> index f7ddca7de0ef..07455c945834 100644
+> --- a/MAINTAINERS
+> +++ b/MAINTAINERS
+> @@ -7454,6 +7454,7 @@ Q:	https://patchwork.freedesktop.org/project/nouvea=
+u/
+>  B:	https://gitlab.freedesktop.org/drm/nova/-/issues
+>  C:	irc://irc.oftc.net/nouveau
+>  T:	git https://gitlab.freedesktop.org/drm/nova.git nova-next
+> +F:	Documentation/gpu/nova/
+>  F:	drivers/gpu/nova-core/
+> =20
+>  DRM DRIVER FOR OLIMEX LCD-OLINUXINO PANELS
+
