@@ -2,79 +2,83 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id 12B98CBADC1
-	for <lists+nouveau@lfdr.de>; Sat, 13 Dec 2025 13:45:26 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 9F624CBAC70
+	for <lists+nouveau@lfdr.de>; Sat, 13 Dec 2025 13:44:00 +0100 (CET)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 5703010EB0B;
-	Sat, 13 Dec 2025 12:41:36 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 0A4B310EA43;
+	Sat, 13 Dec 2025 12:41:08 +0000 (UTC)
 Authentication-Results: gabe.freedesktop.org;
-	dkim=permerror (0-bit key) header.d=joelfernandes.org header.i=@joelfernandes.org header.b="rUMyxT+k";
+	dkim=permerror (0-bit key) header.d=gmail.com header.i=@gmail.com header.b="M+tAoWu/";
 	dkim-atps=neutral
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from mail-wm1-f45.google.com (mail-wm1-f45.google.com
- [209.85.128.45])
- by gabe.freedesktop.org (Postfix) with ESMTPS id A6B3E10E098
- for <nouveau@lists.freedesktop.org>; Tue,  4 Feb 2025 21:09:25 +0000 (UTC)
-Received: by mail-wm1-f45.google.com with SMTP id
- 5b1f17b1804b1-436202dd7f6so70097095e9.0
- for <nouveau@lists.freedesktop.org>; Tue, 04 Feb 2025 13:09:25 -0800 (PST)
+Received: from mail-pj1-f51.google.com (mail-pj1-f51.google.com
+ [209.85.216.51])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 7F25D10E064;
+ Wed,  5 Feb 2025 14:13:26 +0000 (UTC)
+Received: by mail-pj1-f51.google.com with SMTP id
+ 98e67ed59e1d1-2f9cf019884so338890a91.0; 
+ Wed, 05 Feb 2025 06:13:26 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=joelfernandes.org; s=google; t=1738703364; x=1739308164;
- darn=lists.freedesktop.org; 
+ d=gmail.com; s=20230601; t=1738764806; x=1739369606; darn=lists.freedesktop.org;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:from:to:cc:subject:date
  :message-id:reply-to;
- bh=hU4QrAbDQR1o2bnoBznVmRjsUjgFoPERHNCe0D3R9dg=;
- b=rUMyxT+k+8xP2lzhRtjpJjDyTTP3wWYyNRGZPrEgvLqX5M+fsD/FX/+P8/+yStYCQR
- CaIuRW6liKNA94dEyP0JfyB/U3+vGRjf9CFMCfHSY8sDFc3aqcN/0uq73DCClreCs6b0
- rpoQ8BZrhVt4ox70oDKBRmHugq8o1NtNQ4+sg=
+ bh=y9bBxD6OlYG3QN3t6eEdPcfSBfOJrPnlO3VouFKzOcs=;
+ b=M+tAoWu/0wWllQIxDpWRZO8COJjz7xHvS9niJ7mzWqJRGgYusPYexyou5uusrxHoSg
+ dFApz41x8iBWQgCBtyBSiTUo9JPfgp+V0ZpZv9K+juG00HFqJdWXVfNGGi9rtml4NYaT
+ VHClEerB6EyluJsooFcMhjvz+FFYQ2FnmjAC2oGGF1ax0DWK8LHFHM3k6PV3A7Ug6Dlq
+ zmvEU+De87O13SkgP9sFD7qRAyv+k5DkniTf6a9TWaxUVtq2P2SET0PzAMfPowSSa2VK
+ tfjLxOOrkULvhCeaSd7TK9SVDEmoxI2dN4UwOSWMA4Ry8xKh5g0iM9CVDxwMJKPlASXd
+ M/sQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1738703364; x=1739308164;
+ d=1e100.net; s=20230601; t=1738764806; x=1739369606;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=hU4QrAbDQR1o2bnoBznVmRjsUjgFoPERHNCe0D3R9dg=;
- b=ff48uYlnNQmpKWJYRWKHaZ0qu3N8EH7XdyZOyt/bJDNrIVuwb+yUjfbIpmfOruMZJc
- j6jEPv144qyH2k7EKdKzZpyETt4EMI5e/wdSrnFKUsPTaH6KUYww/CsiPLMTq8/hcNvy
- JixmdZ3xDL/Yw8qgixJvMAY2QB4cOHbCXOidTEeGs5DF1gHF1Z3daDz5r5o9N/vnkxzS
- LEgxSe7fHoeLRPiDnPH5lYY6fU/YobgXMkMKt6tnafkyAUaOJ9psFvkKn+gUK/uycN4J
- 4ZwKg2L+5/6KVcnninGAt172PoRbn8Nwt1TF6YJthElBhNSZHA+JNJ4twkD+H3OYcg1Y
- KFkA==
+ bh=y9bBxD6OlYG3QN3t6eEdPcfSBfOJrPnlO3VouFKzOcs=;
+ b=Dlhy90a5KRl3ib6tBIZ4sUM+grSJ5as7hMOOKe4W8IcId/B/Z3NxBt2O0We7t1YEmK
+ g8n58kvi1EgKEYVab0GSuEmt386Jh9rZtV0EmOBMu9IrSOpjGZEyqaPhlxvUv3MRCfvk
+ mRl8X7gdNfUTpCrZxoLN1qRlRDON8gu8Z9LbqiJHASu2zqBVLnroNiDMa8LOsFqIzPZB
+ mZ5Vxq3U2Ev973muKL/x5dPCbdkwcTW06UdI5WAl0zweH3kl6KcHDP7aVKJut7nNJq1e
+ u45C7ZoF1URincroCUZPZ3KSzWoWb6HxmtGSsOLHXnbem4cjjrTcH9Ccx3iW672TXtOW
+ eCGQ==
 X-Forwarded-Encrypted: i=1;
- AJvYcCVKX/OGYejVRL93f1Xj9lvLW9XssSjJuILqZpz9YS+QdFVQwxi/j1Ucd7ro44pC0/ui+EoTmlWx@lists.freedesktop.org
-X-Gm-Message-State: AOJu0YxvphzlyWbEg1xkeUhj1R8YDnS1ozSxzvcSn7BvgqqcInr9VTmP
- KGeXU9kjcDPebvgWAu0aIP4fIMNrQIWZAGlzhXD4FE8T327tzejxMiDg0mvMit4a/6++9GlILyW
- dHJ4NkqRlY6evdwZ5rTPdpSpvrWQlgqvFxSq4IQ==
-X-Gm-Gg: ASbGncuzltCuA5p/n5dB+c9yxOCeHa7/YMcKZ9KcWX++HgG7n8XB8HEgIHVAKrw36f9
- VRzJf9pd1rDxJqeQelIxjtZXAM6uPIgTnZPDQEpDi1AqcKVdi/K4Vj2lG6uOd04xayqlHh+wF
-X-Google-Smtp-Source: AGHT+IG1wU/phrvdmWOZ6gg4Qkaj9tiLGHlTlII39K2KsIGA/7PJCQGdfM9Y7R/VJVyH/LBFDX1pLGfA1F+6yTJrKno=
-X-Received: by 2002:a05:600c:5492:b0:434:ff25:19a0 with SMTP id
- 5b1f17b1804b1-4390d5697b4mr753735e9.21.1738703363904; Tue, 04 Feb 2025
- 13:09:23 -0800 (PST)
+ AJvYcCUMX6mugx4toGnmmx34glZIPukARWVXuu1JI6ouvH9DyXTqD/BAPeFAXYWuC1Pi14BaOVte/sEF+A==@lists.freedesktop.org,
+ AJvYcCVbkRfoTX+y/7usq4c14ddHn+04S9CntqWSSZcqBIhAh8Yr/+JAuKTRUX5VXJ908bAF9kPRS/mJzas=@lists.freedesktop.org
+X-Gm-Message-State: AOJu0YyGn51LWGzSAWqN6FySa0jhAuxTP0dRMBGYs8IaSgKM3rAiohdy
+ dIW3jprxTembFtXH/ul4oeoTmz4jtJnHj7GElZd9djs9y01yCjzM4SHkuQ0DfqXPf8tR51zTelw
+ ecQ8a+xIgiD0+D3pJBe6D0SZLEvo=
+X-Gm-Gg: ASbGncuodu7ODtqzMNLmzbqBDYNrNHT3S7t3o2lJpU4Rb+27UaUtk+blH2VayWaDN9I
+ mTvKNf+iJg52QEL7jJnlTMuyMtwW565AtgEeME5U44WMdzH0SFsh/2xio5o15DyLRWIZsSS/4
+X-Google-Smtp-Source: AGHT+IF4hKXRVLLC6unmAjENx+zZEHsy43XxaM92zW4ScuMwkiqk1/7Tpba6AbMwT3b4dDa6OhFd6Tj7HQNu4hPCPUs=
+X-Received: by 2002:a17:90b:4f4b:b0:2ee:f59a:94d3 with SMTP id
+ 98e67ed59e1d1-2f9e06b216cmr1912666a91.0.1738764805841; Wed, 05 Feb 2025
+ 06:13:25 -0800 (PST)
 MIME-Version: 1.0
-References: <20250131220432.17717-1-dakr@kernel.org>
- <20250203202410.GA3936980@joelbox2> <Z6Jgf-cVt_AlM6Qd@cassiopeiae>
-In-Reply-To: <Z6Jgf-cVt_AlM6Qd@cassiopeiae>
-From: Joel Fernandes <joel@joelfernandes.org>
-Date: Tue, 4 Feb 2025 16:09:13 -0500
-X-Gm-Features: AWEUYZmCOUkLm9MpjL2MDd5EZQ1gMNJEykz-KDiUu51t6tTmXr73ZDfIU09FM3Q
-Message-ID: <CAEXW_YQQey_QweH+favrXPhrEkVwyqCXRG+UBn-oG6wb+n4+gA@mail.gmail.com>
-Subject: Re: [PATCH 1/2] gpu: nova-core: add initial driver stub
-To: Danilo Krummrich <dakr@kernel.org>
-Cc: airlied@gmail.com, simona@ffwll.ch, corbet@lwn.net, 
+References: <20250204190400.2550-1-dakr@kernel.org>
+ <20250204190400.2550-2-dakr@kernel.org>
+ <20250205155646.00003c2f@nvidia.com>
+In-Reply-To: <20250205155646.00003c2f@nvidia.com>
+From: Miguel Ojeda <miguel.ojeda.sandonis@gmail.com>
+Date: Wed, 5 Feb 2025 15:13:12 +0100
+X-Gm-Features: AWEUYZkGVXHP4hrFG-5_ihud3NGINPm5TNS2CNAPtoXmocfUh6RQ24GiptUl5w0
+Message-ID: <CANiq72mxKhCudmRaS=gwnC=gjkCLMhZcC2ZpfzKKaGX1Hivz9g@mail.gmail.com>
+Subject: Re: [PATCH v2 2/2] gpu: nova-core: add initial documentation
+To: Zhi Wang <zhiw@nvidia.com>
+Cc: Danilo Krummrich <dakr@kernel.org>, airlied@gmail.com, simona@ffwll.ch,
+ corbet@lwn.net, 
  maarten.lankhorst@linux.intel.com, mripard@kernel.org, tzimmermann@suse.de, 
- ajanulgu@redhat.com, lyude@redhat.com, pstanner@redhat.com, zhiw@nvidia.com, 
- cjia@nvidia.com, jhubbard@nvidia.com, bskeggs@nvidia.com, acurrid@nvidia.com, 
- ojeda@kernel.org, alex.gaynor@gmail.com, boqun.feng@gmail.com, 
- gary@garyguo.net, bjorn3_gh@protonmail.com, benno.lossin@proton.me, 
- a.hindborg@kernel.org, aliceryhl@google.com, tmgross@umich.edu, 
- dri-devel@lists.freedesktop.org, linux-doc@vger.kernel.org, 
- linux-kernel@vger.kernel.org, nouveau@lists.freedesktop.org, 
- rust-for-linux@vger.kernel.org, joelagnelf@nvidia.com
+ ajanulgu@redhat.com, lyude@redhat.com, pstanner@redhat.com, cjia@nvidia.com, 
+ jhubbard@nvidia.com, bskeggs@nvidia.com, acurrid@nvidia.com, ojeda@kernel.org, 
+ alex.gaynor@gmail.com, boqun.feng@gmail.com, gary@garyguo.net, 
+ bjorn3_gh@protonmail.com, benno.lossin@proton.me, a.hindborg@kernel.org, 
+ aliceryhl@google.com, tmgross@umich.edu, dri-devel@lists.freedesktop.org, 
+ linux-doc@vger.kernel.org, linux-kernel@vger.kernel.org, 
+ nouveau@lists.freedesktop.org, rust-for-linux@vger.kernel.org
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
-X-Mailman-Approved-At: Sat, 13 Dec 2025 12:40:52 +0000
+X-Mailman-Approved-At: Sat, 13 Dec 2025 12:40:47 +0000
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -89,35 +93,27 @@ List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-On Tue, Feb 4, 2025 at 1:46=E2=80=AFPM Danilo Krummrich <dakr@kernel.org> w=
-rote:
+On Wed, Feb 5, 2025 at 2:57=E2=80=AFPM Zhi Wang <zhiw@nvidia.com> wrote:
 >
-> On Mon, Feb 03, 2025 at 03:24:10PM -0500, Joel Fernandes wrote:
-> > Hi Danilo,
-> >
-> > On Fri, Jan 31, 2025 at 11:04:24PM +0100, Danilo Krummrich wrote:
-> > > +#[pin_data]
-> > > +pub(crate) struct NovaCore {
-> > > +    #[pin]
-> > > +    pub(crate) gpu: Gpu,
-> > > +}
-> >
-> > I am curious what is the need for pinning here in the patch in its curr=
-ent
-> > form, is it for future-proofing?
->
-> Yes, it is.
->
-> It's not always needed, but since I know that further down the road we'll=
- need
-> at least a few mutexes, it seemed reasonable to already consider it.
+> It would be also helpful to make the process explicit. E.g. sharing your
+> command lines used to checking the patches. So folks can align with the
+> expected outcome, e.g. command line parameters.
 
-It seems reasonable to me as well, I would probably also add a code
-comment there about what is expected to be unmovable in the future
-(Just in case any code readers don't raise the same question I was
-raising).
+These two guidelines (and generally the few others above) are intended
+to apply to all Rust code in the kernel (i.e. not just `rust/`) --
+their command lines are mentioned in `Documentation/rust/`. We could
+add a note to make that clearer if that helps. So I would suggest
+avoiding repetition here by referencing those.
 
-The source of the confusion for a reader could be the documentation
-expecting a #[pin].
+We also mention it in our "Subsystem Profile document" at
+https://rust-for-linux.com/contributing#submit-checklist-addendum.
 
- - Joel
+> > +The availability of proper documentation is essential in terms of scal=
+ability,
+> > +accessability for new contributors and maintainability of a project in=
+ general,
+
+Typo: accessibility?
+
+Cheers,
+Miguel
