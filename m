@@ -2,75 +2,75 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id 2C577A2F8D9
-	for <lists+nouveau@lfdr.de>; Mon, 10 Feb 2025 20:38:37 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 6FA19A2F8DA
+	for <lists+nouveau@lfdr.de>; Mon, 10 Feb 2025 20:38:41 +0100 (CET)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id D21F510E38C;
-	Mon, 10 Feb 2025 19:38:35 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 238AE10E3B4;
+	Mon, 10 Feb 2025 19:38:40 +0000 (UTC)
 Authentication-Results: gabe.freedesktop.org;
-	dkim=pass (1024-bit key; unprotected) header.d=redhat.com header.i=@redhat.com header.b="ikpo1MCT";
+	dkim=pass (1024-bit key; unprotected) header.d=redhat.com header.i=@redhat.com header.b="PdE02XrA";
 	dkim-atps=neutral
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
 Received: from us-smtp-delivery-124.mimecast.com
  (us-smtp-delivery-124.mimecast.com [170.10.129.124])
- by gabe.freedesktop.org (Postfix) with ESMTPS id D703910E38C
- for <nouveau@lists.freedesktop.org>; Mon, 10 Feb 2025 19:38:34 +0000 (UTC)
+ by gabe.freedesktop.org (Postfix) with ESMTPS id E243C10E601
+ for <nouveau@lists.freedesktop.org>; Mon, 10 Feb 2025 19:38:38 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1739216314;
+ s=mimecast20190719; t=1739216318;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:content-type:content-type:
  content-transfer-encoding:content-transfer-encoding:
  in-reply-to:in-reply-to:references:references;
- bh=NPITbiV5yRtNZIanqm2v+SKlb5hdEoVu/zyhpD+AgeU=;
- b=ikpo1MCTffr8Ho/CsjTxQinDzBJSBDm6LK1sMOgGp3IeFkuZ97IiW/rcOxRahPXs2RnVNs
- UB/aNkXi1DB6RTEIKPoJ69lKDqtUfbor+VUMI/31D+kaJ2UE4q8zU9NGL4O+TF+ZPf7h+I
- 8mrTEJmoqpQwZfgdk3D9cL5yoKTgl7c=
-Received: from mail-wm1-f72.google.com (mail-wm1-f72.google.com
- [209.85.128.72]) by relay.mimecast.com with ESMTP with STARTTLS
+ bh=8sC+CKPivo9nJ2nwAVN+E4SAgEKJPEiCVQrD/mzwcqM=;
+ b=PdE02XrAQ0Z3/Ks7U0EExqc5jHg+iXq8xaygP2zD56pBR0wV0Xp9iIJZLOARoAfeLZDwTi
+ h8Za3ZPWLahslaLCX/0DTXTI+vBvT1koONkJyptkdL10130Sp+aoYjPXHh90X4coRYib3u
+ +Nj62xbcvj14Jd8gYNiHMowR1L6wwAA=
+Received: from mail-wm1-f71.google.com (mail-wm1-f71.google.com
+ [209.85.128.71]) by relay.mimecast.com with ESMTP with STARTTLS
  (version=TLSv1.3, cipher=TLS_AES_256_GCM_SHA384) id
- us-mta-665-EioNtNJ-Nz61i_85P-nbjQ-1; Mon, 10 Feb 2025 14:38:32 -0500
-X-MC-Unique: EioNtNJ-Nz61i_85P-nbjQ-1
-X-Mimecast-MFC-AGG-ID: EioNtNJ-Nz61i_85P-nbjQ
-Received: by mail-wm1-f72.google.com with SMTP id
- 5b1f17b1804b1-4393e89e910so9544445e9.0
- for <nouveau@lists.freedesktop.org>; Mon, 10 Feb 2025 11:38:32 -0800 (PST)
+ us-mta-141-egbQxrHYM1WvxDS47wKzeQ-1; Mon, 10 Feb 2025 14:38:36 -0500
+X-MC-Unique: egbQxrHYM1WvxDS47wKzeQ-1
+X-Mimecast-MFC-AGG-ID: egbQxrHYM1WvxDS47wKzeQ
+Received: by mail-wm1-f71.google.com with SMTP id
+ 5b1f17b1804b1-4394c489babso2566045e9.1
+ for <nouveau@lists.freedesktop.org>; Mon, 10 Feb 2025 11:38:36 -0800 (PST)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1739216311; x=1739821111;
+ d=1e100.net; s=20230601; t=1739216315; x=1739821115;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=NPITbiV5yRtNZIanqm2v+SKlb5hdEoVu/zyhpD+AgeU=;
- b=J4tfRPIaony9Z1l9ZL+1gbO3Xgn7FKefK3bNyekOE5hfoE6uXxNSycXLi8LeuKqeq/
- nDCqhP5fcmm50rcoPgwp07ePiewuohOgmCdovibzvRQAWZcEZj8UWVBZMRrxSRmMyWgP
- AVgR/4eWUprzgKR0hVk/Db5XSmdcNzKBdLCGVq8wW1WQuLKtk237Y8gT/tQQvQk59X60
- bpLPe4+9WXnjf5wNlUcHB/LOdnCURSGbK7rHMYnC7h7qcjZxLCK2uHvFO5lCfdF5UsTs
- NJYt7XvzQWkWXOUfz4KE74FwWJkQgP9e32bDjvPn8t5KlXbZj3TZWI8nKo9K2O1z78a8
- DnVg==
+ bh=8sC+CKPivo9nJ2nwAVN+E4SAgEKJPEiCVQrD/mzwcqM=;
+ b=ccUxuyC15LBEHNAJc8nRnTIVm2yiKVf/sFBoNg8Jakj30SRtcfJZpL7hcru+MPbCg/
+ 0A+3G+RDebiw5C2UzVX9LFbyF2nycFkyxV6Xk9ITQGu4Qt+A0HWkpG4tb4eiXST/4J+s
+ O8r0VyGCvqgAgXakXjxHPSg7JtbFbYOd2ft21+TId+H61puHMsfZaeutg5ssF+Ebtdsr
+ mQpuvCvp6jpOY1BHn/qsZI5ZwgUqOVz8i71aZU4GTC3vVk9qWgWpQ47IWfNx5Pz5h4Q/
+ qrCoT5XA9wd+Y3RdYHikQ1Z+Lh7+Tj+dHCCIq4u3235PNnFNDWTsB0B0vWVES/eRp09L
+ NUWQ==
 X-Forwarded-Encrypted: i=1;
- AJvYcCUNZmih6A5tMy700JtZ9zo1HfSbOOWJPi7pZHsdIODQ5CFp2vRqO7k6qvC6ZhtMyH1ZgEOTStuj@lists.freedesktop.org
-X-Gm-Message-State: AOJu0YyBynE5/mbshBm9oF46JGQVDU40T4uRlJrq3Ik6FzZjUEaK8ufv
- mVABq4j0Fy8lRe+vKOKNg9mFdh/k8hOOMnSnCB+0PKJVEF2pBDo252d0s4HYcX7HV0DGBlHxmVq
- hbWMQ/SM57yVBH5W42W39G0WNUCNe6wNEBq5jO4VAPygdJIEEvQroWqeTnqgMH/Y=
-X-Gm-Gg: ASbGnctY7b7MbRC8juH+YtExWekgMvhTriFc3ZjHUZGev+wZghxltQEtD+2QjG3KmyR
- 1fQ5RwMMWEyx2GfbJdTfq3vOIprQoPTbZlThzkt64vmLUyEjGYVTGMhZhWjM0o33iQxjpZNhtkX
- vHzca5lo6nvxhDgPJKbKoToqZg0CW3P1NQ2xJC7rpWUDpG52rZKKEG2aGmBI1rGL5EaDR/4iCTa
- 4QIUOolCEinTxI7m//kDm4HBWivFltsLuHwMmty5AVzKls1tjsVMrcxJz1j0OSGWpLyMAvMBrwY
- 4Z40cZJZqxZn5OXJLxRH5sVoqycCKX2/PZg0/ANSvqfs7Drf4LD6aNbvijU9+fpgsw==
-X-Received: by 2002:a05:600c:500d:b0:439:3dc0:29b6 with SMTP id
- 5b1f17b1804b1-4393dc02be1mr57220295e9.2.1739216311480; 
- Mon, 10 Feb 2025 11:38:31 -0800 (PST)
-X-Google-Smtp-Source: AGHT+IHbUQzL3Yq1p3VwDR+lxH773I/PQZNBDcgTpUgE2nEJHxULXhio/DNj6yNxLtRtBjWIFSwTIg==
-X-Received: by 2002:a05:600c:500d:b0:439:3dc0:29b6 with SMTP id
- 5b1f17b1804b1-4393dc02be1mr57220015e9.2.1739216311167; 
- Mon, 10 Feb 2025 11:38:31 -0800 (PST)
+ AJvYcCXuke6csFOpmQ29bINzm8v07qfQ2nd6Lq3lHG+vMLWWBMQZwOuohUuaxwGS11uHQ3mMEuPqNtT6@lists.freedesktop.org
+X-Gm-Message-State: AOJu0YydxbFj6BshM4NfyCo1QKn3mmc0PgolTbn4dlYhz5b6KzVIJYA5
+ r++ODX8b5tLozjh4Tvt/dEja3SrGULd9bogzxkFCbSKdBvbsdchifSTfH2d4104LnT0c46FcUUX
+ xPSRaMNjibo4ym2JkNVy9c5+BxYKIAF22IhF2KEUf+a8By85ocqluz81GCu64K8U=
+X-Gm-Gg: ASbGnctoX35Dfo20cMT1vRMAVW4JX8vojfO3iHCWZPS7C06B908L3WW2Z4OTHU0Qawo
+ HFD6HkpXqaKZkzyOPzaje/NsZvJm3s/LaojK6qWXY2Zk67wQVRncmolMZsrsgP6V6meeDNNCokT
+ z5K6+SUt5hZL8eW0BqIE13RDVYb5Rn603txCTigi7NcBGYXZ6s0v18SRL2nEDbUrmte3DggYOKn
+ diDnAOH4NHwss+zXKe5z0RMGHFmmq6tR86TFB+nJ+IvRi2ZuMI06N/ea31vV1MYnTCJE0p9pGbN
+ 6168gK/06bRtB7xxMKhDCsdXthHaM1Vz65ejOxljnRRPtQeRqMCuRpBAQEEcmWgtpw==
+X-Received: by 2002:a05:600c:4e91:b0:439:4637:9d9 with SMTP id
+ 5b1f17b1804b1-43946370d97mr43287285e9.12.1739216315592; 
+ Mon, 10 Feb 2025 11:38:35 -0800 (PST)
+X-Google-Smtp-Source: AGHT+IF6B7q2dhfsb9dj8LY+8M1CJU6DFUQTZK7m2VERaPDmly8AB+qIiZRItOcPeyw5uy4LKosd2g==
+X-Received: by 2002:a05:600c:4e91:b0:439:4637:9d9 with SMTP id
+ 5b1f17b1804b1-43946370d97mr43287075e9.12.1739216315147; 
+ Mon, 10 Feb 2025 11:38:35 -0800 (PST)
 Received: from localhost
  (p200300cbc734b80012c465cd348aaee6.dip0.t-ipconnect.de.
  [2003:cb:c734:b800:12c4:65cd:348a:aee6])
  by smtp.gmail.com with UTF8SMTPSA id
- 5b1f17b1804b1-4390d933523sm192523445e9.1.2025.02.10.11.38.27
+ 5b1f17b1804b1-4390d94d802sm195260345e9.12.2025.02.10.11.38.31
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Mon, 10 Feb 2025 11:38:29 -0800 (PST)
+ Mon, 10 Feb 2025 11:38:33 -0800 (PST)
 From: David Hildenbrand <david@redhat.com>
 To: linux-kernel@vger.kernel.org
 Cc: linux-doc@vger.kernel.org, dri-devel@lists.freedesktop.org,
@@ -90,16 +90,16 @@ Cc: linux-doc@vger.kernel.org, dri-devel@lists.freedesktop.org,
  Vlastimil Babka <vbabka@suse.cz>, Jann Horn <jannh@google.com>,
  Pasha Tatashin <pasha.tatashin@soleen.com>, Peter Xu <peterx@redhat.com>,
  Alistair Popple <apopple@nvidia.com>, Jason Gunthorpe <jgg@nvidia.com>
-Subject: [PATCH v2 07/17] mm/page_vma_mapped: device-exclusive entries are not
- migration entries
-Date: Mon, 10 Feb 2025 20:37:49 +0100
-Message-ID: <20250210193801.781278-8-david@redhat.com>
+Subject: [PATCH v2 08/17] kernel/events/uprobes: handle device-exclusive
+ entries correctly in __replace_page()
+Date: Mon, 10 Feb 2025 20:37:50 +0100
+Message-ID: <20250210193801.781278-9-david@redhat.com>
 X-Mailer: git-send-email 2.48.1
 In-Reply-To: <20250210193801.781278-1-david@redhat.com>
 References: <20250210193801.781278-1-david@redhat.com>
 MIME-Version: 1.0
 X-Mimecast-Spam-Score: 0
-X-Mimecast-MFC-PROC-ID: SeTMm3mzGwi6h7i9x_Pn2qn4dBKrZgykbi9VUAGje4I_1739216311
+X-Mimecast-MFC-PROC-ID: M4aEzB8H8Ml0p4TChA_h5o-pIOPIecMIsk9mNdR0r28_1739216316
 X-Mimecast-Originator: redhat.com
 Content-Transfer-Encoding: 8bit
 content-type: text/plain; charset="US-ASCII"; x-default=true
@@ -117,35 +117,66 @@ List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-It's unclear why they would be considered migration entries; they are
-not.
+Ever since commit b756a3b5e7ea ("mm: device exclusive memory access")
+we can return with a device-exclusive entry from page_vma_mapped_walk().
 
-Likely we'll never really trigger that case in practice, because
-migration (including folio split) of a folio that has device-exclusive
-entries is never started, as we would detect "additional references":
-device-exclusive entries adjust the mapcount, but not the refcount.
+__replace_page() is not prepared for that, so teach it about these
+PFN swap PTEs. Note that device-private entries are so far not
+applicable on that path, because GUP would never have returned such
+folios (conversion to device-private happens by page migration, not
+in-place conversion of the PTE).
+
+There is a race between GUP and us locking the folio to look it up
+using page_vma_mapped_walk(), so this is likely a fix (unless something
+else could prevent that race, but it doesn't look like). pte_pfn() on
+something that is not a present pte could give use garbage, and we'd
+wrongly mess up the mapcount because it was already adjusted by calling
+folio_remove_rmap_pte() when making the entry device-exclusive.
 
 Fixes: b756a3b5e7ea ("mm: device exclusive memory access")
-Reviewed-by: Alistair Popple <apopple@nvidia.com>
 Signed-off-by: David Hildenbrand <david@redhat.com>
 ---
- mm/page_vma_mapped.c | 3 +--
- 1 file changed, 1 insertion(+), 2 deletions(-)
+ kernel/events/uprobes.c | 13 ++++++++++++-
+ 1 file changed, 12 insertions(+), 1 deletion(-)
 
-diff --git a/mm/page_vma_mapped.c b/mm/page_vma_mapped.c
-index 81839a9e74f16..32679be22d30c 100644
---- a/mm/page_vma_mapped.c
-+++ b/mm/page_vma_mapped.c
-@@ -111,8 +111,7 @@ static bool check_pte(struct page_vma_mapped_walk *pvmw)
- 			return false;
- 		entry = pte_to_swp_entry(ptent);
+diff --git a/kernel/events/uprobes.c b/kernel/events/uprobes.c
+index 2ca797cbe465f..cd6105b100325 100644
+--- a/kernel/events/uprobes.c
++++ b/kernel/events/uprobes.c
+@@ -173,6 +173,7 @@ static int __replace_page(struct vm_area_struct *vma, unsigned long addr,
+ 	DEFINE_FOLIO_VMA_WALK(pvmw, old_folio, vma, addr, 0);
+ 	int err;
+ 	struct mmu_notifier_range range;
++	pte_t pte;
  
--		if (!is_migration_entry(entry) &&
--		    !is_device_exclusive_entry(entry))
-+		if (!is_migration_entry(entry))
- 			return false;
+ 	mmu_notifier_range_init(&range, MMU_NOTIFY_CLEAR, 0, mm, addr,
+ 				addr + PAGE_SIZE);
+@@ -192,6 +193,16 @@ static int __replace_page(struct vm_area_struct *vma, unsigned long addr,
+ 	if (!page_vma_mapped_walk(&pvmw))
+ 		goto unlock;
+ 	VM_BUG_ON_PAGE(addr != pvmw.address, old_page);
++	pte = ptep_get(pvmw.pte);
++
++	/*
++	 * Handle PFN swap PTES, such as device-exclusive ones, that actually
++	 * map pages: simply trigger GUP again to fix it up.
++	 */
++	if (unlikely(!pte_present(pte))) {
++		page_vma_mapped_walk_done(&pvmw);
++		goto unlock;
++	}
  
- 		pfn = swp_offset_pfn(entry);
+ 	if (new_page) {
+ 		folio_get(new_folio);
+@@ -206,7 +217,7 @@ static int __replace_page(struct vm_area_struct *vma, unsigned long addr,
+ 		inc_mm_counter(mm, MM_ANONPAGES);
+ 	}
+ 
+-	flush_cache_page(vma, addr, pte_pfn(ptep_get(pvmw.pte)));
++	flush_cache_page(vma, addr, pte_pfn(pte));
+ 	ptep_clear_flush(vma, addr, pvmw.pte);
+ 	if (new_page)
+ 		set_pte_at(mm, addr, pvmw.pte,
 -- 
 2.48.1
 
