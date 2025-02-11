@@ -2,62 +2,155 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id C5B00A30408
-	for <lists+nouveau@lfdr.de>; Tue, 11 Feb 2025 08:00:09 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 38256A305D2
+	for <lists+nouveau@lfdr.de>; Tue, 11 Feb 2025 09:34:06 +0100 (CET)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 06DE410E426;
-	Tue, 11 Feb 2025 07:00:08 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id DBEF010E443;
+	Tue, 11 Feb 2025 08:34:04 +0000 (UTC)
 Authentication-Results: gabe.freedesktop.org;
-	dkim=pass (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="GI2gfjNc";
+	dkim=pass (1024-bit key; unprotected) header.d=redhat.com header.i=@redhat.com header.b="BZJJFXQs";
 	dkim-atps=neutral
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from dfw.source.kernel.org (dfw.source.kernel.org [139.178.84.217])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 0B50310E424;
- Tue, 11 Feb 2025 07:00:07 +0000 (UTC)
-Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by dfw.source.kernel.org (Postfix) with ESMTP id 549FA5C141C;
- Tue, 11 Feb 2025 06:59:26 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 6E770C4CEDD;
- Tue, 11 Feb 2025 07:00:05 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1739257205;
- bh=2Of0rA5FoGn4ZTHvRWUGZwrrx3D8metj3Q4juNaw1eM=;
- h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
- b=GI2gfjNcDnwg7GzDatzEEZWfdJYDwAQFrC79MEvER1PMZLr7IEBISVpIOBY+WVS/O
- Gv8Lp5iEfvSod7fn0czmeJmEGHThHHxD6wpiXBFV1nkPXHa9njgo6XN2sS6Rx4U67S
- sK63mMvK5ma/GUUgHThjzPIYwzhBUYy6KcmWJ2zWLBgCMb0O+5DZpMFv0OzEoV4Kmt
- B5434/VJqwbdrTCswBVUb0QbiYOXhnKk4JdWUR5CiSq6lfFLOFAyW6GydavzlbWW19
- 6gVh1UsyCquTPBGSNfLBRtN9/TduDjrWCgMDEVYeiuiF24cPFXuKgba7glsc/7wRYn
- KUj/R737RmeTQ==
-From: SeongJae Park <sj@kernel.org>
-To: David Hildenbrand <david@redhat.com>
-Cc: SeongJae Park <sj@kernel.org>, linux-kernel@vger.kernel.org,
+Received: from us-smtp-delivery-124.mimecast.com
+ (us-smtp-delivery-124.mimecast.com [170.10.133.124])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 0DC6610E444
+ for <nouveau@lists.freedesktop.org>; Tue, 11 Feb 2025 08:34:02 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
+ s=mimecast20190719; t=1739262842;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ content-transfer-encoding:content-transfer-encoding:
+ in-reply-to:in-reply-to:references:references:autocrypt:autocrypt;
+ bh=mIqIp1BIbRZ5jFRcS7Am3BCGDHCX3wHlAnSNlNmFiWQ=;
+ b=BZJJFXQsViIkEimABulVkmWR3bJc2iqVVaU6Jbp6miWED9r0jT12jek0hp2nl+uzw9EdeU
+ VyW+JwkWogb9OwlW3eG2l+pJ1A8TlV+avv926kBRY3Mt6VXMe+GSthz1px5gOWWPMoiC82
+ A7FXJpXPMk+9Miu0jWOIB1V0NLrU0ag=
+Received: from mail-wm1-f69.google.com (mail-wm1-f69.google.com
+ [209.85.128.69]) by relay.mimecast.com with ESMTP with STARTTLS
+ (version=TLSv1.3, cipher=TLS_AES_256_GCM_SHA384) id
+ us-mta-410-zC6Ue-LNPsS7OMxwZk1LRg-1; Tue, 11 Feb 2025 03:34:00 -0500
+X-MC-Unique: zC6Ue-LNPsS7OMxwZk1LRg-1
+X-Mimecast-MFC-AGG-ID: zC6Ue-LNPsS7OMxwZk1LRg
+Received: by mail-wm1-f69.google.com with SMTP id
+ 5b1f17b1804b1-43942e82719so14089795e9.2
+ for <nouveau@lists.freedesktop.org>; Tue, 11 Feb 2025 00:34:00 -0800 (PST)
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1739262839; x=1739867639;
+ h=content-transfer-encoding:in-reply-to:organization:autocrypt
+ :content-language:from:references:cc:to:subject:user-agent
+ :mime-version:date:message-id:x-gm-message-state:from:to:cc:subject
+ :date:message-id:reply-to;
+ bh=mIqIp1BIbRZ5jFRcS7Am3BCGDHCX3wHlAnSNlNmFiWQ=;
+ b=th45/mGhwpIT5IzoZRAQmQ5API3oLcIa0iXYtnR0PWValxPoJaJZFnyTnbTBMMPioG
+ LQ3ScaPB0n7YJbxb8iKgvkoH8dtxF1tCL7L7v++Q4p4WTBbYnBZYZAmckKN+eDuioOkf
+ 8aeYqHa9kGz03SvAJkY9Tojl1N9Bsyn8aXmRdgBItf3ZJtYfcXgezF0aRbtrtWju5nGX
+ 8xQYOSSy36ssLZTWUE/J8yNjG9tExTFBJPZF55v/zCF0jRuSejGIfrS4RNnELamNtcKL
+ LU40iEuKr6NyjHqv48AjuzT8strnWtv20oNmMgo732bTO/6u5mATJTdPfx8hYEkBPSUt
+ jyEQ==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCW7IHA6nmSwpdwEFacaLWpoTv4cyvA9wvX2tKCvbHSNDRpiYS0k+2+5Kw/7MitnUVAlGN5+HMhv@lists.freedesktop.org
+X-Gm-Message-State: AOJu0YzUNGfB/PPyN02Ya9tojtIBgtjOF7Irayr3gTkA7nI1pSXYTML2
+ 0d0qI3Xqxc+4/VIKowoGXCHVDd2y1s1fvrQJlFL9qVfiJ+yBARnJJhKLBDqVBJ3dSu6wazqkTSB
+ UTenk3zcrMxqyu9/HC3U1JZ7q0SWP+eBTiwqK7AS3F24H/VgUhI9MJsQx3POzpXQ=
+X-Gm-Gg: ASbGncuDUu2ODV0/h3rclMhqEFePribQJPkqJD2mASby8KCFegC+WzJT+FT3xCUmOf0
+ 2v3wk3/+K4wRTTRkxAkQd0FAy2YI6W8NZ3ZRzHVieFE/CoqDME2QlMQ36i+ghDlTuTLKHIEg11H
+ hTsVaMjIv/FiTPCmC7+dazHCXyyOXKqLReRzy+AXWLGu29Dtr9alZIMz79I/R51SRtG0SCS3lh4
+ VYOgPT2OucoXCROnVWa3HvUFnQH8eQuMI0iWdVPlAiT8gUjEZYSFWr8l1Ctb1aOGPqByG/PBOM5
+ 75Tzpxt3VV1mTP3xoxvcFYekqhnVsPCtI/FE9V4Df4vNiA==
+X-Received: by 2002:a05:600c:358f:b0:436:1bbe:f686 with SMTP id
+ 5b1f17b1804b1-439249a83c0mr109645965e9.21.1739262839416; 
+ Tue, 11 Feb 2025 00:33:59 -0800 (PST)
+X-Google-Smtp-Source: AGHT+IEJyNq+mZpSMIMzz0wnTiImVt/FUDNeInl/wSkrB9SyIlWYR/M5mlCRyd/qU2Yby5bdkaf4JQ==
+X-Received: by 2002:a05:600c:358f:b0:436:1bbe:f686 with SMTP id
+ 5b1f17b1804b1-439249a83c0mr109645555e9.21.1739262838972; 
+ Tue, 11 Feb 2025 00:33:58 -0800 (PST)
+Received: from ?IPV6:2a01:599:929:885b:12c0:a824:1abd:41c4?
+ ([2a01:599:929:885b:12c0:a824:1abd:41c4])
+ by smtp.gmail.com with ESMTPSA id
+ 5b1f17b1804b1-4394136fb8bsm65885945e9.29.2025.02.11.00.33.55
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Tue, 11 Feb 2025 00:33:57 -0800 (PST)
+Message-ID: <48fd75b9-696e-402c-95bd-55f2f0e24dfc@redhat.com>
+Date: Tue, 11 Feb 2025 09:33:54 +0100
+MIME-Version: 1.0
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v2 03/17] mm/rmap: convert make_device_exclusive_range()
+ to make_device_exclusive()
+To: Andrew Morton <akpm@linux-foundation.org>
+Cc: linux-kernel@vger.kernel.org, linux-doc@vger.kernel.org,
  dri-devel@lists.freedesktop.org, linux-mm@kvack.org,
  nouveau@lists.freedesktop.org, linux-trace-kernel@vger.kernel.org,
  linux-perf-users@vger.kernel.org, damon@lists.linux.dev,
- Andrew Morton <akpm@linux-foundation.org>,
- =?UTF-8?q?J=C3=A9r=C3=B4me=20Glisse?= <jglisse@redhat.com>,
+ =?UTF-8?B?SsOpcsO0bWUgR2xpc3Nl?= <jglisse@redhat.com>,
  Jonathan Corbet <corbet@lwn.net>, Alex Shi <alexs@kernel.org>,
  Yanteng Si <si.yanteng@linux.dev>, Karol Herbst <kherbst@redhat.com>,
  Lyude Paul <lyude@redhat.com>, Danilo Krummrich <dakr@kernel.org>,
  David Airlie <airlied@gmail.com>, Simona Vetter <simona@ffwll.ch>,
  Masami Hiramatsu <mhiramat@kernel.org>, Oleg Nesterov <oleg@redhat.com>,
- Peter Zijlstra <peterz@infradead.org>,
+ Peter Zijlstra <peterz@infradead.org>, SeongJae Park <sj@kernel.org>,
  "Liam R. Howlett" <Liam.Howlett@oracle.com>,
  Lorenzo Stoakes <lorenzo.stoakes@oracle.com>,
  Vlastimil Babka <vbabka@suse.cz>, Jann Horn <jannh@google.com>,
  Pasha Tatashin <pasha.tatashin@soleen.com>, Peter Xu <peterx@redhat.com>,
- Alistair Popple <apopple@nvidia.com>, Jason Gunthorpe <jgg@nvidia.com>
-Subject: Re: [PATCH v2 15/17] mm/damon: handle device-exclusive entries
- correctly in damon_folio_mkold_one()
-Date: Mon, 10 Feb 2025 23:00:02 -0800
-Message-Id: <20250211070002.6005-1-sj@kernel.org>
-X-Mailer: git-send-email 2.39.5
-In-Reply-To: <20250210193801.781278-16-david@redhat.com>
-References: 
-MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+ Alistair Popple <apopple@nvidia.com>, Jason Gunthorpe <jgg@nvidia.com>,
+ Simona Vetter <simona.vetter@ffwll.ch>
+References: <20250210193801.781278-1-david@redhat.com>
+ <20250210193801.781278-4-david@redhat.com>
+ <20250210210001.5dc68b38eb1bfa44d0fd78f6@linux-foundation.org>
+From: David Hildenbrand <david@redhat.com>
+Autocrypt: addr=david@redhat.com; keydata=
+ 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
+ WNyWQQ==
+Organization: Red Hat
+In-Reply-To: <20250210210001.5dc68b38eb1bfa44d0fd78f6@linux-foundation.org>
+X-Mimecast-Spam-Score: 0
+X-Mimecast-MFC-PROC-ID: 2jSGycC_96bwTAs7cJXBII5lqlU_41mSUfXcY8qSDXU_1739262840
+X-Mimecast-Originator: redhat.com
+Content-Language: en-US
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -72,34 +165,72 @@ List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-On Mon, 10 Feb 2025 20:37:57 +0100 David Hildenbrand <david@redhat.com> wrote:
-
-> Ever since commit b756a3b5e7ea ("mm: device exclusive memory access")
-> we can return with a device-exclusive entry from page_vma_mapped_walk().
+On 11.02.25 06:00, Andrew Morton wrote:
+> On Mon, 10 Feb 2025 20:37:45 +0100 David Hildenbrand <david@redhat.com> wrote:
 > 
-> damon_folio_mkold_one() is not prepared for that and calls
-> damon_ptep_mkold() with PFN swap PTEs. Teach damon_ptep_mkold() to deal
-> with these PFN swap PTEs. Note that device-private entries are so far not
-> applicable on that path, as damon_get_folio() filters out non-lru
-> folios.
+>> The single "real" user in the tree of make_device_exclusive_range() always
+>> requests making only a single address exclusive. The current implementation
+>> is hard to fix for properly supporting anonymous THP / large folios and
+>> for avoiding messing with rmap walks in weird ways.
+>>
+>> So let's always process a single address/page and return folio + page to
+>> minimize page -> folio lookups. This is a preparation for further
+>> changes.
+>>
+>> Reject any non-anonymous or hugetlb folios early, directly after GUP.
+>>
+>> While at it, extend the documentation of make_device_exclusive() to
+>> clarify some things.
 > 
-> Should we just skip PFN swap PTEs completely? Possible, but it seems
-> straight forward to just handle it correctly.
+> x86_64 allmodconfig:
 > 
-> Note that we could currently only run into this case with
-> device-exclusive entries on THPs. We still adjust the mapcount on
-> conversion to device-exclusive; this makes the rmap walk
-> abort early for small folios, because we'll always have
-> !folio_mapped() with a single device-exclusive entry. We'll adjust the
-> mapcount logic once all page_vma_mapped_walk() users can properly
-> handle device-exclusive entries.
-> 
-> Signed-off-by: David Hildenbrand <david@redhat.com>
+> drivers/gpu/drm/nouveau/nouveau_svm.c: In function 'nouveau_atomic_range_fault':
+> drivers/gpu/drm/nouveau/nouveau_svm.c:612:68: error: 'folio' undeclared (first use in this function)
+>    612 |                 page = make_device_exclusive(mm, start, drm->dev, &folio);
+>        |                                                                    ^~~~~
+> drivers/gpu/drm/nouveau/nouveau_svm.c:612:68: note: each undeclared identifier is reported only once for each function it appears in
 
-Reviewed-by: SeongJae Park <sj@kernel.org>
+Ah! Because I was carrying on the same branch SVM fixes [1] that are
+getting surprisingly little attention so far.
 
 
-Thanks,
-SJ
+The following sorts it out for now:
 
-[...]
+ From 337c68bf24af59f36477be11ea6ef7c7ce9aa8ae Mon Sep 17 00:00:00 2001
+From: David Hildenbrand <david@redhat.com>
+Date: Tue, 11 Feb 2025 09:33:04 +0100
+Subject: [PATCH] merge
+
+Signed-off-by: David Hildenbrand <david@redhat.com>
+---
+  drivers/gpu/drm/nouveau/nouveau_svm.c | 1 +
+  1 file changed, 1 insertion(+)
+
+diff --git a/drivers/gpu/drm/nouveau/nouveau_svm.c b/drivers/gpu/drm/nouveau/nouveau_svm.c
+index 39e3740980bb7..1fed638b9eba8 100644
+--- a/drivers/gpu/drm/nouveau/nouveau_svm.c
++++ b/drivers/gpu/drm/nouveau/nouveau_svm.c
+@@ -590,6 +590,7 @@ static int nouveau_atomic_range_fault(struct nouveau_svmm *svmm,
+  	unsigned long timeout =
+  		jiffies + msecs_to_jiffies(HMM_RANGE_DEFAULT_TIMEOUT);
+  	struct mm_struct *mm = svmm->notifier.mm;
++	struct folio *folio;
+  	struct page *page;
+  	unsigned long start = args->p.addr;
+  	unsigned long notifier_seq;
+-- 
+2.48.1
+
+
+I'll resend [1] once this stuff here landed.
+
+Let me know if you want a full resend of this series, thanks.
+
+
+[1] https://lkml.kernel.org/r/20250124181524.3584236-1-david@redhat.com
+
+-- 
+Cheers,
+
+David / dhildenb
+
