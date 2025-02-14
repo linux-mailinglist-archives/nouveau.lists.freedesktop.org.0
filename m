@@ -2,46 +2,47 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id DAE58A35E4D
-	for <lists+nouveau@lfdr.de>; Fri, 14 Feb 2025 14:05:38 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 8971AA35E6C
+	for <lists+nouveau@lfdr.de>; Fri, 14 Feb 2025 14:10:43 +0100 (CET)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 8B02310E33A;
-	Fri, 14 Feb 2025 13:05:37 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id BF46610EC7A;
+	Fri, 14 Feb 2025 13:10:33 +0000 (UTC)
 Authentication-Results: gabe.freedesktop.org;
-	dkim=pass (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="cJit1wiQ";
+	dkim=pass (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="LiwjkU/l";
 	dkim-atps=neutral
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
 Received: from nyc.source.kernel.org (nyc.source.kernel.org [147.75.193.91])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 7E3FC10E33A;
- Fri, 14 Feb 2025 13:05:36 +0000 (UTC)
+ by gabe.freedesktop.org (Postfix) with ESMTPS id CEE0610EC7A;
+ Fri, 14 Feb 2025 13:10:32 +0000 (UTC)
 Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by nyc.source.kernel.org (Postfix) with ESMTP id 7C96DA42A50;
- Fri, 14 Feb 2025 13:03:50 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 20F21C4CED1;
- Fri, 14 Feb 2025 13:05:33 +0000 (UTC)
+ by nyc.source.kernel.org (Postfix) with ESMTP id CBE3FA4046F;
+ Fri, 14 Feb 2025 13:08:46 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 6A344C4CED1;
+ Fri, 14 Feb 2025 13:10:30 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1739538335;
- bh=/ZYi30Kqhec6sI50rp5karwtCSQKZsO3cRynCmtVBPc=;
+ s=k20201202; t=1739538631;
+ bh=LdaSwEwl2gLdaD/CmYnheNHV+UGmaQZUXRor0FyWS3U=;
  h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
- b=cJit1wiQdtUEi6Y+oJwzRcYtOmuBFe84LqN26AtuWh+zhqbWsH2H9Mm3OUodU7rnu
- OsYvAxB4z8aMwU3hu1pi5Rbno7ukKSxfQpYj0aWm/Bd9k4HpX5Y431f4o23IibT8Kr
- JIX40X1JSQg3ZSakpkOx3YkBRQsybJrwiKdjYYnR1hvCf4bNnA8XDmw2peDVuQMJmv
- 0KLYY4Qq+4XkdsOwFMhvV5DliEy6finX2KMX3JlvrwPD6L5wkIjLojgJcifZ78hrRP
- PglUQQq+7oDWT2uEvF2K8+wjXGQepO54dFYkT/cmMd6yhF8o3xI5x7F1jhKIz6Til7
- 7lAtxJWjdy2Eg==
-Date: Fri, 14 Feb 2025 14:05:31 +0100
+ b=LiwjkU/lp/C6FwLqXEfp33bq4HIYvjCjEOz0RDaJzbgi2CDGPmb1gj5nl2UModCkz
+ 23250YWjH5Rjc8p/8jROOPyNyeSMzJxXq3HcLb//yjdVPW5kthsNCmGOOyEgEihwl8
+ K4j6PiIlEEdH1TYNDRI2bd0/Lj2XhvsrkdwzNZfkKMRSLqvx/nomHRdpWbUW8Uif9F
+ NCHkquu7SCJk0Q+EnzViXwHd0W/rSbp3dEzwOogZZRgeHrL+k9Tsd5zX4BcPB+rh4o
+ 9NVjfJpq0VWZd24Up8+BX5FMjnfWBL3GNoLRjBQ5YxbQ4gMSlbv3ZYTsUKff/jhsEU
+ +IbCda2gNz9IA==
+Date: Fri, 14 Feb 2025 14:10:27 +0100
 From: Danilo Krummrich <dakr@kernel.org>
 To: Dave Airlie <airlied@gmail.com>
 Cc: dri-devel@lists.freedesktop.org, nouveau@lists.freedesktop.org,
  Luis Chamberlain <mcgrof@kernel.org>, Russ Weight <russ.weight@linux.dev>
 Subject: Re: [PATCH] drm/nouveau: select FW caching
-Message-ID: <Z68_m1iHYN_7a_hH@cassiopeiae>
+Message-ID: <Z69Awxng8zedDwws@cassiopeiae>
 References: <20250207012531.621369-1-airlied@gmail.com>
+ <Z68_m1iHYN_7a_hH@cassiopeiae>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
-In-Reply-To: <20250207012531.621369-1-airlied@gmail.com>
+In-Reply-To: <Z68_m1iHYN_7a_hH@cassiopeiae>
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -56,35 +57,7 @@ List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-(+ Luis, Russ)
+On Fri, Feb 14, 2025 at 02:05:36PM +0100, Danilo Krummrich wrote:
+> only force FW_CACHE if DRM_NOUVEAU_GSP_DEFAULT?
 
-On Fri, Feb 07, 2025 at 11:25:31AM +1000, Dave Airlie wrote:
-> From: Dave Airlie <airlied@redhat.com>
-> 
-> nouveau tries to load some firmware during suspend that it loaded earlier, but with
-> fw caching disabled it hangs suspend, so just rely on FW cache enabling instead of
-> working around it in the driver.
-> 
-> Fixes: 176fdcbddfd2 ("drm/nouveau/gsp/r535: add support for booting GSP-RM")
-> Signed-off-by: Dave Airlie <airlied@redhat.com>
-> ---
->  drivers/gpu/drm/nouveau/Kconfig | 1 +
->  1 file changed, 1 insertion(+)
-> 
-> diff --git a/drivers/gpu/drm/nouveau/Kconfig b/drivers/gpu/drm/nouveau/Kconfig
-> index ce840300578d8..1050a4617fc15 100644
-> --- a/drivers/gpu/drm/nouveau/Kconfig
-> +++ b/drivers/gpu/drm/nouveau/Kconfig
-> @@ -4,6 +4,7 @@ config DRM_NOUVEAU
->  	depends on DRM && PCI && MMU
->  	select IOMMU_API
->  	select FW_LOADER
-> +	select FW_CACHE if PM_SLEEP
-
-CONFIG_FW_CACHE was added, as the Kconfig says, it "can prevent suspend on many
-platforms".
-
-@Luis, Russ: I assume this mostly means embedded platforms?
-
-I wonder if we should not insist on FW_CACHE if NOUVEAU_PLATFORM_DRIVER, or even
-only force FW_CACHE if DRM_NOUVEAU_GSP_DEFAULT?
+Please scratch that, it was a horrible idea.
