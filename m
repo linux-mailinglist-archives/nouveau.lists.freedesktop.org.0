@@ -2,79 +2,77 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id 89637CBAD31
-	for <lists+nouveau@lfdr.de>; Sat, 13 Dec 2025 13:44:50 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 717B4CBAAD1
+	for <lists+nouveau@lfdr.de>; Sat, 13 Dec 2025 13:42:25 +0100 (CET)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 9159A10EAAB;
-	Sat, 13 Dec 2025 12:41:29 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 146AF10EA81;
+	Sat, 13 Dec 2025 12:41:01 +0000 (UTC)
 Authentication-Results: gabe.freedesktop.org;
-	dkim=permerror (0-bit key) header.d=gmail.com header.i=@gmail.com header.b="NvNY01On";
+	dkim=permerror (0-bit key) header.d=gmail.com header.i=@gmail.com header.b="Ufx33ohB";
 	dkim-atps=neutral
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from mail-ot1-f47.google.com (mail-ot1-f47.google.com
- [209.85.210.47])
- by gabe.freedesktop.org (Postfix) with ESMTPS id C42BB10E048;
- Sun, 16 Feb 2025 07:25:51 +0000 (UTC)
-Received: by mail-ot1-f47.google.com with SMTP id
- 46e09a7af769-727118c4f9aso339503a34.1; 
- Sat, 15 Feb 2025 23:25:51 -0800 (PST)
+Received: from mail-lj1-f171.google.com (mail-lj1-f171.google.com
+ [209.85.208.171])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 93F4110E293;
+ Mon, 17 Feb 2025 20:48:07 +0000 (UTC)
+Received: by mail-lj1-f171.google.com with SMTP id
+ 38308e7fff4ca-3092643f4aaso26412331fa.1; 
+ Mon, 17 Feb 2025 12:48:07 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1739690751; x=1740295551; darn=lists.freedesktop.org;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:from:to:cc:subject:date:message-id:reply-to;
- bh=X2MtFzYyeGI+w53HFhz70blX7wSMVkW9RRqxmsCmG4c=;
- b=NvNY01Ond9T13ILcdwN15NNExZHX0Fd/etfACbGD1ZKE3gqA8ig2bvw+LWrzPj4QvQ
- F1aVA7rfsiZ4zVmrztaxW6+d9hM7L8+y7tlI6Y9oxsAxAVgfbtjnuJ1SN/evuD8w37ci
- lbKkHEHVGfTKpZVGUjmYhN1A8d/bq10FVBc9py5xh+UsFEX80rXz6f8UyumM4xM0vZ8J
- aAJyteEDC54iiT87uTte8vx8fSeM6X63vbNKe2moleAqvtaED3Vk5Bqm430OO3yTXoM1
- uWjjPh470vPqb2SZZ7znsSYx5s++ItUnfkVmXDmb8lXxWFP/kBdNvxJpgFOquL9pPm6G
- IX+Q==
+ d=gmail.com; s=20230601; t=1739825285; x=1740430085; darn=lists.freedesktop.org;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=PBnEtgDXrS3Iq43NK/WiujJi82KZNp8oMdM7dL15NAw=;
+ b=Ufx33ohBvOTYxjorvZ7pTrayR61R7zYu73lohCxVSxWtnVto3NDNOW0RYcdFXR72vs
+ TjKYbZ1VgREm0BcLl/wAP761smNHBHSg0UDgZOZHbA8ogko4tzE/fG3xDXZJ9d/twvpO
+ pvRifFq6nDSngJsdnDjNqcyRmS1q7gX1euROhNqk8Xzmkc/aJ9b38ECiSDN05uO0Xb0c
+ jr5UURPUsEioQqCLULTOGGqnLHO3DOP7RtxACyvBx00Y7CPPSOv3qp4EEQVNkgpaEZfn
+ PSdvylSGeC62bwkbEb4WC2dWjqC0gG9oCNZ48tQ9yzwTmbGaACoBldtZp6qUJvIRyEMb
+ rr0g==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1739690751; x=1740295551;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=X2MtFzYyeGI+w53HFhz70blX7wSMVkW9RRqxmsCmG4c=;
- b=DIkKGrQmkW2V+0dMoQXyMh0WIgKo2FRn9skFjvFjp4dmnhUBnKP6baLdGXinwuy0AA
- aO3yoYS//4TSckKT8pj58hkgaHuyJWrPZWIKT5ykGFBFD8PXJPqnTvNgSe81J7QvUILv
- /DAmcyh/FM3H5L0fm3sLm005WMK3tn6qV22hT7eu9fS13jZA+3PYzG0P5HHOU1pU/KxU
- M+3Z4gmK3fV4FapFG21yOyv2O5xZ44s6/J3nhMjkEEWCos5N54VtH1xk4l9kpwOIF/uq
- AQSCB+WvN8ijsEB78iBN90H38D4fKEnf1FhcbGoVFLEDRSkWNgo4KQt3xXY470dTnJTj
- BXPA==
+ d=1e100.net; s=20230601; t=1739825285; x=1740430085;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=PBnEtgDXrS3Iq43NK/WiujJi82KZNp8oMdM7dL15NAw=;
+ b=qAbhjwdxTTS1DtCiUxMY8Qw4uNe0dd2vP9r4LUTPdiBT1kFx0MtvcnfeCziMdrX3UH
+ cZtGITt3UNxPZv1xvkjQ6ne7EErCiQNSDEgZcOe/3hL7yimdKUm2eu3L9R8EksHgr2m1
+ iFClXM0HFarSpN3d+D4gNadheg9UwWlrhGWRfoS8qkygC7u3DHa+pA8E/yg6HCGd9PZM
+ /FcS4UMUSlyMaSLgygeDSE+ktaSNNDaeHHTwbu8vd0UYp5lJIjNj59J/5KzC1mALsmix
+ N16dIyegl6Q5RpsaOcivJ/sCj5E8QIJNqGGI7a0PMT5FBlkQRwJe8sZlxmYXU/KDXbvl
+ GQfA==
 X-Forwarded-Encrypted: i=1;
- AJvYcCUVf9cUe55Rn/x74kKoPDQ4Lhk3KeHwoETOeGSVS+c5jSTSGjwj7H7Em08A0DNJteqXu7KyN2XD@lists.freedesktop.org
-X-Gm-Message-State: AOJu0Yyr6WM2e1tCWbIxtfzWAK6Uu/QpvlZ1hEOoA45bYqWXN1LMceP9
- l5ADjnbkv4DPfzsmyxqfxZGcGj2xItugRhCqpxXpQZp3j52l6QCs
-X-Gm-Gg: ASbGncvM30NrXtratXJ88UOhfS32mLtCnBFY2u6aFGEv8Zat24obgVveTCo3cpVeXQe
- PlTcikEovF2LA+Ih+nOdmVrqv5ey3Ises5hLo42iWQgd7z1AvuFBt2xWbvsSTGugZkCpw6TD2/d
- 43rPvn+cGLc2f1e79AimWWavzcY3Q+8N6BxVOI7IrP3y+gWXjn0nPagQ1iNoZVAUbMnUUvdcP12
- MRlbMQWAs13SNRyRNj29D7qlrBA8u/jliveQfGX1NIZdob/DXgnVAVglfiNQqZE/xCvrsNzEmLa
- UUBjzNPJZovFQv8BMripRDdXvA==
-X-Google-Smtp-Source: AGHT+IEldSYRhKKvL+bF0zUKZ2HmbKXzdMRqJSuAGcuPjdAPT3c5bZVwGqGNztiB1tyFq27lo9WP7w==
-X-Received: by 2002:a05:6808:2107:b0:3f3:1ca8:97b with SMTP id
- 5614622812f47-3f3eb122105mr3150386b6e.28.1739690750791; 
- Sat, 15 Feb 2025 23:25:50 -0800 (PST)
-Received: from vengeance.tcpc.lan ([97.75.251.196])
- by smtp.gmail.com with ESMTPSA id
- 5614622812f47-3f3daa19849sm2467306b6e.44.2025.02.15.23.25.49
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sat, 15 Feb 2025 23:25:50 -0800 (PST)
-From: Aaron Kling <luceoscutum@gmail.com>
-X-Google-Original-From: Aaron Kling <webgeek1234@gmail.com>
-To: Karol Herbst <kherbst@redhat.com>, Lyude Paul <lyude@redhat.com>,
- Danilo Krummrich <dakr@kernel.org>, David Airlie <airlied@gmail.com>,
- Simona Vetter <simona@ffwll.ch>, Aaron Kling <webgeek1234@gmail.com>,
- Ben Skeggs <bskeggs@redhat.com>
-Cc: dri-devel@lists.freedesktop.org, nouveau@lists.freedesktop.org,
- linux-kernel@vger.kernel.org
-Subject: [PATCH RESEND] drm/nouveau/pmu: Fix gp10b firmware guard
-Date: Sun, 16 Feb 2025 01:25:37 -0600
-Message-ID: <20250216072541.317954-1-webgeek1234@gmail.com>
-X-Mailer: git-send-email 2.48.1
+ AJvYcCVJlv3pMiFgcIyh4fPNWfhxIZRwPqQafOGq4WW4LyBdk2iWPNMZ3+FXX5SNXaJM0vkyW4Z+dmQ1zg==@lists.freedesktop.org,
+ AJvYcCW7RkXyyzNOeYZ+o7+lsVC6cU1WttnAxfjEMy1n/oWaxIU2jxtSDAYW8Y6R/hNTyeI+KAp+AHSQSlo=@lists.freedesktop.org
+X-Gm-Message-State: AOJu0Yx/rIUvSb1XZkroqvQam7Tpvlo7MUCSXEIcMp4wdplhNkk/qAJg
+ HfgvJhLtzTwW02SW2cCimlotz2qzqsoFJS9kMn2ie3p/h64oHcGmsX62ejnLlr+BBjk9rrn3Tyb
+ KsHMQg66Szrh/16wLccPhH5Gsnwk=
+X-Gm-Gg: ASbGncseode7crOKuXK2iEPe+LAVdTV4tNxUQZcjq9+nl5tof8F7bedHh62l1KxmQoJ
+ UJpcg9E/HuPgPe5PJmDGCXo0/rpuzhjMP9woMJECdptrkdGIRvjXN37gTgS4jxiAvQMrMFD0=
+X-Google-Smtp-Source: AGHT+IE2HIK55IZ0WC8oiPzUGf3+qIkZjooYuFgwlxN7ic0lMuYmKdXdCrYqMbDIIPjb16hn+uYvN37aRRh2Mmw54r8=
+X-Received: by 2002:a2e:8615:0:b0:309:1f1a:276b with SMTP id
+ 38308e7fff4ca-309288dd3d9mr24735151fa.10.1739825285303; Mon, 17 Feb 2025
+ 12:48:05 -0800 (PST)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-X-Mailman-Approved-At: Sat, 13 Dec 2025 12:40:51 +0000
+References: <20250217-nova_timer-v1-0-78c5ace2d987@nvidia.com>
+ <20250217-nova_timer-v1-1-78c5ace2d987@nvidia.com>
+In-Reply-To: <20250217-nova_timer-v1-1-78c5ace2d987@nvidia.com>
+From: =?UTF-8?Q?Sergio_Gonz=C3=A1lez_Collado?= <sergio.collado@gmail.com>
+Date: Mon, 17 Feb 2025 21:47:29 +0100
+X-Gm-Features: AWEUYZkhMupaOKDqUFGG02klV236GSJkG6vgCUJ5hwk1HNdZbu8uVT8mYAd_O24
+Message-ID: <CAA76j90OV5OpCVLGFrGVL4-DRSFreZDj8FUmx_nkOq9HL1x2cQ@mail.gmail.com>
+Subject: Re: [PATCH RFC 1/3] rust: add useful ops for u64
+To: Alexandre Courbot <acourbot@nvidia.com>
+Cc: Danilo Krummrich <dakr@kernel.org>, David Airlie <airlied@gmail.com>, 
+ John Hubbard <jhubbard@nvidia.com>, Ben Skeggs <bskeggs@nvidia.com>,
+ linux-kernel@vger.kernel.org, 
+ rust-for-linux@vger.kernel.org, nouveau@lists.freedesktop.org, 
+ dri-devel@lists.freedesktop.org
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+X-Mailman-Approved-At: Sat, 13 Dec 2025 12:40:49 +0000
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -89,29 +87,81 @@ List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-Most kernel configs enable multiple Tegra SoC generations, causing this
-typo to go unnoticed. But in the case where a kernel config is strictly
-for Tegra186, this is a problem.
-
-Fixes: 989863d7cbe5 ("drm/nouveau/pmu: select implementation based on available firmware")
-Signed-off-by: Aaron Kling <webgeek1234@gmail.com>
----
- drivers/gpu/drm/nouveau/nvkm/subdev/pmu/gp10b.c | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
-
-diff --git a/drivers/gpu/drm/nouveau/nvkm/subdev/pmu/gp10b.c b/drivers/gpu/drm/nouveau/nvkm/subdev/pmu/gp10b.c
-index a6f410ba60bc9..d393bc540f862 100644
---- a/drivers/gpu/drm/nouveau/nvkm/subdev/pmu/gp10b.c
-+++ b/drivers/gpu/drm/nouveau/nvkm/subdev/pmu/gp10b.c
-@@ -75,7 +75,7 @@ gp10b_pmu_acr = {
- 	.bootstrap_multiple_falcons = gp10b_pmu_acr_bootstrap_multiple_falcons,
- };
- 
--#if IS_ENABLED(CONFIG_ARCH_TEGRA_210_SOC)
-+#if IS_ENABLED(CONFIG_ARCH_TEGRA_186_SOC)
- MODULE_FIRMWARE("nvidia/gp10b/pmu/desc.bin");
- MODULE_FIRMWARE("nvidia/gp10b/pmu/image.bin");
- MODULE_FIRMWARE("nvidia/gp10b/pmu/sig.bin");
--- 
-2.48.1
-
+On Mon, 17 Feb 2025 at 15:07, Alexandre Courbot <acourbot@nvidia.com> wrote=
+:
+>
+> It is common to build a u64 from its high and low parts obtained from
+> two 32-bit registers. Conversely, it is also common to split a u64 into
+> two u32s to write them into registers. Add an extension trait for u64
+> that implement these methods in a new `num` module.
+>
+> It is expected that this trait will be extended with other useful
+> operations, and similar extension traits implemented for other types.
+>
+> Signed-off-by: Alexandre Courbot <acourbot@nvidia.com>
+> ---
+>  rust/kernel/lib.rs |  1 +
+>  rust/kernel/num.rs | 32 ++++++++++++++++++++++++++++++++
+>  2 files changed, 33 insertions(+)
+>
+> diff --git a/rust/kernel/lib.rs b/rust/kernel/lib.rs
+> index 496ed32b0911a9fdbce5d26738b9cf7ef910b269..8c0c7c20a16aa96e3d3e444be=
+3e03878650ddf77 100644
+> --- a/rust/kernel/lib.rs
+> +++ b/rust/kernel/lib.rs
+> @@ -59,6 +59,7 @@
+>  pub mod miscdevice;
+>  #[cfg(CONFIG_NET)]
+>  pub mod net;
+> +pub mod num;
+>  pub mod of;
+>  pub mod page;
+>  #[cfg(CONFIG_PCI)]
+> diff --git a/rust/kernel/num.rs b/rust/kernel/num.rs
+> new file mode 100644
+> index 0000000000000000000000000000000000000000..5e714cbda4575b8d74f506605=
+80dc4c5683f8c2b
+> --- /dev/null
+> +++ b/rust/kernel/num.rs
+> @@ -0,0 +1,32 @@
+> +// SPDX-License-Identifier: GPL-2.0
+> +
+> +//! Numerical and binary utilities for primitive types.
+> +
+> +/// Useful operations for `u64`.
+> +pub trait U64Ext {
+> +    /// Build a `u64` by combining its `high` and `low` parts.
+> +    ///
+> +    /// ```
+> +    /// use kernel::num::U64Ext;
+> +    /// assert_eq!(u64::from_u32s(0x01234567, 0x89abcdef), 0x01234567_89=
+abcdef);
+> +    /// ```
+> +    fn from_u32s(high: u32, low: u32) -> Self;
+> +
+> +    /// Returns the `(high, low)` u32s that constitute `self`.
+> +    ///
+> +    /// ```
+> +    /// use kernel::num::U64Ext;
+> +    /// assert_eq!(u64::into_u32s(0x01234567_89abcdef), (0x1234567, 0x89=
+abcdef));
+> +    /// ```
+> +    fn into_u32s(self) -> (u32, u32);
+> +}
+> +
+> +impl U64Ext for u64 {
+> +    fn from_u32s(high: u32, low: u32) -> Self {
+> +        ((high as u64) << u32::BITS) | low as u64
+> +    }
+> +
+> +    fn into_u32s(self) -> (u32, u32) {
+> +        ((self >> u32::BITS) as u32, self as u32)
+> +    }
+> +}
+>
+> --
+> 2.48.1
+>
+>
+Looks good :)
+Reviewed-by: Sergio Gonz=C3=A1lez Collado <sergio.collado@gmail.com>
