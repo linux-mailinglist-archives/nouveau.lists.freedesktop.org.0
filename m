@@ -2,50 +2,156 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id E5DD5A382F9
-	for <lists+nouveau@lfdr.de>; Mon, 17 Feb 2025 13:27:38 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 52472A38558
+	for <lists+nouveau@lfdr.de>; Mon, 17 Feb 2025 15:04:58 +0100 (CET)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 3873F10E05E;
-	Mon, 17 Feb 2025 12:27:34 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id EEA4010E4CA;
+	Mon, 17 Feb 2025 14:04:56 +0000 (UTC)
 Authentication-Results: gabe.freedesktop.org;
-	dkim=pass (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="pNqPa/Yk";
+	dkim=pass (2048-bit key; unprotected) header.d=Nvidia.com header.i=@Nvidia.com header.b="Be81bUf2";
 	dkim-atps=neutral
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from nyc.source.kernel.org (nyc.source.kernel.org [147.75.193.91])
- by gabe.freedesktop.org (Postfix) with ESMTPS id B4F4E89F01;
- Mon, 17 Feb 2025 12:27:32 +0000 (UTC)
-Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by nyc.source.kernel.org (Postfix) with ESMTP id B036CA4107E;
- Mon, 17 Feb 2025 12:25:46 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 408DEC4CED1;
- Mon, 17 Feb 2025 12:27:28 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1739795251;
- bh=MIwYUtXnjoepjUfjvLW564dXH5Zc3Mu+jVREsCj6b3Y=;
- h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
- b=pNqPa/Yk+KlWdNEOwwuagNYFcRU8YiLAo+jDc5w/rEo1470xncMv4DECtOyNVNPUL
- dkRRmnnAV2vfOgukrS55kqH34XHuw/kSc+NO02ST2KoWC95XCMstzP0Zc2GD8YTcsL
- 7oYPf3AbkecKDt8uNnBP5bWibYc5wjsoJ3cR0M/tvGtKKFHkz7hvZW/yeikwd9Vl9r
- I8rkT+/q18cKYX/EZlQXqrCmHpHSeGqokZHlDkR/XI6/JHYXb4JxOuK+yKIcs/hjbt
- jm1aMnIbkeGXUSfbnZXCApDPk85lWCAJYWF0viD+8XDOU7l3ZlswK+fsmSWHz/c2z6
- 9RW/7oBkQLcUw==
-Date: Mon, 17 Feb 2025 13:27:25 +0100
-From: Danilo Krummrich <dakr@kernel.org>
-To: Steven Rostedt <rostedt@goodmis.org>,
- Masami Hiramatsu <mhiramat@kernel.org>
-Cc: linux-kernel@vger.kernel.org, Lyude Paul <lyude@redhat.com>,
- Danilo Krummrich <dakr@redhat.com>, dri-devel@lists.freedesktop.org,
- nouveau@lists.freedesktop.org, Dave Airlie <airlied@redhat.com>,
- Simona Vetter <simona.vetter@ffwll.ch>, Karol Herbst <kherbst@redhat.com>
-Subject: Re: [PATCH 1/1] MAINTAINERS: Remove myself
-Message-ID: <Z7MrLUlSzS_I3YPK@cassiopeiae>
-References: <20250215073753.1217002-1-kherbst@redhat.com>
- <20250215073753.1217002-2-kherbst@redhat.com>
+Received: from NAM11-CO1-obe.outbound.protection.outlook.com
+ (mail-co1nam11on2082.outbound.protection.outlook.com [40.107.220.82])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 4C3B410E46C;
+ Mon, 17 Feb 2025 14:04:55 +0000 (UTC)
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=jQntMUQD5uf9hDFVBqzaTzamAWJce8ON4UdGtN6QXfAbNhfOBPLqxH93P1o6dnJJMJ1zf0n8phtp8ubU1jAnEJwXdHDSz5cMfQQn+8Zwo3ooDeAgjgWLwdQ8RXpy0uq7+ydHrMMMsL2ifVHZiNo2y81VOecKX4lFx5aAQvjU5+eh9cVbZuDaI5oTl7/UVPSUygR6cG74OSrMLKvViywGvqJ0QmDJbqN/+dT7fXR531lZS+NZINtEcJFTknIG4qgMPcPEPDJn0Mdbh2Ri85rhb0W7L6KQjGtzE6MePTniwM7blv+X3dYowggA+jlLpNeic7dUX971/a3JPsygB2bDOg==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=a99x7DWKCuH25MLjZC88kbZwr2fA4pIdu1TGhFmqrEo=;
+ b=n4svnGc+YKeONlS8sxpeM2Or32kJJBMDqa/rdU6P6LlvS76uv3kdjY/+xLEDnx/AS2DJSvmZht6FQcNwYsWPn2jIUIjCP0i1ChBAHzdDWr6iuwgwMdy/yQ3r2rQ53PDvr8XnXXOG51Y/MY2Uo/NVC9YBvAXoBNwr5WMquPOfKHA1SlFPdysdRVhM7yJ+C3hVm5QJOnETJyZZkZkwaK9X9zl+NmJI2bbLeYMsrswT4t+/gZaG/gRpz3vj4scM1S4AFDoCuGBJHckiuWbMGddPIv+bOcPWy6msg8uyF6MBJNa2Du1YMMvVUunzF61197yKHH8GTnmt3CyOndJJ34AsBw==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=nvidia.com; dmarc=pass action=none header.from=nvidia.com;
+ dkim=pass header.d=nvidia.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=Nvidia.com;
+ s=selector2;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=a99x7DWKCuH25MLjZC88kbZwr2fA4pIdu1TGhFmqrEo=;
+ b=Be81bUf28KVOLXaf85R2F/4rkOtQvm6G6iaQLb0syJim7g+DATY8s10y6asDMlcKml1aCAMi7WJoNE7nDLKqUHeNL2+fXJfr3TCIKzHasxt8OErr795TUEbaOcBxp94rlJcikKtycT/O80e1SBYwjk10wLVf4DQyQjRbN3i4DCO617BO0Wz0MGbn57enq3mtDNKqC5wJ9x7+UE9RJBjtIVpOQzpVSGp+kPxRGGAFQ4v1DDQpgWlCsn7NI/i9/7RzL4fHDScm8lIZ0nWh9wKuqwnMRfC2WKEOSs4CFr7ilZ30elfxD098wk/4xeCTb5kEIttx0BPEz9wByLTQJgNuQw==
+Authentication-Results: dkim=none (message not signed)
+ header.d=none;dmarc=none action=none header.from=nvidia.com;
+Received: from CH2PR12MB3990.namprd12.prod.outlook.com (2603:10b6:610:28::18)
+ by MN2PR12MB4208.namprd12.prod.outlook.com (2603:10b6:208:1d0::18)
+ with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.8445.19; Mon, 17 Feb
+ 2025 14:04:51 +0000
+Received: from CH2PR12MB3990.namprd12.prod.outlook.com
+ ([fe80::6e37:569f:82ee:3f99]) by CH2PR12MB3990.namprd12.prod.outlook.com
+ ([fe80::6e37:569f:82ee:3f99%6]) with mapi id 15.20.8445.017; Mon, 17 Feb 2025
+ 14:04:51 +0000
+From: Alexandre Courbot <acourbot@nvidia.com>
+Subject: [RFC PATCH 0/3] gpu: nova-core: add basic timer subdevice
+ implementation
+Date: Mon, 17 Feb 2025 23:04:45 +0900
+Message-Id: <20250217-nova_timer-v1-0-78c5ace2d987@nvidia.com>
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+X-B4-Tracking: v=1; b=H4sIAP1Bs2cC/6tWKk4tykwtVrJSqFYqSi3LLM7MzwNyDHUUlJIzE
+ vPSU3UzU4B8JSMDI1MDI0Mz3bz8ssT4kszc1CLdZDNLE2MDQwuTNFMTJaCGgqLUtMwKsGHRsbW
+ 1ACjb2D5cAAAA
+X-Change-ID: 20250216-nova_timer-c69430184f54
+To: Danilo Krummrich <dakr@kernel.org>, David Airlie <airlied@gmail.com>, 
+ John Hubbard <jhubbard@nvidia.com>, Ben Skeggs <bskeggs@nvidia.com>
+Cc: linux-kernel@vger.kernel.org, rust-for-linux@vger.kernel.org, 
+ nouveau@lists.freedesktop.org, dri-devel@lists.freedesktop.org, 
+ Alexandre Courbot <acourbot@nvidia.com>
+X-Mailer: b4 0.14.2
+X-ClientProxiedBy: TYAPR01CA0115.jpnprd01.prod.outlook.com
+ (2603:1096:404:2a::31) To CH2PR12MB3990.namprd12.prod.outlook.com
+ (2603:10b6:610:28::18)
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <20250215073753.1217002-2-kherbst@redhat.com>
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: CH2PR12MB3990:EE_|MN2PR12MB4208:EE_
+X-MS-Office365-Filtering-Correlation-Id: 635987a1-ebe1-4c2f-8b52-08dd4f5c0bf9
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: BCL:0; ARA:13230040|10070799003|376014|366016|1800799024;
+X-Microsoft-Antispam-Message-Info: =?utf-8?B?amJ5VXZwckRYSFBRdUtXWXcrY05oZzdKNG5IeWRGWllDaEtlbUFrU0lRLzNS?=
+ =?utf-8?B?SC9IZWNQTG1kNW1qdXhqelpJU0RUazZrVFVZUGxRTFVBUlgrREsxTFAxY1Vm?=
+ =?utf-8?B?THNKNTZNNmNJTFp1aDdRSDFWRExocDRvMUlTQllRTis1QTQ3RkVUbUFEZld5?=
+ =?utf-8?B?M2VQaCtueCtDaWNUa0xvYjFpK2NleHhBUFcyK3ozalVrK0lxL2MzaFBDOFNT?=
+ =?utf-8?B?OUlMQVRlUFQ3ZjRqQlZxdUNVeGNhdzE3MXppNWJRb1NnQlJNQkpOaTYxTVUw?=
+ =?utf-8?B?c1BZS1hRZWNadUFNTFZJeW0wNDlMSXJ0TWROdVRqTmhqZDJJMWV6cHVmanl6?=
+ =?utf-8?B?VHZyUnBld1U3RGVEaWxkSFlUYkZ3ZFU5MVY1aFgvK24wYjcrZ0NseGV4SG1V?=
+ =?utf-8?B?V1p5U01Hd2E1aitvODdidFZ1M0RYVHNISmdIQ0FLNS9XRVhrUWsrMjUvUXcr?=
+ =?utf-8?B?anhIbm1rMVBUWkR2Q24rMXA5YlZtRnljWkY4R1NoWGdtN05TNzJBcGhQdlpD?=
+ =?utf-8?B?bFc0emNmVmVxWlZtaDZhelIvOWYyUU1GZVFJcHZ5TVBUb3RObkNBSGczSU9R?=
+ =?utf-8?B?TmpXMFQ3ZEhveitMb0VidytNVUN0aCs3MVp4SjM1aEJmOU5WTUtVSXFkWTV5?=
+ =?utf-8?B?R0YxemtpY1FIOEFlcU15UHhEellYYkZCZGhPZGMvcStRdGcwR0I2WnhaeEpu?=
+ =?utf-8?B?YVpWVG9LSDR4Y2ozZStEUzN2dzcvbG5QaWZTc1VPOWlyNis1RVU4UERJU2Rt?=
+ =?utf-8?B?cXUxdUxxY20yNU96SlJNL2U1VXR5NlFLQ2tBdzN2L1VpTTg0Mkd2RUdZQngr?=
+ =?utf-8?B?bk9Ecm92Z0pjN3RzZWJ0T05nVC9teFZ0WkJTekpvUUxOSWcrOUV6MU12cUFZ?=
+ =?utf-8?B?cVFrRmplQTdEdzc4WkVtOWRLRmlva1YzQmZENEUvYmJoeEdMTkdIZHg0SlVx?=
+ =?utf-8?B?aWUrSmFEZnNTMGg3UmNvQTg2SDB2NDZ3azg3cFJDeW9zdERrek81d1hvQjJo?=
+ =?utf-8?B?MDlqZElCMFBwSks1RGNBdTFZZ1pqTDNFR2NwL0wvUkFoZjFnVmxibUJyck4w?=
+ =?utf-8?B?b2V5bDVabERYUFVUYTJWd1B0UlJQeVVYd1ZZWHRQeS9NK2RURGhuRjdDYWVN?=
+ =?utf-8?B?cGFYS0VOMzFHR3BaOEhrY3M2Y3cxYnQxTXVnRFRiUXpOUFlZVy93WVhScGUx?=
+ =?utf-8?B?Z3g1SUJaWTZTb2ovWXNiazZ5VlE2VVhBSGZGVFRDQjNBaEZOZ2N6d0JQZkNs?=
+ =?utf-8?B?aVJRcDM5N0ZPS0NocnVleWY4bmZMY1I3cUI2eCs5MjMwOVR2eVR3WWZQNWlB?=
+ =?utf-8?B?eVdEcmZLbUlqMHRIQStwU3dHanJaTFlDT0NCYmVPb1l0TVFadEU4RndNMkVh?=
+ =?utf-8?B?NTF2SUljaWdGWDFGUnA4Y3NlWWxLaU0rNnI3MkFjVldZRXhrUnl2LzZBVCt6?=
+ =?utf-8?B?R3JwR3cwRUJQeWFHTTZQSjdUMTN2V0kvckxzNjlXWDZ3b2NvWU9tRC9jMGEy?=
+ =?utf-8?B?QllNVTgwYTEvRmgrUk5ncHY4UDZKK3JnVy95WWMwUkVJNkUzU3JuME1EMVlT?=
+ =?utf-8?B?NGpVQVVMUndMUmVJaXlHblZFZ1JBMkx0SXR2cHJpREZzcGlqMmp0N0FEQUFK?=
+ =?utf-8?B?MWZIbXBOVWJHSVBIenpWWEt5aE4ydHNDNDFWL2wvcnk3clZUZnFWYmxxZGsv?=
+ =?utf-8?B?Mm5PaXNpM2xZdnRoRzVhUFp5U3JPOWlZQ2JMdVpKb1U2dWRLNmk2YTJxZGdD?=
+ =?utf-8?B?RkVOK2tWV3A5R3NQUXNxMUliUXY3Q21xUlo2bjNTbng2Z3FZeTdpbUdXV3RY?=
+ =?utf-8?B?R3VHenlvREdOQUwvbnJLYjRTOHJkS1AyMG5jTFFZaXRjMUtRUE0xMWpKdThz?=
+ =?utf-8?Q?fSyypdZp/7HfJ?=
+X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
+ IPV:NLI; SFV:NSPM; H:CH2PR12MB3990.namprd12.prod.outlook.com; PTR:; CAT:NONE;
+ SFS:(13230040)(10070799003)(376014)(366016)(1800799024); DIR:OUT; SFP:1101; 
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?TFFrY09nRk9ZaTJsMWNHZVVLU1pNcG5VbWdveUhod2k3ZlRjQVB6b3dtVVpM?=
+ =?utf-8?B?SEVyWitJMzJXOEtQNC9PQnR3a2cxTVJoaHkvKzMxdFU0MXprN1ZwOHJid2ha?=
+ =?utf-8?B?dkd4Q3U4dnEvK0s3UkRTMzVEK05nd3VCWnFERFZvNlJsVmRZZDZ5Z2VNd1hj?=
+ =?utf-8?B?dTIxK1dvYXdYQ0hmQStxU09hWk10YzEyTUNEVVp5SGxFM05QYlBpb3lzUHdG?=
+ =?utf-8?B?ZkhMd0Y4SVlzTVBxMEFjeUF2N0Z5TGt1WXJUVXZ4SU8zNVNqOE9wN1g3NVZB?=
+ =?utf-8?B?YkRFeC9mTU9UVE80K29MQVlmTnZNNm5hZ0hsWVZTQm1ITDdzdlF1c3NDRGZ2?=
+ =?utf-8?B?U3ROdGh1L2lFQVZiZmEyNU5JN0h0YTBiMkhUTmUwTk5WdVUrc2hOTzJZS1hs?=
+ =?utf-8?B?UmVnTGEzMVZqaDYwMTdqY1lUTzZEOXIwalF4cUg2Uys5Tkkzam5aaFVRcHlV?=
+ =?utf-8?B?NmJlZzBvZE9sOGpxQzI5Tm96Nmo2VkdjOG9WK1dZWVdkbGtHVFFrZ0t0RGxV?=
+ =?utf-8?B?cTNhNU0rNWN6ZU1hN1QrakowaHh4Z216ektUYTVwVzJLWFBIZlRuVi9IaXZz?=
+ =?utf-8?B?TjNHSUZoWCs0WG40UGNJMkhFeEJqN3pPYi9Ld2U1MEdJYU4zSk5qbWFNUDZh?=
+ =?utf-8?B?aFdGSXRnbmVyQXltZHVzUytTZitaYjJZQXp2dDFWWTZYWU9NK3BLWGgrNXhY?=
+ =?utf-8?B?Sng5WlJHa2RjU1hKdzVYa2hJcW55R08xUkNoaG1vamNzQ1dtTFEyMW81UGFa?=
+ =?utf-8?B?cWpxdDhPT3RLMFQ0a0FlTklhQmRBUE9PY1RNR1p1UDhFZDVVZTByN0E4WlZ5?=
+ =?utf-8?B?WXkvVDBOckpKbDFlZFZTTmREQ1JKaUo5WHcxcnBKd1p2ZWlXRCtENnBHcnFI?=
+ =?utf-8?B?S2hLTk1pNFRoYmZxaDJEamVSeCtuNmxaODJpWG5ISjgwOUpGR0xRL2UrVUQ3?=
+ =?utf-8?B?cWdGZk5EQlFNTldoa3F1eTVzR2U5Mmt1NitlaVhUbTNnSVJKNkxCckhnY0NL?=
+ =?utf-8?B?b2xBTnh6UHV4RnlhcGY5Q0JsZFpmMHZRSHJwUGU4SXZQR3F0cE9KZGQ2VG54?=
+ =?utf-8?B?aGpOck5qNmRXaXdUOFZjL0hEWEpEMTB6d2UyK3lNMUdjc0h2cUZ0cjE2UWhy?=
+ =?utf-8?B?bU5sL2tJWUxWWXlyS0lxUFVIcEtEZzVVbWNiNUNzWklTOUM0Y3hGUW93dklx?=
+ =?utf-8?B?OW9pTEhFOUQ0UXRpTDFleUlRS0NpWHRqUVNZZnM2djRIMDU2UlRoYXdhb1FN?=
+ =?utf-8?B?WWxvMDJnSzVTVnVVYWlaOGlJUWxuT1Q3YllsZktwYU05SjlsWHluSGlyWENI?=
+ =?utf-8?B?MTVzdjhTSGFmWWZiTWxmMXZPZ0FEMGJ0MWs5T09lZWVWLzlXZHBoTml5Tnkx?=
+ =?utf-8?B?YmZXMEc5WHVyNmx4VDBkdmwwRzBaMUxwRE5pTFhTeEtkMzRCZ2RFcWhmaGhy?=
+ =?utf-8?B?Wk5LSEFBVms3dTNIQTNVQ3JGQ3V5NE51cStnTXgzMGQzdy9ncVpXUVJVRldD?=
+ =?utf-8?B?N0w1Q2xUTi9JbkVabzRreEoyT3AwYzB4M3Z5U3dNeDFOQi9pejB0T2dPWklF?=
+ =?utf-8?B?QUQvWWt3V1VDanJzRmxmZFFPQzVWSFN5Z2x5TzJlQmJSTDM2eFFLOWlHQ1A0?=
+ =?utf-8?B?V0gxSFdKSERQR0t3ZmQyRFFqWWFLdFRUc0dtNUpPaGVKS2RKWjVERlkyaDd2?=
+ =?utf-8?B?REJuZTNiYmMxcmFmUnYrQjl4emJMcnFlTWZDZ1dFTm8zaVJMK25LR3A3Nmtz?=
+ =?utf-8?B?QzV3SDNQSmdpajhRTFc2ckxidk5pM0dZQlJCOFN3ZGtsYWVQRERsVkZIanJ3?=
+ =?utf-8?B?QUNmQzZRMy92WHVlNmE2ZjhRTWdTMEZJWUN6WTZsdGVOUE5HZ3lKMEJzY1Jx?=
+ =?utf-8?B?dHZOcVpLcHdUdGJUT3lRVzlPNjlrNWpjRkNLaDQ3VmFoTUYzazkzWWR5T1Aw?=
+ =?utf-8?B?VFdMUk1mTkdQMGYrNXpSL3hiRC9adE84NGFVYUFqbktYbTRCMDhGeFFxUXdy?=
+ =?utf-8?B?b1YxeVJiZ0xJVTlQNitCOUYyUWdpUmNyT3ZxbjlaOUMrT1hndHdUNU5STk13?=
+ =?utf-8?B?M2IyK1NwZjM5YTQ5Q1JucFI4anFsYlFEZk9iVG02bFdtQUpMYjFDT1FWVCt5?=
+ =?utf-8?B?V2wzNE1sT1JLNC9DcjFKM2YrSU5yYktZNEpXekdUQ0JURll3Q2YxUTg2Yjkx?=
+ =?utf-8?Q?BAzuSnkUJB2S+nQ0RKwnP82KEhA3fdvO8zAooLqpOUM5?=
+X-OriginatorOrg: Nvidia.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: 635987a1-ebe1-4c2f-8b52-08dd4f5c0bf9
+X-MS-Exchange-CrossTenant-AuthSource: CH2PR12MB3990.namprd12.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 17 Feb 2025 14:04:51.4095 (UTC)
+X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
+X-MS-Exchange-CrossTenant-Id: 43083d15-7273-40c1-b7db-39efd9ccc17a
+X-MS-Exchange-CrossTenant-MailboxType: HOSTED
+X-MS-Exchange-CrossTenant-UserPrincipalName: hE3zP+D978PxCQYvUPRHkzMe5hBR5nd1onEbxUfCrbG/egmBSI7qBNWSeHa37qaaQX0INImvvnFiOnameP3LJQ==
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: MN2PR12MB4208
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -60,94 +166,83 @@ List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-On Sat, Feb 15, 2025 at 08:37:53AM +0100, Karol Herbst wrote:
-> I was pondering with myself for a while if I should just make it official
-> that I'm not really involved in the kernel community anymore, neither as a
-> reviewer, nor as a maintainer.
-> 
-> Most of the time I simply excused myself with "if something urgent comes
-> up, I can chime in and help out". Lyude and Danilo are doing a wonderful
-> job and I've put all my trust into them.
-> 
-> However, there is one thing I can't stand and it's hurting me the most.
-> I'm convinced, no, my core believe is, that inclusivity and respect,
-> working with others as equals, no power plays involved, is how we should
-> work together within the Free and Open Source community.
-> 
-> I can understand maintainers needing to learn, being concerned on
-> technical points. Everybody deserves the time to understand and learn. It
-> is my true belief that most people are capable of change eventually. I
-> truly believe this community can change from within, however this doesn't
-> mean it's going to be a smooth process.
-> 
-> The moment I made up my mind about this was reading the following words
-> written by a maintainer within the kernel community:
-> 
-> 	"we are the thin blue line"
-> 
-> This isn't okay. This isn't creating an inclusive environment. This isn't
-> okay with the current political situation especially in the US. A
-> maintainer speaking those words can't be kept. No matter how important
-> or critical or relevant they are. They need to be removed until they
-> learn. Learn what those words mean for a lot of marginalized people. Learn
-> about what horrors it evokes in their minds.
-> 
-> I can't in good faith remain to be part of a project and its community
-> where those words are tolerated. Those words are not technical, they are
-> a political statement. Even if unintentionally, such words carry power,
-> they carry meanings one needs to be aware of. They do cause an immense
-> amount of harm.
-> 
-> I wish the best of luck for everybody to continue to try to work from
-> within. You got my full support and I won't hold it against anybody trying
-> to improve the community, it's a thankless job, it's a lot of work. People
-> will continue to burn out.
-> 
-> I got burned out enough by myself caring about the bits I maintained, but
-> eventually I had to realize my limits. The obligation I felt was eating me
-> from inside. It stopped being fun at some point and I reached a point
-> where I simply couldn't continue the work I was so motivated doing as I've
-> did in the early days.
-> 
-> Please respect my wishes and put this statement as is into the tree.
-> Leaving anything out destroys its entire meaning.
-> 
-> Respectfully
-> 
-> Karol
-> 
-> Signed-off-by: Karol Herbst <kherbst@redhat.com>
+Hi everyone,
 
-@Steven, @Masami: Can I get an ACK for taking this through the drm-misc tree?
+This short RFC is based on top of Danilo's initial driver stub series
+[1] and has for goal to initiate discussions and hopefully some design
+decisions using the simplest subdevice of the GPU (the timer) as an
+example, before implementing more devices allowing the GPU
+initialization sequence to progress (Falcon being the logical next step
+so we can get the GSP rolling).
 
-(Not cutting any context, since you have not been copied on this one.)
+It is kept simple and short for that purpose, and to avoid bumping into
+a wall with much more device code because my assumptions were incorrect.
 
-- Danilo
+This is my first time trying to write Rust kernel code, and some of my
+questions below are probably due to me not understanding yet how to use
+the core kernel interfaces. So before going further I thought it would
+make sense to raise the most obvious questions that came to my mind
+while writing this draft:
 
-> ---
->  MAINTAINERS | 2 --
->  1 file changed, 2 deletions(-)
-> 
-> diff --git a/MAINTAINERS b/MAINTAINERS
-> index 25c86f47353de..ca31e57fa203c 100644
-> --- a/MAINTAINERS
-> +++ b/MAINTAINERS
-> @@ -7431,7 +7431,6 @@ F:	Documentation/devicetree/bindings/display/panel/novatek,nt36672a.yaml
->  F:	drivers/gpu/drm/panel/panel-novatek-nt36672a.c
->  
->  DRM DRIVER FOR NVIDIA GEFORCE/QUADRO GPUS
-> -M:	Karol Herbst <kherbst@redhat.com>
->  M:	Lyude Paul <lyude@redhat.com>
->  M:	Danilo Krummrich <dakr@kernel.org>
->  L:	dri-devel@lists.freedesktop.org
-> @@ -24062,7 +24061,6 @@ F:	tools/testing/selftests/ftrace/
->  TRACING MMIO ACCESSES (MMIOTRACE)
->  M:	Steven Rostedt <rostedt@goodmis.org>
->  M:	Masami Hiramatsu <mhiramat@kernel.org>
-> -R:	Karol Herbst <karolherbst@gmail.com>
->  R:	Pekka Paalanen <ppaalanen@gmail.com>
->  L:	linux-kernel@vger.kernel.org
->  L:	nouveau@lists.freedesktop.org
-> -- 
-> 2.48.1
-> 
+- Where and how to store subdevices. The timer device is currently a
+  direct member of the GPU structure. It might work for GSP devices
+  which are IIUC supposed to have at least a few fixed devices required
+  to bring the GSP up ; but as a general rule this probably won't scale
+  as not all subdevices are present on all GPU variants, or in the same
+  numbers. So we will probably need to find an equivalent to the
+  `subdev` linked list in Nouveau.
+
+- BAR sharing between subdevices. Right now each subdevice gets access
+  to the full BAR range. I am wondering whether we could not split it
+  into the relevant slices for each-subdevice, and transfer ownership of
+  each slice to the device that is supposed to use it. That way each
+  register would have a single owner, which is arguably safer - but
+  maybe not as flexible as we will need down the road?
+
+- On a related note, since the BAR is behind a Devres its availability
+  must first be secured before any hardware access using try_access().
+  Doing this on a per-register or per-operation basis looks overkill, so
+  all methods that access the BAR take a reference to it, allowing to
+  call try_access() from the highest-level caller and thus reducing the
+  number of times this needs to be performed. Doing so comes at the cost
+  of an extra argument to most subdevice methods ; but also with the
+  benefit that we don't need to put the BAR behind another Arc and share
+  it across all subdevices. I don't know which design is better here,
+  and input would be very welcome.
+
+- We will probably need sometime like a `Subdevice` trait or something
+  down the road, but I'll wait until we have more than one subdevice to
+  think about it.
+
+The first 2 patches are small additions to the core Rust modules, that
+the following patches make use of and which might be useful for other
+drivers as well. The last patch is the naive implementation of the timer
+device. I don't expect it to stay this way at all, so please point out
+all the deficiencies in this very early code! :)
+
+[1] https://lore.kernel.org/nouveau/20250209173048.17398-1-dakr@kernel.org/
+
+Signed-off-by: Alexandre Courbot <acourbot@nvidia.com>
+---
+Alexandre Courbot (3):
+      rust: add useful ops for u64
+      rust: make ETIMEDOUT error available
+      gpu: nova-core: add basic timer device
+
+ drivers/gpu/nova-core/driver.rs    |  4 +-
+ drivers/gpu/nova-core/gpu.rs       | 35 ++++++++++++++-
+ drivers/gpu/nova-core/nova_core.rs |  1 +
+ drivers/gpu/nova-core/regs.rs      | 43 ++++++++++++++++++
+ drivers/gpu/nova-core/timer.rs     | 91 ++++++++++++++++++++++++++++++++++++++
+ rust/kernel/error.rs               |  1 +
+ rust/kernel/lib.rs                 |  1 +
+ rust/kernel/num.rs                 | 32 ++++++++++++++
+ 8 files changed, 206 insertions(+), 2 deletions(-)
+---
+base-commit: 6484e46f33eac8dd42aa36fa56b51d8daa5ae1c1
+change-id: 20250216-nova_timer-c69430184f54
+
+Best regards,
+-- 
+Alexandre Courbot <acourbot@nvidia.com>
+
