@@ -2,90 +2,154 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id DDE41A36C79
-	for <lists+nouveau@lfdr.de>; Sat, 15 Feb 2025 08:38:25 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 09CF5A37916
+	for <lists+nouveau@lfdr.de>; Mon, 17 Feb 2025 01:02:01 +0100 (CET)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 8CE9210E184;
-	Sat, 15 Feb 2025 07:38:24 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 9ADE810E193;
+	Mon, 17 Feb 2025 00:01:58 +0000 (UTC)
 Authentication-Results: gabe.freedesktop.org;
-	dkim=pass (1024-bit key; unprotected) header.d=redhat.com header.i=@redhat.com header.b="Ypx4tJik";
+	dkim=pass (2048-bit key; unprotected) header.d=Nvidia.com header.i=@Nvidia.com header.b="Zo8JhxXz";
 	dkim-atps=neutral
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from us-smtp-delivery-124.mimecast.com
- (us-smtp-delivery-124.mimecast.com [170.10.129.124])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 1DD1C10E184
- for <nouveau@lists.freedesktop.org>; Sat, 15 Feb 2025 07:38:23 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1739605102;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references;
- bh=FWDjtb7Rhn51HfchEFLh7MLZr0T/SMf389ZL5QPUH0M=;
- b=Ypx4tJikZGeX2L66/U2wm9+001uDN1SMSHn0jvPYgFPphvCKq1uoUGucJ7lTsQRidC5NuE
- itqvKvGsZMhNHYlpsxqzF0oVJlG/klDsO2G4/EtOavGFhNUcehhNeEwGYZu3sUaT6Ty9qW
- MKe6NFAauUvUC3Jdu9PxVUTTl5/skDw=
-Received: from mail-ed1-f72.google.com (mail-ed1-f72.google.com
- [209.85.208.72]) by relay.mimecast.com with ESMTP with STARTTLS
- (version=TLSv1.3, cipher=TLS_AES_256_GCM_SHA384) id
- us-mta-447-zvR50E7lP9-1g11fXhdyig-1; Sat, 15 Feb 2025 02:38:20 -0500
-X-MC-Unique: zvR50E7lP9-1g11fXhdyig-1
-X-Mimecast-MFC-AGG-ID: zvR50E7lP9-1g11fXhdyig_1739605100
-Received: by mail-ed1-f72.google.com with SMTP id
- 4fb4d7f45d1cf-5e0412dd901so57969a12.2
- for <nouveau@lists.freedesktop.org>; Fri, 14 Feb 2025 23:38:20 -0800 (PST)
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1739605100; x=1740209900;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=FWDjtb7Rhn51HfchEFLh7MLZr0T/SMf389ZL5QPUH0M=;
- b=VL7IjmTtn11r4gixR0yjmJPLkRWApN2RlgZ3pOI9PIWtZ+d/rNqRtvnFHSa9i0/uKO
- JYSg4InsBhrOMGQ/yv/FcSb4coQLdYpTkTErrId//C2EkJa+pPyXc7INNJhCgT3GxoZx
- 8LvWo1xFrXtE003S4GnS6fP1wHn/mNMdFzVGlQqCVSCN3nYHRCEz08b6/0Eg8gdGqhL5
- C+QIlUVX7lHSDUGN7XsHEE/seKX1GuNU5FoS0w6KDdO2ugkGpT1lGG8U8muqnPa4IbB+
- dAyemVjZsK5RndYHHIz2o4ZEbof0kqBEV7Gh53SbM9tfMZ+mJmvWL9ZCO6RiNriQ+aV3
- j4BQ==
-X-Forwarded-Encrypted: i=1;
- AJvYcCVDhw4hmH7P+ETj2jJ1dwkpJQZJQA+ngIiYWScA4AzX7BnD6qPJ46+Bart9vGiD9bRnzHfNWrfQ@lists.freedesktop.org
-X-Gm-Message-State: AOJu0YzlHcY2q9BDSjhgq9KDpN44XzM044XtUsZcQmPDeRUfV2MSVod8
- 0r3FTWBKJPzqN+N240OMegkHZckyuDbsr9oU9Cj3nNrT4o5yjGQYkYRdlcB8JyevXE9oWzSrIqi
- lftLLuk4UuTpSQ9RSaU3pJPxvv4GqrzuqRLEhOjNxduc0KjZl+45ukzyeXJJ6QwI=
-X-Gm-Gg: ASbGncsqcqWvwEtvYayviOGP8uzu+9arRR1Rwis41TdwPxVaBnxfOzlgPgursI3ygng
- i+0h9RPS9jployzVbUkcHHAECxRwJRF5QhVVMIjHksCLhRKj8mOMfG40+BvjtgiQWv+qcUWBsz5
- naAMifAZVUK+b0qHQCoEC0PDJ+o/KzuNGJoGYCt1TFV+8XgnKhvLBkCc3l7eyaYYETowNHskEf5
- GLKHZH4HsgomzoV99dUg1Up3d/FxtIdaFUifeQTbb2NmxMLFbU//FtU5IwTSdxW6qce0txxl7Xt
- +Ss=
-X-Received: by 2002:a05:6402:2114:b0:5e0:2996:7300 with SMTP id
- 4fb4d7f45d1cf-5e0361c8668mr1789933a12.20.1739605099606; 
- Fri, 14 Feb 2025 23:38:19 -0800 (PST)
-X-Google-Smtp-Source: AGHT+IHY1Jd8Xn9OrRCkMKnwl4e4BSKlBOGfI4udUpcfDESdHQdqzAx+ErE8yPbXqncelWxpQRVCsg==
-X-Received: by 2002:a05:6402:2114:b0:5e0:2996:7300 with SMTP id
- 4fb4d7f45d1cf-5e0361c8668mr1789906a12.20.1739605098571; 
- Fri, 14 Feb 2025 23:38:18 -0800 (PST)
-Received: from kherbst.lan ([188.192.20.101]) by smtp.gmail.com with ESMTPSA id
- 4fb4d7f45d1cf-5ded69e7c33sm3195322a12.61.2025.02.14.23.38.14
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 14 Feb 2025 23:38:14 -0800 (PST)
-From: Karol Herbst <kherbst@redhat.com>
-To: linux-kernel@vger.kernel.org
-Cc: Lyude Paul <lyude@redhat.com>, Danilo Krummrich <dakr@redhat.com>,
- dri-devel@lists.freedesktop.org, nouveau@lists.freedesktop.org,
- Dave Airlie <airlied@redhat.com>, Simona Vetter <simona.vetter@ffwll.ch>,
- Karol Herbst <kherbst@redhat.com>
-Subject: [PATCH 1/1] MAINTAINERS: Remove myself
-Date: Sat, 15 Feb 2025 08:37:53 +0100
-Message-ID: <20250215073753.1217002-2-kherbst@redhat.com>
-X-Mailer: git-send-email 2.48.1
-In-Reply-To: <20250215073753.1217002-1-kherbst@redhat.com>
-References: <20250215073753.1217002-1-kherbst@redhat.com>
+Received: from NAM04-BN8-obe.outbound.protection.outlook.com
+ (mail-bn8nam04on2073.outbound.protection.outlook.com [40.107.100.73])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 41C8910E193;
+ Mon, 17 Feb 2025 00:01:57 +0000 (UTC)
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=JCFDQj2PoqHbuq7gYFQiW2xBopsbz5VuoBZYGL4K5bSam2DWXYub0Kbyjp6gOQWHzj7da1nHPAZVneCsxozah9SwoEOtGO+ezUZCY6Ph5c4ADwNJX4JyfgxxRRVSS2XPTDN+k9KI17xbqztHWFauRpsoKXY1O1cUpqmo5IsOG5eODQsH0BKtBZu5Xj3H/4sJ6or60TxcJaMA/ouo3p4nGFx7fLO5BEhTx0nxrcPoQ9fXjfeP2ArhLykxFGKTmkRUZ1RttnJdCTsGcpZE7ukxK71cXWZX4FwvyQARZBAaoA3A8DyEtMLHk0mEKIwdA3K4sIUdvz50kcjPfPDDUYqsxQ==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=eDK0+wxFsGa0EJGThWLTJe9YyKta5PufmyN0g9Qklfw=;
+ b=YLgyJYlQKNcA2SuVmumhqz6h2l0br4gtjxR7Fnt7VCjZTZePRS7PQOwKP4eSfXV3zlyOvIgKoZmuzUu/QwsttL1u/1NUyph1KgB2Y+SLO3i1T4R5xyhH1A1wM3Ruy/QLcrds+8gFeO52jl+1rbfOVmMBWyiMdTcm0D/kypy/WOpFlK8Jmla0qw4FxbIUN9ZVqHscWqBtOSgm/jmeAPUOaiRaHuPvu1ERFSjSqGFKQIlJfTrgwcaNolhQs79yZSIrbiHJPJlCMw3Dyw8O1kqzuXErAhXlJKG25tA+UW1rRjj9FXwGqYaA8+k4R1aPrhYfJN+WftfB0cqA8I/Nah48Bw==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=nvidia.com; dmarc=pass action=none header.from=nvidia.com;
+ dkim=pass header.d=nvidia.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=Nvidia.com;
+ s=selector2;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=eDK0+wxFsGa0EJGThWLTJe9YyKta5PufmyN0g9Qklfw=;
+ b=Zo8JhxXzR5HqCrQG2oTZT0KuGU59iidfsHFzLDowr26PV6hUaoPUqjAI6iuNU4hsfbson8fWwKTq1tnIfUCgkz3dw8xMjP6ZFchNHsM6XPFb8M/py9cdVr1UwAQYjWICgJ53ZN9mOcFJj/edH55C5VzpzXpkF/iL+IIUSWGZ3wE+9vaKi42ecKFM8Dsz2wnocXQw8DLJaOWa+YfBYMcjdm+NrDIixPfJ/A+t2vdtps/qDUqSXUbQhkG3LaNUdLsTzGMGN0ofLfqRl91bQe52QxwIonDMp0uFigNH3MIX0PaUIfcW6W5n1063JGdD6I9uPtUP5gf1zJ9+VEYVq7UGXQ==
+Authentication-Results: dkim=none (message not signed)
+ header.d=none;dmarc=none action=none header.from=nvidia.com;
+Received: from DS0PR12MB7726.namprd12.prod.outlook.com (2603:10b6:8:130::6) by
+ MW4PR12MB5604.namprd12.prod.outlook.com (2603:10b6:303:18d::17) with
+ Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.8445.16; Mon, 17 Feb
+ 2025 00:01:52 +0000
+Received: from DS0PR12MB7726.namprd12.prod.outlook.com
+ ([fe80::953f:2f80:90c5:67fe]) by DS0PR12MB7726.namprd12.prod.outlook.com
+ ([fe80::953f:2f80:90c5:67fe%7]) with mapi id 15.20.8445.017; Mon, 17 Feb 2025
+ 00:01:52 +0000
+Date: Mon, 17 Feb 2025 11:01:47 +1100
+From: Alistair Popple <apopple@nvidia.com>
+To: David Hildenbrand <david@redhat.com>
+Cc: Andrew Morton <akpm@linux-foundation.org>, 
+ linux-kernel@vger.kernel.org, linux-doc@vger.kernel.org,
+ dri-devel@lists.freedesktop.org, 
+ linux-mm@kvack.org, nouveau@lists.freedesktop.org, 
+ linux-trace-kernel@vger.kernel.org, linux-perf-users@vger.kernel.org,
+ damon@lists.linux.dev, 
+ =?utf-8?B?SsOpcsO0bWU=?= Glisse <jglisse@redhat.com>,
+ Jonathan Corbet <corbet@lwn.net>, Alex Shi <alexs@kernel.org>, 
+ Yanteng Si <si.yanteng@linux.dev>, Karol Herbst <kherbst@redhat.com>,
+ Lyude Paul <lyude@redhat.com>, 
+ Danilo Krummrich <dakr@kernel.org>, David Airlie <airlied@gmail.com>, 
+ Simona Vetter <simona@ffwll.ch>, Masami Hiramatsu <mhiramat@kernel.org>, 
+ Oleg Nesterov <oleg@redhat.com>, Peter Zijlstra <peterz@infradead.org>, 
+ SeongJae Park <sj@kernel.org>, "Liam R. Howlett" <Liam.Howlett@oracle.com>, 
+ Lorenzo Stoakes <lorenzo.stoakes@oracle.com>, Vlastimil Babka <vbabka@suse.cz>,
+ Jann Horn <jannh@google.com>, 
+ Pasha Tatashin <pasha.tatashin@soleen.com>, Peter Xu <peterx@redhat.com>,
+ Jason Gunthorpe <jgg@nvidia.com>, Simona Vetter <simona.vetter@ffwll.ch>
+Subject: Re: [PATCH v2 03/17] mm/rmap: convert make_device_exclusive_range()
+ to make_device_exclusive()
+Message-ID: <vclmxoorivzhamd4smaaeyamdeangj3aqlbl27muzxuljasdrg@t4jj77rmiozu>
+References: <20250210193801.781278-1-david@redhat.com>
+ <20250210193801.781278-4-david@redhat.com>
+ <20250210210001.5dc68b38eb1bfa44d0fd78f6@linux-foundation.org>
+ <48fd75b9-696e-402c-95bd-55f2f0e24dfc@redhat.com>
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <48fd75b9-696e-402c-95bd-55f2f0e24dfc@redhat.com>
+X-ClientProxiedBy: SY0PR01CA0009.ausprd01.prod.outlook.com
+ (2603:10c6:10:1bb::10) To DS0PR12MB7726.namprd12.prod.outlook.com
+ (2603:10b6:8:130::6)
 MIME-Version: 1.0
-X-Mimecast-Spam-Score: 0
-X-Mimecast-MFC-PROC-ID: WvVtj9jii2f97k9ACYLK2wVnBa59SkoQzsiJceUHTFE_1739605100
-X-Mimecast-Originator: redhat.com
-Content-Transfer-Encoding: 8bit
-content-type: text/plain; charset="US-ASCII"; x-default=true
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: DS0PR12MB7726:EE_|MW4PR12MB5604:EE_
+X-MS-Office365-Filtering-Correlation-Id: 4e876eab-77e5-47b4-6f89-08dd4ee64863
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: BCL:0;
+ ARA:13230040|1800799024|376014|7416014|366016|7053199007; 
+X-Microsoft-Antispam-Message-Info: =?us-ascii?Q?Z61QbeB29V4CFrLt5RxkgBOFYdgujTqOdtLAmTxbDmxQUOqDvnx7wj8yPISQ?=
+ =?us-ascii?Q?zcz/bE4XjP8fZSFKi/+6wFY9DXTviz/q/qRKhQicXRlhEXB8CZKK66/eclJX?=
+ =?us-ascii?Q?LkwAyWNbwHIWLpf37I8gd9IvDBwbf7kir6ljIZhGWuz4PrG7xoehE+X2QTPu?=
+ =?us-ascii?Q?2CfB8UDcBzTVh3TRzGfLSUzx8TuGNT8WMEtgt1j19+04wOQawuQOm+BAmxpn?=
+ =?us-ascii?Q?Yr31loZ8Stwfz8T1gsExx8BvUrp5bRszsQQF1ANkb0+UFZzeF655aR5i97Q/?=
+ =?us-ascii?Q?UsZauI4wUTze39WM6RkVX7sAYdfY2s1BbDXwOBPERCEe+qk70CqgzPutVpMp?=
+ =?us-ascii?Q?QHaeSzrrAf6c+OYfnQ452BMSbv6wLH4MxamdETFFutYtOQNnMQ8oNfOU5QGh?=
+ =?us-ascii?Q?POM2o3MeUe5NglGprrlZ+P3+adfV8jnFYTiaVqCHkIlO/aevlh2zSqFXJfcr?=
+ =?us-ascii?Q?2P8ghYDTARAGrRaSTZShes5vv6twJ33QcKPLBjqlIwFllIkkT28FOBjug4H8?=
+ =?us-ascii?Q?N46d1BimcsxwU/b/0/nT0kz6kCc/k9ImIHxN2/gc+1H2bI9/GCTa3UxaF03E?=
+ =?us-ascii?Q?cYdVFgNgZ2KA7F2k6f8K4VfU44kLWsTIMaj3/oQznMi57atl4RRMoYOk5W+r?=
+ =?us-ascii?Q?LkH4T+2IDQkas4Dw1QChaXdPFnWWJPE2vStPmejKmtAwgGuT7oRrukbes6je?=
+ =?us-ascii?Q?Wux6Ep0gahyS3K7RWNl6jmlkLcKokbQ07GpRlPnpeeIHupz7vGHTTv2bDA1b?=
+ =?us-ascii?Q?oQgtHQx7eD09aKhDupHxvMP8sDJP7VMkIknkT4Hhx77GU4UfsRrOvvjPQc0E?=
+ =?us-ascii?Q?fdsFR/B2lUUOOaxya3ueLEfAObmq9Z+uuME8xWz0j3fXWVbqFKtwWtJgR2Cy?=
+ =?us-ascii?Q?9RgN6qh3mYUaztlBbFZCZKUqd7FEEIZEunJG3lFtsMSaIEwCKSQ+V1B0NaZc?=
+ =?us-ascii?Q?2j0dsmzomW+I12r3DJ3xDdYdSEtxf3MedZUyet3uY/xnAACkXTFZcSYh0/IK?=
+ =?us-ascii?Q?M2dXuGiX31eQXP7tI5EvCWz9aSp7VyZlDvqPUyx5f1CZ8VvLSPVsuFJoN7oU?=
+ =?us-ascii?Q?NL7lC4q1z7k5AJ4d8EQi+9EC8AQQPL9y9Vdj2ywYtmQZT2CuKWTjlOSetHFC?=
+ =?us-ascii?Q?sWBfzHG6jhQ7X+G0BqTj7yT+U5YiMDGesfZaX+Uh0JMtn0VWBQO1Oy5XdfWs?=
+ =?us-ascii?Q?PUHpFb8V+lifodHiUiHbM6Oej2bw7r/P8qsJNj84ABCuO+uXLOCRigyhgL2W?=
+ =?us-ascii?Q?OYh4ubVkBLwAO6BCiZeMeuKaOM8XyCEB9iNPOekK3mJFquMD2WTsBECInsv+?=
+ =?us-ascii?Q?llCVVYgBfxkxX1C+zCcKGREJpW6jnBEAf1wLG1zaZ95Ug28eOSOGD3kPmZTR?=
+ =?us-ascii?Q?FPA/Fzm0tMqSa+ZdMhlDYayjYN1Y?=
+X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
+ IPV:NLI; SFV:NSPM; H:DS0PR12MB7726.namprd12.prod.outlook.com; PTR:; CAT:NONE;
+ SFS:(13230040)(1800799024)(376014)(7416014)(366016)(7053199007); DIR:OUT;
+ SFP:1101; 
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0: =?us-ascii?Q?ezYWmCw6oJO78Vnd42KLeFwf8g+ju3tSFJOOsXmU5xuZXYxdf8DvMD2pA3vf?=
+ =?us-ascii?Q?bP+fM8KypRK19jO2IkWnfRYaZzUIXKGyw6MpFCdCSxXxBW0ymfuZouQf27B4?=
+ =?us-ascii?Q?2a1EXJHksSlvVlqHBPzq6uKRyRMaV9GAj9+an/PlC63gRfoTUqljquVD/DHL?=
+ =?us-ascii?Q?GqX9U5szGUw9RA3htwxcb+UmngT1bmHPYUJTAb4JmPhIPxw1VONLNv/SnVmZ?=
+ =?us-ascii?Q?2mbgs5Ll8o5RYriPALxHIRA0WLryyRK2uv/ruv09tSdVLUXx05HgYpeoTrv2?=
+ =?us-ascii?Q?GIAoVyRRI5p5dGgm46lbOz8usD7tj8SuHVFyMtjldnTNkeILHNZfI7Xs9oK2?=
+ =?us-ascii?Q?5V8OogBuni95M+XQc+jUGEHmcEoSTd6ndC31mYTgwdWfQSFV5rmIDhErua0q?=
+ =?us-ascii?Q?wSTE2VAQSsX/LcpIQ6aw2T0Y+xLJxDw1cjzOR+pauFwNvYR8CKYbY2bZ/pUM?=
+ =?us-ascii?Q?xdD6FDg/LVLvfXMm7xgTOyHANVOvIpSloKenD2Q8WbPh3S6Gow0xVa99k0Eo?=
+ =?us-ascii?Q?gm4ryx6ESjIKzR4ZmVKiR17L8Tuqwo5qJz1n6RjWSUtS6JGZxvMHXIMuxeED?=
+ =?us-ascii?Q?ha2ni6SPUMCq7WMTI+rkwgpIWmZdgOEXWgKB9L+T66NrLXg2yAm8nWKamRRP?=
+ =?us-ascii?Q?4fSKUN9mGXB0h3gubFcYfVqjB6+vigtzwrhc8s98r5Mlsu/EqIrt//CJ/Ftl?=
+ =?us-ascii?Q?iyRGx8AqPcqXCu9rvNdjtSbhomGwT7KbIv3Hym2HftsKdocuixLb+SOiGCQK?=
+ =?us-ascii?Q?0WegO8cYy9Z+5aAag3aiBjvFo3vLJPr1heXfGAr6BtVEkn8DGh7JA3asszbI?=
+ =?us-ascii?Q?JtoHZlv+TgI75mv3Bk28dZzdBqdNuzYaipbO/bNQZvqC5qTWLxtHh0edQ6Kk?=
+ =?us-ascii?Q?SU63/XNYYrKsFEEdwJbEwNDE32/ob797lLLfpb9C/9wybmIcp7Czg2AQrH4+?=
+ =?us-ascii?Q?1JQV/WcgVcK6QbKQWpAF7mwGtY3c3JsvJ1w6DDCL0Bfxcfi5UlYmgnELI/kx?=
+ =?us-ascii?Q?88z6PtOWfAkKRv9BiMLWNBGzworAxwrfwaBSnsR5Wr8c+AjJMGffgz78yG8l?=
+ =?us-ascii?Q?NTQwCfjJuBFXFNgiP/adm6HYgpe8rq9scZuExs9I1xShgD0mbuTf43d06nMF?=
+ =?us-ascii?Q?fabwwDg1tbuIC99xzLH60tHI8D0Zp6pbQH1ZtRZN8a8lU83XH6cRC9Cjp4Ol?=
+ =?us-ascii?Q?uolHwyO1pe+r1QTka4Ko8UcKYpnK4hbtMAcO1cmqwdNEyleQFDFq/sUh8vKz?=
+ =?us-ascii?Q?zspOFPHlzIoN8S3rI7gjVRr1Fu++0BOsV55R3XiQLA+q+3VEFmdkBH4q/CMq?=
+ =?us-ascii?Q?3ia/okC2Q+zaPr67ooX8Nih0xzO8j9IWk5H2fWviIuHzulsNSS4dCCJpI1u8?=
+ =?us-ascii?Q?QukG+0NgSCsbNKt0KFGn1KaLq2o7aztOQGm6MrPDGSAZ4Lk8m8/KiX58oFZ/?=
+ =?us-ascii?Q?aH/KSEWeSmmzttl08Omb/s3Izxa1kBZC3+7JKJRvnOCw4viYlRBMbPr8tKaQ?=
+ =?us-ascii?Q?h27Gl0KcBxknMLH4TnsLrRZYJXmTyKsTivG9BKoKD6gPtQJinXK1O4zGyPKA?=
+ =?us-ascii?Q?Gm/A0OVM+i4gErkHQpEyuIxsrgy9+GswvQg1cppq?=
+X-OriginatorOrg: Nvidia.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: 4e876eab-77e5-47b4-6f89-08dd4ee64863
+X-MS-Exchange-CrossTenant-AuthSource: DS0PR12MB7726.namprd12.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 17 Feb 2025 00:01:52.3731 (UTC)
+X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
+X-MS-Exchange-CrossTenant-Id: 43083d15-7273-40c1-b7db-39efd9ccc17a
+X-MS-Exchange-CrossTenant-MailboxType: HOSTED
+X-MS-Exchange-CrossTenant-UserPrincipalName: ET7Vdfw3oHU4t19ek+CEXdMKA8blov1w6MzvNuXuCGyAKTzqaOcFP95y7cnYRBgjyt/Jaa09QoTb2ZVWW57keA==
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: MW4PR12MB5604
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -100,86 +164,78 @@ List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-I was pondering with myself for a while if I should just make it official
-that I'm not really involved in the kernel community anymore, neither as a
-reviewer, nor as a maintainer.
+On Tue, Feb 11, 2025 at 09:33:54AM +0100, David Hildenbrand wrote:
+> On 11.02.25 06:00, Andrew Morton wrote:
+> > On Mon, 10 Feb 2025 20:37:45 +0100 David Hildenbrand <david@redhat.com> wrote:
+> > 
+> > > The single "real" user in the tree of make_device_exclusive_range() always
+> > > requests making only a single address exclusive. The current implementation
+> > > is hard to fix for properly supporting anonymous THP / large folios and
+> > > for avoiding messing with rmap walks in weird ways.
+> > > 
+> > > So let's always process a single address/page and return folio + page to
+> > > minimize page -> folio lookups. This is a preparation for further
+> > > changes.
+> > > 
+> > > Reject any non-anonymous or hugetlb folios early, directly after GUP.
+> > > 
+> > > While at it, extend the documentation of make_device_exclusive() to
+> > > clarify some things.
+> > 
+> > x86_64 allmodconfig:
+> > 
+> > drivers/gpu/drm/nouveau/nouveau_svm.c: In function 'nouveau_atomic_range_fault':
+> > drivers/gpu/drm/nouveau/nouveau_svm.c:612:68: error: 'folio' undeclared (first use in this function)
+> >    612 |                 page = make_device_exclusive(mm, start, drm->dev, &folio);
+> >        |                                                                    ^~~~~
+> > drivers/gpu/drm/nouveau/nouveau_svm.c:612:68: note: each undeclared identifier is reported only once for each function it appears in
+> 
+> Ah! Because I was carrying on the same branch SVM fixes [1] that are
+> getting surprisingly little attention so far.
 
-Most of the time I simply excused myself with "if something urgent comes
-up, I can chime in and help out". Lyude and Danilo are doing a wonderful
-job and I've put all my trust into them.
+I believe this has been picked up in drm-misc-fixes now:
 
-However, there is one thing I can't stand and it's hurting me the most.
-I'm convinced, no, my core believe is, that inclusivity and respect,
-working with others as equals, no power plays involved, is how we should
-work together within the Free and Open Source community.
+https://lore.kernel.org/dri-devel/Z69eloo_7LM6NneO@cassiopeiae/
 
-I can understand maintainers needing to learn, being concerned on
-technical points. Everybody deserves the time to understand and learn. It
-is my true belief that most people are capable of change eventually. I
-truly believe this community can change from within, however this doesn't
-mean it's going to be a smooth process.
-
-The moment I made up my mind about this was reading the following words
-written by a maintainer within the kernel community:
-
-	"we are the thin blue line"
-
-This isn't okay. This isn't creating an inclusive environment. This isn't
-okay with the current political situation especially in the US. A
-maintainer speaking those words can't be kept. No matter how important
-or critical or relevant they are. They need to be removed until they
-learn. Learn what those words mean for a lot of marginalized people. Learn
-about what horrors it evokes in their minds.
-
-I can't in good faith remain to be part of a project and its community
-where those words are tolerated. Those words are not technical, they are
-a political statement. Even if unintentionally, such words carry power,
-they carry meanings one needs to be aware of. They do cause an immense
-amount of harm.
-
-I wish the best of luck for everybody to continue to try to work from
-within. You got my full support and I won't hold it against anybody trying
-to improve the community, it's a thankless job, it's a lot of work. People
-will continue to burn out.
-
-I got burned out enough by myself caring about the bits I maintained, but
-eventually I had to realize my limits. The obligation I felt was eating me
-from inside. It stopped being fun at some point and I reached a point
-where I simply couldn't continue the work I was so motivated doing as I've
-did in the early days.
-
-Please respect my wishes and put this statement as is into the tree.
-Leaving anything out destroys its entire meaning.
-
-Respectfully
-
-Karol
-
-Signed-off-by: Karol Herbst <kherbst@redhat.com>
----
- MAINTAINERS | 2 --
- 1 file changed, 2 deletions(-)
-
-diff --git a/MAINTAINERS b/MAINTAINERS
-index 25c86f47353de..ca31e57fa203c 100644
---- a/MAINTAINERS
-+++ b/MAINTAINERS
-@@ -7431,7 +7431,6 @@ F:	Documentation/devicetree/bindings/display/panel/novatek,nt36672a.yaml
- F:	drivers/gpu/drm/panel/panel-novatek-nt36672a.c
- 
- DRM DRIVER FOR NVIDIA GEFORCE/QUADRO GPUS
--M:	Karol Herbst <kherbst@redhat.com>
- M:	Lyude Paul <lyude@redhat.com>
- M:	Danilo Krummrich <dakr@kernel.org>
- L:	dri-devel@lists.freedesktop.org
-@@ -24062,7 +24061,6 @@ F:	tools/testing/selftests/ftrace/
- TRACING MMIO ACCESSES (MMIOTRACE)
- M:	Steven Rostedt <rostedt@goodmis.org>
- M:	Masami Hiramatsu <mhiramat@kernel.org>
--R:	Karol Herbst <karolherbst@gmail.com>
- R:	Pekka Paalanen <ppaalanen@gmail.com>
- L:	linux-kernel@vger.kernel.org
- L:	nouveau@lists.freedesktop.org
--- 
-2.48.1
-
+> 
+> 
+> The following sorts it out for now:
+> 
+> From 337c68bf24af59f36477be11ea6ef7c7ce9aa8ae Mon Sep 17 00:00:00 2001
+> From: David Hildenbrand <david@redhat.com>
+> Date: Tue, 11 Feb 2025 09:33:04 +0100
+> Subject: [PATCH] merge
+> 
+> Signed-off-by: David Hildenbrand <david@redhat.com>
+> ---
+>  drivers/gpu/drm/nouveau/nouveau_svm.c | 1 +
+>  1 file changed, 1 insertion(+)
+> 
+> diff --git a/drivers/gpu/drm/nouveau/nouveau_svm.c b/drivers/gpu/drm/nouveau/nouveau_svm.c
+> index 39e3740980bb7..1fed638b9eba8 100644
+> --- a/drivers/gpu/drm/nouveau/nouveau_svm.c
+> +++ b/drivers/gpu/drm/nouveau/nouveau_svm.c
+> @@ -590,6 +590,7 @@ static int nouveau_atomic_range_fault(struct nouveau_svmm *svmm,
+>  	unsigned long timeout =
+>  		jiffies + msecs_to_jiffies(HMM_RANGE_DEFAULT_TIMEOUT);
+>  	struct mm_struct *mm = svmm->notifier.mm;
+> +	struct folio *folio;
+>  	struct page *page;
+>  	unsigned long start = args->p.addr;
+>  	unsigned long notifier_seq;
+> -- 
+> 2.48.1
+> 
+> 
+> I'll resend [1] once this stuff here landed.
+> 
+> Let me know if you want a full resend of this series, thanks.
+> 
+> 
+> [1] https://lkml.kernel.org/r/20250124181524.3584236-1-david@redhat.com
+> 
+> -- 
+> Cheers,
+> 
+> David / dhildenb
+> 
