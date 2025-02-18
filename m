@@ -2,47 +2,142 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id 521D7A3947D
-	for <lists+nouveau@lfdr.de>; Tue, 18 Feb 2025 09:07:26 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 24C6CA3956F
+	for <lists+nouveau@lfdr.de>; Tue, 18 Feb 2025 09:32:46 +0100 (CET)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 6C24C10E33E;
-	Tue, 18 Feb 2025 08:07:22 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 495A410E0B6;
+	Tue, 18 Feb 2025 08:32:44 +0000 (UTC)
 Authentication-Results: gabe.freedesktop.org;
-	dkim=pass (1024-bit key; unprotected) header.d=linuxfoundation.org header.i=@linuxfoundation.org header.b="JYtwZ3rw";
+	dkim=pass (2048-bit key; unprotected) header.d=Nvidia.com header.i=@Nvidia.com header.b="qayb8qvK";
 	dkim-atps=neutral
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from dfw.source.kernel.org (dfw.source.kernel.org [139.178.84.217])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 00E9810E64D;
- Tue, 18 Feb 2025 08:07:19 +0000 (UTC)
-Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by dfw.source.kernel.org (Postfix) with ESMTP id A25F35C4CC7;
- Tue, 18 Feb 2025 08:06:39 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 02E3AC4CEE6;
- Tue, 18 Feb 2025 08:07:17 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=linuxfoundation.org;
- s=korg; t=1739866038;
- bh=0nJNYoHEPY55ekPjs2MDTQbDYT48weyBXJTKQum9lYM=;
- h=Date:From:To:Subject:References:In-Reply-To:From;
- b=JYtwZ3rwsLQu4WBaDduY/mEVvInOMPJ16YmXZDER0bYrEWJ7sdc7ZYLPmZh3GGD9r
- ESqOX2EZjua0kKcrx9D+Lgm3sRAiIBYUth0/RuncbJL/eXmaEYJ+CB9msS8pozxVDE
- 1J+N56X+jVbr+Qg7Di4W4B8vCuSz8MTDnZTlbyp4=
-Date: Tue, 18 Feb 2025 09:07:15 +0100
-From: Greg KH <gregkh@linuxfoundation.org>
-To: Alexandre Courbot <acourbot@nvidia.com>,
- Danilo Krummrich <dakr@kernel.org>, David Airlie <airlied@gmail.com>,
- John Hubbard <jhubbard@nvidia.com>, Ben Skeggs <bskeggs@nvidia.com>,
- linux-kernel@vger.kernel.org, rust-for-linux@vger.kernel.org,
- nouveau@lists.freedesktop.org, dri-devel@lists.freedesktop.org
-Subject: Re: [RFC PATCH 0/3] gpu: nova-core: add basic timer subdevice
- implementation
-Message-ID: <2025021830-segment-boil-5ff7@gregkh>
-References: <20250217-nova_timer-v1-0-78c5ace2d987@nvidia.com>
- <Z7NaPYvuRF11uxnM@phenom.ffwll.local>
+Received: from NAM11-BN8-obe.outbound.protection.outlook.com
+ (mail-bn8nam11on2084.outbound.protection.outlook.com [40.107.236.84])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id A004F10E0B6;
+ Tue, 18 Feb 2025 08:32:42 +0000 (UTC)
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=sGRfXdA3WSCKqfFHKKfyS2g1U/mxPSta2yGFHnDTMsC14EK/r4IDeydVGOSnUMESyTKm6N588IZyHUEvHEV7wT/ErgYGeLgVsdT1GXziCPkTtzTz2CK/fC1s/Ur80XpHsCS5XIWpwl59F/buYdLG1yOTPrKfrcNkmZtUA57Q7ohZpcOVeSadIH6xxThEQ7n/3IZdp20Kbvh6SVENLjPyzFL4pgbI4PRbUFibh1Rdr3XTAdzyyL1DW8wRSkZ7HSzUl5XLpCKTkqblqfAv+EOv4ZTNX2ZtIWW0qdM48Ad7gIsjj9lwJuM1VkFpWQU2vUsE1jYDD43MpmlzXRR9nkJGNA==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=oraP/SVZibgmjwmEEToPiTukrB6deOESfgKiwhwbmgo=;
+ b=seE2GIrzrT22UuxOpgTpwiFyq4TPxQTIi0gXKRFSMTOW1K336whJVCtwy8B6sbiYbjLpIhRfPK9buuZat8P6qXoIngIYmwy2xglsfOdQBHjEhgsWb0GAOQovvNoOaNmmfdwX1sCqaO8yYEFc92UtSgHAVAXNr/Lqi2aM++AeIbJZZAlcfyro4v/SY/2HB7BIRqodkPwhI2Y4OJOG5unt/H8g42ZJyNv6nn0beJ4OdDtpgSHbcTfhNBd7SMNCVZK7riwg3Mx/zMeiAvMsi1E2pSrcQ44aWJk0Bx2ER3gdP6+jUGMrkAlbo1zaFWQpAugamqgQiVicHABkjMDC39Yl/w==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
+ 216.228.118.232) smtp.rcpttodomain=gmail.com smtp.mailfrom=nvidia.com;
+ dmarc=pass (p=reject sp=reject pct=100) action=none header.from=nvidia.com;
+ dkim=none (message not signed); arc=none (0)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=Nvidia.com;
+ s=selector2;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=oraP/SVZibgmjwmEEToPiTukrB6deOESfgKiwhwbmgo=;
+ b=qayb8qvKwrDFqmd+Fvr9f1v3qbRLEx5iYNMeLleqDBPLVIm7g5DZjoBZxPutVNrEPIythyY4fWfmPPAx2vwXufb/So7E2iRPlghTieua/IBkVr8h39HX7B86ZoxjOBZn7QNrLxQ/zrERiTrROe1PWiFX2woAC64VIqnWu3RUU37zZb7UqDc6zcrXXvuTMzFT6xjq5tkCdSaOB0roQtWeuu0VH36ga4ZlDgyHBgMgH+p9l2JO2mi+k3kzTgIqC1BUWfxvzLouI8wyiAQKuWZ0C3J13UehjAvbDkDvgE0S0VtHRjuxoqdJUm3SWKDbyt6fqP5/2KmpObv3xE9Bj6C/Sg==
+Received: from BN9PR03CA0858.namprd03.prod.outlook.com (2603:10b6:408:13d::23)
+ by PH7PR12MB6954.namprd12.prod.outlook.com (2603:10b6:510:1b7::21)
+ with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.8445.13; Tue, 18 Feb
+ 2025 08:32:37 +0000
+Received: from BN3PEPF0000B36E.namprd21.prod.outlook.com
+ (2603:10b6:408:13d:cafe::76) by BN9PR03CA0858.outlook.office365.com
+ (2603:10b6:408:13d::23) with Microsoft SMTP Server (version=TLS1_3,
+ cipher=TLS_AES_256_GCM_SHA384) id 15.20.8445.20 via Frontend Transport; Tue,
+ 18 Feb 2025 08:32:37 +0000
+X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 216.228.118.232)
+ smtp.mailfrom=nvidia.com;
+ dkim=none (message not signed)
+ header.d=none;dmarc=pass action=none header.from=nvidia.com;
+Received-SPF: Pass (protection.outlook.com: domain of nvidia.com designates
+ 216.228.118.232 as permitted sender) receiver=protection.outlook.com;
+ client-ip=216.228.118.232; helo=mail.nvidia.com; pr=C
+Received: from mail.nvidia.com (216.228.118.232) by
+ BN3PEPF0000B36E.mail.protection.outlook.com (10.167.243.165) with Microsoft
+ SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ 15.20.8489.2 via Frontend Transport; Tue, 18 Feb 2025 08:32:37 +0000
+Received: from drhqmail202.nvidia.com (10.126.190.181) by mail.nvidia.com
+ (10.127.129.5) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.1544.4; Tue, 18 Feb
+ 2025 00:32:25 -0800
+Received: from drhqmail203.nvidia.com (10.126.190.182) by
+ drhqmail202.nvidia.com (10.126.190.181) with Microsoft SMTP Server
+ (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ 15.2.1544.14; Tue, 18 Feb 2025 00:32:25 -0800
+Received: from localhost (10.127.8.11) by mail.nvidia.com (10.126.190.182)
+ with Microsoft SMTP Server id 15.2.1544.14 via Frontend Transport; Tue, 18
+ Feb 2025 00:32:23 -0800
+Date: Tue, 18 Feb 2025 10:32:22 +0200
+From: Zhi Wang <zhiw@nvidia.com>
+To: Aaron Kling <webgeek1234@gmail.com>
+CC: Karol Herbst <kherbst@redhat.com>, Lyude Paul <lyude@redhat.com>, "Danilo
+ Krummrich" <dakr@kernel.org>, David Airlie <airlied@gmail.com>, "Simona
+ Vetter" <simona@ffwll.ch>, Ben Skeggs <bskeggs@redhat.com>,
+ <dri-devel@lists.freedesktop.org>, <nouveau@lists.freedesktop.org>,
+ <linux-kernel@vger.kernel.org>
+Subject: Re: [PATCH] drm/nouveau/pmu: Fix gp10b firmware guard
+Message-ID: <20250218103222.0000313b@nvidia.com>
+In-Reply-To: <CALHNRZ99cs=rcR07jqsZE7Q3ndLqteKG8K8zpAm4vaEhsYwTLw@mail.gmail.com>
+References: <20250217-nouveau-gm10b-guard-v1-1-0d96f0068570@gmail.com>
+ <CALHNRZ99cs=rcR07jqsZE7Q3ndLqteKG8K8zpAm4vaEhsYwTLw@mail.gmail.com>
+X-Mailer: Claws Mail 4.2.0 (GTK 3.24.38; x86_64-w64-mingw32)
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <Z7NaPYvuRF11uxnM@phenom.ffwll.local>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+X-NV-OnPremToCloud: AnonymousSubmission
+X-EOPAttributedMessage: 0
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: BN3PEPF0000B36E:EE_|PH7PR12MB6954:EE_
+X-MS-Office365-Filtering-Correlation-Id: 22d4f0ea-0c18-4341-3d67-08dd4ff6cced
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: BCL:0;
+ ARA:13230040|1800799024|82310400026|376014|7416014|36860700013|7053199007; 
+X-Microsoft-Antispam-Message-Info: =?utf-8?B?RDBiTGphUzJDWWJ0NEpFeDA3YmlCdUdYL1BMdGZZRTd0Y1B2VFZucFBOa3VG?=
+ =?utf-8?B?bkxvMjFETTdGeWV4QzNFeHRTSVpVMThpOGVSanUvakJTbmdKUmE5UlpOc3pn?=
+ =?utf-8?B?MTFqZFBCaVRnMHFvV3FZd1p4RmNVQTc3MzdnU2trZERackJ2c2NRYWc3M3Q3?=
+ =?utf-8?B?TEozZ3ZTZnY2eTlPWkpKZS9IOEtwMlp6Y0lteG1ueDZ1UFN0TG54MFNKb1FC?=
+ =?utf-8?B?QVFWdElKU2wvalYyQTF4RUVvYTZnWmZ6M0dMcHdCTno5a0h1YW5HeE83Yzll?=
+ =?utf-8?B?VU1md3dHSXBuVE9xUHR3M1g1VTR0M3RyaUJ4OUZoUzdFODlyb2ZnVXlFZHpv?=
+ =?utf-8?B?RGxQamtjeFAxZWNtY3ZhQ1p0MEJKai8vRXJPaWlBdktLVk1TdHFOUFhLSVo1?=
+ =?utf-8?B?RTUwNzJ1YnRqYks3UkkxN2p5VDc5SFFPTkZCWDB3MGgvQnhWZ0JGMWVRT0xy?=
+ =?utf-8?B?UHdFNTgxakRlSlBKWGppOHNmZmgvR29GTE1FVU0zS2FIam5sMHdKYkpKOU5M?=
+ =?utf-8?B?TndnV3N4eGliN3o3TFhlY0pmL240M3hWeFY1MVRlbXQyL3NkZWZ1TGR4NklH?=
+ =?utf-8?B?MkN5QkVtYy94RkZ2Q2hWeEJPMm9WTThaTE51T3NVSzlXbnp6clNpU09FQkpx?=
+ =?utf-8?B?WHRyWFNsNGdSU2lMdmk1TDdsY1JGWGZsQnZIcDFiTWVsK0dlbkFYK0RTUHFP?=
+ =?utf-8?B?TjBlL2psVkJYQXptdTNIZWxsTDRWTHJpNW5TZG50WWhjd01uenRiUkN3WFho?=
+ =?utf-8?B?d2Z6VlVxOXBoZ1JzRTFYTjVrc0NDTzZJU2FZckZwbk5QaW1XbDZTNUtrWWJN?=
+ =?utf-8?B?NEM3UUJJODQvdVFyNGpXWWQrdjRpNWVEaFIyQkYxZU5EWERCTjRVdHJLYk5B?=
+ =?utf-8?B?dldmcGMzbkVaN2E1SGNsYWpxU3dxaFBOYXB3elp3SklVT0h2K0U0dUJPNzlL?=
+ =?utf-8?B?ZS9rb2VHeHc3N002dUlYeXIzL2dPQU0zdGIxNWpTNUNhQTNZUE5ZZDNiZDYr?=
+ =?utf-8?B?bkYxc3pBZGVLK3BOU0lXSFo2aTBobUVZVjZlVmFtL3NXTi9rRUQ5NkNZdW1s?=
+ =?utf-8?B?c2tsbGU2SFlGbzZYYU5pbnlwcER6MWdFaXNtZ1djcHEyWHJuUjdRY25SSThE?=
+ =?utf-8?B?Ynd4anRKSmQwT1RidkdWcEk0TEl6Vng4ajRqdnlDM1h3blhWeE1Fdzh5SDlE?=
+ =?utf-8?B?Q3p0enFOM2did2o3Rk1UNmFWVkNSNTdSUVkvM3hNaFE5NW9hTDBvaFpIOHFN?=
+ =?utf-8?B?c0Vaemo5TFk0WVIwYnRhRlh0WCs1UUtZaGIwN3dKVEhWNVAyQThQNk5WWU9t?=
+ =?utf-8?B?eGF4YXQ0RGNvbEo3SHBnSFBpbUpOWHNnay9EaXMwNWpuN2xraUZHRkIrY1Nk?=
+ =?utf-8?B?T3FPbk9mK1c2d1V3TEtuWWNhcVF3bzV0OVFRZzVJQnJUOHBaQzZoeU11dHZy?=
+ =?utf-8?B?MTJ1a2ZMN0NTQ1A0MGpOdHNjNWllQkxGaWRMK3RjMVd2Nk0zV0QwM1dWZUhG?=
+ =?utf-8?B?QjhTVWcyTXBUYTl5aWRxdXQ2bFdjQmRZOVN0eVhIeC82M2VMZlJmUjQwZk54?=
+ =?utf-8?B?aFlYVFJvdG13RXF1Wk05alhIZWllYk5lU2gvRVhPZWtieHYrZ1h4N0JOcmJ1?=
+ =?utf-8?B?aXhIcWdFR05hQnVid2pSbUpIamZpMGNoYW5oU3orRm15R1o3YzlNeC9wbk0y?=
+ =?utf-8?B?QVZpQisyckZTcHYraUZJM1B0T1A4d2p1K256MGI5aE1LZkwvY0ZwZ2thLzBF?=
+ =?utf-8?B?cHVxcXpISkFEUi9vdkRiYVRKcVFyRjkvL0U2S29ycGJ3YkE2WFp5V2J5YjVK?=
+ =?utf-8?B?WTJDTG5wdTI3c3I4OHhkOFpQVVVDaEE3bHlrcGNwNkR3WEVKdWRURVZxbTl3?=
+ =?utf-8?B?OStkZjh4dzFMTUd0NXhsVU5PZWVLbkhXMTByTDBjRnBBZEN0T2w3ai9WVGcw?=
+ =?utf-8?B?SW54OC9XV2NzNWgwdjhyeE9TbWtwNTBYR3VTM1FKa1BFT3RMd2tweFFsZGVL?=
+ =?utf-8?Q?cmIVIfGffCnCmQpzI6q+OgtlG2GJCM=3D?=
+X-Forefront-Antispam-Report: CIP:216.228.118.232; CTRY:US; LANG:en; SCL:1; SRV:;
+ IPV:NLI; SFV:NSPM; H:mail.nvidia.com; PTR:dc7edge1.nvidia.com; CAT:NONE;
+ SFS:(13230040)(1800799024)(82310400026)(376014)(7416014)(36860700013)(7053199007);
+ DIR:OUT; SFP:1101; 
+X-OriginatorOrg: Nvidia.com
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 18 Feb 2025 08:32:37.3096 (UTC)
+X-MS-Exchange-CrossTenant-Network-Message-Id: 22d4f0ea-0c18-4341-3d67-08dd4ff6cced
+X-MS-Exchange-CrossTenant-Id: 43083d15-7273-40c1-b7db-39efd9ccc17a
+X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=43083d15-7273-40c1-b7db-39efd9ccc17a; Ip=[216.228.118.232];
+ Helo=[mail.nvidia.com]
+X-MS-Exchange-CrossTenant-AuthSource: BN3PEPF0000B36E.namprd21.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Anonymous
+X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: PH7PR12MB6954
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -57,63 +152,57 @@ List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-On Mon, Feb 17, 2025 at 04:48:13PM +0100, Simona Vetter wrote:
-> On Mon, Feb 17, 2025 at 11:04:45PM +0900, Alexandre Courbot wrote:
-> > Hi everyone,
-> > 
-> > This short RFC is based on top of Danilo's initial driver stub series
-> > [1] and has for goal to initiate discussions and hopefully some design
-> > decisions using the simplest subdevice of the GPU (the timer) as an
-> > example, before implementing more devices allowing the GPU
-> > initialization sequence to progress (Falcon being the logical next step
-> > so we can get the GSP rolling).
-> > 
-> > It is kept simple and short for that purpose, and to avoid bumping into
-> > a wall with much more device code because my assumptions were incorrect.
-> > 
-> > This is my first time trying to write Rust kernel code, and some of my
-> > questions below are probably due to me not understanding yet how to use
-> > the core kernel interfaces. So before going further I thought it would
-> > make sense to raise the most obvious questions that came to my mind
-> > while writing this draft:
-> > 
-> > - Where and how to store subdevices. The timer device is currently a
-> >   direct member of the GPU structure. It might work for GSP devices
-> >   which are IIUC supposed to have at least a few fixed devices required
-> >   to bring the GSP up ; but as a general rule this probably won't scale
-> >   as not all subdevices are present on all GPU variants, or in the same
-> >   numbers. So we will probably need to find an equivalent to the
-> >   `subdev` linked list in Nouveau.
-> > 
-> > - BAR sharing between subdevices. Right now each subdevice gets access
-> >   to the full BAR range. I am wondering whether we could not split it
-> >   into the relevant slices for each-subdevice, and transfer ownership of
-> >   each slice to the device that is supposed to use it. That way each
-> >   register would have a single owner, which is arguably safer - but
-> >   maybe not as flexible as we will need down the road?
-> > 
-> > - On a related note, since the BAR is behind a Devres its availability
-> >   must first be secured before any hardware access using try_access().
-> >   Doing this on a per-register or per-operation basis looks overkill, so
-> >   all methods that access the BAR take a reference to it, allowing to
-> >   call try_access() from the highest-level caller and thus reducing the
-> >   number of times this needs to be performed. Doing so comes at the cost
-> >   of an extra argument to most subdevice methods ; but also with the
-> >   benefit that we don't need to put the BAR behind another Arc and share
-> >   it across all subdevices. I don't know which design is better here,
-> >   and input would be very welcome.
-> > 
-> > - We will probably need sometime like a `Subdevice` trait or something
-> >   down the road, but I'll wait until we have more than one subdevice to
-> >   think about it.
-> 
-> It might make sense to go with a full-blown aux bus. Gives you a lot of
-> structures and answers to these questions, but also might be way too much.
+On Mon, 17 Feb 2025 17:46:41 -0600
+Aaron Kling <webgeek1234@gmail.com> wrote:
 
-No, it's not too much, that's exactly what the auxbus code is for
-(splitting a real device into child ones where they all share the same
-physical resources.)  So good suggestion.
+> On Mon, Feb 17, 2025 at 5:43=E2=80=AFPM Aaron Kling via B4 Relay
+> <devnull+webgeek1234.gmail.com@kernel.org> wrote:
+> >
+> > From: Aaron Kling <webgeek1234@gmail.com>
+> >
+> > Fixes: 989863d7cbe5 ("drm/nouveau/pmu: select implementation based on a=
+vailable firmware")
+> > Signed-off-by: Aaron Kling <webgeek1234@gmail.com>
+> > ---
+> >  drivers/gpu/drm/nouveau/nvkm/subdev/pmu/gp10b.c | 2 +-
+> >  1 file changed, 1 insertion(+), 1 deletion(-)
+> >
+> > diff --git a/drivers/gpu/drm/nouveau/nvkm/subdev/pmu/gp10b.c b/drivers/=
+gpu/drm/nouveau/nvkm/subdev/pmu/gp10b.c
+> > index a6f410ba60bc94ec9d52fc78868acddfc6770e19..d393bc540f8628812990dff=
+e4c2f7e9014be07c5 100644
+> > --- a/drivers/gpu/drm/nouveau/nvkm/subdev/pmu/gp10b.c
+> > +++ b/drivers/gpu/drm/nouveau/nvkm/subdev/pmu/gp10b.c
+> > @@ -75,7 +75,7 @@ gp10b_pmu_acr =3D {
+> >         .bootstrap_multiple_falcons =3D gp10b_pmu_acr_bootstrap_multipl=
+e_falcons,
+> >  };
+> >
+> > -#if IS_ENABLED(CONFIG_ARCH_TEGRA_210_SOC)
+> > +#if IS_ENABLED(CONFIG_ARCH_TEGRA_186_SOC)
+> >  MODULE_FIRMWARE("nvidia/gp10b/pmu/desc.bin");
+> >  MODULE_FIRMWARE("nvidia/gp10b/pmu/image.bin");
+> >  MODULE_FIRMWARE("nvidia/gp10b/pmu/sig.bin");
+> >
+> > ---
+> > base-commit: 2408a807bfc3f738850ef5ad5e3fd59d66168996
+> > change-id: 20250217-nouveau-gm10b-guard-a438402b5022
+> >
+> > Best regards,
+> > --
+> > Aaron Kling <webgeek1234@gmail.com>
+> >
+> >
+>=20
+> Apologies to the maintainers for the multiple resends. For some reason
+> the lists weren't accepting my submissions. Looks like it went through
+> with b4, so hopefully I won't have more trouble in the future.
+>=20
 
-thanks,
+It seems like this version doesn't have a comment body. Might need to
+double check the b4 setup.
 
-greg k-h
+> Sincerely,
+> Aaron Kling
+>=20
+
