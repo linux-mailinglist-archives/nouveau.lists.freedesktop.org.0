@@ -2,59 +2,57 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id B15FDA3C996
-	for <lists+nouveau@lfdr.de>; Wed, 19 Feb 2025 21:23:51 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 918DFA3CD25
+	for <lists+nouveau@lfdr.de>; Thu, 20 Feb 2025 00:13:40 +0100 (CET)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 60CA910E88E;
-	Wed, 19 Feb 2025 20:23:50 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id B9D3A10E089;
+	Wed, 19 Feb 2025 23:13:38 +0000 (UTC)
 Authentication-Results: gabe.freedesktop.org;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="PxOCFc/w";
+	dkim=pass (1024-bit key; unprotected) header.d=collabora.com header.i=daniel.almeida@collabora.com header.b="NBQFYdJV";
 	dkim-atps=neutral
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from mail-ed1-f49.google.com (mail-ed1-f49.google.com
- [209.85.208.49])
- by gabe.freedesktop.org (Postfix) with ESMTPS id B934310E88E;
- Wed, 19 Feb 2025 20:23:49 +0000 (UTC)
-Received: by mail-ed1-f49.google.com with SMTP id
- 4fb4d7f45d1cf-5dee1626093so2479198a12.1; 
- Wed, 19 Feb 2025 12:23:49 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1739996628; x=1740601428; darn=lists.freedesktop.org;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=8C9FDgpCO5k/lG9CyZPK4deI/6T7YtN9NRCiQlWA9Hs=;
- b=PxOCFc/wti7SOGhC4B37qldQK8xfqwKlYteRzrZVeD3M5kIA4/YT/wdVyLfYZK7SY/
- oGJUJImIpkj54EJeheYRE12cCUR7VWcW/ckmC8pvC2RQ1mg8XyD9PeG3rPURRKXua01t
- mqX99r+ZqoHcvsYvFdAaCr2Jk+Wbhy9T6j69Uno9jarU3StqUWP3dQsjFGP/Sfe3CDL1
- kO1JFlSPUU5nnfDMbrpVGaxeoSo0BA1av+isccBVW+8wdxTZrNFhcXpKiI2kyXX24Vo8
- 9kcsQmmFuenU9HBWUqoQM60q+8A1/1OlutxuabF2OeAFUCJAfICFpV6WSlczYIr7msXe
- 4qCA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1739996628; x=1740601428;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=8C9FDgpCO5k/lG9CyZPK4deI/6T7YtN9NRCiQlWA9Hs=;
- b=VPcgCkJIShvVo1BAYnIqKR57qe5W7CbV/ereKWBuD+tDyQsLfgKGXdVlNDzrf0dFUm
- Dlvwtl+NF5CPCv+kOYf/UPUfOuhsMzS4I3ALwsG5NwMpnDuRh2MqZtIBX+VHlQsIemH/
- +x+i8c+f2Dd2FHWp6WF21b89AHL9Wd5k9EFZ51j3+pquyZHf5Kv9Hl3UAIEeVDp1v8LT
- PNoh0p9YAIKjzsBFTNdmXGe3AYgzR8GyQwfl3YBi0Tq2Y7un4uiGy229LEU1BdLWQbl9
- 1N88ergDd6hvcyv66GSnT0M6XPo9TI0nxv8aZEiobCxRX/K1YxjSwxiLHPOpmXnByJnh
- nyDg==
-X-Forwarded-Encrypted: i=1;
- AJvYcCVwSA0ko48s6tpkqh7JBbOUq4/J77uAGU43n/+U0bWiBB0lKwcicSiQljPpQHLTyh7xcwtm0TixZmQ=@lists.freedesktop.org,
- AJvYcCWU5+O84r0xYBLHcYABWg84j8vq607pZcO9ijHg6OqUu0B+P5J0o6LflnpKJODLGbAWrszGIaQfEA==@lists.freedesktop.org
-X-Gm-Message-State: AOJu0YyxHdSSr1j8iwMT29RIRhw4hhBRz9NBLq/MQjVPzM7VjnT7gN70
- q+uYCGvJm0d0YcsjhCvN1/dMPH4pd+ESINaq7/vMj1IZ99LG/vSHY9evVeD41iCY/ZWstgzXcnj
- EmkfX+kZeyCh2SNx59oJsG8ExRaU=
-X-Gm-Gg: ASbGncuX8bQ8TPNslUgC5IsnQ+MMoCIdO9cBp9El+SEMJpxdS3PM1ooUiHZPOsZYph4
- AMlNJEx+082g7sqp1FpNsZmizzsWw3MVC/n3DYPztLGgN3q4ujOlOA76Vlv6GQwCexEaLG28=
-X-Google-Smtp-Source: AGHT+IFTlPvg9QQaaWG38k9pWnqwqUxFI4TWfr84YWgQa8VYHZrfD/59IaIQj2pDGyJZK0qQXwPO63XKwpHnAgwuThw=
-X-Received: by 2002:a17:907:770b:b0:ab7:b7b5:2a0c with SMTP id
- a640c23a62f3a-abbedd2f416mr55624866b.6.1739996627857; Wed, 19 Feb 2025
- 12:23:47 -0800 (PST)
-MIME-Version: 1.0
+Received: from sender4-pp-f112.zoho.com (sender4-pp-f112.zoho.com
+ [136.143.188.112])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id D87D210E089;
+ Wed, 19 Feb 2025 23:13:36 +0000 (UTC)
+ARC-Seal: i=1; a=rsa-sha256; t=1740006814; cv=none; 
+ d=zohomail.com; s=zohoarc; 
+ b=d8aKRIxU3l8XlTRQEM9685tTMXH5AqKtOf6F87tkY9qm9vwsLiTZyCqysAx2InJs13/MgjYSrfli88xXpElB/rZ83iXRF7jkbmmQ4kCxmsu4tX3AHCi3jmOiyALjA9XD5PAOgjRNmbLwTXxNhdU1/UconIGTOtsJKspu2LOHoT0=
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=zohomail.com;
+ s=zohoarc; t=1740006814;
+ h=Content-Type:Content-Transfer-Encoding:Cc:Cc:Date:Date:From:From:In-Reply-To:MIME-Version:Message-ID:References:Subject:Subject:To:To:Message-Id:Reply-To;
+ bh=yYsvej7hta50BXSo4O/kInYZNSTmLUgaMrj4n0kXVMA=; 
+ b=OVViB7v1dwUFhDrRdcbZ2766nsGflsj1tunY+Xw8sOE4Cc8xSgneCkiPLqSjp8G5MJ7Qg8uq9HwDQy5g+/BqZNx7Of5Smz09a8eEzUF8NFu9HF4HVanStqoT9D/KwmRdWA7UxfO01rK5KtNn+8Xv/41/GtNT+CE26/gfUKkpfp0=
+ARC-Authentication-Results: i=1; mx.zohomail.com;
+ dkim=pass  header.i=collabora.com;
+ spf=pass  smtp.mailfrom=daniel.almeida@collabora.com;
+ dmarc=pass header.from=<daniel.almeida@collabora.com>
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; t=1740006814; 
+ s=zohomail; d=collabora.com; i=daniel.almeida@collabora.com;
+ h=Content-Type:Mime-Version:Subject:Subject:From:From:In-Reply-To:Date:Date:Cc:Cc:Content-Transfer-Encoding:Message-Id:Message-Id:References:To:To:Reply-To;
+ bh=yYsvej7hta50BXSo4O/kInYZNSTmLUgaMrj4n0kXVMA=;
+ b=NBQFYdJVnDoiFp0z4H+BuyCpQDo0SKKYGuyeZ/UwkjGqSMHSxH50rWoRlOxzw6kO
+ VZVXqzLV5fbepi05sriU2H2OhtApWCevNMfCuRY4z8Zx5BidiHRJUxRqOpS9ynDYgQZ
+ XDferigcuF0iIJVt5WWy8Vx3nUAzQuRO99sFHxok=
+Received: by mx.zohomail.com with SMTPS id 1740006811017578.3153222760697;
+ Wed, 19 Feb 2025 15:13:31 -0800 (PST)
+Content-Type: text/plain;
+	charset=utf-8
+Mime-Version: 1.0 (Mac OS X Mail 16.0 \(3826.300.87.4.3\))
+Subject: Re: [PATCH RFC 1/3] rust: add useful ops for u64
+From: Daniel Almeida <daniel.almeida@collabora.com>
+In-Reply-To: <CAPM=9txmQWO+SHnZhr8zXHCZ=S8CNY=PryRVkWWuHyor-ajU6A@mail.gmail.com>
+Date: Wed, 19 Feb 2025 20:13:15 -0300
+Cc: John Hubbard <jhubbard@nvidia.com>,
+ Alexandre Courbot <acourbot@nvidia.com>, Timur Tabi <ttabi@nvidia.com>,
+ "dri-devel@lists.freedesktop.org" <dri-devel@lists.freedesktop.org>,
+ "rust-for-linux@vger.kernel.org" <rust-for-linux@vger.kernel.org>,
+ "linux-kernel@vger.kernel.org" <linux-kernel@vger.kernel.org>,
+ "nouveau@lists.freedesktop.org" <nouveau@lists.freedesktop.org>,
+ "dakr@kernel.org" <dakr@kernel.org>, Ben Skeggs <bskeggs@nvidia.com>
+Content-Transfer-Encoding: quoted-printable
+Message-Id: <1597EDB7-D91B-4660-ADDC-D2252B26CB22@collabora.com>
 References: <20250217-nova_timer-v1-0-78c5ace2d987@nvidia.com>
  <20250217-nova_timer-v1-1-78c5ace2d987@nvidia.com>
  <C1FF4314-C013-4AE1-A94E-444AFACDB4AC@collabora.com>
@@ -64,21 +62,10 @@ References: <20250217-nova_timer-v1-0-78c5ace2d987@nvidia.com>
  <e6322f90-08bd-4e86-8dad-2ddbd7e5cece@nvidia.com>
  <D7WFP99SMV3H.26AJWK17S0UPX@nvidia.com>
  <fd920faf-a707-4c6d-8c0b-3d59c010da1d@nvidia.com>
-In-Reply-To: <fd920faf-a707-4c6d-8c0b-3d59c010da1d@nvidia.com>
-From: Dave Airlie <airlied@gmail.com>
-Date: Thu, 20 Feb 2025 06:23:36 +1000
-X-Gm-Features: AWEUYZkOfBGae_62O2RzZAhPDqSPHCfH2IsqaSVq-HA6ddj2SAfSDh8cunMZ-t0
-Message-ID: <CAPM=9txmQWO+SHnZhr8zXHCZ=S8CNY=PryRVkWWuHyor-ajU6A@mail.gmail.com>
-Subject: Re: [PATCH RFC 1/3] rust: add useful ops for u64
-To: John Hubbard <jhubbard@nvidia.com>
-Cc: Alexandre Courbot <acourbot@nvidia.com>, Timur Tabi <ttabi@nvidia.com>, 
- "daniel.almeida@collabora.com" <daniel.almeida@collabora.com>, 
- "dri-devel@lists.freedesktop.org" <dri-devel@lists.freedesktop.org>, 
- "rust-for-linux@vger.kernel.org" <rust-for-linux@vger.kernel.org>, 
- "linux-kernel@vger.kernel.org" <linux-kernel@vger.kernel.org>, 
- "nouveau@lists.freedesktop.org" <nouveau@lists.freedesktop.org>,
- "dakr@kernel.org" <dakr@kernel.org>, Ben Skeggs <bskeggs@nvidia.com>
-Content-Type: text/plain; charset="UTF-8"
+ <CAPM=9txmQWO+SHnZhr8zXHCZ=S8CNY=PryRVkWWuHyor-ajU6A@mail.gmail.com>
+To: Dave Airlie <airlied@gmail.com>
+X-Mailer: Apple Mail (2.3826.300.87.4.3)
+X-ZohoMailClient: External
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -93,25 +80,39 @@ List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-On Thu, 20 Feb 2025 at 06:22, John Hubbard <jhubbard@nvidia.com> wrote:
->
-> On 2/19/25 4:51 AM, Alexandre Courbot wrote:
-> > Yes, that looks like the optimal way to do this actually. It also
-> > doesn't introduce any overhead as the destructuring was doing both
-> > high_half() and low_half() in sequence, so in some cases it might
-> > even be more efficient.
-> >
-> > I'd just like to find a better naming. high() and low() might be enough?
-> > Or are there other suggestions?
-> >
->
-> Maybe use "32" instead of "half":
->
->      .high_32()  / .low_32()
->      .upper_32() / .lower_32()
->
 
-The C code currently does upper_32_bits and lower_32_bits, do we want
-to align or diverge here?
 
-Dave.
+> On 19 Feb 2025, at 17:23, Dave Airlie <airlied@gmail.com> wrote:
+>=20
+> On Thu, 20 Feb 2025 at 06:22, John Hubbard <jhubbard@nvidia.com> =
+wrote:
+>>=20
+>> On 2/19/25 4:51 AM, Alexandre Courbot wrote:
+>>> Yes, that looks like the optimal way to do this actually. It also
+>>> doesn't introduce any overhead as the destructuring was doing both
+>>> high_half() and low_half() in sequence, so in some cases it might
+>>> even be more efficient.
+>>>=20
+>>> I'd just like to find a better naming. high() and low() might be =
+enough?
+>>> Or are there other suggestions?
+>>>=20
+>>=20
+>> Maybe use "32" instead of "half":
+>>=20
+>>     .high_32()  / .low_32()
+>>     .upper_32() / .lower_32()
+>>=20
+>=20
+> The C code currently does upper_32_bits and lower_32_bits, do we want
+> to align or diverge here?
+>=20
+> Dave.
+
+
+My humble suggestion here is to use the same nomenclature. =
+`upper_32_bits` and
+`lower_32_bits` immediately and succinctly informs the reader of what is =
+going on.
+
+=E2=80=94 Daniel=
