@@ -2,52 +2,37 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id 5A82FA3D60E
-	for <lists+nouveau@lfdr.de>; Thu, 20 Feb 2025 11:08:45 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id A52A5A3D75E
+	for <lists+nouveau@lfdr.de>; Thu, 20 Feb 2025 11:53:11 +0100 (CET)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id BFA5110E912;
-	Thu, 20 Feb 2025 10:08:42 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id A007F10E938;
+	Thu, 20 Feb 2025 10:53:09 +0000 (UTC)
 Authentication-Results: gabe.freedesktop.org;
-	dkim=pass (2048-bit key; unprotected) header.d=intel.com header.i=@intel.com header.b="Js2YtSm2";
+	dkim=pass (1024-bit key; unprotected) header.d=ideasonboard.com header.i=@ideasonboard.com header.b="wF6C4CGD";
 	dkim-atps=neutral
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from mgamail.intel.com (mgamail.intel.com [192.198.163.12])
- by gabe.freedesktop.org (Postfix) with ESMTPS id D0AC910E910;
- Thu, 20 Feb 2025 10:08:40 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
- d=intel.com; i=@intel.com; q=dns/txt; s=Intel;
- t=1740046121; x=1771582121;
- h=message-id:date:mime-version:subject:to:cc:references:
- from:in-reply-to:content-transfer-encoding;
- bh=qEEkaGFEKdByIXhxlRz4s/blmxr0i3FKT7WWs7RYcVE=;
- b=Js2YtSm23SX09ECAeyG+E0bWqFZk8fw8HtXh+EazJvcBVjkWoaUmFc9i
- YcXcso8mk/RXYY2t90n1aDS3b5Nne4uLFwkm8gX+zrDJFxwLYb7K7PcPi
- H+JxIjnqpu/KHTXIt9osI76mChz0+aM0ggGLJd78JWjiRWt1ZHRiDJ/h8
- fV+CetiDk3baXJKMnajlkikHuobf1y5fVY5C/zgkaygJ8MrS1f6QYfkXK
- SpMDy7wNnipsgrepEnA8KuDjFzKhAfbqxXOEna7kRJwyKZ+tk/2yETxnj
- X3HAoZCDZ/qT6uzNeMTVDah/Qx8MLyD3m3oENWtW6XNniKk+mg1UzkOFH Q==;
-X-CSE-ConnectionGUID: lCs+ISorTwCpKQiiMoZiEg==
-X-CSE-MsgGUID: PbtYYoNJSXWOHs7CcPeE5g==
-X-IronPort-AV: E=McAfee;i="6700,10204,11350"; a="44734927"
-X-IronPort-AV: E=Sophos;i="6.13,301,1732608000"; d="scan'208";a="44734927"
-Received: from orviesa005.jf.intel.com ([10.64.159.145])
- by fmvoesa106.fm.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
- 20 Feb 2025 02:08:40 -0800
-X-CSE-ConnectionGUID: UUemawqKTUWXKRiDeorKDQ==
-X-CSE-MsgGUID: hc9L0Du1SByRgSK2VuJbDQ==
-X-ExtLoop1: 1
-X-IronPort-AV: E=Sophos;i="6.12,224,1728975600"; d="scan'208";a="120221268"
-Received: from dhhellew-desk2.ger.corp.intel.com (HELO [10.245.244.161])
- ([10.245.244.161])
- by orviesa005-auth.jf.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
- 20 Feb 2025 02:08:36 -0800
-Message-ID: <92c1b182-5a0b-4d13-9b16-172ac970b62e@intel.com>
-Date: Thu, 20 Feb 2025 10:08:33 +0000
+Received: from perceval.ideasonboard.com (perceval.ideasonboard.com
+ [213.167.242.64])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id A5F9E10E930;
+ Thu, 20 Feb 2025 10:53:08 +0000 (UTC)
+Received: from [192.168.88.20] (91-158-153-178.elisa-laajakaista.fi
+ [91.158.153.178])
+ by perceval.ideasonboard.com (Postfix) with ESMTPSA id C69249FC;
+ Thu, 20 Feb 2025 11:51:42 +0100 (CET)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=ideasonboard.com;
+ s=mail; t=1740048703;
+ bh=cGmqrMQrzQNKvOYoVbXWr6Lo7FskS49XuKpEvHODBjA=;
+ h=Date:Subject:To:Cc:References:From:In-Reply-To:From;
+ b=wF6C4CGDoP+/HkpCLJaEAJQ5SUDGi9n0fFlEojmHm56G4KxPszUsR/q+aXtSRtihR
+ AQoXwkJ+zXwR8f+vg71cO6pL6HL787yGlQcQZD3c6z5sRdwltXCONK8mS2/SPW2eEM
+ lzKYZgKG0aXbNUjO1esnvXLsAJsX44MVKluFgT40=
+Message-ID: <596b960e-71f8-4c2c-9abe-058206df1dfb@ideasonboard.com>
+Date: Thu, 20 Feb 2025 12:53:03 +0200
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v3 23/25] drm/xe: Compute dumb-buffer sizes with
- drm_mode_size_dumb()
+Subject: Re: [PATCH v3 02/25] drm/dumb-buffers: Provide helper to set pitch
+ and size
 To: Thomas Zimmermann <tzimmermann@suse.de>,
  maarten.lankhorst@linux.intel.com, mripard@kernel.org, airlied@gmail.com,
  simona@ffwll.ch
@@ -58,16 +43,59 @@ Cc: dri-devel@lists.freedesktop.org, linux-mediatek@lists.infradead.org,
  spice-devel@lists.freedesktop.org, linux-renesas-soc@vger.kernel.org,
  linux-rockchip@lists.infradead.org, linux-tegra@vger.kernel.org,
  intel-xe@lists.freedesktop.org, xen-devel@lists.xenproject.org,
- Lucas De Marchi <lucas.demarchi@intel.com>,
- =?UTF-8?Q?Thomas_Hellstr=C3=B6m?= <thomas.hellstrom@linux.intel.com>,
- Rodrigo Vivi <rodrigo.vivi@intel.com>
+ Laurent Pinchart <laurent.pinchart@ideasonboard.com>
 References: <20250218142542.438557-1-tzimmermann@suse.de>
- <20250218142542.438557-24-tzimmermann@suse.de>
-Content-Language: en-GB
-From: Matthew Auld <matthew.auld@intel.com>
-In-Reply-To: <20250218142542.438557-24-tzimmermann@suse.de>
+ <20250218142542.438557-3-tzimmermann@suse.de>
+ <dcd59a75-7945-4a2e-99f9-3abbb3e9de14@ideasonboard.com>
+ <355ed315-61fa-4a9d-b72b-8d5bc7b5a16c@suse.de>
+Content-Language: en-US
+From: Tomi Valkeinen <tomi.valkeinen@ideasonboard.com>
+Autocrypt: addr=tomi.valkeinen@ideasonboard.com; keydata=
+ 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
+In-Reply-To: <355ed315-61fa-4a9d-b72b-8d5bc7b5a16c@suse.de>
 Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 8bit
+Content-Transfer-Encoding: 7bit
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -82,58 +110,70 @@ List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-On 18/02/2025 14:23, Thomas Zimmermann wrote:
-> Call drm_mode_size_dumb() to compute dumb-buffer scanline pitch
-> and buffer size. Align the pitch to a multiple of 8. Align the
-> buffer size according to hardware requirements.
-> 
-> Xe's internal calculation allowed for 64-bit wide buffer sizes, but
-> the ioctl's internal checks always verified against 32-bit wide limits.
-> Hance, it is safe to limit the driver code to 32-bit calculations as
-> well.
-> 
-> v3:
-> - mention 32-bit calculation in commit description (Matthew)
-> 
-> Signed-off-by: Thomas Zimmermann <tzimmermann@suse.de>
-> Cc: Lucas De Marchi <lucas.demarchi@intel.com>
-> Cc: "Thomas Hellström" <thomas.hellstrom@linux.intel.com>
-> Cc: Rodrigo Vivi <rodrigo.vivi@intel.com>
-Reviewed-by: Matthew Auld <matthew.auld@intel.com>
+Hi,
 
-
-> ---
->   drivers/gpu/drm/xe/xe_bo.c | 8 ++++----
->   1 file changed, 4 insertions(+), 4 deletions(-)
+On 20/02/2025 12:05, Thomas Zimmermann wrote:
+> Hi
 > 
-> diff --git a/drivers/gpu/drm/xe/xe_bo.c b/drivers/gpu/drm/xe/xe_bo.c
-> index 78d09c5ed26d..b34f446ad57d 100644
-> --- a/drivers/gpu/drm/xe/xe_bo.c
-> +++ b/drivers/gpu/drm/xe/xe_bo.c
-> @@ -9,6 +9,7 @@
->   #include <linux/nospec.h>
->   
->   #include <drm/drm_drv.h>
-> +#include <drm/drm_dumb_buffers.h>
->   #include <drm/drm_gem_ttm_helper.h>
->   #include <drm/drm_managed.h>
->   #include <drm/ttm/ttm_device.h>
-> @@ -2672,14 +2673,13 @@ int xe_bo_dumb_create(struct drm_file *file_priv,
->   	struct xe_device *xe = to_xe_device(dev);
->   	struct xe_bo *bo;
->   	uint32_t handle;
-> -	int cpp = DIV_ROUND_UP(args->bpp, 8);
->   	int err;
->   	u32 page_size = max_t(u32, PAGE_SIZE,
->   		xe->info.vram_flags & XE_VRAM_FLAGS_NEED64K ? SZ_64K : SZ_4K);
->   
-> -	args->pitch = ALIGN(args->width * cpp, 64);
-> -	args->size = ALIGN(mul_u32_u32(args->pitch, args->height),
-> -			   page_size);
-> +	err = drm_mode_size_dumb(dev, args, SZ_64, page_size);
-> +	if (err)
-> +		return err;
->   
->   	bo = xe_bo_create_user(xe, NULL, NULL, args->size,
->   			       DRM_XE_GEM_CPU_CACHING_WC,
+> Am 20.02.25 um 10:18 schrieb Tomi Valkeinen:
+> [...]
+>>> + * Color modes of 10, 12, 15, 30 and 64 are only supported for use by
+>>> + * legacy user space. Please don't use them in new code. Other modes
+>>> + * are not support.
+>>> + *
+>>> + * Do not attempt to allocate anything but linear framebuffer memory
+>>> + * with single-plane RGB data. Allocation of other framebuffer
+>>> + * layouts requires dedicated ioctls in the respective DRM driver.
+>>
+>> According to this, every driver that supports, say, NV12, should 
+>> implement their own custom ioctl to do the exact same thing? And, of 
+>> course, every userspace app that uses, say, NV12, should then add code 
+>> for all these platforms to call the custom ioctls?
+> 
+> Yes, that's exactly the current status.
+> 
+> There has been discussion about a new dumb-create ioctl that takes a DRM 
+> format as parameter. I'm all for it, but it's out of the scope for this 
+> series.
+> 
+>>
+>> As libdrm's modetest currently supports YUV formats with dumb buffers, 
+>> should we remove that code, as it's not correct and I'm sure people 
+>> use libdrm code as a reference?
+> 
+> Of course not.
+> 
+>>
+>> Well, I'm not serious above, but I think all my points from the 
+>> earlier version are still valid. I don't like this. It changes the 
+>> parameters of the ioctl (bpp used to be bits-per-pixel, not it's 
+>> "color mode"), and the behavior of the ioctl, behavior that we've had 
+>> for a very long time, and we have no idea how many users there are 
+>> that will break (could be none, of course). And the documentation 
+>> changes make the current behavior and uses wrong or legacy.
+> 
+> Before I go into details about this statement, what use case exactly are 
+> you referring to when you say that behavior changes?
+
+For every dumb_buffer allocation with bpp that is not divisible by 8, 
+the result is different, i.e. instead of DIV_ROUND_UP(width * bpp, 8), 
+we now have width * DIV_ROUND_UP(bpp, 8). This, of course, depends on 
+the driver implementation. Some already do the latter.
+
+This change also first calls the drm_driver_color_mode_format(), which 
+could change the behavior even more, but afaics at the moment does not. 
+Although, maybe some platform does width * DIV_ROUND_UP(bpp, 8) even for 
+bpp < 8, and then this series changes it for 1, 2 and 4 bpps (but not 
+for 3, 5, 6, 7, if I'm not mistaken).
+
+However, as the bpp is getting rounded up, this probably won't break any 
+user. But it _is_ a change in the behavior of a uapi, and every time we 
+change a uapi that's been out there for a long time, I'm getting 
+slightly uncomfortable.
+
+So, as a summary, I have a feeling that nothing will break, but I can't 
+say for sure. And as I'm having trouble seeing the benefit of this 
+change for the user, I get even more uncomfortable.
+
+  Tomi
 
