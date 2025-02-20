@@ -2,37 +2,48 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id A52A5A3D75E
-	for <lists+nouveau@lfdr.de>; Thu, 20 Feb 2025 11:53:11 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id A5FBBA3DFEE
+	for <lists+nouveau@lfdr.de>; Thu, 20 Feb 2025 17:10:35 +0100 (CET)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id A007F10E938;
-	Thu, 20 Feb 2025 10:53:09 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 4B85210E4C6;
+	Thu, 20 Feb 2025 16:10:34 +0000 (UTC)
 Authentication-Results: gabe.freedesktop.org;
-	dkim=pass (1024-bit key; unprotected) header.d=ideasonboard.com header.i=@ideasonboard.com header.b="wF6C4CGD";
+	dkim=pass (1024-bit key; unprotected) header.d=collabora.com header.i=dmitry.osipenko@collabora.com header.b="EduweB5K";
 	dkim-atps=neutral
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from perceval.ideasonboard.com (perceval.ideasonboard.com
- [213.167.242.64])
- by gabe.freedesktop.org (Postfix) with ESMTPS id A5F9E10E930;
- Thu, 20 Feb 2025 10:53:08 +0000 (UTC)
-Received: from [192.168.88.20] (91-158-153-178.elisa-laajakaista.fi
- [91.158.153.178])
- by perceval.ideasonboard.com (Postfix) with ESMTPSA id C69249FC;
- Thu, 20 Feb 2025 11:51:42 +0100 (CET)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=ideasonboard.com;
- s=mail; t=1740048703;
- bh=cGmqrMQrzQNKvOYoVbXWr6Lo7FskS49XuKpEvHODBjA=;
- h=Date:Subject:To:Cc:References:From:In-Reply-To:From;
- b=wF6C4CGDoP+/HkpCLJaEAJQ5SUDGi9n0fFlEojmHm56G4KxPszUsR/q+aXtSRtihR
- AQoXwkJ+zXwR8f+vg71cO6pL6HL787yGlQcQZD3c6z5sRdwltXCONK8mS2/SPW2eEM
- lzKYZgKG0aXbNUjO1esnvXLsAJsX44MVKluFgT40=
-Message-ID: <596b960e-71f8-4c2c-9abe-058206df1dfb@ideasonboard.com>
-Date: Thu, 20 Feb 2025 12:53:03 +0200
+Received: from sender4-pp-f112.zoho.com (sender4-pp-f112.zoho.com
+ [136.143.188.112])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 4091610E174;
+ Thu, 20 Feb 2025 16:10:32 +0000 (UTC)
+ARC-Seal: i=1; a=rsa-sha256; t=1740067826; cv=none; 
+ d=zohomail.com; s=zohoarc; 
+ b=fK0hgpnSc7wHdnScZwsvHvmbOkyWb03c01zpIeu3IanN4S/24IADwzwMmHCxMzZh69e0QFLKw+VJlDSQ5aln/0YB2RDSXVsVBcOmmHiTso9hMIalmUv2v2fkpsh2ReLVgNiLiHMfkoe1PZI015y2wn/sO3WfP5mg6mjLzsr/2s8=
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=zohomail.com;
+ s=zohoarc; t=1740067826;
+ h=Content-Type:Content-Transfer-Encoding:Cc:Cc:Date:Date:From:From:In-Reply-To:MIME-Version:Message-ID:References:Subject:Subject:To:To:Message-Id:Reply-To;
+ bh=ZELLhyNrX/AMU/X/XLHluCd0loXd+7aqRfqJaYVGOoE=; 
+ b=ViwEYwSYLaplLiRRebA+EavTbgXaGFDif39tG9l0dYzvRf0ts/sv5Zr3fKIj0Tpa2mXGglvmOEcv8ZzesWzbD/NQRcb1JjyqPZqc3wMYU5+EunyG9GZcm9+M2YI1x2DBHIaTHIgSZWttgVwQS7+aK1fAp99vFS8yjuL3nyBC814=
+ARC-Authentication-Results: i=1; mx.zohomail.com;
+ dkim=pass  header.i=collabora.com;
+ spf=pass  smtp.mailfrom=dmitry.osipenko@collabora.com;
+ dmarc=pass header.from=<dmitry.osipenko@collabora.com>
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; t=1740067826; 
+ s=zohomail; d=collabora.com; i=dmitry.osipenko@collabora.com; 
+ h=Message-ID:Date:Date:MIME-Version:Subject:Subject:To:To:Cc:Cc:References:From:From:In-Reply-To:Content-Type:Content-Transfer-Encoding:Message-Id:Reply-To;
+ bh=ZELLhyNrX/AMU/X/XLHluCd0loXd+7aqRfqJaYVGOoE=;
+ b=EduweB5KBkR0ccyYBTaR71kHlB+Cm2C1+uOYpnAGhP8fsVCU4dd1oLWvb0mZNeiJ
+ 5LPdG3Z1MweoTCjWRid30oQ6iHV9OeNchE42cx4IMeeJ1b4OBPQ5wC3b9rSZ5Fztbc0
+ 7ra/K4+6kLD4/HJUfSiWtBOZSIxhWfXx8uvFMDg0=
+Received: by mx.zohomail.com with SMTPS id 1740067825336681.7729656180264;
+ Thu, 20 Feb 2025 08:10:25 -0800 (PST)
+Message-ID: <d2bd8baf-e1f7-4e8a-9e33-259051d6f97a@collabora.com>
+Date: Thu, 20 Feb 2025 19:10:18 +0300
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v3 02/25] drm/dumb-buffers: Provide helper to set pitch
- and size
+Subject: Re: [PATCH v2 21/25] drm/virtio: Compute dumb-buffer sizes with
+ drm_mode_size_dumb()
+Content-Language: en-US
 To: Thomas Zimmermann <tzimmermann@suse.de>,
  maarten.lankhorst@linux.intel.com, mripard@kernel.org, airlied@gmail.com,
  simona@ffwll.ch
@@ -43,59 +54,15 @@ Cc: dri-devel@lists.freedesktop.org, linux-mediatek@lists.infradead.org,
  spice-devel@lists.freedesktop.org, linux-renesas-soc@vger.kernel.org,
  linux-rockchip@lists.infradead.org, linux-tegra@vger.kernel.org,
  intel-xe@lists.freedesktop.org, xen-devel@lists.xenproject.org,
- Laurent Pinchart <laurent.pinchart@ideasonboard.com>
-References: <20250218142542.438557-1-tzimmermann@suse.de>
- <20250218142542.438557-3-tzimmermann@suse.de>
- <dcd59a75-7945-4a2e-99f9-3abbb3e9de14@ideasonboard.com>
- <355ed315-61fa-4a9d-b72b-8d5bc7b5a16c@suse.de>
-Content-Language: en-US
-From: Tomi Valkeinen <tomi.valkeinen@ideasonboard.com>
-Autocrypt: addr=tomi.valkeinen@ideasonboard.com; keydata=
- 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
-In-Reply-To: <355ed315-61fa-4a9d-b72b-8d5bc7b5a16c@suse.de>
-Content-Type: text/plain; charset=UTF-8; format=flowed
+ David Airlie <airlied@redhat.com>, Gerd Hoffmann <kraxel@redhat.com>,
+ Gurchetan Singh <gurchetansingh@chromium.org>, Chia-I Wu <olvaffe@gmail.com>
+References: <20250109150310.219442-1-tzimmermann@suse.de>
+ <20250109150310.219442-22-tzimmermann@suse.de>
+From: Dmitry Osipenko <dmitry.osipenko@collabora.com>
+In-Reply-To: <20250109150310.219442-22-tzimmermann@suse.de>
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 7bit
+X-ZohoMailClient: External
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -110,70 +77,67 @@ List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-Hi,
+On 1/9/25 17:57, Thomas Zimmermann wrote:
+> Call drm_mode_size_dumb() to compute dumb-buffer scanline pitch and
+> buffer size. Align the pitch to a multiple of 4.
+> 
+> Signed-off-by: Thomas Zimmermann <tzimmermann@suse.de>
+> Cc: David Airlie <airlied@redhat.com>
+> Cc: Gerd Hoffmann <kraxel@redhat.com>
+> Cc: Gurchetan Singh <gurchetansingh@chromium.org>
+> Cc: Chia-I Wu <olvaffe@gmail.com>
+> ---
+>  drivers/gpu/drm/virtio/virtgpu_gem.c | 11 +++++------
+>  1 file changed, 5 insertions(+), 6 deletions(-)
+> 
+> diff --git a/drivers/gpu/drm/virtio/virtgpu_gem.c b/drivers/gpu/drm/virtio/virtgpu_gem.c
+> index 5aab588fc400..22cf1cd2fdfd 100644
+> --- a/drivers/gpu/drm/virtio/virtgpu_gem.c
+> +++ b/drivers/gpu/drm/virtio/virtgpu_gem.c
+> @@ -23,6 +23,7 @@
+>   * WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+>   */
+>  
+> +#include <drm/drm_dumb_buffers.h>
+>  #include <drm/drm_file.h>
+>  #include <drm/drm_fourcc.h>
+>  
+> @@ -66,15 +67,14 @@ int virtio_gpu_mode_dumb_create(struct drm_file *file_priv,
+>  	struct virtio_gpu_object_params params = { 0 };
+>  	struct virtio_gpu_device *vgdev = dev->dev_private;
+>  	int ret;
+> -	uint32_t pitch;
+> +
+> +	ret = drm_mode_size_dumb(dev, args, SZ_4, 0);
 
-On 20/02/2025 12:05, Thomas Zimmermann wrote:
-> Hi
-> 
-> Am 20.02.25 um 10:18 schrieb Tomi Valkeinen:
-> [...]
->>> + * Color modes of 10, 12, 15, 30 and 64 are only supported for use by
->>> + * legacy user space. Please don't use them in new code. Other modes
->>> + * are not support.
->>> + *
->>> + * Do not attempt to allocate anything but linear framebuffer memory
->>> + * with single-plane RGB data. Allocation of other framebuffer
->>> + * layouts requires dedicated ioctls in the respective DRM driver.
->>
->> According to this, every driver that supports, say, NV12, should 
->> implement their own custom ioctl to do the exact same thing? And, of 
->> course, every userspace app that uses, say, NV12, should then add code 
->> for all these platforms to call the custom ioctls?
-> 
-> Yes, that's exactly the current status.
-> 
-> There has been discussion about a new dumb-create ioctl that takes a DRM 
-> format as parameter. I'm all for it, but it's out of the scope for this 
-> series.
-> 
->>
->> As libdrm's modetest currently supports YUV formats with dumb buffers, 
->> should we remove that code, as it's not correct and I'm sure people 
->> use libdrm code as a reference?
-> 
-> Of course not.
-> 
->>
->> Well, I'm not serious above, but I think all my points from the 
->> earlier version are still valid. I don't like this. It changes the 
->> parameters of the ioctl (bpp used to be bits-per-pixel, not it's 
->> "color mode"), and the behavior of the ioctl, behavior that we've had 
->> for a very long time, and we have no idea how many users there are 
->> that will break (could be none, of course). And the documentation 
->> changes make the current behavior and uses wrong or legacy.
-> 
-> Before I go into details about this statement, what use case exactly are 
-> you referring to when you say that behavior changes?
+Nit: I'd keep using PAGE_SIZE instead of 0 for more clarity, but that's
+an optional wish.
 
-For every dumb_buffer allocation with bpp that is not divisible by 8, 
-the result is different, i.e. instead of DIV_ROUND_UP(width * bpp, 8), 
-we now have width * DIV_ROUND_UP(bpp, 8). This, of course, depends on 
-the driver implementation. Some already do the latter.
+> +	if (ret)
+> +		return ret;
+>  
+>  	if (args->bpp != 32)
+>  		return -EINVAL;
+>  
+> -	pitch = args->width * 4;
+> -	args->size = pitch * args->height;
+> -	args->size = ALIGN(args->size, PAGE_SIZE);
+> -
+>  	params.format = virtio_gpu_translate_format(DRM_FORMAT_HOST_XRGB8888);
+>  	params.width = args->width;
+>  	params.height = args->height;
+> @@ -92,7 +92,6 @@ int virtio_gpu_mode_dumb_create(struct drm_file *file_priv,
+>  	if (ret)
+>  		goto fail;
+>  
+> -	args->pitch = pitch;
+>  	return ret;
+>  
+>  fail:
 
-This change also first calls the drm_driver_color_mode_format(), which 
-could change the behavior even more, but afaics at the moment does not. 
-Although, maybe some platform does width * DIV_ROUND_UP(bpp, 8) even for 
-bpp < 8, and then this series changes it for 1, 2 and 4 bpps (but not 
-for 3, 5, 6, 7, if I'm not mistaken).
+Reviewed-by: Dmitry Osipenko <dmitry.osipenko@collabora.com>
 
-However, as the bpp is getting rounded up, this probably won't break any 
-user. But it _is_ a change in the behavior of a uapi, and every time we 
-change a uapi that's been out there for a long time, I'm getting 
-slightly uncomfortable.
-
-So, as a summary, I have a feeling that nothing will break, but I can't 
-say for sure. And as I'm having trouble seeing the benefit of this 
-change for the user, I get even more uncomfortable.
-
-  Tomi
+-- 
+Best regards,
+Dmitry
 
