@@ -2,147 +2,168 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id AA51AA3F165
-	for <lists+nouveau@lfdr.de>; Fri, 21 Feb 2025 11:08:26 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id D9F80A3F300
+	for <lists+nouveau@lfdr.de>; Fri, 21 Feb 2025 12:36:03 +0100 (CET)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 16EF110E233;
-	Fri, 21 Feb 2025 10:08:24 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 1F95D10EA53;
+	Fri, 21 Feb 2025 11:36:02 +0000 (UTC)
 Authentication-Results: gabe.freedesktop.org;
-	dkim=pass (1024-bit key; unprotected) header.d=suse.de header.i=@suse.de header.b="LQF5AnVY";
-	dkim=permerror (0-bit key) header.d=suse.de header.i=@suse.de header.b="WLcapchc";
-	dkim=pass (1024-bit key) header.d=suse.de header.i=@suse.de header.b="lKrGFb/s";
-	dkim=permerror (0-bit key) header.d=suse.de header.i=@suse.de header.b="Oulub/yC";
+	dkim=pass (2048-bit key; unprotected) header.d=Nvidia.com header.i=@Nvidia.com header.b="KgJaEJl2";
 	dkim-atps=neutral
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from smtp-out2.suse.de (smtp-out2.suse.de [195.135.223.131])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 91E1C10E245
- for <nouveau@lists.freedesktop.org>; Fri, 21 Feb 2025 10:08:22 +0000 (UTC)
-Received: from imap1.dmz-prg2.suse.org (unknown [10.150.64.97])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
- (No client certificate requested)
- by smtp-out2.suse.de (Postfix) with ESMTPS id EBE8C1F78A;
- Fri, 21 Feb 2025 10:08:19 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.de; s=susede2_rsa;
- t=1740132501; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
- mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references:autocrypt:autocrypt;
- bh=M2e6KH/BHcFK6w9SYbHcPx6nqA1qpuxt618HD/sPm9I=;
- b=LQF5AnVYcLPwoUAaF2Bux+O59hCHAg6pl0zqiienZa7pQ4gvMY1PpgPpjwuZVrF8ZDKKpf
- LjOteY2AeuwSxMSm1St3s7ejjMGetWwS66KGBEGLl6z5snb3SAsox8bmKkKYu8xbUpOlBJ
- 13eVsZCCqwC2ZqgfhDzxXWYmlFTZ0zo=
-DKIM-Signature: v=1; a=ed25519-sha256; c=relaxed/relaxed; d=suse.de;
- s=susede2_ed25519; t=1740132501;
- h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
- mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references:autocrypt:autocrypt;
- bh=M2e6KH/BHcFK6w9SYbHcPx6nqA1qpuxt618HD/sPm9I=;
- b=WLcapchcQAQV8ZOFP+V3hwPjvdEPgPjJgGK+oZwFKvo+c3s2ayOg9oH8N7jbf3H7oR3eou
- 4NxoU8q4tY+j4BAA==
-Authentication-Results: smtp-out2.suse.de;
-	none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.de; s=susede2_rsa;
- t=1740132499; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
- mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references:autocrypt:autocrypt;
- bh=M2e6KH/BHcFK6w9SYbHcPx6nqA1qpuxt618HD/sPm9I=;
- b=lKrGFb/skhwoYPPUVwSDcJW0EBjnr2uy+nfYrcyElx4exsS5CnMWZrAHIeQaS2BxLRzSTH
- LRhrkqsBRDfwgbOjbZ+zLPS2INLgWtN1L/nPh51l6Cps3I/LPfxVyC6WAPQqpTRm3vrsEp
- 4gh0h4aiWJXnVu93NI8oLcHmwg2Ypkc=
-DKIM-Signature: v=1; a=ed25519-sha256; c=relaxed/relaxed; d=suse.de;
- s=susede2_ed25519; t=1740132499;
- h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
- mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references:autocrypt:autocrypt;
- bh=M2e6KH/BHcFK6w9SYbHcPx6nqA1qpuxt618HD/sPm9I=;
- b=Oulub/yCIhXM878lgyw9zPHPgLLNUSxAK7kXdKfRRv6S9EWcIdOxS23F73zZol16noWM+X
- DGDIsV61UNIiQ5Dw==
-Received: from imap1.dmz-prg2.suse.org (localhost [127.0.0.1])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
- (No client certificate requested)
- by imap1.dmz-prg2.suse.org (Postfix) with ESMTPS id 74CDB136AD;
- Fri, 21 Feb 2025 10:08:19 +0000 (UTC)
-Received: from dovecot-director2.suse.de ([2a07:de40:b281:106:10:150:64:167])
- by imap1.dmz-prg2.suse.org with ESMTPSA id sywjG5NQuGd7MwAAD6G6ig
- (envelope-from <tzimmermann@suse.de>); Fri, 21 Feb 2025 10:08:19 +0000
-Message-ID: <cde8b955-a846-4be9-942b-64ca05550368@suse.de>
-Date: Fri, 21 Feb 2025 11:08:19 +0100
+Received: from NAM12-MW2-obe.outbound.protection.outlook.com
+ (mail-mw2nam12on2083.outbound.protection.outlook.com [40.107.244.83])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id D038C10E2CD;
+ Fri, 21 Feb 2025 11:36:00 +0000 (UTC)
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=LPYIaHmxtFYpcpPpGwL/dTYE8VgyESKYBwSYzeMM2PqTMVi1xYixWbwXiaq4shjLQXM5pexv+kg6Rv4688q6WsPJkdZnX1+bMP0Fdrx70fwhop/6KokpcQDCAKwOVv+L4XJUgsAs1RBIEIqRuPv1t47pIOjoGKHX6b1tbvLW+f+YwcD0PKmuA/DL0QTMMl7gnA2qYmz40ftstbPJcWhAKhXVspmAc+oDxj0ToJbry69qqVK+iB+LzBxxOwuhv5mp9v6vETJpjYb0WtiHlX8e7iDhNKZH7OyXmWP5DIiYLTEda4gOE/g5mRyDiSYdsXM9+SqHIvKlnok2E/KtA5IPpQ==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=Q6UxIPxgPUb/hyBwCEI7G/KIJZAF+KWVAQJnNsmgqJc=;
+ b=Tj+gbIVYQv6jdw4IR8jyP0RiVxovfAcTUqM7ePXTk+8pwTP43axtkTjlhafFwgbcklp6Sv//irLoMm0hC2Qkcy3H2lpmzSL737gD00q3tXQIOdOoF/L+nuL9CYHEZRWr2dTFu4SVd2qfok5aYMWtpnu8mY/arpwXGc4tb1/vFQQ3w4A3NrWc6QBSb+8hDiO7xBbiP6q0aGj2Ne6WDxgW0x7iWcyc5Wp7vKm6BujL8lhIxpMH0qHMk4tzBvN+CLOBzSORaKWOTiMmsWYECgTX/hg6KYl6uoFsRXeb+A0JWiV1+C++joc4n6MEznYrOjKcsjH5E1GA8WGUwqo0mmGYUQ==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=nvidia.com; dmarc=pass action=none header.from=nvidia.com;
+ dkim=pass header.d=nvidia.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=Nvidia.com;
+ s=selector2;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=Q6UxIPxgPUb/hyBwCEI7G/KIJZAF+KWVAQJnNsmgqJc=;
+ b=KgJaEJl2EsL93HCL5RNH38ifraTjzvm+VIT6DCAOYn5Q7ytN/weiwpT95OQQ27/8issPavGOgGZMNRfrDpqZEMr0WLmq4CGeouVVqKAECtB0JOcz2eex4pDMpCAk5eAp8+9JOEAUVmiKASoEv9KlItfFpHNWeBa5SfZW/WcoDpEYb8gZeITI35+e10JPndPk3meUNZb45MGmn5Nf98wGhvnL7vVyCJulnlHo41wnYIKp04wt9+ujHFPfUyct7K//oWMjvozWwbFIIT2asMNkPjQZmH0P6GpLB7+zumYNxHW1GvgeZ2Afw3unZSDTTHxDaPClsZdzJzgdIeRTNcUo/w==
+Authentication-Results: dkim=none (message not signed)
+ header.d=none;dmarc=none action=none header.from=nvidia.com;
+Received: from CH2PR12MB3990.namprd12.prod.outlook.com (2603:10b6:610:28::18)
+ by SJ5PPF75EAF8F39.namprd12.prod.outlook.com
+ (2603:10b6:a0f:fc02::999) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.8466.17; Fri, 21 Feb
+ 2025 11:35:58 +0000
+Received: from CH2PR12MB3990.namprd12.prod.outlook.com
+ ([fe80::6e37:569f:82ee:3f99]) by CH2PR12MB3990.namprd12.prod.outlook.com
+ ([fe80::6e37:569f:82ee:3f99%6]) with mapi id 15.20.8466.015; Fri, 21 Feb 2025
+ 11:35:58 +0000
+Content-Transfer-Encoding: quoted-printable
+Content-Type: text/plain; charset=UTF-8
+Date: Fri, 21 Feb 2025 20:35:54 +0900
+Message-Id: <D7Y3CO9OMZBQ.1QGFV73NZBBIF@nvidia.com>
+Cc: "Timur Tabi" <ttabi@nvidia.com>, "dri-devel@lists.freedesktop.org"
+ <dri-devel@lists.freedesktop.org>, "rust-for-linux@vger.kernel.org"
+ <rust-for-linux@vger.kernel.org>, "linux-kernel@vger.kernel.org"
+ <linux-kernel@vger.kernel.org>, "nouveau@lists.freedesktop.org"
+ <nouveau@lists.freedesktop.org>, "dakr@kernel.org" <dakr@kernel.org>, "Ben
+ Skeggs" <bskeggs@nvidia.com>, "Nouveau"
+ <nouveau-bounces@lists.freedesktop.org>
+Subject: Re: [PATCH RFC 1/3] rust: add useful ops for u64
+From: "Alexandre Courbot" <acourbot@nvidia.com>
+To: "John Hubbard" <jhubbard@nvidia.com>, "Daniel Almeida"
+ <daniel.almeida@collabora.com>, "Dave Airlie" <airlied@gmail.com>
+X-Mailer: aerc 0.20.1-0-g2ecb8770224a
+References: <20250217-nova_timer-v1-0-78c5ace2d987@nvidia.com>
+ <20250217-nova_timer-v1-1-78c5ace2d987@nvidia.com>
+ <C1FF4314-C013-4AE1-A94E-444AFACDB4AC@collabora.com>
+ <D7VLMD31YB0V.OKHDSVUPAZTE@nvidia.com>
+ <1b8921d46f7d70c7467ea0940d60220f05cccc5d.camel@nvidia.com>
+ <D7W119MHCCWH.IS600FTIOV8O@nvidia.com>
+ <e6322f90-08bd-4e86-8dad-2ddbd7e5cece@nvidia.com>
+ <D7WFP99SMV3H.26AJWK17S0UPX@nvidia.com>
+ <fd920faf-a707-4c6d-8c0b-3d59c010da1d@nvidia.com>
+ <CAPM=9txmQWO+SHnZhr8zXHCZ=S8CNY=PryRVkWWuHyor-ajU6A@mail.gmail.com>
+ <1597EDB7-D91B-4660-ADDC-D2252B26CB22@collabora.com>
+ <41cf1c79-f61c-47e7-a0ed-afb8e82d50e6@nvidia.com>
+In-Reply-To: <41cf1c79-f61c-47e7-a0ed-afb8e82d50e6@nvidia.com>
+X-ClientProxiedBy: OS7PR01CA0036.jpnprd01.prod.outlook.com
+ (2603:1096:604:257::10) To CH2PR12MB3990.namprd12.prod.outlook.com
+ (2603:10b6:610:28::18)
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v3 02/25] drm/dumb-buffers: Provide helper to set pitch
- and size
-To: Geert Uytterhoeven <geert@linux-m68k.org>
-Cc: Tomi Valkeinen <tomi.valkeinen@ideasonboard.com>,
- maarten.lankhorst@linux.intel.com, mripard@kernel.org, airlied@gmail.com,
- simona@ffwll.ch, dri-devel@lists.freedesktop.org,
- linux-mediatek@lists.infradead.org, freedreno@lists.freedesktop.org,
- linux-arm-msm@vger.kernel.org, imx@lists.linux.dev,
- linux-samsung-soc@vger.kernel.org, nouveau@lists.freedesktop.org,
- virtualization@lists.linux.dev, spice-devel@lists.freedesktop.org,
- linux-renesas-soc@vger.kernel.org, linux-rockchip@lists.infradead.org,
- linux-tegra@vger.kernel.org, intel-xe@lists.freedesktop.org,
- xen-devel@lists.xenproject.org,
- Laurent Pinchart <laurent.pinchart@ideasonboard.com>
-References: <20250218142542.438557-1-tzimmermann@suse.de>
- <20250218142542.438557-3-tzimmermann@suse.de>
- <dcd59a75-7945-4a2e-99f9-3abbb3e9de14@ideasonboard.com>
- <355ed315-61fa-4a9d-b72b-8d5bc7b5a16c@suse.de>
- <596b960e-71f8-4c2c-9abe-058206df1dfb@ideasonboard.com>
- <87ca2b81-a67a-468b-ae2b-30d02a3a64bc@suse.de>
- <CAMuHMdVnZTj-8bqsbbZdhp0H7Bwib8GkEuXPcKNZjdo_jRRXgg@mail.gmail.com>
-Content-Language: en-US
-From: Thomas Zimmermann <tzimmermann@suse.de>
-Autocrypt: addr=tzimmermann@suse.de; keydata=
- xsBNBFs50uABCADEHPidWt974CaxBVbrIBwqcq/WURinJ3+2WlIrKWspiP83vfZKaXhFYsdg
- XH47fDVbPPj+d6tQrw5lPQCyqjwrCPYnq3WlIBnGPJ4/jreTL6V+qfKRDlGLWFjZcsrPJGE0
- BeB5BbqP5erN1qylK9i3gPoQjXGhpBpQYwRrEyQyjuvk+Ev0K1Jc5tVDeJAuau3TGNgah4Yc
- hdHm3bkPjz9EErV85RwvImQ1dptvx6s7xzwXTgGAsaYZsL8WCwDaTuqFa1d1jjlaxg6+tZsB
- 9GluwvIhSezPgnEmimZDkGnZRRSFiGP8yjqTjjWuf0bSj5rUnTGiyLyRZRNGcXmu6hjlABEB
- AAHNJ1Rob21hcyBaaW1tZXJtYW5uIDx0emltbWVybWFubkBzdXNlLmRlPsLAjgQTAQgAOAIb
- AwULCQgHAgYVCgkICwIEFgIDAQIeAQIXgBYhBHIX+6yM6c9jRKFo5WgNwR1TC3ojBQJftODH
- AAoJEGgNwR1TC3ojx1wH/0hKGWugiqDgLNXLRD/4TfHBEKmxIrmfu9Z5t7vwUKfwhFL6hqvo
- lXPJJKQpQ2z8+X2vZm/slsLn7J1yjrOsoJhKABDi+3QWWSGkaGwRJAdPVVyJMfJRNNNIKwVb
- U6B1BkX2XDKDGffF4TxlOpSQzdtNI/9gleOoUA8+jy8knnDYzjBNOZqLG2FuTdicBXblz0Mf
- vg41gd9kCwYXDnD91rJU8tzylXv03E75NCaTxTM+FBXPmsAVYQ4GYhhgFt8S2UWMoaaABLDe
- 7l5FdnLdDEcbmd8uLU2CaG4W2cLrUaI4jz2XbkcPQkqTQ3EB67hYkjiEE6Zy3ggOitiQGcqp
- j//OwE0EWznS4AEIAMYmP4M/V+T5RY5at/g7rUdNsLhWv1APYrh9RQefODYHrNRHUE9eosYb
- T6XMryR9hT8XlGOYRwKWwiQBoWSDiTMo/Xi29jUnn4BXfI2px2DTXwc22LKtLAgTRjP+qbU6
- 3Y0xnQN29UGDbYgyyK51DW3H0If2a3JNsheAAK+Xc9baj0LGIc8T9uiEWHBnCH+RdhgATnWW
- GKdDegUR5BkDfDg5O/FISymJBHx2Dyoklv5g4BzkgqTqwmaYzsl8UxZKvbaxq0zbehDda8lv
- hFXodNFMAgTLJlLuDYOGLK2AwbrS3Sp0AEbkpdJBb44qVlGm5bApZouHeJ/+n+7r12+lqdsA
- EQEAAcLAdgQYAQgAIAIbDBYhBHIX+6yM6c9jRKFo5WgNwR1TC3ojBQJftOH6AAoJEGgNwR1T
- C3ojVSkIALpAPkIJPQoURPb1VWjh34l0HlglmYHvZszJWTXYwavHR8+k6Baa6H7ufXNQtThR
- yIxJrQLW6rV5lm7TjhffEhxVCn37+cg0zZ3j7zIsSS0rx/aMwi6VhFJA5hfn3T0TtrijKP4A
- SAQO9xD1Zk9/61JWk8OysuIh7MXkl0fxbRKWE93XeQBhIJHQfnc+YBLprdnxR446Sh8Wn/2D
- Ya8cavuWf2zrB6cZurs048xe0UbSW5AOSo4V9M0jzYI4nZqTmPxYyXbm30Kvmz0rYVRaitYJ
- 4kyYYMhuULvrJDMjZRvaNe52tkKAvMevcGdt38H4KSVXAylqyQOW5zvPc4/sq9c=
-In-Reply-To: <CAMuHMdVnZTj-8bqsbbZdhp0H7Bwib8GkEuXPcKNZjdo_jRRXgg@mail.gmail.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
-X-Spam-Score: -2.80
-X-Spamd-Result: default: False [-2.80 / 50.00]; BAYES_HAM(-3.00)[100.00%];
- SUSPICIOUS_RECIPS(1.50)[]; NEURAL_HAM_LONG(-1.00)[-1.000];
- NEURAL_HAM_SHORT(-0.20)[-1.000]; MIME_GOOD(-0.10)[text/plain];
- RCVD_TLS_ALL(0.00)[]; RCPT_COUNT_TWELVE(0.00)[21];
- MIME_TRACE(0.00)[0:+]; RCVD_VIA_SMTP_AUTH(0.00)[];
- ARC_NA(0.00)[]; MID_RHS_MATCH_FROM(0.00)[];
- FREEMAIL_ENVRCPT(0.00)[gmail.com];
- DKIM_SIGNED(0.00)[suse.de:s=susede2_rsa,suse.de:s=susede2_ed25519];
- FROM_HAS_DN(0.00)[];
- FREEMAIL_CC(0.00)[ideasonboard.com,linux.intel.com,kernel.org,gmail.com,ffwll.ch,lists.freedesktop.org,lists.infradead.org,vger.kernel.org,lists.linux.dev,lists.xenproject.org];
- TO_DN_SOME(0.00)[]; FROM_EQ_ENVFROM(0.00)[];
- RCVD_COUNT_TWO(0.00)[2]; TO_MATCH_ENVRCPT_ALL(0.00)[];
- FUZZY_BLOCKED(0.00)[rspamd.com];
- DBL_BLOCKED_OPENRESOLVER(0.00)[imap1.dmz-prg2.suse.org:helo, suse.de:mid,
- suse.de:email]
-X-Spam-Flag: NO
-X-Spam-Level: 
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: CH2PR12MB3990:EE_|SJ5PPF75EAF8F39:EE_
+X-MS-Office365-Filtering-Correlation-Id: 03b4731d-c3c2-49dc-b324-08dd526be896
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: BCL:0; ARA:13230040|376014|10070799003|366016|1800799024;
+X-Microsoft-Antispam-Message-Info: =?utf-8?B?QTlGb1BrVlUya2JiN0kxM1EwUytsaTFSRWRlVlN5Um44QkJVK2JRKzFndnp6?=
+ =?utf-8?B?cHdPbFhGZ3J3NXVlRzdXVTNWbmFaRGlZS2drQ1FUdTBxQWZEMW9IN1IzYU5i?=
+ =?utf-8?B?M3RhQ2RhMzk1T0x5bGlsOHhyS2V1Uk5nZ0xka2tlWG5NS21SZStkbFdhU2ZC?=
+ =?utf-8?B?THFTNjFsc3JwNysxcWRFWHp3ZVBod25acXZaLy9vVHpvVW1KM3kzU1FWR3pl?=
+ =?utf-8?B?ZVJEOEljeEtWSWVJSCtYVEZSeTRzT01ydXUvTkdBQUs4TFN3bnMvdkZ4a1c2?=
+ =?utf-8?B?RVp4OVRLUkJMUEdsUnJxakx3RWpxVXN2V2twZ2ljbVBtK291SXRTVUZYRWdP?=
+ =?utf-8?B?Mzk3QzFiK3pXVHJCbUs4ZzAvWlQ3bW9iekxJRGRxd0M3YlBpVUxZVTl5M0pm?=
+ =?utf-8?B?anNJZFA5dHVoTXpEVWM1Mm1OY1hUQ2tsRlcxRnphWUxzcXBUVDFQK0NGTXJ5?=
+ =?utf-8?B?MTlEQVphQkFuZHpiblhGQXNFQmZoMkMzOEZxMFppTWsrL3RobEQ2aldFU09N?=
+ =?utf-8?B?Vnc5Ry9ITTdhZTdDK0VIdkQ0bVhlVXlTT2xKL1VYNUhzVGZhRDErVzJkNUNl?=
+ =?utf-8?B?NzdwV1d5ZkJoY1B4ZjN1d2hFdVg1aVBMK2Q4dG1VMm5MSEdBRTd0d2dMTThN?=
+ =?utf-8?B?NHIzeUo3ME84ejhmaHdWamhQcnBEdlliUGFJY25LTW02c0U1YXdoZjRzcTRt?=
+ =?utf-8?B?NDVndGFMZEkxVzhTM2xSeTQyWURWRW5UZWd3Um5xaW9FRTZLbXB3OGNEbVMz?=
+ =?utf-8?B?U1lBK29Yb1c3SnVsNDA4Ym9uSWNydERRc2traGROZUFFbjJnakhRbHlPQ3l6?=
+ =?utf-8?B?dFRSYVJqQkVleFYxQ2ZLaHRyRDlFQnVXR3FJOTN5R0JCcFp4Y3dyLzR2T1pa?=
+ =?utf-8?B?TW42L1hiaGV2amI2NnVOdFlpU1p3NTV0eS9pL1dFRU1FWUZzTVdISGNjOFVy?=
+ =?utf-8?B?VnQyaTI3YXNsY0ZubmtySHdKdHphQnlLOVhLSitIdzkzMDJWcjRBT3NtSzAv?=
+ =?utf-8?B?VFBrQzh5MEU5eERtYk1vMHlNVXlGS1d4QXJJamN5N1oyZVR6TTM2bnJMSDB0?=
+ =?utf-8?B?S004a1BnQk9sdHJjU0JHbEdUWmtPYTE1YjUvb1RNbkVHaUUrMFN2bVdQUktu?=
+ =?utf-8?B?dmxIdVNrVDNNNzczZytWYStGZjk5Zy9yKzR1TUk5Y1pVUWs1U2pOSjJzZFM1?=
+ =?utf-8?B?MGJxcXhVZE5XaTg2dGo5b0lEZWwrYU1kRHNXbXB4T05iYXlDbldKRm9OOE1R?=
+ =?utf-8?B?U1dBcGpIWFAyR3hDWmhIbks4RFhXMkk3NWJTRURGNCtJdTRQcDZIcEhicDFY?=
+ =?utf-8?B?SmsxSWdERXpoUnZJeCtsSTlsQXlFcXRHKytjL21wV3pnR0tIekVjWXZjN1NL?=
+ =?utf-8?B?bkMzZ1ZFYys1KzRuYVZaTFRsT1laWWszV1BvVjZEOXl2aU1XR0xZdWZxMUVQ?=
+ =?utf-8?B?THRtODFabUk3N29KY1BKaHZ3Zkg2Sm5JM0N4M0RjK1FWcnU1MkxaTkI1TGxl?=
+ =?utf-8?B?cnVwaW9CWi9wMllNdkhoZ2QvczJGeVY2RFBpMU9xZVNCV1Arb3RqWkVZemMr?=
+ =?utf-8?B?VExSRDE4SEpQaGpFSUpoeGFQOUM1Q1V2MmwzYnVVczdVYVFTbFRidGZKVXc3?=
+ =?utf-8?B?OHdlNG0vYThlaTJtb0VQR3UxdE1VbVRHRTg1SjBSSk1uMUZmQUVKRVJHTHFG?=
+ =?utf-8?B?VFpvV1ArVi9TMWJ5VWJsdG5VTCtWclZjVzV1RWFqdm5TVXRxTWR5R1d5Y2Mr?=
+ =?utf-8?B?ZW5NdVArTTFCb3JqL0JmWEVlOUpaQjVEcjFUeE5NQTJDUm5OcmtWQWlxcmhl?=
+ =?utf-8?B?N3R1ODMwcEgyRnk3WHFQd0ttcUp2eXVBamVvTXdxOUVZVlJGWFNUSEtxRFlS?=
+ =?utf-8?Q?svhEqhPn+AY1K?=
+X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
+ IPV:NLI; SFV:NSPM; H:CH2PR12MB3990.namprd12.prod.outlook.com; PTR:; CAT:NONE;
+ SFS:(13230040)(376014)(10070799003)(366016)(1800799024); DIR:OUT; SFP:1101; 
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?QjMxdUJxRmhDYXJDSkFWeFRocG1zdFJiOHh5WGhxWEMwbmtLMm1RQVlWbTV4?=
+ =?utf-8?B?dXM1U1VaZXFReUprUFV1YS81Q2NGUTNKSVZDRllrZmZNb0h0bjk5YUFGaU8r?=
+ =?utf-8?B?eldIZ1pSNkQrdk03bEwxK1VhMjdFRUk2Y2tJTjA1WE04aXdmMlJWeXZaeU1h?=
+ =?utf-8?B?bWgzZW1iZ2dCOHJhZXJRNFBVNnRDcGtMcTlZTzcyT0RXQ0wvTHpwenkvaDY1?=
+ =?utf-8?B?OHd4cmRRTVl3QzUvR0FzQnRoYXg5dlRMRFhBQUxNU1ZURUZLbHZGSjJuRnFF?=
+ =?utf-8?B?UjdlMDJpdG5JTkYxcGRJVk5lUlI5NE9jZ2N3TFRRVEFOVGxaUDRpQlJNTzBI?=
+ =?utf-8?B?bVJoaU1XYnJsWTlibDhYbkZIS3J1NjU3Z2tZNnQ5MkQ2eDNuZG4zVVMxVzIz?=
+ =?utf-8?B?cTZhOGl0MkVtR1VQVmpBQ1RyaGFJalpKVmR5UVlxU1ZDeVpQaWxncXlhTWwy?=
+ =?utf-8?B?cDNCNW5Qd1drdEVLb1l4SXFwL2JpQ0RBYnRuY09BblZtZVFQVWRLQkpzZVBp?=
+ =?utf-8?B?T0kreXdUT3hVWDU3TnRYMEJtQkpsNVd4R2k3WU1SQ2Jyam5ma1A5cmxnaTZS?=
+ =?utf-8?B?WXBEa3huY3owYkJFU2NwSlp3YzJWTnd0U3RUVUFZM2ZRcEZ2ZnlKQklyRHdm?=
+ =?utf-8?B?OCt2bUROMnB3NXE1NVZKSXEwQk9lc29ZNG5ETjgxVi9QYklYS2xZejBEbTh0?=
+ =?utf-8?B?UjRPcjhMQjYxNkJYeFFVNlFHeWxuUkI2ZndVTkhNOERJdnhya2RweXY0RkRL?=
+ =?utf-8?B?di9qelVzczJJQlowK3N5MEN2SFo4VzRRY2pXRUxjeW1qOVh0d2xvbWQwRGRR?=
+ =?utf-8?B?dTJoaU1iemFpNkJlU3k2NEVxeDJpM0JoVVF2UmtDL2VtVXphbnNDanV0cndI?=
+ =?utf-8?B?OHc5SkFxcGtXeVBwbGg1bldiWTRTT3MzTks5SVpuVWViT0RZUzBubWhDRCtX?=
+ =?utf-8?B?OHNHbGllNXZvT0NZTWpOV3I4N1kwZ1JLbzV3UHU5NVloNTFIa3dOcHd2TEFt?=
+ =?utf-8?B?cThBQ0U2a3VTeHlxQ3dwU3RSMlpFN3F3WHdFQ3dYV3pHYzl4WjJtZlZTTGRj?=
+ =?utf-8?B?TG9OK2hkNlRDWFlEbEVEY3BGR2hBQzQybzNhQ2h1WDVRdlBrOVlrSGRnWEND?=
+ =?utf-8?B?Y0FzUFg3cXlGSzJzd3FKTUZpdlhwa0l6d29HTThGOWgzNXY1OFJtNXhVRkxu?=
+ =?utf-8?B?UUN0bnRQQTVNd3NuUnZZL0tpY0ZFbkJnNkhqTDR3a2NzTmJ2TGhBblBNSHNE?=
+ =?utf-8?B?VFJSK3AzRXVMeGQxZzJ0bjViTnB6ZTZEZG5qeWZGQ3YzZktOSnZZNFpobmZl?=
+ =?utf-8?B?aHhFL1hOckY1ZzlsSDlGQlN6dkNKRlhFZ2prNkZmRTdMZ1Fkc1RmUFBoM0ty?=
+ =?utf-8?B?bGhwYURBdVF0UGdLZDVEUGNLRHNTR2NJbUVwR3ZuWWt0b09tOXNmczBia2RO?=
+ =?utf-8?B?L0tVd0U1UkdJY3gvVXhpMHZldXZWR2hFV1pYa2hyb3AyYzVyZndVaE5yU1VL?=
+ =?utf-8?B?Nk5RL0dVN0dnWCswbDFJRGRmTjR5V3Nya1I5aDBmMUNwdTMrN1pNNkx6V1dQ?=
+ =?utf-8?B?bG0zeU9hcWJUTVUwbWNFRmc3dkpzK0pPZjNkVmtDeCtLRmc0NzZ4WUUwaUxH?=
+ =?utf-8?B?VmN3L3VSMDgrTmpEOFNmem0rUGI5RSttc254SUJmY3NzZHhnbHZnUkQ4Q2FV?=
+ =?utf-8?B?MHA0Vk5FYy93ZWtVOTRLN3VpL0hkV1Yxd1ZHYmhiRWg4d3dUN3RpR0ZiVVdM?=
+ =?utf-8?B?bXZDVFU1VmZiL0tIZ3BlaWFQK01SRHpSbWQ3SUJHTGM4TllTdVZZSGd2MUFa?=
+ =?utf-8?B?b0MxTzI2MmFtYUZhcElHL0FJZFZtS3hkbWYwLzltbWVtakVLOEQ3S3RYRlNJ?=
+ =?utf-8?B?SmpKMkxpK091MEFqd2RrYVA1Q0ozcTFpVDJTOEV0Tk9iVVE2b3dVNlpGNVRN?=
+ =?utf-8?B?Ykp5OVVuZmI0bjhMRW5yK0RzcW04Q1BmN08zYmdCYm4vQ3lyamg5eGhFTjF6?=
+ =?utf-8?B?L0dObjkrMkxFUFJBOENjYVVhR29zWXh2MXNwb2prZExsTmlTcUgySFRlazFZ?=
+ =?utf-8?B?MDg3d1BvekIydVZraXpQdGdOaWZ0Mlo1OVYxb3JvK3NXOEkzVGhzQ0pkcmlP?=
+ =?utf-8?B?ZnhCcWo2czRJdnUrcFIyQUlOdGFJdDFLUmpvSDRaUExDK2FHZUEra2o1U2No?=
+ =?utf-8?Q?kXjhIu3kptpPZCw8tEEWm1AFZD/TUFl4qmpU7gdl5i6q?=
+X-OriginatorOrg: Nvidia.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: 03b4731d-c3c2-49dc-b324-08dd526be896
+X-MS-Exchange-CrossTenant-AuthSource: CH2PR12MB3990.namprd12.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 21 Feb 2025 11:35:58.1474 (UTC)
+X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
+X-MS-Exchange-CrossTenant-Id: 43083d15-7273-40c1-b7db-39efd9ccc17a
+X-MS-Exchange-CrossTenant-MailboxType: HOSTED
+X-MS-Exchange-CrossTenant-UserPrincipalName: Dw6UFkVkjWV4/Ezs6I/1feGjMdjWj8QMRQ0MSQ93ezc0d3elKbUhbsS1bDvwbrUbPWb8yFhxJ6ochN5nFC67fQ==
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: SJ5PPF75EAF8F39
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -157,77 +178,45 @@ List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-Hi
-
-Am 21.02.25 um 10:57 schrieb Geert Uytterhoeven:
-> Hi Thomas,
+On Thu Feb 20, 2025 at 9:14 AM JST, John Hubbard wrote:
+> On 2/19/25 3:13 PM, Daniel Almeida wrote:
+>>> On 19 Feb 2025, at 17:23, Dave Airlie <airlied@gmail.com> wrote:
+>>> On Thu, 20 Feb 2025 at 06:22, John Hubbard <jhubbard@nvidia.com> wrote:
+>>>> On 2/19/25 4:51 AM, Alexandre Courbot wrote:
+>>>>> Yes, that looks like the optimal way to do this actually. It also
+>>>>> doesn't introduce any overhead as the destructuring was doing both
+>>>>> high_half() and low_half() in sequence, so in some cases it might
+>>>>> even be more efficient.
+>>>>>
+>>>>> I'd just like to find a better naming. high() and low() might be enou=
+gh?
+>>>>> Or are there other suggestions?
+>>>>>
+>>>>
+>>>> Maybe use "32" instead of "half":
+>>>>
+>>>>      .high_32()  / .low_32()
+>>>>      .upper_32() / .lower_32()
+>>>>
+>>>
+>>> The C code currently does upper_32_bits and lower_32_bits, do we want
+>>> to align or diverge here?
 >
-> On Fri, 21 Feb 2025 at 10:19, Thomas Zimmermann <tzimmermann@suse.de> wrote:
->> Am 20.02.25 um 11:53 schrieb Tomi Valkeinen:
->>> This change also first calls the drm_driver_color_mode_format(), which
->>> could change the behavior even more, but afaics at the moment does not.
->> Because currently each driver does its own thing, it can be hard to
->> write user space that reliably allocates on all drivers. That's why it's
->> important that parameters are not just raw numbers, but have
->> well-defined semantics. The raw bpp is meaningless; it's also important
->> to know which formats are associated with each value. Otherwise, you
->> might get a dumb buffer with a bpp of 15, but it will be displayed
->> incorrectly. This patch series finally implements this and clearly
->> documents the assumptions behind the interfaces. The assumptions
->> themselves have always existed.
->>
->> The color modes in drm_driver_color_mode_format() are set in stone and
->> will not change incompatibly. It's already a user interface. I've taken
->> care that the results do not change incompatibly compared to what the
->> dumb-buffer ioctl currently assumes. (C1-C4 are special, see below.)
->>
->>> Although, maybe some platform does width * DIV_ROUND_UP(bpp, 8) even
->>> for bpp < 8, and then this series changes it for 1, 2 and 4 bpps (but
->>> not for 3, 5, 6, 7, if I'm not mistaken).
->> True. 1, 2 and 4 would currently over-allocate significantly on some
->> drivers and the series will reduce this to actual requirements. Yet our
->> most common memory managers, gem-dma and gem-shmem, compute the sizes
->> correctly.
->>
->> But there are currently no drivers that support C4, C2 or C1 formats;
->> hence there's likely no user space either. I know that Geert is
->> interested in making a driver that uses these formats on very low-end
->> hardware (something Atari or Amiga IIRC). Over-allocating on such
->> hardware is likely not an option.
-> Note that the gud and ssd130x drivers do support R1, and I believe
-> work is underway to add grayscale formats to ssd130x.
-
-Nice find. Both use gem-shmem, which allocates without much overhead. So 
-any possible userspace should already be prepared for this scenario.
-
+> This sounds like a trick question, so I'm going to go with..."align". hah=
+a :)
 >
->> The other values (3, 5, 6, 7) have no meaning I know of. 6 could be
->> XRGB2222, but I not aware of anything using that. We don't even have a
->> format constant for this.
-> Yeah, e.g. Amiga supports 3, 5, 6, and 7 bpp, but that is using
-> bitplanes.  There is already some sort of consensus to not expose
-> bitplanes to userspace in DRM, so limiting to 1, 2, 4, and 8 bpp
-> (which can be converted from C[1248]) is fine.
-
-There's been discussion about a new dumb-buffer ioctl that receives a 
-format constant and returns individual buffers for each plane. This 
-would allow for these use cases.
-
-Best regards
-Thomas
-
+>>>
+>>> Dave.
+>>=20
+>>=20
+>> My humble suggestion here is to use the same nomenclature. `upper_32_bit=
+s` and
+>> `lower_32_bits` immediately and succinctly informs the reader of what is=
+ going on.
+>>=20
 >
-> Gr{oetje,eeting}s,
->
->                          Geert
->
+> Yes. I missed the pre-existing naming in C, but since we have it and it's
+> well-named as well, definitely this is the way to go.
 
--- 
---
-Thomas Zimmermann
-Graphics Driver Developer
-SUSE Software Solutions Germany GmbH
-Frankenstrasse 146, 90461 Nuernberg, Germany
-GF: Ivo Totev, Andrew Myers, Andrew McDonald, Boudien Moerman
-HRB 36809 (AG Nuernberg)
-
+Agreed, I wasn't aware of the C equivalents either, but since they exist
+we should definitely use the same naming scheme.
