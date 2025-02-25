@@ -2,56 +2,76 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id 5D45DA43125
-	for <lists+nouveau@lfdr.de>; Tue, 25 Feb 2025 00:45:02 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 4D192A43258
+	for <lists+nouveau@lfdr.de>; Tue, 25 Feb 2025 02:16:24 +0100 (CET)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 5CF8010E413;
-	Mon, 24 Feb 2025 23:45:00 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 5C8A210E50D;
+	Tue, 25 Feb 2025 01:16:22 +0000 (UTC)
 Authentication-Results: gabe.freedesktop.org;
-	dkim=pass (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="lS0PoM1g";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="Ni7ysPaP";
 	dkim-atps=neutral
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from dfw.source.kernel.org (dfw.source.kernel.org [139.178.84.217])
- by gabe.freedesktop.org (Postfix) with ESMTPS id D422610E4A2;
- Mon, 24 Feb 2025 23:44:58 +0000 (UTC)
-Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by dfw.source.kernel.org (Postfix) with ESMTP id 5CC815C419A;
- Mon, 24 Feb 2025 23:44:18 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 54A2BC4CED6;
- Mon, 24 Feb 2025 23:44:54 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1740440697;
- bh=Kr1rcS4ZMViPxe+TilfErx2vNbgRGnGen+c0co0S3HY=;
- h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
- b=lS0PoM1gPsYGz6CL0m4sV/UNKhyh3NDOUWFZhOk7k7RwVpFFDHNFkY2wK1ZsdBZV3
- AeGefMf/BsacH6jQUEnHnR9do9P3j0e/Oinz9iaDMGyE3V92sg8owwWr86Lvi5wnA5
- 0YxPtdGUCUd25EJOEeAaBjvmMV8tzTJymm6m9gqwQxZ4f0POdPahMHcNoOSbYnnvgs
- yPZSuiKL1vUjYo4trTbcO4w5TUnCP9sF+kattMFoYYXAkaDhKtx1+ckS4/+IAju1dr
- rwRO6A8Y6kG5IsxN3ZTVD2wAJgrFFluekHJMa+sauLd/0X08PCafLFWTulb01DlcI5
- mlKMhPlZ/rByg==
-Date: Tue, 25 Feb 2025 00:44:51 +0100
-From: Danilo Krummrich <dakr@kernel.org>
-To: Joel Fernandes <joelagnelf@nvidia.com>
-Cc: Alexandre Courbot <acourbot@nvidia.com>,
- Dave Airlie <airlied@gmail.com>, Gary Guo <gary@garyguo.net>,
- Joel Fernandes <joel@joelfernandes.org>, Boqun Feng <boqun.feng@gmail.com>,
- John Hubbard <jhubbard@nvidia.com>, Ben Skeggs <bskeggs@nvidia.com>,
- linux-kernel@vger.kernel.org, rust-for-linux@vger.kernel.org,
- nouveau@lists.freedesktop.org, dri-devel@lists.freedesktop.org,
- paulmck@kernel.org
-Subject: Re: [RFC PATCH 0/3] gpu: nova-core: add basic timer subdevice
- implementation
-Message-ID: <Z70EcwNIX0KtWy36@cassiopeiae>
-References: <20250217-nova_timer-v1-0-78c5ace2d987@nvidia.com>
- <Z7OrKX3zzjrzZdyz@pollux>
- <CAPM=9tyu84z4Xk5X0fykO3Dazby2UqRgwtN4woNKe4Z2yMyDZg@mail.gmail.com>
- <D80AK2CLL4AZ.1G6R7OBHOF08O@nvidia.com> <Z7xg8uArPlr2gQBU@pollux>
- <Z7xh5bEyh_MII4WV@pollux> <20250224184502.GA1599486@joelnvbox>
+Received: from mail-ed1-f51.google.com (mail-ed1-f51.google.com
+ [209.85.208.51])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 38BC110E50D;
+ Tue, 25 Feb 2025 01:16:21 +0000 (UTC)
+Received: by mail-ed1-f51.google.com with SMTP id
+ 4fb4d7f45d1cf-5e0452f859cso7870126a12.2; 
+ Mon, 24 Feb 2025 17:16:21 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=gmail.com; s=20230601; t=1740446179; x=1741050979; darn=lists.freedesktop.org;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=USud5gyYtWrU8U8QerFLgqPcIKFBmDezEDg0FlIDuDg=;
+ b=Ni7ysPaPJY/XUicHQck9dJaT6OdHG0xJuM+fr2NDpFQJRqmmYqYFoG/mOCEviRONfX
+ mmgF37ATt+fxRkzoGLymRGJZWXmXTwfRV2H+lX3gXBwg8E1xn5nCf06rTJ19o/cZ0fDa
+ KpJlrKNEirNfgzAi9zy5AQ3B9YLQvXW2pEKcXrGSirmNFq0VOb2zfdGcsLWs0VzdKgF3
+ FcmYj2+dfMVv9PIjMgsxXbL8vPUtGRQtgOJAMXwM9P56SkUAtuoZL7ISGwdlRmma14iX
+ 63u33jJ7+A+D0lhqgoFThOXEOz1/Ni2G1qGdJSljVdpYuwBw5I0Py+nPXRNI7x3GuVKc
+ 4sIA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1740446179; x=1741050979;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=USud5gyYtWrU8U8QerFLgqPcIKFBmDezEDg0FlIDuDg=;
+ b=qQzP7OshlGNLzbStuv6YUyXBuyDsk4pAIsjBXutkqHHk6aqIRdx5GrqpoobD5kgDz4
+ QExQrAsCvPd5wHXJPdr8Ekcpnkh539OmK8BKMzywKCrGGrEQfgAe2aL73gYu474MpYkm
+ NihcINnJjDVXpm9Ai0pBeys2MWLiXW4lpwfvj/zT73tct/n+J9nIwyvbDP/4BuuTWFhg
+ flAq4Oyr+XBXOo/tcxS++eEve56KND3w5gbD7mRUi/2jKoelx8fNSz4w3hjgAf/lou4K
+ phU/FXWWyyvEbIqEHhb6Ea64Se4zT8yvFaIjdUFE45/W+oRUkUeIzy0ZE46FfmhDqWdR
+ sdeg==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCUPHHyR+GIptzNbjM7iCgGYLKlmYJ+QmIHqPIgxJPc8cWCtArmdVj35y+cnkX2YvL3r0Ia4baetsw==@lists.freedesktop.org,
+ AJvYcCWMSwl//o1OR+MnBkEVGf4vjtGHQrxT3IB/WP0zVdD0HYifNJ9wh03456EFNxsaRH6PkQzLaZoF7Qo=@lists.freedesktop.org
+X-Gm-Message-State: AOJu0YyyWRnRG/Th/QNSrItJ91VHALJsYCbEP41oqMY/XElW5tpP7MGC
+ xYZfwuAqaa+L8LHAJdBcAwTzsltTBs9YZM4actONPoCoqQRPVcMV9Vzcd7hSOmWjHGuCxt+VoVA
+ Txh+olRLFd9A2HoqCvJJufk6NuiA=
+X-Gm-Gg: ASbGnctLfS75J9O6n49Y6bid+D1OPv1+5a+xunV6XX+CG//PmN9g7/OTy1cvIcpuEnQ
+ MgtLeGbxRe/8xAi1DSjKs16+k4DfPPkkuASY7ehXKBeBsqLpoxvYW8HvJQ9y8HB9mxJPQgn+RON
+ SHCFSHdw==
+X-Google-Smtp-Source: AGHT+IF0RS4ftxUi/5gsMlDTZ97MqhoilTR5nbgQvR9Hbq3pJnw0GQ+UCMGT6Y+mJn5iC29yoSvinQroVFNzfU+X1OE=
+X-Received: by 2002:a17:907:9724:b0:ab7:851d:4718 with SMTP id
+ a640c23a62f3a-abc09c27044mr1736963766b.36.1740446179223; Mon, 24 Feb 2025
+ 17:16:19 -0800 (PST)
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <20250224184502.GA1599486@joelnvbox>
+References: <Z6xjZhHxRp4Bu_SX@kspp> <Z69UdL9zaCINQSFC@cassiopeiae>
+In-Reply-To: <Z69UdL9zaCINQSFC@cassiopeiae>
+From: Dave Airlie <airlied@gmail.com>
+Date: Tue, 25 Feb 2025 11:16:07 +1000
+X-Gm-Features: AWEUYZmgRiwQFNtUHE3LYO3HnyBJ0zVgwbRvgZnt3tdjjXgXcXdwfVxCgBec9ww
+Message-ID: <CAPM=9twgrjQdNCrnK2gXMckqDHRjBAwnCKx4HwAfty-Q6VZrig@mail.gmail.com>
+Subject: Re: [PATCH][next] drm/nouveau: Avoid multiple
+ -Wflex-array-member-not-at-end warnings
+To: Danilo Krummrich <dakr@kernel.org>
+Cc: "Gustavo A. R. Silva" <gustavoars@kernel.org>,
+ Karol Herbst <kherbst@redhat.com>, 
+ Lyude Paul <lyude@redhat.com>, Faith Ekstrand <faith.ekstrand@collabora.com>, 
+ Simona Vetter <simona@ffwll.ch>, dri-devel@lists.freedesktop.org, 
+ nouveau@lists.freedesktop.org, linux-kernel@vger.kernel.org, 
+ linux-hardening@vger.kernel.org
+Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -66,70 +86,187 @@ List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-On Mon, Feb 24, 2025 at 01:45:02PM -0500, Joel Fernandes wrote:
-> Hi Danilo,
-> 
-> On Mon, Feb 24, 2025 at 01:11:17PM +0100, Danilo Krummrich wrote:
-> > On Mon, Feb 24, 2025 at 01:07:19PM +0100, Danilo Krummrich wrote:
-> > > CC: Gary
-> > > 
-> > > On Mon, Feb 24, 2025 at 10:40:00AM +0900, Alexandre Courbot wrote:
-> > > > This inability to sleep while we are accessing registers seems very
-> > > > constraining to me, if not dangerous. It is pretty common to have
-> > > > functions intermingle hardware accesses with other operations that might
-> > > > sleep, and this constraint means that in such cases the caller would
-> > > > need to perform guard lifetime management manually:
-> > > > 
-> > > >   let bar_guard = bar.try_access()?;
-> > > >   /* do something non-sleeping with bar_guard */
-> > > >   drop(bar_guard);
-> > > > 
-> > > >   /* do something that might sleep */
-> > > > 
-> > > >   let bar_guard = bar.try_access()?;
-> > > >   /* do something non-sleeping with bar_guard */
-> > > >   drop(bar_guard);
-> > > > 
-> > > >   ...
-> > > > 
-> > > > Failure to drop the guard potentially introduces a race condition, which
-> > > > will receive no compile-time warning and potentialy not even a runtime
-> > > > one unless lockdep is enabled. This problem does not exist with the
-> > > > equivalent C code AFAICT
-> > 
-> > Without klint [1] it is exactly the same as in C, where I have to remember to
-> > not call into something that might sleep from atomic context.
+On Sat, 15 Feb 2025 at 00:34, Danilo Krummrich <dakr@kernel.org> wrote:
+>
+> On Wed, Feb 12, 2025 at 07:31:26PM +1030, Gustavo A. R. Silva wrote:
+> > -Wflex-array-member-not-at-end was introduced in GCC-14, and we are
+> > getting ready to enable it, globally.
 > >
-> 
-> Sure, but in C, a sequence of MMIO accesses don't need to be constrained to
-> not sleeping?
+> > So, in order to avoid ending up with flexible-array members in the
+> > middle of other structs, we use the `struct_group_tagged()` helper
+> > to separate the flexible arrays from the rest of the members in the
+> > flexible structures. We then use the newly created tagged `struct
+> > nvif_ioctl_v0_hdr` and `struct nvif_ioctl_mthd_v0_hdr` to replace the
+> > type of the objects causing trouble in multiple structures.
+> >
+> > We also want to ensure that when new members need to be added to the
+> > flexible structures, they are always included within the newly created
+> > tagged structs. For this, we use `static_assert()`. This ensures that the
+> > memory layout for both the flexible structure and the new tagged struct
+> > is the same after any changes.
+> >
+> > So, with these changes, fix the following warnings:
+> > drivers/gpu/drm/nouveau/nvif/object.c:60:38: warning: structure containing a flexible array member is not at the end of another structure [-Wflex-array-member-not-at-end]
+> > drivers/gpu/drm/nouveau/nvif/object.c:233:38: warning: structure containing a flexible array member is not at the end of another structure [-Wflex-array-member-not-at-end]
+> > drivers/gpu/drm/nouveau/nvif/object.c:214:38: warning: structure containing a flexible array member is not at the end of another structure [-Wflex-array-member-not-at-end]
+> > drivers/gpu/drm/nouveau/nvif/object.c:152:38: warning: structure containing a flexible array member is not at the end of another structure [-Wflex-array-member-not-at-end]
+> > drivers/gpu/drm/nouveau/nvif/object.c:138:38: warning: structure containing a flexible array member is not at the end of another structure [-Wflex-array-member-not-at-end]
+> > drivers/gpu/drm/nouveau/nvif/object.c:104:38: warning: structure containing a flexible array member is not at the end of another structure [-Wflex-array-member-not-at-end]
+> > drivers/gpu/drm/nouveau/nouveau_svm.c:83:35: warning: structure containing a flexible array member is not at the end of another structure [-Wflex-array-member-not-at-end]
+> > drivers/gpu/drm/nouveau/nouveau_svm.c:82:30: warning: structure containing a flexible array member is not at the end of another structure [-Wflex-array-member-not-at-end]
+> >
+> > Signed-off-by: Gustavo A. R. Silva <gustavoars@kernel.org>
+>
+> @Faith, Karol: Can I get an ACK from mesa for this one?
 
-It's not that MMIO needs to be constrained to not sleeping in Rust either. It's
-just that the synchronization mechanism (RCU) used for the Revocable type
-implies that.
+If we do reimport this to userspace we will have to figure it out, but for now,
 
-In C we have something that is pretty similar with drm_dev_enter() /
-drm_dev_exit() even though it is using SRCU instead and is specialized to DRM.
+Acked-by: Dave Airlie <airlied@redhat.com>
 
-In DRM this is used to prevent accesses to device resources after the device has
-been unplugged.
-
-> 
-> I am fairly new to rust, could you help elaborate more about why these MMIO
-> accesses need to have RevocableGuard in Rust? What problem are we trying to
-> solve that C has but Rust doesn't with the aid of a RCU read-side section? I
-> vaguely understand we are trying to "wait for an MMIO access" using
-> synchronize here, but it is just a guest.
-
-Similar to the above, in Rust it's a safety constraint to prevent MMIO accesses
-to unplugged devices.
-
-The exact type in Rust in this case is Devres<pci::Bar>. Within Devres, the
-pci::Bar is placed in a Revocable. The Revocable is revoked when the device
-is detached from the driver (for instance because it has been unplugged).
-
-By revoking the Revocable, the pci::Bar is dropped, which implies that it's also
-unmapped; a subsequent call to try_access() would fail.
-
-But yes, if the device is unplugged while holding the RCU guard, one is on their
-own; that's also why keeping the critical sections short is desirable.
+>
+> > ---
+> >  drivers/gpu/drm/nouveau/include/nvif/ioctl.h | 32 +++++++++++++-------
+> >  drivers/gpu/drm/nouveau/nouveau_svm.c        |  4 +--
+> >  drivers/gpu/drm/nouveau/nvif/object.c        | 12 ++++----
+> >  3 files changed, 29 insertions(+), 19 deletions(-)
+> >
+> > diff --git a/drivers/gpu/drm/nouveau/include/nvif/ioctl.h b/drivers/gpu/drm/nouveau/include/nvif/ioctl.h
+> > index e825c8a1d9ca..00015412cb3e 100644
+> > --- a/drivers/gpu/drm/nouveau/include/nvif/ioctl.h
+> > +++ b/drivers/gpu/drm/nouveau/include/nvif/ioctl.h
+> > @@ -3,25 +3,30 @@
+> >  #define __NVIF_IOCTL_H__
+> >
+> >  struct nvif_ioctl_v0 {
+> > -     __u8  version;
+> > +     /* New members MUST be added within the struct_group() macro below. */
+> > +     struct_group_tagged(nvif_ioctl_v0_hdr, __hdr,
+> > +             __u8  version;
+> >  #define NVIF_IOCTL_V0_SCLASS                                               0x01
+> >  #define NVIF_IOCTL_V0_NEW                                                  0x02
+> >  #define NVIF_IOCTL_V0_DEL                                                  0x03
+> >  #define NVIF_IOCTL_V0_MTHD                                                 0x04
+> >  #define NVIF_IOCTL_V0_MAP                                                  0x07
+> >  #define NVIF_IOCTL_V0_UNMAP                                                0x08
+> > -     __u8  type;
+> > -     __u8  pad02[4];
+> > +             __u8  type;
+> > +             __u8  pad02[4];
+> >  #define NVIF_IOCTL_V0_OWNER_NVIF                                           0x00
+> >  #define NVIF_IOCTL_V0_OWNER_ANY                                            0xff
+> > -     __u8  owner;
+> > +             __u8  owner;
+> >  #define NVIF_IOCTL_V0_ROUTE_NVIF                                           0x00
+> >  #define NVIF_IOCTL_V0_ROUTE_HIDDEN                                         0xff
+> > -     __u8  route;
+> > -     __u64 token;
+> > -     __u64 object;
+> > +             __u8  route;
+> > +             __u64 token;
+> > +             __u64 object;
+> > +     );
+> >       __u8  data[];           /* ioctl data (below) */
+> >  };
+> > +static_assert(offsetof(struct nvif_ioctl_v0, data) == sizeof(struct nvif_ioctl_v0_hdr),
+> > +           "struct member likely outside of struct_group()");
+> >
+> >  struct nvif_ioctl_sclass_v0 {
+> >       /* nvif_ioctl ... */
+> > @@ -51,12 +56,17 @@ struct nvif_ioctl_del {
+> >  };
+> >
+> >  struct nvif_ioctl_mthd_v0 {
+> > -     /* nvif_ioctl ... */
+> > -     __u8  version;
+> > -     __u8  method;
+> > -     __u8  pad02[6];
+> > +     /* New members MUST be added within the struct_group() macro below. */
+> > +     struct_group_tagged(nvif_ioctl_mthd_v0_hdr, __hdr,
+> > +             /* nvif_ioctl ... */
+> > +             __u8  version;
+> > +             __u8  method;
+> > +             __u8  pad02[6];
+> > +     );
+> >       __u8  data[];           /* method data (class.h) */
+> >  };
+> > +static_assert(offsetof(struct nvif_ioctl_mthd_v0, data) == sizeof(struct nvif_ioctl_mthd_v0_hdr),
+> > +           "struct member likely outside of struct_group()");
+> >
+> >  struct nvif_ioctl_map_v0 {
+> >       /* nvif_ioctl ... */
+> > diff --git a/drivers/gpu/drm/nouveau/nouveau_svm.c b/drivers/gpu/drm/nouveau/nouveau_svm.c
+> > index b4da82ddbb6b..fc64c3d3169e 100644
+> > --- a/drivers/gpu/drm/nouveau/nouveau_svm.c
+> > +++ b/drivers/gpu/drm/nouveau/nouveau_svm.c
+> > @@ -79,8 +79,8 @@ struct nouveau_svm {
+> >  #define SVM_ERR(s,f,a...) NV_WARN((s)->drm, "svm: "f"\n", ##a)
+> >
+> >  struct nouveau_pfnmap_args {
+> > -     struct nvif_ioctl_v0 i;
+> > -     struct nvif_ioctl_mthd_v0 m;
+> > +     struct nvif_ioctl_v0_hdr i;
+> > +     struct nvif_ioctl_mthd_v0_hdr m;
+> >       struct nvif_vmm_pfnmap_v0 p;
+> >  };
+> >
+> > diff --git a/drivers/gpu/drm/nouveau/nvif/object.c b/drivers/gpu/drm/nouveau/nvif/object.c
+> > index 0b87278ac0f8..70af63d70976 100644
+> > --- a/drivers/gpu/drm/nouveau/nvif/object.c
+> > +++ b/drivers/gpu/drm/nouveau/nvif/object.c
+> > @@ -57,7 +57,7 @@ int
+> >  nvif_object_sclass_get(struct nvif_object *object, struct nvif_sclass **psclass)
+> >  {
+> >       struct {
+> > -             struct nvif_ioctl_v0 ioctl;
+> > +             struct nvif_ioctl_v0_hdr ioctl;
+> >               struct nvif_ioctl_sclass_v0 sclass;
+> >       } *args = NULL;
+> >       int ret, cnt = 0, i;
+> > @@ -101,7 +101,7 @@ int
+> >  nvif_object_mthd(struct nvif_object *object, u32 mthd, void *data, u32 size)
+> >  {
+> >       struct {
+> > -             struct nvif_ioctl_v0 ioctl;
+> > +             struct nvif_ioctl_v0_hdr ioctl;
+> >               struct nvif_ioctl_mthd_v0 mthd;
+> >       } *args;
+> >       u32 args_size;
+> > @@ -135,7 +135,7 @@ void
+> >  nvif_object_unmap_handle(struct nvif_object *object)
+> >  {
+> >       struct {
+> > -             struct nvif_ioctl_v0 ioctl;
+> > +             struct nvif_ioctl_v0_hdr ioctl;
+> >               struct nvif_ioctl_unmap unmap;
+> >       } args = {
+> >               .ioctl.type = NVIF_IOCTL_V0_UNMAP,
+> > @@ -149,7 +149,7 @@ nvif_object_map_handle(struct nvif_object *object, void *argv, u32 argc,
+> >                      u64 *handle, u64 *length)
+> >  {
+> >       struct {
+> > -             struct nvif_ioctl_v0 ioctl;
+> > +             struct nvif_ioctl_v0_hdr ioctl;
+> >               struct nvif_ioctl_map_v0 map;
+> >       } *args;
+> >       u32 argn = sizeof(*args) + argc;
+> > @@ -211,7 +211,7 @@ void
+> >  nvif_object_dtor(struct nvif_object *object)
+> >  {
+> >       struct {
+> > -             struct nvif_ioctl_v0 ioctl;
+> > +             struct nvif_ioctl_v0_hdr ioctl;
+> >               struct nvif_ioctl_del del;
+> >       } args = {
+> >               .ioctl.type = NVIF_IOCTL_V0_DEL,
+> > @@ -230,7 +230,7 @@ nvif_object_ctor(struct nvif_object *parent, const char *name, u32 handle,
+> >                s32 oclass, void *data, u32 size, struct nvif_object *object)
+> >  {
+> >       struct {
+> > -             struct nvif_ioctl_v0 ioctl;
+> > +             struct nvif_ioctl_v0_hdr ioctl;
+> >               struct nvif_ioctl_new_v0 new;
+> >       } *args;
+> >       int ret = 0;
+> > --
+> > 2.43.0
+> >
