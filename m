@@ -2,58 +2,130 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id CA191A4520C
-	for <lists+nouveau@lfdr.de>; Wed, 26 Feb 2025 02:17:09 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id D1013A45950
+	for <lists+nouveau@lfdr.de>; Wed, 26 Feb 2025 10:02:15 +0100 (CET)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 7720D10E1F9;
-	Wed, 26 Feb 2025 01:17:08 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 7146389238;
+	Wed, 26 Feb 2025 09:02:14 +0000 (UTC)
 Authentication-Results: gabe.freedesktop.org;
-	dkim=pass (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="p11TR35k";
+	dkim=pass (1024-bit key; unprotected) header.d=suse.de header.i=@suse.de header.b="VPB/JA5J";
+	dkim=permerror (0-bit key) header.d=suse.de header.i=@suse.de header.b="+HAgiHnf";
+	dkim=pass (1024-bit key) header.d=suse.de header.i=@suse.de header.b="VPB/JA5J";
+	dkim=permerror (0-bit key) header.d=suse.de header.i=@suse.de header.b="+HAgiHnf";
 	dkim-atps=neutral
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from tor.source.kernel.org (tor.source.kernel.org [172.105.4.254])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 8922D10E1F9;
- Wed, 26 Feb 2025 01:17:07 +0000 (UTC)
-Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by tor.source.kernel.org (Postfix) with ESMTP id 174A2611FD;
- Wed, 26 Feb 2025 01:16:57 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 22B45C4CEDD;
- Wed, 26 Feb 2025 01:17:00 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1740532624;
- bh=/7QHcznAJAo2yO+ZPSdY6irpP6OfrWikh/lcuG95OFw=;
- h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
- b=p11TR35kWUbmfwGxMqGmTqthyQsbWbW+CFGBtI5o/Ob8QMYY1UnP4MtYbTKTKEsgH
- FDFsOntZsdBX+turZ9wTl0d7BkacQd12/dVNgMLSEEN3gR7PnN708BO79xgfKX7xcF
- NaDUpeRCaupQBQ5LxeXT8g733HGkQLnoeWp/vVaI8Op1fNZp3N7licTuG71KCl+UHG
- GYJrZHgyb1ZLvbHXTe2fqHiZBXVKL+hLpdg6EibLqVp8VJuQP/+x1BE4jNP97570D4
- KSCdGtnoxJZM89fuGrkrgS8Dl3yEE7vr6/zkF7fFe0qnwwkTW4qkWX5hEU7BhnBWf0
- VaX+E7EGN3F1g==
-Date: Wed, 26 Feb 2025 02:16:58 +0100
-From: Danilo Krummrich <dakr@kernel.org>
-To: Jason Gunthorpe <jgg@nvidia.com>
-Cc: Joel Fernandes <joelagnelf@nvidia.com>,
- Alexandre Courbot <acourbot@nvidia.com>,
- Dave Airlie <airlied@gmail.com>, Gary Guo <gary@garyguo.net>,
- Joel Fernandes <joel@joelfernandes.org>, Boqun Feng <boqun.feng@gmail.com>,
- John Hubbard <jhubbard@nvidia.com>, Ben Skeggs <bskeggs@nvidia.com>,
- linux-kernel@vger.kernel.org, rust-for-linux@vger.kernel.org,
- nouveau@lists.freedesktop.org, dri-devel@lists.freedesktop.org,
- paulmck@kernel.org
-Subject: Re: [RFC PATCH 0/3] gpu: nova-core: add basic timer subdevice
- implementation
-Message-ID: <Z75riltJo0WvOsS5@cassiopeiae>
-References: <Z7xg8uArPlr2gQBU@pollux> <Z7xh5bEyh_MII4WV@pollux>
- <20250224184502.GA1599486@joelnvbox> <Z70EcwNIX0KtWy36@cassiopeiae>
- <2f062199-8d69-48a2-baa6-abb755479a16@nvidia.com>
- <Z73rP4secPlUMIoS@cassiopeiae> <20250225210228.GA1801922@joelnvbox>
- <20250225225756.GA4959@nvidia.com> <Z75WKSRlUVEqpysJ@cassiopeiae>
- <20250226004916.GB4959@nvidia.com>
+Received: from smtp-out2.suse.de (smtp-out2.suse.de [195.135.223.131])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 9236D10E136
+ for <nouveau@lists.freedesktop.org>; Wed, 26 Feb 2025 09:02:11 +0000 (UTC)
+Received: from imap1.dmz-prg2.suse.org (unknown [10.150.64.97])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
+ (No client certificate requested)
+ by smtp-out2.suse.de (Postfix) with ESMTPS id 39CC11F387;
+ Wed, 26 Feb 2025 09:02:10 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.de; s=susede2_rsa;
+ t=1740560530; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
+ mime-version:mime-version:content-type:content-type:
+ content-transfer-encoding:content-transfer-encoding:
+ in-reply-to:in-reply-to:references:references:autocrypt:autocrypt;
+ bh=T6GoKpixsgEUPlcsai0YSpwFFbUqfMXy4lXn7KbIxnM=;
+ b=VPB/JA5JraynMQc7CuXwh0UG+min6ms1zaOB59UlqiWSIGxY5euJA6oHLOBe5T188uBZ8I
+ QD8tqFG9PHsgpy435dpwZhWixHupPKBo5ovT3bkaqRgucfCOV7kX3LXbN7eBE0VoN37igM
+ A6MS+4NY8Fis4UyXAFN5n7WnpzpLLtw=
+DKIM-Signature: v=1; a=ed25519-sha256; c=relaxed/relaxed; d=suse.de;
+ s=susede2_ed25519; t=1740560530;
+ h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
+ mime-version:mime-version:content-type:content-type:
+ content-transfer-encoding:content-transfer-encoding:
+ in-reply-to:in-reply-to:references:references:autocrypt:autocrypt;
+ bh=T6GoKpixsgEUPlcsai0YSpwFFbUqfMXy4lXn7KbIxnM=;
+ b=+HAgiHnfbxx8RSPOBxRgXb8zlrobJ6XGrIVgIcWJOUr7S5JZLj1fcPLe3eBibQMDhXoors
+ mkmmqYAqC6LoPSBA==
+Authentication-Results: smtp-out2.suse.de;
+	none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.de; s=susede2_rsa;
+ t=1740560530; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
+ mime-version:mime-version:content-type:content-type:
+ content-transfer-encoding:content-transfer-encoding:
+ in-reply-to:in-reply-to:references:references:autocrypt:autocrypt;
+ bh=T6GoKpixsgEUPlcsai0YSpwFFbUqfMXy4lXn7KbIxnM=;
+ b=VPB/JA5JraynMQc7CuXwh0UG+min6ms1zaOB59UlqiWSIGxY5euJA6oHLOBe5T188uBZ8I
+ QD8tqFG9PHsgpy435dpwZhWixHupPKBo5ovT3bkaqRgucfCOV7kX3LXbN7eBE0VoN37igM
+ A6MS+4NY8Fis4UyXAFN5n7WnpzpLLtw=
+DKIM-Signature: v=1; a=ed25519-sha256; c=relaxed/relaxed; d=suse.de;
+ s=susede2_ed25519; t=1740560530;
+ h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
+ mime-version:mime-version:content-type:content-type:
+ content-transfer-encoding:content-transfer-encoding:
+ in-reply-to:in-reply-to:references:references:autocrypt:autocrypt;
+ bh=T6GoKpixsgEUPlcsai0YSpwFFbUqfMXy4lXn7KbIxnM=;
+ b=+HAgiHnfbxx8RSPOBxRgXb8zlrobJ6XGrIVgIcWJOUr7S5JZLj1fcPLe3eBibQMDhXoors
+ mkmmqYAqC6LoPSBA==
+Received: from imap1.dmz-prg2.suse.org (localhost [127.0.0.1])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
+ (No client certificate requested)
+ by imap1.dmz-prg2.suse.org (Postfix) with ESMTPS id F27941377F;
+ Wed, 26 Feb 2025 09:02:09 +0000 (UTC)
+Received: from dovecot-director2.suse.de ([2a07:de40:b281:106:10:150:64:167])
+ by imap1.dmz-prg2.suse.org with ESMTPSA id OA9VOZHYvmdLUgAAD6G6ig
+ (envelope-from <tzimmermann@suse.de>); Wed, 26 Feb 2025 09:02:09 +0000
+Message-ID: <8eaa062a-281a-4875-be1e-a578f28982a1@suse.de>
+Date: Wed, 26 Feb 2025 10:02:09 +0100
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <20250226004916.GB4959@nvidia.com>
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH] drm/nouveau: Do not override forced connector status
+To: kherbst@redhat.com, lyude@redhat.com, dakr@kernel.org, airlied@gmail.com, 
+ simona@ffwll.ch
+Cc: dri-devel@lists.freedesktop.org, nouveau@lists.freedesktop.org
+References: <20250114100214.195386-1-tzimmermann@suse.de>
+Content-Language: en-US
+From: Thomas Zimmermann <tzimmermann@suse.de>
+Autocrypt: addr=tzimmermann@suse.de; keydata=
+ xsBNBFs50uABCADEHPidWt974CaxBVbrIBwqcq/WURinJ3+2WlIrKWspiP83vfZKaXhFYsdg
+ XH47fDVbPPj+d6tQrw5lPQCyqjwrCPYnq3WlIBnGPJ4/jreTL6V+qfKRDlGLWFjZcsrPJGE0
+ BeB5BbqP5erN1qylK9i3gPoQjXGhpBpQYwRrEyQyjuvk+Ev0K1Jc5tVDeJAuau3TGNgah4Yc
+ hdHm3bkPjz9EErV85RwvImQ1dptvx6s7xzwXTgGAsaYZsL8WCwDaTuqFa1d1jjlaxg6+tZsB
+ 9GluwvIhSezPgnEmimZDkGnZRRSFiGP8yjqTjjWuf0bSj5rUnTGiyLyRZRNGcXmu6hjlABEB
+ AAHNJ1Rob21hcyBaaW1tZXJtYW5uIDx0emltbWVybWFubkBzdXNlLmRlPsLAjgQTAQgAOAIb
+ AwULCQgHAgYVCgkICwIEFgIDAQIeAQIXgBYhBHIX+6yM6c9jRKFo5WgNwR1TC3ojBQJftODH
+ AAoJEGgNwR1TC3ojx1wH/0hKGWugiqDgLNXLRD/4TfHBEKmxIrmfu9Z5t7vwUKfwhFL6hqvo
+ lXPJJKQpQ2z8+X2vZm/slsLn7J1yjrOsoJhKABDi+3QWWSGkaGwRJAdPVVyJMfJRNNNIKwVb
+ U6B1BkX2XDKDGffF4TxlOpSQzdtNI/9gleOoUA8+jy8knnDYzjBNOZqLG2FuTdicBXblz0Mf
+ vg41gd9kCwYXDnD91rJU8tzylXv03E75NCaTxTM+FBXPmsAVYQ4GYhhgFt8S2UWMoaaABLDe
+ 7l5FdnLdDEcbmd8uLU2CaG4W2cLrUaI4jz2XbkcPQkqTQ3EB67hYkjiEE6Zy3ggOitiQGcqp
+ j//OwE0EWznS4AEIAMYmP4M/V+T5RY5at/g7rUdNsLhWv1APYrh9RQefODYHrNRHUE9eosYb
+ T6XMryR9hT8XlGOYRwKWwiQBoWSDiTMo/Xi29jUnn4BXfI2px2DTXwc22LKtLAgTRjP+qbU6
+ 3Y0xnQN29UGDbYgyyK51DW3H0If2a3JNsheAAK+Xc9baj0LGIc8T9uiEWHBnCH+RdhgATnWW
+ GKdDegUR5BkDfDg5O/FISymJBHx2Dyoklv5g4BzkgqTqwmaYzsl8UxZKvbaxq0zbehDda8lv
+ hFXodNFMAgTLJlLuDYOGLK2AwbrS3Sp0AEbkpdJBb44qVlGm5bApZouHeJ/+n+7r12+lqdsA
+ EQEAAcLAdgQYAQgAIAIbDBYhBHIX+6yM6c9jRKFo5WgNwR1TC3ojBQJftOH6AAoJEGgNwR1T
+ C3ojVSkIALpAPkIJPQoURPb1VWjh34l0HlglmYHvZszJWTXYwavHR8+k6Baa6H7ufXNQtThR
+ yIxJrQLW6rV5lm7TjhffEhxVCn37+cg0zZ3j7zIsSS0rx/aMwi6VhFJA5hfn3T0TtrijKP4A
+ SAQO9xD1Zk9/61JWk8OysuIh7MXkl0fxbRKWE93XeQBhIJHQfnc+YBLprdnxR446Sh8Wn/2D
+ Ya8cavuWf2zrB6cZurs048xe0UbSW5AOSo4V9M0jzYI4nZqTmPxYyXbm30Kvmz0rYVRaitYJ
+ 4kyYYMhuULvrJDMjZRvaNe52tkKAvMevcGdt38H4KSVXAylqyQOW5zvPc4/sq9c=
+In-Reply-To: <20250114100214.195386-1-tzimmermann@suse.de>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
+X-Spam-Level: 
+X-Spamd-Result: default: False [-4.30 / 50.00]; BAYES_HAM(-3.00)[100.00%];
+ NEURAL_HAM_LONG(-1.00)[-1.000];
+ NEURAL_HAM_SHORT(-0.20)[-1.000]; MIME_GOOD(-0.10)[text/plain];
+ TO_MATCH_ENVRCPT_ALL(0.00)[]; RCVD_TLS_ALL(0.00)[];
+ FUZZY_BLOCKED(0.00)[rspamd.com];
+ FREEMAIL_TO(0.00)[redhat.com,kernel.org,gmail.com,ffwll.ch];
+ DKIM_SIGNED(0.00)[suse.de:s=susede2_rsa,suse.de:s=susede2_ed25519];
+ ARC_NA(0.00)[]; FREEMAIL_ENVRCPT(0.00)[gmail.com];
+ RCVD_VIA_SMTP_AUTH(0.00)[]; RCPT_COUNT_SEVEN(0.00)[7];
+ FROM_EQ_ENVFROM(0.00)[]; FROM_HAS_DN(0.00)[];
+ MIME_TRACE(0.00)[0:+]; RCVD_COUNT_TWO(0.00)[2];
+ MID_RHS_MATCH_FROM(0.00)[]; TO_DN_NONE(0.00)[];
+ DBL_BLOCKED_OPENRESOLVER(0.00)[imap1.dmz-prg2.suse.org:helo, suse.de:email,
+ suse.de:mid]
+X-Spam-Score: -4.30
+X-Spam-Flag: NO
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -68,41 +140,41 @@ List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-On Tue, Feb 25, 2025 at 08:49:16PM -0400, Jason Gunthorpe wrote:
-> I'm pointing out the fundamental different in approachs. The typical
-> widely used pattern results in __device_release_driver() completing
-> with no concurrent driver code running.
+Ping. Are there any comments on this patch?
 
-Typically yes, but there are exceptions, such as DRM.
+Am 14.01.25 um 10:57 schrieb Thomas Zimmermann:
+> Keep user-forced connector status even if it cannot be programmed. Same
+> behavior as for the rest of the drivers.
+>
+> Signed-off-by: Thomas Zimmermann <tzimmermann@suse.de>
+> ---
+> This patch is in preparation of
+> https://patchwork.freedesktop.org/series/139879/. The series improves
+> internal handling of the connector status. That first requires fixes in
+> several drivers; including nouveau.
+> ---
+>   drivers/gpu/drm/nouveau/nouveau_connector.c | 1 -
+>   1 file changed, 1 deletion(-)
+>
+> diff --git a/drivers/gpu/drm/nouveau/nouveau_connector.c b/drivers/gpu/drm/nouveau/nouveau_connector.c
+> index 6fb9719d721f7..1b10c6c12f468 100644
+> --- a/drivers/gpu/drm/nouveau/nouveau_connector.c
+> +++ b/drivers/gpu/drm/nouveau/nouveau_connector.c
+> @@ -775,7 +775,6 @@ nouveau_connector_force(struct drm_connector *connector)
+>   	if (!nv_encoder) {
+>   		NV_ERROR(drm, "can't find encoder to force %s on!\n",
+>   			 connector->name);
+> -		connector->status = connector_status_disconnected;
+>   		return;
+>   	}
+>   
 
-> 
-> DRM achieves this, in part, by using drm_dev_unplug().
+-- 
+--
+Thomas Zimmermann
+Graphics Driver Developer
+SUSE Software Solutions Germany GmbH
+Frankenstrasse 146, 90461 Nuernberg, Germany
+GF: Ivo Totev, Andrew Myers, Andrew McDonald, Boudien Moerman
+HRB 36809 (AG Nuernberg)
 
-No, DRM can have concurrent driver code running, which is why drm_dev_enter()
-returns whether the device is unplugged already, such that subsequent
-operations, (e.g. I/O) can be omitted.
-
-> 
-> The Rust approach ends up with __device_release_driver() completing
-> and leaving driver code still running in other threads.
-
-No, this has nothing to do with Rust device / driver or I/O abstractions.
-
-It entirely depends on the driver you implement. If you register a DRM device,
-then yes, there may be concurrent driver code running after
-__device_release_driver() completes. But this is specific to the DRM
-implementation, *not* to Rust.
-
-Again, the reason a pci::Bar needs to be revocable in Rust is that we can't have
-the driver potentially keep the pci::Bar alive (or even access it) after the
-device is unbound.
-
-A driver can also be unbound without the module being removed, and if the driver
-would be able to keep the pci::Bar alive, it would mean that the resource region
-is not freed and the MMIO mapping is not unmapped, because the resource region
-and the MMIO mapping is bound to the lifetime of the pci::Bar object. This would
-not be acceptable for a Rust driver.
-
-That this also comes in handy for subsystems like DRM, where we could have
-attempts to access to the pci::Bar object after the device is unbound by design,
-can be seen as a nice side effect.
