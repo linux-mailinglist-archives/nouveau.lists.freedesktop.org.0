@@ -2,144 +2,143 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id 33DC5A481DC
-	for <lists+nouveau@lfdr.de>; Thu, 27 Feb 2025 15:46:29 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id DBFD3A4826C
+	for <lists+nouveau@lfdr.de>; Thu, 27 Feb 2025 16:07:27 +0100 (CET)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 2D03710EB0E;
-	Thu, 27 Feb 2025 14:46:26 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 3AEB710EB0C;
+	Thu, 27 Feb 2025 15:07:17 +0000 (UTC)
 Authentication-Results: gabe.freedesktop.org;
-	dkim=pass (2048-bit key; unprotected) header.d=Nvidia.com header.i=@Nvidia.com header.b="hwsq2dzj";
+	dkim=pass (2048-bit key; unprotected) header.d=Nvidia.com header.i=@Nvidia.com header.b="N2CW8q2C";
 	dkim-atps=neutral
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from NAM12-MW2-obe.outbound.protection.outlook.com
- (mail-mw2nam12on2050.outbound.protection.outlook.com [40.107.244.50])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 6A7F110EB0E;
- Thu, 27 Feb 2025 14:46:24 +0000 (UTC)
+Received: from NAM10-BN7-obe.outbound.protection.outlook.com
+ (mail-bn7nam10on2070.outbound.protection.outlook.com [40.107.92.70])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 113D310EB0C;
+ Thu, 27 Feb 2025 15:07:16 +0000 (UTC)
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=wCY31bOsZm/F/LZ3dThdG4psCCGGcNKInLxii+vFrXDHKS6S+C7HLF8kuqsagVAOINB24f3Mto6IsbPwRJEHR9c+HVUgVsAJLXW0F94QpoT/iRexnce8WxT9nMjcQUmZ/M1uoPi8tu14Jzmt4GqKDEclDjlirLa3o0QL+0r2QfRTYtjxTKj6s/NK2uuKuJRGlyi26LzwxM8YKSQ9e2wBXbE65SNNU+jlEmCiWvnmck7GjiRPAjDuZW9YZVd4eDLA6afPbHsb4yGNsOFSs8na2Eu0qJV8PZXASJncGZKIPASuXfu6+Gsh9yUouW25l9k/yQuYC/CTsPviws3zaFgCOg==
+ b=X+vnDIRRa5YXr2DvoJriuc3GUGb5cFp7EsvFi8Nxlw1gJbDpU3mzb+xzZoTpoBwe4uW8Us1D0PRT9tYc1N9SBqGs/WjmU1aXh8cZbDHu2XissF6XmHc6O0bjbMBYn8s7TQ0WXfiUvQpufhwJPo7/YmF+UVpT1sBVtydDRC27k9kc0F11hTLvnX1n1de1wtWA31A4RrwJQsIl3z4i6CD9cxDomd8MTD/jpXuZLtsYvQ/nS2ItwtMBwDkaoFPvBuyf9suhHCMuTgBUmQRJu9tsZDIpx0DxuG2RhrtDgr0fORNrQXk6l3CYE/bYvpZ+JwjVZTwTgQ3xFk2jKDXGKXLdgQ==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
  s=arcselector10001;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=nDbFB+WMiEAipLGt3S+rCLyf9Hl8l7CM9tquJRH/gmg=;
- b=taUxAw6+eyFvS1LDAWky+YU7LnoVuZ4hxxtVJcx13upwQ3eNU7em1L0K0n4WW//yEWSyAiObimdzlz5bqTxfkJ6+1XoTq14C2vqkHYo3sZ/LkfnHqhXI2vXEZqfgT+89sJdCMSImoCoqo61V6xRNt9X0nKNEviSlAm2jBN6qvjM0PgsnxsIk292kPH4ZqTHr8EzsCI/n+h/ed8RADv+0gnMN5QCmiVSi7Gs/YkBDAyIQxV7gi1dVdsV0RdZucCT/gAL1kZ3Uf9dhl9oS6qmRjEmADpCE16VdT/LPIV4HTf3LLul3/Pv1m/0eiZ45vZf9N/NPYXaLeU7Q4Mt1yLHWBA==
+ bh=51Ptewq/Kws0Em0ekFIyNglr1Au2EBY4WW2AvDVBkVE=;
+ b=NxBysoK5jqByVdqPiXCfR2iuFdSGuJ9Bj0he5Z6S+5JFnJQB0R6O5atJwiNwUoZQewW69JkJ78zx2mttmlv00Crwk4L8d9av3rNkCNK8NRIjZDmoWMKzPGL5YYjOSLW1dvI8Qaxg1pa5ZslaUaaTK1EpLvKRNgHDhw/1dvf4bheSVIoqz7G9/RhnmGz/6/f+xM4VMnZJty0Y7tIpSoAtwINNGEfQvl9JpIa/4yRdaTHhx22aXtppFnq2VszfsNkYk0kGxhrsDhanVwAvWNjHrY9M+w5xSQcYCXVHplgDIHM32nccSqpf/DD5I5TiaFVoSiRBBL+64wsMKxtIteaLAA==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
  smtp.mailfrom=nvidia.com; dmarc=pass action=none header.from=nvidia.com;
  dkim=pass header.d=nvidia.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=Nvidia.com;
  s=selector2;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=nDbFB+WMiEAipLGt3S+rCLyf9Hl8l7CM9tquJRH/gmg=;
- b=hwsq2dzjyfrBwcI2F9Ql2Ir7vswVtgI7kqcD2TS4vPwqj/LmnZleWvJKphDmJ+dhKUy08twZj5ug+zVbrBJ5T6ORyp1yno6ksBIlOCJA7poZFbaX6shk55vU5kQrgodvHIblsAurOSGGjAj3miJT+vX5o6EPbpQvJWOvXu/YufNr38YPBNK1sZYmMlmTlWWtrx00pPQyHlHl694e9FIQ9X3ECtAadSiX3hAi5jCcFAtvH14K30zjl32wasZpasIFgClUQIjxnAhYnlnLZ0H0iJVjNfZUmqpjXYay146VvcHiYQqhu9zPKYOotP068e0ZjuGdinizw0vdtUj8YaNpOw==
+ bh=51Ptewq/Kws0Em0ekFIyNglr1Au2EBY4WW2AvDVBkVE=;
+ b=N2CW8q2CwM/sf8Wkp/nPOmFmwBlnXRqcyTu+9qIYMSHi+BiA7iL5ZySh1eEp55oOWpijEN0rOVmDaXYc4iaWR2PiYeuVBtWRXbBP3LD2t5zWEGzlSb6jCgH4t1X0Rz+aqflIooTIyjNSiC7dUPcnGSNT4lPIdUihrU4Aao3BEtbwGXfRUWCWnK/q3e5WnGGy4iFRvXfcPCehx7vPAvtXtdfoAoiIQFoFYWY9UEI5d1IInFnszhwxRmWN3WFjr8fAZv1bTChT2bhsGlD45aOnIKKX+a+eR9wvgr8pZ0SH5IKueRqc+0uZvaLbeyzqTCpe96sgZdatpHs20jZrgmfb9g==
 Authentication-Results: dkim=none (message not signed)
  header.d=none;dmarc=none action=none header.from=nvidia.com;
 Received: from MW6PR12MB8663.namprd12.prod.outlook.com (2603:10b6:303:240::9)
- by SA5PPF9BB0D8619.namprd12.prod.outlook.com
- (2603:10b6:80f:fc04::8d8) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.8466.18; Thu, 27 Feb
- 2025 14:46:20 +0000
+ by BY5PR12MB4049.namprd12.prod.outlook.com (2603:10b6:a03:201::23)
+ with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.8466.26; Thu, 27 Feb
+ 2025 15:07:11 +0000
 Received: from MW6PR12MB8663.namprd12.prod.outlook.com
  ([fe80::594:5be3:34d:77f]) by MW6PR12MB8663.namprd12.prod.outlook.com
  ([fe80::594:5be3:34d:77f%2]) with mapi id 15.20.8489.018; Thu, 27 Feb 2025
- 14:46:20 +0000
-Date: Thu, 27 Feb 2025 10:46:18 -0400
+ 15:07:11 +0000
+Date: Thu, 27 Feb 2025 11:07:09 -0400
 From: Jason Gunthorpe <jgg@nvidia.com>
-To: Boqun Feng <boqun.feng@gmail.com>
-Cc: Danilo Krummrich <dakr@kernel.org>, Joel Fernandes <joelagnelf@nvidia.com>,
+To: Danilo Krummrich <dakr@kernel.org>
+Cc: Joel Fernandes <joelagnelf@nvidia.com>,
  Alexandre Courbot <acourbot@nvidia.com>,
  Dave Airlie <airlied@gmail.com>, Gary Guo <gary@garyguo.net>,
- Joel Fernandes <joel@joelfernandes.org>,
+ Joel Fernandes <joel@joelfernandes.org>, Boqun Feng <boqun.feng@gmail.com>,
  John Hubbard <jhubbard@nvidia.com>, Ben Skeggs <bskeggs@nvidia.com>,
  linux-kernel@vger.kernel.org, rust-for-linux@vger.kernel.org,
  nouveau@lists.freedesktop.org, dri-devel@lists.freedesktop.org,
  paulmck@kernel.org
 Subject: Re: [RFC PATCH 0/3] gpu: nova-core: add basic timer subdevice
  implementation
-Message-ID: <20250227144618.GE39591@nvidia.com>
+Message-ID: <20250227150709.GF39591@nvidia.com>
 References: <Z73rP4secPlUMIoS@cassiopeiae> <20250225210228.GA1801922@joelnvbox>
  <20250225225756.GA4959@nvidia.com> <Z75WKSRlUVEqpysJ@cassiopeiae>
  <20250226004916.GB4959@nvidia.com> <Z75riltJo0WvOsS5@cassiopeiae>
  <20250226172120.GD28425@nvidia.com> <Z7-IHgcVVS8XBurW@cassiopeiae>
- <20250226234730.GC39591@nvidia.com>
- <Z7-0pOmWO6r_KeQI@boqun-archlinux>
+ <20250226234730.GC39591@nvidia.com> <Z8BNXdf3CgqGYjPV@pollux>
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
-In-Reply-To: <Z7-0pOmWO6r_KeQI@boqun-archlinux>
-X-ClientProxiedBy: BN9PR03CA0662.namprd03.prod.outlook.com
- (2603:10b6:408:10e::7) To MW6PR12MB8663.namprd12.prod.outlook.com
+In-Reply-To: <Z8BNXdf3CgqGYjPV@pollux>
+X-ClientProxiedBy: BL1PR13CA0195.namprd13.prod.outlook.com
+ (2603:10b6:208:2be::20) To MW6PR12MB8663.namprd12.prod.outlook.com
  (2603:10b6:303:240::9)
 MIME-Version: 1.0
 X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: MW6PR12MB8663:EE_|SA5PPF9BB0D8619:EE_
-X-MS-Office365-Filtering-Correlation-Id: f382f39a-6ec8-44a2-aa22-08dd573d7f22
+X-MS-TrafficTypeDiagnostic: MW6PR12MB8663:EE_|BY5PR12MB4049:EE_
+X-MS-Office365-Filtering-Correlation-Id: d416755e-7277-464c-d0ea-08dd5740691f
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
 X-Microsoft-Antispam: BCL:0;ARA:13230040|376014|7416014|366016|1800799024;
-X-Microsoft-Antispam-Message-Info: =?us-ascii?Q?52SwforIz2ccPqEyxuHGdDMsFk941LfXkrA8tFOWWtPdNWQ5yAZAYVcQvY9h?=
- =?us-ascii?Q?cAPcaZXZlvRCweEe81Rroe9z82SCNV/sZKz4ZcqRtztMzTbVc3YoYF86byq5?=
- =?us-ascii?Q?as9sZzCZiuh7ndcRjof5y9F9TKcTAAkQ6aXX8ikU0aqmM9yQ/ZkiBaZnKf8X?=
- =?us-ascii?Q?XS3jd4OHim2/s9NTOg6NfjJFyAWDQofnb3WVpVHXX/z6yYsJniGi6Wf8iw3y?=
- =?us-ascii?Q?VV3RN34dWnl0apk+j9vsrwyXUVlN+4X1HBXmn/a+rl0vPr83kJErSMy8Ruq6?=
- =?us-ascii?Q?q0u4/MCDk3whkhsnRjGaqhqB51BovML2kshfRGJCy3JKEVtnR57qIrT/7hB5?=
- =?us-ascii?Q?QH3aHmXJIEwWEKBjOunLJ/jjDfmndQEoo3QTMCFJV8PHyv/JzCleC8kn2/Wx?=
- =?us-ascii?Q?bj7DD4stDfxwv+Z+/ZLbAy9vcyBNomu1LL3k1pPy2vI0xVNx4kJWMuEsnqqE?=
- =?us-ascii?Q?OOnHPg6eqoTN1ZvUSMbWE7Dgt/c/e6a1jPnksa3Vc1iuM7Qio6qxbvtyhrMA?=
- =?us-ascii?Q?KBF3yfxo3Rz0D1FJTPaMt5+7u0Zzuid9Hz/CQZuGN1q44oSg6pKi2b4/STPs?=
- =?us-ascii?Q?aVETqpt8nx83U6TPf/A4Tqs9YJKLNUF+5refxys3URzvP9ZLUsxt3f9IeW1D?=
- =?us-ascii?Q?hwjWFA/pFMJAR9OFeiZ0ez/SbzBsXVRzHDJtEF3aBtDemV0ndjz+CcGIUYgo?=
- =?us-ascii?Q?QgpbfflWNozql/lB0tNjWZfz/P+SWcTE0xddMm1zabzF4wVDIUl19YNocYxm?=
- =?us-ascii?Q?pX1bvqy3DiLxn5WIjwiCJy1UCieu2VA5oPdviTJk4RnxP4dLNx7CiPmHKSls?=
- =?us-ascii?Q?hkr7MLal1BmxO6nYOH/sT3/y4vjyc31PRZu+kSGeDE+mpx27OHgXRhVPKMrq?=
- =?us-ascii?Q?cmn8rlwEAYOIQnGXp2PVeT429s3NEXeJp1yMRKpO0cH3s5tfQnjUGcpwAMuH?=
- =?us-ascii?Q?Pzs+VD+/c4WHJnzG+y6NruhsKPFu2kzvkPE+86/91lQ32m+NXZ/Dt2ailC63?=
- =?us-ascii?Q?N+2+mtIEU1xM5Tp34xCoCnGX9cVZACbuDzVsmMqO7Clujlq/7poEzE+R9uxN?=
- =?us-ascii?Q?oqpo2uG0pgXx/b94peZP7IRltOxP6HwMWIq13UyCeL+ESNJEknUCidDYc3LP?=
- =?us-ascii?Q?PuEpd9XcMmq8ezO34A6pwvxRbqevVYDOkgQq4wI9mT6TfvigqEt+QC2gBD/8?=
- =?us-ascii?Q?B/sn7+YCblihKsgxUTAehkplbqqC9AGW1Z/uBOlzea0o2YcZp0U2WgqrkTaD?=
- =?us-ascii?Q?zv3gIomtr9RjRIE50bkW1Fx9hhrxQRFO9vtwL7IKgQlYWq13bUGIwy78ma7H?=
- =?us-ascii?Q?g4Gf7XC/rXhZ4exmR/jRP5JOcACb49CwE8+qsChxbowsFUAETOyHXmazHHvR?=
- =?us-ascii?Q?eIZh/l+8MRIyUNV8VngqIFSVv0qP?=
+X-Microsoft-Antispam-Message-Info: =?us-ascii?Q?9mIw10QfzbmbPJhY7G3AFo3FEQ8tnPPNnT7UokD0lJLhwjlZSZy9q+3zrm0i?=
+ =?us-ascii?Q?vBVM+UeNgl5CnhsZjGd30ttMBNaQ53OIvWOI2Ldo+IYDjd6y9pRM1n68MITQ?=
+ =?us-ascii?Q?AfOKRDVjd90ksuFcrUJZZya2f6QFb++gmk/ALg4Uqc2qyNYUzXDCh3NJjlJD?=
+ =?us-ascii?Q?K3EgB5kYsj2NFZ8xIxHBei9ZAzUgn8y9JKVOPILBWnN37b163ug27o2LcFQu?=
+ =?us-ascii?Q?YK76JdTXy96P5O7wVO+zzhijapAuerotr8mMDtP1IyM3qticrEknJa0bfVMW?=
+ =?us-ascii?Q?5rKRgEI7RGeYc3yzs54OHLUJoYkp7Na99u8gG2Ey73DUQeStf8fvl+OBCl/f?=
+ =?us-ascii?Q?F8Rv7MKMwQGFbRgfgFLIqWZn+kGJ4tbtZJ311RJZA8NOX0TAQjlPo6zjRrVt?=
+ =?us-ascii?Q?c5G2OK0XscQIkgrX7akH/fc6apw1ZFTTI4o74QehN7Quep6IhNPQiHpcqWB3?=
+ =?us-ascii?Q?zM7+8hqkY/86GHHQ7i8NbzU7mNqX7l6FkazMcQgV4iXpRB+oM7tbwdUNxr5q?=
+ =?us-ascii?Q?wQkicoLXs8F5MaMD5iCD92I5mlPY0797q5FyKJeErk6IspiLkL2Egp58hqxB?=
+ =?us-ascii?Q?ZCVzk04nk42T4JtGY12zblSZQ9jNRazFkhDRHLD52B1qBd1lXFMe3k4Y6yWn?=
+ =?us-ascii?Q?wo5l16vfCgh3I1ZZipecZZOdA1BxfB0g4fok2qI0285Sz8vZTLr/fMxN+Us2?=
+ =?us-ascii?Q?EoeOPBSR0ZsZMWxNKylh7ezknyNSPX2MldByLtGoybg30GcLfm0c+dj9GO9e?=
+ =?us-ascii?Q?ZRhn9qrZyMrJeSZiKuthvFyi041+9btog89evYzyLg/I2/AuQ6DV9TNzBtgE?=
+ =?us-ascii?Q?HKoYED7UhKa/ABdwgRfLcBzNvNp0SK/hRo+HUaOpalc5jNgjIHhbk7y1reLv?=
+ =?us-ascii?Q?rZAi+rJnED+QplGcyIYyeam9Jm1j//LpuvRd/WFEd9lrjkVbElrn7q4TNKCL?=
+ =?us-ascii?Q?PQYfvkGLvPmkz20KCa5WvE3z58+SNxw75AUHMEeMfScjzz7q5NMzZFFOnT0F?=
+ =?us-ascii?Q?A1MBnD04jMLoBaKoXY2+eanMrZR2X8ax3aj2NSxlaz2cwIzgAcvltxMvZbhf?=
+ =?us-ascii?Q?6CpqYXNJDFcKbN5knsxZr3KYbHl2WeAbFyB3/6BWjhDgrLXam/QqKJV5+A0G?=
+ =?us-ascii?Q?3E9LeeB0+d/7nWmOOhFBKp+j+LOyTVoLYNL+L+nr7IZTejIUeZB9ypBIQ6/M?=
+ =?us-ascii?Q?UJHjcR5j8REA/9A9Tm7zf1MgzB3X8BjvBSenWZKzdG+n4mCoG+ovI2byMfT4?=
+ =?us-ascii?Q?yl4YWBjjLboc8r1kqS/xaQJFYeYtTNks+EsZbLgTuMCzBJp7fcxc78rOQOQw?=
+ =?us-ascii?Q?HOASqAU1mPj7GAjlvkgcN11uIyS8gC9wfzHCZZXmgn7SoOLX/GIDsYl1rnXx?=
+ =?us-ascii?Q?F/OOMOWiaJ5chgAC0tmy4DPF0yTL?=
 X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
  IPV:NLI; SFV:NSPM; H:MW6PR12MB8663.namprd12.prod.outlook.com; PTR:; CAT:NONE;
  SFS:(13230040)(376014)(7416014)(366016)(1800799024); DIR:OUT; SFP:1101; 
 X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: =?us-ascii?Q?q4WawejWMzwrGk2uKAEanEE88/USitM8qLdHzQ6GZyAHuoa9d945wEhJsA5l?=
- =?us-ascii?Q?ftpcXrXyJdY0s5W9IpwiWh44eZCiWMHBnnu6REdj3QaHjkneSUGZhmw8tv2X?=
- =?us-ascii?Q?G7bXsyqocg6UWXEM29yxLWayGgJcjhrXYTW5tdMe1e+53Pm65mcWSdkJo3A7?=
- =?us-ascii?Q?bqSx3CgxhjW9EnnvL/YMf2sc4rjSvVrKSPwHrKJj+e1Fyk74HjqqnqFCssrx?=
- =?us-ascii?Q?IuuNxxyo996XYJFeYlheaCdE8ZKkADFHovmktI4YSjLAjZt6icALgtLYKR3W?=
- =?us-ascii?Q?Tdhl7uDpbN6/EjxHUCQxu8S+PBsd+GtO4Ssk/NX9kFFOQzi6KhZtJRUYvucs?=
- =?us-ascii?Q?aSpntUxOwc0CdzssoH8mXGA0UVMwxV3Zax/Jo2sWkfEZ2QcQ8ZnhbsvnO5OZ?=
- =?us-ascii?Q?5eHRcYm7+yL3HPDZplMNxpcup3yfSXI6ar5QRT7BvFr5eyiewActNSNgNUsM?=
- =?us-ascii?Q?bbxhjfe708vILUzz2t0Kq0//Iv6rxCJ+e9okiWaNw6gzz/1bAAO2YP9WBV9E?=
- =?us-ascii?Q?FKV4FEI2WlVuWn6VOKlGghT6QeuyQ8KCVnZlAM9CFV02QqHR2CRCecQ5y9OW?=
- =?us-ascii?Q?z94JgBasf5DZ7DgekwRQpgJRHqU/UcpTzsEHFx85aL7WAl7QNBv2pLerzAkL?=
- =?us-ascii?Q?i/sWfozhiHZpqsavTXwX7wyFBIpVEvZQD+rBRnS/H5loCCRBm7SpZwDmDC0Q?=
- =?us-ascii?Q?UVgKR3Uw3w1nVzkCHBdrPsV+sFUTkWWHEdJJSg+2305iH7m/Tn0W7Fj5hAm4?=
- =?us-ascii?Q?7W/7CwN4NR920y4OKdQ6YK8im71m6uUuuawiMla17p4nn+82HpCNPhB5eM1B?=
- =?us-ascii?Q?BeIu9bLwaIjZJLvoMpRfdUmHabMrBpgJ7owiOQAIJtMJeRX+qVsL8yN2ZbVZ?=
- =?us-ascii?Q?uiIOSMv6EIfTyOdavoiDokbN3T99vubCL0dxS+A2QAC15wh2CvMrkHF5jcHj?=
- =?us-ascii?Q?8DKyHJY78/u8LMacH/BYdWhhFAu51owea53n4Gv1OUfqehLemmZ4wtTuFTm/?=
- =?us-ascii?Q?1++lo+UdAtQB6Il725ZRdu6zYpggSD428/MwwPaDzs0ExewFg+PrdBrphwfJ?=
- =?us-ascii?Q?sBAIh7IkCKD3BXPUZT7pVPqWO36oVLjehvZ4tZzXuAncJXRejs/vSvGYe7E2?=
- =?us-ascii?Q?ukWeCm1G8KxwNAsmHTVe+1VmZaVhY4C9qg6Y6MHI5DobXAJT59ivSK93UcId?=
- =?us-ascii?Q?crq3/L7bnCo/+o70NCFeRhwZb2QfctPiYV145A+lIefmLWcgCt6zih5LeQN3?=
- =?us-ascii?Q?ZhhVZwCWJ0xZ4VWEKQG4LtFGJ5VJ8ZnqM70o5O9G+O5HGBaEt8YfGLob98uO?=
- =?us-ascii?Q?DuuqIZiiRnZYIEjiWtf0mtEaW86H9+ZryxopWlNcpaAyMHeY5zxwOpOHJ27r?=
- =?us-ascii?Q?EJFdf972YcR2uNu6hlXekFL9ZKbq1llMvfw9iwzwJt1Poao3HjykpNnRjJwZ?=
- =?us-ascii?Q?CRP16v4CNJCJ/tuwAAU8leWH33KS7+9P3Wg9ZH5Y83SQ2R0NdauYA/HxCU/C?=
- =?us-ascii?Q?H0q2Loh3Ru5cX3HB95/idQ5R9qQ6LaSMP751cW7i9wc7KI+n7iKUnnHfB78R?=
- =?us-ascii?Q?fuBp1q6WTjJdTQPgWHc=3D?=
+X-MS-Exchange-AntiSpam-MessageData-0: =?us-ascii?Q?gUmC4ZocrpQOT3rhjtUZjDetKbWtIE9hG8B61IwdcsvwFkZYZsij0OldKRwY?=
+ =?us-ascii?Q?w0tJWnS/rsV6tVlMybOFk5ph/QeYCiAe+83iXRV4/yg0yPi8YtdxKeR///Y1?=
+ =?us-ascii?Q?YBquAiZ1zCtvFUh1Udps2E8Vim0Vuw5lKl+rjM1lwIQIFiDebyBKTdMU6fd9?=
+ =?us-ascii?Q?QbjFJYf+qix9OYGCJK5AKb8R/jeKwcJkM1qFFVaYIeXTss7zDb7yATu+8CKG?=
+ =?us-ascii?Q?xaHfj+Hmg+8jjpLu/W2BO/KjeHNeUM3aIuwCtso8qkBBCMWVj4jS8R1nxmHD?=
+ =?us-ascii?Q?NSSgUX6o3q/r1ZGb3yOrAEjGmYAmF7ydsf00bM1LbqR9m4DXRUbFg0HaehAt?=
+ =?us-ascii?Q?Qn2sZu3/AM4KciOvCcWOmd20cl8SNfeFu/PEuxN5Ub3OjsjKarqoSb9TWTna?=
+ =?us-ascii?Q?qJCuCyQ2NjoHotGAg1QjCPdekANsJfgo/B44Q2IYFC5SZbPYMD2SSjKWc21X?=
+ =?us-ascii?Q?Uk1A0Se7KSiKkETCnV3hBodC4mH50V3daPb/a3/uj29IZJRd+fR5DtmThlES?=
+ =?us-ascii?Q?GNGqgcLk0wLPkOvi4IlNdHxFa4RbW6n8YqcquS7cZfxDhfi5pLtLc5pF3lKH?=
+ =?us-ascii?Q?p2NGrjHVzsfrBUfFfcpspUW/by/8lvX6YX/VqwmQGRYl/1kviomlXtG8Pzhy?=
+ =?us-ascii?Q?5F351cBdq44bLRL5WEBtOwl9b09Dio9AjntKH62vKeDZeXGY/C7SK/z2UBbq?=
+ =?us-ascii?Q?IisUexT5CtyKf3bqPdhtAhzSoADXUATukPnVSZGuTPyYixbVfrI6usSQiewQ?=
+ =?us-ascii?Q?092MaVZDV0VKs3Ke52i1PeX4dLKJu1+g9+Ku+3Iac+6Wj443AhWtNhZUKwKx?=
+ =?us-ascii?Q?DxRaObTWuWXMLAJAL+TaKC6NlPrV5XL+x9yGv37ADFZ+aOn6GOfcPxWgmlPH?=
+ =?us-ascii?Q?w7lRsC+HqtS0oEOlI2Pe6p3xI1Yt+8WUnYgkEKOlnBYTVXKIyQhVzYBGxF9O?=
+ =?us-ascii?Q?A7lmcF3uv5d+gcS7HdYrz45n5W3iQt1sbqn0bch1IpMiaXuM1DVc/cR/r7cL?=
+ =?us-ascii?Q?0hHq5stRdLcgdhuxf+qDOGz5vTqqvMrRPUvoBI/TSaSxfvdIvxCrRBEJgoir?=
+ =?us-ascii?Q?iMsClndjDHyXlLV+6mb5B875/j/3omdK2lzmPiJ4Gdo/Md0xc5457PcO89+a?=
+ =?us-ascii?Q?wMNaY13lnxfgllaitgp8Z7wd3D3aTAGhT57TVnr8IA/p8xDPSs4gHDK41pKM?=
+ =?us-ascii?Q?7d9xEUmAxb+EcTLn5ISKUwvko+1WXy1wKPRZ2d9ADukIpwcf+xxsw0bQEI/5?=
+ =?us-ascii?Q?lBssukZ4KBPnC29tpBw2BO/PoJtsDs7NxczD4Gytu8sLAsNLs5GE53l/QMq7?=
+ =?us-ascii?Q?ZOBjxntxwRKxriFihZvoNxCVb+pc/ptLBOSa29hvYBO3CrzNLB4UicMN59uq?=
+ =?us-ascii?Q?lrG0FjJGUZf2iRP4t2d9/FEGrsQrvo5Y+k8SRlaxML4Nkd5APLK7xOgiKBLM?=
+ =?us-ascii?Q?0kZTKlFXfHgXedgDzNyQaJo5DIbWGnAv95MoH0FF7wZq0UfDcZ2Bzhb2I2qp?=
+ =?us-ascii?Q?KMhT82FWPg3LMke8EBBjq6sjC0aiTWXxSXw9agxLKruRUvTmEAcpj6bCMsuG?=
+ =?us-ascii?Q?XvJTv71EBMSBjShXHOs=3D?=
 X-OriginatorOrg: Nvidia.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: f382f39a-6ec8-44a2-aa22-08dd573d7f22
+X-MS-Exchange-CrossTenant-Network-Message-Id: d416755e-7277-464c-d0ea-08dd5740691f
 X-MS-Exchange-CrossTenant-AuthSource: MW6PR12MB8663.namprd12.prod.outlook.com
 X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 27 Feb 2025 14:46:19.9389 (UTC)
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 27 Feb 2025 15:07:11.1529 (UTC)
 X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
 X-MS-Exchange-CrossTenant-Id: 43083d15-7273-40c1-b7db-39efd9ccc17a
 X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: HG7+qCeIKyz6P/nKKwKbsv2REGEhppFnIwiekO1YI3ktWIKjMwcpoEbg8S1+zHUh
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: SA5PPF9BB0D8619
+X-MS-Exchange-CrossTenant-UserPrincipalName: V8SQ4KceAQHQGw2IerIrMzrUHE6MFG1qPmQraDbDZ4Itb0VKhUB/PsEnJkfuNyFl
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: BY5PR12MB4049
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -154,34 +153,109 @@ List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-On Wed, Feb 26, 2025 at 04:41:08PM -0800, Boqun Feng wrote:
-> And if you don't store the HrTimerHandle anywhere, like you drop() it
-> right after start a hrtimer, it will immediately stop the timer. Does
-> this make sense?
+On Thu, Feb 27, 2025 at 12:32:45PM +0100, Danilo Krummrich wrote:
+> On Wed, Feb 26, 2025 at 07:47:30PM -0400, Jason Gunthorpe wrote:
+> > On Wed, Feb 26, 2025 at 10:31:10PM +0100, Danilo Krummrich wrote:
+> > > Let's take a step back and look again why we have Devres (and Revocable) for
+> > > e.g. pci::Bar.
+> > > 
+> > > The device / driver model requires that device resources are only held by a
+> > > driver, as long as the driver is bound to the device.
+> > > 
+> > > For instance, in C we achieve this by calling
+> > > 
+> > > 	pci_iounmap()
+> > > 	pci_release_region()
+> > > 
+> > > from remove().
+> > > 
+> > > We rely on this, we trust drivers to actually do this.
+> > 
+> > Right, exactly
+> > 
+> > But it is not just PCI bar. There are a *huge* number of kernel APIs
+> > that have built in to them the same sort of requirement - teardown
+> > MUST run with remove, and once done the resource cannot be used by
+> > another thread.
+> > 
+> > Basically most things involving function pointers has this sort of
+> > lifecycle requirement because it is a common process that prevents a
+> > EAF of module unload.
+> 
+> You're still mixing topics, the whole Devres<pci::Bar> thing as about limiting
+> object lifetime to the point where the driver is unbound.
+> 
+> Shutting down asynchronous execution of things, i.e. workqueues, timers, IOCTLs
+> to prevent unexpected access to the module .text section is a whole different
+> topic.
 
-Oh, I understand that, but it is not sufficient in the kernel.
+Again, the standard kernel design pattern is to put these things
+together so that shutdown isolates concurrency which permits free
+without UAF.
 
-You are making an implicit argument that something external to the
-rust universe will hold the module alive until all rust destructors
-are run. That is trivialy obvious in your example above.
+> In other words, assuming that we properly enforce that there are no async
+> execution paths after remove() or module_exit() (not necessarily the same),
+> we still need to ensure that a pci::Bar object does not outlive remove().
 
-However, make it more complex. Run the destructor call for your
-hrtimer in a workqueue thread. Use workqueue.rs. Now you don't have
-this implicit argument anymore, and it will EAF things.
+Yes, you just have to somehow use rust to ensure a call pci_iounmap()
+happens during remove, after the isolation.
 
-Danilo argues this is a bug in workqueue.rs.
+You are already doing it with devm.  It seems to me the only problem
+you have is nobody has invented a way in rust to contract that the devm
+won't run until the threads are isolated.
 
-Regardless, it seems like EAF is an overlooked topic in the safety
-analysis.
+I don't see this as insolvable, you can have some input argument to
+any API that creates concurrency that also pushes an ordered
+destructor to the struct device lifecycle that ensures it cancels that
+concurrency.
 
-Further, you and Danilo are making opposing correctness arguments:
+> Device resources are a bit special, since their lifetime must be cap'd at device
+> unbind, *independent* of the object lifetime they reside in. Hence the Devres
+> container.
 
- 1) all rust destructors run before module __exit completes
- 2) rust destructors can run after driver removal completes
+I'd argue many resources should be limited to device unbind. Memory is
+perhaps the only exception.
 
-I understand the technical underpinnings why these are different, but
-I feel that if you can make #1 reliably true for __exit then it is
-highly desirable to use the same techniques to make it true for
-remove() too.
+> > My fear, that is intensifying as we go through this discussion, is
+> > that rust binding authors have not fully comprehended what the kernel
+> > life cycle model and common design pattern actually is, and have not
+> > fully thought through issues like module unload creating a lifetime
+> > cycle for *function pointers*.
+> 
+> I do *not* see where you take the evidence from to make such a generic
+> statement.
+
+Well, I take the basic insistance that is OK to leak stuff from driver
+scope to module scope is not well designed.
+
+> Especially because there aren't a lot of abstractions upstream yet that fall
+> under this category.
+
+And I am thinking forward to other APIs you will need and how they
+will interact and not feeling good about this direction.
+
+> > The thing is once you have a mechanism to shutdown all the stuff you
+> > don't need the overhead of this revocable checking on the normal
+> > paths. What you need is a way to bring your pci::Bar into a safety
+> > contract that remove will shootdown concurrency and that directly
+> > denies references to pci::Bar, and the same contract will guarentee it
+> > frees pci::Bar memory.
+> 
+> This contract needs to be technically enforced, not by convention as
+> we do in C.
+
+People do amazing things with contracts in rust, why is this case so
+hard?
+
+> Data that is accessed from a work item can't be freed under the
+> workqueue by design in Rust.
+
+What? That's madness, alot of work functions are freeing
+something. They are often the terminal point of an object's lifecycle
+because you often have to allocate memory to launch the work in the
+first place.
+
+Certainly if you restrict workqueues to be very limited then alot of
+their challenging problems disappear :\
 
 Jason
