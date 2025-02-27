@@ -2,58 +2,51 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id 090AEA486A5
-	for <lists+nouveau@lfdr.de>; Thu, 27 Feb 2025 18:32:29 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 28148A487E3
+	for <lists+nouveau@lfdr.de>; Thu, 27 Feb 2025 19:35:18 +0100 (CET)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 51CC910EB55;
-	Thu, 27 Feb 2025 17:32:27 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 36D0A10EB17;
+	Thu, 27 Feb 2025 18:35:15 +0000 (UTC)
 Authentication-Results: gabe.freedesktop.org;
-	dkim=pass (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="QeXhWU9t";
+	dkim=pass (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="RlVtBGsM";
 	dkim-atps=neutral
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from dfw.source.kernel.org (dfw.source.kernel.org [139.178.84.217])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 8F93B10EB53;
- Thu, 27 Feb 2025 17:32:25 +0000 (UTC)
+Received: from tor.source.kernel.org (tor.source.kernel.org [172.105.4.254])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 4FBAD10E287;
+ Thu, 27 Feb 2025 18:35:12 +0000 (UTC)
 Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by dfw.source.kernel.org (Postfix) with ESMTP id 7E0F65C2784;
- Thu, 27 Feb 2025 17:31:42 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 27526C4CEDD;
- Thu, 27 Feb 2025 17:32:17 +0000 (UTC)
+ by tor.source.kernel.org (Postfix) with ESMTP id 3239D61F3D;
+ Thu, 27 Feb 2025 18:34:54 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id A601CC4CEDD;
+ Thu, 27 Feb 2025 18:35:00 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1740677541;
- bh=ZF9S4DgsXojdfwe8fyj+o1u2upec991trSXQ85ErxyY=;
- h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
- b=QeXhWU9tdT1xqO+/pAOx7GfponmkwTQKFnO5Gb4eSyOf1P2H9bcbKQ9U0kKL9Ppu2
- 4KOCZl+UK7UIVCCHUMUzH452/mHiXadW2aa1wU5YrFFqXrsGWlLCcXydeHCPjk4IXL
- MSA9DTTNaBPsSjja8HR24z+tJZoSND3XA6QHvH4X9+EbDQtePCa6e6P10HUqmcXsDX
- H00mllT4FUfyYMWeXXerbKdY2tkbs1ZZ1RlcAC//aMUK6uJv5pqrpKQEVu7X8I5pHL
- 5oHRfkZS9Ivc2P7osQ0Fl+8iB8DoIjH4xGeEdX4CgBHsBChMsm9uj1qr5Rdt8fZrqx
- jtYlHBn5PPSaQ==
-Date: Thu, 27 Feb 2025 18:32:15 +0100
-From: Danilo Krummrich <dakr@kernel.org>
-To: Boqun Feng <boqun.feng@gmail.com>, Jason Gunthorpe <jgg@nvidia.com>
-Cc: Joel Fernandes <joelagnelf@nvidia.com>,
- Alexandre Courbot <acourbot@nvidia.com>,
- Dave Airlie <airlied@gmail.com>, Gary Guo <gary@garyguo.net>,
- Joel Fernandes <joel@joelfernandes.org>,
- John Hubbard <jhubbard@nvidia.com>, Ben Skeggs <bskeggs@nvidia.com>,
- linux-kernel@vger.kernel.org, rust-for-linux@vger.kernel.org,
- nouveau@lists.freedesktop.org, dri-devel@lists.freedesktop.org,
- paulmck@kernel.org
-Subject: Re: [RFC PATCH 0/3] gpu: nova-core: add basic timer subdevice
- implementation
-Message-ID: <Z8ChnwPC0UwM8xBe@cassiopeiae>
-References: <20250226004916.GB4959@nvidia.com> <Z75riltJo0WvOsS5@cassiopeiae>
- <20250226172120.GD28425@nvidia.com> <Z7-IHgcVVS8XBurW@cassiopeiae>
- <20250226234730.GC39591@nvidia.com>
- <Z7-0pOmWO6r_KeQI@boqun-archlinux>
- <20250227144618.GE39591@nvidia.com> <Z8CCKl_yA74WjpQ1@Mac.home>
- <20250227161733.GH39591@nvidia.com> <Z8CY7fqbtbO4v1jv@Mac.home>
+ s=k20201202; t=1740681302;
+ bh=sAJRYRGK3w6GvTTl2sxildoAonH5/GMP+Mj1aAQ7Qxk=;
+ h=Date:Subject:To:Cc:References:From:In-Reply-To:From;
+ b=RlVtBGsMBB/u/6D/4mht5TGcJe6DjuDbk2Y2awU55lvWixJhiQvJoCGnKLXHJtx75
+ bszfBmK46QhtO+XDJSPZDkozLs7fi2vkBJ2ifqiwLIPAJdxPHsn2UXNtuukW+y+s1t
+ zUXTukrqujHnxCckpntplYeGLNgA2miXObzQ9fgqoNIW4oGD7NgxGuA6180fGX81ws
+ C2Wf+LjxxgW0NhySzpXdDYE9IQXL0rZilbXslOyyMB55qBBWmDOBZQuJqyF3qQEQzj
+ Aw53Ir13xzBODZuN+R52G3kwjlaHn+ANN0VKJnHSfpQgYo3ea2osYPuL7Dzifcw5wP
+ GXrzlfsYYUHnw==
+Message-ID: <df8b8d59-470f-43e6-a8c2-cc40a4ebe5d6@kernel.org>
+Date: Thu, 27 Feb 2025 19:34:58 +0100
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <Z8CY7fqbtbO4v1jv@Mac.home>
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH][next] drm/nouveau: Avoid multiple
+ -Wflex-array-member-not-at-end warnings
+To: "Gustavo A. R. Silva" <gustavoars@kernel.org>
+Cc: Karol Herbst <kherbst@redhat.com>, Lyude Paul <lyude@redhat.com>,
+ David Airlie <airlied@gmail.com>, Simona Vetter <simona@ffwll.ch>,
+ dri-devel@lists.freedesktop.org, nouveau@lists.freedesktop.org,
+ linux-kernel@vger.kernel.org, linux-hardening@vger.kernel.org
+References: <Z6xjZhHxRp4Bu_SX@kspp>
+From: Danilo Krummrich <dakr@kernel.org>
+Content-Language: en-US
+In-Reply-To: <Z6xjZhHxRp4Bu_SX@kspp>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -68,29 +61,33 @@ List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-On Thu, Feb 27, 2025 at 08:55:09AM -0800, Boqun Feng wrote:
-> On Thu, Feb 27, 2025 at 12:17:33PM -0400, Jason Gunthorpe wrote:
+On 2/12/25 10:01 AM, Gustavo A. R. Silva wrote:
+> -Wflex-array-member-not-at-end was introduced in GCC-14, and we are
+> getting ready to enable it, globally.
 > 
-> > I still wonder why you couldn't also have these reliable reference
-> > counts rooted on the device driver instead of only on the module.
-> > 
+> So, in order to avoid ending up with flexible-array members in the
+> middle of other structs, we use the `struct_group_tagged()` helper
+> to separate the flexible arrays from the rest of the members in the
+> flexible structures. We then use the newly created tagged `struct
+> nvif_ioctl_v0_hdr` and `struct nvif_ioctl_mthd_v0_hdr` to replace the
+> type of the objects causing trouble in multiple structures.
 > 
-> You could put reliable reference counts anywhere you want, as long as it
-> reflects the resource dependencies.
+> We also want to ensure that when new members need to be added to the
+> flexible structures, they are always included within the newly created
+> tagged structs. For this, we use `static_assert()`. This ensures that the
+> memory layout for both the flexible structure and the new tagged struct
+> is the same after any changes.
+> 
+> So, with these changes, fix the following warnings:
+> drivers/gpu/drm/nouveau/nvif/object.c:60:38: warning: structure containing a flexible array member is not at the end of another structure [-Wflex-array-member-not-at-end]
+> drivers/gpu/drm/nouveau/nvif/object.c:233:38: warning: structure containing a flexible array member is not at the end of another structure [-Wflex-array-member-not-at-end]
+> drivers/gpu/drm/nouveau/nvif/object.c:214:38: warning: structure containing a flexible array member is not at the end of another structure [-Wflex-array-member-not-at-end]
+> drivers/gpu/drm/nouveau/nvif/object.c:152:38: warning: structure containing a flexible array member is not at the end of another structure [-Wflex-array-member-not-at-end]
+> drivers/gpu/drm/nouveau/nvif/object.c:138:38: warning: structure containing a flexible array member is not at the end of another structure [-Wflex-array-member-not-at-end]
+> drivers/gpu/drm/nouveau/nvif/object.c:104:38: warning: structure containing a flexible array member is not at the end of another structure [-Wflex-array-member-not-at-end]
+> drivers/gpu/drm/nouveau/nouveau_svm.c:83:35: warning: structure containing a flexible array member is not at the end of another structure [-Wflex-array-member-not-at-end]
+> drivers/gpu/drm/nouveau/nouveau_svm.c:82:30: warning: structure containing a flexible array member is not at the end of another structure [-Wflex-array-member-not-at-end]
+> 
+> Signed-off-by: Gustavo A. R. Silva <gustavoars@kernel.org>
 
-Right, as I explained in a different reply, the signature for PCI driver probe()
-looks like this:
-
-	fn probe(pdev: &mut pci::Device, _info: &Self::IdInfo) -> Result<Pin<KBox<Self>>>
-
-The returned Pin<KBox<Self>> has the lifetime of the driver being bound to the
-device.
-
-Which means a driver can bind things to this lifetime. But, it isn't forced to,
-it can also put things into an Arc and share it with the rest of the world.
-
-If something is crucial to be bound to the lifetime of a driver being bound to a
-device (i.e. device resources), you have to expose it as Devres<T>.
-
-Subsequently, you can put the Devres<T> in an Arc and do whatever you want, the
-result will still be that T is dropped once the device is unbound.
+Applied to drm-misc-next, thanks!
