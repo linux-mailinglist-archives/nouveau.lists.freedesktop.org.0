@@ -2,162 +2,101 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id 3A75FA4E496
-	for <lists+nouveau@lfdr.de>; Tue,  4 Mar 2025 17:00:17 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id E04A2A4E51B
+	for <lists+nouveau@lfdr.de>; Tue,  4 Mar 2025 17:10:53 +0100 (CET)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id A005E10E5EE;
-	Tue,  4 Mar 2025 16:00:14 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 7BDF010E649;
+	Tue,  4 Mar 2025 16:10:52 +0000 (UTC)
 Authentication-Results: gabe.freedesktop.org;
-	dkim=fail reason="signature verification failed" (2048-bit key; unprotected) header.d=l3harris.com header.i=@l3harris.com header.b="Q0tew2Zo";
+	dkim=pass (1024-bit key; secure) header.d=ffwll.ch header.i=@ffwll.ch header.b="fNBg+yFQ";
 	dkim-atps=neutral
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-X-Greylist: delayed 303 seconds by postgrey-1.36 at gabe;
- Tue, 04 Mar 2025 16:00:12 UTC
-Received: from USMLB1RNPMX01POUT.l3harris.com (usmlb1rnpmx01pout.l3harris.com
- [192.52.235.36])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 6834210E62B
- for <nouveau@lists.freedesktop.org>; Tue,  4 Mar 2025 16:00:12 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
- d=l3harris.com; i=@l3harris.com; q=dns/txt; s=mail;
- t=1741104013; x=1772640013;
- h=from:to:subject:date:message-id:mime-version;
- bh=1wMVk7Flz8DfVYoHHhlA3lASTB7AMHxh6tKoP+nQEd8=;
- b=Q0tew2ZoAzRFIca5UEacdMiHdSHCo/iJeGEDEjF7GLA9BRTL5iLTazTQ
- qI+3HE5hCxzeTieCxx1UGUIBxlniKPq4dtcD2fz2AviBOaOThlCjyix8t
- 4Q2XTUWqBjHKpKxHjnwWG8Uv3IkF4Geyft39C0RfLG8Zqo+KUpSqGz/kE
- VLGIkXIMrS6xJmYa5PCqCy8jqSydQKyDeH6AMSTVeR1Axjl+KyJ3kfb+M
- WWG4f2E1hKO6BC2o0xrKEVQSzqFN7tPWmPUb+P0EoR5COjLUoaskq4a6F
- LR/XvvltK9cd4dGBjogt0D3JbLoszakeRRoomTZtTDu8P0xc1UpxC/XF+ A==;
-X-CSE-ConnectionGUID: ZSIzR9VgSc6XfAYvYAZFsA==
-X-CSE-MsgGUID: WIzpU+gERlaSmwgknioq4A==
-X-IronPort-AV: E=Sophos;i="6.14,220,1736812800"; 
- d="scan'208,217";a="154431688"
-Received: from unknown (HELO USMLB1RNPRT03POUT.l3harris.com) ([10.64.225.9])
- by USMLB1RNPMX01POUT.l3harris.com with ESMTP; 04 Mar 2025 15:55:08 +0000
-X-CSE-ConnectionGUID: aWZgM4cnSNGFeYNyKZsc8Q==
-X-CSE-MsgGUID: 67W3kgYyTG2yU2V71CN38Q==
-X-filenames: 
-X-filesizes: None
-X-filetypes: 
-X-ExtLoop1: 1
-X-IronPort-AV: E=Sophos;i="6.14,220,1736812800"; 
- d="scan'208,217";a="238273508"
-Received: from win-p1000844.rootforest.com (HELO mail.l3t.com) ([10.95.208.10])
- by USMLB1RNPRT03POUT.l3harris.com with ESMTP; 04 Mar 2025 15:55:04 +0000
-Received: from WIN-P1000847.rootforest.com (10.95.208.7) by
- WIN-P1000844.rootforest.com (10.95.208.10) with Microsoft SMTP Server
- (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.2.1118.20; Tue, 4 Mar 2025 15:55:02 +0000
-Received: from USG02-BN3-obe.outbound.protection.office365.us (23.103.199.143)
- by WIN-P1000847.rootforest.com (10.95.208.7) with Microsoft SMTP
- Server
- (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.2.1118.20 via Frontend Transport; Tue, 4 Mar 2025 15:55:02 +0000
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector5401; d=microsoft.com; cv=none;
- b=GBRZ8PTu0UfiY/5J7EqkCX06uqMmP0ofEudfrkSXea9vcYATYafnPbwA0lngwvPhOh09ruG+GHM5aggHP9CsGRDd1R6hlyBZsJS5awO5f3kQxw4VjW3rsUH5aZXfc/Z8C/nC7BZqBstZIGpNdQ1EOw8fQMMB+7g9go7Tkh/RMDiAwWu2OTpccAlnwN6GE9RVCWBigCgF5OgRw+VAuCIXEku2SIjhHuPaLU48YvAzFNU57PHEO2PXzvHzT1esSH/mioPCWlBYjPWDR9Eql0Be9UVrtYSU1ar6dC9m8fOnwfT5ujLqTsvYuHltJM34fn/uNEJIwJnA4VjqPM2Er+elpw==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
- s=arcselector5401;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=Xm/Xfwq9VD+h1d/RvhL+qsjIf2HRqzzUPY79dbxW3dA=;
- b=TT5egK6xlKTr6XEeyUxfWsiRNUfsisBKX8MMyPgosDOu9yZEHWnZhAooDX1PnhIXb0M67uUkOdmVQek9+fDPt5kD/GJa6mJon6l1DgOxidQL/hhGYjON6CHg1TwVodvJTpVCdRKVrJsWm1kjdlAH0XUnpUzSE+n6jBRIeDUhXYkWwa4v9p+zRVe+iauBD2ehGmhJXmsm7wY8fpJzyrgpHDUj+YORElrvHZkjcNob7C0qiGEOttp8YSM0CuF0AR7wKEcWKFsPolRUhXbTUkttYYXKWvV3iJuWVw+cFGP6DscsxzAxMQzLsQKHLsE663jauT4P5ubydWXxxUDeJqmT7w==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=l3harris.com; dmarc=pass action=none header.from=l3harris.com;
- dkim=pass header.d=l3harris.com; arc=none
-Received: from SA1P110MB2005.NAMP110.PROD.OUTLOOK.COM (2001:489a:200:1aa::14)
- by SA1P110MB1133.NAMP110.PROD.OUTLOOK.COM (2001:489a:200:171::18)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.8445.26; Tue, 4 Mar
- 2025 15:55:01 +0000
-Received: from SA1P110MB2005.NAMP110.PROD.OUTLOOK.COM
- ([fe80::266f:d560:6be8:c150]) by SA1P110MB2005.NAMP110.PROD.OUTLOOK.COM
- ([fe80::266f:d560:6be8:c150%6]) with mapi id 15.20.8445.022; Tue, 4 Mar 2025
- 15:55:01 +0000
-From: <jeff.vandorp@L3Harris.com>
-To: <nouveau@lists.freedesktop.org>
-Subject: Support of RTX A2000
-Thread-Topic: Support of RTX A2000
-Thread-Index: AduNHTxmOhQa7mUQSxeEibWLYEKLEQ==
-Date: Tue, 4 Mar 2025 15:55:01 +0000
-Message-ID: <SA1P110MB20051F218BC8DF86AC5419D9A8C8A@SA1P110MB2005.NAMP110.PROD.OUTLOOK.COM>
-Accept-Language: en-US
-Content-Language: en-US
-X-MS-Has-Attach: 
-X-MS-TNEF-Correlator: 
-authentication-results: dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=L3Harris.com;
-x-ms-publictraffictype: Email
-x-ms-traffictypediagnostic: SA1P110MB2005:EE_|SA1P110MB1133:EE_
-x-ms-office365-filtering-correlation-id: a8707593-c10c-484d-d621-08dd5b34ec51
-x-ms-exchange-senderadcheck: 1
-x-microsoft-antispam: BCL:0;
- ARA:13230040|366016|1800799024|38070700018|8096899003; 
-x-microsoft-antispam-message-info: =?us-ascii?Q?1WR6xiKVZuVtmSRVVdj0+0PVa+BHOO/2+fXeBScUZRltao5iwazqkVFENjkE?=
- =?us-ascii?Q?QZZN3tqRwV9UqPvF5sHY41RalAX3Otay2GVoNNzZ/fokyS+bZlMJZWaw/kF3?=
- =?us-ascii?Q?LvorlbzyCfGiKSvgElBul3SxuLDN6CcV3Pa/XckxHJkt0J3Q8jQ9BQ3BcV1J?=
- =?us-ascii?Q?TX80RCh5XKQBTcP/gnFekP8/xzrjeITjoje3MoSFmkiZ8diRRLITptku/dSh?=
- =?us-ascii?Q?IYpIJDYt4Q5tvHbm2EuwaR3jwIASQG5zYwyG21gDYto3A0UjY5drfJ7vQT/z?=
- =?us-ascii?Q?NuRhB3FOKf4MPX7T4DH6eXh8QczkpwoSocbHjalwvBnu7Z/LT6kewsfPRfsg?=
- =?us-ascii?Q?SwpMNx6RvvTgPqIxuK0lcxG5s4+TSpAQLX4Vg/pEgRaPHnxFf636pRmA+APH?=
- =?us-ascii?Q?w5b1K6w2Td59qJTAFEqcM6WkQbxCSGIAiPNUcPeIWJxNHCLJA+zSa/xxbNoR?=
- =?us-ascii?Q?eCVVaNUFNW4HRNeitit2DuFuqMsZuIqVNZWauxHUdnBtMPiUPPj2LNwTUszO?=
- =?us-ascii?Q?F+mGSnmi2WlKRT8d0dRuC/wSQvsDXSBr1c5BkrHqTT2E3EM2sNokqd2TXnHf?=
- =?us-ascii?Q?V/VwbiYzxbcb4bSuG6hZn6/lmmX8BiyXEDdADngsy0srbRzw8iaanqTXaQqI?=
- =?us-ascii?Q?IJ5RvIzzKK21U+xvUFf+XDhUi78o0vfvO+9nMN85+RQyt9eqsTspZhmHg0pG?=
- =?us-ascii?Q?1NpwfQdrZwH7FVpV7NXoYo+VPOp5Sra77dpYKEtgkkTZm0ZFrDjcH85HLR4I?=
- =?us-ascii?Q?zELU2UXhPxwaQp1I0IxBtX0OUDcCk9C+EHaRyjWZnILj8LzMfCFkjojkHf6f?=
- =?us-ascii?Q?pbAviCC7XY/EGSyQFw/hA7p+MGr+sDsGwau2QN2kOjCG+mSwYxIBJR2x7SAJ?=
- =?us-ascii?Q?Owr4i7FaYm3pUprCHX1qaSv77ObEo1h3sYZdKP0nACsg5QpgOK8aQHd1dpWU?=
- =?us-ascii?Q?KKbXObMF/ogRxTkwBnAx8ccohUBOZSvbgvbTJjYiKGwlERZOZ6VBX7iNerS/?=
- =?us-ascii?Q?fb4QM/hjQi4owTckiy3dMyoHjiUaIeuZu6Xr28+4TQVKzY0qfF6bzQxzLo0c?=
- =?us-ascii?Q?blUxJUHMuCo2tyxG75XWdsNR9bohUC9Ik8P85B71k8OejVUZIVUAyU2ts2kn?=
- =?us-ascii?Q?cZsfYUwAfagQH87auqS6lUwfapIqXcpUADvTiGf3Src/4B55mTBkDOIh08LP?=
- =?us-ascii?Q?gpdT7G4/WL0DTZeBz/oiSuOS2U2+lwEpGa7wXRGYrO5+tyHSjd3LWSytob4V?=
- =?us-ascii?Q?npQNT5NVJgi9OPMV4c5DaUxYufRloNrOTXwOBdbqDV44QSaKaSdqz7HJV1I6?=
- =?us-ascii?Q?mw8uknmJFR+ZRdJ1dAHaTau9gtNrEGTU3AD8d9qYZ3+0er69pC9kXzLzSTas?=
- =?us-ascii?Q?LV6H2xYaEf3tFCAyR65bJmn9js6SqoSTGi0tF/kEL5/hlmhjcNBwhub8IQ3c?=
- =?us-ascii?Q?Qa0kIOG0dEAz/xCUPpxXKEl/cnESZk8D?=
-x-forefront-antispam-report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
- IPV:NLI; SFV:NSPM; H:SA1P110MB2005.NAMP110.PROD.OUTLOOK.COM; PTR:; CAT:NONE;
- SFS:(13230040)(366016)(1800799024)(38070700018)(8096899003); DIR:OUT; SFP:1101;
-x-ms-exchange-antispam-messagedata-chunkcount: 1
-x-ms-exchange-antispam-messagedata-0: =?us-ascii?Q?3dHhDILJJJ6AHoC8YNO9Y15WPX7sSbHg6eN/UXo8UKqGrdIDBMd6aePYbg/Q?=
- =?us-ascii?Q?WQZkJ8o0RDGpT0u7A3hFDMKF2DBWji8NTkr7iISZpsvSdOPHypBoH5By1Bgj?=
- =?us-ascii?Q?uiX7QGMyJzJ3krJqPWupQk0OMxLupjejToSCBeJ8yAAVd5QiUFtLsPBI4emD?=
- =?us-ascii?Q?cjyI/Rpr0sJhkwn1VeIrexb4f4+BE9h6pia+0kmuFe+q3T8OGPuAH06Ig8Fv?=
- =?us-ascii?Q?pNwT1YPax8LX+EmMXxPkiFvTGFh2YfaqT8vonyv/QGT/o28ONZ8Bt7SmRBu6?=
- =?us-ascii?Q?9eDbvQyn893PwQVWwjQDzEFGedV+1ZwtC9X61Onyytl+qBlgZg2WE8UkLKTd?=
- =?us-ascii?Q?kaiSIbq56KwaJXHhlqr4VbIxUIu5n1Fdvw+cG5EFXEh5wCQ5dG5Tt5h1cvck?=
- =?us-ascii?Q?KtV2lwjuyXawKURwn34Tv7otVj/iqbmiQng3AAQOkVE9P1dxfJw6KcqcTB2Q?=
- =?us-ascii?Q?oaIcfoqp8CxcmjYyFyYQ/eOnEv5ByiLJ0faCw2XF37pFFKPTA/NPsPGg3Vr0?=
- =?us-ascii?Q?FmIKqF6CfjIOZKr7aB9dgmdr8euIGEwE8JH7X8Q5nsqYIKtT7egy32cNKb5G?=
- =?us-ascii?Q?HZY9fL64EnJQrlv5BUqi2ibHmYUEilY2TEEHPVOg8ZxdoV5MP3pg5vpVgiEm?=
- =?us-ascii?Q?1VeilJ+jfWc0/01+2ya1GXeqkrhmR9YT/m4uUWjR+h0nYMy9Q3GNSTUBv2cm?=
- =?us-ascii?Q?aNlWUGK97YjUUgPqtYuwQS/sbJ7pKoAnUecuu9J13i6LRKtXRbHnVYu6pca1?=
- =?us-ascii?Q?WFe8ML6JYwNZkshfyD36oTaa2lUhHS0Z3HeY50xeJwf53ZVNVb2nMQj53Yvj?=
- =?us-ascii?Q?q2Yib3MGSimvEHCxemsseJVkcTCb9aOCtL+pW+OTGcu0d9H69wSw98bIEdIK?=
- =?us-ascii?Q?3u1/ahs74odLK+lP4iJUtV51mM8WT9QQMu2EZ5Hzk9LvvqNhyzEX/parT10R?=
- =?us-ascii?Q?aQhIwuBcgxD137lDXRW4gwrmHP/oeTKblVQCBiLwpWmF0VpIichY+yehEHpu?=
- =?us-ascii?Q?PGgdbzt+cUx31xBBWF0iY6qqsN0T9BV4tfNEPBojFdo46fECeDj/hxO19jMI?=
- =?us-ascii?Q?OJpS/aAU8FBanitaUM0FL/ZpXfkNWCKMusFF5jTxWPjOWyzZJHRPhfqx+ByQ?=
- =?us-ascii?Q?oc/3aT6x4U4P/D9d75Ur4g3vvTgzsOPukTTF90Kjov7daePn09txl5IfH5WW?=
- =?us-ascii?Q?wUBbOEWb1vXjz29JcaztDjMONW55iQeqrswnRlyvgyQAP4VsANuh5Ae4V4+H?=
- =?us-ascii?Q?8PjR/KDOvZNCyTAxSuM52/TyVBzvDA3pmrXhtzNKCLRC87uMbR6awpmnBtr1?=
- =?us-ascii?Q?R0c01pQR/yZBMShFuEMM9KwXzmqRWMemVr2c6FtjlbNIYr/72GbqErBS3dqS?=
- =?us-ascii?Q?c1xrLGSFWfePSKCaXbG6mEaZRZQEsBDQec7elsLVvvDgd23eFBKUutTCmNB9?=
- =?us-ascii?Q?qkLjUc6R8SLGufTRQ1GoAcHXfYgcmJLReAiUnUb+7B466trgSSQG5LIl+/Bn?=
- =?us-ascii?Q?HgQudjx+xzO2u9dNv9ZKC0LoDCDXpKDFAgv0?=
-Content-Type: multipart/alternative;
- boundary="_000_SA1P110MB20051F218BC8DF86AC5419D9A8C8ASA1P110MB2005NAMP_"
+Received: from mail-wm1-f49.google.com (mail-wm1-f49.google.com
+ [209.85.128.49])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 41EE310E64A
+ for <nouveau@lists.freedesktop.org>; Tue,  4 Mar 2025 16:10:51 +0000 (UTC)
+Received: by mail-wm1-f49.google.com with SMTP id
+ 5b1f17b1804b1-43bcb1a9890so6862245e9.0
+ for <nouveau@lists.freedesktop.org>; Tue, 04 Mar 2025 08:10:51 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=ffwll.ch; s=google; t=1741104649; x=1741709449; darn=lists.freedesktop.org; 
+ h=in-reply-to:content-disposition:mime-version:references
+ :mail-followup-to:message-id:subject:cc:to:from:date:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=iIy9PeTTsN4YAiA2ClJKxcubBrW079aT6S1+RxVahlY=;
+ b=fNBg+yFQpDDnY8iawwWojKC1fEP9AyR0FJrRGSJuVRLyeq149Erzx/RP/u5zUoCep9
+ v9M8L45Ngv/pbXWpQ7dUctlMFUf9J3+IErQczW6n0ex+YujHZqJ1wKFlXcUJ3uxqsf4y
+ kTca8AzBTzYjL8SkiuE24PjSoxs495fZcND9k=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1741104649; x=1741709449;
+ h=in-reply-to:content-disposition:mime-version:references
+ :mail-followup-to:message-id:subject:cc:to:from:date
+ :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+ bh=iIy9PeTTsN4YAiA2ClJKxcubBrW079aT6S1+RxVahlY=;
+ b=dFvb427Xs+Id8WPNcXl0yKOYi0fvPEqtnTCfsE2Zrgu5TbNwuj+qWxNEZpafCDK7kd
+ iE4vyrNueAZQEQJspXIuhbkf3B5KP7GVLBj4465LNet9cNewjLalT5K9MjbblxKQXtcY
+ JLYVBgLJTRYtnGqzKybQuNzvx5vX2dvXB7NqmecmP3N0lBMcse9/LO+MW42P7MzYlufO
+ 92C5I2Va4iqaCkg6IJmYkaGhuMvkxVMr3JcNkoVRIGET9JS3NemJ85xrnAnbfg5et+DT
+ PwyhjtbIKOrHNU47fMflP5mS04hzvXlMsE+QbYePQM3EEDMA9/c5W+TgKORagA0LF8xu
+ X83g==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCVDE2JGMHS+VubQ2zstzTUxPmpPXq9riK3MPc6MbE52H6LEQCV68g+xJJjOeItC+XyPmbruzAQ0@lists.freedesktop.org
+X-Gm-Message-State: AOJu0Yw7GHbIrprzcl74lNp+EjPLzAgWS4OfSqAO5myc/UIvtlTJwIMx
+ qpNsSp11+7cenGfmDYmKYa2kfgtsu2UlsIGl0ZKIRUjiGhm9ww50IE0fWUvnu10=
+X-Gm-Gg: ASbGncs5542kscHZvMeLRG1FzdHTCwbSnl1qWaW5BuQPmHNkcbj8H0fHelsC5Ntp7Se
+ 6jyU2YXcLtrHwENqg9T35SREuaew3lLNsn9IBAcgdVfXGYFw9fgTSp6NAE2DUP4gsPmQkhocQZ6
+ 9OxhrBr0OHDKIxtle4mdHjzJtD0fFtFKxwa06v33sn4HXGfU9YYBzZZ4wsohBHJheaKTohVekI1
+ hyEdBF1VzuWhzpScD1zU/RLB2nPCNL/zl9XmbN5vnaokRJqlQOsjL4gCHczpn61ICiSrKsbgMSW
+ mFAY9CRyuZs/bg4KQomYBXGqH7LzbZ/IZx7UnYtHOwKJNpqojbcVx+4K
+X-Google-Smtp-Source: AGHT+IGYstbykxSLckXcDtbIvHnaqvWhbPG4L7oRKtT9m1rH0Ss1kauZrIqVjxI5p2CBcuWK44nyyA==
+X-Received: by 2002:a05:6000:402b:b0:38f:3224:65e5 with SMTP id
+ ffacd0b85a97d-39115605344mr3132563f8f.12.1741104649374; 
+ Tue, 04 Mar 2025 08:10:49 -0800 (PST)
+Received: from phenom.ffwll.local ([2a02:168:57f4:0:5485:d4b2:c087:b497])
+ by smtp.gmail.com with ESMTPSA id
+ ffacd0b85a97d-390e485db82sm17762968f8f.88.2025.03.04.08.10.46
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Tue, 04 Mar 2025 08:10:47 -0800 (PST)
+Date: Tue, 4 Mar 2025 17:10:45 +0100
+From: Simona Vetter <simona.vetter@ffwll.ch>
+To: Jason Gunthorpe <jgg@nvidia.com>
+Cc: John Hubbard <jhubbard@nvidia.com>, Greg KH <gregkh@linuxfoundation.org>,
+ Danilo Krummrich <dakr@kernel.org>, Joel Fernandes <joelagnelf@nvidia.com>,
+ Alexandre Courbot <acourbot@nvidia.com>,
+ Dave Airlie <airlied@gmail.com>, Gary Guo <gary@garyguo.net>,
+ Joel Fernandes <joel@joelfernandes.org>,
+ Boqun Feng <boqun.feng@gmail.com>, Ben Skeggs <bskeggs@nvidia.com>,
+ linux-kernel@vger.kernel.org, rust-for-linux@vger.kernel.org,
+ nouveau@lists.freedesktop.org, dri-devel@lists.freedesktop.org,
+ paulmck@kernel.org
+Subject: Re: [RFC PATCH 0/3] gpu: nova-core: add basic timer subdevice
+ implementation
+Message-ID: <Z8cmBWB8rl97-zSG@phenom.ffwll.local>
+Mail-Followup-To: Jason Gunthorpe <jgg@nvidia.com>,
+ John Hubbard <jhubbard@nvidia.com>,
+ Greg KH <gregkh@linuxfoundation.org>,
+ Danilo Krummrich <dakr@kernel.org>,
+ Joel Fernandes <joelagnelf@nvidia.com>,
+ Alexandre Courbot <acourbot@nvidia.com>,
+ Dave Airlie <airlied@gmail.com>, Gary Guo <gary@garyguo.net>,
+ Joel Fernandes <joel@joelfernandes.org>,
+ Boqun Feng <boqun.feng@gmail.com>, Ben Skeggs <bskeggs@nvidia.com>,
+ linux-kernel@vger.kernel.org, rust-for-linux@vger.kernel.org,
+ nouveau@lists.freedesktop.org, dri-devel@lists.freedesktop.org,
+ paulmck@kernel.org
+References: <Z75WKSRlUVEqpysJ@cassiopeiae> <20250226004916.GB4959@nvidia.com>
+ <Z75riltJo0WvOsS5@cassiopeiae> <20250226172120.GD28425@nvidia.com>
+ <Z7-IHgcVVS8XBurW@cassiopeiae> <20250226234730.GC39591@nvidia.com>
+ <2025022644-fleshed-petite-a944@gregkh>
+ <D82UB3V6NZ55.3OEPPW2W8MFZV@nvidia.com>
+ <Z8GViQzZJVFPxfNd@phenom.ffwll.local>
+ <20250228184013.GF39591@nvidia.com>
 MIME-Version: 1.0
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-AuthSource: SA1P110MB2005.NAMP110.PROD.OUTLOOK.COM
-X-MS-Exchange-CrossTenant-Network-Message-Id: a8707593-c10c-484d-d621-08dd5b34ec51
-X-MS-Exchange-CrossTenant-originalarrivaltime: 04 Mar 2025 15:55:01.7208 (UTC)
-X-MS-Exchange-CrossTenant-fromentityheader: Hosted
-X-MS-Exchange-CrossTenant-id: ba488c5e-f105-4a2b-a8b1-b57b26a44117
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: SA1P110MB1133
-X-OriginatorOrg: L3Harris.com
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <20250228184013.GF39591@nvidia.com>
+X-Operating-System: Linux phenom 6.12.11-amd64 
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -172,95 +111,187 @@ List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
---_000_SA1P110MB20051F218BC8DF86AC5419D9A8C8ASA1P110MB2005NAMP_
-Content-Type: text/plain; charset="us-ascii"
-MIME-Version: 1.0
-Content-Transfer-Encoding: quoted-printable
+On Fri, Feb 28, 2025 at 02:40:13PM -0400, Jason Gunthorpe wrote:
+> On Fri, Feb 28, 2025 at 11:52:57AM +0100, Simona Vetter wrote:
+> 
+> > - Nuke the driver binding manually through sysfs with the unbind files.
+> > - Nuke all userspace that might beholding files and other resources open.
+> > - At this point the module refcount should be zero and you can unload it.
+> > 
+> > Except developers really don't like the manual unbind step, and so we're
+> > missing try_module_get() in a bunch of places where it really should be.
+> 
+> IMHO they are not missing, we just have a general rule that if a
+> cleanup function, required to be called prior to module exit, revokes
+> any .text pointers then you don't need to hold the module refcount.
+> 
+> file_operations doesn't have such a cleanup function which is why it
+> takes the refcount.
+> 
+> hrtimer does have such a function which is why it doesn't take the
+> refcount.
 
-What support does Nouveau have for the RTX A2000?   I don't see it specific=
-ally listed on the "CodeNames.html" page.  I'm assuming it would fall eithe=
-r in the Turing or Ampere families, but its not clear.
+I was talking about a bunch of other places, where it works like
+file_operations, except we don't bother with the module reference count.
+I've seen patches fly by where people "fix" these things because module
+unload is "broken".
 
-Jeff VanDorp
+> > Now wrt why you can't just solve this all at the subsystem level and
+> > guarantee that after drm_dev_unplug no code is running in driver callbacks
+> > anymore:
+> > 
+> > In really, really simple subsystems like backlight this is doable. In drm
+> > with arbitrary ioctl this isn't, and you get to make a choice:
+> 
+> It is certainly doable, you list the right way to do it right below
+> and RDMA implements that successfully.
+> 
+> The subsytem owns all FDs and proxies all file_opertions to the driver
+> (after improving them :) and that is protected by a rwsem/SRCU that
+> is safe against the removal path setting all driver ops to NULL.
 
-  =
+I'm not saying that any of these approaches are bad. For some cases we
+plan to use them in gpu code too even. The above is pretty much the plan
+we have for dma_fence.
 
+> > - You wait until all driver code finishes, which could be never if there's
+> >   ioctl that wait for render to complete and don't handle hotunplug
+> >   correctly. This is a deadlock.
+> 
+> Meh. We waited for all FDs to close for along time. It isn't a
+> "deadlock" it is just a wait on userspace that extends to module
+> unload. Very undesirable yes, but not the end of the world, it can
+> resolve itself if userspace shutsdown.
+> 
+> But, IMHO, the subsystem and driver should shoot down the waits during
+> remove.
+> 
+> Your infinite waits are all interruptable right? :)
 
-CONFIDENTIALITY NOTICE: This email and any attachments are for the sole use=
- of the intended recipient and may contain material that is proprietary, co=
-nfidential, privileged or otherwise legally protected or restricted under a=
-pplicable government laws. Any review, disclosure, distributing or other us=
-e without expressed permission of the sender is strictly prohibited. If you=
- are not the intended recipient, please contact the sender and delete all c=
-opies without reading, printing, or saving.
+So yeah userspace you can shoot down with SIGKILL, assuming really good
+programming. But there's also all the in-kernel operations between various
+work queues and other threads. This can be easily fixed by just rewriting
+the entire thing into a strict message passing paradigm. Unfortunately
+rust has to interop with the current existing mess.
 
+gpu drivers can hog console_lock (yes we're trying to get away from that
+as much as possible), at that point a cavalier attitude of "you can just
+wait" isn't very appreciated.
 
---_000_SA1P110MB20051F218BC8DF86AC5419D9A8C8ASA1P110MB2005NAMP_
-Content-Type: text/html; charset="us-ascii"
-MIME-Version: 1.0
-Content-Transfer-Encoding: quoted-printable
+And once you've made sure that really everything can bail out of you've
+gotten pretty close to reimplementing revocable resources.
 
-<html xmlns:v=3D"urn:schemas-microsoft-com:vml" xmlns:o=3D"urn:schemas-micr=
-osoft-com:office:office" xmlns:w=3D"urn:schemas-microsoft-com:office:word" =
-xmlns:m=3D"http://schemas.microsoft.com/office/2004/12/omml" xmlns=3D"http:=
-//www.w3.org/TR/REC-html40">
-<head>
-<meta http-equiv=3D"Content-Type" content=3D"text/html; charset=3Dus-ascii">
-<meta name=3D"Generator" content=3D"Microsoft Word 15 (filtered medium)">
-<style><!--
-/* Font Definitions */
-@font-face
-	{font-family:"Cambria Math";
-	panose-1:2 4 5 3 5 4 6 3 2 4;}
-@font-face
-	{font-family:Aptos;}
-/* Style Definitions */
-p.MsoNormal, li.MsoNormal, div.MsoNormal
-	{margin:0in;
-	font-size:11.0pt;
-	font-family:"Aptos",sans-serif;
-	mso-ligatures:standardcontextual;}
-span.EmailStyle17
-	{mso-style-type:personal-compose;
-	font-family:"Aptos",sans-serif;
-	color:windowtext;}
-.MsoChpDefault
-	{mso-style-type:export-only;
-	font-size:11.0pt;}
-@page WordSection1
-	{size:8.5in 11.0in;
-	margin:1.0in 1.0in 1.0in 1.0in;}
-div.WordSection1
-	{page:WordSection1;}
---></style><!--[if gte mso 9]><xml>
-<o:shapedefaults v:ext=3D"edit" spidmax=3D"1026" />
-</xml><![endif]--><!--[if gte mso 9]><xml>
-<o:shapelayout v:ext=3D"edit">
-<o:idmap v:ext=3D"edit" data=3D"1" />
-</o:shapelayout></xml><![endif]-->
-</head>
-<body lang=3D"EN-US" link=3D"#467886" vlink=3D"#96607D" style=3D"word-wrap:=
-break-word">
-<div class=3D"WordSection1">
-<p class=3D"MsoNormal">What support does Nouveau have for the RTX A2000?&nb=
-sp; &nbsp;I don&#8217;t see it specifically listed on the &#8220;CodeNames.=
-html&#8221; page.&nbsp; I&#8217;m assuming it would fall either in the Turi=
-ng or Ampere families, but its not clear.<o:p></o:p></p>
-<p class=3D"MsoNormal"><br>
-Jeff VanDorp<o:p></o:p></p>
-</div>
-<span><span><br>&nbsp;</span>&nbsp;</span><br>
-<DIV><span style=3D"FONT-FAMILY: Times New Roman"><span style=3D"FONT-SIZE:=
- 14px">CONFIDENTIALITY NOTICE: This email and any attachments are for the s=
-ole use of the intended recipient and may contain material that is propriet=
-ary, confidential, privileged or otherwise legally protected or restricted =
-under applicable government laws. Any review, disclosure, distributing or o=
-ther use without expressed permission of the sender is strictly prohibited.=
- If you are not the intended recipient, please contact the sender and delet=
-e all copies without reading, printing, or saving.</span></span>
-<DIV style=3D'FONT-SIZE: 14px; FONT-FAMILY: "Times New Roman"'><br></DIV></=
-DIV></body>
-</html>
+> >   In my experience this is theorically possible, practically no one gets
+> >   this right and defacto means that actual hotunplug under load has a good
+> >   chance of just hanging forever. Which is why drm doesn't do this.
+> 
+> See, we didn't have this problem as we don't have infinite waits in
+> driver as part of the API. The API toward the driver is event driven..
 
---_000_SA1P110MB20051F218BC8DF86AC5419D9A8C8ASA1P110MB2005NAMP_--
+Yeah rolling everything over to event passing and message queues would
+sort this out a lot. It's kinda not where we are though.
 
+> I can understand that adding the shootdown logic all over the place
+> would be hard and you'd get it wrong.
+> 
+> But so is half removing the driver while it is doing *anything* and
+> trying to mitigate that with a different kind of hard to do locking
+> fix. *shrug*
+
+The thing is that rust helps you enormously with implementing revocable
+resources and making sure you're not cheating with all the bail-out paths.
+
+It cannot help you with making sure you have interruptible/abortable
+sleeps in all the right places. Yes this is a bit a disappointment, but
+fundamentally rust cannot model negative contexts (unlike strictly
+functional languages like haskell) where certain operations are not
+allowed. But it is much, much better than C at "this could fail, you must
+handle it and not screw up".
+
+In some cases you can plug this gap with runtime validation, like fake
+lockdep contexts behind the might_alloc_gfp() checks and similar tricks
+we're using on the C side too. Given that I'm still struggling with
+weeding out design deadlocks at normal operations. For example runtime pm
+is an absolute disaster on this, and a lot of drivers fail real bad once
+you add lockdep annotations for runtime pm. I'll probably retire before I
+get to doing this for driver unload.
+
+> >   This is why I like the rust Revocable so much, because it's a normal rcu
+> >   section, so disallows all sleeping. You might still deadlock on a busy
+> >   loop waiting for hw without having a timeout. But that's generally
+> >   fairly easy to spot, and good drivers have macros/helpers for this so
+> >   that there is always a timeout.
+> 
+> The Recovable version narrows the critical sections to very small
+> regions, but having critical sections at all is still, IMHO, hacky.
+> 
+> What you should ask Rust to solve for you is the infinite waits! That
+> is the root cause of your problem. Compiler enforces no waits with out
+> a revocation option on DRM callbacks!
+> 
+> Wouldn't that be much better??
+
+It would indeed be nice. I haven't seen that rust unicorn yet though, and
+from my understanding it's just not something rust can give you. Rust
+isn't magic, it's just a tool that can do a few fairly specific things a
+lot better than C. But otherwise it's still the same mess.
+
+> >   drm_dev_unplug uses sleepable rcu for practicality reasons and so has a
+> >   much, much higher chance of deadlocks. Note that strictly speaking
+> >   drm_device should hold a module reference on the driver, but see above
+> >   for why we don't have that - developers prefer convenience over
+> >   correctness in this area.
+> 
+> Doesn't DRM have a module reference because the fops is in the driver
+> and the file core takes the driver module reference during
+> fops_get()/replace_fops() in drm_stub_open()? Or do I misunderstand
+> what that stub is for?
+> 
+> Like, I see a THIS_MODULE in driver->fops == amdgpu_driver_kms_fops ?
+
+Yeah it's there, except only for the userspace references and not for the
+kernel internal ones. Because developers get a bit prickle about adding
+those unfortunately due to "it breaks module unload". Maybe we just should
+add them, at least for rust.
+
+> > We can and should definitely try to make this much better. I think we can
+> > get to full correctness wrt the first 3 lifetime things in rust. I'm not
+> > sure whether handling module unload/.text lifetime is worth the bother,
+> > it's probably only going to upset developers if we try. 
+> 
+> It hurts to read a suggestion we should ignore .text lifetime rules :(
+> DRM can be be like this, but please don't push that mess onto the rest
+> of the world in the common rust bindings or common rust design
+> patterns. Especially after places have invested alot to properly and
+> fully fix these problems without EAF bugs, infinite wait problems or
+> otherwise.
+> 
+> My suggestion is that new DRM rust drivers should have the file
+> operations isolation like RDMA does and a design goal to have
+> revocable sleeps. No EAF issue. You don't have to fix the whole DRM
+> subsystem to get here, just some fairly small work that only new rust
+> drivers would use. Start off on a good foot. <shrug>
+
+You've missed the "it will upset developers part". I've seen people remove
+module references that are needed, to "fix" driver unloading.
+
+The other part is that rust isn't magic, the compiler cannot reasons
+through every possible correct api. Which means that sometimes it forces a
+failure path on you that you know cannot ever happen, but you cannot teach
+the compiler how to prove that. You can side-step that by runtime death in
+rust aka BUG_ON(). Which isn't popular really either.
+
+The third part is that I'm not aware of anything in rust that would
+guarantee that the function pointer and the module reference actually
+belong to each another. Which means another runtime check most likely, and
+hence another thing that shouldn't fail which kinda can now.
+
+Hence my conclusion that maybe it's just not the top priority to get this
+all perfect.
+
+Cheers, Sima
+
+-- 
+Simona Vetter
+Software Engineer, Intel Corporation
+http://blog.ffwll.ch
