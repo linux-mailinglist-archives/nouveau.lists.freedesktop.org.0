@@ -2,84 +2,58 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id 98469CBADB2
-	for <lists+nouveau@lfdr.de>; Sat, 13 Dec 2025 13:45:22 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id AF1ABC8720C
+	for <lists+nouveau@lfdr.de>; Tue, 25 Nov 2025 21:48:25 +0100 (CET)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id DD0A410EAC8;
-	Sat, 13 Dec 2025 12:41:35 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 3435A10E4EF;
+	Tue, 25 Nov 2025 20:47:35 +0000 (UTC)
 Authentication-Results: gabe.freedesktop.org;
-	dkim=permerror (0-bit key) header.d=gmail.com header.i=@gmail.com header.b="Bl2sJGm+";
+	dkim=permerror (0-bit key) header.d=proton.me header.i=@proton.me header.b="ExIVDq+U";
 	dkim-atps=neutral
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from mail-pj1-f49.google.com (mail-pj1-f49.google.com
- [209.85.216.49])
- by gabe.freedesktop.org (Postfix) with ESMTPS id D603010E795;
- Wed,  5 Mar 2025 21:07:30 +0000 (UTC)
-Received: by mail-pj1-f49.google.com with SMTP id
- 98e67ed59e1d1-2ff53b26af2so3459a91.0; 
- Wed, 05 Mar 2025 13:07:30 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1741208850; x=1741813650; darn=lists.freedesktop.org;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=ppeUxjaKjmx50Q3bQDc5N6dSfYxyGJbGKWKkwVwTeuI=;
- b=Bl2sJGm+KITi8YIbZxrKzcYJDFJqGaC+3YhKJqxuwIHfAYOtN11RZMvbtZzjwF3/6k
- jDJVGZkvzQnvh0HXIvtURxYDLErWMwROvVyhDEj0jTvBF6lbe6UWhnMsR8r870bpfGJo
- A24NndjyD12KS8iAlGQoVAZlWu5A8xoDcoLtUaZ4vIU/+xNBBk8/h/vea0JqkbTnsRMe
- ivbUUUav9pEsrKsIYELk6RUSYgKX+UEpLEqzbcRstj6t0aTMf42id1+ppHjwt2tF4JIl
- EQEE3UA23M1gQ9SBi443E7yjpWND4DVaEKqp35paQA/boO7neterxDAQiuuqX7D9IyXf
- c+DA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1741208850; x=1741813650;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=ppeUxjaKjmx50Q3bQDc5N6dSfYxyGJbGKWKkwVwTeuI=;
- b=cj6NMXdUCztSMcCwxZXjkb8QLbAtfKd1vt9jaOZIAVKxHsUl/jWTIypYsGsbRSoupV
- Ym0JqLmAC1R6FC1X7jk52sTT8FaZvsGlG+dIFTdSyB/PqoO/ERqMDuqkVRoe2IxxjL2M
- xI9TDHegKCYbjcv7PSEkgCdUcPit2PKvKx0VBa/5y+Grzm13Al6/2HvOP1VO0c6gS/zT
- vyRWyZ1jePJiPWl2PSV3sm9T8da1kvQWty9+yRD9iCaHfmSUitH58G3KQpfq5w2GGxdD
- kK+3fsxzG14rUug0nZTdyV921e05Zn6MbUrnUbm+NAb80njlkBGRv6hUsjuLlD+RsZHt
- cbQA==
-X-Forwarded-Encrypted: i=1;
- AJvYcCUuSucX3Upz8QQzgO8+fp7GrGNgI9AsdAAevruv7Gne+k7Tbe2OOyv+U9rA7oPuXVeUAtOgjG8ZhQ==@lists.freedesktop.org,
- AJvYcCWuHJ0nx14Tkv9pYPTWWZ22LVVE4xlUFOTmSBMmsIAtW3Ubu6sPKiaHQqU79LlgHIdAa3BuukNYp7c=@lists.freedesktop.org
-X-Gm-Message-State: AOJu0YzjnULXLYS56StpKjeZevH1um4VX65my9gU/e3n0a7dBmc8BFOQ
- ebGHtBcwGHkAMEj0J7/W4+hevstKoNlTJGJ5YPxCvXeOIeQH+aXDXBi462m8pMQpyZdRFaFdVJu
- 4iGwij6b4MeyQNICfW+7ztHOrpy0=
-X-Gm-Gg: ASbGnctu2knZ4QwEApB2l2BUPKUMuSHCuX5I9xvYyiGqtXN5EBts+teiqwS5baIy2Rz
- Pyts9KG/aLJyXGwjsnEEy3luXAKS7le4G3CH2Duvdv3cVm2SEZ3FWvqegy+wH4GghqbI+UWJ/dC
- yAH4nfWL8XbQidGUaHyGqzI42hTQ==
-X-Google-Smtp-Source: AGHT+IFdCsF1vk5OPN4taJHp2TBXL+JUlxGZBmkkbeifhcezimLuADcrM7P2FojcMB4CukfeYQQYekuvC1Sp9CWZOJY=
-X-Received: by 2002:a17:90b:3504:b0:2ee:6563:20b5 with SMTP id
- 98e67ed59e1d1-2ff49634954mr3085426a91.0.1741208850256; Wed, 05 Mar 2025
- 13:07:30 -0800 (PST)
-MIME-Version: 1.0
+X-Greylist: delayed 607 seconds by postgrey-1.36 at gabe;
+ Wed, 05 Mar 2025 22:40:51 UTC
+Received: from mail-4327.protonmail.ch (mail-4327.protonmail.ch [185.70.43.27])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id C5D8510E04F
+ for <nouveau@lists.freedesktop.org>; Wed,  5 Mar 2025 22:40:51 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=proton.me;
+ s=protonmail; t=1741213841; x=1741473041;
+ bh=oA5VdBYqAl1FD7XLdd6ED5xak0jGnkmx5w36QBysOHU=;
+ h=Date:To:From:Cc:Subject:Message-ID:In-Reply-To:References:
+ Feedback-ID:From:To:Cc:Date:Subject:Reply-To:Feedback-ID:
+ Message-ID:BIMI-Selector:List-Unsubscribe:List-Unsubscribe-Post;
+ b=ExIVDq+Ujn6KsOt67OMC7GxrAMIcWg00nU1tO3l1CRkkMfRDzJfhUvlOnbAFRRdwh
+ QSIFakcquGfaPU+hFA+dg/eqEL5ljlXh9cxSrJd/gz0cypodCjxiFBhoA+FX/Jji5X
+ KH9tXlAO+QzhvYchL/eCAymMTqJgYmpyXsPoMOAW7Gr5cGXq/BOJ6ZHwGC4mHfHXmO
+ BINFIJj8ovd8c3iX/5R20OaEcbzFpvkmE3oMa7zRiD7ziMgat1ysdRpIkc0JjpKlzK
+ O2U8nk7deejkOq6rODO8bJp9A0ftPXefTmSwnB6yDHUxkwVXMCmui6Z3aid/fg9nM2
+ 5DLkYeCXLmxGw==
+Date: Wed, 05 Mar 2025 22:30:31 +0000
+To: Danilo Krummrich <dakr@kernel.org>, airlied@gmail.com, simona@ffwll.ch,
+ corbet@lwn.net, maarten.lankhorst@linux.intel.com, mripard@kernel.org,
+ tzimmermann@suse.de, ajanulgu@redhat.com, lyude@redhat.com,
+ pstanner@redhat.com, zhiw@nvidia.com, cjia@nvidia.com, jhubbard@nvidia.com,
+ bskeggs@nvidia.com, acurrid@nvidia.com
+From: Benno Lossin <benno.lossin@proton.me>
+Cc: ojeda@kernel.org, alex.gaynor@gmail.com, boqun.feng@gmail.com,
+ gary@garyguo.net, bjorn3_gh@protonmail.com, a.hindborg@kernel.org,
+ aliceryhl@google.com, tmgross@umich.edu, gregkh@linuxfoundation.org,
+ mcgrof@kernel.org, russ.weight@linux.dev, dri-devel@lists.freedesktop.org,
+ linux-doc@vger.kernel.org, linux-kernel@vger.kernel.org,
+ nouveau@lists.freedesktop.org, rust-for-linux@vger.kernel.org
+Subject: Re: [PATCH v5 2/5] rust: firmware: introduce
+ `firmware::ModInfoBuilder`
+Message-ID: <D88OSC9XJXZL.C5HXWFYCG9U6@proton.me>
+In-Reply-To: <20250304173555.2496-3-dakr@kernel.org>
 References: <20250304173555.2496-1-dakr@kernel.org>
- <20250304173555.2496-2-dakr@kernel.org>
-In-Reply-To: <20250304173555.2496-2-dakr@kernel.org>
-From: Miguel Ojeda <miguel.ojeda.sandonis@gmail.com>
-Date: Wed, 5 Mar 2025 22:07:18 +0100
-X-Gm-Features: AQ5f1Jo9uyXmUsRhx9aiXZGx5yBRRudRw6l9QRLBH4aKQdIv0iL_aGAt-0G_uyM
-Message-ID: <CANiq72kr1NU-xs2f8TG3XXG5su4HmZG0TGj6p2vtrzygxTv0TA@mail.gmail.com>
-Subject: Re: [PATCH v5 1/5] rust: module: add type `LocalModule`
-To: Danilo Krummrich <dakr@kernel.org>
-Cc: airlied@gmail.com, simona@ffwll.ch, corbet@lwn.net, 
- maarten.lankhorst@linux.intel.com, mripard@kernel.org, tzimmermann@suse.de, 
- ajanulgu@redhat.com, lyude@redhat.com, pstanner@redhat.com, zhiw@nvidia.com, 
- cjia@nvidia.com, jhubbard@nvidia.com, bskeggs@nvidia.com, acurrid@nvidia.com, 
- ojeda@kernel.org, alex.gaynor@gmail.com, boqun.feng@gmail.com, 
- gary@garyguo.net, bjorn3_gh@protonmail.com, benno.lossin@proton.me, 
- a.hindborg@kernel.org, aliceryhl@google.com, tmgross@umich.edu, 
- gregkh@linuxfoundation.org, mcgrof@kernel.org, russ.weight@linux.dev, 
- dri-devel@lists.freedesktop.org, linux-doc@vger.kernel.org, 
- linux-kernel@vger.kernel.org, nouveau@lists.freedesktop.org, 
- rust-for-linux@vger.kernel.org
-Content-Type: text/plain; charset="UTF-8"
+ <20250304173555.2496-3-dakr@kernel.org>
+Feedback-ID: 71780778:user:proton
+X-Pm-Message-ID: fc5a88e7746fec47f7de82f7668300d12884367f
+MIME-Version: 1.0
+Content-Type: text/plain; charset=utf-8
 Content-Transfer-Encoding: quoted-printable
-X-Mailman-Approved-At: Sat, 13 Dec 2025 12:40:47 +0000
+X-Mailman-Approved-At: Tue, 25 Nov 2025 20:47:19 +0000
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -94,22 +68,149 @@ List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-On Tue, Mar 4, 2025 at 6:36=E2=80=AFPM Danilo Krummrich <dakr@kernel.org> w=
-rote:
+On Tue Mar 4, 2025 at 6:34 PM CET, Danilo Krummrich wrote:
+> The `firmware` field of the `module!` only accepts literal strings,
+> which is due to the fact that it is implemented as a proc macro.
 >
-> The `LocalModule` type is the type of the module created by `module!`,
-> `module_pci_driver!`, `module_platform_driver!`, etc.
+> Some drivers require a lot of firmware files (such as nova-core) and
+> hence benefit from more flexibility composing firmware path strings.
 >
-> Since the exact type of the module is sometimes generated on the fly by
-> the listed macros, provide an alias.
+> The `firmware::ModInfoBuilder` is a helper component to flexibly compose
+> firmware path strings for the .modinfo section in const context.
 >
-> This is first used by the `module_firmware!` macro introduced in a
-> subsequent patch.
+> It is meant to be used in combination with `kernel::module_firmware!`,
+> which is introduced in a subsequent patch.
 >
-> Suggested-by: Alice Ryhl <aliceryhl@google.com>
+> Co-developed-by: Alice Ryhl <aliceryhl@google.com>
+> Signed-off-by: Alice Ryhl <aliceryhl@google.com>
 > Signed-off-by: Danilo Krummrich <dakr@kernel.org>
+> ---
+>  rust/kernel/firmware.rs | 98 +++++++++++++++++++++++++++++++++++++++++
+>  1 file changed, 98 insertions(+)
+>
+> diff --git a/rust/kernel/firmware.rs b/rust/kernel/firmware.rs
+> index c5162fdc95ff..6e6972d94597 100644
+> --- a/rust/kernel/firmware.rs
+> +++ b/rust/kernel/firmware.rs
+> @@ -115,3 +115,101 @@ unsafe impl Send for Firmware {}
+>  // SAFETY: `Firmware` only holds a pointer to a C `struct firmware`, ref=
+erences to which are safe to
+>  // be used from any thread.
+>  unsafe impl Sync for Firmware {}
+> +
+> +/// Builder for firmware module info.
+> +///
+> +/// [`ModInfoBuilder`] is a helper component to flexibly compose firmwar=
+e paths strings for the
+> +/// .modinfo section in const context.
+> +///
+> +/// It is meant to be used in combination with [`kernel::module_firmware=
+!`].
+> +///
+> +/// For more details and an example, see [`kernel::module_firmware!`].
+> +pub struct ModInfoBuilder<const N: usize> {
+> +    buf: [u8; N],
+> +    n: usize,
+> +    module_name: &'static CStr,
+> +}
+> +
+> +impl<const N: usize> ModInfoBuilder<N> {
+> +    /// Create an empty builder instance.
+> +    pub const fn new(module_name: &'static CStr) -> Self {
+> +        Self {
+> +            buf: [0; N],
+> +            n: 0,
+> +            module_name,
+> +        }
+> +    }
+> +
+> +    const fn push_internal(mut self, bytes: &[u8]) -> Self {
+> +        let mut j =3D 0;
+> +
+> +        if N =3D=3D 0 {
+> +            self.n +=3D bytes.len();
+> +            return self;
+> +        }
+> +
+> +        while j < bytes.len() {
+> +            if self.n < N {
+> +                self.buf[self.n] =3D bytes[j];
+> +            }
+> +            self.n +=3D 1;
+> +            j +=3D 1;
+> +        }
+> +        self
+> +    }
+> +
+> +    /// Push an additional path component.
+> +    ///
+> +    /// After a new [`ModInfoBuilder`] instance has been created, [`ModI=
+nfoBuilder::prepare`] must
+> +    /// be called before adding path components.
+> +    pub const fn push(self, s: &str) -> Self {
+> +        if N !=3D 0 && self.n =3D=3D 0 {
+> +            crate::build_error!("Must call prepare() before push().");
 
-Acked-by: Miguel Ojeda <ojeda@kernel.org>
+This will only prevent the first `prepare` call being missed, right?
 
+> +        }
+> +
+> +        self.push_internal(s.as_bytes())
+> +    }
+> +
+> +    const fn prepare_module_name(self) -> Self {
+> +        let mut this =3D self;
+> +        let module_name =3D this.module_name;
+> +
+> +        if !this.module_name.is_empty() {
+> +            this =3D this.push_internal(module_name.as_bytes_with_nul())=
+;
+> +
+> +            if N !=3D 0 {
+> +                // Re-use the space taken by the NULL terminator and swa=
+p it with the '.' separator.
+> +                this.buf[this.n - 1] =3D b'.';
+> +            }
+> +        }
+> +
+> +        this.push_internal(b"firmware=3D")
+> +    }
+> +
+> +    /// Prepare for the next module info entry.
+> +    ///
+> +    /// Must be called before [`ModInfoBuilder::push`] can be called.
+
+If you always have to call this before `push`, why not inline it there?
+
+---
 Cheers,
-Miguel
+Benno
+
+> +    pub const fn prepare(self) -> Self {
+> +        self.push_internal(b"\0").prepare_module_name()
+> +    }
+> +
+> +    /// Build the byte array.
+> +    pub const fn build(self) -> [u8; N] {
+> +        // Add the final NULL terminator.
+> +        let this =3D self.push_internal(b"\0");
+> +
+> +        if this.n =3D=3D N {
+> +            this.buf
+> +        } else {
+> +            crate::build_error!("Length mismatch.");
+> +        }
+> +    }
+> +}
+> +
+> +impl ModInfoBuilder<0> {
+> +    /// Return the length of the byte array to build.
+> +    pub const fn build_length(self) -> usize {
+> +        // Compensate for the NULL terminator added by `build`.
+> +        self.n + 1
+> +    }
+> +}
+> --
+> 2.48.1
+
+
