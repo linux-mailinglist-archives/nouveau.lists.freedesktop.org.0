@@ -2,78 +2,78 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id 765A8A54473
-	for <lists+nouveau@lfdr.de>; Thu,  6 Mar 2025 09:17:05 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 45E7AA54635
+	for <lists+nouveau@lfdr.de>; Thu,  6 Mar 2025 10:25:11 +0100 (CET)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id D25C210E0A1;
-	Thu,  6 Mar 2025 08:17:02 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id E347610E027;
+	Thu,  6 Mar 2025 09:25:09 +0000 (UTC)
 Authentication-Results: gabe.freedesktop.org;
-	dkim=pass (1024-bit key; unprotected) header.d=redhat.com header.i=@redhat.com header.b="PBrmkEP/";
+	dkim=pass (1024-bit key; unprotected) header.d=redhat.com header.i=@redhat.com header.b="azUKr6Be";
 	dkim-atps=neutral
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
 Received: from us-smtp-delivery-124.mimecast.com
- (us-smtp-delivery-124.mimecast.com [170.10.133.124])
- by gabe.freedesktop.org (Postfix) with ESMTPS id B562A10E0A1
- for <nouveau@lists.freedesktop.org>; Thu,  6 Mar 2025 08:17:00 +0000 (UTC)
+ (us-smtp-delivery-124.mimecast.com [170.10.129.124])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 1D04D10E027
+ for <nouveau@lists.freedesktop.org>; Thu,  6 Mar 2025 09:25:06 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1741249019;
+ s=mimecast20190719; t=1741253105;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:content-type:content-type:
  content-transfer-encoding:content-transfer-encoding:
  in-reply-to:in-reply-to:references:references;
- bh=odsRzfoyTq7MLWg0HBrmPljhEyWEbEmwPwdNT+/iYYo=;
- b=PBrmkEP/4Tz4tlDyTWxiqr11lD/l7HmZKvsNiCRdw3yZt+3zHI5vvpBN5yjBM7EqDf8zIF
- XyatIYPUq2wRbtDaNqYm+M1iZmn04tld/5MnknkPWEeXnhGFM+dceIeyb00vLBdWqNN679
- 0M7hDN199xJ3w0FiHtoJGL9yFjsyUVU=
-Received: from mail-lf1-f69.google.com (mail-lf1-f69.google.com
- [209.85.167.69]) by relay.mimecast.com with ESMTP with STARTTLS
+ bh=WM7yWeObA9CF+Z7/sodqheqkakLF4KM63V0xRYX1Nzs=;
+ b=azUKr6BekudV7SzVC6NJ0GyX87ZlDPDP8et4FdB45VdkfP0mz2SxyBJE0OVeQ2geVtC2QM
+ DO9x6So5bdqaMCuEmgGjeCGslpVRHEzt1d6fGYvWfDDm7obhEoh4+A4Q4PoWGsKVEruTym
+ 5cFUVeZhZhxAckP5Q08Rh8v5BO73wj0=
+Received: from mail-lf1-f72.google.com (mail-lf1-f72.google.com
+ [209.85.167.72]) by relay.mimecast.com with ESMTP with STARTTLS
  (version=TLSv1.3, cipher=TLS_AES_256_GCM_SHA384) id
- us-mta-652-vDSQArkaPeCRV5ASVU2__w-1; Thu, 06 Mar 2025 03:16:58 -0500
-X-MC-Unique: vDSQArkaPeCRV5ASVU2__w-1
-X-Mimecast-MFC-AGG-ID: vDSQArkaPeCRV5ASVU2__w_1741249017
-Received: by mail-lf1-f69.google.com with SMTP id
- 2adb3069b0e04-542a77b4a4cso230687e87.1
- for <nouveau@lists.freedesktop.org>; Thu, 06 Mar 2025 00:16:57 -0800 (PST)
+ us-mta-149-kZ7lONDVN5G1KUvj7PbBvA-1; Thu, 06 Mar 2025 04:25:02 -0500
+X-MC-Unique: kZ7lONDVN5G1KUvj7PbBvA-1
+X-Mimecast-MFC-AGG-ID: kZ7lONDVN5G1KUvj7PbBvA_1741253101
+Received: by mail-lf1-f72.google.com with SMTP id
+ 2adb3069b0e04-5497c18801cso172700e87.2
+ for <nouveau@lists.freedesktop.org>; Thu, 06 Mar 2025 01:25:02 -0800 (PST)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1741249016; x=1741853816;
+ d=1e100.net; s=20230601; t=1741253101; x=1741857901;
  h=content-transfer-encoding:in-reply-to:from:content-language
  :references:cc:to:subject:user-agent:mime-version:date:message-id
  :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=odsRzfoyTq7MLWg0HBrmPljhEyWEbEmwPwdNT+/iYYo=;
- b=LEC4kzaq5Tg/Q/cZYWIEVCeQ6q9RaB1GsBVz4GgOLeVunAZ87ftSa7GhoEGl0iMFyj
- n9wCtIpZEasAa/kCYINPwdnbCfDfbIiZfOvd05q9SIqNnyp980CZtfrx/U1C+U2AtYKk
- tzH4O89ZnU0bzS0ax6Th6tfkAGbGE6qWJZDL/fV8g3/9LRwBE4EITEYKSmGs2QRX8YJ1
- 27q7HbFBKrM9/3i86NVnN6EA7B9wTjhYpTzjzYdk5BM48ctGOfKcpJ4AVtjfQBZZRB4x
- jitoYwu/iv32B7iu6sYdQfE3qH/vskEpKoY458NeWDY3CRJ+gZOBO5xH3YZsdSi6vAIP
- IUyw==
+ bh=WM7yWeObA9CF+Z7/sodqheqkakLF4KM63V0xRYX1Nzs=;
+ b=mN7tz3/ZvitDBHhGWCc5H6XFfwe43p0q8vY3w01hrMLktsLN3lx9/J9ZF5158EtDLl
+ xjXJt6v0JQxK9ddqi6Kmbhs566lp2BWCb6eVMzIWvPejLraepC32oe2wG3Zks1pudXzZ
+ bdjSgm7FZjYNMl2Hok7OtneY/FKv0bzIUJljfKWVHJJvPaBJmT76PMRCF273H7KCO2s7
+ Ka/W7YxKB9bS/8f/UrO6XRuUe69ani4LXmZvmO2pqvW2GvcG0AgT6vPREqEmZCWCPo14
+ wzwlArmXlv1e4LSaXlv6+gZnHTJguNb47OP89d3gd8injBU8a3zBT0NMW82Hs+yhQtk3
+ xF6A==
 X-Forwarded-Encrypted: i=1;
- AJvYcCXhQvmAnuhB8mlXkc/7XKPY2UjOpM7B8vs6QE790vkEZEhxv0Tmh44gTz0VoxCFtIn7fz32w4Ez@lists.freedesktop.org
-X-Gm-Message-State: AOJu0Yxq6IddhOGJT/NAqsREjkpngbpnHa1MblYTfqqtv1Wf8DDCKBd+
- +T6fghbUqgm1AFdJUe/rMKalMoyJpmm0h0ARhiKbsnGJlD1Qw8ku5jayKa8qJMNNGo1f6Kvvl3k
- Hibn86A7wwEuo6ROOQdUIg9GrIBtkzgsGHZMTho712vSgj+537fDphwGvCOE4bA==
-X-Gm-Gg: ASbGncugV2d5RiZS76uTjo1g9PdGbNToLT2O/PWkKF24C1E9STPTAAGmkmDgLhC1h2R
- m8ZPQfQts8VZBn4Jh0oz/rqOZcJgPgeZ/wG9jiAUkUr6kfT7v6KA+9k19Iw9s2/AQkyK7z7zHya
- I14I9ajYpl3oI62g6lMgIbKlq/4GqR/CRyU1mwDbv7j0MeXcW+EA4zn6ywktdOzpf/AbbqMNB4X
- Wge+ncZUSus54MnVGgCNpel2h2/1xjUPHj+HMsFqDem9uAXY9tXEHUA+GIwmRV6SsdITBtlqvZO
- 8RQfgRMYQjqPZcEAUHx2nIHljEcjJ96AnxmENcGPcw==
-X-Received: by 2002:a05:6512:1322:b0:545:eef:83f1 with SMTP id
- 2adb3069b0e04-5497d337e0cmr2671538e87.17.1741249016477; 
- Thu, 06 Mar 2025 00:16:56 -0800 (PST)
-X-Google-Smtp-Source: AGHT+IEiqG6ICeY8Rgq/8C4HzQpFU5tEDdOt1pL5RtIfbip+7YLfAyoT3kW5xY2Cp2v83S4Jtg1SGQ==
-X-Received: by 2002:a05:6512:1322:b0:545:eef:83f1 with SMTP id
- 2adb3069b0e04-5497d337e0cmr2671520e87.17.1741249015951; 
- Thu, 06 Mar 2025 00:16:55 -0800 (PST)
+ AJvYcCU4uKiJC67xa9TQLVMFmk7q4PNyXe4MHRLmGCkMPv1mI/Qu2fBj8gmFHTBa6aGShyTgTr6oDwf/@lists.freedesktop.org
+X-Gm-Message-State: AOJu0YzsoaL7Xe/O1Vj8XPKq37uwZekc6RuH+G5uyXcJgPcmuo32kkbN
+ Cy0iBFaB1lcUb8JwijoxyGudHyIx08SOIiA9oKqAeOg6iJebxl07Xtq58Zk7vrFIVFkrDiv7LZb
+ 9kEdOv0FnKc+PWT5OLmBIP7FzzXStxGWLVwoqhqG2+3itjJgsfnzgyjGSmWRGCA==
+X-Gm-Gg: ASbGncvxyL4OKfaxiPsPcWe7ehMbhuXbNC9tfQgkyOMINKGiE8LoIbTeHhyp6hBnIt9
+ 0yeoUyaFBAmBiPyS0/l29Mg2v/fhAgyaYLquxx2LV9umiuwhwa/AIMhB4va/2QtY269UUSy/fY0
+ PZMJtrfeTH4kq6ysITZkhdVfjxYgxhC6fDnMdzrzovkjK6B84s18Vt8mdq2VtW25ihr0AwgIRuq
+ keDr3hanEWX094DPGkbjMXvMgaCz/b15QDyVRAnSqYpDZnvSQu0srgwhv2qCBGWXJLgazweevjK
+ VJS6X8w6EBvOMNbXUhLYroSXvIVPYIlH5BNpvO5F4A==
+X-Received: by 2002:a05:6512:6d2:b0:545:2eca:856 with SMTP id
+ 2adb3069b0e04-5497d330b21mr2679374e87.9.1741253100618; 
+ Thu, 06 Mar 2025 01:25:00 -0800 (PST)
+X-Google-Smtp-Source: AGHT+IEIwq38VGt7y79hXuVQM/A10zAVLGVX2sPPrzqn5KFw8tGh93hCxrMBcCyARSUv3U5pfE1Fzw==
+X-Received: by 2002:a05:6512:6d2:b0:545:2eca:856 with SMTP id
+ 2adb3069b0e04-5497d330b21mr2679341e87.9.1741253100141; 
+ Thu, 06 Mar 2025 01:25:00 -0800 (PST)
 Received: from [192.168.1.86] (85-23-48-6.bb.dnainternet.fi. [85.23.48.6])
  by smtp.gmail.com with ESMTPSA id
- 2adb3069b0e04-5498ae45fd6sm103034e87.47.2025.03.06.00.16.54
+ 2adb3069b0e04-5498ae5904esm118763e87.76.2025.03.06.01.24.59
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Thu, 06 Mar 2025 00:16:55 -0800 (PST)
-Message-ID: <e1c3341f-dad5-434f-984a-4a3534657233@redhat.com>
-Date: Thu, 6 Mar 2025 10:16:53 +0200
+ Thu, 06 Mar 2025 01:24:59 -0800 (PST)
+Message-ID: <3dc94555-ae24-407f-8ac3-277b911de5d9@redhat.com>
+Date: Thu, 6 Mar 2025 11:24:58 +0200
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [RFC 07/11] mm/memremap: Add folio_split support
+Subject: Re: [RFC 04/11] mm/migrate_device: THP migration of zone device pages
 To: Balbir Singh <balbirs@nvidia.com>, linux-mm@kvack.org,
  akpm@linux-foundation.org
 Cc: dri-devel@lists.freedesktop.org, nouveau@lists.freedesktop.org,
@@ -88,11 +88,11 @@ Cc: dri-devel@lists.freedesktop.org, nouveau@lists.freedesktop.org,
  Kefeng Wang <wangkefeng.wang@huawei.com>, Jane Chu <jane.chu@oracle.com>,
  Alistair Popple <apopple@nvidia.com>, Donet Tom <donettom@linux.ibm.com>
 References: <20250306044239.3874247-1-balbirs@nvidia.com>
- <20250306044239.3874247-8-balbirs@nvidia.com>
+ <20250306044239.3874247-5-balbirs@nvidia.com>
 From: =?UTF-8?Q?Mika_Penttil=C3=A4?= <mpenttil@redhat.com>
-In-Reply-To: <20250306044239.3874247-8-balbirs@nvidia.com>
+In-Reply-To: <20250306044239.3874247-5-balbirs@nvidia.com>
 X-Mimecast-Spam-Score: 0
-X-Mimecast-MFC-PROC-ID: Xj8P9uyyTmByFxf1ELiqfX65B3CWpsO0JDej9Dy_LhE_1741249017
+X-Mimecast-MFC-PROC-ID: swjrFN2q0-1GcW3hUL6UosgaiqCivjnveWOU9QOcD6w_1741253101
 X-Mimecast-Originator: redhat.com
 Content-Language: en-US
 Content-Type: text/plain; charset=UTF-8
@@ -114,143 +114,144 @@ Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 Hi,
 
 On 3/6/25 06:42, Balbir Singh wrote:
-> When a zone device page is split (via huge pmd folio split). The
-> driver callback for folio_split is invoked to let the device driver
-> know that the folio size has been split into a smaller order.
->
-> The HMM test driver has been updated to handle the split, since the
-> test driver uses backing pages, it requires a mechanism of reorganizing
-> the backing pages (backing pages are used to create a mirror device)
-> again into the right sized order pages. This is supported by exporting
-> prep_compound_page().
->
-> Signed-off-by: Balbir Singh <balbirs@nvidia.com>
-> ---
->  include/linux/memremap.h |  7 +++++++
->  include/linux/mm.h       |  1 +
->  lib/test_hmm.c           | 35 +++++++++++++++++++++++++++++++++++
->  mm/huge_memory.c         |  5 +++++
->  mm/page_alloc.c          |  1 +
->  5 files changed, 49 insertions(+)
->
-> diff --git a/include/linux/memremap.h b/include/linux/memremap.h
-> index 11d586dd8ef1..2091b754f1da 100644
-> --- a/include/linux/memremap.h
-> +++ b/include/linux/memremap.h
-> @@ -100,6 +100,13 @@ struct dev_pagemap_ops {
->  	 */
->  	int (*memory_failure)(struct dev_pagemap *pgmap, unsigned long pfn,
->  			      unsigned long nr_pages, int mf_flags);
-> +
-> +	/*
-> +	 * Used for private (un-addressable) device memory only.
-> +	 * This callback is used when a folio is split into
-> +	 * a smaller folio
-> +	 */
-> +	void (*folio_split)(struct folio *head, struct folio *tail);
->  };
->  
->  #define PGMAP_ALTMAP_VALID	(1 << 0)
-> diff --git a/include/linux/mm.h b/include/linux/mm.h
-> index 98a67488b5fe..3d0e91e0a923 100644
-> --- a/include/linux/mm.h
-> +++ b/include/linux/mm.h
-> @@ -1415,6 +1415,7 @@ static inline struct folio *virt_to_folio(const void *x)
->  void __folio_put(struct folio *folio);
->  
->  void split_page(struct page *page, unsigned int order);
-> +void prep_compound_page(struct page *page, unsigned int order);
->  void folio_copy(struct folio *dst, struct folio *src);
->  int folio_mc_copy(struct folio *dst, struct folio *src);
->  
-> diff --git a/lib/test_hmm.c b/lib/test_hmm.c
-> index a81d2f8a0426..18b6a7b061d7 100644
-> --- a/lib/test_hmm.c
-> +++ b/lib/test_hmm.c
-> @@ -1640,10 +1640,45 @@ static vm_fault_t dmirror_devmem_fault(struct vm_fault *vmf)
->  	return ret;
->  }
->  
-> +
-> +static void dmirror_devmem_folio_split(struct folio *head, struct folio *tail)
-> +{
-> +	struct page *rpage = BACKING_PAGE(folio_page(head, 0));
-> +	struct folio *new_rfolio;
-> +	struct folio *rfolio;
-> +	unsigned long offset = 0;
-> +
-> +	if (!rpage) {
-> +		folio_page(tail, 0)->zone_device_data = NULL;
-> +		return;
-> +	}
-> +
-> +	offset = folio_pfn(tail) - folio_pfn(head);
-> +	rfolio = page_folio(rpage);
-> +	new_rfolio = page_folio(folio_page(rfolio, offset));
-> +
-> +	folio_page(tail, 0)->zone_device_data = folio_page(new_rfolio, 0);
-> +
+...
 
-> +	if (folio_pfn(tail) - folio_pfn(head) == 1) {
-> +		if (folio_order(head))
-> +			prep_compound_page(folio_page(rfolio, 0),
-> +						folio_order(head));
-> +		folio_set_count(rfolio, 1);
-> +	}
-
-I think this might need at least a comment. Also, isn't the
-folio_order(head) always 0, tail and head are splitted folios and if pfn
-difference == 1?
-If the intention is to adjust the backing folio's head page to the new
-order, shouldn't there be clear_compound_head() also for backing head
-page if split to zero order?
-
-
-> +	clear_compound_head(folio_page(new_rfolio, 0));
-> +	if (folio_order(tail))
-> +		prep_compound_page(folio_page(new_rfolio, 0),
-> +						folio_order(tail));
-> +	folio_set_count(new_rfolio, 1);
-> +	folio_page(new_rfolio, 0)->mapping = folio_page(rfolio, 0)->mapping;
-> +	tail->pgmap = head->pgmap;
-> +}
-> +
->  static const struct dev_pagemap_ops dmirror_devmem_ops = {
->  	.page_free	= dmirror_devmem_free,
->  	.migrate_to_ram	= dmirror_devmem_fault,
->  	.page_free	= dmirror_devmem_free,
-> +	.folio_split	= dmirror_devmem_folio_split,
->  };
 >  
->  static int dmirror_device_init(struct dmirror_device *mdevice, int id)
-> diff --git a/mm/huge_memory.c b/mm/huge_memory.c
-> index 995ac8be5709..518a70d1b58a 100644
-> --- a/mm/huge_memory.c
-> +++ b/mm/huge_memory.c
-> @@ -3655,6 +3655,11 @@ static int __split_unmapped_folio(struct folio *folio, int new_order,
->  						MTHP_STAT_NR_ANON, 1);
->  			}
->  
-> +			if (folio_is_device_private(origin_folio) &&
-> +					origin_folio->pgmap->ops->folio_split)
-> +				origin_folio->pgmap->ops->folio_split(
-> +					origin_folio, release);
-> +
 >  			/*
->  			 * Unfreeze refcount first. Additional reference from
->  			 * page cache.
-> diff --git a/mm/page_alloc.c b/mm/page_alloc.c
-> index 17ea8fb27cbf..563f7e39aa79 100644
-> --- a/mm/page_alloc.c
-> +++ b/mm/page_alloc.c
-> @@ -573,6 +573,7 @@ void prep_compound_page(struct page *page, unsigned int order)
+>  			 * The only time there is no vma is when called from
+> @@ -728,15 +1000,47 @@ static void __migrate_device_pages(unsigned long *src_pfns,
+>  					migrate->pgmap_owner);
+>  				mmu_notifier_invalidate_range_start(&range);
+>  			}
+> -			migrate_vma_insert_page(migrate, addr, newpage,
+> +
+> +			if ((src_pfns[i] & MIGRATE_PFN_COMPOUND) &&
+> +				(!(dst_pfns[i] & MIGRATE_PFN_COMPOUND))) {
+> +				nr = HPAGE_PMD_NR;
+> +				src_pfns[i] &= ~MIGRATE_PFN_COMPOUND;
+> +				src_pfns[i] &= ~MIGRATE_PFN_MIGRATE;
+> +				goto next;
+> +			}
+> +
+> +			migrate_vma_insert_page(migrate, addr, &dst_pfns[i],
+>  						&src_pfns[i]);
+> -			continue;
+> +			goto next;
+>  		}
 >  
->  	prep_compound_head(page, order);
->  }
-> +EXPORT_SYMBOL_GPL(prep_compound_page);
+>  		newfolio = page_folio(newpage);
+>  		folio = page_folio(page);
+>  		mapping = folio_mapping(folio);
 >  
->  static inline void set_buddy_order(struct page *page, unsigned int order)
+> +		/*
+> +		 * If THP migration is enabled, check if both src and dst
+> +		 * can migrate large pages
+> +		 */
+> +		if (thp_migration_supported()) {
+> +			if ((src_pfns[i] & MIGRATE_PFN_MIGRATE) &&
+> +				(src_pfns[i] & MIGRATE_PFN_COMPOUND) &&
+> +				!(dst_pfns[i] & MIGRATE_PFN_COMPOUND)) {
+> +
+> +				if (!migrate) {
+> +					src_pfns[i] &= ~(MIGRATE_PFN_MIGRATE |
+> +							 MIGRATE_PFN_COMPOUND);
+> +					goto next;
+> +				}
+> +				src_pfns[i] &= ~MIGRATE_PFN_MIGRATE;
+
+This looks strange as is but patch 08 changes this to split and then
+migrate.
+
+
+> +			} else if ((src_pfns[i] & MIGRATE_PFN_MIGRATE) &&
+> +				(dst_pfns[i] & MIGRATE_PFN_COMPOUND) &&
+> +				!(src_pfns[i] & MIGRATE_PFN_COMPOUND)) {
+> +				src_pfns[i] &= ~MIGRATE_PFN_MIGRATE;
+
+Should there be goto next; or similar here also, we are not migrating
+this src?
+
+
+> +			}
+> +		}
+> +
+> +
+>  		if (folio_is_device_private(newfolio) ||
+>  		    folio_is_device_coherent(newfolio)) {
+>  			if (mapping) {
+> @@ -749,7 +1053,7 @@ static void __migrate_device_pages(unsigned long *src_pfns,
+>  				if (!folio_test_anon(folio) ||
+>  				    !folio_free_swap(folio)) {
+>  					src_pfns[i] &= ~MIGRATE_PFN_MIGRATE;
+> -					continue;
+> +					goto next;
+>  				}
+>  			}
+>  		} else if (folio_is_zone_device(newfolio)) {
+> @@ -757,7 +1061,7 @@ static void __migrate_device_pages(unsigned long *src_pfns,
+>  			 * Other types of ZONE_DEVICE page are not supported.
+>  			 */
+>  			src_pfns[i] &= ~MIGRATE_PFN_MIGRATE;
+> -			continue;
+> +			goto next;
+>  		}
+>  
+>  		BUG_ON(folio_test_writeback(folio));
+> @@ -769,6 +1073,8 @@ static void __migrate_device_pages(unsigned long *src_pfns,
+>  			src_pfns[i] &= ~MIGRATE_PFN_MIGRATE;
+>  		else
+>  			folio_migrate_flags(newfolio, folio);
+> +next:
+> +		i += nr;
+>  	}
+>  
+>  	if (notified)
+> @@ -899,24 +1205,40 @@ EXPORT_SYMBOL(migrate_vma_finalize);
+>  int migrate_device_range(unsigned long *src_pfns, unsigned long start,
+>  			unsigned long npages)
 >  {
+> -	unsigned long i, pfn;
+> +	unsigned long i, j, pfn;
+>  
+> -	for (pfn = start, i = 0; i < npages; pfn++, i++) {
+> -		struct folio *folio;
+> +	i = 0;
+> +	pfn = start;
+> +	while (i < npages) {
+> +		struct page *page = pfn_to_page(pfn);
+> +		struct folio *folio = page_folio(page);
+> +		unsigned int nr = 1;
+>  
+>  		folio = folio_get_nontail_page(pfn_to_page(pfn));
+>  		if (!folio) {
+>  			src_pfns[i] = 0;
+> -			continue;
+> +			goto next;
+>  		}
+>  
+>  		if (!folio_trylock(folio)) {
+>  			src_pfns[i] = 0;
+>  			folio_put(folio);
+> -			continue;
+> +			goto next;
+>  		}
+>  
+>  		src_pfns[i] = migrate_pfn(pfn) | MIGRATE_PFN_MIGRATE;
+> +		nr = folio_nr_pages(folio);
+> +		if (nr > 1) {
+> +			src_pfns[i] |= MIGRATE_PFN_COMPOUND;
+> +			for (j = 1; j < nr; j++)
+> +				src_pfns[i+j] = 0;
+> +			i += j;
+> +			pfn += j;
+> +			continue;
+> +		}
+> +next:
+> +		i++;
+> +		pfn++;
+>  	}
+>  
+>  	migrate_device_unmap(src_pfns, npages, NULL);
 
 --Mika
 
