@@ -2,58 +2,90 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id 3AB1AC87180
-	for <lists+nouveau@lfdr.de>; Tue, 25 Nov 2025 21:47:35 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id B2C0BCBAE4C
+	for <lists+nouveau@lfdr.de>; Sat, 13 Dec 2025 13:45:59 +0100 (CET)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id E39E610E472;
-	Tue, 25 Nov 2025 20:47:29 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 342C110EC01;
+	Sat, 13 Dec 2025 12:42:14 +0000 (UTC)
 Authentication-Results: gabe.freedesktop.org;
-	dkim=permerror (0-bit key) header.d=proton.me header.i=@proton.me header.b="fUeAuUK8";
+	dkim=permerror (0-bit key) header.d=gmail.com header.i=@gmail.com header.b="IN0FRkeD";
 	dkim-atps=neutral
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from mail-10631.protonmail.ch (mail-10631.protonmail.ch
- [79.135.106.31])
- by gabe.freedesktop.org (Postfix) with ESMTPS id E9E0210E896
- for <nouveau@lists.freedesktop.org>; Thu,  6 Mar 2025 01:42:45 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=proton.me;
- s=protonmail; t=1741225363; x=1741484563;
- bh=zLAhGikI9OQ7l6Nb3S58CqrDpZ/7yBEMUaeGn554uPg=;
- h=Date:To:From:Cc:Subject:Message-ID:In-Reply-To:References:
- Feedback-ID:From:To:Cc:Date:Subject:Reply-To:Feedback-ID:
- Message-ID:BIMI-Selector:List-Unsubscribe:List-Unsubscribe-Post;
- b=fUeAuUK8+bL+N03w5z8JwfxekjYrDbWfBbPfvtBjBtZY8C7ItqBN8WrRgi8dcc4xk
- zDbo8O2ngikPqLldpGRa+27xLAU4ZK5YAdJMMKYR/UHSXjLtCyYzLQMGMFqa/H6g1R
- TC5E4AHk0OJDYQ1gkEtGQ6kthn2sWkcgyy37Nhe1BAyIVDJ6Z/e8j8cxxyJhf4qYx5
- wt+TyurSZ8GgtF0RYYSzc+ko9gl1ezZenfBLM22uLy+MnvlncCZF4Ztr2wvP5HzbHG
- HF425rCpDGXo153bFkgsNrq6KOMwbUbow33DhmDH3ZVyEpQikj9qWjEXYWLTOcTlQ+
- peCoK77RTQJGg==
-Date: Thu, 06 Mar 2025 01:42:38 +0000
-To: Danilo Krummrich <dakr@kernel.org>
-From: Benno Lossin <benno.lossin@proton.me>
+Received: from mail-pl1-f176.google.com (mail-pl1-f176.google.com
+ [209.85.214.176])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 5B93110E00D;
+ Thu,  6 Mar 2025 12:56:46 +0000 (UTC)
+Received: by mail-pl1-f176.google.com with SMTP id
+ d9443c01a7336-2240b4de12bso13277105ad.2; 
+ Thu, 06 Mar 2025 04:56:46 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=gmail.com; s=20230601; t=1741265806; x=1741870606; darn=lists.freedesktop.org;
+ h=content-transfer-encoding:mime-version:references:in-reply-to:from
+ :subject:cc:to:message-id:date:from:to:cc:subject:date:message-id
+ :reply-to; bh=04e5QVlW7LFU5EHlao9T7yWPAHQynGYSDz8qPerZSOo=;
+ b=IN0FRkeDZThZ9amPWEWNEBa9yNOrDVVWEA33jpRxzuvRDEnJnNeYeqY8DeiIbS8OGm
+ Vu/uF4PhZxzSt/3qTMBnlmwlu5Is+26unj62O2n+f8wcTMLQfx1HmpSdpBL25DWvpLPk
+ qM0jWxBsKM0wPMIKEd9cFwhOGQiTR/8lO+BXsjmItGp5lvDNKVHLkksoI1wAoqtjL2aR
+ tB4ouY/rFVFKPv5fWEylA8wm3Ulu64v3PsaNTCrqusa9iHHWt/fxUJDy9qgj5zwrg9Fu
+ OfRW5vFGKgHK4qxi72e/rfwVw00MnpCjL6g0xAcEJ3JeSgJhVFSti0+QaNtPmzTQ90SS
+ CyuQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1741265806; x=1741870606;
+ h=content-transfer-encoding:mime-version:references:in-reply-to:from
+ :subject:cc:to:message-id:date:x-gm-message-state:from:to:cc:subject
+ :date:message-id:reply-to;
+ bh=04e5QVlW7LFU5EHlao9T7yWPAHQynGYSDz8qPerZSOo=;
+ b=JmOx5ks/ONZyuRTGmu9dEszWzVw8HJIGCVG1vFCcMosSzW8rFpV5PjEiMK1ToZN2Oq
+ S1VDI/WRICPYwqE4cN9ycTlX2V9XbTb6Weur4Q5spCTyCId2izA7dGkuidb4ljjttr5H
+ 3RDBuXFZSXUJUP83/MXtv5kJhf7rcsNbiYar1xpwViI8dqXT9D5LILA0IcjX79HiRodO
+ lmLN/LHoR7UMsDzau89uYyioroi4BRr0cdGi+Yc9vzLdr9NaRR/E3SkvvmshtJf2S9JF
+ l9iXj5L5eKlUo3jh1ZGCtoa08GPYsrVKKqvYIMNu2zf7V++vsCP6kxvbvHnFgmEoAYGT
+ l3Sg==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCVPxU3K53dHXtERxYhePNasNX184EV8XvCbKeauOF8z8ST86gMdD1H+6Kc+T/JlGS//GAJgLz6RlQ==@lists.freedesktop.org,
+ AJvYcCXnHVsXNoyRx9mIUnxypcyGYbOyb5dVCPfs0t+tX9LrIc8CrIaVmW+f9YUlG+yZiJ0UvM32Y+rRHK8=@lists.freedesktop.org
+X-Gm-Message-State: AOJu0YzJLbpS9ZFeahNDrR1R9HHaY/Sjm8z8xCDKj1wZSLVM2guvCOgZ
+ j6yRYmHUOAkKIezzynTXvL/6AXCVHGR0yLhb6L9lEdR85CWG+02o
+X-Gm-Gg: ASbGncuenIbV4dKZhMkjv4WG2VNX07i0XYu8+CVz67YtpYZodVFB05awu00zkrpu04O
+ BxeuS9qpvvtnt7Bs7nBCb+s+da0NLiJe3dq8VTt7AUyGxZTsf++1NWRT7+jFsGW3dmLZ7Y8RBob
+ p836hLwpipugURtLWnYxMeHWeye+jJwy7DDEmaltDPrkPAR09D7Qek7GD/cryCWbXxJVmUpL+YX
+ /FEpzmuGCDZ5rYlMxy/K0IDoJWoEV6pWh5g7dkWiynmgdLLs13BmYLI32+QCQYs3xRDZA+5+qEy
+ CwA0r5z3QwRR9wNalGiRI47NX6ImTw5goGAH3i1jVv76YLvhgNUqznfZIPP2rTNP1qXcUDDb94g
+ lzeTNkMDQmGbQq/0f+eeCPWfvFLo=
+X-Google-Smtp-Source: AGHT+IE9D2V0PlMV5ZABesh7TdWr7X7Bayt5c+xg1q0luPahNx96F8HAIiwpPIbDk09xv10uSnCpqQ==
+X-Received: by 2002:a17:902:ec8f:b0:224:1dd5:4878 with SMTP id
+ d9443c01a7336-2241dd54accmr6811955ad.7.1741265805743; 
+ Thu, 06 Mar 2025 04:56:45 -0800 (PST)
+Received: from localhost (p4204131-ipxg22701hodogaya.kanagawa.ocn.ne.jp.
+ [153.160.176.131]) by smtp.gmail.com with ESMTPSA id
+ d9443c01a7336-22410a91985sm11384815ad.194.2025.03.06.04.56.39
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Thu, 06 Mar 2025 04:56:45 -0800 (PST)
+Date: Thu, 06 Mar 2025 21:56:38 +0900 (JST)
+Message-Id: <20250306.215638.838863448505767234.fujita.tomonori@gmail.com>
+To: dakr@kernel.org
 Cc: airlied@gmail.com, simona@ffwll.ch, corbet@lwn.net,
- maarten.lankhorst@linux.intel.com, mripard@kernel.org, tzimmermann@suse.de,
- ajanulgu@redhat.com, lyude@redhat.com, pstanner@redhat.com, zhiw@nvidia.com,
- cjia@nvidia.com, jhubbard@nvidia.com, bskeggs@nvidia.com, acurrid@nvidia.com,
+ maarten.lankhorst@linux.intel.com, mripard@kernel.org,
+ tzimmermann@suse.de, ajanulgu@redhat.com, lyude@redhat.com,
+ pstanner@redhat.com, zhiw@nvidia.com, cjia@nvidia.com,
+ jhubbard@nvidia.com, bskeggs@nvidia.com, acurrid@nvidia.com,
  ojeda@kernel.org, alex.gaynor@gmail.com, boqun.feng@gmail.com,
- gary@garyguo.net, bjorn3_gh@protonmail.com, a.hindborg@kernel.org,
- aliceryhl@google.com, tmgross@umich.edu, gregkh@linuxfoundation.org,
- mcgrof@kernel.org, russ.weight@linux.dev, dri-devel@lists.freedesktop.org,
- linux-doc@vger.kernel.org, linux-kernel@vger.kernel.org,
- nouveau@lists.freedesktop.org, rust-for-linux@vger.kernel.org
-Subject: Re: [PATCH v5 3/5] rust: firmware: add `module_firmware!` macro
-Message-ID: <D88SVF4SV464.1WALI436PKCDB@proton.me>
-In-Reply-To: <Z8j8gwvnmKF9ZymM@pollux>
+ gary@garyguo.net, bjorn3_gh@protonmail.com, benno.lossin@proton.me,
+ a.hindborg@kernel.org, aliceryhl@google.com, tmgross@umich.edu,
+ gregkh@linuxfoundation.org, mcgrof@kernel.org, russ.weight@linux.dev,
+ dri-devel@lists.freedesktop.org, linux-doc@vger.kernel.org,
+ linux-kernel@vger.kernel.org, nouveau@lists.freedesktop.org,
+ rust-for-linux@vger.kernel.org
+Subject: Re: [PATCH v5 5/5] gpu: nova-core: add initial documentation
+From: FUJITA Tomonori <fujita.tomonori@gmail.com>
+In-Reply-To: <20250304173555.2496-6-dakr@kernel.org>
 References: <20250304173555.2496-1-dakr@kernel.org>
- <20250304173555.2496-4-dakr@kernel.org>
- <D88RCQTNVD7B.3RIN253F8LODY@proton.me> <Z8j0otfkVtnMXIRQ@pollux>
- <D88SJOTH9GN4.3OVO4JFYAF9R2@proton.me> <Z8j8gwvnmKF9ZymM@pollux>
-Feedback-ID: 71780778:user:proton
-X-Pm-Message-ID: 4858ce176deb9419af4eaf1a034e80329ae63e6f
-MIME-Version: 1.0
-Content-Type: text/plain; charset=utf-8
-Content-Transfer-Encoding: quoted-printable
-X-Mailman-Approved-At: Tue, 25 Nov 2025 20:47:19 +0000
+ <20250304173555.2496-6-dakr@kernel.org>
+Mime-Version: 1.0
+Content-Type: Text/Plain; charset=us-ascii
+Content-Transfer-Encoding: 7bit
+X-Mailman-Approved-At: Sat, 13 Dec 2025 12:40:52 +0000
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -68,136 +100,21 @@ List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-On Thu Mar 6, 2025 at 2:38 AM CET, Danilo Krummrich wrote:
-> On Thu, Mar 06, 2025 at 01:27:19AM +0000, Benno Lossin wrote:
->> On Thu Mar 6, 2025 at 2:04 AM CET, Danilo Krummrich wrote:
->> > On Thu, Mar 06, 2025 at 12:31:14AM +0000, Benno Lossin wrote:
->> >> On Tue Mar 4, 2025 at 6:34 PM CET, Danilo Krummrich wrote:
->> >>
->> >> > +#[macro_export]
->> >> > +macro_rules! module_firmware {
->> >> > +    ($($builder:tt)*) =3D> {
->> >>
->> >> This should probably be `$builder:expr` instead.
->> >
->> > That doesn't work, the compiler then complains, since it's not an expr=
-ession:
->> >
->> > 193  |         static __MODULE_FIRMWARE: [u8; $builder::create(__modul=
-e_name()).build_length()] =3D
->> >      |                                                ^^ expected one =
-of `.`, `?`, `]`, or an operator
->>
->> Does `<$builder>::create` work (with the `expr` fragment)?
->
-> No, the compiler then explicitly complains that it expects a type.
+On Tue,  4 Mar 2025 18:34:52 +0100
+Danilo Krummrich <dakr@kernel.org> wrote:
 
-Aw well, can't have em all... Probably would be useful if you add a
-comment saying that `expr` and `ty` can't be used.
+> +Delay / Sleep abstractions
+> +--------------------------
+> +
+> +Rust abstractions for the kernel's delay() and sleep() functions.
+> +
+> +There is some ongoing work from FUJITA Tomonori [1], which has not seen any updates
+> +since Oct. 24.
+> +
+> +| Complexity: Beginner
+> +| Link: https://lore.kernel.org/netdev/20241001112512.4861-2-fujita.tomonori@gmail.com/ [1]
 
->> > `ty` doesn't work either, since then the compiler expects the caller t=
-o add the
->> > const generic, which we want the macro to figure out instead.
->> >
->> >>
->> >> > +
->> >> > +        #[cfg(not(MODULE))]
->> >> > +        const fn __module_name() -> &'static kernel::str::CStr {
->> >> > +            <LocalModule as kernel::ModuleMetadata>::NAME
->> >>
->> >> Please either use `::kernel::` or `$crate::` instead of `kernel::`.
->> >
->> > Good catch, thanks.
->> >
->> >>
->> >> Hmm, I am not 100% comfortable with the `LocalModule` way of accessin=
-g
->> >> the current module for some reason, no idea if there is a rational
->> >> argument behind that, but it just doesn't sit right with me.
->> >>
->> >> Essentially you're doing this for convenience, right? So you don't wa=
-nt
->> >> to have to repeat the name of the module type every time?
->> >
->> > No, it's really that I can't know the type name here, please see the p=
-revious
->> > patch commit message that introduces `LocalModule` for explanation.
->>
->> Gotcha.
->>
->> >> > +        }
->> >> > +
->> >> > +        #[cfg(MODULE)]
->> >> > +        const fn __module_name() -> &'static kernel::str::CStr {
->> >> > +            kernel::c_str!("")
->> >>
->> >> Ditto.
->> >>
->> >> > +        }
->> >>
->> >> Are these two functions used outside of the `static` below? If no, th=
-en
->> >> you can just move them into the static? You can also probably use a
->> >> `const` instead of a function, that way you only have 4 lines instead
->> >> of 8.
->> >
->> > Is this what you're proposing?
->> >
->> > =09#[macro_export]
->> > =09macro_rules! module_firmware {
->> > =09    ($($builder:tt)*) =3D> {
->> > =09        const __MODULE_FIRMWARE_PREFIX: &'static $crate::str::CStr =
-=3D if cfg!(MODULE) {
->> > =09            $crate::c_str!("")
->> > =09        } else {
->> > =09            <LocalModule as $crate::ModuleMetadata>::NAME
->> > =09        };
->> >
->> > =09        #[link_section =3D ".modinfo"]
->> > =09        #[used]
->> > =09        static __MODULE_FIRMWARE: [u8; $($builder)*::create(__MODUL=
-E_FIRMWARE_PREFIX)
->> > =09            .build_length()] =3D $($builder)*::create(__MODULE_FIRM=
-WARE_PREFIX).build();
->>
->> I meant to also move the `const` into the expression, but I guess that
->> leads to duplication:
->>
->>     #[link_section =3D ".modinfo"]
->>     #[used]
->>     static __MODULE_FIRMWARE: [u8; {
->>         const PREFIX: &'static $crate::str::CStr =3D if cfg!(MODULE) {
->>             $crate::c_str!("")
->>         } else {
->>             <LocalModule as $crate::ModuleMetadata>::NAME
->>         };
->>         <$builder>::create(PREFIX).build_length()
->>     }] =3D {
->>         const PREFIX: &'static $crate::str::CStr =3D if cfg!(MODULE) {
->>             $crate::c_str!("")
->>         } else {
->>             <LocalModule as $crate::ModuleMetadata>::NAME
->>         };
->>         <$builder>::create(PREFIX)
->>     };
->>
->> But then the advantage is that only the `__MODULE_FIRMWARE` static will
->> be in-scope.
->>
->> Do you think that its useful to have the static be accessible? I.e. do
->> users need to access it (I would think they don't)? If they don't, then
->> we could put all of those things into a `const _: () =3D { /* ... */ };`=
-.
->> But then people can invoke `module_firmware!` multiple times in the same
->> module, is that a problem?
->
-> Didn't know that's possible (const _; () =3D { ... };). That's pretty nic=
-e, I will
-> go with my above proposal wrapped into the anonymous const. Thanks.
+I posted v11 last month.
 
-Sounds good.
-
----
-Cheers,
-Benno
+https://lore.kernel.org/netdev/20250220070611.214262-1-fujita.tomonori@gmail.com/
 
