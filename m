@@ -2,62 +2,159 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id A6C40A5401C
-	for <lists+nouveau@lfdr.de>; Thu,  6 Mar 2025 02:48:33 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 756B4A541BC
+	for <lists+nouveau@lfdr.de>; Thu,  6 Mar 2025 05:43:50 +0100 (CET)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 7645810E892;
-	Thu,  6 Mar 2025 01:48:31 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 75EE010E121;
+	Thu,  6 Mar 2025 04:43:44 +0000 (UTC)
 Authentication-Results: gabe.freedesktop.org;
-	dkim=pass (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="qh0nO1oD";
+	dkim=pass (2048-bit key; unprotected) header.d=Nvidia.com header.i=@Nvidia.com header.b="M/+XCAh0";
 	dkim-atps=neutral
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from nyc.source.kernel.org (nyc.source.kernel.org [147.75.193.91])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 5AFC710E892;
- Thu,  6 Mar 2025 01:48:30 +0000 (UTC)
-Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by nyc.source.kernel.org (Postfix) with ESMTP id C92FBA46125;
- Thu,  6 Mar 2025 01:42:58 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 5E8AFC4CED1;
- Thu,  6 Mar 2025 01:48:23 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1741225709;
- bh=INgt2WVKj31q2syCqzCQ45mlr1DmXGyw6zo0gKcdDWA=;
- h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
- b=qh0nO1oDVAS7f/23vg/R5TTIoi6cfB+GEegxzD1CZzxD/GuXZXCakJzh+o8yNEfPm
- sfwHZKGrAn3cL2Y0QoGdctOCObO1pDbOhNjULdWibyIqrVjnyFLWQk1NddrmsbVrSu
- dy0lMY8p9kwSxpKPg7TyM+Fu6JwNgo8JdA5O/a7/5KA3iepQoeX1FOaAg3IrIY9n5Y
- 4IggFkLqbgwlDZVlIsgHm1ConOkBB7GJdRRATzAKTdbiRYdl09UqRxmC4Qf3F0DdqQ
- kcymirmw96/XP+xNmj7PQUpXvoW+tLl4VB6YphBQDfkik8JTot43mgODavoTMzrtg5
- aKqiKiyyd0Zsg==
-Date: Thu, 6 Mar 2025 02:48:20 +0100
-From: Danilo Krummrich <dakr@kernel.org>
-To: Benno Lossin <benno.lossin@proton.me>
-Cc: airlied@gmail.com, simona@ffwll.ch, corbet@lwn.net,
- maarten.lankhorst@linux.intel.com, mripard@kernel.org,
- tzimmermann@suse.de, ajanulgu@redhat.com, lyude@redhat.com,
- pstanner@redhat.com, zhiw@nvidia.com, cjia@nvidia.com,
- jhubbard@nvidia.com, bskeggs@nvidia.com, acurrid@nvidia.com,
- ojeda@kernel.org, alex.gaynor@gmail.com, boqun.feng@gmail.com,
- gary@garyguo.net, bjorn3_gh@protonmail.com, a.hindborg@kernel.org,
- aliceryhl@google.com, tmgross@umich.edu, gregkh@linuxfoundation.org,
- mcgrof@kernel.org, russ.weight@linux.dev,
- dri-devel@lists.freedesktop.org, linux-doc@vger.kernel.org,
- linux-kernel@vger.kernel.org, nouveau@lists.freedesktop.org,
- rust-for-linux@vger.kernel.org
-Subject: Re: [PATCH v5 2/5] rust: firmware: introduce
- `firmware::ModInfoBuilder`
-Message-ID: <Z8j-5HDl3loFNXSn@pollux>
-References: <20250304173555.2496-1-dakr@kernel.org>
- <20250304173555.2496-3-dakr@kernel.org>
- <D88OSC9XJXZL.C5HXWFYCG9U6@proton.me> <Z8jSV5CpZDcXrviY@pollux>
- <D88Q7503C8FF.2TMMBSEMOGKU1@proton.me> <Z8jk3qs6nCIJz-39@pollux>
- <D88R7HI1Z6GG.ZOQ9A1VQOR28@proton.me> <Z8j6ckpD6JVY4m-p@pollux>
- <D88SQ87X0OHX.1ZD8LM8LKUQ8J@proton.me>
+Received: from NAM12-DM6-obe.outbound.protection.outlook.com
+ (mail-dm6nam12on2060.outbound.protection.outlook.com [40.107.243.60])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 4EED510E100;
+ Thu,  6 Mar 2025 04:43:39 +0000 (UTC)
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=lRU8MEYKsrAhkzRWRgnvqXl8yiCHVxVODx0vI6GlqRRUP5hEIG6GJU/48jXSfE31AhO1m3TrTmS0MFH/gFbklina8+fPd8FkZifpFN/AYji1Sa4dJtn1/DIe5T5X25+5XhG3AJ+UCXw1FPjC1TkRbtzEnze6Q/zqO4VFLAwRAAH6XeaU+OKhuJGpao18CNtmlcQ8qdNBXKl5HOsnGJtfBBL/GTzHLgnzKqUN66cKSAhBIuMUZSDVLBH5AZ0WDutkbeehjxOq0KCZTR4BsSc0avcXanvQjBqRvocQVaue+qOgyupKAjkqB9CXIXiBFnt5I5PHEmHWoVYelNam3ha5pw==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=LEiN1R594GiUTbIEP1lF9AXj6UN5pBWNtHkFzo5QNmQ=;
+ b=VSMUWUspZzbXCV8TDysABk2ZVI6S/tw9qPVZ7QoIIqIls1XLlkzT3sVW6zBEcvTzcysi4JLbwmedHsCddoPMGDp/5Vf2TSJKnYVkt+z2O2cRRby+50dteEY/MiJQK6G935lgnLszU9nXfIJj7zHvWyEIEE/0NyiyBXkjOPM32uU64NU5SdoXKvc88f5Vjxy3/6okXY9YLy0f9MV8ZryanjLyR5e9SWPebSsCZkeXMUPkVbSkCtxCAyAyn8UVig2mNQ8gmMKWFLc/We5ssvv6DX/nfo8gsjuxdQhr3Mn8bjiXPDC7/95gVI4mjh/mTPkst1AZv5Tq0GNBZH/vh6Kk7Q==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=nvidia.com; dmarc=pass action=none header.from=nvidia.com;
+ dkim=pass header.d=nvidia.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=Nvidia.com;
+ s=selector2;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=LEiN1R594GiUTbIEP1lF9AXj6UN5pBWNtHkFzo5QNmQ=;
+ b=M/+XCAh0PGqlwnjDWpxhcj0Kf/vP0bvfr5233KJ9Y+BoowMne/V2ooR/EilcJmC+XyessbC+0G2zqIfQCP/d3qJKZhi41MMDtNXBvjZ1jqUC7RoBmmh8Rt4L9Jqg8fjWEBUUuUpcDlS4RLsjecR0vHnkXivVPpxKqu31y00DPtwfG8N/s3AgvdAPMIzimN9vwG0qL7wrSbuwOSOxE5j14f9qgzhnnQVOsf4G2mWdjEJ1zaa57x7W1FAaAztfWZK4BbwBVSX7PFFGENBzib39Xw+FrgqX9pe5UUu4/1LTk+y3P6ScTdsbUtYgGgRMACte3gvuALKMMAWJax/evnYCkw==
+Authentication-Results: dkim=none (message not signed)
+ header.d=none;dmarc=none action=none header.from=nvidia.com;
+Received: from SA1PR12MB7272.namprd12.prod.outlook.com (2603:10b6:806:2b6::7)
+ by DS0PR12MB7534.namprd12.prod.outlook.com (2603:10b6:8:139::6) with
+ Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.8489.25; Thu, 6 Mar
+ 2025 04:43:33 +0000
+Received: from SA1PR12MB7272.namprd12.prod.outlook.com
+ ([fe80::a970:b87e:819a:1868]) by SA1PR12MB7272.namprd12.prod.outlook.com
+ ([fe80::a970:b87e:819a:1868%7]) with mapi id 15.20.8489.028; Thu, 6 Mar 2025
+ 04:43:33 +0000
+From: Balbir Singh <balbirs@nvidia.com>
+To: linux-mm@kvack.org,
+	akpm@linux-foundation.org
+Cc: dri-devel@lists.freedesktop.org, nouveau@lists.freedesktop.org,
+ Balbir Singh <balbirs@nvidia.com>, Karol Herbst <kherbst@redhat.com>,
+ Lyude Paul <lyude@redhat.com>, Danilo Krummrich <dakr@kernel.org>,
+ David Airlie <airlied@gmail.com>, Simona Vetter <simona@ffwll.ch>,
+ =?UTF-8?q?J=C3=A9r=C3=B4me=20Glisse?= <jglisse@redhat.com>,
+ Shuah Khan <shuah@kernel.org>, David Hildenbrand <david@redhat.com>,
+ Barry Song <baohua@kernel.org>,
+ Baolin Wang <baolin.wang@linux.alibaba.com>,
+ Ryan Roberts <ryan.roberts@arm.com>, Matthew Wilcox <willy@infradead.org>,
+ Peter Xu <peterx@redhat.com>, Zi Yan <ziy@nvidia.com>,
+ Kefeng Wang <wangkefeng.wang@huawei.com>, Jane Chu <jane.chu@oracle.com>,
+ Alistair Popple <apopple@nvidia.com>, Donet Tom <donettom@linux.ibm.com>
+Subject: [RFC 00/11] THP support for zone device pages
+Date: Thu,  6 Mar 2025 15:42:28 +1100
+Message-ID: <20250306044239.3874247-1-balbirs@nvidia.com>
+X-Mailer: git-send-email 2.48.1
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+X-ClientProxiedBy: SJ0PR13CA0036.namprd13.prod.outlook.com
+ (2603:10b6:a03:2c2::11) To SA1PR12MB7272.namprd12.prod.outlook.com
+ (2603:10b6:806:2b6::7)
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <D88SQ87X0OHX.1ZD8LM8LKUQ8J@proton.me>
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: SA1PR12MB7272:EE_|DS0PR12MB7534:EE_
+X-MS-Office365-Filtering-Correlation-Id: 350507ea-c07f-4250-295f-08dd5c69730b
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: BCL:0;ARA:13230040|7416014|376014|366016|1800799024;
+X-Microsoft-Antispam-Message-Info: =?utf-8?B?L0RWL0JGemY1cGE1MWp0cWxwMDFaNHpLTU94Q2VPcGI5RXNuSENyRDVUMTVF?=
+ =?utf-8?B?bGt6S3duR01aVU5yaDNrckdSRWF5NWJsWXFVdzFOYjJDVERucHRzSzVSQnVU?=
+ =?utf-8?B?aU9PcW5hZHl1a3J6RlR3ZWNkZStGT0w4Q00wYnU5UjlMeEsyamZzV0g3NXpD?=
+ =?utf-8?B?cERURXdtQVFkTllmSjB2WkdvZHpIenlEZ2t0TUIwY2k4bVp4RWhVd3NFRWVn?=
+ =?utf-8?B?VFZJTkF3Z2EwWTJWYW4yK0ZDR3RIMldFZThEdFBpVWtyUDJzQXV4enlXbzdq?=
+ =?utf-8?B?U3hUODJDbHVHUVR3emVUWWs3cnM1amtmRzNURHFHS1RSUGdZUlVYRVJJQzBq?=
+ =?utf-8?B?TVpUOXEzY05wZ2JmTkpJNkVOSkFPQ240cHZWeFYreWYybWMyM205MkVJbWMw?=
+ =?utf-8?B?STV4OGpLOGg2eDdqUlNEUGgyclZGRmE4by9JdWx1OWVyR1hQTi9SZ21aMlVN?=
+ =?utf-8?B?aGw3WlVpS1dmcVBzbkY0R3dRWThWUW5nWkJSUC85dFVMdG14Tk1pRFduMjVE?=
+ =?utf-8?B?M1dFUW53dTNDRlFuNUNTNVYrUTF2TmhST0tiQkFjUXdLOGRvRlgyYzc3cm90?=
+ =?utf-8?B?NTRVZ2tFdnJuQXRMMEFOODdhYXVVRjVkbldzRE1Cb2tmalhZQnUreXBIQ1Rz?=
+ =?utf-8?B?ajhkTGdHUXdUd3dxRnNlV1hmempiNWc2YWZ5SUJ3NWFJM2RXRmZ5ZGdKSGMv?=
+ =?utf-8?B?T2JkcThuTGpiaWdDMGw5elR1d1RYU3NzS1ZRQkRRM25PblJUQzBLSkZGRXBC?=
+ =?utf-8?B?bzAvMll6M2JrSU82Z29HZVZwK3pWUWQybTlwN0MzdlBGYU5wMExsSDRPbjFW?=
+ =?utf-8?B?dTNGUXEzRXdUUmp4bkdvaHp0bk0wb1hZcVN6RnZna2dQeDdwclcvNTdaSWJB?=
+ =?utf-8?B?cUxyeDBqZi9hZGEvUFF5WG4ydkZyNUF5TzJmd3Y4NGFTZHpwelg5YlAvZmk4?=
+ =?utf-8?B?bFU3TkU5NnduVWhsSUY1b2Q5a0dNei81cjBKcWpOeWIxOVowN1FzcHgwQ1c4?=
+ =?utf-8?B?RGlxZTZHcllJNzFkNXZqamNQeWJVQ0pVNVZseUpheDROdHQ3SDlEWDBKZTho?=
+ =?utf-8?B?c1huYkI5V25uZVVweHNVcktrVG1pY0ltaXJhUDVldWo5Vm43SjA5dEJ5TUdW?=
+ =?utf-8?B?OUxVdjJYMUxySzNLUjhyV21yTjNBZzFFN3pwZmM1aHJvdjI3N1h5K3FSa1VX?=
+ =?utf-8?B?Lys5dUpmZk1EUStyQVFzbFBaZ0hSd0U0R2xBTVF1YmQvc1p6SHJSdWFCdHh5?=
+ =?utf-8?B?dGRQdzdGLzlCUytOcDdvV3VveTc3MWJwTXJ0cWFaUVluaXVqOEtCVUhSeUJK?=
+ =?utf-8?B?THkwOTk3VXdkYzM2MXAwV3FOemFORThuemhvaHRGTnNZa1lnVUpSRHNhMWVz?=
+ =?utf-8?B?RlNLbmFuNE5mUlhBVFd0L3doeG9vLzRaemY2TDNWQlJuck4wNGFybkVFU0sw?=
+ =?utf-8?B?Z0FERVRFNE13WTZNaVUyNmEwUVRNWk9xMG9zN0orMDQvWUwxTUpPc2NPbnEy?=
+ =?utf-8?B?dFJ1WTFxeFROTlpydk03ZElCTmpFVWlVblVEYWxQU3NFS1AxM2lNY3FhWVQz?=
+ =?utf-8?B?MW1IL2xsRUIyUGFiTndWbS9hRmJMejdhVFN1b1BkOXU1MitpSUZ1Yk1keHB1?=
+ =?utf-8?B?TzlheWNYYUEzaUhscGpPNUoyVDFyT20yQUdmQWttSVY0eW92SGJsVmUwc0VJ?=
+ =?utf-8?B?WWxtZEtMcE5oWmhzRjZZY0IwWHJGeDV2RVptQ214aE5sZHNwbDRzMnhhRTZF?=
+ =?utf-8?B?UWhVN1A2NWRsQ1Y4L2N0VEdGMm1WZ1RnSmwvRmpjMVdEM1Z2dDFxWUVPR2ww?=
+ =?utf-8?B?WHBhcWFpSzhBMTlrRUxoQm80ZnI5MG9JTThZS2Z2ZEY4di96STZhV016eDJF?=
+ =?utf-8?Q?EWJozqRtCUywC?=
+X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
+ IPV:NLI; SFV:NSPM; H:SA1PR12MB7272.namprd12.prod.outlook.com; PTR:; CAT:NONE;
+ SFS:(13230040)(7416014)(376014)(366016)(1800799024); DIR:OUT; SFP:1101; 
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?NkExU3dnbWRRWm4wRllqSTg3eC9taFJ2VG1ZRUJ2WEFSRnVTQ3hJLyt1WXdl?=
+ =?utf-8?B?UFA1TFR5eWM2S2dMdUI5MUZPK1ROMFlMYTF0L2VNZzdVWG9salQwN2JzTXgw?=
+ =?utf-8?B?OEIzbXVHTDdDY1lzRS96L2ZHTUtUK1VNR2p3WDRycjlOKzU5NERPZlNPYmw5?=
+ =?utf-8?B?Vm5XT2p4NVd1YUZLU1EzVGZIY1o1eEp5Sm5mV1FtNWtOeVFZWlhjUjRsdnpY?=
+ =?utf-8?B?WXVFcEZTT2F3MFlML3plK0FaRGZZOTkxdTI5Zi9LbjhuQXhXRm1kajI2RE1R?=
+ =?utf-8?B?K2VWRUZkOFVOcmJUcy9HajcyUkxBb2liY2ltNm5DUWIrRkN6eXNBVTFlekpz?=
+ =?utf-8?B?d1d6WGQ2cGtwVTlKWVlLR0FZRlVIaXpQdEh5bWNHMHBraTRVNkdLemh6Tkd5?=
+ =?utf-8?B?WmVHOU1sMUtvOEJtaE5vbmh4Mk1TSzN5ZGJ0QmRJSGNncUduQktuTnVSZkF0?=
+ =?utf-8?B?dzV3dlpZYXJEMDMxY1JmN25IYmhjY0hXKzV0Mm5OU1RQS3RSblpaNmpVTllM?=
+ =?utf-8?B?WGs2bDdWYUZIbDB1YWlZVDUxL09RNitIUlhKeEpJRHJCdXUrZ3FTRVIzTlRz?=
+ =?utf-8?B?L0YwZ1BWUUUrNHQwQS9td2FkOFRoRmU4ZlN6RlRhTWxzSThURUZNbU80WmlZ?=
+ =?utf-8?B?RmRmWWU2VVA3RndTSXV1N3FHMEMxR3p5OS9mVjI4NHQ4dnVSWXNET1FDclNQ?=
+ =?utf-8?B?cHNyKzJCaHNKR2tWdWlIa3hHejk2NUJSakxFTm1qZ2NSZzhrbVlFVnU0MTcy?=
+ =?utf-8?B?Zk9KUU50b1dZWkZzVFJ1WGRUOTg4NWE3amdsTmhja0dRRzAwUzJqOW5oWkNU?=
+ =?utf-8?B?cEVabnFBd0tJL1ZyZXBsUnZPM01RWng4NlNSUUFGZUdrM3FabUYwekZjL1JN?=
+ =?utf-8?B?VlV6cks0bDIzbmMzNTYrcDBSYklZbWxpUjJDcFJkaEg0OWJIM0hjQ2REZkg3?=
+ =?utf-8?B?eUZvTDIzY0JZNWF3V1V0d212Ykg3RXlEMUNKbjZJNGNLeEcybkJmY2FiWFJG?=
+ =?utf-8?B?YWpQRE1ZUFFvVUs2TTgrVzVJWVRyR3EwOHhlek80L0J4Z3hBMktPTmZkT3RM?=
+ =?utf-8?B?ZUlhTUtSejZicHNqMHF2cWRmcG1IM1ZsQjJhNitzQlRJYWRpQ2hlVjZkcHQ3?=
+ =?utf-8?B?dmtzMllEZ2JxTFhhb0dnaVM1ZGZBTEJ6cDNQN20wT3dPc3daTWFMbEwrcDRO?=
+ =?utf-8?B?bWxTUXU0TEZPZlJ4bnFMZExxQklpZmdQT3VlOVYxckFSaEh3YkJjT2F5bjU2?=
+ =?utf-8?B?UlB3NGsxRmdEMjhrKzdsb3VXRnZuVWtvZjRsZ1d5Unp3TFgxNVNpeVlLQmR2?=
+ =?utf-8?B?a3MrRy9aWi9TR1NqVmY3Rk1nVitranVQTDJIenVwblBrUnYvNkxtRFk4UEhZ?=
+ =?utf-8?B?bWJBRWUwUk1GeEZ0WndVRVZXS0VPcVJXN0d2bWExS3YrdFFWcUxZV011dHFp?=
+ =?utf-8?B?dXRJdmd2a0FUZmRRQ3dZMEI2MWFlUk9Ha0FQcWxmQnRvVXlMYWc5ay9pUkxO?=
+ =?utf-8?B?ejZCWk1YdEYrU0FvdWQ0YjlWTUR2SlQ4S3UwMkNmZ0VCTXRncW5jNnlFc0d3?=
+ =?utf-8?B?clh3OHVyOWtNZlgzY2FEbTA3aE80K2RrUnd3MDVPS1N5R29ycmhoUGtRL1VK?=
+ =?utf-8?B?ZDdKcFdDdGQ2UVNOd0JZR1lZb2V4Ym9qaDRyQXY2bXVmWDNvamlqWGlDYzZr?=
+ =?utf-8?B?aDZvVER3ZVBKTmwzc05GUU1QTXc4eUhRTlZIcm1iVytMWlN0UUg0QUVOcmxH?=
+ =?utf-8?B?ZHdVS20vaVQ1S0Rna1Vwc2R0RUlLekxpNTcwc3hKdWJGTWFGdUttSGl2QkVk?=
+ =?utf-8?B?YXY1ZmVNTUtScXpkZUdjRHc2dTA1NVB4MFRvVFRLOUVkYlYzMSsrNU5QTDVV?=
+ =?utf-8?B?RUIrUnExQy94ZmtZUHg4VjUybXZoZGo3LzVSMW5idmxNWTMvOHhTUS9tNzRO?=
+ =?utf-8?B?R200N1Era2dsUmtsMFV3aXBGZys3SzQyVkErQXFldDFHckhFTEcyNGJBT3hr?=
+ =?utf-8?B?TE5NaXBZa3cxQWhZSkRBQ3pIMStWR0QrT05IcHRSdFJBOUVCNkJrcS9BTEFW?=
+ =?utf-8?B?VnBrZVJXQk5HbURrQmx3UGsyWmVtZmIzVThEYXJISnlXeUlqMmFFeGtOZU81?=
+ =?utf-8?Q?UBBj3cmky6tE8LhnoPp6uctxF?=
+X-OriginatorOrg: Nvidia.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: 350507ea-c07f-4250-295f-08dd5c69730b
+X-MS-Exchange-CrossTenant-AuthSource: SA1PR12MB7272.namprd12.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 06 Mar 2025 04:43:33.0280 (UTC)
+X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
+X-MS-Exchange-CrossTenant-Id: 43083d15-7273-40c1-b7db-39efd9ccc17a
+X-MS-Exchange-CrossTenant-MailboxType: HOSTED
+X-MS-Exchange-CrossTenant-UserPrincipalName: oOfSvAdR96V8IjKzYbMA5Hc2f3ZRcqO4qQb1JuyfkJWF/aqi1wKM9RKNdtNHNPtHz/BP+mRkL3TikYU0HiPTJA==
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: DS0PR12MB7534
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -72,105 +169,100 @@ List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-On Thu, Mar 06, 2025 at 01:35:52AM +0000, Benno Lossin wrote:
-> On Thu Mar 6, 2025 at 2:29 AM CET, Danilo Krummrich wrote:
-> > On Thu, Mar 06, 2025 at 12:24:21AM +0000, Benno Lossin wrote:
-> >> On Thu Mar 6, 2025 at 12:57 AM CET, Danilo Krummrich wrote:
-> >> > On Wed, Mar 05, 2025 at 11:36:54PM +0000, Benno Lossin wrote:
-> >> >> On Wed Mar 5, 2025 at 11:38 PM CET, Danilo Krummrich wrote:
-> >> >> > On Wed, Mar 05, 2025 at 10:30:31PM +0000, Benno Lossin wrote:
-> >> >> >> On Tue Mar 4, 2025 at 6:34 PM CET, Danilo Krummrich wrote:
-> >> >> >> > +    /// Push an additional path component.
-> >> >> >> > +    ///
-> >> >> >> > +    /// After a new [`ModInfoBuilder`] instance has been created, [`ModInfoBuilder::prepare`] must
-> >> >> >> > +    /// be called before adding path components.
-> >> >> >> > +    pub const fn push(self, s: &str) -> Self {
-> >> >> >> > +        if N != 0 && self.n == 0 {
-> >> >> >> > +            crate::build_error!("Must call prepare() before push().");
-> >> >> >>
-> >> >> >> This will only prevent the first `prepare` call being missed, right?
-> >> >> >
-> >> >> > Correct, unfortunately there's no way to detect subsequent ones.
-> >> >>
-> >> >> Does it make sense to do that one in the constructor?
-> >> >>
-> >> >> (After looking at the example below) Ah maybe you can't do that, since
-> >> >> then you would have two `prepare()` calls for the example below...?
-> >> >
-> >> > Exactly.
-> >> >
-> >> >> >> If you always have to call this before `push`, why not inline it there?
-> >> >> >
-> >> >> > You can push() multiple times to compose the firmware path string (which is the
-> >> >> > whole purpose :).
-> >> >>
-> >> >> Ah I see, I only looked at the example you have in the next patch. All
-> >> >> in all, I think this patch could use some better documentation, since I
-> >> >> had to read a lot of the code to understand what everything is supposed
-> >> >> to do...
-> >> >
-> >> > I can expand the example in module_firmware! to make things a bit more obvious.
-> >> >
-> >> > Otherwise, what information do you think is missing?
-> >>
-> >> Abstractly: what `ModInfoBuilder` *does*, concretely:
-> >> - why the generic constant `N` exists,
-> >
-> > It doesn't really matter to the user, since the user never needs to supply it.
-> > That happens in the module_firmware! macro.
-> >
-> > I agree it not good to not mention anything about it at all, but I wouldn't want
-> > to bother the user with all implemention details.
-> >
-> > We can probably just mention that it's used internally and is supplied by
-> > module_firmware!. (That module_firmware! does that by doing a dry run of the
-> > builder itself, isn't necessary to know for the user I think.)
-> >
-> >> - what `prepare()` does,
-> >
-> > Same here, it's an implementation detail not relevant to the user. All the user
-> > needs to know is that prepare() acts as a separator to be able to supply the
-> > next firmware path.
-> 
-> How about calling it `new_path`/`new_entry` or similar?
+This patch series adds support for THP migration of zone device pages.
+To do so, the patches implement support for folio zone device pages
+by adding support for setting up larger order pages.
 
-Sure, new_entry() sounds good!
+These patches build on the earlier posts by Ralph Campbell [1]
 
-> 
-> >> - what happens with the `module_name` parameter of `new`
-> >
-> > Should probably just mention it's supplied by module_firmware! and used
-> > internally.
-> 
-> IIUC, that's not the case, the `module_firmware!` macro will call the
-> `create` function with the name and you're supposed to just pass it onto
-> the builder.
+Two new flags are added in vma_migration to select and mark compound pages.
+migrate_vma_setup(), migrate_vma_pages() and migrate_vma_finalize()
+support migration of these pages when MIGRATE_VMA_SELECT_COMPOUND
+is passed in as arguments.
 
-Yes, but this part is documented by module_firmware!, which I think is the
-correct place.
+The series also adds zone device awareness to (m)THP pages along
+with fault handling of large zone device private pages. page vma walk
+and the rmap code is also zone device aware. Support has also been
+added for folios that might need to be split in the middle
+of migration (when the src and dst do not agree on
+MIGRATE_PFN_COMPOUND), that occurs when src side of the migration can
+migrate large pages, but the destination has not been able to allocate
+large pages. The code supported and used folio_split() when migrating
+THP pages, this is used when MIGRATE_VMA_SELECT_COMPOUND is not passed
+as an argument to migrate_vma_setup().
 
-> 
-> >> - answer the question "I want that the builder outputs the string `???`
-> >>   can it do that? If yes, how do I do it?"
-> >
-> > All it does is concatenating multiple &str in const context, which I thought is
-> > clear since there are only push() and prepare() as public methods.
-> >
-> > May it be that your request is more about can we add more hints on the
-> > implementation details rather than user focused documentation?
-> 
-> I am not familiar with MODULE_FIRMWARE in C, and I'd think that someone
-> that uses this API would know what to put into the `.modinfo` section,
-> so like "foo\0bar\0\0baz" (no idea if that makes sense, but just add
-> `firmware` or whatever is needed to make it make sense). And then the
-> question would be how to translate that into the builder.
-> 
-> I wouldn't be able to piece it together without looking at the
-> implementation.
+The test infrastructure lib/test_hmm.c has been enhanced to support THP
+migration. A new ioctl to emulate failure of large page allocations has
+been added to test the folio split code path. hmm-tests.c has new test
+cases for huge page migration and to test the folio split path.
 
-I believe if you come from the perspective of writing a driver, you reach
-module_firmware! first and then the subsequent stuff makes sense.
+The nouveau dmem code has been enhanced to use the new THP migration
+capability.
 
-But I recognize your feedback and will try to make things a bit more obvious by
-expanding the example of module_firmware! and expanding a few comments here and
-there. I also think that s/prepare/new_entry/ will help a lot.
+mTHP support:
+
+The patches hard code, HPAGE_PMD_NR in a few places, but the code has
+been kept generic to support various order sizes. With additional
+refactoring of the code support of different order sizes should be
+possible.
+
+References:
+[1] https://lore.kernel.org/linux-mm/20201106005147.20113-1-rcampbell@nvidia.com/
+
+These patches are built on top of mm-everything-2025-03-04-05-51
+
+Cc: Karol Herbst <kherbst@redhat.com>
+Cc: Lyude Paul <lyude@redhat.com>
+Cc: Danilo Krummrich <dakr@kernel.org>
+Cc: David Airlie <airlied@gmail.com>
+Cc: Simona Vetter <simona@ffwll.ch>
+Cc: "Jérôme Glisse" <jglisse@redhat.com>
+Cc: Shuah Khan <shuah@kernel.org>
+Cc: David Hildenbrand <david@redhat.com>
+Cc: Barry Song <baohua@kernel.org>
+Cc: Baolin Wang <baolin.wang@linux.alibaba.com>
+Cc: Ryan Roberts <ryan.roberts@arm.com>
+Cc: Matthew Wilcox <willy@infradead.org>
+Cc: Peter Xu <peterx@redhat.com>
+Cc: Zi Yan <ziy@nvidia.com>
+Cc: Kefeng Wang <wangkefeng.wang@huawei.com>
+Cc: Jane Chu <jane.chu@oracle.com>
+Cc: Alistair Popple <apopple@nvidia.com>
+Cc: Donet Tom <donettom@linux.ibm.com>
+
+Balbir Singh (11):
+  mm/zone_device: support large zone device private folios
+  mm/migrate_device: flags for selecting device private THP pages
+  mm/thp: zone_device awareness in THP handling code
+  mm/migrate_device: THP migration of zone device pages
+  mm/memory/fault: Add support for zone device THP fault handling
+  lib/test_hmm: test cases and support for zone device private THP
+  mm/memremap: Add folio_split support
+  mm/thp: add split during migration support
+  lib/test_hmm: add test case for split pages
+  selftests/mm/hmm-tests: new tests for zone device THP migration
+  gpu/drm/nouveau: Add THP migration support
+
+ drivers/gpu/drm/nouveau/nouveau_dmem.c | 244 +++++++++----
+ drivers/gpu/drm/nouveau/nouveau_svm.c  |   6 +-
+ drivers/gpu/drm/nouveau/nouveau_svm.h  |   3 +-
+ include/linux/huge_mm.h                |  18 +-
+ include/linux/memremap.h               |  29 +-
+ include/linux/migrate.h                |   2 +
+ include/linux/mm.h                     |   1 +
+ lib/test_hmm.c                         | 387 ++++++++++++++++----
+ lib/test_hmm_uapi.h                    |   3 +
+ mm/huge_memory.c                       | 242 +++++++++---
+ mm/memory.c                            |   6 +-
+ mm/memremap.c                          |  50 ++-
+ mm/migrate.c                           |   2 +
+ mm/migrate_device.c                    | 488 +++++++++++++++++++++----
+ mm/page_alloc.c                        |   1 +
+ mm/page_vma_mapped.c                   |  10 +
+ mm/rmap.c                              |  19 +-
+ tools/testing/selftests/mm/hmm-tests.c | 407 +++++++++++++++++++++
+ 18 files changed, 1630 insertions(+), 288 deletions(-)
+
+-- 
+2.48.1
+
