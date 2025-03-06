@@ -2,35 +2,35 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id E768DA54009
-	for <lists+nouveau@lfdr.de>; Thu,  6 Mar 2025 02:38:23 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id A6C40A5401C
+	for <lists+nouveau@lfdr.de>; Thu,  6 Mar 2025 02:48:33 +0100 (CET)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 95AE310E895;
-	Thu,  6 Mar 2025 01:38:22 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 7645810E892;
+	Thu,  6 Mar 2025 01:48:31 +0000 (UTC)
 Authentication-Results: gabe.freedesktop.org;
-	dkim=pass (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="m8fBaVdQ";
+	dkim=pass (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="qh0nO1oD";
 	dkim-atps=neutral
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from dfw.source.kernel.org (dfw.source.kernel.org [139.178.84.217])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 6A79610E891;
- Thu,  6 Mar 2025 01:38:21 +0000 (UTC)
+Received: from nyc.source.kernel.org (nyc.source.kernel.org [147.75.193.91])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 5AFC710E892;
+ Thu,  6 Mar 2025 01:48:30 +0000 (UTC)
 Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by dfw.source.kernel.org (Postfix) with ESMTP id AAF305C6DF6;
- Thu,  6 Mar 2025 01:36:03 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 2CD3DC4CED1;
- Thu,  6 Mar 2025 01:38:13 +0000 (UTC)
+ by nyc.source.kernel.org (Postfix) with ESMTP id C92FBA46125;
+ Thu,  6 Mar 2025 01:42:58 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 5E8AFC4CED1;
+ Thu,  6 Mar 2025 01:48:23 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1741225100;
- bh=UrM87g5D3UWDiuKi4KaePsOLKzw0YeiUZ6UGIXP/nmc=;
+ s=k20201202; t=1741225709;
+ bh=INgt2WVKj31q2syCqzCQ45mlr1DmXGyw6zo0gKcdDWA=;
  h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
- b=m8fBaVdQPpH5BGqnqZgzsQcGmB+yJ4tkSOFBXFNUoeokAkoh02hbJQXS59dUbc3vp
- XrsyGCnQe9Loq1vPnpPmHK6VER2iahCfyQl6+nNw2y3//hnVABiDk6GtJyvghx8Ujz
- KhfZZpngm0p3H02I/5x5kt79DXZCtAG7yH0/NQPJb1irylxXqdTQ5oEm7KtMjhtWhb
- 39ZTWUh4/uYn5F81WhLnWagqcDTbBb1o2j5UqgMNBst4US6p3s/uf8zzsm/PbiSuYc
- eicQAXz18Ar/ZbKSnkQ8EKNhKc4di8QVDVYyeoENpchA/BnW7wsIcrcS+r/6M3lI6Y
- fSB6ueacX/vEw==
-Date: Thu, 6 Mar 2025 02:38:11 +0100
+ b=qh0nO1oDVAS7f/23vg/R5TTIoi6cfB+GEegxzD1CZzxD/GuXZXCakJzh+o8yNEfPm
+ sfwHZKGrAn3cL2Y0QoGdctOCObO1pDbOhNjULdWibyIqrVjnyFLWQk1NddrmsbVrSu
+ dy0lMY8p9kwSxpKPg7TyM+Fu6JwNgo8JdA5O/a7/5KA3iepQoeX1FOaAg3IrIY9n5Y
+ 4IggFkLqbgwlDZVlIsgHm1ConOkBB7GJdRRATzAKTdbiRYdl09UqRxmC4Qf3F0DdqQ
+ kcymirmw96/XP+xNmj7PQUpXvoW+tLl4VB6YphBQDfkik8JTot43mgODavoTMzrtg5
+ aKqiKiyyd0Zsg==
+Date: Thu, 6 Mar 2025 02:48:20 +0100
 From: Danilo Krummrich <dakr@kernel.org>
 To: Benno Lossin <benno.lossin@proton.me>
 Cc: airlied@gmail.com, simona@ffwll.ch, corbet@lwn.net,
@@ -45,16 +45,19 @@ Cc: airlied@gmail.com, simona@ffwll.ch, corbet@lwn.net,
  dri-devel@lists.freedesktop.org, linux-doc@vger.kernel.org,
  linux-kernel@vger.kernel.org, nouveau@lists.freedesktop.org,
  rust-for-linux@vger.kernel.org
-Subject: Re: [PATCH v5 3/5] rust: firmware: add `module_firmware!` macro
-Message-ID: <Z8j8gwvnmKF9ZymM@pollux>
+Subject: Re: [PATCH v5 2/5] rust: firmware: introduce
+ `firmware::ModInfoBuilder`
+Message-ID: <Z8j-5HDl3loFNXSn@pollux>
 References: <20250304173555.2496-1-dakr@kernel.org>
- <20250304173555.2496-4-dakr@kernel.org>
- <D88RCQTNVD7B.3RIN253F8LODY@proton.me> <Z8j0otfkVtnMXIRQ@pollux>
- <D88SJOTH9GN4.3OVO4JFYAF9R2@proton.me>
+ <20250304173555.2496-3-dakr@kernel.org>
+ <D88OSC9XJXZL.C5HXWFYCG9U6@proton.me> <Z8jSV5CpZDcXrviY@pollux>
+ <D88Q7503C8FF.2TMMBSEMOGKU1@proton.me> <Z8jk3qs6nCIJz-39@pollux>
+ <D88R7HI1Z6GG.ZOQ9A1VQOR28@proton.me> <Z8j6ckpD6JVY4m-p@pollux>
+ <D88SQ87X0OHX.1ZD8LM8LKUQ8J@proton.me>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
-In-Reply-To: <D88SJOTH9GN4.3OVO4JFYAF9R2@proton.me>
+In-Reply-To: <D88SQ87X0OHX.1ZD8LM8LKUQ8J@proton.me>
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -69,113 +72,105 @@ List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-On Thu, Mar 06, 2025 at 01:27:19AM +0000, Benno Lossin wrote:
-> On Thu Mar 6, 2025 at 2:04 AM CET, Danilo Krummrich wrote:
-> > On Thu, Mar 06, 2025 at 12:31:14AM +0000, Benno Lossin wrote:
-> >> On Tue Mar 4, 2025 at 6:34 PM CET, Danilo Krummrich wrote:
+On Thu, Mar 06, 2025 at 01:35:52AM +0000, Benno Lossin wrote:
+> On Thu Mar 6, 2025 at 2:29 AM CET, Danilo Krummrich wrote:
+> > On Thu, Mar 06, 2025 at 12:24:21AM +0000, Benno Lossin wrote:
+> >> On Thu Mar 6, 2025 at 12:57 AM CET, Danilo Krummrich wrote:
+> >> > On Wed, Mar 05, 2025 at 11:36:54PM +0000, Benno Lossin wrote:
+> >> >> On Wed Mar 5, 2025 at 11:38 PM CET, Danilo Krummrich wrote:
+> >> >> > On Wed, Mar 05, 2025 at 10:30:31PM +0000, Benno Lossin wrote:
+> >> >> >> On Tue Mar 4, 2025 at 6:34 PM CET, Danilo Krummrich wrote:
+> >> >> >> > +    /// Push an additional path component.
+> >> >> >> > +    ///
+> >> >> >> > +    /// After a new [`ModInfoBuilder`] instance has been created, [`ModInfoBuilder::prepare`] must
+> >> >> >> > +    /// be called before adding path components.
+> >> >> >> > +    pub const fn push(self, s: &str) -> Self {
+> >> >> >> > +        if N != 0 && self.n == 0 {
+> >> >> >> > +            crate::build_error!("Must call prepare() before push().");
+> >> >> >>
+> >> >> >> This will only prevent the first `prepare` call being missed, right?
+> >> >> >
+> >> >> > Correct, unfortunately there's no way to detect subsequent ones.
+> >> >>
+> >> >> Does it make sense to do that one in the constructor?
+> >> >>
+> >> >> (After looking at the example below) Ah maybe you can't do that, since
+> >> >> then you would have two `prepare()` calls for the example below...?
+> >> >
+> >> > Exactly.
+> >> >
+> >> >> >> If you always have to call this before `push`, why not inline it there?
+> >> >> >
+> >> >> > You can push() multiple times to compose the firmware path string (which is the
+> >> >> > whole purpose :).
+> >> >>
+> >> >> Ah I see, I only looked at the example you have in the next patch. All
+> >> >> in all, I think this patch could use some better documentation, since I
+> >> >> had to read a lot of the code to understand what everything is supposed
+> >> >> to do...
+> >> >
+> >> > I can expand the example in module_firmware! to make things a bit more obvious.
+> >> >
+> >> > Otherwise, what information do you think is missing?
 > >>
-> >> > +#[macro_export]
-> >> > +macro_rules! module_firmware {
-> >> > +    ($($builder:tt)*) => {
-> >>
-> >> This should probably be `$builder:expr` instead.
+> >> Abstractly: what `ModInfoBuilder` *does*, concretely:
+> >> - why the generic constant `N` exists,
 > >
-> > That doesn't work, the compiler then complains, since it's not an expression:
+> > It doesn't really matter to the user, since the user never needs to supply it.
+> > That happens in the module_firmware! macro.
 > >
-> > 193  |         static __MODULE_FIRMWARE: [u8; $builder::create(__module_name()).build_length()] =
-> >      |                                                ^^ expected one of `.`, `?`, `]`, or an operator
+> > I agree it not good to not mention anything about it at all, but I wouldn't want
+> > to bother the user with all implemention details.
+> >
+> > We can probably just mention that it's used internally and is supplied by
+> > module_firmware!. (That module_firmware! does that by doing a dry run of the
+> > builder itself, isn't necessary to know for the user I think.)
+> >
+> >> - what `prepare()` does,
+> >
+> > Same here, it's an implementation detail not relevant to the user. All the user
+> > needs to know is that prepare() acts as a separator to be able to supply the
+> > next firmware path.
 > 
-> Does `<$builder>::create` work (with the `expr` fragment)?
+> How about calling it `new_path`/`new_entry` or similar?
 
-No, the compiler then explicitly complains that it expects a type.
+Sure, new_entry() sounds good!
 
 > 
-> > `ty` doesn't work either, since then the compiler expects the caller to add the
-> > const generic, which we want the macro to figure out instead.
+> >> - what happens with the `module_name` parameter of `new`
 > >
-> >>
-> >> > +
-> >> > +        #[cfg(not(MODULE))]
-> >> > +        const fn __module_name() -> &'static kernel::str::CStr {
-> >> > +            <LocalModule as kernel::ModuleMetadata>::NAME
-> >>
-> >> Please either use `::kernel::` or `$crate::` instead of `kernel::`.
-> >
-> > Good catch, thanks.
-> >
-> >>
-> >> Hmm, I am not 100% comfortable with the `LocalModule` way of accessing
-> >> the current module for some reason, no idea if there is a rational
-> >> argument behind that, but it just doesn't sit right with me.
-> >>
-> >> Essentially you're doing this for convenience, right? So you don't want
-> >> to have to repeat the name of the module type every time?
-> >
-> > No, it's really that I can't know the type name here, please see the previous
-> > patch commit message that introduces `LocalModule` for explanation.
+> > Should probably just mention it's supplied by module_firmware! and used
+> > internally.
 > 
-> Gotcha.
-> 
-> >> > +        }
-> >> > +
-> >> > +        #[cfg(MODULE)]
-> >> > +        const fn __module_name() -> &'static kernel::str::CStr {
-> >> > +            kernel::c_str!("")
-> >>
-> >> Ditto.
-> >>
-> >> > +        }
-> >>
-> >> Are these two functions used outside of the `static` below? If no, then
-> >> you can just move them into the static? You can also probably use a
-> >> `const` instead of a function, that way you only have 4 lines instead
-> >> of 8.
-> >
-> > Is this what you're proposing?
-> >
-> > 	#[macro_export]
-> > 	macro_rules! module_firmware {
-> > 	    ($($builder:tt)*) => {
-> > 	        const __MODULE_FIRMWARE_PREFIX: &'static $crate::str::CStr = if cfg!(MODULE) {
-> > 	            $crate::c_str!("")
-> > 	        } else {
-> > 	            <LocalModule as $crate::ModuleMetadata>::NAME
-> > 	        };
-> >
-> > 	        #[link_section = ".modinfo"]
-> > 	        #[used]
-> > 	        static __MODULE_FIRMWARE: [u8; $($builder)*::create(__MODULE_FIRMWARE_PREFIX)
-> > 	            .build_length()] = $($builder)*::create(__MODULE_FIRMWARE_PREFIX).build();
-> 
-> I meant to also move the `const` into the expression, but I guess that
-> leads to duplication:
-> 
->     #[link_section = ".modinfo"]
->     #[used]
->     static __MODULE_FIRMWARE: [u8; {
->         const PREFIX: &'static $crate::str::CStr = if cfg!(MODULE) {
->             $crate::c_str!("")
->         } else {
->             <LocalModule as $crate::ModuleMetadata>::NAME
->         };
->         <$builder>::create(PREFIX).build_length()
->     }] = {
->         const PREFIX: &'static $crate::str::CStr = if cfg!(MODULE) {
->             $crate::c_str!("")
->         } else {
->             <LocalModule as $crate::ModuleMetadata>::NAME
->         };
->         <$builder>::create(PREFIX)
->     };
-> 
-> But then the advantage is that only the `__MODULE_FIRMWARE` static will
-> be in-scope.
-> 
-> Do you think that its useful to have the static be accessible? I.e. do
-> users need to access it (I would think they don't)? If they don't, then
-> we could put all of those things into a `const _: () = { /* ... */ };`.
-> But then people can invoke `module_firmware!` multiple times in the same
-> module, is that a problem?
+> IIUC, that's not the case, the `module_firmware!` macro will call the
+> `create` function with the name and you're supposed to just pass it onto
+> the builder.
 
-Didn't know that's possible (const _; () = { ... };). That's pretty nice, I will
-go with my above proposal wrapped into the anonymous const. Thanks.
+Yes, but this part is documented by module_firmware!, which I think is the
+correct place.
+
+> 
+> >> - answer the question "I want that the builder outputs the string `???`
+> >>   can it do that? If yes, how do I do it?"
+> >
+> > All it does is concatenating multiple &str in const context, which I thought is
+> > clear since there are only push() and prepare() as public methods.
+> >
+> > May it be that your request is more about can we add more hints on the
+> > implementation details rather than user focused documentation?
+> 
+> I am not familiar with MODULE_FIRMWARE in C, and I'd think that someone
+> that uses this API would know what to put into the `.modinfo` section,
+> so like "foo\0bar\0\0baz" (no idea if that makes sense, but just add
+> `firmware` or whatever is needed to make it make sense). And then the
+> question would be how to translate that into the builder.
+> 
+> I wouldn't be able to piece it together without looking at the
+> implementation.
+
+I believe if you come from the perspective of writing a driver, you reach
+module_firmware! first and then the subsequent stuff makes sense.
+
+But I recognize your feedback and will try to make things a bit more obvious by
+expanding the example of module_firmware! and expanding a few comments here and
+there. I also think that s/prepare/new_entry/ will help a lot.
