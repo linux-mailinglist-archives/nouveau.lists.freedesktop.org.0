@@ -2,60 +2,57 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id ED04AA53EB3
-	for <lists+nouveau@lfdr.de>; Thu,  6 Mar 2025 00:57:49 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id AB429A53ED4
+	for <lists+nouveau@lfdr.de>; Thu,  6 Mar 2025 01:06:19 +0100 (CET)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id F1E1C10E86C;
-	Wed,  5 Mar 2025 23:57:29 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 627A110E873;
+	Thu,  6 Mar 2025 00:06:18 +0000 (UTC)
 Authentication-Results: gabe.freedesktop.org;
-	dkim=pass (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="jlnekHAY";
+	dkim=pass (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="tevQe6hI";
 	dkim-atps=neutral
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from nyc.source.kernel.org (nyc.source.kernel.org [147.75.193.91])
- by gabe.freedesktop.org (Postfix) with ESMTPS id AC09610E86C;
- Wed,  5 Mar 2025 23:57:28 +0000 (UTC)
+Received: from dfw.source.kernel.org (dfw.source.kernel.org [139.178.84.217])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 00E7910E796;
+ Thu,  6 Mar 2025 00:06:16 +0000 (UTC)
 Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by nyc.source.kernel.org (Postfix) with ESMTP id DF533A467A1;
- Wed,  5 Mar 2025 23:51:56 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 96B9FC4CED1;
- Wed,  5 Mar 2025 23:57:21 +0000 (UTC)
+ by dfw.source.kernel.org (Postfix) with ESMTP id 927325C5412;
+ Thu,  6 Mar 2025 00:03:59 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 5D498C4CED1;
+ Thu,  6 Mar 2025 00:06:15 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1741219047;
- bh=QRJv6AFPFNy75p7zfaZ2IXSyUSPhoWe5fwtItKMg7Ts=;
+ s=k20201202; t=1741219576;
+ bh=cghxGvZLbOixCf8vLbjlFjCfUpgnX1TkEmT7KQkpcFk=;
  h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
- b=jlnekHAYXRKnKt2JxmOVnfIz5RncxlJkMw1jFjdFoajqFchcIl4oNvJspBVLte/CK
- b7iYMcyvyHaESdqBVRMROUG3lc/r0CzYUpEHHLCzx89rjFNBGit5Ef2baSZYshn/xj
- xMn5+Q6CJDUo1Y4sco/dP4RikYTfhtDv84nWCxI5Bggqo00ciivFCze0rQPskIl+oh
- aOw1Sbl/5ThhxOUyDV9bEjCNFmmBnkh5Zi/5YQVE8LSHKB+vTccBks+LEN45zbGhEn
- IdbrAJJynzIZZL6wr6VTmNeXxwi2EHAjjC9Hk4ons0SlloVT8ES3QZ7bZt46sZqzhj
- wxBfrWCvpCldQ==
-Date: Thu, 6 Mar 2025 00:57:18 +0100
-From: Danilo Krummrich <dakr@kernel.org>
-To: Benno Lossin <benno.lossin@proton.me>
-Cc: airlied@gmail.com, simona@ffwll.ch, corbet@lwn.net,
- maarten.lankhorst@linux.intel.com, mripard@kernel.org,
- tzimmermann@suse.de, ajanulgu@redhat.com, lyude@redhat.com,
- pstanner@redhat.com, zhiw@nvidia.com, cjia@nvidia.com,
- jhubbard@nvidia.com, bskeggs@nvidia.com, acurrid@nvidia.com,
- ojeda@kernel.org, alex.gaynor@gmail.com, boqun.feng@gmail.com,
- gary@garyguo.net, bjorn3_gh@protonmail.com, a.hindborg@kernel.org,
- aliceryhl@google.com, tmgross@umich.edu, gregkh@linuxfoundation.org,
- mcgrof@kernel.org, russ.weight@linux.dev,
- dri-devel@lists.freedesktop.org, linux-doc@vger.kernel.org,
- linux-kernel@vger.kernel.org, nouveau@lists.freedesktop.org,
- rust-for-linux@vger.kernel.org
-Subject: Re: [PATCH v5 2/5] rust: firmware: introduce
- `firmware::ModInfoBuilder`
-Message-ID: <Z8jk3qs6nCIJz-39@pollux>
+ b=tevQe6hIkXOk3v9Rgn4GUc+kbZz4l7gFmrygyzCN19dumIHWIJ9AkaneTO+gn2J59
+ Bw9roHYUUDI8iuEDT/HZSncnQdvSrpxTQJcehW6YT5PoDie9hc/y6K5ZREO0c3poB8
+ vwCpoujEBq3VIK8zOQwhXj7eMTfIlO8iGeRskEcCmvcEn2ojEwh8L9lKs2e4Xaj6xA
+ c1lKHfimCEESRXv2+YHwIk476swIiT6RY3seZuhGxRHz+UydkKjhyg3sw2Ju5N/NbO
+ mnxGG7yBuc7iKUaQQ/BjDNKwN1C2KcdHA/l+fwyna2M+ZbsCbKvFahCV/qlgsqcPuA
+ ByKvbWWZ5CHEA==
+Date: Wed, 5 Mar 2025 16:06:13 -0800
+From: Luis Chamberlain <mcgrof@kernel.org>
+To: Danilo Krummrich <dakr@kernel.org>
+Cc: gregkh@linuxfoundation.org, russ.weight@linux.dev, ojeda@kernel.org,
+ alex.gaynor@gmail.com, boqun.feng@gmail.com, airlied@gmail.com,
+ simona@ffwll.ch, corbet@lwn.net, maarten.lankhorst@linux.intel.com,
+ mripard@kernel.org, tzimmermann@suse.de, ajanulgu@redhat.com,
+ lyude@redhat.com, pstanner@redhat.com, zhiw@nvidia.com,
+ cjia@nvidia.com, jhubbard@nvidia.com, bskeggs@nvidia.com,
+ acurrid@nvidia.com, gary@garyguo.net, bjorn3_gh@protonmail.com,
+ benno.lossin@proton.me, a.hindborg@kernel.org, aliceryhl@google.com,
+ tmgross@umich.edu, dri-devel@lists.freedesktop.org,
+ linux-doc@vger.kernel.org, linux-kernel@vger.kernel.org,
+ nouveau@lists.freedesktop.org, rust-for-linux@vger.kernel.org
+Subject: Re: [PATCH v5 0/5] Initial Nova Core series
+Message-ID: <Z8jm9XbK31nEI33V@bombadil.infradead.org>
 References: <20250304173555.2496-1-dakr@kernel.org>
- <20250304173555.2496-3-dakr@kernel.org>
- <D88OSC9XJXZL.C5HXWFYCG9U6@proton.me> <Z8jSV5CpZDcXrviY@pollux>
- <D88Q7503C8FF.2TMMBSEMOGKU1@proton.me>
+ <Z8isev0gwQJPs7S9@cassiopeiae>
+ <Z8jd0evXjJtz1CRB@bombadil.infradead.org> <Z8jg_OokbtQ_WDS8@pollux>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
-In-Reply-To: <D88Q7503C8FF.2TMMBSEMOGKU1@proton.me>
+In-Reply-To: <Z8jg_OokbtQ_WDS8@pollux>
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -70,48 +67,26 @@ List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-On Wed, Mar 05, 2025 at 11:36:54PM +0000, Benno Lossin wrote:
-> On Wed Mar 5, 2025 at 11:38 PM CET, Danilo Krummrich wrote:
-> > On Wed, Mar 05, 2025 at 10:30:31PM +0000, Benno Lossin wrote:
-> >> On Tue Mar 4, 2025 at 6:34 PM CET, Danilo Krummrich wrote:
-> >> > +    /// Push an additional path component.
-> >> > +    ///
-> >> > +    /// After a new [`ModInfoBuilder`] instance has been created, [`ModInfoBuilder::prepare`] must
-> >> > +    /// be called before adding path components.
-> >> > +    pub const fn push(self, s: &str) -> Self {
-> >> > +        if N != 0 && self.n == 0 {
-> >> > +            crate::build_error!("Must call prepare() before push().");
-> >>
-> >> This will only prevent the first `prepare` call being missed, right?
-> >
-> > Correct, unfortunately there's no way to detect subsequent ones.
+On Thu, Mar 06, 2025 at 12:40:44AM +0100, Danilo Krummrich wrote:
+> On Wed, Mar 05, 2025 at 03:27:13PM -0800, Luis Chamberlain wrote:
+> > On Wed, Mar 05, 2025 at 08:56:42PM +0100, Danilo Krummrich wrote:
+> > > On Tue, Mar 04, 2025 at 06:34:47PM +0100, Danilo Krummrich wrote:
+> > > > Danilo Krummrich (5):
+> > > >   rust: module: add type `LocalModule`
+> > > >   rust: firmware: introduce `firmware::ModInfoBuilder`
+> > > >   rust: firmware: add `module_firmware!` macro
+> > > 
+> > > Greg, Luis, Russ, any objections on me taking the two firmware patches through
+> > > the nova tree?
+> > 
+> > I don't speak Rust so I'd my recommendation would be to add the rust
+> > firmware file under the firmware loader entry for maintainers provided
+> > we get a volunteer from the rust community do help maintain *both* C and
+> > the Rust version of the firmware loader.
 > 
-> Does it make sense to do that one in the constructor?
-> 
-> (After looking at the example below) Ah maybe you can't do that, since
-> then you would have two `prepare()` calls for the example below...?
+> Yeah, you suggested that when I sent the first firmware loader abstraction more
+> than half a year ago and since I'm doing exactly that. :-)
 
-Exactly.
+Great, it sounds like we have a firmware loader maintainer volunteer!
 
-> >> If you always have to call this before `push`, why not inline it there?
-> >
-> > You can push() multiple times to compose the firmware path string (which is the
-> > whole purpose :).
-> 
-> Ah I see, I only looked at the example you have in the next patch. All
-> in all, I think this patch could use some better documentation, since I
-> had to read a lot of the code to understand what everything is supposed
-> to do...
-
-I can expand the example in module_firmware! to make things a bit more obvious.
-
-Otherwise, what information do you think is missing?
-
-> 
-> It might also make sense to make this more generic, since one probably
-> also needs this in other places? Or do you think this will only be
-> required for modinfo?
-
-Currently, I don't think there's any more need for a generic const string
-builder. For now, I think we're good. Let's factor it out, once we have actual
-need for that.
+ Luis
