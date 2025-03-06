@@ -2,51 +2,55 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id 05C36C871DA
-	for <lists+nouveau@lfdr.de>; Tue, 25 Nov 2025 21:47:53 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 9E030C87259
+	for <lists+nouveau@lfdr.de>; Tue, 25 Nov 2025 21:48:27 +0100 (CET)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 5D92B10E49D;
+	by gabe.freedesktop.org (Postfix) with ESMTP id E0BBF10E4B7;
 	Tue, 25 Nov 2025 20:47:33 +0000 (UTC)
 Authentication-Results: gabe.freedesktop.org;
-	dkim=permerror (0-bit key) header.d=proton.me header.i=@proton.me header.b="fvFai9fn";
+	dkim=permerror (0-bit key) header.d=proton.me header.i=@proton.me header.b="NTwlkOkD";
 	dkim-atps=neutral
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from mail-4316.protonmail.ch (mail-4316.protonmail.ch [185.70.43.16])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 5816710E87B
- for <nouveau@lists.freedesktop.org>; Thu,  6 Mar 2025 00:31:21 +0000 (UTC)
+X-Greylist: delayed 6622 seconds by postgrey-1.36 at gabe;
+ Thu, 06 Mar 2025 01:27:31 UTC
+Received: from mail-10631.protonmail.ch (mail-10631.protonmail.ch
+ [79.135.106.31])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id B432B10E88A
+ for <nouveau@lists.freedesktop.org>; Thu,  6 Mar 2025 01:27:30 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=proton.me;
- s=protonmail; t=1741221079; x=1741480279;
- bh=lP7zxDTbeyDZl0Ryw9P4Uxud5cGW/sqewezSoPeHTi8=;
+ s=edku7nt35faorprsmlxm5ocgsm.protonmail; t=1741224448; x=1741483648;
+ bh=Ws+c8tX/OnH0cVp71OPD005wzVChpRlLpSiShc1Bnaw=;
  h=Date:To:From:Cc:Subject:Message-ID:In-Reply-To:References:
  Feedback-ID:From:To:Cc:Date:Subject:Reply-To:Feedback-ID:
  Message-ID:BIMI-Selector:List-Unsubscribe:List-Unsubscribe-Post;
- b=fvFai9fnStR80Ck8q5ZbNYGtkk79SqF9sDYjImm1MpaSN6RDOS+8lhTcu4HXf7pz9
- T9lMedaRW741aWPMQu6x1qkNz8rYkPnDMz8G+InK+mr5ym8Z7os07oaG3k52xycWtO
- +408J6O0lf8KRisg58hDagab57rMVaK1CGz5b/l+UPFxpmr3J+3NZ3e10uo9jLU0bF
- e2JszLzwZOYc+Xly3hL/osA3FiNUHbd1RsjCl90QuuRVXxUg+QnvleEhOwJPKkukQY
- Ids9xB5ZbQEABna8Y5ccztGCUDGX4jSYLlVeOdFw4VApoGE/t2yucj2hckmCuoSGHR
- 318twzUTdMVGw==
-Date: Thu, 06 Mar 2025 00:31:14 +0000
-To: Danilo Krummrich <dakr@kernel.org>, airlied@gmail.com, simona@ffwll.ch,
- corbet@lwn.net, maarten.lankhorst@linux.intel.com, mripard@kernel.org,
- tzimmermann@suse.de, ajanulgu@redhat.com, lyude@redhat.com,
- pstanner@redhat.com, zhiw@nvidia.com, cjia@nvidia.com, jhubbard@nvidia.com,
- bskeggs@nvidia.com, acurrid@nvidia.com
+ b=NTwlkOkDtaj4+D1c+spPsEqV1T2sz4jaTiFJWvG8esBMoZW6jAhHG2dFn8f4NNhjr
+ 5T6yUSEcBAWhmDfhb6F5jiQm9Afkf1ygrUvOeYuV8AdzHGwJBzInppzxTCX77+ljZR
+ 1mCeScRP+eist+ERR6eJ8wqFvWpUTpTxGaAW9yIZNj82JJLlNU1TEkFWs+XXdJ/mIT
+ DvN1zLqRWiPnr04V4OZwGlrtgvfFby54rwhkDnmOdZeHcEb34I31O3hLKFKoYl5eNU
+ ADi/4gs9y3iPY3qrvgafYQOksDS05rO1LVLM3SHhAYzb1BGYMXITj0NbRrxLb86dEl
+ KOQpj5Cdgwarw==
+Date: Thu, 06 Mar 2025 01:27:19 +0000
+To: Danilo Krummrich <dakr@kernel.org>
 From: Benno Lossin <benno.lossin@proton.me>
-Cc: ojeda@kernel.org, alex.gaynor@gmail.com, boqun.feng@gmail.com,
+Cc: airlied@gmail.com, simona@ffwll.ch, corbet@lwn.net,
+ maarten.lankhorst@linux.intel.com, mripard@kernel.org, tzimmermann@suse.de,
+ ajanulgu@redhat.com, lyude@redhat.com, pstanner@redhat.com, zhiw@nvidia.com,
+ cjia@nvidia.com, jhubbard@nvidia.com, bskeggs@nvidia.com, acurrid@nvidia.com,
+ ojeda@kernel.org, alex.gaynor@gmail.com, boqun.feng@gmail.com,
  gary@garyguo.net, bjorn3_gh@protonmail.com, a.hindborg@kernel.org,
  aliceryhl@google.com, tmgross@umich.edu, gregkh@linuxfoundation.org,
  mcgrof@kernel.org, russ.weight@linux.dev, dri-devel@lists.freedesktop.org,
  linux-doc@vger.kernel.org, linux-kernel@vger.kernel.org,
  nouveau@lists.freedesktop.org, rust-for-linux@vger.kernel.org
 Subject: Re: [PATCH v5 3/5] rust: firmware: add `module_firmware!` macro
-Message-ID: <D88RCQTNVD7B.3RIN253F8LODY@proton.me>
-In-Reply-To: <20250304173555.2496-4-dakr@kernel.org>
+Message-ID: <D88SJOTH9GN4.3OVO4JFYAF9R2@proton.me>
+In-Reply-To: <Z8j0otfkVtnMXIRQ@pollux>
 References: <20250304173555.2496-1-dakr@kernel.org>
  <20250304173555.2496-4-dakr@kernel.org>
+ <D88RCQTNVD7B.3RIN253F8LODY@proton.me> <Z8j0otfkVtnMXIRQ@pollux>
 Feedback-ID: 71780778:user:proton
-X-Pm-Message-ID: 8d1ff6c103cb6cc8c060a13e03d39356aa065e1c
+X-Pm-Message-ID: a23028189b279d338045c4e4876c48aa813105ba
 MIME-Version: 1.0
 Content-Type: text/plain; charset=utf-8
 Content-Transfer-Encoding: quoted-printable
@@ -65,154 +69,123 @@ List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-On Tue Mar 4, 2025 at 6:34 PM CET, Danilo Krummrich wrote:
-> Analogous to the `module!` macro `module_firmware!` adds additional
-> firmware path strings to the .modinfo section.
+On Thu Mar 6, 2025 at 2:04 AM CET, Danilo Krummrich wrote:
+> On Thu, Mar 06, 2025 at 12:31:14AM +0000, Benno Lossin wrote:
+>> On Tue Mar 4, 2025 at 6:34 PM CET, Danilo Krummrich wrote:
+>>
+>> > +#[macro_export]
+>> > +macro_rules! module_firmware {
+>> > +    ($($builder:tt)*) =3D> {
+>>
+>> This should probably be `$builder:expr` instead.
 >
-> In contrast to `module!`, where path strings need to be string literals,
-> path strings can be composed with the `firmware::ModInfoBuilder`.
+> That doesn't work, the compiler then complains, since it's not an express=
+ion:
 >
-> Some drivers require a lot of firmware files (such as nova-core) and
-> hence benefit from more flexibility composing firmware path strings.
+> 193  |         static __MODULE_FIRMWARE: [u8; $builder::create(__module_n=
+ame()).build_length()] =3D
+>      |                                                ^^ expected one of =
+`.`, `?`, `]`, or an operator
+
+Does `<$builder>::create` work (with the `expr` fragment)?
+
+> `ty` doesn't work either, since then the compiler expects the caller to a=
+dd the
+> const generic, which we want the macro to figure out instead.
 >
-> Signed-off-by: Danilo Krummrich <dakr@kernel.org>
-> ---
->  rust/kernel/firmware.rs | 79 +++++++++++++++++++++++++++++++++++++++++
->  1 file changed, 79 insertions(+)
+>>
+>> > +
+>> > +        #[cfg(not(MODULE))]
+>> > +        const fn __module_name() -> &'static kernel::str::CStr {
+>> > +            <LocalModule as kernel::ModuleMetadata>::NAME
+>>
+>> Please either use `::kernel::` or `$crate::` instead of `kernel::`.
 >
-> diff --git a/rust/kernel/firmware.rs b/rust/kernel/firmware.rs
-> index 6e6972d94597..5d1ac8287171 100644
-> --- a/rust/kernel/firmware.rs
-> +++ b/rust/kernel/firmware.rs
-> @@ -116,6 +116,85 @@ unsafe impl Send for Firmware {}
->  // be used from any thread.
->  unsafe impl Sync for Firmware {}
+> Good catch, thanks.
 >
-> +/// Create firmware .modinfo entries.
-> +///
-> +/// This macro is the counterpart of the C macro `MODULE_FIRMWARE()`, bu=
-t instead of taking a
-> +/// simple string literals, which is already covered by the `firmware` f=
-ield of
-> +/// [`crate::prelude::module!`], it allows the caller to pass a builder =
-type (e.g.
-> +/// [`ModInfoBuilder`]) which can create the firmware modinfo strings in=
- a more flexible way.
-> +///
-> +/// Drivers should extend the [`ModInfoBuilder`] with their own driver s=
-pecific builder type.
-> +///
-> +/// The `builder` argument must be a type which implements the following=
- function.
-> +///
-> +/// `const fn create(module_name: &'static CStr) -> ModInfoBuilder`
-> +///
-> +/// `create` should pass the `module_name` to the [`ModInfoBuilder`] and=
-, with the help of
-> +/// it construct the corresponding firmware modinfo.
-> +///
-> +/// Typically, such contracts would be enforced by a trait, however trai=
-ts do not (yet) support
-> +/// const functions.
-> +///
-> +/// # Example
-> +///
-> +/// ```
-> +/// # mod module_firmware_test {
-> +/// # use kernel::firmware;
-> +/// # use kernel::prelude::*;
-> +/// #
-> +/// # struct MyModule;
-> +/// #
-> +/// # impl kernel::Module for MyModule {
-> +/// #     fn init(_module: &'static ThisModule) -> Result<Self> {
-> +/// #         Ok(Self)
-> +/// #     }
-> +/// # }
-> +/// #
-> +/// #
-> +/// struct Builder<const N: usize>;
-> +///
-> +/// impl<const N: usize> Builder<N> {
-> +///     const fn create(module_name: &'static kernel::str::CStr) -> firm=
-ware::ModInfoBuilder<N> {
-> +///         firmware::ModInfoBuilder::new(module_name)
-> +///             .prepare()
-> +///             .push("vendor/foo.bin")
-> +///             .prepare()
-> +///             .push("vendor/bar.bin")
-> +///     }
-> +/// }
-> +///
-> +/// module! {
-> +///    type: MyModule,
-> +///    name: "module_firmware_test",
-> +///    author: "Rust for Linux",
-> +///    description: "module_firmware! test module",
-> +///    license: "GPL",
-> +/// }
-> +///
-> +/// kernel::module_firmware!(Builder);
-> +/// # }
-> +/// ```
+>>
+>> Hmm, I am not 100% comfortable with the `LocalModule` way of accessing
+>> the current module for some reason, no idea if there is a rational
+>> argument behind that, but it just doesn't sit right with me.
+>>
+>> Essentially you're doing this for convenience, right? So you don't want
+>> to have to repeat the name of the module type every time?
+>
+> No, it's really that I can't know the type name here, please see the prev=
+ious
+> patch commit message that introduces `LocalModule` for explanation.
 
-Would be nice to see a more complex example here like the one from nova
-you sent in the other thread. So with "dynamic" string interpolation and
-multiple pushes.
+Gotcha.
 
-> +#[macro_export]
-> +macro_rules! module_firmware {
-> +    ($($builder:tt)*) =3D> {
+>> > +        }
+>> > +
+>> > +        #[cfg(MODULE)]
+>> > +        const fn __module_name() -> &'static kernel::str::CStr {
+>> > +            kernel::c_str!("")
+>>
+>> Ditto.
+>>
+>> > +        }
+>>
+>> Are these two functions used outside of the `static` below? If no, then
+>> you can just move them into the static? You can also probably use a
+>> `const` instead of a function, that way you only have 4 lines instead
+>> of 8.
+>
+> Is this what you're proposing?
+>
+> =09#[macro_export]
+> =09macro_rules! module_firmware {
+> =09    ($($builder:tt)*) =3D> {
+> =09        const __MODULE_FIRMWARE_PREFIX: &'static $crate::str::CStr =3D=
+ if cfg!(MODULE) {
+> =09            $crate::c_str!("")
+> =09        } else {
+> =09            <LocalModule as $crate::ModuleMetadata>::NAME
+> =09        };
+>
+> =09        #[link_section =3D ".modinfo"]
+> =09        #[used]
+> =09        static __MODULE_FIRMWARE: [u8; $($builder)*::create(__MODULE_F=
+IRMWARE_PREFIX)
+> =09            .build_length()] =3D $($builder)*::create(__MODULE_FIRMWAR=
+E_PREFIX).build();
 
-This should probably be `$builder:expr` instead.
+I meant to also move the `const` into the expression, but I guess that
+leads to duplication:
 
-> +
-> +        #[cfg(not(MODULE))]
-> +        const fn __module_name() -> &'static kernel::str::CStr {
-> +            <LocalModule as kernel::ModuleMetadata>::NAME
+    #[link_section =3D ".modinfo"]
+    #[used]
+    static __MODULE_FIRMWARE: [u8; {
+        const PREFIX: &'static $crate::str::CStr =3D if cfg!(MODULE) {
+            $crate::c_str!("")
+        } else {
+            <LocalModule as $crate::ModuleMetadata>::NAME
+        };
+        <$builder>::create(PREFIX).build_length()
+    }] =3D {
+        const PREFIX: &'static $crate::str::CStr =3D if cfg!(MODULE) {
+            $crate::c_str!("")
+        } else {
+            <LocalModule as $crate::ModuleMetadata>::NAME
+        };
+        <$builder>::create(PREFIX)
+    };
 
-Please either use `::kernel::` or `$crate::` instead of `kernel::`.
+But then the advantage is that only the `__MODULE_FIRMWARE` static will
+be in-scope.
 
-Hmm, I am not 100% comfortable with the `LocalModule` way of accessing
-the current module for some reason, no idea if there is a rational
-argument behind that, but it just doesn't sit right with me.
-
-Essentially you're doing this for convenience, right? So you don't want
-to have to repeat the name of the module type every time?
-
-> +        }
-> +
-> +        #[cfg(MODULE)]
-> +        const fn __module_name() -> &'static kernel::str::CStr {
-> +            kernel::c_str!("")
-
-Ditto.
-
-> +        }
-
-Are these two functions used outside of the `static` below? If no, then
-you can just move them into the static? You can also probably use a
-`const` instead of a function, that way you only have 4 lines instead
-of 8.
+Do you think that its useful to have the static be accessible? I.e. do
+users need to access it (I would think they don't)? If they don't, then
+we could put all of those things into a `const _: () =3D { /* ... */ };`.
+But then people can invoke `module_firmware!` multiple times in the same
+module, is that a problem?
 
 ---
 Cheers,
 Benno
 
-> +
-> +        #[link_section =3D ".modinfo"]
-> +        #[used]
-> +        static __MODULE_FIRMWARE: [u8; $($builder)*::create(__module_nam=
-e()).build_length()] =3D
-> +            $($builder)*::create(__module_name()).build();
-> +    };
-> +}
-> +
->  /// Builder for firmware module info.
->  ///
->  /// [`ModInfoBuilder`] is a helper component to flexibly compose firmwar=
-e paths strings for the
-> --
-> 2.48.1
+> =09    };
+> =09}
 
 
