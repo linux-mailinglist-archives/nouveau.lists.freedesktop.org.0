@@ -2,103 +2,83 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id 13C15A56877
-	for <lists+nouveau@lfdr.de>; Fri,  7 Mar 2025 14:09:22 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id E42B2A568B1
+	for <lists+nouveau@lfdr.de>; Fri,  7 Mar 2025 14:19:19 +0100 (CET)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id B3F9610EB49;
-	Fri,  7 Mar 2025 13:09:20 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 95BF210EB45;
+	Fri,  7 Mar 2025 13:19:18 +0000 (UTC)
 Authentication-Results: gabe.freedesktop.org;
-	dkim=pass (1024-bit key; secure) header.d=ffwll.ch header.i=@ffwll.ch header.b="kIntLYTT";
+	dkim=pass (1024-bit key; secure) header.d=ffwll.ch header.i=@ffwll.ch header.b="dCvWuutQ";
 	dkim-atps=neutral
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from mail-wm1-f45.google.com (mail-wm1-f45.google.com
- [209.85.128.45])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 7E44B10EB3E
- for <nouveau@lists.freedesktop.org>; Fri,  7 Mar 2025 13:09:17 +0000 (UTC)
-Received: by mail-wm1-f45.google.com with SMTP id
- 5b1f17b1804b1-4394a0c65fcso20644285e9.1
- for <nouveau@lists.freedesktop.org>; Fri, 07 Mar 2025 05:09:17 -0800 (PST)
+Received: from mail-ed1-f45.google.com (mail-ed1-f45.google.com
+ [209.85.208.45])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 37D4410EB45
+ for <nouveau@lists.freedesktop.org>; Fri,  7 Mar 2025 13:19:17 +0000 (UTC)
+Received: by mail-ed1-f45.google.com with SMTP id
+ 4fb4d7f45d1cf-5e5e63162a0so941357a12.3
+ for <nouveau@lists.freedesktop.org>; Fri, 07 Mar 2025 05:19:17 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=ffwll.ch; s=google; t=1741352955; x=1741957755; darn=lists.freedesktop.org; 
- h=in-reply-to:content-disposition:mime-version:references
- :mail-followup-to:message-id:subject:cc:to:from:date:from:to:cc
- :subject:date:message-id:reply-to;
- bh=fLXbK1kB32hdkos1OXYsIkc5qxoXTv1ZW+nI08u1/9M=;
- b=kIntLYTT/FjSBOveIdRrzfHFWMEyOMCgiHcUh7XS0dl0homuWBf0zkWPdSm6bfD+1Z
- xnQalYAPi+/PXRLXqqu0VRTYgrJflg0WviZov75JuzVjxu2rMpz6/7HRNUmTLzuhdmmv
- Kv8+k5thjKHCFU4iRY/+8MOV3oMAQ1BR6T/OU=
+ d=ffwll.ch; s=google; t=1741353556; x=1741958356; darn=lists.freedesktop.org; 
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=GmXXr/GHvAGv2swMlIkbl+Www19HcX8d7ze1AMoIM9w=;
+ b=dCvWuutQZLqU9eRlZRslZf6caIRvChiK0SwJ/1z3lE493UTQEUUO2f63X5r/ehdGPF
+ RIaDpEhjLfIV5egJ6GpfrupLUs9SmNyp2Kp7xIC6MByyT8g4pfH8aThjJPufbOD8TFMK
+ qoYxFwADc6DunqpeQk/IXk0bxuudWpNyJuJKg=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1741352955; x=1741957755;
- h=in-reply-to:content-disposition:mime-version:references
- :mail-followup-to:message-id:subject:cc:to:from:date
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=fLXbK1kB32hdkos1OXYsIkc5qxoXTv1ZW+nI08u1/9M=;
- b=kLLvTYIs5Ov1cy4icMscbNFsspqULXT7UrCe+PQapQE/T+wHhZTyfTwgabjoRRodlL
- lctzU668QhBkZ6u1w+lPD4cBzeXrLeDzxEpUwSL7cMs1vwRl1jp7u5ejc4AnY+JHS7si
- W0KNvzOoJUWBFSBwpC8ORsbVLLiJMlmQey59bDNnFnKF/C/kIp5iKR7+hKI7XETFtMhQ
- 2wac7qjeSVdGjQFv88VbyHO501N70y/tOZpfgr9D1PZTuA7rCmKo0egrgLuhePTRtGFl
- l5wPFgL5rGfQYmZ7vMiA5dY4xIPbMMmUFe4hGxp5pOMLvD5+y44F0rBeqhX0Jokn4yK3
- hHOg==
+ d=1e100.net; s=20230601; t=1741353556; x=1741958356;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=GmXXr/GHvAGv2swMlIkbl+Www19HcX8d7ze1AMoIM9w=;
+ b=p0Aof1foXvWDRQhNc+KJRkDdz0ZTTVFZTjjIP8IewRVOdL78SCBdVtZcrtCkLPGSht
+ fl5lxkcgIpnzu+NwGeNK/fKPM43oRW2UXlkOStu5dzAvtTkDon7qVZ0ihO8vCIXOViV2
+ CAcCUXJfALE4ngFr0Q5bXnEZORZnNXpWGAwHNWAa8++jmmgbkU6bK6zoMBK2F7htZNOo
+ Ejh+P3xRBGTAO7CJRF3JbKUGvLAqltYz1hDU9z4fAnwZS3nIEdNtozPb2whShNXgxQf/
+ RzPYDU30JztnXc+hLmQomntAK3TWHqveDSfVB6pncJNLJNfwEiUMSvxLba+CvEqaHH4v
+ ebHA==
 X-Forwarded-Encrypted: i=1;
- AJvYcCW9LY7/g4e40O3cWZisrOU7T5kedLFc90myd3DuaTaceCoqpetdiYv+GX56Vol3+A7iv0OygqEa@lists.freedesktop.org
-X-Gm-Message-State: AOJu0Yy5QaY7hNpTsfd62EcYwitTkJ6rVg3pu6SlqBdNBjO8qKJCbBMz
- BDOZlwifYZTPgOFrj5RKVE8jeOo0GrTV6Rq+srDO/e8rWd/MGHxvlRAv+UukC9c=
-X-Gm-Gg: ASbGncuRNU8BSe5gH6/xNKsKCt0jrBq6uOhWEp71biErEhDciGSO7XzOEY6oAeJSetE
- WDeyTP9Or2MDISeCAZNIpCv5mb+8p3QIPuYrYyRoz6rB3XTd7uDXzSHs2B4JJzLm3MCrIcnUL8R
- XyIYSU0hhJ1h6JFgukn8jWBP0e/N+YtUhp4XhHuX9xcG4JOAJbGaWcAy7aOS9cSJJbCr4G2vP93
- L8yfxyveKgnyDuE5EcOs+F0Urd6MXKueP8p0If8ZyauHl08xvpOGXAN0VF5a6+mkrFEGEqW3pO5
- BIx9K8d85e7F/k3AK7ftF66GN20cCPz9wnyoi2ruHYMdGutXQFo9bbth
-X-Google-Smtp-Source: AGHT+IGXKnB7QtBKk8gCa+TlzYNbGzQEnm9bXI6Rnch3Ew5gX/H5UMUN/1g1KPRfZAkAjvrureRPLg==
-X-Received: by 2002:a5d:6c63:0:b0:390:f0f3:138a with SMTP id
- ffacd0b85a97d-39132d5b4bfmr3104340f8f.27.1741352954934; 
- Fri, 07 Mar 2025 05:09:14 -0800 (PST)
+ AJvYcCVTqC/FnPxT0KC/Va1TUn7/CewIpMMnuce7t0TEiDmK+9FQW2itnJ7fH/BN7U7DtOyr3xBPyWzV@lists.freedesktop.org
+X-Gm-Message-State: AOJu0YyZYTKllq2n36n1bRZBsNAcJnUf7j0FmeG/iskHEAvaH6S4RV3A
+ 3L4F2pkASjO8fQUotZDuXnMQWWSloU4XGKIAzyut+APx2rJYJyI+zFGen6ANB5M=
+X-Gm-Gg: ASbGnct0+sn3aWFScpYsiThFp6HWeehyXkNTQSHL9z7CBrdxUP8JR8TGvWwajz5331L
+ pNUXcPVx5yyhrwdhX9aWNm/ZI7nesqzkuiY7XgBtZRgqDuqr7iz5gMkM0BoUKqtpiFBAM51rTbG
+ 6fn1UqGoppFPlu4Ey1IbB4vgwij0p2Bdxi4Y0AIviuKtqQlZRD/guv5OiZMSfWcpdQAXrMtk1iD
+ 5T62O3EU2hzG7BF2x9VdzP83TNumXUYjh4UQUG34M+B/5ox5QsetqP7IywWwNozhILvRETb+WfH
+ bqHcb0qrODPPdt1jO2sCxmhNtQQOALpIl5jqpbmwHsQ5xpVKRfC6Pb31
+X-Google-Smtp-Source: AGHT+IGWJEXpT4oFObUhXEX1baZSA5ka+RDW0BObeZF31pqEHYIrQhNdRsTwmr/EHhhCwd6ldgP0tQ==
+X-Received: by 2002:a17:907:7ea9:b0:abf:6b30:7a94 with SMTP id
+ a640c23a62f3a-ac252f4c9eamr387695566b.45.1741353555414; 
+ Fri, 07 Mar 2025 05:19:15 -0800 (PST)
 Received: from phenom.ffwll.local ([2a02:168:57f4:0:5485:d4b2:c087:b497])
  by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-3912bfdfcb8sm5384143f8f.33.2025.03.07.05.09.13
+ a640c23a62f3a-ac2399d2dd8sm272788966b.166.2025.03.07.05.19.14
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 07 Mar 2025 05:09:14 -0800 (PST)
-Date: Fri, 7 Mar 2025 14:09:12 +0100
+ Fri, 07 Mar 2025 05:19:14 -0800 (PST)
+Date: Fri, 7 Mar 2025 14:19:12 +0100
 From: Simona Vetter <simona.vetter@ffwll.ch>
-To: Jason Gunthorpe <jgg@nvidia.com>
-Cc: John Hubbard <jhubbard@nvidia.com>, Greg KH <gregkh@linuxfoundation.org>,
- Danilo Krummrich <dakr@kernel.org>, Joel Fernandes <joelagnelf@nvidia.com>,
- Alexandre Courbot <acourbot@nvidia.com>,
- Dave Airlie <airlied@gmail.com>, Gary Guo <gary@garyguo.net>,
- Joel Fernandes <joel@joelfernandes.org>,
- Boqun Feng <boqun.feng@gmail.com>, Ben Skeggs <bskeggs@nvidia.com>,
- linux-kernel@vger.kernel.org, rust-for-linux@vger.kernel.org,
- nouveau@lists.freedesktop.org, dri-devel@lists.freedesktop.org,
- paulmck@kernel.org
-Subject: Re: [RFC PATCH 0/3] gpu: nova-core: add basic timer subdevice
- implementation
-Message-ID: <Z8rv-DQuGdxye28N@phenom.ffwll.local>
-Mail-Followup-To: Jason Gunthorpe <jgg@nvidia.com>,
- John Hubbard <jhubbard@nvidia.com>,
- Greg KH <gregkh@linuxfoundation.org>,
- Danilo Krummrich <dakr@kernel.org>,
- Joel Fernandes <joelagnelf@nvidia.com>,
- Alexandre Courbot <acourbot@nvidia.com>,
- Dave Airlie <airlied@gmail.com>, Gary Guo <gary@garyguo.net>,
- Joel Fernandes <joel@joelfernandes.org>,
- Boqun Feng <boqun.feng@gmail.com>, Ben Skeggs <bskeggs@nvidia.com>,
- linux-kernel@vger.kernel.org, rust-for-linux@vger.kernel.org,
- nouveau@lists.freedesktop.org, dri-devel@lists.freedesktop.org,
- paulmck@kernel.org
-References: <Z8GViQzZJVFPxfNd@phenom.ffwll.local>
- <20250228184013.GF39591@nvidia.com>
- <Z8cmBWB8rl97-zSG@phenom.ffwll.local>
- <20250304164201.GN133783@nvidia.com>
- <Z8f9mgD4LUJN_dWw@phenom.ffwll.local>
- <20250305151012.GW133783@nvidia.com>
- <Z8l8HgZOV7sDWqBh@phenom.ffwll.local>
- <20250306153236.GE354511@nvidia.com>
- <Z8rKVZolu8n6lB1P@phenom.ffwll.local>
- <20250307123255.GK354511@nvidia.com>
+To: Thomas Zimmermann <tzimmermann@suse.de>
+Cc: maarten.lankhorst@linux.intel.com, mripard@kernel.org,
+ airlied@gmail.com, simona@ffwll.ch, dri-devel@lists.freedesktop.org,
+ linux-mediatek@lists.infradead.org, freedreno@lists.freedesktop.org,
+ linux-arm-msm@vger.kernel.org, imx@lists.linux.dev,
+ linux-samsung-soc@vger.kernel.org, nouveau@lists.freedesktop.org,
+ virtualization@lists.linux.dev, spice-devel@lists.freedesktop.org,
+ linux-renesas-soc@vger.kernel.org,
+ linux-rockchip@lists.infradead.org, linux-tegra@vger.kernel.org,
+ intel-xe@lists.freedesktop.org, xen-devel@lists.xenproject.org
+Subject: Re: [PATCH v3 02/25] drm/dumb-buffers: Provide helper to set pitch
+ and size
+Message-ID: <Z8ryUGgxqVTEw9pe@phenom.ffwll.local>
+References: <20250218142542.438557-1-tzimmermann@suse.de>
+ <20250218142542.438557-3-tzimmermann@suse.de>
+ <Z8qxcTIcD4W5OGwL@phenom.ffwll.local>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
-In-Reply-To: <20250307123255.GK354511@nvidia.com>
+In-Reply-To: <Z8qxcTIcD4W5OGwL@phenom.ffwll.local>
 X-Operating-System: Linux phenom 6.12.11-amd64 
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
@@ -114,96 +94,295 @@ List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-On Fri, Mar 07, 2025 at 08:32:55AM -0400, Jason Gunthorpe wrote:
-> On Fri, Mar 07, 2025 at 11:28:37AM +0100, Simona Vetter wrote:
-> 
-> > > I wouldn't say it is wrong. It is still the correct thing to do, and
-> > > following down the normal cleanup paths is a good way to ensure the
-> > > special case doesn't have bugs. The primary difference is you want to
-> > > understand the device is dead and stop waiting on it faster. Drivers
-> > > need to consider these things anyhow if they want resiliency against
-> > > device crashes, PCI link wobbles and so on that don't involve
-> > > remove().
+On Fri, Mar 07, 2025 at 09:42:25AM +0100, Simona Vetter wrote:
+> On Tue, Feb 18, 2025 at 03:23:25PM +0100, Thomas Zimmermann wrote:
+> > Add drm_modes_size_dumb(), a helper to calculate the dumb-buffer
+> > scanline pitch and allocation size. Implementations of struct
+> > drm_driver.dumb_create can call the new helper for their size
+> > computations.
 > > 
-> > Might need to revisit that discussion, but Greg didn't like when we asked
-> > for a pci helper to check whether the device is physically gone (at least
-> > per the driver model). Hacking that in drivers is doable, but feels
-> > icky.
+> > There is currently quite a bit of code duplication among DRM's
+> > memory managers. Each calculates scanline pitch and buffer size
+> > from the given arguments, but the implementations are inconsistent
+> > in how they treat alignment and format support. Later patches will
+> > unify this code on top of drm_mode_size_dumb() as much as possible.
+> > 
+> > drm_mode_size_dumb() uses existing 4CC format helpers to interpret
+> > the given color mode. This makes the dumb-buffer interface behave
+> > similar the kernel's video= parameter. Current per-driver implementations
+> > again likely have subtle differences or bugs in how they support color
+> > modes.
+> > 
+> > The dumb-buffer UAPI is only specified for known color modes. These
+> > values describe linear, single-plane RGB color formats or legacy index
+> > formats. Other values should not be specified. But some user space
+> > still does. So for unknown color modes, there are a number of known
+> > exceptions for which drm_mode_size_dumb() calculates the pitch from
+> > the bpp value, as before. All other values work the same but print
+> > an error.
+> > 
+> > v3:
+> > - document the UAPI semantics
+> > - compute scanline pitch from for unknown color modes (Andy, Tomi)
+> > 
+> > Signed-off-by: Thomas Zimmermann <tzimmermann@suse.de>
+> > ---
+> >  drivers/gpu/drm/drm_dumb_buffers.c | 116 +++++++++++++++++++++++++++++
+> >  include/drm/drm_dumb_buffers.h     |  14 ++++
+> >  include/uapi/drm/drm_mode.h        |  46 +++++++++++-
+> >  3 files changed, 175 insertions(+), 1 deletion(-)
+> >  create mode 100644 include/drm/drm_dumb_buffers.h
+> > 
+> > diff --git a/drivers/gpu/drm/drm_dumb_buffers.c b/drivers/gpu/drm/drm_dumb_buffers.c
+> > index 9916aaf5b3f2..600ab281712b 100644
+> > --- a/drivers/gpu/drm/drm_dumb_buffers.c
+> > +++ b/drivers/gpu/drm/drm_dumb_buffers.c
+> > @@ -25,6 +25,8 @@
+> >  
+> >  #include <drm/drm_device.h>
+> >  #include <drm/drm_drv.h>
+> > +#include <drm/drm_dumb_buffers.h>
+> > +#include <drm/drm_fourcc.h>
+> >  #include <drm/drm_gem.h>
+> >  #include <drm/drm_mode.h>
+> >  
+> > @@ -57,6 +59,120 @@
+> >   * a hardware-specific ioctl to allocate suitable buffer objects.
+> >   */
+> >  
+> > +static int drm_mode_align_dumb(struct drm_mode_create_dumb *args,
+> > +			       unsigned long pitch_align,
+> > +			       unsigned long size_align)
+> > +{
+> > +	u32 pitch = args->pitch;
+> > +	u32 size;
+> > +
+> > +	if (!pitch)
+> > +		return -EINVAL;
+> > +
+> > +	if (pitch_align)
+> > +		pitch = roundup(pitch, pitch_align);
+> > +
+> > +	/* overflow checks for 32bit size calculations */
+> > +	if (args->height > U32_MAX / pitch)
+> > +		return -EINVAL;
+> > +
+> > +	if (!size_align)
+> > +		size_align = PAGE_SIZE;
+> > +	else if (!IS_ALIGNED(size_align, PAGE_SIZE))
+> > +		return -EINVAL;
+> > +
+> > +	size = ALIGN(args->height * pitch, size_align);
+> > +	if (!size)
+> > +		return -EINVAL;
+> > +
+> > +	args->pitch = pitch;
+> > +	args->size = size;
+> > +
+> > +	return 0;
+> > +}
+> > +
+> > +/**
+> > + * drm_mode_size_dumb - Calculates the scanline and buffer sizes for dumb buffers
+> > + * @dev: DRM device
+> > + * @args: Parameters for the dumb buffer
+> > + * @pitch_align: Scanline alignment in bytes
+> > + * @size_align: Buffer-size alignment in bytes
+> > + *
+> > + * The helper drm_mode_size_dumb() calculates the size of the buffer
+> > + * allocation and the scanline size for a dumb buffer. Callers have to
+> > + * set the buffers width, height and color mode in the argument @arg.
+> > + * The helper validates the correctness of the input and tests for
+> > + * possible overflows. If successful, it returns the dumb buffer's
+> > + * required scanline pitch and size in &args.
+> > + *
+> > + * The parameter @pitch_align allows the driver to specifies an
+> > + * alignment for the scanline pitch, if the hardware requires any. The
+> > + * calculated pitch will be a multiple of the alignment. The parameter
+> > + * @size_align allows to specify an alignment for buffer sizes. The
+> > + * returned size is always a multiple of PAGE_SIZE.
+> > + *
+> > + * Returns:
+> > + * Zero on success, or a negative error code otherwise.
+> > + */
+> > +int drm_mode_size_dumb(struct drm_device *dev,
+> > +		       struct drm_mode_create_dumb *args,
+> > +		       unsigned long pitch_align,
+> > +		       unsigned long size_align)
+> > +{
+> > +	u64 pitch = 0;
+> > +	u32 fourcc;
+> > +
+> > +	/*
+> > +	 * The scanline pitch depends on the buffer width and the color
+> > +	 * format. The latter is specified as a color-mode constant for
+> > +	 * which we first have to find the corresponding color format.
+> > +	 *
+> > +	 * Different color formats can have the same color-mode constant.
+> > +	 * For example XRGB8888 and BGRX8888 both have a color mode of 32.
+> > +	 * It is possible to use different formats for dumb-buffer allocation
+> > +	 * and rendering as long as all involved formats share the same
+> > +	 * color-mode constant.
+> > +	 */
+> > +	fourcc = drm_driver_color_mode_format(dev, args->bpp);
+> > +	if (fourcc != DRM_FORMAT_INVALID) {
+> > +		const struct drm_format_info *info = drm_format_info(fourcc);
+> > +
+> > +		if (!info)
+> > +			return -EINVAL;
+> > +		pitch = drm_format_info_min_pitch(info, 0, args->width);
+> > +	} else if (args->bpp) {
+> > +		/*
+> > +		 * Some userspace throws in arbitrary values for bpp and
+> > +		 * relies on the kernel to figure it out. In this case we
+> > +		 * fall back to the old method of using bpp directly. The
+> > +		 * over-commitment of memory from the rounding is acceptable
+> > +		 * for compatibility with legacy userspace. We have a number
+> > +		 * of deprecated legacy values that are explicitly supported.
+> > +		 */
+> > +		switch (args->bpp) {
+> > +		default:
+> > +			drm_warn(dev, "Unknown color mode %d; guessing buffer size.\n",
+> > +				 args->bpp);
+> > +			fallthrough;
 > 
-> I think Greg is right here, the driver model has less knowledge than
-> the driver if the device is alive.
-
-Maybe I misremember, but iirc he was fairly fundamentally opposed to
-trying to guess whether the hw is gone or not in the ->remove callback.
-But maybe that's more from the usb world, where all the hotremove race
-conditions are handled in the subsystem and you only have to deal with
-errno from calling into usb functions and unwind. So much, much easier
-situation.
-
-> The resiliency/fast-failure issue is not just isolated to having
-> observed a proper hot-unplug, but there are many classes of failure
-> that cause the device HW to malfunction that a robust driver can
-> detect and recover from. mlx5 attempts to do this for instance.
+> We cannot let userspace trigger dmesg warnings (or anything else really
+> that spams logs). Also I think for future proofing it would be good if we
+> just reject anything we don't currently know about instead of silently
+> letting this mess become worse. Hence my vote is to reject unknown bpp
+> hack values.
 > 
-> It turns out when you deploy clusters with 800,000 NICs in them there
-> are weird HW fails constantly and you have to be resilient on the SW
-> side and try to recover from them when possible.
+> > +		case 12:
+> > +		case 15:
+> > +		case 30: /* see drm_gem_afbc_get_bpp() */
 > 
-> So I'd say checking for a -1 read return on PCI is a sufficient
-> technique for the driver to use to understand if it's device is still
-> present. mlx5 devices further have an interactive register operation
-> "health check" that proves the device and it's PCI path is alive.
+> This is a bit too cryptic to me, I think if you want to do comments I'd
+> just put a long-form one above each value that explains where we've found
+> it and why it happens. I'm also assuming these all have depth = 0, which I
+> guess is something we should check just to keep this as strict as
+> possible? Or do they have matching depth?
+
+Correction from irc: Thomas pointed out that there's no depth in the
+create_dumb ioctl, I was mixing this up with addfb and failed to check. So
+please disregard this part, I was fabricating stuff out of some very thin
+air (and probably not enough coffee in the brain too).
+-Sima
+
 > 
-> Failing health checks trigger recovery, which shoot downs sleeps,
-> cleanly destroys stuff, resets the device, and starts running
-> again. IIRC this is actually done with a rdma hot unplug/plug sequence
-> autonomously executed inside the driver.
+> Cheers, Sima
 > 
-> A driver can do a health check immediately in remove() and make a
-> decision if the device is alive or not to speed up removal in the
-> hostile hot unplug case.
+> > +		case 10:
+> > +		case 64: /* used by Mesa */
+> > +			pitch = args->width * DIV_ROUND_UP(args->bpp, SZ_8);
+> > +			break;
+> > +		}
+> > +	}
+> > +
+> > +	if (!pitch || pitch > U32_MAX)
+> > +		return -EINVAL;
+> > +
+> > +	args->pitch = pitch;
+> > +
+> > +	return drm_mode_align_dumb(args, pitch_align, size_align);
+> > +}
+> > +EXPORT_SYMBOL(drm_mode_size_dumb);
+> > +
+> >  int drm_mode_create_dumb(struct drm_device *dev,
+> >  			 struct drm_mode_create_dumb *args,
+> >  			 struct drm_file *file_priv)
+> > diff --git a/include/drm/drm_dumb_buffers.h b/include/drm/drm_dumb_buffers.h
+> > new file mode 100644
+> > index 000000000000..6fe36004b19d
+> > --- /dev/null
+> > +++ b/include/drm/drm_dumb_buffers.h
+> > @@ -0,0 +1,14 @@
+> > +/* SPDX-License-Identifier: MIT */
+> > +
+> > +#ifndef __DRM_DUMB_BUFFERS_H__
+> > +#define __DRM_DUMB_BUFFERS_H__
+> > +
+> > +struct drm_device;
+> > +struct drm_mode_create_dumb;
+> > +
+> > +int drm_mode_size_dumb(struct drm_device *dev,
+> > +		       struct drm_mode_create_dumb *args,
+> > +		       unsigned long pitch_align,
+> > +		       unsigned long size_align);
+> > +
+> > +#endif
+> > diff --git a/include/uapi/drm/drm_mode.h b/include/uapi/drm/drm_mode.h
+> > index c082810c08a8..eea09103b1a6 100644
+> > --- a/include/uapi/drm/drm_mode.h
+> > +++ b/include/uapi/drm/drm_mode.h
+> > @@ -1058,7 +1058,7 @@ struct drm_mode_crtc_page_flip_target {
+> >   * struct drm_mode_create_dumb - Create a KMS dumb buffer for scanout.
+> >   * @height: buffer height in pixels
+> >   * @width: buffer width in pixels
+> > - * @bpp: bits per pixel
+> > + * @bpp: color mode
+> >   * @flags: must be zero
+> >   * @handle: buffer object handle
+> >   * @pitch: number of bytes between two consecutive lines
+> > @@ -1066,6 +1066,50 @@ struct drm_mode_crtc_page_flip_target {
+> >   *
+> >   * User-space fills @height, @width, @bpp and @flags. If the IOCTL succeeds,
+> >   * the kernel fills @handle, @pitch and @size.
+> > + *
+> > + * The value of @bpp is a color-mode number describing a specific format
+> > + * or a variant thereof. The value often corresponds to the number of bits
+> > + * per pixel for most modes, although there are exceptions. Each color mode
+> > + * maps to a DRM format plus a number of modes with similar pixel layout.
+> > + * Framebuffer layout is always linear.
+> > + *
+> > + * Support for all modes and formats is optional. Even if dumb-buffer
+> > + * creation with a certain color mode succeeds, it is not guaranteed that
+> > + * the DRM driver supports any of the related formats. Most drivers support
+> > + * a color mode of 32 with a format of DRM_FORMAT_XRGB8888 on their primary
+> > + * plane.
+> > + *
+> > + * +------------+------------------------+------------------------+
+> > + * | Color mode | Framebuffer format     | Compatibles            |
+> > + * +============+========================+========================+
+> > + * |     32     |  * DRM_FORMAT_XRGB8888 |  * DRM_FORMAT_XBGR8888 |
+> > + * |            |                        |  * DRM_FORMAT_RGBX8888 |
+> > + * |            |                        |  * DRM_FORMAT_BGRX8888 |
+> > + * +------------+------------------------+------------------------+
+> > + * |     24     |  * DRM_FORMAT_RGB888   |  * DRM_FORMAT_BGR888   |
+> > + * +------------+------------------------+------------------------+
+> > + * |     16     |  * DRM_FORMAT_RGB565   |  * DRM_FORMAT_BGR565   |
+> > + * +------------+------------------------+------------------------+
+> > + * |     15     |  * DRM_FORMAT_XRGB1555 |  * DRM_FORMAT_XBGR1555 |
+> > + * |            |                        |  * DRM_FORMAT_RGBX1555 |
+> > + * |            |                        |  * DRM_FORMAT_BGRX1555 |
+> > + * +------------+------------------------+------------------------+
+> > + * |      8     |  * DRM_FORMAT_C8       |  * DRM_FORMAT_R8       |
+> > + * +------------+------------------------+------------------------+
+> > + * |      4     |  * DRM_FORMAT_C4       |  * DRM_FORMAT_R4       |
+> > + * +------------+------------------------+------------------------+
+> > + * |      2     |  * DRM_FORMAT_C2       |  * DRM_FORMAT_R2       |
+> > + * +------------+------------------------+------------------------+
+> > + * |      1     |  * DRM_FORMAT_C1       |  * DRM_FORMAT_R1       |
+> > + * +------------+------------------------+------------------------+
+> > + *
+> > + * Color modes of 10, 12, 15, 30 and 64 are only supported for use by
+> > + * legacy user space. Please don't use them in new code. Other modes
+> > + * are not support.
+> > + *
+> > + * Do not attempt to allocate anything but linear framebuffer memory
+> > + * with single-plane RGB data. Allocation of other framebuffer
+> > + * layouts requires dedicated ioctls in the respective DRM driver.
+> >   */
+> >  struct drm_mode_create_dumb {
+> >  	__u32 height;
+> > -- 
+> > 2.48.1
+> > 
+> 
+> -- 
+> Simona Vetter
+> Software Engineer, Intel Corporation
+> http://blog.ffwll.ch
 
-Hm ... I guess when you get an all -1 read you check with a specific
-register to make sure it's not a false positive? Since for some registers
-that's a valid value.
-
-But yeah maybe this approach is more solid. The current C approach we have
-with an srcu revoceable section is definitely a least worse attempt from a
-very, very bad starting point.
-
-I think maybe we should also have two levels here:
-
-- Ideal driver design, probably what you've outlined above. This will need
-  some hw/driver specific thought to get the optimal design most likely.
-  This part is probably more bus and subsystem specific best practices
-  documentation than things we enforce with the rust abstractions.
-
-- The "at least we don't blow up with memory safety issues" bare minimum
-  that the rust abstractions should guarantee. So revocable and friends.
-
-And I think the latter safety fallback does not prevent you from doing the
-full fancy design, e.g. for revocable resources that only happens after
-your explicitly-coded ->remove() callback has finished. Which means you
-still have full access to the hw like anywhere else.
-
-Does this sounds like a possible conclusion of this thread, or do we need
-to keep digging?
-
-Also now that I look at this problem as a two-level issue, I think drm is
-actually a lot better than what I explained. If you clean up driver state
-properly in ->remove (or as stack automatic cleanup functions that run
-before all the mmio/irq/whatever stuff disappears), then we are largely
-there already with being able to fully quiescent driver state enough to
-make sure no new requests can sneak in. As an example
-drm_atomic_helper_shutdown does a full kernel modesetting commit across
-all resources, which guarantees that all preceeding in-flight commits have
-finished (or timed out, we should probably be a bit smarter on this so the
-timeouts are shorter when the hw is gone for good). And if you do that
-after drm_dev_unplug then nothing new should have been able to sneak in I
-think, at least conceptually. In practice we might have a bunch of funny
-races that are worth plugging I guess.
-
-Cheers, Sima
 -- 
 Simona Vetter
 Software Engineer, Intel Corporation
