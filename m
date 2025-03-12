@@ -2,91 +2,79 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id 0E473CBAE55
-	for <lists+nouveau@lfdr.de>; Sat, 13 Dec 2025 13:46:02 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 3DD05CBAAD4
+	for <lists+nouveau@lfdr.de>; Sat, 13 Dec 2025 13:42:26 +0100 (CET)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 88A7010EC12;
-	Sat, 13 Dec 2025 12:42:14 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 63E2810EA6E;
+	Sat, 13 Dec 2025 12:41:00 +0000 (UTC)
 Authentication-Results: gabe.freedesktop.org;
-	dkim=permerror (0-bit key) header.d=gmail.com header.i=@gmail.com header.b="YOqqeLXQ";
+	dkim=permerror (0-bit key) header.d=gmail.com header.i=@gmail.com header.b="SR8ZeLvy";
 	dkim-atps=neutral
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from mail-pl1-f178.google.com (mail-pl1-f178.google.com
- [209.85.214.178])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 4299710E997;
- Thu,  6 Mar 2025 13:59:11 +0000 (UTC)
-Received: by mail-pl1-f178.google.com with SMTP id
- d9443c01a7336-224100e9a5cso11445635ad.2; 
- Thu, 06 Mar 2025 05:59:11 -0800 (PST)
+Received: from mail-wm1-f53.google.com (mail-wm1-f53.google.com
+ [209.85.128.53])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id EF9B610E070;
+ Wed, 12 Mar 2025 13:09:40 +0000 (UTC)
+Received: by mail-wm1-f53.google.com with SMTP id
+ 5b1f17b1804b1-43cef035a3bso25127105e9.1; 
+ Wed, 12 Mar 2025 06:09:40 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1741269551; x=1741874351; darn=lists.freedesktop.org;
- h=content-transfer-encoding:mime-version:references:in-reply-to:from
- :subject:cc:to:message-id:date:from:to:cc:subject:date:message-id
- :reply-to; bh=gcMj47LDDJL0C0ekfxA2WdyVcUGhX6i6MQXT5ot4g4M=;
- b=YOqqeLXQzNsfCzaqzMHBkmVhZo0qK1VPoKgNB7yUzzdjCdrvVAO/hdqzs5vdwrrdf8
- dk0EgCTRLPfbZGki5a17/D+UmZaKDM+9h56Zkbz3YEcRQRMabh124/5CWvzOP7Moz+5h
- 3oA1L7zYAihKFwiMFQwMw+U3sswvL/kSxVOZAua3g6yMOA7sygmK0n03tihmCz/Bza2d
- yQrSj6AsAKiHK1E0cASVKm899E5WJvzrHV9GQcMG5Tr02ocb5u4f+hZzVLc2F/yyOtxI
- rv98BJbh309GVQIIm/2HhqQMb+YeuzJqfyZf1MM3C509kUuIPRvqpMiuY7/lCgMN8txm
- 9PRQ==
+ d=gmail.com; s=20230601; t=1741784979; x=1742389779; darn=lists.freedesktop.org;
+ h=content-transfer-encoding:content-disposition:mime-version
+ :message-id:subject:cc:to:from:date:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=BesuV5iUBr9H3CHJKVubwaztfZ8d7wDanwbVw8gGgQA=;
+ b=SR8ZeLvy7Nvine0jJobC5l7lXgKM1HXUr8UKWihqD2hP4SQgV4AE9vOeZ/ak8Xq9B9
+ g5xHerY6Gy89WfwwM99SHPJYLFFyKvgEw+Gi7/moWu8Vk0S5KQfW3zVdhhfTmZo3Re3Q
+ aMZfxvI+kG2WFhjDHqVDXUuq0mFKW+UK3JUaKB008ngxfTSVcpa5y0C9pzvovBseSets
+ SeCdV8vUmPhRtDV/VTd/33uRhNCr1WWg0Rl2BChnhwRH1Yo0y/f1mfFt71z7VjtHGcmU
+ qY58eAMAoIy1xPjfKuWnW3yWen5UzpkPZog5bGALy5UKU3cvMLub4UDZaeCkqg52Tabi
+ KSPA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1741269551; x=1741874351;
- h=content-transfer-encoding:mime-version:references:in-reply-to:from
- :subject:cc:to:message-id:date:x-gm-message-state:from:to:cc:subject
- :date:message-id:reply-to;
- bh=gcMj47LDDJL0C0ekfxA2WdyVcUGhX6i6MQXT5ot4g4M=;
- b=Hx4z+uxFTJUyuTy1S5r+pmPnbhOz3C16GCVLL1ywbBT2aRcZe1r7tacrZcAHpEylhN
- x3ctU1UVY6tImUu4GQiXzXmr91u9wo6g4gZmTSpbHz79s+nXRSxl7vUjsXJ+8Youz4CV
- b8bTJKmRf3/Tx4B8sXwgMmRJzrytZh/d6lEPg/8f0eNvRqufMaaBMSoNSuKgWk90+UuP
- ukAJ6GB/KeiiQs4wlX84k9+6+ZQhjZSjw2dT8bhjhT0RqJTAdiYJFe/7805yYgnmLy+y
- lVRlH2n0z586oaoXYhCEp/hxU1kJ1T29AMfJ0E62jLD5oXrBWmvBfcNEJZCKpguPHkzJ
- 1GXA==
+ d=1e100.net; s=20230601; t=1741784979; x=1742389779;
+ h=content-transfer-encoding:content-disposition:mime-version
+ :message-id:subject:cc:to:from:date:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=BesuV5iUBr9H3CHJKVubwaztfZ8d7wDanwbVw8gGgQA=;
+ b=XkEw/dwRw4pP6Lt58KJKgHMFyappN//hvAErLIYpFDo4pFMYaIto/9OC/DJm7nzbCw
+ y0v3pOcCXqip9iud5y6idgZ7okn0VYeCG+C2j7U54d9uorP6mvFYyFBRoWuV4esB3Geh
+ v9yCzWYD6eFg8BDwYNt1QduH1dJY8VphhFbpujAxr0Y2GL+0qHFq9MX1SwOpwGVhAi4o
+ La3b8ShGJK18n45If3inlMcCE5g7ZLBvLyRnnEAWTgFJtY+r/qXfM0vppc76tTFuMxb+
+ lwrj9PTgl06tLqYPgb/OIMDM6wZlZ8lEg0rfSF6IQspKAUUnF2kYbNbrjJzXJtG1gOxj
+ 3c3w==
 X-Forwarded-Encrypted: i=1;
- AJvYcCVkA6qPw738L+pkkCLTa8MKk3wThqgHUW97jmN469TOuZERCzgy6RqN5kUjOxb99555LvcVgTa0CQ==@lists.freedesktop.org,
- AJvYcCWPMidHb8CMyrzwo356LNUH0nGwTXlWHOUhWaQaBL/+JQxeF6J0T/X+N8pmeNpGlnp+EHS4qeWfrDc=@lists.freedesktop.org
-X-Gm-Message-State: AOJu0Yyzvv4v+oqJvRUcstUVFpY/h9+f7nRQLjen89x5hZRUeAePC0qo
- 0Zr9KoMEd1aBEouEXFIL2YFxzpMNS0n4tgg/qC1fLrJoK4ARxkeC
-X-Gm-Gg: ASbGncuSYSymKjbitYvjLfCR39puMZ8SGPGz1h+ovDN/yBAIA8dW4QOoi9ewG1h42lx
- Ivz/WSmmlwhwK0cNKRwqYGdZbxLrGeZxu0mM6E6Qm0wm6n8lcZwdVdr1t8GPVYJxuHfZGF4pCq7
- oIHl3k+EvaHOQxoSeFAdtsiq1MB3e7OyUplCh2+oeZvv4YfoMN9MRwzWRBleXNqEDTzFfcEvp8x
- rgUoly+j05oim6tBRSMNb0WZkMyj1h+wWLrJzfyEPOup0ESf92dTL0NZi1eU8a9gTuxf7BXieCp
- dBW0ApF5jsF9YzXcUPZjMStjk7mdDYNutdpZ/TWBtb61PrK3Scx3+XG8BNz6zmbYCKw1l6dhuuR
- M/B0xdBMLA+jecNWp3bR/WZGC+dA=
-X-Google-Smtp-Source: AGHT+IFqC7dar9vSI6YGsXxKnsXEPE0Q3GPt4+bYPBgIONPD8wz2KSMdMkJPHp0sptOtsCw8Cul/TQ==
-X-Received: by 2002:a05:6a20:4305:b0:1e0:dcc5:164d with SMTP id
- adf61e73a8af0-1f34944ed8bmr12193897637.8.1741269550654; 
- Thu, 06 Mar 2025 05:59:10 -0800 (PST)
-Received: from localhost (p4204131-ipxg22701hodogaya.kanagawa.ocn.ne.jp.
- [153.160.176.131]) by smtp.gmail.com with ESMTPSA id
- 41be03b00d2f7-af28bbf3ab0sm76581a12.9.2025.03.06.05.59.04
+ AJvYcCXJdid5hg2dfYoIM6kWKbn66Lessq2C//evl8A4AaZZRY0Z0KoYDvzCjhS4N59jQlAizA8Gv3lBp5c=@lists.freedesktop.org
+X-Gm-Message-State: AOJu0YzQU+k5gA4qQFEsUx56XMTZ5FB/sxIDIVdE7EuySrRw6D+x0Iq/
+ uffAN4kFXygjAOtemEnwUI97O5TrjZtzrQESyLLaZ/Lg/vWLmyJW+ytANIJQ
+X-Gm-Gg: ASbGnctuUuJ2JI6QTv5i27wSy5rEqvvLk/o9bgIb540fR2CMzj6LrVhOgNEXR1Lndiu
+ JgGnUD6wOWQDPAbUH1PAePHZ8jihAc1OmiBSkpk3m0iBQjkric1Hy1yVfkJzzu6iE0bjVQcDZrL
+ /wki6PGQ3yVFOzPxDybtXr6eOQPOsYa2EgIuODLThlD2/NMwl5bIsTw5d6nVtb/UxGf8M5JSdAp
+ TsqE0ZsgiFL1diQ+uEPVPtmGy+8vHjJaWJeUgjYSvU4Bnb3UiwPuh7f+sjhYXpEy/yeA8LMid52
+ padIDqW/8EV7BZR4deP90DhVxqm/4znd5//vtrRX4/4uKP1Ki86V9mOhtoNuN2g=
+X-Google-Smtp-Source: AGHT+IEWvAbnYEcsY0S3sZRK65NS9EF9SyTrlTuzSCKkbzoiPm9A0wySzWIsDJgR35ApeXwsRAGZhA==
+X-Received: by 2002:a05:600d:14:b0:43c:e2dd:98f3 with SMTP id
+ 5b1f17b1804b1-43ce2dda00amr130086975e9.21.1741784979045; 
+ Wed, 12 Mar 2025 06:09:39 -0700 (PDT)
+Received: from debian.local ([84.70.89.211]) by smtp.gmail.com with ESMTPSA id
+ 5b1f17b1804b1-43d0a8c5cbfsm20408135e9.30.2025.03.12.06.09.37
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 06 Mar 2025 05:59:10 -0800 (PST)
-Date: Thu, 06 Mar 2025 22:59:02 +0900 (JST)
-Message-Id: <20250306.225902.541492197262171384.fujita.tomonori@gmail.com>
-To: dakr@kernel.org
-Cc: fujita.tomonori@gmail.com, airlied@gmail.com, simona@ffwll.ch,
- corbet@lwn.net, maarten.lankhorst@linux.intel.com, mripard@kernel.org,
- tzimmermann@suse.de, ajanulgu@redhat.com, lyude@redhat.com,
- pstanner@redhat.com, zhiw@nvidia.com, cjia@nvidia.com,
- jhubbard@nvidia.com, bskeggs@nvidia.com, acurrid@nvidia.com,
- ojeda@kernel.org, alex.gaynor@gmail.com, boqun.feng@gmail.com,
- gary@garyguo.net, bjorn3_gh@protonmail.com, benno.lossin@proton.me,
- a.hindborg@kernel.org, aliceryhl@google.com, tmgross@umich.edu,
- gregkh@linuxfoundation.org, mcgrof@kernel.org, russ.weight@linux.dev,
- dri-devel@lists.freedesktop.org, linux-doc@vger.kernel.org,
- linux-kernel@vger.kernel.org, nouveau@lists.freedesktop.org,
- rust-for-linux@vger.kernel.org
-Subject: Re: [PATCH v5 5/5] gpu: nova-core: add initial documentation
-From: FUJITA Tomonori <fujita.tomonori@gmail.com>
-In-Reply-To: <Z8mm4fJQxXMiN5tu@cassiopeiae>
-References: <20250304173555.2496-6-dakr@kernel.org>
- <20250306.215638.838863448505767234.fujita.tomonori@gmail.com>
- <Z8mm4fJQxXMiN5tu@cassiopeiae>
-Mime-Version: 1.0
-Content-Type: Text/Plain; charset=us-ascii
-Content-Transfer-Encoding: 7bit
-X-Mailman-Approved-At: Sat, 13 Dec 2025 12:40:52 +0000
+ Wed, 12 Mar 2025 06:09:38 -0700 (PDT)
+Date: Wed, 12 Mar 2025 13:09:35 +0000
+From: Chris Bainbridge <chris.bainbridge@gmail.com>
+To: nouveau@lists.freedesktop.org
+Cc: maarten.lankhorst@linux.intel.com, mripard@kernel.org,
+ tzimmermann@suse.de, airlied@gmail.com, simona@ffwll.ch,
+ lyude@redhat.com, dakr@kernel.org, sumit.semwal@linaro.org,
+ christian.koenig@amd.com, dri-devel@lists.freedesktop.org,
+ linux-kernel@vger.kernel.org
+Subject: [PATCH] drm/nouveau: prime: fix ttm_bo_delayed_delete oops
+Message-ID: <Z9GHj-edWJmyzpdY@debian.local>
+MIME-Version: 1.0
+Content-Type: text/plain; charset=iso-8859-1
+Content-Disposition: inline
+Content-Transfer-Encoding: 8bit
+X-Mailman-Approved-At: Sat, 13 Dec 2025 12:40:42 +0000
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -101,47 +89,129 @@ List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-On Thu, 6 Mar 2025 14:45:05 +0100
-Danilo Krummrich <dakr@kernel.org> wrote:
+Fix an oops in ttm_bo_delayed_delete which results from dererencing a
+dangling pointer:
 
-> On Thu, Mar 06, 2025 at 09:56:38PM +0900, FUJITA Tomonori wrote:
->> On Tue,  4 Mar 2025 18:34:52 +0100
->> Danilo Krummrich <dakr@kernel.org> wrote:
->> 
->> > +Delay / Sleep abstractions
->> > +--------------------------
->> > +
->> > +Rust abstractions for the kernel's delay() and sleep() functions.
->> > +
->> > +There is some ongoing work from FUJITA Tomonori [1], which has not seen any updates
->> > +since Oct. 24.
->> > +
->> > +| Complexity: Beginner
->> > +| Link: https://lore.kernel.org/netdev/20241001112512.4861-2-fujita.tomonori@gmail.com/ [1]
->> 
->> I posted v11 last month.
->> 
->> https://lore.kernel.org/netdev/20250220070611.214262-1-fujita.tomonori@gmail.com/
-> 
-> Thanks for letting me know.
-> 
-> I think I lost track of this because in v1 the series was named "add delay
-> abstraction (sleep functions)" and with v2 it was switched to "rust: Add IO
-> polling" and I was searching for subsequent patch series with the "delay"
-> keyword.
+Oops: general protection fault, probably for non-canonical address 0x6b6b6b6b6b6b6b7b: 0000 [#1] PREEMPT SMP
+CPU: 4 UID: 0 PID: 1082 Comm: kworker/u65:2 Not tainted 6.14.0-rc4-00267-g505460b44513-dirty #216
+Hardware name: LENOVO 82N6/LNVNB161216, BIOS GKCN65WW 01/16/2024
+Workqueue: ttm ttm_bo_delayed_delete [ttm]
+RIP: 0010:dma_resv_iter_first_unlocked+0x55/0x290
+Code: 31 f6 48 c7 c7 00 2b fa aa e8 97 bd 52 ff e8 a2 c1 53 00 5a 85 c0 74 48 e9 88 01 00 00 4c 89 63 20 4d 85 e4 0f 84 30 01 00 00 <41> 8b 44 24 10 c6 43 2c 01 48 89 df 89 43 28 e8 97 fd ff ff 4c 8b
+RSP: 0018:ffffbf9383473d60 EFLAGS: 00010202
+RAX: 0000000000000001 RBX: ffffbf9383473d88 RCX: 0000000000000000
+RDX: 0000000000000000 RSI: 0000000000000000 RDI: 0000000000000000
+RBP: ffffbf9383473d78 R08: 0000000000000000 R09: 0000000000000000
+R10: 0000000000000000 R11: 0000000000000000 R12: 6b6b6b6b6b6b6b6b
+R13: ffffa003bbf78580 R14: ffffa003a6728040 R15: 00000000000383cc
+FS:  0000000000000000(0000) GS:ffffa00991c00000(0000) knlGS:0000000000000000
+CS:  0010 DS: 0000 ES: 0000 CR0: 0000000080050033
+CR2: 0000758348024dd0 CR3: 000000012c259000 CR4: 0000000000f50ef0
+PKRU: 55555554
+Call Trace:
+ <TASK>
+ ? __die_body.cold+0x19/0x26
+ ? die_addr+0x3d/0x70
+ ? exc_general_protection+0x159/0x460
+ ? asm_exc_general_protection+0x27/0x30
+ ? dma_resv_iter_first_unlocked+0x55/0x290
+ dma_resv_wait_timeout+0x56/0x100
+ ttm_bo_delayed_delete+0x69/0xb0 [ttm]
+ process_one_work+0x217/0x5c0
+ worker_thread+0x1c8/0x3d0
+ ? apply_wqattrs_cleanup.part.0+0xc0/0xc0
+ kthread+0x10b/0x240
+ ? kthreads_online_cpu+0x140/0x140
+ ret_from_fork+0x40/0x70
+ ? kthreads_online_cpu+0x140/0x140
+ ret_from_fork_asm+0x11/0x20
+ </TASK>
 
-I see.
+The cause of this is:
 
-During the review process, I changed the subject due to the consensus
-that, in most cases, device drivers should use read_poll_timeout
-instead of calling the sleep function directly.
+- drm_prime_gem_destroy calls dma_buf_put(dma_buf) which releases the
+  reference to the shared dma_buf. The reference count is 0, so the
+  dma_buf is destroyed, which in turn decrements the corresponding
+  amdgpu_bo reference count to 0, and the amdgpu_bo is destroyed -
+  calling drm_gem_object_release then dma_resv_fini (which destroys the
+  reservation object), then finally freeing the amdgpu_bo.
 
-> Anyways, AFAICS you ended up with adding fsleep(). I think nova-core will need
-> control over having a busy loop or actually re-schedule.
+- nouveau_bo obj->bo.base.resv is now a dangling pointer to the memory
+  formerly allocated to the amdgpu_bo.
 
-I plan to add read_poll_timeout_atomic() with delay functions:
+- nouveau_gem_object_del calls ttm_bo_put(&nvbo->bo) which calls
+  ttm_bo_release, which schedules ttm_bo_delayed_delete.
 
-https://lore.kernel.org/netdev/20250228.080550.354359820929821928.fujita.tomonori@gmail.com/
+- ttm_bo_delayed_delete runs and dereferences the dangling resv pointer,
+  resulting in a general protection fault.
 
-delay functions need Delta struct in the patchset so the patchset
-needs to be merged first.
+Fix this by moving the drm_prime_gem_destroy call from
+nouveau_gem_object_del to nouveau_bo_del_ttm. This ensures that it will
+be run after ttm_bo_delayed_delete.
+
+Signed-off-by: Chris Bainbridge <chris.bainbridge@gmail.com>
+Co-Developed-by: Christian König <christian.koenig@amd.com>
+Link: https://gitlab.freedesktop.org/drm/amd/-/issues/3937
+---
+ drivers/gpu/drm/drm_prime.c           | 8 ++++++--
+ drivers/gpu/drm/nouveau/nouveau_bo.c  | 3 +++
+ drivers/gpu/drm/nouveau/nouveau_gem.c | 3 ---
+ 3 files changed, 9 insertions(+), 5 deletions(-)
+
+diff --git a/drivers/gpu/drm/drm_prime.c b/drivers/gpu/drm/drm_prime.c
+index 32a8781cfd67..4b90fa8954d7 100644
+--- a/drivers/gpu/drm/drm_prime.c
++++ b/drivers/gpu/drm/drm_prime.c
+@@ -929,7 +929,9 @@ EXPORT_SYMBOL(drm_gem_prime_export);
+  * &drm_driver.gem_prime_import_sg_table internally.
+  *
+  * Drivers must arrange to call drm_prime_gem_destroy() from their
+- * &drm_gem_object_funcs.free hook when using this function.
++ * &ttm_buffer_object.destroy hook when using this function,
++ * to avoid the dma_buf being freed while the ttm_buffer_object can still
++ * dereference it.
+  */
+ struct drm_gem_object *drm_gem_prime_import_dev(struct drm_device *dev,
+ 					    struct dma_buf *dma_buf,
+@@ -999,7 +1001,9 @@ EXPORT_SYMBOL(drm_gem_prime_import_dev);
+  * implementation in drm_gem_prime_fd_to_handle().
+  *
+  * Drivers must arrange to call drm_prime_gem_destroy() from their
+- * &drm_gem_object_funcs.free hook when using this function.
++ * &ttm_buffer_object.destroy hook when using this function,
++ * to avoid the dma_buf being freed while the ttm_buffer_object can still
++ * dereference it.
+  */
+ struct drm_gem_object *drm_gem_prime_import(struct drm_device *dev,
+ 					    struct dma_buf *dma_buf)
+diff --git a/drivers/gpu/drm/nouveau/nouveau_bo.c b/drivers/gpu/drm/nouveau/nouveau_bo.c
+index db961eade225..2016c1e7242f 100644
+--- a/drivers/gpu/drm/nouveau/nouveau_bo.c
++++ b/drivers/gpu/drm/nouveau/nouveau_bo.c
+@@ -144,6 +144,9 @@ nouveau_bo_del_ttm(struct ttm_buffer_object *bo)
+ 	nouveau_bo_del_io_reserve_lru(bo);
+ 	nv10_bo_put_tile_region(dev, nvbo->tile, NULL);
+ 
++	if (bo->base.import_attach)
++		drm_prime_gem_destroy(&bo->base, bo->sg);
++
+ 	/*
+ 	 * If nouveau_bo_new() allocated this buffer, the GEM object was never
+ 	 * initialized, so don't attempt to release it.
+diff --git a/drivers/gpu/drm/nouveau/nouveau_gem.c b/drivers/gpu/drm/nouveau/nouveau_gem.c
+index 9ae2cee1c7c5..67e3c99de73a 100644
+--- a/drivers/gpu/drm/nouveau/nouveau_gem.c
++++ b/drivers/gpu/drm/nouveau/nouveau_gem.c
+@@ -87,9 +87,6 @@ nouveau_gem_object_del(struct drm_gem_object *gem)
+ 		return;
+ 	}
+ 
+-	if (gem->import_attach)
+-		drm_prime_gem_destroy(gem, nvbo->bo.sg);
+-
+ 	ttm_bo_put(&nvbo->bo);
+ 
+ 	pm_runtime_mark_last_busy(dev);
+-- 
+2.47.2
+
