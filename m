@@ -2,71 +2,104 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id E47B3A5EA5B
-	for <lists+nouveau@lfdr.de>; Thu, 13 Mar 2025 04:59:22 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 8CCBBA5F856
+	for <lists+nouveau@lfdr.de>; Thu, 13 Mar 2025 15:32:24 +0100 (CET)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 74E6610E7ED;
-	Thu, 13 Mar 2025 03:59:19 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 5D27210E8BB;
+	Thu, 13 Mar 2025 14:32:20 +0000 (UTC)
 Authentication-Results: gabe.freedesktop.org;
-	dkim=pass (2048-bit key; unprotected) header.d=intel.com header.i=@intel.com header.b="kGiEvRdO";
+	dkim=pass (1024-bit key; secure) header.d=ffwll.ch header.i=@ffwll.ch header.b="OIap5nSs";
 	dkim-atps=neutral
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from mgamail.intel.com (mgamail.intel.com [192.198.163.7])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 104B810E061;
- Thu, 13 Mar 2025 03:59:18 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
- d=intel.com; i=@intel.com; q=dns/txt; s=Intel;
- t=1741838358; x=1773374358;
- h=date:from:to:cc:subject:message-id:references:
- mime-version:in-reply-to;
- bh=cYwKWE3qx6aAxxggYpyZsccNMSnGdzKXacMIEiXDO/w=;
- b=kGiEvRdO7ypxyKy9Dq7ERrqi+cRZELn0kZdpKbsZ9OglnTZ44djU0w9U
- rjeUe0OEb+klJuessPL5uKt88muhj50SvsOaN0V2wnozm05W+p53IaV0a
- uPMjbQl9b2Wg4CAEsb+rHQ25D4+EY3Kcb5EWfESAoWiFyVGheoDM4By5P
- pGxliT9RptJ7/9KXDqWxzxRo5rPJYZBFRFLRvjzFf2pvYkgFRVfIYgFZP
- 3ynis5t86WFyYFcm33LJOuri/7AwpZX0p4or3qkgFyNo7gqyMVpXQ2Y/T
- B2xA7uHaZV+RuLH6lzZLfwzcuMwJP+qEWPJKV8zq/4PIF8DjTxuCqN9I0 g==;
-X-CSE-ConnectionGUID: Sg6Bp9MCQ2K7iTHHrKFtfg==
-X-CSE-MsgGUID: twVIn27DTL2xdc4lj8xUQA==
-X-IronPort-AV: E=McAfee;i="6700,10204,11371"; a="68294330"
-X-IronPort-AV: E=Sophos;i="6.14,243,1736841600"; d="scan'208";a="68294330"
-Received: from fmviesa009.fm.intel.com ([10.60.135.149])
- by fmvoesa101.fm.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
- 12 Mar 2025 20:59:17 -0700
-X-CSE-ConnectionGUID: Jk/rBPr/R+CE+fsVXvv0Hg==
-X-CSE-MsgGUID: rCVWNuURQ4Kucu2VbRCsgw==
-X-ExtLoop1: 1
-X-IronPort-AV: E=Sophos;i="6.14,243,1736841600"; d="scan'208";a="121530505"
-Received: from lkp-server02.sh.intel.com (HELO a4747d147074) ([10.239.97.151])
- by fmviesa009.fm.intel.com with ESMTP; 12 Mar 2025 20:59:12 -0700
-Received: from kbuild by a4747d147074 with local (Exim 4.96)
- (envelope-from <lkp@intel.com>) id 1tsZij-00096K-1j;
- Thu, 13 Mar 2025 03:59:01 +0000
-Date: Thu, 13 Mar 2025 11:58:50 +0800
-From: kernel test robot <lkp@intel.com>
-To: Thomas Zimmermann <tzimmermann@suse.de>, simona@ffwll.ch,
- airlied@gmail.com, mripard@kernel.org,
- maarten.lankhorst@linux.intel.com, geert@linux-m68k.org,
- tomi.valkeinen@ideasonboard.com
-Cc: llvm@lists.linux.dev, oe-kbuild-all@lists.linux.dev,
- dri-devel@lists.freedesktop.org, linux-mediatek@lists.infradead.org,
- freedreno@lists.freedesktop.org, linux-arm-msm@vger.kernel.org,
- imx@lists.linux.dev, linux-samsung-soc@vger.kernel.org,
- nouveau@lists.freedesktop.org, virtualization@lists.linux.dev,
- spice-devel@lists.freedesktop.org, linux-renesas-soc@vger.kernel.org,
- linux-rockchip@lists.infradead.org, linux-tegra@vger.kernel.org,
- intel-xe@lists.freedesktop.org, xen-devel@lists.xenproject.org,
- Thomas Zimmermann <tzimmermann@suse.de>,
- Biju Das <biju.das.jz@bp.renesas.com>
-Subject: Re: [PATCH v4 18/25] drm/renesas/rz-du: Compute dumb-buffer sizes
- with drm_mode_size_dumb()
-Message-ID: <202503131309.ZzS9Tova-lkp@intel.com>
-References: <20250311155120.442633-19-tzimmermann@suse.de>
+Received: from mail-wr1-f43.google.com (mail-wr1-f43.google.com
+ [209.85.221.43])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 0789510E8BB
+ for <nouveau@lists.freedesktop.org>; Thu, 13 Mar 2025 14:32:18 +0000 (UTC)
+Received: by mail-wr1-f43.google.com with SMTP id
+ ffacd0b85a97d-3965c995151so313322f8f.1
+ for <nouveau@lists.freedesktop.org>; Thu, 13 Mar 2025 07:32:18 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=ffwll.ch; s=google; t=1741876337; x=1742481137; darn=lists.freedesktop.org; 
+ h=in-reply-to:content-disposition:mime-version:references
+ :mail-followup-to:message-id:subject:cc:to:from:date:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=qmJEZa8bhP51f5WeMX8gVU0QSf/9tpQBkqyv3+FpHNc=;
+ b=OIap5nSs0FZNdWygUw07s31eeT2pWk3mLRL758ckq/efEc6wKRYbWZXoxXgY2XfEK9
+ fPQgvBKcwJjS0e4UePstpe+iSdokzdC85qUCyu9mm/DEi5YKSZGtDPQ3m8HMTr3ETgix
+ nWUpIOc0NpsCtPg72gqeJaOL4P6LSJyD9QDj4=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1741876337; x=1742481137;
+ h=in-reply-to:content-disposition:mime-version:references
+ :mail-followup-to:message-id:subject:cc:to:from:date
+ :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+ bh=qmJEZa8bhP51f5WeMX8gVU0QSf/9tpQBkqyv3+FpHNc=;
+ b=F4+9hmzBKjCvziq9neUNdRXkGgXII8mIVmg0UIhfaRhgnmiR+cUN36JnU2slXSuuxs
+ zbfKy3VZXQV6i3+gVW0TvmRYgqb/3U73srQ0z9aEoWr/LaG8scO4UElAWYX8pFhw4+iK
+ fVntKmn4CFwDkyqddlP4LJYffKsbDauB/WXKnKQzXcQUOaxcku52P7Rk/Soe2PeAkzD0
+ F4trfaXYwBN8TSwumEOpZihRxMIs/pbncSW5piV9A3t6vhSjPiZpxZ8jfZ7MEHj6GF8I
+ 69TUNzQjhNcAoNWMur/RS3JOOnlLAnYpZCbDOZ6fhmrEKH59FDXoRa/RgLkoKTFVOhnQ
+ 9cXw==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCUaGRQo2uN00MBRj7glm+v+CX6Q1/IcoyYd7NC0ArAztYbl2595IBJoL1kQDR59F647NiLof+7t@lists.freedesktop.org
+X-Gm-Message-State: AOJu0Yx5dEsgnqqvsDuUwm6njJzr686MNClYcQROJZCbBwoan6IpzEFQ
+ lZz5qlxEgRpg/uVtv6TJlv/JfDjVTnxtdip4jWisU8CQXk1VMQaJtfjp3Q8F0pU=
+X-Gm-Gg: ASbGncvgLDQJYjehKExm8T0EJa2nwVcO/S2U63r7HUZTONJLgftPalzyZkFRtzpAX5I
+ 5QxWLQVJEYkJQfxGBM/FyktDHpAIA0Yz6sInK7jJ14NnmRy85cTAlXTbn/P0DJ+wD6HK+a3RhOi
+ oBNpLAmXj6FZJ3cRDfZDbGUo+l9aysIsOPvbQnZUgMwe5x/wLqMrEQB+rVBMAn0ENwO8hko/EJv
+ xxkqLhdaIcJPF6x0lENNkeB6O7APT2iPBqtPkkw/Q6lhPFSZyGNWmKp6UkEsh6IV64pDIpQqTFR
+ XxmaMZVxShwWf45kodDI3YJEVnqlGn23ZjiqpQxboV65z7GkMPeyU0wf
+X-Google-Smtp-Source: AGHT+IHONUiodfS/fWexcjBKJ56cHcP98PgHHjaNe3WzTXhC4/in7mzoTQfPI07gJnTJ+29TnXggtg==
+X-Received: by 2002:a05:6000:2109:b0:391:2a9a:478c with SMTP id
+ ffacd0b85a97d-39264693887mr8443406f8f.23.1741876337388; 
+ Thu, 13 Mar 2025 07:32:17 -0700 (PDT)
+Received: from phenom.ffwll.local ([2a02:168:57f4:0:5485:d4b2:c087:b497])
+ by smtp.gmail.com with ESMTPSA id
+ ffacd0b85a97d-395c83b6b70sm2338337f8f.30.2025.03.13.07.32.16
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Thu, 13 Mar 2025 07:32:16 -0700 (PDT)
+Date: Thu, 13 Mar 2025 15:32:14 +0100
+From: Simona Vetter <simona.vetter@ffwll.ch>
+To: Jason Gunthorpe <jgg@nvidia.com>
+Cc: John Hubbard <jhubbard@nvidia.com>, Greg KH <gregkh@linuxfoundation.org>,
+ Danilo Krummrich <dakr@kernel.org>, Joel Fernandes <joelagnelf@nvidia.com>,
+ Alexandre Courbot <acourbot@nvidia.com>,
+ Dave Airlie <airlied@gmail.com>, Gary Guo <gary@garyguo.net>,
+ Joel Fernandes <joel@joelfernandes.org>,
+ Boqun Feng <boqun.feng@gmail.com>, Ben Skeggs <bskeggs@nvidia.com>,
+ linux-kernel@vger.kernel.org, rust-for-linux@vger.kernel.org,
+ nouveau@lists.freedesktop.org, dri-devel@lists.freedesktop.org,
+ paulmck@kernel.org
+Subject: Re: [RFC PATCH 0/3] gpu: nova-core: add basic timer subdevice
+ implementation
+Message-ID: <Z9LsbhzjI-P3-edQ@phenom.ffwll.local>
+Mail-Followup-To: Jason Gunthorpe <jgg@nvidia.com>,
+ John Hubbard <jhubbard@nvidia.com>,
+ Greg KH <gregkh@linuxfoundation.org>,
+ Danilo Krummrich <dakr@kernel.org>,
+ Joel Fernandes <joelagnelf@nvidia.com>,
+ Alexandre Courbot <acourbot@nvidia.com>,
+ Dave Airlie <airlied@gmail.com>, Gary Guo <gary@garyguo.net>,
+ Joel Fernandes <joel@joelfernandes.org>,
+ Boqun Feng <boqun.feng@gmail.com>, Ben Skeggs <bskeggs@nvidia.com>,
+ linux-kernel@vger.kernel.org, rust-for-linux@vger.kernel.org,
+ nouveau@lists.freedesktop.org, dri-devel@lists.freedesktop.org,
+ paulmck@kernel.org
+References: <Z8cmBWB8rl97-zSG@phenom.ffwll.local>
+ <20250304164201.GN133783@nvidia.com>
+ <Z8f9mgD4LUJN_dWw@phenom.ffwll.local>
+ <20250305151012.GW133783@nvidia.com>
+ <Z8l8HgZOV7sDWqBh@phenom.ffwll.local>
+ <20250306153236.GE354511@nvidia.com>
+ <Z8rKVZolu8n6lB1P@phenom.ffwll.local>
+ <20250307123255.GK354511@nvidia.com>
+ <Z8rv-DQuGdxye28N@phenom.ffwll.local>
+ <20250307145557.GO354511@nvidia.com>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
-In-Reply-To: <20250311155120.442633-19-tzimmermann@suse.de>
+In-Reply-To: <20250307145557.GO354511@nvidia.com>
+X-Operating-System: Linux phenom 6.12.11-amd64 
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -81,76 +114,85 @@ List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-Hi Thomas,
+On Fri, Mar 07, 2025 at 10:55:57AM -0400, Jason Gunthorpe wrote:
+> On Fri, Mar 07, 2025 at 02:09:12PM +0100, Simona Vetter wrote:
+> 
+> > > A driver can do a health check immediately in remove() and make a
+> > > decision if the device is alive or not to speed up removal in the
+> > > hostile hot unplug case.
+> > 
+> > Hm ... I guess when you get an all -1 read you check with a specific
+> > register to make sure it's not a false positive? Since for some registers
+> > that's a valid value.
+> 
+> Yes. mlx5 has HW designed to support this, but I imagine on most
+> devices you could find an ID register or something that won't be -1.
+> 
+> > - The "at least we don't blow up with memory safety issues" bare minimum
+> >   that the rust abstractions should guarantee. So revocable and friends.
+> 
+> I still really dislike recovable because it imposes a cost that is
+> unnecessary.
+> 
+> > And I think the latter safety fallback does not prevent you from doing the
+> > full fancy design, e.g. for revocable resources that only happens after
+> > your explicitly-coded ->remove() callback has finished. Which means you
+> > still have full access to the hw like anywhere else.
+> 
+> Yes, if you use rust bindings with something like RDMA then I would
+> expect that by the time remove is done everything is cleaned up and
+> all the revokable stuff was useless and never used.
+> 
+> This is why I dislike revoke so much. It is adding a bunch of garbage
+> all over the place that is *never used* if the driver is working
+> correctly.
+> 
+> I believe it is much better to runtime check that the driver is
+> correct and not burden the API design with this.
 
-kernel test robot noticed the following build errors:
+You can do that with for example runtime proofs. R4l has that with
+Mutex from one structure protecting other structures (like in a tree). But
+since the compiler can't prove those you trade in the possibility that you
+will hit a runtime BUG if things don't line up.
 
-[auto build test ERROR on next-20250311]
-[also build test ERROR on v6.14-rc6]
-[cannot apply to drm-exynos/exynos-drm-next rockchip/for-next tegra/for-next drm-xe/drm-xe-next linus/master v6.14-rc6 v6.14-rc5 v6.14-rc4]
-[If your patch is applied to the wrong git tree, kindly drop us a note.
-And when submitting patch, we suggest to use '--base' as documented in
-https://git-scm.com/docs/git-format-patch#_base_tree_information]
+So subsystems that ensure that driver callbacks never run concurrently
+with a revocation could guarantee that revocable resources are always
+present.
 
-url:    https://github.com/intel-lab-lkp/linux/commits/Thomas-Zimmermann/drm-dumb-buffers-Sanitize-output-on-errors/20250311-235818
-base:   next-20250311
-patch link:    https://lore.kernel.org/r/20250311155120.442633-19-tzimmermann%40suse.de
-patch subject: [PATCH v4 18/25] drm/renesas/rz-du: Compute dumb-buffer sizes with drm_mode_size_dumb()
-config: i386-buildonly-randconfig-003-20250313 (https://download.01.org/0day-ci/archive/20250313/202503131309.ZzS9Tova-lkp@intel.com/config)
-compiler: clang version 19.1.7 (https://github.com/llvm/llvm-project cd708029e0b2869e80abe31ddb175f7c35361f90)
-reproduce (this is a W=1 build): (https://download.01.org/0day-ci/archive/20250313/202503131309.ZzS9Tova-lkp@intel.com/reproduce)
+> Giving people these features will only encourage them to write wrong
+> drivers.
 
-If you fix the issue in a separate patch/commit (i.e. not just a new version of
-the same patch/commit), kindly add following tags
-| Reported-by: kernel test robot <lkp@intel.com>
-| Closes: https://lore.kernel.org/oe-kbuild-all/202503131309.ZzS9Tova-lkp@intel.com/
+So I think you can still achieve that building on top of revocable and a
+few more abstractions that are internally unsafe. Or are you thinking of
+different runtime checks?
 
-All errors (new ones prefixed by >>):
+> This is not even a new idea, devm introduces automatic lifetime into
+> the kernel and I've sat in presentations about how devm has all sorts
+> of bug classes because of misuse. :\
 
-   In file included from drivers/gpu/drm/renesas/rz-du/rzg2l_du_kms.c:10:
-   In file included from include/drm/drm_atomic.h:31:
-   In file included from include/drm/drm_crtc.h:32:
-   In file included from include/drm/drm_modes.h:33:
-   In file included from include/drm/drm_connector.h:32:
-   In file included from include/drm/drm_util.h:36:
-   In file included from include/linux/kgdb.h:19:
-   In file included from include/linux/kprobes.h:28:
-   In file included from include/linux/ftrace.h:13:
-   In file included from include/linux/kallsyms.h:13:
-   In file included from include/linux/mm.h:2296:
-   include/linux/vmstat.h:507:36: warning: arithmetic between different enumeration types ('enum node_stat_item' and 'enum lru_list') [-Wenum-enum-conversion]
-     507 |         return node_stat_name(NR_LRU_BASE + lru) + 3; // skip "nr_"
-         |                               ~~~~~~~~~~~ ^ ~~~
->> drivers/gpu/drm/renesas/rz-du/rzg2l_du_kms.c:80:8: error: call to undeclared function 'drm_mode_size_dumb'; ISO C99 and later do not support implicit function declarations [-Wimplicit-function-declaration]
-      80 |         ret = drm_mode_size_dumb(dev, args, 16 * args->bpp / 8, 0);
-         |               ^
-   drivers/gpu/drm/renesas/rz-du/rzg2l_du_kms.c:80:8: note: did you mean 'drm_mode_set_name'?
-   include/drm/drm_modes.h:530:6: note: 'drm_mode_set_name' declared here
-     530 | void drm_mode_set_name(struct drm_display_mode *mode);
-         |      ^
-   1 warning and 1 error generated.
+Yeah automatic lifetime is great, until people mix up things with
+different lifetimes, then it all goes wrong.
 
+> > Does this sounds like a possible conclusion of this thread, or do we need
+> > to keep digging?
+> 
+> IDK, I think this should be socialized more. It is important as it
+> effects all drivers here out, and it is radically different to how the
+> kernel works today.
+> 
+> > Also now that I look at this problem as a two-level issue, I think drm is
+> > actually a lot better than what I explained. If you clean up driver state
+> > properly in ->remove (or as stack automatic cleanup functions that run
+> > before all the mmio/irq/whatever stuff disappears), then we are largely
+> > there already with being able to fully quiescent driver state enough to
+> > make sure no new requests can sneak in. 
+> 
+> That is the typical subsystem design!
 
-vim +/drm_mode_size_dumb +80 drivers/gpu/drm/renesas/rz-du/rzg2l_du_kms.c
-
-    70	
-    71	/* -----------------------------------------------------------------------------
-    72	 * Frame buffer
-    73	 */
-    74	
-    75	int rzg2l_du_dumb_create(struct drm_file *file, struct drm_device *dev,
-    76				 struct drm_mode_create_dumb *args)
-    77	{
-    78		int ret;
-    79	
-  > 80		ret = drm_mode_size_dumb(dev, args, 16 * args->bpp / 8, 0);
-    81		if (ret)
-    82			return ret;
-    83	
-    84		return drm_gem_dma_dumb_create_internal(file, dev, args);
-    85	}
-    86	
-
+Yeah maybe we're not that far really. But I'm still not clear how to do
+an entirely revoke-less world.
+-Sima
 -- 
-0-DAY CI Kernel Test Service
-https://github.com/intel/lkp-tests/wiki
+Simona Vetter
+Software Engineer, Intel Corporation
+http://blog.ffwll.ch
