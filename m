@@ -2,53 +2,81 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id C12B8C87212
-	for <lists+nouveau@lfdr.de>; Tue, 25 Nov 2025 21:48:25 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 33F56CBAF19
+	for <lists+nouveau@lfdr.de>; Sat, 13 Dec 2025 13:46:48 +0100 (CET)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id EED1B10E4E0;
-	Tue, 25 Nov 2025 20:47:34 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 05CBD10EBF9;
+	Sat, 13 Dec 2025 12:42:20 +0000 (UTC)
 Authentication-Results: gabe.freedesktop.org;
-	dkim=permerror (0-bit key) header.d=proton.me header.i=@proton.me header.b="lJDu4Gvz";
+	dkim=permerror (0-bit key) header.d=gmail.com header.i=@gmail.com header.b="AlVRGJGg";
 	dkim-atps=neutral
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from mail-4316.protonmail.ch (mail-4316.protonmail.ch [185.70.43.16])
- by gabe.freedesktop.org (Postfix) with ESMTPS id D571C10E00A;
- Sat, 15 Mar 2025 18:04:31 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=proton.me;
- s=protonmail; t=1742061868; x=1742321068;
- bh=zMY+WAQc14J08GzAX+iNlnPGPVWT6EmF6qM4eIj0Zkk=;
- h=Date:To:From:Cc:Subject:Message-ID:In-Reply-To:References:
- Feedback-ID:From:To:Cc:Date:Subject:Reply-To:Feedback-ID:
- Message-ID:BIMI-Selector:List-Unsubscribe:List-Unsubscribe-Post;
- b=lJDu4GvzZ4aGl5Gi3KECAOdZAhaYWikwvEsa/1w3x+kkD5sUxdgBBatmGwC0Zy8jN
- y/pmmeai818LZuGBiJPjcUIjxbaX+g+7lY7AKCtQlU4Sqet6mLm0cv8dOjJfIYbGqy
- M/76mNE2QIaPKKN7fQ+6Gd8uCdbMSnv99XT5MdIqOjqMIl+Pz0e8KhMSkwnX3nJ8+J
- yF8rzrSoe5YMVDuK2JDWqsSx/ARgssu2v+wb8AG6vo57mwbupaC2y+5fVm296mguMV
- 64dLoyl9Buu5HF8TTROOpJKwUBGLJilGagdyBF8OIp6/EO8iRL5J5PH4E0ByM8Pszh
- RpxA7KwT1Mk4A==
-Date: Sat, 15 Mar 2025 18:04:20 +0000
-To: Andrew Ballance <andrewjballance@gmail.com>
-From: Benno Lossin <benno.lossin@proton.me>
-Cc: a.hindborg@kernel.org, acourbot@nvidia.com, airlied@gmail.com,
- alex.gaynor@gmail.com, aliceryhl@google.com, bjorn3_gh@protonmail.com,
- boqun.feng@gmail.com, corbet@lwn.net, dakr@kernel.org,
- dri-devel@lists.freedesktop.org, gary@garyguo.net, linux-doc@vger.kernel.org,
- linux-kernel@vger.kernel.org, maarten.lankhorst@linux.intel.com,
- mripard@kernel.org, nouveau@lists.freedesktop.org, ojeda@kernel.org,
- rust-for-linux@vger.kernel.org, simona@ffwll.ch, tmgross@umich.edu,
- tzimmermann@suse.de
-Subject: Re: [PATCH 1/3] rust: alloc: add Vec::truncate method
-Message-ID: <D8H1DYGA2P3U.1PHDBOU2YOBS3@proton.me>
-In-Reply-To: <20250315111511.107047-1-andrewjballance@gmail.com>
-References: <D8GRAC8YQIVC.2LS1EIIIRZU3I@proton.me>
- <20250315111511.107047-1-andrewjballance@gmail.com>
-Feedback-ID: 71780778:user:proton
-X-Pm-Message-ID: 2f9f513866f9fb231af860e3cf39013bf22ca7b9
+Received: from mail-pj1-f51.google.com (mail-pj1-f51.google.com
+ [209.85.216.51])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id B541510E29A;
+ Sat, 15 Mar 2025 19:52:41 +0000 (UTC)
+Received: by mail-pj1-f51.google.com with SMTP id
+ 98e67ed59e1d1-30144a72db9so234505a91.1; 
+ Sat, 15 Mar 2025 12:52:41 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=gmail.com; s=20230601; t=1742068361; x=1742673161; darn=lists.freedesktop.org;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=RkSRY1nf3/CCgGX8CixRKz7GOQ9oD7FKwLr65/SUc7E=;
+ b=AlVRGJGgCpiDRQWuGw1vP65TF7G1P0roviqsZ32a4IY2AxoT5VKz6gYAdWudVUNFd1
+ pDoxxpTLAnTuu7DjbDV9bB7URKLow2CT6KdloJQA/GJcWWnSjNdMINGqW1+Dh1LsJlbO
+ Vwofo7LKPu8l8ncLoxMsfYAzD25RsUzX6qRvKDtXnnEGYm5JsCSHimxaqKBtHJChnQ7+
+ MBT8XbM1aZwQ5ASRifYaqw57vwcyzPYs0e4wRMwe5jryzymxEklE1a4W+1qpercubaxu
+ s9GwJVBJW5fSGi6b3mX3qmqZQcQw/H1F4pcfBq4Hr0Fq6Y4wKCTil/YuKDoT7jHevcto
+ DCYw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1742068361; x=1742673161;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=RkSRY1nf3/CCgGX8CixRKz7GOQ9oD7FKwLr65/SUc7E=;
+ b=l1/2AR/T+yNE2nUKYvQbBpMFDtwvcDzcFt8B6DCHppefhluG9nYBnuJTOanimt5TY2
+ OFkFaqqs8xPufT61juBeaiynW1mn4Zqkvuc0h4hmnQJRyvkS+cgGbI3SQsUGrF7U8sSZ
+ djmLAHpyXldHCsyQi1qhmWO6G4af8OuNNm6gzb1eRuYxK5+o/v7sOhABMCFOe9oRhpnW
+ BTi1UnkNqqAcxxNrVQAaQGpkmIvcGPQ/hmd3Xad0+TEHq4YQHpuTYhixG2D0f8qjvamM
+ eJ9NuH955qA2kBsS4cwFY2lev2YaTJpXAYbVjrIB4iWT0atMqzxumHMp78iYHIyRGqMA
+ AJLQ==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCULKbThZA9MpyOKoYSCO6TF/rMWS4jt2ZY56dUSRUPL8GfnNbFcJe5Dxqcb5uTUiV8ZpFP5gsg5Wk8=@lists.freedesktop.org,
+ AJvYcCWTC+r/vQYMNBFtjvViYi22UnVeOnWJDFQaJO92oM4JgT/mWvM1XatbWtp8YWxLmK7qxaYMGVcr2A==@lists.freedesktop.org
+X-Gm-Message-State: AOJu0Yyn4W84AYSBoC1OlPgbY6VgWhHdAgne2h1jPEbB3RxLz5q2EJwm
+ sokgOAdSasHUBcGQtT7Tm3cKZPjmJZq+H0VNnFHjvjxoHc6YfP+uJfDrwSpDFXLCBtRKEtSxyER
+ BdPMQi9R21c5LucMejx+Y1lmTwKc=
+X-Gm-Gg: ASbGncukvuCGUfcD9rCSHpaBrvKTiZUa2zhjA6it3bn1FVkmMM+Sv/anT66/lRC67xP
+ GBowaQXbBfgFhnSgVydQhTmc05CSmuH1cpGC3QeOBVDEha/ZRCK/VHwLZcLdBgmRCpt6HeUaeNq
+ wJhstw2FT3d3tG5QMddztCxA7vVg==
+X-Google-Smtp-Source: AGHT+IFxs4He+SBXrB/e8968d3Baar4MKu0CcOHNfsoZUjb9jwXqfRgnNLe0uug3mxIerqMFsB0azD9mjCBGHGObzng=
+X-Received: by 2002:a05:6a21:9189:b0:1ee:e99a:469f with SMTP id
+ adf61e73a8af0-1f5c12df14amr3661527637.9.1742068361121; Sat, 15 Mar 2025
+ 12:52:41 -0700 (PDT)
 MIME-Version: 1.0
-Content-Type: text/plain; charset=utf-8
+References: <20250315024235.5282-1-andrewjballance@gmail.com>
+ <20250315024235.5282-3-andrewjballance@gmail.com>
+In-Reply-To: <20250315024235.5282-3-andrewjballance@gmail.com>
+From: Miguel Ojeda <miguel.ojeda.sandonis@gmail.com>
+Date: Sat, 15 Mar 2025 20:52:27 +0100
+X-Gm-Features: AQ5f1JryREH9Epw5Czi-uWWexrRFhCZPOTW2A9z8mj-ycImcQLdxcWM1ZbztLgw
+Message-ID: <CANiq72mLX6d9wYGC_OfQ_-0SKsjM85hP=X5n9qRwx5krNw1NLA@mail.gmail.com>
+Subject: Re: [PATCH 2/3] rust: alloc: add Vec::resize method
+To: Andrew Ballance <andrewjballance@gmail.com>
+Cc: dakr@kernel.org, airlied@gmail.com, simona@ffwll.ch, 
+ maarten.lankhorst@linux.intel.com, mripard@kernel.org, tzimmermann@suse.de, 
+ corbet@lwn.net, ojeda@kernel.org, alex.gaynor@gmail.com, boqun.feng@gmail.com, 
+ gary@garyguo.net, bjorn3_gh@protonmail.com, benno.lossin@proton.me, 
+ a.hindborg@kernel.org, aliceryhl@google.com, tmgross@umich.edu, 
+ acourbot@nvidia.com, nouveau@lists.freedesktop.org, 
+ dri-devel@lists.freedesktop.org, linux-doc@vger.kernel.org, 
+ linux-kernel@vger.kernel.org, rust-for-linux@vger.kernel.org
+Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
-X-Mailman-Approved-At: Tue, 25 Nov 2025 20:47:19 +0000
+X-Mailman-Approved-At: Sat, 13 Dec 2025 12:40:47 +0000
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -63,70 +91,14 @@ List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-On Sat Mar 15, 2025 at 12:15 PM CET, Andrew Ballance wrote:
-> On Sat, Mar 15, 2025 at 10:09:26AM +0000, Benno Lossin wrote:
->> On Sat Mar 15, 2025 at 3:42 AM CET, Andrew Ballance wrote:
->> > implements the equivalent to the std's Vec::truncate
->> > on the kernel's Vec type.
->> >
->> > Signed-off-by: Andrew Ballance <andrewjballance@gmail.com>
->> > ---
->> >  rust/kernel/alloc/kvec.rs | 36 ++++++++++++++++++++++++++++++++++++
->> >  1 file changed, 36 insertions(+)
->> >
->> > diff --git a/rust/kernel/alloc/kvec.rs b/rust/kernel/alloc/kvec.rs
->> > index ae9d072741ce..75e9feebb81f 100644
->> > --- a/rust/kernel/alloc/kvec.rs
->> > +++ b/rust/kernel/alloc/kvec.rs
->> > @@ -452,6 +452,42 @@ pub fn reserve(&mut self, additional: usize, flag=
-s: Flags) -> Result<(), AllocEr
->> > =20
->> >          Ok(())
->> >      }
->> > +
->> > +    /// Shortens the vector, setting the length to `len` and drops th=
-e removed values.
->> > +    /// If `len` is greater than or equal to the current length, this=
- does nothing.
->> > +    ///
->> > +    /// This has no effect on the capacity and will not allocate.
->> > +    /// # Examples
->> > +    /// ```
->> > +    /// let mut v =3D kernel::kvec![1, 2, 3]?;
->> > +    /// v.truncate(1);
->> > +    /// assert_eq!(v.len(), 1);
->> > +    /// assert_eq!(&v, &[1]);
->> > +    ///
->> > +    /// # Ok::<(), Error>(())
->> > +    /// ```
->> > +    pub fn truncate(&mut self, len: usize) {
->> > +        if len >=3D self.len() {
->> > +            return;
->> > +        }
->> > +
->> > +        // [new_len, len) is guaranteed to be valid because [0, len) =
-is guaranteed to be valid
->> > +        let drop_range =3D len..self.len();
->> > +
->> > +        // SAFETY:
->> > +        // we can safely ignore the bounds check because we already d=
-id our own check
->> > +        let ptr: *mut [T] =3D unsafe { self.get_unchecked_mut(drop_ra=
-nge) };
->>=20
->> What's this `get_unchecked_mut` method, I don't see it in `rust-next` or
->> `alloc-next`.
+On Sat, Mar 15, 2025 at 3:43=E2=80=AFAM Andrew Ballance
+<andrewjballance@gmail.com> wrote:
 >
-> Vec derefs into a slice which implements get_uncheked_mut
-> https://rust.docs.kernel.org/next/kernel/alloc/kvec/struct.Vec.html#metho=
-d.get_unchecked_mut
+> +    /// # Example
 
-Ah, I forgot about that... Can you change the safety comment to:
+Nit: please use the plural for section headers.
 
-    // SAFETY: `drop_range` is a subrange of `[0, len)` by the bounds check=
- above.
+Thanks!
 
----
 Cheers,
-Benno
-
+Miguel
