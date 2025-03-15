@@ -2,86 +2,53 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id 2456FC871EF
-	for <lists+nouveau@lfdr.de>; Tue, 25 Nov 2025 21:47:56 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id CE720C87186
+	for <lists+nouveau@lfdr.de>; Tue, 25 Nov 2025 21:47:37 +0100 (CET)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 40EA610E495;
-	Tue, 25 Nov 2025 20:47:33 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 4C65510E47B;
+	Tue, 25 Nov 2025 20:47:30 +0000 (UTC)
 Authentication-Results: gabe.freedesktop.org;
-	dkim=permerror (0-bit key) header.d=gmail.com header.i=@gmail.com header.b="janBByr8";
+	dkim=permerror (0-bit key) header.d=proton.me header.i=@proton.me header.b="Tp+loHx4";
 	dkim-atps=neutral
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from mail-ot1-f47.google.com (mail-ot1-f47.google.com
- [209.85.210.47])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 48B6C10E386;
- Sat, 15 Mar 2025 02:43:34 +0000 (UTC)
-Received: by mail-ot1-f47.google.com with SMTP id
- 46e09a7af769-72a145521d6so1908735a34.3; 
- Fri, 14 Mar 2025 19:43:34 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1742006613; x=1742611413; darn=lists.freedesktop.org;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:to:from:from:to:cc:subject:date:message-id
- :reply-to; bh=MibvrQXj2P5QnlDxX5YbYon7Ne8dH6XMjJsYnk+RzkY=;
- b=janBByr8xp/2pBgGj4PUhSS65Lp21hJFCG0ZltFeserYvYRKFyc9Mf7hrB2mnZRGtE
- K08mpHkoMAmENR0pkK4g+jQJI92P4HHZpdRhdsp3fMbKMKAQ8VmC4jdcWVFOlOChqf43
- 0GI9CEzBt1makc9hqxdP5dfPUCtC3Z8DKSkc5+mWs/S9Db1tU3g69+ypdfyK/VG6JzHz
- 7wuU48ZcuWNPdbVIJAQrt3Im2Fah87BLOBQUrRZRbsDBiLaUwx68iAyDbe+uscXRg/no
- w9mxYnVTSDYLG6aCYARSt7lfW8Fu6bP4PbRdsWxnB/TtnOG3+pL3FaECPLeztVPWSfTZ
- kUFQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1742006613; x=1742611413;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:to:from:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=MibvrQXj2P5QnlDxX5YbYon7Ne8dH6XMjJsYnk+RzkY=;
- b=VYpgeFqVoE6wDO8qtJ9QS+n410cIjXON6+XaW0LYnA2Xy2c6SvRJJdCOt13w8ie8sb
- pI1sTfiUtIqkbxzdKd6rzJRuwxU3M7m08ATBbMkXcxaR/8N8hRmbilpA4Alm9wAKt80D
- gR6SM29IuEH+NbYkZBDl3pM6QyRWtZNXcb1El0ndeLg9RdMbxQMrdJeafMZsIbjTTVyt
- 1Cu+89EsYdjd16aQvQqqzn5W7vdmhNX6IIlt6NudvlN0LLtjgduwSaqglbLiSl5etxnI
- 0MVWAHzo9GSFOPZ2m3AMq/O8cPp0JIAVCTvKzZEnBgB5IF4joKDQjwxzrmZa4Ir3MhRK
- qYSQ==
-X-Forwarded-Encrypted: i=1;
- AJvYcCXMYMoJC25UeeVYQqchkS6LAntaUmryjNCIa/GEIdIeE2cnYQ+d6oO72rmMaiGOLNfjf8R9pXSF2A==@lists.freedesktop.org,
- AJvYcCXZX0n0SQb6xja9w4AeJDRTcnTEOVoyBghkkylPy50Nz0doDo5mfi/VsOqx1Uw5y4TKfocJN5kHil0=@lists.freedesktop.org
-X-Gm-Message-State: AOJu0YxFbnDWZMJscQn2PI+fo2mOlyUiAsqCbrBFk5WFGkx3S5xn+yBs
- kCZ8iHsT91Kjo+JdBg20qju1bJAETJ08nvhUhrSA6QcRHCseDHWLFhkCn0Du
-X-Gm-Gg: ASbGncsNfGyeMskHP8bvevARQ1sYYVmVghds62BS1KP3Q6HwvULXY+iUJuWn5zLWj34
- EzAFDzWJM609ufdXjnm0reznCgy2AooNbPtaq8aEkz2PGSYOvpz1ec4vBT6/vNbsY/Fct/sVHJl
- BjHtiNICu90wjefqAx1okGzTdBJ+TfmMgujKYceN6qt1tVwPYoKhkcnkUZbiKFaaGPN5INaG7vA
- FGBoogFbfWZlBGIcr3Us+zdgfwPwqdttWT0/QnNI58XLuwGDBS3VtbTqVNbgKugOhxRpa2/UhNE
- t2CXHtLWNWzlWoADDMYNcuxXgbpQpZ6EyNFyGyRFII5Ac0ga+Xx+yuAtZcj1YPLJQKrGZBSc03/
- eNdSS0iumsi6qfxis
-X-Google-Smtp-Source: AGHT+IH81UySJfquqqsqib4YT+37awiURcsJmKDQnrwiT5WTPoR6EFhWOtsz2pC9Fb1W+uChntifMg==
-X-Received: by 2002:a05:6830:3c86:b0:72b:992b:e50 with SMTP id
- 46e09a7af769-72bbc4ea2a6mr3535769a34.21.1742006613460; 
- Fri, 14 Mar 2025 19:43:33 -0700 (PDT)
-Received: from my-computer.lan (c-73-76-29-249.hsd1.tx.comcast.net.
- [73.76.29.249]) by smtp.googlemail.com with ESMTPSA id
- 46e09a7af769-72bb26bb82dsm882990a34.32.2025.03.14.19.43.28
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 14 Mar 2025 19:43:33 -0700 (PDT)
-From: Andrew Ballance <andrewjballance@gmail.com>
-To: dakr@kernel.org, airlied@gmail.com, simona@ffwll.ch,
- maarten.lankhorst@linux.intel.com, mripard@kernel.org, tzimmermann@suse.de,
- corbet@lwn.net, ojeda@kernel.org, alex.gaynor@gmail.com,
- boqun.feng@gmail.com, gary@garyguo.net, bjorn3_gh@protonmail.com,
- benno.lossin@proton.me, a.hindborg@kernel.org, aliceryhl@google.com,
- tmgross@umich.edu, andrewjballance@gmail.com, acourbot@nvidia.com,
- nouveau@lists.freedesktop.org, dri-devel@lists.freedesktop.org,
- linux-doc@vger.kernel.org, linux-kernel@vger.kernel.org,
- rust-for-linux@vger.kernel.org
-Subject: [PATCH 3/3] gpu: nova-core: remove completed Vec extentions from task
- list
-Date: Fri, 14 Mar 2025 21:42:35 -0500
-Message-ID: <20250315024235.5282-4-andrewjballance@gmail.com>
-X-Mailer: git-send-email 2.48.1
-In-Reply-To: <20250315024235.5282-1-andrewjballance@gmail.com>
+Received: from mail-10630.protonmail.ch (mail-10630.protonmail.ch
+ [79.135.106.30])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id D6E3010E22A
+ for <nouveau@lists.freedesktop.org>; Sat, 15 Mar 2025 10:09:37 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=proton.me;
+ s=protonmail; t=1742033372; x=1742292572;
+ bh=OHcE70XPvRML9VaosSBT33NiXD1wPq+xwAXL+OkphTA=;
+ h=Date:To:From:Subject:Message-ID:In-Reply-To:References:
+ Feedback-ID:From:To:Cc:Date:Subject:Reply-To:Feedback-ID:
+ Message-ID:BIMI-Selector:List-Unsubscribe:List-Unsubscribe-Post;
+ b=Tp+loHx48iHnl0Mbfw+IQKG0pY7CIKt+S8b5Qp0/uQFjpiVqxywW8bQJ1qjOxzgM3
+ vZCvMH00hXsp4ZHB0GmTvxu/2jse5RgkhYpBzM+Hsn5PGzqPyC770t/HIBAvkQ2D97
+ iTRoGMLHWXkjzR6pzV1/afXKBkftflUctRtFac7nXpyClHlxb5Lm/MLGY3Q8AgrxBp
+ OMcGiqzQmSe8u8kXrlqF5fdpzMu1V3kibmmDoyVHiUuqDYryV6d9Zu2MvR+z0Y1oMF
+ IgIeZoVDz/psd+eQBCBNU93NgINwW23tb+K3uZ48gep/Ytg7DidfZl4kjLPimZc4P5
+ 8eSzA3OKeOWKg==
+Date: Sat, 15 Mar 2025 10:09:26 +0000
+To: Andrew Ballance <andrewjballance@gmail.com>, dakr@kernel.org,
+ airlied@gmail.com, simona@ffwll.ch, maarten.lankhorst@linux.intel.com,
+ mripard@kernel.org, tzimmermann@suse.de, corbet@lwn.net, ojeda@kernel.org,
+ alex.gaynor@gmail.com, boqun.feng@gmail.com, gary@garyguo.net,
+ bjorn3_gh@protonmail.com, a.hindborg@kernel.org, aliceryhl@google.com,
+ tmgross@umich.edu, acourbot@nvidia.com, nouveau@lists.freedesktop.org,
+ dri-devel@lists.freedesktop.org, linux-doc@vger.kernel.org,
+ linux-kernel@vger.kernel.org, rust-for-linux@vger.kernel.org
+From: Benno Lossin <benno.lossin@proton.me>
+Subject: Re: [PATCH 1/3] rust: alloc: add Vec::truncate method
+Message-ID: <D8GRAC8YQIVC.2LS1EIIIRZU3I@proton.me>
+In-Reply-To: <20250315024235.5282-2-andrewjballance@gmail.com>
 References: <20250315024235.5282-1-andrewjballance@gmail.com>
+ <20250315024235.5282-2-andrewjballance@gmail.com>
+Feedback-ID: 71780778:user:proton
+X-Pm-Message-ID: f76ad4a7a800f1deeb9c27a5c54e750de1d80a8c
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-X-Mailman-Approved-At: Tue, 25 Nov 2025 20:47:22 +0000
+Content-Type: text/plain; charset=utf-8
+Content-Transfer-Encoding: quoted-printable
+X-Mailman-Approved-At: Tue, 25 Nov 2025 20:47:19 +0000
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -96,35 +63,87 @@ List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-The requested Vec methods have been implemented thus, removes
-the completed item from the nova task list
+On Sat Mar 15, 2025 at 3:42 AM CET, Andrew Ballance wrote:
+> implements the equivalent to the std's Vec::truncate
+> on the kernel's Vec type.
+>
+> Signed-off-by: Andrew Ballance <andrewjballance@gmail.com>
+> ---
+>  rust/kernel/alloc/kvec.rs | 36 ++++++++++++++++++++++++++++++++++++
+>  1 file changed, 36 insertions(+)
+>
+> diff --git a/rust/kernel/alloc/kvec.rs b/rust/kernel/alloc/kvec.rs
+> index ae9d072741ce..75e9feebb81f 100644
+> --- a/rust/kernel/alloc/kvec.rs
+> +++ b/rust/kernel/alloc/kvec.rs
+> @@ -452,6 +452,42 @@ pub fn reserve(&mut self, additional: usize, flags: =
+Flags) -> Result<(), AllocEr
+> =20
+>          Ok(())
+>      }
+> +
+> +    /// Shortens the vector, setting the length to `len` and drops the r=
+emoved values.
+> +    /// If `len` is greater than or equal to the current length, this do=
+es nothing.
+> +    ///
+> +    /// This has no effect on the capacity and will not allocate.
+> +    /// # Examples
+> +    /// ```
+> +    /// let mut v =3D kernel::kvec![1, 2, 3]?;
+> +    /// v.truncate(1);
+> +    /// assert_eq!(v.len(), 1);
+> +    /// assert_eq!(&v, &[1]);
+> +    ///
+> +    /// # Ok::<(), Error>(())
+> +    /// ```
+> +    pub fn truncate(&mut self, len: usize) {
+> +        if len >=3D self.len() {
+> +            return;
+> +        }
+> +
+> +        // [new_len, len) is guaranteed to be valid because [0, len) is =
+guaranteed to be valid
+> +        let drop_range =3D len..self.len();
+> +
+> +        // SAFETY:
+> +        // we can safely ignore the bounds check because we already did =
+our own check
+> +        let ptr: *mut [T] =3D unsafe { self.get_unchecked_mut(drop_range=
+) };
 
-Signed-off-by: Andrew Ballance <andrewjballance@gmail.com>
+What's this `get_unchecked_mut` method, I don't see it in `rust-next` or
+`alloc-next`.
+
+> +
+> +        // SAFETY:
+> +        // it is safe to shrink the length because the new length is
+> +        // guaranteed to be less than the old length
+
+Please take a look at the documentation of `set_len`, in the safety
+section you'll find what you need to justify here.
+
+> +        unsafe { self.set_len(len) };
+> +
+> +        // SAFETY:
+
+A couple points missing:
+- why is the pointer valid?
+
+> +        // - the dropped values are valid `T`s
+> +        // - we are allowed to invalidate [new_len, old_len) because we =
+just changed the len
+
+This should justify why the value will never be accessed again.
+
 ---
- Documentation/gpu/nova/core/todo.rst | 10 ----------
- 1 file changed, 10 deletions(-)
+Cheers,
+Benno
 
-diff --git a/Documentation/gpu/nova/core/todo.rst b/Documentation/gpu/nova/core/todo.rst
-index ca08377d3b73..234d753d3eac 100644
---- a/Documentation/gpu/nova/core/todo.rst
-+++ b/Documentation/gpu/nova/core/todo.rst
-@@ -190,16 +190,6 @@ Rust abstraction for debugfs APIs.
- | Reference: Export GSP log buffers
- | Complexity: Intermediate
- 
--Vec extensions
----------------
--
--Implement ``Vec::truncate`` and ``Vec::resize``.
--
--Currently this is used for some experimental code to parse the vBIOS.
--
--| Reference vBIOS support
--| Complexity: Beginner
--
- GPU (general)
- =============
- 
--- 
-2.48.1
+> +        unsafe { ptr::drop_in_place(ptr) };
+> +    }
+>  }
+> =20
+>  impl<T: Clone, A: Allocator> Vec<T, A> {
+
 
