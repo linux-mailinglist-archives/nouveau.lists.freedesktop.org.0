@@ -2,81 +2,82 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id 33F56CBAF19
-	for <lists+nouveau@lfdr.de>; Sat, 13 Dec 2025 13:46:48 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 52386C8721C
+	for <lists+nouveau@lfdr.de>; Tue, 25 Nov 2025 21:48:26 +0100 (CET)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 05CBD10EBF9;
-	Sat, 13 Dec 2025 12:42:20 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 8BE0410E501;
+	Tue, 25 Nov 2025 20:47:35 +0000 (UTC)
 Authentication-Results: gabe.freedesktop.org;
-	dkim=permerror (0-bit key) header.d=gmail.com header.i=@gmail.com header.b="AlVRGJGg";
+	dkim=permerror (0-bit key) header.d=gmail.com header.i=@gmail.com header.b="LTZcDJZX";
 	dkim-atps=neutral
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from mail-pj1-f51.google.com (mail-pj1-f51.google.com
- [209.85.216.51])
- by gabe.freedesktop.org (Postfix) with ESMTPS id B541510E29A;
- Sat, 15 Mar 2025 19:52:41 +0000 (UTC)
-Received: by mail-pj1-f51.google.com with SMTP id
- 98e67ed59e1d1-30144a72db9so234505a91.1; 
- Sat, 15 Mar 2025 12:52:41 -0700 (PDT)
+Received: from mail-ot1-f46.google.com (mail-ot1-f46.google.com
+ [209.85.210.46])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id D53F010E027;
+ Sun, 16 Mar 2025 11:17:12 +0000 (UTC)
+Received: by mail-ot1-f46.google.com with SMTP id
+ 46e09a7af769-726819aa3fcso2313154a34.0; 
+ Sun, 16 Mar 2025 04:17:12 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1742068361; x=1742673161; darn=lists.freedesktop.org;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=RkSRY1nf3/CCgGX8CixRKz7GOQ9oD7FKwLr65/SUc7E=;
- b=AlVRGJGgCpiDRQWuGw1vP65TF7G1P0roviqsZ32a4IY2AxoT5VKz6gYAdWudVUNFd1
- pDoxxpTLAnTuu7DjbDV9bB7URKLow2CT6KdloJQA/GJcWWnSjNdMINGqW1+Dh1LsJlbO
- Vwofo7LKPu8l8ncLoxMsfYAzD25RsUzX6qRvKDtXnnEGYm5JsCSHimxaqKBtHJChnQ7+
- MBT8XbM1aZwQ5ASRifYaqw57vwcyzPYs0e4wRMwe5jryzymxEklE1a4W+1qpercubaxu
- s9GwJVBJW5fSGi6b3mX3qmqZQcQw/H1F4pcfBq4Hr0Fq6Y4wKCTil/YuKDoT7jHevcto
- DCYw==
+ d=gmail.com; s=20230601; t=1742123832; x=1742728632; darn=lists.freedesktop.org;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:to
+ :from:from:to:cc:subject:date:message-id:reply-to;
+ bh=+7jSFadTV9A/Fg7psg6f9yxG1LE2BjltriuoZ2nFmIY=;
+ b=LTZcDJZXrqBE7puAreDxVez69E4lMj/VOeBkbJ5u11J1lDuZBBJ/OuQlq0GhIdz9gY
+ i5by0M+zR/okE/AH3lfTcZR4IK3ij862XpGUNs2NxuLzdZeUXMzRVerosLVcyeoNQLRU
+ BCj5AXQ4U17TrBavDs5P7yE2Kq1SqdWQbS2VNW8+dAo1Lf7m8DfWIlLi1/ITKFL57bIU
+ lGdGnAG+Tk8RdykCZqocnzx7wOhG6jgttcXauNNBdEzzsx20/9tF+R9p+XglCLcRKZXl
+ QYGvKpNuq84TtXvEUFiz2IMfsintdobuh/0jLCypeoUBn6NdGPRfdHWJxaxVWRfrENpP
+ w8Sg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1742068361; x=1742673161;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=RkSRY1nf3/CCgGX8CixRKz7GOQ9oD7FKwLr65/SUc7E=;
- b=l1/2AR/T+yNE2nUKYvQbBpMFDtwvcDzcFt8B6DCHppefhluG9nYBnuJTOanimt5TY2
- OFkFaqqs8xPufT61juBeaiynW1mn4Zqkvuc0h4hmnQJRyvkS+cgGbI3SQsUGrF7U8sSZ
- djmLAHpyXldHCsyQi1qhmWO6G4af8OuNNm6gzb1eRuYxK5+o/v7sOhABMCFOe9oRhpnW
- BTi1UnkNqqAcxxNrVQAaQGpkmIvcGPQ/hmd3Xad0+TEHq4YQHpuTYhixG2D0f8qjvamM
- eJ9NuH955qA2kBsS4cwFY2lev2YaTJpXAYbVjrIB4iWT0atMqzxumHMp78iYHIyRGqMA
- AJLQ==
+ d=1e100.net; s=20230601; t=1742123832; x=1742728632;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:to
+ :from:x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+ bh=+7jSFadTV9A/Fg7psg6f9yxG1LE2BjltriuoZ2nFmIY=;
+ b=KceVvWtAQ3Dwte9w6o/FlBrWhH7kZzb/ZkW/BERPaV9s6zvwAB91XM19RYOslvrn/v
+ vPyM9fRd46ZB7nz/RhG9UyLRGj2OQfbTny/wu1nktxZt0TYb+A96k76WVerz9XjYFW+Y
+ WFzoo+oCt/3qlt1UC2dlygtHEb0ynAdj1fxSfk+NVeW4LLUMDCdAHX/j1AX1dtZSERar
+ LNgZVbtF3ihWVdtzRFllxv59DRIBEtpK6cqHu+urwoyYHhIyzgQdBjjEFxUxlmYtBTWF
+ 0s/+ZOdDNucbCvRq21y6J56c2NEhcrnyrWl9gmsG6TKBOM1cnvjcBg/ZlRiy1Vwfs4CA
+ GzPg==
 X-Forwarded-Encrypted: i=1;
- AJvYcCULKbThZA9MpyOKoYSCO6TF/rMWS4jt2ZY56dUSRUPL8GfnNbFcJe5Dxqcb5uTUiV8ZpFP5gsg5Wk8=@lists.freedesktop.org,
- AJvYcCWTC+r/vQYMNBFtjvViYi22UnVeOnWJDFQaJO92oM4JgT/mWvM1XatbWtp8YWxLmK7qxaYMGVcr2A==@lists.freedesktop.org
-X-Gm-Message-State: AOJu0Yyn4W84AYSBoC1OlPgbY6VgWhHdAgne2h1jPEbB3RxLz5q2EJwm
- sokgOAdSasHUBcGQtT7Tm3cKZPjmJZq+H0VNnFHjvjxoHc6YfP+uJfDrwSpDFXLCBtRKEtSxyER
- BdPMQi9R21c5LucMejx+Y1lmTwKc=
-X-Gm-Gg: ASbGncukvuCGUfcD9rCSHpaBrvKTiZUa2zhjA6it3bn1FVkmMM+Sv/anT66/lRC67xP
- GBowaQXbBfgFhnSgVydQhTmc05CSmuH1cpGC3QeOBVDEha/ZRCK/VHwLZcLdBgmRCpt6HeUaeNq
- wJhstw2FT3d3tG5QMddztCxA7vVg==
-X-Google-Smtp-Source: AGHT+IFxs4He+SBXrB/e8968d3Baar4MKu0CcOHNfsoZUjb9jwXqfRgnNLe0uug3mxIerqMFsB0azD9mjCBGHGObzng=
-X-Received: by 2002:a05:6a21:9189:b0:1ee:e99a:469f with SMTP id
- adf61e73a8af0-1f5c12df14amr3661527637.9.1742068361121; Sat, 15 Mar 2025
- 12:52:41 -0700 (PDT)
+ AJvYcCWz4caJ1qcaK0wyO3jVTHLxlr0Tc+eGBTotRVsw6loj/rUbsn2EMCma/ZWLYigBMs2dDpEZYbFPVw==@lists.freedesktop.org,
+ AJvYcCXXowAwkbeltAdEo3ZjF1DRuPFYY5V9yhEaRdknLYCfGnf4Tshgipq+1wij2mRPdYns6dvzIM9sfLs=@lists.freedesktop.org
+X-Gm-Message-State: AOJu0YzjFHC+hWRNlwrTkIduPyUjQYq+SkcMtCb8qeZLV7KteL/JELsY
+ rsH2g7V0ixfw8o2ayX05TmS8lRGXlWj8Y4VJxv7BExwnPdR6CJGe
+X-Gm-Gg: ASbGncvloUMN7+dT6N44ClszATZdyMd1Qmuiut5Q/ftgRnHW1zHqeQ3Y3w/efdrg86d
+ j+tVmBfpbhTIx6pOKaTETjW2Cuua/rRzk7I+b9jcChif4EpA0ZHH3y3Qs605V7HRmI7N3Ffzzga
+ 4K8pBcE9pXeF1xrz1Fv2JhaV7zi0Uw0zvnQ14szbw4sMzOr2p+EKEbCPhhBbrT8napfnbYp6Bxz
+ G0RkRfo+dLgEth0DOytfXaDLwnYe0weRmOs36ASmyLqPRMMhepH9ycwdgl9yi/rnwOrodLXMzMk
+ WOZIm4rfGCLr6B9bBas3CHnJu+1nr6jCCCxnrCy8jH/5zrwAZZ+2bT6clthik8MNlsJMyGA067u
+ eh0tMMz/kgKECCsOW
+X-Google-Smtp-Source: AGHT+IHv5t3gQ55bzS+qLlelppCqZRdREWE+WDUuqOccgurK2T+zzctVZElnhWhnl3PVs2DrOmfNeQ==
+X-Received: by 2002:a05:6808:10c7:b0:3f8:4523:2697 with SMTP id
+ 5614622812f47-3fdf0928cabmr5073566b6e.37.1742123831755; 
+ Sun, 16 Mar 2025 04:17:11 -0700 (PDT)
+Received: from my-computer.lan (c-73-76-29-249.hsd1.tx.comcast.net.
+ [73.76.29.249]) by smtp.googlemail.com with ESMTPSA id
+ 5614622812f47-3fe832ce015sm715978b6e.7.2025.03.16.04.17.06
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Sun, 16 Mar 2025 04:17:11 -0700 (PDT)
+From: Andrew Ballance <andrewjballance@gmail.com>
+To: dakr@kernel.org, airlied@gmail.com, simona@ffwll.ch,
+ maarten.lankhorst@linux.intel.com, mripard@kernel.org, tzimmermann@suse.de,
+ corbet@lwn.net, ojeda@kernel.org, alex.gaynor@gmail.com,
+ boqun.feng@gmail.com, gary@garyguo.net, bjorn3_gh@protonmail.com,
+ benno.lossin@proton.me, a.hindborg@kernel.org, aliceryhl@google.com,
+ tmgross@umich.edu, andrewjballance@gmail.com, acourbot@nvidia.com,
+ nouveau@lists.freedesktop.org, dri-devel@lists.freedesktop.org,
+ linux-doc@vger.kernel.org, linux-kernel@vger.kernel.org,
+ rust-for-linux@vger.kernel.org
+Subject: [PATCH v2 0/3] rust: alloc: add Vec::resize and Vec::truncate
+Date: Sun, 16 Mar 2025 06:16:41 -0500
+Message-ID: <20250316111644.154602-1-andrewjballance@gmail.com>
+X-Mailer: git-send-email 2.48.1
 MIME-Version: 1.0
-References: <20250315024235.5282-1-andrewjballance@gmail.com>
- <20250315024235.5282-3-andrewjballance@gmail.com>
-In-Reply-To: <20250315024235.5282-3-andrewjballance@gmail.com>
-From: Miguel Ojeda <miguel.ojeda.sandonis@gmail.com>
-Date: Sat, 15 Mar 2025 20:52:27 +0100
-X-Gm-Features: AQ5f1JryREH9Epw5Czi-uWWexrRFhCZPOTW2A9z8mj-ycImcQLdxcWM1ZbztLgw
-Message-ID: <CANiq72mLX6d9wYGC_OfQ_-0SKsjM85hP=X5n9qRwx5krNw1NLA@mail.gmail.com>
-Subject: Re: [PATCH 2/3] rust: alloc: add Vec::resize method
-To: Andrew Ballance <andrewjballance@gmail.com>
-Cc: dakr@kernel.org, airlied@gmail.com, simona@ffwll.ch, 
- maarten.lankhorst@linux.intel.com, mripard@kernel.org, tzimmermann@suse.de, 
- corbet@lwn.net, ojeda@kernel.org, alex.gaynor@gmail.com, boqun.feng@gmail.com, 
- gary@garyguo.net, bjorn3_gh@protonmail.com, benno.lossin@proton.me, 
- a.hindborg@kernel.org, aliceryhl@google.com, tmgross@umich.edu, 
- acourbot@nvidia.com, nouveau@lists.freedesktop.org, 
- dri-devel@lists.freedesktop.org, linux-doc@vger.kernel.org, 
- linux-kernel@vger.kernel.org, rust-for-linux@vger.kernel.org
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-X-Mailman-Approved-At: Sat, 13 Dec 2025 12:40:47 +0000
+Content-Transfer-Encoding: 8bit
+X-Mailman-Approved-At: Tue, 25 Nov 2025 20:47:22 +0000
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -91,14 +92,25 @@ List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-On Sat, Mar 15, 2025 at 3:43=E2=80=AFAM Andrew Ballance
-<andrewjballance@gmail.com> wrote:
->
-> +    /// # Example
+This patch series implements the Vec::truncate and Vec::resize methods
+that were needed by the nova driver and removes the corresponding item
+from their task list
 
-Nit: please use the plural for section headers.
+changes in v2:
+ - updated safety comments
+ - fixed rustdoc comment spacing
+ - reworded commit messages to be imperative
+ - Link to v1: https://lore.kernel.org/rust-for-linux/20250315024235.5282-1-andrewjballance@gmail.com/
 
-Thanks!
+Andrew Ballance (3):
+  rust: alloc: add Vec::truncate method
+  rust: alloc: add Vec::resize method
+  gpu: nova-core: remove completed Vec extentions from task list
 
-Cheers,
-Miguel
+ Documentation/gpu/nova/core/todo.rst | 10 -----
+ rust/kernel/alloc/kvec.rs            | 62 ++++++++++++++++++++++++++++
+ 2 files changed, 62 insertions(+), 10 deletions(-)
+
+-- 
+2.48.1
+
