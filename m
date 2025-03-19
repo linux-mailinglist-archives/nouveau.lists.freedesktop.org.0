@@ -2,48 +2,52 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id 9C3D1A68C8D
-	for <lists+nouveau@lfdr.de>; Wed, 19 Mar 2025 13:14:09 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 1554CA68D5C
+	for <lists+nouveau@lfdr.de>; Wed, 19 Mar 2025 14:04:28 +0100 (CET)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 8751E10E30B;
-	Wed, 19 Mar 2025 12:14:07 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 151A110E4F6;
+	Wed, 19 Mar 2025 13:04:26 +0000 (UTC)
 Authentication-Results: gabe.freedesktop.org;
-	dkim=pass (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="fvuxVfkl";
+	dkim=pass (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="aEzxjXUW";
 	dkim-atps=neutral
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from nyc.source.kernel.org (nyc.source.kernel.org [147.75.193.91])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 7C3EE10E30B
- for <nouveau@lists.freedesktop.org>; Wed, 19 Mar 2025 12:14:04 +0000 (UTC)
+Received: from dfw.source.kernel.org (dfw.source.kernel.org [139.178.84.217])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 9D19910E4F6;
+ Wed, 19 Mar 2025 13:04:25 +0000 (UTC)
 Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by nyc.source.kernel.org (Postfix) with ESMTP id E8C86A490B1;
- Wed, 19 Mar 2025 12:08:33 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id D6F72C4CEE9;
- Wed, 19 Mar 2025 12:14:00 +0000 (UTC)
+ by dfw.source.kernel.org (Postfix) with ESMTP id 98AA25C5AAF;
+ Wed, 19 Mar 2025 13:02:04 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id B99C1C4CEE9;
+ Wed, 19 Mar 2025 13:04:18 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1742386443;
- bh=ZwisKtmR+BtAGPQjAwwHEIB8ijkggU8e+q8ExATUOVE=;
- h=Date:From:To:Cc:Subject:In-Reply-To:References:From;
- b=fvuxVfkltStMgvNNLMy5/sWPBNLk695F36DgnOOk8BakMZxomVS6bitq8r6pWcrc6
- 8UQzW0rPBcW93jM0+ySaBcPIcrNvW/AL+G14JVbD7gEgX/MzkAitzdfB929EkEuuVE
- yYDAZFtgH99iwEvY+UeW49dOk7SZXKOY7bA99bzGOgSHMlcTHvlDs1FafyMm+XYNhD
- Ub6Qx9vAooEdUT+sW/10pZyZfMgJgUkkHgn509iMdD6ochTCNyDS+i0nmYi+FSHra6
- QUCYa04IC6QyS++vqg8gPwzgBQ6yk5CQ4ViDFMa4gJrdTokRTJJ2hhv28p7MfXUCwH
- cpnFa6DnV91MQ==
-Date: Wed, 19 Mar 2025 21:13:58 +0900
-From: Masami Hiramatsu (Google) <mhiramat@kernel.org>
-To: Naveen Kumar P <naveenkumar.parna@gmail.com>
-Cc: rostedt@goodmis.org, mhiramat@kernel.org, karolherbst@gmail.com,
- ppaalanen@gmail.com, dave.hansen@linux.intel.com, luto@kernel.org, Peter
- Zijlstra <peterz@infradead.org>, nouveau@lists.freedesktop.org
-Subject: Re: Debugging PCIe Configuration Space Using mmiotrace
-Message-Id: <20250319211358.493f01a50ba2dff38651b3f4@kernel.org>
-In-Reply-To: <CAMciSVXGcF=mT0UgU8cNTLiDTUovOYSL=cX95b9Wr1u3UwWNWQ@mail.gmail.com>
-References: <CAMciSVXGcF=mT0UgU8cNTLiDTUovOYSL=cX95b9Wr1u3UwWNWQ@mail.gmail.com>
-X-Mailer: Sylpheed 3.8.0beta1 (GTK+ 2.24.33; x86_64-pc-linux-gnu)
-Mime-Version: 1.0
-Content-Type: text/plain; charset=US-ASCII
-Content-Transfer-Encoding: 7bit
+ s=k20201202; t=1742389461;
+ bh=nu9wio63x0wrdNSqg9z8+FNrmsLElmdw2IaD6hWp4bc=;
+ h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
+ b=aEzxjXUWC+dO24C0gZqm5NDMr9lYjS84JFAiZbAmk6csFgl3ff+69XYo5MAr8YF5J
+ 7oNZMeIBvdspGTPfd87mdJBHv3RFbQQpp2GwOd4MNJBhb4ZmkI40nt+fycjojwX00q
+ kgM7ff9/wZs3CA+cbqpELa9im+LJcWhTgihyElFdND4YtIajdifMMDK1aMgBKmA9lz
+ foOVL5ivGTRnwbrfB5NJjzHXAYysXKVHK5hQvB5hpQvJCMXxY9N8/H8/S9Z8gCKxtv
+ 94IUqVRv0lqzRKIvL30Fird6T0hl2v+Qkbt1lCiPfYSLBqLWfkEv3g/CsHdfFnXbIu
+ 1T7JS3RoFH3zQ==
+Date: Wed, 19 Mar 2025 14:04:16 +0100
+From: Danilo Krummrich <dakr@kernel.org>
+To: Chris Bainbridge <chris.bainbridge@gmail.com>
+Cc: Christian =?iso-8859-1?Q?K=F6nig?= <christian.koenig@amd.com>,
+ nouveau@lists.freedesktop.org, maarten.lankhorst@linux.intel.com,
+ mripard@kernel.org, tzimmermann@suse.de, airlied@gmail.com,
+ simona@ffwll.ch, lyude@redhat.com, sumit.semwal@linaro.org,
+ dri-devel@lists.freedesktop.org, linux-kernel@vger.kernel.org
+Subject: Re: [PATCH v2] drm/nouveau: prime: fix ttm_bo_delayed_delete oops
+Message-ID: <Z9rA0G2urlVHFOSx@cassiopeiae>
+References: <Z9GHj-edWJmyzpdY@debian.local>
+ <00e4d9c4-ecfc-4784-b603-12db04cda806@amd.com>
+ <Z9q-ggKKgTsvW-Rz@debian.local>
+MIME-Version: 1.0
+Content-Type: text/plain; charset=iso-8859-1
+Content-Disposition: inline
+Content-Transfer-Encoding: 8bit
+In-Reply-To: <Z9q-ggKKgTsvW-Rz@debian.local>
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -58,168 +62,153 @@ List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-Hi,
+Hi Chris,
 
-On Tue, 18 Mar 2025 23:53:34 +0530
-Naveen Kumar P <naveenkumar.parna@gmail.com> wrote:
+Thanks for the fix, few comments below.
 
-> Hi all,
+On Wed, Mar 19, 2025 at 12:54:26PM +0000, Chris Bainbridge wrote:
+> Fix an oops in ttm_bo_delayed_delete which results from dererencing a
+> dangling pointer:
 > 
-> I am currently debugging an issue on an x86 machine running the latest
-> Linux kernel, involving a PCIe device whose memory is mapped via BAR0.
-> I am encountering unexpected behavior when reading its PCI
-> configuration space using lspci, and I am seeking guidance on whether
-> mmiotrace can help diagnose the problem.
+> Oops: general protection fault, probably for non-canonical address 0x6b6b6b6b6b6b6b7b: 0000 [#1] PREEMPT SMP
+> CPU: 4 UID: 0 PID: 1082 Comm: kworker/u65:2 Not tainted 6.14.0-rc4-00267-g505460b44513-dirty #216
+> Hardware name: LENOVO 82N6/LNVNB161216, BIOS GKCN65WW 01/16/2024
+> Workqueue: ttm ttm_bo_delayed_delete [ttm]
+> RIP: 0010:dma_resv_iter_first_unlocked+0x55/0x290
+> Code: 31 f6 48 c7 c7 00 2b fa aa e8 97 bd 52 ff e8 a2 c1 53 00 5a 85 c0 74 48 e9 88 01 00 00 4c 89 63 20 4d 85 e4 0f 84 30 01 00 00 <41> 8b 44 24 10 c6 43 2c 01 48 89 df 89 43 28 e8 97 fd ff ff 4c 8b
+> RSP: 0018:ffffbf9383473d60 EFLAGS: 00010202
+> RAX: 0000000000000001 RBX: ffffbf9383473d88 RCX: 0000000000000000
+> RDX: 0000000000000000 RSI: 0000000000000000 RDI: 0000000000000000
+> RBP: ffffbf9383473d78 R08: 0000000000000000 R09: 0000000000000000
+> R10: 0000000000000000 R11: 0000000000000000 R12: 6b6b6b6b6b6b6b6b
+> R13: ffffa003bbf78580 R14: ffffa003a6728040 R15: 00000000000383cc
+> FS:  0000000000000000(0000) GS:ffffa00991c00000(0000) knlGS:0000000000000000
+> CS:  0010 DS: 0000 ES: 0000 CR0: 0000000080050033
+> CR2: 0000758348024dd0 CR3: 000000012c259000 CR4: 0000000000f50ef0
+> PKRU: 55555554
+> Call Trace:
+>  <TASK>
+>  ? __die_body.cold+0x19/0x26
+>  ? die_addr+0x3d/0x70
+>  ? exc_general_protection+0x159/0x460
+>  ? asm_exc_general_protection+0x27/0x30
+>  ? dma_resv_iter_first_unlocked+0x55/0x290
+>  dma_resv_wait_timeout+0x56/0x100
+>  ttm_bo_delayed_delete+0x69/0xb0 [ttm]
+>  process_one_work+0x217/0x5c0
+>  worker_thread+0x1c8/0x3d0
+>  ? apply_wqattrs_cleanup.part.0+0xc0/0xc0
+>  kthread+0x10b/0x240
+>  ? kthreads_online_cpu+0x140/0x140
+>  ret_from_fork+0x40/0x70
+>  ? kthreads_online_cpu+0x140/0x140
+>  ret_from_fork_asm+0x11/0x20
+>  </TASK>
+> 
+> The cause of this is:
+> 
+> - drm_prime_gem_destroy calls dma_buf_put(dma_buf) which releases the
+>   reference to the shared dma_buf. The reference count is 0, so the
+>   dma_buf is destroyed, which in turn decrements the corresponding
+>   amdgpu_bo reference count to 0, and the amdgpu_bo is destroyed -
+>   calling drm_gem_object_release then dma_resv_fini (which destroys the
+>   reservation object), then finally freeing the amdgpu_bo.
+> 
+> - nouveau_bo obj->bo.base.resv is now a dangling pointer to the memory
+>   formerly allocated to the amdgpu_bo.
+> 
+> - nouveau_gem_object_del calls ttm_bo_put(&nvbo->bo) which calls
+>   ttm_bo_release, which schedules ttm_bo_delayed_delete.
+> 
+> - ttm_bo_delayed_delete runs and dereferences the dangling resv pointer,
+>   resulting in a general protection fault.
+> 
+> Fix this by moving the drm_prime_gem_destroy call from
+> nouveau_gem_object_del to nouveau_bo_del_ttm. This ensures that it will
+> be run after ttm_bo_delayed_delete.
+> 
+> Signed-off-by: Chris Bainbridge <chris.bainbridge@gmail.com>
+> Co-Developed-by: Christian König <christian.koenig@amd.com>
 
-AFAIK, mmiotrace is tracing mmio operation from CPU side. That
-traces what data the driver is writing where, and what data is read
-from where.
+Then also Christian's SoB is required.
 
-> 
-> Issue Summary:
-> Expected Behavior After Boot:
-> lspci -xxx -s 01:00.0 correctly displays valid PCI configuration space
-> values, including a properly mapped BAR0.
-> 
-> $ sudo lspci -xxx -s 01:00.0 | grep "10:"
-> 10: 00 00 40 b0 00 00 00 00 00 00 00 00 00 00 00 00
-> 
-> 
-> Unexpected Behavior After Uptime:
-> After a few days, reading the PCI configuration space (lspci -xxx -s
-> 01:00.0) sometimes returns all 0xffs for the entire config space.
-> dmesg does not log any relevant errors.
-> 
+> Fixes: https://gitlab.freedesktop.org/drm/amd/-/issues/3937
 
-Hmm, the below problem seems device side issue (especially 9xffff
-means failed to read the PCI bus, IIRC.) 
+This is a bug report from amdgpu, but I understand that the same issue applies
+for nouveau.
 
-> $ sudo lspci -xxx -s 01:00.0
-> 01:00.0 RAM memory: PLDA Device 5555 (rev ff)
-> 00: ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff
-> 10: ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff
-> 20: ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff
-> 30: ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff
-> 40: ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff
-> 50: ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff
-> 60: ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff
-> 70: ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff
-> 80: ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff
-> 90: ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff
-> a0: ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff
-> b0: ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff
-> c0: ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff
-> d0: ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff
-> e0: ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff
-> f0: ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff
-> 
-> 
-> After Subsequent Reads:
-> Re-running lspci -xxx -s 01:00.0 restores non-0xff values, but BAR0
-> gets reset to zero.
-> 
-> $ sudo lspci -xxx -s 01:00.0
-> 01:00.0 RAM memory: PLDA Device 5555
-> 00: 56 15 55 55 00 00 10 00 00 00 00 05 00 00 00 00
-> 10: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
-> 20: 00 00 00 00 00 00 00 00 00 00 00 00 00 40 00 00
-> 30: 00 00 00 00 40 00 00 00 00 00 00 00 ff 01 00 00
-> 40: 01 48 03 00 08 00 00 00 05 60 00 00 00 00 00 00
-> 50: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
-> 60: 10 00 02 00 c2 8f 00 00 10 28 01 00 21 f4 03 00
-> 70: 00 00 21 00 00 00 00 00 00 00 00 00 00 00 00 00
-> 80: 00 00 00 00 02 00 00 00 00 00 00 00 00 00 00 00
-> 90: 20 00 01 00 00 00 00 00 00 00 00 00 00 00 00 00
-> a0: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
-> b0: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
-> c0: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
-> d0: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
-> e0: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
-> f0: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
-> 
-> This suggests that some function or driver is resetting BAR0 during or
-> after a failed config space read.
-> 
-> 
-> mmiotrace Setup & Results:
-> I have enabled mmiotrace and verified it is active:
-> # cat /sys/kernel/tracing/available_tracers
-> hwlat blk mmiotrace function_graph wakeup_dl wakeup_rt wakeup function nop
-> 
-> # cat current_tracer
-> mmiotrace
-> 
-> However, trace_pipe and trace logs remain empty even after reproducing
-> the issue:
-> 
-> # cat trace_pipe
-> VERSION 20070824
-> PCIDEV 0000 80860f00 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 iosf_mbi_pci
-> PCIDEV 0010 80860f31 61 b0000000 0 a0000008 0 e081 0 c0002 400000 0
-> 10000000 0 8 0 20000 i915
-> PCIDEV 0098 80860f23 5b e071 e061 e051 e041 e021 b0b17000 0 8 4 8 4 20
-> 800 0 ahci
-> PCIDEV 00a0 80860f35 5a b0b00004 0 0 0 0 0 0 10000 0 0 0 0 0 0 xhci_hcd
-> PCIDEV 00b8 80860f50 17 b0b16000 b0b15000 0 0 0 0 0 1000 1000 0 0 0 0
-> 0 sdhci-pci
-> PCIDEV 00d0 80860f18 62 b0900000 b0800000 0 0 0 0 0 100000 100000 0 0
-> 0 0 0 mei_txe
-> PCIDEV 00d8 80860f04 16 b0b10004 0 0 0 0 0 0 4000 0 0 0 0 0 0 snd_hda_intel
-> PCIDEV 00e0 80860f48 57 0 0 0 0 0 0 0 0 0 0 0 0 0 0 pcieport
-> PCIDEV 00e2 80860f4c 58 0 0 0 0 0 0 0 0 0 0 0 0 0 0 pcieport
-> PCIDEV 00e3 80860f4e 59 0 0 0 0 0 0 0 0 0 0 0 0 0 0 pcieport
-> PCIDEV 00f8 80860f1c 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 lpc_ich
-> PCIDEV 00fb 80860f12 12 b0b14000 0 0 0 e001 0 0 20 0 0 0 20 0 0 i801_smbus
-> PCIDEV 0100 15565555 b b0400000 0 0 0 0 0 0 400000 0 0 0 0 0 0
-> PCIDEV 0300 80861533 13 b0a00000 0 d001 b0a80000 0 0 0 80000 0 20 4000 0 0 0 igb
+If at all, this needs to be
 
-Note that once you read the `trace_pipe` file, the trace data is consumed
-and erased (technically, it is not ereased but you can not access it anymore.)
+	Closes: https://gitlab.freedesktop.org/drm/amd/-/issues/3937
 
+Maybe you can add a brief comment that this report applies for nouveau as well.
+
+Please also add a Fixes: tag that indicates the commit in nouveau that
+introduced the problem and Cc stable.
+
+> ---
+>  drivers/gpu/drm/drm_prime.c           | 8 ++++++--
+>  drivers/gpu/drm/nouveau/nouveau_bo.c  | 3 +++
+>  drivers/gpu/drm/nouveau/nouveau_gem.c | 3 ---
+>  3 files changed, 9 insertions(+), 5 deletions(-)
 > 
-> cat trace
-> # tracer: mmiotrace
-> #
-> # entries-in-buffer/entries-written: 0/0   #P:1
-> #
-> #                                _-----=> irqs-off/BH-disabled
-> #                               / _----=> need-resched
-> #                              | / _---=> hardirq/softirq
-> #                              || / _--=> preempt-depth
-> #                              ||| / _-=> migrate-disable
-> #                              |||| /     delay
-> #           TASK-PID     CPU#  |||||  TIMESTAMP  FUNCTION
-> #              | |         |   |||||     |         |
+> diff --git a/drivers/gpu/drm/drm_prime.c b/drivers/gpu/drm/drm_prime.c
+> index 32a8781cfd67..452d5c7cd292 100644
+> --- a/drivers/gpu/drm/drm_prime.c
+> +++ b/drivers/gpu/drm/drm_prime.c
+> @@ -929,7 +929,9 @@ EXPORT_SYMBOL(drm_gem_prime_export);
+>   * &drm_driver.gem_prime_import_sg_table internally.
+>   *
+>   * Drivers must arrange to call drm_prime_gem_destroy() from their
+> - * &drm_gem_object_funcs.free hook when using this function.
+> + * &drm_gem_object_funcs.free hook or &ttm_buffer_object.destroy
+> + * hook when using this function, to avoid the dma_buf being freed while the
+> + * ttm_buffer_object can still dereference it.
+>   */
+>  struct drm_gem_object *drm_gem_prime_import_dev(struct drm_device *dev,
+>  					    struct dma_buf *dma_buf,
+> @@ -999,7 +1001,9 @@ EXPORT_SYMBOL(drm_gem_prime_import_dev);
+>   * implementation in drm_gem_prime_fd_to_handle().
+>   *
+>   * Drivers must arrange to call drm_prime_gem_destroy() from their
+> - * &drm_gem_object_funcs.free hook when using this function.
+> + * &drm_gem_object_funcs.free hook or &ttm_buffer_object.destroy
+> + * hook when using this function, to avoid the dma_buf being freed while the
+> + * ttm_buffer_object can still dereference it.
+>   */
+>  struct drm_gem_object *drm_gem_prime_import(struct drm_device *dev,
+>  					    struct dma_buf *dma_buf)
 
-Thus after reading `trace_pipe`, the `trace` file must be empty.
-If you want to read it multiple times, you need to use `trace` file always.
+Please send a separate commit for the changes in drm_prime.c.
 
+> diff --git a/drivers/gpu/drm/nouveau/nouveau_bo.c b/drivers/gpu/drm/nouveau/nouveau_bo.c
+> index db961eade225..2016c1e7242f 100644
+> --- a/drivers/gpu/drm/nouveau/nouveau_bo.c
+> +++ b/drivers/gpu/drm/nouveau/nouveau_bo.c
+> @@ -144,6 +144,9 @@ nouveau_bo_del_ttm(struct ttm_buffer_object *bo)
+>  	nouveau_bo_del_io_reserve_lru(bo);
+>  	nv10_bo_put_tile_region(dev, nvbo->tile, NULL);
+>  
+> +	if (bo->base.import_attach)
+> +		drm_prime_gem_destroy(&bo->base, bo->sg);
+> +
+>  	/*
+>  	 * If nouveau_bo_new() allocated this buffer, the GEM object was never
+>  	 * initialized, so don't attempt to release it.
+> diff --git a/drivers/gpu/drm/nouveau/nouveau_gem.c b/drivers/gpu/drm/nouveau/nouveau_gem.c
+> index 9ae2cee1c7c5..67e3c99de73a 100644
+> --- a/drivers/gpu/drm/nouveau/nouveau_gem.c
+> +++ b/drivers/gpu/drm/nouveau/nouveau_gem.c
+> @@ -87,9 +87,6 @@ nouveau_gem_object_del(struct drm_gem_object *gem)
+>  		return;
+>  	}
+>  
+> -	if (gem->import_attach)
+> -		drm_prime_gem_destroy(gem, nvbo->bo.sg);
+> -
+>  	ttm_bo_put(&nvbo->bo);
+>  
+>  	pm_runtime_mark_last_busy(dev);
+> -- 
+> 2.47.2
 > 
-> 
-> Request for Assistance:
-> Can mmiotrace help determine the root cause of why reading the PCI
-> configuration space results in all 0xffs?
-
-As I said, this seems device side or bus side issue. mmiotrace may
-not directly help, but you can explain what the software does to the
-hardware people.
-
-Thank you,
-
-> 
-> Is there a way to determine what function or driver is clearing BAR0
-> when the values are restored?
-> 
-> If mmiotrace is suitable for this, how can I properly capture the
-> relevant trace data to analyze this issue?
-> 
-> Any insights or suggestions would be greatly appreciated. Please let
-> me know if you
-> need more details.
-> 
-> Best regards,
-> Naveen
-
-
--- 
-Masami Hiramatsu (Google) <mhiramat@kernel.org>
