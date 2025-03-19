@@ -2,74 +2,77 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id D9F35BBF67A
-	for <lists+nouveau@lfdr.de>; Mon, 06 Oct 2025 22:57:23 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 251DFBBF71A
+	for <lists+nouveau@lfdr.de>; Mon, 06 Oct 2025 22:57:58 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 06A4310E510;
-	Mon,  6 Oct 2025 20:57:22 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 6DEB610E5FE;
+	Mon,  6 Oct 2025 20:57:56 +0000 (UTC)
 Authentication-Results: gabe.freedesktop.org;
-	dkim=permerror (0-bit key) header.d=gmail.com header.i=@gmail.com header.b="ei3A1LxJ";
+	dkim=permerror (0-bit key) header.d=gmail.com header.i=@gmail.com header.b="i6anbx+A";
 	dkim-atps=neutral
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from mail-lj1-f170.google.com (mail-lj1-f170.google.com
- [209.85.208.170])
- by gabe.freedesktop.org (Postfix) with ESMTPS id AD2F010E4CD;
- Tue, 18 Mar 2025 20:13:31 +0000 (UTC)
-Received: by mail-lj1-f170.google.com with SMTP id
- 38308e7fff4ca-30c0517142bso53686731fa.1; 
- Tue, 18 Mar 2025 13:13:31 -0700 (PDT)
+Received: from mail-lj1-f177.google.com (mail-lj1-f177.google.com
+ [209.85.208.177])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 3B59110E4FD;
+ Wed, 19 Mar 2025 13:43:12 +0000 (UTC)
+Received: by mail-lj1-f177.google.com with SMTP id
+ 38308e7fff4ca-30c44a87b9cso61078651fa.3; 
+ Wed, 19 Mar 2025 06:43:12 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1742328810; x=1742933610; darn=lists.freedesktop.org;
+ d=gmail.com; s=20230601; t=1742391790; x=1742996590; darn=lists.freedesktop.org;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:from:to:cc:subject:date
  :message-id:reply-to;
- bh=7EYuK/t2IJSGOT76QGj0LoVWETpAfuQmAmJNAdEEvyY=;
- b=ei3A1LxJFC/X8eR5IwqgSFc8AusF5ZCnZJvFv+uqZ5SfWObUAMvV2hY5W5QvXu9/7E
- +m4GZN3A9X4u6/1d4RAOZYOT/eaYbICPbqjTCzBtNpJedMafmFQCIWIchy8mFRmEjkVJ
- mESwTv3dgcZVuc0sq7BWFBhF2O9twSm8TW/Py8K3i+gyKQkUEqV4c1SRZbTBZ11ynIoG
- 6Mzr3fJcgqkcNGzWJPpnuk65/etqfNGsZcBTL24WS+x+pQEDFisgNXUODGRMIMOq1Kz7
- 3kU4HfJj4ZO4IknSVhAmar6CicRjSb+FAc0JbZK0PcQCBLf71Evw9Fnjxe9pWDyMvt1W
- glAQ==
+ bh=V2MSofc8cyvKVxUKPs8pE0XcoDtUlgqxF6FfrtYMUiE=;
+ b=i6anbx+AAWGGVFELf4zQ4eyaP9j1l6dCoT4B6TsJIgyY4E5xRtGYhCxIyymwddcoN3
+ TFHLXHQAkLLAg7y5c03ToszqyGI7NWg+oMNC/tjvQY95PBhYHmATJuLeoR4LDBUwve4h
+ RYFLOEama6opuQ2q1OyMVHkb4E/v/SPNfic1zeov4kXIJ7sA97dsmrzq3NjdHl8dTJTO
+ 4MGTBbJiQ7pg2i5V6n0s86SbbDP4Z9wf9Q6oqB5hHGEns4sZDnMGHLsYJ8VXArweG73x
+ ISD+qimovNSPcWgYH/o/BGTZNgC5fI8x7b1NuFOwBJuR1tocjPKSIE7Bnb5KQG11+8X7
+ /Jpw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1742328810; x=1742933610;
+ d=1e100.net; s=20230601; t=1742391790; x=1742996590;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=7EYuK/t2IJSGOT76QGj0LoVWETpAfuQmAmJNAdEEvyY=;
- b=duZ0lZtBV8LjxbyiXPVM0pv5JgwxwriytFt6herI7/0IfNvhzHmUz8SUvI48PHUo1g
- 5vDCWaSBoyyM/cdd/BosNrbe6Uxmp/LAvKH7XWW8c2ddnYeLgFw1tkwEP+/CofVv2kSD
- DJIzwaf4Bfh/Oqhwm6ruPgM0y1aJzsxOehIOAcWPbW95WcajDEJpwnHuKcUKtylS7hU+
- MasAK0tjY/hYD52w/hXyqU3lI/uBGer4CPQPr0eNIFGDlkb79EDF+Im8LmszRDJ5RPaY
- 6MKtyqnGnbV/sDzZLWyWvmjL6qZBFaK/ZB1Zm7dAkh2k5s+Fdp1MBR231fyN7P3lihDt
- NfFg==
+ bh=V2MSofc8cyvKVxUKPs8pE0XcoDtUlgqxF6FfrtYMUiE=;
+ b=acNX1vtWrgemJHpesbzPP+wZQv1ggyoTx7NYu++a9sc51+1ktQxxWpLMA6YQSsLW0X
+ FQGpmxUwBObw4hcN0Qq923CFrEPbxscAdQZ3yP4UdZYVNRKOpDxEpudZHj1C5BHX3oli
+ rOc1jPollOQW3nU3IMmBXMYT8kzA8ZfgW3VlPQ2ZqqOCGnGAX4SrsrEhWh48L5kBZzFf
+ sfdwQJgrEhk9cV5Kb6rJXVEliSTypD2qRcGYxp+8xgQXo6rcfEBNe01lUJMoeXQikSlW
+ oiCByynViFjC5sqzfcxUB3DAj5fNENee+P2HrZCa9ZKKyspd6SHX0IuzCNyRioPVgS3E
+ YB0g==
 X-Forwarded-Encrypted: i=1;
- AJvYcCVYMcz+qCkDUQN0doRZTbPx6soug4WorTnHgw1QkHacbevsUI91JD/Q6l/8b7rtUZnTsMI51jNkRg==@lists.freedesktop.org,
- AJvYcCVcOZ0d9t3dapV2YdG9lvV+XbdMXO4ZAnHrNSs10BJKwAxcQA2gjy+dKbQdlJtzPODKwuzksn84Stw=@lists.freedesktop.org
-X-Gm-Message-State: AOJu0YxlgZhzeJ7AR+LUM8jMX07e4Hv7c8u/ktQubfBzMu8l6uKMuoHT
- fcA6J3ihX58Ymil/7CrkJw1lzCfMfJuhMwQ8JciuE3U05DE/F4kDBpEtAhZ7bnc4OYLrfBdix/D
- ML+gIuFPhBDig80M+tNqBwVMBRxg=
-X-Gm-Gg: ASbGncsghY40Pnud8aZ9hn4lLk316zCCyXrfF7CMI6umaWwZaMdsksIe4H9uK8CA8gZ
- PYfpw7m7vyUZtBlWtf1GbtgRkiSshbetOFjN0YCNzluuRzmVczz1MwLemvHpubYAl6edKHoHn7V
- Et4VKO6DJ43oqJKrSBSsAp2LYB6cgLDygjFzd3JvZIXw==
-X-Google-Smtp-Source: AGHT+IE03XdTIPJlrlbTe4XTC7CjLxzzw2MmqZ7G1kRhG67FU/kpFzEBbds8p2MpkhI2rqH08hJOoadGnI+7Ukp7gec=
-X-Received: by 2002:a05:651c:a0b:b0:30b:f52d:148f with SMTP id
- 38308e7fff4ca-30d6a3e2be0mr420101fa.18.1742328809683; Tue, 18 Mar 2025
- 13:13:29 -0700 (PDT)
+ AJvYcCU8I+lHKL9KqCR2wFS/yzEnQVVKfoiI7796rcxE1AsPGIzRyfjCDHBMUgU1ccUY3558bFEy/risClw=@lists.freedesktop.org,
+ AJvYcCWqQXHf7pbtI0NtuCuJkhZFVkewQYoNh+9VdV2B/z6ho5vGND0BcDcnU9/ctd7rDLDUcYakRycsZQ==@lists.freedesktop.org
+X-Gm-Message-State: AOJu0YwDceX6m0FJKhUErbAXhFT1nP2T1ndlntUztgZjn7C7SDlh9eyX
+ 8G6vy46EUwXDSClILOQU4L91BPZ2dmleYhaLwqtTLEuQyZb5XJPF412V3/oTR5Yl75A/Pmc6s1a
+ NIWi4CK2cl/iZm7VN5AduquxnCys=
+X-Gm-Gg: ASbGncsI1gPEYZ/btoZx7rr0SdeU6xaiqBhYE8+nvksXVyx35NutLqSxnl3Rvx1izeB
+ 0pSsSEiPCSvzQ1N7E/S6bTG9N7zlE+HGAHcAC8PWcD09wihVxJoYYkwlwg+d2etDgNa1lxJWBPi
+ v0/wvemifc2AnYpeV23oLNcj6IwvNGoaUMJc5EgY4eUg==
+X-Google-Smtp-Source: AGHT+IF4UZnEdUSdxleThqoQmroEP7JDDLQW+0nYHiycAoFsWFqa8q5lYSIadDHk2oU9ljzuqsif8/Cf1eEeLepUQng=
+X-Received: by 2002:a05:651c:1541:b0:30c:f60:6c6 with SMTP id
+ 38308e7fff4ca-30d6a39d6demr10181131fa.6.1742391790128; Wed, 19 Mar 2025
+ 06:43:10 -0700 (PDT)
 MIME-Version: 1.0
 References: <20250316111644.154602-1-andrewjballance@gmail.com>
  <20250316111644.154602-3-andrewjballance@gmail.com>
-In-Reply-To: <20250316111644.154602-3-andrewjballance@gmail.com>
+ <CAJ-ks9kAROOfyPtxMe6LE4-UPsvXca2sQ2VDjhRchZp3HLddGg@mail.gmail.com>
+ <D8JTWL8JY7DM.3IVH6FZ4M49CB@proton.me>
+In-Reply-To: <D8JTWL8JY7DM.3IVH6FZ4M49CB@proton.me>
 From: Tamir Duberstein <tamird@gmail.com>
-Date: Tue, 18 Mar 2025 16:12:53 -0400
-X-Gm-Features: AQ5f1JqGHb-xKycRwPr6BJPWKgZnlSyF596guWZP_moUzsbI0d82WEiS8RZpmM4
-Message-ID: <CAJ-ks9kAROOfyPtxMe6LE4-UPsvXca2sQ2VDjhRchZp3HLddGg@mail.gmail.com>
+Date: Wed, 19 Mar 2025 09:42:33 -0400
+X-Gm-Features: AQ5f1JrzlMF52hRTEnPnE3fmFFgkh9IFrPPTcapQYiPgOpAS7vBvzN1PK6u3ims
+Message-ID: <CAJ-ks9k+A1+0CWXZmD2m0+jRqTRTNFn-=d9VXqytiOqvn4BR0w@mail.gmail.com>
 Subject: Re: [PATCH v2 2/3] rust: alloc: add Vec::resize method
-To: Andrew Ballance <andrewjballance@gmail.com>
-Cc: dakr@kernel.org, airlied@gmail.com, simona@ffwll.ch, 
- maarten.lankhorst@linux.intel.com, mripard@kernel.org, tzimmermann@suse.de, 
- corbet@lwn.net, ojeda@kernel.org, alex.gaynor@gmail.com, boqun.feng@gmail.com, 
- gary@garyguo.net, bjorn3_gh@protonmail.com, benno.lossin@proton.me, 
+To: Benno Lossin <benno.lossin@proton.me>
+Cc: Andrew Ballance <andrewjballance@gmail.com>, dakr@kernel.org,
+ airlied@gmail.com, 
+ simona@ffwll.ch, maarten.lankhorst@linux.intel.com, mripard@kernel.org, 
+ tzimmermann@suse.de, corbet@lwn.net, ojeda@kernel.org, alex.gaynor@gmail.com, 
+ boqun.feng@gmail.com, gary@garyguo.net, bjorn3_gh@protonmail.com, 
  a.hindborg@kernel.org, aliceryhl@google.com, tmgross@umich.edu, 
  acourbot@nvidia.com, nouveau@lists.freedesktop.org, 
  dri-devel@lists.freedesktop.org, linux-doc@vger.kernel.org, 
@@ -91,74 +94,31 @@ List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-On Sun, Mar 16, 2025 at 7:17=E2=80=AFAM Andrew Ballance
-<andrewjballance@gmail.com> wrote:
+On Tue, Mar 18, 2025 at 8:50=E2=80=AFPM Benno Lossin <benno.lossin@proton.m=
+e> wrote:
 >
-> implement the equivalent of the rust std's Vec::resize
-> on the kernel's Vec type.
+> On Tue Mar 18, 2025 at 9:12 PM CET, Tamir Duberstein wrote:
+> > On Sun, Mar 16, 2025 at 7:17=E2=80=AFAM Andrew Ballance
+> > <andrewjballance@gmail.com> wrote:
+> >> +    pub fn resize(&mut self, new_len: usize, value: T, flags: Flags) =
+-> Result<(), AllocError> {
+> >> +        if new_len > self.len() {
+> >> +            self.extend_with(new_len - self.len(), value, flags)
+> >> +        } else {
+> >> +            self.truncate(new_len);
+> >> +            Ok(())
+> >> +        }
+> >> +    }
+> >
+> > You can avoid underflow checking in debug builds by using `checked_sub`=
+:
 >
-> Signed-off-by: Andrew Ballance <andrewjballance@gmail.com>
-> ---
->  rust/kernel/alloc/kvec.rs | 26 ++++++++++++++++++++++++++
->  1 file changed, 26 insertions(+)
->
-> diff --git a/rust/kernel/alloc/kvec.rs b/rust/kernel/alloc/kvec.rs
-> index 18bcc59f0b38..eb6d40a1bf8b 100644
-> --- a/rust/kernel/alloc/kvec.rs
-> +++ b/rust/kernel/alloc/kvec.rs
-> @@ -554,6 +554,32 @@ pub fn from_elem(value: T, n: usize, flags: Flags) -=
-> Result<Self, AllocError> {
->
->          Ok(v)
->      }
-> +
-> +    /// Resizes the [`Vec`] so that `len` is equal to `new_len`.
-> +    ///
-> +    /// If `new_len` is smaller than `len`, the `Vec` is [`Vec::truncate=
-`]d.
-> +    /// If `new_len` is larger, each new slot is filled with clones of `=
-value`.
-> +    ///
-> +    /// # Examples
-> +    ///
-> +    /// ```
-> +    /// let mut v =3D kernel::kvec![1, 2, 3]?;
-> +    /// v.resize(1, 42, GFP_KERNEL)?;
-> +    /// assert_eq!(&v, &[1]);
-> +    ///
-> +    /// v.resize(3, 42, GFP_KERNEL)?;
-> +    /// assert_eq!(&v, &[1, 42, 42]);
-> +    ///
-> +    /// # Ok::<(), Error>(())
-> +    /// ```
-> +    pub fn resize(&mut self, new_len: usize, value: T, flags: Flags) -> =
-Result<(), AllocError> {
-> +        if new_len > self.len() {
-> +            self.extend_with(new_len - self.len(), value, flags)
-> +        } else {
-> +            self.truncate(new_len);
-> +            Ok(())
-> +        }
-> +    }
+> `checked_sub` doesn't only avoid underflow in debug builds, but rather
+> in all builds. But the code below is a good suggestion.
 
-You can avoid underflow checking in debug builds by using `checked_sub`:
+Yes, I know :)
 
-        match new_len.checked_sub(self.len()) {
-            Some(n) =3D> self.extend_with(n, value, flags),
-            None =3D> {
-                self.truncate(new_len);
-                Ok(())
-            }
-        }
+I included that language because the underflow check is likely
+optimized away in release builds.
 
->  }
->
->  impl<T, A> Drop for Vec<T, A>
-> --
-> 2.48.1
->
->
-
-Either way:
-
-Reviewed-by: Tamir Duberstein <tamird@gmail.com>
+Tamir
