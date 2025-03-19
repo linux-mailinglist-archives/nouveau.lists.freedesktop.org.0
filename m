@@ -2,60 +2,60 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id B5AAFBBF69C
-	for <lists+nouveau@lfdr.de>; Mon, 06 Oct 2025 22:57:27 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 87DBFBBF741
+	for <lists+nouveau@lfdr.de>; Mon, 06 Oct 2025 22:58:03 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id EC3A710E58F;
-	Mon,  6 Oct 2025 20:57:22 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 626CA10E607;
+	Mon,  6 Oct 2025 20:57:57 +0000 (UTC)
 Authentication-Results: gabe.freedesktop.org;
-	dkim=permerror (0-bit key) header.d=gmail.com header.i=@gmail.com header.b="ejiVhLfl";
+	dkim=permerror (0-bit key) header.d=gmail.com header.i=@gmail.com header.b="NqlzqzrK";
 	dkim-atps=neutral
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
 Received: from mail-lj1-f174.google.com (mail-lj1-f174.google.com
  [209.85.208.174])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 43E9810E544;
- Wed, 19 Mar 2025 16:13:56 +0000 (UTC)
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 48D5010E55F;
+ Wed, 19 Mar 2025 17:23:03 +0000 (UTC)
 Received: by mail-lj1-f174.google.com with SMTP id
- 38308e7fff4ca-30bee1cb370so74539531fa.1; 
- Wed, 19 Mar 2025 09:13:56 -0700 (PDT)
+ 38308e7fff4ca-307c13298eeso12584761fa.0; 
+ Wed, 19 Mar 2025 10:23:03 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1742400831; x=1743005631; darn=lists.freedesktop.org;
+ d=gmail.com; s=20230601; t=1742404981; x=1743009781; darn=lists.freedesktop.org;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:from:to:cc:subject:date
  :message-id:reply-to;
- bh=XDbOPF/IzoK1I8Rnzb26Qf0qARjrPhkUyNrbgVryhgg=;
- b=ejiVhLflYMPMenp1XYNN4lycPlzki6qRHO73728i8x73lbWTckLlLkl8ehw7afL4AZ
- KViXJyHAdYCbSt67oqfTGGlGeVhppHdyt1tjv28J8n6v3XMDIyVPl9brETY0KgxRFbKr
- 1ugjEBWjSJkPVtVbc8eEzOJuibspYRoxFYtbJNuzvqp32p8ySuK54F9tp4Fo7dlo7Kpq
- NxCb8Iww5zEiFafQnX9p0VRUSsD+dkVR/BzUVCL+wUaPT8Ipg0dX+5QlKIFFYRmSSRkQ
- PVfgv5pJP2/VZQwVFqilJyRl9jvUIhLbFO5maKA+JaT0wkMQCnaL6+NuE4A/X+bs6/N1
- X3Jg==
+ bh=hsaYUgrXM5qfLvhH06tltZQdRCjc5tEs2EI/X9vdw2c=;
+ b=NqlzqzrKgd0yr2SXj9hIwr2qPm7jjhQWMs+kYUpFXrOt9sCuG6cEOph/vZgEewfTWR
+ 9u8z/f2k8BriaTynw7bqmPHaFZ59OMhTsPvhF0vjR4oBTzZxwhilxal8NxZwt1gGWSQm
+ sNBnXmOTI/KtbmSnQYHLb/77GaECZmU6tYb+e8no1RWnuYBAB+vHLF+hqpYHcqhqWGOS
+ eeXkDWrxuNcr+L5OOm708kvw2fqug9jDzdjEVmkQ+EU8xDxjmABkeElb0pJwRKrdCn6t
+ oTMuZj8JXYW+jpRJcPDHhM/xhlYZP5zbNpLGIFS82A/sloTbS9ETHIDJ0r5fBxGEQlAo
+ Ap7Q==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1742400831; x=1743005631;
+ d=1e100.net; s=20230601; t=1742404981; x=1743009781;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=XDbOPF/IzoK1I8Rnzb26Qf0qARjrPhkUyNrbgVryhgg=;
- b=tZGWYlqSfinQErYX8ACHe4uKWyJRkDNLRKE8bs3DarwwEPpNbYItM+g49ZeOoe7rYh
- et9M6xCFzAuaaZOVZRa46Snswxs2cdtUXhfGOS5qw84gv+rFvErN3eRILI2d7G9AAkSP
- e8+md2UpFbZbTXaIGPjvH0uklpZMgpGEwUXivW7Tl13jFz6hzD8bPJDcvwJ9pkfrzH4z
- meR2NR+4f1lMyXON3oh4OkVLEtlMksPcdO0tgwuqatB4X3qNzQuug+S14FLwhjgASrsO
- mbwHub33DLSoACyoYUstKevCYbmPFOD2JLqUL2VZ6wGvR19iF+szT96RPjUUaNUFHoMc
- qtQg==
+ bh=hsaYUgrXM5qfLvhH06tltZQdRCjc5tEs2EI/X9vdw2c=;
+ b=H+dfHiQjuXlIwAoQ7VQmG+Wkes7sa3gh1CRbJb4JFPtxRHG7/4s4xrMreaAfcAn+iD
+ zcBipTTaHMiJHMC+Nge9dXReRqY+kHaR7CxG01rbFjGXz44eNapMfvGFs/SsZEnZgug2
+ 0k5ag6I/EGsf8aYhy3U21xEs28miWL0PrP2hTm/pz3+Zh9KAgYy5YjzIuIEf2sqzqe6L
+ Yoft9TA46ZM8OUQHfh1co6J4IpphsXhuXMf6tGLiHBz4m3ua87ODMIXR27FjFqSXr/aV
+ Y/AMaMDPat5sLVeEDMtn3u10RWAogqc7kDCrY2uXPhtDzpvKC5WgEYodyjW6MSUp/1KK
+ 9OdA==
 X-Forwarded-Encrypted: i=1;
- AJvYcCW30EjtxLE/VYb3tB970bRyo+NwP4Y7h0fZjcJLj+XFjG3jrwcGHz4Gc30hHONIM9GAbGE5BDJyAA==@lists.freedesktop.org,
- AJvYcCWafvksjJ43AJdIao/yuvm0HRj5f7+Nv12PEdAKSsw5l1gBIq+vRYyUh0mmDpH4tEJWohQWaub9MLI=@lists.freedesktop.org
-X-Gm-Message-State: AOJu0YzUhRMWBxMrCcb5SrjSjJx6E3q2TSM0YcuOJLA7t1zU0kQRwHXx
- JAVggxtvQ4b5k15ItqVBNVtL6HV2+jA4BS1gE1W6SZR+MRlvHsBSfxTnMlEncJVQlqGTiOp9g7X
- LD4pUZ/T8B1HRHz44U9R+vGoWfxo=
-X-Gm-Gg: ASbGncs4DUSSq3h3AA4o/r4k3I18Ih7JmtJh5dwRaQnSmmppakQ1UCeIWGBqYMIPUA8
- XIAzt8Ny1q6NcQkFZJx8z3uvrtI5rm4zG4xN9Yhsxv510MhPjm304f3YhOk5yx6tmzvUBwlqPgk
- 66mA3xtl6W0+A/KSoYnArHPVWEbh1FzF+CD1OcficfvR2XDt95AcuG
-X-Google-Smtp-Source: AGHT+IEJ3So2YBqMFG1H7zUP3nZCz8Ilj316FGI0GTnGNuZimGSXr6pVQD8hc47p7L1xCLjbHX9v5p4tc9HL1dohNVE=
-X-Received: by 2002:a05:651c:b12:b0:30b:9813:b004 with SMTP id
- 38308e7fff4ca-30d6a452d54mr17601071fa.34.1742400831169; Wed, 19 Mar 2025
- 09:13:51 -0700 (PDT)
+ AJvYcCUZNO/xRq+RNxMptV1M1iEKhfYXQL+JZqWQZSxg7A4Eov2oPfyoSpxtAzHZWuiUy1Baoz5658i7eBE=@lists.freedesktop.org,
+ AJvYcCXPRwl87wp0qtXwrs0SQWCZwmJ+5avZMs7F4kRK93SzPLgFMX9jp6ftt2dW5bf+KIfn+Ao0U5qsYQ==@lists.freedesktop.org
+X-Gm-Message-State: AOJu0YwwhWmsKsBZlGszLK9yGjSjRC9BjNgf7S3xUeEwSb4yIy1oTIgI
+ X20Br1VkJ58j224IVUAN7z97tbDU+G9kiPWHmqk88dnPPeBV+avhnmvUhPMsoQsB8BJQYUA/pGi
+ nYp16BVTdDcc1UFl0ML36GmC8Hfs=
+X-Gm-Gg: ASbGncus7zOJs7Uo/JBjn4T/wH59fbOlPWDlT9/weWTdjl3L8O6vaqgaqOJq1Cllo1z
+ V2y34Ym3BkHggHC2daZhwg7JA9aPNQEAUChMhzqxD7Yil1G0fqsPIWjAEbFzquY0zdgzCqsCqJ9
+ 2PFOrv/fX9SW2WCMVBNN75hQJ50yKxCYs2FrPfnkvsjhWAWCxJ4DZ1
+X-Google-Smtp-Source: AGHT+IEjO2m1zIXw4HFAj9tm3S3oc43HEXQnmavT/Wdw9EFY3wTfyK5+LzJIIT2UTtXDcjxCFrMJwxSj2WzQC4KjEys=
+X-Received: by 2002:a2e:90c5:0:b0:30b:e73e:e472 with SMTP id
+ 38308e7fff4ca-30d727aac9fmr1171781fa.14.1742404981302; Wed, 19 Mar 2025
+ 10:23:01 -0700 (PDT)
 MIME-Version: 1.0
 References: <20250316111644.154602-1-andrewjballance@gmail.com>
  <20250316111644.154602-3-andrewjballance@gmail.com>
@@ -65,11 +65,13 @@ References: <20250316111644.154602-1-andrewjballance@gmail.com>
  <D8KBFC9M74H5.4ZJ2SJK06SGR@proton.me>
  <CAJ-ks9=NQrz3ySacKt+XXm2vS+Fn9gjmtqAaaoz1k=iTG_1HXw@mail.gmail.com>
  <CANiq72mnT73Mb7RJhZjf4de=_Orv4pipunMhOersOj_aqrFA-g@mail.gmail.com>
-In-Reply-To: <CANiq72mnT73Mb7RJhZjf4de=_Orv4pipunMhOersOj_aqrFA-g@mail.gmail.com>
+ <CAJ-ks9=23qEqxT5rivsbfNYC6iUP4RXsKbcDU9XDx32ERnKbYg@mail.gmail.com>
+ <CANiq72kfgDVkKAeX1SiahEoo13+kHrcvVY3hMAfRPGjwErCt6A@mail.gmail.com>
+In-Reply-To: <CANiq72kfgDVkKAeX1SiahEoo13+kHrcvVY3hMAfRPGjwErCt6A@mail.gmail.com>
 From: Tamir Duberstein <tamird@gmail.com>
-Date: Wed, 19 Mar 2025 12:13:14 -0400
-X-Gm-Features: AQ5f1Jqd_NgzJUOjvgmIsFxkHSPFGuA73TqCCOq_M4gNiWmI9ySs8ijiU2gDWQ4
-Message-ID: <CAJ-ks9=23qEqxT5rivsbfNYC6iUP4RXsKbcDU9XDx32ERnKbYg@mail.gmail.com>
+Date: Wed, 19 Mar 2025 13:22:25 -0400
+X-Gm-Features: AQ5f1JrVVB0KaF0SOHg6B4PqxeZ26bWmx4gdmbRKGmZX3gyzx8re07gIpcxQEmU
+Message-ID: <CAJ-ks9=mbqMdguFmnRP+t-P2OC+oYGVDU2oLtT1dZzY=USESEg@mail.gmail.com>
 Subject: Re: [PATCH v2 2/3] rust: alloc: add Vec::resize method
 To: Miguel Ojeda <miguel.ojeda.sandonis@gmail.com>
 Cc: Benno Lossin <benno.lossin@proton.me>,
@@ -98,28 +100,31 @@ List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-On Wed, Mar 19, 2025 at 12:06=E2=80=AFPM Miguel Ojeda
+On Wed, Mar 19, 2025 at 12:43=E2=80=AFPM Miguel Ojeda
 <miguel.ojeda.sandonis@gmail.com> wrote:
 >
-> On Wed, Mar 19, 2025 at 4:59=E2=80=AFPM Tamir Duberstein <tamird@gmail.co=
+> On Wed, Mar 19, 2025 at 5:13=E2=80=AFPM Tamir Duberstein <tamird@gmail.co=
 m> wrote:
 > >
-> > If we're talking about the same thing then I think we're both wrong
-> > and the correct phrasing would have been: "you can avoid underflow
-> > checking when CONFIG_RUST_OVERFLOW_CHECKS=3Dy by using `checked_sub`". =
-I
-> > was referring to the underflow check implicit in `new_len -
-> > self.len()`.
+> > No, I meant avoiding the check. The existing code already explicitly
+> > checks `new_len > self.len()` before evaluating `new_len -
+> > self.len()`. This means the check occurs twice. `checked_sub` reduces
+> > the number of checks by 1. Perhaps my wording could have been clearer
+> > ("avoid *an* underflow check").
 >
-> `checked_sub` always checks (if not optimized away). The config option
-> is about the implicit one.
+> Ah, you mean in the function you suggested, I see.
 >
-> Do you mean avoiding panics?
+> I think it they all may compile down to the same thing, whether
+> overflows checks are enabled or not, and whether the version in the
+> patch or `checked_sub` is used or not. At least in a quick Compiler
+> Explorer test it seems so, but I didn't check in an actual kernel
+> build.
+>
+> The implicit check is gated behind the other one, so that one can be
+> removed, even if values are unknown -- we always have optimizations
+> enabled, even under "debug" builds (assuming "debug" means overflow
+> checking enabled).
 
-No, I meant avoiding the check. The existing code already explicitly
-checks `new_len > self.len()` before evaluating `new_len -
-self.len()`. This means the check occurs twice. `checked_sub` reduces
-the number of checks by 1. Perhaps my wording could have been clearer
-("avoid *an* underflow check").
-
-Tamir
+Yeah, this elision is what I was trying to allude to in the original
+wording. I still think the suggested code is simpler, but gave my RB
+either way.
