@@ -2,70 +2,70 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id 7388DA6C5A1
-	for <lists+nouveau@lfdr.de>; Fri, 21 Mar 2025 23:07:17 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id DD474A6C642
+	for <lists+nouveau@lfdr.de>; Sat, 22 Mar 2025 00:01:35 +0100 (CET)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 1124710E83F;
-	Fri, 21 Mar 2025 22:07:16 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 3C53310E071;
+	Fri, 21 Mar 2025 23:01:33 +0000 (UTC)
 Authentication-Results: gabe.freedesktop.org;
-	dkim=pass (2048-bit key; unprotected) header.d=darkrefraction-com.20230601.gappssmtp.com header.i=@darkrefraction-com.20230601.gappssmtp.com header.b="C73e/D0v";
+	dkim=pass (2048-bit key; unprotected) header.d=darkrefraction-com.20230601.gappssmtp.com header.i=@darkrefraction-com.20230601.gappssmtp.com header.b="0Wp+c2aR";
 	dkim-atps=neutral
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from mail-ej1-f45.google.com (mail-ej1-f45.google.com
- [209.85.218.45])
- by gabe.freedesktop.org (Postfix) with ESMTPS id E87C110E840
- for <nouveau@lists.freedesktop.org>; Fri, 21 Mar 2025 22:07:03 +0000 (UTC)
-Received: by mail-ej1-f45.google.com with SMTP id
- a640c23a62f3a-ac2c663a3daso492435766b.2
- for <nouveau@lists.freedesktop.org>; Fri, 21 Mar 2025 15:07:03 -0700 (PDT)
+Received: from mail-ed1-f48.google.com (mail-ed1-f48.google.com
+ [209.85.208.48])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 796F910E071
+ for <nouveau@lists.freedesktop.org>; Fri, 21 Mar 2025 23:01:25 +0000 (UTC)
+Received: by mail-ed1-f48.google.com with SMTP id
+ 4fb4d7f45d1cf-5e5deb6482cso7037249a12.1
+ for <nouveau@lists.freedesktop.org>; Fri, 21 Mar 2025 16:01:25 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=darkrefraction-com.20230601.gappssmtp.com; s=20230601; t=1742594821;
- x=1743199621; darn=lists.freedesktop.org; 
+ d=darkrefraction-com.20230601.gappssmtp.com; s=20230601; t=1742598084;
+ x=1743202884; darn=lists.freedesktop.org; 
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:from:to:cc:subject:date
  :message-id:reply-to;
- bh=u0PRpMcZJqhdnlaV74TNTnd/Kf8jnkFW/jrl+z5cd5Q=;
- b=C73e/D0vsgjLRw62Q9yDUZQwU22o2NZWQmejpgXAfxRNgmX1FXHQj7g3aKljf2ZeCO
- gPrD1kniFGJ/6pa1m1mKkq0GkFRPR9JoxGzlqRl40UVky24IGfyClJRRytBwRUURn8Be
- bEgCfut/a4fI2RmyKO+lbjfs9eN9zRGXJSJNPAN51y9NHVa3dVeM0tzeyaa5W+K1msy+
- 60ceM+R7UciKFc8yQ6qAjh9eb1qYN3UwiVBVQlRb04hznOfz7/f2RvdHxw41K7TjBLOZ
- kXjZGzBDd9mFWNa7YT1PeHqlxcjVyT2HZ4QxI1FnzTh2h7RgyLnwSBFEvigjtPU1nxFS
- sOOw==
+ bh=sH2W37gz5JSCUCdBWPzPlpXu5pNqBdrWWXPAz4A12i0=;
+ b=0Wp+c2aRLv5n87PBt4J2JatHgmKnxbzghZm5LKfOBVoAOc7THD3opjH56IWaCfGzai
+ RXt+Weq5zuM+grcrWpBGa3XJg+7V5srxy4QXKU8VWpjbLbk81G5TnjEzTQ1xfLBVxMp8
+ n19fUOaluuJjV35PceXzUbZgT6fgeeoeRApIwY22ZqDJxkQumrWjMb5UWVCgmhwqv5vx
+ Us9R09BjXTXnMVbtKzN6N6JEVk4MJnL4kCgJslBQNqg62x6wfhqh+x1W6N3KhZZIXKCm
+ KX3VNZhGbKEUzqUUmsj/B9zooQ1dlstwGYxTMcB78Yc37Gq5wBwNmzDXTQ5P3nw2dtZS
+ X6vA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1742594821; x=1743199621;
+ d=1e100.net; s=20230601; t=1742598084; x=1743202884;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=u0PRpMcZJqhdnlaV74TNTnd/Kf8jnkFW/jrl+z5cd5Q=;
- b=w8wau09+eBdoWIbZ73R5+kss0A+F3eJAPFhzSvZObm6uQYhcc9+jkABk943M752B1t
- yrTyp56oFO00dyuVgxIj5n1Y0zc+4UTxg9h/J4vgDPRd6Q4+RRmHbarKPEeXEat6cIar
- ooRzkzIVSpsdKiCN3a6dnOTT1PThUks9iDlZ+g98bhuNMblxG+gY5qxAJiYorth0FYJ7
- P70aLfdhbvGlVTXn2iWC2xOzMh2NI4s6aypWAjWkAPz/LHv3PL7NBpzXsCXUDFqDYK5l
- 6sRGqYUpFr7rrQa28IeJSldKxq4/trhbBE0JsaegbmHjBK/2cxTP86sszfJIix4KK3CU
- 0RNQ==
+ bh=sH2W37gz5JSCUCdBWPzPlpXu5pNqBdrWWXPAz4A12i0=;
+ b=jKemg158RLsNLwDIyCRLDy61gt2hpb86a3zhMH5AQ1FUpURwuVyAcdGmq5xmqwjLWb
+ T99PXCJvi/dOqetbDn8yTYfhKLl61Xedf2Aexbs/+5AS+G6a9QJjG8t8y7oDPDCm0PzQ
+ Cz41K7M2O3TQgYFZLvN0s4oMzrBkA2eJoHLgKfvKa+bdWJVTwDjWWSBOFD3/tc3aBdiR
+ Ntg5HxidePIb/eB9+4/rxKnwc6SX+hcCQV7hnERsmHhEN78uDUGkdGAmlqnSxDNACBqm
+ kv4Mz1w0Eht7YncFiaQmDjRSRPdTp99M6WI8piEgSucu5t3/9EXKcGGVuYrlLttN3rl3
+ Ecog==
 X-Forwarded-Encrypted: i=1;
- AJvYcCVQBMujJf5SZxLIW3xeCFdEiLzlcGilc+ihPByd/ljdlgwbPhKBnLdMDuD0nPkpkFyxmwgVbt6K@lists.freedesktop.org
-X-Gm-Message-State: AOJu0YxX4QZCQYR/AB6z91ZILTkSiQocNJc6xoWjmph/J/WxprSsDGPf
- Ct/1nHWJglVdGu8PBn0GLtRTemQd9UVqjZhXyPn596XVIF8AVqSl3t03CP06kfRSGPB6RXdiwq7
- miwPgyFr9KPOSyhzJhCeJEgYqPHq4ZIGfaK6ssQ==
-X-Gm-Gg: ASbGncucluEeUvZmnmZ89ylQd17xLRdvx3FxCzSZR+jbcutQnytaN2mUeL+51zdUskl
- I6G7ioYyPAjbBFjisKjUph1ZKRcIQFaazyGxld5A5lZACGkQpLpriX7j5jMFPCvyFE4s5tE5rNb
- vE9nZMNy2AMJWrZuk9aCVhGh0plD7EaLzU/pyMYB0CzWDuX4nBFDDytN9VLw==
-X-Google-Smtp-Source: AGHT+IFHEMFTOh70XdtQ4xrnCSfXg3BNGMALvC4wyjrszNdGWZJNxURH3qCIx6r6qJXfRdRnLeyH5STBRuQEqLFEjv0=
-X-Received: by 2002:a17:907:9815:b0:ac3:b613:a651 with SMTP id
- a640c23a62f3a-ac3f20dbe16mr432219066b.17.1742594821226; Fri, 21 Mar 2025
- 15:07:01 -0700 (PDT)
+ AJvYcCWfLnNo97GgpilSEHMmpEavXCezvhvkFEj0TSmOAAB/2EdIlG0WaoBrfGFJIKpQBF3Yi4oVpykD@lists.freedesktop.org
+X-Gm-Message-State: AOJu0YxfJ9lnG17AenCZgnYCuwyueXALaYsplXOoFK34uMkQ7B3DKWmG
+ DeFImJzDn/wvkSNL//clCN3FBE9FF3n0USKYoxaGT2CDMKRRXekCM5aYqRzcYU2ocnSK8A/mEQM
+ G58OLlKDjr0XrUwtyVVMFqmaaD6e/+eueSp9vMDUwJkCzBpg1oOGjzw==
+X-Gm-Gg: ASbGncsXhLgEx+oj78xZUNHGqnpOws3cKS5c0pZrrsC1uS5r8mgng5VnR1bNFooeMb+
+ eQK8to2Uex62mxYhw8/OjRTaHZWJ35ucPFzEOn43yAun89hXsxerh1mVHd66HKmAKx5U9WZVeb+
+ Pww70olFSu6oYoXEQZmt0d3QO8Dnf1NABvxCf7OARnatjN3t2XU+WRtgizShiJ9Fqhy47g
+X-Google-Smtp-Source: AGHT+IEgVTLqq03sZoIlc85e4pxje4Yd7ymNujGbmj6hYsnYZz+ZaZPnJdi1WIE/4jpnjz3bPQx/EbgEmWcNWmSiHfs=
+X-Received: by 2002:a50:d586:0:b0:5e4:d52b:78a2 with SMTP id
+ 4fb4d7f45d1cf-5eb9a310491mr6431605a12.15.1742598083450; Fri, 21 Mar 2025
+ 16:01:23 -0700 (PDT)
 MIME-Version: 1.0
 References: <20250312213746.228042-1-mhenning@darkrefraction.com>
- <20250312213746.228042-2-mhenning@darkrefraction.com>
- <Z9xb5SABWcwYnV-x@pollux>
-In-Reply-To: <Z9xb5SABWcwYnV-x@pollux>
+ <20250312213746.228042-3-mhenning@darkrefraction.com>
+ <Z9xfoS89yimS1Sb3@pollux>
+In-Reply-To: <Z9xfoS89yimS1Sb3@pollux>
 From: M Henning <mhenning@darkrefraction.com>
-Date: Fri, 21 Mar 2025 18:06:34 -0400
-X-Gm-Features: AQ5f1Jr7eKy0nP-D2kNJ3ugdAcpfgQY1v0vniB4o8zwJkjs3NPThDFRQwZS-4ao
-Message-ID: <CAAgWFh2dHZs2D7R4ejY9sNQ+QCtLQeGGS2PNtcsm_MPeV3edLw@mail.gmail.com>
-Subject: Re: [PATCH 1/2] drm/nouveau: Add DRM_IOCTL_NOUVEAU_GET_ZCULL_INFO
+Date: Fri, 21 Mar 2025 19:00:57 -0400
+X-Gm-Features: AQ5f1JosjHpUxkL36DODONjh8EuMIFPu3fhSSXFGrywJK3z2Ey2y3VvLkXNpaUQ
+Message-ID: <CAAgWFh2RtCwaKNinX9X4BjwNiaBj5BF_ypzbqoqV4LJgN4cPvg@mail.gmail.com>
+Subject: Re: [PATCH 2/2] drm/nouveau: DRM_NOUVEAU_SET_ZCULL_CTXSW_BUFFER
 To: Danilo Krummrich <dakr@kernel.org>
 Cc: Karol Herbst <kherbst@redhat.com>, Lyude Paul <lyude@redhat.com>, 
  Faith Ekstrand <faith.ekstrand@collabora.com>, dri-devel@lists.freedesktop.org,
@@ -86,391 +86,74 @@ List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-On Thu, Mar 20, 2025 at 2:18=E2=80=AFPM Danilo Krummrich <dakr@kernel.org> =
+This is a pointer in the gpu's virtual address space. It must be
+aligned according to ctxsw_align and be at least ctxsw_size bytes
+(where those values come from the nouveau_abi16_ioctl_get_zcull_info
+structure). I'll change the description to say that much.
+
+Yes, this is GEM-backed. I'm actually not entirely sure what the
+requirements are here, since this part is reverse-engineered. I think
+NOUVEAU_GEM_DOMAIN_VRAM and NOUVEAU_GEM_DOMAIN_GART are both okay. The
+proprietary driver allocates this buffer using
+NV_ESC_RM_VID_HEAP_CONTROL and sets attr =3D NVOS32_ATTR_LOCATION_ANY |
+NVOS32_ATTR_PAGE_SIZE_BIG | NVOS32_ATTR_PHYSICALITY_CONTIGUOUS, attr2
+=3D NVOS32_ATTR2_GPU_CACHEABLE_YES | NVOS32_ATTR2_ZBC_PREFER_NO_ZBC.
+
+On Thu, Mar 20, 2025 at 2:34=E2=80=AFPM Danilo Krummrich <dakr@kernel.org> =
 wrote:
 >
-> Hi Mel,
-
-Hi, thanks for the review.
-
-> On Wed, Mar 12, 2025 at 05:36:14PM -0400, Mel Henning wrote:
-> > Userspace needs this information to set up zcull correctly.
->
-> This is a very brief motivation for the commit, please also describe what=
- the
-> commit does using imperative form.
-
-Sure, I guess I'll move some of the motivation that I wrote in the
-intro email for this series into this commit message.
-
-> >
-> > Signed-off-by: Mel Henning <mhenning@darkrefraction.com>
-> > ---
-> >  .../drm/nouveau/include/nvkm/core/device.h    |  6 ++
-> >  .../sdk/nvidia/inc/ctrl/ctrl2080/ctrl2080gr.h | 69 +++++++++++++++++++
-> >  drivers/gpu/drm/nouveau/nouveau_abi16.c       | 15 ++++
-> >  drivers/gpu/drm/nouveau/nouveau_abi16.h       |  1 +
-> >  drivers/gpu/drm/nouveau/nouveau_drm.c         |  1 +
-> >  drivers/gpu/drm/nouveau/nvkm/engine/gr/r535.c | 34 +++++++++
-> >  include/uapi/drm/nouveau_drm.h                | 19 +++++
-> >  7 files changed, 145 insertions(+)
-> >
-> > diff --git a/drivers/gpu/drm/nouveau/include/nvkm/core/device.h b/drive=
-rs/gpu/drm/nouveau/include/nvkm/core/device.h
-> > index 46afb877a296..d1742ff1cf6b 100644
-> > --- a/drivers/gpu/drm/nouveau/include/nvkm/core/device.h
-> > +++ b/drivers/gpu/drm/nouveau/include/nvkm/core/device.h
-> > @@ -3,6 +3,9 @@
-> >  #define __NVKM_DEVICE_H__
-> >  #include <core/oclass.h>
-> >  #include <core/intr.h>
-> > +
-> > +#include "uapi/drm/nouveau_drm.h"
-> > +
-> >  enum nvkm_subdev_type;
-> >
-> >  enum nvkm_device_type {
-> > @@ -72,6 +75,9 @@ struct nvkm_device {
-> >               bool armed;
-> >               bool legacy_done;
-> >       } intr;
-> > +
-> > +     bool has_zcull_info;
-> > +     struct drm_nouveau_get_zcull_info zcull_info;
->
-> This is bypassing the nvif layer entirely. I think you should store the c=
-ontents
-> of struct NV2080_CTRL_GR_GET_ZCULL_INFO_PARAMS in struct r535_gr and have=
- an
-> nvif interface to access the data.
-
-Sure. I think my main tripping point here is: do we re-declare the
-struct another time? It feels annoying to re-define it for each layer,
-and I don't suppose we can expose the CTRL2080 or drm structures
-directly in the NVIF layer.
-
-> >  };
-> >
-> >  struct nvkm_subdev *nvkm_device_subdev(struct nvkm_device *, int type,=
- int inst);
-> > diff --git a/drivers/gpu/drm/nouveau/include/nvrm/535.113.01/common/sdk=
-/nvidia/inc/ctrl/ctrl2080/ctrl2080gr.h b/drivers/gpu/drm/nouveau/include/nv=
-rm/535.113.01/common/sdk/nvidia/inc/ctrl/ctrl2080/ctrl2080gr.h
-> > index 59f8895bc5d7..01884b926c9c 100644
-> > --- a/drivers/gpu/drm/nouveau/include/nvrm/535.113.01/common/sdk/nvidia=
-/inc/ctrl/ctrl2080/ctrl2080gr.h
-> > +++ b/drivers/gpu/drm/nouveau/include/nvrm/535.113.01/common/sdk/nvidia=
-/inc/ctrl/ctrl2080/ctrl2080gr.h
-> > @@ -26,6 +26,75 @@
-> >   * DEALINGS IN THE SOFTWARE.
-> >   */
-> >
-> > +/**
-> > + * NV2080_CTRL_CMD_GR_GET_ZCULL_INFO
-> > + *
-> > + * This command is used to query the RM for zcull information that the
-> > + * driver will need to allocate and manage the zcull regions.
-> > + *
-> > + *   widthAlignPixels
-> > + *     This parameter returns the width alignment restrictions in pixe=
-ls
-> > + *     used to adjust a surface for proper aliquot coverage (typically
-> > + *     #TPC's * 16).
-> > + *
-> > + *   heightAlignPixels
-> > + *     This parameter returns the height alignment restrictions in pix=
-els
-> > + *     used to adjust a surface for proper aliquot coverage (typically=
- 32).
-> > + *
-> > + *   pixelSquaresByAliquots
-> > + *     This parameter returns the pixel area covered by an aliquot
-> > + *     (typically #Zcull_banks * 16 * 16).
-> > + *
-> > + *   aliquotTotal
-> > + *     This parameter returns the total aliquot pool available in HW.
-> > + *
-> > + *   zcullRegionByteMultiplier
-> > + *     This parameter returns multiplier used to convert aliquots in a=
- region
-> > + *     to the number of bytes required to save/restore them.
-> > + *
-> > + *   zcullRegionHeaderSize
-> > + *     This parameter returns the region header size which is required=
- to be
-> > + *     allocated and accounted for in any save/restore operation on a =
-region.
-> > + *
-> > + *   zcullSubregionHeaderSize
-> > + *     This parameter returns the subregion header size which is requi=
-red to be
-> > + *     allocated and accounted for in any save/restore operation on a =
-region.
-> > + *
-> > + *   subregionCount
-> > + *     This parameter returns the subregion count.
-> > + *
-> > + *   subregionWidthAlignPixels
-> > + *     This parameter returns the subregion width alignment restrictio=
-ns in
-> > + *     pixels used to adjust a surface for proper aliquot coverage
-> > + *     (typically #TPC's * 16).
-> > + *
-> > + *   subregionHeightAlignPixels
-> > + *     This parameter returns the subregion height alignment restricti=
-ons in
-> > + *     pixels used to adjust a surface for proper aliquot coverage
-> > + *     (typically 62).
-> > + *
-> > + *   The callee should compute the size of a zcull region as follows.
-> > + *     (numBytes =3D aliquots * zcullRegionByteMultiplier +
-> > + *                 zcullRegionHeaderSize + zcullSubregionHeaderSize)
-> > + */
-> > +#define NV2080_CTRL_CMD_GR_GET_ZCULL_INFO            (0x20801206U) /* =
-finn: Evaluated from "(FINN_NV20_SUBDEVICE_0_GR_INTERFACE_ID << 8) | NV2080=
-_CTRL_GR_GET_ZCULL_INFO_PARAMS_MESSAGE_ID" */
-> > +
-> > +#define NV2080_CTRL_GR_GET_ZCULL_INFO_PARAMS_SUBREGION_SUPPORTED
-> > +#define NV2080_CTRL_GR_GET_ZCULL_INFO_PARAMS_MESSAGE_ID (0x6U)
-> > +
-> > +typedef struct NV2080_CTRL_GR_GET_ZCULL_INFO_PARAMS {
-> > +    NvU32 widthAlignPixels;
-> > +    NvU32 heightAlignPixels;
-> > +    NvU32 pixelSquaresByAliquots;
-> > +    NvU32 aliquotTotal;
-> > +    NvU32 zcullRegionByteMultiplier;
-> > +    NvU32 zcullRegionHeaderSize;
-> > +    NvU32 zcullSubregionHeaderSize;
-> > +    NvU32 subregionCount;
-> > +    NvU32 subregionWidthAlignPixels;
-> > +    NvU32 subregionHeightAlignPixels;
-> > +} NV2080_CTRL_GR_GET_ZCULL_INFO_PARAMS;
-> > +
-> >  typedef enum NV2080_CTRL_CMD_GR_CTXSW_PREEMPTION_BIND_BUFFERS {
-> >      NV2080_CTRL_CMD_GR_CTXSW_PREEMPTION_BIND_BUFFERS_MAIN =3D 0,
-> >      NV2080_CTRL_CMD_GR_CTXSW_PREEMPTION_BIND_BUFFERS_SPILL =3D 1,
-> > diff --git a/drivers/gpu/drm/nouveau/nouveau_abi16.c b/drivers/gpu/drm/=
-nouveau/nouveau_abi16.c
-> > index 2a0617e5fe2a..981abea97546 100644
-> > --- a/drivers/gpu/drm/nouveau/nouveau_abi16.c
-> > +++ b/drivers/gpu/drm/nouveau/nouveau_abi16.c
-> > @@ -333,6 +333,21 @@ nouveau_abi16_ioctl_getparam(ABI16_IOCTL_ARGS)
-> >       return 0;
-> >  }
-> >
-> > +int
-> > +nouveau_abi16_ioctl_get_zcull_info(ABI16_IOCTL_ARGS)
-> > +{
-> > +     struct nouveau_drm *drm =3D nouveau_drm(dev);
-> > +     struct nvkm_device *device =3D drm->nvkm;
-> > +     struct drm_nouveau_get_zcull_info *out =3D data;
-> > +
-> > +     if (device->has_zcull_info) {
-> > +             *out =3D device->zcull_info;
->
-> This needs copy_to_user().
->
-> > +             return 0;
-> > +     } else {
-> > +             return -ENODEV;
-> > +     }
-> > +}
-> > +
-> >  int
-> >  nouveau_abi16_ioctl_channel_alloc(ABI16_IOCTL_ARGS)
-> >  {
-> > diff --git a/drivers/gpu/drm/nouveau/nouveau_abi16.h b/drivers/gpu/drm/=
-nouveau/nouveau_abi16.h
-> > index af6b4e1cefd2..134b3ab58719 100644
-> > --- a/drivers/gpu/drm/nouveau/nouveau_abi16.h
-> > +++ b/drivers/gpu/drm/nouveau/nouveau_abi16.h
-> > @@ -6,6 +6,7 @@
-> >       struct drm_device *dev, void *data, struct drm_file *file_priv
-> >
-> >  int nouveau_abi16_ioctl_getparam(ABI16_IOCTL_ARGS);
-> > +int nouveau_abi16_ioctl_get_zcull_info(ABI16_IOCTL_ARGS);
-> >  int nouveau_abi16_ioctl_channel_alloc(ABI16_IOCTL_ARGS);
-> >  int nouveau_abi16_ioctl_channel_free(ABI16_IOCTL_ARGS);
-> >  int nouveau_abi16_ioctl_grobj_alloc(ABI16_IOCTL_ARGS);
-> > diff --git a/drivers/gpu/drm/nouveau/nouveau_drm.c b/drivers/gpu/drm/no=
-uveau/nouveau_drm.c
-> > index 107f63f08bd9..4c4168b50e60 100644
-> > --- a/drivers/gpu/drm/nouveau/nouveau_drm.c
-> > +++ b/drivers/gpu/drm/nouveau/nouveau_drm.c
-> > @@ -1244,6 +1244,7 @@ nouveau_ioctls[] =3D {
-> >       DRM_IOCTL_DEF_DRV(NOUVEAU_GROBJ_ALLOC, nouveau_abi16_ioctl_grobj_=
-alloc, DRM_RENDER_ALLOW),
-> >       DRM_IOCTL_DEF_DRV(NOUVEAU_NOTIFIEROBJ_ALLOC, nouveau_abi16_ioctl_=
-notifierobj_alloc, DRM_RENDER_ALLOW),
-> >       DRM_IOCTL_DEF_DRV(NOUVEAU_GPUOBJ_FREE, nouveau_abi16_ioctl_gpuobj=
-_free, DRM_RENDER_ALLOW),
-> > +     DRM_IOCTL_DEF_DRV(NOUVEAU_GET_ZCULL_INFO, nouveau_abi16_ioctl_get=
-_zcull_info, DRM_RENDER_ALLOW),
-> >       DRM_IOCTL_DEF_DRV(NOUVEAU_SVM_INIT, nouveau_svmm_init, DRM_RENDER=
-_ALLOW),
-> >       DRM_IOCTL_DEF_DRV(NOUVEAU_SVM_BIND, nouveau_svmm_bind, DRM_RENDER=
-_ALLOW),
-> >       DRM_IOCTL_DEF_DRV(NOUVEAU_GEM_NEW, nouveau_gem_ioctl_new, DRM_REN=
-DER_ALLOW),
-> > diff --git a/drivers/gpu/drm/nouveau/nvkm/engine/gr/r535.c b/drivers/gp=
-u/drm/nouveau/nvkm/engine/gr/r535.c
-> > index f4bed3eb1ec2..6669f2b1f492 100644
-> > --- a/drivers/gpu/drm/nouveau/nvkm/engine/gr/r535.c
-> > +++ b/drivers/gpu/drm/nouveau/nvkm/engine/gr/r535.c
-> > @@ -34,6 +34,7 @@
-> >  #include <nvrm/535.113.01/common/sdk/nvidia/inc/alloc/alloc_channel.h>
-> >  #include <nvrm/535.113.01/common/sdk/nvidia/inc/ctrl/ctrl0080/ctrl0080=
-fifo.h>
-> >  #include <nvrm/535.113.01/common/sdk/nvidia/inc/ctrl/ctrl2080/ctrl2080=
-gpu.h>
-> > +#include <nvrm/535.113.01/common/sdk/nvidia/inc/ctrl/ctrl2080/ctrl2080=
-gr.h>
-> >  #include <nvrm/535.113.01/common/sdk/nvidia/inc/ctrl/ctrl2080/ctrl2080=
-internal.h>
-> >  #include <nvrm/535.113.01/nvidia/generated/g_kernel_channel_nvoc.h>
-> >
-> > @@ -244,6 +245,8 @@ static int
-> >  r535_gr_oneinit(struct nvkm_gr *base)
-> >  {
-> >       NV2080_CTRL_INTERNAL_STATIC_GR_GET_CONTEXT_BUFFERS_INFO_PARAMS *i=
-nfo;
-> > +     NV2080_CTRL_GR_GET_ZCULL_INFO_PARAMS *zcull_info;
-> > +     u32 zcull_ctxsw_size, zcull_ctxsw_align;
-> >       struct r535_gr *gr =3D container_of(base, typeof(*gr), base);
-> >       struct nvkm_subdev *subdev =3D &gr->base.engine.subdev;
-> >       struct nvkm_device *device =3D subdev->device;
-> > @@ -418,6 +421,11 @@ r535_gr_oneinit(struct nvkm_gr *base)
-> >               }
-> >       }
-> >
-> > +     zcull_ctxsw_size =3D info->engineContextBuffersInfo[0]
-> > +             .engine[NV0080_CTRL_FIFO_GET_ENGINE_CONTEXT_PROPERTIES_EN=
-GINE_ID_GRAPHICS_ZCULL].size;
-> > +     zcull_ctxsw_align =3D info->engineContextBuffersInfo[0]
-> > +             .engine[NV0080_CTRL_FIFO_GET_ENGINE_CONTEXT_PROPERTIES_EN=
-GINE_ID_GRAPHICS_ZCULL].alignment;
-> > +
-> >       nvkm_gsp_rm_ctrl_done(&gsp->internal.device.subdevice, info);
-> >
-> >       /* Promote golden context to RM. */
-> > @@ -450,6 +458,32 @@ r535_gr_oneinit(struct nvkm_gr *base)
-> >               }
-> >       }
-> >
-> > +     zcull_info =3D nvkm_gsp_rm_ctrl_rd(&gsp->internal.device.subdevic=
-e,
-> > +                                      NV2080_CTRL_CMD_GR_GET_ZCULL_INF=
-O,
-> > +                                      sizeof(*zcull_info));
-> > +     if (WARN_ON(IS_ERR(zcull_info))) {
-> > +             ret =3D PTR_ERR(zcull_info);
-> > +             goto done;
-> > +     }
-> > +
-> > +     device->has_zcull_info =3D true;
-> > +
-> > +     device->zcull_info.width_align_pixels =3D zcull_info->widthAlignP=
-ixels;
-> > +     device->zcull_info.height_align_pixels =3D zcull_info->heightAlig=
-nPixels;
-> > +     device->zcull_info.pixel_squares_by_aliquots =3D zcull_info->pixe=
-lSquaresByAliquots;
-> > +     device->zcull_info.aliquot_total =3D zcull_info->aliquotTotal;
-> > +     device->zcull_info.zcull_region_byte_multiplier =3D zcull_info->z=
-cullRegionByteMultiplier;
-> > +     device->zcull_info.zcull_region_header_size =3D zcull_info->zcull=
-RegionHeaderSize;
-> > +     device->zcull_info.zcull_subregion_header_size =3D zcull_info->zc=
-ullSubregionHeaderSize;
-> > +     device->zcull_info.subregion_count =3D zcull_info->subregionCount=
-;
-> > +     device->zcull_info.subregion_width_align_pixels =3D zcull_info->s=
-ubregionWidthAlignPixels;
-> > +     device->zcull_info.subregion_height_align_pixels =3D zcull_info->=
-subregionHeightAlignPixels;
-> > +
-> > +     device->zcull_info.ctxsw_size =3D zcull_ctxsw_size;
-> > +     device->zcull_info.ctxsw_align =3D zcull_ctxsw_align;
-> > +
-> > +     nvkm_gsp_rm_ctrl_done(&gsp->internal.device.subdevice, zcull_info=
-);
->
-> Please move this to a separate function.
->
-> > +
-> >  done:
-> >       nvkm_gsp_rm_free(&golden.chan);
-> >       for (int i =3D gr->ctxbuf_nr - 1; i >=3D 0; i--)
+> On Wed, Mar 12, 2025 at 05:36:15PM -0400, Mel Henning wrote:
 > > diff --git a/include/uapi/drm/nouveau_drm.h b/include/uapi/drm/nouveau_=
 drm.h
-> > index dd87f8f30793..33361784eb4e 100644
+>
+> Same here, please split the uAPI change in a separate commit.
+>
+> > index 33361784eb4e..e9638f4dd7e6 100644
 > > --- a/include/uapi/drm/nouveau_drm.h
 > > +++ b/include/uapi/drm/nouveau_drm.h
->
-> Please do the uAPI change in a separate commit.
->
-> > @@ -432,6 +432,22 @@ struct drm_nouveau_exec {
-> >       __u64 push_ptr;
+> > @@ -448,6 +448,20 @@ struct drm_nouveau_get_zcull_info {
+> >       __u32 ctxsw_align;
 > >  };
 > >
-> > +struct drm_nouveau_get_zcull_info {
+> > +struct drm_nouveau_set_zcull_ctxsw_buffer {
+> > +     /**
+> > +      * @ptr: The virtual address for the buffer, or null to bind noth=
+ing
+> > +      */
+> > +     __u64 addr;
 >
-> Please add some documentation to this structure.
-
-Okay. I guess I'll mostly copy the docs from the CTRL2080 structure.
-
-> > +     __u32 width_align_pixels;
-> > +     __u32 height_align_pixels;
-> > +     __u32 pixel_squares_by_aliquots;
-> > +     __u32 aliquot_total;
-> > +     __u32 zcull_region_byte_multiplier;
-> > +     __u32 zcull_region_header_size;
-> > +     __u32 zcull_subregion_header_size;
-> > +     __u32 subregion_count;
-> > +     __u32 subregion_width_align_pixels;
-> > +     __u32 subregion_height_align_pixels;
-> > +
-> > +     __u32 ctxsw_size;
-> > +     __u32 ctxsw_align;
-> > +};
->
-> What if this ever changes between hardware revisions or firmware versions=
+> What is this buffer? Is this a GEM object backed buffer? How is it mapped=
 ?
-
-There was some previous discussion of that here:
-https://gitlab.freedesktop.org/mesa/mesa/-/issues/12596#note_2796853
-
-From what I can tell, this structure hasn't really changed since
-FERMI_C (circa 2011), so I'm not too worried about it changing on us
-too quickly. When it does change, we have the option of appending more
-members to this struct in the usual way, or if the change is more
-fundamental we can return an error from this ioctl and add a new
-interface. Userspace needs to handle an error from this ioctl
-gracefully anyway since whether it works or not depends on the gpu
-generation and what firmware is loaded right now.
-
+>
+> > +
+> > +     /**
+> > +      * @channel: the channel to set the buffer on
+> > +      */
+> > +     __u32 channel;
+> > +
+> > +     __u32 pad;
+> > +};
 > > +
 > >  #define DRM_NOUVEAU_GETPARAM           0x00
 > >  #define DRM_NOUVEAU_SETPARAM           0x01 /* deprecated */
 > >  #define DRM_NOUVEAU_CHANNEL_ALLOC      0x02
-> > @@ -445,6 +461,7 @@ struct drm_nouveau_exec {
-> >  #define DRM_NOUVEAU_VM_INIT            0x10
+> > @@ -462,6 +476,7 @@ struct drm_nouveau_get_zcull_info {
 > >  #define DRM_NOUVEAU_VM_BIND            0x11
 > >  #define DRM_NOUVEAU_EXEC               0x12
-> > +#define DRM_NOUVEAU_GET_ZCULL_INFO     0x13
+> >  #define DRM_NOUVEAU_GET_ZCULL_INFO     0x13
+> > +#define DRM_NOUVEAU_SET_ZCULL_CTXSW_BUFFER 0x14
 > >  #define DRM_NOUVEAU_GEM_NEW            0x40
 > >  #define DRM_NOUVEAU_GEM_PUSHBUF        0x41
 > >  #define DRM_NOUVEAU_GEM_CPU_PREP       0x42
-> > @@ -513,6 +530,8 @@ struct drm_nouveau_svm_bind {
-> >  #define DRM_IOCTL_NOUVEAU_VM_INIT            DRM_IOWR(DRM_COMMAND_BASE=
- + DRM_NOUVEAU_VM_INIT, struct drm_nouveau_vm_init)
-> >  #define DRM_IOCTL_NOUVEAU_VM_BIND            DRM_IOWR(DRM_COMMAND_BASE=
- + DRM_NOUVEAU_VM_BIND, struct drm_nouveau_vm_bind)
+> > @@ -532,6 +547,7 @@ struct drm_nouveau_svm_bind {
 > >  #define DRM_IOCTL_NOUVEAU_EXEC               DRM_IOWR(DRM_COMMAND_BASE=
  + DRM_NOUVEAU_EXEC, struct drm_nouveau_exec)
-> > +
-> > +#define DRM_IOCTL_NOUVEAU_GET_ZCULL_INFO     DRM_IOR (DRM_COMMAND_BASE=
+> >
+> >  #define DRM_IOCTL_NOUVEAU_GET_ZCULL_INFO     DRM_IOR (DRM_COMMAND_BASE=
  + DRM_NOUVEAU_GET_ZCULL_INFO, struct drm_nouveau_get_zcull_info)
+> > +#define DRM_IOCTL_NOUVEAU_SET_ZCULL_CTXSW_BUFFER  DRM_IOW (DRM_COMMAND=
+_BASE + DRM_NOUVEAU_SET_ZCULL_CTXSW_BUFFER, struct drm_nouveau_set_zcull_ct=
+xsw_buffer)
 > >  #if defined(__cplusplus)
 > >  }
 > >  #endif
