@@ -2,76 +2,159 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id DD474A6C642
-	for <lists+nouveau@lfdr.de>; Sat, 22 Mar 2025 00:01:35 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 5CE14A6D2C2
+	for <lists+nouveau@lfdr.de>; Mon, 24 Mar 2025 02:03:59 +0100 (CET)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 3C53310E071;
-	Fri, 21 Mar 2025 23:01:33 +0000 (UTC)
-Authentication-Results: gabe.freedesktop.org;
-	dkim=pass (2048-bit key; unprotected) header.d=darkrefraction-com.20230601.gappssmtp.com header.i=@darkrefraction-com.20230601.gappssmtp.com header.b="0Wp+c2aR";
-	dkim-atps=neutral
+	by gabe.freedesktop.org (Postfix) with ESMTP id E83F910E1D8;
+	Mon, 24 Mar 2025 01:03:49 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from mail-ed1-f48.google.com (mail-ed1-f48.google.com
- [209.85.208.48])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 796F910E071
- for <nouveau@lists.freedesktop.org>; Fri, 21 Mar 2025 23:01:25 +0000 (UTC)
-Received: by mail-ed1-f48.google.com with SMTP id
- 4fb4d7f45d1cf-5e5deb6482cso7037249a12.1
- for <nouveau@lists.freedesktop.org>; Fri, 21 Mar 2025 16:01:25 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=darkrefraction-com.20230601.gappssmtp.com; s=20230601; t=1742598084;
- x=1743202884; darn=lists.freedesktop.org; 
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=sH2W37gz5JSCUCdBWPzPlpXu5pNqBdrWWXPAz4A12i0=;
- b=0Wp+c2aRLv5n87PBt4J2JatHgmKnxbzghZm5LKfOBVoAOc7THD3opjH56IWaCfGzai
- RXt+Weq5zuM+grcrWpBGa3XJg+7V5srxy4QXKU8VWpjbLbk81G5TnjEzTQ1xfLBVxMp8
- n19fUOaluuJjV35PceXzUbZgT6fgeeoeRApIwY22ZqDJxkQumrWjMb5UWVCgmhwqv5vx
- Us9R09BjXTXnMVbtKzN6N6JEVk4MJnL4kCgJslBQNqg62x6wfhqh+x1W6N3KhZZIXKCm
- KX3VNZhGbKEUzqUUmsj/B9zooQ1dlstwGYxTMcB78Yc37Gq5wBwNmzDXTQ5P3nw2dtZS
- X6vA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1742598084; x=1743202884;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=sH2W37gz5JSCUCdBWPzPlpXu5pNqBdrWWXPAz4A12i0=;
- b=jKemg158RLsNLwDIyCRLDy61gt2hpb86a3zhMH5AQ1FUpURwuVyAcdGmq5xmqwjLWb
- T99PXCJvi/dOqetbDn8yTYfhKLl61Xedf2Aexbs/+5AS+G6a9QJjG8t8y7oDPDCm0PzQ
- Cz41K7M2O3TQgYFZLvN0s4oMzrBkA2eJoHLgKfvKa+bdWJVTwDjWWSBOFD3/tc3aBdiR
- Ntg5HxidePIb/eB9+4/rxKnwc6SX+hcCQV7hnERsmHhEN78uDUGkdGAmlqnSxDNACBqm
- kv4Mz1w0Eht7YncFiaQmDjRSRPdTp99M6WI8piEgSucu5t3/9EXKcGGVuYrlLttN3rl3
- Ecog==
-X-Forwarded-Encrypted: i=1;
- AJvYcCWfLnNo97GgpilSEHMmpEavXCezvhvkFEj0TSmOAAB/2EdIlG0WaoBrfGFJIKpQBF3Yi4oVpykD@lists.freedesktop.org
-X-Gm-Message-State: AOJu0YxfJ9lnG17AenCZgnYCuwyueXALaYsplXOoFK34uMkQ7B3DKWmG
- DeFImJzDn/wvkSNL//clCN3FBE9FF3n0USKYoxaGT2CDMKRRXekCM5aYqRzcYU2ocnSK8A/mEQM
- G58OLlKDjr0XrUwtyVVMFqmaaD6e/+eueSp9vMDUwJkCzBpg1oOGjzw==
-X-Gm-Gg: ASbGncsXhLgEx+oj78xZUNHGqnpOws3cKS5c0pZrrsC1uS5r8mgng5VnR1bNFooeMb+
- eQK8to2Uex62mxYhw8/OjRTaHZWJ35ucPFzEOn43yAun89hXsxerh1mVHd66HKmAKx5U9WZVeb+
- Pww70olFSu6oYoXEQZmt0d3QO8Dnf1NABvxCf7OARnatjN3t2XU+WRtgizShiJ9Fqhy47g
-X-Google-Smtp-Source: AGHT+IEgVTLqq03sZoIlc85e4pxje4Yd7ymNujGbmj6hYsnYZz+ZaZPnJdi1WIE/4jpnjz3bPQx/EbgEmWcNWmSiHfs=
-X-Received: by 2002:a50:d586:0:b0:5e4:d52b:78a2 with SMTP id
- 4fb4d7f45d1cf-5eb9a310491mr6431605a12.15.1742598083450; Fri, 21 Mar 2025
- 16:01:23 -0700 (PDT)
-MIME-Version: 1.0
-References: <20250312213746.228042-1-mhenning@darkrefraction.com>
- <20250312213746.228042-3-mhenning@darkrefraction.com>
- <Z9xfoS89yimS1Sb3@pollux>
-In-Reply-To: <Z9xfoS89yimS1Sb3@pollux>
-From: M Henning <mhenning@darkrefraction.com>
-Date: Fri, 21 Mar 2025 19:00:57 -0400
-X-Gm-Features: AQ5f1JosjHpUxkL36DODONjh8EuMIFPu3fhSSXFGrywJK3z2Ey2y3VvLkXNpaUQ
-Message-ID: <CAAgWFh2RtCwaKNinX9X4BjwNiaBj5BF_ypzbqoqV4LJgN4cPvg@mail.gmail.com>
-Subject: Re: [PATCH 2/2] drm/nouveau: DRM_NOUVEAU_SET_ZCULL_CTXSW_BUFFER
-To: Danilo Krummrich <dakr@kernel.org>
-Cc: Karol Herbst <kherbst@redhat.com>, Lyude Paul <lyude@redhat.com>, 
- Faith Ekstrand <faith.ekstrand@collabora.com>, dri-devel@lists.freedesktop.org,
- nouveau@lists.freedesktop.org
-Content-Type: text/plain; charset="UTF-8"
+Received: from NAM04-BN8-obe.outbound.protection.outlook.com
+ (mail-bn8nam04on2050.outbound.protection.outlook.com [40.107.100.50])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id B262310E155;
+ Mon, 24 Mar 2025 01:03:39 +0000 (UTC)
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=QtMsBnoXmPyNT7KeM/SNcRQbl69N48v8k7S6MEC2/cUiYACeVipRfFN/1UBH7fcUkCLhujXwQqK/QNGpWDthTZoNCVgUajOOXxRAYhp4n8PHwtR6PznK4gzPDcO2iV4cRDt7ol+oqenIfX35DZmLTkZxX8LLby24gbF3DrCUp/8Teny1eyYXEUdOhjztbkAu8lRujqvrJ092+FLN8Ih9IZqCLriz5zzY7aYD+JQ9u5u++otOewJznnN/qtbNL4sfaBO6pHmadhnYNH+vIWJL1qT5NaxxpUXLR+AH6M/Wjur7IgW0bNiSp/+DAL2vgZv8roDm/l9TmMSrA4gaidlJxw==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=luQqx1BMOT3rBcFW1spHs+SRlLWFlDh5qSAvNtfWkuo=;
+ b=lqN518S+eAm0zJ/8uDxfnY6av8OlAt7K29M/RglR7dhymEpYnB0muzqQvp7JBEwA3u9c2OFKsc0K5Y1G1HS1uj2sqZmBAp1j7QHbUPBkLT+kfFrxAncCCJIRHR4mMNeKhREucIMin9mrTfFFLYc+yLoBEe2XsgPNI2LCNaYZGXYIrBGXh1FbDkUfgKA/ST7NPqmuC5ES4QRS0r2Gfv19OSTsguePPAtyvXc9xqMX0tVfB2cEiaRXjNxKo/am++jTahxhu5u3oFeAhrhas5hhapwJebXznUNUgdUCvkmZ7Wr6st3CHFou75Qj3FSEJ4p4YaDE+2m68cyg/EIdulMeAA==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=nvidia.com; dmarc=pass action=none header.from=nvidia.com;
+ dkim=pass header.d=nvidia.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=Nvidia.com;
+ s=selector2;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=luQqx1BMOT3rBcFW1spHs+SRlLWFlDh5qSAvNtfWkuo=;
+ b=N0xnuUltYRO56GEbgR/9dumjyb7Dm//OgCdXSMbRn8/hbt9TpSnWE0xI32+xr/ArLynWEHqJ5Ntjg1MKvsxhUtndcCeMdrEJQizvhlHpVU1sae06JMycgoVofv0tVkXbmh5Y/m5G8DEGhjbI++L1Kj+3eGrITAVMOwsr2icTGGVWF7wSLf+WefeHO6gMjghTnKeZ5XrSqTj1XMdZW/uS8UElVuTvo2hydYH/SR7jWyG7qlofQsiKAdBXeyEP55ufVI4TD3LYijCLho/lde4VnV2+R0qDs8/axEw3dtah05PDPMw46zEfrWSMfVYHFUrCsspGiNEsKQvtGbJAoz5t3w==
+Authentication-Results: dkim=none (message not signed)
+ header.d=none;dmarc=none action=none header.from=nvidia.com;
+Received: from CH2PR12MB3990.namprd12.prod.outlook.com (2603:10b6:610:28::18)
+ by DM4PR12MB6010.namprd12.prod.outlook.com (2603:10b6:8:6a::7) with
+ Microsoft
+ SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ 15.20.8534.42; Mon, 24 Mar 2025 01:03:31 +0000
+Received: from CH2PR12MB3990.namprd12.prod.outlook.com
+ ([fe80::6e37:569f:82ee:3f99]) by CH2PR12MB3990.namprd12.prod.outlook.com
+ ([fe80::6e37:569f:82ee:3f99%6]) with mapi id 15.20.8534.040; Mon, 24 Mar 2025
+ 01:03:31 +0000
+Content-Type: text/plain; charset=UTF-8
+Date: Mon, 24 Mar 2025 10:03:27 +0900
+Message-Id: <D8O3BBP1RR5Q.2S2NBBCAEX1KI@nvidia.com>
+Cc: "Boqun Feng" <boqun.feng@gmail.com>, "Danilo Krummrich"
+ <dakr@kernel.org>, "David Airlie" <airlied@gmail.com>, "John Hubbard"
+ <jhubbard@nvidia.com>, "Ben Skeggs" <bskeggs@nvidia.com>, "Miguel Ojeda"
+ <ojeda@kernel.org>, "Alex Gaynor" <alex.gaynor@gmail.com>, "Gary Guo"
+ <gary@garyguo.net>, =?utf-8?q?Bj=C3=B6rn_Roy_Baron?=
+ <bjorn3_gh@protonmail.com>, "Benno Lossin" <benno.lossin@proton.me>,
+ "Andreas Hindborg" <a.hindborg@kernel.org>, "Alice Ryhl"
+ <aliceryhl@google.com>, "Trevor Gross" <tmgross@umich.edu>, "Simona Vetter"
+ <simona@ffwll.ch>, <linux-kernel@vger.kernel.org>,
+ <rust-for-linux@vger.kernel.org>, <nouveau@lists.freedesktop.org>,
+ <dri-devel@lists.freedesktop.org>
+Subject: Re: [PATCH RFC v3 6/7] gpu: nova-core: add basic timer device
+From: "Alexandre Courbot" <acourbot@nvidia.com>
+To: "Daniel Brooks" <db48x@db48x.net>
 Content-Transfer-Encoding: quoted-printable
+X-Mailer: aerc 0.20.1-0-g2ecb8770224a
+References: <20250320-nova_timer-v3-0-79aa2ad25a79@nvidia.com>
+ <20250320-nova_timer-v3-6-79aa2ad25a79@nvidia.com>
+ <Z9xb1r1x5tOzAIZT@boqun-archlinux> <D8LPCCP6JNYU.28DYTEK5BB74K@nvidia.com>
+ <87r02qz77h.fsf@db48x.net>
+In-Reply-To: <87r02qz77h.fsf@db48x.net>
+X-ClientProxiedBy: TYWPR01CA0044.jpnprd01.prod.outlook.com
+ (2603:1096:400:17f::11) To CH2PR12MB3990.namprd12.prod.outlook.com
+ (2603:10b6:610:28::18)
+MIME-Version: 1.0
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: CH2PR12MB3990:EE_|DM4PR12MB6010:EE_
+X-MS-Office365-Filtering-Correlation-Id: 7b361b55-d368-4485-ec05-08dd6a6fb13d
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: BCL:0;ARA:13230040|366016|1800799024|7416014|376014;
+X-Microsoft-Antispam-Message-Info: =?utf-8?B?dUgrOCtqSUt4L2NwSEFqK0FKdzlnSktzT2FBUnlJblBUemoxUkVnbWljbWpZ?=
+ =?utf-8?B?N2FVVXBPaHptZ3lzd3ZrNFZ3WncvQTliVXV4bHB0WlY1QktmZlRDTWZEb1dm?=
+ =?utf-8?B?dGQrUStxNXcwOE9MRlMza1ZKSENaTytOVG41aW1Dc3lRdHZSNi9XQWE1UzNU?=
+ =?utf-8?B?L0J1Rk1QNEVxWHZqbkVhejVwWUxEVkk5SE0xT0NMTTlIV2U3UlVFQXR2Kzky?=
+ =?utf-8?B?ZDFtdnBsNXR6ZUtDZXBZZ1V5ZkFKaFhHMGE5bFZ3Sk9YOGYrb1IyZmVib05T?=
+ =?utf-8?B?ZnhsR0hqTWdEWS84Y1EvTTRjZk0wN1lScjQ1ZlpReW04NHZjWksxVjdHTTJ1?=
+ =?utf-8?B?MFUrNWp5UE85OEVTcXZDUHFqRzNYMVprQzgycHBBdXM4U3pINDhUYjkwNDlB?=
+ =?utf-8?B?R2U5ZGJVaGtrZlpNWHlaRTFjZ0tkYTA1RnpPWUZUeHdiSE5VOFpNcklMMlRX?=
+ =?utf-8?B?V0M4aVBSUkhNSEpQNm9INWVFR1lad1NOTTk2VzZ2RmhlYjQ5VWRic2YxQW5s?=
+ =?utf-8?B?MU4wb21JV3BZVjVOalNTSEhvVVZ5NzEvOTJiVDhzTWdhUi9sd0t6Y3ZHN05o?=
+ =?utf-8?B?N2ptcTMzQ2MvYURNZG1QQmVVUFNiZHpOd0VJSkF2Vk1Rbk1ZcWFEYXRrMXF2?=
+ =?utf-8?B?bU41Q0k4dytlQmkvS1lMbjdXdFJwRC9JMXNNS1YxbEtWL1FDUHJ6em5pNFFu?=
+ =?utf-8?B?anBKUUljM3lPUXJPVDR0dDBEMmFUd0RLQU80ZVRuT1ZGRS8yekRyZE1MNUtE?=
+ =?utf-8?B?aTFuK1ZwdFlLVGFNbFpiMGcxeW1sSHJIankrQnRQRmhYRWY2RWdJTys5Vmo5?=
+ =?utf-8?B?WTl6YlZZYlhyM0h3MW4zRjhLL2tIYk5HVGI5RTJTbys1TFM2SVZOR1Vadk9O?=
+ =?utf-8?B?blBoaUFNWktOanVBN2xZbkM4RDBaaklZcGMxM2N2STkvYk42eHZIdjRSTTlM?=
+ =?utf-8?B?QkU3THJZMitsbThJMEJJTjZ6QzFRZ2QvU3lvcmx5T0ltbklpWC9NRmpXRjMz?=
+ =?utf-8?B?bUJMclpkZ1dyWHVYNnpMNjNTOElFVEN3K1h6M01Bc3ltcVRPV3h4a3BxUUsw?=
+ =?utf-8?B?b2RkTFpSZ2hPU3J2aEZDc3NPS1l5bTNpTldPSVN0Vno5NHo1MzJoMk1LbkdP?=
+ =?utf-8?B?K3FsU2txSnhYOVR6SWNrN1ZOcG1TT3hOSE5BSFZkaUZEL3h3cUdxd1E4YXVr?=
+ =?utf-8?B?OWhzaTZ5Q3Byc3dtVjEwNHd5Wnh1clc1RnEwVVJJVGFWM25tSHFRbFpGTzlR?=
+ =?utf-8?B?SWI3Y3hVQVpsQW0veFZ2NnVTRTRJdmZ5TEF1ZnhVZVAyNEFmVktMblRQbGlR?=
+ =?utf-8?B?R3JkaVViR2gra0FVNEZ4ZS9pN1dERHoyRSs2ZjgrbmU4Z214amxLNlhoU29O?=
+ =?utf-8?B?TlRsV1VPOFEySldQNUE1WXBIaUlQZlFLeFNicU1HdGNEa3ppWHVYRDFqRDlC?=
+ =?utf-8?B?eEd1RXJsSDcwb0QzcVN0VVByZGFyZGVwNkFBMjV1M0VmeEtEYnhkTlFERWtx?=
+ =?utf-8?B?Mll6b2xnTFBNKzRNRGZtZ1lETXp6STE2M1dYODJVZjlycEZwNVMxVHFqVjdm?=
+ =?utf-8?B?bjBEdDVVc1BhdTA3cHpDUk1lWERob2JBbUxEdFU3SElDcTIrY3J2TkRodlkw?=
+ =?utf-8?B?Y1R6SWJFTFlPOVBFMXFTeDhIbkJUNTZEVGIzSkhBb3o4dHE1SWg1Qk1ub1JO?=
+ =?utf-8?B?dFJaYWVsVWREc1BMRjVPbElBeGd0Z2VWQUxySkpwMWlYWWJ0TnlGMnlNaGgw?=
+ =?utf-8?B?MWFYUUJleFFTY1pkckxYcmJiaXRuTk54YjJzWUhkaHBGQmhKR3pwZkIvSzls?=
+ =?utf-8?B?bCt2RXQ2OUxHeUZwcmxYTEg4d2tKa25FcWt2KzNIa2FlakRZQVpQTEEvYzVJ?=
+ =?utf-8?Q?rZMtIhENZ9tJL?=
+X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
+ IPV:NLI; SFV:NSPM; H:CH2PR12MB3990.namprd12.prod.outlook.com; PTR:; CAT:NONE;
+ SFS:(13230040)(366016)(1800799024)(7416014)(376014); DIR:OUT; SFP:1101; 
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?MDk2MnlkM1FIajZBcHFjWFBIeHgzNVU5TExqVk1PTGc1L2g3dHZqcmh4RnVj?=
+ =?utf-8?B?bTcxaHJQbGFXNGxmMVJCTVhaZGhhTVNRSjA1TFhqSHFobERzdGpHTm00aGZw?=
+ =?utf-8?B?QlE5aVltN2haQktOYVNSMmpydklmWlRwNjVPa1NhZDF6U2VMNXJrOWFnN3hT?=
+ =?utf-8?B?NDF4ek1LZDJrdDQzaWp4RiswRExBZzY4YnBPRlM1cGw0b0pGd3FKdWk5WExJ?=
+ =?utf-8?B?TDlFVkxZKzBHN25TdytGbUNKSDZJYXFHQzc3c004UlQvQ0RSVlVVZHdpZzl5?=
+ =?utf-8?B?ckcvZlBGQ1FHWWpJY2tVLzVJdWFNRGVNY1lCd20zclMvSGZLQ3lzK0lPUmM1?=
+ =?utf-8?B?blhKdUhxUHpveGpiRDNwaGdPcWNRVFVUMklROHlpczZSUHFZL3ZmOG01eDlD?=
+ =?utf-8?B?Tlp2bU9OUWptbHFtOUlsWnBoT1dEeVhhcTdsaWt2UjBGUlVhc0dQc1JPTk50?=
+ =?utf-8?B?VVJDRVRUYnZOalprelNsMzlkblJGVkhCVnVveW1GWGlQUVRPYU5Sa21NNzZG?=
+ =?utf-8?B?Y1grbnZCb3VsSFVXdUFFTEZ1aXVtY2p6NUl4Y0R5WkcvWGFFV2sxZEczQWRU?=
+ =?utf-8?B?K0JsanYyd2RKK3NscW8wb05STVVQZ0hJUWI5aGFaYnZNTkwrVEtnbTgvYktH?=
+ =?utf-8?B?Y1drMnh5SjJJdXdnWGp1VW1ZNzFaSHl0N3g5cVI3bW5nTWczeVlyNGtKTWhn?=
+ =?utf-8?B?Uy9vdU5mSmhjVE5GbmVJSHkxVWhlSDFKcUd4cU5RVFNIZ28wczdiaUNZZ2Rn?=
+ =?utf-8?B?aHBBWXhWdmVvYnNSL2dlL3ZWcjhJUUpZaHl6Y0taT2NyRUJyY1o1MkNEVFVp?=
+ =?utf-8?B?dlB0VG9RWTJiQ21hY091QWZBOHdjMkkycUpGL1RQNHY4Nk1rb1VYazZ5TzNh?=
+ =?utf-8?B?TUhsSEV0RS9CMnRuTkt2OFZhU2tUT1czV0ljVzJKOU03Mnd0QUNVaXNlN3hU?=
+ =?utf-8?B?RzVZWmhuWFdIdGF5YVl3Nmc4Y2ZYOGMxK3RLcTlUSW02d2xHMDdxNHFISXpF?=
+ =?utf-8?B?Mk5PaTdrU0wyMko5MWNFblhLQjIxWE04YlliZTQvbzBNZElXUFNSelI4M0pi?=
+ =?utf-8?B?dzAza1FRZ1dUaW52TSt1N3RtdnpoN29kNXVYZFh4b3ZOc3psSFptUzFvNTkx?=
+ =?utf-8?B?SXUvcmZGci9jalBXU1ZwQTUxLzl4cTlpNGJ0dDhvZW54U0VkM0tKVzNlMjRD?=
+ =?utf-8?B?WVlPWGlyWVpyQ3NOVnpaaUFmaWV6U250ZG5TQVlzaThFU0ZySXB3OTBtNDBP?=
+ =?utf-8?B?cVVFWFJIcEtMM1M5OG1rTUplOXBEQ3llakxtR2g0Mkx6ZTNrSGZTWjNwaVNt?=
+ =?utf-8?B?ekpkQTVhdTBXZTdoWmVsU2NHMTdtVks3clVqbkxJQ21yWGVHNFRQSmFhSXha?=
+ =?utf-8?B?UEx4cXRRM3BvSjV4Vjk4Rjk2TGxFK3JpczNTZkVpZXpza3BEVm1sSnZYK0hp?=
+ =?utf-8?B?cnJKa2lzUm92ZW5zUXpDc3ZWbUY0OE8ramRCZTliSVBiY3k5Y1lCU0hIS3pD?=
+ =?utf-8?B?QXVUMnJFR0IvMW5DdjhHVWI1cjVaVFR6YkNmYUF2YnFWMThmdWQ0dnZOUjEy?=
+ =?utf-8?B?SldBc0h2S1doRUNhSWg1WE1WSzBSSHNWaDBPYTNZaFo0dyswUnhtMHdRSC82?=
+ =?utf-8?B?cEh5WTlMeXVIZVJHZk9HVnhwdzBRYVQ4a0ZLNXZ6ZVRTbGJjb0dpa2gzOU1k?=
+ =?utf-8?B?ZFcwdjRMR2NMWGlVeklTRFk3WVoxdzA4RHVKdVBqTVdMNHRhc0Jta3RENUQ3?=
+ =?utf-8?B?ajZxYXU3YXVmSUR1Zy95NXg4TGx0NXBjVTRucHB0TVJYV3hkUDZ1bFZvUWx2?=
+ =?utf-8?B?YThSdkpsVlVnSkU4QzNhd21WWkRjREtzMEg5QkhHNENRanRiTmVuRnZsdGtm?=
+ =?utf-8?B?OU80dktyeEVoMC84TnlWVEhwdEpOS0lITXdnU0F3dkVMcTJrY1BrdzdHVndr?=
+ =?utf-8?B?SU5LY2dtZk9CQk5Ra1g0N0RqQnUxZFJyZW5WdzJiTVFXUlJDY2ZwWC9XR3U1?=
+ =?utf-8?B?WDZuT3doQUtpRHpEdlgxNkJ6NkVNTHVwbWZieFQ3L2VlSjRsTEtEYjVJRGMr?=
+ =?utf-8?B?NFZGNXQrU2lBdEtGMzFLd0tpOTlmampEQVFYSmkwZU1ja1JSTXoyREJVd1c0?=
+ =?utf-8?Q?K+d9RlwRf+6EIA57UqiSymdK4?=
+X-OriginatorOrg: Nvidia.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: 7b361b55-d368-4485-ec05-08dd6a6fb13d
+X-MS-Exchange-CrossTenant-AuthSource: CH2PR12MB3990.namprd12.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 24 Mar 2025 01:03:30.9497 (UTC)
+X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
+X-MS-Exchange-CrossTenant-Id: 43083d15-7273-40c1-b7db-39efd9ccc17a
+X-MS-Exchange-CrossTenant-MailboxType: HOSTED
+X-MS-Exchange-CrossTenant-UserPrincipalName: 6bawlSataYlr9L+WN+uhmndzwpqRysVmUfL9+JxQZiZdYVBhNWBV/A8U9ICDNUhHjkb+IRqeaF0YZTkmezZk5w==
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: DM4PR12MB6010
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -86,77 +169,45 @@ List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-This is a pointer in the gpu's virtual address space. It must be
-aligned according to ctxsw_align and be at least ctxsw_size bytes
-(where those values come from the nouveau_abi16_ioctl_get_zcull_info
-structure). I'll change the description to say that much.
+On Sat Mar 22, 2025 at 1:20 AM JST, Daniel Brooks wrote:
+> "Alexandre Courbot" <acourbot@nvidia.com> writes:
+>
+>> Hi Boqun,
+>>
+>> On Fri Mar 21, 2025 at 3:17 AM JST, Boqun Feng wrote:
+>>> Also an Instant type has been proposed and reviewed for a while:
+>>>
+>>> 	https://lore.kernel.org/rust-for-linux/20250220070611.214262-5-fujita.=
+tomonori@gmail.com/
+>>>
+>>> we should use that type instead of re-inventing the wheel here. Of
+>>> course, it's currently not quite working because Instant is only for
+>>> CLOCK_MONOTONIC. But there was a proposal to make `Instant` generic ove=
+r
+>>> clock:
+>>>
+>>> 	https://lore.kernel.org/rust-for-linux/20230714-rust-time-v2-1-f5aed84=
+218c4@asahilina.net/
+>>>
+>>> if you follow that design, you can implement a `Instant<NovaGpu>`, wher=
+e
+>>>
+>>>     ipml Now for NovaGpu {
+>>>         fn now() -> Instant<Self> {
+>>> 	    // your Timer::read() implementation.
+>>> 	}
+>>>     }
+>>
+>> Ah, thanks for pointing this out. I'll keep track of these patches,
+>> hopefully they get merged soon!
+>
+> Would that actually work though? Instant is a ktime_t, which is a signed
+> i64 rather than a u64. When I read your patch I assumed that you had to
+> add your own Timestamp because the value had to be whatever was read
+> from the GPU, independent of the clock value kept by the system or other
+> hardware.
 
-Yes, this is GEM-backed. I'm actually not entirely sure what the
-requirements are here, since this part is reverse-engineered. I think
-NOUVEAU_GEM_DOMAIN_VRAM and NOUVEAU_GEM_DOMAIN_GART are both okay. The
-proprietary driver allocates this buffer using
-NV_ESC_RM_VID_HEAP_CONTROL and sets attr =3D NVOS32_ATTR_LOCATION_ANY |
-NVOS32_ATTR_PAGE_SIZE_BIG | NVOS32_ATTR_PHYSICALITY_CONTIGUOUS, attr2
-=3D NVOS32_ATTR2_GPU_CACHEABLE_YES | NVOS32_ATTR2_ZBC_PREFER_NO_ZBC.
-
-On Thu, Mar 20, 2025 at 2:34=E2=80=AFPM Danilo Krummrich <dakr@kernel.org> =
-wrote:
->
-> On Wed, Mar 12, 2025 at 05:36:15PM -0400, Mel Henning wrote:
-> > diff --git a/include/uapi/drm/nouveau_drm.h b/include/uapi/drm/nouveau_=
-drm.h
->
-> Same here, please split the uAPI change in a separate commit.
->
-> > index 33361784eb4e..e9638f4dd7e6 100644
-> > --- a/include/uapi/drm/nouveau_drm.h
-> > +++ b/include/uapi/drm/nouveau_drm.h
-> > @@ -448,6 +448,20 @@ struct drm_nouveau_get_zcull_info {
-> >       __u32 ctxsw_align;
-> >  };
-> >
-> > +struct drm_nouveau_set_zcull_ctxsw_buffer {
-> > +     /**
-> > +      * @ptr: The virtual address for the buffer, or null to bind noth=
-ing
-> > +      */
-> > +     __u64 addr;
->
-> What is this buffer? Is this a GEM object backed buffer? How is it mapped=
-?
->
-> > +
-> > +     /**
-> > +      * @channel: the channel to set the buffer on
-> > +      */
-> > +     __u32 channel;
-> > +
-> > +     __u32 pad;
-> > +};
-> > +
-> >  #define DRM_NOUVEAU_GETPARAM           0x00
-> >  #define DRM_NOUVEAU_SETPARAM           0x01 /* deprecated */
-> >  #define DRM_NOUVEAU_CHANNEL_ALLOC      0x02
-> > @@ -462,6 +476,7 @@ struct drm_nouveau_get_zcull_info {
-> >  #define DRM_NOUVEAU_VM_BIND            0x11
-> >  #define DRM_NOUVEAU_EXEC               0x12
-> >  #define DRM_NOUVEAU_GET_ZCULL_INFO     0x13
-> > +#define DRM_NOUVEAU_SET_ZCULL_CTXSW_BUFFER 0x14
-> >  #define DRM_NOUVEAU_GEM_NEW            0x40
-> >  #define DRM_NOUVEAU_GEM_PUSHBUF        0x41
-> >  #define DRM_NOUVEAU_GEM_CPU_PREP       0x42
-> > @@ -532,6 +547,7 @@ struct drm_nouveau_svm_bind {
-> >  #define DRM_IOCTL_NOUVEAU_EXEC               DRM_IOWR(DRM_COMMAND_BASE=
- + DRM_NOUVEAU_EXEC, struct drm_nouveau_exec)
-> >
-> >  #define DRM_IOCTL_NOUVEAU_GET_ZCULL_INFO     DRM_IOR (DRM_COMMAND_BASE=
- + DRM_NOUVEAU_GET_ZCULL_INFO, struct drm_nouveau_get_zcull_info)
-> > +#define DRM_IOCTL_NOUVEAU_SET_ZCULL_CTXSW_BUFFER  DRM_IOW (DRM_COMMAND=
-_BASE + DRM_NOUVEAU_SET_ZCULL_CTXSW_BUFFER, struct drm_nouveau_set_zcull_ct=
-xsw_buffer)
-> >  #if defined(__cplusplus)
-> >  }
-> >  #endif
-> > --
-> > 2.48.1
-> >
+That's correct, and honestly there would be little benefit in using an
+already existing type outside of not re-writing very similar code as GPU
+time stamps are only used locally anyway. I'll keep an eye on these
+patches though in case we can harmonize things a bit.
