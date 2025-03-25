@@ -2,37 +2,50 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id 092CAA6FD9A
-	for <lists+nouveau@lfdr.de>; Tue, 25 Mar 2025 13:45:58 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 7E305A70D98
+	for <lists+nouveau@lfdr.de>; Wed, 26 Mar 2025 00:23:03 +0100 (CET)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 9AE5810E573;
-	Tue, 25 Mar 2025 12:45:56 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 7105410E605;
+	Tue, 25 Mar 2025 23:22:58 +0000 (UTC)
+Authentication-Results: gabe.freedesktop.org;
+	dkim=pass (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="qjhZ5SnY";
+	dkim-atps=neutral
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from rudorff.com (rudorff.com [193.31.26.27])
- by gabe.freedesktop.org (Postfix) with ESMTPS id BD50010E573;
- Tue, 25 Mar 2025 12:45:55 +0000 (UTC)
-Received: from [127.0.0.1]
- (dynamic-2a02-3102-8418-1620-0000-0000-0000-04cc.310.pool.telefonica.de
- [IPv6:2a02:3102:8418:1620::4cc])
- by rudorff.com (Postfix) with ESMTPSA id DA59C406DA;
- Tue, 25 Mar 2025 13:45:50 +0100 (CET)
-From: Christoph Rudorff <chris@rudorff.com>
-Date: Tue, 25 Mar 2025 13:44:36 +0100
-Subject: [PATCH v2] drm/nouveau: fix hibernate on disabled GPU
+Received: from sea.source.kernel.org (sea.source.kernel.org [172.234.252.31])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 1DA1B10E61E;
+ Tue, 25 Mar 2025 23:22:52 +0000 (UTC)
+Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
+ by sea.source.kernel.org (Postfix) with ESMTP id 9D35744138;
+ Tue, 25 Mar 2025 23:22:51 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id C66FAC4CEE4;
+ Tue, 25 Mar 2025 23:22:46 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+ s=k20201202; t=1742944971;
+ bh=VK9ZJNnvMvLR69pPVF7hCnOJMsL6WneMp/VWN/uzFYE=;
+ h=From:To:Cc:Subject:Date:From;
+ b=qjhZ5SnYXCiQ/RxLcz15xLHTqtwvMRQ0ZiTHuie4Ypeaf8I2Li1bg1U99cjUFWNP1
+ PAKSde1ro1EfYGGlrjizMEuqhCT6awTgxw91HQTE01wdDy0zBodaBRrxu12dBoVsMx
+ 5cu4zMOd2RLCeDY1dv8UPU76AF4Qj9xiBQ8RRq7GLSU0nkNB1Ycc3UysvYEumK6n89
+ geWyP4mQlYD6lNdUH52FDgYfjvNHROCmcV91EtR8esnG6+8QJ0KCiKF3voTF3mI5vS
+ DjWTKQHOQCDuwOcrwFr2FJMW0WhlnZF+DHMQcaprK8H18YbLf7NzMW8vFqfonm0FcQ
+ Z/Tffi49dvndQ==
+From: Danilo Krummrich <dakr@kernel.org>
+To: airlied@gmail.com, simona@ffwll.ch, maarten.lankhorst@linux.intel.com,
+ mripard@kernel.org, tzimmermann@suse.de, ajanulgu@redhat.com,
+ lyude@redhat.com, pstanner@redhat.com, zhiw@nvidia.com, cjia@nvidia.com,
+ jhubbard@nvidia.com, bskeggs@nvidia.com, acurrid@nvidia.com
+Cc: ojeda@kernel.org, alex.gaynor@gmail.com, boqun.feng@gmail.com,
+ gary@garyguo.net, bjorn3_gh@protonmail.com, benno.lossin@proton.me,
+ a.hindborg@kernel.org, aliceryhl@google.com, tmgross@umich.edu,
+ dri-devel@lists.freedesktop.org, nouveau@lists.freedesktop.org,
+ rust-for-linux@vger.kernel.org, Danilo Krummrich <dakr@kernel.org>
+Subject: [PATCH 0/2] Nova DRM skeleton driver
+Date: Wed, 26 Mar 2025 00:21:47 +0100
+Message-ID: <20250325232222.5326-1-dakr@kernel.org>
+X-Mailer: git-send-email 2.49.0
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 7bit
-Message-Id: <20250325-nouveau-fix-hibernate-v2-1-2bd5c13fb953@rudorff.com>
-X-B4-Tracking: v=1; b=H4sIADOl4mcC/4WNTQ6CMBCFr0Jm7ZhSCv6svIdhUWCws7A1U9poC
- He3cgGX38t731shkjBFuFYrCGWOHHwBfahgdNY/CHkqDFrpVjXKoA8pk0048xsdDyTeLoTaXM6
- 6m4w+DQOU7UuoFHbvvS/sOC5BPvtNrn/pP2OusUYiY5qmNV0p3iRNQeb5OIYn9Nu2fQFtPSRSv
- AAAAA==
-X-Change-ID: 20250304-nouveau-fix-hibernate-249826d427bb
-To: Lyude Paul <lyude@redhat.com>
-Cc: dri-devel@lists.freedesktop.org, nouveau@lists.freedesktop.org,
- linux-kernel@vger.kernel.org, Christoph Rudorff <chris@rudorff.com>
-X-Mailer: b4 0.14.2
+Content-Transfer-Encoding: 8bit
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -47,73 +60,62 @@ List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-Hibernate bricks the machine if a discrete GPU was disabled via
+This patch series adds the nova-drm skeleton driver.
 
-echo IGD > /sys/kernel/debug/vgaswitcheroo/switch
+nova-drm is connected to nova-core through the auxiliary bus and implements the
+DRM parts of the nova driver stack.
 
-The freeze and thaw handler lacks checking the GPU power state,
-as suspend and resume do.
+For now, it implements the fundamental DRM abstractions, i.e. creates a DRM
+device and registers it, exposing a three sample IOCTLs.
 
-This patch add the checks and fix this issue.
+  DRM_IOCTL_NOVA_GETPARAM
+    - provides the PCI bar size from the bar that maps the GPUs VRAM from
+      nova-core
 
-Signed-off-by: Christoph Rudorff <chris@rudorff.com>
----
-I got an old MacBook having a defective nvidia GPU
+  DRM_IOCTL_NOVA_GEM_CREATE
+    - creates a new dummy DRM GEM object and returns a handle
 
-So I put this in the initrd scripts to turn it off asap:
+  DRM_IOCTL_NOVA_GEM_INFO
+    - provides metadata for the DRM GEM object behinda given handle
 
-mount -t debugfs none /sys/kernel/debug
-echo IGD > /sys/kernel/debug/vgaswitcheroo/switch
+I implemented a small userspace test suite [1] that utilizes this
+interface.
 
-which powers down the nouveau.
+This patch series depends on the auxiliary bus abstractions [2] and the DRM
+abstractions [3]; the patches from this series are also in [4].
 
-Suspend and resume works,
-but hibernate locks up the machine.
+[1] https://gitlab.freedesktop.org/dakr/drm-test
+[2] https://web.git.kernel.org/pub/scm/linux/kernel/git/dakr/linux.git/log/?h=rust/auxiliary
+[3] https://gitlab.freedesktop.org/drm/misc/kernel/-/tree/topic/rust-drm
+[4] https://gitlab.freedesktop.org/drm/nova/-/tree/staging/nova-drm
 
-The handlers are not checking the GPU state.
+Danilo Krummrich (2):
+  gpu: nova-core: register auxiliary device for nova-drm
+  drm: nova-drm: add initial driver skeleton
 
-This is a good candidate for backport.
-This patch applies down to 6.12.y
----
-Changes in v2:
-- EDITME: use my real name, my nick raised bugs
-- Link to v1: https://lore.kernel.org/r/20250304-nouveau-fix-hibernate-v1-1-ee4433546030@rudorff.com
----
- drivers/gpu/drm/nouveau/nouveau_drm.c | 8 ++++++++
- 1 file changed, 8 insertions(+)
+ MAINTAINERS                        |  12 ++++
+ drivers/gpu/drm/Kconfig            |   2 +
+ drivers/gpu/drm/Makefile           |   1 +
+ drivers/gpu/drm/nova/Kconfig       |  14 ++++
+ drivers/gpu/drm/nova/Makefile      |   3 +
+ drivers/gpu/drm/nova/driver.rs     |  70 ++++++++++++++++++++
+ drivers/gpu/drm/nova/file.rs       |  68 +++++++++++++++++++
+ drivers/gpu/drm/nova/gem.rs        |  49 ++++++++++++++
+ drivers/gpu/drm/nova/nova.rs       |  17 +++++
+ drivers/gpu/nova-core/Kconfig      |   1 +
+ drivers/gpu/nova-core/driver.rs    |   9 ++-
+ drivers/gpu/nova-core/nova_core.rs |   2 +
+ include/uapi/drm/nova_drm.h        | 101 +++++++++++++++++++++++++++++
+ rust/uapi/uapi_helper.h            |   1 +
+ 14 files changed, 349 insertions(+), 1 deletion(-)
+ create mode 100644 drivers/gpu/drm/nova/Kconfig
+ create mode 100644 drivers/gpu/drm/nova/Makefile
+ create mode 100644 drivers/gpu/drm/nova/driver.rs
+ create mode 100644 drivers/gpu/drm/nova/file.rs
+ create mode 100644 drivers/gpu/drm/nova/gem.rs
+ create mode 100644 drivers/gpu/drm/nova/nova.rs
+ create mode 100644 include/uapi/drm/nova_drm.h
 
-diff --git a/drivers/gpu/drm/nouveau/nouveau_drm.c b/drivers/gpu/drm/nouveau/nouveau_drm.c
-index 5664c4c71faf1ced30f38d9874244db80d58194a..0958d1b940c2533bfadc29e098045db6f0170c79 100644
---- a/drivers/gpu/drm/nouveau/nouveau_drm.c
-+++ b/drivers/gpu/drm/nouveau/nouveau_drm.c
-@@ -1079,6 +1079,10 @@ nouveau_pmops_freeze(struct device *dev)
- {
- 	struct nouveau_drm *drm = dev_get_drvdata(dev);
- 
-+	if (drm->dev->switch_power_state == DRM_SWITCH_POWER_OFF ||
-+	    drm->dev->switch_power_state == DRM_SWITCH_POWER_DYNAMIC_OFF)
-+		return 0;
-+
- 	return nouveau_do_suspend(drm, false);
- }
- 
-@@ -1087,6 +1091,10 @@ nouveau_pmops_thaw(struct device *dev)
- {
- 	struct nouveau_drm *drm = dev_get_drvdata(dev);
- 
-+	if (drm->dev->switch_power_state == DRM_SWITCH_POWER_OFF ||
-+	    drm->dev->switch_power_state == DRM_SWITCH_POWER_DYNAMIC_OFF)
-+		return 0;
-+
- 	return nouveau_do_resume(drm, false);
- }
- 
-
----
-base-commit: 7eb172143d5508b4da468ed59ee857c6e5e01da6
-change-id: 20250304-nouveau-fix-hibernate-249826d427bb
-
-Best regards,
 -- 
-Christoph Rudorff <chris@rudorff.com>
+2.49.0
 
