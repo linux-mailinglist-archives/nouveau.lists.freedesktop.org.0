@@ -2,54 +2,37 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id EB242A6E2E3
-	for <lists+nouveau@lfdr.de>; Mon, 24 Mar 2025 19:59:49 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 092CAA6FD9A
+	for <lists+nouveau@lfdr.de>; Tue, 25 Mar 2025 13:45:58 +0100 (CET)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 7818910E4C1;
-	Mon, 24 Mar 2025 18:59:48 +0000 (UTC)
-Authentication-Results: gabe.freedesktop.org;
-	dkim=pass (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="hEI+S8ti";
-	dkim-atps=neutral
+	by gabe.freedesktop.org (Postfix) with ESMTP id 9AE5810E573;
+	Tue, 25 Mar 2025 12:45:56 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from tor.source.kernel.org (tor.source.kernel.org [172.105.4.254])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 1C89810E4C1;
- Mon, 24 Mar 2025 18:59:47 +0000 (UTC)
-Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by tor.source.kernel.org (Postfix) with ESMTP id 9C12B6158E;
- Mon, 24 Mar 2025 18:59:42 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id E580EC4CEDD;
- Mon, 24 Mar 2025 18:59:42 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1742842786;
- bh=P28JeNDdfIsHs0Yhi2or+iZJOlxhsSMOqlD2e6764qc=;
- h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
- b=hEI+S8tiXB6lfLuJVkI0sE26Hhm+jk4CtP8cYz87BVegLJIt0bT9M+kilzBThiz/G
- 0I2bW94NAHsXkC68F49mB7kWekK5GY7z4ejygaTPUUHReCk5hX33Z/uPhtENnLo4Pe
- UEZTPz1jqCC6X/bm06/8sTNQPbr4E6X/ac3uEYdfuS6mAbEaNRquBUCAsSio5ScyKb
- tQTCyqCBKWTrDanoXtuqvkYPL4wYUHJEGeRgJV7N8WNieaqmhCyfQl1RbDRWamVu+s
- bAozn0aavxXUo503y+LkELMhIjivJ07kptjOrxbJC/qDYBaYc1MSE4vsk4kMUVlf2/
- ZxDQbaoiqxj6w==
-From: Philipp Stanner <phasta@kernel.org>
-To: Lyude Paul <lyude@redhat.com>, Danilo Krummrich <dakr@kernel.org>,
- David Airlie <airlied@gmail.com>, Simona Vetter <simona@ffwll.ch>,
- Matthew Brost <matthew.brost@intel.com>,
- Philipp Stanner <phasta@kernel.org>,
- =?UTF-8?q?Christian=20K=C3=B6nig?= <ckoenig.leichtzumerken@gmail.com>,
- Maarten Lankhorst <maarten.lankhorst@linux.intel.com>,
- Maxime Ripard <mripard@kernel.org>,
- Thomas Zimmermann <tzimmermann@suse.de>,
- Tvrtko Ursulin <tvrtko.ursulin@igalia.com>
-Cc: dri-devel@lists.freedesktop.org, nouveau@lists.freedesktop.org,
- linux-kernel@vger.kernel.org
-Subject: [RFC PATCH 5/5] drm/nouveau: Remove waitque for sched teardown
-Date: Mon, 24 Mar 2025 19:57:29 +0100
-Message-ID: <20250324185728.45857-7-phasta@kernel.org>
-X-Mailer: git-send-email 2.48.1
-In-Reply-To: <20250324185728.45857-2-phasta@kernel.org>
-References: <20250324185728.45857-2-phasta@kernel.org>
+Received: from rudorff.com (rudorff.com [193.31.26.27])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id BD50010E573;
+ Tue, 25 Mar 2025 12:45:55 +0000 (UTC)
+Received: from [127.0.0.1]
+ (dynamic-2a02-3102-8418-1620-0000-0000-0000-04cc.310.pool.telefonica.de
+ [IPv6:2a02:3102:8418:1620::4cc])
+ by rudorff.com (Postfix) with ESMTPSA id DA59C406DA;
+ Tue, 25 Mar 2025 13:45:50 +0100 (CET)
+From: Christoph Rudorff <chris@rudorff.com>
+Date: Tue, 25 Mar 2025 13:44:36 +0100
+Subject: [PATCH v2] drm/nouveau: fix hibernate on disabled GPU
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+Message-Id: <20250325-nouveau-fix-hibernate-v2-1-2bd5c13fb953@rudorff.com>
+X-B4-Tracking: v=1; b=H4sIADOl4mcC/4WNTQ6CMBCFr0Jm7ZhSCv6svIdhUWCws7A1U9poC
+ He3cgGX38t731shkjBFuFYrCGWOHHwBfahgdNY/CHkqDFrpVjXKoA8pk0048xsdDyTeLoTaXM6
+ 6m4w+DQOU7UuoFHbvvS/sOC5BPvtNrn/pP2OusUYiY5qmNV0p3iRNQeb5OIYn9Nu2fQFtPSRSv
+ AAAAA==
+X-Change-ID: 20250304-nouveau-fix-hibernate-249826d427bb
+To: Lyude Paul <lyude@redhat.com>
+Cc: dri-devel@lists.freedesktop.org, nouveau@lists.freedesktop.org,
+ linux-kernel@vger.kernel.org, Christoph Rudorff <chris@rudorff.com>
+X-Mailer: b4 0.14.2
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -64,129 +47,73 @@ List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-struct nouveau_sched contains a waitque needed to prevent
-drm_sched_fini() from being called while there are still jobs pending.
-Doing so so far would have caused memory leaks.
+Hibernate bricks the machine if a discrete GPU was disabled via
 
-With the new memleak-free mode of operation switched on in
-drm_sched_fini() by providing the callback
-nouveau_sched_fence_context_kill() the waitque is not necessary anymore.
+echo IGD > /sys/kernel/debug/vgaswitcheroo/switch
 
-Remove the waitque.
+The freeze and thaw handler lacks checking the GPU power state,
+as suspend and resume do.
 
-Signed-off-by: Philipp Stanner <phasta@kernel.org>
+This patch add the checks and fix this issue.
+
+Signed-off-by: Christoph Rudorff <chris@rudorff.com>
 ---
- drivers/gpu/drm/nouveau/nouveau_sched.c | 20 +++++++-------------
- drivers/gpu/drm/nouveau/nouveau_sched.h |  9 +++------
- drivers/gpu/drm/nouveau/nouveau_uvmm.c  |  8 ++++----
- 3 files changed, 14 insertions(+), 23 deletions(-)
+I got an old MacBook having a defective nvidia GPU
 
-diff --git a/drivers/gpu/drm/nouveau/nouveau_sched.c b/drivers/gpu/drm/nouveau/nouveau_sched.c
-index 3659ac78bb3e..d9ac76198616 100644
---- a/drivers/gpu/drm/nouveau/nouveau_sched.c
-+++ b/drivers/gpu/drm/nouveau/nouveau_sched.c
-@@ -121,11 +121,9 @@ nouveau_job_done(struct nouveau_job *job)
+So I put this in the initrd scripts to turn it off asap:
+
+mount -t debugfs none /sys/kernel/debug
+echo IGD > /sys/kernel/debug/vgaswitcheroo/switch
+
+which powers down the nouveau.
+
+Suspend and resume works,
+but hibernate locks up the machine.
+
+The handlers are not checking the GPU state.
+
+This is a good candidate for backport.
+This patch applies down to 6.12.y
+---
+Changes in v2:
+- EDITME: use my real name, my nick raised bugs
+- Link to v1: https://lore.kernel.org/r/20250304-nouveau-fix-hibernate-v1-1-ee4433546030@rudorff.com
+---
+ drivers/gpu/drm/nouveau/nouveau_drm.c | 8 ++++++++
+ 1 file changed, 8 insertions(+)
+
+diff --git a/drivers/gpu/drm/nouveau/nouveau_drm.c b/drivers/gpu/drm/nouveau/nouveau_drm.c
+index 5664c4c71faf1ced30f38d9874244db80d58194a..0958d1b940c2533bfadc29e098045db6f0170c79 100644
+--- a/drivers/gpu/drm/nouveau/nouveau_drm.c
++++ b/drivers/gpu/drm/nouveau/nouveau_drm.c
+@@ -1079,6 +1079,10 @@ nouveau_pmops_freeze(struct device *dev)
  {
- 	struct nouveau_sched *sched = job->sched;
+ 	struct nouveau_drm *drm = dev_get_drvdata(dev);
  
--	spin_lock(&sched->job.list.lock);
-+	spin_lock(&sched->job_list.lock);
- 	list_del(&job->entry);
--	spin_unlock(&sched->job.list.lock);
--
--	wake_up(&sched->job.wq);
-+	spin_unlock(&sched->job_list.lock);
++	if (drm->dev->switch_power_state == DRM_SWITCH_POWER_OFF ||
++	    drm->dev->switch_power_state == DRM_SWITCH_POWER_DYNAMIC_OFF)
++		return 0;
++
+ 	return nouveau_do_suspend(drm, false);
  }
  
- void
-@@ -306,9 +304,9 @@ nouveau_job_submit(struct nouveau_job *job)
- 	}
+@@ -1087,6 +1091,10 @@ nouveau_pmops_thaw(struct device *dev)
+ {
+ 	struct nouveau_drm *drm = dev_get_drvdata(dev);
  
- 	/* Submit was successful; add the job to the schedulers job list. */
--	spin_lock(&sched->job.list.lock);
--	list_add(&job->entry, &sched->job.list.head);
--	spin_unlock(&sched->job.list.lock);
-+	spin_lock(&sched->job_list.lock);
-+	list_add(&job->entry, &sched->job_list.head);
-+	spin_unlock(&sched->job_list.lock);
- 
- 	drm_sched_job_arm(&job->base);
- 	job->done_fence = dma_fence_get(&job->base.s_fence->finished);
-@@ -458,9 +456,8 @@ nouveau_sched_init(struct nouveau_sched *sched, struct nouveau_drm *drm,
- 		goto fail_sched;
- 
- 	mutex_init(&sched->mutex);
--	spin_lock_init(&sched->job.list.lock);
--	INIT_LIST_HEAD(&sched->job.list.head);
--	init_waitqueue_head(&sched->job.wq);
-+	spin_lock_init(&sched->job_list.lock);
-+	INIT_LIST_HEAD(&sched->job_list.head);
- 
- 	return 0;
- 
-@@ -503,9 +500,6 @@ nouveau_sched_fini(struct nouveau_sched *sched)
- 	struct drm_gpu_scheduler *drm_sched = &sched->base;
- 	struct drm_sched_entity *entity = &sched->entity;
- 
--	rmb(); /* for list_empty to work without lock */
--	wait_event(sched->job.wq, list_empty(&sched->job.list.head));
--
- 	drm_sched_entity_fini(entity);
- 	drm_sched_fini(drm_sched);
- 
-diff --git a/drivers/gpu/drm/nouveau/nouveau_sched.h b/drivers/gpu/drm/nouveau/nouveau_sched.h
-index e6e2016a3569..339a14563fbb 100644
---- a/drivers/gpu/drm/nouveau/nouveau_sched.h
-+++ b/drivers/gpu/drm/nouveau/nouveau_sched.h
-@@ -105,12 +105,9 @@ struct nouveau_sched {
- 	struct nouveau_channel *chan;
- 
- 	struct {
--		struct {
--			struct list_head head;
--			spinlock_t lock;
--		} list;
--		struct wait_queue_head wq;
--	} job;
-+		struct list_head head;
-+		spinlock_t lock;
-+	} job_list;
- };
- 
- int nouveau_sched_create(struct nouveau_sched **psched, struct nouveau_drm *drm,
-diff --git a/drivers/gpu/drm/nouveau/nouveau_uvmm.c b/drivers/gpu/drm/nouveau/nouveau_uvmm.c
-index 48f105239f42..ddfc46bc1b3e 100644
---- a/drivers/gpu/drm/nouveau/nouveau_uvmm.c
-+++ b/drivers/gpu/drm/nouveau/nouveau_uvmm.c
-@@ -1019,8 +1019,8 @@ bind_validate_map_sparse(struct nouveau_job *job, u64 addr, u64 range)
- 	u64 end = addr + range;
- 
- again:
--	spin_lock(&sched->job.list.lock);
--	list_for_each_entry(__job, &sched->job.list.head, entry) {
-+	spin_lock(&sched->job_list.lock);
-+	list_for_each_entry(__job, &sched->job_list.head, entry) {
- 		struct nouveau_uvmm_bind_job *bind_job = to_uvmm_bind_job(__job);
- 
- 		list_for_each_op(op, &bind_job->ops) {
-@@ -1030,7 +1030,7 @@ bind_validate_map_sparse(struct nouveau_job *job, u64 addr, u64 range)
- 
- 				if (!(end <= op_addr || addr >= op_end)) {
- 					nouveau_uvmm_bind_job_get(bind_job);
--					spin_unlock(&sched->job.list.lock);
-+					spin_unlock(&sched->job_list.lock);
- 					wait_for_completion(&bind_job->complete);
- 					nouveau_uvmm_bind_job_put(bind_job);
- 					goto again;
-@@ -1038,7 +1038,7 @@ bind_validate_map_sparse(struct nouveau_job *job, u64 addr, u64 range)
- 			}
- 		}
- 	}
--	spin_unlock(&sched->job.list.lock);
-+	spin_unlock(&sched->job_list.lock);
++	if (drm->dev->switch_power_state == DRM_SWITCH_POWER_OFF ||
++	    drm->dev->switch_power_state == DRM_SWITCH_POWER_DYNAMIC_OFF)
++		return 0;
++
+ 	return nouveau_do_resume(drm, false);
  }
  
- static int
+
+---
+base-commit: 7eb172143d5508b4da468ed59ee857c6e5e01da6
+change-id: 20250304-nouveau-fix-hibernate-249826d427bb
+
+Best regards,
 -- 
-2.48.1
+Christoph Rudorff <chris@rudorff.com>
 
