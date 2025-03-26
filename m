@@ -2,118 +2,87 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id E85C7CBAC37
-	for <lists+nouveau@lfdr.de>; Sat, 13 Dec 2025 13:43:47 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 20835CBAB98
+	for <lists+nouveau@lfdr.de>; Sat, 13 Dec 2025 13:43:10 +0100 (CET)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id A2A7F10EB49;
-	Sat, 13 Dec 2025 12:41:07 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id D898110EAF9;
+	Sat, 13 Dec 2025 12:41:04 +0000 (UTC)
 Authentication-Results: gabe.freedesktop.org;
-	dkim=permerror (0-bit key) header.d=db48x.net header.i=@db48x.net header.b="ZFRaG9Sg";
-	dkim=permerror (0-bit key) header.d=messagingengine.com header.i=@messagingengine.com header.b="KMTayt39";
+	dkim=permerror (0-bit key) header.d=gmail.com header.i=@gmail.com header.b="JEpTaZ5K";
 	dkim-atps=neutral
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from fout-a7-smtp.messagingengine.com
- (fout-a7-smtp.messagingengine.com [103.168.172.150])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 6D90310E7F9;
- Fri, 21 Mar 2025 16:20:24 +0000 (UTC)
-Received: from phl-compute-05.internal (phl-compute-05.phl.internal
- [10.202.2.45])
- by mailfout.phl.internal (Postfix) with ESMTP id 801751382D75;
- Fri, 21 Mar 2025 12:20:22 -0400 (EDT)
-Received: from phl-mailfrontend-01 ([10.202.2.162])
- by phl-compute-05.internal (MEProxy); Fri, 21 Mar 2025 12:20:22 -0400
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=db48x.net; h=cc
- :cc:content-type:content-type:date:date:from:from:in-reply-to
- :in-reply-to:message-id:mime-version:references:reply-to:subject
- :subject:to:to; s=fm2; t=1742574022; x=1742660422; bh=SutsPVKzmc
- avcLnfkr+o/VxBSYFIMZmmfkqaiIK+YZM=; b=ZFRaG9SgOE1XM6dmDC0xywVI4L
- 4wW8HPDVg1tw3o51YRmSFzkjawI41DJv6jraBwCrd8JbY1QTdJQwXmhiMt/GnW6k
- nGpo9Yw/3cx25wNSkvl1p21h6l29G88B/W5n7M560cTdVTgIQi62hGautMlyDjN3
- mJkAQS/1XVb9JPDN4mhVErU022jNtYx/lf6XhfCtBPEcxINzxdTQqd0qUE6nnTZy
- /68/zN8FMfU3WC3i93x1sfyd+alou2nD3c3fcye8pILatPrCoHQkJIpVCDk48VqT
- /qrTIcGSu26QHr6LcNjuxzyPrcW862ja1q1vueuvCWfyk7aw8Pn13q6Kr0KA==
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=
- messagingengine.com; h=cc:cc:content-type:content-type:date:date
- :feedback-id:feedback-id:from:from:in-reply-to:in-reply-to
- :message-id:mime-version:references:reply-to:subject:subject:to
- :to:x-me-proxy:x-me-sender:x-me-sender:x-sasl-enc; s=fm1; t=
- 1742574022; x=1742660422; bh=SutsPVKzmcavcLnfkr+o/VxBSYFIMZmmfkq
- aiIK+YZM=; b=KMTayt391BaNG29YIsMkIz7yfSf5Z2bIlgvjTgD6I5bk3E2PzMi
- J5rkrK3dWFB2jEQkZ2wf3QbCR0na93M95zO3hmn8x9RJb4VYDbDlq0e52mgKiQzu
- tlnmzG4k6HJzF0LY8CwHhSJPpzBcn5zKirQQEUQ7ZIlbplOol3XGtGRs+1pSU3Cg
- Fk+ngY21TXgbGoZ8uJI7C12+guj3nSZaXH54Rm9bvWKm98Shu6jV/M4yHYsC4k8+
- bX01zuGkhmq0I6oc2IRiXd6ubt9frTS2hVGc8U/FlihXJuvIJh5iRtCYMIWHiJfe
- 8o+ZILH1KSOld0N3oFLmZ2qdShTbFnZF6iw==
-X-ME-Sender: <xms:xpHdZ_LazOjWay4joYDqYpRSMD2tUpzgUqnCEgQwhtE8Zv8ccAD4nw>
- <xme:xpHdZzLB_CaSct0QfdwKumgarxhCPF0WQXws3rXJw2hsKbq4ev2RJC2rkRvBUZKXJ
- CWTQQaVM_is6VHG7lg>
-X-ME-Received: <xmr:xpHdZ3uGqRwcdEgInBKUfeD-Bgo5OCB5-rXhn4hwF4pxrICNZ_O5x1ZU-c6P6Sg>
-X-ME-Proxy-Cause: gggruggvucftvghtrhhoucdtuddrgeefvddrtddtgdduheduheehucetufdoteggodetrf
- dotffvucfrrhhofhhilhgvmecuhfgrshhtofgrihhlpdggtfgfnhhsuhgsshgtrhhisggv
- pdfurfetoffkrfgpnffqhgenuceurghilhhouhhtmecufedttdenucesvcftvggtihhpih
- gvnhhtshculddquddttddmnecujfgurhephffvvefujghffffkfgggtgesthdtredttder
- tdenucfhrhhomhepffgrnhhivghluceurhhoohhkshcuoegusgegkeigsegusgegkeigrd
- hnvghtqeenucggtffrrghtthgvrhhnpedtgfekkeetffeuudfggeeiffefveettdehveeh
- hfffvdehvdegtedvheekgeefueenucffohhmrghinhepkhgvrhhnvghlrdhorhhgnecuve
- hluhhsthgvrhfuihiivgeptdenucfrrghrrghmpehmrghilhhfrhhomhepuggsgeekgies
- uggsgeekgidrnhgvthdpnhgspghrtghpthhtohepudelpdhmohguvgepshhmthhpohhuth
- dprhgtphhtthhopegurhhiqdguvghvvghlsehlihhsthhsrdhfrhgvvgguvghskhhtohhp
- rdhorhhgpdhrtghpthhtohepnhhouhhvvggruheslhhishhtshdrfhhrvggvuggvshhkth
- hophdrohhrghdprhgtphhtthhopehruhhsthdqfhhorhdqlhhinhhugiesvhhgvghrrdhk
- vghrnhgvlhdrohhrghdprhgtphhtthhopehlihhnuhigqdhkvghrnhgvlhesvhhgvghrrd
- hkvghrnhgvlhdrohhrghdprhgtphhtthhopehsihhmohhnrgesfhhffihllhdrtghhpdhr
- tghpthhtohepthhmghhrohhsshesuhhmihgthhdrvgguuhdprhgtphhtthhopegrlhhitg
- gvrhihhhhlsehgohhoghhlvgdrtghomhdprhgtphhtthhopegrrdhhihhnuggsohhrghes
- khgvrhhnvghlrdhorhhgpdhrtghpthhtohepsggvnhhnohdrlhhoshhsihhnsehprhhoth
- honhdrmhgv
-X-ME-Proxy: <xmx:xpHdZ4YwSGvt-gfxBXMjy8rlj1hqV6q9a5fNi1UWSTp3JQS7LMMmEA>
- <xmx:xpHdZ2bRILUO7I0walgRZIS4BJQoEDCka1J3r0_bq0KLPvpYqBfIbQ>
- <xmx:xpHdZ8BoCZrCNWaZXbzmkFU9m6qFaeOTtmmxk37i4xUmS3sz8kHPCA>
- <xmx:xpHdZ0aru43o2t2rZNqa6Emrp6ncL_6mJ38G0tv8dYMvmJbEveZU1A>
- <xmx:xpHdZ-PsDYejyOyfEGv7sWGtvKWvNWk-UGPKA1ZBT4S7akOf3qMG21Qx>
-Feedback-ID: ie0194691:Fastmail
-Received: by mail.messagingengine.com (Postfix) with ESMTPA; Fri,
- 21 Mar 2025 12:20:19 -0400 (EDT)
-From: Daniel Brooks <db48x@db48x.net>
-To: "Alexandre Courbot" <acourbot@nvidia.com>
-Cc: "Boqun Feng" <boqun.feng@gmail.com>,  "Danilo Krummrich"
- <dakr@kernel.org>,  "David Airlie" <airlied@gmail.com>,  "John Hubbard"
- <jhubbard@nvidia.com>,  "Ben Skeggs" <bskeggs@nvidia.com>,  "Miguel Ojeda"
- <ojeda@kernel.org>,  "Alex Gaynor" <alex.gaynor@gmail.com>,  "Gary Guo"
- <gary@garyguo.net>,  =?utf-8?Q?Bj=C3=B6rn?= Roy Baron
- <bjorn3_gh@protonmail.com>,  "Benno
- Lossin" <benno.lossin@proton.me>,  "Andreas Hindborg"
- <a.hindborg@kernel.org>,  "Alice Ryhl" <aliceryhl@google.com>,  "Trevor
- Gross" <tmgross@umich.edu>,  "Simona Vetter" <simona@ffwll.ch>,
- <linux-kernel@vger.kernel.org>,  <rust-for-linux@vger.kernel.org>,
- <nouveau@lists.freedesktop.org>,  <dri-devel@lists.freedesktop.org>
-Subject: Re: [PATCH RFC v3 6/7] gpu: nova-core: add basic timer device
-In-Reply-To: <D8LPCCP6JNYU.28DYTEK5BB74K@nvidia.com> (Alexandre Courbot's
- message of "Fri, 21 Mar 2025 14:41:12 +0900")
-References: <20250320-nova_timer-v3-0-79aa2ad25a79@nvidia.com>
- <20250320-nova_timer-v3-6-79aa2ad25a79@nvidia.com>
- <Z9xb1r1x5tOzAIZT@boqun-archlinux>
- <D8LPCCP6JNYU.28DYTEK5BB74K@nvidia.com>
-Face: iVBORw0KGgoAAAANSUhEUgAAADAAAAAwBAMAAAClLOS0AAAABGdBTUEAALGOfPtRkwAAABJQ
- TFRFpKfbdou67PD6JjJgAwUWXGSeIcyLHgAAAkZJREFUOI1VU8Fy6yAMxLi+Q13fCZ3cnQL3dqTc
- 7RD+/1feStDXVnXHDuvVSivZTMba2GPdw3gyCGcMAFxTyrTd9dwGoxHiZX9PmRFUHYAQlGGtXY+F
- Uk0SJOxgJiUEnH1qkitT9D+pQub7qGAmUbR6bu3CvI96Yv6QqkBBMrsyfZccr1/RDXGDTLf4P7ZY
- glVxe2V+/ACXWO1gvDO9/gDRpFFVmPluvLcmBjd5H6d8DEte+Pbk4rcY/Fa5tLKLOtCZsuQKYhpa
- LOkYDT7hESya7/WIET3lfQBqX0pwFtbI832Is0ayMUR9B+12xjgPCQ089cfwkCkX6L5TPmRelJTh
- zMS0Sz1PyjLAMCUWjcmgQLWQMds+e3aaauZDf9dU9A2/8kPVF2odCUoMKHkfjJR+mbgC+DRiycw5
- 3XSqGe6HmhN/AWjHypkAXOAFW5EiuA1ge2GiZuMb0s1fSEXcATeLUfbyEY2L8yPOmdSsdghQXx3K
- pz2eoeXuYvMCINVFDrCdNfVUp4eJ6cSEbjbgFjBEvonGGTrgv9cHjAc8aVgSAPoxaONbzfwhDIhR
- at7IIS7fAGiDSwIA9alhhTBzfA7YM2FY6eMwayrIGK8FDFmshmUA43WqhFtpvoqG9HHaJ7fqtgTz
- 8EWVkgZgtsylFliHDgk0MB7KAEC45C/rgnGvanNLXyzOeTzcT2nw/N44gfrtYXRQLoz9Q3TgmJRx
- 2Mx/Q51qzpm+l3m8z2SWBqC5+PZXAtNYlGFf/gKfHfjFkDT4x7od7R+w3Ls+ZdQBuQAAAABJRU5E
- rkJggg==
-Date: Fri, 21 Mar 2025 09:20:18 -0700
-Message-ID: <87r02qz77h.fsf@db48x.net>
-User-Agent: Gnus/5.13 (Gnus v5.13)
+Received: from mail-wm1-f42.google.com (mail-wm1-f42.google.com
+ [209.85.128.42])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id C756710E134;
+ Wed, 26 Mar 2025 12:52:14 +0000 (UTC)
+Received: by mail-wm1-f42.google.com with SMTP id
+ 5b1f17b1804b1-4394036c0efso43495785e9.2; 
+ Wed, 26 Mar 2025 05:52:14 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=gmail.com; s=20230601; t=1742993533; x=1743598333; darn=lists.freedesktop.org;
+ h=in-reply-to:content-transfer-encoding:content-disposition
+ :mime-version:references:message-id:subject:cc:to:from:date:from:to
+ :cc:subject:date:message-id:reply-to;
+ bh=VwyiSIykfOMTFP9Glhet0fsRm/PA8s+JphWFgIm15/U=;
+ b=JEpTaZ5KW+Dq0dReX6VsEc1HlKaw8fAswj00uid7WxYnSwYAbEKa1A4cStg1aiRGYd
+ N5MlvLNLns2HIJ3Oh2vaIVbz7x8e4XHu8tdt1nnQfWe7/ZxBpbn5/xHhwYKGOE9qV8BW
+ L4YglY8IgVfQM7kj8e0hP69tfk5UjY+Hnhp/hRZqee5O+WoDzubuADg1ghDItjIjCRPV
+ /zOuyMRrknZxRTX6UMCqnkOoaidKhvM+ICsHpFiyRTHBIKguWnsJ2MR46oWSlZPYwR3y
+ AML+WCOlKziX1cxKUPflTO0xHZVHD7Is69MhMjUpWMGQuOMjkUfLg2RZ4EbNOvofKO48
+ 2XrA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1742993533; x=1743598333;
+ h=in-reply-to:content-transfer-encoding:content-disposition
+ :mime-version:references:message-id:subject:cc:to:from:date
+ :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+ bh=VwyiSIykfOMTFP9Glhet0fsRm/PA8s+JphWFgIm15/U=;
+ b=BXwHraKNp1Si6oEDF4jaq+WHWovxynDzSoXupP4XSfUR5ClS8LtMJbNVms0rEceDRB
+ eU+8FKtELnvDWVn/w+xjDQLw3fx2Wx7d+w4vZqBBPoslqsoBWP69c8oKZ08w/71gMA3u
+ pmullZIO7//xJCazNuS/aLYv5Cu3q2aNsGwlxZgA4uf1PmghaTcyVH3q4hYGrRzjZ+Hu
+ 6sIVufQZC6ilZjpX8vwEuwWv3MuR+MgsqKvxL/n/30T33+sszMGMCLI1c0aRszx/ZjYb
+ XBi4PUHBaz8GqlQ7x4FID0s3pGttlzOLBXi/npFM1hIZN3udeYpMRLkTjpUUCsh7//uB
+ CvAw==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCUwMk9goSSFyBqjxArFfWJSQ7jdwRvI4D05oTZcbms/jS79omyNEEE+5WAdJhbMWnWktAihBj7Dlg==@lists.freedesktop.org,
+ AJvYcCVY8lI04w3GHEBgaQ/13KPEWGoCL+fCb8nLMo7mwt2+uQGgtNGpYtRFv4i92BkAAB6ivX6WLb6OjXA=@lists.freedesktop.org
+X-Gm-Message-State: AOJu0YxGKZPwYtcBmLjQ0moxIIfcX1AFfEnADyMmvshgJZVcO2wKuszE
+ M9W7SFGXzFubR6KxH3/duma7j5m/sGgjzgyjBO/MvB7km3cNwjza
+X-Gm-Gg: ASbGncsYyFl0sQe7gndQo4p6Grs/muX4qjKf4i02uiiyB0usw/v1796uANgRludA1vl
+ Qo40CWeM9ezEBwDz3+OqeN9Ev8pqPi83q+xm4q6D28xMokLYgSnYWutrXYOPs/A3VafZwDCBD56
+ OyRMUECB8ZDsCcl6/7I54WnIDQQPtADCtfmqGBwQ0FvjCGKU19IJ/R5yOAKPyjURYqUEJB5G8iK
+ 6vUHLYfT58hHNtfXkwEgaz7PkuibXRUtP0eXs7QHLiOXvxgeGdbApbwV2t9g+uu/gEz0dSYHeXp
+ 7dQY3BNy+BPk681MwupIiY0Sp9wE1Hd8FGNTjri5oZi8yYI8ApNI1q+n
+X-Google-Smtp-Source: AGHT+IGcTlIycYodg67QYlVQjgNPDS68QFaDqKlEuvleRpjGOkZDEWYNZY5cUwYW2nHxjKcverj1vw==
+X-Received: by 2002:a05:600c:5488:b0:43d:db5:7af8 with SMTP id
+ 5b1f17b1804b1-43d50a31981mr155787395e9.21.1742993532805; 
+ Wed, 26 Mar 2025 05:52:12 -0700 (PDT)
+Received: from debian.local ([2a0a:ef40:4d4:f101:e41a:977a:f788:910f])
+ by smtp.gmail.com with ESMTPSA id
+ 5b1f17b1804b1-43d82dedc88sm1252805e9.1.2025.03.26.05.52.11
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Wed, 26 Mar 2025 05:52:12 -0700 (PDT)
+Date: Wed, 26 Mar 2025 12:52:10 +0000
+From: Chris Bainbridge <chris.bainbridge@gmail.com>
+To: Danilo Krummrich <dakr@kernel.org>
+Cc: Christian =?iso-8859-1?Q?K=F6nig?= <christian.koenig@amd.com>,
+ nouveau@lists.freedesktop.org, maarten.lankhorst@linux.intel.com,
+ mripard@kernel.org, tzimmermann@suse.de, airlied@gmail.com,
+ simona@ffwll.ch, lyude@redhat.com, sumit.semwal@linaro.org,
+ dri-devel@lists.freedesktop.org, linux-kernel@vger.kernel.org
+Subject: [PATCH v3] drm/nouveau: prime: fix ttm_bo_delayed_delete oops
+Message-ID: <Z-P4epVK8k7tFZ7C@debian.local>
+References: <Z9GHj-edWJmyzpdY@debian.local>
+ <00e4d9c4-ecfc-4784-b603-12db04cda806@amd.com>
+ <Z9q-ggKKgTsvW-Rz@debian.local> <Z9rA0G2urlVHFOSx@cassiopeiae>
+ <1f4a534f-8883-4793-b191-60c2773f6217@amd.com>
+ <Z9rSTkXlub-JZAz0@cassiopeiae>
 MIME-Version: 1.0
-Content-Type: text/plain
-X-Mailman-Approved-At: Sat, 13 Dec 2025 12:40:44 +0000
+Content-Type: text/plain; charset=iso-8859-1
+Content-Disposition: inline
+Content-Transfer-Encoding: 8bit
+In-Reply-To: <Z9rSTkXlub-JZAz0@cassiopeiae>
+X-Mailman-Approved-At: Sat, 13 Dec 2025 12:40:42 +0000
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -128,37 +97,104 @@ List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-"Alexandre Courbot" <acourbot@nvidia.com> writes:
+Fix an oops in ttm_bo_delayed_delete which results from dererencing a
+dangling pointer:
 
-> Hi Boqun,
->
-> On Fri Mar 21, 2025 at 3:17 AM JST, Boqun Feng wrote:
->> Also an Instant type has been proposed and reviewed for a while:
->>
->> 	https://lore.kernel.org/rust-for-linux/20250220070611.214262-5-fujita.tomonori@gmail.com/
->>
->> we should use that type instead of re-inventing the wheel here. Of
->> course, it's currently not quite working because Instant is only for
->> CLOCK_MONOTONIC. But there was a proposal to make `Instant` generic over
->> clock:
->>
->> 	https://lore.kernel.org/rust-for-linux/20230714-rust-time-v2-1-f5aed84218c4@asahilina.net/
->>
->> if you follow that design, you can implement a `Instant<NovaGpu>`, where
->>
->>     ipml Now for NovaGpu {
->>         fn now() -> Instant<Self> {
->> 	    // your Timer::read() implementation.
->> 	}
->>     }
->
-> Ah, thanks for pointing this out. I'll keep track of these patches,
-> hopefully they get merged soon!
+Oops: general protection fault, probably for non-canonical address 0x6b6b6b6b6b6b6b7b: 0000 [#1] PREEMPT SMP
+CPU: 4 UID: 0 PID: 1082 Comm: kworker/u65:2 Not tainted 6.14.0-rc4-00267-g505460b44513-dirty #216
+Hardware name: LENOVO 82N6/LNVNB161216, BIOS GKCN65WW 01/16/2024
+Workqueue: ttm ttm_bo_delayed_delete [ttm]
+RIP: 0010:dma_resv_iter_first_unlocked+0x55/0x290
+Code: 31 f6 48 c7 c7 00 2b fa aa e8 97 bd 52 ff e8 a2 c1 53 00 5a 85 c0 74 48 e9 88 01 00 00 4c 89 63 20 4d 85 e4 0f 84 30 01 00 00 <41> 8b 44 24 10 c6 43 2c 01 48 89 df 89 43 28 e8 97 fd ff ff 4c 8b
+RSP: 0018:ffffbf9383473d60 EFLAGS: 00010202
+RAX: 0000000000000001 RBX: ffffbf9383473d88 RCX: 0000000000000000
+RDX: 0000000000000000 RSI: 0000000000000000 RDI: 0000000000000000
+RBP: ffffbf9383473d78 R08: 0000000000000000 R09: 0000000000000000
+R10: 0000000000000000 R11: 0000000000000000 R12: 6b6b6b6b6b6b6b6b
+R13: ffffa003bbf78580 R14: ffffa003a6728040 R15: 00000000000383cc
+FS:  0000000000000000(0000) GS:ffffa00991c00000(0000) knlGS:0000000000000000
+CS:  0010 DS: 0000 ES: 0000 CR0: 0000000080050033
+CR2: 0000758348024dd0 CR3: 000000012c259000 CR4: 0000000000f50ef0
+PKRU: 55555554
+Call Trace:
+ <TASK>
+ ? __die_body.cold+0x19/0x26
+ ? die_addr+0x3d/0x70
+ ? exc_general_protection+0x159/0x460
+ ? asm_exc_general_protection+0x27/0x30
+ ? dma_resv_iter_first_unlocked+0x55/0x290
+ dma_resv_wait_timeout+0x56/0x100
+ ttm_bo_delayed_delete+0x69/0xb0 [ttm]
+ process_one_work+0x217/0x5c0
+ worker_thread+0x1c8/0x3d0
+ ? apply_wqattrs_cleanup.part.0+0xc0/0xc0
+ kthread+0x10b/0x240
+ ? kthreads_online_cpu+0x140/0x140
+ ret_from_fork+0x40/0x70
+ ? kthreads_online_cpu+0x140/0x140
+ ret_from_fork_asm+0x11/0x20
+ </TASK>
 
-Would that actually work though? Instant is a ktime_t, which is a signed
-i64 rather than a u64. When I read your patch I assumed that you had to
-add your own Timestamp because the value had to be whatever was read
-from the GPU, independent of the clock value kept by the system or other
-hardware.
+The cause of this is:
 
-db48x
+- drm_prime_gem_destroy calls dma_buf_put(dma_buf) which releases the
+  reference to the shared dma_buf. The reference count is 0, so the
+  dma_buf is destroyed, which in turn decrements the corresponding
+  amdgpu_bo reference count to 0, and the amdgpu_bo is destroyed -
+  calling drm_gem_object_release then dma_resv_fini (which destroys the
+  reservation object), then finally freeing the amdgpu_bo.
+
+- nouveau_bo obj->bo.base.resv is now a dangling pointer to the memory
+  formerly allocated to the amdgpu_bo.
+
+- nouveau_gem_object_del calls ttm_bo_put(&nvbo->bo) which calls
+  ttm_bo_release, which schedules ttm_bo_delayed_delete.
+
+- ttm_bo_delayed_delete runs and dereferences the dangling resv pointer,
+  resulting in a general protection fault.
+
+Fix this by moving the drm_prime_gem_destroy call from
+nouveau_gem_object_del to nouveau_bo_del_ttm. This ensures that it will
+be run after ttm_bo_delayed_delete.
+
+Signed-off-by: Chris Bainbridge <chris.bainbridge@gmail.com>
+Suggested-by: Christian König <christian.koenig@amd.com>
+Fixes: 22b33e8ed0e3 ("22b33e8ed0e3nouveau: add PRIME support")
+Closes: https://gitlab.freedesktop.org/drm/amd/-/issues/3937
+Cc: <Stable@vger.kernel.org>
+---
+ drivers/gpu/drm/nouveau/nouveau_bo.c  | 3 +++
+ drivers/gpu/drm/nouveau/nouveau_gem.c | 3 ---
+ 2 files changed, 3 insertions(+), 3 deletions(-)
+
+diff --git a/drivers/gpu/drm/nouveau/nouveau_bo.c b/drivers/gpu/drm/nouveau/nouveau_bo.c
+index db961eade225..2016c1e7242f 100644
+--- a/drivers/gpu/drm/nouveau/nouveau_bo.c
++++ b/drivers/gpu/drm/nouveau/nouveau_bo.c
+@@ -144,6 +144,9 @@ nouveau_bo_del_ttm(struct ttm_buffer_object *bo)
+ 	nouveau_bo_del_io_reserve_lru(bo);
+ 	nv10_bo_put_tile_region(dev, nvbo->tile, NULL);
+ 
++	if (bo->base.import_attach)
++		drm_prime_gem_destroy(&bo->base, bo->sg);
++
+ 	/*
+ 	 * If nouveau_bo_new() allocated this buffer, the GEM object was never
+ 	 * initialized, so don't attempt to release it.
+diff --git a/drivers/gpu/drm/nouveau/nouveau_gem.c b/drivers/gpu/drm/nouveau/nouveau_gem.c
+index 9ae2cee1c7c5..67e3c99de73a 100644
+--- a/drivers/gpu/drm/nouveau/nouveau_gem.c
++++ b/drivers/gpu/drm/nouveau/nouveau_gem.c
+@@ -87,9 +87,6 @@ nouveau_gem_object_del(struct drm_gem_object *gem)
+ 		return;
+ 	}
+ 
+-	if (gem->import_attach)
+-		drm_prime_gem_destroy(gem, nvbo->bo.sg);
+-
+ 	ttm_bo_put(&nvbo->bo);
+ 
+ 	pm_runtime_mark_last_busy(dev);
+-- 
+2.47.2
+
