@@ -2,37 +2,53 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id DE3D5A71801
-	for <lists+nouveau@lfdr.de>; Wed, 26 Mar 2025 15:03:22 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 831FEA71E35
+	for <lists+nouveau@lfdr.de>; Wed, 26 Mar 2025 19:22:08 +0100 (CET)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 79E8810E6D8;
-	Wed, 26 Mar 2025 14:03:21 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 1C8C510E777;
+	Wed, 26 Mar 2025 18:22:07 +0000 (UTC)
+Authentication-Results: gabe.freedesktop.org;
+	dkim=pass (1024-bit key; unprotected) header.d=collabora.com header.i=mark.filion@collabora.com header.b="WBzbmWyO";
+	dkim-atps=neutral
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from rudorff.com (rudorff.com [193.31.26.27])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 13D0410E6D8;
- Wed, 26 Mar 2025 14:03:19 +0000 (UTC)
-Received: from [127.0.0.1]
- (dynamic-2a02-3102-8418-1620-0000-0000-0000-04cc.310.pool.telefonica.de
- [IPv6:2a02:3102:8418:1620::4cc])
- by rudorff.com (Postfix) with ESMTPSA id 9C887401B2;
- Wed, 26 Mar 2025 15:03:16 +0100 (CET)
-From: Christoph Rudorff <chris@rudorff.com>
-Date: Wed, 26 Mar 2025 15:02:48 +0100
-Subject: [PATCH BACKPORT v3] drm/nouveau: fix hibernate on disabled GPU
+X-Greylist: delayed 902 seconds by postgrey-1.36 at gabe;
+ Wed, 26 Mar 2025 18:22:05 UTC
+Received: from sender4-op-o16.zoho.com (sender4-op-o16.zoho.com
+ [136.143.188.16])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id CC47F10E777
+ for <nouveau@lists.freedesktop.org>; Wed, 26 Mar 2025 18:22:05 +0000 (UTC)
+ARC-Seal: i=1; a=rsa-sha256; t=1743012421; cv=none; 
+ d=zohomail.com; s=zohoarc; 
+ b=EUG4bSI9C5jmn97M/qlHGN5GEe6nyTiGYKl9W9jYUlTln4mbCWxepC+3W2ws/orGoIcM53Hse6kxSJpP5GsjyLPbDFuSaK2ByrUOHd4d0o3uUVf+/LGlY6uWYIZI1au3goSB2SAnwArYWmQAx0gCkqEVt90w+UAXQ5/rQgNCk4A=
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=zohomail.com;
+ s=zohoarc; t=1743012421;
+ h=Content-Type:Date:Date:From:From:MIME-Version:Message-ID:Subject:Subject:To:To:Message-Id:Reply-To:Cc;
+ bh=2++tGDIxxVvZc22ImIHR6BxZsewU5CD0RMC/tY69JHo=; 
+ b=mog/b2PsTE/AY+kiN2znWy/d5EpNoKw9LHTatc2U8ZDD5g8Kvpz5dkykOZTv75h/43VRn5Z59f9nNtYiq+HbTtiDjE1lCDCgpLYDQrK8fp2C9VlbTxwzxVnxfzI9DWVVpQKKAMnw18G8fwI0bjG66F63aDukLDZ58GLvMpm1J8Q=
+ARC-Authentication-Results: i=1; mx.zohomail.com;
+ dkim=pass  header.i=collabora.com;
+ spf=pass  smtp.mailfrom=mark.filion@collabora.com;
+ dmarc=pass header.from=<mark.filion@collabora.com>
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; t=1743012421; 
+ s=zohomail; d=collabora.com; i=mark.filion@collabora.com;
+ h=Message-ID:Subject:Subject:From:From:To:To:Date:Date:Content-Type:MIME-Version:Message-Id:Reply-To:Cc;
+ bh=2++tGDIxxVvZc22ImIHR6BxZsewU5CD0RMC/tY69JHo=;
+ b=WBzbmWyOURCpcVulGIMEzEBDhnsQDxIxyK+KL2OMHmIHIVy3SwVipdE3Y/dgNTaO
+ eWjUHttrJOiUjmR1LF+/i10f8zUZfZnAxNk6k8hOT9+CLvOf1mh0kq3DqVcH9xbWbzh
+ vB4pExI9Hb5NaEV9OSYLsPtR+jTHG5wAXpIs1k90=
+Received: by mx.zohomail.com with SMTPS id 1743012419143413.88162924848496;
+ Wed, 26 Mar 2025 11:06:59 -0700 (PDT)
+Message-ID: <ffcf8ecf10127200ec80e47e889d245b152683ed.camel@collabora.com>
+Subject: 2025 X.Org Foundation Membership deadline for voting in the
+ upcoming election
+From: Mark Filion <mark.filion@collabora.com>
+To: nouveau@lists.freedesktop.org
+Date: Wed, 26 Mar 2025 14:06:58 -0400
+Content-Type: multipart/alternative; boundary="=-6OlHiPr+HaI2ZG727FQ8"
+User-Agent: Evolution 3.54.3 (3.54.3-1.fc41app1) 
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 7bit
-Message-Id: <20250326-nouveau-fix-hibernate-v3-1-893271fdcb59@rudorff.com>
-X-B4-Tracking: v=1; b=H4sIAAcJ5GcC/4XNvQ7CIBQF4FdpmMWUC1Tr5M/ooDFuxqGUW8tgM
- dASTdN3lzDpYBxPzrnfHYlHZ9CTVTYSh8F4Y7sY+CwjdVt1N6RGx0wgB5nzXNDODgGrgTbmSVu
- j0HVVjxREuYRCC1goReLtw2EcJPdCtpvd/ng4nck1Nq3xvXWv9DCw1P+xA6OMIgrBuRRFHK7do
- K1rmnlt78kM8OGA/OVAdEBpWTPeqFLyb2eapjdI59LMDgEAAA==
-X-Change-ID: 20250304-nouveau-fix-hibernate-249826d427bb
-To: Lyude Paul <lyude@redhat.com>
-Cc: dri-devel@lists.freedesktop.org, nouveau@lists.freedesktop.org,
- linux-kernel@vger.kernel.org, Christoph Rudorff <chris@rudorff.com>
-X-Mailer: b4 0.14.2
+X-ZohoMailClient: External
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -47,81 +63,103 @@ List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-Hibernate bricks the machine if a discrete GPU was disabled via
+--=-6OlHiPr+HaI2ZG727FQ8
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 
-echo IGD > /sys/kernel/debug/vgaswitcheroo/switch
+Hello,
 
-The freeze and thaw handler lacks checking the GPU power state,
-as suspend and resume do.
+Now that the freedesktop server migration is almost done, it's time to
+turn our attention on the 2025 X.Org Foundation elections, which are
+rapidly approaching! We will be forwarding the election schedule and
+nominating process to the membership shortly.
 
-This patch add the checks and fix this issue.
+Please note that only current members can vote in the upcoming
+election, and that the deadline for new memberships or renewals to vote
+in the upcoming election is 23 April 2025 at 23:59 UTC.
 
-This is a backport and applies to v6.6 and below.
+If you are interested in joining the X.Org Foundation or in renewing
+your membership, please visit the membership system site
+at:=C2=A0https://members.x.org/
 
-Signed-off-by: Christoph Rudorff <chris@rudorff.com>
----
-I got an old MacBook having a defective nvidia GPU
+Mark Filion, on behalf of the X.Org elections committee
 
-So I put this in the initrd scripts to turn it off asap:
+--=-6OlHiPr+HaI2ZG727FQ8
+Content-Type: text/html; charset="utf-8"
+Content-Transfer-Encoding: quoted-printable
 
-mount -t debugfs none /sys/kernel/debug
-echo IGD > /sys/kernel/debug/vgaswitcheroo/switch
+<html><head><style>pre,code,address {
+  margin: 0px;
+}
+h1,h2,h3,h4,h5,h6 {
+  margin-top: 0.2em;
+  margin-bottom: 0.2em;
+}
+ol,ul {
+  margin-top: 0em;
+  margin-bottom: 0em;
+}
+blockquote {
+  margin-top: 0em;
+  margin-bottom: 0em;
+}
+</style></head><body><div style=3D"caret-color: rgb(0, 0, 0); color: rgb(0,=
+ 0, 0); font-family: Cantarell; font-style: normal; font-variant-caps: norm=
+al; font-weight: 400; letter-spacing: normal; text-align: start; text-inden=
+t: 0px; text-transform: none; white-space: normal; word-spacing: 0px; -webk=
+it-tap-highlight-color: rgba(0, 0, 0, 0.4); -webkit-text-stroke-width: 0px;=
+ text-decoration: none;">Hello,</div><div style=3D"caret-color: rgb(0, 0, 0=
+); color: rgb(0, 0, 0); font-family: Cantarell; font-style: normal; font-va=
+riant-caps: normal; font-weight: 400; letter-spacing: normal; text-align: s=
+tart; text-indent: 0px; text-transform: none; white-space: normal; word-spa=
+cing: 0px; -webkit-tap-highlight-color: rgba(0, 0, 0, 0.4); -webkit-text-st=
+roke-width: 0px; text-decoration: none;"><br></div><div style=3D"caret-colo=
+r: rgb(0, 0, 0); color: rgb(0, 0, 0); font-family: Cantarell; font-style: n=
+ormal; font-variant-caps: normal; font-weight: 400; letter-spacing: normal;=
+ text-align: start; text-indent: 0px; text-transform: none; white-space: no=
+rmal; word-spacing: 0px; -webkit-tap-highlight-color: rgba(0, 0, 0, 0.4); -=
+webkit-text-stroke-width: 0px; text-decoration: none;">Now that the freedes=
+ktop server migration is almost done, it's time to turn our attention on th=
+e 2025 X.Org Foundation elections, which are rapidly approaching! We will b=
+e forwarding the election schedule and nominating process to the membership=
+ shortly.</div><div style=3D"caret-color: rgb(0, 0, 0); color: rgb(0, 0, 0)=
+; font-family: Cantarell; font-style: normal; font-variant-caps: normal; fo=
+nt-weight: 400; letter-spacing: normal; text-align: start; text-indent: 0px=
+; text-transform: none; white-space: normal; word-spacing: 0px; -webkit-tap=
+-highlight-color: rgba(0, 0, 0, 0.4); -webkit-text-stroke-width: 0px; text-=
+decoration: none;"><br></div><div style=3D"caret-color: rgb(0, 0, 0); color=
+: rgb(0, 0, 0); font-family: Cantarell; font-style: normal; font-variant-ca=
+ps: normal; font-weight: 400; letter-spacing: normal; text-align: start; te=
+xt-indent: 0px; text-transform: none; white-space: normal; word-spacing: 0p=
+x; -webkit-tap-highlight-color: rgba(0, 0, 0, 0.4); -webkit-text-stroke-wid=
+th: 0px; text-decoration: none;">Please note that only current members can =
+vote in the upcoming election, and that the deadline for new memberships or=
+ renewals to vote in the upcoming election is 23 April 2025 at 23:59 UTC.</=
+div><div style=3D"caret-color: rgb(0, 0, 0); color: rgb(0, 0, 0); font-fami=
+ly: Cantarell; font-style: normal; font-variant-caps: normal; font-weight: =
+400; letter-spacing: normal; text-align: start; text-indent: 0px; text-tran=
+sform: none; white-space: normal; word-spacing: 0px; -webkit-tap-highlight-=
+color: rgba(0, 0, 0, 0.4); -webkit-text-stroke-width: 0px; text-decoration:=
+ none;"><br></div><div style=3D"caret-color: rgb(0, 0, 0); color: rgb(0, 0,=
+ 0); font-family: Cantarell; font-style: normal; font-variant-caps: normal;=
+ font-weight: 400; letter-spacing: normal; text-align: start; text-indent: =
+0px; text-transform: none; white-space: normal; word-spacing: 0px; -webkit-=
+tap-highlight-color: rgba(0, 0, 0, 0.4); -webkit-text-stroke-width: 0px; te=
+xt-decoration: none;">If you are interested in joining the X.Org Foundation=
+ or in renewing your membership, please visit the membership system site at=
+:<span class=3D"Apple-converted-space">&nbsp;</span><a href=3D"https://memb=
+ers.x.org/" style=3D"color: rgb(238, 238, 236);">https://members.x.org/</a>=
+</div><div style=3D"caret-color: rgb(0, 0, 0); color: rgb(0, 0, 0); font-fa=
+mily: Cantarell; font-style: normal; font-variant-caps: normal; font-weight=
+: 400; letter-spacing: normal; text-align: start; text-indent: 0px; text-tr=
+ansform: none; white-space: normal; word-spacing: 0px; -webkit-tap-highligh=
+t-color: rgba(0, 0, 0, 0.4); -webkit-text-stroke-width: 0px; text-decoratio=
+n: none;"><br></div><div style=3D"caret-color: rgb(0, 0, 0); color: rgb(0, =
+0, 0); font-family: Cantarell; font-style: normal; font-variant-caps: norma=
+l; font-weight: 400; letter-spacing: normal; text-align: start; text-indent=
+: 0px; text-transform: none; white-space: normal; word-spacing: 0px; -webki=
+t-tap-highlight-color: rgba(0, 0, 0, 0.4); -webkit-text-stroke-width: 0px; =
+text-decoration: none;">Mark Filion, on behalf of the X.Org elections commi=
+ttee</div><div><span></span></div></body></html>
 
-which powers down the nouveau.
-
-Suspend and resume works,
-but hibernate locks up the machine.
-
-The handlers are not checking the GPU state.
-
-This is a good candidate for backport.
-This patch applies to v6.6 and below
----
-Changes in v3:
-- Backport for v6.6 and below
-- Link to v2: https://lore.kernel.org/r/20250325-nouveau-fix-hibernate-v2-1-2bd5c13fb953@rudorff.com
-
-Changes in v2:
-- EDITME: use my real name, my nick raised bugs
-- Link to v1: https://lore.kernel.org/r/20250304-nouveau-fix-hibernate-v1-1-ee4433546030@rudorff.com
----
- drivers/gpu/drm/nouveau/nouveau_drm.c | 10 ++++++++++
- 1 file changed, 10 insertions(+)
-
-diff --git a/drivers/gpu/drm/nouveau/nouveau_drm.c b/drivers/gpu/drm/nouveau/nouveau_drm.c
-index ac15a662e06042e2c133da9c17fcd53000a98650..a05151b557dac6860e07fe7147aa81b7b15e6f4b 100644
---- a/drivers/gpu/drm/nouveau/nouveau_drm.c
-+++ b/drivers/gpu/drm/nouveau/nouveau_drm.c
-@@ -1026,6 +1026,11 @@ nouveau_pmops_freeze(struct device *dev)
- {
- 	struct pci_dev *pdev = to_pci_dev(dev);
- 	struct drm_device *drm_dev = pci_get_drvdata(pdev);
-+
-+	if (drm_dev->switch_power_state == DRM_SWITCH_POWER_OFF ||
-+	    drm_dev->switch_power_state == DRM_SWITCH_POWER_DYNAMIC_OFF)
-+		return 0;
-+
- 	return nouveau_do_suspend(drm_dev, false);
- }
- 
-@@ -1034,6 +1039,11 @@ nouveau_pmops_thaw(struct device *dev)
- {
- 	struct pci_dev *pdev = to_pci_dev(dev);
- 	struct drm_device *drm_dev = pci_get_drvdata(pdev);
-+
-+	if (drm_dev->switch_power_state == DRM_SWITCH_POWER_OFF ||
-+	    drm_dev->switch_power_state == DRM_SWITCH_POWER_DYNAMIC_OFF)
-+		return 0;
-+
- 	return nouveau_do_resume(drm_dev, false);
- }
- 
-
----
-base-commit: 4b6a8fa777d29785c7ddb51dcbb2b5411deefaca
-change-id: 20250304-nouveau-fix-hibernate-249826d427bb
-
-Best regards,
--- 
-Christoph Rudorff <chris@rudorff.com>
-
+--=-6OlHiPr+HaI2ZG727FQ8--
