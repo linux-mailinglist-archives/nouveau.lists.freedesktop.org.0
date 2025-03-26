@@ -2,86 +2,87 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id 07DAFCBAC16
-	for <lists+nouveau@lfdr.de>; Sat, 13 Dec 2025 13:43:40 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 21487CBAAE9
+	for <lists+nouveau@lfdr.de>; Sat, 13 Dec 2025 13:42:31 +0100 (CET)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 096ED10EB3B;
-	Sat, 13 Dec 2025 12:41:07 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id B509E10EA14;
+	Sat, 13 Dec 2025 12:41:00 +0000 (UTC)
 Authentication-Results: gabe.freedesktop.org;
-	dkim=permerror (0-bit key) header.d=gmail.com header.i=@gmail.com header.b="ECQyfGYF";
+	dkim=permerror (0-bit key) header.d=gmail.com header.i=@gmail.com header.b="Oovkl2U0";
 	dkim-atps=neutral
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from mail-wm1-f53.google.com (mail-wm1-f53.google.com
- [209.85.128.53])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 847D110E6BA;
- Wed, 26 Mar 2025 12:53:37 +0000 (UTC)
-Received: by mail-wm1-f53.google.com with SMTP id
- 5b1f17b1804b1-43d0618746bso46730575e9.2; 
- Wed, 26 Mar 2025 05:53:37 -0700 (PDT)
+Received: from mail-wr1-f51.google.com (mail-wr1-f51.google.com
+ [209.85.221.51])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id A189810E027;
+ Wed, 26 Mar 2025 13:11:03 +0000 (UTC)
+Received: by mail-wr1-f51.google.com with SMTP id
+ ffacd0b85a97d-39149bccb69so5960983f8f.2; 
+ Wed, 26 Mar 2025 06:11:03 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1742993616; x=1743598416; darn=lists.freedesktop.org;
+ d=gmail.com; s=20230601; t=1742994662; x=1743599462; darn=lists.freedesktop.org;
  h=in-reply-to:content-transfer-encoding:content-disposition
  :mime-version:references:message-id:subject:cc:to:from:date:from:to
  :cc:subject:date:message-id:reply-to;
  bh=coBo9zTOkV+54/uJ8ZjRiGU/vI3P1bGg7BoPmlBVdVs=;
- b=ECQyfGYFCBjaN1gXte9EvKKS1smaInpTcIW+gvLIGQuUeIvRQT5/eShQn8T4OLcI97
- hV9RfoIE9kAa4L9rL6YPY/Tj7hn2fHs8xHS3DJtSgETm7kpN8DX3KlcgJkDx6pfw2ALb
- eQx/cA1HLCswpr4eMgEGeDnm/0JzIA/nP/TcDnhcBWOFdOkniysClX2yrAUpEaCGd4PB
- bjb2hw/2AOSoYosDapMnv34Lm4aSPxop+gYp17oMumdHHovHns5lhq8IGHZluSa5E9X3
- 9ci3TvkbiaUNDxUGnn0JHTTn4/vPVdFxTMTI3qnA0yGBIeNhVmnEOT9zbFihRSRw6lmC
- FutQ==
+ b=Oovkl2U0YZmZnG5M9dABmXvaCvFpG4hMx23zKsrpkPTZQJdFilbP7aAX1iY3GskkLZ
+ qURo4fC9ZVppaa3Hjdfv8IsnrX0zFVe3677MjEY1YQCVLAs7lu8D5qrFQeVpSzZ69JBO
+ NQgT3rxCWLk3ghzwP9gbp9Y3R+uoO431Y4HDJXf7cBN66LwYc1FeMNrMz6r0j8W49La6
+ 6h8c8nn0UjtN/u9wVzzl9PTpUygSCeqGgX7FqU9kIriC8lRVrs0R8P5hHH1fIjgqgVi6
+ Vdvyr83Y/W2cjNQy/2mvS2ntAIBGKVj3Q91151g2ykQJkoz3hsf9+/f/UWLbRSdI5wRb
+ pqow==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1742993616; x=1743598416;
+ d=1e100.net; s=20230601; t=1742994662; x=1743599462;
  h=in-reply-to:content-transfer-encoding:content-disposition
  :mime-version:references:message-id:subject:cc:to:from:date
  :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
  bh=coBo9zTOkV+54/uJ8ZjRiGU/vI3P1bGg7BoPmlBVdVs=;
- b=n8vtyCucN8l3yFHIWBsBZCmTz5G1grmsTn1rJ/olTZMED98H4YXFhfiTOV6ZK1xbb7
- tOnjfbjtuZ16JKUyPhpinKdBaGoj3PFE64HHx17hJBLfnTmcQ0D9dCWPtQ5eH5MwHwdS
- sQCwGOUyeG9yAngnDuzYIT1JKa0wR7WmyR5EcXbebqORyLGd7OPORvicD0EzdEgb4i7i
- ywDkWoHyWpJlLYJs6Amgazz5QYzdMM0aeuSDVxgk+uprCxH9dNCUBD2hjV+45plf1zHs
- xbsAj5F4b4uB+GOps2BJqBdK1ibZUGf0CA4APhXCdsb2P/+6HWrQBVGfgljIapUegoLn
- WQwQ==
+ b=KFnJoCRw596xaXy9BWGhv5Jv26lJdJwULolrwzH7ni8dYEA9+mGUfX71UIO6oPgCdV
+ cx/5OA0lHvUfRSdKVCSyBTbZzHXJVHTzmLFChkajqqOd0CrDCD0s1epdzVY+ciaPD+WH
+ Kz0HH3Ichr69E30m870LxlIxVWFpMMrpYGY4O8ipytY/DXMIvb7yOrVGPE/BriZZaErc
+ igGAHB+my+N2ugLzE1svDcd9RgXvb9HO5A1KMg33TzIlMLIjLms7Tm/vbalXIgHbMXl0
+ bRdLlwdidAT4LuX/IDEn0MSUiK0F1MamcOgy2ehEuJ3Cecx4ekIQMdOJTLz5dzKKP7kR
+ ViGA==
 X-Forwarded-Encrypted: i=1;
- AJvYcCVCyK32wBwfnvvj7c64OzkLmB9CM6fljZ+ojTBiEmSyskYKSkB44CD3PkwUWjfNcRRP1PeRkpZ9Sg==@lists.freedesktop.org,
- AJvYcCWzisuGwoK3eaVpPfSNlN/2tVH0/A9cN/Mz5UBfO3X1Yl1cmcN4JWi9HaQCLa1iZmSFNmRDa6oqFv0=@lists.freedesktop.org
-X-Gm-Message-State: AOJu0Yx0BD3sxqYq7WVe2TUs0Ou0w/0julsQXU5UoH5G01MuMt5glDeb
- rY8d1+J4/vkYrF8W00wgNuT+m6EpX2+v8eFGYZGpyoiDRHcFFM/L
-X-Gm-Gg: ASbGncurbjKHBwn2vnwNYSY2FWF+nqMAbe4TMtHkVCyHzFFaKuWVUwrByGsvXCgxFwg
- luGyIFJXrujizqkZQsMSlkGh++SSaJKr1fbIKQtjm2YPnusj6r9yEAwB4VnJwkhlWD9Dj90FvbS
- 3Tm8+Inn0Yu4a06oAXS8wR7wK050MijGGOnqeDhj6uuEBEIXnf48ZHuQKGL4QpvEPsMEUtje1XY
- fQYy8aINPHJBTbQOPJQ21vXINPCRt/WNRCeHzQ1kkkPhE4t+T6cWHSZ+K7m0zIgAnJAzUt53Wli
- 81mjjcujCP0/4f8DFSrRolWJIyS8rwUHoUmmsyEkaF+GwKeH4Bbr1cwn
-X-Google-Smtp-Source: AGHT+IFx/B2y4pVZ+fIGudSc0pHJcHiMF94Yu3KK2XDJYxFrBVKU4DKqM242i+DiiGBlB3U5k+xijg==
-X-Received: by 2002:a05:600c:198a:b0:43c:fd27:a216 with SMTP id
- 5b1f17b1804b1-43d52376b88mr200235635e9.23.1742993615726; 
- Wed, 26 Mar 2025 05:53:35 -0700 (PDT)
+ AJvYcCUXIxbOJWFOtKXU/QDyBPHbPP6uj8EWJFZ79rA5ogmzNOeOaYJcCGmHO5QFaiXjXDkwbsZmzq5Mm4U=@lists.freedesktop.org,
+ AJvYcCVg98jqKCAmWpOgnFLcPscaI7HCR1WPrMvdCGSzPscv8Sugd13JgyKmRoCJZYmpXj0+YlGa487l/g==@lists.freedesktop.org
+X-Gm-Message-State: AOJu0YwbD0wWU8bZkKOa/KaV4bXbwRf7EQqCsBnmJ19URltrT100pbWo
+ V5Px7CeodYDAY+TF7fcGSqlQkpYqAKHalz0M3rc8UYqGIK3xaU3h
+X-Gm-Gg: ASbGnctpiEwRgK/myAADQA4nHS7yex089OMLiPjvxRx6NQxdEjuc/Kd/puCtm6FAzXX
+ szx4t527bkYcLhqublup4BYh6ULDO6nDzds578u0nYD44PrmK1T1CIt6OXbI9niK9r6UFjIB2Xl
+ mi7fpuNzI57E+X4zsyJqMmthWXfrMNQwjtO8F2vXA7Xm/dRkqjnblK6Q9Olx5r7BPpZczZSIZOT
+ NyI4i4/1A9ejeTYoOTQ02DyWRCU5Mec+BP3yeD5INa57Q8mxsfIsOQUVAGKEtJ+VIUUGv0yP7c7
+ TkKrDedUBxtPygYgxQE6s8fMkjwpa2hkUeYS+9TEv6f9gHBVa01Vnsj6
+X-Google-Smtp-Source: AGHT+IGo5kRZQjK7go8ME7rLgXCUGjJN5HdX5Ne05KaMSmNpoFgkpvAveAfXQrZVzmsvdqDm6os96w==
+X-Received: by 2002:a5d:584b:0:b0:390:f9a5:bd79 with SMTP id
+ ffacd0b85a97d-3997f90ab9emr20396175f8f.26.1742994661851; 
+ Wed, 26 Mar 2025 06:11:01 -0700 (PDT)
 Received: from debian.local ([2a0a:ef40:4d4:f101:e41a:977a:f788:910f])
  by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-3997f9e6651sm16793284f8f.75.2025.03.26.05.53.34
+ 5b1f17b1804b1-43d82e6ab48sm1773125e9.10.2025.03.26.06.11.00
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 26 Mar 2025 05:53:35 -0700 (PDT)
-Date: Wed, 26 Mar 2025 12:53:33 +0000
+ Wed, 26 Mar 2025 06:11:01 -0700 (PDT)
+Date: Wed, 26 Mar 2025 13:10:58 +0000
 From: Chris Bainbridge <chris.bainbridge@gmail.com>
-To: Danilo Krummrich <dakr@kernel.org>
-Cc: Christian =?iso-8859-1?Q?K=F6nig?= <christian.koenig@amd.com>,
- nouveau@lists.freedesktop.org, maarten.lankhorst@linux.intel.com,
- mripard@kernel.org, tzimmermann@suse.de, airlied@gmail.com,
- simona@ffwll.ch, lyude@redhat.com, sumit.semwal@linaro.org,
+To: Christian =?iso-8859-1?Q?K=F6nig?= <christian.koenig@amd.com>
+Cc: Danilo Krummrich <dakr@kernel.org>, nouveau@lists.freedesktop.org,
+ maarten.lankhorst@linux.intel.com, mripard@kernel.org,
+ tzimmermann@suse.de, airlied@gmail.com, simona@ffwll.ch,
+ lyude@redhat.com, sumit.semwal@linaro.org,
  dri-devel@lists.freedesktop.org, linux-kernel@vger.kernel.org
-Subject: [PATCH] drm/nouveau: prime: drm_prime_gem_destroy comment
-Message-ID: <Z-P4zQ1464SeZGmB@debian.local>
+Subject: [PATCH v2] drm/prime: fix drm_prime_gem_destroy comment
+Message-ID: <Z-P84iMUP4NBAY7k@debian.local>
 References: <Z9GHj-edWJmyzpdY@debian.local>
  <00e4d9c4-ecfc-4784-b603-12db04cda806@amd.com>
  <Z9q-ggKKgTsvW-Rz@debian.local> <Z9rA0G2urlVHFOSx@cassiopeiae>
  <1f4a534f-8883-4793-b191-60c2773f6217@amd.com>
- <Z9rSTkXlub-JZAz0@cassiopeiae>
+ <Z9rSTkXlub-JZAz0@cassiopeiae> <Z-P4zQ1464SeZGmB@debian.local>
+ <94eeb36a-9aa5-4afd-9ba6-76e8ace10122@amd.com>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=iso-8859-1
 Content-Disposition: inline
 Content-Transfer-Encoding: 8bit
-In-Reply-To: <Z9rSTkXlub-JZAz0@cassiopeiae>
+In-Reply-To: <94eeb36a-9aa5-4afd-9ba6-76e8ace10122@amd.com>
 X-Mailman-Approved-At: Sat, 13 Dec 2025 12:40:42 +0000
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
@@ -137,4 +138,5 @@ index 32a8781cfd67..452d5c7cd292 100644
  					    struct dma_buf *dma_buf)
 -- 
 2.47.2
+
 
