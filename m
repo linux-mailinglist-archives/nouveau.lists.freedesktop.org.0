@@ -2,51 +2,51 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id 6E047A7339A
-	for <lists+nouveau@lfdr.de>; Thu, 27 Mar 2025 14:51:35 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 651BBA733B7
+	for <lists+nouveau@lfdr.de>; Thu, 27 Mar 2025 14:58:55 +0100 (CET)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 2656410E0F2;
-	Thu, 27 Mar 2025 13:51:32 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id D32EF10E8DB;
+	Thu, 27 Mar 2025 13:58:53 +0000 (UTC)
 Authentication-Results: gabe.freedesktop.org;
-	dkim=pass (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="b3zbp2vC";
+	dkim=pass (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="gGL2rZ/3";
 	dkim-atps=neutral
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from sea.source.kernel.org (sea.source.kernel.org [172.234.252.31])
- by gabe.freedesktop.org (Postfix) with ESMTPS id AE6A910E0A6;
- Thu, 27 Mar 2025 13:51:30 +0000 (UTC)
+Received: from dfw.source.kernel.org (dfw.source.kernel.org [139.178.84.217])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id C03A010E8DB;
+ Thu, 27 Mar 2025 13:58:52 +0000 (UTC)
 Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by sea.source.kernel.org (Postfix) with ESMTP id 459C9435AB;
- Thu, 27 Mar 2025 13:51:29 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 1AF8DC4CEDD;
- Thu, 27 Mar 2025 13:51:27 +0000 (UTC)
+ by dfw.source.kernel.org (Postfix) with ESMTP id A74CB5C66B0;
+ Thu, 27 Mar 2025 13:56:31 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id EE7DBC4CEDD;
+ Thu, 27 Mar 2025 13:58:46 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1743083489;
- bh=MfBm0ARJgTYvHs/SLl+TW6RGQHEr5XhW8mIQcvpQV/M=;
+ s=k20201202; t=1743083928;
+ bh=XzPi1F5SWwXKj7971VQiK+0IGADDRlyQ0aTFTKn+bMc=;
  h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
- b=b3zbp2vCLZn9ZlT2QEbh1A0R7IEjqDiIznyRlG+JaVlPo9CdrAQWF841fTJQT7PXD
- bFrglbFD1lxaZ7/tvE14qFs3+puZcuX7rf7bltfMFOdm30DloW7ZF/+5gv5tsD43i0
- DQ7ZU57m3+jUMwU1FELZhnzb+CIOVEN3tR6bcvLC/b3nbRumukVf+65+uryUPEcnwm
- OCQz9O9EVzlWbdTUnLgD2A+AP/E8NJ6j7nv28BO1IzrlNXGty776djdcgJ2YmNh857
- rDd8R3ohbKz8F1RGxIDPXBZmN1M4RYW0iMY4zEhp3PohA2MQeQDJECw8jX3dZCva2c
- 49mlgwALUGspw==
-Date: Thu, 27 Mar 2025 14:51:25 +0100
+ b=gGL2rZ/327aXTpediX2cwplMLST5kv1Z3VS0C7/mulCj00FyRK2/kexMQutKMT8u5
+ 5bEd0k7dmxXmRkePz7vgXSrWCSkADyrrTWW7yU1s3hIu5fz/RMbin2PLQMewXAmuNa
+ jGD391Ewnk/Y9ScUb9yUMI4XQQIxbUViL3CcAF9CRHKpJcuTzetUAQSYfl82Y0U+2f
+ GK6s+A53pbMg9DGIW3Ksuttpr+dMFGhY5NHIGVguDWGIwIbYpxkSpdR5Z7H9FIvUJr
+ VXUoGRVMqPT/p6x1USE5gbDo/whfCwlYnqOVWtxr946jxdX5FhX1QrVHYDPZnJg76d
+ laM7CFg1HnclA==
+Date: Thu, 27 Mar 2025 14:58:44 +0100
 From: Danilo Krummrich <dakr@kernel.org>
 To: M Henning <mhenning@darkrefraction.com>
 Cc: Karol Herbst <kherbst@redhat.com>, Lyude Paul <lyude@redhat.com>,
  Faith Ekstrand <faith.ekstrand@collabora.com>,
  dri-devel@lists.freedesktop.org, nouveau@lists.freedesktop.org
-Subject: Re: [PATCH 1/2] drm/nouveau: Add DRM_IOCTL_NOUVEAU_GET_ZCULL_INFO
-Message-ID: <Z-VX3TJPI6Tgin2G@cassiopeiae>
+Subject: Re: [PATCH 2/2] drm/nouveau: DRM_NOUVEAU_SET_ZCULL_CTXSW_BUFFER
+Message-ID: <Z-VZlIc3E8ZQQmXa@cassiopeiae>
 References: <20250312213746.228042-1-mhenning@darkrefraction.com>
- <20250312213746.228042-2-mhenning@darkrefraction.com>
- <Z9xb5SABWcwYnV-x@pollux>
- <CAAgWFh2dHZs2D7R4ejY9sNQ+QCtLQeGGS2PNtcsm_MPeV3edLw@mail.gmail.com>
+ <20250312213746.228042-3-mhenning@darkrefraction.com>
+ <Z9xfoS89yimS1Sb3@pollux>
+ <CAAgWFh2RtCwaKNinX9X4BjwNiaBj5BF_ypzbqoqV4LJgN4cPvg@mail.gmail.com>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=utf-8
 Content-Disposition: inline
 Content-Transfer-Encoding: 8bit
-In-Reply-To: <CAAgWFh2dHZs2D7R4ejY9sNQ+QCtLQeGGS2PNtcsm_MPeV3edLw@mail.gmail.com>
+In-Reply-To: <CAAgWFh2RtCwaKNinX9X4BjwNiaBj5BF_ypzbqoqV4LJgN4cPvg@mail.gmail.com>
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -61,47 +61,78 @@ List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-On Fri, Mar 21, 2025 at 06:06:34PM -0400, M Henning wrote:
-> On Thu, Mar 20, 2025 at 2:18 PM Danilo Krummrich <dakr@kernel.org> wrote:
-> > On Wed, Mar 12, 2025 at 05:36:14PM -0400, Mel Henning wrote:
-> > > +     __u32 width_align_pixels;
-> > > +     __u32 height_align_pixels;
-> > > +     __u32 pixel_squares_by_aliquots;
-> > > +     __u32 aliquot_total;
-> > > +     __u32 zcull_region_byte_multiplier;
-> > > +     __u32 zcull_region_header_size;
-> > > +     __u32 zcull_subregion_header_size;
-> > > +     __u32 subregion_count;
-> > > +     __u32 subregion_width_align_pixels;
-> > > +     __u32 subregion_height_align_pixels;
-> > > +
-> > > +     __u32 ctxsw_size;
-> > > +     __u32 ctxsw_align;
-> > > +};
+On Fri, Mar 21, 2025 at 07:00:57PM -0400, M Henning wrote:
+> This is a pointer in the gpu's virtual address space. It must be
+> aligned according to ctxsw_align and be at least ctxsw_size bytes
+> (where those values come from the nouveau_abi16_ioctl_get_zcull_info
+> structure). I'll change the description to say that much.
+> 
+> Yes, this is GEM-backed. I'm actually not entirely sure what the
+> requirements are here, since this part is reverse-engineered. I think
+> NOUVEAU_GEM_DOMAIN_VRAM and NOUVEAU_GEM_DOMAIN_GART are both okay. The
+> proprietary driver allocates this buffer using
+> NV_ESC_RM_VID_HEAP_CONTROL and sets attr = NVOS32_ATTR_LOCATION_ANY |
+> NVOS32_ATTR_PAGE_SIZE_BIG | NVOS32_ATTR_PHYSICALITY_CONTIGUOUS, attr2
+> = NVOS32_ATTR2_GPU_CACHEABLE_YES | NVOS32_ATTR2_ZBC_PREFER_NO_ZBC.
+
+(Please do not top post.)
+
+What I mean is how do you map the backing GEM into the GPU's virtual address
+space? Since it's bound to a channel, I assume that it must be ensured it's
+properly mapped when work is pushed to the channel. Is it mapped through
+VM_BIND?
+
+> 
+> On Thu, Mar 20, 2025 at 2:34 PM Danilo Krummrich <dakr@kernel.org> wrote:
 > >
-> > What if this ever changes between hardware revisions or firmware versions?
-> 
-> There was some previous discussion of that here:
-> https://gitlab.freedesktop.org/mesa/mesa/-/issues/12596#note_2796853
-> 
-> From what I can tell, this structure hasn't really changed since
-> FERMI_C (circa 2011), so I'm not too worried about it changing on us
-> too quickly. When it does change, we have the option of appending more
-> members to this struct in the usual way, or if the change is more
-> fundamental we can return an error from this ioctl and add a new
-> interface. Userspace needs to handle an error from this ioctl
-> gracefully anyway since whether it works or not depends on the gpu
-> generation and what firmware is loaded right now.
-
-We could also define it as
-
-	struct drm_nouveau_get_zcull_info {
-		__u32 version;
-		__u32 _pad;
-
-		union {
-			struct drm_nouveau_get_zcull_info_v1 info;
-		}
-	}
-
-just to be safe.
+> > On Wed, Mar 12, 2025 at 05:36:15PM -0400, Mel Henning wrote:
+> > > diff --git a/include/uapi/drm/nouveau_drm.h b/include/uapi/drm/nouveau_drm.h
+> >
+> > Same here, please split the uAPI change in a separate commit.
+> >
+> > > index 33361784eb4e..e9638f4dd7e6 100644
+> > > --- a/include/uapi/drm/nouveau_drm.h
+> > > +++ b/include/uapi/drm/nouveau_drm.h
+> > > @@ -448,6 +448,20 @@ struct drm_nouveau_get_zcull_info {
+> > >       __u32 ctxsw_align;
+> > >  };
+> > >
+> > > +struct drm_nouveau_set_zcull_ctxsw_buffer {
+> > > +     /**
+> > > +      * @ptr: The virtual address for the buffer, or null to bind nothing
+> > > +      */
+> > > +     __u64 addr;
+> >
+> > What is this buffer? Is this a GEM object backed buffer? How is it mapped?
+> >
+> > > +
+> > > +     /**
+> > > +      * @channel: the channel to set the buffer on
+> > > +      */
+> > > +     __u32 channel;
+> > > +
+> > > +     __u32 pad;
+> > > +};
+> > > +
+> > >  #define DRM_NOUVEAU_GETPARAM           0x00
+> > >  #define DRM_NOUVEAU_SETPARAM           0x01 /* deprecated */
+> > >  #define DRM_NOUVEAU_CHANNEL_ALLOC      0x02
+> > > @@ -462,6 +476,7 @@ struct drm_nouveau_get_zcull_info {
+> > >  #define DRM_NOUVEAU_VM_BIND            0x11
+> > >  #define DRM_NOUVEAU_EXEC               0x12
+> > >  #define DRM_NOUVEAU_GET_ZCULL_INFO     0x13
+> > > +#define DRM_NOUVEAU_SET_ZCULL_CTXSW_BUFFER 0x14
+> > >  #define DRM_NOUVEAU_GEM_NEW            0x40
+> > >  #define DRM_NOUVEAU_GEM_PUSHBUF        0x41
+> > >  #define DRM_NOUVEAU_GEM_CPU_PREP       0x42
+> > > @@ -532,6 +547,7 @@ struct drm_nouveau_svm_bind {
+> > >  #define DRM_IOCTL_NOUVEAU_EXEC               DRM_IOWR(DRM_COMMAND_BASE + DRM_NOUVEAU_EXEC, struct drm_nouveau_exec)
+> > >
+> > >  #define DRM_IOCTL_NOUVEAU_GET_ZCULL_INFO     DRM_IOR (DRM_COMMAND_BASE + DRM_NOUVEAU_GET_ZCULL_INFO, struct drm_nouveau_get_zcull_info)
+> > > +#define DRM_IOCTL_NOUVEAU_SET_ZCULL_CTXSW_BUFFER  DRM_IOW (DRM_COMMAND_BASE + DRM_NOUVEAU_SET_ZCULL_CTXSW_BUFFER, struct drm_nouveau_set_zcull_ctxsw_buffer)
+> > >  #if defined(__cplusplus)
+> > >  }
+> > >  #endif
+> > > --
+> > > 2.48.1
+> > >
