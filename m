@@ -2,77 +2,76 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id 6DE6EA73E03
-	for <lists+nouveau@lfdr.de>; Thu, 27 Mar 2025 19:26:40 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 7A3E7A73E4B
+	for <lists+nouveau@lfdr.de>; Thu, 27 Mar 2025 20:02:26 +0100 (CET)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 152F110E933;
-	Thu, 27 Mar 2025 18:26:39 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 4F6B510E93E;
+	Thu, 27 Mar 2025 19:02:24 +0000 (UTC)
 Authentication-Results: gabe.freedesktop.org;
-	dkim=pass (2048-bit key; unprotected) header.d=darkrefraction-com.20230601.gappssmtp.com header.i=@darkrefraction-com.20230601.gappssmtp.com header.b="2/dLzEJW";
+	dkim=pass (2048-bit key; unprotected) header.d=darkrefraction-com.20230601.gappssmtp.com header.i=@darkrefraction-com.20230601.gappssmtp.com header.b="0TwIh1fC";
 	dkim-atps=neutral
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from mail-ej1-f42.google.com (mail-ej1-f42.google.com
- [209.85.218.42])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 7BEB810E933
- for <nouveau@lists.freedesktop.org>; Thu, 27 Mar 2025 18:26:38 +0000 (UTC)
-Received: by mail-ej1-f42.google.com with SMTP id
- a640c23a62f3a-ac2902f7c2aso227291566b.1
- for <nouveau@lists.freedesktop.org>; Thu, 27 Mar 2025 11:26:38 -0700 (PDT)
+Received: from mail-ej1-f53.google.com (mail-ej1-f53.google.com
+ [209.85.218.53])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 0F30C10E17B
+ for <nouveau@lists.freedesktop.org>; Thu, 27 Mar 2025 19:02:22 +0000 (UTC)
+Received: by mail-ej1-f53.google.com with SMTP id
+ a640c23a62f3a-ac298c8fa50so228510566b.1
+ for <nouveau@lists.freedesktop.org>; Thu, 27 Mar 2025 12:02:22 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=darkrefraction-com.20230601.gappssmtp.com; s=20230601; t=1743099997;
- x=1743704797; darn=lists.freedesktop.org; 
+ d=darkrefraction-com.20230601.gappssmtp.com; s=20230601; t=1743102141;
+ x=1743706941; darn=lists.freedesktop.org; 
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:from:to:cc:subject:date
  :message-id:reply-to;
- bh=CTyrCRgo5ha+JUdwfzwN807l63P0OcURzXC+ycir374=;
- b=2/dLzEJWz9BMr/GugG4T0gDB98C9u/Fvs6YiSmbzY4kKyoPxK9PLHhS4EnajlLByWM
- LMQEiyBH2EDReh3eO5VK5mjANlHZIFu1EL86yyg/hvKZ/zTn6Oxre/foOKaavR8Xvm/F
- TOwfF7m+2VKVwm7OVa0rI1hZsrdXBMKwXBE2eCX4ymQsRPACXXwsaelNLCzyeZbMGxE9
- yWW3zYRtx3Eb5q0xzRdkwEh7g02nOG4d1SED+RYNa3dhI9wzJk/DoiUf1n1kf3VZvTk2
- N6By6necByU9PJ+T2X2epnHzujNAn7AAmHgkZJHdOuG+KbSjdBP2AZne1d2ZHB4KX9F2
- 5c0Q==
+ bh=t01uOc+dKD9m8pHt78XkgjVSzMgtIiWN6r92eFZcqFI=;
+ b=0TwIh1fCHJuRBB4fH06mi3y6AV6toj1V4UKVdwAcOdRnL1EyWLy1fnSlp4YdA0I1F1
+ eFGd8G7graaj/lvGvIF2d0fSys86KGtl8+gvVaJLGgof7meSVHUstLsOHO7e0+S4c/JJ
+ EqE4TLjcT6B1bqumHgAyYdDK7yq22yPrbUZDT0FhaeZA980Xmc+ixwSMllfjApR/PVZ1
+ /PU2xDr7XRA887su9CjvAjOvY6tPh4IcMvlbvPpDfVuUmRg1pI+9hnZk9+5zL3fmozf1
+ Os37lzjJS/gjGuGt9bcG/PwX+QIqyYjUAWxLHSnl6niyNbpYr9PBMM9h4Z5DHpWBRWAN
+ AsKg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1743099997; x=1743704797;
+ d=1e100.net; s=20230601; t=1743102141; x=1743706941;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=CTyrCRgo5ha+JUdwfzwN807l63P0OcURzXC+ycir374=;
- b=CvYaXpCMcHqDB1KSITkp/J9xFRdZpEI1sGbmpwKiNPItdI/oY3zqCO+RGqfT7Pgkna
- YpZWSVO/QTKPhQr1xaxiR1pJfUg/K6kbYGsyA7P3SzJU61w2H8CtIMhL991rTK7cRjN0
- PzJq33MQ7a0nCMhOs8J2hs1AtczhwS3jcIZh/UNx2kUINwRCbH1b3xLyhsGz2NO1PAzx
- 01usJMyzi5WFSjLOltXlegn9Lz+JzIV88H4kz3lV7M46G+QLhl9riczgNeb9vSuc0IuI
- VYL6mJManoaQks3k/oa+rdVqYVBls/VJtaumxbQR1poRNE6ba0DKNAdKnEgllYO3GA66
- f1Hg==
+ bh=t01uOc+dKD9m8pHt78XkgjVSzMgtIiWN6r92eFZcqFI=;
+ b=kkGKY688FY61uHW++n733vTGV66IYFyBECMFcG6D/RNOM3KaoEyY4ZD+PW4yhMBWgL
+ CJfvHb3U4bTMSCfVRd7HGE0nStPBf9Vgps+HZBKJwLgdlbb93ZdrDe/sjSosnTuf4fcr
+ A/dRld6ewdsHxOndpxFKP6PYUCtxYd/OPXVrujK1kq1xxgaA2gZIMj6aXtujCL9aHVBb
+ OgTbGkzmhVC5RB9d7Fsz7RZABgdmqIdsAWD0PvxYO3vEMPvzNmQxED5KU7lBbJCrT0zs
+ Cf83VSv+NJ3/d5BMHgN75cLkjllbXtHe411DEqNIiejI6zjmgnvrriXWjLvXkU/NygKw
+ hkmA==
 X-Forwarded-Encrypted: i=1;
- AJvYcCVnYfaz627j2MTsz2+xMDFk5u3RZN4diCm2JMt7S6IaOn2a+M4ezUfuXmTpNZjvzIiiliyUc7qH@lists.freedesktop.org
-X-Gm-Message-State: AOJu0Yyp6/qvYPQxj+zYFfcjUn4nsZpLGRBfwmhcy4ZBRRMMU/oJsJcg
- BSlXMtrQF6RD6d2hdwWvD7NTAKyPgvrabmyjqv7ZXnA6Shac6z5l5jAmosQ3U8b26Fy5uv7Teaz
- qbBoaXBdtWKMwvv04/mL47JWzV3mk5dhIcOgzvA==
-X-Gm-Gg: ASbGncsvlKbZoKjvLMeXtOfs8FPkOMhMW5s4mg48X3gHbv4IHGV8vVzVJDCLJyScFvJ
- fEs79ZNYYGFG0Qo6AdM5tWll7fTlxYYs1i/Opc2QMxtZthwbq+DC3v+wprUEd2dfvnTE7CoIsum
- A45HSPLA0bLXn29pjk9fqGjyWLUdaheJ0cG0b10hER2I+pbeiY6MvCgekmWg==
-X-Google-Smtp-Source: AGHT+IET0BCFr//EzIPopKFaGN5jZeir/J+CVx/Z+vlQ+1+JmTOCYtSGfPtUJKXO2oYFfeOennYoIUh2PSb/hxTp95w=
-X-Received: by 2002:a17:907:6ea7:b0:ac2:88df:6a5b with SMTP id
- a640c23a62f3a-ac6fb14cefcmr417811366b.42.1743099996622; Thu, 27 Mar 2025
- 11:26:36 -0700 (PDT)
+ AJvYcCX53nGwwaLlFEnXOxymTbW8NDQp2yxUkqpSN/t0CjmzuEErTPUYfd4ofAYTYdoFczz5UerwZc8S@lists.freedesktop.org
+X-Gm-Message-State: AOJu0YwLaML9djQxv5EOtELnfq0wT5aRvfnZlaTdyz3EwUG4mIneaePN
+ NFrVbEDLqUrfiTSrG1SV81TVPsC3aYo/EFJmbBSC+bopAH3/PmTqN03w97JSajuATcu1MpzWThr
+ 1J2TfJFm3NdReMT44/KA37L4Si6i+9xHOQpPjRw==
+X-Gm-Gg: ASbGnculc3o8QKbWSpHScjNQN1nNl1YE9DTECv49JdwpETZYG4vgfbO9IB1H1u56oqj
+ GpRvLE+LcPLUPUaK/vabjRBBXxmXRKLbmk0J9KsIz2LGBlKY32Ln2PPmSb/HFHKUsWOVoqn3Va1
+ KNlZd3q1wU46RN+2lgirWlOQvnZngcCA/Fhg3Oe5bLFUIguTSbcILPu+HwwA==
+X-Google-Smtp-Source: AGHT+IFdAriu33TeMlfQtOemQZ156y3VpXNsrgytu4hyNzGPMxzNiqF61n78Yv6Jx/sursoj3lVdJ7K5H65m6DZ9YSU=
+X-Received: by 2002:a17:907:9410:b0:ac2:cf0b:b806 with SMTP id
+ a640c23a62f3a-ac6fb1bdeb6mr368891266b.56.1743102140953; Thu, 27 Mar 2025
+ 12:02:20 -0700 (PDT)
 MIME-Version: 1.0
 References: <20250312213746.228042-1-mhenning@darkrefraction.com>
- <20250312213746.228042-2-mhenning@darkrefraction.com>
- <Z9xb5SABWcwYnV-x@pollux>
- <abcc6ddc-47d5-4970-8fc1-e82c150fbfd9@nvidia.com> <Z9x0NLY6HHsvxOFD@pollux>
- <CAAgWFh1VzRnt9QdCR9xOVhar7vEYAGPBcMHfqXGq_QHm0A6H8Q@mail.gmail.com>
- <Z-VK8eeA_7BURiBy@cassiopeiae>
-In-Reply-To: <Z-VK8eeA_7BURiBy@cassiopeiae>
+ <20250312213746.228042-3-mhenning@darkrefraction.com>
+ <Z9xfoS89yimS1Sb3@pollux>
+ <CAAgWFh2RtCwaKNinX9X4BjwNiaBj5BF_ypzbqoqV4LJgN4cPvg@mail.gmail.com>
+ <Z-VZlIc3E8ZQQmXa@cassiopeiae>
+In-Reply-To: <Z-VZlIc3E8ZQQmXa@cassiopeiae>
 From: M Henning <mhenning@darkrefraction.com>
-Date: Thu, 27 Mar 2025 14:26:09 -0400
-X-Gm-Features: AQ5f1JrzgQIz946PQKGDBUroIHuC_WtCuVXd9vIquncA5sGiP4wdWFbj9jwxrno
-Message-ID: <CAAgWFh1yGZkEi+Fr9htOp+iXJjLo6Q1B+rszKKAcxgw4Y0D1RQ@mail.gmail.com>
-Subject: Re: [PATCH 1/2] drm/nouveau: Add DRM_IOCTL_NOUVEAU_GET_ZCULL_INFO
+Date: Thu, 27 Mar 2025 15:01:54 -0400
+X-Gm-Features: AQ5f1JrCSLT7wmMfX_bBZIXEHu0KcL2uFmLp74llm2T31nXsEw2JHxFsuNCAqvM
+Message-ID: <CAAgWFh2F-MH_U1V6SY_Z3nWz0_meyvAcWjfUiEoXzpW697oi7w@mail.gmail.com>
+Subject: Re: [PATCH 2/2] drm/nouveau: DRM_NOUVEAU_SET_ZCULL_CTXSW_BUFFER
 To: Danilo Krummrich <dakr@kernel.org>
-Cc: Ben Skeggs <bskeggs@nvidia.com>, Karol Herbst <kherbst@redhat.com>, 
- Lyude Paul <lyude@redhat.com>, Faith Ekstrand <faith.ekstrand@collabora.com>, 
- dri-devel@lists.freedesktop.org, nouveau@lists.freedesktop.org
+Cc: Karol Herbst <kherbst@redhat.com>, Lyude Paul <lyude@redhat.com>, 
+ Faith Ekstrand <faith.ekstrand@collabora.com>, dri-devel@lists.freedesktop.org,
+ nouveau@lists.freedesktop.org
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
 X-BeenThere: nouveau@lists.freedesktop.org
@@ -89,81 +88,99 @@ List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-On Thu, Mar 27, 2025 at 8:56=E2=80=AFAM Danilo Krummrich <dakr@kernel.org> =
+On Thu, Mar 27, 2025 at 9:58=E2=80=AFAM Danilo Krummrich <dakr@kernel.org> =
 wrote:
 >
-> On Tue, Mar 25, 2025 at 07:40:56PM -0400, M Henning wrote:
-> > Okay, that sounds reasonable since I don't expect this to change very q=
-uickly.
+> On Fri, Mar 21, 2025 at 07:00:57PM -0400, M Henning wrote:
+> > This is a pointer in the gpu's virtual address space. It must be
+> > aligned according to ctxsw_align and be at least ctxsw_size bytes
+> > (where those values come from the nouveau_abi16_ioctl_get_zcull_info
+> > structure). I'll change the description to say that much.
 > >
-> > Since I don't fully understand, is the suggestion here to:
-> > 1) add the interface as a function on nvkm_gr using the nvkm_gr_func
-> > vtable and store the actual data on r535_gr
-> > or
-> > 2) add the interface to NVIF (which IF?) and store the actual data on n=
-vkm_gr
-> > ?
+> > Yes, this is GEM-backed. I'm actually not entirely sure what the
+> > requirements are here, since this part is reverse-engineered. I think
+> > NOUVEAU_GEM_DOMAIN_VRAM and NOUVEAU_GEM_DOMAIN_GART are both okay. The
+> > proprietary driver allocates this buffer using
+> > NV_ESC_RM_VID_HEAP_CONTROL and sets attr =3D NVOS32_ATTR_LOCATION_ANY |
+> > NVOS32_ATTR_PAGE_SIZE_BIG | NVOS32_ATTR_PHYSICALITY_CONTIGUOUS, attr2
+> > =3D NVOS32_ATTR2_GPU_CACHEABLE_YES | NVOS32_ATTR2_ZBC_PREFER_NO_ZBC.
 >
-> I think we want both.
+> (Please do not top post.)
 >
-> 1) I think the suggestion was to store the data directly in nvkm_gr, howe=
-ver the
->    structure is indeed specific to r535, so I think, unfortunately, we ne=
-ed the
->    vtable and store that data in r535_gr.
+> What I mean is how do you map the backing GEM into the GPU's virtual addr=
+ess
+> space? Since it's bound to a channel, I assume that it must be ensured it=
+'s
+> properly mapped when work is pushed to the channel. Is it mapped through
+> VM_BIND?
 
-Well, NV2080_CTRL_GR_GET_ZCULL_INFO_PARAMS is r535-specific, but we
-need to convert it into a common structure and combine it with info
-from NV0080_CTRL_FIFO_GET_ENGINE_CONTEXT_PROPERTIES at some point, so
-I think it makes sense to do that conversion+combination before
-storing it on any structure. In that case, maybe we store the
-structure on nvkm_gr directly during r535_gr_oneinit and then the call
-to get the info only goes through NVIF?
+Yes. The userspace code for this is here:
+https://gitlab.freedesktop.org/mesa/mesa/-/merge_requests/33861/diffs?commi=
+t_id=3D0c4baab863730f9fc8b417834ffcbb400f11d617
+It calls into the usual function for driver internal allocations
+(nvkmd_dev_alloc_mem) which calls VM_BIND internally.
 
+I don't understand: why is this line of questioning important?
 
-> 2) Yes, this should be passed through nvif. Unfortunately, I think it wou=
-ld need
->    to be a whole new one (similar to the fifo one).
->
-> Maybe Ben can provide you some additional pointers one this? Mayber he ca=
-n
-> suggest a shortcut, since he has patches queued to simplify the whole int=
-erface.
->
 > >
-> > (Sorry, I don't understand how these layers are intended to fit togethe=
-r.))
-> >
-> > On Thu, Mar 20, 2025 at 4:02=E2=80=AFPM Danilo Krummrich <dakr@kernel.o=
+> > On Thu, Mar 20, 2025 at 2:34=E2=80=AFPM Danilo Krummrich <dakr@kernel.o=
 rg> wrote:
 > > >
-> > > On Fri, Mar 21, 2025 at 05:57:55AM +1000, Ben Skeggs wrote:
-> > > > On 21/3/25 04:18, Danilo Krummrich wrote:
-> > > >
-> > > > > Hi Mel,
-> > > > >
-> > > > > On Wed, Mar 12, 2025 at 05:36:14PM -0400, Mel Henning wrote:
-> > > >
-> > > > > > @@ -72,6 +75,9 @@ struct nvkm_device {
-> > > > > >                   bool armed;
-> > > > > >                   bool legacy_done;
-> > > > > >           } intr;
-> > > > > > +
-> > > > > > + bool has_zcull_info;
-> > > > > > + struct drm_nouveau_get_zcull_info zcull_info;
-> > > > > This is bypassing the nvif layer entirely. I think you should sto=
-re the contents
-> > > > > of struct NV2080_CTRL_GR_GET_ZCULL_INFO_PARAMS in struct r535_gr =
-and have an
-> > > > > nvif interface to access the data.
-> > > >
-> > > > I agree here, though nvkm_gr would be a better choice for a couple =
-of
-> > > > reasons, not least that it's possible (and should be reasonably tri=
-vial) to
-> > > > support this on earlier GPUs - should someone desire to at a later =
-point.
+> > > On Wed, Mar 12, 2025 at 05:36:15PM -0400, Mel Henning wrote:
+> > > > diff --git a/include/uapi/drm/nouveau_drm.h b/include/uapi/drm/nouv=
+eau_drm.h
 > > >
-> > > I agree, if the interface is stable enough -- I don't know whether th=
-is is prone
-> > > to change or not.
+> > > Same here, please split the uAPI change in a separate commit.
+> > >
+> > > > index 33361784eb4e..e9638f4dd7e6 100644
+> > > > --- a/include/uapi/drm/nouveau_drm.h
+> > > > +++ b/include/uapi/drm/nouveau_drm.h
+> > > > @@ -448,6 +448,20 @@ struct drm_nouveau_get_zcull_info {
+> > > >       __u32 ctxsw_align;
+> > > >  };
+> > > >
+> > > > +struct drm_nouveau_set_zcull_ctxsw_buffer {
+> > > > +     /**
+> > > > +      * @ptr: The virtual address for the buffer, or null to bind =
+nothing
+> > > > +      */
+> > > > +     __u64 addr;
+> > >
+> > > What is this buffer? Is this a GEM object backed buffer? How is it ma=
+pped?
+> > >
+> > > > +
+> > > > +     /**
+> > > > +      * @channel: the channel to set the buffer on
+> > > > +      */
+> > > > +     __u32 channel;
+> > > > +
+> > > > +     __u32 pad;
+> > > > +};
+> > > > +
+> > > >  #define DRM_NOUVEAU_GETPARAM           0x00
+> > > >  #define DRM_NOUVEAU_SETPARAM           0x01 /* deprecated */
+> > > >  #define DRM_NOUVEAU_CHANNEL_ALLOC      0x02
+> > > > @@ -462,6 +476,7 @@ struct drm_nouveau_get_zcull_info {
+> > > >  #define DRM_NOUVEAU_VM_BIND            0x11
+> > > >  #define DRM_NOUVEAU_EXEC               0x12
+> > > >  #define DRM_NOUVEAU_GET_ZCULL_INFO     0x13
+> > > > +#define DRM_NOUVEAU_SET_ZCULL_CTXSW_BUFFER 0x14
+> > > >  #define DRM_NOUVEAU_GEM_NEW            0x40
+> > > >  #define DRM_NOUVEAU_GEM_PUSHBUF        0x41
+> > > >  #define DRM_NOUVEAU_GEM_CPU_PREP       0x42
+> > > > @@ -532,6 +547,7 @@ struct drm_nouveau_svm_bind {
+> > > >  #define DRM_IOCTL_NOUVEAU_EXEC               DRM_IOWR(DRM_COMMAND_=
+BASE + DRM_NOUVEAU_EXEC, struct drm_nouveau_exec)
+> > > >
+> > > >  #define DRM_IOCTL_NOUVEAU_GET_ZCULL_INFO     DRM_IOR (DRM_COMMAND_=
+BASE + DRM_NOUVEAU_GET_ZCULL_INFO, struct drm_nouveau_get_zcull_info)
+> > > > +#define DRM_IOCTL_NOUVEAU_SET_ZCULL_CTXSW_BUFFER  DRM_IOW (DRM_COM=
+MAND_BASE + DRM_NOUVEAU_SET_ZCULL_CTXSW_BUFFER, struct drm_nouveau_set_zcul=
+l_ctxsw_buffer)
+> > > >  #if defined(__cplusplus)
+> > > >  }
+> > > >  #endif
+> > > > --
+> > > > 2.48.1
+> > > >
