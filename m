@@ -2,53 +2,49 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id 831FEA71E35
-	for <lists+nouveau@lfdr.de>; Wed, 26 Mar 2025 19:22:08 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 95B65A72BBC
+	for <lists+nouveau@lfdr.de>; Thu, 27 Mar 2025 09:44:55 +0100 (CET)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 1C8C510E777;
-	Wed, 26 Mar 2025 18:22:07 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 7650210E881;
+	Thu, 27 Mar 2025 08:44:51 +0000 (UTC)
 Authentication-Results: gabe.freedesktop.org;
-	dkim=pass (1024-bit key; unprotected) header.d=collabora.com header.i=mark.filion@collabora.com header.b="WBzbmWyO";
+	dkim=pass (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="jL5ZmlWf";
 	dkim-atps=neutral
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-X-Greylist: delayed 902 seconds by postgrey-1.36 at gabe;
- Wed, 26 Mar 2025 18:22:05 UTC
-Received: from sender4-op-o16.zoho.com (sender4-op-o16.zoho.com
- [136.143.188.16])
- by gabe.freedesktop.org (Postfix) with ESMTPS id CC47F10E777
- for <nouveau@lists.freedesktop.org>; Wed, 26 Mar 2025 18:22:05 +0000 (UTC)
-ARC-Seal: i=1; a=rsa-sha256; t=1743012421; cv=none; 
- d=zohomail.com; s=zohoarc; 
- b=EUG4bSI9C5jmn97M/qlHGN5GEe6nyTiGYKl9W9jYUlTln4mbCWxepC+3W2ws/orGoIcM53Hse6kxSJpP5GsjyLPbDFuSaK2ByrUOHd4d0o3uUVf+/LGlY6uWYIZI1au3goSB2SAnwArYWmQAx0gCkqEVt90w+UAXQ5/rQgNCk4A=
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=zohomail.com;
- s=zohoarc; t=1743012421;
- h=Content-Type:Date:Date:From:From:MIME-Version:Message-ID:Subject:Subject:To:To:Message-Id:Reply-To:Cc;
- bh=2++tGDIxxVvZc22ImIHR6BxZsewU5CD0RMC/tY69JHo=; 
- b=mog/b2PsTE/AY+kiN2znWy/d5EpNoKw9LHTatc2U8ZDD5g8Kvpz5dkykOZTv75h/43VRn5Z59f9nNtYiq+HbTtiDjE1lCDCgpLYDQrK8fp2C9VlbTxwzxVnxfzI9DWVVpQKKAMnw18G8fwI0bjG66F63aDukLDZ58GLvMpm1J8Q=
-ARC-Authentication-Results: i=1; mx.zohomail.com;
- dkim=pass  header.i=collabora.com;
- spf=pass  smtp.mailfrom=mark.filion@collabora.com;
- dmarc=pass header.from=<mark.filion@collabora.com>
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; t=1743012421; 
- s=zohomail; d=collabora.com; i=mark.filion@collabora.com;
- h=Message-ID:Subject:Subject:From:From:To:To:Date:Date:Content-Type:MIME-Version:Message-Id:Reply-To:Cc;
- bh=2++tGDIxxVvZc22ImIHR6BxZsewU5CD0RMC/tY69JHo=;
- b=WBzbmWyOURCpcVulGIMEzEBDhnsQDxIxyK+KL2OMHmIHIVy3SwVipdE3Y/dgNTaO
- eWjUHttrJOiUjmR1LF+/i10f8zUZfZnAxNk6k8hOT9+CLvOf1mh0kq3DqVcH9xbWbzh
- vB4pExI9Hb5NaEV9OSYLsPtR+jTHG5wAXpIs1k90=
-Received: by mx.zohomail.com with SMTPS id 1743012419143413.88162924848496;
- Wed, 26 Mar 2025 11:06:59 -0700 (PDT)
-Message-ID: <ffcf8ecf10127200ec80e47e889d245b152683ed.camel@collabora.com>
-Subject: 2025 X.Org Foundation Membership deadline for voting in the
- upcoming election
-From: Mark Filion <mark.filion@collabora.com>
-To: nouveau@lists.freedesktop.org
-Date: Wed, 26 Mar 2025 14:06:58 -0400
-Content-Type: multipart/alternative; boundary="=-6OlHiPr+HaI2ZG727FQ8"
-User-Agent: Evolution 3.54.3 (3.54.3-1.fc41app1) 
+Received: from dfw.source.kernel.org (dfw.source.kernel.org [139.178.84.217])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 4B58410E880;
+ Thu, 27 Mar 2025 08:44:50 +0000 (UTC)
+Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
+ by dfw.source.kernel.org (Postfix) with ESMTP id B60365C687A;
+ Thu, 27 Mar 2025 08:42:32 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 34FACC4CEDD;
+ Thu, 27 Mar 2025 08:44:46 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+ s=k20201202; t=1743065089;
+ bh=30nxOy0/5vmflmamL0miLsXkRxuXtHblR/KuRi7mRLg=;
+ h=From:To:Cc:Subject:Date:From;
+ b=jL5ZmlWfSXM0Rwdhwb1TSadMqwmUtMzsS01aABGf31W9r2q5+y1V2Nt/EUYYapJ9c
+ dVvuc63LIALfAyYWQzFS14Ro4JeSZO3JnsRs4RdadWDzONNjtpSBxCIUn3jxoq1mtz
+ mZW11MhIy2OmitUrpiO2GCNTW8x+8PhEal1r4m1oUJKpHYESLxbvjaoFxnijOajoYP
+ 1yGs+02MwgiOnGBYUmolfNqljyPcGZubefyklVV8jXbNXep4ukgH7aoIBtsAsrA1iv
+ 9VTWoVPLfqyxV4egpeefQ9b5AE98bUXtyaiOTHTm7vEXG7ak4az7g1T6HXb+gAJBa5
+ 6cW20OyfN4MMw==
+From: Philipp Stanner <phasta@kernel.org>
+To: Lyude Paul <lyude@redhat.com>, Danilo Krummrich <dakr@kernel.org>,
+ David Airlie <airlied@gmail.com>, Simona Vetter <simona@ffwll.ch>,
+ Sumit Semwal <sumit.semwal@linaro.org>,
+ =?UTF-8?q?Christian=20K=C3=B6nig?= <christian.koenig@amd.com>
+Cc: dri-devel@lists.freedesktop.org, nouveau@lists.freedesktop.org,
+ linux-kernel@vger.kernel.org, linux-media@vger.kernel.org,
+ linaro-mm-sig@lists.linaro.org, Philipp Stanner <phasta@kernel.org>,
+ stable@vger.kernel.org
+Subject: [PATCH] drm/nouveau: Prevent signalled fences in pending list
+Date: Thu, 27 Mar 2025 09:42:57 +0100
+Message-ID: <20250327084256.11201-2-phasta@kernel.org>
+X-Mailer: git-send-email 2.48.1
 MIME-Version: 1.0
-X-ZohoMailClient: External
+Content-Transfer-Encoding: 8bit
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -63,103 +59,136 @@ List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
---=-6OlHiPr+HaI2ZG727FQ8
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+Nouveau currently relies on the assumption that dma_fences will only
+ever get signalled through nouveau_fence_signal(), which takes care of
+removing a signalled fence from the list nouveau_fence_chan.pending.
 
-Hello,
+This self-imposed rule is violated in nouveau_fence_done(), where
+dma_fence_is_signaled() can signal the fence without removing it from
+the list. This enables accesses to already signalled fences through the
+list, which is a bug.
 
-Now that the freedesktop server migration is almost done, it's time to
-turn our attention on the 2025 X.Org Foundation elections, which are
-rapidly approaching! We will be forwarding the election schedule and
-nominating process to the membership shortly.
+Furthermore, it must always be possible to use standard dma_fence
+methods an a dma_fence and observe valid behavior. The canonical way of
+ensuring that signalling a fence has additional effects is to add those
+effects to a callback and register it on the fence.
 
-Please note that only current members can vote in the upcoming
-election, and that the deadline for new memberships or renewals to vote
-in the upcoming election is 23 April 2025 at 23:59 UTC.
+Move the code from nouveau_fence_signal() into a dma_fence callback.
+Register that callback when creating the fence.
 
-If you are interested in joining the X.Org Foundation or in renewing
-your membership, please visit the membership system site
-at:=C2=A0https://members.x.org/
+Cc: <stable@vger.kernel.org> # 4.10+
+Fixes: f54d1867005c ("dma-buf: Rename struct fence to dma_fence")
+Signed-off-by: Philipp Stanner <phasta@kernel.org>
+---
+I'm not entirely sure what Fixes-Tag is appropriate. The last time the
+line causing the signalled fence in the list was touched is the commit
+listed above.
+---
+ drivers/gpu/drm/nouveau/nouveau_fence.c | 41 ++++++++++++++++---------
+ drivers/gpu/drm/nouveau/nouveau_fence.h |  1 +
+ 2 files changed, 27 insertions(+), 15 deletions(-)
 
-Mark Filion, on behalf of the X.Org elections committee
+diff --git a/drivers/gpu/drm/nouveau/nouveau_fence.c b/drivers/gpu/drm/nouveau/nouveau_fence.c
+index 7cc84472cece..b2c2241a8803 100644
+--- a/drivers/gpu/drm/nouveau/nouveau_fence.c
++++ b/drivers/gpu/drm/nouveau/nouveau_fence.c
+@@ -50,24 +50,22 @@ nouveau_fctx(struct nouveau_fence *fence)
+ 	return container_of(fence->base.lock, struct nouveau_fence_chan, lock);
+ }
+ 
+-static int
+-nouveau_fence_signal(struct nouveau_fence *fence)
++static void
++nouveau_fence_cleanup_cb(struct dma_fence *dfence, struct dma_fence_cb *cb)
+ {
+-	int drop = 0;
++	struct nouveau_fence_chan *fctx;
++	struct nouveau_fence *fence;
++
++	fence = container_of(dfence, struct nouveau_fence, base);
++	fctx = nouveau_fctx(fence);
+ 
+-	dma_fence_signal_locked(&fence->base);
+ 	list_del(&fence->head);
+ 	rcu_assign_pointer(fence->channel, NULL);
+ 
+-	if (test_bit(DMA_FENCE_FLAG_USER_BITS, &fence->base.flags)) {
+-		struct nouveau_fence_chan *fctx = nouveau_fctx(fence);
+-
+-		if (!--fctx->notify_ref)
+-			drop = 1;
+-	}
++	if (test_bit(DMA_FENCE_FLAG_USER_BITS, &fence->base.flags))
++		--fctx->notify_ref;
+ 
+ 	dma_fence_put(&fence->base);
+-	return drop;
+ }
+ 
+ static struct nouveau_fence *
+@@ -93,7 +91,8 @@ nouveau_fence_context_kill(struct nouveau_fence_chan *fctx, int error)
+ 		if (error)
+ 			dma_fence_set_error(&fence->base, error);
+ 
+-		if (nouveau_fence_signal(fence))
++		dma_fence_signal_locked(&fence->base);
++		if (fctx->notify_ref == 0)
+ 			nvif_event_block(&fctx->event);
+ 	}
+ 	fctx->killed = 1;
+@@ -131,7 +130,6 @@ static int
+ nouveau_fence_update(struct nouveau_channel *chan, struct nouveau_fence_chan *fctx)
+ {
+ 	struct nouveau_fence *fence;
+-	int drop = 0;
+ 	u32 seq = fctx->read(chan);
+ 
+ 	while (!list_empty(&fctx->pending)) {
+@@ -140,10 +138,10 @@ nouveau_fence_update(struct nouveau_channel *chan, struct nouveau_fence_chan *fc
+ 		if ((int)(seq - fence->base.seqno) < 0)
+ 			break;
+ 
+-		drop |= nouveau_fence_signal(fence);
++		dma_fence_signal_locked(&fence->base);
+ 	}
+ 
+-	return drop;
++	return fctx->notify_ref == 0 ? 1 : 0;
+ }
+ 
+ static void
+@@ -235,6 +233,19 @@ nouveau_fence_emit(struct nouveau_fence *fence)
+ 			       &fctx->lock, fctx->context, ++fctx->sequence);
+ 	kref_get(&fctx->fence_ref);
+ 
++	fence->cb.func = nouveau_fence_cleanup_cb;
++	/* Adding a callback runs into __dma_fence_enable_signaling(), which will
++	 * ultimately run into nouveau_fence_no_signaling(), where a WARN_ON
++	 * would fire because the refcount can be dropped there.
++	 *
++	 * Increment the refcount here temporarily to work around that.
++	 */
++	dma_fence_get(&fence->base);
++	ret = dma_fence_add_callback(&fence->base, &fence->cb, nouveau_fence_cleanup_cb);
++	dma_fence_put(&fence->base);
++	if (ret)
++		return ret;
++
+ 	ret = fctx->emit(fence);
+ 	if (!ret) {
+ 		dma_fence_get(&fence->base);
+diff --git a/drivers/gpu/drm/nouveau/nouveau_fence.h b/drivers/gpu/drm/nouveau/nouveau_fence.h
+index 8bc065acfe35..e6b2df7fdc42 100644
+--- a/drivers/gpu/drm/nouveau/nouveau_fence.h
++++ b/drivers/gpu/drm/nouveau/nouveau_fence.h
+@@ -10,6 +10,7 @@ struct nouveau_bo;
+ 
+ struct nouveau_fence {
+ 	struct dma_fence base;
++	struct dma_fence_cb cb;
+ 
+ 	struct list_head head;
+ 
+-- 
+2.48.1
 
---=-6OlHiPr+HaI2ZG727FQ8
-Content-Type: text/html; charset="utf-8"
-Content-Transfer-Encoding: quoted-printable
-
-<html><head><style>pre,code,address {
-  margin: 0px;
-}
-h1,h2,h3,h4,h5,h6 {
-  margin-top: 0.2em;
-  margin-bottom: 0.2em;
-}
-ol,ul {
-  margin-top: 0em;
-  margin-bottom: 0em;
-}
-blockquote {
-  margin-top: 0em;
-  margin-bottom: 0em;
-}
-</style></head><body><div style=3D"caret-color: rgb(0, 0, 0); color: rgb(0,=
- 0, 0); font-family: Cantarell; font-style: normal; font-variant-caps: norm=
-al; font-weight: 400; letter-spacing: normal; text-align: start; text-inden=
-t: 0px; text-transform: none; white-space: normal; word-spacing: 0px; -webk=
-it-tap-highlight-color: rgba(0, 0, 0, 0.4); -webkit-text-stroke-width: 0px;=
- text-decoration: none;">Hello,</div><div style=3D"caret-color: rgb(0, 0, 0=
-); color: rgb(0, 0, 0); font-family: Cantarell; font-style: normal; font-va=
-riant-caps: normal; font-weight: 400; letter-spacing: normal; text-align: s=
-tart; text-indent: 0px; text-transform: none; white-space: normal; word-spa=
-cing: 0px; -webkit-tap-highlight-color: rgba(0, 0, 0, 0.4); -webkit-text-st=
-roke-width: 0px; text-decoration: none;"><br></div><div style=3D"caret-colo=
-r: rgb(0, 0, 0); color: rgb(0, 0, 0); font-family: Cantarell; font-style: n=
-ormal; font-variant-caps: normal; font-weight: 400; letter-spacing: normal;=
- text-align: start; text-indent: 0px; text-transform: none; white-space: no=
-rmal; word-spacing: 0px; -webkit-tap-highlight-color: rgba(0, 0, 0, 0.4); -=
-webkit-text-stroke-width: 0px; text-decoration: none;">Now that the freedes=
-ktop server migration is almost done, it's time to turn our attention on th=
-e 2025 X.Org Foundation elections, which are rapidly approaching! We will b=
-e forwarding the election schedule and nominating process to the membership=
- shortly.</div><div style=3D"caret-color: rgb(0, 0, 0); color: rgb(0, 0, 0)=
-; font-family: Cantarell; font-style: normal; font-variant-caps: normal; fo=
-nt-weight: 400; letter-spacing: normal; text-align: start; text-indent: 0px=
-; text-transform: none; white-space: normal; word-spacing: 0px; -webkit-tap=
--highlight-color: rgba(0, 0, 0, 0.4); -webkit-text-stroke-width: 0px; text-=
-decoration: none;"><br></div><div style=3D"caret-color: rgb(0, 0, 0); color=
-: rgb(0, 0, 0); font-family: Cantarell; font-style: normal; font-variant-ca=
-ps: normal; font-weight: 400; letter-spacing: normal; text-align: start; te=
-xt-indent: 0px; text-transform: none; white-space: normal; word-spacing: 0p=
-x; -webkit-tap-highlight-color: rgba(0, 0, 0, 0.4); -webkit-text-stroke-wid=
-th: 0px; text-decoration: none;">Please note that only current members can =
-vote in the upcoming election, and that the deadline for new memberships or=
- renewals to vote in the upcoming election is 23 April 2025 at 23:59 UTC.</=
-div><div style=3D"caret-color: rgb(0, 0, 0); color: rgb(0, 0, 0); font-fami=
-ly: Cantarell; font-style: normal; font-variant-caps: normal; font-weight: =
-400; letter-spacing: normal; text-align: start; text-indent: 0px; text-tran=
-sform: none; white-space: normal; word-spacing: 0px; -webkit-tap-highlight-=
-color: rgba(0, 0, 0, 0.4); -webkit-text-stroke-width: 0px; text-decoration:=
- none;"><br></div><div style=3D"caret-color: rgb(0, 0, 0); color: rgb(0, 0,=
- 0); font-family: Cantarell; font-style: normal; font-variant-caps: normal;=
- font-weight: 400; letter-spacing: normal; text-align: start; text-indent: =
-0px; text-transform: none; white-space: normal; word-spacing: 0px; -webkit-=
-tap-highlight-color: rgba(0, 0, 0, 0.4); -webkit-text-stroke-width: 0px; te=
-xt-decoration: none;">If you are interested in joining the X.Org Foundation=
- or in renewing your membership, please visit the membership system site at=
-:<span class=3D"Apple-converted-space">&nbsp;</span><a href=3D"https://memb=
-ers.x.org/" style=3D"color: rgb(238, 238, 236);">https://members.x.org/</a>=
-</div><div style=3D"caret-color: rgb(0, 0, 0); color: rgb(0, 0, 0); font-fa=
-mily: Cantarell; font-style: normal; font-variant-caps: normal; font-weight=
-: 400; letter-spacing: normal; text-align: start; text-indent: 0px; text-tr=
-ansform: none; white-space: normal; word-spacing: 0px; -webkit-tap-highligh=
-t-color: rgba(0, 0, 0, 0.4); -webkit-text-stroke-width: 0px; text-decoratio=
-n: none;"><br></div><div style=3D"caret-color: rgb(0, 0, 0); color: rgb(0, =
-0, 0); font-family: Cantarell; font-style: normal; font-variant-caps: norma=
-l; font-weight: 400; letter-spacing: normal; text-align: start; text-indent=
-: 0px; text-transform: none; white-space: normal; word-spacing: 0px; -webki=
-t-tap-highlight-color: rgba(0, 0, 0, 0.4); -webkit-text-stroke-width: 0px; =
-text-decoration: none;">Mark Filion, on behalf of the X.Org elections commi=
-ttee</div><div><span></span></div></body></html>
-
---=-6OlHiPr+HaI2ZG727FQ8--
