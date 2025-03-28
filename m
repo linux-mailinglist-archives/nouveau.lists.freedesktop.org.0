@@ -2,35 +2,35 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id 990FFA74D09
-	for <lists+nouveau@lfdr.de>; Fri, 28 Mar 2025 15:45:40 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 9E6D5A74D3A
+	for <lists+nouveau@lfdr.de>; Fri, 28 Mar 2025 15:56:37 +0100 (CET)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 4ADE010EA65;
-	Fri, 28 Mar 2025 14:45:38 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 4461710EA43;
+	Fri, 28 Mar 2025 14:56:35 +0000 (UTC)
 Authentication-Results: gabe.freedesktop.org;
-	dkim=pass (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="YGHjYwng";
+	dkim=pass (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="f8X3+SDf";
 	dkim-atps=neutral
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
 Received: from dfw.source.kernel.org (dfw.source.kernel.org [139.178.84.217])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 79A0310E1E7;
- Fri, 28 Mar 2025 14:45:36 +0000 (UTC)
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 0212A10EA43;
+ Fri, 28 Mar 2025 14:56:29 +0000 (UTC)
 Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by dfw.source.kernel.org (Postfix) with ESMTP id 00EBC5C6470;
- Fri, 28 Mar 2025 14:43:19 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id D6B64C4CEE4;
- Fri, 28 Mar 2025 14:45:34 +0000 (UTC)
+ by dfw.source.kernel.org (Postfix) with ESMTP id ABDFF5C64E9;
+ Fri, 28 Mar 2025 14:54:11 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 889E4C4CEE4;
+ Fri, 28 Mar 2025 14:56:27 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1743173135;
- bh=7qGrXEoUERdDE37I+v3l/CeEtOIhffhKARqqG2bFKTg=;
+ s=k20201202; t=1743173788;
+ bh=lSjBRuGPYK0JKv06whQALWhLO84ENRlVPpECtO0w/dY=;
  h=Date:From:To:Cc:Subject:From;
- b=YGHjYwngkfoyxnQor0tqAGGqzrL1qZP6Y8DipI/P3wXV0okkGj+rV1pBOJ4y0uslY
- EPUGbFfFqqqFgVv56h+ztrJZ+5Mq9Vksy5ZPLfXFtfTpFveGDGi4hU8zFqynvxpnpL
- MWL/zLNmUu4or5WkVj3NuFr842EYQUm6tXZDRbZ7bDwGjqM2T7cVYbMyzdhekaa9b1
- /uVS7eiK51z71h/RkRrEdhqNvebahTxhRgI02Me6Q5BSMv3+knSro6ef3qHTM1tan6
- RG3rJ8tm33elXoTdvYPhoA72WtxIrvs64QG+qmx9jdw2rgUk6p2bMGl0XiDgF+e22N
- Y37qbE260PYSw==
-Date: Fri, 28 Mar 2025 08:45:32 -0600
+ b=f8X3+SDfkTTXgQd9yE0i05TbLTXzxg9CqLNviHW1Bw1UGyPNXnFr8h/2ZqYfQdKuI
+ Idh5YqJGJywZpHkYPV9vogfy9Z/+tpg7y1wE0hQjkaAJ36N8xoYRRxBrfHW8Zth2da
+ mZb/LN3AJDDNeWUCaRZt/TMRxoNKaZXrwAquxfoCXDvwAI9p9haMKdWVPmMsn02tlI
+ qHWZasLJJqU58WgDBilMOumWKfavakAloP7ifkFPc7wjC85BUCQvFbMKVjLfFKcoIb
+ 6IVlbTW5EjaNkNpDdAjKMAcq7alX/vpwCBnsXg+OWrqTflTpmiO9+Mw1122zj30ABk
+ bhQYcTYw9KqNQ==
+Date: Fri, 28 Mar 2025 08:56:25 -0600
 From: "Gustavo A. R. Silva" <gustavoars@kernel.org>
 To: Lyude Paul <lyude@redhat.com>, Danilo Krummrich <dakr@kernel.org>,
  David Airlie <airlied@gmail.com>, Simona Vetter <simona@ffwll.ch>
@@ -38,9 +38,9 @@ Cc: dri-devel@lists.freedesktop.org, nouveau@lists.freedesktop.org,
  linux-kernel@vger.kernel.org,
  "Gustavo A. R. Silva" <gustavoars@kernel.org>,
  linux-hardening@vger.kernel.org
-Subject: [PATCH][next] drm/nouveau/outp: Avoid -Wflex-array-member-not-at-end
+Subject: [PATCH][next] drm/nouveau/conn: Avoid -Wflex-array-member-not-at-end
  warning
-Message-ID: <Z-a2DAQmcsHHlyci@kspp>
+Message-ID: <Z-a4meHAy-t58bcE@kspp>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
@@ -68,43 +68,40 @@ accordingly.
 
 So, with these changes, fix the following warning:
 
-drivers/gpu/drm/nouveau/nvif/outp.c:199:45: warning: structure containing a flexible array member is not at the end of another structure [-Wflex-array-member-not-at-end]
+drivers/gpu/drm/nouveau/nvif/conn.c:34:38: warning: structure containing a flexible array member is not at the end of another structure [-Wflex-array-member-not-at-end]
 
 Signed-off-by: Gustavo A. R. Silva <gustavoars@kernel.org>
 ---
- drivers/gpu/drm/nouveau/nvif/outp.c | 16 +++++++---------
- 1 file changed, 7 insertions(+), 9 deletions(-)
+ drivers/gpu/drm/nouveau/nvif/conn.c | 14 +++++++-------
+ 1 file changed, 7 insertions(+), 7 deletions(-)
 
-diff --git a/drivers/gpu/drm/nouveau/nvif/outp.c b/drivers/gpu/drm/nouveau/nvif/outp.c
-index 6daeb7f0b09b..403cf16d5e84 100644
---- a/drivers/gpu/drm/nouveau/nvif/outp.c
-+++ b/drivers/gpu/drm/nouveau/nvif/outp.c
-@@ -195,20 +195,18 @@ nvif_outp_dp_aux_pwr(struct nvif_outp *outp, bool enable)
- int
- nvif_outp_hda_eld(struct nvif_outp *outp, int head, void *data, u32 size)
+diff --git a/drivers/gpu/drm/nouveau/nvif/conn.c b/drivers/gpu/drm/nouveau/nvif/conn.c
+index 9ee18cb99264..5a1a83c62a2a 100644
+--- a/drivers/gpu/drm/nouveau/nvif/conn.c
++++ b/drivers/gpu/drm/nouveau/nvif/conn.c
+@@ -30,17 +30,17 @@ int
+ nvif_conn_event_ctor(struct nvif_conn *conn, const char *name, nvif_event_func func, u8 types,
+ 		     struct nvif_event *event)
  {
 -	struct {
--		struct nvif_outp_hda_eld_v0 mthd;
--		u8 data[128];
+-		struct nvif_event_v0 base;
+-		struct nvif_conn_event_v0 conn;
 -	} args;
-+	DEFINE_RAW_FLEX(struct nvif_outp_hda_eld_v0, mthd, data, 128);
++	DEFINE_RAW_FLEX(struct nvif_event_v0, args, data,
++			sizeof(struct nvif_conn_event_v0));
++	struct nvif_conn_event_v0 *args_conn =
++				(struct nvif_conn_event_v0 *)args->data;
  	int ret;
  
--	if (WARN_ON(size > ARRAY_SIZE(args.data)))
-+	if (WARN_ON(size > 128))
- 		return -EINVAL;
+-	args.conn.version = 0;
+-	args.conn.types = types;
++	args_conn->version = 0;
++	args_conn->types = types;
  
--	args.mthd.version = 0;
--	args.mthd.head = head;
-+	mthd->version = 0;
-+	mthd->head = head;
- 
--	memcpy(args.data, data, size);
--	ret = nvif_mthd(&outp->object, NVIF_OUTP_V0_HDA_ELD, &args, sizeof(args.mthd) + size);
-+	memcpy(mthd->data, data, size);
-+	ret = nvif_mthd(&outp->object, NVIF_OUTP_V0_HDA_ELD, mthd,
-+			__struct_size(mthd) + size);
- 	NVIF_ERRON(ret, &outp->object, "[HDA_ELD head:%d size:%d]", head, size);
+ 	ret = nvif_event_ctor_(&conn->object, name ?: "nvifConnHpd", nvif_conn_id(conn),
+-			       func, true, &args.base, sizeof(args), false, event);
++			       func, true, args, __struct_size(args), false, event);
+ 	NVIF_DEBUG(&conn->object, "[NEW EVENT:HPD types:%02x]", types);
  	return ret;
  }
 -- 
