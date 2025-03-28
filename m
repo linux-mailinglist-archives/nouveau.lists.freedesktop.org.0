@@ -2,54 +2,53 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id BFF96A748FC
-	for <lists+nouveau@lfdr.de>; Fri, 28 Mar 2025 12:09:26 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id AC88DA7497A
+	for <lists+nouveau@lfdr.de>; Fri, 28 Mar 2025 12:48:47 +0100 (CET)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 4876510E9DF;
-	Fri, 28 Mar 2025 11:09:24 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id BA1E410E1AC;
+	Fri, 28 Mar 2025 11:48:45 +0000 (UTC)
 Authentication-Results: gabe.freedesktop.org;
-	dkim=pass (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="hBPDLDfW";
+	dkim=pass (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="oDeBYnut";
 	dkim-atps=neutral
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from nyc.source.kernel.org (nyc.source.kernel.org [147.75.193.91])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 35F2A10E0D0;
- Fri, 28 Mar 2025 11:09:22 +0000 (UTC)
+Received: from dfw.source.kernel.org (dfw.source.kernel.org [139.178.84.217])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id C54D610E1AC;
+ Fri, 28 Mar 2025 11:48:41 +0000 (UTC)
 Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by nyc.source.kernel.org (Postfix) with ESMTP id 88525A41823;
- Fri, 28 Mar 2025 11:03:52 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 803BCC4CEE4;
- Fri, 28 Mar 2025 11:09:16 +0000 (UTC)
+ by dfw.source.kernel.org (Postfix) with ESMTP id 491C65C57E2;
+ Fri, 28 Mar 2025 11:46:24 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 88576C4CEE4;
+ Fri, 28 Mar 2025 11:48:39 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1743160158;
- bh=jpAvNwxAGa4avnNQMP1myH7Occ8e2O5ooHf8+rmEEYc=;
+ s=k20201202; t=1743162521;
+ bh=ubfo+6G4HyjsKC9Qt3QnXYGYKpuzAJVzYi8an+53eRM=;
  h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
- b=hBPDLDfWH9ZBkNmyNPvmhHLWMFEsznSTNfsn9ddSbUHu3K43yB9/zEdWvQCpccBVH
- HJaw1deWiYcGUWei1w4gT6ca6gyvwFV6v2wCcsaMqdgh2dQUeDdlyOt0g3p+r10XdO
- ET7WTCpcHnuvh3vi9Z+fQb09OiZ1dz1v1ZmfiQN2miPsRHnqOhTe9KYsTY6TVvtxvJ
- fFiLw2MUxe/CBmqQpndJiMW/9LH68vH+bcsq6mmy8MjpqwaQeSYfPLov0a7qungrE2
- em7n5UD0IxmKIbxzoDvpdfpyz0Q3riDhRwHn1Mnz7WvWY6a91ajc7kD89zPzmagDy5
- TzqFBq5SkN8ZA==
-Date: Fri, 28 Mar 2025 12:09:13 +0100
+ b=oDeBYnutRbhSlImrMHaUNapXSWsPH8Ker34IgZ//2QTy1X2XnO4VIjic/vsgri0u4
+ lgdtNIWuS1m6mzwD0NByNenm0aBtPV7oTgIpI3wKXvcwOl7e2T5D26P1xdKk3YCQK2
+ B14D8DZOrDEEjOhlvvsUbElScE+3Ke6IgtGIcQl55vfj2bIL3mn92W76c3JRUXYzn7
+ B+xS71+Kzxo0t4wtjXZsJnbZeYICpX8pb3LB+gx5cxBUKCdYOpslF7ZBSBrE3PNYLx
+ JdnN4I8ayuN8NsXLL0iyfJel6AuAJZjr7IHhXR7YYfr+wh8m5M2RA3pI8RxDCXcrHL
+ wnj5nXv1MaRzA==
+Date: Fri, 28 Mar 2025 12:48:36 +0100
 From: Danilo Krummrich <dakr@kernel.org>
 To: M Henning <mhenning@darkrefraction.com>
 Cc: Karol Herbst <kherbst@redhat.com>, Lyude Paul <lyude@redhat.com>,
- bskeggs@nvidia.com, jhubbard@nvidia.com,
  Faith Ekstrand <faith.ekstrand@collabora.com>,
  dri-devel@lists.freedesktop.org, nouveau@lists.freedesktop.org
-Subject: Re: [PATCH 1/2] drm/nouveau: Add DRM_IOCTL_NOUVEAU_GET_ZCULL_INFO
-Message-ID: <Z-aDWWUTN1MBI_wl@pollux>
+Subject: Re: [PATCH 2/2] drm/nouveau: DRM_NOUVEAU_SET_ZCULL_CTXSW_BUFFER
+Message-ID: <Z-aMlNW2-MvjETXV@pollux>
 References: <20250312213746.228042-1-mhenning@darkrefraction.com>
- <20250312213746.228042-2-mhenning@darkrefraction.com>
- <Z9xb5SABWcwYnV-x@pollux>
- <CAAgWFh2dHZs2D7R4ejY9sNQ+QCtLQeGGS2PNtcsm_MPeV3edLw@mail.gmail.com>
- <Z-VX3TJPI6Tgin2G@cassiopeiae>
- <CAAgWFh3c=qE+c8Q04W2NXpBLBeXC12qTKLNmZeJA65m+dTMG8Q@mail.gmail.com>
+ <20250312213746.228042-3-mhenning@darkrefraction.com>
+ <Z9xfoS89yimS1Sb3@pollux>
+ <CAAgWFh2RtCwaKNinX9X4BjwNiaBj5BF_ypzbqoqV4LJgN4cPvg@mail.gmail.com>
+ <Z-VZlIc3E8ZQQmXa@cassiopeiae>
+ <CAAgWFh2F-MH_U1V6SY_Z3nWz0_meyvAcWjfUiEoXzpW697oi7w@mail.gmail.com>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=utf-8
 Content-Disposition: inline
 Content-Transfer-Encoding: 8bit
-In-Reply-To: <CAAgWFh3c=qE+c8Q04W2NXpBLBeXC12qTKLNmZeJA65m+dTMG8Q@mail.gmail.com>
+In-Reply-To: <CAAgWFh2F-MH_U1V6SY_Z3nWz0_meyvAcWjfUiEoXzpW697oi7w@mail.gmail.com>
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -64,61 +63,81 @@ List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-(CC: Ben, John)
-
-On Thu, Mar 27, 2025 at 02:03:21PM -0400, M Henning wrote:
-> On Thu, Mar 27, 2025 at 9:51 AM Danilo Krummrich <dakr@kernel.org> wrote:
+On Thu, Mar 27, 2025 at 03:01:54PM -0400, M Henning wrote:
+> On Thu, Mar 27, 2025 at 9:58 AM Danilo Krummrich <dakr@kernel.org> wrote:
 > >
-> > On Fri, Mar 21, 2025 at 06:06:34PM -0400, M Henning wrote:
-> > > On Thu, Mar 20, 2025 at 2:18 PM Danilo Krummrich <dakr@kernel.org> wrote:
-> > > > On Wed, Mar 12, 2025 at 05:36:14PM -0400, Mel Henning wrote:
-> > > > > +     __u32 width_align_pixels;
-> > > > > +     __u32 height_align_pixels;
-> > > > > +     __u32 pixel_squares_by_aliquots;
-> > > > > +     __u32 aliquot_total;
-> > > > > +     __u32 zcull_region_byte_multiplier;
-> > > > > +     __u32 zcull_region_header_size;
-> > > > > +     __u32 zcull_subregion_header_size;
-> > > > > +     __u32 subregion_count;
-> > > > > +     __u32 subregion_width_align_pixels;
-> > > > > +     __u32 subregion_height_align_pixels;
-> > > > > +
-> > > > > +     __u32 ctxsw_size;
-> > > > > +     __u32 ctxsw_align;
-> > > > > +};
-> > > >
-> > > > What if this ever changes between hardware revisions or firmware versions?
+> > On Fri, Mar 21, 2025 at 07:00:57PM -0400, M Henning wrote:
+> > > This is a pointer in the gpu's virtual address space. It must be
+> > > aligned according to ctxsw_align and be at least ctxsw_size bytes
+> > > (where those values come from the nouveau_abi16_ioctl_get_zcull_info
+> > > structure). I'll change the description to say that much.
 > > >
-> > > There was some previous discussion of that here:
-> > > https://gitlab.freedesktop.org/mesa/mesa/-/issues/12596#note_2796853
-> > >
-> > > From what I can tell, this structure hasn't really changed since
-> > > FERMI_C (circa 2011), so I'm not too worried about it changing on us
-> > > too quickly. When it does change, we have the option of appending more
-> > > members to this struct in the usual way, or if the change is more
-> > > fundamental we can return an error from this ioctl and add a new
-> > > interface. Userspace needs to handle an error from this ioctl
-> > > gracefully anyway since whether it works or not depends on the gpu
-> > > generation and what firmware is loaded right now.
+> > > Yes, this is GEM-backed. I'm actually not entirely sure what the
+> > > requirements are here, since this part is reverse-engineered. I think
+> > > NOUVEAU_GEM_DOMAIN_VRAM and NOUVEAU_GEM_DOMAIN_GART are both okay. The
+> > > proprietary driver allocates this buffer using
+> > > NV_ESC_RM_VID_HEAP_CONTROL and sets attr = NVOS32_ATTR_LOCATION_ANY |
+> > > NVOS32_ATTR_PAGE_SIZE_BIG | NVOS32_ATTR_PHYSICALITY_CONTIGUOUS, attr2
+> > > = NVOS32_ATTR2_GPU_CACHEABLE_YES | NVOS32_ATTR2_ZBC_PREFER_NO_ZBC.
 > >
-> > We could also define it as
+> > (Please do not top post.)
 > >
-> >         struct drm_nouveau_get_zcull_info {
-> >                 __u32 version;
-> >                 __u32 _pad;
-> >
-> >                 union {
-> >                         struct drm_nouveau_get_zcull_info_v1 info;
-> >                 }
-> >         }
-> >
-> > just to be safe.
+> > What I mean is how do you map the backing GEM into the GPU's virtual address
+> > space? Since it's bound to a channel, I assume that it must be ensured it's
+> > properly mapped when work is pushed to the channel. Is it mapped through
+> > VM_BIND?
 > 
-> We can do that, although I don't see any other drm drivers using a
-> similar pattern anywhere.
+> Yes. The userspace code for this is here:
+> https://gitlab.freedesktop.org/mesa/mesa/-/merge_requests/33861/diffs?commit_id=0c4baab863730f9fc8b417834ffcbb400f11d617
+> It calls into the usual function for driver internal allocations
+> (nvkmd_dev_alloc_mem) which calls VM_BIND internally.
 
-I think it's a bit cleaner than adding new members, leave existing ones unset or
-add a new IOCTL in the worst case.
+BOs mapped through VM_BIND are prone to eviction, is this a problem here, or is
+it fine if it is only ensured that this mapping is valid for the duration of
+subsequent EXEC jobs?
 
-Maybe the NVIDIA folks can give us some hint on whether this is expected to
-change at some point?
+Does the mapping need to be valid when DRM_NOUVEAU_SET_ZCULL_CTXSW_BUFFER is
+called? If so, how is this ensured?
+
+Can DRM_NOUVEAU_SET_ZCULL_CTXSW_BUFFER be called in between multiple
+DRM_NOUVEAU_EXEC calls?
+
+Does it maybe need an async mode, such as EXEC and VM_BIND? (To me it doesn't
+seem to be the case, but those questions still need an answer.)
+
+I also think we should document those things.
+
+> I don't understand: why is this line of questioning important?
+
+By sending those patches you ask me as the maintainer of the project to take
+resposibility of your changes. In this case it even goes further. In fact, you
+ask me to take resposibility of a new interface, which, since it is a uAPI, can
+*never* be removed in the future after being released.
+
+It is part of my job to act responsibly, which includes understanding what the
+interface does, how it is intended to be used, whether it is sufficient for its
+purpose or if it has any flaws.
+
+> 
+> > >
+> > > On Thu, Mar 20, 2025 at 2:34 PM Danilo Krummrich <dakr@kernel.org> wrote:
+> > > >
+> > > > On Wed, Mar 12, 2025 at 05:36:15PM -0400, Mel Henning wrote:
+> > > > > diff --git a/include/uapi/drm/nouveau_drm.h b/include/uapi/drm/nouveau_drm.h
+> > > >
+> > > > Same here, please split the uAPI change in a separate commit.
+> > > >
+> > > > > index 33361784eb4e..e9638f4dd7e6 100644
+> > > > > --- a/include/uapi/drm/nouveau_drm.h
+> > > > > +++ b/include/uapi/drm/nouveau_drm.h
+> > > > > @@ -448,6 +448,20 @@ struct drm_nouveau_get_zcull_info {
+> > > > >       __u32 ctxsw_align;
+> > > > >  };
+> > > > >
+> > > > > +struct drm_nouveau_set_zcull_ctxsw_buffer {
+> > > > > +     /**
+> > > > > +      * @ptr: The virtual address for the buffer, or null to bind nothing
+> > > > > +      */
+> > > > > +     __u64 addr;
+> > > >
+> > > > What is this buffer? Is this a GEM object backed buffer? How is it mapped?
