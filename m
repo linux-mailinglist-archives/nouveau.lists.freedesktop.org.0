@@ -2,78 +2,54 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id 7A3E7A73E4B
-	for <lists+nouveau@lfdr.de>; Thu, 27 Mar 2025 20:02:26 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 0D8DBA748CD
+	for <lists+nouveau@lfdr.de>; Fri, 28 Mar 2025 11:59:10 +0100 (CET)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 4F6B510E93E;
-	Thu, 27 Mar 2025 19:02:24 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 9E23310E0F3;
+	Fri, 28 Mar 2025 10:59:08 +0000 (UTC)
 Authentication-Results: gabe.freedesktop.org;
-	dkim=pass (2048-bit key; unprotected) header.d=darkrefraction-com.20230601.gappssmtp.com header.i=@darkrefraction-com.20230601.gappssmtp.com header.b="0TwIh1fC";
+	dkim=pass (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="b9TDsGYn";
 	dkim-atps=neutral
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from mail-ej1-f53.google.com (mail-ej1-f53.google.com
- [209.85.218.53])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 0F30C10E17B
- for <nouveau@lists.freedesktop.org>; Thu, 27 Mar 2025 19:02:22 +0000 (UTC)
-Received: by mail-ej1-f53.google.com with SMTP id
- a640c23a62f3a-ac298c8fa50so228510566b.1
- for <nouveau@lists.freedesktop.org>; Thu, 27 Mar 2025 12:02:22 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=darkrefraction-com.20230601.gappssmtp.com; s=20230601; t=1743102141;
- x=1743706941; darn=lists.freedesktop.org; 
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=t01uOc+dKD9m8pHt78XkgjVSzMgtIiWN6r92eFZcqFI=;
- b=0TwIh1fCHJuRBB4fH06mi3y6AV6toj1V4UKVdwAcOdRnL1EyWLy1fnSlp4YdA0I1F1
- eFGd8G7graaj/lvGvIF2d0fSys86KGtl8+gvVaJLGgof7meSVHUstLsOHO7e0+S4c/JJ
- EqE4TLjcT6B1bqumHgAyYdDK7yq22yPrbUZDT0FhaeZA980Xmc+ixwSMllfjApR/PVZ1
- /PU2xDr7XRA887su9CjvAjOvY6tPh4IcMvlbvPpDfVuUmRg1pI+9hnZk9+5zL3fmozf1
- Os37lzjJS/gjGuGt9bcG/PwX+QIqyYjUAWxLHSnl6niyNbpYr9PBMM9h4Z5DHpWBRWAN
- AsKg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1743102141; x=1743706941;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=t01uOc+dKD9m8pHt78XkgjVSzMgtIiWN6r92eFZcqFI=;
- b=kkGKY688FY61uHW++n733vTGV66IYFyBECMFcG6D/RNOM3KaoEyY4ZD+PW4yhMBWgL
- CJfvHb3U4bTMSCfVRd7HGE0nStPBf9Vgps+HZBKJwLgdlbb93ZdrDe/sjSosnTuf4fcr
- A/dRld6ewdsHxOndpxFKP6PYUCtxYd/OPXVrujK1kq1xxgaA2gZIMj6aXtujCL9aHVBb
- OgTbGkzmhVC5RB9d7Fsz7RZABgdmqIdsAWD0PvxYO3vEMPvzNmQxED5KU7lBbJCrT0zs
- Cf83VSv+NJ3/d5BMHgN75cLkjllbXtHe411DEqNIiejI6zjmgnvrriXWjLvXkU/NygKw
- hkmA==
-X-Forwarded-Encrypted: i=1;
- AJvYcCX53nGwwaLlFEnXOxymTbW8NDQp2yxUkqpSN/t0CjmzuEErTPUYfd4ofAYTYdoFczz5UerwZc8S@lists.freedesktop.org
-X-Gm-Message-State: AOJu0YwLaML9djQxv5EOtELnfq0wT5aRvfnZlaTdyz3EwUG4mIneaePN
- NFrVbEDLqUrfiTSrG1SV81TVPsC3aYo/EFJmbBSC+bopAH3/PmTqN03w97JSajuATcu1MpzWThr
- 1J2TfJFm3NdReMT44/KA37L4Si6i+9xHOQpPjRw==
-X-Gm-Gg: ASbGnculc3o8QKbWSpHScjNQN1nNl1YE9DTECv49JdwpETZYG4vgfbO9IB1H1u56oqj
- GpRvLE+LcPLUPUaK/vabjRBBXxmXRKLbmk0J9KsIz2LGBlKY32Ln2PPmSb/HFHKUsWOVoqn3Va1
- KNlZd3q1wU46RN+2lgirWlOQvnZngcCA/Fhg3Oe5bLFUIguTSbcILPu+HwwA==
-X-Google-Smtp-Source: AGHT+IFdAriu33TeMlfQtOemQZ156y3VpXNsrgytu4hyNzGPMxzNiqF61n78Yv6Jx/sursoj3lVdJ7K5H65m6DZ9YSU=
-X-Received: by 2002:a17:907:9410:b0:ac2:cf0b:b806 with SMTP id
- a640c23a62f3a-ac6fb1bdeb6mr368891266b.56.1743102140953; Thu, 27 Mar 2025
- 12:02:20 -0700 (PDT)
+Received: from nyc.source.kernel.org (nyc.source.kernel.org [147.75.193.91])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id D81B010E0F3;
+ Fri, 28 Mar 2025 10:59:07 +0000 (UTC)
+Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
+ by nyc.source.kernel.org (Postfix) with ESMTP id 2088FA416E8;
+ Fri, 28 Mar 2025 10:53:37 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 0744CC4CEEA;
+ Fri, 28 Mar 2025 10:59:02 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+ s=k20201202; t=1743159545;
+ bh=M80BwyeI/5FhFXlfX1oHfEYhuopM64H98lTBJqDtmUU=;
+ h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
+ b=b9TDsGYnRmR2NTB+cMFv3V7o4VGVVAeWJz4o/XS8VEzMYhfz1f/tpnAbCoB4D/WLH
+ K+rWsdPhTZplESNX/zBQwfJQj4Izc47Z130tirzVE1hXbyuhL1q39lSBC6rAmMXyTX
+ Kgvf9GvWT7Qbi+XybKYWg3AHJkQ1gJJRam2FHvOA6xBwdwBSwwu0fVyjEizpEaHBto
+ up7QGzu7JRaSNPdOK6KjJ7Bl8mcx4aE6zenTXKAHB9m+I3WdtCDoKRj50PzPFNC0ot
+ X4qtrSjQ8uTwT1J70iilAWU9mG7V/oZT5MRUC3dLroa7uxpundunvmkvKIsD/sFzSB
+ 3dnDRGVUgrkVQ==
+Date: Fri, 28 Mar 2025 11:59:00 +0100
+From: Danilo Krummrich <dakr@kernel.org>
+To: Chris Bainbridge <chris.bainbridge@gmail.com>
+Cc: Christian =?iso-8859-1?Q?K=F6nig?= <christian.koenig@amd.com>,
+ nouveau@lists.freedesktop.org, maarten.lankhorst@linux.intel.com,
+ mripard@kernel.org, tzimmermann@suse.de, airlied@gmail.com,
+ simona@ffwll.ch, lyude@redhat.com, sumit.semwal@linaro.org,
+ dri-devel@lists.freedesktop.org, linux-kernel@vger.kernel.org
+Subject: Re: [PATCH v3] drm/nouveau: prime: fix ttm_bo_delayed_delete oops
+Message-ID: <Z-aA9LBCtdCK4YYr@pollux>
+References: <Z9GHj-edWJmyzpdY@debian.local>
+ <00e4d9c4-ecfc-4784-b603-12db04cda806@amd.com>
+ <Z9q-ggKKgTsvW-Rz@debian.local> <Z9rA0G2urlVHFOSx@cassiopeiae>
+ <1f4a534f-8883-4793-b191-60c2773f6217@amd.com>
+ <Z9rSTkXlub-JZAz0@cassiopeiae> <Z-P4epVK8k7tFZ7C@debian.local>
 MIME-Version: 1.0
-References: <20250312213746.228042-1-mhenning@darkrefraction.com>
- <20250312213746.228042-3-mhenning@darkrefraction.com>
- <Z9xfoS89yimS1Sb3@pollux>
- <CAAgWFh2RtCwaKNinX9X4BjwNiaBj5BF_ypzbqoqV4LJgN4cPvg@mail.gmail.com>
- <Z-VZlIc3E8ZQQmXa@cassiopeiae>
-In-Reply-To: <Z-VZlIc3E8ZQQmXa@cassiopeiae>
-From: M Henning <mhenning@darkrefraction.com>
-Date: Thu, 27 Mar 2025 15:01:54 -0400
-X-Gm-Features: AQ5f1JrCSLT7wmMfX_bBZIXEHu0KcL2uFmLp74llm2T31nXsEw2JHxFsuNCAqvM
-Message-ID: <CAAgWFh2F-MH_U1V6SY_Z3nWz0_meyvAcWjfUiEoXzpW697oi7w@mail.gmail.com>
-Subject: Re: [PATCH 2/2] drm/nouveau: DRM_NOUVEAU_SET_ZCULL_CTXSW_BUFFER
-To: Danilo Krummrich <dakr@kernel.org>
-Cc: Karol Herbst <kherbst@redhat.com>, Lyude Paul <lyude@redhat.com>, 
- Faith Ekstrand <faith.ekstrand@collabora.com>, dri-devel@lists.freedesktop.org,
- nouveau@lists.freedesktop.org
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+Content-Type: text/plain; charset=iso-8859-1
+Content-Disposition: inline
+Content-Transfer-Encoding: 8bit
+In-Reply-To: <Z-P4epVK8k7tFZ7C@debian.local>
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -88,99 +64,74 @@ List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-On Thu, Mar 27, 2025 at 9:58=E2=80=AFAM Danilo Krummrich <dakr@kernel.org> =
-wrote:
->
-> On Fri, Mar 21, 2025 at 07:00:57PM -0400, M Henning wrote:
-> > This is a pointer in the gpu's virtual address space. It must be
-> > aligned according to ctxsw_align and be at least ctxsw_size bytes
-> > (where those values come from the nouveau_abi16_ioctl_get_zcull_info
-> > structure). I'll change the description to say that much.
-> >
-> > Yes, this is GEM-backed. I'm actually not entirely sure what the
-> > requirements are here, since this part is reverse-engineered. I think
-> > NOUVEAU_GEM_DOMAIN_VRAM and NOUVEAU_GEM_DOMAIN_GART are both okay. The
-> > proprietary driver allocates this buffer using
-> > NV_ESC_RM_VID_HEAP_CONTROL and sets attr =3D NVOS32_ATTR_LOCATION_ANY |
-> > NVOS32_ATTR_PAGE_SIZE_BIG | NVOS32_ATTR_PHYSICALITY_CONTIGUOUS, attr2
-> > =3D NVOS32_ATTR2_GPU_CACHEABLE_YES | NVOS32_ATTR2_ZBC_PREFER_NO_ZBC.
->
-> (Please do not top post.)
->
-> What I mean is how do you map the backing GEM into the GPU's virtual addr=
-ess
-> space? Since it's bound to a channel, I assume that it must be ensured it=
-'s
-> properly mapped when work is pushed to the channel. Is it mapped through
-> VM_BIND?
+On Wed, Mar 26, 2025 at 12:52:10PM +0000, Chris Bainbridge wrote:
+> Fix an oops in ttm_bo_delayed_delete which results from dererencing a
+> dangling pointer:
+> 
+> Oops: general protection fault, probably for non-canonical address 0x6b6b6b6b6b6b6b7b: 0000 [#1] PREEMPT SMP
+> CPU: 4 UID: 0 PID: 1082 Comm: kworker/u65:2 Not tainted 6.14.0-rc4-00267-g505460b44513-dirty #216
+> Hardware name: LENOVO 82N6/LNVNB161216, BIOS GKCN65WW 01/16/2024
+> Workqueue: ttm ttm_bo_delayed_delete [ttm]
+> RIP: 0010:dma_resv_iter_first_unlocked+0x55/0x290
+> Code: 31 f6 48 c7 c7 00 2b fa aa e8 97 bd 52 ff e8 a2 c1 53 00 5a 85 c0 74 48 e9 88 01 00 00 4c 89 63 20 4d 85 e4 0f 84 30 01 00 00 <41> 8b 44 24 10 c6 43 2c 01 48 89 df 89 43 28 e8 97 fd ff ff 4c 8b
+> RSP: 0018:ffffbf9383473d60 EFLAGS: 00010202
+> RAX: 0000000000000001 RBX: ffffbf9383473d88 RCX: 0000000000000000
+> RDX: 0000000000000000 RSI: 0000000000000000 RDI: 0000000000000000
+> RBP: ffffbf9383473d78 R08: 0000000000000000 R09: 0000000000000000
+> R10: 0000000000000000 R11: 0000000000000000 R12: 6b6b6b6b6b6b6b6b
+> R13: ffffa003bbf78580 R14: ffffa003a6728040 R15: 00000000000383cc
+> FS:  0000000000000000(0000) GS:ffffa00991c00000(0000) knlGS:0000000000000000
+> CS:  0010 DS: 0000 ES: 0000 CR0: 0000000080050033
+> CR2: 0000758348024dd0 CR3: 000000012c259000 CR4: 0000000000f50ef0
+> PKRU: 55555554
+> Call Trace:
+>  <TASK>
+>  ? __die_body.cold+0x19/0x26
+>  ? die_addr+0x3d/0x70
+>  ? exc_general_protection+0x159/0x460
+>  ? asm_exc_general_protection+0x27/0x30
+>  ? dma_resv_iter_first_unlocked+0x55/0x290
+>  dma_resv_wait_timeout+0x56/0x100
+>  ttm_bo_delayed_delete+0x69/0xb0 [ttm]
+>  process_one_work+0x217/0x5c0
+>  worker_thread+0x1c8/0x3d0
+>  ? apply_wqattrs_cleanup.part.0+0xc0/0xc0
+>  kthread+0x10b/0x240
+>  ? kthreads_online_cpu+0x140/0x140
+>  ret_from_fork+0x40/0x70
+>  ? kthreads_online_cpu+0x140/0x140
+>  ret_from_fork_asm+0x11/0x20
+>  </TASK>
+> 
+> The cause of this is:
+> 
+> - drm_prime_gem_destroy calls dma_buf_put(dma_buf) which releases the
+>   reference to the shared dma_buf. The reference count is 0, so the
+>   dma_buf is destroyed, which in turn decrements the corresponding
+>   amdgpu_bo reference count to 0, and the amdgpu_bo is destroyed -
+>   calling drm_gem_object_release then dma_resv_fini (which destroys the
+>   reservation object), then finally freeing the amdgpu_bo.
+> 
+> - nouveau_bo obj->bo.base.resv is now a dangling pointer to the memory
+>   formerly allocated to the amdgpu_bo.
+> 
+> - nouveau_gem_object_del calls ttm_bo_put(&nvbo->bo) which calls
+>   ttm_bo_release, which schedules ttm_bo_delayed_delete.
+> 
+> - ttm_bo_delayed_delete runs and dereferences the dangling resv pointer,
+>   resulting in a general protection fault.
+> 
+> Fix this by moving the drm_prime_gem_destroy call from
+> nouveau_gem_object_del to nouveau_bo_del_ttm. This ensures that it will
+> be run after ttm_bo_delayed_delete.
+> 
+> Signed-off-by: Chris Bainbridge <chris.bainbridge@gmail.com>
+> Suggested-by: Christian König <christian.koenig@amd.com>
+> Fixes: 22b33e8ed0e3 ("22b33e8ed0e3nouveau: add PRIME support")
+> Closes: https://gitlab.freedesktop.org/drm/amd/-/issues/3937
+> Cc: <Stable@vger.kernel.org>
 
-Yes. The userspace code for this is here:
-https://gitlab.freedesktop.org/mesa/mesa/-/merge_requests/33861/diffs?commi=
-t_id=3D0c4baab863730f9fc8b417834ffcbb400f11d617
-It calls into the usual function for driver internal allocations
-(nvkmd_dev_alloc_mem) which calls VM_BIND internally.
+Applied to drm-misc-fixes, thanks!
 
-I don't understand: why is this line of questioning important?
-
-> >
-> > On Thu, Mar 20, 2025 at 2:34=E2=80=AFPM Danilo Krummrich <dakr@kernel.o=
-rg> wrote:
-> > >
-> > > On Wed, Mar 12, 2025 at 05:36:15PM -0400, Mel Henning wrote:
-> > > > diff --git a/include/uapi/drm/nouveau_drm.h b/include/uapi/drm/nouv=
-eau_drm.h
-> > >
-> > > Same here, please split the uAPI change in a separate commit.
-> > >
-> > > > index 33361784eb4e..e9638f4dd7e6 100644
-> > > > --- a/include/uapi/drm/nouveau_drm.h
-> > > > +++ b/include/uapi/drm/nouveau_drm.h
-> > > > @@ -448,6 +448,20 @@ struct drm_nouveau_get_zcull_info {
-> > > >       __u32 ctxsw_align;
-> > > >  };
-> > > >
-> > > > +struct drm_nouveau_set_zcull_ctxsw_buffer {
-> > > > +     /**
-> > > > +      * @ptr: The virtual address for the buffer, or null to bind =
-nothing
-> > > > +      */
-> > > > +     __u64 addr;
-> > >
-> > > What is this buffer? Is this a GEM object backed buffer? How is it ma=
-pped?
-> > >
-> > > > +
-> > > > +     /**
-> > > > +      * @channel: the channel to set the buffer on
-> > > > +      */
-> > > > +     __u32 channel;
-> > > > +
-> > > > +     __u32 pad;
-> > > > +};
-> > > > +
-> > > >  #define DRM_NOUVEAU_GETPARAM           0x00
-> > > >  #define DRM_NOUVEAU_SETPARAM           0x01 /* deprecated */
-> > > >  #define DRM_NOUVEAU_CHANNEL_ALLOC      0x02
-> > > > @@ -462,6 +476,7 @@ struct drm_nouveau_get_zcull_info {
-> > > >  #define DRM_NOUVEAU_VM_BIND            0x11
-> > > >  #define DRM_NOUVEAU_EXEC               0x12
-> > > >  #define DRM_NOUVEAU_GET_ZCULL_INFO     0x13
-> > > > +#define DRM_NOUVEAU_SET_ZCULL_CTXSW_BUFFER 0x14
-> > > >  #define DRM_NOUVEAU_GEM_NEW            0x40
-> > > >  #define DRM_NOUVEAU_GEM_PUSHBUF        0x41
-> > > >  #define DRM_NOUVEAU_GEM_CPU_PREP       0x42
-> > > > @@ -532,6 +547,7 @@ struct drm_nouveau_svm_bind {
-> > > >  #define DRM_IOCTL_NOUVEAU_EXEC               DRM_IOWR(DRM_COMMAND_=
-BASE + DRM_NOUVEAU_EXEC, struct drm_nouveau_exec)
-> > > >
-> > > >  #define DRM_IOCTL_NOUVEAU_GET_ZCULL_INFO     DRM_IOR (DRM_COMMAND_=
-BASE + DRM_NOUVEAU_GET_ZCULL_INFO, struct drm_nouveau_get_zcull_info)
-> > > > +#define DRM_IOCTL_NOUVEAU_SET_ZCULL_CTXSW_BUFFER  DRM_IOW (DRM_COM=
-MAND_BASE + DRM_NOUVEAU_SET_ZCULL_CTXSW_BUFFER, struct drm_nouveau_set_zcul=
-l_ctxsw_buffer)
-> > > >  #if defined(__cplusplus)
-> > > >  }
-> > > >  #endif
-> > > > --
-> > > > 2.48.1
-> > > >
+[ Fixed up the Fixes: tag, where the commit hash is repeated in the commit
+subject. ]
