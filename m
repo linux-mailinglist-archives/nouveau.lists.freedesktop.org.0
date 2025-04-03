@@ -2,48 +2,84 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id 4999DA7A824
-	for <lists+nouveau@lfdr.de>; Thu,  3 Apr 2025 18:45:37 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id C4EAFA7A8A5
+	for <lists+nouveau@lfdr.de>; Thu,  3 Apr 2025 19:35:10 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id CCFB710E283;
-	Thu,  3 Apr 2025 16:45:34 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 4BE2B10E256;
+	Thu,  3 Apr 2025 17:35:09 +0000 (UTC)
 Authentication-Results: gabe.freedesktop.org;
-	dkim=pass (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="uy68cCCL";
+	dkim=fail reason="signature verification failed" (2048-bit key; unprotected) header.d=embeddedor.com header.i=@embeddedor.com header.b="f8hniX71";
 	dkim-atps=neutral
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from tor.source.kernel.org (tor.source.kernel.org [172.105.4.254])
- by gabe.freedesktop.org (Postfix) with ESMTPS id BA97810E26F;
- Thu,  3 Apr 2025 16:45:24 +0000 (UTC)
-Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by tor.source.kernel.org (Postfix) with ESMTP id 6FE7461364;
- Thu,  3 Apr 2025 16:45:14 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 54625C4CEE3;
- Thu,  3 Apr 2025 16:45:20 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1743698721;
- bh=rAccSmKogNdZqOMCmUuI1Eux/x/3CMaAChmohtmbCd8=;
- h=Date:From:To:Cc:Subject:From;
- b=uy68cCCLzya5knEykk9QlaK/yc9DY2hkxl4f1N8xmkhCR6vNXbk59I2DbINpoz1hj
- z5fgcEWGV8X4zUH5TTnXdsWWHZIM3oVNl/XDnj6FUYUJOSTJc9bQ9FNpcM7BEfW3zL
- nctDcJnTqMKSIeHE7CEbFT8roJ+MHw/oAed09GVRhde48Xl3dVXE60pnJN/pTiS5cT
- rOj1wjPijICVs8ilEAZIZKtuiq+u0azA2GDDfWp9yflHnjFl4QUucTR+0dONGgsXPs
- Im/HnijfAz4lwO+20FakDpe+QTzE78JzEVLmBVX+wFTvWR+d+fFU/PEQi3sBDOsbmX
- b/iU1xCAb6kyQ==
-Date: Thu, 3 Apr 2025 10:45:18 -0600
-From: "Gustavo A. R. Silva" <gustavoars@kernel.org>
-To: Lyude Paul <lyude@redhat.com>, Danilo Krummrich <dakr@kernel.org>,
- David Airlie <airlied@gmail.com>, Simona Vetter <simona@ffwll.ch>
-Cc: dri-devel@lists.freedesktop.org, nouveau@lists.freedesktop.org,
- linux-kernel@vger.kernel.org,
- "Gustavo A. R. Silva" <gustavoars@kernel.org>,
- linux-hardening@vger.kernel.org
-Subject: [PATCH][next] drm/nouveau: chan: Avoid
- -Wflex-array-member-not-at-end warnings
-Message-ID: <Z-67Hm9uHEJs0RGw@kspp>
+Received: from omta038.useast.a.cloudfilter.net (unknown [44.202.169.37])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 5C76D10E2BE
+ for <nouveau@lists.freedesktop.org>; Thu,  3 Apr 2025 17:35:06 +0000 (UTC)
+Received: from eig-obgw-6008a.ext.cloudfilter.net ([10.0.30.227])
+ by cmsmtp with ESMTPS
+ id 02vOuutRdiuzS0OSwuu2zR; Thu, 03 Apr 2025 17:34:58 +0000
+Received: from gator4166.hostgator.com ([108.167.133.22]) by cmsmtp with ESMTPS
+ id 0OSuuzE8QTzuy0OSvubmcn; Thu, 03 Apr 2025 17:34:57 +0000
+X-Authority-Analysis: v=2.4 cv=B72/0vtM c=1 sm=1 tr=0 ts=67eec6c1
+ a=1YbLdUo/zbTtOZ3uB5T3HA==:117 a=B3fuDwYyW55wTQKIj88FGw==:17
+ a=IkcTkHD0fZMA:10 a=XR8D0OoHHMoA:10 a=7T7KSl7uo7wA:10
+ a=AwQk-W9g5lI6dlRaMUIA:9 a=QEXdDO2ut3YA:10 a=Xt_RvD8W3m28Mn_h3AK8:22
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
+ d=embeddedor.com; s=default; h=Content-Transfer-Encoding:Content-Type:
+ In-Reply-To:From:References:Cc:To:Subject:MIME-Version:Date:Message-ID:Sender
+ :Reply-To:Content-ID:Content-Description:Resent-Date:Resent-From:
+ Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:
+ List-Unsubscribe:List-Subscribe:List-Post:List-Owner:List-Archive;
+ bh=N+/sPqbGOxBMdM7Zey0dI8Kpexl+RXW3F/uu+lKz95U=; b=f8hniX71WgPZO1+E0lnTSk3xBQ
+ iLjc6NftmI9B7ejNFC9yV655NLm+rGZjHzJeAqSQGpl46kB9TAFV5ZpgwMPXhhtZrfnb7jQMxS0bj
+ saYdBslAnFmGXU/rU5upDh4WKckMmhCXzmrlfvZ40hv1VX4w9KOj4Ex8ZMfhi49fdZig9KoW+8Dwh
+ vo7OCycgb+DD2AiU86f/S/BmiuNM7sk2Dv2ZURuBguiT0wOE9eyd5/hM4egvm5yySw2byf80FhCJF
+ L+PgTNwjSgf28N8gtg+7oQWciHaB2kNO5pZ5O9XXLEeyR15kcjb3FWdp5/T3Upm5BOKeEIzoKGrK2
+ 9pxaiv1w==;
+Received: from [201.172.174.147] (port=55110 helo=[192.168.15.6])
+ by gator4166.hostgator.com with esmtpsa (TLS1.2) tls
+ TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256 (Exim 4.98.1)
+ (envelope-from <gustavo@embeddedor.com>) id 1u0OSu-00000000rpG-17It;
+ Thu, 03 Apr 2025 12:34:56 -0500
+Message-ID: <08f9d29f-9676-4c92-adfa-32368637f392@embeddedor.com>
+Date: Thu, 3 Apr 2025 11:34:50 -0600
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v2][next] drm/nouveau: disp: Avoid
+ -Wflex-array-member-not-at-end warning
+To: Danilo Krummrich <dakr@kernel.org>,
+ "Gustavo A. R. Silva" <gustavoars@kernel.org>
+Cc: Lyude Paul <lyude@redhat.com>, David Airlie <airlied@gmail.com>,
+ Simona Vetter <simona@ffwll.ch>, dri-devel@lists.freedesktop.org,
+ nouveau@lists.freedesktop.org, linux-kernel@vger.kernel.org,
+ linux-hardening@vger.kernel.org
+References: <Z-2zI55Qf88jTfNK@kspp> <Z-6xwS3qXIyxE05G@pollux>
+Content-Language: en-US
+From: "Gustavo A. R. Silva" <gustavo@embeddedor.com>
+In-Reply-To: <Z-6xwS3qXIyxE05G@pollux>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
+X-AntiAbuse: This header was added to track abuse,
+ please include it with any abuse report
+X-AntiAbuse: Primary Hostname - gator4166.hostgator.com
+X-AntiAbuse: Original Domain - lists.freedesktop.org
+X-AntiAbuse: Originator/Caller UID/GID - [47 12] / [47 12]
+X-AntiAbuse: Sender Address Domain - embeddedor.com
+X-BWhitelist: no
+X-Source-IP: 201.172.174.147
+X-Source-L: No
+X-Exim-ID: 1u0OSu-00000000rpG-17It
+X-Source: 
+X-Source-Args: 
+X-Source-Dir: 
+X-Source-Sender: ([192.168.15.6]) [201.172.174.147]:55110
+X-Source-Auth: gustavo@embeddedor.com
+X-Email-Count: 3
+X-Org: HG=hgshared;ORG=hostgator;
+X-Source-Cap: Z3V6aWRpbmU7Z3V6aWRpbmU7Z2F0b3I0MTY2Lmhvc3RnYXRvci5jb20=
+X-Local-Domain: yes
+X-CMAE-Envelope: MS4xfNc+dP4fabN/7gMEYTUmIeLtx24tB57VrxrMZ2d/hkVE+TcZUhIU3t0EvzDbMgBJsJaLJQwPgJi7H5Bt0cNY+i7RnzOVKm8CDv3wZRqrR0Pwvy5Dm2f1
+ F4XNbOzgWzUPia4BiyJKgAQ67qGrFdpTgbuSj+Vw4jsrTE1q8N7ZB3rBkhnbSK70jcczDZG2pQvBRVdbWNwSFsevheACdzWsC6Ts68f+f9kYj7HO+vWskglq
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -58,218 +94,11 @@ List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
--Wflex-array-member-not-at-end was introduced in GCC-14, and we are
-getting ready to enable it, globally.
 
-Use the `DEFINE_RAW_FLEX()` helper for a few on-stack definitions
-of a flexible structure where the size of the flexible-array member
-is known at compile-time, and refactor the rest of the code,
-accordingly.
+> Applied this one (as well as the svm and fence one) to drm-misc-next, thanks!
 
-So, with these changes, fix the following warnings:
+Awesome. :)
 
-drivers/gpu/drm/nouveau/nouveau_chan.c:274:37: warning: structure containing a flexible array member is not at the end of another structure [-Wflex-array-member-not-at-end]
-drivers/gpu/drm/nouveau/nouveau_chan.c:371:46: warning: structure containing a flexible array member is not at the end of another structure [-Wflex-array-member-not-at-end]
-drivers/gpu/drm/nouveau/nouveau_chan.c:524:42: warning: structure containing a flexible array member is not at the end of another structure [-Wflex-array-member-not-at-end]
-
-Signed-off-by: Gustavo A. R. Silva <gustavoars@kernel.org>
----
- drivers/gpu/drm/nouveau/nouveau_chan.c | 115 ++++++++++++-------------
- 1 file changed, 56 insertions(+), 59 deletions(-)
-
-diff --git a/drivers/gpu/drm/nouveau/nouveau_chan.c b/drivers/gpu/drm/nouveau/nouveau_chan.c
-index cd659b9fd1d9..a7e70517b7cd 100644
---- a/drivers/gpu/drm/nouveau/nouveau_chan.c
-+++ b/drivers/gpu/drm/nouveau/nouveau_chan.c
-@@ -270,10 +270,7 @@ nouveau_channel_ctor(struct nouveau_cli *cli, bool priv, u64 runm,
- 		{    NV03_CHANNEL_DMA     , 0 },
- 		{}
- 	};
--	struct {
--		struct nvif_chan_v0 chan;
--		char name[TASK_COMM_LEN+16];
--	} args;
-+	DEFINE_RAW_FLEX(struct nvif_chan_v0, args, name, TASK_COMM_LEN + 16);
- 	struct nvif_device *device = &cli->device;
- 	struct nouveau_channel *chan;
- 	const u64 plength = 0x10000;
-@@ -298,28 +295,28 @@ nouveau_channel_ctor(struct nouveau_cli *cli, bool priv, u64 runm,
- 		return ret;
- 
- 	/* create channel object */
--	args.chan.version = 0;
--	args.chan.namelen = sizeof(args.name);
--	args.chan.runlist = __ffs64(runm);
--	args.chan.runq = 0;
--	args.chan.priv = priv;
--	args.chan.devm = BIT(0);
-+	args->version = 0;
-+	args->namelen = __struct_size(args) - sizeof(*args);
-+	args->runlist = __ffs64(runm);
-+	args->runq = 0;
-+	args->priv = priv;
-+	args->devm = BIT(0);
- 	if (hosts[cid].oclass < NV50_CHANNEL_GPFIFO) {
--		args.chan.vmm = 0;
--		args.chan.ctxdma = nvif_handle(&chan->push.ctxdma);
--		args.chan.offset = chan->push.addr;
--		args.chan.length = 0;
-+		args->vmm = 0;
-+		args->ctxdma = nvif_handle(&chan->push.ctxdma);
-+		args->offset = chan->push.addr;
-+		args->length = 0;
- 	} else {
--		args.chan.vmm = nvif_handle(&chan->vmm->vmm.object);
-+		args->vmm = nvif_handle(&chan->vmm->vmm.object);
- 		if (hosts[cid].oclass < FERMI_CHANNEL_GPFIFO)
--			args.chan.ctxdma = nvif_handle(&chan->push.ctxdma);
-+			args->ctxdma = nvif_handle(&chan->push.ctxdma);
- 		else
--			args.chan.ctxdma = 0;
--		args.chan.offset = ioffset + chan->push.addr;
--		args.chan.length = ilength;
-+			args->ctxdma = 0;
-+		args->offset = ioffset + chan->push.addr;
-+		args->length = ilength;
- 	}
--	args.chan.huserd = 0;
--	args.chan.ouserd = 0;
-+	args->huserd = 0;
-+	args->ouserd = 0;
- 
- 	/* allocate userd */
- 	if (hosts[cid].oclass >= VOLTA_CHANNEL_GPFIFO_A) {
-@@ -329,27 +326,28 @@ nouveau_channel_ctor(struct nouveau_cli *cli, bool priv, u64 runm,
- 		if (ret)
- 			return ret;
- 
--		args.chan.huserd = nvif_handle(&chan->mem_userd.object);
--		args.chan.ouserd = 0;
-+		args->huserd = nvif_handle(&chan->mem_userd.object);
-+		args->ouserd = 0;
- 
- 		chan->userd = &chan->mem_userd.object;
- 	} else {
- 		chan->userd = &chan->user;
- 	}
- 
--	snprintf(args.name, sizeof(args.name), "%s[%d]", current->comm, task_pid_nr(current));
-+	snprintf(args->name, __struct_size(args) - sizeof(*args), "%s[%d]",
-+		 current->comm, task_pid_nr(current));
- 
- 	ret = nvif_object_ctor(&device->object, "abi16ChanUser", 0, hosts[cid].oclass,
--			       &args, sizeof(args), &chan->user);
-+			       args, __struct_size(args), &chan->user);
- 	if (ret) {
- 		nouveau_channel_del(pchan);
- 		return ret;
- 	}
- 
--	chan->runlist = args.chan.runlist;
--	chan->chid = args.chan.chid;
--	chan->inst = args.chan.inst;
--	chan->token = args.chan.token;
-+	chan->runlist = args->runlist;
-+	chan->chid = args->chid;
-+	chan->inst = args->inst;
-+	chan->token = args->token;
- 	return 0;
- }
- 
-@@ -367,17 +365,17 @@ nouveau_channel_init(struct nouveau_channel *chan, u32 vram, u32 gart)
- 		return ret;
- 
- 	if (chan->user.oclass >= FERMI_CHANNEL_GPFIFO) {
--		struct {
--			struct nvif_event_v0 base;
--			struct nvif_chan_event_v0 host;
--		} args;
-+		DEFINE_RAW_FLEX(struct nvif_event_v0, args, data,
-+				sizeof(struct nvif_chan_event_v0));
-+		struct nvif_chan_event_v0 *host =
-+				(struct nvif_chan_event_v0 *)args->data;
- 
--		args.host.version = 0;
--		args.host.type = NVIF_CHAN_EVENT_V0_KILLED;
-+		host->version = 0;
-+		host->type = NVIF_CHAN_EVENT_V0_KILLED;
- 
- 		ret = nvif_event_ctor(&chan->user, "abi16ChanKilled", chan->chid,
- 				      nouveau_channel_killed, false,
--				      &args.base, sizeof(args), &chan->kill);
-+				      args, __struct_size(args), &chan->kill);
- 		if (ret == 0)
- 			ret = nvif_event_allow(&chan->kill);
- 		if (ret) {
-@@ -520,46 +518,45 @@ nouveau_channels_fini(struct nouveau_drm *drm)
- int
- nouveau_channels_init(struct nouveau_drm *drm)
- {
--	struct {
--		struct nv_device_info_v1 m;
--		struct {
--			struct nv_device_info_v1_data channels;
--			struct nv_device_info_v1_data runlists;
--		} v;
--	} args = {
--		.m.version = 1,
--		.m.count = sizeof(args.v) / sizeof(args.v.channels),
--		.v.channels.mthd = NV_DEVICE_HOST_CHANNELS,
--		.v.runlists.mthd = NV_DEVICE_HOST_RUNLISTS,
--	};
-+	DEFINE_RAW_FLEX(struct nv_device_info_v1, args, data, 2);
-+	struct nv_device_info_v1_data *channels = &args->data[0];
-+	struct nv_device_info_v1_data *runlists = &args->data[1];
- 	struct nvif_object *device = &drm->client.device.object;
- 	int ret, i;
- 
--	ret = nvif_object_mthd(device, NV_DEVICE_V0_INFO, &args, sizeof(args));
-+	args->version = 1;
-+	args->count = (__struct_size(args) - sizeof(*args)) /
-+		      sizeof(*args->data);
-+	channels->mthd = NV_DEVICE_HOST_CHANNELS;
-+	runlists->mthd = NV_DEVICE_HOST_RUNLISTS;
-+
-+	ret = nvif_object_mthd(device, NV_DEVICE_V0_INFO, args,
-+			       __struct_size(args));
- 	if (ret ||
--	    args.v.runlists.mthd == NV_DEVICE_INFO_INVALID || !args.v.runlists.data ||
--	    args.v.channels.mthd == NV_DEVICE_INFO_INVALID)
-+	    runlists->mthd == NV_DEVICE_INFO_INVALID || !runlists->data ||
-+	    channels->mthd == NV_DEVICE_INFO_INVALID)
- 		return -ENODEV;
- 
--	drm->chan_nr = drm->chan_total = args.v.channels.data;
--	drm->runl_nr = fls64(args.v.runlists.data);
-+	drm->chan_nr = drm->chan_total = channels->data;
-+	drm->runl_nr = fls64(runlists->data);
- 	drm->runl = kcalloc(drm->runl_nr, sizeof(*drm->runl), GFP_KERNEL);
- 	if (!drm->runl)
- 		return -ENOMEM;
- 
- 	if (drm->chan_nr == 0) {
- 		for (i = 0; i < drm->runl_nr; i++) {
--			if (!(args.v.runlists.data & BIT(i)))
-+			if (!(runlists->data & BIT(i)))
- 				continue;
- 
--			args.v.channels.mthd = NV_DEVICE_HOST_RUNLIST_CHANNELS;
--			args.v.channels.data = i;
-+			channels->mthd = NV_DEVICE_HOST_RUNLIST_CHANNELS;
-+			channels->data = i;
- 
--			ret = nvif_object_mthd(device, NV_DEVICE_V0_INFO, &args, sizeof(args));
--			if (ret || args.v.channels.mthd == NV_DEVICE_INFO_INVALID)
-+			ret = nvif_object_mthd(device, NV_DEVICE_V0_INFO, args,
-+					       __struct_size(args));
-+			if (ret || channels->mthd == NV_DEVICE_INFO_INVALID)
- 				return -ENODEV;
- 
--			drm->runl[i].chan_nr = args.v.channels.data;
-+			drm->runl[i].chan_nr = channels->data;
- 			drm->runl[i].chan_id_base = drm->chan_total;
- 			drm->runl[i].context_base = dma_fence_context_alloc(drm->runl[i].chan_nr);
- 
--- 
-2.43.0
-
+Thanks!
+--
+Gustavo
