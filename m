@@ -2,88 +2,61 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id 21487CBAAE9
-	for <lists+nouveau@lfdr.de>; Sat, 13 Dec 2025 13:42:31 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 95DA9CBAB42
+	for <lists+nouveau@lfdr.de>; Sat, 13 Dec 2025 13:42:50 +0100 (CET)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id B509E10EA14;
-	Sat, 13 Dec 2025 12:41:00 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 87C5C10EA02;
+	Sat, 13 Dec 2025 12:41:03 +0000 (UTC)
 Authentication-Results: gabe.freedesktop.org;
-	dkim=permerror (0-bit key) header.d=gmail.com header.i=@gmail.com header.b="Oovkl2U0";
+	dkim=pass (2048-bit key; secure) header.d=mailbox.org header.i=@mailbox.org header.b="Ek+r28qN";
 	dkim-atps=neutral
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from mail-wr1-f51.google.com (mail-wr1-f51.google.com
- [209.85.221.51])
- by gabe.freedesktop.org (Postfix) with ESMTPS id A189810E027;
- Wed, 26 Mar 2025 13:11:03 +0000 (UTC)
-Received: by mail-wr1-f51.google.com with SMTP id
- ffacd0b85a97d-39149bccb69so5960983f8f.2; 
- Wed, 26 Mar 2025 06:11:03 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1742994662; x=1743599462; darn=lists.freedesktop.org;
- h=in-reply-to:content-transfer-encoding:content-disposition
- :mime-version:references:message-id:subject:cc:to:from:date:from:to
- :cc:subject:date:message-id:reply-to;
- bh=coBo9zTOkV+54/uJ8ZjRiGU/vI3P1bGg7BoPmlBVdVs=;
- b=Oovkl2U0YZmZnG5M9dABmXvaCvFpG4hMx23zKsrpkPTZQJdFilbP7aAX1iY3GskkLZ
- qURo4fC9ZVppaa3Hjdfv8IsnrX0zFVe3677MjEY1YQCVLAs7lu8D5qrFQeVpSzZ69JBO
- NQgT3rxCWLk3ghzwP9gbp9Y3R+uoO431Y4HDJXf7cBN66LwYc1FeMNrMz6r0j8W49La6
- 6h8c8nn0UjtN/u9wVzzl9PTpUygSCeqGgX7FqU9kIriC8lRVrs0R8P5hHH1fIjgqgVi6
- Vdvyr83Y/W2cjNQy/2mvS2ntAIBGKVj3Q91151g2ykQJkoz3hsf9+/f/UWLbRSdI5wRb
- pqow==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1742994662; x=1743599462;
- h=in-reply-to:content-transfer-encoding:content-disposition
- :mime-version:references:message-id:subject:cc:to:from:date
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=coBo9zTOkV+54/uJ8ZjRiGU/vI3P1bGg7BoPmlBVdVs=;
- b=KFnJoCRw596xaXy9BWGhv5Jv26lJdJwULolrwzH7ni8dYEA9+mGUfX71UIO6oPgCdV
- cx/5OA0lHvUfRSdKVCSyBTbZzHXJVHTzmLFChkajqqOd0CrDCD0s1epdzVY+ciaPD+WH
- Kz0HH3Ichr69E30m870LxlIxVWFpMMrpYGY4O8ipytY/DXMIvb7yOrVGPE/BriZZaErc
- igGAHB+my+N2ugLzE1svDcd9RgXvb9HO5A1KMg33TzIlMLIjLms7Tm/vbalXIgHbMXl0
- bRdLlwdidAT4LuX/IDEn0MSUiK0F1MamcOgy2ehEuJ3Cecx4ekIQMdOJTLz5dzKKP7kR
- ViGA==
-X-Forwarded-Encrypted: i=1;
- AJvYcCUXIxbOJWFOtKXU/QDyBPHbPP6uj8EWJFZ79rA5ogmzNOeOaYJcCGmHO5QFaiXjXDkwbsZmzq5Mm4U=@lists.freedesktop.org,
- AJvYcCVg98jqKCAmWpOgnFLcPscaI7HCR1WPrMvdCGSzPscv8Sugd13JgyKmRoCJZYmpXj0+YlGa487l/g==@lists.freedesktop.org
-X-Gm-Message-State: AOJu0YwbD0wWU8bZkKOa/KaV4bXbwRf7EQqCsBnmJ19URltrT100pbWo
- V5Px7CeodYDAY+TF7fcGSqlQkpYqAKHalz0M3rc8UYqGIK3xaU3h
-X-Gm-Gg: ASbGnctpiEwRgK/myAADQA4nHS7yex089OMLiPjvxRx6NQxdEjuc/Kd/puCtm6FAzXX
- szx4t527bkYcLhqublup4BYh6ULDO6nDzds578u0nYD44PrmK1T1CIt6OXbI9niK9r6UFjIB2Xl
- mi7fpuNzI57E+X4zsyJqMmthWXfrMNQwjtO8F2vXA7Xm/dRkqjnblK6Q9Olx5r7BPpZczZSIZOT
- NyI4i4/1A9ejeTYoOTQ02DyWRCU5Mec+BP3yeD5INa57Q8mxsfIsOQUVAGKEtJ+VIUUGv0yP7c7
- TkKrDedUBxtPygYgxQE6s8fMkjwpa2hkUeYS+9TEv6f9gHBVa01Vnsj6
-X-Google-Smtp-Source: AGHT+IGo5kRZQjK7go8ME7rLgXCUGjJN5HdX5Ne05KaMSmNpoFgkpvAveAfXQrZVzmsvdqDm6os96w==
-X-Received: by 2002:a5d:584b:0:b0:390:f9a5:bd79 with SMTP id
- ffacd0b85a97d-3997f90ab9emr20396175f8f.26.1742994661851; 
- Wed, 26 Mar 2025 06:11:01 -0700 (PDT)
-Received: from debian.local ([2a0a:ef40:4d4:f101:e41a:977a:f788:910f])
- by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-43d82e6ab48sm1773125e9.10.2025.03.26.06.11.00
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 26 Mar 2025 06:11:01 -0700 (PDT)
-Date: Wed, 26 Mar 2025 13:10:58 +0000
-From: Chris Bainbridge <chris.bainbridge@gmail.com>
-To: Christian =?iso-8859-1?Q?K=F6nig?= <christian.koenig@amd.com>
-Cc: Danilo Krummrich <dakr@kernel.org>, nouveau@lists.freedesktop.org,
- maarten.lankhorst@linux.intel.com, mripard@kernel.org,
- tzimmermann@suse.de, airlied@gmail.com, simona@ffwll.ch,
- lyude@redhat.com, sumit.semwal@linaro.org,
- dri-devel@lists.freedesktop.org, linux-kernel@vger.kernel.org
-Subject: [PATCH v2] drm/prime: fix drm_prime_gem_destroy comment
-Message-ID: <Z-P84iMUP4NBAY7k@debian.local>
-References: <Z9GHj-edWJmyzpdY@debian.local>
- <00e4d9c4-ecfc-4784-b603-12db04cda806@amd.com>
- <Z9q-ggKKgTsvW-Rz@debian.local> <Z9rA0G2urlVHFOSx@cassiopeiae>
- <1f4a534f-8883-4793-b191-60c2773f6217@amd.com>
- <Z9rSTkXlub-JZAz0@cassiopeiae> <Z-P4zQ1464SeZGmB@debian.local>
- <94eeb36a-9aa5-4afd-9ba6-76e8ace10122@amd.com>
+X-Greylist: delayed 307 seconds by postgrey-1.36 at gabe;
+ Thu, 03 Apr 2025 10:22:43 UTC
+Received: from mout-p-103.mailbox.org (mout-p-103.mailbox.org [80.241.56.161])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id B15A110E995
+ for <nouveau@lists.freedesktop.org>; Thu,  3 Apr 2025 10:22:43 +0000 (UTC)
+Received: from smtp202.mailbox.org (smtp202.mailbox.org
+ [IPv6:2001:67c:2050:b231:465::202])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
+ (No client certificate requested)
+ by mout-p-103.mailbox.org (Postfix) with ESMTPS id 4ZSyNF0K1Jz9tXs;
+ Thu,  3 Apr 2025 12:17:33 +0200 (CEST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
+ s=mail20150812; 
+ t=1743675453; h=from:from:reply-to:reply-to:subject:subject:date:date:
+ message-id:message-id:to:to:cc:cc:mime-version:mime-version:
+ content-type:content-type:
+ content-transfer-encoding:content-transfer-encoding:
+ in-reply-to:in-reply-to:references:references;
+ bh=IbuCeSaYR73n/sLJzZvyflx5oDaQunwvpjdo2sxXDKY=;
+ b=Ek+r28qNYkvF+vrm5VPf/pAb4WCWPfErtyE2i9ub8FPKksW8HiQet+dZrPzzq0fhRlmJSm
+ 56TsjVqG7tdGq0Uh0XRTcEsTAfRLAzFZV0tGbRxNvSVN/fyNmFzXHWzTcU2PYPG77sIUKZ
+ x3Fsh6gJJtgoKQnMGiAcA0ZxPllgD5FOT/jK+UAaC+C9PrxnGU6Lrbu/GpUUAq9iDW8uuN
+ MnSTVA9b2Cn1VYPYHp1ogKcvTx1UcamDU7ksI+i4pdEOIbJufN2cHCBK1p0o1uWNjyQA3z
+ KWL9dDANMeIk2g0KwA/YR4u9SqwaLh7mIJw5e50PkKkymO2zghKkMww1hT0Dog==
+Message-ID: <84b0db2de7a26aab00778bcaca15a0dffaa9c32a.camel@mailbox.org>
+Subject: Re: [PATCH v2] drm/nouveau: Prevent signalled fences in pending list
+From: Philipp Stanner <phasta@mailbox.org>
+To: Philipp Stanner <phasta@kernel.org>, Lyude Paul <lyude@redhat.com>, 
+ Danilo Krummrich
+ <dakr@kernel.org>, David Airlie <airlied@gmail.com>, Simona Vetter
+ <simona@ffwll.ch>, Sumit Semwal <sumit.semwal@linaro.org>, Christian
+ =?ISO-8859-1?Q?K=F6nig?= <christian.koenig@amd.com>
+Cc: dri-devel@lists.freedesktop.org, nouveau@lists.freedesktop.org, 
+ linux-kernel@vger.kernel.org, linux-media@vger.kernel.org, 
+ linaro-mm-sig@lists.linaro.org, stable@vger.kernel.org
+Date: Thu, 03 Apr 2025 12:17:29 +0200
+In-Reply-To: <20250403101353.42880-2-phasta@kernel.org>
+References: <20250403101353.42880-2-phasta@kernel.org>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 MIME-Version: 1.0
-Content-Type: text/plain; charset=iso-8859-1
-Content-Disposition: inline
-Content-Transfer-Encoding: 8bit
-In-Reply-To: <94eeb36a-9aa5-4afd-9ba6-76e8ace10122@amd.com>
-X-Mailman-Approved-At: Sat, 13 Dec 2025 12:40:42 +0000
+X-MBO-RS-META: uxieox9rrfhb7wiwaja9txij87nw5748
+X-MBO-RS-ID: f3ebb4b2b4aec552ea1
+X-Mailman-Approved-At: Sat, 13 Dec 2025 12:40:50 +0000
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -95,48 +68,226 @@ List-Post: <mailto:nouveau@lists.freedesktop.org>
 List-Help: <mailto:nouveau-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
  <mailto:nouveau-request@lists.freedesktop.org?subject=subscribe>
+Reply-To: phasta@kernel.org
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-Edit the comments on correct usage of drm_prime_gem_destroy to note
-that, if using TTM, drm_prime_gem_destroy must be called in the
-ttm_buffer_object.destroy hook, to avoid the dma_buf being freed leaving
-a dangling pointer which will be later dereferenced by
-ttm_bo_delayed_delete.
+On Thu, 2025-04-03 at 12:13 +0200, Philipp Stanner wrote:
+> Nouveau currently relies on the assumption that dma_fences will only
+> ever get signalled through nouveau_fence_signal(), which takes care
+> of
+> removing a signalled fence from the list nouveau_fence_chan.pending.
+>=20
+> This self-imposed rule is violated in nouveau_fence_done(), where
+> dma_fence_is_signaled() can signal the fence without removing it from
+> the list. This enables accesses to already signalled fences through
+> the
+> list, which is a bug.
+>=20
+> Furthermore, it must always be possible to use standard dma_fence
+> methods an a dma_fence and observe valid behavior. The canonical way
+> of
+> ensuring that signalling a fence has additional effects is to add
+> those
+> effects to a callback and register it on that fence.
+>=20
+> Move the code from nouveau_fence_signal() into a dma_fence callback.
+> Register that callback when creating the fence.
+>=20
+> Cc: <stable@vger.kernel.org> # 4.10+
+> Signed-off-by: Philipp Stanner <phasta@kernel.org>
+> ---
+> Changes in v2:
+> =C2=A0 - Remove Fixes: tag. (Danilo)
+> =C2=A0 - Remove integer "drop" and call nvif_event_block() in the fence
+> =C2=A0=C2=A0=C2=A0 callback. (Danilo)
+> ---
+> =C2=A0drivers/gpu/drm/nouveau/nouveau_fence.c | 52 +++++++++++++---------=
+-
+> --
+> =C2=A0drivers/gpu/drm/nouveau/nouveau_fence.h |=C2=A0 1 +
+> =C2=A02 files changed, 29 insertions(+), 24 deletions(-)
+>=20
+> diff --git a/drivers/gpu/drm/nouveau/nouveau_fence.c
+> b/drivers/gpu/drm/nouveau/nouveau_fence.c
+> index 7cc84472cece..cf510ef9641a 100644
+> --- a/drivers/gpu/drm/nouveau/nouveau_fence.c
+> +++ b/drivers/gpu/drm/nouveau/nouveau_fence.c
+> @@ -50,24 +50,24 @@ nouveau_fctx(struct nouveau_fence *fence)
+> =C2=A0	return container_of(fence->base.lock, struct
+> nouveau_fence_chan, lock);
+> =C2=A0}
+> =C2=A0
+> -static int
+> -nouveau_fence_signal(struct nouveau_fence *fence)
+> +static void
+> +nouveau_fence_cleanup_cb(struct dma_fence *dfence, struct
+> dma_fence_cb *cb)
+> =C2=A0{
+> -	int drop =3D 0;
+> +	struct nouveau_fence_chan *fctx;
+> +	struct nouveau_fence *fence;
+> +
+> +	fence =3D container_of(dfence, struct nouveau_fence, base);
+> +	fctx =3D nouveau_fctx(fence);
+> =C2=A0
+> -	dma_fence_signal_locked(&fence->base);
+> =C2=A0	list_del(&fence->head);
+> =C2=A0	rcu_assign_pointer(fence->channel, NULL);
+> =C2=A0
+> =C2=A0	if (test_bit(DMA_FENCE_FLAG_USER_BITS, &fence->base.flags))
+> {
+> -		struct nouveau_fence_chan *fctx =3D
+> nouveau_fctx(fence);
+> -
+> =C2=A0		if (!--fctx->notify_ref)
+> -			drop =3D 1;
+> +			nvif_event_block(&fctx->event);
+> =C2=A0	}
+> =C2=A0
+> =C2=A0	dma_fence_put(&fence->base);
 
-Signed-off-by: Chris Bainbridge <chris.bainbridge@gmail.com>
-Suggested-by: Christian König <christian.koenig@amd.com>
----
- drivers/gpu/drm/drm_prime.c | 8 ++++++--
- 1 file changed, 6 insertions(+), 2 deletions(-)
+What I realized while coding this v2 is that we might want to think
+about whether we really want the dma_fence_put() in the fence callback?
 
-diff --git a/drivers/gpu/drm/drm_prime.c b/drivers/gpu/drm/drm_prime.c
-index 32a8781cfd67..452d5c7cd292 100644
---- a/drivers/gpu/drm/drm_prime.c
-+++ b/drivers/gpu/drm/drm_prime.c
-@@ -929,7 +929,9 @@ EXPORT_SYMBOL(drm_gem_prime_export);
-  * &drm_driver.gem_prime_import_sg_table internally.
-  *
-  * Drivers must arrange to call drm_prime_gem_destroy() from their
-- * &drm_gem_object_funcs.free hook when using this function.
-+ * &drm_gem_object_funcs.free hook or &ttm_buffer_object.destroy
-+ * hook when using this function, to avoid the dma_buf being freed while the
-+ * ttm_buffer_object can still dereference it.
-  */
- struct drm_gem_object *drm_gem_prime_import_dev(struct drm_device *dev,
- 					    struct dma_buf *dma_buf,
-@@ -999,7 +1001,9 @@ EXPORT_SYMBOL(drm_gem_prime_import_dev);
-  * implementation in drm_gem_prime_fd_to_handle().
-  *
-  * Drivers must arrange to call drm_prime_gem_destroy() from their
-- * &drm_gem_object_funcs.free hook when using this function.
-+ * &drm_gem_object_funcs.free hook or &ttm_buffer_object.destroy
-+ * hook when using this function, to avoid the dma_buf being freed while the
-+ * ttm_buffer_object can still dereference it.
-  */
- struct drm_gem_object *drm_gem_prime_import(struct drm_device *dev,
- 					    struct dma_buf *dma_buf)
--- 
-2.47.2
+It should work fine, since it's exactly identical to the previous
+code's behavior =E2=80=93 but effectively it means that the driver's refere=
+nce
+will be dropped whenever it signals that fence.
 
+IDK
+
+P.
+
+
+> -	return drop;
+> =C2=A0}
+> =C2=A0
+> =C2=A0static struct nouveau_fence *
+> @@ -93,8 +93,7 @@ nouveau_fence_context_kill(struct
+> nouveau_fence_chan *fctx, int error)
+> =C2=A0		if (error)
+> =C2=A0			dma_fence_set_error(&fence->base, error);
+> =C2=A0
+> -		if (nouveau_fence_signal(fence))
+> -			nvif_event_block(&fctx->event);
+> +		dma_fence_signal_locked(&fence->base);
+> =C2=A0	}
+> =C2=A0	fctx->killed =3D 1;
+> =C2=A0	spin_unlock_irqrestore(&fctx->lock, flags);
+> @@ -127,11 +126,10 @@ nouveau_fence_context_free(struct
+> nouveau_fence_chan *fctx)
+> =C2=A0	kref_put(&fctx->fence_ref, nouveau_fence_context_put);
+> =C2=A0}
+> =C2=A0
+> -static int
+> +static void
+> =C2=A0nouveau_fence_update(struct nouveau_channel *chan, struct
+> nouveau_fence_chan *fctx)
+> =C2=A0{
+> =C2=A0	struct nouveau_fence *fence;
+> -	int drop =3D 0;
+> =C2=A0	u32 seq =3D fctx->read(chan);
+> =C2=A0
+> =C2=A0	while (!list_empty(&fctx->pending)) {
+> @@ -140,10 +138,8 @@ nouveau_fence_update(struct nouveau_channel
+> *chan, struct nouveau_fence_chan *fc
+> =C2=A0		if ((int)(seq - fence->base.seqno) < 0)
+> =C2=A0			break;
+> =C2=A0
+> -		drop |=3D nouveau_fence_signal(fence);
+> +		dma_fence_signal_locked(&fence->base);
+> =C2=A0	}
+> -
+> -	return drop;
+> =C2=A0}
+> =C2=A0
+> =C2=A0static void
+> @@ -152,7 +148,6 @@ nouveau_fence_uevent_work(struct work_struct
+> *work)
+> =C2=A0	struct nouveau_fence_chan *fctx =3D container_of(work, struct
+> nouveau_fence_chan,
+> =C2=A0						=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 uevent_work);
+> =C2=A0	unsigned long flags;
+> -	int drop =3D 0;
+> =C2=A0
+> =C2=A0	spin_lock_irqsave(&fctx->lock, flags);
+> =C2=A0	if (!list_empty(&fctx->pending)) {
+> @@ -161,11 +156,8 @@ nouveau_fence_uevent_work(struct work_struct
+> *work)
+> =C2=A0
+> =C2=A0		fence =3D list_entry(fctx->pending.next,
+> typeof(*fence), head);
+> =C2=A0		chan =3D rcu_dereference_protected(fence->channel,
+> lockdep_is_held(&fctx->lock));
+> -		if (nouveau_fence_update(chan, fctx))
+> -			drop =3D 1;
+> +		nouveau_fence_update(chan, fctx);
+> =C2=A0	}
+> -	if (drop)
+> -		nvif_event_block(&fctx->event);
+> =C2=A0
+> =C2=A0	spin_unlock_irqrestore(&fctx->lock, flags);
+> =C2=A0}
+> @@ -235,6 +227,19 @@ nouveau_fence_emit(struct nouveau_fence *fence)
+> =C2=A0			=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 &fctx->lock, fctx->context,=
+ ++fctx-
+> >sequence);
+> =C2=A0	kref_get(&fctx->fence_ref);
+> =C2=A0
+> +	fence->cb.func =3D nouveau_fence_cleanup_cb;
+> +	/* Adding a callback runs into
+> __dma_fence_enable_signaling(), which will
+> +	 * ultimately run into nouveau_fence_no_signaling(), where a
+> WARN_ON
+> +	 * would fire because the refcount can be dropped there.
+> +	 *
+> +	 * Increment the refcount here temporarily to work around
+> that.
+> +	 */
+> +	dma_fence_get(&fence->base);
+> +	ret =3D dma_fence_add_callback(&fence->base, &fence->cb,
+> nouveau_fence_cleanup_cb);
+> +	dma_fence_put(&fence->base);
+> +	if (ret)
+> +		return ret;
+> +
+> =C2=A0	ret =3D fctx->emit(fence);
+> =C2=A0	if (!ret) {
+> =C2=A0		dma_fence_get(&fence->base);
+> @@ -246,8 +251,7 @@ nouveau_fence_emit(struct nouveau_fence *fence)
+> =C2=A0			return -ENODEV;
+> =C2=A0		}
+> =C2=A0
+> -		if (nouveau_fence_update(chan, fctx))
+> -			nvif_event_block(&fctx->event);
+> +		nouveau_fence_update(chan, fctx);
+> =C2=A0
+> =C2=A0		list_add_tail(&fence->head, &fctx->pending);
+> =C2=A0		spin_unlock_irq(&fctx->lock);
+> @@ -270,8 +274,8 @@ nouveau_fence_done(struct nouveau_fence *fence)
+> =C2=A0
+> =C2=A0		spin_lock_irqsave(&fctx->lock, flags);
+> =C2=A0		chan =3D rcu_dereference_protected(fence->channel,
+> lockdep_is_held(&fctx->lock));
+> -		if (chan && nouveau_fence_update(chan, fctx))
+> -			nvif_event_block(&fctx->event);
+> +		if (chan)
+> +			nouveau_fence_update(chan, fctx);
+> =C2=A0		spin_unlock_irqrestore(&fctx->lock, flags);
+> =C2=A0	}
+> =C2=A0	return dma_fence_is_signaled(&fence->base);
+> diff --git a/drivers/gpu/drm/nouveau/nouveau_fence.h
+> b/drivers/gpu/drm/nouveau/nouveau_fence.h
+> index 8bc065acfe35..e6b2df7fdc42 100644
+> --- a/drivers/gpu/drm/nouveau/nouveau_fence.h
+> +++ b/drivers/gpu/drm/nouveau/nouveau_fence.h
+> @@ -10,6 +10,7 @@ struct nouveau_bo;
+> =C2=A0
+> =C2=A0struct nouveau_fence {
+> =C2=A0	struct dma_fence base;
+> +	struct dma_fence_cb cb;
+> =C2=A0
+> =C2=A0	struct list_head head;
+> =C2=A0
 
