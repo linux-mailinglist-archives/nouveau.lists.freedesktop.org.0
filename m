@@ -2,64 +2,48 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id 44049A82239
-	for <lists+nouveau@lfdr.de>; Wed,  9 Apr 2025 12:34:02 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 8DDAFA82303
+	for <lists+nouveau@lfdr.de>; Wed,  9 Apr 2025 13:02:23 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id B292310E83C;
-	Wed,  9 Apr 2025 10:34:00 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 37CC210E841;
+	Wed,  9 Apr 2025 11:02:21 +0000 (UTC)
 Authentication-Results: gabe.freedesktop.org;
-	dkim=pass (2048-bit key; unprotected) header.d=intel.com header.i=@intel.com header.b="XEyY/BPO";
+	dkim=pass (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="R1RJ4UVM";
 	dkim-atps=neutral
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from mgamail.intel.com (mgamail.intel.com [198.175.65.18])
- by gabe.freedesktop.org (Postfix) with ESMTPS id F1D4B10E83B;
- Wed,  9 Apr 2025 10:33:58 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
- d=intel.com; i=@intel.com; q=dns/txt; s=Intel;
- t=1744194840; x=1775730840;
- h=from:to:cc:subject:date:message-id:mime-version:
- content-transfer-encoding;
- bh=5g4K5yO5TsniZ7IMNh0B2hhLNYraKLVSmKpjG/QApGE=;
- b=XEyY/BPOzYwegJvaOLWAXoffGrnXRhIY0S8evfS/v3dnST2RlEpNPSMm
- LwsFKJRVYwUkVGKKTkYelFZ8YN2W/pzhXCJz9rf6cl9Au67GUIzqTBE81
- JRRszENryimjS+D6cRpoT2PgToNSXN0LYt/w22ROomLrL0IKplU1y+KOU
- PtKKXG/dT+sM0qsKIPdabYdMX9lk+xz7thRXefiCFtwhSrRDxcFO1ksUo
- d4mxnLGzbBURyPdATrtvM/dcXTEg/lnVxKMHL+yX4dtvjMmiIsgfjoicW
- wTczqlLJdTbD8TWQScZPmRDUJxSlKqZpKejsJegnZjS5JhHcCaHis9u6Z Q==;
-X-CSE-ConnectionGUID: lKS+fdhMTzW30CJjpBYTWg==
-X-CSE-MsgGUID: JtYmaPKCRGm0zX07O3W/9A==
-X-IronPort-AV: E=McAfee;i="6700,10204,11397"; a="45792991"
-X-IronPort-AV: E=Sophos;i="6.15,200,1739865600"; d="scan'208";a="45792991"
-Received: from orviesa006.jf.intel.com ([10.64.159.146])
- by orvoesa110.jf.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
- 09 Apr 2025 03:33:59 -0700
-X-CSE-ConnectionGUID: OHwJ2eF2TvShuNbMZfZWMw==
-X-CSE-MsgGUID: UpCrYee0RjeZzVDlJ5qQPw==
-X-ExtLoop1: 1
-X-IronPort-AV: E=Sophos;i="6.15,200,1739865600"; d="scan'208";a="128527903"
-Received: from turnipsi.fi.intel.com (HELO kekkonen.fi.intel.com)
- ([10.237.72.44])
- by orviesa006-auth.jf.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
- 09 Apr 2025 03:33:57 -0700
-Received: from punajuuri.localdomain (punajuuri.localdomain [192.168.240.130])
- by kekkonen.fi.intel.com (Postfix) with ESMTP id C391E11FB1F;
- Wed,  9 Apr 2025 13:33:54 +0300 (EEST)
-Received: from sailus by punajuuri.localdomain with local (Exim 4.96)
- (envelope-from <sakari.ailus@linux.intel.com>) id 1u2Skk-00FMYJ-2M;
- Wed, 09 Apr 2025 13:33:54 +0300
-Organization: Intel Finland Oy - BIC 0357606-4 - Westendinkatu 7, 02160 Espoo
-From: Sakari Ailus <sakari.ailus@linux.intel.com>
-To: Lyude Paul <lyude@redhat.com>,
-	Danilo Krummrich <dakr@kernel.org>
-Cc: dri-devel@lists.freedesktop.org,
-	nouveau@lists.freedesktop.org
-Subject: [PATCH 1/1] drm/nouveau/disp: Use dev->dev to get the device
-Date: Wed,  9 Apr 2025 13:33:44 +0300
-Message-Id: <20250409103344.3661603-1-sakari.ailus@linux.intel.com>
-X-Mailer: git-send-email 2.39.5
+Received: from dfw.source.kernel.org (dfw.source.kernel.org [139.178.84.217])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 5CC5D10E841
+ for <nouveau@lists.freedesktop.org>; Wed,  9 Apr 2025 11:02:14 +0000 (UTC)
+Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
+ by dfw.source.kernel.org (Postfix) with ESMTP id 9118A5C4774;
+ Wed,  9 Apr 2025 10:59:53 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 74049C4CEE3;
+ Wed,  9 Apr 2025 11:02:08 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+ s=k20201202; t=1744196530;
+ bh=nSzqOWI3rZXEaJ3L9FxTC+hfQE5GBdW8UHo8Bfm3AHs=;
+ h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
+ b=R1RJ4UVMqGdomsDQ/gi4j40D/zJh5/2OYABZavVV2iLEMjAyP06PYQXY7bSq14Z+7
+ FJFauOCPTioQa7F3JPobJ3icgn2WwZ2KJLFe5SRyVQYIxW88qBQruGXS2RERLsZNtm
+ VIbcZX6M/BQxz7YX9qZPN5PCa+V6flR3PjIXl9ByZDO66a+DfJSWVQ6FKxvqhQIVTR
+ kV4hbQf/+QTFgCPDnKTs5Y9r8zvQvsEL6Ft+QMwpkT/+HCsbmPVXByk/cMwecCSVUP
+ gHLqV1xzwrzXEa5G1mYhHrB2BGPRSxzzyolEPSa+rTDnn1TO6ZZi4YTUXGWe1wO12Z
+ qHYTL5NRE6dXw==
+Date: Wed, 9 Apr 2025 13:02:05 +0200
+From: Danilo Krummrich <dakr@kernel.org>
+To: Philipp Stanner <phasta@kernel.org>
+Cc: Lyude Paul <lyude@redhat.com>, David Airlie <airlied@gmail.com>,
+ Ben Skeggs <bskeggs@nvidia.com>, Simona Vetter <simona@ffwll.ch>,
+ lists.freedesktop.org@cassiopeiae, nouveau@lists.freedesktop.org,
+ linux-kernel@vger.kernel.org
+Subject: Re: [PATCH] drm/nouveau: Remove forgotten TODO
+Message-ID: <Z_ZTrZ-dcD5YiSm4@cassiopeiae>
+References: <20250409091413.94102-2-phasta@kernel.org>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <20250409091413.94102-2-phasta@kernel.org>
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -74,34 +58,42 @@ List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-The local variable dev points to drm->dev already, use dev directly.
+(+ Ben)
 
-Signed-off-by: Sakari Ailus <sakari.ailus@linux.intel.com>
----
-Hi folks,
+On Wed, Apr 09, 2025 at 11:14:14AM +0200, Philipp Stanner wrote:
+> commit ebb945a94bba ("drm/nouveau: port all engines to new engine module
+> format") introduced a TODO to nouveau_chan.h, stating that an
+> unspecified rework would take place in the "near future".
+> 
+> Almost 13 years have passed since this "near future", so it can be
+> safely assumed that the TODO is not needed anymore. Besides, its content
+> is useless anyways since it does not specify *what* should have been
+> done.
+> 
+> Remove the TODO.
+> 
+> Signed-off-by: Philipp Stanner <phasta@kernel.org>
+> ---
+>  drivers/gpu/drm/nouveau/nouveau_chan.h | 1 -
+>  1 file changed, 1 deletion(-)
+> 
+> diff --git a/drivers/gpu/drm/nouveau/nouveau_chan.h b/drivers/gpu/drm/nouveau/nouveau_chan.h
+> index 016f668c0bc1..3b73ec91c4ff 100644
+> --- a/drivers/gpu/drm/nouveau/nouveau_chan.h
+> +++ b/drivers/gpu/drm/nouveau/nouveau_chan.h
+> @@ -33,7 +33,6 @@ struct nouveau_channel {
+>  		u64 addr;
+>  	} push;
+>  
+> -	/* TODO: this will be reworked in the near future */
+>  	bool accel_done;
 
-The background is that I'll be using a Coccinelle spatch soon to remove
-(most) pm_runtime_mark_last_busy() calls. That won't work if the arguments
-aren't the same.
+After having a brief look, it seems that it may has actually been reworked;
+there is only a single use of accel_done, which is in FIRE_RING(), where it is
+set to true. But it doesn't seem to be read from anywhere.
 
-- Sakari
+So, I think we should remove both, the TODO and the accel_done field.
 
- drivers/gpu/drm/nouveau/nouveau_display.c | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+@Ben: Maybe you remember the history of this.
 
-diff --git a/drivers/gpu/drm/nouveau/nouveau_display.c b/drivers/gpu/drm/nouveau/nouveau_display.c
-index add006fc8d81..c50ec347b30a 100644
---- a/drivers/gpu/drm/nouveau/nouveau_display.c
-+++ b/drivers/gpu/drm/nouveau/nouveau_display.c
-@@ -495,7 +495,7 @@ nouveau_display_hpd_work(struct work_struct *work)
- 	if (first_changed_connector)
- 		drm_connector_put(first_changed_connector);
- 
--	pm_runtime_mark_last_busy(drm->dev->dev);
-+	pm_runtime_mark_last_busy(dev->dev);
- noop:
- 	pm_runtime_put_autosuspend(dev->dev);
- }
--- 
-2.39.5
-
+- Danilo
