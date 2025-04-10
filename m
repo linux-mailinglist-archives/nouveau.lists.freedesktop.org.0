@@ -2,104 +2,58 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id A8097CBAD67
-	for <lists+nouveau@lfdr.de>; Sat, 13 Dec 2025 13:45:03 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 6BC73CBAA09
+	for <lists+nouveau@lfdr.de>; Sat, 13 Dec 2025 13:41:47 +0100 (CET)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 9902510EAF6;
-	Sat, 13 Dec 2025 12:41:30 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 59CF910EA2B;
+	Sat, 13 Dec 2025 12:40:58 +0000 (UTC)
 Authentication-Results: gabe.freedesktop.org;
-	dkim=pass (2048-bit key; secure) header.d=mailbox.org header.i=@mailbox.org header.b="LS9up8sz";
+	dkim=pass (2048-bit key; secure) header.d=mailbox.org header.i=@mailbox.org header.b="PVDwBf/g";
 	dkim-atps=neutral
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from mout-p-101.mailbox.org (mout-p-101.mailbox.org [80.241.56.151])
- by gabe.freedesktop.org (Postfix) with ESMTPS id A1BF210E931;
- Wed,  9 Apr 2025 15:04:27 +0000 (UTC)
-Received: from smtp102.mailbox.org (smtp102.mailbox.org [10.196.197.102])
+Received: from mout-p-202.mailbox.org (mout-p-202.mailbox.org [80.241.56.172])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 9C48210E04A;
+ Thu, 10 Apr 2025 09:51:23 +0000 (UTC)
+Received: from smtp2.mailbox.org (smtp2.mailbox.org [10.196.197.2])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
  (No client certificate requested)
- by mout-p-101.mailbox.org (Postfix) with ESMTPS id 4ZXmSR19b9z9t7P;
- Wed,  9 Apr 2025 17:04:23 +0200 (CEST)
+ by mout-p-202.mailbox.org (Postfix) with ESMTPS id 4ZYFSj5mmkz9rwJ;
+ Thu, 10 Apr 2025 11:51:17 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
  s=mail20150812; 
- t=1744211063; h=from:from:reply-to:reply-to:subject:subject:date:date:
+ t=1744278678; h=from:from:reply-to:reply-to:subject:subject:date:date:
  message-id:message-id:to:to:cc:cc:mime-version:mime-version:
  content-type:content-type:
  content-transfer-encoding:content-transfer-encoding:
  in-reply-to:in-reply-to:references:references;
- bh=vXNbrTLUQrlYNydORT5K+rP57dVB2oADM2jV2AgBth4=;
- b=LS9up8szfCpBJACvt4gXa2EtpB97sVavX67wzRPpNDGRm6AHGs0RWhd+AXtPqRnp9op8zM
- yE04pWSHbv+2bVCH/VYb7yTY+oy+qVUAZ4WW9/6lnP3PpHLGzc4tcRtTF4O7CQkK3tXhvX
- cCiMrZuEgIld1a2KfjtHsIUu/oAQCKCx7fGs11u4gWzMoATXWnWjLCYPUuT99rUvw0HFVE
- FckYqYRVDbBSXy1btg0Kjd2aoH0hjFAIPruG1nC4IsLJddiCYtoMfHQpDpP9RKPQBOiAnR
- HJHimkXP9tmHGGqthFRauJolLOimIaLd2csSieO9zeWinLAUXQxNFxqKta20mA==
-Message-ID: <0b2fc70d8fae566c8ca43bafc929e2bd19725924.camel@mailbox.org>
-Subject: Re: [PATCH 1/2] dma-fence: Rename dma_fence_is_signaled()
+ bh=SLuq5GVYUyuL/DywDcVYk39zE5PvpELZsNKYvGOD8Bs=;
+ b=PVDwBf/gmmgKjY9RZKHUvxNpTH3XM4aaI71DRzXnU/vdWErUzBfQ/xalDmz71zy57o4l7T
+ 1Sr8jwCgJWH5wUUd+KlWp271FSCIRXZV7cy2NpaBcQNan2Kw1rqn508laaSliT2ZgwAtry
+ 6X7qm0n4uQvQxjfwzJS4DI7iBIQ3AItW5cqlvmVD59sAgM5/uywFV+kyYaca0OAhbumM4r
+ ZepVZOj/D6In5J8rFtRx+0UOmaoYP3W8YBJ3VgVcM2NJ4zTptdaStEXcPATAHvVyhEiyKZ
+ wmqWNm1msAPfiB70f39aZ0vXVw7kKsMvSzfjSsqmr9tctb3/X2hJ5hFDLWpFqg==
+Message-ID: <1cbb915240e5e09447ac8d04b5d2dc4165926de7.camel@mailbox.org>
+Subject: Re: [PATCH 0/3] drm/nouveau: Fix & improve nouveau_fence_done()
 From: Philipp Stanner <phasta@mailbox.org>
-To: Christian =?ISO-8859-1?Q?K=F6nig?= <christian.koenig@amd.com>, 
- phasta@kernel.org, Boris Brezillon <boris.brezillon@collabora.com>
-Cc: Sumit Semwal <sumit.semwal@linaro.org>, Gustavo Padovan
- <gustavo@padovan.org>, Felix Kuehling <Felix.Kuehling@amd.com>, Alex
- Deucher <alexander.deucher@amd.com>, Xinhui Pan <Xinhui.Pan@amd.com>, David
- Airlie <airlied@gmail.com>, Simona Vetter <simona@ffwll.ch>, Maarten
- Lankhorst <maarten.lankhorst@linux.intel.com>, Maxime Ripard
- <mripard@kernel.org>,  Thomas Zimmermann <tzimmermann@suse.de>, Lucas Stach
- <l.stach@pengutronix.de>, Russell King <linux+etnaviv@armlinux.org.uk>,
- Christian Gmeiner <christian.gmeiner@gmail.com>,  Jani Nikula
- <jani.nikula@linux.intel.com>, Joonas Lahtinen
- <joonas.lahtinen@linux.intel.com>, Rodrigo Vivi <rodrigo.vivi@intel.com>,
- Tvrtko Ursulin <tursulin@ursulin.net>, Frank Binns
- <frank.binns@imgtec.com>, Matt Coster <matt.coster@imgtec.com>, Qiang Yu
- <yuq825@gmail.com>, Rob Clark <robdclark@gmail.com>, Sean Paul
- <sean@poorly.run>,  Konrad Dybcio <konradybcio@kernel.org>, Abhinav Kumar
- <quic_abhinavk@quicinc.com>, Dmitry Baryshkov
- <dmitry.baryshkov@linaro.org>, Marijn Suijten
- <marijn.suijten@somainline.org>,  Lyude Paul <lyude@redhat.com>, Danilo
- Krummrich <dakr@kernel.org>, Rob Herring <robh@kernel.org>,  Steven Price
- <steven.price@arm.com>, Dave Airlie <airlied@redhat.com>, Gerd Hoffmann
- <kraxel@redhat.com>,  Matthew Brost <matthew.brost@intel.com>, Huang Rui
- <ray.huang@amd.com>, Matthew Auld <matthew.auld@intel.com>,  Melissa Wen
- <mwen@igalia.com>, =?ISO-8859-1?Q?Ma=EDra?= Canal <mcanal@igalia.com>, Zack
- Rusin <zack.rusin@broadcom.com>, Broadcom internal kernel review list
- <bcm-kernel-feedback-list@broadcom.com>, Lucas De Marchi
- <lucas.demarchi@intel.com>, Thomas =?ISO-8859-1?Q?Hellstr=F6m?=
- <thomas.hellstrom@linux.intel.com>, Bas Nieuwenhuizen
- <bas@basnieuwenhuizen.nl>,  Yang Wang <kevinyang.wang@amd.com>, Jesse Zhang
- <jesse.zhang@amd.com>, Tim Huang <tim.huang@amd.com>,  Sathishkumar S
- <sathishkumar.sundararaju@amd.com>, Saleemkhan Jamadar
- <saleemkhan.jamadar@amd.com>, Sunil Khatri <sunil.khatri@amd.com>, Lijo
- Lazar <lijo.lazar@amd.com>, Hawking Zhang <Hawking.Zhang@amd.com>, Ma Jun
- <Jun.Ma2@amd.com>, Yunxiang Li <Yunxiang.Li@amd.com>, Eric Huang
- <jinhuieric.huang@amd.com>, Asad Kamal <asad.kamal@amd.com>, Srinivasan
- Shanmugam <srinivasan.shanmugam@amd.com>,  Jack Xiao <Jack.Xiao@amd.com>,
- Friedrich Vock <friedrich.vock@gmx.de>, Michel =?ISO-8859-1?Q?D=E4nzer?=
- <mdaenzer@redhat.com>, Geert Uytterhoeven <geert@linux-m68k.org>,
- Anna-Maria Behnsen <anna-maria@linutronix.de>, Thomas Gleixner
- <tglx@linutronix.de>, Frederic Weisbecker <frederic@kernel.org>, Dan
- Carpenter <dan.carpenter@linaro.org>,  linux-media@vger.kernel.org,
- dri-devel@lists.freedesktop.org,  linaro-mm-sig@lists.linaro.org,
- linux-kernel@vger.kernel.org,  amd-gfx@lists.freedesktop.org,
- etnaviv@lists.freedesktop.org,  intel-gfx@lists.freedesktop.org,
- lima@lists.freedesktop.org,  linux-arm-msm@vger.kernel.org,
- freedreno@lists.freedesktop.org,  nouveau@lists.freedesktop.org,
- virtualization@lists.linux.dev,  spice-devel@lists.freedesktop.org,
- intel-xe@lists.freedesktop.org
-Date: Wed, 09 Apr 2025 17:04:00 +0200
-In-Reply-To: <334e843c-d7fe-4e33-b4fc-f3d18226465a@amd.com>
-References: <20250409120640.106408-2-phasta@kernel.org>
- <20250409120640.106408-3-phasta@kernel.org>
- <20250409143917.31303d22@collabora.com>
- <73d41cd84c73b296789b654e45125bfce88e0dbf.camel@mailbox.org>
- <72eb974dfea8fa1167cf97e29848672223f6fc5b.camel@mailbox.org>
- <ab7d1937-d0e9-45f8-8f7d-ddd7a1a9d3d5@amd.com>
- <9a90f7f14c22c01aa28d89aa91bf4dfa4049c062.camel@mailbox.org>
- <334e843c-d7fe-4e33-b4fc-f3d18226465a@amd.com>
+To: Philipp Stanner <phasta@kernel.org>, Lyude Paul <lyude@redhat.com>, 
+ Danilo Krummrich
+ <dakr@kernel.org>, David Airlie <airlied@gmail.com>, Simona Vetter
+ <simona@ffwll.ch>, Sabrina Dubroca <sd@queasysnail.net>, Sumit Semwal
+ <sumit.semwal@linaro.org>, Christian =?ISO-8859-1?Q?K=F6nig?=
+ <christian.koenig@amd.com>
+Cc: dri-devel@lists.freedesktop.org, nouveau@lists.freedesktop.org, 
+ linux-kernel@vger.kernel.org, netdev@vger.kernel.org, 
+ linux-media@vger.kernel.org, linaro-mm-sig@lists.linaro.org
+Date: Thu, 10 Apr 2025 11:51:13 +0200
+In-Reply-To: <20250410092418.135258-2-phasta@kernel.org>
+References: <20250410092418.135258-2-phasta@kernel.org>
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
 MIME-Version: 1.0
-X-MBO-RS-META: 9wh48drngnos9i43y9zpcu5f5mrpihgx
-X-MBO-RS-ID: f0082fb0ff96fc9be99
+X-MBO-RS-META: tgu3bdc6n14fz54pcg54szae1o4uch54
+X-MBO-RS-ID: e8dbf11236cea39fde8
 X-Mailman-Approved-At: Sat, 13 Dec 2025 12:40:50 +0000
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
@@ -116,204 +70,263 @@ Reply-To: phasta@kernel.org
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-On Wed, 2025-04-09 at 16:10 +0200, Christian K=C3=B6nig wrote:
-> Am 09.04.25 um 16:01 schrieb Philipp Stanner:
-> > On Wed, 2025-04-09 at 15:14 +0200, Christian K=C3=B6nig wrote:
-> > > Am 09.04.25 um 14:56 schrieb Philipp Stanner:
-> > > > On Wed, 2025-04-09 at 14:51 +0200, Philipp Stanner wrote:
-> > > > > On Wed, 2025-04-09 at 14:39 +0200, Boris Brezillon wrote:
-> > > > > > Hi Philipp,
-> > > > > >=20
-> > > > > > On Wed,=C2=A0 9 Apr 2025 14:06:37 +0200
-> > > > > > Philipp Stanner <phasta@kernel.org> wrote:
-> > > > > >=20
-> > > > > > > dma_fence_is_signaled()'s name strongly reads as if this
-> > > > > > > function
-> > > > > > > were
-> > > > > > > intended for checking whether a fence is already
-> > > > > > > signaled.
-> > > > > > > Also
-> > > > > > > the
-> > > > > > > boolean it returns hints at that.
-> > > > > > >=20
-> > > > > > > The function's behavior, however, is more complex: it can
-> > > > > > > check
-> > > > > > > with a
-> > > > > > > driver callback whether the hardware's sequence number
-> > > > > > > indicates
-> > > > > > > that
-> > > > > > > the fence can already be treated as signaled, although
-> > > > > > > the
-> > > > > > > hardware's /
-> > > > > > > driver's interrupt handler has not signaled it yet. If
-> > > > > > > that's
-> > > > > > > the
-> > > > > > > case,
-> > > > > > > the function also signals the fence.
-> > > > > > >=20
-> > > > > > > (Presumably) this has caused a bug in Nouveau (unknown
-> > > > > > > commit),
-> > > > > > > where
-> > > > > > > nouveau_fence_done() uses the function to check a fence,
-> > > > > > > which
-> > > > > > > causes a
-> > > > > > > race.
-> > > > > > >=20
-> > > > > > > Give the function a more obvious name.
-> > > > > > This is just my personal view on this, but I find the new
-> > > > > > name
-> > > > > > just
-> > > > > > as
-> > > > > > confusing as the old one. It sounds like something is
-> > > > > > checked,
-> > > > > > but
-> > > > > > it's
-> > > > > > clear what, and then the fence is forcibly signaled like it
-> > > > > > would
-> > > > > > be
-> > > > > > if
-> > > > > > you call drm_fence_signal(). Of course, this clarified by
-> > > > > > the
-> > > > > > doc,
-> > > > > > but
-> > > > > > given the goal was to make the function name clearly
-> > > > > > reflect
-> > > > > > what
-> > > > > > it
-> > > > > > does, I'm not convinced it's significantly better.
-> > > > > >=20
-> > > > > > Maybe dma_fence_check_hw_state_and_propagate(), though it
-> > > > > > might
-> > > > > > be
-> > > > > > too long of name. Oh well, feel free to ignore this
-> > > > > > comments if
-> > > > > > a
-> > > > > > majority is fine with the new name.
-> > > > > Yoa, the name isn't perfect (the perfect name describing the
-> > > > > whole
-> > > > > behavior would be
-> > > > > dma_fence_check_if_already_signaled_then_check_hardware_state
-> > > > > _and
-> > > > > _pro
-> > > > > pa
-> > > > > gate() ^^'
-> > > > >=20
-> > > > > My intention here is to have the reader realize "watch out,
-> > > > > the
-> > > > > fence
-> > > > > might get signaled here!", which is probably the most
-> > > > > important
-> > > > > event
-> > > > > regarding fences, which can race, invoke the callbacks and so
-> > > > > on.
-> > > > >=20
-> > > > > For details readers will then check the documentation.
-> > > > >=20
-> > > > > But I'm of course open to see if there's a majority for this
-> > > > > or
-> > > > > that
-> > > > > name.
-> > > > how about:
-> > > >=20
-> > > > dma_fence_check_hw_and_signal() ?
-> > > I don't think that renaming the function is a good idea in the
-> > > first
-> > > place.
-> > >=20
-> > > What the function does internally is an implementation detail of
-> > > the
-> > > framework.
-> > >=20
-> > > For the code using this function it's completely irrelevant if
-> > > the
-> > > function might also signal the fence, what matters for the caller
-> > > is
-> > > the returned status of the fence. I think this also counts for
-> > > the
-> > > dma_fence_is_signaled() documentation.
-> > It does obviously matter. As it's currently implemented, a lot of
-> > important things happen implicitly.
->=20
-> Yeah, but that's ok.
->=20
-> The code who calls this is the consumer of the interface and so
-> shouldn't need to know this. That's why we have created the DMA fence
-> framework in the first place.
->=20
-> For the provider side when a driver or similar implements the
-> interface the relevant documentation is the dma_fence_ops structure.
->=20
-> > I only see improvement by making things more obvious.
-> >=20
-> > In any case, how would you call a wrapper that just does
-> > test_bit(IS_SIGNALED, =E2=80=A6) ?
->=20
-> Broken, that was very intentionally removed quite shortly after we
-> created the framework.
->=20
-> We have a few cases were implementations do check that for their
-> fences, but consumers should never be allowed to touch such
-> internals.
+On Thu, 2025-04-10 at 11:24 +0200, Philipp Stanner wrote:
+> Contains two patches improving nouveau_fence_done(), and one
+> addressing
+> an actual bug (race):
 
-There is theory and there is practice. In practice, those internals are
-being used by Nouveau, i915, Xe, vmgfx and radeon.
+Oops, that's the wrong calltrace. Here we go:
 
-So it seems that we failed quite a bit at communicating clearly how the
-interface should be used.
+[ 85.791794] Call Trace: [ 85.791796] <TASK> [ 85.791797] ? nouveau_fence_c=
+ontext_kill (/home/imperator/linux/./include/linux/dma-fence.h:587 (discrim=
+inator 9) /home/imperator/linux/drivers/gpu/drm/nouveau/nouveau_fence.c:94 =
+(discriminator 9)) nouveau [ 85.791874] ? __warn.cold (/home/imperator/linu=
+x/kernel/panic.c:748) [ 85.791878] ? nouveau_fence_context_kill (/home/impe=
+rator/linux/./include/linux/dma-fence.h:587 (discriminator 9) /home/imperat=
+or/linux/drivers/gpu/drm/nouveau/nouveau_fence.c:94 (discriminator 9)) nouv=
+eau [ 85.791950] ? report_bug (/home/imperator/linux/lib/bug.c:180 /home/im=
+perator/linux/lib/bug.c:219) [ 85.791953] ? handle_bug (/home/imperator/lin=
+ux/arch/x86/kernel/traps.c:260) [ 85.791956] ? exc_invalid_op (/home/impera=
+tor/linux/arch/x86/kernel/traps.c:309 (discriminator 1)) [ 85.791957] ? asm=
+_exc_invalid_op (/home/imperator/linux/./arch/x86/include/asm/idtentry.h:62=
+1) [ 85.791960] ? nouveau_fence_context_kill (/home/imperator/linux/./inclu=
+de/linux/dma-fence.h:587 (discriminator 9) /home/imperator/linux/drivers/gp=
+u/drm/nouveau/nouveau_fence.c:94 (discriminator 9)) nouveau [ 85.792028] dr=
+m_sched_fini.cold (/home/imperator/linux/./include/trace/../../drivers/gpu/=
+drm/scheduler/gpu_scheduler_trace.h:72 (discriminator 1)) gpu_sched [ 85.79=
+2033] ? drm_sched_entity_kill.part.0 (/home/imperator/linux/drivers/gpu/drm=
+/scheduler/sched_entity.c:243 (discriminator 2)) gpu_sched [ 85.792037] nou=
+veau_sched_destroy (/home/imperator/linux/drivers/gpu/drm/nouveau/nouveau_s=
+ched.c:509 /home/imperator/linux/drivers/gpu/drm/nouveau/nouveau_sched.c:51=
+8) nouveau [ 85.792122] nouveau_abi16_chan_fini.isra.0 (/home/imperator/lin=
+ux/drivers/gpu/drm/nouveau/nouveau_abi16.c:188) nouveau [ 85.792191] nouvea=
+u_abi16_fini (/home/imperator/linux/drivers/gpu/drm/nouveau/nouveau_abi16.c=
+:224 (discriminator 3)) nouveau [ 85.792263] nouveau_drm_postclose (/home/i=
+mperator/linux/drivers/gpu/drm/nouveau/nouveau_drm.c:1240) nouveau [ 85.792=
+349] drm_file_free (/home/imperator/linux/drivers/gpu/drm/drm_file.c:255) [=
+ 85.792353] drm_release (/home/imperator/linux/./arch/x86/include/asm/atomi=
+c.h:67 (discriminator 1) /home/imperator/linux/./include/linux/atomic/atomi=
+c-arch-fallback.h:2278 (discriminator 1) /home/imperator/linux/./include/li=
+nux/atomic/atomic-instrumented.h:1384 (discriminator 1) /home/imperator/lin=
+ux/drivers/gpu/drm/drm_file.c:428 (discriminator 1)) [ 85.792355] __fput (/=
+home/imperator/linux/fs/file_table.c:464) [ 85.792357] task_work_run (/home=
+/imperator/linux/kernel/task_work.c:227) [ 85.792360] do_exit (/home/impera=
+tor/linux/kernel/exit.c:939) [ 85.792362] do_group_exit (/home/imperator/li=
+nux/kernel/exit.c:1069) [ 85.792364] get_signal (/home/imperator/linux/kern=
+el/signal.c:3036) [ 85.792366] arch_do_signal_or_restart (/home/imperator/l=
+inux/./arch/x86/include/asm/syscall.h:38 /home/imperator/linux/arch/x86/ker=
+nel/signal.c:264 /home/imperator/linux/arch/x86/kernel/signal.c:339) [ 85.7=
+92369] syscall_exit_to_user_mode (/home/imperator/linux/kernel/entry/common=
+.c:113 /home/imperator/linux/./include/linux/entry-common.h:329 /home/imper=
+ator/linux/kernel/entry/common.c:207 /home/imperator/linux/kernel/entry/com=
+mon.c:218) [ 85.792372] do_syscall_64 (/home/imperator/linux/./arch/x86/inc=
+lude/asm/cpufeature.h:172 /home/imperator/linux/arch/x86/entry/common.c:98)=
+ [ 85.792373] ? syscall_exit_to_user_mode_prepare (/home/imperator/linux/./=
+include/linux/audit.h:357 /home/imperator/linux/kernel/entry/common.c:166 /=
+home/imperator/linux/kernel/entry/common.c:200) [ 85.792376] ? syscall_exit=
+_to_user_mode (/home/imperator/linux/./arch/x86/include/asm/paravirt.h:686 =
+/home/imperator/linux/./include/linux/entry-common.h:232 /home/imperator/li=
+nux/kernel/entry/common.c:206 /home/imperator/linux/kernel/entry/common.c:2=
+18) [ 85.792377] ? do_syscall_64 (/home/imperator/linux/./arch/x86/include/=
+asm/cpufeature.h:172 /home/imperator/linux/arch/x86/entry/common.c:98) [ 85=
+.792378] entry_SYSCALL_64_after_hwframe (/home/imperator/linux/arch/x86/ent=
+ry/entry_64.S:130) [ 85.792381] RIP: 0033:0x7ff950b6af70 [ 85.792383] Code:=
+ Unable to access opcode bytes at 0x7ff950b6af46. objdump: '/tmp/tmp.sfPRl5=
+k2te.o': No such file Code starting with the faulting instruction =3D=3D=3D=
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D [ 85.792383] RSP: 002b:00007f=
+f93cdfb6f0 EFLAGS: 00000293 ORIG_RAX: 000000000000010f [ 85.792385] RAX: ff=
+fffffffffffdfe RBX: 000055d386d61870 RCX: 00007ff950b6af70 [ 85.792386] RDX=
+: 0000000000000000 RSI: 0000000000000001 RDI: 00007ff928000b90 [ 85.792387]=
+ RBP: 00007ff93cdfb740 R08: 0000000000000008 R09: 0000000000000000 [ 85.792=
+388] R10: 0000000000000000 R11: 0000000000000293 R12: 0000000000000001 [ 85=
+.792388] R13: 0000000000000000 R14: 0000000000000000 R15: 00007ff951b10b40 =
+[ 85.792390] </TASK> [ 85.792391] ---[ end trace 0000000000000000 ]---
 
-And, to repeat myself, with both name and docu of that function, I
-think it is very easy to misunderstand what it's doing. You say that it
-shouldn't matter =E2=80=93 and maybe that's true, in theory. In practice, i=
-t
-does matter. In practice, APIs get misused and have side-effects. And
-making that harder is desirable.
+By the way, for reference:
+I did try whether it could be done to have nouveau_fence_signal()
+incorporated into nouveau_fence_update() and nouveau_fence_done().
+This, however, would then cause a race with the list_del() in
+nouveau_fence_no_signaling(), WARNing because of the list poison.
 
-In any case, I might have to add another such call to Nouveau, because
-the solution preferred by you over the callback causes another race.
-Certainly one could solve this in a clean way, but someone has to do
-the work, and we're talking about more than a few hours here.
+So the "solution" space is:
+ * A cleanup callback on the dma_fence.
+ * Keeping the current race or
+ * replacing it with another race with another function.
+ * Just preventing nouveau_fence_done() from signaling fences other
+   than through nouveau_fence_update/signal
 
-In any case, be so kind and look at patch 2 and tell me there if you're
-at least OK with making the documentation more detailed.
+The later seems clearly like the cleanest solution to me. Alternative
+would be a work-intensive rework of all the misdesigns broken in
+nouveau_fence.c
+
 
 P.
 
 >=20
-> Regards,
-> Christian.
+> [=C2=A0=C2=A0 39.848463] WARNING: CPU: 21 PID: 1734 at
+> drivers/gpu/drm/nouveau/nouveau_fence.c:509
+> nouveau_fence_no_signaling+0xac/0xd0 [nouveau]
+> [=C2=A0=C2=A0 39.848551] Modules linked in: snd_seq_dummy snd_hrtimer
+> nf_conntrack_netbios_ns nf_conntrack_broadcast nft_fib_inet
+> nft_fib_ipv4 nft_fib_ipv6 nft_fib nft_reject_ine
+> t nf_reject_ipv4 nf_reject_ipv6 nft_reject nft_ct nft_chain_nat
+> nf_nat nf_conntrack nf_defrag_ipv6 nf_defrag_ipv4 rfkill ip_set
+> nf_tables qrtr sunrpc snd_sof_pci_intel_
+> tgl snd_sof_pci_intel_cnl snd_sof_intel_hda_generic snd_sof_pci
+> snd_sof_xtensa_dsp snd_sof_intel_hda_common snd_soc_hdac_hda
+> snd_sof_intel_hda snd_sof snd_sof_utils snd
+> _soc_acpi_intel_match snd_soc_acpi snd_soc_acpi_intel_sdca_quirks
+> snd_sof_intel_hda_mlink snd_soc_sdca snd_soc_avs snd_ctl_led
+> snd_soc_hda_codec intel_rapl_msr snd_hda_
+> codec_realtek snd_hda_ext_core intel_rapl_common
+> snd_hda_codec_generic snd_soc_core snd_hda_scodec_component
+> intel_uncore_frequency intel_uncore_frequency_common snd_hd
+> a_codec_hdmi intel_ifs snd_compress i10nm_edac skx_edac_common nfit
+> snd_hda_intel snd_intel_dspcfg libnvdimm snd_hda_codec binfmt_misc
+> snd_hwdep snd_hda_core snd_seq sn
+> d_seq_device dell_wmi
+> [=C2=A0=C2=A0 39.848575]=C2=A0 dell_pc x86_pkg_temp_thermal spi_nor platf=
+orm_profile
+> sparse_keymap intel_powerclamp dax_hmem snd_pcm cxl_acpi coretemp
+> cxl_port iTCO_wdt mtd rapl intel
+> _pmc_bxt pmt_telemetry cxl_core dell_wmi_sysman pmt_class
+> iTCO_vendor_support snd_timer isst_if_mmio vfat intel_cstate
+> dell_smbios dcdbas fat dell_wmi_ddv dell_smm_hwmo
+> n dell_wmi_descriptor firmware_attributes_class wmi_bmof intel_uncore
+> einj pcspkr isst_if_mbox_pci atlantic snd isst_if_common intel_vsec
+> e1000e macsec mei_me i2c_i801=20
+> spi_intel_pci soundcore i2c_smbus spi_intel mei joydev loop nfnetlink
+> zram nouveau drm_ttm_helper ttm polyval_clmulni iaa_crypto gpu_sched
+> polyval_generic rtsx_pci_sdmm
+> c ghash_clmulni_intel i2c_algo_bit mmc_core drm_gpuvm sha512_ssse3
+> nvme drm_exec drm_display_helper sha256_ssse3 idxd sha1_ssse3 cec
+> nvme_core idxd_bus rtsx_pci nvme_au
+> th pinctrl_alderlake ip6_tables ip_tables fuse
+> [=C2=A0=C2=A0 39.848603] CPU: 21 UID: 42 PID: 1734 Comm: gnome-shell Tain=
+ted:
+> G=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 W=C2=A0=C2=A0=C2=A0=C2=A0=C2=
+=A0=C2=A0=C2=A0=C2=A0=C2=A0 6.14.0-rc4+ #11
+> [=C2=A0=C2=A0 39.848605] Tainted: [W]=3DWARN
+> [=C2=A0=C2=A0 39.848606] Hardware name: Dell Inc. Precision 7960 Tower/01=
+G0M6,
+> BIOS 2.7.0 12/17/2024
+> [=C2=A0=C2=A0 39.848607] RIP: 0010:nouveau_fence_no_signaling+0xac/0xd0
+> [nouveau]
+> [=C2=A0=C2=A0 39.848688] Code: db 74 17 48 8d 7b 38 b8 ff ff ff ff f0 0f =
+c1 43
+> 38 83 f8 01 74 29 85 c0 7e 17 31 c0 5b 5d c3 cc cc cc cc e8 76 b2 c5
+> f0 eb 96 <0f> 0b e9 67 ff ff f
+> f be 03 00 00 00 e8 83 76 33 f1 31 c0 eb dd e8
+> [=C2=A0=C2=A0 39.848690] RSP: 0018:ff1cc1ffc5c039f0 EFLAGS: 00010046
+> [=C2=A0=C2=A0 39.848691] RAX: 0000000000000001 RBX: ff175a3b504da980 RCX:
+> ff175a3b4801e008
+> [=C2=A0=C2=A0 39.848692] RDX: ff175a3b43e7bad0 RSI: ffffffffc09d3fda RDI:
+> ff175a3b504da980
+> [=C2=A0=C2=A0 39.848693] RBP: ff175a3b504da9c0 R08: ffffffffc09e39df R09:
+> 0000000000000001
+> [=C2=A0=C2=A0 39.848694] R10: 0000000000000001 R11: 0000000000000000 R12:
+> ff175a3b6d97de00
+> [=C2=A0=C2=A0 39.848695] R13: 0000000000000246 R14: ff1cc1ffc5c03c60 R15:
+> 0000000000000001
+> [=C2=A0=C2=A0 39.848696] FS:=C2=A0 00007fc5477846c0(0000) GS:ff175a5a5028=
+0000(0000)
+> knlGS:0000000000000000
+> [=C2=A0=C2=A0 39.848698] CS:=C2=A0 0010 DS: 0000 ES: 0000 CR0: 0000000080=
+050033
+> [=C2=A0=C2=A0 39.848699] CR2: 000055cb7613d1a8 CR3: 000000012e5ce004 CR4:
+> 0000000000f71ef0
+> [=C2=A0=C2=A0 39.848700] DR0: 0000000000000000 DR1: 0000000000000000 DR2:
+> 0000000000000000
+> [=C2=A0=C2=A0 39.848701] DR3: 0000000000000000 DR6: 00000000fffe07f0 DR7:
+> 0000000000000400
+> [=C2=A0=C2=A0 39.848702] PKRU: 55555554
+> [=C2=A0=C2=A0 39.848703] Call Trace:
+> [=C2=A0=C2=A0 39.848704]=C2=A0 <TASK>
+> [=C2=A0=C2=A0 39.848705]=C2=A0 ? nouveau_fence_no_signaling+0xac/0xd0 [no=
+uveau]
+> [=C2=A0=C2=A0 39.848782]=C2=A0 ? __warn.cold+0x93/0xfa
+> [=C2=A0=C2=A0 39.848785]=C2=A0 ? nouveau_fence_no_signaling+0xac/0xd0 [no=
+uveau]
+> [=C2=A0=C2=A0 39.848861]=C2=A0 ? report_bug+0xff/0x140
+> [=C2=A0=C2=A0 39.848863]=C2=A0 ? handle_bug+0x58/0x90
+> [=C2=A0=C2=A0 39.848865]=C2=A0 ? exc_invalid_op+0x17/0x70
+> [=C2=A0=C2=A0 39.848866]=C2=A0 ? asm_exc_invalid_op+0x1a/0x20
+> [=C2=A0=C2=A0 39.848870]=C2=A0 ? nouveau_fence_no_signaling+0xac/0xd0 [no=
+uveau]
+> [=C2=A0=C2=A0 39.848943]=C2=A0 nouveau_fence_enable_signaling+0x32/0x80 [=
+nouveau]
+> [=C2=A0=C2=A0 39.849016]=C2=A0 ? __pfx_nouveau_fence_cleanup_cb+0x10/0x10=
+ [nouveau]
+> [=C2=A0=C2=A0 39.849088]=C2=A0 __dma_fence_enable_signaling+0x33/0xc0
+> [=C2=A0=C2=A0 39.849090]=C2=A0 dma_fence_add_callback+0x4b/0xd0
+> [=C2=A0=C2=A0 39.849093]=C2=A0 nouveau_fence_emit+0xa3/0x260 [nouveau]
+> [=C2=A0=C2=A0 39.849166]=C2=A0 nouveau_fence_new+0x7d/0xf0 [nouveau]
+> [=C2=A0=C2=A0 39.849242]=C2=A0 nouveau_gem_ioctl_pushbuf+0xe8f/0x1300 [no=
+uveau]
+> [=C2=A0=C2=A0 39.849338]=C2=A0 ? __pfx_nouveau_gem_ioctl_pushbuf+0x10/0x1=
+0 [nouveau]
+> [=C2=A0=C2=A0 39.849431]=C2=A0 drm_ioctl_kernel+0xad/0x100
+> [=C2=A0=C2=A0 39.849433]=C2=A0 drm_ioctl+0x288/0x550
+> [=C2=A0=C2=A0 39.849435]=C2=A0 ? __pfx_nouveau_gem_ioctl_pushbuf+0x10/0x1=
+0 [nouveau]
+> [=C2=A0=C2=A0 39.849526]=C2=A0 nouveau_drm_ioctl+0x57/0xb0 [nouveau]
+> [=C2=A0=C2=A0 39.849620]=C2=A0 __x64_sys_ioctl+0x94/0xc0
+> [=C2=A0=C2=A0 39.849621]=C2=A0 do_syscall_64+0x82/0x160
+> [=C2=A0=C2=A0 39.849623]=C2=A0 ? drm_ioctl+0x2b7/0x550
+> [=C2=A0=C2=A0 39.849625]=C2=A0 ? __pfx_nouveau_gem_ioctl_pushbuf+0x10/0x1=
+0 [nouveau]
+> [=C2=A0=C2=A0 39.849719]=C2=A0 ? ktime_get_mono_fast_ns+0x38/0xd0
+> [=C2=A0=C2=A0 39.849721]=C2=A0 ? __pm_runtime_suspend+0x69/0xc0
+> [=C2=A0=C2=A0 39.849724]=C2=A0 ? syscall_exit_to_user_mode_prepare+0x15e/=
+0x1a0
+> [=C2=A0=C2=A0 39.849726]=C2=A0 ? syscall_exit_to_user_mode+0x10/0x200
+> [=C2=A0=C2=A0 39.849729]=C2=A0 ? do_syscall_64+0x8e/0x160
+> [=C2=A0=C2=A0 39.849730]=C2=A0 ? exc_page_fault+0x7e/0x1a0
+> [=C2=A0=C2=A0 39.849733]=C2=A0 entry_SYSCALL_64_after_hwframe+0x76/0x7e
+> [=C2=A0=C2=A0 39.849735] RIP: 0033:0x7fc5576fe0ad
+> [=C2=A0=C2=A0 39.849736] Code: 04 25 28 00 00 00 48 89 45 c8 31 c0 48 8d =
+45 10
+> c7 45 b0 10 00 00 00 48 89 45 b8 48 8d 45 d0 48 89 45 c0 b8 10 00 00
+> 00 0f 05 <89> c2 3d 00 f0 ff ff 77 1a 48 8b 45 c8 64 48 2b 04 25 28
+> 00 00 00
+> [=C2=A0=C2=A0 39.849737] RSP: 002b:00007ffc002688a0 EFLAGS: 00000246 ORIG=
+_RAX:
+> 0000000000000010
+> [=C2=A0=C2=A0 39.849739] RAX: ffffffffffffffda RBX: 000055cb74e316c0 RCX:
+> 00007fc5576fe0ad
+> [=C2=A0=C2=A0 39.849740] RDX: 00007ffc00268960 RSI: 00000000c0406481 RDI:
+> 000000000000000e
+> [=C2=A0=C2=A0 39.849741] RBP: 00007ffc002688f0 R08: 0000000000000000 R09:
+> 000055cb74e35560
+> [=C2=A0=C2=A0 39.849742] R10: 0000000000000014 R11: 0000000000000246 R12:
+> 00007ffc00268960
+> [=C2=A0=C2=A0 39.849744] R13: 00000000c0406481 R14: 000000000000000e R15:
+> 000055cb74e3cd10
+> [=C2=A0=C2=A0 39.849746]=C2=A0 </TASK>
+> [=C2=A0=C2=A0 39.849746] ---[ end trace 0000000000000000 ]---
+> [=C2=A0=C2=A0 39.849776] ------------[ cut here ]------------
 >=20
-> >=20
-> > P.
-> >=20
-> > > What we should improve is the documentation of the dma_fence_ops-
-> > > > enable_signaling and dma_fence_ops->signaled callbacks.
-> > > Especially see the comment about reference counts on
-> > > enable_signaling
-> > > which is missing on the signaled callback. That is most likely
-> > > the
-> > > root cause why nouveau implemented enable_signaling correctly but
-> > > not
-> > > the other one.
-> > >=20
-> > > But putting that aside I think we should make nails with heads
-> > > and
-> > > let the framework guarantee that the fences stay alive until they
-> > > are
-> > > signaled (one way or another). This completely removes the burden
-> > > to
-> > > keep a reference on unsignaled fences from the drivers /
-> > > implementations and make things more over all more defensive.
-> > >=20
-> > > Regards,
-> > > Christian.
-> > >=20
-> > > > P.
-> > > >=20
-> > > > > P.
-> > > > >=20
-> > > > >=20
-> > > > > > Regards,
-> > > > > >=20
-> > > > > > Boris
+>=20
+> This is the first WARN_ON() in dma_fence_set_error(), called by
+> nouveau_fence_context_kill().
+>=20
+> It's rare, but it is a bug, or rather: the archetype of a race, since
+> (as Christian pointed out) nouveau_fence_update() later at some point
+> will remove the signaled fence (by signaling it again).
+>=20
+>=20
+> P.
+>=20
+>=20
+> Philipp Stanner (3):
+> =C2=A0 drm/nouveau: Prevent signaled fences in pending list
+> =C2=A0 drm/nouveau: Remove surplus if-branch
+> =C2=A0 drm/nouveau: Add helper to check base fence
+>=20
+> =C2=A0drivers/gpu/drm/nouveau/nouveau_fence.c | 32 ++++++++++++++--------=
+-
+> --
+> =C2=A01 file changed, 18 insertions(+), 14 deletions(-)
 >=20
 
