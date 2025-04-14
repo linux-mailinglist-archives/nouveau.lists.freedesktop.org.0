@@ -2,61 +2,50 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id D9957A884BF
-	for <lists+nouveau@lfdr.de>; Mon, 14 Apr 2025 16:27:16 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 788C1A88BDA
+	for <lists+nouveau@lfdr.de>; Mon, 14 Apr 2025 20:57:23 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id AF24410E5F2;
-	Mon, 14 Apr 2025 14:27:14 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id D632410E253;
+	Mon, 14 Apr 2025 18:57:21 +0000 (UTC)
 Authentication-Results: gabe.freedesktop.org;
-	dkim=pass (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="UQCpq0AB";
+	dkim=pass (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="Gl9b0Krk";
 	dkim-atps=neutral
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from tor.source.kernel.org (tor.source.kernel.org [172.105.4.254])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 916DE10E5E1;
- Mon, 14 Apr 2025 14:27:13 +0000 (UTC)
+Received: from nyc.source.kernel.org (nyc.source.kernel.org [147.75.193.91])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 17F1310E253;
+ Mon, 14 Apr 2025 18:57:21 +0000 (UTC)
 Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by tor.source.kernel.org (Postfix) with ESMTP id 19DCC60007;
- Mon, 14 Apr 2025 14:26:58 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 92AD9C4CEE2;
- Mon, 14 Apr 2025 14:27:09 +0000 (UTC)
+ by nyc.source.kernel.org (Postfix) with ESMTP id 93C89A4A15E;
+ Mon, 14 Apr 2025 18:51:51 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 13541C4CEE2;
+ Mon, 14 Apr 2025 18:57:17 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1744640832;
- bh=JWVti9yDCkyhRv0BTyTqquIhF/3Y9o19PO3iuCETym8=;
- h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
- b=UQCpq0ABSl2OfpmYLyUO46h6ATAeVaZBibS9KwX3p7ArIrXTDEg8krVSXdXwLB4To
- I/Al+bTOimEiznRgOxdzX3OlMlcTlnp4hnHQomdNaVzLElWfM6+v9YTnTKAq9ffZqF
- 811pOgD8mZ9gDca7XQpJL+UKogHhduI3BpplcszT/IJPvjMEH1VXwcxHumEgUkt2BL
- BNlRSFxFrSQ5giUFMjWtwLXftLwzqO7buY7Qc2VBwO79fFtTeTayO0m6Z4t8YOkGKS
- 7oT6ndVIgkJEQdfhwYg1DZOTqoRuWKZKZWhKGkJk1fbLXdarXiOaPd2F2gOJfELOLk
- Ao+/njDNXZRag==
-Date: Mon, 14 Apr 2025 16:27:06 +0200
-From: Danilo Krummrich <dakr@kernel.org>
-To: phasta@kernel.org
-Cc: Christian =?iso-8859-1?Q?K=F6nig?= <christian.koenig@amd.com>,
- Lyude Paul <lyude@redhat.com>, David Airlie <airlied@gmail.com>,
- Simona Vetter <simona@ffwll.ch>, Sabrina Dubroca <sd@queasysnail.net>,
- Sumit Semwal <sumit.semwal@linaro.org>,
- dri-devel@lists.freedesktop.org, nouveau@lists.freedesktop.org,
- linux-kernel@vger.kernel.org, netdev@vger.kernel.org,
- linux-media@vger.kernel.org, linaro-mm-sig@lists.linaro.org,
- stable@vger.kernel.org
-Subject: Re: [PATCH 1/3] drm/nouveau: Prevent signaled fences in pending list
-Message-ID: <Z_0bOgTBkkRH9jib@cassiopeiae>
-References: <8583665a-6886-4245-be49-fd8839cfe212@amd.com>
- <c737c89c7ce9174e349c61ab4e5712eee8946f13.camel@mailbox.org>
- <50c9530d-e274-4f89-8620-16afe0981239@amd.com>
- <1a73e5fe4350d6ee4b7d807612264eb637c4f2a9.camel@mailbox.org>
- <d3dee321cd6b70d6ca98768fbcf6f1e6134c43a1.camel@mailbox.org>
- <81a70ba6-94b1-4bb3-a0b2-9e8890f90b33@amd.com>
- <aca00cb25b813da4fd2f215829f02337f05642f3.camel@mailbox.org>
- <45d66ca4-5390-42e9-869a-f5f9125d05b6@amd.com>
- <1127db242503055b2e5e8d07db3aeae46cfb7a24.camel@mailbox.org>
- <6e4628c3cfc7e0d1e4ea9af510ce0b09b34a8cf8.camel@mailbox.org>
+ s=k20201202; t=1744657039;
+ bh=3m/OjbvoXCmWtUPCO5DT7hKbScsBNwmgSHzIzeZQduI=;
+ h=Date:Subject:To:Cc:References:From:In-Reply-To:From;
+ b=Gl9b0KrkF7gLlm1Sw/F91MC/Tci96/UK3zzE4KF6pDvXaOgIRxfrlQDP+VlJLDKkJ
+ KBf/qDpA7JygfXbWJQ17k8/vf2JC5XCiYQugj+wvGP2QMKXO6JUZExOVprvPptJ01j
+ +B4VMkP+TH2KS/IOJ3ivObbFc8ostKbdpcRw2ATasehD7TiJiLBLoYJVB351q3LeNH
+ /4q8jbRPc/aOwgrw+xREx4OLObn4UxPnEHVW1steOGg9cvSUt3KXN5mF7V4+koKvzC
+ Vp6yZKV8+ne/DFeI4weYTzNJ/Vva9j58rARtY7KAYiYYAe9EXF4NwVuHwI92mn7iUF
+ 6JMM2xbF3N9ww==
+Message-ID: <95c3c3d9-3997-4eda-abd8-223e5bfe60d7@kernel.org>
+Date: Mon, 14 Apr 2025 20:57:16 +0200
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <6e4628c3cfc7e0d1e4ea9af510ce0b09b34a8cf8.camel@mailbox.org>
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH 11/11] drm/nouveau: Test for imported buffers with
+ drm_gem_is_imported()
+To: Thomas Zimmermann <tzimmermann@suse.de>
+Cc: airlied@gmail.com, simona@ffwll.ch, mripard@kernel.org,
+ maarten.lankhorst@linux.intel.com, dri-devel@lists.freedesktop.org,
+ Lyude Paul <lyude@redhat.com>, nouveau@lists.freedesktop.org
+References: <20250414134821.568225-11-tzimmermann@suse.de>
+From: Danilo Krummrich <dakr@kernel.org>
+Content-Language: en-US
+In-Reply-To: <20250414134821.568225-11-tzimmermann@suse.de>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -71,25 +60,16 @@ List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-On Mon, Apr 14, 2025 at 10:54:25AM +0200, Philipp Stanner wrote:
-> @Danilo:
-> We have now 2 possible solutions for the firing WARN_ON floating.
+On 4/14/25 3:48 PM, Thomas Zimmermann wrote:
+> Instead of testing import_attach for imported GEM buffers, invoke
+> drm_gem_is_imported() to do the test. The helper tests the dma_buf
+> itself while import_attach is just an artifact of the import. Prepares
+> to make import_attach optional.
 > 
-> Version A (Christian)
-> Check in nouveau_fence_context_kill() whether a fence is already
-> signaled before setting an error.
-> 
-> Version B (Me)
-> This patch series here. Make sure that in Nouveau, only
-> nouveau_fence_signal() signals fences.
-> 
-> 
-> Both should do the trick. Please share a maintainer-preference so I can
-> move on here.
+> Signed-off-by: Thomas Zimmermann <tzimmermann@suse.de>
+> Cc: Lyude Paul <lyude@redhat.com>
+> Cc: Danilo Krummrich <dakr@kernel.org>
+> Cc: dri-devel@lists.freedesktop.org
+> Cc: nouveau@lists.freedesktop.org
 
-Thanks for working on this Philipp.
-
-If you don't want to rework things entirely, A seems to be superior, since it
-also catches the case when someone else would call dma_fence_is_signaled() on a
-nouveau fence (which could happen at any time). This doesn't seem to be caught
-by B, right?
+Acked-by: Danilo Krummrich <dakr@kernel.org>
