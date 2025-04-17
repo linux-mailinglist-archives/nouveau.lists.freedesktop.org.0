@@ -2,96 +2,57 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id D5C58A915B2
-	for <lists+nouveau@lfdr.de>; Thu, 17 Apr 2025 09:49:55 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 68E03A91ACC
+	for <lists+nouveau@lfdr.de>; Thu, 17 Apr 2025 13:27:56 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 0FBD910EA50;
-	Thu, 17 Apr 2025 07:49:54 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 8CE2810EABD;
+	Thu, 17 Apr 2025 11:27:54 +0000 (UTC)
 Authentication-Results: gabe.freedesktop.org;
-	dkim=pass (1024-bit key; unprotected) header.d=redhat.com header.i=@redhat.com header.b="f4OYKlOo";
+	dkim=fail reason="signature verification failed" (2048-bit key; unprotected) header.d=igalia.com header.i=@igalia.com header.b="K47WesQY";
 	dkim-atps=neutral
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from us-smtp-delivery-124.mimecast.com
- (us-smtp-delivery-124.mimecast.com [170.10.129.124])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 24B9810E18C
- for <nouveau@lists.freedesktop.org>; Thu, 17 Apr 2025 07:49:52 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1744876191;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references;
- bh=fHaewztJhU6dXBBKAbX5gnzf+MrVHXnJVP+oMWLhnco=;
- b=f4OYKlOojPpVViXa2uk1ZA8TAFhUNfbMb7xDBtpSY7/hXFKZBf3qbQ0k9rOzqIIpEo4aDy
- z/z0XmSclLafxThRsVKE0yM6KEhjjLyr3EIuPDxLxJE7mEWitl4DQEV+sWOQuyI/B91M0m
- 3EKNspX5mBf0Ky6zdgsuiCrJCZ6s8ZY=
-Received: from mail-pg1-f197.google.com (mail-pg1-f197.google.com
- [209.85.215.197]) by relay.mimecast.com with ESMTP with STARTTLS
- (version=TLSv1.3, cipher=TLS_AES_256_GCM_SHA384) id
- us-mta-383-aFx5eBXgNp6zP6oIefpiNQ-1; Thu, 17 Apr 2025 03:49:49 -0400
-X-MC-Unique: aFx5eBXgNp6zP6oIefpiNQ-1
-X-Mimecast-MFC-AGG-ID: aFx5eBXgNp6zP6oIefpiNQ_1744876188
-Received: by mail-pg1-f197.google.com with SMTP id
- 41be03b00d2f7-af59547f55bso333495a12.0
- for <nouveau@lists.freedesktop.org>; Thu, 17 Apr 2025 00:49:48 -0700 (PDT)
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1744876188; x=1745480988;
- h=mime-version:user-agent:content-transfer-encoding:references
- :in-reply-to:date:cc:to:from:subject:message-id:x-gm-message-state
- :from:to:cc:subject:date:message-id:reply-to;
- bh=lbQgrXz5oiICX14AE+d1lrN5WuBPYGRCPNcO8Q1nbVQ=;
- b=G+vv9TPCYEU7qIKRqr6xDegcifkV0yZ2EoCDlvL7df1tFltL6pWDHbevNLhYOxNn5G
- wkxpGoq9Jsn/WPvy+DzaFObrsdkSow9kIy00zUAf3gqeukZIh1zJpNrWKf0L75vkFNwG
- 2hg4MfcFYCui7diOytryWF3NZhxEPT3kbnPcANArl0TloSPizazO3yeOPuMRNPc4m5oz
- OKSU95ZE/MNmNhYWtCWKH4YvDhrrYoWMqsFUXy/Qpj1yKVtkdi0YYvWtLug8Bg63mJFi
- +uXUP/N+U/u8mBM1hMP8/PgpVMFZZOSssAUDOO4rjwPcDIHfPEyfWTgLR9obxRA0TNPg
- +ArQ==
-X-Forwarded-Encrypted: i=1;
- AJvYcCWxDKb5YnKZp7agW/cKZa9eZ17mTcOrG8fL74vaLWC99KEm6Qbnj5mO28IxDvKtQrsmtbpAu6bx@lists.freedesktop.org
-X-Gm-Message-State: AOJu0YwVfV9z+RM5VF4FfiRsWnDz+tPWLwvZIrUU2YCe8E/VGdY1jdLo
- FVswvDDPpwYwWA7Kas0mEHesKY/aMc6xFx/TtpEyMbKWfi7D8iPR/g42Da0dsSLY0wFiMJLvzPe
- j/si9APa3/4czpV32CnITCYqhGkeg+w0N5pH3c5Fny/vK+OPzaq1cIz+O5OHnUkg=
-X-Gm-Gg: ASbGncuLsBh/q/1selo1eTdO5OGga03Sknt5T4Lkv8lduPPd8upNnDBDM8eTuzcnckW
- f4VraPyz1vWyWvBMjhTmtx/FtneBYn9PiN/m/urHEvHaPPShLkVCY/H8Cvmm60VbchqaOY/4/8D
- /1pNkz1O0EyIhqbhoraCTEW3xBVXjt8tvTTEhbna8/PZvqx6AW9+Ul/nV9ZyIKZ6vHBkoay5Ry6
- BsNctpLm9fKFYWFkmCujTPa+far1nLLruholDQNrnCfODHFo7m3M5S+G71s9jlS9ZkZtcWFWLQ3
- MAOzBgY7eiCvDcsHXd92N7CGdtdtWrsvrxRlww==
-X-Received: by 2002:a05:6a21:3a44:b0:1f5:8d3b:e294 with SMTP id
- adf61e73a8af0-203b3e9847emr7096078637.16.1744876188011; 
- Thu, 17 Apr 2025 00:49:48 -0700 (PDT)
-X-Google-Smtp-Source: AGHT+IEVjB/C/+4oGat9oE5aw8eMd7Xk6k37G4WKUy4clN0zc5tP1oOBnDeVNJos16vE6SjOc2bC2w==
-X-Received: by 2002:a05:6a21:3a44:b0:1f5:8d3b:e294 with SMTP id
- adf61e73a8af0-203b3e9847emr7096046637.16.1744876187559; 
- Thu, 17 Apr 2025 00:49:47 -0700 (PDT)
-Received: from [10.200.68.91] (nat-pool-muc-u.redhat.com. [149.14.88.27])
- by smtp.gmail.com with ESMTPSA id
- d2e1a72fcca58-73bd2198a89sm11723812b3a.5.2025.04.17.00.49.38
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 17 Apr 2025 00:49:47 -0700 (PDT)
-Message-ID: <bce0a735c334fc3a26f7795c77323b7684085015.camel@redhat.com>
-Subject: Re: [PATCH 1/5] drm/sched: Fix teardown leaks with waitqueue
-From: Philipp Stanner <pstanner@redhat.com>
-To: Philipp Stanner <phasta@kernel.org>, Lyude Paul <lyude@redhat.com>, 
+Received: from fanzine2.igalia.com (fanzine.igalia.com [178.60.130.6])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 5521110EABD;
+ Thu, 17 Apr 2025 11:27:49 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=igalia.com; 
+ s=20170329;
+ h=Content-Transfer-Encoding:Content-Type:In-Reply-To:From:
+ References:Cc:To:Subject:MIME-Version:Date:Message-ID:Sender:Reply-To:
+ Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
+ Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
+ List-Subscribe:List-Post:List-Owner:List-Archive;
+ bh=m/7PFydCEc2cZqSSU1AuQ2J36xZLv3+FkoNbKaaeGj4=; b=K47WesQYhwNtLulRh8JWWEZpT3
+ p543PrdOuRmvUtpC5s4B/QylNakqkKZFYzenYDKgzg7UfwspTCXs6+3lZUEqw8gfr4t+g1eD4bQm+
+ tmiskSzxz//9oj1DZfIlBpgmWLCwU+7GGtx6MxUfsarejvkYq4aKdhYN3q1alix4r3DD6TZReDc/h
+ NFkyfdwKvrKy4m/hVqA1RiFJ0xncu+b8I9x2PJD7j5+einpRpvmwpDh5BiAyjZh9jLRZhPY7UUlZJ
+ 0JE9JAuuiS1aLQNhg3YvtFSB9rJLgpMcqnPiJP9q1M3U3nwlpKs+4MNERjpWJbG8niAVAhD29OMHE
+ R1HNyBaw==;
+Received: from [90.241.98.187] (helo=[192.168.0.101])
+ by fanzine2.igalia.com with esmtpsa 
+ (Cipher TLS1.3:ECDHE_X25519__RSA_PSS_RSAE_SHA256__AES_128_GCM:128) (Exim)
+ id 1u5NP0-000mgU-4r; Thu, 17 Apr 2025 13:27:30 +0200
+Message-ID: <3ac34c84-fd84-4598-96e1-239418b7109f@igalia.com>
+Date: Thu, 17 Apr 2025 12:27:29 +0100
+MIME-Version: 1.0
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH 3/5] drm/sched: Warn if pending list is not empty
+To: phasta@kernel.org, Lyude Paul <lyude@redhat.com>,
  Danilo Krummrich <dakr@kernel.org>, David Airlie <airlied@gmail.com>,
  Simona Vetter <simona@ffwll.ch>, Matthew Brost <matthew.brost@intel.com>,
- Christian =?ISO-8859-1?Q?K=F6nig?= <ckoenig.leichtzumerken@gmail.com>,
- Maarten Lankhorst <maarten.lankhorst@linux.intel.com>, Maxime Ripard
- <mripard@kernel.org>, Thomas Zimmermann <tzimmermann@suse.de>, Tvrtko
- Ursulin <tvrtko.ursulin@igalia.com>
-Cc: dri-devel@lists.freedesktop.org, nouveau@lists.freedesktop.org, 
+ =?UTF-8?Q?Christian_K=C3=B6nig?= <ckoenig.leichtzumerken@gmail.com>,
+ Maarten Lankhorst <maarten.lankhorst@linux.intel.com>,
+ Maxime Ripard <mripard@kernel.org>, Thomas Zimmermann <tzimmermann@suse.de>
+Cc: dri-devel@lists.freedesktop.org, nouveau@lists.freedesktop.org,
  linux-kernel@vger.kernel.org
-Date: Thu, 17 Apr 2025 09:49:34 +0200
-In-Reply-To: <20250407152239.34429-3-phasta@kernel.org>
 References: <20250407152239.34429-2-phasta@kernel.org>
- <20250407152239.34429-3-phasta@kernel.org>
-User-Agent: Evolution 3.52.4 (3.52.4-2.fc40)
-MIME-Version: 1.0
-X-Mimecast-Spam-Score: 0
-X-Mimecast-MFC-PROC-ID: 2BEKz8tSppMKQgXsTeJ16reemPUr4uuTrxBmGEaIwuQ_1744876188
-X-Mimecast-Originator: redhat.com
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+ <20250407152239.34429-5-phasta@kernel.org>
+ <9607e5a54b8c5041dc7fc134425cc36c0c70b5f3.camel@mailbox.org>
+Content-Language: en-GB
+From: Tvrtko Ursulin <tvrtko.ursulin@igalia.com>
+In-Reply-To: <9607e5a54b8c5041dc7fc134425cc36c0c70b5f3.camel@mailbox.org>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 8bit
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -106,309 +67,123 @@ List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-On Mon, 2025-04-07 at 17:22 +0200, Philipp Stanner wrote:
-> From: Philipp Stanner <pstanner@redhat.com>
->=20
-> The GPU scheduler currently does not ensure that its pending_list is
-> empty before performing various other teardown tasks in
-> drm_sched_fini().
->=20
-> If there are still jobs in the pending_list, this is problematic
-> because
-> after scheduler teardown, no one will call backend_ops.free_job()
-> anymore. This would, consequently, result in memory leaks.
->=20
-> One way to solve this is to implement a waitqueue that
-> drm_sched_fini()
-> blocks on until the pending_list has become empty.
->=20
-> Add a waitqueue to struct drm_gpu_scheduler. Wake up waiters once the
-> pending_list becomes empty. Wait in drm_sched_fini() for that to
-> happen.
->=20
-> Signed-off-by: Philipp Stanner <pstanner@redhat.com>
-> ---
-> =C2=A0drivers/gpu/drm/scheduler/sched_main.c | 84 ++++++++++++++++++++---=
--
-> --
-> =C2=A0include/drm/gpu_scheduler.h=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=
-=A0=C2=A0=C2=A0=C2=A0=C2=A0 |=C2=A0 8 +++
-> =C2=A02 files changed, 75 insertions(+), 17 deletions(-)
->=20
-> diff --git a/drivers/gpu/drm/scheduler/sched_main.c
-> b/drivers/gpu/drm/scheduler/sched_main.c
-> index 829579c41c6b..a6a4deeda72b 100644
-> --- a/drivers/gpu/drm/scheduler/sched_main.c
-> +++ b/drivers/gpu/drm/scheduler/sched_main.c
-> @@ -367,7 +367,7 @@ static void drm_sched_run_job_queue(struct
-> drm_gpu_scheduler *sched)
-> =C2=A0 */
-> =C2=A0static void __drm_sched_run_free_queue(struct drm_gpu_scheduler
-> *sched)
-> =C2=A0{
-> -=09if (!READ_ONCE(sched->pause_submit))
-> +=09if (!READ_ONCE(sched->pause_free))
-> =C2=A0=09=09queue_work(sched->submit_wq, &sched->work_free_job);
-> =C2=A0}
-> =C2=A0
-> @@ -556,6 +556,7 @@ static void drm_sched_job_timedout(struct
-> work_struct *work)
-> =C2=A0=09=09 * is parked at which point it's safe.
-> =C2=A0=09=09 */
-> =C2=A0=09=09list_del_init(&job->list);
-> +
-> =C2=A0=09=09spin_unlock(&sched->job_list_lock);
-> =C2=A0
-> =C2=A0=09=09status =3D job->sched->ops->timedout_job(job);
-> @@ -572,8 +573,10 @@ static void drm_sched_job_timedout(struct
-> work_struct *work)
-> =C2=A0=09=09spin_unlock(&sched->job_list_lock);
-> =C2=A0=09}
-> =C2=A0
-> -=09if (status !=3D DRM_GPU_SCHED_STAT_ENODEV)
-> -=09=09drm_sched_start_timeout_unlocked(sched);
-> +=09if (status !=3D DRM_GPU_SCHED_STAT_ENODEV) {
-> +=09=09if (!READ_ONCE(sched->cancel_timeout))
 
-Another thing I want to investigate is whether all those booleans we
-read with READ_ONCE are actually necessary?
+On 17/04/2025 08:45, Philipp Stanner wrote:
+> On Mon, 2025-04-07 at 17:22 +0200, Philipp Stanner wrote:
+>> drm_sched_fini() can leak jobs under certain circumstances.
+>>
+>> Warn if that happens.
+>>
+>> Signed-off-by: Philipp Stanner <phasta@kernel.org>
+>> ---
+>>   drivers/gpu/drm/scheduler/sched_main.c | 4 ++++
+> 
+> I hear a lot of amazed silence for this series ^_^
+> 
+> If there's no major pushback, my intention is to pull this in once the
+> blocking Nouveau-bug has been fixed (by pulling my patch).
 
-Because I suspect they are not. The cancel_work_sync() functions should
-do the trick, and if they're too late we'd just wait one cycle longer.
+It was on my todo list to read it but failed to get to it due various 
+reasons.
 
-@Christian, Tvrtko, could be helpful if you can take a look.
+I only managed to skim over it it and am not quite convinced. But 
+because I did not have time to think about it very much my feedback at 
+this point is not very deep.
 
-> +=09=09=09drm_sched_start_timeout_unlocked(sched);
-> +=09}
-> =C2=A0}
-> =C2=A0
-> =C2=A0/**
-> @@ -1119,12 +1122,22 @@ drm_sched_get_finished_job(struct
-> drm_gpu_scheduler *sched)
-> =C2=A0=09=09/* remove job from pending_list */
-> =C2=A0=09=09list_del_init(&job->list);
-> =C2=A0
-> +=09=09/*
-> +=09=09 * Inform tasks blocking in drm_sched_fini() that
-> it's now safe to proceed.
-> +=09=09 */
-> +=09=09if (list_empty(&sched->pending_list))
-> +=09=09=09wake_up(&sched->pending_list_waitque);
-> +
-> =C2=A0=09=09/* cancel this job's TO timer */
-> =C2=A0=09=09cancel_delayed_work(&sched->work_tdr);
-> =C2=A0=09=09/* make the scheduled timestamp more accurate */
-> =C2=A0=09=09next =3D list_first_entry_or_null(&sched-
-> >pending_list,
-> =C2=A0=09=09=09=09=09=09typeof(*next),
-> list);
-> =C2=A0
-> +=09=09// TODO RFC: above we wake up the waitque which
-> relies on the fact
-> +=09=09// that timeouts have been deactivated. The below
-> should never
-> +=09=09// reactivate them since the list was empty above.
-> Still, should
-> +=09=09// we document that?
+On the high level I understand for nouveau the series is "net zero", 
+right? No leaks before, no leaks after. What about other drivers? Which 
+ones have known leaks which could be addressed by them implementing this 
+new callback?
 
-Regarding this, I re-read the code a few times and conclude that this
-is not a problem.
+Presumably you would document the callback should only be implemented by 
+drivers which are 100% sure the clean up can always reliably done? 
+Otherwise unkillable process on stuck hardware or drivers with not good 
+enough reset support can still happen. (Which would be worse than a leak 
+on shutdown.)
 
+Have you thought about any observable effects from the userspace point 
+of view? For example something if which now works, such as submitting a 
+job which writes to a shared buffer and then exiting could stop working 
+after the callback is implemented? I don't see it, because it would be 
+unreliable even today (timing dependent whether job is in the queue or 
+scheduled at exit time) so just thinking out loud.
 
-P.
+Also, since the cover letter mentions job reference counting was one 
+idea that was discarded another related problem is about the lifetimes. 
+I think it would be good to discuss potentially reference counting 
+"everything" because for instance today I can crash the kernel trivially 
+with the xe driver*. Probably other drivers too.
 
-> =C2=A0=09=09if (next) {
-> =C2=A0=09=09=09if (test_bit(DMA_FENCE_FLAG_TIMESTAMP_BIT,
-> =C2=A0=09=09=09=09=C2=A0=C2=A0=C2=A0=C2=A0 &next->s_fence-
-> >scheduled.flags))
-> @@ -1324,6 +1337,7 @@ int drm_sched_init(struct drm_gpu_scheduler
-> *sched, const struct drm_sched_init_
-> =C2=A0=09init_waitqueue_head(&sched->job_scheduled);
-> =C2=A0=09INIT_LIST_HEAD(&sched->pending_list);
-> =C2=A0=09spin_lock_init(&sched->job_list_lock);
-> +=09init_waitqueue_head(&sched->pending_list_waitque);
-> =C2=A0=09atomic_set(&sched->credit_count, 0);
-> =C2=A0=09INIT_DELAYED_WORK(&sched->work_tdr, drm_sched_job_timedout);
-> =C2=A0=09INIT_WORK(&sched->work_run_job, drm_sched_run_job_work);
-> @@ -1331,6 +1345,8 @@ int drm_sched_init(struct drm_gpu_scheduler
-> *sched, const struct drm_sched_init_
-> =C2=A0=09atomic_set(&sched->_score, 0);
-> =C2=A0=09atomic64_set(&sched->job_id_count, 0);
-> =C2=A0=09sched->pause_submit =3D false;
-> +=09sched->pause_free =3D false;
-> +=09sched->cancel_timeout =3D false;
-> =C2=A0
-> =C2=A0=09sched->ready =3D true;
-> =C2=A0=09return 0;
-> @@ -1348,6 +1364,40 @@ int drm_sched_init(struct drm_gpu_scheduler
-> *sched, const struct drm_sched_init_
-> =C2=A0}
-> =C2=A0EXPORT_SYMBOL(drm_sched_init);
-> =C2=A0
-> +/**
-> + * drm_sched_submission_and_timeout_stop - stop everything except
-> for free_job()
-> + * @sched: scheduler instance
-> + *
-> + * Only needed to cleanly tear down the scheduler in
-> drm_sched_fini().
-> + */
-> +static inline void
-> +drm_sched_submission_and_timeout_stop(struct drm_gpu_scheduler
-> *sched)
-> +{
-> +=09WRITE_ONCE(sched->pause_submit, true);
-> +=09WRITE_ONCE(sched->cancel_timeout, true);
-> +=09cancel_work_sync(&sched->work_run_job);
-> +=09cancel_delayed_work_sync(&sched->work_tdr);
-> +}
-> +
-> +static inline void
-> +drm_sched_free_stop(struct drm_gpu_scheduler *sched)
-> +{
-> +=09WRITE_ONCE(sched->pause_free, true);
-> +=09cancel_work_sync(&sched->work_free_job);
-> +}
-> +
-> +static inline bool
-> +drm_sched_no_jobs_pending(struct drm_gpu_scheduler *sched)
-> +{
-> +=09bool empty;
-> +
-> +=09spin_lock(&sched->job_list_lock);
-> +=09empty =3D list_empty(&sched->pending_list);
-> +=09spin_unlock(&sched->job_list_lock);
-> +
-> +=09return empty;
-> +}
-> +
-> =C2=A0/**
-> =C2=A0 * drm_sched_fini - Destroy a gpu scheduler
-> =C2=A0 *
-> @@ -1355,26 +1405,24 @@ EXPORT_SYMBOL(drm_sched_init);
-> =C2=A0 *
-> =C2=A0 * Tears down and cleans up the scheduler.
-> =C2=A0 *
-> - * This stops submission of new jobs to the hardware through
-> - * drm_sched_backend_ops.run_job(). Consequently,
-> drm_sched_backend_ops.free_job()
-> - * will not be called for all jobs still in
-> drm_gpu_scheduler.pending_list.
-> - * There is no solution for this currently. Thus, it is up to the
-> driver to make
-> - * sure that:
-> - *
-> - *=C2=A0 a) drm_sched_fini() is only called after for all submitted jobs
-> - *=C2=A0=C2=A0=C2=A0=C2=A0 drm_sched_backend_ops.free_job() has been cal=
-led or that
-> - *=C2=A0 b) the jobs for which drm_sched_backend_ops.free_job() has not
-> been called
-> - *=C2=A0=C2=A0=C2=A0=C2=A0 after drm_sched_fini() ran are freed manually=
-.
-> - *
-> - * FIXME: Take care of the above problem and prevent this function
-> from leaking
-> - * the jobs in drm_gpu_scheduler.pending_list under any
-> circumstances.
-> + * Note that this function blocks until all the fences returned by
-> + * &struct drm_sched_backend_ops.run_job have been signalled.
-> =C2=A0 */
-> =C2=A0void drm_sched_fini(struct drm_gpu_scheduler *sched)
-> =C2=A0{
-> =C2=A0=09struct drm_sched_entity *s_entity;
-> =C2=A0=09int i;
-> =C2=A0
-> -=09drm_sched_wqueue_stop(sched);
-> +=09/*
-> +=09 * Jobs that have neither been scheduled or which have timed
-> out are
-> +=09 * gone by now, but jobs that have been submitted through
-> +=09 * backend_ops.run_job() and have not yet terminated are
-> still pending.
-> +=09 *
-> +=09 * Wait for the pending_list to become empty to avoid
-> leaking those jobs.
-> +=09 */
-> +=09drm_sched_submission_and_timeout_stop(sched);
-> +=09wait_event(sched->pending_list_waitque,
-> drm_sched_no_jobs_pending(sched));
-> +=09drm_sched_free_stop(sched);
-> =C2=A0
-> =C2=A0=09for (i =3D DRM_SCHED_PRIORITY_KERNEL; i < sched->num_rqs; i++)
-> {
-> =C2=A0=09=09struct drm_sched_rq *rq =3D sched->sched_rq[i];
-> @@ -1471,6 +1519,7 @@ EXPORT_SYMBOL(drm_sched_wqueue_ready);
-> =C2=A0void drm_sched_wqueue_stop(struct drm_gpu_scheduler *sched)
-> =C2=A0{
-> =C2=A0=09WRITE_ONCE(sched->pause_submit, true);
-> +=09WRITE_ONCE(sched->pause_free, true);
-> =C2=A0=09cancel_work_sync(&sched->work_run_job);
-> =C2=A0=09cancel_work_sync(&sched->work_free_job);
-> =C2=A0}
-> @@ -1488,6 +1537,7 @@ EXPORT_SYMBOL(drm_sched_wqueue_stop);
-> =C2=A0void drm_sched_wqueue_start(struct drm_gpu_scheduler *sched)
-> =C2=A0{
-> =C2=A0=09WRITE_ONCE(sched->pause_submit, false);
-> +=09WRITE_ONCE(sched->pause_free, false);
-> =C2=A0=09queue_work(sched->submit_wq, &sched->work_run_job);
-> =C2=A0=09queue_work(sched->submit_wq, &sched->work_free_job);
-> =C2=A0}
-> diff --git a/include/drm/gpu_scheduler.h
-> b/include/drm/gpu_scheduler.h
-> index 1a7e377d4cbb..badcf9ea4501 100644
-> --- a/include/drm/gpu_scheduler.h
-> +++ b/include/drm/gpu_scheduler.h
-> @@ -29,6 +29,7 @@
-> =C2=A0#include <linux/completion.h>
-> =C2=A0#include <linux/xarray.h>
-> =C2=A0#include <linux/workqueue.h>
-> +#include <linux/wait.h>
-> =C2=A0
-> =C2=A0#define MAX_WAIT_SCHED_ENTITY_Q_EMPTY msecs_to_jiffies(1000)
-> =C2=A0
-> @@ -533,6 +534,8 @@ struct drm_sched_backend_ops {
-> =C2=A0 *=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=
-=A0 timeout interval is over.
-> =C2=A0 * @pending_list: the list of jobs which are currently in the job
-> queue.
-> =C2=A0 * @job_list_lock: lock to protect the pending_list.
-> + * @pending_list_waitque: a waitqueue for drm_sched_fini() to block
-> on until all
-> + *=09=09=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 pending j=
-obs have been finished.
-> =C2=A0 * @hang_limit: once the hangs by a job crosses this limit then it
-> is marked
-> =C2=A0 *=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=
-=A0=C2=A0=C2=A0 guilty and it will no longer be considered for
-> scheduling.
-> =C2=A0 * @score: score to help loadbalancer pick a idle sched
-> @@ -540,6 +543,8 @@ struct drm_sched_backend_ops {
-> =C2=A0 * @ready: marks if the underlying HW is ready to work
-> =C2=A0 * @free_guilty: A hit to time out handler to free the guilty job.
-> =C2=A0 * @pause_submit: pause queuing of @work_run_job on @submit_wq
-> + * @pause_free: pause queuing of @work_free_job on @submit_wq
-> + * @cancel_timeout: pause queuing of @work_tdr on @submit_wq
-> =C2=A0 * @own_submit_wq: scheduler owns allocation of @submit_wq
-> =C2=A0 * @dev: system &struct device
-> =C2=A0 *
-> @@ -562,12 +567,15 @@ struct drm_gpu_scheduler {
-> =C2=A0=09struct delayed_work=09=09work_tdr;
-> =C2=A0=09struct list_head=09=09pending_list;
-> =C2=A0=09spinlock_t=09=09=09job_list_lock;
-> +=09wait_queue_head_t=09=09pending_list_waitque;
-> =C2=A0=09int=09=09=09=09hang_limit;
-> =C2=A0=09atomic_t=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=
-=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=
-=A0=C2=A0 *score;
-> =C2=A0=09atomic_t=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=
-=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=
-=A0=C2=A0 _score;
-> =C2=A0=09bool=09=09=09=09ready;
-> =C2=A0=09bool=09=09=09=09free_guilty;
-> =C2=A0=09bool=09=09=09=09pause_submit;
-> +=09bool=09=09=09=09pause_free;
-> +=09bool=09=09=09=09cancel_timeout;
-> =C2=A0=09bool=09=09=09=09own_submit_wq;
-> =C2=A0=09struct device=09=09=09*dev;
-> =C2=A0};
+Problem exactly is that jobs can outlive the entities and the scheduler, 
+while some userspace may have a dma fence reference to the job via sync 
+file. This new callback would not solve it for xe, but if everything 
+required was reference counted it would.
+
+Back to the series.
+
+On the design level it feels like it adds too much state machine and 
+makes things hard to follow/maintain. It would be nice to find a 
+solutiuon where we end up with less state machine and not more.
+
+On the low level there are some patch ordering and naming, spelling and 
+other small improvements to be made.
+
+But as said at the start, I would need to set aside more time to provide 
+better comments and/or ideas.
+
+*)
+https://patchwork.freedesktop.org/patch/642709/?series=146211&rev=2
+
+> In the mean time, let me review my own stuff:
+> 
+>>   1 file changed, 4 insertions(+)
+>>
+>> diff --git a/drivers/gpu/drm/scheduler/sched_main.c
+>> b/drivers/gpu/drm/scheduler/sched_main.c
+>> index 6b72278c4b72..ae3152beca14 100644
+>> --- a/drivers/gpu/drm/scheduler/sched_main.c
+>> +++ b/drivers/gpu/drm/scheduler/sched_main.c
+>> @@ -1465,6 +1465,10 @@ void drm_sched_fini(struct drm_gpu_scheduler
+>> *sched)
+>>   	sched->ready = false;
+>>   	kfree(sched->sched_rq);
+>>   	sched->sched_rq = NULL;
+>> +
+>> +	if (!list_empty(&sched->pending_list))
+>> +		dev_err(sched->dev, "%s: Tearing down scheduler
+>> while jobs are pending!\n",
+>> +			__func__);
+
+It isn't fair to add this error since it would out of the blue start 
+firing for everyone expect nouveau, no? Regardless if there is a leak or 
+not.
+
+> 
+> The "%s" here will be removed since dev_err() alreday prints the
+> function name.
+
+It does? But anyway, function name is redundant and irrelevant and 
+should not be logged IMO. I would rather prefer we replaced sched->dev 
+with sched->drm so could use drm loggers for clarity throughout.
+
+> I find this dev_err() print more useful than the stack a WARN_ON prints
+> (telling you about invalid_asm_exec_op or stuff like that).
+> 
+> Plus, I guess the places where drivers call drm_sched_fini() are very
+> well defined and known, so a callstack wouldn't really be useful in the
+> first place.
+
+Agreed.
+
+Regards,
+
+Tvrtko
+
+> 
+> P.
+> 
+>>   }
+>>   EXPORT_SYMBOL(drm_sched_fini);
+>>   
+> 
 
