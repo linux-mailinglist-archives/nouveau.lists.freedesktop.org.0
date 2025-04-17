@@ -2,69 +2,59 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id CEE27CBA9C5
-	for <lists+nouveau@lfdr.de>; Sat, 13 Dec 2025 13:41:34 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id CC68ECBAB27
+	for <lists+nouveau@lfdr.de>; Sat, 13 Dec 2025 13:42:44 +0100 (CET)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 96D0710EA12;
-	Sat, 13 Dec 2025 12:40:57 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 05D8F10EAA1;
+	Sat, 13 Dec 2025 12:41:02 +0000 (UTC)
 Authentication-Results: gabe.freedesktop.org;
-	dkim=pass (2048-bit key; secure) header.d=mailbox.org header.i=@mailbox.org header.b="XCrIF9p3";
+	dkim=pass (2048-bit key; secure) header.d=mailbox.org header.i=@mailbox.org header.b="g0892s9B";
 	dkim-atps=neutral
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from mout-p-101.mailbox.org (mout-p-101.mailbox.org [80.241.56.151])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 3B2A410E782;
- Tue, 15 Apr 2025 12:54:44 +0000 (UTC)
-Received: from smtp202.mailbox.org (smtp202.mailbox.org
- [IPv6:2001:67c:2050:b231:465::202])
+Received: from mout-p-103.mailbox.org (mout-p-103.mailbox.org [80.241.56.161])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 6713810EA52;
+ Thu, 17 Apr 2025 07:45:45 +0000 (UTC)
+Received: from smtp202.mailbox.org (smtp202.mailbox.org [10.196.197.202])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
  (No client certificate requested)
- by mout-p-101.mailbox.org (Postfix) with ESMTPS id 4ZcPJ012q5z9sWs;
- Tue, 15 Apr 2025 14:54:40 +0200 (CEST)
+ by mout-p-103.mailbox.org (Postfix) with ESMTPS id 4ZdVLY0tS3z9snh;
+ Thu, 17 Apr 2025 09:45:41 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
  s=mail20150812; 
- t=1744721680; h=from:from:reply-to:reply-to:subject:subject:date:date:
+ t=1744875941; h=from:from:reply-to:reply-to:subject:subject:date:date:
  message-id:message-id:to:to:cc:cc:mime-version:mime-version:
  content-type:content-type:
  content-transfer-encoding:content-transfer-encoding:
  in-reply-to:in-reply-to:references:references;
- bh=K/FjfTvH1QRy7+t7pKsVPI8IS+WdkLH8SmEYGjRagwA=;
- b=XCrIF9p3qYjPKTa32Gt7lp4HeMkDbm5dXf4RLEonFk06uMtAbMgwWXkjqIR46XbE713xqz
- fE+SUU+xAn8sk/b6kuU1QEsyKqCPGFGcf6BTCFUdf8HSZp+Mp9hdtWimDXXroOW1Mq2AjZ
- 6jpgBk+8cNhNmmeUcj389vv5NY/mtZS/M49hR3sJDMwWdOajQ1vJgMQMIfi7puukA2q1fk
- 5oE+49W2M17Uw4RWT+8aoaPjxvUsqm1RjXc1dXF84SCY/AYVTESxoXiWFzmNmy0ti3MLW2
- eUDUqZCbc4KMM3sxTi53SRCABrFe7asAgwL0ryWhoWQ3NNP7zA++k90ukumh0A==
-Message-ID: <573a616a5270d97f421a380e2e41c7e35d2f03e3.camel@mailbox.org>
-Subject: Re: [PATCH 1/3] drm/nouveau: Prevent signaled fences in pending list
+ bh=o01QhRRBt9kbGlZJekh53pp9WB+AZ1VXMfcDIjz0TJ4=;
+ b=g0892s9BhUhMNN64iMQ6epD56Kl8AfSwwketorczIHbAL2mlAxPhjNk9ToLepZYUOpKzh4
+ DSlDKbgZJjvtp3kzU9wBKftCRNySChuK8SbG6m34MI7DACrM2rxf5RDwkhjoh4zDex07+D
+ HpFJQjBURim06m+Fq5OA7SNRQMRvyOAAOusKV5q24Br2cqywBbWNnxKIQ93gSLYAAR23dJ
+ hvaioSVBjtF0AJdkMOtrsfgpKag7DATK59lSf/JYWm5ZwK4myuoqa9brQT9QgUc86TPN64
+ 9s2eavL7DOVxBwGHD+2XSiF/kE/rOBBPmK4glF8bDrT5CAMBN7CKBeW6ze/Uvg==
+Message-ID: <9607e5a54b8c5041dc7fc134425cc36c0c70b5f3.camel@mailbox.org>
+Subject: Re: [PATCH 3/5] drm/sched: Warn if pending list is not empty
 From: Philipp Stanner <phasta@mailbox.org>
-To: Christian =?ISO-8859-1?Q?K=F6nig?= <christian.koenig@amd.com>, Danilo
- Krummrich <dakr@kernel.org>, phasta@kernel.org
-Cc: Lyude Paul <lyude@redhat.com>, David Airlie <airlied@gmail.com>, Simona
- Vetter <simona@ffwll.ch>, Sabrina Dubroca <sd@queasysnail.net>, Sumit
- Semwal <sumit.semwal@linaro.org>, dri-devel@lists.freedesktop.org, 
- nouveau@lists.freedesktop.org, linux-kernel@vger.kernel.org, 
- netdev@vger.kernel.org, linux-media@vger.kernel.org, 
- linaro-mm-sig@lists.linaro.org, stable@vger.kernel.org
-Date: Tue, 15 Apr 2025 14:54:36 +0200
-In-Reply-To: <2dba3077-a770-4e00-9a7a-c744096ae876@amd.com>
-References: <8583665a-6886-4245-be49-fd8839cfe212@amd.com>
- <c737c89c7ce9174e349c61ab4e5712eee8946f13.camel@mailbox.org>
- <50c9530d-e274-4f89-8620-16afe0981239@amd.com>
- <1a73e5fe4350d6ee4b7d807612264eb637c4f2a9.camel@mailbox.org>
- <d3dee321cd6b70d6ca98768fbcf6f1e6134c43a1.camel@mailbox.org>
- <81a70ba6-94b1-4bb3-a0b2-9e8890f90b33@amd.com>
- <aca00cb25b813da4fd2f215829f02337f05642f3.camel@mailbox.org>
- <45d66ca4-5390-42e9-869a-f5f9125d05b6@amd.com>
- <1127db242503055b2e5e8d07db3aeae46cfb7a24.camel@mailbox.org>
- <6e4628c3cfc7e0d1e4ea9af510ce0b09b34a8cf8.camel@mailbox.org>
- <Z_0bOgTBkkRH9jib@cassiopeiae>
- <2dba3077-a770-4e00-9a7a-c744096ae876@amd.com>
+To: Philipp Stanner <phasta@kernel.org>, Lyude Paul <lyude@redhat.com>, 
+ Danilo Krummrich <dakr@kernel.org>, David Airlie <airlied@gmail.com>,
+ Simona Vetter <simona@ffwll.ch>, Matthew Brost <matthew.brost@intel.com>,
+ Christian =?ISO-8859-1?Q?K=F6nig?= <ckoenig.leichtzumerken@gmail.com>,
+ Maarten Lankhorst <maarten.lankhorst@linux.intel.com>, Maxime Ripard
+ <mripard@kernel.org>, Thomas Zimmermann <tzimmermann@suse.de>, Tvrtko
+ Ursulin <tvrtko.ursulin@igalia.com>
+Cc: dri-devel@lists.freedesktop.org, nouveau@lists.freedesktop.org, 
+ linux-kernel@vger.kernel.org
+Date: Thu, 17 Apr 2025 09:45:35 +0200
+In-Reply-To: <20250407152239.34429-5-phasta@kernel.org>
+References: <20250407152239.34429-2-phasta@kernel.org>
+ <20250407152239.34429-5-phasta@kernel.org>
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
 MIME-Version: 1.0
-X-MBO-RS-META: 8it8cuy3unipa6fs4gcxd9fju5nkgkz1
-X-MBO-RS-ID: 9a0b51d9a94caabfc13
+X-MBO-RS-META: ht1k5cx6yf918cstjfpo94f1fsqmah66
+X-MBO-RS-ID: 72d8f281a13a97fa464
 X-Mailman-Approved-At: Sat, 13 Dec 2025 12:40:50 +0000
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
@@ -81,51 +71,55 @@ Reply-To: phasta@kernel.org
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-On Tue, 2025-04-15 at 11:56 +0200, Christian K=C3=B6nig wrote:
-> Am 14.04.25 um 16:27 schrieb Danilo Krummrich:
-> > On Mon, Apr 14, 2025 at 10:54:25AM +0200, Philipp Stanner wrote:
-> > > @Danilo:
-> > > We have now 2 possible solutions for the firing WARN_ON floating.
-> > >=20
-> > > Version A (Christian)
-> > > Check in nouveau_fence_context_kill() whether a fence is already
-> > > signaled before setting an error.
-> > >=20
-> > > Version B (Me)
-> > > This patch series here. Make sure that in Nouveau, only
-> > > nouveau_fence_signal() signals fences.
-> > >=20
-> > >=20
-> > > Both should do the trick. Please share a maintainer-preference so
-> > > I can
-> > > move on here.
-> > Thanks for working on this Philipp.
-> >=20
-> > If you don't want to rework things entirely, A seems to be
-> > superior, since it
-> > also catches the case when someone else would call
-> > dma_fence_is_signaled() on a
-> > nouveau fence (which could happen at any time). This doesn't seem
-> > to be caught
-> > by B, right?
+On Mon, 2025-04-07 at 17:22 +0200, Philipp Stanner wrote:
+> drm_sched_fini() can leak jobs under certain circumstances.
 >=20
-> Correct, yes. I would also keep it as simple as possible for
-> backporting this bug fix.
+> Warn if that happens.
 >=20
-> On the other hand a rework is certainly appropriate including both
-> nouveau as well as the DMA-fence calling rules. Especially that the
-> DMA-fence framework calls the signaled callback with inconsistent
-> locking is something we should fix.
+> Signed-off-by: Philipp Stanner <phasta@kernel.org>
+> ---
+> =C2=A0drivers/gpu/drm/scheduler/sched_main.c | 4 ++++
 
-Do you have a suggestion where to start?
+I hear a lot of amazed silence for this series ^_^
 
-I btw would still be interested in adding some sort of centralized
-mechanism in dma_fence that the driver could use to do some cleanup
-stuff once a fence gets signaled ^_^
+If there's no major pushback, my intention is to pull this in once the
+blocking Nouveau-bug has been fixed (by pulling my patch).
+
+
+In the mean time, let me review my own stuff:
+
+> =C2=A01 file changed, 4 insertions(+)
+>=20
+> diff --git a/drivers/gpu/drm/scheduler/sched_main.c
+> b/drivers/gpu/drm/scheduler/sched_main.c
+> index 6b72278c4b72..ae3152beca14 100644
+> --- a/drivers/gpu/drm/scheduler/sched_main.c
+> +++ b/drivers/gpu/drm/scheduler/sched_main.c
+> @@ -1465,6 +1465,10 @@ void drm_sched_fini(struct drm_gpu_scheduler
+> *sched)
+> =C2=A0	sched->ready =3D false;
+> =C2=A0	kfree(sched->sched_rq);
+> =C2=A0	sched->sched_rq =3D NULL;
+> +
+> +	if (!list_empty(&sched->pending_list))
+> +		dev_err(sched->dev, "%s: Tearing down scheduler
+> while jobs are pending!\n",
+> +			__func__);
+
+The "%s" here will be removed since dev_err() alreday prints the
+function name.
+
+I find this dev_err() print more useful than the stack a WARN_ON prints
+(telling you about invalid_asm_exec_op or stuff like that).
+
+Plus, I guess the places where drivers call drm_sched_fini() are very
+well defined and known, so a callstack wouldn't really be useful in the
+first place.
+
 
 P.
 
->=20
-> Regards,
-> Christian.
+> =C2=A0}
+> =C2=A0EXPORT_SYMBOL(drm_sched_fini);
+> =C2=A0
 
