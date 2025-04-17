@@ -2,48 +2,96 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id 6FE4FA90AAA
-	for <lists+nouveau@lfdr.de>; Wed, 16 Apr 2025 20:00:52 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id D5C58A915B2
+	for <lists+nouveau@lfdr.de>; Thu, 17 Apr 2025 09:49:55 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id E7D6410E98A;
-	Wed, 16 Apr 2025 18:00:50 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 0FBD910EA50;
+	Thu, 17 Apr 2025 07:49:54 +0000 (UTC)
 Authentication-Results: gabe.freedesktop.org;
-	dkim=pass (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="cPUs/7SD";
+	dkim=pass (1024-bit key; unprotected) header.d=redhat.com header.i=@redhat.com header.b="f4OYKlOo";
 	dkim-atps=neutral
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from nyc.source.kernel.org (nyc.source.kernel.org [147.75.193.91])
- by gabe.freedesktop.org (Postfix) with ESMTPS id BBE1810E98A;
- Wed, 16 Apr 2025 18:00:48 +0000 (UTC)
-Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by nyc.source.kernel.org (Postfix) with ESMTP id ED428A4A40C;
- Wed, 16 Apr 2025 17:55:17 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id D6E7CC4CEE2;
- Wed, 16 Apr 2025 18:00:44 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1744826446;
- bh=SJY0xG1DrlZDBeIQmUalS9GpwgIa3ejXcZ6rQbeRQtY=;
- h=Date:From:To:Cc:Subject:From;
- b=cPUs/7SDgeiM0HerpNhmtjeKguIPd24msJJ+OoUVpI5Lf0fu53ldSmmleu5CyF1b7
- x4EQX4drBvPa95+a7mnx6zF7ODs+HXvY35mqHNw4IhlHtCrML2g/+5cKCxtvWfYYF7
- 8yT9fMJ6NKQjyqJAplFZRM12GeK0WX5GlEIX0wkaxnwlH8291ky9nWrIG5P/k42KBZ
- zTJMz1nexk4QIopQ9yFSLhghFwYJZkrc7LXL/cCcYVCz5lE470veypc3LfpoVJRMSE
- k/Yd7mfKb6MMsDS5NKVBfc+4k+h+4jrEE5p6L+Nja2/8Kok9ZmPxiYcCJp66Yu1Hr3
- PbbcKOUgU9GJA==
-Date: Wed, 16 Apr 2025 12:00:42 -0600
-From: "Gustavo A. R. Silva" <gustavoars@kernel.org>
-To: Lyude Paul <lyude@redhat.com>, Danilo Krummrich <dakr@kernel.org>,
- David Airlie <airlied@gmail.com>, Simona Vetter <simona@ffwll.ch>
-Cc: dri-devel@lists.freedesktop.org, nouveau@lists.freedesktop.org,
- linux-kernel@vger.kernel.org,
- "Gustavo A. R. Silva" <gustavoars@kernel.org>,
- linux-hardening@vger.kernel.org, Kees Cook <kees@kernel.org>
-Subject: [PATCH v2][next] drm/nouveau: chan: Avoid
- -Wflex-array-member-not-at-end warnings
-Message-ID: <Z__wSgHK5_lHw8x9@kspp>
+Received: from us-smtp-delivery-124.mimecast.com
+ (us-smtp-delivery-124.mimecast.com [170.10.129.124])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 24B9810E18C
+ for <nouveau@lists.freedesktop.org>; Thu, 17 Apr 2025 07:49:52 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
+ s=mimecast20190719; t=1744876191;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ content-transfer-encoding:content-transfer-encoding:
+ in-reply-to:in-reply-to:references:references;
+ bh=fHaewztJhU6dXBBKAbX5gnzf+MrVHXnJVP+oMWLhnco=;
+ b=f4OYKlOojPpVViXa2uk1ZA8TAFhUNfbMb7xDBtpSY7/hXFKZBf3qbQ0k9rOzqIIpEo4aDy
+ z/z0XmSclLafxThRsVKE0yM6KEhjjLyr3EIuPDxLxJE7mEWitl4DQEV+sWOQuyI/B91M0m
+ 3EKNspX5mBf0Ky6zdgsuiCrJCZ6s8ZY=
+Received: from mail-pg1-f197.google.com (mail-pg1-f197.google.com
+ [209.85.215.197]) by relay.mimecast.com with ESMTP with STARTTLS
+ (version=TLSv1.3, cipher=TLS_AES_256_GCM_SHA384) id
+ us-mta-383-aFx5eBXgNp6zP6oIefpiNQ-1; Thu, 17 Apr 2025 03:49:49 -0400
+X-MC-Unique: aFx5eBXgNp6zP6oIefpiNQ-1
+X-Mimecast-MFC-AGG-ID: aFx5eBXgNp6zP6oIefpiNQ_1744876188
+Received: by mail-pg1-f197.google.com with SMTP id
+ 41be03b00d2f7-af59547f55bso333495a12.0
+ for <nouveau@lists.freedesktop.org>; Thu, 17 Apr 2025 00:49:48 -0700 (PDT)
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1744876188; x=1745480988;
+ h=mime-version:user-agent:content-transfer-encoding:references
+ :in-reply-to:date:cc:to:from:subject:message-id:x-gm-message-state
+ :from:to:cc:subject:date:message-id:reply-to;
+ bh=lbQgrXz5oiICX14AE+d1lrN5WuBPYGRCPNcO8Q1nbVQ=;
+ b=G+vv9TPCYEU7qIKRqr6xDegcifkV0yZ2EoCDlvL7df1tFltL6pWDHbevNLhYOxNn5G
+ wkxpGoq9Jsn/WPvy+DzaFObrsdkSow9kIy00zUAf3gqeukZIh1zJpNrWKf0L75vkFNwG
+ 2hg4MfcFYCui7diOytryWF3NZhxEPT3kbnPcANArl0TloSPizazO3yeOPuMRNPc4m5oz
+ OKSU95ZE/MNmNhYWtCWKH4YvDhrrYoWMqsFUXy/Qpj1yKVtkdi0YYvWtLug8Bg63mJFi
+ +uXUP/N+U/u8mBM1hMP8/PgpVMFZZOSssAUDOO4rjwPcDIHfPEyfWTgLR9obxRA0TNPg
+ +ArQ==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCWxDKb5YnKZp7agW/cKZa9eZ17mTcOrG8fL74vaLWC99KEm6Qbnj5mO28IxDvKtQrsmtbpAu6bx@lists.freedesktop.org
+X-Gm-Message-State: AOJu0YwVfV9z+RM5VF4FfiRsWnDz+tPWLwvZIrUU2YCe8E/VGdY1jdLo
+ FVswvDDPpwYwWA7Kas0mEHesKY/aMc6xFx/TtpEyMbKWfi7D8iPR/g42Da0dsSLY0wFiMJLvzPe
+ j/si9APa3/4czpV32CnITCYqhGkeg+w0N5pH3c5Fny/vK+OPzaq1cIz+O5OHnUkg=
+X-Gm-Gg: ASbGncuLsBh/q/1selo1eTdO5OGga03Sknt5T4Lkv8lduPPd8upNnDBDM8eTuzcnckW
+ f4VraPyz1vWyWvBMjhTmtx/FtneBYn9PiN/m/urHEvHaPPShLkVCY/H8Cvmm60VbchqaOY/4/8D
+ /1pNkz1O0EyIhqbhoraCTEW3xBVXjt8tvTTEhbna8/PZvqx6AW9+Ul/nV9ZyIKZ6vHBkoay5Ry6
+ BsNctpLm9fKFYWFkmCujTPa+far1nLLruholDQNrnCfODHFo7m3M5S+G71s9jlS9ZkZtcWFWLQ3
+ MAOzBgY7eiCvDcsHXd92N7CGdtdtWrsvrxRlww==
+X-Received: by 2002:a05:6a21:3a44:b0:1f5:8d3b:e294 with SMTP id
+ adf61e73a8af0-203b3e9847emr7096078637.16.1744876188011; 
+ Thu, 17 Apr 2025 00:49:48 -0700 (PDT)
+X-Google-Smtp-Source: AGHT+IEVjB/C/+4oGat9oE5aw8eMd7Xk6k37G4WKUy4clN0zc5tP1oOBnDeVNJos16vE6SjOc2bC2w==
+X-Received: by 2002:a05:6a21:3a44:b0:1f5:8d3b:e294 with SMTP id
+ adf61e73a8af0-203b3e9847emr7096046637.16.1744876187559; 
+ Thu, 17 Apr 2025 00:49:47 -0700 (PDT)
+Received: from [10.200.68.91] (nat-pool-muc-u.redhat.com. [149.14.88.27])
+ by smtp.gmail.com with ESMTPSA id
+ d2e1a72fcca58-73bd2198a89sm11723812b3a.5.2025.04.17.00.49.38
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Thu, 17 Apr 2025 00:49:47 -0700 (PDT)
+Message-ID: <bce0a735c334fc3a26f7795c77323b7684085015.camel@redhat.com>
+Subject: Re: [PATCH 1/5] drm/sched: Fix teardown leaks with waitqueue
+From: Philipp Stanner <pstanner@redhat.com>
+To: Philipp Stanner <phasta@kernel.org>, Lyude Paul <lyude@redhat.com>, 
+ Danilo Krummrich <dakr@kernel.org>, David Airlie <airlied@gmail.com>,
+ Simona Vetter <simona@ffwll.ch>, Matthew Brost <matthew.brost@intel.com>,
+ Christian =?ISO-8859-1?Q?K=F6nig?= <ckoenig.leichtzumerken@gmail.com>,
+ Maarten Lankhorst <maarten.lankhorst@linux.intel.com>, Maxime Ripard
+ <mripard@kernel.org>, Thomas Zimmermann <tzimmermann@suse.de>, Tvrtko
+ Ursulin <tvrtko.ursulin@igalia.com>
+Cc: dri-devel@lists.freedesktop.org, nouveau@lists.freedesktop.org, 
+ linux-kernel@vger.kernel.org
+Date: Thu, 17 Apr 2025 09:49:34 +0200
+In-Reply-To: <20250407152239.34429-3-phasta@kernel.org>
+References: <20250407152239.34429-2-phasta@kernel.org>
+ <20250407152239.34429-3-phasta@kernel.org>
+User-Agent: Evolution 3.52.4 (3.52.4-2.fc40)
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
+X-Mimecast-Spam-Score: 0
+X-Mimecast-MFC-PROC-ID: 2BEKz8tSppMKQgXsTeJ16reemPUr4uuTrxBmGEaIwuQ_1744876188
+X-Mimecast-Originator: redhat.com
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -58,224 +106,309 @@ List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
--Wflex-array-member-not-at-end was introduced in GCC-14, and we are
-getting ready to enable it, globally.
+On Mon, 2025-04-07 at 17:22 +0200, Philipp Stanner wrote:
+> From: Philipp Stanner <pstanner@redhat.com>
+>=20
+> The GPU scheduler currently does not ensure that its pending_list is
+> empty before performing various other teardown tasks in
+> drm_sched_fini().
+>=20
+> If there are still jobs in the pending_list, this is problematic
+> because
+> after scheduler teardown, no one will call backend_ops.free_job()
+> anymore. This would, consequently, result in memory leaks.
+>=20
+> One way to solve this is to implement a waitqueue that
+> drm_sched_fini()
+> blocks on until the pending_list has become empty.
+>=20
+> Add a waitqueue to struct drm_gpu_scheduler. Wake up waiters once the
+> pending_list becomes empty. Wait in drm_sched_fini() for that to
+> happen.
+>=20
+> Signed-off-by: Philipp Stanner <pstanner@redhat.com>
+> ---
+> =C2=A0drivers/gpu/drm/scheduler/sched_main.c | 84 ++++++++++++++++++++---=
+-
+> --
+> =C2=A0include/drm/gpu_scheduler.h=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=
+=A0=C2=A0=C2=A0=C2=A0=C2=A0 |=C2=A0 8 +++
+> =C2=A02 files changed, 75 insertions(+), 17 deletions(-)
+>=20
+> diff --git a/drivers/gpu/drm/scheduler/sched_main.c
+> b/drivers/gpu/drm/scheduler/sched_main.c
+> index 829579c41c6b..a6a4deeda72b 100644
+> --- a/drivers/gpu/drm/scheduler/sched_main.c
+> +++ b/drivers/gpu/drm/scheduler/sched_main.c
+> @@ -367,7 +367,7 @@ static void drm_sched_run_job_queue(struct
+> drm_gpu_scheduler *sched)
+> =C2=A0 */
+> =C2=A0static void __drm_sched_run_free_queue(struct drm_gpu_scheduler
+> *sched)
+> =C2=A0{
+> -=09if (!READ_ONCE(sched->pause_submit))
+> +=09if (!READ_ONCE(sched->pause_free))
+> =C2=A0=09=09queue_work(sched->submit_wq, &sched->work_free_job);
+> =C2=A0}
+> =C2=A0
+> @@ -556,6 +556,7 @@ static void drm_sched_job_timedout(struct
+> work_struct *work)
+> =C2=A0=09=09 * is parked at which point it's safe.
+> =C2=A0=09=09 */
+> =C2=A0=09=09list_del_init(&job->list);
+> +
+> =C2=A0=09=09spin_unlock(&sched->job_list_lock);
+> =C2=A0
+> =C2=A0=09=09status =3D job->sched->ops->timedout_job(job);
+> @@ -572,8 +573,10 @@ static void drm_sched_job_timedout(struct
+> work_struct *work)
+> =C2=A0=09=09spin_unlock(&sched->job_list_lock);
+> =C2=A0=09}
+> =C2=A0
+> -=09if (status !=3D DRM_GPU_SCHED_STAT_ENODEV)
+> -=09=09drm_sched_start_timeout_unlocked(sched);
+> +=09if (status !=3D DRM_GPU_SCHED_STAT_ENODEV) {
+> +=09=09if (!READ_ONCE(sched->cancel_timeout))
 
-Use the `DEFINE_RAW_FLEX()` helper for a few on-stack definitions
-of a flexible structure where the size of the flexible-array member
-is known at compile-time, and refactor the rest of the code,
-accordingly.
+Another thing I want to investigate is whether all those booleans we
+read with READ_ONCE are actually necessary?
 
-So, with these changes, fix the following warnings:
+Because I suspect they are not. The cancel_work_sync() functions should
+do the trick, and if they're too late we'd just wait one cycle longer.
 
-drivers/gpu/drm/nouveau/nouveau_chan.c:274:37: warning: structure containing a flexible array member is not at the end of another structure [-Wflex-array-member-not-at-end]
-drivers/gpu/drm/nouveau/nouveau_chan.c:371:46: warning: structure containing a flexible array member is not at the end of another structure [-Wflex-array-member-not-at-end]
-drivers/gpu/drm/nouveau/nouveau_chan.c:524:42: warning: structure containing a flexible array member is not at the end of another structure [-Wflex-array-member-not-at-end]
+@Christian, Tvrtko, could be helpful if you can take a look.
 
-Signed-off-by: Gustavo A. R. Silva <gustavoars@kernel.org>
----
-Changes in v2:
- - Use __member_size() instead of __struct_size() to get the
-   compile-time size of the flexible array.
+> +=09=09=09drm_sched_start_timeout_unlocked(sched);
+> +=09}
+> =C2=A0}
+> =C2=A0
+> =C2=A0/**
+> @@ -1119,12 +1122,22 @@ drm_sched_get_finished_job(struct
+> drm_gpu_scheduler *sched)
+> =C2=A0=09=09/* remove job from pending_list */
+> =C2=A0=09=09list_del_init(&job->list);
+> =C2=A0
+> +=09=09/*
+> +=09=09 * Inform tasks blocking in drm_sched_fini() that
+> it's now safe to proceed.
+> +=09=09 */
+> +=09=09if (list_empty(&sched->pending_list))
+> +=09=09=09wake_up(&sched->pending_list_waitque);
+> +
+> =C2=A0=09=09/* cancel this job's TO timer */
+> =C2=A0=09=09cancel_delayed_work(&sched->work_tdr);
+> =C2=A0=09=09/* make the scheduled timestamp more accurate */
+> =C2=A0=09=09next =3D list_first_entry_or_null(&sched-
+> >pending_list,
+> =C2=A0=09=09=09=09=09=09typeof(*next),
+> list);
+> =C2=A0
+> +=09=09// TODO RFC: above we wake up the waitque which
+> relies on the fact
+> +=09=09// that timeouts have been deactivated. The below
+> should never
+> +=09=09// reactivate them since the list was empty above.
+> Still, should
+> +=09=09// we document that?
 
-v1:
- - Link: https://lore.kernel.org/linux-hardening/Z-67Hm9uHEJs0RGw@kspp/
+Regarding this, I re-read the code a few times and conclude that this
+is not a problem.
 
- drivers/gpu/drm/nouveau/nouveau_chan.c | 114 ++++++++++++-------------
- 1 file changed, 55 insertions(+), 59 deletions(-)
 
-diff --git a/drivers/gpu/drm/nouveau/nouveau_chan.c b/drivers/gpu/drm/nouveau/nouveau_chan.c
-index cd659b9fd1d9..1286a664f688 100644
---- a/drivers/gpu/drm/nouveau/nouveau_chan.c
-+++ b/drivers/gpu/drm/nouveau/nouveau_chan.c
-@@ -270,10 +270,7 @@ nouveau_channel_ctor(struct nouveau_cli *cli, bool priv, u64 runm,
- 		{    NV03_CHANNEL_DMA     , 0 },
- 		{}
- 	};
--	struct {
--		struct nvif_chan_v0 chan;
--		char name[TASK_COMM_LEN+16];
--	} args;
-+	DEFINE_RAW_FLEX(struct nvif_chan_v0, args, name, TASK_COMM_LEN + 16);
- 	struct nvif_device *device = &cli->device;
- 	struct nouveau_channel *chan;
- 	const u64 plength = 0x10000;
-@@ -298,28 +295,28 @@ nouveau_channel_ctor(struct nouveau_cli *cli, bool priv, u64 runm,
- 		return ret;
- 
- 	/* create channel object */
--	args.chan.version = 0;
--	args.chan.namelen = sizeof(args.name);
--	args.chan.runlist = __ffs64(runm);
--	args.chan.runq = 0;
--	args.chan.priv = priv;
--	args.chan.devm = BIT(0);
-+	args->version = 0;
-+	args->namelen = __member_size(args->name);
-+	args->runlist = __ffs64(runm);
-+	args->runq = 0;
-+	args->priv = priv;
-+	args->devm = BIT(0);
- 	if (hosts[cid].oclass < NV50_CHANNEL_GPFIFO) {
--		args.chan.vmm = 0;
--		args.chan.ctxdma = nvif_handle(&chan->push.ctxdma);
--		args.chan.offset = chan->push.addr;
--		args.chan.length = 0;
-+		args->vmm = 0;
-+		args->ctxdma = nvif_handle(&chan->push.ctxdma);
-+		args->offset = chan->push.addr;
-+		args->length = 0;
- 	} else {
--		args.chan.vmm = nvif_handle(&chan->vmm->vmm.object);
-+		args->vmm = nvif_handle(&chan->vmm->vmm.object);
- 		if (hosts[cid].oclass < FERMI_CHANNEL_GPFIFO)
--			args.chan.ctxdma = nvif_handle(&chan->push.ctxdma);
-+			args->ctxdma = nvif_handle(&chan->push.ctxdma);
- 		else
--			args.chan.ctxdma = 0;
--		args.chan.offset = ioffset + chan->push.addr;
--		args.chan.length = ilength;
-+			args->ctxdma = 0;
-+		args->offset = ioffset + chan->push.addr;
-+		args->length = ilength;
- 	}
--	args.chan.huserd = 0;
--	args.chan.ouserd = 0;
-+	args->huserd = 0;
-+	args->ouserd = 0;
- 
- 	/* allocate userd */
- 	if (hosts[cid].oclass >= VOLTA_CHANNEL_GPFIFO_A) {
-@@ -329,27 +326,28 @@ nouveau_channel_ctor(struct nouveau_cli *cli, bool priv, u64 runm,
- 		if (ret)
- 			return ret;
- 
--		args.chan.huserd = nvif_handle(&chan->mem_userd.object);
--		args.chan.ouserd = 0;
-+		args->huserd = nvif_handle(&chan->mem_userd.object);
-+		args->ouserd = 0;
- 
- 		chan->userd = &chan->mem_userd.object;
- 	} else {
- 		chan->userd = &chan->user;
- 	}
- 
--	snprintf(args.name, sizeof(args.name), "%s[%d]", current->comm, task_pid_nr(current));
-+	snprintf(args->name, __member_size(args->name), "%s[%d]",
-+		 current->comm, task_pid_nr(current));
- 
- 	ret = nvif_object_ctor(&device->object, "abi16ChanUser", 0, hosts[cid].oclass,
--			       &args, sizeof(args), &chan->user);
-+			       args, __struct_size(args), &chan->user);
- 	if (ret) {
- 		nouveau_channel_del(pchan);
- 		return ret;
- 	}
- 
--	chan->runlist = args.chan.runlist;
--	chan->chid = args.chan.chid;
--	chan->inst = args.chan.inst;
--	chan->token = args.chan.token;
-+	chan->runlist = args->runlist;
-+	chan->chid = args->chid;
-+	chan->inst = args->inst;
-+	chan->token = args->token;
- 	return 0;
- }
- 
-@@ -367,17 +365,17 @@ nouveau_channel_init(struct nouveau_channel *chan, u32 vram, u32 gart)
- 		return ret;
- 
- 	if (chan->user.oclass >= FERMI_CHANNEL_GPFIFO) {
--		struct {
--			struct nvif_event_v0 base;
--			struct nvif_chan_event_v0 host;
--		} args;
-+		DEFINE_RAW_FLEX(struct nvif_event_v0, args, data,
-+				sizeof(struct nvif_chan_event_v0));
-+		struct nvif_chan_event_v0 *host =
-+				(struct nvif_chan_event_v0 *)args->data;
- 
--		args.host.version = 0;
--		args.host.type = NVIF_CHAN_EVENT_V0_KILLED;
-+		host->version = 0;
-+		host->type = NVIF_CHAN_EVENT_V0_KILLED;
- 
- 		ret = nvif_event_ctor(&chan->user, "abi16ChanKilled", chan->chid,
- 				      nouveau_channel_killed, false,
--				      &args.base, sizeof(args), &chan->kill);
-+				      args, __struct_size(args), &chan->kill);
- 		if (ret == 0)
- 			ret = nvif_event_allow(&chan->kill);
- 		if (ret) {
-@@ -520,46 +518,44 @@ nouveau_channels_fini(struct nouveau_drm *drm)
- int
- nouveau_channels_init(struct nouveau_drm *drm)
- {
--	struct {
--		struct nv_device_info_v1 m;
--		struct {
--			struct nv_device_info_v1_data channels;
--			struct nv_device_info_v1_data runlists;
--		} v;
--	} args = {
--		.m.version = 1,
--		.m.count = sizeof(args.v) / sizeof(args.v.channels),
--		.v.channels.mthd = NV_DEVICE_HOST_CHANNELS,
--		.v.runlists.mthd = NV_DEVICE_HOST_RUNLISTS,
--	};
-+	DEFINE_RAW_FLEX(struct nv_device_info_v1, args, data, 2);
-+	struct nv_device_info_v1_data *channels = &args->data[0];
-+	struct nv_device_info_v1_data *runlists = &args->data[1];
- 	struct nvif_object *device = &drm->client.device.object;
- 	int ret, i;
- 
--	ret = nvif_object_mthd(device, NV_DEVICE_V0_INFO, &args, sizeof(args));
-+	args->version = 1;
-+	args->count = __member_size(args->data) / sizeof(*args->data);
-+	channels->mthd = NV_DEVICE_HOST_CHANNELS;
-+	runlists->mthd = NV_DEVICE_HOST_RUNLISTS;
-+
-+	ret = nvif_object_mthd(device, NV_DEVICE_V0_INFO, args,
-+			       __struct_size(args));
- 	if (ret ||
--	    args.v.runlists.mthd == NV_DEVICE_INFO_INVALID || !args.v.runlists.data ||
--	    args.v.channels.mthd == NV_DEVICE_INFO_INVALID)
-+	    runlists->mthd == NV_DEVICE_INFO_INVALID || !runlists->data ||
-+	    channels->mthd == NV_DEVICE_INFO_INVALID)
- 		return -ENODEV;
- 
--	drm->chan_nr = drm->chan_total = args.v.channels.data;
--	drm->runl_nr = fls64(args.v.runlists.data);
-+	drm->chan_nr = drm->chan_total = channels->data;
-+	drm->runl_nr = fls64(runlists->data);
- 	drm->runl = kcalloc(drm->runl_nr, sizeof(*drm->runl), GFP_KERNEL);
- 	if (!drm->runl)
- 		return -ENOMEM;
- 
- 	if (drm->chan_nr == 0) {
- 		for (i = 0; i < drm->runl_nr; i++) {
--			if (!(args.v.runlists.data & BIT(i)))
-+			if (!(runlists->data & BIT(i)))
- 				continue;
- 
--			args.v.channels.mthd = NV_DEVICE_HOST_RUNLIST_CHANNELS;
--			args.v.channels.data = i;
-+			channels->mthd = NV_DEVICE_HOST_RUNLIST_CHANNELS;
-+			channels->data = i;
- 
--			ret = nvif_object_mthd(device, NV_DEVICE_V0_INFO, &args, sizeof(args));
--			if (ret || args.v.channels.mthd == NV_DEVICE_INFO_INVALID)
-+			ret = nvif_object_mthd(device, NV_DEVICE_V0_INFO, args,
-+					       __struct_size(args));
-+			if (ret || channels->mthd == NV_DEVICE_INFO_INVALID)
- 				return -ENODEV;
- 
--			drm->runl[i].chan_nr = args.v.channels.data;
-+			drm->runl[i].chan_nr = channels->data;
- 			drm->runl[i].chan_id_base = drm->chan_total;
- 			drm->runl[i].context_base = dma_fence_context_alloc(drm->runl[i].chan_nr);
- 
--- 
-2.43.0
+P.
+
+> =C2=A0=09=09if (next) {
+> =C2=A0=09=09=09if (test_bit(DMA_FENCE_FLAG_TIMESTAMP_BIT,
+> =C2=A0=09=09=09=09=C2=A0=C2=A0=C2=A0=C2=A0 &next->s_fence-
+> >scheduled.flags))
+> @@ -1324,6 +1337,7 @@ int drm_sched_init(struct drm_gpu_scheduler
+> *sched, const struct drm_sched_init_
+> =C2=A0=09init_waitqueue_head(&sched->job_scheduled);
+> =C2=A0=09INIT_LIST_HEAD(&sched->pending_list);
+> =C2=A0=09spin_lock_init(&sched->job_list_lock);
+> +=09init_waitqueue_head(&sched->pending_list_waitque);
+> =C2=A0=09atomic_set(&sched->credit_count, 0);
+> =C2=A0=09INIT_DELAYED_WORK(&sched->work_tdr, drm_sched_job_timedout);
+> =C2=A0=09INIT_WORK(&sched->work_run_job, drm_sched_run_job_work);
+> @@ -1331,6 +1345,8 @@ int drm_sched_init(struct drm_gpu_scheduler
+> *sched, const struct drm_sched_init_
+> =C2=A0=09atomic_set(&sched->_score, 0);
+> =C2=A0=09atomic64_set(&sched->job_id_count, 0);
+> =C2=A0=09sched->pause_submit =3D false;
+> +=09sched->pause_free =3D false;
+> +=09sched->cancel_timeout =3D false;
+> =C2=A0
+> =C2=A0=09sched->ready =3D true;
+> =C2=A0=09return 0;
+> @@ -1348,6 +1364,40 @@ int drm_sched_init(struct drm_gpu_scheduler
+> *sched, const struct drm_sched_init_
+> =C2=A0}
+> =C2=A0EXPORT_SYMBOL(drm_sched_init);
+> =C2=A0
+> +/**
+> + * drm_sched_submission_and_timeout_stop - stop everything except
+> for free_job()
+> + * @sched: scheduler instance
+> + *
+> + * Only needed to cleanly tear down the scheduler in
+> drm_sched_fini().
+> + */
+> +static inline void
+> +drm_sched_submission_and_timeout_stop(struct drm_gpu_scheduler
+> *sched)
+> +{
+> +=09WRITE_ONCE(sched->pause_submit, true);
+> +=09WRITE_ONCE(sched->cancel_timeout, true);
+> +=09cancel_work_sync(&sched->work_run_job);
+> +=09cancel_delayed_work_sync(&sched->work_tdr);
+> +}
+> +
+> +static inline void
+> +drm_sched_free_stop(struct drm_gpu_scheduler *sched)
+> +{
+> +=09WRITE_ONCE(sched->pause_free, true);
+> +=09cancel_work_sync(&sched->work_free_job);
+> +}
+> +
+> +static inline bool
+> +drm_sched_no_jobs_pending(struct drm_gpu_scheduler *sched)
+> +{
+> +=09bool empty;
+> +
+> +=09spin_lock(&sched->job_list_lock);
+> +=09empty =3D list_empty(&sched->pending_list);
+> +=09spin_unlock(&sched->job_list_lock);
+> +
+> +=09return empty;
+> +}
+> +
+> =C2=A0/**
+> =C2=A0 * drm_sched_fini - Destroy a gpu scheduler
+> =C2=A0 *
+> @@ -1355,26 +1405,24 @@ EXPORT_SYMBOL(drm_sched_init);
+> =C2=A0 *
+> =C2=A0 * Tears down and cleans up the scheduler.
+> =C2=A0 *
+> - * This stops submission of new jobs to the hardware through
+> - * drm_sched_backend_ops.run_job(). Consequently,
+> drm_sched_backend_ops.free_job()
+> - * will not be called for all jobs still in
+> drm_gpu_scheduler.pending_list.
+> - * There is no solution for this currently. Thus, it is up to the
+> driver to make
+> - * sure that:
+> - *
+> - *=C2=A0 a) drm_sched_fini() is only called after for all submitted jobs
+> - *=C2=A0=C2=A0=C2=A0=C2=A0 drm_sched_backend_ops.free_job() has been cal=
+led or that
+> - *=C2=A0 b) the jobs for which drm_sched_backend_ops.free_job() has not
+> been called
+> - *=C2=A0=C2=A0=C2=A0=C2=A0 after drm_sched_fini() ran are freed manually=
+.
+> - *
+> - * FIXME: Take care of the above problem and prevent this function
+> from leaking
+> - * the jobs in drm_gpu_scheduler.pending_list under any
+> circumstances.
+> + * Note that this function blocks until all the fences returned by
+> + * &struct drm_sched_backend_ops.run_job have been signalled.
+> =C2=A0 */
+> =C2=A0void drm_sched_fini(struct drm_gpu_scheduler *sched)
+> =C2=A0{
+> =C2=A0=09struct drm_sched_entity *s_entity;
+> =C2=A0=09int i;
+> =C2=A0
+> -=09drm_sched_wqueue_stop(sched);
+> +=09/*
+> +=09 * Jobs that have neither been scheduled or which have timed
+> out are
+> +=09 * gone by now, but jobs that have been submitted through
+> +=09 * backend_ops.run_job() and have not yet terminated are
+> still pending.
+> +=09 *
+> +=09 * Wait for the pending_list to become empty to avoid
+> leaking those jobs.
+> +=09 */
+> +=09drm_sched_submission_and_timeout_stop(sched);
+> +=09wait_event(sched->pending_list_waitque,
+> drm_sched_no_jobs_pending(sched));
+> +=09drm_sched_free_stop(sched);
+> =C2=A0
+> =C2=A0=09for (i =3D DRM_SCHED_PRIORITY_KERNEL; i < sched->num_rqs; i++)
+> {
+> =C2=A0=09=09struct drm_sched_rq *rq =3D sched->sched_rq[i];
+> @@ -1471,6 +1519,7 @@ EXPORT_SYMBOL(drm_sched_wqueue_ready);
+> =C2=A0void drm_sched_wqueue_stop(struct drm_gpu_scheduler *sched)
+> =C2=A0{
+> =C2=A0=09WRITE_ONCE(sched->pause_submit, true);
+> +=09WRITE_ONCE(sched->pause_free, true);
+> =C2=A0=09cancel_work_sync(&sched->work_run_job);
+> =C2=A0=09cancel_work_sync(&sched->work_free_job);
+> =C2=A0}
+> @@ -1488,6 +1537,7 @@ EXPORT_SYMBOL(drm_sched_wqueue_stop);
+> =C2=A0void drm_sched_wqueue_start(struct drm_gpu_scheduler *sched)
+> =C2=A0{
+> =C2=A0=09WRITE_ONCE(sched->pause_submit, false);
+> +=09WRITE_ONCE(sched->pause_free, false);
+> =C2=A0=09queue_work(sched->submit_wq, &sched->work_run_job);
+> =C2=A0=09queue_work(sched->submit_wq, &sched->work_free_job);
+> =C2=A0}
+> diff --git a/include/drm/gpu_scheduler.h
+> b/include/drm/gpu_scheduler.h
+> index 1a7e377d4cbb..badcf9ea4501 100644
+> --- a/include/drm/gpu_scheduler.h
+> +++ b/include/drm/gpu_scheduler.h
+> @@ -29,6 +29,7 @@
+> =C2=A0#include <linux/completion.h>
+> =C2=A0#include <linux/xarray.h>
+> =C2=A0#include <linux/workqueue.h>
+> +#include <linux/wait.h>
+> =C2=A0
+> =C2=A0#define MAX_WAIT_SCHED_ENTITY_Q_EMPTY msecs_to_jiffies(1000)
+> =C2=A0
+> @@ -533,6 +534,8 @@ struct drm_sched_backend_ops {
+> =C2=A0 *=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=
+=A0 timeout interval is over.
+> =C2=A0 * @pending_list: the list of jobs which are currently in the job
+> queue.
+> =C2=A0 * @job_list_lock: lock to protect the pending_list.
+> + * @pending_list_waitque: a waitqueue for drm_sched_fini() to block
+> on until all
+> + *=09=09=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 pending j=
+obs have been finished.
+> =C2=A0 * @hang_limit: once the hangs by a job crosses this limit then it
+> is marked
+> =C2=A0 *=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=
+=A0=C2=A0=C2=A0 guilty and it will no longer be considered for
+> scheduling.
+> =C2=A0 * @score: score to help loadbalancer pick a idle sched
+> @@ -540,6 +543,8 @@ struct drm_sched_backend_ops {
+> =C2=A0 * @ready: marks if the underlying HW is ready to work
+> =C2=A0 * @free_guilty: A hit to time out handler to free the guilty job.
+> =C2=A0 * @pause_submit: pause queuing of @work_run_job on @submit_wq
+> + * @pause_free: pause queuing of @work_free_job on @submit_wq
+> + * @cancel_timeout: pause queuing of @work_tdr on @submit_wq
+> =C2=A0 * @own_submit_wq: scheduler owns allocation of @submit_wq
+> =C2=A0 * @dev: system &struct device
+> =C2=A0 *
+> @@ -562,12 +567,15 @@ struct drm_gpu_scheduler {
+> =C2=A0=09struct delayed_work=09=09work_tdr;
+> =C2=A0=09struct list_head=09=09pending_list;
+> =C2=A0=09spinlock_t=09=09=09job_list_lock;
+> +=09wait_queue_head_t=09=09pending_list_waitque;
+> =C2=A0=09int=09=09=09=09hang_limit;
+> =C2=A0=09atomic_t=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=
+=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=
+=A0=C2=A0 *score;
+> =C2=A0=09atomic_t=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=
+=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=
+=A0=C2=A0 _score;
+> =C2=A0=09bool=09=09=09=09ready;
+> =C2=A0=09bool=09=09=09=09free_guilty;
+> =C2=A0=09bool=09=09=09=09pause_submit;
+> +=09bool=09=09=09=09pause_free;
+> +=09bool=09=09=09=09cancel_timeout;
+> =C2=A0=09bool=09=09=09=09own_submit_wq;
+> =C2=A0=09struct device=09=09=09*dev;
+> =C2=A0};
 
