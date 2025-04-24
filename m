@@ -2,166 +2,151 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id B0A97BBF51A
-	for <lists+nouveau@lfdr.de>; Mon, 06 Oct 2025 22:47:30 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 1A169BBF4A2
+	for <lists+nouveau@lfdr.de>; Mon, 06 Oct 2025 22:47:09 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 5476210E507;
-	Mon,  6 Oct 2025 20:46:28 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id B2A0110E4CF;
+	Mon,  6 Oct 2025 20:46:26 +0000 (UTC)
 Authentication-Results: gabe.freedesktop.org;
-	dkim=pass (2048-bit key; unprotected) header.d=Nvidia.com header.i=@Nvidia.com header.b="MtuUxiup";
+	dkim=pass (2048-bit key; unprotected) header.d=Nvidia.com header.i=@Nvidia.com header.b="pp6k5+zB";
 	dkim-atps=neutral
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
 Received: from NAM10-DM6-obe.outbound.protection.outlook.com
- (mail-dm6nam10on2075.outbound.protection.outlook.com [40.107.93.75])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 9AC7D10E18B;
- Thu, 24 Apr 2025 18:54:51 +0000 (UTC)
+ (mail-dm6nam10on2061.outbound.protection.outlook.com [40.107.93.61])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 71F1810E845;
+ Thu, 24 Apr 2025 19:19:06 +0000 (UTC)
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=n+Cfhinpnl3TgiM6dyMwCcnJE47BLtKQt0b9dHVtB6Fk46b3wQM/sYBSxUSRXePzeKYHQwVQOYaV2+TnoHmoKHKibmk61jj8ZVY7Uu4H7N5ajla/FHAR/frll2w06s6suON2SJolEpIrvybjtmpXIqTF2vEqm+OuHjX28DqE70CAUXW0mCC4pur8Po0kXGbLMKjicPoMIIQeTHdw6bo4YRQ1w9nOSqR4Bcgxo8bDpapDx259M7ZIQpo73OTOYXOzSPil/L2q54AQ8+p12mX6/RT3vIZeJ1CGW2srb5SCKxqexWTAIu+dHlh4O5Pv4Wn7dZv0pRulff+cLW3HEIFV5Q==
+ b=hSJmkF90zrJ/4H1qIe3iNgj6S8ROjvNzxaEf43qseQkBYjkhfZ1owPMcYTxt9NzIumKUocga922XyxtibJZNIvkL+F/boOmUkGNxQ650zbyp4FDDuc7jPbVJKcSXk6aSKzlBHDFCmDP45XQVSpL2wdcSTP+JAqx/RGayHhFzjb5BD/9trcIhFgYgTiTS6Be6766vpKJ6U9Y9875/sM2kW9lp4cEojBUn2fL9QNGs4cSRDVHIAZ2fWDex+9iWyZWSJn4vI6LxMSOQRlET2h2MVs0dJ6AlluGnyEqTPQGQu67/xVyZIAHs7frdPL0Hf2UZI+bK3I/erMVOy3fzB/gX2Q==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
  s=arcselector10001;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=6LNVUgNl8V+RqY8CzOMT6XPhC8ZpBFul4WdcDEiDr2w=;
- b=a2ZwiOX+4uwrrYr7VrtJE3SNY9HlxzISpLI75RxFx9CxSAbjI5aEszbx96udEwOY0QuKHvXqjKu0VaIIB0J1RZxuYkmQI/0nOCEU2K25AE8+rREL6MP2SvNLrRH8n4wJqgmVmv7XYEBOjfUzC6gfhK7WrjxYn/Gr5rU2vwwhmaO186JUOp1dUQ/Hd+mjXvRN1Sot5Vd/QDajCvkvwRd5nCZVgVqPWmrOlhyjgf5va2hZ/FamJT7n/gn+/dJjBuNAPUzbVRqFhGl7K3hwR4EnU4D8tDFt/R3vYO3td5a0MklqrnS28BGGrYT8yk+ZOoNCpFxqXh1gWguO51f/1v5b8w==
+ bh=7XGcZFvdkllNkhBgzuL4JIscTQDkBTw5A4uANNNrld0=;
+ b=MVHlSSYWHgotaXQ/8Se+qQPbeKw8HhZVJTDtkyTAVe4cZPdrFf/ZOToSWXn6P9YyZxErRXOrQfebqLaNLU+3wJCoJmi2pxuzuvR/DXmVohzqVIpst0QwS4dCtoHIBHTEnBB0NKB/AAHiXABFbBEgtC2tTtHHynuZN3IJx/Y3rgyZBew1kemdD0mtcsgV49EdCEd9mtwoeRIaSD87cUlC+U65LP90f66UyQtnQi8nlEafVEy17fg8cmKlOQM8+Pi3ndGFU7olxV5dNSBOooSMzAYGQMrooFIL0uIwT+vWoevTVMUtGE739H+y/8jOvby4CUY1MiR845maN7i/3uuhaQ==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
  smtp.mailfrom=nvidia.com; dmarc=pass action=none header.from=nvidia.com;
  dkim=pass header.d=nvidia.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=Nvidia.com;
  s=selector2;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=6LNVUgNl8V+RqY8CzOMT6XPhC8ZpBFul4WdcDEiDr2w=;
- b=MtuUxiup527Pt7unS5Vi91aIc6Oj23A5VNMr7AsFE5TZDFzotmcg+8mGpBDlZLchxmfRfMIKTi98VmZrZepYwYMfEsia55RiOoW0KHC2erLn/YzOW8mduSti5mkrAektohTrBU5/5h13PeyjvNBS9qGtOXk5Pdiqicyr0SHUzunbObran5L2hsfldzwAWcSuYKmtsiL3wrpVKFMITOJGkU7FpCm2QHPtMsmV/aK/DNaNvmV56kes8eZW5x75GTtASYGWhDwn6Wha63rAJMU4fwFMe+nbWURHIah1GqlnXpekgxgSa9nlVbgs+gPK0T1dEqXN46ZPREpetp2tcj0NHA==
+ bh=7XGcZFvdkllNkhBgzuL4JIscTQDkBTw5A4uANNNrld0=;
+ b=pp6k5+zB3BGlIMfvKuvT8I0DaSqXuEUAD/ySEULlz1xKnuyzHrk59N8ZPwH0/ZCKp1PP+WV3ni1ZQjY1CnIrUyRZtoANyCVv3hbzAc8HYjvQtcjMXR1iQAwfyZ+vCxf6gfiRwOl8zKyIGCt7q+lgk13jJRApzXAcl4XoIhRSLT/8ax3QhHnwqBurnYU7stI0YYBHAuF7uOBkEDQ+MkTzOb/xR0zpRRg/QM5irhUGAwtJKugYkM1UCkZ8zNAesRlzWyhQ0XODZk523fxcD/Abr1rzqut0nx77pEmSrRmPJsmDpDnll83iikZiJsSPmjg8OCc34w1tmLiVbai6rjgxPw==
 Authentication-Results: dkim=none (message not signed)
  header.d=none;dmarc=none action=none header.from=nvidia.com;
 Received: from SN7PR12MB8059.namprd12.prod.outlook.com (2603:10b6:806:32b::7)
- by MW4PR12MB7165.namprd12.prod.outlook.com (2603:10b6:303:21b::14)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.8678.27; Thu, 24 Apr
- 2025 18:54:46 +0000
+ by DS4PR12MB9658.namprd12.prod.outlook.com (2603:10b6:8:280::14) with
+ Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.8678.23; Thu, 24 Apr
+ 2025 19:19:03 +0000
 Received: from SN7PR12MB8059.namprd12.prod.outlook.com
  ([fe80::4ee2:654e:1fe8:4b91]) by SN7PR12MB8059.namprd12.prod.outlook.com
  ([fe80::4ee2:654e:1fe8:4b91%6]) with mapi id 15.20.8655.033; Thu, 24 Apr 2025
- 18:54:46 +0000
-Message-ID: <7f3aa4b3-a24a-41c6-b75e-61e0e6e11ee3@nvidia.com>
-Date: Thu, 24 Apr 2025 14:54:42 -0400
-User-Agent: Mozilla Thunderbird
+ 19:19:03 +0000
+Date: Thu, 24 Apr 2025 15:19:00 -0400
+From: Joel Fernandes <joelagnelf@nvidia.com>
+To: Danilo Krummrich <dakr@kernel.org>
+Cc: Alexandre Courbot <acourbot@nvidia.com>, Miguel Ojeda <ojeda@kernel.org>,
+ Alex Gaynor <alex.gaynor@gmail.com>,
+ Boqun Feng <boqun.feng@gmail.com>, Gary Guo <gary@garyguo.net>,
+ =?iso-8859-1?Q?Bj=F6rn?= Roy Baron <bjorn3_gh@protonmail.com>,
+ Benno Lossin <benno.lossin@proton.me>,
+ Andreas Hindborg <a.hindborg@kernel.org>,
+ Alice Ryhl <aliceryhl@google.com>, Trevor Gross <tmgross@umich.edu>,
+ David Airlie <airlied@gmail.com>, Simona Vetter <simona@ffwll.ch>,
+ Maarten Lankhorst <maarten.lankhorst@linux.intel.com>,
+ Maxime Ripard <mripard@kernel.org>,
+ Thomas Zimmermann <tzimmermann@suse.de>, Jonathan Corbet <corbet@lwn.net>,
+ John Hubbard <jhubbard@nvidia.com>, Ben Skeggs <bskeggs@nvidia.com>,
+ Timur Tabi <ttabi@nvidia.com>, Alistair Popple <apopple@nvidia.com>,
+ linux-kernel@vger.kernel.org, rust-for-linux@vger.kernel.org,
+ nouveau@lists.freedesktop.org, dri-devel@lists.freedesktop.org
 Subject: Re: [PATCH 13/16] gpu: nova-core: Add support for VBIOS ucode
  extraction for boot
-To: Danilo Krummrich <dakr@kernel.org>, Alexandre Courbot <acourbot@nvidia.com>
-Cc: Miguel Ojeda <ojeda@kernel.org>, Alex Gaynor <alex.gaynor@gmail.com>,
- Boqun Feng <boqun.feng@gmail.com>, Gary Guo <gary@garyguo.net>,
- =?UTF-8?Q?Bj=C3=B6rn_Roy_Baron?= <bjorn3_gh@protonmail.com>,
- Benno Lossin <benno.lossin@proton.me>,
- Andreas Hindborg <a.hindborg@kernel.org>, Alice Ryhl <aliceryhl@google.com>,
- Trevor Gross <tmgross@umich.edu>, David Airlie <airlied@gmail.com>,
- Simona Vetter <simona@ffwll.ch>,
- Maarten Lankhorst <maarten.lankhorst@linux.intel.com>,
- Maxime Ripard <mripard@kernel.org>, Thomas Zimmermann <tzimmermann@suse.de>,
- Jonathan Corbet <corbet@lwn.net>, John Hubbard <jhubbard@nvidia.com>,
- Ben Skeggs <bskeggs@nvidia.com>, Timur Tabi <ttabi@nvidia.com>,
- Alistair Popple <apopple@nvidia.com>, linux-kernel@vger.kernel.org,
- rust-for-linux@vger.kernel.org, nouveau@lists.freedesktop.org,
- dri-devel@lists.freedesktop.org
+Message-ID: <20250424191900.GA174004@joelnvbox>
 References: <20250420-nova-frts-v1-0-ecd1cca23963@nvidia.com>
- <20250420-nova-frts-v1-13-ecd1cca23963@nvidia.com> <aAjz2CYTsAhidiEU@pollux>
-Content-Language: en-US
-From: Joel Fernandes <joelagnelf@nvidia.com>
-In-Reply-To: <aAjz2CYTsAhidiEU@pollux>
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
-X-ClientProxiedBy: BN9PR03CA0543.namprd03.prod.outlook.com
- (2603:10b6:408:138::8) To SN7PR12MB8059.namprd12.prod.outlook.com
+ <20250420-nova-frts-v1-13-ecd1cca23963@nvidia.com>
+ <aAjz2CYTsAhidiEU@pollux>
+ <88937e2b-6950-4c9d-8f02-50f9b12c7376@nvidia.com>
+ <aAkBIvfTkKVNbdnm@pollux>
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <aAkBIvfTkKVNbdnm@pollux>
+X-ClientProxiedBy: BL6PEPF00016418.NAMP222.PROD.OUTLOOK.COM
+ (2603:10b6:22e:400:0:1004:0:7) To SN7PR12MB8059.namprd12.prod.outlook.com
  (2603:10b6:806:32b::7)
 MIME-Version: 1.0
 X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: SN7PR12MB8059:EE_|MW4PR12MB7165:EE_
-X-MS-Office365-Filtering-Correlation-Id: ddd4f2c3-bc4d-4309-27f3-08dd83617b63
+X-MS-TrafficTypeDiagnostic: SN7PR12MB8059:EE_|DS4PR12MB9658:EE_
+X-MS-Office365-Filtering-Correlation-Id: dd506992-1ee8-42c8-f9b9-08dd8364dfa5
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
 X-Microsoft-Antispam: BCL:0;ARA:13230040|1800799024|7416014|376014|366016;
-X-Microsoft-Antispam-Message-Info: =?utf-8?B?QTgyTkd1Q1VMSXdkOFFXbFpmMm5hYTBMTGVpM3BhNVJjQ3lZMlBZM0FtTmFr?=
- =?utf-8?B?Rk9ncC8vN29HVlQ4V1NDWkF5VTZ5dnFlNFQxWVN6M0gxRXBidmoxKy9NMmwx?=
- =?utf-8?B?TTBkdm0vajlWZHZOYkYzMm5oNVFjQUVkcG9PcDU1eEw3dFdFb3JUUzI5NW5l?=
- =?utf-8?B?VU1vVEl0OWxJb0tZSTdXUS9FU05IZzV5SHpaWWliMnU0L3piSkdXYW91Q0RG?=
- =?utf-8?B?RjlyM0RUR3VobTZXYVpGNnd2cHB5UUx5NnRDWG9ad2RXMjVtSlh4Qnl4QnRN?=
- =?utf-8?B?Q2c0c2VOMUh3bnVIV0J2b3hNL0s4bkJhK2ZWU21paHpXN2FLdWlBRjFPRnBy?=
- =?utf-8?B?d1FVL0tEZis1WGxxMm5DNU9zMVNiVzM3a2JhZzhjZlNaY0V2ZVVxaW1mSnBB?=
- =?utf-8?B?ZW9IckR4UjJWMWQ0ZVduVWJ1SGh0V0EzV2RrTUQvTE01VmhpZ3dXN0RSSmQy?=
- =?utf-8?B?OHUwdzROS0J0c0xMb1Yrb05zOGtyV2hobk1ZQVZOS1dxYnFveHduYyt0TDdE?=
- =?utf-8?B?VkNWc1B4aUY4ZlVEcW85UEY5VUpPN25UWFRjS0VXR1ZQaEVDaEVDazJVZUR1?=
- =?utf-8?B?dXExUnc1dFJycEs5anYwUEJQeXJEcW1pM0h1aVdxQjRIK0xlVHVJVGZMVk4r?=
- =?utf-8?B?MUpqMzZXeXU5YmI1VFRQUVIrNWU2QjdLZDFsblgxcU9Ienl1ZmRockoyWmtm?=
- =?utf-8?B?TWN2Z3ArRll1S1VweThRSmU2UlhONmRvMkxhTC90dVFxSkdKbm9HSDZjNUlI?=
- =?utf-8?B?VmREZ0NsM1lyK2xwNStsUnVUc3l0bDBUYUQ3U0JWNm5LYUhwQjZwbDRlZ0c5?=
- =?utf-8?B?aklzOE5icExuNFphdG9hVVVxOXQ2R2ZvbFpvbzFYWFNOeGhGU2JxUGtSVVF6?=
- =?utf-8?B?WTB2NVJnSTloM0lmS3VLTlc0U0dUWjRqemVOOWs3YUtvMVcxaHlEYWw5YjAz?=
- =?utf-8?B?anNVRXc2QWxIZGpvdVBKOVVKTE5vRFNiVHArQkYwSS95MDFIUlZFVHhJWDcv?=
- =?utf-8?B?SVRhbTJjOHpJR1lXcDlzbG0vb3hKVTNlbmFHMHZuYm9Idi8rZzM3UHRHaHU4?=
- =?utf-8?B?Qm15ZlRMNnhFVTZJZGFZVm9vdTVUVjNIQkw5alRwcjdSanNwbVJjbGZjNzdQ?=
- =?utf-8?B?K01FN204cnBteEQvdHhzdVF4ODZYUGFaNlh1NlVJZ3dkdmRFZXhva05iWjZG?=
- =?utf-8?B?SFV6NURSekxGZUN1dlFWb1lxL3JoTHI4WVlmS3VoeFdQd2x5bVBZSTZXMGtE?=
- =?utf-8?B?UUJtbnNUN2l3NGx2bndBclNGUWRaU3IvaEw1M01IcFNrcWxLL1hZMlQrNkZY?=
- =?utf-8?B?bUZGM1JYZWJub3ZkdEEzZzRwN1orQjdTZ01ocXFaQmcyUFc1NnhHN3hEL0cr?=
- =?utf-8?B?TVE3eHh1S0NmMklJMW5mV01NV0RrYnE4aEtVdkJKaHl4TEtpaU9VN1dycTRj?=
- =?utf-8?B?WUVXeG4rOGR3Ni8relRZa05oU0YzQjBoSytMeFBwM0gyZWk0L0d3QjVmWFFQ?=
- =?utf-8?B?dWRGNWhaMDFZbVBWb1A0MzkrLzlpRWxDTzg2REk5U095NFNPUEtDa3AveDcz?=
- =?utf-8?B?Sys2Ukp2WTJCSzJidkNoSlZWazkxR0ZxQWFBVW9YWkJGcEs0R2VaVTBiUjFm?=
- =?utf-8?B?a1NMdlp3ZDJnQkpVbVB4NmYwSnI2OWozd281TjgwNTNZSFJ4bzNrR0RhRXZR?=
- =?utf-8?B?eG1ybGsyRUFLQXlQSUR4d3RONEo4OUhNaXNzakxLczRQYkpzL1paRkozUjFO?=
- =?utf-8?B?YnZIMGJTTUQyV0p3UTdjM1B3SXdPUG1vSkw2d2xXdUxrOWtXWERlSXdueFk5?=
- =?utf-8?B?YXl6WndoYzRwL1Q1VmlVUC9pSUU2MkJWY2FnL1pldVdSZDNwb1RKUmZnenAy?=
- =?utf-8?B?T1EzMTJ0MjQ5Rm1ESm9KWmgvUnZDRXEyNE40OTNueHM0OWhGK2Zpc0EzR2M2?=
- =?utf-8?Q?DMrXVNMuGVw=3D?=
+X-Microsoft-Antispam-Message-Info: =?us-ascii?Q?c5mfFE/4hrvT9qYmIkfqz9OaZQ/BjMn2r24jJdGUYj0LiRJ7hju89IwQwwhL?=
+ =?us-ascii?Q?c8YGwH/9PhoJERp5Ghs724efpl7jMe68XCGIkxssHMX8I0LpVA6fWodexTVS?=
+ =?us-ascii?Q?JaCaKrkhBetrRJ4xfeWuXivn/KpYBClPFjld1uIZv8bzhPWpw0BYQKBaOq4e?=
+ =?us-ascii?Q?b9Rp/bJLWw+BGtk8kTc22s9RqQEzqlqWESVHPwtSSPfUQFPm/8PDzbz5pSli?=
+ =?us-ascii?Q?q9t+Hi9FlB/sWlXML2dXGos3bgfqHm7zsaCZbGGpcR6zl4oRYzuYy10kFpX/?=
+ =?us-ascii?Q?Nk+0HLHEXfSXrXD2NzAsZiZw6F/1LqIOBWk8dF6z0i3Zd4kKe349Aoed0TzO?=
+ =?us-ascii?Q?c7OUXY8i8MJPP6SXYcAqkVXROTfrpJER+Nzv38AMc8pZCky7QTWgdU+Ulxcu?=
+ =?us-ascii?Q?5qdyJduI4O26EUGyYCH9uwg/Izk1Yk9BJJNgurbVeQ3KFY04X3gwKpq0C5iw?=
+ =?us-ascii?Q?j82WTkDDywXyU/oJntzqObsHOTH9WhpFZyTv3LMUP9cwRGnThDA74dCe2/Uj?=
+ =?us-ascii?Q?hHJCVDQ5OeXrMtuXOepacwFczyYmZmGAXgQTjrNLSaIE1li2awgA7iSUHDQz?=
+ =?us-ascii?Q?v/J9+O5Vwcm0a6FEAdytfSGJJ8uB5x3cBSFUsmlbiTuKOSyIxOiQOEj7OqOA?=
+ =?us-ascii?Q?TEg0np9WvS44gwx13j2ZIeKZS4+5PhiSMwG6Ld7t/9ryWDCUfOZAaYepHz/t?=
+ =?us-ascii?Q?4RlQ9PYDfD0uNmErGZZ7FSreH6Snfp20c1vHg/BHxd4PFF2Co6fVHPOrwQnz?=
+ =?us-ascii?Q?A3olIQvncjt4uz0YI5c1Rs6X0GbFtcagUSAylDB/ASbJJg7TAwmAG2vQRcgB?=
+ =?us-ascii?Q?EWKiOVGuVlKYyHX1HfF8ogOgkm90OfLx2G17llkuHxIlMl1DxlqS0su4JUHD?=
+ =?us-ascii?Q?O9LZ6vQ/xKxxTpwqteIgjhBLV/spXBEq3tD3zzT4hwuCQInRUOWFOfXmvcqR?=
+ =?us-ascii?Q?t5ex2F5IF58Jamkgmur7YCf/D7l6A6PFvZRwUFgMsE1NVPrjLIO6w6Se/g4F?=
+ =?us-ascii?Q?8FHmLS+/dVy/21K26L1okPIXsLV/mklsHkQJqy5rK+o/pgyKhc4hhAXvq0Jc?=
+ =?us-ascii?Q?wGbNVWOHNpl5dmweSJKwHxIfUTycz5OoduaZcZ6VCsgz9ToGfwOn/Xfr8VMt?=
+ =?us-ascii?Q?hSSbBZyhIsfPBR6n0VTd1knT4pnbJLQNZ9cHjFPDCUj+oqkx2VILrGeK1Hu4?=
+ =?us-ascii?Q?uE6aEaVkfvmk2u7A6NohtdPNCmbocZIoTE5nbJbX24GfsD900WqopDHFGqsQ?=
+ =?us-ascii?Q?cozAzDB6YiqQ1Uxf6g7uKZgOyn5p/Bpu+GQwYU/hZO7zlk/GDr4oPYEryr29?=
+ =?us-ascii?Q?ahkak128NVfhCOMyFiQV7VqLChq8gaErEbW05oLBCJclaAnAAknIsES13QEQ?=
+ =?us-ascii?Q?o78ftU2Ega95Qohl0b5wlmOtCBevO3tbGS9XE0fSQdmbQw+nJPkd2xXc5ORY?=
+ =?us-ascii?Q?TuaAR3BochM=3D?=
 X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
  IPV:NLI; SFV:NSPM; H:SN7PR12MB8059.namprd12.prod.outlook.com; PTR:; CAT:NONE;
  SFS:(13230040)(1800799024)(7416014)(376014)(366016); DIR:OUT; SFP:1101; 
 X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?d2pSQXhSaGtodTlOdTZEeFVuWjRXRVVRTVMwd0p6elMyZS9XZ2pDejdqNlFp?=
- =?utf-8?B?eS96alpqQis5L1FkbGJSMjdKQlA1Rm1SSnZBNlJsa1N3SWx0b2JDR1czelBm?=
- =?utf-8?B?anlaL05OeE9mbjQvSVRBL0tlTThGOWtCc0c2TVhzNEttVkxKMndiR3FFWURN?=
- =?utf-8?B?My9PSzFSamFhYTRTN3krNklxQXpDVDlUZmQ3dXB6Uk9FYXF3MHlFMHJqY2dP?=
- =?utf-8?B?T3gxdktYUFY4VTdmQXFrd1RPOVp0cEZGd1BwdElRcXFLWUNBRWNhRmxPamtp?=
- =?utf-8?B?cVZkcktzd1VrclpDbFU5RkNmK0MwMldoSFp4c2xFcXF3empoMStSMDVJcytJ?=
- =?utf-8?B?bFpHa3ZPNVlhZGdpNWh1NzVpR3BmUHI5bXR3dkJSRExzUHRHaHYyMnlacThi?=
- =?utf-8?B?elhhYWpVOVBKK1doOVVReXU5S1Q0emkzRW9RVlhYdldJTWpDQ0QwcWQ0T1k5?=
- =?utf-8?B?YjZMbU9ZeUdhcXVzYTFHaE52YVlrMVdRRDk0aDJ3UXUvUkJEaWFQUUk1Tmx4?=
- =?utf-8?B?QUQ5cTN1QWNvYmFOVExOenErTng4S3ZpRFhRZVpIYnlRVk9iYm9ZOHRXU0k0?=
- =?utf-8?B?VjJLdEl1OVpXdHJVRHBqNHdodXAxRXg3NlFxVlpqQzRxNWtjQkJseVJVb1E1?=
- =?utf-8?B?VlhMUzFiOEIrYy9HRnlNTzVXNDUyUk9LMU9GZTl4aElQSlVhVDdlWFNwaHMy?=
- =?utf-8?B?YXBMdnBmd24wVWRQRVFZcGxqZEw4NjJUWDdBeTRpYWFyWUF5VmFJcnp6Tnhi?=
- =?utf-8?B?MnQxbTFqTlVNemMvNXc2aUsySitjKytjV0Njd2NJUnRyWVdxbDNaSnZ2cDI5?=
- =?utf-8?B?N1FnQXBKM3U5Ulg1MngwK3BSdHhPdlJNd3BNUnE2a0Z0NndVK3JrWDAxdTZS?=
- =?utf-8?B?aERNUExMdUl6ODdZQndKWDM0ZGNLdnQ1eVdxMlczL0wwQjFtMUljK08xUDhp?=
- =?utf-8?B?Nit5SUJIZW50MWExYjZXRTJwamRCWm5KTVFPaW5oS0ErVHQvcFhROHd2cXIw?=
- =?utf-8?B?eDAreU81bGxxYkJNeW84VG9QTXBBT2lRMURkUFNUNDVLdzRERFJqMlNyalRW?=
- =?utf-8?B?MzhuQ29DR1VkMURSMWJYLzBZTWUwd3JNZCtOS05RK1ljM3lLQklZN3dwblF2?=
- =?utf-8?B?by9UcDMycDFDOERCUkc4QkdpNTQ4REtYM3FQUmx3UkNLUHhteVdHVnFvRHI3?=
- =?utf-8?B?M1RSYzBhdEZDdmtOelpKd3Z3L29HazBVeHNYUS9Cd0pCRTdNZmsxREVpVG9Z?=
- =?utf-8?B?cC9sczQxdS90emM3bzFFTmZQSXlOZjlGdmRYNWgzWG5uZ3pJRk56YUVncGV4?=
- =?utf-8?B?RmxER1RHVmlVMVVNa3BrOG1pbk1HS1d5YVd5TVJSZExRdXBqSW1Fd0lZdUow?=
- =?utf-8?B?VTJUQUsxMEJhSmRsZ0IzclJETnpSUytQd1pDNWFIQ2VHRUxmYStVMldQQjVh?=
- =?utf-8?B?enk0K2MvdFpTaXhVNWZDTVhXOWdVU1pkblROZUJWM2p1SHpIVlYybUZwK2Ro?=
- =?utf-8?B?R1diYTgxUG1qUnppejlkMjRnMXQ1bW9TWndPSTV6Zk9lcVp6b09RV3U5MU5u?=
- =?utf-8?B?alJVeEh1THZkTGVwQ1B0YzVma2RRKys3L0Q4VHRjUjB3UjNKNTcxdlZHSHlm?=
- =?utf-8?B?TFJWMzJRU1ZJSDZsTmNYck40YkpLam9SV3pMRjFYOTkyN0txc0tJSVlwdURR?=
- =?utf-8?B?c3NrZHlnbS9OL1dYM1RhWEd4OGtKN3Jld1NZQVh6VGxoM2oxbWhGU2NJS1A0?=
- =?utf-8?B?c0hscDF6U0M1TTI4ZlRDb3FKaUV6OUVuRlBCTkt5VUdhZ2xlVUFQNE5keEpz?=
- =?utf-8?B?YTV6bks2akIrZmxRVHJUVGg3aitVRGJTZ3U0cGJpeUI4RTh2R0hPaEpvTkRt?=
- =?utf-8?B?bGl1RTBmMExBNjBUam04UURneVdZamlPWFdnem1YZ093aERZR09NZFdmY1FK?=
- =?utf-8?B?U0dESG5vWklXczFjc1dvM2pieTBSVFJOdjhDTEJOQmF6R2YzNHpsV2QvV1Zh?=
- =?utf-8?B?N1ZzaWlXQnRRZGVjRUhlTmZXMGxhMGZCNmtYUk5hREZ5clpwQ1dmOFVGSUpS?=
- =?utf-8?B?akRTVy9LWTc1UGprRHlNdWhjK0JoU0hUbXBobDRHNlRrT0NiakVNWVNGYWZX?=
- =?utf-8?Q?oceCAlGGiGNYcvfDCP+AuXybD?=
+X-MS-Exchange-AntiSpam-MessageData-0: =?us-ascii?Q?YIolb0lYFm7a6w1XwltIgare2uyZ5a7M8fwAgRh66OAwaXP7Jzed7SwLejeY?=
+ =?us-ascii?Q?BqRdBn2VUPrkaNGKD1zwHFonpp/elwTeS2Wofh7Hoq/ek4NOCyGtcKf95+Jx?=
+ =?us-ascii?Q?h8M1rKEkIpScrewZ1XypnMmqohzdmMIpdoHhZqwb0a6R1OSpn/JSAFFkZ79t?=
+ =?us-ascii?Q?pjABCYrEQRL6BcyXc03H0PgXXhAF+MBpfsjSMoTFE8PRCBKMQ0MR8uElAjpt?=
+ =?us-ascii?Q?v/bTD/wZsg2J67ejkfAvBrhwX4p/uL56j6G8H7avASpob5UUggGHeI5S/xDA?=
+ =?us-ascii?Q?6oytCPiofoWBga4+lXoxwrcKEWcvmY4LcWvB8wQvhPRGuAmFVT5RCaqrsq3W?=
+ =?us-ascii?Q?9Yrof3gtH05ClrQsJrq978nCRN7M4BW4TOmTIih/abJ5nejfx6nkX5pacIi3?=
+ =?us-ascii?Q?RbWbEnrUNzO0/9uXC1Iewx5sKJ3t99rvtMCGZGK9zDQjAr0+OM2dvLuix2UE?=
+ =?us-ascii?Q?uBGJRmaCTNHcgE3o9u50heTwpFS+wLhS6hp602Tm0k3fG9OXzdDQCF+okL9Q?=
+ =?us-ascii?Q?0qC7zOgXvSDQ7xONdUvlJrJFbRDyd0s5LNrw2CKq8FyL6Ems1RKrvlHAfwj9?=
+ =?us-ascii?Q?bvWQGPUmcMwQ6O127Or6Dg2rpKVuBj0AAGPQb0SK/rqbGx9/iyDo+Zaj8wnA?=
+ =?us-ascii?Q?aMPfAA4LMhBygw2rF2zCxbO7lRZcHnx3D6gEjQeYDucQnPKkE6IgeEIV2T1P?=
+ =?us-ascii?Q?3uwBs5kyuZXM9k/zXh22QNfm/c3k1e4OFJmzLOieWvdqhzeJn/ZhEyAoil61?=
+ =?us-ascii?Q?qlckSDxzM6TtVXGDAr4QEpepjgac5NoNdSdlP0qN5jasI+amksYWDFsm0FEf?=
+ =?us-ascii?Q?JzKP+utn35rM7DjHI4/lHTYSs088gJ6woSSGwflmr606zub4SRvCMhiQYBb+?=
+ =?us-ascii?Q?W0EIBm4W5ynLRKwxp8Y/R6J60htqg5gMLGqSGx9a6fWrZfZ73KK9pLw3FNsa?=
+ =?us-ascii?Q?H9pY52wLBlXutcq6vYpTsL/LCZu0sL/Ag6Y1e0GBtI+JZjUSlh0ZKBAThXSK?=
+ =?us-ascii?Q?Wh9KVdFK642p4R6DmK1bBvyktKPPvVQKlO+za9Dp3wu2uAgv1EomsbZqw+II?=
+ =?us-ascii?Q?s+MDyUIoo8ZMc7ciGVPeEuT8jbrALw2URh0Gq1lA4QDSJGM22Ba231dqjliQ?=
+ =?us-ascii?Q?tJ2SchACgGqPYmggEbNdQkMmNbDPDDs7aYk7sOgGxtzSxYTCPP8wuASS9ydE?=
+ =?us-ascii?Q?d3LEP0jAmPJkxwbMHJEE+4a8mTgwqYfqa0DLEQVu9SwJEzeAwMbFOIXkKxvP?=
+ =?us-ascii?Q?mIoFNJxkh2foL2crAmbisWymaaT/R6dxlpDzKcfkdTbePJtRXFOtN/EB0rW/?=
+ =?us-ascii?Q?bvLSNXHB9moUaIYES79brBs/2uhTA0uSTS0DSfRaOxMkx1lpmq/FLvNZxuoL?=
+ =?us-ascii?Q?VkISbsTqusV3mwG6TX3WVN2tfQ96jyY83gj4LtnAI1nfaVFVc4qOqbCGIJlg?=
+ =?us-ascii?Q?gXWVt7WcE05Yp06JSG5PHqJDICWyvV7HfOFWChuyTAs7FFS1QcKw+/qE2PEj?=
+ =?us-ascii?Q?WOuTrXj6cJt0/pNotqP/VtP6mng3/vKHoRw2nHw7237FmuGt0fUw2RZi8T8m?=
+ =?us-ascii?Q?LfaTyB+bc1ZtGUQVgNiQgZeGPng5DFR4UlukC7NP?=
 X-OriginatorOrg: Nvidia.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: ddd4f2c3-bc4d-4309-27f3-08dd83617b63
+X-MS-Exchange-CrossTenant-Network-Message-Id: dd506992-1ee8-42c8-f9b9-08dd8364dfa5
 X-MS-Exchange-CrossTenant-AuthSource: SN7PR12MB8059.namprd12.prod.outlook.com
 X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 24 Apr 2025 18:54:46.3408 (UTC)
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 24 Apr 2025 19:19:03.1331 (UTC)
 X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
 X-MS-Exchange-CrossTenant-Id: 43083d15-7273-40c1-b7db-39efd9ccc17a
 X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: EaqALOBXs26F3/LX7/9b1745xKSEGU5TYT3iGdeyokmWCuO66EzA996Y7RJ7FU2VQQrO/r6lLf3bxGkar+XK1Q==
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: MW4PR12MB7165
+X-MS-Exchange-CrossTenant-UserPrincipalName: hTkDYORE4+/hCGdQf28ebVr/i04bnPxvK8zczLwmfewuOw9bd4hTqYhl7FlXu/Z7DYpsFVa+1y9n6xoftI/hkA==
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: DS4PR12MB9658
 X-Mailman-Approved-At: Mon, 06 Oct 2025 20:46:16 +0000
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
@@ -177,41 +162,86 @@ List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
+On Wed, Apr 23, 2025 at 05:02:58PM +0200, Danilo Krummrich wrote:
 
+[..]
 
-On 4/23/2025 10:06 AM, Danilo Krummrich wrote:
-[...]
->> +
->> +    /// Probe for VBIOS extraction
->> +    /// Once the VBIOS object is built, bar0 is not read for vbios purposes anymore.
->> +    pub(crate) fn probe(bar0: &Devres<Bar0>) -> Result<Self> {
+> > >> +        data.extend_with(len, 0, GFP_KERNEL)?;
+> > >> +        with_bar!(?bar0, |bar0_ref| {
+> > >> +            let dst = &mut data[current_len..current_len + len];
+> > >> +            for (idx, chunk) in dst
+> > >> +                .chunks_exact_mut(core::mem::size_of::<u32>())
+> > >> +                .enumerate()
+> > >> +            {
+> > >> +                let addr = start + (idx * core::mem::size_of::<u32>());
+> > >> +                // Convert the u32 to a 4 byte array. We use the .to_ne_bytes()
+> > >> +                // method out of convenience to convert the 32-bit integer as it
+> > >> +                // is in memory into a byte array without any endianness
+> > >> +                // conversion or byte-swapping.
+> > >> +                chunk.copy_from_slice(&bar0_ref.try_read32(addr)?.to_ne_bytes());
+> > >> +            }
+> > >> +            Ok(())
+> > >> +        })?;
+> > >> +
+> > >> +        Ok(())
+> > >> +    }
+> > ..actually initially was:
+> > 
+> > +        with_bar!(self.bar0, |bar0| {
+> > +            // Get current length
+> > +            let current_len = self.data.len();
+> > +
+> > +            // Read ROM data bytes push directly to vector
+> > +            for i in 0..bytes as usize {
+> > +                // Read byte from the VBIOS ROM and push it to the data vector
+> > +                let rom_addr = ROM_OFFSET + current_len + i;
+> > +                let byte = bar0.try_readb(rom_addr)?;
+> > +                self.data.push(byte, GFP_KERNEL)?;
+> > 
+> > Where this bit could result in a lot of allocation.
+> > 
+> > There was an unsafe() way of not having to do this but we settled with
+> > extends_with().
+> > 
+> > Thoughts?
 > 
-> Let's not call it probe(), what about VBios::parse(), or simply VBios::new()?
+> If I understand you correctly, you just want to make sure that subsequent push()
+> calls don't re-allocate? If so, you can just use reserve() [1] and keep the
+> subsequent push() calls.
 > 
+> [1] https://rust.docs.kernel.org/kernel/alloc/kvec/struct.Vec.html#method.reserve
 
-Yes, new() is better. I changed it.
 
->> +        // VBIOS data vector: As BIOS images are scanned, they are added to this vector
->> +        // for reference or copying into other data structures. It is the entire
->> +        // scanned contents of the VBIOS which progressively extends. It is used
->> +        // so that we do not re-read any contents that are already read as we use
->> +        // the cumulative length read so far, and re-read any gaps as we extend
->> +        // the length
->> +        let mut data = KVec::new();
->> +
->> +        // Loop through all the BiosImage and extract relevant ones and relevant data from them
->> +        let mut cur_offset = 0;
-> 
-> I suggest to create a new type that contains data and offset and implement
-> read_bios_image_at_offset() and friends as methods of this type. I think this
-> would turn out much cleaner.
-I moved it into struct Vbios {} itself instead of introducing a new type. Is
-that Ok?
 
-I agree it is cleaner. Please see below link for this particular refactor
-(moving data) and let me know if it looks Ok to you: http://bit.ly/4lHfDKZ
+Ok that does turn out to be cleaner! I replaced it with the following and it works.
 
-Thanks!
+Let me know if it looks good now? Here's a preview:
 
- - Joel
+-        data.extend_with(len, 0, GFP_KERNEL)?;
++        data.reserve(len, GFP_KERNEL)?;
++
+         with_bar_res!(bar0, |bar0_ref| {
+-            let dst = &mut data[current_len..current_len + len];
+-            for (idx, chunk) in dst
+-                .chunks_exact_mut(core::mem::size_of::<u32>())
+-                .enumerate()
+-            {
+-                let addr = start + (idx * core::mem::size_of::<u32>());
+-                // Convert the u32 to a 4 byte array. We use the .to_ne_bytes()
+-                // method out of convenience to convert the 32-bit integer as it
+-                // is in memory into a byte array without any endianness
+-                // conversion or byte-swapping.
+-                chunk.copy_from_slice(&bar0_ref.try_read32(addr)?.to_ne_bytes());
++            // Read ROM data bytes and push directly to vector
++            for i in 0..len {
++                // Read 32-bit word from the VBIOS ROM
++                let rom_addr = start + i * core::mem::size_of::<u32>();
++                let word = bar0_ref.try_read32(rom_addr)?;
++
++                // Convert the u32 to a 4 byte array and push each byte
++                word.to_ne_bytes().iter().try_for_each(|&b| data.push(b, GFP_KERNEL))?;
+             }
+
+Thanks.
+
 
