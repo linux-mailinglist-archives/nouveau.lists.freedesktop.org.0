@@ -2,68 +2,59 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id 18BA5CBAE82
-	for <lists+nouveau@lfdr.de>; Sat, 13 Dec 2025 13:46:12 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 7EE78CBAEB5
+	for <lists+nouveau@lfdr.de>; Sat, 13 Dec 2025 13:46:23 +0100 (CET)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 79DDB10EC18;
-	Sat, 13 Dec 2025 12:42:15 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 632EE10EC38;
+	Sat, 13 Dec 2025 12:42:16 +0000 (UTC)
 Authentication-Results: gabe.freedesktop.org;
-	dkim=pass (2048-bit key; secure) header.d=mailbox.org header.i=@mailbox.org header.b="yATb8UOf";
+	dkim=pass (2048-bit key; secure) header.d=mailbox.org header.i=@mailbox.org header.b="UKBU989q";
 	dkim-atps=neutral
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from mout-p-201.mailbox.org (mout-p-201.mailbox.org [80.241.56.171])
- by gabe.freedesktop.org (Postfix) with ESMTPS id C20EE10E5C0;
- Tue, 22 Apr 2025 14:16:58 +0000 (UTC)
-Received: from smtp202.mailbox.org (smtp202.mailbox.org [10.196.197.202])
+Received: from mout-p-202.mailbox.org (mout-p-202.mailbox.org [80.241.56.172])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 5704510E7E1;
+ Thu, 24 Apr 2025 13:26:06 +0000 (UTC)
+Received: from smtp2.mailbox.org (smtp2.mailbox.org
+ [IPv6:2001:67c:2050:b231:465::2])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
  (No client certificate requested)
- by mout-p-201.mailbox.org (Postfix) with ESMTPS id 4Zhknd6yrtz9thF;
- Tue, 22 Apr 2025 16:16:53 +0200 (CEST)
+ by mout-p-202.mailbox.org (Postfix) with ESMTPS id 4ZjxYz24PCz9spL;
+ Thu, 24 Apr 2025 15:25:59 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
  s=mail20150812; 
- t=1745331414; h=from:from:reply-to:reply-to:subject:subject:date:date:
+ t=1745501159; h=from:from:reply-to:reply-to:subject:subject:date:date:
  message-id:message-id:to:to:cc:cc:mime-version:mime-version:
  content-type:content-type:
  content-transfer-encoding:content-transfer-encoding:
  in-reply-to:in-reply-to:references:references;
- bh=B7LtyxZabqxldyU5RLs4vfwzAyWuZQ0DIMUXm0snWbA=;
- b=yATb8UOfgTRN2yvF8+olL/fpXoht6MNPP+JVvDFSFyv6AC1gfHs7lG3LZOjc972u0TF0+5
- qGrgHPOcRfKyC7//weDnc6aDHrZZpwwd/m1b+DuPd+R5aO3Y9WwTSSDiQiXefdjxTBn7lt
- /RPmgshQj8sLWLrVz2euXOeAJ2BE1yNhSsBe/R1EziZ7w/34tASu+lF9r9BZiSrw36LDF9
- nw8MOj1tAPxz8wxpfxm6u1be+lVNmfU6GvuW/LLtjboLfMJiFDilrfpLhvuZ5EbN5OX8ub
- UTAw+GruRlvPNkpz4l3pPPpT2yAm02iJUUE9j0GzLt2a6XCCNz5T3ojHKkPPMA==
-Message-ID: <f0ae2d411c21e799491244fe49880a4acca32918.camel@mailbox.org>
-Subject: Re: [PATCH 3/5] drm/sched: Warn if pending list is not empty
+ bh=fKyBAXY4h0YZsHpQmmZLPNawFEm0LQITaKXAZVu5Xr0=;
+ b=UKBU989qA9gUKlvGOsr9ynylYvx1uO/wprmjoclW9BEwCSjjnVmmzjDZUhQBCVaT4QnCnC
+ ORbl7bU/cf7Sbv3DdAEusQ/Ji5TVyFKQbR+TgqmM/xb1qzLwCn8wLafBuXtO8L/XSkc1g7
+ PYX5tJXmg20m7l40mM7lBqlYnujts51Kit0lxgkYjH34Nx7wiEo2E0RFvF5yfQ7rkH2Iym
+ r8LTboTaanJ2Gj816s2yLjyn/1AUgiptWr+FtjdfO6LoxkOfUkTvkh+y2VsBXQrYUayJ0a
+ NdKC0HKKnrJFuy9+Q4wMRZwklxvHET0IOGPRE0lxHXItxnVcKVwL6iB3MpwUlQ==
+Message-ID: <a27a0a01fa2bf5f328ee762b7dd84dffd18fa664.camel@mailbox.org>
+Subject: Re: [PATCH 4/4] drm/nouveau: Check dma_fence in canonical way
 From: Philipp Stanner <phasta@mailbox.org>
-To: Danilo Krummrich <dakr@kernel.org>, Tvrtko Ursulin
- <tvrtko.ursulin@igalia.com>
-Cc: phasta@kernel.org, Lyude Paul <lyude@redhat.com>, David Airlie
- <airlied@gmail.com>, Simona Vetter <simona@ffwll.ch>, Matthew Brost
- <matthew.brost@intel.com>, Christian =?ISO-8859-1?Q?K=F6nig?=
- <ckoenig.leichtzumerken@gmail.com>, Maarten Lankhorst
- <maarten.lankhorst@linux.intel.com>, Maxime Ripard <mripard@kernel.org>, 
- Thomas Zimmermann <tzimmermann@suse.de>, dri-devel@lists.freedesktop.org,
- nouveau@lists.freedesktop.org,  linux-kernel@vger.kernel.org
-Date: Tue, 22 Apr 2025 16:16:48 +0200
-In-Reply-To: <aAeiwZ2j2PhEwhVh@cassiopeiae>
-References: <aADv4ivXZoJpEA7k@pollux>
- <83758ca7-8ece-433e-b904-3d21690ead23@igalia.com>
- <aAEUwjzZ9w9xlKRY@cassiopeiae>
- <0e8313dc-b1bb-4ce7-b5b7-b8b3e027adb7@igalia.com>
- <0bfa746ca37de1813db22e518ffb259648d29e02.camel@mailbox.org>
- <5a5d4a33-2f7b-46e4-8707-7445ac3de376@igalia.com>
- <aAd54jUwBwgc-_g2@cassiopeiae>
- <d3c0f721-2d19-4a1c-a086-33e8d6bd7be6@igalia.com>
- <aAeMVtdkrAoMrmVk@cassiopeiae>
- <52574769-2120-41a1-b5dc-50a42da5dca6@igalia.com>
- <aAeiwZ2j2PhEwhVh@cassiopeiae>
+To: Danilo Krummrich <dakr@kernel.org>, Philipp Stanner <phasta@kernel.org>
+Cc: Lyude Paul <lyude@redhat.com>, David Airlie <airlied@gmail.com>, Simona
+ Vetter <simona@ffwll.ch>, Sumit Semwal <sumit.semwal@linaro.org>, Christian
+ =?ISO-8859-1?Q?K=F6nig?=
+ <christian.koenig@amd.com>, dri-devel@lists.freedesktop.org, 
+ nouveau@lists.freedesktop.org, linux-kernel@vger.kernel.org, 
+ linux-media@vger.kernel.org, linaro-mm-sig@lists.linaro.org
+Date: Thu, 24 Apr 2025 15:25:55 +0200
+In-Reply-To: <609c8b1a-d7a9-4667-bd6c-1455c639fcd0@kernel.org>
+References: <20250424130254.42046-2-phasta@kernel.org>
+ <20250424130254.42046-6-phasta@kernel.org>
+ <609c8b1a-d7a9-4667-bd6c-1455c639fcd0@kernel.org>
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
 MIME-Version: 1.0
-X-MBO-RS-ID: f6d09d6099a7957f0c4
-X-MBO-RS-META: 8wq86bq79z1ouchutggxfm4d3o8toyh3
+X-MBO-RS-META: 4sjhmd8518k1j7h9y85ob19dku96umzr
+X-MBO-RS-ID: 26ac357924729e237f5
 X-Mailman-Approved-At: Sat, 13 Dec 2025 12:40:50 +0000
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
@@ -80,231 +71,40 @@ Reply-To: phasta@kernel.org
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-On Tue, 2025-04-22 at 16:08 +0200, Danilo Krummrich wrote:
-> On Tue, Apr 22, 2025 at 02:39:21PM +0100, Tvrtko Ursulin wrote:
+On Thu, 2025-04-24 at 15:24 +0200, Danilo Krummrich wrote:
+> On 4/24/25 3:02 PM, Philipp Stanner wrote:
+> > In nouveau_fence_done(), a fence is checked for being signaled by
+> > manually evaluating the base fence's bits. This can be done in a
+> > canonical manner through dma_fence_is_signaled().
 > >=20
-> > On 22/04/2025 13:32, Danilo Krummrich wrote:
-> > > On Tue, Apr 22, 2025 at 01:07:47PM +0100, Tvrtko Ursulin wrote:
-> > > >=20
-> > > > On 22/04/2025 12:13, Danilo Krummrich wrote:
-> > > > > On Tue, Apr 22, 2025 at 11:39:11AM +0100, Tvrtko Ursulin
-> > > > > wrote:
-> > > > > > Question I raised is if there are other drivers which
-> > > > > > manage to clean up
-> > > > > > everything correctly (like the mock scheduler does), but
-> > > > > > trigger that
-> > > > > > warning. Maybe there are not and maybe mock scheduler is
-> > > > > > the only false
-> > > > > > positive.
-> > > > >=20
-> > > > > So far the scheduler simply does not give any guideline on
-> > > > > how to address the
-> > > > > problem, hence every driver simply does something (or
-> > > > > nothing, effectively
-> > > > > ignoring the problem). This is what we want to fix.
-> > > > >=20
-> > > > > The mock scheduler keeps it's own list of pending jobs and on
-> > > > > tear down stops
-> > > > > the scheduler's workqueues, traverses it's own list and
-> > > > > eventually frees the
-> > > > > pending jobs without updating the scheduler's internal
-> > > > > pending list.
-> > > > >=20
-> > > > > So yes, it does avoid memory leaks, but it also leaves the
-> > > > > schedulers internal
-> > > > > structures with an invalid state, i.e. the pending list of
-> > > > > the scheduler has
-> > > > > pointers to already freed memory.
-> > > > >=20
-> > > > > What if the drm_sched_fini() starts touching the pending
-> > > > > list? Then you'd end up
-> > > > > with UAF bugs with this implementation. We cannot invalidate
-> > > > > the schedulers
-> > > > > internal structures and yet call scheduler functions - e.g.
-> > > > > drm_sched_fini() -
-> > > > > subsequently.
-> > > > >=20
-> > > > > Hence, the current implementation of the mock scheduler is
-> > > > > fundamentally flawed.
-> > > > > And so would be *every* driver that still has entries within
-> > > > > the scheduler's
-> > > > > pending list.
-> > > > >=20
-> > > > > This is not a false positive, it already caught a real bug --
-> > > > > in the mock
-> > > > > scheduler.
-> > > >=20
-> > > > To avoid furher splitting hairs on whether real bugs need to be
-> > > > able to
-> > > > manifest or not, lets move past this with a conclusion that
-> > > > there are two
-> > > > potential things to do here:
-> > >=20
-> > > This is not about splitting hairs, it is about understanding that
-> > > abusing
-> > > knowledge about internals of a component to clean things up is
-> > > *never* valid.
-> > >=20
-> > > > First one is to either send separately or include in this
-> > > > series something
-> > > > like:
-> > > >=20
-> > > > diff --git a/drivers/gpu/drm/scheduler/tests/mock_scheduler.c
-> > > > b/drivers/gpu/drm/scheduler/tests/mock_scheduler.c
-> > > > index f999c8859cf7..7c4df0e890ac 100644
-> > > > --- a/drivers/gpu/drm/scheduler/tests/mock_scheduler.c
-> > > > +++ b/drivers/gpu/drm/scheduler/tests/mock_scheduler.c
-> > > > @@ -300,6 +300,8 @@ void drm_mock_sched_fini(struct
-> > > > drm_mock_scheduler
-> > > > *sched)
-> > > > =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=
-=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 drm_mock_sched_job_complete(job);
-> > > > =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 spin_unlock_irqres=
-tore(&sched->lock, flags);
-> > > >=20
-> > > > +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 drm_sched_fini(&sched->base);
-> > > > +
-> > > > =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 /*
-> > > > =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 * Free compl=
-eted jobs and jobs not yet processed by
-> > > > the DRM
-> > > > scheduler
-> > > > =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 * free worke=
-r.
-> > > > @@ -311,8 +313,6 @@ void drm_mock_sched_fini(struct
-> > > > drm_mock_scheduler
-> > > > *sched)
-> > > >=20
-> > > > =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 list_for_each_entr=
-y_safe(job, next, &list, link)
-> > > > =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=
-=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 mock_sched_free_job(&job->base);
-> > > > -
-> > > > -=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 drm_sched_fini(&sched->base);
-> > > > =C2=A0 }
-> > > >=20
-> > > > =C2=A0 /**
-> > > >=20
-> > > > That should satisfy the requirement to "clear" memory about to
-> > > > be freed and
-> > > > be 100% compliant with drm_sched_fini() kerneldoc (guideline
-> > > > b).
-> > > >=20
-> > > > But the new warning from 3/5 here will still be there AFAICT
-> > > > and would you
-> > > > then agree it is a false positive?
-> > >=20
-> > > No, I do not agree.
-> > >=20
-> > > Even if a driver does what you describe it is not the correct
-> > > thing to do and
-> > > having a warning call it out makes sense.
-> > >=20
-> > > This way of cleaning things up entirely relies on knowing
-> > > specific scheduler
-> > > internals, which if changed, may fall apart.
-> > >=20
-> > > > Secondly, the series should modify all drivers (including the
-> > > > unit tests)
-> > > > which are known to trigger this false positive.
-> > >=20
-> > > Again, there are no false positives. It is the scheduler that
-> > > needs to call
-> > > free_job() and other potential cleanups. You can't just stop the
-> > > scheduler,
-> > > leave it in an intermediate state and try to clean it up by hand
-> > > relying on
-> > > knowledge about internals.
+> > Replace the bit-check with dma_fence_is_signaled().
 > >=20
-> > Sorry I don't see the argument for the claim it is relying on the
-> > internals
-> > with the re-positioned drm_sched_fini call. In that case it is
-> > fully
-> > compliant with:
+> > Signed-off-by: Philipp Stanner <phasta@kernel.org>
+> > ---
+> > =C2=A0 drivers/gpu/drm/nouveau/nouveau_fence.c | 2 +-
+> > =C2=A0 1 file changed, 1 insertion(+), 1 deletion(-)
 > >=20
-> > /**
-> > =C2=A0* drm_sched_fini - Destroy a gpu scheduler
-> > =C2=A0*
-> > =C2=A0* @sched: scheduler instance
-> > =C2=A0*
-> > =C2=A0* Tears down and cleans up the scheduler.
-> > =C2=A0*
-> > =C2=A0* This stops submission of new jobs to the hardware through
-> > =C2=A0* drm_sched_backend_ops.run_job(). Consequently,
-> > drm_sched_backend_ops.free_job()
-> > =C2=A0* will not be called for all jobs still in
-> > drm_gpu_scheduler.pending_list.
-> > =C2=A0* There is no solution for this currently. Thus, it is up to the
-> > driver to
-> > make
-> > =C2=A0* sure that:
-> > =C2=A0*
-> > =C2=A0*=C2=A0 a) drm_sched_fini() is only called after for all submitte=
-d jobs
-> > =C2=A0*=C2=A0=C2=A0=C2=A0=C2=A0 drm_sched_backend_ops.free_job() has be=
-en called or that
-> > =C2=A0*=C2=A0 b) the jobs for which drm_sched_backend_ops.free_job() ha=
-s not
-> > been
-> > called
-> > =C2=A0*
-> > =C2=A0* FIXME: Take care of the above problem and prevent this function
-> > from
-> > leaking
-> > =C2=A0* the jobs in drm_gpu_scheduler.pending_list under any
-> > circumstances.
-> >=20
-> > ^^^ recommended solution b).
+> > diff --git a/drivers/gpu/drm/nouveau/nouveau_fence.c
+> > b/drivers/gpu/drm/nouveau/nouveau_fence.c
+> > index fb9811938c82..d5654e26d5bc 100644
+> > --- a/drivers/gpu/drm/nouveau/nouveau_fence.c
+> > +++ b/drivers/gpu/drm/nouveau/nouveau_fence.c
+> > @@ -253,7 +253,7 @@ nouveau_fence_done(struct nouveau_fence *fence)
+> > =C2=A0=C2=A0	struct nouveau_channel *chan;
+> > =C2=A0=C2=A0	unsigned long flags;
+> > =C2=A0=20
+> > -	if (test_bit(DMA_FENCE_FLAG_SIGNALED_BIT, &fence-
+> > >base.flags))
+> > +	if (dma_fence_is_signaled(&fence->base))
 >=20
-> This has been introduced recently with commit baf4afc58314
-> ("drm/sched: Improve
-> teardown documentation") and I do not agree with this. The scheduler
-> should
-> *not* make any promises about implementation details to enable
-> drivers to abuse
-> their knowledge about component internals.
->=20
-> This makes the problem *worse* as it encourages drivers to rely on
-> implementation details, making maintainability of the scheduler even
-> worse.
->=20
-> For instance, what if I change the scheduler implementation, such
-> that for every
-> entry in the pending_list the scheduler allocates another internal
-> object for
-> ${something}? Then drivers would already fall apart leaking those
-> internal
-> objects.
->=20
-> Now, obviously that's pretty unlikely, but I assume you get the idea.
->=20
-> The b) paragraph in drm_sched_fini() should be removed for the given
-> reasons.
->=20
-> AFAICS, since the introduction of this commit, driver implementations
-> haven't
-> changed in this regard, hence we should be good.
->=20
-> So, for me this doesn't change the fact that every driver
-> implementation that
-> just stops the scheduler at an arbitrary point of time and tries to
-> clean things
-> up manually relying on knowledge about component internals is broken.
+> This is only correct with commit bbe5679f30d7 ("drm/nouveau: Fix
+> WARN_ON in
+> nouveau_fence_context_kill()") from drm-misc-fixes, correct?
 
-To elaborate on that, this documentation has been written so that we at
-least have *some* documentation about the problem, instead of just
-letting new drivers run into the knife.
+Yup. Otherwise, this series can't be merged anyways, because patch 1
+depends on it.
 
-The commit explicitly introduced the FIXME, marking those two hacky
-workarounds as undesirable.
-
-But back then we couldn't fix the problem quickly, so it was either
-document the issue at least a bit, or leave it completely undocumented.
+The cover letter says so: "This series is based on this partially
+merged series: [1]"
 
 P.
-
->=20
-> However, this doesn't mean we can't do a brief audit.
->=20
-> - Danilo
-
