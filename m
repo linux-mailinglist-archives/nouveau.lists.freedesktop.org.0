@@ -2,35 +2,35 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id 2D3FCA9B8AE
-	for <lists+nouveau@lfdr.de>; Thu, 24 Apr 2025 22:02:22 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 68BA2A9B8CE
+	for <lists+nouveau@lfdr.de>; Thu, 24 Apr 2025 22:09:02 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 96ED010E85C;
-	Thu, 24 Apr 2025 20:02:06 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id B054510E08F;
+	Thu, 24 Apr 2025 20:09:00 +0000 (UTC)
 Authentication-Results: gabe.freedesktop.org;
-	dkim=pass (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="hFhgNJNN";
+	dkim=pass (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="ISS9edEF";
 	dkim-atps=neutral
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
 Received: from tor.source.kernel.org (tor.source.kernel.org [172.105.4.254])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 16A9010E85C;
- Thu, 24 Apr 2025 20:01:59 +0000 (UTC)
+ by gabe.freedesktop.org (Postfix) with ESMTPS id CF88310E08F;
+ Thu, 24 Apr 2025 20:08:59 +0000 (UTC)
 Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by tor.source.kernel.org (Postfix) with ESMTP id 4CB6B61137;
- Thu, 24 Apr 2025 20:01:36 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 31FF0C4CEE4;
- Thu, 24 Apr 2025 20:01:53 +0000 (UTC)
+ by tor.source.kernel.org (Postfix) with ESMTP id 18E1361137;
+ Thu, 24 Apr 2025 20:08:37 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 20AA7C4CEE3;
+ Thu, 24 Apr 2025 20:08:53 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1745524917;
- bh=I/5AaiyphNo34zBMZtPrQNZj2QmmzY/W/pdD16xNRKw=;
+ s=k20201202; t=1745525338;
+ bh=r/J+71axIcbcBnTDMTPbPhfWreusoyG9PFW3KMwW3d0=;
  h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
- b=hFhgNJNNQ7/AIdB/0axBMufc5VbeI+w2xVQZjZen3f366YV5eXVjFXaTPPIRsKOH0
- 9XpZcTt1JyTYqK+fa72eCBZ3U/9sjWsMeSJ3fZ1/dXn6Urm5GahQiwvoMRWg6xEl9c
- sE3Hy1GtowGSOW/tOl0tpEw17bN6nt4JW1VP7M5wvmb8/RRwJ6iN56jWnEv/7cm8sx
- B0GVXYPOXSK2mEwXrlseH3NV6LGU9Jk3Y0Qa81aSv0sEYe+3fBDpvKpmOZXhC8fY4d
- V4u6EXlQfsJ51QTNSbKajOTRNzMN7V0MR99+BSe3Uhg+bXGuG7b/K8cNayWrSLgcCA
- mu5HU1xIkM9aQ==
-Date: Thu, 24 Apr 2025 22:01:50 +0200
+ b=ISS9edEF3u5Xby+MOrLIfGta/xXgvj8DjuWHfzBXrFZ9ZBVbkAwIkoDv9x14/vlmd
+ hzy7BUxXKcII6wkglUSqd21SGKks8ao2Mb/0m5uGpwG+WWvYJL4XwU43191f7cCpJX
+ zy0BhwhgLd7MBL5szOCwB0f9KYZB+tcTH1/At/LklVOkX6MC3pKizBD69oeN3VTsMR
+ ku0O6Rzq6WoT1dSlZeSQRjA10kpghiyV2qSGBzVH87+Dy5b1c41PQgsNkCSjCQUTeA
+ j1gGwCwlYLhhucBavtvJ+AQVSrgVaTuEEAoJBlBgoftI+s7Reib0R0jbd5rHQcx3BT
+ 9fCHoitRYzsyA==
+Date: Thu, 24 Apr 2025 22:08:51 +0200
 From: Danilo Krummrich <dakr@kernel.org>
 To: Joel Fernandes <joelagnelf@nvidia.com>
 Cc: Alexandre Courbot <acourbot@nvidia.com>, Miguel Ojeda <ojeda@kernel.org>,
@@ -50,16 +50,15 @@ Cc: Alexandre Courbot <acourbot@nvidia.com>, Miguel Ojeda <ojeda@kernel.org>,
  nouveau@lists.freedesktop.org, dri-devel@lists.freedesktop.org
 Subject: Re: [PATCH 13/16] gpu: nova-core: Add support for VBIOS ucode
  extraction for boot
-Message-ID: <aAqYrkqshxHZtz3h@pollux>
+Message-ID: <aAqaU-nX0YRKIGyl@pollux>
 References: <20250420-nova-frts-v1-0-ecd1cca23963@nvidia.com>
  <20250420-nova-frts-v1-13-ecd1cca23963@nvidia.com>
  <aAjz2CYTsAhidiEU@pollux>
- <88937e2b-6950-4c9d-8f02-50f9b12c7376@nvidia.com>
- <aAkBIvfTkKVNbdnm@pollux> <20250424191900.GA174004@joelnvbox>
+ <7f3aa4b3-a24a-41c6-b75e-61e0e6e11ee3@nvidia.com>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
-In-Reply-To: <20250424191900.GA174004@joelnvbox>
+In-Reply-To: <7f3aa4b3-a24a-41c6-b75e-61e0e6e11ee3@nvidia.com>
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -74,85 +73,42 @@ List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-On Thu, Apr 24, 2025 at 03:19:00PM -0400, Joel Fernandes wrote:
-> On Wed, Apr 23, 2025 at 05:02:58PM +0200, Danilo Krummrich wrote:
+On Thu, Apr 24, 2025 at 02:54:42PM -0400, Joel Fernandes wrote:
 > 
-> [..]
 > 
-> > > >> +        data.extend_with(len, 0, GFP_KERNEL)?;
-> > > >> +        with_bar!(?bar0, |bar0_ref| {
-> > > >> +            let dst = &mut data[current_len..current_len + len];
-> > > >> +            for (idx, chunk) in dst
-> > > >> +                .chunks_exact_mut(core::mem::size_of::<u32>())
-> > > >> +                .enumerate()
-> > > >> +            {
-> > > >> +                let addr = start + (idx * core::mem::size_of::<u32>());
-> > > >> +                // Convert the u32 to a 4 byte array. We use the .to_ne_bytes()
-> > > >> +                // method out of convenience to convert the 32-bit integer as it
-> > > >> +                // is in memory into a byte array without any endianness
-> > > >> +                // conversion or byte-swapping.
-> > > >> +                chunk.copy_from_slice(&bar0_ref.try_read32(addr)?.to_ne_bytes());
-> > > >> +            }
-> > > >> +            Ok(())
-> > > >> +        })?;
-> > > >> +
-> > > >> +        Ok(())
-> > > >> +    }
-> > > ..actually initially was:
-> > > 
-> > > +        with_bar!(self.bar0, |bar0| {
-> > > +            // Get current length
-> > > +            let current_len = self.data.len();
-> > > +
-> > > +            // Read ROM data bytes push directly to vector
-> > > +            for i in 0..bytes as usize {
-> > > +                // Read byte from the VBIOS ROM and push it to the data vector
-> > > +                let rom_addr = ROM_OFFSET + current_len + i;
-> > > +                let byte = bar0.try_readb(rom_addr)?;
-> > > +                self.data.push(byte, GFP_KERNEL)?;
-> > > 
-> > > Where this bit could result in a lot of allocation.
-> > > 
-> > > There was an unsafe() way of not having to do this but we settled with
-> > > extends_with().
-> > > 
-> > > Thoughts?
+> On 4/23/2025 10:06 AM, Danilo Krummrich wrote:
+> [...]
+> >> +
+> >> +    /// Probe for VBIOS extraction
+> >> +    /// Once the VBIOS object is built, bar0 is not read for vbios purposes anymore.
+> >> +    pub(crate) fn probe(bar0: &Devres<Bar0>) -> Result<Self> {
 > > 
-> > If I understand you correctly, you just want to make sure that subsequent push()
-> > calls don't re-allocate? If so, you can just use reserve() [1] and keep the
-> > subsequent push() calls.
+> > Let's not call it probe(), what about VBios::parse(), or simply VBios::new()?
 > > 
-> > [1] https://rust.docs.kernel.org/kernel/alloc/kvec/struct.Vec.html#method.reserve
 > 
+> Yes, new() is better. I changed it.
 > 
+> >> +        // VBIOS data vector: As BIOS images are scanned, they are added to this vector
+> >> +        // for reference or copying into other data structures. It is the entire
+> >> +        // scanned contents of the VBIOS which progressively extends. It is used
+> >> +        // so that we do not re-read any contents that are already read as we use
+> >> +        // the cumulative length read so far, and re-read any gaps as we extend
+> >> +        // the length
+> >> +        let mut data = KVec::new();
+> >> +
+> >> +        // Loop through all the BiosImage and extract relevant ones and relevant data from them
+> >> +        let mut cur_offset = 0;
+> > 
+> > I suggest to create a new type that contains data and offset and implement
+> > read_bios_image_at_offset() and friends as methods of this type. I think this
+> > would turn out much cleaner.
+> I moved it into struct Vbios {} itself instead of introducing a new type. Is
+> that Ok?
 > 
-> Ok that does turn out to be cleaner! I replaced it with the following and it works.
-> 
-> Let me know if it looks good now? Here's a preview:
-> 
-> -        data.extend_with(len, 0, GFP_KERNEL)?;
-> +        data.reserve(len, GFP_KERNEL)?;
-> +
->          with_bar_res!(bar0, |bar0_ref| {
-> -            let dst = &mut data[current_len..current_len + len];
-> -            for (idx, chunk) in dst
-> -                .chunks_exact_mut(core::mem::size_of::<u32>())
-> -                .enumerate()
-> -            {
-> -                let addr = start + (idx * core::mem::size_of::<u32>());
-> -                // Convert the u32 to a 4 byte array. We use the .to_ne_bytes()
-> -                // method out of convenience to convert the 32-bit integer as it
-> -                // is in memory into a byte array without any endianness
-> -                // conversion or byte-swapping.
-> -                chunk.copy_from_slice(&bar0_ref.try_read32(addr)?.to_ne_bytes());
-> +            // Read ROM data bytes and push directly to vector
-> +            for i in 0..len {
-> +                // Read 32-bit word from the VBIOS ROM
-> +                let rom_addr = start + i * core::mem::size_of::<u32>();
-> +                let word = bar0_ref.try_read32(rom_addr)?;
-> +
-> +                // Convert the u32 to a 4 byte array and push each byte
-> +                word.to_ne_bytes().iter().try_for_each(|&b| data.push(b, GFP_KERNEL))?;
->              }
+> I agree it is cleaner. Please see below link for this particular refactor
+> (moving data) and let me know if it looks Ok to you: http://bit.ly/4lHfDKZ
 
-Looks good to me, thanks!
+I still think a new type would be better, the Option<KVec<u8>> that is only used
+for the construction of the actual type instance is a bit weird. It's basically
+two types in one, which is also why you need two options -- better separate
+them.
