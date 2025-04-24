@@ -2,50 +2,53 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id 44CBEA9AE45
-	for <lists+nouveau@lfdr.de>; Thu, 24 Apr 2025 15:03:20 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 1BAF0A9AEE5
+	for <lists+nouveau@lfdr.de>; Thu, 24 Apr 2025 15:24:35 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 99CCF10E7F8;
-	Thu, 24 Apr 2025 13:03:18 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 684E910E7F9;
+	Thu, 24 Apr 2025 13:24:30 +0000 (UTC)
 Authentication-Results: gabe.freedesktop.org;
-	dkim=pass (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="D80R/pEx";
+	dkim=pass (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="BkJgZDK3";
 	dkim-atps=neutral
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from tor.source.kernel.org (tor.source.kernel.org [172.105.4.254])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 7000810E7FA;
- Thu, 24 Apr 2025 13:03:17 +0000 (UTC)
+Received: from dfw.source.kernel.org (dfw.source.kernel.org [139.178.84.217])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id B591510E7F7;
+ Thu, 24 Apr 2025 13:24:21 +0000 (UTC)
 Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by tor.source.kernel.org (Postfix) with ESMTP id C825068458;
- Thu, 24 Apr 2025 13:02:54 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 860FEC4CEEB;
- Thu, 24 Apr 2025 13:03:13 +0000 (UTC)
+ by dfw.source.kernel.org (Postfix) with ESMTP id 3E6D65C3A77;
+ Thu, 24 Apr 2025 13:22:04 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id EBF77C4CEE3;
+ Thu, 24 Apr 2025 13:24:18 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1745499796;
- bh=USBXckrnH4EXDRA/UJxzzOnVtw+ramkDN3MksP0nTXQ=;
- h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
- b=D80R/pExgLSr8RGT1pxOAbZY1lIfYUMaR5c2H3A3/A3AXn3+K50MfkS4OtV/N3V6z
- GOXn0ZIAVZ5N/DYBNY3FkUbsM6zO810QMgBXenSp3drHLhEnZdY/kg3ct+lfG6LbaX
- MmZRQ8XlOrkXRMJgkQtQob3wlo1wRG1Nnf1q1ztBNCY3EIqs7WXZq3QcPgfAp7YJL7
- 5Wvy8mPE/hsMkQJxJNWKkKSa7fIhgp7L8FnQ9D+eifbeVvxWl1FJlc5PQjsFfuVxaA
- K8tY5jhApZru9r/6JFU9ru3qUbSPw2JjHpwABtqdj7dt8EQtRypHdglTJFtwVVoq82
- 24i857xMrskmg==
-From: Philipp Stanner <phasta@kernel.org>
-To: Lyude Paul <lyude@redhat.com>, Danilo Krummrich <dakr@kernel.org>,
- David Airlie <airlied@gmail.com>, Simona Vetter <simona@ffwll.ch>,
- Sumit Semwal <sumit.semwal@linaro.org>,
- =?UTF-8?q?Christian=20K=C3=B6nig?= <christian.koenig@amd.com>
-Cc: dri-devel@lists.freedesktop.org, nouveau@lists.freedesktop.org,
- linux-kernel@vger.kernel.org, linux-media@vger.kernel.org,
- linaro-mm-sig@lists.linaro.org, Philipp Stanner <phasta@kernel.org>
-Subject: [PATCH 4/4] drm/nouveau: Check dma_fence in canonical way
-Date: Thu, 24 Apr 2025 15:02:54 +0200
-Message-ID: <20250424130254.42046-6-phasta@kernel.org>
-X-Mailer: git-send-email 2.48.1
-In-Reply-To: <20250424130254.42046-2-phasta@kernel.org>
-References: <20250424130254.42046-2-phasta@kernel.org>
+ s=k20201202; t=1745501061;
+ bh=5BvkCvimTwN5NICaMdIH9+jiIrA1JIL41Q3aBs5HSRU=;
+ h=Date:Subject:To:Cc:References:From:In-Reply-To:From;
+ b=BkJgZDK3qDzBeK7OGhanAll8tyyF2cUdBIpnmDCT/yVvKmNXwQQfggybwxP7+FOlN
+ oUFznwgEpnchDMpmbCBzwiMAfiZe52Q796GdiyOpNBYI7Qinq1npnUSphs35RNIVPR
+ H0UsxWORsKLJaOcJT4P8YmAIEFEJ6Uji0opaFKbIeF8RgSBH88PJEcroF4RWctFo//
+ jxz80HJ78cPRjNZffFdGCm/oBh1jl9P0WouNkBSlAHjPJJgsiGLbxeXY9d9ziYtM+A
+ EAfDd4YF4HTDOx63R/hh3kSz28pPQduVmqTUmujLyoNfQWymhHT2zPbxCBiQJdNJov
+ bFscp05F9GhYg==
+Message-ID: <609c8b1a-d7a9-4667-bd6c-1455c639fcd0@kernel.org>
+Date: Thu, 24 Apr 2025 15:24:17 +0200
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH 4/4] drm/nouveau: Check dma_fence in canonical way
+To: Philipp Stanner <phasta@kernel.org>
+Cc: Lyude Paul <lyude@redhat.com>, David Airlie <airlied@gmail.com>,
+ Simona Vetter <simona@ffwll.ch>, Sumit Semwal <sumit.semwal@linaro.org>,
+ =?UTF-8?Q?Christian_K=C3=B6nig?= <christian.koenig@amd.com>,
+ dri-devel@lists.freedesktop.org, nouveau@lists.freedesktop.org,
+ linux-kernel@vger.kernel.org, linux-media@vger.kernel.org,
+ linaro-mm-sig@lists.linaro.org
+References: <20250424130254.42046-2-phasta@kernel.org>
+ <20250424130254.42046-6-phasta@kernel.org>
+From: Danilo Krummrich <dakr@kernel.org>
+Content-Language: en-US
+In-Reply-To: <20250424130254.42046-6-phasta@kernel.org>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -60,30 +63,28 @@ List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-In nouveau_fence_done(), a fence is checked for being signaled by
-manually evaluating the base fence's bits. This can be done in a
-canonical manner through dma_fence_is_signaled().
+On 4/24/25 3:02 PM, Philipp Stanner wrote:
+> In nouveau_fence_done(), a fence is checked for being signaled by
+> manually evaluating the base fence's bits. This can be done in a
+> canonical manner through dma_fence_is_signaled().
+> 
+> Replace the bit-check with dma_fence_is_signaled().
+> 
+> Signed-off-by: Philipp Stanner <phasta@kernel.org>
+> ---
+>   drivers/gpu/drm/nouveau/nouveau_fence.c | 2 +-
+>   1 file changed, 1 insertion(+), 1 deletion(-)
+> 
+> diff --git a/drivers/gpu/drm/nouveau/nouveau_fence.c b/drivers/gpu/drm/nouveau/nouveau_fence.c
+> index fb9811938c82..d5654e26d5bc 100644
+> --- a/drivers/gpu/drm/nouveau/nouveau_fence.c
+> +++ b/drivers/gpu/drm/nouveau/nouveau_fence.c
+> @@ -253,7 +253,7 @@ nouveau_fence_done(struct nouveau_fence *fence)
+>   	struct nouveau_channel *chan;
+>   	unsigned long flags;
+>   
+> -	if (test_bit(DMA_FENCE_FLAG_SIGNALED_BIT, &fence->base.flags))
+> +	if (dma_fence_is_signaled(&fence->base))
 
-Replace the bit-check with dma_fence_is_signaled().
-
-Signed-off-by: Philipp Stanner <phasta@kernel.org>
----
- drivers/gpu/drm/nouveau/nouveau_fence.c | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
-
-diff --git a/drivers/gpu/drm/nouveau/nouveau_fence.c b/drivers/gpu/drm/nouveau/nouveau_fence.c
-index fb9811938c82..d5654e26d5bc 100644
---- a/drivers/gpu/drm/nouveau/nouveau_fence.c
-+++ b/drivers/gpu/drm/nouveau/nouveau_fence.c
-@@ -253,7 +253,7 @@ nouveau_fence_done(struct nouveau_fence *fence)
- 	struct nouveau_channel *chan;
- 	unsigned long flags;
- 
--	if (test_bit(DMA_FENCE_FLAG_SIGNALED_BIT, &fence->base.flags))
-+	if (dma_fence_is_signaled(&fence->base))
- 		return true;
- 
- 	spin_lock_irqsave(&fctx->lock, flags);
--- 
-2.48.1
-
+This is only correct with commit bbe5679f30d7 ("drm/nouveau: Fix WARN_ON in
+nouveau_fence_context_kill()") from drm-misc-fixes, correct?
