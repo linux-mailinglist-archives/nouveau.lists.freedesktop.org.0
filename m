@@ -2,76 +2,66 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id E8822AA44CF
-	for <lists+nouveau@lfdr.de>; Wed, 30 Apr 2025 10:06:42 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 7B3D9AA4867
+	for <lists+nouveau@lfdr.de>; Wed, 30 Apr 2025 12:32:54 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id DB5B010E72F;
-	Wed, 30 Apr 2025 08:06:40 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 1776310E0C1;
+	Wed, 30 Apr 2025 10:32:53 +0000 (UTC)
 Authentication-Results: gabe.freedesktop.org;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="qSJCd580";
+	dkim=pass (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="owBorUhS";
 	dkim-atps=neutral
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from mail-wm1-f52.google.com (mail-wm1-f52.google.com
- [209.85.128.52])
- by gabe.freedesktop.org (Postfix) with ESMTPS id B21F110E71C
- for <nouveau@lists.freedesktop.org>; Wed, 30 Apr 2025 08:06:39 +0000 (UTC)
-Received: by mail-wm1-f52.google.com with SMTP id
- 5b1f17b1804b1-43cf0d787eeso77236185e9.3
- for <nouveau@lists.freedesktop.org>; Wed, 30 Apr 2025 01:06:39 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1746000398; x=1746605198; darn=lists.freedesktop.org;
- h=content-disposition:mime-version:message-id:subject:cc:to:from:date
- :from:to:cc:subject:date:message-id:reply-to;
- bh=JaBtCb/6XVAvBecubHAVnnEpXRtXlY0yxjWDApUS/CE=;
- b=qSJCd580RyHq3jZ0CLfw1ew+a+6xKrDGVEbcV/x0hzZl9gRb0AeZtJoONsB7wsBmdV
- 5Q1e9uQh031BOcWAE6K32A3N4lcJ4Zb24Rhvl3yzvKMptu5Cwo6wcr4EQdePk5WEpujk
- iSBTOQd8rKaHZj2t3KxBI+MQk0g0JS1oWslW4uyCoisCxdh/uc9OxbtM0EJke4LeHRKG
- YtB/Hp4YI9xsPpF/8hqQrhgIHkYGidLmajPU4UtVFWh3xYNCBece1YLMV6KDSn++ORux
- Dz7XbL5b/Km2Xvrr+0ulQVRGNbxz9OiQA8sT+fptxCMBUKqtpyLbsvYiQu7bbnjQSdWX
- eluQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1746000398; x=1746605198;
- h=content-disposition:mime-version:message-id:subject:cc:to:from:date
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=JaBtCb/6XVAvBecubHAVnnEpXRtXlY0yxjWDApUS/CE=;
- b=qb63RsXX1O6WUTVTw5Y8EZvNCx6FejI8MpIcyME+g0P4IYbqcxojLnSsnUpyG61zhC
- Hg2rR/v+1B2UfEoqGKSW+t3wrE35B6JmDNIgV9PlHuP9wSn1Xt4ESpMsy6uewlGkqwMg
- /y2tMf5gqZyUWLARohqrlWJoRQoIA4c4h8P1Be1tp2j6GFZH8+8yKGhKBQnLy2Q/un19
- Kw6Ft+Plt/CjZH2G50tjD9MhDR1gMSKvW9KrnemgdwV/XpVeJZF/+zLJ1otBaFGp7A81
- GBGgI8l5/Bhctl6c0m8xinXLZWLtOZvv0P38pBdGYU0rBFomeewKggo4SGW1QpeHz3qH
- ++6A==
-X-Forwarded-Encrypted: i=1;
- AJvYcCWJvAiDoZwgUoSHmugRCq7C+VC7oji9zSEuSuQXIyCF40ER3Ds+MVZ0qrPfBLfqczU3EzmGFzlR@lists.freedesktop.org
-X-Gm-Message-State: AOJu0Yy21KTE7/ijgt4yMxemoBioeHccrJqwxkghqWPif6WQj+Q8snvs
- GcUEInrRpHChQY0mAoE2IoxH/KVrWBKpG/Ni9kQAN5l6cO0tFwTw2vhRw/XKYsA=
-X-Gm-Gg: ASbGncsjHZpZcAE2WBvneXSXJWLbFfzbc7aP37cNcuuG/iTHFfLVRilG/WEX4OUEXe7
- xI+oBZ8WSFS4Q1ysFwKPpSOk76FUWsk/PJUhObdYg0aeQmTmO162+b4RDzxG+Lh7fZrIfph+5K4
- 5VaVaqwiQDYbgPl/Kdp9h8kg+42Oiyo3MAeGnWZRAUZH4Yq2rBvn82O0TPf8V6TqSWGhzVo17iT
- 5AfHuwZNTBiYcSvjacfUC7BInDpgfbVK2g1Br9fLBUSYPtNQzPjXdKIjp+eUR3p8xi+kKMH6Ozu
- XRatLHu8phXWGX6/hBz/nrkzccyxfqCw6bg2DXHLLxf1jA==
-X-Google-Smtp-Source: AGHT+IHP+atkeWPXnPct3xYEf+jUQ0S7DQqC5h4qJD0wJmpfwo3S07LKuBCrJm3Z9SrRTQ8TUMm+ag==
-X-Received: by 2002:a05:600c:502b:b0:440:6a1a:d89f with SMTP id
- 5b1f17b1804b1-441b1f30736mr19057575e9.4.1746000398163; 
- Wed, 30 Apr 2025 01:06:38 -0700 (PDT)
-Received: from localhost ([196.207.164.177])
- by smtp.gmail.com with UTF8SMTPSA id
- 5b1f17b1804b1-441b2bbbedfsm15173965e9.26.2025.04.30.01.06.35
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 30 Apr 2025 01:06:37 -0700 (PDT)
-Date: Wed, 30 Apr 2025 11:06:32 +0300
-From: Dan Carpenter <dan.carpenter@linaro.org>
-To: Lyude Paul <lyude@redhat.com>
-Cc: Danilo Krummrich <dakr@kernel.org>, David Airlie <airlied@gmail.com>,
- Simona Vetter <simona@ffwll.ch>, dri-devel@lists.freedesktop.org,
- nouveau@lists.freedesktop.org, linux-kernel@vger.kernel.org,
- kernel-janitors@vger.kernel.org
-Subject: [PATCH] drm/nouveau/fifo: small cleanup in nvkm_chan_cctx_get()
-Message-ID: <aBHaCM66pXaP84ei@stanley.mountain>
+Received: from sea.source.kernel.org (sea.source.kernel.org [172.234.252.31])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 88F8810E0C1;
+ Wed, 30 Apr 2025 10:32:49 +0000 (UTC)
+Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
+ by sea.source.kernel.org (Postfix) with ESMTP id A8CA2445A9;
+ Wed, 30 Apr 2025 10:32:38 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 1BC66C4CEEA;
+ Wed, 30 Apr 2025 10:32:35 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+ s=k20201202; t=1746009160;
+ bh=o+S1aIP7xzbJyrhAIC/cn6ntSs0hD4BPJIGQKZt97QA=;
+ h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
+ b=owBorUhSaii7VmgJCrYuG9Fv/vFiEpeulZVWmpn2SI2y9kgzM1m372LoLJCviqERr
+ 7yavPWj1x247McK+IFtM7vLr01D0aKar6Nd40qUcxSZ4xWPs1i3ab6mveT2p8wTlIX
+ uBidLfXY+pY09ClJ1FvUJczfR7V82b5Anq91hcoO6lAiw3dcVPIXxr01wuALpPRWMt
+ sf9YBXQ8kq8OmxUWxMsGghoFmwaQWhdEGbw7PCK3KOl2K8fEUfVcu7yEyJxnFWg7+c
+ KoCuEnXVWgjuLxN5qQRGU27IRSVQPGiJEFNx6885EFsSgr0KhU8295ww/87nLd1n0V
+ futn8s4BTlWJw==
+Date: Wed, 30 Apr 2025 12:32:33 +0200
+From: Danilo Krummrich <dakr@kernel.org>
+To: Joel Fernandes <joelagnelf@nvidia.com>
+Cc: Alexandre Courbot <acourbot@nvidia.com>, Miguel Ojeda <ojeda@kernel.org>,
+ Alex Gaynor <alex.gaynor@gmail.com>,
+ Boqun Feng <boqun.feng@gmail.com>, Gary Guo <gary@garyguo.net>,
+ =?iso-8859-1?Q?Bj=F6rn?= Roy Baron <bjorn3_gh@protonmail.com>,
+ Benno Lossin <benno.lossin@proton.me>,
+ Andreas Hindborg <a.hindborg@kernel.org>,
+ Alice Ryhl <aliceryhl@google.com>, Trevor Gross <tmgross@umich.edu>,
+ David Airlie <airlied@gmail.com>, Simona Vetter <simona@ffwll.ch>,
+ Maarten Lankhorst <maarten.lankhorst@linux.intel.com>,
+ Maxime Ripard <mripard@kernel.org>,
+ Thomas Zimmermann <tzimmermann@suse.de>, Jonathan Corbet <corbet@lwn.net>,
+ John Hubbard <jhubbard@nvidia.com>, Ben Skeggs <bskeggs@nvidia.com>,
+ Timur Tabi <ttabi@nvidia.com>, Alistair Popple <apopple@nvidia.com>,
+ "linux-kernel@vger.kernel.org" <linux-kernel@vger.kernel.org>,
+ "rust-for-linux@vger.kernel.org" <rust-for-linux@vger.kernel.org>,
+ "nouveau@lists.freedesktop.org" <nouveau@lists.freedesktop.org>,
+ "dri-devel@lists.freedesktop.org" <dri-devel@lists.freedesktop.org>
+Subject: Re: [PATCH 11/16] gpu: nova-core: add falcon register definitions
+ and base code
+Message-ID: <aBH8QUwxabyo-oqm@pollux>
+References: <20250420-nova-frts-v1-0-ecd1cca23963@nvidia.com>
+ <20250420-nova-frts-v1-11-ecd1cca23963@nvidia.com>
+ <aAerWF9j5d01pQv0@cassiopeiae>
+ <C4F54820-4FCE-4096-B341-DB9AB667D0B8@nvidia.com>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
+Content-Type: text/plain; charset=utf-8
 Content-Disposition: inline
-X-Mailer: git-send-email haha only kidding
+Content-Transfer-Encoding: 8bit
+In-Reply-To: <C4F54820-4FCE-4096-B341-DB9AB667D0B8@nvidia.com>
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -86,28 +76,15 @@ List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-"&chan->cgrp->mutex" and "&cgrp->mutex" are the same thing.  Use
-"&cgrp->mutex" consistently.  It looks nicer and it silences a
-Smatch static checker warning.
+On Wed, Apr 30, 2025 at 06:58:44AM +0000, Joel Fernandes wrote:
+> > On Apr 22, 2025, at 10:45 AM, Danilo Krummrich <dakr@kernel.org> wrote:
+> 
+> > [1] https://play.rust-lang.org/?version=stable&mode=debug&edition=2024&gist=bf7035a07e79a4047fb6834eac03a9f2
+> 
+> I am still researching this idea from a rust point of view, but quick question - will this even work if the chip type (GAxxx) is determined at runtime? That does need runtime polymorphism.
 
-Signed-off-by: Dan Carpenter <dan.carpenter@linaro.org>
----
- drivers/gpu/drm/nouveau/nvkm/engine/fifo/chan.c | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+I exetended the example in [2] to address this with `enum HalImpl<E: Engine>`
+and a second architecture that is picked randomly. It needs match for every
+access, but that's probably still better than the dynamic dispatch.
 
-diff --git a/drivers/gpu/drm/nouveau/nvkm/engine/fifo/chan.c b/drivers/gpu/drm/nouveau/nvkm/engine/fifo/chan.c
-index 7d4716dcd512..f5cd7f7c48b4 100644
---- a/drivers/gpu/drm/nouveau/nvkm/engine/fifo/chan.c
-+++ b/drivers/gpu/drm/nouveau/nvkm/engine/fifo/chan.c
-@@ -104,7 +104,7 @@ nvkm_chan_cctx_get(struct nvkm_chan *chan, struct nvkm_engn *engn, struct nvkm_c
- 	if (cctx) {
- 		refcount_inc(&cctx->refs);
- 		*pcctx = cctx;
--		mutex_unlock(&chan->cgrp->mutex);
-+		mutex_unlock(&cgrp->mutex);
- 		return 0;
- 	}
- 
--- 
-2.47.2
-
+[2] https://play.rust-lang.org/?version=stable&mode=debug&edition=2024&gist=99ce0f12542488f78e35356c99a1e23f
