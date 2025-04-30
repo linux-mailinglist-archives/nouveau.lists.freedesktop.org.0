@@ -2,51 +2,50 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id A1E1ABBF514
-	for <lists+nouveau@lfdr.de>; Mon, 06 Oct 2025 22:47:29 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 3DE74BBF469
+	for <lists+nouveau@lfdr.de>; Mon, 06 Oct 2025 22:46:59 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 437F210E4E1;
-	Mon,  6 Oct 2025 20:46:27 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 4670B10E4A5;
+	Mon,  6 Oct 2025 20:46:25 +0000 (UTC)
 Authentication-Results: gabe.freedesktop.org;
-	dkim=pass (2048-bit key; unprotected) header.d=Nvidia.com header.i=@Nvidia.com header.b="eBrSEImG";
+	dkim=pass (2048-bit key; unprotected) header.d=Nvidia.com header.i=@Nvidia.com header.b="FggdyCaN";
 	dkim-atps=neutral
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from NAM10-DM6-obe.outbound.protection.outlook.com
- (mail-dm6nam10on2054.outbound.protection.outlook.com [40.107.93.54])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 1C94710E7B6;
- Wed, 30 Apr 2025 14:38:19 +0000 (UTC)
+Received: from NAM11-DM6-obe.outbound.protection.outlook.com
+ (mail-dm6nam11on2073.outbound.protection.outlook.com [40.107.223.73])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 48B4D10E812;
+ Wed, 30 Apr 2025 22:45:20 +0000 (UTC)
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=vrOdUgORFD/OWXVw2y6FLexN/OZ7a3Jr+tIqBlkRAIBYzSfyR5mCR2AGN0x6AEN0uHLCfntm7ZaeCH7re2FbKgHrx+nVQ54vaCEmqEhhK/EG4c6i4dnCRfO+NLIKyIfDycUr2mZUeV8QBhHF9eeaQz1haTOspMx/c7KhbgolwLT611mnYkoJOiwhfK0xMEswCLHY01hrV+6wOE0IF9x97BL5MOtHZPYNgzAT7jvzL9GQ/O9GexbSMohOewom0Xna/aY8K/sU0wlTESrZM+Cag5dLqSLuI5Ti5WJJv3vLUfgr3CfpZEbxVOJo2PE+srYiDU0kJA/gcHuMkWidRYmeBw==
+ b=qEHfMHN/cwMy1Pf2k6dgrxu1a9SB56+JoyKpPm6w70aasn+Qdh5BTUntJgivxzWV3NSrRxxfE1ZI0TkdRHyFbLVdhB1aDyf1Kwqj+oAbOd5c2Vzl56GMS+RMZPMWEibvplLkrWXhu+u06wkFvDOg7QdaMfVrLegKaUgXf8sNPZMNBrrRoh51cobRfno2vxppHTDEPDwzRCDZI9iXVQMnOhjoxY5DvGYKiJnOuga9E+AuvfcKWwBqLGqyP2+dTZhW+YtbrVMcqDBhL9GQA20yPagW+f/kaiQ7WXszA5r6JED0mIJSRFrTiS4B7WyMlKyYJEp6WJeRU44bkDuPvKdJDw==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
  s=arcselector10001;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=1MDfyf477uxFIA7tIOCNclBzOQ+78TIs/UF7jBFsUAc=;
- b=FTt4U2XcGahLs5BdnPhBS5ttW2NY5HMNfajJRSVuMxupYBma97h7YWkzaHsKtXg22ivg89BrAFV3jeNxZIlkfPfHRVJBs9JN1Sdp3tWojXOQjBAobksL1vjJCVbhBH0EXwKk8riWTVR7NTC3Mwri0AxqIhY5mUl70gunMUflARLhhFBfa9YpSitDpdXm0L+xmit+EfcECcwLLOr4nhDQNRUDBJx78KjljKdNxV1T/HCUdBk9eZINeKRfC01XsQb9h1WrT5V0d/d8bBItnj1pWoB9JlBdOz8zH548iSe87HGdOGnKZf9v3UFr08Bd7LlqFyohzByP2/7AynMBykgekA==
+ bh=H6FuGr6nI2T5GeBMGC5uyvP+uI5MbWg3UCDPBu2y0NI=;
+ b=ZMJOaAwVXrSTbQCR2r1bN92yREAN4Ffm6n6KFpF/y9p9A8zMMifbyXvV47jBVhkP8mhDsAx08MlGJBMwOrDeQZl6rXaRhfObJS88PSSiqPWU8aJVlhMxo13a2ClOqeYci01j484M7yn3F0vt7njUayhaeug8sS9cRjeNOkMaaUOHpyWus3asyDxLf7Mh3Ebx78bO1QRHVKCF0nigZjMNTUXAMJv3urdV0uiB5rbvzyrZ8oIE9MtwXxwCSY/vNUXX4NsN52YzBx5PRY92Mxewn8Je+4K+PtYI83zQcInFkFAAAtJQ2gSSCR0nN7YOOXN4kzbMVAmULvslYGfV+eHC2Q==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
  smtp.mailfrom=nvidia.com; dmarc=pass action=none header.from=nvidia.com;
  dkim=pass header.d=nvidia.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=Nvidia.com;
  s=selector2;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=1MDfyf477uxFIA7tIOCNclBzOQ+78TIs/UF7jBFsUAc=;
- b=eBrSEImGd3c9WOMkGjmnVFjWJt7yywI98XE2cIfOXY8Ng6gOtkBNMyTqjjaRnT4MdmwosMtSkA6pgxJEClSrYsNgZF+PV4qx1fAmbx6Zr+JKzZva6t1xvYyQ7lFpHPEUA1+DBRcd8FIbtreALlfsE2dxwbvFYlYLF0RpEfnepcT8ML7x1cyfqn+BFACl+qU5zZsxWJpH6ott1d29ihUylBZZ1RxZW/ch48BlKzcAoHIJAduszQ6sqiUAejk+h3xR8QlCtZKzVrf4JhNwVkVrRmv1xLGqSTeJ+1ve906I5fZEIbWpSHZZEkgfui9T/dacmsXy5/qPFigLnXZA4Stm0g==
+ bh=H6FuGr6nI2T5GeBMGC5uyvP+uI5MbWg3UCDPBu2y0NI=;
+ b=FggdyCaNwiQd/mMurzdEHVUmaNsco4Fa1TBrLPcFdndeweRmVmJxQIBPPIWhPbG8MnEWZbE2LWRXl/aTkq4w8NxIXNJAPdgUu1J24v8jiQVKE97v5rapUOepxsMBpYVcSHHKpVT/lebQUlPBnnITloe/yJgIimqTdxblIIwVLxQj4FNkb96iZ+jyX5K/r6VhPuTRJxvTMpUebx9ip5iDzs0bG03MslfNrziyXFc+7ENjhgOQIxeFMfgwtS5Da9s8sqWpoZGcYNewkL+/9hABrBej279FcMdRb+lislT88oX+NBbmMD6/U1W5lNrQ8zjpEBclNVvgnHEeldmue4ce4w==
 Authentication-Results: dkim=none (message not signed)
  header.d=none;dmarc=none action=none header.from=nvidia.com;
 Received: from PH7PR12MB8056.namprd12.prod.outlook.com (2603:10b6:510:269::21)
- by DM4PR12MB7527.namprd12.prod.outlook.com (2603:10b6:8:111::13) with
+ by DM4PR12MB7528.namprd12.prod.outlook.com (2603:10b6:8:110::17) with
  Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.8699.19; Wed, 30 Apr
- 2025 14:38:16 +0000
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.8699.20; Wed, 30 Apr
+ 2025 22:45:09 +0000
 Received: from PH7PR12MB8056.namprd12.prod.outlook.com
  ([fe80::5682:7bec:7be0:cbd6]) by PH7PR12MB8056.namprd12.prod.outlook.com
  ([fe80::5682:7bec:7be0:cbd6%4]) with mapi id 15.20.8699.012; Wed, 30 Apr 2025
- 14:38:15 +0000
-Message-ID: <9977ad2e-ce2d-48b5-a222-f74a821abfeb@nvidia.com>
-Date: Wed, 30 Apr 2025 10:38:11 -0400
+ 22:45:09 +0000
+Message-ID: <1f2a6948-8fb2-4eac-ae05-99d007defc07@nvidia.com>
+Date: Wed, 30 Apr 2025 18:45:05 -0400
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 11/16] gpu: nova-core: add falcon register definitions and
- base code
+Subject: Re: [PATCH 08/16] gpu: nova-core: wait for GFW_BOOT completion
 To: Alexandre Courbot <acourbot@nvidia.com>, Danilo Krummrich <dakr@kernel.org>
 Cc: Miguel Ojeda <ojeda@kernel.org>, Alex Gaynor <alex.gaynor@gmail.com>,
  Boqun Feng <boqun.feng@gmail.com>, Gary Guo <gary@garyguo.net>,
@@ -63,106 +62,106 @@ Cc: Miguel Ojeda <ojeda@kernel.org>, Alex Gaynor <alex.gaynor@gmail.com>,
  rust-for-linux@vger.kernel.org, nouveau@lists.freedesktop.org,
  dri-devel@lists.freedesktop.org
 References: <20250420-nova-frts-v1-0-ecd1cca23963@nvidia.com>
- <20250420-nova-frts-v1-11-ecd1cca23963@nvidia.com>
- <aAerWF9j5d01pQv0@cassiopeiae> <D9K09AU4KTQJ.3TVVZPMDB0H7I@nvidia.com>
+ <20250420-nova-frts-v1-8-ecd1cca23963@nvidia.com>
+ <aAd_PBVB5S5pHeP0@cassiopeiae> <D9J4UK3LWDL6.4TE5O7WM6AIP@nvidia.com>
 Content-Language: en-US
 From: Joel Fernandes <joelagnelf@nvidia.com>
-In-Reply-To: <D9K09AU4KTQJ.3TVVZPMDB0H7I@nvidia.com>
+In-Reply-To: <D9J4UK3LWDL6.4TE5O7WM6AIP@nvidia.com>
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 7bit
-X-ClientProxiedBy: BN6PR17CA0046.namprd17.prod.outlook.com
- (2603:10b6:405:75::35) To PH7PR12MB8056.namprd12.prod.outlook.com
+X-ClientProxiedBy: BN9PR03CA0918.namprd03.prod.outlook.com
+ (2603:10b6:408:107::23) To PH7PR12MB8056.namprd12.prod.outlook.com
  (2603:10b6:510:269::21)
 MIME-Version: 1.0
 X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: PH7PR12MB8056:EE_|DM4PR12MB7527:EE_
-X-MS-Office365-Filtering-Correlation-Id: 57aae9b3-c01c-4461-7850-08dd87f4a426
+X-MS-TrafficTypeDiagnostic: PH7PR12MB8056:EE_|DM4PR12MB7528:EE_
+X-MS-Office365-Filtering-Correlation-Id: 3942021e-6b3f-45eb-fac0-08dd8838a8dd
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0;ARA:13230040|1800799024|7416014|376014|366016;
-X-Microsoft-Antispam-Message-Info: =?utf-8?B?ang4RW9leGhsbEpORlBWZTNMWG8xQ2tCVjl6N09pK1JJMTg2Q3BYcWU4SC9V?=
- =?utf-8?B?SjVHcC9GRXpEbFR1aDVXcU8vYVBQbmh6cVBJWHNPa2tFMkkrVmJjOUoxRXhX?=
- =?utf-8?B?OGwzSVZnSzVpMXAveHpJYndLN000OVI2WGUxanhXOXNQYzVwdk5uVUsxR2Q3?=
- =?utf-8?B?b0hoV2dlT0dDUjlUN1BIZnh2bHBvN3dFcndLV3ZBQm9UbVVPRjVqdVhlYm5X?=
- =?utf-8?B?WGphazZNNko5MVFOa01iQkI3ZE9hTUg0SGtBaTQ0NDBWZTVuOXhOSkh0Mk5F?=
- =?utf-8?B?b1NuNzVBdmNSWlJPa0JKbzhEL1lEcy9HQm9DK1dMTDR1MkZOTlNXQ0xFZkNl?=
- =?utf-8?B?VTVzeGQrWExFSzkyS2tTRDNERC8wVmYxVW5QQnhLdm1XbHNEblRucWh5dDd2?=
- =?utf-8?B?VGJEakcwY2lmaUxlUFpKOSt3V050NEFGOHRCR0x6UkZubTdKd1dJaG9SUnJO?=
- =?utf-8?B?aFkvZHc3aEJwcTBCV1VBa1JDeThBR0Z3eEJGN3ZDL1NvVUp4MVhSeEEybWhH?=
- =?utf-8?B?WHFXS3dMVU4yWDhBenliKzhGUHhOK3ZGM21aM295V1VDUUQ1bFZua3VRdFdB?=
- =?utf-8?B?cW52Ri9rSGdZVnQ0TlJNUXNvSWs3YWdvYmxpeXp0Tm95U1hxVFdQczNxRU16?=
- =?utf-8?B?SGZNRGYxS1BVOE9wVDlvOWg2eHZmbi9YUGY4SFk4aHhLcmlPOFVIYlUvVU1C?=
- =?utf-8?B?bmhyaGhmN3ZxMlI0L0xWejZkdWx6czBHbSt1dk0wTTE0cWx6amthSmd5bEJW?=
- =?utf-8?B?dVpBbUtGL1pYNE1kNzBYU1pZQ2ZkMkRkajZnVjc1Skpsb08rajVqTlNJZzNq?=
- =?utf-8?B?QWR2THJmTGg2YTVmSSt0VmQ2a3BqSmR1M0RnaUZDSkQ5ejUxZkwzK0c5RGY4?=
- =?utf-8?B?YWJOMk8wd1hRY0ltdjgwL3Jzb2NLMU9QdVhVVnJjcEJ0dXB1R2lDZThraVE1?=
- =?utf-8?B?THRVYTVJc2ZnM005U1NHa0lBOXpEdFJKWUVSMHNZd2RoQzU0b0xSU3JvSGF4?=
- =?utf-8?B?VkQyUlA5cHJiTGVFZ3lSek04dlQ0bXovL3kyZDRLNFhCbjNSM3NPQXd5ZjVD?=
- =?utf-8?B?MnFuQkJiSzV4NUJLbnFaelRnTGJXSGNtbS83RmNzVU9SdFBCVXBPaHFSZlpB?=
- =?utf-8?B?R1g4VVYrQTVBZm1vRlk2bmNBdWpMcFJBKzVLWWVOOVRmRk55UCtBbTdRVnRW?=
- =?utf-8?B?S0hxQTlwbXpwUDg5Yk5pbnMzaGR3WlYyR0pGcXptbllUK0Z2SEk3UzhEcXk3?=
- =?utf-8?B?a25QOGJZQ3o3eWFmL2kvbUh5bG5MdllrVjJFSGpncU5BNjdrRzhqeTBFQkh4?=
- =?utf-8?B?dGRFQ0hwaGorSHR2REhvT0M1M3o0MGN4NjlaRnNwYUZBcmhxamV1U016M0ox?=
- =?utf-8?B?WkFUbU1SRStiWWMwWHpaRjdSQkxiNzB6L2VyY24yNVAySnhlUnl3dUhhWFFW?=
- =?utf-8?B?SUF0OVgyZlJGWXFtTWlWSkdsNFhNZmRKOFNJWG9UY0hTQ0xWdlJCODIwR0tK?=
- =?utf-8?B?WjAzb05JSnBDKytha2dvOFliTWhJYUNkUkpWTVloY2JVRnJIcjhLUHZndjBY?=
- =?utf-8?B?SUl4bkxsTkhGeVN5TC9xaExEbzFXSFdOL0t4bmxzRXJ5eGpzSXUzZzlLWkJO?=
- =?utf-8?B?b2J0c1RvRUxyT2FOZkZJTDV6UGxjRmZzUFYzdkRzNjA1QzJvRkFpcGpDS0Jj?=
- =?utf-8?B?bERmYzRGWXNkUzhIRzlKUTJBcEpUdFF6cUR1eGp1TnV0TVVJZnJmU0grMksv?=
- =?utf-8?B?Ukxua0crRU9HaXUyVHN3WXdVM1hhTy9RbHhMbVVNQmgrNGYrSHVDNmFBZmhk?=
- =?utf-8?B?YnZ5Q2ptRkpScW5aNEkyaXc5YXlFMTN4WmtuU25JUEh6NFlyWmFkVktCRnJS?=
- =?utf-8?B?ZjEyK0pSZzJqeC94MWxraDQvb09vVWw1endnRUJXUmlzRFNJUDdicjF1RTRF?=
- =?utf-8?Q?4eYQ9iAUJYo=3D?=
+X-Microsoft-Antispam: BCL:0;ARA:13230040|1800799024|376014|366016|7416014;
+X-Microsoft-Antispam-Message-Info: =?utf-8?B?QmcwNzlsS25RZzdsZkF6Wm02Vm9kUUtLTnk1YW0wZExtTFhsTzZNaUJmY0Iz?=
+ =?utf-8?B?WGJ1U2hFSFZqRWJ6QjRQVzY4QVU3bHFCdFE3eFh3aThQM25IN09RR2N2Y3NN?=
+ =?utf-8?B?djR5MzByV0V5QnZhR3piUGRJd3RBQVQyMEFFRDRWSklLS01BamNCZThBeDM5?=
+ =?utf-8?B?QzFyK3BQRUlnTFJtVVJscUNuYkdlMVl3ZXBETjkzazFGVzhaYk5xNWlSYmJv?=
+ =?utf-8?B?SVdOSkNmV2tIUG9ZaUdtREExZU9UZ0FhQTBqb2F3Q2JzTUtlV0g3M1ZCbmRv?=
+ =?utf-8?B?TVdYd2o5Mk5GSUlDNWRtZDdNNkROSUFpd2JKWEdtUDJ0bmM5QmlRWGk2enZF?=
+ =?utf-8?B?MTBlR3pTNFpwdjhEMTRGWUxTeXEvUDNSUUdTZVRKaG04NVEwalFtb3JCRzha?=
+ =?utf-8?B?ZTg2bmxwcG1IVUpEM3FSTlA3YkJpL283WlEvRFZtWm5Zb3VWd29XNkpiZWlr?=
+ =?utf-8?B?cXNxc0ZTWXJvRVNxOUdDdUFEb0FvdjF3VmVHejZET0ZGa3grbzJFT3poMEkw?=
+ =?utf-8?B?UmtTN21qSHBlZS9aYktuYWVTZ1JQZkY3QjNIRXlGZzRhVmU1cjYxTHlxRStJ?=
+ =?utf-8?B?M1hTV1dtRHpGQ3FtWjRmcFlWU3IxWjFreHhCLzBGTWpDNVQ0N3hld3lxZmhY?=
+ =?utf-8?B?WUgxUEE3SnNzdUxMQmFtM3FNck9rUklsNDM2dEZ5bHo4aUFPR3pTQzkrNUhy?=
+ =?utf-8?B?WUp2ZUgxL1B5akNMcEU5SWZYR1pZUjR2K25CQm9qSVFTR3ErN3NQTDNhbDJw?=
+ =?utf-8?B?NTNNYmhDRXNKOVZ4MUQxVWMvUWVzcmx2ZHZqdENUSHJFTEtJQVBOUFIzUmZR?=
+ =?utf-8?B?dVFYVlV4UHZsNXQrNCtxRWtXU0kyR0JySHMxNTJLQ2NxSVp3VWpEaFhuS3Qy?=
+ =?utf-8?B?UHlOa0ZlR1FNSTdYckFlTjhkVFI4SXNvd2VuZUh1N0ViMVRkQ1lobU1PM0ZG?=
+ =?utf-8?B?aVZXejBkWXdjSjNpc0hHRGNVUFlmV2d6aDRPUTVOSDN0aXR5UzVraE5IQUVj?=
+ =?utf-8?B?L2Q3MEg4M0JaNmE3OGdkT3oyTVhodWVDVTdYbVQ1VmVtaEVWWFp3SjIzRUp5?=
+ =?utf-8?B?NTY5ZjZBNGVnWUhrZ05YQWhnM2M4VHJNcU1ab01hTHNVZG4xdlAzcnUwMDkz?=
+ =?utf-8?B?b3czTHBHSExMdXUybms1MUtySCtCeUZFa2V3OE1Bamt2eWJKcHhoVGNqSXNV?=
+ =?utf-8?B?K0lQSmxnQi9tNnBnbndXblprVC9TaythZHRKdHRqdW9WcDJpajAwcFgxdU1X?=
+ =?utf-8?B?MlNLQndvTCtTSGE1VXNhcDJZTW5OVVlmUWRQenVuWWZkejRHWkFrRlJzYkNu?=
+ =?utf-8?B?TFV1OXNpNDFzeGw5R1hMLzJ1OWFsY01ub0lTajduanNpb1VxMldFKzlMdHY0?=
+ =?utf-8?B?NDlMbm9DK004RDBNQXRyeWVpVUE1MVRHODFYc0l4ZWNWWklybjd2N2lCM1NH?=
+ =?utf-8?B?aGw4MWJkNzRjaDFFaFVGMCs3ODlEZmNNMkdJR00vQ3J0VmNTNkZoNzk5dysr?=
+ =?utf-8?B?aVFObC83YVp1NGJIS3g3bHRwNkt5UFVqTEhEVmFKOVNZV0VMWEhRckY1cXpL?=
+ =?utf-8?B?a2FMY1RwQnNPTlpSaWdNWGI4R0pNZFgyU0svSUErTjRIZ3BWYzdOanFSaWU0?=
+ =?utf-8?B?MnhTUHVBclRpamlnWVIvdStYQjdhSmhTZjZwUHVyd0tWUlJUTkRBVitOY0gx?=
+ =?utf-8?B?L2l5ZnFaTnpZS3M5OXl4MThXTHNuOWpKQXdrUVVMQ0ZZaitxVEhFUG94bnFR?=
+ =?utf-8?B?UFN1TFNwTEloR1J6K2c2SURzbzgxZlVPK0ZPdGhZaTZndXBFM0FDV0lFMWZo?=
+ =?utf-8?B?WE1Jb1dleUZRUDNWbEo3amJuSHVjLzNNeXpBQmJvdHcvUm0zQVRuTWV2M0NC?=
+ =?utf-8?B?NjJqWmtHRlNuWDRoUGxxV2Z5YTRCV01ycGRqdTdnN2ZjcEdLNFAyU2FOS2RW?=
+ =?utf-8?Q?US3p9w+lIn8=3D?=
 X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
  IPV:NLI; SFV:NSPM; H:PH7PR12MB8056.namprd12.prod.outlook.com; PTR:; CAT:NONE;
- SFS:(13230040)(1800799024)(7416014)(376014)(366016); DIR:OUT; SFP:1101; 
+ SFS:(13230040)(1800799024)(376014)(366016)(7416014); DIR:OUT; SFP:1101; 
 X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?ZWdQanlsUlRxbDlCVHVXREEvNndxelFhcnh4MDI4d2Zxa1Rxc2Vkd1pxUU1V?=
- =?utf-8?B?ZWtNd3ZaV2hxclIzemo5c1FCL2VneFdmR1dpdmxscHRHSWRHYisyQitjdmpi?=
- =?utf-8?B?MEZMV1QxTmtCaVVUTTRPQktFQUdSdXY5a1N6MHpGZXJsR0tIWVA1QXBUR1c4?=
- =?utf-8?B?dlN1TytPOXBGRkM4RlRUTWc4QVBCeHFKRmRqZVUvZlRNS3B5V2ZDcUlkVGFQ?=
- =?utf-8?B?VXV1OWlBK3FaTHdQeXpFNVI5MStnN3RoMTZET0VxOU1Cb2ZZQmlRT0FGNGE2?=
- =?utf-8?B?aUNFWjJwWWk1anpYYm1Ed0ZnTmZITHl3Z2Q2YkJWYkhsU2Q3NFJjcTBuWHpz?=
- =?utf-8?B?Zk1JWUxxZjM1Q3hNS3R3NnVNWTUrQVJVSzBnamU3cmhiMDBoSklOeGNaeGVL?=
- =?utf-8?B?R0U0cDFBZUZERWxHWE5YdFRYY1Q4YnZIZWsyQm15ODRlc29zREFtSzJFNHp5?=
- =?utf-8?B?a2tERGI5ZC81QWNXbDlPUXo5UWtLQ0lMWmUxN09JekNNUVJ0ZkRweUZUcE1F?=
- =?utf-8?B?RERFSkNvUWdueG1sd3ZoVjhmOFJDUlN5TUJ5VWZhWms0U3p6MkJXL0R1dVVR?=
- =?utf-8?B?VkVOTlR0M2ZsYUV4Z3VoeEh5cUg1SnJTOG9UTE4vdTdEUUcyZUN4NkVoa21j?=
- =?utf-8?B?YzBiNkZVL0FLRWY2dkhWQ1RJbUhpSEhwbm02YXBaSE1WcGpqNUlkMjNGbjFP?=
- =?utf-8?B?cE5zUlkxbEQxNUc4b2l6MVhEeWpXM3MzSU81WkcrSnBVSG5WUjQwdUFQb1BX?=
- =?utf-8?B?TlYwYkFNSjlJTERadWdmQ3ZvWnpLaUpOclFEcWlhZGVBOTJvaElyVmhFSXdX?=
- =?utf-8?B?ZEoycUIzREpYUFc3REdNNzlYVWRWQlJUbEc4aTY3UlVMWEJSZGFKY1lkYmdn?=
- =?utf-8?B?UXd0a1NPUWFXaUdmN3FmK3F1OE5BUHRsSXR3SEtWMHVMd2NLY3BreHRTN0lQ?=
- =?utf-8?B?UXN5SXU4L1Y1cjVMTkRnMGMvRG11TmFtM2FsVzUySDNMeGJDRGtnZzczQm5a?=
- =?utf-8?B?RHdROERsYmgyOXJQdlBzUFVDcGY1bnZmWTRERGFtSkN5MzlCb2YzR0REK2dR?=
- =?utf-8?B?bG03RWRNd1lCYmRjRU5BVkU0U2FHcmdkaEZZNkhYTzYrUThSTnVaNmFCeUlH?=
- =?utf-8?B?UDRPWnMyOWFMMkt0Z0IxUllOaTJmZi9RRWVnUjVHaHZLTVBIVGtHSkxPN0R4?=
- =?utf-8?B?T2N6RFdTeWRLL0REeW1pSDZMQ05UekJ4bUpYY3dGbWhyY3VUTjNMUW8wNGQx?=
- =?utf-8?B?Tm51bkU3REk3SzRsaUFjaTE4U2pJNHBuZ1lRRUs1aTFxVkJORUZRVkNVMDJV?=
- =?utf-8?B?amV4aFppbkxrUjhWeEh6V1VSd0RLenJTN0Zhckg1VkZuOTh5SUp2dFZXK0RB?=
- =?utf-8?B?VFpWMTEwdnk0bXVGeXdHNzl3K0w5eXArTVBUVEM3S0NUU2NBalhMZFdsdk5K?=
- =?utf-8?B?RTg4dDhlN1E2Y2ljQUtJOEc4Y2hmbzZGbDhCYWRmOTEvZ1Bxbm01dlNWM1pv?=
- =?utf-8?B?NEhlaHdjcVIwMWxmRkpEU2tDd1ppNUhhN3FmSDRSMEFmcUp5Q1hwajhwSlpy?=
- =?utf-8?B?VmVGN2xadlAvdVM2SFdjaXB2V0cvNk1BeG5qaUhqWllDV3NkbmNMTDFxSFp6?=
- =?utf-8?B?VklzV3Q4YmRWa1ZkeFAyL2tubGpjQ0RieEc0VHg0bTBKWkh2cGtrNWFwZHFi?=
- =?utf-8?B?NWtEQVFGZHRQdGpEc2p5dHQzdjlPck4vU2hUZUlXd295dGhhODNXekJzNVNY?=
- =?utf-8?B?NTQreU51NnN3UURMVUI2VGdmUVpsRjUwaGZOWFNKUkg0dXlDZ3o2aDkxVW0w?=
- =?utf-8?B?UHNzK21rNkhZVmxsR1d3bGlmbDFNSjhSd3I5RlZPVXV5dkhmaTU1dzhSSkxR?=
- =?utf-8?B?TmJpeFl2M1Z5a0t6Vk02ZDJqbTVmdXhUKzhwWkkyUjlCTU02bk0zWVdCbGQ2?=
- =?utf-8?B?SlFidjJFSERZdU9tSDFlbHA1cDcycWdIamVJTGNicUZQYk5oZlZUZ0Q1RCsw?=
- =?utf-8?B?emg5cGJoS1JlTlRYM3FwUDJCWnltOFR3Mm1UQjBOK1VSTW10U2lSbHpoZkdu?=
- =?utf-8?B?MFEvT3ozRUcrbG0wZjZKVCtsWkYrcXBZQTluNzl4MkRHc0dnR3NmSm4yc1R3?=
- =?utf-8?Q?g76ZawPf/M3N0l3nqrEoZVaYf?=
+X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?bDRTVkMrRjBVN2gvMHJnVi9ZNGVHRXBMbHZwNlhrS0lVd2RibGJLNTFKVDdK?=
+ =?utf-8?B?Q3ZxR0w5dWRnVGdTUy9QVnFpekdmVGlyQ3RNcEVxV1NPQ0hiK2dPVEpxYWFq?=
+ =?utf-8?B?am5WUzEyaWREdWVwU2UyWHhSanhYMURTTVJyTndXM0xLcXZka045ZFBaSWtt?=
+ =?utf-8?B?ZnhHTzlqaHREUUxMYUhUMmxuZnJxTytsZU41N2lYWmZCdWtHZEJ1NThVcE54?=
+ =?utf-8?B?VnBrMXh3ZXBnVTRGZU52MWJpdnl6ZzlibnNnN2gxMEpnOTlIeUJnWE9LdXFz?=
+ =?utf-8?B?QkNiSHBHVmpUd3B4NlRRbG44Rm5MWUcybDhNejl1c1RQa09RYjFRYWRPT3M2?=
+ =?utf-8?B?RDRQV2hYclZxZ25jZTlwN3JLSHByWUluelJBWDY4VnFnbzNQWmIzZ2MrNFhO?=
+ =?utf-8?B?cFBCNWMwNjFIUGNNdUhRb3lBUDA1Y3h0MDJaZ29wdW11OWt3SVg5bUFNVFMw?=
+ =?utf-8?B?cnRGb096aEg2TVlGRy8wcjIrMWE1RERvVGZkS0Z4d1ZmT2lSMjZFR2V6blpT?=
+ =?utf-8?B?WkRldDZ1K2M2MFJnUDFDWVVhc0xxWVZkSCtOOTF6QUlwV3JQV24rdXdBcEtX?=
+ =?utf-8?B?MnJNL0FrYStHNHBHQnlLNllMbUoxNDN3eTlETnVHQUdBTXU4RkZwZGEwZVd4?=
+ =?utf-8?B?NzlJZ1RQb0ZWMVdNWE1pUXVwNEplNHFUc0dHczVPeDJ4MTU3WS9Od1FncU4y?=
+ =?utf-8?B?WktQN1hGM0VBTTBFVVYxZTV1ekU1UmVxVUQvQW1adXp1ekV4dU9XbVU4MDls?=
+ =?utf-8?B?eHRDcytXa1pVQVNIalhKV2tSWlYvUTlEOHZpRlNqKzJ1QlE1MGUxRm4xNWRU?=
+ =?utf-8?B?bDFRWDBYRC93S3JvcnlCSjh3WVdIVGZmc2wvMWN6ZG9OTk9OV2FZOHRFOEov?=
+ =?utf-8?B?bjlOeHJmVnhFYzhBMDYwYzM4WHZRS211ZFJOMnJCWFVCQXBDQnExSGlMOVJI?=
+ =?utf-8?B?RWo3WUFYWXRiR2ZzT2ZPTzB1bWJ1MU1JbW1vV2pwdlVHWUdZK2t1UFVPbi9O?=
+ =?utf-8?B?YUNBemxqYk9jK2tycS9JMEgzeFFzZHI5Sm12ekVodjNZbm5xTSsrOGo3MktG?=
+ =?utf-8?B?QWN4aklWdWRGYmJUYUtsTy9CdDBHdWV0SkkyL1Y1dVJFaG9CeXhVeFlJK0FX?=
+ =?utf-8?B?SXpMVXB6U2VtUVJnVzB3Wjd1V2N6MHpDOG9FZTFRSStLTGgyNW1QSDZCZGV3?=
+ =?utf-8?B?TnBQUHg1STE1WFlSMnloUFNEcW5uYTUzVktvclJTUENjMGZrWFRDazN2eVZ3?=
+ =?utf-8?B?dkNTV3pjVjdyUTEvQkJDZHpXMWRHcWYvLzFtL1duWm9NdHgvRE1xWTZrdmRp?=
+ =?utf-8?B?WE1uL21DSEVNM29TeWl5bk1zWEZ2NUNDOHZsZWhQdEQ0c0YyQlQ3cVFuVTZB?=
+ =?utf-8?B?Zk41bGVzUUxYU01mMlBMeE5BYU9sNnk5YkFPWHRCTDAycTBhejlIbFI1NUFy?=
+ =?utf-8?B?YzlUMHRadHZuVlI2Znk5MmZrL1pDYjR4STUramFObFdpOEJndEZnMjlod0lk?=
+ =?utf-8?B?bmI3S2xvMm1jRkoyZWRUbEltOTJLWHBuZVcydUhCWGVQQm90MG94QVpRVTI5?=
+ =?utf-8?B?bGlMNjNBKzlvejgyUnAxRWhGOXROQjMyaHM1UDZ2dkR4b2lhOUEzUDlMSzZR?=
+ =?utf-8?B?Zy9lUnlGUGx0NEYwQnJDamRzOUIvcEcxeUJMM1ZyYmJoRFcrODlBT2NNMys3?=
+ =?utf-8?B?U2dtcCtUalh0bGFybVR5MU10Vk0wT1lJQVYrTXJjakdmMVMxTWJQS1U5NDRC?=
+ =?utf-8?B?OFpjSVNvTlJBMTFRU042RGFqWmRqOWxlY1Zqb1MwTXhodTMrKzljSFc2aDVJ?=
+ =?utf-8?B?ZFU0blVnb0pnK3cxZVlFd1NiTjRlUzZqQzBHeUNqdUU4TE1oY2IwMCtUNFUy?=
+ =?utf-8?B?ejZIczN0c1A4Q045K00yTW9mQk56MGdZRTlvZ1RHcWFuenQ5c0o0SktOOGtu?=
+ =?utf-8?B?WENLQkxOeVVHQVZhSDMvTXFVQ09rVGlFMDUzOWV5ekhrbVFJb2dqT09WTjcv?=
+ =?utf-8?B?Nmk0YldhOTN4MTZFdkF0YjBzeEdVK0pLM29xUFJndGgwWEI1ekhsUURBd1lO?=
+ =?utf-8?B?V0d5ZnVGYzBGbm5oREJhUmpWSERldUw1SXhpeEtaVldOWW03QnFkYzU2d0FN?=
+ =?utf-8?Q?dPZWPXQHhpXRv/CDLwwiAvLW7?=
 X-OriginatorOrg: Nvidia.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 57aae9b3-c01c-4461-7850-08dd87f4a426
+X-MS-Exchange-CrossTenant-Network-Message-Id: 3942021e-6b3f-45eb-fac0-08dd8838a8dd
 X-MS-Exchange-CrossTenant-AuthSource: PH7PR12MB8056.namprd12.prod.outlook.com
 X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 30 Apr 2025 14:38:15.4878 (UTC)
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 30 Apr 2025 22:45:09.3024 (UTC)
 X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
 X-MS-Exchange-CrossTenant-Id: 43083d15-7273-40c1-b7db-39efd9ccc17a
 X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: eqoO/WfMwIdIt3heex2MLOh75FHwsHjt/TvWS/IwyUmQ/MBTKuMisH0tCwPh0BKarZACgnMM6xfDCfFCeWq+sQ==
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: DM4PR12MB7527
+X-MS-Exchange-CrossTenant-UserPrincipalName: mQjXutQakuZcA3cGkPyN+pU/NyN9QiIjT3CBV9xWgZtaDUz7XzP7+DXPBy8Rw4Waq/bJGa07+pDb+wavR1xAeg==
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: DM4PR12MB7528
 X-Mailman-Approved-At: Mon, 06 Oct 2025 20:46:16 +0000
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
@@ -180,360 +179,156 @@ Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
 
 
-On 4/30/2025 9:25 AM, Alexandre Courbot wrote:
-> Hi Danilo,
-> 
-> On Tue Apr 22, 2025 at 11:44 PM JST, Danilo Krummrich wrote:
->> This patch could probably split up a bit, to make it more pleasant to review. :)
-> 
-> Probably yes. I thought since it is mostly new files, splitting up
-> wouldn't change much. Let me see what I can do.
-> 
->>
->> On Sun, Apr 20, 2025 at 09:19:43PM +0900, Alexandre Courbot wrote:
+On 4/29/2025 8:48 AM, Alexandre Courbot wrote:
+> On Tue Apr 22, 2025 at 8:36 PM JST, Danilo Krummrich wrote:
+>> On Sun, Apr 20, 2025 at 09:19:40PM +0900, Alexandre Courbot wrote:
+>>> Upon reset, the GPU executes the GFW_BOOT firmware in order to
+>>> initialize its base parameters such as clocks. The driver must ensure
+>>> that this step is completed before using the hardware.
 >>>
->>> +#[repr(u8)]
->>> +#[derive(Debug, Default, Copy, Clone)]
->>> +pub(crate) enum FalconSecurityModel {
->>> +    #[default]
->>> +    None = 0,
->>> +    Light = 2,
->>> +    Heavy = 3,
->>> +}
->>
->> Please add an explanation for the different security modules. Where are the
->> differences?
->>
->> I think most of the structures, registers, abbreviations, etc. introduced in
->> this patch need some documentation.
-> 
-> I've documented things a bit better for the next revision.
-> 
->>
->> Please see https://docs.kernel.org/gpu/nova/guidelines.html#documentation.
->>
->>> +
->>> +impl TryFrom<u32> for FalconSecurityModel {
->>> +    type Error = Error;
->>> +
->>> +    fn try_from(value: u32) -> core::result::Result<Self, Self::Error> {
->>> +        use FalconSecurityModel::*;
->>> +
->>> +        let sec_model = match value {
->>> +            0 => None,
->>> +            2 => Light,
->>> +            3 => Heavy,
->>> +            _ => return Err(EINVAL),
->>> +        };
->>> +
->>> +        Ok(sec_model)
->>> +    }
->>> +}
->>> +
->>> +#[repr(u8)]
->>> +#[derive(Debug, Default, Copy, Clone, PartialEq, Eq, PartialOrd, Ord)]
->>> +pub(crate) enum FalconCoreRevSubversion {
->>> +    #[default]
->>> +    Subversion0 = 0,
->>> +    Subversion1 = 1,
->>> +    Subversion2 = 2,
->>> +    Subversion3 = 3,
->>> +}
->>> +
->>> +impl From<u32> for FalconCoreRevSubversion {
->>> +    fn from(value: u32) -> Self {
->>> +        use FalconCoreRevSubversion::*;
->>> +
->>> +        match value & 0b11 {
->>> +            0 => Subversion0,
->>> +            1 => Subversion1,
->>> +            2 => Subversion2,
->>> +            3 => Subversion3,
->>> +            // SAFETY: the `0b11` mask limits the possible values to `0..=3`.
->>> +            4..=u32::MAX => unsafe { unreachable_unchecked() },
->>> +        }
->>
->> FalconCoreRev uses TryFrom to avoid unsafe code, I think FalconCoreRevSubversion
->> should do the same thing.
-> 
-> Since the field from which `FalconCoreRevSubversion` is built is only 2
-> bits, I thought we could avoid using `TryFrom` since we are effectively
-> covering all possible values (I wish Rust has n-bit integer types :)).
-> But yeah I have probably overthought that, and that unsafe block is
-> unsightly. Converted to `TryFrom`.
-> 
->>
->>> +/// Trait defining the parameters of a given Falcon instance.
->>> +pub(crate) trait FalconEngine: Sync {
->>> +    /// Base I/O address for the falcon, relative from which its registers are accessed.
->>> +    const BASE: usize;
->>> +}
->>> +
->>> +/// Represents a portion of the firmware to be loaded into a particular memory (e.g. IMEM or DMEM).
->>> +#[derive(Debug)]
->>> +pub(crate) struct FalconLoadTarget {
->>> +    /// Offset from the start of the source object to copy from.
->>> +    pub(crate) src_start: u32,
->>> +    /// Offset from the start of the destination memory to copy into.
->>> +    pub(crate) dst_start: u32,
->>> +    /// Number of bytes to copy.
->>> +    pub(crate) len: u32,
->>> +}
->>> +
->>> +#[derive(Debug)]
->>> +pub(crate) struct FalconBromParams {
->>> +    pub(crate) pkc_data_offset: u32,
->>> +    pub(crate) engine_id_mask: u16,
->>> +    pub(crate) ucode_id: u8,
->>> +}
->>> +
->>> +pub(crate) trait FalconFirmware {
->>> +    type Target: FalconEngine;
->>> +
->>> +    /// Returns the DMA handle of the object containing the firmware.
->>> +    fn dma_handle(&self) -> bindings::dma_addr_t;
->>> +
->>> +    /// Returns the load parameters for `IMEM`.
->>> +    fn imem_load(&self) -> FalconLoadTarget;
->>> +
->>> +    /// Returns the load parameters for `DMEM`.
->>> +    fn dmem_load(&self) -> FalconLoadTarget;
->>> +
->>> +    /// Returns the parameters to write into the BROM registers.
->>> +    fn brom_params(&self) -> FalconBromParams;
->>> +
->>> +    /// Returns the start address of the firmware.
->>> +    fn boot_addr(&self) -> u32;
->>> +}
->>> +
->>> +/// Contains the base parameters common to all Falcon instances.
->>> +pub(crate) struct Falcon<E: FalconEngine> {
->>> +    pub hal: Arc<dyn FalconHal<E>>,
->>
->> This should probably be private and instead should be exposed via Deref.
-> 
-> Agreed - actually not all the HAL is supposed to be exposed, so I've
-> added a proxy method for the only method that needs to be called from
-> outside this module.
-> 
->>
->> Also, please see my comment at create_falcon_hal() regarding the dynamic
->> dispatch.
->>
->>> +}
->>> +
->>> +impl<E: FalconEngine + 'static> Falcon<E> {
->>> +    pub(crate) fn new(
->>> +        pdev: &pci::Device,
->>> +        chipset: Chipset,
->>> +        bar: &Devres<Bar0>,
->>> +        need_riscv: bool,
->>> +    ) -> Result<Self> {
->>> +        let hwcfg1 = with_bar!(bar, |b| regs::FalconHwcfg1::read(b, E::BASE))?;
->>> +        // Ensure that the revision and security model contain valid values.
->>> +        let _rev = hwcfg1.core_rev()?;
->>> +        let _sec_model = hwcfg1.security_model()?;
->>> +
->>> +        if need_riscv {
->>> +            let hwcfg2 = with_bar!(bar, |b| regs::FalconHwcfg2::read(b, E::BASE))?;
->>> +            if !hwcfg2.riscv() {
->>> +                dev_err!(
->>> +                    pdev.as_ref(),
->>> +                    "riscv support requested on falcon that does not support it\n"
->>> +                );
->>> +                return Err(EINVAL);
->>> +            }
->>> +        }
->>> +
->>> +        Ok(Self {
->>> +            hal: hal::create_falcon_hal(chipset)?,
->>
->> I'd prefer to move the contents of create_falcon_hal() into this constructor.
-> 
-> I think it is actually beneficial to have this in a dedicated method:
-> that way the individual HAL constructors do not need to be visible to
-> the `falcon` module and can be contained in the `hal` sub-module, which
-> I think helps keeping things at their place. Is there a good reason to
-> prefer doing it here?
-> 
-> Ah, maybe you are thinking that we are returning a Boxed HAL because we
-> are going through this function? It's actually on purpose - see below.
-> 
->>> +pub(crate) struct Gsp;
->>> +impl FalconEngine for Gsp {
->>> +    const BASE: usize = 0x00110000;
->>> +}
->>> +
->>> +pub(crate) type GspFalcon = Falcon<Gsp>;
->>
->> Please drop this type alias, Falcon<Gsp> seems simple enough and is much more
->> obvious IMHO.
-> 
-> Yeah, I wanted to avoid having to import two symbols into the gpu
-> module, but I've probably been overthinking it again.
-> 
->>
->>> +
->>> +impl Falcon<Gsp> {
->>> +    /// Clears the SWGEN0 bit in the Falcon's IRQ status clear register to
->>> +    /// allow GSP to signal CPU for processing new messages in message queue.
->>> +    pub(crate) fn clear_swgen0_intr(&self, bar: &Devres<Bar0>) -> Result<()> {
->>> +        with_bar!(bar, |b| regs::FalconIrqsclr::default()
->>> +            .set_swgen0(true)
->>> +            .write(b, Gsp::BASE))
->>> +    }
->>> +}
->>> diff --git a/drivers/gpu/nova-core/falcon/hal.rs b/drivers/gpu/nova-core/falcon/hal.rs
+>>> Signed-off-by: Alexandre Courbot <acourbot@nvidia.com>
+>>> ---
+>>>  drivers/gpu/nova-core/devinit.rs   | 40 ++++++++++++++++++++++++++++++++++++++
+>>>  drivers/gpu/nova-core/driver.rs    |  2 +-
+>>>  drivers/gpu/nova-core/gpu.rs       |  5 +++++
+>>>  drivers/gpu/nova-core/nova_core.rs |  1 +
+>>>  drivers/gpu/nova-core/regs.rs      | 11 +++++++++++
+>>>  5 files changed, 58 insertions(+), 1 deletion(-)
+>>>
+>>> diff --git a/drivers/gpu/nova-core/devinit.rs b/drivers/gpu/nova-core/devinit.rs
 >>> new file mode 100644
->>> index 0000000000000000000000000000000000000000..5ebf4e88f1f25a13cf47859a53507be53e795d34
+>>> index 0000000000000000000000000000000000000000..ee5685aff845aa97d6b0fbe9528df9a7ba274b2c
 >>> --- /dev/null
->>> +++ b/drivers/gpu/nova-core/falcon/hal.rs
->>> @@ -0,0 +1,54 @@
+>>> +++ b/drivers/gpu/nova-core/devinit.rs
+>>> @@ -0,0 +1,40 @@
 >>> +// SPDX-License-Identifier: GPL-2.0
 >>> +
+>>> +//! Methods for device initialization.
+>>> +
+>>> +use kernel::bindings;
 >>> +use kernel::devres::Devres;
 >>> +use kernel::prelude::*;
->>> +use kernel::sync::Arc;
 >>> +
 >>> +use crate::driver::Bar0;
->>> +use crate::falcon::{FalconBromParams, FalconEngine};
->>> +use crate::gpu::Chipset;
->>> +use crate::timer::Timer;
+>>> +use crate::regs;
 >>> +
->>> +mod ga102;
->>> +
->>> +/// Hardware Abstraction Layer for Falcon cores.
+>>> +/// Wait for devinit FW completion.
 >>> +///
->>> +/// Implements chipset-specific low-level operations. The trait is generic against [`FalconEngine`]
->>> +/// so its `BASE` parameter can be used in order to avoid runtime bound checks when accessing
->>> +/// registers.
->>> +pub(crate) trait FalconHal<E: FalconEngine>: Sync {
->>> +    // Activates the Falcon core if the engine is a risvc/falcon dual engine.
->>> +    fn select_core(&self, _bar: &Devres<Bar0>, _timer: &Timer) -> Result<()> {
->>> +        Ok(())
+>>> +/// Upon reset, the GPU runs some firmware code to setup its core parameters. Most of the GPU is
+>>> +/// considered unusable until this step is completed, so it must be waited on very early during
+>>> +/// driver initialization.
+>>> +pub(crate) fn wait_gfw_boot_completion(bar: &Devres<Bar0>) -> Result<()> {
+>>> +    let mut timeout = 2000;
+>>> +
+>>> +    loop {
+>>> +        let gfw_booted = with_bar!(
+>>> +            bar,
+>>> +            |b| regs::Pgc6AonSecureScratchGroup05PrivLevelMask::read(b)
+>>> +                .read_protection_level0_enabled()
+>>> +                && (regs::Pgc6AonSecureScratchGroup05::read(b).value() & 0xff) == 0xff
+>>> +        )?;
+>>> +
+>>> +        if gfw_booted {
+>>> +            return Ok(());
+>>> +        }
+>>> +
+>>> +        if timeout == 0 {
+>>> +            return Err(ETIMEDOUT);
+>>> +        }
+>>> +        timeout -= 1;
+>>> +
+>>> +        // SAFETY: msleep should be safe to call with any parameter.
+>>> +        unsafe { bindings::msleep(2) };
+>>
+>> I assume this goes away with [1]? Can we please add a corresponding TODO? Also,
+>> do you mind preparing the follow-up patches for cases like this (there's also
+>> the transmute one), such that we can apply them, once the dependencies did land
+>> and such that we can verify that they suit our needs?
+>>
+>> [1] https://lore.kernel.org/lkml/20250220070611.214262-8-fujita.tomonori@gmail.com/
+> 
+> Good idea. Added the TODO item with a link to the patch.
+> 
+>>
 >>> +    }
->>> +
->>> +    fn get_signature_reg_fuse_version(
->>> +        &self,
->>> +        bar: &Devres<Bar0>,
->>> +        engine_id_mask: u16,
->>> +        ucode_id: u8,
->>> +    ) -> Result<u32>;
->>> +
->>> +    // Program the BROM registers prior to starting a secure firmware.
->>> +    fn program_brom(&self, bar: &Devres<Bar0>, params: &FalconBromParams) -> Result<()>;
 >>> +}
+>>> diff --git a/drivers/gpu/nova-core/driver.rs b/drivers/gpu/nova-core/driver.rs
+>>> index a08fb6599267a960f0e07b6efd0e3b6cdc296aa4..752ba4b0fcfe8d835d366570bb2f807840a196da 100644
+>>> --- a/drivers/gpu/nova-core/driver.rs
+>>> +++ b/drivers/gpu/nova-core/driver.rs
+>>> @@ -10,7 +10,7 @@ pub(crate) struct NovaCore {
+>>>      pub(crate) gpu: Gpu,
+>>>  }
+>>>  
+>>> -const BAR0_SIZE: usize = 8;
+>>> +const BAR0_SIZE: usize = 0x1000000;
+>>>  pub(crate) type Bar0 = pci::Bar<BAR0_SIZE>;
+>>>  
+>>>  kernel::pci_device_table!(
+>>> diff --git a/drivers/gpu/nova-core/gpu.rs b/drivers/gpu/nova-core/gpu.rs
+>>> index 866c5992b9eb27735975bb4948e522bc01fadaa2..1f7799692a0ab042f2540e01414f5ca347ae9ecc 100644
+>>> --- a/drivers/gpu/nova-core/gpu.rs
+>>> +++ b/drivers/gpu/nova-core/gpu.rs
+>>> @@ -2,6 +2,7 @@
+>>>  
+>>>  use kernel::{device, devres::Devres, error::code::*, pci, prelude::*};
+>>>  
+>>> +use crate::devinit;
+>>>  use crate::driver::Bar0;
+>>>  use crate::firmware::Firmware;
+>>>  use crate::regs;
+>>> @@ -168,6 +169,10 @@ pub(crate) fn new(
+>>>              spec.revision
+>>>          );
+>>>  
+>>> +        // We must wait for GFW_BOOT completion before doing any significant setup on the GPU.
+>>> +        devinit::wait_gfw_boot_completion(&bar)
+>>> +            .inspect_err(|_| pr_err!("GFW boot did not complete"))?;
 >>> +
->>> +/// Returns a boxed falcon HAL adequate for the passed `chipset`.
->>> +///
->>> +/// We use this function and a heap-allocated trait object instead of statically defined trait
->>> +/// objects because of the two-dimensional (Chipset, Engine) lookup required to return the
->>> +/// requested HAL.
+>>>          Ok(pin_init!(Self { spec, bar, fw }))
+>>>      }
+>>>  }
+>>> diff --git a/drivers/gpu/nova-core/nova_core.rs b/drivers/gpu/nova-core/nova_core.rs
+>>> index 0eecd612e34efc046dad852e6239de6ffa5fdd62..878161e060f54da7738c656f6098936a62dcaa93 100644
+>>> --- a/drivers/gpu/nova-core/nova_core.rs
+>>> +++ b/drivers/gpu/nova-core/nova_core.rs
+>>> @@ -20,6 +20,7 @@ macro_rules! with_bar {
+>>>      }
+>>>  }
+>>>  
+>>> +mod devinit;
+>>>  mod driver;
+>>>  mod firmware;
+>>>  mod gpu;
+>>> diff --git a/drivers/gpu/nova-core/regs.rs b/drivers/gpu/nova-core/regs.rs
+>>> index e315a3011660df7f18c0a3e0582b5845545b36e2..fd7096f0ddd4af90114dd1119d9715d2cd3aa2ac 100644
+>>> --- a/drivers/gpu/nova-core/regs.rs
+>>> +++ b/drivers/gpu/nova-core/regs.rs
+>>> @@ -13,3 +13,14 @@
+>>>      7:4     major_rev => as u8, "major revision of the chip";
+>>>      28:20   chipset => try_into Chipset, "chipset model"
+>>>  );
+>>> +
+>>> +/* GC6 */
+>>> +
+>>> +register!(Pgc6AonSecureScratchGroup05PrivLevelMask@0x00118128;
+>>> +    0:0     read_protection_level0_enabled => as_bit bool
+>>> +);
+>>> +
+>>> +/* TODO: This is an array of registers. */
+>>> +register!(Pgc6AonSecureScratchGroup05@0x00118234;
+>>> +    31:0    value => as u32
+>>> +);
 >>
->> Do we really need the dynamic dispatch? AFAICS, there's only E::BASE that is
->> relevant to FalconHal impls?
->>
->> Can't we do something like I do in the following example [1]?
->>
->> ```
->> use std::marker::PhantomData;
->> use std::ops::Deref;
->>
->> trait Engine {
->>     const BASE: u32;
->> }
->>
->> trait Hal<E: Engine> {
->>     fn access(&self);
->> }
->>
->> struct Gsp;
->>
->> impl Engine for Gsp {
->>     const BASE: u32 = 0x1;
->> }
->>
->> struct Sec2;
->>
->> impl Engine for Sec2 {
->>     const BASE: u32 = 0x2;
->> }
->>
->> struct GA100<E: Engine>(PhantomData<E>);
->>
->> impl<E: Engine> Hal<E> for GA100<E> {
->>     fn access(&self) {
->>         println!("Base: {}", E::BASE);
->>     }
->> }
->>
->> impl<E: Engine> GA100<E> {
->>     fn new() -> Self {
->>         Self(PhantomData)
->>     }
->> }
->>
->> //struct Falcon<E: Engine>(GA100<E>);
->>
->> struct Falcon<H: Hal<E>, E: Engine>(H, PhantomData<E>);
->>
->> impl<H: Hal<E>, E: Engine> Falcon<H, E> {
->>     fn new(hal: H) -> Self {
->>         Self(hal, PhantomData)
->>     }
->> }
->>
->> impl<H: Hal<E>, E: Engine> Deref for Falcon<H, E> {
->>     type Target = H;
->>
->>     fn deref(&self) -> &Self::Target {
->>         &self.0
->>     }
->> }
->>
->> fn main() {
->>     let gsp = Falcon::new(GA100::<Gsp>::new());
->>     let sec2 = Falcon::new(GA100::<Sec2>::new());
->>
->>     gsp.access();
->>     sec2.access();
->> }
->> ```
->>
->> [1] https://play.rust-lang.org/?version=stable&mode=debug&edition=2024&gist=bf7035a07e79a4047fb6834eac03a9f2
+>> Please also document new register definitions.
 > 
-> So are you have noticed there are two dimensions from which the falcons
-> can be instantiated:
+> Thankfully Joel's documentation patches take care of this!
 > 
-> - The engine, which determines its register BASE,
-> - The HAL, which is determined by the chipset.
-> 
-> For the engine, I want to keep things static for the main reason that if
-> BASE was dynamic, we would have to do all our IO using
-> try_read()/try_write() and check for an out-of-bounds error at each
-> register access. The cost of monomorphization is limited as there are
-> only a handful of engines.
-> 
-> But the HAL introduces a second dimension to this, and if we support N
-> engines then the amount of monomorphized code would then increase by N
-> for each new HAL we add. Chipsets are released at a good cadence, so
-> this is the dimension that risks growing the most.
-> 
-> It is also the one that makes use of methods to abstract things (vs.
-> fixed parameters), so it is a natural candidate for using virtual
-> methods. I am not a fan of having ever-growing boilerplate match
-> statements for each method that needs to be abstracted, especially since
-> this is that virtual methods do without requiring extra code, and for a
-> runtime penalty that is completely negligible in our context and IMHO
-> completely balanced by the smaller binary size that results from their
-> use.
-Adding to what Alex said, note that the runtime cost is still there even without
-using dyn. Because at runtime, the match conditionals need to route function
-calls to the right place. I am just not seeing the benefits of not using dyn for
-this use case and only drawbacks. IMHO, we should try to not be doing the
-compiler's job.
+Yes, my doc tree (now 8 patches) includes documenting these! Considering the
+register renaming stuff it may conflict, but I'll fix that up. :)
 
-Maybe the only benefit is you don't need an Arc or Kbox wrapper?
+thanks,
 
  - Joel
+
 
