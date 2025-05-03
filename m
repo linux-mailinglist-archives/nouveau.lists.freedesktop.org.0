@@ -2,48 +2,48 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id 60CF2BBF3D0
-	for <lists+nouveau@lfdr.de>; Mon, 06 Oct 2025 22:46:37 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id D21B0BBF3C4
+	for <lists+nouveau@lfdr.de>; Mon, 06 Oct 2025 22:46:34 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id B900410E473;
+	by gabe.freedesktop.org (Postfix) with ESMTP id 6A01C10E46E;
 	Mon,  6 Oct 2025 20:46:23 +0000 (UTC)
 Authentication-Results: gabe.freedesktop.org;
-	dkim=pass (2048-bit key; unprotected) header.d=Nvidia.com header.i=@Nvidia.com header.b="U6mgtz64";
+	dkim=pass (2048-bit key; unprotected) header.d=Nvidia.com header.i=@Nvidia.com header.b="WUnvF3Al";
 	dkim-atps=neutral
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from NAM11-DM6-obe.outbound.protection.outlook.com
- (mail-dm6nam11on2058.outbound.protection.outlook.com [40.107.223.58])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 6F97110E16A;
- Fri,  2 May 2025 20:00:12 +0000 (UTC)
+Received: from NAM10-DM6-obe.outbound.protection.outlook.com
+ (mail-dm6nam10on2063.outbound.protection.outlook.com [40.107.93.63])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 56F2310E0B7;
+ Sat,  3 May 2025 03:02:30 +0000 (UTC)
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=imJVL4O6Bv6QuTDM6qVMp/1RLYROSXuxp5IVfn7A9enqjthFaYRt+i+YBTsqoFmKfLZ4xGEeF7igod1JlhJ3spRl+XGRf9rBzMeshIzMOZzFLvDm781IlLlgLNTYYo7YOud7JD5LqbojlDVxyEmVUb1hnrjqYmUCJhZkb0N8zgSnNVl+r3yMjR62+Cveeg2haCIk+w5s5XTJofsyJ7IFCyxAoLNE2OhyAaw50t1xgSXKRLQlOS4PvM6TBNLiVvWOxELRzfU4Y9OX/x5CUeoLOxIa6i9irONgupsRM4veBq8QhURWmMjrXV4Ef82DJ0D8IDQOs8cVVypGOZlpV7/GLg==
+ b=Ej64ORcQ3a6IJMV77qulpv9YXeodL+TCcvbb2rH5b6qgz7o6LyE7gYLpn1yQcBtm2XrX53H/uMcIORqcK9Zbt6zYKMbvP/mFeDVo5K5HSDTAcKWLA8LY5Je6bimutSDRB/Ko/rPJyay5ihfJh9xAiQb3tkDkSl0VxhhH5FKxd26jnz3VD3FkNoaYP7+Scznxso3n7bQbgnS61Jk0esC26uQDBIyaN8qvK+ajSowdZHcXEhzUFAZiUAWMSddYkX1pSCXXZ8F1eGNUuzvvHHY+nc3ywuSVPwDXbRo8C+i6TYLs265Y07QQP9kqxiAKIOMrRaO+8zOmLELBdfPkBlYa9A==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
  s=arcselector10001;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=BjOQWLdU5gFPJHd6HcUwefoRJ/H5PcxbWPrejgbCUEo=;
- b=AnY6o+SOWQCs39G9YTvLrkkwOznU0yy6eJu1DjKr7MHBMPHnl5E309cw1AlbxsUA45rIXbnkdhBfydscGnC9j3JqDQuTPO9KckKQrZ6lJY/6Z3TbxuNOQe51mErVVMlnHX8leuh04jvfA7Fvtrbdrn3PIWHRO6xTBacE61FoS2cvAA2+GtFYFT/mURtBXoEYUa5+aE3TvVY65yECmSJFZZeuupwDhFlfP4cUAL1TGp4xA+0bXBgl4p77tD9LcNOwtpLF3A4TOMcaG4SFk5R+DvZ6YEENCgwSvMTW/wWeFcqr0c/sb95p61O2H82UCkqjAXV0RQaIGoLBDqX8qCde2w==
+ bh=3rqlWUIOJybB9vHH8jPyXvhq0vfllN/ojE9q2iT/MtI=;
+ b=eL0GI+iT9JxdCghUbbrrP24llniqhZemQj8EklTEqmNWHzGh6QNY1nU3imn1kHUqj4ecuFGxhTETGj6PcrNSUkDjmN//jW7LVf2pZMQ0jWGxxUtOTc8UP+OvY3SYhZMBF8DFyKHR6Z6yEW6QfMVKrCqPDCozlcyrGXsLS4UsegUe06fOHChqyNogh620iFOfko8SQtlD92eyAtxUe2OU/xqS08gLVtqsU6ob8kSb1g1oMv6VjQt5Q8XmKnGX6RBnOPRS710inzB1WXiFdw2CquocT1/y/wD+lzZQduyqvyy/ETvqH806tD4TfimilG/z5hDRDGAn3BBATNa6q2/+nQ==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
  smtp.mailfrom=nvidia.com; dmarc=pass action=none header.from=nvidia.com;
  dkim=pass header.d=nvidia.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=Nvidia.com;
  s=selector2;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=BjOQWLdU5gFPJHd6HcUwefoRJ/H5PcxbWPrejgbCUEo=;
- b=U6mgtz64shXuMns565TiYb8eCAkg0tEaOiDh360yXJ1CFRs6FPYi+txl0vjf2lvFuw86IRFBRBnk8tA4UawJKZlq9ZZd0wYxEHl46R6wNoZ3ak7CZTdRGv/2nk0RsN6mHSInLHjzAuarEG9ho+Qrp6HoKrIzAvNlMGl6Hgjd87bq6OWZeDpCKu51PSu5L4SFrCprv/CnfytG+aOLqMeHZdP1KVa/hm0O65Bginp2SakMOkETuclEN+rpIUA61d/TQUlS+WcFI2m9D2FHkWRqs9V29HxyJgzu4lgrso12Jj7xb1xyra7rdfAatfYsHhrhvj0srWGwfbyjbvWcTKFBsg==
+ bh=3rqlWUIOJybB9vHH8jPyXvhq0vfllN/ojE9q2iT/MtI=;
+ b=WUnvF3AlEeg23h+cmDze82kMDn89rqyNGt0fqIkGo7rtOL8Jn5Y6Bz5Th3tgeYiI03pmV1bPIytMV+zwHmBCmWIiYbqU9E+vcODgR1ESgWWKjs9BZtgaJhGwXSAJPYyRjk3PuYpFWL0fdakfKTTs7LFfx3sdH8r8RDQMW/LD41w4vR5bLB5o+DEVlKbTs7ubT2Q9kkZvycf30vCtMBma1rooKK+KVgG4QkvBQb4R2HAqH1VfH0htGhAOehTb9bR4hmfqfkWVcxOdohBu1GChHfbD9ucTpemDfPFpyMsqlX78QztUw33/ealuvTtwKSw8UAiFX7CDISnlZEJ9s8WM/A==
 Authentication-Results: dkim=none (message not signed)
  header.d=none;dmarc=none action=none header.from=nvidia.com;
 Received: from SN7PR12MB8059.namprd12.prod.outlook.com (2603:10b6:806:32b::7)
- by BL3PR12MB6451.namprd12.prod.outlook.com (2603:10b6:208:3ba::9)
+ by BN5PR12MB9462.namprd12.prod.outlook.com (2603:10b6:408:2ac::14)
  with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.8699.20; Fri, 2 May
- 2025 20:00:03 +0000
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.8699.23; Sat, 3 May
+ 2025 03:02:24 +0000
 Received: from SN7PR12MB8059.namprd12.prod.outlook.com
  ([fe80::4ee2:654e:1fe8:4b91]) by SN7PR12MB8059.namprd12.prod.outlook.com
- ([fe80::4ee2:654e:1fe8:4b91%3]) with mapi id 15.20.8699.021; Fri, 2 May 2025
- 20:00:03 +0000
-Message-ID: <d6962ea3-282d-437c-b3cf-ce701d514558@nvidia.com>
-Date: Fri, 2 May 2025 15:59:59 -0400
+ ([fe80::4ee2:654e:1fe8:4b91%3]) with mapi id 15.20.8699.021; Sat, 3 May 2025
+ 03:02:24 +0000
+Message-ID: <112d971f-20c8-4598-86c9-6822d9c24001@nvidia.com>
+Date: Fri, 2 May 2025 23:02:20 -0400
 User-Agent: Mozilla Thunderbird
 Subject: Re: [PATCH v2 17/21] rust: num: Add an upward alignment helper for
  usize
@@ -64,106 +64,108 @@ Cc: John Hubbard <jhubbard@nvidia.com>, Ben Skeggs <bskeggs@nvidia.com>,
 References: <20250501-nova-frts-v2-0-b4a137175337@nvidia.com>
  <20250501-nova-frts-v2-17-b4a137175337@nvidia.com>
  <D9LEQ1U1PLO8.3N22GRY380ZM3@nvidia.com>
+ <d6962ea3-282d-437c-b3cf-ce701d514558@nvidia.com>
+ <D9M5K55GTN6S.1X827WU0Z50UM@nvidia.com>
 Content-Language: en-US
 From: Joel Fernandes <joelagnelf@nvidia.com>
-In-Reply-To: <D9LEQ1U1PLO8.3N22GRY380ZM3@nvidia.com>
+In-Reply-To: <D9M5K55GTN6S.1X827WU0Z50UM@nvidia.com>
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 7bit
-X-ClientProxiedBy: MN2PR16CA0046.namprd16.prod.outlook.com
- (2603:10b6:208:234::15) To SN7PR12MB8059.namprd12.prod.outlook.com
+X-ClientProxiedBy: MN2PR16CA0005.namprd16.prod.outlook.com
+ (2603:10b6:208:134::18) To SN7PR12MB8059.namprd12.prod.outlook.com
  (2603:10b6:806:32b::7)
 MIME-Version: 1.0
 X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: SN7PR12MB8059:EE_|BL3PR12MB6451:EE_
-X-MS-Office365-Filtering-Correlation-Id: 889bf129-83c9-42a2-3c83-08dd89b3ed59
+X-MS-TrafficTypeDiagnostic: SN7PR12MB8059:EE_|BN5PR12MB9462:EE_
+X-MS-Office365-Filtering-Correlation-Id: 68d305e2-3316-4718-0867-08dd89eeee07
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
 X-Microsoft-Antispam: BCL:0;
- ARA:13230040|376014|7416014|1800799024|366016|921020; 
-X-Microsoft-Antispam-Message-Info: =?utf-8?B?SkoxVnkraHB2aExhWFpuSjdma0cyVXV5MTkySTVDT0hkTytLWXIrVk9CT3VX?=
- =?utf-8?B?anlIQlRGVXhGQjh6UitDM1plcytNTGEvT29nd3JMSDJHU1VrVXExS05uL0h0?=
- =?utf-8?B?ZVpXRGxzall0Y1RubU5ieVpKV3NQTkpETTFyVGYyb1grMHFDTGQyQWhzOHB0?=
- =?utf-8?B?QzhaVDc1WGhhalZoaUtKY3RselNlelJmYzZGNGxHS1ZtRjFwRjR6YmZzc2t0?=
- =?utf-8?B?RStIWW5vNmhNRWtxajZmT0RCZVhyTjZ2TWo4UmxYMmxlcWtFM2prWUozRFVz?=
- =?utf-8?B?OTRmdmVlN0NUZFM1ajlTeG02TGdmWkRvTUxrSjRUdEZDM05ZWGs5bThaRFA2?=
- =?utf-8?B?R1Z5WDVZbW0weUNiWlY5WjUyVXRRTnJWcDA0MHdaV0ZNbzFtaUxBenN6QXBQ?=
- =?utf-8?B?MVExMGFmU2RHMjY2QVFuclphQUtTS0dZL1dyMVF0NzY2dzk0WnRBR200OWFu?=
- =?utf-8?B?VUFoWXkvc1Yxa0czajFGY1lhZGpQbWcyWDZLaDdVRG5WTlkyMWRIVEIzRjBI?=
- =?utf-8?B?WmJGNVVrcnRhZHI5OSt3b3dBVUlwZitiN1cwdTd2L3FZemhQdGR5eStNNHMw?=
- =?utf-8?B?L3BiRGE3bU9ORVB5S2Q5WEZHSlNUWm04VzhIVHNNRkM5NEVpM28ySUxOdkRz?=
- =?utf-8?B?M0J4MFlHVjY5dG5nbVNGRDRBRFVzT0E2YjA4a0VqbE9ISHNvVVhCSXdBUHRm?=
- =?utf-8?B?QTVFMDBqOFhuWWtGaldFdGptdE5uZlpjUVZ5NW9jSDByYWY5RlFucFl0QVcr?=
- =?utf-8?B?VUhOM3E5V0h0WHU4b0NQVHhvN0RYR3kwZVFGYXEvUzlqOHFCUUZ4T1F1cFZj?=
- =?utf-8?B?cnFsWUdRMVFqRTRsUnB5YmNFQzczeGQ5N0RpclF3YjU3SlBQcy9hZVVJRFlW?=
- =?utf-8?B?WkowQzFMU1VWTW14TE0vc0MwY3UvTVM1dHU4S01vUzkwQlRDNmRXWjRhZUU4?=
- =?utf-8?B?VlY4TFFyM05sZ29vTjBuOG5rSlV1QU02bkNUN25VK2EvWlM5Z1VXOHViR1Nw?=
- =?utf-8?B?UnhZeFFULzFoNzViK3o3K1pFL2xmb0xlL1k0cmNGQXozc2Qzc3hwLzJyK25o?=
- =?utf-8?B?M1FIVHpERW5YK1BwbktMZHdvVzRnYm1RZDIwZEJiSFgrYnBNbG1oU3IzMnRC?=
- =?utf-8?B?c3Q1WjUxRGxRR2pZdW4wVk9JOG9aTmxxeXNPdlpLVGszUjB5M3krc1ViN0k3?=
- =?utf-8?B?b3VkSGdnRnlIV2Z0UzlLNU94cHNmcUROdlFnclJtU013OVF3NEo4Ym9iWVY0?=
- =?utf-8?B?dlcraG0wcW1nUTJSMHpWbWNnNU1vRDFWZTY0czIwVlIvNCt3SUJuQzBZMDd5?=
- =?utf-8?B?dHN0VXZsanFNTDNGMkdrb3dzM0FQK2c3WUJ4OVhRa2R4dmprSU9JOWNTbEJX?=
- =?utf-8?B?SkdJQ1R4SUdvSkkxSHozZHZMZ1VkMjFIempVQ0dLUk5jUE1VWXBEa0pOd1pX?=
- =?utf-8?B?OXFZL3ZvbStKUDRSVEhwanVMc3ZER1FoU3Ntayt1TGx2eUFwTjZQbHp6Ynd1?=
- =?utf-8?B?a1FLdm1HSWNtL0IvRGxPM2JEYXlBSXRBOHYwcC9GOUZvRHNWRTNVZ2lQek1Y?=
- =?utf-8?B?QlhjUmIyQ3puWFNzWGtGdFVEdVRqcytPTGJRVGR1R094RWI3NFFlOFQ0N1VU?=
- =?utf-8?B?SXc2eGNvWUhNYndQM2xmUnE2b201NTIyKzROQ2RjK24rUXdBQ2NyR0ZOSmFa?=
- =?utf-8?B?Snc3ejZXNTJpeXNzcEx6bk1zNVpQd3lkMUI2bTlYK0tLMUo4d2I5bWtxYTNy?=
- =?utf-8?B?NCsrZ1RkUkpmWWNQaG5pUFc2cnBOYjJGN2JRU25PYVdramZ0R1JrcjdTL1dq?=
- =?utf-8?B?YzlJVXEwMDNESGt6cHREdGFydVc1N1Y2dnhJS2VUeHFXd3VqMkJRZjB1YVpN?=
- =?utf-8?B?NDBjRWpVZEFoL2o4L1Q0d0g2eTlmUkVSVjZwTFpBSkttR2lCQXJsL2haQldq?=
- =?utf-8?B?OG1EVFUwaTJoenpDdWVaRU5oYXU0OHhaZDRTS1hjZkJEcGpKTEN6MEF3QTNE?=
- =?utf-8?B?YzZidUR0bUpnPT0=?=
+ ARA:13230040|7416014|376014|1800799024|366016|921020; 
+X-Microsoft-Antispam-Message-Info: =?utf-8?B?UFVJZUxFOWx3OXNIY0RpYis4RElYWEZ5OFR2VVk5WmE0RmZnV3o5YzEwL290?=
+ =?utf-8?B?MTVCdC81bFVDcmF2cUIvdVZhLzJBWXE0T0RnMHR0RXZEaFVtS2lGekdwWE1K?=
+ =?utf-8?B?WFZ5NDdzckZSTEp4RGhVNGNveDYzZW9WQ24wUy9MUHJFSjFHSk9rZ1NGZ0dr?=
+ =?utf-8?B?WUlsVmFpS1VBekRndlRVajVUSi9rdENFSWJtZjk4OXY2TXdZeUdWcHlXLzRs?=
+ =?utf-8?B?MG90ZnB5TCtObUF3T0xYdkNiR2JhTlpSaXdBRWVTQit4MW4zalpIVW9HTUp5?=
+ =?utf-8?B?QjdVdzExY0V1WWVTQ1g5S2pxYjJ2ak9DRFd2NXFNbjVQQTJnWUM4VHJLZmJa?=
+ =?utf-8?B?N0x5Z2N5ZUovY0doMzVaTzFUdENPbjdtWjlyWFllMlEyWFhNZGtuRVgyOUYr?=
+ =?utf-8?B?aVNSNDNNZnZGTkR5elQ0ck5VanQwcytaNktYRng1NHBxUUk4UElyMGNUTUZt?=
+ =?utf-8?B?V2Fnbi9icENpajVRVGYvTWE5aTllR3Q1enpodGNPOUh3bzhnT2hwRG5GdXl5?=
+ =?utf-8?B?TVQ3ajZZL25ubjRNcGUwY3RuR1JqUEFhc1VuaGhlRFZhN2FOMHVIQ3l1YUk0?=
+ =?utf-8?B?ZnEyeG5LeEhOZE1NOXYvSUdIU0k2WEluTDRGVlNvdGlmVGhzby9rdDhQMEdR?=
+ =?utf-8?B?a1VLQ0V5d1hCWTBoejVHdDdRSXl4VnBzYUhKM25ud3hDV2hVV0crR3ZiWHF0?=
+ =?utf-8?B?VVNDcWJ1aU5FRHRjblV2ZTZReHo4L201VmJhM2NkQXBGVEx0NjdnT1NuU2NV?=
+ =?utf-8?B?K1RZbjlJYXVoVkJXd2ROU1JSOFlYQ3NMVnRKUUtic2NPOTY2NDhUejBHa0Ev?=
+ =?utf-8?B?c2xrUmUwSW9YRlc4N1NjRmI4alJCNWs4MVF3SXJTOElZL1dhSm9oU2dQVDdH?=
+ =?utf-8?B?SWg0NFViRkNiTFRJdnNxNGFBby9KK0wzN2pPYmc1d3pVdFpYMmlUazRCOW9U?=
+ =?utf-8?B?WUo5dG9ZdVZ4K2hSbWVtaTllMUVsV3FYcUpTY2kwZFNIV2s1OWZWSDZ0N2hw?=
+ =?utf-8?B?cUtsc3Z1WFUzdDBJUkkveXBGK2ZHcTZ5NFoxQzlxTVB0djJkL0xwSS9rb1pU?=
+ =?utf-8?B?YzcwZVM3OHNKOXliN3A1bFVRajRLNklQM2tXYVBVN2RpbTdSdDY1aUdlU1NT?=
+ =?utf-8?B?ZlZHS29uUnU2L0RhUC9haGE2T0Y4SlpuZGd1TlY5d1c3bzFnTGQxc1NMUmlk?=
+ =?utf-8?B?SDcvdVVSdy92SGMwSjBKcytuWjdGWU53REk5dnJNYk8vTXJsd2pjOGdtcmQv?=
+ =?utf-8?B?emNiWExkK200OEt2QmdKOU1MdjByajNqR296SHpYekZUaStmRVB2Y3E4alVP?=
+ =?utf-8?B?TGR3UzlBeXpac0dmNHFnSnVLL0ZXVmZGS3JubGZmK2lOdW1uY1k5eHU5dXE2?=
+ =?utf-8?B?VVdpRDZxN2tlQ3BJTEplTzF4bFJodWl4Y0ExL3ZVQzkvMWNNRVdQbHhMZkRP?=
+ =?utf-8?B?VDY5c3F3M0VOYVNVQXlieHhYZitVWlJuTXc1aVdPOENPblJqYXkydjU3cEgw?=
+ =?utf-8?B?Qjg1VXdqMlI2WHlBWEhxNmRvbzlYR3JveG1pQ0E1bFN6SGVzZHNLNThlSW9m?=
+ =?utf-8?B?K1FqNG9Sck91d05LQXBCQ1hKNDhyN3FReUZJc2R6aUI1VjBVdXg5NE15aVhV?=
+ =?utf-8?B?TDlENHdWMGRtUjgwVTF6YnVkYnAxZ3JSNkYzN1pyc0ViUU1IZ2RpdGJ0QXBK?=
+ =?utf-8?B?QzZpOVJaNCtkRHRaaGQ3dHZ2ei9iTTBXLzYrZ04yQUllOUM1UGZWbjl4TVFy?=
+ =?utf-8?B?blpUOU11alcxQzFYc3paTVI5cjM1bXpwYnZzSSsyMVhuQ3ZrbGRFSWZLR2Nq?=
+ =?utf-8?B?QzNzb3FEV2VjU0RVTjNpa3FxMXdPcFhEVVlvTEh5a092V0VpZnc3SzMwTTBw?=
+ =?utf-8?B?NmVVRnBsYUw0ckVLZjlYbEtvTEdsVVJDa2s4emJnREZCN08wdUk3RnIzcjNV?=
+ =?utf-8?B?OVA5czJiT1lva01xOHM3cUE2bXhwNTBwM21ud3U3L3JoZFhITExYMFlYZm1B?=
+ =?utf-8?B?YnVpZ1Z4VWVBPT0=?=
 X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
  IPV:NLI; SFV:NSPM; H:SN7PR12MB8059.namprd12.prod.outlook.com; PTR:; CAT:NONE;
- SFS:(13230040)(376014)(7416014)(1800799024)(366016)(921020); DIR:OUT; SFP:1101;
+ SFS:(13230040)(7416014)(376014)(1800799024)(366016)(921020); DIR:OUT; SFP:1101;
 X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?OXhHSmpaTlFGRXRmREFiQmcyNHpiRmpPV2o2aUNUbGtmUDFNZDFSWFMrMEZY?=
- =?utf-8?B?UENQYWtkSnBBcjJMdzNBUVVaeTFaNlpCMFJBY1ZaaHhoNDFyK25iSWxwdGdz?=
- =?utf-8?B?cDBLb1VjTFh2UWhCUHVCK05Ub1RERFZ5cyt3ck5kNy8zRUZudDFBay9vRkdX?=
- =?utf-8?B?ZmRBMmtiOTVtSzBIdC9yUGV6aWRmMEFZQ2svUXdQd2RJRWo1bXZIQlNXTDgv?=
- =?utf-8?B?QnUzMm1XTU5sZ2NkQWNkamdsOWg4ZUdsZ2UrQmZqTVBROG5reFZEOHg2NWlQ?=
- =?utf-8?B?UGFEV0NKVFhyN1NTNi93RGMrUnAwY05XVnBQZUhFWDR4cjVmUzBTcCsrN3kz?=
- =?utf-8?B?bklUNVZoaFpITEJTQ0dDSGt1cC9zVmRoRlVSdXlNVkVFZ09QSHFySS9vdVpi?=
- =?utf-8?B?YTBlNDZjT1A1QWN3NWxxYzMwTGZyOUFEbDJWRXJ2d3RyYk5rY3hic1hkWXV1?=
- =?utf-8?B?RktaRHVxcjhGRjYwaUdoVDNSbTFGNENqYmJRbitFV3k2V0MwM2lUNnczT09x?=
- =?utf-8?B?QUZOK2JEY3NRd2lncmcxTzFTR3BxbFpGRFZrL29nQnNMeGpna2RaUGFVVCt3?=
- =?utf-8?B?MUJkckxVR2xiTDYxeWxNc1M2TVplbEFvM3R6ZUhwNXhjMmhMQmpnTDFmT0dY?=
- =?utf-8?B?TmMyUXV1MlFub2lHNmEvUEJQTXFYZURqVmVrSGtURUp3S216NGNkMTZNYWdG?=
- =?utf-8?B?VEZvU3hUUHNIRHQyL0FaT1dHUTltNTVQdGhRaDZTaS9WWjdmV1l1RHJWcmhR?=
- =?utf-8?B?cUMvZ1RRTmcyQzlnWDZ5OVA1WDBhTHZLMmxYM25oaDdiNUtRT2laZDRwTUpl?=
- =?utf-8?B?UkxHS2NHd09WdDdmNEgyeVB0SzNma0VKWDNqUkJINXVzVmxMK3E5OCswSkhV?=
- =?utf-8?B?K3FkTXZ1SnlMQnNpaGZaQ21Fc1UyRjlHVy9zNzdoWDJyM3R0Z2dMaDJGOC9X?=
- =?utf-8?B?L0gwVVlYWnE1OEMrR1k3UC9wL0dLZzh4RlBySEtWR1VZc3hTQm85aFRFa1JO?=
- =?utf-8?B?YlhmNWQ2Z0FqTzlXeHNUb2RFaGUvSXdqbnU1ODRFamFwOG4xaExBSStiNTlr?=
- =?utf-8?B?eXlud3dSemM5K0tVTkNBVEJFbnQwMXl0QVl3aG1TbUJGRU1XeXBTQnBBQ2ZE?=
- =?utf-8?B?d0ZkZ0ovc29ERm8xZWxZeVFUUVc1YjBCeDhhWnpjUEJrQjdhRy9LbjBoS0V0?=
- =?utf-8?B?NkRYQSs1MjlSelFrZkI1SThOa25FamlCK3Fkc2dqMG1RclAreEpHZ2Q5Nmhx?=
- =?utf-8?B?d1VlbmJXMFZ0bWhGQytHZ2lTU0MrQTY3QXZ4NDFKWmZNRDZHellNNDd1YzJY?=
- =?utf-8?B?eE9QZGU2UlMwaFNHeWhRazlTa1Zzc21ZMjRNczZIV3JKWXRBeTJOYVFvU2RZ?=
- =?utf-8?B?bittZFVWSGlOK2cyTU4wLzI1MS9PYThtQXlvR0FaeHJKS0UxTG14M3JvdGcy?=
- =?utf-8?B?NjJDZXR3MmV3V04zTWdoU2tLZHQ2d2pBUUFvTDl0a1FVSGR1UU83c3dSb0lK?=
- =?utf-8?B?QkIzcmg1RzN2MzFSZ2kwWHRhOGZ4Z3g1aVR5UzZUN1AvTFhON1VUanZuTzFr?=
- =?utf-8?B?RVQvRHRQM3VGL0YraHZDc3pNSFRnNTJsemtudys0VUcrUzU1UEVTZTR1bUpK?=
- =?utf-8?B?TlAweFZWMXpENi9ReHQ4SzFQOWdRZHpNZTBsdGdnSHR5RHEzMHpFTkdoL3Bz?=
- =?utf-8?B?TFhvS01GdS91SUpCK20rZmVDeGl4c3V1cmRGcEZDaXA3Nzc0Um8rREVtcnBj?=
- =?utf-8?B?aXZTR1ZFa01oRjBMNmhZYmFXYlBQVURCeThOVU1XbjdzdzZWUWNXeGVTOHIy?=
- =?utf-8?B?VFdKbENwcDIxNUdSZFdGOUZhbEYyNGZyN3MwdVdmVDlUU0JCUFFUeGowWjAv?=
- =?utf-8?B?Q3FISWhERUFRa0NPb3JicU9EK3RlblMzTHBub3dsY1NscHhMNlhhOGZRdTlQ?=
- =?utf-8?B?aWRJSmhPZ1VPZWFmUFl3YkVZelkyeE0xb0I3TlU5OTJQTTBzeFQ5NmM0QjVR?=
- =?utf-8?B?aTdyczRWWWlpK0hiUUp1bHlPV3hEeFkrWHQweWtKSS8wbjUwK2IwWENTSktr?=
- =?utf-8?B?ZVhYWWVNT2Ywa04zazQxTHBqQVBGdTN6a0wyVmJrOWV2WndIbWlqMFRWK2xR?=
- =?utf-8?Q?UQy1lnacf8Q8Ct/hqam1IxvRF?=
+X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?ZjIzeU5kaXpodTZCTEJ4LzQ4ckxmUUJFSUt5di8zZnZNSURPSTd2RVljeTlF?=
+ =?utf-8?B?RzhkWDZQdUtuY3k0MExaN2E3QUhta2IvdFVzQWkxQkRhVytQVS9CQ2p4REVP?=
+ =?utf-8?B?bC96ZlRZTCtIUVRPRFZZcFdtQ01vUzRVM3Nqek11U1ZzU3VTd25OYy93anNE?=
+ =?utf-8?B?YnU5eXZZenc4R2JDbFJQNGV6OWtFRCtDY2JXanJtUUNxbUYzK2xxYW9KTjMz?=
+ =?utf-8?B?RlBPdFNpdWluTGVqalBTbFh6a2RUK0Q5NHBSYlhmWGZjTFoxMU03UDBaUTVz?=
+ =?utf-8?B?ejFZS1d6eUw5YXdHci94eEUzNkZoVEhZY3Q5MitlbFU5bFR6ck9ZVHJPcjRs?=
+ =?utf-8?B?QXk4b0k1YVo0RFl3b0ZmRGRWK0lSbzJER210bWNmNWw4bUZvc3RzRjNXK2Ey?=
+ =?utf-8?B?U2RuWEF5NVJRL2tYRFN3Zyt6RUhWck9pZWdQYkMwOEdWdXhWbUIxUTFJU05j?=
+ =?utf-8?B?eXNSamNuanBHL3BESUNzYXJHZ2FKRWJxMEd1ZnV0WXBjREYrWW0wRGtWSWJI?=
+ =?utf-8?B?bm00QnlUZUZPN0N6RGdCNzV3TGNlYVBoclp3cDF4RGZSV3h2RE9GN2JHdVp3?=
+ =?utf-8?B?TEI4d0FPcHRZM1RpWkJManMyWjJUV25ZVlA4UTJxc01FYjJ0Wk5sWWtPT2tu?=
+ =?utf-8?B?eWhhRzhpUTRsSHhKN3VhMDlGODdWMzVQSnFTWTBHTE5UR0M3aTZuMWhUbmYy?=
+ =?utf-8?B?bzFzNloxSXhJR3crZTZYWkpJcU8rVmpPOXRSd2ZzYktOejh1a1g3aUxMa0xX?=
+ =?utf-8?B?MHVyMHRybE1FSEJ0bGQ1eUdkcG83WlVINUxtSnZMQmJOVWZXNnhZREdyeWhZ?=
+ =?utf-8?B?L2xlZXdqV3lhd3NKTFNPdWkyZUdNVGZxeWhPcWYzVWFKZEpSMlRuTmNZdklj?=
+ =?utf-8?B?dEFjaVRBYW9uUHN4NzBQU1hjQzk2KzdqZFhJbnhoeUNQcjRTNnVoOWtnRmhL?=
+ =?utf-8?B?c0g2V3MybjUxVmwyWjJwRktscXB2R0orNGI3cm52YUhFemJjS01rSDhaNlJw?=
+ =?utf-8?B?cmJWekJFWjhVdnRBdDEvNVhTaXZRVlV6dUhKRDBpeGFRVWorZitHRzRwaWJG?=
+ =?utf-8?B?Z2cyKzdDN1pPN1pNbFVjTktPbWZkSE9vUXFrb0JBRzFwVlZyL3BwelhCNlMr?=
+ =?utf-8?B?aFZTRzdsOHN1MlE0ZzFqQ0dNQStBSGVabUpqYm1oUHFjTnlRL2JvVnJNbzh1?=
+ =?utf-8?B?N2FZQU5mdlpSU3lmcDM1T2FYcGFQd1ExblBYc3FOS3VGWXkrODhtQThwNTc5?=
+ =?utf-8?B?d1Uyb0IrUit4ejZ3TUdNbm42ckQ3ZTVEUDAxSU9kOExjN3dBMGMwRHFMS3Vl?=
+ =?utf-8?B?NG5lZGFrNlZGK3Z2aHhMT0xxQmR6V3dUcVNGV2lZNkpkT1Z4ZFp0L28yMGQz?=
+ =?utf-8?B?TlJmWVM5cHR3WXhMdXlybGFqUStNWFZhamxPWjFVNjRadVRNQVJneFNKVjc4?=
+ =?utf-8?B?S0I5QWZPdHNlcUFYVXJQNmd3b1IrZ1k2VTFuOERCcXZoRnppRnhaYjlPTFB1?=
+ =?utf-8?B?VDVTZkJQaTdsL2ZOTzMwYVlRWTZLMFV5RlJlaEZkVldGREVNZmxCd3Roc2xi?=
+ =?utf-8?B?STV1WG1kamM3R1MzdmdKQTJrNVRGcDFITzEycFVPZ0psTkJDSmZTNWlUalli?=
+ =?utf-8?B?SG1UczdGUHpidEREVGZxU0JHakVETExuQ3diZkcxTlZEUlRuUG13K3NuMmlu?=
+ =?utf-8?B?VG1LUkoxYm1zN3hDejRSbVNJMTlkSURROFJPQ2NFbXZIMktKeWNydUJkbVor?=
+ =?utf-8?B?UnZHNmkwckUvNS9wc25MVW00dHhzSENPaWZKQjVmbGVxZHhiaGxPNkhaUjgw?=
+ =?utf-8?B?ZUxQSjV6RDI3bTd6WEZnRlNFTTVxVlBPbHpGaHJuR2NlSzd4cTVkaHAxZkVk?=
+ =?utf-8?B?ejdxQUpFN0RYc2JoaUVCWkVDSzcrSFhJSkczV0svU1FucUhyd1R6am40dTRG?=
+ =?utf-8?B?VEFSSnM4WVBqbzBaODU2OWRIeHNNWVFIRmx3TjBlenpXRDFENEE3NDhuOHNn?=
+ =?utf-8?B?U25vbmk2RFdXUXRBL0Vmc3IzZVdvamZYQ0JGKzlVOHRWL1VHZjBua3JuSHN6?=
+ =?utf-8?B?SU4rc203Y3BuS05JQnU3ZytmZzFWZ2hkVENMVW9WMTh3cFdrUlJFRDBuaHNK?=
+ =?utf-8?Q?Zm0qz0qAVObEU0nJMQXqti8nK?=
 X-OriginatorOrg: Nvidia.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 889bf129-83c9-42a2-3c83-08dd89b3ed59
+X-MS-Exchange-CrossTenant-Network-Message-Id: 68d305e2-3316-4718-0867-08dd89eeee07
 X-MS-Exchange-CrossTenant-AuthSource: SN7PR12MB8059.namprd12.prod.outlook.com
 X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 02 May 2025 20:00:03.3117 (UTC)
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 03 May 2025 03:02:24.6891 (UTC)
 X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
 X-MS-Exchange-CrossTenant-Id: 43083d15-7273-40c1-b7db-39efd9ccc17a
 X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: 1SvNh0CgF5gR1D7IEI2+nyGIIgHgkyekf3VuZ5p4myoHrhvgNfWKqd+w398iP7S2KuirNf6doN7eJ+ysATb8Hw==
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: BL3PR12MB6451
+X-MS-Exchange-CrossTenant-UserPrincipalName: Dcf04SQN3Z+jaYzo/fDp6U6k5IiZottWFPcIixw4c7YLSLShLt/NUC1cPkC0CTfMtMpOIHOSKk3rHZYM0NfaBw==
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: BN5PR12MB9462
 X-Mailman-Approved-At: Mon, 06 Oct 2025 20:46:16 +0000
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
@@ -179,202 +181,94 @@ List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-Hello, Alex,
 
-On 5/2/2025 12:57 AM, Alexandre Courbot wrote:
-> On Thu May 1, 2025 at 9:58 PM JST, Alexandre Courbot wrote:
->> From: Joel Fernandes <joelagnelf@nvidia.com>
+
+On 5/2/2025 9:59 PM, Alexandre Courbot wrote:
+>> pub trait AlignUp {
+>>     fn align_up(self, alignment: Self) -> Self;
+>> }
 >>
->> This will be used in the nova-core driver where we need to upward-align
->> the image size to get to the next image in the VBIOS ROM.
+>> macro_rules! align_up_impl {
+>>     ($($t:ty),+) => {
+>>         $(
+>>             impl AlignUp for $t {
+>>                 fn align_up(self, alignment: Self) -> Self {
+>>                     (self + alignment - 1) & !(alignment - 1)
+>>                 }
+>>             }
+>>         )+
+>>     }
+>> }
 >>
->> [acourbot@nvidia.com: handled conflicts due to removal of patch creating
->> num.rs]
+>> align_up_impl!(usize, u8, u16, u32, u64, u128);
 >>
->> Signed-off-by: Joel Fernandes <joelagnelf@nvidia.com>
->> Signed-off-by: Alexandre Courbot <acourbot@nvidia.com>
->> ---
->>  rust/kernel/lib.rs |  1 +
->>  rust/kernel/num.rs | 21 +++++++++++++++++++++
->>  2 files changed, 22 insertions(+)
+>> Or, we can even combine the 2 approaches. Use macros for the "impl Alignable"
+>> and use generics on the Alignable trait.
 >>
->> diff --git a/rust/kernel/lib.rs b/rust/kernel/lib.rs
->> index ab0286857061d2de1be0279cbd2cd3490e5a48c3..be75b196aa7a29cf3eed7c902ed8fb98689bbb50 100644
->> --- a/rust/kernel/lib.rs
->> +++ b/rust/kernel/lib.rs
->> @@ -67,6 +67,7 @@
->>  pub mod miscdevice;
->>  #[cfg(CONFIG_NET)]
->>  pub mod net;
->> +pub mod num;
->>  pub mod of;
->>  pub mod page;
->>  #[cfg(CONFIG_PCI)]
->> diff --git a/rust/kernel/num.rs b/rust/kernel/num.rs
->> new file mode 100644
->> index 0000000000000000000000000000000000000000..953c6ab012601efb3c9387b4b299e22233670c4b
->> --- /dev/null
->> +++ b/rust/kernel/num.rs
->> @@ -0,0 +1,21 @@
->> +// SPDX-License-Identifier: GPL-2.0
->> +
->> +//! Numerical and binary utilities for primitive types.
->> +
->> +/// A trait providing alignment operations for `usize`.
->> +pub trait UsizeAlign {
->> +    /// Aligns `self` upwards to the nearest multiple of `align`.
->> +    fn align_up(self, align: usize) -> usize;
->> +}
+>> macro_rules! impl_alignable {
+>>     ($($t:ty),+) => {
+>>         $(
+>>             impl Alignable for $t {}
+>>         )+
+>>     };
+>> }
+>>
+>> impl_alignable!(usize, u8, u16, u32, u64, u128);
+>>
+>> pub trait AlignUp {
+>>     fn align_up(self, alignment: Self) -> Self;
+>> }
+>>
+>> impl<T> AlignUp for T
+>> where
+>>     T: Alignable,
+>> {
+>>     fn align_up(self, alignment: Self) -> Self {
+>>         let one = T::from(1u8);
+>>         (self + alignment - one) & !(alignment - one)
+>>     }
+>> }
+>>
+>> Thoughts?
+> I think that's the correct way to do it and am fully on board with this
+> approach.
 > 
-> As it turns out I will also need the same functionality for u64 in a
-> future patch. :) Could we turn this into a more generic trait? E.g:
-> 
->     /// A trait providing alignment operations for `usize`.
->     pub trait Align {
->         /// Aligns `self` upwards to the nearest multiple of `align`.
->         fn align_up(self, align: Self) -> Self;
->     }
-> 
-> That way it can be implemented for all basic types. I'd suggest having a local
-> macro that takes an arbitrary number of arguments and generates the impl blocks
-> for each of them, which would be invoked as:
-> 
->     impl_align!(i8, u8, i16, u16, ...);
+> The only thing this doesn't solve is that it doesn't provide `const`
+> functions. But maybe for that purpose we can use a single macro that
+> nicely panics at build-time should an overflow occur.
 
-I actually tried this initially before settling for the simpler solution.
+Great, thanks. I split the traits as follows and it is cleaner and works. I will
+look into the build-time overflow check and the returning of Result change on
+Monday. Let me know if any objections. I added the #[inline] and hopefully that
+gives similar benefits to const that you're seeking:
 
-We can do this in 3 ways I think, generics, macros or both.
-
-Unlike the last attempt, this time I did get generics to work. So how about this?
-
-use core::ops::{Add, Sub, BitAnd, Not};
-
-pub trait AlignUp {
-    fn align_up(self, alignment: Self) -> Self;
-}
-
-impl<T> AlignUp for T
-where
-    T: Copy
-        + Add<Output = T>
-        + Sub<Output = T>
-        + BitAnd<Output = T>
-        + Not<Output = T>
-        + From<u8>,
+use core::ops::{BitAnd, BitOr, Not, Add, Sub};
+pub trait BitOps:
+    Copy
+    + BitAnd<Output = Self>
+    + BitOr<Output = Self>
+    + Not<Output = Self>
 {
-    fn align_up(self, alignment: Self) -> Self {
-        let one = T::from(1u8);
-        (self + alignment - one) & !(alignment - one)
-    }
 }
 
-I know you must be screaming the word monomorphization, but it is clean code and
-I'm willing to see just how much code the compiler generates and does not
-requiring specifying any specific types at all!
-
-This also could be simpler if we had num_traits in r4L like userspace, because
-num_trait's PrimInt encapsulates all the needed ops.
-
-use num_traits::PrimInt;
-
-pub trait RoundUp {
-    fn round_up(self, alignment: Self) -> Self;
-}
-
-impl<T> RoundUp for T
-where
-    T: PrimInt,
-{
-    fn round_up(self, alignment: Self) -> Self {
-        (self + alignment - T::one()) & !(alignment - T::one())
-    }
-}
-
-fn main() {
-    let x: u32 = 1234;
-    let y: usize = 1234;
-
-    // Output 1536
-    println!("u32: {}", x.round_up(512));
-    println!("usize: {}", y.round_up(512));
-}
-
-For the monomorphization issues, I do wish Rust in general supported restricting
-types further so if we could say "where T is u32, usize etc." but it does not
-afaics, so maybe we can do this then?
-
-/// This bit can go into separate module if we want to call it
-/// 'num_traits' something.
-
-ppub trait Alignable:
+pub trait Unsigned:
     Copy
     + Add<Output = Self>
     + Sub<Output = Self>
-    + BitAnd<Output = Self>
-    + Not<Output = Self>
     + From<u8>
 {
 }
 
-impl Alignable for usize {}
-impl Alignable for u8 {}
-impl Alignable for u16 {}
-impl Alignable for u32 {}
-impl Alignable for u64 {}
-impl Alignable for u128 {}
-
-//////////////////////
-
-And then num.rs remains simple but restricted to those types:
-
-pub trait AlignUp {
-    fn align_up(self, alignment: Self) -> Self;
-}
-
-impl<T> AlignUp for T
-where
-    T: Alignable ,
-{
-    fn align_up(self, alignment: Self) -> Self {
-        let one = T::from(1u8);
-        (self + alignment - one) & !(alignment - one)
-    }
-}
-
-If we dislike that, we could go with the pure macro implementation as well. But
-I do like the 'num_traits' approach better, since it keeps the align_up
-implementation quite clean.
-
-pub trait AlignUp {
-    fn align_up(self, alignment: Self) -> Self;
-}
-
-macro_rules! align_up_impl {
+macro_rules! impl_unsigned_traits {
     ($($t:ty),+) => {
         $(
-            impl AlignUp for $t {
-                fn align_up(self, alignment: Self) -> Self {
-                    (self + alignment - 1) & !(alignment - 1)
-                }
-            }
-        )+
-    }
-}
-
-align_up_impl!(usize, u8, u16, u32, u64, u128);
-
-Or, we can even combine the 2 approaches. Use macros for the "impl Alignable"
-and use generics on the Alignable trait.
-
-macro_rules! impl_alignable {
-    ($($t:ty),+) => {
-        $(
-            impl Alignable for $t {}
+            impl Unsigned for $t {}
+            impl BitOps for $t {}
         )+
     };
 }
 
-impl_alignable!(usize, u8, u16, u32, u64, u128);
+impl_unsigned_traits!(usize, u8, u16, u32, u64, u128);
 
 pub trait AlignUp {
     fn align_up(self, alignment: Self) -> Self;
@@ -382,63 +276,17 @@ pub trait AlignUp {
 
 impl<T> AlignUp for T
 where
-    T: Alignable,
+    T: BitOps + Unsigned,
 {
+    #[inline]
     fn align_up(self, alignment: Self) -> Self {
         let one = T::from(1u8);
         (self + alignment - one) & !(alignment - one)
     }
 }
 
-Thoughts?
+Thanks.
 
->
->> +impl UsizeAlign for usize {
->> +    fn align_up(mut self, align: usize) -> usize {
->> +        self = (self + align - 1) & !(align - 1);
->> +        self
->> +    }
->> +}
-> 
-> Note that there is no need to mutate `self`, the body can just be:
-> 
->     (self + align - 1) & !(align - 1)
 
-Sure, that's fair enough. I am Ok with either.
 
-> 
-> This operation can trigger overflows/underflows, so I guess for safety it
-> should return a `Result` and use `checked_add` and `checked_sub`, after moving
-> `align - 1` into a local variable to avoid checking it twice.
-> 
-> There is also the interesting question of, what if `align` is not a power of 2.
-> We should probably document the fact that it is expected to be.
-
-Good idea, makes sense to return Result and also check for power-of-2.
-
-> 
->> +/// Aligns `val` upwards to the nearest multiple of `align`.
->> +pub const fn usize_align_up(val: usize, align: usize) -> usize {
->> +    (val + align - 1) & !(align - 1)
->> +}
-> 
-> Let's add a statement in the documentation saying that this exists for use in
-> `const` contexts. The `impl` version can maybe call this one directly to avoid
-> repeating the same operation twice.
-
-Sure.
-
-> Actually I'm not sure whether we want the `impl` block at all since this>
-provides the same functionality, albeit in a slightly less cosmetic way. Can
-> core R4L folks provide guidance about that?
-
-Yeah I am Ok with this as well, however as you noted it is less cosmetic.
-
-To clarify for r4l folks, Alex is asking do we add an impl on the types for
-aligning them up as done by this patch, or do we provide a bunch of helpers
-(possibly using generics or macros to keep the code clean)?
-
-thanks,
-
- - Joel
 
