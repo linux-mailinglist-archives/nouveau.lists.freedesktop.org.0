@@ -2,34 +2,34 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id 15F98AAA0A9
-	for <lists+nouveau@lfdr.de>; Tue,  6 May 2025 00:38:05 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 6F541AAA22D
+	for <lists+nouveau@lfdr.de>; Tue,  6 May 2025 00:56:16 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id BB8F310E4F0;
-	Mon,  5 May 2025 22:38:03 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 859E210E592;
+	Mon,  5 May 2025 22:56:14 +0000 (UTC)
 Authentication-Results: gabe.freedesktop.org;
-	dkim=pass (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="cmNhzzf0";
+	dkim=pass (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="f5hel6QX";
 	dkim-atps=neutral
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from sea.source.kernel.org (sea.source.kernel.org [172.234.252.31])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 1A1C410E4EE;
- Mon,  5 May 2025 22:38:02 +0000 (UTC)
+Received: from dfw.source.kernel.org (dfw.source.kernel.org [139.178.84.217])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 6D28010E592;
+ Mon,  5 May 2025 22:56:12 +0000 (UTC)
 Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by sea.source.kernel.org (Postfix) with ESMTP id 4D863450C3;
- Mon,  5 May 2025 22:37:59 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id AA3F0C4CEE4;
- Mon,  5 May 2025 22:38:00 +0000 (UTC)
+ by dfw.source.kernel.org (Postfix) with ESMTP id B4A935C5AD2;
+ Mon,  5 May 2025 22:53:54 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 68A19C4CEED;
+ Mon,  5 May 2025 22:56:10 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1746484681;
- bh=sFy+V0bk4z2DlSuJsUd5HnI9H7emle+TTChKsuH8Nsk=;
+ s=k20201202; t=1746485771;
+ bh=SlTQksXt8m44xfjDoWZQpuTcycqa3I09Ut1LCHhtKF4=;
  h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
- b=cmNhzzf0LHoWRUshjY3HlX0PRieb8n7OOHZZ50Y9ZzXQGjbgXYO7ZC7n7s1xCMA6C
- rKiYYwrudtuVucefQoGZaIGwiT7mbv2vdtNEES63Pt7YCTHdJyP0IVFV5L6sTYAyOb
- jmi1IbQAAZD7+qxa38sSCIgNukXugO3Mq0Eusj2BIcd527eIHVaSZJhE2K6I4WeSo2
- mJ/gvMGK6xiyaLoJpd008IItGgHkeXEPcw2UIcI65tfZEI9Erq4vC2UNELPrucd0Vt
- 0suJ4vZXDqGRKrZ+E8FJu0V0FqZTU0YbyEZx1pt1zUgE2RuyK8pqQQxVln1GOLApWa
- FxA6mmy/CgyqQ==
+ b=f5hel6QXgPE4a6ftDa1Viv4LdBr3QC6pSL0OI12bIQLqosgB9XX7nG1nY5Iwp32Rk
+ x98+H602RMGwbh/AH3zAwb4JnNnCI4SZ1JOxM4dkleZtkk3LPPAuniJyk0UTccmuFi
+ 3+XcrG7eD5T5yyoA2ysfIHf+2qqy+IBNJ0KeegBUn4vk9n15AVqbC5kxnamXCN27v/
+ R+xkI9oueag6RnIx6iZo0HSuI1BdxCjwcVhiUXhHILl+wePSntO1QMyvLGcFIS96vM
+ nmvWCpEdpl50gGO1/IjAqjggM8Bz99Z/r0QeJbZtzYB2O2hwP1UcIw37DNWA0Oz4ep
+ IsksP2t0e9Y5g==
 From: Sasha Levin <sashal@kernel.org>
 To: linux-kernel@vger.kernel.org,
 	stable@vger.kernel.org
@@ -37,17 +37,17 @@ Cc: Zhi Wang <zhiw@nvidia.com>, Danilo Krummrich <dakr@kernel.org>,
  Sasha Levin <sashal@kernel.org>, lyude@redhat.com, airlied@gmail.com,
  simona@ffwll.ch, ttabi@nvidia.com, dri-devel@lists.freedesktop.org,
  nouveau@lists.freedesktop.org
-Subject: [PATCH AUTOSEL 6.14 603/642] drm/nouveau: fix the broken marco
+Subject: [PATCH AUTOSEL 6.12 475/486] drm/nouveau: fix the broken marco
  GSP_MSG_MAX_SIZE
-Date: Mon,  5 May 2025 18:13:39 -0400
-Message-Id: <20250505221419.2672473-603-sashal@kernel.org>
+Date: Mon,  5 May 2025 18:39:11 -0400
+Message-Id: <20250505223922.2682012-475-sashal@kernel.org>
 X-Mailer: git-send-email 2.39.5
-In-Reply-To: <20250505221419.2672473-1-sashal@kernel.org>
-References: <20250505221419.2672473-1-sashal@kernel.org>
+In-Reply-To: <20250505223922.2682012-1-sashal@kernel.org>
+References: <20250505223922.2682012-1-sashal@kernel.org>
 MIME-Version: 1.0
 X-stable: review
 X-Patchwork-Hint: Ignore
-X-stable-base: Linux 6.14.5
+X-stable-base: Linux 6.12.26
 Content-Transfer-Encoding: 8bit
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
@@ -82,11 +82,11 @@ Signed-off-by: Sasha Levin <sashal@kernel.org>
  1 file changed, 1 insertion(+), 1 deletion(-)
 
 diff --git a/drivers/gpu/drm/nouveau/nvkm/subdev/gsp/r535.c b/drivers/gpu/drm/nouveau/nvkm/subdev/gsp/r535.c
-index 58502102926b6..bb86b6d4ca49e 100644
+index 9c83bab0a5309..fc84ca214f247 100644
 --- a/drivers/gpu/drm/nouveau/nvkm/subdev/gsp/r535.c
 +++ b/drivers/gpu/drm/nouveau/nvkm/subdev/gsp/r535.c
-@@ -61,7 +61,7 @@
- extern struct dentry *nouveau_debugfs_root;
+@@ -58,7 +58,7 @@
+ #include <linux/parser.h>
  
  #define GSP_MSG_MIN_SIZE GSP_PAGE_SIZE
 -#define GSP_MSG_MAX_SIZE GSP_PAGE_MIN_SIZE * 16
