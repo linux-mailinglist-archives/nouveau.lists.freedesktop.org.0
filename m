@@ -2,150 +2,156 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id B3D71AACAE8
-	for <lists+nouveau@lfdr.de>; Tue,  6 May 2025 18:27:20 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 1D0A0AACC16
+	for <lists+nouveau@lfdr.de>; Tue,  6 May 2025 19:18:21 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 6A93C10E267;
-	Tue,  6 May 2025 16:27:18 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id E8F7E10E029;
+	Tue,  6 May 2025 17:18:18 +0000 (UTC)
 Authentication-Results: gabe.freedesktop.org;
-	dkim=pass (2048-bit key; unprotected) header.d=Nvidia.com header.i=@Nvidia.com header.b="ufsp1Ihm";
+	dkim=pass (2048-bit key; unprotected) header.d=Nvidia.com header.i=@Nvidia.com header.b="fcASUDid";
 	dkim-atps=neutral
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from NAM12-BN8-obe.outbound.protection.outlook.com
- (mail-bn8nam12on2068.outbound.protection.outlook.com [40.107.237.68])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 567D710E267;
- Tue,  6 May 2025 16:27:17 +0000 (UTC)
+Received: from NAM10-BN7-obe.outbound.protection.outlook.com
+ (mail-bn7nam10on2043.outbound.protection.outlook.com [40.107.92.43])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 4D08D10E029
+ for <nouveau@lists.freedesktop.org>; Tue,  6 May 2025 17:18:18 +0000 (UTC)
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=Me12iBm73YtDkx69ojl+swZtuvnXiymfXFnEQJZwQH4AFP/P47o16CPst23ggOYSI6ev2UNcu2/gK52v6VdaR8is+6w4z7oOngtceXbs7M9GmppAYXk3RZoR3UE6HKaAfmZjk4mi3leLQpxPzOszOvJHcwa6qIl95Mm5SX1Td8+r9O6vu7p5yxSZtYD2mmXVKFJfQyDNxiBxQZZOEjqac3sHUiZx8ZZw3fnOl7xphyNuBJJaAKGdY/G31u+dVatktE7GpKkL6JEv8PgPma4tNednne/ox1yCYccITTL4RUjY/1rzbd44pdiFnfT9uB86ajU3OIYlUW488yC4D3j0Gg==
+ b=HNWcl3gMTPJEMwN5KP1l36GHWnWlqGNYItXQgWz9ogt0YRL8SSKPOEgRNRsTQSt6aTO3j/9G0tvepgx217r2k2i7Mv6oZrF9GDPBmtKxTbHpAq6jphA1qrOR88mY5h+OAkxKvCRvcnGdL18dSsTCG4txh+xxnLe4RofikAcIiE0hEfIdC001kLJgC30b9uM0w2kqkxGyH7463IEQdf8OF5xxsRB3XcR7j/0B6nxZU0ta16FiZiI3kR4kKWYI+CBbn9ljhOT70QbczBW49VFvHy2jzrAEEEg7RL3ddjMLpEzwxnz3cWFpS1HIqFJLeBdTlLzIXq3mmGaTpDP4R3TkVw==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
  s=arcselector10001;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=C1b8J5gx/sNG19XS1PrMEkLl+F7C/y7jZZ1W/WCfAaQ=;
- b=xOf/j5MfC/m2FBilK377goxotCl6UNs+BZ24G1U2cBFSumVRYsCU+LAphbXY0IN/+SR1by4cSJVxdlS4QxhuI0qE/cRqirYaYaiUUucPQ7vbB0dQdqLkQPt8MK7yPQHUMQ0nwHSW3l0naW7EMnAQzen88EP2+H4Iz/28dMw27YJw10yBxVVIBa9PswYE4BclIcw4YSteWPoLNFDB628AEVl3Tl+jCWtvWAxiuNhDRcGoIxNrHHF+i62O2A3LAWgVS1hMSmcKbTjVghUF8MU8obCwDSMgXv6D9Le2dE0urE8W4g/LFgjsQz3b2HtpwHW0uUDNp1G6EVvGZzZoQOK+1g==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
- 216.228.117.161) smtp.rcpttodomain=lists.freedesktop.org
- smtp.mailfrom=nvidia.com; dmarc=pass (p=reject sp=reject pct=100) action=none
- header.from=nvidia.com; dkim=none (message not signed); arc=none (0)
+ bh=rC1MlZSx0F0VCgGgc5u/Z17Z0rMsc6ege8zWbVnDPuM=;
+ b=Ir0CjKk+lRHjZvRt8qspQgnTKO99cQuQFFMxBs2QGBj58Hk0HEzqWJoaTbGlpJOtVC41hd0RSmK9MTSuTVAsNf2Vyk0NCRfxe44VfTfb1MYbspySQRQK44oeNfL78SxCDkARWTrSdnKjzm93QYnrWGJORm08FaQtstqqMCcrDKGu82DWfYwqk3iFM7htoEn+z1XL0NMnLVTWpsd7G2WyvqCN28rkAnvgOAYq9TQkeQdZUko5Oh6p10y7a/FTRlhrXvayEw6PWwYKNk/Th8ulBCoU4WUeiTMAUEg3Uv78ABXOu4RvuIQqBh7eN342JAH1ULgWAuZ8EnVPow3/wijCzg==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=nvidia.com; dmarc=pass action=none header.from=nvidia.com;
+ dkim=pass header.d=nvidia.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=Nvidia.com;
  s=selector2;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=C1b8J5gx/sNG19XS1PrMEkLl+F7C/y7jZZ1W/WCfAaQ=;
- b=ufsp1IhmA+8/dFA4ThQJpBdOd0A17u+3CSX1BtopQPt7abkJaJZD5QXeI90p57qHza59JSOa7mRGkfXIFvvztToKNPpWWy3GlsCZpfv8JAy+W+wis9rLDnc6sjAR4rf/ERHKXUPad3IU1WyPaaHDswrw+/4loIHiXQAfC4viCiugNput5Di0R0irCsuSBUpiIDPNSl2qLiLNkJbe4cvQEt2W1Zto9BSVgUeJH+11Zh92DukcPCafGlp0LI6XhBGLY42Qz6/FaTXy29Xj9n2OlUgvDM2DJHqoqu3dmS0nMmn/od9CTIJUA+XX1VrIeMg2HmcsKUtFQSrHGCQp6WyqiQ==
-Received: from BLAPR03CA0152.namprd03.prod.outlook.com (2603:10b6:208:32f::16)
- by SN7PR12MB6929.namprd12.prod.outlook.com (2603:10b6:806:263::11)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.8699.20; Tue, 6 May
- 2025 16:27:04 +0000
-Received: from BN1PEPF00004681.namprd03.prod.outlook.com
- (2603:10b6:208:32f:cafe::b4) by BLAPR03CA0152.outlook.office365.com
- (2603:10b6:208:32f::16) with Microsoft SMTP Server (version=TLS1_3,
- cipher=TLS_AES_256_GCM_SHA384) id 15.20.8699.32 via Frontend Transport; Tue,
- 6 May 2025 16:27:04 +0000
-X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 216.228.117.161)
- smtp.mailfrom=nvidia.com;
- dkim=none (message not signed)
- header.d=none;dmarc=pass action=none header.from=nvidia.com;
-Received-SPF: Pass (protection.outlook.com: domain of nvidia.com designates
- 216.228.117.161 as permitted sender) receiver=protection.outlook.com;
- client-ip=216.228.117.161; helo=mail.nvidia.com; pr=C
-Received: from mail.nvidia.com (216.228.117.161) by
- BN1PEPF00004681.mail.protection.outlook.com (10.167.243.87) with Microsoft
- SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.20.8722.18 via Frontend Transport; Tue, 6 May 2025 16:27:03 +0000
-Received: from rnnvmail202.nvidia.com (10.129.68.7) by mail.nvidia.com
- (10.129.200.67) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.1544.4; Tue, 6 May 2025
- 09:26:54 -0700
-Received: from rnnvmail205.nvidia.com (10.129.68.10) by rnnvmail202.nvidia.com
- (10.129.68.7) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.1544.14; Tue, 6 May
- 2025 09:26:46 -0700
-Received: from inno-thin-client (10.127.8.12) by mail.nvidia.com
- (10.129.68.10) with Microsoft SMTP Server id 15.2.1544.14 via Frontend
- Transport; Tue, 6 May 2025 09:26:42 -0700
-Date: Tue, 6 May 2025 19:26:41 +0300
-From: Zhi Wang <zhiw@nvidia.com>
-To: Joel Fernandes <joelagnelf@nvidia.com>
-CC: <linux-kernel@vger.kernel.org>, Danilo Krummrich <dakr@kernel.org>, "David
- Airlie" <airlied@gmail.com>, Simona Vetter <simona@ffwll.ch>, "Maarten
- Lankhorst" <maarten.lankhorst@linux.intel.com>, Maxime Ripard
- <mripard@kernel.org>, Thomas Zimmermann <tzimmermann@suse.de>, "Jonathan
- Corbet" <corbet@lwn.net>, <nouveau@lists.freedesktop.org>,
- <dri-devel@lists.freedesktop.org>, Alexandre Courbot <acourbot@nvidia.com>,
- John Hubbard <jhubbard@nvidia.com>, Shirish Baskaran <sbaskaran@nvidia.com>,
- Alistair Popple <apopple@nvidia.com>, Timur Tabi <ttabi@nvidia.com>, "Ben
- Skeggs" <bskeggs@nvidia.com>, <rust-for-linux@vger.kernel.org>,
- <linux-doc@vger.kernel.org>
-Subject: Re: [PATCH v2 4/7] nova-core: docs: Document fwsec operation and
- layout
-Message-ID: <20250506192641.7872cbd0@inno-thin-client>
-In-Reply-To: <20250503040802.1411285-5-joelagnelf@nvidia.com>
-References: <20250503040802.1411285-1-joelagnelf@nvidia.com>
- <20250503040802.1411285-5-joelagnelf@nvidia.com>
-Organization: NVIDIA
-X-Mailer: Claws Mail 4.0.0 (GTK+ 3.24.33; x86_64-pc-linux-gnu)
+ bh=rC1MlZSx0F0VCgGgc5u/Z17Z0rMsc6ege8zWbVnDPuM=;
+ b=fcASUDidZyh+aCVF9667W/s/0WXvy3/qKUAeF55w6J1E3yjHXxWaMgdl2MqcMD+o0W/nvRuztD7MW9NnDALdFNWSalbv2gWz9tFfCwTVwXhI02UuclLT+GQGRVjEuYKsmk1ICBfAbxgYzwo94bg6OSwAnczeY2+wmc1FwPDlqIMeXNnLkK2rMoqyhn2PtHlIyiaI5uTiN6hL8xBo/0bbkvcS8fl6njT3OWo5Ubxy4jRfqsIzOrABqGlpC7c2b7wH2xpXwcB9mXgNkV80diXGYG6+HokkpAlEw6MPqbCFTwZyaYS5QQdm300f0jQ4/Z0eyV9Ne+LKM/cpjEf26jBBGg==
+Received: from CY5PR12MB6526.namprd12.prod.outlook.com (2603:10b6:930:31::20)
+ by DM4PR12MB6375.namprd12.prod.outlook.com (2603:10b6:8:a2::18) with
+ Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.8699.23; Tue, 6 May
+ 2025 17:18:04 +0000
+Received: from CY5PR12MB6526.namprd12.prod.outlook.com
+ ([fe80::e420:4e37:166:9c56]) by CY5PR12MB6526.namprd12.prod.outlook.com
+ ([fe80::e420:4e37:166:9c56%5]) with mapi id 15.20.8678.028; Tue, 6 May 2025
+ 17:18:04 +0000
+From: Timur Tabi <ttabi@nvidia.com>
+To: "nouveau@lists.freedesktop.org" <nouveau@lists.freedesktop.org>, Ben
+ Skeggs <bskeggs@nvidia.com>
+Subject: Re: [PATCH 52/60] drm/nouveau: add support for GH100
+Thread-Topic: [PATCH 52/60] drm/nouveau: add support for GH100
+Thread-Index: AQHbuWA1/0hz3ys/+UKGRgVa+2r/tbPF4uWA
+Date: Tue, 6 May 2025 17:18:04 +0000
+Message-ID: <fc998d5fe1dcf4d7e3acbe4f5f232954201927a7.camel@nvidia.com>
+References: <20250429233929.24363-1-bskeggs@nvidia.com>
+ <20250429233929.24363-53-bskeggs@nvidia.com>
+In-Reply-To: <20250429233929.24363-53-bskeggs@nvidia.com>
+Accept-Language: en-US
+Content-Language: en-US
+X-MS-Has-Attach: 
+X-MS-TNEF-Correlator: 
+user-agent: Evolution 3.52.3-0ubuntu1 
+authentication-results: dkim=none (message not signed)
+ header.d=none;dmarc=none action=none header.from=nvidia.com;
+x-ms-publictraffictype: Email
+x-ms-traffictypediagnostic: CY5PR12MB6526:EE_|DM4PR12MB6375:EE_
+x-ms-office365-filtering-correlation-id: 8d1dffe4-295b-48f7-8984-08dd8cc1f60c
+x-ms-exchange-senderadcheck: 1
+x-ms-exchange-antispam-relay: 0
+x-microsoft-antispam: BCL:0; ARA:13230040|366016|376014|1800799024|38070700018;
+x-microsoft-antispam-message-info: =?utf-8?B?QlNmRWd4aE1ZODlzZ0M0VWdYb2k1ZFJ0V1Blei84WXZMdExvNi9lYm1qd3M5?=
+ =?utf-8?B?N2RRQ3Fja28vZ3lsbU9qUWpZNFdsa3VMQ0xTdThkaU10aVhVcThCdGhOcW5R?=
+ =?utf-8?B?MGlaakJ1S3J0dDVMTXVtb3RyNHN5aFcyZjlLa011eVdpMk9lRmYvUFkrWXBw?=
+ =?utf-8?B?MmtaZkNWRC8wak1qbFA3NnZiajdNaldBUDVPZlo4VW5NM3ZzQWl1b0dXUXNh?=
+ =?utf-8?B?clpqK1RjZHdWTjFWSE05YVFxdFZaemZkcmQ5NmZUY1VCN3ExanhkMGZxNGU3?=
+ =?utf-8?B?QXRvemZXbXhJTnB3Wm1GdU5RVFE3WlVTT2VaZnM2SHlvOHk2WFArd2wzZ1lj?=
+ =?utf-8?B?ZzV4bENVdis1SEQ3aDdDOVMwTjZYRHFBdWwzOTVoWEQvdzkvcFdnbXJOajI2?=
+ =?utf-8?B?Njd1dHl5V2ZiQUYzSHlVMFdYcG1aVDZHQytnbnJUbDRqc1JrakJYdXlpRWxT?=
+ =?utf-8?B?UW1xSUNaZk4ybEtSRkoySzdCcklhZjc3L1NCeU1qRmFZTWlYM3Q0T1BwSVpB?=
+ =?utf-8?B?RHVJY3VkVHJsdUw2VW01ZDZtWnhUcmRDWC96VklDeVlWQzdDcTcxNHNibVFs?=
+ =?utf-8?B?Q0xLRzhtejZSbTJNMzQzZ2Z3OHpGK3A1S1dNTGUrbE03RzJZcGI3Rmt4M1p5?=
+ =?utf-8?B?dlZzVThMQVNyUkQzNHNnZTUvbjl2eUdqS2JyNjJ4MUN4TWtGNXdabVpLOFJG?=
+ =?utf-8?B?UHY5Q3Q4RWFBSldJWnVxMEtsNVdrenNEUFFOSEZUWkdIcTNRdUM4TlVVR1dH?=
+ =?utf-8?B?NDlTZVRuL2h1ZXJ1VTdrS21EanFtd2tEa3c5WWd4WnpGZ1lWUlBGN29QZzE4?=
+ =?utf-8?B?TTdKcXNvaEc2WXRJckl6SnFJbkJpby9FU0t0VlhSaS9NQlZueEp6UCt4RGxi?=
+ =?utf-8?B?cHVhd2xhMTJwdCthbnVHM3VlVXkrbjlJYUh2QU5Zd0w2VDZZRlhCUmdVSmVx?=
+ =?utf-8?B?ckVsNUtBL1I1R0N1aEUwM0FrQjN2elh3RStLTXoyaWJBeGpKSGVaM0NUTjlD?=
+ =?utf-8?B?ZzBVT2owemg4dDI2bXlEdS9penI1YjB4dFRMR0NUWndGU3hicVV1bVlUWFZa?=
+ =?utf-8?B?MGJKV216VWRQUFk2NWNwU0pWbWd1K29HT2FjeUNCa3BTU3JQRHJxMVpoVHcy?=
+ =?utf-8?B?Nlg1OWVmWSttNTFyZ2tkMUFqRlkyZ2JqckR5QVRGMGtXNFJLMmpFb2paUGFY?=
+ =?utf-8?B?R0d2MTIwSnUrS0YrKzVGOTJrOGwrSVgyeXZYY3EyZ09jS0xieC9Xb2t3WG1z?=
+ =?utf-8?B?Yk43a29jN1Z3YlRsUHRjVURBY0FhUjhLbkdkYUt0K0JmY1d2ZVhXTndiTWVw?=
+ =?utf-8?B?RHM0MjIrdnNzOG56d205a3hueGpWV0RhbDZFVVYrQnAydFM3eVArYVpZcnFr?=
+ =?utf-8?B?V2R5VmRqZjhQT0VHY1p4NmFOYmVSKzZ6elR1K3Via3VRY3gxUEVZbXdGajgw?=
+ =?utf-8?B?QlFXOWRlUUR4V2hhNmNxVW9YdjVtbzJScjg0bW83MytYMnlWeWxoQ1Yramp2?=
+ =?utf-8?B?OXVSZ0V2RlpsS3VEUERRNGoveHMxL1lnSmdQcFhMdFJQNjY1ZWF3a1VLSUtC?=
+ =?utf-8?B?VExUa2l2dUZFdHEzVnV4N0hFZUpDVkp5d2JzSUc1UjcrQXNXOGY0MU51ZlJw?=
+ =?utf-8?B?dG9VUUI4Zk1sYlROakpJdFFoeXVxMHRON0RnUEdYZkRaNFVDZmtVaUUrUzVs?=
+ =?utf-8?B?QUtmRU9HSnl3MHlLSmExTForU1BlSzZkSmVGNmNxZnB1dXo2VitvNnFWSElt?=
+ =?utf-8?B?M3dJVXB1Uy9DRkRyNVBYbDV1d01NQzVaSndmanY0UlIyQVRTSWhJN1pSQW9L?=
+ =?utf-8?B?VjJXY2pNUU9nMndqVm14RnRqdHFmWDMwck5kTktsZnVmU0tTUS9HcC9SazBT?=
+ =?utf-8?B?N1dTL0dCZUJrNEx5cnBiamxJVG9Qd3VpeGJwM2hab2FmK3ZpdnZUOWtLSWRC?=
+ =?utf-8?B?R0xralR2TmVGMFl0T2l0MHJFYzUwSWxXMkF4RzhReTU5dmkzR1FhR29xc2pl?=
+ =?utf-8?Q?+rhTkfoM3RHJakgD+5bvh/WLrFTY8k=3D?=
+x-forefront-antispam-report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
+ IPV:NLI; SFV:NSPM; H:CY5PR12MB6526.namprd12.prod.outlook.com; PTR:; CAT:NONE;
+ SFS:(13230040)(366016)(376014)(1800799024)(38070700018); DIR:OUT; SFP:1101; 
+x-ms-exchange-antispam-messagedata-chunkcount: 1
+x-ms-exchange-antispam-messagedata-0: =?utf-8?B?T3JLQmR5Uk9GUHpJZXFsd1JlM1UvNFNCYUo2YjJ1RGJpaG1tVnFCZDc0clBn?=
+ =?utf-8?B?SlczZVhFRk5Kc1BlSHZRQjJGSmxJb1FGNDhSaTVJYnhIdGdyODlmU0Rib01W?=
+ =?utf-8?B?SE5PNmFJRG5PbDZKbE95WFRIYi81Rzh6V1VVeWJqWUQrbHJCNEp0WlA2cFlU?=
+ =?utf-8?B?Z3RIcDB6WHlicVZJbEJaazMxK0lITDdaL0U3YW95eFNwM28zWVc2WktEdlVw?=
+ =?utf-8?B?RDd4dHNnRjdZZlMwQlEwbmZnRzY0YS9pcUcxakw1ekl1SW5mcURLbXpITU4w?=
+ =?utf-8?B?ZUZCV3F1ZGMwVm9sYzhMUVhOYUhBaXI5MHRDb09rVGh2aHdtdkdsSHRzRmd3?=
+ =?utf-8?B?ZFJGWFVhc0hBTlNiT0N4dUxuQ091ZkMyWTZuMkxQSlQ0TzNiUUtKK0JucFFs?=
+ =?utf-8?B?bWhLSk56dE41ODA5SlVJK0NHQUUxQWphcmVmZGZGVDZxOTRidCsxUUVRc1lz?=
+ =?utf-8?B?V1paNWRobC92ekE5cGZlRkNmMWtUNmkzaFJhNXQ0QWdBYnp2M0YxRXBRTXpW?=
+ =?utf-8?B?VjRQYXNJa1E2U0M4WWZtTnk4Y3M1SGhvNzBhbFpzcWJMK3ZRSFN0aEVtclow?=
+ =?utf-8?B?RkVvUW8zU2ViYzlPb1djUHF4T3BVQ09tbHllc3lITTZiV3BldkZkUzJaaUln?=
+ =?utf-8?B?Y3dxcVJWMEUzR1VwQVV4dGIzVDlWM0k5c0JsVC9Xc1lYeDkxd1gvazNpY2hO?=
+ =?utf-8?B?bzVDc3d4cDQzZVQyemVBZXV1WFJpcmsvRW5ZNkIwT0xWMnd3TitpTlRWOXFT?=
+ =?utf-8?B?eTYvMHZXNnB6YUxERnhEMnladFgvWkJmdVBST3hBckNyK2Nzd3grMzA3RUN2?=
+ =?utf-8?B?RkwwRVNxZ2sxUU54amRFcGZzVjRycVhpSm16QWt0WEMvdEFkZTZIc2VITEw1?=
+ =?utf-8?B?OXJFZ0J6ejByK21UK0VTYlJaYnJ0KzcrU2dteHhrL0x4T0VOOTBHbGYwSEpk?=
+ =?utf-8?B?R08vRThOQXlRcVZGYWIrY0VPTVdBcG9HbzFNNmZwcDRMVmdkTmdMc3FubWUy?=
+ =?utf-8?B?QTRVWFNVKy9YSytReG4zZnJaUGphdFd4ZnNJVFp4dnllRExDZDF5YjhpR0tG?=
+ =?utf-8?B?QVBFdXZYOGFyaUkyVEYrUW9KVmNDMi9Ob1g0V2lFKzZaR2YvVVVoNFJ6NHB0?=
+ =?utf-8?B?RWVCR3dML2liaHNtSG1rd1RYdnhRQnY1cm96UU12QjFWNTVsK25RaTFTNi9U?=
+ =?utf-8?B?NHhhUFJKRmt4Y2pqQlFZSEVKQ1ZGVmptcldwNmtpRFNyWG5TVjVlWForK0NS?=
+ =?utf-8?B?UExUWUZ3d2RUamRTbnhFWTgrdXZhS1hrU2ZkeVRiQ0d2Z1dtdHZPQVJ6alBK?=
+ =?utf-8?B?Zit1cXNzOVVrbzNHNE15eHdNQk0wVnp4WjcyNVhPQTJuTVNVK05kK1RUT1Ux?=
+ =?utf-8?B?YXk1Yng1d2g0ZFVRQ3JVU1hqVWVuRzlkczN2QW9xd1l1VnRNQkVvZmQwclZo?=
+ =?utf-8?B?a1lJMHdxeXp0cnZqUUhuSEVMRFBIRTBUSjU5WElHaEJ1OFVuby9CYWJHZEti?=
+ =?utf-8?B?L0hKMVFmOTIrNDNnVzRFdWg0U1p0UDNaczY1U29ieExjRUVGYTErVWJlOWZW?=
+ =?utf-8?B?YkZSeklzM1c2T3JMK1RHWnM0dml0cG4vMmtjSVNGZGRsUjViYitLWUhLa1B3?=
+ =?utf-8?B?N0IzbFhFeFZQeUk2eXdqd3VyY3R0R1U3ZXh2aldWMldXTm91YU0yZVVvOWda?=
+ =?utf-8?B?L21ncUYwcVgxYnRIVmZsd00xNmJUNXJ6ZGM1YytWNlQ5S0xWK1lWbTdwbEZR?=
+ =?utf-8?B?N3hZd1VIT0U1VER2RWdmMzV6K1BiNnFKSlI5dnFDVkQ0TzlsMXhWRVgxMm44?=
+ =?utf-8?B?dENiMlRsVC9oSEpoM1Z4VXNTbkpPWlA1eUFUU3RXYmRJcU9aTVZUNmZJbjdr?=
+ =?utf-8?B?ZFJ1WnJ0OEJzNE9wYkpvS0d3cWNaK1NqZXphOEVjVjFqNTlxU2E0amJ2Yytt?=
+ =?utf-8?B?VmttalpxeFdGVUtPTXlJRmpYVktCV0haRnNXQ2EvN0VpdElwRko5bVViRjhQ?=
+ =?utf-8?B?dDk0SEZCak9pbFdLdlg4T09NMmh2VzdqOGhDNUpnQi9hQU15Z0lrdHpzbTlP?=
+ =?utf-8?B?cXJ2czEwRU5jRGlleE4yanRoaWpIcnIrd1R6aklPZGlUdGVMRlNiWDhTcjAx?=
+ =?utf-8?Q?SLF771b8PiK3+8PKpVS5ielO2?=
+Content-Type: text/plain; charset="utf-8"
+Content-ID: <7C40F3966413314E97373FF41C6C21CD@namprd12.prod.outlook.com>
+Content-Transfer-Encoding: base64
 MIME-Version: 1.0
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-X-NV-OnPremToCloud: AnonymousSubmission
-X-EOPAttributedMessage: 0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: BN1PEPF00004681:EE_|SN7PR12MB6929:EE_
-X-MS-Office365-Filtering-Correlation-Id: 31866a20-ef2a-48c4-b4f0-08dd8cbad5fd
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0;
- ARA:13230040|1800799024|36860700013|7416014|376014|82310400026; 
-X-Microsoft-Antispam-Message-Info: =?utf-8?B?Z21LcnQrSXNxQm1EbTZyWnNCeHBxUDF3UER1N01hMDN5QW5TaG42bjdmRXhq?=
- =?utf-8?B?NFlkS29VdnJyRlBHWlRqc0Mzd29qd2E2eUtSbHpITWF1c3cweTcwTnA2VlRv?=
- =?utf-8?B?Qkpob1FEd2UxaUJUQnFBSFBXMnlwMHRkOHo2VU5EUUVPU2R0R3EvV1M4bFYz?=
- =?utf-8?B?TDB6aGFlek9MYTNwMlVmQkY3dXpieURoVjg1Z29Qb0c3aldwMXZ3bkNQRzR6?=
- =?utf-8?B?a2w2ZU5NLy9lUVcxbXVZa3p6eWVreUN3RThMUVhwNmtjY2FkRVNUZjc1NHZB?=
- =?utf-8?B?WFVQSVVQRENnTjc1ZGphU0xJK0d0OTZYOG5xYXdEN09IMmxYR1IzWjhvY1FK?=
- =?utf-8?B?a25PQjc2Sks1akVJSUo1bUR6czh5WkdEWHNwVE5RSFdWZGp6bTdSZWFjT0Vw?=
- =?utf-8?B?MlFxa0dMK1ordHpkYlk5MHlkbzdiYTNFT0lvUjdRVnBrMkZjTEV5MEhvZ0dM?=
- =?utf-8?B?S0dlQkZ1ZmY0Nzl0VVUzUG9iNUE1N3dGR2NzVUU0SnVObkd0Q0ZBaUs0N29L?=
- =?utf-8?B?cGpjalNmeUl5a2FEOGVvdE1Qc3BPMTJyaWxKQ0dHdnhxM2QveHhXV0s0dXFL?=
- =?utf-8?B?TlpWNG1ncmp3VzgzOGJiT3J2dUpPTU1vMFBRcnJMNHF2QkhSSEZjQjkxbEFt?=
- =?utf-8?B?V0lySm5WdDc0NU01ajVNZkNYbFZLWGgxZEFubHNmMVd6WEUwZmE0NnhEWmtV?=
- =?utf-8?B?VTBiSk9oQ1RGS0tnWXpYOFBPdkwwZUhxZFlDMFZiaHgxbWJVSWswbjlDbWE0?=
- =?utf-8?B?aE1yVkQ3alNJYVdtYllmOFBRdlBZa2Fwd1lkaEM5TnoydFdtYUFnbWxjaFVl?=
- =?utf-8?B?MUxnNFlxdmJqTHlXdCtUbXF1bFY0cU10NU5NeERFMTU4YU1XM1FXcHVrc2Jm?=
- =?utf-8?B?NHllUDZ6Ri9VTHZvSU9iZFJndmdlOWZtSzlPSzV4b1BOeEN1NmlOU05ZRGZD?=
- =?utf-8?B?N2c5U3lDRFRFemdDTUJ3a0hLT3RsRlNGMThqcXFTUDhGRVh2TnlSRTlKU0t6?=
- =?utf-8?B?ZnNELzJ5bEY4eE50MXEra2EvbUtPR2daTDc1LzF6VldOajZ6cS9VOVVKeDA1?=
- =?utf-8?B?eXMrNDFBNC82M1BMeHVFbXdkS3M1L3JQcFdPR3duWHZyc1BXUmQ3WWVlZkFl?=
- =?utf-8?B?WmdibHVHb3dzampWY2pmTjhEam5yVTIzMjJqUFFJQWllVUVCbUhNZU1KUFFt?=
- =?utf-8?B?V3Q4eW5MaFczMFhob2VYU0dnMWI5OS9tNlRsYSt3bFNBZW05dXNWWit0MkNW?=
- =?utf-8?B?cXZFNGFTNzJFdnFpeElZVDlhSCtaRURNb2JQSkN6SWlUVGVCUGV0bGtwMEFM?=
- =?utf-8?B?NFZ3UzY5Mm5OOGlYaU1tWmxsQWlCNW9RMU1UbTIxQ1kzWmdEYm1ZT054YVNZ?=
- =?utf-8?B?UGhteExLUlRVZS8vN0FrbGdYOU5pS2R2eGUwTjBFeXMwdUdHWk9PRTF4S1RI?=
- =?utf-8?B?YmZLSkVwdGQrbWkzbjJJMThYZFNvRSswaUM1RlhieWduTVB1WDNnTXpIczZC?=
- =?utf-8?B?NTlsZk9BcjIzZEVaUFBwTW02dzVoTHgyT0FlM2NGTlN5RkMzNUplczhsUk10?=
- =?utf-8?B?MTh1U3UyYzh5ak5DWTdrczIyYXJCYVpMaVd3Z1JmejBCOUEvc2ZIZjVJbXVX?=
- =?utf-8?B?bHZpcTEzZ3hNbUNlUWxRbE4rMERyQy9HamlQb2piOVZrT0EyWStTRXZ5TlF3?=
- =?utf-8?B?Z0F6K3R0aVhObVZWeTk3bHJBQ2ZjVUVsOWN1clhBWEZBVENkd2IvVTU1cVph?=
- =?utf-8?B?SW9OWi9QcXlic3BKV21ueTVaeXhWZ3M0SFEydFdtaTcyM2FFc2JJQkdFcWJQ?=
- =?utf-8?B?aWhhOUNwajNHYkNxbVVTM0Q5WmQ1RFhwcGw1UVV0NzJ6d0tJOC9mc2pybWpz?=
- =?utf-8?B?TDcxV1czWjZoUE1GZDR0UEJRR0xaTlU3RG5WS29YMDV6Y0Faand5T1J4R0JC?=
- =?utf-8?B?SVhOcWhUT2JxQXFTOFdtYXZKNWt6TjRXSDB0dXRPTHJ4UHhaNzltM1R5dmdJ?=
- =?utf-8?B?Q3ozOUlDS3B6S1NESU9hb0RaeFZXeEZmeGpQY0VkM3k2dkRodU1YMU54d2pr?=
- =?utf-8?Q?bNceT0?=
-X-Forefront-Antispam-Report: CIP:216.228.117.161; CTRY:US; LANG:en; SCL:1; SRV:;
- IPV:NLI; SFV:NSPM; H:mail.nvidia.com; PTR:dc6edge2.nvidia.com; CAT:NONE;
- SFS:(13230040)(1800799024)(36860700013)(7416014)(376014)(82310400026); DIR:OUT;
- SFP:1101; 
 X-OriginatorOrg: Nvidia.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 06 May 2025 16:27:03.6413 (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: 31866a20-ef2a-48c4-b4f0-08dd8cbad5fd
-X-MS-Exchange-CrossTenant-Id: 43083d15-7273-40c1-b7db-39efd9ccc17a
-X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=43083d15-7273-40c1-b7db-39efd9ccc17a; Ip=[216.228.117.161];
- Helo=[mail.nvidia.com]
-X-MS-Exchange-CrossTenant-AuthSource: BN1PEPF00004681.namprd03.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Anonymous
-X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: SN7PR12MB6929
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-AuthSource: CY5PR12MB6526.namprd12.prod.outlook.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: 8d1dffe4-295b-48f7-8984-08dd8cc1f60c
+X-MS-Exchange-CrossTenant-originalarrivaltime: 06 May 2025 17:18:04.0835 (UTC)
+X-MS-Exchange-CrossTenant-fromentityheader: Hosted
+X-MS-Exchange-CrossTenant-id: 43083d15-7273-40c1-b7db-39efd9ccc17a
+X-MS-Exchange-CrossTenant-mailboxtype: HOSTED
+X-MS-Exchange-CrossTenant-userprincipalname: gir+rHou0zbfUCwoHpaWNo3IwsqljG2RUMSNwvkoE9ySmj1WkdHs4LAJ/hYb8QIo1QljWs1VtjZpu5QzeRW1Yg==
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: DM4PR12MB6375
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -160,472 +166,46 @@ List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-On Sat,  3 May 2025 00:07:56 -0400
-Joel Fernandes <joelagnelf@nvidia.com> wrote:
-
-> Add explanation of fwsec with diagrams. This helps clarify how the
-> nova-core falcon boot works.
->=20
-> Signed-off-by: Joel Fernandes <joelagnelf@nvidia.com>
-> ---
->  Documentation/gpu/nova/core/fwsec.rst | 180
-> ++++++++++++++++++++++++++ Documentation/gpu/nova/index.rst      |
-> 1 + 2 files changed, 181 insertions(+)
->  create mode 100644 Documentation/gpu/nova/core/fwsec.rst
->=20
-> diff --git a/Documentation/gpu/nova/core/fwsec.rst
-> b/Documentation/gpu/nova/core/fwsec.rst new file mode 100644
-> index 000000000000..bed941ac3f2b
-> --- /dev/null
-> +++ b/Documentation/gpu/nova/core/fwsec.rst
-> @@ -0,0 +1,180 @@
-> +.. SPDX-License-Identifier: (GPL-2.0+ OR MIT)
-> +=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
-=3D
-> +FWSEC (Firmware Security)
-> +=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
-=3D
-> +This document briefly/conceptually describes the FWSEC (Firmware
-> Security) image +and its role in the GPU boot sequence. As such, this
-> information is subject to +change in the future and is only current
-> as of the Ampere GPU family. However, +hopefully the concepts
-> described will be useful for understanding the kernel code +that
-> deals with it. All the information is derived from publicly available
-> +sources such as public drivers and documentation. +
-> +The role of FWSEC to provide secure boot, it is running in
-> Heavy-secure mode. It does +firmware verification after GPU reset and
-> load various ucode images on to the other +microcontrollers on the
-> GPU such as the PMU and GSP. +
-> +FWSEC itself is an application stored in the VBIOS ROM in the FWSEC
-> partition of +ROM (see vbios.rst for more details). It contains
-> different commands like FRTS +(Firmware Runtime Services) and SB
-> (Secure Booting other microcontrollers after +reset and loading them
-> with other non-FWSEC ucode). The kernel driver only needs to +to do
-> FRTS, since SB is already already after reset by the time the kernel
-> driver +is loaded. +
-> +The FRTS command carves out the WPR2 region (Write protected region)
-> which contains +data data required for power management. Once setup,
-repetitive word "data" ^
-
-> only HS mode ucode can +access it (see falcon.rst for privilege
-> levels). +
-> +The FWSEC image is located in the VBIOS ROM in the partition of the
-> ROM that contains +various ucode images (also known as applications)
-> -- one of them being FWSEC. For how +it is extracted, see vbios.rst
-> and the vbios.rs source code. +
-> +The Falcon data for each ucode images (including the FWSEC image) is
-> a combination +of headers, data sections (DMEM) and instruction code
-> sections (IMEM). All these +ucode images are stored in the same ROM
-> partition and the PMU table is used to look +up the application to
-> load it based on its application ID (see vbios.rs). +
-> +For the purposes of nova-core driver, the FWSEC contains an
-> 'application interface' +called DMEMMAPPER which is used to the
-> "FWSEC-FRTS" command (among other commands it +is capable of
-> executing). For Ampere, FWSEC is running on the GSP in Heavy-secure
-> +mode and runs FRTS. +
-> +FWSEC Memory Layout
-> +-------------------
-> +The memory layout of the FWSEC image is as follows (this is using an
-> GA-102 +Ampere GPU as an example and could vary for future GPUs and
-> is subject to change +completely, it is just provided as an example):
-> +
-> +Here is a block diagram of the FWSEC memory layout::
-> + =E2=94=8C=E2=94=80=E2=94=80=E2=94=80=E2=94=80=E2=94=80=E2=94=80=E2=94=
-=80=E2=94=80=E2=94=80=E2=94=80=E2=94=80=E2=94=80=E2=94=80=E2=94=80=E2=94=80=
-=E2=94=80=E2=94=80=E2=94=80=E2=94=80=E2=94=80=E2=94=80=E2=94=80=E2=94=80=E2=
-=94=80=E2=94=80=E2=94=80=E2=94=80=E2=94=80=E2=94=80=E2=94=80=E2=94=80=E2=94=
-=80=E2=94=80=E2=94=80=E2=94=80=E2=94=80=E2=94=80=E2=94=80=E2=94=80=E2=94=80=
-=E2=94=80=E2=94=80=E2=94=80=E2=94=80=E2=94=80=E2=94=80=E2=94=80=E2=94=80=E2=
-=94=80=E2=94=80=E2=94=80=E2=94=80=E2=94=80=E2=94=80=E2=94=80=E2=94=80=E2=94=
-=80=E2=94=80=E2=94=80=E2=94=80=E2=94=80=E2=94=80=E2=94=80=E2=94=90
-> + =E2=94=82                         FWSEC ROM image (type 0xE0)          =
- =E2=94=82
-> + =E2=94=82                                                              =
- =E2=94=82
-> + =E2=94=82  =E2=94=8C=E2=94=80=E2=94=80=E2=94=80=E2=94=80=E2=94=80=E2=94=
-=80=E2=94=80=E2=94=80=E2=94=80=E2=94=80=E2=94=80=E2=94=80=E2=94=80=E2=94=80=
-=E2=94=80=E2=94=80=E2=94=80=E2=94=80=E2=94=80=E2=94=80=E2=94=80=E2=94=80=E2=
-=94=80=E2=94=80=E2=94=80=E2=94=80=E2=94=80=E2=94=80=E2=94=80=E2=94=80=E2=94=
-=80=E2=94=80=E2=94=80=E2=94=90                          =E2=94=82
-> + =E2=94=82  =E2=94=82     PMU Falcon Ucode Table      =E2=94=82         =
-                 =E2=94=82
-> + =E2=94=82  =E2=94=82     (PmuLookupTable)            =E2=94=82         =
-                 =E2=94=82
-> + =E2=94=82  =E2=94=82  =E2=94=8C=E2=94=80=E2=94=80=E2=94=80=E2=94=80=E2=
-=94=80=E2=94=80=E2=94=80=E2=94=80=E2=94=80=E2=94=80=E2=94=80=E2=94=80=E2=94=
-=80=E2=94=80=E2=94=80=E2=94=80=E2=94=80=E2=94=80=E2=94=80=E2=94=80=E2=94=80=
-=E2=94=80=E2=94=80=E2=94=80=E2=94=80=E2=94=90    =E2=94=82                 =
-         =E2=94=82
-> + =E2=94=82  =E2=94=82  =E2=94=82 Table Header            =E2=94=82    =
-=E2=94=82                          =E2=94=82
-> + =E2=94=82  =E2=94=82  =E2=94=82 - version: 0x01         =E2=94=82    =
-=E2=94=82                          =E2=94=82
-> + =E2=94=82  =E2=94=82  =E2=94=82 - header_size: 6        =E2=94=82    =
-=E2=94=82                          =E2=94=82
-> + =E2=94=82  =E2=94=82  =E2=94=82 - entry_size: 6         =E2=94=82    =
-=E2=94=82                          =E2=94=82
-> + =E2=94=82  =E2=94=82  =E2=94=82 - entry_count: N        =E2=94=82    =
-=E2=94=82                          =E2=94=82
-> + =E2=94=82  =E2=94=82  =E2=94=82 - desc_version:3(unused)=E2=94=82    =
-=E2=94=82                          =E2=94=82
-> + =E2=94=82  =E2=94=82  =E2=94=94=E2=94=80=E2=94=80=E2=94=80=E2=94=80=E2=
-=94=80=E2=94=80=E2=94=80=E2=94=80=E2=94=80=E2=94=80=E2=94=80=E2=94=80=E2=94=
-=80=E2=94=80=E2=94=80=E2=94=80=E2=94=80=E2=94=80=E2=94=80=E2=94=80=E2=94=80=
-=E2=94=80=E2=94=80=E2=94=80=E2=94=80=E2=94=98    =E2=94=82                 =
-         =E2=94=82
-> + =E2=94=82  =E2=94=82         ...                     =E2=94=82         =
-                 =E2=94=82
-> + =E2=94=82  =E2=94=82  =E2=94=8C=E2=94=80=E2=94=80=E2=94=80=E2=94=80=E2=
-=94=80=E2=94=80=E2=94=80=E2=94=80=E2=94=80=E2=94=80=E2=94=80=E2=94=80=E2=94=
-=80=E2=94=80=E2=94=80=E2=94=80=E2=94=80=E2=94=80=E2=94=80=E2=94=80=E2=94=80=
-=E2=94=80=E2=94=80=E2=94=80=E2=94=80=E2=94=90    =E2=94=82                 =
-         =E2=94=82
-> + =E2=94=82  =E2=94=82  =E2=94=82 Entry for FWSEC (0x85)  =E2=94=82    =
-=E2=94=82                          =E2=94=82
-> + =E2=94=82  =E2=94=82  =E2=94=82 (PmuLookupTableEntry)   =E2=94=82    =
-=E2=94=82                          =E2=94=82
-> + =E2=94=82  =E2=94=82  =E2=94=82 - app_id: 0x85 (FWSEC)  =E2=94=82 =E2=
-=94=80=E2=94=80=E2=94=80=E2=94=BC=E2=94=80=E2=94=80=E2=94=80=E2=94=80=E2=94=
-=90                     =E2=94=82
-> + =E2=94=82  =E2=94=82  =E2=94=82 - target_id: 0x01 (PMU) =E2=94=82    =
-=E2=94=82    =E2=94=82                     =E2=94=82
-> + =E2=94=82  =E2=94=82  =E2=94=82 - data: offset =E2=94=80=E2=94=80=E2=94=
-=80=E2=94=80=E2=94=80=E2=94=80=E2=94=80=E2=94=80=E2=94=80=E2=94=BC=E2=94=80=
-=E2=94=80=E2=94=80=E2=94=80=E2=94=BC=E2=94=80=E2=94=80=E2=94=80=E2=94=80=E2=
-=94=BC=E2=94=80=E2=94=80=E2=94=80=E2=94=90 look up FWSEC   =E2=94=82
-> + =E2=94=82  =E2=94=82  =E2=94=94=E2=94=80=E2=94=80=E2=94=80=E2=94=80=E2=
-=94=80=E2=94=80=E2=94=80=E2=94=80=E2=94=80=E2=94=80=E2=94=80=E2=94=80=E2=94=
-=80=E2=94=80=E2=94=80=E2=94=80=E2=94=80=E2=94=80=E2=94=80=E2=94=80=E2=94=80=
-=E2=94=80=E2=94=80=E2=94=80=E2=94=80=E2=94=98    =E2=94=82    =E2=94=82   =
-=E2=94=82 application.    =E2=94=82
-> + =E2=94=82  =E2=94=94=E2=94=80=E2=94=80=E2=94=80=E2=94=80=E2=94=80=E2=94=
-=80=E2=94=80=E2=94=80=E2=94=80=E2=94=80=E2=94=80=E2=94=80=E2=94=80=E2=94=80=
-=E2=94=80=E2=94=80=E2=94=80=E2=94=80=E2=94=80=E2=94=80=E2=94=80=E2=94=80=E2=
-=94=80=E2=94=80=E2=94=80=E2=94=80=E2=94=80=E2=94=80=E2=94=80=E2=94=80=E2=94=
-=80=E2=94=80=E2=94=80=E2=94=98    =E2=94=82   =E2=94=82                 =E2=
-=94=82
-> + =E2=94=82                                         =E2=94=82   =E2=94=82=
-                 =E2=94=82
-> + =E2=94=82                                         =E2=94=82   =E2=94=82=
-                 =E2=94=82
-> + =E2=94=82  =E2=94=8C=E2=94=80=E2=94=80=E2=94=80=E2=94=80=E2=94=80=E2=94=
-=80=E2=94=80=E2=94=80=E2=94=80=E2=94=80=E2=94=80=E2=94=80=E2=94=80=E2=94=80=
-=E2=94=80=E2=94=80=E2=94=80=E2=94=80=E2=94=80=E2=94=80=E2=94=80=E2=94=80=E2=
-=94=80=E2=94=80=E2=94=80=E2=94=80=E2=94=80=E2=94=80=E2=94=80=E2=94=80=E2=94=
-=80=E2=94=80=E2=94=80=E2=94=90    =E2=94=82   =E2=94=82                 =E2=
-=94=82
-> + =E2=94=82  =E2=94=82     FWSEC Ucode Component       =E2=94=82<=E2=94=
-=80=E2=94=80=E2=94=80=E2=94=98   =E2=94=82                 =E2=94=82
-> + =E2=94=82  =E2=94=82     (aka Falcon data)           =E2=94=82        =
-=E2=94=82                 =E2=94=82
-> + =E2=94=82  =E2=94=82  =E2=94=8C=E2=94=80=E2=94=80=E2=94=80=E2=94=80=E2=
-=94=80=E2=94=80=E2=94=80=E2=94=80=E2=94=80=E2=94=80=E2=94=80=E2=94=80=E2=94=
-=80=E2=94=80=E2=94=80=E2=94=80=E2=94=80=E2=94=80=E2=94=80=E2=94=80=E2=94=80=
-=E2=94=80=E2=94=80=E2=94=80=E2=94=80=E2=94=90    =E2=94=82        =E2=94=82=
-                 =E2=94=82
-> + =E2=94=82  =E2=94=82  =E2=94=82 FalconUCodeDescV3       =E2=94=82<=E2=
-=94=80=E2=94=80=E2=94=80=E2=94=BC=E2=94=80=E2=94=80=E2=94=80=E2=94=80=E2=94=
-=80=E2=94=80=E2=94=80=E2=94=80=E2=94=98                 =E2=94=82
-> + =E2=94=82  =E2=94=82  =E2=94=82 - hdr                   =E2=94=82    =
-=E2=94=82                          =E2=94=82
-> + =E2=94=82  =E2=94=82  =E2=94=82 - stored_size           =E2=94=82    =
-=E2=94=82                          =E2=94=82
-> + =E2=94=82  =E2=94=82  =E2=94=82 - pkc_data_offset       =E2=94=82    =
-=E2=94=82                          =E2=94=82
-> + =E2=94=82  =E2=94=82  =E2=94=82 - interface_offset =E2=94=80=E2=94=80=
-=E2=94=80=E2=94=80=E2=94=80=E2=94=BC=E2=94=80=E2=94=80=E2=94=80=E2=94=80=E2=
-=94=BC=E2=94=80=E2=94=80=E2=94=80=E2=94=80=E2=94=80=E2=94=80=E2=94=80=E2=94=
-=80=E2=94=80=E2=94=80=E2=94=80=E2=94=80=E2=94=80=E2=94=80=E2=94=80=E2=94=80=
-=E2=94=90         =E2=94=82
-> + =E2=94=82  =E2=94=82  =E2=94=82 - imem_phys_base        =E2=94=82    =
-=E2=94=82                =E2=94=82         =E2=94=82
-> + =E2=94=82  =E2=94=82  =E2=94=82 - imem_load_size        =E2=94=82    =
-=E2=94=82                =E2=94=82         =E2=94=82
-> + =E2=94=82  =E2=94=82  =E2=94=82 - imem_virt_base        =E2=94=82    =
-=E2=94=82                =E2=94=82         =E2=94=82
-> + =E2=94=82  =E2=94=82  =E2=94=82 - dmem_phys_base        =E2=94=82    =
-=E2=94=82                =E2=94=82         =E2=94=82
-> + =E2=94=82  =E2=94=82  =E2=94=82 - dmem_load_size        =E2=94=82    =
-=E2=94=82                =E2=94=82         =E2=94=82
-> + =E2=94=82  =E2=94=82  =E2=94=82 - engine_id_mask        =E2=94=82    =
-=E2=94=82                =E2=94=82         =E2=94=82
-> + =E2=94=82  =E2=94=82  =E2=94=82 - ucode_id              =E2=94=82    =
-=E2=94=82                =E2=94=82         =E2=94=82
-> + =E2=94=82  =E2=94=82  =E2=94=82 - signature_count       =E2=94=82    =
-=E2=94=82    look up sig =E2=94=82         =E2=94=82
-> + =E2=94=82  =E2=94=82  =E2=94=82 - signature_versions --------------+   =
-       =E2=94=82         =E2=94=82
-> + =E2=94=82  =E2=94=82  =E2=94=94=E2=94=80=E2=94=80=E2=94=80=E2=94=80=E2=
-=94=80=E2=94=80=E2=94=80=E2=94=80=E2=94=80=E2=94=80=E2=94=80=E2=94=80=E2=94=
-=80=E2=94=80=E2=94=80=E2=94=80=E2=94=80=E2=94=80=E2=94=80=E2=94=80=E2=94=80=
-=E2=94=80=E2=94=80=E2=94=80=E2=94=80=E2=94=98    =E2=94=82     =E2=94=82   =
-       =E2=94=82         =E2=94=82
-> + =E2=94=82  =E2=94=82         (no gap)                =E2=94=82     =E2=
-=94=82          =E2=94=82         =E2=94=82
-> + =E2=94=82  =E2=94=82  =E2=94=8C=E2=94=80=E2=94=80=E2=94=80=E2=94=80=E2=
-=94=80=E2=94=80=E2=94=80=E2=94=80=E2=94=80=E2=94=80=E2=94=80=E2=94=80=E2=94=
-=80=E2=94=80=E2=94=80=E2=94=80=E2=94=80=E2=94=80=E2=94=80=E2=94=80=E2=94=80=
-=E2=94=80=E2=94=80=E2=94=80=E2=94=80=E2=94=90    =E2=94=82     =E2=94=82   =
-       =E2=94=82         =E2=94=82
-> + =E2=94=82  =E2=94=82  =E2=94=82 Signatures Section      =E2=94=82<=E2=
-=94=80=E2=94=80=E2=94=80=E2=94=BC=E2=94=80=E2=94=80=E2=94=80=E2=94=80=E2=94=
-=80=E2=94=98          =E2=94=82         =E2=94=82
-> + =E2=94=82  =E2=94=82  =E2=94=82 (384 bytes per sig)     =E2=94=82    =
-=E2=94=82                =E2=94=82         =E2=94=82
-> + =E2=94=82  =E2=94=82  =E2=94=82 - RSA-3K Signature 1    =E2=94=82    =
-=E2=94=82                =E2=94=82         =E2=94=82
-> + =E2=94=82  =E2=94=82  =E2=94=82 - RSA-3K Signature 2    =E2=94=82    =
-=E2=94=82                =E2=94=82         =E2=94=82
-> + =E2=94=82  =E2=94=82  =E2=94=82   ...                   =E2=94=82    =
-=E2=94=82                =E2=94=82         =E2=94=82
-> + =E2=94=82  =E2=94=82  =E2=94=94=E2=94=80=E2=94=80=E2=94=80=E2=94=80=E2=
-=94=80=E2=94=80=E2=94=80=E2=94=80=E2=94=80=E2=94=80=E2=94=80=E2=94=80=E2=94=
-=80=E2=94=80=E2=94=80=E2=94=80=E2=94=80=E2=94=80=E2=94=80=E2=94=80=E2=94=80=
-=E2=94=80=E2=94=80=E2=94=80=E2=94=80=E2=94=98    =E2=94=82                =
-=E2=94=82         =E2=94=82
-> + =E2=94=82  =E2=94=82                                 =E2=94=82         =
-       =E2=94=82         =E2=94=82
-> + =E2=94=82  =E2=94=82  =E2=94=8C=E2=94=80=E2=94=80=E2=94=80=E2=94=80=E2=
-=94=80=E2=94=80=E2=94=80=E2=94=80=E2=94=80=E2=94=80=E2=94=80=E2=94=80=E2=94=
-=80=E2=94=80=E2=94=80=E2=94=80=E2=94=80=E2=94=80=E2=94=80=E2=94=80=E2=94=80=
-=E2=94=80=E2=94=80=E2=94=80=E2=94=80=E2=94=90    =E2=94=82                =
-=E2=94=82         =E2=94=82
-> + =E2=94=82  =E2=94=82  =E2=94=82 IMEM Section (Code)     =E2=94=82    =
-=E2=94=82                =E2=94=82         =E2=94=82
-> + =E2=94=82  =E2=94=82  =E2=94=82                         =E2=94=82    =
-=E2=94=82                =E2=94=82         =E2=94=82
-> + =E2=94=82  =E2=94=82  =E2=94=82 Contains instruction    =E2=94=82    =
-=E2=94=82                =E2=94=82         =E2=94=82
-> + =E2=94=82  =E2=94=82  =E2=94=82 code etc.               =E2=94=82    =
-=E2=94=82                =E2=94=82         =E2=94=82
-> + =E2=94=82  =E2=94=82  =E2=94=94=E2=94=80=E2=94=80=E2=94=80=E2=94=80=E2=
-=94=80=E2=94=80=E2=94=80=E2=94=80=E2=94=80=E2=94=80=E2=94=80=E2=94=80=E2=94=
-=80=E2=94=80=E2=94=80=E2=94=80=E2=94=80=E2=94=80=E2=94=80=E2=94=80=E2=94=80=
-=E2=94=80=E2=94=80=E2=94=80=E2=94=80=E2=94=98    =E2=94=82                =
-=E2=94=82         =E2=94=82
-> + =E2=94=82  =E2=94=82                                 =E2=94=82         =
-       =E2=94=82         =E2=94=82
-> + =E2=94=82  =E2=94=82  =E2=94=8C=E2=94=80=E2=94=80=E2=94=80=E2=94=80=E2=
-=94=80=E2=94=80=E2=94=80=E2=94=80=E2=94=80=E2=94=80=E2=94=80=E2=94=80=E2=94=
-=80=E2=94=80=E2=94=80=E2=94=80=E2=94=80=E2=94=80=E2=94=80=E2=94=80=E2=94=80=
-=E2=94=80=E2=94=80=E2=94=80=E2=94=80=E2=94=90    =E2=94=82                =
-=E2=94=82         =E2=94=82
-> + =E2=94=82  =E2=94=82  =E2=94=82 DMEM Section (Data)     =E2=94=82    =
-=E2=94=82                =E2=94=82         =E2=94=82
-> + =E2=94=82  =E2=94=82  =E2=94=82                         =E2=94=82    =
-=E2=94=82                =E2=94=82         =E2=94=82
-> + =E2=94=82  =E2=94=82  =E2=94=82 =E2=94=8C=E2=94=80=E2=94=80=E2=94=80=E2=
-=94=80=E2=94=80=E2=94=80=E2=94=80=E2=94=80=E2=94=80=E2=94=80=E2=94=80=E2=94=
-=80=E2=94=80=E2=94=80=E2=94=80=E2=94=80=E2=94=80=E2=94=80=E2=94=80=E2=94=80=
-=E2=94=80=E2=94=90 =E2=94=82    =E2=94=82                =E2=94=82         =
-=E2=94=82
-> + =E2=94=82  =E2=94=82  =E2=94=82 =E2=94=82 Application         =E2=94=82=
- =E2=94=82<=E2=94=80=E2=94=80=E2=94=80=E2=94=BC=E2=94=80=E2=94=80=E2=94=80=
-=E2=94=80=E2=94=80=E2=94=80=E2=94=80=E2=94=80=E2=94=80=E2=94=80=E2=94=80=E2=
-=94=80=E2=94=80=E2=94=80=E2=94=80=E2=94=80=E2=94=98         =E2=94=82
-> + =E2=94=82  =E2=94=82  =E2=94=82 =E2=94=82 Interface Table     =E2=94=82=
- =E2=94=82    =E2=94=82                          =E2=94=82
-> + =E2=94=82  =E2=94=82  =E2=94=82 =E2=94=82 (FalconAppifHdrV1)  =E2=94=82=
- =E2=94=82    =E2=94=82                          =E2=94=82
-> + =E2=94=82  =E2=94=82  =E2=94=82 =E2=94=82 Header:             =E2=94=82=
- =E2=94=82    =E2=94=82                          =E2=94=82
-> + =E2=94=82  =E2=94=82  =E2=94=82 =E2=94=82 - version: 0x01     =E2=94=82=
- =E2=94=82    =E2=94=82                          =E2=94=82
-> + =E2=94=82  =E2=94=82  =E2=94=82 =E2=94=82 - header_size: 4    =E2=94=82=
- =E2=94=82    =E2=94=82                          =E2=94=82
-> + =E2=94=82  =E2=94=82  =E2=94=82 =E2=94=82 - entry_size: 8     =E2=94=82=
- =E2=94=82    =E2=94=82                          =E2=94=82
-> + =E2=94=82  =E2=94=82  =E2=94=82 =E2=94=82 - entry_count: N    =E2=94=82=
- =E2=94=82    =E2=94=82                          =E2=94=82
-> + =E2=94=82  =E2=94=82  =E2=94=82 =E2=94=82                     =E2=94=82=
- =E2=94=82    =E2=94=82                          =E2=94=82
-> + =E2=94=82  =E2=94=82  =E2=94=82 =E2=94=82 Entries:            =E2=94=82=
- =E2=94=82    =E2=94=82                          =E2=94=82
-> + =E2=94=82  =E2=94=82  =E2=94=82 =E2=94=82 =E2=94=8C=E2=94=80=E2=94=80=
-=E2=94=80=E2=94=80=E2=94=80=E2=94=80=E2=94=80=E2=94=80=E2=94=80=E2=94=80=E2=
-=94=80=E2=94=80=E2=94=80=E2=94=80=E2=94=80=E2=94=80=E2=94=80=E2=94=90 =E2=
-=94=82 =E2=94=82    =E2=94=82                          =E2=94=82
-> + =E2=94=82  =E2=94=82  =E2=94=82 =E2=94=82 =E2=94=82 DEVINIT (ID 1)  =E2=
-=94=82 =E2=94=82 =E2=94=82    =E2=94=82                          =E2=94=82
-> + =E2=94=82  =E2=94=82  =E2=94=82 =E2=94=82 =E2=94=82 - id: 0x01      =E2=
-=94=82 =E2=94=82 =E2=94=82    =E2=94=82                          =E2=94=82
-> + =E2=94=82  =E2=94=82  =E2=94=82 =E2=94=82 =E2=94=82 - dmemOffset X =E2=
-=94=80=E2=94=BC=E2=94=80=E2=94=BC=E2=94=80=E2=94=BC=E2=94=80=E2=94=80=E2=94=
-=80=E2=94=80=E2=94=90                          =E2=94=82
-> + =E2=94=82  =E2=94=82  =E2=94=82 =E2=94=82 =E2=94=94=E2=94=80=E2=94=80=
-=E2=94=80=E2=94=80=E2=94=80=E2=94=80=E2=94=80=E2=94=80=E2=94=80=E2=94=80=E2=
-=94=80=E2=94=80=E2=94=80=E2=94=80=E2=94=80=E2=94=80=E2=94=80=E2=94=98 =E2=
-=94=82 =E2=94=82    =E2=94=82                          =E2=94=82
-> + =E2=94=82  =E2=94=82  =E2=94=82 =E2=94=82 =E2=94=8C=E2=94=80=E2=94=80=
-=E2=94=80=E2=94=80=E2=94=80=E2=94=80=E2=94=80=E2=94=80=E2=94=80=E2=94=80=E2=
-=94=80=E2=94=80=E2=94=80=E2=94=80=E2=94=80=E2=94=80=E2=94=80=E2=94=90 =E2=
-=94=82 =E2=94=82    =E2=94=82                          =E2=94=82
-> + =E2=94=82  =E2=94=82  =E2=94=82 =E2=94=82 =E2=94=82 DMEMMAPPER(ID 4)=E2=
-=94=82 =E2=94=82 =E2=94=82    =E2=94=82                          =E2=94=82
-> + =E2=94=82  =E2=94=82  =E2=94=82 =E2=94=82 =E2=94=82 - id: 0x04      =E2=
-=94=82 =E2=94=82 =E2=94=82    =E2=94=82 Used only for DevInit    =E2=94=82
-> + =E2=94=82  =E2=94=82  =E2=94=82 =E2=94=82 =E2=94=82  (NVFW_FALCON_  =E2=
-=94=82 =E2=94=82 =E2=94=82    =E2=94=82 application (not FWSEC)  =E2=94=82
-> + =E2=94=82  =E2=94=82  =E2=94=82 =E2=94=82 =E2=94=82   APPIF_ID_DMEMMAPP=
-ER)   =E2=94=82                          =E2=94=82
-> + =E2=94=82  =E2=94=82  =E2=94=82 =E2=94=82 =E2=94=82 - dmemOffset Y =E2=
-=94=80=E2=94=BC=E2=94=80=E2=94=BC=E2=94=80=E2=94=BC=E2=94=80=E2=94=80=E2=94=
-=80=E2=94=80=E2=94=BC=E2=94=80=E2=94=80=E2=94=80=E2=94=80=E2=94=80=E2=94=90=
-                    =E2=94=82
-> + =E2=94=82  =E2=94=82  =E2=94=82 =E2=94=82 =E2=94=94=E2=94=80=E2=94=80=
-=E2=94=80=E2=94=80=E2=94=80=E2=94=80=E2=94=80=E2=94=80=E2=94=80=E2=94=80=E2=
-=94=80=E2=94=80=E2=94=80=E2=94=80=E2=94=80=E2=94=80=E2=94=80=E2=94=98 =E2=
-=94=82 =E2=94=82    =E2=94=82     =E2=94=82                    =E2=94=82
-> + =E2=94=82  =E2=94=82  =E2=94=82 =E2=94=94=E2=94=80=E2=94=80=E2=94=80=E2=
-=94=80=E2=94=80=E2=94=80=E2=94=80=E2=94=80=E2=94=80=E2=94=80=E2=94=80=E2=94=
-=80=E2=94=80=E2=94=80=E2=94=80=E2=94=80=E2=94=80=E2=94=80=E2=94=80=E2=94=80=
-=E2=94=80=E2=94=98 =E2=94=82    =E2=94=82     =E2=94=82                    =
-=E2=94=82
-> + =E2=94=82  =E2=94=82  =E2=94=82                         =E2=94=82    =
-=E2=94=82     =E2=94=82                    =E2=94=82
-> + =E2=94=82  =E2=94=82  =E2=94=82 =E2=94=8C=E2=94=80=E2=94=80=E2=94=80=E2=
-=94=80=E2=94=80=E2=94=80=E2=94=80=E2=94=80=E2=94=80=E2=94=80=E2=94=80=E2=94=
-=80=E2=94=80=E2=94=80=E2=94=80=E2=94=80=E2=94=80=E2=94=80=E2=94=80=E2=94=80=
-=E2=94=80=E2=94=90 =E2=94=82    =E2=94=82     =E2=94=82                    =
-=E2=94=82
-> + =E2=94=82  =E2=94=82  =E2=94=82 =E2=94=82 DEVINIT Engine      =E2=94=82=
-<=E2=94=BC=E2=94=80=E2=94=80=E2=94=80=E2=94=80=E2=94=98     =E2=94=82 Used =
-by FWSEC      =E2=94=82
-> + =E2=94=82  =E2=94=82  =E2=94=82 =E2=94=82 Interface           =E2=94=82=
- =E2=94=82    =E2=94=82     =E2=94=82         app.       =E2=94=82
-> + =E2=94=82  =E2=94=82  =E2=94=82 =E2=94=94=E2=94=80=E2=94=80=E2=94=80=E2=
-=94=80=E2=94=80=E2=94=80=E2=94=80=E2=94=80=E2=94=80=E2=94=80=E2=94=80=E2=94=
-=80=E2=94=80=E2=94=80=E2=94=80=E2=94=80=E2=94=80=E2=94=80=E2=94=80=E2=94=80=
-=E2=94=80=E2=94=98 =E2=94=82    =E2=94=82     =E2=94=82                    =
-=E2=94=82
-> + =E2=94=82  =E2=94=82  =E2=94=82                         =E2=94=82    =
-=E2=94=82     =E2=94=82                    =E2=94=82
-> + =E2=94=82  =E2=94=82  =E2=94=82 =E2=94=8C=E2=94=80=E2=94=80=E2=94=80=E2=
-=94=80=E2=94=80=E2=94=80=E2=94=80=E2=94=80=E2=94=80=E2=94=80=E2=94=80=E2=94=
-=80=E2=94=80=E2=94=80=E2=94=80=E2=94=80=E2=94=80=E2=94=80=E2=94=80=E2=94=80=
-=E2=94=80=E2=94=90 =E2=94=82    =E2=94=82     =E2=94=82                    =
-=E2=94=82
-> + =E2=94=82  =E2=94=82  =E2=94=82 =E2=94=82 DMEM Mapper (ID 4)  =E2=94=82=
-<=E2=94=BC=E2=94=80=E2=94=80=E2=94=80=E2=94=80+=E2=94=80=E2=94=80=E2=94=80=
-=E2=94=80=E2=94=80=E2=94=98                    =E2=94=82
-> + =E2=94=82  =E2=94=82  =E2=94=82 =E2=94=82 (FalconAppifDmemmapperV3)  =
-=E2=94=82                          =E2=94=82
-> + =E2=94=82  =E2=94=82  =E2=94=82 =E2=94=82 - signature: "DMAP" =E2=94=82=
- =E2=94=82    =E2=94=82                          =E2=94=82
-> + =E2=94=82  =E2=94=82  =E2=94=82 =E2=94=82 - version: 0x0003   =E2=94=82=
- =E2=94=82    =E2=94=82                          =E2=94=82
-> + =E2=94=82  =E2=94=82  =E2=94=82 =E2=94=82 - Size: 64 bytes    =E2=94=82=
- =E2=94=82    =E2=94=82                          =E2=94=82
-> + =E2=94=82  =E2=94=82  =E2=94=82 =E2=94=82 - cmd_in_buffer_off =E2=94=82=
- =E2=94=82=E2=94=80=E2=94=80=E2=94=80=E2=94=80=E2=94=BC=E2=94=80=E2=94=80=
-=E2=94=80=E2=94=80=E2=94=80=E2=94=80=E2=94=80=E2=94=80=E2=94=80=E2=94=80=E2=
-=94=80=E2=94=80=E2=94=90             =E2=94=82
-> + =E2=94=82  =E2=94=82  =E2=94=82 =E2=94=82 - cmd_in_buffer_size=E2=94=82=
- =E2=94=82    =E2=94=82            =E2=94=82             =E2=94=82
-> + =E2=94=82  =E2=94=82  =E2=94=82 =E2=94=82 - cmd_out_buffer_off=E2=94=82=
- =E2=94=82=E2=94=80=E2=94=80=E2=94=80=E2=94=80=E2=94=BC=E2=94=80=E2=94=80=
-=E2=94=80=E2=94=80=E2=94=80=E2=94=80=E2=94=80=E2=94=80=E2=94=80=E2=94=80=E2=
-=94=80=E2=94=80=E2=94=BC=E2=94=80=E2=94=80=E2=94=80=E2=94=80=E2=94=80=E2=94=
-=90       =E2=94=82
-> + =E2=94=82  =E2=94=82  =E2=94=82 =E2=94=82 - cmd_out_buffer_sz =E2=94=82=
- =E2=94=82    =E2=94=82            =E2=94=82     =E2=94=82       =E2=94=82
-> + =E2=94=82  =E2=94=82  =E2=94=82 =E2=94=82 - init_cmd          =E2=94=82=
- =E2=94=82    =E2=94=82            =E2=94=82     =E2=94=82       =E2=94=82
-> + =E2=94=82  =E2=94=82  =E2=94=82 =E2=94=82 - features          =E2=94=82=
- =E2=94=82    =E2=94=82            =E2=94=82     =E2=94=82       =E2=94=82
-> + =E2=94=82  =E2=94=82  =E2=94=82 =E2=94=82 - cmd_mask0/1       =E2=94=82=
- =E2=94=82    =E2=94=82            =E2=94=82     =E2=94=82       =E2=94=82
-> + =E2=94=82  =E2=94=82  =E2=94=82 =E2=94=94=E2=94=80=E2=94=80=E2=94=80=E2=
-=94=80=E2=94=80=E2=94=80=E2=94=80=E2=94=80=E2=94=80=E2=94=80=E2=94=80=E2=94=
-=80=E2=94=80=E2=94=80=E2=94=80=E2=94=80=E2=94=80=E2=94=80=E2=94=80=E2=94=80=
-=E2=94=80=E2=94=98 =E2=94=82    =E2=94=82            =E2=94=82     =E2=94=
-=82       =E2=94=82
-> + =E2=94=82  =E2=94=82  =E2=94=82                         =E2=94=82    =
-=E2=94=82            =E2=94=82     =E2=94=82       =E2=94=82
-> + =E2=94=82  =E2=94=82  =E2=94=82 =E2=94=8C=E2=94=80=E2=94=80=E2=94=80=E2=
-=94=80=E2=94=80=E2=94=80=E2=94=80=E2=94=80=E2=94=80=E2=94=80=E2=94=80=E2=94=
-=80=E2=94=80=E2=94=80=E2=94=80=E2=94=80=E2=94=80=E2=94=80=E2=94=80=E2=94=80=
-=E2=94=80=E2=94=90 =E2=94=82    =E2=94=82            =E2=94=82     =E2=94=
-=82       =E2=94=82
-> + =E2=94=82  =E2=94=82  =E2=94=82 =E2=94=82 Command Input Buffer=E2=94=82=
-<=E2=94=BC=E2=94=80=E2=94=80=E2=94=80=E2=94=80=E2=94=BC=E2=94=80=E2=94=80=
-=E2=94=80=E2=94=80=E2=94=80=E2=94=80=E2=94=80=E2=94=80=E2=94=80=E2=94=80=E2=
-=94=80=E2=94=80=E2=94=98     =E2=94=82       =E2=94=82
-> + =E2=94=82  =E2=94=82  =E2=94=82 =E2=94=82 - Command data      =E2=94=82=
- =E2=94=82    =E2=94=82                  =E2=94=82       =E2=94=82
-> + =E2=94=82  =E2=94=82  =E2=94=82 =E2=94=82 - Arguments         =E2=94=82=
- =E2=94=82    =E2=94=82                  =E2=94=82       =E2=94=82
-> + =E2=94=82  =E2=94=82  =E2=94=82 =E2=94=94=E2=94=80=E2=94=80=E2=94=80=E2=
-=94=80=E2=94=80=E2=94=80=E2=94=80=E2=94=80=E2=94=80=E2=94=80=E2=94=80=E2=94=
-=80=E2=94=80=E2=94=80=E2=94=80=E2=94=80=E2=94=80=E2=94=80=E2=94=80=E2=94=80=
-=E2=94=80=E2=94=98 =E2=94=82    =E2=94=82                  =E2=94=82       =
-=E2=94=82
-> + =E2=94=82  =E2=94=82  =E2=94=82                         =E2=94=82    =
-=E2=94=82                  =E2=94=82       =E2=94=82
-> + =E2=94=82  =E2=94=82  =E2=94=82 =E2=94=8C=E2=94=80=E2=94=80=E2=94=80=E2=
-=94=80=E2=94=80=E2=94=80=E2=94=80=E2=94=80=E2=94=80=E2=94=80=E2=94=80=E2=94=
-=80=E2=94=80=E2=94=80=E2=94=80=E2=94=80=E2=94=80=E2=94=80=E2=94=80=E2=94=80=
-=E2=94=80=E2=94=90 =E2=94=82    =E2=94=82                  =E2=94=82       =
-=E2=94=82
-> + =E2=94=82  =E2=94=82  =E2=94=82 =E2=94=82 Command Output      =E2=94=82=
-<=E2=94=BC=E2=94=80=E2=94=80=E2=94=80=E2=94=80=E2=94=BC=E2=94=80=E2=94=80=
-=E2=94=80=E2=94=80=E2=94=80=E2=94=80=E2=94=80=E2=94=80=E2=94=80=E2=94=80=E2=
-=94=80=E2=94=80=E2=94=80=E2=94=80=E2=94=80=E2=94=80=E2=94=80=E2=94=80=E2=94=
-=98       =E2=94=82
-> + =E2=94=82  =E2=94=82  =E2=94=82 =E2=94=82 Buffer              =E2=94=82=
- =E2=94=82    =E2=94=82                          =E2=94=82
-> + =E2=94=82  =E2=94=82  =E2=94=82 =E2=94=82 - Results           =E2=94=82=
- =E2=94=82    =E2=94=82                          =E2=94=82
-> + =E2=94=82  =E2=94=82  =E2=94=82 =E2=94=82 - Status            =E2=94=82=
- =E2=94=82    =E2=94=82                          =E2=94=82
-> + =E2=94=82  =E2=94=82  =E2=94=82 =E2=94=94=E2=94=80=E2=94=80=E2=94=80=E2=
-=94=80=E2=94=80=E2=94=80=E2=94=80=E2=94=80=E2=94=80=E2=94=80=E2=94=80=E2=94=
-=80=E2=94=80=E2=94=80=E2=94=80=E2=94=80=E2=94=80=E2=94=80=E2=94=80=E2=94=80=
-=E2=94=80=E2=94=98 =E2=94=82    =E2=94=82                          =E2=94=82
-> + =E2=94=82  =E2=94=82  =E2=94=94=E2=94=80=E2=94=80=E2=94=80=E2=94=80=E2=
-=94=80=E2=94=80=E2=94=80=E2=94=80=E2=94=80=E2=94=80=E2=94=80=E2=94=80=E2=94=
-=80=E2=94=80=E2=94=80=E2=94=80=E2=94=80=E2=94=80=E2=94=80=E2=94=80=E2=94=80=
-=E2=94=80=E2=94=80=E2=94=80=E2=94=80=E2=94=98    =E2=94=82                 =
-         =E2=94=82
-> + =E2=94=82  =E2=94=94=E2=94=80=E2=94=80=E2=94=80=E2=94=80=E2=94=80=E2=94=
-=80=E2=94=80=E2=94=80=E2=94=80=E2=94=80=E2=94=80=E2=94=80=E2=94=80=E2=94=80=
-=E2=94=80=E2=94=80=E2=94=80=E2=94=80=E2=94=80=E2=94=80=E2=94=80=E2=94=80=E2=
-=94=80=E2=94=80=E2=94=80=E2=94=80=E2=94=80=E2=94=80=E2=94=80=E2=94=80=E2=94=
-=80=E2=94=80=E2=94=80=E2=94=98                          =E2=94=82
-> + =E2=94=82                                                              =
- =E2=94=82
-> + =E2=94=94=E2=94=80=E2=94=80=E2=94=80=E2=94=80=E2=94=80=E2=94=80=E2=94=
-=80=E2=94=80=E2=94=80=E2=94=80=E2=94=80=E2=94=80=E2=94=80=E2=94=80=E2=94=80=
-=E2=94=80=E2=94=80=E2=94=80=E2=94=80=E2=94=80=E2=94=80=E2=94=80=E2=94=80=E2=
-=94=80=E2=94=80=E2=94=80=E2=94=80=E2=94=80=E2=94=80=E2=94=80=E2=94=80=E2=94=
-=80=E2=94=80=E2=94=80=E2=94=80=E2=94=80=E2=94=80=E2=94=80=E2=94=80=E2=94=80=
-=E2=94=80=E2=94=80=E2=94=80=E2=94=80=E2=94=80=E2=94=80=E2=94=80=E2=94=80=E2=
-=94=80=E2=94=80=E2=94=80=E2=94=80=E2=94=80=E2=94=80=E2=94=80=E2=94=80=E2=94=
-=80=E2=94=80=E2=94=80=E2=94=80=E2=94=80=E2=94=80=E2=94=80=E2=94=98
-> +
-> +.. note::
-> +   The FWSEC image also plays a role in memory scrubbing (ECC
-> initialization) and VPR
-> +   (Video Protected Region) initialization as well. Before the
-> nova-core driver is even
-> +   loaded, the FWSEC image is running on the GSP in heavy-secure
-> mode. After the devinit
-> +   sequence completes, it does VRAM memory scrubbing (ECC
-> initialization). On consumer
-> +   GPUs, it scrubs only part of memory and then initiates 'async
-> scrubbing'. Before this
-> +   async scrubbing completes, the unscrubbed VRAM cannot be used for
-> allocation (thus DRM
-> +   memory allocators need to wait for this scrubbing to complete).
-> \ No newline at end of file
-> diff --git a/Documentation/gpu/nova/index.rst
-> b/Documentation/gpu/nova/index.rst index 91cc802ed94f..22e5712ac6b0
-> 100644 --- a/Documentation/gpu/nova/index.rst
-> +++ b/Documentation/gpu/nova/index.rst
-> @@ -28,4 +28,5 @@ vGPU manager VFIO driver and the nova-drm driver.
-> =20
->     core/guidelines
->     core/vbios
-> +   core/fwsec
->     core/todo
-
+T24gV2VkLCAyMDI1LTA0LTMwIGF0IDA5OjM5ICsxMDAwLCBCZW4gU2tlZ2dzIHdyb3RlOg0KPiBU
+aGlzIGNvbW1pdCBlbmFibGVzIGJhc2ljIHN1cHBvcnQgZm9yIEhvcHBlciBHUFVzLCBhbmQgaXMg
+aW50ZW5kZWQNCj4gcHJpbWFyaWx5IGFzIGEgYmFzZSBzdXBwb3J0aW5nIEJsYWNrd2VsbCBHUFVz
+LCB3aGljaCByZXVzZSBtb3N0IG9mDQo+IHRoZSBjb2RlIGFkZGVkIGhlcmUuDQoNCi4uLg0KDQo+
+IC0tLSAvZGV2L251bGwNCj4gKysrIGIvZHJpdmVycy9ncHUvZHJtL25vdXZlYXUvbnZrbS9zdWJk
+ZXYvZmIvZ2gxMDAuYw0KPiBAQCAtMCwwICsxLDQ3IEBADQo+ICsvKg0KPiArICogQ29weXJpZ2h0
+IChjKSAyMDI1LCBOVklESUEgQ09SUE9SQVRJT04uIEFsbCByaWdodHMgcmVzZXJ2ZWQuDQo+ICsg
+Kg0KPiArICogUGVybWlzc2lvbiBpcyBoZXJlYnkgZ3JhbnRlZCwgZnJlZSBvZiBjaGFyZ2UsIHRv
+IGFueSBwZXJzb24gb2J0YWluaW5nIGENCj4gKyAqIGNvcHkgb2YgdGhpcyBzb2Z0d2FyZSBhbmQg
+YXNzb2NpYXRlZCBkb2N1bWVudGF0aW9uIGZpbGVzICh0aGUgIlNvZnR3YXJlIiksDQo+ICsgKiB0
+byBkZWFsIGluIHRoZSBTb2Z0d2FyZSB3aXRob3V0IHJlc3RyaWN0aW9uLCBpbmNsdWRpbmcgd2l0
+aG91dCBsaW1pdGF0aW9uDQo+ICsgKiB0aGUgcmlnaHRzIHRvIHVzZSwgY29weSwgbW9kaWZ5LCBt
+ZXJnZSwgcHVibGlzaCwgZGlzdHJpYnV0ZSwgc3VibGljZW5zZSwNCj4gKyAqIGFuZC9vciBzZWxs
+IGNvcGllcyBvZiB0aGUgU29mdHdhcmUsIGFuZCB0byBwZXJtaXQgcGVyc29ucyB0byB3aG9tIHRo
+ZQ0KPiArICogU29mdHdhcmUgaXMgZnVybmlzaGVkIHRvIGRvIHNvLCBzdWJqZWN0IHRvIHRoZSBm
+b2xsb3dpbmcgY29uZGl0aW9uczoNCj4gKyAqDQo+ICsgKiBUaGUgYWJvdmUgY29weXJpZ2h0IG5v
+dGljZSBhbmQgdGhpcyBwZXJtaXNzaW9uIG5vdGljZSBzaGFsbCBiZSBpbmNsdWRlZCBpbg0KPiAr
+ICogYWxsIGNvcGllcyBvciBzdWJzdGFudGlhbCBwb3J0aW9ucyBvZiB0aGUgU29mdHdhcmUuDQo+
+ICsgKg0KPiArICogVEhFIFNPRlRXQVJFIElTIFBST1ZJREVEICJBUyBJUyIsIFdJVEhPVVQgV0FS
+UkFOVFkgT0YgQU5ZIEtJTkQsIEVYUFJFU1MgT1INCj4gKyAqIElNUExJRUQsIElOQ0xVRElORyBC
+VVQgTk9UIExJTUlURUQgVE8gVEhFIFdBUlJBTlRJRVMgT0YgTUVSQ0hBTlRBQklMSVRZLA0KPiAr
+ICogRklUTkVTUyBGT1IgQSBQQVJUSUNVTEFSIFBVUlBPU0UgQU5EIE5PTklORlJJTkdFTUVOVC7C
+oCBJTiBOTyBFVkVOVCBTSEFMTA0KPiArICogVEhFIEFVVEhPUlMgT1IgQ09QWVJJR0hUIEhPTERF
+UlMgQkUgTElBQkxFIEZPUiBBTlkgQ0xBSU0sIERBTUFHRVMgT1IgT1RIRVINCj4gKyAqIExJQUJJ
+TElUWSwgV0hFVEhFUiBJTiBBTiBBQ1RJT04gT0YgQ09OVFJBQ1QsIFRPUlQgT1IgT1RIRVJXSVNF
+LCBBUklTSU5HDQo+ICsgKiBGUk9NLCBPVVQgT0YgT1IgSU4gQ09OTkVDVElPTiBXSVRIIFRIRSBT
+T0ZUV0FSRSBPUiBUSEUgVVNFIE9SIE9USEVSDQo+ICsgKiBERUFMSU5HUyBJTiBUSEUgU09GVFdB
+UkUuDQoNClNob3VsZG4ndCB0aGlzIGp1c3QgYmUgYW4gU1BEWCBjb21tZW50Pw0KDQo+ICsjaWZu
+ZGVmIFNIRl9TVFJJTkdTDQo+ICsvKiBUaGVzZSBtaWdodCBub3QgYmUgZGVmaW5lZCBpbiBlbGYu
+aCAqLw0KPiArI2RlZmluZSBTSEZfU1RSSU5HUwkJMHgyMA0KPiArI2RlZmluZSBTSEZfT1NfTk9O
+Q09ORk9STUlORwkweDEwMA0KPiArI2RlZmluZSBTSEZfTUFTS09TCQkweDBGRjAwMDAwDQo+ICsj
+ZW5kaWYNCg0KVGhpcyBpcyBubyBsb25nZXIgbmVjZXNzYXJ5Lg0KDQpodHRwczovL2dpdC5rZXJu
+ZWwub3JnL3B1Yi9zY20vbGludXgva2VybmVsL2dpdC90b3J2YWxkcy9saW51eC5naXQvY29tbWl0
+L2luY2x1ZGUvdWFwaS9saW51eC9lbGYuaD9pZD1iMGRiMWVkMTc2NDViNTM5OTNiYWUzZGQyYzRi
+ZTcwMTM2MDAwODRmDQoNCj4gKy8qKg0KPiArICogZWxmX3ZhbGlkYXRlX3NlY3Rpb25zIC0gdmFs
+aWRhdGUgZWFjaCBzZWN0aW9uIGluIHRoZSBGTUMgRUxGIGltYWdlDQo+ICsgKiBAZWxmOiBFTEYg
+aWFtZ2UNCg0KQGVsZjogRUxGIGltYWdlDQpAbGVuZ3RoOiBzaXplIG9mIHRoZSBlbnRpcmUgRUxG
+IGltYWdlDQoNCg0KPiArLyoqDQo+ICsgKiBlbGZfc2VjdGlvbiAtIHJldHVybiBhIHBvaW50ZXIg
+dG8gdGhlIGRhdGEgZm9yIGEgZ2l2ZW4gc2VjdGlvbg0KPiArICogQGVsZjogRUxGIGltYWdlDQo+
+ICsgKiBAbmFtZTogc2VjdGlvbiBuYW1lIHRvIHNlYXJjaCBmb3INCj4gKyAqIEBwc2l6ZTogcG9p
+bnRlciB0byBzZWN0aW9uIGhlYWRlciBmb3IgZm91bmQgc2VjdGlvbg0KDQpSZXBsYWNlIHRoaXMg
+bGFzdCBsaW5lIHdpdGg6DQoNCkBsZW46IHBvaW50ZXIgdG8gcmV0dXJuZWQgbGVuZ3RoIG9mIGZv
+dW5kIHNlY3Rpb24NCg0K
