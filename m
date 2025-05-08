@@ -2,59 +2,60 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id 3404ECBA9F5
-	for <lists+nouveau@lfdr.de>; Sat, 13 Dec 2025 13:41:44 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 0771ACBAC49
+	for <lists+nouveau@lfdr.de>; Sat, 13 Dec 2025 13:43:52 +0100 (CET)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 043A510EA21;
-	Sat, 13 Dec 2025 12:40:58 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 9EA3A10EA1E;
+	Sat, 13 Dec 2025 12:41:07 +0000 (UTC)
 Authentication-Results: gabe.freedesktop.org;
-	dkim=pass (2048-bit key; secure) header.d=mailbox.org header.i=@mailbox.org header.b="gJ/JbHnh";
+	dkim=pass (2048-bit key; secure) header.d=mailbox.org header.i=@mailbox.org header.b="KwtsKkP9";
 	dkim-atps=neutral
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from mout-p-201.mailbox.org (mout-p-201.mailbox.org [80.241.56.171])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 72D5410E1DE;
- Thu,  8 May 2025 09:13:48 +0000 (UTC)
+Received: from mout-p-103.mailbox.org (mout-p-103.mailbox.org [80.241.56.161])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id A830C10E38A;
+ Thu,  8 May 2025 11:03:41 +0000 (UTC)
 Received: from smtp2.mailbox.org (smtp2.mailbox.org
  [IPv6:2001:67c:2050:b231:465::2])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
  (No client certificate requested)
- by mout-p-201.mailbox.org (Postfix) with ESMTPS id 4ZtRJT2S05z9st4;
- Thu,  8 May 2025 11:13:45 +0200 (CEST)
+ by mout-p-103.mailbox.org (Postfix) with ESMTPS id 4ZtTlC0xVKz9tCf;
+ Thu,  8 May 2025 13:03:35 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
  s=mail20150812; 
- t=1746695625; h=from:from:reply-to:reply-to:subject:subject:date:date:
+ t=1746702215; h=from:from:reply-to:reply-to:subject:subject:date:date:
  message-id:message-id:to:to:cc:cc:mime-version:mime-version:
  content-type:content-type:
  content-transfer-encoding:content-transfer-encoding:
  in-reply-to:in-reply-to:references:references;
- bh=fSaQ2U9dW1z6yZyF5dUSbdQvElX9UoQjbIz44faGFp4=;
- b=gJ/JbHnhScbQ4Qk0oLgM+A7P95WHA3lTu44PlG/MGylK4qssRALzG8tg3nn6ymiLnRl3kU
- 8fUflr1Bvx/gFqoMy+xZ+b1mB2fMrXNODojdEA0I0UYxMzHOPXsDZm7oYztDLOqVvPeM5A
- 8Ih/Gl6V7AkDRmZr+bc0EMhAjCChnTyIrtZ8HfQqUOl0Jngt/dD3jgfa/jZtXuvhty0M1C
- EUc1uIUn1NKfJdxOdCgKsVpuY2g5kDZz3gh/h/57EQ9mUe43waNj6batdScEw/DGyqbkyl
- HRRaIjFJc87NoNpZTyPur6g6oiyccnaRufAN18rVDsI0k0iLVieYMruiTAGePw==
-Message-ID: <3b64a3e0659dbfa2c5f819f40f9f0624309d24ed.camel@mailbox.org>
-Subject: Re: [PATCH 4/4] drm/nouveau: Check dma_fence in canonical way
+ bh=5EXQH6BCiFQKSZOW18WF484owkA/QLDEDighoVoI5Q0=;
+ b=KwtsKkP9JVrcD9N5t2Zm4i6iI26NVgoXDSIJtbDlpQNMDeTwFL7lJF+e76UXBeT2V5iZ1+
+ lWRpj7iXkv1Aj7dCZSvGXLcNRJ5ISVr+Q7+AeGUfcYLT5aUYaVUQ22ebj57uZmf0e76HKm
+ S1q4ORcWUZkuJ2IlJqHVQ8vqACQmMaB6jORjS2Y8X/+yx5d4SVU1RuOc4Vyhn3igKtS47f
+ JJwNsbJJ0LRV/FNQFvKrWYpgubqWLYTD2Lf6tHhGRacRHarKK5yfqI744zaIVltJCFzK4J
+ gDA/L4ZEvPpgCtcSvjtsH4GapNPdqQJ42O0ygzBcxB4w+BPGul5LYJhb5nFJlg==
+Message-ID: <894cf4cdb7e14b2a21dcf87bfeac4776cb695395.camel@mailbox.org>
+Subject: Re: [PATCH v2 6/6] drm/sched: Port unit tests to new cleanup design
 From: Philipp Stanner <phasta@mailbox.org>
-To: Christian =?ISO-8859-1?Q?K=F6nig?= <christian.koenig@amd.com>, Philipp
- Stanner <phasta@kernel.org>, Lyude Paul <lyude@redhat.com>, Danilo
- Krummrich <dakr@kernel.org>,  David Airlie <airlied@gmail.com>, Simona
- Vetter <simona@ffwll.ch>, Sumit Semwal <sumit.semwal@linaro.org>
+To: Philipp Stanner <phasta@kernel.org>, Lyude Paul <lyude@redhat.com>, 
+ Danilo Krummrich <dakr@kernel.org>, David Airlie <airlied@gmail.com>,
+ Simona Vetter <simona@ffwll.ch>, Matthew Brost <matthew.brost@intel.com>,
+ Christian =?ISO-8859-1?Q?K=F6nig?= <ckoenig.leichtzumerken@gmail.com>,
+ Maarten Lankhorst <maarten.lankhorst@linux.intel.com>, Maxime Ripard
+ <mripard@kernel.org>, Thomas Zimmermann <tzimmermann@suse.de>, Tvrtko
+ Ursulin <tvrtko.ursulin@igalia.com>
 Cc: dri-devel@lists.freedesktop.org, nouveau@lists.freedesktop.org, 
- linux-kernel@vger.kernel.org, linux-media@vger.kernel.org, 
- linaro-mm-sig@lists.linaro.org
-Date: Thu, 08 May 2025 11:13:39 +0200
-In-Reply-To: <9793bfc7-5309-4e19-a0e4-5e298720aa9e@amd.com>
-References: <20250424130254.42046-2-phasta@kernel.org>
- <20250424130254.42046-6-phasta@kernel.org>
- <9793bfc7-5309-4e19-a0e4-5e298720aa9e@amd.com>
+ linux-kernel@vger.kernel.org
+Date: Thu, 08 May 2025 13:03:29 +0200
+In-Reply-To: <20250424095535.26119-8-phasta@kernel.org>
+References: <20250424095535.26119-2-phasta@kernel.org>
+ <20250424095535.26119-8-phasta@kernel.org>
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
 MIME-Version: 1.0
-X-MBO-RS-ID: 2f653366805965cb815
-X-MBO-RS-META: 9rdhgij9nsbopajeda3zjr5fzy3oh5ip
+X-MBO-RS-META: 8pzanuw3tqj7ojt1ehyhx681kpp7xrro
+X-MBO-RS-ID: 987543049f878c8909b
 X-Mailman-Approved-At: Sat, 13 Dec 2025 12:40:50 +0000
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
@@ -71,57 +72,92 @@ Reply-To: phasta@kernel.org
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-On Mon, 2025-04-28 at 16:45 +0200, Christian K=C3=B6nig wrote:
-> On 4/24/25 15:02, Philipp Stanner wrote:
-> > In nouveau_fence_done(), a fence is checked for being signaled by
-> > manually evaluating the base fence's bits. This can be done in a
-> > canonical manner through dma_fence_is_signaled().
-> >=20
-> > Replace the bit-check with dma_fence_is_signaled().
-> >=20
-> > Signed-off-by: Philipp Stanner <phasta@kernel.org>
+On Thu, 2025-04-24 at 11:55 +0200, Philipp Stanner wrote:
+> The unit tests so far took care manually of avoiding memory leaks
+> that
+> might have occurred when calling drm_sched_fini().
 >=20
+> The scheduler now takes care by itself of avoiding memory leaks if
+> the
+> driver provides the callback
+> drm_sched_backend_ops.kill_fence_context().
 >=20
-> I think the bit check was used here as fast path optimization because
-> we later call dma_fence_is_signaled() anyway.
+> Implement that callback for the unit tests. Remove the manual cleanup
+> code.
 
-That fast path optimization effectively saves one JMP instruction to
-the function.
-
-I'm increasingly of the opinion that we shall work towards all DRM
-users only ever using infrastructure through officially documented API
-functions, without touching internal data structures.
-
-> Feel free to add my acked-by, but honestly what nouveau does here
-> looks rather suspicious to me.
-
-:)
-
+@Tvrtko: On a scale from 1-10, how much do you love this patch? :)
 
 P.
 
 >=20
-> Regards,
-> Christian.
+> Signed-off-by: Philipp Stanner <phasta@kernel.org>
+> ---
+> =C2=A0.../gpu/drm/scheduler/tests/mock_scheduler.c=C2=A0 | 34 +++++++++++=
++-----
+> --
+> =C2=A01 file changed, 21 insertions(+), 13 deletions(-)
 >=20
-> > ---
-> > =C2=A0drivers/gpu/drm/nouveau/nouveau_fence.c | 2 +-
-> > =C2=A01 file changed, 1 insertion(+), 1 deletion(-)
-> >=20
-> > diff --git a/drivers/gpu/drm/nouveau/nouveau_fence.c
-> > b/drivers/gpu/drm/nouveau/nouveau_fence.c
-> > index fb9811938c82..d5654e26d5bc 100644
-> > --- a/drivers/gpu/drm/nouveau/nouveau_fence.c
-> > +++ b/drivers/gpu/drm/nouveau/nouveau_fence.c
-> > @@ -253,7 +253,7 @@ nouveau_fence_done(struct nouveau_fence *fence)
-> > =C2=A0	struct nouveau_channel *chan;
-> > =C2=A0	unsigned long flags;
-> > =C2=A0
-> > -	if (test_bit(DMA_FENCE_FLAG_SIGNALED_BIT, &fence-
-> > >base.flags))
-> > +	if (dma_fence_is_signaled(&fence->base))
-> > =C2=A0		return true;
-> > =C2=A0
-> > =C2=A0	spin_lock_irqsave(&fctx->lock, flags);
->=20
+> diff --git a/drivers/gpu/drm/scheduler/tests/mock_scheduler.c
+> b/drivers/gpu/drm/scheduler/tests/mock_scheduler.c
+> index f999c8859cf7..a72d26ca8262 100644
+> --- a/drivers/gpu/drm/scheduler/tests/mock_scheduler.c
+> +++ b/drivers/gpu/drm/scheduler/tests/mock_scheduler.c
+> @@ -228,10 +228,30 @@ static void mock_sched_free_job(struct
+> drm_sched_job *sched_job)
+> =C2=A0	/* Mock job itself is freed by the kunit framework. */
+> =C2=A0}
+> =C2=A0
+> +static void mock_sched_fence_context_kill(struct drm_gpu_scheduler
+> *gpu_sched)
+> +{
+> +	struct drm_mock_scheduler *sched =3D
+> drm_sched_to_mock_sched(gpu_sched);
+> +	struct drm_mock_sched_job *job;
+> +	unsigned long flags;
+> +
+> +	spin_lock_irqsave(&sched->lock, flags);
+> +	list_for_each_entry(job, &sched->job_list, link) {
+> +		spin_lock(&job->lock);
+> +		if (!dma_fence_is_signaled_locked(&job->hw_fence)) {
+> +			dma_fence_set_error(&job->hw_fence, -
+> ECANCELED);
+> +			dma_fence_signal_locked(&job->hw_fence);
+> +		}
+> +		complete(&job->done);
+> +		spin_unlock(&job->lock);
+> +	}
+> +	spin_unlock_irqrestore(&sched->lock, flags);
+> +}
+> +
+> =C2=A0static const struct drm_sched_backend_ops drm_mock_scheduler_ops =
+=3D {
+> =C2=A0	.run_job =3D mock_sched_run_job,
+> =C2=A0	.timedout_job =3D mock_sched_timedout_job,
+> -	.free_job =3D mock_sched_free_job
+> +	.free_job =3D mock_sched_free_job,
+> +	.kill_fence_context =3D mock_sched_fence_context_kill,
+> =C2=A0};
+> =C2=A0
+> =C2=A0/**
+> @@ -300,18 +320,6 @@ void drm_mock_sched_fini(struct
+> drm_mock_scheduler *sched)
+> =C2=A0		drm_mock_sched_job_complete(job);
+> =C2=A0	spin_unlock_irqrestore(&sched->lock, flags);
+> =C2=A0
+> -	/*
+> -	 * Free completed jobs and jobs not yet processed by the DRM
+> scheduler
+> -	 * free worker.
+> -	 */
+> -	spin_lock_irqsave(&sched->lock, flags);
+> -	list_for_each_entry_safe(job, next, &sched->done_list, link)
+> -		list_move_tail(&job->link, &list);
+> -	spin_unlock_irqrestore(&sched->lock, flags);
+> -
+> -	list_for_each_entry_safe(job, next, &list, link)
+> -		mock_sched_free_job(&job->base);
+> -
+> =C2=A0	drm_sched_fini(&sched->base);
+> =C2=A0}
+> =C2=A0
 
