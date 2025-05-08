@@ -2,59 +2,60 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id E17B6CBA99A
-	for <lists+nouveau@lfdr.de>; Sat, 13 Dec 2025 13:41:26 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 3404ECBA9F5
+	for <lists+nouveau@lfdr.de>; Sat, 13 Dec 2025 13:41:44 +0100 (CET)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id DFC3210E9FB;
-	Sat, 13 Dec 2025 12:40:56 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 043A510EA21;
+	Sat, 13 Dec 2025 12:40:58 +0000 (UTC)
 Authentication-Results: gabe.freedesktop.org;
-	dkim=permerror (0-bit key) header.d=nppct.ru header.i=@nppct.ru header.b="h39ht8ys";
+	dkim=pass (2048-bit key; secure) header.d=mailbox.org header.i=@mailbox.org header.b="gJ/JbHnh";
 	dkim-atps=neutral
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-X-Greylist: delayed 402 seconds by postgrey-1.36 at gabe;
- Wed, 07 May 2025 21:13:21 UTC
-Received: from mail.nppct.ru (mail.nppct.ru [195.133.245.4])
- by gabe.freedesktop.org (Postfix) with ESMTPS id BE1EC10E8BD
- for <nouveau@lists.freedesktop.org>; Wed,  7 May 2025 21:13:21 +0000 (UTC)
-Received: from mail.nppct.ru (localhost [127.0.0.1])
- by mail.nppct.ru (Postfix) with ESMTP id A21021C0E8F
- for <nouveau@lists.freedesktop.org>; Thu,  8 May 2025 00:06:32 +0300 (MSK)
-Authentication-Results: mail.nppct.ru (amavisd-new); dkim=pass (1024-bit key)
- reason="pass (just generated,
- assumed good)" header.d=nppct.ru
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=nppct.ru; h=
- content-transfer-encoding:content-type:content-type:mime-version
- :x-mailer:message-id:date:date:subject:subject:to:from:from; s=
- dkim; t=1746651987; x=1747515988; bh=dbNPdGsmVrlahME3bAUZHjqgAKA
- kN35JiXmCUn9IdHE=; b=h39ht8ysa8d8jfFuCnkkVIDlWUXvwsn1Irv/u6B5Rpn
- kbEFcPfUY63FkUoR968tMLNZVPeWjh5QW5XsHyhDsNqNygiIXxUIMtn8AUsGHtZC
- 5uWh1VULRjCz0ELvMYU5JauuCjI08B3P86shSj785FRRXqZQVCZV8MXBs82lOhaw
- =
-X-Virus-Scanned: Debian amavisd-new at mail.nppct.ru
-Received: from mail.nppct.ru ([127.0.0.1])
- by mail.nppct.ru (mail.nppct.ru [127.0.0.1]) (amavisd-new, port 10026)
- with ESMTP id WUGq8GdbgNNv for <nouveau@lists.freedesktop.org>;
- Thu,  8 May 2025 00:06:27 +0300 (MSK)
-Received: from localhost.localdomain (unknown [87.249.24.51])
- by mail.nppct.ru (Postfix) with ESMTPSA id F1DB61C012F;
- Thu,  8 May 2025 00:06:25 +0300 (MSK)
-From: Alexey Nepomnyashih <sdl@nppct.ru>
-To: Lyude Paul <lyude@redhat.com>
-Cc: Alexey Nepomnyashih <sdl@nppct.ru>, Danilo Krummrich <dakr@kernel.org>,
- David Airlie <airlied@gmail.com>, Simona Vetter <simona@ffwll.ch>,
- Ben Skeggs <bskeggs@redhat.com>, James Jones <jajones@nvidia.com>,
- dri-devel@lists.freedesktop.org, nouveau@lists.freedesktop.org,
- linux-kernel@vger.kernel.org, lvc-project@linuxtesting.org
-Subject: [PATCH] drm/nouveau/kms: fix overflow in block size calculation in
- nouveau_check_bl_size()
-Date: Wed,  7 May 2025 21:05:47 +0000
-Message-ID: <20250507210550.141861-1-sdl@nppct.ru>
-X-Mailer: git-send-email 2.43.0
+Received: from mout-p-201.mailbox.org (mout-p-201.mailbox.org [80.241.56.171])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 72D5410E1DE;
+ Thu,  8 May 2025 09:13:48 +0000 (UTC)
+Received: from smtp2.mailbox.org (smtp2.mailbox.org
+ [IPv6:2001:67c:2050:b231:465::2])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
+ (No client certificate requested)
+ by mout-p-201.mailbox.org (Postfix) with ESMTPS id 4ZtRJT2S05z9st4;
+ Thu,  8 May 2025 11:13:45 +0200 (CEST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
+ s=mail20150812; 
+ t=1746695625; h=from:from:reply-to:reply-to:subject:subject:date:date:
+ message-id:message-id:to:to:cc:cc:mime-version:mime-version:
+ content-type:content-type:
+ content-transfer-encoding:content-transfer-encoding:
+ in-reply-to:in-reply-to:references:references;
+ bh=fSaQ2U9dW1z6yZyF5dUSbdQvElX9UoQjbIz44faGFp4=;
+ b=gJ/JbHnhScbQ4Qk0oLgM+A7P95WHA3lTu44PlG/MGylK4qssRALzG8tg3nn6ymiLnRl3kU
+ 8fUflr1Bvx/gFqoMy+xZ+b1mB2fMrXNODojdEA0I0UYxMzHOPXsDZm7oYztDLOqVvPeM5A
+ 8Ih/Gl6V7AkDRmZr+bc0EMhAjCChnTyIrtZ8HfQqUOl0Jngt/dD3jgfa/jZtXuvhty0M1C
+ EUc1uIUn1NKfJdxOdCgKsVpuY2g5kDZz3gh/h/57EQ9mUe43waNj6batdScEw/DGyqbkyl
+ HRRaIjFJc87NoNpZTyPur6g6oiyccnaRufAN18rVDsI0k0iLVieYMruiTAGePw==
+Message-ID: <3b64a3e0659dbfa2c5f819f40f9f0624309d24ed.camel@mailbox.org>
+Subject: Re: [PATCH 4/4] drm/nouveau: Check dma_fence in canonical way
+From: Philipp Stanner <phasta@mailbox.org>
+To: Christian =?ISO-8859-1?Q?K=F6nig?= <christian.koenig@amd.com>, Philipp
+ Stanner <phasta@kernel.org>, Lyude Paul <lyude@redhat.com>, Danilo
+ Krummrich <dakr@kernel.org>,  David Airlie <airlied@gmail.com>, Simona
+ Vetter <simona@ffwll.ch>, Sumit Semwal <sumit.semwal@linaro.org>
+Cc: dri-devel@lists.freedesktop.org, nouveau@lists.freedesktop.org, 
+ linux-kernel@vger.kernel.org, linux-media@vger.kernel.org, 
+ linaro-mm-sig@lists.linaro.org
+Date: Thu, 08 May 2025 11:13:39 +0200
+In-Reply-To: <9793bfc7-5309-4e19-a0e4-5e298720aa9e@amd.com>
+References: <20250424130254.42046-2-phasta@kernel.org>
+ <20250424130254.42046-6-phasta@kernel.org>
+ <9793bfc7-5309-4e19-a0e4-5e298720aa9e@amd.com>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 MIME-Version: 1.0
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
-X-Mailman-Approved-At: Sat, 13 Dec 2025 12:40:44 +0000
+X-MBO-RS-ID: 2f653366805965cb815
+X-MBO-RS-META: 9rdhgij9nsbopajeda3zjr5fzy3oh5ip
+X-Mailman-Approved-At: Sat, 13 Dec 2025 12:40:50 +0000
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -66,37 +67,61 @@ List-Post: <mailto:nouveau@lists.freedesktop.org>
 List-Help: <mailto:nouveau-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
  <mailto:nouveau-request@lists.freedesktop.org?subject=subscribe>
+Reply-To: phasta@kernel.org
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-Prevent potential overflow in nouveau_check_bl_size() when calculating
-bl_size. Although bl_size is a 64-bit value, the intermediate
-multiplication of 32-bit operands (bw, bh, tile_mode, and gob_size) may
-overflow before being assigned. gob_size is 256 or 512, and tile_mode is
-validated to be ≤ 31, but bw and bh can still be large enough to trigger
-overflow. Cast bw to uint64_t to ensure proper 64-bit arithmetic.
+On Mon, 2025-04-28 at 16:45 +0200, Christian K=C3=B6nig wrote:
+> On 4/24/25 15:02, Philipp Stanner wrote:
+> > In nouveau_fence_done(), a fence is checked for being signaled by
+> > manually evaluating the base fence's bits. This can be done in a
+> > canonical manner through dma_fence_is_signaled().
+> >=20
+> > Replace the bit-check with dma_fence_is_signaled().
+> >=20
+> > Signed-off-by: Philipp Stanner <phasta@kernel.org>
+>=20
+>=20
+> I think the bit check was used here as fast path optimization because
+> we later call dma_fence_is_signaled() anyway.
 
-Found by Linux Verification Center (linuxtesting.org) with SVACE.
+That fast path optimization effectively saves one JMP instruction to
+the function.
 
-Fixes: 4f5746c863db ("drm/nouveau/kms: Check framebuffer size against bo")
-Signed-off-by: Alexey Nepomnyashih <sdl@nppct.ru>
----
- drivers/gpu/drm/nouveau/nouveau_display.c | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+I'm increasingly of the opinion that we shall work towards all DRM
+users only ever using infrastructure through officially documented API
+functions, without touching internal data structures.
 
-diff --git a/drivers/gpu/drm/nouveau/nouveau_display.c b/drivers/gpu/drm/nouveau/nouveau_display.c
-index add006fc8d81..0363711ee0ee 100644
---- a/drivers/gpu/drm/nouveau/nouveau_display.c
-+++ b/drivers/gpu/drm/nouveau/nouveau_display.c
-@@ -239,7 +239,7 @@ nouveau_check_bl_size(struct nouveau_drm *drm, struct nouveau_bo *nvbo,
- 	bh = nouveau_get_height_in_blocks(h, gobs_in_block, drm->client.device.info.family);
- 	gob_size = nouveau_get_gob_size(drm->client.device.info.family);
- 
--	bl_size = bw * bh * gobs_in_block * gob_size;
-+	bl_size = (uint64_t)bw * bh * gobs_in_block * gob_size;
- 
- 	DRM_DEBUG_KMS("offset=%u stride=%u h=%u gobs_in_block=%u bw=%u bh=%u gob_size=%u bl_size=%llu size=%zu\n",
- 		      offset, stride, h, gobs_in_block, bw, bh, gob_size,
--- 
-2.43.0
+> Feel free to add my acked-by, but honestly what nouveau does here
+> looks rather suspicious to me.
+
+:)
+
+
+P.
+
+>=20
+> Regards,
+> Christian.
+>=20
+> > ---
+> > =C2=A0drivers/gpu/drm/nouveau/nouveau_fence.c | 2 +-
+> > =C2=A01 file changed, 1 insertion(+), 1 deletion(-)
+> >=20
+> > diff --git a/drivers/gpu/drm/nouveau/nouveau_fence.c
+> > b/drivers/gpu/drm/nouveau/nouveau_fence.c
+> > index fb9811938c82..d5654e26d5bc 100644
+> > --- a/drivers/gpu/drm/nouveau/nouveau_fence.c
+> > +++ b/drivers/gpu/drm/nouveau/nouveau_fence.c
+> > @@ -253,7 +253,7 @@ nouveau_fence_done(struct nouveau_fence *fence)
+> > =C2=A0	struct nouveau_channel *chan;
+> > =C2=A0	unsigned long flags;
+> > =C2=A0
+> > -	if (test_bit(DMA_FENCE_FLAG_SIGNALED_BIT, &fence-
+> > >base.flags))
+> > +	if (dma_fence_is_signaled(&fence->base))
+> > =C2=A0		return true;
+> > =C2=A0
+> > =C2=A0	spin_lock_irqsave(&fctx->lock, flags);
+>=20
 
