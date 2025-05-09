@@ -2,111 +2,70 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id C4123AB0A4A
-	for <lists+nouveau@lfdr.de>; Fri,  9 May 2025 08:11:12 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id B0890AB1243
+	for <lists+nouveau@lfdr.de>; Fri,  9 May 2025 13:35:26 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id DB21810E9B8;
-	Fri,  9 May 2025 06:11:10 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id A5E0A10EA1E;
+	Fri,  9 May 2025 11:35:24 +0000 (UTC)
 Authentication-Results: gabe.freedesktop.org;
-	dkim=pass (2048-bit key; unprotected) header.d=arndb.de header.i=@arndb.de header.b="jnguVLlZ";
-	dkim=pass (2048-bit key; unprotected) header.d=messagingengine.com header.i=@messagingengine.com header.b="FeQqFw4R";
+	dkim=pass (2048-bit key; unprotected) header.d=intel.com header.i=@intel.com header.b="UIgRaLKY";
 	dkim-atps=neutral
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-X-Greylist: delayed 335 seconds by postgrey-1.36 at gabe;
- Fri, 09 May 2025 06:11:08 UTC
-Received: from fhigh-b7-smtp.messagingengine.com
- (fhigh-b7-smtp.messagingengine.com [202.12.124.158])
- by gabe.freedesktop.org (Postfix) with ESMTPS id D243310E9B8
- for <nouveau@lists.freedesktop.org>; Fri,  9 May 2025 06:11:08 +0000 (UTC)
-Received: from phl-compute-05.internal (phl-compute-05.phl.internal
- [10.202.2.45])
- by mailfhigh.stl.internal (Postfix) with ESMTP id 5F1FC2540165;
- Fri,  9 May 2025 02:05:28 -0400 (EDT)
-Received: from phl-imap-12 ([10.202.2.86])
- by phl-compute-05.internal (MEProxy); Fri, 09 May 2025 02:05:29 -0400
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=arndb.de; h=cc
- :cc:content-transfer-encoding:content-type:content-type:date
- :date:from:from:in-reply-to:in-reply-to:message-id:mime-version
- :references:reply-to:subject:subject:to:to; s=fm2; t=1746770728;
- x=1746857128; bh=qZ8PpynMyA3bGCmwcCrTN20BWUQt0buKgTswM5C+T9g=; b=
- jnguVLlZJaMH9cvyUpSiwX94nVTw/gCJ1+aZHXVhyAWhPyP7yJYe4uMAj8lGVIgQ
- RRct8Qm9jEAnBHolU4IIRIo8wGOnFNF4UGpRj8/zko3ha/ovPBefvLGkPQY8M/q4
- y9vwuWs77DF8sG5D10DN5hdOPAStxb9leTp6IpkmfC5+VWZNjcQdUizwYW1eBycQ
- 08IPsfxCEjoSJNbUw/SkwBtSloAJkCDyNN7AlHY3v4/9LxGfJC6+hDJmgke++Vj9
- 1KdpPA4VdCNmvc0eiCfdqoKzZj35zw+qXgA4OtezGvPVcz45WB/lbg1PcYV0uVoZ
- DxrlqsqmnQVV9F0aM//y3w==
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=
- messagingengine.com; h=cc:cc:content-transfer-encoding
- :content-type:content-type:date:date:feedback-id:feedback-id
- :from:from:in-reply-to:in-reply-to:message-id:mime-version
- :references:reply-to:subject:subject:to:to:x-me-proxy
- :x-me-sender:x-me-sender:x-sasl-enc; s=fm3; t=1746770728; x=
- 1746857128; bh=qZ8PpynMyA3bGCmwcCrTN20BWUQt0buKgTswM5C+T9g=; b=F
- eQqFw4RJt5Pnwf9M0+4uwpBt+f8o/vNadtnZnBCch3NrLysDy/b3mgbzXxiL4Gqv
- iT2TSab7F3NPoVVVKXMQpkB/Ug4ciYTpUT4Qd4gYU8r6uGplUEo2oEk560bA4EZh
- caEJ0HcxlRAuCldWUnjarQdAzJ3Kp3CM+x4My3oO7xizXFzJw0AYoW89M4cumCyw
- gimP9/qfdRg2/ZgYzOMyzrw8WVxIxercZFT4eGINN9EcU4BMCN7OiRSCkgeuplD5
- kIjPxaZkMIzVaaXD80qcJ4pbxEXW/KodM1AAhlOAaNUggqIML7LHiGq2UAKmEOzy
- ML7K886wRKRo25ACyQ67g==
-X-ME-Sender: <xms:J5sdaPRYsbI_VBfO7JlcgbY1exAaAs2G14mR33Y50tC1iDRUEwbJOw>
- <xme:J5sdaAw0VEzT0-TcHaSeGXzmI38XcDYv00yP7MdFFADvOWTuwNsceo0D1CMiuJlW0
- B7CuY1Er0rltue0N1o>
-X-ME-Proxy-Cause: gggruggvucftvghtrhhoucdtuddrgeefvddrtddtgddvledukeeiucetufdoteggodetrf
- dotffvucfrrhhofhhilhgvmecuhfgrshhtofgrihhlpdggtfgfnhhsuhgsshgtrhhisggv
- pdfurfetoffkrfgpnffqhgenuceurghilhhouhhtmecufedttdenucesvcftvggtihhpih
- gvnhhtshculddquddttddmnecujfgurhepofggfffhvfevkfgjfhfutgfgsehtjeertder
- tddtnecuhfhrohhmpedftehrnhguuceuvghrghhmrghnnhdfuceorghrnhgusegrrhhnug
- gsrdguvgeqnecuggftrfgrthhtvghrnhephfdthfdvtdefhedukeetgefggffhjeeggeet
- fefggfevudegudevledvkefhvdeinecuvehluhhsthgvrhfuihiivgeptdenucfrrghrrg
- hmpehmrghilhhfrhhomheprghrnhgusegrrhhnuggsrdguvgdpnhgspghrtghpthhtohep
- vdekpdhmohguvgepshhmthhpohhuthdprhgtphhtthhopegurghnihgvlhdrrghlmhgvih
- gurgestgholhhlrggsohhrrgdrtghomhdprhgtphhtthhopehsihhmohhnrgesfhhffihl
- lhdrtghhpdhrtghpthhtohepghgrrhihsehgrghrhihguhhordhnvghtpdhrtghpthhtoh
- eprghirhhlihgvugesghhmrghilhdrtghomhdprhgtphhtthhopegrlhgvgidrghgrhihn
- ohhrsehgmhgrihhlrdgtohhmpdhrtghpthhtoheprghnughrvgifjhgsrghllhgrnhgtvg
- esghhmrghilhdrtghomhdprhgtphhtthhopegsohhquhhnrdhfvghnghesghhmrghilhdr
- tghomhdprhgtphhtthhopehfuhhjihhtrgdrthhomhhonhhorhhisehgmhgrihhlrdgtoh
- hmpdhrtghpthhtoheprghlihgtvghrhihhlhesghhoohhglhgvrdgtohhm
-X-ME-Proxy: <xmx:J5sdaE1JDYETjLgyiECyW0ljfGM_hDj-7fdgBoJBYbi7yhku8AEHPA>
- <xmx:J5sdaPDPYoCj0N0Dmg2dITRziM42lxJWWfsvF0vGGrlOIRnL7q-V4A>
- <xmx:J5sdaIjtZ34cNXzDSi6ReDp0TWWLBexm8jKPfCwJqugvj7l_xW75Yw>
- <xmx:J5sdaDrv7pswzOnn80kNMGP9sKtq36dBscVnu_Oc7ST_E9kgoePbrQ>
- <xmx:KJsdaBlnaKL704IQpL9yXD7Jgzyvy_-qpxKsA4XEGdh4reS-gJXpLFjo>
-Feedback-ID: i56a14606:Fastmail
-Received: by mailuser.phl.internal (Postfix, from userid 501)
- id 3BB071C20069; Fri,  9 May 2025 02:05:27 -0400 (EDT)
-X-Mailer: MessagingEngine.com Webmail Interface
-MIME-Version: 1.0
-X-ThreadId: Tfe1d269e5f3a05db
-Date: Fri, 09 May 2025 08:05:06 +0200
-From: "Arnd Bergmann" <arnd@arndb.de>
-To: "Andrew Ballance" <andrewjballance@gmail.com>,
- "Danilo Krummrich" <dakr@kernel.org>, "Dave Airlie" <airlied@gmail.com>,
- "Simona Vetter" <simona@ffwll.ch>,
- "Andrew Morton" <akpm@linux-foundation.org>,
- "Miguel Ojeda" <ojeda@kernel.org>, "Alex Gaynor" <alex.gaynor@gmail.com>,
- "Boqun Feng" <boqun.feng@gmail.com>, "Gary Guo" <gary@garyguo.net>,
- =?UTF-8?Q?Bj=C3=B6rn_Roy_Baron?= <bjorn3_gh@protonmail.com>,
- "Benno Lossin" <benno.lossin@proton.me>,
- "Andreas Hindborg" <a.hindborg@kernel.org>,
- "Alice Ryhl" <aliceryhl@google.com>, "Trevor Gross" <tmgross@umich.edu>,
- "Greg Kroah-Hartman" <gregkh@linuxfoundation.org>,
- "Rafael J . Wysocki" <rafael@kernel.org>, bhelgaas@google.com,
- =?UTF-8?Q?Krzysztof_Wilczy=C5=84ski?= <kwilczynski@kernel.org>,
- "Raag Jadav" <raag.jadav@intel.com>,
- "Andy Shevchenko" <andriy.shevchenko@linux.intel.com>, me@kloenk.dev,
- "FUJITA Tomonori" <fujita.tomonori@gmail.com>, daniel.almeida@collabora.com
-Cc: "nouveau@lists.freedesktop.org" <nouveau@lists.freedesktop.org>,
+Received: from mgamail.intel.com (mgamail.intel.com [198.175.65.12])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id A8C5210EA1E;
+ Fri,  9 May 2025 11:35:23 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
+ d=intel.com; i=@intel.com; q=dns/txt; s=Intel;
+ t=1746790524; x=1778326524;
+ h=date:from:to:cc:subject:message-id:references:
+ mime-version:in-reply-to;
+ bh=8KIHf9OmLLgE+hOeF978U0+HWSf5VFUlCD/UL8AeEME=;
+ b=UIgRaLKYjlEXHY4jphyIO/xw+DPgP0+hbxEzPazGV9aqxqzC15MPMdIQ
+ QHrnDQjyPs+Q+1JPzDXi1uCBe0BOZkHrwfwcIWF3yxv8tBnJn5+pvdEh0
+ WUzGaW8ii42VYL91sDc9yjwE99xUoBMxi4c+EHjmaWmLIHsNyc6HiIewz
+ 6h60AtJzwV26VwR/yiVTAF3i9NSv2K3Faqz7HKxCUJnrM4dH+dJSdzvbs
+ An0nK/XGOt9dcYuf14aDA4nSefXC6vgzWVURjeE9i3YPMRenyiJDZijaA
+ RvUp4cZ1TFfIiKlluuTvcKumxVTmo3Mxa1vXZpzaZN9q0pj7Kqoq5bifA Q==;
+X-CSE-ConnectionGUID: t7azp457Q5GvozDmBGZISg==
+X-CSE-MsgGUID: Uctxl0UFRrqmiyi09mgKqg==
+X-IronPort-AV: E=McAfee;i="6700,10204,11427"; a="60018339"
+X-IronPort-AV: E=Sophos;i="6.15,275,1739865600"; d="scan'208";a="60018339"
+Received: from orviesa001.jf.intel.com ([10.64.159.141])
+ by orvoesa104.jf.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
+ 09 May 2025 04:35:23 -0700
+X-CSE-ConnectionGUID: dnI/PA9fR7C/uvI0OgZHvg==
+X-CSE-MsgGUID: rir706HgTC2/66cqhrngjg==
+X-ExtLoop1: 1
+X-IronPort-AV: E=Sophos;i="6.15,275,1739865600"; d="scan'208";a="173761276"
+Received: from smile.fi.intel.com ([10.237.72.52])
+ by orviesa001.jf.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
+ 09 May 2025 04:35:17 -0700
+Received: from andy by smile.fi.intel.com with local (Exim 4.98.2)
+ (envelope-from <andriy.shevchenko@linux.intel.com>)
+ id 1uDM0X-000000004rY-0p0E; Fri, 09 May 2025 14:35:13 +0300
+Date: Fri, 9 May 2025 14:35:12 +0300
+From: Andy Shevchenko <andriy.shevchenko@linux.intel.com>
+To: Andrew Ballance <andrewjballance@gmail.com>
+Cc: dakr@kernel.org, airlied@gmail.com, simona@ffwll.ch,
+ akpm@linux-foundation.org, ojeda@kernel.org, alex.gaynor@gmail.com,
+ boqun.feng@gmail.com, gary@garyguo.net, bjorn3_gh@protonmail.com,
+ benno.lossin@proton.me, a.hindborg@kernel.org, aliceryhl@google.com,
+ tmgross@umich.edu, gregkh@linuxfoundation.org, rafael@kernel.org,
+ bhelgaas@google.com, kwilczynski@kernel.org, raag.jadav@intel.com,
+ arnd@arndb.de, me@kloenk.dev, fujita.tomonori@gmail.com,
+ daniel.almeida@collabora.com, nouveau@lists.freedesktop.org,
  dri-devel@lists.freedesktop.org, linux-kernel@vger.kernel.org,
  rust-for-linux@vger.kernel.org, linux-pci@vger.kernel.org
-Message-Id: <03548041-89f9-41a2-8488-5b234ce11138@app.fastmail.com>
-In-Reply-To: <20250509031524.2604087-5-andrewjballance@gmail.com>
+Subject: Re: [PATCH 06/11] io: move PIO_OFFSET to linux/io.h
+Message-ID: <aB3ocO8xh5GugfDD@smile.fi.intel.com>
 References: <20250509031524.2604087-1-andrewjballance@gmail.com>
- <20250509031524.2604087-5-andrewjballance@gmail.com>
-Subject: Re: [PATCH 04/11] rust: io: add PortIo
-Content-Type: text/plain
-Content-Transfer-Encoding: 7bit
+ <20250509031524.2604087-7-andrewjballance@gmail.com>
+MIME-Version: 1.0
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <20250509031524.2604087-7-andrewjballance@gmail.com>
+Organization: Intel Finland Oy - BIC 0357606-4 - Westendinkatu 7, 02160 Espoo
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -121,36 +80,37 @@ List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-On Fri, May 9, 2025, at 05:15, Andrew Ballance wrote:
-> +
-> +#define define_rust_pio_read_helper(name, type)     \
-> +	type rust_helper_##name(unsigned long port) \
-> +	{                                           \
-> +		return name(port);                  \
-> +	}
-> +
-> +#define define_rust_pio_write_helper(name, type)                \
-> +	void rust_helper_##name(type value, unsigned long port) \
-> +	{                                                       \
-> +		name(value, port);                              \
-> +	}
-> +
-> +define_rust_pio_read_helper(inb, u8);
-> +define_rust_pio_read_helper(inw, u16);
-> +define_rust_pio_read_helper(inl, u32);
-> +
-> +define_rust_pio_write_helper(outb, u8);
-> +define_rust_pio_write_helper(outw, u16);
-> +define_rust_pio_write_helper(outl, u32);
+On Thu, May 08, 2025 at 10:15:19PM -0500, Andrew Ballance wrote:
+> From: Fiona Behrens <me@kloenk.dev>
+> 
+> Move the non arch specific PIO size to linux/io.h.
+> 
+> This allows rust to access `PIO_OFFSET`, `PIO_MASK` and
+> `PIO_RESERVED`. This is required to implement `IO_COND` in rust.
 
-These have to be guarded with "#ifdef CONFIG_HAS_PIO", since
-most modern machines no longer support PIO at all, even behind
-PCI.
+...
 
-The option is still enabled by default for a number of
-architectures that normally don't have PIO, but it should
-eventually become optional on pretty much anything but
-x86 and a few 1990s-era workstations that implement x86-style
-on-board devices.
+> +/*
+> + * We encode the physical PIO addresses (0-0xffff) into the
 
-     Arnd
+I know this is the original text, but we have a chance to improve it a bit by
+saying range more explicitly:
+
+ * We encode the physical PIO addresses (0x0000-0xffff) into the
+
+> + * pointer by offsetting them with a constant (0x10000) and
+> + * assuming that all the low addresses are always PIO. That means
+> + * we can do some sanity checks on the low bits, and don't
+> + * need to just take things for granted.
+> + */
+> +#define PIO_OFFSET	0x10000UL
+> +#define PIO_MASK	0x0ffffUL
+> +#define PIO_RESERVED	0x40000UL
+> +#endif
+
+
+-- 
+With Best Regards,
+Andy Shevchenko
+
+
