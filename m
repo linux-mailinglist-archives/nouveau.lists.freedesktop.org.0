@@ -2,55 +2,55 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id 03CA0AB09CE
-	for <lists+nouveau@lfdr.de>; Fri,  9 May 2025 07:42:29 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 1DA9FAB09DC
+	for <lists+nouveau@lfdr.de>; Fri,  9 May 2025 07:46:23 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 7443810E20A;
-	Fri,  9 May 2025 05:42:27 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id C6FCC10E995;
+	Fri,  9 May 2025 05:46:21 +0000 (UTC)
 Authentication-Results: gabe.freedesktop.org;
-	dkim=pass (2048-bit key; unprotected) header.d=arndb.de header.i=@arndb.de header.b="ROH5GC1S";
-	dkim=pass (2048-bit key; unprotected) header.d=messagingengine.com header.i=@messagingengine.com header.b="ncJHKtnG";
+	dkim=pass (2048-bit key; unprotected) header.d=arndb.de header.i=@arndb.de header.b="yFlhotKn";
+	dkim=pass (2048-bit key; unprotected) header.d=messagingengine.com header.i=@messagingengine.com header.b="L8WjzyeN";
 	dkim-atps=neutral
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
 Received: from fout-a2-smtp.messagingengine.com
  (fout-a2-smtp.messagingengine.com [103.168.172.145])
- by gabe.freedesktop.org (Postfix) with ESMTPS id A032C10E20A;
- Fri,  9 May 2025 05:42:26 +0000 (UTC)
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 6F37E10E15C;
+ Fri,  9 May 2025 05:46:20 +0000 (UTC)
 Received: from phl-compute-05.internal (phl-compute-05.phl.internal
  [10.202.2.45])
- by mailfout.phl.internal (Postfix) with ESMTP id 093701380289;
- Fri,  9 May 2025 01:42:26 -0400 (EDT)
+ by mailfout.phl.internal (Postfix) with ESMTP id C8B231380299;
+ Fri,  9 May 2025 01:46:19 -0400 (EDT)
 Received: from phl-imap-12 ([10.202.2.86])
- by phl-compute-05.internal (MEProxy); Fri, 09 May 2025 01:42:26 -0400
+ by phl-compute-05.internal (MEProxy); Fri, 09 May 2025 01:46:19 -0400
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=arndb.de; h=cc
  :cc:content-transfer-encoding:content-type:content-type:date
  :date:from:from:in-reply-to:in-reply-to:message-id:mime-version
- :references:reply-to:subject:subject:to:to; s=fm2; t=1746769346;
- x=1746855746; bh=MB3lLFNoiR8mwVWRkKRUkc84kUA8vTg/iA4jkAjD9d8=; b=
- ROH5GC1SWw0akHZWm3Pzq3H4enCsOR/pXkftFTBNDIVeGZmh97EAGMraNsRH7QYq
- SP5mRtPHyX7pa1bnmkQ9JJ+iftuJJjXhOSNs3DiLlMLo25Qc/olnsDVdUaKlFk+I
- bSovqxTVC4kSawOW7HuB51eGuaYH/3uXC14kBf3UeoHGAmerj8vmHTA0gQ+bEuHw
- u437N95/s1LQ5E9nybIojiSgD1T4ucsav18os1sZHv47K0zfDH59LWMPQmAZwynN
- G0E3udCGm9pPH9sC/IqJeptnv3Z7f48kHCuhWZFg3zj6e6uiSRUuwDOY82+4CUhC
- fLvkrOYH+/UcqAuxEnb73g==
+ :references:reply-to:subject:subject:to:to; s=fm2; t=1746769579;
+ x=1746855979; bh=+1+xZSC34osRgfIQqLNaRNA6WjmcAgoDcTg1LRLRZG4=; b=
+ yFlhotKnpiER4XVR3XsZRORud1Hs6z+IS4WAiNu6CxBdmq61ylLYy8NEt7mxM3wC
+ 5359Tg6X9Rzo9y6AgYvjQCnETFR5m0eo/Wo/ucMLxS7qbvahpbcNGlyje+YGyUaW
+ IuhqINGDcw/PIDvPpOpPVMnJdUo9hmHcazeNNRn28mzyxnI99tupsjedlz+PfSVf
+ TTF/VayGTPRkXzDMTAoLbrvgD5s5xxUtdxT70EG9QvWEvkwhct6zbZsUys28HGqx
+ gGL+ac8UlQ/IfVDCGoEoaPy+rA3V+3Zr6JKvgfUl5hvIVEp5AxnCQAKjDGx23yE8
+ 9ZKmlgQlydumUqKSKL0WTQ==
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=
  messagingengine.com; h=cc:cc:content-transfer-encoding
  :content-type:content-type:date:date:feedback-id:feedback-id
  :from:from:in-reply-to:in-reply-to:message-id:mime-version
  :references:reply-to:subject:subject:to:to:x-me-proxy
- :x-me-sender:x-me-sender:x-sasl-enc; s=fm3; t=1746769346; x=
- 1746855746; bh=MB3lLFNoiR8mwVWRkKRUkc84kUA8vTg/iA4jkAjD9d8=; b=n
- cJHKtnGfneB0Vl+4Xi4kMNiWIID7ApTaIke6cGDPZZ+QK7wpDjpLiTArhp+wQK6s
- SRztqUnDObhn/TTba9bjACI5yPpns8Vo97WS4gHIQ2+wIBPYJo4i5t/zCQaV6vNa
- xFV773OYguC4lPKP+YaOdU/Bcz/P8Mfjv56cBRQdY7FeDsEWb9mWHL9OsAsGqRT9
- imY2A9UfmVKamBqAtHirMcTecBMkWziuIgi8bFXlfHN2czbn8XL8SSGWz2pe6ENF
- 675+lJZButysg7tvkTiBZnYNHvpUy6uRqyXamZ6Z8nC+asbzac3gGo7rQVLvz+2V
- u/E/1+L85oP76jF7OKGRA==
-X-ME-Sender: <xms:wZUdaD-uoZhpLt6Lb1mrTNxG-UrjexeQj0Nc_Ho8TMG-_IrV6LIRUg>
- <xme:wZUdaPvmbcunVL0yyPnxS3yuY7a43oPQzNdDvQ25ATNdUqvLDfjEW2dvp8elxpdSc
- Oc2CiDbJA4Dh_8sVTc>
-X-ME-Proxy-Cause: gggruggvucftvghtrhhoucdtuddrgeefvddrtddtgddvledukedtucetufdoteggodetrf
+ :x-me-sender:x-me-sender:x-sasl-enc; s=fm3; t=1746769579; x=
+ 1746855979; bh=+1+xZSC34osRgfIQqLNaRNA6WjmcAgoDcTg1LRLRZG4=; b=L
+ 8WjzyeNnoFxWxb5qxjG5+LHsSUlA9er35Tu4NHVXBdN/sNbfaGHLTMBdLMeP9HKL
+ 4l0ASB13YcOrdL3FVK+rL+h1+A0ot2AofCpPZeJh1OXntysiMgcnl6ODofKpEKK+
+ 5LuFgDpasqbu1/PRNX+HpJPmALS1XOS8SyY5YW1xSaMGwMWOjg37JOnR853TnjT/
+ WYFGss9q4+1CTT6jGpBA3R3nniEUKN8Pe85UMXwPIC1HrSxb76utVgeVuo0+X11k
+ EjFk0F4PbXyWesufZrAtnwTg0N1eRYlx6I/DmYR3ZAXSjgBrUTtMtP+dWFAp8gnE
+ Gi+wuUpKybXnXkN55qj0g==
+X-ME-Sender: <xms:qpYdaKo-tquc02AU4c9qI6ZcYHHQC9GJvKkWsp53LvHPnqT6_D89Tw>
+ <xme:qpYdaIqGk1EhNJg-hd5iC9-I6ijmKpwpgJ8zMV27buej4S6YLWaGjIcy5_rBCzihm
+ g6PXCk6wzGO6RwiQMg>
+X-ME-Proxy-Cause: gggruggvucftvghtrhhoucdtuddrgeefvddrtddtgddvledukeduucetufdoteggodetrf
  dotffvucfrrhhofhhilhgvmecuhfgrshhtofgrihhlpdggtfgfnhhsuhgsshgtrhhisggv
  pdfurfetoffkrfgpnffqhgenuceurghilhhouhhtmecufedttdenucesvcftvggtihhpih
  gvnhhtshculddquddttddmnecujfgurhepofggfffhvfevkfgjfhfutgfgsehtjeertder
@@ -66,18 +66,18 @@ X-ME-Proxy-Cause: gggruggvucftvghtrhhoucdtuddrgeefvddrtddtgddvledukedtucetufdote
  esghhmrghilhdrtghomhdprhgtphhtthhopegsohhquhhnrdhfvghnghesghhmrghilhdr
  tghomhdprhgtphhtthhopehfuhhjihhtrgdrthhomhhonhhorhhisehgmhgrihhlrdgtoh
  hmpdhrtghpthhtoheprghlihgtvghrhihhlhesghhoohhglhgvrdgtohhm
-X-ME-Proxy: <xmx:wZUdaBAzFezhfoPmQPXS_oS4_1ahC4L0GwaYKLSb7IQO1CwJ9GxLhg>
- <xmx:wZUdaPeJisi11crPwsPU4HoSfQSpWCYtGk9qyRPPvqRdt1W7L1akIA>
- <xmx:wZUdaINs6Hja8YRah1_ViCVCFIENa7I9UyB5gzdf_NcfXLrxcenrTQ>
- <xmx:wZUdaBmCHnAxug-EbRWeoVulYz1dOJpYzQDAeQ_sos3ldGNUOEm_7A>
- <xmx:wpUdaJCWafaD1jFVg_sv9mefQ1HVDxBUJN7BP9Oyjsxu9z-QQR_-X9N8>
+X-ME-Proxy: <xmx:q5YdaPOcSPGxyC1-W6dgo6AzLjBYr0E3nluy8VuFfYZEWXuVKm90Fg>
+ <xmx:q5YdaJ6R1Kf-dXTk3dP4QigCAYp11CLkxX78tEIpkRfvqWQKmW0xfg>
+ <xmx:q5YdaJ64Qe4C6uvfdNHjYvG-HvSb0FxCdMldMK2FQyNHgLYSmKuTFw>
+ <xmx:q5YdaJgraDRO-OAgiLEfxV9WiuyfStMFEDyCsViJxbUjaTlYGdXgMw>
+ <xmx:q5YdaKfNQuXTLi7OG1dqJLCXW_IultqJx1p6Eknlc2PVNI7ga9VI6cWU>
 Feedback-ID: i56a14606:Fastmail
 Received: by mailuser.phl.internal (Postfix, from userid 501)
- id 5AF1D1C20069; Fri,  9 May 2025 01:42:25 -0400 (EDT)
+ id E5AE31C20068; Fri,  9 May 2025 01:46:18 -0400 (EDT)
 X-Mailer: MessagingEngine.com Webmail Interface
 MIME-Version: 1.0
-X-ThreadId: Tc229d2825b252d63
-Date: Fri, 09 May 2025 07:42:05 +0200
+X-ThreadId: Tef2df9750d8374d1
+Date: Fri, 09 May 2025 07:45:58 +0200
 From: "Arnd Bergmann" <arnd@arndb.de>
 To: "Andrew Ballance" <andrewjballance@gmail.com>,
  "Danilo Krummrich" <dakr@kernel.org>, "Dave Airlie" <airlied@gmail.com>,
@@ -98,11 +98,11 @@ To: "Andrew Ballance" <andrewjballance@gmail.com>,
 Cc: "nouveau@lists.freedesktop.org" <nouveau@lists.freedesktop.org>,
  dri-devel@lists.freedesktop.org, linux-kernel@vger.kernel.org,
  rust-for-linux@vger.kernel.org, linux-pci@vger.kernel.org
-Message-Id: <13e23d59-ca5d-4cc7-83cd-0c3f41b1bedc@app.fastmail.com>
-In-Reply-To: <20250509031524.2604087-7-andrewjballance@gmail.com>
+Message-Id: <3ad271f7-12e3-4e92-82eb-cd8cd5dbd703@app.fastmail.com>
+In-Reply-To: <20250509031524.2604087-8-andrewjballance@gmail.com>
 References: <20250509031524.2604087-1-andrewjballance@gmail.com>
- <20250509031524.2604087-7-andrewjballance@gmail.com>
-Subject: Re: [PATCH 06/11] io: move PIO_OFFSET to linux/io.h
+ <20250509031524.2604087-8-andrewjballance@gmail.com>
+Subject: Re: [PATCH 07/11] rust: io: add from_raw_cookie functions
 Content-Type: text/plain
 Content-Transfer-Encoding: 7bit
 X-BeenThere: nouveau@lists.freedesktop.org
@@ -120,26 +120,17 @@ Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
 On Fri, May 9, 2025, at 05:15, Andrew Ballance wrote:
-> From: Fiona Behrens <me@kloenk.dev>
->
-> Move the non arch specific PIO size to linux/io.h.
->
-> This allows rust to access `PIO_OFFSET`, `PIO_MASK` and
-> `PIO_RESERVED`. This is required to implement `IO_COND` in rust.
->
-> Signed-off-by: Fiona Behrens <me@kloenk.dev>
-> Signed-off-by: Andrew Ballance <andrewjballance@gmail.com>
 
-This puts an implementation detail of the x86 specific
-iomap() code (unfortunately named "GENERIC_IOMAP" for historic
-reasons) into common code. Please don't do that.
+> +}
+> +#[cfg(not(CONFIG_GENERIC_IOMAP))]
+> +mod io_backend {
+> +    // for everyone who does not use generic iomap
+> +    // except for alpha and parisc, neither of which has a rust compiler,
+> +    // ioread/iowrite is defined in `include/asm-generic/io.h`.
 
-We still have a couple of users of GENERIC_IOMAP outside of
-x86, but they all work in subtly different ways, and I've
-been thinking about better ways to handle those. Ideally
-the nonstandard iomap variants (x86, uml, powerpc/powernv,
-m68k/q40) should just implement their own ioread/iowrite
-helpers out-of-line like we do on alpha and parisc, while
-everyone else just aliases them to readl/writel.
+I think you should special-case x86 here then. The GENERIC_IOMAP
+variant is likely to need another hack for powernv to actually work.
 
-      Arnd
+Hopefully we won't have to support m68k/q40 here.
+
+     Arnd
