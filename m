@@ -2,56 +2,54 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id DABC9AAFA86
-	for <lists+nouveau@lfdr.de>; Thu,  8 May 2025 14:52:24 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 12DCDAB0979
+	for <lists+nouveau@lfdr.de>; Fri,  9 May 2025 07:18:46 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 37A5E10E3A3;
-	Thu,  8 May 2025 12:52:20 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 760DF10E1C6;
+	Fri,  9 May 2025 05:18:42 +0000 (UTC)
 Authentication-Results: gabe.freedesktop.org;
-	dkim=fail reason="signature verification failed" (2048-bit key; unprotected) header.d=igalia.com header.i=@igalia.com header.b="nS06MZyG";
+	dkim=pass (2048-bit key; unprotected) header.d=intel.com header.i=@intel.com header.b="hO4j4uWd";
 	dkim-atps=neutral
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from fanzine2.igalia.com (fanzine2.igalia.com [213.97.179.56])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 5592B10E39A;
- Thu,  8 May 2025 12:52:13 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=igalia.com; 
- s=20170329;
- h=Content-Transfer-Encoding:Content-Type:In-Reply-To:From:
- References:Cc:To:Subject:MIME-Version:Date:Message-ID:Sender:Reply-To:
- Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
- Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
- List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=MFGXgXVhRIMsvtkmQGMYgyfxAd9uaycap/esRlGZ1eo=; b=nS06MZyGHnra3A68B5FRn4AtR1
- Cd3pq19j82mhaAHYfWb0QsWsfLA9NRRKS3BjHEfqE6NPklGG/8BbONBp82ekODxR27Wbc3zztqhAu
- Vwcisfvmsrh2GB7Dr64L08kEOCrej+B+KjhuO/AxlUuNc2xU0KAM/l53MLjBsfAlKgn7nKhONZGtZ
- nXrkWm6ZL/+mk4QbVrci56toprJf9nIRGqhOxtpBWorqI7nWcfBz456kvx68SPDmVL10kwu+UubkW
- +T5kJemrd3fKy3s9dmW293+3cCWuumNY0DU9ExkboR55as797QPcmRUiIdUulx+osy1kmpnwAHsT+
- x1XH1H1A==;
-Received: from [81.79.92.254] (helo=[192.168.0.101])
- by fanzine2.igalia.com with esmtpsa 
- (Cipher TLS1.3:ECDHE_X25519__RSA_PSS_RSAE_SHA256__AES_128_GCM:128) (Exim)
- id 1uD0eu-005Daq-FW; Thu, 08 May 2025 14:51:44 +0200
-Message-ID: <a1c9c680-2927-428c-95e9-2e79d14cec58@igalia.com>
-Date: Thu, 8 May 2025 13:51:42 +0100
+Received: from mgamail.intel.com (mgamail.intel.com [198.175.65.20])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 7C21110E1B6;
+ Fri,  9 May 2025 05:18:41 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
+ d=intel.com; i=@intel.com; q=dns/txt; s=Intel;
+ t=1746767922; x=1778303922;
+ h=from:to:cc:subject:date:message-id:mime-version:
+ content-transfer-encoding;
+ bh=hVGH4H93Fm6zzuVz7HC0Y6/LKbY6TuJNbjhJrNnl6CY=;
+ b=hO4j4uWdrvKjAYnfulEUIGWZsCh9K+Xq05tICXhm7LSpLW7fz393prLk
+ GjpYc3DriJExlzek/HF2phLO6fu4w8rlWcUDBYyQZQehE7I9Se1pxyCg/
+ GTzESRhXAFCkrPYYSF5GNw/hzoPtfXZh8n+tistLLXS6mX/L7+6sBVfsm
+ tHRaMh3oqLWjhVV148/mXHc8HLdA/x2VRfuBblLgVjmW6xtCanw7icrLc
+ YBUOpNcrgRiiZFzOPldQ5qgXNE8cxLQ+gNLp9WjH/s3uP/r87WZqPWXK6
+ 3wA9Hpt7Unzt/rR0NGV0CRGf8BqzXMVVXNJxdCLd8SIqmNCzBwcgv/usd A==;
+X-CSE-ConnectionGUID: HJSjpJ3DTy6bOpoxS8FxTQ==
+X-CSE-MsgGUID: BJdEmoOxTquS5xvCLPpgRg==
+X-IronPort-AV: E=McAfee;i="6700,10204,11427"; a="48287086"
+X-IronPort-AV: E=Sophos;i="6.15,274,1739865600"; d="scan'208";a="48287086"
+Received: from fmviesa005.fm.intel.com ([10.60.135.145])
+ by orvoesa112.jf.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
+ 08 May 2025 22:18:41 -0700
+X-CSE-ConnectionGUID: z5j2J5hSTwG+ryS2jn2ahA==
+X-CSE-MsgGUID: goUJKbM8QNmM007wacCovg==
+X-ExtLoop1: 1
+X-IronPort-AV: E=Sophos;i="6.15,274,1739865600"; d="scan'208";a="141414800"
+Received: from kandpal-x299-ud4-pro.iind.intel.com ([10.190.239.10])
+ by fmviesa005.fm.intel.com with ESMTP; 08 May 2025 22:18:39 -0700
+From: Suraj Kandpal <suraj.kandpal@intel.com>
+To: nouveau@lists.freedesktop.org, dri-devel@lists.freedesktop.org,
+ intel-xe@lists.freedesktop.org, intel-gfx@lists.freedesktop.org
+Cc: ankit.k.nautiyal@intel.com, arun.r.murthy@intel.com,
+ Suraj Kandpal <suraj.kandpal@intel.com>
+Subject: [PATCH 00/13] Modify drm helpers to use luminance
+Date: Fri,  9 May 2025 10:48:03 +0530
+Message-Id: <20250509051816.1244486-1-suraj.kandpal@intel.com>
+X-Mailer: git-send-email 2.34.1
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v2 6/6] drm/sched: Port unit tests to new cleanup design
-To: phasta@kernel.org, Lyude Paul <lyude@redhat.com>,
- Danilo Krummrich <dakr@kernel.org>, David Airlie <airlied@gmail.com>,
- Simona Vetter <simona@ffwll.ch>, Matthew Brost <matthew.brost@intel.com>,
- =?UTF-8?Q?Christian_K=C3=B6nig?= <ckoenig.leichtzumerken@gmail.com>,
- Maarten Lankhorst <maarten.lankhorst@linux.intel.com>,
- Maxime Ripard <mripard@kernel.org>, Thomas Zimmermann <tzimmermann@suse.de>
-Cc: dri-devel@lists.freedesktop.org, nouveau@lists.freedesktop.org,
- linux-kernel@vger.kernel.org
-References: <20250424095535.26119-2-phasta@kernel.org>
- <20250424095535.26119-8-phasta@kernel.org>
- <894cf4cdb7e14b2a21dcf87bfeac4776cb695395.camel@mailbox.org>
-Content-Language: en-GB
-From: Tvrtko Ursulin <tvrtko.ursulin@igalia.com>
-In-Reply-To: <894cf4cdb7e14b2a21dcf87bfeac4776cb695395.camel@mailbox.org>
-Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 8bit
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
@@ -67,105 +65,36 @@ List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
+This series modifies drm dp edp helpers so that drivers can now use them
+to manipulate brightness using luminance value via the
+PANEL_TARGET_LUMINANCE_VALUE register. This feature was
+introduced frin eDP 1.5.
 
-Hi Philipp,
+Signed-off-by: Suraj Kandpal <suraj.kandpal@intel.com>
 
-On 08/05/2025 12:03, Philipp Stanner wrote:
-> On Thu, 2025-04-24 at 11:55 +0200, Philipp Stanner wrote:
->> The unit tests so far took care manually of avoiding memory leaks
->> that
->> might have occurred when calling drm_sched_fini().
->>
->> The scheduler now takes care by itself of avoiding memory leaks if
->> the
->> driver provides the callback
->> drm_sched_backend_ops.kill_fence_context().
->>
->> Implement that callback for the unit tests. Remove the manual cleanup
->> code.
-> 
-> @Tvrtko: On a scale from 1-10, how much do you love this patch? :)
+Suraj Kandpal (13):
+  drm/dp: Introduce new member in drm_backlight_info
+  drm/dp: Add argument in drm_edp_backlight_init
+  drm/dp: Add argument for luminance range info in
+    drm_edp_backlight_init
+  drm/dp: Move from u16 to u32 for max in drm_edp_backlight_info
+  drm/dp: Change current_level argument type to u32
+  drm/dp: Modify drm_edp_probe_state
+  drm/dp: Change argument type for drm_edp_backlight_set_level
+  drm/dp: Modify drm_edp_backlight_set_level
+  drm/dp: Change argument type of drm_edp_backlight_enable
+  drm/dp: Enable backlight control using luminance
+  drm/i915/backlight: Use drm helper to initialize edp backlight
+  drm/i915/backlight: Use drm helper to set edp backlight
+  drm/i915/backlight: Use drm_edp_backlight_enable
 
-Specific patch aside, it is the series as a whole I would like to be 
-sure there isn't a more elegant way to achieve the same end result.
+ drivers/gpu/drm/display/drm_dp_helper.c       |  88 ++++++++---
+ .../drm/i915/display/intel_dp_aux_backlight.c | 143 ++++++------------
+ drivers/gpu/drm/nouveau/dispnv50/disp.c       |   2 +-
+ drivers/gpu/drm/nouveau/nouveau_backlight.c   |   9 +-
+ include/drm/display/drm_dp_helper.h           |  10 +-
+ 5 files changed, 126 insertions(+), 126 deletions(-)
 
-Like that sketch of a counter proposal I sent for the reasons listed 
-with it. Which were, AFAIR, to avoid needing to add more state machine, 
-to avoid mandating drivers have to keep an internal list, and to align 
-better with the existing prototypes in the sched ops table (where 
-everything operates on jobs).
-
-Regards,
-
-Tvrtko
-
->> Signed-off-by: Philipp Stanner <phasta@kernel.org>
->> ---
->>   .../gpu/drm/scheduler/tests/mock_scheduler.c  | 34 ++++++++++++-----
->> --
->>   1 file changed, 21 insertions(+), 13 deletions(-)
->>
->> diff --git a/drivers/gpu/drm/scheduler/tests/mock_scheduler.c
->> b/drivers/gpu/drm/scheduler/tests/mock_scheduler.c
->> index f999c8859cf7..a72d26ca8262 100644
->> --- a/drivers/gpu/drm/scheduler/tests/mock_scheduler.c
->> +++ b/drivers/gpu/drm/scheduler/tests/mock_scheduler.c
->> @@ -228,10 +228,30 @@ static void mock_sched_free_job(struct
->> drm_sched_job *sched_job)
->>   	/* Mock job itself is freed by the kunit framework. */
->>   }
->>   
->> +static void mock_sched_fence_context_kill(struct drm_gpu_scheduler
->> *gpu_sched)
->> +{
->> +	struct drm_mock_scheduler *sched =
->> drm_sched_to_mock_sched(gpu_sched);
->> +	struct drm_mock_sched_job *job;
->> +	unsigned long flags;
->> +
->> +	spin_lock_irqsave(&sched->lock, flags);
->> +	list_for_each_entry(job, &sched->job_list, link) {
->> +		spin_lock(&job->lock);
->> +		if (!dma_fence_is_signaled_locked(&job->hw_fence)) {
->> +			dma_fence_set_error(&job->hw_fence, -
->> ECANCELED);
->> +			dma_fence_signal_locked(&job->hw_fence);
->> +		}
->> +		complete(&job->done);
->> +		spin_unlock(&job->lock);
->> +	}
->> +	spin_unlock_irqrestore(&sched->lock, flags);
->> +}
->> +
->>   static const struct drm_sched_backend_ops drm_mock_scheduler_ops = {
->>   	.run_job = mock_sched_run_job,
->>   	.timedout_job = mock_sched_timedout_job,
->> -	.free_job = mock_sched_free_job
->> +	.free_job = mock_sched_free_job,
->> +	.kill_fence_context = mock_sched_fence_context_kill,
->>   };
->>   
->>   /**
->> @@ -300,18 +320,6 @@ void drm_mock_sched_fini(struct
->> drm_mock_scheduler *sched)
->>   		drm_mock_sched_job_complete(job);
->>   	spin_unlock_irqrestore(&sched->lock, flags);
->>   
->> -	/*
->> -	 * Free completed jobs and jobs not yet processed by the DRM
->> scheduler
->> -	 * free worker.
->> -	 */
->> -	spin_lock_irqsave(&sched->lock, flags);
->> -	list_for_each_entry_safe(job, next, &sched->done_list, link)
->> -		list_move_tail(&job->link, &list);
->> -	spin_unlock_irqrestore(&sched->lock, flags);
->> -
->> -	list_for_each_entry_safe(job, next, &list, link)
->> -		mock_sched_free_job(&job->base);
->> -
->>   	drm_sched_fini(&sched->base);
->>   }
->>   
-> 
+-- 
+2.34.1
 
