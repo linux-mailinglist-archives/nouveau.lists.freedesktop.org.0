@@ -2,72 +2,72 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id 218F1AB2B5D
-	for <lists+nouveau@lfdr.de>; Sun, 11 May 2025 23:08:59 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 2F2D4AB2B5E
+	for <lists+nouveau@lfdr.de>; Sun, 11 May 2025 23:09:01 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id C33EB10E19A;
-	Sun, 11 May 2025 21:08:57 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id D7C1310E1A1;
+	Sun, 11 May 2025 21:08:59 +0000 (UTC)
 Authentication-Results: gabe.freedesktop.org;
-	dkim=pass (2048-bit key; unprotected) header.d=Nvidia.com header.i=@Nvidia.com header.b="dMCF8vLu";
+	dkim=pass (2048-bit key; unprotected) header.d=Nvidia.com header.i=@Nvidia.com header.b="cnhAMPJb";
 	dkim-atps=neutral
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from NAM02-BN1-obe.outbound.protection.outlook.com
- (mail-bn1nam02on2073.outbound.protection.outlook.com [40.107.212.73])
- by gabe.freedesktop.org (Postfix) with ESMTPS id D940E10E19A
- for <nouveau@lists.freedesktop.org>; Sun, 11 May 2025 21:08:56 +0000 (UTC)
+Received: from NAM11-DM6-obe.outbound.protection.outlook.com
+ (mail-dm6nam11on2055.outbound.protection.outlook.com [40.107.223.55])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 5448210E1A1
+ for <nouveau@lists.freedesktop.org>; Sun, 11 May 2025 21:08:59 +0000 (UTC)
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=XBzDsgGQDh/4M/xhAwEK59q+m6i0YihVinfApyi9naMccmZGb5Xd/NTxBcs8llAav2uHLwnNU8r6Us/vxtMzZhYwqkh3lOdB5kQxcVcksaHxIWPFZoiO5yrTWEW/tSdZPSObgk8aglW8Zu/UPeL095eiIqhkHEhVEYPsKVlKIUdxqSgy8WlIcibVySZwmgU8ggajUMTXHXWdUtb1MVCX8rsUrmQVSpsRYIrK7psn8ff/OffGY7cHTb22KhkdBoLKqfm9LZMAT4WwMHK/0ItPhbtP7WKgyvJdgqzVEAA1+7nlaOSibzEEMt6ftY2N+4cGfWeAf3C6nkn8A+pTDDdX3A==
+ b=rBxCpBb9kY25Cnt5a38z8pNqKjt+Dk4yr4D+HbvRZZeYMBkizgTDdaOEargPk1fhN/nDFqT/LRIMhPoUR1F0dLq5JzN2Tze9F8zo5pd/k7Mb3I5GwV7hmTbW7/h57MCpoYBFXg/TgUB3t5Rt5GgW2Unoznq/fAoZFJy5nZZWjBf46UTGruVcm9dQy/lL1Wmudq7fa5lDrI+oCIk0lBLSoBkCcr3Cy/4JzI8Zwnl1fGz3SXOEXFT3SaVrEWnDGkGIK4tzNUjXamYk1afvOWKYf4zcbSRlXVm2w0JSa2Ck/VbXe5X+s/jIASaBD6m3YNY4spnEcGie2rCFAOrOdiNkQQ==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
  s=arcselector10001;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=nFDqu+Mxpzc/BCrppoj9+JVy/faB3By3aUu+mkOE8gg=;
- b=N6VTV4412hoHEdSYjy8aC1r0SuKbLGChc3nXf9PqRETrRUgU4fQTDPBWEId3tOyspo2Zc2VIYC2ItH0s9v7OVqvAWvK5qHtVqu9r8iFZdjk5dCFQ5pTtuSRXdL1kwCo/FORMw3MxqyrOZ6ubh6OqSiK3wKNFejbYCip8bE5Q6qFEd26M9p54v6ien22g8xz+0ZDoPLQbyAr6gA2lkX9bQGC8l26Wkxxts9RoWdt8kBN2qRz5PSZLg+xm72pC9gI3wx1sYRb3z7OXGthNev9W7gmuKJ33DAgL+DlUH/9MWfrc1bgNIgXBL71wY61uS/0v2yD4xlXYVt5kpohlyJntzA==
+ bh=XNIdxy7uYWePVfXc747QT4XxRQTGynYBHF3Zu8dYiIw=;
+ b=QWKjwKz3cleJuQeae6qC9Dx8pOhHVqt4iQQsZTrxA0WKmfj09DJNSk8mdc04Sy5BolDbwNsPuFIIMe2Hb3gyRIBlJfcBxc4qEzr9RQLIXjH1nmm1NVtuoN1PEA+lx8ag29qjGumdudAIC0+GUWhIPYx5KPvE1/SeWDxs1hWDDqR8ecszuOU7EMSrvrNwZql75IfsURIi6csFEG4wTze1vQ4rzaoPyhrhFv0g7Ck7MFVB7vKzR5CU/eC9jmX4UFmuYTFDu0WtMTIXkSZqfzpr1BGqmFBZBoUkXBfDiwkKuC4J8f6T7lTTQewMTyEDyZIsmpTQc+cr+YSgZhoxUaExLA==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
- 216.228.117.161) smtp.rcpttodomain=lists.freedesktop.org
+ 216.228.117.160) smtp.rcpttodomain=lists.freedesktop.org
  smtp.mailfrom=nvidia.com; dmarc=pass (p=reject sp=reject pct=100) action=none
  header.from=nvidia.com; dkim=none (message not signed); arc=none (0)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=Nvidia.com;
  s=selector2;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=nFDqu+Mxpzc/BCrppoj9+JVy/faB3By3aUu+mkOE8gg=;
- b=dMCF8vLuebz6KxPtLJ7jkWZQOirobyqiPl3TXhwwUQI+aekdcVeou4dhiSaTslwy4+w53JeeQZXNiMr22dCbSlAyktGaasnEBkGhUC3aTBBC1yC+M8k66nOv69wg5MQ0arlpMBDJVe6qKab1aqzLvuBJ4ovu80Dz9Q/tqYPeh3Npft0PcoQRpPZPOxibn8UPUPuzT+0zjQJ62c8mJ/Kh8UEV9If0d0a+7kn+Njypd2CsSsmDwjouY6K0v1r4ToSWv4h5+fJgQ7bySCxcuWDtglSGsYina0Vr2C3WsA+rJbtLrOX/+oxG/cOOz1/Adqll9RpeS6akTLwq00zxu0MCyg==
-Received: from DS0PR17CA0003.namprd17.prod.outlook.com (2603:10b6:8:191::17)
- by SA1PR12MB7101.namprd12.prod.outlook.com (2603:10b6:806:29d::16) with
+ bh=XNIdxy7uYWePVfXc747QT4XxRQTGynYBHF3Zu8dYiIw=;
+ b=cnhAMPJbOSNkvBdiSaP2xTrAzZGJduMTE84hePQOuesaghDyCYElKfc1nkbNslSifa4skmaXac82yxzNOTw5s/0N4M+ycGAqH3zzirpaOoPZmJA5Qkyrh/ISimqHCeP55RT8PL+NabvQUB48ElfaLbtyn+7a4OF0lq9+/DX51uVytXItC8qWGMSQjTXpz/f7xhQQ35Nw61LKlX/szoPwZ36Nxa/3tQtQblX5R3O8DFLtf+lyDMCpr5WGi0amidbgz+BmsiPt4CvvkYnsg6QUfaGG59jAqUTfb2+21dmosl2bPMJsl1q7R841wzy+AtUq5AXMaUGpQNFNKBHVo+QLLA==
+Received: from DM6PR07CA0039.namprd07.prod.outlook.com (2603:10b6:5:74::16) by
+ PH0PR12MB7792.namprd12.prod.outlook.com (2603:10b6:510:281::21) with
  Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.8722.23; Sun, 11 May
- 2025 21:08:53 +0000
-Received: from DS2PEPF00003448.namprd04.prod.outlook.com
- (2603:10b6:8:191:cafe::ea) by DS0PR17CA0003.outlook.office365.com
- (2603:10b6:8:191::17) with Microsoft SMTP Server (version=TLS1_3,
- cipher=TLS_AES_256_GCM_SHA384) id 15.20.8699.33 via Frontend Transport; Sun,
- 11 May 2025 21:08:52 +0000
-X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 216.228.117.161)
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.8722.25; Sun, 11 May
+ 2025 21:08:51 +0000
+Received: from DS1PEPF0001709D.namprd05.prod.outlook.com
+ (2603:10b6:5:74:cafe::b) by DM6PR07CA0039.outlook.office365.com
+ (2603:10b6:5:74::16) with Microsoft SMTP Server (version=TLS1_3,
+ cipher=TLS_AES_256_GCM_SHA384) id 15.20.8699.31 via Frontend Transport; Sun,
+ 11 May 2025 21:08:51 +0000
+X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 216.228.117.160)
  smtp.mailfrom=nvidia.com;
  dkim=none (message not signed)
  header.d=none;dmarc=pass action=none header.from=nvidia.com;
 Received-SPF: Pass (protection.outlook.com: domain of nvidia.com designates
- 216.228.117.161 as permitted sender) receiver=protection.outlook.com;
- client-ip=216.228.117.161; helo=mail.nvidia.com; pr=C
-Received: from mail.nvidia.com (216.228.117.161) by
- DS2PEPF00003448.mail.protection.outlook.com (10.167.17.75) with Microsoft
+ 216.228.117.160 as permitted sender) receiver=protection.outlook.com;
+ client-ip=216.228.117.160; helo=mail.nvidia.com; pr=C
+Received: from mail.nvidia.com (216.228.117.160) by
+ DS1PEPF0001709D.mail.protection.outlook.com (10.167.18.107) with Microsoft
  SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.20.8722.18 via Frontend Transport; Sun, 11 May 2025 21:08:52 +0000
+ 15.20.8722.18 via Frontend Transport; Sun, 11 May 2025 21:08:51 +0000
 Received: from rnnvmail201.nvidia.com (10.129.68.8) by mail.nvidia.com
- (10.129.200.67) with Microsoft SMTP Server (version=TLS1_2,
+ (10.129.200.66) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.1544.4; Sun, 11 May
- 2025 14:08:43 -0700
+ 2025 14:08:45 -0700
 Received: from nv-dev.vdiclient.nvidia.com (10.126.231.35) by
  rnnvmail201.nvidia.com (10.129.68.8) with Microsoft SMTP Server
  (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.2.1544.14; Sun, 11 May 2025 14:08:41 -0700
+ 15.2.1544.14; Sun, 11 May 2025 14:08:43 -0700
 From: Ben Skeggs <bskeggs@nvidia.com>
 To: <nouveau@lists.freedesktop.org>, <dakr@kernel.org>
 CC: Ben Skeggs <bskeggs@nvidia.com>, Dave Airlie <airlied@redhat.com>, "Timur
  Tabi" <ttabi@nvidia.com>
-Subject: [PATCH v2 24/62] drm/nouveau/gsp: add hal for gsp.get_static_info()
-Date: Mon, 12 May 2025 07:06:44 +1000
-Message-ID: <20250511210722.80350-25-bskeggs@nvidia.com>
+Subject: [PATCH v2 25/62] drm/nouveau/gsp: add hal for gsp.xlat_mc_engine_idx()
+Date: Mon, 12 May 2025 07:06:45 +1000
+Message-ID: <20250511210722.80350-26-bskeggs@nvidia.com>
 X-Mailer: git-send-email 2.49.0
 In-Reply-To: <20250511210722.80350-1-bskeggs@nvidia.com>
 References: <20250511210722.80350-1-bskeggs@nvidia.com>
@@ -79,52 +79,52 @@ X-ClientProxiedBy: rnnvmail203.nvidia.com (10.129.68.9) To
  rnnvmail201.nvidia.com (10.129.68.8)
 X-EOPAttributedMessage: 0
 X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: DS2PEPF00003448:EE_|SA1PR12MB7101:EE_
-X-MS-Office365-Filtering-Correlation-Id: f3bdcd8f-69c6-463e-8c8e-08dd90d008aa
+X-MS-TrafficTypeDiagnostic: DS1PEPF0001709D:EE_|PH0PR12MB7792:EE_
+X-MS-Office365-Filtering-Correlation-Id: 2479a306-ed4a-41a5-ab59-08dd90d007b8
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
 X-Microsoft-Antispam: BCL:0;
- ARA:13230040|376014|36860700013|1800799024|82310400026; 
-X-Microsoft-Antispam-Message-Info: =?us-ascii?Q?hMue4H9/+nTphS1bvaP7wk4Xm2guNiNRzHnTrmhtjlUE8wPjHWRxzAI8nA2t?=
- =?us-ascii?Q?nhcTS1XXcGv6EhmarBlz6IPZSSHbt9jQkhZIAHgsaheQw+SmteZBWkCxIxqK?=
- =?us-ascii?Q?La/OkfyK17tsJcnId6jZ+6fF8BRNMvDRkX1MWmjDzJhlh3xjYxdD7gTi+SKs?=
- =?us-ascii?Q?5+XL/IvBqpiUEg2nOCtVwp/cp3+lp78eT1hDyELbyeOEMomvF1w2yMsPbKgd?=
- =?us-ascii?Q?Gt6vNscpZSozZiSV5XFxIeyD2EteAlPQk1ZmSSLHyPcQ1D0BIsErdR3B+3Cv?=
- =?us-ascii?Q?X/N9D2NaWbfA26ymI9tSnbVV+3i3JNefUILPkAFrxHaVbe7eF+HZvOD3Uuo2?=
- =?us-ascii?Q?PPlIYDM4Z6UEQ8nKK5BWpuJEhZaF1KYkGfba+xNnEBRE/Y4V9ZC0D+UlTRaw?=
- =?us-ascii?Q?b8YTXs5JcmFRp75cFbe+vthMT7X0K10A86EzslKoyhr5yWtVVhk2RIh9o3xT?=
- =?us-ascii?Q?MFY0E0nEQ4iZUHlN9FTHSs3IJa/AxBgMz/DN47suXanKsvbLoOgLXevnlabY?=
- =?us-ascii?Q?EdEUZvPNzxPguSYY8HrLOHfU2lEOmXLNzfBQK4R7lmDuAyvKGQ4vHy069K5G?=
- =?us-ascii?Q?FRW+IOYsp+2M4LEs3gn/SV3u/Eler3id9bokcHYsCdl9k4RJQpSUIjtvVHyn?=
- =?us-ascii?Q?EVXYFCROx4MHaPdtsyxVYiXIMc6GaEbjMRNw9f9ZomJfu6GoQL8+xnyJ3agc?=
- =?us-ascii?Q?oSwQmarcw+2e/U1kifHPJo2Mbw2xl+QSDhSO34WUu6vHGtEUXyVQmLZ1mhb5?=
- =?us-ascii?Q?+pTpZ/x0mglau9qqVQ9IinmrUrLDF1KU8Bh+oK89p8v5Jq3tf8nXtkWfAuiV?=
- =?us-ascii?Q?EDHeDZfMuky3EYzpS5+6CQK4dSTOBhgEPFCKJpkicl/ADHD+TBNIn8QDpy/X?=
- =?us-ascii?Q?bjqrzOqsHr35Si24NIjw/OMbM5LNLyZNlNIrZzRinuaAn9WTU4he1Lsxk0o9?=
- =?us-ascii?Q?cgSXrwOyWzDvbMqrVPPNTW3yHiOm8BsrBh04FlyogJW1JcN9qWYtRo1waiA2?=
- =?us-ascii?Q?dH1JQZcTJcl2k6xInjSCIWfgkMn3L6RV2K30sRSoYDp+22Uuw+zwI2/tU/xr?=
- =?us-ascii?Q?GZpo3LoVCr0v0+NHbSAqIW7ROdG+64D3VPFhbTrDd6pyrxgLSTeDjWfMxcwU?=
- =?us-ascii?Q?tGIWgxBEyqdSdE+BevqrtSPq7Qd5J7d44mTib3XOoaYpkMn3Dt9f9a/+gkAU?=
- =?us-ascii?Q?bOXXrQb+dzInczyFW7l4h/zUMXNgZCkVD7vQWAGGKmoEfiNRMT8o2Obd7KJp?=
- =?us-ascii?Q?1iYC77VSx46m27S6uWFb5OEyRx2/7iyi3MEXym6buKR+IWp85xLW2GKnq+8J?=
- =?us-ascii?Q?zC1yBXAWOzaFoZ1l0/J/mia90u8w3ksS/918Khd00C5bjTXqJ97mwwq49XMC?=
- =?us-ascii?Q?CE8Gk4OyeiO8wWnE5MEBo4MNgndYUyPidtyDLetOlP2j2nkT+4Sfrt1aY0eP?=
- =?us-ascii?Q?CetxoYzPAs2FyAJ18tG9egFV+fLo65ov/7GPcWhtd6u0oKluUvUs4FX1sQH3?=
- =?us-ascii?Q?wMqI7He82r3CnMV/ix07w+kNwflfacMjjo5q?=
-X-Forefront-Antispam-Report: CIP:216.228.117.161; CTRY:US; LANG:en; SCL:1; SRV:;
- IPV:NLI; SFV:NSPM; H:mail.nvidia.com; PTR:dc6edge2.nvidia.com; CAT:NONE;
- SFS:(13230040)(376014)(36860700013)(1800799024)(82310400026); DIR:OUT;
+ ARA:13230040|36860700013|1800799024|376014|82310400026; 
+X-Microsoft-Antispam-Message-Info: =?us-ascii?Q?l9VM1Ef2GQdipj1VtXygTNp5MOeVPBP9fFZtqBdQE+HCpgmS5J+9FYg06oin?=
+ =?us-ascii?Q?NtVAID9jQhqwQMvcN0BVM35YLqp4NfgqHLj/qekItKiEXueDhoG4+B/+wEhU?=
+ =?us-ascii?Q?4ByuYyot3K5q/b01xzmev6Ln1EQpDjXN2HzRvV2j/qHZ1G2tRfuznxzutW8+?=
+ =?us-ascii?Q?EBAfaWCSOAbtXPetiC3Ruz0xk1HlwKtmkSmFoOZHrr+smcXfLN3BOU0jwEB8?=
+ =?us-ascii?Q?/NJCxr3IvPO8xMzKvSKalm/qq4wnTimfnWxU7miDc1MT5An2FE5ML/bS1lSB?=
+ =?us-ascii?Q?U9iEVk+wr3fbujWeRXh/4Sm/I1s/EzIlJI7wODabW/jZsADueQL2WVxJxwzN?=
+ =?us-ascii?Q?ejEb8LBdHcLHSnfq1H+fbVkfa8C/b/d4TUstoO85Mx28zfrc7QiQWnrh98r+?=
+ =?us-ascii?Q?T9ChZ02OAzdEFBNWhaBIUFHYC+P3vYd96cA5Wgrdlyajas1Mf8kOmsH6qL8b?=
+ =?us-ascii?Q?N30MJJ9EOVODor8vUvM33dhBI6VedJ6dnhbUDtyDrgcRLyQLCbmletKHvlBh?=
+ =?us-ascii?Q?LERIMs1FK8bTWgzF6pa7Wz5zQjBWYjnJ9ChDIFyKoxHQlF05WldQQ6dIzVkv?=
+ =?us-ascii?Q?zhDvUgXrJbtWLX4M81r4TUwBpSUmbuC5AFPMq1tNc4JKX6O+yvgsiSoCHlNO?=
+ =?us-ascii?Q?PrzhdIWPZsazcg41gXen9dkHygWni261cyQnCGCPDP8DYxdz4L8obNyaIWsx?=
+ =?us-ascii?Q?RIkhs80poxqfrYtMv3z8hIDz4Gr0koQ+OFvrp9mGuaYPdFDXG9rRMVLwtVVE?=
+ =?us-ascii?Q?DKLVbugztEo+boS00HbdX0CKaV63Kpqide19NBKwAZ+tt4R2Kb2J3W9Y5Ujo?=
+ =?us-ascii?Q?DbsdfX9llENvOPcS5ZQlmf9/NIZsKsJEvo2OmQRa2nWh01IOEY1NT0edrLbm?=
+ =?us-ascii?Q?Y5KjLOZH2cTDbe6/UXttgI5oW65p+adNJmmAcJzZ1924ye02L/xJRlX0Nw2o?=
+ =?us-ascii?Q?j2A5V53B38eed9tUR+Pf0osfNwJxx4598pZLof+3Z1M2Xl41Y6yn114zAHPM?=
+ =?us-ascii?Q?4Do3wIiNfNmTyPv56MLDlBKTxOz81iJfVLlHhnUwsEKYCYGmd5jbd4U24mHQ?=
+ =?us-ascii?Q?e61A2RycN8iIQyH2t4K+TfsZcvtmrYLce4xAcPepR0ixjUJY2uhJBMOwaXV9?=
+ =?us-ascii?Q?DiYzOkTz1ZvQ1P/5+PrqhlTtBibgXXR9aTv+H26hbiYLyBh80XUMauWNTDfv?=
+ =?us-ascii?Q?zD3f110cSN1mn8+jgT9CRZUHl7FrHxntJ9UlXClp+Buqnxscu+H2Bin/nHci?=
+ =?us-ascii?Q?+d0C5I35pjovOTdIIgzior01WA2PASXXj37btj1Z6LWWT+CHGZcv6HptRbXn?=
+ =?us-ascii?Q?hGBTi8asdwIqxdyA0Wb8wgk+yAY/K07pJfWMFEI5zH5U1u8IypzylpjfqdpQ?=
+ =?us-ascii?Q?pXpkqKsflIYBi716hKOGcR/sfe2C3GIFj2V8DnYp1xWYpVwq1NfTmiwNoHi9?=
+ =?us-ascii?Q?CAfshI70fEHb809URlGYcmXOtgUn9Ua3b09taeboFX4pF3Cg0kZANkeQDIfv?=
+ =?us-ascii?Q?wGwzsvx/pnqi6TUtBci0GF0Q40wfKQQOlZ3O?=
+X-Forefront-Antispam-Report: CIP:216.228.117.160; CTRY:US; LANG:en; SCL:1; SRV:;
+ IPV:NLI; SFV:NSPM; H:mail.nvidia.com; PTR:dc6edge1.nvidia.com; CAT:NONE;
+ SFS:(13230040)(36860700013)(1800799024)(376014)(82310400026); DIR:OUT;
  SFP:1101; 
 X-OriginatorOrg: Nvidia.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 11 May 2025 21:08:52.8010 (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: f3bdcd8f-69c6-463e-8c8e-08dd90d008aa
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 11 May 2025 21:08:51.2170 (UTC)
+X-MS-Exchange-CrossTenant-Network-Message-Id: 2479a306-ed4a-41a5-ab59-08dd90d007b8
 X-MS-Exchange-CrossTenant-Id: 43083d15-7273-40c1-b7db-39efd9ccc17a
-X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=43083d15-7273-40c1-b7db-39efd9ccc17a; Ip=[216.228.117.161];
+X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=43083d15-7273-40c1-b7db-39efd9ccc17a; Ip=[216.228.117.160];
  Helo=[mail.nvidia.com]
-X-MS-Exchange-CrossTenant-AuthSource: DS2PEPF00003448.namprd04.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthSource: DS1PEPF0001709D.namprd05.prod.outlook.com
 X-MS-Exchange-CrossTenant-AuthAs: Anonymous
 X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: SA1PR12MB7101
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: PH0PR12MB7792
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -139,132 +139,133 @@ List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-545.23.06 has incompatible changes to a number of definitions that
-impact the layout of GspStaticConfigInfo.
+545.23.06 has incompatible changes to MC_ENGINE_IDX definitions.
 
 Signed-off-by: Ben Skeggs <bskeggs@nvidia.com>
 Reviewed-by: Dave Airlie <airlied@redhat.com>
 Reviewed-by: Timur Tabi <ttabi@nvidia.com>
 Tested-by: Timur Tabi <ttabi@nvidia.com>
 ---
- .../drm/nouveau/nvkm/subdev/gsp/rm/r535/gsp.c | 67 +++++++++++--------
+ .../drm/nouveau/nvkm/subdev/gsp/rm/r535/gsp.c | 79 +++++++++++--------
  .../gpu/drm/nouveau/nvkm/subdev/gsp/rm/rm.h   |  1 +
- 2 files changed, 39 insertions(+), 29 deletions(-)
+ 2 files changed, 45 insertions(+), 35 deletions(-)
 
 diff --git a/drivers/gpu/drm/nouveau/nvkm/subdev/gsp/rm/r535/gsp.c b/drivers/gpu/drm/nouveau/nvkm/subdev/gsp/rm/r535/gsp.c
-index b225dd06d490..338201b65930 100644
+index 338201b65930..af93116a0fd8 100644
 --- a/drivers/gpu/drm/nouveau/nvkm/subdev/gsp/rm/r535/gsp.c
 +++ b/drivers/gpu/drm/nouveau/nvkm/subdev/gsp/rm/r535/gsp.c
-@@ -165,36 +165,14 @@ r535_gsp_intr_get_table(struct nvkm_gsp *gsp)
- 	return ret;
+@@ -86,10 +86,52 @@ r535_gsp_intr(struct nvkm_inth *inth)
+ 	return IRQ_HANDLED;
  }
  
--static int
--r535_gsp_rpc_get_gsp_static_info(struct nvkm_gsp *gsp)
-+static void
-+r535_gsp_get_static_info_fb(struct nvkm_gsp *gsp,
-+			    const struct NV2080_CTRL_CMD_FB_GET_FB_REGION_INFO_PARAMS *info)
- {
--	GspStaticConfigInfo *rpc;
- 	int last_usable = -1;
- 
--	rpc = nvkm_gsp_rpc_rd(gsp, NV_VGPU_MSG_FUNCTION_GET_GSP_STATIC_INFO, sizeof(*rpc));
--	if (IS_ERR(rpc))
--		return PTR_ERR(rpc);
--
--	gsp->internal.client.object.client = &gsp->internal.client;
--	gsp->internal.client.object.parent = NULL;
--	gsp->internal.client.object.handle = rpc->hInternalClient;
--	gsp->internal.client.gsp = gsp;
--	INIT_LIST_HEAD(&gsp->internal.client.events);
--
--	gsp->internal.device.object.client = &gsp->internal.client;
--	gsp->internal.device.object.parent = &gsp->internal.client.object;
--	gsp->internal.device.object.handle = rpc->hInternalDevice;
--
--	gsp->internal.device.subdevice.client = &gsp->internal.client;
--	gsp->internal.device.subdevice.parent = &gsp->internal.device.object;
--	gsp->internal.device.subdevice.handle = rpc->hInternalSubdevice;
--
--	gsp->bar.rm_bar1_pdb = rpc->bar1PdeBase;
--	gsp->bar.rm_bar2_pdb = rpc->bar2PdeBase;
--
--	for (int i = 0; i < rpc->fbRegionInfoParams.numFBRegions; i++) {
--		NV2080_CTRL_CMD_FB_GET_FB_REGION_FB_REGION_INFO *reg =
--			&rpc->fbRegionInfoParams.fbRegion[i];
-+	for (int i = 0; i < info->numFBRegions; i++) {
-+		const NV2080_CTRL_CMD_FB_GET_FB_REGION_FB_REGION_INFO *reg = &info->fbRegion[i];
- 
- 		nvkm_debug(&gsp->subdev, "fb region %d: "
- 			   "%016llx-%016llx rsvd:%016llx perf:%08x comp:%d iso:%d prot:%d\n", i,
-@@ -216,10 +194,39 @@ r535_gsp_rpc_get_gsp_static_info(struct nvkm_gsp *gsp)
- 	}
- 
- 	if (last_usable >= 0) {
--		u32 rsvd_base = rpc->fbRegionInfoParams.fbRegion[last_usable].limit + 1;
-+		u32 rsvd_base = info->fbRegion[last_usable].limit + 1;
- 
- 		gsp->fb.rsvd_size = gsp->fb.heap.addr - rsvd_base;
- 	}
++static bool
++r535_gsp_xlat_mc_engine_idx(u32 mc_engine_idx, enum nvkm_subdev_type *ptype, int *pinst)
++{
++	switch (mc_engine_idx) {
++	case MC_ENGINE_IDX_GSP:
++		*ptype = NVKM_SUBDEV_GSP;
++		*pinst = 0;
++		return true;
++	case MC_ENGINE_IDX_DISP:
++		*ptype = NVKM_ENGINE_DISP;
++		*pinst = 0;
++		return true;
++	case MC_ENGINE_IDX_CE0 ... MC_ENGINE_IDX_CE9:
++		*ptype = NVKM_ENGINE_CE;
++		*pinst = mc_engine_idx - MC_ENGINE_IDX_CE0;
++		return true;
++	case MC_ENGINE_IDX_GR0:
++		*ptype = NVKM_ENGINE_GR;
++		*pinst = 0;
++		return true;
++	case MC_ENGINE_IDX_NVDEC0 ... MC_ENGINE_IDX_NVDEC7:
++		*ptype = NVKM_ENGINE_NVDEC;
++		*pinst = mc_engine_idx - MC_ENGINE_IDX_NVDEC0;
++		return true;
++	case MC_ENGINE_IDX_MSENC ... MC_ENGINE_IDX_MSENC2:
++		*ptype = NVKM_ENGINE_NVENC;
++		*pinst = mc_engine_idx - MC_ENGINE_IDX_MSENC;
++		return true;
++	case MC_ENGINE_IDX_NVJPEG0 ... MC_ENGINE_IDX_NVJPEG7:
++		*ptype = NVKM_ENGINE_NVJPG;
++		*pinst = mc_engine_idx - MC_ENGINE_IDX_NVJPEG0;
++		return true;
++	case MC_ENGINE_IDX_OFA0:
++		*ptype = NVKM_ENGINE_OFA;
++		*pinst = 0;
++		return true;
++	default:
++		return false;
++	}
 +}
 +
-+static int
-+r535_gsp_get_static_info(struct nvkm_gsp *gsp)
-+{
-+	GspStaticConfigInfo *rpc;
-+
-+	rpc = nvkm_gsp_rpc_rd(gsp, NV_VGPU_MSG_FUNCTION_GET_GSP_STATIC_INFO, sizeof(*rpc));
-+	if (IS_ERR(rpc))
-+		return PTR_ERR(rpc);
-+
-+	gsp->internal.client.object.client = &gsp->internal.client;
-+	gsp->internal.client.object.parent = NULL;
-+	gsp->internal.client.object.handle = rpc->hInternalClient;
-+	gsp->internal.client.gsp = gsp;
-+	INIT_LIST_HEAD(&gsp->internal.client.events);
-+
-+	gsp->internal.device.object.client = &gsp->internal.client;
-+	gsp->internal.device.object.parent = &gsp->internal.client.object;
-+	gsp->internal.device.object.handle = rpc->hInternalDevice;
-+
-+	gsp->internal.device.subdevice.client = &gsp->internal.client;
-+	gsp->internal.device.subdevice.parent = &gsp->internal.device.object;
-+	gsp->internal.device.subdevice.handle = rpc->hInternalSubdevice;
-+
-+	gsp->bar.rm_bar1_pdb = rpc->bar1PdeBase;
-+	gsp->bar.rm_bar2_pdb = rpc->bar2PdeBase;
-+
-+	r535_gsp_get_static_info_fb(gsp, &rpc->fbRegionInfoParams);
- 
- 	for (int gpc = 0; gpc < ARRAY_SIZE(rpc->tpcInfo); gpc++) {
- 		if (rpc->gpcInfo.gpcMask & BIT(gpc)) {
-@@ -278,9 +285,10 @@ static int
- r535_gsp_postinit(struct nvkm_gsp *gsp)
+ static int
+ r535_gsp_intr_get_table(struct nvkm_gsp *gsp)
  {
- 	struct nvkm_device *device = gsp->subdev.device;
+ 	NV2080_CTRL_INTERNAL_INTR_GET_KERNEL_TABLE_PARAMS *ctrl;
 +	const struct nvkm_rm_api *rmapi = gsp->rm->api;
- 	int ret;
+ 	int ret = 0;
  
--	ret = r535_gsp_rpc_get_gsp_static_info(gsp);
-+	ret = rmapi->gsp->get_static_info(gsp);
- 	if (WARN_ON(ret))
- 		return ret;
+ 	ctrl = nvkm_gsp_rm_ctrl_get(&gsp->internal.device.subdevice,
+@@ -112,42 +154,8 @@ r535_gsp_intr_get_table(struct nvkm_gsp *gsp)
+ 			   ctrl->table[i].engineIdx, ctrl->table[i].pmcIntrMask,
+ 			   ctrl->table[i].vectorStall, ctrl->table[i].vectorNonStall);
  
-@@ -2156,4 +2164,5 @@ r535_gsp_oneinit(struct nvkm_gsp *gsp)
- const struct nvkm_rm_api_gsp
+-		switch (ctrl->table[i].engineIdx) {
+-		case MC_ENGINE_IDX_GSP:
+-			type = NVKM_SUBDEV_GSP;
+-			inst = 0;
+-			break;
+-		case MC_ENGINE_IDX_DISP:
+-			type = NVKM_ENGINE_DISP;
+-			inst = 0;
+-			break;
+-		case MC_ENGINE_IDX_CE0 ... MC_ENGINE_IDX_CE9:
+-			type = NVKM_ENGINE_CE;
+-			inst = ctrl->table[i].engineIdx - MC_ENGINE_IDX_CE0;
+-			break;
+-		case MC_ENGINE_IDX_GR0:
+-			type = NVKM_ENGINE_GR;
+-			inst = 0;
+-			break;
+-		case MC_ENGINE_IDX_NVDEC0 ... MC_ENGINE_IDX_NVDEC7:
+-			type = NVKM_ENGINE_NVDEC;
+-			inst = ctrl->table[i].engineIdx - MC_ENGINE_IDX_NVDEC0;
+-			break;
+-		case MC_ENGINE_IDX_MSENC ... MC_ENGINE_IDX_MSENC2:
+-			type = NVKM_ENGINE_NVENC;
+-			inst = ctrl->table[i].engineIdx - MC_ENGINE_IDX_MSENC;
+-			break;
+-		case MC_ENGINE_IDX_NVJPEG0 ... MC_ENGINE_IDX_NVJPEG7:
+-			type = NVKM_ENGINE_NVJPG;
+-			inst = ctrl->table[i].engineIdx - MC_ENGINE_IDX_NVJPEG0;
+-			break;
+-		case MC_ENGINE_IDX_OFA0:
+-			type = NVKM_ENGINE_OFA;
+-			inst = 0;
+-			break;
+-		default:
++		if (!rmapi->gsp->xlat_mc_engine_idx(ctrl->table[i].engineIdx, &type, &inst))
+ 			continue;
+-		}
+ 
+ 		if (WARN_ON(gsp->intr_nr == ARRAY_SIZE(gsp->intr))) {
+ 			ret = -ENOSPC;
+@@ -2165,4 +2173,5 @@ const struct nvkm_rm_api_gsp
  r535_gsp = {
  	.set_system_info = r535_gsp_set_system_info,
-+	.get_static_info = r535_gsp_get_static_info,
+ 	.get_static_info = r535_gsp_get_static_info,
++	.xlat_mc_engine_idx = r535_gsp_xlat_mc_engine_idx,
  };
 diff --git a/drivers/gpu/drm/nouveau/nvkm/subdev/gsp/rm/rm.h b/drivers/gpu/drm/nouveau/nvkm/subdev/gsp/rm/rm.h
-index 4a37904f7f9c..445793d8147b 100644
+index 445793d8147b..aecb066982d8 100644
 --- a/drivers/gpu/drm/nouveau/nvkm/subdev/gsp/rm/rm.h
 +++ b/drivers/gpu/drm/nouveau/nvkm/subdev/gsp/rm/rm.h
-@@ -28,6 +28,7 @@ struct nvkm_rm_wpr {
- struct nvkm_rm_api {
+@@ -29,6 +29,7 @@ struct nvkm_rm_api {
  	const struct nvkm_rm_api_gsp {
  		int (*set_system_info)(struct nvkm_gsp *);
-+		int (*get_static_info)(struct nvkm_gsp *);
+ 		int (*get_static_info)(struct nvkm_gsp *);
++		bool (*xlat_mc_engine_idx)(u32 mc_engine_idx, enum nvkm_subdev_type *, int *inst);
  	} *gsp;
  
  	const struct nvkm_rm_api_rpc {
