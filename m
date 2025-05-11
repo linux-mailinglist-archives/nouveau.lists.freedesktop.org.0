@@ -2,27 +2,27 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id BFDDEAB2B55
-	for <lists+nouveau@lfdr.de>; Sun, 11 May 2025 23:08:44 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id EE6CDAB2B54
+	for <lists+nouveau@lfdr.de>; Sun, 11 May 2025 23:08:43 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 6887510E175;
-	Sun, 11 May 2025 21:08:43 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 9EB6310E0E1;
+	Sun, 11 May 2025 21:08:42 +0000 (UTC)
 Authentication-Results: gabe.freedesktop.org;
-	dkim=pass (2048-bit key; unprotected) header.d=Nvidia.com header.i=@Nvidia.com header.b="j3yXDTR6";
+	dkim=pass (2048-bit key; unprotected) header.d=Nvidia.com header.i=@Nvidia.com header.b="iNcSy/5M";
 	dkim-atps=neutral
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from NAM11-DM6-obe.outbound.protection.outlook.com
- (mail-dm6nam11on2052.outbound.protection.outlook.com [40.107.223.52])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 2C2D110E0E1
- for <nouveau@lists.freedesktop.org>; Sun, 11 May 2025 21:08:42 +0000 (UTC)
+Received: from NAM10-BN7-obe.outbound.protection.outlook.com
+ (mail-bn7nam10on2045.outbound.protection.outlook.com [40.107.92.45])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id CAD3510E0E1
+ for <nouveau@lists.freedesktop.org>; Sun, 11 May 2025 21:08:41 +0000 (UTC)
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=du602vtaHxjz/2uIOp2dvwZO1oENyRFl5TTahewQ1Nfrs0SXNwDShZDK7ajouB8nHT4Q37DBz6htuQgQ75c9L+fU4vdmHfjX50mDnaT1MkyZsbx52HNBPos1hvuyKNA/C3bQDCVdQSrq+166/q7jQYiYLOsNjgk5k51vReO8PcCOH/NgOPtH1G+V8QG0DI+FwsORioLg/wuimLBH2zprwCeVHJp3xQCjEHx4YId9HL/d/krOQAui1x/+0Rdkol++YiFwtenDTgsh+RT8X0Bjvf/yPmuuDOir0dyAOaWiSKDSD3tJpvIfb5A3J2EspQBAMrCgMdqke5VyWuYOZUY7qQ==
+ b=vIPqXhYVwYHSDeFLk3VpOR1jEUwCh/K3ivIupW/LonelFGhe7N5gn0gbktS8QpnG4K/C3ONIOoMnn9Po/Z12eKkYzoJVTXdOBK3zIC8I1GsiugAROmL3dxtmyUWrClQsH8ANaUvOliXZIJG0imjqd5YHVwp7aL6TaNVATq26fOy4eZrApca4qQM7PyOTZVG5ZxX3l6xBoh1V5iZqKfQhC0b0aB6s6hWfnq+y8ETRbVaMVUyA5PQ22JK38hZSuAiJvGZ61KDzCZly0T9+a445IPC9OaYmU1MiOfq7Dy7RF8y1bHbrsyjinUM5z6lXVfatdzBmsQl10EcBBkY2rIourw==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
  s=arcselector10001;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=nexZMeas19AZ/4/89snozhPE146uA6TTOK0QAZtps5Q=;
- b=DbU27aRQlM4ACMhcahYK7cCyB++PTpvwYmh5FP5T+Z7MBKaQgq/XrCYLyGQsaSHLa98G/fC5Nab/VKw6PFD8H8pIJbwtVntH1BFR2NBQx4iTCtyMUEBpZ+un/1qlWzcpaLs1IqAkaERRu5hwIIJloD2btU0cDJKO0PPuetTd5dqfm64WsIyVy6UueIYeqiUml9BjyVoplAgacumfxC8466iQj5Wkgd9iGced10TwALikVNyyDFwMdiyAL/Uuzqe2DqjBjIFKtp5zg/hwkP7MvfWrshtVTlGl2ZXxDOawgI/KabFod7TeAraIWiO3ST0xEkvADtT97k3Emv5C8jaJUw==
+ bh=lhEim/PDCaDLm5lQzQVR9irgV8kWB/msIuijgpAk7ZY=;
+ b=CFnPG2QoEDrPJ0VhJFBvlIA3KQ7eBSFcsZ5VNKT4cYNMvjVBH7ynm9Vz0dyP01eKXCjCbQIXKQ6XdvH73otunDKenW3Q6Pzkmt2a4vs66I6ZnU3Ku7NuHqkKTBp6+tqqHpKrNmz74bnysnTnIxm6uFKtNYhjQRyDrbzqbiP69SYIRMo+ZgIz7XR0mHbyUo0XuGyd18DGbgvTnyXtUm9IkI2t8UTJ0nQ6MjK0+TMSUAo2Ja9wWZ/Fz20hpCMTRI/K7oB5tkVooZiOUQRJxLtdCtRbAAN9B1YNTuWG7b0yvXDWwAkd+pr4C2Zc3gEozE1vqJNd6j67tVsEayIu97xKEw==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
  216.228.117.161) smtp.rcpttodomain=lists.freedesktop.org
  smtp.mailfrom=nvidia.com; dmarc=pass (p=reject sp=reject pct=100) action=none
@@ -30,18 +30,18 @@ ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=Nvidia.com;
  s=selector2;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=nexZMeas19AZ/4/89snozhPE146uA6TTOK0QAZtps5Q=;
- b=j3yXDTR6rrecBlTNE529rrB52HguKmqY0LoHDAqppYPDuIy1rKSBsKZvUyFHjF/AGzcsmVcRdivKB0tHJICEelpg43P1M0KLBQZw76wwJ6GZE16OYPohfceGU2frzXL3Z1BwT223OYHT48QOLKwGJvPuHnvshFs7RU5gsH5dhzTc53gtZI80CYSbzWKraLWnqpjc4t4YLv5JNViS7ptRUgRqrRCag7CKvGqDkqlvIC+nv/7ZxEdkTU9y6ZkTEKKmpiTRqAeab1yZWdED2ZSHUqbOhPct9j8cCrmwIHPQGYK1JADoR6MTE7Ja2yhxtG4OK8wbYBkparc0mmieSgMAoQ==
-Received: from CH2PR10CA0010.namprd10.prod.outlook.com (2603:10b6:610:4c::20)
- by PH7PR12MB7456.namprd12.prod.outlook.com (2603:10b6:510:20f::13)
+ bh=lhEim/PDCaDLm5lQzQVR9irgV8kWB/msIuijgpAk7ZY=;
+ b=iNcSy/5MxcmY13xKYQF5VAu+UkmpvmW9SbBiAGev5IR9zLkmnSbmTkS4bPu/pSQSUK5+EN6jct5DA7lVXPJ8To+tV5JQIipaYhuKt9cP0x3aU4m7tsjhhKkIESd7lltWC+ItIv8ojOeFIVBmh67HBf2CFmlDb8CTECxjgK92Zv2ectJyNyOiQJAJjSgSJpC27CnHCgmD+PEI8AbWqdo+liXeSEZB84G0WUL7vRHv2l/mYDgAkMBHl9V4L7jsdMtRfPooIwXf0Htu93SZoQLAlPC3N7aI29oQfH1WiamTCtZVv24FRWuY9oZYYC9lTq8WiEKaUCjPqx11thCE5fUQMw==
+Received: from CH2PR10CA0026.namprd10.prod.outlook.com (2603:10b6:610:4c::36)
+ by MN2PR12MB4095.namprd12.prod.outlook.com (2603:10b6:208:1d1::11)
  with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.8722.29; Sun, 11 May
- 2025 21:08:35 +0000
+ 2025 21:08:37 +0000
 Received: from DS2PEPF00003443.namprd04.prod.outlook.com
- (2603:10b6:610:4c:cafe::55) by CH2PR10CA0010.outlook.office365.com
- (2603:10b6:610:4c::20) with Microsoft SMTP Server (version=TLS1_3,
- cipher=TLS_AES_256_GCM_SHA384) id 15.20.8722.28 via Frontend Transport; Sun,
- 11 May 2025 21:08:35 +0000
+ (2603:10b6:610:4c:cafe::87) by CH2PR10CA0026.outlook.office365.com
+ (2603:10b6:610:4c::36) with Microsoft SMTP Server (version=TLS1_3,
+ cipher=TLS_AES_256_GCM_SHA384) id 15.20.8722.25 via Frontend Transport; Sun,
+ 11 May 2025 21:08:37 +0000
 X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 216.228.117.161)
  smtp.mailfrom=nvidia.com;
  dkim=none (message not signed)
@@ -52,22 +52,22 @@ Received-SPF: Pass (protection.outlook.com: domain of nvidia.com designates
 Received: from mail.nvidia.com (216.228.117.161) by
  DS2PEPF00003443.mail.protection.outlook.com (10.167.17.70) with Microsoft
  SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.20.8722.18 via Frontend Transport; Sun, 11 May 2025 21:08:35 +0000
+ 15.20.8722.18 via Frontend Transport; Sun, 11 May 2025 21:08:37 +0000
 Received: from rnnvmail201.nvidia.com (10.129.68.8) by mail.nvidia.com
  (10.129.200.67) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.1544.4; Sun, 11 May
- 2025 14:08:29 -0700
+ 2025 14:08:31 -0700
 Received: from nv-dev.vdiclient.nvidia.com (10.126.231.35) by
  rnnvmail201.nvidia.com (10.129.68.8) with Microsoft SMTP Server
  (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.2.1544.14; Sun, 11 May 2025 14:08:27 -0700
+ 15.2.1544.14; Sun, 11 May 2025 14:08:29 -0700
 From: Ben Skeggs <bskeggs@nvidia.com>
 To: <nouveau@lists.freedesktop.org>, <dakr@kernel.org>
 CC: Ben Skeggs <bskeggs@nvidia.com>, Dave Airlie <airlied@redhat.com>, "Timur
  Tabi" <ttabi@nvidia.com>
-Subject: [PATCH v2 16/62] drm/nouveau/gsp: add usermode class id to gpu hal
-Date: Mon, 12 May 2025 07:06:36 +1000
-Message-ID: <20250511210722.80350-17-bskeggs@nvidia.com>
+Subject: [PATCH v2 17/62] drm/nouveau/gsp: add channel class id to gpu hal
+Date: Mon, 12 May 2025 07:06:37 +1000
+Message-ID: <20250511210722.80350-18-bskeggs@nvidia.com>
 X-Mailer: git-send-email 2.49.0
 In-Reply-To: <20250511210722.80350-1-bskeggs@nvidia.com>
 References: <20250511210722.80350-1-bskeggs@nvidia.com>
@@ -79,52 +79,52 @@ X-ClientProxiedBy: rnnvmail203.nvidia.com (10.129.68.9) To
  rnnvmail201.nvidia.com (10.129.68.8)
 X-EOPAttributedMessage: 0
 X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: DS2PEPF00003443:EE_|PH7PR12MB7456:EE_
-X-MS-Office365-Filtering-Correlation-Id: d3e7c8ac-b6ee-4c21-7fe4-08dd90cffe24
+X-MS-TrafficTypeDiagnostic: DS2PEPF00003443:EE_|MN2PR12MB4095:EE_
+X-MS-Office365-Filtering-Correlation-Id: 683e96c6-09fe-4732-df8b-08dd90cfff75
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
 X-Microsoft-Antispam: BCL:0;
- ARA:13230040|36860700013|1800799024|376014|82310400026; 
-X-Microsoft-Antispam-Message-Info: =?us-ascii?Q?xVs+Ms6KSMTExzdptF7JGnNUX5mGEqPH9Vt3OLjfKuEwFXjztu7U26+7Qfrj?=
- =?us-ascii?Q?w74TFA3k2EKQB5+DHWfZ0wicIQA3PMPkh14WpqaZ5g564DIlfT0LwoGayefm?=
- =?us-ascii?Q?ynCaejQBz9ew0QUUn9RiFUYPgzgJYE+scZBKG85xl6TmQGuUgLEDbsIUdmBQ?=
- =?us-ascii?Q?p4/at1Fydo5I1OMKwyyvdmH5ETeEIunYYGpVHDpd2+VmQHixU6ptwLvbVbxk?=
- =?us-ascii?Q?rUl6EqlyN9UHFr3HW1TDO+JH7Q6Cjf+zDNG4lEamtYcpNIsPyEyp+TxCeLba?=
- =?us-ascii?Q?UCKYz1zU0plwdp84BKcD4ix+AeVnyllo46p4MDuA0BXSIsBrIgA6kSX1v10w?=
- =?us-ascii?Q?f6I6Ivh5hHDtCBVOBpZMuO+yhtO6PBaLLCmbtMtQF/Kaw0m1SpacCg+gvTh4?=
- =?us-ascii?Q?8gZ9uDewGg0Tfe9HoAgNQD/JImhETa+mwkn/BU3OK2wzgVugJs571VgfQG/r?=
- =?us-ascii?Q?ytND/R9DSym/o3rdN89v4GNNX2VU1y16a/t6FA+DtkZ7zVXpZqkSiWjv6i1c?=
- =?us-ascii?Q?cGqTcBQecajHEMcg3aE//n8oz6fAe4PmP28OO+cgpGSjuNSouhvLNRY13KX1?=
- =?us-ascii?Q?lBxkGagaPIYFCGXNEcoGst5KarpFC2j/xa+NSXsXX32EaBMJcZUwAOhFywDP?=
- =?us-ascii?Q?zkDgmDDB/sxnphoVzxomB4b8ywd6vQDVRb++Ph/FASNL0ICmF0edEGxR05I6?=
- =?us-ascii?Q?r9V1C2fAnq7b/N57Yc9mik6cG16+8+CJ/olQ6kOQ9KCIs/yejAVcSONL74vG?=
- =?us-ascii?Q?ztVv/VGoMv0HBI/izJ3HzqC1mCaCFodVyEScyr0gyjkOmnbYfJJjODgnkXNs?=
- =?us-ascii?Q?7a2C0qiWDcqjNVmV2Q0xf6RU5gndlX6aT1d8LC7z30Z5Ee1NIfvl4n3g/+8v?=
- =?us-ascii?Q?GvDSFJ9HzKHocZRfdCGuCn03+TsLzk2GsX0PJLmorN+dfOJewS80OjGnz8e1?=
- =?us-ascii?Q?Jmf80koVHsZM9dzKsZNT8aGP/UHwV9J9wSTXTBRXltEwz3F98QPNT/Thx8ue?=
- =?us-ascii?Q?z7MdkDpzFduK0g0d60lESzxMn/oXmHeoxrG+u+BlgR98eHveZwElrrwjYHqq?=
- =?us-ascii?Q?Q1+/5gvvKJFsWlAw15lHN/9u7v3xUQfgYrkaJqVr4Bf/D2dotdafTx/40/j8?=
- =?us-ascii?Q?rTNmfy1h9yYLMNfSi4npZ21+AZNEDQNXzR9eaAYk4VRpZi4cUdoYKxqu2KGQ?=
- =?us-ascii?Q?XaLFfLcikS3ZnnTE+RNNrEWDzsXL8y6o/c5aw70bADN4QfTPxjjYVVJgTVSS?=
- =?us-ascii?Q?JBUGmtmyWz/fSRVPNMq9OV2OHm2hIXQI/p4XNp55kgkLXpEBz/Q50LDInBWG?=
- =?us-ascii?Q?YaYbTUZ9751pfs94PMrJuQWuGDttRpCb9uIOxjyiy4EQNoKKQiBHJsQ8S6o/?=
- =?us-ascii?Q?oCHBS26eMMN2w6r3Jn+fUxlp+NgC4GIyC4jy5hJ0tBNc1Czu2fZBXnLivaMm?=
- =?us-ascii?Q?ezAWWKnJz3YR9QZjAEqwzmo455fdCFxrmQo329bWDx1fofyFAdCLshBAC4w8?=
- =?us-ascii?Q?441HgZLmPlQeIpFfi93UUiuDt7PEKnxi4J4W?=
+ ARA:13230040|376014|36860700013|1800799024|82310400026; 
+X-Microsoft-Antispam-Message-Info: =?us-ascii?Q?G8+Q1v0M6HEja0kTQvtTemeGZF0NKLAxsvrS3sfaGN+dhhMMhlhxSGRMKPo/?=
+ =?us-ascii?Q?YfsXg7cDi3G/DbzRgyZHWuyRLFOmvw+DhQk2tnC0qxmGO1FTF5IleRnxBzW5?=
+ =?us-ascii?Q?rYjmfyzqN7qHgvwFHtpNjGjiz0Khwkw41tE4zCFgzvU3HwP/6orQVD4K/P0U?=
+ =?us-ascii?Q?KKMItaTuXSkIqJuc4JKZWhTYbNONRk+ISxuEH3W3QMNLiG5m//0pwiyYjOmW?=
+ =?us-ascii?Q?sPgZWP7tPWEEISk/pmFCnqVmxMgHEHYEGZ6FVnD+JtfH/XyYh1uLtzAnyG14?=
+ =?us-ascii?Q?xOmsfgse/N2LIZ0XKLSsFkBKT5ski4mPkZ1qBMS6/yzI8sCopzGpIsBOi9Zv?=
+ =?us-ascii?Q?iR5euaCxXxfpt+5oQRyJ5qpBORrzoZjdW4D8WP1TKANGoeK4rm0n3mnhzmUS?=
+ =?us-ascii?Q?dJdyIZfcuGL7Onq8+AecV5JQoVYcNR7dqHcSya7pQrj6cTGdT29AxTCoV3ue?=
+ =?us-ascii?Q?3iOmZpWIDwXsjCQnwfuXE5JmZc/zOvTsTAHu/pJcbPDjLAWZkxop7p6Hpr89?=
+ =?us-ascii?Q?P6UJI2ozE+vEWC+F7P8jr59UG24R7BK20T1d6kkOQAbab8tP1i9qbLJKIZlf?=
+ =?us-ascii?Q?bcJl1lYrrywsaomU+7icyoJ5/iPL7zQ8Wwn19w4i2xgNzOiqg9Tg1kdBMECC?=
+ =?us-ascii?Q?wZrcgOqPIogX8OHNo1P/plcQcVHU4IbDH5MuBg8LZ9J13NKOqMX4joeEvFGC?=
+ =?us-ascii?Q?j4YjiU1zE3ZOiLiSVxnVis4SumnNVtDIMVE9fK0jFKbgvT4AFsPfrxe2kzif?=
+ =?us-ascii?Q?Obb32svTr8M78Z5HC0SpP0t1Yx8fYhO3ztegUa60zDDoQt6Q4ZQFnItZjrZ0?=
+ =?us-ascii?Q?sHRZiENC1XApAnO8V5MkcG5pXxxRnyx8lz3eDTd44/vD7ULNg7tC3IcyAk8t?=
+ =?us-ascii?Q?ZVQroPdXrHx58f48jEzMzs4x+r/fR344Jup2caUSqFZ837yLtqqA92FG9TrQ?=
+ =?us-ascii?Q?PBmfdtrcDNdg/LKDp6ktAcAbq3gxEQUyWUTEG/suGMJTBfgVzpE4Uwzk1pfh?=
+ =?us-ascii?Q?xsUKcxGGrUrf2+xXxQEOuyf+0PIV5IrgsU5FC/EkpAZENKlLTPyq0LMGvnvd?=
+ =?us-ascii?Q?CFT3Z2htVECiVQ+IanLNVdS4LvWO9RIGTRmnhLqsg4q3IVuQarqlD3SD2w9a?=
+ =?us-ascii?Q?icXIqT/qy4spauOs+4rYx5T2zbdaJ8m9OwlAVjzBUgjZrrwhx6zwyGWZNpL/?=
+ =?us-ascii?Q?ph8TfEvQr+/ygpMWaSkZJfnrqaw3+SmG9XmeRukkjhbeAN7RvqhcTMCNPdVY?=
+ =?us-ascii?Q?oG5+5HzETLhrTy02FvqbKkbFEfVJzCExqPZ7T6O7mziM+YZPrPu6DYPs6lie?=
+ =?us-ascii?Q?YfjMkBEp+Kj4SSRvUbxVxmH9d3FLn+TXKNIqXKYP5qWTRd0mH323pb5zI6RL?=
+ =?us-ascii?Q?eCn5AwAgbfYJIoCxX7jF/a6XauxFJzXmm/B5KiAQxg/gpittA5i5ZhNRxmkU?=
+ =?us-ascii?Q?PS+sDUhAdevFtKE6S2rBprmDumKfLL9nL9mueKVnKolaL76oWBh9aX/29+wp?=
+ =?us-ascii?Q?9FpVMfAeoCCzSqdKPM/VpcrrJHiuYe/W/ifj?=
 X-Forefront-Antispam-Report: CIP:216.228.117.161; CTRY:US; LANG:en; SCL:1; SRV:;
  IPV:NLI; SFV:NSPM; H:mail.nvidia.com; PTR:dc6edge2.nvidia.com; CAT:NONE;
- SFS:(13230040)(36860700013)(1800799024)(376014)(82310400026); DIR:OUT;
+ SFS:(13230040)(376014)(36860700013)(1800799024)(82310400026); DIR:OUT;
  SFP:1101; 
 X-OriginatorOrg: Nvidia.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 11 May 2025 21:08:35.1514 (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: d3e7c8ac-b6ee-4c21-7fe4-08dd90cffe24
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 11 May 2025 21:08:37.3792 (UTC)
+X-MS-Exchange-CrossTenant-Network-Message-Id: 683e96c6-09fe-4732-df8b-08dd90cfff75
 X-MS-Exchange-CrossTenant-Id: 43083d15-7273-40c1-b7db-39efd9ccc17a
 X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=43083d15-7273-40c1-b7db-39efd9ccc17a; Ip=[216.228.117.161];
  Helo=[mail.nvidia.com]
 X-MS-Exchange-CrossTenant-AuthSource: DS2PEPF00003443.namprd04.prod.outlook.com
 X-MS-Exchange-CrossTenant-AuthAs: Anonymous
 X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: PH7PR12MB7456
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: MN2PR12MB4095
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -139,7 +139,7 @@ List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-Use usermode class ID from nvkm_rm_gpu, instead of copying it from the
+Use channel class ID from nvkm_rm_gpu, instead of copying it from the
 non-GSP HALs.
 
 Signed-off-by: Ben Skeggs <bskeggs@nvidia.com>
@@ -147,112 +147,126 @@ Reviewed-by: Dave Airlie <airlied@redhat.com>
 Reviewed-by: Timur Tabi <ttabi@nvidia.com>
 Tested-by: Timur Tabi <ttabi@nvidia.com>
 ---
- drivers/gpu/drm/nouveau/nvkm/subdev/gsp/rm/ad10x.c |  2 ++
- drivers/gpu/drm/nouveau/nvkm/subdev/gsp/rm/ga100.c |  3 +++
- drivers/gpu/drm/nouveau/nvkm/subdev/gsp/rm/ga1xx.c |  2 ++
- drivers/gpu/drm/nouveau/nvkm/subdev/gsp/rm/gpu.h   |  4 ++++
- drivers/gpu/drm/nouveau/nvkm/subdev/gsp/rm/tu1xx.c |  2 ++
- drivers/gpu/drm/nouveau/nvkm/subdev/vfn/r535.c     | 11 +++++++++--
- 6 files changed, 22 insertions(+), 2 deletions(-)
+ drivers/gpu/drm/nouveau/nvkm/subdev/gsp/rm/ad10x.c    |  4 ++++
+ drivers/gpu/drm/nouveau/nvkm/subdev/gsp/rm/ga100.c    |  4 ++++
+ drivers/gpu/drm/nouveau/nvkm/subdev/gsp/rm/ga1xx.c    |  4 ++++
+ drivers/gpu/drm/nouveau/nvkm/subdev/gsp/rm/gpu.h      |  6 ++++++
+ .../gpu/drm/nouveau/nvkm/subdev/gsp/rm/r535/fifo.c    | 11 ++++-------
+ drivers/gpu/drm/nouveau/nvkm/subdev/gsp/rm/tu1xx.c    |  4 ++++
+ 6 files changed, 26 insertions(+), 7 deletions(-)
 
 diff --git a/drivers/gpu/drm/nouveau/nvkm/subdev/gsp/rm/ad10x.c b/drivers/gpu/drm/nouveau/nvkm/subdev/gsp/rm/ad10x.c
-index bdeaffbb1077..170264d2a61b 100644
+index 170264d2a61b..d5b64da712bc 100644
 --- a/drivers/gpu/drm/nouveau/nvkm/subdev/gsp/rm/ad10x.c
 +++ b/drivers/gpu/drm/nouveau/nvkm/subdev/gsp/rm/ad10x.c
-@@ -16,4 +16,6 @@ ad10x_gpu = {
- 		.wimm = GA102_DISP_WINDOW_IMM_CHANNEL_DMA,
- 		.curs = GA102_DISP_CURSOR,
+@@ -18,4 +18,8 @@ ad10x_gpu = {
  	},
+ 
+ 	.usermode.class = AMPERE_USERMODE_A,
 +
-+	.usermode.class = AMPERE_USERMODE_A,
++	.fifo.chan = {
++		.class = AMPERE_CHANNEL_GPFIFO_A,
++	},
  };
 diff --git a/drivers/gpu/drm/nouveau/nvkm/subdev/gsp/rm/ga100.c b/drivers/gpu/drm/nouveau/nvkm/subdev/gsp/rm/ga100.c
-index b10e6ff9e9b6..164f46e0a93b 100644
+index 164f46e0a93b..9bf80e196149 100644
 --- a/drivers/gpu/drm/nouveau/nvkm/subdev/gsp/rm/ga100.c
 +++ b/drivers/gpu/drm/nouveau/nvkm/subdev/gsp/rm/ga100.c
-@@ -4,6 +4,9 @@
-  */
- #include "gpu.h"
- 
-+#include <nvif/class.h>
-+
+@@ -9,4 +9,8 @@
  const struct nvkm_rm_gpu
  ga100_gpu = {
-+	.usermode.class = AMPERE_USERMODE_A,
+ 	.usermode.class = AMPERE_USERMODE_A,
++
++	.fifo.chan = {
++		.class = AMPERE_CHANNEL_GPFIFO_A,
++	},
  };
 diff --git a/drivers/gpu/drm/nouveau/nvkm/subdev/gsp/rm/ga1xx.c b/drivers/gpu/drm/nouveau/nvkm/subdev/gsp/rm/ga1xx.c
-index d4b67ccac608..f1d4778c4bc3 100644
+index f1d4778c4bc3..55c90148a0d1 100644
 --- a/drivers/gpu/drm/nouveau/nvkm/subdev/gsp/rm/ga1xx.c
 +++ b/drivers/gpu/drm/nouveau/nvkm/subdev/gsp/rm/ga1xx.c
-@@ -16,4 +16,6 @@ ga1xx_gpu = {
- 		.wimm = GA102_DISP_WINDOW_IMM_CHANNEL_DMA,
- 		.curs = GA102_DISP_CURSOR,
+@@ -18,4 +18,8 @@ ga1xx_gpu = {
  	},
+ 
+ 	.usermode.class = AMPERE_USERMODE_A,
 +
-+	.usermode.class = AMPERE_USERMODE_A,
++	.fifo.chan = {
++		.class = AMPERE_CHANNEL_GPFIFO_A,
++	},
  };
 diff --git a/drivers/gpu/drm/nouveau/nvkm/subdev/gsp/rm/gpu.h b/drivers/gpu/drm/nouveau/nvkm/subdev/gsp/rm/gpu.h
-index 7f3b5f3fd32b..7d005f73326e 100644
+index 7d005f73326e..4aeeb4b32dc8 100644
 --- a/drivers/gpu/drm/nouveau/nvkm/subdev/gsp/rm/gpu.h
 +++ b/drivers/gpu/drm/nouveau/nvkm/subdev/gsp/rm/gpu.h
-@@ -17,6 +17,10 @@ struct nvkm_rm_gpu {
- 			u32 curs;
- 		} class;
- 	} disp;
+@@ -21,6 +21,12 @@ struct nvkm_rm_gpu {
+ 	struct {
+ 		u32 class;
+ 	} usermode;
 +
 +	struct {
-+		u32 class;
-+	} usermode;
++		struct {
++			u32 class;
++		} chan;
++	} fifo;
  };
  
  extern const struct nvkm_rm_gpu tu1xx_gpu;
-diff --git a/drivers/gpu/drm/nouveau/nvkm/subdev/gsp/rm/tu1xx.c b/drivers/gpu/drm/nouveau/nvkm/subdev/gsp/rm/tu1xx.c
-index add98b2f3b6d..7aea54dd89ae 100644
---- a/drivers/gpu/drm/nouveau/nvkm/subdev/gsp/rm/tu1xx.c
-+++ b/drivers/gpu/drm/nouveau/nvkm/subdev/gsp/rm/tu1xx.c
-@@ -16,4 +16,6 @@ tu1xx_gpu = {
- 		.wimm = TU102_DISP_WINDOW_IMM_CHANNEL_DMA,
- 		.curs = TU102_DISP_CURSOR,
- 	},
-+
-+	.usermode.class = TURING_USERMODE_A,
- };
-diff --git a/drivers/gpu/drm/nouveau/nvkm/subdev/vfn/r535.c b/drivers/gpu/drm/nouveau/nvkm/subdev/vfn/r535.c
-index dce337306cab..9446049642e1 100644
---- a/drivers/gpu/drm/nouveau/nvkm/subdev/vfn/r535.c
-+++ b/drivers/gpu/drm/nouveau/nvkm/subdev/vfn/r535.c
-@@ -21,6 +21,8 @@
-  */
- #include "priv.h"
+diff --git a/drivers/gpu/drm/nouveau/nvkm/subdev/gsp/rm/r535/fifo.c b/drivers/gpu/drm/nouveau/nvkm/subdev/gsp/rm/r535/fifo.c
+index acfd807b77ed..4459bebcccdf 100644
+--- a/drivers/gpu/drm/nouveau/nvkm/subdev/gsp/rm/r535/fifo.c
++++ b/drivers/gpu/drm/nouveau/nvkm/subdev/gsp/rm/r535/fifo.c
+@@ -31,6 +31,8 @@
+ #include <subdev/vfn.h>
+ #include <engine/gr.h>
  
 +#include <rm/gpu.h>
 +
- static void
- r535_vfn_dtor(struct nvkm_vfn *vfn)
+ #include <nvhw/drf.h>
+ 
+ #include "nvrm/fifo.h"
+@@ -331,10 +333,6 @@ r535_chan = {
+ 	.doorbell_handle = r535_chan_doorbell_handle,
+ };
+ 
+-static const struct nvkm_cgrp_func
+-r535_cgrp = {
+-};
+-
+ static int
+ r535_engn_nonstall(struct nvkm_engn *engn)
  {
-@@ -32,6 +34,7 @@ r535_vfn_new(const struct nvkm_vfn_func *hw,
- 	     struct nvkm_device *device, enum nvkm_subdev_type type, int inst, u32 addr,
- 	     struct nvkm_vfn **pvfn)
+@@ -637,6 +635,7 @@ int
+ r535_fifo_new(const struct nvkm_fifo_func *hw, struct nvkm_device *device,
+ 	      enum nvkm_subdev_type type, int inst, struct nvkm_fifo **pfifo)
  {
 +	const struct nvkm_rm_gpu *gpu = device->gsp->rm->gpu;
- 	struct nvkm_vfn_func *rm;
- 	int ret;
+ 	struct nvkm_fifo_func *rm;
  
-@@ -39,8 +42,12 @@ r535_vfn_new(const struct nvkm_vfn_func *hw,
- 		return -ENOMEM;
+ 	if (!(rm = kzalloc(sizeof(*rm), GFP_KERNEL)))
+@@ -645,9 +644,7 @@ r535_fifo_new(const struct nvkm_fifo_func *hw, struct nvkm_device *device,
+ 	rm->dtor = r535_fifo_dtor;
+ 	rm->runl_ctor = r535_fifo_runl_ctor;
+ 	rm->runl = &r535_runl;
+-	rm->cgrp = hw->cgrp;
+-	rm->cgrp.func = &r535_cgrp;
+-	rm->chan = hw->chan;
++	rm->chan.user.oclass = gpu->fifo.chan.class;
+ 	rm->chan.func = &r535_chan;
+ 	rm->nonstall = &ga100_fifo_nonstall;
+ 	rm->nonstall_ctor = ga100_fifo_nonstall_ctor;
+diff --git a/drivers/gpu/drm/nouveau/nvkm/subdev/gsp/rm/tu1xx.c b/drivers/gpu/drm/nouveau/nvkm/subdev/gsp/rm/tu1xx.c
+index 7aea54dd89ae..bb674b9cef69 100644
+--- a/drivers/gpu/drm/nouveau/nvkm/subdev/gsp/rm/tu1xx.c
++++ b/drivers/gpu/drm/nouveau/nvkm/subdev/gsp/rm/tu1xx.c
+@@ -18,4 +18,8 @@ tu1xx_gpu = {
+ 	},
  
- 	rm->dtor = r535_vfn_dtor;
--	rm->intr = hw->intr;
--	rm->user = hw->user;
-+	rm->intr = &tu102_vfn_intr,
-+	rm->user.addr = 0x030000;
-+	rm->user.size = 0x010000;
-+	rm->user.base.minver = -1;
-+	rm->user.base.maxver = -1;
-+	rm->user.base.oclass = gpu->usermode.class;
- 
- 	ret = nvkm_vfn_new_(rm, device, type, inst, addr, pvfn);
- 	if (ret)
+ 	.usermode.class = TURING_USERMODE_A,
++
++	.fifo.chan = {
++		.class = TURING_CHANNEL_GPFIFO_A,
++	},
+ };
 -- 
 2.49.0
 
