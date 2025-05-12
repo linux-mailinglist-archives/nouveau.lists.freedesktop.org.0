@@ -2,54 +2,54 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id 4E30CAB44C5
-	for <lists+nouveau@lfdr.de>; Mon, 12 May 2025 21:18:43 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 07DCDAB455B
+	for <lists+nouveau@lfdr.de>; Mon, 12 May 2025 22:07:43 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 4F86D10E0A4;
-	Mon, 12 May 2025 19:18:41 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id BBDCA10E49E;
+	Mon, 12 May 2025 20:07:39 +0000 (UTC)
 Authentication-Results: gabe.freedesktop.org;
-	dkim=pass (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="DBx4N7fU";
+	dkim=pass (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="f24Md++a";
 	dkim-atps=neutral
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
 Received: from nyc.source.kernel.org (nyc.source.kernel.org [147.75.193.91])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 0AFCA10E14F;
- Mon, 12 May 2025 19:18:40 +0000 (UTC)
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 5C94B10E46A;
+ Mon, 12 May 2025 20:07:38 +0000 (UTC)
 Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by nyc.source.kernel.org (Postfix) with ESMTP id 400D8A4C829;
- Mon, 12 May 2025 19:18:38 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 8C638C4CEEF;
- Mon, 12 May 2025 19:18:32 +0000 (UTC)
+ by nyc.source.kernel.org (Postfix) with ESMTP id 6B530A4C8BA;
+ Mon, 12 May 2025 20:07:37 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id B3828C4CEE7;
+ Mon, 12 May 2025 20:07:36 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1747077517;
- bh=XOHvEQa7U216c0WoSRd6/3fB2wSroS71mMJOWWLQAa8=;
- h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
- b=DBx4N7fUXn8H7/SQ8Lg1EFwlZm3r8QmanQa9M3twS+ECuKhW/bg/5Wix10q/CdqRy
- BA9RMoFV7/FVqC7nr3ir98Cr2Y8rc//X8kZk8Y5LXdoy8w1tDIHUzcTp0yGs1+ddUy
- 2NIW2cY3DM7DS2pGJ4WIrNHiJrj8G58s2N9duNUQWzggx/amsEZtdWCJZuF4f5YFXT
- R0gCbqNYijtIDxz0i+UEdUYTvVLM6/MbmW3Q9B/BEN5t15BE4Xa3lfkS42yBRbVThn
- cGwgrnJr/sfFgJqzLlLWYgZJosB/NgnIUhs4Q4WXYPOlpfkyFHgy5LgTNjEKUZ1BN5
- 5p7xVKrgFg3pg==
-Date: Mon, 12 May 2025 21:18:29 +0200
-From: Danilo Krummrich <dakr@kernel.org>
-To: airlied@gmail.com, simona@ffwll.ch, maarten.lankhorst@linux.intel.com,
- mripard@kernel.org, tzimmermann@suse.de, ajanulgu@redhat.com,
- lyude@redhat.com, pstanner@redhat.com, zhiw@nvidia.com,
- cjia@nvidia.com, jhubbard@nvidia.com, bskeggs@nvidia.com,
- acurrid@nvidia.com, joelagnelf@nvidia.com, ttabi@nvidia.com,
- acourbot@nvidia.com
-Cc: ojeda@kernel.org, alex.gaynor@gmail.com, boqun.feng@gmail.com,
- gary@garyguo.net, bjorn3_gh@protonmail.com, benno.lossin@proton.me,
- a.hindborg@kernel.org, aliceryhl@google.com, tmgross@umich.edu,
- dri-devel@lists.freedesktop.org, nouveau@lists.freedesktop.org,
- rust-for-linux@vger.kernel.org
-Subject: Re: [PATCH v2 0/2] Nova DRM skeleton driver
-Message-ID: <aCJJheFGR0TMN5ha@pollux>
-References: <20250424160452.8070-1-dakr@kernel.org>
+ s=k20201202; t=1747080457;
+ bh=Az4ibXiBakDxOB/LA6OaUS+wvOTTZFFucoLFx2LzIag=;
+ h=Date:From:To:Cc:Subject:In-Reply-To:From;
+ b=f24Md++aQzEQfOEm96/rYw7SthZNEh2UBcHOBy4HSkJeILcPVetuY/eQlWUGfZGLi
+ UCmBc554nVfbXefiHzddrpkAKkGxxlW3Vkruj96EVb5aBVrjf8FV//hijvQgauRkpa
+ SYuBBJlCg+9IDSjtOKtyICE8RaB2A7xUFM3K4EkgItlNofzJD8bc2M8KQejyuW4ttd
+ /ecCmjUQJ2QnAAy2UUpfy4wVdpdoSFjgqmP23xUoct9Qw+QyU7T+00rIVqaxEbOm+b
+ SG4aIVoNwBMESSgux1qRwhIdG9UiXf1qKh6lsUVUGbfpNa9luyaU8BAAHCTDjF3BHv
+ 60jLvXnJrlfGQ==
+Date: Mon, 12 May 2025 15:07:34 -0500
+From: Bjorn Helgaas <helgaas@kernel.org>
+To: Andrew Ballance <andrewjballance@gmail.com>
+Cc: dakr@kernel.org, airlied@gmail.com, simona@ffwll.ch,
+ akpm@linux-foundation.org, ojeda@kernel.org, alex.gaynor@gmail.com,
+ boqun.feng@gmail.com, gary@garyguo.net, bjorn3_gh@protonmail.com,
+ benno.lossin@proton.me, a.hindborg@kernel.org, aliceryhl@google.com,
+ tmgross@umich.edu, gregkh@linuxfoundation.org, rafael@kernel.org,
+ bhelgaas@google.com, kwilczynski@kernel.org, raag.jadav@intel.com,
+ andriy.shevchenko@linux.intel.com, arnd@arndb.de, me@kloenk.dev,
+ fujita.tomonori@gmail.com, daniel.almeida@collabora.com,
+ nouveau@lists.freedesktop.org, dri-devel@lists.freedesktop.org,
+ linux-kernel@vger.kernel.org, rust-for-linux@vger.kernel.org,
+ linux-pci@vger.kernel.org
+Subject: Re: [PATCH 02/11] rust: io: Replace Io with MMIo using IoAccess trait
+Message-ID: <20250512200734.GA1120867@bhelgaas>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
-In-Reply-To: <20250424160452.8070-1-dakr@kernel.org>
+In-Reply-To: <20250509031524.2604087-3-andrewjballance@gmail.com>
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -64,7 +64,30 @@ List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-On Thu, Apr 24, 2025 at 06:02:48PM +0200, Danilo Krummrich wrote:
-> This patch series adds the nova-drm skeleton driver.
+On Thu, May 08, 2025 at 10:15:15PM -0500, Andrew Ballance wrote:
+> From: Fiona Behrens <me@kloenk.dev>
+> 
+> Replace the Io struct with a new MMIo struct that uses the different
+> traits (`IoAccess`, `IoAccess64`, `IoAccessRelaxed` and
+> `IoAccess64Relaxed).
+> This allows to later implement PortIo and a generic Io framework.
 
-Applied to nova-next, thanks!
+Add blank line between paragraphs.
+
+> +    /// Read data from a give offset known at compile time.
+
+s/give/given/
+
+> +    /// Bound checks are perfomed on compile time, hence if the offset is not known at compile
+> +    /// time, the build will fail.
+
+s/perfomed on/performed at/
+
+> +    /// Bound checks are performed on runtime, it fails if the offset (plus type size) is
+> +    /// out of bounds.
+
+s/on runtime/at runtime/
+
+> +/// This Takes either `@read` or `@write` to generate a single read or write accessor function.
+
+s/This Takes/This takes/
