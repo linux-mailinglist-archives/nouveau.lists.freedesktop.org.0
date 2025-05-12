@@ -2,88 +2,62 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id B6970C8720F
-	for <lists+nouveau@lfdr.de>; Tue, 25 Nov 2025 21:48:25 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 610DECBA99E
+	for <lists+nouveau@lfdr.de>; Sat, 13 Dec 2025 13:41:28 +0100 (CET)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id AF38C10E49E;
-	Tue, 25 Nov 2025 20:47:34 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id B50BE10E9F3;
+	Sat, 13 Dec 2025 12:40:56 +0000 (UTC)
 Authentication-Results: gabe.freedesktop.org;
-	dkim=permerror (0-bit key) header.d=gmail.com header.i=@gmail.com header.b="hBnm+Jqy";
+	dkim=pass (2048-bit key; secure) header.d=mailbox.org header.i=@mailbox.org header.b="ORyeND/s";
 	dkim-atps=neutral
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from mail-ot1-f42.google.com (mail-ot1-f42.google.com
- [209.85.210.42])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 7DB2B10E269;
- Fri,  9 May 2025 03:17:12 +0000 (UTC)
-Received: by mail-ot1-f42.google.com with SMTP id
- 46e09a7af769-72fffa03ac6so1321454a34.3; 
- Thu, 08 May 2025 20:17:12 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1746760631; x=1747365431; darn=lists.freedesktop.org;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:from:to:cc:subject:date
- :message-id:reply-to;
- bh=opoK+AzPTNKgO/SAmsMVBjeqSr697aHxwJmC1KlGbRc=;
- b=hBnm+JqyUs5pb2SSseYUoISPu8+SPX1uY4TEQ+b+rdKMJkPbsWr3CZ7msu+DZuEEXu
- YbKcVi3AJHxCJdBawhzRYDlYmxC/R3SA0lVlQNUQW0qW5QOaCCZNL28yw0I+Ob3tKKn2
- rKowowNWEbo4V+N3Q1GH1PyM1Te9p8lPaUUfQYybxZ0z1+NZGvIsOOOMA2D/DaOnc/0B
- RlF1knl4cJR7d/aG6og5LTjC4DBi9l7bkfqD3D39ZOJFyKf+9e+JB2VaiLEjJo2TMzwJ
- tDHVGTdRV2rGfT7WN5OaxT0jIosD4khuaM4V/M06ScNuf89XK5eokvhXn+addRD6bVRb
- AlQA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1746760631; x=1747365431;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=opoK+AzPTNKgO/SAmsMVBjeqSr697aHxwJmC1KlGbRc=;
- b=FGOQulaPPs0i+5Rt0/QXLS9XMd8R7jX+pIZnKi6O/FIdwLFLd49N0sPI3z6LAZ5L8K
- ajq2Lmw+68lZFgJccBcQ/5zRrOeLw0vdkZTJPdASDjuVxIwtsfBQ5ubyHhPHz9REzSA+
- CuZiPcV/ivS+SxYBANMx2c84JWKQ6wVDiamcqKiWVSbG/zEt0bQYPRz2O9MZ44qasxPn
- LSQb3W+G8/w6jSiKTsf+jsSQGsuwh2zuUqSF1SRBTIgKAgGcFjT5+IlBnGpGcrjxwwkx
- hwMte+gBpmwyZaJwalyh5Dx/8cHa0+scO3sbANFKfRQSZVuBQg33vTPHVn4YsM4ZYohV
- Fm3A==
-X-Forwarded-Encrypted: i=1;
- AJvYcCXYaoH0RhT4Q2YfXjj+taX2CG2AuIXO4XWSkFOSm30uI3Hm1fDr64OVzZnWovcWpVTxSF+1cRqFtIQ=@lists.freedesktop.org
-X-Gm-Message-State: AOJu0YyLCIDgehxeMeAbn6yIiaD9zS+NWQ9CEe5dDpESB0ky0nVyv+T+
- BK8WSy+qe6E4lu5EuYsy17Wv02TUyqkEWxl4wDZIqsBTFEf5AE2c
-X-Gm-Gg: ASbGnctqrxUHTDvElUQm4+qvmBVBKJYQBLuMrL00tvb3uYBxKsAsDpIEHOi8op85o8+
- /5rOMSMR6BFbBaageVBDJQHYWwvQUfMG3Q2IuHcy+R1Tqobu7WLaH7KQUw7wET4y6fABHaa4+KM
- mxVtFsVsM+Riy4m0+/st014hZp9Kf0g3mGu7xN1cotSOE4bg1X7DztbSNORXkiSZmaHmetDbO4/
- 4UqkgMQUsXxvy88DI6bOY6Cc3IAJwJt69hnSm9iVrrJzhRPra0xUKkF5fVrf2RB/Q5O6tOaNfUg
- Y2yVjACjHI2HYBiSS4C8KghYrehLbIGOCcsiy9VLKwcM+NSUx53cuLpEn8PJhJcJTeMfTRIXs+h
- 9zeFQJHU22/HqKmf3m6+jJXY=
-X-Google-Smtp-Source: AGHT+IFr5wDxcxjZ9Q/iUAiLI2ifQ/cRB+9pzvQIRp+QV4tN7rCEAY/Ke6odF2Cy5+AfeYLWPdfhrw==
-X-Received: by 2002:a05:6808:1885:b0:401:e7c0:62bd with SMTP id
- 5614622812f47-4037fe1e47amr1167787b6e.3.1746760631582; 
- Thu, 08 May 2025 20:17:11 -0700 (PDT)
-Received: from my-computer.lan (c-73-76-29-249.hsd1.tx.comcast.net.
- [73.76.29.249]) by smtp.googlemail.com with ESMTPSA id
- 006d021491bc7-60842b096desm303745eaf.30.2025.05.08.20.17.06
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 08 May 2025 20:17:11 -0700 (PDT)
-From: Andrew Ballance <andrewjballance@gmail.com>
-To: dakr@kernel.org, airlied@gmail.com, simona@ffwll.ch,
- akpm@linux-foundation.org, ojeda@kernel.org, alex.gaynor@gmail.com,
- boqun.feng@gmail.com, gary@garyguo.net, bjorn3_gh@protonmail.com,
- benno.lossin@proton.me, a.hindborg@kernel.org, aliceryhl@google.com,
- tmgross@umich.edu, gregkh@linuxfoundation.org, rafael@kernel.org,
- bhelgaas@google.com, kwilczynski@kernel.org, raag.jadav@intel.com,
- andriy.shevchenko@linux.intel.com, arnd@arndb.de, me@kloenk.dev,
- andrewjballance@gmail.com, fujita.tomonori@gmail.com,
- daniel.almeida@collabora.com
-Cc: nouveau@lists.freedesktop.org, dri-devel@lists.freedesktop.org,
- linux-kernel@vger.kernel.org, rust-for-linux@vger.kernel.org,
- linux-pci@vger.kernel.org
-Subject: [PATCH 11/11] rust: devres: fix doctest
-Date: Thu,  8 May 2025 22:15:24 -0500
-Message-ID: <20250509031524.2604087-12-andrewjballance@gmail.com>
-X-Mailer: git-send-email 2.49.0
-In-Reply-To: <20250509031524.2604087-1-andrewjballance@gmail.com>
-References: <20250509031524.2604087-1-andrewjballance@gmail.com>
+Received: from mout-p-201.mailbox.org (mout-p-201.mailbox.org [80.241.56.171])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id B5EAD10E2FA;
+ Mon, 12 May 2025 08:00:22 +0000 (UTC)
+Received: from smtp2.mailbox.org (smtp2.mailbox.org [10.196.197.2])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
+ (No client certificate requested)
+ by mout-p-201.mailbox.org (Postfix) with ESMTPS id 4ZwsTt6D79z9sR1;
+ Mon, 12 May 2025 10:00:18 +0200 (CEST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
+ s=mail20150812; 
+ t=1747036818; h=from:from:reply-to:reply-to:subject:subject:date:date:
+ message-id:message-id:to:to:cc:cc:mime-version:mime-version:
+ content-type:content-type:
+ content-transfer-encoding:content-transfer-encoding:
+ in-reply-to:in-reply-to:references:references;
+ bh=yoxVZD67ZL713EhSMiYu8DjqgY5ikFo/sSJtdUsWemY=;
+ b=ORyeND/sFmkQfq3E4V1GMt84dROApZtwU/lnbQzkz5YtsLF3zh+ufk9XNGeMaNSUGoPSPf
+ Amxy/ERnAjOvi0KaUwpg7jZAAGYGU+Em7O5QtxfBEtNnThr1z1ICxubNCb6b5TFTViW8M1
+ xT39KgatrqjDrNrSdw+E5BmDnV+pSJD3Lcl5nDfsIFBxWGF05ojn9i/dBnIvR303b0W2rb
+ 8uJYs5HGAZTluUZ9oW/VyxQpLbs1z++4OB5UslTSGvijqthpoJ9QRexKn8LRPy7c69ZXUn
+ PaCdvTMI/oKLs99WNVUKDaBirXyMyFo77qSubwANwHNRxQeHd6Cf5FeLaRI8IQ==
+Message-ID: <84021a2461db55617018050b7c0e07a15dceb634.camel@mailbox.org>
+Subject: Re: [PATCH v2 6/6] drm/sched: Port unit tests to new cleanup design
+From: Philipp Stanner <phasta@mailbox.org>
+To: Tvrtko Ursulin <tvrtko.ursulin@igalia.com>, phasta@kernel.org, Lyude
+ Paul <lyude@redhat.com>, Danilo Krummrich <dakr@kernel.org>, David Airlie
+ <airlied@gmail.com>, Simona Vetter <simona@ffwll.ch>, Matthew Brost
+ <matthew.brost@intel.com>, Christian =?ISO-8859-1?Q?K=F6nig?=
+ <ckoenig.leichtzumerken@gmail.com>, Maarten Lankhorst
+ <maarten.lankhorst@linux.intel.com>, Maxime Ripard <mripard@kernel.org>, 
+ Thomas Zimmermann <tzimmermann@suse.de>
+Cc: dri-devel@lists.freedesktop.org, nouveau@lists.freedesktop.org, 
+ linux-kernel@vger.kernel.org
+Date: Mon, 12 May 2025 10:00:13 +0200
+In-Reply-To: <a1c9c680-2927-428c-95e9-2e79d14cec58@igalia.com>
+References: <20250424095535.26119-2-phasta@kernel.org>
+ <20250424095535.26119-8-phasta@kernel.org>
+ <894cf4cdb7e14b2a21dcf87bfeac4776cb695395.camel@mailbox.org>
+ <a1c9c680-2927-428c-95e9-2e79d14cec58@igalia.com>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-X-Mailman-Approved-At: Tue, 25 Nov 2025 20:47:22 +0000
+X-MBO-RS-ID: f6a8b5451b8e6db5dc4
+X-MBO-RS-META: hpeah8qooega33wgw1uuanskddwwhq95
+X-Mailman-Approved-At: Sat, 13 Dec 2025 12:40:50 +0000
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -95,38 +69,163 @@ List-Post: <mailto:nouveau@lists.freedesktop.org>
 List-Help: <mailto:nouveau-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
  <mailto:nouveau-request@lists.freedesktop.org?subject=subscribe>
+Reply-To: phasta@kernel.org
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-fix a doc test to use the new Io api.
+On Thu, 2025-05-08 at 13:51 +0100, Tvrtko Ursulin wrote:
+>=20
+> Hi Philipp,
+>=20
+> On 08/05/2025 12:03, Philipp Stanner wrote:
+> > On Thu, 2025-04-24 at 11:55 +0200, Philipp Stanner wrote:
+> > > The unit tests so far took care manually of avoiding memory leaks
+> > > that
+> > > might have occurred when calling drm_sched_fini().
+> > >=20
+> > > The scheduler now takes care by itself of avoiding memory leaks
+> > > if
+> > > the
+> > > driver provides the callback
+> > > drm_sched_backend_ops.kill_fence_context().
+> > >=20
+> > > Implement that callback for the unit tests. Remove the manual
+> > > cleanup
+> > > code.
+> >=20
+> > @Tvrtko: On a scale from 1-10, how much do you love this patch? :)
+>=20
+> Specific patch aside, it is the series as a whole I would like to be=20
+> sure there isn't a more elegant way to achieve the same end result.
 
-Signed-off-by: Andrew Ballance <andrewjballance@gmail.com>
----
- rust/kernel/devres.rs | 4 ++--
- 1 file changed, 2 insertions(+), 2 deletions(-)
+I count this as a 9/10 \o/
 
-diff --git a/rust/kernel/devres.rs b/rust/kernel/devres.rs
-index ddb1ce4a78d9..88d145821ca8 100644
---- a/rust/kernel/devres.rs
-+++ b/rust/kernel/devres.rs
-@@ -45,7 +45,7 @@ struct DevresInner<T> {
- /// # Example
- ///
- /// ```no_run
--/// # use kernel::{bindings, c_str, device::Device, devres::Devres, io::{Io, IoRaw}};
-+/// # use kernel::{bindings, c_str, device::Device, devres::Devres, io::{Io, IoRaw, IoAccess}};
- /// # use core::ops::Deref;
- ///
- /// // See also [`pci::Bar`] for a real example.
-@@ -80,7 +80,7 @@ struct DevresInner<T> {
- ///
- ///    fn deref(&self) -> &Self::Target {
- ///         // SAFETY: The memory range stored in `self` has been properly mapped in `Self::new`.
--///         unsafe { Io::from_raw(&self.0) }
-+///         unsafe { Io::from_raw_ref(&self.0) }
- ///    }
- /// }
- /// # fn no_run() -> Result<(), Error> {
--- 
-2.49.0
+But jokes aside:
+
+>=20
+> Like that sketch of a counter proposal I sent for the reasons listed=20
+> with it. Which were, AFAIR, to avoid needing to add more state
+> machine,=20
+
+Well the state machine added is basically just the waitqueue. The
+WRITE_ONCE booleans are currently just for correctness and clarity.
+I've looked at them and want to remove them all in an other patch,
+because I think they're not needed (workqueue handles that)
+
+But yes, the added state is > 0
+
+> to avoid mandating drivers have to keep an internal list,
+
+That's not mandated by the scheduler, but by logic itself. All drivers
+need to have a list of on-flight fences. Otherwise the drivers would
+have no chance of signaling those fences once their GPU tells them to
+do so.
+
+I have now provided two users of the new API, nouveau and the unit
+tests. Can you think of a party for which the suggested approach
+wouldn't work?
+
+
+Don't get me wrong, your approach does work and it definitely has its
+charm. However, I think what I propose here is syntactically a bit
+cleaner because the classical order of a fence first being signaled in
+the driver and then the associated job being freed as usual by the
+scheduler is guaranteed. IOW, we primarily rely on the signaling path.
+
+Either way, neither your nor my approach would have worked out of the
+box in Nouveau without that driver exploding.
+
+>  and to align=20
+> better with the existing prototypes in the sched ops table (where=20
+> everything operates on jobs).
+
+That's not a hard criteria IMO. Those are sched_backend_ops, not
+sched_job_backend_ops, and prepare_job() already takes a parameter
+other than a job.
+
+
+Cheers,
+P.
+
+>=20
+> Regards,
+>=20
+> Tvrtko
+>=20
+> > > Signed-off-by: Philipp Stanner <phasta@kernel.org>
+> > > ---
+> > > =C2=A0=C2=A0.../gpu/drm/scheduler/tests/mock_scheduler.c=C2=A0 | 34
+> > > ++++++++++++-----
+> > > --
+> > > =C2=A0=C2=A01 file changed, 21 insertions(+), 13 deletions(-)
+> > >=20
+> > > diff --git a/drivers/gpu/drm/scheduler/tests/mock_scheduler.c
+> > > b/drivers/gpu/drm/scheduler/tests/mock_scheduler.c
+> > > index f999c8859cf7..a72d26ca8262 100644
+> > > --- a/drivers/gpu/drm/scheduler/tests/mock_scheduler.c
+> > > +++ b/drivers/gpu/drm/scheduler/tests/mock_scheduler.c
+> > > @@ -228,10 +228,30 @@ static void mock_sched_free_job(struct
+> > > drm_sched_job *sched_job)
+> > > =C2=A0=C2=A0	/* Mock job itself is freed by the kunit framework. */
+> > > =C2=A0=C2=A0}
+> > > =C2=A0=20
+> > > +static void mock_sched_fence_context_kill(struct
+> > > drm_gpu_scheduler
+> > > *gpu_sched)
+> > > +{
+> > > +	struct drm_mock_scheduler *sched =3D
+> > > drm_sched_to_mock_sched(gpu_sched);
+> > > +	struct drm_mock_sched_job *job;
+> > > +	unsigned long flags;
+> > > +
+> > > +	spin_lock_irqsave(&sched->lock, flags);
+> > > +	list_for_each_entry(job, &sched->job_list, link) {
+> > > +		spin_lock(&job->lock);
+> > > +		if (!dma_fence_is_signaled_locked(&job-
+> > > >hw_fence)) {
+> > > +			dma_fence_set_error(&job->hw_fence, -
+> > > ECANCELED);
+> > > +			dma_fence_signal_locked(&job->hw_fence);
+> > > +		}
+> > > +		complete(&job->done);
+> > > +		spin_unlock(&job->lock);
+> > > +	}
+> > > +	spin_unlock_irqrestore(&sched->lock, flags);
+> > > +}
+> > > +
+> > > =C2=A0=C2=A0static const struct drm_sched_backend_ops
+> > > drm_mock_scheduler_ops =3D {
+> > > =C2=A0=C2=A0	.run_job =3D mock_sched_run_job,
+> > > =C2=A0=C2=A0	.timedout_job =3D mock_sched_timedout_job,
+> > > -	.free_job =3D mock_sched_free_job
+> > > +	.free_job =3D mock_sched_free_job,
+> > > +	.kill_fence_context =3D mock_sched_fence_context_kill,
+> > > =C2=A0=C2=A0};
+> > > =C2=A0=20
+> > > =C2=A0=C2=A0/**
+> > > @@ -300,18 +320,6 @@ void drm_mock_sched_fini(struct
+> > > drm_mock_scheduler *sched)
+> > > =C2=A0=C2=A0		drm_mock_sched_job_complete(job);
+> > > =C2=A0=C2=A0	spin_unlock_irqrestore(&sched->lock, flags);
+> > > =C2=A0=20
+> > > -	/*
+> > > -	 * Free completed jobs and jobs not yet processed by the
+> > > DRM
+> > > scheduler
+> > > -	 * free worker.
+> > > -	 */
+> > > -	spin_lock_irqsave(&sched->lock, flags);
+> > > -	list_for_each_entry_safe(job, next, &sched->done_list,
+> > > link)
+> > > -		list_move_tail(&job->link, &list);
+> > > -	spin_unlock_irqrestore(&sched->lock, flags);
+> > > -
+> > > -	list_for_each_entry_safe(job, next, &list, link)
+> > > -		mock_sched_free_job(&job->base);
+> > > -
+> > > =C2=A0=C2=A0	drm_sched_fini(&sched->base);
+> > > =C2=A0=C2=A0}
+> > > =C2=A0=20
+> >=20
+>=20
 
