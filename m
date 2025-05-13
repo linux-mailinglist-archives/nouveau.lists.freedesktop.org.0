@@ -2,35 +2,35 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id 18DFEAB55AB
-	for <lists+nouveau@lfdr.de>; Tue, 13 May 2025 15:11:08 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id E669FAB56BA
+	for <lists+nouveau@lfdr.de>; Tue, 13 May 2025 16:07:43 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 5944510E5B6;
-	Tue, 13 May 2025 13:11:04 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 2ED4D10E5A3;
+	Tue, 13 May 2025 14:07:42 +0000 (UTC)
 Authentication-Results: gabe.freedesktop.org;
-	dkim=pass (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="YxlRHcBd";
+	dkim=pass (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="JcimUHHe";
 	dkim-atps=neutral
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from nyc.source.kernel.org (nyc.source.kernel.org [147.75.193.91])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 32EE010E3A3;
- Tue, 13 May 2025 13:11:03 +0000 (UTC)
+Received: from tor.source.kernel.org (tor.source.kernel.org [172.105.4.254])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 4C5F910E39F;
+ Tue, 13 May 2025 14:07:41 +0000 (UTC)
 Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by nyc.source.kernel.org (Postfix) with ESMTP id 68EACA4CC8E;
- Tue, 13 May 2025 13:11:02 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 148CBC4CEE4;
- Tue, 13 May 2025 13:10:56 +0000 (UTC)
+ by tor.source.kernel.org (Postfix) with ESMTP id C3BB8629CC;
+ Tue, 13 May 2025 14:07:39 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 96748C4CEE4;
+ Tue, 13 May 2025 14:07:34 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1747141862;
- bh=gKhlhLz8On/I4blpj1Xo3XEfw/VwE1nkBsqpbi+0TmQ=;
+ s=k20201202; t=1747145259;
+ bh=XQ0PtISiJMgGCU3R2QWS6wlTIRUGPytrW2EX30D6e7g=;
  h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
- b=YxlRHcBdIyTjITqhshYiFpQXnErtT8W0x9QfgcocaaCo3KmngxVi2PXU3ae//Rjoh
- n4XkubZAQmTCqOZ45WiYdnv11SkVaD8EReCBBjhdAeVed0+ggtyM/eMMx7I7O6YZwC
- 0roJwxFIGOud8lJxctuySPBSWWTOZpr76LQKKFxNeAou84cnhNOVJKKAH0+telo092
- sBi0KjRi4500jrLdmCQQPQiPSNXK+31H5gtWADb+Fm+ygH8whuP46M/dbSvAuRyZnw
- 3wKeAbQFoyl7THTiqI57VDigZ26jxFa7EcQgfJTBB/rjbroheuwJo7tpThgRc9SlH2
- lZe92SOiaznnA==
-Date: Tue, 13 May 2025 15:10:54 +0200
+ b=JcimUHHeGhjNh5Mvyn/0+mHwha12SUXq/bzqXiYCaJvDlyuvWqt5KhUbpdrbCcH1/
+ cT4Ehy28S5fCuVFxcz3E5GAB1gT6MgG9pHEoCq1C3akgfeedYk/M6HimsJy//j/8Wf
+ 428iF63D62aPQNlw/15ArDhPmQThH3Pfq57e6BMIh8CUSsxcZGE+8PeUErxlA5xgZk
+ iG6c3C5A8FoCUWOOuzOxJztvCcwyUxWp7D3DM+1n1blv+9tbr3fgJrR5PxzEVAk72I
+ 1Ayo4c+kYTMQP/ARFFCd0lrwBktjRgmvTRTQtNDvYHmQ2lREVnC2PuY4Q1AjZIOzxp
+ 98STD1WVLgZ1Q==
+Date: Tue, 13 May 2025 16:07:31 +0200
 From: Danilo Krummrich <dakr@kernel.org>
 To: Alexandre Courbot <acourbot@nvidia.com>
 Cc: Miguel Ojeda <ojeda@kernel.org>, Alex Gaynor <alex.gaynor@gmail.com>,
@@ -47,16 +47,15 @@ Cc: Miguel Ojeda <ojeda@kernel.org>, Alex Gaynor <alex.gaynor@gmail.com>,
  Joel Fernandes <joelagnelf@nvidia.com>,
  Timur Tabi <ttabi@nvidia.com>, Alistair Popple <apopple@nvidia.com>,
  linux-kernel@vger.kernel.org, rust-for-linux@vger.kernel.org,
- nouveau@lists.freedesktop.org, dri-devel@lists.freedesktop.org,
- Shirish Baskaran <sbaskaran@nvidia.com>
-Subject: Re: [PATCH v3 00/19] nova-core: run FWSEC-FRTS to perform first
- stage of GSP initialization
-Message-ID: <aCNE3uxeuc8TU45w@pollux>
+ nouveau@lists.freedesktop.org, dri-devel@lists.freedesktop.org
+Subject: Re: [PATCH v3 09/19] gpu: nova-core: wait for GFW_BOOT completion
+Message-ID: <aCNSI1iwvK8w51oJ@pollux>
 References: <20250507-nova-frts-v3-0-fcb02749754d@nvidia.com>
+ <20250507-nova-frts-v3-9-fcb02749754d@nvidia.com>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
-In-Reply-To: <20250507-nova-frts-v3-0-fcb02749754d@nvidia.com>
+In-Reply-To: <20250507-nova-frts-v3-9-fcb02749754d@nvidia.com>
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -71,21 +70,84 @@ List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-On Wed, May 07, 2025 at 10:52:27PM +0900, Alexandre Courbot wrote:
->       gpu: nova-core: derive useful traits for Chipset
->       gpu: nova-core: add missing GA100 definition
->       gpu: nova-core: take bound device in Gpu::new
->       gpu: nova-core: define registers layout using helper macro
+On Wed, May 07, 2025 at 10:52:36PM +0900, Alexandre Courbot wrote:
+> Upon reset, the GPU executes the GFW_BOOT firmware in order to
+> initialize its base parameters such as clocks. The driver must ensure
+> that this step is completed before using the hardware.
+> 
+> Signed-off-by: Alexandre Courbot <acourbot@nvidia.com>
+> ---
+>  drivers/gpu/nova-core/devinit.rs   | 38 ++++++++++++++++++++++++++++++++++++++
+>  drivers/gpu/nova-core/driver.rs    |  2 +-
+>  drivers/gpu/nova-core/gpu.rs       |  5 +++++
+>  drivers/gpu/nova-core/nova_core.rs |  1 +
+>  drivers/gpu/nova-core/regs.rs      | 11 +++++++++++
+>  5 files changed, 56 insertions(+), 1 deletion(-)
+> 
+> diff --git a/drivers/gpu/nova-core/devinit.rs b/drivers/gpu/nova-core/devinit.rs
+> new file mode 100644
+> index 0000000000000000000000000000000000000000..5be2e0344fb651e5e53c9223aefeb5b2d95b8de1
+> --- /dev/null
+> +++ b/drivers/gpu/nova-core/devinit.rs
+> @@ -0,0 +1,38 @@
+> +// SPDX-License-Identifier: GPL-2.0
+> +
+> +//! Methods for device initialization.
+> +
+> +use kernel::bindings;
+> +use kernel::prelude::*;
+> +
+> +use crate::driver::Bar0;
+> +use crate::regs;
+> +
+> +/// Wait for devinit FW completion.
+> +///
+> +/// Upon reset, the GPU runs some firmware code to setup its core parameters. Most of the GPU is
+> +/// considered unusable until this step is completed, so it must be waited on very early during
+> +/// driver initialization.
+> +pub(crate) fn wait_gfw_boot_completion(bar: &Bar0) -> Result<()> {
+> +    let mut timeout = 2000;
+> +
+> +    loop {
+> +        let gfw_booted = regs::NV_PGC6_AON_SECURE_SCRATCH_GROUP_05_PRIV_LEVEL_MASK::read(bar)
+> +            .read_protection_level0()
+> +            && (regs::NV_PGC6_AON_SECURE_SCRATCH_GROUP_05::read(bar).value() & 0xff) == 0xff;
 
-    [ Fix typo in commit message. - Danilo ]
+What does it mean when the first 8 bits are set? Why don't we have a mask and
+value to compare for that?
 
->       gpu: nova-core: fix layout of NV_PMC_BOOT_0
+> +
+> +        if gfw_booted {
+> +            return Ok(());
+> +        }
+> +
+> +        if timeout == 0 {
+> +            return Err(ETIMEDOUT);
+> +        }
+> +        timeout -= 1;
 
-    [ Use Result from kernel::prelude. - Danilo ]
+NIT: This means the timeout is ~4s; can we start with timeout == 4000 and decrement
+with the number of ms passed to msleep()?
 
->       gpu: nova-core: move Firmware to firmware module
+Anyways, this should go away with read_poll_timeout() anyways.
 
-    [ Don't require a bound device, remove pub visibility from Firmware
-      fields, use FIRMWARE_VERSION consistently. - Danilo ]
+> +
+> +        // TODO: use `read_poll_timeout` once it is available.
+> +        // (https://lore.kernel.org/lkml/20250220070611.214262-8-fujita.tomonori@gmail.com/)
+> +        // SAFETY: msleep should be safe to call with any parameter.
+> +        unsafe { bindings::msleep(2) };
+> +    }
+> +}
+> diff --git a/drivers/gpu/nova-core/driver.rs b/drivers/gpu/nova-core/driver.rs
+> index a08fb6599267a960f0e07b6efd0e3b6cdc296aa4..752ba4b0fcfe8d835d366570bb2f807840a196da 100644
+> --- a/drivers/gpu/nova-core/driver.rs
+> +++ b/drivers/gpu/nova-core/driver.rs
+> @@ -10,7 +10,7 @@ pub(crate) struct NovaCore {
+>      pub(crate) gpu: Gpu,
+>  }
+>  
+> -const BAR0_SIZE: usize = 8;
+> +const BAR0_SIZE: usize = 0x1000000;
 
-Applied the patches above to nova-next, thanks!
+This means that we'll fail probing the card if BAR0 is not at least 16MiB.
+AFAIK, that should be fine. However, can you make this a separate patch please?
