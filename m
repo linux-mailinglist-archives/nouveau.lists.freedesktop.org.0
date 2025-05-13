@@ -2,35 +2,35 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id F068EAB5A59
-	for <lists+nouveau@lfdr.de>; Tue, 13 May 2025 18:42:08 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 14A3FAB5B04
+	for <lists+nouveau@lfdr.de>; Tue, 13 May 2025 19:20:08 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 8EA6F10E20A;
-	Tue, 13 May 2025 16:42:07 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 9FB4410E26C;
+	Tue, 13 May 2025 17:20:06 +0000 (UTC)
 Authentication-Results: gabe.freedesktop.org;
-	dkim=pass (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="kJtyN6qz";
+	dkim=pass (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="VKfFUr6X";
 	dkim-atps=neutral
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
 Received: from nyc.source.kernel.org (nyc.source.kernel.org [147.75.193.91])
- by gabe.freedesktop.org (Postfix) with ESMTPS id E964110E20A;
- Tue, 13 May 2025 16:42:06 +0000 (UTC)
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 28D7610E267;
+ Tue, 13 May 2025 17:20:05 +0000 (UTC)
 Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by nyc.source.kernel.org (Postfix) with ESMTP id 4F833A4DA22;
- Tue, 13 May 2025 16:42:04 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 43926C4CEE4;
- Tue, 13 May 2025 16:41:59 +0000 (UTC)
+ by nyc.source.kernel.org (Postfix) with ESMTP id 33FE5A4DADF;
+ Tue, 13 May 2025 17:20:04 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id E6CF0C4CEE4;
+ Tue, 13 May 2025 17:19:58 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1747154524;
- bh=/Ux1HyjQpDgAp9sU7Ea8h3m+O43EqtR+LSbkjZzf9sU=;
+ s=k20201202; t=1747156803;
+ bh=MQuhWpdzL93g7rThL0qxlaSL6Ket9ASq4jJ/RLoxeI8=;
  h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
- b=kJtyN6qzbU8Rs6/rCCgnuXBAtvewFagk5TAUVRxX1QPIN8TFuaQuMN3c1y9V4yX8C
- hx0bHCmFdTpoBmZ01k1kkc3770bCWN4vp4bPvV6htromxmClw9AajgKwMJCStCMsgk
- 71MXDMB9kN1V1un54zvQk7W6T0yGYatEu5DfM0ufB7PKmWrG9Yx2Cd//04fY6iRb+n
- p8Zwd984PLAoRB837Tnx4vFoEIov7okdyLYuG6c+2q4VgnOotBWn9ABNIqvXFXrbQu
- vOVU9a9ggdng1Mc2fe2LWZn6DcRPolaiknLJK8epyNToqYRl5iZA9PFjV273r8uL0S
- NO7sEUgHO/CRw==
-Date: Tue, 13 May 2025 18:41:56 +0200
+ b=VKfFUr6XKjwZWWOe1h2dm2026+ajtQ08OViaXvJUs32VjY9pNgCDp3vdLArWlg/ug
+ puZwKFsV0jOk0iacJI6p36/oeQziVIxeiSJAUyKnqq/fBml6h8WOzbMgT2/zUegqoy
+ B4fHJgF8FL0ohX1wmj5VJ4avHzsU1GTK1pwn4i0gDw5oFh/urFsYch6R3cXUojWqDX
+ KJnzl3Kr6WGFJ9Lb92Rj/xUgjOsndgggZdhKrDOsqNtIsCqskFcnAFLHJarQIC1ORk
+ D40A/u3s2+8SpfFgxm5uPh7YMDge5lXgrYnokS5rdcBYcNVgn3EY3M+HxeobdcBAaI
+ b3saKvA8f5miA==
+Date: Tue, 13 May 2025 19:19:56 +0200
 From: Danilo Krummrich <dakr@kernel.org>
 To: Alexandre Courbot <acourbot@nvidia.com>
 Cc: Miguel Ojeda <ojeda@kernel.org>, Alex Gaynor <alex.gaynor@gmail.com>,
@@ -47,15 +47,17 @@ Cc: Miguel Ojeda <ojeda@kernel.org>, Alex Gaynor <alex.gaynor@gmail.com>,
  Joel Fernandes <joelagnelf@nvidia.com>,
  Timur Tabi <ttabi@nvidia.com>, Alistair Popple <apopple@nvidia.com>,
  linux-kernel@vger.kernel.org, rust-for-linux@vger.kernel.org,
- nouveau@lists.freedesktop.org, dri-devel@lists.freedesktop.org
-Subject: Re: [PATCH v3 17/19] gpu: nova-core: compute layout of the FRTS region
-Message-ID: <aCN2VIIKYGcVtctN@pollux>
+ nouveau@lists.freedesktop.org, dri-devel@lists.freedesktop.org,
+ Shirish Baskaran <sbaskaran@nvidia.com>
+Subject: Re: [PATCH v3 16/19] nova-core: Add support for VBIOS ucode
+ extraction for boot
+Message-ID: <aCN_PIYEEzs73AqT@pollux>
 References: <20250507-nova-frts-v3-0-fcb02749754d@nvidia.com>
- <20250507-nova-frts-v3-17-fcb02749754d@nvidia.com>
+ <20250507-nova-frts-v3-16-fcb02749754d@nvidia.com>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
-In-Reply-To: <20250507-nova-frts-v3-17-fcb02749754d@nvidia.com>
+In-Reply-To: <20250507-nova-frts-v3-16-fcb02749754d@nvidia.com>
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -70,269 +72,430 @@ List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-On Wed, May 07, 2025 at 10:52:44PM +0900, Alexandre Courbot wrote:
-> FWSEC-FRTS is run with the desired address of the FRTS region as
-> parameter, which we need to compute depending on some hardware
-> parameters.
+On Wed, May 07, 2025 at 10:52:43PM +0900, Alexandre Courbot wrote:
+> From: Joel Fernandes <joelagnelf@nvidia.com>
 > 
-> Do this in a `FbLayout` structure, that will be later extended to
-> describe more memory regions used to boot the GSP.
+> Add support for navigating and setting up vBIOS ucode data required for
+> GSP to boot. The main data extracted from the vBIOS is the FWSEC-FRTS
+> firmware which runs on the GSP processor. This firmware runs in high
+> secure mode, and sets up the WPR2 (Write protected region) before the
+> Booter runs on the SEC2 processor.
 > 
+> Also add log messages to show the BIOS images.
+> 
+> [102141.013287] NovaCore: Found BIOS image at offset 0x0, size: 0xfe00, type: PciAt
+> [102141.080692] NovaCore: Found BIOS image at offset 0xfe00, size: 0x14800, type: Efi
+> [102141.098443] NovaCore: Found BIOS image at offset 0x24600, size: 0x5600, type: FwSec
+> [102141.415095] NovaCore: Found BIOS image at offset 0x29c00, size: 0x60800, type: FwSec
+> 
+> Tested on my Ampere GA102 and boot is successful.
+> 
+> [applied changes by Alex Courbot for fwsec signatures]
+> [applied feedback from Alex Courbot and Timur Tabi]
+> [applied changes related to code reorg, prints etc from Danilo Krummrich]
+> [acourbot@nvidia.com: fix clippy warnings]
+> [acourbot@nvidia.com: remove now-unneeded Devres acquisition]
+> [acourbot@nvidia.com: fix read_more to read `len` bytes, not u32s]
+> 
+> Cc: Alexandre Courbot <acourbot@nvidia.com>
+> Cc: John Hubbard <jhubbard@nvidia.com>
+> Cc: Shirish Baskaran <sbaskaran@nvidia.com>
+> Cc: Alistair Popple <apopple@nvidia.com>
+> Cc: Timur Tabi <ttabi@nvidia.com>
+> Cc: Ben Skeggs <bskeggs@nvidia.com>
+> Signed-off-by: Joel Fernandes <joelagnelf@nvidia.com>
 > Signed-off-by: Alexandre Courbot <acourbot@nvidia.com>
 > ---
->  drivers/gpu/nova-core/gpu.rs       |   4 ++
->  drivers/gpu/nova-core/gsp.rs       |   3 ++
->  drivers/gpu/nova-core/gsp/fb.rs    | 108 +++++++++++++++++++++++++++++++++++++
->  drivers/gpu/nova-core/nova_core.rs |   1 +
->  drivers/gpu/nova-core/regs.rs      |  27 ++++++++++
->  5 files changed, 143 insertions(+)
+>  drivers/gpu/nova-core/firmware.rs  |    2 -
+>  drivers/gpu/nova-core/gpu.rs       |    3 +
+>  drivers/gpu/nova-core/nova_core.rs |    1 +
+>  drivers/gpu/nova-core/vbios.rs     | 1147 ++++++++++++++++++++++++++++++++++++
+>  4 files changed, 1151 insertions(+), 2 deletions(-)
 > 
+> diff --git a/drivers/gpu/nova-core/firmware.rs b/drivers/gpu/nova-core/firmware.rs
+> index 1eb216307cd01d975b3d5beda1dc516f34b4b3f2..960982174d834c7c66a47ecfb3a15bf47116b2c5 100644
+> --- a/drivers/gpu/nova-core/firmware.rs
+> +++ b/drivers/gpu/nova-core/firmware.rs
+> @@ -80,8 +80,6 @@ pub(crate) struct FalconUCodeDescV3 {
+>      _reserved: u16,
+>  }
+>  
+> -// To be removed once that code is used.
+> -#[expect(dead_code)]
+>  impl FalconUCodeDescV3 {
+>      pub(crate) fn size(&self) -> usize {
+>          ((self.hdr & 0xffff0000) >> 16) as usize
 > diff --git a/drivers/gpu/nova-core/gpu.rs b/drivers/gpu/nova-core/gpu.rs
-> index 4bf7f72247e5320935a517270b5a0e1ec2becfec..a3d96639706e808305cce66416778d2bf6e7e683 100644
+> index ece13594fba687f3f714e255b5436e72d80dece3..4bf7f72247e5320935a517270b5a0e1ec2becfec 100644
 > --- a/drivers/gpu/nova-core/gpu.rs
 > +++ b/drivers/gpu/nova-core/gpu.rs
-> @@ -7,6 +7,7 @@
->  use crate::driver::Bar0;
->  use crate::falcon::{gsp::Gsp, sec2::Sec2, Falcon};
+> @@ -9,6 +9,7 @@
 >  use crate::firmware::Firmware;
-> +use crate::gsp::fb::FbLayout;
 >  use crate::regs;
 >  use crate::util;
->  use crate::vbios::Vbios;
-> @@ -239,6 +240,9 @@ pub(crate) fn new(
+> +use crate::vbios::Vbios;
+>  use core::fmt;
+>  
+>  macro_rules! define_chipset {
+> @@ -238,6 +239,8 @@ pub(crate) fn new(
 >  
 >          let _sec2_falcon = Falcon::<Sec2>::new(pdev.as_ref(), spec.chipset, bar, true)?;
 >  
-> +        let fb_layout = FbLayout::new(spec.chipset, bar)?;
-> +        dev_dbg!(pdev.as_ref(), "{:#x?}\n", fb_layout);
+> +        let _bios = Vbios::new(pdev, bar)?;
+
+Please add a comment why, even though unused, it is important to create this
+instance.
+
+Also, please use `_` if it's not intended to ever be used.
+
 > +
->          let _bios = Vbios::new(pdev, bar)?;
->  
 >          Ok(pin_init!(Self {
-> diff --git a/drivers/gpu/nova-core/gsp.rs b/drivers/gpu/nova-core/gsp.rs
+>              spec,
+>              bar: devres_bar,
+> diff --git a/drivers/gpu/nova-core/nova_core.rs b/drivers/gpu/nova-core/nova_core.rs
+> index 8342482a1aa16da2e69f7d99143c1549a82c969e..ff6d0b40c18f36af4c7e2d5c839fdf77dba23321 100644
+> --- a/drivers/gpu/nova-core/nova_core.rs
+> +++ b/drivers/gpu/nova-core/nova_core.rs
+> @@ -10,6 +10,7 @@
+>  mod gpu;
+>  mod regs;
+>  mod util;
+> +mod vbios;
+>  
+>  kernel::module_pci_driver! {
+>      type: driver::NovaCore,
+> diff --git a/drivers/gpu/nova-core/vbios.rs b/drivers/gpu/nova-core/vbios.rs
 > new file mode 100644
-> index 0000000000000000000000000000000000000000..27616a9d2b7069b18661fc97811fa1cac285b8f8
+> index 0000000000000000000000000000000000000000..cd55d8dbf8e12d532f776d7544c7e5f2a865d6f8
 > --- /dev/null
-> +++ b/drivers/gpu/nova-core/gsp.rs
-> @@ -0,0 +1,3 @@
+> +++ b/drivers/gpu/nova-core/vbios.rs
+> @@ -0,0 +1,1147 @@
 > +// SPDX-License-Identifier: GPL-2.0
 > +
-> +pub(crate) mod fb;
-> diff --git a/drivers/gpu/nova-core/gsp/fb.rs b/drivers/gpu/nova-core/gsp/fb.rs
-> new file mode 100644
-> index 0000000000000000000000000000000000000000..f28ded59469d52daf39e5d19c09efd7bf08fee92
-> --- /dev/null
-> +++ b/drivers/gpu/nova-core/gsp/fb.rs
-> @@ -0,0 +1,108 @@
-> +// SPDX-License-Identifier: GPL-2.0
+> +//! VBIOS extraction and parsing.
 > +
-> +use core::ops::Range;
-> +
-> +use kernel::prelude::*;
+> +// To be removed when all code is used.
+> +#![expect(dead_code)]
 > +
 > +use crate::driver::Bar0;
-> +use crate::gpu::Chipset;
-> +use crate::regs;
+> +use crate::firmware::FalconUCodeDescV3;
+> +use core::convert::TryFrom;
+> +use kernel::device;
+> +use kernel::error::Result;
+> +use kernel::num::NumAlign;
+> +use kernel::pci;
+> +use kernel::prelude::*;
 > +
-> +fn align_down(value: u64, align: u64) -> u64 {
-> +    value & !(align - 1)
-> +}
-
-Can this go in the previous patch, i.e. "rust: num: Add an upward alignment
-helper for usize"?
-
+> +/// The offset of the VBIOS ROM in the BAR0 space.
+> +const ROM_OFFSET: usize = 0x300000;
+> +/// The maximum length of the VBIOS ROM to scan into.
+> +const BIOS_MAX_SCAN_LEN: usize = 0x100000;
+> +/// The size to read ahead when parsing initial BIOS image headers.
+> +const BIOS_READ_AHEAD_SIZE: usize = 1024;
+> +/// The bit in the last image indicator byte for the PCI Data Structure that
+> +/// indicates the last image. Bit 0-6 are reserved, bit 7 is last image bit.
+> +const LAST_IMAGE_BIT_MASK: u8 = 0x80;
 > +
-> +/// Layout of the GPU framebuffer memory.
-> +///
-> +/// Contains ranges of GPU memory reserved for a given purpose during the GSP bootup process.
-> +#[derive(Debug)]
+> +// PMU lookup table entry types. Used to locate PMU table entries
+> +// in the Fwsec image, corresponding to falcon ucodes.
 > +#[expect(dead_code)]
-> +pub(crate) struct FbLayout {
-> +    pub fb: Range<u64>,
+> +const FALCON_UCODE_ENTRY_APPID_FIRMWARE_SEC_LIC: u8 = 0x05;
+> +#[expect(dead_code)]
+> +const FALCON_UCODE_ENTRY_APPID_FWSEC_DBG: u8 = 0x45;
+> +const FALCON_UCODE_ENTRY_APPID_FWSEC_PROD: u8 = 0x85;
 > +
-> +    pub vga_workspace: Range<u64>,
-> +    pub bios: Range<u64>,
-> +
-> +    pub frts: Range<u64>,
-
-Please remove the empty lines.
-
+> +/// Vbios Reader for constructing the VBIOS data
+> +struct VbiosIterator<'a> {
+> +    pdev: &'a pci::Device,
+> +    bar0: &'a Bar0,
+> +    // VBIOS data vector: As BIOS images are scanned, they are added to this vector
+> +    // for reference or copying into other data structures. It is the entire
+> +    // scanned contents of the VBIOS which progressively extends. It is used
+> +    // so that we do not re-read any contents that are already read as we use
+> +    // the cumulative length read so far, and re-read any gaps as we extend
+> +    // the length.
+> +    data: KVec<u8>,
+> +    current_offset: usize, // Current offset for iterator
+> +    last_found: bool,      // Whether the last image has been found
 > +}
 > +
-> +impl FbLayout {
-> +    pub(crate) fn new(chipset: Chipset, bar: &Bar0) -> Result<Self> {
-> +        let fb = {
-> +            let fb_size = vidmem_size(bar, chipset);
-> +
-> +            0..fb_size
-> +        };
-> +        let fb_len = fb.end - fb.start;
-
-Isn't this the same as fb_size? Why not just write it as
-
-	let fb_size = vidmem_size(bar, chipset);
-	let fb = 0..fb_size;
-
-> +
-> +        let vga_workspace = {
-> +            let vga_base = vga_workspace_addr(bar, fb_len, chipset);
-> +
-> +            vga_base..fb.end
-> +        };
-> +
-> +        let bios = vga_workspace.clone();
-
-Why? And why store the same thing twice in FbLayout? If it's really needed,
-clone it in the constructor below and add a comment why it's the same.
-
-> +
-> +        let frts = {
-> +            const FRTS_DOWN_ALIGN: u64 = 0x20000;
-> +            const FRTS_SIZE: u64 = 0x100000;
-> +            let frts_base = align_down(vga_workspace.start, FRTS_DOWN_ALIGN) - FRTS_SIZE;
-> +
-> +            frts_base..frts_base + FRTS_SIZE
-> +        };
-> +
+> +impl<'a> VbiosIterator<'a> {
+> +    fn new(pdev: &'a pci::Device, bar0: &'a Bar0) -> Result<Self> {
 > +        Ok(Self {
-> +            fb,
-> +            vga_workspace,
-> +            bios,
-> +            frts,
+> +            pdev,
+> +            bar0,
+> +            data: KVec::new(),
+> +            current_offset: 0,
+> +            last_found: false,
+> +        })
+> +    }
+> +
+> +    /// Read bytes from the ROM at the current end of the data vector
+> +    fn read_more(&mut self, len: usize) -> Result {
+> +        let current_len = self.data.len();
+> +        let start = ROM_OFFSET + current_len;
+> +
+> +        // Ensure length is a multiple of 4 for 32-bit reads
+> +        if len % core::mem::size_of::<u32>() != 0 {
+> +            dev_err!(
+> +                self.pdev.as_ref(),
+> +                "VBIOS read length {} is not a multiple of 4\n",
+> +                len
+> +            );
+> +            return Err(EINVAL);
+> +        }
+> +
+> +        self.data.reserve(len, GFP_KERNEL)?;
+> +        // Read ROM data bytes and push directly to vector
+> +        for i in (0..len).step_by(core::mem::size_of::<u32>()) {
+> +            // Read 32-bit word from the VBIOS ROM
+> +            let word = self.bar0.try_read32(start + i)?;
+> +
+> +            // Convert the u32 to a 4 byte array and push each byte
+> +            word.to_ne_bytes()
+> +                .iter()
+> +                .try_for_each(|&b| self.data.push(b, GFP_KERNEL))?;
+> +        }
+> +
+> +        Ok(())
+> +    }
+> +
+> +    /// Read bytes at a specific offset, filling any gap
+> +    fn read_more_at_offset(&mut self, offset: usize, len: usize) -> Result {
+> +        if offset > BIOS_MAX_SCAN_LEN {
+> +            dev_err!(self.pdev.as_ref(), "Error: exceeded BIOS scan limit.\n");
+> +            return Err(EINVAL);
+> +        }
+> +
+> +        // If offset is beyond current data size, fill the gap first
+> +        let current_len = self.data.len();
+> +        let gap_bytes = offset.saturating_sub(current_len);
+> +
+> +        // Now read the requested bytes at the offset
+> +        self.read_more(gap_bytes + len)
+> +    }
+> +
+> +    /// Read a BIOS image at a specific offset and create a BiosImage from it.
+> +    /// self.data is extended as needed and a new BiosImage is returned.
+> +    /// @context is a string describing the operation for error reporting
+> +    fn read_bios_image_at_offset(
+> +        &mut self,
+> +        offset: usize,
+> +        len: usize,
+> +        context: &str,
+> +    ) -> Result<BiosImage> {
+> +        let data_len = self.data.len();
+> +        if offset + len > data_len {
+> +            self.read_more_at_offset(offset, len).inspect_err(|e| {
+> +                dev_err!(
+> +                    self.pdev.as_ref(),
+> +                    "Failed to read more at offset {:#x}: {:?}\n",
+> +                    offset,
+> +                    e
+> +                )
+> +            })?;
+> +        }
+> +
+> +        BiosImage::new(self.pdev, &self.data[offset..offset + len]).inspect_err(|err| {
+> +            dev_err!(
+> +                self.pdev.as_ref(),
+> +                "Failed to {} at offset {:#x}: {:?}\n",
+> +                context,
+> +                offset,
+> +                err
+> +            )
 > +        })
 > +    }
 > +}
-
-I'd probably wrap those helpers below in
-
-	mod hal { ... }
-
-or even a new file fb/hal.rs to make their purpose obvious.
-
-> +/// Returns `true` if the display is disabled.
-> +fn display_disabled(bar: &Bar0, chipset: Chipset) -> bool {
-> +    if chipset >= Chipset::GA100 {
-> +        regs::NV_FUSE_STATUS_OPT_DISPLAY_MAXWELL::read(bar).display_disabled()
-> +    } else {
-> +        regs::NV_FUSE_STATUS_OPT_DISPLAY_AMPERE::read(bar).display_disabled()
-> +    }
-> +}
 > +
-> +/// Returns the video memory size in bytes.
-> +fn vidmem_size(bar: &Bar0, chipset: Chipset) -> u64 {
-> +    if chipset >= Chipset::GA102 {
-
-Is GA102 intentional or should this also be GA100?
-
-> +        (regs::NV_PGC6_AON_SECURE_SCRATCH_GROUP_42::read(bar).value() as u64) << 20
-
-Why isn't this shift part of the register abstraction?
-
-> +    } else {
-> +        let local_mem_range = regs::NV_PFB_PRI_MMU_LOCAL_MEMORY_RANGE::read(bar);
-> +        let size =
-> +            (local_mem_range.lower_mag() as u64) << ((local_mem_range.lower_scale() as u64) + 20);
-
-Same here. Please make this part of the register abstraction as it is done in
-previous patches.
-
+> +impl<'a> Iterator for VbiosIterator<'a> {
+> +    type Item = Result<BiosImage>;
 > +
-> +        if local_mem_range.ecc_mode_enabled() {
-> +            size / 16 * 15
-> +        } else {
-> +            size
+> +    /// Iterate over all VBIOS images until the last image is detected or offset
+> +    /// exceeds scan limit.
+> +    fn next(&mut self) -> Option<Self::Item> {
+> +        if self.last_found {
+> +            return None;
 > +        }
+> +
+> +        if self.current_offset > BIOS_MAX_SCAN_LEN {
+> +            dev_err!(
+> +                self.pdev.as_ref(),
+> +                "Error: exceeded BIOS scan limit, stopping scan\n"
+> +            );
+> +            return None;
+> +        }
+> +
+> +        // Parse image headers first to get image size
+> +        let image_size = match self
+> +            .read_bios_image_at_offset(
+> +                self.current_offset,
+> +                BIOS_READ_AHEAD_SIZE,
+> +                "parse initial BIOS image headers",
+> +            )
+> +            .and_then(|image| image.image_size_bytes())
+> +        {
+> +            Ok(size) => size,
+> +            Err(e) => return Some(Err(e)),
+> +        };
+> +
+> +        // Now create a new BiosImage with the full image data
+> +        let full_image = match self.read_bios_image_at_offset(
+> +            self.current_offset,
+> +            image_size,
+> +            "parse full BIOS image",
+> +        ) {
+> +            Ok(image) => image,
+> +            Err(e) => return Some(Err(e)),
+> +        };
+> +
+> +        self.last_found = full_image.is_last();
+> +
+> +        // Advance to next image (aligned to 512 bytes)
+> +        self.current_offset += image_size;
+> +        self.current_offset = self.current_offset.align_up(512);
+> +
+> +        Some(Ok(full_image))
 > +    }
 > +}
 > +
-> +/// Returns the vga workspace address.
-> +fn vga_workspace_addr(bar: &Bar0, fb_size: u64, chipset: Chipset) -> u64 {
-> +    let base = fb_size - 0x100000;
+> +pub(crate) struct Vbios {
+> +    pub fwsec_image: Option<FwSecBiosImage>,
 
-What's this offset? How do you guarantee that this never underflows?
+Please use pub(crate) instead or provide an accessor.
 
-> +    let vga_workspace_base = if display_disabled(bar, chipset) {
-> +        regs::NV_PDISP_VGA_WORKSPACE_BASE::read(bar)
-> +    } else {
-> +        return base;
-> +    };
-> +
-> +    if !vga_workspace_base.status_valid() {
-> +        return base;
-> +    }
-> +
-> +    let addr = (vga_workspace_base.addr() as u64) << 16;
+Also, this shouldn't be an Option, see below comment in Vbios::new().
 
-Where does this shift come from? Shouldn't this be part of the register
-abstraction?
-
-> +    if addr < base {
-> +        fb_size - 0x20000
-
-What's this offset? Can this ever underflow?
-
-> +    } else {
-> +        addr
-> +    }
 > +}
-> diff --git a/drivers/gpu/nova-core/nova_core.rs b/drivers/gpu/nova-core/nova_core.rs
-> index ff6d0b40c18f36af4c7e2d5c839fdf77dba23321..202e978e56f024de3ae8b178e65b63c2cea244e1 100644
-> --- a/drivers/gpu/nova-core/nova_core.rs
-> +++ b/drivers/gpu/nova-core/nova_core.rs
-> @@ -8,6 +8,7 @@
->  mod falcon;
->  mod firmware;
->  mod gpu;
-> +mod gsp;
->  mod regs;
->  mod util;
->  mod vbios;
-> diff --git a/drivers/gpu/nova-core/regs.rs b/drivers/gpu/nova-core/regs.rs
-> index b5c6eeb6ed873a06b4aefcb375f4944eb0b20597..15ec9b7e69694ff198b5353d562fc1aff5eefd3f 100644
-> --- a/drivers/gpu/nova-core/regs.rs
-> +++ b/drivers/gpu/nova-core/regs.rs
-> @@ -53,6 +53,12 @@ pub(crate) fn chipset(self) -> Result<Chipset, Error> {
->      23:0    adr_63_40 as u32;
->  });
->  
-> +register!(NV_PFB_PRI_MMU_LOCAL_MEMORY_RANGE @ 0x00100ce0 {
-> +    3:0     lower_scale as u8;
-> +    9:4     lower_mag as u8;
-> +    30:30   ecc_mode_enabled as bool;
-> +});
 > +
->  /* PGC6 */
->  
->  register!(NV_PGC6_AON_SECURE_SCRATCH_GROUP_05_PRIV_LEVEL_MASK @ 0x00118128 {
-> @@ -64,6 +70,27 @@ pub(crate) fn chipset(self) -> Result<Chipset, Error> {
->      31:0    value as u32;
->  });
->  
-> +register!(NV_PGC6_AON_SECURE_SCRATCH_GROUP_42 @ 0x001183a4 {
-> +    31:0    value as u32;
-> +});
+> +impl Vbios {
+> +    /// Probe for VBIOS extraction
+> +    /// Once the VBIOS object is built, bar0 is not read for vbios purposes anymore.
+> +    pub(crate) fn new(pdev: &pci::Device, bar0: &Bar0) -> Result<Vbios> {
+> +        // Images to extract from iteration
+> +        let mut pci_at_image: Option<PciAtBiosImage> = None;
+> +        let mut first_fwsec_image: Option<FwSecBiosImage> = None;
+> +        let mut second_fwsec_image: Option<FwSecBiosImage> = None;
 > +
-> +/* PDISP */
+> +        // Parse all VBIOS images in the ROM
+> +        for image_result in VbiosIterator::new(pdev, bar0)? {
+> +            let full_image = image_result?;
 > +
-> +register!(NV_PDISP_VGA_WORKSPACE_BASE @ 0x00625f04 {
-> +    3:3     status_valid as bool;
-> +    31:8    addr as u32;
-> +});
+> +            dev_info!(
+
+Let's use dev_dbg!() instaed.
+
+> +                pdev.as_ref(),
+> +                "Found BIOS image: size: {:#x}, type: {}, last: {}\n",
+> +                full_image.image_size_bytes()?,
+> +                full_image.image_type_str(),
+> +                full_image.is_last()
+> +            );
 > +
-> +/* FUSE */
+> +            // Get references to images we will need after the loop, in order to
+> +            // setup the falcon data offset.
+> +            match full_image {
+> +                BiosImage::PciAt(image) => {
+> +                    pci_at_image = Some(image);
+> +                }
+> +                BiosImage::FwSec(image) => {
+> +                    if first_fwsec_image.is_none() {
+> +                        first_fwsec_image = Some(image);
+> +                    } else {
+> +                        second_fwsec_image = Some(image);
+> +                    }
+> +                }
+> +                // For now we don't need to handle these
+> +                BiosImage::Efi(_image) => {}
+> +                BiosImage::Nbsi(_image) => {}
+> +            }
+> +        }
 > +
-> +register!(NV_FUSE_STATUS_OPT_DISPLAY_MAXWELL @ 0x00021c04 {
-> +    0:0     display_disabled as bool;
-> +});
+> +        // Using all the images, setup the falcon data pointer in Fwsec.
+> +        // We need mutable access here, so we handle the Option manually.
+> +        let final_fwsec_image = {
+> +            let mut second = second_fwsec_image; // Take ownership of the option
 > +
-> +register!(NV_FUSE_STATUS_OPT_DISPLAY_AMPERE @ 0x00820c04 {
-> +    0:0     display_disabled as bool;
-> +});
+> +            if let (Some(second), Some(first), Some(pci_at)) =
+> +                (second.as_mut(), first_fwsec_image, pci_at_image)
+> +            {
+> +                second
+> +                    .setup_falcon_data(pdev, &pci_at, &first)
+> +                    .inspect_err(|e| {
+> +                        dev_err!(pdev.as_ref(), "Falcon data setup failed: {:?}\n", e)
+> +                    })?;
+> +            } else {
+> +                dev_err!(
+> +                    pdev.as_ref(),
+> +                    "Missing required images for falcon data setup, skipping\n"
+> +                );
+> +                return Err(EINVAL);
+
+This means that if second == None we fail, which makes sense, so why store an
+Option in Vbios? All methods of Vbios fail if fwsec_image == None.
+
+> +            }
+> +            second
+> +        };
+
+I think this should be:
+
+	let mut second = second_fwsec_image;
+	
+	if let (Some(second), Some(first), Some(pci_at)) =
+	    (second.as_mut(), first_fwsec_image, pci_at_image)
+	{
+	    second
+	        .setup_falcon_data(pdev, &pci_at, &first)
+	        .inspect_err(|e| {
+	            dev_err!(pdev.as_ref(), "Falcon data setup failed: {:?}\n", e)
+	        })?;
+	
+	    Ok(Vbios(second)
+	} else {
+	    dev_err!(
+	        pdev.as_ref(),
+	        "Missing required images for falcon data setup, skipping\n"
+	    );
+	
+	    Err(EINVAL)
+	}
+
+where Vbios can just be
+
+	pub(crate) struct Vbios(FwSecBiosImage);
+
 > +
->  /* PFALCON */
->  
->  register!(NV_PFALCON_FALCON_IRQSCLR @ +0x00000004 {
-> 
-> -- 
-> 2.49.0
-> 
+> +        Ok(Vbios {
+> +            fwsec_image: final_fwsec_image,
+> +        })
+> +    }
+> +
+> +    pub(crate) fn fwsec_header(&self, pdev: &device::Device) -> Result<&FalconUCodeDescV3> {
+> +        let image = self.fwsec_image.as_ref().ok_or(EINVAL)?;
+> +        image.fwsec_header(pdev)
+> +    }
+> +
+> +    pub(crate) fn fwsec_ucode(&self, pdev: &device::Device) -> Result<&[u8]> {
+> +        let image = self.fwsec_image.as_ref().ok_or(EINVAL)?;
+> +        image.fwsec_ucode(pdev, image.fwsec_header(pdev)?)
+> +    }
+> +
+> +    pub(crate) fn fwsec_sigs(&self, pdev: &device::Device) -> Result<&[u8]> {
+> +        let image = self.fwsec_image.as_ref().ok_or(EINVAL)?;
+> +        image.fwsec_sigs(pdev, image.fwsec_header(pdev)?)
+> +    }
+
+Those then become infallible, e.g.
+
+	pub(crate) fn fwsec_sigs(&self, pdev: &device::Device) -> &[u8] {
+	    self.0.fwsec_sigs(pdev, self.fwsec_header(pdev))
+	}
+
+> +}
+
+<snip>
+
+I have to continue with the rest of this patch later on.
+
+- Danilo
