@@ -2,55 +2,61 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id 47B6AAB4E26
-	for <lists+nouveau@lfdr.de>; Tue, 13 May 2025 10:32:47 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id A6B6AAB547A
+	for <lists+nouveau@lfdr.de>; Tue, 13 May 2025 14:15:40 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id F007B10E31E;
-	Tue, 13 May 2025 08:32:45 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id BFC5F10E0C4;
+	Tue, 13 May 2025 12:15:33 +0000 (UTC)
 Authentication-Results: gabe.freedesktop.org;
-	dkim=pass (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="UHeQbiTn";
+	dkim=pass (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="PnypvhNr";
 	dkim-atps=neutral
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from dfw.source.kernel.org (dfw.source.kernel.org [139.178.84.217])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 317B310E338;
- Tue, 13 May 2025 08:32:42 +0000 (UTC)
+Received: from sea.source.kernel.org (sea.source.kernel.org [172.234.252.31])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id BFD9810E0C4;
+ Tue, 13 May 2025 12:15:25 +0000 (UTC)
 Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by dfw.source.kernel.org (Postfix) with ESMTP id 908E75C66A1;
- Tue, 13 May 2025 08:30:20 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id D7ED0C4CEE4;
- Tue, 13 May 2025 08:32:31 +0000 (UTC)
+ by sea.source.kernel.org (Postfix) with ESMTP id 636C54A0F2;
+ Tue, 13 May 2025 12:15:24 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 6B342C4CEE4;
+ Tue, 13 May 2025 12:15:19 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1747125157;
- bh=q70TIRrGdpp6yg967Z9NaG3C82XUVJAKivW+wfIO/tM=;
+ s=k20201202; t=1747138524;
+ bh=idUfsrQz4c6EAsJ61Lq5mzmfS9aeS/MECofu2KJDb1o=;
  h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
- b=UHeQbiTn5XtYLW7+AfbL65SS3DvgOAZP2K+mt25BR8fhFkeRHeTTgjYJffT4uH6MD
- b77UFscjVwRx6Us3pQDmBq7Qlm7hmUzpyno/WePUR5mYocp+jiIy1yP822oACfAtLu
- eCx62UP6S4ZREJAEQ7HiCyZlntpUW/XMgRyni3i5wdrSUWNVntt+xDdzT2o1L6daS7
- gauhQEePN4NFpabmrfMTUgA604cCtWtWOunaees9Vjj+r2UpJO+mqfARF6Ns1U3d7N
- kL+2BBL7BNr2K3gOHn7g+X3PGFF+H4q7l33pTTUohTO9YOgw/Sz0Zm513FmUv68Om8
- b1uHeAuC4Czuw==
-Date: Tue, 13 May 2025 10:32:29 +0200
+ b=PnypvhNrpMfQY13NqEm+v3dGZQaDT9RrOzjNpzu5ZexvD5a8i4aaQHNy6qaBtW6Re
+ zQJ5P0+GEZ7DJbuOe0oihM/SKmSBnu/Efjqfqf9lChGf+MK1LM/auFwEPaDRGDEL7W
+ m1D8Gc/7vi+5fwa7a9Y2tQkGaWo85VP0i8n44iFm6SfsuDZ1D6mQ3aYuHqtmUt64OA
+ m0byRgs/EMIDOfL7J8fsUfaImyXULMSbZjQLrJdduuhDIgNgz4i+J5zPxwKlNa0GIM
+ 6eHvmwDA+xVHk1vpRGCYup/VuuHzWAt4k+S7hBcHR2TwbGCPF1IEzeax5opSqIi4MY
+ xlqB8rYz23uqQ==
+Date: Tue, 13 May 2025 14:15:16 +0200
 From: Danilo Krummrich <dakr@kernel.org>
-To: Andrew Ballance <andrewjballance@gmail.com>
-Cc: airlied@gmail.com, simona@ffwll.ch, akpm@linux-foundation.org,
- ojeda@kernel.org, alex.gaynor@gmail.com, boqun.feng@gmail.com,
- gary@garyguo.net, bjorn3_gh@protonmail.com, benno.lossin@proton.me,
- a.hindborg@kernel.org, aliceryhl@google.com, tmgross@umich.edu,
- gregkh@linuxfoundation.org, rafael@kernel.org, bhelgaas@google.com,
- kwilczynski@kernel.org, raag.jadav@intel.com,
- andriy.shevchenko@linux.intel.com, arnd@arndb.de, me@kloenk.dev,
- fujita.tomonori@gmail.com, daniel.almeida@collabora.com,
- nouveau@lists.freedesktop.org, dri-devel@lists.freedesktop.org,
+To: Alexandre Courbot <acourbot@nvidia.com>
+Cc: Miguel Ojeda <ojeda@kernel.org>, Alex Gaynor <alex.gaynor@gmail.com>,
+ Boqun Feng <boqun.feng@gmail.com>, Gary Guo <gary@garyguo.net>,
+ =?iso-8859-1?Q?Bj=F6rn?= Roy Baron <bjorn3_gh@protonmail.com>,
+ Benno Lossin <benno.lossin@proton.me>,
+ Andreas Hindborg <a.hindborg@kernel.org>,
+ Alice Ryhl <aliceryhl@google.com>, Trevor Gross <tmgross@umich.edu>,
+ David Airlie <airlied@gmail.com>, Simona Vetter <simona@ffwll.ch>,
+ Maarten Lankhorst <maarten.lankhorst@linux.intel.com>,
+ Maxime Ripard <mripard@kernel.org>,
+ Thomas Zimmermann <tzimmermann@suse.de>, Jonathan Corbet <corbet@lwn.net>,
+ John Hubbard <jhubbard@nvidia.com>, Ben Skeggs <bskeggs@nvidia.com>,
+ Joel Fernandes <joelagnelf@nvidia.com>,
+ Timur Tabi <ttabi@nvidia.com>, Alistair Popple <apopple@nvidia.com>,
  linux-kernel@vger.kernel.org, rust-for-linux@vger.kernel.org,
- linux-pci@vger.kernel.org
-Subject: Re: [PATCH 00/11] rust: add support for Port io
-Message-ID: <aCMDnQCcAOt28ONM@pollux>
-References: <20250509031524.2604087-1-andrewjballance@gmail.com>
+ nouveau@lists.freedesktop.org, dri-devel@lists.freedesktop.org
+Subject: Re: [PATCH v3 01/19] rust: dma: expose the count and size of
+ CoherentAllocation
+Message-ID: <aCM31J-B8aOf8Dg2@pollux>
+References: <20250507-nova-frts-v3-0-fcb02749754d@nvidia.com>
+ <20250507-nova-frts-v3-1-fcb02749754d@nvidia.com>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
-In-Reply-To: <20250509031524.2604087-1-andrewjballance@gmail.com>
+In-Reply-To: <20250507-nova-frts-v3-1-fcb02749754d@nvidia.com>
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -65,50 +71,43 @@ List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-Hi Andrew,
-
-On Thu, May 08, 2025 at 10:15:13PM -0500, Andrew Ballance wrote:
-> currently the rust `Io` type maps to the c read{b, w, l, q}/write{b, w, l, q}
-> functions and have no support for port io.this is a problem for pci::Bar
-> because the pointer returned by pci_iomap is expected to accessed with
-> the ioread/iowrite api [0].
+On Wed, May 07, 2025 at 10:52:28PM +0900, Alexandre Courbot wrote:
+> These properties are very useful to have and should be accessible.
 > 
-> this patch series splits the `Io` type into `Io`, `PortIo` and `MMIo`.and,
-> updates pci::Bar, as suggested in the zulip[1], so that it is generic over
-> Io and, a user can optionally give a compile time hint about the type of io. 
+> Signed-off-by: Alexandre Courbot <acourbot@nvidia.com>
+> ---
+>  rust/kernel/dma.rs | 14 ++++++++++++++
+>  1 file changed, 14 insertions(+)
 > 
-> Link: https://docs.kernel.org/6.11/driver-api/pci/pci.html#c.pci_iomap [0]
-> Link: https://rust-for-linux.zulipchat.com/#narrow/channel/288089-General/topic/.60IoRaw.60.20and.20.60usize.60/near/514788730 [1]
+> diff --git a/rust/kernel/dma.rs b/rust/kernel/dma.rs
+> index 605e01e35715667f93297fd9ec49d8e7032e0910..18602d771054fceb80c29278b1945254312ed7c6 100644
+> --- a/rust/kernel/dma.rs
+> +++ b/rust/kernel/dma.rs
+> @@ -201,6 +201,20 @@ pub fn alloc_coherent(
+>          CoherentAllocation::alloc_attrs(dev, count, gfp_flags, Attrs(0))
+>      }
+>  
+> +    /// Returns the number of elements `T` in this allocation.
+> +    ///
+> +    /// Note that this is not the size of the allocation in bytes, which is provided by
+> +    /// [`Self::size`].
+> +    pub fn count(&self) -> usize {
+> +        self.count
+> +    }
+> +
+> +    /// Returns the size in bytes of this allocation.
+> +    pub fn size(&self) -> usize {
+> +        // This is guaranteed not to overflow as the same operation has been done in `alloc_attrs`.
+
+Please make this an invariant of CoherentAllocation and refer to that instead.
+
+> +        self.count * core::mem::size_of::<T>()
+> +    }
+> +
+>      /// Returns the base address to the allocated region in the CPU's virtual address space.
+>      pub fn start_ptr(&self) -> *const T {
+>          self.cpu_addr
 > 
-> Andrew Ballance (6):
->   rust: io: add new Io type
->   rust: io: add from_raw_cookie functions
->   rust: pci: make Bar generic over Io
->   samples: rust: rust_driver_pci: update to use new bar and io api
->   gpu: nova-core: update to use the new bar and io api
->   rust: devres: fix doctest
+> -- 
+> 2.49.0
 > 
-> Fiona Behrens (5):
->   rust: helpers: io: use macro to generate io accessor functions
->   rust: io: Replace Io with MMIo using IoAccess trait
->   rust: io: implement Debug for IoRaw and add some doctests
->   rust: io: add PortIo
->   io: move PIO_OFFSET to linux/io.h
-
-Thanks for sending out the patch series.
-
-I gave it a quick shot and the series breaks the build starting with patch 2. I
-see that you have fixup commits later in the series, however in the kernel we
-don't allow patches to intermediately introduce build failures, build warnings,
-bugs, etc., see also [1]. You should still try to break things down logically as
-good as possible.
-
-From the current structure of your patches it seems to me that structure-wise
-you should be good by going through them one by one and fix them up; your later
-patches should become "noops" then. But feel free to re-organize things if you
-feel that's not the best approach.
-
-Can you please fix this up and resend right away? This should make the
-subsequent review much easier.
-
-[1] https://docs.kernel.org/process/submitting-patches.html#separate-your-changes
