@@ -2,62 +2,59 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id 14A3FAB5B04
-	for <lists+nouveau@lfdr.de>; Tue, 13 May 2025 19:20:08 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 9EDC7AB65FE
+	for <lists+nouveau@lfdr.de>; Wed, 14 May 2025 10:30:49 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 9FB4410E26C;
-	Tue, 13 May 2025 17:20:06 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id E57C710E241;
+	Wed, 14 May 2025 08:30:46 +0000 (UTC)
 Authentication-Results: gabe.freedesktop.org;
-	dkim=pass (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="VKfFUr6X";
+	dkim=fail reason="signature verification failed" (2048-bit key; unprotected) header.d=igalia.com header.i=@igalia.com header.b="HQ8aBzkJ";
 	dkim-atps=neutral
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from nyc.source.kernel.org (nyc.source.kernel.org [147.75.193.91])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 28D7610E267;
- Tue, 13 May 2025 17:20:05 +0000 (UTC)
-Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by nyc.source.kernel.org (Postfix) with ESMTP id 33FE5A4DADF;
- Tue, 13 May 2025 17:20:04 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id E6CF0C4CEE4;
- Tue, 13 May 2025 17:19:58 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1747156803;
- bh=MQuhWpdzL93g7rThL0qxlaSL6Ket9ASq4jJ/RLoxeI8=;
- h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
- b=VKfFUr6XKjwZWWOe1h2dm2026+ajtQ08OViaXvJUs32VjY9pNgCDp3vdLArWlg/ug
- puZwKFsV0jOk0iacJI6p36/oeQziVIxeiSJAUyKnqq/fBml6h8WOzbMgT2/zUegqoy
- B4fHJgF8FL0ohX1wmj5VJ4avHzsU1GTK1pwn4i0gDw5oFh/urFsYch6R3cXUojWqDX
- KJnzl3Kr6WGFJ9Lb92Rj/xUgjOsndgggZdhKrDOsqNtIsCqskFcnAFLHJarQIC1ORk
- D40A/u3s2+8SpfFgxm5uPh7YMDge5lXgrYnokS5rdcBYcNVgn3EY3M+HxeobdcBAaI
- b3saKvA8f5miA==
-Date: Tue, 13 May 2025 19:19:56 +0200
-From: Danilo Krummrich <dakr@kernel.org>
-To: Alexandre Courbot <acourbot@nvidia.com>
-Cc: Miguel Ojeda <ojeda@kernel.org>, Alex Gaynor <alex.gaynor@gmail.com>,
- Boqun Feng <boqun.feng@gmail.com>, Gary Guo <gary@garyguo.net>,
- =?iso-8859-1?Q?Bj=F6rn?= Roy Baron <bjorn3_gh@protonmail.com>,
- Benno Lossin <benno.lossin@proton.me>,
- Andreas Hindborg <a.hindborg@kernel.org>,
- Alice Ryhl <aliceryhl@google.com>, Trevor Gross <tmgross@umich.edu>,
- David Airlie <airlied@gmail.com>, Simona Vetter <simona@ffwll.ch>,
- Maarten Lankhorst <maarten.lankhorst@linux.intel.com>,
- Maxime Ripard <mripard@kernel.org>,
- Thomas Zimmermann <tzimmermann@suse.de>, Jonathan Corbet <corbet@lwn.net>,
- John Hubbard <jhubbard@nvidia.com>, Ben Skeggs <bskeggs@nvidia.com>,
- Joel Fernandes <joelagnelf@nvidia.com>,
- Timur Tabi <ttabi@nvidia.com>, Alistair Popple <apopple@nvidia.com>,
- linux-kernel@vger.kernel.org, rust-for-linux@vger.kernel.org,
- nouveau@lists.freedesktop.org, dri-devel@lists.freedesktop.org,
- Shirish Baskaran <sbaskaran@nvidia.com>
-Subject: Re: [PATCH v3 16/19] nova-core: Add support for VBIOS ucode
- extraction for boot
-Message-ID: <aCN_PIYEEzs73AqT@pollux>
-References: <20250507-nova-frts-v3-0-fcb02749754d@nvidia.com>
- <20250507-nova-frts-v3-16-fcb02749754d@nvidia.com>
+Received: from fanzine2.igalia.com (fanzine2.igalia.com [213.97.179.56])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 9D35310E23A;
+ Wed, 14 May 2025 08:30:42 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=igalia.com; 
+ s=20170329;
+ h=Content-Transfer-Encoding:Content-Type:In-Reply-To:From:
+ References:Cc:To:Subject:MIME-Version:Date:Message-ID:Sender:Reply-To:
+ Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
+ Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
+ List-Subscribe:List-Post:List-Owner:List-Archive;
+ bh=J4EJOcH+vlC4UCADKWOXQAd1u2Z9w7HxAlnVkfrIfXo=; b=HQ8aBzkJzh+L0MyBPN/SSET9z9
+ IboaoWX+7S8scFijWy5q7ZVeVhYKv7r9JrWalVwZEUrzA/OVOYBLxMGoHvxvbX5uEhPO1LEXN5+v/
+ Jde6FY5H2uDz8RDNIXxn6jeRy1kd6ojI+9BojZFS3KNX6g9gb5OSwhOLoearuySbyB3X50aOcwZWs
+ vZiIZCJ3YSHgodd8thHjzDGoy4jaV1XaZ0GDGvHQke6KeDNX7t5fEmQxv25DsNze/0GMeUkAyKFUI
+ ZPfnXypK3HQtCui3M95dEAmFuDDD+hUHVKiZMmpfxhi494K0Ak8cpSIAiIsb5sBgbUl8i6F/e8ESj
+ Weo5B72w==;
+Received: from [81.79.92.254] (helo=[192.168.0.101])
+ by fanzine2.igalia.com with esmtpsa 
+ (Cipher TLS1.3:ECDHE_X25519__RSA_PSS_RSAE_SHA256__AES_128_GCM:128) (Exim)
+ id 1uF7Pv-0083Ee-FV; Wed, 14 May 2025 10:30:26 +0200
+Message-ID: <1d753b0f-4770-4f90-b2fb-48193262d713@igalia.com>
+Date: Wed, 14 May 2025 09:30:25 +0100
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <20250507-nova-frts-v3-16-fcb02749754d@nvidia.com>
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v2 6/6] drm/sched: Port unit tests to new cleanup design
+To: phasta@kernel.org, Lyude Paul <lyude@redhat.com>,
+ Danilo Krummrich <dakr@kernel.org>, David Airlie <airlied@gmail.com>,
+ Simona Vetter <simona@ffwll.ch>, Matthew Brost <matthew.brost@intel.com>,
+ =?UTF-8?Q?Christian_K=C3=B6nig?= <ckoenig.leichtzumerken@gmail.com>,
+ Maarten Lankhorst <maarten.lankhorst@linux.intel.com>,
+ Maxime Ripard <mripard@kernel.org>, Thomas Zimmermann <tzimmermann@suse.de>
+Cc: dri-devel@lists.freedesktop.org, nouveau@lists.freedesktop.org,
+ linux-kernel@vger.kernel.org
+References: <20250424095535.26119-2-phasta@kernel.org>
+ <20250424095535.26119-8-phasta@kernel.org>
+ <894cf4cdb7e14b2a21dcf87bfeac4776cb695395.camel@mailbox.org>
+ <a1c9c680-2927-428c-95e9-2e79d14cec58@igalia.com>
+ <84021a2461db55617018050b7c0e07a15dceb634.camel@mailbox.org>
+Content-Language: en-GB
+From: Tvrtko Ursulin <tvrtko.ursulin@igalia.com>
+In-Reply-To: <84021a2461db55617018050b7c0e07a15dceb634.camel@mailbox.org>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 8bit
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -72,430 +69,205 @@ List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-On Wed, May 07, 2025 at 10:52:43PM +0900, Alexandre Courbot wrote:
-> From: Joel Fernandes <joelagnelf@nvidia.com>
+
+On 12/05/2025 09:00, Philipp Stanner wrote:
+> On Thu, 2025-05-08 at 13:51 +0100, Tvrtko Ursulin wrote:
+>>
+>> Hi Philipp,
+>>
+>> On 08/05/2025 12:03, Philipp Stanner wrote:
+>>> On Thu, 2025-04-24 at 11:55 +0200, Philipp Stanner wrote:
+>>>> The unit tests so far took care manually of avoiding memory leaks
+>>>> that
+>>>> might have occurred when calling drm_sched_fini().
+>>>>
+>>>> The scheduler now takes care by itself of avoiding memory leaks
+>>>> if
+>>>> the
+>>>> driver provides the callback
+>>>> drm_sched_backend_ops.kill_fence_context().
+>>>>
+>>>> Implement that callback for the unit tests. Remove the manual
+>>>> cleanup
+>>>> code.
+>>>
+>>> @Tvrtko: On a scale from 1-10, how much do you love this patch? :)
+>>
+>> Specific patch aside, it is the series as a whole I would like to be
+>> sure there isn't a more elegant way to achieve the same end result.
 > 
-> Add support for navigating and setting up vBIOS ucode data required for
-> GSP to boot. The main data extracted from the vBIOS is the FWSEC-FRTS
-> firmware which runs on the GSP processor. This firmware runs in high
-> secure mode, and sets up the WPR2 (Write protected region) before the
-> Booter runs on the SEC2 processor.
+> I count this as a 9/10 \o/
+
+:) Yes, sorry, it would a bit lower than that, at least until someone 
+can point out a fatal flaw in my alternative. :)
+
+> But jokes aside:
 > 
-> Also add log messages to show the BIOS images.
+>>
+>> Like that sketch of a counter proposal I sent for the reasons listed
+>> with it. Which were, AFAIR, to avoid needing to add more state
+>> machine,
 > 
-> [102141.013287] NovaCore: Found BIOS image at offset 0x0, size: 0xfe00, type: PciAt
-> [102141.080692] NovaCore: Found BIOS image at offset 0xfe00, size: 0x14800, type: Efi
-> [102141.098443] NovaCore: Found BIOS image at offset 0x24600, size: 0x5600, type: FwSec
-> [102141.415095] NovaCore: Found BIOS image at offset 0x29c00, size: 0x60800, type: FwSec
+> Well the state machine added is basically just the waitqueue. The
+> WRITE_ONCE booleans are currently just for correctness and clarity.
+> I've looked at them and want to remove them all in an other patch,
+> because I think they're not needed (workqueue handles that)
 > 
-> Tested on my Ampere GA102 and boot is successful.
+> But yes, the added state is > 0
 > 
-> [applied changes by Alex Courbot for fwsec signatures]
-> [applied feedback from Alex Courbot and Timur Tabi]
-> [applied changes related to code reorg, prints etc from Danilo Krummrich]
-> [acourbot@nvidia.com: fix clippy warnings]
-> [acourbot@nvidia.com: remove now-unneeded Devres acquisition]
-> [acourbot@nvidia.com: fix read_more to read `len` bytes, not u32s]
+>> to avoid mandating drivers have to keep an internal list,
 > 
-> Cc: Alexandre Courbot <acourbot@nvidia.com>
-> Cc: John Hubbard <jhubbard@nvidia.com>
-> Cc: Shirish Baskaran <sbaskaran@nvidia.com>
-> Cc: Alistair Popple <apopple@nvidia.com>
-> Cc: Timur Tabi <ttabi@nvidia.com>
-> Cc: Ben Skeggs <bskeggs@nvidia.com>
-> Signed-off-by: Joel Fernandes <joelagnelf@nvidia.com>
-> Signed-off-by: Alexandre Courbot <acourbot@nvidia.com>
-> ---
->  drivers/gpu/nova-core/firmware.rs  |    2 -
->  drivers/gpu/nova-core/gpu.rs       |    3 +
->  drivers/gpu/nova-core/nova_core.rs |    1 +
->  drivers/gpu/nova-core/vbios.rs     | 1147 ++++++++++++++++++++++++++++++++++++
->  4 files changed, 1151 insertions(+), 2 deletions(-)
+> That's not mandated by the scheduler, but by logic itself. All drivers
+> need to have a list of on-flight fences. Otherwise the drivers would
+> have no chance of signaling those fences once their GPU tells them to
+> do so.
+
+Probably it would be hard to signal without tracking of some sort yes, 
+although it wouldn't have to be indexed by fence context, or looked up 
+by it so maybe still simpler.
+
+More importantly I think with this comment I was thinking about the fact 
+that with ops->cancel_job() approach I was able to remove the _done_ 
+list tracking from the mock scheduler.
+
+> I have now provided two users of the new API, nouveau and the unit
+> tests. Can you think of a party for which the suggested approach
+> wouldn't work?
+
+I did not think along those lines yet so don't know. I just thought it 
+was too much code to implement a relatively simple thing and that also a 
+few things in the design bothered me.
+
+If you look at the diffstat from my proposal and ignore kerneldoc and 
+unit test stats, it literally adds 8 lines to drm_sched_fini() and a 
+single line to gpu_scheduler.h:
+
++       void (*cancel_job)(struct drm_sched_job *sched_job);
+
+And in the former after it stops the workers:
+
++       if (sched->ops->cancel_job) {
++               struct drm_sched_job *job;
++
++               list_for_each_entry_reverse(job, &sched->pending_list, 
+list) {
++                       sched->ops->cancel_job(job);
++                       sched->ops->free_job(job);
++               }
++       }
+
+To me this looks quite clean. Unless, I say this again, I am missing 
+some fatal flaw why it doesn't work.
+
+> Don't get me wrong, your approach does work and it definitely has its
+> charm. However, I think what I propose here is syntactically a bit
+> cleaner because the classical order of a fence first being signaled in
+> the driver and then the associated job being freed as usual by the
+> scheduler is guaranteed. IOW, we primarily rely on the signaling path.
 > 
-> diff --git a/drivers/gpu/nova-core/firmware.rs b/drivers/gpu/nova-core/firmware.rs
-> index 1eb216307cd01d975b3d5beda1dc516f34b4b3f2..960982174d834c7c66a47ecfb3a15bf47116b2c5 100644
-> --- a/drivers/gpu/nova-core/firmware.rs
-> +++ b/drivers/gpu/nova-core/firmware.rs
-> @@ -80,8 +80,6 @@ pub(crate) struct FalconUCodeDescV3 {
->      _reserved: u16,
->  }
->  
-> -// To be removed once that code is used.
-> -#[expect(dead_code)]
->  impl FalconUCodeDescV3 {
->      pub(crate) fn size(&self) -> usize {
->          ((self.hdr & 0xffff0000) >> 16) as usize
-> diff --git a/drivers/gpu/nova-core/gpu.rs b/drivers/gpu/nova-core/gpu.rs
-> index ece13594fba687f3f714e255b5436e72d80dece3..4bf7f72247e5320935a517270b5a0e1ec2becfec 100644
-> --- a/drivers/gpu/nova-core/gpu.rs
-> +++ b/drivers/gpu/nova-core/gpu.rs
-> @@ -9,6 +9,7 @@
->  use crate::firmware::Firmware;
->  use crate::regs;
->  use crate::util;
-> +use crate::vbios::Vbios;
->  use core::fmt;
->  
->  macro_rules! define_chipset {
-> @@ -238,6 +239,8 @@ pub(crate) fn new(
->  
->          let _sec2_falcon = Falcon::<Sec2>::new(pdev.as_ref(), spec.chipset, bar, true)?;
->  
-> +        let _bios = Vbios::new(pdev, bar)?;
+> Either way, neither your nor my approach would have worked out of the
+> box in Nouveau without that driver exploding.
 
-Please add a comment why, even though unused, it is important to create this
-instance.
+What do you mean by this - the latest version of your series does or 
+does not work for nouveau?
 
-Also, please use `_` if it's not intended to ever be used.
+Regards,
 
-> +
->          Ok(pin_init!(Self {
->              spec,
->              bar: devres_bar,
-> diff --git a/drivers/gpu/nova-core/nova_core.rs b/drivers/gpu/nova-core/nova_core.rs
-> index 8342482a1aa16da2e69f7d99143c1549a82c969e..ff6d0b40c18f36af4c7e2d5c839fdf77dba23321 100644
-> --- a/drivers/gpu/nova-core/nova_core.rs
-> +++ b/drivers/gpu/nova-core/nova_core.rs
-> @@ -10,6 +10,7 @@
->  mod gpu;
->  mod regs;
->  mod util;
-> +mod vbios;
->  
->  kernel::module_pci_driver! {
->      type: driver::NovaCore,
-> diff --git a/drivers/gpu/nova-core/vbios.rs b/drivers/gpu/nova-core/vbios.rs
-> new file mode 100644
-> index 0000000000000000000000000000000000000000..cd55d8dbf8e12d532f776d7544c7e5f2a865d6f8
-> --- /dev/null
-> +++ b/drivers/gpu/nova-core/vbios.rs
-> @@ -0,0 +1,1147 @@
-> +// SPDX-License-Identifier: GPL-2.0
-> +
-> +//! VBIOS extraction and parsing.
-> +
-> +// To be removed when all code is used.
-> +#![expect(dead_code)]
-> +
-> +use crate::driver::Bar0;
-> +use crate::firmware::FalconUCodeDescV3;
-> +use core::convert::TryFrom;
-> +use kernel::device;
-> +use kernel::error::Result;
-> +use kernel::num::NumAlign;
-> +use kernel::pci;
-> +use kernel::prelude::*;
-> +
-> +/// The offset of the VBIOS ROM in the BAR0 space.
-> +const ROM_OFFSET: usize = 0x300000;
-> +/// The maximum length of the VBIOS ROM to scan into.
-> +const BIOS_MAX_SCAN_LEN: usize = 0x100000;
-> +/// The size to read ahead when parsing initial BIOS image headers.
-> +const BIOS_READ_AHEAD_SIZE: usize = 1024;
-> +/// The bit in the last image indicator byte for the PCI Data Structure that
-> +/// indicates the last image. Bit 0-6 are reserved, bit 7 is last image bit.
-> +const LAST_IMAGE_BIT_MASK: u8 = 0x80;
-> +
-> +// PMU lookup table entry types. Used to locate PMU table entries
-> +// in the Fwsec image, corresponding to falcon ucodes.
-> +#[expect(dead_code)]
-> +const FALCON_UCODE_ENTRY_APPID_FIRMWARE_SEC_LIC: u8 = 0x05;
-> +#[expect(dead_code)]
-> +const FALCON_UCODE_ENTRY_APPID_FWSEC_DBG: u8 = 0x45;
-> +const FALCON_UCODE_ENTRY_APPID_FWSEC_PROD: u8 = 0x85;
-> +
-> +/// Vbios Reader for constructing the VBIOS data
-> +struct VbiosIterator<'a> {
-> +    pdev: &'a pci::Device,
-> +    bar0: &'a Bar0,
-> +    // VBIOS data vector: As BIOS images are scanned, they are added to this vector
-> +    // for reference or copying into other data structures. It is the entire
-> +    // scanned contents of the VBIOS which progressively extends. It is used
-> +    // so that we do not re-read any contents that are already read as we use
-> +    // the cumulative length read so far, and re-read any gaps as we extend
-> +    // the length.
-> +    data: KVec<u8>,
-> +    current_offset: usize, // Current offset for iterator
-> +    last_found: bool,      // Whether the last image has been found
-> +}
-> +
-> +impl<'a> VbiosIterator<'a> {
-> +    fn new(pdev: &'a pci::Device, bar0: &'a Bar0) -> Result<Self> {
-> +        Ok(Self {
-> +            pdev,
-> +            bar0,
-> +            data: KVec::new(),
-> +            current_offset: 0,
-> +            last_found: false,
-> +        })
-> +    }
-> +
-> +    /// Read bytes from the ROM at the current end of the data vector
-> +    fn read_more(&mut self, len: usize) -> Result {
-> +        let current_len = self.data.len();
-> +        let start = ROM_OFFSET + current_len;
-> +
-> +        // Ensure length is a multiple of 4 for 32-bit reads
-> +        if len % core::mem::size_of::<u32>() != 0 {
-> +            dev_err!(
-> +                self.pdev.as_ref(),
-> +                "VBIOS read length {} is not a multiple of 4\n",
-> +                len
-> +            );
-> +            return Err(EINVAL);
-> +        }
-> +
-> +        self.data.reserve(len, GFP_KERNEL)?;
-> +        // Read ROM data bytes and push directly to vector
-> +        for i in (0..len).step_by(core::mem::size_of::<u32>()) {
-> +            // Read 32-bit word from the VBIOS ROM
-> +            let word = self.bar0.try_read32(start + i)?;
-> +
-> +            // Convert the u32 to a 4 byte array and push each byte
-> +            word.to_ne_bytes()
-> +                .iter()
-> +                .try_for_each(|&b| self.data.push(b, GFP_KERNEL))?;
-> +        }
-> +
-> +        Ok(())
-> +    }
-> +
-> +    /// Read bytes at a specific offset, filling any gap
-> +    fn read_more_at_offset(&mut self, offset: usize, len: usize) -> Result {
-> +        if offset > BIOS_MAX_SCAN_LEN {
-> +            dev_err!(self.pdev.as_ref(), "Error: exceeded BIOS scan limit.\n");
-> +            return Err(EINVAL);
-> +        }
-> +
-> +        // If offset is beyond current data size, fill the gap first
-> +        let current_len = self.data.len();
-> +        let gap_bytes = offset.saturating_sub(current_len);
-> +
-> +        // Now read the requested bytes at the offset
-> +        self.read_more(gap_bytes + len)
-> +    }
-> +
-> +    /// Read a BIOS image at a specific offset and create a BiosImage from it.
-> +    /// self.data is extended as needed and a new BiosImage is returned.
-> +    /// @context is a string describing the operation for error reporting
-> +    fn read_bios_image_at_offset(
-> +        &mut self,
-> +        offset: usize,
-> +        len: usize,
-> +        context: &str,
-> +    ) -> Result<BiosImage> {
-> +        let data_len = self.data.len();
-> +        if offset + len > data_len {
-> +            self.read_more_at_offset(offset, len).inspect_err(|e| {
-> +                dev_err!(
-> +                    self.pdev.as_ref(),
-> +                    "Failed to read more at offset {:#x}: {:?}\n",
-> +                    offset,
-> +                    e
-> +                )
-> +            })?;
-> +        }
-> +
-> +        BiosImage::new(self.pdev, &self.data[offset..offset + len]).inspect_err(|err| {
-> +            dev_err!(
-> +                self.pdev.as_ref(),
-> +                "Failed to {} at offset {:#x}: {:?}\n",
-> +                context,
-> +                offset,
-> +                err
-> +            )
-> +        })
-> +    }
-> +}
-> +
-> +impl<'a> Iterator for VbiosIterator<'a> {
-> +    type Item = Result<BiosImage>;
-> +
-> +    /// Iterate over all VBIOS images until the last image is detected or offset
-> +    /// exceeds scan limit.
-> +    fn next(&mut self) -> Option<Self::Item> {
-> +        if self.last_found {
-> +            return None;
-> +        }
-> +
-> +        if self.current_offset > BIOS_MAX_SCAN_LEN {
-> +            dev_err!(
-> +                self.pdev.as_ref(),
-> +                "Error: exceeded BIOS scan limit, stopping scan\n"
-> +            );
-> +            return None;
-> +        }
-> +
-> +        // Parse image headers first to get image size
-> +        let image_size = match self
-> +            .read_bios_image_at_offset(
-> +                self.current_offset,
-> +                BIOS_READ_AHEAD_SIZE,
-> +                "parse initial BIOS image headers",
-> +            )
-> +            .and_then(|image| image.image_size_bytes())
-> +        {
-> +            Ok(size) => size,
-> +            Err(e) => return Some(Err(e)),
-> +        };
-> +
-> +        // Now create a new BiosImage with the full image data
-> +        let full_image = match self.read_bios_image_at_offset(
-> +            self.current_offset,
-> +            image_size,
-> +            "parse full BIOS image",
-> +        ) {
-> +            Ok(image) => image,
-> +            Err(e) => return Some(Err(e)),
-> +        };
-> +
-> +        self.last_found = full_image.is_last();
-> +
-> +        // Advance to next image (aligned to 512 bytes)
-> +        self.current_offset += image_size;
-> +        self.current_offset = self.current_offset.align_up(512);
-> +
-> +        Some(Ok(full_image))
-> +    }
-> +}
-> +
-> +pub(crate) struct Vbios {
-> +    pub fwsec_image: Option<FwSecBiosImage>,
+Tvrtko
 
-Please use pub(crate) instead or provide an accessor.
+> 
+>>   and to align
+>> better with the existing prototypes in the sched ops table (where
+>> everything operates on jobs).
+> 
+> That's not a hard criteria IMO. Those are sched_backend_ops, not
+> sched_job_backend_ops, and prepare_job() already takes a parameter
+> other than a job.
+> 
+> 
+> Cheers,
+> P.
+> 
+>>
+>> Regards,
+>>
+>> Tvrtko
+>>
+>>>> Signed-off-by: Philipp Stanner <phasta@kernel.org>
+>>>> ---
+>>>>    .../gpu/drm/scheduler/tests/mock_scheduler.c  | 34
+>>>> ++++++++++++-----
+>>>> --
+>>>>    1 file changed, 21 insertions(+), 13 deletions(-)
+>>>>
+>>>> diff --git a/drivers/gpu/drm/scheduler/tests/mock_scheduler.c
+>>>> b/drivers/gpu/drm/scheduler/tests/mock_scheduler.c
+>>>> index f999c8859cf7..a72d26ca8262 100644
+>>>> --- a/drivers/gpu/drm/scheduler/tests/mock_scheduler.c
+>>>> +++ b/drivers/gpu/drm/scheduler/tests/mock_scheduler.c
+>>>> @@ -228,10 +228,30 @@ static void mock_sched_free_job(struct
+>>>> drm_sched_job *sched_job)
+>>>>    	/* Mock job itself is freed by the kunit framework. */
+>>>>    }
+>>>>    
+>>>> +static void mock_sched_fence_context_kill(struct
+>>>> drm_gpu_scheduler
+>>>> *gpu_sched)
+>>>> +{
+>>>> +	struct drm_mock_scheduler *sched =
+>>>> drm_sched_to_mock_sched(gpu_sched);
+>>>> +	struct drm_mock_sched_job *job;
+>>>> +	unsigned long flags;
+>>>> +
+>>>> +	spin_lock_irqsave(&sched->lock, flags);
+>>>> +	list_for_each_entry(job, &sched->job_list, link) {
+>>>> +		spin_lock(&job->lock);
+>>>> +		if (!dma_fence_is_signaled_locked(&job-
+>>>>> hw_fence)) {
+>>>> +			dma_fence_set_error(&job->hw_fence, -
+>>>> ECANCELED);
+>>>> +			dma_fence_signal_locked(&job->hw_fence);
+>>>> +		}
+>>>> +		complete(&job->done);
+>>>> +		spin_unlock(&job->lock);
+>>>> +	}
+>>>> +	spin_unlock_irqrestore(&sched->lock, flags);
+>>>> +}
+>>>> +
+>>>>    static const struct drm_sched_backend_ops
+>>>> drm_mock_scheduler_ops = {
+>>>>    	.run_job = mock_sched_run_job,
+>>>>    	.timedout_job = mock_sched_timedout_job,
+>>>> -	.free_job = mock_sched_free_job
+>>>> +	.free_job = mock_sched_free_job,
+>>>> +	.kill_fence_context = mock_sched_fence_context_kill,
+>>>>    };
+>>>>    
+>>>>    /**
+>>>> @@ -300,18 +320,6 @@ void drm_mock_sched_fini(struct
+>>>> drm_mock_scheduler *sched)
+>>>>    		drm_mock_sched_job_complete(job);
+>>>>    	spin_unlock_irqrestore(&sched->lock, flags);
+>>>>    
+>>>> -	/*
+>>>> -	 * Free completed jobs and jobs not yet processed by the
+>>>> DRM
+>>>> scheduler
+>>>> -	 * free worker.
+>>>> -	 */
+>>>> -	spin_lock_irqsave(&sched->lock, flags);
+>>>> -	list_for_each_entry_safe(job, next, &sched->done_list,
+>>>> link)
+>>>> -		list_move_tail(&job->link, &list);
+>>>> -	spin_unlock_irqrestore(&sched->lock, flags);
+>>>> -
+>>>> -	list_for_each_entry_safe(job, next, &list, link)
+>>>> -		mock_sched_free_job(&job->base);
+>>>> -
+>>>>    	drm_sched_fini(&sched->base);
+>>>>    }
+>>>>    
+>>>
+>>
+> 
 
-Also, this shouldn't be an Option, see below comment in Vbios::new().
-
-> +}
-> +
-> +impl Vbios {
-> +    /// Probe for VBIOS extraction
-> +    /// Once the VBIOS object is built, bar0 is not read for vbios purposes anymore.
-> +    pub(crate) fn new(pdev: &pci::Device, bar0: &Bar0) -> Result<Vbios> {
-> +        // Images to extract from iteration
-> +        let mut pci_at_image: Option<PciAtBiosImage> = None;
-> +        let mut first_fwsec_image: Option<FwSecBiosImage> = None;
-> +        let mut second_fwsec_image: Option<FwSecBiosImage> = None;
-> +
-> +        // Parse all VBIOS images in the ROM
-> +        for image_result in VbiosIterator::new(pdev, bar0)? {
-> +            let full_image = image_result?;
-> +
-> +            dev_info!(
-
-Let's use dev_dbg!() instaed.
-
-> +                pdev.as_ref(),
-> +                "Found BIOS image: size: {:#x}, type: {}, last: {}\n",
-> +                full_image.image_size_bytes()?,
-> +                full_image.image_type_str(),
-> +                full_image.is_last()
-> +            );
-> +
-> +            // Get references to images we will need after the loop, in order to
-> +            // setup the falcon data offset.
-> +            match full_image {
-> +                BiosImage::PciAt(image) => {
-> +                    pci_at_image = Some(image);
-> +                }
-> +                BiosImage::FwSec(image) => {
-> +                    if first_fwsec_image.is_none() {
-> +                        first_fwsec_image = Some(image);
-> +                    } else {
-> +                        second_fwsec_image = Some(image);
-> +                    }
-> +                }
-> +                // For now we don't need to handle these
-> +                BiosImage::Efi(_image) => {}
-> +                BiosImage::Nbsi(_image) => {}
-> +            }
-> +        }
-> +
-> +        // Using all the images, setup the falcon data pointer in Fwsec.
-> +        // We need mutable access here, so we handle the Option manually.
-> +        let final_fwsec_image = {
-> +            let mut second = second_fwsec_image; // Take ownership of the option
-> +
-> +            if let (Some(second), Some(first), Some(pci_at)) =
-> +                (second.as_mut(), first_fwsec_image, pci_at_image)
-> +            {
-> +                second
-> +                    .setup_falcon_data(pdev, &pci_at, &first)
-> +                    .inspect_err(|e| {
-> +                        dev_err!(pdev.as_ref(), "Falcon data setup failed: {:?}\n", e)
-> +                    })?;
-> +            } else {
-> +                dev_err!(
-> +                    pdev.as_ref(),
-> +                    "Missing required images for falcon data setup, skipping\n"
-> +                );
-> +                return Err(EINVAL);
-
-This means that if second == None we fail, which makes sense, so why store an
-Option in Vbios? All methods of Vbios fail if fwsec_image == None.
-
-> +            }
-> +            second
-> +        };
-
-I think this should be:
-
-	let mut second = second_fwsec_image;
-	
-	if let (Some(second), Some(first), Some(pci_at)) =
-	    (second.as_mut(), first_fwsec_image, pci_at_image)
-	{
-	    second
-	        .setup_falcon_data(pdev, &pci_at, &first)
-	        .inspect_err(|e| {
-	            dev_err!(pdev.as_ref(), "Falcon data setup failed: {:?}\n", e)
-	        })?;
-	
-	    Ok(Vbios(second)
-	} else {
-	    dev_err!(
-	        pdev.as_ref(),
-	        "Missing required images for falcon data setup, skipping\n"
-	    );
-	
-	    Err(EINVAL)
-	}
-
-where Vbios can just be
-
-	pub(crate) struct Vbios(FwSecBiosImage);
-
-> +
-> +        Ok(Vbios {
-> +            fwsec_image: final_fwsec_image,
-> +        })
-> +    }
-> +
-> +    pub(crate) fn fwsec_header(&self, pdev: &device::Device) -> Result<&FalconUCodeDescV3> {
-> +        let image = self.fwsec_image.as_ref().ok_or(EINVAL)?;
-> +        image.fwsec_header(pdev)
-> +    }
-> +
-> +    pub(crate) fn fwsec_ucode(&self, pdev: &device::Device) -> Result<&[u8]> {
-> +        let image = self.fwsec_image.as_ref().ok_or(EINVAL)?;
-> +        image.fwsec_ucode(pdev, image.fwsec_header(pdev)?)
-> +    }
-> +
-> +    pub(crate) fn fwsec_sigs(&self, pdev: &device::Device) -> Result<&[u8]> {
-> +        let image = self.fwsec_image.as_ref().ok_or(EINVAL)?;
-> +        image.fwsec_sigs(pdev, image.fwsec_header(pdev)?)
-> +    }
-
-Those then become infallible, e.g.
-
-	pub(crate) fn fwsec_sigs(&self, pdev: &device::Device) -> &[u8] {
-	    self.0.fwsec_sigs(pdev, self.fwsec_header(pdev))
-	}
-
-> +}
-
-<snip>
-
-I have to continue with the rest of this patch later on.
-
-- Danilo
