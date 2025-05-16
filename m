@@ -2,19 +2,19 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id ED8FBAB9898
-	for <lists+nouveau@lfdr.de>; Fri, 16 May 2025 11:20:06 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 8CCC7AB98EA
+	for <lists+nouveau@lfdr.de>; Fri, 16 May 2025 11:33:51 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id B7F2910EA04;
-	Fri, 16 May 2025 09:20:04 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 3E18110EA13;
+	Fri, 16 May 2025 09:33:50 +0000 (UTC)
 Authentication-Results: gabe.freedesktop.org;
-	dkim=fail reason="signature verification failed" (2048-bit key; unprotected) header.d=igalia.com header.i=@igalia.com header.b="qwE7cMKt";
+	dkim=fail reason="signature verification failed" (2048-bit key; unprotected) header.d=igalia.com header.i=@igalia.com header.b="lpXke6mF";
 	dkim-atps=neutral
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
 Received: from fanzine2.igalia.com (fanzine2.igalia.com [213.97.179.56])
- by gabe.freedesktop.org (Postfix) with ESMTPS id C31DF10EA03;
- Fri, 16 May 2025 09:20:02 +0000 (UTC)
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 2A3E810EA13;
+ Fri, 16 May 2025 09:33:49 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=igalia.com; 
  s=20170329;
  h=Content-Transfer-Encoding:Content-Type:In-Reply-To:From:
@@ -22,21 +22,22 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=igalia.com;
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=/bayzPCeERRTY97sgYjY8EAqdfhEth5fc6iSSEu/y+c=; b=qwE7cMKtbIKKJ0oaa+pNqLiKnD
- ynwCjc3CLmaOaCm/7GKYetwT1bmr2mpOYcNOP0rxXRNiwqSsOf6DRktIGjKeMdrV2e6JiO3gJ5S7B
- dTXqWtcA86qkc/eVVwBrgkqOVpPgnJP9C6jynyqvQBYJ+LIYEm7zo1u6SEweNJ8TMSAZppgJavZMb
- MS2P26cMeN4yepBPKwXYDeQiOlgXVM1sGUd+mWpvaYmkR8OqsQJNrQjdTtQFGznJGGebdrc2pphKj
- ZT81UlkOpSebuyj6sFbElYazwTe7nVQ5IGdazv0ZP1DZxZhsW1RZFJOJshJ03VYC8aqIrSy1lW6qv
- TTAjicXQ==;
+ bh=AjoOsfyXisgNrLF8CSMxt99k4q2kuHs9TnfDI4yhKCk=; b=lpXke6mFsPFAWRyFqNrNKY+fx7
+ 43vVe0r4JT74kdag4nXpNAdriSAiEmx/fv9RlG8vk3RW7XTM/WrnEI5Y171IG27t0OGFDiMmFlInL
+ +NGlF+pG4JIAc0/9GoKqtdU1fFYcyERJH2yrAmtXBc4TEiJdk939GTG1PzoH3RMPhQUtqOdYKWYhl
+ 7DbhRR40Vu9UpThnFiUE8veoqW6JJPR2wG/MlFESMeIfc0aWAzvK2ZJAn6MOGM/DVw9vNpC5S3ikj
+ OUsjERryuqmhW92PAlJz3+dI26g9CqMB38wQt5EbKL4A+9lHxnXgqNdQSYXFAS9+x9O6aWW+4JrAs
+ EbcLeDnA==;
 Received: from [81.79.92.254] (helo=[192.168.0.101])
  by fanzine2.igalia.com with esmtpsa 
  (Cipher TLS1.3:ECDHE_X25519__RSA_PSS_RSAE_SHA256__AES_128_GCM:128) (Exim)
- id 1uFr8Y-0090yq-Bw; Fri, 16 May 2025 11:19:49 +0200
-Message-ID: <d8251048-5ee7-4f4c-9f2e-22505e2635b3@igalia.com>
-Date: Fri, 16 May 2025 10:19:48 +0100
+ id 1uFrLo-0091Lf-PM; Fri, 16 May 2025 11:33:31 +0200
+Message-ID: <1297389f-70f6-4813-8de8-1a0c4f92250a@igalia.com>
+Date: Fri, 16 May 2025 10:33:30 +0100
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v2 1/6] drm/sched: Fix teardown leaks with waitqueue
+Subject: Re: [PATCH v2 2/6] drm/sched: Prevent teardown waitque from blocking
+ too long
 To: Philipp Stanner <phasta@kernel.org>, Lyude Paul <lyude@redhat.com>,
  Danilo Krummrich <dakr@kernel.org>, David Airlie <airlied@gmail.com>,
  Simona Vetter <simona@ffwll.ch>, Matthew Brost <matthew.brost@intel.com>,
@@ -44,12 +45,12 @@ To: Philipp Stanner <phasta@kernel.org>, Lyude Paul <lyude@redhat.com>,
  Maarten Lankhorst <maarten.lankhorst@linux.intel.com>,
  Maxime Ripard <mripard@kernel.org>, Thomas Zimmermann <tzimmermann@suse.de>
 Cc: dri-devel@lists.freedesktop.org, nouveau@lists.freedesktop.org,
- linux-kernel@vger.kernel.org, Philipp Stanner <pstanner@redhat.com>
+ linux-kernel@vger.kernel.org, Danilo Krummrich <dakr@redhat.com>
 References: <20250424095535.26119-2-phasta@kernel.org>
- <20250424095535.26119-3-phasta@kernel.org>
+ <20250424095535.26119-4-phasta@kernel.org>
 Content-Language: en-GB
 From: Tvrtko Ursulin <tvrtko.ursulin@igalia.com>
-In-Reply-To: <20250424095535.26119-3-phasta@kernel.org>
+In-Reply-To: <20250424095535.26119-4-phasta@kernel.org>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
 X-BeenThere: nouveau@lists.freedesktop.org
@@ -67,243 +68,158 @@ Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
 
-Hi,
-
-Some review comments below, with a caveat that does not imply support 
-for the approach just yet.
-
 On 24/04/2025 10:55, Philipp Stanner wrote:
-> From: Philipp Stanner <pstanner@redhat.com>
+> The waitqueue that ensures that drm_sched_fini() blocks until the
+> pending_list has become empty could theoretically cause that function to
+> block for a very long time. That, ultimately, could block userspace
+> procesess and prevent them from being killable through SIGKILL.
 > 
-> The GPU scheduler currently does not ensure that its pending_list is
-> empty before performing various other teardown tasks in
-> drm_sched_fini().
+> When a driver calls drm_sched_fini(), it is safe to assume that all
+> still pending jobs are not needed anymore anyways. Thus, they can be
+> cancelled and thereby it can be ensured that drm_sched_fini() will
+> return relatively quickly.
 > 
-> If there are still jobs in the pending_list, this is problematic because
-> after scheduler teardown, no one will call backend_ops.free_job()
-> anymore. This would, consequently, result in memory leaks.
+> Implement a new helper to stop all work items / submission except for
+> the drm_sched_backend_ops.run_job().
 > 
-> One way to solve this is to implement a waitqueue that drm_sched_fini()
-> blocks on until the pending_list has become empty.
+> Implement a driver callback, kill_fence_context(), that instructs the
+> driver to kill the fence context associated with this scheduler, thereby
+> causing all pending hardware fences to be signalled.
 > 
-> Add a waitqueue to struct drm_gpu_scheduler. Wake up waiters once the
-> pending_list becomes empty. Wait in drm_sched_fini() for that to happen.
+> Call those new routines in drm_sched_fini() and ensure backwards
+> compatibility if the new callback is not implemented.
 > 
-> Signed-off-by: Philipp Stanner <pstanner@redhat.com>
+> Suggested-by: Danilo Krummrich <dakr@redhat.com>
+> Signed-off-by: Philipp Stanner <phasta@kernel.org>
 > ---
->   drivers/gpu/drm/scheduler/sched_main.c | 72 ++++++++++++++++++++------
->   include/drm/gpu_scheduler.h            |  6 +++
->   2 files changed, 63 insertions(+), 15 deletions(-)
+>   drivers/gpu/drm/scheduler/sched_main.c | 47 +++++++++++++++++---------
+>   include/drm/gpu_scheduler.h            | 11 ++++++
+>   2 files changed, 42 insertions(+), 16 deletions(-)
 > 
 > diff --git a/drivers/gpu/drm/scheduler/sched_main.c b/drivers/gpu/drm/scheduler/sched_main.c
-> index 829579c41c6b..ea82e69a72a8 100644
+> index ea82e69a72a8..c2ad6c70bfb6 100644
 > --- a/drivers/gpu/drm/scheduler/sched_main.c
 > +++ b/drivers/gpu/drm/scheduler/sched_main.c
-> @@ -367,7 +367,7 @@ static void drm_sched_run_job_queue(struct drm_gpu_scheduler *sched)
->    */
->   static void __drm_sched_run_free_queue(struct drm_gpu_scheduler *sched)
->   {
-> -	if (!READ_ONCE(sched->pause_submit))
-> +	if (!READ_ONCE(sched->pause_free))
->   		queue_work(sched->submit_wq, &sched->work_free_job);
+> @@ -1390,31 +1390,46 @@ drm_sched_no_jobs_pending(struct drm_gpu_scheduler *sched)
+>   	return empty;
 >   }
->   
-> @@ -556,6 +556,7 @@ static void drm_sched_job_timedout(struct work_struct *work)
->   		 * is parked at which point it's safe.
->   		 */
->   		list_del_init(&job->list);
-> +
->   		spin_unlock(&sched->job_list_lock);
->   
->   		status = job->sched->ops->timedout_job(job);
-> @@ -1119,6 +1120,12 @@ drm_sched_get_finished_job(struct drm_gpu_scheduler *sched)
->   		/* remove job from pending_list */
->   		list_del_init(&job->list);
->   
-> +		/*
-> +		 * Inform tasks blocking in drm_sched_fini() that it's now safe to proceed.
-> +		 */
-> +		if (list_empty(&sched->pending_list))
-> +			wake_up(&sched->pending_list_waitque);
-
-Typo in queue.
-
-wake_up could go on the else branch of the if (next) block below.
-
-Also, another micro-advantage to the ->cancel_job() approach is that it 
-doesn't add executing stuff at runtime which is only relevant for the 
-teardown.
-
-> +
->   		/* cancel this job's TO timer */
->   		cancel_delayed_work(&sched->work_tdr);
->   		/* make the scheduled timestamp more accurate */
-> @@ -1324,6 +1331,7 @@ int drm_sched_init(struct drm_gpu_scheduler *sched, const struct drm_sched_init_
->   	init_waitqueue_head(&sched->job_scheduled);
->   	INIT_LIST_HEAD(&sched->pending_list);
->   	spin_lock_init(&sched->job_list_lock);
-> +	init_waitqueue_head(&sched->pending_list_waitque);
->   	atomic_set(&sched->credit_count, 0);
->   	INIT_DELAYED_WORK(&sched->work_tdr, drm_sched_job_timedout);
->   	INIT_WORK(&sched->work_run_job, drm_sched_run_job_work);
-> @@ -1331,6 +1339,7 @@ int drm_sched_init(struct drm_gpu_scheduler *sched, const struct drm_sched_init_
->   	atomic_set(&sched->_score, 0);
->   	atomic64_set(&sched->job_id_count, 0);
->   	sched->pause_submit = false;
-> +	sched->pause_free = false;
->   
->   	sched->ready = true;
->   	return 0;
-> @@ -1348,6 +1357,39 @@ int drm_sched_init(struct drm_gpu_scheduler *sched, const struct drm_sched_init_
->   }
->   EXPORT_SYMBOL(drm_sched_init);
 >   
 > +/**
-> + * drm_sched_submission_and_timeout_stop - stop everything except for free_job()
+> + * drm_sched_cancel_jobs_and_wait - trigger freeing of all pending jobs
 > + * @sched: scheduler instance
 > + *
-> + * Only needed to cleanly tear down the scheduler in drm_sched_fini().
+> + * Must only be called if &struct drm_sched_backend_ops.kill_fence_context is
+> + * implemented.
+> + *
+> + * Instructs the driver to kill the fence context associated with this scheduler,
+> + * thereby signalling all pending fences. This, in turn, will trigger
+> + * &struct drm_sched_backend_ops.free_job to be called for all pending jobs.
+> + * The function then blocks until all pending jobs have been freed.
 > + */
 > +static inline void
-> +drm_sched_submission_and_timeout_stop(struct drm_gpu_scheduler *sched)
+> +drm_sched_cancel_jobs_and_wait(struct drm_gpu_scheduler *sched)
 > +{
-> +	WRITE_ONCE(sched->pause_submit, true);
-> +	cancel_work_sync(&sched->work_run_job);
-> +	cancel_delayed_work_sync(&sched->work_tdr);
-> +}
-
-This one and the two below it: I think best known practice is to leave 
-out the inline keyword and let the compiler decide.
-
-> +
-> +static inline void
-> +drm_sched_free_stop(struct drm_gpu_scheduler *sched)
-> +{
-> +	WRITE_ONCE(sched->pause_free, true);
-> +	cancel_work_sync(&sched->work_free_job);
-> +}
-> +
-> +static inline bool
-> +drm_sched_no_jobs_pending(struct drm_gpu_scheduler *sched)
-> +{
-> +	bool empty;
-> +
-> +	spin_lock(&sched->job_list_lock);
-> +	empty = list_empty(&sched->pending_list);
-> +	spin_unlock(&sched->job_list_lock);
-> +
-> +	return empty;
+> +	sched->ops->kill_fence_context(sched);
+> +	wait_event(sched->pending_list_waitque, drm_sched_no_jobs_pending(sched));
 > +}
 > +
 >   /**
 >    * drm_sched_fini - Destroy a gpu scheduler
 >    *
-> @@ -1355,26 +1397,24 @@ EXPORT_SYMBOL(drm_sched_init);
+>    * @sched: scheduler instance
 >    *
->    * Tears down and cleans up the scheduler.
->    *
-> - * This stops submission of new jobs to the hardware through
-> - * drm_sched_backend_ops.run_job(). Consequently, drm_sched_backend_ops.free_job()
-> - * will not be called for all jobs still in drm_gpu_scheduler.pending_list.
-> - * There is no solution for this currently. Thus, it is up to the driver to make
-> - * sure that:
+> - * Tears down and cleans up the scheduler.
 > - *
-> - *  a) drm_sched_fini() is only called after for all submitted jobs
-> - *     drm_sched_backend_ops.free_job() has been called or that
-> - *  b) the jobs for which drm_sched_backend_ops.free_job() has not been called
-> - *     after drm_sched_fini() ran are freed manually.
-> - *
-> - * FIXME: Take care of the above problem and prevent this function from leaking
-> - * the jobs in drm_gpu_scheduler.pending_list under any circumstances.
-> + * Note that this function blocks until all the fences returned by
-> + * &struct drm_sched_backend_ops.run_job have been signalled.
+> - * Note that this function blocks until all the fences returned by
+> - * &struct drm_sched_backend_ops.run_job have been signalled.
+> + * Tears down and cleans up the scheduler. Might leak memory if
+> + * &struct drm_sched_backend_ops.kill_fence_context is not implemented.
 >    */
 >   void drm_sched_fini(struct drm_gpu_scheduler *sched)
 >   {
 >   	struct drm_sched_entity *s_entity;
 >   	int i;
 >   
-> -	drm_sched_wqueue_stop(sched);
-> +	/*
-> +	 * Jobs that have neither been scheduled or which have timed out are
-> +	 * gone by now, but jobs that have been submitted through
-> +	 * backend_ops.run_job() and have not yet terminated are still pending.
-> +	 *
-> +	 * Wait for the pending_list to become empty to avoid leaking those jobs.
-> +	 */
-> +	drm_sched_submission_and_timeout_stop(sched);
-> +	wait_event(sched->pending_list_waitque, drm_sched_no_jobs_pending(sched));
+> -	/*
+> -	 * Jobs that have neither been scheduled or which have timed out are
+> -	 * gone by now, but jobs that have been submitted through
+> -	 * backend_ops.run_job() and have not yet terminated are still pending.
+> -	 *
+> -	 * Wait for the pending_list to become empty to avoid leaking those jobs.
+> -	 */
+> -	drm_sched_submission_and_timeout_stop(sched);
+> -	wait_event(sched->pending_list_waitque, drm_sched_no_jobs_pending(sched));
+> -	drm_sched_free_stop(sched);
+> +	if (sched->ops->kill_fence_context) {
+> +		drm_sched_submission_and_timeout_stop(sched);
+> +		drm_sched_cancel_jobs_and_wait(sched);
+> +		drm_sched_free_stop(sched);
+> +	} else {
+> +		/* We're in "legacy free-mode" and ignore potential mem leaks */
+> +		drm_sched_wqueue_stop(sched);
+> +	}
+>   
+>   	for (i = DRM_SCHED_PRIORITY_KERNEL; i < sched->num_rqs; i++) {
+>   		struct drm_sched_rq *rq = sched->sched_rq[i];
+> @@ -1502,7 +1517,7 @@ bool drm_sched_wqueue_ready(struct drm_gpu_scheduler *sched)
+>   EXPORT_SYMBOL(drm_sched_wqueue_ready);
+>   
+>   /**
+> - * drm_sched_wqueue_stop - stop scheduler submission
+> + * drm_sched_wqueue_stop - stop scheduler submission and freeing
 
-I think this is a patch ordering issue. To avoid blocking indefinitely 
-after patch 1, you probably should swap patches 1 and 2, or maybe just 
-squash them.
+Looks like the kerneldoc corrections (below too) belong to the previous 
+patch. Irrelevant if you decide to squash them though.
+
+>    * @sched: scheduler instance
+>    *
+>    * Stops the scheduler from pulling new jobs from entities. It also stops
+> @@ -1518,7 +1533,7 @@ void drm_sched_wqueue_stop(struct drm_gpu_scheduler *sched)
+>   EXPORT_SYMBOL(drm_sched_wqueue_stop);
+>   
+>   /**
+> - * drm_sched_wqueue_start - start scheduler submission
+> + * drm_sched_wqueue_start - start scheduler submission and freeing
+>    * @sched: scheduler instance
+>    *
+>    * Restarts the scheduler after drm_sched_wqueue_stop() has stopped it.
+> diff --git a/include/drm/gpu_scheduler.h b/include/drm/gpu_scheduler.h
+> index d0b1f416b4d9..8630b4a26f10 100644
+> --- a/include/drm/gpu_scheduler.h
+> +++ b/include/drm/gpu_scheduler.h
+> @@ -509,6 +509,17 @@ struct drm_sched_backend_ops {
+>            * and it's time to clean it up.
+>   	 */
+>   	void (*free_job)(struct drm_sched_job *sched_job);
+> +
+> +	/**
+> +	 * @kill_fence_context: kill the fence context belonging to this scheduler
+
+Which fence context would that be? ;)
+
+Also, "fence context" would be a new terminology in gpu_scheduler.h API 
+level. You could call it ->sched_fini() or similar to signify at which 
+point in the API it gets called and then the fact it takes sched as 
+parameter would be natural.
+
+We also probably want some commentary on the topic of indefinite (or 
+very long at least) blocking a thread exit / SIGINT/TERM/KILL time. 
+Cover letter touches upon that problem but I don't see you address it. 
+Is the idea to let drivers shoot themselves in the foot or what?
 
 Regards,
 
 Tvrtko
 
-> +	drm_sched_free_stop(sched);
->   
->   	for (i = DRM_SCHED_PRIORITY_KERNEL; i < sched->num_rqs; i++) {
->   		struct drm_sched_rq *rq = sched->sched_rq[i];
-> @@ -1471,6 +1511,7 @@ EXPORT_SYMBOL(drm_sched_wqueue_ready);
->   void drm_sched_wqueue_stop(struct drm_gpu_scheduler *sched)
->   {
->   	WRITE_ONCE(sched->pause_submit, true);
-> +	WRITE_ONCE(sched->pause_free, true);
->   	cancel_work_sync(&sched->work_run_job);
->   	cancel_work_sync(&sched->work_free_job);
->   }
-> @@ -1488,6 +1529,7 @@ EXPORT_SYMBOL(drm_sched_wqueue_stop);
->   void drm_sched_wqueue_start(struct drm_gpu_scheduler *sched)
->   {
->   	WRITE_ONCE(sched->pause_submit, false);
-> +	WRITE_ONCE(sched->pause_free, false);
->   	queue_work(sched->submit_wq, &sched->work_run_job);
->   	queue_work(sched->submit_wq, &sched->work_free_job);
->   }
-> diff --git a/include/drm/gpu_scheduler.h b/include/drm/gpu_scheduler.h
-> index 1a7e377d4cbb..d0b1f416b4d9 100644
-> --- a/include/drm/gpu_scheduler.h
-> +++ b/include/drm/gpu_scheduler.h
-> @@ -29,6 +29,7 @@
->   #include <linux/completion.h>
->   #include <linux/xarray.h>
->   #include <linux/workqueue.h>
-> +#include <linux/wait.h>
->   
->   #define MAX_WAIT_SCHED_ENTITY_Q_EMPTY msecs_to_jiffies(1000)
->   
-> @@ -533,6 +534,8 @@ struct drm_sched_backend_ops {
->    *            timeout interval is over.
->    * @pending_list: the list of jobs which are currently in the job queue.
->    * @job_list_lock: lock to protect the pending_list.
-> + * @pending_list_waitque: a waitqueue for drm_sched_fini() to block on until all
-> + *		          pending jobs have been finished.
->    * @hang_limit: once the hangs by a job crosses this limit then it is marked
->    *              guilty and it will no longer be considered for scheduling.
->    * @score: score to help loadbalancer pick a idle sched
-> @@ -540,6 +543,7 @@ struct drm_sched_backend_ops {
->    * @ready: marks if the underlying HW is ready to work
->    * @free_guilty: A hit to time out handler to free the guilty job.
->    * @pause_submit: pause queuing of @work_run_job on @submit_wq
-> + * @pause_free: pause queuing of @work_free_job on @submit_wq
->    * @own_submit_wq: scheduler owns allocation of @submit_wq
->    * @dev: system &struct device
->    *
-> @@ -562,12 +566,14 @@ struct drm_gpu_scheduler {
->   	struct delayed_work		work_tdr;
->   	struct list_head		pending_list;
->   	spinlock_t			job_list_lock;
-> +	wait_queue_head_t		pending_list_waitque;
->   	int				hang_limit;
->   	atomic_t                        *score;
->   	atomic_t                        _score;
->   	bool				ready;
->   	bool				free_guilty;
->   	bool				pause_submit;
-> +	bool				pause_free;
->   	bool				own_submit_wq;
->   	struct device			*dev;
+> +	 *
+> +	 * Needed to cleanly tear the scheduler down in drm_sched_fini(). This
+> +	 * callback will cause all hardware fences to be signalled by the driver,
+> +	 * which, ultimately, ensures that all jobs get freed before teardown.
+> +	 *
+> +	 * This callback is optional, but it is highly recommended to implement it.
+> +	 */
+> +	void (*kill_fence_context)(struct drm_gpu_scheduler *sched);
 >   };
+>   
+>   /**
 
