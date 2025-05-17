@@ -2,27 +2,27 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id 1CF34ABA728
-	for <lists+nouveau@lfdr.de>; Sat, 17 May 2025 02:11:39 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id CFC35ABA72A
+	for <lists+nouveau@lfdr.de>; Sat, 17 May 2025 02:11:42 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id B63AC10EBDD;
-	Sat, 17 May 2025 00:11:37 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 2DADE10EBDE;
+	Sat, 17 May 2025 00:11:41 +0000 (UTC)
 Authentication-Results: gabe.freedesktop.org;
-	dkim=pass (2048-bit key; unprotected) header.d=Nvidia.com header.i=@Nvidia.com header.b="reOAJQYX";
+	dkim=pass (2048-bit key; unprotected) header.d=Nvidia.com header.i=@Nvidia.com header.b="ef65Q7Zv";
 	dkim-atps=neutral
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from NAM04-DM6-obe.outbound.protection.outlook.com
- (mail-dm6nam04on2087.outbound.protection.outlook.com [40.107.102.87])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 05EA110EBDD
- for <nouveau@lists.freedesktop.org>; Sat, 17 May 2025 00:11:37 +0000 (UTC)
+Received: from NAM10-BN7-obe.outbound.protection.outlook.com
+ (mail-bn7nam10on2049.outbound.protection.outlook.com [40.107.92.49])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 11BF310EBDE
+ for <nouveau@lists.freedesktop.org>; Sat, 17 May 2025 00:11:40 +0000 (UTC)
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=Q6oOShygVKLkjGzodW9YSazkTNGkUc0rcq11UvVhvXCDXXp5/dkfTsy4c5X+Tp7sQd/Kee8OSACw9Y73WsuwlyPhmT08n5RQz0nwhipy5A/PbeUmmYPpHbFjAqVEH2xQEhSN4/GpzkJuu5GZFb+DDETbo7LhbGbaBnq2f1b//cjzqLF+5lktnIMLLjbtnLzRIAEoXhf8UadwGr+DBiCm29huFffh6mtX7l0ydTSiSQvTjCHNF+zOB332TWXbMS9y6ot5Of7ogdCGATs4s1G2risYXR1ixPc6h4Wj1KLjvGRbLED91tLsylHonWYnWjUj7M0P5iSRa0TQtMHB6sKWVg==
+ b=estZrNu2g5x1dUww2x+qwPC7Tilv/Ffm3y/mC9QF8ltM0xvVvRZuRT718kyewTvRGJvHVqQunFjOmpodDUebcnCui5S17e2PpKhMv/RcEnB4byCr9Ei3PSWOfNWpy3xY9CoFZnDE2TZmB4v2lq4TaEtbyD2A+tndhZF4RPjj5H3iYS2quWKVLFHcy1FpVw89F9BEIDJXfJGYpF/QyNz8ws2GDloqEr6eh2CCt1c8oWLUx6hXjG3bp8s2cQB1HzckXwE9K5PFXKeVJC44BXoQPE5/I+p1uKcXrVh8t0GxBxvKv5dNGzo8XLw31EFN4xQnLIzhmgTsGA84qghl1P1y5g==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
  s=arcselector10001;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=ULuoTEtxeWfhnbpU3jXxpT45EXR6XGGICs9M0jh5SQ0=;
- b=Qtg2oNuGcqit6RAya3P1ynYP6LO2Av3e3j/3Wo/Z8mb6GDQJf/Tub2DDOiHZAkoW9vnhITDG7Aqf/kGawAfhnTLGeSds8IAcOzRbJ26so0GI0GB5fTHcch3jiUvEisHX2S8Fjbm3yIIDp2J89FKenOR+6j7vFWIze/kZxKOBauGAyd2PZwpCP7xy2/gCdEmnBIHqeuJszcljgiT0LhELE4K4NZbHpIwc9aHSmIXWqFgtC7FRYzMiOCDFoo5B595X9qadztLuhLwvhQdHBBa7rGks52TDCVWfExYHfhOCJDrTOswUDQP4Dnthf6TJ+haFa733ibaOs6qajBtwShQwVQ==
+ bh=xEhyLbAfkYFBGRWV6nJoErEQPoCFoixRMt331PBn7pM=;
+ b=Voi3eQ2Y2q/HxiaiY6qoQOqdJWPr1V9yJITDJ76EFCwMuWgnceRySdOGyyl5qv7dOcNRLFDGDkZLSCKytz3Pk3pYvKQjo8uhIcc/m32gs0LVOeLF1okJStYKNVmxUEwviJbw2UineUIogB2wVDoemYFP6liEXrUgMLbpn8+9ckgUoAfmsaFbgiIZQxMbK5T6DjxLc1X+rjbeKIvLwt1idLSgPYjp0U6fCUCYkTPv0jYQRocEGt5RClssRhkGIqEuanq9amgOFL+JOsbdpsNov7iI+JDSHLYxBzOmrT0f7rBj4Uh7F/cXxxEJ5Bmanu2zJAbC/sQ8iSKlvDP4wY2jGw==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
  216.228.117.161) smtp.rcpttodomain=lists.freedesktop.org
  smtp.mailfrom=nvidia.com; dmarc=pass (p=reject sp=reject pct=100) action=none
@@ -30,18 +30,18 @@ ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=Nvidia.com;
  s=selector2;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=ULuoTEtxeWfhnbpU3jXxpT45EXR6XGGICs9M0jh5SQ0=;
- b=reOAJQYX2klNWkwEO6+X6yHhNMqRZyL25bC+ZQ4/4Q9lsryNyUTK4vYMVpc3QEDCD4nRJiXxkihFcbVcQOpykWnAzd7LmZw2DFxX/+Jbf5v9HC8NUEOGlDzCvxLkZU2mFoZNKEP0BaKgoftz2dmhmc4u4K9p7Wv1zN/ldAOCdOJY+9BFF5dmmF5XSeU08wCSjpM0sVNjNtywK5J/hsjs26hc01w5gR4LfqYihM2aj/srZUztn45aAdwl28S72mf7I6vfOp8cpZrFzp9lXbL3+UKhFMU+rByLl9fZY8c96j2vSGvtayr7QvSlb7SxAib/uvIU2sr1GaoOkdWUjx8kDQ==
-Received: from SJ0PR05CA0178.namprd05.prod.outlook.com (2603:10b6:a03:339::33)
- by DM4PR12MB6009.namprd12.prod.outlook.com (2603:10b6:8:69::10) with
- Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.8722.33; Sat, 17 May
- 2025 00:11:33 +0000
+ bh=xEhyLbAfkYFBGRWV6nJoErEQPoCFoixRMt331PBn7pM=;
+ b=ef65Q7ZvUW3xk5nXpgaU/hngzwoPvXwbFpldkJ/iFx0AIkkEoTjpgUvhHEgXoAtz9QcoVhNTk80U4XHzMDYLK+4+MPIvkcFu4+xZqrk3SGuHKcO2VsTLBXIF2mzLGOEaa+czhNJq2qizUYlAH4PSlUfzN4ckL9XgO1dNEKPUF9eV9mCKxcNqVqEzLNzIXV9rs8GRySLGTeW5+nldWFlKeYSushp1cquJrLKQTQU5/r2GZB7FEAAIgHQoQ5uaWnxEjMF39PK6vArFSda9UE6kMHeLimUaHH83NvYxS2Nnl5bGibYL1mBHBphvT3lB8+wE+OxwZqXF69EjPb/sdbG9Fg==
+Received: from SJ0PR05CA0170.namprd05.prod.outlook.com (2603:10b6:a03:339::25)
+ by PH7PR12MB8124.namprd12.prod.outlook.com (2603:10b6:510:2ba::14)
+ with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.8722.29; Sat, 17 May
+ 2025 00:11:35 +0000
 Received: from CY4PEPF0000FCBF.namprd03.prod.outlook.com
- (2603:10b6:a03:339:cafe::cc) by SJ0PR05CA0178.outlook.office365.com
- (2603:10b6:a03:339::33) with Microsoft SMTP Server (version=TLS1_3,
- cipher=TLS_AES_256_GCM_SHA384) id 15.20.8722.17 via Frontend Transport; Sat,
- 17 May 2025 00:11:33 +0000
+ (2603:10b6:a03:339:cafe::91) by SJ0PR05CA0170.outlook.office365.com
+ (2603:10b6:a03:339::25) with Microsoft SMTP Server (version=TLS1_3,
+ cipher=TLS_AES_256_GCM_SHA384) id 15.20.8746.19 via Frontend Transport; Sat,
+ 17 May 2025 00:11:35 +0000
 X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 216.228.117.161)
  smtp.mailfrom=nvidia.com;
  dkim=none (message not signed)
@@ -52,22 +52,23 @@ Received-SPF: Pass (protection.outlook.com: domain of nvidia.com designates
 Received: from mail.nvidia.com (216.228.117.161) by
  CY4PEPF0000FCBF.mail.protection.outlook.com (10.167.242.101) with Microsoft
  SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.20.8746.27 via Frontend Transport; Sat, 17 May 2025 00:11:33 +0000
+ 15.20.8746.27 via Frontend Transport; Sat, 17 May 2025 00:11:34 +0000
 Received: from rnnvmail201.nvidia.com (10.129.68.8) by mail.nvidia.com
  (10.129.200.67) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.1544.4; Fri, 16 May
- 2025 17:11:19 -0700
+ 2025 17:11:20 -0700
 Received: from nv-dev.vdiclient.nvidia.com (10.126.231.35) by
  rnnvmail201.nvidia.com (10.129.68.8) with Microsoft SMTP Server
  (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.2.1544.14; Fri, 16 May 2025 17:11:17 -0700
+ 15.2.1544.14; Fri, 16 May 2025 17:11:19 -0700
 From: Ben Skeggs <bskeggs@nvidia.com>
 To: <nouveau@lists.freedesktop.org>
 CC: Ben Skeggs <bskeggs@nvidia.com>, Dave Airlie <airlied@redhat.com>, "Timur
  Tabi" <ttabi@nvidia.com>
-Subject: [PATCH v3 48/62] drm/nouveau/mmu: bump up the maximum page table depth
-Date: Sat, 17 May 2025 10:09:40 +1000
-Message-ID: <20250517000954.35691-49-bskeggs@nvidia.com>
+Subject: [PATCH v3 49/62] drm/nouveau/gsp: fetch level shift and PDE from BAR2
+ VMM
+Date: Sat, 17 May 2025 10:09:41 +1000
+Message-ID: <20250517000954.35691-50-bskeggs@nvidia.com>
 X-Mailer: git-send-email 2.49.0
 In-Reply-To: <20250517000954.35691-1-bskeggs@nvidia.com>
 References: <20250517000954.35691-1-bskeggs@nvidia.com>
@@ -79,52 +80,52 @@ X-ClientProxiedBy: rnnvmail202.nvidia.com (10.129.68.7) To
  rnnvmail201.nvidia.com (10.129.68.8)
 X-EOPAttributedMessage: 0
 X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: CY4PEPF0000FCBF:EE_|DM4PR12MB6009:EE_
-X-MS-Office365-Filtering-Correlation-Id: 5cd9414a-5b11-4fe7-8167-08dd94d761b7
+X-MS-TrafficTypeDiagnostic: CY4PEPF0000FCBF:EE_|PH7PR12MB8124:EE_
+X-MS-Office365-Filtering-Correlation-Id: 0cce96d6-b1ab-457d-e4d6-08dd94d7629d
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
 X-Microsoft-Antispam: BCL:0;
- ARA:13230040|82310400026|376014|36860700013|1800799024; 
-X-Microsoft-Antispam-Message-Info: =?us-ascii?Q?XqSBz6MOXu27UeJ2skuYwcONJSc6H9uD4FjtwASBGxDf/tpCL6DGlD670uNq?=
- =?us-ascii?Q?SUaE2TS6Qx/zIrEW3yC1vPeJ2X4d7AXiFp8otgU65R716hS8l9QZRsST9wST?=
- =?us-ascii?Q?n3GerPknBu1B9DgP1noyJjBNE2ycSEd8sXpqZ7baiWZZJ7cVxvmLlOr1RL/D?=
- =?us-ascii?Q?k2AUss1FCPGGKqCPC76Si++qg4tVzqygMPXbZ2tqw46UdIuryTNT6/kow+53?=
- =?us-ascii?Q?KrjZBJhCBdQ8DtoDF/Oh0P9Nm8quUDcA/ozasqydtS4hE0qqqmSQf7gZH3Se?=
- =?us-ascii?Q?KHL4tmXvKQurdHxLDMcA7ybVB559Pzk2qTvOt3LVMDLoYhQZrLYYLt3d/Yp4?=
- =?us-ascii?Q?b0nVBZo6l8R5KKnTDPmWavKzjdSiqUQ6NpMEYR1/xKobbkh5dd2Uvyg+1PDK?=
- =?us-ascii?Q?q6tZMNI3AAy6hmKqMK+Z4f2X9WQA+e5mgJA1dghj45kdtK4nUBNvaEvDi7Vm?=
- =?us-ascii?Q?axt0lvN/w8CsFBbE2atv+1LAmogbOERFTIBr6K2xXSEYDDVFPwTr5iyndjrc?=
- =?us-ascii?Q?glx1hE7QCgjQoizUlfL4aNJFHSBUfBSjkyr42mfH+eyWhopnOKjFyGURTe+W?=
- =?us-ascii?Q?SjDWLR3604x/M+ct9cdjISHh69ItX1jz02gp2URTt4OMqgqN30y2ovHWwKt3?=
- =?us-ascii?Q?1iJvzTovkMT+q1GFViU07E2pAj/1Mir9l18Iei6GLgAm5BdTM3Du3OCs1ZiH?=
- =?us-ascii?Q?9VrIkjJpz05+vbm1/xETg6BBTplXLCo8KYYxIiLIbOEt0vmbcqu4msudUSIP?=
- =?us-ascii?Q?mNPF1rIqSs7+bYzSIErzSHjDBhCZiCiHJk2kFggra6GRJMW1NuRSyJ/06hlt?=
- =?us-ascii?Q?2lCxrPEm75ffiJkGIbzvmy7hITe5PE0TkNDoAHAJ2x6eKy/qU5zN87FdYdkE?=
- =?us-ascii?Q?/Cv2D+kI7LW6cYP+JP/WTxhPC4fmlQPdiILrv5WtoOTL/0lEJFs+to0lwA4w?=
- =?us-ascii?Q?jKiDwX++bKY5o2r3+Ce9jyEAYt5uwsSGPkwVTzb8gB7/MWx5t5IEnisfp46G?=
- =?us-ascii?Q?4dVPojvUUfRNWMIZG8tuiIhfMizy59RWVylISeaj3uFA8KQIzaQkwGN6J0sc?=
- =?us-ascii?Q?9pjS5W6FF8j3DMKhQ4wOYQJXuf37Ls4LFfMOT/ANEeCXH6cQZz+WzKeD5QWw?=
- =?us-ascii?Q?7z2K6ne+bvfBFq7PmzA5SzQhFpE/N4aD8t7OpMueElJWZV8G0hYf06pUdtGU?=
- =?us-ascii?Q?a3I8Clj81j8K9/eo+AMBwPRyLHoX00ROxDU9UfN4Vm2acpWztZJLR8lRNFIb?=
- =?us-ascii?Q?v17Uq84D7KsMs0UTZpmb/hU4yMmQYIHAs03M4ri3UHdPixKF66WOhfl+TS7c?=
- =?us-ascii?Q?8opZY+jGkLKznY6XIkbLTPEjyP0pzqGeSVBE8JBAHsunY4ADr0XVkdcG0v+t?=
- =?us-ascii?Q?T+V05j8IyacGybf3hkfOKVejPu1DEokx3hYvUvPrRJidBRyrx09x5iwZ56BY?=
- =?us-ascii?Q?dVaJfM8sCBL+M6QKgJ4GpIAbfz/GlmlJ069gd7lTyqRY/fyILf4yYd+6sFCh?=
- =?us-ascii?Q?tWzvTnCPwaGubh+q0U3DN88AhkCTymkuBl7h?=
+ ARA:13230040|82310400026|376014|1800799024|36860700013; 
+X-Microsoft-Antispam-Message-Info: =?us-ascii?Q?JxUN22YRw4QxQWL5A/ltjiGNOlSNqCp4/rupE1r0HljfdC0BSRENi6OL+fpE?=
+ =?us-ascii?Q?tAiBZVLVkkITKL8MZN2EAE8aqAAk7RjJ5JWesjtpeRbUDGk4qExGhdDd2uaS?=
+ =?us-ascii?Q?YW/e/UEANn/UA89NJ3qtIroLI9RWJ0yOHnbEd1O5Y+6KMMxmu9Wd0uZxRy7r?=
+ =?us-ascii?Q?2T/rorNK9hkIPIoe2xhYXI4SqAZ7k/nuY16ZgHRhK6BAG/Btx3aECphu4Lm5?=
+ =?us-ascii?Q?aV4RjaZTy0YY0T+4QiUKce1MrpNpYHCCbtE659UShMGzKLLZ9iFROjndHAlG?=
+ =?us-ascii?Q?+lONkvRCqmAklBq7wolX1gKYhg/5LGUEnZvDXMVBJeEv7jqtcFfRJHmRryq+?=
+ =?us-ascii?Q?vWmErpmyhWjUfBIYqdcevNZf+4Y7+7BbCaE1AOBDEUdTrmAsGnhjclTRgkOr?=
+ =?us-ascii?Q?0E2r3LKhpWPGJVFkodEpd5MW8onnI+oSpWnDUHBJS5p8x9XEnJ2hscx82Mo0?=
+ =?us-ascii?Q?xJsjDXpnqd1Wv6V7Nyu0zWG+mO59Fpiz7GJlvLGr0n9MZV11EiugNily6Ofr?=
+ =?us-ascii?Q?YU6ohS97WQDXG4BnoKMWy+PtO0ligcUowcRbGUIhsJjrqJIuYVmxgeZp6tRs?=
+ =?us-ascii?Q?2heba9G6VH4H33iFIHWkBgNTpORXd4jYDnnWikwn4OGktSD3i13CJcwoG5pK?=
+ =?us-ascii?Q?sbC1MutkemH8ChgqOXmhI60Qd+AFF/NDQb3Tj4iMt/4duyi/abHQOekTNCII?=
+ =?us-ascii?Q?CgWa3oDTupbktFPTqLp9mGUfSDcoO/3KU4roVyk4EgX9VGRu/yiVgKLryENr?=
+ =?us-ascii?Q?/x+BK6h5+6zrbBpYwNdVVt9vc1bdEOo3xGdkt8w4j3A/nTmhsbd9Sois5eEo?=
+ =?us-ascii?Q?KDWgwfGBjQOGAypm4yHFyA6k6U1xNFsKRlrUYKg/cA/SrHMo9LRuqEflC6Zq?=
+ =?us-ascii?Q?1XMEQkbHCn8VT39YYqvdR2mzyplw7+6+XQ/55grsNqt/M3BAMHY4dNyc4PXt?=
+ =?us-ascii?Q?7hSFsdF4YDZnlnrVcMgCOEliQR5b68gSJyPA7rROFE2M+bpor/N38gDgdfTc?=
+ =?us-ascii?Q?d9ZPCxu7NlffRyC/VNL25qNvbYT0gagDt6DbMbfcb5hq5njVde3OHH/NLYN+?=
+ =?us-ascii?Q?Qol5Nyq6zOAoJM5MYLvf3pTGu53K74QZwO66PjGgZkP2Vg/7Yv3JlSWM5LLa?=
+ =?us-ascii?Q?ZwEk2zvO9i0vm4BnaSr0Ff3mOM6jQTZOLqXyeQIbU3+zKUR/EL7RMg3Fsx0e?=
+ =?us-ascii?Q?wH0nV3HA/GdHfk0IyP8dCRPxgurHWChQafoUzx91V+rMrD3ty9Tt1mRloWPB?=
+ =?us-ascii?Q?WP1K2FRv7IQvKCUjw9kdEJvpJzfmbmXOCkugaRi4k5YnvOgGZ5MequTGMYD+?=
+ =?us-ascii?Q?6gaslOgDvi+Qkd/+68iU3S5XZZETJHb2InhGb2rbaSzP82zE7+Yf9bOMUpdu?=
+ =?us-ascii?Q?O7BW8HGzJ8floDakcVYRc1D8C2uRzONz9t6YS1eotA/Z/i9Zb3Sfnllrkd1r?=
+ =?us-ascii?Q?20PZeZ0UTR2VF7DqL4NW/COmfCNSwvyP5v3d8zVCxandEGseCqc8DYhLD7y1?=
+ =?us-ascii?Q?TMm4kmW/cGoB/f8XSKrbf4qucQNO+r4D7EHv?=
 X-Forefront-Antispam-Report: CIP:216.228.117.161; CTRY:US; LANG:en; SCL:1; SRV:;
  IPV:NLI; SFV:NSPM; H:mail.nvidia.com; PTR:dc6edge2.nvidia.com; CAT:NONE;
- SFS:(13230040)(82310400026)(376014)(36860700013)(1800799024); DIR:OUT;
+ SFS:(13230040)(82310400026)(376014)(1800799024)(36860700013); DIR:OUT;
  SFP:1101; 
 X-OriginatorOrg: Nvidia.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 17 May 2025 00:11:33.3589 (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: 5cd9414a-5b11-4fe7-8167-08dd94d761b7
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 17 May 2025 00:11:34.9315 (UTC)
+X-MS-Exchange-CrossTenant-Network-Message-Id: 0cce96d6-b1ab-457d-e4d6-08dd94d7629d
 X-MS-Exchange-CrossTenant-Id: 43083d15-7273-40c1-b7db-39efd9ccc17a
 X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=43083d15-7273-40c1-b7db-39efd9ccc17a; Ip=[216.228.117.161];
  Helo=[mail.nvidia.com]
 X-MS-Exchange-CrossTenant-AuthSource: CY4PEPF0000FCBF.namprd03.prod.outlook.com
 X-MS-Exchange-CrossTenant-AuthAs: Anonymous
 X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: DM4PR12MB6009
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: PH7PR12MB8124
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -139,43 +140,82 @@ List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-GH100/GBxxx have 6-level page tables.
+When mirroring BAR2 page tables to RM, we need to know the level shift
+for the root page table (which is currently hardcoded), as well as the
+raw PDE value (which is currently hardcoded in GP1xx-AD1xx format).
+
+In order to support GH100/GBxxx, modify the code to determine the page
+shift from per-GPU info in nvkm_vmm_page, as well as read the relevant
+PDE back from the root page table rather than recalculating it.
 
 Signed-off-by: Ben Skeggs <bskeggs@nvidia.com>
 Reviewed-by: Dave Airlie <airlied@redhat.com>
 Reviewed-by: Timur Tabi <ttabi@nvidia.com>
 Tested-by: Timur Tabi <ttabi@nvidia.com>
 ---
- drivers/gpu/drm/nouveau/include/nvkm/subdev/mmu.h | 2 +-
- drivers/gpu/drm/nouveau/nvkm/subdev/mmu/vmm.c     | 2 +-
- 2 files changed, 2 insertions(+), 2 deletions(-)
+ .../drm/nouveau/nvkm/subdev/gsp/rm/r535/bar.c | 23 ++++++++++++++-----
+ 1 file changed, 17 insertions(+), 6 deletions(-)
 
-diff --git a/drivers/gpu/drm/nouveau/include/nvkm/subdev/mmu.h b/drivers/gpu/drm/nouveau/include/nvkm/subdev/mmu.h
-index 935b1cacd528..7188e3eb2d07 100644
---- a/drivers/gpu/drm/nouveau/include/nvkm/subdev/mmu.h
-+++ b/drivers/gpu/drm/nouveau/include/nvkm/subdev/mmu.h
-@@ -8,7 +8,7 @@ struct nvkm_vma {
- 	struct list_head head;
- 	struct rb_node tree;
- 	u64 addr;
--	u64 size:50;
-+	u64 size;
- 	bool mapref:1; /* PTs (de)referenced on (un)map (vs pre-allocated). */
- 	bool sparse:1; /* Unmapped PDEs/PTEs will not trigger MMU faults. */
- #define NVKM_VMA_PAGE_NONE 7
-diff --git a/drivers/gpu/drm/nouveau/nvkm/subdev/mmu/vmm.c b/drivers/gpu/drm/nouveau/nvkm/subdev/mmu/vmm.c
-index 9c97800fe037..b54397e5364c 100644
---- a/drivers/gpu/drm/nouveau/nvkm/subdev/mmu/vmm.c
-+++ b/drivers/gpu/drm/nouveau/nvkm/subdev/mmu/vmm.c
-@@ -19,7 +19,7 @@
-  * ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
-  * OTHER DEALINGS IN THE SOFTWARE.
-  */
--#define NVKM_VMM_LEVELS_MAX 5
-+#define NVKM_VMM_LEVELS_MAX 6
- #include "vmm.h"
+diff --git a/drivers/gpu/drm/nouveau/nvkm/subdev/gsp/rm/r535/bar.c b/drivers/gpu/drm/nouveau/nvkm/subdev/gsp/rm/r535/bar.c
+index b8fb8150ae48..91242f09648e 100644
+--- a/drivers/gpu/drm/nouveau/nvkm/subdev/gsp/rm/r535/bar.c
++++ b/drivers/gpu/drm/nouveau/nvkm/subdev/gsp/rm/r535/bar.c
+@@ -50,7 +50,7 @@ r535_bar_bar2_wait(struct nvkm_bar *base)
+ }
  
- #include <subdev/fb.h>
+ static int
+-r535_bar_bar2_update_pde(struct nvkm_gsp *gsp, u64 addr)
++r535_bar_bar2_update_pde(struct nvkm_gsp *gsp, u8 page_shift, u64 pdbe)
+ {
+ 	rpc_update_bar_pde_v15_00 *rpc;
+ 
+@@ -59,8 +59,8 @@ r535_bar_bar2_update_pde(struct nvkm_gsp *gsp, u64 addr)
+ 		return -EIO;
+ 
+ 	rpc->info.barType = NV_RPC_UPDATE_PDE_BAR_2;
+-	rpc->info.entryValue = addr ? ((addr >> 4) | 2) : 0; /* PD3 entry format! */
+-	rpc->info.entryLevelShift = 47; //XXX: probably fetch this from mmu!
++	rpc->info.entryValue = pdbe;
++	rpc->info.entryLevelShift = page_shift;
+ 
+ 	return nvkm_gsp_rpc_wr(gsp, rpc, NVKM_GSP_RPC_REPLY_RECV);
+ }
+@@ -68,12 +68,13 @@ r535_bar_bar2_update_pde(struct nvkm_gsp *gsp, u64 addr)
+ static void
+ r535_bar_bar2_fini(struct nvkm_bar *bar)
+ {
++	struct nvkm_vmm *vmm = gf100_bar(bar)->bar[0].vmm;
+ 	struct nvkm_gsp *gsp = bar->subdev.device->gsp;
+ 
+ 	bar->flushBAR2 = bar->flushBAR2PhysMode;
+ 	nvkm_done(bar->flushFBZero);
+ 
+-	WARN_ON(r535_bar_bar2_update_pde(gsp, 0));
++	WARN_ON(r535_bar_bar2_update_pde(gsp, vmm->func->page[0].shift, 0));
+ }
+ 
+ static void
+@@ -82,8 +83,18 @@ r535_bar_bar2_init(struct nvkm_bar *bar)
+ 	struct nvkm_device *device = bar->subdev.device;
+ 	struct nvkm_vmm *vmm = gf100_bar(bar)->bar[0].vmm;
+ 	struct nvkm_gsp *gsp = device->gsp;
+-
+-	WARN_ON(r535_bar_bar2_update_pde(gsp, vmm->pd->pde[0]->pt[0]->addr));
++	struct nvkm_memory *pdb = vmm->pd->pt[0]->memory;
++	u32 pdb_offset = vmm->pd->pt[0]->base;
++	u32 pdbe_lo, pdbe_hi;
++	u64 pdbe;
++
++	nvkm_kmap(pdb);
++	pdbe_lo = nvkm_ro32(pdb, pdb_offset + 0);
++	pdbe_hi = nvkm_ro32(pdb, pdb_offset + 4);
++	pdbe = ((u64)pdbe_hi << 32) | pdbe_lo;
++	nvkm_done(pdb);
++
++	WARN_ON(r535_bar_bar2_update_pde(gsp, vmm->func->page[0].shift, pdbe));
+ 	vmm->rm.bar2_pdb = gsp->bar.rm_bar2_pdb;
+ 
+ 	if (!bar->flushFBZero) {
 -- 
 2.49.0
 
