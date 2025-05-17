@@ -2,73 +2,72 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id B60DEABA706
-	for <lists+nouveau@lfdr.de>; Sat, 17 May 2025 02:10:53 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id A636EABA708
+	for <lists+nouveau@lfdr.de>; Sat, 17 May 2025 02:10:56 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 42AA610EBA9;
-	Sat, 17 May 2025 00:10:52 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 53AD110EBB0;
+	Sat, 17 May 2025 00:10:55 +0000 (UTC)
 Authentication-Results: gabe.freedesktop.org;
-	dkim=pass (2048-bit key; unprotected) header.d=Nvidia.com header.i=@Nvidia.com header.b="KXh9h8ZZ";
+	dkim=pass (2048-bit key; unprotected) header.d=Nvidia.com header.i=@Nvidia.com header.b="braKTvEh";
 	dkim-atps=neutral
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from NAM11-DM6-obe.outbound.protection.outlook.com
- (mail-dm6nam11on2058.outbound.protection.outlook.com [40.107.223.58])
- by gabe.freedesktop.org (Postfix) with ESMTPS id BBD5910EBA9
- for <nouveau@lists.freedesktop.org>; Sat, 17 May 2025 00:10:50 +0000 (UTC)
+Received: from NAM12-MW2-obe.outbound.protection.outlook.com
+ (mail-mw2nam12on2041.outbound.protection.outlook.com [40.107.244.41])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 10D4310EBAC
+ for <nouveau@lists.freedesktop.org>; Sat, 17 May 2025 00:10:54 +0000 (UTC)
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=tZHn55MVO2bLKD+UTvplwrJ0u2RblxliFr+VnIvQYQeNS5pbYgxmi3Vy7SW/NGxcXjoXAijVlxYDRBIZ53OSRAnqNGCDfNTYRt7zQXUmNudsmTpguNGbzkcf0jFX0h1rNJrD+9UvUx06SiJOAOnBY8hNHAczoLijCdgJA9IEDegkDDMMr09HVNCVXjVvV5hgJAC3sCNbwwRZO5YBW9ToUVegxdNOJUMKS32NTyBsSchywMOd0AdEDHRqCNjRW2Qz9EKV6336BZMmmfb+ApLMYlkDIcc1pCzOYRSiRlADGVJbibE0RcPZfyYsISItVw/R+x8PniBslzXOYODN2xaCiA==
+ b=ksYg4CIx3dJY6TP1O/9waqAhx5fRHNqEnRafO5raLJiRp6+KY4YJQYkq5Oynjhtd2njWUGrpU7P/XH60MSdqLECuogbLh4ujDax/aauC6AfknFryVnkxw5WwTADrBiKPLwgtRvLiEEkFDd2YjsfQDAoBZMBHby4aknVJrVfhLqA4YknnmuPdsEORqmt0DiD7z6E18nJvXMjRqxfh2DacJBC8ZxdfTuSn/uytPO1hVSD3a5GtzAShOPA5LqmMQnV0NMCMdVARVsEHIfpJCylc2IDzLmcwJEftG1rJUVLPWJCUaJJZ++mwneb3xmVZ8eFhJHEwFilcJolS19MpnZRXpg==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
  s=arcselector10001;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=Hyse2yO/e6FzgflKSTpOmPDjyP20ZEeicI+H2A6OLWg=;
- b=i18ST1hll6GpksqtqnJHOm5jhySvXIRWJBk4QMe9A2WCOTts0+TuY59sH+K281Wch6NZ/J3JqRd8eFjb8KGtduLuW7ga5kh1QKoguaQTgHgqeAyPx4seSnslqZm7yOer1H1qJFfn7UDDBG48Q5VR7Wlp7Zm2xSB8oumPLyng7EsC77XPPaygxLjzpX/Dyya+KDm5mnujGjgGDF4pexq3ibcyu2ByAs99yE3ExqxgBSYSPFsYFvPfBlFBsR+9CF2dZBqpLTGRy60J71StOENG9X7mj0+6U01SLE9CsNAsK20Nule9CcGmweTdcH5CkF7jg9PQEr9bKoCfKrg19stbCQ==
+ bh=vgA5U+iWwsfCExvSgUtIc8aPsarthg0tiPsuYwX6v4E=;
+ b=jngh+3540QPeeC+1BUVPxCoxYVFCQMEm3nOBw79dD0yIDa/HSLDbbO08IiEvt35K7R0ag1bGVkVsCKrEUtMTKurkarcj+54E3ldsQieQPGSbTjaWKzyhv5463SO32PojOsNgf9D9YS/ardkr4dyUWne6I6VSicn8yrYBYcaTtAjLGi9/udBqJdR/SjpK657NGJKfD+lsexCwWx46OGwPt0pFCekvbKarzVXTR2quogO06iWvud+PV0jgUJxEtk3ozCMOt6M+zJH0Vmx+uaeTRQEiFFCMs482fr3xSMIA7atInheprJXwyOwh6AqLKDkaxzzAPCRfp90Og1XDxehzuQ==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
- 216.228.117.161) smtp.rcpttodomain=lists.freedesktop.org
+ 216.228.117.160) smtp.rcpttodomain=lists.freedesktop.org
  smtp.mailfrom=nvidia.com; dmarc=pass (p=reject sp=reject pct=100) action=none
  header.from=nvidia.com; dkim=none (message not signed); arc=none (0)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=Nvidia.com;
  s=selector2;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=Hyse2yO/e6FzgflKSTpOmPDjyP20ZEeicI+H2A6OLWg=;
- b=KXh9h8ZZ8W7YILzOWhJWVis4UNu8ellqjUFn35OIGj3seqKlw0XfKr4qARcyiMFnJK4SUO4v46inuHfrPwqxcsEGHaNRT1GM2Ih26eh8o6gn46smGdAvMfVipJYFlJ9xmlSrn2zRUsZma8MwTjvdXLe3kWvPssMlHU0HqiIxtHFRWF2jx6fH6m46IGXgasBwYc8wONpmwsZOWAGIX1BmjY1PuYynX7UZ2rDcmhqAkGRreiR7ZtQsyJ9i+glYyXyHvskS1dm5rEEEsvuEJ9E6Nu8+3GHWKl7PXVW/zLaYnk1JlVbx3MSKPSV/dtn3bPLenU3BHrm0UT3AC+KAMWn6CA==
-Received: from BYAPR06CA0065.namprd06.prod.outlook.com (2603:10b6:a03:14b::42)
- by DS0PR12MB7726.namprd12.prod.outlook.com (2603:10b6:8:130::6) with
+ bh=vgA5U+iWwsfCExvSgUtIc8aPsarthg0tiPsuYwX6v4E=;
+ b=braKTvEhoSHeMrLKuCXEPhWzoa+m+up61HzVIsXzO0j2AFIDH/f7B2H/sctZE5ddDX8Kp09l8VkaPAlhAhFX6OZrDCesJxRiGw6u5wApIaqMH/dWc2jsPTdPfe79JTuG+PqglGbcRQkVSAPNqhgDYg7hDdKLc+g6e6uosKjCJqP+K+CdvcmdsBZqy12MV+JSUgAnTYPy+EMLMNGGAk20xfzh4PZSBcRGD3uB76SToxgMuup+b2p9MR1xK7Np3ZIfwAaH3yq0AMTRBVYozcDk84JsjyiNHtk6Ib76/LnGkZ5y+W9vMfvgUOgrf404j8ClJRtz0BqA80ZvIl4V2P3OnA==
+Received: from CH0PR03CA0093.namprd03.prod.outlook.com (2603:10b6:610:cd::8)
+ by BL3PR12MB6595.namprd12.prod.outlook.com (2603:10b6:208:38e::12) with
  Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.8722.29; Sat, 17 May
- 2025 00:10:41 +0000
-Received: from CY4PEPF0000FCC4.namprd03.prod.outlook.com
- (2603:10b6:a03:14b:cafe::84) by BYAPR06CA0065.outlook.office365.com
- (2603:10b6:a03:14b::42) with Microsoft SMTP Server (version=TLS1_3,
- cipher=TLS_AES_256_GCM_SHA384) id 15.20.8699.32 via Frontend Transport; Sat,
- 17 May 2025 00:10:41 +0000
-X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 216.228.117.161)
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.8722.28; Sat, 17 May
+ 2025 00:10:46 +0000
+Received: from CH2PEPF00000149.namprd02.prod.outlook.com
+ (2603:10b6:610:cd:cafe::6c) by CH0PR03CA0093.outlook.office365.com
+ (2603:10b6:610:cd::8) with Microsoft SMTP Server (version=TLS1_3,
+ cipher=TLS_AES_256_GCM_SHA384) id 15.20.8746.20 via Frontend Transport; Sat,
+ 17 May 2025 00:10:46 +0000
+X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 216.228.117.160)
  smtp.mailfrom=nvidia.com;
  dkim=none (message not signed)
  header.d=none;dmarc=pass action=none header.from=nvidia.com;
 Received-SPF: Pass (protection.outlook.com: domain of nvidia.com designates
- 216.228.117.161 as permitted sender) receiver=protection.outlook.com;
- client-ip=216.228.117.161; helo=mail.nvidia.com; pr=C
-Received: from mail.nvidia.com (216.228.117.161) by
- CY4PEPF0000FCC4.mail.protection.outlook.com (10.167.242.106) with Microsoft
+ 216.228.117.160 as permitted sender) receiver=protection.outlook.com;
+ client-ip=216.228.117.160; helo=mail.nvidia.com; pr=C
+Received: from mail.nvidia.com (216.228.117.160) by
+ CH2PEPF00000149.mail.protection.outlook.com (10.167.244.106) with Microsoft
  SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.20.8746.27 via Frontend Transport; Sat, 17 May 2025 00:10:41 +0000
+ 15.20.8746.27 via Frontend Transport; Sat, 17 May 2025 00:10:45 +0000
 Received: from rnnvmail201.nvidia.com (10.129.68.8) by mail.nvidia.com
- (10.129.200.67) with Microsoft SMTP Server (version=TLS1_2,
+ (10.129.200.66) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.1544.4; Fri, 16 May
- 2025 17:10:27 -0700
+ 2025 17:10:31 -0700
 Received: from nv-dev.vdiclient.nvidia.com (10.126.231.35) by
  rnnvmail201.nvidia.com (10.129.68.8) with Microsoft SMTP Server
  (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.2.1544.14; Fri, 16 May 2025 17:10:25 -0700
+ 15.2.1544.14; Fri, 16 May 2025 17:10:29 -0700
 From: Ben Skeggs <bskeggs@nvidia.com>
 To: <nouveau@lists.freedesktop.org>
 CC: Ben Skeggs <bskeggs@nvidia.com>, Dave Airlie <airlied@redhat.com>, "Timur
  Tabi" <ttabi@nvidia.com>
-Subject: [PATCH v3 13/62] drm/nouveau/gsp: move subdev/engine impls to
- subdev/gsp/rm/r535/
-Date: Sat, 17 May 2025 10:09:05 +1000
-Message-ID: <20250517000954.35691-14-bskeggs@nvidia.com>
+Subject: [PATCH v3 15/62] drm/nouveau/gsp: add gpu hal stubs
+Date: Sat, 17 May 2025 10:09:07 +1000
+Message-ID: <20250517000954.35691-16-bskeggs@nvidia.com>
 X-Mailer: git-send-email 2.49.0
 In-Reply-To: <20250517000954.35691-1-bskeggs@nvidia.com>
 References: <20250517000954.35691-1-bskeggs@nvidia.com>
@@ -80,52 +79,52 @@ X-ClientProxiedBy: rnnvmail202.nvidia.com (10.129.68.7) To
  rnnvmail201.nvidia.com (10.129.68.8)
 X-EOPAttributedMessage: 0
 X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: CY4PEPF0000FCC4:EE_|DS0PR12MB7726:EE_
-X-MS-Office365-Filtering-Correlation-Id: 3a595dc0-9052-4248-c076-08dd94d742ae
+X-MS-TrafficTypeDiagnostic: CH2PEPF00000149:EE_|BL3PR12MB6595:EE_
+X-MS-Office365-Filtering-Correlation-Id: 9c91bdd3-f9b8-43b4-833c-08dd94d7457f
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
 X-Microsoft-Antispam: BCL:0;
- ARA:13230040|376014|36860700013|82310400026|1800799024; 
-X-Microsoft-Antispam-Message-Info: =?us-ascii?Q?8aQfHaJDnecZqMWBKEnZD5PFzqczYxWm+x4jr4kBE0bq/sFCoENFIBze6P3E?=
- =?us-ascii?Q?6F7Ti4M+3L9u/hYyj13QMxdooiPLOZywpgkg2M2JW3dgOXs3nIRoBhkyZC1P?=
- =?us-ascii?Q?3AhtcnzM8+tATCbr6ai6h5vgxdwqwmNSSd4lk8pAD38aMrwxox1Apa01z3Oj?=
- =?us-ascii?Q?yLqnfzEcd0tp0kXwyi9gX5somLySeJTdYoFWVkScRSbBmVJMB5bkw0HYKh2b?=
- =?us-ascii?Q?J2SKYEuuM3xI6z7PusDCMS4W2uoVLdekznVcgk2Dchwnx8OuR2bIvWvtHYW1?=
- =?us-ascii?Q?p7D9jz3vDol/JQEgwXqu2mEjyHMIYfRsop2Abaq47KMfGZukWzRhW3ZCrFYV?=
- =?us-ascii?Q?vJNIstSHfnpoENi1XO2ibxxGuws4l7ojcabD/4PAdnA6tTm4EMpDzwBQ/ICB?=
- =?us-ascii?Q?9O5WjuJKIaywpW36ShMRkife5ndH70Z3hbEP2y8kjk4MncGNOCiYINbScPU/?=
- =?us-ascii?Q?5AyLcP7gQE9bd6QZcfCquxXDNRLRoFJcAgIZmKaF8n5HpIeNqvqS6CVbiRf0?=
- =?us-ascii?Q?w5nLpffepc5NRdnJ1RWWVnSLUR+nblllJ0YWaF5zcbvLChgU2yQhBUXnpEO7?=
- =?us-ascii?Q?1K2rb+cSHHCgAKc06Ck6Rg9nA9URDHbg6ccjkuXOhVzlcNZgpmdbHkNbLny7?=
- =?us-ascii?Q?+XLT2+6e0LF1NTNUNJMtIyPYok1cBb1uzt9XYDy/Q27/Awi34FJ0RzO3WHr7?=
- =?us-ascii?Q?1iCWFCr7SylebUq5EOoUC0N0ea0NCduB0BfVrHHAzUFEJSp2qyJesNhALzAI?=
- =?us-ascii?Q?Oi3oXQb5SpHWMjUsbXUyLC/bieGw963MN0ohBFU6sz22hQ04WA8M+U4hx/I0?=
- =?us-ascii?Q?Vo/Q7ybwT1KZe8+KUPifCG3ISTf9HwWRd879OI2r6npc9I4T3biY2nHy899F?=
- =?us-ascii?Q?CiMC+N9YUX3zPyITyzCtS2oI3y9328a+UnzRPFpMo6zG/O2m1ww8MhpWNnSL?=
- =?us-ascii?Q?AbO9ensxbINEhPoL+bEH0uH1cngf4F5ddI9xMECENP017JRCUMppyFcZIMi0?=
- =?us-ascii?Q?2O0tCAHto5BTUA8i3Bf/BP5kNbVBvGueOP+Vp6u5cZdjZZSUwJbWrGIai5TK?=
- =?us-ascii?Q?bmvnAxC+GvCxKB+m9QBdQIEaifxRep8ZqMjUZCQoNwnwmMyZhHo4J3a1/1W/?=
- =?us-ascii?Q?zgYPw+0jB95tzAUkgoBiCkp7c1THPXFPDuok+AozsxnCKXWgvDwVCgnDGDvo?=
- =?us-ascii?Q?n8w6REC9wYWxp0B9PBbvv+RzqHnxSQKq2ovarH65M9t8SD7OlST7z9Nh+7Ha?=
- =?us-ascii?Q?2B0v4zxJ7lYFpo8beOR13WHeaaHXXt+bu5/LHHNpHexVIA35oaT8mP6gJwqA?=
- =?us-ascii?Q?jq+ODYZIRtK5U99GcxQhCclwwtoeXvNhGtG4lcOsIv0avI5sW/nERWzkfKYc?=
- =?us-ascii?Q?22J0WzJzB7VhrpQ2mg0xifXn5pDRNvwId6O+gJuWlQcs/tZJTEHBaR2j+Ffm?=
- =?us-ascii?Q?3D/CzX5u1FRg41Qmug8Zpnj6dz3ptAEoTjj53eiqZULI0HdZTLjrhqjxqIn/?=
- =?us-ascii?Q?i4ZibvOlECvoucpbIvwQx11EDfASMHn9GwLZ?=
-X-Forefront-Antispam-Report: CIP:216.228.117.161; CTRY:US; LANG:en; SCL:1; SRV:;
- IPV:NLI; SFV:NSPM; H:mail.nvidia.com; PTR:dc6edge2.nvidia.com; CAT:NONE;
- SFS:(13230040)(376014)(36860700013)(82310400026)(1800799024); DIR:OUT;
+ ARA:13230040|376014|82310400026|1800799024|36860700013; 
+X-Microsoft-Antispam-Message-Info: =?us-ascii?Q?naf4pzr3nxGxDs9N6FEkRzdqlQH0nYuzhlPVewtMH5MI0MBTv4wrbNd7BrKD?=
+ =?us-ascii?Q?+iFhk7jT+kB8i+mCC8K864j2LjzGq37wQXRNoMTc0ZKdIjAs3HDYiAkIMPp6?=
+ =?us-ascii?Q?PDmXYJYXXG21Z6j2OH+CP7R6o6y+iQ06gRykLNBBE+Ipcu8W30SZri6qt6ay?=
+ =?us-ascii?Q?NVTyN4f1fHrGjrz0by3qC1WoKMrFHFPQVD43TyAAWIoKVs0zDJXx/lwgf3Vm?=
+ =?us-ascii?Q?DC5DQsKcTjWhouw9vGAVp++qmstCRsdmLmk1VV1At1bqyie12XYuIk+YHtgT?=
+ =?us-ascii?Q?tH1FY2/fZcZJFpexvA7cIuBaNw8dacFAa0tD2ykZmkiW+KJU8IFWqBCS0Gxm?=
+ =?us-ascii?Q?fYRT14sZsBdWfNtzBMnUGL3hGpej8dOa11jFVYklb20x32iXUA2YxStnGTgr?=
+ =?us-ascii?Q?zEZAfCINr5FGJ1ZgezAiGWJ+TzoBe+D5sWoQerQgVPhlSqtvJwUe12vacxUN?=
+ =?us-ascii?Q?yOLD5aOgMKA3PQshF5xCl60cuWzlxT2svxxA3IgL3IJlN3h87WnzBKFzvgeB?=
+ =?us-ascii?Q?DUJGJXqQxf0bpIkWhJihHecN/nhYRuPT06vWD2hSBnOXwaHIMsuMZ2A4KbUN?=
+ =?us-ascii?Q?H2lG+2TzUpKE0Gt2SGqxg9L8fGJZlYG0hEdJqnrN2l3jFq6GYvxvn7l0zUUG?=
+ =?us-ascii?Q?0k7snxPCm+bfBNcmWMF5YCnkpBPoX4i7H7yYXYf6a+QERMqddnelXKKkBMMh?=
+ =?us-ascii?Q?5xzIMirPiuIhPyDJtZ9xD/SQiwr/JR7K9WCeDb7IJXPFv9vUg7C4Qrq+tGJn?=
+ =?us-ascii?Q?dWXBs/ZShTLMw33wiS++StwLLE8cZzKnokTCICl2UBop1T7wknUWw0O287T4?=
+ =?us-ascii?Q?KXRx6OK+cUDxQXKRWNPZsQCiUF2z0qxOCHM0XItqZiMmNR2SrqzdGhmOQCS5?=
+ =?us-ascii?Q?1BhYKqFF9xlFfXnm2dGpMLIY2yFrTWmS1bnWcuNCjCsBbIURCEpunFk9XeZm?=
+ =?us-ascii?Q?AWpLDpHnJoHlSDYSMnCC2vACibgFn5ezcw3lKH1Xzw6BbFnb4YJ4XiotZ8vR?=
+ =?us-ascii?Q?PgAwg/e6uzFXfYDJsUGHo5gR0K3YVO5Tourt9B06f0GZJUsSbe9o4CoB0gIC?=
+ =?us-ascii?Q?WYf4KyiPLGvFi2v/5ygobl+KAeBzlcUAjo2X10osdTK1zrIDZxeusevhRGdj?=
+ =?us-ascii?Q?IYer/wRnNxEOjvuScPBkBaAGPOWWqAOgxTkqtnjLfo9wAejzwfZDs91BC6El?=
+ =?us-ascii?Q?0EgyfsEmBhniVKvi4fCMqkUcuqq8u7cVOwA7xnrfLGCKOCPJRFvBozOrqOp7?=
+ =?us-ascii?Q?F+LALAkTkEMbNZMy4z5+odUQRckA6SyPK4GRNLeEejJQSHTsA25rys4wolo0?=
+ =?us-ascii?Q?mzG3Jht0cyv++vC1lwKDU0gQmI9GMrJ0txi6H0GVGNauf9b/ehbw75Bf+b2M?=
+ =?us-ascii?Q?xpj3VUI8Tko7BX97MbIQhjgOSNeRqV4h2qRRzMGQ7o73BsAuoDDDktbbQMp1?=
+ =?us-ascii?Q?MPUoYRNn87TKg5/kLLTl/z3Amk6wCuoQRusIh8lpijDGF7ceNdXO32LAcstY?=
+ =?us-ascii?Q?39Lxdc4ZrjYMeSQ//FKOicFcKwsgwa3H2ZH1?=
+X-Forefront-Antispam-Report: CIP:216.228.117.160; CTRY:US; LANG:en; SCL:1; SRV:;
+ IPV:NLI; SFV:NSPM; H:mail.nvidia.com; PTR:dc6edge1.nvidia.com; CAT:NONE;
+ SFS:(13230040)(376014)(82310400026)(1800799024)(36860700013); DIR:OUT;
  SFP:1101; 
 X-OriginatorOrg: Nvidia.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 17 May 2025 00:10:41.3509 (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: 3a595dc0-9052-4248-c076-08dd94d742ae
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 17 May 2025 00:10:45.9831 (UTC)
+X-MS-Exchange-CrossTenant-Network-Message-Id: 9c91bdd3-f9b8-43b4-833c-08dd94d7457f
 X-MS-Exchange-CrossTenant-Id: 43083d15-7273-40c1-b7db-39efd9ccc17a
-X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=43083d15-7273-40c1-b7db-39efd9ccc17a; Ip=[216.228.117.161];
+X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=43083d15-7273-40c1-b7db-39efd9ccc17a; Ip=[216.228.117.160];
  Helo=[mail.nvidia.com]
-X-MS-Exchange-CrossTenant-AuthSource: CY4PEPF0000FCC4.namprd03.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthSource: CH2PEPF00000149.namprd02.prod.outlook.com
 X-MS-Exchange-CrossTenant-AuthAs: Anonymous
 X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: DS0PR12MB7726
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: BL3PR12MB6595
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -140,416 +139,457 @@ List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-Move all the remaining GSP-RM code together underneath a versioned path,
-to make the code easier to work with when adding support for a newer RM
-version.
+With GSP-RM handling the majority of the HW programming, NVKM's usual
+HALs are more elaborate than necessary, resulting in a fair amount of
+duplicated boilerplate.
 
-Aside from adjusting include paths, no code change is intended.
+Adds 'nvkm_rm_gpu' which serves to provide GPU-specific constants and
+functions in a more streamlined manner.
+
+This is initially used in subsequent commits to store engine class IDs,
+and replace the per-engine/engobj boilerplate with common code for all
+GSP-RM supported engines - and is further extended when adding GH100,
+GB10x and GB20x support.
 
 Signed-off-by: Ben Skeggs <bskeggs@nvidia.com>
 Reviewed-by: Dave Airlie <airlied@redhat.com>
 Reviewed-by: Timur Tabi <ttabi@nvidia.com>
 Tested-by: Timur Tabi <ttabi@nvidia.com>
 ---
- drivers/gpu/drm/nouveau/nvkm/engine/ce/Kbuild     |  2 --
- drivers/gpu/drm/nouveau/nvkm/engine/disp/Kbuild   |  2 --
- drivers/gpu/drm/nouveau/nvkm/engine/fifo/Kbuild   |  2 --
- drivers/gpu/drm/nouveau/nvkm/engine/gr/Kbuild     |  2 --
- drivers/gpu/drm/nouveau/nvkm/engine/nvdec/Kbuild  |  2 --
- drivers/gpu/drm/nouveau/nvkm/engine/nvenc/Kbuild  |  2 --
- drivers/gpu/drm/nouveau/nvkm/engine/nvjpg/Kbuild  |  2 --
- drivers/gpu/drm/nouveau/nvkm/engine/ofa/Kbuild    |  2 --
- drivers/gpu/drm/nouveau/nvkm/subdev/bar/Kbuild    |  2 --
- drivers/gpu/drm/nouveau/nvkm/subdev/gsp/Kbuild    |  2 --
- .../drm/nouveau/nvkm/subdev/gsp/rm/r535/Kbuild    | 15 +++++++++++++++
- .../nvkm/subdev/{bar/r535.c => gsp/rm/r535/bar.c} |  2 +-
- .../{engine/ce/r535.c => subdev/gsp/rm/r535/ce.c} |  2 +-
- .../disp/r535.c => subdev/gsp/rm/r535/disp.c}     | 14 +++++++-------
- .../subdev/{instmem/r535.c => gsp/rm/r535/fbsr.c} |  2 +-
- .../fifo/r535.c => subdev/gsp/rm/r535/fifo.c}     | 10 +++++-----
- .../{engine/gr/r535.c => subdev/gsp/rm/r535/gr.c} |  2 +-
- .../nvkm/subdev/gsp/{r535.c => rm/r535/gsp.c}     |  0
- .../nvdec/r535.c => subdev/gsp/rm/r535/nvdec.c}   |  2 +-
- .../nvenc/r535.c => subdev/gsp/rm/r535/nvenc.c}   |  2 +-
- .../nvjpg/r535.c => subdev/gsp/rm/r535/nvjpg.c}   |  2 +-
- .../ofa/r535.c => subdev/gsp/rm/r535/ofa.c}       |  2 +-
- .../nvkm/subdev/{mmu/r535.c => gsp/rm/r535/vmm.c} |  2 +-
- .../gpu/drm/nouveau/nvkm/subdev/instmem/Kbuild    |  2 --
- drivers/gpu/drm/nouveau/nvkm/subdev/mmu/Kbuild    |  2 --
- 25 files changed, 36 insertions(+), 45 deletions(-)
- rename drivers/gpu/drm/nouveau/nvkm/subdev/{bar/r535.c => gsp/rm/r535/bar.c} (99%)
- rename drivers/gpu/drm/nouveau/nvkm/{engine/ce/r535.c => subdev/gsp/rm/r535/ce.c} (99%)
- rename drivers/gpu/drm/nouveau/nvkm/{engine/disp/r535.c => subdev/gsp/rm/r535/disp.c} (99%)
- rename drivers/gpu/drm/nouveau/nvkm/subdev/{instmem/r535.c => gsp/rm/r535/fbsr.c} (99%)
- rename drivers/gpu/drm/nouveau/nvkm/{engine/fifo/r535.c => subdev/gsp/rm/r535/fifo.c} (99%)
- rename drivers/gpu/drm/nouveau/nvkm/{engine/gr/r535.c => subdev/gsp/rm/r535/gr.c} (99%)
- rename drivers/gpu/drm/nouveau/nvkm/subdev/gsp/{r535.c => rm/r535/gsp.c} (100%)
- rename drivers/gpu/drm/nouveau/nvkm/{engine/nvdec/r535.c => subdev/gsp/rm/r535/nvdec.c} (99%)
- rename drivers/gpu/drm/nouveau/nvkm/{engine/nvenc/r535.c => subdev/gsp/rm/r535/nvenc.c} (99%)
- rename drivers/gpu/drm/nouveau/nvkm/{engine/nvjpg/r535.c => subdev/gsp/rm/r535/nvjpg.c} (99%)
- rename drivers/gpu/drm/nouveau/nvkm/{engine/ofa/r535.c => subdev/gsp/rm/r535/ofa.c} (99%)
- rename drivers/gpu/drm/nouveau/nvkm/subdev/{mmu/r535.c => gsp/rm/r535/vmm.c} (99%)
+ .../gpu/drm/nouveau/include/nvkm/subdev/gsp.h    |  6 ++----
+ drivers/gpu/drm/nouveau/nvkm/subdev/gsp/ad102.c  |  6 +++---
+ drivers/gpu/drm/nouveau/nvkm/subdev/gsp/base.c   | 12 +++++++++++-
+ drivers/gpu/drm/nouveau/nvkm/subdev/gsp/ga100.c  |  6 +++---
+ drivers/gpu/drm/nouveau/nvkm/subdev/gsp/ga102.c  |  6 +++---
+ drivers/gpu/drm/nouveau/nvkm/subdev/gsp/priv.h   |  7 +++++--
+ .../gpu/drm/nouveau/nvkm/subdev/gsp/rm/Kbuild    |  5 +++++
+ .../gpu/drm/nouveau/nvkm/subdev/gsp/rm/ad10x.c   |  9 +++++++++
+ .../gpu/drm/nouveau/nvkm/subdev/gsp/rm/ga100.c   |  9 +++++++++
+ .../gpu/drm/nouveau/nvkm/subdev/gsp/rm/ga1xx.c   |  9 +++++++++
+ drivers/gpu/drm/nouveau/nvkm/subdev/gsp/rm/gpu.h | 16 ++++++++++++++++
+ .../drm/nouveau/nvkm/subdev/gsp/rm/r535/gsp.c    |  5 -----
+ .../gpu/drm/nouveau/nvkm/subdev/gsp/rm/r535/rm.c | 14 ++++++++++++--
+ drivers/gpu/drm/nouveau/nvkm/subdev/gsp/rm/rm.h  | 13 ++++++++++++-
+ .../gpu/drm/nouveau/nvkm/subdev/gsp/rm/tu1xx.c   |  9 +++++++++
+ drivers/gpu/drm/nouveau/nvkm/subdev/gsp/tu102.c  |  6 +++---
+ drivers/gpu/drm/nouveau/nvkm/subdev/gsp/tu116.c  |  6 +++---
+ 17 files changed, 114 insertions(+), 30 deletions(-)
+ create mode 100644 drivers/gpu/drm/nouveau/nvkm/subdev/gsp/rm/ad10x.c
+ create mode 100644 drivers/gpu/drm/nouveau/nvkm/subdev/gsp/rm/ga100.c
+ create mode 100644 drivers/gpu/drm/nouveau/nvkm/subdev/gsp/rm/ga1xx.c
+ create mode 100644 drivers/gpu/drm/nouveau/nvkm/subdev/gsp/rm/gpu.h
+ create mode 100644 drivers/gpu/drm/nouveau/nvkm/subdev/gsp/rm/tu1xx.c
 
-diff --git a/drivers/gpu/drm/nouveau/nvkm/engine/ce/Kbuild b/drivers/gpu/drm/nouveau/nvkm/engine/ce/Kbuild
-index 165d61fc5d6c..8bf1635ffabc 100644
---- a/drivers/gpu/drm/nouveau/nvkm/engine/ce/Kbuild
-+++ b/drivers/gpu/drm/nouveau/nvkm/engine/ce/Kbuild
-@@ -10,5 +10,3 @@ nvkm-y += nvkm/engine/ce/gv100.o
- nvkm-y += nvkm/engine/ce/tu102.o
- nvkm-y += nvkm/engine/ce/ga100.o
- nvkm-y += nvkm/engine/ce/ga102.o
--
--nvkm-y += nvkm/engine/ce/r535.o
-diff --git a/drivers/gpu/drm/nouveau/nvkm/engine/disp/Kbuild b/drivers/gpu/drm/nouveau/nvkm/engine/disp/Kbuild
-index e346e924fee8..23a10e081081 100644
---- a/drivers/gpu/drm/nouveau/nvkm/engine/disp/Kbuild
-+++ b/drivers/gpu/drm/nouveau/nvkm/engine/disp/Kbuild
-@@ -29,8 +29,6 @@ nvkm-y += nvkm/engine/disp/tu102.o
- nvkm-y += nvkm/engine/disp/ga102.o
- nvkm-y += nvkm/engine/disp/ad102.o
+diff --git a/drivers/gpu/drm/nouveau/include/nvkm/subdev/gsp.h b/drivers/gpu/drm/nouveau/include/nvkm/subdev/gsp.h
+index 3fd279be8340..eeaf72f6add3 100644
+--- a/drivers/gpu/drm/nouveau/include/nvkm/subdev/gsp.h
++++ b/drivers/gpu/drm/nouveau/include/nvkm/subdev/gsp.h
+@@ -209,9 +209,7 @@ struct nvkm_gsp {
+ 		u8 tpcs;
+ 	} gr;
  
--nvkm-y += nvkm/engine/disp/r535.o
--
- nvkm-y += nvkm/engine/disp/udisp.o
- nvkm-y += nvkm/engine/disp/uconn.o
- nvkm-y += nvkm/engine/disp/uoutp.o
-diff --git a/drivers/gpu/drm/nouveau/nvkm/engine/fifo/Kbuild b/drivers/gpu/drm/nouveau/nvkm/engine/fifo/Kbuild
-index aff92848abfe..5a074b9970ab 100644
---- a/drivers/gpu/drm/nouveau/nvkm/engine/fifo/Kbuild
-+++ b/drivers/gpu/drm/nouveau/nvkm/engine/fifo/Kbuild
-@@ -26,7 +26,5 @@ nvkm-y += nvkm/engine/fifo/tu102.o
- nvkm-y += nvkm/engine/fifo/ga100.o
- nvkm-y += nvkm/engine/fifo/ga102.o
+-	const struct nvkm_gsp_rm {
+-		const struct nvkm_rm_api *api;
+-	} *rm;
++	struct nvkm_rm *rm;
  
--nvkm-y += nvkm/engine/fifo/r535.o
--
- nvkm-y += nvkm/engine/fifo/ucgrp.o
- nvkm-y += nvkm/engine/fifo/uchan.o
-diff --git a/drivers/gpu/drm/nouveau/nvkm/engine/gr/Kbuild b/drivers/gpu/drm/nouveau/nvkm/engine/gr/Kbuild
-index 1555f8c40b4f..487fcc14b9a9 100644
---- a/drivers/gpu/drm/nouveau/nvkm/engine/gr/Kbuild
-+++ b/drivers/gpu/drm/nouveau/nvkm/engine/gr/Kbuild
-@@ -43,8 +43,6 @@ nvkm-y += nvkm/engine/gr/tu102.o
- nvkm-y += nvkm/engine/gr/ga102.o
- nvkm-y += nvkm/engine/gr/ad102.o
+ 	struct {
+ 		struct mutex mutex;
+@@ -467,7 +465,7 @@ static inline int
+ nvkm_gsp_device_event_ctor(struct nvkm_gsp_device *device, u32 handle, u32 id,
+ 			   nvkm_gsp_event_func func, struct nvkm_gsp_event *event)
+ {
+-	const struct nvkm_gsp_rm *rm = device->object.client->gsp->rm;
++	struct nvkm_rm *rm = device->object.client->gsp->rm;
  
--nvkm-y += nvkm/engine/gr/r535.o
--
- nvkm-y += nvkm/engine/gr/ctxnv40.o
- nvkm-y += nvkm/engine/gr/ctxnv50.o
- nvkm-y += nvkm/engine/gr/ctxgf100.o
-diff --git a/drivers/gpu/drm/nouveau/nvkm/engine/nvdec/Kbuild b/drivers/gpu/drm/nouveau/nvkm/engine/nvdec/Kbuild
-index 2b0e923cb755..5cc317abc42c 100644
---- a/drivers/gpu/drm/nouveau/nvkm/engine/nvdec/Kbuild
-+++ b/drivers/gpu/drm/nouveau/nvkm/engine/nvdec/Kbuild
-@@ -5,5 +5,3 @@ nvkm-y += nvkm/engine/nvdec/tu102.o
- nvkm-y += nvkm/engine/nvdec/ga100.o
- nvkm-y += nvkm/engine/nvdec/ga102.o
- nvkm-y += nvkm/engine/nvdec/ad102.o
--
--nvkm-y += nvkm/engine/nvdec/r535.o
-diff --git a/drivers/gpu/drm/nouveau/nvkm/engine/nvenc/Kbuild b/drivers/gpu/drm/nouveau/nvkm/engine/nvenc/Kbuild
-index 2c1495b730f3..3d71f2973dab 100644
---- a/drivers/gpu/drm/nouveau/nvkm/engine/nvenc/Kbuild
-+++ b/drivers/gpu/drm/nouveau/nvkm/engine/nvenc/Kbuild
-@@ -4,5 +4,3 @@ nvkm-y += nvkm/engine/nvenc/gm107.o
- nvkm-y += nvkm/engine/nvenc/tu102.o
- nvkm-y += nvkm/engine/nvenc/ga102.o
- nvkm-y += nvkm/engine/nvenc/ad102.o
--
--nvkm-y += nvkm/engine/nvenc/r535.o
-diff --git a/drivers/gpu/drm/nouveau/nvkm/engine/nvjpg/Kbuild b/drivers/gpu/drm/nouveau/nvkm/engine/nvjpg/Kbuild
-index 1408f664add6..1d9bddd68605 100644
---- a/drivers/gpu/drm/nouveau/nvkm/engine/nvjpg/Kbuild
-+++ b/drivers/gpu/drm/nouveau/nvkm/engine/nvjpg/Kbuild
-@@ -1,5 +1,3 @@
- # SPDX-License-Identifier: MIT
- nvkm-y += nvkm/engine/nvjpg/ga100.o
- nvkm-y += nvkm/engine/nvjpg/ad102.o
--
--nvkm-y += nvkm/engine/nvjpg/r535.o
-diff --git a/drivers/gpu/drm/nouveau/nvkm/engine/ofa/Kbuild b/drivers/gpu/drm/nouveau/nvkm/engine/ofa/Kbuild
-index 99f1713d7e51..3faf73b35f5a 100644
---- a/drivers/gpu/drm/nouveau/nvkm/engine/ofa/Kbuild
-+++ b/drivers/gpu/drm/nouveau/nvkm/engine/ofa/Kbuild
-@@ -2,5 +2,3 @@
- nvkm-y += nvkm/engine/ofa/ga100.o
- nvkm-y += nvkm/engine/ofa/ga102.o
- nvkm-y += nvkm/engine/ofa/ad102.o
--
--nvkm-y += nvkm/engine/ofa/r535.o
-diff --git a/drivers/gpu/drm/nouveau/nvkm/subdev/bar/Kbuild b/drivers/gpu/drm/nouveau/nvkm/subdev/bar/Kbuild
-index 9754c6872543..8faee3317a74 100644
---- a/drivers/gpu/drm/nouveau/nvkm/subdev/bar/Kbuild
-+++ b/drivers/gpu/drm/nouveau/nvkm/subdev/bar/Kbuild
-@@ -7,5 +7,3 @@ nvkm-y += nvkm/subdev/bar/gk20a.o
- nvkm-y += nvkm/subdev/bar/gm107.o
- nvkm-y += nvkm/subdev/bar/gm20b.o
- nvkm-y += nvkm/subdev/bar/tu102.o
--
--nvkm-y += nvkm/subdev/bar/r535.o
-diff --git a/drivers/gpu/drm/nouveau/nvkm/subdev/gsp/Kbuild b/drivers/gpu/drm/nouveau/nvkm/subdev/gsp/Kbuild
-index af6e55603763..ba892c111c26 100644
---- a/drivers/gpu/drm/nouveau/nvkm/subdev/gsp/Kbuild
-+++ b/drivers/gpu/drm/nouveau/nvkm/subdev/gsp/Kbuild
-@@ -9,6 +9,4 @@ nvkm-y += nvkm/subdev/gsp/ga100.o
- nvkm-y += nvkm/subdev/gsp/ga102.o
- nvkm-y += nvkm/subdev/gsp/ad102.o
+ 	return rm->api->device->event.ctor(device, handle, id, func, event);
+ }
+diff --git a/drivers/gpu/drm/nouveau/nvkm/subdev/gsp/ad102.c b/drivers/gpu/drm/nouveau/nvkm/subdev/gsp/ad102.c
+index ea2821e7a54e..d7933bfc59fd 100644
+--- a/drivers/gpu/drm/nouveau/nvkm/subdev/gsp/ad102.c
++++ b/drivers/gpu/drm/nouveau/nvkm/subdev/gsp/ad102.c
+@@ -22,7 +22,7 @@
+ #include "priv.h"
  
--nvkm-y += nvkm/subdev/gsp/r535.o
--
- include $(src)/nvkm/subdev/gsp/rm/Kbuild
-diff --git a/drivers/gpu/drm/nouveau/nvkm/subdev/gsp/rm/r535/Kbuild b/drivers/gpu/drm/nouveau/nvkm/subdev/gsp/rm/r535/Kbuild
-index d50f2c351d93..a5f6b2abfd33 100644
---- a/drivers/gpu/drm/nouveau/nvkm/subdev/gsp/rm/r535/Kbuild
-+++ b/drivers/gpu/drm/nouveau/nvkm/subdev/gsp/rm/r535/Kbuild
-@@ -3,8 +3,23 @@
+ static const struct nvkm_gsp_func
+-ad102_gsp_r535_113_01 = {
++ad102_gsp = {
+ 	.flcn = &ga102_gsp_flcn,
+ 	.fwsec = &ga102_gsp_fwsec,
+ 
+@@ -40,12 +40,12 @@ ad102_gsp_r535_113_01 = {
+ 	.fini = tu102_gsp_fini,
+ 	.reset = ga102_gsp_reset,
+ 
+-	.rm = &r535_gsp_rm,
++	.rm.gpu = &ad10x_gpu,
+ };
+ 
+ static struct nvkm_gsp_fwif
+ ad102_gsps[] = {
+-	{ 0, tu102_gsp_load, &ad102_gsp_r535_113_01, "535.113.01", true },
++	{ 0, tu102_gsp_load, &ad102_gsp, &r535_rm_ga102, "535.113.01", true },
+ 	{}
+ };
+ 
+diff --git a/drivers/gpu/drm/nouveau/nvkm/subdev/gsp/base.c b/drivers/gpu/drm/nouveau/nvkm/subdev/gsp/base.c
+index 78f2a15f0d42..0f8526aa969f 100644
+--- a/drivers/gpu/drm/nouveau/nvkm/subdev/gsp/base.c
++++ b/drivers/gpu/drm/nouveau/nvkm/subdev/gsp/base.c
+@@ -102,6 +102,7 @@ nvkm_gsp_dtor(struct nvkm_subdev *subdev)
+ 		gsp->func->dtor(gsp);
+ 
+ 	nvkm_falcon_dtor(&gsp->falcon);
++	kfree(gsp->rm);
+ 	return gsp;
+ }
+ 
+@@ -139,7 +140,16 @@ nvkm_gsp_new_(const struct nvkm_gsp_fwif *fwif, struct nvkm_device *device,
+ 		return PTR_ERR(fwif);
+ 
+ 	gsp->func = fwif->func;
+-	gsp->rm = gsp->func->rm;
++
++	if (fwif->rm) {
++		gsp->rm = kzalloc(sizeof(*gsp->rm), GFP_KERNEL);
++		if (!gsp->rm)
++			return -ENOMEM;
++
++		gsp->rm->device = device;
++		gsp->rm->gpu = fwif->func->rm.gpu;
++		gsp->rm->api = fwif->rm->api;
++	}
+ 
+ 	return nvkm_falcon_ctor(gsp->func->flcn, &gsp->subdev, gsp->subdev.name, 0x110000,
+ 				&gsp->falcon);
+diff --git a/drivers/gpu/drm/nouveau/nvkm/subdev/gsp/ga100.c b/drivers/gpu/drm/nouveau/nvkm/subdev/gsp/ga100.c
+index d9cdec4810b4..77e3501296c9 100644
+--- a/drivers/gpu/drm/nouveau/nvkm/subdev/gsp/ga100.c
++++ b/drivers/gpu/drm/nouveau/nvkm/subdev/gsp/ga100.c
+@@ -39,7 +39,7 @@ ga100_gsp_flcn = {
+ };
+ 
+ static const struct nvkm_gsp_func
+-ga100_gsp_r535_113_01 = {
++ga100_gsp = {
+ 	.flcn = &ga100_gsp_flcn,
+ 	.fwsec = &tu102_gsp_fwsec,
+ 
+@@ -56,12 +56,12 @@ ga100_gsp_r535_113_01 = {
+ 	.fini = tu102_gsp_fini,
+ 	.reset = tu102_gsp_reset,
+ 
+-	.rm = &r535_gsp_rm,
++	.rm.gpu = &ga100_gpu,
+ };
+ 
+ static struct nvkm_gsp_fwif
+ ga100_gsps[] = {
+-	{  0, tu102_gsp_load, &ga100_gsp_r535_113_01, "535.113.01" },
++	{  0, tu102_gsp_load, &ga100_gsp, &r535_rm_tu102, "535.113.01" },
+ 	{ -1, gv100_gsp_nofw, &gv100_gsp },
+ 	{}
+ };
+diff --git a/drivers/gpu/drm/nouveau/nvkm/subdev/gsp/ga102.c b/drivers/gpu/drm/nouveau/nvkm/subdev/gsp/ga102.c
+index 7b8db70f3cb3..709a046d86bf 100644
+--- a/drivers/gpu/drm/nouveau/nvkm/subdev/gsp/ga102.c
++++ b/drivers/gpu/drm/nouveau/nvkm/subdev/gsp/ga102.c
+@@ -150,7 +150,7 @@ ga102_gsp_flcn = {
+ };
+ 
+ static const struct nvkm_gsp_func
+-ga102_gsp_r535_113_01 = {
++ga102_gsp_r535 = {
+ 	.flcn = &ga102_gsp_flcn,
+ 	.fwsec = &ga102_gsp_fwsec,
+ 
+@@ -168,7 +168,7 @@ ga102_gsp_r535_113_01 = {
+ 	.fini = tu102_gsp_fini,
+ 	.reset = ga102_gsp_reset,
+ 
+-	.rm = &r535_gsp_rm,
++	.rm.gpu = &ga1xx_gpu,
+ };
+ 
+ static const struct nvkm_gsp_func
+@@ -178,7 +178,7 @@ ga102_gsp = {
+ 
+ static struct nvkm_gsp_fwif
+ ga102_gsps[] = {
+-	{  0, tu102_gsp_load, &ga102_gsp_r535_113_01, "535.113.01" },
++	{  0, tu102_gsp_load, &ga102_gsp_r535, &r535_rm_ga102, "535.113.01" },
+ 	{ -1, gv100_gsp_nofw, &ga102_gsp },
+ 	{}
+ };
+diff --git a/drivers/gpu/drm/nouveau/nvkm/subdev/gsp/priv.h b/drivers/gpu/drm/nouveau/nvkm/subdev/gsp/priv.h
+index e6f0e865848a..de274f6426c1 100644
+--- a/drivers/gpu/drm/nouveau/nvkm/subdev/gsp/priv.h
++++ b/drivers/gpu/drm/nouveau/nvkm/subdev/gsp/priv.h
+@@ -2,6 +2,7 @@
+ #ifndef __NVKM_GSP_PRIV_H__
+ #define __NVKM_GSP_PRIV_H__
+ #include <subdev/gsp.h>
++#include <rm/gpu.h>
+ enum nvkm_acr_lsf_id;
+ 
+ int nvkm_gsp_fwsec_frts(struct nvkm_gsp *);
+@@ -11,6 +12,7 @@ struct nvkm_gsp_fwif {
+ 	int version;
+ 	int (*load)(struct nvkm_gsp *, int ver, const struct nvkm_gsp_fwif *);
+ 	const struct nvkm_gsp_func *func;
++	const struct nvkm_rm_impl *rm;
+ 	const char *ver;
+ 	bool enable;
+ };
+@@ -51,7 +53,9 @@ struct nvkm_gsp_func {
+ 	int (*fini)(struct nvkm_gsp *, bool suspend);
+ 	int (*reset)(struct nvkm_gsp *);
+ 
+-	const struct nvkm_gsp_rm *rm;
++	struct {
++		const struct nvkm_rm_gpu *gpu;
++	} rm;
+ };
+ 
+ extern const struct nvkm_falcon_func tu102_gsp_flcn;
+@@ -73,7 +77,6 @@ void r535_gsp_dtor(struct nvkm_gsp *);
+ int r535_gsp_oneinit(struct nvkm_gsp *);
+ int r535_gsp_init(struct nvkm_gsp *);
+ int r535_gsp_fini(struct nvkm_gsp *, bool suspend);
+-extern const struct nvkm_gsp_rm r535_gsp_rm;
+ int r535_gsp_rmargs_init(struct nvkm_gsp *gsp, bool resume);
+ 
+ int nvkm_gsp_new_(const struct nvkm_gsp_fwif *, struct nvkm_device *, enum nvkm_subdev_type, int,
+diff --git a/drivers/gpu/drm/nouveau/nvkm/subdev/gsp/rm/Kbuild b/drivers/gpu/drm/nouveau/nvkm/subdev/gsp/rm/Kbuild
+index 1c07740215ec..841b690c0c0a 100644
+--- a/drivers/gpu/drm/nouveau/nvkm/subdev/gsp/rm/Kbuild
++++ b/drivers/gpu/drm/nouveau/nvkm/subdev/gsp/rm/Kbuild
+@@ -2,4 +2,9 @@
+ #
  # Copyright (c) 2025, NVIDIA CORPORATION. All rights reserved.
  
- nvkm-y += nvkm/subdev/gsp/rm/r535/rm.o
-+nvkm-y += nvkm/subdev/gsp/rm/r535/gsp.o
- nvkm-y += nvkm/subdev/gsp/rm/r535/rpc.o
- nvkm-y += nvkm/subdev/gsp/rm/r535/ctrl.o
- nvkm-y += nvkm/subdev/gsp/rm/r535/alloc.o
- nvkm-y += nvkm/subdev/gsp/rm/r535/client.o
- nvkm-y += nvkm/subdev/gsp/rm/r535/device.o
++nvkm-y += nvkm/subdev/gsp/rm/tu1xx.o
++nvkm-y += nvkm/subdev/gsp/rm/ga100.o
++nvkm-y += nvkm/subdev/gsp/rm/ga1xx.o
++nvkm-y += nvkm/subdev/gsp/rm/ad10x.o
 +
-+nvkm-y += nvkm/subdev/gsp/rm/r535/bar.o
-+nvkm-y += nvkm/subdev/gsp/rm/r535/fbsr.o
-+nvkm-y += nvkm/subdev/gsp/rm/r535/vmm.o
+ include $(src)/nvkm/subdev/gsp/rm/r535/Kbuild
+diff --git a/drivers/gpu/drm/nouveau/nvkm/subdev/gsp/rm/ad10x.c b/drivers/gpu/drm/nouveau/nvkm/subdev/gsp/rm/ad10x.c
+new file mode 100644
+index 000000000000..1e519bf166dd
+--- /dev/null
++++ b/drivers/gpu/drm/nouveau/nvkm/subdev/gsp/rm/ad10x.c
+@@ -0,0 +1,9 @@
++/* SPDX-License-Identifier: MIT
++ *
++ * Copyright (c) 2025, NVIDIA CORPORATION. All rights reserved.
++ */
++#include "gpu.h"
 +
-+nvkm-y += nvkm/subdev/gsp/rm/r535/disp.o
++const struct nvkm_rm_gpu
++ad10x_gpu = {
++};
+diff --git a/drivers/gpu/drm/nouveau/nvkm/subdev/gsp/rm/ga100.c b/drivers/gpu/drm/nouveau/nvkm/subdev/gsp/rm/ga100.c
+new file mode 100644
+index 000000000000..b10e6ff9e9b6
+--- /dev/null
++++ b/drivers/gpu/drm/nouveau/nvkm/subdev/gsp/rm/ga100.c
+@@ -0,0 +1,9 @@
++/* SPDX-License-Identifier: MIT
++ *
++ * Copyright (c) 2025, NVIDIA CORPORATION. All rights reserved.
++ */
++#include "gpu.h"
 +
-+nvkm-y += nvkm/subdev/gsp/rm/r535/fifo.o
-+nvkm-y += nvkm/subdev/gsp/rm/r535/ce.o
-+nvkm-y += nvkm/subdev/gsp/rm/r535/gr.o
-+nvkm-y += nvkm/subdev/gsp/rm/r535/nvdec.o
-+nvkm-y += nvkm/subdev/gsp/rm/r535/nvenc.o
-+nvkm-y += nvkm/subdev/gsp/rm/r535/nvjpg.o
-+nvkm-y += nvkm/subdev/gsp/rm/r535/ofa.o
-diff --git a/drivers/gpu/drm/nouveau/nvkm/subdev/bar/r535.c b/drivers/gpu/drm/nouveau/nvkm/subdev/gsp/rm/r535/bar.c
-similarity index 99%
-rename from drivers/gpu/drm/nouveau/nvkm/subdev/bar/r535.c
-rename to drivers/gpu/drm/nouveau/nvkm/subdev/gsp/rm/r535/bar.c
-index 90186f98065c..ce2c86c159b5 100644
---- a/drivers/gpu/drm/nouveau/nvkm/subdev/bar/r535.c
-+++ b/drivers/gpu/drm/nouveau/nvkm/subdev/gsp/rm/r535/bar.c
-@@ -19,7 +19,7 @@
-  * ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
-  * OTHER DEALINGS IN THE SOFTWARE.
-  */
--#include "gf100.h"
-+#include <subdev/bar/gf100.h>
++const struct nvkm_rm_gpu
++ga100_gpu = {
++};
+diff --git a/drivers/gpu/drm/nouveau/nvkm/subdev/gsp/rm/ga1xx.c b/drivers/gpu/drm/nouveau/nvkm/subdev/gsp/rm/ga1xx.c
+new file mode 100644
+index 000000000000..725ccb2c27dc
+--- /dev/null
++++ b/drivers/gpu/drm/nouveau/nvkm/subdev/gsp/rm/ga1xx.c
+@@ -0,0 +1,9 @@
++/* SPDX-License-Identifier: MIT
++ *
++ * Copyright (c) 2025, NVIDIA CORPORATION. All rights reserved.
++ */
++#include "gpu.h"
++
++const struct nvkm_rm_gpu
++ga1xx_gpu = {
++};
+diff --git a/drivers/gpu/drm/nouveau/nvkm/subdev/gsp/rm/gpu.h b/drivers/gpu/drm/nouveau/nvkm/subdev/gsp/rm/gpu.h
+new file mode 100644
+index 000000000000..32d87ce2b77d
+--- /dev/null
++++ b/drivers/gpu/drm/nouveau/nvkm/subdev/gsp/rm/gpu.h
+@@ -0,0 +1,16 @@
++/* SPDX-License-Identifier: MIT
++ *
++ * Copyright (c) 2025, NVIDIA CORPORATION. All rights reserved.
++ */
++#ifndef __NVKM_RM_GPU_H__
++#define __NVKM_RM_GPU_H__
++#include "rm.h"
++
++struct nvkm_rm_gpu {
++};
++
++extern const struct nvkm_rm_gpu tu1xx_gpu;
++extern const struct nvkm_rm_gpu ga100_gpu;
++extern const struct nvkm_rm_gpu ga1xx_gpu;
++extern const struct nvkm_rm_gpu ad10x_gpu;
++#endif
+diff --git a/drivers/gpu/drm/nouveau/nvkm/subdev/gsp/rm/r535/gsp.c b/drivers/gpu/drm/nouveau/nvkm/subdev/gsp/rm/r535/gsp.c
+index 48af5d8d22e8..8ca0f99ccbac 100644
+--- a/drivers/gpu/drm/nouveau/nvkm/subdev/gsp/rm/r535/gsp.c
++++ b/drivers/gpu/drm/nouveau/nvkm/subdev/gsp/rm/r535/gsp.c
+@@ -44,11 +44,6 @@
  
- #include <core/mm.h>
- #include <subdev/fb.h>
-diff --git a/drivers/gpu/drm/nouveau/nvkm/engine/ce/r535.c b/drivers/gpu/drm/nouveau/nvkm/subdev/gsp/rm/r535/ce.c
-similarity index 99%
-rename from drivers/gpu/drm/nouveau/nvkm/engine/ce/r535.c
-rename to drivers/gpu/drm/nouveau/nvkm/subdev/gsp/rm/r535/ce.c
-index bd0d435dbbd3..0d73906f4a5a 100644
---- a/drivers/gpu/drm/nouveau/nvkm/engine/ce/r535.c
-+++ b/drivers/gpu/drm/nouveau/nvkm/subdev/gsp/rm/r535/ce.c
-@@ -19,7 +19,7 @@
-  * ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
-  * OTHER DEALINGS IN THE SOFTWARE.
-  */
--#include "priv.h"
-+#include <engine/ce/priv.h>
+ extern struct dentry *nouveau_debugfs_root;
  
- #include <core/object.h>
- #include <subdev/gsp.h>
-diff --git a/drivers/gpu/drm/nouveau/nvkm/engine/disp/r535.c b/drivers/gpu/drm/nouveau/nvkm/subdev/gsp/rm/r535/disp.c
-similarity index 99%
-rename from drivers/gpu/drm/nouveau/nvkm/engine/disp/r535.c
-rename to drivers/gpu/drm/nouveau/nvkm/subdev/gsp/rm/r535/disp.c
-index 99110ab2f44d..1aae15167249 100644
---- a/drivers/gpu/drm/nouveau/nvkm/engine/disp/r535.c
-+++ b/drivers/gpu/drm/nouveau/nvkm/subdev/gsp/rm/r535/disp.c
-@@ -19,13 +19,13 @@
-  * ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
-  * OTHER DEALINGS IN THE SOFTWARE.
-  */
--#include "priv.h"
--#include "chan.h"
--#include "conn.h"
--#include "dp.h"
--#include "head.h"
--#include "ior.h"
--#include "outp.h"
-+#include <engine/disp/priv.h>
-+#include <engine/disp/chan.h>
-+#include <engine/disp/conn.h>
-+#include <engine/disp/dp.h>
-+#include <engine/disp/head.h>
-+#include <engine/disp/ior.h>
-+#include <engine/disp/outp.h>
- 
- #include <core/ramht.h>
- #include <subdev/bios.h>
-diff --git a/drivers/gpu/drm/nouveau/nvkm/subdev/instmem/r535.c b/drivers/gpu/drm/nouveau/nvkm/subdev/gsp/rm/r535/fbsr.c
-similarity index 99%
-rename from drivers/gpu/drm/nouveau/nvkm/subdev/instmem/r535.c
-rename to drivers/gpu/drm/nouveau/nvkm/subdev/gsp/rm/r535/fbsr.c
-index 35ba1798ee6e..6305f3a93810 100644
---- a/drivers/gpu/drm/nouveau/nvkm/subdev/instmem/r535.c
-+++ b/drivers/gpu/drm/nouveau/nvkm/subdev/gsp/rm/r535/fbsr.c
-@@ -19,7 +19,7 @@
-  * ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
-  * OTHER DEALINGS IN THE SOFTWARE.
-  */
--#include "priv.h"
-+#include <subdev/instmem/priv.h>
- 
- #include <subdev/gsp.h>
- 
-diff --git a/drivers/gpu/drm/nouveau/nvkm/engine/fifo/r535.c b/drivers/gpu/drm/nouveau/nvkm/subdev/gsp/rm/r535/fifo.c
-similarity index 99%
-rename from drivers/gpu/drm/nouveau/nvkm/engine/fifo/r535.c
-rename to drivers/gpu/drm/nouveau/nvkm/subdev/gsp/rm/r535/fifo.c
-index 129f274c9bfd..621e5dfe898a 100644
---- a/drivers/gpu/drm/nouveau/nvkm/engine/fifo/r535.c
-+++ b/drivers/gpu/drm/nouveau/nvkm/subdev/gsp/rm/r535/fifo.c
-@@ -19,11 +19,11 @@
-  * ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
-  * OTHER DEALINGS IN THE SOFTWARE.
-  */
--#include "priv.h"
--#include "cgrp.h"
--#include "chan.h"
--#include "chid.h"
--#include "runl.h"
-+#include <engine/fifo/priv.h>
-+#include <engine/fifo/cgrp.h>
-+#include <engine/fifo/chan.h>
-+#include <engine/fifo/chid.h>
-+#include <engine/fifo/runl.h>
- 
- #include <core/gpuobj.h>
- #include <subdev/gsp.h>
-diff --git a/drivers/gpu/drm/nouveau/nvkm/engine/gr/r535.c b/drivers/gpu/drm/nouveau/nvkm/subdev/gsp/rm/r535/gr.c
-similarity index 99%
-rename from drivers/gpu/drm/nouveau/nvkm/engine/gr/r535.c
-rename to drivers/gpu/drm/nouveau/nvkm/subdev/gsp/rm/r535/gr.c
-index f4bed3eb1ec2..37bde547ae65 100644
---- a/drivers/gpu/drm/nouveau/nvkm/engine/gr/r535.c
-+++ b/drivers/gpu/drm/nouveau/nvkm/subdev/gsp/rm/r535/gr.c
-@@ -19,7 +19,7 @@
-  * ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
-  * OTHER DEALINGS IN THE SOFTWARE.
-  */
--#include "gf100.h"
-+#include <engine/gr/gf100.h>
- 
- #include <core/memory.h>
- #include <subdev/gsp.h>
-diff --git a/drivers/gpu/drm/nouveau/nvkm/subdev/gsp/r535.c b/drivers/gpu/drm/nouveau/nvkm/subdev/gsp/rm/r535/gsp.c
-similarity index 100%
-rename from drivers/gpu/drm/nouveau/nvkm/subdev/gsp/r535.c
-rename to drivers/gpu/drm/nouveau/nvkm/subdev/gsp/rm/r535/gsp.c
-diff --git a/drivers/gpu/drm/nouveau/nvkm/engine/nvdec/r535.c b/drivers/gpu/drm/nouveau/nvkm/subdev/gsp/rm/r535/nvdec.c
-similarity index 99%
-rename from drivers/gpu/drm/nouveau/nvkm/engine/nvdec/r535.c
-rename to drivers/gpu/drm/nouveau/nvkm/subdev/gsp/rm/r535/nvdec.c
-index 75a24f3e6617..16c1928f6d68 100644
---- a/drivers/gpu/drm/nouveau/nvkm/engine/nvdec/r535.c
-+++ b/drivers/gpu/drm/nouveau/nvkm/subdev/gsp/rm/r535/nvdec.c
-@@ -19,7 +19,7 @@
-  * ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
-  * OTHER DEALINGS IN THE SOFTWARE.
-  */
--#include "priv.h"
-+#include <engine/nvdec/priv.h>
- 
- #include <core/object.h>
- #include <subdev/gsp.h>
-diff --git a/drivers/gpu/drm/nouveau/nvkm/engine/nvenc/r535.c b/drivers/gpu/drm/nouveau/nvkm/subdev/gsp/rm/r535/nvenc.c
-similarity index 99%
-rename from drivers/gpu/drm/nouveau/nvkm/engine/nvenc/r535.c
-rename to drivers/gpu/drm/nouveau/nvkm/subdev/gsp/rm/r535/nvenc.c
-index c8a2a9196ce5..b6808a50c4a8 100644
---- a/drivers/gpu/drm/nouveau/nvkm/engine/nvenc/r535.c
-+++ b/drivers/gpu/drm/nouveau/nvkm/subdev/gsp/rm/r535/nvenc.c
-@@ -19,7 +19,7 @@
-  * ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
-  * OTHER DEALINGS IN THE SOFTWARE.
-  */
--#include "priv.h"
-+#include <engine/nvenc/priv.h>
- 
- #include <core/object.h>
- #include <subdev/gsp.h>
-diff --git a/drivers/gpu/drm/nouveau/nvkm/engine/nvjpg/r535.c b/drivers/gpu/drm/nouveau/nvkm/subdev/gsp/rm/r535/nvjpg.c
-similarity index 99%
-rename from drivers/gpu/drm/nouveau/nvkm/engine/nvjpg/r535.c
-rename to drivers/gpu/drm/nouveau/nvkm/subdev/gsp/rm/r535/nvjpg.c
-index 1babddc4eb80..994232b3d030 100644
---- a/drivers/gpu/drm/nouveau/nvkm/engine/nvjpg/r535.c
-+++ b/drivers/gpu/drm/nouveau/nvkm/subdev/gsp/rm/r535/nvjpg.c
-@@ -19,7 +19,7 @@
-  * ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
-  * OTHER DEALINGS IN THE SOFTWARE.
-  */
--#include "priv.h"
-+#include <engine/nvjpg/priv.h>
- 
- #include <core/object.h>
- #include <subdev/gsp.h>
-diff --git a/drivers/gpu/drm/nouveau/nvkm/engine/ofa/r535.c b/drivers/gpu/drm/nouveau/nvkm/subdev/gsp/rm/r535/ofa.c
-similarity index 99%
-rename from drivers/gpu/drm/nouveau/nvkm/engine/ofa/r535.c
-rename to drivers/gpu/drm/nouveau/nvkm/subdev/gsp/rm/r535/ofa.c
-index 438dc692eefe..200201c35f0b 100644
---- a/drivers/gpu/drm/nouveau/nvkm/engine/ofa/r535.c
-+++ b/drivers/gpu/drm/nouveau/nvkm/subdev/gsp/rm/r535/ofa.c
-@@ -19,7 +19,7 @@
-  * ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
-  * OTHER DEALINGS IN THE SOFTWARE.
-  */
--#include "priv.h"
-+#include <engine/ofa/priv.h>
- 
- #include <core/object.h>
- #include <subdev/gsp.h>
-diff --git a/drivers/gpu/drm/nouveau/nvkm/subdev/mmu/r535.c b/drivers/gpu/drm/nouveau/nvkm/subdev/gsp/rm/r535/vmm.c
-similarity index 99%
-rename from drivers/gpu/drm/nouveau/nvkm/subdev/mmu/r535.c
-rename to drivers/gpu/drm/nouveau/nvkm/subdev/gsp/rm/r535/vmm.c
-index d3e95453f25d..94cad290e17e 100644
---- a/drivers/gpu/drm/nouveau/nvkm/subdev/mmu/r535.c
-+++ b/drivers/gpu/drm/nouveau/nvkm/subdev/gsp/rm/r535/vmm.c
-@@ -19,7 +19,7 @@
-  * ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
-  * OTHER DEALINGS IN THE SOFTWARE.
-  */
--#include "vmm.h"
-+#include <subdev/mmu/vmm.h>
- 
- #include <nvrm/nvtypes.h>
- #include <nvrm/535.113.01/common/sdk/nvidia/inc/class/cl90f1.h>
-diff --git a/drivers/gpu/drm/nouveau/nvkm/subdev/instmem/Kbuild b/drivers/gpu/drm/nouveau/nvkm/subdev/instmem/Kbuild
-index 553d540f2736..06cbe19ce376 100644
---- a/drivers/gpu/drm/nouveau/nvkm/subdev/instmem/Kbuild
-+++ b/drivers/gpu/drm/nouveau/nvkm/subdev/instmem/Kbuild
-@@ -4,5 +4,3 @@ nvkm-y += nvkm/subdev/instmem/nv04.o
- nvkm-y += nvkm/subdev/instmem/nv40.o
- nvkm-y += nvkm/subdev/instmem/nv50.o
- nvkm-y += nvkm/subdev/instmem/gk20a.o
+-const struct nvkm_gsp_rm
+-r535_gsp_rm = {
+-	.api = &r535_rm,
+-};
 -
--nvkm-y += nvkm/subdev/instmem/r535.o
-diff --git a/drivers/gpu/drm/nouveau/nvkm/subdev/mmu/Kbuild b/drivers/gpu/drm/nouveau/nvkm/subdev/mmu/Kbuild
-index 7ba35ea59c06..a602b0cb5b31 100644
---- a/drivers/gpu/drm/nouveau/nvkm/subdev/mmu/Kbuild
-+++ b/drivers/gpu/drm/nouveau/nvkm/subdev/mmu/Kbuild
-@@ -16,8 +16,6 @@ nvkm-y += nvkm/subdev/mmu/gp10b.o
- nvkm-y += nvkm/subdev/mmu/gv100.o
- nvkm-y += nvkm/subdev/mmu/tu102.o
+ static void
+ r535_gsp_msgq_work(struct work_struct *work)
+ {
+diff --git a/drivers/gpu/drm/nouveau/nvkm/subdev/gsp/rm/r535/rm.c b/drivers/gpu/drm/nouveau/nvkm/subdev/gsp/rm/r535/rm.c
+index 39cc3d0c740c..3c17b75b5e37 100644
+--- a/drivers/gpu/drm/nouveau/nvkm/subdev/gsp/rm/r535/rm.c
++++ b/drivers/gpu/drm/nouveau/nvkm/subdev/gsp/rm/r535/rm.c
+@@ -4,11 +4,21 @@
+  */
+ #include <rm/rm.h>
  
--nvkm-y += nvkm/subdev/mmu/r535.o
--
- nvkm-y += nvkm/subdev/mmu/mem.o
- nvkm-y += nvkm/subdev/mmu/memnv04.o
- nvkm-y += nvkm/subdev/mmu/memnv50.o
+-const struct nvkm_rm_api
+-r535_rm = {
++static const struct nvkm_rm_api
++r535_api = {
+ 	.rpc = &r535_rpc,
+ 	.ctrl = &r535_ctrl,
+ 	.alloc = &r535_alloc,
+ 	.client = &r535_client,
+ 	.device = &r535_device,
+ };
++
++const struct nvkm_rm_impl
++r535_rm_tu102 = {
++	.api = &r535_api,
++};
++
++const struct nvkm_rm_impl
++r535_rm_ga102 = {
++	.api = &r535_api,
++};
+diff --git a/drivers/gpu/drm/nouveau/nvkm/subdev/gsp/rm/rm.h b/drivers/gpu/drm/nouveau/nvkm/subdev/gsp/rm/rm.h
+index 20841305fa55..41d4ed70fc10 100644
+--- a/drivers/gpu/drm/nouveau/nvkm/subdev/gsp/rm/rm.h
++++ b/drivers/gpu/drm/nouveau/nvkm/subdev/gsp/rm/rm.h
+@@ -6,6 +6,16 @@
+ #ifndef __NVKM_RM_H__
+ #define __NVKM_RM_H__
+ 
++struct nvkm_rm_impl {
++	const struct nvkm_rm_api *api;
++};
++
++struct nvkm_rm {
++	struct nvkm_device *device;
++	const struct nvkm_rm_gpu *gpu;
++	const struct nvkm_rm_api *api;
++};
++
+ struct nvkm_rm_api {
+ 	const struct nvkm_rm_api_rpc {
+ 		void *(*get)(struct nvkm_gsp *, u32 fn, u32 argc);
+@@ -45,7 +55,8 @@ struct nvkm_rm_api {
+ 	} *device;
+ };
+ 
+-extern const struct nvkm_rm_api r535_rm;
++extern const struct nvkm_rm_impl r535_rm_tu102;
++extern const struct nvkm_rm_impl r535_rm_ga102;
+ extern const struct nvkm_rm_api_rpc r535_rpc;
+ extern const struct nvkm_rm_api_ctrl r535_ctrl;
+ extern const struct nvkm_rm_api_alloc r535_alloc;
+diff --git a/drivers/gpu/drm/nouveau/nvkm/subdev/gsp/rm/tu1xx.c b/drivers/gpu/drm/nouveau/nvkm/subdev/gsp/rm/tu1xx.c
+new file mode 100644
+index 000000000000..d455a4f19854
+--- /dev/null
++++ b/drivers/gpu/drm/nouveau/nvkm/subdev/gsp/rm/tu1xx.c
+@@ -0,0 +1,9 @@
++/* SPDX-License-Identifier: MIT
++ *
++ * Copyright (c) 2025, NVIDIA CORPORATION. All rights reserved.
++ */
++#include "gpu.h"
++
++const struct nvkm_rm_gpu
++tu1xx_gpu = {
++};
+diff --git a/drivers/gpu/drm/nouveau/nvkm/subdev/gsp/tu102.c b/drivers/gpu/drm/nouveau/nvkm/subdev/gsp/tu102.c
+index 451d3e588d26..fef9c4444017 100644
+--- a/drivers/gpu/drm/nouveau/nvkm/subdev/gsp/tu102.c
++++ b/drivers/gpu/drm/nouveau/nvkm/subdev/gsp/tu102.c
+@@ -268,7 +268,7 @@ tu102_gsp_flcn = {
+ };
+ 
+ static const struct nvkm_gsp_func
+-tu102_gsp_r535_113_01 = {
++tu102_gsp = {
+ 	.flcn = &tu102_gsp_flcn,
+ 	.fwsec = &tu102_gsp_fwsec,
+ 
+@@ -285,7 +285,7 @@ tu102_gsp_r535_113_01 = {
+ 	.fini = tu102_gsp_fini,
+ 	.reset = tu102_gsp_reset,
+ 
+-	.rm = &r535_gsp_rm,
++	.rm.gpu = &tu1xx_gpu,
+ };
+ 
+ static int
+@@ -336,7 +336,7 @@ tu102_gsp_load(struct nvkm_gsp *gsp, int ver, const struct nvkm_gsp_fwif *fwif)
+ 
+ static struct nvkm_gsp_fwif
+ tu102_gsps[] = {
+-	{  0, tu102_gsp_load, &tu102_gsp_r535_113_01, "535.113.01" },
++	{  0, tu102_gsp_load, &tu102_gsp, &r535_rm_tu102, "535.113.01" },
+ 	{ -1, gv100_gsp_nofw, &gv100_gsp },
+ 	{}
+ };
+diff --git a/drivers/gpu/drm/nouveau/nvkm/subdev/gsp/tu116.c b/drivers/gpu/drm/nouveau/nvkm/subdev/gsp/tu116.c
+index 1bc806a18010..5f279813626f 100644
+--- a/drivers/gpu/drm/nouveau/nvkm/subdev/gsp/tu116.c
++++ b/drivers/gpu/drm/nouveau/nvkm/subdev/gsp/tu116.c
+@@ -22,7 +22,7 @@
+ #include "priv.h"
+ 
+ static const struct nvkm_gsp_func
+-tu116_gsp_r535_113_01 = {
++tu116_gsp = {
+ 	.flcn = &tu102_gsp_flcn,
+ 	.fwsec = &tu102_gsp_fwsec,
+ 
+@@ -39,12 +39,12 @@ tu116_gsp_r535_113_01 = {
+ 	.fini = tu102_gsp_fini,
+ 	.reset = tu102_gsp_reset,
+ 
+-	.rm = &r535_gsp_rm,
++	.rm.gpu = &tu1xx_gpu,
+ };
+ 
+ static struct nvkm_gsp_fwif
+ tu116_gsps[] = {
+-	{  0, tu102_gsp_load, &tu116_gsp_r535_113_01, "535.113.01" },
++	{  0, tu102_gsp_load, &tu116_gsp, &r535_rm_tu102, "535.113.01" },
+ 	{ -1, gv100_gsp_nofw, &gv100_gsp },
+ 	{}
+ };
 -- 
 2.49.0
 
