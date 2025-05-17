@@ -2,72 +2,72 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id C7308ABA732
-	for <lists+nouveau@lfdr.de>; Sat, 17 May 2025 02:11:53 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 8AEF9ABA736
+	for <lists+nouveau@lfdr.de>; Sat, 17 May 2025 02:11:56 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 5DAF410EBE8;
-	Sat, 17 May 2025 00:11:52 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 5FD0110EBEC;
+	Sat, 17 May 2025 00:11:54 +0000 (UTC)
 Authentication-Results: gabe.freedesktop.org;
-	dkim=pass (2048-bit key; unprotected) header.d=Nvidia.com header.i=@Nvidia.com header.b="LUy5sUK2";
+	dkim=pass (2048-bit key; unprotected) header.d=Nvidia.com header.i=@Nvidia.com header.b="cYNmwelM";
 	dkim-atps=neutral
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from NAM11-CO1-obe.outbound.protection.outlook.com
- (mail-co1nam11on2041.outbound.protection.outlook.com [40.107.220.41])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 8CE1210EBE7
- for <nouveau@lists.freedesktop.org>; Sat, 17 May 2025 00:11:50 +0000 (UTC)
+Received: from NAM11-DM6-obe.outbound.protection.outlook.com
+ (mail-dm6nam11on2051.outbound.protection.outlook.com [40.107.223.51])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 007A010EBEB
+ for <nouveau@lists.freedesktop.org>; Sat, 17 May 2025 00:11:52 +0000 (UTC)
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=rHTQ0xTbV6e11sM9fy5HkI51U/Kc9MoqFmvAWbHaYGpW/a39SCr/54TwSPtQOc7GIaisxFzSHsCyloN/VyAVxMDV4nedpwZIZ2L3gWPBOuC/yUS/SAdFWr7BeCqzOLYF3jG132okCEhsOKn/prZqVnnkzCYWJt8XiV2Mw3UgC6zN0Aexrl/S0WJDshFfWeB5lwoV58h9Z11+84HNWX8wEr5Sx3Ds+OEvQ6+Tyw0RrOHw1r82PRebQpHsh2gmaji2W2dP44y0F53YtpTSdP8MQnef0AtLIwIT63ao3S/WWpQAC77zvSArvn+yUVgrvX0CD55T19s+7IeXv3SMrhnpHQ==
+ b=ERqAh04iPcR0d74IKPyi6naZ+4eXJgtvI22tXB3THZ1YH5YodDXGQmu33iGaWGd7EA+aQQ4AFQ+zYNd3w7Ejfzhl2YRXJEShjMqZ520RfsO/YLocYS8lTJzd53Xp2lJOBT84cTxdagsk/sXp3ROrkBGbx6OLrcWyr0WjWKv5nRGpLYjnu9X9fqRnAxBDFhKwHRv4W0JGd7O0Hihr44SZH9593E01Uvic7xvnBKHtWJe5oRZYsQKDJjLVM7BouHIf83zw6U+72tqfJ1BAe0ExpJ6A8FLe7DiXjoNEycTFRqohl7wE2mPA2ZmMQYt0Al0zboJaerHREQnVxJxiuh9rcQ==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
  s=arcselector10001;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=OhD4kEw1/D66Fd08BTOI+b5nndqLsQIX5ouAa6J3Jj8=;
- b=eKHxOI7Z4sztMM+XbOPfmdV2lOqSSXRpu8i92pKZsFK7yw1RUbKSkVG/YUfXGU3HhYhSM5lZWVYjQO2Xnfbu+OSqTexquCPBK0k0G43f7LLmt/gG4zrqByJv7lfIhOQwJv1tgv2Z2pU6GmQ3IyDP1PYDW36S4V1UYgytRpUZTuMxE0OIMJpx7TseVewjU7iEpg/oTO9ZBt9T1+A4IaIBNoCMm6rK0ovx3C4uN6NrveqEr2q5KKyH7897IhoWAR279GLxt4WMyk0B7KLnqOkcgn/F54hkgeIGoumehIizh2G9DJMvciR2aPG43sU/9xsg6hPVtprvvNxFVmYmE+X8dg==
+ bh=9IGNjhTte3TvQ2LNP6zXsq1VN6TPxgGgeib/5Gp0Oyo=;
+ b=jKmoKcNnh2VxAlZ9/imZL/x1S9csBLy+v2ysePWuTxVGTq7Ltgz5JA7gWd3Ltsj5+TelGy0TyhiHz+qh2zyx3Hxgz0rSzGxQB3QUwnWy9HTZokwIyiDfV+Wl6qYIxD7zfg/2gW9pFWLCCNjM4oOy2Pk9edrA2ficyzLfGtInarpRirQVjJVjnujs2C4+drCQpB4EKol+mGzdhxxl8kHfKgZsQNFzF7ZvHkX5duX+eGo8XImEeXa/E/PzeqR2bn0CFKdxcWbpGvw5HuCGtWo2qjvMIT+wVmBW6AYP0ST4krrijwQn6YLm6f8FvBoaShHqGufzd814NMjatmeo0QS9FA==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
- 216.228.117.161) smtp.rcpttodomain=lists.freedesktop.org
+ 216.228.117.160) smtp.rcpttodomain=lists.freedesktop.org
  smtp.mailfrom=nvidia.com; dmarc=pass (p=reject sp=reject pct=100) action=none
  header.from=nvidia.com; dkim=none (message not signed); arc=none (0)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=Nvidia.com;
  s=selector2;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=OhD4kEw1/D66Fd08BTOI+b5nndqLsQIX5ouAa6J3Jj8=;
- b=LUy5sUK2uy8d/W2nRcv7hqyrf4DC/R4xTYYIqfyZBEKs4cPEmnoQzaQ8xW+P6Hsn7xsIzyM2MAmLwxpdSDGoPjMyMbCGDsI0zHh98kyVFpmscZ1VknWxoDiZNL+sTqhkqc2HHJSjrnWFHrfi5lMKb6gKOH5U0GlatFzlgZDmJ6/FpUZGMHnWuE3pEY3AhqFkGsnQ4GCreaSjVWMCYdEa6e75DvMF0hdCDb1TgLtf+JE8zoT6yDUWy4AHrLCHzFymeIkwyF2YaSjZ8iRu9b2BPZ8PGONnmx8AVtolJqUUMQdJOaWrnTNw3V0bWlOWynsOXpD/OMKSnfPT9/rxI5sbXw==
-Received: from PH8P221CA0049.NAMP221.PROD.OUTLOOK.COM (2603:10b6:510:346::6)
- by MW4PR12MB6684.namprd12.prod.outlook.com (2603:10b6:303:1ee::22) with
+ bh=9IGNjhTte3TvQ2LNP6zXsq1VN6TPxgGgeib/5Gp0Oyo=;
+ b=cYNmwelMT4oBOaoagobZb7+GpitsmPLJQ6JXG4j9q5vWIv1kK0uT62XpfiJU5UTMkMRy4AIv8HeSvrHVgwJ0CzY6J4d11vok+nal2jHnrMmWFLb8eKcbYo9SzdBW4dk2lesWwd4Au7zCKpf0w6DxLbPBIzArlvFW7fmPM4Ooy3xMeb/EtLk59Q/jBi4SKyR4ds1BX6RSPbvxJnD+kYPPbJZqK/0jT1LuMijMweIvPXVfu25RlDtqHkHcBSlPxF9vUSJuvfTwbCN0CfiY0yo3S7qzhU0b+Eb3y/ntHYNul81+u2OnT4PuXYK15dr58GcOwWqeD9Z8JroERVh0KzwC3Q==
+Received: from CH5P222CA0004.NAMP222.PROD.OUTLOOK.COM (2603:10b6:610:1ee::8)
+ by CY1PR12MB9675.namprd12.prod.outlook.com (2603:10b6:930:105::20) with
  Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.8722.30; Sat, 17 May
- 2025 00:11:42 +0000
-Received: from CY4PEPF0000FCC2.namprd03.prod.outlook.com
- (2603:10b6:510:346:cafe::85) by PH8P221CA0049.outlook.office365.com
- (2603:10b6:510:346::6) with Microsoft SMTP Server (version=TLS1_3,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.8722.32; Sat, 17 May
+ 2025 00:11:40 +0000
+Received: from CH2PEPF00000145.namprd02.prod.outlook.com
+ (2603:10b6:610:1ee:cafe::ac) by CH5P222CA0004.outlook.office365.com
+ (2603:10b6:610:1ee::8) with Microsoft SMTP Server (version=TLS1_3,
  cipher=TLS_AES_256_GCM_SHA384) id 15.20.8746.24 via Frontend Transport; Sat,
- 17 May 2025 00:11:42 +0000
-X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 216.228.117.161)
+ 17 May 2025 00:11:40 +0000
+X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 216.228.117.160)
  smtp.mailfrom=nvidia.com;
  dkim=none (message not signed)
  header.d=none;dmarc=pass action=none header.from=nvidia.com;
 Received-SPF: Pass (protection.outlook.com: domain of nvidia.com designates
- 216.228.117.161 as permitted sender) receiver=protection.outlook.com;
- client-ip=216.228.117.161; helo=mail.nvidia.com; pr=C
-Received: from mail.nvidia.com (216.228.117.161) by
- CY4PEPF0000FCC2.mail.protection.outlook.com (10.167.242.104) with Microsoft
+ 216.228.117.160 as permitted sender) receiver=protection.outlook.com;
+ client-ip=216.228.117.160; helo=mail.nvidia.com; pr=C
+Received: from mail.nvidia.com (216.228.117.160) by
+ CH2PEPF00000145.mail.protection.outlook.com (10.167.244.102) with Microsoft
  SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.20.8746.27 via Frontend Transport; Sat, 17 May 2025 00:11:42 +0000
+ 15.20.8746.27 via Frontend Transport; Sat, 17 May 2025 00:11:40 +0000
 Received: from rnnvmail201.nvidia.com (10.129.68.8) by mail.nvidia.com
- (10.129.200.67) with Microsoft SMTP Server (version=TLS1_2,
+ (10.129.200.66) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.1544.4; Fri, 16 May
- 2025 17:11:26 -0700
+ 2025 17:11:28 -0700
 Received: from nv-dev.vdiclient.nvidia.com (10.126.231.35) by
  rnnvmail201.nvidia.com (10.129.68.8) with Microsoft SMTP Server
  (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.2.1544.14; Fri, 16 May 2025 17:11:24 -0700
+ 15.2.1544.14; Fri, 16 May 2025 17:11:26 -0700
 From: Ben Skeggs <bskeggs@nvidia.com>
 To: <nouveau@lists.freedesktop.org>
-CC: Ben Skeggs <bskeggs@nvidia.com>, Dave Airlie <airlied@redhat.com>, "Timur
- Tabi" <ttabi@nvidia.com>
-Subject: [PATCH v3 53/62] drm/nouveau: improve handling of 64-bit BARs
-Date: Sat, 17 May 2025 10:09:45 +1000
-Message-ID: <20250517000954.35691-54-bskeggs@nvidia.com>
+CC: Ben Skeggs <bskeggs@nvidia.com>, Timur Tabi <ttabi@nvidia.com>, "Dave
+ Airlie" <airlied@redhat.com>
+Subject: [PATCH v3 54/62] drm/nouveau: add support for GH100
+Date: Sat, 17 May 2025 10:09:46 +1000
+Message-ID: <20250517000954.35691-55-bskeggs@nvidia.com>
 X-Mailer: git-send-email 2.49.0
 In-Reply-To: <20250517000954.35691-1-bskeggs@nvidia.com>
 References: <20250517000954.35691-1-bskeggs@nvidia.com>
@@ -79,52 +79,52 @@ X-ClientProxiedBy: rnnvmail202.nvidia.com (10.129.68.7) To
  rnnvmail201.nvidia.com (10.129.68.8)
 X-EOPAttributedMessage: 0
 X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: CY4PEPF0000FCC2:EE_|MW4PR12MB6684:EE_
-X-MS-Office365-Filtering-Correlation-Id: 5b907942-6f68-4a1d-8368-08dd94d766f5
+X-MS-TrafficTypeDiagnostic: CH2PEPF00000145:EE_|CY1PR12MB9675:EE_
+X-MS-Office365-Filtering-Correlation-Id: 8c09464f-07f6-48d3-7f18-08dd94d765c8
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
 X-Microsoft-Antispam: BCL:0;
- ARA:13230040|36860700013|1800799024|82310400026|376014; 
-X-Microsoft-Antispam-Message-Info: =?us-ascii?Q?ZpOC/PJ1zCS8qnXtMuGYPY1136QKQP5jkaivfCabbVYizL1GaTIpx7tjX+O3?=
- =?us-ascii?Q?D1RnULICJgmH981g+dLPhYEwRBWWEFa6/Oiumh6Ay8FJFvRt3moK7Ano1Ejm?=
- =?us-ascii?Q?DIguKjjjmO3ntkLldJeOH5SsLC1w5/bzmA/PLHGkU7j67BPZMfEJn3T6eEkm?=
- =?us-ascii?Q?ut565qpWpfCFgO6ZxwcUJuKgptRq5ksmITqlsKl47mIdVesKaAwc9OFTYmjX?=
- =?us-ascii?Q?jTvhk2RjVHsAoVecq+ZsOhdzH/WlvfbNjhdfVgJDo1n9tc10hUpMCj0eTmxd?=
- =?us-ascii?Q?Jl87+zBDW6XgZaXvug5QukoZoUi1yew9PTdMKhi7cA/BDCEnChRcib8MatCP?=
- =?us-ascii?Q?TXkOUKXZYW2iYgET328x/s+yQ5e3Qujd8OoDhqC0U1VA2axUn8COq3CWnMw9?=
- =?us-ascii?Q?acChinlww6YbXmS1MiBbUDSR8mGO2+zzINU5ligztM1jBEKnzaBfl/3XkgfE?=
- =?us-ascii?Q?7CWl+Cj00dt0PoGpXR3wbUnpbTDhVa2PR6D15Js4vhkv/A72AQph6tJbmsG7?=
- =?us-ascii?Q?Phq02gnLnqa8KnTTI3gEqD0Cgfv9FT/yzSU8M96+vehwN8ecjiUqubjk6J0H?=
- =?us-ascii?Q?QjoBiCBxcPnQ0PrWyNdH5jwJYgces0yUOhTSvKdWErjwIqaMou2l4leYrvge?=
- =?us-ascii?Q?5jVw0L0V570n1J/Q2lqCBV7j+vL2hdOkCP1U4LZgsQpZy0V9pnhJsG0/l4GK?=
- =?us-ascii?Q?lfyI5Ckt9tUfb/FLCJTzogRhOuiaik6zuDk35lzMJoTGD00JcxvIdPxEcKCy?=
- =?us-ascii?Q?nz1BlgwnNY+UgczvZU4DwrinqQBePQ8ZUUOPfdBTcRNzbhxG3VCYn4pwu8ph?=
- =?us-ascii?Q?DCajT6sDLepryGstbR5HGGUoyCfadGmDrU86nJ9a1yyiecMOwW8rYyVPxBkK?=
- =?us-ascii?Q?RZHY7irm9m0keLnEEb2c+TSKXNb2tv2papPCzps2ozEgA9PpKAXKmefXnbm5?=
- =?us-ascii?Q?KFUttj5hWul3me05UBVE8sS9jKc6riuP8thikFI2cV9WebC0f6vdYXskfRa1?=
- =?us-ascii?Q?jgb5tZFXtp2+4ntY8ob6tA19v205yb5XTCFh9pH+rYTElAg6XBIjAq5PhrPi?=
- =?us-ascii?Q?T1wBx2gP0BcrcLZ8rKBnG7uNUHxcEj/BpyNx5OWCVtrQbFwElC3a4p3toIh2?=
- =?us-ascii?Q?/naQnm7kYploS41osh0HelamEB6Sxc66DctH0H9rbJZG4qLgKuOHLWsVyhaW?=
- =?us-ascii?Q?BlTnnrN+MuUj7tfWpzgwdvvrLNYqkDKoe+WlQjkJnDcURMSc22MzYBT5CW4S?=
- =?us-ascii?Q?b9NoDevPsI0Y0GkYIkKci9k1u4AC2fuWvfxrN9wVMEvnSr4vYQsHLMu/ViOr?=
- =?us-ascii?Q?W3IIu6cxNwfKxHCWg9/ZUzU6ZfqoKQvd9CDn/kTZ3fEP4jvGT4vFMQ7R/ZBI?=
- =?us-ascii?Q?XyyoBCTMJtyyNGbilVvfMHlP/2xnn7Q2jM9oxKG5+SmH1Fig2YaBszH1OxYg?=
- =?us-ascii?Q?PbpIC8Fl1W2woYZcZ9cRdue++isuQSOWvX714XpCwWdIxG/YHlojSWullGHd?=
- =?us-ascii?Q?QIS2yv8bt0hAR5S4VJOz+Futt0nC9CSovvgp?=
-X-Forefront-Antispam-Report: CIP:216.228.117.161; CTRY:US; LANG:en; SCL:1; SRV:;
- IPV:NLI; SFV:NSPM; H:mail.nvidia.com; PTR:dc6edge2.nvidia.com; CAT:NONE;
- SFS:(13230040)(36860700013)(1800799024)(82310400026)(376014); DIR:OUT;
+ ARA:13230040|82310400026|376014|36860700013|1800799024; 
+X-Microsoft-Antispam-Message-Info: =?us-ascii?Q?tdf9JEjoOJ8kHl2/ZZwrFfz0B/pF4lYN3HIljIhtc9AuODTrabrZbcVO8zmg?=
+ =?us-ascii?Q?TTwlwSGheYO575Nx6gvAptphDD77k5DOadIoFPt0htllNHYMYCDIhSqNVpLI?=
+ =?us-ascii?Q?1jFi7xjbwM2lzNW51ebsMxC0eu76MiRkdQ1RA0i0Pf0WYTfL9BD6cuCvqJ6U?=
+ =?us-ascii?Q?+oQxpfqz7LEPLod8beytfkWnbRPAa4CI1U+JJv2MpVFdPkYkakTuI7G5zR+t?=
+ =?us-ascii?Q?k5ZHqqiBRVVxZiFRITw2KYSavawj2pXEhrs6U6Zxwy/k6h1ZAYmV7+U0cfCq?=
+ =?us-ascii?Q?yNCqhtsthuj6MBVaScZpJEL9KXLVgkFIq0uswnJtaYCmuWm9lMYQzZy2GnE1?=
+ =?us-ascii?Q?YaIdebNCfltO32EWpFclWnOnePyna8CJogI8+3IuV92LssJ07wwO40NSagVx?=
+ =?us-ascii?Q?9E0tZOs5vpLMXVM6S8ajQ0nss1ZNEspVGPNZdmf018vWKIb7mazPGbDonHjW?=
+ =?us-ascii?Q?zgdoMYI8NOQEB8pR6Uj9sqStlDTEn1wX+RsRv5bVVdlVuEfVfI2adq762Jm/?=
+ =?us-ascii?Q?vNoay7UYhreSDnsALLZw6faqJGWlKOUoipw2D3DtUJv7uxjFLPqYs8X375F6?=
+ =?us-ascii?Q?WhYa4imr2LEkSbns+S2/MdPvdBen9XN1VZ6xsR5VJgZ4M+XeuGKS4IMB6kri?=
+ =?us-ascii?Q?3GH8mVP3TO536mdAf1eZtz6zxKSp5gHGFB4vdVdpNbTb6z6nYy2aoXaQ3Apn?=
+ =?us-ascii?Q?jYEs3EZX/dohTkublxRB/pJq4K6rfbOlhLqsyrfeD9w1noEZ9wbM1v7xQw57?=
+ =?us-ascii?Q?krOHVCIf3p4VLjqFdAAGIThSgBKnWaG9kn0k8c74C5OsSdSpkvrvWycqJrwt?=
+ =?us-ascii?Q?8/WoVd/xjAZZjMaq9F5nD5W7xn+8PDTgO43R0QgiKwZAfq3wXqp1zs4vZibS?=
+ =?us-ascii?Q?N2BrHPnFVPUBo3Q9lwAYSHDF7NpCU21xgwCJoL2jHevfSyNiItd7laXmHY/0?=
+ =?us-ascii?Q?ApkAZacMXWt6XJ/5VhzRwXti1CriJ57Y/Yw6KRsZtIoeMx81GrkPPlkf3eBy?=
+ =?us-ascii?Q?yl0FZuceQIZw/zBInQR7Hu4rD3FgCRbYLyv8GgLT8UsASzkDk9zKpqgRZPrP?=
+ =?us-ascii?Q?ON5HUw/OkgmaXbXPSWg69PWQ7lDhM8Jo0lhFrHr3DElI39ktSOGyq8HtENO6?=
+ =?us-ascii?Q?DlMvRflxY/3dzEjkk/7O07y9Fkh5slbvF2pk6yykFS3aih54ZDASad/nx/sU?=
+ =?us-ascii?Q?203f1UAzzlSIf3IKeqEyIqJsQ3WBUaKDEXHixkQjbuOkcv5xYaVkSHoL62D+?=
+ =?us-ascii?Q?Nj0bdVMfSs1F8/hFmepSffdMHFJLL2hVkI7Lye+tf/pfFuOk8v5P7cOutY2h?=
+ =?us-ascii?Q?P36Tgcenx/QljXkpIrbUHO2NGZve+kFGiT6tXbxby7eYpxWIL6As5+QjKK31?=
+ =?us-ascii?Q?iryhuNqEa9W+rvwL/4+uXZjQQ4w6DovC5esw6YbI+JcNjm8HcAGcPjqQYr0W?=
+ =?us-ascii?Q?2wDV2KXpwZNfW2LyCGszKHPRIHxL6ITUIyx8ouwHaxuwrnN+indKAQNhaVd6?=
+ =?us-ascii?Q?J8QCVv085yp9j7BbJQASx7JlJ2hy8Q02K2bA?=
+X-Forefront-Antispam-Report: CIP:216.228.117.160; CTRY:US; LANG:en; SCL:1; SRV:;
+ IPV:NLI; SFV:NSPM; H:mail.nvidia.com; PTR:dc6edge1.nvidia.com; CAT:NONE;
+ SFS:(13230040)(82310400026)(376014)(36860700013)(1800799024); DIR:OUT;
  SFP:1101; 
 X-OriginatorOrg: Nvidia.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 17 May 2025 00:11:42.1663 (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: 5b907942-6f68-4a1d-8368-08dd94d766f5
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 17 May 2025 00:11:40.1514 (UTC)
+X-MS-Exchange-CrossTenant-Network-Message-Id: 8c09464f-07f6-48d3-7f18-08dd94d765c8
 X-MS-Exchange-CrossTenant-Id: 43083d15-7273-40c1-b7db-39efd9ccc17a
-X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=43083d15-7273-40c1-b7db-39efd9ccc17a; Ip=[216.228.117.161];
+X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=43083d15-7273-40c1-b7db-39efd9ccc17a; Ip=[216.228.117.160];
  Helo=[mail.nvidia.com]
-X-MS-Exchange-CrossTenant-AuthSource: CY4PEPF0000FCC2.namprd03.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthSource: CH2PEPF00000145.namprd02.prod.outlook.com
 X-MS-Exchange-CrossTenant-AuthAs: Anonymous
 X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: MW4PR12MB6684
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: CY1PR12MB9675
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -139,753 +139,2497 @@ List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-GPUs exist now with a 64-bit BAR0, which mean that BAR1 and BAR2's
-indices (as passed to pci_resource_len() etc) are bumped up by one.
+This commit enables basic support for Hopper GPUs, and is intended
+primarily as a base supporting Blackwell GPUs, which reuse most of
+the code added here.
 
-Modify nvkm_device.resource_addr/size() to take an enum instead of
-an integer bar index, and take IORESOURCE_MEM_64 into account when
-translating to the "raw" bar id.
+Advanced features such as Confidential Compute are not supported.
+
+Beyond a few miscellaneous register moves and HW class ID plumbing,
+the bulk of the changes implemented here are to support the GSP-RM
+boot sequence used on Hopper/Blackwell GPUs, as well as a new page
+table layout.
+
+There should be no changes here that impact prior GPUs.
 
 Signed-off-by: Ben Skeggs <bskeggs@nvidia.com>
+Co-developed-by: Timur Tabi <ttabi@nvidia.com>
+Signed-off-by: Timur Tabi <ttabi@nvidia.com>
 Reviewed-by: Dave Airlie <airlied@redhat.com>
 Reviewed-by: Timur Tabi <ttabi@nvidia.com>
 Tested-by: Timur Tabi <ttabi@nvidia.com>
 ---
- .../drm/nouveau/include/nvkm/core/device.h    | 11 +++++--
- drivers/gpu/drm/nouveau/nouveau_abi16.c       |  2 +-
- drivers/gpu/drm/nouveau/nouveau_bo.c          |  4 +--
- drivers/gpu/drm/nouveau/nouveau_chan.c        |  4 ++-
- drivers/gpu/drm/nouveau/nouveau_ttm.c         | 12 +++----
- .../gpu/drm/nouveau/nvkm/engine/device/base.c |  4 +--
- .../gpu/drm/nouveau/nvkm/engine/device/pci.c  | 32 ++++++++++++++++---
- .../drm/nouveau/nvkm/engine/device/tegra.c    | 18 ++++++++---
- .../gpu/drm/nouveau/nvkm/engine/device/user.c |  4 +--
- .../gpu/drm/nouveau/nvkm/engine/disp/chan.c   |  2 +-
- .../gpu/drm/nouveau/nvkm/engine/disp/gv100.c  |  2 +-
- .../gpu/drm/nouveau/nvkm/engine/fifo/base.c   |  2 +-
- .../gpu/drm/nouveau/nvkm/engine/fifo/chan.c   |  6 ++--
- .../gpu/drm/nouveau/nvkm/engine/fifo/chan.h   |  2 +-
- .../gpu/drm/nouveau/nvkm/engine/fifo/gf100.c  |  2 +-
- .../gpu/drm/nouveau/nvkm/engine/fifo/gk104.c  |  4 +--
- .../gpu/drm/nouveau/nvkm/engine/fifo/gv100.c  |  1 -
- .../gpu/drm/nouveau/nvkm/engine/fifo/nv04.c   |  2 +-
- .../gpu/drm/nouveau/nvkm/engine/fifo/nv40.c   |  2 +-
- .../gpu/drm/nouveau/nvkm/engine/fifo/nv50.c   |  2 +-
- .../gpu/drm/nouveau/nvkm/engine/fifo/uchan.c  |  2 +-
- drivers/gpu/drm/nouveau/nvkm/engine/gr/nv20.c |  2 +-
- drivers/gpu/drm/nouveau/nvkm/engine/gr/nv40.c |  2 +-
- .../gpu/drm/nouveau/nvkm/subdev/bar/gf100.c   | 14 ++++----
- .../gpu/drm/nouveau/nvkm/subdev/bar/nv50.c    |  4 +--
- .../drm/nouveau/nvkm/subdev/devinit/fbmem.h   |  4 +--
- .../gpu/drm/nouveau/nvkm/subdev/fault/user.c  |  2 +-
- .../drm/nouveau/nvkm/subdev/gsp/rm/r535/bar.c |  2 +-
- .../drm/nouveau/nvkm/subdev/gsp/rm/r535/gsp.c |  6 ++--
- .../drm/nouveau/nvkm/subdev/gsp/rm/r570/gsp.c |  6 ++--
- .../drm/nouveau/nvkm/subdev/instmem/nv40.c    | 10 ++----
- .../drm/nouveau/nvkm/subdev/instmem/nv50.c    |  2 +-
- .../drm/nouveau/nvkm/subdev/mmu/memgf100.c    |  2 +-
- .../gpu/drm/nouveau/nvkm/subdev/mmu/memnv04.c |  2 +-
- .../gpu/drm/nouveau/nvkm/subdev/mmu/memnv50.c |  2 +-
- .../gpu/drm/nouveau/nvkm/subdev/vfn/uvfn.c    |  2 +-
- 36 files changed, 109 insertions(+), 73 deletions(-)
+ .../include/nvhw/ref/gh100/dev_falcon_v4.h    |  20 +
+ .../nouveau/include/nvhw/ref/gh100/dev_fb.h   |  15 +
+ .../include/nvhw/ref/gh100/dev_fsp_pri.h      |  28 ++
+ .../nouveau/include/nvhw/ref/gh100/dev_mmu.h  | 173 +++++++++
+ .../include/nvhw/ref/gh100/dev_riscv_pri.h    |  14 +
+ .../include/nvhw/ref/gh100/dev_therm.h        |  17 +
+ .../include/nvhw/ref/gh100/dev_xtl_ep_pri.h   |  10 +
+ .../include/nvhw/ref/gh100/pri_nv_xal_ep.h    |  13 +
+ drivers/gpu/drm/nouveau/include/nvif/cl0080.h |   1 +
+ drivers/gpu/drm/nouveau/include/nvif/class.h  |   9 +
+ .../drm/nouveau/include/nvkm/core/device.h    |   4 +
+ .../drm/nouveau/include/nvkm/core/layout.h    |   1 +
+ .../gpu/drm/nouveau/include/nvkm/subdev/fb.h  |   1 +
+ .../gpu/drm/nouveau/include/nvkm/subdev/fsp.h |  22 ++
+ .../gpu/drm/nouveau/include/nvkm/subdev/gsp.h |  13 +
+ .../drm/nouveau/include/nvkm/subdev/instmem.h |   1 +
+ .../gpu/drm/nouveau/include/nvkm/subdev/mmu.h |   1 +
+ .../gpu/drm/nouveau/include/nvkm/subdev/pci.h |   1 +
+ drivers/gpu/drm/nouveau/nouveau_bo.c          |   1 +
+ drivers/gpu/drm/nouveau/nouveau_chan.c        |   1 +
+ drivers/gpu/drm/nouveau/nouveau_drm.c         |   1 +
+ drivers/gpu/drm/nouveau/nvif/user.c           |   1 +
+ .../gpu/drm/nouveau/nvkm/engine/device/base.c |  18 +
+ .../gpu/drm/nouveau/nvkm/engine/device/priv.h |   1 +
+ .../gpu/drm/nouveau/nvkm/engine/device/user.c |   1 +
+ drivers/gpu/drm/nouveau/nvkm/subdev/Kbuild    |   1 +
+ drivers/gpu/drm/nouveau/nvkm/subdev/fb/Kbuild |   1 +
+ .../gpu/drm/nouveau/nvkm/subdev/fb/ga102.c    |   2 +-
+ .../gpu/drm/nouveau/nvkm/subdev/fb/gh100.c    |  30 ++
+ drivers/gpu/drm/nouveau/nvkm/subdev/fb/priv.h |   2 +
+ .../gpu/drm/nouveau/nvkm/subdev/fsp/Kbuild    |   6 +
+ .../gpu/drm/nouveau/nvkm/subdev/fsp/base.c    |  66 ++++
+ .../gpu/drm/nouveau/nvkm/subdev/fsp/gh100.c   | 275 ++++++++++++++
+ .../gpu/drm/nouveau/nvkm/subdev/fsp/priv.h    |  28 ++
+ .../gpu/drm/nouveau/nvkm/subdev/gsp/Kbuild    |   1 +
+ .../gpu/drm/nouveau/nvkm/subdev/gsp/base.c    |   2 +
+ .../gpu/drm/nouveau/nvkm/subdev/gsp/gh100.c   | 353 ++++++++++++++++++
+ .../gpu/drm/nouveau/nvkm/subdev/gsp/priv.h    |   8 +
+ .../gpu/drm/nouveau/nvkm/subdev/gsp/rm/Kbuild |   1 +
+ .../drm/nouveau/nvkm/subdev/gsp/rm/gh100.c    |  27 ++
+ .../gpu/drm/nouveau/nvkm/subdev/gsp/rm/gpu.h  |   1 +
+ .../drm/nouveau/nvkm/subdev/gsp/rm/r535/gsp.c |   6 +
+ .../drm/nouveau/nvkm/subdev/gsp/rm/r570/gsp.c |  11 +-
+ .../nvkm/subdev/gsp/rm/r570/nvrm/gsp.h        |  58 +++
+ .../drm/nouveau/nvkm/subdev/gsp/rm/r570/rm.c  |  15 +
+ .../gpu/drm/nouveau/nvkm/subdev/gsp/rm/rm.h   |   3 +
+ .../gpu/drm/nouveau/nvkm/subdev/gsp/tu102.c   |   4 +-
+ .../drm/nouveau/nvkm/subdev/instmem/Kbuild    |   1 +
+ .../drm/nouveau/nvkm/subdev/instmem/gh100.c   |  28 ++
+ .../drm/nouveau/nvkm/subdev/instmem/nv50.c    |   6 +-
+ .../drm/nouveau/nvkm/subdev/instmem/priv.h    |   5 +
+ .../gpu/drm/nouveau/nvkm/subdev/mmu/Kbuild    |   2 +
+ .../gpu/drm/nouveau/nvkm/subdev/mmu/gh100.c   |  25 ++
+ .../gpu/drm/nouveau/nvkm/subdev/mmu/priv.h    |   2 +
+ .../gpu/drm/nouveau/nvkm/subdev/mmu/tu102.c   |   2 +-
+ drivers/gpu/drm/nouveau/nvkm/subdev/mmu/vmm.h |   7 +
+ .../drm/nouveau/nvkm/subdev/mmu/vmmgh100.c    | 306 +++++++++++++++
+ .../drm/nouveau/nvkm/subdev/mmu/vmmgp100.c    |   3 +
+ .../drm/nouveau/nvkm/subdev/mmu/vmmtu102.c    |   2 +-
+ .../gpu/drm/nouveau/nvkm/subdev/pci/Kbuild    |   1 +
+ .../gpu/drm/nouveau/nvkm/subdev/pci/gh100.c   |  30 ++
+ 61 files changed, 1680 insertions(+), 9 deletions(-)
+ create mode 100644 drivers/gpu/drm/nouveau/include/nvhw/ref/gh100/dev_falcon_v4.h
+ create mode 100644 drivers/gpu/drm/nouveau/include/nvhw/ref/gh100/dev_fb.h
+ create mode 100644 drivers/gpu/drm/nouveau/include/nvhw/ref/gh100/dev_fsp_pri.h
+ create mode 100644 drivers/gpu/drm/nouveau/include/nvhw/ref/gh100/dev_mmu.h
+ create mode 100644 drivers/gpu/drm/nouveau/include/nvhw/ref/gh100/dev_riscv_pri.h
+ create mode 100644 drivers/gpu/drm/nouveau/include/nvhw/ref/gh100/dev_therm.h
+ create mode 100644 drivers/gpu/drm/nouveau/include/nvhw/ref/gh100/dev_xtl_ep_pri.h
+ create mode 100644 drivers/gpu/drm/nouveau/include/nvhw/ref/gh100/pri_nv_xal_ep.h
+ create mode 100644 drivers/gpu/drm/nouveau/include/nvkm/subdev/fsp.h
+ create mode 100644 drivers/gpu/drm/nouveau/nvkm/subdev/fb/gh100.c
+ create mode 100644 drivers/gpu/drm/nouveau/nvkm/subdev/fsp/Kbuild
+ create mode 100644 drivers/gpu/drm/nouveau/nvkm/subdev/fsp/base.c
+ create mode 100644 drivers/gpu/drm/nouveau/nvkm/subdev/fsp/gh100.c
+ create mode 100644 drivers/gpu/drm/nouveau/nvkm/subdev/fsp/priv.h
+ create mode 100644 drivers/gpu/drm/nouveau/nvkm/subdev/gsp/gh100.c
+ create mode 100644 drivers/gpu/drm/nouveau/nvkm/subdev/gsp/rm/gh100.c
+ create mode 100644 drivers/gpu/drm/nouveau/nvkm/subdev/instmem/gh100.c
+ create mode 100644 drivers/gpu/drm/nouveau/nvkm/subdev/mmu/gh100.c
+ create mode 100644 drivers/gpu/drm/nouveau/nvkm/subdev/mmu/vmmgh100.c
+ create mode 100644 drivers/gpu/drm/nouveau/nvkm/subdev/pci/gh100.c
 
+diff --git a/drivers/gpu/drm/nouveau/include/nvhw/ref/gh100/dev_falcon_v4.h b/drivers/gpu/drm/nouveau/include/nvhw/ref/gh100/dev_falcon_v4.h
+new file mode 100644
+index 000000000000..52171b412aa1
+--- /dev/null
++++ b/drivers/gpu/drm/nouveau/include/nvhw/ref/gh100/dev_falcon_v4.h
+@@ -0,0 +1,20 @@
++/* SPDX-License-Identifier: MIT
++ *
++ * Copyright (c) 2025, NVIDIA CORPORATION. All rights reserved.
++ */
++#ifndef __gh100_dev_falcon_v4_h__
++#define __gh100_dev_falcon_v4_h__
++
++#define NV_PFALCON_FALCON_MAILBOX0                                                                     0x00000040     /* RW-4R */
++#define NV_PFALCON_FALCON_MAILBOX0_DATA                                                                31:0           /* RWIVF */
++#define NV_PFALCON_FALCON_MAILBOX0_DATA_INIT                                                           0x00000000     /* RWI-V */
++#define NV_PFALCON_FALCON_MAILBOX1                                                                     0x00000044     /* RW-4R */
++#define NV_PFALCON_FALCON_MAILBOX1_DATA                                                                31:0           /* RWIVF */
++#define NV_PFALCON_FALCON_MAILBOX1_DATA_INIT                                                           0x00000000     /* RWI-V */
++
++#define NV_PFALCON_FALCON_HWCFG2                                                                       0x000000f4     /* R--4R */
++#define NV_PFALCON_FALCON_HWCFG2_RISCV_BR_PRIV_LOCKDOWN                                                13:13          /* R--VF */
++#define NV_PFALCON_FALCON_HWCFG2_RISCV_BR_PRIV_LOCKDOWN_LOCK                                           0x00000001     /* R---V */
++#define NV_PFALCON_FALCON_HWCFG2_RISCV_BR_PRIV_LOCKDOWN_UNLOCK                                         0x00000000     /* R---V */
++
++#endif // __gh100_dev_falcon_v4_h__
+diff --git a/drivers/gpu/drm/nouveau/include/nvhw/ref/gh100/dev_fb.h b/drivers/gpu/drm/nouveau/include/nvhw/ref/gh100/dev_fb.h
+new file mode 100644
+index 000000000000..819f09465952
+--- /dev/null
++++ b/drivers/gpu/drm/nouveau/include/nvhw/ref/gh100/dev_fb.h
+@@ -0,0 +1,15 @@
++/* SPDX-License-Identifier: MIT
++ *
++ * Copyright (c) 2025, NVIDIA CORPORATION. All rights reserved.
++ */
++#ifndef __gh100_dev_fb_h_
++#define __gh100_dev_fb_h_
++
++#define NV_PFB_NISO_FLUSH_SYSMEM_ADDR_SHIFT                       8 /*       */
++#define NV_PFB_FBHUB_PCIE_FLUSH_SYSMEM_ADDR_LO           0x00100A34 /* RW-4R */
++#define NV_PFB_FBHUB_PCIE_FLUSH_SYSMEM_ADDR_LO_ADR             31:0 /* RWIVF */
++#define NV_PFB_FBHUB_PCIE_FLUSH_SYSMEM_ADDR_HI           0x00100A38 /* RW-4R */
++#define NV_PFB_FBHUB_PCIE_FLUSH_SYSMEM_ADDR_HI_ADR             31:0 /* RWIVF */
++#define NV_PFB_FBHUB_PCIE_FLUSH_SYSMEM_ADDR_HI_ADR_MASK  0x000FFFFF /* ----V */
++
++#endif // __gh100_dev_fb_h_
+diff --git a/drivers/gpu/drm/nouveau/include/nvhw/ref/gh100/dev_fsp_pri.h b/drivers/gpu/drm/nouveau/include/nvhw/ref/gh100/dev_fsp_pri.h
+new file mode 100644
+index 000000000000..e9507242cae5
+--- /dev/null
++++ b/drivers/gpu/drm/nouveau/include/nvhw/ref/gh100/dev_fsp_pri.h
+@@ -0,0 +1,28 @@
++/* SPDX-License-Identifier: MIT
++ *
++ * Copyright (c) 2025, NVIDIA CORPORATION. All rights reserved.
++ */
++#ifndef __gh100_dev_fsp_pri_h__
++#define __gh100_dev_fsp_pri_h__
++
++#define NV_PFSP             0x8F3FFF:0x8F0000 /* RW--D */
++
++#define NV_PFSP_MSGQ_HEAD(i)                                                                             (0x008F2c80+(i)*8) /* RW-4A */
++#define NV_PFSP_MSGQ_HEAD__SIZE_1                                                                        8              /*       */
++#define NV_PFSP_MSGQ_HEAD_VAL                                                                            31:0           /* RWIUF */
++#define NV_PFSP_MSGQ_HEAD_VAL_INIT                                                                       0x00000000     /* RWI-V */
++#define NV_PFSP_MSGQ_TAIL(i)                                                                             (0x008F2c84+(i)*8) /* RW-4A */
++#define NV_PFSP_MSGQ_TAIL__SIZE_1                                                                        8              /*       */
++#define NV_PFSP_MSGQ_TAIL_VAL                                                                            31:0           /* RWIUF */
++#define NV_PFSP_MSGQ_TAIL_VAL_INIT                                                                       0x00000000     /* RWI-V */
++
++#define NV_PFSP_QUEUE_HEAD(i)                                                                            (0x008F2c00+(i)*8) /* RW-4A */
++#define NV_PFSP_QUEUE_HEAD__SIZE_1                                                                       8              /*       */
++#define NV_PFSP_QUEUE_HEAD_ADDRESS                                                                       31:0           /* RWIVF */
++#define NV_PFSP_QUEUE_HEAD_ADDRESS_INIT                                                                  0x00000000     /* RWI-V */
++#define NV_PFSP_QUEUE_TAIL(i)                                                                            (0x008F2c04+(i)*8) /* RW-4A */
++#define NV_PFSP_QUEUE_TAIL__SIZE_1                                                                       8              /*       */
++#define NV_PFSP_QUEUE_TAIL_ADDRESS                                                                       31:0           /* RWIVF */
++#define NV_PFSP_QUEUE_TAIL_ADDRESS_INIT                                                                  0x00000000     /* RWI-V */
++
++#endif // __gh100_dev_fsp_pri_h__
+diff --git a/drivers/gpu/drm/nouveau/include/nvhw/ref/gh100/dev_mmu.h b/drivers/gpu/drm/nouveau/include/nvhw/ref/gh100/dev_mmu.h
+new file mode 100644
+index 000000000000..6707e0e3b96b
+--- /dev/null
++++ b/drivers/gpu/drm/nouveau/include/nvhw/ref/gh100/dev_mmu.h
+@@ -0,0 +1,173 @@
++/* SPDX-License-Identifier: MIT
++ *
++ * Copyright (c) 2025, NVIDIA CORPORATION. All rights reserved.
++ */
++#ifndef __gh100_dev_mmu_h__
++#define __gh100_dev_mmu_h__
++
++#define NV_MMU_PTE                                                      /* ----G */
++#define NV_MMU_PTE_APERTURE                           (1*32+2):(1*32+1) /* RWXVF */
++#define NV_MMU_PTE_APERTURE_VIDEO_MEMORY                     0x00000000 /* RW--V */
++#define NV_MMU_PTE_APERTURE_PEER_MEMORY                      0x00000001 /* RW--V */
++#define NV_MMU_PTE_APERTURE_SYSTEM_COHERENT_MEMORY           0x00000002 /* RW--V */
++#define NV_MMU_PTE_APERTURE_SYSTEM_NON_COHERENT_MEMORY       0x00000003 /* RW--V */
++#define NV_MMU_PTE_KIND                              (1*32+7):(1*32+4) /* RWXVF */
++#define NV_MMU_PTE_KIND_INVALID                       0x07 /* R---V */
++#define NV_MMU_PTE_KIND_PITCH                         0x00 /* R---V */
++#define NV_MMU_PTE_KIND_GENERIC_MEMORY                                                  0x6 /* R---V */
++#define NV_MMU_PTE_KIND_Z16                                                             0x1 /* R---V */
++#define NV_MMU_PTE_KIND_S8                                                              0x2 /* R---V */
++#define NV_MMU_PTE_KIND_S8Z24                                                           0x3 /* R---V */
++#define NV_MMU_PTE_KIND_ZF32_X24S8                                                      0x4 /* R---V */
++#define NV_MMU_PTE_KIND_Z24S8                                                           0x5 /* R---V */
++#define NV_MMU_PTE_KIND_GENERIC_MEMORY_COMPRESSIBLE                                     0x8 /* R---V */
++#define NV_MMU_PTE_KIND_GENERIC_MEMORY_COMPRESSIBLE_DISABLE_PLC                         0x9 /* R---V */
++#define NV_MMU_PTE_KIND_S8_COMPRESSIBLE_DISABLE_PLC                                     0xA /* R---V */
++#define NV_MMU_PTE_KIND_Z16_COMPRESSIBLE_DISABLE_PLC                                    0xB /* R---V */
++#define NV_MMU_PTE_KIND_S8Z24_COMPRESSIBLE_DISABLE_PLC                                  0xC /* R---V */
++#define NV_MMU_PTE_KIND_ZF32_X24S8_COMPRESSIBLE_DISABLE_PLC                             0xD /* R---V */
++#define NV_MMU_PTE_KIND_Z24S8_COMPRESSIBLE_DISABLE_PLC                                  0xE /* R---V */
++#define NV_MMU_PTE_KIND_SMSKED_MESSAGE                                                  0xF /* R---V */
++
++#define NV_MMU_VER3_PDE                                                      /* ----G */
++#define NV_MMU_VER3_PDE_IS_PTE                                           0:0 /* RWXVF */
++#define NV_MMU_VER3_PDE_IS_PTE_TRUE                                      0x1 /* RW--V */
++#define NV_MMU_VER3_PDE_IS_PTE_FALSE                                     0x0 /* RW--V */
++#define NV_MMU_VER3_PDE_VALID                                            0:0 /* RWXVF */
++#define NV_MMU_VER3_PDE_VALID_TRUE                                       0x1 /* RW--V */
++#define NV_MMU_VER3_PDE_VALID_FALSE                                      0x0 /* RW--V */
++#define NV_MMU_VER3_PDE_APERTURE                                         2:1 /* RWXVF */
++#define NV_MMU_VER3_PDE_APERTURE_INVALID                          0x00000000 /* RW--V */
++#define NV_MMU_VER3_PDE_APERTURE_VIDEO_MEMORY                     0x00000001 /* RW--V */
++#define NV_MMU_VER3_PDE_APERTURE_SYSTEM_COHERENT_MEMORY           0x00000002 /* RW--V */
++#define NV_MMU_VER3_PDE_APERTURE_SYSTEM_NON_COHERENT_MEMORY       0x00000003 /* RW--V */
++#define NV_MMU_VER3_PDE_PCF                                                                        5:3 /* RWXVF */
++#define NV_MMU_VER3_PDE_PCF_VALID_CACHED_ATS_ALLOWED__OR__INVALID_ATS_ALLOWED               0x00000000 /* RW--V */
++#define NV_MMU_VER3_PDE_PCF_VALID_CACHED_ATS_ALLOWED                                        0x00000000 /* RW--V */
++#define NV_MMU_VER3_PDE_PCF_INVALID_ATS_ALLOWED                                             0x00000000 /* RW--V */
++#define NV_MMU_VER3_PDE_PCF_VALID_UNCACHED_ATS_ALLOWED__OR__SPARSE_ATS_ALLOWED              0x00000001 /* RW--V */
++#define NV_MMU_VER3_PDE_PCF_VALID_UNCACHED_ATS_ALLOWED                                      0x00000001 /* RW--V */
++#define NV_MMU_VER3_PDE_PCF_SPARSE_ATS_ALLOWED                                              0x00000001 /* RW--V */
++#define NV_MMU_VER3_PDE_PCF_VALID_CACHED_ATS_NOT_ALLOWED__OR__INVALID_ATS_NOT_ALLOWED       0x00000002 /* RW--V */
++#define NV_MMU_VER3_PDE_PCF_VALID_CACHED_ATS_NOT_ALLOWED                                    0x00000002 /* RW--V */
++#define NV_MMU_VER3_PDE_PCF_INVALID_ATS_NOT_ALLOWED                                         0x00000002 /* RW--V */
++#define NV_MMU_VER3_PDE_PCF_VALID_UNCACHED_ATS_NOT_ALLOWED__OR__SPARSE_ATS_NOT_ALLOWED      0x00000003 /* RW--V */
++#define NV_MMU_VER3_PDE_PCF_VALID_UNCACHED_ATS_NOT_ALLOWED                                  0x00000003 /* RW--V */
++#define NV_MMU_VER3_PDE_PCF_SPARSE_ATS_NOT_ALLOWED                                          0x00000003 /* RW--V */
++#define NV_MMU_VER3_PDE_ADDRESS                                             51:12 /* RWXVF */
++#define NV_MMU_VER3_PDE_ADDRESS_SHIFT                                  0x0000000c /*       */
++#define NV_MMU_VER3_PDE__SIZE                                              8
++
++#define NV_MMU_VER3_DUAL_PDE                                                      /* ----G */
++#define NV_MMU_VER3_DUAL_PDE_IS_PTE                                           0:0 /* RWXVF */
++#define NV_MMU_VER3_DUAL_PDE_IS_PTE_TRUE                                      0x1 /* RW--V */
++#define NV_MMU_VER3_DUAL_PDE_IS_PTE_FALSE                                     0x0 /* RW--V */
++#define NV_MMU_VER3_DUAL_PDE_VALID                                            0:0 /* RWXVF */
++#define NV_MMU_VER3_DUAL_PDE_VALID_TRUE                                       0x1 /* RW--V */
++#define NV_MMU_VER3_DUAL_PDE_VALID_FALSE                                      0x0 /* RW--V */
++#define NV_MMU_VER3_DUAL_PDE_APERTURE_BIG                                     2:1 /* RWXVF */
++#define NV_MMU_VER3_DUAL_PDE_APERTURE_BIG_INVALID                      0x00000000 /* RW--V */
++#define NV_MMU_VER3_DUAL_PDE_APERTURE_BIG_VIDEO_MEMORY                 0x00000001 /* RW--V */
++#define NV_MMU_VER3_DUAL_PDE_APERTURE_BIG_SYSTEM_COHERENT_MEMORY       0x00000002 /* RW--V */
++#define NV_MMU_VER3_DUAL_PDE_APERTURE_BIG_SYSTEM_NON_COHERENT_MEMORY   0x00000003 /* RW--V */
++#define NV_MMU_VER3_DUAL_PDE_PCF_BIG                                                                        5:3 /* RWXVF */
++#define NV_MMU_VER3_DUAL_PDE_PCF_BIG_VALID_CACHED_ATS_ALLOWED__OR__INVALID_ATS_ALLOWED               0x00000000 /* RW--V */
++#define NV_MMU_VER3_DUAL_PDE_PCF_BIG_VALID_CACHED_ATS_ALLOWED                                        0x00000000 /* RW--V */
++#define NV_MMU_VER3_DUAL_PDE_PCF_BIG_INVALID_ATS_ALLOWED                                             0x00000000 /* RW--V */
++#define NV_MMU_VER3_DUAL_PDE_PCF_BIG_VALID_UNCACHED_ATS_ALLOWED__OR__SPARSE_ATS_ALLOWED              0x00000001 /* RW--V */
++#define NV_MMU_VER3_DUAL_PDE_PCF_BIG_VALID_UNCACHED_ATS_ALLOWED                                      0x00000001 /* RW--V */
++#define NV_MMU_VER3_DUAL_PDE_PCF_BIG_SPARSE_ATS_ALLOWED                                              0x00000001 /* RW--V */
++#define NV_MMU_VER3_DUAL_PDE_PCF_BIG_VALID_CACHED_ATS_NOT_ALLOWED__OR__INVALID_ATS_NOT_ALLOWED       0x00000002 /* RW--V */
++#define NV_MMU_VER3_DUAL_PDE_PCF_BIG_VALID_CACHED_ATS_NOT_ALLOWED                                    0x00000002 /* RW--V */
++#define NV_MMU_VER3_DUAL_PDE_PCF_BIG_INVALID_ATS_NOT_ALLOWED                                         0x00000002 /* RW--V */
++#define NV_MMU_VER3_DUAL_PDE_PCF_BIG_VALID_UNCACHED_ATS_NOT_ALLOWED__OR__SPARSE_ATS_NOT_ALLOWED      0x00000003 /* RW--V */
++#define NV_MMU_VER3_DUAL_PDE_PCF_BIG_VALID_UNCACHED_ATS_NOT_ALLOWED                                  0x00000003 /* RW--V */
++#define NV_MMU_VER3_DUAL_PDE_PCF_BIG_SPARSE_ATS_NOT_ALLOWED                                          0x00000003 /* RW--V */
++#define NV_MMU_VER3_DUAL_PDE_ADDRESS_BIG                                     51:8 /* RWXVF */
++#define NV_MMU_VER3_DUAL_PDE_APERTURE_SMALL                                 66:65 /* RWXVF */
++#define NV_MMU_VER3_DUAL_PDE_APERTURE_SMALL_INVALID                    0x00000000 /* RW--V */
++#define NV_MMU_VER3_DUAL_PDE_APERTURE_SMALL_VIDEO_MEMORY               0x00000001 /* RW--V */
++#define NV_MMU_VER3_DUAL_PDE_APERTURE_SMALL_SYSTEM_COHERENT_MEMORY     0x00000002 /* RW--V */
++#define NV_MMU_VER3_DUAL_PDE_APERTURE_SMALL_SYSTEM_NON_COHERENT_MEMORY 0x00000003 /* RW--V */
++#define NV_MMU_VER3_DUAL_PDE_PCF_SMALL                                                                      69:67 /* RWXVF */
++#define NV_MMU_VER3_DUAL_PDE_PCF_SMALL_VALID_CACHED_ATS_ALLOWED__OR__INVALID_ATS_ALLOWED               0x00000000 /* RW--V */
++#define NV_MMU_VER3_DUAL_PDE_PCF_SMALL_VALID_CACHED_ATS_ALLOWED                                        0x00000000 /* RW--V */
++#define NV_MMU_VER3_DUAL_PDE_PCF_SMALL_INVALID_ATS_ALLOWED                                             0x00000000 /* RW--V */
++#define NV_MMU_VER3_DUAL_PDE_PCF_SMALL_VALID_UNCACHED_ATS_ALLOWED__OR__SPARSE_ATS_ALLOWED              0x00000001 /* RW--V */
++#define NV_MMU_VER3_DUAL_PDE_PCF_SMALL_VALID_UNCACHED_ATS_ALLOWED                                      0x00000001 /* RW--V */
++#define NV_MMU_VER3_DUAL_PDE_PCF_SMALL_SPARSE_ATS_ALLOWED                                              0x00000001 /* RW--V */
++#define NV_MMU_VER3_DUAL_PDE_PCF_SMALL_VALID_CACHED_ATS_NOT_ALLOWED__OR__INVALID_ATS_NOT_ALLOWED       0x00000002 /* RW--V */
++#define NV_MMU_VER3_DUAL_PDE_PCF_SMALL_VALID_CACHED_ATS_NOT_ALLOWED                                    0x00000002 /* RW--V */
++#define NV_MMU_VER3_DUAL_PDE_PCF_SMALL_INVALID_ATS_NOT_ALLOWED                                         0x00000002 /* RW--V */
++#define NV_MMU_VER3_DUAL_PDE_PCF_SMALL_VALID_UNCACHED_ATS_NOT_ALLOWED__OR__SPARSE_ATS_NOT_ALLOWED      0x00000003 /* RW--V */
++#define NV_MMU_VER3_DUAL_PDE_PCF_SMALL_VALID_UNCACHED_ATS_NOT_ALLOWED                                  0x00000003 /* RW--V */
++#define NV_MMU_VER3_DUAL_PDE_PCF_SMALL_SPARSE_ATS_NOT_ALLOWED                                          0x00000003 /* RW--V */
++#define NV_MMU_VER3_DUAL_PDE_ADDRESS_SMALL                                 115:76 /* RWXVF */
++#define NV_MMU_VER3_DUAL_PDE_ADDRESS_SHIFT                             0x0000000c /*       */
++#define NV_MMU_VER3_DUAL_PDE_ADDRESS_BIG_SHIFT 8 /*       */
++#define NV_MMU_VER3_DUAL_PDE__SIZE                                             16
++
++#define NV_MMU_VER3_PTE                                                      /* ----G */
++#define NV_MMU_VER3_PTE_VALID                                            0:0 /* RWXVF */
++#define NV_MMU_VER3_PTE_VALID_TRUE                                       0x1 /* RW--V */
++#define NV_MMU_VER3_PTE_VALID_FALSE                                      0x0 /* RW--V */
++#define NV_MMU_VER3_PTE_APERTURE                                         2:1 /* RWXVF */
++#define NV_MMU_VER3_PTE_APERTURE_VIDEO_MEMORY                     0x00000000 /* RW--V */
++#define NV_MMU_VER3_PTE_APERTURE_PEER_MEMORY                      0x00000001 /* RW--V */
++#define NV_MMU_VER3_PTE_APERTURE_SYSTEM_COHERENT_MEMORY           0x00000002 /* RW--V */
++#define NV_MMU_VER3_PTE_APERTURE_SYSTEM_NON_COHERENT_MEMORY       0x00000003 /* RW--V */
++#define NV_MMU_VER3_PTE_PCF                                                                        7:3 /* RWXVF */
++#define NV_MMU_VER3_PTE_PCF_INVALID                                                         0x00000000 /* RW--V */
++#define NV_MMU_VER3_PTE_PCF_SPARSE                                                          0x00000001 /* RW--V */
++#define NV_MMU_VER3_PTE_PCF_MAPPING_NOWHERE                                                 0x00000002 /* RW--V */
++#define NV_MMU_VER3_PTE_PCF_NO_VALID_4KB_PAGE                                               0x00000003 /* RW--V */
++#define NV_MMU_VER3_PTE_PCF_REGULAR_RW_ATOMIC_CACHED_ACE                                    0x00000000 /* RW--V */
++#define NV_MMU_VER3_PTE_PCF_REGULAR_RW_ATOMIC_UNCACHED_ACE                                  0x00000001 /* RW--V */
++#define NV_MMU_VER3_PTE_PCF_PRIVILEGE_RW_ATOMIC_CACHED_ACE                                  0x00000002 /* RW--V */
++#define NV_MMU_VER3_PTE_PCF_PRIVILEGE_RW_ATOMIC_UNCACHED_ACE                                0x00000003 /* RW--V */
++#define NV_MMU_VER3_PTE_PCF_REGULAR_RO_ATOMIC_CACHED_ACE                                    0x00000004 /* RW--V */
++#define NV_MMU_VER3_PTE_PCF_REGULAR_RO_ATOMIC_UNCACHED_ACE                                   0x00000005 /* RW--V */
++#define NV_MMU_VER3_PTE_PCF_PRIVILEGE_RO_ATOMIC_CACHED_ACE                                  0x00000006 /* RW--V */
++#define NV_MMU_VER3_PTE_PCF_PRIVILEGE_RO_ATOMIC_UNCACHED_ACE                                0x00000007 /* RW--V */
++#define NV_MMU_VER3_PTE_PCF_REGULAR_RW_NO_ATOMIC_CACHED_ACE                                 0x00000008 /* RW--V */
++#define NV_MMU_VER3_PTE_PCF_REGULAR_RW_NO_ATOMIC_UNCACHED_ACE                               0x00000009 /* RW--V */
++#define NV_MMU_VER3_PTE_PCF_PRIVILEGE_RW_NO_ATOMIC_CACHED_ACE                               0x0000000A /* RW--V */
++#define NV_MMU_VER3_PTE_PCF_PRIVILEGE_RW_NO_ATOMIC_UNCACHED_ACE                             0x0000000B /* RW--V */
++#define NV_MMU_VER3_PTE_PCF_REGULAR_RO_NO_ATOMIC_CACHED_ACE                                 0x0000000C /* RW--V */
++#define NV_MMU_VER3_PTE_PCF_REGULAR_RO_NO_ATOMIC_UNCACHED_ACE                               0x0000000D /* RW--V */
++#define NV_MMU_VER3_PTE_PCF_PRIVILEGE_RO_NO_ATOMIC_CACHED_ACE                               0x0000000E /* RW--V */
++#define NV_MMU_VER3_PTE_PCF_PRIVILEGE_RO_NO_ATOMIC_UNCACHED_ACE                             0x0000000F /* RW--V */
++#define NV_MMU_VER3_PTE_PCF_REGULAR_RW_ATOMIC_CACHED_ACD                                    0x00000010 /* RW--V */
++#define NV_MMU_VER3_PTE_PCF_REGULAR_RW_ATOMIC_UNCACHED_ACD                                  0x00000011 /* RW--V */
++#define NV_MMU_VER3_PTE_PCF_PRIVILEGE_RW_ATOMIC_CACHED_ACD                                  0x00000012 /* RW--V */
++#define NV_MMU_VER3_PTE_PCF_PRIVILEGE_RW_ATOMIC_UNCACHED_ACD                                0x00000013 /* RW--V */
++#define NV_MMU_VER3_PTE_PCF_REGULAR_RO_ATOMIC_CACHED_ACD                                    0x00000014 /* RW--V */
++#define NV_MMU_VER3_PTE_PCF_REGULAR_RO_ATOMIC_UNCACHED_ACD                                  0x00000015 /* RW--V */
++#define NV_MMU_VER3_PTE_PCF_PRIVILEGE_RO_ATOMIC_CACHED_ACD                                  0x00000016 /* RW--V */
++#define NV_MMU_VER3_PTE_PCF_PRIVILEGE_RO_ATOMIC_UNCACHED_ACD                                0x00000017 /* RW--V */
++#define NV_MMU_VER3_PTE_PCF_REGULAR_RW_NO_ATOMIC_CACHED_ACD                                 0x00000018 /* RW--V */
++#define NV_MMU_VER3_PTE_PCF_REGULAR_RW_NO_ATOMIC_UNCACHED_ACD                               0x00000019 /* RW--V */
++#define NV_MMU_VER3_PTE_PCF_PRIVILEGE_RW_NO_ATOMIC_CACHED_ACD                               0x0000001A /* RW--V */
++#define NV_MMU_VER3_PTE_PCF_PRIVILEGE_RW_NO_ATOMIC_UNCACHED_ACD                             0x0000001B /* RW--V */
++#define NV_MMU_VER3_PTE_PCF_REGULAR_RO_NO_ATOMIC_CACHED_ACD                                 0x0000001C /* RW--V */
++#define NV_MMU_VER3_PTE_PCF_REGULAR_RO_NO_ATOMIC_UNCACHED_ACD                               0x0000001D /* RW--V */
++#define NV_MMU_VER3_PTE_PCF_PRIVILEGE_RO_NO_ATOMIC_CACHED_ACD                               0x0000001E /* RW--V */
++#define NV_MMU_VER3_PTE_PCF_PRIVILEGE_RO_NO_ATOMIC_UNCACHED_ACD                             0x0000001F /* RW--V */
++#define NV_MMU_VER3_PTE_KIND                                           11:8 /* RWXVF */
++#define NV_MMU_VER3_PTE_ADDRESS                                         51:12 /* RWXVF */
++#define NV_MMU_VER3_PTE_ADDRESS_SYS                                     51:12 /* RWXVF */
++#define NV_MMU_VER3_PTE_ADDRESS_PEER                                    51:12 /* RWXVF */
++#define NV_MMU_VER3_PTE_ADDRESS_VID                                     39:12 /* RWXVF */
++#define NV_MMU_VER3_PTE_PEER_ID                63:(64-3) /* RWXVF */
++#define NV_MMU_VER3_PTE_PEER_ID_0                                 0x00000000 /* RW--V */
++#define NV_MMU_VER3_PTE_PEER_ID_1                                 0x00000001 /* RW--V */
++#define NV_MMU_VER3_PTE_PEER_ID_2                                 0x00000002 /* RW--V */
++#define NV_MMU_VER3_PTE_PEER_ID_3                                 0x00000003 /* RW--V */
++#define NV_MMU_VER3_PTE_PEER_ID_4                                 0x00000004 /* RW--V */
++#define NV_MMU_VER3_PTE_PEER_ID_5                                 0x00000005 /* RW--V */
++#define NV_MMU_VER3_PTE_PEER_ID_6                                 0x00000006 /* RW--V */
++#define NV_MMU_VER3_PTE_PEER_ID_7                                 0x00000007 /* RW--V */
++#define NV_MMU_VER3_PTE_ADDRESS_SHIFT                             0x0000000c /*       */
++#define NV_MMU_VER3_PTE__SIZE                                              8
++
++#endif // __gh100_dev_mmu_h__
+diff --git a/drivers/gpu/drm/nouveau/include/nvhw/ref/gh100/dev_riscv_pri.h b/drivers/gpu/drm/nouveau/include/nvhw/ref/gh100/dev_riscv_pri.h
+new file mode 100644
+index 000000000000..8ff4663168d2
+--- /dev/null
++++ b/drivers/gpu/drm/nouveau/include/nvhw/ref/gh100/dev_riscv_pri.h
+@@ -0,0 +1,14 @@
++/* SPDX-License-Identifier: MIT
++ *
++ * Copyright (c) 2025, NVIDIA CORPORATION. All rights reserved.
++ */
++#ifndef __gh100_dev_riscv_pri_h__
++#define __gh100_dev_riscv_pri_h__
++
++#define NV_PRISCV_RISCV_CPUCTL                                                                         0x00000388     /* RW-4R */
++#define NV_PRISCV_RISCV_CPUCTL_HALTED                                                                  4:4            /* R-IVF */
++#define NV_PRISCV_RISCV_CPUCTL_HALTED_INIT                                                             0x00000001     /* R-I-V */
++#define NV_PRISCV_RISCV_CPUCTL_HALTED_TRUE                                                             0x00000001     /* R---V */
++#define NV_PRISCV_RISCV_CPUCTL_HALTED_FALSE                                                            0x00000000     /* R---V */
++
++#endif // __gh100_dev_riscv_pri_h__
+diff --git a/drivers/gpu/drm/nouveau/include/nvhw/ref/gh100/dev_therm.h b/drivers/gpu/drm/nouveau/include/nvhw/ref/gh100/dev_therm.h
+new file mode 100644
+index 000000000000..49b4816cb00b
+--- /dev/null
++++ b/drivers/gpu/drm/nouveau/include/nvhw/ref/gh100/dev_therm.h
+@@ -0,0 +1,17 @@
++/* SPDX-License-Identifier: MIT
++ *
++ * Copyright (c) 2025, NVIDIA CORPORATION. All rights reserved.
++ */
++#ifndef __gh100_dev_therm_h__
++#define __gh100_dev_therm_h__
++
++#define NV_THERM_I2CS_SCRATCH                                                  0x000200bc /* RW-4R */
++#define NV_THERM_I2CS_SCRATCH_DATA                                                   31:0 /* RWIVF */
++#define NV_THERM_I2CS_SCRATCH_DATA_INIT                                        0x00000000 /* RWI-V */
++
++#define NV_THERM_I2CS_SCRATCH_FSP_BOOT_COMPLETE                                   NV_THERM_I2CS_SCRATCH
++#define NV_THERM_I2CS_SCRATCH_FSP_BOOT_COMPLETE_STATUS                                             31:0
++#define NV_THERM_I2CS_SCRATCH_FSP_BOOT_COMPLETE_STATUS_SUCCESS                               0x000000FF
++#define NV_THERM_I2CS_SCRATCH_FSP_BOOT_COMPLETE_STATUS_FAILED                                0x00000000
++
++#endif // __gh100_dev_therm_h__
+diff --git a/drivers/gpu/drm/nouveau/include/nvhw/ref/gh100/dev_xtl_ep_pri.h b/drivers/gpu/drm/nouveau/include/nvhw/ref/gh100/dev_xtl_ep_pri.h
+new file mode 100644
+index 000000000000..12b49e9894a2
+--- /dev/null
++++ b/drivers/gpu/drm/nouveau/include/nvhw/ref/gh100/dev_xtl_ep_pri.h
+@@ -0,0 +1,10 @@
++/* SPDX-License-Identifier: MIT
++ *
++ * Copyright (c) 2025, NVIDIA CORPORATION. All rights reserved.
++ */
++#ifndef __gh100_dev_xtl_ep_pri_h__
++#define __gh100_dev_xtl_ep_pri_h__
++
++#define NV_EP_PCFGM                                                              0x92FFF:0x92000        /* RW--D */
++
++#endif // __gh100_dev_xtl_ep_pri_h__
+diff --git a/drivers/gpu/drm/nouveau/include/nvhw/ref/gh100/pri_nv_xal_ep.h b/drivers/gpu/drm/nouveau/include/nvhw/ref/gh100/pri_nv_xal_ep.h
+new file mode 100644
+index 000000000000..1a891bd33fa3
+--- /dev/null
++++ b/drivers/gpu/drm/nouveau/include/nvhw/ref/gh100/pri_nv_xal_ep.h
+@@ -0,0 +1,13 @@
++/* SPDX-License-Identifier: MIT
++ *
++ * Copyright (c) 2025, NVIDIA CORPORATION. All rights reserved.
++ */
++#ifndef __gh100_pri_nv_xal_ep_h__
++#define __gh100_pri_nv_xal_ep_h__
++
++#define NV_XAL_EP_BAR0_WINDOW_BASE_SHIFT                                         0x000010
++#define NV_XAL_EP_BAR0_WINDOW_BASE                                                   21:0
++#define NV_XAL_EP_BAR0_WINDOW                                                  0x0010fd40
++
++#endif // __gh100_pri_nv_xal_ep_h__
++
+diff --git a/drivers/gpu/drm/nouveau/include/nvif/cl0080.h b/drivers/gpu/drm/nouveau/include/nvif/cl0080.h
+index ea937fa7bc55..60a52ef52071 100644
+--- a/drivers/gpu/drm/nouveau/include/nvif/cl0080.h
++++ b/drivers/gpu/drm/nouveau/include/nvif/cl0080.h
+@@ -29,6 +29,7 @@ struct nv_device_info_v0 {
+ #define NV_DEVICE_INFO_V0_TURING                                           0x0c
+ #define NV_DEVICE_INFO_V0_AMPERE                                           0x0d
+ #define NV_DEVICE_INFO_V0_ADA                                              0x0e
++#define NV_DEVICE_INFO_V0_HOPPER                                           0x0f
+ 	__u8  family;
+ 	__u8  pad06[2];
+ 	__u64 ram_size;
+diff --git a/drivers/gpu/drm/nouveau/include/nvif/class.h b/drivers/gpu/drm/nouveau/include/nvif/class.h
+index 71a2a53bff7f..83acf367a65c 100644
+--- a/drivers/gpu/drm/nouveau/include/nvif/class.h
++++ b/drivers/gpu/drm/nouveau/include/nvif/class.h
+@@ -63,6 +63,7 @@
+ #define VOLTA_USERMODE_A                                             0x0000c361
+ #define TURING_USERMODE_A                                            0x0000c461
+ #define AMPERE_USERMODE_A                                            0x0000c561
++#define HOPPER_USERMODE_A                                            0x0000c661
+ 
+ #define MAXWELL_FAULT_BUFFER_A                        /* clb069.h */ 0x0000b069
+ #define VOLTA_FAULT_BUFFER_A                          /* clb069.h */ 0x0000c369
+@@ -85,6 +86,7 @@
+ #define TURING_CHANNEL_GPFIFO_A                       /* if0020.h */ 0x0000c46f
+ #define AMPERE_CHANNEL_GPFIFO_A                       /* if0020.h */ 0x0000c56f
+ #define AMPERE_CHANNEL_GPFIFO_B                       /* if0020.h */ 0x0000c76f
++#define HOPPER_CHANNEL_GPFIFO_A                                      0x0000c86f
+ 
+ #define NV50_DISP                                     /* if0010.h */ 0x00005070
+ #define G82_DISP                                      /* if0010.h */ 0x00008270
+@@ -194,8 +196,11 @@
+ 
+ #define ADA_A                                         /* cl9097.h */ 0x0000c997
+ 
++#define HOPPER_A                                                     0x0000cb97
++
+ #define NV74_BSP                                                     0x000074b0
+ 
++#define NVB8B0_VIDEO_DECODER                                         0x0000b8b0
+ #define NVC4B0_VIDEO_DECODER                                         0x0000c4b0
+ #define NVC6B0_VIDEO_DECODER                                         0x0000c6b0
+ #define NVC7B0_VIDEO_DECODER                                         0x0000c7b0
+@@ -228,6 +233,7 @@
+ #define TURING_DMA_COPY_A                                            0x0000c5b5
+ #define AMPERE_DMA_COPY_A                                            0x0000c6b5
+ #define AMPERE_DMA_COPY_B                                            0x0000c7b5
++#define HOPPER_DMA_COPY_A                                            0x0000c8b5
+ 
+ #define NVC4B7_VIDEO_ENCODER                                         0x0000c4b7
+ #define NVC7B7_VIDEO_ENCODER                                         0x0000c7b7
+@@ -250,12 +256,15 @@
+ #define AMPERE_COMPUTE_A                                             0x0000c6c0
+ #define AMPERE_COMPUTE_B                                             0x0000c7c0
+ #define ADA_COMPUTE_A                                                0x0000c9c0
++#define HOPPER_COMPUTE_A                                             0x0000cbc0
+ 
+ #define NV74_CIPHER                                                  0x000074c1
+ 
++#define NVB8D1_VIDEO_NVJPG                                           0x0000b8d1
+ #define NVC4D1_VIDEO_NVJPG                                           0x0000c4d1
+ #define NVC9D1_VIDEO_NVJPG                                           0x0000c9d1
+ 
++#define NVB8FA_VIDEO_OFA                                             0x0000b8fa
+ #define NVC6FA_VIDEO_OFA                                             0x0000c6fa
+ #define NVC7FA_VIDEO_OFA                                             0x0000c7fa
+ #define NVC9FA_VIDEO_OFA                                             0x0000c9fa
 diff --git a/drivers/gpu/drm/nouveau/include/nvkm/core/device.h b/drivers/gpu/drm/nouveau/include/nvkm/core/device.h
-index 46afb877a296..f50f52d4dc3f 100644
+index f50f52d4dc3f..926542350abc 100644
 --- a/drivers/gpu/drm/nouveau/include/nvkm/core/device.h
 +++ b/drivers/gpu/drm/nouveau/include/nvkm/core/device.h
-@@ -77,6 +77,13 @@ struct nvkm_device {
- struct nvkm_subdev *nvkm_device_subdev(struct nvkm_device *, int type, int inst);
- struct nvkm_engine *nvkm_device_engine(struct nvkm_device *, int type, int inst);
+@@ -46,6 +46,7 @@ struct nvkm_device {
+ 		GV100    = 0x140,
+ 		TU100    = 0x160,
+ 		GA100    = 0x170,
++		GH100    = 0x180,
+ 		AD100    = 0x190,
+ 	} card_type;
+ 	u32 chipset;
+@@ -131,6 +132,9 @@ struct nvkm_device *nvkm_device_find(u64 name);
+ 	_temp;                                                                 \
+ })
  
-+enum nvkm_bar_id {
-+	NVKM_BAR_INVALID = 0,
-+	NVKM_BAR0_PRI,
-+	NVKM_BAR1_FB,
-+	NVKM_BAR2_INST,
++#define NVKM_RD32_(p,o,dr) nvkm_rd32((p), (o) + (dr))
++#define NVKM_RD32(p,A...) DRF_RV(NVKM_RD32_, (p), 0, ##A)
++
+ void nvkm_device_del(struct nvkm_device **);
+ 
+ struct nvkm_device_oclass {
+diff --git a/drivers/gpu/drm/nouveau/include/nvkm/core/layout.h b/drivers/gpu/drm/nouveau/include/nvkm/core/layout.h
+index 2debef27bd95..d92ffd17b729 100644
+--- a/drivers/gpu/drm/nouveau/include/nvkm/core/layout.h
++++ b/drivers/gpu/drm/nouveau/include/nvkm/core/layout.h
+@@ -1,4 +1,5 @@
+ /* SPDX-License-Identifier: MIT */
++NVKM_LAYOUT_ONCE(NVKM_SUBDEV_FSP     , struct nvkm_fsp     ,      fsp)
+ NVKM_LAYOUT_ONCE(NVKM_SUBDEV_GSP     , struct nvkm_gsp     ,      gsp)
+ NVKM_LAYOUT_ONCE(NVKM_SUBDEV_TOP     , struct nvkm_top     ,      top)
+ NVKM_LAYOUT_ONCE(NVKM_SUBDEV_VFN     , struct nvkm_vfn     ,      vfn)
+diff --git a/drivers/gpu/drm/nouveau/include/nvkm/subdev/fb.h b/drivers/gpu/drm/nouveau/include/nvkm/subdev/fb.h
+index 5b798a1a313d..c114903ce388 100644
+--- a/drivers/gpu/drm/nouveau/include/nvkm/subdev/fb.h
++++ b/drivers/gpu/drm/nouveau/include/nvkm/subdev/fb.h
+@@ -102,6 +102,7 @@ int gv100_fb_new(struct nvkm_device *, enum nvkm_subdev_type, int inst, struct n
+ int tu102_fb_new(struct nvkm_device *, enum nvkm_subdev_type, int inst, struct nvkm_fb **);
+ int ga100_fb_new(struct nvkm_device *, enum nvkm_subdev_type, int inst, struct nvkm_fb **);
+ int ga102_fb_new(struct nvkm_device *, enum nvkm_subdev_type, int inst, struct nvkm_fb **);
++int gh100_fb_new(struct nvkm_device *, enum nvkm_subdev_type, int inst, struct nvkm_fb **);
+ 
+ #include <subdev/bios.h>
+ #include <subdev/bios/ramcfg.h>
+diff --git a/drivers/gpu/drm/nouveau/include/nvkm/subdev/fsp.h b/drivers/gpu/drm/nouveau/include/nvkm/subdev/fsp.h
+new file mode 100644
+index 000000000000..2a8c1d5a65f9
+--- /dev/null
++++ b/drivers/gpu/drm/nouveau/include/nvkm/subdev/fsp.h
+@@ -0,0 +1,22 @@
++/* SPDX-License-Identifier: MIT
++ *
++ * Copyright (c) 2025, NVIDIA CORPORATION. All rights reserved.
++ */
++#ifndef __NVKM_FSP_H__
++#define __NVKM_FSP_H__
++#include <core/subdev.h>
++#include <core/falcon.h>
++
++struct nvkm_fsp {
++	const struct nvkm_fsp_func *func;
++	struct nvkm_subdev subdev;
++
++	struct nvkm_falcon falcon;
 +};
 +
- struct nvkm_device_func {
- 	struct nvkm_device_pci *(*pci)(struct nvkm_device *);
- 	struct nvkm_device_tegra *(*tegra)(struct nvkm_device *);
-@@ -85,8 +92,8 @@ struct nvkm_device_func {
- 	int (*init)(struct nvkm_device *);
- 	void (*fini)(struct nvkm_device *, bool suspend);
- 	int (*irq)(struct nvkm_device *);
--	resource_size_t (*resource_addr)(struct nvkm_device *, unsigned bar);
--	resource_size_t (*resource_size)(struct nvkm_device *, unsigned bar);
-+	resource_size_t (*resource_addr)(struct nvkm_device *, enum nvkm_bar_id);
-+	resource_size_t (*resource_size)(struct nvkm_device *, enum nvkm_bar_id);
- 	bool cpu_coherent;
- };
++bool nvkm_fsp_verify_gsp_fmc(struct nvkm_fsp *, u32 hash_size, u32 pkey_size, u32 sig_size);
++int nvkm_fsp_boot_gsp_fmc(struct nvkm_fsp *, u64 args_addr, u32 rsvd_size, bool resume,
++			  u64 img_addr, const u8 *hash, const u8 *pkey, const u8 *sig);
++
++int gh100_fsp_new(struct nvkm_device *, enum nvkm_subdev_type, int inst, struct nvkm_fsp **);
++#endif
+diff --git a/drivers/gpu/drm/nouveau/include/nvkm/subdev/gsp.h b/drivers/gpu/drm/nouveau/include/nvkm/subdev/gsp.h
+index 4ad07f3ced69..8f611b2503b7 100644
+--- a/drivers/gpu/drm/nouveau/include/nvkm/subdev/gsp.h
++++ b/drivers/gpu/drm/nouveau/include/nvkm/subdev/gsp.h
+@@ -68,6 +68,9 @@ struct nvkm_gsp {
+ 			const struct firmware *load;
+ 			const struct firmware *unload;
+ 		} booter;
++
++		const struct firmware *fmc;
++
+ 		const struct firmware *bl;
+ 		const struct firmware *rm;
+ 	} fws;
+@@ -113,6 +116,15 @@ struct nvkm_gsp {
+ 		struct nvkm_falcon_fw unload;
+ 	} booter;
  
-diff --git a/drivers/gpu/drm/nouveau/nouveau_abi16.c b/drivers/gpu/drm/nouveau/nouveau_abi16.c
-index 2a0617e5fe2a..4c100005ef81 100644
---- a/drivers/gpu/drm/nouveau/nouveau_abi16.c
-+++ b/drivers/gpu/drm/nouveau/nouveau_abi16.c
-@@ -315,7 +315,7 @@ nouveau_abi16_ioctl_getparam(ABI16_IOCTL_ARGS)
- 		break;
- 	}
- 	case NOUVEAU_GETPARAM_VRAM_BAR_SIZE:
--		getparam->value = nvkm_device->func->resource_size(nvkm_device, 1);
-+		getparam->value = nvkm_device->func->resource_size(nvkm_device, NVKM_BAR1_FB);
- 		break;
- 	case NOUVEAU_GETPARAM_VRAM_USED: {
- 		struct ttm_resource_manager *vram_mgr = ttm_manager_type(&drm->ttm.bdev, TTM_PL_VRAM);
++	struct {
++		struct nvkm_gsp_mem fw;
++		u8 *hash;
++		u8 *pkey;
++		u8 *sig;
++
++		struct nvkm_gsp_mem args;
++	} fmc;
++
+ 	struct {
+ 		struct nvkm_gsp_mem fw;
+ 		u32 code_offset;
+@@ -478,5 +490,6 @@ int tu102_gsp_new(struct nvkm_device *, enum nvkm_subdev_type, int, struct nvkm_
+ int tu116_gsp_new(struct nvkm_device *, enum nvkm_subdev_type, int, struct nvkm_gsp **);
+ int ga100_gsp_new(struct nvkm_device *, enum nvkm_subdev_type, int, struct nvkm_gsp **);
+ int ga102_gsp_new(struct nvkm_device *, enum nvkm_subdev_type, int, struct nvkm_gsp **);
++int gh100_gsp_new(struct nvkm_device *, enum nvkm_subdev_type, int, struct nvkm_gsp **);
+ int ad102_gsp_new(struct nvkm_device *, enum nvkm_subdev_type, int, struct nvkm_gsp **);
+ #endif
+diff --git a/drivers/gpu/drm/nouveau/include/nvkm/subdev/instmem.h b/drivers/gpu/drm/nouveau/include/nvkm/subdev/instmem.h
+index 7d93c742ee59..db835cf7b8ac 100644
+--- a/drivers/gpu/drm/nouveau/include/nvkm/subdev/instmem.h
++++ b/drivers/gpu/drm/nouveau/include/nvkm/subdev/instmem.h
+@@ -36,4 +36,5 @@ int nv04_instmem_new(struct nvkm_device *, enum nvkm_subdev_type, int, struct nv
+ int nv40_instmem_new(struct nvkm_device *, enum nvkm_subdev_type, int, struct nvkm_instmem **);
+ int nv50_instmem_new(struct nvkm_device *, enum nvkm_subdev_type, int, struct nvkm_instmem **);
+ int gk20a_instmem_new(struct nvkm_device *, enum nvkm_subdev_type, int, struct nvkm_instmem **);
++int gh100_instmem_new(struct nvkm_device *, enum nvkm_subdev_type, int, struct nvkm_instmem **);
+ #endif
+diff --git a/drivers/gpu/drm/nouveau/include/nvkm/subdev/mmu.h b/drivers/gpu/drm/nouveau/include/nvkm/subdev/mmu.h
+index 4cab139f3236..abcb0dbcde70 100644
+--- a/drivers/gpu/drm/nouveau/include/nvkm/subdev/mmu.h
++++ b/drivers/gpu/drm/nouveau/include/nvkm/subdev/mmu.h
+@@ -166,4 +166,5 @@ int gp100_mmu_new(struct nvkm_device *, enum nvkm_subdev_type, int inst, struct
+ int gp10b_mmu_new(struct nvkm_device *, enum nvkm_subdev_type, int inst, struct nvkm_mmu **);
+ int gv100_mmu_new(struct nvkm_device *, enum nvkm_subdev_type, int inst, struct nvkm_mmu **);
+ int tu102_mmu_new(struct nvkm_device *, enum nvkm_subdev_type, int inst, struct nvkm_mmu **);
++int gh100_mmu_new(struct nvkm_device *, enum nvkm_subdev_type, int inst, struct nvkm_mmu **);
+ #endif
+diff --git a/drivers/gpu/drm/nouveau/include/nvkm/subdev/pci.h b/drivers/gpu/drm/nouveau/include/nvkm/subdev/pci.h
+index 3c103101d5fc..112b674ed9c8 100644
+--- a/drivers/gpu/drm/nouveau/include/nvkm/subdev/pci.h
++++ b/drivers/gpu/drm/nouveau/include/nvkm/subdev/pci.h
+@@ -50,6 +50,7 @@ int gf100_pci_new(struct nvkm_device *, enum nvkm_subdev_type, int inst, struct
+ int gf106_pci_new(struct nvkm_device *, enum nvkm_subdev_type, int inst, struct nvkm_pci **);
+ int gk104_pci_new(struct nvkm_device *, enum nvkm_subdev_type, int inst, struct nvkm_pci **);
+ int gp100_pci_new(struct nvkm_device *, enum nvkm_subdev_type, int inst, struct nvkm_pci **);
++int gh100_pci_new(struct nvkm_device *, enum nvkm_subdev_type, int inst, struct nvkm_pci **);
+ 
+ /* pcie functions */
+ int nvkm_pcie_set_link(struct nvkm_pci *, enum nvkm_pcie_speed, u8 width);
 diff --git a/drivers/gpu/drm/nouveau/nouveau_bo.c b/drivers/gpu/drm/nouveau/nouveau_bo.c
-index 2016c1e7242f..9ab8380feb39 100644
+index 9ab8380feb39..fbe0144927e8 100644
 --- a/drivers/gpu/drm/nouveau/nouveau_bo.c
 +++ b/drivers/gpu/drm/nouveau/nouveau_bo.c
-@@ -1204,7 +1204,7 @@ nouveau_ttm_io_mem_reserve(struct ttm_device *bdev, struct ttm_resource *reg)
- 		fallthrough;	/* tiled memory */
- 	case TTM_PL_VRAM:
- 		reg->bus.offset = (reg->start << PAGE_SHIFT) +
--			device->func->resource_addr(device, 1);
-+			device->func->resource_addr(device, NVKM_BAR1_FB);
- 		reg->bus.is_iomem = true;
- 
- 		/* Some BARs do not support being ioremapped WC */
-@@ -1295,7 +1295,7 @@ vm_fault_t nouveau_ttm_fault_reserve_notify(struct ttm_buffer_object *bo)
- 	struct nouveau_drm *drm = nouveau_bdev(bo->bdev);
- 	struct nouveau_bo *nvbo = nouveau_bo(bo);
- 	struct nvkm_device *device = nvxx_device(drm);
--	u32 mappable = device->func->resource_size(device, 1) >> PAGE_SHIFT;
-+	u32 mappable = device->func->resource_size(device, NVKM_BAR1_FB) >> PAGE_SHIFT;
- 	int i, ret;
- 
- 	/* as long as the bo isn't in vram, and isn't tiled, we've got
+@@ -923,6 +923,7 @@ nouveau_bo_move_init(struct nouveau_drm *drm)
+ 			    struct ttm_resource *, struct ttm_resource *);
+ 		int (*init)(struct nouveau_channel *, u32 handle);
+ 	} _methods[] = {
++		{  "COPY", 4, 0xc8b5, nve0_bo_move_copy, nve0_bo_move_init },
+ 		{  "COPY", 4, 0xc7b5, nve0_bo_move_copy, nve0_bo_move_init },
+ 		{  "GRCE", 0, 0xc7b5, nve0_bo_move_copy, nvc0_bo_move_init },
+ 		{  "COPY", 4, 0xc6b5, nve0_bo_move_copy, nve0_bo_move_init },
 diff --git a/drivers/gpu/drm/nouveau/nouveau_chan.c b/drivers/gpu/drm/nouveau/nouveau_chan.c
-index 1286a664f688..5bcd29809c1e 100644
+index 5bcd29809c1e..a14aa6715bb9 100644
 --- a/drivers/gpu/drm/nouveau/nouveau_chan.c
 +++ b/drivers/gpu/drm/nouveau/nouveau_chan.c
-@@ -209,13 +209,15 @@ nouveau_channel_prep(struct nouveau_cli *cli,
- 	} else
- 	if (chan->push.buffer->bo.resource->mem_type == TTM_PL_VRAM) {
- 		if (device->info.family == NV_DEVICE_INFO_V0_TNT) {
-+			struct nvkm_device *nvkm_device = nvxx_device(drm);
-+
- 			/* nv04 vram pushbuf hack, retarget to its location in
- 			 * the framebuffer bar rather than direct vram access..
- 			 * nfi why this exists, it came from the -nv ddx.
- 			 */
- 			args.target = NV_DMA_V0_TARGET_PCI;
- 			args.access = NV_DMA_V0_ACCESS_RDWR;
--			args.start = nvxx_device(drm)->func->resource_addr(nvxx_device(drm), 1);
-+			args.start = nvkm_device->func->resource_addr(nvkm_device, NVKM_BAR1_FB);
- 			args.limit = args.start + device->info.ram_user - 1;
- 		} else {
- 			args.target = NV_DMA_V0_TARGET_VRAM;
-diff --git a/drivers/gpu/drm/nouveau/nouveau_ttm.c b/drivers/gpu/drm/nouveau/nouveau_ttm.c
-index e244927eb5d4..7d2436e5d50d 100644
---- a/drivers/gpu/drm/nouveau/nouveau_ttm.c
-+++ b/drivers/gpu/drm/nouveau/nouveau_ttm.c
-@@ -312,8 +312,8 @@ nouveau_ttm_init(struct nouveau_drm *drm)
- 	/* VRAM init */
- 	drm->gem.vram_available = drm->client.device.info.ram_user;
- 
--	arch_io_reserve_memtype_wc(device->func->resource_addr(device, 1),
--				   device->func->resource_size(device, 1));
-+	arch_io_reserve_memtype_wc(device->func->resource_addr(device, NVKM_BAR1_FB),
-+				   device->func->resource_size(device, NVKM_BAR1_FB));
- 
- 	ret = nouveau_ttm_init_vram(drm);
- 	if (ret) {
-@@ -321,8 +321,8 @@ nouveau_ttm_init(struct nouveau_drm *drm)
- 		return ret;
- 	}
- 
--	drm->ttm.mtrr = arch_phys_wc_add(device->func->resource_addr(device, 1),
--					 device->func->resource_size(device, 1));
-+	drm->ttm.mtrr = arch_phys_wc_add(device->func->resource_addr(device, NVKM_BAR1_FB),
-+					 device->func->resource_size(device, NVKM_BAR1_FB));
- 
- 	/* GART init */
- 	if (!drm->agp.bridge) {
-@@ -357,7 +357,7 @@ nouveau_ttm_fini(struct nouveau_drm *drm)
- 
- 	arch_phys_wc_del(drm->ttm.mtrr);
- 	drm->ttm.mtrr = 0;
--	arch_io_free_memtype_wc(device->func->resource_addr(device, 1),
--				device->func->resource_size(device, 1));
-+	arch_io_free_memtype_wc(device->func->resource_addr(device, NVKM_BAR1_FB),
-+				device->func->resource_size(device, NVKM_BAR1_FB));
- 
- }
+@@ -255,6 +255,7 @@ nouveau_channel_ctor(struct nouveau_cli *cli, bool priv, u64 runm,
+ 		     struct nouveau_channel **pchan)
+ {
+ 	const struct nvif_mclass hosts[] = {
++		{  HOPPER_CHANNEL_GPFIFO_A, 0 },
+ 		{  AMPERE_CHANNEL_GPFIFO_B, 0 },
+ 		{  AMPERE_CHANNEL_GPFIFO_A, 0 },
+ 		{  TURING_CHANNEL_GPFIFO_A, 0 },
+diff --git a/drivers/gpu/drm/nouveau/nouveau_drm.c b/drivers/gpu/drm/nouveau/nouveau_drm.c
+index e7544942791d..5b6bb4c2f78b 100644
+--- a/drivers/gpu/drm/nouveau/nouveau_drm.c
++++ b/drivers/gpu/drm/nouveau/nouveau_drm.c
+@@ -509,6 +509,7 @@ nouveau_accel_init(struct nouveau_drm *drm)
+ 		case TURING_CHANNEL_GPFIFO_A:
+ 		case AMPERE_CHANNEL_GPFIFO_A:
+ 		case AMPERE_CHANNEL_GPFIFO_B:
++		case HOPPER_CHANNEL_GPFIFO_A:
+ 			ret = gv100_fence_create(drm);
+ 			break;
+ 		default:
+diff --git a/drivers/gpu/drm/nouveau/nvif/user.c b/drivers/gpu/drm/nouveau/nvif/user.c
+index b648a5e036af..ae470a1fdfb8 100644
+--- a/drivers/gpu/drm/nouveau/nvif/user.c
++++ b/drivers/gpu/drm/nouveau/nvif/user.c
+@@ -41,6 +41,7 @@ nvif_user_ctor(struct nvif_device *device, const char *name)
+ 		int version;
+ 		const struct nvif_user_func *func;
+ 	} users[] = {
++		{ HOPPER_USERMODE_A, -1, &nvif_userc361 },
+ 		{ AMPERE_USERMODE_A, -1, &nvif_userc361 },
+ 		{ TURING_USERMODE_A, -1, &nvif_userc361 },
+ 		{  VOLTA_USERMODE_A, -1, &nvif_userc361 },
 diff --git a/drivers/gpu/drm/nouveau/nvkm/engine/device/base.c b/drivers/gpu/drm/nouveau/nvkm/engine/device/base.c
-index 0cd20d0f8782..ebcaf2ecff48 100644
+index ebcaf2ecff48..5082fe5f1966 100644
 --- a/drivers/gpu/drm/nouveau/nvkm/engine/device/base.c
 +++ b/drivers/gpu/drm/nouveau/nvkm/engine/device/base.c
-@@ -3027,8 +3027,8 @@ nvkm_device_ctor(const struct nvkm_device_func *func,
- 	device->debug = nvkm_dbgopt(device->dbgopt, "device");
- 	INIT_LIST_HEAD(&device->subdev);
+@@ -2681,6 +2681,22 @@ nv177_chipset = {
+ 	.sec2     = { 0x00000001, ga102_sec2_new },
+ };
  
--	mmio_base = device->func->resource_addr(device, 0);
--	mmio_size = device->func->resource_size(device, 0);
-+	mmio_base = device->func->resource_addr(device, NVKM_BAR0_PRI);
-+	mmio_size = device->func->resource_size(device, NVKM_BAR0_PRI);
++static const struct nvkm_device_chip
++nv180_chipset = {
++	.name = "GH100",
++	.bar      = { 0x00000001, tu102_bar_new },
++	.fault    = { 0x00000001, tu102_fault_new },
++	.fb       = { 0x00000001, gh100_fb_new },
++	.fsp      = { 0x00000001, gh100_fsp_new },
++	.gsp      = { 0x00000001, gh100_gsp_new },
++	.imem     = { 0x00000001, gh100_instmem_new },
++	.mmu      = { 0x00000001, gh100_mmu_new },
++	.pci      = { 0x00000001, gh100_pci_new },
++	.timer    = { 0x00000001, gk20a_timer_new },
++	.vfn      = { 0x00000001, ga100_vfn_new },
++	.fifo     = { 0x00000001, ga102_fifo_new },
++};
++
+ static const struct nvkm_device_chip
+ nv192_chipset = {
+ 	.name = "AD102",
+@@ -3101,6 +3117,7 @@ nvkm_device_ctor(const struct nvkm_device_func *func,
+ 		case 0x140: device->card_type = GV100; break;
+ 		case 0x160: device->card_type = TU100; break;
+ 		case 0x170: device->card_type = GA100; break;
++		case 0x180: device->card_type = GH100; break;
+ 		case 0x190: device->card_type = AD100; break;
+ 		default:
+ 			break;
+@@ -3204,6 +3221,7 @@ nvkm_device_ctor(const struct nvkm_device_func *func,
+ 	case 0x174: device->chip = &nv174_chipset; break;
+ 	case 0x176: device->chip = &nv176_chipset; break;
+ 	case 0x177: device->chip = &nv177_chipset; break;
++	case 0x180: device->chip = &nv180_chipset; break;
+ 	case 0x192: device->chip = &nv192_chipset; break;
+ 	case 0x193: device->chip = &nv193_chipset; break;
+ 	case 0x194: device->chip = &nv194_chipset; break;
+diff --git a/drivers/gpu/drm/nouveau/nvkm/engine/device/priv.h b/drivers/gpu/drm/nouveau/nvkm/engine/device/priv.h
+index 8da5e896dd74..75ee7506d443 100644
+--- a/drivers/gpu/drm/nouveau/nvkm/engine/device/priv.h
++++ b/drivers/gpu/drm/nouveau/nvkm/engine/device/priv.h
+@@ -11,6 +11,7 @@
+ #include <subdev/devinit.h>
+ #include <subdev/fault.h>
+ #include <subdev/fb.h>
++#include <subdev/fsp.h>
+ #include <subdev/fuse.h>
+ #include <subdev/gpio.h>
+ #include <subdev/gsp.h>
+diff --git a/drivers/gpu/drm/nouveau/nvkm/engine/device/user.c b/drivers/gpu/drm/nouveau/nvkm/engine/device/user.c
+index 1f331ec8d747..57c2678022b5 100644
+--- a/drivers/gpu/drm/nouveau/nvkm/engine/device/user.c
++++ b/drivers/gpu/drm/nouveau/nvkm/engine/device/user.c
+@@ -148,6 +148,7 @@ nvkm_udevice_info(struct nvkm_udevice *udev, void *data, u32 size)
+ 	case TU100: args->v0.family = NV_DEVICE_INFO_V0_TURING; break;
+ 	case GA100: args->v0.family = NV_DEVICE_INFO_V0_AMPERE; break;
+ 	case AD100: args->v0.family = NV_DEVICE_INFO_V0_ADA; break;
++	case GH100: args->v0.family = NV_DEVICE_INFO_V0_HOPPER; break;
+ 	default:
+ 		args->v0.family = 0;
+ 		break;
+diff --git a/drivers/gpu/drm/nouveau/nvkm/subdev/Kbuild b/drivers/gpu/drm/nouveau/nvkm/subdev/Kbuild
+index 4c2f6fc4ef58..c19ea4ea9bd3 100644
+--- a/drivers/gpu/drm/nouveau/nvkm/subdev/Kbuild
++++ b/drivers/gpu/drm/nouveau/nvkm/subdev/Kbuild
+@@ -9,6 +9,7 @@ include $(src)/nvkm/subdev/fault/Kbuild
+ include $(src)/nvkm/subdev/fb/Kbuild
+ include $(src)/nvkm/subdev/fuse/Kbuild
+ include $(src)/nvkm/subdev/gpio/Kbuild
++include $(src)/nvkm/subdev/fsp/Kbuild
+ include $(src)/nvkm/subdev/gsp/Kbuild
+ include $(src)/nvkm/subdev/i2c/Kbuild
+ include $(src)/nvkm/subdev/iccsense/Kbuild
+diff --git a/drivers/gpu/drm/nouveau/nvkm/subdev/fb/Kbuild b/drivers/gpu/drm/nouveau/nvkm/subdev/fb/Kbuild
+index d1611ad3bf81..f13312934131 100644
+--- a/drivers/gpu/drm/nouveau/nvkm/subdev/fb/Kbuild
++++ b/drivers/gpu/drm/nouveau/nvkm/subdev/fb/Kbuild
+@@ -35,6 +35,7 @@ nvkm-y += nvkm/subdev/fb/gv100.o
+ nvkm-y += nvkm/subdev/fb/tu102.o
+ nvkm-y += nvkm/subdev/fb/ga100.o
+ nvkm-y += nvkm/subdev/fb/ga102.o
++nvkm-y += nvkm/subdev/fb/gh100.o
  
- 	device->pri = ioremap(mmio_base, mmio_size);
- 	if (device->pri == NULL) {
-diff --git a/drivers/gpu/drm/nouveau/nvkm/engine/device/pci.c b/drivers/gpu/drm/nouveau/nvkm/engine/device/pci.c
-index 3ff6436007fa..8f0261a0d618 100644
---- a/drivers/gpu/drm/nouveau/nvkm/engine/device/pci.c
-+++ b/drivers/gpu/drm/nouveau/nvkm/engine/device/pci.c
-@@ -1560,18 +1560,42 @@ nvkm_device_pci(struct nvkm_device *device)
- 	return container_of(device, struct nvkm_device_pci, device);
- }
+ nvkm-y += nvkm/subdev/fb/r535.o
  
-+static int
-+nvkm_device_pci_resource_idx(struct nvkm_device_pci *pdev, enum nvkm_bar_id bar)
+diff --git a/drivers/gpu/drm/nouveau/nvkm/subdev/fb/ga102.c b/drivers/gpu/drm/nouveau/nvkm/subdev/fb/ga102.c
+index 25f82b372bca..2819780050d8 100644
+--- a/drivers/gpu/drm/nouveau/nvkm/subdev/fb/ga102.c
++++ b/drivers/gpu/drm/nouveau/nvkm/subdev/fb/ga102.c
+@@ -25,7 +25,7 @@
+ #include <subdev/gsp.h>
+ #include <engine/nvdec.h>
+ 
+-static u64
++u64
+ ga102_fb_vidmem_size(struct nvkm_fb *fb)
+ {
+ 	return (u64)nvkm_rd32(fb->subdev.device, 0x1183a4) << 20;
+diff --git a/drivers/gpu/drm/nouveau/nvkm/subdev/fb/gh100.c b/drivers/gpu/drm/nouveau/nvkm/subdev/fb/gh100.c
+new file mode 100644
+index 000000000000..2d8c51f882d5
+--- /dev/null
++++ b/drivers/gpu/drm/nouveau/nvkm/subdev/fb/gh100.c
+@@ -0,0 +1,30 @@
++/* SPDX-License-Identifier: MIT
++ *
++ * Copyright (c) 2025, NVIDIA CORPORATION. All rights reserved.
++ */
++#include "priv.h"
++
++#include <nvhw/drf.h>
++#include <nvhw/ref/gh100/dev_fb.h>
++
++static void
++gh100_fb_sysmem_flush_page_init(struct nvkm_fb *fb)
 +{
-+	int idx = 0;
++	const u64 addr = fb->sysmem.flush_page_addr >> NV_PFB_NISO_FLUSH_SYSMEM_ADDR_SHIFT;
++	struct nvkm_device *device = fb->subdev.device;
 +
-+	if (bar == NVKM_BAR0_PRI)
-+		return idx;
-+
-+	idx += (pci_resource_flags(pdev->pdev, idx) & IORESOURCE_MEM_64) ? 2 : 1;
-+	if (bar == NVKM_BAR1_FB)
-+		return idx;
-+
-+	idx += (pci_resource_flags(pdev->pdev, idx) & IORESOURCE_MEM_64) ? 2 : 1;
-+	if (bar == NVKM_BAR2_INST)
-+		return idx;
-+
-+	WARN_ON(1);
-+	return -1;
++	nvkm_wr32(device, NV_PFB_FBHUB_PCIE_FLUSH_SYSMEM_ADDR_HI, upper_32_bits(addr));
++	nvkm_wr32(device, NV_PFB_FBHUB_PCIE_FLUSH_SYSMEM_ADDR_LO, lower_32_bits(addr));
 +}
 +
- static resource_size_t
--nvkm_device_pci_resource_addr(struct nvkm_device *device, unsigned bar)
-+nvkm_device_pci_resource_addr(struct nvkm_device *device, enum nvkm_bar_id bar)
- {
- 	struct nvkm_device_pci *pdev = nvkm_device_pci(device);
--	return pci_resource_start(pdev->pdev, bar);
-+	int idx = nvkm_device_pci_resource_idx(pdev, bar);
++static const struct nvkm_fb_func
++gh100_fb = {
++	.sysmem.flush_page_init = gh100_fb_sysmem_flush_page_init,
++	.vidmem.size = ga102_fb_vidmem_size,
++};
 +
-+	return idx >= 0 ? pci_resource_start(pdev->pdev, idx) : 0;
++int
++gh100_fb_new(struct nvkm_device *device, enum nvkm_subdev_type type, int inst, struct nvkm_fb **pfb)
++{
++	return r535_fb_new(&gh100_fb, device, type, inst, pfb);
++}
+diff --git a/drivers/gpu/drm/nouveau/nvkm/subdev/fb/priv.h b/drivers/gpu/drm/nouveau/nvkm/subdev/fb/priv.h
+index 35c55dfba23d..ebe996503ab2 100644
+--- a/drivers/gpu/drm/nouveau/nvkm/subdev/fb/priv.h
++++ b/drivers/gpu/drm/nouveau/nvkm/subdev/fb/priv.h
+@@ -98,4 +98,6 @@ int gp102_fb_vpr_scrub(struct nvkm_fb *);
+ int gv100_fb_init_page(struct nvkm_fb *);
+ 
+ bool tu102_fb_vpr_scrub_required(struct nvkm_fb *);
++
++u64 ga102_fb_vidmem_size(struct nvkm_fb *);
+ #endif
+diff --git a/drivers/gpu/drm/nouveau/nvkm/subdev/fsp/Kbuild b/drivers/gpu/drm/nouveau/nvkm/subdev/fsp/Kbuild
+new file mode 100644
+index 000000000000..ff04992b181d
+--- /dev/null
++++ b/drivers/gpu/drm/nouveau/nvkm/subdev/fsp/Kbuild
+@@ -0,0 +1,6 @@
++# SPDX-License-Identifier: MIT
++#
++# Copyright (c) 2025, NVIDIA CORPORATION. All rights reserved.
++
++nvkm-y += nvkm/subdev/fsp/base.o
++nvkm-y += nvkm/subdev/fsp/gh100.o
+diff --git a/drivers/gpu/drm/nouveau/nvkm/subdev/fsp/base.c b/drivers/gpu/drm/nouveau/nvkm/subdev/fsp/base.c
+new file mode 100644
+index 000000000000..e366a980baa9
+--- /dev/null
++++ b/drivers/gpu/drm/nouveau/nvkm/subdev/fsp/base.c
+@@ -0,0 +1,66 @@
++/* SPDX-License-Identifier: MIT
++ *
++ * Copyright (c) 2025, NVIDIA CORPORATION. All rights reserved.
++ */
++#include "priv.h"
++
++int
++nvkm_fsp_boot_gsp_fmc(struct nvkm_fsp *fsp, u64 args_addr, u32 rsvd_size, bool resume,
++		      u64 img_addr, const u8 *hash, const u8 *pkey, const u8 *sig)
++{
++	return fsp->func->cot.boot_gsp_fmc(fsp, args_addr, rsvd_size, resume,
++					   img_addr, hash, pkey, sig);
++}
++
++bool
++nvkm_fsp_verify_gsp_fmc(struct nvkm_fsp *fsp, u32 hash_size, u32 pkey_size, u32 sig_size)
++{
++	return hash_size == fsp->func->cot.size_hash &&
++	       pkey_size == fsp->func->cot.size_pkey &&
++	        sig_size == fsp->func->cot.size_sig;
++}
++
++static int
++nvkm_fsp_preinit(struct nvkm_subdev *subdev)
++{
++	struct nvkm_fsp *fsp = nvkm_fsp(subdev);
++
++	return fsp->func->wait_secure_boot(fsp);
++}
++
++static void *
++nvkm_fsp_dtor(struct nvkm_subdev *subdev)
++{
++	struct nvkm_fsp *fsp = nvkm_fsp(subdev);
++
++	nvkm_falcon_dtor(&fsp->falcon);
++	return fsp;
++}
++
++static const struct nvkm_falcon_func
++nvkm_fsp_flcn = {
++	.emem_pio = &gp102_flcn_emem_pio,
++};
++
++static const struct nvkm_subdev_func
++nvkm_fsp = {
++	.dtor = nvkm_fsp_dtor,
++	.preinit = nvkm_fsp_preinit,
++};
++
++int
++nvkm_fsp_new_(const struct nvkm_fsp_func *func,
++	      struct nvkm_device *device, enum nvkm_subdev_type type, int inst,
++	      struct nvkm_fsp **pfsp)
++{
++	struct nvkm_fsp *fsp;
++
++	fsp = *pfsp = kzalloc(sizeof(*fsp), GFP_KERNEL);
++	if (!fsp)
++		return -ENOMEM;
++
++	fsp->func = func;
++	nvkm_subdev_ctor(&nvkm_fsp, device, type, inst, &fsp->subdev);
++
++	return nvkm_falcon_ctor(&nvkm_fsp_flcn, &fsp->subdev, "fsp", 0x8f2000, &fsp->falcon);
++}
+diff --git a/drivers/gpu/drm/nouveau/nvkm/subdev/fsp/gh100.c b/drivers/gpu/drm/nouveau/nvkm/subdev/fsp/gh100.c
+new file mode 100644
+index 000000000000..9f4285af3fed
+--- /dev/null
++++ b/drivers/gpu/drm/nouveau/nvkm/subdev/fsp/gh100.c
+@@ -0,0 +1,275 @@
++/* SPDX-License-Identifier: MIT
++ *
++ * Copyright (c) 2025, NVIDIA CORPORATION. All rights reserved.
++ */
++#include "priv.h"
++
++#include <nvhw/drf.h>
++#include <nvhw/ref/gh100/dev_fsp_pri.h>
++#include <nvhw/ref/gh100/dev_therm.h>
++
++#include <nvrm/nvtypes.h>
++
++#define MCTP_HEADER_VERSION          3:0
++#define MCTP_HEADER_RSVD             7:4
++
++#define MCTP_HEADER_DEID            15:8
++#define MCTP_HEADER_SEID            23:16
++
++#define MCTP_HEADER_TAG             26:24
++#define MCTP_HEADER_TO              27:27
++#define MCTP_HEADER_SEQ             29:28
++#define MCTP_HEADER_EOM             30:30
++#define MCTP_HEADER_SOM             31:31
++
++#define MCTP_MSG_HEADER_TYPE         6:0
++#define MCTP_MSG_HEADER_IC           7:7
++
++#define MCTP_MSG_HEADER_VENDOR_ID   23:8
++#define MCTP_MSG_HEADER_NVDM_TYPE   31:24
++
++#define MCTP_MSG_HEADER_TYPE_VENDOR_PCI 0x7e
++#define MCTP_MSG_HEADER_VENDOR_ID_NV    0x10de
++
++#define NVDM_TYPE_COT                   0x14
++#define NVDM_TYPE_FSP_RESPONSE          0x15
++
++#pragma pack(1)
++typedef struct nvdm_payload_cot
++{
++    NvU16 version;
++    NvU16 size;
++    NvU64 gspFmcSysmemOffset;
++    NvU64 frtsSysmemOffset;
++    NvU32 frtsSysmemSize;
++
++    // Note this is an offset from the end of FB
++    NvU64 frtsVidmemOffset;
++    NvU32 frtsVidmemSize;
++
++    // Authentication related fields
++    NvU32 hash384[12];
++    NvU32 publicKey[96];
++    NvU32 signature[96];
++
++    NvU64 gspBootArgsSysmemOffset;
++} NVDM_PAYLOAD_COT;
++#pragma pack()
++
++#pragma pack(1)
++typedef struct
++{
++    NvU32 taskId;
++    NvU32 commandNvdmType;
++    NvU32 errorCode;
++} NVDM_PAYLOAD_COMMAND_RESPONSE;
++#pragma pack()
++
++static u32
++gh100_fsp_poll(struct nvkm_fsp *fsp)
++{
++	struct nvkm_device *device = fsp->subdev.device;
++	u32 head, tail;
++
++	head = nvkm_rd32(device, NV_PFSP_MSGQ_HEAD(0));
++	tail = nvkm_rd32(device, NV_PFSP_MSGQ_TAIL(0));
++
++	if (head == tail)
++		return 0;
++
++	return (tail - head) + sizeof(u32); /* TAIL points at last DWORD written. */
++}
++
++static int
++gh100_fsp_recv(struct nvkm_fsp *fsp, u8 *packet, u32 max_packet_size)
++{
++	struct nvkm_device *device = fsp->subdev.device;
++	u32 packet_size;
++	int ret;
++
++	packet_size = gh100_fsp_poll(fsp);
++	if (!packet_size || WARN_ON(packet_size % 4 || packet_size > max_packet_size))
++		return -EINVAL;
++
++	ret = nvkm_falcon_pio_rd(&fsp->falcon, 0, EMEM, 0, packet, 0, packet_size);
++	if (ret)
++		return ret;
++
++	nvkm_wr32(device, NV_PFSP_MSGQ_TAIL(0), 0);
++	nvkm_wr32(device, NV_PFSP_MSGQ_HEAD(0), 0);
++
++	return packet_size;
++}
++
++static int
++gh100_fsp_wait(struct nvkm_fsp *fsp)
++{
++	int time = 1000;
++
++	do {
++		if (gh100_fsp_poll(fsp))
++			return 0;
++
++		usleep_range(1000, 2000);
++	} while(time--);
++
++	return -ETIMEDOUT;
++}
++
++static int
++gh100_fsp_send(struct nvkm_fsp *fsp, const u8 *packet, u32 packet_size)
++{
++	struct nvkm_device *device = fsp->subdev.device;
++	int time = 1000, ret;
++
++	if (WARN_ON(packet_size % sizeof(u32)))
++		return -EINVAL;
++
++	/* Ensure any previously sent message has been consumed. */
++	do {
++		u32 head = nvkm_rd32(device, NV_PFSP_QUEUE_HEAD(0));
++		u32 tail = nvkm_rd32(device, NV_PFSP_QUEUE_TAIL(0));
++
++		if (tail == head)
++			break;
++
++		usleep_range(1000, 2000);
++	} while(time--);
++
++	if (time < 0)
++		return -ETIMEDOUT;
++
++	/* Write message to EMEM. */
++	ret = nvkm_falcon_pio_wr(&fsp->falcon, packet, 0, 0, EMEM, 0, packet_size, 0, false);
++	if (ret)
++		return ret;
++
++	/* Update queue pointers - TAIL points at last DWORD written. */
++	nvkm_wr32(device, NV_PFSP_QUEUE_TAIL(0), packet_size - sizeof(u32));
++	nvkm_wr32(device, NV_PFSP_QUEUE_HEAD(0), 0);
++	return 0;
++}
++
++static int
++gh100_fsp_send_sync(struct nvkm_fsp *fsp, u8 nvdm_type, const u8 *packet, u32 packet_size)
++{
++	struct nvkm_subdev *subdev = &fsp->subdev;
++	struct {
++		u32 mctp_header;
++		u32 nvdm_header;
++		NVDM_PAYLOAD_COMMAND_RESPONSE response;
++	} reply;
++	int ret;
++
++	ret = gh100_fsp_send(fsp, packet, packet_size);
++	if (ret)
++		return ret;
++
++	ret = gh100_fsp_wait(fsp);
++	if (ret)
++		return ret;
++
++	ret = gh100_fsp_recv(fsp, (u8 *)&reply, sizeof(reply));
++	if (ret < 0)
++		return ret;
++
++	if (NVVAL_TEST(reply.mctp_header, MCTP, HEADER, SOM, !=, 1) ||
++	    NVVAL_TEST(reply.mctp_header, MCTP, HEADER, EOM, !=, 1)) {
++		nvkm_error(subdev, "unexpected MCTP header in reply: 0x%08x\n", reply.mctp_header);
++		return -EIO;
++	}
++
++	if (NVDEF_TEST(reply.nvdm_header, MCTP, MSG_HEADER, TYPE, !=, VENDOR_PCI) ||
++	    NVDEF_TEST(reply.nvdm_header, MCTP, MSG_HEADER, VENDOR_ID, !=, NV) ||
++	    NVVAL_TEST(reply.nvdm_header, MCTP, MSG_HEADER, NVDM_TYPE, !=, NVDM_TYPE_FSP_RESPONSE)) {
++		nvkm_error(subdev, "unexpected NVDM header in reply: 0x%08x\n", reply.nvdm_header);
++		return -EIO;
++	}
++
++	if (reply.response.commandNvdmType != nvdm_type) {
++		nvkm_error(subdev, "expected NVDM type 0x%02x in reply, got 0x%02x\n",
++			   nvdm_type, reply.response.commandNvdmType);
++		return -EIO;
++	}
++
++	if (reply.response.errorCode) {
++		nvkm_error(subdev, "NVDM command 0x%02x failed with error 0x%08x\n",
++			   nvdm_type, reply.response.errorCode);
++		return -EIO;
++	}
++
++	return 0;
++}
++
++int
++gh100_fsp_boot_gsp_fmc(struct nvkm_fsp *fsp, u64 args_addr, u32 rsvd_size, bool resume,
++		       u64 img_addr, const u8 *hash, const u8 *pkey, const u8 *sig)
++{
++	struct {
++		u32 mctp_header;
++		u32 nvdm_header;
++		NVDM_PAYLOAD_COT cot;
++	} msg = {};
++
++	msg.mctp_header = NVVAL(MCTP, HEADER, SOM, 1) |
++			  NVVAL(MCTP, HEADER, EOM, 1) |
++			  NVVAL(MCTP, HEADER, SEID, 0) |
++			  NVVAL(MCTP, HEADER, SEQ, 0);
++
++	msg.nvdm_header = NVDEF(MCTP, MSG_HEADER, TYPE, VENDOR_PCI) |
++			  NVDEF(MCTP, MSG_HEADER, VENDOR_ID, NV) |
++			  NVVAL(MCTP, MSG_HEADER, NVDM_TYPE, NVDM_TYPE_COT);
++
++	msg.cot.version = fsp->func->cot.version;
++	msg.cot.size = sizeof(msg.cot);
++	msg.cot.gspFmcSysmemOffset = img_addr;
++	if (!resume) {
++		msg.cot.frtsVidmemOffset = ALIGN(rsvd_size, 0x200000);
++		msg.cot.frtsVidmemSize = 0x100000;
++	}
++
++	memcpy(msg.cot.hash384, hash, fsp->func->cot.size_hash);
++	memcpy(msg.cot.publicKey, pkey, fsp->func->cot.size_pkey);
++	memcpy(msg.cot.signature, sig, fsp->func->cot.size_sig);
++
++	msg.cot.gspBootArgsSysmemOffset = args_addr;
++
++	return gh100_fsp_send_sync(fsp, NVDM_TYPE_COT, (const u8 *)&msg, sizeof(msg));
++}
++
++static int
++gh100_fsp_wait_secure_boot(struct nvkm_fsp *fsp)
++{
++	struct nvkm_device *device = fsp->subdev.device;
++	unsigned timeout_ms = 4000;
++
++	do {
++		u32 status = NVKM_RD32(device, NV_THERM, I2CS_SCRATCH, FSP_BOOT_COMPLETE_STATUS);
++
++		if (status == NV_THERM_I2CS_SCRATCH_FSP_BOOT_COMPLETE_STATUS_SUCCESS)
++			return 0;
++
++		usleep_range(1000, 2000);
++	} while (timeout_ms--);
++
++	return -ETIMEDOUT;
++}
++
++static const struct nvkm_fsp_func
++gh100_fsp = {
++	.wait_secure_boot = gh100_fsp_wait_secure_boot,
++	.cot = {
++		.version = 1,
++		.size_hash = 48,
++		.size_pkey = 384,
++		.size_sig = 384,
++		.boot_gsp_fmc = gh100_fsp_boot_gsp_fmc,
++	},
++};
++
++int
++gh100_fsp_new(struct nvkm_device *device,
++	      enum nvkm_subdev_type type, int inst, struct nvkm_fsp **pfsp)
++{
++	return nvkm_fsp_new_(&gh100_fsp, device, type, inst, pfsp);
++}
+diff --git a/drivers/gpu/drm/nouveau/nvkm/subdev/fsp/priv.h b/drivers/gpu/drm/nouveau/nvkm/subdev/fsp/priv.h
+new file mode 100644
+index 000000000000..91517f3dedfb
+--- /dev/null
++++ b/drivers/gpu/drm/nouveau/nvkm/subdev/fsp/priv.h
+@@ -0,0 +1,28 @@
++/* SPDX-License-Identifier: MIT
++ *
++ * Copyright (c) 2025, NVIDIA CORPORATION. All rights reserved.
++ */
++#ifndef __NVKM_FSP_PRIV_H__
++#define __NVKM_FSP_PRIV_H__
++#define nvkm_fsp(p) container_of((p), struct nvkm_fsp, subdev)
++#include <subdev/fsp.h>
++
++struct nvkm_fsp_func {
++	int (*wait_secure_boot)(struct nvkm_fsp *);
++
++	struct {
++		u32 version;
++		u32 size_hash;
++		u32 size_pkey;
++		u32 size_sig;
++		int (*boot_gsp_fmc)(struct nvkm_fsp *, u64 args_addr, u32 rsvd_size, bool resume,
++				    u64 img_addr, const u8 *hash, const u8 *pkey, const u8 *sig);
++	} cot;
++};
++
++int nvkm_fsp_new_(const struct nvkm_fsp_func *,
++		  struct nvkm_device *, enum nvkm_subdev_type, int inst, struct nvkm_fsp **);
++
++int gh100_fsp_boot_gsp_fmc(struct nvkm_fsp *, u64 args_addr, u32 rsvd_size, bool resume,
++			   u64 img_addr, const u8 *hash, const u8 *pkey, const u8 *sig);
++#endif
+diff --git a/drivers/gpu/drm/nouveau/nvkm/subdev/gsp/Kbuild b/drivers/gpu/drm/nouveau/nvkm/subdev/gsp/Kbuild
+index ba892c111c26..3c6c1309c4b4 100644
+--- a/drivers/gpu/drm/nouveau/nvkm/subdev/gsp/Kbuild
++++ b/drivers/gpu/drm/nouveau/nvkm/subdev/gsp/Kbuild
+@@ -7,6 +7,7 @@ nvkm-y += nvkm/subdev/gsp/tu102.o
+ nvkm-y += nvkm/subdev/gsp/tu116.o
+ nvkm-y += nvkm/subdev/gsp/ga100.o
+ nvkm-y += nvkm/subdev/gsp/ga102.o
++nvkm-y += nvkm/subdev/gsp/gh100.o
+ nvkm-y += nvkm/subdev/gsp/ad102.o
+ 
+ include $(src)/nvkm/subdev/gsp/rm/Kbuild
+diff --git a/drivers/gpu/drm/nouveau/nvkm/subdev/gsp/base.c b/drivers/gpu/drm/nouveau/nvkm/subdev/gsp/base.c
+index 3a452349afde..d23243a83a4c 100644
+--- a/drivers/gpu/drm/nouveau/nvkm/subdev/gsp/base.c
++++ b/drivers/gpu/drm/nouveau/nvkm/subdev/gsp/base.c
+@@ -83,6 +83,8 @@ nvkm_gsp_oneinit(struct nvkm_subdev *subdev)
+ void
+ nvkm_gsp_dtor_fws(struct nvkm_gsp *gsp)
+ {
++	nvkm_firmware_put(gsp->fws.fmc);
++	gsp->fws.fmc = NULL;
+ 	nvkm_firmware_put(gsp->fws.bl);
+ 	gsp->fws.bl = NULL;
+ 	nvkm_firmware_put(gsp->fws.booter.unload);
+diff --git a/drivers/gpu/drm/nouveau/nvkm/subdev/gsp/gh100.c b/drivers/gpu/drm/nouveau/nvkm/subdev/gsp/gh100.c
+new file mode 100644
+index 000000000000..3ad71696c111
+--- /dev/null
++++ b/drivers/gpu/drm/nouveau/nvkm/subdev/gsp/gh100.c
+@@ -0,0 +1,353 @@
++/* SPDX-License-Identifier: MIT
++ *
++ * Copyright (c) 2025, NVIDIA CORPORATION. All rights reserved.
++ */
++#include "priv.h"
++
++#include <linux/elf.h>
++#include <linux/crc32.h>
++
++#include <subdev/fb.h>
++#include <subdev/fsp.h>
++
++#include <rm/r570/nvrm/gsp.h>
++
++#include <nvhw/drf.h>
++#include <nvhw/ref/gh100/dev_falcon_v4.h>
++#include <nvhw/ref/gh100/dev_riscv_pri.h>
++
++static int
++gh100_gsp_fini(struct nvkm_gsp *gsp, bool suspend)
++{
++	struct nvkm_falcon *falcon = &gsp->falcon;
++	int ret, time = 4000;
++
++	/* Shutdown RM. */
++	ret = r535_gsp_fini(gsp, suspend);
++	if (ret && suspend)
++		return ret;
++
++	/* Wait for RISC-V to halt. */
++	do {
++		u32 data = nvkm_falcon_rd32(falcon, falcon->addr2 + NV_PRISCV_RISCV_CPUCTL);
++
++		if (NVVAL_GET(data, NV_PRISCV, RISCV_CPUCTL, HALTED))
++			return 0;
++
++		usleep_range(1000, 2000);
++	} while(time--);
++
++	return -ETIMEDOUT;
++}
++
++static bool
++gh100_gsp_lockdown_released(struct nvkm_gsp *gsp, u32 *mbox0)
++{
++	u32 data;
++
++	/* Wait for GSP access via BAR0 to be allowed. */
++	*mbox0 = nvkm_falcon_rd32(&gsp->falcon, NV_PFALCON_FALCON_MAILBOX0);
++
++	if (*mbox0 && (*mbox0 & 0xffffff00) == 0xbadf4100)
++		return false;
++
++	/* Check if an error code has been reported. */
++	if (*mbox0) {
++		u32 mbox1 = nvkm_falcon_rd32(&gsp->falcon, NV_PFALCON_FALCON_MAILBOX1);
++
++		/* Any value that's not GSP_FMC_BOOT_PARAMS addr is an error. */
++		if ((((u64)mbox1 << 32) | *mbox0) != gsp->fmc.args.addr)
++			return true;
++	}
++
++	/* Check if lockdown has been released. */
++	data = nvkm_falcon_rd32(&gsp->falcon, NV_PFALCON_FALCON_HWCFG2);
++	return !NVVAL_GET(data, NV_PFALCON, FALCON_HWCFG2, RISCV_BR_PRIV_LOCKDOWN);
++}
++
++static int
++gh100_gsp_init(struct nvkm_gsp *gsp)
++{
++	struct nvkm_subdev *subdev = &gsp->subdev;
++	struct nvkm_device *device = subdev->device;
++	const bool resume = gsp->sr.meta.data != NULL;
++	struct nvkm_gsp_mem *meta;
++	GSP_FMC_BOOT_PARAMS *args;
++	int ret, time = 4000;
++	u32 mbox0;
++
++	if (!resume) {
++		ret = nvkm_gsp_mem_ctor(gsp, sizeof(*args), &gsp->fmc.args);
++		if (ret)
++			return ret;
++
++		meta = &gsp->wpr_meta;
++	} else {
++		gsp->rm->api->gsp->set_rmargs(gsp, true);
++		meta = &gsp->sr.meta;
++	}
++
++	args = gsp->fmc.args.data;
++
++	args->bootGspRmParams.gspRmDescOffset = meta->addr;
++	args->bootGspRmParams.gspRmDescSize = meta->size;
++	args->bootGspRmParams.target = GSP_DMA_TARGET_COHERENT_SYSTEM;
++	args->bootGspRmParams.bIsGspRmBoot = 1;
++
++	args->gspRmParams.target = GSP_DMA_TARGET_NONCOHERENT_SYSTEM;
++	args->gspRmParams.bootArgsOffset = gsp->libos.addr;
++
++	ret = nvkm_fsp_boot_gsp_fmc(device->fsp, gsp->fmc.args.addr, gsp->fb.heap.size, resume,
++				    gsp->fmc.fw.addr, gsp->fmc.hash, gsp->fmc.pkey, gsp->fmc.sig);
++	if (ret)
++		return ret;
++
++	do {
++		if (gh100_gsp_lockdown_released(gsp, &mbox0))
++			break;
++
++		usleep_range(1000, 2000);
++	} while(time--);
++
++	if (time < 0) {
++		nvkm_error(subdev, "GSP-FMC boot timed out\n");
++		return -ETIMEDOUT;
++	}
++
++	if (mbox0) {
++		nvkm_error(subdev, "GSP-FMC boot failed (mbox: 0x%08x)\n", mbox0);
++		return -EIO;
++	}
++
++	return r535_gsp_init(gsp);
++}
++
++static int
++gh100_gsp_wpr_meta_init(struct nvkm_gsp *gsp)
++{
++	GspFwWprMeta *meta;
++	int ret;
++
++	ret = nvkm_gsp_mem_ctor(gsp, sizeof(*meta), &gsp->wpr_meta);
++	if (ret)
++		return ret;
++
++	gsp->fb.size = nvkm_fb_vidmem_size(gsp->subdev.device);
++	gsp->fb.bios.vga_workspace.size = 128 * 1024;
++	gsp->fb.heap.size = gsp->rm->wpr->heap_size_non_wpr;
++
++	meta = gsp->wpr_meta.data;
++
++	meta->magic = GSP_FW_WPR_META_MAGIC;
++	meta->revision = GSP_FW_WPR_META_REVISION;
++
++	meta->sizeOfRadix3Elf = gsp->fw.len;
++	meta->sysmemAddrOfRadix3Elf = gsp->radix3.lvl0.addr;
++
++	meta->sizeOfBootloader = gsp->boot.fw.size;
++	meta->sysmemAddrOfBootloader = gsp->boot.fw.addr;
++	meta->bootloaderCodeOffset = gsp->boot.code_offset;
++	meta->bootloaderDataOffset = gsp->boot.data_offset;
++	meta->bootloaderManifestOffset = gsp->boot.manifest_offset;
++
++	meta->sysmemAddrOfSignature = gsp->sig.addr;
++	meta->sizeOfSignature = gsp->sig.size;
++
++	meta->nonWprHeapSize = gsp->fb.heap.size;
++	meta->gspFwHeapSize = tu102_gsp_wpr_heap_size(gsp);
++	meta->frtsSize = 0x100000;
++	meta->vgaWorkspaceSize = gsp->fb.bios.vga_workspace.size;
++	meta->pmuReservedSize = 0;
++	return 0;
++}
++
++/* The sh_flags value for the binary blobs in the ELF image */
++#define FMC_SHF_FLAGS (SHF_MASKPROC | SHF_MASKOS | SHF_OS_NONCONFORMING | SHF_ALLOC)
++
++#define ELF_HDR_SIZE ((u8)sizeof(struct elf32_hdr))
++#define ELF_SHDR_SIZE ((u8)sizeof(struct elf32_shdr))
++
++/* The FMC ELF header must be exactly this */
++static const u8 elf_header[] = {
++	0x7f, 'E', 'L', 'F', 1, 1, 1, 0,
++	0, 0, 0, 0, 0, 0, 0, 0,
++
++	0, 0, 0, 0, 1, 0, 0, 0, /* e_type, e_machine, e_version */
++	0, 0, 0, 0, 0, 0, 0, 0, /* e_entry, e_phoff */
++
++	ELF_HDR_SIZE, 0, 0, 0, 0, 0, 0, 0, /* e_shoff, e_flags */
++	ELF_HDR_SIZE, 0, 0, 0, /* e_ehsize, e_phentsize */
++	0, 0, ELF_SHDR_SIZE, 0, /* e_phnum, e_shentsize */
++
++	6, 0, 1, 0, /* e_shnum, e_shstrndx */
++};
++
++/**
++ * elf_validate_sections - validate each section in the FMC ELF image
++ * @elf: ELF image
++ * @length: size of the entire ELF image
++ */
++static bool
++elf_validate_sections(const void *elf, size_t length)
++{
++	const struct elf32_hdr *ehdr = elf;
++	const struct elf32_shdr *shdr = elf + ehdr->e_shoff;
++
++	/* The offset of the first section */
++	Elf32_Off section_begin = ehdr->e_shoff + ehdr->e_shnum * ehdr->e_shentsize;
++
++	if (section_begin > length)
++		return false;
++
++	/* The first section header is the null section, so skip it */
++	for (unsigned int i = 1; i < ehdr->e_shnum; i++) {
++		if (i == ehdr->e_shstrndx) {
++			if (shdr[i].sh_type != SHT_STRTAB)
++				return false;
++			if (shdr[i].sh_flags != SHF_STRINGS)
++				return false;
++		} else {
++			if (shdr[i].sh_type != SHT_PROGBITS)
++				return false;
++			if (shdr[i].sh_flags != FMC_SHF_FLAGS)
++				return false;
++		}
++
++		/* Ensure that each section is inside the image */
++		if (shdr[i].sh_offset < section_begin ||
++		    (u64)shdr[i].sh_offset + shdr[i].sh_size > length)
++			return false;
++
++		/* Non-zero sh_info is a CRC */
++		if (shdr[i].sh_info) {
++			/* The kernel's CRC32 needs a pre- and post-xor to match standard CRCs */
++			u32 crc32 = crc32_le(~0, elf + shdr[i].sh_offset, shdr[i].sh_size) ^ ~0;
++
++			if (shdr[i].sh_info != crc32)
++				return false;
++		}
++	}
++
++	return true;
++}
++
++/**
++ * elf_section - return a pointer to the data for a given section
++ * @elf: ELF image
++ * @name: section name to search for
++ * @len: pointer to returned length of found section
++ */
++static const void *
++elf_section(const void *elf, const char *name, unsigned int *len)
++{
++	const struct elf32_hdr *ehdr = elf;
++	const struct elf32_shdr *shdr = elf + ehdr->e_shoff;
++	const char *names = elf + shdr[ehdr->e_shstrndx].sh_offset;
++
++	for (unsigned int i = 1; i < ehdr->e_shnum; i++) {
++		if (!strcmp(&names[shdr[i].sh_name], name)) {
++			*len = shdr[i].sh_size;
++			return elf + shdr[i].sh_offset;
++		}
++	}
++
++	return NULL;
++}
++
++static int
++gh100_gsp_oneinit(struct nvkm_gsp *gsp)
++{
++	struct nvkm_subdev *subdev = &gsp->subdev;
++	struct nvkm_device *device = subdev->device;
++	struct nvkm_fsp *fsp = device->fsp;
++	const void *fw = gsp->fws.fmc->data;
++	const void *hash, *sig, *pkey, *img;
++	unsigned int img_len = 0, hash_len = 0, pkey_len = 0, sig_len = 0;
++	int ret;
++
++	if (gsp->fws.fmc->size < ELF_HDR_SIZE ||
++	    memcmp(fw, elf_header, sizeof(elf_header)) ||
++	    !elf_validate_sections(fw, gsp->fws.fmc->size)) {
++		nvkm_error(subdev, "fmc firmware image is invalid\n");
++		return -ENODATA;
++	}
++
++	hash = elf_section(fw, "hash", &hash_len);
++	sig = elf_section(fw, "signature", &sig_len);
++	pkey = elf_section(fw, "publickey", &pkey_len);
++	img = elf_section(fw, "image", &img_len);
++
++	if (!hash || !sig || !pkey || !img) {
++		nvkm_error(subdev, "fmc firmware image is invalid\n");
++		return -ENODATA;
++	}
++
++	if (!nvkm_fsp_verify_gsp_fmc(fsp, hash_len, pkey_len, sig_len))
++		return -EINVAL;
++
++	/* Load GSP-FMC FW into memory. */
++	ret = nvkm_gsp_mem_ctor(gsp, img_len, &gsp->fmc.fw);
++	if (ret)
++		return ret;
++
++	memcpy(gsp->fmc.fw.data, img, img_len);
++
++	gsp->fmc.hash = kmemdup(hash, hash_len, GFP_KERNEL);
++	gsp->fmc.pkey = kmemdup(pkey, pkey_len, GFP_KERNEL);
++	gsp->fmc.sig = kmemdup(sig, sig_len, GFP_KERNEL);
++	if (!gsp->fmc.hash || !gsp->fmc.pkey || !gsp->fmc.sig)
++		return -ENOMEM;
++
++	ret = r535_gsp_oneinit(gsp);
++	if (ret)
++		return ret;
++
++	return gh100_gsp_wpr_meta_init(gsp);
++}
++
++static const struct nvkm_gsp_func
++gh100_gsp = {
++	.flcn = &ga102_gsp_flcn,
++
++	.sig_section = ".fwsignature_gh100",
++
++	.dtor = r535_gsp_dtor,
++	.oneinit = gh100_gsp_oneinit,
++	.init = gh100_gsp_init,
++	.fini = gh100_gsp_fini,
++
++	.rm.gpu = &gh100_gpu,
++};
++
++static int
++gh100_gsp_load(struct nvkm_gsp *gsp, int ver, const struct nvkm_gsp_fwif *fwif)
++{
++	int ret;
++
++	ret = tu102_gsp_load_rm(gsp, fwif);
++	if (ret)
++		goto done;
++
++	ret = nvkm_gsp_load_fw(gsp, "fmc", fwif->ver, &gsp->fws.fmc);
++
++done:
++	if (ret)
++		nvkm_gsp_dtor_fws(gsp);
++
++	return ret;
++}
++
++static struct nvkm_gsp_fwif
++gh100_gsps[] = {
++	{ 0, gh100_gsp_load, &gh100_gsp, &r570_rm_gh100, "570.144", true },
++	{}
++};
++
++int
++gh100_gsp_new(struct nvkm_device *device, enum nvkm_subdev_type type, int inst,
++	      struct nvkm_gsp **pgsp)
++{
++	return nvkm_gsp_new_(gh100_gsps, device, type, inst, pgsp);
++}
++
++NVKM_GSP_FIRMWARE_FMC(gh100, 570.144);
+diff --git a/drivers/gpu/drm/nouveau/nvkm/subdev/gsp/priv.h b/drivers/gpu/drm/nouveau/nvkm/subdev/gsp/priv.h
+index c8429863b642..86ec580ba936 100644
+--- a/drivers/gpu/drm/nouveau/nvkm/subdev/gsp/priv.h
++++ b/drivers/gpu/drm/nouveau/nvkm/subdev/gsp/priv.h
+@@ -22,7 +22,9 @@ int nvkm_gsp_load_fw(struct nvkm_gsp *, const char *name, const char *ver,
+ void nvkm_gsp_dtor_fws(struct nvkm_gsp *);
+ 
+ int gv100_gsp_nofw(struct nvkm_gsp *, int, const struct nvkm_gsp_fwif *);
++
+ int tu102_gsp_load(struct nvkm_gsp *, int, const struct nvkm_gsp_fwif *);
++int tu102_gsp_load_rm(struct nvkm_gsp *, const struct nvkm_gsp_fwif *);
+ 
+ #define NVKM_GSP_FIRMWARE_BOOTER(chip,vers)                      \
+ MODULE_FIRMWARE("nvidia/"#chip"/gsp/booter_load-"#vers".bin");   \
+@@ -30,6 +32,11 @@ MODULE_FIRMWARE("nvidia/"#chip"/gsp/booter_unload-"#vers".bin"); \
+ MODULE_FIRMWARE("nvidia/"#chip"/gsp/bootloader-"#vers".bin");    \
+ MODULE_FIRMWARE("nvidia/"#chip"/gsp/gsp-"#vers".bin")
+ 
++#define NVKM_GSP_FIRMWARE_FMC(chip,vers)                      \
++MODULE_FIRMWARE("nvidia/"#chip"/gsp/fmc-"#vers".bin");        \
++MODULE_FIRMWARE("nvidia/"#chip"/gsp/bootloader-"#vers".bin"); \
++MODULE_FIRMWARE("nvidia/"#chip"/gsp/gsp-"#vers".bin")
++
+ struct nvkm_gsp_func {
+ 	const struct nvkm_falcon_func *flcn;
+ 	const struct nvkm_falcon_fw_func *fwsec;
+@@ -60,6 +67,7 @@ int tu102_gsp_oneinit(struct nvkm_gsp *);
+ int tu102_gsp_init(struct nvkm_gsp *);
+ int tu102_gsp_fini(struct nvkm_gsp *, bool suspend);
+ int tu102_gsp_reset(struct nvkm_gsp *);
++u64 tu102_gsp_wpr_heap_size(struct nvkm_gsp *);
+ 
+ extern const struct nvkm_falcon_func ga102_gsp_flcn;
+ extern const struct nvkm_falcon_fw_func ga102_gsp_fwsec;
+diff --git a/drivers/gpu/drm/nouveau/nvkm/subdev/gsp/rm/Kbuild b/drivers/gpu/drm/nouveau/nvkm/subdev/gsp/rm/Kbuild
+index d3f4e60bb131..2a71868d6710 100644
+--- a/drivers/gpu/drm/nouveau/nvkm/subdev/gsp/rm/Kbuild
++++ b/drivers/gpu/drm/nouveau/nvkm/subdev/gsp/rm/Kbuild
+@@ -11,6 +11,7 @@ nvkm-y += nvkm/subdev/gsp/rm/tu1xx.o
+ nvkm-y += nvkm/subdev/gsp/rm/ga100.o
+ nvkm-y += nvkm/subdev/gsp/rm/ga1xx.o
+ nvkm-y += nvkm/subdev/gsp/rm/ad10x.o
++nvkm-y += nvkm/subdev/gsp/rm/gh100.o
+ 
+ include $(src)/nvkm/subdev/gsp/rm/r535/Kbuild
+ include $(src)/nvkm/subdev/gsp/rm/r570/Kbuild
+diff --git a/drivers/gpu/drm/nouveau/nvkm/subdev/gsp/rm/gh100.c b/drivers/gpu/drm/nouveau/nvkm/subdev/gsp/rm/gh100.c
+new file mode 100644
+index 000000000000..088250559e12
+--- /dev/null
++++ b/drivers/gpu/drm/nouveau/nvkm/subdev/gsp/rm/gh100.c
+@@ -0,0 +1,27 @@
++/* SPDX-License-Identifier: MIT
++ *
++ * Copyright (c) 2025, NVIDIA CORPORATION. All rights reserved.
++ */
++#include "gpu.h"
++
++#include <nvif/class.h>
++
++const struct nvkm_rm_gpu
++gh100_gpu = {
++	.usermode.class = HOPPER_USERMODE_A,
++
++	.fifo.chan = {
++		.class = HOPPER_CHANNEL_GPFIFO_A,
++	},
++
++	.ce.class = HOPPER_DMA_COPY_A,
++	.gr.class = {
++		.i2m = KEPLER_INLINE_TO_MEMORY_B,
++		.twod = FERMI_TWOD_A,
++		.threed = HOPPER_A,
++		.compute = HOPPER_COMPUTE_A,
++	},
++	.nvdec.class = NVB8B0_VIDEO_DECODER,
++	.nvjpg.class = NVB8D1_VIDEO_NVJPG,
++	.ofa.class = NVB8FA_VIDEO_OFA,
++};
+diff --git a/drivers/gpu/drm/nouveau/nvkm/subdev/gsp/rm/gpu.h b/drivers/gpu/drm/nouveau/nvkm/subdev/gsp/rm/gpu.h
+index a256be42ab6e..443753f3369a 100644
+--- a/drivers/gpu/drm/nouveau/nvkm/subdev/gsp/rm/gpu.h
++++ b/drivers/gpu/drm/nouveau/nvkm/subdev/gsp/rm/gpu.h
+@@ -62,4 +62,5 @@ extern const struct nvkm_rm_gpu tu1xx_gpu;
+ extern const struct nvkm_rm_gpu ga100_gpu;
+ extern const struct nvkm_rm_gpu ga1xx_gpu;
+ extern const struct nvkm_rm_gpu ad10x_gpu;
++extern const struct nvkm_rm_gpu gh100_gpu;
+ #endif
+diff --git a/drivers/gpu/drm/nouveau/nvkm/subdev/gsp/rm/r535/gsp.c b/drivers/gpu/drm/nouveau/nvkm/subdev/gsp/rm/r535/gsp.c
+index fe00425c5479..baf42339f93e 100644
+--- a/drivers/gpu/drm/nouveau/nvkm/subdev/gsp/rm/r535/gsp.c
++++ b/drivers/gpu/drm/nouveau/nvkm/subdev/gsp/rm/r535/gsp.c
+@@ -2073,6 +2073,12 @@ r535_gsp_dtor(struct nvkm_gsp *gsp)
+ 	nvkm_falcon_fw_dtor(&gsp->booter.unload);
+ 	nvkm_falcon_fw_dtor(&gsp->booter.load);
+ 
++	nvkm_gsp_mem_dtor(&gsp->fmc.args);
++	kfree(gsp->fmc.sig);
++	kfree(gsp->fmc.pkey);
++	kfree(gsp->fmc.hash);
++	nvkm_gsp_mem_dtor(&gsp->fmc.fw);
++
+ 	mutex_destroy(&gsp->msgq.mutex);
+ 	mutex_destroy(&gsp->cmdq.mutex);
+ 
+diff --git a/drivers/gpu/drm/nouveau/nvkm/subdev/gsp/rm/r570/gsp.c b/drivers/gpu/drm/nouveau/nvkm/subdev/gsp/rm/r570/gsp.c
+index 730dcb645cca..9d2fa4e66d59 100644
+--- a/drivers/gpu/drm/nouveau/nvkm/subdev/gsp/rm/r570/gsp.c
++++ b/drivers/gpu/drm/nouveau/nvkm/subdev/gsp/rm/r570/gsp.c
+@@ -26,8 +26,10 @@ r570_gsp_sr_data_size(struct nvkm_gsp *gsp)
+ static void
+ r570_gsp_drop_post_nocat_record(struct nvkm_gsp *gsp)
+ {
+-	if (gsp->subdev.debug < NV_DBG_DEBUG)
++	if (gsp->subdev.debug < NV_DBG_DEBUG) {
+ 		r535_gsp_msg_ntfy_add(gsp, NV_VGPU_MSG_EVENT_GSP_POST_NOCAT_RECORD, NULL, NULL);
++		r535_gsp_msg_ntfy_add(gsp, NV_VGPU_MSG_EVENT_GSP_LOCKDOWN_NOTICE, NULL, NULL);
++	}
  }
  
- static resource_size_t
--nvkm_device_pci_resource_size(struct nvkm_device *device, unsigned bar)
-+nvkm_device_pci_resource_size(struct nvkm_device *device, enum nvkm_bar_id bar)
- {
- 	struct nvkm_device_pci *pdev = nvkm_device_pci(device);
--	return pci_resource_len(pdev->pdev, bar);
-+	int idx = nvkm_device_pci_resource_idx(pdev, bar);
+ static bool
+@@ -102,6 +104,13 @@ r570_gsp_get_static_info(struct nvkm_gsp *gsp)
+ 
+ 	r535_gsp_get_static_info_fb(gsp, &rpc->fbRegionInfoParams);
+ 
++	if (gsp->rm->wpr->offset_set_by_acr) {
++		GspFwWprMeta *meta = gsp->wpr_meta.data;
 +
-+	return idx >= 0 ? pci_resource_len(pdev->pdev, idx) : 0;
++		meta->nonWprHeapOffset = rpc->fwWprLayoutOffset.nonWprHeapOffset;
++		meta->frtsOffset = rpc->fwWprLayoutOffset.frtsOffset;
++	}
++
+ 	nvkm_gsp_rpc_done(gsp, rpc);
+ 
+ 	ret = r570_gr_gpc_mask(gsp, &gpc_mask);
+diff --git a/drivers/gpu/drm/nouveau/nvkm/subdev/gsp/rm/r570/nvrm/gsp.h b/drivers/gpu/drm/nouveau/nvkm/subdev/gsp/rm/r570/nvrm/gsp.h
+index 4685a898fac6..b6075021e74f 100644
+--- a/drivers/gpu/drm/nouveau/nvkm/subdev/gsp/rm/r570/nvrm/gsp.h
++++ b/drivers/gpu/drm/nouveau/nvkm/subdev/gsp/rm/r570/nvrm/gsp.h
+@@ -573,4 +573,62 @@ typedef struct
+                                     (88u + (BULLSEYE_ROOT_HEAP_ALLOC_RM_DATA_SECTION_SIZE_DELTA) + \
+                                     (BULLSEYE_ROOT_HEAP_ALLOC_BAREMETAL_LIBOS_HEAP_SIZE_DELTA))
+ 
++typedef struct GSP_FMC_INIT_PARAMS
++{
++    // CC initialization "registry keys"
++    NvU32 regkeys;
++} GSP_FMC_INIT_PARAMS;
++
++typedef enum {
++    GSP_DMA_TARGET_LOCAL_FB,
++    GSP_DMA_TARGET_COHERENT_SYSTEM,
++    GSP_DMA_TARGET_NONCOHERENT_SYSTEM,
++    GSP_DMA_TARGET_COUNT
++} GSP_DMA_TARGET;
++
++typedef struct GSP_ACR_BOOT_GSP_RM_PARAMS
++{
++    // Physical memory aperture through which gspRmDescPa is accessed
++    GSP_DMA_TARGET target;
++    // Size in bytes of the GSP-RM descriptor structure
++    NvU32          gspRmDescSize;
++    // Physical offset in the target aperture of the GSP-RM descriptor structure
++    NvU64          gspRmDescOffset;
++    // Physical offset in FB to set the start of the WPR containing GSP-RM
++    NvU64          wprCarveoutOffset;
++    // Size in bytes of the WPR containing GSP-RM
++    NvU32          wprCarveoutSize;
++    // Whether to boot GSP-RM or GSP-Proxy through ACR
++    NvBool         bIsGspRmBoot;
++} GSP_ACR_BOOT_GSP_RM_PARAMS;
++
++typedef struct GSP_RM_PARAMS
++{
++    // Physical memory aperture through which bootArgsOffset is accessed
++    GSP_DMA_TARGET target;
++    // Physical offset in the memory aperture that will be passed to GSP-RM
++    NvU64          bootArgsOffset;
++} GSP_RM_PARAMS;
++
++typedef struct GSP_SPDM_PARAMS
++{
++    // Physical Memory Aperture through which all addresses are accessed
++    GSP_DMA_TARGET target;
++
++    // Physical offset in the memory aperture where SPDM payload is stored
++    NvU64 payloadBufferOffset;
++
++    // Size of the above payload buffer
++    NvU32 payloadBufferSize;
++} GSP_SPDM_PARAMS;
++
++typedef struct GSP_FMC_BOOT_PARAMS
++{
++    GSP_FMC_INIT_PARAMS         initParams;
++    GSP_ACR_BOOT_GSP_RM_PARAMS  bootGspRmParams;
++    GSP_RM_PARAMS               gspRmParams;
++    GSP_SPDM_PARAMS             gspSpdmParams;
++} GSP_FMC_BOOT_PARAMS;
++
++#define GSP_FW_HEAP_PARAM_BASE_RM_SIZE_GH100              (14 << 20)   // Hopper+
+ #endif
+diff --git a/drivers/gpu/drm/nouveau/nvkm/subdev/gsp/rm/r570/rm.c b/drivers/gpu/drm/nouveau/nvkm/subdev/gsp/rm/r570/rm.c
+index ad80d8a3d6d3..8a641e5a5b92 100644
+--- a/drivers/gpu/drm/nouveau/nvkm/subdev/gsp/rm/r570/rm.c
++++ b/drivers/gpu/drm/nouveau/nvkm/subdev/gsp/rm/r570/rm.c
+@@ -20,6 +20,15 @@ r570_wpr_libos3 = {
+ 	.heap_size_min = GSP_FW_HEAP_SIZE_OVERRIDE_LIBOS3_BAREMETAL_MIN_MB,
+ };
+ 
++static const struct nvkm_rm_wpr
++r570_wpr_libos3_gh100 = {
++	.os_carveout_size = GSP_FW_HEAP_PARAM_OS_SIZE_LIBOS3_BAREMETAL,
++	.base_size = GSP_FW_HEAP_PARAM_BASE_RM_SIZE_GH100,
++	.heap_size_min = GSP_FW_HEAP_SIZE_OVERRIDE_LIBOS3_BAREMETAL_MIN_MB,
++	.heap_size_non_wpr = 0x200000,
++	.offset_set_by_acr = true,
++};
++
+ static const struct nvkm_rm_api
+ r570_api = {
+ 	.gsp = &r570_gsp,
+@@ -50,3 +59,9 @@ r570_rm_ga102 = {
+ 	.wpr = &r570_wpr_libos3,
+ 	.api = &r570_api,
+ };
++
++const struct nvkm_rm_impl
++r570_rm_gh100 = {
++	.wpr = &r570_wpr_libos3_gh100,
++	.api = &r570_api,
++};
+diff --git a/drivers/gpu/drm/nouveau/nvkm/subdev/gsp/rm/rm.h b/drivers/gpu/drm/nouveau/nvkm/subdev/gsp/rm/rm.h
+index ead48c106bb6..626ebce39be5 100644
+--- a/drivers/gpu/drm/nouveau/nvkm/subdev/gsp/rm/rm.h
++++ b/drivers/gpu/drm/nouveau/nvkm/subdev/gsp/rm/rm.h
+@@ -25,6 +25,8 @@ struct nvkm_rm_wpr {
+ 	u32 os_carveout_size;
+ 	u32 base_size;
+ 	u64 heap_size_min;
++	u32 heap_size_non_wpr;
++	bool offset_set_by_acr;
+ };
+ 
+ struct nvkm_rm_api {
+@@ -173,6 +175,7 @@ extern const struct nvkm_rm_api_engine r535_ofa;
+ 
+ extern const struct nvkm_rm_impl r570_rm_tu102;
+ extern const struct nvkm_rm_impl r570_rm_ga102;
++extern const struct nvkm_rm_impl r570_rm_gh100;
+ extern const struct nvkm_rm_api_gsp r570_gsp;
+ extern const struct nvkm_rm_api_client r570_client;
+ extern const struct nvkm_rm_api_fbsr r570_fbsr;
+diff --git a/drivers/gpu/drm/nouveau/nvkm/subdev/gsp/tu102.c b/drivers/gpu/drm/nouveau/nvkm/subdev/gsp/tu102.c
+index 97c02aa93d55..58e233bc53b1 100644
+--- a/drivers/gpu/drm/nouveau/nvkm/subdev/gsp/tu102.c
++++ b/drivers/gpu/drm/nouveau/nvkm/subdev/gsp/tu102.c
+@@ -246,7 +246,7 @@ tu102_gsp_wpr_meta_init(struct nvkm_gsp *gsp)
+ 	return 0;
  }
  
- static int
-diff --git a/drivers/gpu/drm/nouveau/nvkm/engine/device/tegra.c b/drivers/gpu/drm/nouveau/nvkm/engine/device/tegra.c
-index 78a83f904bbd..f7f21d9ed6ef 100644
---- a/drivers/gpu/drm/nouveau/nvkm/engine/device/tegra.c
-+++ b/drivers/gpu/drm/nouveau/nvkm/engine/device/tegra.c
-@@ -186,21 +186,31 @@ nvkm_device_tegra(struct nvkm_device *device)
+-static u64
++u64
+ tu102_gsp_wpr_heap_size(struct nvkm_gsp *gsp)
+ {
+ 	u32 fb_size_gb = DIV_ROUND_UP_ULL(gsp->fb.size, 1 << 30);
+@@ -379,7 +379,7 @@ tu102_gsp = {
+ 	.rm.gpu = &tu1xx_gpu,
+ };
+ 
+-static int
++int
+ tu102_gsp_load_rm(struct nvkm_gsp *gsp, const struct nvkm_gsp_fwif *fwif)
+ {
+ 	struct nvkm_subdev *subdev = &gsp->subdev;
+diff --git a/drivers/gpu/drm/nouveau/nvkm/subdev/instmem/Kbuild b/drivers/gpu/drm/nouveau/nvkm/subdev/instmem/Kbuild
+index 06cbe19ce376..fa7a2862dd1f 100644
+--- a/drivers/gpu/drm/nouveau/nvkm/subdev/instmem/Kbuild
++++ b/drivers/gpu/drm/nouveau/nvkm/subdev/instmem/Kbuild
+@@ -4,3 +4,4 @@ nvkm-y += nvkm/subdev/instmem/nv04.o
+ nvkm-y += nvkm/subdev/instmem/nv40.o
+ nvkm-y += nvkm/subdev/instmem/nv50.o
+ nvkm-y += nvkm/subdev/instmem/gk20a.o
++nvkm-y += nvkm/subdev/instmem/gh100.o
+diff --git a/drivers/gpu/drm/nouveau/nvkm/subdev/instmem/gh100.c b/drivers/gpu/drm/nouveau/nvkm/subdev/instmem/gh100.c
+new file mode 100644
+index 000000000000..8d8dd5f8a6c7
+--- /dev/null
++++ b/drivers/gpu/drm/nouveau/nvkm/subdev/instmem/gh100.c
+@@ -0,0 +1,28 @@
++/* SPDX-License-Identifier: MIT
++ *
++ * Copyright (c) 2025, NVIDIA CORPORATION. All rights reserved.
++ */
++#include "priv.h"
++
++#include <nvhw/ref/gh100/pri_nv_xal_ep.h>
++
++static void
++gh100_instmem_set_bar0_window_addr(struct nvkm_device *device, u64 addr)
++{
++	nvkm_wr32(device, NV_XAL_EP_BAR0_WINDOW, addr >> NV_XAL_EP_BAR0_WINDOW_BASE_SHIFT);
++}
++
++static const struct nvkm_instmem_func
++gh100_instmem = {
++	.fini = nv50_instmem_fini,
++	.memory_new = nv50_instobj_new,
++	.memory_wrap = nv50_instobj_wrap,
++	.set_bar0_window_addr = gh100_instmem_set_bar0_window_addr,
++};
++
++int
++gh100_instmem_new(struct nvkm_device *device, enum nvkm_subdev_type type, int inst,
++		  struct nvkm_instmem **pimem)
++{
++	return r535_instmem_new(&gh100_instmem, device, type, inst, pimem);
++}
+diff --git a/drivers/gpu/drm/nouveau/nvkm/subdev/instmem/nv50.c b/drivers/gpu/drm/nouveau/nvkm/subdev/instmem/nv50.c
+index 9d29e5234734..4ca6fb30743d 100644
+--- a/drivers/gpu/drm/nouveau/nvkm/subdev/instmem/nv50.c
++++ b/drivers/gpu/drm/nouveau/nvkm/subdev/instmem/nv50.c
+@@ -353,7 +353,7 @@ nv50_instobj_func = {
+ 	.map = nv50_instobj_map,
+ };
+ 
+-static int
++int
+ nv50_instobj_wrap(struct nvkm_instmem *base,
+ 		  struct nvkm_memory *memory, struct nvkm_memory **pmemory)
+ {
+@@ -373,7 +373,7 @@ nv50_instobj_wrap(struct nvkm_instmem *base,
+ 	return 0;
  }
  
- static struct resource *
--nvkm_device_tegra_resource(struct nvkm_device *device, unsigned bar)
-+nvkm_device_tegra_resource(struct nvkm_device *device, enum nvkm_bar_id bar)
+-static int
++int
+ nv50_instobj_new(struct nvkm_instmem *imem, u32 size, u32 align, bool zero,
+ 		 struct nvkm_memory **pmemory)
  {
- 	struct nvkm_device_tegra *tdev = nvkm_device_tegra(device);
--	return platform_get_resource(tdev->pdev, IORESOURCE_MEM, bar);
-+	int idx;
+@@ -400,7 +400,7 @@ nv50_instmem_set_bar0_window_addr(struct nvkm_device *device, u64 addr)
+ 	nvkm_wr32(device, 0x001700, addr >> 16);
+ }
+ 
+-static void
++void
+ nv50_instmem_fini(struct nvkm_instmem *base)
+ {
+ 	nv50_instmem(base)->addr = ~0ULL;
+diff --git a/drivers/gpu/drm/nouveau/nvkm/subdev/instmem/priv.h b/drivers/gpu/drm/nouveau/nvkm/subdev/instmem/priv.h
+index d5b5fcd9262b..87bbdd786eaa 100644
+--- a/drivers/gpu/drm/nouveau/nvkm/subdev/instmem/priv.h
++++ b/drivers/gpu/drm/nouveau/nvkm/subdev/instmem/priv.h
+@@ -21,6 +21,11 @@ struct nvkm_instmem_func {
+ 
+ int nv50_instmem_new_(const struct nvkm_instmem_func *, struct nvkm_device *,
+ 		      enum nvkm_subdev_type, int, struct nvkm_instmem **);
++void nv50_instmem_fini(struct nvkm_instmem *);
++int nv50_instobj_new(struct nvkm_instmem *, u32 size, u32 align, bool zero,
++		     struct nvkm_memory **);
++int nv50_instobj_wrap(struct nvkm_instmem *, struct nvkm_memory *vram,
++		      struct nvkm_memory **bar2);
+ 
+ void nvkm_instmem_ctor(const struct nvkm_instmem_func *, struct nvkm_device *,
+ 		       enum nvkm_subdev_type, int, struct nvkm_instmem *);
+diff --git a/drivers/gpu/drm/nouveau/nvkm/subdev/mmu/Kbuild b/drivers/gpu/drm/nouveau/nvkm/subdev/mmu/Kbuild
+index a602b0cb5b31..ea4848931540 100644
+--- a/drivers/gpu/drm/nouveau/nvkm/subdev/mmu/Kbuild
++++ b/drivers/gpu/drm/nouveau/nvkm/subdev/mmu/Kbuild
+@@ -15,6 +15,7 @@ nvkm-y += nvkm/subdev/mmu/gp100.o
+ nvkm-y += nvkm/subdev/mmu/gp10b.o
+ nvkm-y += nvkm/subdev/mmu/gv100.o
+ nvkm-y += nvkm/subdev/mmu/tu102.o
++nvkm-y += nvkm/subdev/mmu/gh100.o
+ 
+ nvkm-y += nvkm/subdev/mmu/mem.o
+ nvkm-y += nvkm/subdev/mmu/memnv04.o
+@@ -36,6 +37,7 @@ nvkm-y += nvkm/subdev/mmu/vmmgp100.o
+ nvkm-y += nvkm/subdev/mmu/vmmgp10b.o
+ nvkm-y += nvkm/subdev/mmu/vmmgv100.o
+ nvkm-y += nvkm/subdev/mmu/vmmtu102.o
++nvkm-y += nvkm/subdev/mmu/vmmgh100.o
+ 
+ nvkm-y += nvkm/subdev/mmu/umem.o
+ nvkm-y += nvkm/subdev/mmu/ummu.o
+diff --git a/drivers/gpu/drm/nouveau/nvkm/subdev/mmu/gh100.c b/drivers/gpu/drm/nouveau/nvkm/subdev/mmu/gh100.c
+new file mode 100644
+index 000000000000..2918fb32cc91
+--- /dev/null
++++ b/drivers/gpu/drm/nouveau/nvkm/subdev/mmu/gh100.c
+@@ -0,0 +1,25 @@
++/* SPDX-License-Identifier: MIT
++ *
++ * Copyright (c) 2025, NVIDIA CORPORATION. All rights reserved.
++ */
++#include "mem.h"
++#include "vmm.h"
 +
-+	switch (bar) {
-+	case NVKM_BAR0_PRI: idx = 0; break;
-+	case NVKM_BAR1_FB : idx = 1; break;
++#include <nvif/class.h>
++
++static const struct nvkm_mmu_func
++gh100_mmu = {
++	.dma_bits = 52,
++	.mmu = {{ -1, -1, NVIF_CLASS_MMU_GF100}},
++	.mem = {{ -1,  0, NVIF_CLASS_MEM_GF100}, gf100_mem_new, gf100_mem_map },
++	.vmm = {{ -1,  0, NVIF_CLASS_VMM_GP100}, gh100_vmm_new },
++	.kind = tu102_mmu_kind,
++	.kind_sys = true,
++};
++
++int
++gh100_mmu_new(struct nvkm_device *device, enum nvkm_subdev_type type, int inst,
++	      struct nvkm_mmu **pmmu)
++{
++	return r535_mmu_new(&gh100_mmu, device, type, inst, pmmu);
++}
+diff --git a/drivers/gpu/drm/nouveau/nvkm/subdev/mmu/priv.h b/drivers/gpu/drm/nouveau/nvkm/subdev/mmu/priv.h
+index e9ca6537778c..90efef8f0b54 100644
+--- a/drivers/gpu/drm/nouveau/nvkm/subdev/mmu/priv.h
++++ b/drivers/gpu/drm/nouveau/nvkm/subdev/mmu/priv.h
+@@ -53,6 +53,8 @@ const u8 *gf100_mmu_kind(struct nvkm_mmu *, int *count, u8 *invalid);
+ 
+ const u8 *gm200_mmu_kind(struct nvkm_mmu *, int *, u8 *);
+ 
++const u8 *tu102_mmu_kind(struct nvkm_mmu *, int *, u8 *);
++
+ struct nvkm_mmu_pt {
+ 	union {
+ 		struct nvkm_mmu_ptc *ptc;
+diff --git a/drivers/gpu/drm/nouveau/nvkm/subdev/mmu/tu102.c b/drivers/gpu/drm/nouveau/nvkm/subdev/mmu/tu102.c
+index df662ce4a4b0..7acff3642e20 100644
+--- a/drivers/gpu/drm/nouveau/nvkm/subdev/mmu/tu102.c
++++ b/drivers/gpu/drm/nouveau/nvkm/subdev/mmu/tu102.c
+@@ -28,7 +28,7 @@
+ 
+ #include <nvif/class.h>
+ 
+-static const u8 *
++const u8 *
+ tu102_mmu_kind(struct nvkm_mmu *mmu, int *count, u8 *invalid)
+ {
+ 	static const u8
+diff --git a/drivers/gpu/drm/nouveau/nvkm/subdev/mmu/vmm.h b/drivers/gpu/drm/nouveau/nvkm/subdev/mmu/vmm.h
+index f9bc30cdb2b3..4586a425dbe4 100644
+--- a/drivers/gpu/drm/nouveau/nvkm/subdev/mmu/vmm.h
++++ b/drivers/gpu/drm/nouveau/nvkm/subdev/mmu/vmm.h
+@@ -143,6 +143,8 @@ struct nvkm_vmm_func {
+ 	int (*aper)(enum nvkm_memory_target);
+ 	int (*valid)(struct nvkm_vmm *, void *argv, u32 argc,
+ 		     struct nvkm_vmm_map *);
++	int (*valid2)(struct nvkm_vmm *, bool ro, bool priv, u8 kind, u8 comp,
++		      struct nvkm_vmm_map *);
+ 	void (*flush)(struct nvkm_vmm *, int depth);
+ 
+ 	int (*mthd)(struct nvkm_vmm *, struct nvkm_client *,
+@@ -254,6 +256,8 @@ void gp100_vmm_invalidate_pdb(struct nvkm_vmm *, u64 addr);
+ 
+ int gv100_vmm_join(struct nvkm_vmm *, struct nvkm_memory *);
+ 
++void tu102_vmm_flush(struct nvkm_vmm *, int depth);
++
+ int nv04_vmm_new(struct nvkm_mmu *, bool, u64, u64, void *, u32,
+ 		 struct lock_class_key *, const char *, struct nvkm_vmm **);
+ int nv41_vmm_new(struct nvkm_mmu *, bool, u64, u64, void *, u32,
+@@ -296,6 +300,9 @@ int gv100_vmm_new(struct nvkm_mmu *, bool, u64, u64, void *, u32,
+ int tu102_vmm_new(struct nvkm_mmu *, bool, u64, u64, void *, u32,
+ 		  struct lock_class_key *, const char *,
+ 		  struct nvkm_vmm **);
++int gh100_vmm_new(struct nvkm_mmu *, bool, u64, u64, void *, u32,
++		  struct lock_class_key *, const char *,
++		  struct nvkm_vmm **);
+ 
+ #define VMM_PRINT(l,v,p,f,a...) do {                                           \
+ 	struct nvkm_vmm *_vmm = (v);                                           \
+diff --git a/drivers/gpu/drm/nouveau/nvkm/subdev/mmu/vmmgh100.c b/drivers/gpu/drm/nouveau/nvkm/subdev/mmu/vmmgh100.c
+new file mode 100644
+index 000000000000..5614df3432da
+--- /dev/null
++++ b/drivers/gpu/drm/nouveau/nvkm/subdev/mmu/vmmgh100.c
+@@ -0,0 +1,306 @@
++/* SPDX-License-Identifier: MIT
++ *
++ * Copyright (c) 2025, NVIDIA CORPORATION. All rights reserved.
++ */
++#include "vmm.h"
++
++#include <subdev/fb.h>
++
++#include <nvhw/drf.h>
++#include <nvhw/ref/gh100/dev_mmu.h>
++
++static inline void
++gh100_vmm_pgt_pte(struct nvkm_vmm *vmm, struct nvkm_mmu_pt *pt, u32 ptei, u32 ptes,
++		  struct nvkm_vmm_map *map, u64 addr)
++{
++	u64 data = addr | map->type;
++
++	while (ptes--) {
++		VMM_WO064(pt, vmm, ptei++ * NV_MMU_VER3_PTE__SIZE, data);
++		data += map->next;
++	}
++}
++
++static void
++gh100_vmm_pgt_sgl(struct nvkm_vmm *vmm, struct nvkm_mmu_pt *pt, u32 ptei, u32 ptes,
++		  struct nvkm_vmm_map *map)
++{
++	VMM_MAP_ITER_SGL(vmm, pt, ptei, ptes, map, gh100_vmm_pgt_pte);
++}
++
++static void
++gh100_vmm_pgt_dma(struct nvkm_vmm *vmm, struct nvkm_mmu_pt *pt, u32 ptei, u32 ptes,
++		  struct nvkm_vmm_map *map)
++{
++	if (map->page->shift == PAGE_SHIFT) {
++		VMM_SPAM(vmm, "DMAA %08x %08x PTE(s)", ptei, ptes);
++
++		nvkm_kmap(pt->memory);
++		while (ptes--) {
++			const u64 data = *map->dma++ | map->type;
++
++			VMM_WO064(pt, vmm, ptei++ * NV_MMU_VER3_PTE__SIZE, data);
++		}
++		nvkm_done(pt->memory);
++		return;
++	}
++
++	VMM_MAP_ITER_DMA(vmm, pt, ptei, ptes, map, gh100_vmm_pgt_pte);
++}
++
++static void
++gh100_vmm_pgt_mem(struct nvkm_vmm *vmm, struct nvkm_mmu_pt *pt, u32 ptei, u32 ptes,
++		  struct nvkm_vmm_map *map)
++{
++	VMM_MAP_ITER_MEM(vmm, pt, ptei, ptes, map, gh100_vmm_pgt_pte);
++}
++
++static void
++gh100_vmm_pgt_sparse(struct nvkm_vmm *vmm,
++		     struct nvkm_mmu_pt *pt, u32 ptei, u32 ptes)
++{
++	const u64 data = NVDEF(NV_MMU, VER3_PTE, PCF, SPARSE);
++
++	VMM_FO064(pt, vmm, ptei * NV_MMU_VER3_PTE__SIZE, data, ptes);
++}
++
++static const struct nvkm_vmm_desc_func
++gh100_vmm_desc_spt = {
++	.unmap = gf100_vmm_pgt_unmap,
++	.sparse = gh100_vmm_pgt_sparse,
++	.mem = gh100_vmm_pgt_mem,
++	.dma = gh100_vmm_pgt_dma,
++	.sgl = gh100_vmm_pgt_sgl,
++};
++
++static void
++gh100_vmm_lpt_invalid(struct nvkm_vmm *vmm,
++		      struct nvkm_mmu_pt *pt, u32 ptei, u32 ptes)
++{
++	const u64 data = NVDEF(NV_MMU, VER3_PTE, PCF, NO_VALID_4KB_PAGE);
++
++	VMM_FO064(pt, vmm, ptei * NV_MMU_VER3_PTE__SIZE, data, ptes);
++}
++
++static const struct nvkm_vmm_desc_func
++gh100_vmm_desc_lpt = {
++	.invalid = gh100_vmm_lpt_invalid,
++	.unmap = gf100_vmm_pgt_unmap,
++	.sparse = gh100_vmm_pgt_sparse,
++	.mem = gh100_vmm_pgt_mem,
++};
++
++static inline void
++gh100_vmm_pd0_pte(struct nvkm_vmm *vmm, struct nvkm_mmu_pt *pt,
++		  u32 ptei, u32 ptes, struct nvkm_vmm_map *map, u64 addr)
++{
++	u64 data = addr | map->type;
++
++	while (ptes--) {
++		VMM_WO128(pt, vmm, ptei++ * NV_MMU_VER3_DUAL_PDE__SIZE, data, 0ULL);
++		data += map->next;
++	}
++}
++
++static void
++gh100_vmm_pd0_mem(struct nvkm_vmm *vmm, struct nvkm_mmu_pt *pt,
++		  u32 ptei, u32 ptes, struct nvkm_vmm_map *map)
++{
++	VMM_MAP_ITER_MEM(vmm, pt, ptei, ptes, map, gh100_vmm_pd0_pte);
++}
++
++static inline bool
++gh100_vmm_pde(struct nvkm_mmu_pt *pt, u64 *data)
++{
++	switch (nvkm_memory_target(pt->memory)) {
++	case NVKM_MEM_TARGET_VRAM:
++		*data |= NVDEF(NV_MMU, VER3_PDE, APERTURE, VIDEO_MEMORY);
++		*data |= NVDEF(NV_MMU, VER3_PDE, PCF, VALID_CACHED_ATS_NOT_ALLOWED);
++		break;
++	case NVKM_MEM_TARGET_HOST:
++		*data |= NVDEF(NV_MMU, VER3_PDE, APERTURE, SYSTEM_COHERENT_MEMORY);
++		*data |= NVDEF(NV_MMU, VER3_PDE, PCF, VALID_UNCACHED_ATS_ALLOWED);
++		break;
++	case NVKM_MEM_TARGET_NCOH:
++		*data |= NVDEF(NV_MMU, VER3_PDE, APERTURE, SYSTEM_NON_COHERENT_MEMORY);
++		*data |= NVDEF(NV_MMU, VER3_PDE, PCF, VALID_CACHED_ATS_ALLOWED);
++		break;
 +	default:
 +		WARN_ON(1);
++		return false;
++	}
++
++	*data |= pt->addr;
++	return true;
++}
++
++static void
++gh100_vmm_pd0_pde(struct nvkm_vmm *vmm, struct nvkm_vmm_pt *pgd, u32 pdei)
++{
++	struct nvkm_vmm_pt *pgt = pgd->pde[pdei];
++	struct nvkm_mmu_pt *pd = pgd->pt[0];
++	u64 data[2] = {};
++
++	if (pgt->pt[0] && !gh100_vmm_pde(pgt->pt[0], &data[0]))
++		return;
++	if (pgt->pt[1] && !gh100_vmm_pde(pgt->pt[1], &data[1]))
++		return;
++
++	nvkm_kmap(pd->memory);
++	VMM_WO128(pd, vmm, pdei * NV_MMU_VER3_DUAL_PDE__SIZE, data[0], data[1]);
++	nvkm_done(pd->memory);
++}
++
++static void
++gh100_vmm_pd0_sparse(struct nvkm_vmm *vmm,
++		     struct nvkm_mmu_pt *pt, u32 pdei, u32 pdes)
++{
++	const u64 data = NVDEF(NV_MMU, VER3_DUAL_PDE, PCF_BIG, SPARSE_ATS_ALLOWED);
++
++	VMM_FO128(pt, vmm, pdei * NV_MMU_VER3_DUAL_PDE__SIZE, data, 0ULL, pdes);
++}
++
++static void
++gh100_vmm_pd0_unmap(struct nvkm_vmm *vmm,
++		    struct nvkm_mmu_pt *pt, u32 pdei, u32 pdes)
++{
++	VMM_FO128(pt, vmm, pdei * NV_MMU_VER3_DUAL_PDE__SIZE, 0ULL, 0ULL, pdes);
++}
++
++static const struct nvkm_vmm_desc_func
++gh100_vmm_desc_pd0 = {
++	.unmap = gh100_vmm_pd0_unmap,
++	.sparse = gh100_vmm_pd0_sparse,
++	.pde = gh100_vmm_pd0_pde,
++	.mem = gh100_vmm_pd0_mem,
++};
++
++static void
++gh100_vmm_pd1_pde(struct nvkm_vmm *vmm, struct nvkm_vmm_pt *pgd, u32 pdei)
++{
++	struct nvkm_vmm_pt *pgt = pgd->pde[pdei];
++	struct nvkm_mmu_pt *pd = pgd->pt[0];
++	u64 data = 0;
++
++	if (!gh100_vmm_pde(pgt->pt[0], &data))
++		return;
++
++	nvkm_kmap(pd->memory);
++	VMM_WO064(pd, vmm, pdei * NV_MMU_VER3_PDE__SIZE, data);
++	nvkm_done(pd->memory);
++}
++
++static const struct nvkm_vmm_desc_func
++gh100_vmm_desc_pd1 = {
++	.unmap = gf100_vmm_pgt_unmap,
++	.sparse = gh100_vmm_pgt_sparse,
++	.pde = gh100_vmm_pd1_pde,
++};
++
++static const struct nvkm_vmm_desc
++gh100_vmm_desc_16[] = {
++	{ LPT, 5,  8, 0x0100, &gh100_vmm_desc_lpt },
++	{ PGD, 8, 16, 0x1000, &gh100_vmm_desc_pd0 },
++	{ PGD, 9,  8, 0x1000, &gh100_vmm_desc_pd1 },
++	{ PGD, 9,  8, 0x1000, &gh100_vmm_desc_pd1 },
++	{ PGD, 9,  8, 0x1000, &gh100_vmm_desc_pd1 },
++	{ PGD, 1,  8, 0x1000, &gh100_vmm_desc_pd1 },
++	{}
++};
++
++static const struct nvkm_vmm_desc
++gh100_vmm_desc_12[] = {
++	{ SPT, 9,  8, 0x1000, &gh100_vmm_desc_spt },
++	{ PGD, 8, 16, 0x1000, &gh100_vmm_desc_pd0 },
++	{ PGD, 9,  8, 0x1000, &gh100_vmm_desc_pd1 },
++	{ PGD, 9,  8, 0x1000, &gh100_vmm_desc_pd1 },
++	{ PGD, 9,  8, 0x1000, &gh100_vmm_desc_pd1 },
++	{ PGD, 1,  8, 0x1000, &gh100_vmm_desc_pd1 },
++	{}
++};
++
++static int
++gh100_vmm_valid(struct nvkm_vmm *vmm, bool ro, bool priv, u8 kind, u8 comp,
++		struct nvkm_vmm_map *map)
++{
++	const enum nvkm_memory_target target = nvkm_memory_target(map->memory);
++	const bool vol = target == NVKM_MEM_TARGET_HOST;
++	const struct nvkm_vmm_page *page = map->page;
++	u8 kind_inv, pcf;
++	int kindn, aper;
++	const u8 *kindm;
++
++	map->next = 1ULL << page->shift;
++	map->type = 0;
++
++	aper = vmm->func->aper(target);
++	if (WARN_ON(aper < 0))
++		return aper;
++
++	kindm = vmm->mmu->func->kind(vmm->mmu, &kindn, &kind_inv);
++	if (kind >= kindn || kindm[kind] == kind_inv) {
++		VMM_DEBUG(vmm, "kind %02x", kind);
 +		return -EINVAL;
 +	}
 +
-+	return platform_get_resource(tdev->pdev, IORESOURCE_MEM, idx);
- }
- 
- static resource_size_t
--nvkm_device_tegra_resource_addr(struct nvkm_device *device, unsigned bar)
-+nvkm_device_tegra_resource_addr(struct nvkm_device *device, enum nvkm_bar_id bar)
- {
- 	struct resource *res = nvkm_device_tegra_resource(device, bar);
- 	return res ? res->start : 0;
- }
- 
- static resource_size_t
--nvkm_device_tegra_resource_size(struct nvkm_device *device, unsigned bar)
-+nvkm_device_tegra_resource_size(struct nvkm_device *device, enum nvkm_bar_id bar)
- {
- 	struct resource *res = nvkm_device_tegra_resource(device, bar);
- 	return res ? resource_size(res) : 0;
-diff --git a/drivers/gpu/drm/nouveau/nvkm/engine/device/user.c b/drivers/gpu/drm/nouveau/nvkm/engine/device/user.c
-index d7f75b3a43c8..1f331ec8d747 100644
---- a/drivers/gpu/drm/nouveau/nvkm/engine/device/user.c
-+++ b/drivers/gpu/drm/nouveau/nvkm/engine/device/user.c
-@@ -209,8 +209,8 @@ nvkm_udevice_map(struct nvkm_object *object, void *argv, u32 argc,
- 	struct nvkm_udevice *udev = nvkm_udevice(object);
- 	struct nvkm_device *device = udev->device;
- 	*type = NVKM_OBJECT_MAP_IO;
--	*addr = device->func->resource_addr(device, 0);
--	*size = device->func->resource_size(device, 0);
-+	*addr = device->func->resource_addr(device, NVKM_BAR0_PRI);
-+	*size = device->func->resource_size(device, NVKM_BAR0_PRI);
- 	return 0;
- }
- 
-diff --git a/drivers/gpu/drm/nouveau/nvkm/engine/disp/chan.c b/drivers/gpu/drm/nouveau/nvkm/engine/disp/chan.c
-index 4e43ee383c34..9b84e357d354 100644
---- a/drivers/gpu/drm/nouveau/nvkm/engine/disp/chan.c
-+++ b/drivers/gpu/drm/nouveau/nvkm/engine/disp/chan.c
-@@ -49,7 +49,7 @@ nvkm_disp_chan_map(struct nvkm_object *object, void *argv, u32 argc,
- {
- 	struct nvkm_disp_chan *chan = nvkm_disp_chan(object);
- 	struct nvkm_device *device = chan->disp->engine.subdev.device;
--	const u64 base = device->func->resource_addr(device, 0);
-+	const u64 base = device->func->resource_addr(device, NVKM_BAR0_PRI);
- 
- 	*type = NVKM_OBJECT_MAP_IO;
- 	*addr = base + chan->func->user(chan, size);
-diff --git a/drivers/gpu/drm/nouveau/nvkm/engine/disp/gv100.c b/drivers/gpu/drm/nouveau/nvkm/engine/disp/gv100.c
-index cfa3698d3a2f..614921166fba 100644
---- a/drivers/gpu/drm/nouveau/nvkm/engine/disp/gv100.c
-+++ b/drivers/gpu/drm/nouveau/nvkm/engine/disp/gv100.c
-@@ -805,7 +805,7 @@ gv100_disp_caps_map(struct nvkm_object *object, void *argv, u32 argc,
- 	struct gv100_disp_caps *caps = gv100_disp_caps(object);
- 	struct nvkm_device *device = caps->disp->engine.subdev.device;
- 	*type = NVKM_OBJECT_MAP_IO;
--	*addr = 0x640000 + device->func->resource_addr(device, 0);
-+	*addr = 0x640000 + device->func->resource_addr(device, NVKM_BAR0_PRI);
- 	*size = 0x1000;
- 	return 0;
- }
-diff --git a/drivers/gpu/drm/nouveau/nvkm/engine/fifo/base.c b/drivers/gpu/drm/nouveau/nvkm/engine/fifo/base.c
-index 3c2ca711dc5c..fdffa0391b31 100644
---- a/drivers/gpu/drm/nouveau/nvkm/engine/fifo/base.c
-+++ b/drivers/gpu/drm/nouveau/nvkm/engine/fifo/base.c
-@@ -303,7 +303,7 @@ nvkm_fifo_oneinit(struct nvkm_engine *engine)
++	if (priv) {
++		if (ro) {
++			if (vol)
++				pcf = NV_MMU_VER3_PTE_PCF_PRIVILEGE_RO_ATOMIC_UNCACHED_ACD;
++			else
++				pcf = NV_MMU_VER3_PTE_PCF_PRIVILEGE_RO_ATOMIC_CACHED_ACD;
++		} else {
++			if (vol)
++				pcf = NV_MMU_VER3_PTE_PCF_PRIVILEGE_RW_ATOMIC_UNCACHED_ACD;
++			else
++				pcf = NV_MMU_VER3_PTE_PCF_PRIVILEGE_RW_ATOMIC_CACHED_ACD;
++		}
++	} else {
++		if (ro) {
++			if (vol)
++				pcf = NV_MMU_VER3_PTE_PCF_REGULAR_RO_ATOMIC_UNCACHED_ACD;
++			else
++				pcf = NV_MMU_VER3_PTE_PCF_REGULAR_RO_ATOMIC_CACHED_ACD;
++		} else {
++			if (vol)
++				pcf = NV_MMU_VER3_PTE_PCF_REGULAR_RW_ATOMIC_UNCACHED_ACD;
++			else
++				pcf = NV_MMU_VER3_PTE_PCF_REGULAR_RW_ATOMIC_CACHED_ACD;
++		}
++	}
++
++	map->type |= NVDEF(NV_MMU, VER3_PTE, VALID, TRUE);
++	map->type |= NVVAL(NV_MMU, VER3_PTE, APERTURE, aper);
++	map->type |= NVVAL(NV_MMU, VER3_PTE, PCF, pcf);
++	map->type |= NVVAL(NV_MMU, VER3_PTE, KIND, kind);
++	return 0;
++}
++
++static const struct nvkm_vmm_func
++gh100_vmm = {
++	.join = gv100_vmm_join,
++	.part = gf100_vmm_part,
++	.aper = gf100_vmm_aper,
++	.valid = gp100_vmm_valid,
++	.valid2 = gh100_vmm_valid,
++	.flush = tu102_vmm_flush,
++	.page = {
++		{ 56, &gh100_vmm_desc_16[5], NVKM_VMM_PAGE_Sxxx },
++		{ 47, &gh100_vmm_desc_16[4], NVKM_VMM_PAGE_Sxxx },
++		{ 38, &gh100_vmm_desc_16[3], NVKM_VMM_PAGE_Sxxx },
++		{ 29, &gh100_vmm_desc_16[2], NVKM_VMM_PAGE_SVxC },
++		{ 21, &gh100_vmm_desc_16[1], NVKM_VMM_PAGE_SVxC },
++		{ 16, &gh100_vmm_desc_16[0], NVKM_VMM_PAGE_SVxC },
++		{ 12, &gh100_vmm_desc_12[0], NVKM_VMM_PAGE_SVHx },
++		{}
++	}
++};
++
++int
++gh100_vmm_new(struct nvkm_mmu *mmu, bool managed, u64 addr, u64 size,
++	      void *argv, u32 argc, struct lock_class_key *key,
++	      const char *name, struct nvkm_vmm **pvmm)
++{
++	return gp100_vmm_new_(&gh100_vmm, mmu, managed, addr, size,
++			      argv, argc, key, name, pvmm);
++}
+diff --git a/drivers/gpu/drm/nouveau/nvkm/subdev/mmu/vmmgp100.c b/drivers/gpu/drm/nouveau/nvkm/subdev/mmu/vmmgp100.c
+index bddac77f48f0..851fd847a2a9 100644
+--- a/drivers/gpu/drm/nouveau/nvkm/subdev/mmu/vmmgp100.c
++++ b/drivers/gpu/drm/nouveau/nvkm/subdev/mmu/vmmgp100.c
+@@ -436,6 +436,9 @@ gp100_vmm_valid(struct nvkm_vmm *vmm, void *argv, u32 argc,
+ 		return ret;
  	}
  
- 	/* Allocate USERD + BAR1 polling area. */
--	if (fifo->func->chan.func->userd->bar == 1) {
-+	if (fifo->func->chan.func->userd->bar == NVKM_BAR1_FB) {
- 		struct nvkm_vmm *bar1 = nvkm_bar_bar1_vmm(device);
++	if (vmm->func->valid2)
++		return vmm->func->valid2(vmm, ro, priv, kind, 0, map);
++
+ 	aper = vmm->func->aper(target);
+ 	if (WARN_ON(aper < 0))
+ 		return aper;
+diff --git a/drivers/gpu/drm/nouveau/nvkm/subdev/mmu/vmmtu102.c b/drivers/gpu/drm/nouveau/nvkm/subdev/mmu/vmmtu102.c
+index 8379e72d77ab..4b30eab40bba 100644
+--- a/drivers/gpu/drm/nouveau/nvkm/subdev/mmu/vmmtu102.c
++++ b/drivers/gpu/drm/nouveau/nvkm/subdev/mmu/vmmtu102.c
+@@ -23,7 +23,7 @@
  
- 		ret = nvkm_memory_new(device, NVKM_MEM_TARGET_INST, fifo->chid->nr *
-diff --git a/drivers/gpu/drm/nouveau/nvkm/engine/fifo/chan.c b/drivers/gpu/drm/nouveau/nvkm/engine/fifo/chan.c
-index 78be7abc90d1..4e09985424b6 100644
---- a/drivers/gpu/drm/nouveau/nvkm/engine/fifo/chan.c
-+++ b/drivers/gpu/drm/nouveau/nvkm/engine/fifo/chan.c
-@@ -355,14 +355,14 @@ nvkm_chan_new_(const struct nvkm_chan_func *func, struct nvkm_runl *runl, int ru
- 	/* Validate arguments against class requirements. */
- 	if ((runq && runq >= runl->func->runqs) ||
- 	    (!func->inst->vmm != !vmm) ||
--	    ((func->userd->bar < 0) == !userd) ||
-+	    (!func->userd->bar == !userd) ||
- 	    (!func->ramfc->ctxdma != !dmaobj) ||
- 	    ((func->ramfc->devm < devm) && devm != BIT(0)) ||
- 	    (!func->ramfc->priv && priv)) {
- 		RUNL_DEBUG(runl, "args runq:%d:%d vmm:%d:%p userd:%d:%p "
- 				 "push:%d:%p devm:%08x:%08x priv:%d:%d",
- 			   runl->func->runqs, runq, func->inst->vmm, vmm,
--			   func->userd->bar < 0, userd, func->ramfc->ctxdma, dmaobj,
-+			   func->userd->bar, userd, func->ramfc->ctxdma, dmaobj,
- 			   func->ramfc->devm, devm, func->ramfc->priv, priv);
- 		return -EINVAL;
- 	}
-@@ -439,7 +439,7 @@ nvkm_chan_new_(const struct nvkm_chan_func *func, struct nvkm_runl *runl, int ru
- 	/* Allocate channel ID. */
- 	chan->id = nvkm_chid_get(runl->chid, chan);
- 	if (chan->id >= 0) {
--		if (func->userd->bar < 0) {
-+		if (!func->userd->bar) {
- 			if (ouserd + chan->func->userd->size >=
- 				nvkm_memory_size(userd)) {
- 				RUNL_DEBUG(runl, "ouserd %llx", ouserd);
-diff --git a/drivers/gpu/drm/nouveau/nvkm/engine/fifo/chan.h b/drivers/gpu/drm/nouveau/nvkm/engine/fifo/chan.h
-index 85b94f699128..445db5dfd1e4 100644
---- a/drivers/gpu/drm/nouveau/nvkm/engine/fifo/chan.h
-+++ b/drivers/gpu/drm/nouveau/nvkm/engine/fifo/chan.h
-@@ -24,7 +24,7 @@ struct nvkm_chan_func {
- 	} *inst;
+ #include <subdev/timer.h>
  
- 	const struct nvkm_chan_func_userd {
--		int bar;
-+		enum nvkm_bar_id bar;
- 		u32 base;
- 		u32 size;
- 		void (*clear)(struct nvkm_chan *);
-diff --git a/drivers/gpu/drm/nouveau/nvkm/engine/fifo/gf100.c b/drivers/gpu/drm/nouveau/nvkm/engine/fifo/gf100.c
-index 6c94451d0faa..e4a4fad2eafc 100644
---- a/drivers/gpu/drm/nouveau/nvkm/engine/fifo/gf100.c
-+++ b/drivers/gpu/drm/nouveau/nvkm/engine/fifo/gf100.c
-@@ -133,7 +133,7 @@ gf100_chan_userd_clear(struct nvkm_chan *chan)
- 
- static const struct nvkm_chan_func_userd
- gf100_chan_userd = {
--	.bar = 1,
-+	.bar = NVKM_BAR1_FB,
- 	.size = 0x1000,
- 	.clear = gf100_chan_userd_clear,
- };
-diff --git a/drivers/gpu/drm/nouveau/nvkm/engine/fifo/gk104.c b/drivers/gpu/drm/nouveau/nvkm/engine/fifo/gk104.c
-index d8a4d773a58c..5655eda52a7b 100644
---- a/drivers/gpu/drm/nouveau/nvkm/engine/fifo/gk104.c
-+++ b/drivers/gpu/drm/nouveau/nvkm/engine/fifo/gk104.c
-@@ -113,7 +113,7 @@ gk104_chan_ramfc = {
- 
- const struct nvkm_chan_func_userd
- gk104_chan_userd = {
--	.bar = 1,
-+	.bar = NVKM_BAR1_FB,
- 	.size = 0x200,
- 	.clear = gf100_chan_userd_clear,
- };
-@@ -745,7 +745,7 @@ gk104_fifo_init(struct nvkm_fifo *fifo)
+-static void
++void
+ tu102_vmm_flush(struct nvkm_vmm *vmm, int depth)
  {
- 	struct nvkm_device *device = fifo->engine.subdev.device;
- 
--	if (fifo->func->chan.func->userd->bar == 1)
-+	if (fifo->func->chan.func->userd->bar == NVKM_BAR1_FB)
- 		nvkm_wr32(device, 0x002254, 0x10000000 | fifo->userd.bar1->addr >> 12);
- 
- 	nvkm_wr32(device, 0x002100, 0xffffffff);
-diff --git a/drivers/gpu/drm/nouveau/nvkm/engine/fifo/gv100.c b/drivers/gpu/drm/nouveau/nvkm/engine/fifo/gv100.c
-index 33066c8cdc64..d7f046c03cfd 100644
---- a/drivers/gpu/drm/nouveau/nvkm/engine/fifo/gv100.c
-+++ b/drivers/gpu/drm/nouveau/nvkm/engine/fifo/gv100.c
-@@ -70,7 +70,6 @@ gv100_chan_ramfc = {
- 
- const struct nvkm_chan_func_userd
- gv100_chan_userd = {
--	.bar = -1,
- 	.size = 0x200,
- 	.clear = gf100_chan_userd_clear,
- };
-diff --git a/drivers/gpu/drm/nouveau/nvkm/engine/fifo/nv04.c b/drivers/gpu/drm/nouveau/nvkm/engine/fifo/nv04.c
-index 674faf002b20..c4b8e567d86f 100644
---- a/drivers/gpu/drm/nouveau/nvkm/engine/fifo/nv04.c
-+++ b/drivers/gpu/drm/nouveau/nvkm/engine/fifo/nv04.c
-@@ -154,7 +154,7 @@ nv04_chan_ramfc = {
- 
- const struct nvkm_chan_func_userd
- nv04_chan_userd = {
--	.bar = 0,
-+	.bar = NVKM_BAR0_PRI,
- 	.base = 0x800000,
- 	.size = 0x010000,
- };
-diff --git a/drivers/gpu/drm/nouveau/nvkm/engine/fifo/nv40.c b/drivers/gpu/drm/nouveau/nvkm/engine/fifo/nv40.c
-index e50a94b6d7f8..084ca5561ee1 100644
---- a/drivers/gpu/drm/nouveau/nvkm/engine/fifo/nv40.c
-+++ b/drivers/gpu/drm/nouveau/nvkm/engine/fifo/nv40.c
-@@ -93,7 +93,7 @@ nv40_chan_ramfc = {
- 
- static const struct nvkm_chan_func_userd
- nv40_chan_userd = {
--	.bar = 0,
-+	.bar = NVKM_BAR0_PRI,
- 	.base = 0xc00000,
- 	.size = 0x001000,
- };
-diff --git a/drivers/gpu/drm/nouveau/nvkm/engine/fifo/nv50.c b/drivers/gpu/drm/nouveau/nvkm/engine/fifo/nv50.c
-index 954b5f3a7d57..7bf77661157d 100644
---- a/drivers/gpu/drm/nouveau/nvkm/engine/fifo/nv50.c
-+++ b/drivers/gpu/drm/nouveau/nvkm/engine/fifo/nv50.c
-@@ -124,7 +124,7 @@ nv50_chan_ramfc = {
- 
- const struct nvkm_chan_func_userd
- nv50_chan_userd = {
--	.bar = 0,
-+	.bar = NVKM_BAR0_PRI,
- 	.base = 0xc00000,
- 	.size = 0x002000,
- };
-diff --git a/drivers/gpu/drm/nouveau/nvkm/engine/fifo/uchan.c b/drivers/gpu/drm/nouveau/nvkm/engine/fifo/uchan.c
-index 9e56bcc166ed..52420a1edca5 100644
---- a/drivers/gpu/drm/nouveau/nvkm/engine/fifo/uchan.c
-+++ b/drivers/gpu/drm/nouveau/nvkm/engine/fifo/uchan.c
-@@ -258,7 +258,7 @@ nvkm_uchan_map(struct nvkm_object *object, void *argv, u32 argc,
- 	struct nvkm_chan *chan = nvkm_uchan(object)->chan;
- 	struct nvkm_device *device = chan->cgrp->runl->fifo->engine.subdev.device;
- 
--	if (chan->func->userd->bar < 0)
-+	if (!chan->func->userd->bar)
- 		return -ENOSYS;
- 
- 	*type = NVKM_OBJECT_MAP_IO;
-diff --git a/drivers/gpu/drm/nouveau/nvkm/engine/gr/nv20.c b/drivers/gpu/drm/nouveau/nvkm/engine/gr/nv20.c
-index 02a8c62a0a32..13407fafe947 100644
---- a/drivers/gpu/drm/nouveau/nvkm/engine/gr/nv20.c
-+++ b/drivers/gpu/drm/nouveau/nvkm/engine/gr/nv20.c
-@@ -297,7 +297,7 @@ nv20_gr_init(struct nvkm_gr *base)
- 	nvkm_wr32(device, NV10_PGRAPH_SURFACE, tmp);
- 
- 	/* begin RAM config */
--	vramsz = device->func->resource_size(device, 1) - 1;
-+	vramsz = device->func->resource_size(device, NVKM_BAR1_FB) - 1;
- 	nvkm_wr32(device, 0x4009A4, nvkm_rd32(device, 0x100200));
- 	nvkm_wr32(device, 0x4009A8, nvkm_rd32(device, 0x100204));
- 	nvkm_wr32(device, NV10_PGRAPH_RDI_INDEX, 0x00EA0000);
-diff --git a/drivers/gpu/drm/nouveau/nvkm/engine/gr/nv40.c b/drivers/gpu/drm/nouveau/nvkm/engine/gr/nv40.c
-index a5e1f02791b4..b609b0150ba1 100644
---- a/drivers/gpu/drm/nouveau/nvkm/engine/gr/nv40.c
-+++ b/drivers/gpu/drm/nouveau/nvkm/engine/gr/nv40.c
-@@ -386,7 +386,7 @@ nv40_gr_init(struct nvkm_gr *base)
- 	}
- 
- 	/* begin RAM config */
--	vramsz = device->func->resource_size(device, 1) - 1;
-+	vramsz = device->func->resource_size(device, NVKM_BAR1_FB) - 1;
- 	switch (device->chipset) {
- 	case 0x40:
- 		nvkm_wr32(device, 0x4009A4, nvkm_rd32(device, 0x100200));
-diff --git a/drivers/gpu/drm/nouveau/nvkm/subdev/bar/gf100.c b/drivers/gpu/drm/nouveau/nvkm/subdev/bar/gf100.c
-index 51070b7dda85..e5e60915029c 100644
---- a/drivers/gpu/drm/nouveau/nvkm/subdev/bar/gf100.c
-+++ b/drivers/gpu/drm/nouveau/nvkm/subdev/bar/gf100.c
-@@ -82,7 +82,7 @@ gf100_bar_bar2_init(struct nvkm_bar *base)
- 
- static int
- gf100_bar_oneinit_bar(struct gf100_bar *bar, struct gf100_barN *bar_vm,
--		      struct lock_class_key *key, int bar_nr)
-+		      struct lock_class_key *key, enum nvkm_bar_id bar_id)
- {
- 	struct nvkm_device *device = bar->base.subdev.device;
- 	resource_size_t bar_len;
-@@ -93,14 +93,14 @@ gf100_bar_oneinit_bar(struct gf100_bar *bar, struct gf100_barN *bar_vm,
- 	if (ret)
- 		return ret;
- 
--	bar_len = device->func->resource_size(device, bar_nr);
-+	bar_len = device->func->resource_size(device, bar_id);
- 	if (!bar_len)
- 		return -ENOMEM;
--	if (bar_nr == 3 && bar->bar2_halve)
-+	if (bar_id == NVKM_BAR2_INST && bar->bar2_halve)
- 		bar_len >>= 1;
- 
- 	ret = nvkm_vmm_new(device, 0, bar_len, NULL, 0, key,
--			   (bar_nr == 3) ? "bar2" : "bar1", &bar_vm->vmm);
-+			   (bar_id == NVKM_BAR2_INST) ? "bar2" : "bar1", &bar_vm->vmm);
- 	if (ret)
- 		return ret;
- 
-@@ -110,7 +110,7 @@ gf100_bar_oneinit_bar(struct gf100_bar *bar, struct gf100_barN *bar_vm,
- 	/*
- 	 * Bootstrap page table lookup.
- 	 */
--	if (bar_nr == 3) {
-+	if (bar_id == NVKM_BAR2_INST) {
- 		ret = nvkm_vmm_boot(bar_vm->vmm);
- 		if (ret)
- 			return ret;
-@@ -129,7 +129,7 @@ gf100_bar_oneinit(struct nvkm_bar *base)
- 
- 	/* BAR2 */
- 	if (bar->base.func->bar2.init) {
--		ret = gf100_bar_oneinit_bar(bar, &bar->bar[0], &bar2_lock, 3);
-+		ret = gf100_bar_oneinit_bar(bar, &bar->bar[0], &bar2_lock, NVKM_BAR2_INST);
- 		if (ret)
- 			return ret;
- 
-@@ -138,7 +138,7 @@ gf100_bar_oneinit(struct nvkm_bar *base)
- 	}
- 
- 	/* BAR1 */
--	ret = gf100_bar_oneinit_bar(bar, &bar->bar[1], &bar1_lock, 1);
-+	ret = gf100_bar_oneinit_bar(bar, &bar->bar[1], &bar1_lock, NVKM_BAR1_FB);
- 	if (ret)
- 		return ret;
- 
-diff --git a/drivers/gpu/drm/nouveau/nvkm/subdev/bar/nv50.c b/drivers/gpu/drm/nouveau/nvkm/subdev/bar/nv50.c
-index 27d8a1be43e4..6a881becb02c 100644
---- a/drivers/gpu/drm/nouveau/nvkm/subdev/bar/nv50.c
-+++ b/drivers/gpu/drm/nouveau/nvkm/subdev/bar/nv50.c
-@@ -127,7 +127,7 @@ nv50_bar_oneinit(struct nvkm_bar *base)
- 
- 	/* BAR2 */
- 	start = 0x0100000000ULL;
--	size = device->func->resource_size(device, 3);
-+	size = device->func->resource_size(device, NVKM_BAR2_INST);
- 	if (!size)
- 		return -ENOMEM;
- 	limit = start + size;
-@@ -167,7 +167,7 @@ nv50_bar_oneinit(struct nvkm_bar *base)
- 
- 	/* BAR1 */
- 	start = 0x0000000000ULL;
--	size = device->func->resource_size(device, 1);
-+	size = device->func->resource_size(device, NVKM_BAR1_FB);
- 	if (!size)
- 		return -ENOMEM;
- 	limit = start + size;
-diff --git a/drivers/gpu/drm/nouveau/nvkm/subdev/devinit/fbmem.h b/drivers/gpu/drm/nouveau/nvkm/subdev/devinit/fbmem.h
-index 6c5bbff12eb4..b918e22df5a8 100644
---- a/drivers/gpu/drm/nouveau/nvkm/subdev/devinit/fbmem.h
-+++ b/drivers/gpu/drm/nouveau/nvkm/subdev/devinit/fbmem.h
-@@ -47,8 +47,8 @@
- static inline struct io_mapping *
- fbmem_init(struct nvkm_device *dev)
- {
--	return io_mapping_create_wc(dev->func->resource_addr(dev, 1),
--				    dev->func->resource_size(dev, 1));
-+	return io_mapping_create_wc(dev->func->resource_addr(dev, NVKM_BAR1_FB),
-+				    dev->func->resource_size(dev, NVKM_BAR1_FB));
- }
- 
- static inline void
-diff --git a/drivers/gpu/drm/nouveau/nvkm/subdev/fault/user.c b/drivers/gpu/drm/nouveau/nvkm/subdev/fault/user.c
-index c123e5893d76..cd2fbc0472d8 100644
---- a/drivers/gpu/drm/nouveau/nvkm/subdev/fault/user.c
-+++ b/drivers/gpu/drm/nouveau/nvkm/subdev/fault/user.c
-@@ -50,7 +50,7 @@ nvkm_ufault_map(struct nvkm_object *object, void *argv, u32 argc,
- 	struct nvkm_fault_buffer *buffer = nvkm_fault_buffer(object);
- 	struct nvkm_device *device = buffer->fault->subdev.device;
- 	*type = NVKM_OBJECT_MAP_IO;
--	*addr = device->func->resource_addr(device, 3) + buffer->addr;
-+	*addr = device->func->resource_addr(device, NVKM_BAR2_INST) + buffer->addr;
- 	*size = nvkm_memory_size(buffer->mem);
- 	return 0;
- }
-diff --git a/drivers/gpu/drm/nouveau/nvkm/subdev/gsp/rm/r535/bar.c b/drivers/gpu/drm/nouveau/nvkm/subdev/gsp/rm/r535/bar.c
-index 91242f09648e..d06bf95b9a4a 100644
---- a/drivers/gpu/drm/nouveau/nvkm/subdev/gsp/rm/r535/bar.c
-+++ b/drivers/gpu/drm/nouveau/nvkm/subdev/gsp/rm/r535/bar.c
-@@ -191,7 +191,7 @@ r535_bar_new_(const struct nvkm_bar_func *hw, struct nvkm_device *device,
- 	}
- 	*pbar = bar;
- 
--	bar->flushBAR2PhysMode = ioremap(device->func->resource_addr(device, 3), PAGE_SIZE);
-+	bar->flushBAR2PhysMode = ioremap(device->func->resource_addr(device, NVKM_BAR2_INST), PAGE_SIZE);
- 	if (!bar->flushBAR2PhysMode)
- 		return -ENOMEM;
- 
-diff --git a/drivers/gpu/drm/nouveau/nvkm/subdev/gsp/rm/r535/gsp.c b/drivers/gpu/drm/nouveau/nvkm/subdev/gsp/rm/r535/gsp.c
-index e2171d0d25be..fe00425c5479 100644
---- a/drivers/gpu/drm/nouveau/nvkm/subdev/gsp/rm/r535/gsp.c
-+++ b/drivers/gpu/drm/nouveau/nvkm/subdev/gsp/rm/r535/gsp.c
-@@ -901,9 +901,9 @@ r535_gsp_set_system_info(struct nvkm_gsp *gsp)
- 	if (IS_ERR(info))
- 		return PTR_ERR(info);
- 
--	info->gpuPhysAddr = device->func->resource_addr(device, 0);
--	info->gpuPhysFbAddr = device->func->resource_addr(device, 1);
--	info->gpuPhysInstAddr = device->func->resource_addr(device, 3);
-+	info->gpuPhysAddr = device->func->resource_addr(device, NVKM_BAR0_PRI);
-+	info->gpuPhysFbAddr = device->func->resource_addr(device, NVKM_BAR1_FB);
-+	info->gpuPhysInstAddr = device->func->resource_addr(device, NVKM_BAR2_INST);
- 	info->nvDomainBusDeviceFunc = pci_dev_id(pdev->pdev);
- 	info->maxUserVa = TASK_SIZE;
- 	info->pciConfigMirrorBase = device->pci->func->cfg.addr;
-diff --git a/drivers/gpu/drm/nouveau/nvkm/subdev/gsp/rm/r570/gsp.c b/drivers/gpu/drm/nouveau/nvkm/subdev/gsp/rm/r570/gsp.c
-index a3c070d41923..730dcb645cca 100644
---- a/drivers/gpu/drm/nouveau/nvkm/subdev/gsp/rm/r570/gsp.c
-+++ b/drivers/gpu/drm/nouveau/nvkm/subdev/gsp/rm/r570/gsp.c
-@@ -153,9 +153,9 @@ r570_gsp_set_system_info(struct nvkm_gsp *gsp)
- 	if (IS_ERR(info))
- 		return PTR_ERR(info);
- 
--	info->gpuPhysAddr = device->func->resource_addr(device, 0);
--	info->gpuPhysFbAddr = device->func->resource_addr(device, 1);
--	info->gpuPhysInstAddr = device->func->resource_addr(device, 3);
-+	info->gpuPhysAddr = device->func->resource_addr(device, NVKM_BAR0_PRI);
-+	info->gpuPhysFbAddr = device->func->resource_addr(device, NVKM_BAR1_FB);
-+	info->gpuPhysInstAddr = device->func->resource_addr(device, NVKM_BAR2_INST);
- 	info->nvDomainBusDeviceFunc = pci_dev_id(pdev);
- 	info->maxUserVa = TASK_SIZE;
- 	info->pciConfigMirrorBase = device->pci->func->cfg.addr;
-diff --git a/drivers/gpu/drm/nouveau/nvkm/subdev/instmem/nv40.c b/drivers/gpu/drm/nouveau/nvkm/subdev/instmem/nv40.c
-index 6b462f960922..2544b9f0ec85 100644
---- a/drivers/gpu/drm/nouveau/nvkm/subdev/instmem/nv40.c
-+++ b/drivers/gpu/drm/nouveau/nvkm/subdev/instmem/nv40.c
-@@ -239,7 +239,6 @@ nv40_instmem_new(struct nvkm_device *device, enum nvkm_subdev_type type, int ins
- 		 struct nvkm_instmem **pimem)
- {
- 	struct nv40_instmem *imem;
--	int bar;
- 
- 	if (!(imem = kzalloc(sizeof(*imem), GFP_KERNEL)))
- 		return -ENOMEM;
-@@ -247,13 +246,8 @@ nv40_instmem_new(struct nvkm_device *device, enum nvkm_subdev_type type, int ins
- 	*pimem = &imem->base;
- 
- 	/* map bar */
--	if (device->func->resource_size(device, 2))
--		bar = 2;
--	else
--		bar = 3;
--
--	imem->iomem = ioremap_wc(device->func->resource_addr(device, bar),
--				 device->func->resource_size(device, bar));
-+	imem->iomem = ioremap_wc(device->func->resource_addr(device, NVKM_BAR2_INST),
-+				 device->func->resource_size(device, NVKM_BAR2_INST));
- 	if (!imem->iomem) {
- 		nvkm_error(&imem->base.subdev, "unable to map PRAMIN BAR\n");
- 		return -EFAULT;
-diff --git a/drivers/gpu/drm/nouveau/nvkm/subdev/instmem/nv50.c b/drivers/gpu/drm/nouveau/nvkm/subdev/instmem/nv50.c
-index 0ef66d7d5e51..9d29e5234734 100644
---- a/drivers/gpu/drm/nouveau/nvkm/subdev/instmem/nv50.c
-+++ b/drivers/gpu/drm/nouveau/nvkm/subdev/instmem/nv50.c
-@@ -172,7 +172,7 @@ nv50_instobj_kmap(struct nv50_instobj *iobj, struct nvkm_vmm *vmm)
- 
- 	/* Make the mapping visible to the host. */
- 	iobj->bar = bar;
--	iobj->map = ioremap_wc(device->func->resource_addr(device, 3) +
-+	iobj->map = ioremap_wc(device->func->resource_addr(device, NVKM_BAR2_INST) +
- 			       (u32)iobj->bar->addr, size);
- 	if (!iobj->map) {
- 		nvkm_warn(subdev, "PRAMIN ioremap failed\n");
-diff --git a/drivers/gpu/drm/nouveau/nvkm/subdev/mmu/memgf100.c b/drivers/gpu/drm/nouveau/nvkm/subdev/mmu/memgf100.c
-index d9c9bee45222..160a5749a29f 100644
---- a/drivers/gpu/drm/nouveau/nvkm/subdev/mmu/memgf100.c
-+++ b/drivers/gpu/drm/nouveau/nvkm/subdev/mmu/memgf100.c
-@@ -60,7 +60,7 @@ gf100_mem_map(struct nvkm_mmu *mmu, struct nvkm_memory *memory, void *argv,
- 	if (ret)
- 		return ret;
- 
--	*paddr = device->func->resource_addr(device, 1) + (*pvma)->addr;
-+	*paddr = device->func->resource_addr(device, NVKM_BAR1_FB) + (*pvma)->addr;
- 	*psize = (*pvma)->size;
- 	return 0;
- }
-diff --git a/drivers/gpu/drm/nouveau/nvkm/subdev/mmu/memnv04.c b/drivers/gpu/drm/nouveau/nvkm/subdev/mmu/memnv04.c
-index 79a3b0cc9f5b..1e3db52de6cb 100644
---- a/drivers/gpu/drm/nouveau/nvkm/subdev/mmu/memnv04.c
-+++ b/drivers/gpu/drm/nouveau/nvkm/subdev/mmu/memnv04.c
-@@ -41,7 +41,7 @@ nv04_mem_map(struct nvkm_mmu *mmu, struct nvkm_memory *memory, void *argv,
- 	if ((ret = nvif_unvers(ret, &argv, &argc, args->vn)))
- 		return ret;
- 
--	*paddr = device->func->resource_addr(device, 1) + addr;
-+	*paddr = device->func->resource_addr(device, NVKM_BAR1_FB) + addr;
- 	*psize = nvkm_memory_size(memory);
- 	*pvma = ERR_PTR(-ENODEV);
- 	return 0;
-diff --git a/drivers/gpu/drm/nouveau/nvkm/subdev/mmu/memnv50.c b/drivers/gpu/drm/nouveau/nvkm/subdev/mmu/memnv50.c
-index 46759b89fc1f..33b2321e9d87 100644
---- a/drivers/gpu/drm/nouveau/nvkm/subdev/mmu/memnv50.c
-+++ b/drivers/gpu/drm/nouveau/nvkm/subdev/mmu/memnv50.c
-@@ -57,7 +57,7 @@ nv50_mem_map(struct nvkm_mmu *mmu, struct nvkm_memory *memory, void *argv,
- 	if (ret)
- 		return ret;
- 
--	*paddr = device->func->resource_addr(device, 1) + (*pvma)->addr;
-+	*paddr = device->func->resource_addr(device, NVKM_BAR1_FB) + (*pvma)->addr;
- 	*psize = (*pvma)->size;
- 	return nvkm_memory_map(memory, 0, bar, *pvma, &uvmm, sizeof(uvmm));
- }
-diff --git a/drivers/gpu/drm/nouveau/nvkm/subdev/vfn/uvfn.c b/drivers/gpu/drm/nouveau/nvkm/subdev/vfn/uvfn.c
-index c5460a14c541..4e64d8843373 100644
---- a/drivers/gpu/drm/nouveau/nvkm/subdev/vfn/uvfn.c
-+++ b/drivers/gpu/drm/nouveau/nvkm/subdev/vfn/uvfn.c
-@@ -36,7 +36,7 @@ nvkm_uvfn_map(struct nvkm_object *object, void *argv, u32 argc,
- 	struct nvkm_vfn *vfn = nvkm_uvfn(object)->vfn;
- 	struct nvkm_device *device = vfn->subdev.device;
- 
--	*addr = device->func->resource_addr(device, 0) + vfn->addr.user;
-+	*addr = device->func->resource_addr(device, NVKM_BAR0_PRI) + vfn->addr.user;
- 	*size = vfn->func->user.size;
- 	*type = NVKM_OBJECT_MAP_IO;
- 	return 0;
+ 	struct nvkm_device *device = vmm->mmu->subdev.device;
+diff --git a/drivers/gpu/drm/nouveau/nvkm/subdev/pci/Kbuild b/drivers/gpu/drm/nouveau/nvkm/subdev/pci/Kbuild
+index 174bdf995271..a14ea0f7b1c8 100644
+--- a/drivers/gpu/drm/nouveau/nvkm/subdev/pci/Kbuild
++++ b/drivers/gpu/drm/nouveau/nvkm/subdev/pci/Kbuild
+@@ -13,3 +13,4 @@ nvkm-y += nvkm/subdev/pci/gf100.o
+ nvkm-y += nvkm/subdev/pci/gf106.o
+ nvkm-y += nvkm/subdev/pci/gk104.o
+ nvkm-y += nvkm/subdev/pci/gp100.o
++nvkm-y += nvkm/subdev/pci/gh100.o
+diff --git a/drivers/gpu/drm/nouveau/nvkm/subdev/pci/gh100.c b/drivers/gpu/drm/nouveau/nvkm/subdev/pci/gh100.c
+new file mode 100644
+index 000000000000..42da92d7a5fe
+--- /dev/null
++++ b/drivers/gpu/drm/nouveau/nvkm/subdev/pci/gh100.c
+@@ -0,0 +1,30 @@
++/* SPDX-License-Identifier: MIT
++ *
++ * Copyright (c) 2025, NVIDIA CORPORATION. All rights reserved.
++ */
++#include "priv.h"
++
++#include <nvhw/drf.h>
++#include <nvhw/ref/gh100/dev_xtl_ep_pri.h>
++
++static void
++gh100_pci_msi_rearm(struct nvkm_pci *pci)
++{
++	/* Handled by top-level intr ACK. */
++}
++
++static const struct nvkm_pci_func
++gh100_pci = {
++	.cfg = {
++		.addr = DRF_LO(NV_EP_PCFGM),
++		.size = DRF_HI(NV_EP_PCFGM) - DRF_LO(NV_EP_PCFGM) + 1,
++	},
++	.msi_rearm = gh100_pci_msi_rearm,
++};
++
++int
++gh100_pci_new(struct nvkm_device *device, enum nvkm_subdev_type type, int inst,
++	      struct nvkm_pci **ppci)
++{
++	return nvkm_pci_new_(&gh100_pci, device, type, inst, ppci);
++}
 -- 
 2.49.0
 
