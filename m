@@ -2,27 +2,27 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id 7B96EABA6FF
-	for <lists+nouveau@lfdr.de>; Sat, 17 May 2025 02:10:44 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 0F50CABA700
+	for <lists+nouveau@lfdr.de>; Sat, 17 May 2025 02:10:45 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 3B37510E10D;
-	Sat, 17 May 2025 00:10:41 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 1985810EBA4;
+	Sat, 17 May 2025 00:10:43 +0000 (UTC)
 Authentication-Results: gabe.freedesktop.org;
-	dkim=pass (2048-bit key; unprotected) header.d=Nvidia.com header.i=@Nvidia.com header.b="jt7MMStq";
+	dkim=pass (2048-bit key; unprotected) header.d=Nvidia.com header.i=@Nvidia.com header.b="MHcn+jww";
 	dkim-atps=neutral
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from NAM12-DM6-obe.outbound.protection.outlook.com
- (mail-dm6nam12on2079.outbound.protection.outlook.com [40.107.243.79])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 92DF510E119
- for <nouveau@lists.freedesktop.org>; Sat, 17 May 2025 00:10:39 +0000 (UTC)
+Received: from NAM04-MW2-obe.outbound.protection.outlook.com
+ (mail-mw2nam04on2062.outbound.protection.outlook.com [40.107.101.62])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id A492610EBA4
+ for <nouveau@lists.freedesktop.org>; Sat, 17 May 2025 00:10:41 +0000 (UTC)
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=GZ6dzoiGQzYOpOS9pd1QMyuq+6+cIOXK9Mdeey/q0NqCQAIOKi4PMggIC21bG/Fhb5m9k36lcKmlBAQHELz+F/bpg9fsnvFJZGfOfXKfeJkzbYa5Lf43xU20iEKoChXCy53J6QTSpOXh+MUrjenBEvunb5+n4JVkQaPhj9zvQ/CW49uZRjIkmatQu8WTrN5Z/LJzlc9ZSeO2P1zjugYkRyM9br6QQzUrUReiWiMSu3tXeZUBTihfsF27Kez+8eaMvC8nOeBm2TBRARrdxbD2muBYmhbuOHGslg9w7qr4I0xTRt+dPLDBY0rYVPQaLfBuf22SLhxqwT36JNWuZCJWMg==
+ b=guyxJ2zC0ZEzArYv0tX7xR4vBUyLs/zoyZdf2HKxMr3dYZV7ZXdqaAgOIATPIZ995ckEKNVO1ymmqdA6n2mVi24Nu3Qt94zaFdGeWAVyBIVsQUXsON8n5DKoARFTmCRCPJmoaoqf0VdjsaGIxYi79wGa1TbjgzKSMnUkV69FHw5vLjWtrHpvCUNS2ZF/zpRPwlfKlqXvtUeDOY9yJEBqn0U1HB3vP7+B+/p7dQ/D7fOVBV40s2ygxC2gFTIQjFqoEWmdebTtn1E3iWIf0mnyX+K+RD7MD08KTjnqQV/y+XZlkdwnCDGLoo+o9GHs7SL2cn+BJF8WiCkwvEzUDDlsbw==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
  s=arcselector10001;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=cl0Wl21ed743iQNgQ7iPhARQiQSdqU9SVt/9NL9itrc=;
- b=Eybz2HTn9474wDbBpA2u2BOtTYEhpXEKaypUQ7L8eLwT29AjPSU61mFrytaB9XWLR/WXraWcdLeztLarm6JuUlh6Vf1L+D9HYMwa/kCkS2oYIRjm8wuvvoONzqzhCijN43nEiKHnY1z1Xc0AkJXzT/p4dGmSH6uXNmhKg+5eoouAYKi4vQC8XVl6h2ZVGIsyePcfuLrjmGkfPsVbFJGhkEY1a3u1S9CLOAhLZa+knPZVebYq4nZP9lfAp+6GT89dTSAD7FKh9UZE5nHX3vX0j4zJRXBPTX6hIPWjo9S7q10M4FJjw6Edvwj11fbQYk6uuYndWCsxnGDv87VWQKwNcQ==
+ bh=hi3MhFbOQaPMKVSc3vKE2r/XWjANYxoIPgeFQB8ZA4g=;
+ b=mAz90rGCYcaMilYeZhwxicqFi4PKYRHWe9xNHirCLKfm2jqb6+q8jvYLVCFK1jUNGLSbTOJ8gB/XcsJgxJELPwFmi/0tAn7r1h2vskLA5L0gH5Scu0Z69jC5dNEWSlu1wWLsieuHp+HkMhSREvX82k4jyExUVhTDmpr07yLclYd3X+UDG88iCBe6ts6Ahf9vToEXGoSqsC4TZaWSPb0zvwBqyA+CinJjgKIRf82PYi3+FhTb4zgqkETYnppEYmOUDNHojDqXr1zqiTCITT45UtXaxZSqKeZWrSTNY4aaImfBX/2GqBEhCmV5l7mInom+1Q06cIOts6OmNw5PygDV0g==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
  216.228.117.161) smtp.rcpttodomain=lists.freedesktop.org
  smtp.mailfrom=nvidia.com; dmarc=pass (p=reject sp=reject pct=100) action=none
@@ -30,18 +30,18 @@ ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=Nvidia.com;
  s=selector2;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=cl0Wl21ed743iQNgQ7iPhARQiQSdqU9SVt/9NL9itrc=;
- b=jt7MMStqs9V1N9InYhKt8LOYPlxoRkW6PJ7JYqsGJ27iviZ9XOJWRddVgLzLgViV2iAuP0R77QHQuywbobsDFEvHx8o1zey7nAzSvaa02h3+BEMGKakmTNWjWmL3cUVTbbZcShRYjvQ6g4GAcefKoeXiS4hhHwFuZ/zyZbHxjIiWIZZs4US5yer9pmsOZaYouFo/7p/kGFwvLtds2GEsH8USOhxQDPVK0qTrzKLPi+9EQR5g33cWR/pe42NFhA9V1wGfFtWypRJkiIgIiVNW7avjeEF4lX9LX+Ymspbpm9Q1nhG4Wj2cOyEE6UXmjP1MGbgX2/LVry/xofvBA0Sz6A==
-Received: from SJ0PR03CA0277.namprd03.prod.outlook.com (2603:10b6:a03:39e::12)
- by SJ0PR12MB6805.namprd12.prod.outlook.com (2603:10b6:a03:44f::5)
+ bh=hi3MhFbOQaPMKVSc3vKE2r/XWjANYxoIPgeFQB8ZA4g=;
+ b=MHcn+jwwjmfOZO/BuFulMwA0FvcO3tv4zSEml16vTGF+Bdv74J/zELJ7R3qEhB1L7SdD5sHepSz1dnU3RUvhPMUTQOmkIb1g8VWTLqp/Q6HOzYIe3GJ8da5khui1+vUozRaH5UazYDKnmO8t/mvm8FyXRq3DD5NvXHcjVF92efE8AEZWQKZcYnkDyegP98y6usXuWqZv44BvOrd8FhvnKDmegXtYpaTYHG0jPqL5kfPZmnYQ2NlzhX4ghAnQ+aiJ0zrAgc8fi7UkrYVZJ/TOSxqyfxh6zmB9UoKwGwS9ffqKbGStgESL4S2M/rGdb3Yzd2fIgHMIsFBEONXZ2Ss7JA==
+Received: from SJ0PR03CA0294.namprd03.prod.outlook.com (2603:10b6:a03:39e::29)
+ by MN0PR12MB5857.namprd12.prod.outlook.com (2603:10b6:208:378::10)
  with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.8722.29; Sat, 17 May
- 2025 00:10:32 +0000
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.8722.32; Sat, 17 May
+ 2025 00:10:35 +0000
 Received: from CY4PEPF0000FCC5.namprd03.prod.outlook.com
- (2603:10b6:a03:39e:cafe::f0) by SJ0PR03CA0277.outlook.office365.com
- (2603:10b6:a03:39e::12) with Microsoft SMTP Server (version=TLS1_3,
- cipher=TLS_AES_256_GCM_SHA384) id 15.20.8722.23 via Frontend Transport; Sat,
- 17 May 2025 00:10:32 +0000
+ (2603:10b6:a03:39e:cafe::d4) by SJ0PR03CA0294.outlook.office365.com
+ (2603:10b6:a03:39e::29) with Microsoft SMTP Server (version=TLS1_3,
+ cipher=TLS_AES_256_GCM_SHA384) id 15.20.8746.16 via Frontend Transport; Sat,
+ 17 May 2025 00:10:35 +0000
 X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 216.228.117.161)
  smtp.mailfrom=nvidia.com;
  dkim=none (message not signed)
@@ -52,23 +52,23 @@ Received-SPF: Pass (protection.outlook.com: domain of nvidia.com designates
 Received: from mail.nvidia.com (216.228.117.161) by
  CY4PEPF0000FCC5.mail.protection.outlook.com (10.167.242.107) with Microsoft
  SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.20.8746.27 via Frontend Transport; Sat, 17 May 2025 00:10:32 +0000
+ 15.20.8746.27 via Frontend Transport; Sat, 17 May 2025 00:10:35 +0000
 Received: from rnnvmail201.nvidia.com (10.129.68.8) by mail.nvidia.com
  (10.129.200.67) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.1544.4; Fri, 16 May
- 2025 17:10:18 -0700
+ 2025 17:10:20 -0700
 Received: from nv-dev.vdiclient.nvidia.com (10.126.231.35) by
  rnnvmail201.nvidia.com (10.129.68.8) with Microsoft SMTP Server
  (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.2.1544.14; Fri, 16 May 2025 17:10:17 -0700
+ 15.2.1544.14; Fri, 16 May 2025 17:10:18 -0700
 From: Ben Skeggs <bskeggs@nvidia.com>
 To: <nouveau@lists.freedesktop.org>
 CC: Ben Skeggs <bskeggs@nvidia.com>, Dave Airlie <airlied@redhat.com>, "Timur
  Tabi" <ttabi@nvidia.com>
-Subject: [PATCH v3 07/62] drm/nouveau/gsp: split rm ctrl handling out on its
+Subject: [PATCH v3 08/62] drm/nouveau/gsp: split rm alloc handling out on its
  own
-Date: Sat, 17 May 2025 10:08:59 +1000
-Message-ID: <20250517000954.35691-8-bskeggs@nvidia.com>
+Date: Sat, 17 May 2025 10:09:00 +1000
+Message-ID: <20250517000954.35691-9-bskeggs@nvidia.com>
 X-Mailer: git-send-email 2.49.0
 In-Reply-To: <20250517000954.35691-1-bskeggs@nvidia.com>
 References: <20250517000954.35691-1-bskeggs@nvidia.com>
@@ -80,52 +80,52 @@ X-ClientProxiedBy: rnnvmail202.nvidia.com (10.129.68.7) To
  rnnvmail201.nvidia.com (10.129.68.8)
 X-EOPAttributedMessage: 0
 X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: CY4PEPF0000FCC5:EE_|SJ0PR12MB6805:EE_
-X-MS-Office365-Filtering-Correlation-Id: d32377c0-09be-4904-b9cf-08dd94d73d69
+X-MS-TrafficTypeDiagnostic: CY4PEPF0000FCC5:EE_|MN0PR12MB5857:EE_
+X-MS-Office365-Filtering-Correlation-Id: 4a0e4a83-ee14-44cf-4600-08dd94d73f0f
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
 X-Microsoft-Antispam: BCL:0;
- ARA:13230040|82310400026|1800799024|376014|36860700013; 
-X-Microsoft-Antispam-Message-Info: =?us-ascii?Q?3CApb5xpn7C1+sCEFhhjMi0tiuCovt4GVL9hJW6HP3tunYo7p/jLp6+J589W?=
- =?us-ascii?Q?z8py+Kq81Gi9giAauZwmgZRS3/mkv0Bt15BOxZ+150gdFop864IJp9J89QYV?=
- =?us-ascii?Q?3jrsNjO7aBTeq9doEjw4cnliZSAFNRWcySp2GDP/YC4zTQESGlNdI/tv6XR9?=
- =?us-ascii?Q?bL/oIs4mwpJg32ceVoUPqPfIrSm0zWxyAIAUwcK3G2x+z83Ed/OZt5osn48C?=
- =?us-ascii?Q?49DBo6khqoPc7eXYSB2y4zywuktwac6ubow5t+4VW8ET85eEaSvINYWJjMDI?=
- =?us-ascii?Q?HaTWKhRuFoS1NumzW3/Q0p3UD9650T3WuSY1PIoR7PvnIGgzA/8BpQ8l4LQD?=
- =?us-ascii?Q?BOS5ZJVi53fIO8IeqVnyX34vO7w+7ESALQkw0ASdHHeZxpy3TlE3KdXqhvF7?=
- =?us-ascii?Q?2LKUiFVugqoP04QSZ6gp/ikesXFEZ9zW/w8qZsvgPnMXXzb2K06/644MuQSp?=
- =?us-ascii?Q?eYWnE4O6JomT+JG66pnCF3BkP4Jui7+4mmWRp7v3kwNqcRECVfQvBnokiKMj?=
- =?us-ascii?Q?x+tLZGPOMOKcmyqkgT9MBWxEzn5GNyiiBVh7cp03QNmVSkhE7nJs2QAmLhrF?=
- =?us-ascii?Q?gupj6qJNib8cBbwErpGsjJh7qmcrbVG9ZVMzpl7QHyHAXA/U8S4ugsob91Rj?=
- =?us-ascii?Q?Djv2o1gIk84/c/+TcUFqxOQoOOIJ3AxqQhzYu2FtC7P6wtL8dXht/ceO+Fju?=
- =?us-ascii?Q?gBGH1KA8XfaYH1k4bcfMX7x1qymeMRCjdvYA/gRM4WuJjdcS2Pj1050Kn14o?=
- =?us-ascii?Q?d+lY1fkDMXeo61Av20d3VnAQCUfs3sNX0i6AW2yGigq2tVPTICVc0P6SgCBw?=
- =?us-ascii?Q?+XHy8n+5ur2EJFIsIkIyDQ4nQ3IiRb562inuUO6AHbzksebvdT268lnIrx1U?=
- =?us-ascii?Q?CiXLh/zN0u3S75d/8y36ZIGkNS3eNX2JTlFd+7ce4tKbUFsaftnJ/eZwKu4+?=
- =?us-ascii?Q?fgFf4jXWnyxu/SUJvZNc2V2PwtA266YJ1XW3WtEMTFot3GSPc2+LqNBpk08f?=
- =?us-ascii?Q?2CanCGxqUGw/CuDecgV2meJc08vnmEjSAlaTS/g4PiOXL8TYwPR8W94Y0JAw?=
- =?us-ascii?Q?4C2bW5VYyfQobOiMqQGJtNt6xCN366yn1lxGcMpesTIs8r6u4Xi53KhpKswN?=
- =?us-ascii?Q?IeVT9xp8oY7JIxz8GIydbZysPy40zspRcD8NXumNUztvzUbdotRaS+yNXSul?=
- =?us-ascii?Q?HDZfsVwostasfKD09bYeKhnUxXuKHjoUG5STULI/XpAoPIV9uOmIisqjf7hZ?=
- =?us-ascii?Q?mdVSPWCQOtZ25JTB5Iqc5+ZVOfg1IWZHk0CKl9SiYnaNCuxrUKh7iv/xBzcv?=
- =?us-ascii?Q?K+3kqhfi+7AhJXo4idhf78mgJ2xHJAdRn0TFygeMxpqTN61vrn+ewtBMgqHC?=
- =?us-ascii?Q?1kctezNgEY48YOvdM0XzQYCZvB1dRgrpO7nQXFeTrRrjjT8SF1pkgjAx9Obv?=
- =?us-ascii?Q?v4nQcFLlr3OzPE/mU8SHjogNzf51eyev883SxWSkHMuBTn9tHiM7lAVwSmWx?=
- =?us-ascii?Q?LBJpqJfCcIKdzrdhLicdtcGlh9GmlmJ/yemq?=
+ ARA:13230040|36860700013|376014|82310400026|1800799024; 
+X-Microsoft-Antispam-Message-Info: =?us-ascii?Q?9YWC1pnT3+b3R5EL67WXL2gi/GBmT8b93PHG8GeI8LOzUrqT9f9W1z6zEu7F?=
+ =?us-ascii?Q?BjGwSPVoYhP8yoHDHLAz0ZHSry71AKSRuor4xCQUByz+aEUDd9sI1BNxwZ9r?=
+ =?us-ascii?Q?D3FkZMIw1pzxbBORb6GP0zw4vKPTGzKrjoJWllNCQq3aGRrep6wsymlSZeNa?=
+ =?us-ascii?Q?dOHRanioMWB7cV2r1uEYQAEtjbSTlPIlPkQvsb3SXm5IxMxkPfpPDsfDcl9k?=
+ =?us-ascii?Q?eO/Ebcjxi7BtJYksID1TS7Q655LS8oDuOw7yDwppE5aUYPQWQ/4uWRYK4Rf6?=
+ =?us-ascii?Q?1eCNtynPa/bIRdv5DS7QeRnR3IE+G/4glPgMUAi0TmohD96dRj42+9kqIBJW?=
+ =?us-ascii?Q?b5m84ctzbiAFpjaXLef6FNAlPeJtLXf9W4+WCdHB2ysbUKrukyWuE3UECI8h?=
+ =?us-ascii?Q?cnt6RM193NXQviF3JMMSBOsZFfDF8E/CjP8YkxQpKOCOWffxIDx5+Pb711em?=
+ =?us-ascii?Q?zUgBEVs2noXZSGjruetnJoL0yOqxDvHOmBshm9OVwL5tJsr+fIRujSmK/F5Q?=
+ =?us-ascii?Q?yt7r3U0xWF7SF89Ahven5w5bUTl+IXDWyKK4Vi5lIcXo2CrHMVnOBxKvQ4Iw?=
+ =?us-ascii?Q?kjz9NbP6+WR+HZuy/Q79Kwd5tL8bc5qn5w4hskPl85MvJApZ9Ca7/6snLjdw?=
+ =?us-ascii?Q?K+Z7MLwlqBRkc3qqzpstyt27JIXykx/FBMRjPgebG6P27AM0uolMuxGpkqFP?=
+ =?us-ascii?Q?SZEV0cwSwee+Ng8uL2RGCYAhz+yj1v7xqf6SOX+w8EUBq93W9CILUQD+OpoP?=
+ =?us-ascii?Q?RP2BJMhqgq4MpsrtSWv1Gh/zJRMF6D2ldjDfXg9CXMQdfEYy/IcS7Ne2mdjx?=
+ =?us-ascii?Q?mHCedYoR4NJYIvEVgUAjfPG/APkfAkuVRgpfgyD7+i59trySK6o8chmg/7TV?=
+ =?us-ascii?Q?ECFtqoOw+0WPpOHrWNfcfbePaQMhWy0I0CtO4I2Tc+PFZ9EXqzuxsYxo9vEa?=
+ =?us-ascii?Q?hqcNWJ2GzjgheJebT+e1xHDXD84Yq4e9LwAGmPx7eNj2UCc3y4TqkC1icbDs?=
+ =?us-ascii?Q?FaiBEIZTiJqoGeLcZVNUzFF+7/LfaSoR+5hOgqdtVi9vl7bk7UY8T2ZSKehv?=
+ =?us-ascii?Q?cJhLfOtUqcYuvqYc7EqwkRIMm9BD0V51HQk7mPYxX+RkeSG4VOMmfzKwFeAT?=
+ =?us-ascii?Q?Dv8j1t8LFNExBkuN1qMIUL2G/edX4A1A4leAljzCGaAIu5Bf9cjm/Vc6vbW6?=
+ =?us-ascii?Q?LRrQa2YUaJhhRYQ37HUD8X2J0QSyhDQy3beb3wvqN5SusjBdp/ON8JXT7kZ+?=
+ =?us-ascii?Q?e4URAwO71vSfCWF1NSnAw7YRxpt0Xd0d9ZC2k/1BXzRqGRMYjmB6GBwE6gdh?=
+ =?us-ascii?Q?cfVGRLEG/ekuMG3myG+l6acWxt2ghP5t7j0OIwa2920NjwMf6C8gO1iMXR1N?=
+ =?us-ascii?Q?PvOOmy1+4/Mt3PdSOpBcyMaYz3nQx6f4zLq+HXiJaOUZY+V6SOKxh4Uyrs0n?=
+ =?us-ascii?Q?T8DFwzb2MvP7FohsLzfQHwEuSdkY+BmottKjJGHoKe05QevhMoa+n0/KesMV?=
+ =?us-ascii?Q?F8l5RwPP7ccClp/NEFkIrGJcyXQGu0crd2DR?=
 X-Forefront-Antispam-Report: CIP:216.228.117.161; CTRY:US; LANG:en; SCL:1; SRV:;
  IPV:NLI; SFV:NSPM; H:mail.nvidia.com; PTR:dc6edge2.nvidia.com; CAT:NONE;
- SFS:(13230040)(82310400026)(1800799024)(376014)(36860700013); DIR:OUT;
+ SFS:(13230040)(36860700013)(376014)(82310400026)(1800799024); DIR:OUT;
  SFP:1101; 
 X-OriginatorOrg: Nvidia.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 17 May 2025 00:10:32.5078 (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: d32377c0-09be-4904-b9cf-08dd94d73d69
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 17 May 2025 00:10:35.2108 (UTC)
+X-MS-Exchange-CrossTenant-Network-Message-Id: 4a0e4a83-ee14-44cf-4600-08dd94d73f0f
 X-MS-Exchange-CrossTenant-Id: 43083d15-7273-40c1-b7db-39efd9ccc17a
 X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=43083d15-7273-40c1-b7db-39efd9ccc17a; Ip=[216.228.117.161];
  Helo=[mail.nvidia.com]
 X-MS-Exchange-CrossTenant-AuthSource: CY4PEPF0000FCC5.namprd03.prod.outlook.com
 X-MS-Exchange-CrossTenant-AuthAs: Anonymous
 X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: SJ0PR12MB6805
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: MN0PR12MB5857
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -140,7 +140,7 @@ List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-Split base RM_CONTROL handling out into its own module.
+Split base RM_ALLOC handling out into its own module.
 
 Aside from moving the function pointers, no code change is intended.
 
@@ -149,128 +149,156 @@ Reviewed-by: Dave Airlie <airlied@redhat.com>
 Reviewed-by: Timur Tabi <ttabi@nvidia.com>
 Tested-by: Timur Tabi <ttabi@nvidia.com>
 ---
- .../gpu/drm/nouveau/include/nvkm/subdev/gsp.h | 10 +-
- .../gpu/drm/nouveau/nvkm/subdev/gsp/r535.c    | 66 +------------
- .../nouveau/nvkm/subdev/gsp/rm/r535/Kbuild    |  1 +
- .../nouveau/nvkm/subdev/gsp/rm/r535/ctrl.c    | 94 +++++++++++++++++++
- .../drm/nouveau/nvkm/subdev/gsp/rm/r535/rm.c  |  1 +
- .../gpu/drm/nouveau/nvkm/subdev/gsp/rm/rm.h   |  7 ++
- 6 files changed, 107 insertions(+), 72 deletions(-)
- create mode 100644 drivers/gpu/drm/nouveau/nvkm/subdev/gsp/rm/r535/ctrl.c
+ .../gpu/drm/nouveau/include/nvkm/subdev/gsp.h |  19 ++-
+ .../gpu/drm/nouveau/nvkm/subdev/gsp/r535.c    |  85 -------------
+ .../nouveau/nvkm/subdev/gsp/rm/r535/Kbuild    |   1 +
+ .../nouveau/nvkm/subdev/gsp/rm/r535/alloc.c   | 113 ++++++++++++++++++
+ .../drm/nouveau/nvkm/subdev/gsp/rm/r535/rm.c  |   1 +
+ .../gpu/drm/nouveau/nvkm/subdev/gsp/rm/rm.h   |   9 ++
+ 6 files changed, 132 insertions(+), 96 deletions(-)
+ create mode 100644 drivers/gpu/drm/nouveau/nvkm/subdev/gsp/rm/r535/alloc.c
 
 diff --git a/drivers/gpu/drm/nouveau/include/nvkm/subdev/gsp.h b/drivers/gpu/drm/nouveau/include/nvkm/subdev/gsp.h
-index b543c31d3d32..bc2cf837aa9f 100644
+index bc2cf837aa9f..66e3873155f0 100644
 --- a/drivers/gpu/drm/nouveau/include/nvkm/subdev/gsp.h
 +++ b/drivers/gpu/drm/nouveau/include/nvkm/subdev/gsp.h
-@@ -212,10 +212,6 @@ struct nvkm_gsp {
+@@ -212,12 +212,6 @@ struct nvkm_gsp {
  	const struct nvkm_gsp_rm {
  		const struct nvkm_rm_api *api;
  
--		void *(*rm_ctrl_get)(struct nvkm_gsp_object *, u32 cmd, u32 argc);
--		int (*rm_ctrl_push)(struct nvkm_gsp_object *, void **argv, u32 repc);
--		void (*rm_ctrl_done)(struct nvkm_gsp_object *, void *repv);
+-		void *(*rm_alloc_get)(struct nvkm_gsp_object *, u32 oclass, u32 argc);
+-		void *(*rm_alloc_push)(struct nvkm_gsp_object *, void *argv);
+-		void (*rm_alloc_done)(struct nvkm_gsp_object *, void *repv);
 -
- 		void *(*rm_alloc_get)(struct nvkm_gsp_object *, u32 oclass, u32 argc);
- 		void *(*rm_alloc_push)(struct nvkm_gsp_object *, void *argv);
- 		void (*rm_alloc_done)(struct nvkm_gsp_object *, void *repv);
-@@ -316,13 +312,13 @@ nvkm_gsp_rpc_done(struct nvkm_gsp *gsp, void *repv)
+-		int (*rm_free)(struct nvkm_gsp_object *);
+-
+ 		int (*client_ctor)(struct nvkm_gsp *, struct nvkm_gsp_client *);
+ 		void (*client_dtor)(struct nvkm_gsp_client *);
+ 
+@@ -364,7 +358,7 @@ nvkm_gsp_rm_alloc_get(struct nvkm_gsp_object *parent, u32 handle, u32 oclass, u3
+ 	object->parent = parent;
+ 	object->handle = handle;
+ 
+-	argv = gsp->rm->rm_alloc_get(object, oclass, argc);
++	argv = gsp->rm->api->alloc->get(object, oclass, argc);
+ 	if (IS_ERR_OR_NULL(argv)) {
+ 		object->client = NULL;
+ 		return argv;
+@@ -376,7 +370,7 @@ nvkm_gsp_rm_alloc_get(struct nvkm_gsp_object *parent, u32 handle, u32 oclass, u3
  static inline void *
- nvkm_gsp_rm_ctrl_get(struct nvkm_gsp_object *object, u32 cmd, u32 argc)
+ nvkm_gsp_rm_alloc_push(struct nvkm_gsp_object *object, void *argv)
  {
--	return object->client->gsp->rm->rm_ctrl_get(object, cmd, argc);
-+	return object->client->gsp->rm->api->ctrl->get(object, cmd, argc);
+-	void *repv = object->client->gsp->rm->rm_alloc_push(object, argv);
++	void *repv = object->client->gsp->rm->api->alloc->push(object, argv);
+ 
+ 	if (IS_ERR(repv))
+ 		object->client = NULL;
+@@ -398,7 +392,7 @@ nvkm_gsp_rm_alloc_wr(struct nvkm_gsp_object *object, void *argv)
+ static inline void
+ nvkm_gsp_rm_alloc_done(struct nvkm_gsp_object *object, void *repv)
+ {
+-	object->client->gsp->rm->rm_alloc_done(object, repv);
++	object->client->gsp->rm->api->alloc->done(object, repv);
  }
  
  static inline int
- nvkm_gsp_rm_ctrl_push(struct nvkm_gsp_object *object, void *argv, u32 repc)
+@@ -416,8 +410,11 @@ nvkm_gsp_rm_alloc(struct nvkm_gsp_object *parent, u32 handle, u32 oclass, u32 ar
+ static inline int
+ nvkm_gsp_rm_free(struct nvkm_gsp_object *object)
  {
--	return object->client->gsp->rm->rm_ctrl_push(object, argv, repc);
-+	return object->client->gsp->rm->api->ctrl->push(object, argv, repc);
- }
+-	if (object->client)
+-		return object->client->gsp->rm->rm_free(object);
++	if (object->client) {
++		int ret = object->client->gsp->rm->api->alloc->free(object);
++		object->client = NULL;
++		return ret;
++	}
  
- static inline void *
-@@ -353,7 +349,7 @@ nvkm_gsp_rm_ctrl_wr(struct nvkm_gsp_object *object, void *argv)
- static inline void
- nvkm_gsp_rm_ctrl_done(struct nvkm_gsp_object *object, void *repv)
- {
--	object->client->gsp->rm->rm_ctrl_done(object, repv);
-+	object->client->gsp->rm->api->ctrl->done(object, repv);
+ 	return 0;
  }
- 
- static inline void *
 diff --git a/drivers/gpu/drm/nouveau/nvkm/subdev/gsp/r535.c b/drivers/gpu/drm/nouveau/nvkm/subdev/gsp/r535.c
-index 745d43586bad..4797a92708e9 100644
+index 4797a92708e9..e9be8c2ef07e 100644
 --- a/drivers/gpu/drm/nouveau/nvkm/subdev/gsp/r535.c
 +++ b/drivers/gpu/drm/nouveau/nvkm/subdev/gsp/r535.c
-@@ -20,6 +20,7 @@
-  * OTHER DEALINGS IN THE SOFTWARE.
-  */
- #include <rm/rpc.h>
-+
- #include "priv.h"
- 
- #include <core/pci.h>
-@@ -304,75 +305,10 @@ r535_gsp_rpc_rm_alloc_get(struct nvkm_gsp_object *object, u32 oclass,
- 	return rpc->params;
+@@ -226,95 +226,10 @@ r535_gsp_client_ctor(struct nvkm_gsp *gsp, struct nvkm_gsp_client *client)
+ 	return 0;
  }
  
--static void
--r535_gsp_rpc_rm_ctrl_done(struct nvkm_gsp_object *object, void *params)
+-static int
+-r535_gsp_rpc_rm_free(struct nvkm_gsp_object *object)
 -{
--	rpc_gsp_rm_control_v03_00 *rpc = to_payload_hdr(params, rpc);
+-	struct nvkm_gsp_client *client = object->client;
+-	struct nvkm_gsp *gsp = client->gsp;
+-	rpc_free_v03_00 *rpc;
 -
--	if (!params)
--		return;
+-	nvkm_debug(&gsp->subdev, "cli:0x%08x obj:0x%08x free\n",
+-		   client->object.handle, object->handle);
+-
+-	rpc = nvkm_gsp_rpc_get(gsp, NV_VGPU_MSG_FUNCTION_FREE, sizeof(*rpc));
+-	if (WARN_ON(IS_ERR_OR_NULL(rpc)))
+-		return -EIO;
+-
+-	rpc->params.hRoot = client->object.handle;
+-	rpc->params.hObjectParent = 0;
+-	rpc->params.hObjectOld = object->handle;
+-	return nvkm_gsp_rpc_wr(gsp, rpc, NVKM_GSP_RPC_REPLY_RECV);
+-}
+-
+-static void
+-r535_gsp_rpc_rm_alloc_done(struct nvkm_gsp_object *object, void *params)
+-{
+-	rpc_gsp_rm_alloc_v03_00 *rpc = to_payload_hdr(params, rpc);
+-
 -	nvkm_gsp_rpc_done(object->client->gsp, rpc);
 -}
 -
--static int
--r535_gsp_rpc_rm_ctrl_push(struct nvkm_gsp_object *object, void **params, u32 repc)
+-static void *
+-r535_gsp_rpc_rm_alloc_push(struct nvkm_gsp_object *object, void *params)
 -{
--	rpc_gsp_rm_control_v03_00 *rpc = to_payload_hdr((*params), rpc);
+-	rpc_gsp_rm_alloc_v03_00 *rpc = to_payload_hdr(params, rpc);
 -	struct nvkm_gsp *gsp = object->client->gsp;
--	int ret = 0;
+-	void *ret = NULL;
 -
--	rpc = nvkm_gsp_rpc_push(gsp, rpc, NVKM_GSP_RPC_REPLY_RECV, repc);
--	if (IS_ERR_OR_NULL(rpc)) {
--		*params = NULL;
--		return PTR_ERR(rpc);
--	}
+-	rpc = nvkm_gsp_rpc_push(gsp, rpc, NVKM_GSP_RPC_REPLY_RECV, sizeof(*rpc));
+-	if (IS_ERR_OR_NULL(rpc))
+-		return rpc;
 -
 -	if (rpc->status) {
--		ret = r535_rpc_status_to_errno(rpc->status);
--		if (ret != -EAGAIN && ret != -EBUSY)
--			nvkm_error(&gsp->subdev, "cli:0x%08x obj:0x%08x ctrl cmd:0x%08x failed: 0x%08x\n",
--				   object->client->object.handle, object->handle, rpc->cmd, rpc->status);
+-		ret = ERR_PTR(r535_rpc_status_to_errno(rpc->status));
+-		if (PTR_ERR(ret) != -EAGAIN && PTR_ERR(ret) != -EBUSY)
+-			nvkm_error(&gsp->subdev, "RM_ALLOC: 0x%x\n", rpc->status);
 -	}
 -
--	if (repc)
--		*params = rpc->params;
--	else
--		nvkm_gsp_rpc_done(gsp, rpc);
+-	nvkm_gsp_rpc_done(gsp, rpc);
 -
 -	return ret;
 -}
 -
 -static void *
--r535_gsp_rpc_rm_ctrl_get(struct nvkm_gsp_object *object, u32 cmd, u32 params_size)
+-r535_gsp_rpc_rm_alloc_get(struct nvkm_gsp_object *object, u32 oclass,
+-			  u32 params_size)
 -{
 -	struct nvkm_gsp_client *client = object->client;
 -	struct nvkm_gsp *gsp = client->gsp;
--	rpc_gsp_rm_control_v03_00 *rpc;
+-	rpc_gsp_rm_alloc_v03_00 *rpc;
 -
--	nvkm_debug(&gsp->subdev, "cli:0x%08x obj:0x%08x ctrl cmd:0x%08x params_size:%d\n",
--		   client->object.handle, object->handle, cmd, params_size);
+-	nvkm_debug(&gsp->subdev, "cli:0x%08x obj:0x%08x new obj:0x%08x\n",
+-		   client->object.handle, object->parent->handle,
+-		   object->handle);
 -
--	rpc = nvkm_gsp_rpc_get(gsp, NV_VGPU_MSG_FUNCTION_GSP_RM_CONTROL,
+-	nvkm_debug(&gsp->subdev, "cls:0x%08x params_size:%d\n", oclass,
+-		   params_size);
+-
+-	rpc = nvkm_gsp_rpc_get(gsp, NV_VGPU_MSG_FUNCTION_GSP_RM_ALLOC,
 -			       sizeof(*rpc) + params_size);
 -	if (IS_ERR(rpc))
 -		return rpc;
 -
--	rpc->hClient    = client->object.handle;
--	rpc->hObject    = object->handle;
--	rpc->cmd	= cmd;
--	rpc->status     = 0;
+-	rpc->hClient = client->object.handle;
+-	rpc->hParent = object->parent->handle;
+-	rpc->hObject = object->handle;
+-	rpc->hClass = oclass;
+-	rpc->status = 0;
 -	rpc->paramsSize = params_size;
 -	return rpc->params;
 -}
@@ -279,28 +307,30 @@ index 745d43586bad..4797a92708e9 100644
  r535_gsp_rm = {
  	.api = &r535_rm,
  
--	.rm_ctrl_get = r535_gsp_rpc_rm_ctrl_get,
--	.rm_ctrl_push = r535_gsp_rpc_rm_ctrl_push,
--	.rm_ctrl_done = r535_gsp_rpc_rm_ctrl_done,
+-	.rm_alloc_get = r535_gsp_rpc_rm_alloc_get,
+-	.rm_alloc_push = r535_gsp_rpc_rm_alloc_push,
+-	.rm_alloc_done = r535_gsp_rpc_rm_alloc_done,
 -
- 	.rm_alloc_get = r535_gsp_rpc_rm_alloc_get,
- 	.rm_alloc_push = r535_gsp_rpc_rm_alloc_push,
- 	.rm_alloc_done = r535_gsp_rpc_rm_alloc_done,
+-	.rm_free = r535_gsp_rpc_rm_free,
+-
+ 	.client_ctor = r535_gsp_client_ctor,
+ 	.client_dtor = r535_gsp_client_dtor,
+ 
 diff --git a/drivers/gpu/drm/nouveau/nvkm/subdev/gsp/rm/r535/Kbuild b/drivers/gpu/drm/nouveau/nvkm/subdev/gsp/rm/r535/Kbuild
-index 21c818ec0701..c8d7419b754f 100644
+index c8d7419b754f..48b432c9005d 100644
 --- a/drivers/gpu/drm/nouveau/nvkm/subdev/gsp/rm/r535/Kbuild
 +++ b/drivers/gpu/drm/nouveau/nvkm/subdev/gsp/rm/r535/Kbuild
-@@ -4,3 +4,4 @@
- 
+@@ -5,3 +5,4 @@
  nvkm-y += nvkm/subdev/gsp/rm/r535/rm.o
  nvkm-y += nvkm/subdev/gsp/rm/r535/rpc.o
-+nvkm-y += nvkm/subdev/gsp/rm/r535/ctrl.o
-diff --git a/drivers/gpu/drm/nouveau/nvkm/subdev/gsp/rm/r535/ctrl.c b/drivers/gpu/drm/nouveau/nvkm/subdev/gsp/rm/r535/ctrl.c
+ nvkm-y += nvkm/subdev/gsp/rm/r535/ctrl.o
++nvkm-y += nvkm/subdev/gsp/rm/r535/alloc.o
+diff --git a/drivers/gpu/drm/nouveau/nvkm/subdev/gsp/rm/r535/alloc.c b/drivers/gpu/drm/nouveau/nvkm/subdev/gsp/rm/r535/alloc.c
 new file mode 100644
-index 000000000000..f3f0fcd22cac
+index 000000000000..968fb7e01b46
 --- /dev/null
-+++ b/drivers/gpu/drm/nouveau/nvkm/subdev/gsp/rm/r535/ctrl.c
-@@ -0,0 +1,94 @@
++++ b/drivers/gpu/drm/nouveau/nvkm/subdev/gsp/rm/r535/alloc.c
+@@ -0,0 +1,113 @@
 +/*
 + * Copyright 2023 Red Hat Inc.
 + *
@@ -328,102 +358,124 @@ index 000000000000..f3f0fcd22cac
 +#include <nvrm/535.113.01/nvidia/generated/g_rpc-structures.h>
 +#include <nvrm/535.113.01/nvidia/kernel/inc/vgpu/rpc_global_enums.h>
 +
-+static void
-+r535_gsp_rpc_rm_ctrl_done(struct nvkm_gsp_object *object, void *params)
++static int
++r535_gsp_rpc_rm_free(struct nvkm_gsp_object *object)
 +{
-+	rpc_gsp_rm_control_v03_00 *rpc = to_payload_hdr(params, rpc);
++	struct nvkm_gsp_client *client = object->client;
++	struct nvkm_gsp *gsp = client->gsp;
++	rpc_free_v03_00 *rpc;
 +
-+	if (!params)
-+		return;
++	nvkm_debug(&gsp->subdev, "cli:0x%08x obj:0x%08x free\n",
++		   client->object.handle, object->handle);
++
++	rpc = nvkm_gsp_rpc_get(gsp, NV_VGPU_MSG_FUNCTION_FREE, sizeof(*rpc));
++	if (WARN_ON(IS_ERR_OR_NULL(rpc)))
++		return -EIO;
++
++	rpc->params.hRoot = client->object.handle;
++	rpc->params.hObjectParent = 0;
++	rpc->params.hObjectOld = object->handle;
++	return nvkm_gsp_rpc_wr(gsp, rpc, NVKM_GSP_RPC_REPLY_RECV);
++}
++
++static void
++r535_gsp_rpc_rm_alloc_done(struct nvkm_gsp_object *object, void *params)
++{
++	rpc_gsp_rm_alloc_v03_00 *rpc = to_payload_hdr(params, rpc);
++
 +	nvkm_gsp_rpc_done(object->client->gsp, rpc);
 +}
 +
-+static int
-+r535_gsp_rpc_rm_ctrl_push(struct nvkm_gsp_object *object, void **params, u32 repc)
++static void *
++r535_gsp_rpc_rm_alloc_push(struct nvkm_gsp_object *object, void *params)
 +{
-+	rpc_gsp_rm_control_v03_00 *rpc = to_payload_hdr((*params), rpc);
++	rpc_gsp_rm_alloc_v03_00 *rpc = to_payload_hdr(params, rpc);
 +	struct nvkm_gsp *gsp = object->client->gsp;
-+	int ret = 0;
++	void *ret = NULL;
 +
-+	rpc = nvkm_gsp_rpc_push(gsp, rpc, NVKM_GSP_RPC_REPLY_RECV, repc);
-+	if (IS_ERR_OR_NULL(rpc)) {
-+		*params = NULL;
-+		return PTR_ERR(rpc);
-+	}
++	rpc = nvkm_gsp_rpc_push(gsp, rpc, NVKM_GSP_RPC_REPLY_RECV, sizeof(*rpc));
++	if (IS_ERR_OR_NULL(rpc))
++		return rpc;
 +
 +	if (rpc->status) {
-+		ret = r535_rpc_status_to_errno(rpc->status);
-+		if (ret != -EAGAIN && ret != -EBUSY)
-+			nvkm_error(&gsp->subdev, "cli:0x%08x obj:0x%08x ctrl cmd:0x%08x failed: 0x%08x\n",
-+				   object->client->object.handle, object->handle, rpc->cmd, rpc->status);
++		ret = ERR_PTR(r535_rpc_status_to_errno(rpc->status));
++		if (PTR_ERR(ret) != -EAGAIN && PTR_ERR(ret) != -EBUSY)
++			nvkm_error(&gsp->subdev, "RM_ALLOC: 0x%x\n", rpc->status);
 +	}
 +
-+	if (repc)
-+		*params = rpc->params;
-+	else
-+		nvkm_gsp_rpc_done(gsp, rpc);
++	nvkm_gsp_rpc_done(gsp, rpc);
 +
 +	return ret;
 +}
 +
 +static void *
-+r535_gsp_rpc_rm_ctrl_get(struct nvkm_gsp_object *object, u32 cmd, u32 params_size)
++r535_gsp_rpc_rm_alloc_get(struct nvkm_gsp_object *object, u32 oclass,
++			  u32 params_size)
 +{
 +	struct nvkm_gsp_client *client = object->client;
 +	struct nvkm_gsp *gsp = client->gsp;
-+	rpc_gsp_rm_control_v03_00 *rpc;
++	rpc_gsp_rm_alloc_v03_00 *rpc;
 +
-+	nvkm_debug(&gsp->subdev, "cli:0x%08x obj:0x%08x ctrl cmd:0x%08x params_size:%d\n",
-+		   client->object.handle, object->handle, cmd, params_size);
++	nvkm_debug(&gsp->subdev, "cli:0x%08x obj:0x%08x new obj:0x%08x\n",
++		   client->object.handle, object->parent->handle,
++		   object->handle);
 +
-+	rpc = nvkm_gsp_rpc_get(gsp, NV_VGPU_MSG_FUNCTION_GSP_RM_CONTROL,
++	nvkm_debug(&gsp->subdev, "cls:0x%08x params_size:%d\n", oclass,
++		   params_size);
++
++	rpc = nvkm_gsp_rpc_get(gsp, NV_VGPU_MSG_FUNCTION_GSP_RM_ALLOC,
 +			       sizeof(*rpc) + params_size);
 +	if (IS_ERR(rpc))
 +		return rpc;
 +
-+	rpc->hClient    = client->object.handle;
-+	rpc->hObject    = object->handle;
-+	rpc->cmd	= cmd;
-+	rpc->status     = 0;
++	rpc->hClient = client->object.handle;
++	rpc->hParent = object->parent->handle;
++	rpc->hObject = object->handle;
++	rpc->hClass = oclass;
++	rpc->status = 0;
 +	rpc->paramsSize = params_size;
 +	return rpc->params;
 +}
 +
-+const struct nvkm_rm_api_ctrl
-+r535_ctrl = {
-+	.get = r535_gsp_rpc_rm_ctrl_get,
-+	.push = r535_gsp_rpc_rm_ctrl_push,
-+	.done = r535_gsp_rpc_rm_ctrl_done,
++const struct nvkm_rm_api_alloc
++r535_alloc = {
++	.get = r535_gsp_rpc_rm_alloc_get,
++	.push = r535_gsp_rpc_rm_alloc_push,
++	.done = r535_gsp_rpc_rm_alloc_done,
++	.free = r535_gsp_rpc_rm_free,
 +};
 diff --git a/drivers/gpu/drm/nouveau/nvkm/subdev/gsp/rm/r535/rm.c b/drivers/gpu/drm/nouveau/nvkm/subdev/gsp/rm/r535/rm.c
-index f28b781abc5c..a3ee277a999d 100644
+index a3ee277a999d..f6fcd89ec502 100644
 --- a/drivers/gpu/drm/nouveau/nvkm/subdev/gsp/rm/r535/rm.c
 +++ b/drivers/gpu/drm/nouveau/nvkm/subdev/gsp/rm/r535/rm.c
-@@ -7,4 +7,5 @@
- const struct nvkm_rm_api
+@@ -8,4 +8,5 @@ const struct nvkm_rm_api
  r535_rm = {
  	.rpc = &r535_rpc,
-+	.ctrl = &r535_ctrl,
+ 	.ctrl = &r535_ctrl,
++	.alloc = &r535_alloc,
  };
 diff --git a/drivers/gpu/drm/nouveau/nvkm/subdev/gsp/rm/rm.h b/drivers/gpu/drm/nouveau/nvkm/subdev/gsp/rm/rm.h
-index 7a0ece979167..9558fbb59ae4 100644
+index 9558fbb59ae4..6d0eb8e202ca 100644
 --- a/drivers/gpu/drm/nouveau/nvkm/subdev/gsp/rm/rm.h
 +++ b/drivers/gpu/drm/nouveau/nvkm/subdev/gsp/rm/rm.h
-@@ -13,8 +13,15 @@ struct nvkm_rm_api {
- 			      enum nvkm_gsp_rpc_reply_policy policy, u32 repc);
- 		void (*done)(struct nvkm_gsp *gsp, void *repv);
- 	} *rpc;
+@@ -19,9 +19,18 @@ struct nvkm_rm_api {
+ 		int (*push)(struct nvkm_gsp_object *, void **params, u32 repc);
+ 		void (*done)(struct nvkm_gsp_object *, void *params);
+ 	} *ctrl;
 +
-+	const struct nvkm_rm_api_ctrl {
-+		void *(*get)(struct nvkm_gsp_object *, u32 cmd, u32 params_size);
-+		int (*push)(struct nvkm_gsp_object *, void **params, u32 repc);
++	const struct nvkm_rm_api_alloc {
++		void *(*get)(struct nvkm_gsp_object *, u32 oclass, u32 params_size);
++		void *(*push)(struct nvkm_gsp_object *, void *params);
 +		void (*done)(struct nvkm_gsp_object *, void *params);
-+	} *ctrl;
++
++		int (*free)(struct nvkm_gsp_object *);
++	} *alloc;
  };
  
  extern const struct nvkm_rm_api r535_rm;
  extern const struct nvkm_rm_api_rpc r535_rpc;
-+extern const struct nvkm_rm_api_ctrl r535_ctrl;
+ extern const struct nvkm_rm_api_ctrl r535_ctrl;
++extern const struct nvkm_rm_api_alloc r535_alloc;
  #endif
 -- 
 2.49.0
