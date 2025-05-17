@@ -2,72 +2,72 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id EF98AABA6FE
-	for <lists+nouveau@lfdr.de>; Sat, 17 May 2025 02:10:43 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 14D62ABA702
+	for <lists+nouveau@lfdr.de>; Sat, 17 May 2025 02:10:46 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 48DED10EBA3;
-	Sat, 17 May 2025 00:10:40 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 2396A10EBAE;
+	Sat, 17 May 2025 00:10:44 +0000 (UTC)
 Authentication-Results: gabe.freedesktop.org;
-	dkim=pass (2048-bit key; unprotected) header.d=Nvidia.com header.i=@Nvidia.com header.b="jhacTZu2";
+	dkim=pass (2048-bit key; unprotected) header.d=Nvidia.com header.i=@Nvidia.com header.b="CxqlFLjP";
 	dkim-atps=neutral
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
 Received: from NAM10-MW2-obe.outbound.protection.outlook.com
- (mail-mw2nam10on2060.outbound.protection.outlook.com [40.107.94.60])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 6F7DD10E10D
- for <nouveau@lists.freedesktop.org>; Sat, 17 May 2025 00:10:39 +0000 (UTC)
+ (mail-mw2nam10on2063.outbound.protection.outlook.com [40.107.94.63])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id E63F010E119
+ for <nouveau@lists.freedesktop.org>; Sat, 17 May 2025 00:10:42 +0000 (UTC)
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=CcDteWmm08/n5Qpb0c2JiE8aUOKrU3n4N6i/zBteH1vbG7uNEhZ5jfhkZFc7B+QQIbRu7l28dpDkvpkc3FTq3+xM/Mk8FmNOa9bzsVWhRu3vrt0vlL18Ed8mNlssmfxEuFvB+XHVnfTbjLteKW9MdcgOw/y8Laa2zcxXs4/XE22BLP3gSeqr/SpXy0gtUnhWnfNc0UMyHAnpPlt4AexINBOk1Hq8eqL4f36bnwN3g5MmIURC61prB6VmPsSp/vhQzgiVKIwNBMpNWD2LknZkFi3gqF7yfZgGloFmN/9zEbQXW35+lNej7AqDunmy43SUDoYy7lWfLQsHS+nxZ+l8Mw==
+ b=h7BcOjoERIQdPX5YoQSM2/UQ6myVNP8TiIqTtGRHT80bH+M5AB9pm5F94VViOda2jaNW6DASnBizxAqEnxMSTJ0Cu7IwgAQWcciTmHryxeZ0t1zwfWEY5vxl0q68Qr1Y21laPmcYBIujhp0nHPPSBCd5ZY1y2Tidpttn08eW8k0hv9yEALA2oRMiH9eIIgQCaG6t93kfpJ2O4uwLMzlcROIUpP9XKXCuug2E3Px7pkMJMOaYY2V5TmO/jfYLx3mmcOW4eiAMQQU0j32/w9oIzM3NrAo/H+JvuxHCYguHSSEdP9nSmOnaAKehAyvIL2drUK3gX2Jwk0B8pyG4DQzC/g==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
  s=arcselector10001;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=1KoiuivbyNhTQFkwjhZgRsdOMDHaf3W1+cLPk5thxpQ=;
- b=igGDNYeQkmqwywG6p0NpjN7TKPkFi957kKgG6qNN5onZ2MFRl/J9z2JAg83YGhl7hSKoHRHGAh/gHTcflNiUInX9x0yTICHLRGX8OO9TyX/cdPZXl5oTUKRVlBEz4FnTw6s7xrr+/uGfLRLsf7IEaUTYObN+VqR95YMde6r6G9Pxre1ugtaA3Gj5HsuyWN63aeEz/H1XM61cbz2Gwngh616+yX2qtgq+sth204ux4MqNtRRSZjsr4uGfB08apuyhdEXuNotcWuZBa13xoVwu1d5yfDEK64kMHUmuSLL151rnGtKC43Cgp1tlV22D4o8eJwLD7H1n611hAnlz+qu48Q==
+ bh=A5fVmI131UPsJv5fqsJ4+lyYU3ccgIKZJo5OXnQJiTk=;
+ b=qj/u23aqdNc3cQdQaQ8+lgve+g3xLJPCUvpagmGM58JWyH+X40yVKg3eEx0UpTNJqrzp6+IuA5zJ+aJlGqa8Khwah5gTWkiqxXzNYVtjV5Ti6D/I6xEjuw/lt9sDNJcP5K3LIIWUf3gJp+llIPxJhfLKWH8I7Q4p+BLnuQWhzftn+em5wuhn+cgFEskplEDdEyHl8dqUqm7F+x8W7bWALWvaSIDkESqA8t530xRUY5E0SrCjLgSCLdEDGgzTbLxsyW4FDAkDVhsE4uS6PYbPOXjzLz0SAs/YA7VlsP0tzQ+JwcPEUlmG3bMQNzfC2bQxGdqEnbQA3SFmw+yXxAUkmg==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
- 216.228.117.160) smtp.rcpttodomain=lists.freedesktop.org
+ 216.228.117.161) smtp.rcpttodomain=lists.freedesktop.org
  smtp.mailfrom=nvidia.com; dmarc=pass (p=reject sp=reject pct=100) action=none
  header.from=nvidia.com; dkim=none (message not signed); arc=none (0)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=Nvidia.com;
  s=selector2;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=1KoiuivbyNhTQFkwjhZgRsdOMDHaf3W1+cLPk5thxpQ=;
- b=jhacTZu2P4/+ZJCdrpa0gkVwZu4cxuEv9xU9UVjn64G9DUqa8XrUCo2YFCHQwslnxZTxvbnWXLeyymzDwA27EKEetrzNRQowXvLKJB0cJbDb0V0lDgmz5GZch/T6mC7s7OmO3+Av1rkDgUdwTkeY6g37NXr9rh8J4kfpZjGTeBCFc2N4RHNWHGzrLvBJqhQTl1pM6hZROEsQOIrl5mqjOqhElP7/sXvbdh6aJkIkNMAAcBq7WT5xJer1lPhJSwwGPBxou3J4J0xE9W643VQ59qnbz+XOuqg2v/WKLVkZf3+2PRk6rb7bv8cEDZGUZbt0AT1NU0H2XdPgY9ZR2Jxp/g==
-Received: from CH0PR03CA0371.namprd03.prod.outlook.com (2603:10b6:610:119::19)
- by LV2PR12MB5872.namprd12.prod.outlook.com (2603:10b6:408:173::12)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.8722.30; Sat, 17 May
- 2025 00:10:30 +0000
-Received: from CH2PEPF00000148.namprd02.prod.outlook.com
- (2603:10b6:610:119:cafe::b8) by CH0PR03CA0371.outlook.office365.com
- (2603:10b6:610:119::19) with Microsoft SMTP Server (version=TLS1_3,
- cipher=TLS_AES_256_GCM_SHA384) id 15.20.8746.19 via Frontend Transport; Sat,
- 17 May 2025 00:10:30 +0000
-X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 216.228.117.160)
+ bh=A5fVmI131UPsJv5fqsJ4+lyYU3ccgIKZJo5OXnQJiTk=;
+ b=CxqlFLjPeos3I/6UHf7HBkAuhHlmcUZTt6vO50ik3qggzTHaONvMz36/phSuAb2BeCMwCswCiVEchd8MhR5Hj9aJxahs6D6RDMmk77oNg0Rllhiy9S3YsC1JfTaLIF6Kxd4Dbc8rZTNmAhUfbXG8Ke9roaFZ5N1OV3LDhhjUvpika3kM63MsPYA/VdbgTpd2Prb1LVwwTUX+tOBeLKMkKoreaJ6oa6Tuq6/b/T9VGYhp2iDZ1uP4uRlaM2UAiSKhuO7MXwuROeNp3nwkAvE5d5wiyuAlLj2XfuH7E4lFGBG0CgwP5UHM8c+a7MR8lSyxE6pRmOdZwFk58s3YnHFuew==
+Received: from PH7PR10CA0010.namprd10.prod.outlook.com (2603:10b6:510:23d::19)
+ by DS0PR12MB7583.namprd12.prod.outlook.com (2603:10b6:8:13f::8) with
+ Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.8722.32; Sat, 17 May
+ 2025 00:10:32 +0000
+Received: from CY4PEPF0000FCBE.namprd03.prod.outlook.com
+ (2603:10b6:510:23d:cafe::aa) by PH7PR10CA0010.outlook.office365.com
+ (2603:10b6:510:23d::19) with Microsoft SMTP Server (version=TLS1_3,
+ cipher=TLS_AES_256_GCM_SHA384) id 15.20.8746.20 via Frontend Transport; Sat,
+ 17 May 2025 00:10:31 +0000
+X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 216.228.117.161)
  smtp.mailfrom=nvidia.com;
  dkim=none (message not signed)
  header.d=none;dmarc=pass action=none header.from=nvidia.com;
 Received-SPF: Pass (protection.outlook.com: domain of nvidia.com designates
- 216.228.117.160 as permitted sender) receiver=protection.outlook.com;
- client-ip=216.228.117.160; helo=mail.nvidia.com; pr=C
-Received: from mail.nvidia.com (216.228.117.160) by
- CH2PEPF00000148.mail.protection.outlook.com (10.167.244.105) with Microsoft
+ 216.228.117.161 as permitted sender) receiver=protection.outlook.com;
+ client-ip=216.228.117.161; helo=mail.nvidia.com; pr=C
+Received: from mail.nvidia.com (216.228.117.161) by
+ CY4PEPF0000FCBE.mail.protection.outlook.com (10.167.242.100) with Microsoft
  SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.20.8746.27 via Frontend Transport; Sat, 17 May 2025 00:10:29 +0000
+ 15.20.8746.27 via Frontend Transport; Sat, 17 May 2025 00:10:31 +0000
 Received: from rnnvmail201.nvidia.com (10.129.68.8) by mail.nvidia.com
- (10.129.200.66) with Microsoft SMTP Server (version=TLS1_2,
+ (10.129.200.67) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.1544.4; Fri, 16 May
- 2025 17:10:15 -0700
+ 2025 17:10:17 -0700
 Received: from nv-dev.vdiclient.nvidia.com (10.126.231.35) by
  rnnvmail201.nvidia.com (10.129.68.8) with Microsoft SMTP Server
  (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.2.1544.14; Fri, 16 May 2025 17:10:14 -0700
+ 15.2.1544.14; Fri, 16 May 2025 17:10:15 -0700
 From: Ben Skeggs <bskeggs@nvidia.com>
 To: <nouveau@lists.freedesktop.org>
 CC: Ben Skeggs <bskeggs@nvidia.com>, Dave Airlie <airlied@redhat.com>, "Timur
  Tabi" <ttabi@nvidia.com>
-Subject: [PATCH v3 05/62] drm/nouveau/ofa: bump max instances to 2
-Date: Sat, 17 May 2025 10:08:57 +1000
-Message-ID: <20250517000954.35691-6-bskeggs@nvidia.com>
+Subject: [PATCH v3 06/62] drm/nouveau/gsp: split rpc handling out on its own
+Date: Sat, 17 May 2025 10:08:58 +1000
+Message-ID: <20250517000954.35691-7-bskeggs@nvidia.com>
 X-Mailer: git-send-email 2.49.0
 In-Reply-To: <20250517000954.35691-1-bskeggs@nvidia.com>
 References: <20250517000954.35691-1-bskeggs@nvidia.com>
@@ -79,52 +79,53 @@ X-ClientProxiedBy: rnnvmail202.nvidia.com (10.129.68.7) To
  rnnvmail201.nvidia.com (10.129.68.8)
 X-EOPAttributedMessage: 0
 X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: CH2PEPF00000148:EE_|LV2PR12MB5872:EE_
-X-MS-Office365-Filtering-Correlation-Id: b77c1b09-de84-463c-f0f5-08dd94d73b93
+X-MS-TrafficTypeDiagnostic: CY4PEPF0000FCBE:EE_|DS0PR12MB7583:EE_
+X-MS-Office365-Filtering-Correlation-Id: fb0d0b87-2c89-4596-9dfe-08dd94d73cce
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
 X-Microsoft-Antispam: BCL:0;
- ARA:13230040|376014|82310400026|36860700013|1800799024; 
-X-Microsoft-Antispam-Message-Info: =?us-ascii?Q?MWhjOeIAOwipLGiwVdMS41u+hl1FMXE3KuZMvnSp6R3csraD9mww/n9jcuMI?=
- =?us-ascii?Q?SmX17YSjMOxUVMYO2xaSgipQxGC++7P+NsDeHJcjjHY+te/Ju5oANT+Kmj5/?=
- =?us-ascii?Q?zTeDa/dZ4JpV9m5v36E/ksZuhbftd2w65JnmeEbL9MHqQgCPxKR9IWuru4Jr?=
- =?us-ascii?Q?oi8HnTroPkvkChbXwIe8pindFsQRtxmM51dwqKVk00aqJeJypW6RRjoOv++J?=
- =?us-ascii?Q?GLgIwWByZ5mscN/Z2rJIoKU4TieF0R04NU85WC7omAizAL00RownPkpiVq/z?=
- =?us-ascii?Q?RxuOvo4BTdLJvDmCx3Im+9gflv24zEVseOPPKmXxyt1IiHddk+V3u3BuWBzP?=
- =?us-ascii?Q?QQi/+QgZbbU5b2fycygxfFGUhIfuEahQ6BpLhQOlB8bhDKEsoVvxBQao7HVE?=
- =?us-ascii?Q?nvdcrPzKy1J1SjxGL/s1SnRffIUAJk0KPWx9Hb3uwoFNmv9o8Sbjnh//BJQs?=
- =?us-ascii?Q?l2X/466JbvrQQkdxcYSyOIYV/XkZAjsQhdIzbbqDV5Fa5gf3bBFavHSakj70?=
- =?us-ascii?Q?WdMbjxB+jiPms+DaB60YRa+JGhzWLwqhHVHZfkK9mvGbztOMgun987miN3Go?=
- =?us-ascii?Q?pGIKbS7KCTzBlYSYO8sfD2wkqV13nNidlnwh0KpHiEdvVztadlyahpk5dKbB?=
- =?us-ascii?Q?0HZIOApOq0aRvNq8+hHkqkWFjej8QVZJ6kTAQSZLXmybLMHi2A229Dwfv2My?=
- =?us-ascii?Q?Jb2e7J5cIRNZqNjhXnZBa3Ztamwm0JPIadZ3hRJYHp30p0qX8uOdc37dhbfk?=
- =?us-ascii?Q?k1y7kEABpD8/khN4aupIjRocykvpdWs+V3jmuVzV+L51hQh/Vp69ay4+e5jZ?=
- =?us-ascii?Q?JwMZ4KT3UWf4kYDRqhzLHC3lTLvIahki4ILJxTJPwp58wiO/sjh/t3plR6Zo?=
- =?us-ascii?Q?WCrowXg+uHmnGQxmriDMXe2CMCWjd1KMLEiNK8kPuZhO1VJ0m7VPCNeSKaQ2?=
- =?us-ascii?Q?CHi+L4wSVDN5Z0MGRdz9ip54bjh/+V0t5yX41zdx7Cn6sY8xY2VyTYAkdaHt?=
- =?us-ascii?Q?S5cZkR98Pr4jOPqsvr0lTTV18Pw4BAYOos0ajJwbF5PVVIAfKoNfAjklWtFE?=
- =?us-ascii?Q?jx8O9MgW5ahfY0o426YQtZ2Ixy+4SMi4cjSslHP/bEk1bxywFeJ+4GtV5sYN?=
- =?us-ascii?Q?05oNsd/HtuBwZxlaMycnxghizGF+cFg5yN6SXWdHmegFLgD2Q/YFGO1eoWvb?=
- =?us-ascii?Q?Mw89+nMk7r090zQNOXq0cgYCKk97h1d0xkF5DTFG145kJrRNOUx4VlZEHQVJ?=
- =?us-ascii?Q?WFOOHULkCa4SOkr3pWrxHEq3JvYwPRZ3MawvGFIwwhE2+Vm6VXputFMch/8w?=
- =?us-ascii?Q?MwV3+ShFEQUR9CSKg6BhvjG1uw7Rxm3D6G7taPr2zNJdKFZ9RtWN6dsIFp/6?=
- =?us-ascii?Q?90+/EbvVAWpHS4PnOGzUAcJukRx9wX3fcoVkav9RAmTKBSvNt0RpCJ0uLobJ?=
- =?us-ascii?Q?CeWdgJ4KN8IXiOVaTeZoQ1Ah+Q269m4zIXiovC79DMcspHf6HBuEWLXxgFXl?=
- =?us-ascii?Q?zuetizhD4QkAJFa1Ob2+DDayVTRzS2Ajfhxr?=
-X-Forefront-Antispam-Report: CIP:216.228.117.160; CTRY:US; LANG:en; SCL:1; SRV:;
- IPV:NLI; SFV:NSPM; H:mail.nvidia.com; PTR:dc6edge1.nvidia.com; CAT:NONE;
- SFS:(13230040)(376014)(82310400026)(36860700013)(1800799024); DIR:OUT;
- SFP:1101; 
+ ARA:13230040|376014|36860700013|82310400026|1800799024|13003099007; 
+X-Microsoft-Antispam-Message-Info: =?us-ascii?Q?8Z1f187S0HE/z9QIMwI0IZFPD7Me940muJMhSux5uA5IPNjicTVS41HVMjua?=
+ =?us-ascii?Q?nYWQcD8HO9leSliXLUDWd/2fGhSKujj6kfOMv/rgZt6hFvS5USkm9M0F6R83?=
+ =?us-ascii?Q?u3P+vjJ6+IkNc7Tu4l1uQsuMVt3GbTsvobXJ0XT2mX7bmDRATvJMbZA5WQ9j?=
+ =?us-ascii?Q?3gY73BKV4yCi/yvOH9cgBm2GHJltlhYEux21gRuCgn9MkXIA70aSDMNLDbV2?=
+ =?us-ascii?Q?enmCrugJPEeARANDSYBfYV3uH5jBENj4R59Dr7UxNCkuCEnBUvZAarEqHYWk?=
+ =?us-ascii?Q?1cjCLxsAq4jDC/8J2MWsSp5b0bOpdn/Ro7ulwU/slD4xwOkFyLxxuZcuTceL?=
+ =?us-ascii?Q?HCwocLGEX5Dw95TPeCAvE/kfIFRFMM7tMu70DC5CKVSKtv8XGH8fAvB/nOZT?=
+ =?us-ascii?Q?1zNELmMN3TEd7e4c+LvYavm9yFx1ZxG9ekpVixVKmyIFq6YMmPLhxtem+u/p?=
+ =?us-ascii?Q?BSaFHlzgCrbJ9du6HTat0LYAT1l8kwJQZcd1WwCntUetGQMpZxB2BrHWgHRW?=
+ =?us-ascii?Q?ZNVH7+gUT0ReIJPzZASlSakphyxpWQlxWmzaXj7sqTmsl4OecuFYxoGjtSJx?=
+ =?us-ascii?Q?JTjOi91jZuGEw052BrFfPlSJ1lM4MyoqIq17il1QFShLyQoie0S9xF7OW2xH?=
+ =?us-ascii?Q?m+ZsdCkXqGx/ADiN1+Plcny6tuu9iDjAsgf6S+GKzxnDRDTsoR+hWpvTRTOV?=
+ =?us-ascii?Q?6TX6lMdYB+H+Bl4L3pxeVr+jj0EYjxpzRoLrUIBtN9v8OLBVYJYQvkcbv2hm?=
+ =?us-ascii?Q?r/nwnMMRv76EQgY0VkReFXZzeInMSOkDHOl0lA9O4Ydv2dFNEAV/Rj4jUIW+?=
+ =?us-ascii?Q?cec066wKzSnawgceaE3JPWnxXHyGBN0Nb3icDhbEbtLsBlZTUbyf8V/jTv95?=
+ =?us-ascii?Q?G7SYJRuIzOhchqX2vPiBS+1jC4PmRQKeA0eRrb0u2xUxgfG4KIPqeuY9LhQK?=
+ =?us-ascii?Q?zuOfP1Ie64Rd7hx48JRDa5y/b/55wttkWM8k2BRT1cz2GSMlUmWAFxKDdIuo?=
+ =?us-ascii?Q?fr07R6YuDzheLEx4GstyS6HPLtoKu5W660K676S5RAjAb2U56f7USIchUJFc?=
+ =?us-ascii?Q?xQM/lFhurcjilItqkUlGaitZy60zo4tNa+2pAVCEbvavbSNSptTZeCgFmOCe?=
+ =?us-ascii?Q?kHtFaPj3QR1czlAJ7TmUCQemYjg9qFlrnDxY3dD/n5Cu25d3cn6c/6bI4JDI?=
+ =?us-ascii?Q?6z8ReIOD5eyYqe32HQJB3Wd9PNl4Yqp95FiVrZ2y3PZLJxR9Cd+0+udq/tpF?=
+ =?us-ascii?Q?vh3cVDeAYMOK8Glyb9wM082rwKgyL0wpvFGMyXfgBK7Tdsnol7FaPivyt1nd?=
+ =?us-ascii?Q?4fyyXkN880rwl4iPVzChjky7qJ9mTeAYdU9tVlPkP5c4gsG4k3EwSJJmofBn?=
+ =?us-ascii?Q?vHz4UaZ9bikPoikeb4uNrrfeos+t7urynoDWplgGgOiazpRrb1OrdwpYV3AW?=
+ =?us-ascii?Q?GDcw4a/F1fMEpKQn776goYg/sjIwM64eLQwIoHbQ5kAM+Rba71o2+F7ZlzQu?=
+ =?us-ascii?Q?LAYxu3+k53Lc3QkZf8W2BjsAf/bd8ufpD6a1vgJcDhbD/z5Fpe/kl5wbvw?=
+ =?us-ascii?Q?=3D=3D?=
+X-Forefront-Antispam-Report: CIP:216.228.117.161; CTRY:US; LANG:en; SCL:1; SRV:;
+ IPV:NLI; SFV:NSPM; H:mail.nvidia.com; PTR:dc6edge2.nvidia.com; CAT:NONE;
+ SFS:(13230040)(376014)(36860700013)(82310400026)(1800799024)(13003099007);
+ DIR:OUT; SFP:1101; 
 X-OriginatorOrg: Nvidia.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 17 May 2025 00:10:29.3401 (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: b77c1b09-de84-463c-f0f5-08dd94d73b93
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 17 May 2025 00:10:31.4403 (UTC)
+X-MS-Exchange-CrossTenant-Network-Message-Id: fb0d0b87-2c89-4596-9dfe-08dd94d73cce
 X-MS-Exchange-CrossTenant-Id: 43083d15-7273-40c1-b7db-39efd9ccc17a
-X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=43083d15-7273-40c1-b7db-39efd9ccc17a; Ip=[216.228.117.160];
+X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=43083d15-7273-40c1-b7db-39efd9ccc17a; Ip=[216.228.117.161];
  Helo=[mail.nvidia.com]
-X-MS-Exchange-CrossTenant-AuthSource: CH2PEPF00000148.namprd02.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthSource: CY4PEPF0000FCBE.namprd03.prod.outlook.com
 X-MS-Exchange-CrossTenant-AuthAs: Anonymous
 X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: LV2PR12MB5872
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: DS0PR12MB7583
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -139,29 +140,1584 @@ List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-560.28.03 supports more NVENC instances.
+Later patches in the series add HALs around various RM APIs in order to
+support a newer version of GSP-RM firmware.  In order to do this, begin
+by splitting the code up into "modules" that roughly represent RM's API
+boundaries so they can be more easily managed.
+
+Aside from moving the RPC function pointers, no code change is indended.
 
 Signed-off-by: Ben Skeggs <bskeggs@nvidia.com>
 Reviewed-by: Dave Airlie <airlied@redhat.com>
 Reviewed-by: Timur Tabi <ttabi@nvidia.com>
 Tested-by: Timur Tabi <ttabi@nvidia.com>
 ---
- drivers/gpu/drm/nouveau/include/nvkm/core/layout.h | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+ drivers/gpu/drm/nouveau/Kbuild                |   1 +
+ .../gpu/drm/nouveau/include/nvkm/subdev/gsp.h |  13 +-
+ .../gpu/drm/nouveau/nvkm/subdev/gsp/Kbuild    |   2 +
+ .../gpu/drm/nouveau/nvkm/subdev/gsp/r535.c    | 665 +----------------
+ .../gpu/drm/nouveau/nvkm/subdev/gsp/rm/Kbuild |   5 +
+ .../nouveau/nvkm/subdev/gsp/rm/r535/Kbuild    |   6 +
+ .../drm/nouveau/nvkm/subdev/gsp/rm/r535/rm.c  |  10 +
+ .../drm/nouveau/nvkm/subdev/gsp/rm/r535/rpc.c | 692 ++++++++++++++++++
+ .../gpu/drm/nouveau/nvkm/subdev/gsp/rm/rm.h   |  20 +
+ .../gpu/drm/nouveau/nvkm/subdev/gsp/rm/rpc.h  |  18 +
+ 10 files changed, 762 insertions(+), 670 deletions(-)
+ create mode 100644 drivers/gpu/drm/nouveau/nvkm/subdev/gsp/rm/Kbuild
+ create mode 100644 drivers/gpu/drm/nouveau/nvkm/subdev/gsp/rm/r535/Kbuild
+ create mode 100644 drivers/gpu/drm/nouveau/nvkm/subdev/gsp/rm/r535/rm.c
+ create mode 100644 drivers/gpu/drm/nouveau/nvkm/subdev/gsp/rm/r535/rpc.c
+ create mode 100644 drivers/gpu/drm/nouveau/nvkm/subdev/gsp/rm/rm.h
+ create mode 100644 drivers/gpu/drm/nouveau/nvkm/subdev/gsp/rm/rpc.h
 
-diff --git a/drivers/gpu/drm/nouveau/include/nvkm/core/layout.h b/drivers/gpu/drm/nouveau/include/nvkm/core/layout.h
-index 33e3bc519b9b..2debef27bd95 100644
---- a/drivers/gpu/drm/nouveau/include/nvkm/core/layout.h
-+++ b/drivers/gpu/drm/nouveau/include/nvkm/core/layout.h
-@@ -45,7 +45,7 @@ NVKM_LAYOUT_ONCE(NVKM_ENGINE_MSVLD   , struct nvkm_engine  ,    msvld)
- NVKM_LAYOUT_INST(NVKM_ENGINE_NVDEC   , struct nvkm_nvdec   ,    nvdec, 8)
- NVKM_LAYOUT_INST(NVKM_ENGINE_NVENC   , struct nvkm_nvenc   ,    nvenc, 4)
- NVKM_LAYOUT_INST(NVKM_ENGINE_NVJPG   , struct nvkm_engine  ,    nvjpg, 8)
--NVKM_LAYOUT_ONCE(NVKM_ENGINE_OFA     , struct nvkm_engine  ,      ofa)
-+NVKM_LAYOUT_INST(NVKM_ENGINE_OFA     , struct nvkm_engine  ,      ofa, 2)
- NVKM_LAYOUT_ONCE(NVKM_ENGINE_SEC     , struct nvkm_engine  ,      sec)
- NVKM_LAYOUT_ONCE(NVKM_ENGINE_SEC2    , struct nvkm_sec2    ,     sec2)
- NVKM_LAYOUT_ONCE(NVKM_ENGINE_SW      , struct nvkm_sw      ,       sw)
+diff --git a/drivers/gpu/drm/nouveau/Kbuild b/drivers/gpu/drm/nouveau/Kbuild
+index 7b863355c5c6..0759ba15954b 100644
+--- a/drivers/gpu/drm/nouveau/Kbuild
++++ b/drivers/gpu/drm/nouveau/Kbuild
+@@ -2,6 +2,7 @@
+ ccflags-y += -I $(src)/include
+ ccflags-y += -I $(src)/include/nvkm
+ ccflags-y += -I $(src)/nvkm
++ccflags-y += -I $(src)/nvkm/subdev/gsp
+ ccflags-y += -I $(src)
+ 
+ # NVKM - HW resource manager
+diff --git a/drivers/gpu/drm/nouveau/include/nvkm/subdev/gsp.h b/drivers/gpu/drm/nouveau/include/nvkm/subdev/gsp.h
+index 1c12854a8550..b543c31d3d32 100644
+--- a/drivers/gpu/drm/nouveau/include/nvkm/subdev/gsp.h
++++ b/drivers/gpu/drm/nouveau/include/nvkm/subdev/gsp.h
+@@ -210,10 +210,7 @@ struct nvkm_gsp {
+ 	} gr;
+ 
+ 	const struct nvkm_gsp_rm {
+-		void *(*rpc_get)(struct nvkm_gsp *, u32 fn, u32 argc);
+-		void *(*rpc_push)(struct nvkm_gsp *gsp, void *argv,
+-				  enum nvkm_gsp_rpc_reply_policy policy, u32 repc);
+-		void (*rpc_done)(struct nvkm_gsp *gsp, void *repv);
++		const struct nvkm_rm_api *api;
+ 
+ 		void *(*rm_ctrl_get)(struct nvkm_gsp_object *, u32 cmd, u32 argc);
+ 		int (*rm_ctrl_push)(struct nvkm_gsp_object *, void **argv, u32 repc);
+@@ -272,17 +269,19 @@ nvkm_gsp_rm(struct nvkm_gsp *gsp)
+ 	return gsp && (gsp->fws.rm || gsp->fw.img);
+ }
+ 
++#include <rm/rm.h>
++
+ static inline void *
+ nvkm_gsp_rpc_get(struct nvkm_gsp *gsp, u32 fn, u32 argc)
+ {
+-	return gsp->rm->rpc_get(gsp, fn, argc);
++	return gsp->rm->api->rpc->get(gsp, fn, argc);
+ }
+ 
+ static inline void *
+ nvkm_gsp_rpc_push(struct nvkm_gsp *gsp, void *argv,
+ 		  enum nvkm_gsp_rpc_reply_policy policy, u32 repc)
+ {
+-	return gsp->rm->rpc_push(gsp, argv, policy, repc);
++	return gsp->rm->api->rpc->push(gsp, argv, policy, repc);
+ }
+ 
+ static inline void *
+@@ -311,7 +310,7 @@ nvkm_gsp_rpc_wr(struct nvkm_gsp *gsp, void *argv,
+ static inline void
+ nvkm_gsp_rpc_done(struct nvkm_gsp *gsp, void *repv)
+ {
+-	gsp->rm->rpc_done(gsp, repv);
++	gsp->rm->api->rpc->done(gsp, repv);
+ }
+ 
+ static inline void *
+diff --git a/drivers/gpu/drm/nouveau/nvkm/subdev/gsp/Kbuild b/drivers/gpu/drm/nouveau/nvkm/subdev/gsp/Kbuild
+index 16bf2f1bb780..af6e55603763 100644
+--- a/drivers/gpu/drm/nouveau/nvkm/subdev/gsp/Kbuild
++++ b/drivers/gpu/drm/nouveau/nvkm/subdev/gsp/Kbuild
+@@ -10,3 +10,5 @@ nvkm-y += nvkm/subdev/gsp/ga102.o
+ nvkm-y += nvkm/subdev/gsp/ad102.o
+ 
+ nvkm-y += nvkm/subdev/gsp/r535.o
++
++include $(src)/nvkm/subdev/gsp/rm/Kbuild
+diff --git a/drivers/gpu/drm/nouveau/nvkm/subdev/gsp/r535.c b/drivers/gpu/drm/nouveau/nvkm/subdev/gsp/r535.c
+index 2bb726c0c49f..745d43586bad 100644
+--- a/drivers/gpu/drm/nouveau/nvkm/subdev/gsp/r535.c
++++ b/drivers/gpu/drm/nouveau/nvkm/subdev/gsp/r535.c
+@@ -19,6 +19,7 @@
+  * ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
+  * OTHER DEALINGS IN THE SOFTWARE.
+  */
++#include <rm/rpc.h>
+ #include "priv.h"
+ 
+ #include <core/pci.h>
+@@ -60,578 +61,6 @@
+ 
+ extern struct dentry *nouveau_debugfs_root;
+ 
+-#define GSP_MSG_MIN_SIZE GSP_PAGE_SIZE
+-#define GSP_MSG_MAX_SIZE (GSP_MSG_MIN_SIZE * 16)
+-
+-/**
+- * DOC: GSP message queue element
+- *
+- * https://github.com/NVIDIA/open-gpu-kernel-modules/blob/535/src/nvidia/inc/kernel/gpu/gsp/message_queue_priv.h
+- *
+- * The GSP command queue and status queue are message queues for the
+- * communication between software and GSP. The software submits the GSP
+- * RPC via the GSP command queue, GSP writes the status of the submitted
+- * RPC in the status queue.
+- *
+- * A GSP message queue element consists of three parts:
+- *
+- * - message element header (struct r535_gsp_msg), which mostly maintains
+- *   the metadata for queuing the element.
+- *
+- * - RPC message header (struct nvfw_gsp_rpc), which maintains the info
+- *   of the RPC. E.g., the RPC function number.
+- *
+- * - The payload, where the RPC message stays. E.g. the params of a
+- *   specific RPC function. Some RPC functions also have their headers
+- *   in the payload. E.g. rm_alloc, rm_control.
+- *
+- * The memory layout of a GSP message element can be illustrated below::
+- *
+- *    +------------------------+
+- *    | Message Element Header |
+- *    |    (r535_gsp_msg)      |
+- *    |                        |
+- *    | (r535_gsp_msg.data)    |
+- *    |          |             |
+- *    |----------V-------------|
+- *    |    GSP RPC Header      |
+- *    |    (nvfw_gsp_rpc)      |
+- *    |                        |
+- *    | (nvfw_gsp_rpc.data)    |
+- *    |          |             |
+- *    |----------V-------------|
+- *    |       Payload          |
+- *    |                        |
+- *    |   header(optional)     |
+- *    |        params          |
+- *    +------------------------+
+- *
+- * The max size of a message queue element is 16 pages (including the
+- * headers). When a GSP message to be sent is larger than 16 pages, the
+- * message should be split into multiple elements and sent accordingly.
+- *
+- * In the bunch of the split elements, the first element has the expected
+- * function number, while the rest of the elements are sent with the
+- * function number NV_VGPU_MSG_FUNCTION_CONTINUATION_RECORD.
+- *
+- * GSP consumes the elements from the cmdq and always writes the result
+- * back to the msgq. The result is also formed as split elements.
+- *
+- * Terminology:
+- *
+- * - gsp_msg(msg): GSP message element (element header + GSP RPC header +
+- *   payload)
+- * - gsp_rpc(rpc): GSP RPC (RPC header + payload)
+- * - gsp_rpc_buf: buffer for (GSP RPC header + payload)
+- * - gsp_rpc_len: size of (GSP RPC header + payload)
+- * - params_size: size of params in the payload
+- * - payload_size: size of (header if exists + params) in the payload
+- */
+-
+-struct r535_gsp_msg {
+-	u8 auth_tag_buffer[16];
+-	u8 aad_buffer[16];
+-	u32 checksum;
+-	u32 sequence;
+-	u32 elem_count;
+-	u32 pad;
+-	u8  data[];
+-};
+-
+-struct nvfw_gsp_rpc {
+-	u32 header_version;
+-	u32 signature;
+-	u32 length;
+-	u32 function;
+-	u32 rpc_result;
+-	u32 rpc_result_private;
+-	u32 sequence;
+-	union {
+-		u32 spare;
+-		u32 cpuRmGfid;
+-	};
+-	u8  data[];
+-};
+-
+-#define GSP_MSG_HDR_SIZE offsetof(struct r535_gsp_msg, data)
+-
+-#define to_gsp_hdr(p, header) \
+-	container_of((void *)p, typeof(*header), data)
+-
+-#define to_payload_hdr(p, header) \
+-	container_of((void *)p, typeof(*header), params)
+-
+-static int
+-r535_rpc_status_to_errno(uint32_t rpc_status)
+-{
+-	switch (rpc_status) {
+-	case 0x55: /* NV_ERR_NOT_READY */
+-	case 0x66: /* NV_ERR_TIMEOUT_RETRY */
+-		return -EBUSY;
+-	case 0x51: /* NV_ERR_NO_MEMORY */
+-		return -ENOMEM;
+-	default:
+-		return -EINVAL;
+-	}
+-}
+-
+-static int
+-r535_gsp_msgq_wait(struct nvkm_gsp *gsp, u32 gsp_rpc_len, int *ptime)
+-{
+-	u32 size, rptr = *gsp->msgq.rptr;
+-	int used;
+-
+-	size = DIV_ROUND_UP(GSP_MSG_HDR_SIZE + gsp_rpc_len,
+-			    GSP_PAGE_SIZE);
+-	if (WARN_ON(!size || size >= gsp->msgq.cnt))
+-		return -EINVAL;
+-
+-	do {
+-		u32 wptr = *gsp->msgq.wptr;
+-
+-		used = wptr + gsp->msgq.cnt - rptr;
+-		if (used >= gsp->msgq.cnt)
+-			used -= gsp->msgq.cnt;
+-		if (used >= size)
+-			break;
+-
+-		usleep_range(1, 2);
+-	} while (--(*ptime));
+-
+-	if (WARN_ON(!*ptime))
+-		return -ETIMEDOUT;
+-
+-	return used;
+-}
+-
+-static struct r535_gsp_msg *
+-r535_gsp_msgq_get_entry(struct nvkm_gsp *gsp)
+-{
+-	u32 rptr = *gsp->msgq.rptr;
+-
+-	/* Skip the first page, which is the message queue info */
+-	return (void *)((u8 *)gsp->shm.msgq.ptr + GSP_PAGE_SIZE +
+-	       rptr * GSP_PAGE_SIZE);
+-}
+-
+-/**
+- * DOC: Receive a GSP message queue element
+- *
+- * Receiving a GSP message queue element from the message queue consists of
+- * the following steps:
+- *
+- * - Peek the element from the queue: r535_gsp_msgq_peek().
+- *   Peek the first page of the element to determine the total size of the
+- *   message before allocating the proper memory.
+- *
+- * - Allocate memory for the message.
+- *   Once the total size of the message is determined from the GSP message
+- *   queue element, the caller of r535_gsp_msgq_recv() allocates the
+- *   required memory.
+- *
+- * - Receive the message: r535_gsp_msgq_recv().
+- *   Copy the message into the allocated memory. Advance the read pointer.
+- *   If the message is a large GSP message, r535_gsp_msgq_recv() calls
+- *   r535_gsp_msgq_recv_one_elem() repeatedly to receive continuation parts
+- *   until the complete message is received.
+- *   r535_gsp_msgq_recv() assembles the payloads of cotinuation parts into
+- *   the return of the large GSP message.
+- *
+- * - Free the allocated memory: r535_gsp_msg_done().
+- *   The user is responsible for freeing the memory allocated for the GSP
+- *   message pages after they have been processed.
+- */
+-static void *
+-r535_gsp_msgq_peek(struct nvkm_gsp *gsp, u32 gsp_rpc_len, int *retries)
+-{
+-	struct r535_gsp_msg *mqe;
+-	int ret;
+-
+-	ret = r535_gsp_msgq_wait(gsp, gsp_rpc_len, retries);
+-	if (ret < 0)
+-		return ERR_PTR(ret);
+-
+-	mqe = r535_gsp_msgq_get_entry(gsp);
+-
+-	return mqe->data;
+-}
+-
+-struct r535_gsp_msg_info {
+-	int *retries;
+-	u32 gsp_rpc_len;
+-	void *gsp_rpc_buf;
+-	bool continuation;
+-};
+-
+-static void
+-r535_gsp_msg_dump(struct nvkm_gsp *gsp, struct nvfw_gsp_rpc *msg, int lvl);
+-
+-static void *
+-r535_gsp_msgq_recv_one_elem(struct nvkm_gsp *gsp,
+-			    struct r535_gsp_msg_info *info)
+-{
+-	u8 *buf = info->gsp_rpc_buf;
+-	u32 rptr = *gsp->msgq.rptr;
+-	struct r535_gsp_msg *mqe;
+-	u32 size, expected, len;
+-	int ret;
+-
+-	expected = info->gsp_rpc_len;
+-
+-	ret = r535_gsp_msgq_wait(gsp, expected, info->retries);
+-	if (ret < 0)
+-		return ERR_PTR(ret);
+-
+-	mqe = r535_gsp_msgq_get_entry(gsp);
+-
+-	if (info->continuation) {
+-		struct nvfw_gsp_rpc *rpc = (struct nvfw_gsp_rpc *)mqe->data;
+-
+-		if (rpc->function != NV_VGPU_MSG_FUNCTION_CONTINUATION_RECORD) {
+-			nvkm_error(&gsp->subdev,
+-				   "Not a continuation of a large RPC\n");
+-			r535_gsp_msg_dump(gsp, rpc, NV_DBG_ERROR);
+-			return ERR_PTR(-EIO);
+-		}
+-	}
+-
+-	size = ALIGN(expected + GSP_MSG_HDR_SIZE, GSP_PAGE_SIZE);
+-
+-	len = ((gsp->msgq.cnt - rptr) * GSP_PAGE_SIZE) - sizeof(*mqe);
+-	len = min_t(u32, expected, len);
+-
+-	if (info->continuation)
+-		memcpy(buf, mqe->data + sizeof(struct nvfw_gsp_rpc),
+-		       len - sizeof(struct nvfw_gsp_rpc));
+-	else
+-		memcpy(buf, mqe->data, len);
+-
+-	expected -= len;
+-
+-	if (expected) {
+-		mqe = (void *)((u8 *)gsp->shm.msgq.ptr + 0x1000 + 0 * 0x1000);
+-		memcpy(buf + len, mqe, expected);
+-	}
+-
+-	rptr = (rptr + DIV_ROUND_UP(size, GSP_PAGE_SIZE)) % gsp->msgq.cnt;
+-
+-	mb();
+-	(*gsp->msgq.rptr) = rptr;
+-	return buf;
+-}
+-
+-static void *
+-r535_gsp_msgq_recv(struct nvkm_gsp *gsp, u32 gsp_rpc_len, int *retries)
+-{
+-	struct r535_gsp_msg *mqe;
+-	const u32 max_rpc_size = GSP_MSG_MAX_SIZE - sizeof(*mqe);
+-	struct nvfw_gsp_rpc *rpc;
+-	struct r535_gsp_msg_info info = {0};
+-	u32 expected = gsp_rpc_len;
+-	void *buf;
+-
+-	mqe = r535_gsp_msgq_get_entry(gsp);
+-	rpc = (struct nvfw_gsp_rpc *)mqe->data;
+-
+-	if (WARN_ON(rpc->length > max_rpc_size))
+-		return NULL;
+-
+-	buf = kvmalloc(max_t(u32, rpc->length, expected), GFP_KERNEL);
+-	if (!buf)
+-		return ERR_PTR(-ENOMEM);
+-
+-	info.gsp_rpc_buf = buf;
+-	info.retries = retries;
+-	info.gsp_rpc_len = rpc->length;
+-
+-	buf = r535_gsp_msgq_recv_one_elem(gsp, &info);
+-	if (IS_ERR(buf)) {
+-		kvfree(info.gsp_rpc_buf);
+-		info.gsp_rpc_buf = NULL;
+-		return buf;
+-	}
+-
+-	if (expected <= max_rpc_size)
+-		return buf;
+-
+-	info.gsp_rpc_buf += info.gsp_rpc_len;
+-	expected -= info.gsp_rpc_len;
+-
+-	while (expected) {
+-		u32 size;
+-
+-		rpc = r535_gsp_msgq_peek(gsp, sizeof(*rpc), info.retries);
+-		if (IS_ERR_OR_NULL(rpc)) {
+-			kfree(buf);
+-			return rpc;
+-		}
+-
+-		info.gsp_rpc_len = rpc->length;
+-		info.continuation = true;
+-
+-		rpc = r535_gsp_msgq_recv_one_elem(gsp, &info);
+-		if (IS_ERR_OR_NULL(rpc)) {
+-			kfree(buf);
+-			return rpc;
+-		}
+-
+-		size = info.gsp_rpc_len - sizeof(*rpc);
+-		expected -= size;
+-		info.gsp_rpc_buf += size;
+-	}
+-
+-	rpc = buf;
+-	rpc->length = gsp_rpc_len;
+-	return buf;
+-}
+-
+-static int
+-r535_gsp_cmdq_push(struct nvkm_gsp *gsp, void *rpc)
+-{
+-	struct r535_gsp_msg *msg = to_gsp_hdr(rpc, msg);
+-	struct r535_gsp_msg *cqe;
+-	u32 gsp_rpc_len = msg->checksum;
+-	u64 *ptr = (void *)msg;
+-	u64 *end;
+-	u64 csum = 0;
+-	int free, time = 1000000;
+-	u32 wptr, size, step, len;
+-	u32 off = 0;
+-
+-	len = ALIGN(GSP_MSG_HDR_SIZE + gsp_rpc_len, GSP_PAGE_SIZE);
+-
+-	end = (u64 *)((char *)ptr + len);
+-	msg->pad = 0;
+-	msg->checksum = 0;
+-	msg->sequence = gsp->cmdq.seq++;
+-	msg->elem_count = DIV_ROUND_UP(len, 0x1000);
+-
+-	while (ptr < end)
+-		csum ^= *ptr++;
+-
+-	msg->checksum = upper_32_bits(csum) ^ lower_32_bits(csum);
+-
+-	wptr = *gsp->cmdq.wptr;
+-	do {
+-		do {
+-			free = *gsp->cmdq.rptr + gsp->cmdq.cnt - wptr - 1;
+-			if (free >= gsp->cmdq.cnt)
+-				free -= gsp->cmdq.cnt;
+-			if (free >= 1)
+-				break;
+-
+-			usleep_range(1, 2);
+-		} while(--time);
+-
+-		if (WARN_ON(!time)) {
+-			kvfree(msg);
+-			return -ETIMEDOUT;
+-		}
+-
+-		cqe = (void *)((u8 *)gsp->shm.cmdq.ptr + 0x1000 + wptr * 0x1000);
+-		step = min_t(u32, free, (gsp->cmdq.cnt - wptr));
+-		size = min_t(u32, len, step * GSP_PAGE_SIZE);
+-
+-		memcpy(cqe, (u8 *)msg + off, size);
+-
+-		wptr += DIV_ROUND_UP(size, 0x1000);
+-		if (wptr == gsp->cmdq.cnt)
+-			wptr = 0;
+-
+-		off  += size;
+-		len -= size;
+-	} while (len);
+-
+-	nvkm_trace(&gsp->subdev, "cmdq: wptr %d\n", wptr);
+-	wmb();
+-	(*gsp->cmdq.wptr) = wptr;
+-	mb();
+-
+-	nvkm_falcon_wr32(&gsp->falcon, 0xc00, 0x00000000);
+-
+-	kvfree(msg);
+-	return 0;
+-}
+-
+-static void *
+-r535_gsp_cmdq_get(struct nvkm_gsp *gsp, u32 gsp_rpc_len)
+-{
+-	struct r535_gsp_msg *msg;
+-	u32 size = GSP_MSG_HDR_SIZE + gsp_rpc_len;
+-
+-	size = ALIGN(size, GSP_MSG_MIN_SIZE);
+-	msg = kvzalloc(size, GFP_KERNEL);
+-	if (!msg)
+-		return ERR_PTR(-ENOMEM);
+-
+-	msg->checksum = gsp_rpc_len;
+-	return msg->data;
+-}
+-
+-static void
+-r535_gsp_msg_done(struct nvkm_gsp *gsp, struct nvfw_gsp_rpc *msg)
+-{
+-	kvfree(msg);
+-}
+-
+-static void
+-r535_gsp_msg_dump(struct nvkm_gsp *gsp, struct nvfw_gsp_rpc *msg, int lvl)
+-{
+-	if (gsp->subdev.debug >= lvl) {
+-		nvkm_printk__(&gsp->subdev, lvl, info,
+-			      "msg fn:%d len:0x%x/0x%zx res:0x%x resp:0x%x\n",
+-			      msg->function, msg->length, msg->length - sizeof(*msg),
+-			      msg->rpc_result, msg->rpc_result_private);
+-		print_hex_dump(KERN_INFO, "msg: ", DUMP_PREFIX_OFFSET, 16, 1,
+-			       msg->data, msg->length - sizeof(*msg), true);
+-	}
+-}
+-
+-static struct nvfw_gsp_rpc *
+-r535_gsp_msg_recv(struct nvkm_gsp *gsp, int fn, u32 gsp_rpc_len)
+-{
+-	struct nvkm_subdev *subdev = &gsp->subdev;
+-	struct nvfw_gsp_rpc *rpc;
+-	int retries = 4000000, i;
+-
+-retry:
+-	rpc = r535_gsp_msgq_peek(gsp, sizeof(*rpc), &retries);
+-	if (IS_ERR_OR_NULL(rpc))
+-		return rpc;
+-
+-	rpc = r535_gsp_msgq_recv(gsp, gsp_rpc_len, &retries);
+-	if (IS_ERR_OR_NULL(rpc))
+-		return rpc;
+-
+-	if (rpc->rpc_result) {
+-		r535_gsp_msg_dump(gsp, rpc, NV_DBG_ERROR);
+-		r535_gsp_msg_done(gsp, rpc);
+-		return ERR_PTR(-EINVAL);
+-	}
+-
+-	r535_gsp_msg_dump(gsp, rpc, NV_DBG_TRACE);
+-
+-	if (fn && rpc->function == fn) {
+-		if (gsp_rpc_len) {
+-			if (rpc->length < gsp_rpc_len) {
+-				nvkm_error(subdev, "rpc len %d < %d\n",
+-					   rpc->length, gsp_rpc_len);
+-				r535_gsp_msg_dump(gsp, rpc, NV_DBG_ERROR);
+-				r535_gsp_msg_done(gsp, rpc);
+-				return ERR_PTR(-EIO);
+-			}
+-
+-			return rpc;
+-		}
+-
+-		r535_gsp_msg_done(gsp, rpc);
+-		return NULL;
+-	}
+-
+-	for (i = 0; i < gsp->msgq.ntfy_nr; i++) {
+-		struct nvkm_gsp_msgq_ntfy *ntfy = &gsp->msgq.ntfy[i];
+-
+-		if (ntfy->fn == rpc->function) {
+-			if (ntfy->func)
+-				ntfy->func(ntfy->priv, ntfy->fn, rpc->data,
+-					   rpc->length - sizeof(*rpc));
+-			break;
+-		}
+-	}
+-
+-	if (i == gsp->msgq.ntfy_nr)
+-		r535_gsp_msg_dump(gsp, rpc, NV_DBG_WARN);
+-
+-	r535_gsp_msg_done(gsp, rpc);
+-	if (fn)
+-		goto retry;
+-
+-	if (*gsp->msgq.rptr != *gsp->msgq.wptr)
+-		goto retry;
+-
+-	return NULL;
+-}
+-
+-static int
+-r535_gsp_msg_ntfy_add(struct nvkm_gsp *gsp, u32 fn, nvkm_gsp_msg_ntfy_func func, void *priv)
+-{
+-	int ret = 0;
+-
+-	mutex_lock(&gsp->msgq.mutex);
+-	if (WARN_ON(gsp->msgq.ntfy_nr >= ARRAY_SIZE(gsp->msgq.ntfy))) {
+-		ret = -ENOSPC;
+-	} else {
+-		gsp->msgq.ntfy[gsp->msgq.ntfy_nr].fn = fn;
+-		gsp->msgq.ntfy[gsp->msgq.ntfy_nr].func = func;
+-		gsp->msgq.ntfy[gsp->msgq.ntfy_nr].priv = priv;
+-		gsp->msgq.ntfy_nr++;
+-	}
+-	mutex_unlock(&gsp->msgq.mutex);
+-	return ret;
+-}
+-
+-static int
+-r535_gsp_rpc_poll(struct nvkm_gsp *gsp, u32 fn)
+-{
+-	void *repv;
+-
+-	mutex_lock(&gsp->cmdq.mutex);
+-	repv = r535_gsp_msg_recv(gsp, fn, 0);
+-	mutex_unlock(&gsp->cmdq.mutex);
+-	if (IS_ERR(repv))
+-		return PTR_ERR(repv);
+-
+-	return 0;
+-}
+-
+-static void *
+-r535_gsp_rpc_handle_reply(struct nvkm_gsp *gsp, u32 fn,
+-			  enum nvkm_gsp_rpc_reply_policy policy,
+-			  u32 gsp_rpc_len)
+-{
+-	struct nvfw_gsp_rpc *reply;
+-	void *repv = NULL;
+-
+-	switch (policy) {
+-	case NVKM_GSP_RPC_REPLY_NOWAIT:
+-		break;
+-	case NVKM_GSP_RPC_REPLY_RECV:
+-		reply = r535_gsp_msg_recv(gsp, fn, gsp_rpc_len);
+-		if (!IS_ERR_OR_NULL(reply))
+-			repv = reply->data;
+-		else
+-			repv = reply;
+-		break;
+-	case NVKM_GSP_RPC_REPLY_POLL:
+-		repv = r535_gsp_msg_recv(gsp, fn, 0);
+-		break;
+-	}
+-
+-	return repv;
+-}
+-
+-static void *
+-r535_gsp_rpc_send(struct nvkm_gsp *gsp, void *payload,
+-		  enum nvkm_gsp_rpc_reply_policy policy, u32 gsp_rpc_len)
+-{
+-	struct nvfw_gsp_rpc *rpc = to_gsp_hdr(payload, rpc);
+-	u32 fn = rpc->function;
+-	int ret;
+-
+-	if (gsp->subdev.debug >= NV_DBG_TRACE) {
+-		nvkm_trace(&gsp->subdev, "rpc fn:%d len:0x%x/0x%zx\n", rpc->function,
+-			   rpc->length, rpc->length - sizeof(*rpc));
+-		print_hex_dump(KERN_INFO, "rpc: ", DUMP_PREFIX_OFFSET, 16, 1,
+-			       rpc->data, rpc->length - sizeof(*rpc), true);
+-	}
+-
+-	ret = r535_gsp_cmdq_push(gsp, rpc);
+-	if (ret)
+-		return ERR_PTR(ret);
+-
+-	return r535_gsp_rpc_handle_reply(gsp, fn, policy, gsp_rpc_len);
+-}
+-
+ static void
+ r535_gsp_event_dtor(struct nvkm_gsp_event *event)
+ {
+@@ -936,99 +365,9 @@ r535_gsp_rpc_rm_ctrl_get(struct nvkm_gsp_object *object, u32 cmd, u32 params_siz
+ 	return rpc->params;
+ }
+ 
+-static void
+-r535_gsp_rpc_done(struct nvkm_gsp *gsp, void *repv)
+-{
+-	struct nvfw_gsp_rpc *rpc = container_of(repv, typeof(*rpc), data);
+-
+-	r535_gsp_msg_done(gsp, rpc);
+-}
+-
+-static void *
+-r535_gsp_rpc_get(struct nvkm_gsp *gsp, u32 fn, u32 payload_size)
+-{
+-	struct nvfw_gsp_rpc *rpc;
+-
+-	rpc = r535_gsp_cmdq_get(gsp, ALIGN(sizeof(*rpc) + payload_size,
+-					   sizeof(u64)));
+-	if (IS_ERR(rpc))
+-		return ERR_CAST(rpc);
+-
+-	rpc->header_version = 0x03000000;
+-	rpc->signature = ('C' << 24) | ('P' << 16) | ('R' << 8) | 'V';
+-	rpc->function = fn;
+-	rpc->rpc_result = 0xffffffff;
+-	rpc->rpc_result_private = 0xffffffff;
+-	rpc->length = sizeof(*rpc) + payload_size;
+-	return rpc->data;
+-}
+-
+-static void *
+-r535_gsp_rpc_push(struct nvkm_gsp *gsp, void *payload,
+-		  enum nvkm_gsp_rpc_reply_policy policy, u32 gsp_rpc_len)
+-{
+-	struct nvfw_gsp_rpc *rpc = to_gsp_hdr(payload, rpc);
+-	struct r535_gsp_msg *msg = to_gsp_hdr(rpc, msg);
+-	const u32 max_rpc_size = GSP_MSG_MAX_SIZE - sizeof(*msg);
+-	const u32 max_payload_size = max_rpc_size - sizeof(*rpc);
+-	u32 payload_size = rpc->length - sizeof(*rpc);
+-	void *repv;
+-
+-	mutex_lock(&gsp->cmdq.mutex);
+-	if (payload_size > max_payload_size) {
+-		const u32 fn = rpc->function;
+-		u32 remain_payload_size = payload_size;
+-
+-		/* Adjust length, and send initial RPC. */
+-		rpc->length = sizeof(*rpc) + max_payload_size;
+-		msg->checksum = rpc->length;
+-
+-		repv = r535_gsp_rpc_send(gsp, payload, NVKM_GSP_RPC_REPLY_NOWAIT, 0);
+-		if (IS_ERR(repv))
+-			goto done;
+-
+-		payload += max_payload_size;
+-		remain_payload_size -= max_payload_size;
+-
+-		/* Remaining chunks sent as CONTINUATION_RECORD RPCs. */
+-		while (remain_payload_size) {
+-			u32 size = min(remain_payload_size,
+-				       max_payload_size);
+-			void *next;
+-
+-			next = r535_gsp_rpc_get(gsp, NV_VGPU_MSG_FUNCTION_CONTINUATION_RECORD, size);
+-			if (IS_ERR(next)) {
+-				repv = next;
+-				goto done;
+-			}
+-
+-			memcpy(next, payload, size);
+-
+-			repv = r535_gsp_rpc_send(gsp, next, NVKM_GSP_RPC_REPLY_NOWAIT, 0);
+-			if (IS_ERR(repv))
+-				goto done;
+-
+-			payload += size;
+-			remain_payload_size -= size;
+-		}
+-
+-		/* Wait for reply. */
+-		repv = r535_gsp_rpc_handle_reply(gsp, fn, policy, payload_size +
+-						 sizeof(*rpc));
+-	} else {
+-		repv = r535_gsp_rpc_send(gsp, payload, policy, gsp_rpc_len);
+-	}
+-
+-done:
+-	mutex_unlock(&gsp->cmdq.mutex);
+-	return repv;
+-}
+-
+ const struct nvkm_gsp_rm
+ r535_gsp_rm = {
+-	.rpc_get = r535_gsp_rpc_get,
+-	.rpc_push = r535_gsp_rpc_push,
+-	.rpc_done = r535_gsp_rpc_done,
++	.api = &r535_rm,
+ 
+ 	.rm_ctrl_get = r535_gsp_rpc_rm_ctrl_get,
+ 	.rm_ctrl_push = r535_gsp_rpc_rm_ctrl_push,
+diff --git a/drivers/gpu/drm/nouveau/nvkm/subdev/gsp/rm/Kbuild b/drivers/gpu/drm/nouveau/nvkm/subdev/gsp/rm/Kbuild
+new file mode 100644
+index 000000000000..1c07740215ec
+--- /dev/null
++++ b/drivers/gpu/drm/nouveau/nvkm/subdev/gsp/rm/Kbuild
+@@ -0,0 +1,5 @@
++# SPDX-License-Identifier: MIT
++#
++# Copyright (c) 2025, NVIDIA CORPORATION. All rights reserved.
++
++include $(src)/nvkm/subdev/gsp/rm/r535/Kbuild
+diff --git a/drivers/gpu/drm/nouveau/nvkm/subdev/gsp/rm/r535/Kbuild b/drivers/gpu/drm/nouveau/nvkm/subdev/gsp/rm/r535/Kbuild
+new file mode 100644
+index 000000000000..21c818ec0701
+--- /dev/null
++++ b/drivers/gpu/drm/nouveau/nvkm/subdev/gsp/rm/r535/Kbuild
+@@ -0,0 +1,6 @@
++# SPDX-License-Identifier: MIT
++#
++# Copyright (c) 2025, NVIDIA CORPORATION. All rights reserved.
++
++nvkm-y += nvkm/subdev/gsp/rm/r535/rm.o
++nvkm-y += nvkm/subdev/gsp/rm/r535/rpc.o
+diff --git a/drivers/gpu/drm/nouveau/nvkm/subdev/gsp/rm/r535/rm.c b/drivers/gpu/drm/nouveau/nvkm/subdev/gsp/rm/r535/rm.c
+new file mode 100644
+index 000000000000..f28b781abc5c
+--- /dev/null
++++ b/drivers/gpu/drm/nouveau/nvkm/subdev/gsp/rm/r535/rm.c
+@@ -0,0 +1,10 @@
++/* SPDX-License-Identifier: MIT
++ *
++ * Copyright (c) 2025, NVIDIA CORPORATION. All rights reserved.
++ */
++#include <rm/rm.h>
++
++const struct nvkm_rm_api
++r535_rm = {
++	.rpc = &r535_rpc,
++};
+diff --git a/drivers/gpu/drm/nouveau/nvkm/subdev/gsp/rm/r535/rpc.c b/drivers/gpu/drm/nouveau/nvkm/subdev/gsp/rm/r535/rpc.c
+new file mode 100644
+index 000000000000..ffb4104a7d8c
+--- /dev/null
++++ b/drivers/gpu/drm/nouveau/nvkm/subdev/gsp/rm/r535/rpc.c
+@@ -0,0 +1,692 @@
++/*
++ * Copyright 2023 Red Hat Inc.
++ *
++ * Permission is hereby granted, free of charge, to any person obtaining a
++ * copy of this software and associated documentation files (the "Software"),
++ * to deal in the Software without restriction, including without limitation
++ * the rights to use, copy, modify, merge, publish, distribute, sublicense,
++ * and/or sell copies of the Software, and to permit persons to whom the
++ * Software is furnished to do so, subject to the following conditions:
++ *
++ * The above copyright notice and this permission notice shall be included in
++ * all copies or substantial portions of the Software.
++ *
++ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
++ * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
++ * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.  IN NO EVENT SHALL
++ * THE COPYRIGHT HOLDER(S) OR AUTHOR(S) BE LIABLE FOR ANY CLAIM, DAMAGES OR
++ * OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE,
++ * ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
++ * OTHER DEALINGS IN THE SOFTWARE.
++ */
++#include <rm/rpc.h>
++
++#include <nvrm/nvtypes.h>
++#include <nvrm/535.113.01/nvidia/kernel/inc/vgpu/rpc_global_enums.h>
++
++#define GSP_MSG_MIN_SIZE GSP_PAGE_SIZE
++#define GSP_MSG_MAX_SIZE (GSP_MSG_MIN_SIZE * 16)
++
++/**
++ * DOC: GSP message queue element
++ *
++ * https://github.com/NVIDIA/open-gpu-kernel-modules/blob/535/src/nvidia/inc/kernel/gpu/gsp/message_queue_priv.h
++ *
++ * The GSP command queue and status queue are message queues for the
++ * communication between software and GSP. The software submits the GSP
++ * RPC via the GSP command queue, GSP writes the status of the submitted
++ * RPC in the status queue.
++ *
++ * A GSP message queue element consists of three parts:
++ *
++ * - message element header (struct r535_gsp_msg), which mostly maintains
++ *   the metadata for queuing the element.
++ *
++ * - RPC message header (struct nvfw_gsp_rpc), which maintains the info
++ *   of the RPC. E.g., the RPC function number.
++ *
++ * - The payload, where the RPC message stays. E.g. the params of a
++ *   specific RPC function. Some RPC functions also have their headers
++ *   in the payload. E.g. rm_alloc, rm_control.
++ *
++ * The memory layout of a GSP message element can be illustrated below::
++ *
++ *    +------------------------+
++ *    | Message Element Header |
++ *    |    (r535_gsp_msg)      |
++ *    |                        |
++ *    | (r535_gsp_msg.data)    |
++ *    |          |             |
++ *    |----------V-------------|
++ *    |    GSP RPC Header      |
++ *    |    (nvfw_gsp_rpc)      |
++ *    |                        |
++ *    | (nvfw_gsp_rpc.data)    |
++ *    |          |             |
++ *    |----------V-------------|
++ *    |       Payload          |
++ *    |                        |
++ *    |   header(optional)     |
++ *    |        params          |
++ *    +------------------------+
++ *
++ * The max size of a message queue element is 16 pages (including the
++ * headers). When a GSP message to be sent is larger than 16 pages, the
++ * message should be split into multiple elements and sent accordingly.
++ *
++ * In the bunch of the split elements, the first element has the expected
++ * function number, while the rest of the elements are sent with the
++ * function number NV_VGPU_MSG_FUNCTION_CONTINUATION_RECORD.
++ *
++ * GSP consumes the elements from the cmdq and always writes the result
++ * back to the msgq. The result is also formed as split elements.
++ *
++ * Terminology:
++ *
++ * - gsp_msg(msg): GSP message element (element header + GSP RPC header +
++ *   payload)
++ * - gsp_rpc(rpc): GSP RPC (RPC header + payload)
++ * - gsp_rpc_buf: buffer for (GSP RPC header + payload)
++ * - gsp_rpc_len: size of (GSP RPC header + payload)
++ * - params_size: size of params in the payload
++ * - payload_size: size of (header if exists + params) in the payload
++ */
++
++struct r535_gsp_msg {
++	u8 auth_tag_buffer[16];
++	u8 aad_buffer[16];
++	u32 checksum;
++	u32 sequence;
++	u32 elem_count;
++	u32 pad;
++	u8  data[];
++};
++
++struct nvfw_gsp_rpc {
++	u32 header_version;
++	u32 signature;
++	u32 length;
++	u32 function;
++	u32 rpc_result;
++	u32 rpc_result_private;
++	u32 sequence;
++	union {
++		u32 spare;
++		u32 cpuRmGfid;
++	};
++	u8  data[];
++};
++
++#define GSP_MSG_HDR_SIZE offsetof(struct r535_gsp_msg, data)
++
++#define to_gsp_hdr(p, header) \
++	container_of((void *)p, typeof(*header), data)
++
++#define to_payload_hdr(p, header) \
++	container_of((void *)p, typeof(*header), params)
++
++int
++r535_rpc_status_to_errno(uint32_t rpc_status)
++{
++	switch (rpc_status) {
++	case 0x55: /* NV_ERR_NOT_READY */
++	case 0x66: /* NV_ERR_TIMEOUT_RETRY */
++		return -EBUSY;
++	case 0x51: /* NV_ERR_NO_MEMORY */
++		return -ENOMEM;
++	default:
++		return -EINVAL;
++	}
++}
++
++static int
++r535_gsp_msgq_wait(struct nvkm_gsp *gsp, u32 gsp_rpc_len, int *ptime)
++{
++	u32 size, rptr = *gsp->msgq.rptr;
++	int used;
++
++	size = DIV_ROUND_UP(GSP_MSG_HDR_SIZE + gsp_rpc_len,
++			    GSP_PAGE_SIZE);
++	if (WARN_ON(!size || size >= gsp->msgq.cnt))
++		return -EINVAL;
++
++	do {
++		u32 wptr = *gsp->msgq.wptr;
++
++		used = wptr + gsp->msgq.cnt - rptr;
++		if (used >= gsp->msgq.cnt)
++			used -= gsp->msgq.cnt;
++		if (used >= size)
++			break;
++
++		usleep_range(1, 2);
++	} while (--(*ptime));
++
++	if (WARN_ON(!*ptime))
++		return -ETIMEDOUT;
++
++	return used;
++}
++
++static struct r535_gsp_msg *
++r535_gsp_msgq_get_entry(struct nvkm_gsp *gsp)
++{
++	u32 rptr = *gsp->msgq.rptr;
++
++	/* Skip the first page, which is the message queue info */
++	return (void *)((u8 *)gsp->shm.msgq.ptr + GSP_PAGE_SIZE +
++	       rptr * GSP_PAGE_SIZE);
++}
++
++/**
++ * DOC: Receive a GSP message queue element
++ *
++ * Receiving a GSP message queue element from the message queue consists of
++ * the following steps:
++ *
++ * - Peek the element from the queue: r535_gsp_msgq_peek().
++ *   Peek the first page of the element to determine the total size of the
++ *   message before allocating the proper memory.
++ *
++ * - Allocate memory for the message.
++ *   Once the total size of the message is determined from the GSP message
++ *   queue element, the caller of r535_gsp_msgq_recv() allocates the
++ *   required memory.
++ *
++ * - Receive the message: r535_gsp_msgq_recv().
++ *   Copy the message into the allocated memory. Advance the read pointer.
++ *   If the message is a large GSP message, r535_gsp_msgq_recv() calls
++ *   r535_gsp_msgq_recv_one_elem() repeatedly to receive continuation parts
++ *   until the complete message is received.
++ *   r535_gsp_msgq_recv() assembles the payloads of cotinuation parts into
++ *   the return of the large GSP message.
++ *
++ * - Free the allocated memory: r535_gsp_msg_done().
++ *   The user is responsible for freeing the memory allocated for the GSP
++ *   message pages after they have been processed.
++ */
++static void *
++r535_gsp_msgq_peek(struct nvkm_gsp *gsp, u32 gsp_rpc_len, int *retries)
++{
++	struct r535_gsp_msg *mqe;
++	int ret;
++
++	ret = r535_gsp_msgq_wait(gsp, gsp_rpc_len, retries);
++	if (ret < 0)
++		return ERR_PTR(ret);
++
++	mqe = r535_gsp_msgq_get_entry(gsp);
++
++	return mqe->data;
++}
++
++struct r535_gsp_msg_info {
++	int *retries;
++	u32 gsp_rpc_len;
++	void *gsp_rpc_buf;
++	bool continuation;
++};
++
++static void
++r535_gsp_msg_dump(struct nvkm_gsp *gsp, struct nvfw_gsp_rpc *msg, int lvl);
++
++static void *
++r535_gsp_msgq_recv_one_elem(struct nvkm_gsp *gsp,
++			    struct r535_gsp_msg_info *info)
++{
++	u8 *buf = info->gsp_rpc_buf;
++	u32 rptr = *gsp->msgq.rptr;
++	struct r535_gsp_msg *mqe;
++	u32 size, expected, len;
++	int ret;
++
++	expected = info->gsp_rpc_len;
++
++	ret = r535_gsp_msgq_wait(gsp, expected, info->retries);
++	if (ret < 0)
++		return ERR_PTR(ret);
++
++	mqe = r535_gsp_msgq_get_entry(gsp);
++
++	if (info->continuation) {
++		struct nvfw_gsp_rpc *rpc = (struct nvfw_gsp_rpc *)mqe->data;
++
++		if (rpc->function != NV_VGPU_MSG_FUNCTION_CONTINUATION_RECORD) {
++			nvkm_error(&gsp->subdev,
++				   "Not a continuation of a large RPC\n");
++			r535_gsp_msg_dump(gsp, rpc, NV_DBG_ERROR);
++			return ERR_PTR(-EIO);
++		}
++	}
++
++	size = ALIGN(expected + GSP_MSG_HDR_SIZE, GSP_PAGE_SIZE);
++
++	len = ((gsp->msgq.cnt - rptr) * GSP_PAGE_SIZE) - sizeof(*mqe);
++	len = min_t(u32, expected, len);
++
++	if (info->continuation)
++		memcpy(buf, mqe->data + sizeof(struct nvfw_gsp_rpc),
++		       len - sizeof(struct nvfw_gsp_rpc));
++	else
++		memcpy(buf, mqe->data, len);
++
++	expected -= len;
++
++	if (expected) {
++		mqe = (void *)((u8 *)gsp->shm.msgq.ptr + 0x1000 + 0 * 0x1000);
++		memcpy(buf + len, mqe, expected);
++	}
++
++	rptr = (rptr + DIV_ROUND_UP(size, GSP_PAGE_SIZE)) % gsp->msgq.cnt;
++
++	mb();
++	(*gsp->msgq.rptr) = rptr;
++	return buf;
++}
++
++static void *
++r535_gsp_msgq_recv(struct nvkm_gsp *gsp, u32 gsp_rpc_len, int *retries)
++{
++	struct r535_gsp_msg *mqe;
++	const u32 max_rpc_size = GSP_MSG_MAX_SIZE - sizeof(*mqe);
++	struct nvfw_gsp_rpc *rpc;
++	struct r535_gsp_msg_info info = {0};
++	u32 expected = gsp_rpc_len;
++	void *buf;
++
++	mqe = r535_gsp_msgq_get_entry(gsp);
++	rpc = (struct nvfw_gsp_rpc *)mqe->data;
++
++	if (WARN_ON(rpc->length > max_rpc_size))
++		return NULL;
++
++	buf = kvmalloc(max_t(u32, rpc->length, expected), GFP_KERNEL);
++	if (!buf)
++		return ERR_PTR(-ENOMEM);
++
++	info.gsp_rpc_buf = buf;
++	info.retries = retries;
++	info.gsp_rpc_len = rpc->length;
++
++	buf = r535_gsp_msgq_recv_one_elem(gsp, &info);
++	if (IS_ERR(buf)) {
++		kvfree(info.gsp_rpc_buf);
++		info.gsp_rpc_buf = NULL;
++		return buf;
++	}
++
++	if (expected <= max_rpc_size)
++		return buf;
++
++	info.gsp_rpc_buf += info.gsp_rpc_len;
++	expected -= info.gsp_rpc_len;
++
++	while (expected) {
++		u32 size;
++
++		rpc = r535_gsp_msgq_peek(gsp, sizeof(*rpc), info.retries);
++		if (IS_ERR_OR_NULL(rpc)) {
++			kfree(buf);
++			return rpc;
++		}
++
++		info.gsp_rpc_len = rpc->length;
++		info.continuation = true;
++
++		rpc = r535_gsp_msgq_recv_one_elem(gsp, &info);
++		if (IS_ERR_OR_NULL(rpc)) {
++			kfree(buf);
++			return rpc;
++		}
++
++		size = info.gsp_rpc_len - sizeof(*rpc);
++		expected -= size;
++		info.gsp_rpc_buf += size;
++	}
++
++	rpc = buf;
++	rpc->length = gsp_rpc_len;
++	return buf;
++}
++
++static int
++r535_gsp_cmdq_push(struct nvkm_gsp *gsp, void *rpc)
++{
++	struct r535_gsp_msg *msg = to_gsp_hdr(rpc, msg);
++	struct r535_gsp_msg *cqe;
++	u32 gsp_rpc_len = msg->checksum;
++	u64 *ptr = (void *)msg;
++	u64 *end;
++	u64 csum = 0;
++	int free, time = 1000000;
++	u32 wptr, size, step, len;
++	u32 off = 0;
++
++	len = ALIGN(GSP_MSG_HDR_SIZE + gsp_rpc_len, GSP_PAGE_SIZE);
++
++	end = (u64 *)((char *)ptr + len);
++	msg->pad = 0;
++	msg->checksum = 0;
++	msg->sequence = gsp->cmdq.seq++;
++	msg->elem_count = DIV_ROUND_UP(len, 0x1000);
++
++	while (ptr < end)
++		csum ^= *ptr++;
++
++	msg->checksum = upper_32_bits(csum) ^ lower_32_bits(csum);
++
++	wptr = *gsp->cmdq.wptr;
++	do {
++		do {
++			free = *gsp->cmdq.rptr + gsp->cmdq.cnt - wptr - 1;
++			if (free >= gsp->cmdq.cnt)
++				free -= gsp->cmdq.cnt;
++			if (free >= 1)
++				break;
++
++			usleep_range(1, 2);
++		} while(--time);
++
++		if (WARN_ON(!time)) {
++			kvfree(msg);
++			return -ETIMEDOUT;
++		}
++
++		cqe = (void *)((u8 *)gsp->shm.cmdq.ptr + 0x1000 + wptr * 0x1000);
++		step = min_t(u32, free, (gsp->cmdq.cnt - wptr));
++		size = min_t(u32, len, step * GSP_PAGE_SIZE);
++
++		memcpy(cqe, (u8 *)msg + off, size);
++
++		wptr += DIV_ROUND_UP(size, 0x1000);
++		if (wptr == gsp->cmdq.cnt)
++			wptr = 0;
++
++		off  += size;
++		len -= size;
++	} while (len);
++
++	nvkm_trace(&gsp->subdev, "cmdq: wptr %d\n", wptr);
++	wmb();
++	(*gsp->cmdq.wptr) = wptr;
++	mb();
++
++	nvkm_falcon_wr32(&gsp->falcon, 0xc00, 0x00000000);
++
++	kvfree(msg);
++	return 0;
++}
++
++static void *
++r535_gsp_cmdq_get(struct nvkm_gsp *gsp, u32 gsp_rpc_len)
++{
++	struct r535_gsp_msg *msg;
++	u32 size = GSP_MSG_HDR_SIZE + gsp_rpc_len;
++
++	size = ALIGN(size, GSP_MSG_MIN_SIZE);
++	msg = kvzalloc(size, GFP_KERNEL);
++	if (!msg)
++		return ERR_PTR(-ENOMEM);
++
++	msg->checksum = gsp_rpc_len;
++	return msg->data;
++}
++
++static void
++r535_gsp_msg_done(struct nvkm_gsp *gsp, struct nvfw_gsp_rpc *msg)
++{
++	kvfree(msg);
++}
++
++static void
++r535_gsp_msg_dump(struct nvkm_gsp *gsp, struct nvfw_gsp_rpc *msg, int lvl)
++{
++	if (gsp->subdev.debug >= lvl) {
++		nvkm_printk__(&gsp->subdev, lvl, info,
++			      "msg fn:%d len:0x%x/0x%zx res:0x%x resp:0x%x\n",
++			      msg->function, msg->length, msg->length - sizeof(*msg),
++			      msg->rpc_result, msg->rpc_result_private);
++		print_hex_dump(KERN_INFO, "msg: ", DUMP_PREFIX_OFFSET, 16, 1,
++			       msg->data, msg->length - sizeof(*msg), true);
++	}
++}
++
++struct nvfw_gsp_rpc *
++r535_gsp_msg_recv(struct nvkm_gsp *gsp, int fn, u32 gsp_rpc_len)
++{
++	struct nvkm_subdev *subdev = &gsp->subdev;
++	struct nvfw_gsp_rpc *rpc;
++	int retries = 4000000, i;
++
++retry:
++	rpc = r535_gsp_msgq_peek(gsp, sizeof(*rpc), &retries);
++	if (IS_ERR_OR_NULL(rpc))
++		return rpc;
++
++	rpc = r535_gsp_msgq_recv(gsp, gsp_rpc_len, &retries);
++	if (IS_ERR_OR_NULL(rpc))
++		return rpc;
++
++	if (rpc->rpc_result) {
++		r535_gsp_msg_dump(gsp, rpc, NV_DBG_ERROR);
++		r535_gsp_msg_done(gsp, rpc);
++		return ERR_PTR(-EINVAL);
++	}
++
++	r535_gsp_msg_dump(gsp, rpc, NV_DBG_TRACE);
++
++	if (fn && rpc->function == fn) {
++		if (gsp_rpc_len) {
++			if (rpc->length < gsp_rpc_len) {
++				nvkm_error(subdev, "rpc len %d < %d\n",
++					   rpc->length, gsp_rpc_len);
++				r535_gsp_msg_dump(gsp, rpc, NV_DBG_ERROR);
++				r535_gsp_msg_done(gsp, rpc);
++				return ERR_PTR(-EIO);
++			}
++
++			return rpc;
++		}
++
++		r535_gsp_msg_done(gsp, rpc);
++		return NULL;
++	}
++
++	for (i = 0; i < gsp->msgq.ntfy_nr; i++) {
++		struct nvkm_gsp_msgq_ntfy *ntfy = &gsp->msgq.ntfy[i];
++
++		if (ntfy->fn == rpc->function) {
++			if (ntfy->func)
++				ntfy->func(ntfy->priv, ntfy->fn, rpc->data,
++					   rpc->length - sizeof(*rpc));
++			break;
++		}
++	}
++
++	if (i == gsp->msgq.ntfy_nr)
++		r535_gsp_msg_dump(gsp, rpc, NV_DBG_WARN);
++
++	r535_gsp_msg_done(gsp, rpc);
++	if (fn)
++		goto retry;
++
++	if (*gsp->msgq.rptr != *gsp->msgq.wptr)
++		goto retry;
++
++	return NULL;
++}
++
++int
++r535_gsp_msg_ntfy_add(struct nvkm_gsp *gsp, u32 fn, nvkm_gsp_msg_ntfy_func func, void *priv)
++{
++	int ret = 0;
++
++	mutex_lock(&gsp->msgq.mutex);
++	if (WARN_ON(gsp->msgq.ntfy_nr >= ARRAY_SIZE(gsp->msgq.ntfy))) {
++		ret = -ENOSPC;
++	} else {
++		gsp->msgq.ntfy[gsp->msgq.ntfy_nr].fn = fn;
++		gsp->msgq.ntfy[gsp->msgq.ntfy_nr].func = func;
++		gsp->msgq.ntfy[gsp->msgq.ntfy_nr].priv = priv;
++		gsp->msgq.ntfy_nr++;
++	}
++	mutex_unlock(&gsp->msgq.mutex);
++	return ret;
++}
++
++int
++r535_gsp_rpc_poll(struct nvkm_gsp *gsp, u32 fn)
++{
++	void *repv;
++
++	mutex_lock(&gsp->cmdq.mutex);
++	repv = r535_gsp_msg_recv(gsp, fn, 0);
++	mutex_unlock(&gsp->cmdq.mutex);
++	if (IS_ERR(repv))
++		return PTR_ERR(repv);
++
++	return 0;
++}
++
++static void *
++r535_gsp_rpc_handle_reply(struct nvkm_gsp *gsp, u32 fn,
++			  enum nvkm_gsp_rpc_reply_policy policy,
++			  u32 gsp_rpc_len)
++{
++	struct nvfw_gsp_rpc *reply;
++	void *repv = NULL;
++
++	switch (policy) {
++	case NVKM_GSP_RPC_REPLY_NOWAIT:
++		break;
++	case NVKM_GSP_RPC_REPLY_RECV:
++		reply = r535_gsp_msg_recv(gsp, fn, gsp_rpc_len);
++		if (!IS_ERR_OR_NULL(reply))
++			repv = reply->data;
++		else
++			repv = reply;
++		break;
++	case NVKM_GSP_RPC_REPLY_POLL:
++		repv = r535_gsp_msg_recv(gsp, fn, 0);
++		break;
++	}
++
++	return repv;
++}
++
++static void *
++r535_gsp_rpc_send(struct nvkm_gsp *gsp, void *payload,
++		  enum nvkm_gsp_rpc_reply_policy policy, u32 gsp_rpc_len)
++{
++	struct nvfw_gsp_rpc *rpc = to_gsp_hdr(payload, rpc);
++	u32 fn = rpc->function;
++	int ret;
++
++	if (gsp->subdev.debug >= NV_DBG_TRACE) {
++		nvkm_trace(&gsp->subdev, "rpc fn:%d len:0x%x/0x%zx\n", rpc->function,
++			   rpc->length, rpc->length - sizeof(*rpc));
++		print_hex_dump(KERN_INFO, "rpc: ", DUMP_PREFIX_OFFSET, 16, 1,
++			       rpc->data, rpc->length - sizeof(*rpc), true);
++	}
++
++	ret = r535_gsp_cmdq_push(gsp, rpc);
++	if (ret)
++		return ERR_PTR(ret);
++
++	return r535_gsp_rpc_handle_reply(gsp, fn, policy, gsp_rpc_len);
++}
++
++static void
++r535_gsp_rpc_done(struct nvkm_gsp *gsp, void *repv)
++{
++	struct nvfw_gsp_rpc *rpc = container_of(repv, typeof(*rpc), data);
++
++	r535_gsp_msg_done(gsp, rpc);
++}
++
++static void *
++r535_gsp_rpc_get(struct nvkm_gsp *gsp, u32 fn, u32 payload_size)
++{
++	struct nvfw_gsp_rpc *rpc;
++
++	rpc = r535_gsp_cmdq_get(gsp, ALIGN(sizeof(*rpc) + payload_size,
++					   sizeof(u64)));
++	if (IS_ERR(rpc))
++		return ERR_CAST(rpc);
++
++	rpc->header_version = 0x03000000;
++	rpc->signature = ('C' << 24) | ('P' << 16) | ('R' << 8) | 'V';
++	rpc->function = fn;
++	rpc->rpc_result = 0xffffffff;
++	rpc->rpc_result_private = 0xffffffff;
++	rpc->length = sizeof(*rpc) + payload_size;
++	return rpc->data;
++}
++
++static void *
++r535_gsp_rpc_push(struct nvkm_gsp *gsp, void *payload,
++		  enum nvkm_gsp_rpc_reply_policy policy, u32 gsp_rpc_len)
++{
++	struct nvfw_gsp_rpc *rpc = to_gsp_hdr(payload, rpc);
++	struct r535_gsp_msg *msg = to_gsp_hdr(rpc, msg);
++	const u32 max_rpc_size = GSP_MSG_MAX_SIZE - sizeof(*msg);
++	const u32 max_payload_size = max_rpc_size - sizeof(*rpc);
++	u32 payload_size = rpc->length - sizeof(*rpc);
++	void *repv;
++
++	mutex_lock(&gsp->cmdq.mutex);
++	if (payload_size > max_payload_size) {
++		const u32 fn = rpc->function;
++		u32 remain_payload_size = payload_size;
++
++		/* Adjust length, and send initial RPC. */
++		rpc->length = sizeof(*rpc) + max_payload_size;
++		msg->checksum = rpc->length;
++
++		repv = r535_gsp_rpc_send(gsp, payload, NVKM_GSP_RPC_REPLY_NOWAIT, 0);
++		if (IS_ERR(repv))
++			goto done;
++
++		payload += max_payload_size;
++		remain_payload_size -= max_payload_size;
++
++		/* Remaining chunks sent as CONTINUATION_RECORD RPCs. */
++		while (remain_payload_size) {
++			u32 size = min(remain_payload_size,
++				       max_payload_size);
++			void *next;
++
++			next = r535_gsp_rpc_get(gsp, NV_VGPU_MSG_FUNCTION_CONTINUATION_RECORD, size);
++			if (IS_ERR(next)) {
++				repv = next;
++				goto done;
++			}
++
++			memcpy(next, payload, size);
++
++			repv = r535_gsp_rpc_send(gsp, next, NVKM_GSP_RPC_REPLY_NOWAIT, 0);
++			if (IS_ERR(repv))
++				goto done;
++
++			payload += size;
++			remain_payload_size -= size;
++		}
++
++		/* Wait for reply. */
++		repv = r535_gsp_rpc_handle_reply(gsp, fn, policy, payload_size +
++						 sizeof(*rpc));
++	} else {
++		repv = r535_gsp_rpc_send(gsp, payload, policy, gsp_rpc_len);
++	}
++
++done:
++	mutex_unlock(&gsp->cmdq.mutex);
++	return repv;
++}
++
++const struct nvkm_rm_api_rpc
++r535_rpc = {
++	.get = r535_gsp_rpc_get,
++	.push = r535_gsp_rpc_push,
++	.done = r535_gsp_rpc_done,
++};
+diff --git a/drivers/gpu/drm/nouveau/nvkm/subdev/gsp/rm/rm.h b/drivers/gpu/drm/nouveau/nvkm/subdev/gsp/rm/rm.h
+new file mode 100644
+index 000000000000..7a0ece979167
+--- /dev/null
++++ b/drivers/gpu/drm/nouveau/nvkm/subdev/gsp/rm/rm.h
+@@ -0,0 +1,20 @@
++/* SPDX-License-Identifier: MIT
++ *
++ * Copyright (c) 2025, NVIDIA CORPORATION. All rights reserved.
++ */
++#include <subdev/gsp.h>
++#ifndef __NVKM_RM_H__
++#define __NVKM_RM_H__
++
++struct nvkm_rm_api {
++	const struct nvkm_rm_api_rpc {
++		void *(*get)(struct nvkm_gsp *, u32 fn, u32 argc);
++		void *(*push)(struct nvkm_gsp *gsp, void *argv,
++			      enum nvkm_gsp_rpc_reply_policy policy, u32 repc);
++		void (*done)(struct nvkm_gsp *gsp, void *repv);
++	} *rpc;
++};
++
++extern const struct nvkm_rm_api r535_rm;
++extern const struct nvkm_rm_api_rpc r535_rpc;
++#endif
+diff --git a/drivers/gpu/drm/nouveau/nvkm/subdev/gsp/rm/rpc.h b/drivers/gpu/drm/nouveau/nvkm/subdev/gsp/rm/rpc.h
+new file mode 100644
+index 000000000000..4431e33b3304
+--- /dev/null
++++ b/drivers/gpu/drm/nouveau/nvkm/subdev/gsp/rm/rpc.h
+@@ -0,0 +1,18 @@
++/* SPDX-License-Identifier: MIT
++ *
++ * Copyright (c) 2025, NVIDIA CORPORATION. All rights reserved.
++ */
++#ifndef __NVKM_RM_RPC_H__
++#define __NVKM_RM_RPC_H__
++#include "rm.h"
++
++#define to_payload_hdr(p, header) \
++	container_of((void *)p, typeof(*header), params)
++
++int r535_gsp_rpc_poll(struct nvkm_gsp *, u32 fn);
++
++struct nvfw_gsp_rpc *r535_gsp_msg_recv(struct nvkm_gsp *, int fn, u32 gsp_rpc_len);
++int r535_gsp_msg_ntfy_add(struct nvkm_gsp *, u32 fn, nvkm_gsp_msg_ntfy_func, void *priv);
++
++int r535_rpc_status_to_errno(uint32_t rpc_status);
++#endif
 -- 
 2.49.0
 
