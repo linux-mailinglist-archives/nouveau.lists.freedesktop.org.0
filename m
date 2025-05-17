@@ -2,27 +2,27 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id 59BBCABA72C
-	for <lists+nouveau@lfdr.de>; Sat, 17 May 2025 02:11:45 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id ABC01ABA729
+	for <lists+nouveau@lfdr.de>; Sat, 17 May 2025 02:11:42 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 0B88E10EBE0;
-	Sat, 17 May 2025 00:11:44 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 12D9010EBDF;
+	Sat, 17 May 2025 00:11:40 +0000 (UTC)
 Authentication-Results: gabe.freedesktop.org;
-	dkim=pass (2048-bit key; unprotected) header.d=Nvidia.com header.i=@Nvidia.com header.b="mfdm3CO+";
+	dkim=pass (2048-bit key; unprotected) header.d=Nvidia.com header.i=@Nvidia.com header.b="kEAE31NM";
 	dkim-atps=neutral
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from NAM04-BN8-obe.outbound.protection.outlook.com
- (mail-bn8nam04on2064.outbound.protection.outlook.com [40.107.100.64])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 4D09210EBDD
- for <nouveau@lists.freedesktop.org>; Sat, 17 May 2025 00:11:37 +0000 (UTC)
+Received: from NAM11-CO1-obe.outbound.protection.outlook.com
+ (mail-co1nam11on2041.outbound.protection.outlook.com [40.107.220.41])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id EE40110EBDE
+ for <nouveau@lists.freedesktop.org>; Sat, 17 May 2025 00:11:38 +0000 (UTC)
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=rNmD8gUuiKopKJucCckVNUi6T4lX5/XBf1DB7oMbw47YOqFKXe4MHn6Kkh3OmIno2LMNz84tjk2jUWhui2+gMt8kVI95/FV5/Ve2hPF+sigwZ2zLn4i+ZebKywD5Kh9SObCLcfsaDaJgm7gwECaCnIulGeqkwWET6hmqd18U5E02PKVFkCGMKK32C/0AX6JrHrJ3U6fv/8sxFPBVHqQ7FbdovuxNQU2bqIsR+CSYaaZ6UO2ZrszJlVe5aNFwS/rGYpu34g2cpe5CHogTl/F4/MFk9eHx2yohxDYtd8fDU2e7gkGBlX8UbCsHf/DX987KkY+KO8dTI5YYMJNHcw+lNA==
+ b=Wzf20DxMY+CLJ0rpC9Gqevyj0g3lAA7SDwUj1LhBsUZ0VqmCxUoXAq3lGV0BHes/IqwoCRpLnA1I7num0UJn/dl6WhpS7vCr4H1TrYA9MB6QLPtVD5IC8pBoDdBysWToEhuOep0+eHu1TFu1au9DQp7ud3fmvIcHN7DoKHt+D0OuVZKSoEjvdnmvHr03+HlILCmSD8L/ywBbOvqEwBnF2qzSo4O+JHDb0WRg2GeFemBgeKn/QnYWE3d/3pBmmd0EHQ7Fv90do6WE67Yu37gOb2NP9qtQpFXiJRBzE68VWSTHObN2ZE4I2y69snAlLTS5lF3sIbbzLum8b67G3HkmwQ==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
  s=arcselector10001;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=VCUrUPIFMaETgPmxt/bwRc988EF1s3MNaN8sncs8nik=;
- b=ptRAhQad8mCerxl42/4V/m+3YszCtmsST+OmViVQMGbTSWWqQdMBwMV1P2djvyOBIn9AmWGVk9SXMEM814d6lBKe+pcZOpt+jyrolHOrVhUsUUqQ2hytpWHnJDbJnnTo39fa3gCeXdAcx1LJuHU9zn/i31XZU0ypnc6e8/rvWpwBZAr0sWh0AzOTbh483Apns0Sp5QKL5NGNe4y7lCGbL911xcOC30UGdHQCZGh41vKATIW1pyOGhBXyww7dmd9BZH7qQXhYFaWM2kZ+8zio2yRn6J9OOTdr5Bmq9uYA5dhO6zTM6iD/w0WziOH/tzx6xZ7NatuUMAFBVkN8z0SjRQ==
+ bh=NhcGJZT8iBV0nxwLpN5XMyZWgFovIshJq4reTOfUzWM=;
+ b=yihie/gFKfLqGqoUO9woHpSFIJn6dwV4QfkSHkhrQ0DjvvM6pNREwpxXkkFI1d5fh619PfgDYwiYfFbuTaUYsG7xr/lbtqlY9m6R8ND8hvV384bAY0BVCCul4/IVLtrV4SsunZis+mu9RMfENwkQf8D+w2Wq7mK8AcDWIBWZ7jMvlo3TUyGiiqXMlBtmtC2lFYfDTKxIBoWZb5gWBWyzYjaMwl81/rzi3OM6h/Ym84MDNnWAgBxoKoegethxLSPKjTRMWpl5UL5h8p9EU+UxPVMWAMyg5NbZq/24skebSJQ4FQLNW77/Ed13evgdhs5yVXwY55H7vFvqRKK34vPHVQ==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
  216.228.117.161) smtp.rcpttodomain=lists.freedesktop.org
  smtp.mailfrom=nvidia.com; dmarc=pass (p=reject sp=reject pct=100) action=none
@@ -30,18 +30,18 @@ ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=Nvidia.com;
  s=selector2;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=VCUrUPIFMaETgPmxt/bwRc988EF1s3MNaN8sncs8nik=;
- b=mfdm3CO+Rdk4ouPXKcSj4+If1kMhJwz315y49v7WJeY7Ss7Vw6lHFg6ttOCKk/51GngtXVsZMvJfl+W4Uxm9WZez4mG4dRUhzg653VgjKquEA16FETemjZOfxHIkmeMSZCYuT3QqRUvPXCeksMrcvdCVB37CanYWrsUZSnFiOqDbOP5vTybLgqc0yKPuVdwSz9YSvywSgIMh8dUgUBuak9Orgmfm8DRn9VLbSQrvAJigTZpfvvQ38cATYIs6cjk1CJIyERWIBoPtvLmV4MLvrLT8IT0II3lElva5Fvbjf8kKRdqMkqbCp3S0/fSSo7TjlfgBa3Kq0I+ReXD9frqUYA==
-Received: from BY3PR03CA0008.namprd03.prod.outlook.com (2603:10b6:a03:39a::13)
- by BN3PR12MB9571.namprd12.prod.outlook.com (2603:10b6:408:2ca::8)
- with Microsoft SMTP Server (version=TLS1_2,
+ bh=NhcGJZT8iBV0nxwLpN5XMyZWgFovIshJq4reTOfUzWM=;
+ b=kEAE31NMMa5Fcwiu8WGHKjBruGk+abIpx3k7qD2Po0++Xv/p8fUggrcybt+rWV3fxX9ny2LJ5nFOo3W5Sy5t248XOHsniuVNkf41IBLKOsyY+bE1OnoENuhxWhHhE/U6uKVIdxmvj7VwdyCAEZTB2PUgvf6AwWuJkzFKtoJ4yr9sksKaXJmwio68g4Rhi/8buTXw7HraGsbc1zt7imypy81bPSLvTAUhjD02xAqG7owY2xya2623+nw/B6i3c346YQaq/viyf3+F95CS1whqEGrbxSz1uM+v7Cmvtuzt7WFQjOU6wTLfNrC61Q3biMcxQb49jmxnmnaDvI8DIAcw/w==
+Received: from PH8P221CA0048.NAMP221.PROD.OUTLOOK.COM (2603:10b6:510:346::29)
+ by DM6PR12MB4420.namprd12.prod.outlook.com (2603:10b6:5:2a7::8) with
+ Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.8722.30; Sat, 17 May
- 2025 00:11:31 +0000
-Received: from CY4PEPF0000FCC1.namprd03.prod.outlook.com
- (2603:10b6:a03:39a:cafe::da) by BY3PR03CA0008.outlook.office365.com
- (2603:10b6:a03:39a::13) with Microsoft SMTP Server (version=TLS1_3,
- cipher=TLS_AES_256_GCM_SHA384) id 15.20.8722.30 via Frontend Transport; Sat,
- 17 May 2025 00:11:30 +0000
+ 2025 00:11:32 +0000
+Received: from CY4PEPF0000FCC2.namprd03.prod.outlook.com
+ (2603:10b6:510:346:cafe::9f) by PH8P221CA0048.outlook.office365.com
+ (2603:10b6:510:346::29) with Microsoft SMTP Server (version=TLS1_3,
+ cipher=TLS_AES_256_GCM_SHA384) id 15.20.8746.20 via Frontend Transport; Sat,
+ 17 May 2025 00:11:32 +0000
 X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 216.228.117.161)
  smtp.mailfrom=nvidia.com;
  dkim=none (message not signed)
@@ -50,25 +50,25 @@ Received-SPF: Pass (protection.outlook.com: domain of nvidia.com designates
  216.228.117.161 as permitted sender) receiver=protection.outlook.com;
  client-ip=216.228.117.161; helo=mail.nvidia.com; pr=C
 Received: from mail.nvidia.com (216.228.117.161) by
- CY4PEPF0000FCC1.mail.protection.outlook.com (10.167.242.103) with Microsoft
+ CY4PEPF0000FCC2.mail.protection.outlook.com (10.167.242.104) with Microsoft
  SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.20.8746.27 via Frontend Transport; Sat, 17 May 2025 00:11:30 +0000
+ 15.20.8746.27 via Frontend Transport; Sat, 17 May 2025 00:11:31 +0000
 Received: from rnnvmail201.nvidia.com (10.129.68.8) by mail.nvidia.com
  (10.129.200.67) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.1544.4; Fri, 16 May
- 2025 17:11:16 -0700
+ 2025 17:11:18 -0700
 Received: from nv-dev.vdiclient.nvidia.com (10.126.231.35) by
  rnnvmail201.nvidia.com (10.129.68.8) with Microsoft SMTP Server
  (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.2.1544.14; Fri, 16 May 2025 17:11:14 -0700
+ 15.2.1544.14; Fri, 16 May 2025 17:11:16 -0700
 From: Ben Skeggs <bskeggs@nvidia.com>
 To: <nouveau@lists.freedesktop.org>
 CC: Ben Skeggs <bskeggs@nvidia.com>, Dave Airlie <airlied@redhat.com>, "Timur
  Tabi" <ttabi@nvidia.com>
-Subject: [PATCH v3 46/62] drm/nouveau/pci: add PRI address of config space
- mirror to nvkm_pci_func
-Date: Sat, 17 May 2025 10:09:38 +1000
-Message-ID: <20250517000954.35691-47-bskeggs@nvidia.com>
+Subject: [PATCH v3 47/62] drm/nouveau/instmem: add hal for
+ set_bar0_window_addr()
+Date: Sat, 17 May 2025 10:09:39 +1000
+Message-ID: <20250517000954.35691-48-bskeggs@nvidia.com>
 X-Mailer: git-send-email 2.49.0
 In-Reply-To: <20250517000954.35691-1-bskeggs@nvidia.com>
 References: <20250517000954.35691-1-bskeggs@nvidia.com>
@@ -80,52 +80,52 @@ X-ClientProxiedBy: rnnvmail202.nvidia.com (10.129.68.7) To
  rnnvmail201.nvidia.com (10.129.68.8)
 X-EOPAttributedMessage: 0
 X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: CY4PEPF0000FCC1:EE_|BN3PR12MB9571:EE_
-X-MS-Office365-Filtering-Correlation-Id: 423a0f29-29ae-476d-ad21-08dd94d75fcb
+X-MS-TrafficTypeDiagnostic: CY4PEPF0000FCC2:EE_|DM6PR12MB4420:EE_
+X-MS-Office365-Filtering-Correlation-Id: ffa7bf8d-4fd0-4c99-cd7f-08dd94d760d0
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
 X-Microsoft-Antispam: BCL:0;
  ARA:13230040|376014|82310400026|1800799024|36860700013; 
-X-Microsoft-Antispam-Message-Info: =?us-ascii?Q?J/csExTw/awt+k8QrHFVTZaIIuzhSLhl2gQCCaBWPBUSc7C9ix9PEKT2Cyi2?=
- =?us-ascii?Q?BLjzgYQ3LgkF8flTo8Dofhp+x5P2ebfBWryNuit011qe/17N0pKk1Sp83jxs?=
- =?us-ascii?Q?tJm4vQuxJQpepAHW6VbPP5M3FXp7elL6ca06RCReBQ4gD5bUoptkgdYfed8E?=
- =?us-ascii?Q?07hDpxanr6muCcw5vNapsUtuoC9IwMwwC3ihpYyATRATv+hzC7u7BJnsizDS?=
- =?us-ascii?Q?4QauvnVI99lrSgcd5jfYvg/bJbJlv1umemTHpvENsjcyRbRLRLnul9yBnqOb?=
- =?us-ascii?Q?/mE3tzb9zsBYvJTtXUU6pG1F9c5F4ffUV8eLsdMeLa6FWUXhIRqe8fNToJ/m?=
- =?us-ascii?Q?5a5qzzHKDiRXZ2q14SfBdq56NGLF6qSmE6yE0VfnXzqUsP8v9/ImIUTZiZsn?=
- =?us-ascii?Q?RQ5zYBw+om2czMLOndRzM208hmu/+HdbB9iTt25kSHF0ovLZGlef7C6bdjma?=
- =?us-ascii?Q?s8VdeSzHYDe42N4thd+f26O0uk1V/0O/C+2uZ6hVjBTFCNP30yZync/LUQmE?=
- =?us-ascii?Q?ZYQil+yJE75dAE79t5oHelGDADvwrDx3KSucSKwxFG4cRM8OBt63Gfm4uXNj?=
- =?us-ascii?Q?tW/NBBRpyP1x2/NY32W3h9QUeOcSvERDRCbiBTfBGEA5svXUeyuoyKTiKcJJ?=
- =?us-ascii?Q?bsMfqTYAFWrP/rOsY6NV1QkeSfI0i0Xa9zCzw2ueDPqYJg2brRWCt2dh7oQe?=
- =?us-ascii?Q?f6MGxsmdL6sFn+iwYBMulaBwgEDOXXIWedEHuUsYRWE9b0jAxxNTGZA6cbVk?=
- =?us-ascii?Q?T4uXM7lAh2QH+ttoI/2WPq6yf7YYWrCMcAaljcaTDyG+ICC38LaDIyRhbr9/?=
- =?us-ascii?Q?/Me8GCoRsbdTVOe1GZ5WYF9fFDX3KHuPn7jXOPQ17n+eD3K9YObm1uq17xs8?=
- =?us-ascii?Q?hMZMS4SrTE0gPJAlmGKmaeIHCSnrJracFME0nGcphi0p8dSRnVblUYd/CWOK?=
- =?us-ascii?Q?grYoz7yBpPplO78QUBkTTPXZkbC3BxIS3vreuo1Msyhc54rvW+wPdd3Ha9Au?=
- =?us-ascii?Q?6YPwN7VLBCLvH7H1C97f/Lp6lnEcA0lCdUFw8zD195z765W7e4URvW0wxGlU?=
- =?us-ascii?Q?x8A9Xy+msU9EsCSpVQFkNyZp3ffMnHs7nBMqigVKGoHO5t5kanWJfs657/wH?=
- =?us-ascii?Q?Vz/gXPQ9oVXXuCU+rBqvcXi5gXjnXXUxa6Ab07R7mh6782BpJRmE8HtpNP29?=
- =?us-ascii?Q?Zb8VXiqjJCVvX4KtstmvVo0MUPT++SI7j7H5fpEVgL+EMUs5Hd95zehX+jGT?=
- =?us-ascii?Q?2kNG9fPJ47zyywqlMqTODfXyVlDFxIvjwSCT9ly/ez5obe6Us3DqHx+ObDfq?=
- =?us-ascii?Q?elYd0a8IlOLWFI4rpF+JZeiEh8w4uwW38Tn95xNhA2EXKJ6CuQ+RWMPFdo/b?=
- =?us-ascii?Q?8QFJCApNmnfHu+QR/ChmcF+sS71zR+jJP4klZpF/m33+jebvibcCyv8KFGT7?=
- =?us-ascii?Q?/NznO1n9ZO+YXQe2qPL+seErz0oqBGlZdNWqigTBaFszy/2YwPhzG0hzO9nE?=
- =?us-ascii?Q?h9jXUgyqCWKvr1UqNrpCPW5hyfUcOX4oPt/i?=
+X-Microsoft-Antispam-Message-Info: =?us-ascii?Q?aLwElLX+xAL3OVZxv/1J+4MWBp8wZfTId+WNeu/o4vdjahNHKIyO1yAXsiKX?=
+ =?us-ascii?Q?Bw2in0j3bVT0dv6KfQTV6gKeyKiBv9+6UzqLcVvPfy4R/rhYAi5o1FSuFF8N?=
+ =?us-ascii?Q?LqR0p71u7NX3dB99bY6EBGFIQLxCJVidNvkr1zx5Hux+Jwj/df8ciI8HKvVu?=
+ =?us-ascii?Q?1eHUmCawxBKJlUUYK0XAGj+CGgIfUhou4zwVamw0r7sw/L7hWklf8qHdPy/P?=
+ =?us-ascii?Q?eMJi16zGIkw4QCAA1zADtZHgbA0GDzXURsns6NcIV4S2wYvQAF8q329CGIUw?=
+ =?us-ascii?Q?jmxZHZicN/nT4KOnAb2MpiIaVKIK33JJR2OdKW6KVYRJO7lHBkVhNnnVYjaD?=
+ =?us-ascii?Q?FZP0KYL7azh5RneA4sIXp3bXnmW2DlR6/iJ1vDfkwHwhnYyTMCCOmr+3uFnj?=
+ =?us-ascii?Q?mQISbHnJ1VE7LiMmd+6ZCp9tpN4ONgke8g1/+4jrE3xA3yMAaHqMcv9SIKjT?=
+ =?us-ascii?Q?hmRa9KYMjr/+5937wycG4MQziRrbHykyZaTXKhB8AS7EXiAC85AtrHUquNf/?=
+ =?us-ascii?Q?PneTCs6Bb9yAQ9hogPdEikG3nttGOOpmx6VSSckoylwkhhmu4IVSYeLhdobz?=
+ =?us-ascii?Q?pa0oiCzL0RD400paArctK6qU49WJw26FocmzxPc4kqIDCwqPZdhPwOWjuFwB?=
+ =?us-ascii?Q?N2TpNLVLNItsvW4BcdLzETSc7mv42WRYP/NVGkTCc/NhD1Dn66GGpqOMNDco?=
+ =?us-ascii?Q?fGGIm89cCGaz6ueOf8Oeg5VRQpA14mlWhof/gr9pQ7KiQIx2hsixVqTmJyXP?=
+ =?us-ascii?Q?C+DVEVCbywsMl9ESTVaxtDnr6Y9sXZIPfQ5smGxMwCPlghzMsoxW+/ceTT/b?=
+ =?us-ascii?Q?5xwwK+Q9lkXUTDDUcl9H5E5DrBOLgZ3ao+Qsta9Eervivdfy7EAQYSmM/P2D?=
+ =?us-ascii?Q?iPwId+3QTLPCVd0MPiCcWXmhIsLhCesUJVBkPtPVYI+oTV5FKhUn46EjFTUu?=
+ =?us-ascii?Q?744vIz9HQv2GwvUEqU4FOAxziqKtBIWg+ARPsrH+nYP3wOitTvtREZ/056tH?=
+ =?us-ascii?Q?CaMTn+dAzZfd19z9ZbD1LrMEYoY0QWIev9yhKCKaRb0B1ODMWVviab96pnMa?=
+ =?us-ascii?Q?gdLS3vm79vUl2cGo3FwurBpZTmB3nWH7bcgi8vqbn3bwm5RFSlSC6qdLRqFd?=
+ =?us-ascii?Q?Qy+SK85imkPTYHfg971YYvsiHBsqiKybHhApRgA8oLXKIjgf26TGmdBoVONp?=
+ =?us-ascii?Q?zIlbxdvf0Apeq5Q29fwipa97yzCs4YqosxRnq/0C4FranO7GxbONBMp9p73l?=
+ =?us-ascii?Q?geHNwNrZsLq7fIekmcSVDpRPuTY/hZbOy3S+IDyRHzXA37fvhSbjDYsQr6wh?=
+ =?us-ascii?Q?ArK6SjG3JOurwUCOJVocDDLCNpRWI9Od1zDOmFOk5LcFHaqaU0K23q98cw0f?=
+ =?us-ascii?Q?k9UkyxKAqoL96xePe/VDdLzK4wee7MLOm1v5UySCX0wQXxUQP9BlgIJTaNaR?=
+ =?us-ascii?Q?pEzP75sn82xhSA49wpM+Y9SUFUbLK0CEbLVmQLS9/PrhmMWXrG15WjUFphtm?=
+ =?us-ascii?Q?eI2okg6blntrmWV8IfZWmASC+ygxmpAx5rHk?=
 X-Forefront-Antispam-Report: CIP:216.228.117.161; CTRY:US; LANG:en; SCL:1; SRV:;
  IPV:NLI; SFV:NSPM; H:mail.nvidia.com; PTR:dc6edge2.nvidia.com; CAT:NONE;
  SFS:(13230040)(376014)(82310400026)(1800799024)(36860700013); DIR:OUT;
  SFP:1101; 
 X-OriginatorOrg: Nvidia.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 17 May 2025 00:11:30.1984 (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: 423a0f29-29ae-476d-ad21-08dd94d75fcb
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 17 May 2025 00:11:31.8499 (UTC)
+X-MS-Exchange-CrossTenant-Network-Message-Id: ffa7bf8d-4fd0-4c99-cd7f-08dd94d760d0
 X-MS-Exchange-CrossTenant-Id: 43083d15-7273-40c1-b7db-39efd9ccc17a
 X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=43083d15-7273-40c1-b7db-39efd9ccc17a; Ip=[216.228.117.161];
  Helo=[mail.nvidia.com]
-X-MS-Exchange-CrossTenant-AuthSource: CY4PEPF0000FCC1.namprd03.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthSource: CY4PEPF0000FCC2.namprd03.prod.outlook.com
 X-MS-Exchange-CrossTenant-AuthAs: Anonymous
 X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: BN3PR12MB9571
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: DM6PR12MB4420
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -140,374 +140,88 @@ List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-These registers have moved on GH100/GBxxx, and the GSP-RM init code uses
-hardcoded values from earlier GPUs to fill GspSystemInfo.
+GH100/GBxxx have moved the register that controls where in VRAM the
+the BAR0 NV_PRAMIN window points.
 
-Replace the per-GPU accessors in nvkm_pci_func with region info, and use
-it when initialising GspSystemInfo.
+Add a HAL for this, as the BAR0 window is needed for BAR2 bootstrap.
 
 Signed-off-by: Ben Skeggs <bskeggs@nvidia.com>
 Reviewed-by: Dave Airlie <airlied@redhat.com>
 Reviewed-by: Timur Tabi <ttabi@nvidia.com>
 Tested-by: Timur Tabi <ttabi@nvidia.com>
 ---
- .../drm/nouveau/nvkm/subdev/gsp/rm/r535/gsp.c |  5 ++--
- .../drm/nouveau/nvkm/subdev/gsp/rm/r570/gsp.c |  5 ++--
- .../gpu/drm/nouveau/nvkm/subdev/pci/base.c    | 10 ++++----
- drivers/gpu/drm/nouveau/nvkm/subdev/pci/g84.c |  5 ++--
- drivers/gpu/drm/nouveau/nvkm/subdev/pci/g92.c |  5 ++--
- drivers/gpu/drm/nouveau/nvkm/subdev/pci/g94.c |  5 ++--
- .../gpu/drm/nouveau/nvkm/subdev/pci/gf100.c   |  5 ++--
- .../gpu/drm/nouveau/nvkm/subdev/pci/gf106.c   |  5 ++--
- .../gpu/drm/nouveau/nvkm/subdev/pci/gk104.c   |  5 ++--
- .../gpu/drm/nouveau/nvkm/subdev/pci/gp100.c   |  4 +--
- .../gpu/drm/nouveau/nvkm/subdev/pci/nv04.c    | 25 +------------------
- .../gpu/drm/nouveau/nvkm/subdev/pci/nv40.c    | 25 +------------------
- .../gpu/drm/nouveau/nvkm/subdev/pci/nv46.c    |  4 +--
- .../gpu/drm/nouveau/nvkm/subdev/pci/nv4c.c    |  4 +--
- .../gpu/drm/nouveau/nvkm/subdev/pci/priv.h    | 11 ++++----
- 15 files changed, 33 insertions(+), 90 deletions(-)
+ .../gpu/drm/nouveau/nvkm/subdev/gsp/rm/r535/fbsr.c    |  1 +
+ drivers/gpu/drm/nouveau/nvkm/subdev/instmem/nv50.c    | 11 +++++++++--
+ drivers/gpu/drm/nouveau/nvkm/subdev/instmem/priv.h    |  1 +
+ 3 files changed, 11 insertions(+), 2 deletions(-)
 
-diff --git a/drivers/gpu/drm/nouveau/nvkm/subdev/gsp/rm/r535/gsp.c b/drivers/gpu/drm/nouveau/nvkm/subdev/gsp/rm/r535/gsp.c
-index ce3d4dd49ac8..e2171d0d25be 100644
---- a/drivers/gpu/drm/nouveau/nvkm/subdev/gsp/rm/r535/gsp.c
-+++ b/drivers/gpu/drm/nouveau/nvkm/subdev/gsp/rm/r535/gsp.c
-@@ -24,6 +24,7 @@
- #include "priv.h"
+diff --git a/drivers/gpu/drm/nouveau/nvkm/subdev/gsp/rm/r535/fbsr.c b/drivers/gpu/drm/nouveau/nvkm/subdev/gsp/rm/r535/fbsr.c
+index 1976d0030d17..150e22fde2ac 100644
+--- a/drivers/gpu/drm/nouveau/nvkm/subdev/gsp/rm/r535/fbsr.c
++++ b/drivers/gpu/drm/nouveau/nvkm/subdev/gsp/rm/r535/fbsr.c
+@@ -317,6 +317,7 @@ r535_instmem_new(const struct nvkm_instmem_func *hw,
+ 	rm->memory_new = hw->memory_new;
+ 	rm->memory_wrap = hw->memory_wrap;
+ 	rm->zero = false;
++	rm->set_bar0_window_addr = hw->set_bar0_window_addr;
  
- #include <core/pci.h>
-+#include <subdev/pci/priv.h>
- #include <subdev/timer.h>
- #include <subdev/vfn.h>
- #include <engine/fifo/chan.h>
-@@ -905,8 +906,8 @@ r535_gsp_set_system_info(struct nvkm_gsp *gsp)
- 	info->gpuPhysInstAddr = device->func->resource_addr(device, 3);
- 	info->nvDomainBusDeviceFunc = pci_dev_id(pdev->pdev);
- 	info->maxUserVa = TASK_SIZE;
--	info->pciConfigMirrorBase = 0x088000;
--	info->pciConfigMirrorSize = 0x001000;
-+	info->pciConfigMirrorBase = device->pci->func->cfg.addr;
-+	info->pciConfigMirrorSize = device->pci->func->cfg.size;
- 	r535_gsp_acpi_info(gsp, &info->acpiMethodData);
+ 	ret = nv50_instmem_new_(rm, device, type, inst, pinstmem);
+ 	if (ret)
+diff --git a/drivers/gpu/drm/nouveau/nvkm/subdev/instmem/nv50.c b/drivers/gpu/drm/nouveau/nvkm/subdev/instmem/nv50.c
+index dd5b5a17ece0..0ef66d7d5e51 100644
+--- a/drivers/gpu/drm/nouveau/nvkm/subdev/instmem/nv50.c
++++ b/drivers/gpu/drm/nouveau/nvkm/subdev/instmem/nv50.c
+@@ -65,7 +65,7 @@ nv50_instobj_wr32_slow(struct nvkm_memory *memory, u64 offset, u32 data)
  
- 	return nvkm_gsp_rpc_wr(gsp, info, NVKM_GSP_RPC_REPLY_NOWAIT);
-diff --git a/drivers/gpu/drm/nouveau/nvkm/subdev/gsp/rm/r570/gsp.c b/drivers/gpu/drm/nouveau/nvkm/subdev/gsp/rm/r570/gsp.c
-index 55795c49371f..a3c070d41923 100644
---- a/drivers/gpu/drm/nouveau/nvkm/subdev/gsp/rm/r570/gsp.c
-+++ b/drivers/gpu/drm/nouveau/nvkm/subdev/gsp/rm/r570/gsp.c
-@@ -12,6 +12,7 @@
- #include "nvrm/msgfn.h"
+ 	spin_lock_irqsave(&imem->base.lock, flags);
+ 	if (unlikely(imem->addr != base)) {
+-		nvkm_wr32(device, 0x001700, base >> 16);
++		imem->base.func->set_bar0_window_addr(device, base);
+ 		imem->addr = base;
+ 	}
+ 	nvkm_wr32(device, 0x700000 + addr, data);
+@@ -85,7 +85,7 @@ nv50_instobj_rd32_slow(struct nvkm_memory *memory, u64 offset)
  
- #include <core/pci.h>
-+#include <subdev/pci/priv.h>
+ 	spin_lock_irqsave(&imem->base.lock, flags);
+ 	if (unlikely(imem->addr != base)) {
+-		nvkm_wr32(device, 0x001700, base >> 16);
++		imem->base.func->set_bar0_window_addr(device, base);
+ 		imem->addr = base;
+ 	}
+ 	data = nvkm_rd32(device, 0x700000 + addr);
+@@ -394,6 +394,12 @@ nv50_instobj_new(struct nvkm_instmem *imem, u32 size, u32 align, bool zero,
+  * instmem subdev implementation
+  *****************************************************************************/
  
- static u32
- r570_gsp_sr_data_size(struct nvkm_gsp *gsp)
-@@ -157,8 +158,8 @@ r570_gsp_set_system_info(struct nvkm_gsp *gsp)
- 	info->gpuPhysInstAddr = device->func->resource_addr(device, 3);
- 	info->nvDomainBusDeviceFunc = pci_dev_id(pdev);
- 	info->maxUserVa = TASK_SIZE;
--	info->pciConfigMirrorBase = 0x088000;
--	info->pciConfigMirrorSize = 0x001000;
-+	info->pciConfigMirrorBase = device->pci->func->cfg.addr;
-+	info->pciConfigMirrorSize = device->pci->func->cfg.size;
- 	info->PCIDeviceID = (pdev->device << 16) | pdev->vendor;
- 	info->PCISubDeviceID = (pdev->subsystem_device << 16) | pdev->subsystem_vendor;
- 	info->PCIRevisionID = pdev->revision;
-diff --git a/drivers/gpu/drm/nouveau/nvkm/subdev/pci/base.c b/drivers/gpu/drm/nouveau/nvkm/subdev/pci/base.c
-index 5a0de45d36ce..6867934256a7 100644
---- a/drivers/gpu/drm/nouveau/nvkm/subdev/pci/base.c
-+++ b/drivers/gpu/drm/nouveau/nvkm/subdev/pci/base.c
-@@ -39,26 +39,26 @@ nvkm_pci_msi_rearm(struct nvkm_device *device)
- u32
- nvkm_pci_rd32(struct nvkm_pci *pci, u16 addr)
++static void
++nv50_instmem_set_bar0_window_addr(struct nvkm_device *device, u64 addr)
++{
++	nvkm_wr32(device, 0x001700, addr >> 16);
++}
++
+ static void
+ nv50_instmem_fini(struct nvkm_instmem *base)
  {
--	return pci->func->rd32(pci, addr);
-+	return nvkm_rd32(pci->subdev.device, pci->func->cfg.addr + addr);
- }
- 
- void
- nvkm_pci_wr08(struct nvkm_pci *pci, u16 addr, u8 data)
- {
--	pci->func->wr08(pci, addr, data);
-+	nvkm_wr08(pci->subdev.device, pci->func->cfg.addr + addr, data);
- }
- 
- void
- nvkm_pci_wr32(struct nvkm_pci *pci, u16 addr, u32 data)
- {
--	pci->func->wr32(pci, addr, data);
-+	nvkm_wr32(pci->subdev.device, pci->func->cfg.addr + addr, data);
- }
- 
- u32
- nvkm_pci_mask(struct nvkm_pci *pci, u16 addr, u32 mask, u32 value)
- {
--	u32 data = pci->func->rd32(pci, addr);
--	pci->func->wr32(pci, addr, (data & ~mask) | value);
-+	u32 data = nvkm_pci_rd32(pci, addr);
-+	nvkm_pci_wr32(pci, addr, (data & ~mask) | value);
- 	return data;
- }
- 
-diff --git a/drivers/gpu/drm/nouveau/nvkm/subdev/pci/g84.c b/drivers/gpu/drm/nouveau/nvkm/subdev/pci/g84.c
-index 5b29aacedef3..5308f6539a3f 100644
---- a/drivers/gpu/drm/nouveau/nvkm/subdev/pci/g84.c
-+++ b/drivers/gpu/drm/nouveau/nvkm/subdev/pci/g84.c
-@@ -132,10 +132,9 @@ g84_pcie_init(struct nvkm_pci *pci)
- 
- static const struct nvkm_pci_func
- g84_pci_func = {
-+	.cfg = { .addr = 0x088000, .size = 0x1000 },
-+
- 	.init = g84_pci_init,
--	.rd32 = nv40_pci_rd32,
--	.wr08 = nv40_pci_wr08,
--	.wr32 = nv40_pci_wr32,
- 	.msi_rearm = nv46_pci_msi_rearm,
- 
- 	.pcie.init = g84_pcie_init,
-diff --git a/drivers/gpu/drm/nouveau/nvkm/subdev/pci/g92.c b/drivers/gpu/drm/nouveau/nvkm/subdev/pci/g92.c
-index a9e0674009c6..8ae7aa02e675 100644
---- a/drivers/gpu/drm/nouveau/nvkm/subdev/pci/g92.c
-+++ b/drivers/gpu/drm/nouveau/nvkm/subdev/pci/g92.c
-@@ -33,10 +33,9 @@ g92_pcie_version_supported(struct nvkm_pci *pci)
- 
- static const struct nvkm_pci_func
- g92_pci_func = {
-+	.cfg = { .addr = 0x088000, .size = 0x1000 },
-+
- 	.init = g84_pci_init,
--	.rd32 = nv40_pci_rd32,
--	.wr08 = nv40_pci_wr08,
--	.wr32 = nv40_pci_wr32,
- 	.msi_rearm = nv46_pci_msi_rearm,
- 
- 	.pcie.init = g84_pcie_init,
-diff --git a/drivers/gpu/drm/nouveau/nvkm/subdev/pci/g94.c b/drivers/gpu/drm/nouveau/nvkm/subdev/pci/g94.c
-index 7bacd0693283..df745d0690ca 100644
---- a/drivers/gpu/drm/nouveau/nvkm/subdev/pci/g94.c
-+++ b/drivers/gpu/drm/nouveau/nvkm/subdev/pci/g94.c
-@@ -25,10 +25,9 @@
- 
- static const struct nvkm_pci_func
- g94_pci_func = {
-+	.cfg = { .addr = 0x088000, .size = 0x1000 },
-+
- 	.init = g84_pci_init,
--	.rd32 = nv40_pci_rd32,
--	.wr08 = nv40_pci_wr08,
--	.wr32 = nv40_pci_wr32,
- 	.msi_rearm = nv40_pci_msi_rearm,
- 
- 	.pcie.init = g84_pcie_init,
-diff --git a/drivers/gpu/drm/nouveau/nvkm/subdev/pci/gf100.c b/drivers/gpu/drm/nouveau/nvkm/subdev/pci/gf100.c
-index 099906092fe1..6ce941df87b7 100644
---- a/drivers/gpu/drm/nouveau/nvkm/subdev/pci/gf100.c
-+++ b/drivers/gpu/drm/nouveau/nvkm/subdev/pci/gf100.c
-@@ -78,10 +78,9 @@ gf100_pcie_set_link(struct nvkm_pci *pci, enum nvkm_pcie_speed speed, u8 width)
- 
- static const struct nvkm_pci_func
- gf100_pci_func = {
-+	.cfg = { .addr = 0x088000, .size = 0x1000 },
-+
- 	.init = g84_pci_init,
--	.rd32 = nv40_pci_rd32,
--	.wr08 = nv40_pci_wr08,
--	.wr32 = nv40_pci_wr32,
- 	.msi_rearm = gf100_pci_msi_rearm,
- 
- 	.pcie.init = gf100_pcie_init,
-diff --git a/drivers/gpu/drm/nouveau/nvkm/subdev/pci/gf106.c b/drivers/gpu/drm/nouveau/nvkm/subdev/pci/gf106.c
-index bcde609ba866..712ca7e0959a 100644
---- a/drivers/gpu/drm/nouveau/nvkm/subdev/pci/gf106.c
-+++ b/drivers/gpu/drm/nouveau/nvkm/subdev/pci/gf106.c
-@@ -25,10 +25,9 @@
- 
- static const struct nvkm_pci_func
- gf106_pci_func = {
-+	.cfg = { .addr = 0x088000, .size = 0x1000 },
-+
- 	.init = g84_pci_init,
--	.rd32 = nv40_pci_rd32,
--	.wr08 = nv40_pci_wr08,
--	.wr32 = nv40_pci_wr32,
- 	.msi_rearm = nv40_pci_msi_rearm,
- 
- 	.pcie.init = gf100_pcie_init,
-diff --git a/drivers/gpu/drm/nouveau/nvkm/subdev/pci/gk104.c b/drivers/gpu/drm/nouveau/nvkm/subdev/pci/gk104.c
-index 6be87ecffc89..ec6d0a7de995 100644
---- a/drivers/gpu/drm/nouveau/nvkm/subdev/pci/gk104.c
-+++ b/drivers/gpu/drm/nouveau/nvkm/subdev/pci/gk104.c
-@@ -204,10 +204,9 @@ gk104_pcie_set_link(struct nvkm_pci *pci, enum nvkm_pcie_speed speed, u8 width)
- 
- static const struct nvkm_pci_func
- gk104_pci_func = {
-+	.cfg = { .addr = 0x088000, .size = 0x1000 },
-+
- 	.init = g84_pci_init,
--	.rd32 = nv40_pci_rd32,
--	.wr08 = nv40_pci_wr08,
--	.wr32 = nv40_pci_wr32,
- 	.msi_rearm = nv40_pci_msi_rearm,
- 
- 	.pcie.init = gk104_pcie_init,
-diff --git a/drivers/gpu/drm/nouveau/nvkm/subdev/pci/gp100.c b/drivers/gpu/drm/nouveau/nvkm/subdev/pci/gp100.c
-index a5fafda0014d..4204316a544f 100644
---- a/drivers/gpu/drm/nouveau/nvkm/subdev/pci/gp100.c
-+++ b/drivers/gpu/drm/nouveau/nvkm/subdev/pci/gp100.c
-@@ -31,9 +31,7 @@ gp100_pci_msi_rearm(struct nvkm_pci *pci)
- 
- static const struct nvkm_pci_func
- gp100_pci_func = {
--	.rd32 = nv40_pci_rd32,
--	.wr08 = nv40_pci_wr08,
--	.wr32 = nv40_pci_wr32,
-+	.cfg = { .addr = 0x088000, .size = 0x1000 },
- 	.msi_rearm = gp100_pci_msi_rearm,
- };
- 
-diff --git a/drivers/gpu/drm/nouveau/nvkm/subdev/pci/nv04.c b/drivers/gpu/drm/nouveau/nvkm/subdev/pci/nv04.c
-index 9ab64194b185..b8a3f6850fa7 100644
---- a/drivers/gpu/drm/nouveau/nvkm/subdev/pci/nv04.c
-+++ b/drivers/gpu/drm/nouveau/nvkm/subdev/pci/nv04.c
-@@ -23,32 +23,9 @@
-  */
- #include "priv.h"
- 
--static u32
--nv04_pci_rd32(struct nvkm_pci *pci, u16 addr)
--{
--	struct nvkm_device *device = pci->subdev.device;
--	return nvkm_rd32(device, 0x001800 + addr);
--}
--
--static void
--nv04_pci_wr08(struct nvkm_pci *pci, u16 addr, u8 data)
--{
--	struct nvkm_device *device = pci->subdev.device;
--	nvkm_wr08(device, 0x001800 + addr, data);
--}
--
--static void
--nv04_pci_wr32(struct nvkm_pci *pci, u16 addr, u32 data)
--{
--	struct nvkm_device *device = pci->subdev.device;
--	nvkm_wr32(device, 0x001800 + addr, data);
--}
--
- static const struct nvkm_pci_func
- nv04_pci_func = {
--	.rd32 = nv04_pci_rd32,
--	.wr08 = nv04_pci_wr08,
--	.wr32 = nv04_pci_wr32,
-+	.cfg = { .addr = 0x001800, .size = 0x1000 },
+@@ -415,6 +421,7 @@ nv50_instmem = {
+ 	.memory_new = nv50_instobj_new,
+ 	.memory_wrap = nv50_instobj_wrap,
+ 	.zero = false,
++	.set_bar0_window_addr = nv50_instmem_set_bar0_window_addr,
  };
  
  int
-diff --git a/drivers/gpu/drm/nouveau/nvkm/subdev/pci/nv40.c b/drivers/gpu/drm/nouveau/nvkm/subdev/pci/nv40.c
-index 6a3c31cf0200..1971dbbdeb2b 100644
---- a/drivers/gpu/drm/nouveau/nvkm/subdev/pci/nv40.c
-+++ b/drivers/gpu/drm/nouveau/nvkm/subdev/pci/nv40.c
-@@ -23,27 +23,6 @@
-  */
- #include "priv.h"
- 
--u32
--nv40_pci_rd32(struct nvkm_pci *pci, u16 addr)
--{
--	struct nvkm_device *device = pci->subdev.device;
--	return nvkm_rd32(device, 0x088000 + addr);
--}
--
--void
--nv40_pci_wr08(struct nvkm_pci *pci, u16 addr, u8 data)
--{
--	struct nvkm_device *device = pci->subdev.device;
--	nvkm_wr08(device, 0x088000 + addr, data);
--}
--
--void
--nv40_pci_wr32(struct nvkm_pci *pci, u16 addr, u32 data)
--{
--	struct nvkm_device *device = pci->subdev.device;
--	nvkm_wr32(device, 0x088000 + addr, data);
--}
--
- void
- nv40_pci_msi_rearm(struct nvkm_pci *pci)
- {
-@@ -52,9 +31,7 @@ nv40_pci_msi_rearm(struct nvkm_pci *pci)
- 
- static const struct nvkm_pci_func
- nv40_pci_func = {
--	.rd32 = nv40_pci_rd32,
--	.wr08 = nv40_pci_wr08,
--	.wr32 = nv40_pci_wr32,
-+	.cfg = { .addr = 0x088000, .size = 0x1000 },
- 	.msi_rearm = nv40_pci_msi_rearm,
+diff --git a/drivers/gpu/drm/nouveau/nvkm/subdev/instmem/priv.h b/drivers/gpu/drm/nouveau/nvkm/subdev/instmem/priv.h
+index 4c14c96fb60a..d5b5fcd9262b 100644
+--- a/drivers/gpu/drm/nouveau/nvkm/subdev/instmem/priv.h
++++ b/drivers/gpu/drm/nouveau/nvkm/subdev/instmem/priv.h
+@@ -16,6 +16,7 @@ struct nvkm_instmem_func {
+ 			  bool zero, struct nvkm_memory **);
+ 	int (*memory_wrap)(struct nvkm_instmem *, struct nvkm_memory *, struct nvkm_memory **);
+ 	bool zero;
++	void (*set_bar0_window_addr)(struct nvkm_device *, u64 addr);
  };
  
-diff --git a/drivers/gpu/drm/nouveau/nvkm/subdev/pci/nv46.c b/drivers/gpu/drm/nouveau/nvkm/subdev/pci/nv46.c
-index 9cad17f178ec..0093eabac9ae 100644
---- a/drivers/gpu/drm/nouveau/nvkm/subdev/pci/nv46.c
-+++ b/drivers/gpu/drm/nouveau/nvkm/subdev/pci/nv46.c
-@@ -38,9 +38,7 @@ nv46_pci_msi_rearm(struct nvkm_pci *pci)
- 
- static const struct nvkm_pci_func
- nv46_pci_func = {
--	.rd32 = nv40_pci_rd32,
--	.wr08 = nv40_pci_wr08,
--	.wr32 = nv40_pci_wr32,
-+	.cfg = { .addr = 0x088000, .size = 0x1000 },
- 	.msi_rearm = nv46_pci_msi_rearm,
- };
- 
-diff --git a/drivers/gpu/drm/nouveau/nvkm/subdev/pci/nv4c.c b/drivers/gpu/drm/nouveau/nvkm/subdev/pci/nv4c.c
-index 741e34bf307c..b445081bb80e 100644
---- a/drivers/gpu/drm/nouveau/nvkm/subdev/pci/nv4c.c
-+++ b/drivers/gpu/drm/nouveau/nvkm/subdev/pci/nv4c.c
-@@ -25,9 +25,7 @@
- 
- static const struct nvkm_pci_func
- nv4c_pci_func = {
--	.rd32 = nv40_pci_rd32,
--	.wr08 = nv40_pci_wr08,
--	.wr32 = nv40_pci_wr32,
-+	.cfg = { .addr = 0x088000, .size = 0x1000 },
- };
- 
- int
-diff --git a/drivers/gpu/drm/nouveau/nvkm/subdev/pci/priv.h b/drivers/gpu/drm/nouveau/nvkm/subdev/pci/priv.h
-index 9b7583532962..988eeee1471c 100644
---- a/drivers/gpu/drm/nouveau/nvkm/subdev/pci/priv.h
-+++ b/drivers/gpu/drm/nouveau/nvkm/subdev/pci/priv.h
-@@ -8,10 +8,12 @@ int nvkm_pci_new_(const struct nvkm_pci_func *, struct nvkm_device *, enum nvkm_
- 		  struct nvkm_pci **);
- 
- struct nvkm_pci_func {
-+	struct {
-+		u32 addr;
-+		u16 size;
-+	} cfg;
-+
- 	void (*init)(struct nvkm_pci *);
--	u32 (*rd32)(struct nvkm_pci *, u16 addr);
--	void (*wr08)(struct nvkm_pci *, u16 addr, u8 data);
--	void (*wr32)(struct nvkm_pci *, u16 addr, u32 data);
- 	void (*msi_rearm)(struct nvkm_pci *);
- 
- 	struct {
-@@ -27,9 +29,6 @@ struct nvkm_pci_func {
- 	} pcie;
- };
- 
--u32 nv40_pci_rd32(struct nvkm_pci *, u16);
--void nv40_pci_wr08(struct nvkm_pci *, u16, u8);
--void nv40_pci_wr32(struct nvkm_pci *, u16, u32);
- void nv40_pci_msi_rearm(struct nvkm_pci *);
- 
- void nv46_pci_msi_rearm(struct nvkm_pci *);
+ int nv50_instmem_new_(const struct nvkm_instmem_func *, struct nvkm_device *,
 -- 
 2.49.0
 
