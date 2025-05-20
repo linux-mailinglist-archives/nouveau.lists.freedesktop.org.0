@@ -2,35 +2,35 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id 95727ABD364
-	for <lists+nouveau@lfdr.de>; Tue, 20 May 2025 11:31:11 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 8B3D5ABDE12
+	for <lists+nouveau@lfdr.de>; Tue, 20 May 2025 17:01:40 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id BD8DE10E455;
-	Tue, 20 May 2025 09:31:08 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 37DA310E5EB;
+	Tue, 20 May 2025 15:01:39 +0000 (UTC)
 Authentication-Results: gabe.freedesktop.org;
-	dkim=pass (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="IXBc2pGq";
+	dkim=pass (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="oPyjeJGc";
 	dkim-atps=neutral
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
 Received: from nyc.source.kernel.org (nyc.source.kernel.org [147.75.193.91])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 8C55410E44B;
- Tue, 20 May 2025 09:31:05 +0000 (UTC)
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 6C5B010E65F;
+ Tue, 20 May 2025 15:01:30 +0000 (UTC)
 Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by nyc.source.kernel.org (Postfix) with ESMTP id 931D4A4C865;
- Tue, 20 May 2025 09:30:59 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 68E36C4CEE9;
- Tue, 20 May 2025 09:30:54 +0000 (UTC)
+ by nyc.source.kernel.org (Postfix) with ESMTP id 37C72A4EBC2;
+ Tue, 20 May 2025 15:01:25 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 0B931C4CEE9;
+ Tue, 20 May 2025 15:01:19 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1747733459;
- bh=jcb4aPAbKPsWRg6KidM3qub1Bb9HpbBNOe12kNEXwSU=;
+ s=k20201202; t=1747753284;
+ bh=JXYMAkvj/vNiCk438wP3usUMpigmdkQBoAWrzqqiPxo=;
  h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
- b=IXBc2pGqp+VVik11Y7jfvML+CkrotItGRoxjZZGTMo5og35cO210IyMChrOKrfY7c
- dysWNOqI39ZDurXZ9RHWc/LOhAm3EQIcmorx05+Z6zWEDRKFwFMiK7xRvH8kCgDwJU
- X9x/X4UVhK9JqYuFF1ed3w4IAtuMM+T9wwNcKCIFkg5UcK/qsYlBkDLUBnoCKHaFj6
- FGxxEPzdpyH2O4HYQXhq/Fn5b50S297R9OaR7SkYtCeEpdio2q16uw3/ooM1QLkAVi
- ONhWUU9/6Lnup0BcTlsA4fIbqCTRj4QQZQSxFVA+8itV+AZbiTGzB47zWPXnk7qLMh
- UwdOgr9LG2HeA==
-Date: Tue, 20 May 2025 11:30:51 +0200
+ b=oPyjeJGcL4wWmhLv9mYckwIt//FsPF0uVP927y59OhlFrG6w8DlDaTFA/0oEEKPex
+ BpULEI41kTjn1Xvdk6JCqfB81lKme9hOYL5y1qmUqi/8JfGgVNGWDdfejU8mTammlY
+ ygphQufAE1kUFtKHG/7Vj7eSp/GKSAxVP/0xTyT4Y+iCcGpeYEHL9O29bJ/pDMeN7T
+ aNMknS2rzjZvu9BcB7C2g3wfJ8naFN2qREUgQ0H0M731NSH8H1HNsTkoKJzzpzmo6g
+ wbbdSCKGWrQ1uQPYZ6kgpf6HAW5um6D5dbpFFkYQd5LhuAHPtSiYLSN3IgQ3duaECG
+ FfFtCadsO2/1w==
+Date: Tue, 20 May 2025 17:01:17 +0200
 From: Danilo Krummrich <dakr@kernel.org>
 To: Joel Fernandes <joelagnelf@nvidia.com>
 Cc: Alexandre Courbot <acourbot@nvidia.com>, Miguel Ojeda <ojeda@kernel.org>,
@@ -51,15 +51,17 @@ Cc: Alexandre Courbot <acourbot@nvidia.com>, Miguel Ojeda <ojeda@kernel.org>,
  Shirish Baskaran <sbaskaran@nvidia.com>
 Subject: Re: [PATCH v3 16/19] nova-core: Add support for VBIOS ucode
  extraction for boot
-Message-ID: <aCxLyxcERNHKzfvI@cassiopeiae>
+Message-ID: <aCyZPUaPSks_DhTn@cassiopeiae>
 References: <20250507-nova-frts-v3-0-fcb02749754d@nvidia.com>
  <20250507-nova-frts-v3-16-fcb02749754d@nvidia.com>
  <aCN_PIYEEzs73AqT@pollux>
  <4fee85be-a8c5-4a99-8397-c93e79d72d15@nvidia.com>
+ <aCxLyxcERNHKzfvI@cassiopeiae>
+ <3cfb7a8c-467e-44d0-9874-361f719748b8@nvidia.com>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
-In-Reply-To: <4fee85be-a8c5-4a99-8397-c93e79d72d15@nvidia.com>
+In-Reply-To: <3cfb7a8c-467e-44d0-9874-361f719748b8@nvidia.com>
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -74,261 +76,189 @@ List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-On Tue, May 20, 2025 at 03:55:06AM -0400, Joel Fernandes wrote:
-> On 5/13/2025 1:19 PM, Danilo Krummrich wrote:
-> > On Wed, May 07, 2025 at 10:52:43PM +0900, Alexandre Courbot wrote:
-> >> @@ -238,6 +239,8 @@ pub(crate) fn new(
-> >>  
-> >>          let _sec2_falcon = Falcon::<Sec2>::new(pdev.as_ref(), spec.chipset, bar, true)?;
-> >>  
-> >> +        let _bios = Vbios::new(pdev, bar)?;
-> > 
-> > Please add a comment why, even though unused, it is important to create this
-> > instance.
-> > 
-> > Also, please use `_` if it's not intended to ever be used.
+On Tue, May 20, 2025 at 09:43:42AM -0400, Joel Fernandes wrote:
+> On 5/20/2025 5:30 AM, Danilo Krummrich wrote:
+> > On Tue, May 20, 2025 at 03:55:06AM -0400, Joel Fernandes wrote:
+> >> On 5/13/2025 1:19 PM, Danilo Krummrich wrote:
+> >>> On Wed, May 07, 2025 at 10:52:43PM +0900, Alexandre Courbot wrote:
 > 
-> If I add a comment, it will simply be removed by the next patch. I can add that
-> though so it makes it more clear.
-
-I recommend to add such comments, because then reviewers don't stumble over it.
-:-)
-
-> >> +impl Vbios {
-> >> +    /// Probe for VBIOS extraction
-> >> +    /// Once the VBIOS object is built, bar0 is not read for vbios purposes anymore.
-> >> +    pub(crate) fn new(pdev: &pci::Device, bar0: &Bar0) -> Result<Vbios> {
-> >> +        // Images to extract from iteration
-> >> +        let mut pci_at_image: Option<PciAtBiosImage> = None;
-> >> +        let mut first_fwsec_image: Option<FwSecBiosImage> = None;
-> >> +        let mut second_fwsec_image: Option<FwSecBiosImage> = None;
-> >> +
-> >> +        // Parse all VBIOS images in the ROM
-> >> +        for image_result in VbiosIterator::new(pdev, bar0)? {
-> >> +            let full_image = image_result?;
-> >> +
-> >> +            dev_info!(
-> > 
-> > Let's use dev_dbg!() instaed.
+> So the code here now looks like the below, definitely better, thanks! :
 > 
-> Done.
-> 
-> > 
-> >> +                pdev.as_ref(),
-> >> +                "Found BIOS image: size: {:#x}, type: {}, last: {}\n",
-> >> +                full_image.image_size_bytes()?,
-> >> +                full_image.image_type_str(),
-> >> +                full_image.is_last()
-> >> +            );
-> >> +
-> >> +            // Get references to images we will need after the loop, in order to
-> >> +            // setup the falcon data offset.
-> >> +            match full_image {
-> >> +                BiosImage::PciAt(image) => {
-> >> +                    pci_at_image = Some(image);
-> >> +                }
-> >> +                BiosImage::FwSec(image) => {
-> >> +                    if first_fwsec_image.is_none() {
-> >> +                        first_fwsec_image = Some(image);
-> >> +                    } else {
-> >> +                        second_fwsec_image = Some(image);
-> >> +                    }
-> >> +                }
-> >> +                // For now we don't need to handle these
-> >> +                BiosImage::Efi(_image) => {}
-> >> +                BiosImage::Nbsi(_image) => {}
-> >> +            }
-> >> +        }
-> >> +
-> >> +        // Using all the images, setup the falcon data pointer in Fwsec.
-> >> +        // We need mutable access here, so we handle the Option manually.
-> >> +        let final_fwsec_image = {
-> >> +            let mut second = second_fwsec_image; // Take ownership of the option
-> >> +
-> >> +            if let (Some(second), Some(first), Some(pci_at)) =
-> >> +                (second.as_mut(), first_fwsec_image, pci_at_image)
-> >> +            {
-> >> +                second
-> >> +                    .setup_falcon_data(pdev, &pci_at, &first)
-> >> +                    .inspect_err(|e| {
-> >> +                        dev_err!(pdev.as_ref(), "Falcon data setup failed: {:?}\n", e)
-> >> +                    })?;
-> >> +            } else {
-> >> +                dev_err!(
-> >> +                    pdev.as_ref(),
-> >> +                    "Missing required images for falcon data setup, skipping\n"
-> >> +                );
-> >> +                return Err(EINVAL);
-> > 
-> > This means that if second == None we fail, which makes sense, so why store an
-> > Option in Vbios? All methods of Vbios fail if fwsec_image == None.
-> > 
-> 
-> Well, if first and pci_at are None, we will fail as well. Not just second. But
-> we don't know until we finish parsing all the images in the prior loop, if we
-> found all the images. So we store it as Option during the prior loop, and check
-> it later. Right?
+>             if let (Some(second_ref), Some(first), Some(pci_at)) =
+>                 (second.as_mut(), first_fwsec_image, pci_at_image)
+>             {
+>                 second_ref
+>                     .setup_falcon_data(pdev, &pci_at, &first)
+>                     .inspect_err(|e| {
+>                         dev_err!(..)
+>                     })?;
+>                 Ok(Vbios { fwsec_image: second.take().ok_or(EINVAL)? })
+>             } else {
+>                 dev_err!(
+>                     pdev.as_ref(),
+>                     "Missing required images for falcon data setup, skipping\n"
+>                 );
+>                 Err(EINVAL)
+>             }
 
-My point is not that second is an option within this function -- that's fine. I
-don't want the Vbios type to store an Option, because that doesn't make sense.
-I.e. it should be
+Sorry, my code-snipped was incorrect indeed. Let me paste what I actually
+intended (and this time properly compile checked) and should be even better:
 
-	struct Vbios {
-	   fwsec_image: FwSecBiosImage,
+	if let (Some(mut second), Some(first), Some(pci_at)) =
+	    (second_fwsec_image, first_fwsec_image, pci_at_image)
+	{
+	    second
+	        .setup_falcon_data(pdev, &pci_at, &first)
+	        .inspect_err(|e| {
+	            dev_err!(pdev.as_ref(), "Falcon data setup failed: {:?}\n", e)
+	        })?;
+	
+	    Ok(Vbios(second))
+	} else {
+	    dev_err!(
+	        pdev.as_ref(),
+	        "Missing required images for falcon data setup, skipping\n"
+	    );
+	
+	    Err(EINVAL)
 	}
 
-or just
+So, with this second is the actual value and not just a reference. :)
 
-	struct Vbios(FwSecBiosImage);
+And the methods can become:
 
-which is the same, rather than
-
-	struct Vbios {
-	   fwsec_image: Option<FwSecBiosImage>,
+	pub(crate) fn fwsec_header(&self, pdev: &device::Device) -> Result<&FalconUCodeDescV3> {
+	    self.0.fwsec_header(pdev)
+	}
+	
+	pub(crate) fn fwsec_ucode(&self, pdev: &device::Device) -> Result<&[u8]> {
+	    self.0.fwsec_ucode(pdev, self.fwsec_header(pdev)?)
+	}
+	
+	pub(crate) fn fwsec_sigs(&self, pdev: &device::Device) -> Result<&[u8]> {
+	    self.0.fwsec_sigs(pdev, self.fwsec_header(pdev)?)
 	}
 
-because Vbios::new() fails anyways if any of the images is None, i.e.
-vbios.fwsec_image can't ever be None.
+However, I don't understand why they're not just implemented for FwSecBiosImage
+itself this way. You can just implement Deref for Vbios then.
 
-The code below does that for you, i.e. it returns an instance of Vbios without
-the inner Option.
+> > In general, I feel like a lot of those Option come from a programming pattern
+> > that is very common in C, i.e. allocate a structure (stack or heap) and then
+> > initialize its fields.
+> > 
+> > In Rust you should aim to initialize all the fields of a structure when you
+> > create the instance. Option as a return type of a function is common, but it's
+> > always a bit suspicious when there is an Option field in a struct.
+> 
+> I looked into it, I could not git rid of those ones because we need to
+> initialize in the "impl TryFrom<BiosImageBase> for BiosImage {"
+> 
+>             0xE0 => Ok(BiosImage::FwSec(FwSecBiosImage {
+>                 base,
+>                 falcon_data_offset: None,
+>                 pmu_lookup_table: None,
+>                 falcon_ucode_offset: None,
+>             })),
+> 
+> And these fields will not be determined until much later, because as is the case
+> with the earlier example, these fields cannot be determined until all the images
+> are parsed.
 
-> >> +            }
-> >> +            second
-> >> +        };
+You should not use TryFrom, but instead use a normal constructor, such as
+
+	BiosImage::new(base_bios_image)
+
+and do the parsing within this constructor.
+
+If you want a helper type with Options while parsing that's totally fine, but
+the final result can clearly be without Options. For instance:
+
+	struct Data {
+	   image: KVec<u8>,
+	}
+
+	impl Data {
+	   fn new() -> Result<Self> {
+	      let parser = DataParser::new();
+
+	      Self { image: parser.parse()? }
+	   }
+
+	   fn load_image(&self) {
+	      ...
+	   }
+	}
+
+	struct DataParser {
+	   // Only some images have a checksum.
+	   checksum: Option<u64>,
+	   // Some images have an extra offset.
+	   offset: Option<u64>,
+	   // Some images need to be patched.
+	   patch: Option<KVec<u8>>,
+	   image: KVec<u8>,
+	}
+
+	impl DataParser {
+	   fn new() -> Self {
+	      Self {
+	         checksum: None,
+	         offset: None,
+	         patch: None,
+	         bytes: KVec::new(),
+	      }
+	   }
+
+	   fn parse(self) -> Result<KVec<u8>> {
+	      // Fetch all the required data.
+	      self.fetch_checksum()?;
+	      self.fetch_offset()?;
+	      self.fetch_patch()?;
+	      self.fetch_byes()?;
+
+	      // Doesn't do anything if `checksum == None`.
+	      self.validate_checksum()?;
+
+	      // Doesn't do anything if `offset == None`.
+	      self.apply_offset()?;
+
+	      // Doesn't do anything if `patch == None`.
+	      self.apply_patch()?;
+
+	      // Return the final image.
+	      self.image
+	   }
+	}
+
+I think the pattern here is the same, but in this example you keep working with
+the DataParser, instead of a new instance of Data.
+
+> > I understand that there are cases where we can't omit it, and for obvious
+> > reasons the Vbios code is probably a perfect example for that.
 > > 
-> > I think this should be:
+> > However, I recommend looking at this from top to bottom: Do the "final"
+> > structures that we expose to the driver from the Vbios module have fields that
+> > are *really* optional? Or is the Option type just a result from the parsing
+> > process?
 > > 
-> > 	let mut second = second_fwsec_image;
-> > 	
-> > 	if let (Some(second), Some(first), Some(pci_at)) =
-> > 	    (second.as_mut(), first_fwsec_image, pci_at_image)
-> > 	{
-> > 	    second
-> > 	        .setup_falcon_data(pdev, &pci_at, &first)
-> > 	        .inspect_err(|e| {
-> > 	            dev_err!(pdev.as_ref(), "Falcon data setup failed: {:?}\n", e)
-> > 	        })?;
-> > 	
-> > 	    Ok(Vbios(second)
-> > 	} else {
-> > 	    dev_err!(
-> > 	        pdev.as_ref(),
-> > 	        "Missing required images for falcon data setup, skipping\n"
-> > 	    );
-> > 	
-> > 	    Err(EINVAL)
+> > If it's the latter, we should get rid of it and work with a different type
+> > during the parsing process and then create the final instance that is exposed to
+> > the driver at the end.
+> > 
+> > For instance FwSecBiosImage is defined as:
+> > 
+> > 	pub(crate) struct FwSecBiosImage {
+> > 	    base: BiosImageBase,
+> > 	    falcon_data_offset: Option<usize>,
+> > 	    pmu_lookup_table: Option<PmuLookupTable>,
+> > 	    falcon_ucode_offset: Option<usize>,
 > > 	}
 > > 
-> > where Vbios can just be
+> > Do only *some* FwSecBiosImage instances have a falcon_ucode_offset?
 > > 
-> > 	pub(crate) struct Vbios(FwSecBiosImage);
+> > If the answer is 'no' then it shouldn't be an Option. If the answer is 'yes',
+> > then this indicates that FwSecBiosImage is probably too generic and should be
+> > split into more specific types of a FwSecBiosImage which instead share a common
+> > trait in order to treat the different types generically.
 > 
-> But your suggestion here still considers second as an Option? That's why you
-> wrote 'Some(second)' ?
-
-Yes, that's fine, see above. The difference is that the code returns you an
-instance of
-
-	struct Vbios(FwSecBiosImage);
-
-rather than
-
-	struct Vbios {
-	   fwsec_image: Option<FwSecBiosImage>,
-	}
-
-which is unnecessary.
-
-> 
-> > 
-> >> +
-> >> +        Ok(Vbios {
-> >> +            fwsec_image: final_fwsec_image,
-> >> +        })
-> >> +    }
-> >> +
-> >> +    pub(crate) fn fwsec_header(&self, pdev: &device::Device) -> Result<&FalconUCodeDescV3> {
-> >> +        let image = self.fwsec_image.as_ref().ok_or(EINVAL)?;
-> >> +        image.fwsec_header(pdev)
-> >> +    }
-> >> +
-> >> +    pub(crate) fn fwsec_ucode(&self, pdev: &device::Device) -> Result<&[u8]> {
-> >> +        let image = self.fwsec_image.as_ref().ok_or(EINVAL)?;
-> >> +        image.fwsec_ucode(pdev, image.fwsec_header(pdev)?)
-> >> +    }
-> >> +
-> >> +    pub(crate) fn fwsec_sigs(&self, pdev: &device::Device) -> Result<&[u8]> {
-> >> +        let image = self.fwsec_image.as_ref().ok_or(EINVAL)?;
-> >> +        image.fwsec_sigs(pdev, image.fwsec_header(pdev)?)
-> >> +    }
-> > 
-> > Those then become infallible, e.g.
-> > 
-> > 	pub(crate) fn fwsec_sigs(&self, pdev: &device::Device) -> &[u8] {
-> > 	    self.0.fwsec_sigs(pdev, self.fwsec_header(pdev))
-> > 	}
-> > 
-> 
-> Nope, I think you are wrong there. fwsec_sigs() of the underlying .0 returns a
-> Result.
-
-That's true, I confused self.fwsec_sigs() with self.0.fwsec_sigs(). It seems
-that you may want to implement Deref for Vbios.
-
-Also, can you please double check the Options in FwSecBiosImage (in case we
-didn't talk about them yet)? They look quite suspicious too.
-
-In general, I feel like a lot of those Option come from a programming pattern
-that is very common in C, i.e. allocate a structure (stack or heap) and then
-initialize its fields.
-
-In Rust you should aim to initialize all the fields of a structure when you
-create the instance. Option as a return type of a function is common, but it's
-always a bit suspicious when there is an Option field in a struct.
-
-I understand that there are cases where we can't omit it, and for obvious
-reasons the Vbios code is probably a perfect example for that.
-
-However, I recommend looking at this from top to bottom: Do the "final"
-structures that we expose to the driver from the Vbios module have fields that
-are *really* optional? Or is the Option type just a result from the parsing
-process?
-
-If it's the latter, we should get rid of it and work with a different type
-during the parsing process and then create the final instance that is exposed to
-the driver at the end.
-
-For instance FwSecBiosImage is defined as:
-
-	pub(crate) struct FwSecBiosImage {
-	    base: BiosImageBase,
-	    falcon_data_offset: Option<usize>,
-	    pmu_lookup_table: Option<PmuLookupTable>,
-	    falcon_ucode_offset: Option<usize>,
-	}
-
-Do only *some* FwSecBiosImage instances have a falcon_ucode_offset?
-
-If the answer is 'no' then it shouldn't be an Option. If the answer is 'yes',
-then this indicates that FwSecBiosImage is probably too generic and should be
-split into more specific types of a FwSecBiosImage which instead share a common
-trait in order to treat the different types generically.
-
-> Also in Vbios::new(), I extract the Option when returning:
-> 
->         Ok(Vbios {
->             fwsec_image: final_fwsec_image.ok_or(EINVAL)?,
->         })
-
-Maybe you do so in your tree? v3 of the patch series has:
-
-	pub(crate) struct Vbios {
-	   pub fwsec_image: Option<FwSecBiosImage>,
-	}
-
-and
-
-	Ok(Vbios {
-	   fwsec_image: final_fwsec_image,
-	})
+> Understood, thanks.
