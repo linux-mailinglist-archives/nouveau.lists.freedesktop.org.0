@@ -2,72 +2,93 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id 52EFDABE4D2
-	for <lists+nouveau@lfdr.de>; Tue, 20 May 2025 22:36:26 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 14082ABE621
+	for <lists+nouveau@lfdr.de>; Tue, 20 May 2025 23:32:33 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 050DD10E59A;
-	Tue, 20 May 2025 20:36:25 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id BC48D10E0C5;
+	Tue, 20 May 2025 21:32:31 +0000 (UTC)
 Authentication-Results: gabe.freedesktop.org;
-	dkim=pass (1024-bit key; unprotected) header.d=redhat.com header.i=@redhat.com header.b="VYoOeqZZ";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="bNxUONXB";
 	dkim-atps=neutral
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from us-smtp-delivery-124.mimecast.com
- (us-smtp-delivery-124.mimecast.com [170.10.129.124])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 922E310E59C
- for <nouveau@lists.freedesktop.org>; Tue, 20 May 2025 20:36:24 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1747773383;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references;
- bh=/FiP53qIGqK3kQ8uYRbm+tkR4/PouMqDuk4sdgE46BE=;
- b=VYoOeqZZfLM8GlOQ8BzJIeY3GP1r80mePUu/LM0ldkMMeQ+SU7QRZvS0JNo4poO1BjXUEv
- ctHYRy4qbOCoFWdv1+LNpj85/PvUTAU+Tzgkucv/jZqSZ71Clg7fwiExrwVSJsokteQejZ
- r/lWZPGt3sykfzxiXtB2lik7O6BfVl4=
-Received: from mx-prod-mc-06.mail-002.prod.us-west-2.aws.redhat.com
- (ec2-35-165-154-97.us-west-2.compute.amazonaws.com [35.165.154.97]) by
- relay.mimecast.com with ESMTP with STARTTLS (version=TLSv1.3,
- cipher=TLS_AES_256_GCM_SHA384) id us-mta-387-ewVPIDvDNzC8IdKgTSlCag-1; Tue,
- 20 May 2025 16:36:22 -0400
-X-MC-Unique: ewVPIDvDNzC8IdKgTSlCag-1
-X-Mimecast-MFC-AGG-ID: ewVPIDvDNzC8IdKgTSlCag_1747773379
-Received: from mx-prod-int-03.mail-002.prod.us-west-2.aws.redhat.com
- (mx-prod-int-03.mail-002.prod.us-west-2.aws.redhat.com [10.30.177.12])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
- (No client certificate requested)
- by mx-prod-mc-06.mail-002.prod.us-west-2.aws.redhat.com (Postfix) with ESMTPS
- id 6DD591800366; Tue, 20 May 2025 20:36:19 +0000 (UTC)
-Received: from chopper.redhat.com (unknown [10.22.64.128])
- by mx-prod-int-03.mail-002.prod.us-west-2.aws.redhat.com (Postfix) with ESMTP
- id AC4CD19560AD; Tue, 20 May 2025 20:36:14 +0000 (UTC)
-From: Lyude Paul <lyude@redhat.com>
-To: dri-devel@lists.freedesktop.org, linux-kernel@vger.kernel.org,
- rust-for-linux@vger.kernel.org
-Cc: Danilo Krummrich <dakr@kernel.org>,
- Maarten Lankhorst <maarten.lankhorst@linux.intel.com>,
- Maxime Ripard <mripard@kernel.org>,
- Thomas Zimmermann <tzimmermann@suse.de>, David Airlie <airlied@gmail.com>,
- Simona Vetter <simona@ffwll.ch>, Miguel Ojeda <ojeda@kernel.org>,
- Alex Gaynor <alex.gaynor@gmail.com>, Boqun Feng <boqun.feng@gmail.com>,
- Gary Guo <gary@garyguo.net>,
- =?UTF-8?q?Bj=C3=B6rn=20Roy=20Baron?= <bjorn3_gh@protonmail.com>,
- Benno Lossin <benno.lossin@proton.me>,
- Andreas Hindborg <a.hindborg@kernel.org>,
- Alice Ryhl <aliceryhl@google.com>, Trevor Gross <tmgross@umich.edu>,
- Daniel Almeida <daniel.almeida@collabora.com>,
- Asahi Lina <lina@asahilina.net>, Alyssa Rosenzweig <alyssa@rosenzweig.io>,
- nouveau@lists.freedesktop.org (open list:DRM DRIVER FOR NVIDIA GPUS [RUST])
-Subject: [PATCH v4 4/4] rust: drm: gem: Support driver-private GEM object types
-Date: Tue, 20 May 2025 16:35:30 -0400
-Message-ID: <20250520203542.1391548-5-lyude@redhat.com>
-In-Reply-To: <20250520203542.1391548-1-lyude@redhat.com>
-References: <20250520203542.1391548-1-lyude@redhat.com>
+Received: from mail-ej1-f45.google.com (mail-ej1-f45.google.com
+ [209.85.218.45])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 4675610E0C5;
+ Tue, 20 May 2025 21:32:31 +0000 (UTC)
+Received: by mail-ej1-f45.google.com with SMTP id
+ a640c23a62f3a-ad564b7aea9so560171866b.1; 
+ Tue, 20 May 2025 14:32:31 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=gmail.com; s=20230601; t=1747776750; x=1748381550; darn=lists.freedesktop.org;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=PVyeTtgp442HJDMgT08Hm8NeOQ55yWX3pvKDV8NYv8M=;
+ b=bNxUONXB2VNC/Y4aqP/eHeZdmvo1qb1AhfgipDlG73YeDUm7EBbdiie/L3mnZ8CpNO
+ wUjK+FB5gZw9TWfSHuNu1I92L9pFS04uquZBLweLlaGHeSIkVYvzU6VK0s14EQw2Oa8g
+ PvmkgdCnfMiiNRRO11oj2K8OKQLBFBqh2+9PygSDrY6oVKnMVE9iez07ecGBaYkpq/fz
+ GCxP5WJx36MaqbxfsAvdqDIbyiy8O610nX7ovWXLB+fLK1aZcXqIHsf2/I/Nor6mdsSe
+ fRPzZitNz5V1JvE4psffryxIMQKx6hSLPRloCaX8EU8wYc7p7ZkMZdF8dJn/xn61pP4N
+ oUEw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1747776750; x=1748381550;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=PVyeTtgp442HJDMgT08Hm8NeOQ55yWX3pvKDV8NYv8M=;
+ b=keFGNkRydEUsIYehenm3Dq55zUnX9jl9l1c3gERev8px5yEyPxWR27L5CKil/DBCCE
+ Cs6jpO9+ENV/Llb+AHbZJ4qwZ/fQy47OpGipnwe2hLfoFrhOPedaocxbosgNMLQZ7As3
+ ooVFMRs82TA6eOnz86mI6snxh8mmWz4lq8Hqc0LEuQyaBcW2loGyEIlrsG27fxNGesXJ
+ s3OHPZodG1k+JcdY9L2omLYLq7jiTEbiDnxHjUGB0NDihdTGhhJRB4oyFFNhCrKEpZIb
+ GVrpILCGZI6s6G/lGaCGhtKGys5b8xM0VZH6owRPE4XXT6iIH/SPyrxfejoEY3dAObka
+ J+gg==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCX/tSa4xEcZfPZKS2p0erfqpJKF2PJGsJWxl9hj1TnzQMoVqJqCNoiK+8ozQlO1TanfxxBHGbzb/w==@lists.freedesktop.org,
+ AJvYcCX0zlBc9f5ZzBKom+JELtQO7+CkORRsCt1FxOeYITzTbi4n9TEYTzf7ajXcVVK8i+c56joi6Ce4J7I=@lists.freedesktop.org
+X-Gm-Message-State: AOJu0YzKFJVMc1sBtD7UQpF5yD8QnL4i1tXW+LTHa6IOFng2d7SxrtyP
+ 436fVRP1Di5a8uasoHtSc7FlP+JxDkS4HSG/0cL4UNKfUsiZfPRCgDe8vmmfdVNlg5K9WDf8bj6
+ IKvTQS0InaQzGXo3+IKpES3aZp+lqzsA=
+X-Gm-Gg: ASbGncv2ItjIDaWW0TBeD2cxonYwoAi2p61qOPm1eLguST/jXzA9yVE+Fbc8CK5c2a8
+ k3oR32CVMgWvjtUN7dsC+G0WPxNSSAWB3O82BZat3aI5fo8Il/idO0BvZ9uYJU4a84VaY0kH7nC
+ bcZz4qIU5MJInEFgyZPrmtuZ1c8oG/5+I=
+X-Google-Smtp-Source: AGHT+IE6ZfjH0fXFNg73kcmkQydRGkPJxZXm2rI85X7IwGpF2mp4Nj2W8aK6jolZcs3JZ0Fq7YjChtSqklpPuK2uKKY=
+X-Received: by 2002:a17:906:4ad8:b0:ad5:46a8:1ca4 with SMTP id
+ a640c23a62f3a-ad546a82c11mr1220923766b.7.1747776749497; Tue, 20 May 2025
+ 14:32:29 -0700 (PDT)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-X-Scanned-By: MIMEDefang 3.0 on 10.30.177.12
+References: <20250507-nova-frts-v3-0-fcb02749754d@nvidia.com>
+ <20250507-nova-frts-v3-16-fcb02749754d@nvidia.com> <aCN_PIYEEzs73AqT@pollux>
+ <4fee85be-a8c5-4a99-8397-c93e79d72d15@nvidia.com>
+ <aCxLyxcERNHKzfvI@cassiopeiae>
+ <3cfb7a8c-467e-44d0-9874-361f719748b8@nvidia.com>
+ <aCyZPUaPSks_DhTn@cassiopeiae>
+ <bdb290d4-b369-4b8e-b78d-8c8d3cc07057@nvidia.com>
+ <aCyhkiBTXV86P_GF@cassiopeiae>
+ <dcd249d6-7e99-476e-b216-8ca9e1a936e5@nvidia.com>
+In-Reply-To: <dcd249d6-7e99-476e-b216-8ca9e1a936e5@nvidia.com>
+From: Dave Airlie <airlied@gmail.com>
+Date: Wed, 21 May 2025 07:32:17 +1000
+X-Gm-Features: AX0GCFtnnWOjvTVc4bevf2USIhVR5JOAj-n3PIwluhf2VOt5T6BTyJ01ydh9IxA
+Message-ID: <CAPM=9typcavVsj-w_4zaBkU=eo-hsOagHn4cMekCsXPHwLK3Aw@mail.gmail.com>
+Subject: Re: [PATCH v3 16/19] nova-core: Add support for VBIOS ucode
+ extraction for boot
+To: Joel Fernandes <joelagnelf@nvidia.com>
+Cc: Danilo Krummrich <dakr@kernel.org>, Alexandre Courbot <acourbot@nvidia.com>,
+ Miguel Ojeda <ojeda@kernel.org>, Alex Gaynor <alex.gaynor@gmail.com>, 
+ Boqun Feng <boqun.feng@gmail.com>, Gary Guo <gary@garyguo.net>, 
+ =?UTF-8?Q?Bj=C3=B6rn_Roy_Baron?= <bjorn3_gh@protonmail.com>, 
+ Benno Lossin <benno.lossin@proton.me>, Andreas Hindborg <a.hindborg@kernel.org>,
+ Alice Ryhl <aliceryhl@google.com>, Trevor Gross <tmgross@umich.edu>, 
+ Simona Vetter <simona@ffwll.ch>,
+ Maarten Lankhorst <maarten.lankhorst@linux.intel.com>, 
+ Maxime Ripard <mripard@kernel.org>, Thomas Zimmermann <tzimmermann@suse.de>, 
+ Jonathan Corbet <corbet@lwn.net>, John Hubbard <jhubbard@nvidia.com>,
+ Ben Skeggs <bskeggs@nvidia.com>, 
+ Timur Tabi <ttabi@nvidia.com>, Alistair Popple <apopple@nvidia.com>,
+ linux-kernel@vger.kernel.org, 
+ rust-for-linux@vger.kernel.org, nouveau@lists.freedesktop.org, 
+ dri-devel@lists.freedesktop.org, Shirish Baskaran <sbaskaran@nvidia.com>
+Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -82,205 +103,102 @@ List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-One of the original intents with the gem bindings was that drivers could
-specify additional gem implementations, in order to enable for driver
-private gem objects. This wasn't really possible however, as up until now
-our GEM bindings have always assumed that the only GEM object we would run
-into was driver::Driver::Object - meaning that implementing another GEM
-object type would result in all of the BaseDriverObject callbacks assuming
-the wrong type.
+On Wed, 21 May 2025 at 04:13, Joel Fernandes <joelagnelf@nvidia.com> wrote:
+>
+>
+>
+> On 5/20/2025 11:36 AM, Danilo Krummrich wrote:
+> >>> If you want a helper type with Options while parsing that's totally fine, but
+> >>> the final result can clearly be without Options. For instance:
+> >>>
+> >>>     struct Data {
+> >>>        image: KVec<u8>,
+> >>>     }
+> >>>
+> >>>     impl Data {
+> >>>        fn new() -> Result<Self> {
+> >>>           let parser = DataParser::new();
+> >>>
+> >>>           Self { image: parser.parse()? }
+> >>>        }
+> >>>
+> >>>        fn load_image(&self) {
+> >>>           ...
+> >>>        }
+> >>>     }
+> >>>
+> >>>     struct DataParser {
+> >>>        // Only some images have a checksum.
+> >>>        checksum: Option<u64>,
+> >>>        // Some images have an extra offset.
+> >>>        offset: Option<u64>,
+> >>>        // Some images need to be patched.
+> >>>        patch: Option<KVec<u8>>,
+> >>>        image: KVec<u8>,
+> >>>     }
+> >>>
+> >>>     impl DataParser {
+> >>>        fn new() -> Self {
+> >>>           Self {
+> >>>              checksum: None,
+> >>>              offset: None,
+> >>>              patch: None,
+> >>>              bytes: KVec::new(),
+> >>>           }
+> >>>        }
+> >>>
+> >>>        fn parse(self) -> Result<KVec<u8>> {
+> >>>           // Fetch all the required data.
+> >>>           self.fetch_checksum()?;
+> >>>           self.fetch_offset()?;
+> >>>           self.fetch_patch()?;
+> >>>           self.fetch_byes()?;
+> >>>
+> >>>           // Doesn't do anything if `checksum == None`.
+> >>>           self.validate_checksum()?;
+> >>>
+> >>>           // Doesn't do anything if `offset == None`.
+> >>>           self.apply_offset()?;
+> >>>
+> >>>           // Doesn't do anything if `patch == None`.
+> >>>           self.apply_patch()?;
+> >>>
+> >>>           // Return the final image.
+> >>>           self.image
+> >>>        }
+> >>>     }
+> >>>
+> >>> I think the pattern here is the same, but in this example you keep working with
+> >>> the DataParser, instead of a new instance of Data.
+> >> I think this would be a fundamental rewrite of the patch. I am Ok with looking
+> >> into it as a future item, but right now I am not sure if it justifies not using
+> >> Option for these few. There's a lot of immediate work we have to do for boot,
+> >> lets please not block the patch on just this if that's Ok with you. If you want,
+> >> I could add a TODO here.
+> >
+> > Honestly, I don't think it'd be too bad to fix this up. It's "just" a bit of
+> > juggling fields and moving code around. The actual code should not change much.
+> >
+> > Having Option<T> where the corresponding value T isn't actually optional is
+> > extremely confusing and makes it hard for everyone, but especially new
+> > contributors, to understand the code and can easily trick people into taking
+> > wrong assumptions.
+> >
+> > Making the code reasonably accessible for (new) contributors is one of the
+> > objectives of nova and one of the learnings from nouveau.
 
-This is a pretty easy fix though, all we need to do is specify a
-BaseDriverObject in driver::Driver instead of an AllocImpl, and then add an
-associated type for AllocImpl in BaseDriverObject. That way each
-BaseDriverObject has its own AllocImpl allowing it to know which type to
-provide in BaseDriverObject callbacks, and driver::Driver can simply go
-through the BaseDriverObject to its AllocImpl type in order to get access
-to ALLOC_OPS.
+I just want to back Danilo up on this concept as well.
 
-So, let's do this and update Nova for these changes.
+When I did the experiments code, I faced the not fully constructed
+object problem a lot, and I tried to resist the C pattern of Option<>
+all the things, it's a very C based thing where we create an object
+then initialise it as we go, and it's not a great pattern to have for
+rust code.
 
-Signed-off-by: Lyude Paul <lyude@redhat.com>
+I'm not a huge fan of constructor/builder objects either if they can
+be avoided, please do, and I tried to also avoid proliferating them,
+but I think for most things we can build the pieces and then the final
+object as we go, it just requires doing so from the start, and not
+giving into the Option<> pattern.
 
----
-V4:
-* Update trait bounds. This looks gnarlier then it is:
-
-    Self: AllocImpl<Driver = D>, <-- Get the driver for this GEM object
-    D: drm::Driver<Object = O, File = F>, <-- Get the driver's Object, File
-                                              impl
-    F: drm::file::DriverFile,
-    O: BaseDriverObject<Object = Self>, <-- Make sure we're the driver's
-                                            main GEM object impl.
-  (don't worry, the compiler can always figure out what D, F, O are)
-* Also, rename the commit. I realized I should be clearer about what this
-  does so people can stop me if this isn't what was meant by private gem
-  object implementations :).
-
-Signed-off-by: Lyude Paul <lyude@redhat.com>
----
- drivers/gpu/drm/nova/driver.rs |  4 ++--
- drivers/gpu/drm/nova/gem.rs    |  1 +
- rust/kernel/drm/device.rs      | 17 ++++++++++-------
- rust/kernel/drm/driver.rs      |  2 +-
- rust/kernel/drm/gem/mod.rs     | 21 +++++++++++++--------
- 5 files changed, 27 insertions(+), 18 deletions(-)
-
-diff --git a/drivers/gpu/drm/nova/driver.rs b/drivers/gpu/drm/nova/driver.rs
-index b28b2e05cc156..58e534cf3ed39 100644
---- a/drivers/gpu/drm/nova/driver.rs
-+++ b/drivers/gpu/drm/nova/driver.rs
-@@ -1,6 +1,6 @@
- // SPDX-License-Identifier: GPL-2.0
- 
--use kernel::{auxiliary, c_str, device::Core, drm, drm::gem, drm::ioctl, prelude::*, types::ARef};
-+use kernel::{auxiliary, c_str, device::Core, drm, drm::ioctl, prelude::*, types::ARef};
- 
- use crate::file::File;
- use crate::gem::NovaObject;
-@@ -57,7 +57,7 @@ fn probe(adev: &auxiliary::Device<Core>, _info: &Self::IdInfo) -> Result<Pin<KBo
- impl drm::Driver for NovaDriver {
-     type Data = NovaData;
-     type File = File;
--    type Object = gem::Object<NovaObject>;
-+    type Object = NovaObject;
- 
-     const INFO: drm::DriverInfo = INFO;
- 
-diff --git a/drivers/gpu/drm/nova/gem.rs b/drivers/gpu/drm/nova/gem.rs
-index 68f93c9675611..a3024922f0d90 100644
---- a/drivers/gpu/drm/nova/gem.rs
-+++ b/drivers/gpu/drm/nova/gem.rs
-@@ -18,6 +18,7 @@ pub(crate) struct NovaObject {}
- 
- impl gem::BaseDriverObject for NovaObject {
-     type Driver = NovaDriver;
-+    type Object = gem::Object<Self>;
- 
-     fn new(_dev: &NovaDevice, _size: usize) -> impl PinInit<Self, Error> {
-         try_pin_init!(NovaObject {})
-diff --git a/rust/kernel/drm/device.rs b/rust/kernel/drm/device.rs
-index 74c9a3dd719e3..6fc6995be637d 100644
---- a/rust/kernel/drm/device.rs
-+++ b/rust/kernel/drm/device.rs
-@@ -60,6 +60,9 @@ pub struct Device<T: drm::Driver> {
-     data: T::Data,
- }
- 
-+/// A type alias for referring to the [`AllocImpl`] implementation for a DRM driver.
-+type DriverAllocImpl<T> = <<T as drm::Driver>::Object as drm::gem::BaseDriverObject>::Object;
-+
- impl<T: drm::Driver> Device<T> {
-     const VTABLE: bindings::drm_driver = drm_legacy_fields! {
-         load: None,
-@@ -70,13 +73,13 @@ impl<T: drm::Driver> Device<T> {
-         master_set: None,
-         master_drop: None,
-         debugfs_init: None,
--        gem_create_object: T::Object::ALLOC_OPS.gem_create_object,
--        prime_handle_to_fd: T::Object::ALLOC_OPS.prime_handle_to_fd,
--        prime_fd_to_handle: T::Object::ALLOC_OPS.prime_fd_to_handle,
--        gem_prime_import: T::Object::ALLOC_OPS.gem_prime_import,
--        gem_prime_import_sg_table: T::Object::ALLOC_OPS.gem_prime_import_sg_table,
--        dumb_create: T::Object::ALLOC_OPS.dumb_create,
--        dumb_map_offset: T::Object::ALLOC_OPS.dumb_map_offset,
-+        gem_create_object: DriverAllocImpl::<T>::ALLOC_OPS.gem_create_object,
-+        prime_handle_to_fd: DriverAllocImpl::<T>::ALLOC_OPS.prime_handle_to_fd,
-+        prime_fd_to_handle: DriverAllocImpl::<T>::ALLOC_OPS.prime_fd_to_handle,
-+        gem_prime_import: DriverAllocImpl::<T>::ALLOC_OPS.gem_prime_import,
-+        gem_prime_import_sg_table: DriverAllocImpl::<T>::ALLOC_OPS.gem_prime_import_sg_table,
-+        dumb_create: DriverAllocImpl::<T>::ALLOC_OPS.dumb_create,
-+        dumb_map_offset: DriverAllocImpl::<T>::ALLOC_OPS.dumb_map_offset,
-         show_fdinfo: None,
-         fbdev_probe: None,
- 
-diff --git a/rust/kernel/drm/driver.rs b/rust/kernel/drm/driver.rs
-index 2be2a2d318e03..a77747edac80e 100644
---- a/rust/kernel/drm/driver.rs
-+++ b/rust/kernel/drm/driver.rs
-@@ -106,7 +106,7 @@ pub trait Driver {
-     type Data: Sync + Send;
- 
-     /// The type used to manage memory for this driver.
--    type Object: AllocImpl;
-+    type Object: drm::gem::BaseDriverObject;
- 
-     /// The type used to represent a DRM File (client)
-     type File: drm::file::DriverFile;
-diff --git a/rust/kernel/drm/gem/mod.rs b/rust/kernel/drm/gem/mod.rs
-index c459829ce5a5d..992e098d0a3e2 100644
---- a/rust/kernel/drm/gem/mod.rs
-+++ b/rust/kernel/drm/gem/mod.rs
-@@ -26,16 +26,19 @@ pub trait BaseDriverObject: Sync + Send + Sized {
-     /// Parent `Driver` for this object.
-     type Driver: drm::Driver;
- 
-+    /// The GEM object type that will be passed to various callbacks.
-+    type Object: AllocImpl;
-+
-     /// Create a new driver data object for a GEM object of a given size.
-     fn new(dev: &drm::Device<Self::Driver>, size: usize) -> impl PinInit<Self, Error>;
- 
-     /// Open a new handle to an existing object, associated with a File.
--    fn open(_obj: &<Self::Driver as drm::Driver>::Object, _file: &DriverFile<Self>) -> Result {
-+    fn open(_obj: &Self::Object, _file: &DriverFile<Self>) -> Result {
-         Ok(())
-     }
- 
-     /// Close a handle to an existing object, associated with a File.
--    fn close(_obj: &<Self::Driver as drm::Driver>::Object, _file: &DriverFile<Self>) {}
-+    fn close(_obj: &Self::Object, _file: &DriverFile<Self>) {}
- }
- 
- /// Trait that represents a GEM object subtype
-@@ -83,7 +86,7 @@ extern "C" fn open_callback<T: BaseDriverObject>(
- 
-     // SAFETY: `open_callback` is specified in the AllocOps structure for `DriverObject<T>`,
-     // ensuring that `raw_obj` is contained within a `DriverObject<T>`
--    let obj = unsafe { <<T::Driver as drm::Driver>::Object as IntoGEMObject>::as_ref(raw_obj) };
-+    let obj = unsafe { T::Object::as_ref(raw_obj) };
- 
-     match T::open(obj, file) {
-         Err(e) => e.to_errno(),
-@@ -100,7 +103,7 @@ extern "C" fn close_callback<T: BaseDriverObject>(
- 
-     // SAFETY: `close_callback` is specified in the AllocOps structure for `Object<T>`, ensuring
-     // that `raw_obj` is indeed contained within a `Object<T>`.
--    let obj = unsafe { <<T::Driver as drm::Driver>::Object as IntoGEMObject>::as_ref(raw_obj) };
-+    let obj = unsafe { T::Object::as_ref(raw_obj) };
- 
-     T::close(obj, file);
- }
-@@ -127,11 +130,12 @@ fn size(&self) -> usize {
- 
-     /// Creates a new handle for the object associated with a given `File`
-     /// (or returns an existing one).
--    fn create_handle<D, F>(&self, file: &drm::File<F>) -> Result<u32>
-+    fn create_handle<D, F, O>(&self, file: &drm::File<F>) -> Result<u32>
-     where
-         Self: AllocImpl<Driver = D>,
--        D: drm::Driver<Object = Self, File = F>,
-+        D: drm::Driver<Object = O, File = F>,
-         F: drm::file::DriverFile,
-+        O: BaseDriverObject<Object = Self>,
-     {
-         let mut handle: u32 = 0;
-         // SAFETY: The arguments are all valid per the type invariants.
-@@ -142,11 +146,12 @@ fn create_handle<D, F>(&self, file: &drm::File<F>) -> Result<u32>
-     }
- 
-     /// Looks up an object by its handle for a given `File`.
--    fn lookup_handle<D, F>(file: &drm::File<F>, handle: u32) -> Result<ARef<Self>>
-+    fn lookup_handle<D, F, O>(file: &drm::File<F>, handle: u32) -> Result<ARef<Self>>
-     where
-         Self: AllocImpl<Driver = D>,
--        D: drm::Driver<Object = Self, File = F>,
-+        D: drm::Driver<Object = O, File = F>,
-         F: drm::file::DriverFile,
-+        O: BaseDriverObject<Object = Self>,
-     {
-         // SAFETY: The arguments are all valid per the type invariants.
-         let ptr = unsafe { bindings::drm_gem_object_lookup(file.as_raw().cast(), handle) };
--- 
-2.49.0
-
+Dave.
