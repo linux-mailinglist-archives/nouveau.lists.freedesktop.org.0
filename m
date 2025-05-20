@@ -2,166 +2,176 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id 8FCBDBBF460
-	for <lists+nouveau@lfdr.de>; Mon, 06 Oct 2025 22:46:57 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id A6624BBF3FD
+	for <lists+nouveau@lfdr.de>; Mon, 06 Oct 2025 22:46:43 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 37D9610E4A3;
-	Mon,  6 Oct 2025 20:46:25 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 70C4B10E48A;
+	Mon,  6 Oct 2025 20:46:24 +0000 (UTC)
 Authentication-Results: gabe.freedesktop.org;
-	dkim=pass (2048-bit key; unprotected) header.d=Nvidia.com header.i=@Nvidia.com header.b="gcRFQV87";
+	dkim=pass (2048-bit key; unprotected) header.d=Nvidia.com header.i=@Nvidia.com header.b="O9drGnii";
 	dkim-atps=neutral
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from NAM10-BN7-obe.outbound.protection.outlook.com
- (mail-bn7nam10on2056.outbound.protection.outlook.com [40.107.92.56])
- by gabe.freedesktop.org (Postfix) with ESMTPS id E1ACE10E2F0;
- Mon, 19 May 2025 23:00:08 +0000 (UTC)
+Received: from NAM12-MW2-obe.outbound.protection.outlook.com
+ (mail-mw2nam12on2065.outbound.protection.outlook.com [40.107.244.65])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id F3DEF10E0A9;
+ Tue, 20 May 2025 06:35:39 +0000 (UTC)
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=Ib0/s8n1CLZwVwTXaQcfBHU6t8DSBEmiC+9xsQXHGJ23EWDVjxSm/SX29ratlnmKh9fohzzz+amqgLNijsOSBKu6idlr9tFHZPtVAx322HhNEiwvb1s/MPOvBKurn1xyvr2YeNdjfzjx62pLedv/tTTSF3ETR9tTeADfK3mK8CDHMHhViRf/WSJD8ksNaFLlpFati9S6pWCutBt62cL3oKJnMkZ39TiCjhGCtq4kbboNSHmAzdx6oLBvh4S+wIRSAICfBxAt224dUbg7NpPI8IoecAOantgfjSePK0KdyJQf0ah9YS+edvcSqBogQkRMx+6XIL07ZTNR06VdglS90Q==
+ b=CWqumQ9JdRzhVgxfNEZUmLIG9nXJ2A2O/K8GhKTt9Qwr5LGdS7slSgTLwiFPlxuZDyS3ppkhOTXKhxDyUtXvZI02QolTKV5TmarvuCxRh41XSpd2EV+qiIjmTFNnSdZHUChQLDsPb9msuugoPfKTOYwvsEpLVQmQed80J68ZFlDEBoMxhcAk94v+KMiM7nr2DUFv/FxWpsljcdvqb4thlktWZHz9eW2V5CAgHn2Okr4ZfotDejW0XoSyPBvIIuZ7sTRAIM/0C1PU0Z64maVFPBpDF7sQazNjkFLvbOsMsjJH33GGPWMBAZPc1Ov1T7wNQlUfkQGwjuYuEvabBjcqmQ==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
  s=arcselector10001;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=fwuHCo6wfWwXQUaETwyhZviG+hpnJuNOl0PxeudkUxs=;
- b=V55++A6FtvuoRTu3aIFf0Uv3yxwXQDtxSQAFX3rBzcmkMPCwnaDUrwravJ1GEbd+NXLAUkbOCXJbQi3AzRFdWZNi12oWLgr//wFn6qtOIZD+1j/K2OfQZkT+uEH1vIyoftqBxbAfrhDanUdQ3Ona5LLqREyNRuJUKoHawaRIL2SVETSkwECGRfss8cJgER6uX8eA2vWj4Jf/1mJCKaZ73AejpnYOItmuuDWrPeNplEOxhwNP0mtBx3/EyO/Bbak9TSTKiis7tpE6Qi/vC+jYeNQM8SEvzjr701e5dLj19Tt7N5FsusQLw3oKjiP6SrOblOq7y/KFfRnRo4j4NRAwOg==
+ bh=Jdkn+rFw79XdKHgeRQLP/uFjVsD8KDsW23RaKKDqpxQ=;
+ b=pvrc0Jt4Zc2Fl5EB2plw85csPdtdv1aYzkeAZmRktIb49yRU+bVaeOONq/8FFC6AsJBXOLHvvo0BNJLChB8Boo2UDRUXzFdWfBpKDN69gxW41Kaxf9NZOkl2hHgvVCwQ2qkFYfdDeVOhVaPsnjfGiwUBo1No5v720xeZ2ZOoyk37myUf024WED1Lh7aVWgr6OAEHuiZXvagIGRBtY5H77d5IgxRGPXBY2Gg0+2LYp1jl5DwrRbRODx8NSN/IpMdpMDlOn4eAg9j9fdfTWxyWbZc4ryHxo9J34SOAyAx4RgS0WeDeDzUvpnhfOFBK6TbPh1vam8YK9Sd98J3sAxsHCA==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
  smtp.mailfrom=nvidia.com; dmarc=pass action=none header.from=nvidia.com;
  dkim=pass header.d=nvidia.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=Nvidia.com;
  s=selector2;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=fwuHCo6wfWwXQUaETwyhZviG+hpnJuNOl0PxeudkUxs=;
- b=gcRFQV87JK6OsSvb5YWqdN4+rQ/aHOJAKI+IsYBeMP2HtuGA4/ZJdI7wUdzWkuzrj96bqY0Rxfz2mtQgY6KeOfGCA8/5Wcu1geggXRIoJ7WsG0eVYI3wYwMxLZq/UhFsC53AYmBUzTYT00+8gKJrPA+h8HvEv/SjRoS6abi0T5QCIbHCyD0cq4cFmqZ3981er+gIOXpdCVs9774oKk8ohJv7aNCDEIl9MxBobt99n4/MMqtX5aR/QmGLcfWTP5l9a0OnuWtCdm+azBTOYfSGYSVyqzuy24yVrsLcTNRvUvFKL/G9ldz85cHEHwPpDVwHNMYTtIEIfZ/z6Ao5xVDYnA==
+ bh=Jdkn+rFw79XdKHgeRQLP/uFjVsD8KDsW23RaKKDqpxQ=;
+ b=O9drGniiVR8/qptG358EM+rHHSA7l36t0XQXrPLh3gScK85/9MAaZS62VUqt4ilHn3dh1lFlMR1I1sr7KkT/85Q2C3TxCAQfINCP+aEiBgwKKGfFFwv+V9DvvuMTnvrTkafaeRqZcTYPO9zr0HWGldspWp6ma976gMUJ9Gm8Dmyl7FPG+QPiTV0TYv7O+hnNDwCIWp/eRc9rt8gAqk8bHGTwpz9jDZttRJ8dAgam0k8m65N+XmbbfASdOTMickKy3PfkLgujCMTqS9DQwz26I2cxFoQRIO5UPSjxMyo+4GTBxU7rOu7R9EqnfMHdANZbOvcNodB607yNSLbiP7yw/w==
 Authentication-Results: dkim=none (message not signed)
  header.d=none;dmarc=none action=none header.from=nvidia.com;
 Received: from SN7PR12MB8059.namprd12.prod.outlook.com (2603:10b6:806:32b::7)
- by SA3PR12MB8024.namprd12.prod.outlook.com (2603:10b6:806:312::12)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.8746.31; Mon, 19 May
- 2025 22:59:58 +0000
+ by DM4PR12MB6447.namprd12.prod.outlook.com (2603:10b6:8:bf::16) with
+ Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.8722.33; Tue, 20 May
+ 2025 06:35:33 +0000
 Received: from SN7PR12MB8059.namprd12.prod.outlook.com
  ([fe80::4ee2:654e:1fe8:4b91]) by SN7PR12MB8059.namprd12.prod.outlook.com
- ([fe80::4ee2:654e:1fe8:4b91%3]) with mapi id 15.20.8746.030; Mon, 19 May 2025
- 22:59:58 +0000
-Message-ID: <d79dd1dd-8660-4e67-8d44-a49b1a4a3add@nvidia.com>
-Date: Mon, 19 May 2025 18:59:55 -0400
+ ([fe80::4ee2:654e:1fe8:4b91%3]) with mapi id 15.20.8746.030; Tue, 20 May 2025
+ 06:35:33 +0000
+Message-ID: <5ed3795e-283a-45ba-83c5-6d35622b56ba@nvidia.com>
+Date: Tue, 20 May 2025 02:35:29 -0400
 User-Agent: Mozilla Thunderbird
 Subject: Re: [PATCH v3 16/19] nova-core: Add support for VBIOS ucode
  extraction for boot
-To: Danilo Krummrich <dakr@kernel.org>, Alexandre Courbot <acourbot@nvidia.com>
-Cc: Miguel Ojeda <ojeda@kernel.org>, Alex Gaynor <alex.gaynor@gmail.com>,
- Boqun Feng <boqun.feng@gmail.com>, Gary Guo <gary@garyguo.net>,
- =?UTF-8?Q?Bj=C3=B6rn_Roy_Baron?= <bjorn3_gh@protonmail.com>,
- Benno Lossin <benno.lossin@proton.me>,
- Andreas Hindborg <a.hindborg@kernel.org>, Alice Ryhl <aliceryhl@google.com>,
- Trevor Gross <tmgross@umich.edu>, David Airlie <airlied@gmail.com>,
- Simona Vetter <simona@ffwll.ch>,
- Maarten Lankhorst <maarten.lankhorst@linux.intel.com>,
- Maxime Ripard <mripard@kernel.org>, Thomas Zimmermann <tzimmermann@suse.de>,
- Jonathan Corbet <corbet@lwn.net>, John Hubbard <jhubbard@nvidia.com>,
- Ben Skeggs <bskeggs@nvidia.com>, Timur Tabi <ttabi@nvidia.com>,
- Alistair Popple <apopple@nvidia.com>, linux-kernel@vger.kernel.org,
- rust-for-linux@vger.kernel.org, nouveau@lists.freedesktop.org,
- dri-devel@lists.freedesktop.org, Shirish Baskaran <sbaskaran@nvidia.com>
+To: Timur Tabi <ttabi@nvidia.com>, "dakr@kernel.org" <dakr@kernel.org>,
+ "a.hindborg@kernel.org" <a.hindborg@kernel.org>,
+ "ojeda@kernel.org" <ojeda@kernel.org>,
+ "boqun.feng@gmail.com" <boqun.feng@gmail.com>,
+ "simona@ffwll.ch" <simona@ffwll.ch>, "tmgross@umich.edu"
+ <tmgross@umich.edu>, "alex.gaynor@gmail.com" <alex.gaynor@gmail.com>,
+ "tzimmermann@suse.de" <tzimmermann@suse.de>, "corbet@lwn.net"
+ <corbet@lwn.net>, "mripard@kernel.org" <mripard@kernel.org>,
+ "maarten.lankhorst@linux.intel.com" <maarten.lankhorst@linux.intel.com>,
+ "benno.lossin@proton.me" <benno.lossin@proton.me>,
+ "bjorn3_gh@protonmail.com" <bjorn3_gh@protonmail.com>,
+ "airlied@gmail.com" <airlied@gmail.com>,
+ "aliceryhl@google.com" <aliceryhl@google.com>,
+ Alexandre Courbot <acourbot@nvidia.com>, "gary@garyguo.net"
+ <gary@garyguo.net>
+Cc: Shirish Baskaran <sbaskaran@nvidia.com>,
+ Alistair Popple <apopple@nvidia.com>, John Hubbard <jhubbard@nvidia.com>,
+ "rust-for-linux@vger.kernel.org" <rust-for-linux@vger.kernel.org>,
+ "dri-devel@lists.freedesktop.org" <dri-devel@lists.freedesktop.org>,
+ "nouveau@lists.freedesktop.org" <nouveau@lists.freedesktop.org>,
+ "linux-kernel@vger.kernel.org" <linux-kernel@vger.kernel.org>,
+ Ben Skeggs <bskeggs@nvidia.com>
 References: <20250507-nova-frts-v3-0-fcb02749754d@nvidia.com>
- <20250507-nova-frts-v3-16-fcb02749754d@nvidia.com> <aCTDk9UKRWHWYexR@pollux>
+ <20250507-nova-frts-v3-16-fcb02749754d@nvidia.com>
+ <3a32db1ee57f26ed59a69c9aa53f1cfff6f29176.camel@nvidia.com>
 Content-Language: en-US
 From: Joel Fernandes <joelagnelf@nvidia.com>
-In-Reply-To: <aCTDk9UKRWHWYexR@pollux>
+In-Reply-To: <3a32db1ee57f26ed59a69c9aa53f1cfff6f29176.camel@nvidia.com>
 Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
-X-ClientProxiedBy: MN0PR05CA0017.namprd05.prod.outlook.com
- (2603:10b6:208:52c::21) To SN7PR12MB8059.namprd12.prod.outlook.com
+Content-Transfer-Encoding: 8bit
+X-ClientProxiedBy: MN2PR19CA0002.namprd19.prod.outlook.com
+ (2603:10b6:208:178::15) To SN7PR12MB8059.namprd12.prod.outlook.com
  (2603:10b6:806:32b::7)
 MIME-Version: 1.0
 X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: SN7PR12MB8059:EE_|SA3PR12MB8024:EE_
-X-MS-Office365-Filtering-Correlation-Id: 4fb911b4-1e30-4b6b-747e-08dd9728e0dc
+X-MS-TrafficTypeDiagnostic: SN7PR12MB8059:EE_|DM4PR12MB6447:EE_
+X-MS-Office365-Filtering-Correlation-Id: dfa1c334-e2da-4ed1-8382-08dd97688576
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0;ARA:13230040|366016|1800799024|7416014|376014;
-X-Microsoft-Antispam-Message-Info: =?utf-8?B?aFl0R04wVTVEVFMwZFJ2cHRKL0V1N3VnZzMvSmtVL3REbEFQdk5Oa3hCRW54?=
- =?utf-8?B?N21FL1VZWW1FZUg4amgwajdWdzd1QUhZVjVwYm5Ud2g1ZWl1cWljejJuQ2lI?=
- =?utf-8?B?M1dkR1ZYNndDWi9ua08xQmJXNWxIMjZSNkZqNHNTNHFwNnh5M2tCeXpCcUFD?=
- =?utf-8?B?aWtSWllNV0gxWVM4eTNORGdEaGxkZTFjQXNGdEtPd1cwQTE1VUdRVXVPYnpX?=
- =?utf-8?B?U2pCeEdXa0s3VndlaCszZ2gzZURONUpXbU5LdTVqdFBCeTdkTlBQOTJuZEF1?=
- =?utf-8?B?a2FSaHNVNjV0bmREeGFXUG9xNUxZYTRTTVBGU0xhSDRwM0piL0VDMkZFSWxO?=
- =?utf-8?B?bjc4ejBIL0t6eEhjaHlvYXpnZ1RCdFIxbGFzUnFCZ3V2aFA4TG1CWlF5VDVp?=
- =?utf-8?B?OTJ1YjJxWEUyNWhEL01ZWXM5czJqVzl3bngxMWJZUHFGcXRTbklKWmp0VDFG?=
- =?utf-8?B?SEtxSVJ1SnB2ZitDLzdLOEJIV085NjhnbHZQa2tWMWZZWnJleUNoY2QyQzR1?=
- =?utf-8?B?VmVZck9sVnorNXBycWR0T1R0d2p1TGV1MXZ3QXFLWVRHbzNKOEF2Q1dNN2VC?=
- =?utf-8?B?dzVsOFRXWEdtV0NFdndUUmt1ZitSU3VQWVlWS3JLWGpTMXM3WURrRnFmMVY0?=
- =?utf-8?B?S0R6Qyt2bXU2dTFxNUxLTTQwY1IrbHdiRzVORUp1Y1lQbGF5ZnhuM2t3amFK?=
- =?utf-8?B?YUhERTY3MmtxRHp2T0ova2FoNFNHWElUVmJpY0gwNlZPemNzaXNWd3NuMFJF?=
- =?utf-8?B?SHB6UGpQRk5halE0KzdPQjk5MWM1YlRKYUN0eUphdnpyamtidm80WVUzUVdx?=
- =?utf-8?B?aDJ0TW1lMW0vZUM3aDExdnF5NFl4S0I5ZHlUckUxWEMyNEpNV1U5YmMzVVh5?=
- =?utf-8?B?c3Q2RzJFNUExM0hvbmo4NXdUZ1doa3hFUFhnRmxxWVZxQjhyazlGNmc0by83?=
- =?utf-8?B?ZWJ3dm5neVM4cENBSnFqZW11ZkViangvd2lWdXd1Tlh6VE1RWFJnM1V5ZVd3?=
- =?utf-8?B?T3k2bE80UnV6ZFkrK05heDhLNDU3VjZIR2x1K3Z4RzE4QzFkYm82d3RRVFAz?=
- =?utf-8?B?ejdTSnJrNzRuMVYrRmkyT1dKS2lmTDVZQ2JRaDJ1RktoMy9GZTBYT3h4dGh4?=
- =?utf-8?B?UUd4dkdQQzd6d2pJRElTK1JadzVySTVTUzRCY3BoYUc3TUU3cXdWU2tXclJF?=
- =?utf-8?B?RVkwTVlZZXZFdUJSemtWcXVCUU0yL1dVTXJBa0dDWU5XOTFicXRxdGJjM3dq?=
- =?utf-8?B?UGplTTNVNGNyVGw5VlFBQzIzc0hXMGZtRlgxQTN1V1lLNUlwWFhaSVk4S0M3?=
- =?utf-8?B?OFloSHNNcjZTZnpxNXhQQkRGc3hRSVNJL1J1TXhQYnp6YzBUZ2hIRmNTcWg5?=
- =?utf-8?B?c2dUeGI2bWhEeGhwMXU4cWhwR25DWmYzeE9BOUtkWk1uUkQ4RlJOMnhXQm1m?=
- =?utf-8?B?YVgwVy9YSmJ6Rkc3OWFlOXRPSFdNUVhRdTVIdUIyOVkvdVNRM2M2VGRFdUlr?=
- =?utf-8?B?OC9NQy9IbE1idWx6dWNvUkREUDhmbEl3Y1BMbnRUOEpuREhZZCtETEFrcVc1?=
- =?utf-8?B?N2Z3TWFOVzI5RXByZWVla21KU3EvVEpDaFRMOGk5VWt0T2hvUHUzRFAxTGJX?=
- =?utf-8?B?ZEVITGVmZkR0M29GVXR1RUtFdGRCTjk0STR3VGY5K3VpOVZrZEI5QWhUaC95?=
- =?utf-8?B?aUpPclFXNkZiWVdWWW5uZTY5WVZ0MVpWZVcwdFMvVCtIREUrL05wa2YycnJo?=
- =?utf-8?B?VDJ6UEEvaEFzYThCUjkvaVh3cU5ydTlyek9mU1pOWXZndi9mQ0hyUnNEdFRn?=
- =?utf-8?B?MUhicGt5UUsya3gzZmdOK2NzcGJ0amxMT1lqOWpFcm5WdlQvK0RNc1k3QWlq?=
- =?utf-8?B?TWxnTExJaU5nRkdVN3Z6SGdKZnlUOHQ1d3krVy9ZbUtEYlJwVVA2Wnd6dTVn?=
- =?utf-8?Q?ajeaY61etI8=3D?=
+X-Microsoft-Antispam: BCL:0;
+ ARA:13230040|366016|1800799024|376014|7416014|921020; 
+X-Microsoft-Antispam-Message-Info: =?utf-8?B?aWpiaDRxMkxKOE1xTFQ3a0VpMUw4aVJsS3BXUDFES0kwbW5UKytTczA1SDZi?=
+ =?utf-8?B?bnhaYnY4SlRlSHNpWnFWMnJxOEVVZTB3cUlBbldpTE9QallhSmRmcXhyWXk0?=
+ =?utf-8?B?aEFpMUdFTjM1V01salZzamVKQVoyeHhzdk9xRW55cVF1N3FQOFo4YXZzM0dx?=
+ =?utf-8?B?M1ZTUzRvSzRzaDVoQWNKOU1vSDlQNThpWk0zdjcyKzhhL1VObENrQVJYd1dJ?=
+ =?utf-8?B?bG9QeS9rZU5qelBrNlpmdHVPMmtvdUZrbTd1ZmxaUUZIMlZqRDZDNmZyWGw4?=
+ =?utf-8?B?ekZXWFB1czlmdEl3TlhSSlZaOEppb2hyOUFIMUtMV0poQWF2bFN5WFE3dURP?=
+ =?utf-8?B?eFdoZnFkemJyYUd3T00zSFZnN0NSUDRGb3BHdXF0TEUxRzZzOC9jaFlsSXN1?=
+ =?utf-8?B?YUVjbDF6Zll4UXpGbDA2M1JIV2NTRmdqV0J1RUhqRVdlbDhkU3kyY0N6MTJF?=
+ =?utf-8?B?SDlTWEkyNGNMRVVadklZRWZXRk5DVm1BeTJCRFpScWFsYUVaaWRub1d5MGlN?=
+ =?utf-8?B?SkFoamEyVU5jYlhtT0J3TE5xU2FCZ1JmbW8waVJXZDZjREF6YTkrUUVab0tZ?=
+ =?utf-8?B?RlBTMmI4cVJHN2ErZ0lCVHRneC95ckFraGY2WXEremVRRm5tNjFlMjFrOTVw?=
+ =?utf-8?B?K3hzOEdGU1FsRDY1NU9aRzVhd3kvM1RhZmU4anFGaEdWZXlQTGZNTE5VTHBD?=
+ =?utf-8?B?KzBWREhSQjA3QWFQdWRGWVhqU28vc2JWUlJwZjZCb3YwMU13SXF4UkNkd3Y4?=
+ =?utf-8?B?dUk5K1BnalZzT0hJMUtyaFZTWkQwUmEyMUdKMHVZS0VCYVVvbVZCdXM5UDNn?=
+ =?utf-8?B?Z3J1ZkZwMkNiLzFFY3NDREEwRFlpeXhqUUxjd3ZNdVU4SW5xdlczcnhwdlNI?=
+ =?utf-8?B?d3VpdzUwZUVSYnlWWGNqbFlsN0RhaW1lVkZRc1RjQjBYYzBENWV0TG9PTDJJ?=
+ =?utf-8?B?YVl4K3A3V1NMSUdmV0ZyK012eW5mQzJnOFBDUExYRXN1eWFXdEJqdm1uMVVo?=
+ =?utf-8?B?aHZubUJFR1duQUZDK2JMclc3djkzaTN6amN0T28rKyt0QksxQ0FuSjZFZVQ4?=
+ =?utf-8?B?bVVkVHBObEpBNE52dlNxQVdjelA1MDJ0NytZWitOYnRJa1ptQ1NFWWwwMFJM?=
+ =?utf-8?B?SmRsWHFFZFJJaW1IdTF6TDVFcTRxby9UdXNsQWtLYlZxTVNmQ1dhK3o1bXlK?=
+ =?utf-8?B?bWV6MGNQS0F5L3BqbGNkbG95Z0l4b0t5Tjc4TUFFQkFOeGorSDNyNW1EZlF0?=
+ =?utf-8?B?RzAwS09UaHV4enBkWnB5VjJnTFZqYVc3MTcyYTNQVjdnQjVJOHdVWm0zMGVi?=
+ =?utf-8?B?d3JqMk5WM2d4NUFoY1pLcHZoSXg5RnlyM1p6czhZQ2ZKeEZucThlblRFVDZ1?=
+ =?utf-8?B?c3J5ZFQ1aWI2SXgzNlEzZFFCNEl6VHhGQktvMXl4RHVkK0xmdjRrT25wdkRK?=
+ =?utf-8?B?MkZiWTU1aUlvVTJUZmtyNlQ2NzlpQzMvMnhmd1FsUFpQSmNsaUlVcDhXeGQ0?=
+ =?utf-8?B?czYzK0RWR2RqcVZlNTM4dDVabnZtNWw5cFlCTDR6Kyt0OUlzcG5wSnVHMC9N?=
+ =?utf-8?B?akJYR2d2K1lwRk9FVzVtYmJRNENvZ0h2ei9JTlZ6SFV4T0ZkYko4L3VlSDEy?=
+ =?utf-8?B?YmRGeWxCVmdJdFo2N0pwT1l5T0IzaXVVQkdPUU1QdmkwNUFWZ1QxZTE0bnhS?=
+ =?utf-8?B?ZmYyNEZia1R0OFd1QnVLQUJYcU5QMXFTYll1cDMyTzc5OHRtVkhqZkYya0VZ?=
+ =?utf-8?B?SEh5czhQZTZtWklJRHZZcXc0QnN0a3NxUHREbnkyUGJaclBUQWhYd3VhMElC?=
+ =?utf-8?B?N2hDYk9NaXNVWC9jdUIwai9zK0c3TXprVFVUTEdrREZDc1g4L290YkFnSXR2?=
+ =?utf-8?B?U0dYTEVPbHI2eWx6NzZGWVloWGRTeW5QTFlKSzFPd2x5ZVlZU3E5N3pjUVp6?=
+ =?utf-8?B?ZEtaWHpMTEJWcFIwdUlQVFVOaXozYWRrRkFSRkVKclUvZnh2aWVxV1Y4azFy?=
+ =?utf-8?B?VkNsK2JrUVlBPT0=?=
 X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
  IPV:NLI; SFV:NSPM; H:SN7PR12MB8059.namprd12.prod.outlook.com; PTR:; CAT:NONE;
- SFS:(13230040)(366016)(1800799024)(7416014)(376014); DIR:OUT; SFP:1101; 
+ SFS:(13230040)(366016)(1800799024)(376014)(7416014)(921020); DIR:OUT; SFP:1101;
 X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?UDBmZzNSYVByZ3NxTjB5QVYzd1BoZDFWc2sydkN2eXJCZUNoYnllUjd0SUtC?=
- =?utf-8?B?ZHUwQ1Rmc015b3gybmV3bUFlUXowSCtVc0R6Z0k3OStjOTR5U3F1M2ovZy9N?=
- =?utf-8?B?SmxiOXZpTnRNdTNuME9KVVJNbGx0VFk5Q1ltaXhFMU1pR2J4bGVmZDBsclRK?=
- =?utf-8?B?NlBoT0hUTWFJenF0dGhQc2gySWNhN0duU0ZDYVFHN3BHZTIzY2pVdkJhbXV2?=
- =?utf-8?B?V0RibzBFbHA0VS9oQ2ZBUGxsZEZXTnpFUXpHd1hzUW1sZ1BpcTgzOThqTGIw?=
- =?utf-8?B?V3RYU1A5NkFHdGtFTWFQVXdqRVY0WHN5MkJ1VFFuQ2JoMjFmV2wvWVZUdmht?=
- =?utf-8?B?dUcvRks4TklmOG9PRFVDSDhObmpsTHB6MGRIUWtPbjBsVUI5dVZkM2lyRHhu?=
- =?utf-8?B?N1lWN05yRHFwLytPSjBOZy9XOWhocEErK005WjROTStDMEZnMC81OEhIUzFt?=
- =?utf-8?B?ckZRUG50dVR1bkNsMU9qUWo2K0oxbFF0RUdBUzF0NFVoOE0xZWQyaFdmRTBO?=
- =?utf-8?B?N21jUE9la2RBakU4V2lXbzUvV1RFdGQvYnpoNm5BaWx2ZVI1c1pkMjNta09I?=
- =?utf-8?B?bEJsMkZVVGpaOE1uZWpjditUcUNGN1NXc1dzNm9xenFMS1NUQ3lJdlRCclhM?=
- =?utf-8?B?dUhnMk5QYUVWM1hSNzhxMUtWRnNTRjRDaUx4UUdUREVLYUVGTWxkTmo1TUdo?=
- =?utf-8?B?ek9TZjA0TU82UWNnbUtDL0JwdzE5R0twYStqM21QMzM0eWVCUk45TnVjRGJQ?=
- =?utf-8?B?UFF1NVBhZUxzRzQwK2FxVkJ2a0hTQXQxZ1FxcDNia09UdW13bEZwYnRsdy9S?=
- =?utf-8?B?bG92N25ETkwyRkxJdm9oL00reFFzTktxS1ZKSXBlUFI1WkRIOVhQMCt3ajEx?=
- =?utf-8?B?cG45Q0ZJL3AwdHBmd0E3QmZQbmk3MDhndlRodDRPL2pOZXloY2tLenFORzUz?=
- =?utf-8?B?QmpTWUlMVVZmVkVONml6bk9PSS9TOG1IbGhZZXdsVlpkTVRTQTlLWVZpK1Ew?=
- =?utf-8?B?RnkvUUJyK21OcTNrVzBLSnhBVGkycGc3S215ODIwa2dIa2VTWnlkZWtmSHBH?=
- =?utf-8?B?YzJWYmo0Ry9udE13REs0UnFTMHhLSlM3QVNRNnpnMGdsSGhXNXhxdmtHQTcx?=
- =?utf-8?B?WkdTMS83TndydnZ2ekNyRHA1cUVTWXpITmhuWUJpMUNsVmVTMzhLdmdncGhB?=
- =?utf-8?B?VFYxc2QzZXNsbUJzRVNmZS9RSXplUzBlZDNXZFY5TE41eFoyQlhRNk5uRXJE?=
- =?utf-8?B?UE1nUUJRY0hWV3YxN1lGYUJ3d0JrUXNacm1TS3BYd3dNdFBwK1RVbHZjOXQy?=
- =?utf-8?B?enM2RW9QZHZVQUtDTmRacDIzdFBkVGY2N3U2ZkRTY2tkMVhaREtHVitVZkFr?=
- =?utf-8?B?cDF2RUVpS0pGQ2E5SHZzM2JHRGhCZVBYb1k3bFZrbVp3alZaYnRtdkNTMlZD?=
- =?utf-8?B?TGRMT2U0VGxnNnZqcEptZzRYSHQ0UThiNU5nYTZtWnNLZmdaK1FoSG1qcFB3?=
- =?utf-8?B?cHZJM3B6YU90QXZXVmVZQXg0MmtzVEVaY2xucnJDRURqaUphbXZXTlpqdGxY?=
- =?utf-8?B?UkI0aHVCbjRjWEJZQUNrUVdzdmlJdWhOc21WWlUwbWk3YnZWNGpvK1k3ZjZL?=
- =?utf-8?B?NTBCSVpKVmFlVHhVQmcwNlJGZWhMT1gzYi82d3YyL3hOYTJLdXhTcHFhcGZG?=
- =?utf-8?B?Zkp1QmYxZGtVYk1NZkpIeXIwcVpkQkpSK1BnNTBKY2ZsMkR3ZHUyZnExd2dw?=
- =?utf-8?B?ZTJ1YWU3SXBnV28xM2pKTTd2MUhKc1U1OFFldXhsd21xY3pSM3FwLy9lQ1hM?=
- =?utf-8?B?V1BaN0VsZXpLb3ZyeVdPQVpDeDRlVW1ORjZsaFBSaEpMd2dQR2UyTDBCNm9u?=
- =?utf-8?B?MkE3QkF0eCtmbmhOODhDTERoZUw5a0l3bHM0eVpnSTgzZ3k1Ris2THFpbGlL?=
- =?utf-8?B?M3I2YkxaVVJHTzNTSytmR1NCNkRwNGprMERPMlc1aWg4dWlUUlpHWVQ3RXJ5?=
- =?utf-8?B?YzNJSHRZaFVwQ0N0c1NrT2NEU25waU1NVXNxNnJLWGc0R2lsdjluZVJkVElC?=
- =?utf-8?B?di9oUDl2TW5aSDJsM0lScFNBdSs2ZkwzcnptbDBQS2pYWjMvUi9GcUVNbm9U?=
- =?utf-8?Q?dpmHiEunyCJikY4ZsJ6924zjN?=
+X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?ZEVzNWVPWEFQRkNVelFoQjdYT0R4ZGNPelNKemd4TU03THE0OWR5L084L1No?=
+ =?utf-8?B?Z0RuWWd0TmVLUGtWMkdiNExQYnB6K3VPYk1jTXloQ2x3c2VzdjFjNTREQThN?=
+ =?utf-8?B?UUZBeFRSdThRclcrem05cDk4RjYyamU1dkVSV3FCb3FKMDZRS3U0ZWlibXJ1?=
+ =?utf-8?B?REVXdytXVVBuNm9XOWdRZHFid04rY3NjVWNjVEJFbTAzRHJlMmhHRm9wWXlT?=
+ =?utf-8?B?NGdXVExkSDFPNEV4QnV1Y01xOEFCazZmSzFubE5IWXlHUUVsRWw2S2N2UjJZ?=
+ =?utf-8?B?Ukg2ekkzWEZrRDhNVjhkZ0RYQjNhYzFxR2FLdC9UMWk5SlZnNnU3eGlaMDFJ?=
+ =?utf-8?B?OThHK09TT1hvWDl4YVNYNkZIMEo5d2hwRC9iT0tuYno1WlFBQ3JTaE5EVmRM?=
+ =?utf-8?B?UG5laGNoeXRrOGVSYVl6NVlYNmRWRy92ckdDZTRTNkdmWE9aTmw0NHBDTnBy?=
+ =?utf-8?B?bFoxZ2JkdnZxU1VhbC80VlZhOGh3NWRtdWJHeWpWVE9hWmh0aUZ6Z0hBUy9y?=
+ =?utf-8?B?VENacEFwTlA1UnlieXQ3bllLbG1tQUsrMnZQdG1FVm9SOEZmOHhLcy85dWZt?=
+ =?utf-8?B?ZVFZSUNjZ2FEUUM1UWZxR1doUzFnYldTcDFNZWpzTEhINFBvUVdxK0d6VG9I?=
+ =?utf-8?B?bi9rMkdid1RmUlc3dkRZYUxwSXlXVy9wcXJRTkUxb2JrVzQrZkx1Z0FGWWtJ?=
+ =?utf-8?B?cEtFWENKelhTL3NkdmJTYm9ZbzJGdDlZMjNBSER3dysyTnNIMVVhTElaeUxM?=
+ =?utf-8?B?VTEzMmZTckxyZVVYblNWOCszUC9BZzYvOFlyd2RYM1pNejhyQ2pnSkx0SENN?=
+ =?utf-8?B?TkxKbjJPNXNPc3E5MnRYUlk0VE9yelRYVVdtT0JXSUkrMk9WdlorbG9odCtC?=
+ =?utf-8?B?SGRzUm0zai8yWEdTTEREaEpBNDdmQVpvM0NJNWFHOTR3bHpNbVpKeVZLVkh3?=
+ =?utf-8?B?cElTYUNXU0kzZkZ6dnNSejBRbjdmY2lmRlBLR244UlExRUNwS2hVOWZHUDBO?=
+ =?utf-8?B?Tks5czUzaGt5bzkxVEsyOXZiZFJVOWFlaG1LaGlYdFZLVWNFYnlTS2NVLytX?=
+ =?utf-8?B?bGtOSXhxNXgvQURjdkNRekQ5TCsvV0FuVkpMVmJzNVBFVU0wNjNKeFBma1JZ?=
+ =?utf-8?B?OVBETTVzRTh1T2RadmhKd2wyWWlGcjBEaFk3cUdlUFR6ckErRFgzQ1doVENu?=
+ =?utf-8?B?WkxCRjdlZTJtMUJJUWJWRENtN2pWSjI5S0Njbm1sQ0N1Zys5OGVOYkdncGRt?=
+ =?utf-8?B?SnNQTS9EM2FZeUFzRjFuNnBGOFk2enRGMy9hWUFsSVU2T1hmdlJmVWVuTHNo?=
+ =?utf-8?B?NXVXckszNG96YUJVRm5rdWFvZDZCWWNScWFXZ0J3enUrK0lTejlXZ203b1Bq?=
+ =?utf-8?B?cm1YekJtdUUzQkY5dFBDWlZ1dDEwaVNoVVZBbEdJa291eWhvOEZFQ1F0eXFE?=
+ =?utf-8?B?cG9RQlhmdkRKWEc2V3pXWSsvSE1iS1htZmNTQXJZam9VR01RbG56dnJKWEpV?=
+ =?utf-8?B?Y25BSGRxbXZkS3crK0orNWNEMlVNM2FSV2lnWWtaMnluQkt0VlV5V3YwdFdH?=
+ =?utf-8?B?QnhSNVJvalhrUFZ0SDJvaGwzci9ObStJdGdVbGlyNWhYYmRQUDNaRm9NbTRZ?=
+ =?utf-8?B?b0oxK2FaU1dEeDk1T2lPZkNMMXpHOFRsWFFaa1VIUjExeTBabWNCWGtkc0N2?=
+ =?utf-8?B?TVJWREFiTHBBZzVaTFZDbDBkUTAvTVVHb2VxbFVPV2IxTXIwNnRUWkFiNldT?=
+ =?utf-8?B?cmNBdjJOZitnT0RHNVBtaWMrUGxiVjB0N2dxUFpLQlZOaEpjandGUEdWTXhL?=
+ =?utf-8?B?eit3Qk55anpnSHVxQkk5Q3lpeEFjZkNkYUtiQk9DWVBObFRydmlLRVhqYWdp?=
+ =?utf-8?B?d25QOXd0NWhFTTNYNEZQY05pNFJ1eXhBNFB2YWRBTWFhUW9yNjZaZHpIeExD?=
+ =?utf-8?B?L1plYk94ZGFlUENKOXBjV2dZOE1BYzR5cVZRdStSK0cvZUJPeEk2ZUhVTTJp?=
+ =?utf-8?B?SlNTTzN1NjRaNWoraHNNSERtQThnNWNuU3ZEeUp1NDc3K2pvN3B2UGFhU1pN?=
+ =?utf-8?B?SFdJdlpDOWZydUtSSUpmQUZZdTJwTjI0UGt6dERLdTEvdmxqNzZuSmpQb0Zm?=
+ =?utf-8?Q?/bwgIpE2621I5wAGiKnKc1+ad?=
 X-OriginatorOrg: Nvidia.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 4fb911b4-1e30-4b6b-747e-08dd9728e0dc
+X-MS-Exchange-CrossTenant-Network-Message-Id: dfa1c334-e2da-4ed1-8382-08dd97688576
 X-MS-Exchange-CrossTenant-AuthSource: SN7PR12MB8059.namprd12.prod.outlook.com
 X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 19 May 2025 22:59:58.5094 (UTC)
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 20 May 2025 06:35:32.9708 (UTC)
 X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
 X-MS-Exchange-CrossTenant-Id: 43083d15-7273-40c1-b7db-39efd9ccc17a
 X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: tuDoM6F83dYeRsraIRr/qAbfSPar0Jo5LlPpuRH94tjHcw0bh3HV0RjdOCuIGfB3bisEIqa92/JjrpJadYfUFA==
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: SA3PR12MB8024
+X-MS-Exchange-CrossTenant-UserPrincipalName: vPHOwIy1/jH18K/fQOZz3GRE15kI0fh9ePDkK0SO40f2QJ+awOrSPHqcO8syBpqcJIrnjDFSQI5dfjFvqSa2wQ==
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: DM4PR12MB6447
 X-Mailman-Approved-At: Mon, 06 Oct 2025 20:46:16 +0000
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
@@ -177,308 +187,65 @@ List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-Hi Danilo,
 
-On 5/14/2025 12:23 PM, Danilo Krummrich wrote:
-> On Wed, May 07, 2025 at 10:52:43PM +0900, Alexandre Courbot wrote:
->> +/// PCI Data Structure as defined in PCI Firmware Specification
->> +#[derive(Debug, Clone)]
->> +#[repr(C)]
->> +struct PcirStruct {
->> +    /// PCI Data Structure signature ("PCIR" or "NPDS")
->> +    pub signature: [u8; 4],
->> +    /// PCI Vendor ID (e.g., 0x10DE for NVIDIA)
->> +    pub vendor_id: u16,
->> +    /// PCI Device ID
->> +    pub device_id: u16,
->> +    /// Device List Pointer
->> +    pub device_list_ptr: u16,
->> +    /// PCI Data Structure Length
->> +    pub pci_data_struct_len: u16,
->> +    /// PCI Data Structure Revision
->> +    pub pci_data_struct_rev: u8,
->> +    /// Class code (3 bytes, 0x03 for display controller)
->> +    pub class_code: [u8; 3],
->> +    /// Size of this image in 512-byte blocks
->> +    pub image_len: u16,
->> +    /// Revision Level of the Vendor's ROM
->> +    pub vendor_rom_rev: u16,
->> +    /// ROM image type (0x00 = PC-AT compatible, 0x03 = EFI, 0x70 = NBSI)
->> +    pub code_type: u8,
->> +    /// Last image indicator (0x00 = Not last image, 0x80 = Last image)
->> +    pub last_image: u8,
->> +    /// Maximum Run-time Image Length (units of 512 bytes)
->> +    pub max_runtime_image_len: u16,
->> +}
+
+On 5/16/2025 4:38 PM, Timur Tabi wrote:
+> n Wed, 2025-05-07 at 22:52 +0900, Alexandre Courbot wrote:
+>> +impl FwSecBiosImage {
+>> +    fn setup_falcon_data(
+>> +        &mut self,
+>> +        pdev: &pci::Device,
+>> +        pci_at_image: &PciAtBiosImage,
+>> +        first_fwsec_image: &FwSecBiosImage,
+>> +    ) -> Result<()> {
+>> +        let mut offset = pci_at_image.falcon_data_ptr(pdev)? as usize;
+>> +
+>> +        // The falcon data pointer assumes that the PciAt and FWSEC images
+>> +        // are contiguous in memory. However, testing shows the EFI image sits in
+>> +        // between them. So calculate the offset from the end of the PciAt image
+>> +        // rather than the start of it. Compensate.
+>> +        offset -= pci_at_image.base.data.len();
+>> +
+>> +        // The offset is now from the start of the first Fwsec image, however
+>> +        // the offset points to a location in the second Fwsec image. Since
+>> +        // the fwsec images are contiguous, subtract the length of the first Fwsec
+>> +        // image from the offset to get the offset to the start of the second
+>> +        // Fwsec image.
+>> +        offset -= first_fwsec_image.base.data.len();
+>> +
+>> +        self.falcon_data_offset = Some(offset);
+>> +
+>> +        // The PmuLookupTable starts at the offset of the falcon data pointer
+>> +        self.pmu_lookup_table = Some(PmuLookupTable::new(&self.base.data[offset..])?);
+>> +
+>> +        match self
+>> +            .pmu_lookup_table
+>> +            .as_ref()
+>> +            .ok_or(EINVAL)?
+>> +            .find_entry_by_type(FALCON_UCODE_ENTRY_APPID_FWSEC_PROD)
+>> +        {
+>> +            Ok(entry) => {
+>> +                let mut ucode_offset = entry.data as usize;
+>> +                ucode_offset -= pci_at_image.base.data.len();
+>> +                ucode_offset -= first_fwsec_image.base.data.len();
+>> +                self.falcon_ucode_offset = Some(ucode_offset);
+>> +                if cfg!(debug_assertions) {
+>> +                    // Print the v3_desc header for debugging
+>> +                    let v3_desc = self.fwsec_header(pdev.as_ref())?;
+>> +                    pr_info!("PmuLookupTableEntry v3_desc: {:#?}\n", v3_desc);
+>> +                }
+>> +            }
+>> +            Err(e) => {
+>> +                dev_err!(
+>> +                    pdev.as_ref(),
+>> +                    "PmuLookupTableEntry not found, error: {:?}\n",
+>> +                    e
+>> +                );
+> Shouldn't you return an error here?
 > 
-> Here and in a couple more cases below, please don't use pub for fields of
-> private structures.
+> If not, then maybe this should probably be dev_warn.
 
-Fixed thanks.
-
->> +
->> +impl PcirStruct {
->> +    fn new(pdev: &pci::Device, data: &[u8]) -> Result<Self> {
->> +        if data.len() < core::mem::size_of::<PcirStruct>() {
->> +            dev_err!(pdev.as_ref(), "Not enough data for PcirStruct\n");
->> +            return Err(EINVAL);
->> +        }
->> +
->> +        let mut signature = [0u8; 4];
->> +        signature.copy_from_slice(&data[0..4]);
->> +
->> +        // Signature should be "PCIR" (0x52494350) or "NPDS" (0x5344504e)
->> +        if &signature != b"PCIR" && &signature != b"NPDS" {
->> +            dev_err!(
->> +                pdev.as_ref(),
->> +                "Invalid signature for PcirStruct: {:?}\n",
->> +                signature
->> +            );
->> +            return Err(EINVAL);
->> +        }
->> +
->> +        let mut class_code = [0u8; 3];
->> +        class_code.copy_from_slice(&data[13..16]);
->> +
->> +        Ok(PcirStruct {
->> +            signature,
->> +            vendor_id: u16::from_le_bytes([data[4], data[5]]),
->> +            device_id: u16::from_le_bytes([data[6], data[7]]),
->> +            device_list_ptr: u16::from_le_bytes([data[8], data[9]]),
->> +            pci_data_struct_len: u16::from_le_bytes([data[10], data[11]]),
->> +            pci_data_struct_rev: data[12],
->> +            class_code,
->> +            image_len: u16::from_le_bytes([data[16], data[17]]),
->> +            vendor_rom_rev: u16::from_le_bytes([data[18], data[19]]),
->> +            code_type: data[20],
->> +            last_image: data[21],
->> +            max_runtime_image_len: u16::from_le_bytes([data[22], data[23]]),
->> +        })
-> 
-> Quite some of those fields seem unused, do we still want to have them? Same for
-> other structures below.
-
-I think we discussed this in the previous posting as well. As such, I am not
-keen on removing unused fields of structures part of 'standard' specifications
-since I only see drawbacks of doing so:
-1. Obfuscation
-2. Replacement of the fields with some kind of padding so that size_of() works.
-3. Goes in the opposite direction of documentation and transparency in how the
-structures work.
-4. Partially filling structures.
-
-
->> +
->> +    /// Check if this is the last image in the ROM
->> +    fn is_last(&self) -> bool {
->> +        self.last_image & LAST_IMAGE_BIT_MASK != 0
->> +    }
->> +
->> +    /// Calculate image size in bytes
->> +    fn image_size_bytes(&self) -> Result<usize> {
->> +        if self.image_len > 0 {
->> +            // Image size is in 512-byte blocks
->> +            Ok(self.image_len as usize * 512)
->> +        } else {
->> +            Err(EINVAL)
->> +        }
->> +    }
->> +}
->> +
->> +/// BIOS Information Table (BIT) Header
->> +/// This is the head of the BIT table, that is used to locate the Falcon data.
->> +/// The BIT table (with its header) is in the PciAtBiosImage and the falcon data
->> +/// it is pointing to is in the FwSecBiosImage.
->> +#[derive(Debug, Clone, Copy)]
->> +#[expect(dead_code)]
->> +struct BitHeader {
->> +    /// 0h: BIT Header Identifier (BMP=0x7FFF/BIT=0xB8FF)
->> +    pub id: u16,
->> +    /// 2h: BIT Header Signature ("BIT\0")
->> +    pub signature: [u8; 4],
->> +    /// 6h: Binary Coded Decimal Version, ex: 0x0100 is 1.00.
->> +    pub bcd_version: u16,
->> +    /// 8h: Size of BIT Header (in bytes)
->> +    pub header_size: u8,
->> +    /// 9h: Size of BIT Tokens (in bytes)
->> +    pub token_size: u8,
->> +    /// 10h: Number of token entries that follow
->> +    pub token_entries: u8,
->> +    /// 11h: BIT Header Checksum
->> +    pub checksum: u8,
->> +}
->> +
->> +impl BitHeader {
->> +    fn new(data: &[u8]) -> Result<Self> {
->> +        if data.len() < 12 {
->> +            return Err(EINVAL);
->> +        }
->> +
->> +        let mut signature = [0u8; 4];
->> +        signature.copy_from_slice(&data[2..6]);
->> +
->> +        // Check header ID and signature
->> +        let id = u16::from_le_bytes([data[0], data[1]]);
->> +        if id != 0xB8FF || &signature != b"BIT\0" {
->> +            return Err(EINVAL);
->> +        }
->> +
->> +        Ok(BitHeader {
->> +            id,
->> +            signature,
->> +            bcd_version: u16::from_le_bytes([data[6], data[7]]),
->> +            header_size: data[8],
->> +            token_size: data[9],
->> +            token_entries: data[10],
->> +            checksum: data[11],
->> +        })
->> +    }
->> +}
->> +
->> +/// BIT Token Entry: Records in the BIT table followed by the BIT header
->> +#[derive(Debug, Clone, Copy)]
->> +#[expect(dead_code)]
->> +struct BitToken {
->> +    /// 00h: Token identifier
->> +    pub id: u8,
->> +    /// 01h: Version of the token data
->> +    pub data_version: u8,
->> +    /// 02h: Size of token data in bytes
->> +    pub data_size: u16,
->> +    /// 04h: Offset to the token data
->> +    pub data_offset: u16,
->> +}
->> +
->> +// Define the token ID for the Falcon data
->> +pub(in crate::vbios) const BIT_TOKEN_ID_FALCON_DATA: u8 = 0x70;
-> 
-> This can just be private.
-
-Yep, fixed.
-
->> +
->> +impl BitToken {
->> +    /// Find a BIT token entry by BIT ID in a PciAtBiosImage
->> +    pub(in crate::vbios) fn from_id(image: &PciAtBiosImage, token_id: u8) -> Result<Self> {
-> 
-> Same here.
-
-Fixed.
-
-> <snip>
-> 
->> +struct PciAtBiosImage {
->> +    base: BiosImageBase,
->> +    bit_header: Option<BitHeader>,
->> +    bit_offset: Option<usize>,
-> 
-> Why are those Options? AFAICS, this structure is only ever created from
-> 
-> 	impl TryFrom<BiosImageBase> for PciAtBiosImage
-> 
-> and there you fail if you can't find the bit header anyways.
-> 
-> Also BitToken::from_id fails if bit_header == None, and it doesn't seem to be
-> used anywhere else.
-> 
-> I think we should remove the Option wrapper for both.
-
-Yes, thanks. That does simplify the code, I made the change and it works.
-
-
-> 
->> +/// The PmuLookupTableEntry structure is used to find the PmuLookupTableEntry
->> +/// for a given application ID. The table of entries is pointed to by the falcon
->> +/// data pointer in the BIT table, and is used to locate the Falcon Ucode.
->> +#[expect(dead_code)]
->> +struct PmuLookupTable {
->> +    version: u8,
->> +    header_len: u8,
->> +    entry_len: u8,
->> +    entry_count: u8,
->> +    table_data: KVec<u8>,
->> +}
->> +
->> +impl PmuLookupTable {
->> +    fn new(data: &[u8]) -> Result<Self> {
->> +        if data.len() < 4 {
->> +            return Err(EINVAL);
->> +        }
->> +
->> +        let header_len = data[1] as usize;
->> +        let entry_len = data[2] as usize;
->> +        let entry_count = data[3] as usize;
->> +
->> +        let required_bytes = header_len + (entry_count * entry_len);
->> +
->> +        if data.len() < required_bytes {
->> +            return Err(EINVAL);
->> +        }
->> +
->> +        // Create a copy of only the table data
->> +        let mut table_data = KVec::new();
->> +
->> +        // "last_entry_bytes" is a debugging aid.
->> +        let mut last_entry_bytes: Option<KVec<u8>> = if cfg!(debug_assertions) {
->> +            Some(KVec::new())
->> +        } else {
->> +            None
->> +        };
->> +
->> +        for &byte in &data[header_len..required_bytes] {
->> +            table_data.push(byte, GFP_KERNEL)?;
-> 
-> This should just be
-> 
-> 	table_data.extend_from_slice(&data[header_len..required_bytes], GFP_KERNEL)?;
-> 
-> so you don't need the loop and potentially lots of re-allocations.
-> 
-> Subsequently you can implement the debugging stuff as
-> 
-> 	if cfg!(debug_assertions) {
-> 	    let mut last_entry_bytes = KVec::new();
-> 	
-> 	    for &byte in &data[header_len..required_bytes] {
-> 	        // Debugging (dumps the table data to dmesg):
-> 	        last_entry_bytes.push(byte, GFP_KERNEL)?;
-> 	
-> 	        let last_entry_bytes_len = last_entry_bytes.len();
-> 	        if last_entry_bytes_len == entry_len {
-> 	            pr_info!("Last entry bytes: {:02x?}\n", &last_entry_bytes[..]);
-> 	            last_entry_bytes = KVec::new();
-> 	        }
-> 	    }
-> 	}
-
-Ok, that's better, I took the opportunity to replace this code with:
-
-(Sorry for wrapping)
-
-        // Create a copy of only the table data
-        let data_entries = &data[header_len..required_bytes];
-        let table_data = {
-            let mut ret = KVec::new();
-            ret.extend_from_slice(&data_entries, GFP_KERNEL)?;
-            ret
-        };
-
-        // Debug logging of entries (dumps the table data to dmesg)
-        if cfg!(debug_assertions) {
-            for i in 0..entry_count {
-                pr_info!("PMU entry: {:02x?}\n", &data_entries[i * entry_len..(i
-+ 1) * entry_len]);
-            }
-        }
-
-
-> In general, I feel like this patch utilizes the Option type way too much and
-> often without actual need. Can you please also double check?
-
-Yeah, sorry, I'm somewhat new to rust. :-D. I am going through all my Options now.
-
-I will continue addressing the rest of the comments and those in the other email
-and will reply soon. Thanks!
+Good catch, fixed! Thanks,
 
  - Joel
 
