@@ -2,45 +2,64 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id E9412ABD233
-	for <lists+nouveau@lfdr.de>; Tue, 20 May 2025 10:42:47 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 95727ABD364
+	for <lists+nouveau@lfdr.de>; Tue, 20 May 2025 11:31:11 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id EF15B10E437;
-	Tue, 20 May 2025 08:42:45 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id BD8DE10E455;
+	Tue, 20 May 2025 09:31:08 +0000 (UTC)
 Authentication-Results: gabe.freedesktop.org;
-	dkim=pass (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="J+lFtlLU";
+	dkim=pass (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="IXBc2pGq";
 	dkim-atps=neutral
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
 Received: from nyc.source.kernel.org (nyc.source.kernel.org [147.75.193.91])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 952C610E420;
- Tue, 20 May 2025 08:42:44 +0000 (UTC)
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 8C55410E44B;
+ Tue, 20 May 2025 09:31:05 +0000 (UTC)
 Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by nyc.source.kernel.org (Postfix) with ESMTP id C8CBEA4E135;
- Tue, 20 May 2025 08:42:43 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 12EDAC4CEE9;
- Tue, 20 May 2025 08:42:41 +0000 (UTC)
+ by nyc.source.kernel.org (Postfix) with ESMTP id 931D4A4C865;
+ Tue, 20 May 2025 09:30:59 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 68E36C4CEE9;
+ Tue, 20 May 2025 09:30:54 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1747730563;
- bh=L7UvoMIcAqAL9KwvDgu28lLIe9XhyYkSV008NPY5tKI=;
- h=Date:From:To:Cc:Subject:From;
- b=J+lFtlLUOZ6D54IiYG8SE07FGhIStJ2NNef6ABfbATN+uewjv6Cf2JBvHHwBJzzhK
- b3iFu/ydkX59y5BFuKQK+/UIIe/RFNLvaA69QyXoqlKjN3zl3QDTV2mcFa3JOQs8wF
- qLKl4M4XmjzhW97+GRAw7wo14WTFC219gzHXAzDzFEleyodWwyWd58PjDNS9J6GjXx
- dNTW2/6xGGDf7QX99hzBjFE0XUYJkq1H8prmUqxXTotC6aagmbWRTW/m665At8xG8E
- lynBdEb337L9mrD4ZqXvbjiHwbb491xG+rtxdo9K2cDEXtBVC+UYcRZwhbsP87rkXj
- WleatUVB73YAA==
-Date: Tue, 20 May 2025 10:42:39 +0200
+ s=k20201202; t=1747733459;
+ bh=jcb4aPAbKPsWRg6KidM3qub1Bb9HpbBNOe12kNEXwSU=;
+ h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
+ b=IXBc2pGqp+VVik11Y7jfvML+CkrotItGRoxjZZGTMo5og35cO210IyMChrOKrfY7c
+ dysWNOqI39ZDurXZ9RHWc/LOhAm3EQIcmorx05+Z6zWEDRKFwFMiK7xRvH8kCgDwJU
+ X9x/X4UVhK9JqYuFF1ed3w4IAtuMM+T9wwNcKCIFkg5UcK/qsYlBkDLUBnoCKHaFj6
+ FGxxEPzdpyH2O4HYQXhq/Fn5b50S297R9OaR7SkYtCeEpdio2q16uw3/ooM1QLkAVi
+ ONhWUU9/6Lnup0BcTlsA4fIbqCTRj4QQZQSxFVA+8itV+AZbiTGzB47zWPXnk7qLMh
+ UwdOgr9LG2HeA==
+Date: Tue, 20 May 2025 11:30:51 +0200
 From: Danilo Krummrich <dakr@kernel.org>
-To: Dave Airlie <airlied@gmail.com>, Simona Vetter <simona@ffwll.ch>
-Cc: Miguel Ojeda <ojeda@kernel.org>,
- Greg Kroah-Hartman <gregkh@linuxfoundation.org>,
- nouveau@lists.freedesktop.org, dri-devel@lists.freedesktop.org
-Subject: [GIT PULL] Nova changes for v6.16
-Message-ID: <aCxAf3RqQAXLDhAj@cassiopeiae>
+To: Joel Fernandes <joelagnelf@nvidia.com>
+Cc: Alexandre Courbot <acourbot@nvidia.com>, Miguel Ojeda <ojeda@kernel.org>,
+ Alex Gaynor <alex.gaynor@gmail.com>,
+ Boqun Feng <boqun.feng@gmail.com>, Gary Guo <gary@garyguo.net>,
+ =?iso-8859-1?Q?Bj=F6rn?= Roy Baron <bjorn3_gh@protonmail.com>,
+ Benno Lossin <benno.lossin@proton.me>,
+ Andreas Hindborg <a.hindborg@kernel.org>,
+ Alice Ryhl <aliceryhl@google.com>, Trevor Gross <tmgross@umich.edu>,
+ David Airlie <airlied@gmail.com>, Simona Vetter <simona@ffwll.ch>,
+ Maarten Lankhorst <maarten.lankhorst@linux.intel.com>,
+ Maxime Ripard <mripard@kernel.org>,
+ Thomas Zimmermann <tzimmermann@suse.de>, Jonathan Corbet <corbet@lwn.net>,
+ John Hubbard <jhubbard@nvidia.com>, Ben Skeggs <bskeggs@nvidia.com>,
+ Timur Tabi <ttabi@nvidia.com>, Alistair Popple <apopple@nvidia.com>,
+ linux-kernel@vger.kernel.org, rust-for-linux@vger.kernel.org,
+ nouveau@lists.freedesktop.org, dri-devel@lists.freedesktop.org,
+ Shirish Baskaran <sbaskaran@nvidia.com>
+Subject: Re: [PATCH v3 16/19] nova-core: Add support for VBIOS ucode
+ extraction for boot
+Message-ID: <aCxLyxcERNHKzfvI@cassiopeiae>
+References: <20250507-nova-frts-v3-0-fcb02749754d@nvidia.com>
+ <20250507-nova-frts-v3-16-fcb02749754d@nvidia.com>
+ <aCN_PIYEEzs73AqT@pollux>
+ <4fee85be-a8c5-4a99-8397-c93e79d72d15@nvidia.com>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
+In-Reply-To: <4fee85be-a8c5-4a99-8397-c93e79d72d15@nvidia.com>
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -55,206 +74,261 @@ List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-Hi Dave and Sima,
+On Tue, May 20, 2025 at 03:55:06AM -0400, Joel Fernandes wrote:
+> On 5/13/2025 1:19 PM, Danilo Krummrich wrote:
+> > On Wed, May 07, 2025 at 10:52:43PM +0900, Alexandre Courbot wrote:
+> >> @@ -238,6 +239,8 @@ pub(crate) fn new(
+> >>  
+> >>          let _sec2_falcon = Falcon::<Sec2>::new(pdev.as_ref(), spec.chipset, bar, true)?;
+> >>  
+> >> +        let _bios = Vbios::new(pdev, bar)?;
+> > 
+> > Please add a comment why, even though unused, it is important to create this
+> > instance.
+> > 
+> > Also, please use `_` if it's not intended to ever be used.
+> 
+> If I add a comment, it will simply be removed by the next patch. I can add that
+> though so it makes it more clear.
 
-Please pull the following nova changes and other dependencies.
+I recommend to add such comments, because then reviewers don't stumble over it.
+:-)
 
-There are two minor and trivial conflicts with Linus' tree [1] and the CONFIGFS
-tree [2].
+> >> +impl Vbios {
+> >> +    /// Probe for VBIOS extraction
+> >> +    /// Once the VBIOS object is built, bar0 is not read for vbios purposes anymore.
+> >> +    pub(crate) fn new(pdev: &pci::Device, bar0: &Bar0) -> Result<Vbios> {
+> >> +        // Images to extract from iteration
+> >> +        let mut pci_at_image: Option<PciAtBiosImage> = None;
+> >> +        let mut first_fwsec_image: Option<FwSecBiosImage> = None;
+> >> +        let mut second_fwsec_image: Option<FwSecBiosImage> = None;
+> >> +
+> >> +        // Parse all VBIOS images in the ROM
+> >> +        for image_result in VbiosIterator::new(pdev, bar0)? {
+> >> +            let full_image = image_result?;
+> >> +
+> >> +            dev_info!(
+> > 
+> > Let's use dev_dbg!() instaed.
+> 
+> Done.
+> 
+> > 
+> >> +                pdev.as_ref(),
+> >> +                "Found BIOS image: size: {:#x}, type: {}, last: {}\n",
+> >> +                full_image.image_size_bytes()?,
+> >> +                full_image.image_type_str(),
+> >> +                full_image.is_last()
+> >> +            );
+> >> +
+> >> +            // Get references to images we will need after the loop, in order to
+> >> +            // setup the falcon data offset.
+> >> +            match full_image {
+> >> +                BiosImage::PciAt(image) => {
+> >> +                    pci_at_image = Some(image);
+> >> +                }
+> >> +                BiosImage::FwSec(image) => {
+> >> +                    if first_fwsec_image.is_none() {
+> >> +                        first_fwsec_image = Some(image);
+> >> +                    } else {
+> >> +                        second_fwsec_image = Some(image);
+> >> +                    }
+> >> +                }
+> >> +                // For now we don't need to handle these
+> >> +                BiosImage::Efi(_image) => {}
+> >> +                BiosImage::Nbsi(_image) => {}
+> >> +            }
+> >> +        }
+> >> +
+> >> +        // Using all the images, setup the falcon data pointer in Fwsec.
+> >> +        // We need mutable access here, so we handle the Option manually.
+> >> +        let final_fwsec_image = {
+> >> +            let mut second = second_fwsec_image; // Take ownership of the option
+> >> +
+> >> +            if let (Some(second), Some(first), Some(pci_at)) =
+> >> +                (second.as_mut(), first_fwsec_image, pci_at_image)
+> >> +            {
+> >> +                second
+> >> +                    .setup_falcon_data(pdev, &pci_at, &first)
+> >> +                    .inspect_err(|e| {
+> >> +                        dev_err!(pdev.as_ref(), "Falcon data setup failed: {:?}\n", e)
+> >> +                    })?;
+> >> +            } else {
+> >> +                dev_err!(
+> >> +                    pdev.as_ref(),
+> >> +                    "Missing required images for falcon data setup, skipping\n"
+> >> +                );
+> >> +                return Err(EINVAL);
+> > 
+> > This means that if second == None we fail, which makes sense, so why store an
+> > Option in Vbios? All methods of Vbios fail if fwsec_image == None.
+> > 
+> 
+> Well, if first and pci_at are None, we will fail as well. Not just second. But
+> we don't know until we finish parsing all the images in the prior loop, if we
+> found all the images. So we store it as Option during the prior loop, and check
+> it later. Right?
 
-There is also a minor, but slightly less trivial conflict with the Rust Xarray
-tree with a resolution in [3].
+My point is not that second is an option within this function -- that's fine. I
+don't want the Vbios type to store an Option, because that doesn't make sense.
+I.e. it should be
 
-[1] https://lore.kernel.org/all/20250428123825.4acf2499@canb.auug.org.au/
-[2] https://lore.kernel.org/all/20250513135521.44a26953@canb.auug.org.au/
-[3] https://lore.kernel.org/all/877c344gmp.fsf@kernel.org/
+	struct Vbios {
+	   fwsec_image: FwSecBiosImage,
+	}
 
-The following changes since commit 0af2f6be1b4281385b618cb86ad946eded089ac8:
+or just
 
-  Linux 6.15-rc1 (2025-04-06 13:11:33 -0700)
+	struct Vbios(FwSecBiosImage);
 
-are available in the Git repository at:
+which is the same, rather than
 
-  https://gitlab.freedesktop.org/drm/nova.git tags/nova-next-v6.16-2025-05-20
+	struct Vbios {
+	   fwsec_image: Option<FwSecBiosImage>,
+	}
 
-for you to fetch changes up to 276c53c66e032c8e7cc0da63555f2742eb1afd69:
+because Vbios::new() fails anyways if any of the images is None, i.e.
+vbios.fwsec_image can't ever be None.
 
-  gpu: drm: nova: select AUXILIARY_BUS instead of depending on it (2025-05-15 20:59:32 +0200)
+The code below does that for you, i.e. it returns an instance of Vbios without
+the inner Option.
 
-----------------------------------------------------------------
-Nova changes for v6.16
+> >> +            }
+> >> +            second
+> >> +        };
+> > 
+> > I think this should be:
+> > 
+> > 	let mut second = second_fwsec_image;
+> > 	
+> > 	if let (Some(second), Some(first), Some(pci_at)) =
+> > 	    (second.as_mut(), first_fwsec_image, pci_at_image)
+> > 	{
+> > 	    second
+> > 	        .setup_falcon_data(pdev, &pci_at, &first)
+> > 	        .inspect_err(|e| {
+> > 	            dev_err!(pdev.as_ref(), "Falcon data setup failed: {:?}\n", e)
+> > 	        })?;
+> > 	
+> > 	    Ok(Vbios(second)
+> > 	} else {
+> > 	    dev_err!(
+> > 	        pdev.as_ref(),
+> > 	        "Missing required images for falcon data setup, skipping\n"
+> > 	    );
+> > 	
+> > 	    Err(EINVAL)
+> > 	}
+> > 
+> > where Vbios can just be
+> > 
+> > 	pub(crate) struct Vbios(FwSecBiosImage);
+> 
+> But your suggestion here still considers second as an Option? That's why you
+> wrote 'Some(second)' ?
 
-auxiliary:
-  - bus abstractions
-  - implementation for driver registration
-  - add sample driver
+Yes, that's fine, see above. The difference is that the code returns you an
+instance of
 
-drm:
-  - implement __drm_dev_alloc()
-  - DRM core infrastructure Rust abstractions
-    - device, driver and registration
-    - DRM IOCTL
-    - DRM File
-    - GEM object
-  - IntoGEMObject rework
-    - generically implement AlwaysRefCounted through IntoGEMObject
-    - refactor unsound from_gem_obj() into as_ref()
-    - refactor into_gem_obj() into as_raw()
+	struct Vbios(FwSecBiosImage);
 
-driver-core:
-  - merge topic/device-context-2025-04-17 from driver-core tree
-  - implement Devres::access()
-    - fix: doctest build under `!CONFIG_PCI`
-  - accessor for Device::parent()
-    - fix: conditionally expect `dead_code` for `parent()`
-  - impl TryFrom<&Device> bus devices (PCI, platform)
+rather than
 
-nova-core:
-  - remove completed Vec extentions from task list
-  - register auxiliary device for nova-drm
-  - derive useful traits for Chipset
-  - add missing GA100 chipset
-  - take &Device<Bound> in Gpu::new()
-  - infrastructure to generate register definitions
-  - fix register layout of NV_PMC_BOOT_0
-  - move Firmware into own (Rust) module
-  - fix: select AUXILIARY_BUS
+	struct Vbios {
+	   fwsec_image: Option<FwSecBiosImage>,
+	}
 
-nova-drm:
-  - initial driver skeleton (depends on drm and auxiliary bus
-    abstractions)
-  - fix: select AUXILIARY_BUS
+which is unnecessary.
 
-Rust (dependencies):
-  - implement Opaque::zeroed()
-  - implement Revocable::try_access_with()
-  - implement Revocable::access()
+> 
+> > 
+> >> +
+> >> +        Ok(Vbios {
+> >> +            fwsec_image: final_fwsec_image,
+> >> +        })
+> >> +    }
+> >> +
+> >> +    pub(crate) fn fwsec_header(&self, pdev: &device::Device) -> Result<&FalconUCodeDescV3> {
+> >> +        let image = self.fwsec_image.as_ref().ok_or(EINVAL)?;
+> >> +        image.fwsec_header(pdev)
+> >> +    }
+> >> +
+> >> +    pub(crate) fn fwsec_ucode(&self, pdev: &device::Device) -> Result<&[u8]> {
+> >> +        let image = self.fwsec_image.as_ref().ok_or(EINVAL)?;
+> >> +        image.fwsec_ucode(pdev, image.fwsec_header(pdev)?)
+> >> +    }
+> >> +
+> >> +    pub(crate) fn fwsec_sigs(&self, pdev: &device::Device) -> Result<&[u8]> {
+> >> +        let image = self.fwsec_image.as_ref().ok_or(EINVAL)?;
+> >> +        image.fwsec_sigs(pdev, image.fwsec_header(pdev)?)
+> >> +    }
+> > 
+> > Those then become infallible, e.g.
+> > 
+> > 	pub(crate) fn fwsec_sigs(&self, pdev: &device::Device) -> &[u8] {
+> > 	    self.0.fwsec_sigs(pdev, self.fwsec_header(pdev))
+> > 	}
+> > 
+> 
+> Nope, I think you are wrong there. fwsec_sigs() of the underlying .0 returns a
+> Result.
 
-----------------------------------------------------------------
-Alexandre Courbot (11):
-      rust/revocable: add try_access_with() convenience method
-      samples: rust: convert PCI rust sample driver to use try_access_with()
-      gpu: nova-core: derive useful traits for Chipset
-      gpu: nova-core: add missing GA100 definition
-      gpu: nova-core: take bound device in Gpu::new
-      gpu: nova-core: define registers layout using helper macro
-      gpu: nova-core: fix layout of NV_PMC_BOOT_0
-      gpu: nova-core: move Firmware to firmware module
-      samples: rust: select AUXILIARY_BUS instead of depending on it
-      gpu: nova-core: select AUXILIARY_BUS instead of depending on it
-      gpu: drm: nova: select AUXILIARY_BUS instead of depending on it
+That's true, I confused self.fwsec_sigs() with self.0.fwsec_sigs(). It seems
+that you may want to implement Deref for Vbios.
 
-Andrew Ballance (1):
-      gpu: nova-core: remove completed Vec extentions from task list
+Also, can you please double check the Options in FwSecBiosImage (in case we
+didn't talk about them yet)? They look quite suspicious too.
 
-Asahi Lina (6):
-      rust: drm: ioctl: Add DRM ioctl abstraction
-      rust: drm: add driver abstractions
-      rust: drm: add device abstraction
-      rust: drm: add DRM driver registration
-      rust: drm: file: Add File abstraction
-      rust: drm: gem: Add GEM object abstraction
+In general, I feel like a lot of those Option come from a programming pattern
+that is very common in C, i.e. allocate a structure (stack or heap) and then
+initialize its fields.
 
-Danilo Krummrich (24):
-      rust: device: implement impl_device_context_deref!
-      rust: device: implement impl_device_context_into_aref!
-      rust: device: implement device context for Device
-      rust: platform: preserve device context in AsRef
-      rust: pci: preserve device context in AsRef
-      rust: device: implement Bound device context
-      rust: pci: move iomap_region() to impl Device<Bound>
-      rust: devres: require a bound device
-      rust: dma: require a bound device
-      Merge tag 'topic/device-context-2025-04-17' into nova-next
-      rust: pci: impl TryFrom<&Device> for &pci::Device
-      rust: platform: impl TryFrom<&Device> for &platform::Device
-      rust: types: add `Opaque::zeroed`
-      rust: device: implement Device::parent()
-      rust: auxiliary: add auxiliary device / driver abstractions
-      rust: auxiliary: add auxiliary registration
-      samples: rust: add Rust auxiliary driver sample
-      drm: drv: implement __drm_dev_alloc()
-      MAINTAINERS: add DRM Rust source files to DRM DRIVERS
-      rust: revocable: implement Revocable::access()
-      rust: devres: implement Devres::access()
-      samples: rust: pci: take advantage of Devres::access()
-      gpu: nova-core: register auxiliary device for nova-drm
-      drm: nova-drm: add initial driver skeleton
+In Rust you should aim to initialize all the fields of a structure when you
+create the instance. Option as a return type of a function is common, but it's
+always a bit suspicious when there is an Option field in a struct.
 
-Lyude Paul (4):
-      rust: drm: gem: Use NonNull for Object::dev
-      rust: drm: gem: Refactor IntoGEMObject::from_gem_obj() to as_ref()
-      rust: drm: gem: s/into_gem_obj()/as_raw()/
-      rust: drm: gem: Implement AlwaysRefCounted for all gem objects automatically
+I understand that there are cases where we can't omit it, and for obvious
+reasons the Vbios code is probably a perfect example for that.
 
-Miguel Ojeda (2):
-      rust: device: conditionally expect `dead_code` for `parent()`
-      rust: devres: fix doctest build under `!CONFIG_PCI`
+However, I recommend looking at this from top to bottom: Do the "final"
+structures that we expose to the driver from the Vbios module have fields that
+are *really* optional? Or is the Option type just a result from the parsing
+process?
 
- Documentation/gpu/nova/core/todo.rst  |  16 ++---
- MAINTAINERS                           |  17 ++++++
- drivers/gpu/drm/Kconfig               |   2 +
- drivers/gpu/drm/Makefile              |   1 +
- drivers/gpu/drm/drm_drv.c             |  58 +++++++++++++-----
- drivers/gpu/drm/nova/Kconfig          |  14 +++++
- drivers/gpu/drm/nova/Makefile         |   3 +
- drivers/gpu/drm/nova/driver.rs        |  69 +++++++++++++++++++++
- drivers/gpu/drm/nova/file.rs          |  74 +++++++++++++++++++++++
- drivers/gpu/drm/nova/gem.rs           |  49 +++++++++++++++
- drivers/gpu/drm/nova/nova.rs          |  18 ++++++
- drivers/gpu/drm/nova/uapi.rs          |  61 +++++++++++++++++++
- drivers/gpu/nova-core/Kconfig         |   1 +
- drivers/gpu/nova-core/driver.rs       |   9 ++-
- drivers/gpu/nova-core/firmware.rs     |  44 ++++++++++++--
- drivers/gpu/nova-core/gpu.rs          |  86 ++++++++++++--------------
- drivers/gpu/nova-core/nova_core.rs    |   2 +
- drivers/gpu/nova-core/regs.rs         |  82 ++++++++++---------------
- drivers/gpu/nova-core/regs/macros.rs  | 380 ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
- include/drm/drm_drv.h                 |   5 ++
- include/uapi/drm/nova_drm.h           | 101 +++++++++++++++++++++++++++++++
- rust/bindings/bindings_helper.h       |   7 +++
- rust/helpers/auxiliary.c              |  23 +++++++
- rust/helpers/drm.c                    |  23 +++++++
- rust/helpers/helpers.c                |   2 +
- rust/helpers/pci.c                    |   5 ++
- rust/helpers/platform.c               |   5 ++
- rust/kernel/auxiliary.rs              | 360 ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
- rust/kernel/device.rs                 | 109 ++++++++++++++++++++++++++++++++-
- rust/kernel/devres.rs                 |  56 ++++++++++++++---
- rust/kernel/dma.rs                    |  14 ++---
- rust/kernel/drm/device.rs             | 200 ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
- rust/kernel/drm/driver.rs             | 166 ++++++++++++++++++++++++++++++++++++++++++++++++++
- rust/kernel/drm/file.rs               |  99 ++++++++++++++++++++++++++++++
- rust/kernel/drm/gem/mod.rs            | 328 ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
- rust/kernel/drm/ioctl.rs              | 162 +++++++++++++++++++++++++++++++++++++++++++++++++
- rust/kernel/drm/mod.rs                |  19 ++++++
- rust/kernel/lib.rs                    |   4 ++
- rust/kernel/pci.rs                    |  55 ++++++++++-------
- rust/kernel/platform.rs               |  54 +++++++++--------
- rust/kernel/revocable.rs              |  28 +++++++++
- rust/kernel/types.rs                  |   8 +++
- rust/uapi/uapi_helper.h               |   2 +
- samples/rust/Kconfig                  |  12 ++++
- samples/rust/Makefile                 |   1 +
- samples/rust/rust_driver_auxiliary.rs | 120 ++++++++++++++++++++++++++++++++++++
- samples/rust/rust_driver_pci.rs       |   5 +-
- 47 files changed, 2762 insertions(+), 197 deletions(-)
- create mode 100644 drivers/gpu/drm/nova/Kconfig
- create mode 100644 drivers/gpu/drm/nova/Makefile
- create mode 100644 drivers/gpu/drm/nova/driver.rs
- create mode 100644 drivers/gpu/drm/nova/file.rs
- create mode 100644 drivers/gpu/drm/nova/gem.rs
- create mode 100644 drivers/gpu/drm/nova/nova.rs
- create mode 100644 drivers/gpu/drm/nova/uapi.rs
- create mode 100644 drivers/gpu/nova-core/regs/macros.rs
- create mode 100644 include/uapi/drm/nova_drm.h
- create mode 100644 rust/helpers/auxiliary.c
- create mode 100644 rust/helpers/drm.c
- create mode 100644 rust/kernel/auxiliary.rs
- create mode 100644 rust/kernel/drm/device.rs
- create mode 100644 rust/kernel/drm/driver.rs
- create mode 100644 rust/kernel/drm/file.rs
- create mode 100644 rust/kernel/drm/gem/mod.rs
- create mode 100644 rust/kernel/drm/ioctl.rs
- create mode 100644 rust/kernel/drm/mod.rs
- create mode 100644 samples/rust/rust_driver_auxiliary.rs
+If it's the latter, we should get rid of it and work with a different type
+during the parsing process and then create the final instance that is exposed to
+the driver at the end.
+
+For instance FwSecBiosImage is defined as:
+
+	pub(crate) struct FwSecBiosImage {
+	    base: BiosImageBase,
+	    falcon_data_offset: Option<usize>,
+	    pmu_lookup_table: Option<PmuLookupTable>,
+	    falcon_ucode_offset: Option<usize>,
+	}
+
+Do only *some* FwSecBiosImage instances have a falcon_ucode_offset?
+
+If the answer is 'no' then it shouldn't be an Option. If the answer is 'yes',
+then this indicates that FwSecBiosImage is probably too generic and should be
+split into more specific types of a FwSecBiosImage which instead share a common
+trait in order to treat the different types generically.
+
+> Also in Vbios::new(), I extract the Option when returning:
+> 
+>         Ok(Vbios {
+>             fwsec_image: final_fwsec_image.ok_or(EINVAL)?,
+>         })
+
+Maybe you do so in your tree? v3 of the patch series has:
+
+	pub(crate) struct Vbios {
+	   pub fwsec_image: Option<FwSecBiosImage>,
+	}
+
+and
+
+	Ok(Vbios {
+	   fwsec_image: final_fwsec_image,
+	})
