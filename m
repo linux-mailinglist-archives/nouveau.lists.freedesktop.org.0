@@ -2,169 +2,45 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id 19EB9ABC086
-	for <lists+nouveau@lfdr.de>; Mon, 19 May 2025 16:24:35 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id E9412ABD233
+	for <lists+nouveau@lfdr.de>; Tue, 20 May 2025 10:42:47 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id AA7A210E416;
-	Mon, 19 May 2025 14:24:28 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id EF15B10E437;
+	Tue, 20 May 2025 08:42:45 +0000 (UTC)
 Authentication-Results: gabe.freedesktop.org;
-	dkim=pass (2048-bit key; unprotected) header.d=Nvidia.com header.i=@Nvidia.com header.b="Fq8D70w1";
+	dkim=pass (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="J+lFtlLU";
 	dkim-atps=neutral
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from NAM10-MW2-obe.outbound.protection.outlook.com
- (mail-mw2nam10on2057.outbound.protection.outlook.com [40.107.94.57])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 38E8910E38F;
- Mon, 19 May 2025 14:24:22 +0000 (UTC)
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=rm/wMJvwBaF4WRDsTBYcgqjBxQsftR5lOCA3+f5V8m0dRmWEcm0VhdJLSGRuLj42CSsR/gLvrOrvk9S/WcCx/N6aixhH/cIVsBuryHqVd8ztG2RN3gKuNqXtR8aP+sg2/EhgtBhASgeBKW7JwFSBlD2DUQUKhQRxpNTc6SxB5dserhZZM0AzBJRkPz9O6YkrnR2y3ShBWcwWu/6pfgrtBA46aioONmHgVqO8vj7pZWJO4vQsNafEaG9VicuAREFlC9ytmLy797m5pRGIh+5l+WUw6c0ryewHgS3axnjm4MtKbS+68o0ybFgBvla0oTa0FD3kU0J9iFmk+BbD25kpcw==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=ECQUdvns9u4reGBhF5sEo6Os9GTJwB/VyzCWsSzdGqk=;
- b=NnQ5r36k90bFaS3orEmY1cCrFumRkee/o7yV93ChkBESHxlgkZO+hKAJ8BFyL3YIIrH0++OmcMbZSW9IinkpvABKdd2oXelJZWZ9JFwJ9KBvpQnpAUx+3ufl29RAuwEoiVNVXqStuMqpmLa9UDXulfKok2wtxaG+6Uojhv1R1uF7u1dW3doXdj4giCpUtIUfqDC1cJ2viwGnrpHkiamBnngxIeImdHai+9TUjkAn4yeC2XfugxhMj904BmKrbt25TPMmKndAlNZBdGAFFQIx/Dg8DwM2M7XnuqAq+fvjOl559aUzcJnpMyFohrgt0GsvaY6s1eIVHOx/xLZRpKgNOQ==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=nvidia.com; dmarc=pass action=none header.from=nvidia.com;
- dkim=pass header.d=nvidia.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=Nvidia.com;
- s=selector2;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=ECQUdvns9u4reGBhF5sEo6Os9GTJwB/VyzCWsSzdGqk=;
- b=Fq8D70w1qMgzRkwmYkS33gD8juqGNBD/me3e6sJI+Yo+qhYJwe5/a+bnR+OcOI6wxHSX5OGuLDsCKYMXy/Oe8R4AOE2h6rvxkg6LDH9+rFDFReQAmXQHqpsNDZWIjg6fBYjfT9596JU/MhdLT0gVzyWs+R8TsyQyiE0PLfsdP0V8Uyx/hiUfclNaKbIFH2LgGueOeF+0Sy+g4IkIXHqYa6z09c1a4neZebhECQqtGLv08d4goXwRvzz7Qa+BKo8OWHZmbytL/eFNFp8HbHk4XZD/13wkpGo5VLrN/LuAjJQBz86IUhgFMl9GJzkEcE6BNyBBTstNivMxAc1qpCzi1g==
-Authentication-Results: dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=nvidia.com;
-Received: from CH2PR12MB3990.namprd12.prod.outlook.com (2603:10b6:610:28::18)
- by LV8PR12MB9084.namprd12.prod.outlook.com (2603:10b6:408:18e::11)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.8746.30; Mon, 19 May
- 2025 14:24:11 +0000
-Received: from CH2PR12MB3990.namprd12.prod.outlook.com
- ([fe80::6e37:569f:82ee:3f99]) by CH2PR12MB3990.namprd12.prod.outlook.com
- ([fe80::6e37:569f:82ee:3f99%5]) with mapi id 15.20.8746.030; Mon, 19 May 2025
- 14:24:11 +0000
-Content-Type: text/plain; charset=UTF-8
-Date: Mon, 19 May 2025 23:24:08 +0900
-Message-Id: <DA07EVNAJXQW.MF79KW7CZAOV@nvidia.com>
-Subject: Re: [PATCH v3 18/19] gpu: nova-core: extract FWSEC from BIOS and
- patch it to run FWSEC-FRTS
-From: "Alexandre Courbot" <acourbot@nvidia.com>
-To: "Danilo Krummrich" <dakr@kernel.org>
-Cc: "Miguel Ojeda" <ojeda@kernel.org>, "Alex Gaynor"
- <alex.gaynor@gmail.com>, "Boqun Feng" <boqun.feng@gmail.com>, "Gary Guo"
- <gary@garyguo.net>, =?utf-8?q?Bj=C3=B6rn_Roy_Baron?=
- <bjorn3_gh@protonmail.com>, "Benno Lossin" <benno.lossin@proton.me>,
- "Andreas Hindborg" <a.hindborg@kernel.org>, "Alice Ryhl"
- <aliceryhl@google.com>, "Trevor Gross" <tmgross@umich.edu>, "David Airlie"
- <airlied@gmail.com>, "Simona Vetter" <simona@ffwll.ch>, "Maarten Lankhorst"
- <maarten.lankhorst@linux.intel.com>, "Maxime Ripard" <mripard@kernel.org>,
- "Thomas Zimmermann" <tzimmermann@suse.de>, "Jonathan Corbet"
- <corbet@lwn.net>, "John Hubbard" <jhubbard@nvidia.com>, "Ben Skeggs"
- <bskeggs@nvidia.com>, "Joel Fernandes" <joelagnelf@nvidia.com>, "Timur
- Tabi" <ttabi@nvidia.com>, "Alistair Popple" <apopple@nvidia.com>,
- <linux-kernel@vger.kernel.org>, <rust-for-linux@vger.kernel.org>,
- <nouveau@lists.freedesktop.org>, <dri-devel@lists.freedesktop.org>
-Content-Transfer-Encoding: quoted-printable
-X-Mailer: aerc 0.20.1-0-g2ecb8770224a
-References: <20250507-nova-frts-v3-0-fcb02749754d@nvidia.com>
- <20250507-nova-frts-v3-18-fcb02749754d@nvidia.com>
- <aCTHBO0Wqx3rc81W@pollux>
-In-Reply-To: <aCTHBO0Wqx3rc81W@pollux>
-X-ClientProxiedBy: TYAPR04CA0021.apcprd04.prod.outlook.com
- (2603:1096:404:15::33) To CH2PR12MB3990.namprd12.prod.outlook.com
- (2603:10b6:610:28::18)
+Received: from nyc.source.kernel.org (nyc.source.kernel.org [147.75.193.91])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 952C610E420;
+ Tue, 20 May 2025 08:42:44 +0000 (UTC)
+Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
+ by nyc.source.kernel.org (Postfix) with ESMTP id C8CBEA4E135;
+ Tue, 20 May 2025 08:42:43 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 12EDAC4CEE9;
+ Tue, 20 May 2025 08:42:41 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+ s=k20201202; t=1747730563;
+ bh=L7UvoMIcAqAL9KwvDgu28lLIe9XhyYkSV008NPY5tKI=;
+ h=Date:From:To:Cc:Subject:From;
+ b=J+lFtlLUOZ6D54IiYG8SE07FGhIStJ2NNef6ABfbATN+uewjv6Cf2JBvHHwBJzzhK
+ b3iFu/ydkX59y5BFuKQK+/UIIe/RFNLvaA69QyXoqlKjN3zl3QDTV2mcFa3JOQs8wF
+ qLKl4M4XmjzhW97+GRAw7wo14WTFC219gzHXAzDzFEleyodWwyWd58PjDNS9J6GjXx
+ dNTW2/6xGGDf7QX99hzBjFE0XUYJkq1H8prmUqxXTotC6aagmbWRTW/m665At8xG8E
+ lynBdEb337L9mrD4ZqXvbjiHwbb491xG+rtxdo9K2cDEXtBVC+UYcRZwhbsP87rkXj
+ WleatUVB73YAA==
+Date: Tue, 20 May 2025 10:42:39 +0200
+From: Danilo Krummrich <dakr@kernel.org>
+To: Dave Airlie <airlied@gmail.com>, Simona Vetter <simona@ffwll.ch>
+Cc: Miguel Ojeda <ojeda@kernel.org>,
+ Greg Kroah-Hartman <gregkh@linuxfoundation.org>,
+ nouveau@lists.freedesktop.org, dri-devel@lists.freedesktop.org
+Subject: [GIT PULL] Nova changes for v6.16
+Message-ID: <aCxAf3RqQAXLDhAj@cassiopeiae>
 MIME-Version: 1.0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: CH2PR12MB3990:EE_|LV8PR12MB9084:EE_
-X-MS-Office365-Filtering-Correlation-Id: 52997816-60b0-4e61-2e59-08dd96e0d2c7
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0;
- ARA:13230040|10070799003|7416014|376014|1800799024|366016; 
-X-Microsoft-Antispam-Message-Info: =?utf-8?B?UDR3cmRhTEsxTEFURkNxZlROaHJUaHVsS0dUSlVzbHlxR1JWejlLUzNteVMx?=
- =?utf-8?B?OHZwWmtGU3haa0gzZU5wTEF1Y3hKREhmYmttTnVKcDVWbk5rK0QwZWlhVEZu?=
- =?utf-8?B?WWg4R3grbUc1bmdTOFRRWmlvbWQ4ZFo4eVIwRElxcnkxbVQvRHU0czdnRy9X?=
- =?utf-8?B?S3VJQStCenRzOUJCWlJQeXM2bkQvNVdpQjRVNjBnVUlnbGdPK2crOUFwd3dO?=
- =?utf-8?B?T0FBK0I3dDQxZWlIaFhSWWJzTzloL0VwSXdvS2hrZk1scStycVhNdDFOWnVL?=
- =?utf-8?B?elhxa0prbHo5TWU0dTBXLyt2YkRpOUN5cVVRSUZMV2RlYklkSUFvemlzWDN4?=
- =?utf-8?B?ckFZR0tOaUtXSXVsU3E1K0k2Q0JoeEgrN1p2K2dNV0FtUWpzTVJNSUw5NWIv?=
- =?utf-8?B?VHp3K0Y3UU9iNFJ0WGw4RUhvV3VNZVk4a3NqejMzb3Rjc3hCcUxzVDdzM2FC?=
- =?utf-8?B?VUVkY2lSMkhySUtueExLQXlvdjNENzYwaWFpYWRISUhQS0pPWkpyZ1V4N2k1?=
- =?utf-8?B?SnkzMHNvRmpZV3VuNkdnS2ZPYUtaN0FDUkhzeFlrTTJmK1B6bVBqa29DU1JX?=
- =?utf-8?B?dVM0WnlZRW1lQURnWnlKNHIwUnNYTDNoalNIV3FyelJWOXlnNWJHYTVYM2l1?=
- =?utf-8?B?R2htc1gycUhWN0ZRVUtTZXc4cU9NbktKeE1aa25wb25kVko4aG9EQThKSlhh?=
- =?utf-8?B?cW02a0ZMSnFtL1FBL2MxNXl6OHNWQ1NMbEJWVXhsb2kwb3BBWUQ2eGMxeUkx?=
- =?utf-8?B?bTBhL3RuTnduR0xIZ2FITU1wQWo0NE5NT0tvMEk2WmVwaStZR00raWZCVHJ2?=
- =?utf-8?B?dlozMmFqOVZ4bWFjMVZIWjRZWDRMampjR0RwdU1USEhVWElPOFU4YnlmSzVi?=
- =?utf-8?B?RmpscVBKaWZVbTE2b2Rnc3IwUXJwSFhUckRxMkd5VFA1MGMwOWtKVTJCcEI2?=
- =?utf-8?B?RGtOcmFtM0ZBTW10UG1lMnZIdGZCMVdYZ1I1SjhRODAwRk4xUitzQnRWRExW?=
- =?utf-8?B?WDZERnI4ZTJydy91M2QrZ3RGdmxjOXZnVFM1UkZvaHd4NEZadnRSRk9IK2py?=
- =?utf-8?B?THl6NHdzV2d0UDBYR29vbXJISnZXZng4dzVZWWdhdFpYQU5TeHFLUTVrcllv?=
- =?utf-8?B?MElYczBCbEg1SXRIR2cwZ3dia2dwNmFoQm5qWU9rcDV4SkxLcnpOUmJkQXQ3?=
- =?utf-8?B?N0NNeHRWODBTc0tqbDRtQ2p3RGYxTXh1dDE5ang2dVZsSHc3RDJKUHJBaDhG?=
- =?utf-8?B?Yk0rZDFWbUpXZE5GaXlxWmE4OGkwYXFjS01BWm9oRUFLNlpMUXRGeTJpTlY3?=
- =?utf-8?B?cktkQVhqQzVXTDRwN0tjN3RHMnU3TElQeDNlV0djNUVhUnNUdE96eTFqRjZR?=
- =?utf-8?B?T3JDRE4yaHZDSXpuM01nakR0QXEyQzRJSk1NTGNta1RIazQ1R0hWT1QxQ0hQ?=
- =?utf-8?B?OTRyKzBBKy85dVUwQzcyZDdZVUZjblJodytmZW9MOUJ1M1k1TXoweHFFVzZX?=
- =?utf-8?B?NkNRaGl4Vk5LTGk1aFRsdno1UHYxTS9GVHhNd0ZsdlhaOHZ6aE5qMUtJbW5E?=
- =?utf-8?B?Y2dWeXVtZjNZSG0vSksyZGNrd1BzVVdNamJ1UDF5NngzRWkyaTc1RHdRcGt0?=
- =?utf-8?B?elAyQmpVZUxCT1FFVlVQOTBTUkRtbmxWN2dYTmJ1SmJSSkdha3Q2WXh6Umxs?=
- =?utf-8?B?SElJL2NDcm53aU8xcTNNTnAwdUxXTjBaRDROQUp1c01UdVl2R2tlenh3eWdr?=
- =?utf-8?B?NFV4MWVkY3ViekZSbFdOS1VJVUxPdFVCS2Y1UmhkL0FCQmR4SGVrTDdwb1h3?=
- =?utf-8?B?bzc2MkJEVXZyaE0yVzJSbmFEbUV1VGs1TklrOGdBVGtZM3lwY3pPcVk3SWRW?=
- =?utf-8?B?SDNsSTErR2FPbnBrSU5pczN4T1BCaGd6SkdpUHFFL3JtZmEvUzZpR0IyMEY3?=
- =?utf-8?Q?6K+gNRB5Sls=3D?=
-X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
- IPV:NLI; SFV:NSPM; H:CH2PR12MB3990.namprd12.prod.outlook.com; PTR:; CAT:NONE;
- SFS:(13230040)(10070799003)(7416014)(376014)(1800799024)(366016); DIR:OUT;
- SFP:1101; 
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?T25raE9jZTBvMkVSbjdwSzhxUUY5NVF3NU9zMTQ4Zm5FMVB1cXZQTkhFM0JQ?=
- =?utf-8?B?R2FkSDJtUTZObWpmNm1OZi9ON2trM210Ym4xVWNwcTFCVFQ2ZzI0ekhhUzZ2?=
- =?utf-8?B?R2xlNHl5bVdINW5RclREVElRckNBWmQxbDd0eHl3dUdrZnVVbHFiUUVPaEdx?=
- =?utf-8?B?ZFNraFZaa1l2Z3FCM2RBYjkrcUpRbVE2ZDFEYTEyTVp4WkxIUi80SFo1QTl0?=
- =?utf-8?B?cGhXWW5SNlJQbU85M1FiY2JVandKWXRBS0dmemtTRDlaTUFEWThZYm1ycVd1?=
- =?utf-8?B?d3AxU3UyaUtsOTZITjVXRnZvQ05rMWlJNkJ2RkVTTDg4THBiQTNHTldkRnVH?=
- =?utf-8?B?OVJTQlZvUkhIQWVQZUFGd01FejJSUjJjTmN6Z1ptTEwxeHhxWDdHR3k2b2ZG?=
- =?utf-8?B?eW93Skw2dkNydmtHUHVqQ1I4WGU1SWE3ejh0MDVtVTRJa0pkeVdvayswakxn?=
- =?utf-8?B?RU0vUW9odjlJZ1c2cnN3UkRFZVZ5STVhbGJiQng4UmNVakVLVDFkUGFBMVdZ?=
- =?utf-8?B?SFc5bkQraEppY0NlaHIxUFI5RkFQQVdCWll1dUFnZWVONjhtOUZlTDBIKzdt?=
- =?utf-8?B?Vk9lWHRUSlRXamd4MHNFRDAxbGxKb1NIT3BJWWloaCsrOW1BT05JeTJkTVpl?=
- =?utf-8?B?U1ZHaGw2MTBGV2JwTDQ4bXJLSktEemQzbXFxTzlrQUtZeHZqNUZ0WTQxRGJw?=
- =?utf-8?B?eEdiR2pETEJUQ1lETWJOVDEwQVNHWkV4dlBpYnI5emtFaE4zV1ZRYi92MEVz?=
- =?utf-8?B?SWt0d0NnUXVEVllRTUtEQmN6Wllaei8vRmlXZWg3M1U2aXk5eEdGTzZCOXFO?=
- =?utf-8?B?OHhaMTRLM1ppK0h6TG4vOUg5ZGp5V3NvRFVGaUtKbFcwUUpzL1IrejZPZ2Nh?=
- =?utf-8?B?dTZHdEFEbERlOWNYWFVINGM0UjFScExDWitkUUM2czdSVFFsYzFaRU03bklo?=
- =?utf-8?B?Y1FzenlIVHNpdlAzaHJHVFpDOUtPK3BpTk9UMHo3NzZpZitVaGdsbUwvSUFT?=
- =?utf-8?B?cVcyS2ZZQzJuVUFhZEJpdmE2aTNFNUxBM2xaVGVNWkVVZXZ4cXlPSnNlZjZS?=
- =?utf-8?B?U3pxTi9kKzlCT3FFcHdSY1hSQ2NyUU5CYm1JNnB0dE9JQVNFNVpzVVRGSGIy?=
- =?utf-8?B?R0x6UGtBaW00NGIrOE16TDczR3NXOTB3TXhhRElhTWwxNjN1QndFY3hma1Nt?=
- =?utf-8?B?V29qT2c2SERCT3RXREp6d2Q4Qmg3OHBHa1N5TGZZOHRPZFVTUnV0cXMycHhl?=
- =?utf-8?B?bFhJdUJudFppL1F4bXUxUkNrb1hRMFI5U21BeWtHaWkxby9wazlFUnBHbzh4?=
- =?utf-8?B?UmtOKys3K1d6NDBiVGhKVm81akFVR2hSZXJzV0pDUVhURzlmOUowek1ZcnJU?=
- =?utf-8?B?SnhxbVdYbjBkSXJyTGs3VEZxaVdaSWVmNDZIZXpRRms5Qkc0aDJIY3BxOWww?=
- =?utf-8?B?d1c0Z1RBRk5UbGlZMmlQK1V0MStVWkRQSS9NVnhsNUF0NU5sUWpVeTFXcWVM?=
- =?utf-8?B?eTZBV1FUY1JUM2Jua3d2Uzkzdk5xcGVKczVNOTVsMitCVzRVRTVJeGVxdDR6?=
- =?utf-8?B?bDlOeEp1VFFHV2R0aDd4cnFqMlp1OXlqT2MrTjgxdHlaWllrblVMdStFajNr?=
- =?utf-8?B?ZDJpREhzenE0TWYwbUVHTTJkdm5FeUxSZ0RETWhlOGlUcDZJQXI0UGMwQ1ZZ?=
- =?utf-8?B?eFl1R0JJMWlkYVB2UzRkalQ1czA2U2N4NWtMMVlvZmV5VSsvdGpFdGlwZndF?=
- =?utf-8?B?b24zV3doZGhJQTRJZGFZZkZKRktVNkZkdnl5SDBHeDZmOTIrYkFhMVpVY2J5?=
- =?utf-8?B?eWJIVFVLTzRRVUlXYmhxYWlVNjkxWWhZelhaQTVvSEhwUXRHQnp2QmllMlJp?=
- =?utf-8?B?VmhuMkYydEhWYjJlSjlWN3plTk1KVDd2YVZNNFJoeG9tMnhtWlE2bmxNc1pZ?=
- =?utf-8?B?Y1VjeER0VGFwaE9nQW9MUjQwZUdkQWxOS3p3OCtya3BRajFETC9sbnoyRDgx?=
- =?utf-8?B?Sk1jYVJ0QXZRWWk5ZVN1Yk5kOWZRQnV4WWVOUFM4ck42NGhCY0UzRTN6cjJU?=
- =?utf-8?B?RmM1dmtCSHJTMk5yQ1cvWG5CbnN4WU41VGdGaGsvZUZwNVpsSERwU2pwT1dq?=
- =?utf-8?B?VWhMcjZ6VGVFS09SUitwa2ZHQXRvdGJWblZ4OUxUdEU0QWk4dWhEQnlNRUYy?=
- =?utf-8?Q?FBhdfZvsizrbnjBqZHgMPxztsx2CihqdjP31nZg+R/oI?=
-X-OriginatorOrg: Nvidia.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 52997816-60b0-4e61-2e59-08dd96e0d2c7
-X-MS-Exchange-CrossTenant-AuthSource: CH2PR12MB3990.namprd12.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 19 May 2025 14:24:11.1910 (UTC)
-X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
-X-MS-Exchange-CrossTenant-Id: 43083d15-7273-40c1-b7db-39efd9ccc17a
-X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: 3E0flucK/rAFpXWknehjPnvL9Nc8dUBBnHFYNcVM5Khe5AxT8yKrwOrF/y1YKRSce8hRtgXNOPCPesQSMrgYTw==
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: LV8PR12MB9084
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -179,159 +55,206 @@ List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-On Thu May 15, 2025 at 1:38 AM JST, Danilo Krummrich wrote:
-> On Wed, May 07, 2025 at 10:52:45PM +0900, Alexandre Courbot wrote:
->> The FWSEC firmware needs to be extracted from the VBIOS and patched with
->> the desired command, as well as the right signature. Do this so we are
->> ready to load and run this firmware into the GSP falcon and create the
->> FRTS region.
->>=20
->> [joelagnelf@nvidia.com: give better names to FalconAppifHdrV1's fields]
->> Signed-off-by: Alexandre Courbot <acourbot@nvidia.com>
->> ---
->>  drivers/gpu/nova-core/dma.rs            |   3 -
->>  drivers/gpu/nova-core/firmware.rs       |  18 ++
->>  drivers/gpu/nova-core/firmware/fwsec.rs | 359 +++++++++++++++++++++++++=
-+++++++
->>  drivers/gpu/nova-core/gpu.rs            |  20 +-
->>  drivers/gpu/nova-core/vbios.rs          |   3 -
->>  5 files changed, 395 insertions(+), 8 deletions(-)
->>=20
->> diff --git a/drivers/gpu/nova-core/dma.rs b/drivers/gpu/nova-core/dma.rs
->> index 9d90ae01d0044eaab4ddbc3eba216741d7a623ef..a12d0dff574aa38fb5eb8f4d=
-759611af2f8ba3ec 100644
->> --- a/drivers/gpu/nova-core/dma.rs
->> +++ b/drivers/gpu/nova-core/dma.rs
->> @@ -2,9 +2,6 @@
->> =20
->>  //! Simple DMA object wrapper.
->> =20
->> -// To be removed when all code is used.
->> -#![expect(dead_code)]
->> -
->>  use core::ops::{Deref, DerefMut};
->> =20
->>  use kernel::device;
->> diff --git a/drivers/gpu/nova-core/firmware.rs b/drivers/gpu/nova-core/f=
-irmware.rs
->> index 960982174d834c7c66a47ecfb3a15bf47116b2c5..3945fd18499555ddd6fb2e0e=
-a69535b40fcc4b08 100644
->> --- a/drivers/gpu/nova-core/firmware.rs
->> +++ b/drivers/gpu/nova-core/firmware.rs
->> @@ -8,9 +8,12 @@
->>  use kernel::prelude::*;
->>  use kernel::str::CString;
->> =20
->> +use crate::dma::DmaObject;
->>  use crate::gpu;
->>  use crate::gpu::Chipset;
->> =20
->> +pub(crate) mod fwsec;
->> +
->>  pub(crate) const FIRMWARE_VERSION: &str =3D "535.113.01";
->> =20
->>  /// Structure encapsulating the firmware blobs required for the GPU to =
-operate.
->> @@ -86,6 +89,21 @@ pub(crate) fn size(&self) -> usize {
->>      }
->>  }
->> =20
->> +/// Patch the `ucode_dma` firmware at offset `sig_base_img` with `signa=
-ture`.
->> +fn patch_signature(ucode_dma: &mut DmaObject, signature: &[u8], sig_bas=
-e_img: usize) -> Result<()> {
->> +    if sig_base_img + signature.len() > ucode_dma.size() {
->> +        return Err(EINVAL);
->> +    }
->> +
->> +    // SAFETY: we are the only user of this object, so there cannot be =
-any race.
->> +    let dst =3D unsafe { ucode_dma.start_ptr_mut().add(sig_base_img) };
->> +
->> +    // SAFETY: `signature` and `dst` are valid, properly aligned, and d=
-o not overlap.
->> +    unsafe { core::ptr::copy_nonoverlapping(signature.as_ptr(), dst, si=
-gnature.len()) };
->> +
->> +    Ok(())
->> +}
->
-> Why is this not in firmware/fwsec.rs, like patch_command()?
+Hi Dave and Sima,
 
-Ah, there is no way to know it now, but this function will also be used
-to patch the booter firmware that runs on sec2, so having it here makes
-it available to both sub-modules. I'm fine with moving it into the fwsec
-module temporarily if you prefer though.
+Please pull the following nova changes and other dependencies.
 
->
-> Also, please wrap the ucode DmaObject in its own type, i.e.
-> `struct UcodeDma(DmaObject)` and make the patch_*() functions methods of =
-this
-> type. They're only applicable for the ucode DmaObject.
+There are two minor and trivial conflicts with Linus' tree [1] and the CONFIGFS
+tree [2].
 
-Indeed, good idea. We will event want to specialize that type against
-the kind of firmware as not all patching methods may be applicable
-depending on the firmware.
+There is also a minor, but slightly less trivial conflict with the Rust Xarray
+tree with a resolution in [3].
 
-<snip>
->> +impl FwsecFirmware {
->> +    /// Extract the Fwsec firmware from `bios` and patch it to run with=
- the `cmd` command.
->> +    pub(crate) fn new(
->> +        falcon: &Falcon<Gsp>,
->> +        dev: &Device<device::Bound>,
->> +        bar: &Bar0,
->> +        bios: &Vbios,
->> +        cmd: FwsecCommand,
->> +    ) -> Result<Self> {
->> +        let v3_desc =3D bios.fwsec_header(dev)?;
->> +        let ucode =3D bios.fwsec_ucode(dev)?;
->> +
->> +        let mut ucode_dma =3D DmaObject::from_data(dev, ucode)?;
->> +        patch_command(&mut ucode_dma, v3_desc, cmd)?;
->> +
->> +        const SIG_SIZE: usize =3D 96 * 4;
->
-> 96 * 4? :-)
+[1] https://lore.kernel.org/all/20250428123825.4acf2499@canb.auug.org.au/
+[2] https://lore.kernel.org/all/20250513135521.44a26953@canb.auug.org.au/
+[3] https://lore.kernel.org/all/877c344gmp.fsf@kernel.org/
 
-Mmmm let me look that up. ^_^; But I think it means that a signature is
-made of 96 32-bit integers.
+The following changes since commit 0af2f6be1b4281385b618cb86ad946eded089ac8:
 
->
->> +        let signatures =3D bios.fwsec_sigs(dev)?;
->> +        let sig_base_img =3D (v3_desc.imem_load_size + v3_desc.pkc_data=
-_offset) as usize;
->> +
->> +        if v3_desc.signature_count !=3D 0 {
->> +            // Patch signature.
->> +            let desc_sig_versions =3D v3_desc.signature_versions as u32=
-;
->> +            let reg_fuse_version =3D falcon.get_signature_reg_fuse_vers=
-ion(
->> +                bar,
->> +                v3_desc.engine_id_mask,
->> +                v3_desc.ucode_id,
->> +            )?;
->> +            dev_dbg!(
->> +                dev,
->> +                "desc_sig_versions: {:#x}, reg_fuse_version: {}\n",
->> +                desc_sig_versions,
->> +                reg_fuse_version
->> +            );
->> +            let signature_idx =3D {
->> +                let reg_fuse_version_bit =3D 1 << reg_fuse_version;
->> +
->> +                // Check if the fuse version is supported by the firmwa=
-re.
->> +                if desc_sig_versions & reg_fuse_version_bit =3D=3D 0 {
->> +                    dev_warn!(
->> +                        dev,
->> +                        "no matching signature: {:#x} {:#x}\n",
->> +                        reg_fuse_version_bit,
->> +                        v3_desc.signature_versions
->> +                    );
->
-> Looks like this should be dev_err!().
+  Linux 6.15-rc1 (2025-04-06 13:11:33 -0700)
 
-Indeed, fixed.
+are available in the Git repository at:
 
+  https://gitlab.freedesktop.org/drm/nova.git tags/nova-next-v6.16-2025-05-20
+
+for you to fetch changes up to 276c53c66e032c8e7cc0da63555f2742eb1afd69:
+
+  gpu: drm: nova: select AUXILIARY_BUS instead of depending on it (2025-05-15 20:59:32 +0200)
+
+----------------------------------------------------------------
+Nova changes for v6.16
+
+auxiliary:
+  - bus abstractions
+  - implementation for driver registration
+  - add sample driver
+
+drm:
+  - implement __drm_dev_alloc()
+  - DRM core infrastructure Rust abstractions
+    - device, driver and registration
+    - DRM IOCTL
+    - DRM File
+    - GEM object
+  - IntoGEMObject rework
+    - generically implement AlwaysRefCounted through IntoGEMObject
+    - refactor unsound from_gem_obj() into as_ref()
+    - refactor into_gem_obj() into as_raw()
+
+driver-core:
+  - merge topic/device-context-2025-04-17 from driver-core tree
+  - implement Devres::access()
+    - fix: doctest build under `!CONFIG_PCI`
+  - accessor for Device::parent()
+    - fix: conditionally expect `dead_code` for `parent()`
+  - impl TryFrom<&Device> bus devices (PCI, platform)
+
+nova-core:
+  - remove completed Vec extentions from task list
+  - register auxiliary device for nova-drm
+  - derive useful traits for Chipset
+  - add missing GA100 chipset
+  - take &Device<Bound> in Gpu::new()
+  - infrastructure to generate register definitions
+  - fix register layout of NV_PMC_BOOT_0
+  - move Firmware into own (Rust) module
+  - fix: select AUXILIARY_BUS
+
+nova-drm:
+  - initial driver skeleton (depends on drm and auxiliary bus
+    abstractions)
+  - fix: select AUXILIARY_BUS
+
+Rust (dependencies):
+  - implement Opaque::zeroed()
+  - implement Revocable::try_access_with()
+  - implement Revocable::access()
+
+----------------------------------------------------------------
+Alexandre Courbot (11):
+      rust/revocable: add try_access_with() convenience method
+      samples: rust: convert PCI rust sample driver to use try_access_with()
+      gpu: nova-core: derive useful traits for Chipset
+      gpu: nova-core: add missing GA100 definition
+      gpu: nova-core: take bound device in Gpu::new
+      gpu: nova-core: define registers layout using helper macro
+      gpu: nova-core: fix layout of NV_PMC_BOOT_0
+      gpu: nova-core: move Firmware to firmware module
+      samples: rust: select AUXILIARY_BUS instead of depending on it
+      gpu: nova-core: select AUXILIARY_BUS instead of depending on it
+      gpu: drm: nova: select AUXILIARY_BUS instead of depending on it
+
+Andrew Ballance (1):
+      gpu: nova-core: remove completed Vec extentions from task list
+
+Asahi Lina (6):
+      rust: drm: ioctl: Add DRM ioctl abstraction
+      rust: drm: add driver abstractions
+      rust: drm: add device abstraction
+      rust: drm: add DRM driver registration
+      rust: drm: file: Add File abstraction
+      rust: drm: gem: Add GEM object abstraction
+
+Danilo Krummrich (24):
+      rust: device: implement impl_device_context_deref!
+      rust: device: implement impl_device_context_into_aref!
+      rust: device: implement device context for Device
+      rust: platform: preserve device context in AsRef
+      rust: pci: preserve device context in AsRef
+      rust: device: implement Bound device context
+      rust: pci: move iomap_region() to impl Device<Bound>
+      rust: devres: require a bound device
+      rust: dma: require a bound device
+      Merge tag 'topic/device-context-2025-04-17' into nova-next
+      rust: pci: impl TryFrom<&Device> for &pci::Device
+      rust: platform: impl TryFrom<&Device> for &platform::Device
+      rust: types: add `Opaque::zeroed`
+      rust: device: implement Device::parent()
+      rust: auxiliary: add auxiliary device / driver abstractions
+      rust: auxiliary: add auxiliary registration
+      samples: rust: add Rust auxiliary driver sample
+      drm: drv: implement __drm_dev_alloc()
+      MAINTAINERS: add DRM Rust source files to DRM DRIVERS
+      rust: revocable: implement Revocable::access()
+      rust: devres: implement Devres::access()
+      samples: rust: pci: take advantage of Devres::access()
+      gpu: nova-core: register auxiliary device for nova-drm
+      drm: nova-drm: add initial driver skeleton
+
+Lyude Paul (4):
+      rust: drm: gem: Use NonNull for Object::dev
+      rust: drm: gem: Refactor IntoGEMObject::from_gem_obj() to as_ref()
+      rust: drm: gem: s/into_gem_obj()/as_raw()/
+      rust: drm: gem: Implement AlwaysRefCounted for all gem objects automatically
+
+Miguel Ojeda (2):
+      rust: device: conditionally expect `dead_code` for `parent()`
+      rust: devres: fix doctest build under `!CONFIG_PCI`
+
+ Documentation/gpu/nova/core/todo.rst  |  16 ++---
+ MAINTAINERS                           |  17 ++++++
+ drivers/gpu/drm/Kconfig               |   2 +
+ drivers/gpu/drm/Makefile              |   1 +
+ drivers/gpu/drm/drm_drv.c             |  58 +++++++++++++-----
+ drivers/gpu/drm/nova/Kconfig          |  14 +++++
+ drivers/gpu/drm/nova/Makefile         |   3 +
+ drivers/gpu/drm/nova/driver.rs        |  69 +++++++++++++++++++++
+ drivers/gpu/drm/nova/file.rs          |  74 +++++++++++++++++++++++
+ drivers/gpu/drm/nova/gem.rs           |  49 +++++++++++++++
+ drivers/gpu/drm/nova/nova.rs          |  18 ++++++
+ drivers/gpu/drm/nova/uapi.rs          |  61 +++++++++++++++++++
+ drivers/gpu/nova-core/Kconfig         |   1 +
+ drivers/gpu/nova-core/driver.rs       |   9 ++-
+ drivers/gpu/nova-core/firmware.rs     |  44 ++++++++++++--
+ drivers/gpu/nova-core/gpu.rs          |  86 ++++++++++++--------------
+ drivers/gpu/nova-core/nova_core.rs    |   2 +
+ drivers/gpu/nova-core/regs.rs         |  82 ++++++++++---------------
+ drivers/gpu/nova-core/regs/macros.rs  | 380 ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+ include/drm/drm_drv.h                 |   5 ++
+ include/uapi/drm/nova_drm.h           | 101 +++++++++++++++++++++++++++++++
+ rust/bindings/bindings_helper.h       |   7 +++
+ rust/helpers/auxiliary.c              |  23 +++++++
+ rust/helpers/drm.c                    |  23 +++++++
+ rust/helpers/helpers.c                |   2 +
+ rust/helpers/pci.c                    |   5 ++
+ rust/helpers/platform.c               |   5 ++
+ rust/kernel/auxiliary.rs              | 360 ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+ rust/kernel/device.rs                 | 109 ++++++++++++++++++++++++++++++++-
+ rust/kernel/devres.rs                 |  56 ++++++++++++++---
+ rust/kernel/dma.rs                    |  14 ++---
+ rust/kernel/drm/device.rs             | 200 ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+ rust/kernel/drm/driver.rs             | 166 ++++++++++++++++++++++++++++++++++++++++++++++++++
+ rust/kernel/drm/file.rs               |  99 ++++++++++++++++++++++++++++++
+ rust/kernel/drm/gem/mod.rs            | 328 ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+ rust/kernel/drm/ioctl.rs              | 162 +++++++++++++++++++++++++++++++++++++++++++++++++
+ rust/kernel/drm/mod.rs                |  19 ++++++
+ rust/kernel/lib.rs                    |   4 ++
+ rust/kernel/pci.rs                    |  55 ++++++++++-------
+ rust/kernel/platform.rs               |  54 +++++++++--------
+ rust/kernel/revocable.rs              |  28 +++++++++
+ rust/kernel/types.rs                  |   8 +++
+ rust/uapi/uapi_helper.h               |   2 +
+ samples/rust/Kconfig                  |  12 ++++
+ samples/rust/Makefile                 |   1 +
+ samples/rust/rust_driver_auxiliary.rs | 120 ++++++++++++++++++++++++++++++++++++
+ samples/rust/rust_driver_pci.rs       |   5 +-
+ 47 files changed, 2762 insertions(+), 197 deletions(-)
+ create mode 100644 drivers/gpu/drm/nova/Kconfig
+ create mode 100644 drivers/gpu/drm/nova/Makefile
+ create mode 100644 drivers/gpu/drm/nova/driver.rs
+ create mode 100644 drivers/gpu/drm/nova/file.rs
+ create mode 100644 drivers/gpu/drm/nova/gem.rs
+ create mode 100644 drivers/gpu/drm/nova/nova.rs
+ create mode 100644 drivers/gpu/drm/nova/uapi.rs
+ create mode 100644 drivers/gpu/nova-core/regs/macros.rs
+ create mode 100644 include/uapi/drm/nova_drm.h
+ create mode 100644 rust/helpers/auxiliary.c
+ create mode 100644 rust/helpers/drm.c
+ create mode 100644 rust/kernel/auxiliary.rs
+ create mode 100644 rust/kernel/drm/device.rs
+ create mode 100644 rust/kernel/drm/driver.rs
+ create mode 100644 rust/kernel/drm/file.rs
+ create mode 100644 rust/kernel/drm/gem/mod.rs
+ create mode 100644 rust/kernel/drm/ioctl.rs
+ create mode 100644 rust/kernel/drm/mod.rs
+ create mode 100644 samples/rust/rust_driver_auxiliary.rs
