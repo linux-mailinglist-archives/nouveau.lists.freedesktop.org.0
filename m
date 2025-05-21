@@ -2,79 +2,79 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id EF196CBA8F1
-	for <lists+nouveau@lfdr.de>; Sat, 13 Dec 2025 13:17:25 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 435CECBA8BE
+	for <lists+nouveau@lfdr.de>; Sat, 13 Dec 2025 13:17:13 +0100 (CET)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 9BB7C10E419;
-	Sat, 13 Dec 2025 12:17:24 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 36ACA10E3F7;
+	Sat, 13 Dec 2025 12:17:09 +0000 (UTC)
 Authentication-Results: gabe.freedesktop.org;
-	dkim=permerror (0-bit key) header.d=gmail.com header.i=@gmail.com header.b="WQrD2BfL";
+	dkim=permerror (0-bit key) header.d=gmail.com header.i=@gmail.com header.b="jKJ3C3FX";
 	dkim-atps=neutral
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from mail-qt1-f173.google.com (mail-qt1-f173.google.com
- [209.85.160.173])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 0500712BBFF;
- Wed, 21 May 2025 12:43:28 +0000 (UTC)
-Received: by mail-qt1-f173.google.com with SMTP id
- d75a77b69052e-47691d82bfbso131187961cf.0; 
- Wed, 21 May 2025 05:43:28 -0700 (PDT)
+Received: from mail-qv1-f51.google.com (mail-qv1-f51.google.com
+ [209.85.219.51])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 8A0931124DD;
+ Wed, 21 May 2025 12:45:11 +0000 (UTC)
+Received: by mail-qv1-f51.google.com with SMTP id
+ 6a1803df08f44-6f8b0fdd5ffso66358846d6.0; 
+ Wed, 21 May 2025 05:45:11 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1747831408; x=1748436208; darn=lists.freedesktop.org;
+ d=gmail.com; s=20230601; t=1747831510; x=1748436310; darn=lists.freedesktop.org;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:feedback-id:from:to:cc:subject:date
  :message-id:reply-to;
- bh=hgjwFdM2k5sCslQZdWwlZbIspHEoXzqe2FcVDJivI+o=;
- b=WQrD2BfLb7xgYSsuJ83dg2UPLqYzcJqz28V9iOBg7XznJou387i79UdViIvxVvI6dx
- tLOWSx1DKGdrrbe9BncyTgFyZS4DJmGYLN24PpVCs/99Us//3DzCp81DG/KXPdVflqLI
- cwYJ9RROMirJz7Zeu+YF9u4wJySjnZPfV/y5C4aRBzTmRts32xcc9y2NPS41zQ3orqSt
- nCpPjDI+LN4nYoSOWCffGZe3VDp6TB9WhBQtBI9ZcAiMGggC9IQKeZV/7QAI8fuJ4SHL
- r4vl11GgKdIDijWAP94qrr5Z+KUYBvrl5BjPwJPqTIUxNnr/UNJm4DPFQCLM7bY631gH
- rUJA==
+ bh=Vhnzj3NnJO366VT/ATwYapAPa7ylDj+dwVk+TFu/WXo=;
+ b=jKJ3C3FXpzIExSP0AuiXYfjceEI2df8wbzfX0dfDrY73QDwQH9N2cJ1PD7wdPfR6BX
+ zrAqgY9zhVNPbtLNWFFWUoKgRgBihNWpiNq0+HfifsR1SBwWUkqn6OP2Xu3obJu6ki6/
+ 9v2e1+8STX0Hxhwg6T8pa3QL6QbgDyNRnZ31lm6pcEAmuf8xkanvSRBGn18FGlpmb240
+ B5M9oQGaMYzCMldd9v2Dm2w7JOiP7mQ2uNulMOmfB3oFnlPMsOzlauyRw1blRU9ugi5n
+ Fb43n8rPpgJe3/bCy7OPkuXQwb5yZ6CldWPPrPdhJNy4NcJnFY3qauifO30lrW5VCoiP
+ Yc6w==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1747831408; x=1748436208;
+ d=1e100.net; s=20230601; t=1747831510; x=1748436310;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:feedback-id:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=hgjwFdM2k5sCslQZdWwlZbIspHEoXzqe2FcVDJivI+o=;
- b=A3oufzoI4y3DZX6D9/5VylbrwkwgexXgb5/ebDAte5epEjeKoAnb3VQ8Ittladm8h1
- VScICaBgHQt+MujbMAXwgnNJgbr22ibY1vM6og39qfr6IS67XPz1HMspxSKRBQnzmO2N
- NawrY6KmloFt718OVPJwVdsSXQ/azJjSAWFD9RQ9gqURi9RNMJL/dkhYJVOUv+6Z1tQu
- qBaz0Gj4p5ZUSCYU+c4E2nh417XRaibiiZ6Vqkj5pIjC7YP/XSETA2ufHBG9bvht5TCa
- b133i23jrotOpDcFXWfA3//PmAtTO0m8N6Pdz5AboAJO/+GsJPZZRSemIffTxyEjGWyt
- y/Ig==
+ bh=Vhnzj3NnJO366VT/ATwYapAPa7ylDj+dwVk+TFu/WXo=;
+ b=wzPhx08hOdfI/F2Qb+XjPTItdoPYQTDyj7I1Ad3G4NnK7wllUH75sF3+MfCSs8NsOZ
+ binM668JAdW5U4Zc+j1TT0aylzUA5aebiKRsW6kUa+D1Rh2pJ46CvJLBcM2nJ/kShKc8
+ rnbojG2r33rdErG1vyKROHyW9hPAD4XMOVlUx4PchpbaeL7DmCffPSTvDNlTwFFX/jFF
+ Rb3Os6lFtHQTjktN+PP5AXLVHyyIRodNnO03vo++xk/7gu2eImDNsyQepRSZhVxDEG4w
+ nQ1P3SqK3b9+SH+Q1T0sSv9FN/2dJ0B+46ZBZGz5y2PZyg3Q8zsddRlOI7xAxgXGLmIZ
+ IWpQ==
 X-Forwarded-Encrypted: i=1;
- AJvYcCUQGd6dxFoBfGHImZOoUvccI7x+IcC08K+R5Ccd79TOPXfIai4GIoQCtVY5A4jqKCFULOKyfqILM8o=@lists.freedesktop.org,
- AJvYcCXVK3/pXLLj6c6mtQTB2+F53QnOD5LYaXY8lFFtQMFoDL38KWGz33EIIss6q+qT6FcpF0gLMZyYrA==@lists.freedesktop.org
-X-Gm-Message-State: AOJu0YwXlY6AS0Hwh1jhlACdkwiKx+CP46smVB2vcSpyZJrWqYg8hEpZ
- G5bRzf0nGJ8FUXv60TaJWYESI8OShxN7nuoLjc8m9SBHN68dEZwHo00m
-X-Gm-Gg: ASbGncuY6LMSNJShDoCqgPX4b2deytelUoov95NzR3pr67i7TlB7co9Ob6f/+o/Hkqx
- CiRePIlTKJsC5Xd9Jz/jh5PTtY1JFvvNPPmazXH6fH5kaIjzzFjAANXvfAuV6UIWUyZnvsF7Ctb
- zVpqUv8bJysx8cICHTu6UBYBj3aoncVtCVHiXH5MjN7lkfBWXMOSq6kCIADhh/J/pCJn/Z7azNh
- xrVMT257VSUnzkM9FbKRss/lMxJmwpyKmyMtV4Q4oWwZrBTpP4V5HZ5JlTT+ql05eIkLmJAJGqY
- IMP+8s6Kbr4U0+Q89uVAkfDSuoQCL4wNOkH7pOK3P3Y2bfm9EMEPqXFFc0nYwVW+veoLC1cqjzy
- lzj06xuWqojIZrcxGi/kePSdYVrhfn7lm2sYUJwDu6K47RPv0yOw2
-X-Google-Smtp-Source: AGHT+IErCuCfRGil1ejhob4xg9yF6HudkK+JCsZ+ou6hegKIPEwSjezrXHPPDMBGZDMU5QdCutpJMw==
-X-Received: by 2002:a05:622a:5a92:b0:474:fee1:7915 with SMTP id
- d75a77b69052e-494b0804fccmr351306121cf.31.1747831408000; 
- Wed, 21 May 2025 05:43:28 -0700 (PDT)
+ AJvYcCUcla+kpNyWPFuKiFosC9Yy+e0jvT3VP9fHQHWAE85NLBHMMPidOFCE+MG+4eq4qCegQc8LcfhNJw==@lists.freedesktop.org,
+ AJvYcCVPHoOs1eQVG0dXIY0fjaP/e5v6U9JqlHSnKLQ7dX8RZH7oX0+vI7ZPlhAfCfGsa9qDBdVMuycjN18=@lists.freedesktop.org
+X-Gm-Message-State: AOJu0Yw7bJJ/YF3XprC0U5CFak+NkdOnPeuJtsZqvn+sdIbd33HhqUm/
+ 2U8cC8L1R9nxF6ST4e2kJJDkQUpSKMTnYTtf5x7mlqhsvyXZxcbzh3u2wudQdA==
+X-Gm-Gg: ASbGncskXl18P5wdy3mOLRaADb6TaYz2yhkbn2gRhe+E4B2QjuCdXktqIe9GsPt2bqr
+ joNjrkc9+E5u6dMSNt5oP+sWZTLYkhmL2P1SDSm9jKGARodimDwQFcxW5Nz0XYRp0NgsFQkQGBp
+ OdOUcdQwqeqQ1tquBhJ/RboInU36E3uYJLAlo+ZMdyBKH/JRBFw6QCA40A5uqX5FxbKcdNNtX2r
+ ntSQoDftKIpHaeK1g4Y+K2o8LRlyWNxbA7LgAe7gPYV43FQAXlJqzpfKbfBzq31FVKnmsie1y+7
+ UcPIdlm6M9GpDYn100v2VgQ7iK+J4zG05FYs2AkehSdIrfEtTPGrI5cpDZt/9KD073DSCtZd3b2
+ 0FNBlihvSMLbzcosELlT1K/lxE9kFViGsEaBK1S8tpA==
+X-Google-Smtp-Source: AGHT+IEfRSqcGJ5t4rcRxmzM2k920FXsaJwu1wxt9D1Hfdpn8uKSN3fb6OCq2dNh4iOIGz1TYtv/Hg==
+X-Received: by 2002:a05:6214:cac:b0:6fa:864f:87cc with SMTP id
+ 6a1803df08f44-6fa864f8a4fmr18904046d6.33.1747831510427; 
+ Wed, 21 May 2025 05:45:10 -0700 (PDT)
 Received: from fauth-a1-smtp.messagingengine.com
  (fauth-a1-smtp.messagingengine.com. [103.168.172.200])
  by smtp.gmail.com with ESMTPSA id
- d75a77b69052e-494b2de7adesm78612461cf.17.2025.05.21.05.43.27
+ 6a1803df08f44-6f8b08bf66bsm84578696d6.63.2025.05.21.05.45.09
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 21 May 2025 05:43:27 -0700 (PDT)
-Received: from phl-compute-09.internal (phl-compute-09.phl.internal
- [10.202.2.49])
- by mailfauth.phl.internal (Postfix) with ESMTP id C0F0E120007A;
- Wed, 21 May 2025 08:43:26 -0400 (EDT)
-Received: from phl-mailfrontend-01 ([10.202.2.162])
- by phl-compute-09.internal (MEProxy); Wed, 21 May 2025 08:43:26 -0400
-X-ME-Sender: <xms:bsotaDmo6rPZ2tXj80tjivOzXA9zUk6xy3r7BaxKDzBH9Tl7SYB8Jw>
- <xme:bsotaG3yjjhGuEA2SFUFzXmthWJxpZLhxozreZrqF_Mh0IiDABi6OW1yzmMv1Uc1B
- 1yS-xMRrtdJYAqDgQ>
-X-ME-Received: <xmr:bsotaJp-h3wu69T1xoojOOr2UB59J6teF9TmX8dDoOrOvdDnOJQiPFLq>
-X-ME-Proxy-Cause: gggruggvucftvghtrhhoucdtuddrgeeffedrtddtgdefudduucdltddurdegfedvrddttd
+ Wed, 21 May 2025 05:45:09 -0700 (PDT)
+Received: from phl-compute-11.internal (phl-compute-11.phl.internal
+ [10.202.2.51])
+ by mailfauth.phl.internal (Postfix) with ESMTP id 5CD34120007A;
+ Wed, 21 May 2025 08:45:09 -0400 (EDT)
+Received: from phl-mailfrontend-02 ([10.202.2.163])
+ by phl-compute-11.internal (MEProxy); Wed, 21 May 2025 08:45:09 -0400
+X-ME-Sender: <xms:1cotaFbzhLa-AVxwpQ35d8kX6hIq-ZwWislwhChbDGrE886dcXNkqg>
+ <xme:1cotaMb7eFhXctyLi7ci4R4k3tFn2T2VAuphJPlupRodTcGwYg19z8qCxeIB3OiXg
+ GoUBfDa8naZrFuR_A>
+X-ME-Received: <xmr:1cotaH9vnyOR6XHBgx3dt1S-54GBmy0ro27iatwvJnw6GrIg8QlhdE-Y>
+X-ME-Proxy-Cause: gggruggvucftvghtrhhoucdtuddrgeeffedrtddtgdefuddvucdltddurdegfedvrddttd
  dmucetufdoteggodetrfdotffvucfrrhhofhhilhgvmecuhfgrshhtofgrihhlpdggtfgf
  nhhsuhgsshgtrhhisggvpdfurfetoffkrfgpnffqhgenuceurghilhhouhhtmecufedttd
  enucesvcftvggtihhpihgvnhhtshculddquddttddmnecujfgurhepfffhvfevuffkfhgg
@@ -92,15 +92,15 @@ X-ME-Proxy-Cause: gggruggvucftvghtrhhoucdtuddrgeeffedrtddtgdefudduucdltddurdegfe
  hinhesphhrohhtohhnrdhmvgdprhgtphhtthhopegrrdhhihhnuggsohhrgheskhgvrhhn
  vghlrdhorhhgpdhrtghpthhtoheprghlihgtvghrhihhlhesghhoohhglhgvrdgtohhmpd
  hrtghpthhtohepthhmghhrohhsshesuhhmihgthhdrvgguuh
-X-ME-Proxy: <xmx:bsotaLmvSkg2Q06ODnYxXBUDGpip6DQk3VTw7K4qMb2reqkkcSWrVA>
- <xmx:bsotaB3MfIrt8FFge-AucHIiw6NaEDMgIfwaMG4fS9t1kft0C04zuA>
- <xmx:bsotaKuSJ-iPW_ldhIxNCQ2UxEf5EaZ56wZOLmaLS1G0rcJmTJ2YgA>
- <xmx:bsotaFWm4FiQy945-CSPTPkSXQlvyTnVjbb8iPWajXkBDIE068QB1g>
- <xmx:bsotaA39I8JQdG94Oyw-Ah8xDMPX_twLC3gAiGlTsg415qakz7IrijV3>
+X-ME-Proxy: <xmx:1cotaDr_BZnTBO2ZZrxy5srrQmZLzeo9gWXnSOIXgNKffweWuOxofg>
+ <xmx:1cotaAqMl1zRLe7L77t9gwX1n54-xBKwNgVE1PMBxXFMnUOO50bscw>
+ <xmx:1cotaJQ4dtper7JsxvJG39LklNMIPguYPvErgkSuMnOiT_alNE6wdA>
+ <xmx:1cotaIqgOC4ilrO4JZb18O9O6GbSlFri46ozj22VjBeOFxpIB5P63g>
+ <xmx:1cotaJ4jQULX3Xw0qsN9n-dwPqENjGgYpRv_JvJUfS2Dt1RcyknYAt6Z>
 Feedback-ID: iad51458e:Fastmail
 Received: by mail.messagingengine.com (Postfix) with ESMTPA; Wed,
- 21 May 2025 08:43:25 -0400 (EDT)
-Date: Wed, 21 May 2025 05:43:24 -0700
+ 21 May 2025 08:45:08 -0400 (EDT)
+Date: Wed, 21 May 2025 05:45:07 -0700
 From: Boqun Feng <boqun.feng@gmail.com>
 To: Alexandre Courbot <acourbot@nvidia.com>
 Cc: Miguel Ojeda <ojeda@kernel.org>, Alex Gaynor <alex.gaynor@gmail.com>,
@@ -119,15 +119,14 @@ Cc: Miguel Ojeda <ojeda@kernel.org>, Alex Gaynor <alex.gaynor@gmail.com>,
  Timur Tabi <ttabi@nvidia.com>, Alistair Popple <apopple@nvidia.com>,
  linux-kernel@vger.kernel.org, rust-for-linux@vger.kernel.org,
  nouveau@lists.freedesktop.org, dri-devel@lists.freedesktop.org
-Subject: Re: [PATCH v4 01/20] rust: dma: expose the count and size of
- CoherentAllocation
-Message-ID: <aC3KbKeEVlHggi5l@Mac.home>
+Subject: Re: [PATCH v4 03/20] rust: sizes: add constants up to SZ_2G
+Message-ID: <aC3K0-z7JARmg7Cc@Mac.home>
 References: <20250521-nova-frts-v4-0-05dfd4f39479@nvidia.com>
- <20250521-nova-frts-v4-1-05dfd4f39479@nvidia.com>
+ <20250521-nova-frts-v4-3-05dfd4f39479@nvidia.com>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
-In-Reply-To: <20250521-nova-frts-v4-1-05dfd4f39479@nvidia.com>
+In-Reply-To: <20250521-nova-frts-v4-3-05dfd4f39479@nvidia.com>
 X-Mailman-Approved-At: Sat, 13 Dec 2025 12:17:01 +0000
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
@@ -143,57 +142,53 @@ List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-On Wed, May 21, 2025 at 03:44:56PM +0900, Alexandre Courbot wrote:
-> These properties are very useful to have and should be accessible.
+On Wed, May 21, 2025 at 03:44:58PM +0900, Alexandre Courbot wrote:
+> nova-core will need to use SZ_1M, so make the remaining constants
+> available.
 > 
 > Signed-off-by: Alexandre Courbot <acourbot@nvidia.com>
-> ---
->  rust/kernel/dma.rs | 18 ++++++++++++++++++
->  1 file changed, 18 insertions(+)
-> 
-> diff --git a/rust/kernel/dma.rs b/rust/kernel/dma.rs
-> index 605e01e35715667f93297fd9ec49d8e7032e0910..2a60eefa47dfc1f836c30ee342e26c6ff3e9b13a 100644
-> --- a/rust/kernel/dma.rs
-> +++ b/rust/kernel/dma.rs
-> @@ -129,6 +129,10 @@ pub mod attrs {
->  //
->  // Hence, find a way to revoke the device resources of a `CoherentAllocation`, but not the
->  // entire `CoherentAllocation` including the allocated memory itself.
-> +//
-> +// # Invariants
-> +//
-> +// The size in bytes of the allocation is equal to `size_of::<T> * count()`.
->  pub struct CoherentAllocation<T: AsBytes + FromBytes> {
->      dev: ARef<Device>,
->      dma_handle: bindings::dma_addr_t,
-> @@ -201,6 +205,20 @@ pub fn alloc_coherent(
->          CoherentAllocation::alloc_attrs(dev, count, gfp_flags, Attrs(0))
->      }
->  
-> +    /// Returns the number of elements `T` in this allocation.
-> +    ///
-> +    /// Note that this is not the size of the allocation in bytes, which is provided by
-> +    /// [`Self::size`].
-> +    pub fn count(&self) -> usize {
-> +        self.count
-> +    }
-> +
-> +    /// Returns the size in bytes of this allocation.
-> +    pub fn size(&self) -> usize {
-> +        // As per the invariants of `CoherentAllocation`.
-> +        self.count * core::mem::size_of::<T>()
 
-I think we need a comment or even an invariant saying this multiply
-cannot overflow.
+Reviewed-by: Boqun Feng <boqun.feng@gmail.com>
 
 Regards,
 Boqun
 
-> +    }
-> +
->      /// Returns the base address to the allocated region in the CPU's virtual address space.
->      pub fn start_ptr(&self) -> *const T {
->          self.cpu_addr
+> ---
+>  rust/kernel/sizes.rs | 24 ++++++++++++++++++++++++
+>  1 file changed, 24 insertions(+)
+> 
+> diff --git a/rust/kernel/sizes.rs b/rust/kernel/sizes.rs
+> index 834c343e4170f507821b870e77afd08e2392911f..661e680d9330616478513a19fe2f87f9521516d7 100644
+> --- a/rust/kernel/sizes.rs
+> +++ b/rust/kernel/sizes.rs
+> @@ -24,3 +24,27 @@
+>  pub const SZ_256K: usize = bindings::SZ_256K as usize;
+>  /// 0x00080000
+>  pub const SZ_512K: usize = bindings::SZ_512K as usize;
+> +/// 0x00100000
+> +pub const SZ_1M: usize = bindings::SZ_1M as usize;
+> +/// 0x00200000
+> +pub const SZ_2M: usize = bindings::SZ_2M as usize;
+> +/// 0x00400000
+> +pub const SZ_4M: usize = bindings::SZ_4M as usize;
+> +/// 0x00800000
+> +pub const SZ_8M: usize = bindings::SZ_8M as usize;
+> +/// 0x01000000
+> +pub const SZ_16M: usize = bindings::SZ_16M as usize;
+> +/// 0x02000000
+> +pub const SZ_32M: usize = bindings::SZ_32M as usize;
+> +/// 0x04000000
+> +pub const SZ_64M: usize = bindings::SZ_64M as usize;
+> +/// 0x08000000
+> +pub const SZ_128M: usize = bindings::SZ_128M as usize;
+> +/// 0x10000000
+> +pub const SZ_256M: usize = bindings::SZ_256M as usize;
+> +/// 0x20000000
+> +pub const SZ_512M: usize = bindings::SZ_512M as usize;
+> +/// 0x40000000
+> +pub const SZ_1G: usize = bindings::SZ_1G as usize;
+> +/// 0x80000000
+> +pub const SZ_2G: usize = bindings::SZ_2G as usize;
 > 
 > -- 
 > 2.49.0
