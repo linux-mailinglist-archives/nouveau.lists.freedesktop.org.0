@@ -2,78 +2,170 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id 3338AABFE5E
-	for <lists+nouveau@lfdr.de>; Wed, 21 May 2025 22:48:52 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id A82D2AC0372
+	for <lists+nouveau@lfdr.de>; Thu, 22 May 2025 06:45:39 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id D51A010E796;
-	Wed, 21 May 2025 20:48:50 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 09CE6971C5;
+	Thu, 22 May 2025 04:23:51 +0000 (UTC)
 Authentication-Results: gabe.freedesktop.org;
-	dkim=pass (1024-bit key; unprotected) header.d=redhat.com header.i=@redhat.com header.b="B1N5CI94";
+	dkim=pass (2048-bit key; unprotected) header.d=Nvidia.com header.i=@Nvidia.com header.b="HUNAY3ng";
 	dkim-atps=neutral
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from us-smtp-delivery-124.mimecast.com
- (us-smtp-delivery-124.mimecast.com [170.10.129.124])
- by gabe.freedesktop.org (Postfix) with ESMTPS id E3FAA10E795
- for <nouveau@lists.freedesktop.org>; Wed, 21 May 2025 20:48:48 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1747860528;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references;
- bh=0Xzufaa4aZgtFIYzj8zYYCFRxQVb/zwFe5HxzSZJWxY=;
- b=B1N5CI94J6qbmxWIjId/MzpSW/rHQyU11XcmWy0ywIpFR3YqdjyV5sb7JI+Vj4ln8WkSN2
- 2TxnFnRdy2Y+RdSboTk1gRs+ivrKwcLBCinYZScRurJUJQ5O7d4AQ+/pjaGi+VZ/LKYTQi
- fh/WOwiAV0aEifNGmnPf3z+NogsiVZI=
-Received: from mx-prod-mc-08.mail-002.prod.us-west-2.aws.redhat.com
- (ec2-35-165-154-97.us-west-2.compute.amazonaws.com [35.165.154.97]) by
- relay.mimecast.com with ESMTP with STARTTLS (version=TLSv1.3,
- cipher=TLS_AES_256_GCM_SHA384) id us-mta-641-cHEFoZDJMu2ztuwO7P5b-Q-1; Wed,
- 21 May 2025 16:48:45 -0400
-X-MC-Unique: cHEFoZDJMu2ztuwO7P5b-Q-1
-X-Mimecast-MFC-AGG-ID: cHEFoZDJMu2ztuwO7P5b-Q_1747860520
-Received: from mx-prod-int-04.mail-002.prod.us-west-2.aws.redhat.com
- (mx-prod-int-04.mail-002.prod.us-west-2.aws.redhat.com [10.30.177.40])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
- (No client certificate requested)
- by mx-prod-mc-08.mail-002.prod.us-west-2.aws.redhat.com (Postfix) with ESMTPS
- id A474D180036E; Wed, 21 May 2025 20:48:40 +0000 (UTC)
-Received: from chopper.redhat.com (unknown [10.22.80.100])
- by mx-prod-int-04.mail-002.prod.us-west-2.aws.redhat.com (Postfix) with ESMTP
- id AED9F19560B7; Wed, 21 May 2025 20:48:35 +0000 (UTC)
-From: Lyude Paul <lyude@redhat.com>
-To: dri-devel@lists.freedesktop.org, rust-for-linux@vger.kernel.org,
- linux-kernel@vger.kernel.org
-Cc: Danilo Krummrich <dakr@kernel.org>,
- Maarten Lankhorst <maarten.lankhorst@linux.intel.com>,
- Maxime Ripard <mripard@kernel.org>,
- Thomas Zimmermann <tzimmermann@suse.de>, David Airlie <airlied@gmail.com>,
- Simona Vetter <simona@ffwll.ch>, Miguel Ojeda <ojeda@kernel.org>,
- Alex Gaynor <alex.gaynor@gmail.com>, Boqun Feng <boqun.feng@gmail.com>,
- Gary Guo <gary@garyguo.net>,
- =?UTF-8?q?Bj=C3=B6rn=20Roy=20Baron?= <bjorn3_gh@protonmail.com>,
- Benno Lossin <benno.lossin@proton.me>,
- Andreas Hindborg <a.hindborg@kernel.org>,
- Alice Ryhl <aliceryhl@google.com>, Trevor Gross <tmgross@umich.edu>,
- Sumit Semwal <sumit.semwal@linaro.org>,
- =?UTF-8?q?Christian=20K=C3=B6nig?= <christian.koenig@amd.com>,
- Daniel Almeida <daniel.almeida@collabora.com>,
- Asahi Lina <lina@asahilina.net>, Alyssa Rosenzweig <alyssa@rosenzweig.io>,
- nouveau@lists.freedesktop.org (open list:DRM DRIVER FOR NVIDIA GPUS [RUST]),
- linux-media@vger.kernel.org (open list:DMA BUFFER SHARING
- FRAMEWORK:Keyword:\bdma_(?:buf|fence|resv)\b), 
- linaro-mm-sig@lists.linaro.org (moderated list:DMA BUFFER SHARING
- FRAMEWORK:Keyword:\bdma_(?:buf|fence|resv)\b)
-Subject: [PATCH v2 11/12] rust: drm: gem: Add export() callback
-Date: Wed, 21 May 2025 16:29:18 -0400
-Message-ID: <20250521204654.1610607-12-lyude@redhat.com>
-In-Reply-To: <20250521204654.1610607-1-lyude@redhat.com>
-References: <20250521204654.1610607-1-lyude@redhat.com>
+Received: from NAM12-BN8-obe.outbound.protection.outlook.com
+ (mail-bn8nam12on2051.outbound.protection.outlook.com [40.107.237.51])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 7821D95AB9;
+ Thu, 22 May 2025 04:01:07 +0000 (UTC)
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=OhH/7rE8RXP+hl6uYikLdfVnSUB1eWKJiohaqckIx2llkXOSh1jV3/2C4O/8ILwcLm8kqGDbSmxB6lMkrTapcDIHAMy4kDH1FzOtf3xELAchtybolRBQLhZO0hx+ZHD7KerXkjPhnHL+rdjjiG8WGVClJhgMkPbGhep7T8md04lwaa7aHOO014hrSoBu2RMDreSfNenJP7WVYr2npJRJ3QBpEHnsR6NMoIJYlnA0BA39tbH4RXI/lwpH/6f00c+H9hK12zWPNGfXU8NbCENg+jWZGP6KfAPsUfA3BZcFV4wc64BtkQfw7Qcsfi6wddq+EPWJorRvZGUuqP6YFkTX1g==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=Yv2qeM2BhPG3oLtA1XTo86pZQW+gCGIeUtBliEwnozQ=;
+ b=oyHJL0CmGu/Q8zp3lvG0DhtaZ+6udcxhKXon4mImRb3JQUdWjNZzH6+8n0e8MqnnYxOsDo3bViw6Tp4+iwISqDH62Im5WjY9Pi+5s6JuZGAnY6fsO4ZhvQoNVVlJdb3o1SKYODkUZUdrHQi2d7JGvKJHo6hG4LSJe/iHLcVHBcTydYONHJqg7ZXKarwPuce3GYa/GGYoADt40nN4ctFSYcc6WoZdhXvcg2K/9Cd/ProfujEHnIJBGsTJ6Y1C2uV/R6C6uM6r9YpWDmlX1JMHFYH0WCE4NsH3Q5Q8PiXA1smTsgKqF4J+31egbKz1goYA8+r3ILFxAyQ0nWr8WebFtw==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=nvidia.com; dmarc=pass action=none header.from=nvidia.com;
+ dkim=pass header.d=nvidia.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=Nvidia.com;
+ s=selector2;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=Yv2qeM2BhPG3oLtA1XTo86pZQW+gCGIeUtBliEwnozQ=;
+ b=HUNAY3ngatHwEOepB4p0XeMhmB+lt90RaHK7x5EN84zoJjs5iRaub6gqfo00YT4lMxGdyuU2+hQ+Kj9HV112nuEuE7N38W3Gq2Q+y6LR1xFaKIT4C/kTwcr3abFnESPoMw7odBPhbaa+9v1C454YnNzcQRTlmcMD7d4rSFFjQaJlocybNGnUypCzBDbjp27MjRA28G8zdmI7OtxzLtf0BIrVO9eZVobDmtnIPnjC7SFy6DUZNsQKP+yKV6oyr0SWGj60X36Bav2QStI7G5od2RIK+YEnzLX+9+rptgulPiYjEzKS6PvvKWoNvG/d7kijq/zdVFVKIDZeZCWL+fkZvQ==
+Authentication-Results: dkim=none (message not signed)
+ header.d=none;dmarc=none action=none header.from=nvidia.com;
+Received: from CH2PR12MB3990.namprd12.prod.outlook.com (2603:10b6:610:28::18)
+ by PH7PR12MB7842.namprd12.prod.outlook.com (2603:10b6:510:27a::21)
+ with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.8769.20; Thu, 22 May
+ 2025 04:01:01 +0000
+Received: from CH2PR12MB3990.namprd12.prod.outlook.com
+ ([fe80::6e37:569f:82ee:3f99]) by CH2PR12MB3990.namprd12.prod.outlook.com
+ ([fe80::6e37:569f:82ee:3f99%5]) with mapi id 15.20.8769.019; Thu, 22 May 2025
+ 04:00:57 +0000
+Content-Type: text/plain; charset=UTF-8
+Date: Thu, 22 May 2025 13:00:53 +0900
+Message-Id: <DA2E1BNC668R.MMCARZ3K2NTS@nvidia.com>
+Cc: "John Hubbard" <jhubbard@nvidia.com>, "Ben Skeggs" <bskeggs@nvidia.com>,
+ "Joel Fernandes" <joelagnelf@nvidia.com>, "Timur Tabi" <ttabi@nvidia.com>,
+ "Alistair Popple" <apopple@nvidia.com>, <linux-kernel@vger.kernel.org>,
+ <rust-for-linux@vger.kernel.org>, <nouveau@lists.freedesktop.org>,
+ <dri-devel@lists.freedesktop.org>
+Subject: Re: [PATCH v4 04/20] rust: add new `num` module with useful integer
+ operations
+From: "Alexandre Courbot" <acourbot@nvidia.com>
+To: "Alexandre Courbot" <acourbot@nvidia.com>, "Miguel Ojeda"
+ <ojeda@kernel.org>, "Alex Gaynor" <alex.gaynor@gmail.com>, "Boqun Feng"
+ <boqun.feng@gmail.com>, "Gary Guo" <gary@garyguo.net>,
+ =?utf-8?q?Bj=C3=B6rn_Roy_Baron?= <bjorn3_gh@protonmail.com>, "Benno Lossin"
+ <benno.lossin@proton.me>, "Andreas Hindborg" <a.hindborg@kernel.org>,
+ "Alice Ryhl" <aliceryhl@google.com>, "Trevor Gross" <tmgross@umich.edu>,
+ "Danilo Krummrich" <dakr@kernel.org>, "David Airlie" <airlied@gmail.com>,
+ "Simona Vetter" <simona@ffwll.ch>, "Maarten Lankhorst"
+ <maarten.lankhorst@linux.intel.com>, "Maxime Ripard" <mripard@kernel.org>,
+ "Thomas Zimmermann" <tzimmermann@suse.de>, "Daniel Almeida"
+ <daniel.almeida@collabora.com>
+Content-Transfer-Encoding: quoted-printable
+X-Mailer: aerc 0.20.1-0-g2ecb8770224a
+References: <20250521-nova-frts-v4-0-05dfd4f39479@nvidia.com>
+ <20250521-nova-frts-v4-4-05dfd4f39479@nvidia.com>
+In-Reply-To: <20250521-nova-frts-v4-4-05dfd4f39479@nvidia.com>
+X-ClientProxiedBy: TYCP301CA0085.JPNP301.PROD.OUTLOOK.COM
+ (2603:1096:405:7b::7) To CH2PR12MB3990.namprd12.prod.outlook.com
+ (2603:10b6:610:28::18)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-X-Scanned-By: MIMEDefang 3.0 on 10.30.177.40
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: CH2PR12MB3990:EE_|PH7PR12MB7842:EE_
+X-MS-Office365-Filtering-Correlation-Id: 016863c0-ccdf-4a35-db00-08dd98e54115
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: BCL:0;
+ ARA:13230040|1800799024|366016|10070799003|7416014|376014|921020; 
+X-Microsoft-Antispam-Message-Info: =?utf-8?B?UnFmMk1IaXJZeDZURlZkcFN5U1FCcmVWVVdNMG9wbitheXpscHRucWRZaTJo?=
+ =?utf-8?B?RklLMEo3T2pHUHM5cko1dUdITHVMYTBYNFZhcTQxM0g4UVEvVEViVWd6Ymxy?=
+ =?utf-8?B?ZUNWa0E5dnhzVU1YbWQwKzdLTjhuQ1h6blBBbktVd3lmYUE1Y1FoK3dxMDJC?=
+ =?utf-8?B?TkVyMGluem42QzBUNy9BV3VraTlxY1pQeE8vM2hsK1IzN2RUcTh2cWh1c0g3?=
+ =?utf-8?B?MHZ6c2hLTkVRWDFqL1lOZnQ3RGptMzEzNzFFZklkbEYvMFcrOFc5SGNwYUNY?=
+ =?utf-8?B?ZmxJY1BwcUh4Z2ZOempSNlduUDVLL3FIYmZjeVpZQmV4dWNDWE80Rm5ScTFo?=
+ =?utf-8?B?MG1XTzNrSEk4RUdTakIxRXBJRmFmTWVUQnNZM3FGOGJoTUk5RTBOQktPN2xt?=
+ =?utf-8?B?VW5FTjJiV2NtMXBnWC9hcFV2Z2s5dUtmZ3l6aFJ4L1FubCsvZUxPOGxsZlRh?=
+ =?utf-8?B?QlR0K0R1V1JsQnR3NXFNWWdSeGZ0bnVraStOMkE3ZndsbWNzcEhjRnBkV3ps?=
+ =?utf-8?B?RExWV1VDUXE2L0YwTHd3dE5UMU1JTEFYT2lDa2Z0dUswZk9BZXo5K1BYZ2tL?=
+ =?utf-8?B?NDl0bzJ3d1ZkM1YrK2d1OHE0b1V3Q21FUkNaU1dNbEJaRmtJRldWOE5JY1B5?=
+ =?utf-8?B?Zk5WaFpHQ2p2VGcvSDZJc2Z2dU84MGVTRDJRS3VTdFZoSVdleGZOaWVnYVpy?=
+ =?utf-8?B?MVZHS01NTTMyNXRGL3VHN1ZtRklLWXU5YlpFaVh5TGZVU3U3R29Xa0gxVm42?=
+ =?utf-8?B?ODlOcEFDNitJMFVrK1JnekhQWk5TSUlndTVMUDR4R0Z4RkxvOWlndUR0QjNK?=
+ =?utf-8?B?Uzltd2lKQnQ5WW5mUFJXQ0p6WXJjVlFpOGZGeWttSXRMUHBYdkpqbzk3WExz?=
+ =?utf-8?B?R3AyL1JvNE9BelZYa1NNNDdLWjhJWE4vZWlQMGc1Rm41dlhHbzVka3Z4NFMv?=
+ =?utf-8?B?a0Vma0ZUekFRV1I4TDVEM2JleEQ5VGdUdXdOL2JpRzFUUjFZaXVUTlJBTGJy?=
+ =?utf-8?B?R1hGc0tkWTIyU2J2c29LRmlVdWJCR0plZ256SGZocXNLNE91NUtxbTRDRUF2?=
+ =?utf-8?B?QklyMkRvdU82VkI1bmkyV05xSG9oeU9odlAxNnR3RnptTHNyaFlWRmdWUHI0?=
+ =?utf-8?B?cDY4L0V4NUgrcDI0NW1iQlVmWXQzRGRSc2lLd2k1YmlnODJBejhJY1JoU2Fr?=
+ =?utf-8?B?UWRMYjlvZHJFbEo2aWxrTDVxa2Noako3VE5zUCtYZ1ExZjcydW5iYnhCVzdz?=
+ =?utf-8?B?WjdoS3RCM2dxUThldytRQVB0KytIMkZ6Mk04cTZKMnBvRjE4bldoR2t0VW5L?=
+ =?utf-8?B?cHBKU3lPeC9BZGk1Q0J4R0NnQ2pUa0NvLzNJZytzQXhrRFdEc0JBNkJWTkR4?=
+ =?utf-8?B?YnpsblQrdTNvNTlNN3gzaEFUWksxVFdMNERlR0tKVWRTZDdtR1NRS3R4Tkh3?=
+ =?utf-8?B?dFduU1RkYTJlcnQzcFFqeFdzV3Nja2VBUnVMQjh2S1pHWEFJMy9pSXo4cXBW?=
+ =?utf-8?B?Z3lwMDlPL2t4NERneEF6NGhFd1BZUnk4eEJSaGJtQUpnRSs1RUYvZDdxUjRM?=
+ =?utf-8?B?bGU2Nk1Ba1JrQzhoam93Vkt5NGhJdjdDeU96QUF4eW0xVDd6eVJiRTJDTkxn?=
+ =?utf-8?B?aFpEcGhSVHNNYnlCaWs0VzcwclVPczUzTDRRc0dQQW5KTHNyRDFOenA5SXEx?=
+ =?utf-8?B?V0NwcnpYcFB1dUZVQmliU0txNkVQNVJ0ZE5OZUFkelplcE5GRTdqK2wxMUJn?=
+ =?utf-8?B?K3E2REhOWVlxNm5nbmxxU3dkZjJvVGZMcE5idWFrOG8vSVBWQUZCSHJEOE93?=
+ =?utf-8?B?QWZGdGxCUlgzTFlJa0toVXNhRGRDRncyMGRVcHVyeWVRaGlTdkRoNElrUm5K?=
+ =?utf-8?B?ODYxbnFDakcxV25ZaXlOUDZJa1RNRk9UVXhiNy9iRHdMaU9yelRSbGFZczJ3?=
+ =?utf-8?B?a3lTSklHRkZPRVZVT1hqTGVta2VzWHgxbDVhcVoxcTJtWk8rS1QyN2c4cEZs?=
+ =?utf-8?B?NXN1a3liMUZnPT0=?=
+X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
+ IPV:NLI; SFV:NSPM; H:CH2PR12MB3990.namprd12.prod.outlook.com; PTR:; CAT:NONE;
+ SFS:(13230040)(1800799024)(366016)(10070799003)(7416014)(376014)(921020);
+ DIR:OUT; SFP:1101; 
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?QTl3SXJnYkVJYzZreWxLU0FScytwbnR3MGEzcTJmdXpVSXdoL01tWXBWK2Q5?=
+ =?utf-8?B?VWRoaUhxQjUrU1BnY3BIU1I1QlBTNUVvM2ZVM0ZaWnNoNG1YNG5PQktCRHhw?=
+ =?utf-8?B?ak5ORlhQb0ZhOEhwS09ZZXEydzZZMThMZStlREJkMjlTbDlOTUZDOFRMMGxx?=
+ =?utf-8?B?ZVNQMTRycnJzS1BWN2xpOWZzRXVKMzF5b05xWjZ0U1lzLzN0SDU1dWs3NjNC?=
+ =?utf-8?B?bTlYTTZSOEZsbThBTzFhNURCNUtSRGxJVXloQks2ODVGYU1lVG04cU5CQ0ZE?=
+ =?utf-8?B?UVVFWFQ3RHZrSE1JMWl1T3Z6RjAxeG81YklWRExlU2c1NW1JWGJYeGhERGRs?=
+ =?utf-8?B?bFZJbFZDZmxGWUE5QWN5ZE5CZ2RQVkFUTTNZY0Y3bFg1bzJ0cXNzcURDNC9O?=
+ =?utf-8?B?b3d2ZzNZQjZNRld4Skd2Q2UrNlRLaWdWVHlLdFFRSFU2SGwrRW9EeWFkVE5w?=
+ =?utf-8?B?R1RxdFRpb2FnL240aDBQNThqMm9qVk93U2N4enkvUGI1RmEvQTQ2ejIzbXda?=
+ =?utf-8?B?bWZaYUJobWlxRG9mZllTRFQ2aHBQWDVSRFZ5dWs0TUlSTHZKNThZRFF0QTRO?=
+ =?utf-8?B?SGdaRkdGMDBXOTMwS1dxMEhhekZqdGgzeU9rSVBDTzgzSDV2MlBTMVFDZmJh?=
+ =?utf-8?B?WE5CWGhqb0tSajNXMzd5WHZBNXRpMkRhRTNhc0o2YzRYa1FOcDdnYnkwTGtM?=
+ =?utf-8?B?aHh5TkJrSk9pNDRsU21hZkpJMjRIWEhlYldxOE8rbnV6MHdUZnlubzluRU41?=
+ =?utf-8?B?YTZ5bFc2N1dWQ2YxbGQwajNBWnhub0UvTlc0ZUxJNjdZRFgwd0RFRSs3Q3FR?=
+ =?utf-8?B?Si8rUUZBclhZdUttKzgvK1AxNmV4YWs2cGFlMWZFWisyNWo2cThmNTRjVHZh?=
+ =?utf-8?B?c1psS0FnMTBWa0N4dUk0SXNxaGJWalRxWFllL2pDWXlzV0poQnFMYmJubzBq?=
+ =?utf-8?B?TXREQmJVaXdZSTRoSVRQa3RvVmVNbllianBsT2R3SXZrL2VlQllSbmVRQ1E3?=
+ =?utf-8?B?MXYveDMxK1lBN0NrbCtWQnlqOFdzVnNoUWN3WGFGMlJnMXU0ZUo4TTYrS0tS?=
+ =?utf-8?B?bnRKVkF2a1dOL3RpOG5rTlRsbHZyMXdlRkJNZW1qdnR4Q2g0cG4xMWtFdTIy?=
+ =?utf-8?B?UGk0L0pyTVlBa1ZibVNMU1BPOXVROGR4YWFLdWVLc0JHN0U4MC9qaUhxdHdR?=
+ =?utf-8?B?UGExNTRHeVMxbmdnODgzZGVpS0UyYmdRNkdOYUFlOTFCMEtNT2FYVGVwVnlk?=
+ =?utf-8?B?MkI0TkF1NzNGc1pDbmRzS1c4RWxyUEhpRjFLV1JpbDNLRlZRZ2FJYk9uNzdY?=
+ =?utf-8?B?NUlPNW41RUR0WnBwbzVpdDVMNFR6Z2JqdnVDOVduTWNYSG5KUFVxcmhjTUZy?=
+ =?utf-8?B?NEpmSjJwYkZWVTE2K2NyKzZlQmpyK3MwQlRJWTV1S3AyN290VEN0dUhWeEVN?=
+ =?utf-8?B?SFo2eE5hRERCTVdjdTAweVVZbUw0cTh2aTI5c0FOajBab2Z2Z21YaU9kdDYr?=
+ =?utf-8?B?VVVXbjVnQzhFQjZZZW84MFpSODNNNCtvTTZNbmtSa3FQOU5CTTRWMHpnWkd1?=
+ =?utf-8?B?NHYxN2p5SEdpUFY2S0lJSGEzZmsxNDBTZTlCQ0NBZDltSGt0amtGbjBwTTlB?=
+ =?utf-8?B?WEx3WVFZTzRLc0hVdlhCY0ZQd3BjUlc0ZVRyVkVJZW9ERjQvR1hjWCtNTGcr?=
+ =?utf-8?B?NnpCbDJRdjBBUUpETkNFM05HQzdpalhVSHRKMmVYZ3pGdm5lZVdVVGlERU9X?=
+ =?utf-8?B?TUJTUHFoYVVpbDRGb29pQlJHcXJ3TGNHTFRtV0hWSkIrSVF0M29MM1JXenZR?=
+ =?utf-8?B?NkJieEtrenM2Uy9NM0djSXFCNVM2amtaWC8zWWNnRG1Ld0RWU3RKY1BXRDlW?=
+ =?utf-8?B?THZyWUNhSGNMTnoxYzZHQzZSckVTUG8zYTJ4Z0NZMTJFWVFvR1VCSkZkVVRt?=
+ =?utf-8?B?NW9GaWgvNDhHT1ltRWxJZURVckt3SWpsZUxNM1piSU5Ya2tMNW1sL3FZQms5?=
+ =?utf-8?B?RjhjRDBodjkxOGYzTXZYbFo5b2pRSzdPcDZIc2NTK2EyTFE4MlhwOStqME8x?=
+ =?utf-8?B?czhMdndiSytNNXp1RlMzV2kxQ1ZFQ3pGVmVTTHdPNFhyY1BENjJlTXhtV2J0?=
+ =?utf-8?B?N3BncEU3NU8rb1hYTEFubUY5QTNKSWo3cDltS0NrY1RsSSttcWUyd3BxZWNW?=
+ =?utf-8?Q?qKeYSy2cKSIZs8Ep8hCzwbN2NKXaJvmzVSdrjfjFe7NH?=
+X-OriginatorOrg: Nvidia.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: 016863c0-ccdf-4a35-db00-08dd98e54115
+X-MS-Exchange-CrossTenant-AuthSource: CH2PR12MB3990.namprd12.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 22 May 2025 04:00:57.5230 (UTC)
+X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
+X-MS-Exchange-CrossTenant-Id: 43083d15-7273-40c1-b7db-39efd9ccc17a
+X-MS-Exchange-CrossTenant-MailboxType: HOSTED
+X-MS-Exchange-CrossTenant-UserPrincipalName: IAOJ1kKPSPiEDzBDfiDHyRSL20HVGQ8z4AG0/uQAl7UXaBPDtgtDhegV17E05OBxoyraoGcdr+abWdTmJAboUA==
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: PH7PR12MB7842
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -88,164 +180,34 @@ List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-This introduces an optional export() callback for GEM objects, which is
-used to implement the drm_gem_object_funcs->export function.
+On Wed May 21, 2025 at 3:44 PM JST, Alexandre Courbot wrote:
+> Introduce the `num` module, featuring the `NumExt` extension trait
+> that expands unsigned integers with useful operations for the kernel.
+>
+> These are to be used by the nova-core driver, but they are so ubiquitous
+> that other drivers should be able to take advantage of them as well.
+>
+> The currently implemented operations are:
+>
+> - align_down()
+> - align_up()
+> - fls()
+>
+> But this trait is expected to be expanded further.
 
-Signed-off-by: Lyude Paul <lyude@redhat.com>
----
- drivers/gpu/drm/nova/gem.rs  |  1 +
- rust/kernel/drm/gem/mod.rs   | 73 +++++++++++++++++++++++++++++++++++-
- rust/kernel/drm/gem/shmem.rs |  6 ++-
- 3 files changed, 77 insertions(+), 3 deletions(-)
+A trait is nice, but prevents any use in const context... After looking
+at the genmask patch [1] I am now wondering (again) whether a set of
+const functions would not better serve the needs of the kernel.
 
-diff --git a/drivers/gpu/drm/nova/gem.rs b/drivers/gpu/drm/nova/gem.rs
-index f2f23320110dd..6cc7a65a50fae 100644
---- a/drivers/gpu/drm/nova/gem.rs
-+++ b/drivers/gpu/drm/nova/gem.rs
-@@ -16,6 +16,7 @@
- #[pin_data]
- pub(crate) struct NovaObject {}
- 
-+#[vtable]
- impl gem::BaseDriverObject for NovaObject {
-     type Driver = NovaDriver;
-     type Object = gem::Object<Self>;
-diff --git a/rust/kernel/drm/gem/mod.rs b/rust/kernel/drm/gem/mod.rs
-index 6d87e75690d2f..ef697f323e52c 100644
---- a/rust/kernel/drm/gem/mod.rs
-+++ b/rust/kernel/drm/gem/mod.rs
-@@ -10,7 +10,8 @@
-     alloc::flags::*,
-     bindings, drm::{self, private::Sealed},
-     drm::driver::{AllocImpl, AllocOps},
--    error::{to_result, Result},
-+    dma_buf,
-+    error::{to_result, from_err_ptr, Result},
-     prelude::*,
-     types::{ARef, AlwaysRefCounted, Opaque},
- };
-@@ -44,6 +45,7 @@ fn as_ref(&self) -> &kernel::drm::gem::OpaqueObject<D> {
- pub(crate) use impl_as_opaque;
- 
- /// GEM object functions, which must be implemented by drivers.
-+#[vtable]
- pub trait BaseDriverObject: Sync + Send + Sized {
-     /// Parent `Driver` for this object.
-     type Driver: drm::Driver;
-@@ -68,6 +70,11 @@ fn open(_obj: &Self::Object, _file: &DriverFile<Self>) -> Result {
- 
-     /// Close a handle to an existing object, associated with a File.
-     fn close(_obj: &Self::Object, _file: &DriverFile<Self>) {}
-+
-+    /// Optional handle for exporting a gem object.
-+    fn export(_obj: &Self::Object, _flags: u32) -> Result<DmaBuf<Self::Object>> {
-+        unimplemented!()
-+    }
- }
- 
- /// Trait that represents a GEM object subtype
-@@ -137,6 +144,21 @@ extern "C" fn close_callback<T: BaseDriverObject>(
-     T::close(obj, file);
- }
- 
-+extern "C" fn export_callback<T: BaseDriverObject>(
-+    raw_obj: *mut bindings::drm_gem_object,
-+    flags: i32,
-+) -> *mut bindings::dma_buf {
-+    // SAFETY: `export_callback` is specified in the AllocOps structure for `Object<T>`, ensuring
-+    // that `raw_obj` is contained within a `Object<T>`.
-+    let obj = unsafe { T::Object::as_ref(raw_obj) };
-+
-+    match T::export(obj, flags as _) {
-+        // DRM takes a hold of the reference
-+        Ok(buf) => buf.into_raw(),
-+        Err(e) => e.to_ptr(),
-+    }
-+}
-+
- impl<T: BaseDriverObject> IntoGEMObject for Object<T> {
-     fn as_raw(&self) -> *mut bindings::drm_gem_object {
-         self.obj.get()
-@@ -247,7 +269,11 @@ impl<T: BaseDriverObject> Object<T> {
-         open: Some(open_callback::<T>),
-         close: Some(close_callback::<T>),
-         print_info: None,
--        export: None,
-+        export: if T::HAS_EXPORT {
-+            Some(export_callback::<T>)
-+        } else {
-+            None
-+        },
-         pin: None,
-         unpin: None,
-         get_sg_table: None,
-@@ -376,6 +402,49 @@ fn as_raw(&self) -> *mut bindings::drm_gem_object {
- 
- impl<D: drm::Driver> Sealed for OpaqueObject<D> {}
- 
-+/// A [`dma_buf::DmaBuf`] which has been exported from a GEM object.
-+///
-+/// The [`dma_buf::DmaBuf`] will be released when this type is dropped.
-+///
-+/// # Invariants
-+///
-+/// - `self.0` points to a valid initialized [`dma_buf::DmaBuf`] for the lifetime of this object.
-+/// - The GEM object from which this [`dma_buf::DmaBuf`] was exported from is guaranteed to be of
-+///   type `T`.
-+pub struct DmaBuf<T: IntoGEMObject>(NonNull<dma_buf::DmaBuf>, PhantomData<T>);
-+
-+impl<T: IntoGEMObject> Deref for DmaBuf<T> {
-+    type Target = dma_buf::DmaBuf;
-+
-+    #[inline]
-+    fn deref(&self) -> &Self::Target {
-+        // SAFETY: This pointer is guaranteed to be valid by our type invariants.
-+        unsafe { self.0.as_ref() }
-+    }
-+}
-+
-+impl<T: IntoGEMObject> Drop for DmaBuf<T> {
-+    #[inline]
-+    fn drop(&mut self) {
-+        // SAFETY:
-+        // - `dma_buf::DmaBuf` is guaranteed to have an identical layout to `struct dma_buf`
-+        //   by its type invariants.
-+        // - We hold the last reference to this `DmaBuf`, making it safe to destroy.
-+        unsafe { bindings::drm_gem_dmabuf_release(self.0.cast().as_ptr()) }
-+    }
-+}
-+
-+impl<T: IntoGEMObject> DmaBuf<T> {
-+    /// Leak the reference for this [`DmaBuf`] and return a raw pointer to it.
-+    #[inline]
-+    pub(crate) fn into_raw(self) -> *mut bindings::dma_buf {
-+        let dma_ptr = self.as_raw();
-+
-+        core::mem::forget(self);
-+        dma_ptr
-+    }
-+}
-+
- pub(super) const fn create_fops() -> bindings::file_operations {
-     // SAFETY: As by the type invariant, it is safe to initialize `bindings::file_operations`
-     // zeroed.
-diff --git a/rust/kernel/drm/gem/shmem.rs b/rust/kernel/drm/gem/shmem.rs
-index bff038df93334..799f15c38cc36 100644
---- a/rust/kernel/drm/gem/shmem.rs
-+++ b/rust/kernel/drm/gem/shmem.rs
-@@ -77,7 +77,11 @@ impl<T: BaseDriverObject> Object<T> {
-         open: Some(super::open_callback::<T>),
-         close: Some(super::close_callback::<T>),
-         print_info: Some(bindings::drm_gem_shmem_object_print_info),
--        export: None,
-+        export: if T::HAS_EXPORT {
-+            Some(super::export_callback::<T>)
-+        } else {
-+            None
-+        },
-         pin: Some(bindings::drm_gem_shmem_object_pin),
-         unpin: Some(bindings::drm_gem_shmem_object_unpin),
-         get_sg_table: Some(bindings::drm_gem_shmem_object_get_sg_table),
--- 
-2.49.0
+Either that, or we enable `#![feature(const_trait_impl)]`. I just tried
+and with it we could indeed define and implement `NumExt` as const,
+which looks like the cleanest way to do this to me.
+
+The functions of [1] could then also be implemented as methods of that
+trait, which would allow them to leverage the macro generating the impl
+blocks for all supporting types, while having their examples/doc-tests
+in the trait declaration.
+
+[1] https://lore.kernel.org/rust-for-linux/20250326-topic-panthor-rs-genmas=
+k-v5-1-bfa6140214da@collabora.com/
 
