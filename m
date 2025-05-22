@@ -2,54 +2,55 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id 62224AC0BD3
-	for <lists+nouveau@lfdr.de>; Thu, 22 May 2025 14:44:21 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id DE7E5AC0C18
+	for <lists+nouveau@lfdr.de>; Thu, 22 May 2025 14:59:33 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id C1E4510E848;
-	Thu, 22 May 2025 12:44:17 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id B8A4B10ED10;
+	Thu, 22 May 2025 12:59:30 +0000 (UTC)
 Authentication-Results: gabe.freedesktop.org;
-	dkim=pass (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="QMug1+j4";
+	dkim=pass (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="G3Cpqv5+";
 	dkim-atps=neutral
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from nyc.source.kernel.org (nyc.source.kernel.org [147.75.193.91])
- by gabe.freedesktop.org (Postfix) with ESMTPS id B44EE10E12D;
- Thu, 22 May 2025 12:44:15 +0000 (UTC)
+Received: from dfw.source.kernel.org (dfw.source.kernel.org [139.178.84.217])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 77BC810ECAE;
+ Thu, 22 May 2025 12:59:26 +0000 (UTC)
 Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by nyc.source.kernel.org (Postfix) with ESMTP id DB1CDA4E607;
- Thu, 22 May 2025 12:44:14 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id B69F0C4CEE4;
- Thu, 22 May 2025 12:44:11 +0000 (UTC)
+ by dfw.source.kernel.org (Postfix) with ESMTP id 3BC0E5C58CC;
+ Thu, 22 May 2025 12:57:05 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id CA56BC4CEE4;
+ Thu, 22 May 2025 12:59:19 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1747917854;
- bh=Yz2UtYWagsYaY4eenVbgXf3j+TpwLLfD5UbOHYYkLHY=;
+ s=k20201202; t=1747918762;
+ bh=EzfhMIhRFIBM3Fwseht3BF96lg8TCY/2uetMvYqb0rk=;
  h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
- b=QMug1+j4WVW/bFSxZ/rczepIXSyBsMR5lldov6EkiJxyN74GeBMAtBrP+5UjORdCZ
- Y6LTM/GgBy86Tk0DmxeDjhSsL6z6wER5jJBXmmUXVJiptm46dJfnaNzE+UcPxG/RCd
- eXTmTJ/+jlvqWOxLRTkUhpp/nnhRxSN1VqD4ZI9OL5whAJA1yOUUXoQNlpxTX/xAS7
- R9hKl4o+yV2puLAWxbT1dn6FIiStrM1o0ixu4l+/esP5Hg9KpZ8svGdCS96lOjmVKY
- /utjd0IRngjXfSOvodkKfNLCaJcqVnm1rBdWRopfOAo9da3QHrEYlLMTYPMJ4QNxY/
- AcSDh2UJeGyuA==
-Date: Thu, 22 May 2025 14:44:08 +0200
+ b=G3Cpqv5+9gbs7tVHCLE4dTolFc/WK1cnGNOuDbi2r9P86s69Oibbw5EyCcXMS6caJ
+ WF2MgwzXEYENObgeTtgmait9gV/geM0iIErCdC9w9t2prr0a7nSMvM2E1uXlEz4uIw
+ UjMju2ewQ1/OHObhV5bHiXBMWphCoxXfOBCYApOJxc140kfTX1oOds+4Rgn2xeWOFF
+ fC/9WL24/hZ/WzdszziEnBtKZHSzkQtg+a4JGqatBACIhv2Zc669QhHbTDm6M/Q3V7
+ w8MYEdsWxNs/q9zTCxwo0XQp86Irgo1ZUjxjMKsSk4GM+O0UVpeNNvK5dT7mUlbIFm
+ /Jkhuva4PkqeQ==
+Date: Thu, 22 May 2025 14:59:16 +0200
 From: Danilo Krummrich <dakr@kernel.org>
-To: Philipp Stanner <phasta@kernel.org>
-Cc: Lyude Paul <lyude@redhat.com>, David Airlie <airlied@gmail.com>,
- Simona Vetter <simona@ffwll.ch>, Matthew Brost <matthew.brost@intel.com>,
- Christian =?iso-8859-1?Q?K=F6nig?= <ckoenig.leichtzumerken@gmail.com>,
- Maarten Lankhorst <maarten.lankhorst@linux.intel.com>,
- Maxime Ripard <mripard@kernel.org>,
- Thomas Zimmermann <tzimmermann@suse.de>,
- Tvrtko Ursulin <tvrtko.ursulin@igalia.com>,
+To: Christian =?iso-8859-1?Q?K=F6nig?= <christian.koenig@amd.com>
+Cc: phasta@kernel.org, Lyude Paul <lyude@redhat.com>,
+ David Airlie <airlied@gmail.com>, Simona Vetter <simona@ffwll.ch>,
+ Sumit Semwal <sumit.semwal@linaro.org>,
  dri-devel@lists.freedesktop.org, nouveau@lists.freedesktop.org,
- linux-kernel@vger.kernel.org, Philipp Stanner <pstanner@redhat.com>
-Subject: Re: [PATCH v3 1/5] drm/sched: Fix teardown leaks with waitqueue
-Message-ID: <aC8cGPx_m8g2ApcV@pollux>
-References: <20250522082742.148191-2-phasta@kernel.org>
- <20250522082742.148191-3-phasta@kernel.org>
+ linux-kernel@vger.kernel.org, linux-media@vger.kernel.org
+Subject: Re: [PATCH 2/2] drm/nouveau: Don't signal when killing the fence
+ context
+Message-ID: <aC8fpEXYWZ9Oy41J@pollux>
+References: <20250522112540.161411-2-phasta@kernel.org>
+ <20250522112540.161411-3-phasta@kernel.org>
+ <af03b541-0b69-4b3d-b498-b68e0beb3dcb@amd.com>
+ <06210b9dc5e5ea8365295b77942c3ca030f02729.camel@mailbox.org>
+ <eae0ff0f-31a6-433a-b255-9bdb4727a940@amd.com>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
+Content-Type: text/plain; charset=iso-8859-1
 Content-Disposition: inline
-In-Reply-To: <20250522082742.148191-3-phasta@kernel.org>
+Content-Transfer-Encoding: 8bit
+In-Reply-To: <eae0ff0f-31a6-433a-b255-9bdb4727a940@amd.com>
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -64,91 +65,26 @@ List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-On Thu, May 22, 2025 at 10:27:39AM +0200, Philipp Stanner wrote:
-> +/**
-> + * drm_sched_submission_and_timeout_stop - stop everything except for free_job
-> + * @sched: scheduler instance
-> + *
-> + * Helper for tearing down the scheduler in drm_sched_fini().
-> + */
-> +static void
-> +drm_sched_submission_and_timeout_stop(struct drm_gpu_scheduler *sched)
-> +{
-> +	WRITE_ONCE(sched->pause_submit, true);
-> +	cancel_work_sync(&sched->work_run_job);
-> +	cancel_delayed_work_sync(&sched->work_tdr);
-> +}
-> +
-> +/**
-> + * drm_sched_free_stop - stop free_job
-> + * @sched: scheduler instance
-> + *
-> + * Helper for tearing down the scheduler in drm_sched_fini().
-> + */
-> +static void drm_sched_free_stop(struct drm_gpu_scheduler *sched)
-> +{
-> +	WRITE_ONCE(sched->pause_free, true);
-> +	cancel_work_sync(&sched->work_free_job);
-> +}
-> +
-> +/**
-> + * drm_sched_no_jobs_pending - check whether jobs are pending
-> + * @sched: scheduler instance
-> + *
-> + * Checks if jobs are pending for @sched.
-> + *
-> + * Return: true if jobs are pending, false otherwise.
-> + */
-> +static bool drm_sched_no_jobs_pending(struct drm_gpu_scheduler *sched)
-> +{
-> +	bool empty;
-> +
-> +	spin_lock(&sched->job_list_lock);
-> +	empty = list_empty(&sched->pending_list);
-> +	spin_unlock(&sched->job_list_lock);
-> +
-> +	return empty;
-> +}
+On Thu, May 22, 2025 at 02:34:33PM +0200, Christian König wrote:
+> See all the functions inside include/linux/dma-fence.h can be used by everybody. It's basically the public interface of the dma_fence object.
 
-I understand that the way you use this function is correct, since you only call
-it *after* drm_sched_submission_and_timeout_stop(), which means that no new
-items can end up on the pending_list.
+As you write below, in certain cases it is valid to call this from drivers, so
+it's not unreasonable to have it as part of the public API.
 
-But if we look at this function without context, it's broken:
+> So testing if a fence is signaled without calling the callback is only allowed by whoever implemented the fence.
+> 
+> In other words nouveau can test nouveau fences, i915 can test i915 fences, amdgpu can test amdgpu fences etc... But if you have the wrapper that makes it officially allowed that nouveau starts testing i915 fences and that would be problematic.
 
-The documentation says "Return: true if jobs are pending, false otherwise.", but
-you can't guarantee that, since a new job could be added to the pending_list
-after spin_unlock().
+In general, I like the  __dma_fence_is_signaled() helper, because this way we
+can document in which cases it is allowed to be used, i.e. the ones you descibe
+above.
 
-Hence, providing this function is a footgun.
+test_bit() can be called by anyone and there is no documentation comment
+explaining that it is only allowed under certain conditions.
 
-Instead, you should put this teardown sequence in a single function, where you
-can control the external conditions, i.e. that
-drm_sched_submission_and_timeout_stop() has been called.
+Having the __dma_fence_is_signaled() helper properly documented could get you
+rid of having to explain in which case the test_bit() dance is allowed to do
+over and over again. :-)
 
-Please also add a comment explaining why we can release the lock and still work
-with the value returned by list_empty() in this case, i.e. because we guarantee
-that the list item count converges against zero.
-
-The other two helpers above, drm_sched_submission_and_timeout_stop() and
-drm_sched_free_stop() should be fine to have.
-
-> +/**
-> + * drm_sched_cancel_jobs_and_wait - trigger freeing of all pending jobs
-> + * @sched: scheduler instance
-> + *
-> + * Must only be called if &struct drm_sched_backend_ops.cancel_pending_fences is
-> + * implemented.
-> + *
-> + * Instructs the driver to kill the fence context associated with this scheduler,
-> + * thereby signaling all pending fences. This, in turn, will trigger
-> + * &struct drm_sched_backend_ops.free_job to be called for all pending jobs.
-> + * The function then blocks until all pending jobs have been freed.
-> + */
-> +static void drm_sched_cancel_jobs_and_wait(struct drm_gpu_scheduler *sched)
-> +{
-> +	sched->ops->cancel_pending_fences(sched);
-> +	wait_event(sched->pending_list_waitque, drm_sched_no_jobs_pending(sched));
-> +}
-
-Same here, you can't have this as an isolated helper.
+I also think the name is good, since the '__' prefix already implies that there
+are some restrictions on the use of this helper.
