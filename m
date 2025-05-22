@@ -2,91 +2,60 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id D8F80CBADCD
-	for <lists+nouveau@lfdr.de>; Sat, 13 Dec 2025 13:45:28 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 0CDF1CBAD37
+	for <lists+nouveau@lfdr.de>; Sat, 13 Dec 2025 13:44:52 +0100 (CET)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 9753710EB1C;
-	Sat, 13 Dec 2025 12:41:36 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id A398D10EA67;
+	Sat, 13 Dec 2025 12:41:29 +0000 (UTC)
 Authentication-Results: gabe.freedesktop.org;
-	dkim=permerror (0-bit key) header.d=gmail.com header.i=@gmail.com header.b="R9bWqrrR";
+	dkim=pass (2048-bit key; secure) header.d=mailbox.org header.i=@mailbox.org header.b="X/GzKpRL";
 	dkim-atps=neutral
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from mail-pl1-f177.google.com (mail-pl1-f177.google.com
- [209.85.214.177])
- by gabe.freedesktop.org (Postfix) with ESMTPS id ECA8C10E911;
- Thu, 22 May 2025 08:45:02 +0000 (UTC)
-Received: by mail-pl1-f177.google.com with SMTP id
- d9443c01a7336-231ba912ba1so7726055ad.2; 
- Thu, 22 May 2025 01:45:02 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1747903502; x=1748508302; darn=lists.freedesktop.org;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=e9dormL9HrrIAVH/MkapwqpUc/OQw/GWiqS4n86n8Ls=;
- b=R9bWqrrRjrRife8Whh7vD9l83PfJrIfa/3PQY8L2pjPHy6C9sq4SNpkd/rNKpJN/T3
- i2sv5wJDPPyTLLHNRuznaUDz/AzDmRJrKbUGGCIXOdytMBzUITSiAMbHbSN25511FvW2
- ca51Qg6Chpene8tFYSptWCjlnVJKOUMflEk3qHwm5MO4XKD/q4xS+Lk4tKsjRncOd2T7
- U8a07SrxoV1p2hAjNVl0BXYGMMddhzdgyXlPF/VuPKvYJ7rB81vKSF5mj/XA0TxqQBY5
- bef7zdlmMZNTb4GDIRigf8pWP2S4oxXYH2g/LrIw1DKAG2keTOTnImuUOU7iMwH6OvA6
- WuQQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1747903502; x=1748508302;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=e9dormL9HrrIAVH/MkapwqpUc/OQw/GWiqS4n86n8Ls=;
- b=SwMMTiIheomQRaPU2Ye3av1LrbvV8t+QTBekL4KtINrCXvI4huwyEpCC1TyBJGrodt
- SXlN+XrWKxJENbjHYeD5M1CC7npkHK25+lxkopnZgjuGcdRQEviJKByXlLdtdr6OuICq
- 7HKaeZuAG7WLlmsrOlSH7mLo8nFqyT7XKAIYSRV+5DugXtZknwMoxJD6Ti356FNi2I1T
- 3HzCW8it2zlNIYmoo2aTYwjGMxhC2fGzjsWjKH0KE90S6kxLPJn6f/VgSACR8bCmnu6h
- 3Cuj2AosAcXBsax2a6Scd7W04qMjwgTevKJRcGvZIQ64Xz/xihDdbF5f+6gis1xqiUn0
- Tr/Q==
-X-Forwarded-Encrypted: i=1;
- AJvYcCUxYfxlhlZuhQHAIvyZ5hIF65UjpuRGrv0KnQvcakeyRT72gVv8oDFp1rkp0vep4o8iJw01fSlIUKk=@lists.freedesktop.org,
- AJvYcCW0T7TAo1ggw3zrTw3TMXQH8mGF9TTYSHcY4ynAkUziVAKIV84sX0bhWbc3enEfxhiKb6JzR/gFaQ==@lists.freedesktop.org
-X-Gm-Message-State: AOJu0Yxegmku8iaricFEe2TPOONXmvrIzIDimm9iMKTfUkIYpT5EwmVU
- rES9tBNHhHA6TAnzioEFIpcZJzuiK47KKz9x9z4SI6MFAZzWjSuVa3xDDUESJfuQJZZQzwBmX53
- VUKgAaE20+Gda5ts22Wx+y3JhGTuzjck=
-X-Gm-Gg: ASbGnct0AFcLKbbk11XZ+QJFLwu7tJAHVVnBH8Krdj1eos3uDH8c09ZExgCN6XGDnSP
- 1YYX0quuKPpDUPPvR010mPHnh12LKZIeKIo1GF8CgqVrP4g6xEg5XJM1GPPzfCKt3oOZmaGak9L
- l752/FVJXxodMW0S2yuZqx8y0KJ7kJpQiidRVRYUCozhc=
-X-Google-Smtp-Source: AGHT+IHcDoEYiYNfDCdUkacNcMEAOzs+8U1TP1/BcHDhQFdNfXEeXQOFjK7ijS68XWJepFQkaZKUMIQQVff3hXBYuFc=
-X-Received: by 2002:a17:902:eccd:b0:22e:50d1:b8d1 with SMTP id
- d9443c01a7336-231d437f0e7mr141804895ad.3.1747903502395; Thu, 22 May 2025
- 01:45:02 -0700 (PDT)
-MIME-Version: 1.0
-References: <20250521-nova-frts-v4-0-05dfd4f39479@nvidia.com>
- <20250521-nova-frts-v4-4-05dfd4f39479@nvidia.com>
- <DA2E1BNC668R.MMCARZ3K2NTS@nvidia.com>
-In-Reply-To: <DA2E1BNC668R.MMCARZ3K2NTS@nvidia.com>
-From: Miguel Ojeda <miguel.ojeda.sandonis@gmail.com>
-Date: Thu, 22 May 2025 10:44:49 +0200
-X-Gm-Features: AX0GCFvCHoNK_pM6k7TEPjfKCmoWB02CvdL9c9h6ygApOUg3uOuHv8pwBTVxdiI
-Message-ID: <CANiq72nQwxqeRGWBW2WSHijUKLs4c26UGQvJFjt-_SpnJJaaYQ@mail.gmail.com>
-Subject: Re: [PATCH v4 04/20] rust: add new `num` module with useful integer
- operations
-To: Alexandre Courbot <acourbot@nvidia.com>
-Cc: Miguel Ojeda <ojeda@kernel.org>, Alex Gaynor <alex.gaynor@gmail.com>, 
- Boqun Feng <boqun.feng@gmail.com>, Gary Guo <gary@garyguo.net>, 
- =?UTF-8?Q?Bj=C3=B6rn_Roy_Baron?= <bjorn3_gh@protonmail.com>, 
- Benno Lossin <benno.lossin@proton.me>, Andreas Hindborg <a.hindborg@kernel.org>,
- Alice Ryhl <aliceryhl@google.com>, Trevor Gross <tmgross@umich.edu>, 
- Danilo Krummrich <dakr@kernel.org>, David Airlie <airlied@gmail.com>,
- Simona Vetter <simona@ffwll.ch>, 
- Maarten Lankhorst <maarten.lankhorst@linux.intel.com>,
- Maxime Ripard <mripard@kernel.org>, 
- Thomas Zimmermann <tzimmermann@suse.de>,
- Daniel Almeida <daniel.almeida@collabora.com>, 
- John Hubbard <jhubbard@nvidia.com>, Ben Skeggs <bskeggs@nvidia.com>, 
- Joel Fernandes <joelagnelf@nvidia.com>, Timur Tabi <ttabi@nvidia.com>, 
- Alistair Popple <apopple@nvidia.com>, linux-kernel@vger.kernel.org, 
- rust-for-linux@vger.kernel.org, nouveau@lists.freedesktop.org, 
- dri-devel@lists.freedesktop.org
+Received: from mout-p-101.mailbox.org (mout-p-101.mailbox.org [80.241.56.151])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 4324710E802;
+ Thu, 22 May 2025 12:20:13 +0000 (UTC)
+Received: from smtp1.mailbox.org (smtp1.mailbox.org
+ [IPv6:2001:67c:2050:b231:465::1])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
+ (No client certificate requested)
+ by mout-p-101.mailbox.org (Postfix) with ESMTPS id 4b36n42b4Fz9smv;
+ Thu, 22 May 2025 14:20:08 +0200 (CEST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
+ s=mail20150812; 
+ t=1747916408; h=from:from:reply-to:reply-to:subject:subject:date:date:
+ message-id:message-id:to:to:cc:cc:mime-version:mime-version:
+ content-type:content-type:
+ content-transfer-encoding:content-transfer-encoding:
+ in-reply-to:in-reply-to:references:references;
+ bh=6les8TOi5wRq0T8kDR8xQDFeOUCbVRDYJE8WXeCcMbk=;
+ b=X/GzKpRLGoUU1TIQgiCFE33WMIXEgo2bOzU2gD+5YBWIA+Xch5he0PNQ5L4B9c50ClsLa0
+ AjpL/vNQ5PL/0zlPieZL2EAYcfWWP/bIBv6d89Kf0PWtotOHOLZ7ZA8biPCX8dC56KGSWG
+ Y8/2y9AWnSS5zLtZUQOBfdXZA7jwqGKTIEP+HeIOzkSQ0921vADAkAE3w233nXJohb09hu
+ uJpNHTUx13lSzntM5QICqUvDqMwqDt5Ci8pzqtl+FIhYpTiocEwbz+lkwNoKYktLfXSIB/
+ o8JOG2n2ugalDzKQawb+80VuNMOtXViSR9pY7rlEHNP0KKrhN7lq2T06KRtSWg==
+Message-ID: <06210b9dc5e5ea8365295b77942c3ca030f02729.camel@mailbox.org>
+Subject: Re: [PATCH 2/2] drm/nouveau: Don't signal when killing the fence
+ context
+From: Philipp Stanner <phasta@mailbox.org>
+To: Christian =?ISO-8859-1?Q?K=F6nig?= <christian.koenig@amd.com>, Philipp
+ Stanner <phasta@kernel.org>, Lyude Paul <lyude@redhat.com>, Danilo
+ Krummrich <dakr@kernel.org>,  David Airlie <airlied@gmail.com>, Simona
+ Vetter <simona@ffwll.ch>, Sumit Semwal <sumit.semwal@linaro.org>
+Cc: dri-devel@lists.freedesktop.org, nouveau@lists.freedesktop.org, 
+ linux-kernel@vger.kernel.org, linux-media@vger.kernel.org
+Date: Thu, 22 May 2025 14:20:03 +0200
+In-Reply-To: <af03b541-0b69-4b3d-b498-b68e0beb3dcb@amd.com>
+References: <20250522112540.161411-2-phasta@kernel.org>
+ <20250522112540.161411-3-phasta@kernel.org>
+ <af03b541-0b69-4b3d-b498-b68e0beb3dcb@amd.com>
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
-X-Mailman-Approved-At: Sat, 13 Dec 2025 12:40:47 +0000
+MIME-Version: 1.0
+X-MBO-RS-ID: 081f752363f695d129f
+X-MBO-RS-META: zq69kf63muzfjptq7ehgdi67s8374jom
+X-Mailman-Approved-At: Sat, 13 Dec 2025 12:40:50 +0000
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -98,20 +67,72 @@ List-Post: <mailto:nouveau@lists.freedesktop.org>
 List-Help: <mailto:nouveau-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
  <mailto:nouveau-request@lists.freedesktop.org?subject=subscribe>
+Reply-To: phasta@kernel.org
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-On Thu, May 22, 2025 at 6:01=E2=80=AFAM Alexandre Courbot <acourbot@nvidia.=
-com> wrote:
->
-> Either that, or we enable `#![feature(const_trait_impl)]`. I just tried
-> and with it we could indeed define and implement `NumExt` as const,
-> which looks like the cleanest way to do this to me.
+On Thu, 2025-05-22 at 14:06 +0200, Christian K=C3=B6nig wrote:
+> On 5/22/25 13:25, Philipp Stanner wrote:
+> > dma_fence_is_signaled_locked(), which is used in
+> > nouveau_fence_context_kill(), can signal fences below the surface
+> > through a callback.
+> >=20
+> > There is neither need for nor use in doing that when killing a
+> > fence
+> > context.
+> >=20
+> > Replace dma_fence_is_signaled_locked() with
+> > __dma_fence_is_signaled(), a
+> > function which only checks, never signals.
+>=20
+> That is not a good approach.
+>=20
+> Having the __dma_fence_is_signaled() means that other would be
+> allowed to call it as well.
+>=20
+> But nouveau can do that here only because it knows that the fence was
+> issued by nouveau.
+>=20
+> What nouveau can to is to test the signaled flag directly, but that's
+> what you try to avoid as well.
 
-Hmm... I think that one is actively being worked on, with a possible
-syntax change in the works. We would need to speak to upstream Rust to
-see when we could reasonably stat to use it, and consider the older
-compilers (e.g. if the syntax changes).
+There's many parties who check the bit already.
 
-Cheers,
-Miguel
+And if Nouveau is allowed to do that, one can just as well provide a
+wrapper for it.
+
+That has the advantage of centralizing the responsibility and
+documenting it.
+
+P.
+
+>=20
+> Regards,
+> Christian.
+>=20
+> >=20
+> > Signed-off-by: Philipp Stanner <phasta@kernel.org>
+> > ---
+> > =C2=A0drivers/gpu/drm/nouveau/nouveau_fence.c | 2 +-
+> > =C2=A01 file changed, 1 insertion(+), 1 deletion(-)
+> >=20
+> > diff --git a/drivers/gpu/drm/nouveau/nouveau_fence.c
+> > b/drivers/gpu/drm/nouveau/nouveau_fence.c
+> > index d5654e26d5bc..993b3dcb5db0 100644
+> > --- a/drivers/gpu/drm/nouveau/nouveau_fence.c
+> > +++ b/drivers/gpu/drm/nouveau/nouveau_fence.c
+> > @@ -88,7 +88,7 @@ nouveau_fence_context_kill(struct
+> > nouveau_fence_chan *fctx, int error)
+> > =C2=A0
+> > =C2=A0	spin_lock_irqsave(&fctx->lock, flags);
+> > =C2=A0	list_for_each_entry_safe(fence, tmp, &fctx->pending, head)
+> > {
+> > -		if (error && !dma_fence_is_signaled_locked(&fence-
+> > >base))
+> > +		if (error && !__dma_fence_is_signaled(&fence-
+> > >base))
+> > =C2=A0			dma_fence_set_error(&fence->base, error);
+> > =C2=A0
+> > =C2=A0		if (nouveau_fence_signal(fence))
+>=20
+
