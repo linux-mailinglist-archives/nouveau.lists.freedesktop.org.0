@@ -2,161 +2,97 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id 15A12AC0F3F
-	for <lists+nouveau@lfdr.de>; Thu, 22 May 2025 17:01:46 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id A57C6AC1008
+	for <lists+nouveau@lfdr.de>; Thu, 22 May 2025 17:32:52 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 1CDE410E88C;
-	Thu, 22 May 2025 15:01:44 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 31C9510E080;
+	Thu, 22 May 2025 15:32:49 +0000 (UTC)
 Authentication-Results: gabe.freedesktop.org;
-	dkim=pass (1024-bit key; unprotected) header.d=amd.com header.i=@amd.com header.b="ok3bcYAY";
+	dkim=pass (1024-bit key; unprotected) header.d=redhat.com header.i=@redhat.com header.b="bu5MRwRV";
 	dkim-atps=neutral
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from NAM02-SN1-obe.outbound.protection.outlook.com
- (mail-sn1nam02on2041.outbound.protection.outlook.com [40.107.96.41])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 8235610E88C;
- Thu, 22 May 2025 15:01:39 +0000 (UTC)
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=zLaUUpSHKXA2f0eQcyGGS4MOd00Ol8wCh3++R0I3OeWbs0WUHVygNupJqMQ4p3USicuAxFlWzKqRF2sQTTsN/bqZ1BnxflV3p+d5Fttd5EAH0Vq4G4XFdg1yq3GNKC72JqdRF69j+IqrFkoqyejtsIIPOU5Q4oOtbxreeL/AtEzjnijq9H9DOyigQj5c5tFbm+q3MZSmpwwaNyuGlAzpejzL3Bs5GaSXA4+ntKoXH20CXxg671oRjX6e8d7seEF2j0bzr7f8ACB+eIzwhWduaSs7/vD3XzKQY64qXdzeK/xlbfjTCeTNDBlzroxIV6v47jAA3UBPwKXFX6aTUzVdNQ==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=lbb0PNuDcNQX5IXLvKPOREyk28cjEP6Jln8Xh4/jL2k=;
- b=jb+YJFuZkG6pv8u0pe2zQAzmH8/DNFyA2H8KeULjP+90TXSXbPvfC4dm6rgmQrY6okM5C8fPeJfiHCxIVK2b1B1mbUKGjBlFnkQnDHhyhYPllDpuLjFHi7wSKckP6fWrETQ6oa3g04aCOJB7V4ZbelAtow+nu3XYUpC1b2ZKeCOp5KMn0O6+rs7S1A8PfgZCvoce/MvgWcXi4hJDKtRoVdZ3lT1rdfnoH/R1eEOjFha4nhXlOuXcaUfQR4NB8OC0MJmrINrj3qy3XgWAriAJfrrrzFfpaCfj6kLp9xSFZFqKSGt21b09XnX2/uymq8qHYMHAn48bXUhxkXpsCXme0w==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=amd.com; dmarc=pass action=none header.from=amd.com; dkim=pass
- header.d=amd.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1; 
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=lbb0PNuDcNQX5IXLvKPOREyk28cjEP6Jln8Xh4/jL2k=;
- b=ok3bcYAY8hwlTg7JeEC5w3N1BVGIsRRZ0Fg6n1beY+D4dty5XBuCN5zodHDUDkWqaV7ttzNfckdbKN9vMAhuo+LJIGq3XpamUHyNicMQQzrXH+9vjuP/SClrbu620MBncTTT55WlOiPQAtssQ7BsdUBT8MEkej1MELVG3EE2WIE=
-Authentication-Results: dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=amd.com;
-Received: from PH7PR12MB5685.namprd12.prod.outlook.com (2603:10b6:510:13c::22)
- by SJ0PR12MB6990.namprd12.prod.outlook.com (2603:10b6:a03:449::9)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.8678.33; Thu, 22 May
- 2025 15:01:33 +0000
-Received: from PH7PR12MB5685.namprd12.prod.outlook.com
- ([fe80::46fb:96f2:7667:7ca5]) by PH7PR12MB5685.namprd12.prod.outlook.com
- ([fe80::46fb:96f2:7667:7ca5%7]) with mapi id 15.20.8722.031; Thu, 22 May 2025
- 15:01:32 +0000
-Message-ID: <84a885ea-f49c-473e-9144-828260ebd615@amd.com>
-Date: Thu, 22 May 2025 17:01:28 +0200
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 2/2] drm/nouveau: Don't signal when killing the fence
- context
-To: Danilo Krummrich <dakr@kernel.org>
-Cc: phasta@kernel.org, Lyude Paul <lyude@redhat.com>,
- David Airlie <airlied@gmail.com>, Simona Vetter <simona@ffwll.ch>,
- Sumit Semwal <sumit.semwal@linaro.org>, dri-devel@lists.freedesktop.org,
- nouveau@lists.freedesktop.org, linux-kernel@vger.kernel.org,
- linux-media@vger.kernel.org
-References: <20250522112540.161411-2-phasta@kernel.org>
- <20250522112540.161411-3-phasta@kernel.org>
- <af03b541-0b69-4b3d-b498-b68e0beb3dcb@amd.com>
- <06210b9dc5e5ea8365295b77942c3ca030f02729.camel@mailbox.org>
- <eae0ff0f-31a6-433a-b255-9bdb4727a940@amd.com>
- <e5d74c0be68d641171271cdff2e71ec5eb312377.camel@mailbox.org>
- <aac87a7e-5a45-4b54-a43b-cb92c5df669c@amd.com> <aC8rjBuqzst-SHMD@pollux>
-Content-Language: en-US
-From: =?UTF-8?Q?Christian_K=C3=B6nig?= <christian.koenig@amd.com>
-In-Reply-To: <aC8rjBuqzst-SHMD@pollux>
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
-X-ClientProxiedBy: BL1PR13CA0230.namprd13.prod.outlook.com
- (2603:10b6:208:2bf::25) To PH7PR12MB5685.namprd12.prod.outlook.com
- (2603:10b6:510:13c::22)
+Received: from us-smtp-delivery-124.mimecast.com
+ (us-smtp-delivery-124.mimecast.com [170.10.129.124])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 2E48810E15F
+ for <nouveau@lists.freedesktop.org>; Thu, 22 May 2025 15:32:44 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
+ s=mimecast20190719; t=1747927964;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ content-transfer-encoding:content-transfer-encoding:
+ in-reply-to:in-reply-to:references:references;
+ bh=+KIi7IgtzuwG9JRM0NfWn2R5/Tu80P8R/8lxyp3okcM=;
+ b=bu5MRwRVEcetd5Dzcc4Bu/AhEYyOqpfVnR6j4TJpoLn0V5acP7kkENKPEFM/t8noIAtZo4
+ 87AjwkynmWcnril4IyK8ODbm3G7/fuNPhVf8jz1hTiFoT6sfAOse7zRCP9D+touqo+WQ5a
+ 9Rz1pwMUf1U2AyJ2XH20izWdxTrGO+Q=
+Received: from mail-pl1-f198.google.com (mail-pl1-f198.google.com
+ [209.85.214.198]) by relay.mimecast.com with ESMTP with STARTTLS
+ (version=TLSv1.3, cipher=TLS_AES_256_GCM_SHA384) id
+ us-mta-81-du4IuQGiPIKkDYl9KKoD_w-1; Thu, 22 May 2025 11:32:42 -0400
+X-MC-Unique: du4IuQGiPIKkDYl9KKoD_w-1
+X-Mimecast-MFC-AGG-ID: du4IuQGiPIKkDYl9KKoD_w_1747927961
+Received: by mail-pl1-f198.google.com with SMTP id
+ d9443c01a7336-231d7f590ffso47045885ad.1
+ for <nouveau@lists.freedesktop.org>; Thu, 22 May 2025 08:32:42 -0700 (PDT)
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1747927961; x=1748532761;
+ h=mime-version:user-agent:content-transfer-encoding:references
+ :in-reply-to:date:cc:to:from:subject:message-id:x-gm-message-state
+ :from:to:cc:subject:date:message-id:reply-to;
+ bh=DeXBrK2bgFthQnpVSUpFiSBohma7/u74wkxma9Kyu9s=;
+ b=mY5QhCFQPwu7fitpbYiqEA1Dy5qeztCRXC0HMIkzYKZeL4OAKcZlBDDBoPGD7KMnzx
+ Ex6QpvXdGK5HBma11cLd2gqXTQiZHArNyx2bZHMjorelG/oqi8yyOTuk/SE/AIuB1xWi
+ hvWFbXZEOSbSR90L3FsdmUUeocMEwka4KYhTFzhIDY0gOk6T28pGuU+7pO1++QbK8WX0
+ GCqRk+cN4jaXbygVA3hUK18XmoDn+otQfNlFFP9kAhiTCwm0Fz7hpIcUlbVWrbRCAdxC
+ fXIiLHFM6LlLrNuAFtyFiC5E4ckWt6V+xqQKZd2rjkNFz5uOkSiDYFHwCwmeiLyswSVS
+ qNJg==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCUBTP9nzBQlyP13p/pOy6q1Ut+wo8aKh2zkHEFSywMpigL977uRI+3k2+R2N7BaxP/wPsV2l5Ww@lists.freedesktop.org
+X-Gm-Message-State: AOJu0Yxzwuja5bnD8GEAGDFvqPwXcHOi7jyKFspC3+8eNSMUgGR6G0KV
+ +8tnJHLAi1pEGbgT8jEaQqndSiIbFDW5LXQcqSnP41cnhPvIKzxPl/O1/M+SPDFZxqbRYwDgerk
+ ILmQTRhX4u0Zuaf65fBUDIDgEPVOPL8PPXIkWpMOzEeMI6gj6atxR13SMdUWAaJSV3sc=
+X-Gm-Gg: ASbGncs1OLXxBQVf6I5aTFIWLqbCp7X4X2zHmgG4GDGhts01G4KOlWmTQVbisdPWk/n
+ 7Lh6NRD71igJDBPpp7z5Kf00Tq+Zn1vM7PF0oh4RDJpa5zF2R60kvk3ibtF2jevJ4d5q6k4y8E9
+ glbzelbD9f+B1HOfva4aj1t2/58S2EkynA2YgMGEW+mKBtt6mZbEHRilkJX54E8R2jJ2ImtcqIU
+ FhWljY9jGmovx/xOKHpilqZc2ATKl/fgMEXqBaf/M3jA4b9krDrwMmIOswGKfZjPMmeAV/6yNhy
+ HMLhJY/qJUnBpeQvHkK0bqoolQ3S5pRhJFLcYQ==
+X-Received: by 2002:a17:902:ea12:b0:224:584:6eef with SMTP id
+ d9443c01a7336-231de370161mr380770225ad.41.1747927960986; 
+ Thu, 22 May 2025 08:32:40 -0700 (PDT)
+X-Google-Smtp-Source: AGHT+IHjPJ3d2Li+gJkA5m0jUKxV/lCdF1BtyKLt3kcWVKRRohcYKbvk2gX+o2xn/FomLrZtISVaEQ==
+X-Received: by 2002:a17:902:ea12:b0:224:584:6eef with SMTP id
+ d9443c01a7336-231de370161mr380769615ad.41.1747927960459; 
+ Thu, 22 May 2025 08:32:40 -0700 (PDT)
+Received: from [10.200.68.91] (nat-pool-muc-u.redhat.com. [149.14.88.27])
+ by smtp.gmail.com with ESMTPSA id
+ d9443c01a7336-232053579d7sm90944365ad.80.2025.05.22.08.32.33
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Thu, 22 May 2025 08:32:39 -0700 (PDT)
+Message-ID: <44c318c704960c0d0732598773fd256bdfac2fc1.camel@redhat.com>
+Subject: Re: [PATCH v3 1/5] drm/sched: Fix teardown leaks with waitqueue
+From: Philipp Stanner <pstanner@redhat.com>
+To: Tvrtko Ursulin <tvrtko.ursulin@igalia.com>, Philipp Stanner
+ <phasta@kernel.org>, Lyude Paul <lyude@redhat.com>, Danilo Krummrich
+ <dakr@kernel.org>, David Airlie <airlied@gmail.com>, Simona Vetter
+ <simona@ffwll.ch>, Matthew Brost <matthew.brost@intel.com>, Christian
+ =?ISO-8859-1?Q?K=F6nig?= <ckoenig.leichtzumerken@gmail.com>, Maarten
+ Lankhorst <maarten.lankhorst@linux.intel.com>, Maxime Ripard
+ <mripard@kernel.org>, Thomas Zimmermann <tzimmermann@suse.de>
+Cc: dri-devel@lists.freedesktop.org, nouveau@lists.freedesktop.org, 
+ linux-kernel@vger.kernel.org
+Date: Thu, 22 May 2025 17:32:29 +0200
+In-Reply-To: <1a15598f-da02-46a0-8c41-ef8b765dc177@igalia.com>
+References: <20250522082742.148191-2-phasta@kernel.org>
+ <20250522082742.148191-3-phasta@kernel.org>
+ <1a15598f-da02-46a0-8c41-ef8b765dc177@igalia.com>
+User-Agent: Evolution 3.52.4 (3.52.4-2.fc40)
 MIME-Version: 1.0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: PH7PR12MB5685:EE_|SJ0PR12MB6990:EE_
-X-MS-Office365-Filtering-Correlation-Id: 5bd92a4b-6106-4ba3-fae6-08dd99418a33
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0;ARA:13230040|1800799024|366016|376014|7416014;
-X-Microsoft-Antispam-Message-Info: =?utf-8?B?eU1NOUZpVHhlNGgyQkEwdCtQcUZIekpUSzg1dUJMdk0vNUpHZVMwdFEySmlX?=
- =?utf-8?B?em83R0xVREE3M2FMdWhHMG12dCtzZkUrelh1dDRvdGx3NkkwblJSaHhyQUhN?=
- =?utf-8?B?R0xkVzdVY3lHQmkreGtLeXM4K3BKSFhnMHR2NndHcDdwaGNZZ3Y4RVZxbTl1?=
- =?utf-8?B?cjkzRy9jRU5TNVFiNHNVWnByWTd2NDlGWi9zZ0JMdUlpaUFTNU5RZHAyb0VU?=
- =?utf-8?B?YlhnNEpJazhJZzI4bDRDQTFlUU5BdWphNWo0eFFsbyt3SnRKVUQ1R2FlNGtB?=
- =?utf-8?B?RXNQOGhwdTRaQmttcDJTNCt4V2cwUTRManhNMlBuenpMSjExRHRiTnRWekNm?=
- =?utf-8?B?SSs1TGpuOXhxenBIU1hiWkZTV2J0eXJmejZWd2lxWTFrZ1YvSmNIQUw0U05W?=
- =?utf-8?B?RlYrMmF6WXllU0lhdTFZenRPRVphYlZhM0NrK2M4Y3JlZy9jL1JsdjJsYklX?=
- =?utf-8?B?OXNUdytXKytSMkR1VGF2dm5lZDdmR1NiRjFmSHRJSzZWV0NUVldSZktDbXdn?=
- =?utf-8?B?a0haWW0wWGp1aHg5dy92L0pXMy9pTWo4Y3lLSlgrREtZZ2RRZDIrdkNtMk5y?=
- =?utf-8?B?dGpPckNZanQrRnV2cnc3djdLMytZb2NSRkNhRmNiRUNzQk5JQWpxNTEvWlMz?=
- =?utf-8?B?Sk5oMTZuQjBZZVV1TWZ3SXgzYkhNYTNVMCtDTUdXYmVVaU9oOGZlSzFwdjlW?=
- =?utf-8?B?VlZuVjIyRS9uemNiSy9IQ0JxMzVWSm5tZkZJYVV2emoxSFFUWHNEUUVqMlJN?=
- =?utf-8?B?VWpaTVhuQ3NHSEl0dTJaU2RDdWRJcXhTcHdZNnBacjZaa2ErcHcwUThzYUx1?=
- =?utf-8?B?THNKQVhQUjNoV1dIVEFKYzZGdHZjeFpXYUdmUDgwL3BkTmhwbC9wTTJONkpl?=
- =?utf-8?B?SXZNYWVnSmNCQkZjKzhFeFl5aWRKaWxmdjBab3RxWGxGZWkvZXpkWWRGdlp1?=
- =?utf-8?B?VWZab0lPa2U3b24yd1BCUTZ3SzBsY3Erc2t2SmIzbllXaStPUHFhVWppbXJT?=
- =?utf-8?B?dnhwaDZlY3N6TWl1N2hNTFNGMnJpVlNUbjJsdS9xR2pxVCtqa3UreHpJNjRq?=
- =?utf-8?B?K25taVpOQVB2KzQxOFdmZktDVUtMRGpUNkRXNlFCVXVsS2NOMzBEcWZocm9Q?=
- =?utf-8?B?SkpyK1hlWERib1BoU2RrbHZMZVl3aUttQXRVQTkrUXVCd1VGamphYlUyOTRD?=
- =?utf-8?B?NHVQaW5hekdBR2JMRURaWDlBajVqRWtXVHQ1ZDRhSzJsemFHVXlkOC9Qa1hH?=
- =?utf-8?B?RDlYSVlObzZOOUVXbEdTalA1WFplOFQ0NTIxd1ZWMEJYdzRJODZ0K1RGVHpk?=
- =?utf-8?B?ZEtDZ09iY3ZtMmxBNEJCTTduMzdST1ExZXVjZFkvL0FOcEF4cmlZaHVNWTA1?=
- =?utf-8?B?S3A1dHdJNFQrNTFEMVRMWnI3eTRlWGhjMTlzczRKeVRyWDRQZlZXNTFZMTdW?=
- =?utf-8?B?Y3orUUxTekorUHByeVJqU1ZEN1hvZGd2YzJ1NDcycHNaR2lLR09EdnR4RHhh?=
- =?utf-8?B?UUdxdWhBVGYzbzJBOHAwa0lSNlhBcXh5VUJRaWZpZDdzQ3NXRFF4aGsxaHgr?=
- =?utf-8?B?MDFpZ1FlcHVPdHVxQTN2Z0J5ejFwY0I0bFpLaXpPRmdsR0FmSVQrZTBqb1Rl?=
- =?utf-8?B?YVpvcVFhQkMwTTBTdGZoV0p1TXpWU3lncE1SSHNoY1piWkhvR1Nlamd5S3VJ?=
- =?utf-8?B?TEx4MWQ2ZGZoYTQvRGllRUFGWm10QXZOalY1bk5GaTExNjZWcm4vY2xSQ2N2?=
- =?utf-8?B?ZGZPWGJJdVExUHlIQWZsakFleUp0dkJmSlZVN0s2VHZFblUyRFpsdVV2TERh?=
- =?utf-8?B?UVlFSEdrcVVrWVZ2MkFrU054MGRTb1dLYnhPMWV3blB2RnJIeXJzeXR1YkYv?=
- =?utf-8?B?NzZLeWZaR1FxcWdTc3dwVjRCc2ZSMVZzUDRSdVBNZ1Y0aFNMNis0T2h2N3Ru?=
- =?utf-8?Q?YkJclsvselU=3D?=
-X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
- IPV:NLI; SFV:NSPM; H:PH7PR12MB5685.namprd12.prod.outlook.com; PTR:; CAT:NONE;
- SFS:(13230040)(1800799024)(366016)(376014)(7416014); DIR:OUT; SFP:1101; 
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?aEhpdk4rV00zSkFSRmY3TWtoZU1weVEzR2p0b0tQbHY3VkwzSlllcUo0TXRW?=
- =?utf-8?B?V25QQzg5OHhuYmkvV3N4S2VVOURRTzBqYU1ZbGRHeDhyR2RWcHFNMWo3S3c4?=
- =?utf-8?B?TXhSS3F3OUhTamJwWWFPa09oUVhobWQwSlRVeE9hQWVXanJjVldvMW5Qc3RW?=
- =?utf-8?B?eGN2aTdUeHN1UzgrYWZ0dzZ2WHhKdysvSzVPclk1Unh4S2xJNVpieEVxUGps?=
- =?utf-8?B?SGxyVVErNDBxZkVZdTBiYVZ6Rk1iNXNvYjRjZ0NqdGpUZnZLdEcvUmVibnJY?=
- =?utf-8?B?ek1sTGxOOFRmb2NlL2VnWlY3UFgvRjdDU25mbm85MDVpZGRtTzkvZ1o4VCtZ?=
- =?utf-8?B?Z3lSTUVHRXRRSHJBTGtGRDNYRFBFV3hCK1dCNVN2RzlHampON09PT3IvbTFI?=
- =?utf-8?B?Skc2MjhpVjlsSTFOSjkxYThJU2Y2eDNxc3FFRENHVk9nb3B5L2l2dEQxNVhE?=
- =?utf-8?B?SERmc2Z2eTVVNmZ6MFhFcUdEdDZRT09FZGd5QTI0bWlCYkNjMDNsUFlzQWRP?=
- =?utf-8?B?M1Y1ZWhXQnFPVnVseVZIbTBBakZtd2VxUmE5S1d0WnVidlRUUWVrNURqb1d2?=
- =?utf-8?B?NmQveDZSeTlCS0hEVnFNVS90dzNkZVFCN3l6OVM3WlU3Tlh1LzFWV2VHRmY1?=
- =?utf-8?B?bWlCSlZlSjd0d2ZpOUJFVnZiY3NIOCtZWHUybzd2bnVuNnBPckpHdEhMRUp2?=
- =?utf-8?B?RkMyWlZ1Q29idHVETlFxcTVOK09Gd3dsVlY3enlzZUNFTU50Rmw1dkE2aWZt?=
- =?utf-8?B?MHVzU2JJZ3p4TGRLMlR1Y2JhbXk1bXRBNGcxc3ZVcXh1Rk9rY2EvdjZkeVZO?=
- =?utf-8?B?SXU4RzZUajJVUzJqbTFzam5wWjNFZ29Od3RLTW5lU3hiMG9sSC9sNm1yVDN2?=
- =?utf-8?B?elBSVnBUUVpNSXY3em5NM2pQWmVGVVI3eTRaMmtUZGpJY1lwcVRwcHlCL244?=
- =?utf-8?B?S2QvV0RzOWdzYm5qUnZpaTQyVG1oczJJbUtrVE03MitmY1VuQjBDN25GcU5N?=
- =?utf-8?B?VUdqK1M1WWZ4NEJzaFY2cnN5NDBVNjJjekFEOG1uRENCWFBUNlQxWXdJTmtZ?=
- =?utf-8?B?RitUeUdGamV2dVpzVEM0aTNZazZBbnp0aTd5c1Vqa3piNC9MUE5mdkx1Vnlk?=
- =?utf-8?B?QWt0eW1ELzlBYjMvV3VJcysyc1BaRkFiMjFGc2dQVkpJYS9vUnpYZ05ZNXFK?=
- =?utf-8?B?aG03aGhtZU1Oa1FEU1pqd3pJUVlFbStneDZuL1NuRFBhRG5FRHJnMUtKMjdX?=
- =?utf-8?B?RW5yTGVCaDZMS0VFY0xMNi9JcVZ3Nnh1NGV3KzRFUExOR1NBYkIrbTdtdWFw?=
- =?utf-8?B?UDFONW5PcWd3YnJRT3dNdEZ1MVZUTjh5NVlhdFdvaFBxT1hVVER6WUY0elZr?=
- =?utf-8?B?TnZUSExvOVJZK2cyV0JGUFZ5QU90eDNQTWhaYmpiMzRRZi9RZkQ4bHRyK3Av?=
- =?utf-8?B?dnJKczdKeVBoblVYVG5qV1MwS0I5b2tPMzFFazAyR1pUczJVWXVrakJOWkVn?=
- =?utf-8?B?Zm5yTWNjY09lWWxjYkhUNEYrQ1k3VThEaWhsVExRcVRiY2o1aFptUVRaam5Q?=
- =?utf-8?B?c09URk8wdEJIZWVmdmxuRUNjbC95TDRET2xUN2ZZV2NnbWRxRWhDQ2liRk9D?=
- =?utf-8?B?aWpDa3Y3Zk1iSEdpcWJCOE5WaXlUdGs0YU9tSVNocnZFZWhGWFhuaUI4eE5T?=
- =?utf-8?B?Q3ZBVlhNRG1sRXdvRkxlcjRDcG04OTZ4bSt1alZNSnZSZUtKZzRxV0FJMGg5?=
- =?utf-8?B?Wi9lSkxSMGZEUnBGeTI3dEczeTExdlMzd0p6b3NSVTVPMWVZcDRkeDNRdnVO?=
- =?utf-8?B?b2FiWVd3QkVZV3FBeTVHYUN3T3FmUmN3R2Y4TENnajhENGJtSkdMYU51eSs0?=
- =?utf-8?B?WmtRZGFHYWF5alI2R296aXlIL2w4V1RnOFUzUlpGZ3AyQ21YZU9FRFkzZHVW?=
- =?utf-8?B?TUt2THJNbnk4RjdQdnhyY29Eb2xYeGJkYlBtdVZ0OG1aSmFCV2tocFVmL3U0?=
- =?utf-8?B?c3ZWTHdnblhZTW1GTk1abDZMdnJyWUF3TjA0WE92UVRkcThybFQxN2t5UjlV?=
- =?utf-8?B?N3d5cWJMbUJnaC9SNU5oN3FxOTk4T0tsMUhkN2xmRVdrTFlSTmM5aUxjQVdU?=
- =?utf-8?Q?fQFeYfMVGJFYZuiPYKPKPFYwI?=
-X-OriginatorOrg: amd.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 5bd92a4b-6106-4ba3-fae6-08dd99418a33
-X-MS-Exchange-CrossTenant-AuthSource: PH7PR12MB5685.namprd12.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 22 May 2025 15:01:32.8687 (UTC)
-X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
-X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
-X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: 69z60KzmoCyY1nZQxSoHUp3+l/Ijo3toCxbWhvPckuE9rtZjNmN/RcR6hEFewX5v
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: SJ0PR12MB6990
+X-Mimecast-Spam-Score: 0
+X-Mimecast-MFC-PROC-ID: NfR7co6zK8miS-HZV-YMy2Ikzybw-lMe8UEL5zNfj6Y_1747927961
+X-Mimecast-Originator: redhat.com
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -171,31 +107,463 @@ List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-On 5/22/25 15:50, Danilo Krummrich wrote:
-> On Thu, May 22, 2025 at 03:05:02PM +0200, Christian König wrote:
->> E.g. when you don't know the implementation side use the defined API and don't mess with the internals. If you do know the implementation side then it's valid that you check the internals.
-> 
-> I assume you meant this as "bothering with the internals of you *own* fence is
-> fine, but not with foreign ones".
+On Thu, 2025-05-22 at 14:37 +0100, Tvrtko Ursulin wrote:
+>=20
+> On 22/05/2025 09:27, Philipp Stanner wrote:
+> > From: Philipp Stanner <pstanner@redhat.com>
+> >=20
+> > The GPU scheduler currently does not ensure that its pending_list
+> > is
+> > empty before performing various other teardown tasks in
+> > drm_sched_fini().
+> >=20
+> > If there are still jobs in the pending_list, this is problematic
+> > because
+> > after scheduler teardown, no one will call backend_ops.free_job()
+> > anymore. This would, consequently, result in memory leaks.
+> >=20
+> > One way to solve this is to implement a waitqueue that
+> > drm_sched_fini()
+> > blocks on until the pending_list has become empty. That waitqueue
+> > must
+> > obviously not block for a significant time. Thus, it's necessary to
+> > only
+> > wait if it's guaranteed that all fences will get signaled quickly.
+> >=20
+> > This can be ensured by having the driver implement a new backend
+> > ops,
+> > cancel_pending_fences(), in which the driver shall signal all
+> > unsignaled, in-flight fences with an error.
+> >=20
+> > Add a waitqueue to struct drm_gpu_scheduler. Wake up waiters once
+> > the
+> > pending_list becomes empty. Wait in drm_sched_fini() for that to
+> > happen
+> > if cancel_pending_fences() is implemented.
+> >=20
+> > Signed-off-by: Philipp Stanner <pstanner@redhat.com>
+> > ---
+> > =C2=A0 drivers/gpu/drm/scheduler/sched_main.c | 105
+> > ++++++++++++++++++++-----
+> > =C2=A0 include/drm/gpu_scheduler.h=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=
+=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 |=C2=A0 19 +++++
+> > =C2=A0 2 files changed, 105 insertions(+), 19 deletions(-)
+> >=20
+> > diff --git a/drivers/gpu/drm/scheduler/sched_main.c
+> > b/drivers/gpu/drm/scheduler/sched_main.c
+> > index f7118497e47a..406572f5168e 100644
+> > --- a/drivers/gpu/drm/scheduler/sched_main.c
+> > +++ b/drivers/gpu/drm/scheduler/sched_main.c
+> > @@ -367,7 +367,7 @@ static void drm_sched_run_job_queue(struct
+> > drm_gpu_scheduler *sched)
+> > =C2=A0=C2=A0 */
+> > =C2=A0 static void __drm_sched_run_free_queue(struct drm_gpu_scheduler
+> > *sched)
+> > =C2=A0 {
+> > -=09if (!READ_ONCE(sched->pause_submit))
+> > +=09if (!READ_ONCE(sched->pause_free))
+> > =C2=A0=C2=A0=09=09queue_work(sched->submit_wq, &sched-
+> > >work_free_job);
+> > =C2=A0 }
+> > =C2=A0=20
+> > @@ -1121,6 +1121,12 @@ drm_sched_get_finished_job(struct
+> > drm_gpu_scheduler *sched)
+> > =C2=A0=C2=A0=09=09/* remove job from pending_list */
+> > =C2=A0=C2=A0=09=09list_del_init(&job->list);
+> > =C2=A0=20
+> > +=09=09/*
+> > +=09=09 * Inform tasks blocking in drm_sched_fini() that
+> > it's now safe to proceed.
+> > +=09=09 */
+> > +=09=09if (list_empty(&sched->pending_list))
+> > +=09=09=09wake_up(&sched->pending_list_waitque);
+>=20
+> Wait what? ;) (pun intended)
+>=20
+> I think I mentioned in the last round that waitque looks dodgy.
+> Either a=20
+> typo or a very unusual and novel shorthand? I suggest a typical wq or
+> waitqueue.
 
-Yes, exactly that.
+Ah right, I forgot about that.
 
-> And if the driver messes with the internals of its own fence code that's fine,
-> but in this case we talk about the generic dma_fence implementation, i.e. an
-> internal flag of the dma_fence implementation.
+>=20
+> I also mentioned that one more advantage of the ->cancel_job()
+> approach=20
+> is there is no need for these extra calls on the normal path (non=20
+> teardown) at all.
 
-Well the flag is under the control of the fence implementation.
+Yes, agreed, that's a tiny performance gain. But it's running in a
+workqueue, so no big deal. But see below, too
 
-> In general, a driver should *never* bother with implementation details of a
-> generic component, regardless whether the author knows the internal details.
-> Things are *always* prone to change and then this may result into subtle bugs.
+>=20
+> > +
+> > =C2=A0=C2=A0=09=09/* cancel this job's TO timer */
+> > =C2=A0=C2=A0=09=09cancel_delayed_work(&sched->work_tdr);
+> > =C2=A0=C2=A0=09=09/* make the scheduled timestamp more accurate */
+> > @@ -1326,6 +1332,7 @@ int drm_sched_init(struct drm_gpu_scheduler
+> > *sched, const struct drm_sched_init_
+> > =C2=A0=C2=A0=09init_waitqueue_head(&sched->job_scheduled);
+> > =C2=A0=C2=A0=09INIT_LIST_HEAD(&sched->pending_list);
+> > =C2=A0=C2=A0=09spin_lock_init(&sched->job_list_lock);
+> > +=09init_waitqueue_head(&sched->pending_list_waitque);
+> > =C2=A0=C2=A0=09atomic_set(&sched->credit_count, 0);
+> > =C2=A0=C2=A0=09INIT_DELAYED_WORK(&sched->work_tdr,
+> > drm_sched_job_timedout);
+> > =C2=A0=C2=A0=09INIT_WORK(&sched->work_run_job, drm_sched_run_job_work);
+> > @@ -1333,6 +1340,7 @@ int drm_sched_init(struct drm_gpu_scheduler
+> > *sched, const struct drm_sched_init_
+> > =C2=A0=C2=A0=09atomic_set(&sched->_score, 0);
+> > =C2=A0=C2=A0=09atomic64_set(&sched->job_id_count, 0);
+> > =C2=A0=C2=A0=09sched->pause_submit =3D false;
+> > +=09sched->pause_free =3D false;
+> > =C2=A0=20
+> > =C2=A0=C2=A0=09sched->ready =3D true;
+> > =C2=A0=C2=A0=09return 0;
+> > @@ -1350,33 +1358,90 @@ int drm_sched_init(struct drm_gpu_scheduler
+> > *sched, const struct drm_sched_init_
+> > =C2=A0 }
+> > =C2=A0 EXPORT_SYMBOL(drm_sched_init);
+> > =C2=A0=20
+> > +/**
+> > + * drm_sched_submission_and_timeout_stop - stop everything except
+> > for free_job
+> > + * @sched: scheduler instance
+> > + *
+> > + * Helper for tearing down the scheduler in drm_sched_fini().
+> > + */
+> > +static void
+> > +drm_sched_submission_and_timeout_stop(struct drm_gpu_scheduler
+> > *sched)
+> > +{
+> > +=09WRITE_ONCE(sched->pause_submit, true);
+> > +=09cancel_work_sync(&sched->work_run_job);
+> > +=09cancel_delayed_work_sync(&sched->work_tdr);
+> > +}
+> > +
+> > +/**
+> > + * drm_sched_free_stop - stop free_job
+> > + * @sched: scheduler instance
+> > + *
+> > + * Helper for tearing down the scheduler in drm_sched_fini().
+> > + */
+> > +static void drm_sched_free_stop(struct drm_gpu_scheduler *sched)
+> > +{
+> > +=09WRITE_ONCE(sched->pause_free, true);
+> > +=09cancel_work_sync(&sched->work_free_job);
+> > +}
+> > +
+> > +/**
+> > + * drm_sched_no_jobs_pending - check whether jobs are pending
+> > + * @sched: scheduler instance
+> > + *
+> > + * Checks if jobs are pending for @sched.
+> > + *
+> > + * Return: true if jobs are pending, false otherwise.
+> > + */
+> > +static bool drm_sched_no_jobs_pending(struct drm_gpu_scheduler
+> > *sched)
+> > +{
+> > +=09bool empty;
+> > +
+> > +=09spin_lock(&sched->job_list_lock);
+> > +=09empty =3D list_empty(&sched->pending_list);
+> > +=09spin_unlock(&sched->job_list_lock);
+> > +
+> > +=09return empty;
+> > +}
+> > +
+> > +/**
+> > + * drm_sched_cancel_jobs_and_wait - trigger freeing of all pending
+> > jobs
+> > + * @sched: scheduler instance
+> > + *
+> > + * Must only be called if &struct
+> > drm_sched_backend_ops.cancel_pending_fences is
+> > + * implemented.
+> > + *
+> > + * Instructs the driver to kill the fence context associated with
+> > this scheduler,
+> > + * thereby signaling all pending fences. This, in turn, will
+> > trigger
+> > + * &struct drm_sched_backend_ops.free_job to be called for all
+> > pending jobs.
+> > + * The function then blocks until all pending jobs have been
+> > freed.
+> > + */
+> > +static void drm_sched_cancel_jobs_and_wait(struct
+> > drm_gpu_scheduler *sched)
+> > +{
+> > +=09sched->ops->cancel_pending_fences(sched);
+> > +=09wait_event(sched->pending_list_waitque,
+> > drm_sched_no_jobs_pending(sched));
+> > +}
+> > +
+> > =C2=A0 /**
+> > =C2=A0=C2=A0 * drm_sched_fini - Destroy a gpu scheduler
+> > =C2=A0=C2=A0 *
+> > =C2=A0=C2=A0 * @sched: scheduler instance
+> > =C2=A0=C2=A0 *
+> > - * Tears down and cleans up the scheduler.
+> > - *
+> > - * This stops submission of new jobs to the hardware through
+> > - * drm_sched_backend_ops.run_job(). Consequently,
+> > drm_sched_backend_ops.free_job()
+> > - * will not be called for all jobs still in
+> > drm_gpu_scheduler.pending_list.
+> > - * There is no solution for this currently. Thus, it is up to the
+> > driver to make
+> > - * sure that:
+> > - *
+> > - *=C2=A0 a) drm_sched_fini() is only called after for all submitted
+> > jobs
+> > - *=C2=A0=C2=A0=C2=A0=C2=A0 drm_sched_backend_ops.free_job() has been c=
+alled or that
+> > - *=C2=A0 b) the jobs for which drm_sched_backend_ops.free_job() has no=
+t
+> > been called
+> > - *=C2=A0=C2=A0=C2=A0=C2=A0 after drm_sched_fini() ran are freed manual=
+ly.
+> > - *
+> > - * FIXME: Take care of the above problem and prevent this function
+> > from leaking
+> > - * the jobs in drm_gpu_scheduler.pending_list under any
+> > circumstances.
+> > + * Tears down and cleans up the scheduler. Might leak memory if
+> > + * &struct drm_sched_backend_ops.cancel_pending_fences is not
+> > implemented.
+> > =C2=A0=C2=A0 */
+> > =C2=A0 void drm_sched_fini(struct drm_gpu_scheduler *sched)
+> > =C2=A0 {
+> > =C2=A0=C2=A0=09struct drm_sched_entity *s_entity;
+> > =C2=A0=C2=A0=09int i;
+> > =C2=A0=20
+> > -=09drm_sched_wqueue_stop(sched);
+> > +=09if (sched->ops->cancel_pending_fences) {
+> > +=09=09drm_sched_submission_and_timeout_stop(sched);
+> > +=09=09drm_sched_cancel_jobs_and_wait(sched);
+> > +=09=09drm_sched_free_stop(sched);
+> > +=09} else {
+> > +=09=09/* We're in "legacy free-mode" and ignore
+> > potential mem leaks */
+> > +=09=09drm_sched_wqueue_stop(sched);
+> > +=09}
+> > =C2=A0=20
+> > =C2=A0=C2=A0=09for (i =3D DRM_SCHED_PRIORITY_KERNEL; i < sched->num_rqs=
+;
+> > i++) {
+> > =C2=A0=C2=A0=09=09struct drm_sched_rq *rq =3D sched->sched_rq[i];
+> > @@ -1464,7 +1529,7 @@ bool drm_sched_wqueue_ready(struct
+> > drm_gpu_scheduler *sched)
+> > =C2=A0 EXPORT_SYMBOL(drm_sched_wqueue_ready);
+> > =C2=A0=20
+> > =C2=A0 /**
+> > - * drm_sched_wqueue_stop - stop scheduler submission
+> > + * drm_sched_wqueue_stop - stop scheduler submission and freeing
+> > =C2=A0=C2=A0 * @sched: scheduler instance
+> > =C2=A0=C2=A0 *
+> > =C2=A0=C2=A0 * Stops the scheduler from pulling new jobs from entities.=
+ It
+> > also stops
+> > @@ -1473,13 +1538,14 @@ EXPORT_SYMBOL(drm_sched_wqueue_ready);
+> > =C2=A0 void drm_sched_wqueue_stop(struct drm_gpu_scheduler *sched)
+> > =C2=A0 {
+> > =C2=A0=C2=A0=09WRITE_ONCE(sched->pause_submit, true);
+> > +=09WRITE_ONCE(sched->pause_free, true);
+> > =C2=A0=C2=A0=09cancel_work_sync(&sched->work_run_job);
+> > =C2=A0=C2=A0=09cancel_work_sync(&sched->work_free_job);
+> > =C2=A0 }
+> > =C2=A0 EXPORT_SYMBOL(drm_sched_wqueue_stop);
+> > =C2=A0=20
+> > =C2=A0 /**
+> > - * drm_sched_wqueue_start - start scheduler submission
+> > + * drm_sched_wqueue_start - start scheduler submission and freeing
+> > =C2=A0=C2=A0 * @sched: scheduler instance
+> > =C2=A0=C2=A0 *
+> > =C2=A0=C2=A0 * Restarts the scheduler after drm_sched_wqueue_stop() has
+> > stopped it.
+> > @@ -1490,6 +1556,7 @@ EXPORT_SYMBOL(drm_sched_wqueue_stop);
+> > =C2=A0 void drm_sched_wqueue_start(struct drm_gpu_scheduler *sched)
+> > =C2=A0 {
+> > =C2=A0=C2=A0=09WRITE_ONCE(sched->pause_submit, false);
+> > +=09WRITE_ONCE(sched->pause_free, false);
+> > =C2=A0=C2=A0=09queue_work(sched->submit_wq, &sched->work_run_job);
+> > =C2=A0=C2=A0=09queue_work(sched->submit_wq, &sched->work_free_job);
+> > =C2=A0 }
+> > diff --git a/include/drm/gpu_scheduler.h
+> > b/include/drm/gpu_scheduler.h
+> > index d860db087ea5..d8bd5b605336 100644
+> > --- a/include/drm/gpu_scheduler.h
+> > +++ b/include/drm/gpu_scheduler.h
+> > @@ -29,6 +29,7 @@
+> > =C2=A0 #include <linux/completion.h>
+> > =C2=A0 #include <linux/xarray.h>
+> > =C2=A0 #include <linux/workqueue.h>
+> > +#include <linux/wait.h>
+> > =C2=A0=20
+> > =C2=A0 #define MAX_WAIT_SCHED_ENTITY_Q_EMPTY msecs_to_jiffies(1000)
+> > =C2=A0=20
+> > @@ -508,6 +509,19 @@ struct drm_sched_backend_ops {
+> > =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 * and it's=
+ time to clean it up.
+> > =C2=A0=C2=A0=09 */
+> > =C2=A0=C2=A0=09void (*free_job)(struct drm_sched_job *sched_job);
+> > +
+> > +=09/**
+> > +=09 * @cancel_pending_fences: cancel all unsignaled hardware
+> > fences
+> > +=09 *
+> > +=09 * This callback must signal all unsignaled hardware
+> > fences associated
+> > +=09 * with @sched with an appropriate error code (e.g., -
+> > ECANCELED). This
+> > +=09 * ensures that all jobs will get freed by the scheduler
+> > before
+> > +=09 * teardown.
+> > +=09 *
+> > +=09 * This callback is optional, but it is highly recommended
+> > to implement
+> > +=09 * it to avoid memory leaks.
+> > +=09 */
+> > +=09void (*cancel_pending_fences)(struct drm_gpu_scheduler
+> > *sched);
+>=20
+> I still don't understand why insist to use a new term in the backend=20
+> ops, and even the whole scheduler API. Nothing in the API so far has=20
+> fences in the name. Something like cancel(_all|pending)_jobs or=20
+> sched_fini would read more aligned with the rest to me.
 
-Yeah, I know what you mean. The implementation kind of sub-classes the dma_fence component to use it to implement it's specific function.
+Nothing has fences in the name, but they are the central concept of the
+API: run_job() returns them, and they are the main mechanism through
+which scheduler and driver communicate.
 
-In C++ we would distinct the function between into private: protected: and public: sections, but we don't have that luxury here.
+As mentioned in the other mail, the idea behind the callback is to get
+all hardware fences signaled. Just that. That's a simple, well
+established concept, easy to understand by drivers. In contrast, it
+would be far less clear what "cancel" even means. That's evident from
+the other patch where we're suddenly wondering whether the driver
+should also cancel timers etc. in the callback.
 
-But you already convinced me with the argument that this needs to be better documented, I'm just not sure if adding the function documentation would do it.
+It should not. The contract is simple: "signal everything".
 
-Regards,
-Christian.
+It's also more difficult to abuse, since signaling is always valid. But
+when is canceling valid?
+
+Considering how internal APIs have been abused in the past, I can very
+well see some party using a cancel_job() callback in the future to
+"cancel" single jobs, for example in our (still unsolved)
+resubmit_jobs() problem.
+
+>=20
+> > =C2=A0 };
+> > =C2=A0=20
+> > =C2=A0 /**
+> > @@ -533,6 +547,8 @@ struct drm_sched_backend_ops {
+> > =C2=A0=C2=A0 *=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=
+=A0=C2=A0 timeout interval is over.
+> > =C2=A0=C2=A0 * @pending_list: the list of jobs which are currently in t=
+he job
+> > queue.
+> > =C2=A0=C2=A0 * @job_list_lock: lock to protect the pending_list.
+> > + * @pending_list_waitque: a waitqueue for drm_sched_fini() to
+> > block on until all
+> > + *=09=09=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 pending=
+ jobs have been finished.
+> > =C2=A0=C2=A0 * @hang_limit: once the hangs by a job crosses this limit =
+then
+> > it is marked
+> > =C2=A0=C2=A0 *=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=
+=A0=C2=A0=C2=A0=C2=A0 guilty and it will no longer be considered for
+> > scheduling.
+> > =C2=A0=C2=A0 * @score: score to help loadbalancer pick a idle sched
+> > @@ -540,6 +556,7 @@ struct drm_sched_backend_ops {
+> > =C2=A0=C2=A0 * @ready: marks if the underlying HW is ready to work
+> > =C2=A0=C2=A0 * @free_guilty: A hit to time out handler to free the guil=
+ty
+> > job.
+> > =C2=A0=C2=A0 * @pause_submit: pause queuing of @work_run_job on @submit=
+_wq
+> > + * @pause_free: pause queueing of @work_free_job on @submit_wq
+> > =C2=A0=C2=A0 * @own_submit_wq: scheduler owns allocation of @submit_wq
+> > =C2=A0=C2=A0 * @dev: system &struct device
+> > =C2=A0=C2=A0 *
+> > @@ -562,12 +579,14 @@ struct drm_gpu_scheduler {
+> > =C2=A0=C2=A0=09struct delayed_work=09=09work_tdr;
+> > =C2=A0=C2=A0=09struct list_head=09=09pending_list;
+> > =C2=A0=C2=A0=09spinlock_t=09=09=09job_list_lock;
+> > +=09wait_queue_head_t=09=09pending_list_waitque;
+> > =C2=A0=C2=A0=09int=09=09=09=09hang_limit;
+> > =C2=A0=C2=A0=09atomic_t=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=
+=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=
+=A0=C2=A0=C2=A0 *score;
+> > =C2=A0=C2=A0=09atomic_t=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=
+=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=
+=A0=C2=A0=C2=A0 _score;
+> > =C2=A0=C2=A0=09bool=09=09=09=09ready;
+> > =C2=A0=C2=A0=09bool=09=09=09=09free_guilty;
+> > =C2=A0=C2=A0=09bool=09=09=09=09pause_submit;
+> > +=09bool=09=09=09=09pause_free;
+> > =C2=A0=C2=A0=09bool=09=09=09=09own_submit_wq;
+> > =C2=A0=C2=A0=09struct device=09=09=09*dev;
+> > =C2=A0 };
+>=20
+> And, as you know, another thing I don't understand is why would we=20
+> choose to add more of the state machine when I have shown how it can
+> be=20
+> done more elegantly. You don't have to reply, this is more a for the=20
+> record against v3.
+
+I do like your approach to a degree, and I reimplemented and tested it
+during the last days! Don't think I just easily toss aside a good idea;
+in fact, weighing between both approaches did cause me some headache :)
+
+The thing is that while implementing it for the unit tests (not even to
+begin with Nouveau, where the implementation is a bit more difficult
+because some helpers need to be moved), I ran into a ton of faults
+because of how the tests are constructed. When do I have to cancel
+which timer for which job, all before calling drm_sched_fini(), or each
+one separately in cancel_job()? What about timedout jobs?
+
+This [1] for exmaple is an implementation attempt I made which differs
+only slightly from yours but does not work and causes all sorts of
+issues with timer interrupts.
+
+Now, that could obviously be fixed, and maybe I fail =E2=80=93 but the thin=
+g
+is, if I can fail, others can, too. And porting the unit tests is a
+good beta-test.
+
+When you look at the waitqueue solution, it is easy to implement for
+both Nouveau and sched/tests, with minimal adjustments. My approach
+works for both and is already well tested in Nouveau.
+
+The ease with which it can be used and the simplicity of the contract
+("signal all fences!") gives me confidence that this is, despite the
+larger state machine, more maintainable and that it's easier to port
+other drivers to the new cleanup method. I've had some success with
+similar approaches when cleaning up 16 year old broken PCI code [2].
+
+Moreover, our long term goal should anyways be to, ideally, port all
+drivers to the new cleanup design and then make the callback mandatory.
+Then some places in drm_sched_fini() can be cleaned up, too.
+
+Besides, the above reasons like the resistence against abuse of a
+cancel_job() also apply.
+
+
+Does that sound convincing? :)
+P.
+
+
+[1] https://paste.debian.net/1376021/
+[2] https://lore.kernel.org/linux-pci/20250520085938.GB261485@rocinante/T/#=
+m6e28eabdb22286238545c1fa6026445a4001d8e2
+
+
+
+>=20
+> Regards,
+>=20
+> Tvrtko
+>=20
 
