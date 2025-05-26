@@ -2,132 +2,153 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id 99783AC3F2D
-	for <lists+nouveau@lfdr.de>; Mon, 26 May 2025 14:15:57 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id DE35EAC3FC2
+	for <lists+nouveau@lfdr.de>; Mon, 26 May 2025 14:55:52 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 3A31010E050;
-	Mon, 26 May 2025 12:15:56 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id EB6F110E358;
+	Mon, 26 May 2025 12:55:46 +0000 (UTC)
 Authentication-Results: gabe.freedesktop.org;
-	dkim=pass (2048-bit key; unprotected) header.d=Nvidia.com header.i=@Nvidia.com header.b="o19xyrgd";
+	dkim=pass (1024-bit key; unprotected) header.d=amd.com header.i=@amd.com header.b="U+MSisGj";
 	dkim-atps=neutral
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from NAM12-DM6-obe.outbound.protection.outlook.com
- (mail-dm6nam12on2077.outbound.protection.outlook.com [40.107.243.77])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 8C6B010E2F8;
- Mon, 26 May 2025 12:15:48 +0000 (UTC)
+Received: from NAM12-MW2-obe.outbound.protection.outlook.com
+ (mail-mw2nam12on2068.outbound.protection.outlook.com [40.107.244.68])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 46CF310E134;
+ Mon, 26 May 2025 12:55:41 +0000 (UTC)
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=LMonylrFgKFOhE/9rR9BsPPscCX7bK8BBKA4d8fEOrYzJyW4fP8jMwJOunhqmYLZzX9ShmQss3prsKL3C9ofW1KpMuwXJh/Sdf3ej4uSxTygtL1lR+kXE77nUukf6/FzvSXUeNh9/p0kF32icG3pzFzNyj1Ld7+YI+bPjaK95brdBe6rfrGIJUxkMsiBrfFQ1YQ/STlV1mcJ+NvsQQt075ci9lBfhKGy6shBTr0DUIbKxy468tJhFpg++P8+G4+ztUTLKqgRjjD9nlgmOMVwRgkcKODL5fdc4TpxSYfJ/JbTJwq5vosGLz30SMB/oA1pWUD11x185l2hvojqFotxtg==
+ b=WXg1ffKixIo5QLCu9LdPMNufWyb0j+2ysJ3g+6LLW8IMEF1VIH72LVnSaKJ2oU27Wk6rYRea64BVTyOsI0VgWiuraPgCnu+sEuPQ8KPXYDvGXr2j8oElVKuG99uAbAd1WqAqWu3sIVPcOH0YDaBEyo8qacgrCMvR5tkivMTm/SdsY65Cg2ZqVnoDP2wqiX6xpqLyamk6YQDhm17v70I7LtLBFNdHFMuCfLFR/Z+z9lRGU+LU6wdhluZmo/mJN9JuIY6g7w7XbbiXNF1nUee41wy072/sevzinkhniTtHSHTxVseYCJmbXHMIxnruHJwTJRzRrza7dpxJFyKKBRd0Xw==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
  s=arcselector10001;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=bVpFIT8sUsT9L9lka83Ezude++APrXZWnmfj5i5hORM=;
- b=p638lSpfpK8WvTBeDFpTn3CrQbh0ccyBSRp4CQ7p5XOGxtUXiVZbDHuJwztY5uGOQ1YLg4GfRJ0JHa6P2DpinCqOydQ3vZfcW4U8AWtyUFlR+EkXsjuKad+eo+15Fn6GwclK/9NPhKcW8hylE7LJ2gNF6yJ2t89PczcvaTIhN3mTjZv7keFXZkCUMHCEbrMit0d4f/blBDkmYuyaFjzJ4PBphGQiDL6sgTAZfxC1RYztwzb6WXEukJkGh9rvELhjzIm/+vpjoS17w7kTGQ1IEP6BIBvt5yWtfaR/LAGekJBfkJmQ09EpGH7ZWZ/Dqu527s5zUYCJcVhX0ZCQgBFwOw==
+ bh=6B8P1zxfJDoyoU0W3IawYc8DH8YXTlPWkpb4fSZ9TNA=;
+ b=oLH/XTiqFnCu56FvOf+qnciryrf2CTTAPqNglGIq3iDsYtbbv8xzljBEkx0SRSjF52L7ZqmhVKxy8NRTgxA0T2RpF2JGMdzSVMDrF6iHckDW1wOD/gjolakB3YNdoJ5C6mKqG868VveWGv0UdALWBj0ZPBQXqn63UFdrNS90fbDc3RqdQx7f81NxzC27oyhkWhhbdH/ZdpN9D0tvpNk3lrVw33ZKkULO1euh4Whqx3yyohE/slFRzU8LVqYpv+MRLIzYWQqRkJE87vXaBFbElsch9wNoDF6GshR/TT5Xp4OqDYYwSxQT3hyU0jLMn5d5ZezdypdoumCvwDe2TfLWnA==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
- 216.228.117.160) smtp.rcpttodomain=redhat.com smtp.mailfrom=nvidia.com;
- dmarc=pass (p=reject sp=reject pct=100) action=none header.from=nvidia.com;
+ 165.204.84.17) smtp.rcpttodomain=igalia.com smtp.mailfrom=amd.com; dmarc=pass
+ (p=quarantine sp=quarantine pct=100) action=none header.from=amd.com;
  dkim=none (message not signed); arc=none (0)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=Nvidia.com;
- s=selector2;
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1; 
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=bVpFIT8sUsT9L9lka83Ezude++APrXZWnmfj5i5hORM=;
- b=o19xyrgddn7K2it2C5K0N5LgYqLlzaHexOBABsE5E/T4ci99fHH9m3VOxeGE9cLBMH33Lq46Vok/JBArHek6m0bjtLrgkZvRWfGeTRLsUkeVtfLvTXnHd8eGTRso+f3fwT7YI28MpVhqzT7KXTwayyEBgWmY1HfwXG2hhV4h7D3+VVw/gv6fsBIoJroVygLeKQvgjOW5iXp+DzhZbGRVbVrK3tUNmmVWBh+VXsio4gaEVHKfZcW4AXSC8lMrMkUVMKpckC8aQwnyaGajR0XTaIyzg6OeiGB3Tu3eduZcABXOIutCqH0FTCxPrPQ249YMFsdKIZ1xq7rWoP2M0Ui+Zg==
-Received: from BY3PR05CA0004.namprd05.prod.outlook.com (2603:10b6:a03:254::9)
- by CY8PR12MB7539.namprd12.prod.outlook.com (2603:10b6:930:96::12)
+ bh=6B8P1zxfJDoyoU0W3IawYc8DH8YXTlPWkpb4fSZ9TNA=;
+ b=U+MSisGj84SKPUI9CT14iXrTTQNrGD9tGGIv5zEqN4bWzlyQ9nukI4MhmlfmhBFtd+/h2KEyfNtxYa3aRQig/O8VmIHv7g+rUzZEcqGQW94A65GzzfboxHcdxLkHlvTn/luFCw58EuSja+HFbOzGD4oCMVKwzRMxGWZj42z5JX8=
+Received: from SJ0PR13CA0001.namprd13.prod.outlook.com (2603:10b6:a03:2c0::6)
+ by IA1PR12MB6044.namprd12.prod.outlook.com (2603:10b6:208:3d4::20)
  with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.8769.22; Mon, 26 May
- 2025 12:15:43 +0000
-Received: from SJ1PEPF0000231A.namprd03.prod.outlook.com
- (2603:10b6:a03:254:cafe::ac) by BY3PR05CA0004.outlook.office365.com
- (2603:10b6:a03:254::9) with Microsoft SMTP Server (version=TLS1_3,
- cipher=TLS_AES_256_GCM_SHA384) id 15.20.8769.15 via Frontend Transport; Mon,
- 26 May 2025 12:15:43 +0000
-X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 216.228.117.160)
- smtp.mailfrom=nvidia.com;
- dkim=none (message not signed)
- header.d=none;dmarc=pass action=none header.from=nvidia.com;
-Received-SPF: Pass (protection.outlook.com: domain of nvidia.com designates
- 216.228.117.160 as permitted sender) receiver=protection.outlook.com;
- client-ip=216.228.117.160; helo=mail.nvidia.com; pr=C
-Received: from mail.nvidia.com (216.228.117.160) by
- SJ1PEPF0000231A.mail.protection.outlook.com (10.167.242.231) with Microsoft
- SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.20.8769.18 via Frontend Transport; Mon, 26 May 2025 12:15:43 +0000
-Received: from rnnvmail205.nvidia.com (10.129.68.10) by mail.nvidia.com
- (10.129.200.66) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.1544.4; Mon, 26 May
- 2025 05:15:21 -0700
-Received: from rnnvmail204.nvidia.com (10.129.68.6) by rnnvmail205.nvidia.com
- (10.129.68.10) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.1544.14; Mon, 26 May
- 2025 05:15:20 -0700
-Received: from ipp2-2167.ipp2u1.colossus.nvidia.com (10.127.8.11) by
- mail.nvidia.com (10.129.68.6) with Microsoft SMTP Server id 15.2.1544.14 via
- Frontend Transport; Mon, 26 May 2025 05:15:20 -0700
-From: Zhi Wang <zhiw@nvidia.com>
-To: <lyude@redhat.com>, <dakr@kernel.org>, <airlied@gmail.com>,
- <simona@ffwll.ch>
-CC: <dri-devel@lists.freedesktop.org>, <nouveau@lists.freedesktop.org>,
- <linux-kernel@vger.kernel.org>, <acurrid@nvidia.com>, <cjia@nvidia.com>,
- <smitra@nvidia.com>, <aniketa@nvidia.com>, <arpitj@nvidia.com>,
- <kwankhede@nvidia.com>, <targupta@nvidia.com>, <zhiw@nvidia.com>,
- <zhiwang@kernel.org>
-Subject: [PATCH] drm/nouveau: fix a use-after-free in r535_gsp_rpc_push()
-Date: Mon, 26 May 2025 12:15:17 +0000
-Message-ID: <20250526121517.8319-1-zhiw@nvidia.com>
-X-Mailer: git-send-email 2.43.5
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.8769.21; Mon, 26 May
+ 2025 12:55:34 +0000
+Received: from SJ1PEPF00001CEB.namprd03.prod.outlook.com
+ (2603:10b6:a03:2c0:cafe::66) by SJ0PR13CA0001.outlook.office365.com
+ (2603:10b6:a03:2c0::6) with Microsoft SMTP Server (version=TLS1_3,
+ cipher=TLS_AES_256_GCM_SHA384) id 15.20.8769.18 via Frontend Transport; Mon,
+ 26 May 2025 12:55:31 +0000
+X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 165.204.84.17)
+ smtp.mailfrom=amd.com; dkim=none (message not signed)
+ header.d=none;dmarc=pass action=none header.from=amd.com;
+Received-SPF: Pass (protection.outlook.com: domain of amd.com designates
+ 165.204.84.17 as permitted sender) receiver=protection.outlook.com;
+ client-ip=165.204.84.17; helo=SATLEXMB04.amd.com; pr=C
+Received: from SATLEXMB04.amd.com (165.204.84.17) by
+ SJ1PEPF00001CEB.mail.protection.outlook.com (10.167.242.27) with Microsoft
+ SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
+ 15.20.8769.18 via Frontend Transport; Mon, 26 May 2025 12:55:30 +0000
+Received: from FRAPPELLOUX01.amd.com (10.180.168.240) by SATLEXMB04.amd.com
+ (10.181.40.145) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.39; Mon, 26 May
+ 2025 07:55:22 -0500
+From: Pierre-Eric Pelloux-Prayer <pierre-eric.pelloux-prayer@amd.com>
+To: 
+CC: Pierre-Eric Pelloux-Prayer <pierre-eric.pelloux-prayer@amd.com>,
+ =?UTF-8?q?Christian=20K=C3=B6nig?= <christian.koenig@amd.com>,
+ =?UTF-8?q?Ma=C3=ADra=20Canal?= <mcanal@igalia.com>,
+ =?UTF-8?q?Thomas=20Hellstr=C3=B6m?= <thomas.hellstrom@linux.intel.com>,
+ Abhinav Kumar <quic_abhinavk@quicinc.com>, Alex Deucher
+ <alexander.deucher@amd.com>, Boris Brezillon <boris.brezillon@collabora.com>, 
+ Danilo Krummrich <dakr@kernel.org>, David Airlie <airlied@gmail.com>, "Dmitry
+ Baryshkov" <lumag@kernel.org>, Felix Kuehling <Felix.Kuehling@amd.com>,
+ "Frank Binns" <frank.binns@imgtec.com>, Jonathan Corbet <corbet@lwn.net>,
+ Liviu Dudau <liviu.dudau@arm.com>, Lizhi Hou <lizhi.hou@amd.com>, Lucas De
+ Marchi <lucas.demarchi@intel.com>, Lucas Stach <l.stach@pengutronix.de>,
+ Lyude Paul <lyude@redhat.com>, Maarten Lankhorst
+ <maarten.lankhorst@linux.intel.com>, Matt Coster <matt.coster@imgtec.com>,
+ Matthew Brost <matthew.brost@intel.com>, Maxime Ripard <mripard@kernel.org>,
+ Melissa Wen <mwen@igalia.com>, Min Ma <min.ma@amd.com>, Oded Gabbay
+ <ogabbay@kernel.org>, Philipp Stanner <phasta@kernel.org>, Qiang Yu
+ <yuq825@gmail.com>, Rob Clark <robdclark@gmail.com>, Rob Herring
+ <robh@kernel.org>, Rodrigo Vivi <rodrigo.vivi@intel.com>, Simona Vetter
+ <simona@ffwll.ch>, Steven Price <steven.price@arm.com>, Sumit Semwal
+ <sumit.semwal@linaro.org>, "Thomas Zimmermann" <tzimmermann@suse.de>,
+ <amd-gfx@lists.freedesktop.org>, <dri-devel@lists.freedesktop.org>,
+ <etnaviv@lists.freedesktop.org>, <freedreno@lists.freedesktop.org>,
+ <intel-xe@lists.freedesktop.org>, <lima@lists.freedesktop.org>,
+ <linaro-mm-sig@lists.linaro.org>, <linux-arm-msm@vger.kernel.org>,
+ <linux-doc@vger.kernel.org>, <linux-kernel@vger.kernel.org>,
+ <linux-media@vger.kernel.org>, <nouveau@lists.freedesktop.org>
+Subject: [PATCH v11 00/10] Improve gpu_scheduler trace events + UAPI
+Date: Mon, 26 May 2025 14:54:42 +0200
+Message-ID: <20250526125505.2360-1-pierre-eric.pelloux-prayer@amd.com>
+X-Mailer: git-send-email 2.43.0
 MIME-Version: 1.0
+Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: 8bit
-Content-Type: text/plain
-X-NV-OnPremToCloud: AnonymousSubmission
+X-Originating-IP: [10.180.168.240]
+X-ClientProxiedBy: SATLEXMB04.amd.com (10.181.40.145) To SATLEXMB04.amd.com
+ (10.181.40.145)
 X-EOPAttributedMessage: 0
 X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: SJ1PEPF0000231A:EE_|CY8PR12MB7539:EE_
-X-MS-Office365-Filtering-Correlation-Id: 7b702671-7919-4e10-d42b-08dd9c4f0970
+X-MS-TrafficTypeDiagnostic: SJ1PEPF00001CEB:EE_|IA1PR12MB6044:EE_
+X-MS-Office365-Filtering-Correlation-Id: 593ebef6-bda9-4046-d91f-08dd9c54986d
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
 X-Microsoft-Antispam: BCL:0;
- ARA:13230040|1800799024|376014|82310400026|36860700013; 
-X-Microsoft-Antispam-Message-Info: =?us-ascii?Q?Tga6vQja+y4UBWpSG4Ubl6UWI7aWd1tZ20uzl43YLqeRRsn+NymSlzb+ThNf?=
- =?us-ascii?Q?ZA9tBPv/Rf+0DIDSqRA5xsNOEQCLm6rrgRTxuNi1GtorYjJtKnzOl21grUio?=
- =?us-ascii?Q?F6GJHuQHE+Wx80prHZWu14b+AKkKBnOoQAhnKmDBIPnJcItHTMz/YFJZF9FL?=
- =?us-ascii?Q?IefFEeLkUlr8APahCAItH1FcjgzshCpKWrm/DG1zAJ5xn48KVa9NyOgafcNa?=
- =?us-ascii?Q?VEPecuuQxVhwpP3mMTaUq2p0dW9Na6/3lGy4DiDU+To7cLYa9E6ZgxgxWOE2?=
- =?us-ascii?Q?V112yJIeTP69u7YF33I27XU+Vqlv1uqt+en9aq1HeRTOUla5wz9xxKx/3kFh?=
- =?us-ascii?Q?bLIg7MxBJkjRRyS+uGFX+AR3zwHVw/euMcAYREZegV2NYr5pNZCnIx0mplcc?=
- =?us-ascii?Q?OAuAziERx/gJYERPoMcR8ext67USzT1Utdk6ou7NkTzEfg1IuI6pEcQvrGxd?=
- =?us-ascii?Q?e8fNINWE9TNB3AFnksO23jMJtnMvnwjf2Bmc3lJkJ4qID7pud/tS2VOOuhA4?=
- =?us-ascii?Q?Zzs9/yB147+ar6G4+dQQg7Z3B5AWogEFCJU+TI88mZFfM4Y7LV2ru4A9JuwT?=
- =?us-ascii?Q?iwhdrQ2dfQXR6a4a5x5GmKwohy5w4VK1/ONNrpCCByruB8IyR0tXvQeNA3MM?=
- =?us-ascii?Q?KwAdN1IbZFcbncecwMZbdk/MXLDsgWpP0/dd+LYWYisGUEouMJ4UhtDCaixf?=
- =?us-ascii?Q?aN1Zb0ag5oAiAl1aOchsnIL8D2aUJVKBpKxnnGEshzFTLOZFzRFu/tcGZZ67?=
- =?us-ascii?Q?Nx4Nwh2LBGt3qaKDoeFaep+20SqRQZq26EYk9DaY4xV1v6Lcgqy6y6oRDpf0?=
- =?us-ascii?Q?8tsqsLNmbXi6xR+NLM+f5BG3T0aILMiyQpnMfTaNLc/JzzG0dNecy6R/A2Ok?=
- =?us-ascii?Q?cdpCd5oeCm6UphSHR5JF/89DEHUVJEhSAxKJfkWBad+JRK+vb6jpGxCySGXd?=
- =?us-ascii?Q?/IuQrKYmc67M9yp4IdjuFiKZ30zpHiIsXIEc+p1lVQPvUQTScFUCfFTxGgC7?=
- =?us-ascii?Q?uxLjzDYzncG/6RVSLLOgE+n52kjBrgRKwMjti9iT3/DPK576VPB0wah2eNdt?=
- =?us-ascii?Q?xma5axIljcXjjSUJI5Bgcyb2rcbVOMWOGo5JBueJxzo42NPaWSYgtS0vp2VY?=
- =?us-ascii?Q?djEMAp8TgnafcCtjpXIwRtlkINsRxSRvxOkD+qV8ANHAVUwbKNL6/AWOeSof?=
- =?us-ascii?Q?ybbS9x8LqPN+RC4Z72RXQi5T/feV0ZpeC/bN/4QBBAm6N4/UEno1sW8O1QNY?=
- =?us-ascii?Q?HQSo5fKdVpVvVBocIggYj0B/3zYVboiFSRktfAdwwYZK31Gz13uadOImt4f1?=
- =?us-ascii?Q?XiwdfLtQhmAnAA8W8TCJVUAu/RoPrREhu607DA9a0mv0BVlQZGDQtVT+CHkQ?=
- =?us-ascii?Q?D9ntp2dJ51cjLdkkVk6ZRBXM9nb2Zsyv0+nS9Gm5cTzcaeG0ZqgNuKeZGTqX?=
- =?us-ascii?Q?aqsa6zP5mLLPnr3I4iu/ZTG5biPIjsLkL4pdbAXC3kPpZFEv4MQJyyQD+eNd?=
- =?us-ascii?Q?cM+Q9/jukQ4rCzA9VLY5sTrPmCXOyr4meav5?=
-X-Forefront-Antispam-Report: CIP:216.228.117.160; CTRY:US; LANG:en; SCL:1; SRV:;
- IPV:NLI; SFV:NSPM; H:mail.nvidia.com; PTR:dc6edge1.nvidia.com; CAT:NONE;
- SFS:(13230040)(1800799024)(376014)(82310400026)(36860700013); DIR:OUT;
+ ARA:13230040|36860700013|1800799024|82310400026|376014|7416014; 
+X-Microsoft-Antispam-Message-Info: =?utf-8?B?WHI1OFRDMG1hYy9xYkxmMGNDNUFxMjBSMEYxWklWMlhFeFR2bGNMWVNESUpz?=
+ =?utf-8?B?aVJJNS9oem1hbGkvN3RwSjA1cnFKUUEwRkJGL0dheGpnT2xJWGN6ODgwSGpw?=
+ =?utf-8?B?blViMkIxOHMxZVMxUkNscWM4a1NiaXhld3FPY3BpM2pzWnVlN2dxY2ozQm5r?=
+ =?utf-8?B?Uzd1VUYrbnQ5blRudGZFU0JOUjFrMFdrUGhVeHYva1oyVGM1Ri9LVHJHUlRW?=
+ =?utf-8?B?TmZhNCszNTJjdmJtOWZyUWNCRlpKa1EvVlNDaGdKeGVkdFB4N09tOVh4REhP?=
+ =?utf-8?B?a1hRMnc2Z1BWT2NVYlZ1Wm9rOHZ2M2tkeHcyRmlkVGJ1SnQvalZDaWZXWGR5?=
+ =?utf-8?B?K2dRNmV0TFZsWkRTVU82VE5TSzg2enJyYmQwT0RiSTd4bFE1TFJQdTBvd21I?=
+ =?utf-8?B?alg2WHVPS0Z2cDkvVFYyT0d3Q0NzNThFU1F3MHZYN2lVNVp0T1kvSzcxOHhU?=
+ =?utf-8?B?SEZqTmdrQndxWk80UmxHR1czWnBBTUxGLzA4bzk0K0FLbjNqL0xmYWhQVExI?=
+ =?utf-8?B?c3ZYVEtlQ29WNUloTHJvUTlsRFVWUlVpbVBlNnA5MDd3VTVZblhkcTdoRCta?=
+ =?utf-8?B?Ump0dnA0UUV2dTBIamJEV0Q0QmthM1VKSEFaZUpjQVpVaXcya3pQNkZWSDU0?=
+ =?utf-8?B?RTJtWCswRUJ6bmdrZDRGVGUrWkswWC9PRzJnSHhXbnpkc3ZKT3FkZkpxTDk1?=
+ =?utf-8?B?R3BFZ3dYdC9hRktiUWRhU0pydzJXcFpiUzBoblluRVEwS0dRSG5sZDdEeG1S?=
+ =?utf-8?B?THVjSFBpL2Fid1RrRDd3dDR2Ry8vbWlRUzh1NUtYbW9veFpjZW5TZXZIZVV1?=
+ =?utf-8?B?ZkhkUUNqclFza0pGUG5OTHYxV1UrTFpOV2VUVFpPU25ZQzZHcmUrQnZlOUcr?=
+ =?utf-8?B?Wk5sNDFrR2RWdnhuVmRmeTB4NkxDYnk5UVlHckRCdE5oYVRsekhjQUVQQzVp?=
+ =?utf-8?B?NFErTTNWendyL0U4aDNKK0JuVVAydkJGZTBNZGp3cFZwcERmTFdoR1ZIbUF3?=
+ =?utf-8?B?S1lLUHJNTEpFeHpORG5ka1NEeWxiNU1wanU1dHdJYTBBUUEwK2ZjSHljQXMx?=
+ =?utf-8?B?RVVUZW8zZ25HNzNzTlF5amM4c3U2aSt4b05vTXhNS0ltRkVyM3dSS2crdWo2?=
+ =?utf-8?B?VzBUKzNYVFpUOVR0SDNVbE5qc1FpbzVscVBZZnE1L0tJSUlDa3RaTlBDWlEw?=
+ =?utf-8?B?VWhRaVBqLzZlMk5ZcTJRUDA0M21HelJqL1BxQko3V2FscWVJL2dPaXVraTQy?=
+ =?utf-8?B?Qk5sOWRyTGJ3QWZKU3oveVM0Sk93K2JxS1Z3eFAvQ3YvYmdtd1J1MTc0NFVv?=
+ =?utf-8?B?bGlrL0k0ME1SOW93MHlubFVDSXNCOHVpQkNvcjRTWlAzQmFCREVxWkI3V3JP?=
+ =?utf-8?B?d0Z0R0RlWnZTcTdQT0VUamZyMTNwR2ZZODV2MU1qOVpzcnVCeXVST1NWbFdY?=
+ =?utf-8?B?TlA2cGh0NHVLNzR6Y3FHYjB5YklFRmRudVNmL2psR2VnVU1ndjNnMnlmYTZJ?=
+ =?utf-8?B?dHR3R2lhVEdabkZRUUtVR2NpQTkwYjNlZ05uTFE5Y09acjBqNjB2Y0d3eVlI?=
+ =?utf-8?B?cHlCSUtDall6RDlab082WitCMHdTY2JWNGdzcjB1OERSaGNFRFJTTnEyQ1Bo?=
+ =?utf-8?B?MTd3VzNzUnhXSVV0dXhiZ0dseXIwNlRqMElCY3cyVnpqRklEdzJoZkZEb2RT?=
+ =?utf-8?B?Z3pjUUVYcy9oQ29VM0Y3ek5QdTgwZDlEQzBMd0l0R0crNlE3ZEVhUGhOVTNy?=
+ =?utf-8?B?UE9LRlEzOHA0Q1lxYlVsRU9sbDhzNGxwRHJrZTdDajI4V2pHSWhtUkc0QnVD?=
+ =?utf-8?B?OExQd3BDaWNFekdNQi9JTjdqQmlkTzdRczZhNlNnUHUrdytqR2kwdk1nc2U5?=
+ =?utf-8?B?VVNWSWIwUHJhczBCTU8zd0tqL3BDRXRLVm1oSVQxVTcrSk93ckpXcDNvcEJ1?=
+ =?utf-8?B?MlFEY1N0WWhibDBTcGlON2M1YWM5OEhBOXF1U2RnN2FTbjlZRnUwUitVamY2?=
+ =?utf-8?B?NFFHSGdWWEFnPT0=?=
+X-Forefront-Antispam-Report: CIP:165.204.84.17; CTRY:US; LANG:en; SCL:1; SRV:;
+ IPV:CAL; SFV:NSPM; H:SATLEXMB04.amd.com; PTR:InfoDomainNonexistent; CAT:NONE;
+ SFS:(13230040)(36860700013)(1800799024)(82310400026)(376014)(7416014); DIR:OUT;
  SFP:1101; 
-X-OriginatorOrg: Nvidia.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 26 May 2025 12:15:43.0152 (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: 7b702671-7919-4e10-d42b-08dd9c4f0970
-X-MS-Exchange-CrossTenant-Id: 43083d15-7273-40c1-b7db-39efd9ccc17a
-X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=43083d15-7273-40c1-b7db-39efd9ccc17a; Ip=[216.228.117.160];
- Helo=[mail.nvidia.com]
-X-MS-Exchange-CrossTenant-AuthSource: SJ1PEPF0000231A.namprd03.prod.outlook.com
+X-OriginatorOrg: amd.com
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 26 May 2025 12:55:30.3756 (UTC)
+X-MS-Exchange-CrossTenant-Network-Message-Id: 593ebef6-bda9-4046-d91f-08dd9c54986d
+X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
+X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=3dd8961f-e488-4e60-8e11-a82d994e183d; Ip=[165.204.84.17];
+ Helo=[SATLEXMB04.amd.com]
+X-MS-Exchange-CrossTenant-AuthSource: SJ1PEPF00001CEB.namprd03.prod.outlook.com
 X-MS-Exchange-CrossTenant-AuthAs: Anonymous
 X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: CY8PR12MB7539
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: IA1PR12MB6044
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -142,69 +163,101 @@ List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-The RPC container is released after being passed to r535_gsp_rpc_send().
+Hi,
 
-When sending the initial fragment of a large RPC and passing the
-caller's RPC container, the container will be freed prematurely. Subsequent
-attempts to send remaining fragments will therefore result in a
-use-after-free.
+The initial goal of this series was to improve the drm and amdgpu
+trace events to be able to expose more of the inner workings of
+the scheduler and drivers to developers via tools.
 
-Allocate a temporary RPC container for holding the initial fragment of a
-large RPC when sending. Free the caller's container when all fragments
-are successfully sent.
+Then, the series evolved to become focused only on gpu_scheduler.
+The changes around vblank events will be part of a different
+series, as well as the amdgpu ones.
 
-This problem is caught by KASAN.
+Moreover Sima suggested to make some trace events stable uAPI,
+so tools can rely on them long term.
 
-Fixes: 176fdcbddfd2 ("drm/nouveau/gsp/r535: add support for booting GSP-RM")
-Signed-off-by: Zhi Wang <zhiw@nvidia.com>
----
- drivers/gpu/drm/nouveau/nvkm/subdev/gsp/r535.c | 14 ++++++++++++--
- 1 file changed, 12 insertions(+), 2 deletions(-)
+The first patches extend and cleanup the gpu scheduler events,
+then add a documentation entry in drm-uapi.rst.
 
-diff --git a/drivers/gpu/drm/nouveau/nvkm/subdev/gsp/r535.c b/drivers/gpu/drm/nouveau/nvkm/subdev/gsp/r535.c
-index 969f6b921fdb..ab865da2541d 100644
---- a/drivers/gpu/drm/nouveau/nvkm/subdev/gsp/r535.c
-+++ b/drivers/gpu/drm/nouveau/nvkm/subdev/gsp/r535.c
-@@ -978,12 +978,21 @@ r535_gsp_rpc_push(struct nvkm_gsp *gsp, void *payload,
- 	if (payload_size > max_payload_size) {
- 		const u32 fn = rpc->function;
- 		u32 remain_payload_size = payload_size;
-+		void *next;
- 
- 		/* Adjust length, and send initial RPC. */
- 		rpc->length = sizeof(*rpc) + max_payload_size;
- 		msg->checksum = rpc->length;
- 
--		repv = r535_gsp_rpc_send(gsp, payload, NVKM_GSP_RPC_REPLY_NOWAIT, 0);
-+		next = r535_gsp_rpc_get(gsp, fn, max_payload_size);
-+		if (IS_ERR(next)) {
-+			repv = next;
-+			goto done;
-+		}
-+
-+		memcpy(next, payload, max_payload_size);
-+
-+		repv = r535_gsp_rpc_send(gsp, next, NVKM_GSP_RPC_REPLY_NOWAIT, 0);
- 		if (IS_ERR(repv))
- 			goto done;
- 
-@@ -994,7 +1003,6 @@ r535_gsp_rpc_push(struct nvkm_gsp *gsp, void *payload,
- 		while (remain_payload_size) {
- 			u32 size = min(remain_payload_size,
- 				       max_payload_size);
--			void *next;
- 
- 			next = r535_gsp_rpc_get(gsp, NV_VGPU_MSG_FUNCTION_CONTINUATION_RECORD, size);
- 			if (IS_ERR(next)) {
-@@ -1015,6 +1023,8 @@ r535_gsp_rpc_push(struct nvkm_gsp *gsp, void *payload,
- 		/* Wait for reply. */
- 		repv = r535_gsp_rpc_handle_reply(gsp, fn, policy, payload_size +
- 						 sizeof(*rpc));
-+		if (!IS_ERR(repv))
-+			kvfree(msg);
- 	} else {
- 		repv = r535_gsp_rpc_send(gsp, payload, policy, gsp_rpc_len);
- 	}
+The last 2 patches are new in v8. One is based on a suggestion
+from Tvrtko and gets rid of drm_sched_job::id. The other is a
+cleanup of amdgpu trace events to use the fence=%llu:%llu format.
+
+The drm_sched_job patches don't affect gpuvis which has code to parse
+the gpu_scheduler events but these events are not enabled.
+
+Changes since v10:
+* fixed 2 errors reported by kernel test robot
+* rebased on drm-misc-next
+
+Changes since v9:
+* fixed documentation link syntax
+* fixed typos in commit messages
+* spelled out that these events cannot be used before
+  drm_sched_job_arm has been called
+
+Changes since v8:
+* swapped patches 8 & 9
+* rebased on drm-next
+
+Changes since v7:
+* uint64_t -> u64
+* reworked dependencies tracing (Tvrtko)
+* use common name prefix for all events (Tvrtko)
+* dropped drm_sched_job::id (Tvrtko)
+
+Useful links:
+- userspace tool using the updated events:
+https://gitlab.freedesktop.org/tomstdenis/umr/-/merge_requests/37
+- v8:
+https://lists.freedesktop.org/archives/dri-devel/2025-March/496781.html
+
+Pierre-Eric Pelloux-Prayer (10):
+  drm/debugfs: Output client_id in in drm_clients_info
+  drm/sched: Store the drm client_id in drm_sched_fence
+  drm/sched: Add device name to the drm_sched_process_job event
+  drm/sched: Cleanup gpu_scheduler trace events
+  drm/sched: Trace dependencies for GPU jobs
+  drm/sched: Add the drm_client_id to the drm_sched_run/exec_job events
+  drm/sched: Cleanup event names
+  drm: Get rid of drm_sched_job.id
+  drm/doc: Document some tracepoints as uAPI
+  drm/amdgpu: update trace format to match gpu_scheduler_trace
+
+ Documentation/gpu/drm-uapi.rst                |  19 ++++
+ drivers/accel/amdxdna/aie2_ctx.c              |   3 +-
+ drivers/gpu/drm/amd/amdgpu/amdgpu_amdkfd.c    |   2 +-
+ drivers/gpu/drm/amd/amdgpu/amdgpu_cs.c        |   3 +-
+ drivers/gpu/drm/amd/amdgpu/amdgpu_job.c       |   8 +-
+ drivers/gpu/drm/amd/amdgpu/amdgpu_job.h       |   3 +-
+ drivers/gpu/drm/amd/amdgpu/amdgpu_trace.h     |  32 ++----
+ drivers/gpu/drm/drm_debugfs.c                 |  10 +-
+ drivers/gpu/drm/etnaviv/etnaviv_gem_submit.c  |   2 +-
+ drivers/gpu/drm/imagination/pvr_job.c         |   2 +-
+ drivers/gpu/drm/imagination/pvr_queue.c       |   5 +-
+ drivers/gpu/drm/imagination/pvr_queue.h       |   2 +-
+ drivers/gpu/drm/lima/lima_gem.c               |   2 +-
+ drivers/gpu/drm/lima/lima_sched.c             |   6 +-
+ drivers/gpu/drm/lima/lima_sched.h             |   3 +-
+ drivers/gpu/drm/lima/lima_trace.h             |   6 +-
+ drivers/gpu/drm/msm/msm_gem_submit.c          |   8 +-
+ drivers/gpu/drm/nouveau/nouveau_sched.c       |   3 +-
+ drivers/gpu/drm/panfrost/panfrost_drv.c       |   2 +-
+ drivers/gpu/drm/panthor/panthor_drv.c         |   3 +-
+ drivers/gpu/drm/panthor/panthor_mmu.c         |   2 +-
+ drivers/gpu/drm/panthor/panthor_sched.c       |   5 +-
+ drivers/gpu/drm/panthor/panthor_sched.h       |   3 +-
+ .../gpu/drm/scheduler/gpu_scheduler_trace.h   | 103 +++++++++++++-----
+ drivers/gpu/drm/scheduler/sched_entity.c      |  16 ++-
+ drivers/gpu/drm/scheduler/sched_fence.c       |   4 +-
+ drivers/gpu/drm/scheduler/sched_internal.h    |   2 +-
+ drivers/gpu/drm/scheduler/sched_main.c        |  12 +-
+ .../gpu/drm/scheduler/tests/mock_scheduler.c  |   3 +-
+ drivers/gpu/drm/v3d/v3d_submit.c              |   2 +-
+ drivers/gpu/drm/xe/xe_sched_job.c             |   3 +-
+ include/drm/gpu_scheduler.h                   |  13 ++-
+ 32 files changed, 191 insertions(+), 101 deletions(-)
+
 -- 
-2.43.5
+2.43.0
 
