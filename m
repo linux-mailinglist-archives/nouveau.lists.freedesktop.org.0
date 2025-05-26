@@ -2,70 +2,70 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id 95D6ABBF6CF
-	for <lists+nouveau@lfdr.de>; Mon, 06 Oct 2025 22:57:35 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 048D5BBF7A1
+	for <lists+nouveau@lfdr.de>; Mon, 06 Oct 2025 22:58:19 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 81AF210E5AF;
-	Mon,  6 Oct 2025 20:57:24 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id F0F4710E637;
+	Mon,  6 Oct 2025 20:57:59 +0000 (UTC)
 Authentication-Results: gabe.freedesktop.org;
-	dkim=permerror (0-bit key) header.d=gmail.com header.i=@gmail.com header.b="EI57zU2n";
+	dkim=permerror (0-bit key) header.d=gmail.com header.i=@gmail.com header.b="j7BNgT1r";
 	dkim-atps=neutral
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
 Received: from mail-lj1-f174.google.com (mail-lj1-f174.google.com
  [209.85.208.174])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 7091A10E432;
- Mon, 26 May 2025 22:30:24 +0000 (UTC)
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 7F35E10E3CF;
+ Mon, 26 May 2025 22:31:33 +0000 (UTC)
 Received: by mail-lj1-f174.google.com with SMTP id
- 38308e7fff4ca-32a658c4cc4so9001071fa.2; 
- Mon, 26 May 2025 15:30:24 -0700 (PDT)
+ 38308e7fff4ca-310447fe59aso28850431fa.0; 
+ Mon, 26 May 2025 15:31:33 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1748298623; x=1748903423; darn=lists.freedesktop.org;
+ d=gmail.com; s=20230601; t=1748298692; x=1748903492; darn=lists.freedesktop.org;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:from:to:cc:subject:date
  :message-id:reply-to;
- bh=DeRtQfopGgqdSMrju5Mssh4B08QuGYql7A9ITbZgjgA=;
- b=EI57zU2nHZQGAjjztBKUPmKIRvtJqRE90nHtI5+wK6QKxhvLyjMyK5cC2fHaZeQvCc
- ccbhlyFHxEt+y9taeJpxpsxF+vQTSxEfZ/o30GlYJOUumNLZcjyiVZkmfBsHemagPevG
- SADb4ljVepREPAns9b38yM32PTbZEyTZAmNuez9KvFgU/yg1RkM/VtDl984AhVgA2y+o
- ouMHkw8R+gxdQAsIWyXBej6vb75eWjiG/cM/FOQcBapjucYJoiA8Uic0/MW5RclS3BDV
- GtAojHMg3uz86s2qGaJqJs7u82i7K1Kv77Wzo+6sXOaFt7nPo8+GDRW82QJ1Bm0NueUZ
- f/mA==
+ bh=jvLHYVJDLL1tRu00kxb4TV63RHH86AdnGIzbeTcCyBM=;
+ b=j7BNgT1rhh4cyyH5DRhWGR613sHenlYpoZ2Fs3/GGVRtzDAVBBHWIUzxg1uit206vR
+ RrYr0k8/8X8oCBnBWYpqwd1xnOVMSEnm8PP2NcrdEX22Xp1zlWhBh8Mi/irDFvjQgZ5a
+ qjcmoxC+elBIMx7agLVTTD4RQedtWwMjEsdVKVw4XlVb1Giw7aNd2+cCxQKQALGutiqu
+ 6Lo+XOY+xh41yXnnpV05W3rVefL5bPqSyKCYOD0e5+Zooyuw1FAtilVr91d2pn93GZjX
+ S+/8bBJ0EyZMuwLR21b2RqHkdPPVChTbbarmdCs+Q+D9iWH3WIvD/gyfUbyhDJkDpHz6
+ KCcw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1748298623; x=1748903423;
+ d=1e100.net; s=20230601; t=1748298692; x=1748903492;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=DeRtQfopGgqdSMrju5Mssh4B08QuGYql7A9ITbZgjgA=;
- b=dQdf4yZqKfN2VDVpF16yQvbopJQXS4ODxyBiQVjnc/Ie386GYiJQdhLhfELqkSZs0y
- tC0+WZEa7+MaEv8upPlqECtefdDMS/oztnreO5tD6SCc40F3RiTAbJBNvYGMGch/Jhf+
- r8grt4+9nEfWIoUxC7VZ1PE6luoAMA/qCg6aeScTDIKuVRPsaObI68QvCeWf7/Iadqu4
- NKnbScpz05HK2vBzL6OynxJwHyeMAraehfkz8gf+vUbOUo2+9mCUsfsn2ljkA3lFRD+V
- hsoyBRRB6VV2aDWmQuY06KAifot1VpoGAbEcFgWmHvuJuYhcC23IJaZUZd4qtrxsPqNG
- tcSQ==
+ bh=jvLHYVJDLL1tRu00kxb4TV63RHH86AdnGIzbeTcCyBM=;
+ b=l03t3Tb84JCXetD+TSqj+gzwnEOxD9er+NcOd6q1q4IUAtsa8LAJd5mn4e88PTBW28
+ PM7kL3THWocZqgaAhxd106+oARcRU4q4IUrNB6RW8KY+2vF6i5KeDnL3aLIsH4vk7Kwj
+ BJH36RGZe453zlyeMjPO7J8gkXCyX+NkgOTJjUwfQI7tCjUqYlnomcgiaNdWWzEAs5J3
+ FBW50Vmu1j5UDFHN9kBIkCtijAPo+VzCG7rsHrzk3Rf0yzl36+TtJV9L+96bCDDZzxD9
+ Y1/QCHI4QGVB0Ni25cKdMwceHkRnSd+UL+UHYk406atZEunjB8J4yErgmL1MXixwvWIa
+ Q0FA==
 X-Forwarded-Encrypted: i=1;
- AJvYcCVP8b905NiPYMpC1C4WznzxNEApS/zOYoY90n9Kz/X1KjtnQ0LHUO0oxptFUjK5tm9g6DYgGbeui78=@lists.freedesktop.org,
- AJvYcCXldZkp6EPah7159HFA1SiC+7dM3ulxLyWxQGr7Ym/E3fCKCYe6r59RNlEf9MgeWUQxkIZQw2sl8w==@lists.freedesktop.org
-X-Gm-Message-State: AOJu0YzIens3oTKa0/ADJ86pH9rUNdxRSwE6VAQq6RlYa9/bydARFmOa
- 8IeKBuXRbGjQCOFZ33Y55j/2tZ+y23ucq2kZJkKbsf5dp6UKLh4zdKTjsW30CrsnXTI75nI7qBi
- wxKf0sh6CAQrkrq8eA2hpWPgMI/R43Jw=
-X-Gm-Gg: ASbGncsgdoj7NDjHo/00CMHOpfpI7cWnfG8G1+dcoQAByQMq6/KNPlQVmcCQBAv61Xv
- 3yhbDNeQs2WOM8rIU36Ccq5CSyPNMviZ+SofyOmnZADxG4Fl3IEBi3RKUPo/jf8K5hgY2dS6WB9
- ALXdq9eaiOEhe/wW7gV0hxKhvJW6DaNtFgH/hxdmUsHzvi60lqfhtEZK1cN1unVMkPgHg=
-X-Google-Smtp-Source: AGHT+IHobXPM6nV57q0LkxjWMI5y+a9fqFFRAaaAVdT/IiyU5kBtoHLbzkKYgFh6GOZFHTnYbitctcnCYMHIu3rZzy0=
-X-Received: by 2002:a05:651c:1b11:b0:32a:6bef:7587 with SMTP id
- 38308e7fff4ca-32a6bef7741mr3018881fa.20.1748298622556; Mon, 26 May 2025
- 15:30:22 -0700 (PDT)
+ AJvYcCUi1BjyO2qNbnrHfJp8ytJ82jje7OXvxZAlY2MfMbpb55bJmqoUIXEj5Hk+DPJJzrbBtiaFVTRdQg==@lists.freedesktop.org,
+ AJvYcCXFoHUtQquWQExNM+Vwab1xVaAwrUWRxu/PfBAg8OSYomGwvbAOiA62ZVjqfcoXWDsa7m8rDVSHln4=@lists.freedesktop.org
+X-Gm-Message-State: AOJu0Yw1kQhLlyhqVdUaYrXcqlaasfZgRiG9Y2ThRdv9B0ZTfzVclLnm
+ ImoxWiJH08QzPvFszv0EGIho+uUKSZXxbgnf8lZi08B8OEchiDL+exhES5jT2reSQPubQ9ZB4Zw
+ yo+lAkELJ7Fg28YL6mzBh6HbS2YIFgW4=
+X-Gm-Gg: ASbGncsZKclyLRiuTA1oEAeo+uA1wX1ln+Y8Wj1YTkpJlz9IQEESANNHe2obh8yNsCU
+ h9UJ+RfPeAdxMwKMqb4qpvzUjcWtG+0NSD5oz2A1ntUc4YNULc4QzR6dHdx4TfVPJ7tH9MX2Jxv
+ bpJpSkzhLZLIwuE/sVpe6h/g3lMWOI0jxT9Kb4+TMF1QZj3AeBMyQYXXRCEfWGG8nGKrI=
+X-Google-Smtp-Source: AGHT+IEJfWzc6VPUDuyUq0aTn+WE4sTfnbgvmOYP1K86Po8lb+CyhSBKVylPu7Ej7IoVB3uFqztWGvTQz/dCfNqAd+Q=
+X-Received: by 2002:a05:651c:f01:b0:32a:664e:a923 with SMTP id
+ 38308e7fff4ca-32a664ea9e0mr10313091fa.22.1748298691742; Mon, 26 May 2025
+ 15:31:31 -0700 (PDT)
 MIME-Version: 1.0
 References: <20250524-cstr-core-v10-0-6412a94d9d75@gmail.com>
- <20250524-cstr-core-v10-4-6412a94d9d75@gmail.com>
- <DA66NJXU86M4.1HU12P6E79JLO@kernel.org>
-In-Reply-To: <DA66NJXU86M4.1HU12P6E79JLO@kernel.org>
+ <20250524-cstr-core-v10-5-6412a94d9d75@gmail.com>
+ <DA66OFXQCWUK.31LM78DIVABZV@kernel.org>
+In-Reply-To: <DA66OFXQCWUK.31LM78DIVABZV@kernel.org>
 From: Tamir Duberstein <tamird@gmail.com>
-Date: Mon, 26 May 2025 18:29:46 -0400
-X-Gm-Features: AX0GCFuvvdq9fWPFcsB31U1UA0LVEWVFnDG5B-zpmEiF_aWL5P9UrGYE0gqlG8U
-Message-ID: <CAJ-ks9nd6_iGK+ie-f+F0x4kwpyEGJ-kQiQGt-ffdbVN5S6kOg@mail.gmail.com>
-Subject: Re: [PATCH v10 4/5] rust: replace `kernel::c_str!` with C-Strings
+Date: Mon, 26 May 2025 18:30:55 -0400
+X-Gm-Features: AX0GCFuHGuPmwsi9tWeeUypjxRW1UrvRCX_LVo0C-ggOVzUmGabC1z1bBuoaiZU
+Message-ID: <CAJ-ks9m=okC9_K2MJU80xbnO+3+Z0hvC_FYzCtzW9pD=WA_xqQ@mail.gmail.com>
+Subject: Re: [PATCH v10 5/5] rust: remove core::ffi::CStr reexport
 To: Benno Lossin <lossin@kernel.org>
 Cc: Michal Rostecki <vadorovsky@protonmail.com>,
  Miguel Ojeda <ojeda@kernel.org>, 
@@ -117,49 +117,43 @@ List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-On Mon, May 26, 2025 at 11:04=E2=80=AFAM Benno Lossin <lossin@kernel.org> w=
+On Mon, May 26, 2025 at 11:05=E2=80=AFAM Benno Lossin <lossin@kernel.org> w=
 rote:
 >
 > On Sat May 24, 2025 at 10:33 PM CEST, Tamir Duberstein wrote:
-> > +macro_rules! c_str_avoid_literals {
+> > Clean up references to `kernel::str::CStr`.
+> >
+> > Signed-off-by: Tamir Duberstein <tamird@gmail.com>
+> > ---
+> >  drivers/gpu/drm/drm_panic_qr.rs   |  3 ++-
+> >  drivers/gpu/nova-core/firmware.rs |  2 +-
+> >  drivers/net/phy/ax88796b_rust.rs  |  1 +
+> >  drivers/net/phy/qt2025.rs         |  1 +
+> >  rust/kernel/device.rs             |  3 +--
+> >  rust/kernel/driver.rs             |  4 ++--
+> >  rust/kernel/error.rs              |  6 ++----
+> >  rust/kernel/faux.rs               |  5 ++++-
+> >  rust/kernel/firmware.rs           | 15 ++++-----------
+> >  rust/kernel/kunit.rs              |  6 +++---
+> >  rust/kernel/lib.rs                |  2 +-
+> >  rust/kernel/miscdevice.rs         |  3 +--
+> >  rust/kernel/net/phy.rs            |  4 +++-
+> >  rust/kernel/of.rs                 |  3 ++-
+> >  rust/kernel/pci.rs                |  2 +-
+> >  rust/kernel/platform.rs           |  2 +-
+> >  rust/kernel/prelude.rs            |  5 +----
+> >  rust/kernel/str.rs                | 22 ++++++++++------------
+> >  rust/kernel/sync/condvar.rs       |  4 ++--
+> >  rust/kernel/sync/lock.rs          |  4 ++--
+> >  rust/kernel/sync/lock/global.rs   |  5 +++--
+> >  rust/kernel/sync/poll.rs          |  1 +
+> >  rust/kernel/workqueue.rs          |  1 +
+> >  rust/macros/module.rs             |  2 +-
+> >  24 files changed, 51 insertions(+), 55 deletions(-)
 >
-> I don't like this name, how about `concat_to_c_str` or
-> `concat_with_nul`?
->
-> This macro also is useful from macros that have a normal string literal,
-> but can't turn it into a `c""` one.
+> Haven't compile tested this series yet, but this commit seems to suggest
+> to me that some of the previous commits introduced code that doesn't
+> compile or emits warnings? If so that needs to be fixed.
 
-Uh, can you give an example? I'm not attached to the name.
-
->
-> > +    // NB: we could write `($str:lit) =3D> compile_error!("use a C str=
-ing literal instead");` here but
-> > +    // that would trigger when the literal is at the top of several ma=
-cro expansions. That would be
-> > +    // too limiting to macro authors, so we rely on the name as a hint=
- instead.
-> >      ($str:expr) =3D> {{
-> > -        const S: &str =3D concat!($str, "\0");
-> > -        const C: &$crate::str::CStr =3D match $crate::str::CStr::from_=
-bytes_with_nul(S.as_bytes()) {
-> > -            Ok(v) =3D> v,
-> > -            Err(_) =3D> panic!("string contains interior NUL"),
-> > -        };
-> > +        const S: &'static str =3D concat!($str, "\0");
-> > +        const C: &'static $crate::str::CStr =3D
-> > +            match $crate::str::CStr::from_bytes_with_nul(S.as_bytes())=
- {
->
-> Why is this still our CStr?
-
-Good question. I'll just revert all the changes here, I don't need to
-touch this.
-
->
-> > +                Ok(v) =3D> v,
-> > +                Err(err) =3D> {
-> > +                    let _: core::ffi::FromBytesWithNulError =3D err;
->
-> Is this really necessary?
-
-No. Reverted in v11.
+That's not the case. There are no warnings and no compilation failures
+in prior commits.
