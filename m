@@ -2,107 +2,132 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id 4EDF5AC4ED1
-	for <lists+nouveau@lfdr.de>; Tue, 27 May 2025 14:44:46 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 2AFAFAC531C
+	for <lists+nouveau@lfdr.de>; Tue, 27 May 2025 18:37:49 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 6B02E10E4E2;
-	Tue, 27 May 2025 12:44:44 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 3FAEC10E080;
+	Tue, 27 May 2025 16:37:47 +0000 (UTC)
 Authentication-Results: gabe.freedesktop.org;
-	dkim=pass (2048-bit key; unprotected) header.d=google.com header.i=@google.com header.b="s45UJUjL";
+	dkim=pass (2048-bit key; unprotected) header.d=Nvidia.com header.i=@Nvidia.com header.b="ft4WK94H";
 	dkim-atps=neutral
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from mail-wm1-f54.google.com (mail-wm1-f54.google.com
- [209.85.128.54])
- by gabe.freedesktop.org (Postfix) with ESMTPS id EC5E910E4E8
- for <nouveau@lists.freedesktop.org>; Tue, 27 May 2025 12:44:42 +0000 (UTC)
-Received: by mail-wm1-f54.google.com with SMTP id
- 5b1f17b1804b1-442f4a3a4d6so22650045e9.0
- for <nouveau@lists.freedesktop.org>; Tue, 27 May 2025 05:44:42 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=google.com; s=20230601; t=1748349881; x=1748954681;
- darn=lists.freedesktop.org; 
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=/+1ORexpCal/yWarvUklj5P7KVERu3osu4+FfJ0CMj4=;
- b=s45UJUjLmB95wp247BuHhYBBbwtrCf7jbg6QVyGymfvH7Jf+iJBulUTHEy7LWOP1TV
- fDSolYjLIEQmaL6Yc3mez+LZVKCNC4LyWrkiYvJJaN+ck7/AbtPo/rlUezayQt2iSOdk
- NbBYNbchV8VnkUNypdDhWIMfp6wuYugu5O+9kXv0HXBWr/ReCet0OpqmkhctPHR0bbkJ
- AwTbw867Y891tHOba4rneYYqPFzNtjR47o915xQAp5hvWbX/PNYdIOq1L9/jlXcDAw/x
- Bn7vI6UkKS1DJEfBju5XcZl8iUuBu6fNTON07UAmsC4qZQ/s67yWFA1znzDYa/4xnMxP
- N4Ag==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1748349881; x=1748954681;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=/+1ORexpCal/yWarvUklj5P7KVERu3osu4+FfJ0CMj4=;
- b=JBFy2CgS9KynSphYgK4Of7PmArg2kcymMq3ZoPW+awo170OoWF/kE2/Fv7qqrsRHWV
- tyNEDt2bgmuKpHvoXW+EwMvfZa4FwBwORsDLWzd3M9fNzJXrGRVDVZpgg6jccIhOuKBL
- k1TIXFiuqiYIpgNR27ArXDWEWOCk/BGfySM9Svq1yvPuN4rG0HB0fl98vnOMfNI3bhCy
- TNQLubE2F7ZmCNApW6AsbqytwRiV9rN/a3Txg2pRlNnSs6goEWtTjrV8Qyc2E7adugsm
- 47G60wKoLhSPdIKd5ImOFERZO3Cs9AgDYcHU1AE5OmoJiIh+ggnxCmvbAmzVrSuSC1iz
- LoOA==
-X-Forwarded-Encrypted: i=1;
- AJvYcCVxR312rcvnFRRwTqQ8a2bf47u5gX2m2/oD5jekGMcIKfIjAyzimmUP2Iu4FAO313YHqd6BrKbk@lists.freedesktop.org
-X-Gm-Message-State: AOJu0YzeFU63NB+Fb/3Rb/zTyYow/GLHMc7uruYNsa4CnSL7pCKAPe7+
- FGNLS2Vxy3x226F1oPhf8U52EhcZw6G5Sa/miTDOf8T7qpRxnLgFDo1rplQgulTTpQLhzpDJYoj
- KhrwjGAeyfOzNqZVLaxhEYgZq/YsZu5Afj07+MqWP
-X-Gm-Gg: ASbGnctryowB6AXXGcgfdcBCqmEvFCgjrF+oXjmgQaXAKq59sjCqI+HtQ52vy950PmC
- LsWLI9tPkxK25V9M5fkpNvDiGOm11/csSBMlMBgJRdnK5rucNuuSCTIHlqfSWviN4TfW3hDseV6
- IZnZTX3OrLqMf0E8qSwOAd2HOZenX/XDuhUA3r7W7H4YpXO+lVUW0IjGsW/28QhpWRv1N5V8DP
-X-Google-Smtp-Source: AGHT+IEky1d5meo1qHzcDPYMKOo6itgabi6xnmNH55BIUhfTHja5jzKInw1nb+GfsRVDFZjoQp10Sz6+0092+zxkyU8=
-X-Received: by 2002:a05:600c:54cc:b0:442:ea3b:9d72 with SMTP id
- 5b1f17b1804b1-44fd1a229demr3814135e9.5.1748349881244; Tue, 27 May 2025
- 05:44:41 -0700 (PDT)
+Received: from NAM04-MW2-obe.outbound.protection.outlook.com
+ (mail-mw2nam04on2088.outbound.protection.outlook.com [40.107.101.88])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 20F7110E080;
+ Tue, 27 May 2025 16:37:44 +0000 (UTC)
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=SIN+v5JUyt/gsjCXdhb1qbmEX6rfMJTXNYOR4wgGUGe5SnmGlb22rZXZJ1Rt30kTPKJ3Nvigtyjc9NLi9BUqGVqjmXEIBceRP5goyicWbN71gvubnwcuuCqVXSRhfinTr8lOFoT8F1pO6BFsWTqj/qibxE3ROGJofbJ+F04nkBK44q8VzFTrM0EsNhG5xan3FrEJGXdfLk9nBksMKrWSRzFW8ciS4Tu4uVsVpT2A/v6o8rViXamf+OMuaGntRyB7VTrHVVPqxqC3s42rSOivIBZ4LP35/bQjHMoZnNZk2CtM99zShBnT6f06VhkETdjQ0xQUZNc/RdJ7DH2SAcnj+w==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=WFdnEP42ZFWa82cBXLKcKUur1J2/1sraDt/xKf4XRjQ=;
+ b=tT+LW/53O2SNNvdqTCmKLv0LwfJHvf1Tl13P8JggJQ+VmQ1vUQYOu1W8T+NylZfGf/u4diqGO2S6PZuaLi37K5d93sqooviyxGJi+dvPiqOd4wqwCF+5IzoYXaax1qlVvRLvU6u4z/NcaUNidpB2jFmTLxnM9yfbs/R3FyhYcMgGxs3hd5wwNWCoAQxiJtrdYjAibQYY91ZDoaT8EEN7hl/42bdD3lQ6D0OzyD6pQkxk1YAsGuUQUN28ji8A/nEKevJeSLw3kpTiBUGsCDh6iqywC/zDIwQTDwcNwTsUqaRZGMGMgHaR/3MT2mhyBLUXwJtzE1hF0Ul406sEdA6wKA==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
+ 216.228.117.161) smtp.rcpttodomain=redhat.com smtp.mailfrom=nvidia.com;
+ dmarc=pass (p=reject sp=reject pct=100) action=none header.from=nvidia.com;
+ dkim=none (message not signed); arc=none (0)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=Nvidia.com;
+ s=selector2;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=WFdnEP42ZFWa82cBXLKcKUur1J2/1sraDt/xKf4XRjQ=;
+ b=ft4WK94HLRHw8XPeOt2DQAoDZEiy2XMYYsPd25iWwWK4Y8EBXcGsSBts56Of87m48LiWkzH3B7lj3gUt2o3TGB4CJsPfix+/UpJTOXq3FLfEfBUf03qvV1Eq9q532CttKaqCrCk5kq/0IHq4mnUxceDa6XCdaZF0RyWx9x9mBmALdOCTh0XfiU3XkgKpI+OOcLtIM7oly7n1xVAUJtTXQMO9rkRs89/oXwoywlevqwcUvTQMaz5Z9cbLjG20HZ7qqhj1JNXiqhzAQta9cmbfOaPsDjzX3GW1lIBha0yLRsuiKxyFgsg+FzdSArHLWou37mIgh2jy54WXkddAg2Ebhg==
+Received: from SJ0PR13CA0023.namprd13.prod.outlook.com (2603:10b6:a03:2c0::28)
+ by CY1PR12MB9698.namprd12.prod.outlook.com (2603:10b6:930:107::9)
+ with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.8769.26; Tue, 27 May
+ 2025 16:37:37 +0000
+Received: from CO1PEPF000075F3.namprd03.prod.outlook.com
+ (2603:10b6:a03:2c0:cafe::7f) by SJ0PR13CA0023.outlook.office365.com
+ (2603:10b6:a03:2c0::28) with Microsoft SMTP Server (version=TLS1_3,
+ cipher=TLS_AES_256_GCM_SHA384) id 15.20.8769.18 via Frontend Transport; Tue,
+ 27 May 2025 16:37:37 +0000
+X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 216.228.117.161)
+ smtp.mailfrom=nvidia.com;
+ dkim=none (message not signed)
+ header.d=none;dmarc=pass action=none header.from=nvidia.com;
+Received-SPF: Pass (protection.outlook.com: domain of nvidia.com designates
+ 216.228.117.161 as permitted sender) receiver=protection.outlook.com;
+ client-ip=216.228.117.161; helo=mail.nvidia.com; pr=C
+Received: from mail.nvidia.com (216.228.117.161) by
+ CO1PEPF000075F3.mail.protection.outlook.com (10.167.249.42) with Microsoft
+ SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ 15.20.8769.18 via Frontend Transport; Tue, 27 May 2025 16:37:37 +0000
+Received: from rnnvmail203.nvidia.com (10.129.68.9) by mail.nvidia.com
+ (10.129.200.67) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.1544.4; Tue, 27 May
+ 2025 09:37:21 -0700
+Received: from rnnvmail201.nvidia.com (10.129.68.8) by rnnvmail203.nvidia.com
+ (10.129.68.9) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.1544.14; Tue, 27 May
+ 2025 09:37:20 -0700
+Received: from ipp2-2167.ipp2u1.colossus.nvidia.com (10.127.8.11) by
+ mail.nvidia.com (10.129.68.8) with Microsoft SMTP Server id 15.2.1544.14 via
+ Frontend Transport; Tue, 27 May 2025 09:37:20 -0700
+From: Zhi Wang <zhiw@nvidia.com>
+To: <lyude@redhat.com>, <dakr@kernel.org>, <airlied@gmail.com>,
+ <simona@ffwll.ch>
+CC: <dri-devel@lists.freedesktop.org>, <nouveau@lists.freedesktop.org>,
+ <linux-kernel@vger.kernel.org>, <acurrid@nvidia.com>, <cjia@nvidia.com>,
+ <smitra@nvidia.com>, <aniketa@nvidia.com>, <arpitj@nvidia.com>,
+ <kwankhede@nvidia.com>, <targupta@nvidia.com>, <zhiw@nvidia.com>,
+ <zhiwang@kernel.org>
+Subject: [PATCH v2] drm/nouveau: fix a use-after-free in r535_gsp_rpc_push()
+Date: Tue, 27 May 2025 16:37:12 +0000
+Message-ID: <20250527163712.3444-1-zhiw@nvidia.com>
+X-Mailer: git-send-email 2.43.5
 MIME-Version: 1.0
-References: <20250524-cstr-core-v10-0-6412a94d9d75@gmail.com>
- <20250524-cstr-core-v10-2-6412a94d9d75@gmail.com>
- <DA66BBX1PDGI.10NHLG3D4CIT7@kernel.org>
- <CAJ-ks9m48gmar0WWP9WknV2JLqkKNU0X4nwXaQ+JdG+b-EcVxA@mail.gmail.com>
-In-Reply-To: <CAJ-ks9m48gmar0WWP9WknV2JLqkKNU0X4nwXaQ+JdG+b-EcVxA@mail.gmail.com>
-From: Alice Ryhl <aliceryhl@google.com>
-Date: Tue, 27 May 2025 14:44:27 +0200
-X-Gm-Features: AX0GCFs41915HXTpfqcCKH3n_1X5KqqnwxYwkDK8S1yQqomTcDJwCXbrNKkuqdo
-Message-ID: <CAH5fLgiUhvp9P7oSf4Rtv5jK1SNebW9-r5YFHVzCZjEwaR=Mjg@mail.gmail.com>
-Subject: Re: [PATCH v10 2/5] rust: support formatting of foreign types
-To: Tamir Duberstein <tamird@gmail.com>
-Cc: Benno Lossin <lossin@kernel.org>,
- Michal Rostecki <vadorovsky@protonmail.com>, 
- Miguel Ojeda <ojeda@kernel.org>, Alex Gaynor <alex.gaynor@gmail.com>, 
- Boqun Feng <boqun.feng@gmail.com>, Gary Guo <gary@garyguo.net>, 
- =?UTF-8?Q?Bj=C3=B6rn_Roy_Baron?= <bjorn3_gh@protonmail.com>, 
- Andreas Hindborg <a.hindborg@kernel.org>, Trevor Gross <tmgross@umich.edu>, 
- Brendan Higgins <brendan.higgins@linux.dev>, David Gow <davidgow@google.com>, 
- Rae Moar <rmoar@google.com>, Danilo Krummrich <dakr@kernel.org>, 
- Maarten Lankhorst <maarten.lankhorst@linux.intel.com>,
- Maxime Ripard <mripard@kernel.org>, 
- Thomas Zimmermann <tzimmermann@suse.de>, David Airlie <airlied@gmail.com>,
- Simona Vetter <simona@ffwll.ch>, 
- Greg Kroah-Hartman <gregkh@linuxfoundation.org>,
- "Rafael J. Wysocki" <rafael@kernel.org>, 
- Luis Chamberlain <mcgrof@kernel.org>, Russ Weight <russ.weight@linux.dev>, 
- FUJITA Tomonori <fujita.tomonori@gmail.com>, Rob Herring <robh@kernel.org>, 
- Saravana Kannan <saravanak@google.com>, Peter Zijlstra <peterz@infradead.org>, 
- Ingo Molnar <mingo@redhat.com>, Will Deacon <will@kernel.org>,
- Waiman Long <longman@redhat.com>, Nathan Chancellor <nathan@kernel.org>,
- Nick Desaulniers <nick.desaulniers+lkml@gmail.com>, 
- Bill Wendling <morbo@google.com>, Justin Stitt <justinstitt@google.com>,
- Andrew Lunn <andrew@lunn.ch>, 
- Heiner Kallweit <hkallweit1@gmail.com>, Russell King <linux@armlinux.org.uk>, 
- "David S. Miller" <davem@davemloft.net>, Eric Dumazet <edumazet@google.com>, 
- Jakub Kicinski <kuba@kernel.org>, Paolo Abeni <pabeni@redhat.com>,
- Bjorn Helgaas <bhelgaas@google.com>, 
- Arnd Bergmann <arnd@arndb.de>, Jens Axboe <axboe@kernel.dk>, 
- =?UTF-8?Q?Krzysztof_Wilczy=C5=84ski?= <kwilczynski@kernel.org>, 
- rust-for-linux@vger.kernel.org, linux-kernel@vger.kernel.org, 
- linux-kselftest@vger.kernel.org, kunit-dev@googlegroups.com, 
- dri-devel@lists.freedesktop.org, netdev@vger.kernel.org, 
- devicetree@vger.kernel.org, llvm@lists.linux.dev, linux-pci@vger.kernel.org, 
- nouveau@lists.freedesktop.org, linux-block@vger.kernel.org
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
+X-NV-OnPremToCloud: AnonymousSubmission
+X-EOPAttributedMessage: 0
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: CO1PEPF000075F3:EE_|CY1PR12MB9698:EE_
+X-MS-Office365-Filtering-Correlation-Id: d5887b4c-f60d-40ec-7d11-08dd9d3cca39
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: BCL:0;
+ ARA:13230040|36860700013|376014|82310400026|1800799024; 
+X-Microsoft-Antispam-Message-Info: =?us-ascii?Q?dQEAXebzT//Ls/fUonHLFC3u0YcrIi0iYrUgcdGmbqleXA9oogJrDebGgwQ4?=
+ =?us-ascii?Q?7XCOj91GmYW6fegi0C/qyueFVxAATCM3j5w7DGsqR9G1ueUe1teZZ4KOpKyK?=
+ =?us-ascii?Q?PAg7QgmE8ANTJNuvIKsugUp85mCcSahnxUpmnDSqFxfHPR6bkLrXyr72trgr?=
+ =?us-ascii?Q?BtjReGsCa9Ex9ZQWh/2sAwZZiBVOSLtmYQMs7P6fKetKGlEmFl/DPLmZrrQw?=
+ =?us-ascii?Q?xusWlbnsw/n1YA+ncdYKV8NYCQ/0eewFGN6XDC5GVqbX+UavIMrVfkGRiI1S?=
+ =?us-ascii?Q?5+WG0GVmYTJAfCO8mI67bcFcR4VycJtPaDaZ8Am8cTVNm9yqN3KQaRXmy6No?=
+ =?us-ascii?Q?u94tGsrFZPxxhnYYPVWKP5FXKlm6UxXFz6OHRI1N59id/UNfFcAEIEfttL2o?=
+ =?us-ascii?Q?510WWqTrqgPofon75CIxkBl5urND+0mkculWL3KG1KctmIbOE1ntfu3XZ1Dc?=
+ =?us-ascii?Q?xwZ/K2SuFgF7Q7xcKkJehN0YBjIbf1IMeB+8C9e6QF9eSLOFs0va/EEGo1Xb?=
+ =?us-ascii?Q?3jWeV3YFCUO0EbsDx1lWq3oTqr70gGPQME0J+ftWrkJR4nKhLWafgJHg9b7T?=
+ =?us-ascii?Q?vt/zoWwHBO7ESgzqDRkU7BzhqCyvPgGDyB0/Y6AWlPbizQNanSckTdAHNyJl?=
+ =?us-ascii?Q?7v1eNXfbR7sZmaOi/WD9gWCIsYCynwFzTOvDvJLJ+JYDRww2soYnwUR4NFIo?=
+ =?us-ascii?Q?5egP+fUZZH9srR4AwefI+Hy8I8DpTWrLmwPv1WLMbhZVyaIWzNCQ3EAqTlwF?=
+ =?us-ascii?Q?47RfJYCDzks8oc3CKWmpyvX1yoasJkFKXJm5P3Iaea81ia01+d9HJttruTUa?=
+ =?us-ascii?Q?lGi3IrO2TTotyzBQiGc8awleYDAmLm3hqLuisb4mnkbhBaiu7q2EsgrRBE1k?=
+ =?us-ascii?Q?iNEz0YwEIW+VGb1JulgWNcTTdG0fY8Jh2QV1ZjVUuYULoEJUGMgJ1kmo3UbC?=
+ =?us-ascii?Q?JfLwNiKsMsj6pcx/i4MvxAKi1LDlgYFVLhDv/8AQkXOBR0YgEnkTRIRjtzdR?=
+ =?us-ascii?Q?1AT2YpmnOjReRTOYcvKnDasQjol2wcTOkYZfgYBBLzZHosI4Q3qVuYKPSG4T?=
+ =?us-ascii?Q?9uI2B53Hf9ok+UI9Md8BpDcgsdtocQGDiM8u9IXIGnzVx1oQaBKcOP8fbD5r?=
+ =?us-ascii?Q?JrAw4x9iLKbjavpvJT15/Y88SQjidui7f5+NPnQn6MJH0s+tT3+As/57oqwV?=
+ =?us-ascii?Q?xnd+VitEcmqaK/yo5TXhnZULmJQgFG0Rhv25UD/QoxYM9JqI51AFL8mS5H7+?=
+ =?us-ascii?Q?faBsQB3IkEMR1lqrm02EqKfBL1hkMdU4xAt/uYc91I296+VqY4SYa5WmChCk?=
+ =?us-ascii?Q?wwWmROtYj8isU/Kv3FzSjClrPS7MXXqqw1lDYdCG3xsd1YiLR9ESHFltu0W5?=
+ =?us-ascii?Q?+m0pZtDXbRW4YhTiYe8T27SbP2Dlx+oycFoHuEbS+IiVuy479VWiYShHVxMB?=
+ =?us-ascii?Q?ymx+DkR0Yf5eQ9QPsRldIpkVpnUZ2GuJocGsby2xbQUvHyL/C/Oaayy/Ul74?=
+ =?us-ascii?Q?y6TqvherkGRGV4l3AH1lXO6H+/wA1dG8Sp/z?=
+X-Forefront-Antispam-Report: CIP:216.228.117.161; CTRY:US; LANG:en; SCL:1; SRV:;
+ IPV:NLI; SFV:NSPM; H:mail.nvidia.com; PTR:dc6edge2.nvidia.com; CAT:NONE;
+ SFS:(13230040)(36860700013)(376014)(82310400026)(1800799024); DIR:OUT;
+ SFP:1101; 
+X-OriginatorOrg: Nvidia.com
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 27 May 2025 16:37:37.2403 (UTC)
+X-MS-Exchange-CrossTenant-Network-Message-Id: d5887b4c-f60d-40ec-7d11-08dd9d3cca39
+X-MS-Exchange-CrossTenant-Id: 43083d15-7273-40c1-b7db-39efd9ccc17a
+X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=43083d15-7273-40c1-b7db-39efd9ccc17a; Ip=[216.228.117.161];
+ Helo=[mail.nvidia.com]
+X-MS-Exchange-CrossTenant-AuthSource: CO1PEPF000075F3.namprd03.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Anonymous
+X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: CY1PR12MB9698
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -117,70 +142,72 @@ List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-On Tue, May 27, 2025 at 12:18=E2=80=AFAM Tamir Duberstein <tamird@gmail.com=
-> wrote:
-> > > +}
-> > > +
-> > > +fn make_ident<'a, T: IntoIterator<Item =3D &'a str>>(
-> > > +    span: Span,
-> > > +    names: T,
-> > > +) -> impl Iterator<Item =3D TokenTree> + use<'a, T> {
-> > > +    names.into_iter().flat_map(move |name| {
-> > > +        [
-> > > +            TokenTree::Punct(Punct::new(':', Spacing::Joint)),
-> > > +            TokenTree::Punct(Punct::new(':', Spacing::Alone)),
-> > > +            TokenTree::Ident(Ident::new(name, span)),
-> > > +        ]
-> > > +    })
-> > > +}
-> > > diff --git a/rust/macros/lib.rs b/rust/macros/lib.rs
-> > > index d31e50c446b0..fa956eaa3ba7 100644
-> > > --- a/rust/macros/lib.rs
-> > > +++ b/rust/macros/lib.rs
-> > > @@ -10,6 +10,7 @@
-> > >  mod quote;
-> > >  mod concat_idents;
-> > >  mod export;
-> > > +mod fmt;
-> > >  mod helpers;
-> > >  mod kunit;
-> > >  mod module;
-> > > @@ -196,6 +197,24 @@ pub fn export(attr: TokenStream, ts: TokenStream=
-) -> TokenStream {
-> > >      export::export(attr, ts)
-> > >  }
-> > >
-> > > +/// Like [`core::format_args!`], but automatically wraps arguments i=
-n [`kernel::fmt::Adapter`].
-> > > +///
-> > > +/// This macro allows generating `core::fmt::Arguments` while ensuri=
-ng that each argument is wrapped
-> > > +/// with `::kernel::fmt::Adapter`, which customizes formatting behav=
-ior for kernel logging.
-> > > +///
-> > > +/// Named arguments used in the format string (e.g. `{foo}`) are det=
-ected and resolved from local
-> > > +/// bindings. All positional and named arguments are automatically w=
-rapped.
-> > > +///
-> > > +/// This macro is an implementation detail of other kernel logging m=
-acros like [`pr_info!`] and
-> > > +/// should not typically be used directly.
-> > > +///
-> > > +/// [`kernel::fmt::Adapter`]: ../kernel/fmt/struct.Adapter.html
-> > > +/// [`pr_info!`]: ../kernel/macro.pr_info.html
-> > > +#[proc_macro]
-> > > +pub fn fmt(input: TokenStream) -> TokenStream {
-> >
-> > I'm wondering if we should name this `format_args` instead in order to
-> > better communicate that it's a replacement for `core::format_args!`.
->
-> Unfortunately that introduces ambiguity in cases where
-> kernel::prelude::* is imported because core::format_args is in core's
-> prelude.
+The RPC container is released after being passed to r535_gsp_rpc_send().
 
-I'm pretty sure that glob imports are higher priority than the core
-prelude? Or is this because there are macros that now incorrectly use
-kernel::prelude::format_args when they should use the one from core?
+When sending the initial fragment of a large RPC and passing the
+caller's RPC container, the container will be freed prematurely. Subsequent
+attempts to send remaining fragments will therefore result in a
+use-after-free.
 
-Alice
+Allocate a temporary RPC container for holding the initial fragment of a
+large RPC when sending. Free the caller's container when all fragments
+are successfully sent.
+
+Fixes: 176fdcbddfd2 ("drm/nouveau/gsp/r535: add support for booting GSP-RM")
+Signed-off-by: Zhi Wang <zhiw@nvidia.com>
+---
+
+v2:
+- Avoid unnecessary length adjusting on caller's RPC container as a new RPC
+  container is going to be used.
+
+ drivers/gpu/drm/nouveau/nvkm/subdev/gsp/r535.c | 17 ++++++++++++-----
+ 1 file changed, 12 insertions(+), 5 deletions(-)
+
+diff --git a/drivers/gpu/drm/nouveau/nvkm/subdev/gsp/r535.c b/drivers/gpu/drm/nouveau/nvkm/subdev/gsp/r535.c
+index 969f6b921fdb..83b2be43bd16 100644
+--- a/drivers/gpu/drm/nouveau/nvkm/subdev/gsp/r535.c
++++ b/drivers/gpu/drm/nouveau/nvkm/subdev/gsp/r535.c
+@@ -978,12 +978,18 @@ r535_gsp_rpc_push(struct nvkm_gsp *gsp, void *payload,
+ 	if (payload_size > max_payload_size) {
+ 		const u32 fn = rpc->function;
+ 		u32 remain_payload_size = payload_size;
++		void *next;
+ 
+-		/* Adjust length, and send initial RPC. */
+-		rpc->length = sizeof(*rpc) + max_payload_size;
+-		msg->checksum = rpc->length;
++		/* Send initial RPC. */
++		next = r535_gsp_rpc_get(gsp, fn, max_payload_size);
++		if (IS_ERR(next)) {
++			repv = next;
++			goto done;
++		}
+ 
+-		repv = r535_gsp_rpc_send(gsp, payload, NVKM_GSP_RPC_REPLY_NOWAIT, 0);
++		memcpy(next, payload, max_payload_size);
++
++		repv = r535_gsp_rpc_send(gsp, next, NVKM_GSP_RPC_REPLY_NOWAIT, 0);
+ 		if (IS_ERR(repv))
+ 			goto done;
+ 
+@@ -994,7 +1000,6 @@ r535_gsp_rpc_push(struct nvkm_gsp *gsp, void *payload,
+ 		while (remain_payload_size) {
+ 			u32 size = min(remain_payload_size,
+ 				       max_payload_size);
+-			void *next;
+ 
+ 			next = r535_gsp_rpc_get(gsp, NV_VGPU_MSG_FUNCTION_CONTINUATION_RECORD, size);
+ 			if (IS_ERR(next)) {
+@@ -1015,6 +1020,8 @@ r535_gsp_rpc_push(struct nvkm_gsp *gsp, void *payload,
+ 		/* Wait for reply. */
+ 		repv = r535_gsp_rpc_handle_reply(gsp, fn, policy, payload_size +
+ 						 sizeof(*rpc));
++		if (!IS_ERR(repv))
++			kvfree(msg);
+ 	} else {
+ 		repv = r535_gsp_rpc_send(gsp, payload, policy, gsp_rpc_len);
+ 	}
+-- 
+2.43.5
+
