@@ -2,83 +2,85 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id 048D5BBF7A1
-	for <lists+nouveau@lfdr.de>; Mon, 06 Oct 2025 22:58:19 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id B7452BBF679
+	for <lists+nouveau@lfdr.de>; Mon, 06 Oct 2025 22:57:23 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id F0F4710E637;
-	Mon,  6 Oct 2025 20:57:59 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id F193910E4CB;
+	Mon,  6 Oct 2025 20:57:21 +0000 (UTC)
 Authentication-Results: gabe.freedesktop.org;
-	dkim=permerror (0-bit key) header.d=gmail.com header.i=@gmail.com header.b="j7BNgT1r";
+	dkim=permerror (0-bit key) header.d=gmail.com header.i=@gmail.com header.b="NG6HPwxK";
 	dkim-atps=neutral
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from mail-lj1-f174.google.com (mail-lj1-f174.google.com
- [209.85.208.174])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 7F35E10E3CF;
- Mon, 26 May 2025 22:31:33 +0000 (UTC)
-Received: by mail-lj1-f174.google.com with SMTP id
- 38308e7fff4ca-310447fe59aso28850431fa.0; 
- Mon, 26 May 2025 15:31:33 -0700 (PDT)
+Received: from mail-lj1-f181.google.com (mail-lj1-f181.google.com
+ [209.85.208.181])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 751D189F49;
+ Tue, 27 May 2025 14:57:49 +0000 (UTC)
+Received: by mail-lj1-f181.google.com with SMTP id
+ 38308e7fff4ca-3106217268dso31590761fa.1; 
+ Tue, 27 May 2025 07:57:49 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1748298692; x=1748903492; darn=lists.freedesktop.org;
+ d=gmail.com; s=20230601; t=1748357868; x=1748962668; darn=lists.freedesktop.org;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:from:to:cc:subject:date
  :message-id:reply-to;
- bh=jvLHYVJDLL1tRu00kxb4TV63RHH86AdnGIzbeTcCyBM=;
- b=j7BNgT1rhh4cyyH5DRhWGR613sHenlYpoZ2Fs3/GGVRtzDAVBBHWIUzxg1uit206vR
- RrYr0k8/8X8oCBnBWYpqwd1xnOVMSEnm8PP2NcrdEX22Xp1zlWhBh8Mi/irDFvjQgZ5a
- qjcmoxC+elBIMx7agLVTTD4RQedtWwMjEsdVKVw4XlVb1Giw7aNd2+cCxQKQALGutiqu
- 6Lo+XOY+xh41yXnnpV05W3rVefL5bPqSyKCYOD0e5+Zooyuw1FAtilVr91d2pn93GZjX
- S+/8bBJ0EyZMuwLR21b2RqHkdPPVChTbbarmdCs+Q+D9iWH3WIvD/gyfUbyhDJkDpHz6
- KCcw==
+ bh=SNE3eNQigcgAPplki00LvwTSib7PfNi6+3iBJNr9+88=;
+ b=NG6HPwxK713ughst6Vnmk3ciLetc+DpFSMx30ZvyeRpg/DHaw48WTF4h1xfxUpoRNP
+ ntxAhJT2cZApUqA4zmyKRDmEiEiGAQ2J1rT5op0N6OOeErVsFidXqt5/8MNcr9c4JkAR
+ z0ty8+scYTQEnY/fHIBJbmnlugQWId0l272Pz4BspFxKG0wLewx7RdaZnjl2Xt1I5YWM
+ XhTPSEPfXyUOyOiSnGWYm9BDDsAYNf0mV02Ogfvll+x/+7FJfIkh8vfU+hhDeB2i9hMv
+ vyDBDorfQcCeRFjlVVxaP2FjlmsAsb8Va0nHPiA8shec8W4hlGlZbzwgopprpe1RP+AX
+ 7BMA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1748298692; x=1748903492;
+ d=1e100.net; s=20230601; t=1748357868; x=1748962668;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=jvLHYVJDLL1tRu00kxb4TV63RHH86AdnGIzbeTcCyBM=;
- b=l03t3Tb84JCXetD+TSqj+gzwnEOxD9er+NcOd6q1q4IUAtsa8LAJd5mn4e88PTBW28
- PM7kL3THWocZqgaAhxd106+oARcRU4q4IUrNB6RW8KY+2vF6i5KeDnL3aLIsH4vk7Kwj
- BJH36RGZe453zlyeMjPO7J8gkXCyX+NkgOTJjUwfQI7tCjUqYlnomcgiaNdWWzEAs5J3
- FBW50Vmu1j5UDFHN9kBIkCtijAPo+VzCG7rsHrzk3Rf0yzl36+TtJV9L+96bCDDZzxD9
- Y1/QCHI4QGVB0Ni25cKdMwceHkRnSd+UL+UHYk406atZEunjB8J4yErgmL1MXixwvWIa
- Q0FA==
+ bh=SNE3eNQigcgAPplki00LvwTSib7PfNi6+3iBJNr9+88=;
+ b=Q/K51fbagPV27AKVmWLGGmAs9RuQ9q6vTrfFmYkOlHUlTzc6+re47uAb5X+fHNYGmj
+ fGwa5wJ/pNRoxJ0u4LuRuWUCBYw4nwACnnoxOPffpJLfITAwYvdFv3BCH2weMU7DixsQ
+ rWg/1Nv7zWDJzjxCIrI3R7KTi4qPvraX81hp9VesV7egF4ieltIWbA9i0GSgzWPSumBT
+ NwH4dp79M0o000t6p6Vbbk0BorFBSA6YqVLszwleRPsD1t0Q8O6jtPlnTbv05rDBRop2
+ v3AN6PGkGoOQc3MELcDYxEKxqe5hm8V6Nra9fyG2v7Mpfis42tqr8OydOghFXXrw4jms
+ iKUw==
 X-Forwarded-Encrypted: i=1;
- AJvYcCUi1BjyO2qNbnrHfJp8ytJ82jje7OXvxZAlY2MfMbpb55bJmqoUIXEj5Hk+DPJJzrbBtiaFVTRdQg==@lists.freedesktop.org,
- AJvYcCXFoHUtQquWQExNM+Vwab1xVaAwrUWRxu/PfBAg8OSYomGwvbAOiA62ZVjqfcoXWDsa7m8rDVSHln4=@lists.freedesktop.org
-X-Gm-Message-State: AOJu0Yw1kQhLlyhqVdUaYrXcqlaasfZgRiG9Y2ThRdv9B0ZTfzVclLnm
- ImoxWiJH08QzPvFszv0EGIho+uUKSZXxbgnf8lZi08B8OEchiDL+exhES5jT2reSQPubQ9ZB4Zw
- yo+lAkELJ7Fg28YL6mzBh6HbS2YIFgW4=
-X-Gm-Gg: ASbGncsZKclyLRiuTA1oEAeo+uA1wX1ln+Y8Wj1YTkpJlz9IQEESANNHe2obh8yNsCU
- h9UJ+RfPeAdxMwKMqb4qpvzUjcWtG+0NSD5oz2A1ntUc4YNULc4QzR6dHdx4TfVPJ7tH9MX2Jxv
- bpJpSkzhLZLIwuE/sVpe6h/g3lMWOI0jxT9Kb4+TMF1QZj3AeBMyQYXXRCEfWGG8nGKrI=
-X-Google-Smtp-Source: AGHT+IEJfWzc6VPUDuyUq0aTn+WE4sTfnbgvmOYP1K86Po8lb+CyhSBKVylPu7Ej7IoVB3uFqztWGvTQz/dCfNqAd+Q=
-X-Received: by 2002:a05:651c:f01:b0:32a:664e:a923 with SMTP id
- 38308e7fff4ca-32a664ea9e0mr10313091fa.22.1748298691742; Mon, 26 May 2025
- 15:31:31 -0700 (PDT)
+ AJvYcCVUqDFMpUvQ5/rHF7W8q/tE5nBb/M591aefDAkkID/c2VhKR7q2Q8ox50aDp4HvVjg0VjScaI6/QQo=@lists.freedesktop.org,
+ AJvYcCVl16MYyaygez5Ik6jGqNbrJB5UhZPZTHG+ZrGQOHmB2GQM2RApCb3TTrwzT6ahkgURzB8lYc2yZw==@lists.freedesktop.org
+X-Gm-Message-State: AOJu0YzFngkoaiyoT45iEVfITlbKhRWIocs9Zb4WKp+U4QhEPFXblMof
+ +fo/1mJqld9ebM9P9tV3bubM7naF1stAOXwnLGI6WyzkCUCMOsUJ9BGAXBD0lPoCDCYsDbkhY4E
+ ytTqC2o7Bdy9uTzIBloiz7bobKAIRXvc=
+X-Gm-Gg: ASbGncvJ1nmGO042akD/LKQcgwXkMER2fnrbYgOd3FkbbvkGFnIsjTxR3wufV4KgMH4
+ TgLfMMtbWfCKAG3RIob72hSciqDZkL7nxQHycj54Q3nT6tAkbx9hQ79ZM1djx+CNRUBlYzUDfQ+
+ TSmkF5fOXT8fpSTniK5yFbKtfzV7u8zQQkGcYSaDQF86AE5aB6
+X-Google-Smtp-Source: AGHT+IGMpsgNs0H0v36WCubbxlinvgNLfiVk9IX6EmewrCYJWnUCTsflWg1QTkNc19iE0AzQz3ot/ZAJjdnwjF/SkXc=
+X-Received: by 2002:a2e:8a93:0:b0:32a:604c:504e with SMTP id
+ 38308e7fff4ca-32a604c5122mr6252591fa.38.1748357867433; Tue, 27 May 2025
+ 07:57:47 -0700 (PDT)
 MIME-Version: 1.0
 References: <20250524-cstr-core-v10-0-6412a94d9d75@gmail.com>
- <20250524-cstr-core-v10-5-6412a94d9d75@gmail.com>
- <DA66OFXQCWUK.31LM78DIVABZV@kernel.org>
-In-Reply-To: <DA66OFXQCWUK.31LM78DIVABZV@kernel.org>
+ <20250524-cstr-core-v10-2-6412a94d9d75@gmail.com>
+ <DA66BBX1PDGI.10NHLG3D4CIT7@kernel.org>
+ <CAJ-ks9m48gmar0WWP9WknV2JLqkKNU0X4nwXaQ+JdG+b-EcVxA@mail.gmail.com>
+ <CAH5fLgiUhvp9P7oSf4Rtv5jK1SNebW9-r5YFHVzCZjEwaR=Mjg@mail.gmail.com>
+In-Reply-To: <CAH5fLgiUhvp9P7oSf4Rtv5jK1SNebW9-r5YFHVzCZjEwaR=Mjg@mail.gmail.com>
 From: Tamir Duberstein <tamird@gmail.com>
-Date: Mon, 26 May 2025 18:30:55 -0400
-X-Gm-Features: AX0GCFuHGuPmwsi9tWeeUypjxRW1UrvRCX_LVo0C-ggOVzUmGabC1z1bBuoaiZU
-Message-ID: <CAJ-ks9m=okC9_K2MJU80xbnO+3+Z0hvC_FYzCtzW9pD=WA_xqQ@mail.gmail.com>
-Subject: Re: [PATCH v10 5/5] rust: remove core::ffi::CStr reexport
-To: Benno Lossin <lossin@kernel.org>
-Cc: Michal Rostecki <vadorovsky@protonmail.com>,
- Miguel Ojeda <ojeda@kernel.org>, 
- Alex Gaynor <alex.gaynor@gmail.com>, Boqun Feng <boqun.feng@gmail.com>, 
- Gary Guo <gary@garyguo.net>,
+Date: Tue, 27 May 2025 10:57:11 -0400
+X-Gm-Features: AX0GCFv2oY8lzrXQtwfj6_dQyq0RFoGjtHhR6-NzX_hnZZ_7RGNdHOXxleigo1M
+Message-ID: <CAJ-ks9=prR2TNFhqip8MsjtTWKkoUhoMG75v2mSLF1UaRNwJLg@mail.gmail.com>
+Subject: Re: [PATCH v10 2/5] rust: support formatting of foreign types
+To: Alice Ryhl <aliceryhl@google.com>
+Cc: Benno Lossin <lossin@kernel.org>,
+ Michal Rostecki <vadorovsky@protonmail.com>, 
+ Miguel Ojeda <ojeda@kernel.org>, Alex Gaynor <alex.gaynor@gmail.com>, 
+ Boqun Feng <boqun.feng@gmail.com>, Gary Guo <gary@garyguo.net>, 
  =?UTF-8?Q?Bj=C3=B6rn_Roy_Baron?= <bjorn3_gh@protonmail.com>, 
- Andreas Hindborg <a.hindborg@kernel.org>, Alice Ryhl <aliceryhl@google.com>, 
- Trevor Gross <tmgross@umich.edu>, Brendan Higgins <brendan.higgins@linux.dev>, 
- David Gow <davidgow@google.com>, Rae Moar <rmoar@google.com>, 
- Danilo Krummrich <dakr@kernel.org>,
- Maarten Lankhorst <maarten.lankhorst@linux.intel.com>, 
- Maxime Ripard <mripard@kernel.org>, Thomas Zimmermann <tzimmermann@suse.de>, 
- David Airlie <airlied@gmail.com>, Simona Vetter <simona@ffwll.ch>, 
+ Andreas Hindborg <a.hindborg@kernel.org>, Trevor Gross <tmgross@umich.edu>, 
+ Brendan Higgins <brendan.higgins@linux.dev>, David Gow <davidgow@google.com>, 
+ Rae Moar <rmoar@google.com>, Danilo Krummrich <dakr@kernel.org>, 
+ Maarten Lankhorst <maarten.lankhorst@linux.intel.com>,
+ Maxime Ripard <mripard@kernel.org>, 
+ Thomas Zimmermann <tzimmermann@suse.de>, David Airlie <airlied@gmail.com>,
+ Simona Vetter <simona@ffwll.ch>, 
  Greg Kroah-Hartman <gregkh@linuxfoundation.org>,
  "Rafael J. Wysocki" <rafael@kernel.org>, 
  Luis Chamberlain <mcgrof@kernel.org>, Russ Weight <russ.weight@linux.dev>, 
@@ -117,43 +119,93 @@ List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-On Mon, May 26, 2025 at 11:05=E2=80=AFAM Benno Lossin <lossin@kernel.org> w=
+On Tue, May 27, 2025 at 8:44=E2=80=AFAM Alice Ryhl <aliceryhl@google.com> w=
 rote:
 >
-> On Sat May 24, 2025 at 10:33 PM CEST, Tamir Duberstein wrote:
-> > Clean up references to `kernel::str::CStr`.
+> On Tue, May 27, 2025 at 12:18=E2=80=AFAM Tamir Duberstein <tamird@gmail.c=
+om> wrote:
+> > > > +}
+> > > > +
+> > > > +fn make_ident<'a, T: IntoIterator<Item =3D &'a str>>(
+> > > > +    span: Span,
+> > > > +    names: T,
+> > > > +) -> impl Iterator<Item =3D TokenTree> + use<'a, T> {
+> > > > +    names.into_iter().flat_map(move |name| {
+> > > > +        [
+> > > > +            TokenTree::Punct(Punct::new(':', Spacing::Joint)),
+> > > > +            TokenTree::Punct(Punct::new(':', Spacing::Alone)),
+> > > > +            TokenTree::Ident(Ident::new(name, span)),
+> > > > +        ]
+> > > > +    })
+> > > > +}
+> > > > diff --git a/rust/macros/lib.rs b/rust/macros/lib.rs
+> > > > index d31e50c446b0..fa956eaa3ba7 100644
+> > > > --- a/rust/macros/lib.rs
+> > > > +++ b/rust/macros/lib.rs
+> > > > @@ -10,6 +10,7 @@
+> > > >  mod quote;
+> > > >  mod concat_idents;
+> > > >  mod export;
+> > > > +mod fmt;
+> > > >  mod helpers;
+> > > >  mod kunit;
+> > > >  mod module;
+> > > > @@ -196,6 +197,24 @@ pub fn export(attr: TokenStream, ts: TokenStre=
+am) -> TokenStream {
+> > > >      export::export(attr, ts)
+> > > >  }
+> > > >
+> > > > +/// Like [`core::format_args!`], but automatically wraps arguments=
+ in [`kernel::fmt::Adapter`].
+> > > > +///
+> > > > +/// This macro allows generating `core::fmt::Arguments` while ensu=
+ring that each argument is wrapped
+> > > > +/// with `::kernel::fmt::Adapter`, which customizes formatting beh=
+avior for kernel logging.
+> > > > +///
+> > > > +/// Named arguments used in the format string (e.g. `{foo}`) are d=
+etected and resolved from local
+> > > > +/// bindings. All positional and named arguments are automatically=
+ wrapped.
+> > > > +///
+> > > > +/// This macro is an implementation detail of other kernel logging=
+ macros like [`pr_info!`] and
+> > > > +/// should not typically be used directly.
+> > > > +///
+> > > > +/// [`kernel::fmt::Adapter`]: ../kernel/fmt/struct.Adapter.html
+> > > > +/// [`pr_info!`]: ../kernel/macro.pr_info.html
+> > > > +#[proc_macro]
+> > > > +pub fn fmt(input: TokenStream) -> TokenStream {
+> > >
+> > > I'm wondering if we should name this `format_args` instead in order t=
+o
+> > > better communicate that it's a replacement for `core::format_args!`.
 > >
-> > Signed-off-by: Tamir Duberstein <tamird@gmail.com>
-> > ---
-> >  drivers/gpu/drm/drm_panic_qr.rs   |  3 ++-
-> >  drivers/gpu/nova-core/firmware.rs |  2 +-
-> >  drivers/net/phy/ax88796b_rust.rs  |  1 +
-> >  drivers/net/phy/qt2025.rs         |  1 +
-> >  rust/kernel/device.rs             |  3 +--
-> >  rust/kernel/driver.rs             |  4 ++--
-> >  rust/kernel/error.rs              |  6 ++----
-> >  rust/kernel/faux.rs               |  5 ++++-
-> >  rust/kernel/firmware.rs           | 15 ++++-----------
-> >  rust/kernel/kunit.rs              |  6 +++---
-> >  rust/kernel/lib.rs                |  2 +-
-> >  rust/kernel/miscdevice.rs         |  3 +--
-> >  rust/kernel/net/phy.rs            |  4 +++-
-> >  rust/kernel/of.rs                 |  3 ++-
-> >  rust/kernel/pci.rs                |  2 +-
-> >  rust/kernel/platform.rs           |  2 +-
-> >  rust/kernel/prelude.rs            |  5 +----
-> >  rust/kernel/str.rs                | 22 ++++++++++------------
-> >  rust/kernel/sync/condvar.rs       |  4 ++--
-> >  rust/kernel/sync/lock.rs          |  4 ++--
-> >  rust/kernel/sync/lock/global.rs   |  5 +++--
-> >  rust/kernel/sync/poll.rs          |  1 +
-> >  rust/kernel/workqueue.rs          |  1 +
-> >  rust/macros/module.rs             |  2 +-
-> >  24 files changed, 51 insertions(+), 55 deletions(-)
+> > Unfortunately that introduces ambiguity in cases where
+> > kernel::prelude::* is imported because core::format_args is in core's
+> > prelude.
 >
-> Haven't compile tested this series yet, but this commit seems to suggest
-> to me that some of the previous commits introduced code that doesn't
-> compile or emits warnings? If so that needs to be fixed.
+> I'm pretty sure that glob imports are higher priority than the core
+> prelude? Or is this because there are macros that now incorrectly use
+> kernel::prelude::format_args when they should use the one from core?
 
-That's not the case. There are no warnings and no compilation failures
-in prior commits.
+compiler says no, e.g.:
+
+error[E0659]: `format_args` is ambiguous
+    --> rust/doctests_kernel_generated.rs:8783:25
+     |
+8783 |     kernel::kunit::info(format_args!("    #
+rust_doctest_kernel_workqueue_rs_3.location:
+rust/kernel/workqueue.rs:77\n"));
+     |                         ^^^^^^^^^^^ ambiguous name
+     |
+     =3D note: ambiguous because of a conflict between a name from a
+glob import and an outer scope during import or macro resolution
+     =3D note: `format_args` could refer to a macro from prelude
+note: `format_args` could also refer to the macro imported here
+    --> rust/doctests_kernel_generated.rs:8772:9
+     |
+8772 |     use kernel::prelude::*;
+     |         ^^^^^^^^^^^^^^^^^^
+     =3D help: consider adding an explicit import of `format_args` to disam=
+biguate
