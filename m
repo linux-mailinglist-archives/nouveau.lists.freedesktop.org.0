@@ -2,82 +2,137 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id 6B3FFAC5B9E
-	for <lists+nouveau@lfdr.de>; Tue, 27 May 2025 22:50:01 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 8E871AC644A
+	for <lists+nouveau@lfdr.de>; Wed, 28 May 2025 10:23:47 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 1B27710E531;
-	Tue, 27 May 2025 20:50:00 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 3682C10E5AD;
+	Wed, 28 May 2025 08:23:46 +0000 (UTC)
 Authentication-Results: gabe.freedesktop.org;
-	dkim=pass (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="fZrC8roU";
+	dkim=pass (1024-bit key; unprotected) header.d=suse.de header.i=@suse.de header.b="XQBmtfRd";
+	dkim=permerror (0-bit key) header.d=suse.de header.i=@suse.de header.b="dvJt6W9e";
+	dkim=pass (1024-bit key) header.d=suse.de header.i=@suse.de header.b="XQBmtfRd";
+	dkim=permerror (0-bit key) header.d=suse.de header.i=@suse.de header.b="dvJt6W9e";
 	dkim-atps=neutral
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from tor.source.kernel.org (tor.source.kernel.org [172.105.4.254])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 9F06310E531;
- Tue, 27 May 2025 20:49:54 +0000 (UTC)
-Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by tor.source.kernel.org (Postfix) with ESMTP id 7D676614B3;
- Tue, 27 May 2025 20:49:49 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 926C0C4CEE9;
- Tue, 27 May 2025 20:49:38 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1748378989;
- bh=AU9LU7Nfj9orPVkMVTA/U57FFt4iUo111sXVjNeMwhA=;
- h=Date:Cc:Subject:From:To:References:In-Reply-To:From;
- b=fZrC8roUMokBYhflU/jyR8KKzKXFLL0o3LZTrRmKy1rZn7MPtTMJKlmei9wGWFtKx
- awwyhFAbRLFB/rdLuB9QzwI5TrILJVlQ3x8gcyZw2qp4xV9pc6qacWH7KVoRDzn21O
- AuqlrgQPpPJPQqS48ObY/2BDrx2trlDnhwFnd3NytpV9aPvnv5KIJF50yMGDeTrhc1
- L/zRSIE1TY3Vtv6/1CaynsrFDTRo4pc3C0ObsCZrtks1PVTGAwp4yg6FCH6oBHDIUb
- 9ALlGXQbcEWzWDDjL7+aE7/dbeemgdE984ysWfkZWCXv4hSv6k2Bra0ejPACNkkFNY
- ggYxYHyAsAymw==
-Mime-Version: 1.0
-Content-Transfer-Encoding: quoted-printable
-Content-Type: text/plain; charset=UTF-8
-Date: Tue, 27 May 2025 22:49:36 +0200
-Message-Id: <DA78MDRNCNB8.X69904APMYCB@kernel.org>
-Cc: "Michal Rostecki" <vadorovsky@protonmail.com>, "Miguel Ojeda"
- <ojeda@kernel.org>, "Alex Gaynor" <alex.gaynor@gmail.com>, "Boqun Feng"
- <boqun.feng@gmail.com>, "Gary Guo" <gary@garyguo.net>,
- =?utf-8?q?Bj=C3=B6rn_Roy_Baron?= <bjorn3_gh@protonmail.com>, "Andreas
- Hindborg" <a.hindborg@kernel.org>, "Alice Ryhl" <aliceryhl@google.com>,
- "Trevor Gross" <tmgross@umich.edu>, "Brendan Higgins"
- <brendan.higgins@linux.dev>, "David Gow" <davidgow@google.com>, "Rae Moar"
- <rmoar@google.com>, "Danilo Krummrich" <dakr@kernel.org>, "Maarten
- Lankhorst" <maarten.lankhorst@linux.intel.com>, "Maxime Ripard"
- <mripard@kernel.org>, "Thomas Zimmermann" <tzimmermann@suse.de>, "David
- Airlie" <airlied@gmail.com>, "Simona Vetter" <simona@ffwll.ch>, "Greg
- Kroah-Hartman" <gregkh@linuxfoundation.org>, "Rafael J. Wysocki"
- <rafael@kernel.org>, "Luis Chamberlain" <mcgrof@kernel.org>, "Russ Weight"
- <russ.weight@linux.dev>, "FUJITA Tomonori" <fujita.tomonori@gmail.com>,
- "Rob Herring" <robh@kernel.org>, "Saravana Kannan" <saravanak@google.com>,
- "Peter Zijlstra" <peterz@infradead.org>, "Ingo Molnar" <mingo@redhat.com>,
- "Will Deacon" <will@kernel.org>, "Waiman Long" <longman@redhat.com>,
- "Nathan Chancellor" <nathan@kernel.org>, "Nick Desaulniers"
- <nick.desaulniers+lkml@gmail.com>, "Bill Wendling" <morbo@google.com>,
- "Justin Stitt" <justinstitt@google.com>, "Andrew Lunn" <andrew@lunn.ch>,
- "Heiner Kallweit" <hkallweit1@gmail.com>, "Russell King"
- <linux@armlinux.org.uk>, "David S. Miller" <davem@davemloft.net>, "Eric
- Dumazet" <edumazet@google.com>, "Jakub Kicinski" <kuba@kernel.org>, "Paolo
- Abeni" <pabeni@redhat.com>, "Bjorn Helgaas" <bhelgaas@google.com>, "Arnd
- Bergmann" <arnd@arndb.de>, "Jens Axboe" <axboe@kernel.dk>,
- =?utf-8?q?Krzysztof_Wilczy=C5=84ski?= <kwilczynski@kernel.org>,
- <rust-for-linux@vger.kernel.org>, <linux-kernel@vger.kernel.org>,
- <linux-kselftest@vger.kernel.org>, <kunit-dev@googlegroups.com>,
- <dri-devel@lists.freedesktop.org>, <netdev@vger.kernel.org>,
- <devicetree@vger.kernel.org>, <llvm@lists.linux.dev>,
- <linux-pci@vger.kernel.org>, <nouveau@lists.freedesktop.org>,
- <linux-block@vger.kernel.org>
-Subject: Re: [PATCH v10 2/5] rust: support formatting of foreign types
-From: "Benno Lossin" <lossin@kernel.org>
-To: "Tamir Duberstein" <tamird@gmail.com>
-X-Mailer: aerc 0.20.1
-References: <20250524-cstr-core-v10-0-6412a94d9d75@gmail.com>
- <20250524-cstr-core-v10-2-6412a94d9d75@gmail.com>
- <DA66BBX1PDGI.10NHLG3D4CIT7@kernel.org>
- <CAJ-ks9m48gmar0WWP9WknV2JLqkKNU0X4nwXaQ+JdG+b-EcVxA@mail.gmail.com>
- <DA6GSMHMLRFM.YH9RGZWLY2X4@kernel.org>
- <CAJ-ks9nTf4dCoDdg4+YSkXM1sJsZ-0vuSC7wybc2JMAoGemhXQ@mail.gmail.com>
-In-Reply-To: <CAJ-ks9nTf4dCoDdg4+YSkXM1sJsZ-0vuSC7wybc2JMAoGemhXQ@mail.gmail.com>
+Received: from smtp-out1.suse.de (smtp-out1.suse.de [195.135.223.130])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 9BA1610E5B3
+ for <nouveau@lists.freedesktop.org>; Wed, 28 May 2025 08:23:43 +0000 (UTC)
+Received: from imap1.dmz-prg2.suse.org (unknown [10.150.64.97])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
+ (No client certificate requested)
+ by smtp-out1.suse.de (Postfix) with ESMTPS id 5358A21D18;
+ Wed, 28 May 2025 08:23:42 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.de; s=susede2_rsa;
+ t=1748420622; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
+ mime-version:mime-version:content-type:content-type:
+ content-transfer-encoding:content-transfer-encoding:
+ in-reply-to:in-reply-to:references:references:autocrypt:autocrypt;
+ bh=IsYeUMzNWf+c4bLmoKUOHp5YpWvtC7v74oJ9jXBtnHM=;
+ b=XQBmtfRd9f0BD+wpJmfsDg89bjVUFtWxyB8+k37xabISALbh+H9l1F8nnknU7GJur2Ir6r
+ Kmlkb+phPU6vHmBUvrOzKLyPdCDiqZ5OX7tAinz1caXlC0ZC8KfcFq7XHirFV3R3ifXNaY
+ lyqWj/ehrK8c6iCWlXr1VU2Q1LKJ/G4=
+DKIM-Signature: v=1; a=ed25519-sha256; c=relaxed/relaxed; d=suse.de;
+ s=susede2_ed25519; t=1748420622;
+ h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
+ mime-version:mime-version:content-type:content-type:
+ content-transfer-encoding:content-transfer-encoding:
+ in-reply-to:in-reply-to:references:references:autocrypt:autocrypt;
+ bh=IsYeUMzNWf+c4bLmoKUOHp5YpWvtC7v74oJ9jXBtnHM=;
+ b=dvJt6W9eqTR5Rd+KiuP01H+RwKo8jKPYSaFQcOmtWsSoyOZPFSM4P/6LbT/SZoQfSnPT4b
+ VftOkM9jdhB63YBw==
+Authentication-Results: smtp-out1.suse.de;
+	none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.de; s=susede2_rsa;
+ t=1748420622; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
+ mime-version:mime-version:content-type:content-type:
+ content-transfer-encoding:content-transfer-encoding:
+ in-reply-to:in-reply-to:references:references:autocrypt:autocrypt;
+ bh=IsYeUMzNWf+c4bLmoKUOHp5YpWvtC7v74oJ9jXBtnHM=;
+ b=XQBmtfRd9f0BD+wpJmfsDg89bjVUFtWxyB8+k37xabISALbh+H9l1F8nnknU7GJur2Ir6r
+ Kmlkb+phPU6vHmBUvrOzKLyPdCDiqZ5OX7tAinz1caXlC0ZC8KfcFq7XHirFV3R3ifXNaY
+ lyqWj/ehrK8c6iCWlXr1VU2Q1LKJ/G4=
+DKIM-Signature: v=1; a=ed25519-sha256; c=relaxed/relaxed; d=suse.de;
+ s=susede2_ed25519; t=1748420622;
+ h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
+ mime-version:mime-version:content-type:content-type:
+ content-transfer-encoding:content-transfer-encoding:
+ in-reply-to:in-reply-to:references:references:autocrypt:autocrypt;
+ bh=IsYeUMzNWf+c4bLmoKUOHp5YpWvtC7v74oJ9jXBtnHM=;
+ b=dvJt6W9eqTR5Rd+KiuP01H+RwKo8jKPYSaFQcOmtWsSoyOZPFSM4P/6LbT/SZoQfSnPT4b
+ VftOkM9jdhB63YBw==
+Received: from imap1.dmz-prg2.suse.org (localhost [127.0.0.1])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
+ (No client certificate requested)
+ by imap1.dmz-prg2.suse.org (Postfix) with ESMTPS id CC0DA136E0;
+ Wed, 28 May 2025 08:23:41 +0000 (UTC)
+Received: from dovecot-director2.suse.de ([2a07:de40:b281:106:10:150:64:167])
+ by imap1.dmz-prg2.suse.org with ESMTPSA id pmh/MA3INmgxVwAAD6G6ig
+ (envelope-from <tzimmermann@suse.de>); Wed, 28 May 2025 08:23:41 +0000
+Message-ID: <1926848a-9334-4c15-a076-a93ef29c80d6@suse.de>
+Date: Wed, 28 May 2025 10:23:41 +0200
+MIME-Version: 1.0
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v4 00/25] drm/dumb-buffers: Fix and improve buffer-size
+ calculation
+To: simona@ffwll.ch, airlied@gmail.com, mripard@kernel.org,
+ maarten.lankhorst@linux.intel.com, geert@linux-m68k.org,
+ tomi.valkeinen@ideasonboard.com
+Cc: dri-devel@lists.freedesktop.org, linux-mediatek@lists.infradead.org,
+ freedreno@lists.freedesktop.org, linux-arm-msm@vger.kernel.org,
+ imx@lists.linux.dev, linux-samsung-soc@vger.kernel.org,
+ nouveau@lists.freedesktop.org, virtualization@lists.linux.dev,
+ spice-devel@lists.freedesktop.org, linux-renesas-soc@vger.kernel.org,
+ linux-rockchip@lists.infradead.org, linux-tegra@vger.kernel.org,
+ intel-xe@lists.freedesktop.org, xen-devel@lists.xenproject.org
+References: <20250311155120.442633-1-tzimmermann@suse.de>
+Content-Language: en-US
+From: Thomas Zimmermann <tzimmermann@suse.de>
+Autocrypt: addr=tzimmermann@suse.de; keydata=
+ xsBNBFs50uABCADEHPidWt974CaxBVbrIBwqcq/WURinJ3+2WlIrKWspiP83vfZKaXhFYsdg
+ XH47fDVbPPj+d6tQrw5lPQCyqjwrCPYnq3WlIBnGPJ4/jreTL6V+qfKRDlGLWFjZcsrPJGE0
+ BeB5BbqP5erN1qylK9i3gPoQjXGhpBpQYwRrEyQyjuvk+Ev0K1Jc5tVDeJAuau3TGNgah4Yc
+ hdHm3bkPjz9EErV85RwvImQ1dptvx6s7xzwXTgGAsaYZsL8WCwDaTuqFa1d1jjlaxg6+tZsB
+ 9GluwvIhSezPgnEmimZDkGnZRRSFiGP8yjqTjjWuf0bSj5rUnTGiyLyRZRNGcXmu6hjlABEB
+ AAHNJ1Rob21hcyBaaW1tZXJtYW5uIDx0emltbWVybWFubkBzdXNlLmRlPsLAjgQTAQgAOAIb
+ AwULCQgHAgYVCgkICwIEFgIDAQIeAQIXgBYhBHIX+6yM6c9jRKFo5WgNwR1TC3ojBQJftODH
+ AAoJEGgNwR1TC3ojx1wH/0hKGWugiqDgLNXLRD/4TfHBEKmxIrmfu9Z5t7vwUKfwhFL6hqvo
+ lXPJJKQpQ2z8+X2vZm/slsLn7J1yjrOsoJhKABDi+3QWWSGkaGwRJAdPVVyJMfJRNNNIKwVb
+ U6B1BkX2XDKDGffF4TxlOpSQzdtNI/9gleOoUA8+jy8knnDYzjBNOZqLG2FuTdicBXblz0Mf
+ vg41gd9kCwYXDnD91rJU8tzylXv03E75NCaTxTM+FBXPmsAVYQ4GYhhgFt8S2UWMoaaABLDe
+ 7l5FdnLdDEcbmd8uLU2CaG4W2cLrUaI4jz2XbkcPQkqTQ3EB67hYkjiEE6Zy3ggOitiQGcqp
+ j//OwE0EWznS4AEIAMYmP4M/V+T5RY5at/g7rUdNsLhWv1APYrh9RQefODYHrNRHUE9eosYb
+ T6XMryR9hT8XlGOYRwKWwiQBoWSDiTMo/Xi29jUnn4BXfI2px2DTXwc22LKtLAgTRjP+qbU6
+ 3Y0xnQN29UGDbYgyyK51DW3H0If2a3JNsheAAK+Xc9baj0LGIc8T9uiEWHBnCH+RdhgATnWW
+ GKdDegUR5BkDfDg5O/FISymJBHx2Dyoklv5g4BzkgqTqwmaYzsl8UxZKvbaxq0zbehDda8lv
+ hFXodNFMAgTLJlLuDYOGLK2AwbrS3Sp0AEbkpdJBb44qVlGm5bApZouHeJ/+n+7r12+lqdsA
+ EQEAAcLAdgQYAQgAIAIbDBYhBHIX+6yM6c9jRKFo5WgNwR1TC3ojBQJftOH6AAoJEGgNwR1T
+ C3ojVSkIALpAPkIJPQoURPb1VWjh34l0HlglmYHvZszJWTXYwavHR8+k6Baa6H7ufXNQtThR
+ yIxJrQLW6rV5lm7TjhffEhxVCn37+cg0zZ3j7zIsSS0rx/aMwi6VhFJA5hfn3T0TtrijKP4A
+ SAQO9xD1Zk9/61JWk8OysuIh7MXkl0fxbRKWE93XeQBhIJHQfnc+YBLprdnxR446Sh8Wn/2D
+ Ya8cavuWf2zrB6cZurs048xe0UbSW5AOSo4V9M0jzYI4nZqTmPxYyXbm30Kvmz0rYVRaitYJ
+ 4kyYYMhuULvrJDMjZRvaNe52tkKAvMevcGdt38H4KSVXAylqyQOW5zvPc4/sq9c=
+In-Reply-To: <20250311155120.442633-1-tzimmermann@suse.de>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
+X-Spam-Flag: NO
+X-Spam-Score: -2.80
+X-Spamd-Result: default: False [-2.80 / 50.00]; BAYES_HAM(-3.00)[100.00%];
+ SUSPICIOUS_RECIPS(1.50)[]; NEURAL_HAM_LONG(-1.00)[-1.000];
+ NEURAL_HAM_SHORT(-0.20)[-0.996]; MIME_GOOD(-0.10)[text/plain];
+ FREEMAIL_TO(0.00)[ffwll.ch,gmail.com,kernel.org,linux.intel.com,linux-m68k.org,ideasonboard.com];
+ RCVD_VIA_SMTP_AUTH(0.00)[]; ARC_NA(0.00)[];
+ MID_RHS_MATCH_FROM(0.00)[]; MIME_TRACE(0.00)[0:+];
+ RCPT_COUNT_TWELVE(0.00)[20]; FREEMAIL_ENVRCPT(0.00)[gmail.com];
+ FUZZY_BLOCKED(0.00)[rspamd.com]; FROM_EQ_ENVFROM(0.00)[];
+ FROM_HAS_DN(0.00)[];
+ DKIM_SIGNED(0.00)[suse.de:s=susede2_rsa,suse.de:s=susede2_ed25519];
+ RCVD_TLS_ALL(0.00)[]; TO_MATCH_ENVRCPT_ALL(0.00)[];
+ TO_DN_NONE(0.00)[]; RCVD_COUNT_TWO(0.00)[2];
+ DBL_BLOCKED_OPENRESOLVER(0.00)[suse.de:mid,imap1.dmz-prg2.suse.org:helo]
+X-Spam-Level: 
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -92,180 +147,109 @@ List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-On Tue May 27, 2025 at 5:02 PM CEST, Tamir Duberstein wrote:
-> On Mon, May 26, 2025 at 7:01=E2=80=AFPM Benno Lossin <lossin@kernel.org> =
-wrote:
->> On Tue May 27, 2025 at 12:17 AM CEST, Tamir Duberstein wrote:
->> > On Mon, May 26, 2025 at 10:48=E2=80=AFAM Benno Lossin <lossin@kernel.o=
-rg> wrote:
->> >> On Sat May 24, 2025 at 10:33 PM CEST, Tamir Duberstein wrote:
->> >> > +impl_display_forward!(
->> >> > +    bool,
->> >> > +    char,
->> >> > +    core::panic::PanicInfo<'_>,
->> >> > +    crate::str::BStr,
->> >> > +    fmt::Arguments<'_>,
->> >> > +    i128,
->> >> > +    i16,
->> >> > +    i32,
->> >> > +    i64,
->> >> > +    i8,
->> >> > +    isize,
->> >> > +    str,
->> >> > +    u128,
->> >> > +    u16,
->> >> > +    u32,
->> >> > +    u64,
->> >> > +    u8,
->> >> > +    usize,
->> >> > +    {<T: ?Sized>} crate::sync::Arc<T> {where crate::sync::Arc<T>: =
-fmt::Display},
->> >> > +    {<T: ?Sized>} crate::sync::UniqueArc<T> {where crate::sync::Un=
-iqueArc<T>: fmt::Display},
->> >> > +);
->> >>
->> >> If we use `{}` instead of `()`, then we can format the contents
->> >> differently:
->> >>
->> >>     impl_display_forward! {
->> >>         i8, i16, i32, i64, i128, isize,
->> >>         u8, u16, u32, u64, u128, usize,
->> >>         bool, char, str,
->> >>         crate::str::BStr,
->> >>         fmt::Arguments<'_>,
->> >>         core::panic::PanicInfo<'_>,
->> >>         {<T: ?Sized>} crate::sync::Arc<T> {where Self: fmt::Display},
->> >>         {<T: ?Sized>} crate::sync::UniqueArc<T> {where Self: fmt::Dis=
-play},
->> >>     }
->> >
->> > Is that formatting better? rustfmt refuses to touch it either way.
->>
->> Yeah rustfmt doesn't touch macro parameters enclosed in `{}`. I think
->> it's better.
+ping
+
+I'm still looking for more reviews; especially patches 1 and 2.
+
+Best regards
+Thomas
+
+Am 11.03.25 um 16:47 schrieb Thomas Zimmermann:
+> Dumb-buffer pitch and size is specified by width, height, bits-per-pixel
+> plus various hardware-specific alignments. The calculation of these
+> values is inconsistent and duplicated among drivers. The results for
+> formats with bpp < 8 are sometimes incorrect.
 >
-> OK, but why? This seems entirely subjective.
-
-If more types are added to the list, it will grow over one screen size.
-With my formatting, leaving related types on a single line, that will
-only happen much later.
-
->> >> > +/// Please see [`crate::fmt`] for documentation.
->> >> > +pub(crate) fn fmt(input: TokenStream) -> TokenStream {
->> >> > +    let mut input =3D input.into_iter();
->> >> > +
->> >> > +    let first_opt =3D input.next();
->> >> > +    let first_owned_str;
->> >> > +    let mut names =3D BTreeSet::new();
->> >> > +    let first_lit =3D {
->> >> > +        let Some((mut first_str, first_lit)) =3D (match first_opt.=
-as_ref() {
->> >> > +            Some(TokenTree::Literal(first_lit)) =3D> {
->> >> > +                first_owned_str =3D first_lit.to_string();
->> >> > +                Some(first_owned_str.as_str()).and_then(|first| {
->> >> > +                    let first =3D first.strip_prefix('"')?;
->> >> > +                    let first =3D first.strip_suffix('"')?;
->> >> > +                    Some((first, first_lit))
->> >> > +                })
->> >> > +            }
->> >> > +            _ =3D> None,
->> >> > +        }) else {
->> >> > +            return first_opt.into_iter().chain(input).collect();
->> >> > +        };
->> >>
->> >> This usage of let-else + match is pretty confusing and could just be =
-a
->> >> single match statement.
->> >
->> > I don't think so. Can you try rewriting it into the form you like?
->>
->>     let (mut first_str, first_lit) match first_opt.as_ref() {
->>         Some(TokenTree::Literal(lit)) if lit.to_string().starts_with('"'=
-) =3D> {
->>             let contents =3D lit.to_string();
->>             let contents =3D contents.strip_prefix('"').unwrap().strip_s=
-uffix('"').unwrap();
->>             ((contents, lit))
->>         }
->>         _ =3D> return first_opt.into_iter().chain(input).collect(),
->>     };
+> This series fixes this for most drivers. Default scanline pitch and
+> buffer size are now calculated with the existing 4CC helpers. There is
+> a new helper drm_mode_size_dumb() that calculates scanline pitch and
+> buffer size according to driver requirements.
 >
-> What happens if the invocation is utterly malformed, e.g.
-> `fmt!("hello)`? You're unwrapping here, which I intentionally avoid.
-
-That example won't even survive lexing (macros always will get valid
-rust tokens as input). If a literal begins with a `"`, it also will end
-with one AFAIK.
-
->> Yes it will error like that, but if we do the replacement only when the
->> syntax is correct, there also will be compile errors because of a
->> missing `Display` impl, or is that not the case?
+> The series fixes the common GEM implementations for DMA, SHMEM and
+> VRAM. It further changes most implementations of dumb_create to use
+> the new helper. A small number of drivers has more complicated
+> calculations and will be updated by a later patches.
 >
-> I'm not sure - I would guess syntax errors "mask" typeck errors.
-
-I checked and it seems to be so, that's good.
-
->> >> > +                    first_str =3D rest;
->> >> > +                    continue;
->> >> > +                }
->> >> > +                let name =3D name.split_once(':').map_or(name, |(n=
-ame, _)| name);
->> >> > +                if !name.is_empty() && !name.chars().all(|c| c.is_=
-ascii_digit()) {
->> >> > +                    names.insert(name);
->> >> > +                }
->> >> > +                break;
->> >> > +            }
->> >> > +        }
->> >> > +        first_lit
->> >>
->> >> `first_lit` is not modified, so could we just the code above it into =
-a
->> >> block instead of keeping it in the expr for `first_lit`?
->> >
->> > As above, can you suggest the alternate form you like better? The
->> > gymnastics here are all in service of being able to let malformed
->> > input fall through to core::format_args which will do the hard work of
->> > producing good diagnostics.
->>
->> I don't see how this is hard, just do:
->>
->>     let (first_str, first_lit) =3D ...;
+> v4:
+> - improve UAPI documentation
+> - document bpp special cases
+> - use drm_warn_once()
+> - add TODO lists
+> - armada: fix pitch alignment
+> v3:
+> - document UAPI semantics
+> - fall back to bpp-based allocation for unknown color modes
+> - cleanups
+> v2:
+> - rewrite series
+> - convert many individual drivers besides the shared GEM helpers
 >
-> It requires you to unwrap, like you did above, which is what I'm
-> trying to avoid.
-
-How so? What do you need to unwrap?
-
->> >> > +    };
->> >> > +
->> >> > +    let first_span =3D first_lit.span();
->> >> > +    let adapt =3D |expr| {
->> >> > +        let mut borrow =3D
->> >> > +            TokenStream::from_iter([TokenTree::Punct(Punct::new('&=
-', Spacing::Alone))]);
->> >> > +        borrow.extend(expr);
->> >> > +        make_ident(first_span, ["kernel", "fmt", "Adapter"])
->> >> > +            .chain([TokenTree::Group(Group::new(Delimiter::Parenth=
-esis, borrow))])
->> >>
->> >> This should be fine with using `quote!`:
->> >>
->> >>     quote!(::kernel::fmt::Adapter(&#expr))
->> >
->> > Yeah, I have a local commit that uses quote_spanned to remove all the
->> > manual constructions.
->>
->> I don't think that you need `quote_spanned` here at all. If you do, then
->> let me know, something weird with spans is going on then.
+> Thomas Zimmermann (25):
+>    drm/dumb-buffers: Sanitize output on errors
+>    drm/dumb-buffers: Provide helper to set pitch and size
+>    drm/gem-dma: Compute dumb-buffer sizes with drm_mode_size_dumb()
+>    drm/gem-shmem: Compute dumb-buffer sizes with drm_mode_size_dumb()
+>    drm/gem-vram: Compute dumb-buffer sizes with drm_mode_size_dumb()
+>    drm/armada: Compute dumb-buffer sizes with drm_mode_size_dumb()
+>    drm/exynos: Compute dumb-buffer sizes with drm_mode_size_dumb()
+>    drm/gma500: Compute dumb-buffer sizes with drm_mode_size_dumb()
+>    drm/hibmc: Compute dumb-buffer sizes with drm_mode_size_dumb()
+>    drm/imx/ipuv3: Compute dumb-buffer sizes with drm_mode_size_dumb()
+>    drm/loongson: Compute dumb-buffer sizes with drm_mode_size_dumb()
+>    drm/mediatek: Compute dumb-buffer sizes with drm_mode_size_dumb()
+>    drm/msm: Compute dumb-buffer sizes with drm_mode_size_dumb()
+>    drm/nouveau: Compute dumb-buffer sizes with drm_mode_size_dumb()
+>    drm/omapdrm: Compute dumb-buffer sizes with drm_mode_size_dumb()
+>    drm/qxl: Compute dumb-buffer sizes with drm_mode_size_dumb()
+>    drm/renesas/rcar-du: Compute dumb-buffer sizes with
+>      drm_mode_size_dumb()
+>    drm/renesas/rz-du: Compute dumb-buffer sizes with drm_mode_size_dumb()
+>    drm/rockchip: Compute dumb-buffer sizes with drm_mode_size_dumb()
+>    drm/tegra: Compute dumb-buffer sizes with drm_mode_size_dumb()
+>    drm/virtio: Compute dumb-buffer sizes with drm_mode_size_dumb()
+>    drm/vmwgfx: Compute dumb-buffer sizes with drm_mode_size_dumb()
+>    drm/xe: Compute dumb-buffer sizes with drm_mode_size_dumb()
+>    drm/xen: Compute dumb-buffer sizes with drm_mode_size_dumb()
+>    drm/xlnx: Compute dumb-buffer sizes with drm_mode_size_dumb()
 >
-> You need to give idents a span, so each of `kernel`, `fmt`, and
-> `adapter` need a span. I *could* use `quote!` and get whatever span it
-> uses (mixed_site) but I'd rather retain control.
+>   Documentation/gpu/todo.rst                    |  28 +++
+>   drivers/gpu/drm/armada/armada_gem.c           |  16 +-
+>   drivers/gpu/drm/drm_dumb_buffers.c            | 172 ++++++++++++++++--
+>   drivers/gpu/drm/drm_gem_dma_helper.c          |   7 +-
+>   drivers/gpu/drm/drm_gem_shmem_helper.c        |  16 +-
+>   drivers/gpu/drm/drm_gem_vram_helper.c         |  89 +++------
+>   drivers/gpu/drm/exynos/exynos_drm_gem.c       |   8 +-
+>   drivers/gpu/drm/gma500/gem.c                  |  21 +--
+>   .../gpu/drm/hisilicon/hibmc/hibmc_drm_drv.c   |  25 ++-
+>   drivers/gpu/drm/imx/ipuv3/imx-drm-core.c      |  29 ++-
+>   drivers/gpu/drm/loongson/lsdc_gem.c           |  29 +--
+>   drivers/gpu/drm/mediatek/mtk_gem.c            |  13 +-
+>   drivers/gpu/drm/msm/msm_gem.c                 |  27 ++-
+>   drivers/gpu/drm/nouveau/nouveau_display.c     |   7 +-
+>   drivers/gpu/drm/omapdrm/omap_gem.c            |  15 +-
+>   drivers/gpu/drm/qxl/qxl_dumb.c                |  17 +-
+>   drivers/gpu/drm/renesas/rcar-du/rcar_du_kms.c |   7 +-
+>   drivers/gpu/drm/renesas/rz-du/rzg2l_du_kms.c  |   7 +-
+>   drivers/gpu/drm/rockchip/rockchip_drm_gem.c   |  12 +-
+>   drivers/gpu/drm/tegra/gem.c                   |   8 +-
+>   drivers/gpu/drm/virtio/virtgpu_gem.c          |  11 +-
+>   drivers/gpu/drm/vmwgfx/vmwgfx_surface.c       |  21 +--
+>   drivers/gpu/drm/xe/xe_bo.c                    |   8 +-
+>   drivers/gpu/drm/xen/xen_drm_front.c           |   7 +-
+>   drivers/gpu/drm/xlnx/zynqmp_kms.c             |   7 +-
+>   include/drm/drm_dumb_buffers.h                |  14 ++
+>   include/drm/drm_gem_vram_helper.h             |   6 -
+>   include/uapi/drm/drm_mode.h                   |  50 ++++-
+>   28 files changed, 449 insertions(+), 228 deletions(-)
+>   create mode 100644 include/drm/drm_dumb_buffers.h
+>
 
-Please use `quote!` if it works. No need to make this more complex than
-it already is. If it doesn't work then that's another story.
+-- 
+--
+Thomas Zimmermann
+Graphics Driver Developer
+SUSE Software Solutions Germany GmbH
+Frankenstrasse 146, 90461 Nuernberg, Germany
+GF: Ivo Totev, Andrew Myers, Andrew McDonald, Boudien Moerman
+HRB 36809 (AG Nuernberg)
 
----
-Cheers,
-Benno
