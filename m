@@ -2,63 +2,51 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id 8E61FAC79C3
-	for <lists+nouveau@lfdr.de>; Thu, 29 May 2025 09:27:47 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 807CAAC826A
+	for <lists+nouveau@lfdr.de>; Thu, 29 May 2025 21:01:54 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 3A3F510E30C;
-	Thu, 29 May 2025 07:27:46 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 35D5110E234;
+	Thu, 29 May 2025 19:01:53 +0000 (UTC)
 Authentication-Results: gabe.freedesktop.org;
-	dkim=pass (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="qMpEeeVo";
+	dkim=pass (1024-bit key; unprotected) header.d=collabora.com header.i=mark.filion@collabora.com header.b="bPcYVDL+";
 	dkim-atps=neutral
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from dfw.source.kernel.org (dfw.source.kernel.org [139.178.84.217])
- by gabe.freedesktop.org (Postfix) with ESMTPS id CDEF610E30C;
- Thu, 29 May 2025 07:27:44 +0000 (UTC)
-Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by dfw.source.kernel.org (Postfix) with ESMTP id C2BDA5C55B4;
- Thu, 29 May 2025 07:25:23 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 530A4C4CEE7;
- Thu, 29 May 2025 07:27:35 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1748503660;
- bh=s6s6ARYurnzqxgQbwLV10a+xTKOthHY4uyCNDCpcO+Y=;
- h=Date:Cc:Subject:From:To:References:In-Reply-To:From;
- b=qMpEeeVoObJ4LXrmnAI6HhhTQnWyL4trC4W2xAaEynolLiOyEIaXO9yrQPdG/gcKj
- zI4Q23eUy2bD7gfPx6tMhtQaRvyCnHGvwVon2VSerZc0qxt4Rp/QjxKEmqSUKa2DBd
- YkYE1+w6BAxQzA1FR41e5JsBHzNRgP2r/jHRrWDfc+5qknnAG/7aF2XvZAUiRC4qNq
- 5nmKqyc39jos7ZK6dRgaeO6AHW1SR23eFDi0FnZI8+Lg7JMwKZcW9vKkot8Quhs+Y5
- pwaFtzUPhcmpiT5Oq+t2wdOSV174YxaroTBIp5vYK7Fh25Yy2YdYHjk+OqVGtC6OEE
- kdmsCvhTsnWEg==
-Mime-Version: 1.0
+Received: from sender4-op-o16.zoho.com (sender4-op-o16.zoho.com
+ [136.143.188.16])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id B3FD110E234
+ for <nouveau@lists.freedesktop.org>; Thu, 29 May 2025 19:01:52 +0000 (UTC)
+ARC-Seal: i=1; a=rsa-sha256; t=1748545311; cv=none; 
+ d=zohomail.com; s=zohoarc; 
+ b=Y9oOJRQI4tBg4hVnlzPKSo+LNduPZeiT3qzXRbvPQMJfwvYqL0HmRgKT4svzOHhABVSWMCioHDDrukONZuTrK4zUj96TlziHs9Rze3Qkpjuq0m8XihJoceItndTZNb7zoPWT3SZkSs/FsgCNHx6EfkEBBd0bRsydXj0f4mNjw1A=
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=zohomail.com;
+ s=zohoarc; t=1748545311;
+ h=Content-Type:Content-Transfer-Encoding:Date:Date:From:From:MIME-Version:Message-ID:Subject:Subject:To:To:Message-Id:Reply-To:Cc;
+ bh=L3uj6rLy46QHqM66eogkjrelHkiVumz/LWjuCMD+K9U=; 
+ b=HfYBRez7+49SXUa9hVX72iSExeyUXVLL4kA8+zHw5wEVuqalOklh2o2/5UD8fpvj2tcO2PMWYFk0ngbOy4QSxZgFoq52jBKnXwQoJZpDunf/wPxyRHl+4AHMir1EYqzrznZvxjUUwqp9QvKNPp9q7ngdsbJUKp4R5ZGjMBYOCKU=
+ARC-Authentication-Results: i=1; mx.zohomail.com;
+ dkim=pass  header.i=collabora.com;
+ spf=pass  smtp.mailfrom=mark.filion@collabora.com;
+ dmarc=pass header.from=<mark.filion@collabora.com>
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; t=1748545311; 
+ s=zohomail; d=collabora.com; i=mark.filion@collabora.com;
+ h=Message-ID:Subject:Subject:From:From:To:To:Date:Date:Content-Type:Content-Transfer-Encoding:MIME-Version:Message-Id:Reply-To:Cc;
+ bh=L3uj6rLy46QHqM66eogkjrelHkiVumz/LWjuCMD+K9U=;
+ b=bPcYVDL+oZIx7xHeQtIlyxDuny5UlGaRUWPEQOGK5edHNpEcZH95z+aLtB2l2kSF
+ xpiGfn4MLrRhSo3Df7tfxqFSzCwmK146InJMOjPSsP8hJNtI6kEmJJ1nMR3B9hwGENk
+ hWvwa1ebynqatQpOLNSLxeKiJOKTO8bMMicoGUok=
+Received: by mx.zohomail.com with SMTPS id 1748545309542999.6836329356083;
+ Thu, 29 May 2025 12:01:49 -0700 (PDT)
+Message-ID: <46836b8742a8a7de55f9e3c51a7020d4b9a277a4.camel@collabora.com>
+Subject: XDC 2025: Registration & Call for Proposals now open!
+From: Mark Filion <mark.filion@collabora.com>
+To: nouveau@lists.freedesktop.org
+Date: Thu, 29 May 2025 15:01:48 -0400
+Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
-Content-Type: text/plain; charset=UTF-8
-Date: Thu, 29 May 2025 09:27:33 +0200
-Message-Id: <DA8GTD7LT7KO.1A3LBQGEQTCEW@kernel.org>
-Cc: "John Hubbard" <jhubbard@nvidia.com>, "Ben Skeggs" <bskeggs@nvidia.com>,
- "Joel Fernandes" <joelagnelf@nvidia.com>, "Timur Tabi" <ttabi@nvidia.com>,
- "Alistair Popple" <apopple@nvidia.com>, <linux-kernel@vger.kernel.org>,
- <rust-for-linux@vger.kernel.org>, <nouveau@lists.freedesktop.org>,
- <dri-devel@lists.freedesktop.org>
-Subject: Re: [PATCH v4 04/20] rust: add new `num` module with useful integer
- operations
-From: "Benno Lossin" <lossin@kernel.org>
-To: "Alexandre Courbot" <acourbot@nvidia.com>, "Miguel Ojeda"
- <ojeda@kernel.org>, "Alex Gaynor" <alex.gaynor@gmail.com>, "Boqun Feng"
- <boqun.feng@gmail.com>, "Gary Guo" <gary@garyguo.net>,
- =?utf-8?q?Bj=C3=B6rn_Roy_Baron?= <bjorn3_gh@protonmail.com>, "Benno Lossin"
- <benno.lossin@proton.me>, "Andreas Hindborg" <a.hindborg@kernel.org>,
- "Alice Ryhl" <aliceryhl@google.com>, "Trevor Gross" <tmgross@umich.edu>,
- "Danilo Krummrich" <dakr@kernel.org>, "David Airlie" <airlied@gmail.com>,
- "Simona Vetter" <simona@ffwll.ch>, "Maarten Lankhorst"
- <maarten.lankhorst@linux.intel.com>, "Maxime Ripard" <mripard@kernel.org>,
- "Thomas Zimmermann" <tzimmermann@suse.de>
-X-Mailer: aerc 0.20.1
-References: <20250521-nova-frts-v4-0-05dfd4f39479@nvidia.com>
- <20250521-nova-frts-v4-4-05dfd4f39479@nvidia.com>
- <DA82KFLNAOG7.R7YT4BHCLNZQ@kernel.org>
- <DA88YHU4AZT7.B8JGZHW9P9L9@nvidia.com>
-In-Reply-To: <DA88YHU4AZT7.B8JGZHW9P9L9@nvidia.com>
+User-Agent: Evolution 3.56.1 (3.56.1-1.fc42app2) 
+MIME-Version: 1.0
+X-ZohoMailClient: External
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -73,129 +61,45 @@ List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-On Thu May 29, 2025 at 3:18 AM CEST, Alexandre Courbot wrote:
-> On Thu May 29, 2025 at 5:17 AM JST, Benno Lossin wrote:
->> On Wed May 21, 2025 at 8:44 AM CEST, Alexandre Courbot wrote:
->>> Introduce the `num` module, featuring the `NumExt` extension trait
->>> that expands unsigned integers with useful operations for the kernel.
->>>
->>> These are to be used by the nova-core driver, but they are so ubiquitou=
-s
->>> that other drivers should be able to take advantage of them as well.
->>>
->>> The currently implemented operations are:
->>>
->>> - align_down()
->>> - align_up()
->>> - fls()
->>>
->>> But this trait is expected to be expanded further.
->>>
->>> `NumExt` is on unsigned types using a macro. An approach using another
->>> trait constrained by the operator traits that we need (`Add`, `Sub`,
->>> etc) was also considered, but had to be dropped as we need to use
->>> wrapping operations, which are not provided by any trait.
->>>
->>> Co-developed-by: Joel Fernandes <joelagnelf@nvidia.com>
->>> Signed-off-by: Joel Fernandes <joelagnelf@nvidia.com>
->>> Signed-off-by: Alexandre Courbot <acourbot@nvidia.com>
->>> ---
->>>  rust/kernel/lib.rs |  1 +
->>>  rust/kernel/num.rs | 82 ++++++++++++++++++++++++++++++++++++++++++++++=
-++++++++
->>>  2 files changed, 83 insertions(+)
->>
->> Have you proposed `align_down` to upstream rust? Not saying that we
->> shouldn't do it here, but if we haven't tried yet, it might be a good
->> idea to just get them upstreamed. (if you do, it should probably be
->> named `prev_multiple_of`)
->
-> I haven't yet - haven't ever contributed anything to upstream Rust, so
-> I'll have to look that one up first. :) But I agree a `prev_multiple_of`
-> could be useful.
+Hello!
 
-I'd recommend opening a thread on Zulip before you go implement stuff.
-Then you can also get a more rusty name for `fls` :)
+Registration & Call for Proposals are now open for XDC 2025, which will
+take place at the  TU Wien Kuppelsaal in Vienna, Austria on 29
+September to 1 October.
 
->>> +    /// Align `self` up to `alignment`.
->>> +    ///
->>> +    /// `alignment` must be a power of 2 for accurate results.
->>> +    ///
->>> +    /// Wraps around to `0` if the requested alignment pushes the resu=
-lt above the type's limits.
->>> +    ///
->>> +    /// # Examples
->>> +    ///
->>> +    /// ```
->>> +    /// use kernel::num::NumExt;
->>> +    ///
->>> +    /// assert_eq!(0x4fffu32.align_up(0x1000), 0x5000);
->>> +    /// assert_eq!(0x4000u32.align_up(0x1000), 0x4000);
->>> +    /// assert_eq!(0x0u32.align_up(0x1000), 0x0);
->>> +    /// assert_eq!(0xffffu16.align_up(0x100), 0x0);
->>> +    /// assert_eq!(0x4fffu32.align_up(0x0), 0x0);
->>> +    /// ```
->>> +    fn align_up(self, alignment: Self) -> Self;
->>
->> Isn't this `next_multiple_of` [1] (it also allows non power of 2
->> inputs).
->>
->> [1]: https://doc.rust-lang.org/std/primitive.u32.html#method.next_multip=
-le_of
->
-> It is, however the fact that `next_multiple_of` works with non powers of
-> two also means it needs to perform a modulo operation. That operation
-> might well be optimized away by the compiler, but ACAICT we have no way
-> of proving it will always be the case, hence the always-optimal
-> implementation here.
+    https://xdc2025.x.org
+ =20
+As usual, the conference is free of charge and open to the general
+public. If you plan on attending, please make sure to register as early
+as possible:
 
-When you use a power of 2 constant, then I'm very sure that it will get
-optimized [1]. Even with non-powers of 2, you don't get a division [2].
-If you find some code that is not optimized, then sure add a custom
-function.
+    https://indico.freedesktop.org/event/10/registrations/
 
-[1]: https://godbolt.org/z/57M9e36T3
-[2]: https://godbolt.org/z/9P4P8zExh
+In addition to registration, the CfP is now open for talks, demos, and
+workshops at XDC 2025. While any serious proposal will be gratefully
+considered, topics of interest to X.Org and freedesktop.org developers
+are encouraged. The program focus is on new development, ongoing
+challenges and anything else that will spark discussions among
+attendees in the hallway track.
 
-> Also in the kernel we tend to use the `align` nomenclature and I think we
-> should preserve that for clarity.
+We are open to talks across all layers of the graphics stack, from the
+kernel to desktop environments / graphical applications and about how
+to make things better for the developers who build them. Head to the
+CfP page to learn more:
 
-That's also fair, but we lose the constness of `next_multiple_of`, so
-you can't use `align_up` in a const function. That might confuse people
-and then they write their own const helper function... I'd prefer we use
-all functions that are available in the stdlib.
+    https://indico.freedesktop.org/event/10/abstracts/
 
->>> +
->>> +    /// Find Last Set Bit: return the 1-based index of the last (i.e. =
-most significant) set bit in
->>> +    /// `self`.
->>> +    ///
->>> +    /// Equivalent to the C `fls` function.
->>> +    ///
->>> +    /// # Examples
->>> +    ///
->>> +    /// ```
->>> +    /// use kernel::num::NumExt;
->>> +    ///
->>> +    /// assert_eq!(0x0u32.fls(), 0);
->>> +    /// assert_eq!(0x1u32.fls(), 1);
->>> +    /// assert_eq!(0x10u32.fls(), 5);
->>> +    /// assert_eq!(0xffffu32.fls(), 16);
->>> +    /// assert_eq!(0x8000_0000u32.fls(), 32);
->>> +    /// ```
->>> +    fn fls(self) -> u32;
->>
->> Isn't this just `trailing_zeros` [2]?
->>
->> [2]: https://doc.rust-lang.org/std/primitive.u32.html#method.trailing_ze=
-ros
->
-> No, `trailing_zeros` counts from the LSB up to the first bit set to 1,
-> whereas fls does that from the MSB. For instance, `0xffffu32.fls() =3D=3D
-> 16` but `0xffffu32.trailing_zeros() =3D=3D 0`.
+The deadline for submissions Friday, 11 July 2025.
 
-Ah right... Then maybe add that to the upstream suggestion :)
+We are looking forward to seeing you in Vienna! If you have any
+questions, please email the organizer (hfink at snap.com), adding on
+CC the X.org board (board at foundation.x.org).
 
----
-Cheers,
-Benno
+And don't forget, you can follow us on Mastodon for all the latest
+updates and to stay connected:
+
+    https://floss.social/@XOrgDevConf
+
+Best,
+
+Mark
