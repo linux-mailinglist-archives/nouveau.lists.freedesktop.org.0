@@ -2,76 +2,75 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id 85BA8AC975B
-	for <lists+nouveau@lfdr.de>; Fri, 30 May 2025 23:53:47 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 1A173AC9761
+	for <lists+nouveau@lfdr.de>; Fri, 30 May 2025 23:57:52 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 3BB3C10E89D;
-	Fri, 30 May 2025 21:53:46 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 6DBDF10E887;
+	Fri, 30 May 2025 21:57:50 +0000 (UTC)
 Authentication-Results: gabe.freedesktop.org;
-	dkim=pass (1024-bit key; unprotected) header.d=redhat.com header.i=@redhat.com header.b="VkAzoTRE";
+	dkim=pass (1024-bit key; unprotected) header.d=redhat.com header.i=@redhat.com header.b="AB8yXtto";
 	dkim-atps=neutral
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
 Received: from us-smtp-delivery-124.mimecast.com
- (us-smtp-delivery-124.mimecast.com [170.10.129.124])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 7675B10E89D
- for <nouveau@lists.freedesktop.org>; Fri, 30 May 2025 21:53:45 +0000 (UTC)
+ (us-smtp-delivery-124.mimecast.com [170.10.133.124])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 7A18410E887
+ for <nouveau@lists.freedesktop.org>; Fri, 30 May 2025 21:57:49 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1748642024;
+ s=mimecast20190719; t=1748642268;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:content-type:content-type:
  content-transfer-encoding:content-transfer-encoding:
  in-reply-to:in-reply-to:references:references;
- bh=3t8UYHwYOcX+igI2s90HrJEaKB/cUj/2UVBQv2H752A=;
- b=VkAzoTRE6KT6GBzcpj6TEVP1ZRXkag6FhignK24nR7nLu62vwFygnxX2xPyOYP9Nt6hqOY
- ddxwG3c5KTzG54kw6nJqz94AiweZLN2HOrJMWs9chq+Q6vTwUCuYPMRe2SF8pEtHnRHRYI
- wQQ1pyCtGz+2ga7pCO4x2LoQyTV5Nbk=
-Received: from mail-qv1-f71.google.com (mail-qv1-f71.google.com
- [209.85.219.71]) by relay.mimecast.com with ESMTP with STARTTLS
+ bh=y3lttqqB9sA75b2r8NSQIDzwyIRL4HXl7lBOk7qc8XY=;
+ b=AB8yXttoUSwLvKeUlBs8hIyaO2VFl70N+tOLwaimDDreHw6Y+sJZ8EiA/3OrU7xmP4ASFE
+ 0InndcD/IUu1tSMF4IB36Sv8sRH6qcCisuNueLM+2VZvCb5VJaM7d6IeGvdu/7Vr3DGUTl
+ fgQ9UpUm7+Ow9fvovtGY7+Fz1W3T0ec=
+Received: from mail-qv1-f72.google.com (mail-qv1-f72.google.com
+ [209.85.219.72]) by relay.mimecast.com with ESMTP with STARTTLS
  (version=TLSv1.3, cipher=TLS_AES_256_GCM_SHA384) id
- us-mta-655-5fcnZHT7PA64t2xwQydMjQ-1; Fri, 30 May 2025 17:53:43 -0400
-X-MC-Unique: 5fcnZHT7PA64t2xwQydMjQ-1
-X-Mimecast-MFC-AGG-ID: 5fcnZHT7PA64t2xwQydMjQ_1748642023
-Received: by mail-qv1-f71.google.com with SMTP id
- 6a1803df08f44-6fad5f1e70fso12792076d6.0
- for <nouveau@lists.freedesktop.org>; Fri, 30 May 2025 14:53:43 -0700 (PDT)
+ us-mta-380-taJIlik-NaueyvUSSIpQ3g-1; Fri, 30 May 2025 17:57:47 -0400
+X-MC-Unique: taJIlik-NaueyvUSSIpQ3g-1
+X-Mimecast-MFC-AGG-ID: taJIlik-NaueyvUSSIpQ3g_1748642267
+Received: by mail-qv1-f72.google.com with SMTP id
+ 6a1803df08f44-6fad8b4c92cso1717956d6.0
+ for <nouveau@lists.freedesktop.org>; Fri, 30 May 2025 14:57:47 -0700 (PDT)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1748642020; x=1749246820;
+ d=1e100.net; s=20230601; t=1748642267; x=1749247067;
  h=mime-version:user-agent:content-transfer-encoding:organization
  :references:in-reply-to:date:cc:to:from:subject:message-id
  :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=3t8UYHwYOcX+igI2s90HrJEaKB/cUj/2UVBQv2H752A=;
- b=eCzEeW0aurE4xOjhd2uFuGexTig6fQIOPnQSEu3vrtzwKVfUv9DEuUi3AZy2SvXQ/P
- znKBgos7FKfgeL0WE+JRZTyTgdlED7Z/04NngR4LZrKyucI2vAuMurAnjFwDaNiNgjCg
- CU9Y1nYRk9IRipaywIGb46GHIqVZiE7BTLOrfIgqqOzx/iGFmyjYc/cBcFg3Cz4ixGpL
- dzWnMEI+o5h/FMDsi6ZKw+McGTiS3ZkzhRc9KtTZ7PvsKFEb/njV4O1oyCdADDTkhLuF
- ymAW1lVH6+JPM4VIQ4XPt5GaFFx+tgdeIuC8AuFbrpaVg0aNc50hHkHWWGNjQhpSqMR+
- kirA==
+ bh=y3lttqqB9sA75b2r8NSQIDzwyIRL4HXl7lBOk7qc8XY=;
+ b=HVkQQNi9UlpGDeDpS88SnblsZifn1jdD1iZ1/G0nsD5lfw16XKZkEVKQlurMDbJnNz
+ mr/SJU5tZhJroeSpdP9M2kAy3BOFCr/2/IHWVABI+dXpoMrXMnTmWxEDpaCBtfbGLpYv
+ Bq5RaK5POCpWBaCK/LhOG1EBmj5nEgfDd90Tg06+YgVNnTSh151sekz+ky2joDAAp+Le
+ 8AVPgSCfevP55kzKC+QDxQbHBTetMd4hBRD2Q01hAFy7kkdv/jTuxXtJt7qAOFG05fEj
+ Yn2VcHqMg9UFnU+MJRXtjSkdsHkdF01kRTUF8rIb6MpyrGmgsjaLhNcDSdbpFKvyQ6w6
+ yQIQ==
 X-Forwarded-Encrypted: i=1;
- AJvYcCVV+E0j0JvdBXJE2nQG/udVRFBBBfa7q4GHt/oz1wjgsORXX4vT/O0y3fsQ3ejCGs0i4NSAwstS@lists.freedesktop.org
-X-Gm-Message-State: AOJu0YwEzEmzWI/PFS6mdhkffIAE44EkV0YUu9p1fDJL8SzH7KI3JgrJ
- Paoo0mYBfYF+LknOM3G5DN/bAtGxyGNgz7U4DqME/14fIXCWggeZlPEpCZmzHuqWju66Zk2uw4W
- +JFivl4VrCh48EYZFSSenHbp+91FutlF08/12h3hLM6zZK1hA2ILKOR0ygS9nAiIvFTqV3jT4HQ
- fG9Q==
-X-Gm-Gg: ASbGncuBAvrs/7t+2Ssl0fWYNLtzFjy3hurVu+s4AyQT8r8EJ1ZCVgCo2kixkA6gtz6
- EQdExyv0mWrLdCOcW/fc7r8diZXXC8WnICcn5CMLfpcNIyJpdJGQd5wASOTdI8RsCOiKKSG3DCX
- Ov1X2zogQg+dB+rKHQcF/+66YrjCCGVEB9CYjCipewaodp9nC+nEzxuQqGiwy5pqoEyU30Ryje4
- xqCn9pWd2AY8HFBBrzO1hxyNFJUlxQOqTOmbnQpQJR8xbMX7AiSiGSJBulMK7ppCSKIMzva7QDG
- 4HwK78edTvPkY75mY88nsKSc2Rft
-X-Received: by 2002:a05:622a:488d:b0:4a3:398d:825c with SMTP id
- d75a77b69052e-4a443f6810dmr54049431cf.48.1748642019636; 
- Fri, 30 May 2025 14:53:39 -0700 (PDT)
-X-Google-Smtp-Source: AGHT+IEIokD+QvEzVcwUdhEof41g2juLztSYJIDCO67lp00C7DcSeLDtPDSHBnS7B/7M9KPbPfGX/w==
-X-Received: by 2002:a05:6214:c29:b0:6fa:c7a5:9f76 with SMTP id
- 6a1803df08f44-6fad190adfamr66974216d6.18.1748642008378; 
- Fri, 30 May 2025 14:53:28 -0700 (PDT)
+ AJvYcCXFfakrOJYrCayzcNje8s82PazPkR2LywPrneyaQ2Efzh2/qTkoeuSL5cJ4PaXUX7x10ACQtDm6@lists.freedesktop.org
+X-Gm-Message-State: AOJu0Ywowb3KFr/CsQfjT6MbUnf11WyetKG6PDjx7KlOGC274UNpfcCN
+ v0f7/+GVI6Ud5CzeMYjZWZGhxtNnCUzrrlEy2QE/DGQPPAKj+MU4HWDT3G7nQq3qJ90ZMI9E+QX
+ QjE3+Dpv4TqVlD2wVW3NYr6up5pIcAkoL5oQQSAhoZWz4rPG6GKMsAUwe7maBH40EJHM=
+X-Gm-Gg: ASbGncs8G8uu7DOzeDu2b8r9TgWw5NA7y5aLwfW6NkE474PV7TMvH0V7NXaS4Kd83FS
+ PSSveXxe6G5D0oAn62GxxQufXHFQpB+4foz67HqFs/YvFx9h9f3D6Mwfu57Ot7PCKDRrWsLjn1L
+ sLHVVhfO5CMHWKwsMFZJUS4+DoN0XFRHxfSJC8ukcSjQk7wBp/U82qqWl38JImHQvg4XXO9jHQw
+ Pi2hR6iEo3AjdFu6ZxLDgdFxcb3yj6q0BsA7YA8ppPhj6idvwaylRwDzn7yBjY2G30sA/7pvPVd
+ 7VD2lFOwriURfBbw3Q==
+X-Received: by 2002:a05:6214:529b:b0:6fa:c2e4:dfab with SMTP id
+ 6a1803df08f44-6fad1a97955mr55569086d6.40.1748642266927; 
+ Fri, 30 May 2025 14:57:46 -0700 (PDT)
+X-Google-Smtp-Source: AGHT+IGX4yn33KpCzmCSuCSMV9+VblpOB0UmFX0LR5oI6Xh5+FdCGH126cncPnmtywQFANTkUS04lw==
+X-Received: by 2002:a05:6214:529b:b0:6fa:c2e4:dfab with SMTP id
+ 6a1803df08f44-6fad1a97955mr55568736d6.40.1748642266513; 
+ Fri, 30 May 2025 14:57:46 -0700 (PDT)
 Received: from ?IPv6:2600:4040:5c4b:da00::bb3? ([2600:4040:5c4b:da00::bb3])
  by smtp.gmail.com with ESMTPSA id
- 6a1803df08f44-6fac6e1a6f6sm29501376d6.96.2025.05.30.14.53.26
+ 6a1803df08f44-6fac6d33870sm29824116d6.23.2025.05.30.14.57.44
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 30 May 2025 14:53:27 -0700 (PDT)
-Message-ID: <a94a7450a8047664f4517c61b29dd38642c3439b.camel@redhat.com>
-Subject: Re: [PATCH v4 12/20] gpu: nova-core: add DMA object struct
+ Fri, 30 May 2025 14:57:45 -0700 (PDT)
+Message-ID: <44f13ec88af918893e2a4b7050dce9ac184e3b75.camel@redhat.com>
+Subject: Re: [PATCH v4 13/20] gpu: nova-core: register sysmem flush page
 From: Lyude Paul <lyude@redhat.com>
 To: Alexandre Courbot <acourbot@nvidia.com>, Miguel Ojeda
  <ojeda@kernel.org>,  Alex Gaynor <alex.gaynor@gmail.com>, Boqun Feng
@@ -88,15 +87,15 @@ Cc: John Hubbard <jhubbard@nvidia.com>, Ben Skeggs <bskeggs@nvidia.com>,
  Alistair Popple <apopple@nvidia.com>, 	linux-kernel@vger.kernel.org,
  rust-for-linux@vger.kernel.org, 	nouveau@lists.freedesktop.org,
  dri-devel@lists.freedesktop.org
-Date: Fri, 30 May 2025 17:53:26 -0400
-In-Reply-To: <20250521-nova-frts-v4-12-05dfd4f39479@nvidia.com>
+Date: Fri, 30 May 2025 17:57:44 -0400
+In-Reply-To: <20250521-nova-frts-v4-13-05dfd4f39479@nvidia.com>
 References: <20250521-nova-frts-v4-0-05dfd4f39479@nvidia.com>
- <20250521-nova-frts-v4-12-05dfd4f39479@nvidia.com>
+ <20250521-nova-frts-v4-13-05dfd4f39479@nvidia.com>
 Organization: Red Hat Inc.
 User-Agent: Evolution 3.54.3 (3.54.3-1.fc41)
 MIME-Version: 1.0
 X-Mimecast-Spam-Score: 0
-X-Mimecast-MFC-PROC-ID: AfyNuOAkcD9ewXrFC3v18cx_P-C50X29GaEh-eI6rVY_1748642023
+X-Mimecast-MFC-PROC-ID: tcnvSEI0RRdrgCqaB31mAIy_gNVhc_dgvMMqVdIXX3k_1748642267
 X-Mimecast-Originator: redhat.com
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
@@ -114,109 +113,132 @@ List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-Hooray for new types!
-
-Reviewed-by: Lyude Paul <lyude@redhat.com>
-
 On Wed, 2025-05-21 at 15:45 +0900, Alexandre Courbot wrote:
-> Since we will need to allocate lots of distinct memory chunks to be
-> shared between GPU and CPU, introduce a type dedicated to that. It is a
-> light wrapper around CoherentAllocation.
+> Reserve a page of system memory so sysmembar can perform a read on it if
+> a system write occurred since the last flush. Do this early as it can be
+> required to e.g. reset the GPU falcons.
 >=20
 > Signed-off-by: Alexandre Courbot <acourbot@nvidia.com>
 > ---
->  drivers/gpu/nova-core/dma.rs       | 61 ++++++++++++++++++++++++++++++++=
-++++++
->  drivers/gpu/nova-core/nova_core.rs |  1 +
->  2 files changed, 62 insertions(+)
+>  drivers/gpu/nova-core/gpu.rs  | 45 +++++++++++++++++++++++++++++++++++++=
+++++--
+>  drivers/gpu/nova-core/regs.rs | 10 ++++++++++
+>  2 files changed, 53 insertions(+), 2 deletions(-)
 >=20
-> diff --git a/drivers/gpu/nova-core/dma.rs b/drivers/gpu/nova-core/dma.rs
-> new file mode 100644
-> index 0000000000000000000000000000000000000000..4b063aaef65ec4e2f476fc5ce=
-9dc25341b6660ca
-> --- /dev/null
-> +++ b/drivers/gpu/nova-core/dma.rs
-> @@ -0,0 +1,61 @@
-> +// SPDX-License-Identifier: GPL-2.0
-> +
-> +//! Simple DMA object wrapper.
-> +
-> +// To be removed when all code is used.
-> +#![expect(dead_code)]
-> +
-> +use core::ops::{Deref, DerefMut};
-> +
-> +use kernel::device;
-> +use kernel::dma::CoherentAllocation;
-> +use kernel::page::PAGE_SIZE;
-> +use kernel::prelude::*;
-> +
-> +pub(crate) struct DmaObject {
-> +    dma: CoherentAllocation<u8>,
-> +}
-> +
-> +impl DmaObject {
-> +    pub(crate) fn new(dev: &device::Device<device::Bound>, len: usize) -=
-> Result<Self> {
-> +        let len =3D core::alloc::Layout::from_size_align(len, PAGE_SIZE)
-> +            .map_err(|_| EINVAL)?
-> +            .pad_to_align()
-> +            .size();
-> +        let dma =3D CoherentAllocation::alloc_coherent(dev, len, GFP_KER=
-NEL | __GFP_ZERO)?;
-> +
-> +        Ok(Self { dma })
-> +    }
-> +
-> +    pub(crate) fn from_data(dev: &device::Device<device::Bound>, data: &=
-[u8]) -> Result<Self> {
-> +        Self::new(dev, data.len()).map(|mut dma_obj| {
-> +            // TODO: replace with `CoherentAllocation::write()` once ava=
-ilable.
-> +            // SAFETY:
-> +            // - `dma_obj`'s size is at least `data.len()`.
-> +            // - We have just created this object and there is no other =
-user at this stage.
-> +            unsafe {
-> +                core::ptr::copy_nonoverlapping(
-> +                    data.as_ptr(),
-> +                    dma_obj.dma.start_ptr_mut(),
-> +                    data.len(),
-> +                );
-> +            }
-> +
-> +            dma_obj
-> +        })
-> +    }
-> +}
-> +
-> +impl Deref for DmaObject {
-> +    type Target =3D CoherentAllocation<u8>;
-> +
-> +    fn deref(&self) -> &Self::Target {
-> +        &self.dma
-> +    }
-> +}
-> +
-> +impl DerefMut for DmaObject {
-> +    fn deref_mut(&mut self) -> &mut Self::Target {
-> +        &mut self.dma
-> +    }
-> +}
-> diff --git a/drivers/gpu/nova-core/nova_core.rs b/drivers/gpu/nova-core/n=
-ova_core.rs
-> index c3fde3e132ea658888851137ab47fcb7b3637577..121fe5c11044a192212d0a643=
-53b7acad58c796a 100644
-> --- a/drivers/gpu/nova-core/nova_core.rs
-> +++ b/drivers/gpu/nova-core/nova_core.rs
+> diff --git a/drivers/gpu/nova-core/gpu.rs b/drivers/gpu/nova-core/gpu.rs
+> index 50417f608dc7b445958ae43444a13c7593204fcf..a4e2cf1b529cc25fc168f68f9=
+eaa6f4a7a9748eb 100644
+> --- a/drivers/gpu/nova-core/gpu.rs
+> +++ b/drivers/gpu/nova-core/gpu.rs
 > @@ -2,6 +2,7 @@
 > =20
->  //! Nova Core GPU Driver
+>  use kernel::{device, devres::Devres, error::code::*, pci, prelude::*};
 > =20
-> +mod dma;
->  mod driver;
->  mod firmware;
->  mod gfw;
+> +use crate::dma::DmaObject;
+>  use crate::driver::Bar0;
+>  use crate::firmware::{Firmware, FIRMWARE_VERSION};
+>  use crate::gfw;
+> @@ -158,12 +159,32 @@ fn new(bar: &Bar0) -> Result<Spec> {
+>  }
+> =20
+>  /// Structure holding the resources required to operate the GPU.
+> -#[pin_data]
+> +#[pin_data(PinnedDrop)]
+>  pub(crate) struct Gpu {
+>      spec: Spec,
+>      /// MMIO mapping of PCI BAR 0
+>      bar: Devres<Bar0>,
+>      fw: Firmware,
+> +    /// System memory page required for flushing all pending GPU-side me=
+mory writes done through
+> +    /// PCIE into system memory.
+> +    sysmem_flush: DmaObject,
+> +}
+> +
+> +#[pinned_drop]
+> +impl PinnedDrop for Gpu {
+> +    fn drop(self: Pin<&mut Self>) {
+> +        // Unregister the sysmem flush page before we release it.
+> +        let _ =3D self.bar.try_access_with(|b| {
+> +            regs::NV_PFB_NISO_FLUSH_SYSMEM_ADDR::default()
+> +                .set_adr_39_08(0)
+> +                .write(b);
+> +            if self.spec.chipset >=3D Chipset::GA102 {
+> +                regs::NV_PFB_NISO_FLUSH_SYSMEM_ADDR_HI::default()
+> +                    .set_adr_63_40(0)
+> +                    .write(b);
+> +            }
+> +        });
+> +    }
+>  }
+> =20
+>  impl Gpu {
+> @@ -187,10 +208,30 @@ pub(crate) fn new(
+>          gfw::wait_gfw_boot_completion(bar)
+>              .inspect_err(|_| dev_err!(pdev.as_ref(), "GFW boot did not c=
+omplete"))?;
+> =20
+> +        // System memory page required for sysmembar to properly flush i=
+nto system memory.
+> +        let sysmem_flush =3D {
+> +            let page =3D DmaObject::new(pdev.as_ref(), kernel::bindings:=
+:PAGE_SIZE)?;
+> +
+> +            // Register the sysmem flush page.
+> +            let handle =3D page.dma_handle();
+> +
+> +            regs::NV_PFB_NISO_FLUSH_SYSMEM_ADDR::default()
+> +                .set_adr_39_08((handle >> 8) as u32)
+> +                .write(bar);
+> +            if spec.chipset >=3D Chipset::GA102 {
+> +                regs::NV_PFB_NISO_FLUSH_SYSMEM_ADDR_HI::default()
+> +                    .set_adr_63_40((handle >> 40) as u32)
+> +                    .write(bar);
+> +            }
+> +
+
+Small nit - would it make sense for us to just add a function for initiatin=
+g a
+sysmem memory flush that you could pass the bar to? Seems like it might be =
+a
+bit less error prone if we end up having to do this elsewhere
+
+> +            page
+> +        };
+> +
+>          Ok(pin_init!(Self {
+>              spec,
+>              bar: devres_bar,
+> -            fw
+> +            fw,
+> +            sysmem_flush,
+>          }))
+>      }
+>  }
+> diff --git a/drivers/gpu/nova-core/regs.rs b/drivers/gpu/nova-core/regs.r=
+s
+> index cba442da51181971f209b338249307c11ac481e3..b599e7ddad57ed8defe032405=
+6571ba46b926cf6 100644
+> --- a/drivers/gpu/nova-core/regs.rs
+> +++ b/drivers/gpu/nova-core/regs.rs
+> @@ -38,6 +38,16 @@ pub(crate) fn chipset(self) -> Result<Chipset> {
+>      }
+>  }
+> =20
+> +/* PFB */
+> +
+> +register!(NV_PFB_NISO_FLUSH_SYSMEM_ADDR @ 0x00100c10 {
+> +    31:0    adr_39_08 as u32;
+> +});
+> +
+> +register!(NV_PFB_NISO_FLUSH_SYSMEM_ADDR_HI @ 0x00100c40 {
+> +    23:0    adr_63_40 as u32;
+> +});
+> +
+>  /* PGC6 */
+> =20
+>  register!(NV_PGC6_AON_SECURE_SCRATCH_GROUP_05_PRIV_LEVEL_MASK @ 0x001181=
+28 {
 >=20
 
 --=20
