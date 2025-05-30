@@ -2,75 +2,76 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id CCCE2AC9755
-	for <lists+nouveau@lfdr.de>; Fri, 30 May 2025 23:51:37 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 85BA8AC975B
+	for <lists+nouveau@lfdr.de>; Fri, 30 May 2025 23:53:47 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 4A8D610E89B;
-	Fri, 30 May 2025 21:51:36 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 3BB3C10E89D;
+	Fri, 30 May 2025 21:53:46 +0000 (UTC)
 Authentication-Results: gabe.freedesktop.org;
-	dkim=pass (1024-bit key; unprotected) header.d=redhat.com header.i=@redhat.com header.b="M7yo2eOA";
+	dkim=pass (1024-bit key; unprotected) header.d=redhat.com header.i=@redhat.com header.b="VkAzoTRE";
 	dkim-atps=neutral
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
 Received: from us-smtp-delivery-124.mimecast.com
- (us-smtp-delivery-124.mimecast.com [170.10.133.124])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 6E20410E89B
- for <nouveau@lists.freedesktop.org>; Fri, 30 May 2025 21:51:35 +0000 (UTC)
+ (us-smtp-delivery-124.mimecast.com [170.10.129.124])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 7675B10E89D
+ for <nouveau@lists.freedesktop.org>; Fri, 30 May 2025 21:53:45 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1748641894;
+ s=mimecast20190719; t=1748642024;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:content-type:content-type:
  content-transfer-encoding:content-transfer-encoding:
  in-reply-to:in-reply-to:references:references;
- bh=UfMDZFcS7d4nnVsBGuQICjFtGq78SXXJeuJZ56DwJmg=;
- b=M7yo2eOAR6qk1MnM2eP4sQRVs4LplpmpOHVuvDw+SGGknBVqBwM5wbUF/JpkqLfR6rFtzO
- gk2LbhxmgW8X+98yu7k75Uk26bmqEkGc3YJwqoNcjy1q+kRRQ8FtmaJ5s42WtM/zpFzJn5
- dsRoMMrUH9ZsPdpA/Jk84oQcOn3iDnA=
-Received: from mail-qk1-f199.google.com (mail-qk1-f199.google.com
- [209.85.222.199]) by relay.mimecast.com with ESMTP with STARTTLS
+ bh=3t8UYHwYOcX+igI2s90HrJEaKB/cUj/2UVBQv2H752A=;
+ b=VkAzoTRE6KT6GBzcpj6TEVP1ZRXkag6FhignK24nR7nLu62vwFygnxX2xPyOYP9Nt6hqOY
+ ddxwG3c5KTzG54kw6nJqz94AiweZLN2HOrJMWs9chq+Q6vTwUCuYPMRe2SF8pEtHnRHRYI
+ wQQ1pyCtGz+2ga7pCO4x2LoQyTV5Nbk=
+Received: from mail-qv1-f71.google.com (mail-qv1-f71.google.com
+ [209.85.219.71]) by relay.mimecast.com with ESMTP with STARTTLS
  (version=TLSv1.3, cipher=TLS_AES_256_GCM_SHA384) id
- us-mta-550-RLPeIWQ3MkiBweu1wYK1TA-1; Fri, 30 May 2025 17:51:33 -0400
-X-MC-Unique: RLPeIWQ3MkiBweu1wYK1TA-1
-X-Mimecast-MFC-AGG-ID: RLPeIWQ3MkiBweu1wYK1TA_1748641893
-Received: by mail-qk1-f199.google.com with SMTP id
- af79cd13be357-7c5750ca8b2so310769385a.0
- for <nouveau@lists.freedesktop.org>; Fri, 30 May 2025 14:51:33 -0700 (PDT)
+ us-mta-655-5fcnZHT7PA64t2xwQydMjQ-1; Fri, 30 May 2025 17:53:43 -0400
+X-MC-Unique: 5fcnZHT7PA64t2xwQydMjQ-1
+X-Mimecast-MFC-AGG-ID: 5fcnZHT7PA64t2xwQydMjQ_1748642023
+Received: by mail-qv1-f71.google.com with SMTP id
+ 6a1803df08f44-6fad5f1e70fso12792076d6.0
+ for <nouveau@lists.freedesktop.org>; Fri, 30 May 2025 14:53:43 -0700 (PDT)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1748641893; x=1749246693;
+ d=1e100.net; s=20230601; t=1748642020; x=1749246820;
  h=mime-version:user-agent:content-transfer-encoding:organization
  :references:in-reply-to:date:cc:to:from:subject:message-id
  :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=UfMDZFcS7d4nnVsBGuQICjFtGq78SXXJeuJZ56DwJmg=;
- b=c1y2j4vF6ajJ2EoiHwLWf7WC42I+8fg6cZ+nqqv5qeBIKilyb2qFAU0cc161zjz+2j
- Y1BpokV96w2syGqHdP3/jVngdOYWhX5D6d8lGiO1CDJI060L0CfNdNxBG2xnVyqmIPPw
- jpq9efI2kVVk1pDJN8lNQ7Z+s4eeBWZFs8nVl/iECcC+xYe23n4xw5SzBm5hZgpNz4nc
- CBja5Ch7V61gp+TKiAQatIIVGjZHXx8Y5GtX2LjE9gRVOgjVBgBXBxqbsaOfXmIgi/QE
- hsxfV6XmdKKL2SSgkdnRvYXoCklJMFBu2IKvRsRpyEmYpcP5qfRcOEnYukgv1IUk1M6+
- yNHg==
+ bh=3t8UYHwYOcX+igI2s90HrJEaKB/cUj/2UVBQv2H752A=;
+ b=eCzEeW0aurE4xOjhd2uFuGexTig6fQIOPnQSEu3vrtzwKVfUv9DEuUi3AZy2SvXQ/P
+ znKBgos7FKfgeL0WE+JRZTyTgdlED7Z/04NngR4LZrKyucI2vAuMurAnjFwDaNiNgjCg
+ CU9Y1nYRk9IRipaywIGb46GHIqVZiE7BTLOrfIgqqOzx/iGFmyjYc/cBcFg3Cz4ixGpL
+ dzWnMEI+o5h/FMDsi6ZKw+McGTiS3ZkzhRc9KtTZ7PvsKFEb/njV4O1oyCdADDTkhLuF
+ ymAW1lVH6+JPM4VIQ4XPt5GaFFx+tgdeIuC8AuFbrpaVg0aNc50hHkHWWGNjQhpSqMR+
+ kirA==
 X-Forwarded-Encrypted: i=1;
- AJvYcCUE1gEUOxciRE1FlX69MiCHIL25y3xYqYOto6Zrs16NRF8hE0SnRujLWhWA2roaecwcqg1xwcxy@lists.freedesktop.org
-X-Gm-Message-State: AOJu0YyIZU8fUMEc+Km3hlsM3fmLGm0AnMznp5atsApJ4FXjaQ2HAmom
- 0Um6JvXGkvjEc0nbe8ObAaTnscBvXSj5zYgx/ZOvP8WqZKQ7EsH0uX926krQ1gx0T5LXO/bW072
- QqDRhYil408ad+/G4nEAgF8t0s2ulDuywHEztzKgKVIt6dK5wkOIW3YxwuK+aIeRPoXo=
-X-Gm-Gg: ASbGnctWHA8WMrpoYj3icrnyHscLvqb9hesyGtTrmy2k3KAYO9nJNdqZ3Zcoo1cYykd
- 5ViNgP6rmTMd2r+dp5zEqudGhN8jhtNfHMDjcfcDYp9Hz1lL4yfzWwHMvwJYEtlC7V3jsbI2yEU
- OdQCd7Qlc8gtbaS/rJULKRypon+oGo1cE9gNkbD5jVBN8Z90c+r+y68Ghh+Ke1fVE6cP8NZrs5L
- wxmZzeowabXku4uYw9ScJ3SHAYnAvrVhTt4Wts2jOXSbH7EeKzqlY1NicQnZTjiMZdOsKvKyj3M
- /WJy1bEc/v/aZJQiLA==
-X-Received: by 2002:a05:620a:2720:b0:7c7:6667:ade5 with SMTP id
- af79cd13be357-7d0a1fbd32dmr769890685a.27.1748641892602; 
- Fri, 30 May 2025 14:51:32 -0700 (PDT)
-X-Google-Smtp-Source: AGHT+IHvxUk5sLz9Mim1SXlKyxObeOGwTGTKoqI2mu7oIGr7VfFIGprAjp3pKRDMw6YRHE7iLlCrgw==
-X-Received: by 2002:a05:620a:2720:b0:7c7:6667:ade5 with SMTP id
- af79cd13be357-7d0a1fbd32dmr769888185a.27.1748641892181; 
- Fri, 30 May 2025 14:51:32 -0700 (PDT)
+ AJvYcCVV+E0j0JvdBXJE2nQG/udVRFBBBfa7q4GHt/oz1wjgsORXX4vT/O0y3fsQ3ejCGs0i4NSAwstS@lists.freedesktop.org
+X-Gm-Message-State: AOJu0YwEzEmzWI/PFS6mdhkffIAE44EkV0YUu9p1fDJL8SzH7KI3JgrJ
+ Paoo0mYBfYF+LknOM3G5DN/bAtGxyGNgz7U4DqME/14fIXCWggeZlPEpCZmzHuqWju66Zk2uw4W
+ +JFivl4VrCh48EYZFSSenHbp+91FutlF08/12h3hLM6zZK1hA2ILKOR0ygS9nAiIvFTqV3jT4HQ
+ fG9Q==
+X-Gm-Gg: ASbGncuBAvrs/7t+2Ssl0fWYNLtzFjy3hurVu+s4AyQT8r8EJ1ZCVgCo2kixkA6gtz6
+ EQdExyv0mWrLdCOcW/fc7r8diZXXC8WnICcn5CMLfpcNIyJpdJGQd5wASOTdI8RsCOiKKSG3DCX
+ Ov1X2zogQg+dB+rKHQcF/+66YrjCCGVEB9CYjCipewaodp9nC+nEzxuQqGiwy5pqoEyU30Ryje4
+ xqCn9pWd2AY8HFBBrzO1hxyNFJUlxQOqTOmbnQpQJR8xbMX7AiSiGSJBulMK7ppCSKIMzva7QDG
+ 4HwK78edTvPkY75mY88nsKSc2Rft
+X-Received: by 2002:a05:622a:488d:b0:4a3:398d:825c with SMTP id
+ d75a77b69052e-4a443f6810dmr54049431cf.48.1748642019636; 
+ Fri, 30 May 2025 14:53:39 -0700 (PDT)
+X-Google-Smtp-Source: AGHT+IEIokD+QvEzVcwUdhEof41g2juLztSYJIDCO67lp00C7DcSeLDtPDSHBnS7B/7M9KPbPfGX/w==
+X-Received: by 2002:a05:6214:c29:b0:6fa:c7a5:9f76 with SMTP id
+ 6a1803df08f44-6fad190adfamr66974216d6.18.1748642008378; 
+ Fri, 30 May 2025 14:53:28 -0700 (PDT)
 Received: from ?IPv6:2600:4040:5c4b:da00::bb3? ([2600:4040:5c4b:da00::bb3])
  by smtp.gmail.com with ESMTPSA id
- af79cd13be357-7d09a1aa3basm301727485a.113.2025.05.30.14.51.30
+ 6a1803df08f44-6fac6e1a6f6sm29501376d6.96.2025.05.30.14.53.26
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 30 May 2025 14:51:31 -0700 (PDT)
-Message-ID: <adbf5fa1104978df76ae40705e5df13dfbe59bb8.camel@redhat.com>
-Subject: Re: [PATCH v4 11/20] gpu: nova-core: wait for GFW_BOOT completion
+ Fri, 30 May 2025 14:53:27 -0700 (PDT)
+Message-ID: <a94a7450a8047664f4517c61b29dd38642c3439b.camel@redhat.com>
+Subject: Re: [PATCH v4 12/20] gpu: nova-core: add DMA object struct
 From: Lyude Paul <lyude@redhat.com>
 To: Alexandre Courbot <acourbot@nvidia.com>, Miguel Ojeda
  <ojeda@kernel.org>,  Alex Gaynor <alex.gaynor@gmail.com>, Boqun Feng
@@ -87,15 +88,15 @@ Cc: John Hubbard <jhubbard@nvidia.com>, Ben Skeggs <bskeggs@nvidia.com>,
  Alistair Popple <apopple@nvidia.com>, 	linux-kernel@vger.kernel.org,
  rust-for-linux@vger.kernel.org, 	nouveau@lists.freedesktop.org,
  dri-devel@lists.freedesktop.org
-Date: Fri, 30 May 2025 17:51:30 -0400
-In-Reply-To: <20250521-nova-frts-v4-11-05dfd4f39479@nvidia.com>
+Date: Fri, 30 May 2025 17:53:26 -0400
+In-Reply-To: <20250521-nova-frts-v4-12-05dfd4f39479@nvidia.com>
 References: <20250521-nova-frts-v4-0-05dfd4f39479@nvidia.com>
- <20250521-nova-frts-v4-11-05dfd4f39479@nvidia.com>
+ <20250521-nova-frts-v4-12-05dfd4f39479@nvidia.com>
 Organization: Red Hat Inc.
 User-Agent: Evolution 3.54.3 (3.54.3-1.fc41)
 MIME-Version: 1.0
 X-Mimecast-Spam-Score: 0
-X-Mimecast-MFC-PROC-ID: OFAG-2L0ciTPW0WAnKzO_ZhOTJDSIQAmRaaTqBhSS7M_1748641893
+X-Mimecast-MFC-PROC-ID: AfyNuOAkcD9ewXrFC3v18cx_P-C50X29GaEh-eI6rVY_1748642023
 X-Mimecast-Originator: redhat.com
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
@@ -113,176 +114,109 @@ List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
+Hooray for new types!
+
+Reviewed-by: Lyude Paul <lyude@redhat.com>
+
 On Wed, 2025-05-21 at 15:45 +0900, Alexandre Courbot wrote:
-> Upon reset, the GPU executes the GFW (GPU Firmware) in order to
-> initialize its base parameters such as clocks. The driver must ensure
-> that this step is completed before using the hardware.
+> Since we will need to allocate lots of distinct memory chunks to be
+> shared between GPU and CPU, introduce a type dedicated to that. It is a
+> light wrapper around CoherentAllocation.
 >=20
 > Signed-off-by: Alexandre Courbot <acourbot@nvidia.com>
 > ---
->  drivers/gpu/nova-core/gfw.rs       | 37 ++++++++++++++++++++++++++++++++=
-+++++
->  drivers/gpu/nova-core/gpu.rs       |  5 +++++
+>  drivers/gpu/nova-core/dma.rs       | 61 ++++++++++++++++++++++++++++++++=
+++++++
 >  drivers/gpu/nova-core/nova_core.rs |  1 +
->  drivers/gpu/nova-core/regs.rs      | 25 +++++++++++++++++++++++++
->  drivers/gpu/nova-core/util.rs      |  1 -
->  5 files changed, 68 insertions(+), 1 deletion(-)
+>  2 files changed, 62 insertions(+)
 >=20
-> diff --git a/drivers/gpu/nova-core/gfw.rs b/drivers/gpu/nova-core/gfw.rs
+> diff --git a/drivers/gpu/nova-core/dma.rs b/drivers/gpu/nova-core/dma.rs
 > new file mode 100644
-> index 0000000000000000000000000000000000000000..11ad480e1da826555e264101e=
-f56ff0f69db8f95
+> index 0000000000000000000000000000000000000000..4b063aaef65ec4e2f476fc5ce=
+9dc25341b6660ca
 > --- /dev/null
-> +++ b/drivers/gpu/nova-core/gfw.rs
-> @@ -0,0 +1,37 @@
+> +++ b/drivers/gpu/nova-core/dma.rs
+> @@ -0,0 +1,61 @@
 > +// SPDX-License-Identifier: GPL-2.0
 > +
-> +//! GPU Firmware (GFW) support.
-> +//!
-> +//! Upon reset, the GPU runs some firmware code from the BIOS to setup i=
-ts core parameters. Most of
-> +//! the GPU is considered unusable until this step is completed, so we m=
-ust wait on it before
-> +//! performing driver initialization.
+> +//! Simple DMA object wrapper.
 > +
-> +use core::time::Duration;
+> +// To be removed when all code is used.
+> +#![expect(dead_code)]
 > +
-> +use kernel::bindings;
+> +use core::ops::{Deref, DerefMut};
+> +
+> +use kernel::device;
+> +use kernel::dma::CoherentAllocation;
+> +use kernel::page::PAGE_SIZE;
 > +use kernel::prelude::*;
 > +
-> +use crate::driver::Bar0;
-> +use crate::regs;
-> +use crate::util;
-> +
-> +/// Wait until GFW (GPU Firmware) completes, or a 4 seconds timeout elap=
-ses.
-> +pub(crate) fn wait_gfw_boot_completion(bar: &Bar0) -> Result<()> {
-
-JFYI: You can actually just say Result here, since () is the default type f=
-or
-the kernel's Result type
-
-> +    util::wait_on(Duration::from_secs(4), || {
-> +        // Check that FWSEC has lowered its protection level before read=
-ing the GFW_BOOT
-> +        // status.
-> +        let gfw_booted =3D regs::NV_PGC6_AON_SECURE_SCRATCH_GROUP_05_PRI=
-V_LEVEL_MASK::read(bar)
-> +            .read_protection_level0()
-> +            && regs::NV_PGC6_AON_SECURE_SCRATCH_GROUP_05_0_GFW_BOOT::rea=
-d(bar).completed();
-> +
-> +        if gfw_booted {
-> +            Some(())
-> +        } else {
-> +            // Avoid busy-looping.
-> +            // SAFETY: msleep should be safe to call with any parameter.
-> +            unsafe { bindings::msleep(1) };
-
-TBH - we should really add some safe bindings for sleeps instead of calling
-this unsafely, I'd be happy to review them if you do
-
-> +
-> +            None
-> +        }
-> +    })
+> +pub(crate) struct DmaObject {
+> +    dma: CoherentAllocation<u8>,
 > +}
-> diff --git a/drivers/gpu/nova-core/gpu.rs b/drivers/gpu/nova-core/gpu.rs
-> index 99c6796e73e924cb5fd2b6f49d84589c1ce5f627..50417f608dc7b445958ae4344=
-4a13c7593204fcf 100644
-> --- a/drivers/gpu/nova-core/gpu.rs
-> +++ b/drivers/gpu/nova-core/gpu.rs
-> @@ -4,6 +4,7 @@
-> =20
->  use crate::driver::Bar0;
->  use crate::firmware::{Firmware, FIRMWARE_VERSION};
-> +use crate::gfw;
->  use crate::regs;
->  use crate::util;
->  use core::fmt;
-> @@ -182,6 +183,10 @@ pub(crate) fn new(
->              spec.revision
->          );
-> =20
-> +        // We must wait for GFW_BOOT completion before doing any signifi=
-cant setup on the GPU.
-> +        gfw::wait_gfw_boot_completion(bar)
-> +            .inspect_err(|_| dev_err!(pdev.as_ref(), "GFW boot did not c=
-omplete"))?;
 > +
->          Ok(pin_init!(Self {
->              spec,
->              bar: devres_bar,
+> +impl DmaObject {
+> +    pub(crate) fn new(dev: &device::Device<device::Bound>, len: usize) -=
+> Result<Self> {
+> +        let len =3D core::alloc::Layout::from_size_align(len, PAGE_SIZE)
+> +            .map_err(|_| EINVAL)?
+> +            .pad_to_align()
+> +            .size();
+> +        let dma =3D CoherentAllocation::alloc_coherent(dev, len, GFP_KER=
+NEL | __GFP_ZERO)?;
+> +
+> +        Ok(Self { dma })
+> +    }
+> +
+> +    pub(crate) fn from_data(dev: &device::Device<device::Bound>, data: &=
+[u8]) -> Result<Self> {
+> +        Self::new(dev, data.len()).map(|mut dma_obj| {
+> +            // TODO: replace with `CoherentAllocation::write()` once ava=
+ilable.
+> +            // SAFETY:
+> +            // - `dma_obj`'s size is at least `data.len()`.
+> +            // - We have just created this object and there is no other =
+user at this stage.
+> +            unsafe {
+> +                core::ptr::copy_nonoverlapping(
+> +                    data.as_ptr(),
+> +                    dma_obj.dma.start_ptr_mut(),
+> +                    data.len(),
+> +                );
+> +            }
+> +
+> +            dma_obj
+> +        })
+> +    }
+> +}
+> +
+> +impl Deref for DmaObject {
+> +    type Target =3D CoherentAllocation<u8>;
+> +
+> +    fn deref(&self) -> &Self::Target {
+> +        &self.dma
+> +    }
+> +}
+> +
+> +impl DerefMut for DmaObject {
+> +    fn deref_mut(&mut self) -> &mut Self::Target {
+> +        &mut self.dma
+> +    }
+> +}
 > diff --git a/drivers/gpu/nova-core/nova_core.rs b/drivers/gpu/nova-core/n=
 ova_core.rs
-> index 618632f0abcc8f5ef6945a04fc084acc4ecbf20b..c3fde3e132ea658888851137a=
-b47fcb7b3637577 100644
+> index c3fde3e132ea658888851137ab47fcb7b3637577..121fe5c11044a192212d0a643=
+53b7acad58c796a 100644
 > --- a/drivers/gpu/nova-core/nova_core.rs
 > +++ b/drivers/gpu/nova-core/nova_core.rs
-> @@ -4,6 +4,7 @@
+> @@ -2,6 +2,7 @@
 > =20
+>  //! Nova Core GPU Driver
+> =20
+> +mod dma;
 >  mod driver;
 >  mod firmware;
-> +mod gfw;
->  mod gpu;
->  mod regs;
->  mod util;
-> diff --git a/drivers/gpu/nova-core/regs.rs b/drivers/gpu/nova-core/regs.r=
-s
-> index 5a12732303066f78b8ec5745096cef632ff3bfba..cba442da51181971f209b3382=
-49307c11ac481e3 100644
-> --- a/drivers/gpu/nova-core/regs.rs
-> +++ b/drivers/gpu/nova-core/regs.rs
-> @@ -37,3 +37,28 @@ pub(crate) fn chipset(self) -> Result<Chipset> {
->              .and_then(Chipset::try_from)
->      }
->  }
-> +
-> +/* PGC6 */
-> +
-> +register!(NV_PGC6_AON_SECURE_SCRATCH_GROUP_05_PRIV_LEVEL_MASK @ 0x001181=
-28 {
-> +    0:0     read_protection_level0 as bool, "Set after FWSEC lowers its =
-protection level";
-> +});
-> +
-> +// TODO: This is an array of registers.
-> +register!(NV_PGC6_AON_SECURE_SCRATCH_GROUP_05 @ 0x00118234 {
-> +    31:0    value as u32;
-> +});
-> +
-> +register!(
-> +    NV_PGC6_AON_SECURE_SCRATCH_GROUP_05_0_GFW_BOOT =3D> NV_PGC6_AON_SECU=
-RE_SCRATCH_GROUP_05,
-> +    "Scratch group 05 register 0 used as GFW boot progress indicator" {
-> +        7:0    progress as u8, "Progress of GFW boot (0xff means complet=
-ed)";
-> +    }
-> +);
-> +
-> +impl NV_PGC6_AON_SECURE_SCRATCH_GROUP_05_0_GFW_BOOT {
-> +    /// Returns `true` if GFW boot is completed.
-> +    pub(crate) fn completed(self) -> bool {
-> +        self.progress() =3D=3D 0xff
-> +    }
-> +}
-> diff --git a/drivers/gpu/nova-core/util.rs b/drivers/gpu/nova-core/util.r=
-s
-> index afb525228431a2645afe7bb34988e9537757b1d7..81fcfff1f6f437d2f6a2130ce=
-2249fbf4c1501be 100644
-> --- a/drivers/gpu/nova-core/util.rs
-> +++ b/drivers/gpu/nova-core/util.rs
-> @@ -34,7 +34,6 @@ pub(crate) const fn const_bytes_to_str(bytes: &[u8]) ->=
- &str {
->  ///
->  /// TODO: replace with `read_poll_timeout` once it is available.
->  /// (https://lore.kernel.org/lkml/20250220070611.214262-8-fujita.tomonor=
-i@gmail.com/)
-> -#[expect(dead_code)]
->  pub(crate) fn wait_on<R, F: Fn() -> Option<R>>(timeout: Duration, cond: =
-F) -> Result<R> {
->      let start_time =3D Ktime::ktime_get();
-> =20
+>  mod gfw;
 >=20
 
 --=20
