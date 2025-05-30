@@ -2,101 +2,105 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id 2DD24AC97AF
-	for <lists+nouveau@lfdr.de>; Sat, 31 May 2025 00:23:49 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 6CD29AC97BD
+	for <lists+nouveau@lfdr.de>; Sat, 31 May 2025 00:32:37 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id CED3910E8A4;
-	Fri, 30 May 2025 22:23:47 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id CDEC910E8A6;
+	Fri, 30 May 2025 22:32:35 +0000 (UTC)
 Authentication-Results: gabe.freedesktop.org;
-	dkim=pass (1024-bit key; unprotected) header.d=redhat.com header.i=@redhat.com header.b="G8jOqSVk";
+	dkim=pass (1024-bit key; unprotected) header.d=redhat.com header.i=@redhat.com header.b="RLt5jZxc";
 	dkim-atps=neutral
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
 Received: from us-smtp-delivery-124.mimecast.com
  (us-smtp-delivery-124.mimecast.com [170.10.129.124])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 05E2510E8A4
- for <nouveau@lists.freedesktop.org>; Fri, 30 May 2025 22:23:45 +0000 (UTC)
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 369E310E8A6
+ for <nouveau@lists.freedesktop.org>; Fri, 30 May 2025 22:32:34 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1748643825;
+ s=mimecast20190719; t=1748644353;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:content-type:content-type:
  content-transfer-encoding:content-transfer-encoding:
  in-reply-to:in-reply-to:references:references;
- bh=zaWVb+KpdKppl9N7uVu+FwFkO0n8Zt18ZjjwwoKfzpg=;
- b=G8jOqSVkG1fltd5WtTHNjk56I9wJQc/ZxPQj8zYw5K80SwaHY8zgw7FhOBbbFoiZeQRGMv
- 5bSFq8bKYFHsFkq3KfkUXxMpJDlIxZ7K1fD5Hn0M54xA3+mihB683qqnTvxbPFivmCFo2O
- vGgRQ1cvwc+2IedHyuzAnVZ7ZfAo5ns=
-Received: from mail-qt1-f200.google.com (mail-qt1-f200.google.com
- [209.85.160.200]) by relay.mimecast.com with ESMTP with STARTTLS
+ bh=8MRtToITlyH2bIgMue+q5UhUvYDiRYZ9w1o+fDxnL+M=;
+ b=RLt5jZxc91Wu0Z6iOb7rHLxPnSciLFIY4y/h1Wd/9zhCIE7c0U7wOdZ66fCwVRrOts64sw
+ a0GIiM5jACTGDhMcAllytFxwfyLYYLv6fOf+kk4iivpSEp8+HgpJPsMJCOleIpuhsNNka6
+ eRfjOWb5C3D4sZKjurfXfV4chI6KoW8=
+Received: from mail-qv1-f69.google.com (mail-qv1-f69.google.com
+ [209.85.219.69]) by relay.mimecast.com with ESMTP with STARTTLS
  (version=TLSv1.3, cipher=TLS_AES_256_GCM_SHA384) id
- us-mta-465-ITD2n_0gM6yC0Vs3APAOPQ-1; Fri, 30 May 2025 18:23:44 -0400
-X-MC-Unique: ITD2n_0gM6yC0Vs3APAOPQ-1
-X-Mimecast-MFC-AGG-ID: ITD2n_0gM6yC0Vs3APAOPQ_1748643823
-Received: by mail-qt1-f200.google.com with SMTP id
- d75a77b69052e-4a4369e7413so42503731cf.1
- for <nouveau@lists.freedesktop.org>; Fri, 30 May 2025 15:23:43 -0700 (PDT)
+ us-mta-205-KtTfx2EvOZKByKqBDZgfOw-1; Fri, 30 May 2025 18:32:32 -0400
+X-MC-Unique: KtTfx2EvOZKByKqBDZgfOw-1
+X-Mimecast-MFC-AGG-ID: KtTfx2EvOZKByKqBDZgfOw_1748644351
+Received: by mail-qv1-f69.google.com with SMTP id
+ 6a1803df08f44-6fad70ebdaaso5743086d6.1
+ for <nouveau@lists.freedesktop.org>; Fri, 30 May 2025 15:32:31 -0700 (PDT)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1748643823; x=1749248623;
+ d=1e100.net; s=20230601; t=1748644351; x=1749249151;
  h=mime-version:user-agent:content-transfer-encoding:organization
  :references:in-reply-to:date:cc:to:from:subject:message-id
  :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=zaWVb+KpdKppl9N7uVu+FwFkO0n8Zt18ZjjwwoKfzpg=;
- b=m8UKGyPhgofw4m4jsA7qjhGxefcxKIykN43yTRVD+f1LQuLH034bXVr8WsiWP0x3eI
- 2lw8ABOaY01hDElETBDrhKUbeghD1IDaA1HJ5aFFnbFp6xzDBgomXF6VTblcfMC7HsCe
- Lhvq82iY8Ii89SHWmpOlQQBforjARHzbGGqgxTbgOe15RE7qaHOms7DqE4hzfCPK25cD
- WKdtIaXmYpu2Z9NmD9jJKh3CEGHj7SWH5ywJi5Dk5MHLlcCM3CkToKFhkG4Qw/TVleVT
- Fs5KOTengiDw6jcP9sjV6rKWJVPiPWy9hQ0fDxmnTFNc1fGYga7Ae/hmazsLICjgE+op
- TuFw==
+ bh=oQ5ktjRskjIoP2atgwAZFrfRox55TroWj/kC5P9lWhE=;
+ b=jfk/FyfQYHY4sZ5fdOkPxEVNs8Fw6l+ht2QPiwbINiBXb8pcGu2xBFIsWfwnsKN1/6
+ Xnt9yqELQxsBHrCBhHborrx+NkwXmEIfx6UqDaWwD3GfO79daitGjHZ2M8RBfXHUneBO
+ R6esSIABkipOzXaYMAVIWEJTEFAmYDLqVdlSwGKpPnGOv0/1Ti6h3nvMKnnC6xTh4Z7W
+ UNQSRTsH2MEvw3ns3RqqVZ2ZPWXMIeHg2jlzD0KT0V+pezGtBAi6UR99VDyNI3HW9OtR
+ jW8U66kNBsK2V75XzOzOwQ5GMkMk14G51QDd0unvV6/sCUI8oNQWKCyE0tctoYkM1enx
+ 5JPw==
 X-Forwarded-Encrypted: i=1;
- AJvYcCUsrvhQ4VRnJsLTwidd4aFgqSiiOK9J7ICAEkj74V8bGTd4rvQmxXianF3vCrFW/hkm0ZJZcKw4@lists.freedesktop.org
-X-Gm-Message-State: AOJu0YxyQ4x6RIg7KtXCsoVR8Oac21KU3GTz4K/bnqVv510hc+m9NMGh
- AqbUh15IBBwHxPtTO4CXbFFFWepjMiB9tfMr2HQPrvOsRKDdt/UqjhU7beJmHtbdEDQfF13dp7U
- RqZhOYtUGPK83QQtELkwd4K5NQU/3i49FjZWBUKWlvqQzyBz+UdQ4+T/7XCuGFBDGXQI=
-X-Gm-Gg: ASbGncvZX4LabTjds1taUQuIDhx3Y+eBTfs8o8QKsTJHRLYz6BjDu4DsSciLyrbkihM
- sl0nWH7/PMBVPX5jdlq2AfJPB/2KJUOG5PGBE0ah24uPeYPF1KVqP/XWMncnP2EVkyYpE8uyQCg
- tfc+tLKhrlD0pJcT33VVgJvf4pE+S+coDLB9vWGrmkanAoSvBcZIhLGpESBHkFtW4O54KKLFFy3
- qXw7HM3u4tDdOsMH2w1qGnpv0B2rhpEuF3EseA4phkdp7PfDZO/OMi8dBtt2/gIlCT9fOLczpGQ
- /kiMpGbpHuRfNGFQDw==
-X-Received: by 2002:a05:622a:4a09:b0:494:784a:ee41 with SMTP id
- d75a77b69052e-4a4400ae19fmr85133961cf.42.1748643823463; 
- Fri, 30 May 2025 15:23:43 -0700 (PDT)
-X-Google-Smtp-Source: AGHT+IGrbxVg/9Jfg+SCTwpmYmFdAZq/xoLP+nXywKG1JA9b+fkuxrfMqVax4gObjMkfb7a7hDlaVQ==
-X-Received: by 2002:a05:622a:4a09:b0:494:784a:ee41 with SMTP id
- d75a77b69052e-4a4400ae19fmr85133631cf.42.1748643823172; 
- Fri, 30 May 2025 15:23:43 -0700 (PDT)
+ AJvYcCVo7H28Fjo3B/b80U9JhLU4ZWbTAx39LSPi2MfywW0eOq3Bv5MBErpVZmZ8OIa2gu3O9B9aE0SL@lists.freedesktop.org
+X-Gm-Message-State: AOJu0YxoTL2Dq1+wXBSd+QygjcSX4DFlCWU3tUHl1tGgWOjWG4qKgVDl
+ gmAgnfoD72H45jm8GOLsMpMWkNq73aaz4RHBsMQyE4jSzHhH9V2kwiS+nSmo1hYvEdR8Lba5vqT
+ GJuxnmW0aPcFKfWCbBWFSiKMfKkv+QeCNWIrzOu+8XhD3lgztb2d3fDVxyYEuShGYLXY=
+X-Gm-Gg: ASbGncuKAbYV43+23PLkYjiQDyMRQ4ECLcijEoP7A7bIiBwgvLVPv6PrguIxzTho5u5
+ QgdZtRdC0/dXslWwsS609wmanE49k1X2rXB825mraPCfevkbkaIKQPr5zYhmAxj0DAjAn2pk7aR
+ yAF0V/Z7g+pvSto3KF9yPcNil3/CsCmb6lhr8FzEpQqbR70MKmo2PtftTAw4N31lAbhLR7DXenc
+ u1vx5JHiTYFizw20kNg88BK1/a/VWtod+SJyhfhhjRdEvFG25L9ei371n0mkgBc4pByHFUPzWRp
+ /wr9fHO4f4NcZs+pqQ==
+X-Received: by 2002:a05:6214:dcd:b0:6fa:ba15:e8d with SMTP id
+ 6a1803df08f44-6fad15bb0dfmr58923556d6.0.1748644351460; 
+ Fri, 30 May 2025 15:32:31 -0700 (PDT)
+X-Google-Smtp-Source: AGHT+IH8azXHVQRwfAMupPFon03e7/0VwAsAhfb8yhS3lvEBc4pgyqq9bElTFHN1rRfsD3W6dfHhgw==
+X-Received: by 2002:a05:6214:dcd:b0:6fa:ba15:e8d with SMTP id
+ 6a1803df08f44-6fad15bb0dfmr58923096d6.0.1748644351035; 
+ Fri, 30 May 2025 15:32:31 -0700 (PDT)
 Received: from ?IPv6:2600:4040:5c4b:da00::bb3? ([2600:4040:5c4b:da00::bb3])
  by smtp.gmail.com with ESMTPSA id
- d75a77b69052e-4a43588a4a7sm26376411cf.17.2025.05.30.15.23.40
+ 6a1803df08f44-6fac6d4d0cesm30163306d6.35.2025.05.30.15.32.29
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 30 May 2025 15:23:41 -0700 (PDT)
-Message-ID: <58077926908a9e2bccc8c037fc65018fb12326fc.camel@redhat.com>
-Subject: Re: [PATCH v4 15/20] gpu: nova-core: firmware: add ucode descriptor
- used by FWSEC-FRTS
+ Fri, 30 May 2025 15:32:30 -0700 (PDT)
+Message-ID: <cf64174c8baf2fb48e13afc6e10fbd2bdda4dab2.camel@redhat.com>
+Subject: Re: [PATCH v4 20/20] gpu: nova-core: load and run FWSEC-FRTS
 From: Lyude Paul <lyude@redhat.com>
-To: Alexandre Courbot <acourbot@nvidia.com>, Miguel Ojeda
- <ojeda@kernel.org>,  Alex Gaynor <alex.gaynor@gmail.com>, Boqun Feng
- <boqun.feng@gmail.com>, Gary Guo <gary@garyguo.net>, 
- =?ISO-8859-1?Q?Bj=F6rn?= Roy Baron	 <bjorn3_gh@protonmail.com>, Benno
- Lossin <benno.lossin@proton.me>, Andreas Hindborg <a.hindborg@kernel.org>,
- Alice Ryhl <aliceryhl@google.com>, Trevor Gross <tmgross@umich.edu>, 
- Danilo Krummrich	 <dakr@kernel.org>, David Airlie <airlied@gmail.com>,
- Simona Vetter	 <simona@ffwll.ch>, Maarten Lankhorst
- <maarten.lankhorst@linux.intel.com>,  Maxime Ripard <mripard@kernel.org>,
- Thomas Zimmermann <tzimmermann@suse.de>
-Cc: John Hubbard <jhubbard@nvidia.com>, Ben Skeggs <bskeggs@nvidia.com>, 
- Joel Fernandes <joelagnelf@nvidia.com>, Timur Tabi <ttabi@nvidia.com>,
- Alistair Popple <apopple@nvidia.com>, 	linux-kernel@vger.kernel.org,
- rust-for-linux@vger.kernel.org, 	nouveau@lists.freedesktop.org,
- dri-devel@lists.freedesktop.org
-Date: Fri, 30 May 2025 18:23:39 -0400
-In-Reply-To: <20250521-nova-frts-v4-15-05dfd4f39479@nvidia.com>
+To: Timur Tabi <ttabi@nvidia.com>, "dakr@kernel.org" <dakr@kernel.org>, 
+ "a.hindborg@kernel.org"	 <a.hindborg@kernel.org>, "ojeda@kernel.org"
+ <ojeda@kernel.org>,  "boqun.feng@gmail.com"	 <boqun.feng@gmail.com>,
+ "simona@ffwll.ch" <simona@ffwll.ch>,  "tmgross@umich.edu"	
+ <tmgross@umich.edu>, "alex.gaynor@gmail.com" <alex.gaynor@gmail.com>, 
+ "tzimmermann@suse.de"	 <tzimmermann@suse.de>, "mripard@kernel.org"
+ <mripard@kernel.org>,  "maarten.lankhorst@linux.intel.com"	
+ <maarten.lankhorst@linux.intel.com>, "benno.lossin@proton.me"	
+ <benno.lossin@proton.me>, "bjorn3_gh@protonmail.com"
+ <bjorn3_gh@protonmail.com>,  "airlied@gmail.com"	 <airlied@gmail.com>,
+ "aliceryhl@google.com" <aliceryhl@google.com>,  Alexandre Courbot
+ <acourbot@nvidia.com>, "gary@garyguo.net" <gary@garyguo.net>
+Cc: Alistair Popple <apopple@nvidia.com>, John Hubbard
+ <jhubbard@nvidia.com>,  "rust-for-linux@vger.kernel.org"	
+ <rust-for-linux@vger.kernel.org>, "dri-devel@lists.freedesktop.org"	
+ <dri-devel@lists.freedesktop.org>, "nouveau@lists.freedesktop.org"	
+ <nouveau@lists.freedesktop.org>, "linux-kernel@vger.kernel.org"	
+ <linux-kernel@vger.kernel.org>, Joel Fernandes <joelagnelf@nvidia.com>, Ben
+ Skeggs <bskeggs@nvidia.com>
+Date: Fri, 30 May 2025 18:32:28 -0400
+In-Reply-To: <31707e2b49015e52f5b1fe185ea6791538c4034f.camel@nvidia.com>
 References: <20250521-nova-frts-v4-0-05dfd4f39479@nvidia.com>
- <20250521-nova-frts-v4-15-05dfd4f39479@nvidia.com>
+ <20250521-nova-frts-v4-20-05dfd4f39479@nvidia.com>
+ <31707e2b49015e52f5b1fe185ea6791538c4034f.camel@nvidia.com>
 Organization: Red Hat Inc.
 User-Agent: Evolution 3.54.3 (3.54.3-1.fc41)
 MIME-Version: 1.0
 X-Mimecast-Spam-Score: 0
-X-Mimecast-MFC-PROC-ID: rowQ33ZxKoK7XyHD1jeAaMV3dcGyhyfui0TyagymLzI_1748643823
+X-Mimecast-MFC-PROC-ID: TmNMaTBkomFakwcxkqfs2HAbP4rhNNX8yFhPO-mF3f0_1748644351
 X-Mimecast-Originator: redhat.com
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
@@ -114,17 +118,72 @@ List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-On Wed, 2025-05-21 at 15:45 +0900, Alexandre Courbot wrote:
-> +// To be removed once that code is used.
-> +#[expect(dead_code)]
+On Thu, 2025-05-29 at 21:30 +0000, Timur Tabi wrote:
+> On Wed, 2025-05-21 at 15:45 +0900, Alexandre Courbot wrote:
+>=20
+> I noticed something interesting in this change to Gpu::new().
+>=20
+> > +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 // Check that the WPR2 regi=
+on does not already exists - if it does, the GPU needs to be
+> > +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 // reset.
+> > +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 if regs::NV_PFB_PRI_MMU_WPR=
+2_ADDR_HI::read(bar).hi_val() !=3D 0 {
+> > +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 dev=
+_err!(
+> > +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=
+=A0=C2=A0=C2=A0=C2=A0 pdev.as_ref(),
+> > +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=
+=A0=C2=A0=C2=A0=C2=A0 "WPR2 region already exists - GPU needs to be reset t=
+o proceed\n"
+> > +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 );
+> > +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 ret=
+urn Err(EBUSY);
+> > +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 }
+>=20
+> You have a lot of checks in this code that display an error message and t=
+hen return an Err().
+>=20
+> But then ...
+>=20
+> > +
+> > +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 // Reset falcon, load FWSEC=
+-FRTS, and run it.
+> > +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 gsp_falcon.reset(bar)?;
+> > +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 gsp_falcon.dma_load(bar, &f=
+wsec_frts)?;
+> > +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 let (mbox0, _) =3D gsp_falc=
+on.boot(bar, Some(0), None)?;
+> > +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 if mbox0 !=3D 0 {
+> > +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 dev=
+_err!(pdev.as_ref(), "FWSEC firmware returned error {}\n", mbox0);
+> > +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 ret=
+urn Err(EINVAL);
+> > +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 }
+>=20
+> There are several lines where you just terminate them with "?".  This mea=
+ns that no error message is
+> displays.=20
+>=20
+> I think all of these ? should be replaced with something like:
+>=20
+> =09gsp_falcon.reset(bar).inspect_err(|e| {
+>             dev_err!(pdev.as_ref(), "Failed to reset GSP falcon: {:?}\n",=
+ e);
+>         })?;
+>=20
+> This feels like something that would benefit from a macro, but I can't im=
+agine what that would look
+> like.
 
-FWIW - I think most people will understand what the #[expect(dead_code)] bi=
-ts
-are for with or without the comment.
+Another option would be to just create our own error type that can be
+converted into the kernel's standard error type, and then just pass that ba=
+ck
+from this function so that we don't have to duplicate the error printing co=
+de
+all over.
 
-Regardless:
-
-Reviewed-by: Lyude Paul <lyude@redhat.com>
+>=20
+>=20
 
 --=20
 Cheers,
