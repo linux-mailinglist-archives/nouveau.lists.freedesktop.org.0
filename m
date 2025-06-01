@@ -2,64 +2,78 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id 39C1EAC9B62
-	for <lists+nouveau@lfdr.de>; Sat, 31 May 2025 16:37:34 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id EBEE6AC9F64
+	for <lists+nouveau@lfdr.de>; Sun,  1 Jun 2025 18:24:47 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 0D4EA10E00D;
-	Sat, 31 May 2025 14:37:32 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 0A5EC10E083;
+	Sun,  1 Jun 2025 16:24:46 +0000 (UTC)
 Authentication-Results: gabe.freedesktop.org;
-	dkim=pass (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="DSeMVG/F";
+	dkim=pass (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="BdDYm3ma";
 	dkim-atps=neutral
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from dfw.source.kernel.org (dfw.source.kernel.org [139.178.84.217])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 0D17010E00D;
- Sat, 31 May 2025 14:37:29 +0000 (UTC)
+Received: from tor.source.kernel.org (tor.source.kernel.org [172.105.4.254])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id C444010E044;
+ Sun,  1 Jun 2025 16:24:37 +0000 (UTC)
 Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by dfw.source.kernel.org (Postfix) with ESMTP id 56A345C49D5;
- Sat, 31 May 2025 14:35:04 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id AF4CFC4CEE3;
- Sat, 31 May 2025 14:37:15 +0000 (UTC)
+ by tor.source.kernel.org (Postfix) with ESMTP id A532261165;
+ Sun,  1 Jun 2025 16:24:31 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id E0113C4CEE7;
+ Sun,  1 Jun 2025 16:24:20 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1748702240;
- bh=fivt1Mk4Yw5WXYfrIwOJfSKG3z+m2LyIrjnukMMgFOg=;
- h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
- b=DSeMVG/Fbe4qRBejiZw0EyatWeyiWsE20b6NZA1wBfJWpepek0YCiHbxmDi/Mb0gA
- YvT1GDR0JgkrXPMEXnskuvgMpIxBIia/wv9AEZFvb8mJ9bKRGsuKfUfbHjQDaVTLqO
- tteVaN0kse0EAUXGjtVD3idwokMzsGoi9l23MVq/J8ZnRSxOgCM8pzbX9ZiroqYtAx
- tu+YSV3yG0bys0FsnbU5PPjpg1kkC4VGSF+612EPLKmNtGdAc49h5+AkeFtJUarRSk
- Vtm4GfcJfJkvP9fKwRXo1G2dwMCcQAmwalOWUIRRBZlHfqXr0aDbl+gmHjbCeJT7qF
- bimcc3X3iNdww==
-Date: Sat, 31 May 2025 16:37:12 +0200
-From: Danilo Krummrich <dakr@kernel.org>
-To: Miguel Ojeda <miguel.ojeda.sandonis@gmail.com>
-Cc: Lyude Paul <lyude@redhat.com>, Alexandre Courbot <acourbot@nvidia.com>,
- Miguel Ojeda <ojeda@kernel.org>, Alex Gaynor <alex.gaynor@gmail.com>,
- Boqun Feng <boqun.feng@gmail.com>, Gary Guo <gary@garyguo.net>,
- =?iso-8859-1?Q?Bj=F6rn?= Roy Baron <bjorn3_gh@protonmail.com>,
- Benno Lossin <benno.lossin@proton.me>,
- Andreas Hindborg <a.hindborg@kernel.org>,
- Alice Ryhl <aliceryhl@google.com>, Trevor Gross <tmgross@umich.edu>,
- David Airlie <airlied@gmail.com>, Simona Vetter <simona@ffwll.ch>,
- Maarten Lankhorst <maarten.lankhorst@linux.intel.com>,
- Maxime Ripard <mripard@kernel.org>,
- Thomas Zimmermann <tzimmermann@suse.de>,
- John Hubbard <jhubbard@nvidia.com>, Ben Skeggs <bskeggs@nvidia.com>,
- Joel Fernandes <joelagnelf@nvidia.com>,
- Timur Tabi <ttabi@nvidia.com>, Alistair Popple <apopple@nvidia.com>,
- linux-kernel@vger.kernel.org, rust-for-linux@vger.kernel.org,
- nouveau@lists.freedesktop.org, dri-devel@lists.freedesktop.org
-Subject: Re: [PATCH v4 11/20] gpu: nova-core: wait for GFW_BOOT completion
-Message-ID: <aDsUGGrjbJ_8KyrP@pollux>
-References: <20250521-nova-frts-v4-0-05dfd4f39479@nvidia.com>
- <20250521-nova-frts-v4-11-05dfd4f39479@nvidia.com>
- <adbf5fa1104978df76ae40705e5df13dfbe59bb8.camel@redhat.com>
- <CANiq72n42hbKPmED4PnzCADsy8iM-i0R2dizypTd_Vui5GctJg@mail.gmail.com>
-MIME-Version: 1.0
-Content-Type: text/plain; charset=utf-8
-Content-Disposition: inline
-Content-Transfer-Encoding: 8bit
-In-Reply-To: <CANiq72n42hbKPmED4PnzCADsy8iM-i0R2dizypTd_Vui5GctJg@mail.gmail.com>
+ s=k20201202; t=1748795071;
+ bh=PMAkhQy/Nj8Qt7aS/e+j9Xv4t7buO1RGFex1w+i2gQo=;
+ h=Date:Cc:Subject:From:To:References:In-Reply-To:From;
+ b=BdDYm3makofis/Ax9rM0GzHSjQ+tNLU+f0PbFUOY9BF9dLvdOuyAKODKHjXLDjvbP
+ 5lIXeyJX1Xl+VIqXf9pDgFbbwa+bXMlhD/l8wRETbbNVaTT0/++1IFmhMG/96JI24o
+ cNiilVHw+p2wn++Q3SnqEDr8/FVMKw5nODG2riXGlUux6OwYxsqNRKvlhJsCDxkYzF
+ ssijqz3/s6CQP9JL+AzW9YgvNLlsseQ8OJKw+7qVKg+DVx3cTb2bFgptyZfSejssMM
+ uW5xwVxTdstNKC4LvO4wJIsDsux0vx/2U2FLofXrHXcGfGKkW/IeXYjmdwSCap6h7B
+ mPzWDuxHoh+Qw==
+Mime-Version: 1.0
+Content-Transfer-Encoding: quoted-printable
+Content-Type: text/plain; charset=UTF-8
+Date: Sun, 01 Jun 2025 18:24:19 +0200
+Message-Id: <DABC3ZAQ01GG.1VT5NL7PIMTEO@kernel.org>
+Cc: <rust-for-linux@vger.kernel.org>, <linux-kernel@vger.kernel.org>,
+ <linux-kselftest@vger.kernel.org>, <kunit-dev@googlegroups.com>,
+ <dri-devel@lists.freedesktop.org>, <netdev@vger.kernel.org>,
+ <devicetree@vger.kernel.org>, <llvm@lists.linux.dev>,
+ <linux-pci@vger.kernel.org>, <nouveau@lists.freedesktop.org>,
+ <linux-block@vger.kernel.org>
+Subject: Re: [PATCH v11 1/5] rust: macros: reduce collections in `quote!` macro
+From: "Benno Lossin" <lossin@kernel.org>
+To: "Tamir Duberstein" <tamird@gmail.com>, "Michal Rostecki"
+ <vadorovsky@protonmail.com>, "Miguel Ojeda" <ojeda@kernel.org>, "Alex
+ Gaynor" <alex.gaynor@gmail.com>, "Boqun Feng" <boqun.feng@gmail.com>, "Gary
+ Guo" <gary@garyguo.net>, =?utf-8?q?Bj=C3=B6rn_Roy_Baron?=
+ <bjorn3_gh@protonmail.com>, "Andreas Hindborg" <a.hindborg@kernel.org>,
+ "Alice Ryhl" <aliceryhl@google.com>, "Trevor Gross" <tmgross@umich.edu>,
+ "Brendan Higgins" <brendan.higgins@linux.dev>, "David Gow"
+ <davidgow@google.com>, "Rae Moar" <rmoar@google.com>, "Danilo Krummrich"
+ <dakr@kernel.org>, "Maarten Lankhorst" <maarten.lankhorst@linux.intel.com>,
+ "Maxime Ripard" <mripard@kernel.org>, "Thomas Zimmermann"
+ <tzimmermann@suse.de>, "David Airlie" <airlied@gmail.com>, "Simona Vetter"
+ <simona@ffwll.ch>, "Greg Kroah-Hartman" <gregkh@linuxfoundation.org>,
+ "Rafael J. Wysocki" <rafael@kernel.org>, "Luis Chamberlain"
+ <mcgrof@kernel.org>, "Russ Weight" <russ.weight@linux.dev>, "FUJITA
+ Tomonori" <fujita.tomonori@gmail.com>, "Rob Herring" <robh@kernel.org>,
+ "Saravana Kannan" <saravanak@google.com>, "Peter Zijlstra"
+ <peterz@infradead.org>, "Ingo Molnar" <mingo@redhat.com>, "Will Deacon"
+ <will@kernel.org>, "Waiman Long" <longman@redhat.com>, "Nathan Chancellor"
+ <nathan@kernel.org>, "Nick Desaulniers" <nick.desaulniers+lkml@gmail.com>,
+ "Bill Wendling" <morbo@google.com>, "Justin Stitt"
+ <justinstitt@google.com>, "Andrew Lunn" <andrew@lunn.ch>, "Heiner Kallweit"
+ <hkallweit1@gmail.com>, "Russell King" <linux@armlinux.org.uk>, "David S.
+ Miller" <davem@davemloft.net>, "Eric Dumazet" <edumazet@google.com>, "Jakub
+ Kicinski" <kuba@kernel.org>, "Paolo Abeni" <pabeni@redhat.com>, "Bjorn
+ Helgaas" <bhelgaas@google.com>, "Arnd Bergmann" <arnd@arndb.de>, "Jens
+ Axboe" <axboe@kernel.dk>, =?utf-8?q?Krzysztof_Wilczy=C5=84ski?=
+ <kwilczynski@kernel.org>
+X-Mailer: aerc 0.20.1
+References: <20250530-cstr-core-v11-0-cd9c0cbcb902@gmail.com>
+ <20250530-cstr-core-v11-1-cd9c0cbcb902@gmail.com>
+In-Reply-To: <20250530-cstr-core-v11-1-cd9c0cbcb902@gmail.com>
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -74,23 +88,23 @@ List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-On Sat, May 31, 2025 at 04:09:29PM +0200, Miguel Ojeda wrote:
-> On Fri, May 30, 2025 at 11:51 PM Lyude Paul <lyude@redhat.com> wrote:
-> > TBH - we should really add some safe bindings for sleeps instead of calling
-> > this unsafely, I'd be happy to review them if you do
-> 
-> In case it helps, there is:
-> 
->     https://lore.kernel.org/rust-for-linux/20250423192857.199712-6-fujita.tomonori@gmail.com/
-> 
-> I think that is the last one -- we have been going back and forth a
-> bit on it (e.g. we had `coarse_sleep()` in the old `rust` pre-merge
-> branch), but, yeah, let's try to get the abstraction(s) in.
+On Fri May 30, 2025 at 2:27 PM CEST, Tamir Duberstein wrote:
+> Remove a handful of unncessary intermediate vectors and token streams;
+> mainly the top-level stream can be directly extended with the notable
+> exception of groups.
 
-We've already discussed this on previous versions of this patch series, where I
-also pointed to the patch series linked above.
+What's the motivation for this? I wouldn't spend much effort on this
+file, as it'll go away when we add the `quote` crate.
 
-I agreed to take this code without waiting for those abstractions, but with a
-TODO to fix things up once they land.
+---
+Cheers,
+Benno
 
-- Danilo
+> Remove an unnecessary `#[allow(dead_code)]` added in commit dbd5058ba60c
+> ("rust: make pin-init its own crate").
+>
+> Signed-off-by: Tamir Duberstein <tamird@gmail.com>
+> ---
+>  rust/macros/quote.rs | 104 ++++++++++++++++++++++++---------------------=
+------
+>  1 file changed, 49 insertions(+), 55 deletions(-)
