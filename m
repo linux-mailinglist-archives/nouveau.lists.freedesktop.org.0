@@ -2,39 +2,38 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id E3551ACAB87
-	for <lists+nouveau@lfdr.de>; Mon,  2 Jun 2025 11:39:51 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id A9108ACACFC
+	for <lists+nouveau@lfdr.de>; Mon,  2 Jun 2025 13:10:00 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 9568310E4D8;
-	Mon,  2 Jun 2025 09:39:49 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 5CBFD10E2FC;
+	Mon,  2 Jun 2025 11:09:59 +0000 (UTC)
 Authentication-Results: gabe.freedesktop.org;
-	dkim=pass (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="ODV/5L/u";
+	dkim=pass (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="Evq5kpWg";
 	dkim-atps=neutral
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
 Received: from nyc.source.kernel.org (nyc.source.kernel.org [147.75.193.91])
- by gabe.freedesktop.org (Postfix) with ESMTPS id DCD4710E4D8;
- Mon,  2 Jun 2025 09:39:43 +0000 (UTC)
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 2F75610E2FC;
+ Mon,  2 Jun 2025 11:09:58 +0000 (UTC)
 Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by nyc.source.kernel.org (Postfix) with ESMTP id 4E65AA4FF0D;
- Mon,  2 Jun 2025 09:39:42 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 11A7BC4CEEB;
- Mon,  2 Jun 2025 09:39:36 +0000 (UTC)
+ by nyc.source.kernel.org (Postfix) with ESMTP id 8DB90A4FF8D;
+ Mon,  2 Jun 2025 11:09:55 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 527A8C4CEEB;
+ Mon,  2 Jun 2025 11:09:50 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1748857182;
- bh=EpczvPljsIHCCSerQ8PlUVESAr97xCCeUPVmwWEVuko=;
+ s=k20201202; t=1748862595;
+ bh=a7I7HJvFQ9VEde/6Ve3ViLZ6lotsk0Tp4rZAPkF0fNg=;
  h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
- b=ODV/5L/uN51j4TwraKZ3BycfSVRlESswLej+FDW09tuaWtYSdO6nPVR1qDSq0BnVj
- m/zXMgoP3AvYZabDO/9Yzp75n+qMBFO8JjLT8ZaMoLwTGZK2iZngAol/tbpaQZR2NK
- FlzG72XCHoT3DNr9I3f2g5rHrZUPxMBZQ0CFytRtiYBiNM1zhxKEgtYb64G7gL+XcB
- WPv+8YHjq3Qr2RyDfyBr3XZ4rvFCLIMju6+Red0wHTf/Cr5EPi7gx2FqlBASui+Mn3
- +k1lyYd9cBaod5t0GFMU19xY/qkf0zyla2RkR4EUpufwgn+mbEXCrJ7dtHTtuXNiXk
- I0GolDOu0P+7w==
-Date: Mon, 2 Jun 2025 11:39:34 +0200
+ b=Evq5kpWgyNewVa6YT61xGlwHz1Grol3+yKM9bYOYALw03KfYmvv7GSA1oSUXJS3eM
+ oFfmAhCaCJQSAvbnElZ8w2UM76LOBplvkfvTBfX/b2V44DIUArNvb5+Jl8nvZ+yJaY
+ aWD9hB2h7W6+K/LCrUzUX5MjTuXVcYlLd9G+inj6nIjcK5hlHyZdpXxvi9qIq7oEq4
+ GsKZJfupAMWnZI3aGqbG2KWl2qv9BaAOt+YZsapTx6OCTxbY3DkfMh2TFq3ofNAFzx
+ g7Ja/ia+jkqK3Ai72I6OUUFZfIegyiPXOiIsZAp6xUpt2tZqeyrvCFq86R3BTb9Aig
+ l9GfmqD20qvow==
+Date: Mon, 2 Jun 2025 13:09:47 +0200
 From: Danilo Krummrich <dakr@kernel.org>
-To: Benno Lossin <lossin@kernel.org>
-Cc: Alexandre Courbot <acourbot@nvidia.com>, Miguel Ojeda <ojeda@kernel.org>,
- Alex Gaynor <alex.gaynor@gmail.com>,
+To: Lyude Paul <lyude@redhat.com>, Alexandre Courbot <acourbot@nvidia.com>
+Cc: Miguel Ojeda <ojeda@kernel.org>, Alex Gaynor <alex.gaynor@gmail.com>,
  Boqun Feng <boqun.feng@gmail.com>, Gary Guo <gary@garyguo.net>,
  =?iso-8859-1?Q?Bj=F6rn?= Roy Baron <bjorn3_gh@protonmail.com>,
  Benno Lossin <benno.lossin@proton.me>,
@@ -49,18 +48,15 @@ Cc: Alexandre Courbot <acourbot@nvidia.com>, Miguel Ojeda <ojeda@kernel.org>,
  Timur Tabi <ttabi@nvidia.com>, Alistair Popple <apopple@nvidia.com>,
  linux-kernel@vger.kernel.org, rust-for-linux@vger.kernel.org,
  nouveau@lists.freedesktop.org, dri-devel@lists.freedesktop.org
-Subject: Re: [PATCH v4 04/20] rust: add new `num` module with useful integer
- operations
-Message-ID: <aD1xVkggDrCvA7ve@pollux>
+Subject: Re: [PATCH v4 13/20] gpu: nova-core: register sysmem flush page
+Message-ID: <aD2Ge8RM1uTT726z@pollux>
 References: <20250521-nova-frts-v4-0-05dfd4f39479@nvidia.com>
- <20250521-nova-frts-v4-4-05dfd4f39479@nvidia.com>
- <DA82KFLNAOG7.R7YT4BHCLNZQ@kernel.org>
- <DA88YHU4AZT7.B8JGZHW9P9L9@nvidia.com>
- <DA8GTD7LT7KO.1A3LBQGEQTCEW@kernel.org>
+ <20250521-nova-frts-v4-13-05dfd4f39479@nvidia.com>
+ <44f13ec88af918893e2a4b7050dce9ac184e3b75.camel@redhat.com>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
-In-Reply-To: <DA8GTD7LT7KO.1A3LBQGEQTCEW@kernel.org>
+In-Reply-To: <44f13ec88af918893e2a4b7050dce9ac184e3b75.camel@redhat.com>
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -75,16 +71,101 @@ List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-On Thu, May 29, 2025 at 09:27:33AM +0200, Benno Lossin wrote:
-> That's also fair, but we lose the constness of `next_multiple_of`, so
-> you can't use `align_up` in a const function. That might confuse people
-> and then they write their own const helper function... I'd prefer we use
-> all functions that are available in the stdlib.
+On Fri, May 30, 2025 at 05:57:44PM -0400, Lyude Paul wrote:
+> On Wed, 2025-05-21 at 15:45 +0900, Alexandre Courbot wrote:
+> > Reserve a page of system memory so sysmembar can perform a read on it if
+> > a system write occurred since the last flush. Do this early as it can be
+> > required to e.g. reset the GPU falcons.
+> > 
+> > Signed-off-by: Alexandre Courbot <acourbot@nvidia.com>
+> > ---
+> >  drivers/gpu/nova-core/gpu.rs  | 45 +++++++++++++++++++++++++++++++++++++++++--
+> >  drivers/gpu/nova-core/regs.rs | 10 ++++++++++
+> >  2 files changed, 53 insertions(+), 2 deletions(-)
+> > 
+> > diff --git a/drivers/gpu/nova-core/gpu.rs b/drivers/gpu/nova-core/gpu.rs
+> > index 50417f608dc7b445958ae43444a13c7593204fcf..a4e2cf1b529cc25fc168f68f9eaa6f4a7a9748eb 100644
+> > --- a/drivers/gpu/nova-core/gpu.rs
+> > +++ b/drivers/gpu/nova-core/gpu.rs
+> > @@ -2,6 +2,7 @@
+> >  
+> >  use kernel::{device, devres::Devres, error::code::*, pci, prelude::*};
+> >  
+> > +use crate::dma::DmaObject;
+> >  use crate::driver::Bar0;
+> >  use crate::firmware::{Firmware, FIRMWARE_VERSION};
+> >  use crate::gfw;
+> > @@ -158,12 +159,32 @@ fn new(bar: &Bar0) -> Result<Spec> {
+> >  }
+> >  
+> >  /// Structure holding the resources required to operate the GPU.
+> > -#[pin_data]
+> > +#[pin_data(PinnedDrop)]
+> >  pub(crate) struct Gpu {
+> >      spec: Spec,
+> >      /// MMIO mapping of PCI BAR 0
+> >      bar: Devres<Bar0>,
+> >      fw: Firmware,
+> > +    /// System memory page required for flushing all pending GPU-side memory writes done through
+> > +    /// PCIE into system memory.
+> > +    sysmem_flush: DmaObject,
+> > +}
+> > +
+> > +#[pinned_drop]
+> > +impl PinnedDrop for Gpu {
+> > +    fn drop(self: Pin<&mut Self>) {
+> > +        // Unregister the sysmem flush page before we release it.
+> > +        let _ = self.bar.try_access_with(|b| {
+> > +            regs::NV_PFB_NISO_FLUSH_SYSMEM_ADDR::default()
+> > +                .set_adr_39_08(0)
+> > +                .write(b);
+> > +            if self.spec.chipset >= Chipset::GA102 {
+> > +                regs::NV_PFB_NISO_FLUSH_SYSMEM_ADDR_HI::default()
+> > +                    .set_adr_63_40(0)
+> > +                    .write(b);
+> > +            }
+> > +        });
+> > +    }
 
-Considering that, what's the suggestion for this trait?
+Sorry that I haven't noticed this before -- I think this should be self
+contained in a new type (e.g. SysmemFlush).
 
-I don't think we should have a trait with align_down() and fls() only and
-otherwise use next_multiple_of(), i.e. mix things up.
+We should also move this kind of cleanup into the Driver::remove() callback,
+where we still have a bound device, to avoid try_access_with().
 
-I think we should either align with the Rust nomenclature - whatever this means
-for fls() - or implement the trait with all three methods.
+I already have this on my list to implement for quite a while, because I wasn't
+quite sure yet what's the best way to approach this, but I think the simple
+remove() callback to perform tear down operations on device resources is fine.
+
+I'll prepare the corresponding patches and subsequently rework those bits
+accordingly.
+
+> >  }
+> >  
+> >  impl Gpu {
+> > @@ -187,10 +208,30 @@ pub(crate) fn new(
+> >          gfw::wait_gfw_boot_completion(bar)
+> >              .inspect_err(|_| dev_err!(pdev.as_ref(), "GFW boot did not complete"))?;
+> >  
+> > +        // System memory page required for sysmembar to properly flush into system memory.
+> > +        let sysmem_flush = {
+> > +            let page = DmaObject::new(pdev.as_ref(), kernel::bindings::PAGE_SIZE)?;
+> > +
+> > +            // Register the sysmem flush page.
+> > +            let handle = page.dma_handle();
+> > +
+> > +            regs::NV_PFB_NISO_FLUSH_SYSMEM_ADDR::default()
+> > +                .set_adr_39_08((handle >> 8) as u32)
+> > +                .write(bar);
+> > +            if spec.chipset >= Chipset::GA102 {
+> > +                regs::NV_PFB_NISO_FLUSH_SYSMEM_ADDR_HI::default()
+> > +                    .set_adr_63_40((handle >> 40) as u32)
+> > +                    .write(bar);
+> > +            }
+> > +
+> 
+> Small nit - would it make sense for us to just add a function for initiating a
+> sysmem memory flush that you could pass the bar to? Seems like it might be a
+> bit less error prone if we end up having to do this elsewhere
+
+Agreed -- but let's solve this with a new type and make it a method instead.
