@@ -2,103 +2,62 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id 205BDACAACC
-	for <lists+nouveau@lfdr.de>; Mon,  2 Jun 2025 10:46:32 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id BBDFDACAB51
+	for <lists+nouveau@lfdr.de>; Mon,  2 Jun 2025 11:25:07 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id C8C1410E4BC;
-	Mon,  2 Jun 2025 08:46:30 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id C5CD610E249;
+	Mon,  2 Jun 2025 09:25:02 +0000 (UTC)
 Authentication-Results: gabe.freedesktop.org;
-	dkim=pass (2048-bit key; unprotected) header.d=google.com header.i=@google.com header.b="D4c2/cNz";
+	dkim=pass (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="EWFJ9l0X";
 	dkim-atps=neutral
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from mail-wm1-f74.google.com (mail-wm1-f74.google.com
- [209.85.128.74])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 181BB10E4BC
- for <nouveau@lists.freedesktop.org>; Mon,  2 Jun 2025 08:46:30 +0000 (UTC)
-Received: by mail-wm1-f74.google.com with SMTP id
- 5b1f17b1804b1-450dada0f83so18544495e9.0
- for <nouveau@lists.freedesktop.org>; Mon, 02 Jun 2025 01:46:30 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=google.com; s=20230601; t=1748853988; x=1749458788;
- darn=lists.freedesktop.org; 
- h=cc:to:from:subject:message-id:references:mime-version:in-reply-to
- :date:from:to:cc:subject:date:message-id:reply-to;
- bh=ktsVoxepsNTrdCKxowANypGkEb6jHKbHJKn1XhGy1Uw=;
- b=D4c2/cNzj+XvW0GUCMXR+gW/gWKxBEc1hodd5ZC+5dYg8PN2xcU7sDRmUjH+f7g2Pe
- uM02+YrBXwk2SJUfadN5DfB20LlwfWENrMMHLgTRrWrlQYvnPkXaeS1cK/DgwxAfTyls
- /l2Hbi1Co/fv0aV/FuCoWEDQOShD+ZJhJLJmMIQ/HsnQ3g+c8hPScpjroLwCfa8lKg3b
- 5sVumPx2EedS9f8SkvqOPBjqQQV/gKmZFTYFCm8+ZQqnVmxCVrm+Y9VO9qHvq1HPp9Uf
- WDXZLPNa4FQsYDZyg8lFAwpkUGF3JcNJ6QyTvybLbf4Bu2buNhVnRZgG61QVMPoFD3IQ
- DOfA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1748853988; x=1749458788;
- h=cc:to:from:subject:message-id:references:mime-version:in-reply-to
- :date:x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=ktsVoxepsNTrdCKxowANypGkEb6jHKbHJKn1XhGy1Uw=;
- b=uDbCr5rj3DUtBar/7WcjV4HHzVE3Dd4NJiCIwvKHg7urQBVuT7aI8qEAFcIC5f+ruU
- 5lXvRVQ3RuXvhY7Bt6soq7AS3bffLiBUDYRLUcFv3RQF2jTLkWzfAqShZi4e/qo/rxz4
- F7uT6HNs715wlhUdkTxXrs0tf9XQAwoEaLPVDIsyEsGC3Ze2HgvzhDcCZPtNQumU/LEm
- WOVe8zApKXcZU3N/nFNgaeNHuZG5Ct19g029bbkKSiSVb9GSihmlC2QMIndsSHo0lytx
- qHF1n+5eWNdxLd1ZC6e2jFDTDTa/CdlrlJSM0nT89URtbakd3zMFXLrVQaAgFh5uOLzp
- bQsw==
-X-Forwarded-Encrypted: i=1;
- AJvYcCW6olmGR9OydacCwop1i7jde5hmFfXFunzTjkJCvRk6F1Q2WA9K5Cm+f8Rz7At/nzZBa2w+s1RP@lists.freedesktop.org
-X-Gm-Message-State: AOJu0YzoWXjqM8to7CKmnB+ekylJnGiY+hIHf9tKKysvXv2E7+8DweZN
- iddrgyu+lVkhDanU+jfiT+h0RFUtSFD2fZIwaRP6mjB5dGmACyzsiTBsbuC/LUzCwzltRBLiyT2
- abOVqXfDX/m3RwdjDmQ==
-X-Google-Smtp-Source: AGHT+IEN8wW1H0RTzFbTdIlqYAJYXEVRMaA4cvq7c8CG74BNxW0QzTAmaWpfyWc/gO5HljzZUpfF3+rdjR1DcgY=
-X-Received: from wmbhc27.prod.google.com
- ([2002:a05:600c:871b:b0:450:d422:69f9])
- (user=aliceryhl job=prod-delivery.src-stubby-dispatcher) by
- 2002:a05:600c:4ec9:b0:442:ccfa:fa with SMTP id
- 5b1f17b1804b1-45121fb9373mr61377385e9.27.1748853988668; 
- Mon, 02 Jun 2025 01:46:28 -0700 (PDT)
-Date: Mon, 2 Jun 2025 08:46:26 +0000
-In-Reply-To: <20250530-cstr-core-v11-3-cd9c0cbcb902@gmail.com>
-Mime-Version: 1.0
-References: <20250530-cstr-core-v11-0-cd9c0cbcb902@gmail.com>
- <20250530-cstr-core-v11-3-cd9c0cbcb902@gmail.com>
-Message-ID: <aD1k4rRK8Pt5Tkva@google.com>
-Subject: Re: [PATCH v11 3/5] rust: replace `CStr` with `core::ffi::CStr`
-From: Alice Ryhl <aliceryhl@google.com>
-To: Tamir Duberstein <tamird@gmail.com>
-Cc: Michal Rostecki <vadorovsky@protonmail.com>,
- Miguel Ojeda <ojeda@kernel.org>, 
- Alex Gaynor <alex.gaynor@gmail.com>, Boqun Feng <boqun.feng@gmail.com>, 
- Gary Guo <gary@garyguo.net>, 
- "=?utf-8?B?QmrDtnJu?= Roy Baron" <bjorn3_gh@protonmail.com>,
- Andreas Hindborg <a.hindborg@kernel.org>, 
- Trevor Gross <tmgross@umich.edu>, Brendan Higgins <brendan.higgins@linux.dev>, 
- David Gow <davidgow@google.com>, Rae Moar <rmoar@google.com>, 
- Danilo Krummrich <dakr@kernel.org>,
- Maarten Lankhorst <maarten.lankhorst@linux.intel.com>, 
- Maxime Ripard <mripard@kernel.org>, Thomas Zimmermann <tzimmermann@suse.de>, 
- David Airlie <airlied@gmail.com>, Simona Vetter <simona@ffwll.ch>, 
- Greg Kroah-Hartman <gregkh@linuxfoundation.org>,
- "Rafael J. Wysocki" <rafael@kernel.org>, 
- Luis Chamberlain <mcgrof@kernel.org>, Russ Weight <russ.weight@linux.dev>, 
- FUJITA Tomonori <fujita.tomonori@gmail.com>, Rob Herring <robh@kernel.org>, 
- Saravana Kannan <saravanak@google.com>, Peter Zijlstra <peterz@infradead.org>, 
- Ingo Molnar <mingo@redhat.com>, Will Deacon <will@kernel.org>,
- Waiman Long <longman@redhat.com>, Nathan Chancellor <nathan@kernel.org>,
- Nick Desaulniers <nick.desaulniers+lkml@gmail.com>, 
- Bill Wendling <morbo@google.com>, Justin Stitt <justinstitt@google.com>,
- Andrew Lunn <andrew@lunn.ch>, 
- Heiner Kallweit <hkallweit1@gmail.com>, Russell King <linux@armlinux.org.uk>, 
- "David S. Miller" <davem@davemloft.net>, Eric Dumazet <edumazet@google.com>, 
- Jakub Kicinski <kuba@kernel.org>, Paolo Abeni <pabeni@redhat.com>,
- Bjorn Helgaas <bhelgaas@google.com>, 
- Arnd Bergmann <arnd@arndb.de>, Jens Axboe <axboe@kernel.dk>,
- Benno Lossin <lossin@kernel.org>, 
- "Krzysztof =?utf-8?Q?Wilczy=C5=84ski?=" <kwilczynski@kernel.org>,
- rust-for-linux@vger.kernel.org, 
- linux-kernel@vger.kernel.org, linux-kselftest@vger.kernel.org, 
- kunit-dev@googlegroups.com, dri-devel@lists.freedesktop.org, 
- netdev@vger.kernel.org, devicetree@vger.kernel.org, llvm@lists.linux.dev, 
- linux-pci@vger.kernel.org, nouveau@lists.freedesktop.org, 
- linux-block@vger.kernel.org
-Content-Type: text/plain; charset="utf-8"
+Received: from dfw.source.kernel.org (dfw.source.kernel.org [139.178.84.217])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id B600910E4E1;
+ Mon,  2 Jun 2025 09:24:59 +0000 (UTC)
+Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
+ by dfw.source.kernel.org (Postfix) with ESMTP id B6C335C5B08;
+ Mon,  2 Jun 2025 09:22:38 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 9D555C4CEEB;
+ Mon,  2 Jun 2025 09:24:50 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+ s=k20201202; t=1748856295;
+ bh=pB9o3mAUoyvT5CVnSzncN9qg5DAlvKCqyW+SS6Gxx7k=;
+ h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
+ b=EWFJ9l0XBuYZXCwwDCVdn2r/zt59KQQtfVHJorW8CPXrkNOr9soZr6cwqraVhafyL
+ hH3KpyKmM3O+8gwm4dJ4auEFeEHPt5dJ8noMfgtzdfX7giuH++JET02DBAHU/GvGAV
+ j9XIKr5o4t+xcFa2d6LBmR21N/OmEVD2gMXzoRo+WGYL2Gp/tbPGejnz/XR3h/8rn3
+ W3h2RUWgTMbHt8+wGIyv56m1nCY6zYcGaHkAM9XYf7OlU/NBh8z34k/mVj/K5t9reB
+ z+dD4iIBvPY1DFlwo71AxLc48vHmSzEAW9qNVfnqFw6/TS5XkOttgUI3DV6aOk/4q+
+ kqxtLlYXZU5YQ==
+Date: Mon, 2 Jun 2025 11:24:47 +0200
+From: Danilo Krummrich <dakr@kernel.org>
+To: Alexandre Courbot <acourbot@nvidia.com>
+Cc: Boqun Feng <boqun.feng@gmail.com>, Miguel Ojeda <ojeda@kernel.org>,
+ Alex Gaynor <alex.gaynor@gmail.com>, Gary Guo <gary@garyguo.net>,
+ =?iso-8859-1?Q?Bj=F6rn?= Roy Baron <bjorn3_gh@protonmail.com>,
+ Benno Lossin <benno.lossin@proton.me>,
+ Andreas Hindborg <a.hindborg@kernel.org>,
+ Alice Ryhl <aliceryhl@google.com>, Trevor Gross <tmgross@umich.edu>,
+ David Airlie <airlied@gmail.com>, Simona Vetter <simona@ffwll.ch>,
+ Maarten Lankhorst <maarten.lankhorst@linux.intel.com>,
+ Maxime Ripard <mripard@kernel.org>,
+ Thomas Zimmermann <tzimmermann@suse.de>,
+ John Hubbard <jhubbard@nvidia.com>, Ben Skeggs <bskeggs@nvidia.com>,
+ Joel Fernandes <joelagnelf@nvidia.com>,
+ Timur Tabi <ttabi@nvidia.com>, Alistair Popple <apopple@nvidia.com>,
+ linux-kernel@vger.kernel.org, rust-for-linux@vger.kernel.org,
+ nouveau@lists.freedesktop.org, dri-devel@lists.freedesktop.org
+Subject: Re: [PATCH v4 01/20] rust: dma: expose the count and size of
+ CoherentAllocation
+Message-ID: <aD1t34em7jd7vFek@pollux>
+References: <20250521-nova-frts-v4-0-05dfd4f39479@nvidia.com>
+ <20250521-nova-frts-v4-1-05dfd4f39479@nvidia.com>
+ <aC3KbKeEVlHggi5l@Mac.home> <DA2FX8C1HZ59.13SM6DQ1JVFQ5@nvidia.com>
+MIME-Version: 1.0
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <DA2FX8C1HZ59.13SM6DQ1JVFQ5@nvidia.com>
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -113,59 +72,64 @@ List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-On Fri, May 30, 2025 at 08:27:44AM -0400, Tamir Duberstein wrote:
-> `kernel::ffi::CStr` was introduced in commit d126d2380131 ("rust: str:
-> add `CStr` type") in November 2022 as an upstreaming of earlier work
-> that was done in May 2021[0]. That earlier work, having predated the
-> inclusion of `CStr` in `core`, largely duplicated the implementation of
-> `std::ffi::CStr`.
+On Thu, May 22, 2025 at 02:29:35PM +0900, Alexandre Courbot wrote:
+> On Wed May 21, 2025 at 9:43 PM JST, Boqun Feng wrote:
+> > On Wed, May 21, 2025 at 03:44:56PM +0900, Alexandre Courbot wrote:
+> >> These properties are very useful to have and should be accessible.
+> >> 
+> >> Signed-off-by: Alexandre Courbot <acourbot@nvidia.com>
+> >> ---
+> >>  rust/kernel/dma.rs | 18 ++++++++++++++++++
+> >>  1 file changed, 18 insertions(+)
+> >> 
+> >> diff --git a/rust/kernel/dma.rs b/rust/kernel/dma.rs
+> >> index 605e01e35715667f93297fd9ec49d8e7032e0910..2a60eefa47dfc1f836c30ee342e26c6ff3e9b13a 100644
+> >> --- a/rust/kernel/dma.rs
+> >> +++ b/rust/kernel/dma.rs
+> >> @@ -129,6 +129,10 @@ pub mod attrs {
+> >>  //
+> >>  // Hence, find a way to revoke the device resources of a `CoherentAllocation`, but not the
+> >>  // entire `CoherentAllocation` including the allocated memory itself.
+> >> +//
+> >> +// # Invariants
+> >> +//
+> >> +// The size in bytes of the allocation is equal to `size_of::<T> * count()`.
+
+As you propose below.
+
+"... and does fit into a `usize`"
+
+You then need an '// INVARIANT' comment where we actually ensure this, i.e. in
+Self::alloc_attrs().
+
+> >>  pub struct CoherentAllocation<T: AsBytes + FromBytes> {
+> >>      dev: ARef<Device>,
+> >>      dma_handle: bindings::dma_addr_t,
+> >> @@ -201,6 +205,20 @@ pub fn alloc_coherent(
+> >>          CoherentAllocation::alloc_attrs(dev, count, gfp_flags, Attrs(0))
+> >>      }
+> >>  
+> >> +    /// Returns the number of elements `T` in this allocation.
+> >> +    ///
+> >> +    /// Note that this is not the size of the allocation in bytes, which is provided by
+> >> +    /// [`Self::size`].
+> >> +    pub fn count(&self) -> usize {
+> >> +        self.count
+> >> +    }
+> >> +
+> >> +    /// Returns the size in bytes of this allocation.
+> >> +    pub fn size(&self) -> usize {
+> >> +        // As per the invariants of `CoherentAllocation`.
+
+"The type invariant of `Self` guarantees that [...]" or similar.
+
+> >> +        self.count * core::mem::size_of::<T>()
+> >
+> > I think we need a comment or even an invariant saying this multiply
+> > cannot overflow.
 > 
-> `std::ffi::CStr` was moved to `core::ffi::CStr` in Rust 1.64 in
-> September 2022. Hence replace `kernel::str::CStr` with `core::ffi::CStr`
-> to reduce our custom code footprint, and retain needed custom
-> functionality through an extension trait.
+> I'll add the following invariant:
 > 
-> C-String literals were added in Rust 1.77, while our MSRV is 1.78. Thus
-> opportunistically replace instances of `kernel::c_str!` with C-String
-> literals where other code changes were already necessary or where
-> existing code triggered clippy lints; the rest will be done in a later
-> commit.
+>     `size_of::<T> * count` fits into a `usize`.
 > 
-> Link: https://github.com/Rust-for-Linux/linux/commit/faa3cbcca03d0dec8f8e43f1d8d5c0860d98a23f [0]
-> Signed-off-by: Tamir Duberstein <tamird@gmail.com>
-
-> diff --git a/rust/kernel/firmware.rs b/rust/kernel/firmware.rs
-> index 2494c96e105f..582ab648b14c 100644
-> --- a/rust/kernel/firmware.rs
-> +++ b/rust/kernel/firmware.rs
-> @@ -4,7 +4,14 @@
->  //!
->  //! C header: [`include/linux/firmware.h`](srctree/include/linux/firmware.h)
->  
-> -use crate::{bindings, device::Device, error::Error, error::Result, ffi, str::CStr};
-> +use crate::{
-> +    bindings,
-> +    device::Device,
-> +    error::Error,
-> +    error::Result,
-> +    ffi,
-> +    str::{CStr, CStrExt as _},
-> +};
-
-Did you not add CStrExt to the prelude?
-
-> --- a/rust/kernel/error.rs
-> +++ b/rust/kernel/error.rs
-> @@ -164,6 +164,8 @@ pub fn name(&self) -> Option<&'static CStr> {
->          if ptr.is_null() {
->              None
->          } else {
-> +            use crate::str::CStrExt as _;
-> +
->              // SAFETY: The string returned by `errname` is static and `NUL`-terminated.
->              Some(unsafe { CStr::from_char_ptr(ptr) })
->          }
-
-Ditto here.
-
-Alice
+> and refer to it here. Does it work?
