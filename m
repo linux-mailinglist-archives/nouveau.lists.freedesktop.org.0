@@ -2,67 +2,60 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id B35ACACD877
-	for <lists+nouveau@lfdr.de>; Wed,  4 Jun 2025 09:21:17 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 2656AACDBE5
+	for <lists+nouveau@lfdr.de>; Wed,  4 Jun 2025 12:23:23 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 616BB10E761;
-	Wed,  4 Jun 2025 07:21:16 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 6CE7510E11F;
+	Wed,  4 Jun 2025 10:23:20 +0000 (UTC)
 Authentication-Results: gabe.freedesktop.org;
-	dkim=pass (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="ReE5esUN";
+	dkim=pass (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="LZs6XMtk";
 	dkim-atps=neutral
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from nyc.source.kernel.org (nyc.source.kernel.org [147.75.193.91])
- by gabe.freedesktop.org (Postfix) with ESMTPS id A22CB10E729;
- Wed,  4 Jun 2025 07:21:15 +0000 (UTC)
+Received: from sea.source.kernel.org (sea.source.kernel.org [172.234.252.31])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id BA2B810E02E;
+ Wed,  4 Jun 2025 10:23:14 +0000 (UTC)
 Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by nyc.source.kernel.org (Postfix) with ESMTP id 8632BA5017F;
- Wed,  4 Jun 2025 07:21:14 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 978F5C4CEE7;
- Wed,  4 Jun 2025 07:21:09 +0000 (UTC)
+ by sea.source.kernel.org (Postfix) with ESMTP id E078D44EEC;
+ Wed,  4 Jun 2025 10:23:12 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 180C4C4CEF0;
+ Wed,  4 Jun 2025 10:23:07 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1749021674;
- bh=bv3plLMWlYqiLX7bbykrBWrHgekpaHQ8/VAfsukF9Y4=;
- h=Date:To:Cc:Subject:From:References:In-Reply-To:From;
- b=ReE5esUN24NKZGDizZih/Wi47yyBeivCQXlNEh7+dKc7W/mln6YWKC6G/WA6exjT7
- RPGl9TCXMD0b85groLCDhRcejg9Z9Afl3yFqCTh1ECCVHP68DDLfVficbKQWwy8GtP
- 1ALltU25VugAwUYwpMrjMixo2W+GskAbnZ4Gimg+c6dq52wCKjt94M1P1lUr+Q0Vmm
- hv4IKqICYaw7SW6kKJH2pbgue6YsIzTurZclRU7ygsUvhzdOxzD2a0RgQ5r3yaGVB2
- 3T7dGBeM4I4S4WNhiJv8vgpOQlWewseUzQavzgbRXP8NvBe5aQWNKlcg5yDE+wJ3YE
- AraRyj45Y625g==
-Mime-Version: 1.0
-Content-Transfer-Encoding: quoted-printable
-Content-Type: text/plain; charset=UTF-8
-Date: Wed, 04 Jun 2025 09:21:07 +0200
-Message-Id: <DADKFPYCQTSB.11AEFJUAXVH1R@kernel.org>
-To: "Alexandre Courbot" <acourbot@nvidia.com>, "Danilo Krummrich"
- <dakr@kernel.org>
-Cc: "Miguel Ojeda" <ojeda@kernel.org>, "Alex Gaynor"
- <alex.gaynor@gmail.com>, "Boqun Feng" <boqun.feng@gmail.com>, "Gary Guo"
- <gary@garyguo.net>, =?utf-8?q?Bj=C3=B6rn_Roy_Baron?=
- <bjorn3_gh@protonmail.com>, "Benno Lossin" <benno.lossin@proton.me>,
- "Andreas Hindborg" <a.hindborg@kernel.org>, "Alice Ryhl"
- <aliceryhl@google.com>, "Trevor Gross" <tmgross@umich.edu>, "David Airlie"
- <airlied@gmail.com>, "Simona Vetter" <simona@ffwll.ch>, "Maarten Lankhorst"
- <maarten.lankhorst@linux.intel.com>, "Maxime Ripard" <mripard@kernel.org>,
- "Thomas Zimmermann" <tzimmermann@suse.de>, "John Hubbard"
- <jhubbard@nvidia.com>, "Ben Skeggs" <bskeggs@nvidia.com>, "Joel Fernandes"
- <joelagnelf@nvidia.com>, "Timur Tabi" <ttabi@nvidia.com>, "Alistair Popple"
- <apopple@nvidia.com>, <linux-kernel@vger.kernel.org>,
- <rust-for-linux@vger.kernel.org>, <nouveau@lists.freedesktop.org>,
- <dri-devel@lists.freedesktop.org>
-Subject: Re: [PATCH v4 04/20] rust: add new `num` module with useful integer
- operations
-From: "Benno Lossin" <lossin@kernel.org>
-X-Mailer: aerc 0.20.1
+ s=k20201202; t=1749032592;
+ bh=IsZt5w6RNpSLAPXJ4G5EuYXatQFaY7xih6awDDId0ns=;
+ h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
+ b=LZs6XMtkTpWknLrbNMU2qVWSTB1LLd2aXLOfCV25H+8gfPhhVMl9OxupmmvlwR4ZW
+ saXtJxodZpnDExgUfzyHpo70AnH9xZ0V4XLkcR5ahWWBP+3hEc6ew5Pdok1Tyfu8L2
+ nrKV8/NhBwDCnZ+FoLUQSlZK/uhkzCufVFO4SjlBe0pcdbfX0A2UQX9oHpkNHypb9V
+ UetIRQqyXSd0rtz79LUkxXFM5gCcobA+45lxNOAjRl57+XRZ7BYyZcppcbIDv8dWui
+ D3jkB/cNP8Cqc8Yc4SjB4n9Vzc2Jz3Iwwt+6qHWJ3Ml3znlDwS5Uo55ldzP7NGp9Lr
+ qGoEQCEilSS6Q==
+Date: Wed, 4 Jun 2025 12:23:05 +0200
+From: Danilo Krummrich <dakr@kernel.org>
+To: Alexandre Courbot <acourbot@nvidia.com>
+Cc: Miguel Ojeda <ojeda@kernel.org>, Alex Gaynor <alex.gaynor@gmail.com>,
+ Boqun Feng <boqun.feng@gmail.com>, Gary Guo <gary@garyguo.net>,
+ =?iso-8859-1?Q?Bj=F6rn?= Roy Baron <bjorn3_gh@protonmail.com>,
+ Benno Lossin <benno.lossin@proton.me>,
+ Andreas Hindborg <a.hindborg@kernel.org>,
+ Alice Ryhl <aliceryhl@google.com>, Trevor Gross <tmgross@umich.edu>,
+ David Airlie <airlied@gmail.com>, Simona Vetter <simona@ffwll.ch>,
+ Maarten Lankhorst <maarten.lankhorst@linux.intel.com>,
+ Maxime Ripard <mripard@kernel.org>,
+ Thomas Zimmermann <tzimmermann@suse.de>,
+ John Hubbard <jhubbard@nvidia.com>, Ben Skeggs <bskeggs@nvidia.com>,
+ Joel Fernandes <joelagnelf@nvidia.com>,
+ Timur Tabi <ttabi@nvidia.com>, Alistair Popple <apopple@nvidia.com>,
+ linux-kernel@vger.kernel.org, rust-for-linux@vger.kernel.org,
+ nouveau@lists.freedesktop.org, dri-devel@lists.freedesktop.org
+Subject: Re: [PATCH v4 17/20] gpu: nova-core: compute layout of the FRTS region
+Message-ID: <aEAeibsMAdlmIfch@cassiopeiae>
 References: <20250521-nova-frts-v4-0-05dfd4f39479@nvidia.com>
- <20250521-nova-frts-v4-4-05dfd4f39479@nvidia.com>
- <DA82KFLNAOG7.R7YT4BHCLNZQ@kernel.org>
- <DA88YHU4AZT7.B8JGZHW9P9L9@nvidia.com>
- <DA8GTD7LT7KO.1A3LBQGEQTCEW@kernel.org> <aD1xVkggDrCvA7ve@pollux>
- <DAD9NDFY2RXV.3LDMFVUYN0IKD@kernel.org>
- <DADAXGJLZ4LP.27P0GIQB2DKD0@nvidia.com>
-In-Reply-To: <DADAXGJLZ4LP.27P0GIQB2DKD0@nvidia.com>
+ <20250521-nova-frts-v4-17-05dfd4f39479@nvidia.com>
+MIME-Version: 1.0
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <20250521-nova-frts-v4-17-05dfd4f39479@nvidia.com>
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -77,47 +70,13 @@ List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-On Wed Jun 4, 2025 at 1:54 AM CEST, Alexandre Courbot wrote:
-> On Wed Jun 4, 2025 at 7:53 AM JST, Benno Lossin wrote:
->> On Mon Jun 2, 2025 at 11:39 AM CEST, Danilo Krummrich wrote:
->>> On Thu, May 29, 2025 at 09:27:33AM +0200, Benno Lossin wrote:
->>>> That's also fair, but we lose the constness of `next_multiple_of`, so
->>>> you can't use `align_up` in a const function. That might confuse peopl=
-e
->>>> and then they write their own const helper function... I'd prefer we u=
-se
->>>> all functions that are available in the stdlib.
->>>
->>> Considering that, what's the suggestion for this trait?
->>>
->>> I don't think we should have a trait with align_down() and fls() only a=
-nd
->>> otherwise use next_multiple_of(), i.e. mix things up.
->>
->> Agreed.
->>
->>> I think we should either align with the Rust nomenclature - whatever th=
-is means
->>> for fls() - or implement the trait with all three methods.
->>
->> The longterm perspective would be to choose the Rust one. But I'd also
->> understand if people want the kernel's own terms used. Still I prefer
->> the Rust ones :)
->
-> My understanding is that so far we have tried to match the names of C
-> counterparts as much as possible when reimplementing stuff. I don't
-> think this particular module warrants an exception, which could cause
-> confusion to folks coming from the C part of the kernel.
+On Wed, May 21, 2025 at 03:45:12PM +0900, Alexandre Courbot wrote:
+> +impl Chipset {
+> +    /// Returns the HAL corresponding to this chipset.
+> +    pub(super) fn get_fb_fal(self) -> &'static dyn FbHal {
 
-There are instances of both, sometimes we have taken the Rust names,
-sometimes we have taken the C names. While wrapping a C API, we have
-mostly stuck to the C names, since that's what people are used to.
+Please don't use the 'get' prefix here.
 
-But for more "core" code that's used by everyone, we often have used the
-Rust names. For example for the reference counting stuff, we have not
-used the `_get` and `_put` names, as that is done very different in Rust
-with `Drop`.
-
----
-Cheers,
-Benno
+Also, I feel like it's a bit random to have this on Chipset. I think the
+standalone function to create a HAL was fine. (Same for falcon/hal.rs, where I
+missed this.)
