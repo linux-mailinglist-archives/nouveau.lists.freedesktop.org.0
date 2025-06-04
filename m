@@ -2,35 +2,35 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id 3E5BFACDBF5
-	for <lists+nouveau@lfdr.de>; Wed,  4 Jun 2025 12:28:55 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id C9CD9ACDC0B
+	for <lists+nouveau@lfdr.de>; Wed,  4 Jun 2025 12:42:33 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id E180310E092;
-	Wed,  4 Jun 2025 10:28:53 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 4F9BF10E816;
+	Wed,  4 Jun 2025 10:42:19 +0000 (UTC)
 Authentication-Results: gabe.freedesktop.org;
-	dkim=pass (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="qP9yIi1G";
+	dkim=pass (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="cuZf38GB";
 	dkim-atps=neutral
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from nyc.source.kernel.org (nyc.source.kernel.org [147.75.193.91])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 5312A10E092;
- Wed,  4 Jun 2025 10:28:53 +0000 (UTC)
+Received: from sea.source.kernel.org (sea.source.kernel.org [172.234.252.31])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id DACEB10E734;
+ Wed,  4 Jun 2025 10:42:18 +0000 (UTC)
 Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by nyc.source.kernel.org (Postfix) with ESMTP id 31D86A5043F;
- Wed,  4 Jun 2025 10:28:52 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 401EFC4CEE7;
- Wed,  4 Jun 2025 10:28:47 +0000 (UTC)
+ by sea.source.kernel.org (Postfix) with ESMTP id E03274A776;
+ Wed,  4 Jun 2025 10:42:16 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 4D6A9C4CEE7;
+ Wed,  4 Jun 2025 10:42:12 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1749032931;
- bh=JBl2S2HcUiHa7eTyy0mmRlKPLkijJl96CchvkFqMJNc=;
+ s=k20201202; t=1749033736;
+ bh=qNDOUiF7KGRFDOUnrBkneiuinvRIhfXa2gk0djElLEg=;
  h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
- b=qP9yIi1GWziSK+VEJTpm1vEyrBxdG0uppVJAd6frmyrfEEZs2s5ba3u9NsSupTlTw
- DztOcoXc8EjQM0TDdtKR1jrVryh2iiC/To4hlWR9VuGAIFk2WrfJYI/YEApkELqkSN
- /oms3NVAgEpR2Hnr9jYOi5HUvxcJiaEPktU+qL/quWemrVQKOeMZExJhiCLHrmpqoK
- mtpwUXM2kpVPamsZ+tdNlIM7qIBYb/VI9J4j/uk7jZyr9C6ujVg6oM5MT3ThPMqn/7
- 1yZ0kl9lccbciDhbRaTaw0sndq+0UyUJyHXf7mu7RTHxo32jxQv3ba2Poyru3o9bSt
- fMx2pRB0wAEbg==
-Date: Wed, 4 Jun 2025 12:28:44 +0200
+ b=cuZf38GBKdmBQUia1rTRrpxrwZm0dilfnmqqBlXyp4nZz8oM1MMSWTNcr/kClFbvr
+ ew94dmBplR3Dbvd7xH7kY/HTHVWIRDfpNAZJq6BfC2g0shGYB4HgMregASavszwCam
+ O4jUhn55Hj7unRUdfYY5/cp+zgU/nSshPK1fu0gsEulAK2RaJVHHBLqhoUtow1P/Mm
+ n2EdVMsYHUQ+9Rbvy3Crj/xNO33Fmb7SiOvfAQHGNB3vq7TlsJpMA9xQPonJidkxEv
+ poTasdllJ8rpBDayF2IhUXn61Wc5nHP1MYbYIV+hsPVVQ+dDvGuq+ZwX050wxiptnq
+ zp1PBIbJ5LriA==
+Date: Wed, 4 Jun 2025 12:42:09 +0200
 From: Danilo Krummrich <dakr@kernel.org>
 To: Alexandre Courbot <acourbot@nvidia.com>
 Cc: Miguel Ojeda <ojeda@kernel.org>, Alex Gaynor <alex.gaynor@gmail.com>,
@@ -48,15 +48,15 @@ Cc: Miguel Ojeda <ojeda@kernel.org>, Alex Gaynor <alex.gaynor@gmail.com>,
  Timur Tabi <ttabi@nvidia.com>, Alistair Popple <apopple@nvidia.com>,
  linux-kernel@vger.kernel.org, rust-for-linux@vger.kernel.org,
  nouveau@lists.freedesktop.org, dri-devel@lists.freedesktop.org
-Subject: Re: [PATCH v4 18/20] gpu: nova-core: add types for patching firmware
- binaries
-Message-ID: <aEAf3GUUz5oxnuk9@cassiopeiae>
+Subject: Re: [PATCH v4 19/20] gpu: nova-core: extract FWSEC from BIOS and
+ patch it to run FWSEC-FRTS
+Message-ID: <aEAjASkf9t4s4RsY@cassiopeiae>
 References: <20250521-nova-frts-v4-0-05dfd4f39479@nvidia.com>
- <20250521-nova-frts-v4-18-05dfd4f39479@nvidia.com>
+ <20250521-nova-frts-v4-19-05dfd4f39479@nvidia.com>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
-In-Reply-To: <20250521-nova-frts-v4-18-05dfd4f39479@nvidia.com>
+In-Reply-To: <20250521-nova-frts-v4-19-05dfd4f39479@nvidia.com>
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -71,49 +71,30 @@ List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-On Wed, May 21, 2025 at 03:45:13PM +0900, Alexandre Courbot wrote:
-> +/// A [`DmaObject`] containing a specific microcode ready to be loaded into a falcon.
-> +///
-> +/// This is module-local and meant for sub-modules to use internally.
-> +struct FirmwareDmaObject<F: FalconFirmware>(DmaObject, PhantomData<F>);
-> +
-> +/// Trait for signatures to be patched directly into a given firmware.
-> +///
-> +/// This is module-local and meant for sub-modules to use internally.
-> +trait FirmwareSignature<F: FalconFirmware>: AsRef<[u8]> {}
-> +
-> +#[expect(unused)]
-> +impl<F: FalconFirmware> FirmwareDmaObject<F> {
-> +    /// Creates a new `UcodeDmaObject` containing `data`.
-> +    fn new(dev: &device::Device<device::Bound>, data: &[u8]) -> Result<Self> {
-> +        DmaObject::from_data(dev, data).map(|dmaobj| Self(dmaobj, PhantomData))
-> +    }
-> +
-> +    /// Patches the firmware at offset `sig_base_img` with `signature`.
-> +    fn patch_signature<S: FirmwareSignature<F>>(
-> +        &mut self,
-> +        signature: &S,
-> +        sig_base_img: usize,
-> +    ) -> Result<()> {
-> +        let signature_bytes = signature.as_ref();
-> +        if sig_base_img + signature_bytes.len() > self.0.size() {
-> +            return Err(EINVAL);
-> +        }
-> +
-> +        // SAFETY: we are the only user of this object, so there cannot be any race.
-> +        let dst = unsafe { self.0.start_ptr_mut().add(sig_base_img) };
-> +
-> +        // SAFETY: `signature` and `dst` are valid, properly aligned, and do not overlap.
-> +        unsafe {
-> +            core::ptr::copy_nonoverlapping(signature_bytes.as_ptr(), dst, signature_bytes.len())
-> +        };
-> +
-> +        Ok(())
-> +    }
-> +}
+On Wed, May 21, 2025 at 03:45:14PM +0900, Alexandre Courbot wrote:
+> +impl FirmwareDmaObject<FwsecFirmware> {
+> +    /// Patch the Fwsec firmware image in `fw` to run the command `cmd`.
+> +    fn patch_command(&mut self, v3_desc: &FalconUCodeDescV3, cmd: FwsecCommand) -> Result<()> {
 
-If we can't patch them when the object is created, i.e. in
-FirmwareDmaObject::new(), I think we should take self by value in
-FirmwareDmaObject::patch_signature() and return a SignedFirmwareDmaObject (which
-can just be a transparent wrapper) instead in order to let the type system prove
-that we did not forget to call patch_signature().
+Same comment as on the previous patch regarding patch_signature().
+
+<snip>
+
+> +    fn dmem_load_params(&self) -> FalconLoadTarget {
+> +        FalconLoadTarget {
+> +            src_start: self.desc.imem_load_size,
+> +            dst_start: self.desc.dmem_phys_base,
+> +            len: Layout::from_size_align(self.desc.dmem_load_size as usize, 256)
+> +                // Cannot panic, as 256 is non-zero and a power of 2.
+> +                .unwrap()
+
+There is also Layout::from_size_align_unchecked(), which I prefer over unwrap().
+I think we should never use unwrap() and rather the unsafe variant, which at least
+forces us to document things properly, if there's no other option.
+
+In this case, however, I don't see why we can't just propage the error? This
+method is used from Falcon::dma_load(), which returns a Result anyways, so let's
+just propagate it.
+
+In general, we should *never* potentially panic the whole kernel just because
+of a wrong size calculation in a driver.
