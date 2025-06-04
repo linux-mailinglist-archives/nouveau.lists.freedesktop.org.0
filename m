@@ -2,59 +2,59 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id BC6DAACD077
-	for <lists+nouveau@lfdr.de>; Wed,  4 Jun 2025 02:05:55 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 61794ACD2E0
+	for <lists+nouveau@lfdr.de>; Wed,  4 Jun 2025 03:11:58 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 0C1C410E610;
-	Wed,  4 Jun 2025 00:05:54 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 4D92A10E7A3;
+	Wed,  4 Jun 2025 01:11:54 +0000 (UTC)
 Authentication-Results: gabe.freedesktop.org;
-	dkim=pass (2048-bit key; unprotected) header.d=Nvidia.com header.i=@Nvidia.com header.b="A0ecVM5w";
+	dkim=pass (2048-bit key; unprotected) header.d=Nvidia.com header.i=@Nvidia.com header.b="AYDlJAm9";
 	dkim-atps=neutral
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from NAM10-BN7-obe.outbound.protection.outlook.com
- (mail-bn7nam10on2069.outbound.protection.outlook.com [40.107.92.69])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 20FFC10E610;
- Wed,  4 Jun 2025 00:05:49 +0000 (UTC)
+Received: from NAM11-CO1-obe.outbound.protection.outlook.com
+ (mail-co1nam11on2074.outbound.protection.outlook.com [40.107.220.74])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id C4D4C10E75C;
+ Wed,  4 Jun 2025 01:11:52 +0000 (UTC)
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=ueO4h2AJnJJ1U2gjw07XkH6/Se0LCQe8ztfZunMtq8S/kAIkVesQWa5/bvl5HOOksT+jgzFOKE9EfQsJ9I6Jz1haKvj0boFGsCzp2Bih9/YBydRm8R7fRnBzoT20Y9IaeoDOhqsXTs8myn+WnAFm2x1UY+5S6PwCn1qSQPksjuUcSUTO2lyLdZsfqO77V7UTJh4wq8Xpy47p1KyOea6ce7+YABCvDleyQxrsFb2P0E2+bK6lnDtRs0e92GvWFQxOxhx2YjIsJmvN9Hxrzuu4IHXidwMKcdMtpu2ComasKW/Xar+/BPdJmuApA3etOhPw+NQTuKb8z+z5D6GLlY+FoQ==
+ b=BY+f5tuQH+inPrekJqwm1wFZca9zDNhKhE42mW011OASh5cYXVTDFpKmVni/0KIe9BLWYACyJI2G6Vyypvh+KD9ptidfSMe1KdYdnH2CfQhjmUYh9XQQBMq6rH2dfc9TYcty53PGn2cBdyEBi0+w7ENy1ID3IfJseM0qzJp8YjJR8XdKazEdoh3NA65Ay0P6Jzxaate3ORqFZw0yIPQ4basrw9j2hTQvBLPlN0E5+ZziePAYaWMsB9DJ/l1egi4PqQi6loKVdjIKVc4LQpfdNBRoXjpUIVuAu0CG0jp2Pc7UUBTHuaC68dUq1rzwCijg3Agk4dBfA0D4+2g71zGXnA==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
  s=arcselector10001;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=A3TQlKCmmaR3pyD3eUhRtgvBdFeWGK0VaFKPIqLOJsI=;
- b=b6CPNGv/2Q0cqLh5aqcbyNSuervoaxOkZ7H++sNq558bF3J7zR7Sf6JcUhEbqw0AaK37g9M4M1VfzyQoDt+yskAQJRAL0vOuVkHehe/blDdBVUCPqid8mctaUgWRYDvUnFZSSDomG+VdysBiozhjPp59NWrvxU/Xw2JXsw1uGV0eGp4/6dEmuK+k2p1mCO5zBBm9xY6BNbpvgs+1pad+R5Z9dBdT1t4QhOoP7jvVjaZMsy9Bux1GMCJq/vqcLJY5eOpAq8nBl3PgqQg1vYsCyr2rhj6QmjYYTCIjq1sbaXEr+dv46g9iferUurZIb9itP62LRvCKCuf3iYRbD3NPsA==
+ bh=Ldsb0dBo7IAixmaQyzmNw+kRYkzqIqYe1rATMtmF0oc=;
+ b=oJeaXDJmS92ymEldq47K7eQtT0wcKrGU7n5EI4b6mZLk/SsF8ZAO2JftBzzVyV+Go4LwihEHn+y416nnEtxNg6fH0fRfs2nl9fpMjH69TCTC7SbvNVXbn7S44DN3i3MvUNHXMK6CrFigj9ZcTAwE/CTX/wGCr6UUjBz70NiKVzMHTcBwxcC2LAbDrrP+ACTGt/B/RKHciqIP6oHS8LmCnAl9zp+gpI43F0F82QYMY6Fx45kE+nZtdEq6t/hLfNZ8BVo8kDu7Sv70lQJGev0fzPHctMNzJageluTJzIgXsF5S/kiPwSk8Jr/rHwBnTAz5FLGHhdMqMlGWyJOZo/iBTw==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
  smtp.mailfrom=nvidia.com; dmarc=pass action=none header.from=nvidia.com;
  dkim=pass header.d=nvidia.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=Nvidia.com;
  s=selector2;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=A3TQlKCmmaR3pyD3eUhRtgvBdFeWGK0VaFKPIqLOJsI=;
- b=A0ecVM5wREq126mWypoGsK4rzgBzbsy8JXMxEMiacy/tocvgROYfUUn2w4bU/OlpvGfc+/rdYU/PF0hfod8maVSRowQsRKStBJOxEnEdFbIpq1LqqANb5PLmdfWLOvFdzw7S76jaTFLu9oFpxklwhAb7dGC6bYLZxqSf2nLFpo2nQvy/1NC3vvBaUf2x/M8nYP82kkDCxZrBk4G8qQvJT7iDTffA6tkkfWn37TBSyGbmA/beZ1egQMhPWxDz22J0dLDVGsBJOIYyE7l8kDMKhBSW9BoRKix6YTt8c3AfWNpFo6FSWuEsdCdlARncTxZZsE5nFwi5pSTLTG/9zMLVzw==
+ bh=Ldsb0dBo7IAixmaQyzmNw+kRYkzqIqYe1rATMtmF0oc=;
+ b=AYDlJAm9Ej19/LrtmHpxd+BHzUjKH5lGupdylnbDJLWZcQqxGo6zu1WPkxNXeqK5n7Md3whTCP4pET2ylAdNEsyBraFrNgqn8oaKZ+fMT4sv5LUal3kz0J4Ow3sxKJLlAiR4TO0SuNL5zCjaIWJgqb/ntFmGdf5Hq9DoRbRGtVYC3RbRVvozQh/duZJQOh4qzg2l+XfeOhYFCNReSRrAHapZpOxaO3rft/eD8oZ15ws8vczD2JbpMun6TwrXKZZt5tGlu3cyl/XsNvTD9cwQLrj6ny08zIENruQClPmqmd4O8yXLhJ7HepHfLQJbWyt1bPBt5ib5ovhrYtJE4kP2rQ==
 Authentication-Results: dkim=none (message not signed)
  header.d=none;dmarc=none action=none header.from=nvidia.com;
 Received: from CH2PR12MB3990.namprd12.prod.outlook.com (2603:10b6:610:28::18)
- by SA1PR12MB7248.namprd12.prod.outlook.com (2603:10b6:806:2be::12)
+ by CH3PR12MB9028.namprd12.prod.outlook.com (2603:10b6:610:123::20)
  with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.8769.25; Wed, 4 Jun
- 2025 00:05:40 +0000
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.8769.37; Wed, 4 Jun
+ 2025 01:11:47 +0000
 Received: from CH2PR12MB3990.namprd12.prod.outlook.com
  ([fe80::6e37:569f:82ee:3f99]) by CH2PR12MB3990.namprd12.prod.outlook.com
  ([fe80::6e37:569f:82ee:3f99%4]) with mapi id 15.20.8792.034; Wed, 4 Jun 2025
- 00:05:40 +0000
+ 01:11:46 +0000
 Content-Transfer-Encoding: quoted-printable
 Content-Type: text/plain; charset=UTF-8
-Date: Wed, 04 Jun 2025 09:05:34 +0900
-Message-Id: <DADB6892Z31G.12LB1BVSGTEAQ@nvidia.com>
+Date: Wed, 04 Jun 2025 10:11:41 +0900
+Message-Id: <DADCKUVFXPLH.2DWHTBQ76T3PD@nvidia.com>
 Cc: "John Hubbard" <jhubbard@nvidia.com>, "Ben Skeggs" <bskeggs@nvidia.com>,
  "Joel Fernandes" <joelagnelf@nvidia.com>, "Timur Tabi" <ttabi@nvidia.com>,
  "Alistair Popple" <apopple@nvidia.com>, <linux-kernel@vger.kernel.org>,
  <rust-for-linux@vger.kernel.org>, <nouveau@lists.freedesktop.org>,
  <dri-devel@lists.freedesktop.org>
-Subject: Re: [PATCH v4 04/20] rust: add new `num` module with useful integer
- operations
+Subject: Re: [PATCH v4 19/20] gpu: nova-core: extract FWSEC from BIOS and
+ patch it to run FWSEC-FRTS
 From: "Alexandre Courbot" <acourbot@nvidia.com>
-To: "Benno Lossin" <lossin@kernel.org>, "Miguel Ojeda" <ojeda@kernel.org>,
+To: "Lyude Paul" <lyude@redhat.com>, "Miguel Ojeda" <ojeda@kernel.org>,
  "Alex Gaynor" <alex.gaynor@gmail.com>, "Boqun Feng" <boqun.feng@gmail.com>,
  "Gary Guo" <gary@garyguo.net>, =?utf-8?q?Bj=C3=B6rn_Roy_Baron?=
  <bjorn3_gh@protonmail.com>, "Benno Lossin" <benno.lossin@proton.me>,
@@ -66,110 +66,106 @@ To: "Benno Lossin" <lossin@kernel.org>, "Miguel Ojeda" <ojeda@kernel.org>,
  "Thomas Zimmermann" <tzimmermann@suse.de>
 X-Mailer: aerc 0.20.1-0-g2ecb8770224a
 References: <20250521-nova-frts-v4-0-05dfd4f39479@nvidia.com>
- <20250521-nova-frts-v4-4-05dfd4f39479@nvidia.com>
- <DA82KFLNAOG7.R7YT4BHCLNZQ@kernel.org>
- <DA88YHU4AZT7.B8JGZHW9P9L9@nvidia.com>
- <DA8GTD7LT7KO.1A3LBQGEQTCEW@kernel.org>
- <DAC2L6ZKR6U2.WOMERUJIOENK@nvidia.com>
- <DAD9TNUBUGPN.1ED519FYR29U4@kernel.org>
-In-Reply-To: <DAD9TNUBUGPN.1ED519FYR29U4@kernel.org>
-X-ClientProxiedBy: PN4PR01CA0075.INDPRD01.PROD.OUTLOOK.COM
- (2603:1096:c01:26d::12) To MN2PR12MB3997.namprd12.prod.outlook.com
- (2603:10b6:208:161::11)
+ <20250521-nova-frts-v4-19-05dfd4f39479@nvidia.com>
+ <3212029a1f4d671aaa2b48e2e917d5c810f5c769.camel@redhat.com>
+In-Reply-To: <3212029a1f4d671aaa2b48e2e917d5c810f5c769.camel@redhat.com>
+X-ClientProxiedBy: TYCP286CA0254.JPNP286.PROD.OUTLOOK.COM
+ (2603:1096:400:456::8) To CH2PR12MB3990.namprd12.prod.outlook.com
+ (2603:10b6:610:28::18)
 MIME-Version: 1.0
 X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: CH2PR12MB3990:EE_|SA1PR12MB7248:EE_
-X-MS-Office365-Filtering-Correlation-Id: 6f26421d-099d-4bab-9f2f-08dda2fb8a5e
+X-MS-TrafficTypeDiagnostic: CH2PR12MB3990:EE_|CH3PR12MB9028:EE_
+X-MS-Office365-Filtering-Correlation-Id: 18979ed9-7a67-42bf-a29e-08dda304c644
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
 X-Microsoft-Antispam: BCL:0;
- ARA:13230040|10070799003|1800799024|376014|7416014|366016|921020; 
-X-Microsoft-Antispam-Message-Info: =?utf-8?B?TitHQ3JVcVJUQU83UmRyeVdTdDltVUhLcEdIMDVrQnJ6b1FjL0tVeHVnRjZH?=
- =?utf-8?B?SU5SREZJU3ZVcVQ2RTQ0ZU04bkNaTWJlMmEySVFsUU9XY2pmWUtEQnJiQmFp?=
- =?utf-8?B?N09WRTVuSVVObFpaOHdFZlM1M2pjb05DZlgzU2pzSzFoNDJDVlM5OGduWS9l?=
- =?utf-8?B?d05ZQmQxRnlPNGZGUTVqbzZCTzIxcU5mQnhPQlFpNDllMm1PdEhqYmZLY2Jh?=
- =?utf-8?B?SE90cVNMVjNjcjVjS0FKaEsxR3dZek9JVWExNXRoTjFYNm56aTZ3UHpMM25y?=
- =?utf-8?B?aTU5ZEF6Uk9TbkRsZW9peUxlQ2V4ZWVMZktCREREUDdyWEYzcUFUQ3BzS0ZP?=
- =?utf-8?B?YjBzNTBnbVlRbkEwWnA5R0VjM05ld05PQW82c0F3dktyQzFtV0NVM09hL3Jt?=
- =?utf-8?B?SW1keTZhalpHWG5tSTFUbUFJa2sxVGluQUo0N3VLSVZrbE5GcWNRNnp1K0F2?=
- =?utf-8?B?RWExZ3l3N0RET3ZzbzBPbzJYVkFHSnRtSWlpczEwVTRKOWlQRGdaWDdYVEJs?=
- =?utf-8?B?MitCb0sxakM0bDVjM2RTTDBKMlV0Rlk5VTgveDk4NjUvanpmc00xUzJybjg3?=
- =?utf-8?B?bW5YL25NUzRrd2JidncrWk9QV1p1TURjcFo4TXNieEtSakV2eTRRTGJ5WXNS?=
- =?utf-8?B?YnAzdFZjWXBHdk1DcTUvUkRWUWZlbk1rNVNhVkhyWVluNjFKeGZHcW1xY2Yw?=
- =?utf-8?B?SS8vTXVORWxoZnpWNENCcXdkNTBvZWlYNlFWYTg5MEVHWGRCdTNCSTQ0R3Zk?=
- =?utf-8?B?RjJ2dlFwTTNJVVZiSDcvV2U3VllzVUlCVUNBOXZ1LzIvMDl3UHFmVTVYbUZV?=
- =?utf-8?B?RmsveTQ2eFNUK3JkckRzeEoxRmpuMWZURHllejJqNTFBd0p5bkJOaDZUZ2tK?=
- =?utf-8?B?U1M0Rm44UHNZWFM0amU1eU04S0Z1N0R3QmxaVHN1bXdVUFJZOEhGV0JYUi9Y?=
- =?utf-8?B?ZzlsYTd5b1kwS0pnb05DUTZGYVBEdVpqcGFWNElOUmlsa0lodjY2ekpkWWFP?=
- =?utf-8?B?aWswUWpLeE5YdFp2aTFhZ3B4TTNoRCt6THN4SFpEd3VDcWh4K25nMFNMbDdX?=
- =?utf-8?B?dE5lSnBIM2hJaUJEeEdyWXMvZXozNnIvTE9QV3ZnSGo4Y0FnbDVHdGhKZW9i?=
- =?utf-8?B?WjVNeWxsVkFUZjd5RFVweUc1TEI1R2xUT2dDeG1xVmZKdmtOMkxxcnRNMDhl?=
- =?utf-8?B?RUZkWEliQ3ZrRDE2M2dhemNQWkgveTBLNkFvNHpsbisvZjBONmhlK1E3V1NL?=
- =?utf-8?B?c0xvRjRIalVXbHNwaDJ1NWd4T2JnYWozc01jYnN6TXQxUWFtUytZZWRabUNx?=
- =?utf-8?B?M256b2ZvTTZhMDc4MndtYzNCS2pNcFQwYWRBbFZHL0NmOEpES2RYNTRYQ3lW?=
- =?utf-8?B?QVNWZFBmTkwxVGh3a0dHWURtaXByVGJackRGL3FtN0tmdktoZDFBUWFpNFk4?=
- =?utf-8?B?aWM4cWllSVJXWUtCU3VYQkREZzE1RHE1bCsvNzd1M0lCQUVTempuTDBVUFVB?=
- =?utf-8?B?NWlHZTlYMnhaQlNxeFRqN213V3pOV0V1STNYRTdBSG1xaEFvZ0dYclM3bVhL?=
- =?utf-8?B?RGJzcDJpa2swUlB5cHZJYllneWc2amQ4L1FITWFFeUMxbHowL1dwK21mcFRp?=
- =?utf-8?B?b3RkdGg3T1pWaktjRitNZnpkTzVyd3RLekFOMlRFL2RGQ2VubFA5dGxMWDlF?=
- =?utf-8?B?YlNEeEY3Q2lYTnZqLzhRbVBNbllORUlGV3BxWHdRK3hLSmNUSVo0cnV4SGF2?=
- =?utf-8?B?UHZXWG0weDl0UnN2L3JhN3ZiYjdtVjhGR3RxM3U5V01SdWJrVXBMSU1PTjNH?=
- =?utf-8?B?YXpFckVLMXZabDJLRy8ycldwa015MTRUQlczVGY2alVNemFMZVZRKzRnSmow?=
- =?utf-8?B?dlJMRG9kTHNtTnFrSno4aUhlUUgyL2NjZnQzdUhhNk5hcyt3NG1NNlNJVkRY?=
- =?utf-8?B?YlJnZUs2R0N5QkowRFl0NUhXM3l6MUJQR0Q3OWFDbklCQ20ydGxyT1pGaFlW?=
- =?utf-8?B?a05YdHVVS0pRPT0=?=
+ ARA:13230040|366016|7416014|376014|1800799024|10070799003|921020; 
+X-Microsoft-Antispam-Message-Info: =?utf-8?B?TWY5czV5dmZLbmZ4UTYwM1FHMlExNXUwY0taREJON09LWDRUVlpLeTBmNUpv?=
+ =?utf-8?B?OTFxUHVpT0t6dCtJZE9OcTJZSXZvSStrd0Z6YmZTV3ZFK0l2eThoKy92Wmpq?=
+ =?utf-8?B?T1hGUXN3N0VRbjFreVAydUhzd0xxb3dLdFVsczU0M0dhdmd6a0l2UWRYN3pk?=
+ =?utf-8?B?TmJoZVYrZzFJN0VYdVd6MHlLM2RDSjg4S0FOby9xYlVGNTNzNkgxYTQwcmkw?=
+ =?utf-8?B?NERTZGJKQ3krUWt0RTdzQkNpMStmTzFRVmh6SU8vSmh5YkJCQmJNMzlTalNq?=
+ =?utf-8?B?ODA3TEtrdC9NQUZHUnhPRTRXVWN1b3NrazZ4Q2ZjeFFBOGZ0R3NtR2NKdU1O?=
+ =?utf-8?B?Z01WWFR5eVdFaTBjQ0xrZDNqUVdiZlFIb05aZk5obitheGlLQ25kMXpCUUJO?=
+ =?utf-8?B?RkRSZXJuWHR6NEQrRTI2N3hBVjVpVGdwUGYyUmVWaUZGTXdVZ0FlZGhhb2x3?=
+ =?utf-8?B?U05KS3RSYXRFVFFhMGJ4MTJnL2UveklhODc1elhZU1ZSZitsdVdBaDhxSzg1?=
+ =?utf-8?B?OXNNVmdkMm5zdEFBNElwMFRteXVrQmNGRlpkZXFUWjZLV0ozMTViVm8zRDFK?=
+ =?utf-8?B?Q3Y2anZoRmRROE5TeGt3SFRnTjZYNlZHZWdwY3dvL0s3VHBoWEFHekk0TS96?=
+ =?utf-8?B?Z1pRZzFsNzlESFFocklzVmQ5RmtrRnFZYzMrcGtqTnNEL2FIMGV1eG4xTUdp?=
+ =?utf-8?B?THliTVRqWnJmM0w5OC81TnR4NzlEVEhZL3F3Rll2UmVrM0htbU8vTXl5eWw4?=
+ =?utf-8?B?SU1OVzB0SmNlNTdsczBZaFhESWRBZ3VPUy9TcXNPeVFkdnhwMUVZemRQU1Fq?=
+ =?utf-8?B?R3ZZenFXci9oSVpBUjdSSEJtZldJeWxEaVJBcC9nV25jMnVmQ0xYaG5BYit0?=
+ =?utf-8?B?eVVqWm1jTHBRNFViaXYwQjVjckQxVm5ydDk1OGdPM3RNZzZabHpuV2JzTjZw?=
+ =?utf-8?B?OEVud1RtQXBrWkNsblB2M21QODlFU1pEOXhnWEJrYlgzdDUvZCtXYWxSUFdz?=
+ =?utf-8?B?c0hhS1Rya2djaW52citIVzVoQmdQTFc0djU1amhWT011VEpMNWxVZHBiQVZE?=
+ =?utf-8?B?OFhkVWxMekd5V0FyRUxwMVJrSElScEtRUGtRM0xjQVIveFA0Z3czUnoyOG42?=
+ =?utf-8?B?WmdxYVROdjQvN0NGSXNqVjJwUFJzVkhHdkMrWlNZVkVPbnVtaVpwYnhnYzcx?=
+ =?utf-8?B?YXVkOVg2MlIvcUpyZllqcjdpYU1PdW1FM1Nwd3h6dm82YmZFSWtiQVlmREpK?=
+ =?utf-8?B?Tlc3cGpJRW5lSWtYbUdJanRiSWF1bHppWWVjeTllcGZ1WG9CZFFGSloxelUx?=
+ =?utf-8?B?VVR0dEZMbEk3MlpCZG5BZ21jQlBRaWo4bUNIaEZBU3pCN3lzVldaZFJHTGpN?=
+ =?utf-8?B?ekFacUFGaDJwU0lmTUgvZEkvK0pQUjhOVG9EQTFaNjNBMmFYL1ZaSGJwMEZv?=
+ =?utf-8?B?U2haVHhTWDB0U09haXB6S01rR0M1VUpBUHlWTFpFT0hlY3pub2oxcElQNE9C?=
+ =?utf-8?B?VkYyR2Zuc3N5eWFyRHExKzA5UllnbGV4Y3U2cWhjVHhVcEJ4REZWSjl3RG95?=
+ =?utf-8?B?YnMraVNDZ01mcTEyb2tEcmJpVVozSTRhZGw2SnhrcXcwck5SeHlTNTdyNEMz?=
+ =?utf-8?B?K3ZXQmJQSXBHOGQ4QlJtNXNBOHF6eVlxekltMTlNQnJ3S09yRmwrV3ZOR1h6?=
+ =?utf-8?B?STFZTm1UaWRJM21pVDBReHFURVM1NXhKUWluVHAwdjhaWGN6a01QU3RDaEVV?=
+ =?utf-8?B?MnFUalRLTzZhQjFJSjQ1aTRpbXA1bVp2T05aN1M5aVFvWk9XOTZOYnQ3SFhW?=
+ =?utf-8?B?ZGZaaXd5aG9td0FQUXdHV2M3VnZiQjA5SGV2dWFMS0tpSGpsa1NvdDVzS2VT?=
+ =?utf-8?B?QTVoeFJjZ2ZkU3J4NGxFTS9VNHBVM3VSYzZKS0ZWbE9SS3FUQjlMK3gxcWl1?=
+ =?utf-8?B?clp3UDhWdnZWaEF1WDRCSnE0c1l5T3crR1RzM1VHelg1b01TaWZHQUJVaWhR?=
+ =?utf-8?B?dlBXV2ppbC9nPT0=?=
 X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
  IPV:NLI; SFV:NSPM; H:CH2PR12MB3990.namprd12.prod.outlook.com; PTR:; CAT:NONE;
- SFS:(13230040)(10070799003)(1800799024)(376014)(7416014)(366016)(921020);
+ SFS:(13230040)(366016)(7416014)(376014)(1800799024)(10070799003)(921020);
  DIR:OUT; SFP:1101; 
 X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?NE96ZUhxUDBURXVhUFZFOWx1OWVNeUtlaW4raHFBSGlzejQrMWZsWkpsQ082?=
- =?utf-8?B?WFpIVC92R0Q1YWJ3SDZxd29qMmovK2ozS3M0L3RRY3ZJTWE5Zi9UbERCTnd5?=
- =?utf-8?B?LzZNdllhL2xibktCQjgwdkw1TzFjR2ZWK1IvMENtaGVmcWZBcGFkbUNSMkl5?=
- =?utf-8?B?ZXZKQ0YzUE12TkZtTVVCaGJOZ1FKY3JBTUxxUTV2N0ZOL0RXckFialZXMDFj?=
- =?utf-8?B?RGZVTWp2b2hOTkJPdW9Zd2FkYWZBSlVmQ2REcE9lKzNzbDNWTTlUZzV0cUYx?=
- =?utf-8?B?WnJoeG9xZ1N3ZVNvNWowZ25lL3ZOODArRW1xVGNHenNNS3RZbUZVbWJxTzZq?=
- =?utf-8?B?SUlHMFJDNytaKzJ1aXlXRlBpYjFzMjJpWnMzdnovVVl1WGdqdzdNM01meTdw?=
- =?utf-8?B?c01DRWgvTnlGa3d1TEI5YUtyUExwVG5kcGxxVUFnS21rb1o0VVExV0ZjaEhG?=
- =?utf-8?B?S01uZGhodTd5RXNSOGRUeUhoOUI0dVJDWTk4ak5Sa0xiNXRrWWFULzYwOXVw?=
- =?utf-8?B?QXZ5L1NQQ2dhYlpBMmdCVURlaFBGbko2OVYwV0tIODZPWkFxR1F2QXd0TlJC?=
- =?utf-8?B?RkZUY0FMK3V0MVBPcVJwMXI0WmVjVmQ4UTB5MU54NVU1cXRiUFg4TlNXejFD?=
- =?utf-8?B?NUE2dG82OFViMC93RzJ1b0FDR0dNSUpDQ1pBVCtPQXB6d01aV0t0YytCZlRj?=
- =?utf-8?B?K0dZRE40akpHdTlpS0FRZHVSRjczLzFuaW55cEhmcmpoV3dtUWh1ZEIwd2py?=
- =?utf-8?B?djhacUhrNy9kV1JsT1pGaTVRVkFLUGJ5UnRaZFNyOEVxQ0tvSHkrWFlZd25U?=
- =?utf-8?B?S204MDRad0hGU3ZtSnB1VTJpSC8zTVVna0h2TzdPVEZid3NXN2ZkMmZubXJa?=
- =?utf-8?B?MlZBOFlWZno0V3hyOTh3U0VvbW5TblVRWnkxVVlCbUZzbEZrcmRjMmVBb3c1?=
- =?utf-8?B?U091WTNoWFNLNjJyNnh6WHZvdEh6M3lRdFNENlNESDVEcVhMeG9PSUJiTUUw?=
- =?utf-8?B?Uk1XSkVDejdwLzZkSXBVY2Y3Sk5VVmQ3TXY4c0c4aXhwa1lZMlFieS9MbUVR?=
- =?utf-8?B?QTBpRmhwdzlaM0tpdXlhQVEyNXVIZ3pxSnJmeUE5VlBkNmJONWNXSm5adnkv?=
- =?utf-8?B?OVNYZ1pxU09aRVdsc2E4MjFrQk5TeW9lQkQ5dEYvZ0dVbGFFQWJpU1cwWXhw?=
- =?utf-8?B?K2VQSUNGNWh3b0JiNWQ1QjJBMXVGbysvU1NwTzZ5NHZtbGhsQS8zbzZvRENr?=
- =?utf-8?B?cVpPazJSTlByMjZUNUFtMnNWYU5PYi8rZGJDdXN4dGhTNlU5RlRSdFBhZllt?=
- =?utf-8?B?aGRXYXg3RnJMenRHTzFQRUFVVHJYTWJhUnJYMXVmcExjZDh4Z0Vqb1JBd3RI?=
- =?utf-8?B?QlpLVW5tVm9yUW43KytwUDM2UkpCT25pZU54c1lCaVlKSlJFNlh1OWw0bDhQ?=
- =?utf-8?B?OVRjTUdNZzEwQ1A5dnVSaDdNMndlYXhORUJDY21wQ05XeFY1SXBGalVmbUsw?=
- =?utf-8?B?d2FEclpGYUNYL1BzYVpraE1QdndySkM3cmtVQ1Ixdis0RVFsMmNoclBYK2ZR?=
- =?utf-8?B?TjF1YW1HU0p0M212N1hBOEVyVUdhcFZVd1hNQ0tvaEplZDZocEtnOGsvSksw?=
- =?utf-8?B?cjE0cnlKbXBFUmtsa3hQeUlqVHNBRGx0WXVMb3VTNytHL0dRSlkwdzQ1bnFn?=
- =?utf-8?B?eGExaDVxY29QODY5WXVZSXM2S2MvL0JVaDAvT0Mrb1AvcDFPdmVPT1RxMURl?=
- =?utf-8?B?bVdGSy9wQnRObkpwWXowa3Y4NUJ4dzVFdk0yVy9qb2pjQVpEQlR5NnpIVnFN?=
- =?utf-8?B?TEpwZldXRFBmK2lPODF2ZkhzQzVzOXVJL1RUWWZXOFdBYWUxSWg3Rm9vRTFM?=
- =?utf-8?B?ZVlOQTVpQlBPVHRuWm1qK0hXcWdKbjZQcnNBZmlYbjNJRFBVcU4wMjVkVVFI?=
- =?utf-8?B?UFhtMk8zdHdwL3A3cjBoNmZ3bnRlSGE4eGtZMWc3OEVYaFBSUndXRCtLUzBj?=
- =?utf-8?B?WDl1b1NPZ0F2QXJHZVljT09FYUx3bHBneHkzNjAyalJjMjgvdkZVcnQrNjls?=
- =?utf-8?B?YVEwb1o2WnB1U21zV2ZRazR2WW5UR0lvRWEwQ3pkZUUxQlNhNi9lci9lTEkx?=
- =?utf-8?B?VHlGSHcyRmpFb2x2bm12alMvSm1pZjNhNVd0WWs2cEdGUkNXSUJYT0xCeDUy?=
- =?utf-8?Q?4rBb5J3ZSwRNLBHS1S2wsUzPBGD7SdRYvjJpt59BYMrY?=
+X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?Kzl5NlVzT2syV2ppS2ZDM0g3eEZ0cmpwYWtNU3hJUzh3UFFxL25hRzl5L3Zh?=
+ =?utf-8?B?b0I5ejdSRmVmZG9EbzZiUU5RdjhvbjZqdzU2c2ttSlVkc2UrRlBXNmZRdXVG?=
+ =?utf-8?B?N0c1QVU5Tmg4WjNiSzRCSVZBWWZVU1lCMzdXQUo2QmIwYTNnakR3RUNrcVJk?=
+ =?utf-8?B?YzN3dkh6ZER1eEVEQ1hHUTB0c0lLZjdjMFFnL3NSYzVMREdUWXdqQjdvZTZ1?=
+ =?utf-8?B?eXlHRE9jbUg4VnE1NktxU1htOUtHZW9FRmEwTHZlZE1Kb1lxRzgxa1VwSkRp?=
+ =?utf-8?B?dTJCWXcwVTZMYXU3dlVhdXY0YkdRUkNmeHNtblNrTFE4UXpjbTIwcExEUGF1?=
+ =?utf-8?B?UEtWRkVCV3FDdGFGWkpvSkdINjhUb1RkeDRXNnF3VUJvbzFkeW9FNlFkeGVU?=
+ =?utf-8?B?akQzbDgrTGdMVi9JTVpTbmtHVzZuL2tsOUd3ZGExeUgwZm1HeHJQdjF2bVFS?=
+ =?utf-8?B?TnpHVFJCelc2UE9VNDRUOGJCOUZGRnB5QWxYNjMxeDF2OWVHNWhIcFVaL3JO?=
+ =?utf-8?B?cktNYzQ5dFZRejBFTGNtTkxURUhjWWZFemxPTWJDZXUya0JJaUFsekovSkdH?=
+ =?utf-8?B?b3ZweWZ4MlFkT0lGdlRaV0pmdGJOOEEwRml0MEx5VzdINGRCdVlkZmgxSTN0?=
+ =?utf-8?B?Si9jY3JvK0JvbFVRdnhsUDJxTDRUS2RaREo3Rk9mY2NOZnp5L3hiQXBtV2x2?=
+ =?utf-8?B?TzA3NVRjd0NyZ2dKQXprZFpaN093Yk9DU09kZjlCMFNTS1Z0VndFNklKRGdi?=
+ =?utf-8?B?NEJSeFNiYndxUk1RWk5WQWc4MHdIU0wvY2R2bHNXTlFRbldRWEszQkNCVnZv?=
+ =?utf-8?B?YnoxSjhJTHo2OTJYbHA0WWpOLzNtQzV2QWJXZXNTd3U1MTI2bTEyT1dieFlT?=
+ =?utf-8?B?M1VzRHJhRkRTWmFuNG1uQ0lEckxpeXo2OWN2b2VvSGZXT1VrbCtESHc1bjBk?=
+ =?utf-8?B?N2dGYlBaSVRoS1JTaEFWYXRNalh5M25GVDlVTC9xVVhtVmpXNURQeFBtaGhQ?=
+ =?utf-8?B?RXFwOWZoeit0YVdSbi90eHNKcWxwTStIRG1naHducGNPbkdUMzVMdWRhZHpq?=
+ =?utf-8?B?UFY3Q3lRVHFnMGdRQ01vZ2p1ckdFaUJtQWQ2d1RCanRSZm1qY2s2TkFOREoz?=
+ =?utf-8?B?ZSs0TTcxVGVNZEFqTEJRV2prM2NyTDBDaDFoYVNaRWxFOTFoQ0JUaFduWWdI?=
+ =?utf-8?B?R1h4Wmxzb29TTE5acnFpU29YK2xiK1pNZ0NXZ2V3anRqZFNOQndZZDQ1Um9G?=
+ =?utf-8?B?YUdPVnFCcW9wTWk4dktHL1hUdUFpWEw4dkZqZzkxRWFLeVpqQXZxbmdUSGZ0?=
+ =?utf-8?B?ek1xUzFBNFpyZnlTK2U2Yi92V29YSEdPclQzZ0x1QTNyWklKT2V3VzUwcC9O?=
+ =?utf-8?B?R2hMTkRWSVZsL2lWaEtScmtSS21XTE5wajJka0MzenFnVHMxRC9zSFZycUNk?=
+ =?utf-8?B?eVZaa1E0dzBWbTEvV28rQ0craEpZRVpRa3JLTUZCemZiemc2ekI0MWpqeW1s?=
+ =?utf-8?B?TXMvKzArSXJCM2FqUnZibDFZVkcyYVhKdFZBUG4yMWtDZjdlbGZWenMrL0JI?=
+ =?utf-8?B?Tnd5NmpKc1kyTWJEVTZwdk4xQkROQUZORlc0MVI3dXhxQ1Y0NjBUalNXd2lv?=
+ =?utf-8?B?N0svYVlqSUZVT01mbURXNCsrL0ZzWUFZMUVYbFlpUHZMM0ZwRXYvbmY1THVG?=
+ =?utf-8?B?ZFFTNDkxR3MraEhMZ2ZFWVc0V2haQWV1d25wRyt0OVR0STk5Mmhzbng5UnVX?=
+ =?utf-8?B?OG9WeW5kQUxpL0Y2RUFVNC8rek9rK1FDckZoMEswZG0zdDRPSHZKT3Q2SW80?=
+ =?utf-8?B?elJkSVlKQ2NsdmlacUQ3YUd3T2Znb01FVWVsZ2tvbXIzRm1iL2RoTmFQWDcv?=
+ =?utf-8?B?cS9BeC9rRm5vcThYMVN3WE5ORk5CZHBhVm0zdjRwTXJpK092clZXWnZkWjhJ?=
+ =?utf-8?B?b1E2VndQV1JKbmhDVUNXQk0rYzkrT0xGM1h6REVqVFVZY3JHd1pXKysvKzRm?=
+ =?utf-8?B?MVdVWkFGY3I0T0tqem1idUM4ZlZOWlBoVCszTExCUk1wbjVCMVJHb3czNDB4?=
+ =?utf-8?B?YnpKdFJ3M0VMd3F4cXlka05sRkpWdkRBbHY1R293c3lnYm1BSEloUitDTzFw?=
+ =?utf-8?B?cjlKcStmZXE1RURKdzhJZTdPR1lSQ1dqODFPcEpkM3MyZzFMOEpqVmJHUzZ2?=
+ =?utf-8?Q?w8khq9T2iJ1JUlflonQCIj1Jr50Kb668916fyP408Tj5?=
 X-OriginatorOrg: Nvidia.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 6f26421d-099d-4bab-9f2f-08dda2fb8a5e
-X-MS-Exchange-CrossTenant-AuthSource: MN2PR12MB3997.namprd12.prod.outlook.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: 18979ed9-7a67-42bf-a29e-08dda304c644
+X-MS-Exchange-CrossTenant-AuthSource: CH2PR12MB3990.namprd12.prod.outlook.com
 X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 04 Jun 2025 00:05:40.3822 (UTC)
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 04 Jun 2025 01:11:46.2750 (UTC)
 X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
 X-MS-Exchange-CrossTenant-Id: 43083d15-7273-40c1-b7db-39efd9ccc17a
 X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: UU+DYIk0mm3oSh6vFv89PngFHQAhBjv9/VOtWKzvj5eed5lA+95VGkDvUM+bTRNQwRxPt3u+ISqpDVqmPaBi8w==
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: SA1PR12MB7248
+X-MS-Exchange-CrossTenant-UserPrincipalName: sTXf3PcmYLN+Me0GzF1Ghj7UGedHGs5Xtdx0iCYyT9DtuJ6VHbePl8+hrfAVq/v2zUw3PcmLxyPoQVgkuU0nQg==
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: CH3PR12MB9028
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -184,92 +180,195 @@ List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-On Wed Jun 4, 2025 at 8:02 AM JST, Benno Lossin wrote:
-> On Mon Jun 2, 2025 at 3:09 PM CEST, Alexandre Courbot wrote:
->> On Thu May 29, 2025 at 4:27 PM JST, Benno Lossin wrote:
->>> On Thu May 29, 2025 at 3:18 AM CEST, Alexandre Courbot wrote:
->>>> On Thu May 29, 2025 at 5:17 AM JST, Benno Lossin wrote:
->>>>> On Wed May 21, 2025 at 8:44 AM CEST, Alexandre Courbot wrote:
->>>>>> +    /// Align `self` up to `alignment`.
->>>>>> +    ///
->>>>>> +    /// `alignment` must be a power of 2 for accurate results.
->>>>>> +    ///
->>>>>> +    /// Wraps around to `0` if the requested alignment pushes the r=
-esult above the type's limits.
->>>>>> +    ///
->>>>>> +    /// # Examples
->>>>>> +    ///
->>>>>> +    /// ```
->>>>>> +    /// use kernel::num::NumExt;
->>>>>> +    ///
->>>>>> +    /// assert_eq!(0x4fffu32.align_up(0x1000), 0x5000);
->>>>>> +    /// assert_eq!(0x4000u32.align_up(0x1000), 0x4000);
->>>>>> +    /// assert_eq!(0x0u32.align_up(0x1000), 0x0);
->>>>>> +    /// assert_eq!(0xffffu16.align_up(0x100), 0x0);
->>>>>> +    /// assert_eq!(0x4fffu32.align_up(0x0), 0x0);
->>>>>> +    /// ```
->>>>>> +    fn align_up(self, alignment: Self) -> Self;
->>>>>
->>>>> Isn't this `next_multiple_of` [1] (it also allows non power of 2
->>>>> inputs).
->>>>>
->>>>> [1]: https://doc.rust-lang.org/std/primitive.u32.html#method.next_mul=
-tiple_of
->>>>
->>>> It is, however the fact that `next_multiple_of` works with non powers =
-of
->>>> two also means it needs to perform a modulo operation. That operation
->>>> might well be optimized away by the compiler, but ACAICT we have no wa=
-y
->>>> of proving it will always be the case, hence the always-optimal
->>>> implementation here.
->>>
->>> When you use a power of 2 constant, then I'm very sure that it will get
->>> optimized [1]. Even with non-powers of 2, you don't get a division [2].
->>> If you find some code that is not optimized, then sure add a custom
->>> function.
->>>
->>> [1]: https://godbolt.org/z/57M9e36T3
->>> [2]: https://godbolt.org/z/9P4P8zExh
->>
->> That's impressive and would definitely work well with a constant. But
->> when the value is not known at compile-time, the division does occur
->> unfortunately: https://godbolt.org/z/WK1bPMeEx
->>
->> So I think we will still need a kernel-optimized version of these
->> alignment functions.
+On Wed Jun 4, 2025 at 6:32 AM JST, Lyude Paul wrote:
+<snip>
+>> +unsafe fn transmute<'a, 'b, T: Sized + FromBytes>(
+>> +    fw: &'a DmaObject,
+>> +    offset: usize,
+>> +) -> Result<&'b T> {
+>> +    if offset + core::mem::size_of::<T>() > fw.size() {
+>> +        return Err(EINVAL);
+>> +    }
+>> +    if (fw.start_ptr() as usize + offset) % core::mem::align_of::<T>() =
+!=3D 0 {
+>> +        return Err(EINVAL);
+>> +    }
+>> +
+>> +    // SAFETY: we have checked that the pointer is properly aligned tha=
+t its pointed memory is
+>> +    // large enough the contains an instance of `T`, which implements `=
+FromBytes`.
+>> +    Ok(unsafe { &*(fw.start_ptr().add(offset) as *const T) })
 >
-> Hmm what exactly is the use-case for a variable align amount? Could you
-> store it in const generics?
+> Why not .cast()?
 
-Say you have an IOMMU with support for different pages sizes, the size
-of a particular page can be decided at runtime.
+No reason - fixed, thanks!
 
 >
-> If not, there are also these two variants that are more efficient:
+>> +}
+>> +
+>> +/// Reinterpret the area starting from `offset` in `fw` as a mutable in=
+stance of `T` (which must
+>> +/// implement [`FromBytes`]) and return a reference to it.
+>> +///
+>> +/// # Safety
+>> +///
+>> +/// Callers must ensure that the region of memory returned is not read =
+or written for as long as
+>> +/// the returned reference is alive.
+>> +unsafe fn transmute_mut<'a, 'b, T: Sized + FromBytes>(
+>> +    fw: &'a mut DmaObject,
+>> +    offset: usize,
+>> +) -> Result<&'b mut T> {
+>> +    if offset + core::mem::size_of::<T>() > fw.size() {
+>> +        return Err(EINVAL);
+>> +    }
+>> +    if (fw.start_ptr_mut() as usize + offset) % core::mem::align_of::<T=
+>() !=3D 0 {
+>> +        return Err(EINVAL);
+>> +    }
+>> +
+>> +    // SAFETY: we have checked that the pointer is properly aligned tha=
+t its pointed memory is
+>> +    // large enough the contains an instance of `T`, which implements `=
+FromBytes`.
+>> +    Ok(unsafe { &mut *(fw.start_ptr_mut().add(offset) as *mut T) })
+>> +}
+>> +
+>> +impl FirmwareDmaObject<FwsecFirmware> {
+>> +    /// Patch the Fwsec firmware image in `fw` to run the command `cmd`=
+.
+>> +    fn patch_command(&mut self, v3_desc: &FalconUCodeDescV3, cmd: Fwsec=
+Command) -> Result<()> {
+>> +        let hdr_offset =3D (v3_desc.imem_load_size + v3_desc.interface_=
+offset) as usize;
+>> +        // SAFETY: we have an exclusive reference to `self`, and no cal=
+ler should have shared
+>> +        // `self` with the hardware yet.
+>> +        let hdr: &FalconAppifHdrV1 =3D unsafe { transmute(&self.0, hdr_=
+offset) }?;
+>> +
+>> +        if hdr.version !=3D 1 {
+>> +            return Err(EINVAL);
+>> +        }
+>> +
+>> +        // Find the DMEM mapper section in the firmware.
+>> +        for i in 0..hdr.entry_count as usize {
+>> +            let app: &FalconAppifV1 =3D
+>> +            // SAFETY: we have an exclusive reference to `self`, and no=
+ caller should have shared
+>> +            // `self` with the hardware yet.
+>> +            unsafe {
+>> +                transmute(
+>> +                    &self.0,
+>> +                    hdr_offset + hdr.header_size as usize + i * hdr.ent=
+ry_size as usize
+>> +                )
+>> +            }?;
+>> +
+>> +            if app.id !=3D NVFW_FALCON_APPIF_ID_DMEMMAPPER {
+>> +                continue;
+>> +            }
+>> +
+>> +            // SAFETY: we have an exclusive reference to `self`, and no=
+ caller should have shared
+>> +            // `self` with the hardware yet.
+>> +            let dmem_mapper: &mut FalconAppifDmemmapperV3 =3D unsafe {
+>> +                transmute_mut(
+>> +                    &mut self.0,
+>> +                    (v3_desc.imem_load_size + app.dmem_base) as usize,
+>> +                )
+>> +            }?;
+>> +
+>> +            // SAFETY: we have an exclusive reference to `self`, and no=
+ caller should have shared
+>> +            // `self` with the hardware yet.
+>> +            let frts_cmd: &mut FrtsCmd =3D unsafe {
+>> +                transmute_mut(
+>> +                    &mut self.0,
+>> +                    (v3_desc.imem_load_size + dmem_mapper.cmd_in_buffer=
+_offset) as usize,
+>> +                )
+>> +            }?;
+>> +
+>> +            frts_cmd.read_vbios =3D ReadVbios {
+>> +                ver: 1,
+>> +                hdr: core::mem::size_of::<ReadVbios>() as u32,
 >
-> * option: https://godbolt.org/z/ecnb19zaM
-> * unsafe: https://godbolt.org/z/EqTaGov71
+> I think if we're using size_of and align_of this many times it would be w=
+orth
+> just importing it
+
+Indeed, especially since they seem to already be imported by the kernel
+prelude.
+
 >
-> So if the compiler can infer it from context it still optimizes it :)
-
-I think the `Option` (and subsequent `unwrap`) is something we want to
-avoid on such a common operation.
-
+>> +                addr: 0,
+>> +                size: 0,
+>> +                flags: 2,
+>> +            };
+>> +
+>> +            dmem_mapper.init_cmd =3D match cmd {
+>> +                FwsecCommand::Frts {
+>> +                    frts_addr,
+>> +                    frts_size,
+>> +                } =3D> {
+>> +                    frts_cmd.frts_region =3D FrtsRegion {
+>> +                        ver: 1,
+>> +                        hdr: core::mem::size_of::<FrtsRegion>() as u32,
+>> +                        addr: (frts_addr >> 12) as u32,
+>> +                        size: (frts_size >> 12) as u32,
+>> +                        ftype: NVFW_FRTS_CMD_REGION_TYPE_FB,
+>> +                    };
+>> +
+>> +                    NVFW_FALCON_APPIF_DMEMMAPPER_CMD_FRTS
+>> +                }
+>> +                FwsecCommand::Sb =3D> NVFW_FALCON_APPIF_DMEMMAPPER_CMD_=
+SB,
+>> +            };
+>> +
+>> +            // Return early as we found and patched the DMEMMAPPER regi=
+on.
+>> +            return Ok(());
+>> +        }
+>> +
+>> +        Err(ENOTSUPP)
+>> +    }
+>> +}
+>> +
+>> +/// The FWSEC microcode, extracted from the BIOS and to be run on the G=
+SP falcon.
+>> +///
+>> +/// It is responsible for e.g. carving out the WPR2 region as the first=
+ step of the GSP bootflow.
+>> +pub(crate) struct FwsecFirmware {
+>> +    desc: FalconUCodeDescV3,
+>> +    ucode: FirmwareDmaObject<Self>,
+>> +}
+>> +
+>> +impl FalconLoadParams for FwsecFirmware {
+>> +    fn imem_load_params(&self) -> FalconLoadTarget {
+>> +        FalconLoadTarget {
+>> +            src_start: 0,
+>> +            dst_start: self.desc.imem_phys_base,
+>> +            len: self.desc.imem_load_size,
+>> +        }
+>> +    }
+>> +
+>> +    fn dmem_load_params(&self) -> FalconLoadTarget {
+>> +        FalconLoadTarget {
+>> +            src_start: self.desc.imem_load_size,
+>> +            dst_start: self.desc.dmem_phys_base,
+>> +            len: Layout::from_size_align(self.desc.dmem_load_size as us=
+ize, 256)
+>> +                // Cannot panic, as 256 is non-zero and a power of 2.
+>> +                .unwrap()
 >
-> But yeah to be extra sure, you need your version. By the way, what
-> happens if `align` is not a power of 2 in your version?
+> Why not just unwrap_unchecked() then? Or do we still want a possible pani=
+c
+> here just to make sure we didn't make a mistake?
 
-It will just return `(self + (self - 1)) & (alignment - 1)`, which will
-likely be a value you don't want.
+`unwrap_unchecked` requires an `unsafe` block, which I think it not
+really worth here. I'd expect the compiler to optimize the `unwrap` out
+anyway.
 
-So yes, for this particular operation we would prefer to only use powers
-of 2 as inputs - if we can ensure that then it solves most of our
-problems (can use `next_multiple_of`, no `Option`, etc).
-
-Maybe we can introduce a new integer type that, similarly to `NonZero`,
-guarantees that the value it stores is a power of 2? Users with const
-values (90+% of uses) won't see any difference, and if working with a
-runtime-generated value we will want to validate it anyway...
-
-(I can already hear you saying "send that to upstream Rust!" ^_^;)
