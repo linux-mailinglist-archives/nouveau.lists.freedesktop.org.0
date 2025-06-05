@@ -2,41 +2,40 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id 4772ACBADD3
-	for <lists+nouveau@lfdr.de>; Sat, 13 Dec 2025 13:45:30 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 2D520CBAF3A
+	for <lists+nouveau@lfdr.de>; Sat, 13 Dec 2025 13:46:57 +0100 (CET)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id AECC210EB47;
-	Sat, 13 Dec 2025 12:41:36 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 797A910EC80;
+	Sat, 13 Dec 2025 12:42:21 +0000 (UTC)
 Authentication-Results: gabe.freedesktop.org;
-	dkim=permerror (0-bit key) header.d=nppct.ru header.i=@nppct.ru header.b="muyYK09A";
+	dkim=permerror (0-bit key) header.d=nppct.ru header.i=@nppct.ru header.b="emr3/nIj";
 	dkim-atps=neutral
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
 Received: from mail.nppct.ru (mail.nppct.ru [195.133.245.4])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 0191E10E34C
- for <nouveau@lists.freedesktop.org>; Thu,  5 Jun 2025 20:03:54 +0000 (UTC)
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 3783110E2E4
+ for <nouveau@lists.freedesktop.org>; Thu,  5 Jun 2025 20:19:56 +0000 (UTC)
 Received: from mail.nppct.ru (localhost [127.0.0.1])
- by mail.nppct.ru (Postfix) with ESMTP id 07C6D1C11ED
- for <nouveau@lists.freedesktop.org>; Thu,  5 Jun 2025 23:03:52 +0300 (MSK)
+ by mail.nppct.ru (Postfix) with ESMTP id CABCE1C11F0
+ for <nouveau@lists.freedesktop.org>; Thu,  5 Jun 2025 23:19:49 +0300 (MSK)
 Authentication-Results: mail.nppct.ru (amavisd-new); dkim=pass (1024-bit key)
  reason="pass (just generated,
  assumed good)" header.d=nppct.ru
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=nppct.ru; h=
- content-transfer-encoding:mime-version:references:in-reply-to
- :x-mailer:message-id:date:date:subject:subject:to:from:from; s=
- dkim; t=1749153831; x=1750017832; bh=TeGhnktdSvFxXreUkwhblyYxGqC
- rkCLuVr00TRFUiKg=; b=muyYK09AKsd5svyarCM+wgyXi06Ne0zIQpr8osYyGlM
- mvFv38mvh3e1slWQweEQvM33yQ2sJPuyYfezhOkuBx44rteHQiJ3P3ULqQ0CTKY+
- Yf6RfncjFBjitQYbMnjScBBdtAJZeidKE5vZzL2zX0n+++cfU7vC7VRQHVDjnJt8
- =
+ content-transfer-encoding:mime-version:x-mailer:message-id:date
+ :date:subject:subject:to:from:from; s=dkim; t=1749154789; x=
+ 1750018790; bh=o1vWj2peYFzT+9B8W1tqxLwFgYA9lzDCmka4MeMf2gg=; b=e
+ mr3/nIjvbsJKIlluD5A2AXt79HamKalwBQHC4j2cvl/O2lIQGo58K3+ROOxiXWEc
+ /wT6BROuNrM1PiriGehwgjCYwpouiEboydme81nqxbdxJQfB3pRm9BQx9jUQHanB
+ NO0Gl8pPh3T1RkrWBhx8GKhPCwPIk57VLI2JOvfPBI=
 X-Virus-Scanned: Debian amavisd-new at mail.nppct.ru
 Received: from mail.nppct.ru ([127.0.0.1])
  by mail.nppct.ru (mail.nppct.ru [127.0.0.1]) (amavisd-new, port 10026)
- with ESMTP id Ds3obJ93Br3g for <nouveau@lists.freedesktop.org>;
- Thu,  5 Jun 2025 23:03:51 +0300 (MSK)
+ with ESMTP id qUeVTJnPgHQa for <nouveau@lists.freedesktop.org>;
+ Thu,  5 Jun 2025 23:19:49 +0300 (MSK)
 Received: from localhost.localdomain (unknown [87.249.24.51])
- by mail.nppct.ru (Postfix) with ESMTPSA id EA2801C2ABA;
- Thu,  5 Jun 2025 23:03:49 +0300 (MSK)
+ by mail.nppct.ru (Postfix) with ESMTPSA id 5176C1C0D75;
+ Thu,  5 Jun 2025 23:19:43 +0300 (MSK)
 From: Alexey Nepomnyashih <sdl@nppct.ru>
 To: Lyude Paul <lyude@redhat.com>
 Cc: Alexey Nepomnyashih <sdl@nppct.ru>, Danilo Krummrich <dakr@kernel.org>,
@@ -47,13 +46,11 @@ Cc: Alexey Nepomnyashih <sdl@nppct.ru>, Danilo Krummrich <dakr@kernel.org>,
  linux-stm32@st-md-mailman.stormreply.com,
  linux-arm-kernel@lists.infradead.org, linux-kernel@vger.kernel.org,
  lvc-project@linuxtesting.org, stable@vger.kernel.org
-Subject: [PATCH 2/2] drm/nouveau/instmem/gk20a: fix incorrect argument in
- iommu_unmap
-Date: Thu,  5 Jun 2025 20:03:24 +0000
-Message-ID: <20250605200332.336245-2-sdl@nppct.ru>
+Subject: [PATCH v2 1/2] drm/nouveau/instmem/gk20a: fix overflow in IOVA
+ calculation for iommu_map/unmap
+Date: Thu,  5 Jun 2025 20:19:20 +0000
+Message-ID: <20250605201927.339352-1-sdl@nppct.ru>
 X-Mailer: git-send-email 2.43.0
-In-Reply-To: <20250605200332.336245-1-sdl@nppct.ru>
-References: <20250605200332.336245-1-sdl@nppct.ru>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 X-Mailman-Approved-At: Sat, 13 Dec 2025 12:40:44 +0000
@@ -71,40 +68,42 @@ List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-The unmap logic assumes a fixed step size of PAGE_SIZE, but the
-actual IOVA step depends on iommu_pgshift, not PAGE_SHIFT. If
-iommu_pgshift > PAGE_SHIFT, this results in mismatched offsets and
-causes iommu_unmap() to target incorrect addresses, potentially
-leaving mappings intact or corrupting IOMMU state.
-
-Fix this by recomputing the offset per index using the same logic as
-in the map loop, ensuring symmetry and correctness.
+Fix possible overflow in the address expression used as the second
+argument to iommu_map() and iommu_unmap(). Without an explicit cast,
+this expression may overflow when 'r->offset' or 'i' are large. Cast
+the result to unsigned long before shifting to ensure correct IOVA
+computation and prevent unintended wraparound.
 
 Found by Linux Verification Center (linuxtesting.org) with SVACE.
 
-Cc: stable@vger.kernel.org # v4.3+
-Fixes: a7f6da6e758c ("drm/nouveau/instmem/gk20a: add IOMMU support")
+Cc: stable@vger.kernel.org # v4.4+
 Signed-off-by: Alexey Nepomnyashih <sdl@nppct.ru>
 ---
- drivers/gpu/drm/nouveau/nvkm/subdev/instmem/gk20a.c | 5 +++--
- 1 file changed, 3 insertions(+), 2 deletions(-)
+ drivers/gpu/drm/nouveau/nvkm/subdev/instmem/gk20a.c | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
 
 diff --git a/drivers/gpu/drm/nouveau/nvkm/subdev/instmem/gk20a.c b/drivers/gpu/drm/nouveau/nvkm/subdev/instmem/gk20a.c
-index 17a0e1a46211..f58e0d4fb2b1 100644
+index 201022ae9214..17a0e1a46211 100644
 --- a/drivers/gpu/drm/nouveau/nvkm/subdev/instmem/gk20a.c
 +++ b/drivers/gpu/drm/nouveau/nvkm/subdev/instmem/gk20a.c
-@@ -481,8 +481,9 @@ gk20a_instobj_ctor_iommu(struct gk20a_instmem *imem, u32 npages, u32 align,
- 			nvkm_error(subdev, "IOMMU mapping failure: %d\n", ret);
+@@ -334,7 +334,7 @@ gk20a_instobj_dtor_iommu(struct nvkm_memory *memory)
+ 	/* Unmap pages from GPU address space and free them */
+ 	for (i = 0; i < node->base.mn->length; i++) {
+ 		iommu_unmap(imem->domain,
+-			    (r->offset + i) << imem->iommu_pgshift, PAGE_SIZE);
++			    ((unsigned long)r->offset + i) << imem->iommu_pgshift, PAGE_SIZE);
+ 		dma_unmap_page(dev, node->dma_addrs[i], PAGE_SIZE,
+ 			       DMA_BIDIRECTIONAL);
+ 		__free_page(node->pages[i]);
+@@ -472,7 +472,7 @@ gk20a_instobj_ctor_iommu(struct gk20a_instmem *imem, u32 npages, u32 align,
  
- 			while (i-- > 0) {
--				offset -= PAGE_SIZE;
--				iommu_unmap(imem->domain, offset, PAGE_SIZE);
-+				iommu_unmap(imem->domain,
-+					    ((unsigned long)r->offset + i) << imem->iommu_pgshift,
-+					    PAGE_SIZE);
- 			}
- 			goto release_area;
- 		}
+ 	/* Map into GPU address space */
+ 	for (i = 0; i < npages; i++) {
+-		u32 offset = (r->offset + i) << imem->iommu_pgshift;
++		unsigned long offset = ((unsigned long)r->offset + i) << imem->iommu_pgshift;
+ 
+ 		ret = iommu_map(imem->domain, offset, node->dma_addrs[i],
+ 				PAGE_SIZE, IOMMU_READ | IOMMU_WRITE,
 -- 
 2.43.0
 
