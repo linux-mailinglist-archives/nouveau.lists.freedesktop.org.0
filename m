@@ -2,91 +2,58 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id 5FD87CBAE6D
-	for <lists+nouveau@lfdr.de>; Sat, 13 Dec 2025 13:46:07 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id DEB0BCBADD6
+	for <lists+nouveau@lfdr.de>; Sat, 13 Dec 2025 13:45:30 +0100 (CET)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 016D410EC17;
-	Sat, 13 Dec 2025 12:42:15 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id B1FEC10EB52;
+	Sat, 13 Dec 2025 12:41:36 +0000 (UTC)
 Authentication-Results: gabe.freedesktop.org;
-	dkim=permerror (0-bit key) header.d=gmail.com header.i=@gmail.com header.b="dKkQDez1";
+	dkim=permerror (0-bit key) header.d=nppct.ru header.i=@nppct.ru header.b="KI9nhAcI";
 	dkim-atps=neutral
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from mail-pg1-f173.google.com (mail-pg1-f173.google.com
- [209.85.215.173])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 00A3F10E6F7;
- Wed,  4 Jun 2025 10:03:45 +0000 (UTC)
-Received: by mail-pg1-f173.google.com with SMTP id
- 41be03b00d2f7-b2ef619e80eso327027a12.2; 
- Wed, 04 Jun 2025 03:03:45 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1749031425; x=1749636225; darn=lists.freedesktop.org;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=iYIRVfkXKufURUDOPAucqCIYt8hFzqU7YK1s1FIrhP8=;
- b=dKkQDez1dEHZ3MD1Ju+8AJjGr83Wig6msFXn+0yQ0efqf7kl9VAbDiZyhUIbI5HQTA
- EWQwDmqVsgcAJcFUtFny/S/HFs8sylmcn1NkoRHD1SX0NcSKLkSXGprnx4B1sDshRU2t
- kZAVQIbrGkDCXCXY4guEPpigHrlOdo787Y2UeGv++jLTrxe1K05nf+y8OLdrFBE1eyAq
- 7+W1cr0uuTf2jRj0sNFkd5/oVfGBQ+wprsjMwkF0JABMUjB/uhs9Cyu15mTYSy6ONWEY
- Eny7XZP2Fe9KHMsaNBqvpJ0q3mjavgIeGs5XCyhAxzKl1l0r/EKgAO9tJ+pDWENW1CMU
- yBxw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1749031425; x=1749636225;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=iYIRVfkXKufURUDOPAucqCIYt8hFzqU7YK1s1FIrhP8=;
- b=XrNbF5PG97OHncMmNAinQYkn62E9ylEj3/IkhCNqs8nS/lKclEUlX8NiLteKyGf5ly
- rbMah1VxkLMtcNMUJL6wsEeiwga3kICsXe/88eBAMZb7+1Q9SHwUiUB/k3py8G1s5WNp
- CjC7r8dqihdwBktB9VpkuEi9aANPSbUPA3yHgb8RCMu4bAy9KJzH9CBAozuqeP5oO5XE
- +O7xYYs5U0ZfiVoXfaPsX15Fq6Coxb85B7SUiZPuTYnUAhzyyDIV7X8tr7zpG+ZlezSm
- RYE9aeMJXmlyRowXfclS80GvhGZqxf7JXZZE85rNEuWjNWm+r+e0GMhg1FuGYWavNdKO
- CodQ==
-X-Forwarded-Encrypted: i=1;
- AJvYcCV/ROrgS8YC6bKEJ3UKS2BxTtPeLJj1I3yuvG/BUvfPHdVlzBenrQjx2CI+DwNBvQA5CfM5YxtCvQ==@lists.freedesktop.org,
- AJvYcCX9fEtQOU862BeRfpw+bxzEq3wzmFLpXV9/vOBg1HEyBa6meDN9GnuH8wXY4U9x1KKrDlWgT4BfTNE=@lists.freedesktop.org
-X-Gm-Message-State: AOJu0Yxc2EJmk+v5ZT5BOydbnT3h3eGCma8JV2em9qv/WoRgDuMIAY0b
- Y+ac2RYN2keN63RzQ5aPyqOpqErJ2O0PE07hWyOqOXTMkMdz0wBXHMdx7GaQwss3EON8E9ojyKB
- WJhJkhaLutZPn5pqmPbHw3dvAdX7Zleo=
-X-Gm-Gg: ASbGncuEOVAw3gQMKvKlbYryo1J1GL0M8L0PU1Id0tNwCbmZdB66URXkF+GvOnJ2hoh
- FedGcp0NTxCIsM6lBf8EPLE2g/CPqg8KyVj3Beir1PTeuKx4nNU8vQlqYy91wJut0olH9JgplS+
- l6fj2mLZ9b0cZQaG8WpMD5uHHpZ1KzLNhx
-X-Google-Smtp-Source: AGHT+IFY54/4SXuHhNfhR34u/tz7WHBUhSm2/IfQ3AqffQFchQvW18uxeL7Cd6oGwhaiU9pD6yfyiIBQ6dRYcZzfLS8=
-X-Received: by 2002:a17:903:181:b0:234:11cb:6f95 with SMTP id
- d9443c01a7336-235e116766cmr12020315ad.6.1749031425395; Wed, 04 Jun 2025
- 03:03:45 -0700 (PDT)
+Received: from mail.nppct.ru (mail.nppct.ru [195.133.245.4])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 0190210E30D
+ for <nouveau@lists.freedesktop.org>; Thu,  5 Jun 2025 20:03:54 +0000 (UTC)
+Received: from mail.nppct.ru (localhost [127.0.0.1])
+ by mail.nppct.ru (Postfix) with ESMTP id 3EBC61C2ABF
+ for <nouveau@lists.freedesktop.org>; Thu,  5 Jun 2025 23:03:52 +0300 (MSK)
+Authentication-Results: mail.nppct.ru (amavisd-new); dkim=pass (1024-bit key)
+ reason="pass (just generated,
+ assumed good)" header.d=nppct.ru
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=nppct.ru; h=
+ content-transfer-encoding:mime-version:x-mailer:message-id:date
+ :date:subject:subject:to:from:from; s=dkim; t=1749153825; x=
+ 1750017826; bh=o1vWj2peYFzT+9B8W1tqxLwFgYA9lzDCmka4MeMf2gg=; b=K
+ I9nhAcIiu7lrXTn3NaSpYUL8bNKN3JuEZPUAtssONVOxwA0OfQrmMVRtqDrTfQST
+ kfd5pvsOhmYcS89KLUgIxIfiT1B07gzs9+gNkR1YbWtLTB6hmsD1SiWoIZQ8MmcF
+ WObORsAQhNJAosjXCOvEpGDGM+Y6fvXsMWBkPfkouw=
+X-Virus-Scanned: Debian amavisd-new at mail.nppct.ru
+Received: from mail.nppct.ru ([127.0.0.1])
+ by mail.nppct.ru (mail.nppct.ru [127.0.0.1]) (amavisd-new, port 10026)
+ with ESMTP id fhNIWIKGZz7F for <nouveau@lists.freedesktop.org>;
+ Thu,  5 Jun 2025 23:03:45 +0300 (MSK)
+Received: from localhost.localdomain (unknown [87.249.24.51])
+ by mail.nppct.ru (Postfix) with ESMTPSA id 786081C0D75;
+ Thu,  5 Jun 2025 23:03:40 +0300 (MSK)
+From: Alexey Nepomnyashih <sdl@nppct.ru>
+To: 
+Cc: Alexey Nepomnyashih <sdl@nppct.ru>, Danilo Krummrich <dakr@kernel.org>,
+ David Airlie <airlied@gmail.com>, Simona Vetter <simona@ffwll.ch>,
+ Maxime Coquelin <mcoquelin.stm32@gmail.com>,
+ Alexandre Torgue <alexandre.torgue@foss.st.com>,
+ dri-devel@lists.freedesktop.org, nouveau@lists.freedesktop.org,
+ linux-stm32@st-md-mailman.stormreply.com,
+ linux-arm-kernel@lists.infradead.org, linux-kernel@vger.kernel.org,
+ lvc-project@linuxtesting.org, stable@vger.kernel.org
+Subject: [PATCH 1/2] drm/nouveau/instmem/gk20a: fix overflow in IOVA
+ calculation for iommu_map/unmap
+Date: Thu,  5 Jun 2025 20:03:23 +0000
+Message-ID: <20250605200332.336245-1-sdl@nppct.ru>
+X-Mailer: git-send-email 2.43.0
 MIME-Version: 1.0
-References: <20250521-nova-frts-v4-0-05dfd4f39479@nvidia.com>
- <20250521-nova-frts-v4-16-05dfd4f39479@nvidia.com>
- <f528cd2d491f15404f30317dd093cc7af5a00fa7.camel@redhat.com>
-In-Reply-To: <f528cd2d491f15404f30317dd093cc7af5a00fa7.camel@redhat.com>
-From: Miguel Ojeda <miguel.ojeda.sandonis@gmail.com>
-Date: Wed, 4 Jun 2025 12:03:32 +0200
-X-Gm-Features: AX0GCFvjWD_zgPyKD-OQaU5vX3FRf-KmGpph09TCktkVk0tXDV8Lo-vignDRYHw
-Message-ID: <CANiq72=daoTUH0qdEuTLtgaDsdNj=RVvX4fn2xjDtQZn7-xYcw@mail.gmail.com>
-Subject: Re: [PATCH v4 16/20] nova-core: Add support for VBIOS ucode
- extraction for boot
-To: Lyude Paul <lyude@redhat.com>
-Cc: Alexandre Courbot <acourbot@nvidia.com>, Miguel Ojeda <ojeda@kernel.org>, 
- Alex Gaynor <alex.gaynor@gmail.com>, Boqun Feng <boqun.feng@gmail.com>, 
- Gary Guo <gary@garyguo.net>,
- =?UTF-8?Q?Bj=C3=B6rn_Roy_Baron?= <bjorn3_gh@protonmail.com>, 
- Benno Lossin <benno.lossin@proton.me>, Andreas Hindborg <a.hindborg@kernel.org>,
- Alice Ryhl <aliceryhl@google.com>, Trevor Gross <tmgross@umich.edu>, 
- Danilo Krummrich <dakr@kernel.org>, David Airlie <airlied@gmail.com>,
- Simona Vetter <simona@ffwll.ch>, 
- Maarten Lankhorst <maarten.lankhorst@linux.intel.com>,
- Maxime Ripard <mripard@kernel.org>, 
- Thomas Zimmermann <tzimmermann@suse.de>, John Hubbard <jhubbard@nvidia.com>, 
- Ben Skeggs <bskeggs@nvidia.com>, Joel Fernandes <joelagnelf@nvidia.com>, 
- Timur Tabi <ttabi@nvidia.com>, Alistair Popple <apopple@nvidia.com>,
- linux-kernel@vger.kernel.org, 
- rust-for-linux@vger.kernel.org, nouveau@lists.freedesktop.org, 
- dri-devel@lists.freedesktop.org, Shirish Baskaran <sbaskaran@nvidia.com>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-X-Mailman-Approved-At: Sat, 13 Dec 2025 12:40:47 +0000
+Content-Transfer-Encoding: 8bit
+X-Mailman-Approved-At: Sat, 13 Dec 2025 12:40:44 +0000
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -101,21 +68,42 @@ List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-On Tue, Jun 3, 2025 at 11:05=E2=80=AFPM Lyude Paul <lyude@redhat.com> wrote=
-:
->
-> Not sure this makes sense - debug_assertions is supposed to be about
-> assertions, we probably shouldn't try to use it for other things (especia=
-lly
-> since we've already got dev_dbg! here)
+Fix possible overflow in the address expression used as the second
+argument to iommu_map() and iommu_unmap(). Without an explicit cast,
+this expression may overflow when 'r->offset' or 'i' are large. Cast
+the result to unsigned long before shifting to ensure correct IOVA
+computation and prevent unintended wraparound.
 
-Yeah, we added it in `pr_debug!`, but I think we should match the C
-side for that one instead.
+Found by Linux Verification Center (linuxtesting.org) with SVACE.
 
-In general, we probably want to say that enabling `debug_assertions`
-should ideally have no "visible" effect on the program if there are no
-bugs (modulo performance etc.; and it should have a loud effect if
-there is indeed a bug :)
+Cc: stable@vger.kernel.org # v4.4+
+Signed-off-by: Alexey Nepomnyashih <sdl@nppct.ru>
+---
+ drivers/gpu/drm/nouveau/nvkm/subdev/instmem/gk20a.c | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
 
-Cheers,
-Miguel
+diff --git a/drivers/gpu/drm/nouveau/nvkm/subdev/instmem/gk20a.c b/drivers/gpu/drm/nouveau/nvkm/subdev/instmem/gk20a.c
+index 201022ae9214..17a0e1a46211 100644
+--- a/drivers/gpu/drm/nouveau/nvkm/subdev/instmem/gk20a.c
++++ b/drivers/gpu/drm/nouveau/nvkm/subdev/instmem/gk20a.c
+@@ -334,7 +334,7 @@ gk20a_instobj_dtor_iommu(struct nvkm_memory *memory)
+ 	/* Unmap pages from GPU address space and free them */
+ 	for (i = 0; i < node->base.mn->length; i++) {
+ 		iommu_unmap(imem->domain,
+-			    (r->offset + i) << imem->iommu_pgshift, PAGE_SIZE);
++			    ((unsigned long)r->offset + i) << imem->iommu_pgshift, PAGE_SIZE);
+ 		dma_unmap_page(dev, node->dma_addrs[i], PAGE_SIZE,
+ 			       DMA_BIDIRECTIONAL);
+ 		__free_page(node->pages[i]);
+@@ -472,7 +472,7 @@ gk20a_instobj_ctor_iommu(struct gk20a_instmem *imem, u32 npages, u32 align,
+ 
+ 	/* Map into GPU address space */
+ 	for (i = 0; i < npages; i++) {
+-		u32 offset = (r->offset + i) << imem->iommu_pgshift;
++		unsigned long offset = ((unsigned long)r->offset + i) << imem->iommu_pgshift;
+ 
+ 		ret = iommu_map(imem->domain, offset, node->dma_addrs[i],
+ 				PAGE_SIZE, IOMMU_READ | IOMMU_WRITE,
+-- 
+2.43.0
+
