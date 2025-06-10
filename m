@@ -2,61 +2,60 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id D9B5FAD3352
-	for <lists+nouveau@lfdr.de>; Tue, 10 Jun 2025 12:12:45 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 79CD1AD3779
+	for <lists+nouveau@lfdr.de>; Tue, 10 Jun 2025 14:56:06 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 8162C10E10A;
-	Tue, 10 Jun 2025 10:12:44 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 3078210E303;
+	Tue, 10 Jun 2025 12:56:05 +0000 (UTC)
 Authentication-Results: gabe.freedesktop.org;
-	dkim=pass (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="GNxX638I";
+	dkim=pass (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="iGzKdesq";
 	dkim-atps=neutral
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from sea.source.kernel.org (sea.source.kernel.org [172.234.252.31])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 62C2A10E10A;
- Tue, 10 Jun 2025 10:12:43 +0000 (UTC)
+Received: from nyc.source.kernel.org (nyc.source.kernel.org [147.75.193.91])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id E3DEE10E303;
+ Tue, 10 Jun 2025 12:56:03 +0000 (UTC)
 Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by sea.source.kernel.org (Postfix) with ESMTP id 38EE544DDD;
- Tue, 10 Jun 2025 10:12:43 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id B5B36C4CEED;
- Tue, 10 Jun 2025 10:12:36 +0000 (UTC)
+ by nyc.source.kernel.org (Postfix) with ESMTP id 2ACE7A51266;
+ Tue, 10 Jun 2025 12:56:03 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 8EB62C4CEEF;
+ Tue, 10 Jun 2025 12:55:56 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1749550363;
- bh=ST5N4y7efa3WI81pyAb9EfnKKmnc6+2XM1s9J2ylets=;
+ s=k20201202; t=1749560162;
+ bh=ymdmRNA1an7znV7VwE8aKDdd9upCMjadrk7wwCN+JS0=;
  h=Date:Cc:Subject:From:To:References:In-Reply-To:From;
- b=GNxX638ICb6jA3ELDYkyk1s7ytMLGeQ8sQ1q+WnmBdHE0FHZeqPPV30patlKk4h3W
- Q7La763WOAZo37Ae1wurznNwOd521J9iYShUqkx7boJ960f/U7Vcsr8x1UF4TsHtGX
- DpeV/5AH3Z8eQFuiv2AnZU6sdDqBEME3Q3Djt0SLtCvCWKCk6b8IABBhUxYStwdJCB
- 5KZaf85Gd2aYMnXlrgxBaoPkQETCfw5Q2GDIkQEDp0OT01bDvQROABLvAvnfWpRipA
- I/Lh2T81rYpxt92Xq5FGmG0FPcWrqaTneDOpcKrpQOGxf15rVIH3Spk2ND9Hhp4rsh
- 2aPg25kRyu4yQ==
+ b=iGzKdesqdm1MrpyWKVIbnnnTO2O5kjtU0RWXuPsX72qmoBIf1+QGRaRjgZ2tudgyJ
+ r066JMd+OFmUd03hH7AREG3eFtPRIYeT5fffPBhRHTDNsYzZrn6GSXuoczYlB+tFEM
+ Xv83cl923uHkQY0nVAc6FsJLFl6Xy4uunqWmjZpzls9Pcz/9aoH+/TifQuZ8u0DNrI
+ nrPNp24G+J/OqKYjScTqVdrdyOBtof8CkpfQeM/WEzZpnj9R7LbpZfTUgnHFRF9Fse
+ 9ejaWmya7EgYDDrJ7BRajiE9GTVPe8gd8UDUzd+NxnZW5xx5LIyQvYxetZHzMia4dg
+ ACzOo9EY8FAwQ==
 Mime-Version: 1.0
 Content-Transfer-Encoding: quoted-printable
 Content-Type: text/plain; charset=UTF-8
-Date: Tue, 10 Jun 2025 12:12:35 +0200
-Message-Id: <DAIRU9INPO8A.1PLCLKFJJGODH@kernel.org>
-Cc: "Guilherme Giacomo Simoes" <trintaeoitogc@gmail.com>,
- <rafael@kernel.org>, <viresh.kumar@linaro.org>, <dakr@kernel.org>,
- <maarten.lankhorst@linux.intel.com>, <mripard@kernel.org>,
- <tzimmermann@suse.de>, <airlied@gmail.com>, <simona@ffwll.ch>,
- <mcgrof@kernel.org>, <russ.weight@linux.dev>, <ojeda@kernel.org>,
- <alex.gaynor@gmail.com>, <boqun.feng@gmail.com>, <gary@garyguo.net>,
- <bjorn3_gh@protonmail.com>, <a.hindborg@kernel.org>,
- <aliceryhl@google.com>, <tmgross@umich.edu>, <leitao@debian.org>,
- <gregkh@linuxfoundation.org>, <david.m.ertman@intel.com>,
- <ira.weiny@intel.com>, <leon@kernel.org>, <fujita.tomonori@gmail.com>,
- <tamird@gmail.com>, <igor.korotin.linux@gmail.com>,
- <walmeida@microsoft.com>, <anisse@astier.eu>, <linux-pm@vger.kernel.org>,
- <linux-kernel@vger.kernel.org>, <nouveau@lists.freedesktop.org>,
- <dri-devel@lists.freedesktop.org>, <rust-for-linux@vger.kernel.org>
+Date: Tue, 10 Jun 2025 14:55:55 +0200
+Message-Id: <DAIVBBJADWNR.1LLZJ6YWV8IN2@kernel.org>
+Cc: <a.hindborg@kernel.org>, <airlied@gmail.com>, <alex.gaynor@gmail.com>,
+ <aliceryhl@google.com>, <anisse@astier.eu>, <bjorn3_gh@protonmail.com>,
+ <boqun.feng@gmail.com>, <dakr@kernel.org>, <david.m.ertman@intel.com>,
+ <dri-devel@lists.freedesktop.org>, <fujita.tomonori@gmail.com>,
+ <gary@garyguo.net>, <gregkh@linuxfoundation.org>,
+ <igor.korotin.linux@gmail.com>, <ira.weiny@intel.com>, <leitao@debian.org>,
+ <leon@kernel.org>, <linux-kernel@vger.kernel.org>,
+ <linux-pm@vger.kernel.org>, <maarten.lankhorst@linux.intel.com>,
+ <mcgrof@kernel.org>, <mripard@kernel.org>, <nouveau@lists.freedesktop.org>,
+ <ojeda@kernel.org>, <rafael@kernel.org>, <russ.weight@linux.dev>,
+ <rust-for-linux@vger.kernel.org>, <simona@ffwll.ch>, <tamird@gmail.com>,
+ <tmgross@umich.edu>, <tzimmermann@suse.de>, <viresh.kumar@linaro.org>,
+ <walmeida@microsoft.com>
 Subject: Re: [PATCH] rust: module: remove deprecated author key
 From: "Benno Lossin" <lossin@kernel.org>
-To: "Miguel Ojeda" <miguel.ojeda.sandonis@gmail.com>
+To: "Guilherme Giacomo Simoes" <trintaeoitogc@gmail.com>,
+ <miguel.ojeda.sandonis@gmail.com>
 X-Mailer: aerc 0.20.1
-References: <20250609122200.179307-1-trintaeoitogc@gmail.com>
- <DAIQ9342ZFYD.3VQVI80A18HKX@kernel.org>
- <CANiq72kC1j-kprAQ5WU0QVV_zhyKfDPJ_M5E9xZ+8+fxt4R6qQ@mail.gmail.com>
-In-Reply-To: <CANiq72kC1j-kprAQ5WU0QVV_zhyKfDPJ_M5E9xZ+8+fxt4R6qQ@mail.gmail.com>
+References: <CANiq72kORZjTe3tPEBueDi57TGF7KfxgTSw4Tn0DQeK_X5hi5A@mail.gmail.com>
+ <20250610123731.194853-1-trintaeoitogc@gmail.com>
+In-Reply-To: <20250610123731.194853-1-trintaeoitogc@gmail.com>
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -71,21 +70,34 @@ List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-On Tue Jun 10, 2025 at 12:03 PM CEST, Miguel Ojeda wrote:
-> On Tue, Jun 10, 2025 at 10:58=E2=80=AFAM Benno Lossin <lossin@kernel.org>=
- wrote:
->>
->> Unrelated to this change, I think we should add email addresses to
->> people in authors. Possibly enforce it by scanning each author element
->> and checking if there is an email address.
->
-> Sounds good to me, but I am not sure if it is possible in all cases.
->
-> At least looking at C, there are company names too.
->
-> I even saw a URL...
+On Tue Jun 10, 2025 at 2:37 PM CEST, Guilherme Giacomo Simoes wrote:
+> Miguel Ojeda <miguel.ojeda.sandonis@gmail.com> wrotes:
+>> On Tue, Jun 10, 2025 at 12:12=E2=80=AFPM Benno Lossin <lossin@kernel.org=
+> wrote:
+>> >
+>> > Hmm, I guess a checkpatch lint fits better then?
+>>=20
+>> Yeah, that would work.
+>>=20
+>> Probably for the C side too -- from a quick grep I don't see it.
+> Maybe, after this patch we can make a checkpatch change for check the `au=
+thors`
+> key (and MODULE_AUTHOR for C side), and throw a WARN if the author is a n=
+ame
+> (not a url, or "rust for linux") and don't have a email address.=20
 
-Hmm, I guess a checkpatch lint fits better then?
+Most other authors fields that don't list explicit names use "Rust for
+Linux Contributors", so we should probably scan for that instead.
+
+But I think that we should no longer add any author fields using that.
+Things with that are from way back in the day (when RfL was still out of
+tree) where many people contributed to a single file, hence the use of
+that phrase.
+
+> Unless you guys tell me otherwise, I guess this is not so priority.
+
+Yeah this isn't high priority. We can just make this into a
+good-first-issue, then someone can eventually pick it up.
 
 ---
 Cheers,
