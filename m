@@ -2,54 +2,60 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id B3899AD2EC1
-	for <lists+nouveau@lfdr.de>; Tue, 10 Jun 2025 09:34:32 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id A1C62AD3009
+	for <lists+nouveau@lfdr.de>; Tue, 10 Jun 2025 10:24:41 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 6D74C10E47D;
-	Tue, 10 Jun 2025 07:34:31 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 1C74610E49E;
+	Tue, 10 Jun 2025 08:24:39 +0000 (UTC)
 Authentication-Results: gabe.freedesktop.org;
-	dkim=fail reason="signature verification failed" (2048-bit key; secure) header.d=infradead.org header.i=@infradead.org header.b="j0njGC3U";
+	dkim=pass (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="rDRqf8zz";
 	dkim-atps=neutral
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from desiato.infradead.org (desiato.infradead.org [90.155.92.199])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 8E0A110E470;
- Tue, 10 Jun 2025 07:34:25 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=infradead.org; s=desiato.20200630; h=Content-Transfer-Encoding:Content-Type
- :In-Reply-To:From:References:Cc:To:Subject:MIME-Version:Date:Message-ID:
- Sender:Reply-To:Content-ID:Content-Description;
- bh=VkI4nXK+TS/9EeUuqPQ0SR/T+jH8FR1py6Gdua1yCt4=; b=j0njGC3UPXcWm0z3vckW4pMCjt
- nkvunDF+OMq3AA7GF73Y/5O/P+cNVS6vGBHOuACD6FpVFT9UQK+Td4auN86ig2fIs8fsmw/axWEvu
- 0zaZdRaM0cWhvESthyGy3wcmgG9GvNMN+WzlKZSLkBg/GkbMacJICTm/3GUfyqgZwDOuQjpV/Ib7e
- Yp5ENxv04Ut/+uTseM4aPhaNu8MtaT2kxqYNHGeHV9hnVuFMRJHIbGkUHmKbQx2pCuOzNWSffSSff
- OQxSJW4qyB2U5fX9ZZR0asetT4W551WCyTvSNitSt1waxnpuP5hWLbv2H7osuQx5qm3DaVrye/ZSl
- fcJrueYA==;
-Received: from [50.53.25.54] (helo=[192.168.254.17])
- by desiato.infradead.org with esmtpsa (Exim 4.98.2 #2 (Red Hat Linux))
- id 1uOtUp-00000001kLw-3mFR; Tue, 10 Jun 2025 07:34:12 +0000
-Message-ID: <b17709fd-7ca6-40dc-8d9c-7d3a98d9d305@infradead.org>
-Date: Tue, 10 Jun 2025 00:34:06 -0700
+Received: from nyc.source.kernel.org (nyc.source.kernel.org [147.75.193.91])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 272CC10E49E;
+ Tue, 10 Jun 2025 08:24:37 +0000 (UTC)
+Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
+ by nyc.source.kernel.org (Postfix) with ESMTP id F1326A4B8AA;
+ Tue, 10 Jun 2025 08:24:35 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 804D5C4CEF2;
+ Tue, 10 Jun 2025 08:24:29 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+ s=k20201202; t=1749543875;
+ bh=quoL3/AbdEFxunyDYr3lt/Bd6viOltjUaS68qAqZ3DQ=;
+ h=From:To:Cc:Subject:In-Reply-To:References:Date:From;
+ b=rDRqf8zzpSFUo0jbg2eDk6j3WzKLDA90jIoYg/dklaNpFkx175lQWor1PQ6gKRwJn
+ W3g3usxWTOyIK27uKUaoYOPLGX3IfXzZ/88WSmBgkqoRt9CvADaWOOdvRCT4q1rk/P
+ bx6r5x4zOONF/fMarbOyonJC19vsFGkRPJT8EQsvTCEbOosUKMFs//DW06oRK5wCif
+ bCDE4JycDmqkjFA7L9sOB8JmeBOwTS2Hgf4z054PPsQpwMqvruLAnM1vA+yZm7klDn
+ 08Y1sscR8a8Hmx0dTB5Q5ADJftiP7JYUnpKOSK7zwIYcgRygpOh4ORHNgmxoYcZsLN
+ SXz5W6YklVztA==
+From: Andreas Hindborg <a.hindborg@kernel.org>
+To: "Guilherme Giacomo Simoes" <trintaeoitogc@gmail.com>
+Cc: <rafael@kernel.org>,  <viresh.kumar@linaro.org>,  <dakr@kernel.org>,
+ <maarten.lankhorst@linux.intel.com>,  <mripard@kernel.org>,
+ <tzimmermann@suse.de>,  <airlied@gmail.com>,  <simona@ffwll.ch>,
+ <mcgrof@kernel.org>,  <russ.weight@linux.dev>,  <ojeda@kernel.org>,
+ <alex.gaynor@gmail.com>,  <boqun.feng@gmail.com>,  <gary@garyguo.net>,
+ <bjorn3_gh@protonmail.com>,  <lossin@kernel.org>,
+ <aliceryhl@google.com>,  <tmgross@umich.edu>,  <leitao@debian.org>,
+ <gregkh@linuxfoundation.org>,  <david.m.ertman@intel.com>,
+ <ira.weiny@intel.com>,  <leon@kernel.org>,  <fujita.tomonori@gmail.com>,
+ <tamird@gmail.com>,  <igor.korotin.linux@gmail.com>,
+ <walmeida@microsoft.com>,  <anisse@astier.eu>,
+ <linux-pm@vger.kernel.org>,  <linux-kernel@vger.kernel.org>,
+ <nouveau@lists.freedesktop.org>,  <dri-devel@lists.freedesktop.org>,
+ <rust-for-linux@vger.kernel.org>
+Subject: Re: [PATCH] rust: module: remove deprecated author key
+In-Reply-To: <20250609122200.179307-1-trintaeoitogc@gmail.com> (Guilherme
+ Giacomo Simoes's message of "Mon, 09 Jun 2025 09:22:00 -0300")
+References: <4pEkPxIXoND4Ndog7RjFo36DrUhFW-OT8Z6Y21aYvhfqE0rgUEmYEGn2PStTYOsOfpXv0R8aWmboCdc0m8uZfA==@protonmail.internalid>
+ <20250609122200.179307-1-trintaeoitogc@gmail.com>
+User-Agent: mu4e 1.12.9; emacs 30.1
+Date: Tue, 10 Jun 2025 10:24:20 +0200
+Message-ID: <87y0u02edn.fsf@kernel.org>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH] Documentation: nouveau: Update GSP message queue
- kernel-doc reference
-To: Bagas Sanjaya <bagasdotme@gmail.com>,
- Linux Kernel Mailing List <linux-kernel@vger.kernel.org>,
- Linux Documentation <linux-doc@vger.kernel.org>,
- Linux DRI Development <dri-devel@lists.freedesktop.org>,
- Linux Nouveau <nouveau@lists.freedesktop.org>
-Cc: David Airlie <airlied@gmail.com>, Simona Vetter <simona@ffwll.ch>,
- Maarten Lankhorst <maarten.lankhorst@linux.intel.com>,
- Maxime Ripard <mripard@kernel.org>, Thomas Zimmermann <tzimmermann@suse.de>,
- Jonathan Corbet <corbet@lwn.net>, Dave Airlie <airlied@redhat.com>,
- Timur Tabi <ttabi@nvidia.com>, Ben Skeggs <bskeggs@nvidia.com>
-References: <20250610065258.41467-1-bagasdotme@gmail.com>
-Content-Language: en-US
-From: Randy Dunlap <rdunlap@infradead.org>
-In-Reply-To: <20250610065258.41467-1-bagasdotme@gmail.com>
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
+Content-Type: text/plain
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -64,57 +70,23 @@ List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
+"Guilherme Giacomo Simoes" <trintaeoitogc@gmail.com> writes:
+
+> Commit 38559da6afb2 ("rust: module: introduce `authors` key") introduced
+> a new `authors` key to support multiple module authors, while keeping
+> the old `author` key for backward compatibility.
+>
+> Now that all in-tree modules have migrated to `authors`, remove:
+> 1. The deprecated `author` key support from the module macro
+> 2. Legacy `author` entries from remaining modules
+>
+> Signed-off-by: Guilherme Giacomo Simoes <trintaeoitogc@gmail.com>
 
 
-On 6/9/25 11:52 PM, Bagas Sanjaya wrote:
-> Commit c472d828348caf ("drm/nouveau/gsp: move subdev/engine impls to
-> subdev/gsp/rm/r535/") moves GSP-RM message queue implementation in
-> drivers/gpu/drm/nouveau/nvkm/subdev/gsp/r535.c to versioned path in
-> drivers/gpu/drm/nouveau/nvkm/subdev/gsp/rm/r535/gsp.c, but forgets to
-> update kernel-doc reference in nouveau docs, hence triggers htmldocs
-> warnings:
-> 
-> ERROR: Cannot find file ./drivers/gpu/drm/nouveau/nvkm/subdev/gsp/r535.c
-> WARNING: No kernel-doc for file ./drivers/gpu/drm/nouveau/nvkm/subdev/gsp/r535.c
-> 
-> Update the reference.
-> 
-> Fixes: c472d828348c ("drm/nouveau/gsp: move subdev/engine impls to subdev/gsp/rm/r535/")
-> Signed-off-by: Bagas Sanjaya <bagasdotme@gmail.com>
-> ---
->  Documentation/gpu/nouveau.rst | 2 +-
->  1 file changed, 1 insertion(+), 1 deletion(-)
-> 
-> diff --git a/Documentation/gpu/nouveau.rst b/Documentation/gpu/nouveau.rst
-> index b8c801e0068cb0..878fb1ade31e4c 100644
-> --- a/Documentation/gpu/nouveau.rst
-> +++ b/Documentation/gpu/nouveau.rst
-> @@ -25,7 +25,7 @@ providing a consistent API to upper layers of the driver stack.
->  GSP Support
->  ------------------------
->  
-> -.. kernel-doc:: drivers/gpu/drm/nouveau/nvkm/subdev/gsp/r535.c
-> +.. kernel-doc:: drivers/gpu/drm/nouveau/nvkm/subdev/gsp/rm/r535/gsp.c
-
-Are you sure?  Did that work for you?
-
-I see
-/**
- * DOC: GSP message queue element
-
-in drivers/gpu/drm/nouveau/nvkm/subdev/gsp/rm/r535/rpc.c but not in the
-file that you referenced.  Maybe it just keeps moving around...
+Acked-by: Andreas Hindborg <a.hindborg@kernel.org>
 
 
-This works for me. Please send a v2 if you see the need to.
+Best regards,
+Andreas Hindborg
 
-
->     :doc: GSP message queue element
->  
->  .. kernel-doc:: drivers/gpu/drm/nouveau/include/nvkm/subdev/gsp.h
-> 
-> base-commit: 19272b37aa4f83ca52bdf9c16d5d81bdd1354494
-
--- 
-~Randy
 
