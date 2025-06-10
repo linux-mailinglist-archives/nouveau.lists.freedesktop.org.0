@@ -2,60 +2,67 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id 79CD1AD3779
-	for <lists+nouveau@lfdr.de>; Tue, 10 Jun 2025 14:56:06 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id A6FA7AD4515
+	for <lists+nouveau@lfdr.de>; Tue, 10 Jun 2025 23:55:12 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 3078210E303;
-	Tue, 10 Jun 2025 12:56:05 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 3416A10E5D1;
+	Tue, 10 Jun 2025 21:55:10 +0000 (UTC)
 Authentication-Results: gabe.freedesktop.org;
-	dkim=pass (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="iGzKdesq";
+	dkim=pass (2048-bit key; unprotected) header.d=intel.com header.i=@intel.com header.b="EnYiEQgl";
 	dkim-atps=neutral
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from nyc.source.kernel.org (nyc.source.kernel.org [147.75.193.91])
- by gabe.freedesktop.org (Postfix) with ESMTPS id E3DEE10E303;
- Tue, 10 Jun 2025 12:56:03 +0000 (UTC)
-Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by nyc.source.kernel.org (Postfix) with ESMTP id 2ACE7A51266;
- Tue, 10 Jun 2025 12:56:03 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 8EB62C4CEEF;
- Tue, 10 Jun 2025 12:55:56 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1749560162;
- bh=ymdmRNA1an7znV7VwE8aKDdd9upCMjadrk7wwCN+JS0=;
- h=Date:Cc:Subject:From:To:References:In-Reply-To:From;
- b=iGzKdesqdm1MrpyWKVIbnnnTO2O5kjtU0RWXuPsX72qmoBIf1+QGRaRjgZ2tudgyJ
- r066JMd+OFmUd03hH7AREG3eFtPRIYeT5fffPBhRHTDNsYzZrn6GSXuoczYlB+tFEM
- Xv83cl923uHkQY0nVAc6FsJLFl6Xy4uunqWmjZpzls9Pcz/9aoH+/TifQuZ8u0DNrI
- nrPNp24G+J/OqKYjScTqVdrdyOBtof8CkpfQeM/WEzZpnj9R7LbpZfTUgnHFRF9Fse
- 9ejaWmya7EgYDDrJ7BRajiE9GTVPe8gd8UDUzd+NxnZW5xx5LIyQvYxetZHzMia4dg
- ACzOo9EY8FAwQ==
-Mime-Version: 1.0
-Content-Transfer-Encoding: quoted-printable
-Content-Type: text/plain; charset=UTF-8
-Date: Tue, 10 Jun 2025 14:55:55 +0200
-Message-Id: <DAIVBBJADWNR.1LLZJ6YWV8IN2@kernel.org>
-Cc: <a.hindborg@kernel.org>, <airlied@gmail.com>, <alex.gaynor@gmail.com>,
- <aliceryhl@google.com>, <anisse@astier.eu>, <bjorn3_gh@protonmail.com>,
- <boqun.feng@gmail.com>, <dakr@kernel.org>, <david.m.ertman@intel.com>,
- <dri-devel@lists.freedesktop.org>, <fujita.tomonori@gmail.com>,
- <gary@garyguo.net>, <gregkh@linuxfoundation.org>,
- <igor.korotin.linux@gmail.com>, <ira.weiny@intel.com>, <leitao@debian.org>,
- <leon@kernel.org>, <linux-kernel@vger.kernel.org>,
- <linux-pm@vger.kernel.org>, <maarten.lankhorst@linux.intel.com>,
- <mcgrof@kernel.org>, <mripard@kernel.org>, <nouveau@lists.freedesktop.org>,
- <ojeda@kernel.org>, <rafael@kernel.org>, <russ.weight@linux.dev>,
- <rust-for-linux@vger.kernel.org>, <simona@ffwll.ch>, <tamird@gmail.com>,
- <tmgross@umich.edu>, <tzimmermann@suse.de>, <viresh.kumar@linaro.org>,
- <walmeida@microsoft.com>
-Subject: Re: [PATCH] rust: module: remove deprecated author key
-From: "Benno Lossin" <lossin@kernel.org>
-To: "Guilherme Giacomo Simoes" <trintaeoitogc@gmail.com>,
- <miguel.ojeda.sandonis@gmail.com>
-X-Mailer: aerc 0.20.1
-References: <CANiq72kORZjTe3tPEBueDi57TGF7KfxgTSw4Tn0DQeK_X5hi5A@mail.gmail.com>
- <20250610123731.194853-1-trintaeoitogc@gmail.com>
-In-Reply-To: <20250610123731.194853-1-trintaeoitogc@gmail.com>
+Received: from mgamail.intel.com (mgamail.intel.com [198.175.65.21])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 9ABD110E5CF;
+ Tue, 10 Jun 2025 21:55:08 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
+ d=intel.com; i=@intel.com; q=dns/txt; s=Intel;
+ t=1749592508; x=1781128508;
+ h=from:date:subject:mime-version:content-transfer-encoding:
+ message-id:to:cc;
+ bh=jHqE/M83tEgWWEESsQZJOZxo4PhfowOIr8iQtAHpI7M=;
+ b=EnYiEQglygHxwB3lSs5nCRIH0Ga3CvZi07lMTzTexAav6mRqooTJXInd
+ kAmNt5bvMQBSOe/REkEQsM3maaI7Ow731exXAxDhXIT7Z9F38rfjiJ4nZ
+ kwG3/IiaNG84+eoiSquFFpY/3r8p+SAU8bSdsJQjQ7ejEcLi20DxKJFqo
+ 7Qd5Xe5oi4+9oAAXvhGU+B1j/JwHczHXUz5YbaJpIXZRQBwAxJzEA3ln0
+ qxFcHZOWJVu/cqfPnFWJ2hHLp6yDwMVVQD1ESUvmLf6Whw+8a2WdatAGa
+ fKZMquYbHwE/NHlwOX0kCrnbS0+zsCLVq7tWFUA5IbwbgRMQqIk7Y5yrW A==;
+X-CSE-ConnectionGUID: 3hgb4C6cQf+ka6epOMa0Ew==
+X-CSE-MsgGUID: M4hkEqSMTm+B3tZfMSD0Tw==
+X-IronPort-AV: E=McAfee;i="6800,10657,11460"; a="51577977"
+X-IronPort-AV: E=Sophos;i="6.16,226,1744095600"; d="scan'208";a="51577977"
+Received: from fmviesa008.fm.intel.com ([10.60.135.148])
+ by orvoesa113.jf.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
+ 10 Jun 2025 14:55:08 -0700
+X-CSE-ConnectionGUID: wMsJenf1TFSH/QEHBAKL4g==
+X-CSE-MsgGUID: X7qn84rdS2mqpLfeMJKBLQ==
+X-ExtLoop1: 1
+X-IronPort-AV: E=Sophos;i="6.16,226,1744095600"; d="scan'208";a="147336540"
+Received: from jekeller-desk.jf.intel.com ([10.166.241.15])
+ by fmviesa008-auth.fm.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
+ 10 Jun 2025 14:55:07 -0700
+From: Jacob Keller <jacob.e.keller@intel.com>
+Date: Tue, 10 Jun 2025 14:54:51 -0700
+Subject: [PATCH v2] drm/nouveau/bl: increase buffer size to avoid truncate
+ warning
+MIME-Version: 1.0
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 8bit
+Message-Id: <20250610-jk-nouveua-drm-bl-snprintf-fix-v2-1-7fdd4b84b48e@intel.com>
+X-B4-Tracking: v=1; b=H4sIAKqpSGgC/42NQQ6CMBBFr0Jm7RhaKAZX3sOwKG2RUWhJC42G9
+ O5WTuDyvZ+8v0MwnkyAa7GDN5ECOZuBnwpQo7QPg6QzAy+5KJuyxucLrdui2SRqP2M/YbCLJ7s
+ OONAbFVdScCErzQfIkcWbrI+De5d5pLA6/zn+IvvZv9ORIcNL2zPRVlI3TX3Lk5nOys3QpZS+B
+ EwQ1MwAAAA=
+X-Change-ID: 20250604-jk-nouveua-drm-bl-snprintf-fix-c2ca525a3d2f
+To: Lyude Paul <lyude@redhat.com>, Danilo Krummrich <dakr@kernel.org>, 
+ David Airlie <airlied@gmail.com>, Simona Vetter <simona@ffwll.ch>, 
+ Ben Skeggs <bskeggs@redhat.com>, Pierre Moreau <pierre.morrow@free.fr>, 
+ Christophe JAILLET <christophe.jaillet@wanadoo.fr>, 
+ Philip Li <philip.li@intel.com>
+Cc: dri-devel@lists.freedesktop.org, nouveau@lists.freedesktop.org, 
+ linux-kernel@vger.kernel.org, kernel test robot <lkp@intel.com>, 
+ Timur Tabi <ttabi@nvidia.com>, Jacob Keller <jacob.e.keller@intel.com>
+X-Mailer: b4 0.14.2
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -70,35 +77,79 @@ List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-On Tue Jun 10, 2025 at 2:37 PM CEST, Guilherme Giacomo Simoes wrote:
-> Miguel Ojeda <miguel.ojeda.sandonis@gmail.com> wrotes:
->> On Tue, Jun 10, 2025 at 12:12=E2=80=AFPM Benno Lossin <lossin@kernel.org=
-> wrote:
->> >
->> > Hmm, I guess a checkpatch lint fits better then?
->>=20
->> Yeah, that would work.
->>=20
->> Probably for the C side too -- from a quick grep I don't see it.
-> Maybe, after this patch we can make a checkpatch change for check the `au=
-thors`
-> key (and MODULE_AUTHOR for C side), and throw a WARN if the author is a n=
-ame
-> (not a url, or "rust for linux") and don't have a email address.=20
+The nouveau_get_backlight_name() function generates a unique name for the
+backlight interface, appending an id from 1 to 99 for all backlight devices
+after the first.
 
-Most other authors fields that don't list explicit names use "Rust for
-Linux Contributors", so we should probably scan for that instead.
+GCC 15 (and likely other compilers) produce the following
+-Wformat-truncation warning:
 
-But I think that we should no longer add any author fields using that.
-Things with that are from way back in the day (when RfL was still out of
-tree) where many people contributed to a single file, hence the use of
-that phrase.
+nouveau_backlight.c: In function ‘nouveau_backlight_init’:
+nouveau_backlight.c:56:69: error: ‘%d’ directive output may be truncated writing between 1 and 10 bytes into a region of size 3 [-Werror=format-truncation=]
+   56 |                 snprintf(backlight_name, BL_NAME_SIZE, "nv_backlight%d", nb);
+      |                                                                     ^~
+In function ‘nouveau_get_backlight_name’,
+    inlined from ‘nouveau_backlight_init’ at nouveau_backlight.c:351:7:
+nouveau_backlight.c:56:56: note: directive argument in the range [1, 2147483647]
+   56 |                 snprintf(backlight_name, BL_NAME_SIZE, "nv_backlight%d", nb);
+      |                                                        ^~~~~~~~~~~~~~~~
+nouveau_backlight.c:56:17: note: ‘snprintf’ output between 14 and 23 bytes into a destination of size 15
+   56 |                 snprintf(backlight_name, BL_NAME_SIZE, "nv_backlight%d", nb);
+      |                 ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-> Unless you guys tell me otherwise, I guess this is not so priority.
+The warning started appearing after commit ab244be47a8f ("drm/nouveau:
+Fix a potential theorical leak in nouveau_get_backlight_name()") This fix
+for the ida usage removed the explicit value check for ids larger than 99.
+The compiler is unable to intuit that the ida_alloc_max() limits the
+returned value range between 0 and 99.
 
-Yeah this isn't high priority. We can just make this into a
-good-first-issue, then someone can eventually pick it up.
+Because the compiler can no longer infer that the number ranges from 0 to
+99, it thinks that it could use as many as 11 digits (10 + the potential -
+sign for negative numbers).
+
+The warning has gone unfixed for some time, with at least one kernel test
+robot report. The code breaks W=1 builds, which is especially frustrating
+with the introduction of CONFIG_WERROR.
+
+The string is stored temporarily on the stack and then copied into the
+device name. Its not a big deal to use 11 more bytes of stack rounding out
+to an even 24 bytes. Increase BL_NAME_SIZE to 24 to avoid the truncation
+warning. This fixes the W=1 builds that include this driver.
+
+Compile tested only.
+
+Fixes: ab244be47a8f ("drm/nouveau: Fix a potential theorical leak in nouveau_get_backlight_name()")
+Reported-by: kernel test robot <lkp@intel.com>
+Closes: https://lore.kernel.org/oe-kbuild-all/202312050324.0kv4PnfZ-lkp@intel.com/
+Suggested-by: Timur Tabi <ttabi@nvidia.com>
+Signed-off-by: Jacob Keller <jacob.e.keller@intel.com>
+---
+Changes in v2:
+- Just increase the buffer size
+- Link to v1: https://lore.kernel.org/r/20250604-jk-nouveua-drm-bl-snprintf-fix-v1-1-79b1593ad664@intel.com
+---
+ drivers/gpu/drm/nouveau/nouveau_backlight.c | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/drivers/gpu/drm/nouveau/nouveau_backlight.c b/drivers/gpu/drm/nouveau/nouveau_backlight.c
+index d47442125fa183146135f3725eae161c68e2a900..9aae26eb7d8fba54c8a989bfe7ecc2b10ccf7f61 100644
+--- a/drivers/gpu/drm/nouveau/nouveau_backlight.c
++++ b/drivers/gpu/drm/nouveau/nouveau_backlight.c
+@@ -42,7 +42,7 @@
+ #include "nouveau_acpi.h"
+ 
+ static struct ida bl_ida;
+-#define BL_NAME_SIZE 15 // 12 for name + 2 for digits + 1 for '\0'
++#define BL_NAME_SIZE 24 // 12 for name + 11 for digits + 1 for '\0'
+ 
+ static bool
+ nouveau_get_backlight_name(char backlight_name[BL_NAME_SIZE],
 
 ---
-Cheers,
-Benno
+base-commit: 90b83efa6701656e02c86e7df2cb1765ea602d07
+change-id: 20250604-jk-nouveua-drm-bl-snprintf-fix-c2ca525a3d2f
+
+Best regards,
+-- 
+Jacob Keller <jacob.e.keller@intel.com>
+
