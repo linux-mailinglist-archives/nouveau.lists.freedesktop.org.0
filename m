@@ -2,68 +2,69 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id 6F973CBAE5B
-	for <lists+nouveau@lfdr.de>; Sat, 13 Dec 2025 13:46:03 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 5A9D5CBADBE
+	for <lists+nouveau@lfdr.de>; Sat, 13 Dec 2025 13:45:25 +0100 (CET)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 9A88610EC13;
-	Sat, 13 Dec 2025 12:42:14 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 407D910EB03;
+	Sat, 13 Dec 2025 12:41:36 +0000 (UTC)
 Authentication-Results: gabe.freedesktop.org;
-	dkim=permerror (0-bit key) header.d=gmail.com header.i=@gmail.com header.b="mKw9RiuE";
+	dkim=permerror (0-bit key) header.d=gmail.com header.i=@gmail.com header.b="fhlXrLBU";
 	dkim-atps=neutral
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from mail-pl1-f170.google.com (mail-pl1-f170.google.com
- [209.85.214.170])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 1065A10E4DF;
- Tue, 10 Jun 2025 10:03:48 +0000 (UTC)
-Received: by mail-pl1-f170.google.com with SMTP id
- d9443c01a7336-234b9b01a76so4822505ad.3; 
- Tue, 10 Jun 2025 03:03:48 -0700 (PDT)
+Received: from mail-pj1-f54.google.com (mail-pj1-f54.google.com
+ [209.85.216.54])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id B6E8C10E4D9;
+ Tue, 10 Jun 2025 10:10:10 +0000 (UTC)
+Received: by mail-pj1-f54.google.com with SMTP id
+ 98e67ed59e1d1-313336f8438so861740a91.0; 
+ Tue, 10 Jun 2025 03:10:10 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1749549827; x=1750154627; darn=lists.freedesktop.org;
+ d=gmail.com; s=20230601; t=1749550210; x=1750155010; darn=lists.freedesktop.org;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:from:to:cc:subject:date
  :message-id:reply-to;
- bh=tTJU7HrJ6ej1SJiEBa65fcjJmrmv7m2MmkFfBg64efA=;
- b=mKw9RiuEqK07lOgFynWQZZ2j+YfAXnLa1nzxk84e+JTx/wRufmLOmxLL7W+Hlr3Ova
- Ph3+9ess/PSdFk1pmFIkYTrOwoknXBe8sUx1pHrUQMUmMWlcio+5cT52B0s0sv+fB89e
- Uws/VI4ybSYjtZBsYADT2n2x3aPeRvRIWX+lt9LW6phQVuDwxKtnsl2A9ZTdT0GshksR
- +P8nZykWwx6cnBhXTjc10/fpyVIJQAAsy8kxPi9uLkqUvunh4/0SBJonOJc6aD6/Ibfy
- ZHtWThnbJybcZ/HqwdHGtOTN2j6IrlO+ooNVvgEP4neQv+LwLFfcKE6mRgXrd0cKkYjl
- pTMg==
+ bh=ZRl5cQXysfFPXL6AFBbaJUkmuUlj4Q8VKoGcUuUjP+k=;
+ b=fhlXrLBU/+ZSBU5H+5M49gjoaphC1jJRPveMXJHSgVV1/B/SoBoc0RMXFXJ5WRifv1
+ 71Z30m0OIfKbMae2Jt+1gCCMmTDy1D7Q6Gnwq9uPUJI0bdotk2KOcW4E2u4V7XsgaD6J
+ lpp+Vn3PmNrF+8a65gN0ZACz16T7sqqafyvoenFhpqSuUzHDB/FkTN+yX3mYvTMu6qmF
+ CVVT7eRJNsmba8HevJvRkxPWtueusPbEQjhAjum7cQI8xW5RCqczTkIGLo+4mTILchWS
+ JYWcfyhdZevYPWhffWCIy1470nYnP2cGgv9+Rw9j9QM9VsQy15MNhF92yH2KrQMcizMM
+ mkIw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1749549827; x=1750154627;
+ d=1e100.net; s=20230601; t=1749550210; x=1750155010;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=tTJU7HrJ6ej1SJiEBa65fcjJmrmv7m2MmkFfBg64efA=;
- b=smyPrYD31JcTLSwHazK2Szou7KWHkdETPVOpyOHLWavMU88CVG+khZLGjAQ/3DnF0T
- NePf+V80vgKU31Tl7tbuQK3E6CK2kVf0LdLj8MTZzYW7d1k/aJTaBq/sUZ4wvAGO+VKv
- sBTwcHW1y3mQQSR+8hZ5s2Vd0Hv+LMv1vAcB1NhWkCHes6DBmzH2squfOuCCBZ1SwFcQ
- R6g475Ihl338gANPhxXEtE+4mC35Fa6MqkeYZfDLxCRaTFo/mqku5svNmV7TNizJ4c0i
- wb8Rxu2OumsqImb2pXnPuEbCLuhCGK6hI0MfVQIrFkBF9DlkLx4cY/WmNZVQP9xu4hRr
- IIBQ==
+ bh=ZRl5cQXysfFPXL6AFBbaJUkmuUlj4Q8VKoGcUuUjP+k=;
+ b=FQlCt4bf2LAJ56iJ+ELkDxmmK/lVCrERFy3tVZnFHklFkll2aTH2JD5WMykTjb+5EK
+ awLoTv+hAx3DCHA24uuAIv4r9KABP8D+K1nhLCMcYo0xTEsyWMiOZFRzAoeVl/2iT+mI
+ ezxyd2zqPwXmPGS0dZ/VqkERgSXQfc00Lba2ZVkiVtzvnVZ/q5DmLQj6CIs4PF+SDNGj
+ 99whIe2cFAqTHZtHjcsr193YwX/QGgQSkRrpwdyX7TBtOGs2PStvyIGl9Qrn8ByeqY0Z
+ 5KBsaVRmyqtQzMgl4QmhYhh28H3GQgva9f1rAOHWem3mw3K3YOEuOxOwklOsyFufBmg9
+ gu8Q==
 X-Forwarded-Encrypted: i=1;
- AJvYcCUZ5XskjvX/YZX8epzvc2ALKWuIJpoSERIOAsDSDxsM8zhl85Alffbq4xF6qtpgfmwCuFPJFzXgIw==@lists.freedesktop.org,
- AJvYcCWzhFSishHNcf7pDiTxJx0GKsU4P8sm4ad/L59h6h0hkF6lxSVVxmzaEM32joQzY4bz7+i82n3f39E=@lists.freedesktop.org
-X-Gm-Message-State: AOJu0YyXLn+qu5o89fUSYaGPp9IMLn8Ka2ABfsRi7kAnBWatbFMnNQqo
- ztSmn6TQbnnhF7D2P3A29x0G1a2s8rKS1ljw5H2494v+lS/81rtFDYPb6c+/yDxlLC56Mk2xfsW
- ttzVrDTqzlH1LQuHVhzER0y4lT5r52IA=
-X-Gm-Gg: ASbGnctl/N587Yz5fXGlzoxmz5HvAL180bjcDMMLW6/Cr2revgjSs9oPh9Hf/gu1SCW
- NPRCmWKYfYzWZdhNAgkKEIfFd+aBXPa8YT7HxIseACtGZcdy6Nu4YZkVkpQr0ICsgvnAJZS2UKq
- iwrVoxoqNihpeow+YygiAkTv1kS1ZkUXb60YK4yGs0QrM=
-X-Google-Smtp-Source: AGHT+IFl3QRS1ASxD5Nom/WmbJxg88zSGy1MBXMnBBS0GH7xlD4TWPEw8AfHbd8l7rkvR87H+MsMI8FvbSOGlFGFsG8=
-X-Received: by 2002:a17:90b:4f8f:b0:311:488:f506 with SMTP id
- 98e67ed59e1d1-3134753c5d1mr8776699a91.6.1749549827474; Tue, 10 Jun 2025
- 03:03:47 -0700 (PDT)
+ AJvYcCUu4vEsluGGIRMIR5jRaGF7vMCG3APqSibWE9CYCDDFeAuYWSdJ9cci81js7NT0mfoUvgQxPmb0jWE=@lists.freedesktop.org,
+ AJvYcCXDOumHl9wu5gukXIbo6lFsqM17dvIL1GG3TxO1wKKwQfkFNn8mK6vL3HTw8T7AKVHFT4h7mYZKyQ==@lists.freedesktop.org
+X-Gm-Message-State: AOJu0YxzYHiD4RjUc3rANPA7r9ONrV1+LHShlaGDgIjIiLkgkTmc3m1J
+ kxr4tBcgl1LrJ6Yo8a9O9OkixTOqSS3w/Ix0rJ+mxi2DNCpFBiyb3HpNxNGOgT+bJsrcbwUTDlY
+ d389hxMGgBXluHVwT8Y+1Jf4qTGFH5WU=
+X-Gm-Gg: ASbGncuOTSo5V/tKq0g8k3FOvfKCSVeRUmmUrbmknkO60U61aB7brtkDjWbnVSM6sqj
+ fJv9FiQS0EFRRAxF16U0Xa0Ub9PB9lWXFy8rSo0Dky3cuKXaLRU5fN7BKQ7DqtO0zQaW2LBQdx1
+ JD76ym+L3rsUZtTbSY7i9nlSJeRVC+WtcuknX4/2L5Suw=
+X-Google-Smtp-Source: AGHT+IEQw155gVvnxaNkH8ebHs4zS3ADdbJBWxomsZZRx1+0u1ykLUMJIIrhF3RC4Mie1dvmIeEaYGc3fpHk7OOd6YQ=
+X-Received: by 2002:a17:90b:1dcb:b0:311:c1da:3858 with SMTP id
+ 98e67ed59e1d1-3134debe401mr8335583a91.0.1749550210201; Tue, 10 Jun 2025
+ 03:10:10 -0700 (PDT)
 MIME-Version: 1.0
 References: <20250609122200.179307-1-trintaeoitogc@gmail.com>
  <DAIQ9342ZFYD.3VQVI80A18HKX@kernel.org>
-In-Reply-To: <DAIQ9342ZFYD.3VQVI80A18HKX@kernel.org>
+ <CANiq72kC1j-kprAQ5WU0QVV_zhyKfDPJ_M5E9xZ+8+fxt4R6qQ@mail.gmail.com>
+In-Reply-To: <CANiq72kC1j-kprAQ5WU0QVV_zhyKfDPJ_M5E9xZ+8+fxt4R6qQ@mail.gmail.com>
 From: Miguel Ojeda <miguel.ojeda.sandonis@gmail.com>
-Date: Tue, 10 Jun 2025 12:03:35 +0200
-X-Gm-Features: AX0GCFsqB3V8oX6wtHSUpzU2MNL8wo_FwhFMAyLhaEv4LKWmFGOaZ6ak2XtPuK0
-Message-ID: <CANiq72kC1j-kprAQ5WU0QVV_zhyKfDPJ_M5E9xZ+8+fxt4R6qQ@mail.gmail.com>
+Date: Tue, 10 Jun 2025 12:09:58 +0200
+X-Gm-Features: AX0GCFsHP1AlO74yO415mgHq99AB0fqU564MM_NdfP0z3sz9Mc_AdfxhNQWL9po
+Message-ID: <CANiq72mEfFK-iZ24aX2_UdnvPLXkBLNEFZ9r=y_Mhvu3qHXyuQ@mail.gmail.com>
 Subject: Re: [PATCH] rust: module: remove deprecated author key
 To: Benno Lossin <lossin@kernel.org>
 Cc: Guilherme Giacomo Simoes <trintaeoitogc@gmail.com>, rafael@kernel.org,
@@ -96,18 +97,20 @@ List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-On Tue, Jun 10, 2025 at 10:58=E2=80=AFAM Benno Lossin <lossin@kernel.org> w=
-rote:
+On Tue, Jun 10, 2025 at 12:03=E2=80=AFPM Miguel Ojeda
+<miguel.ojeda.sandonis@gmail.com> wrote:
 >
-> Unrelated to this change, I think we should add email addresses to
-> people in authors. Possibly enforce it by scanning each author element
-> and checking if there is an email address.
+> I even saw a URL...
 
-Sounds good to me, but I am not sure if it is possible in all cases.
+i.e. as the sole thing, not as an addition to a company name:
 
-At least looking at C, there are company names too.
+    MODULE_AUTHOR("https://www.comedi.org");
 
-I even saw a URL...
+Perhaps we could have a new key or similar for companies/entities, but
+I am not sure if it is important, and we should probably do it in the
+C side too in that case.
+
+After all, we can get contact details from the Git log, `MAINTAINERS`, etc.
 
 Cheers,
 Miguel
