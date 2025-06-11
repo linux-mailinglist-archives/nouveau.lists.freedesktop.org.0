@@ -2,67 +2,93 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id A6FA7AD4515
-	for <lists+nouveau@lfdr.de>; Tue, 10 Jun 2025 23:55:12 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id D11EAAD485A
+	for <lists+nouveau@lfdr.de>; Wed, 11 Jun 2025 04:08:43 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 3416A10E5D1;
-	Tue, 10 Jun 2025 21:55:10 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 702BE10E345;
+	Wed, 11 Jun 2025 02:08:39 +0000 (UTC)
 Authentication-Results: gabe.freedesktop.org;
-	dkim=pass (2048-bit key; unprotected) header.d=intel.com header.i=@intel.com header.b="EnYiEQgl";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="N+PfmuH2";
 	dkim-atps=neutral
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from mgamail.intel.com (mgamail.intel.com [198.175.65.21])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 9ABD110E5CF;
- Tue, 10 Jun 2025 21:55:08 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
- d=intel.com; i=@intel.com; q=dns/txt; s=Intel;
- t=1749592508; x=1781128508;
- h=from:date:subject:mime-version:content-transfer-encoding:
- message-id:to:cc;
- bh=jHqE/M83tEgWWEESsQZJOZxo4PhfowOIr8iQtAHpI7M=;
- b=EnYiEQglygHxwB3lSs5nCRIH0Ga3CvZi07lMTzTexAav6mRqooTJXInd
- kAmNt5bvMQBSOe/REkEQsM3maaI7Ow731exXAxDhXIT7Z9F38rfjiJ4nZ
- kwG3/IiaNG84+eoiSquFFpY/3r8p+SAU8bSdsJQjQ7ejEcLi20DxKJFqo
- 7Qd5Xe5oi4+9oAAXvhGU+B1j/JwHczHXUz5YbaJpIXZRQBwAxJzEA3ln0
- qxFcHZOWJVu/cqfPnFWJ2hHLp6yDwMVVQD1ESUvmLf6Whw+8a2WdatAGa
- fKZMquYbHwE/NHlwOX0kCrnbS0+zsCLVq7tWFUA5IbwbgRMQqIk7Y5yrW A==;
-X-CSE-ConnectionGUID: 3hgb4C6cQf+ka6epOMa0Ew==
-X-CSE-MsgGUID: M4hkEqSMTm+B3tZfMSD0Tw==
-X-IronPort-AV: E=McAfee;i="6800,10657,11460"; a="51577977"
-X-IronPort-AV: E=Sophos;i="6.16,226,1744095600"; d="scan'208";a="51577977"
-Received: from fmviesa008.fm.intel.com ([10.60.135.148])
- by orvoesa113.jf.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
- 10 Jun 2025 14:55:08 -0700
-X-CSE-ConnectionGUID: wMsJenf1TFSH/QEHBAKL4g==
-X-CSE-MsgGUID: X7qn84rdS2mqpLfeMJKBLQ==
-X-ExtLoop1: 1
-X-IronPort-AV: E=Sophos;i="6.16,226,1744095600"; d="scan'208";a="147336540"
-Received: from jekeller-desk.jf.intel.com ([10.166.241.15])
- by fmviesa008-auth.fm.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
- 10 Jun 2025 14:55:07 -0700
-From: Jacob Keller <jacob.e.keller@intel.com>
-Date: Tue, 10 Jun 2025 14:54:51 -0700
-Subject: [PATCH v2] drm/nouveau/bl: increase buffer size to avoid truncate
- warning
+Received: from mail-pl1-f176.google.com (mail-pl1-f176.google.com
+ [209.85.214.176])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id E252F10E336;
+ Wed, 11 Jun 2025 02:08:37 +0000 (UTC)
+Received: by mail-pl1-f176.google.com with SMTP id
+ d9443c01a7336-234fcadde3eso71842035ad.0; 
+ Tue, 10 Jun 2025 19:08:37 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=gmail.com; s=20230601; t=1749607717; x=1750212517; darn=lists.freedesktop.org;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=/GTJ1pJR4xwooAL1I5nvRW+Wju9UFrsbmTKQ9hJqRj4=;
+ b=N+PfmuH25foeswgnLn0pV9WwRq31CuprXHD2tq9N6V1OdZGhShVhSYkkXLyPVWY9S3
+ afWrwL2pTefczH984B35qNBCg46kxUQZawh4TUCWKqDbx2nHTMamNrg+qQ1IImefVHgw
+ MbGi75e7RYJhr0uP6ocrwbxBsatfp/nzXyUh/KEg+GtEBYc/NqH7nqGbxF8UsYfVbtoA
+ xdSkzr9C/fwu1X6GIbmG8rcE3WJ91ePacWOClmmjB6xTBQyCbQH3xSKGpWTqpv4VJU2f
+ 9E7gCUhjKVVZfT4rwchZmIJMZmKdOiPVQoQW316iJ3HcQ+OJfy7UzgwIYl5XzZS+P7Y7
+ QDIw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1749607717; x=1750212517;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=/GTJ1pJR4xwooAL1I5nvRW+Wju9UFrsbmTKQ9hJqRj4=;
+ b=i4BQvvtFArxbZNq+yUNxf/mJXKlJ8xdJSrmPldBSWG3vwqXu0HAb1nJaqYMZj7tAsG
+ vQD/Q6UtH87rr+87KxIMWmp7ZWqzZLpkg24SPDQYec/pRspb1fUn+DnhiHYFBCN60JIZ
+ e6UvfXEBCLu4fWoVzTgSU3n+DR4CpHDpSNdju2/dm9DMQ0+zHr6gOLRjOBa0TuqjRfaf
+ XH4SeV3dbdtDiC0vPx/K9wYSzqybIrHHeXHsxwIIcJ95YMP2TyxYakVwDEAVgAJpqObM
+ mxyWZCuhaSEuyNcref8UoSmd9nFMUfFWaeq5xgK+PErl8M5jG+6Z9gSf6KETLV93rNVk
+ hawQ==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCW5yk5bOh43IAWBZhhYrg1vNaW0zvIBE51wJ5jCraLZH+fs2hvYZsW63o8pNysUFqlnlF5g33Pxqg==@lists.freedesktop.org,
+ AJvYcCXjxLXNmTZzlsMr6pLDWpatYbyiwXs0Qwo5YVBiSDeoh0/VOYEBFJdRFkgcg6Tx9lnswkFYh+JPMGY=@lists.freedesktop.org
+X-Gm-Message-State: AOJu0Ywm+itEZ43GmZvHH4Iu03x12qyd+fXuBnF19DicY2ENfW91oRMZ
+ 83cmbGY3DQ2Bfysp4pchVBVMJOtRUuRZsyr67K5XfmYNhPNjxei/50DF
+X-Gm-Gg: ASbGnctZHhRwEbTbI+4tSAly4jjK+K6j7s3RtbRc/SfOrmas/5NXzhWxdhqN/IeaQ+e
+ S/+Bg/s7YDGupHW3B9T4/rG546aJo2CIo51uOFzRm0K0K/KFyU7Jp+0pnVXDUeKRugoe63DwTr+
+ 7EuNC9s37X3mq612OGsq8mbpCcYehWezHzHJ96imewzQD2FD3NMP4oPMAc5YeZa9zXuR/G325ZV
+ gp+M3IRVMeoYOPlg4KKkcT1m3+WqIK3a9pCfKBiveK1rS6k9Jb+Pc5n6BXGbAN254/d8R+HsI3u
+ kNWm17nJKVVqMEQ9hEde0JrVDka/1mmiFxJ97DB5X53SQoz0H2NuMmq1LhgVgW5rkZYxmQ4N
+X-Google-Smtp-Source: AGHT+IGUrcqA3hrwumHbP3z+19RPkhfMytlxOzMA0qc6w05gOhIJ4Jk1wBXyEFe80IP2WwukQ5L/Ug==
+X-Received: by 2002:a17:902:c94d:b0:235:668:fb00 with SMTP id
+ d9443c01a7336-23641b25d36mr17985605ad.46.1749607717145; 
+ Tue, 10 Jun 2025 19:08:37 -0700 (PDT)
+Received: from archie.me ([103.124.138.155]) by smtp.gmail.com with ESMTPSA id
+ d9443c01a7336-236030789b3sm77086055ad.26.2025.06.10.19.08.35
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Tue, 10 Jun 2025 19:08:36 -0700 (PDT)
+Received: by archie.me (Postfix, from userid 1000)
+ id 201CE420AA82; Wed, 11 Jun 2025 09:08:34 +0700 (WIB)
+From: Bagas Sanjaya <bagasdotme@gmail.com>
+To: Linux Kernel Mailing List <linux-kernel@vger.kernel.org>,
+ Linux Documentation <linux-doc@vger.kernel.org>,
+ Linux DRI Development <dri-devel@lists.freedesktop.org>,
+ Linux Nouveau <nouveau@lists.freedesktop.org>
+Cc: David Airlie <airlied@gmail.com>, Simona Vetter <simona@ffwll.ch>,
+ Maarten Lankhorst <maarten.lankhorst@linux.intel.com>,
+ Maxime Ripard <mripard@kernel.org>,
+ Thomas Zimmermann <tzimmermann@suse.de>, Jonathan Corbet <corbet@lwn.net>,
+ Dave Airlie <airlied@redhat.com>, Ben Skeggs <bskeggs@nvidia.com>,
+ Timur Tabi <ttabi@nvidia.com>, Randy Dunlap <rdunlap@infradead.org>,
+ Bagas Sanjaya <bagasdotme@gmail.com>
+Subject: [PATCH v2] Documentation: nouveau: Update GSP message queue
+ kernel-doc reference
+Date: Wed, 11 Jun 2025 09:08:06 +0700
+Message-ID: <20250611020805.22418-2-bagasdotme@gmail.com>
+X-Mailer: git-send-email 2.49.0
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
+X-Developer-Signature: v=1; a=openpgp-sha256; l=1724; i=bagasdotme@gmail.com;
+ h=from:subject; bh=xqmLTSSMJRGvXYb5vPd6fT5kvFP6HfljFoZuxEiyQTc=;
+ b=owGbwMvMwCX2bWenZ2ig32LG02pJDBkeTwIjH37Td/ofe82l6vluzhTfT05V7lmdR/vs2dpvf
+ HnRvHRqRykLgxgXg6yYIsukRL6m07uMRC60r3WEmcPKBDKEgYtTACaiH8DIsPO7SYSCaFTK30OR
+ IQGsxcFfvVjmKgcFK0rembiy7o3TXEaGvd+/3zt7v/fImituP2bPmKXyrfB9Y9yFskuvU67d36p
+ 2lQEA
+X-Developer-Key: i=bagasdotme@gmail.com; a=openpgp;
+ fpr=701B806FDCA5D3A58FFB8F7D7C276C64A5E44A1D
 Content-Transfer-Encoding: 8bit
-Message-Id: <20250610-jk-nouveua-drm-bl-snprintf-fix-v2-1-7fdd4b84b48e@intel.com>
-X-B4-Tracking: v=1; b=H4sIAKqpSGgC/42NQQ6CMBBFr0Jm7RhaKAZX3sOwKG2RUWhJC42G9
- O5WTuDyvZ+8v0MwnkyAa7GDN5ECOZuBnwpQo7QPg6QzAy+5KJuyxucLrdui2SRqP2M/YbCLJ7s
- OONAbFVdScCErzQfIkcWbrI+De5d5pLA6/zn+IvvZv9ORIcNL2zPRVlI3TX3Lk5nOys3QpZS+B
- EwQ1MwAAAA=
-X-Change-ID: 20250604-jk-nouveua-drm-bl-snprintf-fix-c2ca525a3d2f
-To: Lyude Paul <lyude@redhat.com>, Danilo Krummrich <dakr@kernel.org>, 
- David Airlie <airlied@gmail.com>, Simona Vetter <simona@ffwll.ch>, 
- Ben Skeggs <bskeggs@redhat.com>, Pierre Moreau <pierre.morrow@free.fr>, 
- Christophe JAILLET <christophe.jaillet@wanadoo.fr>, 
- Philip Li <philip.li@intel.com>
-Cc: dri-devel@lists.freedesktop.org, nouveau@lists.freedesktop.org, 
- linux-kernel@vger.kernel.org, kernel test robot <lkp@intel.com>, 
- Timur Tabi <ttabi@nvidia.com>, Jacob Keller <jacob.e.keller@intel.com>
-X-Mailer: b4 0.14.2
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -77,79 +103,46 @@ List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-The nouveau_get_backlight_name() function generates a unique name for the
-backlight interface, appending an id from 1 to 99 for all backlight devices
-after the first.
+GSP message queue docs has been moved following RPC handling split in
+8a8b1ec5261f20 ("drm/nouveau/gsp: split rpc handling out on its own"),
+before GSP-RM implementation is versioned in c472d828348caf
+("drm/nouveau/gsp: move subdev/engine impls to subdev/gsp/rm/r535/").
+However, the kernel-doc reference in nouveau docs is left behind, which
+triggers htmldocs warnings:
 
-GCC 15 (and likely other compilers) produce the following
--Wformat-truncation warning:
+ERROR: Cannot find file ./drivers/gpu/drm/nouveau/nvkm/subdev/gsp/r535.c
+WARNING: No kernel-doc for file ./drivers/gpu/drm/nouveau/nvkm/subdev/gsp/r535.c
 
-nouveau_backlight.c: In function ‘nouveau_backlight_init’:
-nouveau_backlight.c:56:69: error: ‘%d’ directive output may be truncated writing between 1 and 10 bytes into a region of size 3 [-Werror=format-truncation=]
-   56 |                 snprintf(backlight_name, BL_NAME_SIZE, "nv_backlight%d", nb);
-      |                                                                     ^~
-In function ‘nouveau_get_backlight_name’,
-    inlined from ‘nouveau_backlight_init’ at nouveau_backlight.c:351:7:
-nouveau_backlight.c:56:56: note: directive argument in the range [1, 2147483647]
-   56 |                 snprintf(backlight_name, BL_NAME_SIZE, "nv_backlight%d", nb);
-      |                                                        ^~~~~~~~~~~~~~~~
-nouveau_backlight.c:56:17: note: ‘snprintf’ output between 14 and 23 bytes into a destination of size 15
-   56 |                 snprintf(backlight_name, BL_NAME_SIZE, "nv_backlight%d", nb);
-      |                 ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Update the reference.
 
-The warning started appearing after commit ab244be47a8f ("drm/nouveau:
-Fix a potential theorical leak in nouveau_get_backlight_name()") This fix
-for the ida usage removed the explicit value check for ids larger than 99.
-The compiler is unable to intuit that the ida_alloc_max() limits the
-returned value range between 0 and 99.
-
-Because the compiler can no longer infer that the number ranges from 0 to
-99, it thinks that it could use as many as 11 digits (10 + the potential -
-sign for negative numbers).
-
-The warning has gone unfixed for some time, with at least one kernel test
-robot report. The code breaks W=1 builds, which is especially frustrating
-with the introduction of CONFIG_WERROR.
-
-The string is stored temporarily on the stack and then copied into the
-device name. Its not a big deal to use 11 more bytes of stack rounding out
-to an even 24 bytes. Increase BL_NAME_SIZE to 24 to avoid the truncation
-warning. This fixes the W=1 builds that include this driver.
-
-Compile tested only.
-
-Fixes: ab244be47a8f ("drm/nouveau: Fix a potential theorical leak in nouveau_get_backlight_name()")
-Reported-by: kernel test robot <lkp@intel.com>
-Closes: https://lore.kernel.org/oe-kbuild-all/202312050324.0kv4PnfZ-lkp@intel.com/
-Suggested-by: Timur Tabi <ttabi@nvidia.com>
-Signed-off-by: Jacob Keller <jacob.e.keller@intel.com>
+Fixes: c472d828348c ("drm/nouveau/gsp: move subdev/engine impls to subdev/gsp/rm/r535/")
+Fixes: 8a8b1ec5261f ("drm/nouveau/gsp: split rpc handling out on its own")
+Signed-off-by: Bagas Sanjaya <bagasdotme@gmail.com>
 ---
-Changes in v2:
-- Just increase the buffer size
-- Link to v1: https://lore.kernel.org/r/20250604-jk-nouveua-drm-bl-snprintf-fix-v1-1-79b1593ad664@intel.com
----
- drivers/gpu/drm/nouveau/nouveau_backlight.c | 2 +-
+Changes since v1 [1]:
+
+  - Correct GSP kernel-doc reference file (Randy)
+
+[1]: https://lore.kernel.org/linux-doc/20250610065258.41467-1-bagasdotme@gmail.com/
+
+ Documentation/gpu/nouveau.rst | 2 +-
  1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/drivers/gpu/drm/nouveau/nouveau_backlight.c b/drivers/gpu/drm/nouveau/nouveau_backlight.c
-index d47442125fa183146135f3725eae161c68e2a900..9aae26eb7d8fba54c8a989bfe7ecc2b10ccf7f61 100644
---- a/drivers/gpu/drm/nouveau/nouveau_backlight.c
-+++ b/drivers/gpu/drm/nouveau/nouveau_backlight.c
-@@ -42,7 +42,7 @@
- #include "nouveau_acpi.h"
+diff --git a/Documentation/gpu/nouveau.rst b/Documentation/gpu/nouveau.rst
+index b8c801e0068cb0..cab2e81013bc5f 100644
+--- a/Documentation/gpu/nouveau.rst
++++ b/Documentation/gpu/nouveau.rst
+@@ -25,7 +25,7 @@ providing a consistent API to upper layers of the driver stack.
+ GSP Support
+ ------------------------
  
- static struct ida bl_ida;
--#define BL_NAME_SIZE 15 // 12 for name + 2 for digits + 1 for '\0'
-+#define BL_NAME_SIZE 24 // 12 for name + 11 for digits + 1 for '\0'
+-.. kernel-doc:: drivers/gpu/drm/nouveau/nvkm/subdev/gsp/r535.c
++.. kernel-doc:: drivers/gpu/drm/nouveau/nvkm/subdev/gsp/rm/r535/rpc.c
+    :doc: GSP message queue element
  
- static bool
- nouveau_get_backlight_name(char backlight_name[BL_NAME_SIZE],
+ .. kernel-doc:: drivers/gpu/drm/nouveau/include/nvkm/subdev/gsp.h
 
----
-base-commit: 90b83efa6701656e02c86e7df2cb1765ea602d07
-change-id: 20250604-jk-nouveua-drm-bl-snprintf-fix-c2ca525a3d2f
-
-Best regards,
+base-commit: 19272b37aa4f83ca52bdf9c16d5d81bdd1354494
 -- 
-Jacob Keller <jacob.e.keller@intel.com>
+An old man doll... just what I always wanted! - Clara
 
