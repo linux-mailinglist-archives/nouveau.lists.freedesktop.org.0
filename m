@@ -2,63 +2,94 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id A69CEAD6E64
-	for <lists+nouveau@lfdr.de>; Thu, 12 Jun 2025 12:55:03 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 421A4AD6EA3
+	for <lists+nouveau@lfdr.de>; Thu, 12 Jun 2025 13:10:57 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 86F1610E7C8;
-	Thu, 12 Jun 2025 10:54:40 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 6197C10E7D5;
+	Thu, 12 Jun 2025 11:10:55 +0000 (UTC)
 Authentication-Results: gabe.freedesktop.org;
-	dkim=pass (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="Wl7wNucj";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="gmMv+sXf";
 	dkim-atps=neutral
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from dfw.source.kernel.org (dfw.source.kernel.org [139.178.84.217])
- by gabe.freedesktop.org (Postfix) with ESMTPS id A672010E7C6;
- Thu, 12 Jun 2025 10:54:38 +0000 (UTC)
-Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by dfw.source.kernel.org (Postfix) with ESMTP id F2A8D5C5AF4;
- Thu, 12 Jun 2025 10:52:20 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id CBADCC4CEEA;
- Thu, 12 Jun 2025 10:54:32 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1749725677;
- bh=Svf2SlshRf4K2I3bpqEV/6RweQo/oo8/RGNKpTG7qDs=;
- h=Date:Subject:To:Cc:References:From:In-Reply-To:From;
- b=Wl7wNucjTNCstmT8lp0PPGX2AAqsrSfFv41JrNffe3eBnZlkiDeRDpgKVI5QWRn1f
- 4LvzOizaTV6LTjwMAahzYTkouypLbCtX6MLiD7iWkEcFLbA5GgL0584ayTrOwyJy6q
- GZ0xDOOQvhagfMadU4IYifKGs8zn3dPIPt8DF1KHuXLEae/LN+WkKdo6gqQMgRRlAm
- 0f40dVGAP/11T/OPQxjpMxL4/bnqJaNlUSnxCSLfCzpVK4/67JqW4Qhg3BxNGkU7kS
- UbFl4M6f2XJNpOAydXw/LO3zQXI6Bfab6qpFBLT14W+LFIOz/aoKNyZcRNHjTfqYdW
- erTQ3cyOhT+Tg==
-Message-ID: <6e97aa79-6d6f-497f-96d2-7568d6516682@kernel.org>
-Date: Thu, 12 Jun 2025 12:54:31 +0200
+Received: from mail-ej1-f43.google.com (mail-ej1-f43.google.com
+ [209.85.218.43])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 47A0310E7D5
+ for <nouveau@lists.freedesktop.org>; Thu, 12 Jun 2025 11:10:54 +0000 (UTC)
+Received: by mail-ej1-f43.google.com with SMTP id
+ a640c23a62f3a-ad56cbc7b07so132279766b.0
+ for <nouveau@lists.freedesktop.org>; Thu, 12 Jun 2025 04:10:54 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=gmail.com; s=20230601; t=1749726652; x=1750331452; darn=lists.freedesktop.org;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=9nBrpMK9zZeZHFNOhk7Yg3FOCL/mJbGGTtA0TEp4ISs=;
+ b=gmMv+sXfJgUSTcsJ88LET0uag2aw1wro09lEAGD8mtXi9g9Git6idRC+EHGKUJRn9o
+ TTp7eaZmKPbvd80E6tQnqLouOoYeqH9VbRtYGYxYXBTDnTpkAhGocNpF9XqXSRkW/QTt
+ vbL2VrT6rzKxZAmrvm8jOwLZ5MJnOKjR9YAnJWF5YwK3OfDNuw6FBd9SZ5sSQhUFhh4e
+ mK/N7U10D9ploMyR3gjR9eLWwUWlZQ7GVavQPoEfvVyglXWBBHq7yHt9hRkrYIbMOQla
+ ZlPxUP3zQxdy7/iPFhA24AhRzoc4ipvz1jt/xnWGG+k15TsiGnph5UeI6xbwI11drGf4
+ 9A4Q==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1749726652; x=1750331452;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=9nBrpMK9zZeZHFNOhk7Yg3FOCL/mJbGGTtA0TEp4ISs=;
+ b=hMbwhGe303vFuoVA9gaWpKixyEh65PRBazJ6FLiR1rsx5vXH2ODFJbJ1Ej4gvQLPUI
+ g0okGOtb1xYWYpgBkstLzL2YC0S8IF80S/0VcAm5AmoufzYEs4MoIGpoZqwkCornHeSL
+ yeo9R58H/ESNSN0GbVGsmB53xy68YvAKEwxirtROQ71VM0gOLI+5hj0ucQXXQC+7jUJr
+ Q4l4LsEIVSZvVXwq3brtOziax5URS8r75hfy/W/vh4ZJs7lK8N+1DnJUETi0zImrtslK
+ Do8cHIDJgzlWJKLVxoi76e5u0+nJTXjmRyAecpCTJdOffYM4N5cCUGL9ZWsm5EaXrP44
+ BXiQ==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCWQtxoux7BVk1txb7I2kdsi8IwPFe+2ubKqJ+FWGWlTdjrLcQLMZEZ1Y190mxachYYjOmRlz+hM@lists.freedesktop.org
+X-Gm-Message-State: AOJu0Yyaf2J1vkrioKs7na9WyNGuleFtWziLbApquk5oITAV80Jhxbjf
+ n0yYGE+dLKh4BgQWylR4SznDDi5gFic+WnHnaZ+Jhbr5WAXMtL1ZEL1JUgmEktImMJv7WpFnBIq
+ XjXsv2iIyDTsB0sbQhqeVJIaJADsBWoA=
+X-Gm-Gg: ASbGncs7m5RX2QxY+IuBNHlCiwU6wG96mdxSgr4D5vUmJErGIph6bfIgPWPNGk/oY5V
+ NSoENbpNOv69AHb7+gGPQB7yHt/6aBnWKR9k78QaNuKZkyrkc+O6Zi4pmtYc9QplkpPbLQf+xBR
+ 8uMCEaefAmeHIcDatZtVDp/WPnOnO+8nG0+JHYo8/9l1A=
+X-Google-Smtp-Source: AGHT+IFrX17XfYVkjVnepz8BihCrbdN9elHb1a1FwyoMbX0yLjH2EltV5lWsECJ7oLshTrIE21PMDORFUypei4zXNLs=
+X-Received: by 2002:a17:907:980f:b0:ad8:a515:767f with SMTP id
+ a640c23a62f3a-adea9464061mr258576566b.51.1749726651742; Thu, 12 Jun 2025
+ 04:10:51 -0700 (PDT)
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v4 18/20] gpu: nova-core: add types for patching firmware
- binaries
-To: Alexandre Courbot <acourbot@nvidia.com>
-Cc: Miguel Ojeda <ojeda@kernel.org>, Alex Gaynor <alex.gaynor@gmail.com>,
- Boqun Feng <boqun.feng@gmail.com>, Gary Guo <gary@garyguo.net>,
- =?UTF-8?Q?Bj=C3=B6rn_Roy_Baron?= <bjorn3_gh@protonmail.com>,
- Benno Lossin <benno.lossin@proton.me>,
- Andreas Hindborg <a.hindborg@kernel.org>, Alice Ryhl <aliceryhl@google.com>,
- Trevor Gross <tmgross@umich.edu>, David Airlie <airlied@gmail.com>,
- Simona Vetter <simona@ffwll.ch>,
- Maarten Lankhorst <maarten.lankhorst@linux.intel.com>,
- Maxime Ripard <mripard@kernel.org>, Thomas Zimmermann <tzimmermann@suse.de>,
- John Hubbard <jhubbard@nvidia.com>, Ben Skeggs <bskeggs@nvidia.com>,
- Joel Fernandes <joelagnelf@nvidia.com>, Timur Tabi <ttabi@nvidia.com>,
- Alistair Popple <apopple@nvidia.com>, linux-kernel@vger.kernel.org,
- rust-for-linux@vger.kernel.org, nouveau@lists.freedesktop.org,
- dri-devel@lists.freedesktop.org
-References: <20250521-nova-frts-v4-0-05dfd4f39479@nvidia.com>
- <20250521-nova-frts-v4-18-05dfd4f39479@nvidia.com>
- <aEAf3GUUz5oxnuk9@cassiopeiae> <DAKDETL7I95F.31L41GTLYNBWO@nvidia.com>
-From: Danilo Krummrich <dakr@kernel.org>
-Content-Language: en-US
-In-Reply-To: <DAKDETL7I95F.31L41GTLYNBWO@nvidia.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
+References: <20250612093228.7655-1-chengzhenghan@uniontech.com>
+ <84b14425-03e4-42be-8bd5-9bc010ebecda@suse.com>
+In-Reply-To: <84b14425-03e4-42be-8bd5-9bc010ebecda@suse.com>
+From: Andy Shevchenko <andy.shevchenko@gmail.com>
+Date: Thu, 12 Jun 2025 14:10:15 +0300
+X-Gm-Features: AX0GCFubP_i495cQIkoSGfjK4G9pwjz7TYfQyvgZfj4JA8pwuaopIL7tecp4u7I
+Message-ID: <CAHp75Vc7AO_sRgB1Nj6CevbseMFyv5ku8ZS3PwzAuAgysKVxNg@mail.gmail.com>
+Subject: Re: [PATCH] x86: Fix build warnings about export.h
+To: Juergen Gross <jgross@suse.com>
+Cc: Zhenghan Cheng <chengzhenghan@uniontech.com>, tglx@linutronix.de,
+ mingo@redhat.com, 
+ bp@alien8.de, dave.hansen@linux.intel.com, x86@kernel.org, 
+ mario.limonciello@amd.com, yazen.ghannam@amd.com, jpoimboe@kernel.org, 
+ tony.luck@intel.com, jarkko@kernel.org, bhelgaas@google.com, 
+ pbonzini@redhat.com, oleg@redhat.com, jbaron@akamai.com, ning.sun@intel.com, 
+ seanjc@google.com, luto@kernel.org, andy@kernel.org, jim.cromie@gmail.com, 
+ kirill.shutemov@linux.intel.com, hpa@zytor.com, 
+ pawan.kumar.gupta@linux.intel.com, vkuznets@redhat.com, rostedt@goodmis.org, 
+ ardb@kernel.org, thomas.lendacky@amd.com, nikunj@amd.com, 
+ ashish.kalra@amd.com, kees@kernel.org, alexandre.chartre@oracle.com, 
+ rppt@kernel.org, steve.wahl@hpe.com, jirislaby@kernel.org, 
+ apatel@ventanamicro.com, bvanassche@acm.org, ptsm@linux.microsoft.com, 
+ Jonathan.Cameron@huawei.com, beata.michalska@arm.com, xin@zytor.com, 
+ davydov-max@yandex-team.ru, ravi.bangoria@amd.com, joel.granados@kernel.org, 
+ ffmancera@riseup.net, kprateek.nayak@amd.com, akpm@linux-foundation.org, 
+ bhe@redhat.com, brgerst@gmail.com, coxu@redhat.com, dmaluka@chromium.org, 
+ linux-kernel@vger.kernel.org, linux-edac@vger.kernel.org, 
+ linux-sgx@vger.kernel.org, kvm@vger.kernel.org, 
+ virtualization@lists.linux.dev, tboot-devel@lists.sourceforge.net, 
+ nouveau@lists.freedesktop.org, linux-coco@lists.linux.dev, 
+ xen-devel@lists.xenproject.org, Huacai Chen <chenhuacai@loongson.cn>, 
+ Zhenghan Cheng <your_email@example.com>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -73,24 +104,51 @@ List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-On 6/12/25 9:19 AM, Alexandre Courbot wrote:
-> On Wed Jun 4, 2025 at 7:28 PM JST, Danilo Krummrich wrote:
->> If we can't patch them when the object is created, i.e. in
->> FirmwareDmaObject::new(), I think we should take self by value in
->> FirmwareDmaObject::patch_signature() and return a SignedFirmwareDmaObject (which
->> can just be a transparent wrapper) instead in order to let the type system prove
->> that we did not forget to call patch_signature().
-> 
-> This one is a bit tricky. Signature patching is actually optional,
-> depending on whether there are signatures present at all (it might not
-> be the case on development setups). So involving the type system here
-> would require storing the result in an enum, and then match that enum
-> later in order to do the same thing in both cases - load the binary
-> as-is.
-> 
-> So I guess I would rather leave this one as it currently is, unless
-> there is a better way I haven't thought about?
+On Thu, Jun 12, 2025 at 1:19=E2=80=AFPM Juergen Gross <jgross@suse.com> wro=
+te:
+>
+> On 12.06.25 11:32, Zhenghan Cheng wrote:
+> > After commit a934a57a42f64a4 ("scripts/misc-check:
+> > check missing #include <linux/export.h> when W=3D1")
+> > and commit 7d95680d64ac8e836c ("scripts/misc-check:
+> > check unnecessary #include <linux/export.h> when W=3D1"),
+> > we get some build warnings with W=3D1,such as:
+> >
+> > arch/x86/coco/sev/core.c: warning: EXPORT_SYMBOL() is used, but #includ=
+e <linux/export.h> is missing
+> > arch/x86/crypto/aria_aesni_avx2_glue.c: warning: EXPORT_SYMBOL() is use=
+d, but #include <linux/export.h> is missing
+> > arch/x86/kernel/unwind_orc.c: warning: EXPORT_SYMBOL() is used, but #in=
+clude <linux/export.h> is missing
+> > arch/x86/kvm/hyperv.c: warning: EXPORT_SYMBOL() is used, but #include <=
+linux/export.h> is missing
+> > arch/x86/events/intel/core.c: warning: EXPORT_SYMBOL() is not used, but=
+ #include <linux/export.h> is present
+> > arch/x86/events/zhaoxin/core.c: warning: EXPORT_SYMBOL() is not used, b=
+ut #include <linux/export.h> is present
+> > arch/x86/kernel/crash.c: warning: EXPORT_SYMBOL() is not used, but #inc=
+lude <linux/export.h> is present
+> > arch/x86/kernel/devicetree.c: warning: EXPORT_SYMBOL() is not used, but=
+ #include <linux/export.h> is present
+> >
+> > so fix these build warnings for x86.
+> >
+> > Signed-off-by: "Zhenghan Cheng" <chengzhenghan@uniontech.com>
+> > Suggested-by: "Huacai Chen" <chenhuacai@loongson.cn>
+>
+> For Xen and paravirt:
+>
+> Acked-by: Juergen Gross <jgross@suse.com>
+>
+> Your patch is looking a little bit strange, as the list of modified files
+> is located between the patch hunks, followed by another "Signed-off-by:".
 
-In the end the idea is to ensure that we can't forget to call patch_signature(), 
-so even if it's optional we could do what I mentioned above, just that 
-patch_signature() might be a noop?
+Indeed.
+And at bare minimum please split at least to two:
+1) adding export.h;
+2) removing export.h.
+
+
+--=20
+With Best Regards,
+Andy Shevchenko
