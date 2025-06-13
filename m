@@ -2,79 +2,79 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id 6FC20CBA8BB
-	for <lists+nouveau@lfdr.de>; Sat, 13 Dec 2025 13:17:12 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id EB2A0CBA915
+	for <lists+nouveau@lfdr.de>; Sat, 13 Dec 2025 13:17:40 +0100 (CET)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 272F810E285;
-	Sat, 13 Dec 2025 12:17:09 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 9F2A310E412;
+	Sat, 13 Dec 2025 12:17:39 +0000 (UTC)
 Authentication-Results: gabe.freedesktop.org;
-	dkim=permerror (0-bit key) header.d=gmail.com header.i=@gmail.com header.b="Mb1ymPDp";
+	dkim=permerror (0-bit key) header.d=gmail.com header.i=@gmail.com header.b="CQjyG/V1";
 	dkim-atps=neutral
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from mail-qv1-f52.google.com (mail-qv1-f52.google.com
- [209.85.219.52])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 2777010E181;
- Thu, 12 Jun 2025 20:12:18 +0000 (UTC)
-Received: by mail-qv1-f52.google.com with SMTP id
- 6a1803df08f44-6fad79433bbso16038766d6.0; 
- Thu, 12 Jun 2025 13:12:18 -0700 (PDT)
+Received: from mail-qk1-f182.google.com (mail-qk1-f182.google.com
+ [209.85.222.182])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 5BB8B10E987;
+ Fri, 13 Jun 2025 15:25:14 +0000 (UTC)
+Received: by mail-qk1-f182.google.com with SMTP id
+ af79cd13be357-7c922169051so140821685a.0; 
+ Fri, 13 Jun 2025 08:25:14 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1749759137; x=1750363937; darn=lists.freedesktop.org;
+ d=gmail.com; s=20230601; t=1749828313; x=1750433113; darn=lists.freedesktop.org;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:feedback-id:from:to:cc:subject:date
  :message-id:reply-to;
- bh=PVFfh/OIaSzF+T7uh2as5eWwfIjPE42Cyz++RGQQ/jw=;
- b=Mb1ymPDp0wdt4Ald5dnrhbTDx9Q7F/sN/m5K7wPEF/U/4Ia+x+R3OCrWBgovqYqZdk
- fdhCx65ZoId2wNkXV+DgoR3QAr/sScrP1OggfoMvskb0/X+Vt/YkDDMt2YwyCghUpY1R
- svZ4bX0YcdVycIDckdkspjR0oa9aNFdxOX9R35j/HRmGzdL8n9bU82G63TjRpLD6Ix/x
- GlebGCQBQXgULuwEy5jF2RPE40lplxB9W08DkJC4TYpU4h7/9nbGKy9Hj4ZepfSIiJky
- S9vlIq7MUrFbypWamBf/Fb0JbB3yxtEFLulApI+y1KRDLXsGaM/9eF1o92jD7krsW3zA
- kKmg==
+ bh=lAvMYCY7N602oTIv1xbvy3rwaOD5ob45HmfKgySj4yM=;
+ b=CQjyG/V1GjGSSnBeZzuJiBqfCdVbBNOeAYp0g9jN9huLpg4cWFWO6+JTGhcTDRsKYn
+ iyaLxsY/M4KUEXWRCdZ7R9aOY9kfN+IyI5fKaBLPyEz490Yx8fPzZNa71MXB7hXixACo
+ PcJ4bF0iTwzeNL9CBbQ3HHQViv8POW/sEMOw9Zfpx2U3fxoqdJtFDSTNQaEcTPbP2I9X
+ k5s46bN6a/M6031bpTeAtE5eNjRoDN2ECR/14j8k325aaKtW+WX3I78Ra6a9P/Uk1pbr
+ EZ1q1JVemvdr/YU1wgqjE7Lxt6Ds6QoDhC/74b79p/sp7PqMjDjUwMwe3Uh1O0n22C3o
+ Sj5w==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1749759137; x=1750363937;
+ d=1e100.net; s=20230601; t=1749828313; x=1750433113;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:feedback-id:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=PVFfh/OIaSzF+T7uh2as5eWwfIjPE42Cyz++RGQQ/jw=;
- b=JGfZpuNVLrJc1oIe+UKKcLa406nzSa71Eyr7PGKAnAbu7Cwh6pmAAPF+zoRYqfSNJS
- astxZFxVyYXP9Uf0uMBEvoerlYXa9F3rcwlIrSSU+3WFAPmC2y2uSAbdYG0UfPs4tZU7
- 1C10WqeS+uyUgDVvnWkkPU4f/66ivVsgxrACZ1RgPfqbwHkPLBL6Px9Pvbr31JA0ZOU9
- ZDw/l1MKspa+f/YegE22DIyKvCiwjS73i1i/hJFiuJUOO3rUYPqhr+UFUTTAZkxn5aSp
- E30nmoVp3WcEHoakMBAuB5OOJ+oDil8jmPuSs6z2ncv4nNLC981Y/aPXaQ40NwdeDizM
- eqkg==
+ bh=lAvMYCY7N602oTIv1xbvy3rwaOD5ob45HmfKgySj4yM=;
+ b=NkVJlYrG2PUaKdpPSse2tTYWwNA7TpYB/v94thTujp/Hlxf+O/WjFXOl2p3nNw/Mkm
+ KiJbustKyWUzu1J7U2Is8LwVRs3WWgWkdhRYKDQUojc3eNJ886fVpxqcinM5FnkaHuKK
+ dyvUdwP7f754RPt6UepE81qyJXznMtgzse6mzG28PIdvhMRXxiDly0ho32SPjYDSjkwg
+ s3+8tTNehUbhifa8oytsynyrx/T67M441quvqujJgyC3j6uFJY2foiTS4sUTDiedDAE/
+ p8zmHZdU7iZrosSpQjNoFzdPMHiYBLUn5wOWYLNLnRDjjMbjlDsmnK1eSM9uZfUzbggp
+ uUsw==
 X-Forwarded-Encrypted: i=1;
- AJvYcCWOZ5yhCpz9+GzbJu6krdSCFj/JMPVJhhpcGml85oF48K/1b7wIUscqJ1eWrvjCoPbo4pfYnEAVHA==@lists.freedesktop.org,
- AJvYcCX4el5d0YLSaDutyhDGaAulXX8tGT9rpL9rREl0kK30flTPCvpzH4t9Rd+QgndGQJ4EJ5APDfwVYAE=@lists.freedesktop.org
-X-Gm-Message-State: AOJu0YyEZKBMEQj917fv2aHgp6N8gvJugYzk6/10ERlhOxM46bHSq97e
- gJC67aHbNPBOEO4Eb3vN3GAvhkf/wD9V++zmMXh7SQH2uC0wclS2IucR
-X-Gm-Gg: ASbGnctDVz0zwY43LTo2bQ6+y12UkshupIm17GAbLVYOf7zRrq3RnO+gePQ3BAj5G1l
- NluigqDJgO31kZjacy+DKN92qTF0C9fnVjFyj69ZsrA22uWjl4ASUJPyR9tewggxsXlFlg61H+z
- ToP/FWWKcz8qwLKFXQmvJo+B66ItKhOaS5oScKG8NLLgiLSRSRJCUka5slO2a/q8pLPCnMapc84
- JMoC7vTCwfW4u77AYGbWBN0FsaX74oybaHS+CEJyRaJDhMoScnFKjGckDxGCDrZElBqbvUHFFYN
- oVuZ6V+ABkFZ5E/05urnVlL6EjEMhChwUm3pjifIMJf3sm4Db6+muuYDiJz+4J/++HmhUYQRGfU
- MTCrWrv5dDGhzf/bIPbpNgHE3TQctVNLpkQOhDYMIe3dmA6YzNkzw
-X-Google-Smtp-Source: AGHT+IFJNlGuVyvaF9eRVutRSsDpcCFkY1tMrNQNHCT2HWLojqkctlXf1dIxq1F7oOHuTDrPXVYCgg==
-X-Received: by 2002:a05:6214:f22:b0:6fa:ccb6:600d with SMTP id
- 6a1803df08f44-6fb3e5de4c4mr3415446d6.21.1749759137250; 
- Thu, 12 Jun 2025 13:12:17 -0700 (PDT)
+ AJvYcCV1A9vmUNKFc6U+GYnKHNoUen9RKvmvjQVYl7qtMmWylZE/QCK5FAFBA47KrTMlxFQSTydCoZ1a2/Y=@lists.freedesktop.org,
+ AJvYcCVik+vYcR63ugHIdB+fsKtCrKYNHMbX3N5r7H9PqDybuqq/gXod3tuDKPeO2oBLfA/Fo2h1/+8LQQ==@lists.freedesktop.org
+X-Gm-Message-State: AOJu0YyrTIAMx55B7JQFL3j4Hvi4umELUUWGINZwRiei/sBntTvKxqxN
+ FcFcNYYO8VzqbJ5ZAVkYO7Kay5k2OtURpPlV6WloHGMshV6fWqQLCf7l
+X-Gm-Gg: ASbGncs1AkJWyq6CqCvRN4jVhCkw5ZZAibX3Pb3i/PwAYpDB0vetByTs4t1GXN35hrQ
+ PWZ9qEqQNJ8pgILmTq21l8NwmziBTp7AJiMQeqzVroIyX26kJYqGCW/uy8JZvDUTfEAoOFmb8z/
+ tnS5GLpdojxh+zfbAoc8hD40opTO34SaXTjnCGAO1JReAaipCdc45rKArQD3c8E241jZMWu7Vqi
+ rcXWqLQ5EbsAoV6QxAM3C0KDdCwoKPhe89+1guXOZAUUUBT/jW2xDiQ9MTDXdVW0rUfOIza3q5y
+ Hw3gP3Ur6UmvYfCflG8HfH4JsdfmHskzEdoq1Bo2bFxFmMOPd/5dNa8J+UlUOsbw6KN6hhqEBp4
+ 5ryXBtbMTfjcbu3zFZOjj778He0/B7Z1DsV6xRdU7UFOuEfoQFTF9
+X-Google-Smtp-Source: AGHT+IF0nUAxa3ReBaADmdgbTluy0nUpM5l1CqJ7CF4aRQW+mAF+H8dNcq9aeQVegX9bYVkg1XO5gw==
+X-Received: by 2002:a05:620a:2905:b0:7ca:df2c:e112 with SMTP id
+ af79cd13be357-7d3bc4b8904mr469287285a.45.1749828313083; 
+ Fri, 13 Jun 2025 08:25:13 -0700 (PDT)
 Received: from fauth-a2-smtp.messagingengine.com
  (fauth-a2-smtp.messagingengine.com. [103.168.172.201])
  by smtp.gmail.com with ESMTPSA id
- 6a1803df08f44-6fb35c31ac3sm13639086d6.68.2025.06.12.13.12.16
+ af79cd13be357-7d3b8eac852sm184655885a.71.2025.06.13.08.25.12
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 12 Jun 2025 13:12:16 -0700 (PDT)
-Received: from phl-compute-04.internal (phl-compute-04.phl.internal
- [10.202.2.44])
- by mailfauth.phl.internal (Postfix) with ESMTP id 240E31200043;
- Thu, 12 Jun 2025 16:12:16 -0400 (EDT)
+ Fri, 13 Jun 2025 08:25:12 -0700 (PDT)
+Received: from phl-compute-05.internal (phl-compute-05.phl.internal
+ [10.202.2.45])
+ by mailfauth.phl.internal (Postfix) with ESMTP id B68461200043;
+ Fri, 13 Jun 2025 11:25:11 -0400 (EDT)
 Received: from phl-mailfrontend-01 ([10.202.2.162])
- by phl-compute-04.internal (MEProxy); Thu, 12 Jun 2025 16:12:16 -0400
-X-ME-Sender: <xms:oDRLaFc_03txAVqTKE90sYUCBRynSpdVPHQjWgopAaipmum3EiCnWg>
- <xme:oDRLaDM-BKIpyWnAjmG32Hzuxc51gt3WkipfILmRtJEBylR6gtaf1-EuwHIuyFDec
- xcKpbKvEIlgvu2oBA>
-X-ME-Received: <xmr:oDRLaOilFFQO6Jy2Y-t7G7IOuF_sHc6ylNB99aGCDl28AA-AtAF-VtDkIDs>
-X-ME-Proxy-Cause: gggruggvucftvghtrhhoucdtuddrgeeffedrtddugdduiedttdcutefuodetggdotefrod
+ by phl-compute-05.internal (MEProxy); Fri, 13 Jun 2025 11:25:11 -0400
+X-ME-Sender: <xms:10JMaOdiZhcyzdY9O-UyB-HYPT4bQ2eExX7BSrCeeVb_lvLYlm5YuQ>
+ <xme:10JMaIPCXbrhyhWgzd2KbHv3tqiEgajb8TKENsm-AA05nZMNtwojaMca2R1AEfHoG
+ PHK8lHfRad0WPP8Iw>
+X-ME-Received: <xmr:10JMaPjb0XgDR_VD9sZev4hdAsMDoQjNbtigy7Ghh-_dV-W9yvAHZM1Hvg>
+X-ME-Proxy-Cause: gggruggvucftvghtrhhoucdtuddrgeeffedrtddugddukeefudcutefuodetggdotefrod
  ftvfcurfhrohhfihhlvgemucfhrghsthforghilhdpggftfghnshhusghstghrihgsvgdp
  uffrtefokffrpgfnqfghnecuuegrihhlohhuthemuceftddtnecusecvtfgvtghiphhivg
  hnthhsucdlqddutddtmdenucfjughrpeffhffvvefukfhfgggtuggjsehttdertddttddv
@@ -84,27 +84,27 @@ X-ME-Proxy-Cause: gggruggvucftvghtrhhoucdtuddrgeeffedrtddugdduiedttdcutefuodetgg
  hmpehmrghilhhfrhhomhepsghoqhhunhdomhgvshhmthhprghuthhhphgvrhhsohhnrghl
  ihhthidqieelvdeghedtieegqddujeejkeehheehvddqsghoqhhunhdrfhgvnhhgpeepgh
  hmrghilhdrtghomhesfhhigihmvgdrnhgrmhgvpdhnsggprhgtphhtthhopedvhedpmhho
- uggvpehsmhhtphhouhhtpdhrtghpthhtohepjhhhuhgssggrrhgusehnvhhiughirgdrtg
- homhdprhgtphhtthhopegrtghouhhrsghothesnhhvihguihgrrdgtohhmpdhrtghpthht
- ohepohhjvggurgeskhgvrhhnvghlrdhorhhgpdhrtghpthhtoheprghlvgigrdhgrgihnh
- horhesghhmrghilhdrtghomhdprhgtphhtthhopehgrghrhiesghgrrhihghhuohdrnhgv
- thdprhgtphhtthhopegsjhhorhhnfegpghhhsehprhhothhonhhmrghilhdrtghomhdprh
- gtphhtthhopegrrdhhihhnuggsohhrgheskhgvrhhnvghlrdhorhhgpdhrtghpthhtohep
- rghlihgtvghrhihhlhesghhoohhglhgvrdgtohhmpdhrtghpthhtohepthhmghhrohhssh
- esuhhmihgthhdrvgguuh
-X-ME-Proxy: <xmx:oDRLaO9_nMB1tWbwRzzD-Zvo5jVdXayR0dtZaUGL4e1pHfne-1RzlQ>
- <xmx:oDRLaBv3KgwHgSY_H5-Rb6oL2HftHm2kKPDCQBIcmCZYPEgQgo5bmw>
- <xmx:oDRLaNEUGIB2EbhOzkQ_wdcDKK-5DOKcUxk89H9GjZDLTc0CkEcEKw>
- <xmx:oDRLaIM0Pg4EkifRY2hLgxF5UDZFc2yPS5CxYJKvuwT4dfJqVM4b3w>
- <xmx:oDRLaKPaHv8UVEXfB6bNyd0pDweM1L1hyRFATrjaqFtjCelg0iQfmsFJ>
+ uggvpehsmhhtphhouhhtpdhrtghpthhtoheprggtohhurhgsohhtsehnvhhiughirgdrtg
+ homhdprhgtphhtthhopehojhgvuggrsehkvghrnhgvlhdrohhrghdprhgtphhtthhopegr
+ lhgvgidrghgrhihnohhrsehgmhgrihhlrdgtohhmpdhrtghpthhtohepghgrrhihsehgrg
+ hrhihguhhordhnvghtpdhrtghpthhtohepsghjohhrnhefpghghhesphhrohhtohhnmhgr
+ ihhlrdgtohhmpdhrtghpthhtoheprgdrhhhinhgusghorhhgsehkvghrnhgvlhdrohhrgh
+ dprhgtphhtthhopegrlhhitggvrhihhhhlsehgohhoghhlvgdrtghomhdprhgtphhtthho
+ pehtmhhgrhhoshhssehumhhitghhrdgvughupdhrtghpthhtohepuggrkhhrsehkvghrnh
+ gvlhdrohhrgh
+X-ME-Proxy: <xmx:10JMaL_kfhoKrO6X8e3fz52F0wnehq8a6jKkLf17zQC5_DLEj2z-0A>
+ <xmx:10JMaKvD4gdM7EQ95ZJZjAv5YReN4IXxytDIypr7FBVye2qNKA75zg>
+ <xmx:10JMaCGO40MMjFycUE4eFTeVCmv8MrGVbGoWc57K13ufV-rjUvrk0w>
+ <xmx:10JMaJO7nnDgCfmU5iEo8WgGK6AoKvkSkG8oC9hOFgZth1sQ5r7QFQ>
+ <xmx:10JMaHO8UP66GCv2E26QOvTPmojbt-HM3WaXjUu0O8N_sb9of3oQwtMv>
 Feedback-ID: iad51458e:Fastmail
-Received: by mail.messagingengine.com (Postfix) with ESMTPA; Thu,
- 12 Jun 2025 16:12:15 -0400 (EDT)
-Date: Thu, 12 Jun 2025 13:12:14 -0700
+Received: by mail.messagingengine.com (Postfix) with ESMTPA; Fri,
+ 13 Jun 2025 11:25:11 -0400 (EDT)
+Date: Fri, 13 Jun 2025 08:25:10 -0700
 From: Boqun Feng <boqun.feng@gmail.com>
-To: John Hubbard <jhubbard@nvidia.com>
-Cc: Alexandre Courbot <acourbot@nvidia.com>, Miguel Ojeda <ojeda@kernel.org>,
- Alex Gaynor <alex.gaynor@gmail.com>, Gary Guo <gary@garyguo.net>,
+To: Alexandre Courbot <acourbot@nvidia.com>
+Cc: Miguel Ojeda <ojeda@kernel.org>, Alex Gaynor <alex.gaynor@gmail.com>,
+ Gary Guo <gary@garyguo.net>,
  =?iso-8859-1?Q?Bj=F6rn?= Roy Baron <bjorn3_gh@protonmail.com>,
  Andreas Hindborg <a.hindborg@kernel.org>,
  Alice Ryhl <aliceryhl@google.com>, Trevor Gross <tmgross@umich.edu>,
@@ -112,24 +112,22 @@ Cc: Alexandre Courbot <acourbot@nvidia.com>, Miguel Ojeda <ojeda@kernel.org>,
  David Airlie <airlied@gmail.com>, Simona Vetter <simona@ffwll.ch>,
  Maarten Lankhorst <maarten.lankhorst@linux.intel.com>,
  Maxime Ripard <mripard@kernel.org>,
- Thomas Zimmermann <tzimmermann@suse.de>,
- Benno Lossin <lossin@kernel.org>, Ben Skeggs <bskeggs@nvidia.com>,
+ Thomas Zimmermann <tzimmermann@suse.de>, Benno Lossin <lossin@kernel.org>,
+ John Hubbard <jhubbard@nvidia.com>, Ben Skeggs <bskeggs@nvidia.com>,
  Joel Fernandes <joelagnelf@nvidia.com>,
  Timur Tabi <ttabi@nvidia.com>, Alistair Popple <apopple@nvidia.com>,
  linux-kernel@vger.kernel.org, rust-for-linux@vger.kernel.org,
  nouveau@lists.freedesktop.org, dri-devel@lists.freedesktop.org
 Subject: Re: [PATCH v5 04/23] rust: add new `num` module with `PowerOfTwo` type
-Message-ID: <aEs0noYbLf1crnAf@tardis.local>
+Message-ID: <aExC1j8WmkJn3Csb@Mac.home>
 References: <20250612-nova-frts-v5-0-14ba7eaf166b@nvidia.com>
  <20250612-nova-frts-v5-4-14ba7eaf166b@nvidia.com>
  <aErtL6yxLu3Azbsm@tardis.local>
- <f8d9af76-fc1d-4f7a-8dfb-a0606e44c56b@nvidia.com>
- <aEsy8XDy6JW8zb6v@tardis.local>
- <529736c9-15a1-4777-be30-cc9aa9d11a87@nvidia.com>
+ <DALGWEM3TD3O.95L77CD6R62S@nvidia.com>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
-In-Reply-To: <529736c9-15a1-4777-be30-cc9aa9d11a87@nvidia.com>
+In-Reply-To: <DALGWEM3TD3O.95L77CD6R62S@nvidia.com>
 X-Mailman-Approved-At: Sat, 13 Dec 2025 12:17:01 +0000
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
@@ -145,60 +143,55 @@ List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-On Thu, Jun 12, 2025 at 01:08:25PM -0700, John Hubbard wrote:
-> On 6/12/25 1:05 PM, Boqun Feng wrote:
-> > On Thu, Jun 12, 2025 at 01:00:12PM -0700, John Hubbard wrote:
-> >> On 6/12/25 8:07 AM, Boqun Feng wrote:
-> >>> On Thu, Jun 12, 2025 at 11:01:32PM +0900, Alexandre Courbot wrote:
-> >> ...
-> >>>> +                #[inline(always)]
-> >>>> +                pub const fn align_down(self, value: $t) -> $t {
-> >>>
-> >>> I'm late to party, but could we instead implement:
-> >>>
-> >>>     pub const fn round_down<i32>(value: i32, shift: i32) -> i32 {
-> >>>         value & !((1 << shift) - 1)
-> >>>     }
-> >>>
-> >>>     pub const fn round_up<i32>(value: i32, shift: i32) -> i32 {
-> >>>         let mask = (1 << shift) - 1;
-> >>>         value.wrapping_add(mask) & !mask
-> >>>     }
-> >>
-> >> Just a naming concern here.
-> >>
-> >> The function name, and the "shift" argument is extremely odd there.
-> >> And that's because it is re-inventing the concept of align_down()
-> >> and align_up(), but with a misleading name and a hard to understand
-> >> "shift" argument.
-> >>
-> >> If you are "rounding" to a power of two, that's normally called
-> >> alignment, at least in kernel code. And if you are rounding to the
-> >> nearest...integer, for example, that's rounding.
-> >>
-> >> But "rounding" with a "shift" argument? That's a little too 
-> >> creative! :) 
-> >>
-> > 
-> > Oh, sorry, I should have mentioned where I got these names, see
-> > round_up() and round_down() in include/linux/math.h. But no objection to
-> > find a better name for "shift".
+On Fri, Jun 13, 2025 at 11:16:10PM +0900, Alexandre Courbot wrote:
+[...]
+> >> +#[repr(transparent)]
+> >> +pub struct PowerOfTwo<T>(T);
+> >> +
+> >> +macro_rules! power_of_two_impl {
+> >> +    ($($t:ty),+) => {
+> >> +        $(
+> >> +            impl PowerOfTwo<$t> {
+> >> +                /// Validates that `v` is a power of two at build-time, and returns it wrapped into
+> >> +                /// `PowerOfTwo`.
+> >> +                ///
+> >> +                /// A build error is triggered if `v` cannot be asserted to be a power of two.
+> >> +                ///
+> >> +                /// # Examples
+> >> +                ///
+> >> +                /// ```
+> >> +                /// use kernel::num::PowerOfTwo;
+> >> +                ///
+> >> +                /// let v = PowerOfTwo::<u32>::new(256);
+> >> +                /// assert_eq!(v.value(), 256);
+> >> +                /// ```
+> >> +                #[inline(always)]
+> >> +                pub const fn new(v: $t) -> Self {
+> >
+> > Then this function should be unsafe, because an invalid `v` can create
+> > an invalid PowerOfTwo.
 > 
-> lol, perfect response! So my complaint is really about the kernel's existing
-> math.h, rather than your proposal. OK then. :)
+> Doesn't the `build_assert` below allow us to keep this method safe,
+> since it will fail at build-time if it cannot be asserted that `v` is a
+> power of two?
 > 
 
-;-) I realised I misunderstood round_up() and round_down(), I thought
-they are using the numbers of bits of the alignment, but it turns out
-they are using the alignment itself. What I tried to suggest is that
-for this align functions, we use numbers of bits instead of alignment.
+You're right, I misunderstood a bit, so if compiler cannot be sure about
+the assertion from build_assert!() it'll still generate a build error,
+i.e. even for cases like:
 
-Not sure about the name now :)
+    pub fn my_power_of_two(v: i32) -> PowerOfTwo<i32> {
+        PowerOfTwo::new(v)
+    }
+
+where `v` is a user input and the value is unknown at the build time.
+build_assert!() will trigger.
 
 Regards,
 Boqun
 
-> thanks,
-> -- 
-> John Hubbard
-> 
+> >
+> >> +                    build_assert!(v.count_ones() == 1);
+> >> +                    Self(v)
+> >> +                }
+[...]
