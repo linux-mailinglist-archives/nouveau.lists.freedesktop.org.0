@@ -2,82 +2,75 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id 344FCAD83E7
-	for <lists+nouveau@lfdr.de>; Fri, 13 Jun 2025 09:15:57 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 251D8AD8642
+	for <lists+nouveau@lfdr.de>; Fri, 13 Jun 2025 11:04:48 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 67DF310E8DC;
-	Fri, 13 Jun 2025 07:15:52 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 4DFE310E908;
+	Fri, 13 Jun 2025 09:04:41 +0000 (UTC)
 Authentication-Results: gabe.freedesktop.org;
-	dkim=pass (1024-bit key; unprotected) header.d=suse.de header.i=@suse.de header.b="wpnxcqgj";
-	dkim=permerror (0-bit key) header.d=suse.de header.i=@suse.de header.b="kPjofHKQ";
-	dkim=pass (1024-bit key) header.d=suse.de header.i=@suse.de header.b="wpnxcqgj";
-	dkim=permerror (0-bit key) header.d=suse.de header.i=@suse.de header.b="kPjofHKQ";
+	dkim=pass (1024-bit key; unprotected) header.d=suse.de header.i=@suse.de header.b="JhYaXkf9";
+	dkim=permerror (0-bit key) header.d=suse.de header.i=@suse.de header.b="EijQ9W4U";
+	dkim=pass (1024-bit key) header.d=suse.de header.i=@suse.de header.b="JhYaXkf9";
+	dkim=permerror (0-bit key) header.d=suse.de header.i=@suse.de header.b="EijQ9W4U";
 	dkim-atps=neutral
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from smtp-out1.suse.de (smtp-out1.suse.de [195.135.223.130])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 73FA010E8CA
- for <nouveau@lists.freedesktop.org>; Fri, 13 Jun 2025 07:15:42 +0000 (UTC)
+Received: from smtp-out2.suse.de (smtp-out2.suse.de [195.135.223.131])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id AB2BB10E906
+ for <nouveau@lists.freedesktop.org>; Fri, 13 Jun 2025 09:04:37 +0000 (UTC)
 Received: from imap1.dmz-prg2.suse.org (unknown [10.150.64.97])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
  (No client certificate requested)
- by smtp-out1.suse.de (Postfix) with ESMTPS id 4F20B2115E;
- Fri, 13 Jun 2025 07:15:41 +0000 (UTC)
+ by smtp-out2.suse.de (Postfix) with ESMTPS id 701A11F7ED;
+ Fri, 13 Jun 2025 09:04:36 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.de; s=susede2_rsa;
- t=1749798941; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
+ t=1749805476; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
  mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references:autocrypt:autocrypt;
- bh=AFKIeJdzd7Bm1UfGUYdUXTMZwzn7kuZf09ynXcNd27k=;
- b=wpnxcqgjRop7dkbkBQ/X1iuElaw96F5zP50QsPn5I4PbCQYjlf8kTIsBu6JxfU6RPDJuDp
- RxQ4MhnWMcmky2ZNo4wk7bRNFuuNxkOpgFB9eXHAcKu2tTzWDaCYQ4M/VUWfplABYgNbFh
- sVh+N4mU2AnW9XJXV/M4hBmN1ndOy/w=
+ content-transfer-encoding:content-transfer-encoding;
+ bh=Cognuam3Nnn8rKlVmxnaH2SIEYJ0L+O3m38UIjpzf1M=;
+ b=JhYaXkf9do51n73K/iLjwm7nHC8S7e0nVK1s9v8I2ZPmxjZn721KsstV88tf9wJmTOsXbb
+ 2KSW12/Rn//21FJ+NeV88eAvBKYN+ToELXufuiXJKkobpFBeFpV8GH66wBEUyaHD/7WS8X
+ cf1jjBzCCWoTtf3FZv+F3DeeSh9sTx0=
 DKIM-Signature: v=1; a=ed25519-sha256; c=relaxed/relaxed; d=suse.de;
- s=susede2_ed25519; t=1749798941;
+ s=susede2_ed25519; t=1749805476;
  h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
  mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references:autocrypt:autocrypt;
- bh=AFKIeJdzd7Bm1UfGUYdUXTMZwzn7kuZf09ynXcNd27k=;
- b=kPjofHKQaFEdsoc79AwOm7JvdSfaz141myzJctvWsea6Z/9xOjZvLdd1Jo7NEsyl0iHep4
- TeHnsN5rMrD7G5Aw==
-Authentication-Results: smtp-out1.suse.de;
+ content-transfer-encoding:content-transfer-encoding;
+ bh=Cognuam3Nnn8rKlVmxnaH2SIEYJ0L+O3m38UIjpzf1M=;
+ b=EijQ9W4UcJFKx0GFiMCASsmN7Bv/B+ijlMOYEwmeXGmGWmaJAc8vhRIQ+b3eQnupw9Sp9L
+ 6+hx9rNfI1eQjNDg==
+Authentication-Results: smtp-out2.suse.de;
 	none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.de; s=susede2_rsa;
- t=1749798941; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
+ t=1749805476; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
  mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references:autocrypt:autocrypt;
- bh=AFKIeJdzd7Bm1UfGUYdUXTMZwzn7kuZf09ynXcNd27k=;
- b=wpnxcqgjRop7dkbkBQ/X1iuElaw96F5zP50QsPn5I4PbCQYjlf8kTIsBu6JxfU6RPDJuDp
- RxQ4MhnWMcmky2ZNo4wk7bRNFuuNxkOpgFB9eXHAcKu2tTzWDaCYQ4M/VUWfplABYgNbFh
- sVh+N4mU2AnW9XJXV/M4hBmN1ndOy/w=
+ content-transfer-encoding:content-transfer-encoding;
+ bh=Cognuam3Nnn8rKlVmxnaH2SIEYJ0L+O3m38UIjpzf1M=;
+ b=JhYaXkf9do51n73K/iLjwm7nHC8S7e0nVK1s9v8I2ZPmxjZn721KsstV88tf9wJmTOsXbb
+ 2KSW12/Rn//21FJ+NeV88eAvBKYN+ToELXufuiXJKkobpFBeFpV8GH66wBEUyaHD/7WS8X
+ cf1jjBzCCWoTtf3FZv+F3DeeSh9sTx0=
 DKIM-Signature: v=1; a=ed25519-sha256; c=relaxed/relaxed; d=suse.de;
- s=susede2_ed25519; t=1749798941;
+ s=susede2_ed25519; t=1749805476;
  h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
  mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references:autocrypt:autocrypt;
- bh=AFKIeJdzd7Bm1UfGUYdUXTMZwzn7kuZf09ynXcNd27k=;
- b=kPjofHKQaFEdsoc79AwOm7JvdSfaz141myzJctvWsea6Z/9xOjZvLdd1Jo7NEsyl0iHep4
- TeHnsN5rMrD7G5Aw==
+ content-transfer-encoding:content-transfer-encoding;
+ bh=Cognuam3Nnn8rKlVmxnaH2SIEYJ0L+O3m38UIjpzf1M=;
+ b=EijQ9W4UcJFKx0GFiMCASsmN7Bv/B+ijlMOYEwmeXGmGWmaJAc8vhRIQ+b3eQnupw9Sp9L
+ 6+hx9rNfI1eQjNDg==
 Received: from imap1.dmz-prg2.suse.org (localhost [127.0.0.1])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
  (No client certificate requested)
- by imap1.dmz-prg2.suse.org (Postfix) with ESMTPS id CB0A513782;
- Fri, 13 Jun 2025 07:15:40 +0000 (UTC)
+ by imap1.dmz-prg2.suse.org (Postfix) with ESMTPS id D952B137FE;
+ Fri, 13 Jun 2025 09:04:35 +0000 (UTC)
 Received: from dovecot-director2.suse.de ([2a07:de40:b281:106:10:150:64:167])
- by imap1.dmz-prg2.suse.org with ESMTPSA id TbJIMBzQS2iFFgAAD6G6ig
- (envelope-from <tzimmermann@suse.de>); Fri, 13 Jun 2025 07:15:40 +0000
-Message-ID: <e2478a92-4e37-407c-8f2a-017d8f0e77ba@suse.de>
-Date: Fri, 13 Jun 2025 09:15:40 +0200
-MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v4 03/25] drm/gem-dma: Compute dumb-buffer sizes with
- drm_mode_size_dumb()
-To: Tomi Valkeinen <tomi.valkeinen@ideasonboard.com>
+ by imap1.dmz-prg2.suse.org with ESMTPSA id wChmM6PpS2inNAAAD6G6ig
+ (envelope-from <tzimmermann@suse.de>); Fri, 13 Jun 2025 09:04:35 +0000
+From: Thomas Zimmermann <tzimmermann@suse.de>
+To: simona@ffwll.ch, airlied@gmail.com, mripard@kernel.org,
+ maarten.lankhorst@linux.intel.com, geert@linux-m68k.org,
+ tomi.valkeinen@ideasonboard.com
 Cc: dri-devel@lists.freedesktop.org, linux-mediatek@lists.infradead.org,
  freedreno@lists.freedesktop.org, linux-arm-msm@vger.kernel.org,
  imx@lists.linux.dev, linux-samsung-soc@vger.kernel.org,
@@ -85,57 +78,31 @@ Cc: dri-devel@lists.freedesktop.org, linux-mediatek@lists.infradead.org,
  spice-devel@lists.freedesktop.org, linux-renesas-soc@vger.kernel.org,
  linux-rockchip@lists.infradead.org, linux-tegra@vger.kernel.org,
  intel-xe@lists.freedesktop.org, xen-devel@lists.xenproject.org,
- simona@ffwll.ch, airlied@gmail.com, mripard@kernel.org,
- maarten.lankhorst@linux.intel.com, geert@linux-m68k.org
-References: <20250311155120.442633-1-tzimmermann@suse.de>
- <20250311155120.442633-4-tzimmermann@suse.de>
- <d7e016fd-3d0e-4822-a404-a53ba11e5dc4@ideasonboard.com>
-Content-Language: en-US
-From: Thomas Zimmermann <tzimmermann@suse.de>
-Autocrypt: addr=tzimmermann@suse.de; keydata=
- xsBNBFs50uABCADEHPidWt974CaxBVbrIBwqcq/WURinJ3+2WlIrKWspiP83vfZKaXhFYsdg
- XH47fDVbPPj+d6tQrw5lPQCyqjwrCPYnq3WlIBnGPJ4/jreTL6V+qfKRDlGLWFjZcsrPJGE0
- BeB5BbqP5erN1qylK9i3gPoQjXGhpBpQYwRrEyQyjuvk+Ev0K1Jc5tVDeJAuau3TGNgah4Yc
- hdHm3bkPjz9EErV85RwvImQ1dptvx6s7xzwXTgGAsaYZsL8WCwDaTuqFa1d1jjlaxg6+tZsB
- 9GluwvIhSezPgnEmimZDkGnZRRSFiGP8yjqTjjWuf0bSj5rUnTGiyLyRZRNGcXmu6hjlABEB
- AAHNJ1Rob21hcyBaaW1tZXJtYW5uIDx0emltbWVybWFubkBzdXNlLmRlPsLAjgQTAQgAOAIb
- AwULCQgHAgYVCgkICwIEFgIDAQIeAQIXgBYhBHIX+6yM6c9jRKFo5WgNwR1TC3ojBQJftODH
- AAoJEGgNwR1TC3ojx1wH/0hKGWugiqDgLNXLRD/4TfHBEKmxIrmfu9Z5t7vwUKfwhFL6hqvo
- lXPJJKQpQ2z8+X2vZm/slsLn7J1yjrOsoJhKABDi+3QWWSGkaGwRJAdPVVyJMfJRNNNIKwVb
- U6B1BkX2XDKDGffF4TxlOpSQzdtNI/9gleOoUA8+jy8knnDYzjBNOZqLG2FuTdicBXblz0Mf
- vg41gd9kCwYXDnD91rJU8tzylXv03E75NCaTxTM+FBXPmsAVYQ4GYhhgFt8S2UWMoaaABLDe
- 7l5FdnLdDEcbmd8uLU2CaG4W2cLrUaI4jz2XbkcPQkqTQ3EB67hYkjiEE6Zy3ggOitiQGcqp
- j//OwE0EWznS4AEIAMYmP4M/V+T5RY5at/g7rUdNsLhWv1APYrh9RQefODYHrNRHUE9eosYb
- T6XMryR9hT8XlGOYRwKWwiQBoWSDiTMo/Xi29jUnn4BXfI2px2DTXwc22LKtLAgTRjP+qbU6
- 3Y0xnQN29UGDbYgyyK51DW3H0If2a3JNsheAAK+Xc9baj0LGIc8T9uiEWHBnCH+RdhgATnWW
- GKdDegUR5BkDfDg5O/FISymJBHx2Dyoklv5g4BzkgqTqwmaYzsl8UxZKvbaxq0zbehDda8lv
- hFXodNFMAgTLJlLuDYOGLK2AwbrS3Sp0AEbkpdJBb44qVlGm5bApZouHeJ/+n+7r12+lqdsA
- EQEAAcLAdgQYAQgAIAIbDBYhBHIX+6yM6c9jRKFo5WgNwR1TC3ojBQJftOH6AAoJEGgNwR1T
- C3ojVSkIALpAPkIJPQoURPb1VWjh34l0HlglmYHvZszJWTXYwavHR8+k6Baa6H7ufXNQtThR
- yIxJrQLW6rV5lm7TjhffEhxVCn37+cg0zZ3j7zIsSS0rx/aMwi6VhFJA5hfn3T0TtrijKP4A
- SAQO9xD1Zk9/61JWk8OysuIh7MXkl0fxbRKWE93XeQBhIJHQfnc+YBLprdnxR446Sh8Wn/2D
- Ya8cavuWf2zrB6cZurs048xe0UbSW5AOSo4V9M0jzYI4nZqTmPxYyXbm30Kvmz0rYVRaitYJ
- 4kyYYMhuULvrJDMjZRvaNe52tkKAvMevcGdt38H4KSVXAylqyQOW5zvPc4/sq9c=
-In-Reply-To: <d7e016fd-3d0e-4822-a404-a53ba11e5dc4@ideasonboard.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
-X-Spamd-Result: default: False [-2.80 / 50.00]; BAYES_HAM(-3.00)[100.00%];
+ Thomas Zimmermann <tzimmermann@suse.de>
+Subject: [PATCH v5 00/25] drm/dumb-buffers: Fix and improve buffer-size
+ calculation
+Date: Fri, 13 Jun 2025 11:00:19 +0200
+Message-ID: <20250613090431.127087-1-tzimmermann@suse.de>
+X-Mailer: git-send-email 2.49.0
+MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+X-Spamd-Result: default: False [-1.80 / 50.00]; BAYES_HAM(-3.00)[100.00%];
  SUSPICIOUS_RECIPS(1.50)[]; NEURAL_HAM_LONG(-1.00)[-1.000];
- NEURAL_HAM_SHORT(-0.20)[-1.000]; MIME_GOOD(-0.10)[text/plain];
- RCVD_TLS_ALL(0.00)[]; RCPT_COUNT_TWELVE(0.00)[20];
- MIME_TRACE(0.00)[0:+]; RCVD_VIA_SMTP_AUTH(0.00)[];
- ARC_NA(0.00)[]; MID_RHS_MATCH_FROM(0.00)[];
- FREEMAIL_ENVRCPT(0.00)[gmail.com];
+ MID_CONTAINS_FROM(1.00)[]; NEURAL_HAM_SHORT(-0.20)[-1.000];
+ MIME_GOOD(-0.10)[text/plain]; ARC_NA(0.00)[];
+ FREEMAIL_TO(0.00)[ffwll.ch,gmail.com,kernel.org,linux.intel.com,linux-m68k.org,ideasonboard.com];
+ MIME_TRACE(0.00)[0:+]; RCPT_COUNT_TWELVE(0.00)[21];
+ RCVD_VIA_SMTP_AUTH(0.00)[]; FREEMAIL_ENVRCPT(0.00)[gmail.com];
  DKIM_SIGNED(0.00)[suse.de:s=susede2_rsa,suse.de:s=susede2_ed25519];
- FROM_HAS_DN(0.00)[];
- FREEMAIL_CC(0.00)[lists.freedesktop.org,lists.infradead.org,vger.kernel.org,lists.linux.dev,lists.xenproject.org,ffwll.ch,gmail.com,kernel.org,linux.intel.com,linux-m68k.org];
- TO_DN_SOME(0.00)[]; FROM_EQ_ENVFROM(0.00)[];
+ FUZZY_BLOCKED(0.00)[rspamd.com]; FROM_EQ_ENVFROM(0.00)[];
+ FROM_HAS_DN(0.00)[]; TO_DN_SOME(0.00)[]; RCVD_TLS_ALL(0.00)[];
  RCVD_COUNT_TWO(0.00)[2]; TO_MATCH_ENVRCPT_ALL(0.00)[];
- FUZZY_BLOCKED(0.00)[rspamd.com];
- DBL_BLOCKED_OPENRESOLVER(0.00)[suse.de:email,suse.de:mid]
+ URIBL_BLOCKED(0.00)[suse.de:mid];
+ DBL_BLOCKED_OPENRESOLVER(0.00)[suse.de:mid]
 X-Spam-Level: 
 X-Spam-Flag: NO
-X-Spam-Score: -2.80
+X-Spam-Score: -1.80
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -150,90 +117,103 @@ List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-Hi
+Dumb-buffer pitch and size is specified by width, height, bits-per-pixel
+plus various hardware-specific alignments. The calculation of these
+values is inconsistent and duplicated among drivers. The results for
+formats with bpp < 8 are sometimes incorrect.
 
-Am 12.06.25 um 10:43 schrieb Tomi Valkeinen:
-> Hi,
->
-> On 11/03/2025 17:47, Thomas Zimmermann wrote:
->> Call drm_mode_size_dumb() to compute dumb-buffer scanline pitch and
->> buffer size. Align the pitch to a multiple of 8.
->>
->> Push the current calculation into the only direct caller imx. Imx's
->> hardware requires the framebuffer width to be aligned to 8. The
->> driver's current approach is actually incorrect, as it only guarantees
->> this implicitly and requires bpp to be a multiple of 8 already. A
->> later commit will fix this problem by aligning the scanline pitch
->> such that an aligned width still fits into each scanline's memory.
->>
->> A number of other drivers are build on top of gem-dma helpers and
->> implement their own dumb-buffer allocation. These drivers invoke
->> drm_gem_dma_dumb_create_internal(), which is not affected by this
->> commit.
->>
->> Signed-off-by: Thomas Zimmermann <tzimmermann@suse.de>
->> ---
->>   drivers/gpu/drm/drm_gem_dma_helper.c     | 7 +++++--
->>   drivers/gpu/drm/imx/ipuv3/imx-drm-core.c | 2 ++
->>   2 files changed, 7 insertions(+), 2 deletions(-)
->>
->> diff --git a/drivers/gpu/drm/drm_gem_dma_helper.c b/drivers/gpu/drm/drm_gem_dma_helper.c
->> index b7f033d4352a..49be9b033610 100644
->> --- a/drivers/gpu/drm/drm_gem_dma_helper.c
->> +++ b/drivers/gpu/drm/drm_gem_dma_helper.c
->> @@ -20,6 +20,7 @@
->>   #include <drm/drm.h>
->>   #include <drm/drm_device.h>
->>   #include <drm/drm_drv.h>
->> +#include <drm/drm_dumb_buffers.h>
->>   #include <drm/drm_gem_dma_helper.h>
->>   #include <drm/drm_vma_manager.h>
->>   
->> @@ -304,9 +305,11 @@ int drm_gem_dma_dumb_create(struct drm_file *file_priv,
->>   			    struct drm_mode_create_dumb *args)
->>   {
->>   	struct drm_gem_dma_object *dma_obj;
->> +	int ret;
->>   
->> -	args->pitch = DIV_ROUND_UP(args->width * args->bpp, 8);
->> -	args->size = args->pitch * args->height;
->> +	ret = drm_mode_size_dumb(drm, args, SZ_8, 0);
->> +	if (ret)
->> +		return ret;
->>   
->>   	dma_obj = drm_gem_dma_create_with_handle(file_priv, drm, args->size,
->>   						 &args->handle);
->> diff --git a/drivers/gpu/drm/imx/ipuv3/imx-drm-core.c b/drivers/gpu/drm/imx/ipuv3/imx-drm-core.c
->> index ec5fd9a01f1e..e7025df7b978 100644
->> --- a/drivers/gpu/drm/imx/ipuv3/imx-drm-core.c
->> +++ b/drivers/gpu/drm/imx/ipuv3/imx-drm-core.c
->> @@ -145,6 +145,8 @@ static int imx_drm_dumb_create(struct drm_file *file_priv,
->>   	int ret;
->>   
->>   	args->width = ALIGN(width, 8);
->> +	args->pitch = DIV_ROUND_UP(args->width * args->bpp, 8);
->> +	args->size = args->pitch * args->height;
->>   
->>   	ret = drm_gem_dma_dumb_create(file_priv, drm, args);
->>   	if (ret)
-> Won't the pitch and size just be overwritten by the
-> drm_gem_dma_dumb_create() call?
+This series fixes this for most drivers. Default scanline pitch and
+buffer size are now calculated with the existing 4CC helpers. There is
+a new helper drm_mode_size_dumb() that calculates scanline pitch and
+buffer size according to driver requirements.
 
-Right, looks like it. Thanks for looking over this. The call to 
-drm_gem_dma_dumb_create() needs to be changed 
-drm_gem_dma_dumb_create_internal(). The latter doesn't modify the 
-arguments besides some sanity checks. BTW patch 10 cleans up imx 
-entirely. Best regards Thomas
->
->   Tomi
->
+The series fixes the common GEM implementations for DMA, SHMEM and
+VRAM. It further changes most implementations of dumb_create to use
+the new helper. A small number of drivers has more complicated
+calculations and will be updated by a later patches.
 
+v5:
+- use check_mul_overflow() for overflow test (Tomi)
+- imx: fix intermediate code (Tomi)
+- rz-du: include dumb-buffers header
+v4:
+- improve UAPI documentation
+- document bpp special cases
+- use drm_warn_once()
+- add TODO lists
+- armada: fix pitch alignment
+v3:
+- document UAPI semantics
+- fall back to bpp-based allocation for unknown color modes
+- cleanups
+v2:
+- rewrite series
+- convert many individual drivers besides the shared GEM helpers
+
+Thomas Zimmermann (25):
+  drm/dumb-buffers: Sanitize output on errors
+  drm/dumb-buffers: Provide helper to set pitch and size
+  drm/gem-dma: Compute dumb-buffer sizes with drm_mode_size_dumb()
+  drm/gem-shmem: Compute dumb-buffer sizes with drm_mode_size_dumb()
+  drm/gem-vram: Compute dumb-buffer sizes with drm_mode_size_dumb()
+  drm/armada: Compute dumb-buffer sizes with drm_mode_size_dumb()
+  drm/exynos: Compute dumb-buffer sizes with drm_mode_size_dumb()
+  drm/gma500: Compute dumb-buffer sizes with drm_mode_size_dumb()
+  drm/hibmc: Compute dumb-buffer sizes with drm_mode_size_dumb()
+  drm/imx/ipuv3: Compute dumb-buffer sizes with drm_mode_size_dumb()
+  drm/loongson: Compute dumb-buffer sizes with drm_mode_size_dumb()
+  drm/mediatek: Compute dumb-buffer sizes with drm_mode_size_dumb()
+  drm/msm: Compute dumb-buffer sizes with drm_mode_size_dumb()
+  drm/nouveau: Compute dumb-buffer sizes with drm_mode_size_dumb()
+  drm/omapdrm: Compute dumb-buffer sizes with drm_mode_size_dumb()
+  drm/qxl: Compute dumb-buffer sizes with drm_mode_size_dumb()
+  drm/renesas/rcar-du: Compute dumb-buffer sizes with
+    drm_mode_size_dumb()
+  drm/renesas/rz-du: Compute dumb-buffer sizes with drm_mode_size_dumb()
+  drm/rockchip: Compute dumb-buffer sizes with drm_mode_size_dumb()
+  drm/tegra: Compute dumb-buffer sizes with drm_mode_size_dumb()
+  drm/virtio: Compute dumb-buffer sizes with drm_mode_size_dumb()
+  drm/vmwgfx: Compute dumb-buffer sizes with drm_mode_size_dumb()
+  drm/xe: Compute dumb-buffer sizes with drm_mode_size_dumb()
+  drm/xen: Compute dumb-buffer sizes with drm_mode_size_dumb()
+  drm/xlnx: Compute dumb-buffer sizes with drm_mode_size_dumb()
+
+ Documentation/gpu/todo.rst                    |  27 +++
+ drivers/gpu/drm/armada/armada_gem.c           |  16 +-
+ drivers/gpu/drm/drm_dumb_buffers.c            | 170 ++++++++++++++++--
+ drivers/gpu/drm/drm_gem_dma_helper.c          |   7 +-
+ drivers/gpu/drm/drm_gem_shmem_helper.c        |  16 +-
+ drivers/gpu/drm/drm_gem_vram_helper.c         |  89 +++------
+ drivers/gpu/drm/exynos/exynos_drm_gem.c       |   8 +-
+ drivers/gpu/drm/gma500/gem.c                  |  21 +--
+ .../gpu/drm/hisilicon/hibmc/hibmc_drm_drv.c   |  25 ++-
+ drivers/gpu/drm/imx/ipuv3/imx-drm-core.c      |  29 ++-
+ drivers/gpu/drm/loongson/lsdc_gem.c           |  29 +--
+ drivers/gpu/drm/mediatek/mtk_gem.c            |  13 +-
+ drivers/gpu/drm/msm/msm_gem.c                 |  27 ++-
+ drivers/gpu/drm/nouveau/nouveau_display.c     |   7 +-
+ drivers/gpu/drm/omapdrm/omap_gem.c            |  15 +-
+ drivers/gpu/drm/qxl/qxl_dumb.c                |  17 +-
+ drivers/gpu/drm/renesas/rcar-du/rcar_du_kms.c |   7 +-
+ drivers/gpu/drm/renesas/rz-du/rzg2l_du_kms.c  |   8 +-
+ drivers/gpu/drm/rockchip/rockchip_drm_gem.c   |  12 +-
+ drivers/gpu/drm/tegra/gem.c                   |   8 +-
+ drivers/gpu/drm/virtio/virtgpu_gem.c          |  11 +-
+ drivers/gpu/drm/vmwgfx/vmwgfx_surface.c       |  21 +--
+ drivers/gpu/drm/xe/xe_bo.c                    |   8 +-
+ drivers/gpu/drm/xen/xen_drm_front.c           |   7 +-
+ drivers/gpu/drm/xlnx/zynqmp_kms.c             |   7 +-
+ include/drm/drm_dumb_buffers.h                |  14 ++
+ include/drm/drm_gem_vram_helper.h             |   6 -
+ include/uapi/drm/drm_mode.h                   |  50 +++++-
+ 28 files changed, 447 insertions(+), 228 deletions(-)
+ create mode 100644 include/drm/drm_dumb_buffers.h
+
+
+base-commit: 75238c32deae15ee4120b42a5be556ec36807a84
+prerequisite-patch-id: c67e5d886a47b7d0266d81100837557fda34cb24
+prerequisite-patch-id: a5a973e527c88a5b47053d7a72aefe0b550197cb
+prerequisite-patch-id: 719d09751d38f5da743beed6266585ee063e1e29
 -- 
---
-Thomas Zimmermann
-Graphics Driver Developer
-SUSE Software Solutions Germany GmbH
-Frankenstrasse 146, 90461 Nuernberg, Germany
-GF: Ivo Totev, Andrew Myers, Andrew McDonald, Boudien Moerman
-HRB 36809 (AG Nuernberg)
+2.49.0
 
