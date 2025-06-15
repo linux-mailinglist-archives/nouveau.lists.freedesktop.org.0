@@ -2,68 +2,70 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id 50237CBAC13
-	for <lists+nouveau@lfdr.de>; Sat, 13 Dec 2025 13:43:39 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 9F50FCBAA6F
+	for <lists+nouveau@lfdr.de>; Sat, 13 Dec 2025 13:42:06 +0100 (CET)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id E410510EA90;
-	Sat, 13 Dec 2025 12:41:06 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 94A3010EA50;
+	Sat, 13 Dec 2025 12:40:59 +0000 (UTC)
 Authentication-Results: gabe.freedesktop.org;
-	dkim=permerror (0-bit key) header.d=gmail.com header.i=@gmail.com header.b="nW4Da215";
+	dkim=permerror (0-bit key) header.d=gmail.com header.i=@gmail.com header.b="ghEIqce1";
 	dkim-atps=neutral
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from mail-pj1-f42.google.com (mail-pj1-f42.google.com
- [209.85.216.42])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 5DF4110E20A;
- Sun, 15 Jun 2025 09:37:34 +0000 (UTC)
-Received: by mail-pj1-f42.google.com with SMTP id
- 98e67ed59e1d1-31306794b30so586645a91.2; 
- Sun, 15 Jun 2025 02:37:34 -0700 (PDT)
+Received: from mail-pj1-f41.google.com (mail-pj1-f41.google.com
+ [209.85.216.41])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 1CC0510E232;
+ Sun, 15 Jun 2025 13:25:55 +0000 (UTC)
+Received: by mail-pj1-f41.google.com with SMTP id
+ 98e67ed59e1d1-313862d48e7so705986a91.1; 
+ Sun, 15 Jun 2025 06:25:55 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1749980254; x=1750585054; darn=lists.freedesktop.org;
+ d=gmail.com; s=20230601; t=1749993955; x=1750598755; darn=lists.freedesktop.org;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:from:to:cc:subject:date
  :message-id:reply-to;
- bh=/gjcFnYr1zulmPLSgYp/FlvofVHo2jy2BSHVlmNjNfE=;
- b=nW4Da2151VAV1cC61mcCNhOz6Ctr9aPjbYYpEgxORSwxPhlV2MeJH/bdujvOycG9FK
- uqKiXhpeY4Wj+PrdACjg7vLVM9U8Gq7U4wak+f8jeg320Gw8v1wkaUfdysVOeTJ4wloy
- sQkJq05s5PNuymUJMu8mfWxZIEWyDcXLdi4Ew1XI+4T4T1iffQUkbVxdib4Kcbct/QEd
- g8OGHceVsn8OwfLQ992/gC7LOoAHh1ogFZTMHFmuASn4+W3S/KwU9wrtn2hHhyhFTYfo
- H2l2E8PDzimTAx1aRIkNE4WRfG3zdkCDCvZEpS+IdPAQ08529pa4TCy4EfnqTTxV227H
- 6SVA==
+ bh=FSZZSMDBPFtEVqKeoNqHLJlRKfMjtGjyva/WaUGres8=;
+ b=ghEIqce1pzk68/WhIZ+n7RhVbqUfsZ0v1MOBzWKwoRpnJ3eDapAsAsWdbCcofJ34W5
+ tS4HHh2pPVOqIIdyooagKM1Pele6RoSF/Fo2AcCtOuLCJ23XNfqOMT6XU60NRtb5BMGW
+ bmDp/69ngnDONZCF62TDdwUR9AMgNAwd1rRCBWo+U+wT5owEgq1SyWYxLBsSrql/ZGU7
+ cXwZPoqNiOElJI++eM5SBodYangXXvwP81sewaAoDqLPQknsruA2KRw3hKzP5HX7oT40
+ ZFrjsu5Ixy165VYgHLdfI1nI4bUIKf/D4tK1P8f72Kv4itYzgJML927X1rIxGeQBTKr1
+ dZYg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1749980254; x=1750585054;
+ d=1e100.net; s=20230601; t=1749993955; x=1750598755;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=/gjcFnYr1zulmPLSgYp/FlvofVHo2jy2BSHVlmNjNfE=;
- b=ThsqxSFAMrtGLhgeHa1UHnbV5wwZfeGyO/FB82OBxzfMHaVtsOuClPBt5nykz59fdG
- b0DyoxGQ/TJa7/SW1XsohwPgXqGRP3uWLV2ZZN93IEcQpfKkCGtAuKbSjpeNdTQAfC30
- 8rY0IzAG3Rq1K4DDd2AI9JCYzG0/OcR14/SnXuuPMQ3L90yO/9THwSG8d62UuhVjArNf
- xjsg1Ti7XU1iTmit/jS8/h01uu9n+yMkXYrXWrdKFeg/gTaZi0aA/lNZ+8jdcxUJLnOs
- vxW/bvhOCQKXrCzMNGYgC+1KrS8IQ7VsG6oUBwTU2m93fNseOQ+kZthOSE6FHcozbhZ6
- Wing==
+ bh=FSZZSMDBPFtEVqKeoNqHLJlRKfMjtGjyva/WaUGres8=;
+ b=FeZ6ec3rTHVZMUWxUrA2NmYQIfZVS0vINAsc9Y0KndKv9BXJEUoWQQEvf85IjInjBD
+ zqI4E7GA+Qvb3gCG/hue3AqGYoGQQM4bkHG6aeexDZvlmCiYth3upX54NlOCQvQbaDlI
+ xBoKEUZPTfErd5T+geESTATkRA9EVHVS9DL2R5SlihWwiBH+9pTs9KcVayczQyET5sIF
+ jYNAqN4SUlL5y++IgatCE5uL80HiDSldHyAOltW6aCZpbWcnq64fDtnN3gLhYkBTDRtZ
+ mrJR7WTiLp6Bk4Q5ET87e6wvUGAQl0fUS6UbgHiml1DG07DFIp5uV1vfoOYRLD6iYzxi
+ UDJg==
 X-Forwarded-Encrypted: i=1;
- AJvYcCWwzM2SGTPmZ5+gw+STpVllHl2Z1tcNU9bHole6XqVFra80hxcB5ZjwMC5a19+IQzozE+rScosi6Z0=@lists.freedesktop.org,
- AJvYcCX6SherITeew+P9C0jcDTOpk+DdKaa+0ZtnjvJyTWgd5luCDQuK7r1qzoWcNKIISTgA7GrT6gFWDg==@lists.freedesktop.org
-X-Gm-Message-State: AOJu0YxecV3eFJ+SzhaUDcnBwTzfHmXFfUJf8fC0rDLeoqrssOAgk13u
- 6TVVrupSFMyPeI/ch3VOeMu1RX/1pUSj04j25ySqWKWKLlvN83hnDTAPYQyNa6gqtMIKg+i3ecp
- a7pJOub0yndkRGprtO+BKhSa5KgSymCc=
-X-Gm-Gg: ASbGncv7R9GchnlHXYaxdokwFD/t/zrKJDl9sRFTkhiANHdsajIZ3U04rLQOsD+p5Fk
- SUlgLSFh98CCOiHuZS4U4WOfbV42U01F1F5/PJgiX24+cGgzaMeQt/nR7Z34PaT+CblXjSAuEC6
- BzwLGw3cUXz5aub3xNw1+4K8IhqA389W4M03VyxuKSeN35n4N1vJOhmQ==
-X-Google-Smtp-Source: AGHT+IGbIX4ZqW4W6JqEhTUKL7JgH4ax75TOpKeUB9Si29+wvmi0/pBeO4Qe4njiFfgTj8c0Ruhx6A+eKMp32rUHjw8=
-X-Received: by 2002:a17:90b:17c8:b0:30a:80bc:ad4 with SMTP id
- 98e67ed59e1d1-313f18d8384mr2404966a91.0.1749980253763; Sun, 15 Jun 2025
- 02:37:33 -0700 (PDT)
+ AJvYcCW0eX2n0jHOLs3oFV6xTvIOChplIGaLuQR6y4FhkPe8S4SnIJnoCetgyJqz3/iTlddXPEFfDJOYvA==@lists.freedesktop.org,
+ AJvYcCXkemxnESWxdA+DbtivpY86SwuumaXkNN+EtfMhoVuOf1XtVy2gIzZ2mxddm9aB/RZc4xpsF7HUCs0=@lists.freedesktop.org
+X-Gm-Message-State: AOJu0YzzLp3Vyhzmdo2Bref+SooCEOGB6OCMs1WShKsNCGzUvaK5bGo1
+ JfWt0xi4l4eZvTQjuB8bL7YBq92nEG2IZpbv287rQACzs+mFgk6sdDq5ImldZjs3dfBV1HxkF0I
+ fRh8zT2Rr5DJHSG1EBx/B9ID30EDhZ0M=
+X-Gm-Gg: ASbGncvf+ReBCXAjLR7r7sfAFSWQ9KHG4+RIWGdJRVZuv2+rcpzXA6lAkmX0kz0V73S
+ CYtCGXhxPxxoSO8Ej1nJp8LXxxo7c4Q+OztMkICLj30vxoEflfu6x33yQaOz0Ub0Zs4o8M+MsDG
+ pKob4gckQg23lPzMfbxtgunZS/bf9XqkXL0aAnD+NrgJI=
+X-Google-Smtp-Source: AGHT+IHL489+Ip7x87tr3uBuoh4+FL6dhvUV+iEgTRFzqe+7NJzeg4yWPgNk3PpSOcE1u2TzipBmgzEfpVIaZmoYc0Q=
+X-Received: by 2002:a17:90b:4c45:b0:313:2bfc:94c with SMTP id
+ 98e67ed59e1d1-313f1e70849mr3454988a91.8.1749993954821; Sun, 15 Jun 2025
+ 06:25:54 -0700 (PDT)
 MIME-Version: 1.0
 References: <20250612-nova-frts-v5-0-14ba7eaf166b@nvidia.com>
  <20250612-nova-frts-v5-5-14ba7eaf166b@nvidia.com>
-In-Reply-To: <20250612-nova-frts-v5-5-14ba7eaf166b@nvidia.com>
+ <CANiq72=3nDR=J2OXu9nWwZW_kcWfZ4KhZ3aS12_dcB=1EP2icQ@mail.gmail.com>
+ <DAN1SGG5DPVE.UUW0B523LQHO@nvidia.com> <DAN1XS7Z0AFO.3S7PRNH5FWWV4@nvidia.com>
+In-Reply-To: <DAN1XS7Z0AFO.3S7PRNH5FWWV4@nvidia.com>
 From: Miguel Ojeda <miguel.ojeda.sandonis@gmail.com>
-Date: Sun, 15 Jun 2025 11:37:21 +0200
-X-Gm-Features: AX0GCFsoXlgaGr3xG5wD7wf0x5De99vBBegtuz6QksxqbmtS7108VOxDnXnDgxI
-Message-ID: <CANiq72=3nDR=J2OXu9nWwZW_kcWfZ4KhZ3aS12_dcB=1EP2icQ@mail.gmail.com>
+Date: Sun, 15 Jun 2025 15:25:42 +0200
+X-Gm-Features: AX0GCFtthC9dPN0SJASTPTNnA5ujZZS706Vksi3r_Hn7M7E3IClaBsBN60VbcoY
+Message-ID: <CANiq72mpFX2pSuy7JU+Xb_6fCkEA96er6Rsg0bVv+wBBO5OqUw@mail.gmail.com>
 Subject: Re: [PATCH v5 05/23] rust: num: add the `fls` operation
 To: Alexandre Courbot <acourbot@nvidia.com>
 Cc: Miguel Ojeda <ojeda@kernel.org>, Alex Gaynor <alex.gaynor@gmail.com>, 
@@ -97,24 +99,26 @@ List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-On Thu, Jun 12, 2025 at 4:02=E2=80=AFPM Alexandre Courbot <acourbot@nvidia.=
-com> wrote:
+On Sun, Jun 15, 2025 at 12:58=E2=80=AFPM Alexandre Courbot <acourbot@nvidia=
+.com> wrote:
 >
-> +            /// ```
-> +            /// use kernel::num::fls_u32;
-> +            ///
-> +            /// assert_eq!(fls_u32(0x0), 0);
-> +            /// assert_eq!(fls_u32(0x1), 1);
-> +            /// assert_eq!(fls_u32(0x10), 5);
-> +            /// assert_eq!(fls_u32(0xffff), 16);
-> +            /// assert_eq!(fls_u32(0x8000_0000), 32);
-> +            /// ```
+> Also, although this will work nicely for `impl_fls!` which is a single
+> function, I'm afraid this won't scale well for `power_of_two_impl!`,
+> which defines 6 functions per type... Any suggestions for this case?
 
-For a future patch series: this could provide examples per type
-(passing them in the `impl_fls!` call).
+We can always generate the same "cases", i.e. sharing as much as
+possible the lines, and just passing the values (numbers) that
+actually differ, which you then plug into the example line
+concatenating.
 
-I can create a good first issue if this lands and it is not somewhere alrea=
-dy.
+The standard library does that for their integer macros, e.g.
+
+    https://doc.rust-lang.org/src/core/num/int_macros.rs.html#3639-3644
+
+If that happened to be too onerous for some reason, then we could
+ignore it for the time being (i.e. we don't need to delay things just
+for that), or we could put them as `#[test]`s to at least have them as
+tests.
 
 Cheers,
 Miguel
