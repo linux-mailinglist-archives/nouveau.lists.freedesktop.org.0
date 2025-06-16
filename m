@@ -2,87 +2,66 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id 8C069CBAA45
-	for <lists+nouveau@lfdr.de>; Sat, 13 Dec 2025 13:41:58 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 88056CBAA0F
+	for <lists+nouveau@lfdr.de>; Sat, 13 Dec 2025 13:41:48 +0100 (CET)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 10AB310EA41;
-	Sat, 13 Dec 2025 12:40:59 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 7B7EB10E9F9;
+	Sat, 13 Dec 2025 12:40:58 +0000 (UTC)
 Authentication-Results: gabe.freedesktop.org;
-	dkim=permerror (0-bit key) header.d=gmail.com header.i=@gmail.com header.b="BEr7/QgG";
+	dkim=pass (2048-bit key; secure) header.d=mailbox.org header.i=@mailbox.org header.b="turY0Mg0";
 	dkim-atps=neutral
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from mail-pj1-f46.google.com (mail-pj1-f46.google.com
- [209.85.216.46])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 54D7510E057;
- Sun, 15 Jun 2025 13:32:46 +0000 (UTC)
-Received: by mail-pj1-f46.google.com with SMTP id
- 98e67ed59e1d1-313fab41fd5so254026a91.1; 
- Sun, 15 Jun 2025 06:32:46 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1749994366; x=1750599166; darn=lists.freedesktop.org;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=+6biztJOYDaIMr4ggV0+B+qehBU/oHbwf4HAdJFN2AM=;
- b=BEr7/QgGgblEVta3BeT5lWbFkWPzAGWtIL1ngO2PJCNHgovgfo+cqZ+rAVBab9J35R
- fLSKr0WHcH5phXLwDdRUxsInU7jK+qUDu2xH/6lENrpLUBfzKoY4/T0VubLSiCxDu+f9
- vR2dCZrnFdv8QiRrSdNNVg4acJrqcm8h7qthCX5glkAVbxbyLCU4/AfmfEl0vj/ajM9P
- 0KGUAq1DSeHVjxEeRAGPSWr49rKP8Mzdvp2PZPc1kHqgKGYeLvtlZM7Xz4Yioz7/3Q5w
- 5vcKjXIO++pflap2PugrTjBqD7UhS6DHXqi10uSuBzKvF5N/FxaYiNNOD+EIBsZKFORs
- ofag==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1749994366; x=1750599166;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=+6biztJOYDaIMr4ggV0+B+qehBU/oHbwf4HAdJFN2AM=;
- b=RXA/W3WWWuIHNLM25qqsnCBVeL1o8rBEzbek0iBPEU1Pf8DjESRfDQGUpGn1vJ6tz1
- moXYrsX7+j1jc6Ovz9zfGGhxBdmwr4VStmwGwUJBkrgWv3x+HXh6XejUKXlhg/1BgMVu
- 8F7JvnTxjs0kwhHh4OHkuU8fJovlIPQxvz6yqxlE4LyWVoaAZvo8hcn6GomdP9a1/iK4
- wLyGFuq3K8U+vQVArr4MQWwruTOxviCroy1CQTWDzEcrkPU1okaNYkSdnrdcRVh/URPb
- xd56jXU5eol2O1ww4w4yu6l06trhf7zlcSJhh4UV+FE/lcaikMd/i7vRf2WSsMPS6A45
- Hp1A==
-X-Forwarded-Encrypted: i=1;
- AJvYcCWuhXncgscVze+kquXuCt5xczuTrFPNK2GxtuRB9TDCMcvk2SSTia4AYUVFvvhjqEuMi8sB29tjnJk=@lists.freedesktop.org,
- AJvYcCXkOfAX6/dNI4kXj0YCQAbDxtqUr85RHHv/OjFViFlIygb+ehraPreoJwepgWEGYqSTAouAwCx3fA==@lists.freedesktop.org
-X-Gm-Message-State: AOJu0YxP0VJ4EMlTLKaYxOg2byEi6pvfDYLrwP1qSRzyGOpG+SiSeDln
- 8YVwqk1q1oTNzaZSW6yTokktf6hVEtLW8VzyooRa4Y0A4wHNgbdFfOw7xXNfdEW0MJI6R4WYqVn
- QDVpNo9Cx2dNZ+TzBaMcxAgEDK8PEgLE=
-X-Gm-Gg: ASbGncvMfLKHRGfP91P6llWLnvToHFWvSZNIy5wzOLEQJ+ZZUa95Iykvrj9H58dd3tg
- ruKrE+nEw+d6u///mhHcRsCyseFlVguA25Ad4nq3fKMgUP9yXBYDlMqgR3evjXoP2+qhBawFEdj
- L/Q75H8iRIRAEb0Oux7SqwrxISXQIWuTHu6/Xrar0dM5h5SAqhvrQheQ==
-X-Google-Smtp-Source: AGHT+IHQPepWr0PbwjEpszbly3f9S7PyiIfm9U5H1qbjy7Mjf/JI6jI8cAihWSLXmT4Yher59wp77PQ5KCOkUqJ5pgE=
-X-Received: by 2002:a17:90a:d890:b0:311:c5d9:2c8b with SMTP id
- 98e67ed59e1d1-313f1da5571mr3359079a91.5.1749994365766; Sun, 15 Jun 2025
- 06:32:45 -0700 (PDT)
-MIME-Version: 1.0
-References: <20250612-nova-frts-v5-0-14ba7eaf166b@nvidia.com>
- <20250612-nova-frts-v5-4-14ba7eaf166b@nvidia.com>
-In-Reply-To: <20250612-nova-frts-v5-4-14ba7eaf166b@nvidia.com>
-From: Miguel Ojeda <miguel.ojeda.sandonis@gmail.com>
-Date: Sun, 15 Jun 2025 15:32:33 +0200
-X-Gm-Features: AX0GCFtDT2rLIdlNco-7aTZNeN4QdhHpMIapjyRZrHTOhSvmbikJIdVociuqbmg
-Message-ID: <CANiq72nS5DR2NxLoba1w83=Qsqzi-gdK7Le=y7BxPxQP5U6Rmg@mail.gmail.com>
-Subject: Re: [PATCH v5 04/23] rust: add new `num` module with `PowerOfTwo` type
-To: Alexandre Courbot <acourbot@nvidia.com>
-Cc: Miguel Ojeda <ojeda@kernel.org>, Alex Gaynor <alex.gaynor@gmail.com>, 
- Boqun Feng <boqun.feng@gmail.com>, Gary Guo <gary@garyguo.net>, 
- =?UTF-8?Q?Bj=C3=B6rn_Roy_Baron?= <bjorn3_gh@protonmail.com>, 
- Andreas Hindborg <a.hindborg@kernel.org>, Alice Ryhl <aliceryhl@google.com>, 
- Trevor Gross <tmgross@umich.edu>, Danilo Krummrich <dakr@kernel.org>,
- David Airlie <airlied@gmail.com>, Simona Vetter <simona@ffwll.ch>,
- Maarten Lankhorst <maarten.lankhorst@linux.intel.com>, 
- Maxime Ripard <mripard@kernel.org>, Thomas Zimmermann <tzimmermann@suse.de>, 
- Benno Lossin <lossin@kernel.org>, John Hubbard <jhubbard@nvidia.com>,
- Ben Skeggs <bskeggs@nvidia.com>, 
- Joel Fernandes <joelagnelf@nvidia.com>, Timur Tabi <ttabi@nvidia.com>, 
- Alistair Popple <apopple@nvidia.com>, linux-kernel@vger.kernel.org, 
- rust-for-linux@vger.kernel.org, nouveau@lists.freedesktop.org, 
- dri-devel@lists.freedesktop.org
+Received: from mout-p-201.mailbox.org (mout-p-201.mailbox.org [80.241.56.171])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id E969910E31E;
+ Mon, 16 Jun 2025 10:08:51 +0000 (UTC)
+Received: from smtp102.mailbox.org (smtp102.mailbox.org [10.196.197.102])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
+ (No client certificate requested)
+ by mout-p-201.mailbox.org (Postfix) with ESMTPS id 4bLQgz507Bz9sqj;
+ Mon, 16 Jun 2025 12:08:47 +0200 (CEST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
+ s=mail20150812; 
+ t=1750068527; h=from:from:reply-to:reply-to:subject:subject:date:date:
+ message-id:message-id:to:to:cc:cc:mime-version:mime-version:
+ content-type:content-type:
+ content-transfer-encoding:content-transfer-encoding:
+ in-reply-to:in-reply-to:references:references;
+ bh=o3szePmqcHJryvA1er9S8PcvbfWuy6iFHHcrJVIXtWM=;
+ b=turY0Mg0O+tfBX/no06qt5IutDn3NPSQsTsTMZLHDtwvFlKz/4uzFzCZFRqpfJxH9n633Q
+ XIsvXO9v4YQCXe396xopdx0KS90FHEEc+blHCSQjyeOWFjOhyx0NkFCQPThCrSG3kExsUu
+ Qrguz8OgAbVZg8LZJImDkC1jI4+99RqUbMC7hsxu6JDuGzPhpIHjdVuw5o+vmxZm6d1uCn
+ 1UGZ2i1P04hU9S/uHS0rnZe9Q/A73/5BlueoyH2/yBf9yilf4X/rkn8Ormy/8T1VgsHewi
+ eCamfwEtewpBO6OKYaAWlIvTKAMfFYkE3yLyoEXQ3tIWZevQPXDHHdcLt5BRyQ==
+Message-ID: <d1ecec0124edcf70f682e91e52f3f349c7a1b33c.camel@mailbox.org>
+Subject: Re: [RFC PATCH 1/6] drm/sched: Avoid memory leaks with cancel_job()
+ callback
+From: Philipp Stanner <phasta@mailbox.org>
+To: Tvrtko Ursulin <tvrtko.ursulin@igalia.com>, phasta@kernel.org, Lyude
+ Paul <lyude@redhat.com>, Danilo Krummrich <dakr@kernel.org>, David Airlie
+ <airlied@gmail.com>, Simona Vetter <simona@ffwll.ch>, Matthew Brost
+ <matthew.brost@intel.com>, Christian =?ISO-8859-1?Q?K=F6nig?=
+ <ckoenig.leichtzumerken@gmail.com>, Maarten Lankhorst
+ <maarten.lankhorst@linux.intel.com>, Maxime Ripard <mripard@kernel.org>, 
+ Thomas Zimmermann <tzimmermann@suse.de>, Sumit Semwal
+ <sumit.semwal@linaro.org>, Pierre-Eric Pelloux-Prayer
+ <pierre-eric.pelloux-prayer@amd.com>
+Cc: dri-devel@lists.freedesktop.org, nouveau@lists.freedesktop.org, 
+ linux-kernel@vger.kernel.org, linux-media@vger.kernel.org
+Date: Mon, 16 Jun 2025 12:08:40 +0200
+In-Reply-To: <18cd6b1f-8872-4a16-9ceb-50fd1ecfea39@igalia.com>
+References: <20250603093130.100159-2-phasta@kernel.org>
+ <20250603093130.100159-3-phasta@kernel.org>
+ <62ff8ddb-b2f1-4e52-a026-290561ab5337@igalia.com>
+ <f4f326a0ecb98a9996919c3f827b3247b8207feb.camel@mailbox.org>
+ <18cd6b1f-8872-4a16-9ceb-50fd1ecfea39@igalia.com>
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
-X-Mailman-Approved-At: Sat, 13 Dec 2025 12:40:47 +0000
+MIME-Version: 1.0
+X-MBO-RS-META: xugczu8yqt6ag77z8f3qkcye1jaikzbn
+X-MBO-RS-ID: 549f6941f9059223189
+X-Mailman-Approved-At: Sat, 13 Dec 2025 12:40:50 +0000
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -94,27 +73,221 @@ List-Post: <mailto:nouveau@lists.freedesktop.org>
 List-Help: <mailto:nouveau-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
  <mailto:nouveau-request@lists.freedesktop.org?subject=subscribe>
+Reply-To: phasta@kernel.org
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-On Thu, Jun 12, 2025 at 4:02=E2=80=AFPM Alexandre Courbot <acourbot@nvidia.=
-com> wrote:
->
-> +                /// assert_eq!(PowerOfTwo::<u32>::try_new(16).unwrap().v=
-alue(), 16);
+On Mon, 2025-06-16 at 10:27 +0100, Tvrtko Ursulin wrote:
+>=20
+> On 12/06/2025 15:20, Philipp Stanner wrote:
+> > On Thu, 2025-06-12 at 15:17 +0100, Tvrtko Ursulin wrote:
+> > >=20
+> > > On 03/06/2025 10:31, Philipp Stanner wrote:
+> > > > Since its inception, the GPU scheduler can leak memory if the
+> > > > driver
+> > > > calls drm_sched_fini() while there are still jobs in flight.
+> > > >=20
+> > > > The simplest way to solve this in a backwards compatible manner
+> > > > is
+> > > > by
+> > > > adding a new callback, drm_sched_backend_ops.cancel_job(),
+> > > > which
+> > > > instructs the driver to signal the hardware fence associated
+> > > > with
+> > > > the
+> > > > job. Afterwards, the scheduler can savely use the established
+> > > > free_job()
+> > > > callback for freeing the job.
+> > > >=20
+> > > > Implement the new backend_ops callback cancel_job().
+> > > >=20
+> > > > Suggested-by: Tvrtko Ursulin <tvrtko.ursulin@igalia.com>
+> > >=20
+> > > Please just add the link to the patch here (it is only in the
+> > > cover
+> > > letter):
+> > >=20
+> > > Link:
+> > > https://lore.kernel.org/dri-devel/20250418113211.69956-1-tvrtko.ursul=
+in@igalia.com/
+> >=20
+> > That I can do, sure
+>=20
+> Cool, with that, for this patch:
+>=20
+> Acked-by: Tvrtko Ursulin <tvrtko.ursulin@igalia.com>
+>=20
+> > > And you probably want to take the unit test modifications from
+> > > the
+> > > same
+> > > patch too. You could put them in the same patch or separate.
+> >=20
+> > Necessary adjustments for the unit tests are already implemented
+> > and
+> > are waiting for review separately, since this can be done
+> > independently
+> > from this entire series:
+> >=20
+> > https://lore.kernel.org/dri-devel/20250605134154.191764-2-phasta@kernel=
+.org/
+>=20
+> For me it would make most sense to fold that into 2/6 from this
+> series.=20
+> I don't see it making sense as standalone. So if you could repost the
+> series with it integrated I will give it a spin and can review that=20
+> patch at least.
 
-By the way, we are trying to write examples close to normal kernel
-code as possible, so could you please use `?` here instead of
-`unwrap()`?
+It does make sense as an independent patch, because it is: independent.
+It improves the unit tests in a way that they become a better role
+model for the driver callbacks. All fences always must get signaled,
+which is not the case there currently. Unit tests serve as a reference
+implementation for new users, which is why I am stressing that point.
 
-It is not a big deal, when within `assert`s, but there is value in not
-showing any `unwrap()`s, and to spot easily places where we actually
-do `unwrap()`.
+If you disagree with that patch's content, please answer on it
 
-Also, please use intra-doc links wherever they may work, e.g. I think
-[`PowerOfTwo`] and [`None`] will work.
+P.
 
-Thanks!
+>=20
+> Regards,
+>=20
+> Tvrtko
+>=20
+> >=20
+> > Thx
+> > P.
+> >=20
+> > >=20
+> > > Regards,
+> > >=20
+> > > Tvrtko
+> > >=20
+> > > > Signed-off-by: Philipp Stanner <phasta@kernel.org>
+> > > > ---
+> > > > =C2=A0=C2=A0 drivers/gpu/drm/scheduler/sched_main.c | 34
+> > > > ++++++++++++++++-----
+> > > > -----
+> > > > =C2=A0=C2=A0 include/drm/gpu_scheduler.h=C2=A0=C2=A0=C2=A0=C2=A0=C2=
+=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 |=C2=A0 9 +++++++
+> > > > =C2=A0=C2=A0 2 files changed, 30 insertions(+), 13 deletions(-)
+> > > >=20
+> > > > diff --git a/drivers/gpu/drm/scheduler/sched_main.c
+> > > > b/drivers/gpu/drm/scheduler/sched_main.c
+> > > > index d20726d7adf0..3f14f1e151fa 100644
+> > > > --- a/drivers/gpu/drm/scheduler/sched_main.c
+> > > > +++ b/drivers/gpu/drm/scheduler/sched_main.c
+> > > > @@ -1352,6 +1352,18 @@ int drm_sched_init(struct
+> > > > drm_gpu_scheduler
+> > > > *sched, const struct drm_sched_init_
+> > > > =C2=A0=C2=A0 }
+> > > > =C2=A0=C2=A0 EXPORT_SYMBOL(drm_sched_init);
+> > > > =C2=A0=C2=A0=20
+> > > > +static void drm_sched_kill_remaining_jobs(struct
+> > > > drm_gpu_scheduler
+> > > > *sched)
+> > > > +{
+> > > > +	struct drm_sched_job *job, *tmp;
+> > > > +
+> > > > +	/* All other accessors are stopped. No locking
+> > > > necessary.
+> > > > */
+> > > > +	list_for_each_entry_safe_reverse(job, tmp, &sched-
+> > > > > pending_list, list) {
+> > > > +		sched->ops->cancel_job(job);
+> > > > +		list_del(&job->list);
+> > > > +		sched->ops->free_job(job);
+> > > > +	}
+> > > > +}
+> > > > +
+> > > > =C2=A0=C2=A0 /**
+> > > > =C2=A0=C2=A0=C2=A0 * drm_sched_fini - Destroy a gpu scheduler
+> > > > =C2=A0=C2=A0=C2=A0 *
+> > > > @@ -1359,19 +1371,11 @@ EXPORT_SYMBOL(drm_sched_init);
+> > > > =C2=A0=C2=A0=C2=A0 *
+> > > > =C2=A0=C2=A0=C2=A0 * Tears down and cleans up the scheduler.
+> > > > =C2=A0=C2=A0=C2=A0 *
+> > > > - * This stops submission of new jobs to the hardware through
+> > > > - * drm_sched_backend_ops.run_job(). Consequently,
+> > > > drm_sched_backend_ops.free_job()
+> > > > - * will not be called for all jobs still in
+> > > > drm_gpu_scheduler.pending_list.
+> > > > - * There is no solution for this currently. Thus, it is up to
+> > > > the
+> > > > driver to make
+> > > > - * sure that:
+> > > > - *
+> > > > - *=C2=A0 a) drm_sched_fini() is only called after for all submitte=
+d
+> > > > jobs
+> > > > - *=C2=A0=C2=A0=C2=A0=C2=A0 drm_sched_backend_ops.free_job() has be=
+en called or
+> > > > that
+> > > > - *=C2=A0 b) the jobs for which drm_sched_backend_ops.free_job() ha=
+s
+> > > > not
+> > > > been called
+> > > > - *=C2=A0=C2=A0=C2=A0=C2=A0 after drm_sched_fini() ran are freed ma=
+nually.
+> > > > - *
+> > > > - * FIXME: Take care of the above problem and prevent this
+> > > > function
+> > > > from leaking
+> > > > - * the jobs in drm_gpu_scheduler.pending_list under any
+> > > > circumstances.
+> > > > + * This stops submission of new jobs to the hardware through
+> > > > &struct
+> > > > + * drm_sched_backend_ops.run_job. If &struct
+> > > > drm_sched_backend_ops.cancel_job
+> > > > + * is implemented, all jobs will be canceled through it and
+> > > > afterwards cleaned
+> > > > + * up through &struct drm_sched_backend_ops.free_job. If
+> > > > cancel_job is not
+> > > > + * implemented, memory could leak.
+> > > > =C2=A0=C2=A0=C2=A0 */
+> > > > =C2=A0=C2=A0 void drm_sched_fini(struct drm_gpu_scheduler *sched)
+> > > > =C2=A0=C2=A0 {
+> > > > @@ -1401,6 +1405,10 @@ void drm_sched_fini(struct
+> > > > drm_gpu_scheduler
+> > > > *sched)
+> > > > =C2=A0=C2=A0=C2=A0	/* Confirm no work left behind accessing device
+> > > > structures
+> > > > */
+> > > > =C2=A0=C2=A0=C2=A0	cancel_delayed_work_sync(&sched->work_tdr);
+> > > > =C2=A0=C2=A0=20
+> > > > +	/* Avoid memory leaks if supported by the driver. */
+> > > > +	if (sched->ops->cancel_job)
+> > > > +		drm_sched_kill_remaining_jobs(sched);
+> > > > +
+> > > > =C2=A0=C2=A0=C2=A0	if (sched->own_submit_wq)
+> > > > =C2=A0=C2=A0=C2=A0		destroy_workqueue(sched->submit_wq);
+> > > > =C2=A0=C2=A0=C2=A0	sched->ready =3D false;
+> > > > diff --git a/include/drm/gpu_scheduler.h
+> > > > b/include/drm/gpu_scheduler.h
+> > > > index e62a7214e052..81dcbfc8c223 100644
+> > > > --- a/include/drm/gpu_scheduler.h
+> > > > +++ b/include/drm/gpu_scheduler.h
+> > > > @@ -512,6 +512,15 @@ struct drm_sched_backend_ops {
+> > > > =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 =
+* and it's time to clean it up.
+> > > > =C2=A0=C2=A0=C2=A0	 */
+> > > > =C2=A0=C2=A0=C2=A0	void (*free_job)(struct drm_sched_job *sched_job=
+);
+> > > > +
+> > > > +	/**
+> > > > +	 * @cancel_job: Used by the scheduler to guarantee
+> > > > remaining jobs' fences
+> > > > +	 * get signaled in drm_sched_fini().
+> > > > +	 *
+> > > > +	 * Drivers need to signal the passed job's hardware
+> > > > fence
+> > > > with
+> > > > +	 * -ECANCELED in this callback. They must not free the
+> > > > job.
+> > > > +	 */
+> > > > +	void (*cancel_job)(struct drm_sched_job *sched_job);
+> > > > =C2=A0=C2=A0 };
+> > > > =C2=A0=C2=A0=20
+> > > > =C2=A0=C2=A0 /**
+> > >=20
+> >=20
+>=20
 
-Cheers,
-Miguel
