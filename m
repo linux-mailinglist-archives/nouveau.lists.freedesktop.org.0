@@ -2,89 +2,48 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id BF3D7ADCC1F
-	for <lists+nouveau@lfdr.de>; Tue, 17 Jun 2025 14:59:49 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id BF14FADCC6F
+	for <lists+nouveau@lfdr.de>; Tue, 17 Jun 2025 15:05:14 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id F261389048;
-	Tue, 17 Jun 2025 12:59:47 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 0C31010E676;
+	Tue, 17 Jun 2025 13:05:13 +0000 (UTC)
 Authentication-Results: gabe.freedesktop.org;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="BTJvGWc+";
+	dkim=pass (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="HbXtzZWz";
 	dkim-atps=neutral
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from mail-vk1-f178.google.com (mail-vk1-f178.google.com
- [209.85.221.178])
- by gabe.freedesktop.org (Postfix) with ESMTPS id F154289048;
- Tue, 17 Jun 2025 12:59:46 +0000 (UTC)
-Received: by mail-vk1-f178.google.com with SMTP id
- 71dfb90a1353d-5242f137a1eso1565562e0c.1; 
- Tue, 17 Jun 2025 05:59:46 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1750165186; x=1750769986; darn=lists.freedesktop.org;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=IJGnTu2P8k2zWLpKT9gQ0C6Ynav6qAdbDTnXBuG6SzE=;
- b=BTJvGWc+mHLqv3AD9dzZ4GLtgmB83Szqb9hMlGAvu4ZY3WUgHUyrhCin9bJ9Qw7wGw
- Ya6QIZsRcxd9bLoOalyrP2FJiHGyG3O06b3MnQBUpFcPo3+/fU7nLZ3ddFg0BH5eSuyV
- eXVUcWlVxfF3b2q7zuqZNQfZVp4TkufdwBfZyDwlSe23KXTIouZSH5xz4Kxbp5xD1Rec
- wpFl9DNMr/E//PRO7E4ejgiBKDgipVmwrnqDjTitqNKlGAjv6k4ZnrGSuZFLrGJwfaBa
- Gi/oYde9TsyAq2u92xVxACPrMNaFUyV3i5MYpq5xcyBH7oyUv3thqq3Uiw5zW/1jLE+m
- AN5A==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1750165186; x=1750769986;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=IJGnTu2P8k2zWLpKT9gQ0C6Ynav6qAdbDTnXBuG6SzE=;
- b=PaBp2EBEy5lNXMQET1AbplzRuuYqai+wi9nsQicYnXRrtlnELK0GdICmFH3iZjRL+l
- 4no8LYI7xELm8Ux9uDFeQ4bJ9Q56ZKpWvPYuJ5+5Zz05n1HzvQ3exkJTNH3PezSQWplv
- RUj4hbqVngw3Mdc5JZrTZ/fcEAHxoeUXjduVzhrNWOvhYJ83Hc/uYRLZTeddsn6WyIVe
- JLk6oKcWQ2RjQJbBVk8DAYAbbGaC388teHDuiDvmwfiERcGsSqB3OOi7ar2i1QvspsYl
- m07xhihUUmPRndPVOg1VgBqKSGOZNIHAdLy7zbWdxIcYQbzRcBdDV/wzue3qrAhM7aiR
- pomw==
-X-Forwarded-Encrypted: i=1;
- AJvYcCV5VmopJT4PjEuq4KNPwRmiP/HnGTsf8YRbq/XtynS7QZgflypc97UXJHhYd7rKmcy2AByrEvMvujTZ@lists.freedesktop.org,
- AJvYcCVsX9rgnbHBwZ2W0OEzSVe9aDwDAg8+cotxFym9c5kho+lY+cUMeFIVCtpI0PXKQOvrLMqXeiZnJ0E=@lists.freedesktop.org,
- AJvYcCWETi/M1G5mgL1UCLJaxBOEm2MjhE8H18HcHY/2gjJl8/5AsQ+hQTHt9/ZLVUlx5mni0JheFmmhisuAL5w=@lists.freedesktop.org,
- AJvYcCX2RAszt+lIsMu+jheIiMbbWOi3l/boi0QPVeLlanCC+Mf2QR3FxMYwLb1y7evCyXwEmCzAU1biXA==@lists.freedesktop.org,
- AJvYcCX8ftvWuLJoJZfWlZlXGzLH1TEqXoBSLvtqi+Wb+TDk4RkpIRNUE0WELj3/CS/sPED+BDkyum0uQs0=@lists.freedesktop.org
-X-Gm-Message-State: AOJu0YwtBfBEpONO8xwJ6eUY076Durd0h7aD26hry2sMfo8iycQ20SkF
- DpfpdahlzgYTdsV9/oQTI1u4HCn5+i7qWTn8QuZLEVRxgZOu4wUH1pdrUUSeCaGM++PUrVKk59s
- QQy4jf0pACy5SgLOMU8M1RhzLlsRDL40=
-X-Gm-Gg: ASbGncuvwDlaj313rsPcITg3hF0n1Qw6pnFbtms3eLWUoM8jTUQ3qSEm+xX31SYjrBp
- vD8zADA6fLQgu93EhzUy5pyFNGhOFwjXaQ1eAPVvz8gpBzaPwL6L/TQmKUPwvGKnvh+MXVb7Z7J
- mmbH6CiAEYftXi/R8A0OtjKMSwTf2vu8bMwZNUPSuCtg==
-X-Google-Smtp-Source: AGHT+IFyDxk9ofOoSE1jUdDwuXC6uj68bPw86gFHeN0xbFulbam2J1M/auQRgbuNa5uXdcywAXE8tSUc/+x2hYqgo2M=
-X-Received: by 2002:a05:6122:4586:b0:52f:47de:3700 with SMTP id
- 71dfb90a1353d-53149677e4amr8402312e0c.5.1750165185838; Tue, 17 Jun 2025
- 05:59:45 -0700 (PDT)
+Received: from tor.source.kernel.org (tor.source.kernel.org [172.105.4.254])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 34D9210E676
+ for <nouveau@lists.freedesktop.org>; Tue, 17 Jun 2025 13:05:11 +0000 (UTC)
+Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
+ by tor.source.kernel.org (Postfix) with ESMTP id 2ED1E629F9;
+ Tue, 17 Jun 2025 13:05:10 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 0E912C4CEE3;
+ Tue, 17 Jun 2025 13:05:08 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+ s=k20201202; t=1750165509;
+ bh=z9tdSEAIFxej5/oWiSDe8keUDTaAtx0GsbZFpAEI4fY=;
+ h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
+ b=HbXtzZWzdTPwOfpopfp50VjiIqkQh1rNRrSaOSkJx14ApD6yEFcHiTtKenqcHdlVA
+ JixgdNe/qgwEaWlvpghyE4gVeNDGdjJy2AbYfKyjVtnnyis1CiRmQ5yffn89bxW+V/
+ +b9T0znq0BNNYBr2vZs4zXjjNKD5ul6+R9LQKAraNdIftyU5S0wu+v+QhXiOYq7osX
+ X8f8TNSF4XLSJ+mFDeNC0kcjVuX/F9eZ9Yl+boRGsZOmMRsUxsuJSIrw+wB/nyynqc
+ T1ozoFl0gWpAe/hcebVfNrlkfCK6C9ylHvAjVEA42S9pnr9NQZCSsniWnRgkBVx8Vr
+ CJpamy0dRD2Dw==
+Date: Tue, 17 Jun 2025 15:05:06 +0200
+From: Danilo Krummrich <dakr@kernel.org>
+To: Philipp Stanner <pstanner@redhat.com>
+Cc: Ben Skeggs <bskeggs@nvidia.com>, nouveau@lists.freedesktop.org
+Subject: Re: [PATCH] drm/nouveau/gsp: fix potential leak of memory used
+ during acpi init
+Message-ID: <aFFoAnIO4bjupYT2@pollux>
+References: <20250617040036.2932-1-bskeggs@nvidia.com>
+ <f09b10e30f38cc094c4070e318d41262c0118f31.camel@redhat.com>
 MIME-Version: 1.0
-References: <20250613090431.127087-1-tzimmermann@suse.de>
- <20250613090431.127087-8-tzimmermann@suse.de>
-In-Reply-To: <20250613090431.127087-8-tzimmermann@suse.de>
-From: Inki Dae <daeinki@gmail.com>
-Date: Tue, 17 Jun 2025 21:59:08 +0900
-X-Gm-Features: Ac12FXy1YqAOwtksyoMPU_mcRXzK8GOxRWP5F_To6gWRQ1V5y95DviShSwJIG6g
-Message-ID: <CAAQKjZOiz3Z42N_GEPzqU=CCfim+Z7oCuyxuji6Guj_dKYsimw@mail.gmail.com>
-Subject: Re: [PATCH v5 07/25] drm/exynos: Compute dumb-buffer sizes with
- drm_mode_size_dumb()
-To: Thomas Zimmermann <tzimmermann@suse.de>
-Cc: simona@ffwll.ch, airlied@gmail.com, mripard@kernel.org, 
- maarten.lankhorst@linux.intel.com, geert@linux-m68k.org, 
- tomi.valkeinen@ideasonboard.com, dri-devel@lists.freedesktop.org, 
- linux-mediatek@lists.infradead.org, freedreno@lists.freedesktop.org, 
- linux-arm-msm@vger.kernel.org, imx@lists.linux.dev, 
- linux-samsung-soc@vger.kernel.org, nouveau@lists.freedesktop.org, 
- virtualization@lists.linux.dev, spice-devel@lists.freedesktop.org, 
- linux-renesas-soc@vger.kernel.org, linux-rockchip@lists.infradead.org, 
- linux-tegra@vger.kernel.org, intel-xe@lists.freedesktop.org, 
- xen-devel@lists.xenproject.org, Seung-Woo Kim <sw0312.kim@samsung.com>, 
- Kyungmin Park <kyungmin.park@samsung.com>,
- Krzysztof Kozlowski <krzk@kernel.org>, 
- Alim Akhtar <alim.akhtar@samsung.com>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+Content-Type: text/plain; charset=iso-8859-1
+Content-Disposition: inline
+Content-Transfer-Encoding: 8bit
+In-Reply-To: <f09b10e30f38cc094c4070e318d41262c0118f31.camel@redhat.com>
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -99,64 +58,121 @@ List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-2025=EB=85=84 6=EC=9B=94 13=EC=9D=BC (=EA=B8=88) =EC=98=A4=ED=9B=84 6:05, T=
-homas Zimmermann <tzimmermann@suse.de>=EB=8B=98=EC=9D=B4 =EC=9E=91=EC=84=B1=
-:
->
-> Call drm_mode_size_dumb() to compute dumb-buffer scanline pitch and
-> buffer size. No alignment required.
->
+On Tue, Jun 17, 2025 at 01:29:20PM +0200, Philipp Stanner wrote:
+> On Tue, 2025-06-17 at 14:00 +1000, Ben Skeggs wrote:
+> > diff --git a/drivers/gpu/drm/nouveau/nvkm/subdev/gsp/rm/r535/gsp.c
+> > b/drivers/gpu/drm/nouveau/nvkm/subdev/gsp/rm/r535/gsp.c
+> > index baf42339f93e..b098a7555fde 100644
+> > --- a/drivers/gpu/drm/nouveau/nvkm/subdev/gsp/rm/r535/gsp.c
+> > +++ b/drivers/gpu/drm/nouveau/nvkm/subdev/gsp/rm/r535/gsp.c
+> 
+> This seems to be based on a code move that is not yet in mainline.
 
-Acked-by : Inki Dae <inki.dae@samsung.com>
+It is, it did land with v6.16-rc1.
 
-Thanks,
-Inki Dae
+> Therefore, backporting the bugfix to stable seems difficult. Since that
+> code move is already in drm-misc-next, it would seem that it can only
+> be solved with two distinct patches for stable and for -next.
 
-> Signed-off-by: Thomas Zimmermann <tzimmermann@suse.de>
-> Cc: Inki Dae <inki.dae@samsung.com>
-> Cc: Seung-Woo Kim <sw0312.kim@samsung.com>
-> Cc: Kyungmin Park <kyungmin.park@samsung.com>
-> Cc: Krzysztof Kozlowski <krzk@kernel.org>
-> Cc: Alim Akhtar <alim.akhtar@samsung.com>
-> ---
->  drivers/gpu/drm/exynos/exynos_drm_gem.c | 8 +++++---
->  1 file changed, 5 insertions(+), 3 deletions(-)
->
-> diff --git a/drivers/gpu/drm/exynos/exynos_drm_gem.c b/drivers/gpu/drm/ex=
-ynos/exynos_drm_gem.c
-> index 4787fee4696f..ffa1c02b4b1e 100644
-> --- a/drivers/gpu/drm/exynos/exynos_drm_gem.c
-> +++ b/drivers/gpu/drm/exynos/exynos_drm_gem.c
-> @@ -11,6 +11,7 @@
->  #include <linux/shmem_fs.h>
->  #include <linux/module.h>
->
-> +#include <drm/drm_dumb_buffers.h>
->  #include <drm/drm_prime.h>
->  #include <drm/drm_vma_manager.h>
->  #include <drm/exynos_drm.h>
-> @@ -330,15 +331,16 @@ int exynos_drm_gem_dumb_create(struct drm_file *fil=
-e_priv,
->         unsigned int flags;
->         int ret;
->
-> +       ret =3D drm_mode_size_dumb(dev, args, 0, 0);
-> +       if (ret)
-> +               return ret;
-> +
->         /*
->          * allocate memory to be used for framebuffer.
->          * - this callback would be called by user application
->          *      with DRM_IOCTL_MODE_CREATE_DUMB command.
->          */
->
-> -       args->pitch =3D args->width * ((args->bpp + 7) / 8);
-> -       args->size =3D args->pitch * args->height;
-> -
->         if (is_drm_iommu_supported(dev))
->                 flags =3D EXYNOS_BO_NONCONTIG | EXYNOS_BO_WC;
->         else
-> --
-> 2.49.0
->
->
+drm-misc-fixes is the relevant target branch and given the above, it contains
+the code move as well.
+
+However, you're right that this fix won't apply to anything before v6.16-rc1.
+Given that, it makes sense to leave a note below the '---' line that this fix
+won't apply before v6.16-rc1 and that a backported patch will be sent to stable
+once this one hit Linus' tree.
+
+> But this needs to be judged by a maintainer.
+> 
+> > @@ -719,7 +719,6 @@ r535_gsp_acpi_caps(acpi_handle handle,
+> > CAPS_METHOD_DATA *caps)
+> >  	union acpi_object argv4 = {
+> >  		.buffer.type    = ACPI_TYPE_BUFFER,
+> >  		.buffer.length  = 4,
+> > -		.buffer.pointer = kmalloc(argv4.buffer.length,
+> > GFP_KERNEL),
+> >  	}, *obj;
+> >  
+> >  	caps->status = 0xffff;
+> > @@ -727,17 +726,22 @@ r535_gsp_acpi_caps(acpi_handle handle,
+> > CAPS_METHOD_DATA *caps)
+> >  	if (!acpi_check_dsm(handle, &NVOP_DSM_GUID, NVOP_DSM_REV,
+> > BIT_ULL(0x1a)))
+> >  		return;
+> >  
+> > +	argv4.buffer.pointer = kmalloc(argv4.buffer.length,
+> > GFP_KERNEL);
+> > +	if (!argv4.buffer.pointer)
+> > +		return;
+> > +
+> 
+> This could be done immediately after the creation of argv4. That way
+> it's more difficult to have the leak again if something is inserted
+> later on.
+
+I think the idea was to avoid a potential unwind path after acpi_check_dsm().
+
+> >  	obj = acpi_evaluate_dsm(handle, &NVOP_DSM_GUID,
+> > NVOP_DSM_REV, 0x1a, &argv4);
+> >  	if (!obj)
+> > -		return;
+> > +		goto done;
+> >  
+> >  	if (WARN_ON(obj->type != ACPI_TYPE_BUFFER) ||
+> >  	    WARN_ON(obj->buffer.length != 4))
+> > -		return;
+> > +		goto done;
+> >  
+> >  	caps->status = 0;
+> >  	caps->optimusCaps = *(u32 *)obj->buffer.pointer;
+> >  
+> > +done:
+> >  	ACPI_FREE(obj);
+> >  
+> >  	kfree(argv4.buffer.pointer);
+> > @@ -754,24 +758,28 @@ r535_gsp_acpi_jt(acpi_handle handle,
+> > JT_METHOD_DATA *jt)
+> >  	union acpi_object argv4 = {
+> >  		.buffer.type    = ACPI_TYPE_BUFFER,
+> >  		.buffer.length  = sizeof(caps),
+> > -		.buffer.pointer = kmalloc(argv4.buffer.length,
+> > GFP_KERNEL),
+> >  	}, *obj;
+> >  
+> >  	jt->status = 0xffff;
+> >  
+> > +	argv4.buffer.pointer = kmalloc(argv4.buffer.length,
+> > GFP_KERNEL);
+> > +	if (!argv4.buffer.pointer)
+> > +		return;
+> > +
+> >  	obj = acpi_evaluate_dsm(handle, &JT_DSM_GUID, JT_DSM_REV,
+> > 0x1, &argv4);
+> >  	if (!obj)
+> > -		return;
+> > +		goto done;
+> >  
+> >  	if (WARN_ON(obj->type != ACPI_TYPE_BUFFER) ||
+> >  	    WARN_ON(obj->buffer.length != 4))
+> > -		return;
+> > +		goto done;
+> >  
+> >  	jt->status = 0;
+> >  	jt->jtCaps = *(u32 *)obj->buffer.pointer;
+> >  	jt->jtRevId = (jt->jtCaps & 0xfff00000) >> 20;
+> >  	jt->bSBIOSCaps = 0;
+> >  
+> > +done:
+> 
+> 'done' seems like a bad name considering that the operations are
+> aborted with a WARN_ON above. Better 'abort' or sth like that.
+
+I think some neutral name is fine, since we also enter this code path when
+everything went well, maybe 'out_free' or just 'free'?
+
+> P.
+> 
+> >  	ACPI_FREE(obj);
+> >  
+> >  	kfree(argv4.buffer.pointer);
+> 
