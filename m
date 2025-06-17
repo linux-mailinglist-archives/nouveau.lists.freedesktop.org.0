@@ -2,35 +2,35 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id C4EA2ADD66E
-	for <lists+nouveau@lfdr.de>; Tue, 17 Jun 2025 18:33:25 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id BB0A1ADDD0A
+	for <lists+nouveau@lfdr.de>; Tue, 17 Jun 2025 22:14:27 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 789E210E415;
-	Tue, 17 Jun 2025 16:33:24 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 61B3F10E152;
+	Tue, 17 Jun 2025 20:14:23 +0000 (UTC)
 Authentication-Results: gabe.freedesktop.org;
-	dkim=pass (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="LIz1PzBz";
+	dkim=pass (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="S/ViDK5R";
 	dkim-atps=neutral
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
 Received: from sea.source.kernel.org (sea.source.kernel.org [172.234.252.31])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 3B1E389C49;
- Tue, 17 Jun 2025 16:33:23 +0000 (UTC)
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 166D110E101;
+ Tue, 17 Jun 2025 20:14:22 +0000 (UTC)
 Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by sea.source.kernel.org (Postfix) with ESMTP id 72FFC44AF0;
- Tue, 17 Jun 2025 16:33:21 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 83A29C4CEF1;
- Tue, 17 Jun 2025 16:33:16 +0000 (UTC)
+ by sea.source.kernel.org (Postfix) with ESMTP id B9C2D4A284;
+ Tue, 17 Jun 2025 20:14:12 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 8BBC7C4CEE3;
+ Tue, 17 Jun 2025 20:14:07 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1750178001;
- bh=D4zqKCNVSdpYD1YROivJ0iKR8RbuS0zFHwcD2L/OpL8=;
+ s=k20201202; t=1750191252;
+ bh=oLvbT+kATQP0niwsl8Ion+MRezBTBGDHphjSJvl1ykY=;
  h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
- b=LIz1PzBzebeAd+/tDjDgnCiSkeGDg6nio65KqXEjJABtem5BBu8bfq0AvAOS2l0DN
- fR/rsmoZ/ISn4BjDo+mcPMHMHZGbyocq8EN55SX3iSr7s423IG11i4ZNxxRIrEaiAH
- 8MMtVraOED3V6dWoyeX4V8EqlpsUSZ37dRAIg+KZgTZqCMjPtXQ8N0uNjJKT48MVo7
- xW+x3ej9sPA0uf3ophgULjaQcAf0fXoozVvbzxjawegrmJQrmwx8b3gPNkJmn0s/3A
- h5KySjhvIOh0nSUboQjAacLT/uHjrlMkVdmMmCaB2vA+KAiEJ1LM8EERhK4yEII7X4
- oPeT2BXLdI1jQ==
-Date: Tue, 17 Jun 2025 18:33:13 +0200
+ b=S/ViDK5R04yKbjdvPIPz4/BNAf4yzkDlToY5S8CwWpHwbVWDHzCK7ZAe4tJnURvr0
+ hc4QS5ZPDiWFMK6ZLA2fCwKb5EZvmgftWSgtQfSWND9d5fQzMXCP23ffUMbVaQNjxl
+ mh7AuPF3M5CYBbZQTApdJ3HFvcRXvSCfmfdSh2S+/Yz0csJJJLP0FdI69cHs/DsmDl
+ AktoECLMXQrAhCD1PQ1BYBrYdxD9PMqmS1DKajFz8/qhaC9TVy4dGfttH7hfbUr4of
+ zM1sI/P5V5Ze5oIhU3z9Ayj+MKPcyZaiKZ+J80LXdYYrZ7hhkMNW5Tm+o9N4z9D21m
+ gUAR1B/HPXD0g==
+Date: Tue, 17 Jun 2025 22:14:04 +0200
 From: Danilo Krummrich <dakr@kernel.org>
 To: Alexandre Courbot <acourbot@nvidia.com>
 Cc: Miguel Ojeda <ojeda@kernel.org>, Alex Gaynor <alex.gaynor@gmail.com>,
@@ -47,16 +47,15 @@ Cc: Miguel Ojeda <ojeda@kernel.org>, Alex Gaynor <alex.gaynor@gmail.com>,
  Timur Tabi <ttabi@nvidia.com>, Alistair Popple <apopple@nvidia.com>,
  linux-kernel@vger.kernel.org, rust-for-linux@vger.kernel.org,
  nouveau@lists.freedesktop.org, dri-devel@lists.freedesktop.org,
- Lyude Paul <lyude@redhat.com>
-Subject: Re: [PATCH v5 15/23] gpu: nova-core: add falcon register definitions
- and base code
-Message-ID: <aFGYyXS21tZFdldX@pollux>
+ Lyude Paul <lyude@redhat.com>, Shirish Baskaran <sbaskaran@nvidia.com>
+Subject: Re: [PATCH v5 00/23] nova-core: run FWSEC-FRTS to perform first
+ stage of GSP initialization
+Message-ID: <aFHMjEt7KrjClom_@pollux>
 References: <20250612-nova-frts-v5-0-14ba7eaf166b@nvidia.com>
- <20250612-nova-frts-v5-15-14ba7eaf166b@nvidia.com>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
-In-Reply-To: <20250612-nova-frts-v5-15-14ba7eaf166b@nvidia.com>
+In-Reply-To: <20250612-nova-frts-v5-0-14ba7eaf166b@nvidia.com>
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -71,123 +70,47 @@ List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-On Thu, Jun 12, 2025 at 11:01:43PM +0900, Alexandre Courbot wrote:
-> +    /// Perform a DMA write according to `load_offsets` from `dma_handle` into the falcon's
-> +    /// `target_mem`.
-> +    ///
-> +    /// `sec` is set if the loaded firmware is expected to run in secure mode.
-> +    fn dma_wr(
-> +        &self,
-> +        bar: &Bar0,
-> +        dma_handle: bindings::dma_addr_t,
+On Thu, Jun 12, 2025 at 11:01:28PM +0900, Alexandre Courbot wrote:
+> Hi everyone,
+> 
+> The feedback on v4 has been (hopefully) addressed. I guess the main
+> remaining unknown is the direction of the `num` module ; for this
+> iteration, following the received feedback I have eschewed the extension
+> trait and implemented the alignment functions as methods of the new
+> `PowerOfTwo` type. This has the benefit of making it impossible to call
+> them with undesirable (i.e. non-power of two) values. The `fls` function
+> is now provided as a series of const functions for each supported type,
+> generated by a macro.
+> 
+> It feels like the `num` module could be its own series though, so if
+> there is still discussion about it, I can also extract it and implement
+> the functionality we need in nova-core as local helper functions until
+> it gets merged at its own pace.
+> 
+> As previously, this series only successfully probes Ampere GPUs, but
+> support for other generations is on the way.
+> 
+> Upon successful probe, the driver will display the range of the WPR2
+> region constructed by FWSEC-FRTS with debug priority:
+> 
+>   [   95.436000] NovaCore 0000:01:00.0: WPR2: 0xffc00000-0xffce0000
+>   [   95.436002] NovaCore 0000:01:00.0: GPU instance built
+> 
+> This series is based on v6.16-rc1 with no other dependencies.
+> 
+> There are bits of documentation still missing, these are addressed by
+> Joel in his own documentation patch series [1]. I'll also double-check
+> and send follow-up patches if anything is still missing after that.
+> 
+> [1] https://lore.kernel.org/rust-for-linux/20250503040802.1411285-1-joelagnelf@nvidia.com/
 
-I think we should pass &F from dma_load() rather than the raw handle.
+I think this series collected quite a few TODOs to follow up on once the
+corresponding abstractions are in place, etc. This is fine and expected.
 
-<snip>
+However, I think we should list those things in a central place, e.g. our TODO
+list, in order to make it easier to follow up.
 
-> +fn select_core_ga102<E: FalconEngine>(bar: &Bar0) -> Result {
-> +    let bcr_ctrl = regs::NV_PRISCV_RISCV_BCR_CTRL::read(bar, E::BASE);
-> +    if bcr_ctrl.core_select() != PeregrineCoreSelect::Falcon {
-> +        regs::NV_PRISCV_RISCV_BCR_CTRL::default()
-> +            .set_core_select(PeregrineCoreSelect::Falcon)
-> +            .write(bar, E::BASE);
-> +
-> +        util::wait_on(Duration::from_millis(10), || {
+Additionally, it might get us more contributors who might be interested in
+following up on those things.
 
-As agreed, can you please add a brief comment to justify the timeout?
-
-> +            let r = regs::NV_PRISCV_RISCV_BCR_CTRL::read(bar, E::BASE);
-> +            if r.valid() {
-> +                Some(())
-> +            } else {
-> +                None
-> +            }
-> +        })?;
-> +    }
-> +
-> +    Ok(())
-> +}
-> +
-> +fn signature_reg_fuse_version_ga102(
-> +    dev: &device::Device,
-> +    bar: &Bar0,
-> +    engine_id_mask: u16,
-> +    ucode_id: u8,
-> +) -> Result<u32> {
-> +    // The ucode fuse versions are contained in the FUSE_OPT_FPF_<ENGINE>_UCODE<X>_VERSION
-> +    // registers, which are an array. Our register definition macros do not allow us to manage them
-> +    // properly, so we need to hardcode their addresses for now.
-
-Sounds like a TODO?
-
-> +
-> +    // Each engine has 16 ucode version registers numbered from 1 to 16.
-> +    if ucode_id == 0 || ucode_id > 16 {
-> +        dev_err!(dev, "invalid ucode id {:#x}", ucode_id);
-> +        return Err(EINVAL);
-> +    }
-> +
-> +    // Base address of the FUSE registers array corresponding to the engine.
-> +    let reg_fuse_base = if engine_id_mask & 0x0001 != 0 {
-> +        regs::NV_FUSE_OPT_FPF_SEC2_UCODE1_VERSION::OFFSET
-> +    } else if engine_id_mask & 0x0004 != 0 {
-> +        regs::NV_FUSE_OPT_FPF_NVDEC_UCODE1_VERSION::OFFSET
-> +    } else if engine_id_mask & 0x0400 != 0 {
-> +        regs::NV_FUSE_OPT_FPF_GSP_UCODE1_VERSION::OFFSET
-> +    } else {
-> +        dev_err!(dev, "unexpected engine_id_mask {:#x}", engine_id_mask);
-> +        return Err(EINVAL);
-> +    };
-> +
-> +    // Read `reg_fuse_base[ucode_id - 1]`.
-> +    let reg_fuse_version =
-> +        bar.read32(reg_fuse_base + ((ucode_id - 1) as usize * core::mem::size_of::<u32>()));
-> +
-> +    Ok(fls_u32(reg_fuse_version))
-> +}
-> +
-> +fn program_brom_ga102<E: FalconEngine>(bar: &Bar0, params: &FalconBromParams) -> Result {
-> +    regs::NV_PFALCON2_FALCON_BROM_PARAADDR::default()
-> +        .set_value(params.pkc_data_offset)
-> +        .write(bar, E::BASE);
-> +    regs::NV_PFALCON2_FALCON_BROM_ENGIDMASK::default()
-> +        .set_value(params.engine_id_mask as u32)
-> +        .write(bar, E::BASE);
-> +    regs::NV_PFALCON2_FALCON_BROM_CURR_UCODE_ID::default()
-> +        .set_ucode_id(params.ucode_id)
-> +        .write(bar, E::BASE);
-> +    regs::NV_PFALCON2_FALCON_MOD_SEL::default()
-> +        .set_algo(FalconModSelAlgo::Rsa3k)
-> +        .write(bar, E::BASE);
-> +
-> +    Ok(())
-> +}
-> +
-> +pub(super) struct Ga102<E: FalconEngine>(PhantomData<E>);
-> +
-> +impl<E: FalconEngine> Ga102<E> {
-> +    pub(super) fn new() -> Self {
-> +        Self(PhantomData)
-> +    }
-> +}
-> +
-> +impl<E: FalconEngine> FalconHal<E> for Ga102<E> {
-> +    fn select_core(&self, _falcon: &Falcon<E>, bar: &Bar0) -> Result {
-> +        select_core_ga102::<E>(bar)
-> +    }
-> +
-> +    fn signature_reg_fuse_version(
-> +        &self,
-> +        falcon: &Falcon<E>,
-> +        bar: &Bar0,
-> +        engine_id_mask: u16,
-> +        ucode_id: u8,
-> +    ) -> Result<u32> {
-> +        signature_reg_fuse_version_ga102(&falcon.dev, bar, engine_id_mask, ucode_id)
-> +    }
-> +
-> +    fn program_brom(&self, _falcon: &Falcon<E>, bar: &Bar0, params: &FalconBromParams) -> Result {
-> +        program_brom_ga102::<E>(bar, params)
-> +    }
-
-Why are those two separate functions?
+@Alex: Can you please add such a list?
