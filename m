@@ -2,86 +2,61 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id 89AE8ADF484
-	for <lists+nouveau@lfdr.de>; Wed, 18 Jun 2025 19:44:32 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 825D1ADF6C7
+	for <lists+nouveau@lfdr.de>; Wed, 18 Jun 2025 21:24:25 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 3BF8010E8EB;
-	Wed, 18 Jun 2025 17:44:31 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 1DB8D10E502;
+	Wed, 18 Jun 2025 19:24:21 +0000 (UTC)
 Authentication-Results: gabe.freedesktop.org;
-	dkim=pass (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="RUAq9iNP";
+	dkim=pass (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="nnkT9RJz";
 	dkim-atps=neutral
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
 Received: from tor.source.kernel.org (tor.source.kernel.org [172.105.4.254])
- by gabe.freedesktop.org (Postfix) with ESMTPS id AD2A610E8EB;
- Wed, 18 Jun 2025 17:44:30 +0000 (UTC)
+ by gabe.freedesktop.org (Postfix) with ESMTPS id F3A5510E285;
+ Wed, 18 Jun 2025 19:24:19 +0000 (UTC)
 Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by tor.source.kernel.org (Postfix) with ESMTP id 7E8F061F1F;
- Wed, 18 Jun 2025 17:44:27 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id B86DBC4CEE7;
- Wed, 18 Jun 2025 17:44:16 +0000 (UTC)
+ by tor.source.kernel.org (Postfix) with ESMTP id E48E3629CE;
+ Wed, 18 Jun 2025 19:24:14 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 4DE6CC4CEEF;
+ Wed, 18 Jun 2025 19:24:10 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1750268667;
- bh=J3emUuMS2sP+fVu514LS2iE2SxNv9+tMuhs+QvDPSzI=;
- h=Date:Subject:To:Cc:References:From:In-Reply-To:From;
- b=RUAq9iNPBOvtBZ6kjZvzyDf3azz9pNEJrtV802b0Y+7oFzo46N+wIUNg/gUWuVYNv
- 0zTcE5vpf09zObs3MB5J0eo6OqIPMHS2hzU8M6zIhoCiDCJqMS64GU9M2cvpKemyE6
- 2cQfwsDPfUcwxAICjnnffdcOSRG7xmqYXPDVZgl7Mo2lPxi8/0fvmHvNSPg0dSTHSu
- uRRXbMuBmGgK+dW6FH4AGtLJYIu9K/KZlCp0EFVJQAiTuHA+H5PyIBduZh3y/5F0hn
- 36XXhmH+5bXNB865NML1afkhVnOFmu9mD/2qEx7ja97HEAcU+6YLo11U1bNdFcUrRV
- sQv648YcGy5eQ==
-Message-ID: <ccbc2a76-20fe-4f70-b69b-9d05b59f24b8@kernel.org>
-Date: Wed, 18 Jun 2025 19:44:14 +0200
-MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v12 1/6] rust: enable `clippy::ptr_as_ptr` lint
-To: Miguel Ojeda <miguel.ojeda.sandonis@gmail.com>
-Cc: Tamir Duberstein <tamird@gmail.com>,
- Christian Brauner <brauner@kernel.org>, David Gow <davidgow@google.com>,
- Greg Kroah-Hartman <gregkh@linuxfoundation.org>, Tejun Heo <tj@kernel.org>,
- Masahiro Yamada <masahiroy@kernel.org>, Nathan Chancellor
- <nathan@kernel.org>, Miguel Ojeda <ojeda@kernel.org>,
- Alex Gaynor <alex.gaynor@gmail.com>, Boqun Feng <boqun.feng@gmail.com>,
- Gary Guo <gary@garyguo.net>, =?UTF-8?Q?Bj=C3=B6rn_Roy_Baron?=
- <bjorn3_gh@protonmail.com>, Andreas Hindborg <a.hindborg@kernel.org>,
- Alice Ryhl <aliceryhl@google.com>, Trevor Gross <tmgross@umich.edu>,
- "Rafael J. Wysocki" <rafael@kernel.org>,
- Brendan Higgins <brendan.higgins@linux.dev>, Rae Moar <rmoar@google.com>,
- Bjorn Helgaas <bhelgaas@google.com>, Luis Chamberlain <mcgrof@kernel.org>,
- Russ Weight <russ.weight@linux.dev>, Rob Herring <robh@kernel.org>,
- Saravana Kannan <saravanak@google.com>,
- Abdiel Janulgue <abdiel.janulgue@gmail.com>,
- Daniel Almeida <daniel.almeida@collabora.com>,
- Robin Murphy <robin.murphy@arm.com>,
- Maarten Lankhorst <maarten.lankhorst@linux.intel.com>,
- Maxime Ripard <mripard@kernel.org>, Thomas Zimmermann <tzimmermann@suse.de>,
- David Airlie <airlied@gmail.com>, Simona Vetter <simona@ffwll.ch>,
- FUJITA Tomonori <fujita.tomonori@gmail.com>,
- Nicolas Schier <nicolas.schier@linux.dev>,
- Frederic Weisbecker <frederic@kernel.org>, Lyude Paul <lyude@redhat.com>,
- Thomas Gleixner <tglx@linutronix.de>,
- Anna-Maria Behnsen <anna-maria@linutronix.de>,
- Benno Lossin <lossin@kernel.org>,
- =?UTF-8?Q?Krzysztof_Wilczy=C5=84ski?= <kwilczynski@kernel.org>,
- John Stultz <jstultz@google.com>, Stephen Boyd <sboyd@kernel.org>,
- Lorenzo Stoakes <lorenzo.stoakes@oracle.com>,
- "Liam R. Howlett" <Liam.Howlett@oracle.com>, Breno Leitao
- <leitao@debian.org>, Viresh Kumar <viresh.kumar@linaro.org>,
- linux-kbuild@vger.kernel.org, linux-kernel@vger.kernel.org,
- rust-for-linux@vger.kernel.org, linux-kselftest@vger.kernel.org,
- kunit-dev@googlegroups.com, linux-pci@vger.kernel.org,
- linux-block@vger.kernel.org, devicetree@vger.kernel.org,
- dri-devel@lists.freedesktop.org, netdev@vger.kernel.org, linux-mm@kvack.org,
- linux-pm@vger.kernel.org, nouveau@lists.freedesktop.org
-References: <20250615-ptr-as-ptr-v12-0-f43b024581e8@gmail.com>
- <20250615-ptr-as-ptr-v12-1-f43b024581e8@gmail.com>
- <CAJ-ks9=6RSaLmNmDBv-TzJfGF8WzEi9Vd-s=1wyqBcF7_f7qQQ@mail.gmail.com>
- <CANiq72kgnKH2SSp76EdPeysExBWasqhTyf1JyReR65g6FMsidA@mail.gmail.com>
-From: Danilo Krummrich <dakr@kernel.org>
-Content-Language: en-US
-In-Reply-To: <CANiq72kgnKH2SSp76EdPeysExBWasqhTyf1JyReR65g6FMsidA@mail.gmail.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 8bit
+ s=k20201202; t=1750274654;
+ bh=0B1AqIh7XaT96Qz7mgiF/9cixkNlDiA1iViFQK2gYs4=;
+ h=Date:Cc:Subject:From:To:References:In-Reply-To:From;
+ b=nnkT9RJza11P1108ZFZQQbR60kDdssVI6SRGhuBkp1onGLyJ+27ShAiQPWjyM5aHN
+ BSIlZVu+gs57RAtjxyWwmB/velvo4q0R6H2FD8eaXQOUIRxEH15bNc0XBi26Dy80P5
+ 4vhf5pOHx82Fz37X0MboY5pV68Y/YI3EHj/GBtRujwU/wJ0LEsMEnCmSkzR3RwhoXj
+ Ppa1DhWdv7ro07e5u8zdRyVeFmke3NumBy8EfdRlWnn4wrKXUlNdSNblMStJtEcGwv
+ up3wnPlQp1GqCUy22Pco8yokKs7ThNq4ULn/0ZjWRhOHORk1ZXEPM3rGPMScr0NkRQ
+ 8NyIWaYc1K0mw==
+Mime-Version: 1.0
+Content-Transfer-Encoding: quoted-printable
+Content-Type: text/plain; charset=UTF-8
+Date: Wed, 18 Jun 2025 21:24:08 +0200
+Message-Id: <DAPWKX9V8T26.315LG5OZLLL2M@kernel.org>
+Cc: "John Hubbard" <jhubbard@nvidia.com>, "Ben Skeggs" <bskeggs@nvidia.com>,
+ "Joel Fernandes" <joelagnelf@nvidia.com>, "Timur Tabi" <ttabi@nvidia.com>,
+ "Alistair Popple" <apopple@nvidia.com>, <linux-kernel@vger.kernel.org>,
+ <rust-for-linux@vger.kernel.org>, <nouveau@lists.freedesktop.org>,
+ <dri-devel@lists.freedesktop.org>
+Subject: Re: [PATCH v5 05/23] rust: num: add the `fls` operation
+From: "Benno Lossin" <lossin@kernel.org>
+To: "Alexandre Courbot" <acourbot@nvidia.com>, "Miguel Ojeda"
+ <ojeda@kernel.org>, "Alex Gaynor" <alex.gaynor@gmail.com>, "Boqun Feng"
+ <boqun.feng@gmail.com>, "Gary Guo" <gary@garyguo.net>,
+ =?utf-8?q?Bj=C3=B6rn_Roy_Baron?= <bjorn3_gh@protonmail.com>, "Andreas
+ Hindborg" <a.hindborg@kernel.org>, "Alice Ryhl" <aliceryhl@google.com>,
+ "Trevor Gross" <tmgross@umich.edu>, "Danilo Krummrich" <dakr@kernel.org>,
+ "David Airlie" <airlied@gmail.com>, "Simona Vetter" <simona@ffwll.ch>,
+ "Maarten Lankhorst" <maarten.lankhorst@linux.intel.com>, "Maxime Ripard"
+ <mripard@kernel.org>, "Thomas Zimmermann" <tzimmermann@suse.de>
+X-Mailer: aerc 0.20.1
+References: <20250612-nova-frts-v5-0-14ba7eaf166b@nvidia.com>
+ <20250612-nova-frts-v5-5-14ba7eaf166b@nvidia.com>
+ <DAMHWN6ML8A1.2AUE4UWR58KR2@kernel.org>
+ <DANR43CR8X87.1YWHJK7P75TPQ@nvidia.com>
+In-Reply-To: <DANR43CR8X87.1YWHJK7P75TPQ@nvidia.com>
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -96,24 +71,30 @@ List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-On 6/18/25 6:45 PM, Miguel Ojeda wrote:
-> On Wed, Jun 18, 2025 at 3:54 PM Tamir Duberstein <tamird@gmail.com> wrote:
+On Mon Jun 16, 2025 at 8:41 AM CEST, Alexandre Courbot wrote:
+> On Sun Jun 15, 2025 at 4:16 AM JST, Benno Lossin wrote:
+>> On Thu Jun 12, 2025 at 4:01 PM CEST, Alexandre Courbot wrote:
+>>> +            #[inline(always)]
+>>> +            pub const fn [<fls_ $t>](v: $t) -> u32 {
 >>
->> @Andreas Hindborg could you please have a look for configfs?
->>
->> @Rafael J. Wysocki @Viresh Kumar could you please have a look for cpufreq?
-> 
-> Thanks Tamir.
-> 
-> Christian, Danilo, David, Greg, Tejun: It would also be nice to get
-> Acked-by's for your bits. Thanks!
+>> Can we name this `find_last_set_bit_ $t`? When the upstream function
+>> lands, we should also rename this one.
+>
+> We can - but as for `align_up`/`next_multiple_of`, I am not sure which
+> naming scheme (kernel-like or closer to Rust conventions) is favored in
+> such cases, and so far it seems to come down to personal preference. I
+> tend to think that staying close to kernel conventions make it easier to
+> understand when a function is the equivalent of a C one, but whichever
+> policy we adopt it would be nice to codify it somewhere (apologies if it
+> is already and I missed it).
 
-For the whole series and the bits I maintain:
+I don't think we have it written down anywhere. I don't think that we
+should have a global rule for this. Certain things are more in the
+purview of the kernel and others are more on the Rust side.
 
-Acked-by: Danilo Krummrich <dakr@kernel.org>
+My opinion is that this, since it will hopefully be in `core` at some
+point, should go with the Rust naming.
 
---
-
-Independent from that, won't this potentially leave us with a lot of warnings
-from code that goes through other trees in the upcoming merge window? How do we
-deal with that?
+---
+Cheers,
+Benno
