@@ -2,89 +2,83 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id B389BADF394
-	for <lists+nouveau@lfdr.de>; Wed, 18 Jun 2025 19:17:36 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 1AF9BADF400
+	for <lists+nouveau@lfdr.de>; Wed, 18 Jun 2025 19:38:17 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id B025010E013;
-	Wed, 18 Jun 2025 17:17:34 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id BF19510E299;
+	Wed, 18 Jun 2025 17:38:13 +0000 (UTC)
 Authentication-Results: gabe.freedesktop.org;
-	dkim=pass (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="h6oWJFp0";
+	dkim=pass (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="tMjYJJMN";
 	dkim-atps=neutral
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from tor.source.kernel.org (tor.source.kernel.org [172.105.4.254])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 9D82810E013;
- Wed, 18 Jun 2025 17:17:24 +0000 (UTC)
+Received: from nyc.source.kernel.org (nyc.source.kernel.org [147.75.193.91])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 0AACC10E1E5;
+ Wed, 18 Jun 2025 17:38:11 +0000 (UTC)
 Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by tor.source.kernel.org (Postfix) with ESMTP id 21014629CE;
- Wed, 18 Jun 2025 17:17:21 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 9D50CC4CEF0;
- Wed, 18 Jun 2025 17:17:20 +0000 (UTC)
+ by nyc.source.kernel.org (Postfix) with ESMTP id D5C10A525DD;
+ Wed, 18 Jun 2025 17:38:06 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id A2905C4CEF0;
+ Wed, 18 Jun 2025 17:37:56 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1750267040;
- bh=7N2qedqfmm2wSBE+X0xRUvrNeOitpNABVy0dpLK4z5Q=;
- h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
- b=h6oWJFp0fiMQrE1E5+fibmlM2jCeT2KZxH+a6iMOr+JJAnOUGSKQSP7kXS0H5H3Nu
- mBWOsyUE42uLIwTS3uWFi7MN0WpZIXNkIUDuAY3zPSiC7r2FozFALhUw2UsKsDYpYv
- O0WAXLDXJcCCFawSHxSIv5dZANuNpR96I/TUSYOWQAS6Jt8BzTXhQeW8EzHc+uptwS
- /77M5B6EBvyXZz447YneeE6jj58S+lPZGrJ8qdDaa3DdueRpK4NX3pXlZfEby1mrYj
- F+dLHAHgoYV/buxAedHuY+/YFLMyWlRT6SiemUYklWEZFk/R0ixstw2GZuorkoV0X7
- npiOADLxMx9kQ==
-Date: Wed, 18 Jun 2025 07:17:19 -1000
-From: Tejun Heo <tj@kernel.org>
-To: Miguel Ojeda <miguel.ojeda.sandonis@gmail.com>
-Cc: Tamir Duberstein <tamird@gmail.com>,
- Christian Brauner <brauner@kernel.org>,
- Danilo Krummrich <dakr@kernel.org>, David Gow <davidgow@google.com>,
- Greg Kroah-Hartman <gregkh@linuxfoundation.org>,
- Masahiro Yamada <masahiroy@kernel.org>,
+ s=k20201202; t=1750268286;
+ bh=iW9LufXJIvbvUBrzExqn4UB+Dl7RTb6MInZzRTsd/gE=;
+ h=Date:Subject:To:Cc:References:From:In-Reply-To:From;
+ b=tMjYJJMNrwSXJJKi8YsQ2JJzCWZzP3aUZRw8z5zFfnRs1PXkskRU1Uy/yMHhyjNDZ
+ aYyZvuF39WCJ0xfMW8VeWBs9XfgsxQPF+pfQhST331PYbTu5SMofDob0J6zFVIuQiD
+ xSNdKxYMYh7U71x0eBK5yeKhMdcB9wxpVvFZ3qE1TB+ZhJbwwiFeANK7gl5OpRQQfV
+ HSlnFlW678e57cd/6TC7LCfpEXAcYmojJXL5MBRF9yft0mAOs/z5mLjzxKGeOOJg26
+ w8zV/ffBD4jrvfjL7VmhG/U0wMlv2WpMERp1XRhsOUdVpC+tBSoJP0eHtbj0yJFIBz
+ Dl2uipre8dPhQ==
+Message-ID: <de30bc80-3dc9-4fac-afe8-bf6b0df42ea9@kernel.org>
+Date: Wed, 18 Jun 2025 19:37:54 +0200
+MIME-Version: 1.0
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v12 4/6] rust: enable `clippy::as_underscore` lint
+To: Tamir Duberstein <tamird@gmail.com>
+Cc: Masahiro Yamada <masahiroy@kernel.org>,
  Nathan Chancellor <nathan@kernel.org>, Miguel Ojeda <ojeda@kernel.org>,
- Alex Gaynor <alex.gaynor@gmail.com>,
- Boqun Feng <boqun.feng@gmail.com>, Gary Guo <gary@garyguo.net>,
- =?iso-8859-1?Q?Bj=F6rn?= Roy Baron <bjorn3_gh@protonmail.com>,
- Andreas Hindborg <a.hindborg@kernel.org>,
+ Alex Gaynor <alex.gaynor@gmail.com>, Boqun Feng <boqun.feng@gmail.com>,
+ Gary Guo <gary@garyguo.net>, =?UTF-8?Q?Bj=C3=B6rn_Roy_Baron?=
+ <bjorn3_gh@protonmail.com>, Andreas Hindborg <a.hindborg@kernel.org>,
  Alice Ryhl <aliceryhl@google.com>, Trevor Gross <tmgross@umich.edu>,
+ Greg Kroah-Hartman <gregkh@linuxfoundation.org>,
  "Rafael J. Wysocki" <rafael@kernel.org>,
- Brendan Higgins <brendan.higgins@linux.dev>,
- Rae Moar <rmoar@google.com>, Bjorn Helgaas <bhelgaas@google.com>,
- Luis Chamberlain <mcgrof@kernel.org>,
+ Brendan Higgins <brendan.higgins@linux.dev>, David Gow
+ <davidgow@google.com>, Rae Moar <rmoar@google.com>,
+ Bjorn Helgaas <bhelgaas@google.com>, Luis Chamberlain <mcgrof@kernel.org>,
  Russ Weight <russ.weight@linux.dev>, Rob Herring <robh@kernel.org>,
  Saravana Kannan <saravanak@google.com>,
  Abdiel Janulgue <abdiel.janulgue@gmail.com>,
  Daniel Almeida <daniel.almeida@collabora.com>,
  Robin Murphy <robin.murphy@arm.com>,
  Maarten Lankhorst <maarten.lankhorst@linux.intel.com>,
- Maxime Ripard <mripard@kernel.org>,
- Thomas Zimmermann <tzimmermann@suse.de>,
+ Maxime Ripard <mripard@kernel.org>, Thomas Zimmermann <tzimmermann@suse.de>,
  David Airlie <airlied@gmail.com>, Simona Vetter <simona@ffwll.ch>,
  FUJITA Tomonori <fujita.tomonori@gmail.com>,
  Nicolas Schier <nicolas.schier@linux.dev>,
- Frederic Weisbecker <frederic@kernel.org>,
- Lyude Paul <lyude@redhat.com>, Thomas Gleixner <tglx@linutronix.de>,
+ Frederic Weisbecker <frederic@kernel.org>, Lyude Paul <lyude@redhat.com>,
+ Thomas Gleixner <tglx@linutronix.de>,
  Anna-Maria Behnsen <anna-maria@linutronix.de>,
  Benno Lossin <lossin@kernel.org>,
- Krzysztof =?utf-8?Q?Wilczy=C5=84ski?= <kwilczynski@kernel.org>,
+ =?UTF-8?Q?Krzysztof_Wilczy=C5=84ski?= <kwilczynski@kernel.org>,
  John Stultz <jstultz@google.com>, Stephen Boyd <sboyd@kernel.org>,
  Lorenzo Stoakes <lorenzo.stoakes@oracle.com>,
- "Liam R. Howlett" <Liam.Howlett@oracle.com>,
- Breno Leitao <leitao@debian.org>, Viresh Kumar <viresh.kumar@linaro.org>,
+ "Liam R. Howlett" <Liam.Howlett@oracle.com>, Breno Leitao
+ <leitao@debian.org>, Viresh Kumar <viresh.kumar@linaro.org>,
  linux-kbuild@vger.kernel.org, linux-kernel@vger.kernel.org,
  rust-for-linux@vger.kernel.org, linux-kselftest@vger.kernel.org,
  kunit-dev@googlegroups.com, linux-pci@vger.kernel.org,
  linux-block@vger.kernel.org, devicetree@vger.kernel.org,
- dri-devel@lists.freedesktop.org, netdev@vger.kernel.org,
- linux-mm@kvack.org, linux-pm@vger.kernel.org, nouveau@lists.freedesktop.org
-Subject: Re: [PATCH v12 1/6] rust: enable `clippy::ptr_as_ptr` lint
-Message-ID: <aFL0n0KxQUbxjWdT@slm.duckdns.org>
+ dri-devel@lists.freedesktop.org, netdev@vger.kernel.org, linux-mm@kvack.org,
+ linux-pm@vger.kernel.org, nouveau@lists.freedesktop.org
 References: <20250615-ptr-as-ptr-v12-0-f43b024581e8@gmail.com>
- <20250615-ptr-as-ptr-v12-1-f43b024581e8@gmail.com>
- <CAJ-ks9=6RSaLmNmDBv-TzJfGF8WzEi9Vd-s=1wyqBcF7_f7qQQ@mail.gmail.com>
- <CANiq72kgnKH2SSp76EdPeysExBWasqhTyf1JyReR65g6FMsidA@mail.gmail.com>
-MIME-Version: 1.0
-Content-Type: text/plain; charset=utf-8
-Content-Disposition: inline
-Content-Transfer-Encoding: 8bit
-In-Reply-To: <CANiq72kgnKH2SSp76EdPeysExBWasqhTyf1JyReR65g6FMsidA@mail.gmail.com>
+ <20250615-ptr-as-ptr-v12-4-f43b024581e8@gmail.com>
+From: Danilo Krummrich <dakr@kernel.org>
+Content-Language: en-US
+In-Reply-To: <20250615-ptr-as-ptr-v12-4-f43b024581e8@gmail.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -99,23 +93,17 @@ List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-On Wed, Jun 18, 2025 at 06:45:56PM +0200, Miguel Ojeda wrote:
-> On Wed, Jun 18, 2025 at 3:54 PM Tamir Duberstein <tamird@gmail.com> wrote:
-> >
-> > @Andreas Hindborg could you please have a look for configfs?
-> >
-> > @Rafael J. Wysocki @Viresh Kumar could you please have a look for cpufreq?
-> 
-> Thanks Tamir.
-> 
-> Christian, Danilo, David, Greg, Tejun: It would also be nice to get
-> Acked-by's for your bits. Thanks!
 
-For wq part:
+On 6/15/25 10:55 PM, Tamir Duberstein wrote:
+> diff --git a/rust/kernel/error.rs b/rust/kernel/error.rs
+> index afcb00cb6a75..fd7a8b759437 100644
+> --- a/rust/kernel/error.rs
+> +++ b/rust/kernel/error.rs
+> @@ -153,7 +153,7 @@ pub(crate) fn to_blk_status(self) -> bindings::blk_status_t {
+>       /// Returns the error encoded as a pointer.
+>       pub fn to_ptr<T>(self) -> *mut T {
+>           // SAFETY: `self.0` is a valid error due to its invariant.
+> -        unsafe { bindings::ERR_PTR(self.0.get() as _).cast() }
+> +        unsafe { bindings::ERR_PTR(self.0.get() as isize).cast() }
 
-Acked-by: Tejun Heo <tj@kernel.org>
-
-Thanks.
-
--- 
-tejun
+Shouldn't this be `c_long`?
