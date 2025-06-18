@@ -2,61 +2,60 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id 825D1ADF6C7
-	for <lists+nouveau@lfdr.de>; Wed, 18 Jun 2025 21:24:25 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id B9A71ADF781
+	for <lists+nouveau@lfdr.de>; Wed, 18 Jun 2025 22:14:46 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 1DB8D10E502;
-	Wed, 18 Jun 2025 19:24:21 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 9A8DC10E937;
+	Wed, 18 Jun 2025 20:14:44 +0000 (UTC)
 Authentication-Results: gabe.freedesktop.org;
-	dkim=pass (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="nnkT9RJz";
+	dkim=pass (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="i8eTqS6W";
 	dkim-atps=neutral
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from tor.source.kernel.org (tor.source.kernel.org [172.105.4.254])
- by gabe.freedesktop.org (Postfix) with ESMTPS id F3A5510E285;
- Wed, 18 Jun 2025 19:24:19 +0000 (UTC)
+Received: from dfw.source.kernel.org (dfw.source.kernel.org [139.178.84.217])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 4B17310E930;
+ Wed, 18 Jun 2025 20:14:43 +0000 (UTC)
 Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by tor.source.kernel.org (Postfix) with ESMTP id E48E3629CE;
- Wed, 18 Jun 2025 19:24:14 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 4DE6CC4CEEF;
- Wed, 18 Jun 2025 19:24:10 +0000 (UTC)
+ by dfw.source.kernel.org (Postfix) with ESMTP id 043F35C627C;
+ Wed, 18 Jun 2025 20:12:21 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 61985C4CEE7;
+ Wed, 18 Jun 2025 20:14:32 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1750274654;
- bh=0B1AqIh7XaT96Qz7mgiF/9cixkNlDiA1iViFQK2gYs4=;
- h=Date:Cc:Subject:From:To:References:In-Reply-To:From;
- b=nnkT9RJza11P1108ZFZQQbR60kDdssVI6SRGhuBkp1onGLyJ+27ShAiQPWjyM5aHN
- BSIlZVu+gs57RAtjxyWwmB/velvo4q0R6H2FD8eaXQOUIRxEH15bNc0XBi26Dy80P5
- 4vhf5pOHx82Fz37X0MboY5pV68Y/YI3EHj/GBtRujwU/wJ0LEsMEnCmSkzR3RwhoXj
- Ppa1DhWdv7ro07e5u8zdRyVeFmke3NumBy8EfdRlWnn4wrKXUlNdSNblMStJtEcGwv
- up3wnPlQp1GqCUy22Pco8yokKs7ThNq4ULn/0ZjWRhOHORk1ZXEPM3rGPMScr0NkRQ
- 8NyIWaYc1K0mw==
-Mime-Version: 1.0
-Content-Transfer-Encoding: quoted-printable
-Content-Type: text/plain; charset=UTF-8
-Date: Wed, 18 Jun 2025 21:24:08 +0200
-Message-Id: <DAPWKX9V8T26.315LG5OZLLL2M@kernel.org>
-Cc: "John Hubbard" <jhubbard@nvidia.com>, "Ben Skeggs" <bskeggs@nvidia.com>,
- "Joel Fernandes" <joelagnelf@nvidia.com>, "Timur Tabi" <ttabi@nvidia.com>,
- "Alistair Popple" <apopple@nvidia.com>, <linux-kernel@vger.kernel.org>,
- <rust-for-linux@vger.kernel.org>, <nouveau@lists.freedesktop.org>,
- <dri-devel@lists.freedesktop.org>
-Subject: Re: [PATCH v5 05/23] rust: num: add the `fls` operation
-From: "Benno Lossin" <lossin@kernel.org>
-To: "Alexandre Courbot" <acourbot@nvidia.com>, "Miguel Ojeda"
- <ojeda@kernel.org>, "Alex Gaynor" <alex.gaynor@gmail.com>, "Boqun Feng"
- <boqun.feng@gmail.com>, "Gary Guo" <gary@garyguo.net>,
- =?utf-8?q?Bj=C3=B6rn_Roy_Baron?= <bjorn3_gh@protonmail.com>, "Andreas
- Hindborg" <a.hindborg@kernel.org>, "Alice Ryhl" <aliceryhl@google.com>,
- "Trevor Gross" <tmgross@umich.edu>, "Danilo Krummrich" <dakr@kernel.org>,
- "David Airlie" <airlied@gmail.com>, "Simona Vetter" <simona@ffwll.ch>,
- "Maarten Lankhorst" <maarten.lankhorst@linux.intel.com>, "Maxime Ripard"
- <mripard@kernel.org>, "Thomas Zimmermann" <tzimmermann@suse.de>
-X-Mailer: aerc 0.20.1
+ s=k20201202; t=1750277677;
+ bh=sw9XPuoboz5Zyke7ap1VbtdqXBQ7MhGyKF3T4RxE9i8=;
+ h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
+ b=i8eTqS6WvGvFBZrIQPLraPRlTbl0S0z0BTl8mIebLfLJ3O+wHSv8NCUXxLEHFxgik
+ 6K1Wcto63lQ6YY1UAs6jphHEWg4f7ddLy1Mj86GI9kD26KJjL1Vo/vdXoyGJw6T6rm
+ BNY8PN34EBJfqGsDjVmQ5qm4zWEeQlIEU21C0wlAIsluCpOMusX849rt8HIVsCbvDa
+ U6Fd0u+8peyGlw6eZgJ3K7AhKX8HrnB9boAXpvPlIZC67NVDkwRlFogpaSh5CZI/Pl
+ /TaooLWSainf8sDgGY3D4plh+nzj823JCKWeRM6FYMZXeOsDVHpsDIgF4ES9fxh6Vl
+ 8x4/tjGvjPhAQ==
+Date: Wed, 18 Jun 2025 22:14:29 +0200
+From: Danilo Krummrich <dakr@kernel.org>
+To: Alexandre Courbot <acourbot@nvidia.com>
+Cc: Miguel Ojeda <ojeda@kernel.org>, Alex Gaynor <alex.gaynor@gmail.com>,
+ Boqun Feng <boqun.feng@gmail.com>, Gary Guo <gary@garyguo.net>,
+ =?iso-8859-1?Q?Bj=F6rn?= Roy Baron <bjorn3_gh@protonmail.com>,
+ Andreas Hindborg <a.hindborg@kernel.org>,
+ Alice Ryhl <aliceryhl@google.com>, Trevor Gross <tmgross@umich.edu>,
+ David Airlie <airlied@gmail.com>, Simona Vetter <simona@ffwll.ch>,
+ Maarten Lankhorst <maarten.lankhorst@linux.intel.com>,
+ Maxime Ripard <mripard@kernel.org>,
+ Thomas Zimmermann <tzimmermann@suse.de>, Benno Lossin <lossin@kernel.org>,
+ John Hubbard <jhubbard@nvidia.com>, Ben Skeggs <bskeggs@nvidia.com>,
+ Joel Fernandes <joelagnelf@nvidia.com>,
+ Timur Tabi <ttabi@nvidia.com>, Alistair Popple <apopple@nvidia.com>,
+ linux-kernel@vger.kernel.org, rust-for-linux@vger.kernel.org,
+ nouveau@lists.freedesktop.org, dri-devel@lists.freedesktop.org,
+ Lyude Paul <lyude@redhat.com>, Shirish Baskaran <sbaskaran@nvidia.com>
+Subject: Re: [PATCH v5 00/23] nova-core: run FWSEC-FRTS to perform first
+ stage of GSP initialization
+Message-ID: <aFMeJZuXsBRhUxJC@cassiopeiae>
 References: <20250612-nova-frts-v5-0-14ba7eaf166b@nvidia.com>
- <20250612-nova-frts-v5-5-14ba7eaf166b@nvidia.com>
- <DAMHWN6ML8A1.2AUE4UWR58KR2@kernel.org>
- <DANR43CR8X87.1YWHJK7P75TPQ@nvidia.com>
-In-Reply-To: <DANR43CR8X87.1YWHJK7P75TPQ@nvidia.com>
+MIME-Version: 1.0
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <20250612-nova-frts-v5-0-14ba7eaf166b@nvidia.com>
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -71,30 +70,63 @@ List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-On Mon Jun 16, 2025 at 8:41 AM CEST, Alexandre Courbot wrote:
-> On Sun Jun 15, 2025 at 4:16 AM JST, Benno Lossin wrote:
->> On Thu Jun 12, 2025 at 4:01 PM CEST, Alexandre Courbot wrote:
->>> +            #[inline(always)]
->>> +            pub const fn [<fls_ $t>](v: $t) -> u32 {
->>
->> Can we name this `find_last_set_bit_ $t`? When the upstream function
->> lands, we should also rename this one.
->
-> We can - but as for `align_up`/`next_multiple_of`, I am not sure which
-> naming scheme (kernel-like or closer to Rust conventions) is favored in
-> such cases, and so far it seems to come down to personal preference. I
-> tend to think that staying close to kernel conventions make it easier to
-> understand when a function is the equivalent of a C one, but whichever
-> policy we adopt it would be nice to codify it somewhere (apologies if it
-> is already and I missed it).
+On Thu, Jun 12, 2025 at 11:01:28PM +0900, Alexandre Courbot wrote:
+> Hi everyone,
+> 
+> The feedback on v4 has been (hopefully) addressed. I guess the main
+> remaining unknown is the direction of the `num` module ; for this
+> iteration, following the received feedback I have eschewed the extension
+> trait and implemented the alignment functions as methods of the new
+> `PowerOfTwo` type. This has the benefit of making it impossible to call
+> them with undesirable (i.e. non-power of two) values. The `fls` function
+> is now provided as a series of const functions for each supported type,
+> generated by a macro.
+> 
+> It feels like the `num` module could be its own series though, so if
+> there is still discussion about it, I can also extract it and implement
+> the functionality we need in nova-core as local helper functions until
+> it gets merged at its own pace.
+> 
+> As previously, this series only successfully probes Ampere GPUs, but
+> support for other generations is on the way.
+> 
+> Upon successful probe, the driver will display the range of the WPR2
+> region constructed by FWSEC-FRTS with debug priority:
+> 
+>   [   95.436000] NovaCore 0000:01:00.0: WPR2: 0xffc00000-0xffce0000
+>   [   95.436002] NovaCore 0000:01:00.0: GPU instance built
+> 
+> This series is based on v6.16-rc1 with no other dependencies.
 
-I don't think we have it written down anywhere. I don't think that we
-should have a global rule for this. Certain things are more in the
-purview of the kernel and others are more on the Rust side.
+If compiled with rustc 1.78 there are missing imports of size_of() and
+align_of() which break the build.
 
-My opinion is that this, since it will hopefully be in `core` at some
-point, should go with the Rust naming.
+There are also a few warnings still:
 
----
-Cheers,
-Benno
+warning: unreachable `pub` field
+  --> drivers/gpu/nova-core/fb.rs:79:5
+   |
+79 |     pub fb: Range<u64>,
+   |     ---^^^^^^^^^^^^^^^
+   |     |
+   |     help: consider restricting its visibility: `pub(crate)`
+   |
+   = note: requested on the command line with `-W unreachable-pub`
+
+warning: unreachable `pub` field
+  --> drivers/gpu/nova-core/fb.rs:80:5
+   |
+80 |     pub vga_workspace: Range<u64>,
+   |     ---^^^^^^^^^^^^^^^^^^^^^^^^^^
+   |     |
+   |     help: consider restricting its visibility: `pub(crate)`
+
+warning: unreachable `pub` field
+  --> drivers/gpu/nova-core/fb.rs:81:5
+   |
+81 |     pub frts: Range<u64>,
+   |     ---^^^^^^^^^^^^^^^^^
+   |     |
+   |     help: consider restricting its visibility: `pub(crate)`
+
+warning: 3 warnings emitted
