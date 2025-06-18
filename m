@@ -2,74 +2,75 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id E1B72CBAD8E
-	for <lists+nouveau@lfdr.de>; Sat, 13 Dec 2025 13:45:13 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 0D0C2CBAA2D
+	for <lists+nouveau@lfdr.de>; Sat, 13 Dec 2025 13:41:54 +0100 (CET)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id E753F10EB53;
-	Sat, 13 Dec 2025 12:41:31 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 2AC8410EA46;
+	Sat, 13 Dec 2025 12:40:59 +0000 (UTC)
 Authentication-Results: gabe.freedesktop.org;
-	dkim=permerror (0-bit key) header.d=gmail.com header.i=@gmail.com header.b="Bgf0sayH";
+	dkim=permerror (0-bit key) header.d=gmail.com header.i=@gmail.com header.b="MAbH26SI";
 	dkim-atps=neutral
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from mail-pl1-f181.google.com (mail-pl1-f181.google.com
- [209.85.214.181])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 64FE610E296;
- Wed, 18 Jun 2025 17:31:40 +0000 (UTC)
-Received: by mail-pl1-f181.google.com with SMTP id
- d9443c01a7336-235db423abdso6393695ad.1; 
- Wed, 18 Jun 2025 10:31:40 -0700 (PDT)
+Received: from mail-pj1-f45.google.com (mail-pj1-f45.google.com
+ [209.85.216.45])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id BE34A10E90C;
+ Wed, 18 Jun 2025 17:50:20 +0000 (UTC)
+Received: by mail-pj1-f45.google.com with SMTP id
+ 98e67ed59e1d1-313756c602fso1093016a91.3; 
+ Wed, 18 Jun 2025 10:50:20 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1750267900; x=1750872700; darn=lists.freedesktop.org;
+ d=gmail.com; s=20230601; t=1750269020; x=1750873820; darn=lists.freedesktop.org;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:from:to:cc:subject:date
  :message-id:reply-to;
- bh=giEZC4CA1Gs2zQVVLh4SgqvtfIsCHKQ3JeTi6+ZWRSQ=;
- b=Bgf0sayHyUOOKomIKzNFEq5/oVcCwki72wCqV5BShpAdINpRHUjhI0ZWC513at1be2
- N1DMs6EcAFNQQtGxjRxwbMrVeUn2W4vr0ZqLjZTFBzaKazizFkGO8z+Z5IJatoNtVAsj
- rYcZdLJOUNvsLmM1MkVhInWN+KwTyDGKc7U6aAE13zagt1xIyWzF71zJIJvYufiv8SWc
- MWZRf4HM+U5Hxj5kOyUUMbfOrxqxpjgkgCkzpAqP9J/1jcAdelC+4MhRNdsc0cEyHFJG
- DZCnFQJKSVO42U3DF38YzReT6IcXCwr0UN+YDXo+LRemweSHJx4+LklCE4rDgthX70tW
- Or3A==
+ bh=y8FicD/fgNk5GmRRD6awNlCWX8z/26EGV8z9+xgODLg=;
+ b=MAbH26SIUbMljNbM1phrDIl5M+EnKnsAsfhseHf+oCmJKj3/JLTGdtDSmnhG1xWcxR
+ vnwLIm5MxV+WXawgz/5/Ne+RZa3waVayN8ivyPYt08vG0ED+WIc0DYoXohAzmoM+ZzWj
+ ku8oiVwAqVFrVoWrhIH+xnH4i+3bRhEMIbHzTL5GfkS3d3Ul9ehI/Tyb3Sxt9PtFXKrk
+ FpbTSRR0mTOHYadKCrQmzNBv2aHbdWAFOsjtV7WpC5NXAem7i5SJhPjvIBYK/MC59CL/
+ 5790kzUhJefviFhJrv6dK3hblOjN2OHFtbglK1uWq822GtgqJHh4GivpkUMZJEYWZk31
+ TQXA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1750267900; x=1750872700;
+ d=1e100.net; s=20230601; t=1750269020; x=1750873820;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=giEZC4CA1Gs2zQVVLh4SgqvtfIsCHKQ3JeTi6+ZWRSQ=;
- b=ZqpDDAq7N3oaFMgby0FKdVJMmOQpDgbUYMKFJYFSvU7rq2pxM3pg/C1vfZGd8MfbUJ
- X2NPR2DyUht4tctZG/LaFIBgZGkTHTtxd/qThiZmZVbUBFSHhgvRBwRI/6ZB1q+mGq11
- bvExaD4FRidHyD4MmEBDvoGKP+lLRw4zWMF6xAWPzl31b7f/KIEmGLbbwhJpuU2EYghZ
- jMBY1jV9JWgidWP9TFqGQiW4whCKSEttlOBY6GI8ywEvGTBcj9vFeEmwyiJl6wpKPLm5
- JQPSvjFestRnUo9wqH4VnKDOrnxv3UCEG1UmIVBNTeCcdk/2HP9Y9ltAcom8mMQ6oDE+
- i/UQ==
+ bh=y8FicD/fgNk5GmRRD6awNlCWX8z/26EGV8z9+xgODLg=;
+ b=apKvDTM/t0uG7/uTnUanWSp+/wUtJ6QZJAoam5qYNT6U0nNnoJTYiWS3u9JFUv5IRY
+ 7OKersKlZrDatEIeJQ42JRW9NNcOUu0mnl53GtORm0K3qetqxqzzHbDPReU7gLidcy/x
+ huFeAHVeQM5wQR3GxAYMSpV2LUGa1UbKFkUl/ANZXSS877qclNmoXIVdqUVAjy9E0Urg
+ DpD6oAx8hyeCDdkwNDcFYx3fgf0Lei0w8HcOqnh0ny8Vn7tbKsZMqa/CnBQ3wx1zlc/m
+ O3CKcdY/6anMM3A21/P+bDAS7B2rrh3bFUJ7CTBcTajMwsowN2jnNLMZSMAUdOQRJZ+2
+ OOBQ==
 X-Forwarded-Encrypted: i=1;
- AJvYcCUtmB0M+WdUi0M2rbvxETwNoX2DFFw71XArQ2N629Bs1FSs+TJwRwYJ0nhn/HS7qlsJa4/j04VRBg==@lists.freedesktop.org,
- AJvYcCXIb97/jQUY+WYFfmio0RZRrEgPD6Fl06/YsLnFtTX2EUiFrn4W9wb31TIzCC3KAIfUyhXVtZ60Riw=@lists.freedesktop.org
-X-Gm-Message-State: AOJu0Yx4pGjTdEhWbXjZKzqVUrgQlX1DUipHb81KgvDp74cwFFtccxgi
- w+8pluzoR8MInTyPGy24d8/6r0GmhAuX6uAguej2z1FRqZlOCEm2iySyYAkLGYkCKLyFyMRi7Xl
- 0y8Z8JAl4Gjw/ywExBykvPUO961UimEE=
-X-Gm-Gg: ASbGncv5wGcUGi8bMH+dDe/ZcAT1GnacykU6+tZgGy7mkcsuRy0TZ2FT0sUsB80hwx1
- F9FUqd1HJkE5kgjX2p8/tuf05OvDkkvZ+ajU6gGcL0gVU/Q8x2ub1tQwSG6ewYufEOUIfluX78/
- t3fi0ei0CUHNEIohN2c6WCmWIr3fmLJvH9c2vEeaxC1aQ=
-X-Google-Smtp-Source: AGHT+IElAYFQ7bmLDzGoK+LouyDOjrVrsskRPo8QHb8hQdYz3Xniksj2pUSBRZd+2TWCbtZwG0l3dCw6erP0uN8kpG4=
-X-Received: by 2002:a17:903:11c9:b0:236:7333:f1a0 with SMTP id
- d9443c01a7336-2368ee1cc91mr46098835ad.14.1750267899755; Wed, 18 Jun 2025
- 10:31:39 -0700 (PDT)
+ AJvYcCW+7bUDm0xKyEmGEAjuOfRSKk2WD7UQmv8FbpdGaOjPG4HMeKqv74tLmA1A3xaCmEpIC/e/29sNzFg=@lists.freedesktop.org,
+ AJvYcCXLDDLJ0KE/vbQwFL/2yJYqq3BVZWM4LMjYSyetDUe/TaGKVB+qZ+lXB5Swb/UR6TiP50Tq4lvl2w==@lists.freedesktop.org
+X-Gm-Message-State: AOJu0Yz/NETvbA7cl+DlQRwm2yFf2P70uhWjYxopv+AWow3p/j5XVAHU
+ Af1lBexNKqx24Ld/Pxg2E/QELYX9kDTBSBy7br2Hw3/L9I+4ApLwi11UtrG8hnUa5zykNqrLUd9
+ UBmh1MbxstHVxIGhwO0M6LR6T509PK60=
+X-Gm-Gg: ASbGnctuc9q+Cnwn9onaAUPRPrJ5COtjRsVZjSqgmGf9Ady6tovzOtscDTz64Vys27v
+ 2BzH+P+Sx7IQ9qmyYysABmOskFdY6TwAXGFT26S8pZ+R+aM2WNoi4Tx2JfnlF8Pq8aqzAgvlbH3
+ Xs/CvDXRq/XI7SEeRVCono6sbKOIe5633a89zRO2yXoQ8=
+X-Google-Smtp-Source: AGHT+IGwBEuoz7ZkZcRjBpUqCxdbqSbY0pSB/07XdCAmHEONw2uE7rmOXu2mtjhcBLdh+UgbAYF1+iUixf8L1GxnymM=
+X-Received: by 2002:a17:90b:3d82:b0:311:c5d9:2c8b with SMTP id
+ 98e67ed59e1d1-3158bfee2acmr131081a91.5.1750269019586; Wed, 18 Jun 2025
+ 10:50:19 -0700 (PDT)
 MIME-Version: 1.0
 References: <20250615-ptr-as-ptr-v12-0-f43b024581e8@gmail.com>
- <20250615-ptr-as-ptr-v12-2-f43b024581e8@gmail.com>
-In-Reply-To: <20250615-ptr-as-ptr-v12-2-f43b024581e8@gmail.com>
+ <20250615-ptr-as-ptr-v12-4-f43b024581e8@gmail.com>
+ <de30bc80-3dc9-4fac-afe8-bf6b0df42ea9@kernel.org>
+In-Reply-To: <de30bc80-3dc9-4fac-afe8-bf6b0df42ea9@kernel.org>
 From: Miguel Ojeda <miguel.ojeda.sandonis@gmail.com>
-Date: Wed, 18 Jun 2025 19:31:26 +0200
-X-Gm-Features: Ac12FXx7GupXW8Bt-WgcYO-htZmUwVX0jAEiTk6mVy23gMLCIJ6y3H_HjinHnSQ
-Message-ID: <CANiq72m1vd65BtF0gn1E6SSq=Xp9JTznZn-Yawd0yMMQdjPRYw@mail.gmail.com>
-Subject: Re: [PATCH v12 2/6] rust: enable `clippy::ptr_cast_constness` lint
-To: Tamir Duberstein <tamird@gmail.com>, Danilo Krummrich <dakr@kernel.org>
-Cc: Masahiro Yamada <masahiroy@kernel.org>,
- Nathan Chancellor <nathan@kernel.org>, 
- Miguel Ojeda <ojeda@kernel.org>, Alex Gaynor <alex.gaynor@gmail.com>, 
- Boqun Feng <boqun.feng@gmail.com>, Gary Guo <gary@garyguo.net>, 
+Date: Wed, 18 Jun 2025 19:50:06 +0200
+X-Gm-Features: Ac12FXzgdlmcKkLec41X9ZU6lwhGyCLefBHdsMy9eFFNw8WZHynLVcdkmU58X90
+Message-ID: <CANiq72mOHbxt3xOJw8f=j184TRYs9y3wvcopH-h6P2SLe4jVNQ@mail.gmail.com>
+Subject: Re: [PATCH v12 4/6] rust: enable `clippy::as_underscore` lint
+To: Danilo Krummrich <dakr@kernel.org>
+Cc: Tamir Duberstein <tamird@gmail.com>, Masahiro Yamada <masahiroy@kernel.org>,
+ Nathan Chancellor <nathan@kernel.org>, Miguel Ojeda <ojeda@kernel.org>, 
+ Alex Gaynor <alex.gaynor@gmail.com>, Boqun Feng <boqun.feng@gmail.com>, 
+ Gary Guo <gary@garyguo.net>,
  =?UTF-8?Q?Bj=C3=B6rn_Roy_Baron?= <bjorn3_gh@protonmail.com>, 
  Andreas Hindborg <a.hindborg@kernel.org>, Alice Ryhl <aliceryhl@google.com>, 
  Trevor Gross <tmgross@umich.edu>,
@@ -121,12 +122,13 @@ List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-On Sun, Jun 15, 2025 at 10:55=E2=80=AFPM Tamir Duberstein <tamird@gmail.com=
-> wrote:
+On Wed, Jun 18, 2025 at 7:38=E2=80=AFPM Danilo Krummrich <dakr@kernel.org> =
+wrote:
 >
->  rust/kernel/drm/device.rs       | 4 ++--
+> Shouldn't this be `c_long`?
 
-Danilo: for completeness: if you don't want this, please shout. Thanks!
+Yeah, agreed, it is clearer -- I mentioned that for similar ones in a
+previous version.
 
 Cheers,
 Miguel
