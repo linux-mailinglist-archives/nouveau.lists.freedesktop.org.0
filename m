@@ -2,35 +2,35 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id B9A71ADF781
-	for <lists+nouveau@lfdr.de>; Wed, 18 Jun 2025 22:14:46 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id ECDE5ADF799
+	for <lists+nouveau@lfdr.de>; Wed, 18 Jun 2025 22:23:25 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 9A8DC10E937;
-	Wed, 18 Jun 2025 20:14:44 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 5059610E947;
+	Wed, 18 Jun 2025 20:23:22 +0000 (UTC)
 Authentication-Results: gabe.freedesktop.org;
-	dkim=pass (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="i8eTqS6W";
+	dkim=pass (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="E5KYkur7";
 	dkim-atps=neutral
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from dfw.source.kernel.org (dfw.source.kernel.org [139.178.84.217])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 4B17310E930;
- Wed, 18 Jun 2025 20:14:43 +0000 (UTC)
+Received: from tor.source.kernel.org (tor.source.kernel.org [172.105.4.254])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id E457810E945;
+ Wed, 18 Jun 2025 20:23:19 +0000 (UTC)
 Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by dfw.source.kernel.org (Postfix) with ESMTP id 043F35C627C;
- Wed, 18 Jun 2025 20:12:21 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 61985C4CEE7;
- Wed, 18 Jun 2025 20:14:32 +0000 (UTC)
+ by tor.source.kernel.org (Postfix) with ESMTP id 0A49061F1F;
+ Wed, 18 Jun 2025 20:23:16 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id C9CC1C4CEED;
+ Wed, 18 Jun 2025 20:23:10 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1750277677;
- bh=sw9XPuoboz5Zyke7ap1VbtdqXBQ7MhGyKF3T4RxE9i8=;
+ s=k20201202; t=1750278195;
+ bh=vBlU29f0lKXjTb1IjXg9xDRSuF39bMysiXLwUIkTQDs=;
  h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
- b=i8eTqS6WvGvFBZrIQPLraPRlTbl0S0z0BTl8mIebLfLJ3O+wHSv8NCUXxLEHFxgik
- 6K1Wcto63lQ6YY1UAs6jphHEWg4f7ddLy1Mj86GI9kD26KJjL1Vo/vdXoyGJw6T6rm
- BNY8PN34EBJfqGsDjVmQ5qm4zWEeQlIEU21C0wlAIsluCpOMusX849rt8HIVsCbvDa
- U6Fd0u+8peyGlw6eZgJ3K7AhKX8HrnB9boAXpvPlIZC67NVDkwRlFogpaSh5CZI/Pl
- /TaooLWSainf8sDgGY3D4plh+nzj823JCKWeRM6FYMZXeOsDVHpsDIgF4ES9fxh6Vl
- 8x4/tjGvjPhAQ==
-Date: Wed, 18 Jun 2025 22:14:29 +0200
+ b=E5KYkur7Z9XHzLxHKvdtEitEsqV4o0QoO+ZU5JYz09QH0vme4eCKwixtLqhf7LS99
+ +LKUE3fQNDVJJ0Ws58vgnfpkYMWTpiGqkR4XBOw3Ed0CBhVcXMNBClRGXxmvawSv1P
+ aaYX2WvhKVwoyJZrpNcVCR7I+VXknqx4SnvB5hDXCbsIcKX+Tv2h/lPluDQjuaoYwx
+ mABuKLJGA8LVBEkoeC0ON7zO3NtShR6l6ptOQLJIcdcEymfG0XzStwul4LjK564/Lm
+ PJarGR1GwlAOU2mPDECrp44oLmFQXtSDH6M+bSew2MdLBhA/MGgfcMP/mORGJ80mS/
+ vsuSETTm/1kkg==
+Date: Wed, 18 Jun 2025 22:23:08 +0200
 From: Danilo Krummrich <dakr@kernel.org>
 To: Alexandre Courbot <acourbot@nvidia.com>
 Cc: Miguel Ojeda <ojeda@kernel.org>, Alex Gaynor <alex.gaynor@gmail.com>,
@@ -47,15 +47,15 @@ Cc: Miguel Ojeda <ojeda@kernel.org>, Alex Gaynor <alex.gaynor@gmail.com>,
  Timur Tabi <ttabi@nvidia.com>, Alistair Popple <apopple@nvidia.com>,
  linux-kernel@vger.kernel.org, rust-for-linux@vger.kernel.org,
  nouveau@lists.freedesktop.org, dri-devel@lists.freedesktop.org,
- Lyude Paul <lyude@redhat.com>, Shirish Baskaran <sbaskaran@nvidia.com>
-Subject: Re: [PATCH v5 00/23] nova-core: run FWSEC-FRTS to perform first
- stage of GSP initialization
-Message-ID: <aFMeJZuXsBRhUxJC@cassiopeiae>
+ Lyude Paul <lyude@redhat.com>
+Subject: Re: [PATCH v5 23/23] gpu: nova-core: load and run FWSEC-FRTS
+Message-ID: <aFMgLDfNKWPsSoD1@cassiopeiae>
 References: <20250612-nova-frts-v5-0-14ba7eaf166b@nvidia.com>
+ <20250612-nova-frts-v5-23-14ba7eaf166b@nvidia.com>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
-In-Reply-To: <20250612-nova-frts-v5-0-14ba7eaf166b@nvidia.com>
+In-Reply-To: <20250612-nova-frts-v5-23-14ba7eaf166b@nvidia.com>
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -70,63 +70,72 @@ List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-On Thu, Jun 12, 2025 at 11:01:28PM +0900, Alexandre Courbot wrote:
-> Hi everyone,
-> 
-> The feedback on v4 has been (hopefully) addressed. I guess the main
-> remaining unknown is the direction of the `num` module ; for this
-> iteration, following the received feedback I have eschewed the extension
-> trait and implemented the alignment functions as methods of the new
-> `PowerOfTwo` type. This has the benefit of making it impossible to call
-> them with undesirable (i.e. non-power of two) values. The `fls` function
-> is now provided as a series of const functions for each supported type,
-> generated by a macro.
-> 
-> It feels like the `num` module could be its own series though, so if
-> there is still discussion about it, I can also extract it and implement
-> the functionality we need in nova-core as local helper functions until
-> it gets merged at its own pace.
-> 
-> As previously, this series only successfully probes Ampere GPUs, but
-> support for other generations is on the way.
-> 
-> Upon successful probe, the driver will display the range of the WPR2
-> region constructed by FWSEC-FRTS with debug priority:
-> 
->   [   95.436000] NovaCore 0000:01:00.0: WPR2: 0xffc00000-0xffce0000
->   [   95.436002] NovaCore 0000:01:00.0: GPU instance built
-> 
-> This series is based on v6.16-rc1 with no other dependencies.
+On Thu, Jun 12, 2025 at 11:01:51PM +0900, Alexandre Courbot wrote:
+> @@ -237,6 +237,67 @@ pub(crate) fn new(
+>              },
+>          )?;
+>  
+> +        // Check that the WPR2 region does not already exists - if it does, the GPU needs to be
+> +        // reset.
+> +        if regs::NV_PFB_PRI_MMU_WPR2_ADDR_HI::read(bar).hi_val() != 0 {
+> +            dev_err!(
+> +                pdev.as_ref(),
+> +                "WPR2 region already exists - GPU needs to be reset to proceed\n"
+> +            );
+> +            return Err(EBUSY);
+> +        }
+> +
+> +        // Reset falcon, load FWSEC-FRTS, and run it.
+> +        gsp_falcon
+> +            .reset(bar)
+> +            .inspect_err(|e| dev_err!(pdev.as_ref(), "Failed to reset GSP falcon: {:?}\n", e))?;
+> +        gsp_falcon
+> +            .dma_load(bar, &fwsec_frts)
+> +            .inspect_err(|e| dev_err!(pdev.as_ref(), "Failed to load FWSEC-FRTS: {:?}\n", e))?;
+> +        let (mbox0, _) = gsp_falcon
+> +            .boot(bar, Some(0), None)
+> +            .inspect_err(|e| dev_err!(pdev.as_ref(), "Failed to boot FWSEC-FRTS: {:?}\n", e))?;
+> +        if mbox0 != 0 {
+> +            dev_err!(pdev.as_ref(), "FWSEC firmware returned error {}\n", mbox0);
+> +            return Err(EIO);
+> +        }
+> +
+> +        // SCRATCH_E contains FWSEC-FRTS' error code, if any.
+> +        let frts_status = regs::NV_PBUS_SW_SCRATCH_0E::read(bar).frts_err_code();
+> +        if frts_status != 0 {
+> +            dev_err!(
+> +                pdev.as_ref(),
+> +                "FWSEC-FRTS returned with error code {:#x}",
+> +                frts_status
+> +            );
+> +            return Err(EIO);
+> +        }
+> +
+> +        // Check the WPR2 has been created as we requested.
+> +        let (wpr2_lo, wpr2_hi) = (
+> +            (regs::NV_PFB_PRI_MMU_WPR2_ADDR_LO::read(bar).lo_val() as u64) << 12,
+> +            (regs::NV_PFB_PRI_MMU_WPR2_ADDR_HI::read(bar).hi_val() as u64) << 12,
+> +        );
+> +        if wpr2_hi == 0 {
+> +            dev_err!(
+> +                pdev.as_ref(),
+> +                "WPR2 region not created after running FWSEC-FRTS\n"
+> +            );
+> +
+> +            return Err(EIO);
+> +        } else if wpr2_lo != fb_layout.frts.start {
+> +            dev_err!(
+> +                pdev.as_ref(),
+> +                "WPR2 region created at unexpected address {:#x}; expected {:#x}\n",
+> +                wpr2_lo,
+> +                fb_layout.frts.start,
+> +            );
+> +            return Err(EIO);
+> +        }
+> +
+> +        dev_dbg!(pdev.as_ref(), "WPR2: {:#x}-{:#x}\n", wpr2_lo, wpr2_hi);
+> +        dev_dbg!(pdev.as_ref(), "GPU instance built\n");
+> +
 
-If compiled with rustc 1.78 there are missing imports of size_of() and
-align_of() which break the build.
-
-There are also a few warnings still:
-
-warning: unreachable `pub` field
-  --> drivers/gpu/nova-core/fb.rs:79:5
-   |
-79 |     pub fb: Range<u64>,
-   |     ---^^^^^^^^^^^^^^^
-   |     |
-   |     help: consider restricting its visibility: `pub(crate)`
-   |
-   = note: requested on the command line with `-W unreachable-pub`
-
-warning: unreachable `pub` field
-  --> drivers/gpu/nova-core/fb.rs:80:5
-   |
-80 |     pub vga_workspace: Range<u64>,
-   |     ---^^^^^^^^^^^^^^^^^^^^^^^^^^
-   |     |
-   |     help: consider restricting its visibility: `pub(crate)`
-
-warning: unreachable `pub` field
-  --> drivers/gpu/nova-core/fb.rs:81:5
-   |
-81 |     pub frts: Range<u64>,
-   |     ---^^^^^^^^^^^^^^^^^
-   |     |
-   |     help: consider restricting its visibility: `pub(crate)`
-
-warning: 3 warnings emitted
+This makes Gpu::new() quite messy, can we move this to a separate function
+please?
