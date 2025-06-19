@@ -2,182 +2,168 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id EB039ADFD59
-	for <lists+nouveau@lfdr.de>; Thu, 19 Jun 2025 07:56:21 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id B45BEADFE77
+	for <lists+nouveau@lfdr.de>; Thu, 19 Jun 2025 09:14:25 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 9FE7210E99E;
-	Thu, 19 Jun 2025 05:56:20 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 1763510E9BF;
+	Thu, 19 Jun 2025 07:14:22 +0000 (UTC)
 Authentication-Results: gabe.freedesktop.org;
-	dkim=pass (2048-bit key; unprotected) header.d=intel.com header.i=@intel.com header.b="gVtwoIAc";
+	dkim=pass (2048-bit key; unprotected) header.d=Nvidia.com header.i=@Nvidia.com header.b="VwZaUpZq";
 	dkim-atps=neutral
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from mgamail.intel.com (mgamail.intel.com [198.175.65.16])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 0E8B510E99E;
- Thu, 19 Jun 2025 05:56:20 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
- d=intel.com; i=@intel.com; q=dns/txt; s=Intel;
- t=1750312580; x=1781848580;
- h=from:to:cc:subject:date:message-id:references:
- in-reply-to:content-transfer-encoding:mime-version;
- bh=4GcBePnQs52mQ9GdcKJf9wSGUg2Vj9O7lpUy2eeDChA=;
- b=gVtwoIAceLKQNZ4TAtCT9+sIKXIaRLqqBwnIepTdLGIwZeytSD23tp70
- +ETj7S2jsJtVjkkNlbh4MUmI6NgFz5ScGBqilsosp/bj6p3vpiAoWst2L
- iaH64QPwbZPLR5EWEa3hGWFTOonwvtWMvAiT5/hCKIqP48xoi7aKV9M5d
- JUNlee+GvxvfA86QcrC3Ctjq4NKGxAsrJAlqZJzivXVOegL4eTRfUrtqn
- H0pqjOp4zSwxQ2DITjtZQwCLa5i8DCPEcO09x+gZ/gJt1KRuf6FpzZalZ
- LnlqRKmi9barBEvS66oH6Qmwsp3YA0o1ahubQrayt84mpaNIANswtqcld A==;
-X-CSE-ConnectionGUID: C0wUvWvOQ0qmatE2k/DjYg==
-X-CSE-MsgGUID: dGvrD9zoRvSpNOnX22+TKw==
-X-IronPort-AV: E=McAfee;i="6800,10657,11468"; a="52648179"
-X-IronPort-AV: E=Sophos;i="6.16,247,1744095600"; d="scan'208";a="52648179"
-Received: from fmviesa007.fm.intel.com ([10.60.135.147])
- by orvoesa108.jf.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
- 18 Jun 2025 22:56:20 -0700
-X-CSE-ConnectionGUID: cycqUwdvR3OvSPHMaBPKtw==
-X-CSE-MsgGUID: B5EJtWw8R0+sfBcrRr8/sA==
-X-ExtLoop1: 1
-X-IronPort-AV: E=Sophos;i="6.16,247,1744095600"; d="scan'208";a="150074860"
-Received: from orsmsx901.amr.corp.intel.com ([10.22.229.23])
- by fmviesa007.fm.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
- 18 Jun 2025 22:56:19 -0700
-Received: from ORSMSX901.amr.corp.intel.com (10.22.229.23) by
- ORSMSX901.amr.corp.intel.com (10.22.229.23) with Microsoft SMTP Server
- (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.2.1544.25; Wed, 18 Jun 2025 22:56:18 -0700
-Received: from ORSEDG902.ED.cps.intel.com (10.7.248.12) by
- ORSMSX901.amr.corp.intel.com (10.22.229.23) with Microsoft SMTP Server
- (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.2.1544.25 via Frontend Transport; Wed, 18 Jun 2025 22:56:18 -0700
-Received: from NAM02-SN1-obe.outbound.protection.outlook.com (40.107.96.70) by
- edgegateway.intel.com (134.134.137.112) with Microsoft SMTP Server
- (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.2.1544.25; Wed, 18 Jun 2025 22:56:18 -0700
+Received: from NAM10-BN7-obe.outbound.protection.outlook.com
+ (mail-bn7nam10on2061.outbound.protection.outlook.com [40.107.92.61])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id CDC3310E9BB;
+ Thu, 19 Jun 2025 07:14:11 +0000 (UTC)
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=HJMPerj501iiS+nUGoqBz8QTKU9eXSI0r3hoY9r+6KVNmDIBLvQEGQO6CiCdjgc0vPs8Rp1/fxfWbho1kTP4XSj99pQh2yFPLfuzyYSkb8zkNbVcfdb/VmlgOsgY/APEe3udvyUr1BezPD/FzpD6Nb7NzrH0DkEJykJwrr7WciDvSTsMrc4t2iZBUN1eXZXvZMR9mz0JUldzcc76LB8Wxdrglghr8NBghKlPyYqG2Fo1yfKCulqIF/b39SBDqRKTqdv7EXyblN5sa3THtzdDWIFyfnQkGbue79aRUkA9JQEc6Ac9AOY6N/ldBTuMZo0tU8WQtshMHv2n1R0AyRGv8g==
+ b=M9wuwqLi6rtiXVOKEHsOXv7bTF2IZp9o6rMw5N9SjOx9j2Dd+zCHtXaSuVK52bmF94+4kpwb5Lp+PbvQ5IKT9pxfhCQ4BOHZdVrzXT9dRfdrS4NyNvMhbUXrzHaED/36mzsE6xwK98imcDggnziSpVxe/NGy/qbqU5RQxnUycuzL3KY1WH09vHU8oYJj+RzMe+gCdKdoLPa44ok3kDFgGB4LcHeUtrwgO1NIxWq9cTVRLSzDZiAWMMhh/3lIJsL+PcZ/7/cBZWVXxhRin+4D5dhWvCMyPU23bhH3/u4H/6rr9aphywVy4FMYgYEVTyJAWQFsjX9JN5XCb7I0kVZXDg==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
  s=arcselector10001;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=4Jz6fgymKsZh5jBOTb2nRVUs5s0/RsiodDUvKrhe8HQ=;
- b=p+oiUMstu3UevSR3PnWR7JjkeLNWv7xOHH7ubPtf1A766xRmlBIrTMV2sfHK39bHhfjh1ZeBjZAi7MGc/E8v8JB8S+Ul/JNSHZX3sAzSJH1nXcj9NnXeGmC/PX/Y9drpbdeSTX6oY7DFNZ+1MJt5kjISRQ4PJz5b58KugoTBpJe7NqKr0uMBeub98+fINeX2BpIlhm/viV06VbaDOH0+GuAKkgtVgdjIhp4n9oHcYKzxL43bhzwSJCqHBxJYJZtkbtSBVtUESu6X1QHMbRo+pacYO6erWELinN+ByOWvdvHe/DY9yF35bojsxBHI3fzt09HOpKoMgMX3Kk3H4dDETg==
+ bh=ZqPWN1i2wY1zeIkqUr6BelZrFeDu9RJw6OjMYUjCIVg=;
+ b=iKH1qIeOuYbqvtIQcyY/A4gqpN0AyX1PwY9e5loMFSF9gF9IeyznRynStzHAY4cjtpz6a2UHOQ06psQeNZgZe4CQXJmPwPVQ5z9ArLrSLNkn4om7FaUq1UYL0Gia8uJn8AHtTuPlgptoY1L5nH//PKZIg3l5QDI8C0tf3U75L+q8qzJhrRDjYVwC1DK1T8e9Hi6oRoSpH0Zn7+k5MdGMUXXLcTchyIhfy3iIk2yZ3KUpYm9cpRLs8zLH3KeKkOA4AVXxDKBgZ2kYkJydOOzG+4CxdqC42G0Zwm01YKX1jt/g578NTsKdQXuSDyqaRvWKR/q59ZO3/fwuy10VGp2r9w==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=intel.com; dmarc=pass action=none header.from=intel.com;
- dkim=pass header.d=intel.com; arc=none
-Received: from DM3PPF208195D8D.namprd11.prod.outlook.com
- (2603:10b6:f:fc00::f13) by SA1PR11MB8253.namprd11.prod.outlook.com
- (2603:10b6:806:250::12) with Microsoft SMTP Server (version=TLS1_2,
+ smtp.mailfrom=nvidia.com; dmarc=pass action=none header.from=nvidia.com;
+ dkim=pass header.d=nvidia.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=Nvidia.com;
+ s=selector2;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=ZqPWN1i2wY1zeIkqUr6BelZrFeDu9RJw6OjMYUjCIVg=;
+ b=VwZaUpZqadNrIg4b8fkB4Epzn1gQuso4bRxAfi09/c/DgM6rUDvcTzQWCTa1RSOLhz23bKntCn6Y8XYl2NTEZlPpoBoRDhZ9/t/GSFGGz4eAoLK+ESKuWUiO9jmCnN0zp/TkJEuzawwjKI7ezuHeKnHYkzlRtkPOOCVSssgNwZBA4hEsT3GhDH1Ly5W1g8p8xuXRV+ZtkXuCsjWR0TFBK0BIsF19jdHN2vYNQabeacEdtBqdSz6Tv8mjQTRJMAITvZAyzOmi2tAy8QFS1EgaKNZh6gGkhQHAfC+WHg8+qDxpVZStnFXdUQqQAl3zmrP5onclVow+FotCdtd7CwclWw==
+Authentication-Results: dkim=none (message not signed)
+ header.d=none;dmarc=none action=none header.from=nvidia.com;
+Received: from CH2PR12MB3990.namprd12.prod.outlook.com (2603:10b6:610:28::18)
+ by DM4PR12MB8474.namprd12.prod.outlook.com (2603:10b6:8:181::13) with
+ Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.8835.29; Thu, 19 Jun
- 2025 05:56:15 +0000
-Received: from DM3PPF208195D8D.namprd11.prod.outlook.com
- ([fe80::9c2a:ba60:c5fe:6a64]) by DM3PPF208195D8D.namprd11.prod.outlook.com
- ([fe80::9c2a:ba60:c5fe:6a64%5]) with mapi id 15.20.8857.020; Thu, 19 Jun 2025
- 05:56:15 +0000
-From: "Kandpal, Suraj" <suraj.kandpal@intel.com>
-To: "Murthy, Arun R" <arun.r.murthy@intel.com>,
- "nouveau@lists.freedesktop.org" <nouveau@lists.freedesktop.org>,
- "dri-devel@lists.freedesktop.org" <dri-devel@lists.freedesktop.org>,
- "intel-xe@lists.freedesktop.org" <intel-xe@lists.freedesktop.org>,
- "intel-gfx@lists.freedesktop.org" <intel-gfx@lists.freedesktop.org>
-CC: "Nautiyal, Ankit K" <ankit.k.nautiyal@intel.com>
-Subject: RE: [PATCH 03/13] drm/dp: Add argument for luminance range info in
- drm_edp_backlight_init
-Thread-Topic: [PATCH 03/13] drm/dp: Add argument for luminance range info in
- drm_edp_backlight_init
-Thread-Index: AQHbrPQjjHgX94DrmU+/a+D20aPY7rP/aJsAgABHZZCAAAwhgIAABp4QgAqWNQCAAArHwA==
-Date: Thu, 19 Jun 2025 05:56:15 +0000
-Message-ID: <DM3PPF208195D8DF450691C45A5C906D7A8E37DA@DM3PPF208195D8D.namprd11.prod.outlook.com>
-References: <20250414041637.128039-1-suraj.kandpal@intel.com>
- <20250414041637.128039-4-suraj.kandpal@intel.com>
- <IA0PR11MB73072A82012F059738260626BA74A@IA0PR11MB7307.namprd11.prod.outlook.com>
- <DM3PPF208195D8D82C92D58A8780E866EE6E374A@DM3PPF208195D8D.namprd11.prod.outlook.com>
- <IA0PR11MB7307ED398EE421D9A54A686CBA74A@IA0PR11MB7307.namprd11.prod.outlook.com>
- <DM3PPF208195D8DD3B3CBE1B3B00821BC02E374A@DM3PPF208195D8D.namprd11.prod.outlook.com>
- <IA0PR11MB730719B23CABD77E02CB6220BA7DA@IA0PR11MB7307.namprd11.prod.outlook.com>
-In-Reply-To: <IA0PR11MB730719B23CABD77E02CB6220BA7DA@IA0PR11MB7307.namprd11.prod.outlook.com>
-Accept-Language: en-US
-Content-Language: en-US
-X-MS-Has-Attach: 
-X-MS-TNEF-Correlator: 
-authentication-results: dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=intel.com;
-x-ms-publictraffictype: Email
-x-ms-traffictypediagnostic: DM3PPF208195D8D:EE_|SA1PR11MB8253:EE_
-x-ms-office365-filtering-correlation-id: 5acf7b94-2bf8-4d9f-4269-08ddaef600d6
-x-ms-exchange-senderadcheck: 1
-x-ms-exchange-antispam-relay: 0
-x-microsoft-antispam: BCL:0;
- ARA:13230040|376014|1800799024|366016|7053199007|38070700018; 
-x-microsoft-antispam-message-info: =?us-ascii?Q?tXC3iloyHBDwk1SDB33D/IenLPqAECtv7tjcL9tJ0bpL+bPLmGkQdyRW2N48?=
- =?us-ascii?Q?hQ1ipPO9ImmkJ2x0iL0IlI+9n6QpODPIIDtxm2tg1LcckiHJ22cvw+6gf8v/?=
- =?us-ascii?Q?i+1U/Z2ik/wI2MjZy1aSly44DC5DLd4xGepxl8WUsk74PqKswhpo42qh1pwM?=
- =?us-ascii?Q?M+vy4yrmYfYBthv/vjoVQAM1acy0N73gC7YrbT2mGH4+Y7wvk7RQcQ8EZJjA?=
- =?us-ascii?Q?ubyGVfMR+1bbAOMhWviSdWhDLhWUkWrirhhOeCTcGiytwOhwEO/Do41Njbzb?=
- =?us-ascii?Q?EOk5u7etlwLZALUh4S48AuSMM6yIj1SM8WmtuY7ctQbfxYlX32/FQpgKdiE/?=
- =?us-ascii?Q?TB5u293jtLbBRU8EDAi2RMJSVkMbR3jSGSdZlszP00kFPETJ4q7xK/aqa4NA?=
- =?us-ascii?Q?xDbtB50gINRoiGkf9A7LDtWQB2g4R/HMTxD3T8p1qXEhj9vjpi7I0l+LsQa1?=
- =?us-ascii?Q?nW2Jf23RZFX1pRtyaeq4/ygqdlUayoAp66ENE9w1OJPyd8lchQw6JEyhMm2Y?=
- =?us-ascii?Q?4RFVB2tpBEr9YS2hx37uv/jHW0Srj5vEEZQIyHNouET5SRQOZKLqbT4XIwPu?=
- =?us-ascii?Q?ofnqZSjKTn8jp6RDR51nZQ2PFzdh0deXF+2M9gqGxU9ktRyXlamLUgHIChk6?=
- =?us-ascii?Q?uMVtyqCxKXGJ1UhZ10qC4leGsSr+D4iCA/0caehrEZu2Ve9fovQcMhXewzSs?=
- =?us-ascii?Q?4P5sbi2AmIqEFb5vainQgARBYg1hMOkRz2OhDVaD0QXRVfpu7ovZ4/zE0xKJ?=
- =?us-ascii?Q?01IIw9Ncwkivoxu0GDKMw+Uy4T4LxpS0+ldWAWsJGlsEMjJ54I5S52Tb7fZ4?=
- =?us-ascii?Q?p/nobMNqxwUmJYxj51bJCnTW0BlTkUO7wSOLXvhzfW5cgGvdi+3cEfEh22NN?=
- =?us-ascii?Q?9z0yAhI/6yL2EP0hJFre0Kqxoz7ZnxbigNYLz10a0XqrDVh6k0K2MA/QrA9+?=
- =?us-ascii?Q?fvc5Vm0uu1IhjPNCgr2tleyKIrpIwSSMtvNVTr9rK9AUDyoQkx+c3/Day/LN?=
- =?us-ascii?Q?tx9F9SzRJ3f+DwKrJ0dYgKDfIMOvwDrVdsrbnyUZ/87aYGmp94h7Fcv+QUXV?=
- =?us-ascii?Q?LyqqiUCtbRY88ztJtD0my+DZBylno8Crbn2zCK8ePvIw1avg7FB8S/WJzJ4P?=
- =?us-ascii?Q?F4F6wYhCUI8AMgsVd2l9xyTojyfA4JGrYvuzWkwJtgfnqNRieBUzuPotZ6ri?=
- =?us-ascii?Q?Hucf87bFo/XVOjuZXj+UZBGD+AgwmEY3gAxFTUqkJ9MYBbdIkYOOl/RtHnGr?=
- =?us-ascii?Q?vpgQDo7THV9rNAF6LFeN3LUQhhTTe49cpiHvmCggnzfHBjyhMkx1Lz/Dabws?=
- =?us-ascii?Q?ZnK0DQz1gOGOLL0YnjSvqaICABdn6VPOQEMJYqD7KkiASoaQlDIN/VwHxhNv?=
- =?us-ascii?Q?6aGSr+JkKkbVQCOXyuDcgErZmVF2MBfYkjyIvO8AgV8lqvO3EyXUCFAQQt3A?=
- =?us-ascii?Q?HZYi+mgLT7rK4B10UQeiZ4aXO0534zJ2/fwOwDkWgM/qPByQuxUbu+lcaqkr?=
- =?us-ascii?Q?xJSBE2JAxldvADo=3D?=
-x-forefront-antispam-report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
- IPV:NLI; SFV:NSPM; H:DM3PPF208195D8D.namprd11.prod.outlook.com; PTR:; CAT:NONE;
- SFS:(13230040)(376014)(1800799024)(366016)(7053199007)(38070700018); DIR:OUT;
- SFP:1101; 
-x-ms-exchange-antispam-messagedata-chunkcount: 1
-x-ms-exchange-antispam-messagedata-0: =?us-ascii?Q?pZE6L14XFOwSeIoOXAeahi/7/xNJdiCHW1HLlDSCy/FiuZqfBJP9ZNzfixBu?=
- =?us-ascii?Q?Ghb4yGsXFlnRhOBdESX5CsJCTYyj86dG4NfM/Z+rKCAduuzbPxg0xsuXu23x?=
- =?us-ascii?Q?3ZpKbO/eiIE9Wia7sw7l567nwwfLXgFahjNTl6ztvqBQAkw2AUa2n1LSJY6c?=
- =?us-ascii?Q?LcGxlMpwqkUFPud3sFHazz84RlSyIBBCjFEF95GhHHDVUyrFib/j3YCPlKW6?=
- =?us-ascii?Q?PCHFvgcotTRLTmzmGeFJIe0sQtcRb9lyraTn+qsMBVTu3fL/arB1oKGGZWAt?=
- =?us-ascii?Q?WQH8860bsDJp0pzg7MvUfE+Q2b7Uq/PFnDTr7p63VrwI8KkKeF5A/h2kRSma?=
- =?us-ascii?Q?eBbYZ4yL+P2Wu7vFsuR+z36VEIZ/zljBDg+js6wRR3tfQp4ogXkFQHQhD+JJ?=
- =?us-ascii?Q?IMcp8KCbOPDe4q76RE+szCzkxkyMdI1XcHiW+vxzb/uLFCdzd1k0VIfs5gmS?=
- =?us-ascii?Q?Cw7WFUTE/DDVuhQlnM3Ll3O1tlpA4fxOyvvzO5qiv7rZqNRTcdz5cULbBDY5?=
- =?us-ascii?Q?8B9enFv+4+gG+jgVOue+X0ATV8+4zF72RyuttYhOKM1CrYXNpL/Ngv9Pi2An?=
- =?us-ascii?Q?c0LYElIeY/incjnFcu/T44CKOw2bjNd6XsM4doGrqbisDXuL4PAnQ8aN1+dX?=
- =?us-ascii?Q?8UbYjkDPKDOaZKWjPlLKaGgZ716CdTugguqi/E9YuhX/JzAhrIQJXHFr8oEF?=
- =?us-ascii?Q?ktnVlyIyuCIQp2f8xwwq0oFMHpgB7wxvlTOjp80LQtKwbl7ZmMEknIDMRTS+?=
- =?us-ascii?Q?sjln3XzSN7E9VqjXNb18HiNo5kK63nJs9nMhmJDX1ITJuS53REyOFhAOrx+G?=
- =?us-ascii?Q?b4nmPitLzhEEe/ePX42oGtF1LjdeHwnhBTdPnc3Xc21rb50Pg7TMe7/0eSZ3?=
- =?us-ascii?Q?IZpRfMug+IoBYBgUnuiloWUJGxd/FjHPZT8vgcol5VKE7RqL6XPY7uXmZMHT?=
- =?us-ascii?Q?a4TjXQVoDcoUsUvx1pW0uS1lOBHdfU4AgFULmgUrY3PyvxA8PDxl1YO40dbk?=
- =?us-ascii?Q?UfB782olvdgTRTN7gd77BI0Z/VkNZZgFn7ES4lcO0IuTFhJ8XjmiKn01XLzF?=
- =?us-ascii?Q?4d7yXgnWydFc7sZyYif1UDQom9Rdkk30mHReQRKMcivRBOcZHN5bfyM+lteJ?=
- =?us-ascii?Q?vSJeNyn3t46xTr8+tu2L/tdjLHtoCqLPG+DcIwmCfzV0JNQs3fflsetzzOKp?=
- =?us-ascii?Q?3e4RtWtG4oAU9eBM+1SnRWAs76ZB1L8rt9q7OTvTNzZfcMmBaiwqsk3uQE1k?=
- =?us-ascii?Q?Txn42RODYppGb73+zexD5ME2rYNUh1eXZXVq/l1acQ9xb3Yk3gA8wC/TaNeT?=
- =?us-ascii?Q?0QVggwGomvHdT5kPxnOd37eSTOMndKr9keWW0pCI44fb1B8O49kyfuSBo1bL?=
- =?us-ascii?Q?R4qZUWn3ILAS4H0Efib3Upsp0ODchMcAbkHDgS9jY77qBYup9vHFTnH96c1W?=
- =?us-ascii?Q?pCFNThiungUaRT3Y0mDAXmi20WsaHWbt+kJ/mfFjaaWAuUSzFBx+TO81LCJo?=
- =?us-ascii?Q?KjbQMzDm2UDW3xFxUJLqUQ4Bqd4PI0lcQQ2o1pSW4ln+6cwcWyNVUcWPMpK2?=
- =?us-ascii?Q?fC86CmnF5GrYFzAmaXAGJQfcx//HOPvZKTTwnUU4?=
-Content-Type: text/plain; charset="us-ascii"
+ 2025 07:14:05 +0000
+Received: from CH2PR12MB3990.namprd12.prod.outlook.com
+ ([fe80::6e37:569f:82ee:3f99]) by CH2PR12MB3990.namprd12.prod.outlook.com
+ ([fe80::6e37:569f:82ee:3f99%4]) with mapi id 15.20.8857.019; Thu, 19 Jun 2025
+ 07:14:05 +0000
 Content-Transfer-Encoding: quoted-printable
+Content-Type: text/plain; charset=UTF-8
+Date: Thu, 19 Jun 2025 16:14:02 +0900
+Message-Id: <DAQBOGIUHI90.2NO9AVT4IRDTY@nvidia.com>
+Cc: "Miguel Ojeda" <ojeda@kernel.org>, "Alex Gaynor"
+ <alex.gaynor@gmail.com>, "Boqun Feng" <boqun.feng@gmail.com>, "Gary Guo"
+ <gary@garyguo.net>, =?utf-8?q?Bj=C3=B6rn_Roy_Baron?=
+ <bjorn3_gh@protonmail.com>, "Andreas Hindborg" <a.hindborg@kernel.org>,
+ "Alice Ryhl" <aliceryhl@google.com>, "Trevor Gross" <tmgross@umich.edu>,
+ "David Airlie" <airlied@gmail.com>, "Simona Vetter" <simona@ffwll.ch>,
+ "Maarten Lankhorst" <maarten.lankhorst@linux.intel.com>, "Maxime Ripard"
+ <mripard@kernel.org>, "Thomas Zimmermann" <tzimmermann@suse.de>, "Benno
+ Lossin" <lossin@kernel.org>, "John Hubbard" <jhubbard@nvidia.com>, "Ben
+ Skeggs" <bskeggs@nvidia.com>, "Joel Fernandes" <joelagnelf@nvidia.com>,
+ "Timur Tabi" <ttabi@nvidia.com>, "Alistair Popple" <apopple@nvidia.com>,
+ <linux-kernel@vger.kernel.org>, <rust-for-linux@vger.kernel.org>,
+ <nouveau@lists.freedesktop.org>, <dri-devel@lists.freedesktop.org>, "Lyude
+ Paul" <lyude@redhat.com>, "Shirish Baskaran" <sbaskaran@nvidia.com>
+Subject: Re: [PATCH v5 00/23] nova-core: run FWSEC-FRTS to perform first
+ stage of GSP initialization
+From: "Alexandre Courbot" <acourbot@nvidia.com>
+To: "Danilo Krummrich" <dakr@kernel.org>
+X-Mailer: aerc 0.20.1-0-g2ecb8770224a
+References: <20250612-nova-frts-v5-0-14ba7eaf166b@nvidia.com>
+ <aFMeJZuXsBRhUxJC@cassiopeiae>
+In-Reply-To: <aFMeJZuXsBRhUxJC@cassiopeiae>
+X-ClientProxiedBy: TYCP286CA0226.JPNP286.PROD.OUTLOOK.COM
+ (2603:1096:400:3c7::20) To CH2PR12MB3990.namprd12.prod.outlook.com
+ (2603:10b6:610:28::18)
 MIME-Version: 1.0
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: CH2PR12MB3990:EE_|DM4PR12MB8474:EE_
+X-MS-Office365-Filtering-Correlation-Id: 9231aa64-5e32-4660-8603-08ddaf00e00c
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: BCL:0;
+ ARA:13230040|366016|1800799024|376014|7416014|10070799003; 
+X-Microsoft-Antispam-Message-Info: =?utf-8?B?ZWNkdFV1cVMvbmFhMTB0QmQ4d0N5YllUWDZVS1ExME1VaklXQ0FpNWJENDY2?=
+ =?utf-8?B?VXdTLzhQL1MvTnRxKzZhVURZM011S2tScGpFSmhqbHNqSHdqM1I4ZXN2SWpj?=
+ =?utf-8?B?L1kyRTBaSWhuYk5welhwZG0zb0wrb3d3VDdhR2Z3MkNjdmZ6ZGdzQ0ZMN3h2?=
+ =?utf-8?B?NXNPdzZ2QXFLeCswMHp1WlZTOGZXaXRjVTk2UGd1NC9QalpRaEF5ZWVrblkv?=
+ =?utf-8?B?eDBaN1hXcjZMMGgxTkJnZ01iS0ZwUXhKKzB4SGpSSGJQU3ZadksyUytWQm5T?=
+ =?utf-8?B?MlVTRUM5ZHpmQkkrcmZlS241RXNIMEZadGVzcFMrWEM0MmZDY1hwUys2SzVl?=
+ =?utf-8?B?eGduWXpod3VXL0tmMEd2U3JaT2FjbVVTZzZVcmNkY3YvNGxHdDRhREJTVmdi?=
+ =?utf-8?B?SWtXaFpEaW1rT1ZtYkNrZzJ2UnZMd250OFhhV2dhV0R5d1l0dUxXcmhqOHVB?=
+ =?utf-8?B?Vm5LT0l1RkUzUVpvMk1wN0tEdlk1amNvZEZjOFU3c1ZKL1BiNkFSVWpFYUJx?=
+ =?utf-8?B?WUlnUVQyZzBjYlVjZGZkWC9xNGlGL1ZlaWNJa2RXbTBZNXJzVmhJWEY1aGF6?=
+ =?utf-8?B?WUNlS1hCOTFpNGVIODRhaVZtYWREUXhCTEtxbTNrLytQK0FONS9rSHc0UER2?=
+ =?utf-8?B?R0dmREM2WDVxK0hDRWpDMlZYUnloNkpsTEQyb01TdlI5WWJTNDFlTTBqZ0My?=
+ =?utf-8?B?d0h6Zll6dzdNdFUzY05oWlY2M3JzcEFaRmY5NktuSTZrcVFLK1lCS2lxQ21N?=
+ =?utf-8?B?SlFNbFVBQTcrUGQxaGp2ZndLYVY3OEVnZG9jc2xxdlpRZDRZV25scms4REcv?=
+ =?utf-8?B?MC9sKzFJUGV0SHFGZ0c3czlXa2xYRkFzRWVVNVR4cXBnMGh5a1Q4bXlJc2tG?=
+ =?utf-8?B?YVB4bEtZd0licjhRQ084ay9waENiRW1hRkI3UlFSMml6bnpOclFtZlRiVDM1?=
+ =?utf-8?B?Zlc4YWZIQmZobXBYVTNmTU4xR3hUa0J4K1lLMWRna0VxQzdIeVVaeVBLRko4?=
+ =?utf-8?B?eXQva2loeEFVMm1HK0RBSFFER2s1TURXVkI3QjBVM2dHdU9rOUtuSDdLWjBC?=
+ =?utf-8?B?SGQ2eEtKT29BU1lkYit3WU5ldkZoVlBZNXZOR2Uyeks4bEpOeGdLUlRaWCtH?=
+ =?utf-8?B?YTRON1I0aVpFbFF1UVZBeG9hRmtaQVVSN2dSWGRLUTVDUyt0OEhVdzN3NlAx?=
+ =?utf-8?B?N2lwNDNXYnNUT1BLWWxDdGdFbVFmK2FmT2pWVFgyelYzUWFRaDFHWGdmQklT?=
+ =?utf-8?B?bUpHLy9aVHcyNk9aYVAzcUJEelRFTzZuTVFNaTk2UDNDZHNDbzVQOHJPRHZ0?=
+ =?utf-8?B?U3JXTVZURTliaTJNK25obW5tbGUwVDNFZ0RSWVZsbDhlQitRZHBXeTYzVDNL?=
+ =?utf-8?B?M2lUQjlTdFBkVzJYT1Eyb2FQc3RUMHNaamZQMUF3ZHZUYURrMThodUFmb2l2?=
+ =?utf-8?B?RXg1aW43RW1LRVZFdnJUWWFqdTFtaGFwWndMS0p4ZWdYSG5OWVU4dWhmcmZm?=
+ =?utf-8?B?MzRHcGV6b2xwYVNnZzdBazdoR3RPWitIYm9sU01lUTF4aTVMa1VZaFN2RG1i?=
+ =?utf-8?B?NExyeDNQV3ozMmFIQlBpN21XL0FtcW9PdS9KSFVmSHNCai83RDRud21rYjRj?=
+ =?utf-8?B?azh4T3BGSFFSSmtFYmFiNkJqM0tnVUdmWWpJbm5rYkJLNUV4M0VJc0VhU3dE?=
+ =?utf-8?B?TEo3TzdlZkFETTliT2RKRVZ6Y2JaYzNXaFlMZUorK05EYyt1bmF6bGxXREhv?=
+ =?utf-8?B?UVN1RG90UlA1SVZ1ZmphNWpHVFFLL1dXN050Zi91Q0xmcjN1SlB1ZmRaam0z?=
+ =?utf-8?B?YUdHYTFRdTVMUXFoem5DRDJaWEZxLzFQUjZhZ0kzU0RmZUJTblpkR3Z2MnY2?=
+ =?utf-8?B?UWdXL3F0TDNUUE5semJ1Wjl6MlhuNHFzN04xN0FZUUdZdnd6bzhIZkV3Vndr?=
+ =?utf-8?Q?7WysgY3Mcxs=3D?=
+X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
+ IPV:NLI; SFV:NSPM; H:CH2PR12MB3990.namprd12.prod.outlook.com; PTR:; CAT:NONE;
+ SFS:(13230040)(366016)(1800799024)(376014)(7416014)(10070799003); DIR:OUT;
+ SFP:1101; 
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?Sit2OTdsbWdwbHZVaTlrRmgrVjNLcGZ3aGlRS2lEdW1VVldnSjVvdUV6WHU4?=
+ =?utf-8?B?TmM3cFdwb1MxRXBzdExCai85cWZjRlk2V1VuZmhFYWtvS1RHTXkwY0QvL2pp?=
+ =?utf-8?B?V05HMFJHRlB1aDZlVmN5UkJwSm5sU2FrY0h6Y25PQ2tGakJ5akpDeDJlOUFO?=
+ =?utf-8?B?VUNaZklmSG9ydnFzWHRjNWdiSjFYZVhlYXREbC9pUDAvNS81UTdJR3FBaXd6?=
+ =?utf-8?B?azE2S1hETWZvVnZRNXB4Y0FIOEVHWXhBUGQvYzV6WDNycHlDUnliUk9LRnNR?=
+ =?utf-8?B?KzU0aHFWQzROalJFUk5XTEJFODhaRFFVYUpUZ2xNa2J3amFOSUg5QllieTNJ?=
+ =?utf-8?B?MFpseElCUHRkR2lEVnpxZFkzMENkTGNVMUVDQVFSSDhWNHYwS0tuR1E3Vml5?=
+ =?utf-8?B?QVl4YmFiTitDU0pmMTlQZmkvVTd2ZXJickRaVTU4RktEMjV6RlB5VHFJZTBt?=
+ =?utf-8?B?VlR2eXM1ZWJoM21laXYxVGhlN21qRnV1UkROWXQzWThSMXZITXRuZmxyUk95?=
+ =?utf-8?B?aXpUT0NjRW1OaE9ES1gxNEZCMXF6MGhEZTZ5Z1pTV3VKdkVtQk51ekI3OXFI?=
+ =?utf-8?B?UnZaQWxEKzFtQVJqRjQzR1gvdkcwNXdFdGdRZFhQbktMemNNWnFZRXcrYXZV?=
+ =?utf-8?B?OFR4MGxkZkhsTGFGMWMzNjA1SHZiMENYRGdFMWdiNWs3dm92YWEzaThLYjdZ?=
+ =?utf-8?B?SmZ1d0pEREtxOHhtTWtZUVk2clh0TEx0V1dYYzlrYktrdldXZVR4U01scndP?=
+ =?utf-8?B?eTVsUG5BM1lPSnlyZFZKNmM5b21BUkdOWC9zSDVrMjlKd1piRC83NEsyVC94?=
+ =?utf-8?B?T2RCVHdvMUVpQVo1elJxeks5enZEM1BIV3ozMmdiWlJBSFRUVGZOSk4rN3g2?=
+ =?utf-8?B?S1RoejMxZzh2ems1ZHExdFU4QlhoRnc1UEo3aEQwK1ZPMWpvUzEwaWNPYTB4?=
+ =?utf-8?B?VnA1dVFPYTl5Z0hBd2NHTGVrMnAzNXEyc1VOYlFOWWNvSXVva0o3WHdocnl4?=
+ =?utf-8?B?M08vTWF2aHJybG9DY1lIbFc1Qjhtb0kzWmJkR3dyQTJYR1dkM0JpOStnN2JY?=
+ =?utf-8?B?bWRHSW5kTExOb1AzajYwNWg2Y3g0d0l6TUNSeWtHbDVDSHIydnJld2o3RnpR?=
+ =?utf-8?B?eFh1YWJVekZKakh2NTFKTEcvamNVWEVHakFkYkV5ajFYcEZURTRrMmt4Zksw?=
+ =?utf-8?B?OGQvL3Q2RjBRVGQ5b1hMcXhYSENFSzh2Q0trTm5Ha1JzdHF3cy9Gb1pCWUxW?=
+ =?utf-8?B?TkNYMFdJZXYzdmNYVXJ1bklWRVMzMzZBdHRDZjd6d0lBRXBrRUZPTXdHM3pj?=
+ =?utf-8?B?bElXb1lrUW9DWllObmtIdVp1Y0lURVJzWVBpNWh3dGhXQktLY0VPazEwYThS?=
+ =?utf-8?B?OG1CTXZrdjhvcGkvb2gvZHZ3ajdpcHB5VTk1c0YyRnhIakJYYzhZUU85OWhT?=
+ =?utf-8?B?clRCVlB4R0FxdHQ1QURyUWVXK2szVjZnRWVua0J4Y0dUOEFQL0IxRFlmRjU0?=
+ =?utf-8?B?SmY3amwxRjJweHpQWFFkR2lESnBYTWJ6Tkk3YjZDeCtNakJIMHFSSERQMkxh?=
+ =?utf-8?B?V2I2VjBVWlZvWFpNVlNSREo4NnFsaGRJdm4yVzcrTGhUWWNBV3FlcEd6bVZO?=
+ =?utf-8?B?OXBqT2VhVnhVeHlSd2N1b1pLY1I3VytXdUJTbDRBd2x5Z3JqZkg2QU0zR3VB?=
+ =?utf-8?B?b0M5Zkt2REpiZFgyUThxei95RnVTdTRobm9sUExwMU1FOGJVQjNsYXdadnQv?=
+ =?utf-8?B?Vi9FOXgyNDZhL2ZOZ3ZuK2FYaTIxb1lmL21pc2F2NDFoendrdjlpcUR1UGxV?=
+ =?utf-8?B?NG9jQ2tjUFRITFFseTZ6dTVkK2hlbTdtemZldVVwWm9HaVl5M2VjVG94Vm1M?=
+ =?utf-8?B?RzB6bTNobGd0cEdVL05MVHYvcjN0am04N0ZuMGhQbnZiMEdDTTh1OSt0UThC?=
+ =?utf-8?B?V1Y2SWl6Y0labUFXMjk1M3RkU2tkUnBiVGpNb2grRm02cWJaY1pqZG80ODly?=
+ =?utf-8?B?cGh1Wm1TSldZRStJMy80M3ZDTDdqMk5aTmg0bXdMWUJNb0p4d3dZeVhoaDhW?=
+ =?utf-8?B?SDRydmZhdjFTcEpMc1c0aUpHR2pCOEF1L3R5L21hVUw0ampEeUlvdWVJVElT?=
+ =?utf-8?B?c09lV1ppSXpUYzk3K0NyS0k1S1ZSdTJybnRBeTlLZlRGYm4xQVR5TTkyS1pI?=
+ =?utf-8?Q?WDsHBTD2F3Qm2eBspotjYP/UU4q+vvtw8bZ4+9IS24/L?=
+X-OriginatorOrg: Nvidia.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: 9231aa64-5e32-4660-8603-08ddaf00e00c
+X-MS-Exchange-CrossTenant-AuthSource: CH2PR12MB3990.namprd12.prod.outlook.com
 X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-AuthSource: DM3PPF208195D8D.namprd11.prod.outlook.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 5acf7b94-2bf8-4d9f-4269-08ddaef600d6
-X-MS-Exchange-CrossTenant-originalarrivaltime: 19 Jun 2025 05:56:15.5571 (UTC)
-X-MS-Exchange-CrossTenant-fromentityheader: Hosted
-X-MS-Exchange-CrossTenant-id: 46c98d88-e344-4ed4-8496-4ed7712e255d
-X-MS-Exchange-CrossTenant-mailboxtype: HOSTED
-X-MS-Exchange-CrossTenant-userprincipalname: X0uAPeI7xn5y7XWaCNfbH6nHVOfgF8vFvaRCj3WMKd6A7pObhMYhNXex9clWfRxegB4T41chhAln/01G8L550Q==
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: SA1PR11MB8253
-X-OriginatorOrg: intel.com
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 19 Jun 2025 07:14:05.2374 (UTC)
+X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
+X-MS-Exchange-CrossTenant-Id: 43083d15-7273-40c1-b7db-39efd9ccc17a
+X-MS-Exchange-CrossTenant-MailboxType: HOSTED
+X-MS-Exchange-CrossTenant-UserPrincipalName: Ek8cvtRJROjdxYXDWzkiM8Ltn/DZ82SbKIqKU0opMuB1Xfh2wJoZ7s4ZAohmbXKdPouvWxA9RETfwEuS33Zu3w==
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: DM4PR12MB8474
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -192,126 +178,67 @@ List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
+On Thu Jun 19, 2025 at 5:14 AM JST, Danilo Krummrich wrote:
+> On Thu, Jun 12, 2025 at 11:01:28PM +0900, Alexandre Courbot wrote:
+>> Hi everyone,
+>>=20
+>> The feedback on v4 has been (hopefully) addressed. I guess the main
+>> remaining unknown is the direction of the `num` module ; for this
+>> iteration, following the received feedback I have eschewed the extension
+>> trait and implemented the alignment functions as methods of the new
+>> `PowerOfTwo` type. This has the benefit of making it impossible to call
+>> them with undesirable (i.e. non-power of two) values. The `fls` function
+>> is now provided as a series of const functions for each supported type,
+>> generated by a macro.
+>>=20
+>> It feels like the `num` module could be its own series though, so if
+>> there is still discussion about it, I can also extract it and implement
+>> the functionality we need in nova-core as local helper functions until
+>> it gets merged at its own pace.
+>>=20
+>> As previously, this series only successfully probes Ampere GPUs, but
+>> support for other generations is on the way.
+>>=20
+>> Upon successful probe, the driver will display the range of the WPR2
+>> region constructed by FWSEC-FRTS with debug priority:
+>>=20
+>>   [   95.436000] NovaCore 0000:01:00.0: WPR2: 0xffc00000-0xffce0000
+>>   [   95.436002] NovaCore 0000:01:00.0: GPU instance built
+>>=20
+>> This series is based on v6.16-rc1 with no other dependencies.
+>
+> If compiled with rustc 1.78 there are missing imports of size_of() and
+> align_of() which break the build.
+>
+> There are also a few warnings still:
+>
+> warning: unreachable `pub` field
+>   --> drivers/gpu/nova-core/fb.rs:79:5
+>    |
+> 79 |     pub fb: Range<u64>,
+>    |     ---^^^^^^^^^^^^^^^
+>    |     |
+>    |     help: consider restricting its visibility: `pub(crate)`
+>    |
+>    =3D note: requested on the command line with `-W unreachable-pub`
+>
+> warning: unreachable `pub` field
+>   --> drivers/gpu/nova-core/fb.rs:80:5
+>    |
+> 80 |     pub vga_workspace: Range<u64>,
+>    |     ---^^^^^^^^^^^^^^^^^^^^^^^^^^
+>    |     |
+>    |     help: consider restricting its visibility: `pub(crate)`
+>
+> warning: unreachable `pub` field
+>   --> drivers/gpu/nova-core/fb.rs:81:5
+>    |
+> 81 |     pub frts: Range<u64>,
+>    |     ---^^^^^^^^^^^^^^^^^
+>    |     |
+>    |     help: consider restricting its visibility: `pub(crate)`
+>
+> warning: 3 warnings emitted
 
+Sorry about this. These are confirmed fixed in v6.
 
-> -----Original Message-----
-> From: Murthy, Arun R <arun.r.murthy@intel.com>
-> Sent: Thursday, June 19, 2025 10:47 AM
-> To: Kandpal, Suraj <suraj.kandpal@intel.com>;
-> nouveau@lists.freedesktop.org; dri-devel@lists.freedesktop.org; intel-
-> xe@lists.freedesktop.org; intel-gfx@lists.freedesktop.org
-> Cc: Nautiyal, Ankit K <ankit.k.nautiyal@intel.com>
-> Subject: RE: [PATCH 03/13] drm/dp: Add argument for luminance range info =
-in
-> drm_edp_backlight_init
->=20
-> > > -----Original Message-----
-> > > From: Murthy, Arun R <arun.r.murthy@intel.com>
-> > > Sent: Thursday, June 12, 2025 4:43 PM
-> > > To: Kandpal, Suraj <suraj.kandpal@intel.com>;
-> > > nouveau@lists.freedesktop.org; dri-devel@lists.freedesktop.org;
-> > > intel- xe@lists.freedesktop.org; intel-gfx@lists.freedesktop.org
-> > > Cc: Nautiyal, Ankit K <ankit.k.nautiyal@intel.com>
-> > > Subject: RE: [PATCH 03/13] drm/dp: Add argument for luminance range
-> > > info in drm_edp_backlight_init
-> > >
-> > > > > > -----Original Message-----
-> > > > > > From: Kandpal, Suraj <suraj.kandpal@intel.com>
-> > > > > > Sent: Monday, April 14, 2025 9:46 AM
-> > > > > > To: nouveau@lists.freedesktop.org;
-> > > > > > dri-devel@lists.freedesktop.org;
-> > > > > > intel- xe@lists.freedesktop.org;
-> > > > > > intel-gfx@lists.freedesktop.org
-> > > > > > Cc: Nautiyal, Ankit K <ankit.k.nautiyal@intel.com>; Murthy,
-> > > > > > Arun R <arun.r.murthy@intel.com>; Kandpal, Suraj
-> > > > > > <suraj.kandpal@intel.com>
-> > > > > > Subject: [PATCH 03/13] drm/dp: Add argument for luminance
-> > > > > > range info in drm_edp_backlight_init
-> > > > > >
-> > > > > > Add new argument to drm_edp_backlight_init which gives the
-> > > > > > drm_luminance_range_info struct which will be needed to set
-> > > > > > the min and max values for backlight.
-> > > > > >
-> > > > > > Signed-off-by: Suraj Kandpal <suraj.kandpal@intel.com>
-> > > > > > ---
-> > > > > >  drivers/gpu/drm/display/drm_dp_helper.c               | 5 ++++=
--
-> > > > > >  drivers/gpu/drm/i915/display/intel_dp_aux_backlight.c | 5 +++-=
--
-> > > > > >  drivers/gpu/drm/nouveau/nouveau_backlight.c           | 5 ++++=
--
-> > > > > >  include/drm/display/drm_dp_helper.h                   | 1 +
-> > > > > >  4 files changed, 12 insertions(+), 4 deletions(-)
-> > > > > >
-> > > > > > diff --git a/drivers/gpu/drm/display/drm_dp_helper.c
-> > > > > > b/drivers/gpu/drm/display/drm_dp_helper.c
-> > > > > > index 99b27e5e3365..3b309ac5190b 100644
-> > > > > > --- a/drivers/gpu/drm/display/drm_dp_helper.c
-> > > > > > +++ b/drivers/gpu/drm/display/drm_dp_helper.c
-> > > > > > @@ -4227,6 +4227,8 @@ drm_edp_backlight_probe_state(struct
-> > > > > drm_dp_aux
-> > > > > > *aux, struct drm_edp_backlight_i
-> > > > > >   * interface.
-> > > > > >   * @aux: The DP aux device to use for probing
-> > > > > >   * @bl: The &drm_edp_backlight_info struct to fill out with
-> > > > > > information on the backlight
-> > > > > > + * @lr: The &drm_luminance_range_info struct which is used to
-> > > > > > + get the min max when using *luminance override
-> > > > > >   * @driver_pwm_freq_hz: Optional PWM frequency from the
-> > > > > > driver in
-> > > hz
-> > > > > >   * @edp_dpcd: A cached copy of the eDP DPCD
-> > > > > >   * @current_level: Where to store the probed brightness
-> > > > > > level, if any @@ -
-> > > > > > 4243,6 +4245,7 @@ drm_edp_backlight_probe_state(struct
-> > > drm_dp_aux
-> > > > > > *aux, struct drm_edp_backlight_i
-> > > > > >   */
-> > > > > >  int
-> > > > > >  drm_edp_backlight_init(struct drm_dp_aux *aux, struct
-> > > > > > drm_edp_backlight_info *bl,
-> > > > > > +		       struct drm_luminance_range_info *lr,
-> > > > > Would it be better to have this drm_luminance_range_info inside
-> > > > > the drm_edp_backlight_info?
-> > > >
-> > > > The thing is we fill drm_edp_backlight_info struct in
-> > > > drm_edp_backlight_init Which means we would have to pass it
-> anyways.
-> > > > So having a reference of this in drm_edp_backlight_info didn't make
-> sense.
-> > > >
-> > > The main intention for this ask is two xx_info struct passed as argum=
-ent.
-> > > Moreover luminance is part of backlight and this new element is
-> > > _info and there already exists backlight_info. So wondering is
-> > > luminance can be put inside backlight_info. The caller of this
-> > > function can fill the luminance part and then make a call.
-> > >
-> >
-> > I see you point but the thing is luminance range is not something we
-> > will be using later and is only used the set the max level of brightnes=
-s that
-> can be set.
-> > That being said I do get your point on sending two xx_info struct
-> > here, I was thinking we send only the
-> > U32 max luminance here since that's the only one we actually use.
-> > Drivers can send the max luminance they like.
-> > What do you think?
-> >
-> That should be better! 4th patch can be squashed with this one.
->=20
-
-Sure will do that
-
-Regards,
-Suraj Kandpal
-
-> Thanks and Regards,
-> Arun R Murthy
-> --------------------
-> > Regards,
-> > Suraj Kandpal
-> >
-> > > Thanks and Regards,
-> > > Arun R Murthy
-> > > --------------------
