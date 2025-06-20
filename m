@@ -2,76 +2,76 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id C0DA5AE12A7
-	for <lists+nouveau@lfdr.de>; Fri, 20 Jun 2025 06:55:23 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 73993AE12ED
+	for <lists+nouveau@lfdr.de>; Fri, 20 Jun 2025 07:29:49 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 5BE6E10EABA;
-	Fri, 20 Jun 2025 04:55:22 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 72F5210EACB;
+	Fri, 20 Jun 2025 05:29:47 +0000 (UTC)
 Authentication-Results: gabe.freedesktop.org;
-	dkim=pass (2048-bit key; unprotected) header.d=intel.com header.i=@intel.com header.b="TEHKmNhO";
+	dkim=pass (2048-bit key; unprotected) header.d=intel.com header.i=@intel.com header.b="Ji8tWPjS";
 	dkim-atps=neutral
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from mgamail.intel.com (mgamail.intel.com [192.198.163.17])
- by gabe.freedesktop.org (Postfix) with ESMTPS id A595110EAB4;
- Fri, 20 Jun 2025 04:55:21 +0000 (UTC)
+Received: from mgamail.intel.com (mgamail.intel.com [198.175.65.19])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 15CBE10EAC6;
+ Fri, 20 Jun 2025 05:29:46 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
  d=intel.com; i=@intel.com; q=dns/txt; s=Intel;
- t=1750395321; x=1781931321;
+ t=1750397386; x=1781933386;
  h=from:to:cc:subject:date:message-id:references:
  in-reply-to:content-transfer-encoding:mime-version;
- bh=p/tH1x39gnGzk9Oh0o+unCcyj7Q/wlc9KMf7Nje+aJA=;
- b=TEHKmNhONvL+ozYHYuUdRYvsV79Ht8tI43gyQGSHV9ri0jA1VjqszzdO
- wtfu0PPoOYJT5NBexfXT9SSudsWLyT18hTZWCQ0tTeQo75GmYlTYpyADk
- dydKutlqL5QzIkuxKZ7mgENblhETZLVP3iG92gdVNKzM970ldNwqQWfBY
- tXKxNm1QXm0arUahobP8UAR2nXfRmozuN/qWm5PHmuFYjz6/nWn1W05Eo
- S7S5tccnoVM/mnRTf3Kr/YjixasnQcpWCPNoTQClrpEhyg7PK2whj3UrX
- rdu/BaEMQOVJ9rk/k6IlEB+MsrUoxTPp0jNmFiVQoot8t/zgeWefzlP1l A==;
-X-CSE-ConnectionGUID: 8l50e/uQSXmypqIfzWLTcg==
-X-CSE-MsgGUID: pRWSJpYBQPioYJVOVcfRqw==
-X-IronPort-AV: E=McAfee;i="6800,10657,11469"; a="52574037"
-X-IronPort-AV: E=Sophos;i="6.16,250,1744095600"; d="scan'208";a="52574037"
-Received: from orviesa006.jf.intel.com ([10.64.159.146])
- by fmvoesa111.fm.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
- 19 Jun 2025 21:55:21 -0700
-X-CSE-ConnectionGUID: J69vRYzPSFezFzoYJ54vng==
-X-CSE-MsgGUID: dpz7oGgkR66lK2yIYSFn1Q==
+ bh=ALKuEDiSBVuMxx+APkCWaISc8+Tu1U9TyUzsdakqNFA=;
+ b=Ji8tWPjSI/AXRcpTTwHs7oQCBj88mxFu5EwOgYT0xakA/3ctSLvsJsHR
+ c1CrShU0r9FrzLn9Gh5+c6JNV7j/zOytb39SRvXXu7q7POfOS5ufS/pw5
+ NtBxSzqAqnfBsJLImYWsEuD9ZZiBqtV/SOULZyc+vz8q5Lozj0hH0LR8E
+ eSkFpWzJB13ZkjT/yPwzsrt5Ooqu8dnsHppkRnCtVQFuPvIBchX7jgM/g
+ XJ+jUplJS/rmPjG+Ir6XBnxf9lx3DqIIq9YSLuGvqwGClczO96w/y6ioq
+ WoUKQgJVR+sKI/FdudN845D1yQTZys7D/RAfsjCK7YzZHzDqaXOdj3kIj A==;
+X-CSE-ConnectionGUID: f+KExx4/QI2/j211lNLUeQ==
+X-CSE-MsgGUID: jZP97IyWRB6EGaJd9rvNrw==
+X-IronPort-AV: E=McAfee;i="6800,10657,11469"; a="52531661"
+X-IronPort-AV: E=Sophos;i="6.16,250,1744095600"; d="scan'208";a="52531661"
+Received: from fmviesa008.fm.intel.com ([10.60.135.148])
+ by orvoesa111.jf.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
+ 19 Jun 2025 22:29:46 -0700
+X-CSE-ConnectionGUID: WQ7x6WJMTcK5knV2JrWzVg==
+X-CSE-MsgGUID: 5A2ei1N6SmmpdfWTlRnoxQ==
 X-ExtLoop1: 1
-X-IronPort-AV: E=Sophos;i="6.16,250,1744095600"; d="scan'208";a="150297349"
+X-IronPort-AV: E=Sophos;i="6.16,250,1744095600"; d="scan'208";a="151347943"
 Received: from orsmsx901.amr.corp.intel.com ([10.22.229.23])
- by orviesa006.jf.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
- 19 Jun 2025 21:55:21 -0700
-Received: from ORSMSX902.amr.corp.intel.com (10.22.229.24) by
+ by fmviesa008.fm.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
+ 19 Jun 2025 22:29:43 -0700
+Received: from ORSMSX903.amr.corp.intel.com (10.22.229.25) by
  ORSMSX901.amr.corp.intel.com (10.22.229.23) with Microsoft SMTP Server
  (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.2.1544.25; Thu, 19 Jun 2025 21:55:20 -0700
-Received: from ORSEDG902.ED.cps.intel.com (10.7.248.12) by
- ORSMSX902.amr.corp.intel.com (10.22.229.24) with Microsoft SMTP Server
+ 15.2.1544.25; Thu, 19 Jun 2025 22:29:40 -0700
+Received: from ORSEDG901.ED.cps.intel.com (10.7.248.11) by
+ ORSMSX903.amr.corp.intel.com (10.22.229.25) with Microsoft SMTP Server
  (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.2.1544.25 via Frontend Transport; Thu, 19 Jun 2025 21:55:20 -0700
-Received: from NAM04-MW2-obe.outbound.protection.outlook.com (40.107.101.60)
- by edgegateway.intel.com (134.134.137.112) with Microsoft SMTP Server
+ 15.2.1544.25 via Frontend Transport; Thu, 19 Jun 2025 22:29:40 -0700
+Received: from NAM04-MW2-obe.outbound.protection.outlook.com (40.107.101.72)
+ by edgegateway.intel.com (134.134.137.111) with Microsoft SMTP Server
  (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.2.1544.25; Thu, 19 Jun 2025 21:55:20 -0700
+ 15.2.1544.25; Thu, 19 Jun 2025 22:29:40 -0700
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=PxdO+om0VzYk55xJy7S93lH5aV+ZUJ4ZyQzGmRrl2P02OaKztr9/zor94+fkupsCYuJm/q5AeRYcqt6kb700KQA7HJH/HDlY4eu+CAu36wn6z06+igT6gqZ1gu/kBspn4aHmNIXuXb4hlj/0UXdbI/13ray3cl08rlw9NC6BxlpITasXsjr07Md3bvHPSJyr/nIZR02ll7GxsVFuMP1x2y2uNU7TkoxE/9aD4Uh4XdTK9y0HQgZ4bC6G/lu3+AFMxWK4pOVaavBAQpOW9gcfUWAYGVYSxNnIEkzNpkmiHLGqcP37cwrFqdX1BxVccXGzjWxhrK0PdzBc/eRZZp39gg==
+ b=buM56FVFlz9eApNkwutDdO0K+RFtyFPporMprAhZWmQEMc2Gge98goWH9+e7Ua1LUe06+oMCDV7oSGfov0Bb5QoImiqW6zYqjIrIWcbM6hMsSpXAWqXaLYuAco/lf0lV/J5LB3x1TgZTdACvjz8nC9zGZIUsH0QZLRN5C8WWqe/swNm14GI8VrdLDhSzeAnPJnk4w7Qd5ItVMvPctKifGcvJbp+gFMUx93m6zJo8iIJGj7tGtB45XjodiI/b3NfRB3NgKZfHrFVQiYxAPOWifBxDnQFYSNPdFSdiIC/0/c2tJsAID69SHJejaJmCGx2iNDEIAS124sKdzRXQflFSMg==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
  s=arcselector10001;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=MeYWWKU6JrrIrWdLLqp6hjrBplGrwxsyVDpXoy6mbuw=;
- b=nNvN9Kic4RxDODuIYKjlWRH5SHfpMiy4DMdmp8WeoDlKCJk947M//4/OApI/mTCHY/fSiLKj5ole8269HQRQD2o2elKHptHmMtd6nu80X/ZqYXSw0FTquIJkc/J7/OUNjPhG2Rav7DVnTXSkPEBqQ0cZcwxWHf12xuef2nkNDpm5nTIzLgpdYlzMk8u9B8qsNWh/gWd3WaBW/qScMY8Ar2QUI4NvI76pa9rUHLRnaHqI1+C81DKUTJ4jco9H/GvNOdmWdQ7E7zPffzw0UCxiJ/5Apevm/6DpH1Nmuuo5OaBKzzwAP6bj6RIiIVML+eZt+5j/OfzXwFiocb7HqrwxJw==
+ bh=vXGAeWmRf1LLeOx6rdcloqojFvALrQCkggvrFgFHMRc=;
+ b=iGDAz5G9UjGVn49ms2FZmiJeRAvwlfSMONX0QC6XU7JggmYFhyeoITa7DsM0pX3o9wM6/6DMzyX3sXKZwTyDRTOInnBrE60cogbk3Vo9xZLs2epa7+80xhRw7hyAncdH44ozfyGL9GFp/LAWUszwGKgrA6R+ok2dDErXmWniJBGql9OVnGKTijNHhRbEvmMAI0RwITljPpDpAtzwjm+JVB0/3M0aNWCRN2YGKnKyunY+Jy1i/3Zew5w/lG5jX9/jGgrf3oVVhGvROWS28STIzmHhbbboGz+iFWL/EKJLn3u4YnE1z9tAk5tVMw2Ha8Kr3fQ3wyCDIvkIYh/aR/vRuw==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
  smtp.mailfrom=intel.com; dmarc=pass action=none header.from=intel.com;
  dkim=pass header.d=intel.com; arc=none
 Received: from IA0PR11MB7307.namprd11.prod.outlook.com (2603:10b6:208:437::10)
- by SA0PR11MB4718.namprd11.prod.outlook.com (2603:10b6:806:98::24)
+ by MN2PR11MB4646.namprd11.prod.outlook.com (2603:10b6:208:264::8)
  with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.8857.23; Fri, 20 Jun
- 2025 04:55:18 +0000
+ 2025 05:29:39 +0000
 Received: from IA0PR11MB7307.namprd11.prod.outlook.com
  ([fe80::dafa:d38d:8ac1:e843]) by IA0PR11MB7307.namprd11.prod.outlook.com
  ([fe80::dafa:d38d:8ac1:e843%3]) with mapi id 15.20.8857.019; Fri, 20 Jun 2025
- 04:55:18 +0000
+ 05:29:38 +0000
 From: "Murthy, Arun R" <arun.r.murthy@intel.com>
 To: "Kandpal, Suraj" <suraj.kandpal@intel.com>,
  "nouveau@lists.freedesktop.org" <nouveau@lists.freedesktop.org>,
@@ -79,16 +79,16 @@ To: "Kandpal, Suraj" <suraj.kandpal@intel.com>,
  "intel-xe@lists.freedesktop.org" <intel-xe@lists.freedesktop.org>,
  "intel-gfx@lists.freedesktop.org" <intel-gfx@lists.freedesktop.org>
 CC: "Nautiyal, Ankit K" <ankit.k.nautiyal@intel.com>
-Subject: RE: [PATCH 10/13] drm/dp: Enable backlight control using luminance
-Thread-Topic: [PATCH 10/13] drm/dp: Enable backlight control using luminance
-Thread-Index: AQHbrPQsb0MNKLgTfkSBqlLbvJf4S7QL4IRAgAAEHACAAAA74A==
-Date: Fri, 20 Jun 2025 04:55:18 +0000
-Message-ID: <IA0PR11MB7307077434E292DBE1305FA7BA7CA@IA0PR11MB7307.namprd11.prod.outlook.com>
+Subject: RE: [PATCH 11/13] drm/i915/backlight: Use drm helper to initialize
+ edp backlight
+Thread-Topic: [PATCH 11/13] drm/i915/backlight: Use drm helper to initialize
+ edp backlight
+Thread-Index: AQHbrPQv9hZI19dojkutRVVg6KuFlLQL4szg
+Date: Fri, 20 Jun 2025 05:29:38 +0000
+Message-ID: <IA0PR11MB73071E1E8218FCF2EC03B2EDBA7CA@IA0PR11MB7307.namprd11.prod.outlook.com>
 References: <20250414041637.128039-1-suraj.kandpal@intel.com>
- <20250414041637.128039-11-suraj.kandpal@intel.com>
- <IA0PR11MB7307A074AEC006084B87C350BA7CA@IA0PR11MB7307.namprd11.prod.outlook.com>
- <DM3PPF208195D8D784D6B49529CD251A527E37CA@DM3PPF208195D8D.namprd11.prod.outlook.com>
-In-Reply-To: <DM3PPF208195D8D784D6B49529CD251A527E37CA@DM3PPF208195D8D.namprd11.prod.outlook.com>
+ <20250414041637.128039-12-suraj.kandpal@intel.com>
+In-Reply-To: <20250414041637.128039-12-suraj.kandpal@intel.com>
 Accept-Language: en-US
 Content-Language: en-US
 X-MS-Has-Attach: 
@@ -96,83 +96,83 @@ X-MS-TNEF-Correlator:
 authentication-results: dkim=none (message not signed)
  header.d=none;dmarc=none action=none header.from=intel.com;
 x-ms-publictraffictype: Email
-x-ms-traffictypediagnostic: IA0PR11MB7307:EE_|SA0PR11MB4718:EE_
-x-ms-office365-filtering-correlation-id: bb2d409b-7dc1-4add-ac6a-08ddafb6a77f
+x-ms-traffictypediagnostic: IA0PR11MB7307:EE_|MN2PR11MB4646:EE_
+x-ms-office365-filtering-correlation-id: 1b418cc6-f370-4a1f-8bf1-08ddafbb7394
 x-ms-exchange-senderadcheck: 1
 x-ms-exchange-antispam-relay: 0
 x-microsoft-antispam: BCL:0;
- ARA:13230040|376014|1800799024|366016|10070799003|38070700018; 
-x-microsoft-antispam-message-info: =?us-ascii?Q?n8cDXFHB7Z6NKv7ZiV7XYn0tH9qbF2Tesh7fAIYbaV8BhlVTYh/C33VIcsC8?=
- =?us-ascii?Q?/pd23z7MXp1VM2+PAEoLUXlXu9HRGdzhHCBwNS9I2VxZ+xzIcDhQas0VSYQ4?=
- =?us-ascii?Q?B0DLb7xnnYpfo+hBRfx9Gb+ljH7MNWH1MPb/laI/OZ+62SfHst2cHKeZVs6B?=
- =?us-ascii?Q?1zuNUvnh7aCHUh9V+KJSaEc/WinmIFeIY+ultXGi3aNf3J1DkvJP5uIo3ZaP?=
- =?us-ascii?Q?LQtMV7SyR9kFVd5WGOiPmsHnm5z8aYTL3ZdFiGecqNw6blFxA3KaOWjatwMG?=
- =?us-ascii?Q?eRzg2xWdQXiodCRX9+0RbyW7juhb1I/KM2ap2Cc1AMqsHjyRybLA1mkcFSiW?=
- =?us-ascii?Q?UUk0yhCb7U302BISO0bxSVPp1am9+SFq+LlDO3+7tZf0GIfGwWXRXCuw2O3v?=
- =?us-ascii?Q?4tzMtSUREVEfmrJXxAhevQRyJLBhNOakgYne8im9s7DkVEPU71jslpXu7Pwx?=
- =?us-ascii?Q?L7JOG7B9RjW7p+jgVupfgB2WcWggtJeHBXkzHoXu3ze8PFWyRzfRT3pL3+7u?=
- =?us-ascii?Q?XIpVrz44vMaNexl2FYQA21S6ftm5fM3hWldajYSGoZE2eSwMozozmqAi42Th?=
- =?us-ascii?Q?7pM3IujRe0Mid0ud1KKivTZvntZLIy6O+CAP8jMZwwAdojX3K4u+132/qL3t?=
- =?us-ascii?Q?+eUZWbSEmGCIgsX1MaR6IsqDw+TbMy/r7e5EP6AbW9m3Zvs9rW5LkjMAJb7V?=
- =?us-ascii?Q?kuKAz29Fac8kSgyBlUPZDs8RTX7mvrRVwAWAdaxJaHyxQ3TZgrmgBBLsQQM6?=
- =?us-ascii?Q?Gej/UhPCgeUIfYffxe6/Lf6JTw+xr/7Wr+SHJi6QYJ96yxNXbM9ZoH5TWy55?=
- =?us-ascii?Q?6YtWeccAm8rYyx8fgFUaIW+EX3wXoeQaPJnCi5pDYr/9H1O9XyeLgbno3Er7?=
- =?us-ascii?Q?HUtwHqKVbq2CkzCaYg4Zf5U9WVMpgQQw+IHvvaCtqvjtFBqvjAODUJ+62/Dy?=
- =?us-ascii?Q?6cmJ5Ujf8C2qpssVFSCZxzm1FPvHY9G9sZw55GegI2KRWcaaFxzbvW2V+2yl?=
- =?us-ascii?Q?6R/rpdNdX5eZYC9BeiOmCK7GXqeJ80NWK+hLhTXidpXvOC5TLzf0bzw2mvUJ?=
- =?us-ascii?Q?DakITUTTdNv0B6DrRsGYwOASUlP2t6KGDUEslCbyGmATXP5XxfGurjriVU8Y?=
- =?us-ascii?Q?ieq3yg91DJtKcUT8SCXMu5XuWsMXcLZ5E8eG81Wlqx/t47rsPIAlDCWMrz3v?=
- =?us-ascii?Q?a7HevUpDJixnssxG4PXiM8TvnkYMX03NsMz0zUF1GArjkrhWcmxutUk1Re5G?=
- =?us-ascii?Q?czQTQlgAFbMKT3BhH7mvYcyIXREQdBIA2IcHVOUNQj8jsVgs6sNHOKATJfRe?=
- =?us-ascii?Q?YM/OrSrsgMt/NxifxoMM5K+sUyB3W9aXWqhKed+KYqcjTb7x+t9z+4JxlCgo?=
- =?us-ascii?Q?cdaqdW6RrV3v9lHDYxBJICzVYXsFn9NYbZZl4uZuN078gNuwFzOQKgvN0ows?=
- =?us-ascii?Q?evxky8NXJtRvssTts3iYTORQ2B6SecfiyJaNtz8RxrQPkbTSoX6NFeEu42N+?=
- =?us-ascii?Q?WtunHVRahSW+hJM=3D?=
+ ARA:13230040|376014|1800799024|366016|10070799003|7053199007|38070700018; 
+x-microsoft-antispam-message-info: =?us-ascii?Q?MtIVWwpKy3JkIRRdzAkCevn/OVXqQ6sfcUJYgtoGtremquNN0D+/y7fLu8DX?=
+ =?us-ascii?Q?qAb6NrwoYObtC/p53WFKtLhI4bmZqunEIvDs/kziix8J0Dj8ivdNc0T1uGHc?=
+ =?us-ascii?Q?Y7mqQVtsCHmvnv1mcDF+DGqjfw2D4RB+Z4HZ6OQdPZSFCLGhxG+AE4c9dMzd?=
+ =?us-ascii?Q?FAw0ErLt1+pRQeYgWDs6+pPY9XQvnCOwkrDTHjDIO61GJk8OGJHCovyzvrC3?=
+ =?us-ascii?Q?lxUIU1KkS6ZP4Ndj+xMgSHY6MwYFhnuIabHm38J/e2wXD36XrDUL9COfpl/F?=
+ =?us-ascii?Q?/pDaQLfGsvNfvJFVC9aajpqYEANCfipPnYtzG+QB8sLC8ug/9iHYOXBfmEJL?=
+ =?us-ascii?Q?V4JTRUBidUtaUH6fCMLWrGqwCcMjUg12tnjHz3IEoq4ej4IoAlMoWLWo5Ynf?=
+ =?us-ascii?Q?oj1isWsv1J/a/5BjNr36CNJ/jHImzCBd2eYcnnKICFNiFyub6ABvzD7jTgRZ?=
+ =?us-ascii?Q?HbEX76oEYQ0YB1KUjOe0SC6366vEFuMPFwwF2iL3QVdlUWaHBnEbMqs5NTtT?=
+ =?us-ascii?Q?MC4BLO2UVEUIUEC8DNKFfbbhEbk4+rHuUwuEgbZRJVm8GX4o2igImeSjrB8/?=
+ =?us-ascii?Q?BLufTNP7moR0ABtsGBYwI2x3nU5CHOkApLD8O8AlLFdhn57SVYSCMjk/KEP6?=
+ =?us-ascii?Q?XezFYj0H9dp0RDM5wmkqOi5c+vkwmyMMKcV9mJOmpA2DgpfKmygDTnWzyqx/?=
+ =?us-ascii?Q?q5ACEdH/ijL5n2hs0rmyIyikT/w09t+SqNWKH4WR3maWvB8L2HxkRxtDArzG?=
+ =?us-ascii?Q?tKeAOCEHJ5ngOGMihr1d4QpJ8uQA8KSXSDxOLAeZ25qPuGqEZLbUqENdzinA?=
+ =?us-ascii?Q?ZXA1h7gjF05cZ8r2wy4YRDrLK3nxhcGikFxI5u+uXwb9w6NiBvTTAaLGT+pg?=
+ =?us-ascii?Q?uk1/PF1suOvpuinkULDGU5eTxEjvMuAjA5tetSIG/PG87ePqOG8gfd8sIPPg?=
+ =?us-ascii?Q?POH/7VF/g7FNcfs5npxTW5T6ErUwkmwNH/pLhtXqY/LEZ8ObsDDFPOWnIyEo?=
+ =?us-ascii?Q?ZYZMD+Yts2IIgjjaL4SdiI9N0KvGCIs9M1gqNBLahBH2m9VUbtTuL46jfAHx?=
+ =?us-ascii?Q?aTUVusi3Lu+2biMhoMPm2XWZPw15Gvkzc5x1j2PUPtKxhWCBD9LeHwaH0uxK?=
+ =?us-ascii?Q?gGl4prCZkHXAJCpBLTkI6DXc9gz5EDe+E0Ak/VC9wiXWdWO2s/Sfg9KnlhGb?=
+ =?us-ascii?Q?RHnxjBwX9bk1+oac7KqEKoP72Xy3cmpl2QkgZfTKgIaw/HLqYJrCdh7DAuVV?=
+ =?us-ascii?Q?nurudDFeKgYzTcxbbQYT9eoVH3AjyKyrxmuZ9KOSsJ0+Vf14vJ7guqhhsLJ6?=
+ =?us-ascii?Q?/6GkiPtaoSSp7K9JnS9PsU01LtfRPYecfg5QAEMvcG2OdhMygu5P1UVOsVAA?=
+ =?us-ascii?Q?cevVNUjaVS+z0KLBO1eq7r0R5p6zvyrsSw3zrMBlu+wKxt4JRj0xtU3ocUju?=
+ =?us-ascii?Q?L2VTqO8c19ghtT8zZvb9ETOPpjs5J94jl+Aa8z8hN/T5ExlbtBYLNpIjCPNG?=
+ =?us-ascii?Q?X+68lmcXo7/MW5o=3D?=
 x-forefront-antispam-report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
  IPV:NLI; SFV:NSPM; H:IA0PR11MB7307.namprd11.prod.outlook.com; PTR:; CAT:NONE;
- SFS:(13230040)(376014)(1800799024)(366016)(10070799003)(38070700018); DIR:OUT;
- SFP:1101; 
+ SFS:(13230040)(376014)(1800799024)(366016)(10070799003)(7053199007)(38070700018);
+ DIR:OUT; SFP:1101; 
 x-ms-exchange-antispam-messagedata-chunkcount: 1
-x-ms-exchange-antispam-messagedata-0: =?us-ascii?Q?6DjrkVwNMwHxp5auweWWnPtyH/mlPPMDRIq9/2P1IiAtLTfpNS2X/zpwoPLa?=
- =?us-ascii?Q?j9pza+my6L1DvJOVeQsQk2MFoSqzTwn2mzYHkeWEsMB7hUeMPw86xk96r72q?=
- =?us-ascii?Q?MwVWa/poDVfqM/QwpUNRBPv+66TtMvA9OtmV9+MZaDRr6xVQSAkZgMI1eQzz?=
- =?us-ascii?Q?sss5YeHF47Kcb4pBpOYuR5PgMxl4mV9zP0OBcOkcUoEHYaksp18pF20nYTh4?=
- =?us-ascii?Q?QRo/nmJ6hzaCvyWCxWFczDxthpLaPa1ohwe42ZkR8d4hju7b8oFAjLUx5m4l?=
- =?us-ascii?Q?H3BNPndA2WgAAQrR3/r8xSoJktqMfc/gHE5U3T6OpuVHpQC4c12GZB7XmMDv?=
- =?us-ascii?Q?QDefxqm7p9cz0pb/xukPpZHMTPsy/B2kejgJ4tJGD9ze5NwQn0LOgTCTs4UE?=
- =?us-ascii?Q?VrDb6gJQMZTCaArREKJX5lhJByarsn2B40NcXS7eAqbtsgVXPt9Fy6JNxgWd?=
- =?us-ascii?Q?A48QxaKidGO0SjLQLno5gKrE8QTDPG5F8J8RWapAaRYV61jzGICbfF4JkdZj?=
- =?us-ascii?Q?qNv6OmSFjZ4rNWsNjpyfEJqHsBC2oTu8OK3tWRwrMt11qIR4bIHPWNQM06Yd?=
- =?us-ascii?Q?tobpe3zcJdUF5ARLEsgaCBcWddkaxDBCL6/omHBxjsiHqFilrQUoE0BPeQ3j?=
- =?us-ascii?Q?6bkmaxCmk68AEWLg0rgbEDYC+Tyyso6r29cGClI4XAmNM6k7E+7zwkYVKFuD?=
- =?us-ascii?Q?48MklrM3JAvx7/Mk+UP1Is1VxYNa2BI0hEdGRt4j6yMabkXZv1f4+buKcXnq?=
- =?us-ascii?Q?CxpcU+GjpXKCkWRfQ9IwictVkB8JNOuWJhNjcLw1b6aLS+jJ3/z65z0rm3b2?=
- =?us-ascii?Q?xCBp8sG63ZAl9G2u0z1N2VJalmsf1Jsq+mA0YWrPI1HtcGC9xYRSxXeCVvOc?=
- =?us-ascii?Q?WNlVRTh+R/+xPx0M6XV7bVZ24xuu2RDBsDYJ4PFVWT9YDfzmgfOeJeKLfiUE?=
- =?us-ascii?Q?wktc0hI3mbG9RX6sgRAS6oBl3xfbNvvbrAOZza43nJlHKdH+komfmn6nixRR?=
- =?us-ascii?Q?tgoDo71Am0BXHuX8koZy1giZrUzHUVcAaKuDGe6KYwEZ9KqMBmE/YM1GAYkq?=
- =?us-ascii?Q?j+cx8tF6rwDI0TwSFM/2pK3h8wQ99QEjf2pV/GtNR6+X51dmFQV9yuOAEDXW?=
- =?us-ascii?Q?0xPrfLylWELVGRCA7kl0ywWBY3AKI62GXfbvs21uLUdmxMWoGh3kMMZy7HUc?=
- =?us-ascii?Q?TKzXk1iA/Yz2Ari0TT1hhDt0Mkma4etA/YXIVLiSpxjjrxt6CnXM3shxw4rC?=
- =?us-ascii?Q?QmAOOFf2G3J40mJU65kN2I8anm6E3+XvHSYjP3vOVVVKLSPGZPqPvKCdqxkY?=
- =?us-ascii?Q?OEPAV/GqPxohiLQ0BIl8fBa5fjSvjNWXG4dD09ITyu0lXyyfCdQ64hoRRCxe?=
- =?us-ascii?Q?vuLLRH+RUfiXy90DhO+i3c7bS63/OmmicqJUFLL4GijdRTxwIfmUI8kBVt0t?=
- =?us-ascii?Q?P2FwQhEqWSRMs230qGT+bVhR6JZTomXATJ5TbzDObjvLT9X/M82oM6YZHJUV?=
- =?us-ascii?Q?fBznCMhFnT2I/zkaEQUBU85tc7iubW4wJiQv7Bn/a/I9M/Brx+Z8bLzvVAJn?=
- =?us-ascii?Q?5sx8HopDI/5i4VuTmNZfNa2gt+hoNlzMSOLtCR81UttJ17BR/0GhGjIJCwpa?=
- =?us-ascii?Q?TgvS3ecUkO/UVc8S9mSESt4FyIe3zMxstsDkq+sJ/qvr?=
+x-ms-exchange-antispam-messagedata-0: =?us-ascii?Q?++/YlAUgeegwEd3bf/ZbA8BFDW++VjlkCFiu2dwcO9BXpTk81yAarUUOvozX?=
+ =?us-ascii?Q?rcF1dttDYnX90n9NviphgnbyHQavGpzsvhC4vMKxZpiJ/WRd++8FWzbeFOTL?=
+ =?us-ascii?Q?vP6uJgPZpdqcRkkHFmL72s70dp+YYj5RB2DpJzYC2Rj2CLb/t6qk0k/lCufz?=
+ =?us-ascii?Q?Rk0FE63JxTZj3VHIAVmrwWbdOBPnrDx+G0Qg0TJ2o5azr+VjQOUpvXrVOP2f?=
+ =?us-ascii?Q?wyKlFXETmQzgyt8IUEd0anNyvF678cXWaf9OfQu8FdaMQo9C0MkTzgqBc6Ua?=
+ =?us-ascii?Q?atbeF00vs7ObJvfmWBHDNsQscVOKQQnVIdV1jisqRAHetUcvzHoUi6DwDmaC?=
+ =?us-ascii?Q?z41EkvNgWCRgWc3bYyjx13u1GG91EZrzpsGEIGWLK87kE5JvdX8o3EXiddxm?=
+ =?us-ascii?Q?b857QbVovjbDzm2fL0QHv834v1mzUFnLh+BAc6ociuqEPOZSMrW3rv+eoVt4?=
+ =?us-ascii?Q?vAOtOgA9l2FzqzRB1lJv5q96WkxgmyJkvjfFKJXeAhXLrmv4OAry9yQfuPu3?=
+ =?us-ascii?Q?aQb3McZVe9MZwA6hE6Hpj87kS3HzIFyXziY3/QkPeduVI9mN4XT+0FZo1qGV?=
+ =?us-ascii?Q?L2bZkY5dsfHSeLVE2ubLwXVsOxgNEqOcRN7Bmc+mKbMbcI4leqLZxTSnx/OY?=
+ =?us-ascii?Q?sMnnwEzvW03Fn2IFSh4TppeD/d1zOwQf22Rmab7zBtuhqHFTL7Rukv+Uvfqt?=
+ =?us-ascii?Q?d8s6820ZMtJagg3Lk+FkHcivmpudxpeiydym5Zt3BqSODuqYWCyfnfO7CvX0?=
+ =?us-ascii?Q?RQjp7tdecVT7wxb0dBCxxMTxD8R4raPXQT6XZx6NZnvPExUjDmXcpVOdDt6v?=
+ =?us-ascii?Q?Z+rBzkzCJ4tkwerAntd6On9REec+mpfn1/SR8bIWOr/duKHFEJIYEq2J7jo4?=
+ =?us-ascii?Q?zb59NOIm5HMTnfhvoYAVSPUoxwzxAYGsjeEnNnsVceLWGXgQuvwQpxQhVWBz?=
+ =?us-ascii?Q?QvC4cUafGlQJjcJZmgOX5RFnX63095s6xzs1pRVCEalibv+R+fwqCN9zRIFi?=
+ =?us-ascii?Q?mpq7SELUH9s2QYt1e/yeLaxfG5cMZFJ9SK6owZz9kpJcH6buwcT/XTN+EbKV?=
+ =?us-ascii?Q?H49nRSWEhddNWrI+4xnoCGk6QtC7QG539J/VVVQlpPPp+QsZWxq9e9MoYvlx?=
+ =?us-ascii?Q?GfeOtl00BnNR3dLI7hgx2RJWeFTFO3qntZeLMpgSuqdKORcSlN/fk+dCqHxH?=
+ =?us-ascii?Q?7qtQ+jJo5CoKOvcygAP0PcWCPU07KgMGO3F0MW5FuBVUCsRiaqe5au2TLa24?=
+ =?us-ascii?Q?IAqoGyl5NChCmjbC01KFBillwAu/XiUCm4MifEnfoIt+cHQBNoJma9nk3geM?=
+ =?us-ascii?Q?YHDFsJ+gFUrFBb7GWPw/zeXKHRhHixB0KmNUd58IX3Q645Z946JVTqdnzz4m?=
+ =?us-ascii?Q?rHuzmGUvvbKJtO/lkuISHEiV2SSTqsXZdhBpo/NLXHlKwJMqtlEuBHVgFLw6?=
+ =?us-ascii?Q?oMY2YlEwuFt/repvWMHsbBfJCoZslOiQFOtnSA8eh/FbAPVNQII1K2PV9k8+?=
+ =?us-ascii?Q?c/4ksnmgcDs3068LUDWJafuUN6aY4OfjNvtv4mjpgb8P6G7Ed1BLa6EHlW/J?=
+ =?us-ascii?Q?2Vsk0x4yIf9Xk6zLs4sd4FQQ02CA5JTzss7dQNTnLstpE9Ml9h+0MX+Pgfx0?=
+ =?us-ascii?Q?RScWWb8b/1QB8XzRf+SCY5mx/xkWpEgH93ucHfzl8Fsp?=
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: quoted-printable
 MIME-Version: 1.0
 X-MS-Exchange-CrossTenant-AuthAs: Internal
 X-MS-Exchange-CrossTenant-AuthSource: IA0PR11MB7307.namprd11.prod.outlook.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: bb2d409b-7dc1-4add-ac6a-08ddafb6a77f
-X-MS-Exchange-CrossTenant-originalarrivaltime: 20 Jun 2025 04:55:18.5476 (UTC)
+X-MS-Exchange-CrossTenant-Network-Message-Id: 1b418cc6-f370-4a1f-8bf1-08ddafbb7394
+X-MS-Exchange-CrossTenant-originalarrivaltime: 20 Jun 2025 05:29:38.8710 (UTC)
 X-MS-Exchange-CrossTenant-fromentityheader: Hosted
 X-MS-Exchange-CrossTenant-id: 46c98d88-e344-4ed4-8496-4ed7712e255d
 X-MS-Exchange-CrossTenant-mailboxtype: HOSTED
-X-MS-Exchange-CrossTenant-userprincipalname: gkY8BUbVY6KZYwWe3rS1RpB5XSIyS85KH9ErdHPavBoC+SPPCzab/lbwMkfGnp8sWuXeRTTiiyrVKRPCRqWsUA==
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: SA0PR11MB4718
+X-MS-Exchange-CrossTenant-userprincipalname: t8fD2cQuLOA0YMM5Ft/Hg9jv3N8qOM0XYXsd0totbGrFSsORxsxSZd/9nO69cjnS01uQwyRfcdD8l2HaSpifQQ==
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: MN2PR11MB4646
 X-OriginatorOrg: intel.com
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
@@ -188,36 +188,205 @@ List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-> > > Add flag to enable brightness control via luminance value when
-> > > enabling edp backlight.
-> > >
-> > > Signed-off-by: Suraj Kandpal <suraj.kandpal@intel.com>
-> > > ---
-> > >  drivers/gpu/drm/display/drm_dp_helper.c | 3 +++
-> > >  1 file changed, 3 insertions(+)
-> > >
-> > > diff --git a/drivers/gpu/drm/display/drm_dp_helper.c
-> > > b/drivers/gpu/drm/display/drm_dp_helper.c
-> > > index 0421b2ed9bd4..4e2caba8311a 100644
-> > > --- a/drivers/gpu/drm/display/drm_dp_helper.c
-> > > +++ b/drivers/gpu/drm/display/drm_dp_helper.c
-> > > @@ -4030,6 +4030,9 @@ int drm_edp_backlight_enable(struct
-> > drm_dp_aux
-> > > *aux, const struct drm_edp_backli
-> > >  	else
-> > >  		dpcd_buf =3D DP_EDP_BACKLIGHT_CONTROL_MODE_PWM;
-> > >
-> > > +	if (bl->luminance_set)
-> > > +		dpcd_buf |=3D
-> > DP_EDP_PANEL_LUMINANCE_CONTROL_ENABLE;
-> > Can the backlight control by luminance be used along with PWM or AUX ct=
-l?
-> >
+> -----Original Message-----
+> From: Kandpal, Suraj <suraj.kandpal@intel.com>
+> Sent: Monday, April 14, 2025 9:47 AM
+> To: nouveau@lists.freedesktop.org; dri-devel@lists.freedesktop.org; intel=
+-
+> xe@lists.freedesktop.org; intel-gfx@lists.freedesktop.org
+> Cc: Nautiyal, Ankit K <ankit.k.nautiyal@intel.com>; Murthy, Arun R
+> <arun.r.murthy@intel.com>; Kandpal, Suraj <suraj.kandpal@intel.com>
+> Subject: [PATCH 11/13] drm/i915/backlight: Use drm helper to initialize e=
+dp
+> backlight
 >=20
-> It does work.
+> Now that drm_edp_backlight init has been to be able to setup brightness
+Can you reframe this?
+
+> manipulation via luminance we can just use that.
 >=20
-Reviewed-by: Arun R Murthy <arun.r.murthy@intel.com>
+> Signed-off-by: Suraj Kandpal <suraj.kandpal@intel.com>
+> ---
+>  .../drm/i915/display/intel_dp_aux_backlight.c | 100 +++++++++---------
+>  1 file changed, 49 insertions(+), 51 deletions(-)
+>=20
+> diff --git a/drivers/gpu/drm/i915/display/intel_dp_aux_backlight.c
+> b/drivers/gpu/drm/i915/display/intel_dp_aux_backlight.c
+> index be740fb72ebc..2eff9b545390 100644
+> --- a/drivers/gpu/drm/i915/display/intel_dp_aux_backlight.c
+> +++ b/drivers/gpu/drm/i915/display/intel_dp_aux_backlight.c
+> @@ -585,9 +585,36 @@ static int intel_dp_aux_vesa_setup_backlight(struct
+> intel_connector *connector,
+>  	u8 current_mode;
+>  	int ret;
+>=20
+> -	if (panel->backlight.edp.vesa.luminance_control_support) {
+> +	ret =3D drm_edp_backlight_init(&intel_dp->aux, &panel-
+> >backlight.edp.vesa.info,
+> +				     luminance_range, panel-
+> >vbt.backlight.pwm_freq_hz,
+> +				     intel_dp->edp_dpcd, &current_level,
+> &current_mode, true);
+> +	if (ret < 0)
+> +		return ret;
+> +
+> +	drm_dbg_kms(display->drm,
+> +		    "[CONNECTOR:%d:%s] AUX VESA backlight enable is
+> controlled through %s\n",
+> +		    connector->base.base.id, connector->base.name,
+> +		    dpcd_vs_pwm_str(panel-
+> >backlight.edp.vesa.info.aux_enable));
+> +	drm_dbg_kms(display->drm,
+> +		    "[CONNECTOR:%d:%s] AUX VESA backlight level is controlled
+> through %s\n",
+> +		    connector->base.base.id, connector->base.name,
+> +		    dpcd_vs_pwm_str(panel->backlight.edp.vesa.info.aux_set));
+> +
+Is two separate debug prints required to convey that backlight is enabled a=
+nd the level is set with he same parameters?
+
+> +	if (!panel->backlight.edp.vesa.info.luminance_set ||
+> +	    !panel->backlight.edp.vesa.info.aux_set ||
+> +	    !panel->backlight.edp.vesa.info.aux_enable) {
+> +		ret =3D panel->backlight.pwm_funcs->setup(connector, pipe);
+If pwm is used then none of the above conditions will be true so instead ca=
+n check for the assignment of the function pointer if (pwm_funcs->setup)
+In backlight struct enabled and pwm_enabled doesn't make much sense, maybe =
+one element to convey the mode make it easier. This can be taken out of thi=
+s series.
+
+> +		if (ret < 0) {
+> +			drm_err(display->drm,
+> +				"[CONNECTOR:%d:%s] Failed to setup PWM
+> backlight controls for eDP backlight: %d\n",
+> +				connector->base.base.id, connector-
+> >base.name, ret);
+> +			return ret;
+> +		}
+> +	}
+> +
+> +	if (panel->backlight.edp.vesa.info.luminance_set) {
+>  		if (luminance_range->max_luminance) {
+> -			panel->backlight.max =3D luminance_range-
+> >max_luminance;
+> +			panel->backlight.max =3D panel-
+> >backlight.edp.vesa.info.max;
+>  			panel->backlight.min =3D luminance_range-
+> >min_luminance;
+>  		} else {
+>  			panel->backlight.max =3D 512;
+> @@ -596,57 +623,28 @@ static int intel_dp_aux_vesa_setup_backlight(struct
+> intel_connector *connector,
+>  		panel->backlight.level =3D
+> intel_dp_aux_vesa_get_backlight(connector, 0);
+>  		panel->backlight.enabled =3D panel->backlight.level !=3D 0;
+>  		drm_dbg_kms(display->drm,
+> -			    "[CONNECTOR:%d:%s] AUX VESA Nits backlight level
+> is controlled through DPCD\n",
+> -			    connector->base.base.id, connector->base.name);
+> -	} else {
+> -		ret =3D drm_edp_backlight_init(&intel_dp->aux, &panel-
+> >backlight.edp.vesa.info,
+> -					     luminance_range, panel-
+> >vbt.backlight.pwm_freq_hz,
+> -					     intel_dp->edp_dpcd,
+> &current_level, &current_mode,
+> -					     false);
+> -		if (ret < 0)
+> -			return ret;
+> -
+> -		drm_dbg_kms(display->drm,
+> -			    "[CONNECTOR:%d:%s] AUX VESA backlight enable is
+> controlled through %s\n",
+> -			    connector->base.base.id, connector->base.name,
+> -			    dpcd_vs_pwm_str(panel-
+> >backlight.edp.vesa.info.aux_enable));
+> -		drm_dbg_kms(display->drm,
+> -			    "[CONNECTOR:%d:%s] AUX VESA backlight level is
+> controlled through %s\n",
+> -			    connector->base.base.id, connector->base.name,
+> -			    dpcd_vs_pwm_str(panel-
+> >backlight.edp.vesa.info.aux_set));
+> -
+> -		if (!panel->backlight.edp.vesa.info.aux_set ||
+> -		    !panel->backlight.edp.vesa.info.aux_enable) {
+> -			ret =3D panel->backlight.pwm_funcs->setup(connector,
+> pipe);
+> -			if (ret < 0) {
+> -				drm_err(display->drm,
+> -					"[CONNECTOR:%d:%s] Failed to setup
+> PWM backlight controls for eDP backlight: %d\n",
+> -					connector->base.base.id, connector-
+> >base.name, ret);
+> -				return ret;
+> -			}
+> +		    "[CONNECTOR:%d:%s] AUX VESA Nits backlight level is
+> controlled through DPCD\n",
+> +		    connector->base.base.id, connector->base.name);
+> +	} else if (panel->backlight.edp.vesa.info.aux_set) {
+> +		panel->backlight.max =3D panel->backlight.edp.vesa.info.max;
+> +		panel->backlight.min =3D 0;
+> +		if (current_mode =3D=3D
+> DP_EDP_BACKLIGHT_CONTROL_MODE_DPCD) {
+> +			panel->backlight.level =3D current_level;
+> +			panel->backlight.enabled =3D panel->backlight.level !=3D 0;
+> +		} else {
+> +			panel->backlight.level =3D panel->backlight.max;
+> +			panel->backlight.enabled =3D false;
+>  		}
+> -
+> -		if (panel->backlight.edp.vesa.info.aux_set) {
+> -			panel->backlight.max =3D panel-
+> >backlight.edp.vesa.info.max;
+> -			panel->backlight.min =3D 0;
+> -			if (current_mode =3D=3D
+> DP_EDP_BACKLIGHT_CONTROL_MODE_DPCD) {
+> -				panel->backlight.level =3D current_level;
+> -				panel->backlight.enabled =3D panel-
+> >backlight.level !=3D 0;
+> -			} else {
+> -				panel->backlight.level =3D panel->backlight.max;
+> -				panel->backlight.enabled =3D false;
+> -			}
+> +	} else {
+> +		panel->backlight.max =3D panel->backlight.pwm_level_max;
+> +		panel->backlight.min =3D panel->backlight.pwm_level_min;
+> +		if (current_mode =3D=3D
+> DP_EDP_BACKLIGHT_CONTROL_MODE_PWM) {
+> +			panel->backlight.level =3D
+> +				panel->backlight.pwm_funcs->get(connector,
+> pipe);
+> +			panel->backlight.enabled =3D panel-
+> >backlight.pwm_enabled;
+>  		} else {
+> -			panel->backlight.max =3D panel-
+> >backlight.pwm_level_max;
+> -			panel->backlight.min =3D panel-
+> >backlight.pwm_level_min;
+> -			if (current_mode =3D=3D
+> DP_EDP_BACKLIGHT_CONTROL_MODE_PWM) {
+> -				panel->backlight.level =3D
+> -					panel->backlight.pwm_funcs-
+> >get(connector, pipe);
+> -				panel->backlight.enabled =3D panel-
+> >backlight.pwm_enabled;
+> -			} else {
+> -				panel->backlight.level =3D panel->backlight.max;
+> -				panel->backlight.enabled =3D false;
+> -			}
+> +			panel->backlight.level =3D panel->backlight.max;
+> +			panel->backlight.enabled =3D false;
+Change is simple, adding a new condition for luminance and moving edp_backl=
+ight_init out of the if condition so that it will be initialized for all th=
+e modes and then initializing backlight level and max based on the mode. Bu=
+t the change looks complex.
 
 Thanks and Regards,
 Arun R Murthy
 -------------------
+>  		}
+>  	}
+>=20
+> --
+> 2.34.1
+
