@@ -2,78 +2,107 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id 8FE67CBADF4
-	for <lists+nouveau@lfdr.de>; Sat, 13 Dec 2025 13:45:37 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 0CA1CCBA9C2
+	for <lists+nouveau@lfdr.de>; Sat, 13 Dec 2025 13:41:34 +0100 (CET)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 5BABC10EBA4;
-	Sat, 13 Dec 2025 12:41:37 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 6ECE110E660;
+	Sat, 13 Dec 2025 12:40:57 +0000 (UTC)
 Authentication-Results: gabe.freedesktop.org;
-	dkim=permerror (0-bit key) header.d=gmail.com header.i=@gmail.com header.b="Us7pqBjI";
+	dkim=permerror (0-bit key) header.d=gmail.com header.i=@gmail.com header.b="RGqpv40Y";
 	dkim-atps=neutral
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from mail-pj1-f54.google.com (mail-pj1-f54.google.com
- [209.85.216.54])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 60A1510E23C
- for <nouveau@lists.freedesktop.org>; Fri, 20 Jun 2025 17:06:27 +0000 (UTC)
-Received: by mail-pj1-f54.google.com with SMTP id
- 98e67ed59e1d1-313290ea247so360893a91.3
- for <nouveau@lists.freedesktop.org>; Fri, 20 Jun 2025 10:06:27 -0700 (PDT)
+Received: from mail-pj1-f53.google.com (mail-pj1-f53.google.com
+ [209.85.216.53])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 0131110E0E0;
+ Sun, 22 Jun 2025 22:50:45 +0000 (UTC)
+Received: by mail-pj1-f53.google.com with SMTP id
+ 98e67ed59e1d1-313756c602fso357274a91.3; 
+ Sun, 22 Jun 2025 15:50:45 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1750439185; x=1751043985; darn=lists.freedesktop.org;
+ d=gmail.com; s=20230601; t=1750632645; x=1751237445; darn=lists.freedesktop.org;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:from:to:cc:subject:date
  :message-id:reply-to;
- bh=nR8JCkDCS0gb3QmY+xkreXhapsXDdGblPAP/bOLVoRc=;
- b=Us7pqBjIWOL6zHG+gaAbbrD/D/M9ke9V0QJf8c+iaBmvTvj/XpFet6jOh7qmicTqvs
- rWOXsd3r6Do8S8RyMU6mZ9DX+YQgyD94jrG+BYD8vuKuXtaBWlE4luCs9JMhSdorGqDZ
- DgCN4OQqK2XttU+6zv80QL2boIYWv3xQa6z4QbjAJIThNsHkrJ2wVypZP7wiPrlgh71P
- TWh35pdAoUIlDKiDAH4pWcYb+omM8UWjADpuBZCBfMKUN2M3HNBNwpbVuTWgJHnbnv/s
- RWgKKg+DpfWgiaFeZvNsx5TPgEdZs5EuFpvPBrTYg4cfrs3iIV2uWUdhM+0Kf11NdSdj
- pUjw==
+ bh=2XyaOPS+SVDJS2nuVakOU+h3pEZcqv0KxHASicqOHR0=;
+ b=RGqpv40YSldTbQXr2/VYzPUzgV1Wkt8LRCBAjgByrxQgxPSqsMHG8fceWxsK4OxzkJ
+ y5jv6GpglVqTasAGuvnvqv8ne0bSnVixtjgIJcRSdPkTEv9+PkQFYN365bTyqWyUo/Go
+ dIcxUm9QKVteP/QAKu9OvsuZI8DLWgrZcStkM0/2e54pcGSnRIhGpCnEoOGAAvaR7Mrq
+ YC7RFg/gDvSyAbx2C85jciIfnkPL+90i+Nuok7o1Of4b45pxi8za7G+822uFbYnr5q1t
+ t369geC7sAIX/WTGLzK61VKl95U5JF1Qx5JlNvPAidp3lOyPwfMp3YmtOKyqIN5WKx0M
+ zPow==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1750439185; x=1751043985;
+ d=1e100.net; s=20230601; t=1750632645; x=1751237445;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=nR8JCkDCS0gb3QmY+xkreXhapsXDdGblPAP/bOLVoRc=;
- b=Erv8mKXSfP9Z+IWO65d5UfC8EJdp+5QC89OansHLBKeYVLo4Vs+nH4XYsGjpujYq6b
- 7IwVb+Xgg4evqQoCU2mx9eAj6MPPJWHbVH4SZ6evPdnEN/Y2NTNCtp42uDbqhrSg94fI
- FRxhxzY9JD0MMovydMF4BEPUy5qfBPBixAa+R0laNL3xuDLSvi85+m9wgQF6J6rt7qV0
- kFzqftsjtNrslqS/j43XIHvK/QvMKsuZmkx2q7tD8P41kmgijdZh1uNZDb9v+8WteDdf
- ke7GJGhYE1QLL98D5n4wQbWhMtrGowAiNe4xW/USsKTLBcbDMdEpF3Od7khTv7KRb0cT
- S3dA==
+ bh=2XyaOPS+SVDJS2nuVakOU+h3pEZcqv0KxHASicqOHR0=;
+ b=G8ahcmQd99MihZw6xm91fME+W4LqeI5WGOa+ij2HFUWyFse3G7I/XmRtKoQHwCC92G
+ jCCIn5m9krbjW8BNRgdb5z9HhdUgYLZrPeOWT0OycxuEFiXCjj3wNQUsqAfoAA34j1iZ
+ PKH5K2qZLUNb4BFL/prr5+Ks/3bfWD79svF7IFgPgO1hWJQQpwzEY81hn5GIHlfVX+Bk
+ Oe1XQaCme30A0hfkOfFqZMUgyz/5mPGm0cuJzocJn0yYeBngbjeMOoy+8mgaUOgOZ0At
+ gp7CcsTTgoLA7DNVBzyM1AD04+OGQGTChl2Ua/Pfvyj538Qc6cTXhCO8LMMm7njOk16T
+ MoVA==
 X-Forwarded-Encrypted: i=1;
- AJvYcCWIL3NR0TEz8w93qVvP2LlOo03TDODIDTWDOXbuhjBwIzlzH+JyBk3e6clopDotc0bfNp2oT5jP@lists.freedesktop.org
-X-Gm-Message-State: AOJu0YwAOJcli1SSGhe6u9jQtA00Y/MctBL0ORMNerg0qqLb6lNhjT/9
- Pzj82rIHkHa4P8KDtTdOPSJS1f6Z4fvdYGDRV3t+AoJILvFm/taf56+cd8jDrwhw8/b9K1Wavk4
- MdxKfM1sRKpxzP5XZXsSDn5do1HfjzrU=
-X-Gm-Gg: ASbGnctEX+dHF5/qMNb9P5tkaxkLICC+ShUz88bnSEz+UnwMX9i0MCTv0NFmY6DWVC6
- 8TTYP+KUwW+xX1ACvPMIZPOTvXAz4YMj42VN2I8OPbwFZQgLsBCzHsVwxXIUk/IkB5HbycmZdTh
- RdqI9btDg9/2qb0ic4mGyJRKhZLkhqClIJzlb+WWk0CpixgJ72wOL3Yw==
-X-Google-Smtp-Source: AGHT+IFUdRD9ff/2AXzkajZ014jgzqnnrOctCnqUh751BOw8Une3qB2C2bF1iaF/ptF/GHz1mrxH1fQWMGB98YE9euA=
-X-Received: by 2002:a17:90b:51c3:b0:311:a314:c2dd with SMTP id
- 98e67ed59e1d1-3159d8c6cedmr2366780a91.4.1750439185108; Fri, 20 Jun 2025
- 10:06:25 -0700 (PDT)
+ AJvYcCWl/c2tiYmLKjFxCw7XbPJJ09MFGPYk5+Udy7vHujAXHgGuTlr/LlqWlhXDUAjxPqhClTKrLzU82iU=@lists.freedesktop.org,
+ AJvYcCXCT+PkxerXa+ZIiCd6rqSwf4qF547UwRNr3d29Zitx3+MXhDEx7zz4ykYeZVWWXQRFnRLjBWhgeg==@lists.freedesktop.org
+X-Gm-Message-State: AOJu0YxoiucLPgNfmHjNJ0eAexrd7+jTw29JyCkEMhlpwaByMlWA9rer
+ YcP9EkI449Vrh0va2VXd3/DNCHKNYcj/t2ZqOjIiu1oFZR+ddsVmxLHPoAb7OnUar0LLmtm9VTy
+ d7TsLBCux+re+XEDaUsDZ02TSoU6WL7k=
+X-Gm-Gg: ASbGnctNQASii5WwtdA3qIgnORSCZL+ua/MqYnv+LrERNZ3sWeoFQmWCX1nbw/wc0RR
+ yku5wp6bHiUuS+65/4V1t7HtnRAZxNyB875p/Q7bYoiCRVOA7bB5LvKxkCH74MLgT+KqL8pOWdI
+ Od/AyZC/IJvfrJX/4vrhhnYXwpTV9uTpgtFAV5DLwH6dinQvOQxDxNfg==
+X-Google-Smtp-Source: AGHT+IHkK5VxbDTzDH+78CGWNybiQ0lflBEpMpSVRH6uwkYDUKXtQuR/kJbEABJn7CeEMEkyXPjXtmArCfcPAjxsRNU=
+X-Received: by 2002:a17:90b:3a43:b0:311:fde5:c4ae with SMTP id
+ 98e67ed59e1d1-3159d8e2be9mr5684021a91.6.1750632645432; Sun, 22 Jun 2025
+ 15:50:45 -0700 (PDT)
 MIME-Version: 1.0
-References: <20250620-num-v1-0-7ec3d3fb06c9@nvidia.com>
- <20250620-num-v1-1-7ec3d3fb06c9@nvidia.com>
- <CANiq72=BSnom-nQgzLvv-cqwSknK1uJ=CXGP51r0WRj1Y553Ew@mail.gmail.com>
- <DAREXAUV51B6.7X7TPOJKK249@nvidia.com>
-In-Reply-To: <DAREXAUV51B6.7X7TPOJKK249@nvidia.com>
+References: <20250615-ptr-as-ptr-v12-0-f43b024581e8@gmail.com>
+In-Reply-To: <20250615-ptr-as-ptr-v12-0-f43b024581e8@gmail.com>
 From: Miguel Ojeda <miguel.ojeda.sandonis@gmail.com>
-Date: Fri, 20 Jun 2025 19:06:12 +0200
-X-Gm-Features: Ac12FXy9impNFri4YJFlzwQ3T6GDHruzREl_6st0yjIG4jjsANoToHYXbGIIsEw
-Message-ID: <CANiq72=kfhLwpXL0s2HWbW79QEZNTvJ1UKBSzp6MHyoVEUAC1A@mail.gmail.com>
-Subject: Re: [PATCH 1/3] rust: add `num` module with `PowerOfTwo` type
-To: Alexandre Courbot <acourbot@nvidia.com>
-Cc: Miguel Ojeda <ojeda@kernel.org>, Alex Gaynor <alex.gaynor@gmail.com>, 
+Date: Mon, 23 Jun 2025 00:50:31 +0200
+X-Gm-Features: Ac12FXzAp4qUKl_aNT741tylL3I37tb5s--GlJccgcY1EV1oeXS1Teju6Ztan0w
+Message-ID: <CANiq72=xmyHuBYEGbCMi=Um_NvNbf5TfMmJB5YPpVp41FcPdJA@mail.gmail.com>
+Subject: Re: [PATCH v12 0/6] rust: reduce `as` casts, enable related lints
+To: Tamir Duberstein <tamird@gmail.com>
+Cc: Masahiro Yamada <masahiroy@kernel.org>,
+ Nathan Chancellor <nathan@kernel.org>, 
+ Miguel Ojeda <ojeda@kernel.org>, Alex Gaynor <alex.gaynor@gmail.com>, 
  Boqun Feng <boqun.feng@gmail.com>, Gary Guo <gary@garyguo.net>, 
  =?UTF-8?Q?Bj=C3=B6rn_Roy_Baron?= <bjorn3_gh@protonmail.com>, 
- Benno Lossin <lossin@kernel.org>, Andreas Hindborg <a.hindborg@kernel.org>, 
- Alice Ryhl <aliceryhl@google.com>, Trevor Gross <tmgross@umich.edu>, 
- Danilo Krummrich <dakr@kernel.org>, linux-kernel@vger.kernel.org, 
- rust-for-linux@vger.kernel.org, nouveau@lists.freedesktop.org
+ Andreas Hindborg <a.hindborg@kernel.org>, Alice Ryhl <aliceryhl@google.com>, 
+ Trevor Gross <tmgross@umich.edu>, Danilo Krummrich <dakr@kernel.org>, 
+ Greg Kroah-Hartman <gregkh@linuxfoundation.org>,
+ "Rafael J. Wysocki" <rafael@kernel.org>, 
+ Brendan Higgins <brendan.higgins@linux.dev>, David Gow <davidgow@google.com>, 
+ Rae Moar <rmoar@google.com>, Bjorn Helgaas <bhelgaas@google.com>, 
+ Luis Chamberlain <mcgrof@kernel.org>, Russ Weight <russ.weight@linux.dev>,
+ Rob Herring <robh@kernel.org>, Saravana Kannan <saravanak@google.com>,
+ Abdiel Janulgue <abdiel.janulgue@gmail.com>, 
+ Daniel Almeida <daniel.almeida@collabora.com>,
+ Robin Murphy <robin.murphy@arm.com>, 
+ Maarten Lankhorst <maarten.lankhorst@linux.intel.com>,
+ Maxime Ripard <mripard@kernel.org>, 
+ Thomas Zimmermann <tzimmermann@suse.de>, David Airlie <airlied@gmail.com>,
+ Simona Vetter <simona@ffwll.ch>, 
+ FUJITA Tomonori <fujita.tomonori@gmail.com>,
+ Nicolas Schier <nicolas.schier@linux.dev>, 
+ Frederic Weisbecker <frederic@kernel.org>, Lyude Paul <lyude@redhat.com>, 
+ Thomas Gleixner <tglx@linutronix.de>,
+ Anna-Maria Behnsen <anna-maria@linutronix.de>, 
+ Benno Lossin <lossin@kernel.org>,
+ =?UTF-8?Q?Krzysztof_Wilczy=C5=84ski?= <kwilczynski@kernel.org>, 
+ John Stultz <jstultz@google.com>, Stephen Boyd <sboyd@kernel.org>, 
+ Lorenzo Stoakes <lorenzo.stoakes@oracle.com>,
+ "Liam R. Howlett" <Liam.Howlett@oracle.com>, 
+ Breno Leitao <leitao@debian.org>, Viresh Kumar <viresh.kumar@linaro.org>, 
+ linux-kbuild@vger.kernel.org, linux-kernel@vger.kernel.org, 
+ rust-for-linux@vger.kernel.org, linux-kselftest@vger.kernel.org, 
+ kunit-dev@googlegroups.com, linux-pci@vger.kernel.org, 
+ linux-block@vger.kernel.org, devicetree@vger.kernel.org, 
+ dri-devel@lists.freedesktop.org, netdev@vger.kernel.org, linux-mm@kvack.org, 
+ linux-pm@vger.kernel.org, nouveau@lists.freedesktop.org, 
+ Christian Brauner <brauner@kernel.org>
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
 X-Mailman-Approved-At: Sat, 13 Dec 2025 12:40:47 +0000
@@ -91,20 +120,30 @@ List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-On Fri, Jun 20, 2025 at 3:59=E2=80=AFPM Alexandre Courbot <acourbot@nvidia.=
-com> wrote:
+On Sun, Jun 15, 2025 at 10:55=E2=80=AFPM Tamir Duberstein <tamird@gmail.com=
+> wrote:
 >
-> This reminds me that I should also check whether upstream Rust would be
-> interested in `prev_multiple_of` and `last_set_bit`. The docs I've read
-> for contributing looked a bit intimidating, with RFCs to write and all.
-> Would you have a pointer for where I should start? Maybe a Zulip thread?
+> This started with a patch that enabled `clippy::ptr_as_ptr`. Benno
+> Lossin suggested I also look into `clippy::ptr_cast_constness` and I
+> discovered `clippy::as_ptr_cast_mut`. This series now enables all 3
+> lints. It also enables `clippy::as_underscore` which ensures other
+> pointer casts weren't missed.
+>
+> As a later addition, `clippy::cast_lossless` and `clippy::ref_as_ptr`
+> are also enabled.
+>
+> Signed-off-by: Tamir Duberstein <tamird@gmail.com>
 
-I would say it is actually quite straightforward compared to, say, WG14/21.
+Applied to `rust-next` -- thanks everyone!
 
-The first thing I added was a method too, to see how things worked,
-and I started just by sending the PR.
+    [ Added `.cast()` for `opp`. - Miguel ]
 
-So I would say, go for it! :)
+    [ Changed `isize` to `c_long`. - Miguel ]
+
+It would still be nice to get the couple remaining Acked-bys (happy to
+rebase to apply them), but I feel we are in good shape, and it is a
+good time to put it into linux-next so that people see the lint before
+they start applying new code into their branches.
 
 Cheers,
 Miguel
