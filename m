@@ -2,83 +2,53 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id 308EAAE2C9F
-	for <lists+nouveau@lfdr.de>; Sat, 21 Jun 2025 23:19:00 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id EC71AAE2ED3
+	for <lists+nouveau@lfdr.de>; Sun, 22 Jun 2025 10:11:40 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id CA19A10E2F5;
-	Sat, 21 Jun 2025 21:18:58 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 3062A10E049;
+	Sun, 22 Jun 2025 08:11:38 +0000 (UTC)
 Authentication-Results: gabe.freedesktop.org;
-	dkim=fail reason="signature verification failed" (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="Cj21Cs9v";
+	dkim=pass (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="gOzNFqbT";
 	dkim-atps=neutral
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from sea.source.kernel.org (sea.source.kernel.org [172.234.252.31])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 462BF10E2F5;
- Sat, 21 Jun 2025 21:18:57 +0000 (UTC)
+Received: from dfw.source.kernel.org (dfw.source.kernel.org [139.178.84.217])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 289DD10E049
+ for <nouveau@lists.freedesktop.org>; Sun, 22 Jun 2025 08:11:34 +0000 (UTC)
 Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by sea.source.kernel.org (Postfix) with ESMTP id CACC14A7DF;
- Sat, 21 Jun 2025 21:18:53 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 84DE0C4CEE7;
- Sat, 21 Jun 2025 21:18:53 +0000 (UTC)
+ by dfw.source.kernel.org (Postfix) with ESMTP id 86CC75C1D06;
+ Sun, 22 Jun 2025 08:09:13 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 2D3BCC4CEE3;
+ Sun, 22 Jun 2025 08:11:27 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1750540733;
- bh=Y442YX5hM85zpUXLCqKwJEt5Ke3jFuQq2IdIaKtfHnY=;
- h=In-Reply-To:References:Subject:From:Cc:To:Date:From;
- b=Cj21Cs9vo16c9/agcI0xqrPisWhf971Q8Grpd5dNTcqDw+yAnjC9eGBk+ZgSSM6ml
- WuLtpT48XOJTt1RgONS749wakxcv+P51epDks9uRM0XrRWkBF0mLImnsgqjZga29K9
- tBN1elhcw/BPM6kH5WzBFbuY01NeDCwjuarrEoVU/RyPCLfPP3lIsnsWi/eQ1+7pC5
- qdxytMND/2noNXE/IZOgLJnI3aN8UG3RFZcRSvVFgGx2kKH6nsnOhAzopPOHe2YYaN
- yEm4OPMaxgQ05giQba8s4/NR1TRJwD0jwShSfHzc2uGL/zWGegpZDSgpbVSTId73I3
- 5stBWhNTlIWfA==
-Content-Type: text/plain; charset="utf-8"
-MIME-Version: 1.0
+ s=k20201202; t=1750579889;
+ bh=RfKICBXZidiu4OD84YvFGCoQa3tLgCT6Ic2UxiwvK+c=;
+ h=Date:Cc:Subject:From:To:References:In-Reply-To:From;
+ b=gOzNFqbTi7Xenp9f8n/wBpt4QvFlkSIt3B3FJfXe82BThRvDP+A1Git2cXx9CF7bU
+ qKLau8uYvfn2qIXJLXAfPsy+0CRWrN89sOYcNGz5NZ9bRZNa3RjfofdxZ/kFlbsEhZ
+ bFTEmK9Z/y/9MwgNwdthymdTVke1CbpDZkbuWm7uQ9yr9fJcvRpvKPmhXB/ujn+pNp
+ jbKNdou+U0/KoTWGcXjdrgu7w5AqfbJ7vO+j/UR2hFkbwR+gYo/TPY8S3EEWuteutd
+ fK9XoEECcg0Rx7QxIqBzGAtoaflf9Llah6HEK2N3Q0EbQJ7X+NxAgUvlV2BldJhdVf
+ mYVUVSagy6WXA==
+Mime-Version: 1.0
 Content-Transfer-Encoding: quoted-printable
-In-Reply-To: <20250619-cstr-core-v12-5-80c9c7b45900@gmail.com>
-References: <20250619-cstr-core-v12-0-80c9c7b45900@gmail.com>
- <20250619-cstr-core-v12-5-80c9c7b45900@gmail.com>
-Subject: Re: [PATCH v12 5/5] rust: remove core::ffi::CStr reexport
-From: Stephen Boyd <sboyd@kernel.org>
-Cc: rust-for-linux@vger.kernel.org, linux-kernel@vger.kernel.org,
- linux-kselftest@vger.kernel.org, kunit-dev@googlegroups.com,
- dri-devel@lists.freedesktop.org, netdev@vger.kernel.org,
- devicetree@vger.kernel.org, llvm@lists.linux.dev, linux-pci@vger.kernel.org,
- nouveau@lists.freedesktop.org, linux-block@vger.kernel.org,
- linux-pm@vger.kernel.org, linux-clk@vger.kernel.org,
- Tamir Duberstein <tamird@gmail.com>
-To: Alex Gaynor <alex.gaynor@gmail.com>, Alice Ryhl <aliceryhl@google.com>,
- Andreas Hindborg <a.hindborg@kernel.org>, Andrew Lunn <andrew@lunn.ch>,
- Arnd Bergmann <arnd@arndb.de>, Benno Lossin <lossin@kernel.org>,
- Bill Wendling <morbo@google.com>, Bjorn Helgaas <bhelgaas@google.com>,
- =?utf-8?q?Bj=C3=B6rn?= Roy Baron <bjorn3_gh@protonmail.com>,
- Boqun Feng <boqun.feng@gmail.com>, Brendan Higgins <brendan.higgins@linux.dev>,
- Breno Leitao <leitao@debian.org>, Danilo Krummrich <dakr@kernel.org>,
- Dave Ertman <david.m.ertman@intel.com>, David Airlie <airlied@gmail.com>,
- David Gow <davidgow@google.com>, David S. Miller <davem@davemloft.net>,
- Eric Dumazet <edumazet@google.com>,
- FUJITA Tomonori <fujita.tomonori@gmail.com>, Gary Guo <gary@garyguo.net>,
- Greg Kroah-Hartman <gregkh@linuxfoundation.org>,
- Heiner Kallweit <hkallweit1@gmail.com>, Ingo Molnar <mingo@redhat.com>,
- Ira Weiny <ira.weiny@intel.com>, Jakub Kicinski <kuba@kernel.org>,
- Jens Axboe <axboe@kernel.dk>, Justin Stitt <justinstitt@goo
- gle.com>, Krzysztof =?utf-8?q?Wilczy=C5=84ski?= <kwilczynski@kernel.org>,
- Leon Romanovsky <leon@kernel.org>, Luis Chamberlain <mcgrof@kernel.org>,
- Maarten Lankhorst <maarten.lankhorst@linux.intel.com>,
- Maxime Ripard <mripard@kernel.org>,
- Michael Turquette <mturquette@baylibre.com>,
- Michal Rostecki <vadorovsky@protonmail.com>, Miguel Ojeda <ojeda@kernel.org>,
- Nathan Chancellor <nathan@kernel.org>,
- Nick Desaulniers <nick.desaulniers+lkml@gmail.com>,
- Paolo Abeni <pabeni@redhat.com>, Peter Zijlstra <peterz@infradead.org>,
- Rae Moar <rmoar@google.com>, Rafael J. Wysocki <rafael@kernel.org>,
- Rob Herring <robh@kernel.org>, Russ Weight <russ.weight@linux.dev>,
- Russell King <linux@armlinux.org.uk>, Saravana Kannan <saravanak@google.com>,
- Simona Vetter <simona@ffwll.ch>, Tamir Duberstein <tamird@gmail.com>,
- Thomas Zimmermann <tzimmermann@suse.de>, Trevor Gross <tmgross@umich.edu>,
- Viresh Kumar <viresh.kumar@linaro.org>, Waiman Long <longman@redhat.com>,
- Will Deacon <will@kernel.org>
-Date: Sat, 21 Jun 2025 14:18:52 -0700
-Message-ID: <175054073280.4372.1963514562501935667@lazor>
-User-Agent: alot/0.11
+Content-Type: text/plain; charset=UTF-8
+Date: Sun, 22 Jun 2025 10:11:25 +0200
+Message-Id: <DASWS1A63LYM.399CKUDL4Z7UC@kernel.org>
+Cc: <linux-kernel@vger.kernel.org>, <rust-for-linux@vger.kernel.org>,
+ <nouveau@lists.freedesktop.org>
+Subject: Re: [PATCH 1/3] rust: add `num` module with `PowerOfTwo` type
+From: "Benno Lossin" <lossin@kernel.org>
+To: "Alexandre Courbot" <acourbot@nvidia.com>, "Miguel Ojeda"
+ <ojeda@kernel.org>, "Alex Gaynor" <alex.gaynor@gmail.com>, "Boqun Feng"
+ <boqun.feng@gmail.com>, "Gary Guo" <gary@garyguo.net>,
+ =?utf-8?q?Bj=C3=B6rn_Roy_Baron?= <bjorn3_gh@protonmail.com>, "Andreas
+ Hindborg" <a.hindborg@kernel.org>, "Alice Ryhl" <aliceryhl@google.com>,
+ "Trevor Gross" <tmgross@umich.edu>, "Danilo Krummrich" <dakr@kernel.org>
+X-Mailer: aerc 0.20.1
+References: <20250620-num-v1-0-7ec3d3fb06c9@nvidia.com>
+ <20250620-num-v1-1-7ec3d3fb06c9@nvidia.com>
+In-Reply-To: <20250620-num-v1-1-7ec3d3fb06c9@nvidia.com>
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -93,14 +63,175 @@ List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-Quoting Tamir Duberstein (2025-06-19 08:06:29)
-> Clean up references to `kernel::str::CStr`.
->=20
-> Signed-off-by: Tamir Duberstein <tamird@gmail.com>
-> ---
+On Fri Jun 20, 2025 at 3:14 PM CEST, Alexandre Courbot wrote:
+> +/// An unsigned integer which is guaranteed to be a power of 2.
+> +///
+> +/// # Invariants
+> +///
+> +/// The stored value is guaranteed to be a power of two.
+> +#[derive(Debug, Clone, Copy, PartialEq, Eq, PartialOrd, Ord, Hash)]
+> +#[repr(transparent)]
+> +pub struct PowerOfTwo<T>(T);
+> +
+> +macro_rules! power_of_two_impl {
+> +    ($($t:ty),+) =3D> {
+> +        $(
+> +            impl PowerOfTwo<$t> {
 
-For clk part
+I tried to use this type in a doctest like this:
 
->  rust/kernel/clk.rs                    |  3 +--
+    use kernel::num::PowerOfTwo;
+  =20
+    fn new(x: usize) -> PowerOfTwo<usize> {
+        PowerOfTwo::new(1 << x)
+    }
 
-Acked-by: Stephen Boyd <sboyd@kernel.org>
+And it doesn't compile :(
+
+    error[E0034]: multiple applicable items in scope
+        --> rust/doctests_kernel_generated.rs:4930:17
+         |
+    4930 |     PowerOfTwo::new(1 << x)
+         |                 ^^^ multiple `new` found
+         |
+         =3D note: candidate #1 is defined in an impl for the type `PowerOf=
+Two<u128>`
+         =3D note: candidate #2 is defined in an impl for the type `PowerOf=
+Two<u16>`
+         =3D note: candidate #3 is defined in an impl for the type `PowerOf=
+Two<u32>`
+         =3D note: candidate #4 is defined in an impl for the type `PowerOf=
+Two<u64>`
+         =3D note: and 2 others
+   =20
+    error: aborting due to 1 previous error
+
+The problem is that the function `new` exists 6 times for each of the
+integer types. You can write `PowerOfTwo::<usize>::new()` instead, but
+that's annoying...
+
+We probably need an `Integer` trait and then do
+
+    impl<I: Integer> PowerOfTwo<I> {
+        pub const fn new(value: I) -> Self;
+    }
+
+> +                /// Validates that `v` is a power of two at build-time, =
+and returns it wrapped into
+> +                /// [`PowerOfTwo`].
+> +                ///
+> +                /// A build error is triggered if `v` cannot be asserted=
+ to be a power of two.
+> +                ///
+> +                /// # Examples
+> +                ///
+> +                /// ```
+> +                /// use kernel::num::PowerOfTwo;
+> +                ///
+> +                #[doc =3D concat!("let v =3D PowerOfTwo::<", stringify!(=
+$t), ">::new(16);")]
+> +                /// assert_eq!(v.value(), 16);
+> +                /// ```
+> +                #[inline(always)]
+> +                pub const fn new(v: $t) -> Self {
+> +                    build_assert!(v.count_ones() =3D=3D 1);
+
+Why not `v.is_power_of_two()`?
+
+> +                    Self(v)
+
+Missing `// INVARIANT` comment.
+
+> +                }
+> +
+> +                /// Validates that `v` is a power of two at runtime, and=
+ returns it wrapped into
+> +                /// [`PowerOfTwo`].
+> +                ///
+> +                /// [`None`] is returned if `v` was not a power of two.
+> +                ///
+> +                /// # Examples
+> +                ///
+> +                /// ```
+> +                /// use kernel::num::PowerOfTwo;
+> +                ///
+> +                #[doc =3D concat!(
+> +                    "assert_eq!(PowerOfTwo::<",
+> +                    stringify!($t),
+> +                    ">::try_new(16), Some(PowerOfTwo::<",
+> +                    stringify!($t),
+> +                    ">::new(16)));"
+> +                )]
+> +                #[doc =3D concat!(
+> +                    "assert_eq!(PowerOfTwo::<",
+> +                    stringify!($t),
+> +                    ">::try_new(15), None);"
+> +                )]
+> +                /// ```
+> +                #[inline(always)]
+> +                pub const fn try_new(v: $t) -> Option<Self> {
+
+Maybe `new_checked` is a better name, since it doesn't return a result?
+
+> +                    match v.count_ones() {
+
+Why not `is_power_of_two()`?
+
+> +                        1 =3D> Some(Self(v)),
+
+Missing `// INVARIANT` comment.
+
+> +                        _ =3D> None,
+> +                    }
+> +                }
+> +
+> +                /// Returns the value of this instance.
+> +                ///
+> +                /// It is guaranteed to be a power of two.
+> +                ///
+> +                /// # Examples
+> +                ///
+> +                /// ```
+> +                /// use kernel::num::PowerOfTwo;
+> +                ///
+> +                #[doc =3D concat!("let v =3D PowerOfTwo::<", stringify!(=
+$t), ">::new(16);")]
+> +                /// assert_eq!(v.value(), 16);
+> +                /// ```
+> +                #[inline(always)]
+> +                pub const fn value(self) -> $t {
+> +                    self.0
+
+Let's add:
+
+    if !self.0.is_power_of_two() {
+        core::hint::unreachable_unchecked()
+    }
+    self.0
+
+> +                }
+> +
+> +                /// Returns the mask corresponding to `self.value() - 1`=
+.
+> +                ///
+> +                /// # Examples
+> +                ///
+> +                /// ```
+> +                /// use kernel::num::PowerOfTwo;
+> +                ///
+> +                #[doc =3D concat!("let v =3D PowerOfTwo::<", stringify!(=
+$t), ">::new(0x10);")]
+> +                /// assert_eq!(v.mask(), 0xf);
+> +                /// ```
+> +                #[inline(always)]
+> +                pub const fn mask(self) -> $t {
+> +                    self.0.wrapping_sub(1)
+
+Then use `self.value().wrapping_sub(1)` here instead to also propagate
+the information.
+
+---
+Cheers,
+Benno
+
+> +                }
