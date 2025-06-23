@@ -2,66 +2,66 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id 0CBF4CBA9F0
-	for <lists+nouveau@lfdr.de>; Sat, 13 Dec 2025 13:41:43 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id EFF26CBAD8B
+	for <lists+nouveau@lfdr.de>; Sat, 13 Dec 2025 13:45:12 +0100 (CET)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id D4CB210EA1D;
-	Sat, 13 Dec 2025 12:40:57 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id A7B6C10EB42;
+	Sat, 13 Dec 2025 12:41:31 +0000 (UTC)
 Authentication-Results: gabe.freedesktop.org;
-	dkim=permerror (0-bit key) header.d=gmail.com header.i=@gmail.com header.b="MDGHWxCL";
+	dkim=permerror (0-bit key) header.d=gmail.com header.i=@gmail.com header.b="Xfx71Rwq";
 	dkim-atps=neutral
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from mail-pg1-f174.google.com (mail-pg1-f174.google.com
- [209.85.215.174])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 184FE891D9
- for <nouveau@lists.freedesktop.org>; Mon, 23 Jun 2025 15:14:46 +0000 (UTC)
-Received: by mail-pg1-f174.google.com with SMTP id
- 41be03b00d2f7-b31f22d706aso2682601a12.0
- for <nouveau@lists.freedesktop.org>; Mon, 23 Jun 2025 08:14:46 -0700 (PDT)
+Received: from mail-pj1-f42.google.com (mail-pj1-f42.google.com
+ [209.85.216.42])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 9660C891D9
+ for <nouveau@lists.freedesktop.org>; Mon, 23 Jun 2025 15:14:50 +0000 (UTC)
+Received: by mail-pj1-f42.google.com with SMTP id
+ 98e67ed59e1d1-3141f9ce4d1so3908479a91.2
+ for <nouveau@lists.freedesktop.org>; Mon, 23 Jun 2025 08:14:50 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1750691685; x=1751296485; darn=lists.freedesktop.org;
+ d=gmail.com; s=20230601; t=1750691690; x=1751296490; darn=lists.freedesktop.org;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=4L+SLp5sEjKp/3F3270exGqS9NQW7oUMk/S+cCYt5Es=;
- b=MDGHWxCLa8ZEM2QeRcC3xkErx2W7jOsvp2pkHxMn9HZjPFbyY7TGqrh6YRNf2d/MGl
- r6XPw7BOFZAAhBVBZIsoAQHqIuQ35Wmbul59+BotyD0CJS2PcyGt2HaHid/RWcX2hiJG
- pjaT0umR0uPuJFZJSZi9+wRO4V4/xI/nS4F7WYmesIDQFj/+GCANJLTjXYrGU5SlU7Ad
- beHk0QirAU6s4CvLe8lUmHBf+neyz9uBJOlzM5yZeltUD9omO8HIihFNgBnNesjd2fep
- YtD5sme2DXZMeSxygkVdtfC4PcjCEOb7bCYmQ+L25YwuZoHL8UKMwVKjRopBL/R4WKte
- 2LzQ==
+ bh=WxVvDAMvkM375HX/zxtZMIQJuoJ7i7/DvaZjzOiyFTo=;
+ b=Xfx71Rwq31yVsZjxmwvVPah6Kp4vN1xvERuZKKCsdgWFBs9vTmNNoTtjPqf2fq94YP
+ xlVmtZo5Gc+1cynDiPev36hD8c/gdBDxbil3cDulXuytMYCnkkdGDaulXKnkw5YQquik
+ mGenZKlTW+sJNn0VrW8EvQAiXRxaKSAWXwPT4CJI9ztj+0JM5nQ2WVVRTLSioEvuHKy0
+ 60cisX87guKsKyjPLqJVulfpta4lFUNyXmQ6QpWZysarfQC/WVHzcOd8AkQW+x4hAitB
+ KLZsplurYmfmKwQKAhlNvL8KImsl8hM28FPF8+2pmXpUclzQD3lxMjshZeqJwrFly5+R
+ xHXA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1750691685; x=1751296485;
+ d=1e100.net; s=20230601; t=1750691690; x=1751296490;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=4L+SLp5sEjKp/3F3270exGqS9NQW7oUMk/S+cCYt5Es=;
- b=Xy3Z/jQwDfzPmYcX4IN9KCiqOSLRno9+5PcLtJ1KpMYUFC/vd4F3xctWQ0nLRoNdbX
- U8Dx8e6iW6dl6FwU9NwbWDa76Z04R62f4I9Ehl9lrXkxJ+VrBqHophBLC55FKCDDC1XU
- yXeC4AvveKxElMtqSVxOlgTLFVB+IXI4LoC/DHczOFR8KHleHRz7591rj6FX2NuzCojW
- uVoGwOFFYbYVKvXH+yBk+ANc95NNdwttFjpn9/EtxfpAAHHGB7lMy8KsYlabJ6YNkVVM
- BBdmshTrsxJ0wRr4iWIwgqoGimbBiGs+F2YzEMpgC0X6ksqasAxF5KbjE6EoA+fcs24f
- 5zlA==
+ bh=WxVvDAMvkM375HX/zxtZMIQJuoJ7i7/DvaZjzOiyFTo=;
+ b=uBTXxaB17PG4kY/eckgtgBhyT19ReBds9skoM/OC+P3Dz7asMVr4hmN+boM5LilYe5
+ A6HUx8ynEmGLJrBc8z8dB67Jy5Noch1WcqitB+Lh5DCIJ4znpOLCc133m7/mNABQkP8g
+ 7G0hcL7uGGbF942blsS5ljfchDB4vItGw8P1oYMRu+60iGSfkfnmBlxiAzLCvKLLvHFW
+ 11GWU0sUrcMMICdBGYsRjewJafDPyO/O6qM+ujBvw4I0YujwsqQQ4Bf2NnWM0YfAJmPI
+ DiVanAMyK/GT8fXpN46JUXtPZYM7QY3L3f/epEbkB0l0LxPLDG3kM6cTbiqBPGXt7p29
+ p+Bw==
 X-Forwarded-Encrypted: i=1;
- AJvYcCV8byJWVMCKmav2Fs2HCS1gxn6xkWnEjo8GyVJJNHQaDQNqiu/k6rt0R7hgJM1Qu3npm3vY6w7f@lists.freedesktop.org
-X-Gm-Message-State: AOJu0YyPy6yVdNa+Xn/8e7t/DPr4aiEot+qeOMw7BnRQNE2zSLIzqmHe
- bCdi2oIDRZIU9jgMtI/DpNw4tDb05Vc1WX1bmM9Ssm5qf+MYOXo2MXeW
-X-Gm-Gg: ASbGncs/kKRrPs4llh83+FWBjsu0vgWU4Aw37QuYRDNBKw1w9wHlSGEtMXMB4cmcGR+
- eo33597dlIkEgP8DBlezZ3/xDMlZpMWY1mfvvpHBNVY7owote2uGyAzXsHyqmziAMSWOE3cQMRR
- 1QxUmNdK94IFtp6c0BjxwhM+7DYm5MT7LRFS5kiqvDNOEfjwgveUzhyG+q1Tr9Z4VrC5trvjQMe
- q4rU1PzF4vtkxpx0amU70PNXUOpRAn9BT/ZPorZZLLWmmOT2RAlVMWGS6Ise9n+PF9LB/TD+2K1
- k9GmVeNGw/RY7tUPoQhbY3rjkYatIZCZPbIcwSuvHDQwmmHAj27newYMolS7Ymym+CJo3sEua5P
- hSuyKRdQ=
-X-Google-Smtp-Source: AGHT+IHjXjnNaJs4mpv+QbUUX8obW8sAmU/EZar1U85z03oyOBaK0Zh98OMIpjOXdxPItTkxI0ZxFA==
-X-Received: by 2002:a17:90b:4f46:b0:312:e49b:c972 with SMTP id
- 98e67ed59e1d1-3159d68a9cbmr18302917a91.15.1750691685273; 
- Mon, 23 Jun 2025 08:14:45 -0700 (PDT)
+ AJvYcCWJjPC0zQcDWvGQJWAzW6mp3gjxljycQ9e8CgUeLEInOypXtHOmxqGDnLwhIpUS020unKMFwoPi@lists.freedesktop.org
+X-Gm-Message-State: AOJu0Yy7f0MB1EZr2KG52s7nB+Hr5bMuta5PcdW9X7gsuUwOJpnDLss3
+ 8ubSC0i+Nd1NBalIdJYFQ8yyKb5jdov0huK7CNNmj+14Q8f4og3GjmY0
+X-Gm-Gg: ASbGncsStBYloHK/tH/7bA+zXT8iyrJAoraJ/qwocNfVeIs+5DdmJt3Xk+U88UCRHml
+ zVUWCElFw4csmaW5oRt7AVwPBxsU+0MMeAy6xa56FgUGXpU7Gcvh75aZwHxNog0WBGCoNiemVVv
+ R310ictLMrDwR2zfAX/cn9tclteMj2A/DMKIB/MxkPZzf21eyCXlffAnMLftqdtmhqdkxDWgLa4
+ jCvPITILO9H8tDYe3KslGYxdiRKfYnWZNDrFUSHk2A8iLw1T/w9E/lcpw8XpxdikApgVJlGUOLR
+ LjysZyne2+xnKQadq2TX1QMYnelYf3ae2+e/P6jntUHkEbzfOSIXoud9TC87Aott+hQlMa1cOhr
+ aZb0a9aM=
+X-Google-Smtp-Source: AGHT+IHZ6b3VUpDC1c2zoZYui2q3WO6oIWeoRkRFN9suemWLWo9jP+W3JOYotkgd1zwMLlo2zWW6Rg==
+X-Received: by 2002:a17:90b:574d:b0:312:e731:5a66 with SMTP id
+ 98e67ed59e1d1-3159d624244mr19128362a91.3.1750691689838; 
+ Mon, 23 Jun 2025 08:14:49 -0700 (PDT)
 Received: from localhost.localdomain ([112.149.32.52])
  by smtp.gmail.com with ESMTPSA id
- 98e67ed59e1d1-3159df71cd6sm8338512a91.4.2025.06.23.08.14.41
+ 98e67ed59e1d1-3159df71cd6sm8338512a91.4.2025.06.23.08.14.45
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 23 Jun 2025 08:14:44 -0700 (PDT)
+ Mon, 23 Jun 2025 08:14:49 -0700 (PDT)
 From: Jesung Yang <y.j3ms.n@gmail.com>
 To: Miguel Ojeda <ojeda@kernel.org>, Alex Gaynor <alex.gaynor@gmail.com>,
  Boqun Feng <boqun.feng@gmail.com>, Gary Guo <gary@garyguo.net>,
@@ -71,9 +71,9 @@ To: Miguel Ojeda <ojeda@kernel.org>, Alex Gaynor <alex.gaynor@gmail.com>,
  Danilo Krummrich <dakr@kernel.org>
 Cc: linux-kernel@vger.kernel.org, rust-for-linux@vger.kernel.org,
  nouveau@lists.freedesktop.org, Jesung Yang <y.j3ms.n@gmail.com>
-Subject: [PATCH 1/4] rust: introduce `FromPrimitive` trait
-Date: Mon, 23 Jun 2025 15:14:27 +0000
-Message-Id: <702d21d34368b1dcd896343771b00a2303e9a312.1750689857.git.y.j3ms.n@gmail.com>
+Subject: [PATCH 2/4] rust: macros: extend custom `quote!` macro
+Date: Mon, 23 Jun 2025 15:14:28 +0000
+Message-Id: <f75b20619c4269edad12ad826caf83ceeed89dbb.1750689857.git.y.j3ms.n@gmail.com>
 X-Mailer: git-send-email 2.39.5
 In-Reply-To: <cover.1750689857.git.y.j3ms.n@gmail.com>
 References: <cover.1750689857.git.y.j3ms.n@gmail.com>
@@ -94,194 +94,90 @@ List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-Introduce a new `FromPrimitive` trait under `kernel::convert` that
-enables fallible conversion from primitive types to user-defined
-types.
+Implement the `ToTokens` trait for `&T` where `T` implements `ToTokens`.
+This allows users to use the `quote!` macro with references directly,
+avoiding the need to clone values.
 
-This is useful when numeric values need to be interpreted as structured
-representations such as enums. These situations often arise when
-working with low-level data sources, for example when reading values
-from hardware registers.
+Implement the `ToTokens` trait for `proc_macro::Literal`. This enables
+the direct use of literals in the `quote!` macro, which is useful when
+emitting numeric constants.
+
+Extend the `quote_spanned!` macro to support additional punctuation
+tokens: `->`, `<`, `>`, and `==`. This symbols are commonly needed when
+dealing with functions, generic bounds, and equality comparisons.
 
 Signed-off-by: Jesung Yang <y.j3ms.n@gmail.com>
 ---
- rust/kernel/convert.rs | 154 +++++++++++++++++++++++++++++++++++++++++
- rust/kernel/lib.rs     |   1 +
- 2 files changed, 155 insertions(+)
- create mode 100644 rust/kernel/convert.rs
+ rust/macros/quote.rs | 42 ++++++++++++++++++++++++++++++++++++++++++
+ 1 file changed, 42 insertions(+)
 
-diff --git a/rust/kernel/convert.rs b/rust/kernel/convert.rs
-new file mode 100644
-index 000000000000..fb01a0e1507a
---- /dev/null
-+++ b/rust/kernel/convert.rs
-@@ -0,0 +1,154 @@
-+// SPDX-License-Identifier: GPL-2.0
-+
-+//! Traits for type conversion.
-+
-+/// A trait for fallible conversions from primitive types.
-+///
-+/// [`FromPrimitive`] allows converting from various built-in primitive types
-+/// (such as integers and `bool`) into a user-defined type, typically an `enum`.
-+///
-+/// At least [`from_i64`] and [`from_u64`] should be implemented. All other methods
-+/// have default implementations that convert to `i64` or `u64` using fallible casts and
-+/// delegate to those two core methods.
-+///
-+/// Enums with wide representations such as `#[repr(i128)]` or `#[repr(u128)]` may lose
-+/// information through narrowing in the default implementations. In such cases, override
-+/// [`from_i128`] and [`from_u128`] explicitly.
-+///
-+/// This trait can be used with `#[derive]`.
-+/// See [`FromPrimitive`](../../macros/derive.FromPrimitive.html) derive macro for more
-+/// information.
-+///
-+/// [`from_i64`]: FromPrimitive::from_i64
-+/// [`from_i128`]: FromPrimitive::from_i128
-+/// [`from_u64`]: FromPrimitive::from_u64
-+/// [`from_u128`]: FromPrimitive::from_u128
-+///
-+/// # Examples
-+///
-+/// ```rust
-+/// use kernel::convert::FromPrimitive;
-+///
-+/// #[derive(PartialEq)]
-+/// enum Foo {
-+///     A,
-+///     B = 0x17,
-+///     C = -2,
-+/// }
-+///
-+/// impl FromPrimitive for Foo {
-+///     fn from_i64(n: i64) -> Option<Self> {
-+///         match n {
-+///             0 => Some(Self::A),
-+///             0x17 => Some(Self::B),
-+///             -2 => Some(Self::C),
-+///             _ => None,
-+///         }
-+///     }
-+///
-+///     fn from_u64(n: u64) -> Option<Self> {
-+///         i64::try_from(n).ok().and_then(Self::from_i64)
-+///     }
-+/// }
-+///
-+/// assert_eq!(Foo::from_u64(0), Some(Foo::A));
-+/// assert_eq!(Foo::from_u64(0x17), Some(Foo::B));
-+/// assert_eq!(Foo::from_i64(-2), Some(Foo::C));
-+/// assert_eq!(Foo::from_i64(-3), None);
-+/// ```
-+pub trait FromPrimitive: Sized {
-+    /// Attempts to convert a `bool` to `Self`. Returns `Some(Self)` if the input
-+    /// corresponds to a known value; otherwise, `None`.
-+    #[inline]
-+    fn from_bool(b: bool) -> Option<Self> {
-+        Self::from_u64(u64::from(b))
-+    }
-+
-+    /// Attempts to convert an `isize` to `Self`. Returns `Some(Self)` if the input
-+    /// corresponds to a known value; otherwise, `None`.
-+    #[inline]
-+    fn from_isize(n: isize) -> Option<Self> {
-+        i64::try_from(n).ok().and_then(Self::from_i64)
-+    }
-+
-+    /// Attempts to convert an `i8` to `Self`. Returns `Some(Self)` if the input
-+    /// corresponds to a known value; otherwise, `None`.
-+    #[inline]
-+    fn from_i8(n: i8) -> Option<Self> {
-+        Self::from_i64(i64::from(n))
-+    }
-+
-+    /// Attempts to convert an `i16` to `Self`. Returns `Some(Self)` if the input
-+    /// corresponds to a known value; otherwise, `None`.
-+    #[inline]
-+    fn from_i16(n: i16) -> Option<Self> {
-+        Self::from_i64(i64::from(n))
-+    }
-+
-+    /// Attempts to convert an `i32` to `Self`. Returns `Some(Self)` if the input
-+    /// corresponds to a known value; otherwise, `None`.
-+    #[inline]
-+    fn from_i32(n: i32) -> Option<Self> {
-+        Self::from_i64(i64::from(n))
-+    }
-+
-+    /// Attempts to convert an `i64` to `Self`. Returns `Some(Self)` if the input
-+    /// corresponds to a known value; otherwise, `None`.
-+    fn from_i64(n: i64) -> Option<Self>;
-+
-+    /// Attempts to convert an `i128` to `Self`. Returns `Some(Self)` if the input
-+    /// corresponds to a known value; otherwise, `None`.
-+    ///
-+    /// The default implementation delegates to [`from_i64`](FromPrimitive::from_i64)
-+    /// by downcasting from `i128` to `i64`, which may result in information loss.
-+    /// Consider overriding this method if `Self` can represent values outside the
-+    /// `i64` range.
-+    #[inline]
-+    fn from_i128(n: i128) -> Option<Self> {
-+        i64::try_from(n).ok().and_then(Self::from_i64)
-+    }
-+
-+    /// Attempts to convert a `usize` to `Self`. Returns `Some(Self)` if the input
-+    /// corresponds to a known value; otherwise, `None`.
-+    #[inline]
-+    fn from_usize(n: usize) -> Option<Self> {
-+        u64::try_from(n).ok().and_then(Self::from_u64)
-+    }
-+
-+    /// Attempts to convert a `u8` to `Self`. Returns `Some(Self)` if the input
-+    /// corresponds to a known value; otherwise, `None`.
-+    #[inline]
-+    fn from_u8(n: u8) -> Option<Self> {
-+        Self::from_u64(u64::from(n))
-+    }
-+
-+    /// Attempts to convert a `u16` to `Self`. Returns `Some(Self)` if the input
-+    /// corresponds to a known value; otherwise, `None`.
-+    #[inline]
-+    fn from_u16(n: u16) -> Option<Self> {
-+        Self::from_u64(u64::from(n))
-+    }
-+
-+    /// Attempts to convert a `u32` to `Self`. Returns `Some(Self)` if the input
-+    /// corresponds to a known value; otherwise, `None`.
-+    #[inline]
-+    fn from_u32(n: u32) -> Option<Self> {
-+        Self::from_u64(u64::from(n))
-+    }
-+
-+    /// Attempts to convert a `u64` to `Self`. Returns `Some(Self)` if the input
-+    /// corresponds to a known value; otherwise, `None`.
-+    fn from_u64(n: u64) -> Option<Self>;
-+
-+    /// Attempts to convert a `u128` to `Self`. Returns `Some(Self)` if the input
-+    /// corresponds to a known value; otherwise, `None`.
-+    ///
-+    /// The default implementation delegates to [`from_u64`](FromPrimitive::from_u64)
-+    /// by downcasting from `u128` to `u64`, which may result in information loss.
-+    /// Consider overriding this method if `Self` can represent values outside the
-+    /// `u64` range.
-+    #[inline]
-+    fn from_u128(n: u128) -> Option<Self> {
-+        u64::try_from(n).ok().and_then(Self::from_u64)
+diff --git a/rust/macros/quote.rs b/rust/macros/quote.rs
+index 92cacc4067c9..d05f60f55623 100644
+--- a/rust/macros/quote.rs
++++ b/rust/macros/quote.rs
+@@ -7,6 +7,12 @@ pub(crate) trait ToTokens {
+     fn to_tokens(&self, tokens: &mut TokenStream);
+ }
+ 
++impl<T: ToTokens> ToTokens for &T {
++    fn to_tokens(&self, tokens: &mut TokenStream) {
++        (*self).to_tokens(tokens);
 +    }
 +}
-diff --git a/rust/kernel/lib.rs b/rust/kernel/lib.rs
-index 6b4774b2b1c3..861c9340d9c2 100644
---- a/rust/kernel/lib.rs
-+++ b/rust/kernel/lib.rs
-@@ -61,6 +61,7 @@
- pub mod clk;
- #[cfg(CONFIG_CONFIGFS_FS)]
- pub mod configfs;
-+pub mod convert;
- pub mod cpu;
- #[cfg(CONFIG_CPU_FREQ)]
- pub mod cpufreq;
++
+ impl<T: ToTokens> ToTokens for Option<T> {
+     fn to_tokens(&self, tokens: &mut TokenStream) {
+         if let Some(v) = self {
+@@ -27,6 +33,12 @@ fn to_tokens(&self, tokens: &mut TokenStream) {
+     }
+ }
+ 
++impl ToTokens for proc_macro::Literal {
++    fn to_tokens(&self, tokens: &mut TokenStream) {
++        tokens.extend([TokenTree::from(self.clone())]);
++    }
++}
++
+ impl ToTokens for TokenTree {
+     fn to_tokens(&self, tokens: &mut TokenStream) {
+         tokens.extend([self.clone()]);
+@@ -144,6 +156,36 @@ macro_rules! quote_spanned {
+         ));
+         quote_spanned!(@proc $v $span $($tt)*);
+     };
++    (@proc $v:ident $span:ident -> $($tt:tt)*) => {
++        $v.push(::proc_macro::TokenTree::Punct(
++                ::proc_macro::Punct::new('-', ::proc_macro::Spacing::Joint)
++        ));
++        $v.push(::proc_macro::TokenTree::Punct(
++                ::proc_macro::Punct::new('>', ::proc_macro::Spacing::Alone)
++        ));
++        quote_spanned!(@proc $v $span $($tt)*);
++    };
++    (@proc $v:ident $span:ident < $($tt:tt)*) => {
++        $v.push(::proc_macro::TokenTree::Punct(
++                ::proc_macro::Punct::new('<', ::proc_macro::Spacing::Alone)
++        ));
++        quote_spanned!(@proc $v $span $($tt)*);
++    };
++    (@proc $v:ident $span:ident > $($tt:tt)*) => {
++        $v.push(::proc_macro::TokenTree::Punct(
++                ::proc_macro::Punct::new('>', ::proc_macro::Spacing::Alone)
++        ));
++        quote_spanned!(@proc $v $span $($tt)*);
++    };
++    (@proc $v:ident $span:ident == $($tt:tt)*) => {
++        $v.push(::proc_macro::TokenTree::Punct(
++                ::proc_macro::Punct::new('=', ::proc_macro::Spacing::Joint)
++        ));
++        $v.push(::proc_macro::TokenTree::Punct(
++                ::proc_macro::Punct::new('=', ::proc_macro::Spacing::Alone)
++        ));
++        quote_spanned!(@proc $v $span $($tt)*);
++    };
+     (@proc $v:ident $span:ident = $($tt:tt)*) => {
+         $v.push(::proc_macro::TokenTree::Punct(
+                 ::proc_macro::Punct::new('=', ::proc_macro::Spacing::Alone)
 -- 
 2.39.5
 
