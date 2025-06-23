@@ -2,110 +2,81 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id 0CA1CCBA9C2
-	for <lists+nouveau@lfdr.de>; Sat, 13 Dec 2025 13:41:34 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 5D7CBCBAC4F
+	for <lists+nouveau@lfdr.de>; Sat, 13 Dec 2025 13:43:53 +0100 (CET)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 6ECE110E660;
-	Sat, 13 Dec 2025 12:40:57 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 0D38910EAB9;
+	Sat, 13 Dec 2025 12:41:08 +0000 (UTC)
 Authentication-Results: gabe.freedesktop.org;
-	dkim=permerror (0-bit key) header.d=gmail.com header.i=@gmail.com header.b="RGqpv40Y";
+	dkim=permerror (0-bit key) header.d=gmail.com header.i=@gmail.com header.b="VLtGbtHy";
 	dkim-atps=neutral
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
 Received: from mail-pj1-f53.google.com (mail-pj1-f53.google.com
  [209.85.216.53])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 0131110E0E0;
- Sun, 22 Jun 2025 22:50:45 +0000 (UTC)
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 9D189891D9
+ for <nouveau@lists.freedesktop.org>; Mon, 23 Jun 2025 15:14:41 +0000 (UTC)
 Received: by mail-pj1-f53.google.com with SMTP id
- 98e67ed59e1d1-313756c602fso357274a91.3; 
- Sun, 22 Jun 2025 15:50:45 -0700 (PDT)
+ 98e67ed59e1d1-3137c20213cso4340774a91.3
+ for <nouveau@lists.freedesktop.org>; Mon, 23 Jun 2025 08:14:41 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1750632645; x=1751237445; darn=lists.freedesktop.org;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=2XyaOPS+SVDJS2nuVakOU+h3pEZcqv0KxHASicqOHR0=;
- b=RGqpv40YSldTbQXr2/VYzPUzgV1Wkt8LRCBAjgByrxQgxPSqsMHG8fceWxsK4OxzkJ
- y5jv6GpglVqTasAGuvnvqv8ne0bSnVixtjgIJcRSdPkTEv9+PkQFYN365bTyqWyUo/Go
- dIcxUm9QKVteP/QAKu9OvsuZI8DLWgrZcStkM0/2e54pcGSnRIhGpCnEoOGAAvaR7Mrq
- YC7RFg/gDvSyAbx2C85jciIfnkPL+90i+Nuok7o1Of4b45pxi8za7G+822uFbYnr5q1t
- t369geC7sAIX/WTGLzK61VKl95U5JF1Qx5JlNvPAidp3lOyPwfMp3YmtOKyqIN5WKx0M
- zPow==
+ d=gmail.com; s=20230601; t=1750691681; x=1751296481; darn=lists.freedesktop.org;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=fJl0bofvsCNb/IhdYpO8yEuEs+fLAbcokn6DAhbWI2Y=;
+ b=VLtGbtHy/RBOv61a2DyJ6EfmrXrNsHwRKH7JYgYDXc8iRKpJOGy+nCFeOrGH3TgA7X
+ jQKvjyTpOdZCc/xey37GAIdYrI17L/USf8K7TRwKURYhYIyKE3cYdEFr3JoWP+HJCs/j
+ cuBHX3knpP7miSRqXEp+SOIj4pMO1dEMHDvDg6IOwSMRsjKDPn8K0gKTH4LdClYaQYZv
+ C0FeU5PKje3yYIUfYK3RVR7HWkuNzXnh5oFz85G4/3gaDf6ghm0asvYTcMBt0CpFipkQ
+ UwcM/PoBzMO2/2DzJiSki5qF570ssgckBxzMe6Wos7K0Eud9mOuf2c0iS58HzYB02CMs
+ AL8A==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1750632645; x=1751237445;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=2XyaOPS+SVDJS2nuVakOU+h3pEZcqv0KxHASicqOHR0=;
- b=G8ahcmQd99MihZw6xm91fME+W4LqeI5WGOa+ij2HFUWyFse3G7I/XmRtKoQHwCC92G
- jCCIn5m9krbjW8BNRgdb5z9HhdUgYLZrPeOWT0OycxuEFiXCjj3wNQUsqAfoAA34j1iZ
- PKH5K2qZLUNb4BFL/prr5+Ks/3bfWD79svF7IFgPgO1hWJQQpwzEY81hn5GIHlfVX+Bk
- Oe1XQaCme30A0hfkOfFqZMUgyz/5mPGm0cuJzocJn0yYeBngbjeMOoy+8mgaUOgOZ0At
- gp7CcsTTgoLA7DNVBzyM1AD04+OGQGTChl2Ua/Pfvyj538Qc6cTXhCO8LMMm7njOk16T
- MoVA==
+ d=1e100.net; s=20230601; t=1750691681; x=1751296481;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=fJl0bofvsCNb/IhdYpO8yEuEs+fLAbcokn6DAhbWI2Y=;
+ b=rpj4/9ODI60geMb2plnSo76EPCs06buotTTa0YSobKIZb2dJF0DTuCPIvoU5n1YUvg
+ bRE+BrXMpRRtCUOqtqqUF0MMvMUj7XwBPFq4RKRrnt4kU2iWKiphYz9s9S39JgqrJU/a
+ aCY6q0+mpXHP2S99ffXSKDA9/jEFbqvTRzDPj2Zn/rIRTjNEKVZQIQQXn+bFNEg6fU31
+ DLnRvtFGchQl2P6akNELOw6/Se/jzLpkw2vk5f3mfU61VSQAMV7NBAFeZepaa1o49KEi
+ tg6yksFd6G2UbsfymgEVIJy8AlIyPVRwzZ6XGwQAFSHGcqa9R+FTVwQmCrX5lqp6j7Aa
+ gM9Q==
 X-Forwarded-Encrypted: i=1;
- AJvYcCWl/c2tiYmLKjFxCw7XbPJJ09MFGPYk5+Udy7vHujAXHgGuTlr/LlqWlhXDUAjxPqhClTKrLzU82iU=@lists.freedesktop.org,
- AJvYcCXCT+PkxerXa+ZIiCd6rqSwf4qF547UwRNr3d29Zitx3+MXhDEx7zz4ykYeZVWWXQRFnRLjBWhgeg==@lists.freedesktop.org
-X-Gm-Message-State: AOJu0YxoiucLPgNfmHjNJ0eAexrd7+jTw29JyCkEMhlpwaByMlWA9rer
- YcP9EkI449Vrh0va2VXd3/DNCHKNYcj/t2ZqOjIiu1oFZR+ddsVmxLHPoAb7OnUar0LLmtm9VTy
- d7TsLBCux+re+XEDaUsDZ02TSoU6WL7k=
-X-Gm-Gg: ASbGnctNQASii5WwtdA3qIgnORSCZL+ua/MqYnv+LrERNZ3sWeoFQmWCX1nbw/wc0RR
- yku5wp6bHiUuS+65/4V1t7HtnRAZxNyB875p/Q7bYoiCRVOA7bB5LvKxkCH74MLgT+KqL8pOWdI
- Od/AyZC/IJvfrJX/4vrhhnYXwpTV9uTpgtFAV5DLwH6dinQvOQxDxNfg==
-X-Google-Smtp-Source: AGHT+IHkK5VxbDTzDH+78CGWNybiQ0lflBEpMpSVRH6uwkYDUKXtQuR/kJbEABJn7CeEMEkyXPjXtmArCfcPAjxsRNU=
-X-Received: by 2002:a17:90b:3a43:b0:311:fde5:c4ae with SMTP id
- 98e67ed59e1d1-3159d8e2be9mr5684021a91.6.1750632645432; Sun, 22 Jun 2025
- 15:50:45 -0700 (PDT)
+ AJvYcCWgch1SBjMK3/BUC9Hr+o6i5IgEr8ll9pPIpD03XMz+P4K8DfNF203esAh9FmO6mbpvIUfRIq15@lists.freedesktop.org
+X-Gm-Message-State: AOJu0YyRkicrc4k7qzz+GoXjT8Zp/EG0YL24up5AaBGF4Pu/23cC5JdU
+ 4zWF+DKigLleXsGmJrK7uqwLnCs3qW0N+ZAnRQy3aHqS/RWH2R7fLD9i6StXaRq52mQ=
+X-Gm-Gg: ASbGncuXfaPcEqyW6rt+Y/z7tfHlPYXtoql+f43JYC14TVUTb1vcvmhW4W7bL6gzctq
+ pwvna2dI3E1EWtviNkJx1PUb5zLLIn2foFggu0yGxp8JIdmru41RRryXZ45hbwMUSDGa5A9s0Co
+ javhpHXeQdAvQH16FbplEgeLa23uQVOVoCkhUQxLflb5hMxA2tFKi1cOZ3jYUqE5jCaTXtTYrGv
+ vAgyxlF1uIHvkPC9LTVHBKQCsMC5hTYLhaOed+zEF3YxWJpqP5r+Jf8EJaklxY4Q6fYc+iRzZCd
+ /MC5Eqp/qsWxSykd9eoBVgULbFJTvuzoQ3QE4SbO4nzQ/t9h0xmqCYqfhSDiQ0co7WVR7r3kT7w
+ v3YiJmds=
+X-Google-Smtp-Source: AGHT+IGKsva6kVgzg4Cok11z5b+GUl9qeuWFMNPVQGJXb1rtZHDejue9tGLjW0VLzgTh0jN+h79VWQ==
+X-Received: by 2002:a17:90b:3d50:b0:311:a314:c2cf with SMTP id
+ 98e67ed59e1d1-3159d8f7de2mr17582857a91.30.1750691681066; 
+ Mon, 23 Jun 2025 08:14:41 -0700 (PDT)
+Received: from localhost.localdomain ([112.149.32.52])
+ by smtp.gmail.com with ESMTPSA id
+ 98e67ed59e1d1-3159df71cd6sm8338512a91.4.2025.06.23.08.14.36
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Mon, 23 Jun 2025 08:14:40 -0700 (PDT)
+From: Jesung Yang <y.j3ms.n@gmail.com>
+To: Miguel Ojeda <ojeda@kernel.org>, Alex Gaynor <alex.gaynor@gmail.com>,
+ Boqun Feng <boqun.feng@gmail.com>, Gary Guo <gary@garyguo.net>,
+ =?UTF-8?q?Bj=C3=B6rn=20Roy=20Baron?= <bjorn3_gh@protonmail.com>,
+ Benno Lossin <lossin@kernel.org>, Andreas Hindborg <a.hindborg@kernel.org>,
+ Alice Ryhl <aliceryhl@google.com>, Trevor Gross <tmgross@umich.edu>,
+ Danilo Krummrich <dakr@kernel.org>
+Cc: linux-kernel@vger.kernel.org, rust-for-linux@vger.kernel.org,
+ nouveau@lists.freedesktop.org, Jesung Yang <y.j3ms.n@gmail.com>
+Subject: [PATCH 0/4] rust: add `FromPrimitive` support
+Date: Mon, 23 Jun 2025 15:14:26 +0000
+Message-Id: <cover.1750689857.git.y.j3ms.n@gmail.com>
+X-Mailer: git-send-email 2.39.5
 MIME-Version: 1.0
-References: <20250615-ptr-as-ptr-v12-0-f43b024581e8@gmail.com>
-In-Reply-To: <20250615-ptr-as-ptr-v12-0-f43b024581e8@gmail.com>
-From: Miguel Ojeda <miguel.ojeda.sandonis@gmail.com>
-Date: Mon, 23 Jun 2025 00:50:31 +0200
-X-Gm-Features: Ac12FXzAp4qUKl_aNT741tylL3I37tb5s--GlJccgcY1EV1oeXS1Teju6Ztan0w
-Message-ID: <CANiq72=xmyHuBYEGbCMi=Um_NvNbf5TfMmJB5YPpVp41FcPdJA@mail.gmail.com>
-Subject: Re: [PATCH v12 0/6] rust: reduce `as` casts, enable related lints
-To: Tamir Duberstein <tamird@gmail.com>
-Cc: Masahiro Yamada <masahiroy@kernel.org>,
- Nathan Chancellor <nathan@kernel.org>, 
- Miguel Ojeda <ojeda@kernel.org>, Alex Gaynor <alex.gaynor@gmail.com>, 
- Boqun Feng <boqun.feng@gmail.com>, Gary Guo <gary@garyguo.net>, 
- =?UTF-8?Q?Bj=C3=B6rn_Roy_Baron?= <bjorn3_gh@protonmail.com>, 
- Andreas Hindborg <a.hindborg@kernel.org>, Alice Ryhl <aliceryhl@google.com>, 
- Trevor Gross <tmgross@umich.edu>, Danilo Krummrich <dakr@kernel.org>, 
- Greg Kroah-Hartman <gregkh@linuxfoundation.org>,
- "Rafael J. Wysocki" <rafael@kernel.org>, 
- Brendan Higgins <brendan.higgins@linux.dev>, David Gow <davidgow@google.com>, 
- Rae Moar <rmoar@google.com>, Bjorn Helgaas <bhelgaas@google.com>, 
- Luis Chamberlain <mcgrof@kernel.org>, Russ Weight <russ.weight@linux.dev>,
- Rob Herring <robh@kernel.org>, Saravana Kannan <saravanak@google.com>,
- Abdiel Janulgue <abdiel.janulgue@gmail.com>, 
- Daniel Almeida <daniel.almeida@collabora.com>,
- Robin Murphy <robin.murphy@arm.com>, 
- Maarten Lankhorst <maarten.lankhorst@linux.intel.com>,
- Maxime Ripard <mripard@kernel.org>, 
- Thomas Zimmermann <tzimmermann@suse.de>, David Airlie <airlied@gmail.com>,
- Simona Vetter <simona@ffwll.ch>, 
- FUJITA Tomonori <fujita.tomonori@gmail.com>,
- Nicolas Schier <nicolas.schier@linux.dev>, 
- Frederic Weisbecker <frederic@kernel.org>, Lyude Paul <lyude@redhat.com>, 
- Thomas Gleixner <tglx@linutronix.de>,
- Anna-Maria Behnsen <anna-maria@linutronix.de>, 
- Benno Lossin <lossin@kernel.org>,
- =?UTF-8?Q?Krzysztof_Wilczy=C5=84ski?= <kwilczynski@kernel.org>, 
- John Stultz <jstultz@google.com>, Stephen Boyd <sboyd@kernel.org>, 
- Lorenzo Stoakes <lorenzo.stoakes@oracle.com>,
- "Liam R. Howlett" <Liam.Howlett@oracle.com>, 
- Breno Leitao <leitao@debian.org>, Viresh Kumar <viresh.kumar@linaro.org>, 
- linux-kbuild@vger.kernel.org, linux-kernel@vger.kernel.org, 
- rust-for-linux@vger.kernel.org, linux-kselftest@vger.kernel.org, 
- kunit-dev@googlegroups.com, linux-pci@vger.kernel.org, 
- linux-block@vger.kernel.org, devicetree@vger.kernel.org, 
- dri-devel@lists.freedesktop.org, netdev@vger.kernel.org, linux-mm@kvack.org, 
- linux-pm@vger.kernel.org, nouveau@lists.freedesktop.org, 
- Christian Brauner <brauner@kernel.org>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-X-Mailman-Approved-At: Sat, 13 Dec 2025 12:40:47 +0000
+Content-Transfer-Encoding: 8bit
+X-Mailman-Approved-At: Sat, 13 Dec 2025 12:40:44 +0000
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -120,30 +91,58 @@ List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-On Sun, Jun 15, 2025 at 10:55=E2=80=AFPM Tamir Duberstein <tamird@gmail.com=
-> wrote:
->
-> This started with a patch that enabled `clippy::ptr_as_ptr`. Benno
-> Lossin suggested I also look into `clippy::ptr_cast_constness` and I
-> discovered `clippy::as_ptr_cast_mut`. This series now enables all 3
-> lints. It also enables `clippy::as_underscore` which ensures other
-> pointer casts weren't missed.
->
-> As a later addition, `clippy::cast_lossless` and `clippy::ref_as_ptr`
-> are also enabled.
->
-> Signed-off-by: Tamir Duberstein <tamird@gmail.com>
+This patch series introduces a new `FromPrimitive` trait along with its
+corresponding derive macro.
 
-Applied to `rust-next` -- thanks everyone!
+A few enhancements were made to the custom `quote!` macro to write the
+derive macro. These include support for additional punctuation tokens
+and a fix for an unused variable warning when quoting simple forms.
+Detailed information about these enhancements is provided in the
+relevant patches.
 
-    [ Added `.cast()` for `opp`. - Miguel ]
+While cleaning up the implementations, I came across an alternative
+form of the `FromPrimitive` trait that might better suit the current
+use case. Since types that implement this trait may often rely on just
+one `from_*` method, the following design could be a simpler fit:
 
-    [ Changed `isize` to `c_long`. - Miguel ]
+    trait FromPrimitive: Sized {
+        type Primitive;
 
-It would still be nice to get the couple remaining Acked-bys (happy to
-rebase to apply them), but I feel we are in good shape, and it is a
-good time to put it into linux-next so that people see the lint before
-they start applying new code into their branches.
+        fn from_bool(b: bool) -> Option<Self>
+        where
+            <Self as FromPrimitive>::Primitive: From<bool>,
+        {
+            Self::from_primitive(b.into())
+        }
 
-Cheers,
-Miguel
+        fn from_primitive(n: Self::Primitive) -> Option<Self>;
+    }
+
+This is just a thought and not something I feel strongly about, but I
+wanted to share it in case others find the idea useful. Feedback or
+suggestions are very welcome.
+
+The original discussion of FromPrimitive can be found on Zulip [1].
+
+[1] https://rust-for-linux.zulipchat.com/#narrow/channel/288089/topic/x/near/524427350
+
+Jesung Yang (4):
+  rust: introduce `FromPrimitive` trait
+  rust: macros: extend custom `quote!` macro
+  rust: macros: prefix variable `span` with underscore
+  rust: macros: add derive macro for `FromPrimitive`
+
+ rust/kernel/convert.rs | 154 +++++++++++++++++++++++++++++
+ rust/kernel/lib.rs     |   1 +
+ rust/macros/convert.rs | 217 +++++++++++++++++++++++++++++++++++++++++
+ rust/macros/lib.rs     |  71 ++++++++++++++
+ rust/macros/quote.rs   |  46 ++++++++-
+ 5 files changed, 487 insertions(+), 2 deletions(-)
+ create mode 100644 rust/kernel/convert.rs
+ create mode 100644 rust/macros/convert.rs
+
+
+base-commit: dc35ddcf97e99b18559d0855071030e664aae44d
+-- 
+2.39.5
+
