@@ -2,117 +2,74 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id 9CB19AE359D
-	for <lists+nouveau@lfdr.de>; Mon, 23 Jun 2025 08:22:16 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 19F61AE3E26
+	for <lists+nouveau@lfdr.de>; Mon, 23 Jun 2025 13:42:13 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 503C110E185;
-	Mon, 23 Jun 2025 06:22:15 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 48AAF10E037;
+	Mon, 23 Jun 2025 11:42:09 +0000 (UTC)
 Authentication-Results: gabe.freedesktop.org;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="mdFri6u6";
+	dkim=pass (2048-bit key; unprotected) header.d=google.com header.i=@google.com header.b="brTGUUYv";
 	dkim-atps=neutral
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from mail-pj1-f47.google.com (mail-pj1-f47.google.com
- [209.85.216.47])
- by gabe.freedesktop.org (Postfix) with ESMTPS id C3A6F10E181
- for <nouveau@lists.freedesktop.org>; Mon, 23 Jun 2025 06:22:13 +0000 (UTC)
-Received: by mail-pj1-f47.google.com with SMTP id
- 98e67ed59e1d1-3135f3511bcso3942079a91.0
- for <nouveau@lists.freedesktop.org>; Sun, 22 Jun 2025 23:22:13 -0700 (PDT)
+Received: from mail-wm1-f73.google.com (mail-wm1-f73.google.com
+ [209.85.128.73])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 5A1AC10E35C
+ for <nouveau@lists.freedesktop.org>; Mon, 23 Jun 2025 11:42:07 +0000 (UTC)
+Received: by mail-wm1-f73.google.com with SMTP id
+ 5b1f17b1804b1-450eaae2934so35108495e9.2
+ for <nouveau@lists.freedesktop.org>; Mon, 23 Jun 2025 04:42:07 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1750659733; x=1751264533; darn=lists.freedesktop.org;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=ZjaVo7z5thcmzA/Idtk2W4NhEJVEWcJtCaNKpGwgS2c=;
- b=mdFri6u6ksgQ2EaEqFUTaC2IcFOCOiyqyBrKcT5ke63eYU8GZ/0OX0hmGZsVsK/6y6
- QjZyn5fawiU9Nvqh0ZAQ4AUrgZjwRB1+g9TclxXSHVguKwOaverbFmPli1vUJfA65VRh
- eqYb3EjQvkvA84u1TAO6o+WY41EOvATapP8dc9xq4LFsVN0TyMRL9CPHk4oipd4IBYuE
- Q/2H/ncMkjiI8Xfm04E+IUiEKh7Q6x7+g/um3/F4cF2AI6JSqvkCKvMQoK8NUpEyIdvx
- Nb80mbwDx897XKD2xePNmKS3MA6ilCAXFIl1jhq4rJAtfi3/Z3GOfkxpbuhVn21y1iT2
- VKnA==
+ d=google.com; s=20230601; t=1750678926; x=1751283726;
+ darn=lists.freedesktop.org; 
+ h=cc:to:from:subject:message-id:references:mime-version:in-reply-to
+ :date:from:to:cc:subject:date:message-id:reply-to;
+ bh=gOakrre7l7gSs8tnftFg1umC3O4hex3jEXhe5bAXm4c=;
+ b=brTGUUYvgh1HB2R5+PhqvsTFj6FMIb7Y3PGofDI1kat9g9a/OpdAYG1MPJjEPgZCCy
+ j11r4rbFXXccnggu0mXjZyGU3gxPi5fWdzUcvP8HBMoYueuJ4Au5prLhWkSxbOPcULNB
+ 9IVpNYmY1OMTmrereKznLBvnvi9hkKqiMSxg05vKc95nszpPnjsK4k1bgKdE2TDpAAl+
+ l0gd8fXsPWQRRn7xMlG4mjjWfidNKKzIRsH5G00RS18o8akwDLmfqR5+mexMdmKvhSrh
+ G5Dv4uSU5hg4z8aPf5IwhfQ7hc49l9h/etzqlLNeEs0d8sg8PVNrTJSwjrIUqtl4Apzc
+ 5SHg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1750659733; x=1751264533;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=ZjaVo7z5thcmzA/Idtk2W4NhEJVEWcJtCaNKpGwgS2c=;
- b=kKTvS+Gc8nEQOmiqZtfRwlOTwEPoEFJPo17beuqOilV9ZAx7iQa53ksCz6Rc8LDaCy
- Zl8GqNu9gtimj//bxseBEjABlb5q5/9g+MuoMfMlLOXeaFKDw94f2+UCgsvNzxg2TDp3
- wXH99nZsyU2n6Cfs/KLQebkITqkQJO2DRlGpuCQj23as2w0XZCg1hiDj6ZpO7tb3aj2L
- cgvbgm/oHo6a7tkaH0DmsXbB4RZPx/IT9R/57DcE1SkflAq3k0WSna2QPeOC+qkQuub1
- J0kDa5UysPxHGGieeT3Ha9hH+Ud8E9sLQ97gVco53w1ldOJ908z5chvOcoEekmoMMND+
- Uv1g==
+ d=1e100.net; s=20230601; t=1750678926; x=1751283726;
+ h=cc:to:from:subject:message-id:references:mime-version:in-reply-to
+ :date:x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+ bh=gOakrre7l7gSs8tnftFg1umC3O4hex3jEXhe5bAXm4c=;
+ b=huu/Zf3ajj9/fyHwNe0HZzGN+sKvhTf3kI/+ENZ1sX2k/OwuQ9wzrXx4uNeGn0KoHu
+ WGzKAuqOnYiN+EcS6D/uf0R32HqBSnGe+PCga72bPGgynQ/8XHwhobgFR2fmnRjNHEe+
+ lvN3cAu475UM52yCFESNJXuaK9S8CZ8w88Ns4/66zdASDu9x/Td1mxRxkJSjOZmMDRBd
+ eKsCLH1sjuqV+aFoqoOagsFrSVFb27SP+7zcQIFTZb3ztK/VSd6GIvJSBdNKE+aWQX7G
+ jaTsaQo5JdCNPFYHThcYbcZOnMjVT/c7ltrYvnmxv6VhdC2rMeyw3n05beCgyph6W5fd
+ e/fw==
 X-Forwarded-Encrypted: i=1;
- AJvYcCVt97XdHQ/chwoSdTBacKLnyAcCJgsXaQzw716rg2POhAxOny+ltvxPCgpEMNfiPbpzvhmaNN8/@lists.freedesktop.org
-X-Gm-Message-State: AOJu0Yz4kpQ2mIKyH6dqdkCPqd6qvpeZXr91j9lELNhtRma5HupOQ3RM
- skIR3EyzV7p+6Ixe5/tm7no/wF3dzqji0svQ3G9Y/D6SL+8fBxLyLEB71zsx7tzCzZ8=
-X-Gm-Gg: ASbGncs0Z+8i8yjFqlZH/l9+bHbymXxprB564AXtD9UlXURigVf9XtcLd5P8jl5xCDw
- hwNf+bMU3gtX68cDGp42pO6QhP6R1hHpptlA/me9qNiwgOlmhNU0Xf9Uinbi8XoMYofpqCBbbBu
- RoyM0VoxtW7gttmkal76eOpGC//eJ1UPzPeeoCMflZPUCWuH7ggNaKPyXU2cXV3zRo+3NeO6w1/
- w0HigFMIDIdh38LvJtc0iMzuxPbjSv9lzi0mIsfd5NM0SQ5kBztKrPwmLkNOiZZqAqpWa8yOBGS
- ubryvJiQ2MIi9LPRzcRceBHzyQd2NpjNbuARkw3kTUAUo4Cf3TxgK1nk5oRzVlM=
-X-Google-Smtp-Source: AGHT+IHTC8DDc643Bby1AguMJbpjpU8RoaZSO7asfpNMZjv5HFpnG7zervZfVFZEkHAcEV/Plpb2eg==
-X-Received: by 2002:a17:90b:1fcc:b0:311:b0ec:135b with SMTP id
- 98e67ed59e1d1-3159d8d6282mr19886141a91.24.1750659733212; 
- Sun, 22 Jun 2025 23:22:13 -0700 (PDT)
-Received: from localhost ([122.172.81.72]) by smtp.gmail.com with ESMTPSA id
- d9443c01a7336-237d860a3c9sm75875175ad.95.2025.06.22.23.22.12
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sun, 22 Jun 2025 23:22:12 -0700 (PDT)
-Date: Mon, 23 Jun 2025 11:52:10 +0530
-From: Viresh Kumar <viresh.kumar@linaro.org>
-To: Tamir Duberstein <tamird@gmail.com>
-Cc: Michal Rostecki <vadorovsky@protonmail.com>,
- Miguel Ojeda <ojeda@kernel.org>, Alex Gaynor <alex.gaynor@gmail.com>,
- Boqun Feng <boqun.feng@gmail.com>, Gary Guo <gary@garyguo.net>,
- =?utf-8?B?QmrDtnJu?= Roy Baron <bjorn3_gh@protonmail.com>,
- Andreas Hindborg <a.hindborg@kernel.org>,
- Alice Ryhl <aliceryhl@google.com>, Trevor Gross <tmgross@umich.edu>,
- Brendan Higgins <brendan.higgins@linux.dev>,
- David Gow <davidgow@google.com>, Rae Moar <rmoar@google.com>,
- Danilo Krummrich <dakr@kernel.org>,
- Maarten Lankhorst <maarten.lankhorst@linux.intel.com>,
- Maxime Ripard <mripard@kernel.org>,
- Thomas Zimmermann <tzimmermann@suse.de>,
- David Airlie <airlied@gmail.com>, Simona Vetter <simona@ffwll.ch>,
- Greg Kroah-Hartman <gregkh@linuxfoundation.org>,
- "Rafael J. Wysocki" <rafael@kernel.org>,
- Luis Chamberlain <mcgrof@kernel.org>, Russ Weight <russ.weight@linux.dev>,
- FUJITA Tomonori <fujita.tomonori@gmail.com>, Rob Herring <robh@kernel.org>,
- Saravana Kannan <saravanak@google.com>,
- Peter Zijlstra <peterz@infradead.org>,
- Ingo Molnar <mingo@redhat.com>, Will Deacon <will@kernel.org>,
- Waiman Long <longman@redhat.com>, Nathan Chancellor <nathan@kernel.org>,
- Nick Desaulniers <nick.desaulniers+lkml@gmail.com>,
- Bill Wendling <morbo@google.com>,
- Justin Stitt <justinstitt@google.com>, Andrew Lunn <andrew@lunn.ch>,
- Heiner Kallweit <hkallweit1@gmail.com>,
- Russell King <linux@armlinux.org.uk>,
- "David S. Miller" <davem@davemloft.net>,
- Eric Dumazet <edumazet@google.com>,
- Jakub Kicinski <kuba@kernel.org>, Paolo Abeni <pabeni@redhat.com>,
- Bjorn Helgaas <bhelgaas@google.com>, Arnd Bergmann <arnd@arndb.de>,
- Jens Axboe <axboe@kernel.dk>, Benno Lossin <lossin@kernel.org>,
- Krzysztof =?utf-8?Q?Wilczy=C5=84ski?= <kwilczynski@kernel.org>,
- Dave Ertman <david.m.ertman@intel.com>,
- Ira Weiny <ira.weiny@intel.com>, Leon Romanovsky <leon@kernel.org>,
- Breno Leitao <leitao@debian.org>,
- Michael Turquette <mturquette@baylibre.com>,
- Stephen Boyd <sboyd@kernel.org>, rust-for-linux@vger.kernel.org,
- linux-kernel@vger.kernel.org, linux-kselftest@vger.kernel.org,
- kunit-dev@googlegroups.com, dri-devel@lists.freedesktop.org,
- netdev@vger.kernel.org, devicetree@vger.kernel.org,
- llvm@lists.linux.dev, linux-pci@vger.kernel.org,
- nouveau@lists.freedesktop.org, linux-block@vger.kernel.org,
- linux-pm@vger.kernel.org, linux-clk@vger.kernel.org
-Subject: Re: [PATCH v12 4/5] rust: replace `kernel::c_str!` with C-Strings
-Message-ID: <20250623062210.she33z5hfouu5jgj@vireshk-i7>
-References: <20250619-cstr-core-v12-0-80c9c7b45900@gmail.com>
- <20250619-cstr-core-v12-4-80c9c7b45900@gmail.com>
-MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <20250619-cstr-core-v12-4-80c9c7b45900@gmail.com>
+ AJvYcCVdhPo5qtpl7IG8ns0KTbT4HRkzYrJW4ntEOhqC8c2K1pHcKHK1rx8huMY9m3mQQAqz3wBA6zq+@lists.freedesktop.org
+X-Gm-Message-State: AOJu0YwHm+FMkXlfIqf1k8pCSBeiZhx3Yg+yLczvRoi2xv1IEBaDllQO
+ TZLqmZK2WBi5rKG0xMGt9UHDCcX8ThC+fHD4HwFOBxowj6oC/OpsjNwDtnXRfNSD9Oc9vUPMsfQ
+ 9HxdyFtLYvpZofi8C6A==
+X-Google-Smtp-Source: AGHT+IFLgU2zCTWelcLduERfWArl79+0ODmzTBoOgn9WbMCJ/VeopIZFCpbEQxpUShrPw9S7d8IZRIEelvQI5Xg=
+X-Received: from wmbfs6.prod.google.com ([2002:a05:600c:3f86:b0:453:ccf:1528])
+ (user=aliceryhl job=prod-delivery.src-stubby-dispatcher) by
+ 2002:a05:600c:8b14:b0:453:a88:d509 with SMTP id
+ 5b1f17b1804b1-453659ca92cmr134236355e9.10.1750678925797; 
+ Mon, 23 Jun 2025 04:42:05 -0700 (PDT)
+Date: Mon, 23 Jun 2025 11:42:03 +0000
+In-Reply-To: <20250620-num-v1-2-7ec3d3fb06c9@nvidia.com>
+Mime-Version: 1.0
+References: <20250620-num-v1-0-7ec3d3fb06c9@nvidia.com>
+ <20250620-num-v1-2-7ec3d3fb06c9@nvidia.com>
+Message-ID: <aFk9i71j2rKcC6KL@google.com>
+Subject: Re: [PATCH 2/3] rust: num: add the `last_set_bit` operation
+From: Alice Ryhl <aliceryhl@google.com>
+To: Alexandre Courbot <acourbot@nvidia.com>
+Cc: Miguel Ojeda <ojeda@kernel.org>, Alex Gaynor <alex.gaynor@gmail.com>, 
+ Boqun Feng <boqun.feng@gmail.com>, Gary Guo <gary@garyguo.net>, 
+ "=?utf-8?B?QmrDtnJu?= Roy Baron" <bjorn3_gh@protonmail.com>,
+ Benno Lossin <lossin@kernel.org>, 
+ Andreas Hindborg <a.hindborg@kernel.org>, Trevor Gross <tmgross@umich.edu>, 
+ Danilo Krummrich <dakr@kernel.org>, linux-kernel@vger.kernel.org, 
+ rust-for-linux@vger.kernel.org, nouveau@lists.freedesktop.org
+Content-Type: text/plain; charset="utf-8"
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -127,12 +84,74 @@ List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-On 19-06-25, 11:06, Tamir Duberstein wrote:
->  drivers/cpufreq/rcpufreq_dt.rs        |  5 ++---
->  rust/kernel/clk.rs                    |  6 ++----
->  rust/kernel/cpufreq.rs                |  3 +--
+On Fri, Jun 20, 2025 at 10:14:52PM +0900, Alexandre Courbot wrote:
+> Add an equivalent to the `fls` (Find Last Set bit) C function to Rust
+> unsigned types.
+> 
+> It is to be first used by the nova-core driver.
+> 
+> Signed-off-by: Alexandre Courbot <acourbot@nvidia.com>
 
-Acked-by: Viresh Kumar <viresh.kumar@linaro.org>
+Reviewed-by: Alice Ryhl <aliceryhl@google.com>
 
--- 
-viresh
+>  rust/kernel/num.rs | 38 ++++++++++++++++++++++++++++++++++++++
+>  1 file changed, 38 insertions(+)
+> 
+> diff --git a/rust/kernel/num.rs b/rust/kernel/num.rs
+> index 6ecff037893dd25420a6369ea0cd6adbe3460b29..95766201a7cf208989f37ecbc6d54d264385a754 100644
+> --- a/rust/kernel/num.rs
+> +++ b/rust/kernel/num.rs
+> @@ -161,3 +161,41 @@ pub const fn align_up(self, value: $t) -> $t {
+>  }
+>  
+>  power_of_two_impl!(usize, u8, u16, u32, u64, u128);
+> +
+> +macro_rules! impl_last_set_bit {
+> +    ($($t:ty),+) => {
+> +        $(
+> +            ::kernel::macros::paste! {
+
+I think this would read slightly nicer with the paste! invocation on the
+outer scope.
+
+$(::kernel::macros::paste! {
+    ...
+})+
+
+> +            /// Last Set Bit: return the 1-based index of the last (i.e. most significant) set bit
+> +            /// in `v`.
+> +            ///
+> +            /// Equivalent to the C `fls` function.
+> +            ///
+> +            /// # Examples
+> +            ///
+> +            /// ```
+> +            #[doc = concat!("use kernel::num::last_set_bit_", stringify!($t), ";")]
+> +            ///
+> +            #[doc = concat!("assert_eq!(last_set_bit_", stringify!($t), "(0x0), 0);")]
+> +            #[doc = concat!("assert_eq!(last_set_bit_", stringify!($t), "(0x1), 1);")]
+> +            #[doc = concat!("assert_eq!(last_set_bit_", stringify!($t), "(0x10), 5);")]
+> +            #[doc = concat!("assert_eq!(last_set_bit_", stringify!($t), "(0x1f), 5);")]
+> +            #[doc = concat!(
+> +                "assert_eq!(last_set_bit_",
+> +                stringify!($t),
+> +                "(",
+> +                stringify!($t),
+> +                "::MAX), ",
+> +                stringify!($t), "::BITS);"
+> +            )]
+> +            /// ```
+> +            #[inline(always)]
+> +            pub const fn [<last_set_bit_ $t>](v: $t) -> u32 {
+> +                $t::BITS - v.leading_zeros()
+> +            }
+> +            }
+> +        )+
+> +    };
+> +}
+> +
+> +impl_last_set_bit!(usize, u8, u16, u32, u64, u128);
+> 
+> -- 
+> 2.49.0
+> 
