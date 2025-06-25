@@ -2,173 +2,160 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id 91839AE80D6
-	for <lists+nouveau@lfdr.de>; Wed, 25 Jun 2025 13:20:49 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 8946FAE85A0
+	for <lists+nouveau@lfdr.de>; Wed, 25 Jun 2025 16:07:42 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 0669910E20A;
-	Wed, 25 Jun 2025 11:20:48 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id A629610E739;
+	Wed, 25 Jun 2025 14:07:38 +0000 (UTC)
 Authentication-Results: gabe.freedesktop.org;
-	dkim=pass (2048-bit key; unprotected) header.d=intel.com header.i=@intel.com header.b="Xfb/este";
+	dkim=pass (2048-bit key; unprotected) header.d=Nvidia.com header.i=@Nvidia.com header.b="ej+26TgH";
 	dkim-atps=neutral
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from mgamail.intel.com (mgamail.intel.com [192.198.163.18])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 6A11710E10A;
- Wed, 25 Jun 2025 11:20:46 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
- d=intel.com; i=@intel.com; q=dns/txt; s=Intel;
- t=1750850446; x=1782386446;
- h=from:to:cc:subject:date:message-id:references:
- in-reply-to:content-transfer-encoding:mime-version;
- bh=/US4Y4sOP3rcP8NXz3VQCbEgQJaFyKr4bnrqgU8qMJ8=;
- b=Xfb/esteo7GiVeqfHzMtchj2mxH63vQOpfv9TN/8CQKkzuKmu8NcAm+u
- 1hhpoKXjMK9v98TqQe2ol67+R35zT7GjGALhKQOarFpHUvRSg7qXKE3ub
- As+5Xxh61oIBGEIDlUa6kszTNpzPXk8b2ir74Tx5kQei+p+QjBxJ04+ey
- bEF6x6FrunPb5nYrm2bz5ILTIeJ4usx/5T2z7FcDH5YBf6nMYUnC9F2OP
- qdzu7QCoJIasltnRUj4tr2iFSKQav0VRYwIuhXel+0RPy/RYnUUkV8FRk
- hLOR7TQs0Kyuvuv2ZJ9Ro29X8z9IzfDgMM2FypT43JNAYRzdpIvPSSELM Q==;
-X-CSE-ConnectionGUID: bhwKmPSERBuBsi+V/9zz/A==
-X-CSE-MsgGUID: QNxqeAgxTSSoAOgrKJZydg==
-X-IronPort-AV: E=McAfee;i="6800,10657,11474"; a="52345436"
-X-IronPort-AV: E=Sophos;i="6.16,264,1744095600"; d="scan'208";a="52345436"
-Received: from orviesa009.jf.intel.com ([10.64.159.149])
- by fmvoesa112.fm.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
- 25 Jun 2025 04:20:46 -0700
-X-CSE-ConnectionGUID: b1pjcpKXTTeCHZ1HHbZ2aw==
-X-CSE-MsgGUID: t6n8dJgyTFmPJ1pSYVqNgA==
-X-ExtLoop1: 1
-X-IronPort-AV: E=Sophos;i="6.16,264,1744095600"; d="scan'208";a="151952445"
-Received: from orsmsx902.amr.corp.intel.com ([10.22.229.24])
- by orviesa009.jf.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
- 25 Jun 2025 04:20:45 -0700
-Received: from ORSMSX901.amr.corp.intel.com (10.22.229.23) by
- ORSMSX902.amr.corp.intel.com (10.22.229.24) with Microsoft SMTP Server
- (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.2.1544.25; Wed, 25 Jun 2025 04:20:45 -0700
-Received: from ORSEDG902.ED.cps.intel.com (10.7.248.12) by
- ORSMSX901.amr.corp.intel.com (10.22.229.23) with Microsoft SMTP Server
- (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.2.1544.25 via Frontend Transport; Wed, 25 Jun 2025 04:20:45 -0700
-Received: from NAM12-MW2-obe.outbound.protection.outlook.com (40.107.244.41)
- by edgegateway.intel.com (134.134.137.112) with Microsoft SMTP Server
- (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.2.1544.25; Wed, 25 Jun 2025 04:20:45 -0700
+Received: from NAM10-BN7-obe.outbound.protection.outlook.com
+ (mail-bn7nam10on2083.outbound.protection.outlook.com [40.107.92.83])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id BE97310E739
+ for <nouveau@lists.freedesktop.org>; Wed, 25 Jun 2025 14:07:34 +0000 (UTC)
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=ya9bTERlEn7/T6t78KDOLrwak7mkzHkwqchT0MgZ59aGrw5qetPTj2y3Dg/2XM2Fx8hX51FO0q2FUCs5n6d3QmAimKNszspg69adeajKveDmoQgiCWDXEdSjcllbzsNcTWVnWZlEhddjWkfxeqmBXKY7G866AZbRY5jQT9w+c3SeRvPBZkzhxO0XWua4hLJvUihFJ3jpB/91FzRLMnlpj4orv3WXniTWeHDo3TdiQ/rkiUL1YkggbOaK4t7ZrsBe7hpWltpfOTBOs/qGda/9W6iz48v8ZzUmWNGzYPAC1wVLKcIPssInuZtQTz3s4B5WLiSmxff4qviSFzntRkITaA==
+ b=hHAGG3X/6C5ULC4ELH8wmSqkgBKoNrHU/YHY3yN/JqCS4eIKZ/ckDzy7D0nOnffO+CYkDNtjhWLAY+y8Nx4w/AOv42Uo9nJk+1m9CeHOf8R5spH1/1SRjK9jvPOFNABiAFvy1vOi2drDz5wtG5wHfobbgBIhH0wFuGoVCX0r4PlVMzdVks2NpEGC6ThNVLwGi8WJbYg5ScI07YSUuCZ1tGz+Y0qMe/iSVi9KNPqfDMG/Sx3lGSmCnVP9Bl3EWk6P8IC9HQ018vsBUGl7ngVCEWo6XZW2igR0dWOfLFqG+9JcGiFIqKJ2sZADD3M3IrxLkN6fDfISzKsst0EeyLZDyA==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
  s=arcselector10001;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=iJ73huqVJvAjpJO4fQl5hxaamrrTSCSfVvn29WjNsxM=;
- b=rSNYIbZ5HU2BfYxBgy3OhBoC6yqCG6qHj9ODr5fukAVDUU3fG7Bi+H30I4XU5PWQ+X7R1pfJobkAoCqAQLHNUm8sw08YLXw1oLBT39XQBPqyCLXcF6zEv9PXRWG2/ZthEzoa/0ESOA4vtVMsj0oSAN0T0ZVdK7n1K19RS+80QZAjI9YuVU1m/Vk36/cwRgr4bDVGpSHgNHj9/FfbjPgglUG5P+/s4yjVffOKxlBUJKsP59tcDRBFQ01BCzyyixCagQGxV8iHs1AM/dEXNnFWdMp1LUJqyXgTaj25rrblJXeCWBLalLFfvZHNKQ7QBCyBi8Sp4q5Zzr0v+C3C77abaQ==
+ bh=fdr1bjE/l6ddPRd+rG2PCED0D+QJY8rVMPZtD6NVDsE=;
+ b=wYKSzdr6alr8yrgW3ADATv6i/qMO+vy90cTWO3f80BAXlD2QWhbWJvsl05wIwsEw/iiMcg7SCKAk3mWmu7PEhmfc+bTxM158LkZ/g9KVQRDo7ptvfgEVM15VXwB9iypkfUMrGTJ0lVE7J0ulklu/lJZAWKe0MobNEY8QkvmND3SquV/dQ0C4i2oOmwTFO2MZot86y4j2fCC3VB4v84O96xrZOxGVzAPGZ8Ee9wzmYkUkZ23E1uc2Rz00edNJSyPBOXwT02rL26ZLVanMPXu/uMl5wOlblltsv5A1NHOS/mKeivxErxwEb1WzdKqCt1Kg+eTLvVJaUDWqsSL+uxlr0g==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=intel.com; dmarc=pass action=none header.from=intel.com;
- dkim=pass header.d=intel.com; arc=none
-Received: from DM3PPF208195D8D.namprd11.prod.outlook.com
- (2603:10b6:f:fc00::f13) by MW4PR11MB5797.namprd11.prod.outlook.com
- (2603:10b6:303:184::21) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.8835.38; Wed, 25 Jun
- 2025 11:20:28 +0000
-Received: from DM3PPF208195D8D.namprd11.prod.outlook.com
- ([fe80::9c2a:ba60:c5fe:6a64]) by DM3PPF208195D8D.namprd11.prod.outlook.com
- ([fe80::9c2a:ba60:c5fe:6a64%5]) with mapi id 15.20.8857.026; Wed, 25 Jun 2025
- 11:20:28 +0000
-From: "Kandpal, Suraj" <suraj.kandpal@intel.com>
-To: Jani Nikula <jani.nikula@linux.intel.com>,
- "intel-xe@lists.freedesktop.org" <intel-xe@lists.freedesktop.org>,
- "intel-gfx@lists.freedesktop.org" <intel-gfx@lists.freedesktop.org>,
- "dri-devel@lists.freedesktop.org" <dri-devel@lists.freedesktop.org>,
- "nouveau@lists.freedesktop.org" <nouveau@lists.freedesktop.org>, Lyude Paul
- <lyude@redhat.com>
-CC: "Murthy, Arun R" <arun.r.murthy@intel.com>
-Subject: RE: [PATCH 00/13] Modify drm helpers to use luminance
-Thread-Topic: [PATCH 00/13] Modify drm helpers to use luminance
-Thread-Index: AQHb4a19aatm4GnqKUaZrU7UJOyb07QTnJQAgAAlcVA=
-Date: Wed, 25 Jun 2025 11:20:28 +0000
-Message-ID: <DM3PPF208195D8DCD368BF05ED5C8398409E37BA@DM3PPF208195D8D.namprd11.prod.outlook.com>
-References: <20250620063445.3603086-1-suraj.kandpal@intel.com>
- <4962fc123ddc84edcf02dea8d57df32088c18d5a@intel.com>
-In-Reply-To: <4962fc123ddc84edcf02dea8d57df32088c18d5a@intel.com>
-Accept-Language: en-US
-Content-Language: en-US
-X-MS-Has-Attach: 
-X-MS-TNEF-Correlator: 
-authentication-results: dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=intel.com;
-x-ms-publictraffictype: Email
-x-ms-traffictypediagnostic: DM3PPF208195D8D:EE_|MW4PR11MB5797:EE_
-x-ms-office365-filtering-correlation-id: 1747eb27-2418-4537-0d92-08ddb3da4a56
-x-ms-exchange-senderadcheck: 1
-x-ms-exchange-antispam-relay: 0
-x-microsoft-antispam: BCL:0; ARA:13230040|1800799024|376014|366016|38070700018;
-x-microsoft-antispam-message-info: =?us-ascii?Q?YKG0Lq+FHsq6BPUehiEEhn523/jjy8w1QhDcOUZ9Ao9kbRgWBZYJEVxuADYn?=
- =?us-ascii?Q?YPok82APG+JiO1F7D0rKYXf4Oe4u6w7FYqZfjpuhrEqJQQkEfbYFtvACFzeo?=
- =?us-ascii?Q?MhUiXbNt37y3K0VyJlX/67LbpjkJTtDSNGY0cdozf9C4TJH5p6z0A4d90T8E?=
- =?us-ascii?Q?HLT38/JCKMpOP7Edgn6qPT8JrgBc6+t/dsAb2OYSsTnnrznLcuDngs8Xd5FS?=
- =?us-ascii?Q?6AmVJdVAf+OpYlaCU4MB86mJ0w/bChzXqueK5OaoPj9kY+9g5S8ZJfn6lAqi?=
- =?us-ascii?Q?Yz+Tc5SiWM9bmhNlLXx5SP7HrgZqbzfXUpuP/x0Jemz0tFtf/OOTatL4QaDV?=
- =?us-ascii?Q?1DKYawITrAyf/HkTy0QXGwSgk1kKqzLdUuHiPoI8w9OUkLvAHLnwfn0J66DP?=
- =?us-ascii?Q?T93jUzD+GAj8x29Md4SkQ9gUlUBjtlI8o6svL5JA2Ar5dQ2McHFOWgkhpda2?=
- =?us-ascii?Q?vukVYnHhgAi7SmG7g2qxQKJUQhuWTfC4S9SwX6qtAzUMaInSRkhWueI038/S?=
- =?us-ascii?Q?uWMyog0YMoNvsFXtIu9VrWxRyDH2ODYpEqLr2BS362+pu0wPl8BALV78kEER?=
- =?us-ascii?Q?2A8u6YY6eU/9oFy9LLBDka0LBwvwqvrRQK2ySJECeK9u2dPr+K2F8mM/UC8+?=
- =?us-ascii?Q?ChUrh7Q8PlHPb9r6yYGJ/MQhzaNhAkKrbApIOYKtMRN5KNcCDHHQU7eOWst1?=
- =?us-ascii?Q?37Pkaudgzm7UQ2ACtbd9yB9DbR4OScRrDEaObmOpyD5SBq/EWoJTLmwgvCaP?=
- =?us-ascii?Q?df6/vUn1lTfDNtjwC8z4x7yammrlCq7rRba0HV3XalkxhSu02cW1bm+i0zis?=
- =?us-ascii?Q?gpy+PsrBTG/JOttjzrjVoZumxIZEYuvP/s8JOy/+bAY0frAU/5GDJE68j2F3?=
- =?us-ascii?Q?XBqizwSxeEGuqbeKd/RfAz4GroIW1wEjdS0VoXXqsZe9ckiT0Y+qMK5pzlIq?=
- =?us-ascii?Q?2WDKlaStUcWlMbBrl8HPjj3MxOeTuNLzDCol9ypqUsPmvPIIJfCPZ++5SrBn?=
- =?us-ascii?Q?8UjDpMyu9tLr63tp9K5lUFEQ1wUyDsTOOrqZa4E5+xxHNC1tUwhbT4cm/pMq?=
- =?us-ascii?Q?xog5iFmL413Hirp//i6DlzyThJLx44m9qJDghivFnY2FZyKmHxqrQUIN0K+0?=
- =?us-ascii?Q?xQ6aM5l240qZhTTrsT/68PSSaPDwFpYfPpCbHMslETApCWgtJzUr2BdtubEE?=
- =?us-ascii?Q?bd2iQjePqPOD4FaB9uqxjkdsOv9VdLN6AD1CNluqE2mc6I8kIg7I7wJHsXd+?=
- =?us-ascii?Q?8yL0aV2TCj4Pg53qTb3ebeIt8jzFZBKJqR8v22mrGAG29jMJeYQ0i74zgIOE?=
- =?us-ascii?Q?Jh2w3C7SF1s5arlGsrNWsQ5JhiDzp5VkagkmB90exjtafmug6NzOU/SpmEfw?=
- =?us-ascii?Q?cPBzJ9u8Khm7H1Gf8Ksdm5J7n3Xc4wA35QCP94ignDTgPzQCJMMyJiMOjcjq?=
- =?us-ascii?Q?13mTz5GNzOPCkeAZzcIi9H16QrL1obqiL6O6FMtCqmebVjprkhoiXg=3D=3D?=
-x-forefront-antispam-report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
- IPV:NLI; SFV:NSPM; H:DM3PPF208195D8D.namprd11.prod.outlook.com; PTR:; CAT:NONE;
- SFS:(13230040)(1800799024)(376014)(366016)(38070700018); DIR:OUT; SFP:1101; 
-x-ms-exchange-antispam-messagedata-chunkcount: 1
-x-ms-exchange-antispam-messagedata-0: =?us-ascii?Q?6GBypw+xMOyxAQIlUnCj3jhhq2pmEp/lIqmBqw98r6rKKySBZBqrj3yVYUpB?=
- =?us-ascii?Q?Toml7xAP+mqgE9xfW3iIUtDc9DMhL8q4gKWRkMoZzEuv7LMcLnyHzaaA0QLB?=
- =?us-ascii?Q?j9Tx5nQQNtqcdqFGcqt6jOO56JbM0LavIZrZzSoQq8c3yeVzwv42HyQp50Il?=
- =?us-ascii?Q?rlEZP1Pv43YNnbI/Rt1bNOmNcwdWVNlE++orji/ZjmlAQRQxKwZlZ0TtF3bt?=
- =?us-ascii?Q?wZQCQO3Ctz9IVj/00FtQsdD21HT0Qd05FXzyxu2DeWc4fviw9PGz6D9kBWek?=
- =?us-ascii?Q?WaJvwIrp7bXmsinKHZrtsGyf/mRZEAMZmCMhKInvDFfR/uDi6N4Gx5DNvHj9?=
- =?us-ascii?Q?EdjJ/vjoTDeysaCsjsef3RSJ20cBhIUsJQfS7YlDFt/7GR7JTDdkEeCgvuLy?=
- =?us-ascii?Q?3GXKc26p4Wq+AjoOFGgkuEXslEhFoX7aajWvou7dIh5NWHRCHZqk6bEbLHBv?=
- =?us-ascii?Q?CSwcS8fEiiBo/rox+NgrfRxrecCtxIku5p2oVns35zFo91PtToTWLHfdxDmT?=
- =?us-ascii?Q?uP6eMvGqRqE9+aqLfxUjXSivKdxVY3A4jcnlmqa01/PM8MjasE2UFC5lUUCm?=
- =?us-ascii?Q?XvthuVYTD73gC4peESPk2dJ4na3vHvehMe6rwnu/ucCxPsvRNA4T21e4zf0X?=
- =?us-ascii?Q?QJ/0otUUnDKGP79aeFlyf24jzaoCVE8nGx3Xvu53c66UxDRF2qnsrW3Dt7Xb?=
- =?us-ascii?Q?JKUqgc5dc9x5ey0x9H9pgN2UOVinwWnIXxECyfn8ouesIg7+v9+hNqdKe/hI?=
- =?us-ascii?Q?K9CuOj2axqD5dD+mg2PvT2tyORE5q7O3Y8RgN68i6yxFd2f2Q3lyNmY4S6RU?=
- =?us-ascii?Q?MKAeyfPQKtebZiN5INUVJFqXqO13BU+4+WeMHLDvrdbHkLKwdMXAlrbvBme5?=
- =?us-ascii?Q?3AiGr2FlvEK+fWRefmHzq/lpeviKyegXSlFVFn/5PnNwDblLMu5fGK67YIAm?=
- =?us-ascii?Q?0p3e44bnNvVcrkzSbf3oIpI1u2B7OvzpiJ8usfpTH9sO57sBxhb9aGicCOsT?=
- =?us-ascii?Q?6x0mvKcmooKm8m/muhSNGqLxu4p32EMdpdJC/SkGjseIEjeemd7J9B4nXxgF?=
- =?us-ascii?Q?GGcfmc6lcPqKxs4AyVQbvPfZm895wLXaJc+oCNaC3mhSxmexOSEO76iRqXzz?=
- =?us-ascii?Q?rDUvsvOQJKpkHgvp/rF/iZqgQPmvSWppwF+iwfKD7K/MburyjZgfw/LFcSsN?=
- =?us-ascii?Q?XJ31yh4OfPd87h0+tWVPtYAnhaW/A6EUGiWarwl4fMsA2LHPnLiogrVIMIOa?=
- =?us-ascii?Q?VgYBFzfRM0wVRCgd59L/4qBrg++lQ2FHAFjkXoTSuvOMvQL49Ww4n+KJlJBO?=
- =?us-ascii?Q?JD8es8fy/PNTUtLWBf8OXpJzXiM2DSDkIRI69roCvKzY3z9+rfnoiyb3HDp7?=
- =?us-ascii?Q?PljEMSiUvhn83Ait0SM58f6G3KMi0xYNb7ntrBHPqtf5wFfwvHiEHH/QZD4Q?=
- =?us-ascii?Q?JRylYJ7h1lvuK+w7jG6+1O982ZYpmIT0nULs246D96DLU2QyYLuoSVVRjMbM?=
- =?us-ascii?Q?rACXP06DVPvHNJ+vPqDdyYjcuO1pwiNrbCVu7cSya9PrThaQ+D9pBCE90xOU?=
- =?us-ascii?Q?DGaWXQ25+Qb2+dgA05rcaYm1EfJYqO32AiEq+o0c?=
-Content-Type: text/plain; charset="us-ascii"
+ smtp.mailfrom=nvidia.com; dmarc=pass action=none header.from=nvidia.com;
+ dkim=pass header.d=nvidia.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=Nvidia.com;
+ s=selector2;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=fdr1bjE/l6ddPRd+rG2PCED0D+QJY8rVMPZtD6NVDsE=;
+ b=ej+26TgHM8brymskfdrVb2WoPHLaUGLQoUPVJBZ0N8r9EUXZ2OOOf/0yWKox8YeB012DGJvEMJTFXW0hRxfDWPVn18Jt2HWf3z5+2t9DJG3ABP2Yg9wZEhIebWVz63d60xme/eMhV4wpWt+JIeSWkSDiBWYzBywIDU7Pf3pex8+RdcOJW30IArvU7XNCfZvSdaXJ55ZA6XGofMPSN7vIVWeWd0GzYgLFuJPQDZFxcwXzYTU63Vps4UQe+hb+zCwC9ALYq9hM+vF1fEYo03CPPu/rOGy7SvWapvOp047GIkiSholniChgvLj7KBClAlnEEshUd5XmPIgBh6w+O2LyXQ==
+Authentication-Results: dkim=none (message not signed)
+ header.d=none;dmarc=none action=none header.from=nvidia.com;
+Received: from CH2PR12MB3990.namprd12.prod.outlook.com (2603:10b6:610:28::18)
+ by SN7PR12MB7911.namprd12.prod.outlook.com (2603:10b6:806:32a::19)
+ with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.8857.29; Wed, 25 Jun
+ 2025 14:07:29 +0000
+Received: from CH2PR12MB3990.namprd12.prod.outlook.com
+ ([fe80::6e37:569f:82ee:3f99]) by CH2PR12MB3990.namprd12.prod.outlook.com
+ ([fe80::6e37:569f:82ee:3f99%4]) with mapi id 15.20.8857.026; Wed, 25 Jun 2025
+ 14:07:28 +0000
+Content-Type: text/plain; charset=UTF-8
+Date: Wed, 25 Jun 2025 23:07:22 +0900
+Message-Id: <DAVO878E49AN.1L5TPHANBBHE6@nvidia.com>
+To: "Jesung Yang" <y.j3ms.n@gmail.com>, "Miguel Ojeda" <ojeda@kernel.org>,
+ "Alex Gaynor" <alex.gaynor@gmail.com>, "Boqun Feng" <boqun.feng@gmail.com>,
+ "Gary Guo" <gary@garyguo.net>, =?utf-8?q?Bj=C3=B6rn_Roy_Baron?=
+ <bjorn3_gh@protonmail.com>, "Benno Lossin" <lossin@kernel.org>, "Andreas
+ Hindborg" <a.hindborg@kernel.org>, "Alice Ryhl" <aliceryhl@google.com>,
+ "Trevor Gross" <tmgross@umich.edu>, "Danilo Krummrich" <dakr@kernel.org>
+Cc: <linux-kernel@vger.kernel.org>, <rust-for-linux@vger.kernel.org>,
+ <nouveau@lists.freedesktop.org>
+Subject: Re: [PATCH 0/4] rust: add `FromPrimitive` support
+From: "Alexandre Courbot" <acourbot@nvidia.com>
 Content-Transfer-Encoding: quoted-printable
+X-Mailer: aerc 0.20.1-0-g2ecb8770224a-dirty
+References: <cover.1750689857.git.y.j3ms.n@gmail.com>
+In-Reply-To: <cover.1750689857.git.y.j3ms.n@gmail.com>
+X-ClientProxiedBy: TYAPR01CA0005.jpnprd01.prod.outlook.com (2603:1096:404::17)
+ To CH2PR12MB3990.namprd12.prod.outlook.com
+ (2603:10b6:610:28::18)
 MIME-Version: 1.0
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: CH2PR12MB3990:EE_|SN7PR12MB7911:EE_
+X-MS-Office365-Filtering-Correlation-Id: 4f6ac23c-52e2-472a-9555-08ddb3f19cd6
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: BCL:0;
+ ARA:13230040|7416014|1800799024|376014|366016|10070799003|921020; 
+X-Microsoft-Antispam-Message-Info: =?utf-8?B?bzBaZDJZcGwxd0xxUHN4Q2xtY2ZqcTVuTUd5alpZVUxxWkZZMkVXZnVYQ3BS?=
+ =?utf-8?B?cVA4QTZvVVl2TXA1dDkycnlFRXFXZWZidE83elI1NThqU2EyZHFhd3JvbTZV?=
+ =?utf-8?B?MmI3UExHMzBPZzhZYkNNSVNmWTFiWHBDS0tjTnZwdTBtLzY3OFN4R0hSY3Y5?=
+ =?utf-8?B?d0xOYStPb05tbzVVaFF0amVDQ2RpajgrME0zOFE0akwrL3pCZjVlcWRwUDc5?=
+ =?utf-8?B?eFdTbnhUSWttSCt4cXlYejhhQnRyYUN1emNoeVRiUnJ2MDV5OXlGYkVDM21p?=
+ =?utf-8?B?Nks5bDhsVjNlWHpKQll4TGZiUmVBaC8yZlVxZ09BTUxrbHFDdHZpVW1oWU5B?=
+ =?utf-8?B?ZnVCNzZLdm10WWszTFVyN1FHcXBNRG9Pb2ZMazVHc3prWDgyK2E4UkR4aXRs?=
+ =?utf-8?B?VFd6THpLRXhxc3Q1VjNkbjQ0U0R1aGFITXRWdGcrSk9CWFdZTXU2N2EyenNw?=
+ =?utf-8?B?N2dLcTVITlIwOGdxZERlcDVtaWIzSjEvVUFwb2hmQmFTYVBlNS9WcXpiNjUv?=
+ =?utf-8?B?WHhRUjBsT1VBdWhpdFRXZ2NoMWNteEN1Yy9ZbTFKcitNK29nWDIydnREZlFI?=
+ =?utf-8?B?S1BoSUpLTzdvcUMyazliTGlveDlZQk1WZEd2a0diR2RpNW4vU3NweGFad2gz?=
+ =?utf-8?B?MytlWDBOMmtBT2JyTGZqeUhwdVU2SlNHWUhGdVFWczBHTkxnRzBsVG5GUTdR?=
+ =?utf-8?B?NllHdlJRQnAxTEpDVzdOSzk5VlRRVTN1eW1PUE5ML0JKT2hMWUN0SUlaSEVq?=
+ =?utf-8?B?TmRENHRiNzhSQVdxUG5FQUQ3TVB2Q1ViZFZsN25ySkZqRjlXMjJ2Q2tSUStU?=
+ =?utf-8?B?aDVIWFJ4MlQxUTBpb0xXanFndFduWkFJb3Nqd21hTk5BZnV0VGwrbm1DZlBk?=
+ =?utf-8?B?V3U2U05BTE5lY2VybTY2bkFYYjVFNGo4MXhJSk9TUlF0RG5zbkp6bENkS1hW?=
+ =?utf-8?B?RnJYN2lPQTZ6eXA0d2dDQkx6NExYdXJmay9tQ3A5T1lYMHlVejU4Um9wNHVl?=
+ =?utf-8?B?RTlsYjRuZjB1VllKMHQydEo4ZjRiUUV1TGdyTGc4YzltMDl1dUtmUmJTNFZF?=
+ =?utf-8?B?ZFFkUTJ0ZWhHbVhsVWd0dzI0YW5YejVONFU3YVMwZ1RBc3RuV0tZcEdRVVJp?=
+ =?utf-8?B?OVhoWnBnaFZMeFdvYXBXOVRrOGdFYjJLUE44QlRqU2ZPYllvZmZkWVZzNGtD?=
+ =?utf-8?B?NzVNdFdPSXRKK1hHR0VLb1RYWDRHaWZnbUZMaEhSckJMVTJQcFNYK29aQUpX?=
+ =?utf-8?B?encxcXBQWXBaaUFlSTZUK3RadTV4QlVHeUZXQnVobVIyQ1U2TjJRTkhiMlE5?=
+ =?utf-8?B?UlJna3BRTjYxb3NXdENBZkpLUlR0MEhoZXhqbngwdm5FeVhOVG1xVzM0QUhp?=
+ =?utf-8?B?bHdPUCt3ZC9DL21obW80RHpubDFnVUNPWWRPWHNFN1NKYjNoZFFBNlVycjNp?=
+ =?utf-8?B?QnhMa2xlT0k5cWw2bGtZSGxjWG1sNG1xU0s2UEVJdUxuejBJRGJLQVoxUW56?=
+ =?utf-8?B?ejlybEZWKzNwODZLMUJDNXJHUXFlVWtLZFY4L1M1b3JrOUFMOFQ2dU1tVDVm?=
+ =?utf-8?B?UDBmWUxyRjBFU1RFdUlkemNHME5NNmRrNHFvV0RPZnlBUmlzUzZYeDZ0SUZY?=
+ =?utf-8?B?enVDY0FLTzllU2dKcW5UdVppakxGOFF2OGltblVyamp1TW1hRlBpbXFUcHJ6?=
+ =?utf-8?B?dzdTdTRmazg2YW1nWTdCVVhxa1FQdUNmajJhMFJSaHBFYjlvRE1yNkMza3g5?=
+ =?utf-8?B?Sm9DSFpxalY1ZmtBdVByTjNZNUkxRkNlR25IRlVzeHovQ2ZJSm5XL01QZjFF?=
+ =?utf-8?B?bUdHUzlPaVNPWlBoYmJnZHRhckFDaFRSMGxuQjlZM0FGaVhEQWFwQ1plUURU?=
+ =?utf-8?B?NVlBWWQ3RGxLQnhVOGNKdXJYSTl4eUVvbEkrNDg0Y2ZqbnVpZ0xkNWl3SFRC?=
+ =?utf-8?B?MVczelM0RGkrNmN4THlGZEdtckVSSkYxeHQwQVNiUFgvZXY0ZnJqRytrdGtF?=
+ =?utf-8?B?WTNEeVBNL0VBPT0=?=
+X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
+ IPV:NLI; SFV:NSPM; H:CH2PR12MB3990.namprd12.prod.outlook.com; PTR:; CAT:NONE;
+ SFS:(13230040)(7416014)(1800799024)(376014)(366016)(10070799003)(921020);
+ DIR:OUT; SFP:1101; 
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?ZmFERDNIWm9YWmhqU3N4UEx2WjVHV0lyb21hQ0p4cEdDZDBWSUVNc3BqRjhl?=
+ =?utf-8?B?L1lidUpOckpEeW0wTlR4a05PbThkTUowMGFUZE8rZGZWb29ZUE1aMCtYUU1w?=
+ =?utf-8?B?Sitic21PNUVwUHgvVVcvSFVRSVlOZ2hnNkszK2RqS2ppRXlOc01xc2RXZXpt?=
+ =?utf-8?B?S1U3RzNYQmxrQjZKVXZzbmpLTUYyUkZRUFh3V21sa2JOQXZoQzd4bkdLQUdt?=
+ =?utf-8?B?bW41Q3h4eVNtUmszV3NpeDA4MG81cFBLVVViSE5yeVNBbU9uVWM0ekwvSUVK?=
+ =?utf-8?B?QjNvWkhtU1IzRnpBOFRWc0Q4TTd0bnFCS2pVbi9LVTFoRDEwd0pGUldPbWcv?=
+ =?utf-8?B?amJ5MG8rd3RldExyMmFvTk1TUHhwcW9tbXBla3hQUU8yNkdZY2lsMmVQcita?=
+ =?utf-8?B?MXpTOXM5YTdNVDlJaG5lTHA3cXdEYmFXTEZ0SFovTFJQcHh2bmxSU2ExeTJP?=
+ =?utf-8?B?YVlVRDVrS0NlbEJSS0FySmNiN0dFR1Q5RGs3bkgvRmRNUVVWYWJDeFBJYkhE?=
+ =?utf-8?B?Z0NiMVowSkZDZ0g4Q0pHMjR1WVd0c3Z2emw4cjJOYTRMbU9JZUZRbU9kSDRI?=
+ =?utf-8?B?aVhNUWtBWU5IcmdpdFhkQkl6UkhqNll0QXJPTWRpeDFDaHlBSi84elRvTmE0?=
+ =?utf-8?B?MXVjcUNiU2hSbldwYXN1NEFVdVRsUHhlcitoK1RoUTVKUS9rLzZDcGtUNEoz?=
+ =?utf-8?B?NS9CMzl3MXc5cVpoMXBabEdnSkw1VWE5Yzd4WkNaL3V1UXhJUm5CTzZLQ3da?=
+ =?utf-8?B?eDAvVlpkUjEwS2phYjkvVVVaQlhaREVuV0E5ckFPT3RQWE9xM2d4VHkrc2Jn?=
+ =?utf-8?B?S2xPWFFXc21MUEs4U0g3M1ZTbEJOMVJYb3pJWHc5Q1J3cXpjdFRRRGJyUUMx?=
+ =?utf-8?B?eTkyS2pYTVViZklUV3ZYTitnelM0OGhCSzZZeWk4Q04vTjhRQ0gzSDBLOWdP?=
+ =?utf-8?B?NXgyWThZejFwVUdrcXFWWGcwTDNzb1JqdVU0cUNQVHkxM3l6RjhEamhBSWxk?=
+ =?utf-8?B?UWhTd3o3c1VVYUpVWlArK2lieHVQVUJ6Wit2eFJ1Q1FQSU9sTURyNk1rVVIw?=
+ =?utf-8?B?NU9MNzhMZDJHcGVINWl4VnpYQzN5SmtxazNTSXBLcDVvYmlpaTBQVzMxVEUv?=
+ =?utf-8?B?ZVJNblhmR3kwSXlwN2Ewc1c0ck5kT3FwTGZGSWZjUDg5ZW4vdGJlNWNkQ1FX?=
+ =?utf-8?B?ZGJ6aG50TTN2UWNoNDRzekRjY2hlbWtsRkQxU3ozRTZBUWk3c2xHMVdCZVd6?=
+ =?utf-8?B?eHQyeE4yWDUrU01yc1EyQ3lsZnE0a3dLSENwSHBCU1hNaU1GSVY3Wk02U25I?=
+ =?utf-8?B?M1JpWjdPRUNjT0ZiUXl1cEpqc1FUdDhiWG9Va0lnK0xPeU9RUkYxNjFlRVk4?=
+ =?utf-8?B?WFNhMW5VSEZzV0VlVlRPTmVoT25WcjVFRitBY1lTc0d4N0pQMUNQdHNiMGxa?=
+ =?utf-8?B?VWhWTVJsZ1Z6YXZSRk9ESCtSTXJ6c1Y3ckpHd3lPZnlXN25ZRnNGQ1MyY3k4?=
+ =?utf-8?B?eExKVUlwcHUzeUNBMngzUitlYVdreGVSMnRCOGtMNUJFRXpZVWFTSFVOMHpL?=
+ =?utf-8?B?VU9La1czL3hSelhjVHVZc1g4cTNIU2lxN1RGMzFrbGRXaEw5M0NCQXlXN3dh?=
+ =?utf-8?B?UDUzYm94bUxlWXMyRjJvZ09yNVZOZTFFMll5Vy83QWY2eHlYMld1Q1pkbFRa?=
+ =?utf-8?B?K2NabVZYVDdWV29IRjJRRGwxRjJNMStlNnZRUHlhQUhMM2NVdnZvR0NKVC9y?=
+ =?utf-8?B?NG10L2ZUWnNDcVZyUnovR2gzRWNHVnN3S3F5K3FPdmRqc0VtQXQwWVhiN1VT?=
+ =?utf-8?B?QTN5WDcyekpJakc4VGJWRHhMdXFZMzRFOWxWc1R3VjBvaENuUFkzOFZJd3M4?=
+ =?utf-8?B?QThQaHNkeVNBL2NzZytOY2V2QXgwUjcweno5NWY0WFFkSFNITGQyQnJJeWFj?=
+ =?utf-8?B?eTY0dTBuZXVyVG5qa3hMbVNQeGxpTnhnOFY3d0tJNWNCSUJ1VmMrSUJIVDJJ?=
+ =?utf-8?B?TXp2SE1vZi9naWM5UitCalN2Y1JVU2VUQm9DbEU1SGVxSDg1aVlrMVorbmls?=
+ =?utf-8?B?Si80VTNUZVNKdTBWV0Q3Qjl0a0dzL0h0clZqTkIzMFcvL21oTkQvTnhUV3k5?=
+ =?utf-8?B?WnBta0daTnZiUmRqMDRzdEEraVVIMmFIVytUV2dLQVRWWlRQVXFaUUlDR2Jk?=
+ =?utf-8?Q?o6ewv/KMKSs+D3rOWBg7bgmtIJX2ESBOZ2OD1Mw/ZlU3?=
+X-OriginatorOrg: Nvidia.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: 4f6ac23c-52e2-472a-9555-08ddb3f19cd6
+X-MS-Exchange-CrossTenant-AuthSource: CH2PR12MB3990.namprd12.prod.outlook.com
 X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-AuthSource: DM3PPF208195D8D.namprd11.prod.outlook.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 1747eb27-2418-4537-0d92-08ddb3da4a56
-X-MS-Exchange-CrossTenant-originalarrivaltime: 25 Jun 2025 11:20:28.7455 (UTC)
-X-MS-Exchange-CrossTenant-fromentityheader: Hosted
-X-MS-Exchange-CrossTenant-id: 46c98d88-e344-4ed4-8496-4ed7712e255d
-X-MS-Exchange-CrossTenant-mailboxtype: HOSTED
-X-MS-Exchange-CrossTenant-userprincipalname: pPLdVAx9XFaf+T8q5Qp8rPpttxp+gIlOx1fFbUeAco+xxMh70lKTnfQlEr9hmAZhwn7sbUvkjukTJt5KEYVu7w==
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: MW4PR11MB5797
-X-OriginatorOrg: intel.com
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 25 Jun 2025 14:07:28.7672 (UTC)
+X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
+X-MS-Exchange-CrossTenant-Id: 43083d15-7273-40c1-b7db-39efd9ccc17a
+X-MS-Exchange-CrossTenant-MailboxType: HOSTED
+X-MS-Exchange-CrossTenant-UserPrincipalName: 97/oAaAS5IgD2Fvr0ydCV+iQOlNYHcFpg3X8NGPqmn3/sIJiosirXVTtKFaMLNxPAGInebSpS/uWkDJYCMS+Wg==
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: SN7PR12MB7911
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -183,67 +170,76 @@ List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
+On Tue Jun 24, 2025 at 12:14 AM JST, Jesung Yang wrote:
+> This patch series introduces a new `FromPrimitive` trait along with its
+> corresponding derive macro.
+>
+> A few enhancements were made to the custom `quote!` macro to write the
+> derive macro. These include support for additional punctuation tokens
+> and a fix for an unused variable warning when quoting simple forms.
+> Detailed information about these enhancements is provided in the
+> relevant patches.
 
+Thanks for crafting this! I have been able to sucessfully use it to
+provide the implementations needed for Nova's `register!()` macro.
 
-> -----Original Message-----
-> From: Jani Nikula <jani.nikula@linux.intel.com>
-> Sent: Wednesday, June 25, 2025 2:33 PM
-> To: Kandpal, Suraj <suraj.kandpal@intel.com>; intel-xe@lists.freedesktop.=
-org;
-> intel-gfx@lists.freedesktop.org; dri-devel@lists.freedesktop.org;
-> nouveau@lists.freedesktop.org; Lyude Paul <lyude@redhat.com>
-> Cc: Murthy, Arun R <arun.r.murthy@intel.com>; Kandpal, Suraj
-> <suraj.kandpal@intel.com>
-> Subject: Re: [PATCH 00/13] Modify drm helpers to use luminance
->=20
-> On Fri, 20 Jun 2025, Suraj Kandpal <suraj.kandpal@intel.com> wrote:
-> > This series modifies drm dp edp helpers so that drivers can now use
-> > them to manipulate brightness using luminance value via the
-> > PANEL_TARGET_LUMINANCE_VALUE register. This feature was introduced
-> > frin eDP 1.5.
-> >
-> > Signed-off-by: Suraj Kandpal <suraj.kandpal@intel.com>
-> >
-> > Suraj Kandpal (13):
-> >   drm/dp: Introduce new member in drm_backlight_info
-> >   drm/dp: Add argument in drm_edp_backlight_init
-> >   drm/dp: Add argument for max luminance in drm_edp_backlight_init
-> >   drm/dp: Move from u16 to u32 for max in drm_edp_backlight_info
-> >   drm/dp: Change current_level argument type to u32
-> >   drm/dp: Modify drm_edp_probe_state
-> >   drm/dp: Change argument type for drm_edp_backlight_set_level
-> >   drm/dp: Modify drm_edp_backlight_set_level
-> >   drm/dp: Change argument type of drm_edp_backlight_enable
-> >   drm/dp: Enable backlight control using luminance
-> >   drm/i915/backlight: Use drm helper to initialize edp backlight
-> >   drm/i915/backlight: Use drm helper to set edp backlight
-> >   drm/i915/backlight: Use drm_edp_backlight_enable
->=20
-> Acked-by: Jani Nikula <jani.nikula@intel.com>
->=20
-> for merging the last three patches via drm-misc.
->=20
-> However, would be great to solicit feedback on the series from non-Intel =
-folks
-> too. Cc: Lyude who's worked on DPCD brightness before.
+>
+> While cleaning up the implementations, I came across an alternative
+> form of the `FromPrimitive` trait that might better suit the current
+> use case. Since types that implement this trait may often rely on just
+> one `from_*` method, the following design could be a simpler fit:
+>
+>     trait FromPrimitive: Sized {
+>         type Primitive;
+>
+>         fn from_bool(b: bool) -> Option<Self>
+>         where
+>             <Self as FromPrimitive>::Primitive: From<bool>,
+>         {
+>             Self::from_primitive(b.into())
+>         }
+>
+>         fn from_primitive(n: Self::Primitive) -> Option<Self>;
+>     }
 
-Sure will wait and see if we have any more comments on this till Friday bef=
-ore merging this.
+This alternative form looks like it could be more suitable for us
+indeed.
 
-Regards,
-Suraj Kandpal=20
+The userspace `num::FromPrimitive` is a bit too exhaustive to my taste,
+as it makes methods available to build from primitives that we don't
+really want. For instance, if I have an enum type that should only be
+built from a `u16` or larger (because it has variants with values bigger
+than 256), then it will still have a `from_u8` method, which looks
+terribly wrong to me as the very fact that you are trying to build from
+a `u8` indicates that you have mistakenly truncated the value at some
+point, and thus you will possibly obtain a different variant from the
+one you would get if you hadn't!
 
->=20
-> BR,
-> Jani.
->=20
-> >
-> >  drivers/gpu/drm/display/drm_dp_helper.c       |  92 ++++++++----
-> >  .../drm/i915/display/intel_dp_aux_backlight.c | 140 ++++++------------
-> >  drivers/gpu/drm/nouveau/dispnv50/disp.c       |   2 +-
-> >  drivers/gpu/drm/nouveau/nouveau_backlight.c   |   7 +-
-> >  include/drm/display/drm_dp_helper.h           |  10 +-
-> >  5 files changed, 127 insertions(+), 124 deletions(-)
->=20
-> --
-> Jani Nikula, Intel
+So from this perspective, having an associated type to indicate the
+valid primitive type like you suggest sounds like an excellent idea. I
+probably also wouldn't mind if we only supported that specific type
+either, as callers can make the required conversion themselves and doing
+so actually forces them to be conscious of the types they are passing
+and be warned of potential mismatches.
+
+But I guess that if we do so we can just introduce a derive macro that
+implements `TryFrom` for us, without needing to introduce a new trait. I
+might be too focused on my own use-case and would like to hear other
+usage perspectives for this work.
+
+If you add an associated type, I guess this means the derive macro
+should have a helper attribute to specify it?
+
+Another important aspect discussed on Zulip is the counterpart to
+`FromPrimitive`, `ToPrimitive`. Here I feel more strongly that we should
+*not* follow that the userspace `num` crate does, i.e. having all
+operations return an `Option` - that would result in a lot of unneeded
+error-checking code in the kernel. No, here it is pretty clear that we
+should only provide infallible methods for the types that can store all
+the possible values. Which is basically... one or several `Into`
+implementations?
+
+So indeed I'd like to understand first whether we actually need a new
+trait, or whether our needs can be met by derive macros that provide the
+right `TryFrom` and `Into` implementations. For nova-core, I think the
+latter would be ok, but maybe I am missing the larger picture.
