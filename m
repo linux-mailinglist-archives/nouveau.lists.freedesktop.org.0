@@ -2,48 +2,64 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id EE747AE79D3
-	for <lists+nouveau@lfdr.de>; Wed, 25 Jun 2025 10:20:16 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id A41B3AE7AD5
+	for <lists+nouveau@lfdr.de>; Wed, 25 Jun 2025 10:50:53 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 1AD0B89EAC;
-	Wed, 25 Jun 2025 08:20:15 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 1404710E6B2;
+	Wed, 25 Jun 2025 08:50:51 +0000 (UTC)
 Authentication-Results: gabe.freedesktop.org;
-	dkim=pass (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="tRtgFlVE";
+	dkim=pass (2048-bit key; unprotected) header.d=intel.com header.i=@intel.com header.b="QGnOhf+L";
 	dkim-atps=neutral
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from dfw.source.kernel.org (dfw.source.kernel.org [139.178.84.217])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 8E58C89EAC;
- Wed, 25 Jun 2025 08:20:14 +0000 (UTC)
-Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by dfw.source.kernel.org (Postfix) with ESMTP id 296D85C669C;
- Wed, 25 Jun 2025 08:17:54 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 78CAEC4CEEE;
- Wed, 25 Jun 2025 08:20:09 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1750839610;
- bh=d2K+swS3zVCovOGE/wtAt9dzlyYMqc+P9GuLT1mKK4k=;
- h=Date:Subject:To:Cc:References:From:In-Reply-To:From;
- b=tRtgFlVExlFPh0imTK6eu4wJeOx10TNZSZ1w2htRPfXKF1paTe47XTQR/OpA5nLk3
- TDdldgUgIUKKf0y9IFCM5yXY4UqWgKrx5FhvLwcXHEFHuQ2mA67KTE7B0dz2VHpfG1
- 8SnCyLudyY9ZttejPrRqvMh/wjaEb+XsDorWzUiBRfDzouMTxmQxKpx6joRLhfCkeG
- pl5n0krVXzSBxVQ+9tXD4bUiG93xzhmMg6M+4vBO9caqOakMrWO36CRrb4+8ZiRZfS
- 3hylYQwqItcot97TPtfdvFCtFIGhjIYf1F9iFGS8Z0qdfPxCiKBWX4gO6QPYeraEHQ
- fjmXeoMt4wPvg==
-Message-ID: <db30702c-bda8-49a8-890b-e457dcb66848@kernel.org>
-Date: Wed, 25 Jun 2025 10:20:07 +0200
-MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 1/1] drm/nouveau/disp: Use dev->dev to get the device
-To: Sakari Ailus <sakari.ailus@linux.intel.com>
+Received: from mgamail.intel.com (mgamail.intel.com [192.198.163.13])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 39EAE10E6B2;
+ Wed, 25 Jun 2025 08:50:50 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
+ d=intel.com; i=@intel.com; q=dns/txt; s=Intel;
+ t=1750841450; x=1782377450;
+ h=date:from:to:cc:subject:message-id:references:
+ mime-version:in-reply-to;
+ bh=4A2VSTm3feOgZjxgjKFxXi03FSDEinNe7aqgbD/47tQ=;
+ b=QGnOhf+LyzNv6scsOs6eafivEZEqF1rv8EMHGzh14okuhCGAcFO6awDW
+ j5StYGXFKNCbt1tZT5XD0KUryl3NXBTDtrgbCxCSOM9FZyFgwRRR+LxyB
+ wHxhkkGP2VeyYNqlQUvvpP83hz+uUig42Vh8sGgPHiIORpYpA9J8oo3wC
+ L96zVUDQ9NBCWjCYl63yY1iw2kTxqXiBR0JlwqdbyuPTAQxns9bx/YWt9
+ B0KE3GSn9kZYoyYwTDVCAu03Kk4Y/1tMdEavCb2JjzWHWmU5UhSMmClfa
+ 3hSKDWjaQRnQtB6yttm2VlWaT7j2VYZDBVZjjN5uMvLyBXyCgX99zVAYQ g==;
+X-CSE-ConnectionGUID: Et24SWArT9K6GLA/JKfs9w==
+X-CSE-MsgGUID: fmbdgyCqQ/2W1KGXPu4lyg==
+X-IronPort-AV: E=McAfee;i="6800,10657,11474"; a="55728884"
+X-IronPort-AV: E=Sophos;i="6.16,264,1744095600"; d="scan'208";a="55728884"
+Received: from fmviesa004.fm.intel.com ([10.60.135.144])
+ by fmvoesa107.fm.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
+ 25 Jun 2025 01:50:50 -0700
+X-CSE-ConnectionGUID: ujPilYwwTlmqvZNqZ4zREA==
+X-CSE-MsgGUID: YYs/odi8R5ezT8EfE5NFfg==
+X-ExtLoop1: 1
+X-IronPort-AV: E=Sophos;i="6.16,264,1744095600"; d="scan'208";a="157659107"
+Received: from klitkey1-mobl1.ger.corp.intel.com (HELO kekkonen.fi.intel.com)
+ ([10.245.245.155])
+ by fmviesa004-auth.fm.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
+ 25 Jun 2025 01:50:49 -0700
+Received: from kekkonen.localdomain (localhost [127.0.0.1])
+ by kekkonen.fi.intel.com (Postfix) with SMTP id 4C4CA11F742;
+ Wed, 25 Jun 2025 11:50:46 +0300 (EEST)
+Date: Wed, 25 Jun 2025 08:50:46 +0000
+Organization: Intel Finland Oy - BIC 0357606-4 - c/o Alberga Business Park,
+ 6 krs, Bertel Jungin Aukio 5, 02600 Espoo
+From: Sakari Ailus <sakari.ailus@linux.intel.com>
+To: Danilo Krummrich <dakr@kernel.org>
 Cc: Lyude Paul <lyude@redhat.com>, dri-devel@lists.freedesktop.org,
  nouveau@lists.freedesktop.org
+Subject: Re: [PATCH 1/1] drm/nouveau/disp: Use dev->dev to get the device
+Message-ID: <aFu4ZsbcRVfqZ3fv@kekkonen.localdomain>
 References: <20250409103344.3661603-1-sakari.ailus@linux.intel.com>
-From: Danilo Krummrich <dakr@kernel.org>
-Content-Language: en-US
-In-Reply-To: <20250409103344.3661603-1-sakari.ailus@linux.intel.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
+ <db30702c-bda8-49a8-890b-e457dcb66848@kernel.org>
+MIME-Version: 1.0
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <db30702c-bda8-49a8-890b-e457dcb66848@kernel.org>
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -58,19 +74,32 @@ List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-On 4/9/25 12:33 PM, Sakari Ailus wrote:
-> The local variable dev points to drm->dev already, use dev directly.
+Hi Danilo,
+
+On Wed, Jun 25, 2025 at 10:20:07AM +0200, Danilo Krummrich wrote:
+> On 4/9/25 12:33 PM, Sakari Ailus wrote:
+> > The local variable dev points to drm->dev already, use dev directly.
+> > 
+> > Signed-off-by: Sakari Ailus <sakari.ailus@linux.intel.com>
+> > ---
+> > Hi folks,
+> > 
+> > The background is that I'll be using a Coccinelle spatch soon to remove
+> > (most) pm_runtime_mark_last_busy() calls. That won't work if the arguments
+> > aren't the same.
 > 
-> Signed-off-by: Sakari Ailus <sakari.ailus@linux.intel.com>
-> ---
-> Hi folks,
+> If you want to submit / merge it together with your rework:
 > 
-> The background is that I'll be using a Coccinelle spatch soon to remove
-> (most) pm_runtime_mark_last_busy() calls. That won't work if the arguments
-> aren't the same.
+> Acked-by: Danilo Krummrich <dakr@kernel.org>
+> 
+> If I should pick it up, please let me know.
 
-If you want to submit / merge it together with your rework:
+Either is definitely possible. However I'd prefer you to take this in order
+to avoid potential conflicts with merging larger patches later on.
 
-Acked-by: Danilo Krummrich <dakr@kernel.org>
+Thanks.
 
-If I should pick it up, please let me know.
+-- 
+Kind regards,
+
+Sakari Ailus
