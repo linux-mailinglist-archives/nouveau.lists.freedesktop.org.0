@@ -2,46 +2,49 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id A4C49AE8C09
-	for <lists+nouveau@lfdr.de>; Wed, 25 Jun 2025 20:10:39 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 72754AE8C30
+	for <lists+nouveau@lfdr.de>; Wed, 25 Jun 2025 20:20:26 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 0991810E7B5;
-	Wed, 25 Jun 2025 18:10:35 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 43DBC10E053;
+	Wed, 25 Jun 2025 18:20:23 +0000 (UTC)
 Authentication-Results: gabe.freedesktop.org;
-	dkim=pass (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="VJzC0tDu";
+	dkim=pass (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="ZUPN5tOr";
 	dkim-atps=neutral
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from tor.source.kernel.org (tor.source.kernel.org [172.105.4.254])
- by gabe.freedesktop.org (Postfix) with ESMTPS id C111810E236;
- Wed, 25 Jun 2025 18:10:30 +0000 (UTC)
+Received: from nyc.source.kernel.org (nyc.source.kernel.org [147.75.193.91])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 3109510E053
+ for <nouveau@lists.freedesktop.org>; Wed, 25 Jun 2025 18:20:22 +0000 (UTC)
 Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by tor.source.kernel.org (Postfix) with ESMTP id 020AB61151;
- Wed, 25 Jun 2025 18:10:25 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id D1E11C4CEEA;
- Wed, 25 Jun 2025 18:10:23 +0000 (UTC)
+ by nyc.source.kernel.org (Postfix) with ESMTP id 57DFAA52D49;
+ Wed, 25 Jun 2025 18:20:20 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id A9D3EC4CEEA;
+ Wed, 25 Jun 2025 18:20:17 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1750875024;
- bh=lRIi7zZBVZ5uFlzDvsBeIRxNbMyfYf5vmetNeMgd0io=;
+ s=k20201202; t=1750875620;
+ bh=VxlmLzMyNV7tHN6TJqRWcZDGSM22FRYtG3OjfMQ6e44=;
  h=Date:Subject:To:Cc:References:From:In-Reply-To:From;
- b=VJzC0tDuMDU0QYSIeSXIr9FWOR9+qDxLkeFx9nSu5m4cOxnkDjk+thc+EixptgVkl
- GLr6MvhqK5hOvEqP3afxUoMucLVb7w5rZOEjzCs0JmGDVG1Fp74X/XCKAyyU7DNOB1
- PEQXnZ09xhjIX8a0KbFGjBDZXz+WZFIz9D6dpDO4WGefe8TkXkwdinjigkHNUd/bBv
- YEVvakEzA1gmqkVUZugbOLewd5vkTnwGtBIBeI7ZyOVRf2L3gfslQa2aZ1IK8LzhP4
- Ty9LspYyvhpYul9c3U02T5JXPctsfACURjz8Q9/mAqiyWRmkPQ15sereim/pSuvqYz
- K5Edm+NUjHHDg==
-Message-ID: <873f6a6b-3f8e-41f8-9434-57d3bb6e71d5@kernel.org>
-Date: Wed, 25 Jun 2025 20:10:22 +0200
+ b=ZUPN5tOreQIycJeduVlWcP1WcvUiGZkIXmffaSYRTlWGdHS6EEP1vDvaTuV0s1afL
+ Fu/27kdJL0Cf6ZcytxFFlSrTSyOinOoVQ1el9Wfkw2LuxS2FF55WeENuz4IxxSG+Tk
+ BU/gyQbefa3UTkNoN3+0sYtcT4+kSCbE2H9p+X1aOkWzGiAboZlg+1sCbZeJjR1zNy
+ THaIYj3LEReChCTb6wqLfY4U6jF6kIrNJVvtHisnIAkssQQdqAVKAkdZxtyaBA9tms
+ LndNKlzlVo4zYOytXLoiyjWhyaobTn4p+0LduOVhMLYSjp7D6JbTv1fwYuvkFHFL4w
+ caB6muGJXND0w==
+Message-ID: <513ee881-cf28-4c68-99ee-5a802c3269e2@kernel.org>
+Date: Wed, 25 Jun 2025 20:20:16 +0200
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 1/1] drm/nouveau/disp: Use dev->dev to get the device
-To: Sakari Ailus <sakari.ailus@linux.intel.com>
-Cc: Lyude Paul <lyude@redhat.com>, dri-devel@lists.freedesktop.org,
- nouveau@lists.freedesktop.org
-References: <20250409103344.3661603-1-sakari.ailus@linux.intel.com>
+Subject: Re: [PATCH] MAINTAINERS: Add Alexandre Courbot as co-maintainer to
+ nova-core
+To: acourbot@nvidia.com
+Cc: nouveau@lists.freedesktop.org, airlied@gmail.com, simona@ffwll.ch,
+ jhubbard@nvidia.com, bskeggs@nvidia.com, joelagnelf@nvidia.com,
+ ttabi@nvidia.com, apopple@nvidia.com, sbaskaran@nvidia.com,
+ rust-for-linux@vger.kernel.org, ojeda@kernel.org
+References: <20250624170517.105148-1-dakr@kernel.org>
 From: Danilo Krummrich <dakr@kernel.org>
 Content-Language: en-US
-In-Reply-To: <20250409103344.3661603-1-sakari.ailus@linux.intel.com>
+In-Reply-To: <20250624170517.105148-1-dakr@kernel.org>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
 X-BeenThere: nouveau@lists.freedesktop.org
@@ -58,9 +61,20 @@ List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-On 4/9/25 12:33 PM, Sakari Ailus wrote:
-> The local variable dev points to drm->dev already, use dev directly.
+On 6/24/25 7:05 PM, Danilo Krummrich wrote:
+> Alex has extensive experience with NVIDIA GPU support, is closely
+> involved in nova-core development, and brings valuable Rust expertise.
 > 
-> Signed-off-by: Sakari Ailus <sakari.ailus@linux.intel.com>
+> In addition to his technical contributions, Alex is actively engaged with
+> the broader community. He works closely with contributors and
+> stakeholders to identify and solve issues, fosters collaboration, and
+> helps ensure that the Nova driver evolves in alignment with the
+> community.
+> 
+> I trust him to take a key role in making the Nova driver a successful
+> upstream solution for NVIDIA GPUs in the Linux kernel.
+> 
+> Cc: Alexandre Courbot <acourbot@nvidia.com>
+> Signed-off-by: Danilo Krummrich <dakr@kernel.org>
 
-Applied to drm-misc-next, thanks!
+Applied to nova-next, thanks!
