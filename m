@@ -2,90 +2,80 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id 316C2CBAAF0
-	for <lists+nouveau@lfdr.de>; Sat, 13 Dec 2025 13:42:33 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 157C6CBAC76
+	for <lists+nouveau@lfdr.de>; Sat, 13 Dec 2025 13:44:02 +0100 (CET)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 5EF3110EA6D;
-	Sat, 13 Dec 2025 12:41:00 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 4AE1410EB61;
+	Sat, 13 Dec 2025 12:41:08 +0000 (UTC)
 Authentication-Results: gabe.freedesktop.org;
-	dkim=pass (2048-bit key; secure) header.d=iki.fi header.i=@iki.fi header.b="VC7rXLXV";
-	dkim=pass (1024-bit key; secure) header.d=iki.fi header.i=@iki.fi header.b="GmIzAikO";
+	dkim=permerror (0-bit key) header.d=gmail.com header.i=@gmail.com header.b="XkWyyBel";
 	dkim-atps=neutral
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-X-Greylist: delayed 543 seconds by postgrey-1.36 at gabe;
- Wed, 25 Jun 2025 08:26:05 UTC
-Received: from lahtoruutu.iki.fi (lahtoruutu.iki.fi [185.185.170.37])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 93CF910E1BF;
- Wed, 25 Jun 2025 08:26:05 +0000 (UTC)
-Received: from meesny.iki.fi (meesny.iki.fi [IPv6:2001:67c:2b0:1c1::201])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
- (No client certificate requested)
- by lahtoruutu.iki.fi (Postfix) with ESMTPS id 4bRvmc4kkRz49Q5s;
- Wed, 25 Jun 2025 11:16:48 +0300 (EEST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=iki.fi; s=lahtoruutu; 
- t=1750839408;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- in-reply-to:in-reply-to:references:references;
- bh=MrQC7Tos4anaJUbtszYmQNSsMU7siWR0u74LO5jbtxY=;
- b=VC7rXLXVw4vwp8IoATh/qxtDmh+Xrgz/LT+GGq/IKtHxPt01XOPLPR3pth6nPvetvGQEsw
- CRf874lMculCF3ibIlkbCqoG8J9KJfAuMfnb6gVLv3NZ42G4RgRev8/sWaI+lZvutxSXiy
- GfZMwg6o8vb2mHYQPiaKaWiqb27RPVL0Hpm1QcQFaEHJJhpE5uI/injgxCsAlv9lFOySTY
- oaJVX7ndRxJIXJAK7HDap4+HSXlPdlDwifivwv6H1Xps9sIK2ZUjnQ+xzdH+6srFJOtYZr
- 3R2lGjLIgVY2gBslroRDRj1ANaW5NhPF6kloms5nvzSsEYEj9frdMcp59zlzlw==
-Received: from hillosipuli.retiisi.eu
- (2a00-1190-d1dd-0-127c-61ff-fee2-b97e.v6.cust.suomicom.net
- [IPv6:2a00:1190:d1dd:0:127c:61ff:fee2:b97e])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
- (No client certificate requested) (Authenticated sender: sailus)
- by meesny.iki.fi (Postfix) with ESMTPSA id 4bRvmT67FTzyQ5;
- Wed, 25 Jun 2025 11:16:41 +0300 (EEST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=iki.fi; s=meesny;
- t=1750839402;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- in-reply-to:in-reply-to:references:references;
- bh=MrQC7Tos4anaJUbtszYmQNSsMU7siWR0u74LO5jbtxY=;
- b=GmIzAikOby6iq36P4gbjFfrehlkARIALWJD2C4Pt9zr0js+tvGgzLgBS6sf6rOR4V9voM2
- gMi/s07tIWdNmzBPiVDEU/zsr4zh/0U13YtSE3ZZc5TQ/r86nYBs/5x75RjU9MkPSChGUZ
- fz73PKHwybahYhbnxNcN7vty7Iiv9vk=
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=iki.fi;
- s=meesny; t=1750839402;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- in-reply-to:in-reply-to:references:references;
- bh=MrQC7Tos4anaJUbtszYmQNSsMU7siWR0u74LO5jbtxY=;
- b=Ka7TTCIx8rxkMORpPwCxAY+72JgTmJ5cmHt2CXIA2Ay+9KqTo55Tias/0AgmHFx+v7CQOX
- ScbAJjSaXPJdyJ+bRqMeSW1raUhbPIa8EXXheuiRAwRa2ehj0HHI0/H3JxJrQ2cUyS67jp
- T00a5rgfepnNUDzK3mt6DjMVXOYS4qA=
-ARC-Authentication-Results: i=1; ORIGINATING;
- auth=pass smtp.auth=sailus smtp.mailfrom=sakari.ailus@iki.fi
-ARC-Seal: i=1; s=meesny; d=iki.fi; t=1750839402; a=rsa-sha256; cv=none;
- b=xD3eINPrld3VHOT5rKZPM1aHuLa9bV+jNMVMC/qRCUqgSx0UoeMXzgUYas5lxATMxd+N4T
- Ebt9qbHqX7ccx+yhjzbfWK1RvFHZyv5Urb4bji6LShku+DSQFr4ASv2qZFSGbYvybd0gLK
- kYL4NMPRpIu0doLGv2tsvaiE9ntz4pA=
-Received: from valkosipuli.retiisi.eu (valkosipuli.local [192.168.4.2])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange ECDHE (prime256v1) server-signature RSA-PSS (4096 bits)
- server-digest SHA256) (No client certificate requested)
- by hillosipuli.retiisi.eu (Postfix) with ESMTPS id 2B2FA634C93;
- Wed, 25 Jun 2025 11:16:41 +0300 (EEST)
-Date: Wed, 25 Jun 2025 08:16:40 +0000
-From: Sakari Ailus <sakari.ailus@iki.fi>
-To: Sakari Ailus <sakari.ailus@linux.intel.com>
-Cc: Lyude Paul <lyude@redhat.com>, Danilo Krummrich <dakr@kernel.org>,
- dri-devel@lists.freedesktop.org, nouveau@lists.freedesktop.org
-Subject: Re: [PATCH 1/1] drm/nouveau/disp: Use dev->dev to get the device
-Message-ID: <aFuwaMpjbvWgcwYV@valkosipuli.retiisi.eu>
-References: <20250409103344.3661603-1-sakari.ailus@linux.intel.com>
+Received: from mail-il1-f181.google.com (mail-il1-f181.google.com
+ [209.85.166.181])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id B6DD610E87E
+ for <nouveau@lists.freedesktop.org>; Thu, 26 Jun 2025 14:23:13 +0000 (UTC)
+Received: by mail-il1-f181.google.com with SMTP id
+ e9e14a558f8ab-3df2f97258eso8931055ab.0
+ for <nouveau@lists.freedesktop.org>; Thu, 26 Jun 2025 07:23:13 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=gmail.com; s=20230601; t=1750947793; x=1751552593; darn=lists.freedesktop.org;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=3PmJhzf1sJs2FN8a0RHNKuha/3rAM6VtFHnWa30sHCs=;
+ b=XkWyyBel8siJAWPeDXL6+pac7l2SmEqc/+q4gCycahFOhhjXjVn63hlnuBi7eE43n2
+ QXY8ReBG0V1HC5eLNVYFJgg61zp1MqiFMKFLQenRujqQ+78knAJUWVAg/VRmvls6ZUd8
+ ZFzscVxll/IpcpDuinTwmDOcTQn4+22IkabY03MtqWbQLtsJ+V80k1Wmw58cXwkTBw+g
+ 7QrFQRTrxxBaK+YQw7YwoLARzdiu23HK7hhVoRhZGjQ99XKm0AsU03ohwjL5y3mNMdvd
+ rvz5Gbd9NHk1tMdCrKVlQy+3xht/571NZxSq4m2ZgKqj/iyPJcVXcVw3EWsno516Grup
+ benw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1750947793; x=1751552593;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=3PmJhzf1sJs2FN8a0RHNKuha/3rAM6VtFHnWa30sHCs=;
+ b=FreHs4mKFX2ekPIGn7x+cICAqiJwizJnfWkuynL40bkCiTksFaEJsdka7TghPGTZpj
+ 1E1yHHF80bEDWnyJuje/GaHLrqIHpYu/bRyO4Mdnj8L2Ovm5Du2Od8uqaVuIxowsk2Kf
+ Nr01vwoiVSWTJa192OAHAyzduaT3nmnui3qT1PGfp+8VPqhCQ1IJ+fMNZko1tG5tbYZ5
+ tuzV1hGom8SI6DaC9uQgmMmVdYSOpUAjzT1JsqawOqMH9sRsziTSnffLUXhk6IYQcc5M
+ nlsiHPPtD3ApDYUF2UzXa3oHYnv4RL95Hx+DiLq9U98g8yvGEWxq52hZn6a6V0Tngpbk
+ F5XA==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCWD1xGMun6KrxsJWzpLCTeUX2e9nGSrzJJkBZOq/u/R0TRt3TWCTEM6+RBP4eGq5JpDT1M3c3on@lists.freedesktop.org
+X-Gm-Message-State: AOJu0YzAIqZYGWE4AbrTkpBON2PQNsN4yd2XUkDYsqLuyhBPtVxWlC+f
+ 9RSsTFYxl6DUDx0sXtmTSMs87MBuYatem0aNR2kY0YYFWT+w8BTgTubelo+IrYCKMeiXR0lcEr1
+ IriIYoI2M58zHzU2VL+Mh1z4speOXXiY=
+X-Gm-Gg: ASbGncszWWe3+t6IcQa8gDydEj/cV26Be9Yoi4w/CILINFJDI4qPPCfTjklTQBUuQ8j
+ jhWxP2K0qyyQ3zyOMRd0or7+HDVRdfT29BPKb152o+fpCSMxGmnMpbHnXP06xrPYxoGeKOlSc5W
+ udOGwcDiQieyImTT8n8ASYcB6tO5uLB2fNfvEAYWQyrXg=
+X-Google-Smtp-Source: AGHT+IF3rE0mC2CPX+Ugvjxi6nBUgivlndxS0obHPchi2LG/zWvKMmmAwuBdqywvKq+VzZiCw1orp74px1+xkgYq9ik=
+X-Received: by 2002:a05:6e02:378c:b0:3dc:8b2c:4bc7 with SMTP id
+ e9e14a558f8ab-3df32852952mr95072965ab.1.1750947792809; Thu, 26 Jun 2025
+ 07:23:12 -0700 (PDT)
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <20250409103344.3661603-1-sakari.ailus@linux.intel.com>
-X-Mailman-Approved-At: Sat, 13 Dec 2025 12:40:42 +0000
+References: <cover.1750689857.git.y.j3ms.n@gmail.com>
+ <DAVO878E49AN.1L5TPHANBBHE6@nvidia.com>
+In-Reply-To: <DAVO878E49AN.1L5TPHANBBHE6@nvidia.com>
+From: Jesung Yang <y.j3ms.n@gmail.com>
+Date: Thu, 26 Jun 2025 23:23:01 +0900
+X-Gm-Features: Ac12FXzfN9fk03al47GYWZapf9guorVxLElMTuSPKfESyeSLvx8gJf-MiJnO3vM
+Message-ID: <CA+tqQ4Ji486i=Gzy5oEsdZLOFDmGHpxT=Wkng2cyZpJ=u14FPA@mail.gmail.com>
+Subject: Re: [PATCH 0/4] rust: add `FromPrimitive` support
+To: Alexandre Courbot <acourbot@nvidia.com>, Miguel Ojeda <ojeda@kernel.org>, 
+ Alex Gaynor <alex.gaynor@gmail.com>, Boqun Feng <boqun.feng@gmail.com>, 
+ Gary Guo <gary@garyguo.net>,
+ =?UTF-8?Q?Bj=C3=B6rn_Roy_Baron?= <bjorn3_gh@protonmail.com>, 
+ Benno Lossin <lossin@kernel.org>, Andreas Hindborg <a.hindborg@kernel.org>, 
+ Alice Ryhl <aliceryhl@google.com>, Trevor Gross <tmgross@umich.edu>, 
+ Danilo Krummrich <dakr@kernel.org>
+Cc: linux-kernel@vger.kernel.org, rust-for-linux@vger.kernel.org, 
+ nouveau@lists.freedesktop.org
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+X-Mailman-Approved-At: Sat, 13 Dec 2025 12:40:44 +0000
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -100,12 +90,30 @@ List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-On Wed, Apr 09, 2025 at 01:33:44PM +0300, Sakari Ailus wrote:
-> The local variable dev points to drm->dev already, use dev directly.
-> 
-> Signed-off-by: Sakari Ailus <sakari.ailus@linux.intel.com>
+On Wed, Jun 25, 2025 at 11:07=E2=80=AFPM Alexandre Courbot <acourbot@nvidia=
+.com> wrote:
+>
+> If you add an associated type, I guess this means the derive macro
+> should have a helper attribute to specify it?
 
-Ping.
+The current implementation tries to detect the enum's representation
+(e.g., `#[repr(u8)]`) and falls back to `isize` if nothing is provided,
+since it's the default [1]. However, when `#[repr(C)]` is used, the
+internal representation is not controlled on the Rust side. To quote
+the reference [2]:
 
--- 
-Sakari Ailus
+For field-less enums, the C representation has the size and
+alignment of the default enum size and alignment for the target
+platform's C ABI.
+
+Given this, it would definitely help with determinism if users provided
+an explicit attribute. Being explicit also often improves clarity and
+makes the intent more obvious.
+
+[1]: https://doc.rust-lang.org/reference/items/enumerations.html#r-items.en=
+um.discriminant.repr-rust
+[2]: https://doc.rust-lang.org/reference/type-layout.html?highlight=3Drepr#=
+r-layout.repr.c.enum
+
+Best regards,
+Jesung
