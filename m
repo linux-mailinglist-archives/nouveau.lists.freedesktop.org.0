@@ -2,168 +2,81 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id 44B4AAEEEBE
-	for <lists+nouveau@lfdr.de>; Tue,  1 Jul 2025 08:29:39 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 02E09AEF281
+	for <lists+nouveau@lfdr.de>; Tue,  1 Jul 2025 11:08:03 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id B607710E4FB;
-	Tue,  1 Jul 2025 06:29:37 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id B34AA10E54D;
+	Tue,  1 Jul 2025 09:07:43 +0000 (UTC)
 Authentication-Results: gabe.freedesktop.org;
-	dkim=pass (2048-bit key; unprotected) header.d=Nvidia.com header.i=@Nvidia.com header.b="DYmhiMFw";
+	dkim=pass (2048-bit key; unprotected) header.d=intel.com header.i=@intel.com header.b="jxFIxUA1";
 	dkim-atps=neutral
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from NAM02-SN1-obe.outbound.protection.outlook.com
- (mail-sn1nam02on2072.outbound.protection.outlook.com [40.107.96.72])
- by gabe.freedesktop.org (Postfix) with ESMTPS id DD11910E4FB;
- Tue,  1 Jul 2025 06:29:36 +0000 (UTC)
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=CiYvpvwrAvX83OFNtL8ctQdD09rwLxcRQUo13g+38adklvCcbgXtTAcafftQ+mn8XlHAlBDb40NDGXByd/HumwTeb8sWObapMoXII98MRq3TZ5EBQrGxz6PQTBMwmFGNNJqWDWKtSJ89LotSe2gzhPwL/riWPogjGYdRt7/8UCcChGOGvB1v7v+Yml+H6hP25yP8cbgiL/Y8GmH3gZ6NPGJ4Nuk3ALC2FecDFiIgeqAii0BJcD9fnZlE5fsxmz1Zcwvu/XqHCxxQel3A4jBTsFLLB8cu20ToAWGBPEgtId7Rdf/ziiKxVO/fjJ5QipT6CBY8XJVF8cGcVFjlc5GtDg==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=0MiLlwxJRREU1csTeg+3hmuUfyuFBIbXbx2+BmPYopc=;
- b=IydqJeRd06U2apWmIAdnC3O0VuT9LaPPk4Y/n6mu1emYo6AJyC9kVR2LG0nYwloOa15RRWRRSyWBjcIYROkUXLGmkQJQwfd15xdro6+Uvx9VXC9jCx55Ji2uQT7PK8MOf/aWcNbV39zA/F1vzhe2x4lmJMB5krHhyrR3D1kXYZdGF2RN2CdBC2xhYaKlcoFa6dq4gVj4iY5y7T4wnOtmxOSOXAjSDs5ku9GFVN3cPkWNXOeEWcE4St2YhkyBAA48CAVZHJ2XoZ9AytiVnza+X2/AwGuk791po2SQYoAFte2oBS4SAxIbikvLKyWfinzd+ziCLi/Lx2d5KOJ/sLicIA==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=nvidia.com; dmarc=pass action=none header.from=nvidia.com;
- dkim=pass header.d=nvidia.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=Nvidia.com;
- s=selector2;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=0MiLlwxJRREU1csTeg+3hmuUfyuFBIbXbx2+BmPYopc=;
- b=DYmhiMFwwXVZmogt0IcVf/6Ba8jM5pGdVzNNMKZdQJWS0aa/9oeSxyTwcSyhOkN5OmweH8jXqN+ag+bwgxeEsEZGDVB9jJxTs2nAzQ2qPs6tdSVxlpl5BJq/F1K5sGQ2MyjFHNImvKo5wEOaO0S/2Ptya4TQQKc41Hx2ENdl5r/bYZGK+AvLJR3lyDQkmgMp/FcTGqp1jmgkBmmnGwHl0yrtL8/M8jdLVXve0xZErdcDqwvdgizPXrxdGfFovjMsKgjnMrc19rEQP35QXG0rAjUmv6x0/yO/L0UgSxTxGr2dmw5g1s3Lle+SrqJ3VjuZmDIxwAJp9ydF0GT0tW85Eg==
-Authentication-Results: dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=nvidia.com;
-Received: from CH2PR12MB3990.namprd12.prod.outlook.com (2603:10b6:610:28::18)
- by DM6PR12MB4449.namprd12.prod.outlook.com (2603:10b6:5:2a5::9) with
- Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.8880.30; Tue, 1 Jul
- 2025 06:29:33 +0000
-Received: from CH2PR12MB3990.namprd12.prod.outlook.com
- ([fe80::6e37:569f:82ee:3f99]) by CH2PR12MB3990.namprd12.prod.outlook.com
- ([fe80::6e37:569f:82ee:3f99%4]) with mapi id 15.20.8880.021; Tue, 1 Jul 2025
- 06:29:33 +0000
-Content-Transfer-Encoding: quoted-printable
-Content-Type: text/plain; charset=UTF-8
-Date: Tue, 01 Jul 2025 15:29:29 +0900
-Message-Id: <DB0I8WAH970B.25D3S59AYF85P@nvidia.com>
-Cc: "Miguel Ojeda" <ojeda@kernel.org>, "Alex Gaynor"
- <alex.gaynor@gmail.com>, "Boqun Feng" <boqun.feng@gmail.com>, "Gary Guo"
- <gary@garyguo.net>, =?utf-8?q?Bj=C3=B6rn_Roy_Baron?=
- <bjorn3_gh@protonmail.com>, "Andreas Hindborg" <a.hindborg@kernel.org>,
- "Alice Ryhl" <aliceryhl@google.com>, "Trevor Gross" <tmgross@umich.edu>,
- "David Airlie" <airlied@gmail.com>, "Simona Vetter" <simona@ffwll.ch>,
- "Maarten Lankhorst" <maarten.lankhorst@linux.intel.com>, "Maxime Ripard"
- <mripard@kernel.org>, "Thomas Zimmermann" <tzimmermann@suse.de>, "Benno
- Lossin" <lossin@kernel.org>, "John Hubbard" <jhubbard@nvidia.com>, "Ben
- Skeggs" <bskeggs@nvidia.com>, "Joel Fernandes" <joelagnelf@nvidia.com>,
- "Timur Tabi" <ttabi@nvidia.com>, "Alistair Popple" <apopple@nvidia.com>,
- <linux-kernel@vger.kernel.org>, <rust-for-linux@vger.kernel.org>,
- <nouveau@lists.freedesktop.org>, <dri-devel@lists.freedesktop.org>, "Lyude
- Paul" <lyude@redhat.com>, "Shirish Baskaran" <sbaskaran@nvidia.com>
-Subject: Re: [PATCH v6 00/24] nova-core: run FWSEC-FRTS to perform first
- stage of GSP initialization
-From: "Alexandre Courbot" <acourbot@nvidia.com>
-To: "Danilo Krummrich" <dakr@kernel.org>
-X-Mailer: aerc 0.20.1-0-g2ecb8770224a-dirty
-References: <20250619-nova-frts-v6-0-ecf41ef99252@nvidia.com>
- <aFnArVIFkHCUzNqe@pollux> <DAUFC932W5MR.Q13BFD3CYEKJ@nvidia.com>
- <324c842b-e110-4e15-b058-9238a9ee598a@kernel.org>
-In-Reply-To: <324c842b-e110-4e15-b058-9238a9ee598a@kernel.org>
-X-ClientProxiedBy: TYCPR01CA0148.jpnprd01.prod.outlook.com
- (2603:1096:400:2b7::7) To CH2PR12MB3990.namprd12.prod.outlook.com
- (2603:10b6:610:28::18)
+Received: from mgamail.intel.com (mgamail.intel.com [192.198.163.11])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id E2B2B10E426;
+ Tue,  1 Jul 2025 09:07:41 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
+ d=intel.com; i=@intel.com; q=dns/txt; s=Intel;
+ t=1751360862; x=1782896862;
+ h=from:to:cc:subject:date:message-id:in-reply-to:
+ references:mime-version:content-transfer-encoding;
+ bh=PwvduGq01JI/FZTSXvDPB92tBezOeopBPZMkqHTOsBs=;
+ b=jxFIxUA1NEF2+dGAGX7JH3raPwlFv/FfA6EnKqVTFGjOaYkJLEjJYwVC
+ +q8KGH8tVqpzM9D/Lk6hvaSg5sIfZe3UjTqT7HYGaOtywnUNoddsOuDmZ
+ +77UcqfWpntcGPOhvEPq5coweWModQ98xIik0YBOh9tsyGzssxoDGMqn4
+ +bmiUcdpVEffC2QfCfrpxrwB20eRLeDBo2Z0t/QHHdTi1vfGVCcwgAp/4
+ ElgmykyCESO9MsIOgz1FByyso/kyt4TU6aUXTGI92/sKpg5DiAg530WFV
+ fSp0pro0+Gj1zWRDh7HGZ511Vlo6s1YzEwQbizJ8swq5pWW1uhJGq/Zgn w==;
+X-CSE-ConnectionGUID: kLmg1ST+SAK6I5gQjAVy4A==
+X-CSE-MsgGUID: DMAZVcbPQieThxJ0e5MqdQ==
+X-IronPort-AV: E=McAfee;i="6800,10657,11480"; a="64218302"
+X-IronPort-AV: E=Sophos;i="6.16,279,1744095600"; d="scan'208";a="64218302"
+Received: from orviesa005.jf.intel.com ([10.64.159.145])
+ by fmvoesa105.fm.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
+ 01 Jul 2025 02:07:41 -0700
+X-CSE-ConnectionGUID: ecpeFWU3QhqDAygzV7/LgQ==
+X-CSE-MsgGUID: hZGfCFffS1eOQHKDiJBvYw==
+X-ExtLoop1: 1
+X-IronPort-AV: E=Sophos;i="6.16,279,1744095600"; d="scan'208";a="159426871"
+Received: from zzombora-mobl1.ger.corp.intel.com (HELO stinkbox)
+ ([10.245.245.11])
+ by orviesa005.jf.intel.com with SMTP; 01 Jul 2025 02:07:32 -0700
+Received: by stinkbox (sSMTP sendmail emulation);
+ Tue, 01 Jul 2025 12:07:31 +0300
+From: Ville Syrjala <ville.syrjala@linux.intel.com>
+To: dri-devel@lists.freedesktop.org
+Cc: intel-gfx@lists.freedesktop.org, intel-xe@lists.freedesktop.org,
+ Liviu Dudau <liviu.dudau@arm.com>, Russell King <linux@armlinux.org.uk>,
+ Inki Dae <inki.dae@samsung.com>, Seung-Woo Kim <sw0312.kim@samsung.com>,
+ Kyungmin Park <kyungmin.park@samsung.com>,
+ Patrik Jakobsson <patrik.r.jakobsson@gmail.com>,
+ Chun-Kuang Hu <chunkuang.hu@kernel.org>,
+ Philipp Zabel <p.zabel@pengutronix.de>, Rob Clark <robdclark@gmail.com>,
+ Abhinav Kumar <quic_abhinavk@quicinc.com>,
+ Dmitry Baryshkov <lumag@kernel.org>, Sean Paul <sean@poorly.run>,
+ Marijn Suijten <marijn.suijten@somainline.org>,
+ Marek Vasut <marex@denx.de>, Stefan Agner <stefan@agner.ch>,
+ Lyude Paul <lyude@redhat.com>, Danilo Krummrich <dakr@kernel.org>,
+ Tomi Valkeinen <tomi.valkeinen@ideasonboard.com>,
+ Alex Deucher <alexander.deucher@amd.com>, Sandy Huang <hjc@rock-chips.com>,
+ =?UTF-8?q?Heiko=20St=C3=BCbner?= <heiko@sntech.de>,
+ Andy Yan <andy.yan@rock-chips.com>,
+ Thierry Reding <thierry.reding@gmail.com>,
+ Mikko Perttunen <mperttunen@nvidia.com>, linux-arm-msm@vger.kernel.org,
+ freedreno@lists.freedesktop.org, nouveau@lists.freedesktop.org,
+ amd-gfx@lists.freedesktop.org, linux-tegra@vger.kernel.org,
+ Thomas Zimmermann <tzimmermann@suse.de>,
+ Laurent Pinchart <laurent.pinchart+renesas@ideasonboard.com>
+Subject: [PATCH v2 02/19] drm: Pass pixel_format+modifier directly to
+ drm_get_format_info()
+Date: Tue,  1 Jul 2025 12:07:05 +0300
+Message-ID: <20250701090722.13645-3-ville.syrjala@linux.intel.com>
+X-Mailer: git-send-email 2.49.0
+In-Reply-To: <20250701090722.13645-1-ville.syrjala@linux.intel.com>
+References: <20250701090722.13645-1-ville.syrjala@linux.intel.com>
 MIME-Version: 1.0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: CH2PR12MB3990:EE_|DM6PR12MB4449:EE_
-X-MS-Office365-Filtering-Correlation-Id: 16dce5d4-bdc9-4708-0813-08ddb868a44b
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0;
- ARA:13230040|1800799024|10070799003|366016|7416014|376014; 
-X-Microsoft-Antispam-Message-Info: =?utf-8?B?Y1hScEVkSVZjcTVLWHFTRGI1Qnkwc2hZTEx3V05qazhYdXRwdHB3eXlIYjhi?=
- =?utf-8?B?Z3JyVE10OUpoY0VGUmtEQlhzWlNNcGo3MEFGY28xeUk5aFRSOFhEZVJtVmwr?=
- =?utf-8?B?OVQvV21BcWwyVk9lVTl4NUFLRzFsN3h2WFFtUFNNZVVRMGFPOWhhVElNTFZU?=
- =?utf-8?B?cjJ0cTNVMEFlaUtvYVVEajJWNkJreEF3UWtwV0h0ZXNrRnNzQnNLTURQTEhJ?=
- =?utf-8?B?SzhmMGpseWZvV2FMTkpWdXNKUGpSM3ByTHhtTUJEUExQSWNhT3VVSlNqQjZ1?=
- =?utf-8?B?ZjdtOE5QcXFjQldmSkx5SUZ1YzEvVWMzekhnZHRaQ3BJTnAwUTN5MGZCeXpz?=
- =?utf-8?B?TXBiaVRSZjNkd0tzdVZraXY0WWdaaGxsM00yMmhMeklVSHhxOUdLb1pkOGRQ?=
- =?utf-8?B?VWlrazcvTkMwN29zZUxyTlM2WjdXa2l6ZVVxbnNzTjk4N0lUZmJKSnMyWFcx?=
- =?utf-8?B?alk1MkxGU3F5Vi9CekF4eEpNbkdMRDVzZmJQZVU3ZFNkQ1BPVlI2VmVHVE4x?=
- =?utf-8?B?d1VUMzZVRUthZTFZUVY4VnlQV2tPUkJNU0ZhbmFwdXdPMkkvdmtzekdqcWxh?=
- =?utf-8?B?K2pmaklGTGJKRlZpcFdMSXNLMEdFcEFEcmk3d0I2cUJaNWkvckcxQUlBZjM1?=
- =?utf-8?B?NTc4M3VFTUphcXhROFMyS0xXU0JVZm9XUzV3aEdmcnJoS2NQUWwxdUJlVTYy?=
- =?utf-8?B?Y1F5SmNMak1nVWlUOGNJZGZIM3lOT01uSkV2b3NERVcycWdRdVBFUGtySFNM?=
- =?utf-8?B?ZWNkcnJDeWVJb1l6RFUyamM0SzM3bDFJOE1VeURRd2ZleEJ1akd6aGwvY3FZ?=
- =?utf-8?B?V21YOWorZXU1VWtCdGtGL091eFVyaFJaMTBsQnYvY3QxWHd1b1RwZitJRHIw?=
- =?utf-8?B?S1VuWkpEMUdxT1RFNEJNV0FWdE9YTWZZYXMzVFVZN1FPbSt4cnorM3NrTll1?=
- =?utf-8?B?QzNkWW5JZjY3Q2FuSjVINDA3TG9kQWFqeC9rcm9Qc2FMU3BDVzkrY3VPR1NI?=
- =?utf-8?B?Sjc3cnVTWjlRait6THRQUWNwMkRiYUhqTi84MzdnVnpWdks1cWZQWjJJK2s0?=
- =?utf-8?B?Tm5TRWl1dWVaTHFzaG9MaENRYWM4MDV3ZkNxVEZJVm1HNDZIY3ZSSUM5S05o?=
- =?utf-8?B?eVJCV04ya3FkNkVYa0QzcE9DejR1ZHFpaFZPNFpqQmZZalhoMmZVU05pc0Fk?=
- =?utf-8?B?b2NDV0xnRzB3SnZ1WUdoUFNETW5VbnpCZFRZMDN0ZmNiNXFHT0lmdGQzODFI?=
- =?utf-8?B?WEVucVZ1UzVyVUUxVitFNkE5Q1dKK1dWbVlrTXA1dDNHdndURHdxamlKODRz?=
- =?utf-8?B?QjRubHZKWVZYSm1FZGpmcVhlMFpvRTNURXZYRWJUc3JacWVEODBtYVo5Z3Rk?=
- =?utf-8?B?VHNEWHRBMGVDWUdNK1MyMkZxaGUxS2FWRGdnQ1hzK0t4eTB2cWdxZUhqMkNn?=
- =?utf-8?B?UmYyKys2aGZYcXhUTjAvMmRGdWRlZ2g3eVZWNnRpdEdNd1NmMDFnOEVPaFIv?=
- =?utf-8?B?L1djRkg4K2ZZNEVPN0RzWGt5OFA2OUVvWXE2d2FIaXEzUE5TOHNiV3g2aDNn?=
- =?utf-8?B?TGs0enN5ZGZWenpIRGYwK3JCWXhTNWZqN0pMeGtSZDRlR2hLU0p2UlFYbmdG?=
- =?utf-8?B?VzBPZXAzYlY3ampKc2RUSldCK3JkTXF0dFpCQWJZNEtyT09oc3pWNG1WSlpl?=
- =?utf-8?B?SDZ5WUkvUDZtNTRDS2xLelpUUm5hM3Nra3l1aXVUQVRMRlZrVU9xLzc1bGRj?=
- =?utf-8?B?UFA4SW1xZ01oVy9SOVoxRWVCUkpsendUSnVOem4zU21mKys2cVFLeHJXVHVY?=
- =?utf-8?B?dVVBUWE0MDZEWEVaQmgyenVCdWhldFFobGhFbnRKVUhKOGtvd2t5TnNMMVhK?=
- =?utf-8?B?cDRyVW5ZK29NdGVuSEh4VFhxZW1wNS9QK0dXTUJndnhrc0E9PQ==?=
-X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
- IPV:NLI; SFV:NSPM; H:CH2PR12MB3990.namprd12.prod.outlook.com; PTR:; CAT:NONE;
- SFS:(13230040)(1800799024)(10070799003)(366016)(7416014)(376014); DIR:OUT;
- SFP:1101; 
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?b0tXMXRWdy93b0M1bU84MVVaOURlVGs4YzRwZWF5UUlYUS84QVZnZjNURGp6?=
- =?utf-8?B?SUZuT0RZc3oydnF3UldpWGoxNWRPdm8zdm0zelFNRTJ3QWtHZkNYSUFoUk50?=
- =?utf-8?B?Uk01cnhzWmJHNVJYaUd5YVplYjI4M3o1ZlVvckpOOXhGK0QxdDhJbitQRWkr?=
- =?utf-8?B?bGFuaXN3OWI0MXRENDE4c0E5QlRwYUdGVFRlOXZ6M3Z6czVCQ3FCdG1Pd2ZT?=
- =?utf-8?B?dDNOZ2FDVGErbmtMWDAva1ZMYU9FMThwUFdFVGJ5SkF4LzJ6TVJhUjd5TFYy?=
- =?utf-8?B?WTl4N0M5NkdCbXAxVkN6YXpQSGpKVlI0Q090OUlVUzErWHoxZmR5bEVjWmlp?=
- =?utf-8?B?N2JidVhTNWp1RzNXYXFOSzJ6QWt5bXN3Rmpad2dSUENxNFVYelBnRTYwY1kv?=
- =?utf-8?B?T29BcU5aZ21pdTFXSHpyVjRHR2xHUU0zOTAxVnpVMHhvY2JFODZqK252WXRE?=
- =?utf-8?B?a0gxZG92UEhQMU1jTWtyYStKZlhCVHZ4Skt2Q3VFTVBzRTJLWVNFVW9hS0Js?=
- =?utf-8?B?RGhTL1ozRDd2Zk1pajR2R2tJZGV3enZ0c1ZPYTV4OG1aclU3ZUxuUllOc2dn?=
- =?utf-8?B?aHhjSjlnQTVHNmhWVEovaUVMR1IyOStWK2xPMEVrNGROeWNKK0orbmFkK3hQ?=
- =?utf-8?B?ZDlrTkFjSTIrTk9menZGNUFmaTNMM2RTQ1Ryd1NxS2ZPQWlhcjVucnprcS9z?=
- =?utf-8?B?YUJ0Qjliem5kMzdNSmlLNy9UMGMzb0lyakF2K0k4blpjcEs3UUZXcFBGOGxG?=
- =?utf-8?B?UDd6enZZRVV4c3g5bzlEeEJEcnFJbmVWdGNOc0txaXVHdENFc0NaS2lXSjdx?=
- =?utf-8?B?a2lmeXR6OTVtb1V4ZEJWb2g0dGVmNzNUUFM1bWJpZUtNaDhkQkgrZEZtSzFI?=
- =?utf-8?B?Q2Y5NGhUc0hoa2ltTVVzOEs2aTdGR0VwV1RRMHV5YVZ1WWRRR3lyS0pRTm9F?=
- =?utf-8?B?Wk1kNnJ1eXI1YVpNZ3lQT2ZWcjA1ZGdCVDQ4bTBSbHowUDF4Z3J6aTR2SEdy?=
- =?utf-8?B?TGk4OE1UTStUcGtIc0VHYnR1L3pTRjJjOGRZQTJ2UFZnN3laajAveHVUdDNW?=
- =?utf-8?B?U1ZiaE5iYThlRno5WGRmV3MvcWdkelRhSkkwb1BYMWE0QWFNRGgwU0xHd24x?=
- =?utf-8?B?N3JIT3d2dXNkZzZIa0tCMEVKK3kvS0FuY3lRUDFIN3BDcnVFdFJMTmp1K0w1?=
- =?utf-8?B?RUc1UHgxcGU3UVJrdFZKR2c5ckNoSDM1SjJJejBlM1BwMGl2Ty9mejhib1c4?=
- =?utf-8?B?dDBlQ25kSWxHaHhEOHpPNWNidHF3SWEySEtHWHYveFpkK0JDdWV2cjFHM1Zl?=
- =?utf-8?B?N1FpVG1oNTJwTHJVSEpuUHdKUXl4Q016eVlnS3I5elJSdC9QUUdldUNkUm5S?=
- =?utf-8?B?aXZUdVNsQzE1dkp6a3JyVHpVYnVmclFmNG50TlBWNFhLUUR1WUlTeGpHSXZv?=
- =?utf-8?B?UUxzU0dXenArcFZmemZabXVMdURmNjVaZTh0RDdOL2pKdThBS2tKK1QwQlMw?=
- =?utf-8?B?bzgrd2VydGJhWTFQWGpCd3NOUzd6MWo4czZ3MEp5TkFOYnRyTVQvWXBaS3hq?=
- =?utf-8?B?NDFGMDBXSk84aWlycFE2RGxXME9kRjhWSnVZWDBxVmRVTmlrTU5VVWUwK01R?=
- =?utf-8?B?d00rRlV1dWtlR0Vmb0t0V2t5YkE5d1RFcmxOcFg4bDBvc1A2NE9KT1FMZk5z?=
- =?utf-8?B?eG9HTUxNa0hVK3U1VHFZakxwSTRxeVlDcFZEd0RXelZtZzErdUFyUUJnVFN2?=
- =?utf-8?B?bjAxd0ZwNml2M0g5ZDZEczZrSTFhbURGNkxMR1Z3eUxjTi9NUWJpQjlnOThy?=
- =?utf-8?B?dmRaN3g1ZDhWSWRaYmVCaHFkMERnbDErWFFReU5wdDVEMk9zdWZvL0pCS0FM?=
- =?utf-8?B?Tm0vM0U2SlkzVHZyMklzZVRNeC9zUkltZ2lkdGpSZ2VZL29pMDZKNVg1Qlpv?=
- =?utf-8?B?RlZDTTIxWTkzUkxqckNVTVZxWmJSRHdtZzlHc1FRRC9pckpWcGdvTHRTV1E1?=
- =?utf-8?B?L2FEc1VXZmw3Mm94WjdlOWZuMGRmSlVQT0oxTE5zYnlOaHBSWWs3MHQzVmJw?=
- =?utf-8?B?TTB3RGtrNFYzR1Z3Mi9zdVhnWVJCM3JWQjdxekUyNUtsQVg5K2VzRmJ1VUpw?=
- =?utf-8?B?NXRDREpJb29YTHVJUXViWlAreTBFb2ZGSHA5R01BRW1Wd3lHMVpUV1drUmo2?=
- =?utf-8?Q?sn2COesWIUOxS9se+Bwl52yx9lbtCAI5KdMTq9/dR8dR?=
-X-OriginatorOrg: Nvidia.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 16dce5d4-bdc9-4708-0813-08ddb868a44b
-X-MS-Exchange-CrossTenant-AuthSource: CH2PR12MB3990.namprd12.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 01 Jul 2025 06:29:33.1104 (UTC)
-X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
-X-MS-Exchange-CrossTenant-Id: 43083d15-7273-40c1-b7db-39efd9ccc17a
-X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: YWmAn9uVI56mMeMKFkfBGMj8N8mqd4eQYZMbmbgXhRwMiFQDVJx6233IXWDYXSjmU3xD4Ig6ke2hNuut/sIrEg==
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: DM6PR12MB4449
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -178,25 +91,415 @@ List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-On Tue Jul 1, 2025 at 12:43 AM JST, Danilo Krummrich wrote:
-> On 6/24/25 4:56 AM, Alexandre Courbot wrote:
->> On Tue Jun 24, 2025 at 6:01 AM JST, Danilo Krummrich wrote:
->>> There's one thing that would be nice to fix subsequently, which is prop=
-erly
->>> resetting the GPU. Currently, it needs a power cycle to be able to prob=
-e
->>> successfully after unbinding the driver.
->>=20
->> Yes, what I usually do is the following after unloading Nova:
->>=20
->>      echo 1 | sudo tee /sys/bus/pci/devices/0000:01:00.0/reset
->>=20
->> and this allows it to probe again. Maybe we want to add some equivalent
->> programmatically in the driver probe function?
->
-> Probably -- how are things implemented on the GPU side of things? Is the =
-GPU
-> firmware surviving a FLR?
+From: Ville Syrjälä <ville.syrjala@linux.intel.com>
 
-After a FLR all firmware is cleared and the WPR2 region is wiped,
-meaning GPU initialization has to be done again from the very beginning.
+Decouple drm_get_format_info() from struct drm_mode_fb_cmd2 and just
+pass the pixel format+modifier combo in by hand.
+
+We may want to use drm_get_format_info() outside of the normal
+addfb paths where we won't have a struct drm_mode_fb_cmd2, and
+creating a temporary one just for this seems silly.
+
+Done with cocci:
+@@
+identifier dev, mode_cmd;
+@@
+struct drm_format_info *
+drm_get_format_info(struct drm_device *dev,
+-		    const struct drm_mode_fb_cmd2 *mode_cmd
++		    u32 pixel_format, u64 modifier
+     		    )
+{
+<...
+(
+- mode_cmd->pixel_format
++ pixel_format
+|
+- mode_cmd->modifier[0]
++ modifier
+)
+...>
+}
+
+@@
+identifier dev, mode_cmd;
+@@
+struct drm_format_info *
+drm_get_format_info(struct drm_device *dev,
+-		    const struct drm_mode_fb_cmd2 *mode_cmd
++		    u32 pixel_format, u64 modifier
+     		    );
+
+@@
+expression dev, mode_cmd;
+@@
+- drm_get_format_info(dev, mode_cmd)
++ drm_get_format_info(dev, mode_cmd->pixel_format, mode_cmd->modifier[0])
+
+v2: Fix kernel docs (Laurent)
+    Drop drm_mode_fb_cmd2 forward declaration (Thomas)
+
+Cc: Liviu Dudau <liviu.dudau@arm.com>
+Cc: Russell King <linux@armlinux.org.uk>
+Cc: Inki Dae <inki.dae@samsung.com>
+Cc: Seung-Woo Kim <sw0312.kim@samsung.com>
+Cc: Kyungmin Park <kyungmin.park@samsung.com>
+Cc: Patrik Jakobsson <patrik.r.jakobsson@gmail.com>
+Cc: Chun-Kuang Hu <chunkuang.hu@kernel.org>
+Cc: Philipp Zabel <p.zabel@pengutronix.de>
+Cc: Rob Clark <robdclark@gmail.com>
+Cc: Abhinav Kumar <quic_abhinavk@quicinc.com>
+Cc: Dmitry Baryshkov <lumag@kernel.org>
+Cc: Sean Paul <sean@poorly.run>
+Cc: Marijn Suijten <marijn.suijten@somainline.org>
+Cc: Marek Vasut <marex@denx.de>
+Cc: Stefan Agner <stefan@agner.ch>
+Cc: Lyude Paul <lyude@redhat.com>
+Cc: Danilo Krummrich <dakr@kernel.org>
+Cc: Tomi Valkeinen <tomi.valkeinen@ideasonboard.com>
+Cc: Alex Deucher <alexander.deucher@amd.com>
+Cc: Sandy Huang <hjc@rock-chips.com>
+Cc: "Heiko Stübner" <heiko@sntech.de>
+Cc: Andy Yan <andy.yan@rock-chips.com>
+Cc: Thierry Reding <thierry.reding@gmail.com>
+Cc: Mikko Perttunen <mperttunen@nvidia.com>
+Cc: linux-arm-msm@vger.kernel.org
+Cc: freedreno@lists.freedesktop.org
+Cc: nouveau@lists.freedesktop.org
+Cc: amd-gfx@lists.freedesktop.org
+Cc: linux-tegra@vger.kernel.org
+Reviewed-by: Thomas Zimmermann <tzimmermann@suse.de>
+Reviewed-by: Laurent Pinchart <laurent.pinchart+renesas@ideasonboard.com>
+Signed-off-by: Ville Syrjälä <ville.syrjala@linux.intel.com>
+---
+ drivers/gpu/drm/arm/malidp_drv.c             |  3 ++-
+ drivers/gpu/drm/armada/armada_fb.c           |  4 +++-
+ drivers/gpu/drm/drm_fourcc.c                 | 11 ++++++-----
+ drivers/gpu/drm/drm_framebuffer.c            |  2 +-
+ drivers/gpu/drm/drm_gem_framebuffer_helper.c |  9 ++++++---
+ drivers/gpu/drm/drm_modeset_helper.c         |  3 ++-
+ drivers/gpu/drm/exynos/exynos_drm_fb.c       |  4 +++-
+ drivers/gpu/drm/gma500/framebuffer.c         |  3 ++-
+ drivers/gpu/drm/mediatek/mtk_drm_drv.c       |  4 +++-
+ drivers/gpu/drm/msm/msm_fb.c                 |  6 ++++--
+ drivers/gpu/drm/mxsfb/mxsfb_drv.c            |  3 ++-
+ drivers/gpu/drm/nouveau/nouveau_display.c    |  3 ++-
+ drivers/gpu/drm/omapdrm/omap_fb.c            |  6 ++++--
+ drivers/gpu/drm/radeon/radeon_fbdev.c        |  3 ++-
+ drivers/gpu/drm/rockchip/rockchip_drm_fb.c   |  3 ++-
+ drivers/gpu/drm/tegra/fb.c                   |  4 +++-
+ include/drm/drm_fourcc.h                     |  3 +--
+ 17 files changed, 48 insertions(+), 26 deletions(-)
+
+diff --git a/drivers/gpu/drm/arm/malidp_drv.c b/drivers/gpu/drm/arm/malidp_drv.c
+index e083021e9e99..558e44a7e627 100644
+--- a/drivers/gpu/drm/arm/malidp_drv.c
++++ b/drivers/gpu/drm/arm/malidp_drv.c
+@@ -325,7 +325,8 @@ malidp_verify_afbc_framebuffer_size(struct drm_device *dev,
+ 		return false;
+ 	}
+ 
+-	info = drm_get_format_info(dev, mode_cmd);
++	info = drm_get_format_info(dev, mode_cmd->pixel_format,
++				   mode_cmd->modifier[0]);
+ 
+ 	n_superblocks = (mode_cmd->width / afbc_superblock_width) *
+ 		(mode_cmd->height / afbc_superblock_height);
+diff --git a/drivers/gpu/drm/armada/armada_fb.c b/drivers/gpu/drm/armada/armada_fb.c
+index cf2e88218dc0..85fc2cb50544 100644
+--- a/drivers/gpu/drm/armada/armada_fb.c
++++ b/drivers/gpu/drm/armada/armada_fb.c
+@@ -86,7 +86,9 @@ struct armada_framebuffer *armada_framebuffer_create(struct drm_device *dev,
+ struct drm_framebuffer *armada_fb_create(struct drm_device *dev,
+ 	struct drm_file *dfile, const struct drm_mode_fb_cmd2 *mode)
+ {
+-	const struct drm_format_info *info = drm_get_format_info(dev, mode);
++	const struct drm_format_info *info = drm_get_format_info(dev,
++								 mode->pixel_format,
++								 mode->modifier[0]);
+ 	struct armada_gem_object *obj;
+ 	struct armada_framebuffer *dfb;
+ 	int ret;
+diff --git a/drivers/gpu/drm/drm_fourcc.c b/drivers/gpu/drm/drm_fourcc.c
+index 4b4444f6d504..e0d533611040 100644
+--- a/drivers/gpu/drm/drm_fourcc.c
++++ b/drivers/gpu/drm/drm_fourcc.c
+@@ -417,7 +417,8 @@ EXPORT_SYMBOL(drm_format_info);
+ /**
+  * drm_get_format_info - query information for a given framebuffer configuration
+  * @dev: DRM device
+- * @mode_cmd: metadata from the userspace fb creation request
++ * @pixel_format: pixel format (DRM_FORMAT_*)
++ * @modifier: modifier
+  *
+  * Returns:
+  * The instance of struct drm_format_info that describes the pixel format, or
+@@ -425,16 +426,16 @@ EXPORT_SYMBOL(drm_format_info);
+  */
+ const struct drm_format_info *
+ drm_get_format_info(struct drm_device *dev,
+-		    const struct drm_mode_fb_cmd2 *mode_cmd)
++		    u32 pixel_format, u64 modifier)
+ {
+ 	const struct drm_format_info *info = NULL;
+ 
+ 	if (dev->mode_config.funcs->get_format_info)
+-		info = dev->mode_config.funcs->get_format_info(mode_cmd->pixel_format,
+-							       mode_cmd->modifier[0]);
++		info = dev->mode_config.funcs->get_format_info(pixel_format,
++							       modifier);
+ 
+ 	if (!info)
+-		info = drm_format_info(mode_cmd->pixel_format);
++		info = drm_format_info(pixel_format);
+ 
+ 	return info;
+ }
+diff --git a/drivers/gpu/drm/drm_framebuffer.c b/drivers/gpu/drm/drm_framebuffer.c
+index b781601946db..18a0267e374e 100644
+--- a/drivers/gpu/drm/drm_framebuffer.c
++++ b/drivers/gpu/drm/drm_framebuffer.c
+@@ -176,7 +176,7 @@ static int framebuffer_check(struct drm_device *dev,
+ 	}
+ 
+ 	/* now let the driver pick its own format info */
+-	info = drm_get_format_info(dev, r);
++	info = drm_get_format_info(dev, r->pixel_format, r->modifier[0]);
+ 
+ 	for (i = 0; i < info->num_planes; i++) {
+ 		unsigned int width = drm_format_info_plane_width(info, r->width, i);
+diff --git a/drivers/gpu/drm/drm_gem_framebuffer_helper.c b/drivers/gpu/drm/drm_gem_framebuffer_helper.c
+index 618ce725cd75..62eec0fddc3e 100644
+--- a/drivers/gpu/drm/drm_gem_framebuffer_helper.c
++++ b/drivers/gpu/drm/drm_gem_framebuffer_helper.c
+@@ -160,7 +160,8 @@ int drm_gem_fb_init_with_funcs(struct drm_device *dev,
+ 	unsigned int i;
+ 	int ret;
+ 
+-	info = drm_get_format_info(dev, mode_cmd);
++	info = drm_get_format_info(dev, mode_cmd->pixel_format,
++				   mode_cmd->modifier[0]);
+ 	if (!info) {
+ 		drm_dbg_kms(dev, "Failed to get FB format info\n");
+ 		return -EINVAL;
+@@ -502,7 +503,8 @@ static __u32 drm_gem_afbc_get_bpp(struct drm_device *dev,
+ {
+ 	const struct drm_format_info *info;
+ 
+-	info = drm_get_format_info(dev, mode_cmd);
++	info = drm_get_format_info(dev, mode_cmd->pixel_format,
++				   mode_cmd->modifier[0]);
+ 
+ 	switch (info->format) {
+ 	case DRM_FORMAT_YUV420_8BIT:
+@@ -600,7 +602,8 @@ int drm_gem_fb_afbc_init(struct drm_device *dev,
+ 	int ret;
+ 
+ 	objs = afbc_fb->base.obj;
+-	info = drm_get_format_info(dev, mode_cmd);
++	info = drm_get_format_info(dev, mode_cmd->pixel_format,
++				   mode_cmd->modifier[0]);
+ 	if (!info)
+ 		return -EINVAL;
+ 
+diff --git a/drivers/gpu/drm/drm_modeset_helper.c b/drivers/gpu/drm/drm_modeset_helper.c
+index ef32f6af10d4..3fed2d5ab1d6 100644
+--- a/drivers/gpu/drm/drm_modeset_helper.c
++++ b/drivers/gpu/drm/drm_modeset_helper.c
+@@ -86,7 +86,8 @@ void drm_helper_mode_fill_fb_struct(struct drm_device *dev,
+ 	int i;
+ 
+ 	fb->dev = dev;
+-	fb->format = drm_get_format_info(dev, mode_cmd);
++	fb->format = drm_get_format_info(dev, mode_cmd->pixel_format,
++					 mode_cmd->modifier[0]);
+ 	fb->width = mode_cmd->width;
+ 	fb->height = mode_cmd->height;
+ 	for (i = 0; i < 4; i++) {
+diff --git a/drivers/gpu/drm/exynos/exynos_drm_fb.c b/drivers/gpu/drm/exynos/exynos_drm_fb.c
+index fc1c5608db96..bcf7b534d1f7 100644
+--- a/drivers/gpu/drm/exynos/exynos_drm_fb.c
++++ b/drivers/gpu/drm/exynos/exynos_drm_fb.c
+@@ -96,7 +96,9 @@ static struct drm_framebuffer *
+ exynos_user_fb_create(struct drm_device *dev, struct drm_file *file_priv,
+ 		      const struct drm_mode_fb_cmd2 *mode_cmd)
+ {
+-	const struct drm_format_info *info = drm_get_format_info(dev, mode_cmd);
++	const struct drm_format_info *info = drm_get_format_info(dev,
++								 mode_cmd->pixel_format,
++								 mode_cmd->modifier[0]);
+ 	struct exynos_drm_gem *exynos_gem[MAX_FB_BUFFER];
+ 	struct drm_framebuffer *fb;
+ 	int i;
+diff --git a/drivers/gpu/drm/gma500/framebuffer.c b/drivers/gpu/drm/gma500/framebuffer.c
+index 1a374702b696..c82e623a2071 100644
+--- a/drivers/gpu/drm/gma500/framebuffer.c
++++ b/drivers/gpu/drm/gma500/framebuffer.c
+@@ -39,7 +39,8 @@ static int psb_framebuffer_init(struct drm_device *dev,
+ 	 * Reject unknown formats, YUV formats, and formats with more than
+ 	 * 4 bytes per pixel.
+ 	 */
+-	info = drm_get_format_info(dev, mode_cmd);
++	info = drm_get_format_info(dev, mode_cmd->pixel_format,
++				   mode_cmd->modifier[0]);
+ 	if (!info || !info->depth || info->cpp[0] > 4)
+ 		return -EINVAL;
+ 
+diff --git a/drivers/gpu/drm/mediatek/mtk_drm_drv.c b/drivers/gpu/drm/mediatek/mtk_drm_drv.c
+index 7c0c12dde488..0ebcfcbc258b 100644
+--- a/drivers/gpu/drm/mediatek/mtk_drm_drv.c
++++ b/drivers/gpu/drm/mediatek/mtk_drm_drv.c
+@@ -45,7 +45,9 @@ mtk_drm_mode_fb_create(struct drm_device *dev,
+ 		       struct drm_file *file,
+ 		       const struct drm_mode_fb_cmd2 *cmd)
+ {
+-	const struct drm_format_info *info = drm_get_format_info(dev, cmd);
++	const struct drm_format_info *info = drm_get_format_info(dev,
++								 cmd->pixel_format,
++								 cmd->modifier[0]);
+ 
+ 	if (info->num_planes != 1)
+ 		return ERR_PTR(-EINVAL);
+diff --git a/drivers/gpu/drm/msm/msm_fb.c b/drivers/gpu/drm/msm/msm_fb.c
+index 09268e416843..df2f85c44d55 100644
+--- a/drivers/gpu/drm/msm/msm_fb.c
++++ b/drivers/gpu/drm/msm/msm_fb.c
+@@ -137,7 +137,8 @@ struct drm_framebuffer *msm_framebuffer_create(struct drm_device *dev,
+ 		struct drm_file *file, const struct drm_mode_fb_cmd2 *mode_cmd)
+ {
+ 	const struct drm_format_info *info = drm_get_format_info(dev,
+-								 mode_cmd);
++								 mode_cmd->pixel_format,
++								 mode_cmd->modifier[0]);
+ 	struct drm_gem_object *bos[4] = {0};
+ 	struct drm_framebuffer *fb;
+ 	int ret, i, n = info->num_planes;
+@@ -168,7 +169,8 @@ static struct drm_framebuffer *msm_framebuffer_init(struct drm_device *dev,
+ 		const struct drm_mode_fb_cmd2 *mode_cmd, struct drm_gem_object **bos)
+ {
+ 	const struct drm_format_info *info = drm_get_format_info(dev,
+-								 mode_cmd);
++								 mode_cmd->pixel_format,
++								 mode_cmd->modifier[0]);
+ 	struct msm_drm_private *priv = dev->dev_private;
+ 	struct msm_kms *kms = priv->kms;
+ 	struct msm_framebuffer *msm_fb = NULL;
+diff --git a/drivers/gpu/drm/mxsfb/mxsfb_drv.c b/drivers/gpu/drm/mxsfb/mxsfb_drv.c
+index c183b1112bc4..09329af9b01e 100644
+--- a/drivers/gpu/drm/mxsfb/mxsfb_drv.c
++++ b/drivers/gpu/drm/mxsfb/mxsfb_drv.c
+@@ -95,7 +95,8 @@ mxsfb_fb_create(struct drm_device *dev, struct drm_file *file_priv,
+ {
+ 	const struct drm_format_info *info;
+ 
+-	info = drm_get_format_info(dev, mode_cmd);
++	info = drm_get_format_info(dev, mode_cmd->pixel_format,
++				   mode_cmd->modifier[0]);
+ 	if (!info)
+ 		return ERR_PTR(-EINVAL);
+ 
+diff --git a/drivers/gpu/drm/nouveau/nouveau_display.c b/drivers/gpu/drm/nouveau/nouveau_display.c
+index c50ec347b30a..bd9a85f4b4fc 100644
+--- a/drivers/gpu/drm/nouveau/nouveau_display.c
++++ b/drivers/gpu/drm/nouveau/nouveau_display.c
+@@ -295,7 +295,8 @@ nouveau_framebuffer_new(struct drm_device *dev,
+ 		kind = nvbo->kind;
+ 	}
+ 
+-	info = drm_get_format_info(dev, mode_cmd);
++	info = drm_get_format_info(dev, mode_cmd->pixel_format,
++				   mode_cmd->modifier[0]);
+ 
+ 	for (i = 0; i < info->num_planes; i++) {
+ 		height = drm_format_info_plane_height(info,
+diff --git a/drivers/gpu/drm/omapdrm/omap_fb.c b/drivers/gpu/drm/omapdrm/omap_fb.c
+index 449d521c78fe..e18878068c57 100644
+--- a/drivers/gpu/drm/omapdrm/omap_fb.c
++++ b/drivers/gpu/drm/omapdrm/omap_fb.c
+@@ -338,7 +338,8 @@ struct drm_framebuffer *omap_framebuffer_create(struct drm_device *dev,
+ 		struct drm_file *file, const struct drm_mode_fb_cmd2 *mode_cmd)
+ {
+ 	const struct drm_format_info *info = drm_get_format_info(dev,
+-								 mode_cmd);
++								 mode_cmd->pixel_format,
++								 mode_cmd->modifier[0]);
+ 	unsigned int num_planes = info->num_planes;
+ 	struct drm_gem_object *bos[4];
+ 	struct drm_framebuffer *fb;
+@@ -378,7 +379,8 @@ struct drm_framebuffer *omap_framebuffer_init(struct drm_device *dev,
+ 			dev, mode_cmd, mode_cmd->width, mode_cmd->height,
+ 			(char *)&mode_cmd->pixel_format);
+ 
+-	format = drm_get_format_info(dev, mode_cmd);
++	format = drm_get_format_info(dev, mode_cmd->pixel_format,
++				     mode_cmd->modifier[0]);
+ 
+ 	for (i = 0; i < ARRAY_SIZE(formats); i++) {
+ 		if (formats[i] == mode_cmd->pixel_format)
+diff --git a/drivers/gpu/drm/radeon/radeon_fbdev.c b/drivers/gpu/drm/radeon/radeon_fbdev.c
+index d4a58bd679db..e3a481bbee7b 100644
+--- a/drivers/gpu/drm/radeon/radeon_fbdev.c
++++ b/drivers/gpu/drm/radeon/radeon_fbdev.c
+@@ -67,7 +67,8 @@ static int radeon_fbdev_create_pinned_object(struct drm_fb_helper *fb_helper,
+ 	int height = mode_cmd->height;
+ 	u32 cpp;
+ 
+-	info = drm_get_format_info(rdev_to_drm(rdev), mode_cmd);
++	info = drm_get_format_info(rdev_to_drm(rdev), mode_cmd->pixel_format,
++				   mode_cmd->modifier[0]);
+ 	cpp = info->cpp[0];
+ 
+ 	/* need to align pitch with crtc limits */
+diff --git a/drivers/gpu/drm/rockchip/rockchip_drm_fb.c b/drivers/gpu/drm/rockchip/rockchip_drm_fb.c
+index 5829ee061c61..66762ca54a98 100644
+--- a/drivers/gpu/drm/rockchip/rockchip_drm_fb.c
++++ b/drivers/gpu/drm/rockchip/rockchip_drm_fb.c
+@@ -36,7 +36,8 @@ rockchip_fb_create(struct drm_device *dev, struct drm_file *file,
+ 	const struct drm_format_info *info;
+ 	int ret;
+ 
+-	info = drm_get_format_info(dev, mode_cmd);
++	info = drm_get_format_info(dev, mode_cmd->pixel_format,
++				   mode_cmd->modifier[0]);
+ 	if (!info)
+ 		return ERR_PTR(-ENOMEM);
+ 
+diff --git a/drivers/gpu/drm/tegra/fb.c b/drivers/gpu/drm/tegra/fb.c
+index 46170753699d..634c6346d947 100644
+--- a/drivers/gpu/drm/tegra/fb.c
++++ b/drivers/gpu/drm/tegra/fb.c
+@@ -134,7 +134,9 @@ struct drm_framebuffer *tegra_fb_create(struct drm_device *drm,
+ 					struct drm_file *file,
+ 					const struct drm_mode_fb_cmd2 *cmd)
+ {
+-	const struct drm_format_info *info = drm_get_format_info(drm, cmd);
++	const struct drm_format_info *info = drm_get_format_info(drm,
++								 cmd->pixel_format,
++								 cmd->modifier[0]);
+ 	struct tegra_bo *planes[4];
+ 	struct drm_gem_object *gem;
+ 	struct drm_framebuffer *fb;
+diff --git a/include/drm/drm_fourcc.h b/include/drm/drm_fourcc.h
+index c3f4405d6662..471784426857 100644
+--- a/include/drm/drm_fourcc.h
++++ b/include/drm/drm_fourcc.h
+@@ -54,7 +54,6 @@
+ #endif
+ 
+ struct drm_device;
+-struct drm_mode_fb_cmd2;
+ 
+ /**
+  * struct drm_format_info - information about a DRM format
+@@ -309,7 +308,7 @@ const struct drm_format_info *__drm_format_info(u32 format);
+ const struct drm_format_info *drm_format_info(u32 format);
+ const struct drm_format_info *
+ drm_get_format_info(struct drm_device *dev,
+-		    const struct drm_mode_fb_cmd2 *mode_cmd);
++		    u32 pixel_format, u64 modifier);
+ uint32_t drm_mode_legacy_fb_format(uint32_t bpp, uint32_t depth);
+ uint32_t drm_driver_legacy_fb_format(struct drm_device *dev,
+ 				     uint32_t bpp, uint32_t depth);
+-- 
+2.49.0
+
