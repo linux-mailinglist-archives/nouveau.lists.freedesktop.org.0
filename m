@@ -2,58 +2,60 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id 41B08AF0037
-	for <lists+nouveau@lfdr.de>; Tue,  1 Jul 2025 18:42:39 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id EF8CDAF1190
+	for <lists+nouveau@lfdr.de>; Wed,  2 Jul 2025 12:19:54 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id A50BE10E5D7;
-	Tue,  1 Jul 2025 16:42:37 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id E8C7510E6C9;
+	Wed,  2 Jul 2025 10:19:52 +0000 (UTC)
+Authentication-Results: gabe.freedesktop.org;
+	dkim=fail reason="signature verification failed" (2048-bit key; unprotected) header.d=igalia.com header.i=@igalia.com header.b="Rcf7g8RV";
+	dkim-atps=neutral
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from foss.arm.com (foss.arm.com [217.140.110.172])
- by gabe.freedesktop.org (Postfix) with ESMTP id 7843C10E5D6
- for <nouveau@lists.freedesktop.org>; Tue,  1 Jul 2025 16:42:36 +0000 (UTC)
-Received: from usa-sjc-imap-foss1.foss.arm.com (unknown [10.121.207.14])
- by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id E3A91237B
- for <nouveau@lists.freedesktop.org>; Tue,  1 Jul 2025 09:42:20 -0700 (PDT)
-Received: from e110455-lin.cambridge.arm.com (usa-sjc-imap-foss1.foss.arm.com
- [10.121.207.14])
- by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPA id D49703F58B
- for <nouveau@lists.freedesktop.org>; Tue,  1 Jul 2025 09:42:35 -0700 (PDT)
-Date: Tue, 1 Jul 2025 17:41:58 +0100
-From: Liviu Dudau <liviu.dudau@arm.com>
-To: Ville Syrjala <ville.syrjala@linux.intel.com>
-Cc: dri-devel@lists.freedesktop.org, intel-gfx@lists.freedesktop.org,
- intel-xe@lists.freedesktop.org, Alex Deucher <alexander.deucher@amd.com>,
- Russell King <linux@armlinux.org.uk>, Inki Dae <inki.dae@samsung.com>,
- Seung-Woo Kim <sw0312.kim@samsung.com>,
- Kyungmin Park <kyungmin.park@samsung.com>,
- Patrik Jakobsson <patrik.r.jakobsson@gmail.com>,
- Rob Clark <robdclark@gmail.com>, Abhinav Kumar <quic_abhinavk@quicinc.com>,
- Dmitry Baryshkov <lumag@kernel.org>, Sean Paul <sean@poorly.run>,
- Marijn Suijten <marijn.suijten@somainline.org>,
- Lyude Paul <lyude@redhat.com>, Danilo Krummrich <dakr@kernel.org>,
- Tomi Valkeinen <tomi.valkeinen@ideasonboard.com>,
- Thierry Reding <thierry.reding@gmail.com>,
- Mikko Perttunen <mperttunen@nvidia.com>, Gerd Hoffmann <kraxel@redhat.com>,
- Dmitry Osipenko <dmitry.osipenko@collabora.com>,
- Gurchetan Singh <gurchetansingh@chromium.org>,
- Chia-I Wu <olvaffe@gmail.com>, Zack Rusin <zack.rusin@broadcom.com>,
- Broadcom internal kernel review list <bcm-kernel-feedback-list@broadcom.com>, 
- amd-gfx@lists.freedesktop.org, linux-arm-msm@vger.kernel.org,
- freedreno@lists.freedesktop.org, nouveau@lists.freedesktop.org,
- linux-tegra@vger.kernel.org, virtualization@lists.linux.dev,
- Thomas Zimmermann <tzimmermann@suse.de>,
- Laurent Pinchart <laurent.pinchart+renesas@ideasonboard.com>
-Subject: Re: [PATCH v2 05/19] drm: Allow the caller to pass in the format
- info to drm_helper_mode_fill_fb_struct()
-Message-ID: <aGQP1pWrItse3dn4@e110455-lin.cambridge.arm.com>
-References: <20250701090722.13645-1-ville.syrjala@linux.intel.com>
- <20250701090722.13645-6-ville.syrjala@linux.intel.com>
+Received: from fanzine2.igalia.com (fanzine2.igalia.com [213.97.179.56])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 25B9610E6C3;
+ Wed,  2 Jul 2025 10:19:48 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=igalia.com; 
+ s=20170329;
+ h=Content-Transfer-Encoding:Content-Type:In-Reply-To:From:
+ References:Cc:To:Subject:MIME-Version:Date:Message-ID:Sender:Reply-To:
+ Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
+ Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
+ List-Subscribe:List-Post:List-Owner:List-Archive;
+ bh=MzngX37uvz6d6lF8YACHw9qO2X6AeXWw1SWs2AOP1WE=; b=Rcf7g8RVQfKIrVxyn7c63p17YJ
+ IvqJHB0AmaNPPr6i7R9XE6SNPXBtFQ9jASR3sUp2vv3sBUYlLfgrqwJtQsl1XxtuS4BPKInKaazxT
+ ZSY98oWk0IM9KkVBAqQLLymVJDGjuBuhpg5mw3BbLM88ODkM1YXObjbHCrYwqIFh2hTJwiy0aHC8Q
+ kxWFmG0PM7XLEMkl7MparOA3/bgwB8Ra3mehn6Am+tngJvPgUUrRyjd3LEnZi6nMgvDaGDiJkbj9u
+ tFNMHcgLo8e7eDnH3ASvt6AdKmPcORmAMqgVeNQsbAYEPUhyVeXawm/BlCce53jWRiOpN98dJ7hAA
+ TOOvBE4Q==;
+Received: from [81.79.92.254] (helo=[192.168.0.101])
+ by fanzine2.igalia.com with esmtpsa 
+ (Cipher TLS1.3:ECDHE_X25519__RSA_PSS_RSAE_SHA256__AES_128_GCM:128) (Exim)
+ id 1uWuYs-00BPA0-Es; Wed, 02 Jul 2025 12:19:30 +0200
+Message-ID: <ed5f6666-5c73-494c-835c-7e407dfd737b@igalia.com>
+Date: Wed, 2 Jul 2025 11:19:29 +0100
 MIME-Version: 1.0
-Content-Type: text/plain; charset=utf-8
-Content-Disposition: inline
-Content-Transfer-Encoding: 8bit
-In-Reply-To: <20250701090722.13645-6-ville.syrjala@linux.intel.com>
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH 1/6] drm/sched: Avoid memory leaks with cancel_job()
+ callback
+To: Philipp Stanner <phasta@kernel.org>, Lyude Paul <lyude@redhat.com>,
+ Danilo Krummrich <dakr@kernel.org>, David Airlie <airlied@gmail.com>,
+ Simona Vetter <simona@ffwll.ch>, Matthew Brost <matthew.brost@intel.com>,
+ =?UTF-8?Q?Christian_K=C3=B6nig?= <ckoenig.leichtzumerken@gmail.com>,
+ Maarten Lankhorst <maarten.lankhorst@linux.intel.com>,
+ Maxime Ripard <mripard@kernel.org>, Thomas Zimmermann <tzimmermann@suse.de>,
+ Sumit Semwal <sumit.semwal@linaro.org>,
+ Pierre-Eric Pelloux-Prayer <pierre-eric.pelloux-prayer@amd.com>
+Cc: dri-devel@lists.freedesktop.org, nouveau@lists.freedesktop.org,
+ linux-kernel@vger.kernel.org, linux-media@vger.kernel.org,
+ linaro-mm-sig@lists.linaro.org
+References: <20250701132142.76899-3-phasta@kernel.org>
+ <20250701132142.76899-4-phasta@kernel.org>
+Content-Language: en-GB
+From: Tvrtko Ursulin <tvrtko.ursulin@igalia.com>
+In-Reply-To: <20250701132142.76899-4-phasta@kernel.org>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -68,355 +70,124 @@ List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-On Tue, Jul 01, 2025 at 12:07:08PM +0300, Ville Syrjala wrote:
-> From: Ville Syrjälä <ville.syrjala@linux.intel.com>
+
+On 01/07/2025 14:21, Philipp Stanner wrote:
+> Since its inception, the GPU scheduler can leak memory if the driver
+> calls drm_sched_fini() while there are still jobs in flight.
 > 
-> Soon all drivers should have the format info already available in the
-> places where they call drm_helper_mode_fill_fb_struct(). Allow it to
-> be passed along into drm_helper_mode_fill_fb_struct() instead of doing
-> yet another redundant lookup.
+> The simplest way to solve this in a backwards compatible manner is by
+> adding a new callback, drm_sched_backend_ops.cancel_job(), which
+> instructs the driver to signal the hardware fence associated with the
+> job. Afterwards, the scheduler can savely use the established free_job()
+> callback for freeing the job.
 > 
-> Start by always passing in NULL and still doing the extra lookup.
-> The actual changes to avoid the lookup will follow.
+> Implement the new backend_ops callback cancel_job().
 > 
-> Done with cocci (with some manual fixups):
-> @@
-> identifier dev, fb, mode_cmd;
-> expression get_format_info;
-> @@
-> void drm_helper_mode_fill_fb_struct(struct drm_device *dev,
->                                     struct drm_framebuffer *fb,
-> +                                    const struct drm_format_info *info,
->                                     const struct drm_mode_fb_cmd2 *mode_cmd)
-> {
-> ...
-> - fb->format = get_format_info;
-> + fb->format = info ?: get_format_info;
-> ...
-> }
-> 
-> @@
-> identifier dev, fb, mode_cmd;
-> @@
-> void drm_helper_mode_fill_fb_struct(struct drm_device *dev,
->                                     struct drm_framebuffer *fb,
-> +                                    const struct drm_format_info *info,
->                                     const struct drm_mode_fb_cmd2 *mode_cmd);
-> 
-> @@
-> expression dev, fb, mode_cmd;
-> @@
-> drm_helper_mode_fill_fb_struct(dev, fb
-> +	       ,NULL
-> 	       ,mode_cmd);
-> 
-> Cc: Alex Deucher <alexander.deucher@amd.com>
-> Cc: Liviu Dudau <liviu.dudau@arm.com>
-> Cc: Russell King <linux@armlinux.org.uk>
-> Cc: Inki Dae <inki.dae@samsung.com>
-> Cc: Seung-Woo Kim <sw0312.kim@samsung.com>
-> Cc: Kyungmin Park <kyungmin.park@samsung.com>
-> Cc: Patrik Jakobsson <patrik.r.jakobsson@gmail.com>
-> Cc: Rob Clark <robdclark@gmail.com>
-> Cc: Abhinav Kumar <quic_abhinavk@quicinc.com>
-> Cc: Dmitry Baryshkov <lumag@kernel.org>
-> Cc: Sean Paul <sean@poorly.run>
-> Cc: Marijn Suijten <marijn.suijten@somainline.org>
-> Cc: Lyude Paul <lyude@redhat.com>
-> Cc: Danilo Krummrich <dakr@kernel.org>
-> Cc: Tomi Valkeinen <tomi.valkeinen@ideasonboard.com>
-> Cc: Thierry Reding <thierry.reding@gmail.com>
-> Cc: Mikko Perttunen <mperttunen@nvidia.com>
-> Cc: Gerd Hoffmann <kraxel@redhat.com>
-> Cc: Dmitry Osipenko <dmitry.osipenko@collabora.com>
-> Cc: Gurchetan Singh <gurchetansingh@chromium.org>
-> Cc: Chia-I Wu <olvaffe@gmail.com>
-> Cc: Zack Rusin <zack.rusin@broadcom.com>
-> Cc: Broadcom internal kernel review list <bcm-kernel-feedback-list@broadcom.com>
-> Cc: amd-gfx@lists.freedesktop.org
-> Cc: linux-arm-msm@vger.kernel.org
-> Cc: freedreno@lists.freedesktop.org
-> Cc: nouveau@lists.freedesktop.org
-> Cc: linux-tegra@vger.kernel.org
-> Cc: virtualization@lists.linux.dev
-> Reviewed-by: Thomas Zimmermann <tzimmermann@suse.de>
-> Reviewed-by: Laurent Pinchart <laurent.pinchart+renesas@ideasonboard.com>
-> Signed-off-by: Ville Syrjälä <ville.syrjala@linux.intel.com>
+> Suggested-by: Tvrtko Ursulin <tvrtko.ursulin@igalia.com>
+> Link: https://lore.kernel.org/dri-devel/20250418113211.69956-1-tvrtko.ursulin@igalia.com/
+> Signed-off-by: Philipp Stanner <phasta@kernel.org>
 > ---
->  drivers/gpu/drm/amd/amdgpu/amdgpu_display.c             | 2 +-
->  drivers/gpu/drm/arm/display/komeda/komeda_framebuffer.c | 2 +-
-
-Reviewed-by: Liviu Dudau <liviu.dudau@arm.com>
-
-Best regards,
-Liviu
-
->  drivers/gpu/drm/armada/armada_fb.c                      | 2 +-
->  drivers/gpu/drm/drm_gem_framebuffer_helper.c            | 2 +-
->  drivers/gpu/drm/drm_modeset_helper.c                    | 6 ++++--
->  drivers/gpu/drm/exynos/exynos_drm_fb.c                  | 2 +-
->  drivers/gpu/drm/gma500/framebuffer.c                    | 2 +-
->  drivers/gpu/drm/i915/display/intel_fb.c                 | 2 +-
->  drivers/gpu/drm/msm/msm_fb.c                            | 2 +-
->  drivers/gpu/drm/nouveau/nouveau_display.c               | 2 +-
->  drivers/gpu/drm/omapdrm/omap_fb.c                       | 2 +-
->  drivers/gpu/drm/radeon/radeon_display.c                 | 2 +-
->  drivers/gpu/drm/tegra/fb.c                              | 2 +-
->  drivers/gpu/drm/virtio/virtgpu_display.c                | 2 +-
->  drivers/gpu/drm/vmwgfx/vmwgfx_kms.c                     | 4 ++--
->  include/drm/drm_modeset_helper.h                        | 2 ++
->  16 files changed, 21 insertions(+), 17 deletions(-)
+>   drivers/gpu/drm/scheduler/sched_main.c | 34 ++++++++++++++++----------
+>   include/drm/gpu_scheduler.h            | 18 ++++++++++++++
+>   2 files changed, 39 insertions(+), 13 deletions(-)
 > 
-> diff --git a/drivers/gpu/drm/amd/amdgpu/amdgpu_display.c b/drivers/gpu/drm/amd/amdgpu/amdgpu_display.c
-> index 10c57ded0e3e..4cbbae543e34 100644
-> --- a/drivers/gpu/drm/amd/amdgpu/amdgpu_display.c
-> +++ b/drivers/gpu/drm/amd/amdgpu/amdgpu_display.c
-> @@ -1202,7 +1202,7 @@ static int amdgpu_display_gem_fb_verify_and_init(struct drm_device *dev,
->  	int ret;
->  
->  	rfb->base.obj[0] = obj;
-> -	drm_helper_mode_fill_fb_struct(dev, &rfb->base, mode_cmd);
-> +	drm_helper_mode_fill_fb_struct(dev, &rfb->base, NULL, mode_cmd);
->  	/* Verify that the modifier is supported. */
->  	if (!drm_any_plane_has_format(dev, mode_cmd->pixel_format,
->  				      mode_cmd->modifier[0])) {
-> diff --git a/drivers/gpu/drm/arm/display/komeda/komeda_framebuffer.c b/drivers/gpu/drm/arm/display/komeda/komeda_framebuffer.c
-> index 29b05482f713..acd8e505ebc7 100644
-> --- a/drivers/gpu/drm/arm/display/komeda/komeda_framebuffer.c
-> +++ b/drivers/gpu/drm/arm/display/komeda/komeda_framebuffer.c
-> @@ -178,7 +178,7 @@ komeda_fb_create(struct drm_device *dev, struct drm_file *file,
->  		return ERR_PTR(-EINVAL);
->  	}
->  
-> -	drm_helper_mode_fill_fb_struct(dev, &kfb->base, mode_cmd);
-> +	drm_helper_mode_fill_fb_struct(dev, &kfb->base, NULL, mode_cmd);
->  
->  	if (kfb->base.modifier)
->  		ret = komeda_fb_afbc_size_check(kfb, file, mode_cmd);
-> diff --git a/drivers/gpu/drm/armada/armada_fb.c b/drivers/gpu/drm/armada/armada_fb.c
-> index 597720e229c2..7e94ec5bd4f4 100644
-> --- a/drivers/gpu/drm/armada/armada_fb.c
-> +++ b/drivers/gpu/drm/armada/armada_fb.c
-> @@ -64,7 +64,7 @@ struct armada_framebuffer *armada_framebuffer_create(struct drm_device *dev,
->  	dfb->mod = config;
->  	dfb->fb.obj[0] = &obj->obj;
->  
-> -	drm_helper_mode_fill_fb_struct(dev, &dfb->fb, mode);
-> +	drm_helper_mode_fill_fb_struct(dev, &dfb->fb, NULL, mode);
->  
->  	ret = drm_framebuffer_init(dev, &dfb->fb, &armada_fb_funcs);
->  	if (ret) {
-> diff --git a/drivers/gpu/drm/drm_gem_framebuffer_helper.c b/drivers/gpu/drm/drm_gem_framebuffer_helper.c
-> index 7c0d2174dbc9..6fe4094bd0fe 100644
-> --- a/drivers/gpu/drm/drm_gem_framebuffer_helper.c
-> +++ b/drivers/gpu/drm/drm_gem_framebuffer_helper.c
-> @@ -75,7 +75,7 @@ drm_gem_fb_init(struct drm_device *dev,
->  	unsigned int i;
->  	int ret;
->  
-> -	drm_helper_mode_fill_fb_struct(dev, fb, mode_cmd);
-> +	drm_helper_mode_fill_fb_struct(dev, fb, NULL, mode_cmd);
->  
->  	for (i = 0; i < num_planes; i++)
->  		fb->obj[i] = obj[i];
-> diff --git a/drivers/gpu/drm/drm_modeset_helper.c b/drivers/gpu/drm/drm_modeset_helper.c
-> index 3fed2d5ab1d6..89ba99970735 100644
-> --- a/drivers/gpu/drm/drm_modeset_helper.c
-> +++ b/drivers/gpu/drm/drm_modeset_helper.c
-> @@ -74,6 +74,7 @@ EXPORT_SYMBOL(drm_helper_move_panel_connectors_to_head);
->   * drm_helper_mode_fill_fb_struct - fill out framebuffer metadata
->   * @dev: DRM device
->   * @fb: drm_framebuffer object to fill out
-> + * @info: pixel format information
->   * @mode_cmd: metadata from the userspace fb creation request
->   *
->   * This helper can be used in a drivers fb_create callback to pre-fill the fb's
-> @@ -81,13 +82,14 @@ EXPORT_SYMBOL(drm_helper_move_panel_connectors_to_head);
->   */
->  void drm_helper_mode_fill_fb_struct(struct drm_device *dev,
->  				    struct drm_framebuffer *fb,
-> +				    const struct drm_format_info *info,
->  				    const struct drm_mode_fb_cmd2 *mode_cmd)
->  {
->  	int i;
->  
->  	fb->dev = dev;
-> -	fb->format = drm_get_format_info(dev, mode_cmd->pixel_format,
-> -					 mode_cmd->modifier[0]);
-> +	fb->format = info ? : drm_get_format_info(dev, mode_cmd->pixel_format,
-> +						  mode_cmd->modifier[0]);
->  	fb->width = mode_cmd->width;
->  	fb->height = mode_cmd->height;
->  	for (i = 0; i < 4; i++) {
-> diff --git a/drivers/gpu/drm/exynos/exynos_drm_fb.c b/drivers/gpu/drm/exynos/exynos_drm_fb.c
-> index 9ae526825726..7091d31835ec 100644
-> --- a/drivers/gpu/drm/exynos/exynos_drm_fb.c
-> +++ b/drivers/gpu/drm/exynos/exynos_drm_fb.c
-> @@ -76,7 +76,7 @@ exynos_drm_framebuffer_init(struct drm_device *dev,
->  		fb->obj[i] = &exynos_gem[i]->base;
->  	}
->  
-> -	drm_helper_mode_fill_fb_struct(dev, fb, mode_cmd);
-> +	drm_helper_mode_fill_fb_struct(dev, fb, NULL, mode_cmd);
->  
->  	ret = drm_framebuffer_init(dev, fb, &exynos_drm_fb_funcs);
->  	if (ret < 0) {
-> diff --git a/drivers/gpu/drm/gma500/framebuffer.c b/drivers/gpu/drm/gma500/framebuffer.c
-> index a4a18ec2dd56..f9ade8361354 100644
-> --- a/drivers/gpu/drm/gma500/framebuffer.c
-> +++ b/drivers/gpu/drm/gma500/framebuffer.c
-> @@ -47,7 +47,7 @@ static int psb_framebuffer_init(struct drm_device *dev,
->  	if (mode_cmd->pitches[0] & 63)
->  		return -EINVAL;
->  
-> -	drm_helper_mode_fill_fb_struct(dev, fb, mode_cmd);
-> +	drm_helper_mode_fill_fb_struct(dev, fb, NULL, mode_cmd);
->  	fb->obj[0] = obj;
->  	ret = drm_framebuffer_init(dev, fb, &psb_fb_funcs);
->  	if (ret) {
-> diff --git a/drivers/gpu/drm/i915/display/intel_fb.c b/drivers/gpu/drm/i915/display/intel_fb.c
-> index 571d2720575b..30fa287ed6b0 100644
-> --- a/drivers/gpu/drm/i915/display/intel_fb.c
-> +++ b/drivers/gpu/drm/i915/display/intel_fb.c
-> @@ -2254,7 +2254,7 @@ int intel_framebuffer_init(struct intel_framebuffer *intel_fb,
->  		goto err_frontbuffer_put;
->  	}
->  
-> -	drm_helper_mode_fill_fb_struct(display->drm, fb, mode_cmd);
-> +	drm_helper_mode_fill_fb_struct(display->drm, fb, NULL, mode_cmd);
->  
->  	for (i = 0; i < fb->format->num_planes; i++) {
->  		unsigned int stride_alignment;
-> diff --git a/drivers/gpu/drm/msm/msm_fb.c b/drivers/gpu/drm/msm/msm_fb.c
-> index 4aef51cef3d5..0615427e85ce 100644
-> --- a/drivers/gpu/drm/msm/msm_fb.c
-> +++ b/drivers/gpu/drm/msm/msm_fb.c
-> @@ -222,7 +222,7 @@ static struct drm_framebuffer *msm_framebuffer_init(struct drm_device *dev,
->  		msm_fb->base.obj[i] = bos[i];
->  	}
->  
-> -	drm_helper_mode_fill_fb_struct(dev, fb, mode_cmd);
-> +	drm_helper_mode_fill_fb_struct(dev, fb, NULL, mode_cmd);
->  
->  	ret = drm_framebuffer_init(dev, fb, &msm_framebuffer_funcs);
->  	if (ret) {
-> diff --git a/drivers/gpu/drm/nouveau/nouveau_display.c b/drivers/gpu/drm/nouveau/nouveau_display.c
-> index 1ddd92901526..e1e542126310 100644
-> --- a/drivers/gpu/drm/nouveau/nouveau_display.c
-> +++ b/drivers/gpu/drm/nouveau/nouveau_display.c
-> @@ -321,7 +321,7 @@ nouveau_framebuffer_new(struct drm_device *dev,
->  	if (!(fb = *pfb = kzalloc(sizeof(*fb), GFP_KERNEL)))
->  		return -ENOMEM;
->  
-> -	drm_helper_mode_fill_fb_struct(dev, fb, mode_cmd);
-> +	drm_helper_mode_fill_fb_struct(dev, fb, NULL, mode_cmd);
->  	fb->obj[0] = gem;
->  
->  	ret = drm_framebuffer_init(dev, fb, &nouveau_framebuffer_funcs);
-> diff --git a/drivers/gpu/drm/omapdrm/omap_fb.c b/drivers/gpu/drm/omapdrm/omap_fb.c
-> index 36afcd1c1fd7..30c81e2e5d6b 100644
-> --- a/drivers/gpu/drm/omapdrm/omap_fb.c
-> +++ b/drivers/gpu/drm/omapdrm/omap_fb.c
-> @@ -440,7 +440,7 @@ struct drm_framebuffer *omap_framebuffer_init(struct drm_device *dev,
->  		plane->dma_addr  = 0;
->  	}
->  
-> -	drm_helper_mode_fill_fb_struct(dev, fb, mode_cmd);
-> +	drm_helper_mode_fill_fb_struct(dev, fb, NULL, mode_cmd);
->  
->  	ret = drm_framebuffer_init(dev, fb, &omap_framebuffer_funcs);
->  	if (ret) {
-> diff --git a/drivers/gpu/drm/radeon/radeon_display.c b/drivers/gpu/drm/radeon/radeon_display.c
-> index 85b714ac9882..b4bf5dfeea2d 100644
-> --- a/drivers/gpu/drm/radeon/radeon_display.c
-> +++ b/drivers/gpu/drm/radeon/radeon_display.c
-> @@ -1302,7 +1302,7 @@ radeon_framebuffer_init(struct drm_device *dev,
->  {
->  	int ret;
->  	fb->obj[0] = obj;
-> -	drm_helper_mode_fill_fb_struct(dev, fb, mode_cmd);
-> +	drm_helper_mode_fill_fb_struct(dev, fb, NULL, mode_cmd);
->  	ret = drm_framebuffer_init(dev, fb, &radeon_fb_funcs);
->  	if (ret) {
->  		fb->obj[0] = NULL;
-> diff --git a/drivers/gpu/drm/tegra/fb.c b/drivers/gpu/drm/tegra/fb.c
-> index 24907573e758..d359683f5ce6 100644
-> --- a/drivers/gpu/drm/tegra/fb.c
-> +++ b/drivers/gpu/drm/tegra/fb.c
-> @@ -114,7 +114,7 @@ struct drm_framebuffer *tegra_fb_alloc(struct drm_device *drm,
->  	if (!fb)
->  		return ERR_PTR(-ENOMEM);
->  
-> -	drm_helper_mode_fill_fb_struct(drm, fb, mode_cmd);
-> +	drm_helper_mode_fill_fb_struct(drm, fb, NULL, mode_cmd);
->  
->  	for (i = 0; i < fb->format->num_planes; i++)
->  		fb->obj[i] = &planes[i]->gem;
-> diff --git a/drivers/gpu/drm/virtio/virtgpu_display.c b/drivers/gpu/drm/virtio/virtgpu_display.c
-> index f9a98fbbabd1..93763b91bab5 100644
-> --- a/drivers/gpu/drm/virtio/virtgpu_display.c
-> +++ b/drivers/gpu/drm/virtio/virtgpu_display.c
-> @@ -73,7 +73,7 @@ virtio_gpu_framebuffer_init(struct drm_device *dev,
->  
->  	vgfb->base.obj[0] = obj;
->  
-> -	drm_helper_mode_fill_fb_struct(dev, &vgfb->base, mode_cmd);
-> +	drm_helper_mode_fill_fb_struct(dev, &vgfb->base, NULL, mode_cmd);
->  
->  	ret = drm_framebuffer_init(dev, &vgfb->base, &virtio_gpu_fb_funcs);
->  	if (ret) {
-> diff --git a/drivers/gpu/drm/vmwgfx/vmwgfx_kms.c b/drivers/gpu/drm/vmwgfx/vmwgfx_kms.c
-> index 2d48a28cda9c..35965e29e408 100644
-> --- a/drivers/gpu/drm/vmwgfx/vmwgfx_kms.c
-> +++ b/drivers/gpu/drm/vmwgfx/vmwgfx_kms.c
-> @@ -548,7 +548,7 @@ static int vmw_kms_new_framebuffer_surface(struct vmw_private *dev_priv,
->  		goto out_err1;
->  	}
->  
-> -	drm_helper_mode_fill_fb_struct(dev, &vfbs->base.base, mode_cmd);
-> +	drm_helper_mode_fill_fb_struct(dev, &vfbs->base.base, NULL, mode_cmd);
->  	memcpy(&vfbs->uo, uo, sizeof(vfbs->uo));
->  	vmw_user_object_ref(&vfbs->uo);
->  
-> @@ -634,7 +634,7 @@ static int vmw_kms_new_framebuffer_bo(struct vmw_private *dev_priv,
->  	}
->  
->  	vfbd->base.base.obj[0] = &bo->tbo.base;
-> -	drm_helper_mode_fill_fb_struct(dev, &vfbd->base.base, mode_cmd);
-> +	drm_helper_mode_fill_fb_struct(dev, &vfbd->base.base, NULL, mode_cmd);
->  	vfbd->base.bo = true;
->  	vfbd->buffer = vmw_bo_reference(bo);
->  	*out = &vfbd->base;
-> diff --git a/include/drm/drm_modeset_helper.h b/include/drm/drm_modeset_helper.h
-> index 995fd981cab0..7e3d4c5a7f66 100644
-> --- a/include/drm/drm_modeset_helper.h
-> +++ b/include/drm/drm_modeset_helper.h
-> @@ -26,6 +26,7 @@
->  struct drm_crtc;
->  struct drm_crtc_funcs;
->  struct drm_device;
-> +struct drm_format_info;
->  struct drm_framebuffer;
->  struct drm_mode_fb_cmd2;
->  
-> @@ -33,6 +34,7 @@ void drm_helper_move_panel_connectors_to_head(struct drm_device *);
->  
->  void drm_helper_mode_fill_fb_struct(struct drm_device *dev,
->  				    struct drm_framebuffer *fb,
-> +				    const struct drm_format_info *info,
->  				    const struct drm_mode_fb_cmd2 *mode_cmd);
->  
->  int drm_crtc_init(struct drm_device *dev, struct drm_crtc *crtc,
-> -- 
-> 2.49.0
-> 
+> diff --git a/drivers/gpu/drm/scheduler/sched_main.c b/drivers/gpu/drm/scheduler/sched_main.c
+> index c63543132f9d..1239954f5f7c 100644
+> --- a/drivers/gpu/drm/scheduler/sched_main.c
+> +++ b/drivers/gpu/drm/scheduler/sched_main.c
+> @@ -1353,6 +1353,18 @@ int drm_sched_init(struct drm_gpu_scheduler *sched, const struct drm_sched_init_
+>   }
+>   EXPORT_SYMBOL(drm_sched_init);
+>   
+> +static void drm_sched_cancel_remaining_jobs(struct drm_gpu_scheduler *sched)
+> +{
+> +	struct drm_sched_job *job, *tmp;
+> +
+> +	/* All other accessors are stopped. No locking necessary. */
+> +	list_for_each_entry_safe_reverse(job, tmp, &sched->pending_list, list) {
+> +		sched->ops->cancel_job(job);
+> +		list_del(&job->list);
 
--- 
-====================
-| I would like to |
-| fix the world,  |
-| but they're not |
-| giving me the   |
- \ source code!  /
-  ---------------
-    ¯\_(ツ)_/¯
+List_del is just for the warning in 3/6 I guess? You could in theory zap 
+the whole list in one go and avoid the safe iterator. Not that it 
+matters really so:
+
+Acked-by: Tvrtko Ursulin <tvrtko.ursulin@igalia.com>
+
+Regards,
+
+Tvrtko
+
+> +		sched->ops->free_job(job);
+> +	}
+> +}
+> +
+>   /**
+>    * drm_sched_fini - Destroy a gpu scheduler
+>    *
+> @@ -1360,19 +1372,11 @@ EXPORT_SYMBOL(drm_sched_init);
+>    *
+>    * Tears down and cleans up the scheduler.
+>    *
+> - * This stops submission of new jobs to the hardware through
+> - * drm_sched_backend_ops.run_job(). Consequently, drm_sched_backend_ops.free_job()
+> - * will not be called for all jobs still in drm_gpu_scheduler.pending_list.
+> - * There is no solution for this currently. Thus, it is up to the driver to make
+> - * sure that:
+> - *
+> - *  a) drm_sched_fini() is only called after for all submitted jobs
+> - *     drm_sched_backend_ops.free_job() has been called or that
+> - *  b) the jobs for which drm_sched_backend_ops.free_job() has not been called
+> - *     after drm_sched_fini() ran are freed manually.
+> - *
+> - * FIXME: Take care of the above problem and prevent this function from leaking
+> - * the jobs in drm_gpu_scheduler.pending_list under any circumstances.
+> + * This stops submission of new jobs to the hardware through &struct
+> + * drm_sched_backend_ops.run_job. If &struct drm_sched_backend_ops.cancel_job
+> + * is implemented, all jobs will be canceled through it and afterwards cleaned
+> + * up through &struct drm_sched_backend_ops.free_job. If cancel_job is not
+> + * implemented, memory could leak.
+>    */
+>   void drm_sched_fini(struct drm_gpu_scheduler *sched)
+>   {
+> @@ -1402,6 +1406,10 @@ void drm_sched_fini(struct drm_gpu_scheduler *sched)
+>   	/* Confirm no work left behind accessing device structures */
+>   	cancel_delayed_work_sync(&sched->work_tdr);
+>   
+> +	/* Avoid memory leaks if supported by the driver. */
+> +	if (sched->ops->cancel_job)
+> +		drm_sched_cancel_remaining_jobs(sched);
+> +
+>   	if (sched->own_submit_wq)
+>   		destroy_workqueue(sched->submit_wq);
+>   	sched->ready = false;
+> diff --git a/include/drm/gpu_scheduler.h b/include/drm/gpu_scheduler.h
+> index e62a7214e052..190844370f48 100644
+> --- a/include/drm/gpu_scheduler.h
+> +++ b/include/drm/gpu_scheduler.h
+> @@ -512,6 +512,24 @@ struct drm_sched_backend_ops {
+>            * and it's time to clean it up.
+>   	 */
+>   	void (*free_job)(struct drm_sched_job *sched_job);
+> +
+> +	/**
+> +	 * @cancel_job: Used by the scheduler to guarantee remaining jobs' fences
+> +	 * get signaled in drm_sched_fini().
+> +	 *
+> +	 * Used by the scheduler to cancel all jobs that have not been executed
+> +	 * with &struct drm_sched_backend_ops.run_job by the time
+> +	 * drm_sched_fini() gets invoked.
+> +	 *
+> +	 * Drivers need to signal the passed job's hardware fence with an
+> +	 * appropriate error code (e.g., -ECANCELED) in this callback. They
+> +	 * must not free the job.
+> +	 *
+> +	 * The scheduler will only call this callback once it stopped calling
+> +	 * all other callbacks forever, with the exception of &struct
+> +	 * drm_sched_backend_ops.free_job.
+> +	 */
+> +	void (*cancel_job)(struct drm_sched_job *sched_job);
+>   };
+>   
+>   /**
+
