@@ -2,113 +2,163 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id F06ECBBF78F
-	for <lists+nouveau@lfdr.de>; Mon, 06 Oct 2025 22:58:15 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id A42B2BBF49F
+	for <lists+nouveau@lfdr.de>; Mon, 06 Oct 2025 22:47:08 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 4563E10E621;
-	Mon,  6 Oct 2025 20:57:59 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id EEE6A10E4D9;
+	Mon,  6 Oct 2025 20:46:26 +0000 (UTC)
 Authentication-Results: gabe.freedesktop.org;
-	dkim=permerror (0-bit key) header.d=gmail.com header.i=@gmail.com header.b="bb8zWtmi";
+	dkim=pass (2048-bit key; unprotected) header.d=Nvidia.com header.i=@Nvidia.com header.b="PTs9lG7h";
 	dkim-atps=neutral
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from mail-lj1-f179.google.com (mail-lj1-f179.google.com
- [209.85.208.179])
- by gabe.freedesktop.org (Postfix) with ESMTPS id C6D6710E84B;
- Thu,  3 Jul 2025 13:56:30 +0000 (UTC)
-Received: by mail-lj1-f179.google.com with SMTP id
- 38308e7fff4ca-32b43846e8cso68364471fa.0; 
- Thu, 03 Jul 2025 06:56:30 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1751550989; x=1752155789; darn=lists.freedesktop.org;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=XroVTgiipbMk92z/0akuSiUYeZttfe/ce+IMaIERceI=;
- b=bb8zWtmifPJxkoosl7JwOtUiQrv8tyYx0Gfqbxd9FFPxMdWXk6p3L9fS1ozlNtgzLd
- wklSDOQ11N2RuDWbNMsHpkbySuTSuHwoL5EYffe1xSGpWF0dvAmumJNAOR6gBbImmL4m
- n8+sR3OgQPjS6RzaZJE8j2acK6zejgTqW2Oq21oBJsyIh7E21vns+CmS3ZxL9ZhbeV+C
- UGRgyZpXBeeAgInxKwUrhZ12aWG9hLxHVDfWbvC8X0ivKw6acPFrTi2l5eIY8ihuYyuU
- UhRN8D1Cgm4o6iONMeSirSH4zrWa5c1ZHTmx7y6t669wYwAp9MlsRfab2aS14UVuLuoT
- PThw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1751550989; x=1752155789;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=XroVTgiipbMk92z/0akuSiUYeZttfe/ce+IMaIERceI=;
- b=AmcF00AUaD7EQtd30PUioD6qOhFsmbodbIXxSq5fr47GNx10NSMij1DkWOCxBtnMBf
- VKAZ2EVvNJ5gp4mtP1R3VHWwQyQbdqj/ZhAN9rS8fObmHSnJnHQS+p1m+vPVLOhy82PB
- GNA4RnGD3JB2JwbEBe+0TtrnaeiV629ytEhwalJMrf0hwq72QAxyoiUlGQFGRYsI4WRO
- PwFH7zJouyf1fyKCseJgoVl/nBlWw7gEfkX5ZIGIY8pUnB4rT6UPaye69BE7+8CNjk7h
- JSqFETi41uP877ZzW6kUoOQRDi2bpKgizNeLEcyli79WC5tL/XUsaUWSeWx50fEfCHMZ
- 8QBw==
-X-Forwarded-Encrypted: i=1;
- AJvYcCU1TC1WqxzEyWjGgpI77tGG+oOgVlowog8nW9bO7nlZS/+3R39XAdwNncRjaVfM6oQIERyMYwTMPrs=@lists.freedesktop.org,
- AJvYcCXRNLpxUUZSoPiOOwCE4F8uUhAmoiJW+q83y3dXT/zJ1ELJhMF37HO/hhrNjNsv7kIC9bKIjal+NA==@lists.freedesktop.org
-X-Gm-Message-State: AOJu0YwKsO/P3xGfiGECIMBkbQpNsO8qWCduDwz1rJ9STLKZA18SRnSi
- 8z4Z3rMCuGbNuRWyFJRMMm4//bxOUQEJ++vE6ow1+0WSNlb//q+pwdMOiGn5NxLRT4j14q0zR94
- iiou1FUZwx/0r442CEV2CLxb9G1Hb20g=
-X-Gm-Gg: ASbGncu1uXeHigRbAKLq5OMjBexpnwFRE7ZUa00e4VaJN7nIU59EtozNs40P4gkuSDw
- PJiWHp+GGp4EvL9uSXAvZ2co2MUVXTDKc75VlB3HE35wKVfh18mifPutzX0NG3FnarMZNj5w31E
- LiDWppn2Lqjw6ueSLCy2rmMRDcGn7kyaFjW2vS4MO6a9lK
-X-Google-Smtp-Source: AGHT+IHecHJqinQ0GtjAARewm2enIQAyyQD5rKLXQHe+ItluA3s82XioLx3xqz+ougAgIvj7CA1kgvJIs3FoZ5ExGxI=
-X-Received: by 2002:a2e:a369:0:b0:32c:bc69:e921 with SMTP id
- 38308e7fff4ca-32e0cfaac22mr12120091fa.9.1751550988404; Thu, 03 Jul 2025
- 06:56:28 -0700 (PDT)
+Received: from NAM02-DM3-obe.outbound.protection.outlook.com
+ (mail-dm3nam02on2043.outbound.protection.outlook.com [40.107.95.43])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 1231810E15C;
+ Thu,  3 Jul 2025 15:49:35 +0000 (UTC)
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=q14WtDyRZNeTM1XoegYv+zEQySoqAGfCO9GKG+31cV8LQ44S3i2wNW/ch6Pz//cQi+RAThb/z9JefKtEsc4+LPnva0JlK1itXFkFavKMm0PYX9yQpYYMOywIFtDqMuW+TBjYoktFiorRAahahyycZ4E5tqHuz42sztQqe1zZ5+3fgQSN8/zaCYMdRjMIVIxKrneMV6LOag9QHnX2dJppgr9796U/4/iqM1ZXsEkVN06EL9fuxKcbSdOPQa9+b/obu1dSDG88t4ZS4r//rDdZfOxF31Ugo93AkdB1wDLb6Ca3A+HHwQZtEudWURAkuaEioPQiT3+j5iKwhbgRXC/r1Q==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=3M2dJTNhuaiVhZCxcKP6nOjeo/G4fww4mS2oThs6Bnk=;
+ b=GVtdjxhpoCjm/XiXw+HXFv7yo3DZvtGD2PQ2kR8aSudE+fKb4YSJ6gCmI6TDEzpL+JkU3m8GokbEEOePyJ+QxNzWdViQAKtHXyQLfTp1tbyRirBmQ98SwvGEV96PLRBH4QUJWr8QtRIQFqq0HzvUfArMaeoIPxIEP38VqCzKc9mg64n5GxEeSgpoEy/wBqsKdPpvBobny5zcpXjMHONn9a45q0xNP88X+8XG0DWa+VAqiudW7J04EbHX0VMx1wBKHRC2B21zEK6bOA/yPfwb30KjvlVxuAx3oSIqM7mjB4DYcmCOltWx2T9YCwyD4NVmBT3h4JM3e2lEvoc1zJTfOA==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=nvidia.com; dmarc=pass action=none header.from=nvidia.com;
+ dkim=pass header.d=nvidia.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=Nvidia.com;
+ s=selector2;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=3M2dJTNhuaiVhZCxcKP6nOjeo/G4fww4mS2oThs6Bnk=;
+ b=PTs9lG7hemfk1+ZL7U0Ffp5ANoSgtfcg/c9VqlLDfg+OarRtM9sMf7+SPkzrlfKZom89LSephyA/xryzT+czxfaiI75trFXDlzFNY9HCHtbB0ydMIpk3ZNuQdTATNSTVEBMR/MTsc0sWiP3ooofxQiJaXEl4aCbadrukHWvVq3l5XcqLcKGPyCaj6i+SYIQhXXF9aV7QoMkrfpI/85BVZTWfWyBJakqn/i3COiu1mU8t0XMsjLD+39I76wdgeVjqXQArstBRhZQYMq80z8t5Zv695h5VQ4tKZRdMD2n29eHjjBGwZuwLWzN5qT5KBHGT4v9YB5Xag5eSg6LW+Fm9Pw==
+Authentication-Results: dkim=none (message not signed)
+ header.d=none;dmarc=none action=none header.from=nvidia.com;
+Received: from SN7PR12MB8059.namprd12.prod.outlook.com (2603:10b6:806:32b::7)
+ by PH7PR12MB6588.namprd12.prod.outlook.com (2603:10b6:510:210::10)
+ with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.8901.20; Thu, 3 Jul
+ 2025 15:49:28 +0000
+Received: from SN7PR12MB8059.namprd12.prod.outlook.com
+ ([fe80::4ee2:654e:1fe8:4b91]) by SN7PR12MB8059.namprd12.prod.outlook.com
+ ([fe80::4ee2:654e:1fe8:4b91%7]) with mapi id 15.20.8901.018; Thu, 3 Jul 2025
+ 15:49:28 +0000
+Message-ID: <f6941c56-b096-4a5f-805e-c3b9b260850a@nvidia.com>
+Date: Thu, 3 Jul 2025 11:49:23 -0400
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v3 4/7] Documentation: gpu: nova-core: Document vbios
+ layout
+To: Bagas Sanjaya <bagasdotme@gmail.com>,
+ Alexandre Courbot <acourbot@nvidia.com>, Danilo Krummrich <dakr@kernel.org>,
+ David Airlie <airlied@gmail.com>, Simona Vetter <simona@ffwll.ch>,
+ Maarten Lankhorst <maarten.lankhorst@linux.intel.com>,
+ Maxime Ripard <mripard@kernel.org>, Thomas Zimmermann <tzimmermann@suse.de>,
+ Jonathan Corbet <corbet@lwn.net>
+Cc: nouveau@lists.freedesktop.org, dri-devel@lists.freedesktop.org,
+ linux-kernel@vger.kernel.org, linux-doc@vger.kernel.org,
+ rust-for-linux@vger.kernel.org
+References: <20250702-nova-docs-v3-0-f362260813e2@nvidia.com>
+ <20250702-nova-docs-v3-4-f362260813e2@nvidia.com>
+ <aGXMtB7sN1FJOXAL@archie.me>
+Content-Language: en-US
+From: Joel Fernandes <joelagnelf@nvidia.com>
+In-Reply-To: <aGXMtB7sN1FJOXAL@archie.me>
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
+X-ClientProxiedBy: MN2PR01CA0061.prod.exchangelabs.com (2603:10b6:208:23f::30)
+ To SN7PR12MB8059.namprd12.prod.outlook.com
+ (2603:10b6:806:32b::7)
 MIME-Version: 1.0
-References: <20250701-cstr-core-v13-0-29f7d3eb97a6@gmail.com>
- <20250701-cstr-core-v13-2-29f7d3eb97a6@gmail.com>
- <DB2BDSN1JH51.14ZZPETJORBC6@kernel.org>
-In-Reply-To: <DB2BDSN1JH51.14ZZPETJORBC6@kernel.org>
-From: Tamir Duberstein <tamird@gmail.com>
-Date: Thu, 3 Jul 2025 09:55:52 -0400
-X-Gm-Features: Ac12FXwkwRINIecE-FwYN90tPuGpGFKpT2Ln86Mwgefjv5UkGbvTZ6CcK0fiY_k
-Message-ID: <CAJ-ks9nC=AyBPXRY3nJ0NuZvjFskzMcOkVNrBEfXD2hZ5uRntQ@mail.gmail.com>
-Subject: Re: [PATCH v13 2/5] rust: support formatting of foreign types
-To: Benno Lossin <lossin@kernel.org>
-Cc: Michal Rostecki <vadorovsky@protonmail.com>,
- Miguel Ojeda <ojeda@kernel.org>, 
- Alex Gaynor <alex.gaynor@gmail.com>, Boqun Feng <boqun.feng@gmail.com>, 
- Gary Guo <gary@garyguo.net>,
- =?UTF-8?Q?Bj=C3=B6rn_Roy_Baron?= <bjorn3_gh@protonmail.com>, 
- Andreas Hindborg <a.hindborg@kernel.org>, Alice Ryhl <aliceryhl@google.com>, 
- Trevor Gross <tmgross@umich.edu>, Brendan Higgins <brendan.higgins@linux.dev>, 
- David Gow <davidgow@google.com>, Rae Moar <rmoar@google.com>, 
- Danilo Krummrich <dakr@kernel.org>,
- Maarten Lankhorst <maarten.lankhorst@linux.intel.com>, 
- Maxime Ripard <mripard@kernel.org>, Thomas Zimmermann <tzimmermann@suse.de>, 
- David Airlie <airlied@gmail.com>, Simona Vetter <simona@ffwll.ch>, 
- Greg Kroah-Hartman <gregkh@linuxfoundation.org>,
- "Rafael J. Wysocki" <rafael@kernel.org>, 
- Luis Chamberlain <mcgrof@kernel.org>, Russ Weight <russ.weight@linux.dev>, 
- FUJITA Tomonori <fujita.tomonori@gmail.com>, Rob Herring <robh@kernel.org>, 
- Saravana Kannan <saravanak@google.com>, Peter Zijlstra <peterz@infradead.org>, 
- Ingo Molnar <mingo@redhat.com>, Will Deacon <will@kernel.org>,
- Waiman Long <longman@redhat.com>, Nathan Chancellor <nathan@kernel.org>,
- Nick Desaulniers <nick.desaulniers+lkml@gmail.com>, 
- Bill Wendling <morbo@google.com>, Justin Stitt <justinstitt@google.com>,
- Andrew Lunn <andrew@lunn.ch>, 
- Heiner Kallweit <hkallweit1@gmail.com>, Russell King <linux@armlinux.org.uk>, 
- "David S. Miller" <davem@davemloft.net>, Eric Dumazet <edumazet@google.com>, 
- Jakub Kicinski <kuba@kernel.org>, Paolo Abeni <pabeni@redhat.com>,
- Bjorn Helgaas <bhelgaas@google.com>, 
- Arnd Bergmann <arnd@arndb.de>, Jens Axboe <axboe@kernel.dk>, 
- =?UTF-8?Q?Krzysztof_Wilczy=C5=84ski?= <kwilczynski@kernel.org>, 
- Dave Ertman <david.m.ertman@intel.com>, Ira Weiny <ira.weiny@intel.com>, 
- Leon Romanovsky <leon@kernel.org>, Breno Leitao <leitao@debian.org>, 
- Viresh Kumar <viresh.kumar@linaro.org>,
- Michael Turquette <mturquette@baylibre.com>, 
- Stephen Boyd <sboyd@kernel.org>, rust-for-linux@vger.kernel.org, 
- linux-kernel@vger.kernel.org, linux-kselftest@vger.kernel.org, 
- kunit-dev@googlegroups.com, dri-devel@lists.freedesktop.org, 
- netdev@vger.kernel.org, devicetree@vger.kernel.org, llvm@lists.linux.dev, 
- linux-pci@vger.kernel.org, nouveau@lists.freedesktop.org, 
- linux-block@vger.kernel.org, linux-pm@vger.kernel.org, 
- linux-clk@vger.kernel.org
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-X-Mailman-Approved-At: Mon, 06 Oct 2025 20:57:15 +0000
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: SN7PR12MB8059:EE_|PH7PR12MB6588:EE_
+X-MS-Office365-Filtering-Correlation-Id: f34aa086-8f63-4e51-2c0c-08ddba493189
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: BCL:0;ARA:13230040|1800799024|376014|7416014|366016;
+X-Microsoft-Antispam-Message-Info: =?utf-8?B?aUJoSHd4NThrMVAwRTh4dDJleXk5S1E3SlNoQk5qbENZZXpYalpvM0lmWGQ0?=
+ =?utf-8?B?VFozNlBiQXJ2RHBGOEZpWUR3bzZiMDc0KzFMU21hVXMreFh6RWZONEhjUUpF?=
+ =?utf-8?B?RUVrUU5MNEJrQXNKNm5lbmMrVkhaUnlsaWwwdUtzNURmQzZZU2hSWjBUa2po?=
+ =?utf-8?B?cTNqRUdUZFJvaldGeU1RcTFDaitONmR6WmdiajNLOTFPLzIrVFJBTjB6STd0?=
+ =?utf-8?B?ZzVKaFNEWVM3UU5RZ1F4eW5BSjRCSmJmYk1IVFQ2c055YU05ZzNSSkkwaXdU?=
+ =?utf-8?B?Yjc3bzlFUUFuRHhBTnZoNy9tbmRTNUFHZkZkV2ZISmp5dmRydEo5djlKU3JX?=
+ =?utf-8?B?MnlOS0FMNk9wYXE0azNZVG42TUJPaG4rV0R0eGgxZkhITUtRM1JUR09FL0pT?=
+ =?utf-8?B?ZFJZMm5OelZYNWgyV0JzNEFYbkQ5YXVpU29Db25LQW93ekdHcjBNSG9uUnc3?=
+ =?utf-8?B?QXI0Q1NZc2hKbjAxSTQ2M1NTN1RpQ2prYWpKeHNJclIxRmI1SkYwQnN4eHlX?=
+ =?utf-8?B?dnRQMk55TGRTQTRsc0ptdzFtSWNOL0VlWmJvenZEQlovZzBNWHljSW53dGFv?=
+ =?utf-8?B?eHpMSmFyRHZWeGdraHZFeXM5cXNYV3Q2TUxqeHhiTis1MkZ6OGhMMVVNV3pP?=
+ =?utf-8?B?WTVpUHlzWFhsY0VxdFgwTkZlSlhwTFZRekM0RjRSQk5zVzZHRG9KckUrVi9F?=
+ =?utf-8?B?K3NYOHZLeGwxamdEN1dyYWFBYXZwVE0vQUVtQkpvVzg2cWlRK1RBU1YxYW1H?=
+ =?utf-8?B?NC9XczhuRTh1ZEsrZTNMOCtGclcvc0NlZjdlWlZENXRjcUJNSVlBSlhBeXFw?=
+ =?utf-8?B?TVMvblMzWmpyZy82aDF0TURXS2c0M2lGMHFqN3IzZHRjS3k1YnNualNvNzli?=
+ =?utf-8?B?OHh5WklGRk1XdEh5YzlqQzFIODF4R1pwNnFOVFljSnZGcjEvOWV1NFFHbjF3?=
+ =?utf-8?B?TTExMTc4QU1pMjlDcnBxei9vTWljL1d0QzNOR3o5WkM5UkYwVGZsNXAySDJz?=
+ =?utf-8?B?WktoRklGd1hlT0R5SjFBWkRwM1pmTUJtMGZHc1lOb2UySFNHY2FVQ2JpRWZo?=
+ =?utf-8?B?djVHYmF4cVZmVEh1TDNqRlR0SEVTTUdYQUFSeVFEZE4yWmRvMVp0QStFTURp?=
+ =?utf-8?B?aXp4NEozdVBYY1lMNHB5Q2pzR1B6bHg1WjJ1V1BqNmZLWlFENlZwa2lEenhW?=
+ =?utf-8?B?cjk4VThQZGc4b0liRVN2WmhhK1l1Y0pvWWVPVm9CWHVsSnlJdmJQUmtZUzhK?=
+ =?utf-8?B?aFFwbWJ2aGx4YXovK3ZvWjdZalErZTgvRlQwck1FNmgzTkk1NFRDeXcxQkd4?=
+ =?utf-8?B?RDRDK1VsWWdURlNHaGlOQm96eURJampWSzBVazBwaFdjWTBPeGgwQ0ZKdURW?=
+ =?utf-8?B?WXNGSjRBMFIzUnJBdUFuWDdXeUlUQnJqUUNKSmRGZjJUdE1wVFBZVmd1NXdP?=
+ =?utf-8?B?V0lUR0FCL2c2TnlCRnM4eEQ1Qi9RNmdsajhHaWZUNFdmTmMzdllHVGpCdzRW?=
+ =?utf-8?B?enBGK2U1TjJaRUFabDBRK2kxQU5LdGV4OU5sUHVEalhzWGE5VjR4SGhaV09B?=
+ =?utf-8?B?ck5XbkFMOXp0dnJLVEY0WEhVY1F0anR6b0NVamlIdmQrMHZFT3R1YjU3U0hm?=
+ =?utf-8?B?a2JDczk3dkJNeUx5TGhBN1c2WlBXSFQzblpPUzdGUEdGWkpxTytmYVUzT3ZJ?=
+ =?utf-8?B?b3lsemVnQ2MvdkNwcWJJSHZvMkRCMVFPdmlvYS8rKzlVSGl5M3FINm00ZlpI?=
+ =?utf-8?B?TXhWNWVIUWxuTEdLMm5aSk0rY2lpV2Z6K0dkdld0T2pEVnVmdEF0cTZTZG1C?=
+ =?utf-8?B?eFNkeTdLWTRmbzJuYWEreVh5M1JiUHhuSEEyNm5wSXFPUW5CbnBBQUZTRlkw?=
+ =?utf-8?B?Q1JYV2tRby85M3ZhaEtJOTZxSHo1aWxKS0hRWWZScmhURmZmZHVMeGJZRlVV?=
+ =?utf-8?Q?KPQ+Y0Hh9gM=3D?=
+X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
+ IPV:NLI; SFV:NSPM; H:SN7PR12MB8059.namprd12.prod.outlook.com; PTR:; CAT:NONE;
+ SFS:(13230040)(1800799024)(376014)(7416014)(366016); DIR:OUT; SFP:1101; 
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?TlhmVGs2b25ySmhYSmxTR0JYMTNNOGdQZHowR1hpemhVd1pZa0dnOTRlQlJB?=
+ =?utf-8?B?ZHlXN0hEd09DeFlLbDVDMWROZE9wcjBoRFBIU0wyN1M4NmNPT3IrQ3hoR1B2?=
+ =?utf-8?B?RUQydTh1b29VRkVJRGlkTS9rSXFkaHdlRTQ5VzNRRHR1UnZLR2ZKMGVlMnd5?=
+ =?utf-8?B?OTgrZFhwR00yeHg4OFF1a3lSSys0YitqUWdiY01xZWZmeHVXQ0Z2Y3ovYWJt?=
+ =?utf-8?B?WlVFVWpLV1VydVBzL0dBL0gwM0Nqa0EyTEtUMFJzY1l4UjdLcmRhYm1Kbzk2?=
+ =?utf-8?B?ZGFITitjclRvbG14Mk1TazhINGRMdU10MlNKdjZOWk1LVmtUMmdDL1IvK0FK?=
+ =?utf-8?B?djVMeEdzMWg4UUlnaEhkUUhZZ2ljN2dXTFQ5aGlSYi8yR09BQnVvaU1nODFT?=
+ =?utf-8?B?VGN4T1Q1bWxIZWhsQ240YmtTTUJXdFBqbHl3bjIrNDNNcWJTUC85RDViQmxI?=
+ =?utf-8?B?YkdHQU1hVG9yV21vajFPWWtTTVVweHZNSCtFbFczYS9RQVZVbXIrNHg0Sjd1?=
+ =?utf-8?B?WnF6YnlBWE1ZT1pITnBNdlY1NFlYOUZ6TDNTalJsTmhxQlVwRkprYlB3eWV1?=
+ =?utf-8?B?MGxNQjM5VHVsd0tVWWFjN3pvVHBMTmxIMTF6K3dDRkl2R01RRVFiQ0d1VEND?=
+ =?utf-8?B?Z01wWm5QVnU4Y2NEc2NzM3RWLzBpK0YzQnhONzRtZVBWVW9aNnlKRHlRUEox?=
+ =?utf-8?B?MTgvNDYzcFk4dC9TWU1hVnlwck9FbC9TZWY3bTg5QjdsRDdKZnkvSTBuRGlw?=
+ =?utf-8?B?RSsvVU4vUm5uYTlmcmZnTWFqbVhoUjc4cUdTai9EY1JOVWxQRGlGbnQ5elVX?=
+ =?utf-8?B?akRsQmk4bmtMa1ZjYVR1VTRkUVJ1Tm5FK1o4V1RxdjJ0eVd4djNmN3o3MmxM?=
+ =?utf-8?B?RWkvWmFXLzVDdjZaRTdYVCtwZW1taitzZ2VjNUtkWTRSYXBIMkVsaDhoWlZW?=
+ =?utf-8?B?K2huZ2VxMXZqajdPWVE4Y25aa0w4SmFZMktBZVhHVXQ5SjdtQjE3NWoxRzM2?=
+ =?utf-8?B?Qmt4S1graGtZYUgzcmRwTm5MZm15Q1U2M0FQcFNuMGNxMzZjQW5sV01BWTFJ?=
+ =?utf-8?B?Y09DNGtnbnpJTk1mVmg4bUptTVRZZXJta2hlc0J4dHRNdWdrMm5XZkZwYVhU?=
+ =?utf-8?B?aUYrUmlpWG9SMVdBSld5UTh5UW1JOFcrVHd5b2dpd2s2TkNydUQzQjk1Q1ZP?=
+ =?utf-8?B?WnZhQTBXaWZxcmE5KzRsME5ZTnI1V01CZEczY01iVHdGa1Z6NlJRTThoS0I4?=
+ =?utf-8?B?WTVCeUlRRVkzNHd1U2xpUGNGVG5NUnYyQTF2WVFyWmFPLzdyUDFCcTNjZUJn?=
+ =?utf-8?B?RlcwT0VWalVEdm9PRjdCUElKRFJCK1kwN0gxdkFTVjYvVFg5VW5xbTlKS2ho?=
+ =?utf-8?B?aHczNlVwT0cyTmo1QXVxeWdReTg1U1JlY1JtL0VBc1ZZdXdtZDhvaHZuUHdh?=
+ =?utf-8?B?OUpiYTRxSGdhRnBOU01PbXFjWVhVUnlFZ1ZwUWNvd0YyMVBIR3VXNXRNUlNk?=
+ =?utf-8?B?NFVKNWUrektweHlJQmZFY2oyU3NXc1lmSHhRRmVOMWpxcmVIWTczZHBwc0R6?=
+ =?utf-8?B?ZWoyMTBjdVN5RnV5Z0tENnA5M3lGdTBsVmRCU1I5R1plNU5kaHVVTVlIYlJF?=
+ =?utf-8?B?ZXFtNHpqVTdXTnR2WXJGbmM5NVh0UmF2dXVveUU0cW5NSXJ2N2Uwc3QzcmNm?=
+ =?utf-8?B?SkExNkphYzNhSUV1KzdIRnJINU1OSDRaSkM5RXZXL0w2YzZyUHNjM3dDMC9H?=
+ =?utf-8?B?ZU9NOGVnT2hMc2luZGx1eUJjZ29lQmZnN3VzRUJSZHJySG9GWDBTUEtNRm5G?=
+ =?utf-8?B?OXdYWXpCWW51NWRPakJaeW85TkJQU2EvQkI3T1FlY1A3QjJqT3pFYlFtMHha?=
+ =?utf-8?B?ZVFYaWp5MVZ2dUp1amNwb1VVNHJwTjFzZDlWTkhWYmZwUHBpaFBBMTVpVVZK?=
+ =?utf-8?B?NGtOMnlzZFhZYVpSRnNTT3hJN3ZOSEUyNGxoQzNYYnBIMU5mQVRGOGY2ckc0?=
+ =?utf-8?B?cjlUMzFBdEhDeGtNMHNtd1hrclhWZ3ZXZXRBMkZKVXRIUWRPTCtvZGVldWQw?=
+ =?utf-8?B?RElCSHkzUnVQMng3cDdvcFBJQ3hiVTdIcWZIMUVjMHNoSmVBTnBoTjN6ejRa?=
+ =?utf-8?B?N2IxeTdVRkNqTllUNFQyaTNzOXlwMGdlTktyREcvOGx5ZCtheVhOV2c4b2hM?=
+ =?utf-8?B?b2c9PQ==?=
+X-OriginatorOrg: Nvidia.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: f34aa086-8f63-4e51-2c0c-08ddba493189
+X-MS-Exchange-CrossTenant-AuthSource: SN7PR12MB8059.namprd12.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 03 Jul 2025 15:49:28.4598 (UTC)
+X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
+X-MS-Exchange-CrossTenant-Id: 43083d15-7273-40c1-b7db-39efd9ccc17a
+X-MS-Exchange-CrossTenant-MailboxType: HOSTED
+X-MS-Exchange-CrossTenant-UserPrincipalName: 6gDMBLPh4j35TmhTUpbnzxxaRMWEEodOOms+sEAsmiUO9woEaATOKeyOC9A4DSvjkflabS5zulqRgCtXOK2S7A==
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: PH7PR12MB6588
+X-Mailman-Approved-At: Mon, 06 Oct 2025 20:46:16 +0000
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -123,357 +173,197 @@ List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-On Thu, Jul 3, 2025 at 5:32=E2=80=AFAM Benno Lossin <lossin@kernel.org> wro=
-te:
->
-> On Tue Jul 1, 2025 at 6:49 PM CEST, Tamir Duberstein wrote:
-> > Introduce a `fmt!` macro which wraps all arguments in
-> > `kernel::fmt::Adapter` and a `kernel::fmt::Display` trait. This enables
-> > formatting of foreign types (like `core::ffi::CStr`) that do not
-> > implement `core::fmt::Display` due to concerns around lossy conversions=
- which
-> > do not apply in the kernel.
-> >
-> > Replace all direct calls to `format_args!` with `fmt!`.
-> >
-> > Replace all implementations of `core::fmt::Display` with implementation=
-s
-> > of `kernel::fmt::Display`.
-> >
-> > Suggested-by: Alice Ryhl <aliceryhl@google.com>
-> > Link: https://rust-for-linux.zulipchat.com/#narrow/channel/288089-Gener=
-al/topic/Custom.20formatting/with/516476467
-> > Acked-by: Greg Kroah-Hartman <gregkh@linuxfoundation.org>
-> > Reviewed-by: Alice Ryhl <aliceryhl@google.com>
-> > Signed-off-by: Tamir Duberstein <tamird@gmail.com>
-> > ---
-> >  drivers/block/rnull.rs       |  2 +-
-> >  drivers/gpu/nova-core/gpu.rs |  4 +-
-> >  rust/kernel/block/mq.rs      |  2 +-
-> >  rust/kernel/device.rs        |  2 +-
-> >  rust/kernel/fmt.rs           | 89 ++++++++++++++++++++++++++++++++++++=
-+++
-> >  rust/kernel/kunit.rs         |  6 +--
-> >  rust/kernel/lib.rs           |  1 +
-> >  rust/kernel/prelude.rs       |  3 +-
-> >  rust/kernel/print.rs         |  4 +-
-> >  rust/kernel/seq_file.rs      |  2 +-
-> >  rust/kernel/str.rs           | 22 ++++------
-> >  rust/macros/fmt.rs           | 99 ++++++++++++++++++++++++++++++++++++=
-++++++++
-> >  rust/macros/lib.rs           | 19 +++++++++
-> >  rust/macros/quote.rs         |  7 ++++
-> >  scripts/rustdoc_test_gen.rs  |  2 +-
-> >  15 files changed, 236 insertions(+), 28 deletions(-)
->
-> This would be a lot easier to review if he proc-macro and the call
-> replacement were different patches.
->
-> Also the `kernel/fmt.rs` file should be a different commit.
 
-Can you help me understand why? The changes you ask to be separated
-would all be in different files, so why would separate commits make it
-easier to review?
 
-I prefer to keep things in one commit because the changes are highly
-interdependent. The proc macro doesn't make sense without
-kernel/fmt.rs and kernel/fmt.rs is useless without the proc macro.
+On 7/2/2025 8:20 PM, Bagas Sanjaya wrote:
+> On Wed, Jul 02, 2025 at 08:00:41PM +0900, Alexandre Courbot wrote:
+>> diff --git a/Documentation/gpu/nova/core/vbios.rst b/Documentation/gpu/nova/core/vbios.rst
+>> new file mode 100644
+>> index 0000000000000000000000000000000000000000..55d7dd4a6658c2a20cc5617f96b278bc4ec2ba17
+>> --- /dev/null
+>> +++ b/Documentation/gpu/nova/core/vbios.rst
+>> @@ -0,0 +1,180 @@
+>> +.. SPDX-License-Identifier: (GPL-2.0+ OR MIT)
+>> +
+>> +==========
+>> +VBIOS
+>> +==========
+>> +This document describes the layout of the VBIOS image which is a series of concatenated
+>> +images in the ROM of the GPU. The VBIOS is mirrored onto the BAR 0 space and is read
+>> +by both Boot ROM firmware (also known as IFR or init-from-rom firmware) on the GPU to
+>> +boot strap various microcontrollers (PMU, SEC, GSP) with critical initialization before
+>
+>    bootstrap
+>
+>> +the driver loads, as well as by the nova-core driver in the kernel to boot the GSP.
+>> +
+>> +The format of the images in the ROM follow the "BIOS Specification" part of the
+>> +PCI specification, with Nvidia-specific extensions. The ROM images of type FwSec
+>> +are the ones that contain Falcon ucode and what we are mainly looking for.
+>> +
+>> +As an example, the following are the different image types that can be found in the
+>> +VBIOS of an Ampere GA102 GPU which is supported by the nova-core driver.
+>> +
+>> +- PciAt Image (Type 0x00) - This is the standard PCI BIOS image, whose name
+>> +  likely comes from the "IBM PC/AT" architecture.
+>> +
+>> +- EFI Image (Type 0x03) - This is the EFI BIOS image. It contains the UEFI GOP
+>> +  driver that is used to display UEFI graphics output.
+>> +
+>> +- First FwSec Image (Type 0xE0) - The first FwSec image (Secure Firmware)
+>> +
+>> +- Second FwSec Image (Type 0xE0) - The second FwSec image (Secure Firmware)
+>> +  contains various different microcodes (also known as an applications) that do
+>
+>               various microcodes?
 
->
-> > diff --git a/rust/kernel/fmt.rs b/rust/kernel/fmt.rs
-> > new file mode 100644
-> > index 000000000000..348d16987de6
-> > --- /dev/null
-> > +++ b/rust/kernel/fmt.rs
-> > @@ -0,0 +1,89 @@
-> > +// SPDX-License-Identifier: GPL-2.0
-> > +
-> > +//! Formatting utilities.
-> > +
-> > +use core::fmt;
->
-> I think we should pub export all types that we are still using from
-> `core::fmt`. For example `Result`, `Formatter`, `Debug` etc.
->
-> That way I can still use the same pattern of importing `fmt` and then
-> writing
->
->     impl fmt::Display for MyType {
->         fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {}
->     }
+The above 2 fixups sounds good to me, I'm guessing Danilo if you're pulling this
+then maybe apply the fixups directly to the patch since it is trivial?
 
-Great idea, done for the next spin. It would be nice to be able to
-lint against references to `core::fmt` outside of kernel/fmt.rs.
+> 
+>> +
+>> +.. note::
+>> +   This diagram is created based on an GA-102 Ampere GPU as an example and could
+>> +   vary for future or other GPUs.
+>> +
+>> +Here is a block diagram of the VBIOS layout::
+> 
+> Above sentence (but not the note directive) is redundant, though.
 
-> > +
-> > +/// Internal adapter used to route allow implementations of formatting=
- traits for foreign types.
-> > +///
-> > +/// It is inserted automatically by the [`fmt!`] macro and is not mean=
-t to be used directly.
-> > +///
-> > +/// [`fmt!`]: crate::prelude::fmt!
-> > +#[doc(hidden)]
-> > +pub struct Adapter<T>(pub T);
-> > +
-> > +macro_rules! impl_fmt_adapter_forward {
-> > +    ($($trait:ident),* $(,)?) =3D> {
-> > +        $(
-> > +            impl<T: fmt::$trait> fmt::$trait for Adapter<T> {
-> > +                fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Resu=
-lt {
-> > +                    let Self(t) =3D self;
-> > +                    fmt::$trait::fmt(t, f)
-> > +                }
-> > +            }
-> > +        )*
-> > +    };
-> > +}
-> > +
-> > +impl_fmt_adapter_forward!(Debug, LowerHex, UpperHex, Octal, Binary, Po=
-inter, LowerExp, UpperExp);
-> > +
-> > +/// A copy of [`fmt::Display`] that allows us to implement it for fore=
-ign types.
-> > +///
-> > +/// Types should implement this trait rather than [`fmt::Display`]. To=
-gether with the [`Adapter`]
-> > +/// type and [`fmt!`] macro, it allows for formatting foreign types (e=
-.g. types from core) which do
-> > +/// not implement [`fmt::Display`] directly.
-> > +///
-> > +/// [`fmt!`]: crate::prelude::fmt!
-> > +pub trait Display {
-> > +    /// Same as [`fmt::Display::fmt`].
-> > +    fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result;
-> > +}
-> > +
-> > +impl<T: ?Sized + Display> Display for &T {
-> > +    fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
-> > +        Display::fmt(*self, f)
-> > +    }
-> > +}
-> > +
-> > +impl<T: ?Sized + Display> fmt::Display for Adapter<&T> {
-> > +    fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
-> > +        let Self(t) =3D self;
-> > +        Display::fmt(t, f)
->
-> Why not `Display::fmt(&self.0, f)`?
+This suggestion I'd skip.
 
-I like destructuring because it shows me that there's only one field.
-With `self.0` I don't see that.
+But thanks for all the review!
 
-> > +    }
-> > +}
-> > +
-> > +macro_rules! impl_display_forward {
-> > +    ($(
-> > +        $( { $($generics:tt)* } )? $ty:ty $( { where $($where:tt)* } )=
-?
-> > +    ),* $(,)?) =3D> {
-> > +        $(
-> > +            impl$($($generics)*)? Display for $ty $(where $($where)*)?=
- {
-> > +                fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Resu=
-lt {
-> > +                    fmt::Display::fmt(self, f)
-> > +                }
-> > +            }
-> > +        )*
-> > +    };
-> > +}
-> > +
-> > +impl_display_forward!(
-> > +    bool,
-> > +    char,
-> > +    core::panic::PanicInfo<'_>,
-> > +    fmt::Arguments<'_>,
-> > +    i128,
-> > +    i16,
-> > +    i32,
-> > +    i64,
-> > +    i8,
-> > +    isize,
-> > +    str,
-> > +    u128,
-> > +    u16,
-> > +    u32,
-> > +    u64,
-> > +    u8,
-> > +    usize,
-> > +    {<T: ?Sized>} crate::sync::Arc<T> {where crate::sync::Arc<T>: fmt:=
-:Display},
-> > +    {<T: ?Sized>} crate::sync::UniqueArc<T> {where crate::sync::Unique=
-Arc<T>: fmt::Display},
-> > +);
->
-> > diff --git a/rust/macros/fmt.rs b/rust/macros/fmt.rs
-> > new file mode 100644
-> > index 000000000000..edc37c220a89
-> > --- /dev/null
-> > +++ b/rust/macros/fmt.rs
-> > @@ -0,0 +1,99 @@
-> > +// SPDX-License-Identifier: GPL-2.0
-> > +
-> > +use proc_macro::{Ident, TokenStream, TokenTree};
-> > +use std::collections::BTreeSet;
-> > +
-> > +/// Please see [`crate::fmt`] for documentation.
-> > +pub(crate) fn fmt(input: TokenStream) -> TokenStream {
-> > +    let mut input =3D input.into_iter();
-> > +
-> > +    let first_opt =3D input.next();
-> > +    let first_owned_str;
-> > +    let mut names =3D BTreeSet::new();
-> > +    let first_lit =3D {
-> > +        let Some((mut first_str, first_lit)) =3D (match first_opt.as_r=
-ef() {
-> > +            Some(TokenTree::Literal(first_lit)) =3D> {
-> > +                first_owned_str =3D first_lit.to_string();
-> > +                Some(first_owned_str.as_str()).and_then(|first| {
-> > +                    let first =3D first.strip_prefix('"')?;
-> > +                    let first =3D first.strip_suffix('"')?;
-> > +                    Some((first, first_lit))
->
-> You're only using first_lit to get the span later, so why not just get
-> the span directly here?
+ - Joel
 
-Good point. I was probably using it for more stuff in an earlier iteration.
 
->
-> > +                })
-> > +            }
-> > +            _ =3D> None,
-> > +        }) else {
-> > +            return first_opt.into_iter().chain(input).collect();
-> > +        };
-> > +        while let Some((_, rest)) =3D first_str.split_once('{') {
->
-> Let's put a comment above this loop mentioning [1] and saying that it
-> parses the identifiers from the format arguments.
->
-> [1]: https://doc.rust-lang.org/std/fmt/index.html#syntax
+> 
+>> +
+>> +    +----------------------------------------------------------------------------+
+>> +    | VBIOS (Starting at ROM_OFFSET: 0x300000)                                   |
+>> +    +----------------------------------------------------------------------------+
+>> +    | +-----------------------------------------------+                          |
+>> +    | | PciAt Image (Type 0x00)                       |                          |
+>> +    | +-----------------------------------------------+                          |
+>> +    | | +-------------------+                         |                          |
+>> +    | | | ROM Header        |                         |                          |
+>> +    | | | (Signature 0xAA55)|                         |                          |
+>> +    | | +-------------------+                         |                          |
+>> +    | |         | rom header's pci_data_struct_offset |                          |
+>> +    | |         | points to the PCIR structure        |                          |
+>> +    | |         V                                     |                          |
+>> +    | | +-------------------+                         |                          |
+>> +    | | | PCIR Structure    |                         |                          |
+>> +    | | | (Signature "PCIR")|                         |                          |
+>> +    | | | last_image: 0x80  |                         |                          |
+>> +    | | | image_len: size   |                         |                          |
+>> +    | | | in 512-byte units |                         |                          |
+>> +    | | +-------------------+                         |                          |
+>> +    | |         |                                     |                          |
+>> +    | |         | NPDE immediately follows PCIR       |                          |
+>> +    | |         V                                     |                          |
+>> +    | | +-------------------+                         |                          |
+>> +    | | | NPDE Structure    |                         |                          |
+>> +    | | | (Signature "NPDE")|                         |                          |
+>> +    | | | last_image: 0x00  |                         |                          |
+>> +    | | +-------------------+                         |                          |
+>> +    | |                                               |                          |
+>> +    | | +-------------------+                         |                          |
+>> +    | | | BIT Header        | (Signature scanning     |                          |
+>> +    | | | (Signature "BIT") |  provides the location  |                          |
+>> +    | | +-------------------+  of the BIT table)      |                          |
+>> +    | |         | header is                           |                          |
+>> +    | |         | followed by a table of tokens       |                          |
+>> +    | |         V one of which is for falcon data.    |                          |
+>> +    | | +-------------------+                         |                          |
+>> +    | | | BIT Tokens        |                         |                          |
+>> +    | | |  ______________   |                         |                          |
+>> +    | | | | Falcon Data |   |                         |                          |
+>> +    | | | | Token (0x70)|---+------------>------------+--+                       |
+>> +    | | | +-------------+   |  falcon_data_ptr()      |  |                       |
+>> +    | | +-------------------+                         |  V                       |
+>> +    | +-----------------------------------------------+  |                       |
+>> +    |              (no gap between images)               |                       |
+>> +    | +-----------------------------------------------+  |                       |
+>> +    | | EFI Image (Type 0x03)                         |  |                       |
+>> +    | +-----------------------------------------------+  |                       |
+>> +    | | Contains the UEFI GOP driver (Graphics Output)|  |                       |
+>> +    | | +-------------------+                         |  |                       |
+>> +    | | | ROM Header        |                         |  |                       |
+>> +    | | +-------------------+                         |  |                       |
+>> +    | | | PCIR Structure    |                         |  |                       |
+>> +    | | +-------------------+                         |  |                       |
+>> +    | | | NPDE Structure    |                         |  |                       |
+>> +    | | +-------------------+                         |  |                       |
+>> +    | | | Image data        |                         |  |                       |
+>> +    | | +-------------------+                         |  |                       |
+>> +    | +-----------------------------------------------+  |                       |
+>> +    |              (no gap between images)               |                       |
+>> +    | +-----------------------------------------------+  |                       |
+>> +    | | First FwSec Image (Type 0xE0)                 |  |                       |
+>> +    | +-----------------------------------------------+  |                       |
+>> +    | | +-------------------+                         |  |                       |
+>> +    | | | ROM Header        |                         |  |                       |
+>> +    | | +-------------------+                         |  |                       |
+>> +    | | | PCIR Structure    |                         |  |                       |
+>> +    | | +-------------------+                         |  |                       |
+>> +    | | | NPDE Structure    |                         |  |                       |
+>> +    | | +-------------------+                         |  |                       |
+>> +    | | | Image data        |                         |  |                       |
+>> +    | | +-------------------+                         |  |                       |
+>> +    | +-----------------------------------------------+  |                       |
+>> +    |              (no gap between images)               |                       |
+>> +    | +-----------------------------------------------+  |                       |
+>> +    | | Second FwSec Image (Type 0xE0)                |  |                       |
+>> +    | +-----------------------------------------------+  |                       |
+>> +    | | +-------------------+                         |  |                       |
+>> +    | | | ROM Header        |                         |  |                       |
+>> +    | | +-------------------+                         |  |                       |
+>> +    | | | PCIR Structure    |                         |  |                       |
+>> +    | | +-------------------+                         |  |                       |
+>> +    | | | NPDE Structure    |                         |  |                       |
+>> +    | | +-------------------+                         |  |                       |
+>> +    | |                                               |  |                       |
+>> +    | | +-------------------+                         |  |                       |
+>> +    | | | PMU Lookup Table  | <- falcon_data_offset <----+                       |
+>> +    | | | +-------------+   |    pmu_lookup_table     |                          |
+>> +    | | | | Entry 0x85  |   |                         |                          |
+>> +    | | | | FWSEC_PROD  |   |                         |                          |
+>> +    | | | +-------------+   |                         |                          |
+>> +    | | +-------------------+                         |                          |
+>> +    | |         |                                     |                          |
+>> +    | |         | points to                           |                          |
+>> +    | |         V                                     |                          |
+>> +    | | +-------------------+                         |                          |
+>> +    | | | FalconUCodeDescV3 | <- falcon_ucode_offset  |                          |
+>> +    | | | (FWSEC Firmware)  |    fwsec_header()       |                          |
+>> +    | | +-------------------+                         |                          |
+>> +    | |         |   immediately followed  by...       |                          |
+>> +    | |         V                                     |                          |
+>> +    | | +----------------------------+                |                          |
+>> +    | | | Signatures + FWSEC Ucode   |                |                          |
+>> +    | | | fwsec_sigs(), fwsec_ucode()|                |                          |
+>> +    | | +----------------------------+                |                          |
+>> +    | +-----------------------------------------------+                          |
+>> +    |                                                                            |
+>> +    +----------------------------------------------------------------------------+
+>> +
+>> +Falcon data Lookup
+>> +------------------
+>> +A key part of the VBIOS extraction code (vbios.rs) is to find the location of the
+>> +Falcon data in the VBIOS which contains the PMU lookup table. This lookup table is
+>> +used to find the required Falcon ucode based on an application ID.
+>> +
+>> +The location of the PMU lookup table is found by scanning the BIT (`BIOS Information Table`_)
+>> +tokens for a token with the id `BIT_TOKEN_ID_FALCON_DATA` (0x70) which indicates the
+>> +offset of the same from the start of the VBIOS image. Unfortunately, the offset
+>> +does not account for the EFI image located between the PciAt and FwSec images.
+>> +The `vbios.rs` code compensates for this with appropriate arithmetic.
+>> +
+>> +.. _`BIOS Information Table`: https://download.nvidia.com/open-gpu-doc/BIOS-Information-Table/1/BIOS-Information-Table.html
+> 
+> The rest looks good.
+> 
+> Thanks.
+> 
 
-=F0=9F=91=8D
-
->
-> > +            first_str =3D rest;
-> > +            if let Some(rest) =3D first_str.strip_prefix('{') {
-> > +                first_str =3D rest;
-> > +                continue;
-> > +            }
-> > +            if let Some((name, rest)) =3D first_str.split_once('}') {
-> > +                first_str =3D rest;
-> > +                let name =3D name.split_once(':').map_or(name, |(name,=
- _)| name);
-> > +                if !name.is_empty() && !name.chars().all(|c| c.is_asci=
-i_digit()) {
-> > +                    names.insert(name);
-> > +                }
-> > +            }
-> > +        }
-> > +        first_lit
-> > +    };
-> > +
-> > +    let first_span =3D first_lit.span();
-> > +    let adapter =3D quote_spanned! {
-> > +        first_span =3D> ::kernel::fmt::Adapter
-> > +    };
->
-> I think we should follow the formatting convention from the quote crate:
->
->     let adapter =3D quote_spanned!(first_span=3D> ::kernel::fmt::Adapter)=
-;
-
-Sure.
-
->
-> > +
-> > +    let mut args =3D TokenStream::from_iter(first_opt);
-> > +    {
-> > +        let mut flush =3D |args: &mut TokenStream, current: &mut Token=
-Stream| {
->
-> You don't need to pass `args` as a closure argument, since you always
-> call it with `&mut args`.
-
-This doesn't work because of the borrow checker. If I wrote what you
-suggest, then `args` is mutably borrowed by the closure, which
-prohibits the mutable borrow needed for the .extend() call here:
-
-        for tt in input {
-            match &tt {
-                TokenTree::Punct(p) if p.as_char() =3D=3D ',' =3D> {
-                    flush(&mut args, &mut current);
-                    &mut args
-                }
-                _ =3D> &mut current,
-            }
-            .extend([tt]);
-        }
-
->
-> > +            let current =3D std::mem::take(current);
-> > +            if !current.is_empty() {
-> > +                let (lhs, rhs) =3D (|| {
-> > +                    let mut current =3D current.into_iter();
-> > +                    let mut acc =3D TokenStream::new();
-> > +                    while let Some(tt) =3D current.next() {
-> > +                        // Split on `=3D` only once to handle cases li=
-ke `a =3D b =3D c`.
-> > +                        if matches!(&tt, TokenTree::Punct(p) if p.as_c=
-har() =3D=3D '=3D') {
-> > +                            names.remove(acc.to_string().as_str());
-> > +                            // Include the `=3D` itself to keep the ha=
-ndling below uniform.
-> > +                            acc.extend([tt]);
-> > +                            return (Some(acc), current.collect::<Token=
-Stream>());
-> > +                        }
-> > +                        acc.extend([tt]);
-> > +                    }
-> > +                    (None, acc)
-> > +                })();
-> > +                args.extend(quote_spanned! {
-> > +                    first_span =3D> #lhs #adapter(&#rhs)
-> > +                });
-> > +            }
-> > +        };
-> > +
-> > +        let mut current =3D TokenStream::new();
->
-> Define this before the closure, then you don't need to pass it as an
-> argument.
-
-Same reason as above. Borrow checker says no.
-
->
-> ---
-> Cheers,
-> Benno
->
-> > +        for tt in input {
-> > +            match &tt {
-> > +                TokenTree::Punct(p) if p.as_char() =3D=3D ',' =3D> {
-> > +                    flush(&mut args, &mut current);
-> > +                    &mut args
-> > +                }
-> > +                _ =3D> &mut current,
-> > +            }
-> > +            .extend([tt]);
-> > +        }
-> > +        flush(&mut args, &mut current);
-> > +    }
-> > +
-> > +    for name in names {
-> > +        let name =3D Ident::new(name, first_span);
-> > +        args.extend(quote_spanned! {
-> > +            first_span =3D> , #name =3D #adapter(&#name)
-> > +        });
-> > +    }
-> > +
-> > +    quote_spanned! {
-> > +        first_span =3D> ::core::format_args!(#args)
-> > +    }
-> > +}
