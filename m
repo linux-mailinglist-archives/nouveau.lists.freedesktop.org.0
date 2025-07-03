@@ -2,66 +2,66 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id 8F326AF6690
-	for <lists+nouveau@lfdr.de>; Thu,  3 Jul 2025 02:22:46 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id EE10AAF66C1
+	for <lists+nouveau@lfdr.de>; Thu,  3 Jul 2025 02:25:31 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 064AD10E7B5;
-	Thu,  3 Jul 2025 00:22:44 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id B259A10E7BB;
+	Thu,  3 Jul 2025 00:25:29 +0000 (UTC)
 Authentication-Results: gabe.freedesktop.org;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="JjONP0+L";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="MglBywUa";
 	dkim-atps=neutral
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from mail-pf1-f169.google.com (mail-pf1-f169.google.com
- [209.85.210.169])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 85BA810E7B5;
- Thu,  3 Jul 2025 00:22:42 +0000 (UTC)
-Received: by mail-pf1-f169.google.com with SMTP id
- d2e1a72fcca58-74b56b1d301so763847b3a.1; 
- Wed, 02 Jul 2025 17:22:42 -0700 (PDT)
+Received: from mail-pg1-f179.google.com (mail-pg1-f179.google.com
+ [209.85.215.179])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 6EA2A10E7BB;
+ Thu,  3 Jul 2025 00:25:29 +0000 (UTC)
+Received: by mail-pg1-f179.google.com with SMTP id
+ 41be03b00d2f7-af51596da56so4841149a12.0; 
+ Wed, 02 Jul 2025 17:25:29 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1751502162; x=1752106962; darn=lists.freedesktop.org;
+ d=gmail.com; s=20230601; t=1751502329; x=1752107129; darn=lists.freedesktop.org;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=sJK1LPZmNSj7O82pl3GniJn8DVrIh6bpo36MpNcOU/E=;
- b=JjONP0+LYGMs9Ws9taGrt1yQJJP9B7FDXAlC31km4l+1BGYWV9CY4KkTrjZdtuD8ZC
- X025IJy+jk2i+usdEhnRTAvU7GLS0mlryx0ArtjBeHsGMFbOUM36kXi5ehvIqqpBBPKy
- wvXNAjr6hzYbK4wmdYwpilTMI6IXe/UFYJVEQbsvCSRebNoTBcfjfGQ705i9tRMfkaEP
- GCc3hJZtuUFE74fkJfeII+aVd0dhz1EHd1aZd205O5K3kGy8zFevMUCY2s1orwAGw4fz
- 876bE/4LHCO19OdUjh7bU68M1YU+cTjxQCqNUcajJAJdSSmxZTNSF14TN2dqLhWySeoN
- iJ3g==
+ bh=NSLzIqO90YkPCol3RRrpeMNsBThgzqJUNZzQMcg/9E0=;
+ b=MglBywUaJajVaypzwrAYHWUDgbPJfi/8upAve8lAXhtzuB++y+Ulr3HZNmwHnlXawc
+ FrAUcPzXt88Q3HpFDZj20n8HwaPWv2MJozAMP1+J6z+TN+fmFW/+661tZeDys/wj+l9Y
+ CcdPM6WNPTaYuJ+Hy4BCnEt2EnLAJWi/Sr2UMOg3X3DU1T5LQ96aODoxDREe+xnrXNzH
+ h6NeOYw4Ee+/VW2KDIFXzqGKjP2xKr+noIr5q3bQmjZKs3PuIKZDvS2u+d7vCByABM+a
+ r9xP/yVUMDukW2ApTEb8ZrlS4daGDZX4p/2CMeI+wwmOk8ze8Z4dfLRgzUIFmFpLJUOM
+ Vk/A==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1751502162; x=1752106962;
+ d=1e100.net; s=20230601; t=1751502329; x=1752107129;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to;
- bh=sJK1LPZmNSj7O82pl3GniJn8DVrIh6bpo36MpNcOU/E=;
- b=Vy/UarKWuLzxTR3uvoqsgihmZJIlRJ/rf+ZA9/Oo54XjePoZ+W40mbiIBxjwu/ccIt
- XOYGzrrm/TLKx4PC9TG3d6H3aQpOFiBCrBHF1uKfKBTMm1ZELG8fx2SjXzD/MpJ+tXT/
- GhCDCeZLkTt9E5UynL1XAopLsWoGDPeZivChEzFr3i+/2hXG5pJboiG6d1V8Q+yAuEht
- N5+TQMCKCF7E15KCUSy6MASDd77kEFnhMWjosBHSZWU/hD0lVI57PvwRXNRUG6dbZe1+
- fVmq/OYqFBJHJCTR05RRtAOAyy0Auk4ku2RB1bGMDIp3K98hB8cLd5+jTBe6XdX1kF/F
- UHOw==
+ bh=NSLzIqO90YkPCol3RRrpeMNsBThgzqJUNZzQMcg/9E0=;
+ b=JsscB99Zr/3EWwaQ0exVzg8o7msDV6zG9mKTwJLr8ePBM1w7xiHbv5aCcX0o5lYQlE
+ tR87Me5+f6CUPyFZCEP0U0aQt357bhpHmtxHdItP2EPb6sNIj2TpGLGM5Qb3VDIPBsdE
+ p1cpqH08lgrF6JUr/TxhuQw/ZQj5GY1tXd1tilXeAEFcmCtXJtMA+fLiY34xLCtaAazc
+ 5xlOzzV7ZbxAYlDg7l9jBjX3Xbcm+F1ngMpQSYqRMy4PQhpF80FJ1VdkAGtNXKDtMHd2
+ HmhLlZYbAwH2zWC0W4e6XRfvExRB6f5CVOI/HKV5Nza968kIj1Soiow6RZ7y7YGSLdq/
+ uXMg==
 X-Forwarded-Encrypted: i=1;
- AJvYcCWtwJHBRVmJ9b/tijqepawui+DFo1fgnj8BKTvGJU5DYjiBOuG0X3r69dN06RK3xYeH1oqgxC9jF34=@lists.freedesktop.org
-X-Gm-Message-State: AOJu0YxNOq2JGq/EeBx/48kzHzFZcSF9PrVxsyVrqfIjJEmcdXspiyRh
- pcB9GuH/aoUPsW4gn7+F8OhOzL8L4H8YEJuonnQr+xjBQM69H9zZu2Bi
-X-Gm-Gg: ASbGncso3noyql8uMGk+VHgAoXSPVP2Z0WhYpF4gHggwiWA9Zx5C2DxZlRJmF8IXwLQ
- CljrECNMsGDDayyQo0WQsq6jkKKauqeAHiOU3HhSN9lnrx6126eeLNCV5dFk39ypnXp1z7HSwzl
- w+Qz0nFSS86j47TdKNw4ZESxHlA1xTi5k1cvD6zt6kBh5S4hTOqL/18e+JGcScW9hzG8iGH5e/B
- Ggx+1y8L4MxxFEhdtkyd+9WiF5KUGuEU48rC4pqF2T0XGr6yS7I57/D8AVYm66DdSANoIr8QHQd
- 2J+d4hLpYAKxwehvxqirR+MdLcISEHdDINYHgumHLvveqEMTghZK8mH+2V6hIg==
-X-Google-Smtp-Source: AGHT+IG11pZFCQC1d8dXNiTO0PVlbDjh04PIJgu8i7Ochf4Cz2KpROCLMxUu4ZKBPbCLWTWpScLMew==
-X-Received: by 2002:a05:6a00:194e:b0:748:e1e4:71de with SMTP id
- d2e1a72fcca58-74b50f29f08mr6358988b3a.14.1751502161863; 
- Wed, 02 Jul 2025 17:22:41 -0700 (PDT)
+ AJvYcCUc0NI+zM/k+4Z5ined3A1GNpGUjRLOXE7Wq/FlJWYaFEpuyKaaKsTku/7Lo0PSSfyN0ftp/9rQjjI=@lists.freedesktop.org
+X-Gm-Message-State: AOJu0YyJGBkLlt8KDJxUqUm9rIA+Oo6PnekGzYBElWX3DywHvgmJiFQO
+ keee6g9+jVe5Mhbg3qEbdRy7Jt2umEANyX2WzSlE6biI7iOIfJ3jh1nxcJN52Q==
+X-Gm-Gg: ASbGncsStgNWAyH1iRPIfEMob0x/IGuLh8/M2Cahny68TclYiSO/FjfNOxQDctBkz53
+ 01wKfASiIehrP/zm2c/hXGVNEZfW5GMjfb+akSqLE4vdA/fTtxudiBc/M1huDMpVsipK66EmXt/
+ 4S+tQ74FiUAxAYdS5iFPgROmEVTDcDmBtEKmtVU9bmtyTWBP8BM8v6H7NBtAfp6LZI5xcnVGiZ8
+ 5HPw89tj4RwvKbzVFb+9vCTzD93PwPi4wqp17iYHF30YwN8I48BwUVXFYFL7na7rLKFLDXfCQoR
+ W1MtQo783CNxcZdl+p2MdBwIKp05KCM/vepJShABlVHbo1lRwnO0V3jdX3NFJw==
+X-Google-Smtp-Source: AGHT+IFjsUoYBmLh0X886pHpGqMQ8Rzj9r2662mubW8hFdwnbM8UjOnwwpMzrtrSu1OAJYGsoZ2aHA==
+X-Received: by 2002:a05:6a21:104:b0:220:1ca5:957c with SMTP id
+ adf61e73a8af0-222d7ef985bmr9329384637.31.1751502328716; 
+ Wed, 02 Jul 2025 17:25:28 -0700 (PDT)
 Received: from archie.me ([103.124.138.155]) by smtp.gmail.com with ESMTPSA id
- d2e1a72fcca58-74af57ee836sm15934075b3a.152.2025.07.02.17.22.40
+ d2e1a72fcca58-74af57f1ef1sm15687041b3a.164.2025.07.02.17.25.27
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 02 Jul 2025 17:22:40 -0700 (PDT)
+ Wed, 02 Jul 2025 17:25:27 -0700 (PDT)
 Received: by archie.me (Postfix, from userid 1000)
- id A043E4206887; Thu, 03 Jul 2025 07:22:38 +0700 (WIB)
-Date: Thu, 3 Jul 2025 07:22:38 +0700
+ id A16E14206887; Thu, 03 Jul 2025 07:25:24 +0700 (WIB)
+Date: Thu, 3 Jul 2025 07:25:24 +0700
 From: Bagas Sanjaya <bagasdotme@gmail.com>
 To: Alexandre Courbot <acourbot@nvidia.com>,
  Danilo Krummrich <dakr@kernel.org>,
@@ -72,16 +72,16 @@ To: Alexandre Courbot <acourbot@nvidia.com>,
 Cc: nouveau@lists.freedesktop.org, dri-devel@lists.freedesktop.org,
  linux-kernel@vger.kernel.org, linux-doc@vger.kernel.org,
  rust-for-linux@vger.kernel.org, Joel Fernandes <joelagnelf@nvidia.com>
-Subject: Re: [PATCH v3 5/7] Documentation: gpu: nova-core: Document devinit
- process
-Message-ID: <aGXNTjw-VPTNYrH2@archie.me>
+Subject: Re: [PATCH v3 6/7] Documentation: gpu: nova-core: Document fwsec
+ operation and layout
+Message-ID: <aGXN9C_ouM6ylzyf@archie.me>
 References: <20250702-nova-docs-v3-0-f362260813e2@nvidia.com>
- <20250702-nova-docs-v3-5-f362260813e2@nvidia.com>
+ <20250702-nova-docs-v3-6-f362260813e2@nvidia.com>
 MIME-Version: 1.0
 Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="xHavB6NUYjLSItap"
+ protocol="application/pgp-signature"; boundary="3EAk4poTFdusGnth"
 Content-Disposition: inline
-In-Reply-To: <20250702-nova-docs-v3-5-f362260813e2@nvidia.com>
+In-Reply-To: <20250702-nova-docs-v3-6-f362260813e2@nvidia.com>
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -97,123 +97,38 @@ Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
 
---xHavB6NUYjLSItap
+--3EAk4poTFdusGnth
 Content-Type: text/plain; charset=utf-8
 Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
 
-On Wed, Jul 02, 2025 at 08:00:42PM +0900, Alexandre Courbot wrote:
-> diff --git a/Documentation/gpu/nova/core/devinit.rst b/Documentation/gpu/=
-nova/core/devinit.rst
-> new file mode 100644
-> index 0000000000000000000000000000000000000000..70c819a96a00a0a27846e7e96=
-525470d07721a10
-> --- /dev/null
-> +++ b/Documentation/gpu/nova/core/devinit.rst
-> @@ -0,0 +1,61 @@
-> +.. SPDX-License-Identifier: GPL-2.0
+On Wed, Jul 02, 2025 at 08:00:43PM +0900, Alexandre Courbot wrote:
+> +FWSEC Memory Layout
+> +-------------------
+> +The memory layout of the FWSEC image is as follows (this is using an GA-=
+102
+> +Ampere GPU as an example and could vary for future GPUs and is subject t=
+o change
+> +completely, it is just provided as an example):
 > +
-> +=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
-> +Device Initialization (devinit)
-> +=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
-> +The devinit process is complex and subject to change. This document prov=
-ides a high-level
-> +overview using the Ampere GPU family as an example. The goal is to provi=
-de a conceptual
-> +overview of the process to aid in understanding the corresponding kernel=
- code.
-> +
-> +Device initialization (devinit) is a crucial sequence of register read/w=
-rite operations
-> +that occur after a GPU reset. The devinit sequence is essential for prop=
-erly configuring
-> +the GPU hardware before it can be used.
-> +
-> +The devinit engine is an interpreter program that typically runs on the =
-PMU (Power Management
-> +Unit) microcontroller of the GPU. This interpreter executes a "script" o=
-f initialization
-> +commands. The devinit engine itself is part of the VBIOS ROM in the same=
- ROM image as the
-> +FWSEC (Firmware Security) image (see fwsec.rst and vbios.rst) and it run=
-s before the
-> +nova-core driver is even loaded. On an Ampere GPU, the devinit ucode is =
-separate from the
-> +FWSEC ucode. It is launched by FWSEC, which runs on the GSP in 'heavy-se=
-cure' mode, while
-> +devinit runs on the PMU in 'light-secure' mode.
-> +
-> +Key Functions of devinit
-> +------------------------
-> +devinit performs several critical tasks:
-> +
-> +1. Programming VRAM memory controller timings
-> +2. Power sequencing
-> +3. Clock and PLL (Phase-Locked Loop) configuration
-> +4. Thermal management
-> +
-> +Low-level Firmware Initialization Flow
-> +--------------------------------------
-> +Upon reset, several microcontrollers on the GPU (such as PMU, SEC2, GSP,=
- etc.) run GPU
-> +firmware (gfw) code to set up the GPU and its core parameters. Most of t=
-he GPU is
-> +considered unusable until this initialization process completes.
-> +
-> +These low-level GPU firmware components are typically:
-> +
-> +1. Located in the VBIOS ROM in the same ROM partition (see vbios.rst and=
- fwsec.rst).
-> +2. Executed in sequence on different microcontrollers:
-> +
-> +  - The devinit engine typically but not necessarily runs on the PMU.
-> +  - On an Ampere GPU, the FWSEC typically runs on the GSP (GPU System Pr=
-ocessor) in
-> +    heavy-secure mode.
-> +
-> +Before the driver can proceed with further initialization, it must wait =
-for a signal
-> +indicating that core initialization is complete (known as GFW_BOOT). Thi=
-s signal is
-> +asserted by the FWSEC running on the GSP in heavy-secure mode.
-> +
-> +Runtime Considerations
-> +----------------------
-> +It's important to note that the devinit sequence also needs to run durin=
-g suspend/resume
-> +operations at runtime, not just during initial boot, as it is critical t=
-o power management.
-> +
-> +Security and Access Control
-> +---------------------------
-> +The initialization process involves careful privilege management. For ex=
-ample, before
-> +accessing certain completion status registers, the driver must check pri=
-vilege level
-> +masks. Some registers are only accessible after secure firmware (FWSEC) =
-lowers the
-> +privilege level to allow CPU (LS/low-secure) access. This is the case, f=
-or example,
-> +when receiving the GFW_BOOT signal.
+> +Here is a block diagram of the FWSEC memory layout::
 
-The wording LGTM, thanks!
+Above sentence is redundant (as it is implied by preceding paragraph).
 
-Reviewed-by: Bagas Sanjaya <bagasdotme@gmail.com>
+Thanks.
 
 --=20
 An old man doll... just what I always wanted! - Clara
 
---xHavB6NUYjLSItap
+--3EAk4poTFdusGnth
 Content-Type: application/pgp-signature; name=signature.asc
 
 -----BEGIN PGP SIGNATURE-----
 
-iHUEABYKAB0WIQSSYQ6Cy7oyFNCHrUH2uYlJVVFOowUCaGXNTgAKCRD2uYlJVVFO
-oyaYAP9dYPzPZJL4k8IbXaAQtRvwo3hRmPlPJlB7ltR0JkTvWQEA7+RK8r3cbs8g
-jtqTlDMdRiku8fBY+ztaUKmS/DfOvg8=
-=+EEX
+iHUEABYKAB0WIQSSYQ6Cy7oyFNCHrUH2uYlJVVFOowUCaGXN9AAKCRD2uYlJVVFO
+o7TTAP9xUUoDhtQRYj0Qu6Zz2laGb+FXpuJd8JcCBV+0OSY2HAEAk+mrOqjJ0RCF
+ch68VLOtkWzBsPK7zw9sxNMGVFYBYQU=
+=gaWJ
 -----END PGP SIGNATURE-----
 
---xHavB6NUYjLSItap--
+--3EAk4poTFdusGnth--
