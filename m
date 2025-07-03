@@ -2,40 +2,70 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id BD215AF6EB9
-	for <lists+nouveau@lfdr.de>; Thu,  3 Jul 2025 11:32:24 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 7010DAF7A08
+	for <lists+nouveau@lfdr.de>; Thu,  3 Jul 2025 17:08:41 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 2884410E7F4;
-	Thu,  3 Jul 2025 09:32:23 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id C202310E871;
+	Thu,  3 Jul 2025 15:08:38 +0000 (UTC)
 Authentication-Results: gabe.freedesktop.org;
-	dkim=pass (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="PdPt2XDh";
+	dkim=pass (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="sqiylDDl";
 	dkim-atps=neutral
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
 Received: from dfw.source.kernel.org (dfw.source.kernel.org [139.178.84.217])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 60DF010E7F4;
- Thu,  3 Jul 2025 09:32:21 +0000 (UTC)
+ by gabe.freedesktop.org (Postfix) with ESMTPS id EDCFC10E870;
+ Thu,  3 Jul 2025 15:08:36 +0000 (UTC)
 Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by dfw.source.kernel.org (Postfix) with ESMTP id 97E0F5C5A15;
- Thu,  3 Jul 2025 09:32:19 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 9FD0DC4CEE3;
- Thu,  3 Jul 2025 09:32:07 +0000 (UTC)
+ by dfw.source.kernel.org (Postfix) with ESMTP id DCB055C58B1;
+ Thu,  3 Jul 2025 15:08:35 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id D734DC4CEED;
+ Thu,  3 Jul 2025 15:08:23 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1751535139;
- bh=WtO1DgUxyix8oDOSgjZfMtxXQjswM3LI+TSs1gDywZg=;
+ s=k20201202; t=1751555315;
+ bh=8GljKLrHpe9kEXKa3hqzrNoCIsl56DSFqDvkVIih/VM=;
  h=Date:Cc:Subject:From:To:References:In-Reply-To:From;
- b=PdPt2XDhT93ntXTcvbBpnFi+Vp43qWrOTV8apH25X/OTbnhL7q3cDHTb+eEs1S6FN
- byoaUU84MkJoHRtB6frTgxrNxHJ07pzp7FkepC9If0jj/Woeiz8HWUFkxHC7CeQlR5
- T/5Iea4mPe/5Xf5+6YfdT7aRrUFon4wI1LeIJqR2/5nJvKSN9y/8Z+w5av1BnrjGCj
- inULlHQYluATDD3nWJfOJsLTnNmVB5K0jK8xLINhcQhHyS96/X5NCTLbc17DFX3OjI
- ay5ZRmAGoY67ktEqCeRBECvTPRbAc9Qcj4ukGwQrIHoHeiKjak6hbo3yOo4Cm8P9Gt
- LyMUdqnzaTcPw==
+ b=sqiylDDl2AA2H7oObOdp9HnXMvLCM5hmnb6+/+MaxrqmX3gDy8ZShwCyGlfIyap/G
+ +7azaRN8FrYZT4oKRXiUCRfO+CqSSXm5T9GXI84E6Pa2TuJkvuZQwAROBV5FE5VJ8h
+ g9dT/h6I7czTQp/Rlz02Tp07mpnCYSt4Eoe/Po/8s6XjPEA6/2nULo6w+IShgITWpv
+ 9t/P2XvQXr9RVsxQdIg4h7R0n2vQk0Uai3C/J2zSGKxlJvqemQBwkQmFj6KwoFCxVz
+ CBILc4T0vMxDj5eEIfvb3CzXrE1KOadGjHOtdX4cfhY9147utvIV7umZv8Jf5AgeeF
+ vnxs7Lkq8KyeQ==
 Mime-Version: 1.0
 Content-Transfer-Encoding: quoted-printable
 Content-Type: text/plain; charset=UTF-8
-Date: Thu, 03 Jul 2025 11:32:05 +0200
-Message-Id: <DB2BDSN1JH51.14ZZPETJORBC6@kernel.org>
-Cc: <rust-for-linux@vger.kernel.org>, <linux-kernel@vger.kernel.org>,
+Date: Thu, 03 Jul 2025 17:08:22 +0200
+Message-Id: <DB2IJ9HBIM0W.3N0JVGKX558QI@kernel.org>
+Cc: "Michal Rostecki" <vadorovsky@protonmail.com>, "Miguel Ojeda"
+ <ojeda@kernel.org>, "Alex Gaynor" <alex.gaynor@gmail.com>, "Boqun Feng"
+ <boqun.feng@gmail.com>, "Gary Guo" <gary@garyguo.net>,
+ =?utf-8?q?Bj=C3=B6rn_Roy_Baron?= <bjorn3_gh@protonmail.com>, "Andreas
+ Hindborg" <a.hindborg@kernel.org>, "Alice Ryhl" <aliceryhl@google.com>,
+ "Trevor Gross" <tmgross@umich.edu>, "Brendan Higgins"
+ <brendan.higgins@linux.dev>, "David Gow" <davidgow@google.com>, "Rae Moar"
+ <rmoar@google.com>, "Danilo Krummrich" <dakr@kernel.org>, "Maarten
+ Lankhorst" <maarten.lankhorst@linux.intel.com>, "Maxime Ripard"
+ <mripard@kernel.org>, "Thomas Zimmermann" <tzimmermann@suse.de>, "David
+ Airlie" <airlied@gmail.com>, "Simona Vetter" <simona@ffwll.ch>, "Greg
+ Kroah-Hartman" <gregkh@linuxfoundation.org>, "Rafael J. Wysocki"
+ <rafael@kernel.org>, "Luis Chamberlain" <mcgrof@kernel.org>, "Russ Weight"
+ <russ.weight@linux.dev>, "FUJITA Tomonori" <fujita.tomonori@gmail.com>,
+ "Rob Herring" <robh@kernel.org>, "Saravana Kannan" <saravanak@google.com>,
+ "Peter Zijlstra" <peterz@infradead.org>, "Ingo Molnar" <mingo@redhat.com>,
+ "Will Deacon" <will@kernel.org>, "Waiman Long" <longman@redhat.com>,
+ "Nathan Chancellor" <nathan@kernel.org>, "Nick Desaulniers"
+ <nick.desaulniers+lkml@gmail.com>, "Bill Wendling" <morbo@google.com>,
+ "Justin Stitt" <justinstitt@google.com>, "Andrew Lunn" <andrew@lunn.ch>,
+ "Heiner Kallweit" <hkallweit1@gmail.com>, "Russell King"
+ <linux@armlinux.org.uk>, "David S. Miller" <davem@davemloft.net>, "Eric
+ Dumazet" <edumazet@google.com>, "Jakub Kicinski" <kuba@kernel.org>, "Paolo
+ Abeni" <pabeni@redhat.com>, "Bjorn Helgaas" <bhelgaas@google.com>, "Arnd
+ Bergmann" <arnd@arndb.de>, "Jens Axboe" <axboe@kernel.dk>,
+ =?utf-8?q?Krzysztof_Wilczy=C5=84ski?= <kwilczynski@kernel.org>, "Dave
+ Ertman" <david.m.ertman@intel.com>, "Ira Weiny" <ira.weiny@intel.com>,
+ "Leon Romanovsky" <leon@kernel.org>, "Breno Leitao" <leitao@debian.org>,
+ "Viresh Kumar" <viresh.kumar@linaro.org>, "Michael Turquette"
+ <mturquette@baylibre.com>, "Stephen Boyd" <sboyd@kernel.org>,
+ <rust-for-linux@vger.kernel.org>, <linux-kernel@vger.kernel.org>,
  <linux-kselftest@vger.kernel.org>, <kunit-dev@googlegroups.com>,
  <dri-devel@lists.freedesktop.org>, <netdev@vger.kernel.org>,
  <devicetree@vger.kernel.org>, <llvm@lists.linux.dev>,
@@ -44,41 +74,13 @@ Cc: <rust-for-linux@vger.kernel.org>, <linux-kernel@vger.kernel.org>,
  <linux-clk@vger.kernel.org>
 Subject: Re: [PATCH v13 2/5] rust: support formatting of foreign types
 From: "Benno Lossin" <lossin@kernel.org>
-To: "Tamir Duberstein" <tamird@gmail.com>, "Michal Rostecki"
- <vadorovsky@protonmail.com>, "Miguel Ojeda" <ojeda@kernel.org>, "Alex
- Gaynor" <alex.gaynor@gmail.com>, "Boqun Feng" <boqun.feng@gmail.com>, "Gary
- Guo" <gary@garyguo.net>, =?utf-8?q?Bj=C3=B6rn_Roy_Baron?=
- <bjorn3_gh@protonmail.com>, "Andreas Hindborg" <a.hindborg@kernel.org>,
- "Alice Ryhl" <aliceryhl@google.com>, "Trevor Gross" <tmgross@umich.edu>,
- "Brendan Higgins" <brendan.higgins@linux.dev>, "David Gow"
- <davidgow@google.com>, "Rae Moar" <rmoar@google.com>, "Danilo Krummrich"
- <dakr@kernel.org>, "Maarten Lankhorst" <maarten.lankhorst@linux.intel.com>,
- "Maxime Ripard" <mripard@kernel.org>, "Thomas Zimmermann"
- <tzimmermann@suse.de>, "David Airlie" <airlied@gmail.com>, "Simona Vetter"
- <simona@ffwll.ch>, "Greg Kroah-Hartman" <gregkh@linuxfoundation.org>,
- "Rafael J. Wysocki" <rafael@kernel.org>, "Luis Chamberlain"
- <mcgrof@kernel.org>, "Russ Weight" <russ.weight@linux.dev>, "FUJITA
- Tomonori" <fujita.tomonori@gmail.com>, "Rob Herring" <robh@kernel.org>,
- "Saravana Kannan" <saravanak@google.com>, "Peter Zijlstra"
- <peterz@infradead.org>, "Ingo Molnar" <mingo@redhat.com>, "Will Deacon"
- <will@kernel.org>, "Waiman Long" <longman@redhat.com>, "Nathan Chancellor"
- <nathan@kernel.org>, "Nick Desaulniers" <nick.desaulniers+lkml@gmail.com>,
- "Bill Wendling" <morbo@google.com>, "Justin Stitt"
- <justinstitt@google.com>, "Andrew Lunn" <andrew@lunn.ch>, "Heiner Kallweit"
- <hkallweit1@gmail.com>, "Russell King" <linux@armlinux.org.uk>, "David S.
- Miller" <davem@davemloft.net>, "Eric Dumazet" <edumazet@google.com>, "Jakub
- Kicinski" <kuba@kernel.org>, "Paolo Abeni" <pabeni@redhat.com>, "Bjorn
- Helgaas" <bhelgaas@google.com>, "Arnd Bergmann" <arnd@arndb.de>, "Jens
- Axboe" <axboe@kernel.dk>, =?utf-8?q?Krzysztof_Wilczy=C5=84ski?=
- <kwilczynski@kernel.org>, "Dave Ertman" <david.m.ertman@intel.com>, "Ira
- Weiny" <ira.weiny@intel.com>, "Leon Romanovsky" <leon@kernel.org>, "Breno
- Leitao" <leitao@debian.org>, "Viresh Kumar" <viresh.kumar@linaro.org>,
- "Michael Turquette" <mturquette@baylibre.com>, "Stephen Boyd"
- <sboyd@kernel.org>
+To: "Tamir Duberstein" <tamird@gmail.com>
 X-Mailer: aerc 0.20.1
 References: <20250701-cstr-core-v13-0-29f7d3eb97a6@gmail.com>
  <20250701-cstr-core-v13-2-29f7d3eb97a6@gmail.com>
-In-Reply-To: <20250701-cstr-core-v13-2-29f7d3eb97a6@gmail.com>
+ <DB2BDSN1JH51.14ZZPETJORBC6@kernel.org>
+ <CAJ-ks9nC=AyBPXRY3nJ0NuZvjFskzMcOkVNrBEfXD2hZ5uRntQ@mail.gmail.com>
+In-Reply-To: <CAJ-ks9nC=AyBPXRY3nJ0NuZvjFskzMcOkVNrBEfXD2hZ5uRntQ@mail.gmail.com>
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -93,307 +95,180 @@ List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-On Tue Jul 1, 2025 at 6:49 PM CEST, Tamir Duberstein wrote:
-> Introduce a `fmt!` macro which wraps all arguments in
-> `kernel::fmt::Adapter` and a `kernel::fmt::Display` trait. This enables
-> formatting of foreign types (like `core::ffi::CStr`) that do not
-> implement `core::fmt::Display` due to concerns around lossy conversions w=
-hich
-> do not apply in the kernel.
+On Thu Jul 3, 2025 at 3:55 PM CEST, Tamir Duberstein wrote:
+> On Thu, Jul 3, 2025 at 5:32=E2=80=AFAM Benno Lossin <lossin@kernel.org> w=
+rote:
+>> On Tue Jul 1, 2025 at 6:49 PM CEST, Tamir Duberstein wrote:
+>> > Introduce a `fmt!` macro which wraps all arguments in
+>> > `kernel::fmt::Adapter` and a `kernel::fmt::Display` trait. This enable=
+s
+>> > formatting of foreign types (like `core::ffi::CStr`) that do not
+>> > implement `core::fmt::Display` due to concerns around lossy conversion=
+s which
+>> > do not apply in the kernel.
+>> >
+>> > Replace all direct calls to `format_args!` with `fmt!`.
+>> >
+>> > Replace all implementations of `core::fmt::Display` with implementatio=
+ns
+>> > of `kernel::fmt::Display`.
+>> >
+>> > Suggested-by: Alice Ryhl <aliceryhl@google.com>
+>> > Link: https://rust-for-linux.zulipchat.com/#narrow/channel/288089-Gene=
+ral/topic/Custom.20formatting/with/516476467
+>> > Acked-by: Greg Kroah-Hartman <gregkh@linuxfoundation.org>
+>> > Reviewed-by: Alice Ryhl <aliceryhl@google.com>
+>> > Signed-off-by: Tamir Duberstein <tamird@gmail.com>
+>> > ---
+>> >  drivers/block/rnull.rs       |  2 +-
+>> >  drivers/gpu/nova-core/gpu.rs |  4 +-
+>> >  rust/kernel/block/mq.rs      |  2 +-
+>> >  rust/kernel/device.rs        |  2 +-
+>> >  rust/kernel/fmt.rs           | 89 +++++++++++++++++++++++++++++++++++=
+++++
+>> >  rust/kernel/kunit.rs         |  6 +--
+>> >  rust/kernel/lib.rs           |  1 +
+>> >  rust/kernel/prelude.rs       |  3 +-
+>> >  rust/kernel/print.rs         |  4 +-
+>> >  rust/kernel/seq_file.rs      |  2 +-
+>> >  rust/kernel/str.rs           | 22 ++++------
+>> >  rust/macros/fmt.rs           | 99 +++++++++++++++++++++++++++++++++++=
++++++++++
+>> >  rust/macros/lib.rs           | 19 +++++++++
+>> >  rust/macros/quote.rs         |  7 ++++
+>> >  scripts/rustdoc_test_gen.rs  |  2 +-
+>> >  15 files changed, 236 insertions(+), 28 deletions(-)
+>>
+>> This would be a lot easier to review if he proc-macro and the call
+>> replacement were different patches.
+>>
+>> Also the `kernel/fmt.rs` file should be a different commit.
 >
-> Replace all direct calls to `format_args!` with `fmt!`.
+> Can you help me understand why? The changes you ask to be separated
+> would all be in different files, so why would separate commits make it
+> easier to review?
+
+It takes less time to go through the entire patch and give a RB. I can
+take smaller time chunks and don't have to get back into the entire
+context of the patch when I don't have 30-60min available.
+
+In this patch the biggest problem is the rename & addition of new
+things, maybe just adding 200 lines in those files could be okay to go
+together, see below for more.
+
+> I prefer to keep things in one commit because the changes are highly
+> interdependent. The proc macro doesn't make sense without
+> kernel/fmt.rs and kernel/fmt.rs is useless without the proc macro.
+
+I think that `Adapter`, the custom `Display` and their impl blocks
+don't need to be in the same commit as the proc-macro. They are related,
+but maybe someone is not well-versed in proc-macros and thus doesn't
+want to review that part.
+
+>> > diff --git a/rust/kernel/fmt.rs b/rust/kernel/fmt.rs
+>> > new file mode 100644
+>> > index 000000000000..348d16987de6
+>> > --- /dev/null
+>> > +++ b/rust/kernel/fmt.rs
+>> > @@ -0,0 +1,89 @@
+>> > +// SPDX-License-Identifier: GPL-2.0
+>> > +
+>> > +//! Formatting utilities.
+>> > +
+>> > +use core::fmt;
+>>
+>> I think we should pub export all types that we are still using from
+>> `core::fmt`. For example `Result`, `Formatter`, `Debug` etc.
+>>
+>> That way I can still use the same pattern of importing `fmt` and then
+>> writing
+>>
+>>     impl fmt::Display for MyType {
+>>         fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {}
+>>     }
 >
-> Replace all implementations of `core::fmt::Display` with implementations
-> of `kernel::fmt::Display`.
+> Great idea, done for the next spin. It would be nice to be able to
+> lint against references to `core::fmt` outside of kernel/fmt.rs.
+
+I think there was something in clippy that can do that globally and we
+could allow that in this file?
+
+>> > +
+>> > +/// Internal adapter used to route allow implementations of formattin=
+g traits for foreign types.
+>> > +///
+>> > +/// It is inserted automatically by the [`fmt!`] macro and is not mea=
+nt to be used directly.
+>> > +///
+>> > +/// [`fmt!`]: crate::prelude::fmt!
+>> > +#[doc(hidden)]
+>> > +pub struct Adapter<T>(pub T);
+>> > +
+>> > +macro_rules! impl_fmt_adapter_forward {
+>> > +    ($($trait:ident),* $(,)?) =3D> {
+>> > +        $(
+>> > +            impl<T: fmt::$trait> fmt::$trait for Adapter<T> {
+>> > +                fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Res=
+ult {
+>> > +                    let Self(t) =3D self;
+>> > +                    fmt::$trait::fmt(t, f)
+>> > +                }
+>> > +            }
+>> > +        )*
+>> > +    };
+>> > +}
+>> > +
+>> > +impl_fmt_adapter_forward!(Debug, LowerHex, UpperHex, Octal, Binary, P=
+ointer, LowerExp, UpperExp);
+>> > +
+>> > +/// A copy of [`fmt::Display`] that allows us to implement it for for=
+eign types.
+>> > +///
+>> > +/// Types should implement this trait rather than [`fmt::Display`]. T=
+ogether with the [`Adapter`]
+>> > +/// type and [`fmt!`] macro, it allows for formatting foreign types (=
+e.g. types from core) which do
+>> > +/// not implement [`fmt::Display`] directly.
+>> > +///
+>> > +/// [`fmt!`]: crate::prelude::fmt!
+>> > +pub trait Display {
+>> > +    /// Same as [`fmt::Display::fmt`].
+>> > +    fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result;
+>> > +}
+>> > +
+>> > +impl<T: ?Sized + Display> Display for &T {
+>> > +    fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
+>> > +        Display::fmt(*self, f)
+>> > +    }
+>> > +}
+>> > +
+>> > +impl<T: ?Sized + Display> fmt::Display for Adapter<&T> {
+>> > +    fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
+>> > +        let Self(t) =3D self;
+>> > +        Display::fmt(t, f)
+>>
+>> Why not `Display::fmt(&self.0, f)`?
 >
-> Suggested-by: Alice Ryhl <aliceryhl@google.com>
-> Link: https://rust-for-linux.zulipchat.com/#narrow/channel/288089-General=
-/topic/Custom.20formatting/with/516476467
-> Acked-by: Greg Kroah-Hartman <gregkh@linuxfoundation.org>
-> Reviewed-by: Alice Ryhl <aliceryhl@google.com>
-> Signed-off-by: Tamir Duberstein <tamird@gmail.com>
-> ---
->  drivers/block/rnull.rs       |  2 +-
->  drivers/gpu/nova-core/gpu.rs |  4 +-
->  rust/kernel/block/mq.rs      |  2 +-
->  rust/kernel/device.rs        |  2 +-
->  rust/kernel/fmt.rs           | 89 ++++++++++++++++++++++++++++++++++++++=
-+
->  rust/kernel/kunit.rs         |  6 +--
->  rust/kernel/lib.rs           |  1 +
->  rust/kernel/prelude.rs       |  3 +-
->  rust/kernel/print.rs         |  4 +-
->  rust/kernel/seq_file.rs      |  2 +-
->  rust/kernel/str.rs           | 22 ++++------
->  rust/macros/fmt.rs           | 99 ++++++++++++++++++++++++++++++++++++++=
-++++++
->  rust/macros/lib.rs           | 19 +++++++++
->  rust/macros/quote.rs         |  7 ++++
->  scripts/rustdoc_test_gen.rs  |  2 +-
->  15 files changed, 236 insertions(+), 28 deletions(-)
+> I like destructuring because it shows me that there's only one field.
+> With `self.0` I don't see that.
 
-This would be a lot easier to review if he proc-macro and the call
-replacement were different patches.
+And what is the benefit here?
 
-Also the `kernel/fmt.rs` file should be a different commit.
+>> > +
+>> > +    let mut args =3D TokenStream::from_iter(first_opt);
+>> > +    {
+>> > +        let mut flush =3D |args: &mut TokenStream, current: &mut Toke=
+nStream| {
+>>
+>> You don't need to pass `args` as a closure argument, since you always
+>> call it with `&mut args`.
+>
+> This doesn't work because of the borrow checker. If I wrote what you
+> suggest, then `args` is mutably borrowed by the closure, which
+> prohibits the mutable borrow needed for the .extend() call here:
 
-> diff --git a/rust/kernel/fmt.rs b/rust/kernel/fmt.rs
-> new file mode 100644
-> index 000000000000..348d16987de6
-> --- /dev/null
-> +++ b/rust/kernel/fmt.rs
-> @@ -0,0 +1,89 @@
-> +// SPDX-License-Identifier: GPL-2.0
-> +
-> +//! Formatting utilities.
-> +
-> +use core::fmt;
-
-I think we should pub export all types that we are still using from
-`core::fmt`. For example `Result`, `Formatter`, `Debug` etc.
-
-That way I can still use the same pattern of importing `fmt` and then
-writing
-
-    impl fmt::Display for MyType {
-        fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {}
-    }
-
-> +
-> +/// Internal adapter used to route allow implementations of formatting t=
-raits for foreign types.
-> +///
-> +/// It is inserted automatically by the [`fmt!`] macro and is not meant =
-to be used directly.
-> +///
-> +/// [`fmt!`]: crate::prelude::fmt!
-> +#[doc(hidden)]
-> +pub struct Adapter<T>(pub T);
-> +
-> +macro_rules! impl_fmt_adapter_forward {
-> +    ($($trait:ident),* $(,)?) =3D> {
-> +        $(
-> +            impl<T: fmt::$trait> fmt::$trait for Adapter<T> {
-> +                fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result=
- {
-> +                    let Self(t) =3D self;
-> +                    fmt::$trait::fmt(t, f)
-> +                }
-> +            }
-> +        )*
-> +    };
-> +}
-> +
-> +impl_fmt_adapter_forward!(Debug, LowerHex, UpperHex, Octal, Binary, Poin=
-ter, LowerExp, UpperExp);
-> +
-> +/// A copy of [`fmt::Display`] that allows us to implement it for foreig=
-n types.
-> +///
-> +/// Types should implement this trait rather than [`fmt::Display`]. Toge=
-ther with the [`Adapter`]
-> +/// type and [`fmt!`] macro, it allows for formatting foreign types (e.g=
-. types from core) which do
-> +/// not implement [`fmt::Display`] directly.
-> +///
-> +/// [`fmt!`]: crate::prelude::fmt!
-> +pub trait Display {
-> +    /// Same as [`fmt::Display::fmt`].
-> +    fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result;
-> +}
-> +
-> +impl<T: ?Sized + Display> Display for &T {
-> +    fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
-> +        Display::fmt(*self, f)
-> +    }
-> +}
-> +
-> +impl<T: ?Sized + Display> fmt::Display for Adapter<&T> {
-> +    fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
-> +        let Self(t) =3D self;
-> +        Display::fmt(t, f)
-
-Why not `Display::fmt(&self.0, f)`?
-
-> +    }
-> +}
-> +
-> +macro_rules! impl_display_forward {
-> +    ($(
-> +        $( { $($generics:tt)* } )? $ty:ty $( { where $($where:tt)* } )?
-> +    ),* $(,)?) =3D> {
-> +        $(
-> +            impl$($($generics)*)? Display for $ty $(where $($where)*)? {
-> +                fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result=
- {
-> +                    fmt::Display::fmt(self, f)
-> +                }
-> +            }
-> +        )*
-> +    };
-> +}
-> +
-> +impl_display_forward!(
-> +    bool,
-> +    char,
-> +    core::panic::PanicInfo<'_>,
-> +    fmt::Arguments<'_>,
-> +    i128,
-> +    i16,
-> +    i32,
-> +    i64,
-> +    i8,
-> +    isize,
-> +    str,
-> +    u128,
-> +    u16,
-> +    u32,
-> +    u64,
-> +    u8,
-> +    usize,
-> +    {<T: ?Sized>} crate::sync::Arc<T> {where crate::sync::Arc<T>: fmt::D=
-isplay},
-> +    {<T: ?Sized>} crate::sync::UniqueArc<T> {where crate::sync::UniqueAr=
-c<T>: fmt::Display},
-> +);
-
-> diff --git a/rust/macros/fmt.rs b/rust/macros/fmt.rs
-> new file mode 100644
-> index 000000000000..edc37c220a89
-> --- /dev/null
-> +++ b/rust/macros/fmt.rs
-> @@ -0,0 +1,99 @@
-> +// SPDX-License-Identifier: GPL-2.0
-> +
-> +use proc_macro::{Ident, TokenStream, TokenTree};
-> +use std::collections::BTreeSet;
-> +
-> +/// Please see [`crate::fmt`] for documentation.
-> +pub(crate) fn fmt(input: TokenStream) -> TokenStream {
-> +    let mut input =3D input.into_iter();
-> +
-> +    let first_opt =3D input.next();
-> +    let first_owned_str;
-> +    let mut names =3D BTreeSet::new();
-> +    let first_lit =3D {
-> +        let Some((mut first_str, first_lit)) =3D (match first_opt.as_ref=
-() {
-> +            Some(TokenTree::Literal(first_lit)) =3D> {
-> +                first_owned_str =3D first_lit.to_string();
-> +                Some(first_owned_str.as_str()).and_then(|first| {
-> +                    let first =3D first.strip_prefix('"')?;
-> +                    let first =3D first.strip_suffix('"')?;
-> +                    Some((first, first_lit))
-
-You're only using first_lit to get the span later, so why not just get
-the span directly here?
-
-> +                })
-> +            }
-> +            _ =3D> None,
-> +        }) else {
-> +            return first_opt.into_iter().chain(input).collect();
-> +        };
-> +        while let Some((_, rest)) =3D first_str.split_once('{') {
-
-Let's put a comment above this loop mentioning [1] and saying that it
-parses the identifiers from the format arguments.
-
-[1]: https://doc.rust-lang.org/std/fmt/index.html#syntax
-
-> +            first_str =3D rest;
-> +            if let Some(rest) =3D first_str.strip_prefix('{') {
-> +                first_str =3D rest;
-> +                continue;
-> +            }
-> +            if let Some((name, rest)) =3D first_str.split_once('}') {
-> +                first_str =3D rest;
-> +                let name =3D name.split_once(':').map_or(name, |(name, _=
-)| name);
-> +                if !name.is_empty() && !name.chars().all(|c| c.is_ascii_=
-digit()) {
-> +                    names.insert(name);
-> +                }
-> +            }
-> +        }
-> +        first_lit
-> +    };
-> +
-> +    let first_span =3D first_lit.span();
-> +    let adapter =3D quote_spanned! {
-> +        first_span =3D> ::kernel::fmt::Adapter
-> +    };
-
-I think we should follow the formatting convention from the quote crate:
-
-    let adapter =3D quote_spanned!(first_span=3D> ::kernel::fmt::Adapter);
-
-> +
-> +    let mut args =3D TokenStream::from_iter(first_opt);
-> +    {
-> +        let mut flush =3D |args: &mut TokenStream, current: &mut TokenSt=
-ream| {
-
-You don't need to pass `args` as a closure argument, since you always
-call it with `&mut args`.
-
-> +            let current =3D std::mem::take(current);
-> +            if !current.is_empty() {
-> +                let (lhs, rhs) =3D (|| {
-> +                    let mut current =3D current.into_iter();
-> +                    let mut acc =3D TokenStream::new();
-> +                    while let Some(tt) =3D current.next() {
-> +                        // Split on `=3D` only once to handle cases like=
- `a =3D b =3D c`.
-> +                        if matches!(&tt, TokenTree::Punct(p) if p.as_cha=
-r() =3D=3D '=3D') {
-> +                            names.remove(acc.to_string().as_str());
-> +                            // Include the `=3D` itself to keep the hand=
-ling below uniform.
-> +                            acc.extend([tt]);
-> +                            return (Some(acc), current.collect::<TokenSt=
-ream>());
-> +                        }
-> +                        acc.extend([tt]);
-> +                    }
-> +                    (None, acc)
-> +                })();
-> +                args.extend(quote_spanned! {
-> +                    first_span =3D> #lhs #adapter(&#rhs)
-> +                });
-> +            }
-> +        };
-> +
-> +        let mut current =3D TokenStream::new();
-
-Define this before the closure, then you don't need to pass it as an
-argument.
+Ahh right... Well then it's fine.
 
 ---
 Cheers,
 Benno
-
-> +        for tt in input {
-> +            match &tt {
-> +                TokenTree::Punct(p) if p.as_char() =3D=3D ',' =3D> {
-> +                    flush(&mut args, &mut current);
-> +                    &mut args
-> +                }
-> +                _ =3D> &mut current,
-> +            }
-> +            .extend([tt]);
-> +        }
-> +        flush(&mut args, &mut current);
-> +    }
-> +
-> +    for name in names {
-> +        let name =3D Ident::new(name, first_span);
-> +        args.extend(quote_spanned! {
-> +            first_span =3D> , #name =3D #adapter(&#name)
-> +        });
-> +    }
-> +
-> +    quote_spanned! {
-> +        first_span =3D> ::core::format_args!(#args)
-> +    }
-> +}
