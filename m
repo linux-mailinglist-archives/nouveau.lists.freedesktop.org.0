@@ -2,64 +2,114 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id A97B2CBAA4B
-	for <lists+nouveau@lfdr.de>; Sat, 13 Dec 2025 13:41:59 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 1A5CDCBAE09
+	for <lists+nouveau@lfdr.de>; Sat, 13 Dec 2025 13:45:43 +0100 (CET)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id CAC1710EA04;
-	Sat, 13 Dec 2025 12:40:58 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id C97BB10EBAD;
+	Sat, 13 Dec 2025 12:41:37 +0000 (UTC)
 Authentication-Results: gabe.freedesktop.org;
-	dkim=pass (2048-bit key; secure) header.d=mailbox.org header.i=@mailbox.org header.b="OsNT/XBH";
+	dkim=permerror (0-bit key) header.d=gmail.com header.i=@gmail.com header.b="Wf1qBKFS";
 	dkim-atps=neutral
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from mout-p-201.mailbox.org (mout-p-201.mailbox.org [80.241.56.171])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 0D9E510E6D0;
- Wed,  2 Jul 2025 10:56:13 +0000 (UTC)
-Received: from smtp202.mailbox.org (smtp202.mailbox.org [10.196.197.202])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
- (No client certificate requested)
- by mout-p-201.mailbox.org (Postfix) with ESMTPS id 4bXGzF6Z2Jz9tWy;
- Wed,  2 Jul 2025 12:56:09 +0200 (CEST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
- s=mail20150812; 
- t=1751453770; h=from:from:reply-to:reply-to:subject:subject:date:date:
- message-id:message-id:to:to:cc:cc:mime-version:mime-version:
- content-type:content-type:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references;
- bh=gz27GezlXTQrMHknTZCeUyKPAgt7TIG1apN6pbXeoEg=;
- b=OsNT/XBHhbijr30fIjuYUL8+evGiEi5+pQoimRPC7ALZF3+BSa5EXP3VOnrTscreAraEGZ
- jLiUJp/sHXf2MIoVpTGnle7sLGP/11Ig3qlbTCjUyehgxpiPf0ekRaNVC+R/TlV5CDkGpu
- u/fpHsxT216iDobSqcvAz2Zp2j2zvWdJHh0FI346o4V/KQ4x2g5g6+nKR6DpQ3XGtT5UX+
- QfrRN2W37ZwUMznzLyVsjG2b2PuSoOrSDz60hmO/ET5oN8T+i8AtXSlYNMxTlGc7PyDqUt
- kn+OOf2SVW0lq0QTY3wRa23pux+BRe6/aeACXCf7vyagdB0oet954QwL/2xhVw==
-Message-ID: <6762d33b4fe8e7b264a7403f228e6ec6723ae623.camel@mailbox.org>
-Subject: Re: [PATCH 2/6] drm/sched/tests: Port to cancel_job()
-From: Philipp Stanner <phasta@mailbox.org>
-To: Tvrtko Ursulin <tvrtko.ursulin@igalia.com>, Philipp Stanner
- <phasta@kernel.org>, Lyude Paul <lyude@redhat.com>, Danilo Krummrich
- <dakr@kernel.org>, David Airlie <airlied@gmail.com>, Simona Vetter
- <simona@ffwll.ch>, Matthew Brost <matthew.brost@intel.com>, Christian
- =?ISO-8859-1?Q?K=F6nig?= <ckoenig.leichtzumerken@gmail.com>, Maarten
- Lankhorst <maarten.lankhorst@linux.intel.com>, Maxime Ripard
- <mripard@kernel.org>, Thomas Zimmermann <tzimmermann@suse.de>, Sumit Semwal
- <sumit.semwal@linaro.org>, Pierre-Eric Pelloux-Prayer
- <pierre-eric.pelloux-prayer@amd.com>
-Cc: dri-devel@lists.freedesktop.org, nouveau@lists.freedesktop.org, 
- linux-kernel@vger.kernel.org, linux-media@vger.kernel.org, 
- linaro-mm-sig@lists.linaro.org
-Date: Wed, 02 Jul 2025 12:56:03 +0200
-In-Reply-To: <f9b55d5b-0018-4850-a9b7-2f267467e957@igalia.com>
-References: <20250701132142.76899-3-phasta@kernel.org>
- <20250701132142.76899-5-phasta@kernel.org>
- <f9b55d5b-0018-4850-a9b7-2f267467e957@igalia.com>
+Received: from mail-pl1-f179.google.com (mail-pl1-f179.google.com
+ [209.85.214.179])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id BC1D510E008;
+ Thu,  3 Jul 2025 16:26:23 +0000 (UTC)
+Received: by mail-pl1-f179.google.com with SMTP id
+ d9443c01a7336-234d3103237so226235ad.0; 
+ Thu, 03 Jul 2025 09:26:23 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=gmail.com; s=20230601; t=1751559983; x=1752164783; darn=lists.freedesktop.org;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=rSyt4WnF+qHRwEMJ5395X7EAvgdTWUY/zMhaiamm5RI=;
+ b=Wf1qBKFS5JGCR+vWv+2z5wFcvtDDt7jjGS1GtDrLlo+eCG1sKqzelcdQ7aEs//KwC9
+ iRlB7hoTMphP9I41dMgk6AzZ3o6D2MB3hcPARo+OuUCrbRgizEIGORoUFoCDLtOUqVsN
+ T9yNy9gWdk3AxROYLjZGJ6vxGUvUEmnAhdNCQgpr3H+WmDmA7IRBxP/MpBcszu8WWiSv
+ vmjdfLhLt2SwmOLlEn/e04cDm2YP9WTAg9VAIkcBlnkRl+fHCi+NOWwEz9yzc3zttvxq
+ WC6N6uFAR+pk0kw5h6tNwEf7/ObKoh3RT7qvcjFbQafGZO8G+bJZBcYdzLMgjtjfjVH5
+ DcJA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1751559983; x=1752164783;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=rSyt4WnF+qHRwEMJ5395X7EAvgdTWUY/zMhaiamm5RI=;
+ b=ouQnAeHve6asGmhpbPU47SSr847h8/KPiJdkuAwHRYna61Jb/jR3Odep0Vw24+FjFe
+ XsVPLec25a+7BpWNnuOhZglAiAYrako/FNuHF2iKRB/IhHf2GzOppB4aLM4YMRf3T+Y8
+ B/N7kCqukO/CdL8VybF3UoxoVMbrEL9jJkNJXAPDBDFEtWf1ySdnjuKL0/j9rbBES5yJ
+ g3OkT+UFhD2zlTKvjvz5nIDdrrHhuXzHWmLUldIS3bxHR7x9bqsei2I/2/dpsjDRkRrS
+ RTgbP7xj+ci/EVjaXBT7jJRz/4rNxamJkRadNFLXpBSWa43rvlWMsvYUawaZgf8Hr9DN
+ EtAg==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCWrOHrt/80V7l1yRqAO22/gt0rdlbRnBgvVclf9QMyTSXcVcagailrcFru57ZGniajL0BSnTbYo0sQ=@lists.freedesktop.org,
+ AJvYcCX24BkMm++HNMDX1gq6u9Jf+djndfmvfh+GnBwqXneM+r9QEVGd0z+OHVbt9AaEseDDqb9pTuXR3Q==@lists.freedesktop.org
+X-Gm-Message-State: AOJu0YwhppiZZIWtnQbSZXBKBHp+sTal2RT49GdA5UPf1ph3LcU25itu
+ reepd+iFbl75EmtElX6R8PLsddmh1Ei3NA1C41dIP/qGWj23okS+c8DXSzdIuoRtlXH7nKZFPF2
+ SAUq38u1/jPUlvCyZEQ+OfUQJGBD3+XY=
+X-Gm-Gg: ASbGncuQ95XCFx2jeA6aztgX1iUPyiaVuJoTKQufIylTxP7RhdPqmz+QagbM3YUsFmC
+ 3YyzySzOqSAmTAx6OGlHHpzvNQ/HTdDuqO3lNdBv0nHxv7qZOmic7B+guE/3P1BUumqMBT6G25n
+ +z4xlQ+Wpwrwg3Ag0Y0y5WOwGo4OpuGlqimCP+OPEIlF2IJhjW2UQ74w==
+X-Google-Smtp-Source: AGHT+IE2AsrunGhRqAPTssN0vu1pH9T/puSPtq1EYmN/wZ3G149WG6FCC+weBXEH09090+WjrZpEYCR5WVBab3y8bBw=
+X-Received: by 2002:a17:902:d50c:b0:234:cb4a:bc1c with SMTP id
+ d9443c01a7336-23c7b2c48abmr14508535ad.6.1751559983011; Thu, 03 Jul 2025
+ 09:26:23 -0700 (PDT)
+MIME-Version: 1.0
+References: <20250701-cstr-core-v13-0-29f7d3eb97a6@gmail.com>
+ <20250701-cstr-core-v13-2-29f7d3eb97a6@gmail.com>
+ <DB2BDSN1JH51.14ZZPETJORBC6@kernel.org>
+ <CAJ-ks9nC=AyBPXRY3nJ0NuZvjFskzMcOkVNrBEfXD2hZ5uRntQ@mail.gmail.com>
+In-Reply-To: <CAJ-ks9nC=AyBPXRY3nJ0NuZvjFskzMcOkVNrBEfXD2hZ5uRntQ@mail.gmail.com>
+From: Miguel Ojeda <miguel.ojeda.sandonis@gmail.com>
+Date: Thu, 3 Jul 2025 18:26:09 +0200
+X-Gm-Features: Ac12FXyK3yF1o66pvRj95wQBg--_tN8783HmS0ZULfxKl6rLdQ-EP0UVIzak-4s
+Message-ID: <CANiq72=61JhEf97JTkineo+FX+JG+Q9x9x86MC_hukSa9YSX3g@mail.gmail.com>
+Subject: Re: [PATCH v13 2/5] rust: support formatting of foreign types
+To: Tamir Duberstein <tamird@gmail.com>
+Cc: Benno Lossin <lossin@kernel.org>,
+ Michal Rostecki <vadorovsky@protonmail.com>, 
+ Miguel Ojeda <ojeda@kernel.org>, Alex Gaynor <alex.gaynor@gmail.com>, 
+ Boqun Feng <boqun.feng@gmail.com>, Gary Guo <gary@garyguo.net>, 
+ =?UTF-8?Q?Bj=C3=B6rn_Roy_Baron?= <bjorn3_gh@protonmail.com>, 
+ Andreas Hindborg <a.hindborg@kernel.org>, Alice Ryhl <aliceryhl@google.com>, 
+ Trevor Gross <tmgross@umich.edu>, Brendan Higgins <brendan.higgins@linux.dev>, 
+ David Gow <davidgow@google.com>, Rae Moar <rmoar@google.com>, 
+ Danilo Krummrich <dakr@kernel.org>,
+ Maarten Lankhorst <maarten.lankhorst@linux.intel.com>, 
+ Maxime Ripard <mripard@kernel.org>, Thomas Zimmermann <tzimmermann@suse.de>, 
+ David Airlie <airlied@gmail.com>, Simona Vetter <simona@ffwll.ch>, 
+ Greg Kroah-Hartman <gregkh@linuxfoundation.org>,
+ "Rafael J. Wysocki" <rafael@kernel.org>, 
+ Luis Chamberlain <mcgrof@kernel.org>, Russ Weight <russ.weight@linux.dev>, 
+ FUJITA Tomonori <fujita.tomonori@gmail.com>, Rob Herring <robh@kernel.org>, 
+ Saravana Kannan <saravanak@google.com>, Peter Zijlstra <peterz@infradead.org>, 
+ Ingo Molnar <mingo@redhat.com>, Will Deacon <will@kernel.org>,
+ Waiman Long <longman@redhat.com>, Nathan Chancellor <nathan@kernel.org>,
+ Nick Desaulniers <nick.desaulniers+lkml@gmail.com>, 
+ Bill Wendling <morbo@google.com>, Justin Stitt <justinstitt@google.com>,
+ Andrew Lunn <andrew@lunn.ch>, 
+ Heiner Kallweit <hkallweit1@gmail.com>, Russell King <linux@armlinux.org.uk>, 
+ "David S. Miller" <davem@davemloft.net>, Eric Dumazet <edumazet@google.com>, 
+ Jakub Kicinski <kuba@kernel.org>, Paolo Abeni <pabeni@redhat.com>,
+ Bjorn Helgaas <bhelgaas@google.com>, 
+ Arnd Bergmann <arnd@arndb.de>, Jens Axboe <axboe@kernel.dk>, 
+ =?UTF-8?Q?Krzysztof_Wilczy=C5=84ski?= <kwilczynski@kernel.org>, 
+ Dave Ertman <david.m.ertman@intel.com>, Ira Weiny <ira.weiny@intel.com>, 
+ Leon Romanovsky <leon@kernel.org>, Breno Leitao <leitao@debian.org>, 
+ Viresh Kumar <viresh.kumar@linaro.org>,
+ Michael Turquette <mturquette@baylibre.com>, 
+ Stephen Boyd <sboyd@kernel.org>, rust-for-linux@vger.kernel.org, 
+ linux-kernel@vger.kernel.org, linux-kselftest@vger.kernel.org, 
+ kunit-dev@googlegroups.com, dri-devel@lists.freedesktop.org, 
+ netdev@vger.kernel.org, devicetree@vger.kernel.org, llvm@lists.linux.dev, 
+ linux-pci@vger.kernel.org, nouveau@lists.freedesktop.org, 
+ linux-block@vger.kernel.org, linux-pm@vger.kernel.org, 
+ linux-clk@vger.kernel.org
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
-MIME-Version: 1.0
-X-MBO-RS-META: 3wp6oc1wto6y4c8s6acowbuo57rutw3p
-X-MBO-RS-ID: 30b1c1d7b94b1f12f12
-X-Mailman-Approved-At: Sat, 13 Dec 2025 12:40:50 +0000
+X-Mailman-Approved-At: Sat, 13 Dec 2025 12:40:47 +0000
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -71,211 +121,21 @@ List-Post: <mailto:nouveau@lists.freedesktop.org>
 List-Help: <mailto:nouveau-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
  <mailto:nouveau-request@lists.freedesktop.org?subject=subscribe>
-Reply-To: phasta@kernel.org
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-On Wed, 2025-07-02 at 11:36 +0100, Tvrtko Ursulin wrote:
->=20
-> On 01/07/2025 14:21, Philipp Stanner wrote:
-> > The GPU Scheduler now supports a new callback, cancel_job(), which
-> > lets
-> > the scheduler cancel all jobs which might not yet be freed when
-> > drm_sched_fini() runs. Using this callback allows for significantly
-> > simplifying the mock scheduler teardown code.
-> >=20
-> > Implement the cancel_job() callback and adjust the code where
-> > necessary.
->=20
-> Cross referencing against my version I think you missed this hunk:
->=20
-> --- a/drivers/gpu/drm/scheduler/tests/sched_tests.h
-> +++ b/drivers/gpu/drm/scheduler/tests/sched_tests.h
-> @@ -49,7 +49,6 @@ struct drm_mock_scheduler {
->=20
-> =C2=A0=C2=A0	spinlock_t		lock;
-> =C2=A0=C2=A0	struct list_head	job_list;
-> -	struct list_head	done_list;
->=20
-> =C2=A0=C2=A0	struct {
-> =C2=A0=C2=A0		u64		context;
->=20
+On Thu, Jul 3, 2025 at 3:56=E2=80=AFPM Tamir Duberstein <tamird@gmail.com> =
+wrote:
+>
+> Can you help me understand why? The changes you ask to be separated
+> would all be in different files, so why would separate commits make it
+> easier to review?
 
-Right, overlooked that one.
+By the way, if we are talking about splitting, it is easier to land
+patches that can go independently into different subsystems and
+avoiding flag day changes (or making those as small as possible), i.e.
+ideally being able to land big changes across more than one kernel
+cycle.
 
->=20
-> I also had this:
->=20
-> @@ -97,7 +96,8 @@ struct drm_mock_sched_job {
-> =C2=A0=C2=A0	struct completion	done;
->=20
-> =C2=A0 #define DRM_MOCK_SCHED_JOB_DONE		0x1
-> -#define DRM_MOCK_SCHED_JOB_TIMEDOUT	0x2
-> +#define DRM_MOCK_SCHED_JOB_CANCELED	0x2
-> +#define DRM_MOCK_SCHED_JOB_TIMEDOUT	0x4
->=20
-> And was setting it in the callback. And since we should add a test to
-> explicitly cover the new callback, and just the callback, that could=20
-> make it very easy to do it.
-
-What do you imagine that to look like? The scheduler only invokes the
-callback on tear down.
-
-We also don't have tests that only test free_job() and the like, do
-we?=C2=A0
-
-You cannot test a callback for the scheduler, because the callback is
-implemented in the driver.
-
-Callbacks are tested by using the scheduler. In this case, it's tested
-the intended way by the unit tests invoking drm_sched_free().
-
-
-P.
-
-
->=20
-> > Signed-off-by: Philipp Stanner <phasta@kernel.org>
-> > ---
-> > =C2=A0 .../gpu/drm/scheduler/tests/mock_scheduler.c=C2=A0 | 66 +++++++-=
-------
-> > -----
-> > =C2=A0 1 file changed, 23 insertions(+), 43 deletions(-)
-> >=20
-> > diff --git a/drivers/gpu/drm/scheduler/tests/mock_scheduler.c
-> > b/drivers/gpu/drm/scheduler/tests/mock_scheduler.c
-> > index 49d067fecd67..2d3169d95200 100644
-> > --- a/drivers/gpu/drm/scheduler/tests/mock_scheduler.c
-> > +++ b/drivers/gpu/drm/scheduler/tests/mock_scheduler.c
-> > @@ -63,7 +63,7 @@ static void drm_mock_sched_job_complete(struct
-> > drm_mock_sched_job *job)
-> > =C2=A0=C2=A0	lockdep_assert_held(&sched->lock);
-> > =C2=A0=20
-> > =C2=A0=C2=A0	job->flags |=3D DRM_MOCK_SCHED_JOB_DONE;
-> > -	list_move_tail(&job->link, &sched->done_list);
-> > +	list_del(&job->link);
-> > =C2=A0=C2=A0	dma_fence_signal_locked(&job->hw_fence);
-> > =C2=A0=C2=A0	complete(&job->done);
-> > =C2=A0 }
-> > @@ -236,26 +236,39 @@ mock_sched_timedout_job(struct drm_sched_job
-> > *sched_job)
-> > =C2=A0=20
-> > =C2=A0 static void mock_sched_free_job(struct drm_sched_job *sched_job)
-> > =C2=A0 {
-> > -	struct drm_mock_scheduler *sched =3D
-> > -			drm_sched_to_mock_sched(sched_job->sched);
-> > =C2=A0=C2=A0	struct drm_mock_sched_job *job =3D
-> > drm_sched_job_to_mock_job(sched_job);
-> > -	unsigned long flags;
-> > =C2=A0=20
-> > -	/* Remove from the scheduler done list. */
-> > -	spin_lock_irqsave(&sched->lock, flags);
-> > -	list_del(&job->link);
-> > -	spin_unlock_irqrestore(&sched->lock, flags);
-> > =C2=A0=C2=A0	dma_fence_put(&job->hw_fence);
-> > -
-> > =C2=A0=C2=A0	drm_sched_job_cleanup(sched_job);
-> > =C2=A0=20
-> > =C2=A0=C2=A0	/* Mock job itself is freed by the kunit framework. */
-> > =C2=A0 }
-> > =C2=A0=20
-> > +static void mock_sched_cancel_job(struct drm_sched_job *sched_job)
-> > +{
-> > +	struct drm_mock_scheduler *sched =3D
-> > drm_sched_to_mock_sched(sched_job->sched);
-> > +	struct drm_mock_sched_job *job =3D
-> > drm_sched_job_to_mock_job(sched_job);
-> > +	unsigned long flags;
-> > +
-> > +	hrtimer_cancel(&job->timer);
-> > +
-> > +	spin_lock_irqsave(&sched->lock, flags);
-> > +	if (!dma_fence_is_signaled_locked(&job->hw_fence)) {
-> > +		list_del(&job->link);
-> > +		dma_fence_set_error(&job->hw_fence, -ECANCELED);
-> > +		dma_fence_signal_locked(&job->hw_fence);
-> > +	}
-> > +	spin_unlock_irqrestore(&sched->lock, flags);
-> > +
-> > +	/* The GPU Scheduler will call
-> > drm_sched_backend_ops.free_job(), still.
-> > +	 * Mock job itself is freed by the kunit framework. */
->=20
-> /*
-> =C2=A0 * Multiline comment style to stay consistent, at least in this
-> file.
-> =C2=A0 */
->=20
-> The rest looks good, but I need to revisit the timeout/free handling=20
-> since it has been a while and you changed it recently.
->=20
-> Regards,
->=20
-> Tvrtko
->=20
-> > +}
-> > +
-> > =C2=A0 static const struct drm_sched_backend_ops drm_mock_scheduler_ops
-> > =3D {
-> > =C2=A0=C2=A0	.run_job =3D mock_sched_run_job,
-> > =C2=A0=C2=A0	.timedout_job =3D mock_sched_timedout_job,
-> > -	.free_job =3D mock_sched_free_job
-> > +	.free_job =3D mock_sched_free_job,
-> > +	.cancel_job =3D mock_sched_cancel_job,
-> > =C2=A0 };
-> > =C2=A0=20
-> > =C2=A0 /**
-> > @@ -289,7 +302,6 @@ struct drm_mock_scheduler
-> > *drm_mock_sched_new(struct kunit *test, long timeout)
-> > =C2=A0=C2=A0	sched->hw_timeline.context =3D dma_fence_context_alloc(1);
-> > =C2=A0=C2=A0	atomic_set(&sched->hw_timeline.next_seqno, 0);
-> > =C2=A0=C2=A0	INIT_LIST_HEAD(&sched->job_list);
-> > -	INIT_LIST_HEAD(&sched->done_list);
-> > =C2=A0=C2=A0	spin_lock_init(&sched->lock);
-> > =C2=A0=20
-> > =C2=A0=C2=A0	return sched;
-> > @@ -304,38 +316,6 @@ struct drm_mock_scheduler
-> > *drm_mock_sched_new(struct kunit *test, long timeout)
-> > =C2=A0=C2=A0 */
-> > =C2=A0 void drm_mock_sched_fini(struct drm_mock_scheduler *sched)
-> > =C2=A0 {
-> > -	struct drm_mock_sched_job *job, *next;
-> > -	unsigned long flags;
-> > -	LIST_HEAD(list);
-> > -
-> > -	drm_sched_wqueue_stop(&sched->base);
-> > -
-> > -	/* Force complete all unfinished jobs. */
-> > -	spin_lock_irqsave(&sched->lock, flags);
-> > -	list_for_each_entry_safe(job, next, &sched->job_list,
-> > link)
-> > -		list_move_tail(&job->link, &list);
-> > -	spin_unlock_irqrestore(&sched->lock, flags);
-> > -
-> > -	list_for_each_entry(job, &list, link)
-> > -		hrtimer_cancel(&job->timer);
-> > -
-> > -	spin_lock_irqsave(&sched->lock, flags);
-> > -	list_for_each_entry_safe(job, next, &list, link)
-> > -		drm_mock_sched_job_complete(job);
-> > -	spin_unlock_irqrestore(&sched->lock, flags);
-> > -
-> > -	/*
-> > -	 * Free completed jobs and jobs not yet processed by the
-> > DRM scheduler
-> > -	 * free worker.
-> > -	 */
-> > -	spin_lock_irqsave(&sched->lock, flags);
-> > -	list_for_each_entry_safe(job, next, &sched->done_list,
-> > link)
-> > -		list_move_tail(&job->link, &list);
-> > -	spin_unlock_irqrestore(&sched->lock, flags);
-> > -
-> > -	list_for_each_entry_safe(job, next, &list, link)
-> > -		mock_sched_free_job(&job->base);
-> > -
-> > =C2=A0=C2=A0	drm_sched_fini(&sched->base);
-> > =C2=A0 }
-> > =C2=A0=20
->=20
-
+Cheers,
+Miguel
