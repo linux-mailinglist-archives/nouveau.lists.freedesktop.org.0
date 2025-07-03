@@ -2,64 +2,86 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id D7F54AF6654
-	for <lists+nouveau@lfdr.de>; Thu,  3 Jul 2025 01:38:09 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 1574FAF668C
+	for <lists+nouveau@lfdr.de>; Thu,  3 Jul 2025 02:20:16 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 7F7FB10E7AF;
-	Wed,  2 Jul 2025 23:38:08 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 2F25F10E7B9;
+	Thu,  3 Jul 2025 00:20:11 +0000 (UTC)
 Authentication-Results: gabe.freedesktop.org;
-	dkim=pass (1024-bit key; unprotected) header.d=collabora.com header.i=caterina.shablia@collabora.com header.b="hYzqBNtH";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="kcEEzJUp";
 	dkim-atps=neutral
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from sender4-op-o15.zoho.com (sender4-op-o15.zoho.com
- [136.143.188.15])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 9797B10E7AF;
- Wed,  2 Jul 2025 23:38:06 +0000 (UTC)
-ARC-Seal: i=1; a=rsa-sha256; t=1751499475; cv=none; 
- d=zohomail.com; s=zohoarc; 
- b=RJCm9j5ADiVuBjSvoJ5U8x2GDQJDQ0t0IUAgwlJ6/p0Mxswx6P8Q4fA8sHAVJIXbgFCUEhPubqmiL/nLkm4YgAxnDeWCX1vSwnogoHUL/72fNaFSa894/3MafsWVE/2B/pyxZCxwJjgbfeTgihS2t3QsUf/Wx3kI5mNCK2hSwaY=
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=zohomail.com;
- s=zohoarc; t=1751499475;
- h=Content-Transfer-Encoding:Cc:Cc:Date:Date:From:From:In-Reply-To:MIME-Version:Message-ID:References:Subject:Subject:To:To:Message-Id:Reply-To;
- bh=nARL4OFCD2O39FehCxs+cIIAGwgYqKjVMIFNSolyApY=; 
- b=VIdLZLY9Qu2vP+oixfQrvM8OppCSS9fSA+2MRBLadRHdc4mCLJJA5QgfpSHd6XaunmF4tZ2ZryOfNEhzJqJdyMLMlX0KDWbaq4F7NEbt4N3Qn23PkC/VELGBrAZlfRCybC+GIIoQoqmyf9ZZtuwrqtVS8XfNRci3D4UJTRnCmpk=
-ARC-Authentication-Results: i=1; mx.zohomail.com;
- dkim=pass  header.i=collabora.com;
- spf=pass  smtp.mailfrom=caterina.shablia@collabora.com;
- dmarc=pass header.from=<caterina.shablia@collabora.com>
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; t=1751499475; 
- s=zohomail; d=collabora.com; i=caterina.shablia@collabora.com; 
- h=From:From:To:To:Cc:Cc:Subject:Subject:Date:Date:Message-ID:In-Reply-To:References:MIME-Version:Content-Transfer-Encoding:Message-Id:Reply-To;
- bh=nARL4OFCD2O39FehCxs+cIIAGwgYqKjVMIFNSolyApY=;
- b=hYzqBNtHa5hHNHnyN7mZl1lN62Lfvk5wx++nF2XOAk2Xov/EZBk1Vvs8sWWd7Ygu
- ToBEbsA6kGV3S4TKMoUfaPGB6e9NyfmlIKuMJLFe/O6fTZEpR+y+RcjdddZZcZoe4ZN
- RFom+JjCV6nDFcKmQF5u7XcdXN0ukVzUVjaMnbfM=
-Received: by mx.zohomail.com with SMTPS id 1751499472776311.5266964927587;
- Wed, 2 Jul 2025 16:37:52 -0700 (PDT)
-From: Caterina Shablia <caterina.shablia@collabora.com>
-To: Maarten Lankhorst <maarten.lankhorst@linux.intel.com>,
- Maxime Ripard <mripard@kernel.org>,
- Thomas Zimmermann <tzimmermann@suse.de>, David Airlie <airlied@gmail.com>,
- Simona Vetter <simona@ffwll.ch>, Frank Binns <frank.binns@imgtec.com>,
- Matt Coster <matt.coster@imgtec.com>, Lyude Paul <lyude@redhat.com>,
+Received: from mail-pl1-f169.google.com (mail-pl1-f169.google.com
+ [209.85.214.169])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 32CE110E0D6;
+ Thu,  3 Jul 2025 00:20:09 +0000 (UTC)
+Received: by mail-pl1-f169.google.com with SMTP id
+ d9443c01a7336-23649faf69fso45561405ad.0; 
+ Wed, 02 Jul 2025 17:20:09 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=gmail.com; s=20230601; t=1751502008; x=1752106808; darn=lists.freedesktop.org;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=74rKt+STDv8gvziFnmBUH7WzclmqAx6VBVFDifAftQU=;
+ b=kcEEzJUpuqNn/IMfStNj5nel9CzQFBTyWO0xBLJJoZmpY3KLUmKblZhOZSbV1MNjud
+ 70wp1lp7NAU/SSPBSp7Cpo1AuGfWFLWdnnUMv1nz7HFfRpa4A9R+Q5F5zEiFtmnCiUR7
+ zph0JkOWjpe1PF/ImnApH3zy8c9xTqfSoJ2hzlKhmDAODpIn7Hcvq5RYeAn4FxJdQO92
+ +OsWrJwbMKecH3Rg605JeEw9v5ED9zz2L0J2j6rZmPPK7qdKaI/XoPe22Keu3oPJvMGz
+ F8IUXBQZHR+sQ5XgKuA2QUXk01q04oBhKeiy2npzMleIg3wHx6vEg9jcyMPwfmqz+ZJ5
+ 4RHA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1751502008; x=1752106808;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=74rKt+STDv8gvziFnmBUH7WzclmqAx6VBVFDifAftQU=;
+ b=izBGKmQ4+5Ycps8i7nb7W3CkaZzKp0kjVvY9S4OUYy/thBXezvI0u2zJ/lmw3skbvl
+ pqL1Q6xudc24WDz5mNaGWtGaur4KqBc1TBnH2MdWprtVVD0v8yzHKHFZyYBjUFBmS8pF
+ DHTVNqMlanTAMf0/3Q9Wl/RwK6SapDEfk8jKwJbNNXf5BY8BNA5igAQOrq1GDZm1B3kf
+ mhJ18frzsAsv8wQVUcTAISQ7Yi16pDdLZKWCsbkbbOyT73clC0i410c87Q+3F4YtqeL1
+ SE6zawTT9NHDpYR6iG53WIDTk0MmQNVFnprbUXYk6pOREmVzHuzdaqshqjqVcWrmcPw6
+ EcfQ==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCUjePNQWaIOkJ3zN6d3k041ZoQ8Zni2kqoCLf6xe4vKnLylGXTQfdyD5XJuADdKhXdAUNuye91/rVk=@lists.freedesktop.org
+X-Gm-Message-State: AOJu0Ywsok/xYw8aDRTlTvg/bavqDvSjci7NGRcr6yVlwu7exMLvotwf
+ TV8TIa/RHC2oJqeZ71zsBPuwfD1PFL76ltugu0chvmbp4Ud7byeEAGIL
+X-Gm-Gg: ASbGncuqkybXxIl28v+bRbbpZetD3WDMLueCS7xwZ+wtYcCyjEx8dG9Wdb5ahIwGamF
+ POQEx1T5DP8iAQgJK5Qfjmu/SfPuUxFbqkc3D/vaS8mOPsIFUwd/LhP0PVb2yOh4MBqS4J17CcZ
+ k8eBvzJH/dZrfj8JS1KP2CPBrpI/zq+Xfrlh9Aa4kt9ECSbMhifBJprvo4EjCyJ1bTUTubNcASu
+ h9EUQfYAly6eduUzs4Ge7lDbKqk2spJ7L2YymVxp9/8OcBhYdalVynUJYQ9wPrYQ2Gp5zpoTlHg
+ KcojnzpKskNVvkqybvWgSHVJ0w4yukLZzOpbP3PyAgcT9TrFPl110xlqbR0QOA==
+X-Google-Smtp-Source: AGHT+IFreKQK98FHtTd4csmo0TGyK/ccLa13EmASTbcqZiR2H8hgMzgT145WTD5dZuLeULY9C5CM+w==
+X-Received: by 2002:a17:903:1b63:b0:235:e71e:a37b with SMTP id
+ d9443c01a7336-23c6e550151mr82210355ad.34.1751502008326; 
+ Wed, 02 Jul 2025 17:20:08 -0700 (PDT)
+Received: from archie.me ([103.124.138.155]) by smtp.gmail.com with ESMTPSA id
+ d9443c01a7336-23acb2f1814sm135737205ad.57.2025.07.02.17.20.06
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Wed, 02 Jul 2025 17:20:07 -0700 (PDT)
+Received: by archie.me (Postfix, from userid 1000)
+ id 82C5E4206887; Thu, 03 Jul 2025 07:20:04 +0700 (WIB)
+Date: Thu, 3 Jul 2025 07:20:04 +0700
+From: Bagas Sanjaya <bagasdotme@gmail.com>
+To: Alexandre Courbot <acourbot@nvidia.com>,
  Danilo Krummrich <dakr@kernel.org>,
- Boris Brezillon <boris.brezillon@collabora.com>,
- Steven Price <steven.price@arm.com>, Liviu Dudau <liviu.dudau@arm.com>,
- Lucas De Marchi <lucas.demarchi@intel.com>,
- =?UTF-8?q?Thomas=20Hellstr=C3=B6m?= <thomas.hellstrom@linux.intel.com>,
- Rodrigo Vivi <rodrigo.vivi@intel.com>
-Cc: kernel@collabora.com, Caterina Shablia <caterina.shablia@collabora.com>,
- dri-devel@lists.freedesktop.org, linux-kernel@vger.kernel.org,
- nouveau@lists.freedesktop.org, intel-xe@lists.freedesktop.org
-Subject: [PATCH v2 3/7] drm/gpuvm: Pass map arguments through a struct
-Date: Wed,  2 Jul 2025 23:36:05 +0000
-Message-ID: <20250702233621.12990-4-caterina.shablia@collabora.com>
-X-Mailer: git-send-email 2.47.2
-In-Reply-To: <20250702233621.12990-1-caterina.shablia@collabora.com>
-References: <20250702233621.12990-1-caterina.shablia@collabora.com>
+ David Airlie <airlied@gmail.com>, Simona Vetter <simona@ffwll.ch>,
+ Maarten Lankhorst <maarten.lankhorst@linux.intel.com>,
+ Maxime Ripard <mripard@kernel.org>,
+ Thomas Zimmermann <tzimmermann@suse.de>, Jonathan Corbet <corbet@lwn.net>
+Cc: nouveau@lists.freedesktop.org, dri-devel@lists.freedesktop.org,
+ linux-kernel@vger.kernel.org, linux-doc@vger.kernel.org,
+ rust-for-linux@vger.kernel.org, Joel Fernandes <joelagnelf@nvidia.com>
+Subject: Re: [PATCH v3 4/7] Documentation: gpu: nova-core: Document vbios
+ layout
+Message-ID: <aGXMtB7sN1FJOXAL@archie.me>
+References: <20250702-nova-docs-v3-0-f362260813e2@nvidia.com>
+ <20250702-nova-docs-v3-4-f362260813e2@nvidia.com>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+Content-Type: multipart/signed; micalg=pgp-sha512;
+ protocol="application/pgp-signature"; boundary="dcvzE3w8GZbsAc7N"
+Content-Disposition: inline
+In-Reply-To: <20250702-nova-docs-v3-4-f362260813e2@nvidia.com>
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -74,393 +96,369 @@ List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-From: Boris Brezillon <boris.brezillon@collabora.com>
 
-We are about to pass more arguments to drm_gpuvm_sm_map[_ops_create](),
-so, before we do that, let's pass arguments through a struct instead
-of changing each call site every time a new optional argument is added.
+--dcvzE3w8GZbsAc7N
+Content-Type: text/plain; charset=utf-8
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-Signed-off-by: Boris Brezillon <boris.brezillon@collabora.com>
-Signed-off-by: Caterina Shablia <caterina.shablia@collabora.com>
----
- drivers/gpu/drm/drm_gpuvm.c            | 77 +++++++++++---------------
- drivers/gpu/drm/imagination/pvr_vm.c   | 15 +++--
- drivers/gpu/drm/nouveau/nouveau_uvmm.c | 11 ++--
- drivers/gpu/drm/panthor/panthor_mmu.c  | 13 ++++-
- drivers/gpu/drm/xe/xe_vm.c             | 13 ++++-
- include/drm/drm_gpuvm.h                | 34 ++++++++++--
- 6 files changed, 98 insertions(+), 65 deletions(-)
+On Wed, Jul 02, 2025 at 08:00:41PM +0900, Alexandre Courbot wrote:
+> diff --git a/Documentation/gpu/nova/core/vbios.rst b/Documentation/gpu/no=
+va/core/vbios.rst
+> new file mode 100644
+> index 0000000000000000000000000000000000000000..55d7dd4a6658c2a20cc5617f9=
+6b278bc4ec2ba17
+> --- /dev/null
+> +++ b/Documentation/gpu/nova/core/vbios.rst
+> @@ -0,0 +1,180 @@
+> +.. SPDX-License-Identifier: (GPL-2.0+ OR MIT)
+> +
+> +=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
+> +VBIOS
+> +=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
+> +This document describes the layout of the VBIOS image which is a series =
+of concatenated
+> +images in the ROM of the GPU. The VBIOS is mirrored onto the BAR 0 space=
+ and is read
+> +by both Boot ROM firmware (also known as IFR or init-from-rom firmware) =
+on the GPU to
+> +boot strap various microcontrollers (PMU, SEC, GSP) with critical initia=
+lization before
+   bootstrap
+> +the driver loads, as well as by the nova-core driver in the kernel to bo=
+ot the GSP.
+> +
+> +The format of the images in the ROM follow the "BIOS Specification" part=
+ of the
+> +PCI specification, with Nvidia-specific extensions. The ROM images of ty=
+pe FwSec
+> +are the ones that contain Falcon ucode and what we are mainly looking fo=
+r.
+> +
+> +As an example, the following are the different image types that can be f=
+ound in the
+> +VBIOS of an Ampere GA102 GPU which is supported by the nova-core driver.
+> +
+> +- PciAt Image (Type 0x00) - This is the standard PCI BIOS image, whose n=
+ame
+> +  likely comes from the "IBM PC/AT" architecture.
+> +
+> +- EFI Image (Type 0x03) - This is the EFI BIOS image. It contains the UE=
+FI GOP
+> +  driver that is used to display UEFI graphics output.
+> +
+> +- First FwSec Image (Type 0xE0) - The first FwSec image (Secure Firmware)
+> +
+> +- Second FwSec Image (Type 0xE0) - The second FwSec image (Secure Firmwa=
+re)
+> +  contains various different microcodes (also known as an applications) =
+that do
+              various microcodes?
+> +  a range of different functions. The FWSEC ucode is run in heavy-secure=
+ mode and
+> +  typically runs directly on the GSP (it could be running on a different=
+ designated
+> +  processor in future generations but as of Ampere, it is the GSP). This=
+ firmware
+> +  then loads other firmware ucodes onto the PMU and SEC2 microcontroller=
+s for gfw
+> +  initialization after GPU reset and before the driver loads (see devini=
+t.rst).
+> +  The DEVINIT ucode is itself another ucode that is stored in this ROM p=
+artition.
+> +
+> +Once located, the Falcon ucodes have "Application Interfaces" in their d=
+ata
+> +memory (DMEM). For FWSEC, the application interface we use for FWSEC is =
+the
+> +"DMEM mapper" interface which is configured to run the "FRTS" command. T=
+his
+> +command carves out the WPR2 (Write-Protected Region) in VRAM. It then pl=
+aces
+> +important power-management data, called 'FRTS', into this region. The WP=
+R2
+> +region is only accessible to heavy-secure ucode.
+> +
+> +.. note::
+> +   It is not clear why FwSec has 2 different partitions in the ROM, but =
+they both
+> +   are of type 0xE0 and can be identified as such. This could be subject=
+ to change
+> +   in future generations.
+> +
+> +VBIOS ROM Layout
+> +----------------
+> +The VBIOS layout is roughly a series of concatenated images as follows:
+> +(For more explanations of acronyms, see the detailed descriptions in vbi=
+os.rs).
 
-diff --git a/drivers/gpu/drm/drm_gpuvm.c b/drivers/gpu/drm/drm_gpuvm.c
-index e89b932e987c..ae201d45e6b8 100644
---- a/drivers/gpu/drm/drm_gpuvm.c
-+++ b/drivers/gpu/drm/drm_gpuvm.c
-@@ -2054,16 +2054,15 @@ EXPORT_SYMBOL_GPL(drm_gpuva_unmap);
- 
- static int
- op_map_cb(const struct drm_gpuvm_ops *fn, void *priv,
--	  u64 addr, u64 range,
--	  struct drm_gem_object *obj, u64 offset)
-+	  const struct drm_gpuvm_map_req *req)
- {
- 	struct drm_gpuva_op op = {};
- 
- 	op.op = DRM_GPUVA_OP_MAP;
--	op.map.va.addr = addr;
--	op.map.va.range = range;
--	op.map.gem.obj = obj;
--	op.map.gem.offset = offset;
-+	op.map.va.addr = req->va.addr;
-+	op.map.va.range = req->va.range;
-+	op.map.gem.obj = req->gem.obj;
-+	op.map.gem.offset = req->gem.offset;
- 
- 	return fn->sm_step_map(&op, priv);
- }
-@@ -2102,17 +2101,16 @@ op_unmap_cb(const struct drm_gpuvm_ops *fn, void *priv,
- static int
- __drm_gpuvm_sm_map(struct drm_gpuvm *gpuvm,
- 		   const struct drm_gpuvm_ops *ops, void *priv,
--		   u64 req_addr, u64 req_range,
--		   struct drm_gem_object *req_obj, u64 req_offset)
-+		   const struct drm_gpuvm_map_req *req)
- {
- 	struct drm_gpuva *va, *next;
--	u64 req_end = req_addr + req_range;
-+	u64 req_end = req->va.addr + req->va.range;
- 	int ret;
- 
--	if (unlikely(!drm_gpuvm_range_valid(gpuvm, req_addr, req_range)))
-+	if (unlikely(!drm_gpuvm_range_valid(gpuvm, req->va.addr, req->va.range)))
- 		return -EINVAL;
- 
--	drm_gpuvm_for_each_va_range_safe(va, next, gpuvm, req_addr, req_end) {
-+	drm_gpuvm_for_each_va_range_safe(va, next, gpuvm, req->va.addr, req_end) {
- 		struct drm_gem_object *obj = va->gem.obj;
- 		u64 offset = va->gem.offset;
- 		u64 addr = va->va.addr;
-@@ -2120,9 +2118,9 @@ __drm_gpuvm_sm_map(struct drm_gpuvm *gpuvm,
- 		u64 end = addr + range;
- 		bool merge = !!va->gem.obj;
- 
--		if (addr == req_addr) {
--			merge &= obj == req_obj &&
--				 offset == req_offset;
-+		if (addr == req->va.addr) {
-+			merge &= obj == req->gem.obj &&
-+				 offset == req->gem.offset;
- 
- 			if (end == req_end) {
- 				ret = op_unmap_cb(ops, priv, va, merge);
-@@ -2141,9 +2139,9 @@ __drm_gpuvm_sm_map(struct drm_gpuvm *gpuvm,
- 			if (end > req_end) {
- 				struct drm_gpuva_op_map n = {
- 					.va.addr = req_end,
--					.va.range = range - req_range,
-+					.va.range = range - req->va.range,
- 					.gem.obj = obj,
--					.gem.offset = offset + req_range,
-+					.gem.offset = offset + req->va.range,
- 				};
- 				struct drm_gpuva_op_unmap u = {
- 					.va = va,
-@@ -2155,8 +2153,8 @@ __drm_gpuvm_sm_map(struct drm_gpuvm *gpuvm,
- 					return ret;
- 				break;
- 			}
--		} else if (addr < req_addr) {
--			u64 ls_range = req_addr - addr;
-+		} else if (addr < req->va.addr) {
-+			u64 ls_range = req->va.addr - addr;
- 			struct drm_gpuva_op_map p = {
- 				.va.addr = addr,
- 				.va.range = ls_range,
-@@ -2165,8 +2163,8 @@ __drm_gpuvm_sm_map(struct drm_gpuvm *gpuvm,
- 			};
- 			struct drm_gpuva_op_unmap u = { .va = va };
- 
--			merge &= obj == req_obj &&
--				 offset + ls_range == req_offset;
-+			merge &= obj == req->gem.obj &&
-+				 offset + ls_range == req->gem.offset;
- 			u.keep = merge;
- 
- 			if (end == req_end) {
-@@ -2189,7 +2187,7 @@ __drm_gpuvm_sm_map(struct drm_gpuvm *gpuvm,
- 					.va.range = end - req_end,
- 					.gem.obj = obj,
- 					.gem.offset = offset + ls_range +
--						      req_range,
-+						      req->va.range,
- 				};
- 
- 				ret = op_remap_cb(ops, priv, &p, &n, &u);
-@@ -2197,10 +2195,10 @@ __drm_gpuvm_sm_map(struct drm_gpuvm *gpuvm,
- 					return ret;
- 				break;
- 			}
--		} else if (addr > req_addr) {
--			merge &= obj == req_obj &&
--				 offset == req_offset +
--					   (addr - req_addr);
-+		} else if (addr > req->va.addr) {
-+			merge &= obj == req->gem.obj &&
-+				 offset == req->gem.offset +
-+					   (addr - req->va.addr);
- 
- 			if (end == req_end) {
- 				ret = op_unmap_cb(ops, priv, va, merge);
-@@ -2228,6 +2226,7 @@ __drm_gpuvm_sm_map(struct drm_gpuvm *gpuvm,
- 					.keep = merge,
- 				};
- 
-+
- 				ret = op_remap_cb(ops, priv, NULL, &n, &u);
- 				if (ret)
- 					return ret;
-@@ -2236,9 +2235,7 @@ __drm_gpuvm_sm_map(struct drm_gpuvm *gpuvm,
- 		}
- 	}
- 
--	return op_map_cb(ops, priv,
--			 req_addr, req_range,
--			 req_obj, req_offset);
-+	return op_map_cb(ops, priv, req);
- }
- 
- static int
-@@ -2302,11 +2299,8 @@ __drm_gpuvm_sm_unmap(struct drm_gpuvm *gpuvm,
- /**
-  * drm_gpuvm_sm_map() - creates the &drm_gpuva_op split/merge steps
-  * @gpuvm: the &drm_gpuvm representing the GPU VA space
-- * @req_addr: the start address of the new mapping
-- * @req_range: the range of the new mapping
-- * @req_obj: the &drm_gem_object to map
-- * @req_offset: the offset within the &drm_gem_object
-  * @priv: pointer to a driver private data structure
-+ * @req: map request information
-  *
-  * This function iterates the given range of the GPU VA space. It utilizes the
-  * &drm_gpuvm_ops to call back into the driver providing the split and merge
-@@ -2333,8 +2327,7 @@ __drm_gpuvm_sm_unmap(struct drm_gpuvm *gpuvm,
-  */
- int
- drm_gpuvm_sm_map(struct drm_gpuvm *gpuvm, void *priv,
--		 u64 req_addr, u64 req_range,
--		 struct drm_gem_object *req_obj, u64 req_offset)
-+		 const struct drm_gpuvm_map_req *req)
- {
- 	const struct drm_gpuvm_ops *ops = gpuvm->ops;
- 
-@@ -2343,9 +2336,7 @@ drm_gpuvm_sm_map(struct drm_gpuvm *gpuvm, void *priv,
- 		       ops->sm_step_unmap)))
- 		return -EINVAL;
- 
--	return __drm_gpuvm_sm_map(gpuvm, ops, priv,
--				  req_addr, req_range,
--				  req_obj, req_offset);
-+	return __drm_gpuvm_sm_map(gpuvm, ops, priv, req);
- }
- EXPORT_SYMBOL_GPL(drm_gpuvm_sm_map);
- 
-@@ -2485,10 +2476,7 @@ static const struct drm_gpuvm_ops gpuvm_list_ops = {
- /**
-  * drm_gpuvm_sm_map_ops_create() - creates the &drm_gpuva_ops to split and merge
-  * @gpuvm: the &drm_gpuvm representing the GPU VA space
-- * @req_addr: the start address of the new mapping
-- * @req_range: the range of the new mapping
-- * @req_obj: the &drm_gem_object to map
-- * @req_offset: the offset within the &drm_gem_object
-+ * @req: map request arguments
-  *
-  * This function creates a list of operations to perform splitting and merging
-  * of existent mapping(s) with the newly requested one.
-@@ -2516,8 +2504,7 @@ static const struct drm_gpuvm_ops gpuvm_list_ops = {
-  */
- struct drm_gpuva_ops *
- drm_gpuvm_sm_map_ops_create(struct drm_gpuvm *gpuvm,
--			    u64 req_addr, u64 req_range,
--			    struct drm_gem_object *req_obj, u64 req_offset)
-+			    const struct drm_gpuvm_map_req *req)
- {
- 	struct drm_gpuva_ops *ops;
- 	struct {
-@@ -2535,9 +2522,7 @@ drm_gpuvm_sm_map_ops_create(struct drm_gpuvm *gpuvm,
- 	args.vm = gpuvm;
- 	args.ops = ops;
- 
--	ret = __drm_gpuvm_sm_map(gpuvm, &gpuvm_list_ops, &args,
--				 req_addr, req_range,
--				 req_obj, req_offset);
-+	ret = __drm_gpuvm_sm_map(gpuvm, &gpuvm_list_ops, &args, req);
- 	if (ret)
- 		goto err_free_ops;
- 
-diff --git a/drivers/gpu/drm/imagination/pvr_vm.c b/drivers/gpu/drm/imagination/pvr_vm.c
-index 2896fa7501b1..abfdcd279363 100644
---- a/drivers/gpu/drm/imagination/pvr_vm.c
-+++ b/drivers/gpu/drm/imagination/pvr_vm.c
-@@ -185,12 +185,17 @@ struct pvr_vm_bind_op {
- static int pvr_vm_bind_op_exec(struct pvr_vm_bind_op *bind_op)
- {
- 	switch (bind_op->type) {
--	case PVR_VM_BIND_TYPE_MAP:
-+	case PVR_VM_BIND_TYPE_MAP: {
-+		const struct drm_gpuvm_map_req map_req = {
-+			.va.addr = bind_op->device_addr,
-+			.va.range = bind_op->size,
-+			.gem.obj = gem_from_pvr_gem(bind_op->pvr_obj),
-+			.gem.offset = bind_op->offset,
-+		};
-+
- 		return drm_gpuvm_sm_map(&bind_op->vm_ctx->gpuvm_mgr,
--					bind_op, bind_op->device_addr,
--					bind_op->size,
--					gem_from_pvr_gem(bind_op->pvr_obj),
--					bind_op->offset);
-+					bind_op, &map_req);
-+	}
- 
- 	case PVR_VM_BIND_TYPE_UNMAP:
- 		return drm_gpuvm_sm_unmap(&bind_op->vm_ctx->gpuvm_mgr,
-diff --git a/drivers/gpu/drm/nouveau/nouveau_uvmm.c b/drivers/gpu/drm/nouveau/nouveau_uvmm.c
-index 48f105239f42..b481700be666 100644
---- a/drivers/gpu/drm/nouveau/nouveau_uvmm.c
-+++ b/drivers/gpu/drm/nouveau/nouveau_uvmm.c
-@@ -1276,6 +1276,12 @@ nouveau_uvmm_bind_job_submit(struct nouveau_job *job,
- 			break;
- 		case OP_MAP: {
- 			struct nouveau_uvma_region *reg;
-+			struct drm_gpuvm_map_req map_req = {
-+				.va.addr = op->va.addr,
-+				.va.range = op->va.range,
-+				.gem.obj = op->gem.obj,
-+				.gem.offset = op->gem.offset,
-+			};
- 
- 			reg = nouveau_uvma_region_find_first(uvmm,
- 							     op->va.addr,
-@@ -1301,10 +1307,7 @@ nouveau_uvmm_bind_job_submit(struct nouveau_job *job,
- 			}
- 
- 			op->ops = drm_gpuvm_sm_map_ops_create(&uvmm->base,
--							      op->va.addr,
--							      op->va.range,
--							      op->gem.obj,
--							      op->gem.offset);
-+							      &map_req);
- 			if (IS_ERR(op->ops)) {
- 				ret = PTR_ERR(op->ops);
- 				goto unwind_continue;
-diff --git a/drivers/gpu/drm/panthor/panthor_mmu.c b/drivers/gpu/drm/panthor/panthor_mmu.c
-index 1e58948587a9..a7852485e638 100644
---- a/drivers/gpu/drm/panthor/panthor_mmu.c
-+++ b/drivers/gpu/drm/panthor/panthor_mmu.c
-@@ -2236,15 +2236,22 @@ panthor_vm_exec_op(struct panthor_vm *vm, struct panthor_vm_op_ctx *op,
- 		goto out;
- 
- 	switch (op_type) {
--	case DRM_PANTHOR_VM_BIND_OP_TYPE_MAP:
-+	case DRM_PANTHOR_VM_BIND_OP_TYPE_MAP: {
-+		const struct drm_gpuvm_map_req map_req = {
-+			.va.addr = op->va.addr,
-+			.va.range = op->va.range,
-+			.gem.obj = op->map.vm_bo->obj,
-+			.gem.offset = op->map.bo_offset,
-+		};
-+
- 		if (vm->unusable) {
- 			ret = -EINVAL;
- 			break;
- 		}
- 
--		ret = drm_gpuvm_sm_map(&vm->base, vm, op->va.addr, op->va.range,
--				       op->map.vm_bo->obj, op->map.bo_offset);
-+		ret = drm_gpuvm_sm_map(&vm->base, vm, &map_req);
- 		break;
-+	}
- 
- 	case DRM_PANTHOR_VM_BIND_OP_TYPE_UNMAP:
- 		ret = drm_gpuvm_sm_unmap(&vm->base, vm, op->va.addr, op->va.range);
-diff --git a/drivers/gpu/drm/xe/xe_vm.c b/drivers/gpu/drm/xe/xe_vm.c
-index 861577746929..80bc741bdb6b 100644
---- a/drivers/gpu/drm/xe/xe_vm.c
-+++ b/drivers/gpu/drm/xe/xe_vm.c
-@@ -2246,10 +2246,17 @@ vm_bind_ioctl_ops_create(struct xe_vm *vm, struct xe_bo *bo,
- 
- 	switch (operation) {
- 	case DRM_XE_VM_BIND_OP_MAP:
--	case DRM_XE_VM_BIND_OP_MAP_USERPTR:
--		ops = drm_gpuvm_sm_map_ops_create(&vm->gpuvm, addr, range,
--						  obj, bo_offset_or_userptr);
-+	case DRM_XE_VM_BIND_OP_MAP_USERPTR: {
-+		struct drm_gpuvm_map_req map_req = {
-+			.va.addr = addr,
-+			.va.range = range,
-+			.gem.obj = obj,
-+			.gem.offset = bo_offset_or_userptr,
-+		};
-+
-+		ops = drm_gpuvm_sm_map_ops_create(&vm->gpuvm, &map_req);
- 		break;
-+	}
- 	case DRM_XE_VM_BIND_OP_UNMAP:
- 		ops = drm_gpuvm_sm_unmap_ops_create(&vm->gpuvm, addr, range);
- 		break;
-diff --git a/include/drm/drm_gpuvm.h b/include/drm/drm_gpuvm.h
-index 6fdf2aff3e90..a6e6c33fc10b 100644
---- a/include/drm/drm_gpuvm.h
-+++ b/include/drm/drm_gpuvm.h
-@@ -1049,10 +1049,37 @@ struct drm_gpuva_ops {
-  */
- #define drm_gpuva_next_op(op) list_next_entry(op, entry)
- 
-+/**
-+ * struct drm_gpuvm_map_req - arguments passed to drm_gpuvm_sm_map[_ops_create]()
-+ */
-+struct drm_gpuvm_map_req {
-+	/** @va: virtual address related fields */
-+	struct {
-+		/** @va.addr: start of the virtual address range to map to */
-+		u64 addr;
-+
-+		/** @va.size: size of the virtual address range to map to */
-+		u64 range;
-+	} va;
-+
-+	/** @gem: GEM related fields */
-+	struct {
-+		/**
-+		 * @obj: GEM object to map.
-+		 *
-+		 * Can be NULL if the virtual range is not backed by a GEM object.
-+		 */
-+		struct drm_gem_object *obj;
-+
-+		/** @offset: offset in the GEM */
-+		u64 offset;
-+	} gem;
-+};
-+
- struct drm_gpuva_ops *
- drm_gpuvm_sm_map_ops_create(struct drm_gpuvm *gpuvm,
--			    u64 addr, u64 range,
--			    struct drm_gem_object *obj, u64 offset);
-+			    const struct drm_gpuvm_map_req *req);
-+
- struct drm_gpuva_ops *
- drm_gpuvm_sm_unmap_ops_create(struct drm_gpuvm *gpuvm,
- 			      u64 addr, u64 range);
-@@ -1198,8 +1225,7 @@ struct drm_gpuvm_ops {
- };
- 
- int drm_gpuvm_sm_map(struct drm_gpuvm *gpuvm, void *priv,
--		     u64 addr, u64 range,
--		     struct drm_gem_object *obj, u64 offset);
-+		     const struct drm_gpuvm_map_req *req);
- 
- int drm_gpuvm_sm_unmap(struct drm_gpuvm *gpuvm, void *priv,
- 		       u64 addr, u64 range);
--- 
-2.47.2
+Looks OK, but...
 
+> +
+> +.. note::
+> +   This diagram is created based on an GA-102 Ampere GPU as an example a=
+nd could
+> +   vary for future or other GPUs.
+> +
+> +Here is a block diagram of the VBIOS layout::
+
+Above sentence (but not the note directive) is redundant, though.
+
+> +
+> +    +-------------------------------------------------------------------=
+---------+
+> +    | VBIOS (Starting at ROM_OFFSET: 0x300000)                          =
+         |
+> +    +-------------------------------------------------------------------=
+---------+
+> +    | +-----------------------------------------------+                 =
+         |
+> +    | | PciAt Image (Type 0x00)                       |                 =
+         |
+> +    | +-----------------------------------------------+                 =
+         |
+> +    | | +-------------------+                         |                 =
+         |
+> +    | | | ROM Header        |                         |                 =
+         |
+> +    | | | (Signature 0xAA55)|                         |                 =
+         |
+> +    | | +-------------------+                         |                 =
+         |
+> +    | |         | rom header's pci_data_struct_offset |                 =
+         |
+> +    | |         | points to the PCIR structure        |                 =
+         |
+> +    | |         V                                     |                 =
+         |
+> +    | | +-------------------+                         |                 =
+         |
+> +    | | | PCIR Structure    |                         |                 =
+         |
+> +    | | | (Signature "PCIR")|                         |                 =
+         |
+> +    | | | last_image: 0x80  |                         |                 =
+         |
+> +    | | | image_len: size   |                         |                 =
+         |
+> +    | | | in 512-byte units |                         |                 =
+         |
+> +    | | +-------------------+                         |                 =
+         |
+> +    | |         |                                     |                 =
+         |
+> +    | |         | NPDE immediately follows PCIR       |                 =
+         |
+> +    | |         V                                     |                 =
+         |
+> +    | | +-------------------+                         |                 =
+         |
+> +    | | | NPDE Structure    |                         |                 =
+         |
+> +    | | | (Signature "NPDE")|                         |                 =
+         |
+> +    | | | last_image: 0x00  |                         |                 =
+         |
+> +    | | +-------------------+                         |                 =
+         |
+> +    | |                                               |                 =
+         |
+> +    | | +-------------------+                         |                 =
+         |
+> +    | | | BIT Header        | (Signature scanning     |                 =
+         |
+> +    | | | (Signature "BIT") |  provides the location  |                 =
+         |
+> +    | | +-------------------+  of the BIT table)      |                 =
+         |
+> +    | |         | header is                           |                 =
+         |
+> +    | |         | followed by a table of tokens       |                 =
+         |
+> +    | |         V one of which is for falcon data.    |                 =
+         |
+> +    | | +-------------------+                         |                 =
+         |
+> +    | | | BIT Tokens        |                         |                 =
+         |
+> +    | | |  ______________   |                         |                 =
+         |
+> +    | | | | Falcon Data |   |                         |                 =
+         |
+> +    | | | | Token (0x70)|---+------------>------------+--+              =
+         |
+> +    | | | +-------------+   |  falcon_data_ptr()      |  |              =
+         |
+> +    | | +-------------------+                         |  V              =
+         |
+> +    | +-----------------------------------------------+  |              =
+         |
+> +    |              (no gap between images)               |              =
+         |
+> +    | +-----------------------------------------------+  |              =
+         |
+> +    | | EFI Image (Type 0x03)                         |  |              =
+         |
+> +    | +-----------------------------------------------+  |              =
+         |
+> +    | | Contains the UEFI GOP driver (Graphics Output)|  |              =
+         |
+> +    | | +-------------------+                         |  |              =
+         |
+> +    | | | ROM Header        |                         |  |              =
+         |
+> +    | | +-------------------+                         |  |              =
+         |
+> +    | | | PCIR Structure    |                         |  |              =
+         |
+> +    | | +-------------------+                         |  |              =
+         |
+> +    | | | NPDE Structure    |                         |  |              =
+         |
+> +    | | +-------------------+                         |  |              =
+         |
+> +    | | | Image data        |                         |  |              =
+         |
+> +    | | +-------------------+                         |  |              =
+         |
+> +    | +-----------------------------------------------+  |              =
+         |
+> +    |              (no gap between images)               |              =
+         |
+> +    | +-----------------------------------------------+  |              =
+         |
+> +    | | First FwSec Image (Type 0xE0)                 |  |              =
+         |
+> +    | +-----------------------------------------------+  |              =
+         |
+> +    | | +-------------------+                         |  |              =
+         |
+> +    | | | ROM Header        |                         |  |              =
+         |
+> +    | | +-------------------+                         |  |              =
+         |
+> +    | | | PCIR Structure    |                         |  |              =
+         |
+> +    | | +-------------------+                         |  |              =
+         |
+> +    | | | NPDE Structure    |                         |  |              =
+         |
+> +    | | +-------------------+                         |  |              =
+         |
+> +    | | | Image data        |                         |  |              =
+         |
+> +    | | +-------------------+                         |  |              =
+         |
+> +    | +-----------------------------------------------+  |              =
+         |
+> +    |              (no gap between images)               |              =
+         |
+> +    | +-----------------------------------------------+  |              =
+         |
+> +    | | Second FwSec Image (Type 0xE0)                |  |              =
+         |
+> +    | +-----------------------------------------------+  |              =
+         |
+> +    | | +-------------------+                         |  |              =
+         |
+> +    | | | ROM Header        |                         |  |              =
+         |
+> +    | | +-------------------+                         |  |              =
+         |
+> +    | | | PCIR Structure    |                         |  |              =
+         |
+> +    | | +-------------------+                         |  |              =
+         |
+> +    | | | NPDE Structure    |                         |  |              =
+         |
+> +    | | +-------------------+                         |  |              =
+         |
+> +    | |                                               |  |              =
+         |
+> +    | | +-------------------+                         |  |              =
+         |
+> +    | | | PMU Lookup Table  | <- falcon_data_offset <----+              =
+         |
+> +    | | | +-------------+   |    pmu_lookup_table     |                 =
+         |
+> +    | | | | Entry 0x85  |   |                         |                 =
+         |
+> +    | | | | FWSEC_PROD  |   |                         |                 =
+         |
+> +    | | | +-------------+   |                         |                 =
+         |
+> +    | | +-------------------+                         |                 =
+         |
+> +    | |         |                                     |                 =
+         |
+> +    | |         | points to                           |                 =
+         |
+> +    | |         V                                     |                 =
+         |
+> +    | | +-------------------+                         |                 =
+         |
+> +    | | | FalconUCodeDescV3 | <- falcon_ucode_offset  |                 =
+         |
+> +    | | | (FWSEC Firmware)  |    fwsec_header()       |                 =
+         |
+> +    | | +-------------------+                         |                 =
+         |
+> +    | |         |   immediately followed  by...       |                 =
+         |
+> +    | |         V                                     |                 =
+         |
+> +    | | +----------------------------+                |                 =
+         |
+> +    | | | Signatures + FWSEC Ucode   |                |                 =
+         |
+> +    | | | fwsec_sigs(), fwsec_ucode()|                |                 =
+         |
+> +    | | +----------------------------+                |                 =
+         |
+> +    | +-----------------------------------------------+                 =
+         |
+> +    |                                                                   =
+         |
+> +    +-------------------------------------------------------------------=
+---------+
+> +
+> +Falcon data Lookup
+> +------------------
+> +A key part of the VBIOS extraction code (vbios.rs) is to find the locati=
+on of the
+> +Falcon data in the VBIOS which contains the PMU lookup table. This looku=
+p table is
+> +used to find the required Falcon ucode based on an application ID.
+> +
+> +The location of the PMU lookup table is found by scanning the BIT (`BIOS=
+ Information Table`_)
+> +tokens for a token with the id `BIT_TOKEN_ID_FALCON_DATA` (0x70) which i=
+ndicates the
+> +offset of the same from the start of the VBIOS image. Unfortunately, the=
+ offset
+> +does not account for the EFI image located between the PciAt and FwSec i=
+mages.
+> +The `vbios.rs` code compensates for this with appropriate arithmetic.
+> +
+> +.. _`BIOS Information Table`: https://download.nvidia.com/open-gpu-doc/B=
+IOS-Information-Table/1/BIOS-Information-Table.html
+
+The rest looks good.
+
+Thanks.
+
+--=20
+An old man doll... just what I always wanted! - Clara
+
+--dcvzE3w8GZbsAc7N
+Content-Type: application/pgp-signature; name=signature.asc
+
+-----BEGIN PGP SIGNATURE-----
+
+iHUEABYKAB0WIQSSYQ6Cy7oyFNCHrUH2uYlJVVFOowUCaGXMrwAKCRD2uYlJVVFO
+o/gJAP9jlcd/JgjSS+ZtfVD1Ol3IKve2PGOU8NWjOZb3riPbKAD/fKtPOiNkS/Xk
+V8jmP5oeb2MVjpif7ckRWNLTom80Fw0=
+=9m7c
+-----END PGP SIGNATURE-----
+
+--dcvzE3w8GZbsAc7N--
