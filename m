@@ -2,160 +2,92 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id A79B5AF8295
-	for <lists+nouveau@lfdr.de>; Thu,  3 Jul 2025 23:26:14 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id D3392AF8322
+	for <lists+nouveau@lfdr.de>; Fri,  4 Jul 2025 00:12:03 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 5DD4710E8F3;
-	Thu,  3 Jul 2025 21:26:12 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 9B13910E1E1;
+	Thu,  3 Jul 2025 22:12:01 +0000 (UTC)
 Authentication-Results: gabe.freedesktop.org;
-	dkim=pass (2048-bit key; unprotected) header.d=Nvidia.com header.i=@Nvidia.com header.b="Nrgm9vf/";
+	dkim=fail reason="signature verification failed" (1024-bit key; unprotected) header.d=lunn.ch header.i=@lunn.ch header.b="Nas0qbwd";
 	dkim-atps=neutral
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from NAM04-BN8-obe.outbound.protection.outlook.com
- (mail-bn8nam04on2088.outbound.protection.outlook.com [40.107.100.88])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 4950510E8F2;
- Thu,  3 Jul 2025 21:26:11 +0000 (UTC)
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=Phj6zIwrU0jp/ot4dAo4pso0xJlNzRyaaI6zFuw+ZzuEzi5CuggXi5UDjws6Yd2qLp9Jht87jcABWLpo2uzY11O5qIpm2UJzUg0ZbxGc2mO0pR79/JUvU7B1/oJHKdjIDimLaG6OBTyFCVsia6nQNnf/Brcv7nN7+uTJylT1N4cSgWOFQNIs0DMAlKA2CAIho7sWUvt2RsUbGUAMHUjdfG9MV0+9AKO6HKxpbzgvRCNqyd0sn5aaO7bFtZYdpb4hBpLgNOskxxn6L2RB36tt+CafUbsQ03a/RdcvJGK05+G8LFf43KQ6YZVdS0ungIFptuw+uOxoHVB0aU/NeALMWQ==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=9XL2dzyOQNE1u4pidVT/VgQAfNVrSuREaj2WR6N2g5g=;
- b=aChoTaVNwnd63DhArv6MEGeqVgGGxpHsWT4XUakj+QQMHjah6skgSi802Hmu/83uVg0xg3MjZR9+d5aZe0kip2uzJJG9ss/eCChgV50uRCcQ6M1NT1QMoadwosaWPQtPo5u6PI2EBqbl3FhmXkXbR3Ru+jVwBLFKvHTgHeKt7Qm9FmgwjSzoP1d5dabSlk1SMoFh/cYV1WJpy+MT987BXcGrLhs8eQUbJZvckCAzm1vB8M5UBVrSsytHJkR6N5G8W9kIrlnOrW+a6D1U+v5XiDCiD6DKXYnHNLQy51COJNcUKMSxhoLDUFW5cEgJDa8BYKBUsIwTkw+lNBf+n06/EQ==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=nvidia.com; dmarc=pass action=none header.from=nvidia.com;
- dkim=pass header.d=nvidia.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=Nvidia.com;
- s=selector2;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=9XL2dzyOQNE1u4pidVT/VgQAfNVrSuREaj2WR6N2g5g=;
- b=Nrgm9vf/ZaMxgXvGaMTgQBjTG+qQ+Yjg5e9rwNpcNZhJKaU3k8SR0lDwTqH4P56KNXcRMNrJualYN8DuZHRl6KhKzIZ3m/HN/iE3Y4Dl3rOiTbcw6m3hPJTez3NDM2GNAz44nRe1USSJ6ZDmNMrLEeRx/zwjAiL6MN70lb+ZluFV124jvC9o58Eacr96AO19bdtB4RbKHeuYe/HfUR35AoP7pwcgIHP+uTjHvg3uDdZn42r1VV8IgDAyXaeS+7TKXxT+KfkVeQdFvbabTzlwneSS3/nHAKhcBRrF4dmnFU4656jtVA+xkSpLpDsQ3acaf2APLjQrNRteZj5T/4Fc4A==
-Received: from CY5PR12MB6526.namprd12.prod.outlook.com (2603:10b6:930:31::20)
- by SN7PR12MB7451.namprd12.prod.outlook.com (2603:10b6:806:29b::20)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.8901.20; Thu, 3 Jul
- 2025 21:26:07 +0000
-Received: from CY5PR12MB6526.namprd12.prod.outlook.com
- ([fe80::e420:4e37:166:9c56]) by CY5PR12MB6526.namprd12.prod.outlook.com
- ([fe80::e420:4e37:166:9c56%5]) with mapi id 15.20.8901.018; Thu, 3 Jul 2025
- 21:26:07 +0000
-From: Timur Tabi <ttabi@nvidia.com>
-To: "dri-devel@lists.freedesktop.org" <dri-devel@lists.freedesktop.org>,
- "nouveau@lists.freedesktop.org" <nouveau@lists.freedesktop.org>,
- "dev@aaront.org" <dev@aaront.org>, "lyude@redhat.com" <lyude@redhat.com>,
- "dakr@kernel.org" <dakr@kernel.org>, "airlied@gmail.com" <airlied@gmail.com>, 
- "simona@ffwll.ch" <simona@ffwll.ch>
-CC: "stable@vger.kernel.org" <stable@vger.kernel.org>,
- "linux-kernel@vger.kernel.org" <linux-kernel@vger.kernel.org>
-Subject: Re: [PATCH] drm/nouveau: Do not fail module init on debugfs errors
-Thread-Topic: [PATCH] drm/nouveau: Do not fail module init on debugfs errors
-Thread-Index: AQHb7GBFJS/Gmv+DQUSsLMK76N/EbrQg6WyA
-Date: Thu, 3 Jul 2025 21:26:07 +0000
-Message-ID: <d87acf2378c5c983982591ef9b9a3a636d707922.camel@nvidia.com>
-References: <20250703211949.9916-1-dev@aaront.org>
-In-Reply-To: <20250703211949.9916-1-dev@aaront.org>
-Accept-Language: en-US
-Content-Language: en-US
-X-MS-Has-Attach: 
-X-MS-TNEF-Correlator: 
-user-agent: Evolution 3.52.3-0ubuntu1 
-authentication-results: dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=nvidia.com;
-x-ms-publictraffictype: Email
-x-ms-traffictypediagnostic: CY5PR12MB6526:EE_|SN7PR12MB7451:EE_
-x-ms-office365-filtering-correlation-id: 0fbfd325-46d7-47a1-01c7-08ddba783933
-x-ms-exchange-senderadcheck: 1
-x-ms-exchange-antispam-relay: 0
-x-microsoft-antispam: BCL:0; ARA:13230040|366016|376014|1800799024|38070700018;
-x-microsoft-antispam-message-info: =?utf-8?B?S2ZZeHo5VldpalpjUUFrVzdVWjhtY0Z4NzRKS21FZ0FzRUowWGl5TE5Ma3px?=
- =?utf-8?B?cjN4QjcrYTcydy9qeUJyK3NWQUVFdkk4aG5KcWRDREdZVEpLWSsvbVB1QTlK?=
- =?utf-8?B?a1ZHanVEbkZVYlV2ZHJBQWdnbWRYdklldnBpdFlKbUhiTWFqeVU1UURrUDNt?=
- =?utf-8?B?TlMvbHNhMFdUU3FmSGc2SmVKSGdkaS9yM3hrUFl2K1RraHhGbDZxY0JQb0hV?=
- =?utf-8?B?bEFzMnpBbnlxTFpxOTBpWUxwY2FJd0NSdnRUaFFvdEtSbmFRR3BFcFVJN2xs?=
- =?utf-8?B?YXVSU1M2V2txQnlLQ3VGbnBEMG9GMGt0SVJyUSt2cTB2R01ZeUswblRuUGdr?=
- =?utf-8?B?cElZMUhiWm9nZlJLTzNPazhBc1RuRzJ0Rld6L0xvbEZnYnhReDRpbG05OGxr?=
- =?utf-8?B?S2dOTmlRMm1xakdrOFVyaXJ1eUpsc2tRR1J0U01QbDlaWjZoMERadmNRTi9C?=
- =?utf-8?B?Nm5HS0p0V0Q5UlcwWWU3YUEwbUsvSXNDa21FTnBrbzhKZWp5djBUUTNvSndy?=
- =?utf-8?B?S2tXamY1VFpSVlJ4Qi9oeWJnczRZV3FNcWRUWFhONmpwRTV5WG9VYTZLYkRW?=
- =?utf-8?B?cUFlRzkxMG8rM1I1VW1QZkhUS0R4SHp2bjlCL2M0T21zLzZjdm5pS1ZvZ0p3?=
- =?utf-8?B?TVhFTGZEZ2w5TkJhbUxoU29aTFcyVE1tQzhvMXE1azZKbHhla2wvU3AxOWFR?=
- =?utf-8?B?T0V2TVRacmYvVjhXS2ErV2QyMlRRYkMxZG1Kc1NVK3dPR0lWTHpnbStoeWh1?=
- =?utf-8?B?ZUEzeVVqRWlyNnFSbW1RaVRBOGgxNEdlSjdsYmhqNGJjbjRKSjNPY2NzaEY2?=
- =?utf-8?B?ZDJ3Rk9KdjFRTHJoNlJ3ZDVPLzJ2c1g4Z0dhQU5lbENWWkVzcWdzY3lweDEw?=
- =?utf-8?B?Mis2NTQrU2lhelU1dm5TUFZjUnVBNTdVTjFLS05ETWg4ZDR0MDI1R0dzWnND?=
- =?utf-8?B?L1BXZlBvS2RweDEvNmJ6VW5DSXc5S2NNWFc2bGpIWVJvKzJEdlA2eStZSzZR?=
- =?utf-8?B?VDJ2WE5ZbHh3cUxjM2FVbE12ZTljM3lCaENnOHVQc3VvUGNwWUYyeTFnTDkv?=
- =?utf-8?B?dEtRNHEzeWE5bUJMaStYTVY5cE5RNkNMRWk5WTBDY0FNL2pzSnppN3Ryamwv?=
- =?utf-8?B?MTR1WlNCaXZjQzJFRStHcUdONzJscXFhWkZ3NVFRUVdSaXRmZmNXSGpRTGVz?=
- =?utf-8?B?dzFwR0FIbXAzUEdzVWdSbEtBelA5NzFtRnp6R05jVExkc29HbWdvN2Y5Mmlp?=
- =?utf-8?B?L1U4SUJZMFV6V1RKSDV2bXl3UnVjakpmc2xKZWlkSEtoNUNCaDhDYTd5TEp3?=
- =?utf-8?B?azRneDl3aERnZWtPWTNCTnlkU2RRRXVFeGhQSXp5VmhPQ3k4RXNFUXZqMm95?=
- =?utf-8?B?SkR4cnBoK3gyM09IdEJUZm9Ea3VlNHZpK1oxNHVkV2kyMDV5YVRDdjBIMVNW?=
- =?utf-8?B?c0pGekhhT1ZYUEwwaDVFZC9GajFnd0dMNFUyNi9RbEY2Rm5BQTJ0eVZxWjgz?=
- =?utf-8?B?QU5XTlE0MEVkejRzZXNNZkhvcVd6VkcremJxVlF1cDYrMkZJaEhqTFM3Yzk5?=
- =?utf-8?B?OW5UcDZPQ2pRWmdKOUpBdmVVcmg2Zk9MZzNRVUc0SkJsaGFURHhwZUNHdDlr?=
- =?utf-8?B?SE92dU0reUE1aFlKclBaZkpna2VJWDMvaTE4QktWQll6RDFLc29ETXlYV2Rw?=
- =?utf-8?B?U1lGV3FmdzUvWHlFWURnckJabFpCb09GRTFtcExqdDRuYlZ5eWhKb0tJbmYy?=
- =?utf-8?B?RzVZWFZKaEhSVmtZT3ViV0dPRUdxWllmOTVqNHdpSUtnbm56bDVQV1JVcDFB?=
- =?utf-8?B?aVZkSlNjMTdwSUFnT3U2dTc5OG8wSHRiTFJQV1ZXMVdMWnp6ZmtQSHloYmhP?=
- =?utf-8?B?VTRudW9wOTJTTHhtbnBLWnBHeW9JeVlCZC9aM3pJTWE0cURiTWxCdVkzc0VI?=
- =?utf-8?B?VUVMOFdxK1lNOTdtcFoweVBhcEZjY3NpeCtXVVR3cDQ5NGExNTh1bUVuMlRk?=
- =?utf-8?B?bFU0NDNvNUNnPT0=?=
-x-forefront-antispam-report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
- IPV:NLI; SFV:NSPM; H:CY5PR12MB6526.namprd12.prod.outlook.com; PTR:; CAT:NONE;
- SFS:(13230040)(366016)(376014)(1800799024)(38070700018); DIR:OUT; SFP:1101; 
-x-ms-exchange-antispam-messagedata-chunkcount: 1
-x-ms-exchange-antispam-messagedata-0: =?utf-8?B?Qnl2SUI4KzFQUmNaNmxDYzNnQ1ZrOFk5bDRWV2pzaVBtb01uNkZZbVNxQ3d4?=
- =?utf-8?B?RXZ1U28vMnUwNnA2VTAvRnMxYjlDdHNpN1EzcG5mZEh3dlhIZTkvcjh5YzY1?=
- =?utf-8?B?QUY2YkhOR1dHM2hqVXkyNnIxUU5EbjM4bW9ycW1ndkdvRHhhdU9SSDNSdFVj?=
- =?utf-8?B?YXBCV2ZxYVRlWXJ3U0V2OHIxZDR2aDZKK1JjNFlybTVtVkVtQUhNL01DNHB5?=
- =?utf-8?B?R0pERnpCSXlUdzhhcnFTeE5VZXJjRXdSWjVQbWlNaHQ1N1VKK3BJQ2lLb1Vn?=
- =?utf-8?B?VFl2K1pZOEduY1ViUDllUDBBODZvNkJoTGk5M01KUHlMN1RYWnk4TEdHMGkz?=
- =?utf-8?B?ZGs0UEpqdTZ1ODdocXBaNmpGSTFTd0ZGK3c5UjBRZmw4bk11L0QzTFltOEd0?=
- =?utf-8?B?OXpxYVZTL1B0TnNMd0MrWHJKaVljYkM0YmRpdkN5aW9rNlJoQjF3aXZpYzdV?=
- =?utf-8?B?Ky9IMklxbHg3R0o4S1FoSThwaEQxcnRacWhVTk5lQ3NVK0JMR0tuZnUzRE5L?=
- =?utf-8?B?MEZLaVFzRUFIdWxiYmdPUVdWZlBOV3JIWElneStOS0ZDcEUyUkoveG1uT1pa?=
- =?utf-8?B?RmtBOHo5THIyZ2tnL29waFpQaUk5bDJRWFlNajRBa1FsMFFBOG5BVVlPdnRP?=
- =?utf-8?B?aXBuNXhHVi9zN0xBWnRQbnBYd0NxZFVVbG1GeXVQdUk1N0tzUG5XU1VXYUE2?=
- =?utf-8?B?YTFIbkRHYmVuSU9NaHpPM3NCaDh1dCtSUWZ1bGxQSU0xUW1pd0FVellMS0dz?=
- =?utf-8?B?NDU4ZzlhMGVGR2x0MG94VDJYbGJpdnR1L1FFVlVWd0xhSjFYaGh0V1c1aXJi?=
- =?utf-8?B?SzV1ekU4TjUvUW1BYWlCeUdDem1sbnQycWlVSC9JTGVBWTErckVWZ2ExaDBh?=
- =?utf-8?B?MjVldDFkWnVzbmlpT1FpYjNoMHQzS09OYnc0L0dGbSt6MWtPMytZZmhmbGVN?=
- =?utf-8?B?SG5kcmtjNC9uOElEenlYNmozdFkvMExrd0dWSzNzRkMwb21TK2MxRkRyR2NE?=
- =?utf-8?B?bTN5cm9KSGdhb05jRXRyWEszM3NIZTFzemNacXhES1Y2YTVVT3k0MXhMZ3hv?=
- =?utf-8?B?cldycnJUUzVTVkNCZEdVSW1LcThFYVFwZklNRkpoN1J5Sm9DVlNsditZdUJH?=
- =?utf-8?B?OWRJc04wT0JEcHFlcVBkSGlCeTRqd0dQVFR0OWRGTkRRdXpzV3dQcEM2aGZY?=
- =?utf-8?B?dG5JVHBBb09KbDNoNjlZMTZHaUUyakRSU1M1TmJHbTBCWU1NUTcwUHlYejU1?=
- =?utf-8?B?c0NuTXhqcnNaMldnSjBrSWtsNzM3S1RsRDMvUkt1aU5MUzFXMWpkYmR4OXk0?=
- =?utf-8?B?Zm1QVHBMMmpURENhL2pNOTRNTk5JYUlsYW5JRlUzMTNYak9hMGhXNmtoTnQ2?=
- =?utf-8?B?S2VtY1dQdHBPZ3ZUS1dlaEdhL3htSGcwcDdDcDFlZFRqaVByN3NGdFlXN3ZD?=
- =?utf-8?B?eW1jeUN6T0tvMi94L0hJRjN2enBWNDNxd1NCNFVRTDM2Y1BrajE4dGNQSnRW?=
- =?utf-8?B?R3JMWmwxazArNzRVdUwzaU1yMlBaa3MwUmQ0dkw4R3EyazJVdkhqdzMxTkth?=
- =?utf-8?B?TEtsS3orV0FIc1RVOGdXd2Q0SGNKQ3F5NUZ6TFlsdjVwUGcyTkR2SlBlNmha?=
- =?utf-8?B?TldheTM1aTNJZW5zL1ZQUnNRdnMwSDJPTk5BVkRjclFQYjh0WmZIMkliS1k4?=
- =?utf-8?B?d0RKcWRwNVlYTXl3VzRlUURoUlV2eDV2QzBkNDRFaU5rck9OL0FMYUdBU3F3?=
- =?utf-8?B?NUtpR3pTcVRaL1hYRHNTbjRpQllieUcyTXh3alZBZXRPc3ZaSC9VcUxHdTJx?=
- =?utf-8?B?ZEcvZWU3UUlYKzVKTW5hREtlMHBJNGM2OU1aUDdMUDRKOXVWWUhZcHdEb3pQ?=
- =?utf-8?B?SnBOWWMwNnl6QkRkSTlvSnp2UHRwUXpTYnFnNE9JSnFFWm5nN1JCbkNKbWZ4?=
- =?utf-8?B?NjhOQ1J6MHNvWk5JNTBJSGY2SzVzcnZNdThYWDBTM3psWGFBa08rV2RiZlZt?=
- =?utf-8?B?SDYzUTM2ZzkwK3dyY2ZvMktVTExyVStBQzhpSHMzaUFQU3J2b2w5b2t0OTVa?=
- =?utf-8?B?RGRnY1JHYTkyTTcwY1BHeVlZdkpTSFMyVGpqaVpRN2NrelBVTmNpcmVhY2JT?=
- =?utf-8?Q?XYoYlN5/GV2205ymcq6NiH0dd?=
-Content-Type: text/plain; charset="utf-8"
-Content-ID: <6B23C58FC2FF004B8CE7451EC914B04A@namprd12.prod.outlook.com>
-Content-Transfer-Encoding: base64
+X-Greylist: delayed 2589 seconds by postgrey-1.36 at gabe;
+ Thu, 03 Jul 2025 22:12:00 UTC
+Received: from vps0.lunn.ch (vps0.lunn.ch [156.67.10.101])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 62B0810E1E1
+ for <nouveau@lists.freedesktop.org>; Thu,  3 Jul 2025 22:12:00 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=lunn.ch;
+ s=20171124; h=In-Reply-To:Content-Transfer-Encoding:Content-Disposition:
+ Content-Type:MIME-Version:References:Message-ID:Subject:Cc:To:From:Date:From:
+ Sender:Reply-To:Subject:Date:Message-ID:To:Cc:MIME-Version:Content-Type:
+ Content-Transfer-Encoding:Content-ID:Content-Description:Content-Disposition:
+ In-Reply-To:References; bh=A83NKRGoevWzL/NcvqijuYTaZ0xDTVIZ9pvu0pc07Jk=; b=Na
+ s0qbwdL6B67K0wS+f7tbNlfneHHctNev/cTniYFhLMkwezOAunGEDatFtpLb4g+PG761JVmPtbDzC
+ rfpydruVCCrDayQ33cjSGl/o6BiA+VGkuX6ILQmO0/nR1G4/Ap/W5RcWrBNuhbzqrUhTrrpdbnIlt
+ YvmVDe7keP8zJfo=;
+Received: from andrew by vps0.lunn.ch with local (Exim 4.94.2)
+ (envelope-from <andrew@lunn.ch>)
+ id 1uXRTN-0008hX-2p; Thu, 03 Jul 2025 23:28:01 +0200
+Date: Thu, 3 Jul 2025 23:28:01 +0200
+From: Andrew Lunn <andrew@lunn.ch>
+To: Tamir Duberstein <tamird@gmail.com>
+Cc: Benno Lossin <lossin@kernel.org>,
+ Michal Rostecki <vadorovsky@protonmail.com>,
+ Miguel Ojeda <ojeda@kernel.org>, Alex Gaynor <alex.gaynor@gmail.com>,
+ Boqun Feng <boqun.feng@gmail.com>, Gary Guo <gary@garyguo.net>,
+ =?iso-8859-1?Q?Bj=F6rn?= Roy Baron <bjorn3_gh@protonmail.com>,
+ Andreas Hindborg <a.hindborg@kernel.org>,
+ Alice Ryhl <aliceryhl@google.com>, Trevor Gross <tmgross@umich.edu>,
+ Brendan Higgins <brendan.higgins@linux.dev>,
+ David Gow <davidgow@google.com>, Rae Moar <rmoar@google.com>,
+ Danilo Krummrich <dakr@kernel.org>,
+ Maarten Lankhorst <maarten.lankhorst@linux.intel.com>,
+ Maxime Ripard <mripard@kernel.org>,
+ Thomas Zimmermann <tzimmermann@suse.de>,
+ David Airlie <airlied@gmail.com>, Simona Vetter <simona@ffwll.ch>,
+ Greg Kroah-Hartman <gregkh@linuxfoundation.org>,
+ "Rafael J. Wysocki" <rafael@kernel.org>,
+ Luis Chamberlain <mcgrof@kernel.org>, Russ Weight <russ.weight@linux.dev>,
+ FUJITA Tomonori <fujita.tomonori@gmail.com>, Rob Herring <robh@kernel.org>,
+ Saravana Kannan <saravanak@google.com>,
+ Peter Zijlstra <peterz@infradead.org>,
+ Ingo Molnar <mingo@redhat.com>, Will Deacon <will@kernel.org>,
+ Waiman Long <longman@redhat.com>, Nathan Chancellor <nathan@kernel.org>,
+ Nick Desaulniers <nick.desaulniers+lkml@gmail.com>,
+ Bill Wendling <morbo@google.com>, Justin Stitt <justinstitt@google.com>,
+ Heiner Kallweit <hkallweit1@gmail.com>,
+ Russell King <linux@armlinux.org.uk>,
+ "David S. Miller" <davem@davemloft.net>,
+ Eric Dumazet <edumazet@google.com>,
+ Jakub Kicinski <kuba@kernel.org>, Paolo Abeni <pabeni@redhat.com>,
+ Bjorn Helgaas <bhelgaas@google.com>, Arnd Bergmann <arnd@arndb.de>,
+ Jens Axboe <axboe@kernel.dk>,
+ Krzysztof =?utf-8?Q?Wilczy=C5=84ski?= <kwilczynski@kernel.org>,
+ Dave Ertman <david.m.ertman@intel.com>,
+ Ira Weiny <ira.weiny@intel.com>, Leon Romanovsky <leon@kernel.org>,
+ Breno Leitao <leitao@debian.org>, Viresh Kumar <viresh.kumar@linaro.org>,
+ Michael Turquette <mturquette@baylibre.com>,
+ Stephen Boyd <sboyd@kernel.org>, rust-for-linux@vger.kernel.org,
+ linux-kernel@vger.kernel.org, linux-kselftest@vger.kernel.org,
+ kunit-dev@googlegroups.com, dri-devel@lists.freedesktop.org,
+ netdev@vger.kernel.org, devicetree@vger.kernel.org,
+ llvm@lists.linux.dev, linux-pci@vger.kernel.org,
+ nouveau@lists.freedesktop.org, linux-block@vger.kernel.org,
+ linux-pm@vger.kernel.org, linux-clk@vger.kernel.org
+Subject: Re: [PATCH v13 2/5] rust: support formatting of foreign types
+Message-ID: <34c00dfa-8302-45ee-8d80-58b97a08e52e@lunn.ch>
+References: <20250701-cstr-core-v13-0-29f7d3eb97a6@gmail.com>
+ <20250701-cstr-core-v13-2-29f7d3eb97a6@gmail.com>
+ <DB2BDSN1JH51.14ZZPETJORBC6@kernel.org>
+ <CAJ-ks9nC=AyBPXRY3nJ0NuZvjFskzMcOkVNrBEfXD2hZ5uRntQ@mail.gmail.com>
+ <DB2IJ9HBIM0W.3N0JVGKX558QI@kernel.org>
+ <CAJ-ks9nF5+m+_bn0Pzi9yU0pw0TyN7Fs4x--mQ4ygyHz4A6hzg@mail.gmail.com>
 MIME-Version: 1.0
-X-OriginatorOrg: Nvidia.com
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-AuthSource: CY5PR12MB6526.namprd12.prod.outlook.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 0fbfd325-46d7-47a1-01c7-08ddba783933
-X-MS-Exchange-CrossTenant-originalarrivaltime: 03 Jul 2025 21:26:07.4740 (UTC)
-X-MS-Exchange-CrossTenant-fromentityheader: Hosted
-X-MS-Exchange-CrossTenant-id: 43083d15-7273-40c1-b7db-39efd9ccc17a
-X-MS-Exchange-CrossTenant-mailboxtype: HOSTED
-X-MS-Exchange-CrossTenant-userprincipalname: gSohZxCF7A1kMK/OUq5LR2GGK22ofNQDeHVA/suvVlt0TIMJaN4XSy1OgMrCu647kyr1mWKo+0l5E+A8/3QNnQ==
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: SN7PR12MB7451
+Content-Type: text/plain; charset=utf-8
+Content-Disposition: inline
+Content-Transfer-Encoding: 8bit
+In-Reply-To: <CAJ-ks9nF5+m+_bn0Pzi9yU0pw0TyN7Fs4x--mQ4ygyHz4A6hzg@mail.gmail.com>
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -170,23 +102,74 @@ List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-T24gVGh1LCAyMDI1LTA3LTAzIGF0IDIxOjE5ICswMDAwLCBBYXJvbiBUaG9tcHNvbiB3cm90ZToN
-Cj4gRnJvbTogQWFyb24gVGhvbXBzb24gPGRldkBhYXJvbnQub3JnPg0KPiANCj4gSWYgQ09ORklH
-X0RFQlVHX0ZTIGlzIGVuYWJsZWQsIG5vdXZlYXVfZHJtX2luaXQoKSByZXR1cm5zIGFuIGVycm9y
-IGlmIGl0DQo+IGZhaWxzIHRvIGNyZWF0ZSB0aGUgIm5vdXZlYXUiIGRpcmVjdG9yeSBpbiBkZWJ1
-Z2ZzLiBPbmUgY2FzZSB3aGVyZSB0aGF0DQo+IHdpbGwgaGFwcGVuIGlzIHdoZW4gZGVidWdmcyBh
-Y2Nlc3MgaXMgcmVzdHJpY3RlZCBieQ0KPiBDT05GSUdfREVCVUdfRlNfQUxMT1dfTk9ORSBvciBi
-eSB0aGUgYm9vdCBwYXJhbWV0ZXIgZGVidWdmcz1vZmYsIHdoaWNoDQo+IGNhdXNlIHRoZSBkZWJ1
-Z2ZzIEFQSXMgdG8gcmV0dXJuIC1FUEVSTS4NCj4gDQo+IFNvIGp1c3QgaWdub3JlIGVycm9ycyBm
-cm9tIGRlYnVnZnMuIE5vdGUgdGhhdCBub3V2ZWF1X2RlYnVnZnNfcm9vdCBtYXkNCj4gYmUgYW4g
-ZXJyb3Igbm93LCBidXQgdGhhdCBpcyBhIHN0YW5kYXJkIHBhdHRlcm4gZm9yIGRlYnVnZnMuIEZy
-b20NCj4gaW5jbHVkZS9saW51eC9kZWJ1Z2ZzLmg6DQo+IA0KPiAiTk9URTogaXQncyBleHBlY3Rl
-ZCB0aGF0IG1vc3QgY2FsbGVycyBzaG91bGQgX2lnbm9yZV8gdGhlIGVycm9ycw0KPiByZXR1cm5l
-ZCBieSB0aGlzIGZ1bmN0aW9uLiBPdGhlciBkZWJ1Z2ZzIGZ1bmN0aW9ucyBoYW5kbGUgdGhlIGZh
-Y3QgdGhhdA0KPiB0aGUgImRlbnRyeSIgcGFzc2VkIHRvIHRoZW0gY291bGQgYmUgYW4gZXJyb3Ig
-YW5kIHRoZXkgZG9uJ3QgY3Jhc2ggaW4NCj4gdGhhdCBjYXNlLiBEcml2ZXJzIHNob3VsZCBnZW5l
-cmFsbHkgd29yayBmaW5lIGV2ZW4gaWYgZGVidWdmcyBmYWlscyB0bw0KPiBpbml0IGFueXdheS4i
-DQo+IA0KPiBGaXhlczogOTcxMThhMTgxNmQyICgiZHJtL25vdXZlYXU6IGNyZWF0ZSBtb2R1bGUg
-ZGVidWdmcyByb290IikNCg0KT29mLCBzb3JyeSBhYm91dCB0aGF0LiAgSSBzaG91bGQgaGF2ZSBu
-b3RpY2VkIHRoaXMgYmVoYXZpb3Igd2hlbiBJIHJldmlld2VkIHRoaXMgcGF0Y2guDQoNCkFja2Vk
-LWJ5OiBUaW11ciBUYWJpIDx0dGFiaUBudmlkaWEuY29tPg0KDQo=
+On Thu, Jul 03, 2025 at 02:55:30PM -0400, Tamir Duberstein wrote:
+> On Thu, Jul 3, 2025 at 11:08 AM Benno Lossin <lossin@kernel.org> wrote:
+> >
+> > On Thu Jul 3, 2025 at 3:55 PM CEST, Tamir Duberstein wrote:
+> > > On Thu, Jul 3, 2025 at 5:32 AM Benno Lossin <lossin@kernel.org> wrote:
+> > >> On Tue Jul 1, 2025 at 6:49 PM CEST, Tamir Duberstein wrote:
+> > >> > Introduce a `fmt!` macro which wraps all arguments in
+> > >> > `kernel::fmt::Adapter` and a `kernel::fmt::Display` trait. This enables
+> > >> > formatting of foreign types (like `core::ffi::CStr`) that do not
+> > >> > implement `core::fmt::Display` due to concerns around lossy conversions which
+> > >> > do not apply in the kernel.
+> > >> >
+> > >> > Replace all direct calls to `format_args!` with `fmt!`.
+> > >> >
+> > >> > Replace all implementations of `core::fmt::Display` with implementations
+> > >> > of `kernel::fmt::Display`.
+> > >> >
+> > >> > Suggested-by: Alice Ryhl <aliceryhl@google.com>
+> > >> > Link: https://rust-for-linux.zulipchat.com/#narrow/channel/288089-General/topic/Custom.20formatting/with/516476467
+> > >> > Acked-by: Greg Kroah-Hartman <gregkh@linuxfoundation.org>
+> > >> > Reviewed-by: Alice Ryhl <aliceryhl@google.com>
+> > >> > Signed-off-by: Tamir Duberstein <tamird@gmail.com>
+> > >> > ---
+> > >> >  drivers/block/rnull.rs       |  2 +-
+> > >> >  drivers/gpu/nova-core/gpu.rs |  4 +-
+> > >> >  rust/kernel/block/mq.rs      |  2 +-
+> > >> >  rust/kernel/device.rs        |  2 +-
+> > >> >  rust/kernel/fmt.rs           | 89 +++++++++++++++++++++++++++++++++++++++
+> > >> >  rust/kernel/kunit.rs         |  6 +--
+> > >> >  rust/kernel/lib.rs           |  1 +
+> > >> >  rust/kernel/prelude.rs       |  3 +-
+> > >> >  rust/kernel/print.rs         |  4 +-
+> > >> >  rust/kernel/seq_file.rs      |  2 +-
+> > >> >  rust/kernel/str.rs           | 22 ++++------
+> > >> >  rust/macros/fmt.rs           | 99 ++++++++++++++++++++++++++++++++++++++++++++
+> > >> >  rust/macros/lib.rs           | 19 +++++++++
+> > >> >  rust/macros/quote.rs         |  7 ++++
+> > >> >  scripts/rustdoc_test_gen.rs  |  2 +-
+> > >> >  15 files changed, 236 insertions(+), 28 deletions(-)
+> > >>
+> > >> This would be a lot easier to review if he proc-macro and the call
+> > >> replacement were different patches.
+> > >>
+> > >> Also the `kernel/fmt.rs` file should be a different commit.
+> > >
+> > > Can you help me understand why? The changes you ask to be separated
+> > > would all be in different files, so why would separate commits make it
+> > > easier to review?
+> >
+> > It takes less time to go through the entire patch and give a RB. I can
+> > take smaller time chunks and don't have to get back into the entire
+> > context of the patch when I don't have 30-60min available.
+> 
+> Ah, I see what you mean. Yeah, the requirement to RB the entire patch
+> does mean there's a benefit to smaller patches.
+
+I often tell kernel newbies:
+
+Lots of small patches which are obviously correct.
+
+A small patch tends to be more obviously correct than a big patch. The
+commit message is more focused and helpful because it refers to a
+small chunk of code. Because the commit message is more focused, it
+can answer questions reviewers might ask, before they ask them. If i
+can spend 60 seconds looking at a patch and decide it looks correct,
+i'm more likely to actually look at it and give a reviewed by. If i
+need to find 10 minutes, it is going to get put off for a later
+time. Many reviewers just have a few minutes here, a few there,
+slotted into time between other tasks, while drinking coffee, etc.
+
+	Andrew
