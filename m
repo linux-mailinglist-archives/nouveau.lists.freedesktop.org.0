@@ -2,136 +2,75 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id 08F2BAF837D
-	for <lists+nouveau@lfdr.de>; Fri,  4 Jul 2025 00:34:58 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id BA493AF840D
+	for <lists+nouveau@lfdr.de>; Fri,  4 Jul 2025 01:22:44 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 9814410E915;
-	Thu,  3 Jul 2025 22:34:55 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 6BB2110E14F;
+	Thu,  3 Jul 2025 23:22:42 +0000 (UTC)
 Authentication-Results: gabe.freedesktop.org;
-	dkim=pass (2048-bit key; unprotected) header.d=Nvidia.com header.i=@Nvidia.com header.b="g1/pzttx";
+	dkim=pass (2048-bit key; unprotected) header.d=gfxstrand-net.20230601.gappssmtp.com header.i=@gfxstrand-net.20230601.gappssmtp.com header.b="xeNy7Syo";
 	dkim-atps=neutral
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from NAM12-BN8-obe.outbound.protection.outlook.com
- (mail-bn8nam12on2078.outbound.protection.outlook.com [40.107.237.78])
- by gabe.freedesktop.org (Postfix) with ESMTPS id C7B9510E90F;
- Thu,  3 Jul 2025 22:34:53 +0000 (UTC)
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=UA+h/dtZzgfFOso6/NQo8CCExh5lDrIE+/0yRTz9A26M1pII1cKYKGRCZVbGMjGlN/J9XdGnyDWCyj2ac4CAd7W2Zmcpc3FlnmK9lBemtSGgr2DnUJgFtLWOjwkwUzrcTMAeYSsmH7oLFhHnbfaZkzUe3XZooofWepuEx5ber3vH3ltvvNaCSogPWSB3PzeP1Vsa0HErpXnxL9/4mX0SOIIFzhilvoLbkJWyPqqCXmSyap0OmZJ0XVVuSNwUtpqTQXSaQcIW4N62aDrIbmGSfrsktqTMl80awk5Y1OYcLnvEHP53m5z+7Fubs3BGZpsPoH8GDwh8EOI0E92629slkg==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=r06+YJyeU0gG5TunywdwAE2gaUIMtlRzu/HMWv/h8+I=;
- b=P+x9Xd48TXJfTru4UXkGEgaemGjt0pWF3KnpHX6F5/jVeh+cHOqVvNHWvvwWVc9tBhhpRJHBMccOThexiBJ8jNQrPXkfRh9nBTP4zKrynI4ryqbGdLAY096R12vkIm0W+ygca9G37x9948xD77SDbmQidLP7Gsj7KgW86xbWzdLYbvJfbhvJ0K5dLYfSgHqNeU7YhyYZY9i9mFIdNL62+ILD54XG9dbPTOCyzT/g8jY4yUYe4fGs0RpTMwHAS4LvxUcVhLwJUGszb4NrlSrZQZHUj2qaMfwVoe2CqmKyz9uW4dfaj2FxDeMM6zAMKJWHmRIF1aI/EL+nBcl3dWNfOA==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=nvidia.com; dmarc=pass action=none header.from=nvidia.com;
- dkim=pass header.d=nvidia.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=Nvidia.com;
- s=selector2;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=r06+YJyeU0gG5TunywdwAE2gaUIMtlRzu/HMWv/h8+I=;
- b=g1/pzttx2mhTs8EXDA76ql3Fl/5YgB/6PiaYQcXYzUqdxb8syze+Bm9BxIC4+EDsyPwZuqeqnhELPPu56dAUDgk9ZJF1Gm8OkJEahAgqYVbpChmQBBSBwll11yZ/8k7+zkTtlPp7os3cYNaLNgRM4BiL1fs5f/bMz2jrt0wn+sDWyYU+ZIN3b/j7p1g774n1WYfiTgY+mWszoIXoJrYpf41dN1m7mzY+w5PtG4noJbqY0Q0TLaHV2QI5iF5K/PE1mmRH3U8oTZm7I8Y5BgKDfTu04Zyp82x2bK3rWnhAtwYED2KEg+7CmTx+jqI+6QNlWuQ9PsuSXrctbRlSjQ8YHw==
-Authentication-Results: dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=nvidia.com;
-Received: from SA1PR12MB6701.namprd12.prod.outlook.com (2603:10b6:806:251::18)
- by CH3PR12MB9079.namprd12.prod.outlook.com (2603:10b6:610:1a1::9)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.8880.34; Thu, 3 Jul
- 2025 22:34:50 +0000
-Received: from SA1PR12MB6701.namprd12.prod.outlook.com
- ([fe80::2be0:c316:443d:da3a]) by SA1PR12MB6701.namprd12.prod.outlook.com
- ([fe80::2be0:c316:443d:da3a%6]) with mapi id 15.20.8901.018; Thu, 3 Jul 2025
- 22:34:50 +0000
-From: James Jones <jajones@nvidia.com>
-To: David Airlie <airlied@gmail.com>, Lyude Paul <lyude@redhat.com>,
- Danilo Krummrich <dakr@kernel.org>
-Cc: nouveau@lists.freedesktop.org, dri-devel@lists.freedesktop.org,
- Faith Ekstrand <faith.ekstrand@collabora.com>,
- Alexandre Courbot <acourbot@nvidia.com>, Ben Skeggs <bskeggs@nvidia.com>,
- James Jones <jajones@nvidia.com>
-Subject: [RFC  4/4] drm: define NVIDIA DRM format modifiers for GB20x
-Date: Thu,  3 Jul 2025 15:36:58 -0700
-Message-ID: <20250703223658.1457-5-jajones@nvidia.com>
-X-Mailer: git-send-email 2.49.0
-In-Reply-To: <20250703223658.1457-1-jajones@nvidia.com>
-References: <20250703223658.1457-1-jajones@nvidia.com>
-Content-Transfer-Encoding: 8bit
-Content-Type: text/plain
-X-ClientProxiedBy: PH2PEPF0000384C.namprd17.prod.outlook.com
- (2603:10b6:518:1::70) To SA1PR12MB6701.namprd12.prod.outlook.com
- (2603:10b6:806:251::18)
+Received: from mail-pj1-f45.google.com (mail-pj1-f45.google.com
+ [209.85.216.45])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id B6A9B10E906
+ for <nouveau@lists.freedesktop.org>; Thu,  3 Jul 2025 23:22:41 +0000 (UTC)
+Received: by mail-pj1-f45.google.com with SMTP id
+ 98e67ed59e1d1-311a6236effso417001a91.2
+ for <nouveau@lists.freedesktop.org>; Thu, 03 Jul 2025 16:22:41 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=gfxstrand-net.20230601.gappssmtp.com; s=20230601; t=1751584961; x=1752189761;
+ darn=lists.freedesktop.org; 
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=GMW6M+V/LFsEoODHF+S9taxspEfmPDDPydPh061xQUs=;
+ b=xeNy7SyoeYM4gqurZKmb9kMV51oqCafMJWaDWl5tvCeQhfkAK7kI+Pge3WSo3TtAhT
+ ljwov3CUlMz8c213j2533HfGltrlAuzDdOmy3o32+n9OXvnV0mbcPTTqVHlmBLaqGdnj
+ sCaPsreJyVReSyBzalTEPAZmmh6XqWedi6vCN/m84EzSfy7TkH1nzp7Ac9b2mOxa1fxi
+ ZYxOiXb5IBKzFfPC9SRmQPVff9JCm0/k1p3H+gxsktRmcpbyF6/lzt3iYiDaePdFYM01
+ xSQCgf0Qp5AZGykJyIBHLryWQ4w+IPBSqNaMsFQvHYSKS8fizpEX9s5xmzxYJM3DJNyc
+ c03A==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1751584961; x=1752189761;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=GMW6M+V/LFsEoODHF+S9taxspEfmPDDPydPh061xQUs=;
+ b=xJFh4B1BHZk1h6MilTAGZyostNiHIiYj2zQ+iWu32YqfcxE8zJ/yBVkVQbYJq5f5AY
+ LeKgZPH1vWSWjSPl1fEZoKlGUJJnVw7Vm3eTyblJ8SkJ3g7zfl20m5YxZLWQJgRO06N4
+ r01tmh1QpsbRzHdwgosdMj+1H9rah94bkOIVYkdrLcx/MT3+yjXtqAK3QFvmCIchIKyi
+ Qz7jRRi3LYtnbdeZ+YT6gvFzVthIbjRKo2EEi61dpDPUW2MWiQ+Bp4OsJvdNn/bbG6Lf
+ SPpgSfcOVZ1HVo4bBzknFaw6t/FjTlWvfJCxnLd3PaMbwTNNvY41P03vWBB9lQzdncsY
+ 9Urw==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCX7ovJRpvcHl4NcpDEqCs1fvz0Z6MGSU7xtqsQbZIpR/8cQuQ1FradRQmLDC71ob/wNLziIzmZy@lists.freedesktop.org
+X-Gm-Message-State: AOJu0YwL0CL6MqXJKa8mVPKGxxPefPKvx1T/KyBziaRm7KY4b/Kl6SMN
+ pFxJ7AuFKodj0z3Wi6WCUC7682VdyB0g4qTdE9RkNHoKBxSbtSUQNhZJOhj+w0ic2uLCcgnLANT
+ PwYUAlnSwZM48y3vEmCZk15MvSodbHMLze/vZ9DJitg==
+X-Gm-Gg: ASbGncsHCsgIAZGNCEZL2rfNBfIxA5POgG6Gy5QsaLnfAGLAiwqLcwnVp7551Aq0WxL
+ SPujnbVrYLyiaunGEOog+ma8v4dhvqUA+uvV10IXnD9NJtMBbM9r3sFfCJMyf4PKweAgIDyaSu9
+ bo1kgRMPRdL5cnI8MpYEDwdq5+WKVo7ZhdVT28XnwsoQ==
+X-Google-Smtp-Source: AGHT+IE+L3oo42If4uhFm+T4u2yS2Y/S7jenERYCKsdq6VEwx8/DHIC6vdTrwTRR186WUHOaaeDop0rFhN9Vv2K7oKs=
+X-Received: by 2002:a17:90b:2590:b0:313:2754:5910 with SMTP id
+ 98e67ed59e1d1-31aac46204dmr678209a91.15.1751584961080; Thu, 03 Jul 2025
+ 16:22:41 -0700 (PDT)
 MIME-Version: 1.0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: SA1PR12MB6701:EE_|CH3PR12MB9079:EE_
-X-MS-Office365-Filtering-Correlation-Id: 16711a1c-292c-4ad1-afad-08ddba81d210
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0;ARA:13230040|1800799024|376014|366016;
-X-Microsoft-Antispam-Message-Info: =?us-ascii?Q?Ooh0HN1Xwy7wmyjOuZaXZzglk3m1eHsq3LrGMf8eEVvO+va+2ujvyU64k2eF?=
- =?us-ascii?Q?/iYJoihSwA7zRk8zWNqNkGEUhECJg2NvCfK5XXUHH8j8xkjP+yhxxAGLX9IX?=
- =?us-ascii?Q?UfzIHDZ5ieh+u6fpC6sIlnmj1RRBwBrmGhgiEmBLGKIS4MGdKqw3HhNHRkq/?=
- =?us-ascii?Q?c9D3wne2sH4itobCa7nCJ5S3F/dcoSbEB+sMK6CtzJdSRNBGXWvuzi7FMErx?=
- =?us-ascii?Q?K2Q6T/aGs0AHW8tFLpqnGiQyVKhX1tGALl2KNeBXLqnGdZAHPNEcCXYsX/cr?=
- =?us-ascii?Q?pFkHLKcydvNkSePFEneWxWCoQ3l7oYHp9bevg+CtshkaDFxH364KGmUukSzQ?=
- =?us-ascii?Q?gA0O01EHgrB4ywsqVyzUY7Kie7tkrvLYoonUT402/YjNJ/PNU6dsLEAxrAxR?=
- =?us-ascii?Q?S7lwc/RY/rhPlwnfOQt6Ug/hc+xmrfaZrzrJVRhYiCuJBvNI4U9w4IVxuLzR?=
- =?us-ascii?Q?uG5ncuifzqnDqxV3HT5zOHYvhqD26dKGkJgZd6zazOoDWRYWczm0ye5a2oBP?=
- =?us-ascii?Q?MAyyoMDyPWzsBXOuP2dbiuYkdy+6CaD+SUntp4PzujpSC5DBbcz8CijYOt/Y?=
- =?us-ascii?Q?vSOtkgg+XGzp/w71iShXW95MZVkYvufdbzz9nwlwOXit1DYYisbPWT53TpDb?=
- =?us-ascii?Q?bREUQD9oGCfC2yqBq4pO1gGs7dwYkj+oG2kSLM26Nbuzvm5sPzfPzpIo2ULF?=
- =?us-ascii?Q?cbXHtZX3UNrHia1oqnypkqlaEz4tbDzW1qW61FtCCP2hP1ZtJ4k89Bf4NNI7?=
- =?us-ascii?Q?7uI4e5G1LXMmL8DaLveciGWCujnlR7lkceAjTKVgJQ4TUaN8nkpJrHyp3xgB?=
- =?us-ascii?Q?82v5Lj/dwaCCe+GRwz87XczCKg5s+18BSeRJAnS9836xwsnrMMAJUff4GCZz?=
- =?us-ascii?Q?p6vLGzXSXdIN2/N00E2pxbRMEDv5efEcfukLDXPFK64NQXtJs7y5AwAYnays?=
- =?us-ascii?Q?Nsnr9TpNRvDwoRXYpSZN+xlPTSR2PRIanv8PKNoVEYJQ5VdY8kUXVzakmEPE?=
- =?us-ascii?Q?bSGP9tBk061ufcuzxWj+Jhf9Rz818x7xK/Esh+mlIXmU9lMgafqxI8wfg1H+?=
- =?us-ascii?Q?SJ7zYUWTjHP7XWRaNIaNQOeTFv0/WsALZz4sa3ffWVfalGxUU4HPBiPYwMfV?=
- =?us-ascii?Q?awubZnCdorllJIeGu/3URG8eeN9j8ydGXAAvmGJKvnuimlaFMrcX5oMA7iGr?=
- =?us-ascii?Q?s7h/aWcKBUH2XOdIXKgjoqqLkjLtv62bcy7mn1K8FTH4A/blOnoramZdMilk?=
- =?us-ascii?Q?aBNQMB/Le5aS2xtOQ/BnNRt8ESjYjmhQSfTw0z1AnPWdW+cN23jINBSh9cvj?=
- =?us-ascii?Q?GOtrjTR3Yfn1Is0j4s+7y9lwk1lkvbEJxL4DTIj0OZTtrHfKesLCIjwzfFJs?=
- =?us-ascii?Q?TdO49/7ebKNJAAwj1vwQEAyrpMYQPIN7r1qZSUPWsM22ad6meg=3D=3D?=
-X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
- IPV:NLI; SFV:NSPM; H:SA1PR12MB6701.namprd12.prod.outlook.com; PTR:; CAT:NONE;
- SFS:(13230040)(1800799024)(376014)(366016); DIR:OUT; SFP:1101; 
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: =?us-ascii?Q?dSQST6Amyi2/H3pSZM9+8wvkRVQkud6onRjMs1Y0Ozv4Yo8lj1nrGfwbM28f?=
- =?us-ascii?Q?y3esZh+whkTeUdM7U0pqAzYAqV6N2mSY7il+6V29TpQEt2l5r9t+NtQFgTIH?=
- =?us-ascii?Q?kuF2dk+eWG7MJ/KZif9uCewX30GwdvSWGDIwDLqwAwlu9cWjD1yre6AFynRw?=
- =?us-ascii?Q?04jOjX2W9vnq84/4khRC2foAJ1G7wmBGI1Ciu7gDwNGir37uNfhLiTLUK3KT?=
- =?us-ascii?Q?gnPq2TmaOnImlH4McUYJM7rsmWgCL30xYVF/yOUEZaaxO/pKyeLpnKXVdk+v?=
- =?us-ascii?Q?d4sRjT8dr6TaKvYgXruhcKKcUV5WifQYcHWX9tzOjrECHq2IZk+O5jbMdeoD?=
- =?us-ascii?Q?6ZFD4On6LTAFoErOcqTn163dVc1wkShkCqlqDxlejCKLc/JwQ1AYCef8k3cw?=
- =?us-ascii?Q?3Il7KmWuo/qEOEid+L6RaZDHc/9JwFwjeOT6pJxeut8aelqcvCYallNUbkda?=
- =?us-ascii?Q?/hJt32WGPkcujRbDy0ROelJ7GVvdJ6dM7nriBLr+4RM8TuiH2Soj/bMzG+It?=
- =?us-ascii?Q?ehqMS4ejZJK73DKLKAor0Tzxb9Mjk3EhK41YzTueBcO8N3NwyCPyjvrWzHFs?=
- =?us-ascii?Q?irdK8f32O6etxaLgv1kUnuh0UrAAGiNYpgvOPApf0HZ3vUr9C7wUbHDno7t9?=
- =?us-ascii?Q?CkfHNYzNBOCuioavIPC9CLBpgr3lYzvVtCBS8X8gdKk+tzBRiiQbHvJaxvH+?=
- =?us-ascii?Q?g3/IJ0HFTrwFt3Q9MssPekSkttmE+OmUNPal8anTo9nEIj67jZ93ajZ3LZok?=
- =?us-ascii?Q?7Jpl1tvYjexzpKavJvUw333UIcgy7ha/GMlCinXHqvB6kVgBJXnHYI4hRIcj?=
- =?us-ascii?Q?n48bIIkShX/XnZku3us6D2RSZfOb9DvMJqYvQy86InDSm3g782wmJp+CDTtt?=
- =?us-ascii?Q?DC3U9UpHzK9jsSUKj1pnir/9nOJd1HkULaqYB8ewRRoVTMKP8kaUenLY6BXc?=
- =?us-ascii?Q?dB6dP44gJ1/KU3dIaRuQm7QfLTD19LkVdEEor/cH0CrjmvEBJ+c3im+//wC9?=
- =?us-ascii?Q?4ioELgg5JXUvvp9zWdKfE4hK8fYlL2EPxhTCbWvdAXDKiqFRLc4VC7//g7k5?=
- =?us-ascii?Q?l1g7lqy0sDtjJnC2w4NelHXDXaCw/3UqyLDLy6fDV3rkLK2NgjZFw60fPsXR?=
- =?us-ascii?Q?toBoREnGzeQ+GlabiCJYvslmi7qnTahcZJN3YxgUcO6g+gaCwVBNb01X1mOr?=
- =?us-ascii?Q?yDkZARnJlKvWtzGZA0JsIXgq+LanaebfTbIK29+ErrOF40igkNZZSo7TxIOh?=
- =?us-ascii?Q?RVsHcxm/eGLGUp2Zat5Z4Bevg475iz477U6yT/jj93fmAl/EppqpiOkDqmgJ?=
- =?us-ascii?Q?vfSUAh/flEf9Twlbl+sGvrBzfaGhEIldU9cL046X6LH0oyXceZqe2AjUpA7Z?=
- =?us-ascii?Q?z++Vb87DeiJA2Y+/2H96PHRIf3+wFpJQsq/UG2OtOQXOk4iVcZEbYBskrk2g?=
- =?us-ascii?Q?CbZ9KLMNIq7i9LOF6/7nQaSjc191CReJ7W69KeoC+7k6lC3wRvpkk87H7kmA?=
- =?us-ascii?Q?/Li88wPqsJbHH4CkYOmsQ5nDejlvNhoGZ7BPtSSZcS1TO0exLba5sclsjEZl?=
- =?us-ascii?Q?tq3X1/GqMhhm9dBbmWYD/qPkOF5hZkAyB7Q0SeJv?=
-X-OriginatorOrg: Nvidia.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 16711a1c-292c-4ad1-afad-08ddba81d210
-X-MS-Exchange-CrossTenant-AuthSource: SA1PR12MB6701.namprd12.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 03 Jul 2025 22:34:49.5971 (UTC)
-X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
-X-MS-Exchange-CrossTenant-Id: 43083d15-7273-40c1-b7db-39efd9ccc17a
-X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: mC7WSTEwOyEh2qsNXHO1dknp7lUOaZpm3viC5gOwKewPYOGEFR5WQUh8BQkUgsY3j+DwroiqLhA92d94XAl9dQ==
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: CH3PR12MB9079
+References: <20250703223658.1457-1-jajones@nvidia.com>
+ <20250703223658.1457-5-jajones@nvidia.com>
+In-Reply-To: <20250703223658.1457-5-jajones@nvidia.com>
+From: Faith Ekstrand <faith@gfxstrand.net>
+Date: Thu, 3 Jul 2025 19:22:29 -0400
+X-Gm-Features: Ac12FXyPaIJ54obxQNsHxJu3vwpxkxNMLhHqBqPz7mzNbZWark38mWZ0HP8rQ9g
+Message-ID: <CAOFGe95mU1P-BeMXM506Jmdr66b1poFyFquxQr_s9KoEDbqVcQ@mail.gmail.com>
+Subject: Re: [RFC 4/4] drm: define NVIDIA DRM format modifiers for GB20x
+To: James Jones <jajones@nvidia.com>
+Cc: David Airlie <airlied@gmail.com>, Lyude Paul <lyude@redhat.com>, 
+ Danilo Krummrich <dakr@kernel.org>, nouveau@lists.freedesktop.org, 
+ dri-devel@lists.freedesktop.org, 
+ Faith Ekstrand <faith.ekstrand@collabora.com>,
+ Alexandre Courbot <acourbot@nvidia.com>, Ben Skeggs <bskeggs@nvidia.com>
+Content-Type: multipart/alternative; boundary="0000000000006641d406390ea7f9"
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -146,129 +85,368 @@ List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-The layout of bits within the individual tiles
-(referred to as sectors in the
-DRM_FORMAT_MOD_NVIDIA_BLOCK_LINEAR_2D() macro)
-changed for some formats starting in Blackwell 2
-GPUs. To denote the difference, extend the sector
-field in the parametric format modifier definition
-used to generate modifier values for NVIDIA
+--0000000000006641d406390ea7f9
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+
+On Thu, Jul 3, 2025 at 6:34=E2=80=AFPM James Jones <jajones@nvidia.com> wro=
+te:
+
+> The layout of bits within the individual tiles
+> (referred to as sectors in the
+> DRM_FORMAT_MOD_NVIDIA_BLOCK_LINEAR_2D() macro)
+> changed for some formats starting in Blackwell 2
+> GPUs. To denote the difference, extend the sector
+> field in the parametric format modifier definition
+> used to generate modifier values for NVIDIA
+> hardware.
+>
+> Without this change, it would be impossible to
+> differentiate the two layouts based on modifiers,
+> and as a result software could attempt to share
+> surfaces directly between pre-GB20x and GB20x
+> cards, resulting in corruption when the surface
+> was accessed on one of the GPUs after being
+> populated with content by the other.
+>
+> Of note: This change causes the
+> DRM_FORMAT_MOD_NVIDIA_BLOCK_LINEAR_2D() macro to
+> evaluate its "s" parameter twice, with the side
+> effects that entails. I surveyed all usage of the
+> modifier in the kernel and Mesa code, and that
+> does not appear to be problematic in any current
+> usage, but I thought it was worth calling out.
+>
+> Signed-off-by: James Jones <jajones@nvidia.com>
+> ---
+>  include/uapi/drm/drm_fourcc.h | 46 +++++++++++++++++++++--------------
+>  1 file changed, 28 insertions(+), 18 deletions(-)
+>
+> diff --git a/include/uapi/drm/drm_fourcc.h b/include/uapi/drm/drm_fourcc.=
+h
+> index 052e5fdd1d3b..348b2f1c1cb7 100644
+> --- a/include/uapi/drm/drm_fourcc.h
+> +++ b/include/uapi/drm/drm_fourcc.h
+> @@ -909,8 +909,10 @@ extern "C" {
+>  #define __fourcc_mod_nvidia_pkind_shift 12
+>  #define __fourcc_mod_nvidia_kgen_mask 0x3ULL
+>  #define __fourcc_mod_nvidia_kgen_shift 20
+> -#define __fourcc_mod_nvidia_slayout_mask 0x1ULL
+> -#define __fourcc_mod_nvidia_slayout_shift 22
+> +#define __fourcc_mod_nvidia_slayout_low_mask 0x1ULL
+> +#define __fourcc_mod_nvidia_slayout_low_shift 22
+> +#define __fourcc_mod_nvidia_slayout_high_mask 0x2ULL
+> +#define __fourcc_mod_nvidia_slayout_high_shift 25
+>  #define __fourcc_mod_nvidia_comp_mask 0x7ULL
+>  #define __fourcc_mod_nvidia_comp_shift 23
+>
+> @@ -973,14 +975,16 @@ extern "C" {
+>   *               2 =3D Gob Height 8, Turing+ Page Kind mapping
+>   *               3 =3D Reserved for future use.
+>   *
+> - * 22:22 s     Sector layout.  On Tegra GPUs prior to Xavier, there is a
+> further
+> - *             bit remapping step that occurs at an even lower level tha=
+n
+> the
+> - *             page kind and block linear swizzles.  This causes the
+> layout of
+> - *             surfaces mapped in those SOC's GPUs to be incompatible
+> with the
+> - *             equivalent mapping on other GPUs in the same system.
+> + * 22:22 s     Sector layout.  There is a further bit remapping step tha=
+t
+> occurs
+> + * 26:26       at an even lower level than the page kind and block linea=
+r
+> + *             swizzles.  This causes the bit arrangement of surfaces in
+> memory
+> + *             to differ subtly, and prevents direct sharing of surfaces
+> between
+> + *             GPUs with different layouts.
+>   *
+> - *               0 =3D Tegra K1 - Tegra Parker/TX2 Layout.
+> - *               1 =3D Desktop GPU and Tegra Xavier+ Layout
+> + *               0 =3D Tegra K1 - Tegra Parker/TX2 Layout
+> + *               1 =3D Pre-GB20x, Tegra Xavier-Orin, GB10 Layout
+> + *               2 =3D GB20x(Blackwell 2)+ Layout for some pixel/texel s=
+izes
+>
+
+I'm not sure I like just lumping all of blackwell together. Blackwell is
+the same as Turing for 32, 64, and 128-bit formats. It's only different on
+8 and 16 and those aren't the same. The way we modeled this for NVK is to
+have Turing, Blackwell8Bit, and Blackwell16Bit GOBTypes. I think I'd prefer
+the modifiers take a similar form.
+
+Technically, this isn't strictly necessary as there is always a format and
+formats with different element sizes aren't compatible so a driver can
+always look at format+modifier.  However, it is a better model of the
 hardware.
 
-Without this change, it would be impossible to
-differentiate the two layouts based on modifiers,
-and as a result software could attempt to share
-surfaces directly between pre-GB20x and GB20x
-cards, resulting in corruption when the surface
-was accessed on one of the GPUs after being
-populated with content by the other.
+~Faith Ekstrand
 
-Of note: This change causes the
-DRM_FORMAT_MOD_NVIDIA_BLOCK_LINEAR_2D() macro to
-evaluate its "s" parameter twice, with the side
-effects that entails. I surveyed all usage of the
-modifier in the kernel and Mesa code, and that
-does not appear to be problematic in any current
-usage, but I thought it was worth calling out.
 
-Signed-off-by: James Jones <jajones@nvidia.com>
----
- include/uapi/drm/drm_fourcc.h | 46 +++++++++++++++++++++--------------
- 1 file changed, 28 insertions(+), 18 deletions(-)
 
-diff --git a/include/uapi/drm/drm_fourcc.h b/include/uapi/drm/drm_fourcc.h
-index 052e5fdd1d3b..348b2f1c1cb7 100644
---- a/include/uapi/drm/drm_fourcc.h
-+++ b/include/uapi/drm/drm_fourcc.h
-@@ -909,8 +909,10 @@ extern "C" {
- #define __fourcc_mod_nvidia_pkind_shift 12
- #define __fourcc_mod_nvidia_kgen_mask 0x3ULL
- #define __fourcc_mod_nvidia_kgen_shift 20
--#define __fourcc_mod_nvidia_slayout_mask 0x1ULL
--#define __fourcc_mod_nvidia_slayout_shift 22
-+#define __fourcc_mod_nvidia_slayout_low_mask 0x1ULL
-+#define __fourcc_mod_nvidia_slayout_low_shift 22
-+#define __fourcc_mod_nvidia_slayout_high_mask 0x2ULL
-+#define __fourcc_mod_nvidia_slayout_high_shift 25
- #define __fourcc_mod_nvidia_comp_mask 0x7ULL
- #define __fourcc_mod_nvidia_comp_shift 23
- 
-@@ -973,14 +975,16 @@ extern "C" {
-  *               2 = Gob Height 8, Turing+ Page Kind mapping
-  *               3 = Reserved for future use.
-  *
-- * 22:22 s     Sector layout.  On Tegra GPUs prior to Xavier, there is a further
-- *             bit remapping step that occurs at an even lower level than the
-- *             page kind and block linear swizzles.  This causes the layout of
-- *             surfaces mapped in those SOC's GPUs to be incompatible with the
-- *             equivalent mapping on other GPUs in the same system.
-+ * 22:22 s     Sector layout.  There is a further bit remapping step that occurs
-+ * 26:26       at an even lower level than the page kind and block linear
-+ *             swizzles.  This causes the bit arrangement of surfaces in memory
-+ *             to differ subtly, and prevents direct sharing of surfaces between
-+ *             GPUs with different layouts.
-  *
-- *               0 = Tegra K1 - Tegra Parker/TX2 Layout.
-- *               1 = Desktop GPU and Tegra Xavier+ Layout
-+ *               0 = Tegra K1 - Tegra Parker/TX2 Layout
-+ *               1 = Pre-GB20x, Tegra Xavier-Orin, GB10 Layout
-+ *               2 = GB20x(Blackwell 2)+ Layout for some pixel/texel sizes
-+ *               3 = reserved for future use.
-  *
-  * 25:23 c     Lossless Framebuffer Compression type.
-  *
-@@ -995,7 +999,7 @@ extern "C" {
-  *               6 = Reserved for future use
-  *               7 = Reserved for future use
-  *
-- * 55:26 -     Reserved for future use.  Must be zero.
-+ * 55:27 -     Reserved for future use.  Must be zero.
-  */
- #define DRM_FORMAT_MOD_NVIDIA_BLOCK_LINEAR_2D(c, s, g, k, h) \
- 	fourcc_mod_code(NVIDIA, \
-@@ -1006,8 +1010,10 @@ extern "C" {
- 			  __fourcc_mod_nvidia_pkind_shift) | \
- 			 (((g) & __fourcc_mod_nvidia_kgen_mask) << \
- 			  __fourcc_mod_nvidia_kgen_shift) | \
--			 (((s) & __fourcc_mod_nvidia_slayout_mask) << \
--			  __fourcc_mod_nvidia_slayout_shift) | \
-+			 (((s) & __fourcc_mod_nvidia_slayout_low_mask) << \
-+			  __fourcc_mod_nvidia_slayout_low_shift) | \
-+			 (((s) & __fourcc_mod_nvidia_slayout_high_mask) << \
-+			  __fourcc_mod_nvidia_slayout_high_shift) | \
- 			 (((c) & __fourcc_mod_nvidia_comp_mask) << \
- 			  __fourcc_mod_nvidia_comp_shift)))
- 
-@@ -1037,12 +1043,6 @@ __DRM_FOURCC_MKNVHELPER_FUNC(pkind)
-  */
- __DRM_FOURCC_MKNVHELPER_FUNC(kgen)
- 
--/*
-- * Get the sector layout specified by mod:
-- * static inline __u64 drm_fourcc_nvidia_format_mod_slayout(__u64 mod)
-- */
--__DRM_FOURCC_MKNVHELPER_FUNC(slayout)
--
- /*
-  * Get the lossless framebuffer compression specified by mod:
-  * static inline __u64 drm_fourcc_nvidia_format_mod_kgen(__u64 mod)
-@@ -1051,6 +1051,16 @@ __DRM_FOURCC_MKNVHELPER_FUNC(comp)
- 
- #undef __DRM_FOURCC_MKNVHELPER_FUNC
- 
-+/* Get the sector layout specified by mod: */
-+static inline __u64
-+drm_fourcc_nvidia_format_mod_slayout(__u64 mod)
-+{
-+	return ((mod >> __fourcc_mod_nvidia_slayout_low_shift) &
-+		__fourcc_mod_nvidia_slayout_low_mask) |
-+		((mod >> __fourcc_mod_nvidia_slayout_high_shift) &
-+		 __fourcc_mod_nvidia_slayout_high_mask);
-+}
-+
- /* To grandfather in prior block linear format modifiers to the above layout,
-  * the page kind "0", which corresponds to "pitch/linear" and hence is unusable
-  * with block-linear layouts, is remapped within drivers to the value 0xfe,
--- 
-2.49.0
+> + *               3 =3D reserved for future use.
+>   *
+>   * 25:23 c     Lossless Framebuffer Compression type.
+>   *
+> @@ -995,7 +999,7 @@ extern "C" {
+>   *               6 =3D Reserved for future use
+>   *               7 =3D Reserved for future use
+>   *
+> - * 55:26 -     Reserved for future use.  Must be zero.
+> + * 55:27 -     Reserved for future use.  Must be zero.
+>   */
+>  #define DRM_FORMAT_MOD_NVIDIA_BLOCK_LINEAR_2D(c, s, g, k, h) \
+>         fourcc_mod_code(NVIDIA, \
+> @@ -1006,8 +1010,10 @@ extern "C" {
+>                           __fourcc_mod_nvidia_pkind_shift) | \
+>                          (((g) & __fourcc_mod_nvidia_kgen_mask) << \
+>                           __fourcc_mod_nvidia_kgen_shift) | \
+> -                        (((s) & __fourcc_mod_nvidia_slayout_mask) << \
+> -                         __fourcc_mod_nvidia_slayout_shift) | \
+> +                        (((s) & __fourcc_mod_nvidia_slayout_low_mask) <<=
+ \
+> +                         __fourcc_mod_nvidia_slayout_low_shift) | \
+> +                        (((s) & __fourcc_mod_nvidia_slayout_high_mask) <=
+<
+> \
+> +                         __fourcc_mod_nvidia_slayout_high_shift) | \
+>                          (((c) & __fourcc_mod_nvidia_comp_mask) << \
+>                           __fourcc_mod_nvidia_comp_shift)))
+>
+> @@ -1037,12 +1043,6 @@ __DRM_FOURCC_MKNVHELPER_FUNC(pkind)
+>   */
+>  __DRM_FOURCC_MKNVHELPER_FUNC(kgen)
+>
+> -/*
+> - * Get the sector layout specified by mod:
+> - * static inline __u64 drm_fourcc_nvidia_format_mod_slayout(__u64 mod)
+> - */
+> -__DRM_FOURCC_MKNVHELPER_FUNC(slayout)
+> -
+>  /*
+>   * Get the lossless framebuffer compression specified by mod:
+>   * static inline __u64 drm_fourcc_nvidia_format_mod_kgen(__u64 mod)
+> @@ -1051,6 +1051,16 @@ __DRM_FOURCC_MKNVHELPER_FUNC(comp)
+>
+>  #undef __DRM_FOURCC_MKNVHELPER_FUNC
+>
+> +/* Get the sector layout specified by mod: */
+> +static inline __u64
+> +drm_fourcc_nvidia_format_mod_slayout(__u64 mod)
+> +{
+> +       return ((mod >> __fourcc_mod_nvidia_slayout_low_shift) &
+> +               __fourcc_mod_nvidia_slayout_low_mask) |
+> +               ((mod >> __fourcc_mod_nvidia_slayout_high_shift) &
+> +                __fourcc_mod_nvidia_slayout_high_mask);
+> +}
+> +
+>  /* To grandfather in prior block linear format modifiers to the above
+> layout,
+>   * the page kind "0", which corresponds to "pitch/linear" and hence is
+> unusable
+>   * with block-linear layouts, is remapped within drivers to the value
+> 0xfe,
+> --
+> 2.49.0
+>
+>
 
+--0000000000006641d406390ea7f9
+Content-Type: text/html; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+
+<div dir=3D"ltr"><div class=3D"gmail_quote gmail_quote_container"><div dir=
+=3D"ltr" class=3D"gmail_attr">On Thu, Jul 3, 2025 at 6:34=E2=80=AFPM James =
+Jones &lt;<a href=3D"mailto:jajones@nvidia.com">jajones@nvidia.com</a>&gt; =
+wrote:<br></div><blockquote class=3D"gmail_quote" style=3D"margin:0px 0px 0=
+px 0.8ex;border-left:1px solid rgb(204,204,204);padding-left:1ex">The layou=
+t of bits within the individual tiles<br>
+(referred to as sectors in the<br>
+DRM_FORMAT_MOD_NVIDIA_BLOCK_LINEAR_2D() macro)<br>
+changed for some formats starting in Blackwell 2<br>
+GPUs. To denote the difference, extend the sector<br>
+field in the parametric format modifier definition<br>
+used to generate modifier values for NVIDIA<br>
+hardware.<br>
+<br>
+Without this change, it would be impossible to<br>
+differentiate the two layouts based on modifiers,<br>
+and as a result software could attempt to share<br>
+surfaces directly between pre-GB20x and GB20x<br>
+cards, resulting in corruption when the surface<br>
+was accessed on one of the GPUs after being<br>
+populated with content by the other.<br>
+<br>
+Of note: This change causes the<br>
+DRM_FORMAT_MOD_NVIDIA_BLOCK_LINEAR_2D() macro to<br>
+evaluate its &quot;s&quot; parameter twice, with the side<br>
+effects that entails. I surveyed all usage of the<br>
+modifier in the kernel and Mesa code, and that<br>
+does not appear to be problematic in any current<br>
+usage, but I thought it was worth calling out.<br>
+<br>
+Signed-off-by: James Jones &lt;<a href=3D"mailto:jajones@nvidia.com" target=
+=3D"_blank">jajones@nvidia.com</a>&gt;<br>
+---<br>
+=C2=A0include/uapi/drm/drm_fourcc.h | 46 +++++++++++++++++++++-------------=
+-<br>
+=C2=A01 file changed, 28 insertions(+), 18 deletions(-)<br>
+<br>
+diff --git a/include/uapi/drm/drm_fourcc.h b/include/uapi/drm/drm_fourcc.h<=
+br>
+index 052e5fdd1d3b..348b2f1c1cb7 100644<br>
+--- a/include/uapi/drm/drm_fourcc.h<br>
++++ b/include/uapi/drm/drm_fourcc.h<br>
+@@ -909,8 +909,10 @@ extern &quot;C&quot; {<br>
+=C2=A0#define __fourcc_mod_nvidia_pkind_shift 12<br>
+=C2=A0#define __fourcc_mod_nvidia_kgen_mask 0x3ULL<br>
+=C2=A0#define __fourcc_mod_nvidia_kgen_shift 20<br>
+-#define __fourcc_mod_nvidia_slayout_mask 0x1ULL<br>
+-#define __fourcc_mod_nvidia_slayout_shift 22<br>
++#define __fourcc_mod_nvidia_slayout_low_mask 0x1ULL<br>
++#define __fourcc_mod_nvidia_slayout_low_shift 22<br>
++#define __fourcc_mod_nvidia_slayout_high_mask 0x2ULL<br>
++#define __fourcc_mod_nvidia_slayout_high_shift 25<br>
+=C2=A0#define __fourcc_mod_nvidia_comp_mask 0x7ULL<br>
+=C2=A0#define __fourcc_mod_nvidia_comp_shift 23<br>
+<br>
+@@ -973,14 +975,16 @@ extern &quot;C&quot; {<br>
+=C2=A0 *=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A02 =3D Gob He=
+ight 8, Turing+ Page Kind mapping<br>
+=C2=A0 *=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A03 =3D Reserv=
+ed for future use.<br>
+=C2=A0 *<br>
+- * 22:22 s=C2=A0 =C2=A0 =C2=A0Sector layout.=C2=A0 On Tegra GPUs prior to =
+Xavier, there is a further<br>
+- *=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0bit remapping step that =
+occurs at an even lower level than the<br>
+- *=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0page kind and block line=
+ar swizzles.=C2=A0 This causes the layout of<br>
+- *=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0surfaces mapped in those=
+ SOC&#39;s GPUs to be incompatible with the<br>
+- *=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0equivalent mapping on ot=
+her GPUs in the same system.<br>
++ * 22:22 s=C2=A0 =C2=A0 =C2=A0Sector layout.=C2=A0 There is a further bit =
+remapping step that occurs<br>
++ * 26:26=C2=A0 =C2=A0 =C2=A0 =C2=A0at an even lower level than the page ki=
+nd and block linear<br>
++ *=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0swizzles.=C2=A0 This cau=
+ses the bit arrangement of surfaces in memory<br>
++ *=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0to differ subtly, and pr=
+events direct sharing of surfaces between<br>
++ *=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0GPUs with different layo=
+uts.<br>
+=C2=A0 *<br>
+- *=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A00 =3D Tegra K1 - =
+Tegra Parker/TX2 Layout.<br>
+- *=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A01 =3D Desktop GPU=
+ and Tegra Xavier+ Layout<br>
++ *=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A00 =3D Tegra K1 - =
+Tegra Parker/TX2 Layout<br>
++ *=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A01 =3D Pre-GB20x, =
+Tegra Xavier-Orin, GB10 Layout<br>
++ *=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A02 =3D GB20x(Black=
+well 2)+ Layout for some pixel/texel sizes<br></blockquote><div><br></div><=
+div>I&#39;m not sure I like just lumping all of blackwell together. Blackwe=
+ll is the same as Turing for 32, 64, and 128-bit formats. It&#39;s only dif=
+ferent on 8 and 16 and those aren&#39;t the same. The way we modeled this f=
+or NVK is to have Turing, Blackwell8Bit, and Blackwell16Bit=C2=A0GOBTypes. =
+I think I&#39;d prefer the modifiers take a similar form.</div><div><br></d=
+iv><div>Technically, this isn&#39;t strictly necessary as there is always a=
+ format and formats with different element sizes aren&#39;t compatible so a=
+ driver can always look at format+modifier.=C2=A0 However, it is a better m=
+odel of the hardware.</div><div><br></div><div>~Faith Ekstrand</div><div><b=
+r></div><div>=C2=A0</div><blockquote class=3D"gmail_quote" style=3D"margin:=
+0px 0px 0px 0.8ex;border-left:1px solid rgb(204,204,204);padding-left:1ex">
++ *=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A03 =3D reserved fo=
+r future use.<br>
+=C2=A0 *<br>
+=C2=A0 * 25:23 c=C2=A0 =C2=A0 =C2=A0Lossless Framebuffer Compression type.<=
+br>
+=C2=A0 *<br>
+@@ -995,7 +999,7 @@ extern &quot;C&quot; {<br>
+=C2=A0 *=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A06 =3D Reserv=
+ed for future use<br>
+=C2=A0 *=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A07 =3D Reserv=
+ed for future use<br>
+=C2=A0 *<br>
+- * 55:26 -=C2=A0 =C2=A0 =C2=A0Reserved for future use.=C2=A0 Must be zero.=
+<br>
++ * 55:27 -=C2=A0 =C2=A0 =C2=A0Reserved for future use.=C2=A0 Must be zero.=
+<br>
+=C2=A0 */<br>
+=C2=A0#define DRM_FORMAT_MOD_NVIDIA_BLOCK_LINEAR_2D(c, s, g, k, h) \<br>
+=C2=A0 =C2=A0 =C2=A0 =C2=A0 fourcc_mod_code(NVIDIA, \<br>
+@@ -1006,8 +1010,10 @@ extern &quot;C&quot; {<br>
+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=
+=A0 =C2=A0 =C2=A0 __fourcc_mod_nvidia_pkind_shift) | \<br>
+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=
+=A0 =C2=A0 =C2=A0(((g) &amp; __fourcc_mod_nvidia_kgen_mask) &lt;&lt; \<br>
+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=
+=A0 =C2=A0 =C2=A0 __fourcc_mod_nvidia_kgen_shift) | \<br>
+-=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=
+=A0 =C2=A0 (((s) &amp; __fourcc_mod_nvidia_slayout_mask) &lt;&lt; \<br>
+-=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=
+=A0 =C2=A0 =C2=A0__fourcc_mod_nvidia_slayout_shift) | \<br>
++=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=
+=A0 =C2=A0 (((s) &amp; __fourcc_mod_nvidia_slayout_low_mask) &lt;&lt; \<br>
++=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=
+=A0 =C2=A0 =C2=A0__fourcc_mod_nvidia_slayout_low_shift) | \<br>
++=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=
+=A0 =C2=A0 (((s) &amp; __fourcc_mod_nvidia_slayout_high_mask) &lt;&lt; \<br=
+>
++=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=
+=A0 =C2=A0 =C2=A0__fourcc_mod_nvidia_slayout_high_shift) | \<br>
+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=
+=A0 =C2=A0 =C2=A0(((c) &amp; __fourcc_mod_nvidia_comp_mask) &lt;&lt; \<br>
+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=
+=A0 =C2=A0 =C2=A0 __fourcc_mod_nvidia_comp_shift)))<br>
+<br>
+@@ -1037,12 +1043,6 @@ __DRM_FOURCC_MKNVHELPER_FUNC(pkind)<br>
+=C2=A0 */<br>
+=C2=A0__DRM_FOURCC_MKNVHELPER_FUNC(kgen)<br>
+<br>
+-/*<br>
+- * Get the sector layout specified by mod:<br>
+- * static inline __u64 drm_fourcc_nvidia_format_mod_slayout(__u64 mod)<br>
+- */<br>
+-__DRM_FOURCC_MKNVHELPER_FUNC(slayout)<br>
+-<br>
+=C2=A0/*<br>
+=C2=A0 * Get the lossless framebuffer compression specified by mod:<br>
+=C2=A0 * static inline __u64 drm_fourcc_nvidia_format_mod_kgen(__u64 mod)<b=
+r>
+@@ -1051,6 +1051,16 @@ __DRM_FOURCC_MKNVHELPER_FUNC(comp)<br>
+<br>
+=C2=A0#undef __DRM_FOURCC_MKNVHELPER_FUNC<br>
+<br>
++/* Get the sector layout specified by mod: */<br>
++static inline __u64<br>
++drm_fourcc_nvidia_format_mod_slayout(__u64 mod)<br>
++{<br>
++=C2=A0 =C2=A0 =C2=A0 =C2=A0return ((mod &gt;&gt; __fourcc_mod_nvidia_slayo=
+ut_low_shift) &amp;<br>
++=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0__fourcc_mod_nvidia=
+_slayout_low_mask) |<br>
++=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0((mod &gt;&gt; __fo=
+urcc_mod_nvidia_slayout_high_shift) &amp;<br>
++=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 __fourcc_mod_nvidi=
+a_slayout_high_mask);<br>
++}<br>
++<br>
+=C2=A0/* To grandfather in prior block linear format modifiers to the above=
+ layout,<br>
+=C2=A0 * the page kind &quot;0&quot;, which corresponds to &quot;pitch/line=
+ar&quot; and hence is unusable<br>
+=C2=A0 * with block-linear layouts, is remapped within drivers to the value=
+ 0xfe,<br>
+-- <br>
+2.49.0<br>
+<br>
+</blockquote></div></div>
+
+--0000000000006641d406390ea7f9--
