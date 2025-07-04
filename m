@@ -2,60 +2,60 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id 91DE8CBADE2
-	for <lists+nouveau@lfdr.de>; Sat, 13 Dec 2025 13:45:33 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 8678BCBADD0
+	for <lists+nouveau@lfdr.de>; Sat, 13 Dec 2025 13:45:29 +0100 (CET)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 0A32B10EB70;
-	Sat, 13 Dec 2025 12:41:37 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id ADCDD10EB3F;
+	Sat, 13 Dec 2025 12:41:36 +0000 (UTC)
 Authentication-Results: gabe.freedesktop.org;
-	dkim=permerror (0-bit key) header.d=gmail.com header.i=@gmail.com header.b="LPOC1hA2";
+	dkim=permerror (0-bit key) header.d=gmail.com header.i=@gmail.com header.b="QxoF9fSM";
 	dkim-atps=neutral
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from mail-pl1-f174.google.com (mail-pl1-f174.google.com
- [209.85.214.174])
- by gabe.freedesktop.org (Postfix) with ESMTPS id C74F310E8F8;
- Thu,  3 Jul 2025 21:38:40 +0000 (UTC)
-Received: by mail-pl1-f174.google.com with SMTP id
- d9443c01a7336-2352b04c7c1so622045ad.3; 
- Thu, 03 Jul 2025 14:38:40 -0700 (PDT)
+Received: from mail-pj1-f44.google.com (mail-pj1-f44.google.com
+ [209.85.216.44])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 1A92710E98A;
+ Fri,  4 Jul 2025 08:40:57 +0000 (UTC)
+Received: by mail-pj1-f44.google.com with SMTP id
+ 98e67ed59e1d1-313fab41fd5so172894a91.1; 
+ Fri, 04 Jul 2025 01:40:57 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1751578720; x=1752183520; darn=lists.freedesktop.org;
+ d=gmail.com; s=20230601; t=1751618456; x=1752223256; darn=lists.freedesktop.org;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:from:to:cc:subject:date
  :message-id:reply-to;
- bh=pHNodlGoraqosvL2in94YD46DI6OCuusa8x3ST+BCu8=;
- b=LPOC1hA2MiOizLOeiR7A3XibECWw3jmCvhAiH/pJCkwzTDAJpuHMndGhO2N1L+ubCR
- iEQ3RQQVHYICLsQdLLH+nTRqlsCi+5g9rlbr+NFmMc2ue4fmN7KgWmr+5Ov4goLbX2+e
- T/UhtOxz5xKZRk+V5M8yR2LUk1on4SZvx9bSU05WTiNMT+xefXOYkUYTzKchTgCurkcI
- BFDu1+RJNttVzfG+3uhqzMjlGYpJTvZSyTFaVdCIGeLHKuLoa0aMT6h0u2xAujeRZY4e
- txWxvVncCcSF+3YeYxx7LGILPE8eTWyBOChIFs+1/IK4eLogMSMakXYasHPC01Yanpju
- biKQ==
+ bh=dHSEKYsU05H6zm689vQoHx3pYIDxa35XkhfzWTQQ1co=;
+ b=QxoF9fSME+Rz39FqSdQq6lrYkMhonjGD13Ywv9LpA7hGbIziXprvDV/kGMgyfnOe2m
+ /3ZmqrHtwpyNB/PdlAe5Fkr7g1akXubRLx4hVcEgc2KRTJbU4LIwxnaRts5DSsIvUK61
+ F3dQV9iV8YQ5EKlc3hrAxn6D5+wFBMxdGishPFky3+o65dMRfamyRW83boViJ4BWJIxn
+ aHVFFrbahrbV1chY7S7tWdPzF5j0sVK/VIUNyv379NnyVRHvS9hZlsE4eel8MVKBrt3T
+ wClmxRmcyFIHO3BwslDyrZ0or6kwVYKnCduiac6mhL8HT3sqGhsv5zh3lq4BgkAOhoLi
+ pCQg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1751578720; x=1752183520;
+ d=1e100.net; s=20230601; t=1751618456; x=1752223256;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=pHNodlGoraqosvL2in94YD46DI6OCuusa8x3ST+BCu8=;
- b=XDhFAw+1jTEhz/93p6+MCKjEBbJnqphFRyrVMzvGf7RUWDT3YHzJ/T7B7ZGnLCjmMr
- 7gZ1gkf9uGe9J5/0+fTl1w03kW3/F9OTqNfgO3Nt1OGSjqeMf2idE/K4wtm7cSBWexOd
- /IdwCshoKGpjialEuvE+eFLsXgO8UyuRRlZY+ccZcH/Mff4UC03XFx1BTKI8ecKpf7sl
- 24zw0VTAN1LuKdh4qQ9VnuNgboDhqiGm/10VsZJkDxoC4d7hbQ5zN8JHfJ+e3Qb6krdw
- q0X835g7eI273CvOopx9dY2jid0fPJ24QpOrvO+ngo7LiXGpc0M78h1n4RgEhw9s1giX
- qldQ==
+ bh=dHSEKYsU05H6zm689vQoHx3pYIDxa35XkhfzWTQQ1co=;
+ b=V1603j7WJwhv0JWB63WphkTVoeF0yOhaFMzp0MkaQoC9lIBwuLaUKHCUqycbev54ky
+ Xyd/BK2JixWkFT1LfYxtukJJoydbbkb5lG00PW6GbIdxyU8XOtXcSN4n2pKhyGzH9b3e
+ nmR5oOR9/jokOXZjG/VWstjQrnhG1u6OndutG+EWs3aZH6Eoph67K20tcknPErXAVcIN
+ WvRzVq2ijl7otHYjol6oCoyrESUBJPUW+BBYxV3ECI5JOeZLWOmm210mqQo5OlV+qor4
+ 6uljtIGyBraUHFSsyghzV3tt364A7UcHCeWuIXVhHxyRBp7BI1PxcjpXs4pyXHzRILhk
+ DiaA==
 X-Forwarded-Encrypted: i=1;
- AJvYcCUJWcu2mYaVkBy7/LF2OzpoFUxBz6UjNZSzDNdYB12tKx5I61m4zCvyzTRU2g0kVJ5WjRpOhyPNRg==@lists.freedesktop.org,
- AJvYcCV4NkajbVb0zweDARWHNLTs2vm3zk1jsprwt7yjNJkbTP2eDhiWPNBsPlNodl94Nb1HIdYkaG5Lt18=@lists.freedesktop.org
-X-Gm-Message-State: AOJu0YzVIHlk1FsG9IToJn5O1FTI4/KascR5U+7JLH2cTA1dicF1NHcA
- XbHnAz9GajjQ6bYVo1T/ewgAUN8EdF1wHv7kuQNR7jeTc129oUIpgTbfaej/HwXelbLrZpTPlgb
- lCa4RdNSAUoBBG3tQoFfC3f62DurdXrc=
-X-Gm-Gg: ASbGnctVks0Sof//tt7PAZUpYsBfrElrXFP3zQ/yIUVRyWKBkacQ0gbaI758IZam1sb
- EIAE8e5HeThR7/aOdhM/W0jr49vjNqeNe3pjMRgXAONsF3irHHXdK4dE1nVa7MZzdDFi7gtv5Be
- 7HaVrP1VNkqxXis+Am70mogP9YNAkRW18ykUF7y0UYEVo=
-X-Google-Smtp-Source: AGHT+IELtB5XgtVh1TIl503YSOBpKDzFFV0lUuu4UGNcygnKkLkVRq6ABgmlhe/GC2s+Ns1XtRhxYcb0/TcFag3V8H0=
-X-Received: by 2002:a17:902:c404:b0:234:f4a3:f73e with SMTP id
- d9443c01a7336-23c85ec795bmr1697845ad.9.1751578720047; Thu, 03 Jul 2025
- 14:38:40 -0700 (PDT)
+ AJvYcCUBbQnp8pnzHTyMgKLmM82HbYlk7+PiWCGE3UHhDd4mzxWzB0AIYpgu9XKVTma5VQDrHKJzcAOI1Q==@lists.freedesktop.org,
+ AJvYcCWT6FaIMsuNuwfqN+mWja2TsTuXXLg67FVzHrJSPIEQa/Ojhw58WJAIsemXzdWnSSz3ElCQ+ovSDH8=@lists.freedesktop.org
+X-Gm-Message-State: AOJu0YyvWi3Y5C+rqdFanRfVdgn02y8QgJ3i06eehhzL2Wr1sTIEYSjw
+ tV2J8+xZ5ooNbPue3TYqpgzQTBlbVKBjjq6KfcXgw0q5tcq/iJ7YDYMlpwAgHNuhquilexSoQDv
+ h7S3cQjRW1OVK8qcgcxa05pBgXUCDsnI=
+X-Gm-Gg: ASbGncuv3ANjtb+lV1iB97e2+lxxxYn6FcCuAMa30VapF6+X6bY1VvKWgnPd3CrDRze
+ cOY5bSr1TrnStylYPf5iwf2568J+8EHu/8ksz2mmuKAPtHMZNUzEEeBublr+rIoLpMpDlguqkiY
+ lS9urtA1zOfnC9sWsUX/awnUmIP17tv69tzd9pNiRIw6w=
+X-Google-Smtp-Source: AGHT+IFMfEXuJ43kSXsdtdWY5bcekIDLYN3gAjscsQDNZrtLRLqrsSS7+psigrvCXRqkKZzl+hRlwyHYKmZ9GwWepBk=
+X-Received: by 2002:a17:90b:1dcc:b0:311:c1da:3858 with SMTP id
+ 98e67ed59e1d1-31aaca78c4dmr1037960a91.0.1751618456422; Fri, 04 Jul 2025
+ 01:40:56 -0700 (PDT)
 MIME-Version: 1.0
 References: <20250701-cstr-core-v13-0-29f7d3eb97a6@gmail.com>
  <20250701-cstr-core-v13-2-29f7d3eb97a6@gmail.com>
@@ -64,14 +64,16 @@ References: <20250701-cstr-core-v13-0-29f7d3eb97a6@gmail.com>
  <DB2IJ9HBIM0W.3N0JVGKX558QI@kernel.org>
  <CAJ-ks9nF5+m+_bn0Pzi9yU0pw0TyN7Fs4x--mQ4ygyHz4A6hzg@mail.gmail.com>
  <34c00dfa-8302-45ee-8d80-58b97a08e52e@lunn.ch>
-In-Reply-To: <34c00dfa-8302-45ee-8d80-58b97a08e52e@lunn.ch>
+ <CANiq72ksOG10vc36UDdBytsM-LT7PdgjcZ9B0dkqSETH6a0ezA@mail.gmail.com>
+ <CAJ-ks9mkC3ncTeTiJo54p2nAgoBgTKdRsAwEEwZE2CtwbAS7BA@mail.gmail.com>
+In-Reply-To: <CAJ-ks9mkC3ncTeTiJo54p2nAgoBgTKdRsAwEEwZE2CtwbAS7BA@mail.gmail.com>
 From: Miguel Ojeda <miguel.ojeda.sandonis@gmail.com>
-Date: Thu, 3 Jul 2025 23:38:27 +0200
-X-Gm-Features: Ac12FXwdXJJ0hQiiGaabkdHfelYANMQVK7rSTVhFAhKXDapeaUgG2_fvXL2LwP0
-Message-ID: <CANiq72ksOG10vc36UDdBytsM-LT7PdgjcZ9B0dkqSETH6a0ezA@mail.gmail.com>
+Date: Fri, 4 Jul 2025 10:40:43 +0200
+X-Gm-Features: Ac12FXwGbZyrddKNNViyoD8x6yBVbP3kVI8pI2AlPxz0BjAZk4Lec5cu34XzXTU
+Message-ID: <CANiq72kta=Wk=3764A5SzxB6Mq=sJfm9DyMZXFC91ojUSj1TeQ@mail.gmail.com>
 Subject: Re: [PATCH v13 2/5] rust: support formatting of foreign types
-To: Andrew Lunn <andrew@lunn.ch>
-Cc: Tamir Duberstein <tamird@gmail.com>, Benno Lossin <lossin@kernel.org>, 
+To: Tamir Duberstein <tamird@gmail.com>
+Cc: Andrew Lunn <andrew@lunn.ch>, Benno Lossin <lossin@kernel.org>, 
  Michal Rostecki <vadorovsky@protonmail.com>, Miguel Ojeda <ojeda@kernel.org>, 
  Alex Gaynor <alex.gaynor@gmail.com>, Boqun Feng <boqun.feng@gmail.com>, 
  Gary Guo <gary@garyguo.net>,
@@ -126,15 +128,68 @@ List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-On Thu, Jul 3, 2025 at 11:28=E2=80=AFPM Andrew Lunn <andrew@lunn.ch> wrote:
+On Fri, Jul 4, 2025 at 12:46=E2=80=AFAM Tamir Duberstein <tamird@gmail.com>=
+ wrote:
 >
-> A small patch tends to be more obviously correct than a big patch. The
-> commit message is more focused and helpful because it refers to a
-> small chunk of code. Because the commit message is more focused, it
-> can answer questions reviewers might ask, before they ask them. If i
+> There's also a tactical question about splitting by subsystem: are
+> there any tools that would assist in doing this, or is it a matter of
+> manually consulting MAINTAINERS to figure out file groupings?
 
-Yeah, also better for smaller reverts, as well as typically easier to
-backport if needed, etc.
+As Andrew mentioned, you can use that script, though I recommend not
+fully/blindly trusting it.
+
+Sometimes you will want to adjust things, e.g. sometimes things may be
+related even if in a couple different `MAINTAINERS` entries, or you
+may want to adjust the flags the script provides to filter, or you may
+want to check `git log --no-merges` to see who is recently applying
+patches related to that area, etc.
+
+It is essentially the same process as when you send patches.
+
+For instance, taking the diffstat above, and ignoring contents (i.e.
+assuming all lines could just be freely split and without considering
+other splits discussed to make the patches smaller first and reducing
+the flag day changes), I could have done something like this:
+
+    drivers/block/rnull.rs       |  2 +-
+    rust/kernel/block/mq.rs      |  2 +-
+
+    drivers/gpu/nova-core/gpu.rs |  4 +-
+
+    rust/kernel/device.rs        |  2 +-
+
+    rust/kernel/kunit.rs         |  6 +--
+
+    rust/kernel/seq_file.rs      |  2 +-
+
+    rust/kernel/fmt.rs           | 89 +++++++++++++++++++++++++++++++++++++=
+++
+    rust/kernel/lib.rs           |  1 +
+    rust/kernel/prelude.rs       |  3 +-
+    rust/kernel/print.rs         |  4 +-
+    rust/kernel/str.rs           | 22 ++++------
+    rust/macros/fmt.rs           | 99
+++++++++++++++++++++++++++++++++++++++++++++
+    rust/macros/lib.rs           | 19 +++++++++
+    rust/macros/quote.rs         |  7 ++++
+    scripts/rustdoc_test_gen.rs  |  2 +-
+
+And then those long lines may hint that it may make sense to split the
+smaller tweaks in the last group into their own patch, so that it
+mirrors what is done for the other smaller groups. Thus possibly
+leaving the feature being added into its own patch, which would be the
+biggest and the one that would take some discussion. And the others
+would be the small ones that are easy to Acked-by or Reviewed-by or
+simply take (if independently possible) by other maintainers.
+
+And so on -- again, this is speaking generally, and it is just a dummy
+example, not intended to say anything about the current patch. And
+sometimes things may not make sense to split too far, and it can be
+more annoying than it is worth for everyone involved, e.g. when we are
+talking about trivial conversions that could take 50+ patches that
+could be automated instead and then applied by a single maintainer.
+
+So it is a balance.
 
 Cheers,
 Miguel
