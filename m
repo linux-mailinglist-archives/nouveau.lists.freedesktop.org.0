@@ -2,64 +2,83 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id 24892AF928F
-	for <lists+nouveau@lfdr.de>; Fri,  4 Jul 2025 14:30:16 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id ED53FAF935B
+	for <lists+nouveau@lfdr.de>; Fri,  4 Jul 2025 15:00:43 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id CFA6510EA1A;
-	Fri,  4 Jul 2025 12:30:14 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id A444A10EA2D;
+	Fri,  4 Jul 2025 13:00:42 +0000 (UTC)
 Authentication-Results: gabe.freedesktop.org;
-	dkim=fail reason="signature verification failed" (2048-bit key; unprotected) header.d=igalia.com header.i=@igalia.com header.b="ldJBXSYz";
+	dkim=pass (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="mi+LrZHj";
 	dkim-atps=neutral
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from fanzine2.igalia.com (fanzine2.igalia.com [213.97.179.56])
- by gabe.freedesktop.org (Postfix) with ESMTPS id F179610EA18;
- Fri,  4 Jul 2025 12:30:13 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=igalia.com; 
- s=20170329;
- h=Content-Transfer-Encoding:Content-Type:In-Reply-To:From:
- References:Cc:To:Subject:MIME-Version:Date:Message-ID:Sender:Reply-To:
- Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
- Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
- List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=0xfZqBp17aRS6MxoH8oIJF+tAVuvVXaqV0rJ/wtD2Ng=; b=ldJBXSYz7KzJMMVpkDqKFAtjMp
- ByXKmWZgWhQyFOwT4xlWUFrEy62aQ/t2fdUBJZ6y+FeiFrC7pPX51zggyg76zOkcYNqANfd9i5QdX
- iUukzKGJXe1M/4YqiQeyKB5mDyJpfHk6DrvKnXefeImwD71FdVAA+jSPu6aYb/2kfN85laAnV/S7x
- BbHBUh2a32uVYZQ5gK7WmigO8v8tVAAWEWr3Cp3o5IszvrLO2eTjdildqbtzjBYkoAmKq/qIY+2sR
- pscHq1GMXZNCN7FR0n8TsbwBnYnehUEpccE76EAemBdmoJ5G1OAEGf73XYKdOkUXZm7R1SZT/M9sm
- JGY3uSjg==;
-Received: from [81.79.92.254] (helo=[192.168.0.101])
- by fanzine2.igalia.com with esmtpsa 
- (Cipher TLS1.3:ECDHE_X25519__RSA_PSS_RSAE_SHA256__AES_128_GCM:128) (Exim)
- id 1uXfYH-00CQTY-B5; Fri, 04 Jul 2025 14:30:01 +0200
-Message-ID: <da5fefba-7222-4d77-9528-51eef235c36a@igalia.com>
-Date: Fri, 4 Jul 2025 13:30:00 +0100
-MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 2/6] drm/sched/tests: Port to cancel_job()
-To: phasta@kernel.org, Lyude Paul <lyude@redhat.com>,
- Danilo Krummrich <dakr@kernel.org>, David Airlie <airlied@gmail.com>,
- Simona Vetter <simona@ffwll.ch>, Matthew Brost <matthew.brost@intel.com>,
- =?UTF-8?Q?Christian_K=C3=B6nig?= <ckoenig.leichtzumerken@gmail.com>,
- Maarten Lankhorst <maarten.lankhorst@linux.intel.com>,
- Maxime Ripard <mripard@kernel.org>, Thomas Zimmermann <tzimmermann@suse.de>,
- Sumit Semwal <sumit.semwal@linaro.org>,
- Pierre-Eric Pelloux-Prayer <pierre-eric.pelloux-prayer@amd.com>
-Cc: dri-devel@lists.freedesktop.org, nouveau@lists.freedesktop.org,
- linux-kernel@vger.kernel.org, linux-media@vger.kernel.org,
- linaro-mm-sig@lists.linaro.org
-References: <20250701132142.76899-3-phasta@kernel.org>
- <20250701132142.76899-5-phasta@kernel.org>
- <f9b55d5b-0018-4850-a9b7-2f267467e957@igalia.com>
- <6762d33b4fe8e7b264a7403f228e6ec6723ae623.camel@mailbox.org>
- <9a070a66-f6fd-45b4-958c-c6e9f3487a0c@igalia.com>
- <fc61c7c9d5d341d752458d0ee6313ec932803ab3.camel@mailbox.org>
- <298eeb951676d24981f1d9208b076ec03563a3ae.camel@mailbox.org>
-Content-Language: en-GB
-From: Tvrtko Ursulin <tvrtko.ursulin@igalia.com>
-In-Reply-To: <298eeb951676d24981f1d9208b076ec03563a3ae.camel@mailbox.org>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 8bit
+Received: from tor.source.kernel.org (tor.source.kernel.org [172.105.4.254])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 8EDF510EA2D;
+ Fri,  4 Jul 2025 13:00:41 +0000 (UTC)
+Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
+ by tor.source.kernel.org (Postfix) with ESMTP id 6C9C961457;
+ Fri,  4 Jul 2025 13:00:40 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 3F840C4CEE3;
+ Fri,  4 Jul 2025 13:00:26 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+ s=k20201202; t=1751634040;
+ bh=PQ+uuvbgXKFc5vIr220QI1Lf8oYUGvsoSa+Kga5uCxI=;
+ h=Date:Subject:From:To:Cc:References:In-Reply-To:From;
+ b=mi+LrZHjF+yRfLmrMqCm45+w6sUTBWLIFLln4t06TCRfNNID72odMCaUkq6P7uCUX
+ 6UUsEVXl8dcAwtsGpEQ4be8tzBNVlVqFR/dHUws6kyBu1YvtpkQhwwKUxloNwWR9R/
+ IGSdHN0MxrYLaSCkpAV78+BdMxg3sCNdQTC9sRmKmYWFLMqIw4rrFCZRyV7KRJtd2E
+ 0j73lXtusTnleqcS0NxrPxjaCD0MHAoeWaeskbB4i7ET3pELASmMynDmabvpgju8s5
+ lM5kWnUgAXLXzxzcI7AEuaVKCn3OYtKdR4/uhCwyRJ5lqmW3Ng5o+Qj0VkMX0rxdf6
+ 342H5Q7Nz/erA==
+Mime-Version: 1.0
+Content-Transfer-Encoding: quoted-printable
+Content-Type: text/plain; charset=UTF-8
+Date: Fri, 04 Jul 2025 15:00:24 +0200
+Message-Id: <DB3AFTUC22W1.39C4DMWSENZGB@kernel.org>
+Subject: Re: [PATCH v13 3/5] rust: replace `CStr` with `core::ffi::CStr`
+From: "Benno Lossin" <lossin@kernel.org>
+To: "Tamir Duberstein" <tamird@gmail.com>, "Michal Rostecki"
+ <vadorovsky@protonmail.com>, "Miguel Ojeda" <ojeda@kernel.org>, "Alex
+ Gaynor" <alex.gaynor@gmail.com>, "Boqun Feng" <boqun.feng@gmail.com>, "Gary
+ Guo" <gary@garyguo.net>, =?utf-8?q?Bj=C3=B6rn_Roy_Baron?=
+ <bjorn3_gh@protonmail.com>, "Andreas Hindborg" <a.hindborg@kernel.org>,
+ "Alice Ryhl" <aliceryhl@google.com>, "Trevor Gross" <tmgross@umich.edu>,
+ "Brendan Higgins" <brendan.higgins@linux.dev>, "David Gow"
+ <davidgow@google.com>, "Rae Moar" <rmoar@google.com>, "Danilo Krummrich"
+ <dakr@kernel.org>, "Maarten Lankhorst" <maarten.lankhorst@linux.intel.com>,
+ "Maxime Ripard" <mripard@kernel.org>, "Thomas Zimmermann"
+ <tzimmermann@suse.de>, "David Airlie" <airlied@gmail.com>, "Simona Vetter"
+ <simona@ffwll.ch>, "Greg Kroah-Hartman" <gregkh@linuxfoundation.org>,
+ "Rafael J. Wysocki" <rafael@kernel.org>, "Luis Chamberlain"
+ <mcgrof@kernel.org>, "Russ Weight" <russ.weight@linux.dev>, "FUJITA
+ Tomonori" <fujita.tomonori@gmail.com>, "Rob Herring" <robh@kernel.org>,
+ "Saravana Kannan" <saravanak@google.com>, "Peter Zijlstra"
+ <peterz@infradead.org>, "Ingo Molnar" <mingo@redhat.com>, "Will Deacon"
+ <will@kernel.org>, "Waiman Long" <longman@redhat.com>, "Nathan Chancellor"
+ <nathan@kernel.org>, "Nick Desaulniers" <nick.desaulniers+lkml@gmail.com>,
+ "Bill Wendling" <morbo@google.com>, "Justin Stitt"
+ <justinstitt@google.com>, "Andrew Lunn" <andrew@lunn.ch>, "Heiner Kallweit"
+ <hkallweit1@gmail.com>, "Russell King" <linux@armlinux.org.uk>, "David S.
+ Miller" <davem@davemloft.net>, "Eric Dumazet" <edumazet@google.com>, "Jakub
+ Kicinski" <kuba@kernel.org>, "Paolo Abeni" <pabeni@redhat.com>, "Bjorn
+ Helgaas" <bhelgaas@google.com>, "Arnd Bergmann" <arnd@arndb.de>, "Jens
+ Axboe" <axboe@kernel.dk>, =?utf-8?q?Krzysztof_Wilczy=C5=84ski?=
+ <kwilczynski@kernel.org>, "Dave Ertman" <david.m.ertman@intel.com>, "Ira
+ Weiny" <ira.weiny@intel.com>, "Leon Romanovsky" <leon@kernel.org>, "Breno
+ Leitao" <leitao@debian.org>, "Viresh Kumar" <viresh.kumar@linaro.org>,
+ "Michael Turquette" <mturquette@baylibre.com>, "Stephen Boyd"
+ <sboyd@kernel.org>
+Cc: <rust-for-linux@vger.kernel.org>, <linux-kernel@vger.kernel.org>,
+ <linux-kselftest@vger.kernel.org>, <kunit-dev@googlegroups.com>,
+ <dri-devel@lists.freedesktop.org>, <netdev@vger.kernel.org>,
+ <devicetree@vger.kernel.org>, <llvm@lists.linux.dev>,
+ <linux-pci@vger.kernel.org>, <nouveau@lists.freedesktop.org>,
+ <linux-block@vger.kernel.org>, <linux-pm@vger.kernel.org>,
+ <linux-clk@vger.kernel.org>
+X-Mailer: aerc 0.20.1
+References: <20250701-cstr-core-v13-0-29f7d3eb97a6@gmail.com>
+ <20250701-cstr-core-v13-3-29f7d3eb97a6@gmail.com>
+In-Reply-To: <20250701-cstr-core-v13-3-29f7d3eb97a6@gmail.com>
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -74,304 +93,56 @@ List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
+On Tue Jul 1, 2025 at 6:49 PM CEST, Tamir Duberstein wrote:
+> `kernel::ffi::CStr` was introduced in commit d126d2380131 ("rust: str:
+> add `CStr` type") in November 2022 as an upstreaming of earlier work
+> that was done in May 2021[0]. That earlier work, having predated the
+> inclusion of `CStr` in `core`, largely duplicated the implementation of
+> `std::ffi::CStr`.
+>
+> `std::ffi::CStr` was moved to `core::ffi::CStr` in Rust 1.64 in
+> September 2022. Hence replace `kernel::str::CStr` with `core::ffi::CStr`
+> to reduce our custom code footprint, and retain needed custom
+> functionality through an extension trait.
+>
+> C-String literals were added in Rust 1.77, while our MSRV is 1.78. Thus
+> opportunistically replace instances of `kernel::c_str!` with C-String
+> literals where other code changes were already necessary or where
+> existing code triggered clippy lints; the rest will be done in a later
+> commit.
+>
+> Link: https://github.com/Rust-for-Linux/linux/commit/faa3cbcca03d0dec8f8e=
+43f1d8d5c0860d98a23f [0]
+> Acked-by: Greg Kroah-Hartman <gregkh@linuxfoundation.org>
+> Reviewed-by: Alice Ryhl <aliceryhl@google.com>
+> Signed-off-by: Tamir Duberstein <tamird@gmail.com>
+> ---
+>  drivers/gpu/drm/drm_panic_qr.rs |   2 +-
+>  rust/kernel/auxiliary.rs        |   4 +-
+>  rust/kernel/configfs.rs         |   4 +-
+>  rust/kernel/cpufreq.rs          |   2 +-
+>  rust/kernel/device.rs           |   4 +-
+>  rust/kernel/drm/device.rs       |   4 +-
+>  rust/kernel/error.rs            |   4 +-
+>  rust/kernel/firmware.rs         |  11 +-
+>  rust/kernel/kunit.rs            |   6 +-
+>  rust/kernel/miscdevice.rs       |   2 +-
+>  rust/kernel/net/phy.rs          |   2 +-
+>  rust/kernel/of.rs               |   2 +-
+>  rust/kernel/prelude.rs          |   5 +-
+>  rust/kernel/seq_file.rs         |   4 +-
+>  rust/kernel/str.rs              | 394 +++++++++++-----------------------=
+------
+>  rust/kernel/sync/condvar.rs     |   2 +-
+>  rust/kernel/sync/lock.rs        |   2 +-
+>  rust/kernel/sync/lock/global.rs |   2 +-
+>  samples/rust/rust_configfs.rs   |   2 +-
+>  19 files changed, 140 insertions(+), 318 deletions(-)
 
-On 04/07/2025 12:27, Philipp Stanner wrote:
-> On Fri, 2025-07-04 at 11:53 +0200, Philipp Stanner wrote:
->> On Wed, 2025-07-02 at 12:25 +0100, Tvrtko Ursulin wrote:
->>>
->>> On 02/07/2025 11:56, Philipp Stanner wrote:
->>>> On Wed, 2025-07-02 at 11:36 +0100, Tvrtko Ursulin wrote:
->>>>>
->>>>> On 01/07/2025 14:21, Philipp Stanner wrote:
->>>>>> The GPU Scheduler now supports a new callback, cancel_job(),
->>>>>> which
->>>>>> lets
->>>>>> the scheduler cancel all jobs which might not yet be freed
->>>>>> when
->>>>>> drm_sched_fini() runs. Using this callback allows for
->>>>>> significantly
->>>>>> simplifying the mock scheduler teardown code.
->>>>>>
->>>>>> Implement the cancel_job() callback and adjust the code where
->>>>>> necessary.
->>>>>
->>>>> Cross referencing against my version I think you missed this
->>>>> hunk:
->>>>>
->>>>> --- a/drivers/gpu/drm/scheduler/tests/sched_tests.h
->>>>> +++ b/drivers/gpu/drm/scheduler/tests/sched_tests.h
->>>>> @@ -49,7 +49,6 @@ struct drm_mock_scheduler {
->>>>>
->>>>>     	spinlock_t		lock;
->>>>>     	struct list_head	job_list;
->>>>> -	struct list_head	done_list;
->>>>>
->>>>>     	struct {
->>>>>     		u64		context;
->>>>>
->>>>
->>>> Right, overlooked that one.
->>>>
->>>>>
->>>>> I also had this:
->>>>>
->>>>> @@ -97,7 +96,8 @@ struct drm_mock_sched_job {
->>>>>     	struct completion	done;
->>>>>
->>>>>     #define DRM_MOCK_SCHED_JOB_DONE		0x1
->>>>> -#define DRM_MOCK_SCHED_JOB_TIMEDOUT	0x2
->>>>> +#define DRM_MOCK_SCHED_JOB_CANCELED	0x2
->>>>> +#define DRM_MOCK_SCHED_JOB_TIMEDOUT	0x4
->>>>>
->>>>> And was setting it in the callback. And since we should add a
->>>>> test to
->>>>> explicitly cover the new callback, and just the callback, that
->>>>> could
->>>>> make it very easy to do it.
->>>>
->>>> What do you imagine that to look like? The scheduler only invokes
->>>> the
->>>> callback on tear down.
->>>>
->>>> We also don't have tests that only test free_job() and the like,
->>>> do
->>>> we?
->>>>
->>>> You cannot test a callback for the scheduler, because the
->>>> callback
->>>> is
->>>> implemented in the driver.
->>>>
->>>> Callbacks are tested by using the scheduler. In this case, it's
->>>> tested
->>>> the intended way by the unit tests invoking drm_sched_free().
->>>
->>> Something like (untested):
->>>
->>> static void drm_sched_test_cleanup(struct kunit *test)
->>> {
->>> 	struct drm_mock_sched_entity *entity;
->>> 	struct drm_mock_scheduler *sched;
->>> 	struct drm_mock_sched_job job;
->>> 	bool done;
->>>
->>> 	/*
->>> 	 * Check that the job cancel callback gets invoked by the
->>> scheduler.
->>> 	 */
->>>
->>> 	sched = drm_mock_sched_new(test, MAX_SCHEDULE_TIMEOUT);
->>> 	entity = drm_mock_sched_entity_new(test,
->>> 					
->>> DRM_SCHED_PRIORITY_NORMAL,
->>> 					   sched);
->>>
->>> 	job = drm_mock_sched_job_new(test, entity);
->>> 	drm_mock_sched_job_submit(job);
->>> 	done = drm_mock_sched_job_wait_scheduled(job, HZ);
->>> 	KUNIT_ASSERT_TRUE(test, done);
->>>
->>> 	drm_mock_sched_entity_free(entity);
->>> 	drm_mock_sched_fini(sched);
->>>
->>> 	KUNIT_ASSERT_TRUE(test, job->flags &
->>> DRM_MOCK_SCHED_JOB_CANCELED);
->>> }
->>
->> That could work – but it's racy.
->>
->> I wonder if we want to introduce a mechanism into the mock scheduler
->> through which we can enforce a simulated GPU hang. Then it would
->> never
->> race, and that might be useful for more advanced tests for reset
->> recovery and those things.
->>
->> Opinions?
-> 
-> Ah wait, we can do that with job_duration = 0
+Is it also possible to split this? First rename the existing functions
+on our CStr to match upstream & then you don't need to do the rename &
+removal of our CStr in the same patch?
 
-Yes, the above already wasn't racy.
-
-If job duration is not explicitly set, and it isn't, the job will not 
-complete until test would call drm_mock_sched_advance(sched, 1). And 
-since it doesn't, the job is guaranteed to be sitting on the list 
-forever. So drm_sched_fini() has a guaranteed chance to clean it up.
-
-> Very good, I'll include something like that in v2.
-
-Ack.
-
-Regards,
-
-Tvrtko
-
->>> Or via the hw fence status.
->>>
->>> Regards,
->>>
->>> Tvrtko
->>>
->>>>>> Signed-off-by: Philipp Stanner <phasta@kernel.org>
->>>>>> ---
->>>>>>     .../gpu/drm/scheduler/tests/mock_scheduler.c  | 66
->>>>>> +++++++--
->>>>>> -----
->>>>>> -----
->>>>>>     1 file changed, 23 insertions(+), 43 deletions(-)
->>>>>>
->>>>>> diff --git a/drivers/gpu/drm/scheduler/tests/mock_scheduler.c
->>>>>> b/drivers/gpu/drm/scheduler/tests/mock_scheduler.c
->>>>>> index 49d067fecd67..2d3169d95200 100644
->>>>>> --- a/drivers/gpu/drm/scheduler/tests/mock_scheduler.c
->>>>>> +++ b/drivers/gpu/drm/scheduler/tests/mock_scheduler.c
->>>>>> @@ -63,7 +63,7 @@ static void
->>>>>> drm_mock_sched_job_complete(struct
->>>>>> drm_mock_sched_job *job)
->>>>>>     	lockdep_assert_held(&sched->lock);
->>>>>>     
->>>>>>     	job->flags |= DRM_MOCK_SCHED_JOB_DONE;
->>>>>> -	list_move_tail(&job->link, &sched->done_list);
->>>>>> +	list_del(&job->link);
->>>>>>     	dma_fence_signal_locked(&job->hw_fence);
->>>>>>     	complete(&job->done);
->>>>>>     }
->>>>>> @@ -236,26 +236,39 @@ mock_sched_timedout_job(struct
->>>>>> drm_sched_job
->>>>>> *sched_job)
->>>>>>     
->>>>>>     static void mock_sched_free_job(struct drm_sched_job
->>>>>> *sched_job)
->>>>>>     {
->>>>>> -	struct drm_mock_scheduler *sched =
->>>>>> -			drm_sched_to_mock_sched(sched_job-
->>>>>>> sched);
->>>>>>     	struct drm_mock_sched_job *job =
->>>>>> drm_sched_job_to_mock_job(sched_job);
->>>>>> -	unsigned long flags;
->>>>>>     
->>>>>> -	/* Remove from the scheduler done list. */
->>>>>> -	spin_lock_irqsave(&sched->lock, flags);
->>>>>> -	list_del(&job->link);
->>>>>> -	spin_unlock_irqrestore(&sched->lock, flags);
->>>>>>     	dma_fence_put(&job->hw_fence);
->>>>>> -
->>>>>>     	drm_sched_job_cleanup(sched_job);
->>>>>>     
->>>>>>     	/* Mock job itself is freed by the kunit framework.
->>>>>> */
->>>>>>     }
->>>>>>     
->>>>>> +static void mock_sched_cancel_job(struct drm_sched_job
->>>>>> *sched_job)
->>>>>> +{
->>>>>> +	struct drm_mock_scheduler *sched =
->>>>>> drm_sched_to_mock_sched(sched_job->sched);
->>>>>> +	struct drm_mock_sched_job *job =
->>>>>> drm_sched_job_to_mock_job(sched_job);
->>>>>> +	unsigned long flags;
->>>>>> +
->>>>>> +	hrtimer_cancel(&job->timer);
->>>>>> +
->>>>>> +	spin_lock_irqsave(&sched->lock, flags);
->>>>>> +	if (!dma_fence_is_signaled_locked(&job->hw_fence)) {
->>>>>> +		list_del(&job->link);
->>>>>> +		dma_fence_set_error(&job->hw_fence, -
->>>>>> ECANCELED);
->>>>>> +		dma_fence_signal_locked(&job->hw_fence);
->>>>>> +	}
->>>>>> +	spin_unlock_irqrestore(&sched->lock, flags);
->>>>>> +
->>>>>> +	/* The GPU Scheduler will call
->>>>>> drm_sched_backend_ops.free_job(), still.
->>>>>> +	 * Mock job itself is freed by the kunit framework.
->>>>>> */
->>>>>
->>>>> /*
->>>>>     * Multiline comment style to stay consistent, at least in
->>>>> this
->>>>> file.
->>>>>     */
->>>>>
->>>>> The rest looks good, but I need to revisit the timeout/free
->>>>> handling
->>>>> since it has been a while and you changed it recently.
->>>>>
->>>>> Regards,
->>>>>
->>>>> Tvrtko
->>>>>
->>>>>> +}
->>>>>> +
->>>>>>     static const struct drm_sched_backend_ops
->>>>>> drm_mock_scheduler_ops
->>>>>> = {
->>>>>>     	.run_job = mock_sched_run_job,
->>>>>>     	.timedout_job = mock_sched_timedout_job,
->>>>>> -	.free_job = mock_sched_free_job
->>>>>> +	.free_job = mock_sched_free_job,
->>>>>> +	.cancel_job = mock_sched_cancel_job,
->>>>>>     };
->>>>>>     
->>>>>>     /**
->>>>>> @@ -289,7 +302,6 @@ struct drm_mock_scheduler
->>>>>> *drm_mock_sched_new(struct kunit *test, long timeout)
->>>>>>     	sched->hw_timeline.context =
->>>>>> dma_fence_context_alloc(1);
->>>>>>     	atomic_set(&sched->hw_timeline.next_seqno, 0);
->>>>>>     	INIT_LIST_HEAD(&sched->job_list);
->>>>>> -	INIT_LIST_HEAD(&sched->done_list);
->>>>>>     	spin_lock_init(&sched->lock);
->>>>>>     
->>>>>>     	return sched;
->>>>>> @@ -304,38 +316,6 @@ struct drm_mock_scheduler
->>>>>> *drm_mock_sched_new(struct kunit *test, long timeout)
->>>>>>      */
->>>>>>     void drm_mock_sched_fini(struct drm_mock_scheduler *sched)
->>>>>>     {
->>>>>> -	struct drm_mock_sched_job *job, *next;
->>>>>> -	unsigned long flags;
->>>>>> -	LIST_HEAD(list);
->>>>>> -
->>>>>> -	drm_sched_wqueue_stop(&sched->base);
->>>>>> -
->>>>>> -	/* Force complete all unfinished jobs. */
->>>>>> -	spin_lock_irqsave(&sched->lock, flags);
->>>>>> -	list_for_each_entry_safe(job, next, &sched-
->>>>>>> job_list,
->>>>>> link)
->>>>>> -		list_move_tail(&job->link, &list);
->>>>>> -	spin_unlock_irqrestore(&sched->lock, flags);
->>>>>> -
->>>>>> -	list_for_each_entry(job, &list, link)
->>>>>> -		hrtimer_cancel(&job->timer);
->>>>>> -
->>>>>> -	spin_lock_irqsave(&sched->lock, flags);
->>>>>> -	list_for_each_entry_safe(job, next, &list, link)
->>>>>> -		drm_mock_sched_job_complete(job);
->>>>>> -	spin_unlock_irqrestore(&sched->lock, flags);
->>>>>> -
->>>>>> -	/*
->>>>>> -	 * Free completed jobs and jobs not yet processed by
->>>>>> the
->>>>>> DRM scheduler
->>>>>> -	 * free worker.
->>>>>> -	 */
->>>>>> -	spin_lock_irqsave(&sched->lock, flags);
->>>>>> -	list_for_each_entry_safe(job, next, &sched-
->>>>>>> done_list,
->>>>>> link)
->>>>>> -		list_move_tail(&job->link, &list);
->>>>>> -	spin_unlock_irqrestore(&sched->lock, flags);
->>>>>> -
->>>>>> -	list_for_each_entry_safe(job, next, &list, link)
->>>>>> -		mock_sched_free_job(&job->base);
->>>>>> -
->>>>>>     	drm_sched_fini(&sched->base);
->>>>>>     }
->>>>>>     
->>>>>
->>>>
->>>
->>
-> 
-
+---
+Cheers,
+Benno
