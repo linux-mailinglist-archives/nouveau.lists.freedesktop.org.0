@@ -2,61 +2,61 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id 37841BBF6E7
-	for <lists+nouveau@lfdr.de>; Mon, 06 Oct 2025 22:57:39 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 4F83FBBF689
+	for <lists+nouveau@lfdr.de>; Mon, 06 Oct 2025 22:57:25 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 4A01510E5E8;
-	Mon,  6 Oct 2025 20:57:25 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 43DB410E55D;
+	Mon,  6 Oct 2025 20:57:22 +0000 (UTC)
 Authentication-Results: gabe.freedesktop.org;
-	dkim=permerror (0-bit key) header.d=gmail.com header.i=@gmail.com header.b="e7Ufdtga";
+	dkim=permerror (0-bit key) header.d=gmail.com header.i=@gmail.com header.b="e1+4MlBv";
 	dkim-atps=neutral
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from mail-lj1-f180.google.com (mail-lj1-f180.google.com
- [209.85.208.180])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 9590C10E910;
- Thu,  3 Jul 2025 23:24:03 +0000 (UTC)
-Received: by mail-lj1-f180.google.com with SMTP id
- 38308e7fff4ca-32b78b5aa39so4188401fa.1; 
- Thu, 03 Jul 2025 16:24:03 -0700 (PDT)
+Received: from mail-lf1-f54.google.com (mail-lf1-f54.google.com
+ [209.85.167.54])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id DFBAD10EA00;
+ Fri,  4 Jul 2025 11:59:05 +0000 (UTC)
+Received: by mail-lf1-f54.google.com with SMTP id
+ 2adb3069b0e04-553b584ac96so849427e87.1; 
+ Fri, 04 Jul 2025 04:59:05 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1751585042; x=1752189842; darn=lists.freedesktop.org;
+ d=gmail.com; s=20230601; t=1751630344; x=1752235144; darn=lists.freedesktop.org;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:from:to:cc:subject:date
  :message-id:reply-to;
- bh=NtvbM0ZJbl7PRtVkId0uy2JLD6jAbUhYMSmm1BPeVlY=;
- b=e7Ufdtgal4pKlYBY5b2YuST16X1yTIX1JJEIHkMU3bHavS9D93nR0i3sy32f+VijmQ
- cMZVbjvlRHmO7Q2O6fch4Ijnk1tWCKnJFBAUkgERSYALqUVvVKoC/SnSqwSsnJhq6O2H
- xXQU/604L/KrKz97/Vfz6psySwmX2MmemZTNTDGLd9d6FAU+8czeDVL2RpQmUXKswbhx
- ucRidizPJ/93shN/bWpecFQy1BeJ6Fvdc0IQ9d9Op+8uCfUWoqnwhL/ws5KcODdnxLqX
- 4wzDK61Oglfzi6Y4afqyxtvgZRA2f4PvWDTxI1hmZuboq7ZE9OpkMe821dOOiQ0QKAcM
- kthA==
+ bh=AX2ezheHMTwCnwKIKFQeSSolcoT52guQ9m4zT7OdyqQ=;
+ b=e1+4MlBv909WocPlDiGdREMzoLUxFVgCmOgYl3aO87vwiXM5yhE4eJjiTMmRiyCxJk
+ EK2PHv3gdqCXH8iTRGPiIXHY1ycXuOQUXb/sHbsl/36ScWc0/wuTIMFYBqWVCbbjSeJQ
+ DRemY5hmX169Fa6ERswruI885vPDDm5MmwBUqnI3RwbFsmUymTVyIx5BccpMJih2ooR7
+ ps/MvyB9cyg9t/OyvsqjAk/6i9ZD479584ILphiTXtW/cmMGvPOhwCnutec9zVv0TS4V
+ O8zP00K65SejgiQmqRDm3mrCFNHzBgQEiwfW25um/R11v7w+TLtuIavz0Fd8QcF1a2mN
+ Z6iQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1751585042; x=1752189842;
+ d=1e100.net; s=20230601; t=1751630344; x=1752235144;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=NtvbM0ZJbl7PRtVkId0uy2JLD6jAbUhYMSmm1BPeVlY=;
- b=ILQmVqhccXWQxMa/ZsxgixxVggJNLJ+kh25/jPqPNB55hrxSg/enHwly2k4E8Gox8w
- /Z4+GvtF13fb9a3Sn09DCcaOAXm9YElarS0fIlT19VFpqS3IP04fpOPQd8NevDRAQ6u7
- c0Pul4ZaIILOdW2GRpJPyAzToRRasgbxxYe1kLeQsM4AHYhNOjBcUp9M6E6TnYTBA9Et
- d4c59UhpJTeqqTUy9p1LFjyWwesCQHBGmiGoLFOSPp8JqrbyaKiR82cAyGEFvD/iSfp1
- hCnRBZumBRgqOnc1B+z7pZ2b7MMyguYKsJ5kGMh+p4YZfYO9e0ZfIHdjPccR9LqOuTd3
- IJTg==
+ bh=AX2ezheHMTwCnwKIKFQeSSolcoT52guQ9m4zT7OdyqQ=;
+ b=gXj8FLmzsShwMLsrhlGEUlX6lV6SjKA3cIu53ACdwrJWnOVuSxlahSqVggXRi8FZIg
+ DmFqi/ry5PbP5G9Y+rHlyC13hibWArjC+hCaV1kWKn4JckbrXNLnJ1HDmsF6JfmXMGTy
+ CRsNhJIpYMNoTPn44i+6MGBB/XmOQKyNoJH1JnzZ/FQla/JeCUz97/Biyrj8J4Fs90Gj
+ KBh1Pmo9/08i/g6bZwy5Yine9OzfK6phPBtqEkMnE45xcLmslAl9Isc8v7TWn4zxt4SJ
+ HxN7Z76Rj1ciwIRh/GuWwQNPXVAPXHbka2Gq5ZzMx0FlJKBRCroPsNZr61Rbnc1tbGWf
+ vwDg==
 X-Forwarded-Encrypted: i=1;
- AJvYcCVPwR5bJG/WBP/BB1Zmv/vQ+8PPvtTYocuLlJ4OPSW4CMmmHkmAuZ/btR2gI26KW0SvAQ+JXLO/qA==@lists.freedesktop.org,
- AJvYcCWOs2O2WAGclvk8/sD90hRfM28hLB1dzogsZ/yvoIWwcZJ0Iymt9v3upxdUASNIeRvomAVhUJ6l4uc=@lists.freedesktop.org
-X-Gm-Message-State: AOJu0YwAJBN/GiQ1o4rd8VftXZlrvplJ6UBZ7EZDJGAC13KBSuPjXTEY
- OetK/OmEEQsrgKfZlVSgnhifBcU2x54n0Tv+JTc9NOyh9NIuDnnd+XOTWx/YNDHRQ+DDSXTc4pz
- G/8ITwEVOOGHAwYEwKgX4gCpr/XfnVpI=
-X-Gm-Gg: ASbGnctdmoDp57mbeP8UL7GZkTb+Pj4O4Dw1a++PLvFBTq12r0bx3DzF9EfU1fIk6tn
- VhZSxkXpx4oBk2Co+5jT7K7xlMWRSa7THg+yAIe1WAn2T5fCv2gmccGqUDLblt6EZeZF/cVpGjE
- Tz7t9cA6WlB0HMBpbxEoNONNQ26jna6/XktF6I0jVCxMm9rTFaEqjHqhqkFCTypZZB8E18AENp4
- 6ypCLOSvHcEEE94
-X-Google-Smtp-Source: AGHT+IGEPG+g+OxH8rOfSaGvbFyeTmDB+1fQ7xPcfMGDOeGLeCcig+uAF9z9wcJ3Z5LOomVIJicrX6bQd17nnYWnOI4=
-X-Received: by 2002:a05:651c:2155:b0:32a:604c:504e with SMTP id
- 38308e7fff4ca-32e5f62cdfcmr641231fa.38.1751585041586; Thu, 03 Jul 2025
- 16:24:01 -0700 (PDT)
+ AJvYcCVNo56JYnNiQtLsyxBnnxTJvr4PyexyG9yYjkU6yS0PTFPRLSXIj3RAeOb23DEqoFopoAqMdS3b68U=@lists.freedesktop.org,
+ AJvYcCXtqkIsjYXZZsrCIqyBm36GnVlav8FM8hCZty65eAJ5OEPjfUQ8baiF8Rh5BUMfY4mHF/whaFiSjw==@lists.freedesktop.org
+X-Gm-Message-State: AOJu0Yzn7WCvH5+dVgeT8dFdrIgNziEUW8ynjeiindAHoywIkgyGupUa
+ z5DNIwbeqzjkjAEDBWv+Z7AhetmAkeoNAW68kch68shfTvLj1X4yJjnJcgYy/mvOncPpLGTckoE
+ R8OpA23fWHhcOYFgjK3Wm1aGBfYUc83Q=
+X-Gm-Gg: ASbGncvClORzSCc595RqzrjqHJpIEUJl3a2SvDPn1LBHhw2GmFKga92k7dZ7UI7dzkx
+ XkGgsFfHGiLtPc1hkJ/45YqASFWE6ATpqZlCN4SgPFEbB9s2xlkVA5+YBR5Mjji7t5PxmXMCjO6
+ N9jn5OnoXcQaXBIfig0lB0p+RbiaNru8ITqx3o0lFBp8lPMQDqDEC3jdG9p03gjbD88Bv+DqUqm
+ XGIpA==
+X-Google-Smtp-Source: AGHT+IFprJqElpi5vcjeJ23fLLN3WMzZLZ0CrkVny13pfXY112X2yXfPm/SOjbYZcibT+i59JoBTBmJ65qELc434iFo=
+X-Received: by 2002:a05:6512:2528:b0:553:2868:635c with SMTP id
+ 2adb3069b0e04-556e60879d0mr712367e87.48.1751630343665; Fri, 04 Jul 2025
+ 04:59:03 -0700 (PDT)
 MIME-Version: 1.0
 References: <20250701-cstr-core-v13-0-29f7d3eb97a6@gmail.com>
  <20250701-cstr-core-v13-2-29f7d3eb97a6@gmail.com>
@@ -66,11 +66,13 @@ References: <20250701-cstr-core-v13-0-29f7d3eb97a6@gmail.com>
  <CAJ-ks9nF5+m+_bn0Pzi9yU0pw0TyN7Fs4x--mQ4ygyHz4A6hzg@mail.gmail.com>
  <DB2PIGAQHCJR.3BF8ZHECYH3KB@kernel.org>
  <CAJ-ks9=WmuXLJ6KkMEOP2jTvM_YBJO10SNsq0DU2J+_d4jp7qw@mail.gmail.com>
-In-Reply-To: <CAJ-ks9=WmuXLJ6KkMEOP2jTvM_YBJO10SNsq0DU2J+_d4jp7qw@mail.gmail.com>
+ <CAJ-ks9kNiOgPO7FF3cAbaSNtTWs0_PzQ4k4W0AxjHNFuMJnDcQ@mail.gmail.com>
+ <DB36T5JWBL10.2F56EDJ1XKAD0@kernel.org>
+In-Reply-To: <DB36T5JWBL10.2F56EDJ1XKAD0@kernel.org>
 From: Tamir Duberstein <tamird@gmail.com>
-Date: Thu, 3 Jul 2025 19:23:25 -0400
-X-Gm-Features: Ac12FXySgZtzHdWG_UZyVlFR27yExYl4PiFasz3P6nXfOoJ_ZKfjtj833w6aTPo
-Message-ID: <CAJ-ks9kNiOgPO7FF3cAbaSNtTWs0_PzQ4k4W0AxjHNFuMJnDcQ@mail.gmail.com>
+Date: Fri, 4 Jul 2025 07:58:27 -0400
+X-Gm-Features: Ac12FXwwR0QTbVNjts9p85kYh4knK1uvCt11R29enEo0nBiKI492OfZj839T-II
+Message-ID: <CAJ-ks9=Jutg+UAwCVER_X91BGxWzmVq=OdStDgLZjTyMQSEX6Q@mail.gmail.com>
 Subject: Re: [PATCH v13 2/5] rust: support formatting of foreign types
 To: Benno Lossin <lossin@kernel.org>
 Cc: Michal Rostecki <vadorovsky@protonmail.com>,
@@ -129,122 +131,64 @@ List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-On Thu, Jul 3, 2025 at 6:41=E2=80=AFPM Tamir Duberstein <tamird@gmail.com> =
-wrote:
+On Fri, Jul 4, 2025 at 6:09=E2=80=AFAM Benno Lossin <lossin@kernel.org> wro=
+te:
 >
-> On Thu, Jul 3, 2025 at 4:36=E2=80=AFPM Benno Lossin <lossin@kernel.org> w=
-rote:
+> On Fri Jul 4, 2025 at 1:23 AM CEST, Tamir Duberstein wrote:
+> > On Thu, Jul 3, 2025 at 6:41=E2=80=AFPM Tamir Duberstein <tamird@gmail.c=
+om> wrote:
+> >> On Thu, Jul 3, 2025 at 4:36=E2=80=AFPM Benno Lossin <lossin@kernel.org=
+> wrote:
+> >> >
+> >> > I don't understand, can't you just do:
+> >> >
+> >> > * add `rust/kernel/fmt.rs`,
+> >> > * add `rust/macros/fmt.rs`,
+> >> > * change all occurrences of `core::fmt` to `kernel::fmt` and
+> >> >   `format_args!` to `fmt!`.
+> >>
+> >> Yes, such a split could be done - I will do so in the next spin
+> >>
+> >>
+> >> > The last one could be split by subsystem, no? Some subsystems might
+> >> > interact and thus need simultaneous splitting, but there should be s=
+ome
+> >> > independent ones.
+> >>
+> >> Yes, it probably can. As you say, some subsystems might interact - the
+> >> claimed benefit of doing this subsystem-by-subsystem split is that it
+> >> avoids conflicts with ongoing work that will conflict with a large
+> >> patch, but this is also the downside; if ongoing work changes the set
+> >> of interactions between subsystems then a maintainer may find
+> >> themselves unable to emit the log message they want (because one
+> >> subsystem is using kernel::fmt while another is still on core::fmt).
 > >
-> > On Thu Jul 3, 2025 at 8:55 PM CEST, Tamir Duberstein wrote:
-> > > On Thu, Jul 3, 2025 at 11:08=E2=80=AFAM Benno Lossin <lossin@kernel.o=
-rg> wrote:
-> > >> On Thu Jul 3, 2025 at 3:55 PM CEST, Tamir Duberstein wrote:
-> > >> > On Thu, Jul 3, 2025 at 5:32=E2=80=AFAM Benno Lossin <lossin@kernel=
-.org> wrote:
-> > >> >> On Tue Jul 1, 2025 at 6:49 PM CEST, Tamir Duberstein wrote:
-> > >> >> > Introduce a `fmt!` macro which wraps all arguments in
-> > >> >> > `kernel::fmt::Adapter` and a `kernel::fmt::Display` trait. This=
- enables
-> > >> >> > formatting of foreign types (like `core::ffi::CStr`) that do no=
-t
-> > >> >> > implement `core::fmt::Display` due to concerns around lossy con=
-versions which
-> > >> >> > do not apply in the kernel.
-> > >> >> >
-> > >> >> > Replace all direct calls to `format_args!` with `fmt!`.
-> > >> >> >
-> > >> >> > Replace all implementations of `core::fmt::Display` with implem=
-entations
-> > >> >> > of `kernel::fmt::Display`.
-> > >> >> >
-> > >> >> > Suggested-by: Alice Ryhl <aliceryhl@google.com>
-> > >> >> > Link: https://rust-for-linux.zulipchat.com/#narrow/channel/2880=
-89-General/topic/Custom.20formatting/with/516476467
-> > >> >> > Acked-by: Greg Kroah-Hartman <gregkh@linuxfoundation.org>
-> > >> >> > Reviewed-by: Alice Ryhl <aliceryhl@google.com>
-> > >> >> > Signed-off-by: Tamir Duberstein <tamird@gmail.com>
-> > >> >> > ---
-> > >> >> >  drivers/block/rnull.rs       |  2 +-
-> > >> >> >  drivers/gpu/nova-core/gpu.rs |  4 +-
-> > >> >> >  rust/kernel/block/mq.rs      |  2 +-
-> > >> >> >  rust/kernel/device.rs        |  2 +-
-> > >> >> >  rust/kernel/fmt.rs           | 89 ++++++++++++++++++++++++++++=
-+++++++++++
-> > >> >> >  rust/kernel/kunit.rs         |  6 +--
-> > >> >> >  rust/kernel/lib.rs           |  1 +
-> > >> >> >  rust/kernel/prelude.rs       |  3 +-
-> > >> >> >  rust/kernel/print.rs         |  4 +-
-> > >> >> >  rust/kernel/seq_file.rs      |  2 +-
-> > >> >> >  rust/kernel/str.rs           | 22 ++++------
-> > >> >> >  rust/macros/fmt.rs           | 99 ++++++++++++++++++++++++++++=
-++++++++++++++++
-> > >> >> >  rust/macros/lib.rs           | 19 +++++++++
-> > >> >> >  rust/macros/quote.rs         |  7 ++++
-> > >> >> >  scripts/rustdoc_test_gen.rs  |  2 +-
-> > >> >> >  15 files changed, 236 insertions(+), 28 deletions(-)
-> > >> >>
-> > >> >> This would be a lot easier to review if he proc-macro and the cal=
-l
-> > >> >> replacement were different patches.
-> > >> >>
-> > >> >> Also the `kernel/fmt.rs` file should be a different commit.
-> > >> >
-> > >> > Can you help me understand why? The changes you ask to be separate=
-d
-> > >> > would all be in different files, so why would separate commits mak=
-e it
-> > >> > easier to review?
-> > >>
-> > >> It takes less time to go through the entire patch and give a RB. I c=
-an
-> > >> take smaller time chunks and don't have to get back into the entire
-> > >> context of the patch when I don't have 30-60min available.
-> > >
-> > > Ah, I see what you mean. Yeah, the requirement to RB the entire patch
-> > > does mean there's a benefit to smaller patches.
-> > >
-> > >> In this patch the biggest problem is the rename & addition of new
-> > >> things, maybe just adding 200 lines in those files could be okay to =
-go
-> > >> together, see below for more.
-> > >
-> > > After implementing your suggestion of re-exporting things from
-> > > `kernel::fmt` the diffstat is
-> > >
-> > > 26 files changed, 253 insertions(+), 51 deletions(-)
-> > >
-> > > so I guess I could do all the additions in one patch, but then
-> > > *everything* else has to go in a single patch together because the
-> > > formatting macros either want core::fmt::Display or
-> > > kernel::fmt::Display; they can't work in a halfway state.
-> >
-> > I don't understand, can't you just do:
-> >
-> > * add `rust/kernel/fmt.rs`,
-> > * add `rust/macros/fmt.rs`,
-> > * change all occurrences of `core::fmt` to `kernel::fmt` and
-> >   `format_args!` to `fmt!`.
+> > I gave this a try. I ran into the problem that `format_args!` (and,
+> > after this patch, `fmt!`) is at the center of `print_macro!`, which
+> > itself underpins various other formatting macros. This means we'd have
+> > to bifurcate the formatting infrastructure to support an incremental
+> > migration. That's quite a bit of code, and likely quite a mess in the
+> > resulting git history -- and that's setting aside the toil required to
+> > figure out the correct combinations of subsystems that must migrate
+> > together.
 >
-> Yes, such a split could be done - I will do so in the next spin
+> So here is what we can do without duplicating the logic, though it
+> requires multiple cycles:
 >
->
-> > The last one could be split by subsystem, no? Some subsystems might
-> > interact and thus need simultaneous splitting, but there should be some
-> > independent ones.
->
-> Yes, it probably can. As you say, some subsystems might interact - the
-> claimed benefit of doing this subsystem-by-subsystem split is that it
-> avoids conflicts with ongoing work that will conflict with a large
-> patch, but this is also the downside; if ongoing work changes the set
-> of interactions between subsystems then a maintainer may find
-> themselves unable to emit the log message they want (because one
-> subsystem is using kernel::fmt while another is still on core::fmt).
+> 1. We merge the two `fmt.rs` files & each subsystem merges an
+>    implementation of `kernel::fmt::Display` for their types, but keeps
+>    the `core::fmt::Display` impl around.
+> 2. After all subsystems have merged the previous step, we change the
+>    implementations of `print_macro!` to use `fmt!` instead of
+>    `format_args!`.
+> 3. We remove all occurrences of `core::fmt` (& replace them with
+>    `kernel::fmt`), removing the `core::fmt::Display` impls.
 
-I gave this a try. I ran into the problem that `format_args!` (and,
-after this patch, `fmt!`) is at the center of `print_macro!`, which
-itself underpins various other formatting macros. This means we'd have
-to bifurcate the formatting infrastructure to support an incremental
-migration. That's quite a bit of code, and likely quite a mess in the
-resulting git history -- and that's setting aside the toil required to
-figure out the correct combinations of subsystems that must migrate
-together.
+That would probably work. We will probably see regressions because we
+can't just replace `core::fmt` imports with `kernel::fmt`, so new code
+may appear that uses the former.
+
+I think this discussion would be productive on the next spin. The
+changes in other subsystems are now almost entirely changing of import
+paths -- perhaps that would be sufficiently uncontroversial for folks
+to give their Acked-bys.
