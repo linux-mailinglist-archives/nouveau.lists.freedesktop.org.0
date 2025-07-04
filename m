@@ -2,90 +2,61 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id 9F549AF8F85
-	for <lists+nouveau@lfdr.de>; Fri,  4 Jul 2025 12:10:02 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 79F81AF9260
+	for <lists+nouveau@lfdr.de>; Fri,  4 Jul 2025 14:19:20 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 5CDF810E9CA;
-	Fri,  4 Jul 2025 10:09:59 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id D99C110EA11;
+	Fri,  4 Jul 2025 12:19:18 +0000 (UTC)
 Authentication-Results: gabe.freedesktop.org;
-	dkim=pass (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="bjHFAeZa";
+	dkim=fail reason="signature verification failed" (2048-bit key; unprotected) header.d=igalia.com header.i=@igalia.com header.b="Oxp0Fzn8";
 	dkim-atps=neutral
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from sea.source.kernel.org (sea.source.kernel.org [172.234.252.31])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 0F83D10E201;
- Fri,  4 Jul 2025 10:09:58 +0000 (UTC)
-Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by sea.source.kernel.org (Postfix) with ESMTP id 7FD4742BAC;
- Fri,  4 Jul 2025 10:09:57 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 9EB26C4CEE3;
- Fri,  4 Jul 2025 10:09:45 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1751623797;
- bh=sErifeomiBisSrJ5F/Z1EiOE+yjyaoOoLVJmALiwIss=;
- h=Date:Subject:From:To:Cc:References:In-Reply-To:From;
- b=bjHFAeZaJFAnmlfy0BXQom4D2g8nROdZRV9VSgmHVyp34hx86laW5qYZ9hJt1xRQW
- 0K0KO2yByzLe4dQZLFhD35Ow6d8OFCvrtXqBJsfVoIIfyv2UGdJYm4h3q0G5Jkpw5z
- wGhbmAF7CZg/+Usn4oPgUWLuVpcLqO00+9bczIkO/xSH+5IJAtnA1+gQ91n+wiBcP6
- B7oDcHjP2qL77G1iVen1zde1nv2qXrbY4ckstCIFg4BI/BrUjKystwvqi6oNlmq8/O
- 6gVbjWvcNhrRjps2Q90t25m0FTomyUvTA0EnLcqcQEkGdXcBV9HXEB+8pGkJCpLBEg
- +vGw4nMjPXgxg==
-Mime-Version: 1.0
-Content-Transfer-Encoding: quoted-printable
-Content-Type: text/plain; charset=UTF-8
-Date: Fri, 04 Jul 2025 12:09:43 +0200
-Message-Id: <DB36T5JWBL10.2F56EDJ1XKAD0@kernel.org>
-Subject: Re: [PATCH v13 2/5] rust: support formatting of foreign types
-From: "Benno Lossin" <lossin@kernel.org>
-To: "Tamir Duberstein" <tamird@gmail.com>
-Cc: "Michal Rostecki" <vadorovsky@protonmail.com>, "Miguel Ojeda"
- <ojeda@kernel.org>, "Alex Gaynor" <alex.gaynor@gmail.com>, "Boqun Feng"
- <boqun.feng@gmail.com>, "Gary Guo" <gary@garyguo.net>,
- =?utf-8?q?Bj=C3=B6rn_Roy_Baron?= <bjorn3_gh@protonmail.com>, "Andreas
- Hindborg" <a.hindborg@kernel.org>, "Alice Ryhl" <aliceryhl@google.com>,
- "Trevor Gross" <tmgross@umich.edu>, "Brendan Higgins"
- <brendan.higgins@linux.dev>, "David Gow" <davidgow@google.com>, "Rae Moar"
- <rmoar@google.com>, "Danilo Krummrich" <dakr@kernel.org>, "Maarten
- Lankhorst" <maarten.lankhorst@linux.intel.com>, "Maxime Ripard"
- <mripard@kernel.org>, "Thomas Zimmermann" <tzimmermann@suse.de>, "David
- Airlie" <airlied@gmail.com>, "Simona Vetter" <simona@ffwll.ch>, "Greg
- Kroah-Hartman" <gregkh@linuxfoundation.org>, "Rafael J. Wysocki"
- <rafael@kernel.org>, "Luis Chamberlain" <mcgrof@kernel.org>, "Russ Weight"
- <russ.weight@linux.dev>, "FUJITA Tomonori" <fujita.tomonori@gmail.com>,
- "Rob Herring" <robh@kernel.org>, "Saravana Kannan" <saravanak@google.com>,
- "Peter Zijlstra" <peterz@infradead.org>, "Ingo Molnar" <mingo@redhat.com>,
- "Will Deacon" <will@kernel.org>, "Waiman Long" <longman@redhat.com>,
- "Nathan Chancellor" <nathan@kernel.org>, "Nick Desaulniers"
- <nick.desaulniers+lkml@gmail.com>, "Bill Wendling" <morbo@google.com>,
- "Justin Stitt" <justinstitt@google.com>, "Andrew Lunn" <andrew@lunn.ch>,
- "Heiner Kallweit" <hkallweit1@gmail.com>, "Russell King"
- <linux@armlinux.org.uk>, "David S. Miller" <davem@davemloft.net>, "Eric
- Dumazet" <edumazet@google.com>, "Jakub Kicinski" <kuba@kernel.org>, "Paolo
- Abeni" <pabeni@redhat.com>, "Bjorn Helgaas" <bhelgaas@google.com>, "Arnd
- Bergmann" <arnd@arndb.de>, "Jens Axboe" <axboe@kernel.dk>,
- =?utf-8?q?Krzysztof_Wilczy=C5=84ski?= <kwilczynski@kernel.org>, "Dave
- Ertman" <david.m.ertman@intel.com>, "Ira Weiny" <ira.weiny@intel.com>,
- "Leon Romanovsky" <leon@kernel.org>, "Breno Leitao" <leitao@debian.org>,
- "Viresh Kumar" <viresh.kumar@linaro.org>, "Michael Turquette"
- <mturquette@baylibre.com>, "Stephen Boyd" <sboyd@kernel.org>,
- <rust-for-linux@vger.kernel.org>, <linux-kernel@vger.kernel.org>,
- <linux-kselftest@vger.kernel.org>, <kunit-dev@googlegroups.com>,
- <dri-devel@lists.freedesktop.org>, <netdev@vger.kernel.org>,
- <devicetree@vger.kernel.org>, <llvm@lists.linux.dev>,
- <linux-pci@vger.kernel.org>, <nouveau@lists.freedesktop.org>,
- <linux-block@vger.kernel.org>, <linux-pm@vger.kernel.org>,
- <linux-clk@vger.kernel.org>
-X-Mailer: aerc 0.20.1
-References: <20250701-cstr-core-v13-0-29f7d3eb97a6@gmail.com>
- <20250701-cstr-core-v13-2-29f7d3eb97a6@gmail.com>
- <DB2BDSN1JH51.14ZZPETJORBC6@kernel.org>
- <CAJ-ks9nC=AyBPXRY3nJ0NuZvjFskzMcOkVNrBEfXD2hZ5uRntQ@mail.gmail.com>
- <DB2IJ9HBIM0W.3N0JVGKX558QI@kernel.org>
- <CAJ-ks9nF5+m+_bn0Pzi9yU0pw0TyN7Fs4x--mQ4ygyHz4A6hzg@mail.gmail.com>
- <DB2PIGAQHCJR.3BF8ZHECYH3KB@kernel.org>
- <CAJ-ks9=WmuXLJ6KkMEOP2jTvM_YBJO10SNsq0DU2J+_d4jp7qw@mail.gmail.com>
- <CAJ-ks9kNiOgPO7FF3cAbaSNtTWs0_PzQ4k4W0AxjHNFuMJnDcQ@mail.gmail.com>
-In-Reply-To: <CAJ-ks9kNiOgPO7FF3cAbaSNtTWs0_PzQ4k4W0AxjHNFuMJnDcQ@mail.gmail.com>
+Received: from fanzine2.igalia.com (fanzine2.igalia.com [213.97.179.56])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 779ED10EA11;
+ Fri,  4 Jul 2025 12:19:16 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=igalia.com; 
+ s=20170329;
+ h=Content-Transfer-Encoding:Content-Type:In-Reply-To:From:
+ References:Cc:To:Subject:MIME-Version:Date:Message-ID:Sender:Reply-To:
+ Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
+ Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
+ List-Subscribe:List-Post:List-Owner:List-Archive;
+ bh=XbaDjDWqdnKDdqcosm9iq5MePhQ6bbb1VeFVI/I13F4=; b=Oxp0Fzn8fYvGKvkCgubLNFDlMF
+ pOs+6UGpF2H0Mlk6S3K6OJgTYWqLOToouotKVhTQp9Ed3B0Vp6vt50DczZxr8rsWhC/S5FQF9aEkf
+ QBv+Dj/G+Wr7ttZ8lLgl1X56tblIgnKX1e+E0JaKpmHr4te54gsJwquvcLjym703VJXI4bConOtMd
+ 8UjPQNXmcSuWt5/wUqEkdRU5zcBFhdPLk3VKCoAmK9v1MXMqDYT3aHihITfSxay+9GUxwl7cC7SOe
+ 4CFdYm/XS3u8PSRyWZh8R99NlEFAuxnybM08YBHL4RSjf1xsnj2rKDgyMXgxRenpAvQoH27cq0Cw4
+ IQX7a2kg==;
+Received: from [189.7.87.79] (helo=[192.168.0.7])
+ by fanzine2.igalia.com with esmtpsa 
+ (Cipher TLS1.3:ECDHE_X25519__RSA_PSS_RSAE_SHA256__AES_128_GCM:128) (Exim)
+ id 1uXfNW-00CQHV-Rd; Fri, 04 Jul 2025 14:18:55 +0200
+Message-ID: <dc5317a4-0adc-4371-871c-79b7d54614a6@igalia.com>
+Date: Fri, 4 Jul 2025 09:18:47 -0300
+MIME-Version: 1.0
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH 1/6] drm/sched: Avoid memory leaks with cancel_job()
+ callback
+To: Philipp Stanner <phasta@kernel.org>, Lyude Paul <lyude@redhat.com>,
+ Danilo Krummrich <dakr@kernel.org>, David Airlie <airlied@gmail.com>,
+ Simona Vetter <simona@ffwll.ch>, Matthew Brost <matthew.brost@intel.com>,
+ =?UTF-8?Q?Christian_K=C3=B6nig?= <ckoenig.leichtzumerken@gmail.com>,
+ Maarten Lankhorst <maarten.lankhorst@linux.intel.com>,
+ Maxime Ripard <mripard@kernel.org>, Thomas Zimmermann <tzimmermann@suse.de>,
+ Sumit Semwal <sumit.semwal@linaro.org>,
+ Tvrtko Ursulin <tvrtko.ursulin@igalia.com>,
+ Pierre-Eric Pelloux-Prayer <pierre-eric.pelloux-prayer@amd.com>
+Cc: dri-devel@lists.freedesktop.org, nouveau@lists.freedesktop.org,
+ linux-kernel@vger.kernel.org, linux-media@vger.kernel.org,
+ linaro-mm-sig@lists.linaro.org
+References: <20250701132142.76899-3-phasta@kernel.org>
+ <20250701132142.76899-4-phasta@kernel.org>
+Content-Language: en-US
+From: =?UTF-8?Q?Ma=C3=ADra_Canal?= <mcanal@igalia.com>
+In-Reply-To: <20250701132142.76899-4-phasta@kernel.org>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 8bit
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -100,56 +71,28 @@ List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-On Fri Jul 4, 2025 at 1:23 AM CEST, Tamir Duberstein wrote:
-> On Thu, Jul 3, 2025 at 6:41=E2=80=AFPM Tamir Duberstein <tamird@gmail.com=
-> wrote:
->> On Thu, Jul 3, 2025 at 4:36=E2=80=AFPM Benno Lossin <lossin@kernel.org> =
-wrote:
->> >
->> > I don't understand, can't you just do:
->> >
->> > * add `rust/kernel/fmt.rs`,
->> > * add `rust/macros/fmt.rs`,
->> > * change all occurrences of `core::fmt` to `kernel::fmt` and
->> >   `format_args!` to `fmt!`.
->>
->> Yes, such a split could be done - I will do so in the next spin
->>
->>
->> > The last one could be split by subsystem, no? Some subsystems might
->> > interact and thus need simultaneous splitting, but there should be som=
-e
->> > independent ones.
->>
->> Yes, it probably can. As you say, some subsystems might interact - the
->> claimed benefit of doing this subsystem-by-subsystem split is that it
->> avoids conflicts with ongoing work that will conflict with a large
->> patch, but this is also the downside; if ongoing work changes the set
->> of interactions between subsystems then a maintainer may find
->> themselves unable to emit the log message they want (because one
->> subsystem is using kernel::fmt while another is still on core::fmt).
->
-> I gave this a try. I ran into the problem that `format_args!` (and,
-> after this patch, `fmt!`) is at the center of `print_macro!`, which
-> itself underpins various other formatting macros. This means we'd have
-> to bifurcate the formatting infrastructure to support an incremental
-> migration. That's quite a bit of code, and likely quite a mess in the
-> resulting git history -- and that's setting aside the toil required to
-> figure out the correct combinations of subsystems that must migrate
-> together.
+Hi Philipp,
 
-So here is what we can do without duplicating the logic, though it
-requires multiple cycles:
+On 01/07/25 10:21, Philipp Stanner wrote:
+> Since its inception, the GPU scheduler can leak memory if the driver
+> calls drm_sched_fini() while there are still jobs in flight.
+> 
+> The simplest way to solve this in a backwards compatible manner is by
+> adding a new callback, drm_sched_backend_ops.cancel_job(), which
+> instructs the driver to signal the hardware fence associated with the
+> job. Afterwards, the scheduler can savely use the established free_job()
 
-1. We merge the two `fmt.rs` files & each subsystem merges an
-   implementation of `kernel::fmt::Display` for their types, but keeps
-   the `core::fmt::Display` impl around.
-2. After all subsystems have merged the previous step, we change the
-   implementations of `print_macro!` to use `fmt!` instead of
-   `format_args!`.
-3. We remove all occurrences of `core::fmt` (& replace them with
-   `kernel::fmt`), removing the `core::fmt::Display` impls.
+s/savely/safely
 
----
-Cheers,
-Benno
+> callback for freeing the job.
+> 
+> Implement the new backend_ops callback cancel_job().
+> 
+> Suggested-by: Tvrtko Ursulin <tvrtko.ursulin@igalia.com>
+> Link: https://lore.kernel.org/dri-devel/20250418113211.69956-1-tvrtko.ursulin@igalia.com/
+> Signed-off-by: Philipp Stanner <phasta@kernel.org>
+
+Reviewed-by: Maíra Canal <mcanal@igalia.com>
+
+Best Regards,
+- Maíra
