@@ -2,113 +2,101 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id 3D6F0BBF771
-	for <lists+nouveau@lfdr.de>; Mon, 06 Oct 2025 22:58:11 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id C342EBBF7B0
+	for <lists+nouveau@lfdr.de>; Mon, 06 Oct 2025 22:58:21 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 9618810E623;
-	Mon,  6 Oct 2025 20:57:58 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 89FFD10E60F;
+	Mon,  6 Oct 2025 20:58:00 +0000 (UTC)
 Authentication-Results: gabe.freedesktop.org;
-	dkim=permerror (0-bit key) header.d=gmail.com header.i=@gmail.com header.b="ltiiabn4";
+	dkim=permerror (0-bit key) header.d=gmail.com header.i=@gmail.com header.b="HZ3buQvF";
 	dkim-atps=neutral
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from mail-lj1-f170.google.com (mail-lj1-f170.google.com
- [209.85.208.170])
- by gabe.freedesktop.org (Postfix) with ESMTPS id E344610EA70;
- Fri,  4 Jul 2025 19:39:30 +0000 (UTC)
-Received: by mail-lj1-f170.google.com with SMTP id
- 38308e7fff4ca-32b553e33e6so10607351fa.2; 
- Fri, 04 Jul 2025 12:39:30 -0700 (PDT)
+Received: from mail-qt1-f173.google.com (mail-qt1-f173.google.com
+ [209.85.160.173])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id B22EC10E0B6;
+ Fri,  4 Jul 2025 20:16:03 +0000 (UTC)
+Received: by mail-qt1-f173.google.com with SMTP id
+ d75a77b69052e-4a58d95ea53so15284591cf.0; 
+ Fri, 04 Jul 2025 13:16:03 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1751657969; x=1752262769; darn=lists.freedesktop.org;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=PaN1iXlsiktU/ZIaAdJUYYtsPKiTgtwWPQpDE5mPO2Y=;
- b=ltiiabn4bLC9Em0urjF2x2PqPEc/EBm6QJ3mBjZ5IFNCRtL7I0jxF2V0tTI7iGVNlQ
- jeptxgmKoJkObafxe16+0mbei2r6THCOEsGUifuioA4bkLoZKJ/kLH6vCGOcdU+Dikro
- 0eU0bn1MFxkcgt2gYEcpLZXKVSC0I+zhSsyp1pJ8PBfLpTfYjhnzItPGB9t+85OxwDUk
- NhO250WbsW8R3Cro5hev0Op5glr4T9sFHO9HS2BVW1hbrJ2Ll6KaIro9uDqzlmhggHqb
- mSmtIwe/S5Chl2LMpLVlnro4WEKL9/CDaP3zWkInR4F+Emfoe3OKyDT/kwLmIxLVMoSa
- VTzw==
+ d=gmail.com; s=20230601; t=1751660162; x=1752264962; darn=lists.freedesktop.org;
+ h=cc:to:content-transfer-encoding:mime-version:message-id:date
+ :subject:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=JvF1PhT6A+YsimfPIbVV0DwQMx5ntblUzy1Cm9DCNFs=;
+ b=HZ3buQvFeb1YzUstz+2CcUGhVuKWtaL+KbM0ndbgxG6hKruWXVROdhZb+e0xbL7bwZ
+ t5MU48Z6bdN7LAlg5GWnGD4c7e6lIjgld/5L2LqI64MtOD2uKBzk+qBcuiUWslXEsNeI
+ IYJ7mHma6iQ2rhzD5toNupML+gbKd5ab2Lg8RV/GbCFnULnYHqfx6tlXrfZon9gw+SJt
+ ytTzaTSb2LWGQcqwVJv4epb+Qxh3lCrbnFMyrauMU6Cxoqzwe1fa9W4mrjq/dkcL0wgM
+ dmeAygayWvNl7X6uO4zCeIn21gb7mILXKm6vhYM/vT0caThnz9ZwZhos/g2pmu1hSHoP
+ DUDA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1751657969; x=1752262769;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=PaN1iXlsiktU/ZIaAdJUYYtsPKiTgtwWPQpDE5mPO2Y=;
- b=QGEjrTqTUDNrnMaak61MA+rNQK5gLbEhdhJjwvBVfQOeqyW96T1SQ9a/kb08ybTpDZ
- 21Cy1JQ13CKYX1fO5xzuEHaHN0qNJdVCG4XkHO0JIg2wAFI7tfxBp0hj43hAqGV226NK
- T24QZ79fzZ37Y0GGPefvkf/PM5BTOwGATDU4nTmVUZ/1NqOt5JneI4ISHZRAR7I+VJrr
- hfTJJ4Tpriy381yVBGBrSVcOyQpNt9ZYfBU57WHbLL7P0/1rgwfkwX2vxvx2McY3IIVR
- jCu+fghMpO2mEUQYbwdb//jYzWcpzt7thYVgvWfxKMK/fsIx0rHsBngl6fypAwAz8A3B
- ISMQ==
+ d=1e100.net; s=20230601; t=1751660162; x=1752264962;
+ h=cc:to:content-transfer-encoding:mime-version:message-id:date
+ :subject:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=JvF1PhT6A+YsimfPIbVV0DwQMx5ntblUzy1Cm9DCNFs=;
+ b=Eh38+UhGnXwoo1r/9op3rOnNaGOQxWsWVYPu3/b0i5uLzKeiFPDb/IsplrxtzDE1ft
+ LCKsit7vlBzFIfe15WjPTc+c2iS88LC3roM5/hJwoSRKVPdHw922Ci9fQTUlEii/5opu
+ w0ZJnIH3dn//GUG731j3ZqtyQbsbxZFPGjGin1papd2XAeTHmbnuZmzcqgZz3NUIPlce
+ QZUB2kuQ7NBhc2crqE9VPjEoTt7gmcvYS87u4QVc9ezRyW4zCym2nCkUX+dHgTi6H9qj
+ /8B2SBPl++17sI5coEIWGuF4ayfzD3IDCbV+HkAUlX1zyOluBlg+0/FWNbgmff/InJFi
+ s+Yw==
 X-Forwarded-Encrypted: i=1;
- AJvYcCU6rZbaW+tWg1Xd/TL+EFwncyXydKQZHbT8/keYTv1KRrvoWZZSAaw6zYV98wOMmvnnY30wTKmREQM=@lists.freedesktop.org,
- AJvYcCUS7OC7vRWTW1lQPGz1P4ek/WCTKt19qAptgZuqGeLR1lwRDNPj/Il5od9sfNeffY8U5l6V4gdW3g==@lists.freedesktop.org
-X-Gm-Message-State: AOJu0YzrInK1VHZTfNMh+IM1zyWNdTqy30XQcb/Qi9BO0jWwLYB+RZRW
- wM+//78DlA5LN4CpRACB6CAzRxBbwVeaHYgqwcMs6N+EF5tX10hXdkxwjJUlkPF6M5g/C57LbAt
- zLNkjjwIQ0zbd0pFU8iPUf7bm+rVbV4k=
-X-Gm-Gg: ASbGnctGQAX3lVSSNSaPv1bLwmKDJfFnAvvw/TeYExSwpxskUKWVqkSRH/se4LE4Ljh
- KbdUqPyBW45P5VRDjzn6RSs8BN3QlUNrYAXyJ3JSOedwjtn3dNiol5byFVsBXW+p76jh0vIQZNt
- 2arrc1KNqnJEM/N07CdvT6ivxrugFmLc/jA8dvyIliPFagNLOxim9KPBtIrmFJPBGn9lpAu71du
- 8nNdw==
-X-Google-Smtp-Source: AGHT+IEUCasNpOjrLiPTdba+G1DzRMt5tyZu55jlQh+AX9oNhtSkPC1M27OuhbpRgJbummxXICHmkFV1J91gViP7ObU=
-X-Received: by 2002:a2e:b88f:0:b0:32a:6c63:92a with SMTP id
- 38308e7fff4ca-32f03639f57mr13413521fa.22.1751657968994; Fri, 04 Jul 2025
- 12:39:28 -0700 (PDT)
-MIME-Version: 1.0
-References: <20250701-cstr-core-v13-0-29f7d3eb97a6@gmail.com>
- <20250701-cstr-core-v13-3-29f7d3eb97a6@gmail.com>
- <DB3AFTUC22W1.39C4DMWSENZGB@kernel.org>
-In-Reply-To: <DB3AFTUC22W1.39C4DMWSENZGB@kernel.org>
+ AJvYcCUcsWoqyW7lxIAj3A1nNQwaGCA+pcdvqg24HwCAEh1mgwcV335vf1jq/PWxmzMBbzEwZNYkmZ8wYXs=@lists.freedesktop.org,
+ AJvYcCVULFZbtsynH5zPWeqr5Dy5NJks5D+lO9NHO99nVG4eSCZoBq2zAz9P/goqaPAO9VZBLkYSNihcOQ==@lists.freedesktop.org
+X-Gm-Message-State: AOJu0YxrB+9w+t0fsyn/NkzXQ2HxX78osONvWtQDFNDX+t1Z7zKuNA7v
+ bKE5WMHvtPANBsSzVKj7YnZ9aOC1o1tqsR3AZ9ltFVEOOCAncx2O8dad
+X-Gm-Gg: ASbGncsOoMqHVcPJFSl+yic2TSQY/j53LbgegZKuyo0LK8hrrfWlW8ZvFTlMXx5LwID
+ Y2S8DYEamC1c72YaXNl36Tl326RwFxJIsxguhsEq3gYOOZmeOKZRjEhXrigdIwaYTCn4VwI3aza
+ Z+ZyqIuvxTBlTEUCUgycv8qY77cbchAmMusLlrbFiL7zhyoVlgpImL8/lS/lUuqc/4qN48V6lda
+ T5BcVFCkV/NC1y1xBbo02BThsUbsVimWDFylSj/CGi6rVGH9TBiOshNOnSm4dB5rmMWqt91LnHp
+ gydyBg2IkQKWl4AjHES4M/c/i7VahZkNRL+c/hmYc20JNI2BNc5UOQen7lavw6+JyEVROAsgOpt
+ FdkKJzC0=
+X-Google-Smtp-Source: AGHT+IGNtDccghiwMyeSOhBtUWcR8MfX183nsH4JyaXEa12ociciUBdXmH+eYmkAki5LcBiOJOoL5w==
+X-Received: by 2002:a05:622a:4c16:b0:4a7:8439:796e with SMTP id
+ d75a77b69052e-4a994f46b02mr72174231cf.13.1751660162501; 
+ Fri, 04 Jul 2025 13:16:02 -0700 (PDT)
+Received: from 156.1.168.192.in-addr.arpa
+ ([2600:4041:5c29:e400:94f3:d2bb:5ace:77a1])
+ by smtp.gmail.com with ESMTPSA id
+ d75a77b69052e-4a9949e5221sm19772941cf.2.2025.07.04.13.16.01
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Fri, 04 Jul 2025 13:16:02 -0700 (PDT)
 From: Tamir Duberstein <tamird@gmail.com>
-Date: Fri, 4 Jul 2025 15:38:53 -0400
-X-Gm-Features: Ac12FXzIFREDgXqCwrv6XJgEObqPEvHKICa5en-HTCiFL74MHyUAIu3tq-_u52g
-Message-ID: <CAJ-ks9=Q2+zmBzq36aYnePmRm2b5NL3buMXP36FpmnJ+UU3FWQ@mail.gmail.com>
-Subject: Re: [PATCH v13 3/5] rust: replace `CStr` with `core::ffi::CStr`
-To: Benno Lossin <lossin@kernel.org>
-Cc: Michal Rostecki <vadorovsky@protonmail.com>,
- Miguel Ojeda <ojeda@kernel.org>, 
- Alex Gaynor <alex.gaynor@gmail.com>, Boqun Feng <boqun.feng@gmail.com>, 
- Gary Guo <gary@garyguo.net>,
- =?UTF-8?Q?Bj=C3=B6rn_Roy_Baron?= <bjorn3_gh@protonmail.com>, 
- Andreas Hindborg <a.hindborg@kernel.org>, Alice Ryhl <aliceryhl@google.com>, 
- Trevor Gross <tmgross@umich.edu>, Brendan Higgins <brendan.higgins@linux.dev>, 
- David Gow <davidgow@google.com>, Rae Moar <rmoar@google.com>, 
- Danilo Krummrich <dakr@kernel.org>,
- Maarten Lankhorst <maarten.lankhorst@linux.intel.com>, 
- Maxime Ripard <mripard@kernel.org>, Thomas Zimmermann <tzimmermann@suse.de>, 
+Subject: [PATCH 0/6] Replace `kernel::str::CStr` with `core::ffi::CStr`
+ (cycle 1)
+Date: Fri, 04 Jul 2025 16:14:51 -0400
+Message-Id: <20250704-core-cstr-prepare-v1-0-a91524037783@gmail.com>
+MIME-Version: 1.0
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+X-B4-Tracking: v=1; b=H4sIADs2aGgC/x3MSwqAMAxF0a2UjC1UsRbdijjoJ2omKqmIULp3g
+ 8Nz4b0CGZkww6QKMD6U6TwEbaMg7v7YUFMSQ2c6a5zpdTwZdcw364vx8oIxjDh4F5J1CLKTvtL
+ 7f85LrR8k4c5TYwAAAA==
+X-Change-ID: 20250704-core-cstr-prepare-9b9e6a7bd57e
+To: "Rafael J. Wysocki" <rafael@kernel.org>, 
+ Viresh Kumar <viresh.kumar@linaro.org>, Danilo Krummrich <dakr@kernel.org>, 
  David Airlie <airlied@gmail.com>, Simona Vetter <simona@ffwll.ch>, 
- Greg Kroah-Hartman <gregkh@linuxfoundation.org>,
- "Rafael J. Wysocki" <rafael@kernel.org>, 
- Luis Chamberlain <mcgrof@kernel.org>, Russ Weight <russ.weight@linux.dev>, 
- FUJITA Tomonori <fujita.tomonori@gmail.com>, Rob Herring <robh@kernel.org>, 
- Saravana Kannan <saravanak@google.com>, Peter Zijlstra <peterz@infradead.org>, 
- Ingo Molnar <mingo@redhat.com>, Will Deacon <will@kernel.org>,
- Waiman Long <longman@redhat.com>, Nathan Chancellor <nathan@kernel.org>,
- Nick Desaulniers <nick.desaulniers+lkml@gmail.com>, 
- Bill Wendling <morbo@google.com>, Justin Stitt <justinstitt@google.com>,
- Andrew Lunn <andrew@lunn.ch>, 
- Heiner Kallweit <hkallweit1@gmail.com>, Russell King <linux@armlinux.org.uk>, 
- "David S. Miller" <davem@davemloft.net>, Eric Dumazet <edumazet@google.com>, 
- Jakub Kicinski <kuba@kernel.org>, Paolo Abeni <pabeni@redhat.com>,
- Bjorn Helgaas <bhelgaas@google.com>, 
- Arnd Bergmann <arnd@arndb.de>, Jens Axboe <axboe@kernel.dk>, 
- =?UTF-8?Q?Krzysztof_Wilczy=C5=84ski?= <kwilczynski@kernel.org>, 
- Dave Ertman <david.m.ertman@intel.com>, Ira Weiny <ira.weiny@intel.com>, 
- Leon Romanovsky <leon@kernel.org>, Breno Leitao <leitao@debian.org>, 
- Viresh Kumar <viresh.kumar@linaro.org>,
- Michael Turquette <mturquette@baylibre.com>, 
- Stephen Boyd <sboyd@kernel.org>, rust-for-linux@vger.kernel.org, 
- linux-kernel@vger.kernel.org, linux-kselftest@vger.kernel.org, 
- kunit-dev@googlegroups.com, dri-devel@lists.freedesktop.org, 
- netdev@vger.kernel.org, devicetree@vger.kernel.org, llvm@lists.linux.dev, 
- linux-pci@vger.kernel.org, nouveau@lists.freedesktop.org, 
- linux-block@vger.kernel.org, linux-pm@vger.kernel.org, 
- linux-clk@vger.kernel.org
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+ Nishanth Menon <nm@ti.com>, Stephen Boyd <sboyd@kernel.org>, 
+ Miguel Ojeda <ojeda@kernel.org>, Alex Gaynor <alex.gaynor@gmail.com>, 
+ Boqun Feng <boqun.feng@gmail.com>, Gary Guo <gary@garyguo.net>, 
+ =?utf-8?q?Bj=C3=B6rn_Roy_Baron?= <bjorn3_gh@protonmail.com>, 
+ Benno Lossin <lossin@kernel.org>, Andreas Hindborg <a.hindborg@kernel.org>, 
+ Alice Ryhl <aliceryhl@google.com>, Trevor Gross <tmgross@umich.edu>
+Cc: linux-pm@vger.kernel.org, linux-kernel@vger.kernel.org, 
+ nouveau@lists.freedesktop.org, dri-devel@lists.freedesktop.org, 
+ rust-for-linux@vger.kernel.org, Tamir Duberstein <tamird@gmail.com>
+X-Mailer: b4 0.15-dev
+X-Developer-Signature: v=1; a=openssh-sha256; t=1751660160; l=1945;
+ i=tamird@gmail.com; h=from:subject:message-id;
+ bh=QbKwusMAkM9a/9/xceMyEYhSLLCaD1ZRtRJUSrrJv5Q=;
+ b=U1NIU0lHAAAAAQAAADMAAAALc3NoLWVkMjU1MTkAAAAgtYz36g7iDMSkY5K7Ab51ksGX7hJgs
+ MRt+XVZTrIzMVIAAAAGcGF0YXR0AAAAAAAAAAZzaGE1MTIAAABTAAAAC3NzaC1lZDI1NTE5AAAA
+ QCCsSGmWQGuchXx15wPXzQ8bwXKfo878bqFcp4CZeit5Laltm+GPuYb7EicsWu7PjvXZK+2GLfQ
+ 9DAOrwfdjJwc=
+X-Developer-Key: i=tamird@gmail.com; a=openssh;
+ fpr=SHA256:264rPmnnrb+ERkS7DDS3tuwqcJss/zevJRzoylqMsbc
 X-Mailman-Approved-At: Mon, 06 Oct 2025 20:57:15 +0000
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
@@ -124,58 +112,49 @@ List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-On Fri, Jul 4, 2025 at 9:00=E2=80=AFAM Benno Lossin <lossin@kernel.org> wro=
-te:
->
-> On Tue Jul 1, 2025 at 6:49 PM CEST, Tamir Duberstein wrote:
-> > `kernel::ffi::CStr` was introduced in commit d126d2380131 ("rust: str:
-> > add `CStr` type") in November 2022 as an upstreaming of earlier work
-> > that was done in May 2021[0]. That earlier work, having predated the
-> > inclusion of `CStr` in `core`, largely duplicated the implementation of
-> > `std::ffi::CStr`.
-> >
-> > `std::ffi::CStr` was moved to `core::ffi::CStr` in Rust 1.64 in
-> > September 2022. Hence replace `kernel::str::CStr` with `core::ffi::CStr=
-`
-> > to reduce our custom code footprint, and retain needed custom
-> > functionality through an extension trait.
-> >
-> > C-String literals were added in Rust 1.77, while our MSRV is 1.78. Thus
-> > opportunistically replace instances of `kernel::c_str!` with C-String
-> > literals where other code changes were already necessary or where
-> > existing code triggered clippy lints; the rest will be done in a later
-> > commit.
-> >
-> > Link: https://github.com/Rust-for-Linux/linux/commit/faa3cbcca03d0dec8f=
-8e43f1d8d5c0860d98a23f [0]
-> > Acked-by: Greg Kroah-Hartman <gregkh@linuxfoundation.org>
-> > Reviewed-by: Alice Ryhl <aliceryhl@google.com>
-> > Signed-off-by: Tamir Duberstein <tamird@gmail.com>
-> > ---
-> >  drivers/gpu/drm/drm_panic_qr.rs |   2 +-
-> >  rust/kernel/auxiliary.rs        |   4 +-
-> >  rust/kernel/configfs.rs         |   4 +-
-> >  rust/kernel/cpufreq.rs          |   2 +-
-> >  rust/kernel/device.rs           |   4 +-
-> >  rust/kernel/drm/device.rs       |   4 +-
-> >  rust/kernel/error.rs            |   4 +-
-> >  rust/kernel/firmware.rs         |  11 +-
-> >  rust/kernel/kunit.rs            |   6 +-
-> >  rust/kernel/miscdevice.rs       |   2 +-
-> >  rust/kernel/net/phy.rs          |   2 +-
-> >  rust/kernel/of.rs               |   2 +-
-> >  rust/kernel/prelude.rs          |   5 +-
-> >  rust/kernel/seq_file.rs         |   4 +-
-> >  rust/kernel/str.rs              | 394 +++++++++++---------------------=
---------
-> >  rust/kernel/sync/condvar.rs     |   2 +-
-> >  rust/kernel/sync/lock.rs        |   2 +-
-> >  rust/kernel/sync/lock/global.rs |   2 +-
-> >  samples/rust/rust_configfs.rs   |   2 +-
-> >  19 files changed, 140 insertions(+), 318 deletions(-)
->
-> Is it also possible to split this? First rename the existing functions
-> on our CStr to match upstream & then you don't need to do the rename &
-> removal of our CStr in the same patch?
+This series makes preparations for the replacement of our custom `CStr`
+type with the analogous type available in `core`.
 
-Yes.
+As this is a large migration that touches many subsystems, it will take
+place in several cycles, each of which may see multiple series:
+1. introduces facades in the kernel crate that downstream
+   code can reference. [this series]
+2. migrate downstream code to kernel crate facades. (N series, divided
+   by subsystem).
+3. replace kernel crate facades to allow `Display`ing foreign types
+   (such as `core::ffi::CStr`). Replace `CStr` with `core::ffi::CStr`.
+4. migrate uses of `c_str!` to C-String literals. Replace references to
+   `kernel::str::CStr` with `kernel::ffi::CStr`. (N series, divided by
+   subsystem).
+5. rename `c_str!` to discourage use. Remove `CStr` reexport from
+   `kernel/str.rs`.
+
+Signed-off-by: Tamir Duberstein <tamird@gmail.com>
+---
+Tamir Duberstein (6):
+      rust: kernel: remove `fmt!`, fix clippy::uninlined-format-args
+      rust: kernel: add `fmt` module
+      rust: use `kernel::{fmt,prelude::fmt!}`
+      rust: str: remove unnecessary qualification
+      rust: add `CStr` methods matching `core::ffi::CStr`
+      rust: use `core::ffi::CStr` method names
+
+ drivers/cpufreq/rcpufreq_dt.rs    |  3 +-
+ drivers/gpu/nova-core/firmware.rs |  5 +-
+ rust/kernel/error.rs              |  8 ++--
+ rust/kernel/fmt.rs                |  7 +++
+ rust/kernel/lib.rs                |  1 +
+ rust/kernel/opp.rs                |  2 +-
+ rust/kernel/prelude.rs            |  2 +-
+ rust/kernel/print.rs              |  6 +--
+ rust/kernel/str.rs                | 97 ++++++++++++++++++++++++---------------
+ samples/rust/rust_print_main.rs   |  2 +-
+ 10 files changed, 83 insertions(+), 50 deletions(-)
+---
+base-commit: 769e324b66b0d92d04f315d0c45a0f72737c7494
+change-id: 20250704-core-cstr-prepare-9b9e6a7bd57e
+
+Best regards,
+--  
+Tamir Duberstein <tamird@gmail.com>
+
