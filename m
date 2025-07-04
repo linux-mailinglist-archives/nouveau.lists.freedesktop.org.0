@@ -2,56 +2,89 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id 13623AF8E6E
-	for <lists+nouveau@lfdr.de>; Fri,  4 Jul 2025 11:24:43 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id C1930AF8F63
+	for <lists+nouveau@lfdr.de>; Fri,  4 Jul 2025 12:05:45 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 4F00210E9BD;
-	Fri,  4 Jul 2025 09:24:41 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 0099710E9C5;
+	Fri,  4 Jul 2025 10:05:44 +0000 (UTC)
 Authentication-Results: gabe.freedesktop.org;
-	dkim=pass (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="X5ugVTKi";
+	dkim=pass (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="dIFzhyDo";
 	dkim-atps=neutral
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from dfw.source.kernel.org (dfw.source.kernel.org [139.178.84.217])
- by gabe.freedesktop.org (Postfix) with ESMTPS id F22D110E04D;
- Fri,  4 Jul 2025 09:24:39 +0000 (UTC)
+Received: from nyc.source.kernel.org (nyc.source.kernel.org [147.75.193.91])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 458AC10E201;
+ Fri,  4 Jul 2025 10:05:42 +0000 (UTC)
 Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by dfw.source.kernel.org (Postfix) with ESMTP id DA94D5C5AB8;
- Fri,  4 Jul 2025 09:24:38 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id C2AC6C4CEE3;
- Fri,  4 Jul 2025 09:24:35 +0000 (UTC)
+ by nyc.source.kernel.org (Postfix) with ESMTP id B5A10A53B49;
+ Fri,  4 Jul 2025 10:05:40 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 5C8AFC4CEE3;
+ Fri,  4 Jul 2025 10:05:28 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1751621078;
- bh=IWnv8wuvxjSLZu6TYH7AvRedSfu4EGdi6dGZhG1R0X0=;
- h=Date:Subject:To:Cc:References:From:In-Reply-To:From;
- b=X5ugVTKihbzZa05OkMV/cLal/5bAimpvswCAOaRNZj2wFXjeCAtUPiTSbRN5KcPDM
- 0aJOA8mGqUHzTaNb7fB+25+rCgwfzL5aIEpbfHZ71H64mj6yG+ChTohvKgykLB90a0
- y+fd/KjPfDuwC8xKuhe8YQuJrM5dE0h0bzoW80m3k/RABq595aM+8cMGxqGaPODGQo
- gfLKri2qmEbE4zK4Hj/2cwK9AJtmaQoPaqh9HN2xGIk0OKMHMH89GLJjssZTToXzD5
- md4WRvpObwhWoivkrCYj6VykBRuKaR/gcQNiQlTNIKF02uBnYY4m+2tUao7IAJCY2O
- R/aJDUm+M4MHw==
-Message-ID: <f202f889-2f20-4b5a-94b9-89b61147777e@kernel.org>
-Date: Fri, 4 Jul 2025 11:24:33 +0200
-MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 17/80] drm/nouveau: Remove redundant
- pm_runtime_mark_last_busy() calls
-To: Sakari Ailus <sakari.ailus@linux.intel.com>
-Cc: Lyude Paul <lyude@redhat.com>, David Airlie <airlied@gmail.com>,
- Simona Vetter <simona@ffwll.ch>, Ben Skeggs <bskeggs@nvidia.com>,
- Dave Airlie <airlied@redhat.com>, Thomas Zimmermann <tzimmermann@suse.de>,
- Jani Nikula <jani.nikula@intel.com>,
- "Gustavo A. R. Silva" <gustavoars@kernel.org>,
- Dmitry Baryshkov <lumag@kernel.org>, Suraj Kandpal
- <suraj.kandpal@intel.com>, dri-devel@lists.freedesktop.org,
- nouveau@lists.freedesktop.org, linux-kernel@vger.kernel.org
-References: <20250704075225.3212486-1-sakari.ailus@linux.intel.com>
- <20250704075410.3217943-1-sakari.ailus@linux.intel.com>
-From: Danilo Krummrich <dakr@kernel.org>
-Content-Language: en-US
-In-Reply-To: <20250704075410.3217943-1-sakari.ailus@linux.intel.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
+ s=k20201202; t=1751623540;
+ bh=3zMvBpnjYhXNk119LId6VxXRlohR+SMqHtEt+DjGgOs=;
+ h=Date:Cc:Subject:From:To:References:In-Reply-To:From;
+ b=dIFzhyDoOtTAbxDe4ng7ZMrO/97heBHHA2tlOt/nH+8zNG51bHrYZPY5Otop9wkEE
+ GOrKb3MaWAOEqB12OvaklthhMEb5eZrWI0BPDhSMueKmloWwIpmrdhA574pgwdyDVL
+ 5lRojgAt+uopNziY+Nbq2Vyar7Ow/l0OqQ3ieJWWl/vzootQhnKntCRzNGjWwagrXs
+ ZQVT86x9TMFgy9J6Lt1mMum6Y6ipYwyQeTLs74SvWohAan1nxvN+IidtlqAZw2lilc
+ nqy6gMPSSrHzKKMC7HAuqqW0Qh3uEfCRekMqt+80F1Dobu3rSHA5697iSIX1wfMM87
+ 5aWiEaLuho2cA==
+Mime-Version: 1.0
+Content-Transfer-Encoding: quoted-printable
+Content-Type: text/plain; charset=UTF-8
+Date: Fri, 04 Jul 2025 12:05:26 +0200
+Message-Id: <DB36PVASJ5G9.2TMRXNIXYI9UO@kernel.org>
+Cc: "Michal Rostecki" <vadorovsky@protonmail.com>, "Miguel Ojeda"
+ <ojeda@kernel.org>, "Alex Gaynor" <alex.gaynor@gmail.com>, "Boqun Feng"
+ <boqun.feng@gmail.com>, "Gary Guo" <gary@garyguo.net>,
+ =?utf-8?q?Bj=C3=B6rn_Roy_Baron?= <bjorn3_gh@protonmail.com>, "Andreas
+ Hindborg" <a.hindborg@kernel.org>, "Alice Ryhl" <aliceryhl@google.com>,
+ "Trevor Gross" <tmgross@umich.edu>, "Brendan Higgins"
+ <brendan.higgins@linux.dev>, "David Gow" <davidgow@google.com>, "Rae Moar"
+ <rmoar@google.com>, "Danilo Krummrich" <dakr@kernel.org>, "Maarten
+ Lankhorst" <maarten.lankhorst@linux.intel.com>, "Maxime Ripard"
+ <mripard@kernel.org>, "Thomas Zimmermann" <tzimmermann@suse.de>, "David
+ Airlie" <airlied@gmail.com>, "Simona Vetter" <simona@ffwll.ch>, "Greg
+ Kroah-Hartman" <gregkh@linuxfoundation.org>, "Rafael J. Wysocki"
+ <rafael@kernel.org>, "Luis Chamberlain" <mcgrof@kernel.org>, "Russ Weight"
+ <russ.weight@linux.dev>, "FUJITA Tomonori" <fujita.tomonori@gmail.com>,
+ "Rob Herring" <robh@kernel.org>, "Saravana Kannan" <saravanak@google.com>,
+ "Peter Zijlstra" <peterz@infradead.org>, "Ingo Molnar" <mingo@redhat.com>,
+ "Will Deacon" <will@kernel.org>, "Waiman Long" <longman@redhat.com>,
+ "Nathan Chancellor" <nathan@kernel.org>, "Nick Desaulniers"
+ <nick.desaulniers+lkml@gmail.com>, "Bill Wendling" <morbo@google.com>,
+ "Justin Stitt" <justinstitt@google.com>, "Andrew Lunn" <andrew@lunn.ch>,
+ "Heiner Kallweit" <hkallweit1@gmail.com>, "Russell King"
+ <linux@armlinux.org.uk>, "David S. Miller" <davem@davemloft.net>, "Eric
+ Dumazet" <edumazet@google.com>, "Jakub Kicinski" <kuba@kernel.org>, "Paolo
+ Abeni" <pabeni@redhat.com>, "Bjorn Helgaas" <bhelgaas@google.com>, "Arnd
+ Bergmann" <arnd@arndb.de>, "Jens Axboe" <axboe@kernel.dk>,
+ =?utf-8?q?Krzysztof_Wilczy=C5=84ski?= <kwilczynski@kernel.org>, "Dave
+ Ertman" <david.m.ertman@intel.com>, "Ira Weiny" <ira.weiny@intel.com>,
+ "Leon Romanovsky" <leon@kernel.org>, "Breno Leitao" <leitao@debian.org>,
+ "Viresh Kumar" <viresh.kumar@linaro.org>, "Michael Turquette"
+ <mturquette@baylibre.com>, "Stephen Boyd" <sboyd@kernel.org>,
+ <rust-for-linux@vger.kernel.org>, <linux-kernel@vger.kernel.org>,
+ <linux-kselftest@vger.kernel.org>, <kunit-dev@googlegroups.com>,
+ <dri-devel@lists.freedesktop.org>, <netdev@vger.kernel.org>,
+ <devicetree@vger.kernel.org>, <llvm@lists.linux.dev>,
+ <linux-pci@vger.kernel.org>, <nouveau@lists.freedesktop.org>,
+ <linux-block@vger.kernel.org>, <linux-pm@vger.kernel.org>,
+ <linux-clk@vger.kernel.org>
+Subject: Re: [PATCH v13 2/5] rust: support formatting of foreign types
+From: "Benno Lossin" <lossin@kernel.org>
+To: "Tamir Duberstein" <tamird@gmail.com>
+X-Mailer: aerc 0.20.1
+References: <20250701-cstr-core-v13-0-29f7d3eb97a6@gmail.com>
+ <20250701-cstr-core-v13-2-29f7d3eb97a6@gmail.com>
+ <DB2BDSN1JH51.14ZZPETJORBC6@kernel.org>
+ <CAJ-ks9nC=AyBPXRY3nJ0NuZvjFskzMcOkVNrBEfXD2hZ5uRntQ@mail.gmail.com>
+ <DB2IJ9HBIM0W.3N0JVGKX558QI@kernel.org>
+ <CAJ-ks9nF5+m+_bn0Pzi9yU0pw0TyN7Fs4x--mQ4ygyHz4A6hzg@mail.gmail.com>
+ <DB2PIGAQHCJR.3BF8ZHECYH3KB@kernel.org>
+ <CAJ-ks9=WmuXLJ6KkMEOP2jTvM_YBJO10SNsq0DU2J+_d4jp7qw@mail.gmail.com>
+In-Reply-To: <CAJ-ks9=WmuXLJ6KkMEOP2jTvM_YBJO10SNsq0DU2J+_d4jp7qw@mail.gmail.com>
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -66,13 +99,46 @@ List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-On 7/4/25 9:54 AM, Sakari Ailus wrote:
-> pm_runtime_put_autosuspend(), pm_runtime_put_sync_autosuspend(),
-> pm_runtime_autosuspend() and pm_request_autosuspend() now include a call
-> to pm_runtime_mark_last_busy(). Remove the now-reduntant explicit call to
-> pm_runtime_mark_last_busy().
-> 
-> Signed-off-by: Sakari Ailus <sakari.ailus@linux.intel.com>
+On Fri Jul 4, 2025 at 12:41 AM CEST, Tamir Duberstein wrote:
+> On Thu, Jul 3, 2025 at 4:36=E2=80=AFPM Benno Lossin <lossin@kernel.org> w=
+rote:
+>> On Thu Jul 3, 2025 at 8:55 PM CEST, Tamir Duberstein wrote:
+>> > On Thu, Jul 3, 2025 at 11:08=E2=80=AFAM Benno Lossin <lossin@kernel.or=
+g> wrote:
+>> >> On Thu Jul 3, 2025 at 3:55 PM CEST, Tamir Duberstein wrote:
+>> >> > On Thu, Jul 3, 2025 at 5:32=E2=80=AFAM Benno Lossin <lossin@kernel.=
+org> wrote:
+>> >> >> On Tue Jul 1, 2025 at 6:49 PM CEST, Tamir Duberstein wrote:
+>> >> >> > +impl<T: ?Sized + Display> fmt::Display for Adapter<&T> {
+>> >> >> > +    fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
+>> >> >> > +        let Self(t) =3D self;
+>> >> >> > +        Display::fmt(t, f)
+>> >> >>
+>> >> >> Why not `Display::fmt(&self.0, f)`?
+>> >> >
+>> >> > I like destructuring because it shows me that there's only one fiel=
+d.
+>> >> > With `self.0` I don't see that.
+>> >>
+>> >> And what is the benefit here?
+>> >
+>> > In general the benefit is that the method does not ignore some portion
+>> > of `Self`. A method that uses `self.0` would not provoke a compiler
+>> > error in case another field is added, while this form would.
+>>
+>> Yeah, but why would that change happen here? And even if it got another
+>> field, why would that invalidate the impl of `fn fmt`?
+>
+> I don't know, but I would rather force a person to make that decision
+> when they add another field rather than assume that such an addition
+> wouldn't require changes here.
 
-Acked-by: Danilo Krummrich <dakr@kernel.org>
+I don't think so. If this were in another file, then destructuring
+might make sense if the struct could conceivably get more fields in the
+future **and** it if the other file relied on there only being one
+field (or if it *had* to be changed when there was a field added). This
+isn't the case here so it's just unnecessary noise.
 
+---
+Cheers,
+Benno
