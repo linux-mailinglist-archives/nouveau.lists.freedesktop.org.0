@@ -2,58 +2,60 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id 716FAAFB740
-	for <lists+nouveau@lfdr.de>; Mon,  7 Jul 2025 17:25:34 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 56188AFB96F
+	for <lists+nouveau@lfdr.de>; Mon,  7 Jul 2025 19:05:02 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 6B37110E4CA;
-	Mon,  7 Jul 2025 15:25:31 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id E383F10E4F4;
+	Mon,  7 Jul 2025 17:04:58 +0000 (UTC)
 Authentication-Results: gabe.freedesktop.org;
-	dkim=fail reason="signature verification failed" (2048-bit key; unprotected) header.d=igalia.com header.i=@igalia.com header.b="dsR4xg0i";
+	dkim=pass (2048-bit key; unprotected) header.d=collabora.com header.i=@collabora.com header.b="fNawTVU9";
 	dkim-atps=neutral
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from fanzine2.igalia.com (fanzine2.igalia.com [213.97.179.56])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 723DE10E326;
- Mon,  7 Jul 2025 15:25:29 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=igalia.com; 
- s=20170329;
- h=Content-Transfer-Encoding:Content-Type:In-Reply-To:From:
- References:Cc:To:Subject:MIME-Version:Date:Message-ID:Sender:Reply-To:
- Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
- Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
- List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=St8BIQfR0g/bkj5Q2vbzyU5XeiMPVTu5DtKzmShcTZA=; b=dsR4xg0ipSXR9KEalJjr778CD8
- rPdAyDcbkUwvqsSZaYzhNRukXe5zYO2FUe8Y49ijLn++ZiuUs4JyWY6a/c9+q4TdUPqBNhID+8BdG
- K3mEXx1J1tyWFlidkjkpaUb1bREve84+ueR7B3wZvO10vmveutZQSeUE0PTEY43UoXecugEhHRySO
- n5r3LX+1gvoKtmf/X+dUCjyI+rAPggCZIW8xNutF2aWq96F3ilVINa/PaA5pGjBRxWleslWcjAh+G
- ou1BlgNSU6rkQnIbIX64CgjRQH5RxFdqGYsGMjQDpA+C7Xl+2tEuD23hJ1xalrZsCt4D7yjw8fzct
- nulK/Giw==;
-Received: from [81.79.92.254] (helo=[192.168.0.101])
- by fanzine2.igalia.com with esmtpsa 
- (Cipher TLS1.3:ECDHE_X25519__RSA_PSS_RSAE_SHA256__AES_128_GCM:128) (Exim)
- id 1uYniZ-00DbXM-Ad; Mon, 07 Jul 2025 17:25:19 +0200
-Message-ID: <790c4053-cc63-4020-96ac-2650c8f009d3@igalia.com>
-Date: Mon, 7 Jul 2025 16:25:18 +0100
+Received: from bali.collaboradmins.com (bali.collaboradmins.com
+ [148.251.105.195])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 5643C10E18F;
+ Mon,  7 Jul 2025 17:04:57 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=collabora.com;
+ s=mail; t=1751907895;
+ bh=jgKZgyW8ErO8QzJyJCAQZUk0KZ20NLh49rPbV9DsWz8=;
+ h=From:To:Cc:Subject:Date:From;
+ b=fNawTVU9aFP0I1iAvn5Qf0e0rri1K0BP2b1vqr0j4IJ93VqfvahDvOlegx7/R5Z+E
+ NrRW7k/jYHWdfnix2GB5sNeOLxRCdga+aBsBPxZSOsqNAkdiofIf2S8V1nDkH+TfmB
+ 6NNW6zD+LYiCXzVS+3iI0Ox8N7YkH9dPz6vtdZ0WLPSBdgylwhBRl9GriHI4ILP+z1
+ 8Esae5v0L34CL8+UTI//+GkxSbFsue9vy5IR82y9HRQ4wcrfTkq8E5Hyz6KDzOLYoc
+ opM+hfPQg8xCkArH+B2W3Jyqi710hbW6z0mfLrGubipokGs0G5wNWLqayDj/F4/YrC
+ xaUkaB3gSoubA==
+Received: from debian-rockchip-rock5b-rk3588.. (unknown [90.168.160.154])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
+ (No client certificate requested) (Authenticated sender: nanokatze)
+ by bali.collaboradmins.com (Postfix) with ESMTPSA id 8711E17E046D;
+ Mon,  7 Jul 2025 19:04:54 +0200 (CEST)
+From: Caterina Shablia <caterina.shablia@collabora.com>
+To: "Maarten Lankhorst" <maarten.lankhorst@linux.intel.com>,
+ "Maxime Ripard" <mripard@kernel.org>,
+ "Thomas Zimmermann" <tzimmermann@suse.de>,
+ "David Airlie" <airlied@gmail.com>, "Simona Vetter" <simona@ffwll.ch>,
+ "Frank Binns" <frank.binns@imgtec.com>,
+ "Matt Coster" <matt.coster@imgtec.com>,
+ "Karol Herbst" <kherbst@redhat.com>, "Lyude Paul" <lyude@redhat.com>,
+ "Danilo Krummrich" <dakr@kernel.org>,
+ "Boris Brezillon" <boris.brezillon@collabora.com>,
+ "Steven Price" <steven.price@arm.com>, "Liviu Dudau" <liviu.dudau@arm.com>,
+ "Lucas De Marchi" <lucas.demarchi@intel.com>,
+ =?UTF-8?q?Thomas=20Hellstr=C3=B6m?= <thomas.hellstrom@linux.intel.com>,
+ "Rodrigo Vivi" <rodrigo.vivi@intel.com>
+Cc: dri-devel@lists.freedesktop.org, linux-kernel@vger.kernel.org,
+ nouveau@lists.freedesktop.org, intel-xe@lists.freedesktop.org,
+ asahi@lists.linux.dev, Asahi Lina <lina@asahilina.net>,
+ Caterina Shablia <caterina.shablia@collabora.com>
+Subject: [PATCH v4 0/7] drm/panthor: support repeated mappings
+Date: Mon,  7 Jul 2025 17:04:26 +0000
+Message-ID: <20250707170442.1437009-1-caterina.shablia@collabora.com>
+X-Mailer: git-send-email 2.47.2
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v2 2/7] drm/sched/tests: Implement cancel_job() callback
-To: Philipp Stanner <phasta@kernel.org>, Lyude Paul <lyude@redhat.com>,
- Danilo Krummrich <dakr@kernel.org>, David Airlie <airlied@gmail.com>,
- Simona Vetter <simona@ffwll.ch>, Matthew Brost <matthew.brost@intel.com>,
- =?UTF-8?Q?Christian_K=C3=B6nig?= <ckoenig.leichtzumerken@gmail.com>,
- Maarten Lankhorst <maarten.lankhorst@linux.intel.com>,
- Maxime Ripard <mripard@kernel.org>, Thomas Zimmermann <tzimmermann@suse.de>,
- Sumit Semwal <sumit.semwal@linaro.org>,
- Pierre-Eric Pelloux-Prayer <pierre-eric.pelloux-prayer@amd.com>
-Cc: dri-devel@lists.freedesktop.org, nouveau@lists.freedesktop.org,
- linux-kernel@vger.kernel.org, linux-media@vger.kernel.org
-References: <20250707134221.34291-2-phasta@kernel.org>
- <20250707134221.34291-4-phasta@kernel.org>
-Content-Language: en-GB
-From: Tvrtko Ursulin <tvrtko.ursulin@igalia.com>
-In-Reply-To: <20250707134221.34291-4-phasta@kernel.org>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
+Content-Transfer-Encoding: 8bit
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -68,142 +70,72 @@ List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
+This patch series adds OP_MAP_REPEAT flag, which lets the user map a BO
+region over an address range repeatedly with just one map operation.
 
-On 07/07/2025 14:42, Philipp Stanner wrote:
-> The GPU Scheduler now supports a new callback, cancel_job(), which lets
-> the scheduler cancel all jobs which might not yet be freed when
-> drm_sched_fini() runs. Using this callback allows for significantly
-> simplifying the mock scheduler teardown code.
-> 
-> Implement the cancel_job() callback and adjust the code where necessary.
-> 
-> Signed-off-by: Philipp Stanner <phasta@kernel.org>
-> ---
->   .../gpu/drm/scheduler/tests/mock_scheduler.c  | 66 +++++++------------
->   1 file changed, 23 insertions(+), 43 deletions(-)
-> 
-> diff --git a/drivers/gpu/drm/scheduler/tests/mock_scheduler.c b/drivers/gpu/drm/scheduler/tests/mock_scheduler.c
-> index 49d067fecd67..2d3169d95200 100644
-> --- a/drivers/gpu/drm/scheduler/tests/mock_scheduler.c
-> +++ b/drivers/gpu/drm/scheduler/tests/mock_scheduler.c
-> @@ -63,7 +63,7 @@ static void drm_mock_sched_job_complete(struct drm_mock_sched_job *job)
->   	lockdep_assert_held(&sched->lock);
->   
->   	job->flags |= DRM_MOCK_SCHED_JOB_DONE;
-> -	list_move_tail(&job->link, &sched->done_list);
-> +	list_del(&job->link);
->   	dma_fence_signal_locked(&job->hw_fence);
->   	complete(&job->done);
->   }
-> @@ -236,26 +236,39 @@ mock_sched_timedout_job(struct drm_sched_job *sched_job)
->   
->   static void mock_sched_free_job(struct drm_sched_job *sched_job)
->   {
-> -	struct drm_mock_scheduler *sched =
-> -			drm_sched_to_mock_sched(sched_job->sched);
->   	struct drm_mock_sched_job *job = drm_sched_job_to_mock_job(sched_job);
-> -	unsigned long flags;
->   
-> -	/* Remove from the scheduler done list. */
-> -	spin_lock_irqsave(&sched->lock, flags);
-> -	list_del(&job->link);
-> -	spin_unlock_irqrestore(&sched->lock, flags);
->   	dma_fence_put(&job->hw_fence);
-> -
->   	drm_sched_job_cleanup(sched_job);
->   
->   	/* Mock job itself is freed by the kunit framework. */
->   }
->   
-> +static void mock_sched_cancel_job(struct drm_sched_job *sched_job)
-> +{
-> +	struct drm_mock_scheduler *sched = drm_sched_to_mock_sched(sched_job->sched);
-> +	struct drm_mock_sched_job *job = drm_sched_job_to_mock_job(sched_job);
-> +	unsigned long flags;
-> +
-> +	hrtimer_cancel(&job->timer);
-> +
-> +	spin_lock_irqsave(&sched->lock, flags);
-> +	if (!dma_fence_is_signaled_locked(&job->hw_fence)) {
-> +		list_del(&job->link);
-> +		dma_fence_set_error(&job->hw_fence, -ECANCELED);
-> +		dma_fence_signal_locked(&job->hw_fence);
-> +	}
-> +	spin_unlock_irqrestore(&sched->lock, flags);
-> +
-> +	/* The GPU Scheduler will call drm_sched_backend_ops.free_job(), still.
-> +	 * Mock job itself is freed by the kunit framework. */
+Sparse resources in the Vulkan API let the user leave regions of a
+resource unmapped (from the API perspective.) Accesses to such regions
+must not result in program termination, but loads produce undefined
+values.
 
-I suggest sticking with the multi-line comment format as used in this 
-file. Ie.
+To implement this feature on Mali hardware, Vulkan sparse unmap is
+implemented by mapping the specified region to a "dummy bo" so that the
+accesses do not fault. A newly created sparse resource starts off
+unmapped, and therefore also has to be mapped to the "dummy bo".  This
+"dummy bo" is small (a page size) in comparison to the sizes of va
+ranges that we might want to map to it, and a large number of vm_bind
+ops can be necessary. For example, if the user were to create a
+100e6-byte sparse resident resource, we'd have to poke VM_BIND with
+ceil(100e6/0x1000)=24415 map operations.
 
-/*
-  * Multi-line comment.
-  */
+OP_MAP_REPEAT addresses this particular inefficiency by letting us
+implement a single Vulkan sparse unmap operation and sparse resident
+resource initialization with just one map operation.
 
-> +}
-> +
->   static const struct drm_sched_backend_ops drm_mock_scheduler_ops = {
->   	.run_job = mock_sched_run_job,
->   	.timedout_job = mock_sched_timedout_job,
-> -	.free_job = mock_sched_free_job
-> +	.free_job = mock_sched_free_job,
-> +	.cancel_job = mock_sched_cancel_job,
->   };
->   
->   /**
-> @@ -289,7 +302,6 @@ struct drm_mock_scheduler *drm_mock_sched_new(struct kunit *test, long timeout)
->   	sched->hw_timeline.context = dma_fence_context_alloc(1);
->   	atomic_set(&sched->hw_timeline.next_seqno, 0);
->   	INIT_LIST_HEAD(&sched->job_list);
-> -	INIT_LIST_HEAD(&sched->done_list);
+The panvk changes making use of this uapi can be found at
+https://gitlab.freedesktop.org/mesa/mesa/-/merge_requests/35287
 
-You forgot to remove done_list from the struct definition.
+Changes in v4:
+- Fixed the warnings reported by the kernel test robot.
+  https://lore.kernel.org/oe-kbuild-all/202507041635.WyDu3TQ1-lkp@intel.com/
+- Fixed the warnings reported by the CI.
+  https://patchwork.freedesktop.org/series/151264/
 
-Regards,
+No changes in v3.
 
-Tvrtko
+Changes in v2:
+- Make panthor use this stuff.
+- Make it possible to express a repeated mappina of any suitably sized
+  and aligned range of a BO, rather than strictly the page size -sized
+  prefix, generalizing the API. Rename DRM_GPUVA_SINGLE_PAGE to
+  DRM_GPUVA_REPEAT.
+- Clean up parts of drm/gpuvm affected by these changes.
 
->   	spin_lock_init(&sched->lock);
->   
->   	return sched;
-> @@ -304,38 +316,6 @@ struct drm_mock_scheduler *drm_mock_sched_new(struct kunit *test, long timeout)
->    */
->   void drm_mock_sched_fini(struct drm_mock_scheduler *sched)
->   {
-> -	struct drm_mock_sched_job *job, *next;
-> -	unsigned long flags;
-> -	LIST_HEAD(list);
-> -
-> -	drm_sched_wqueue_stop(&sched->base);
-> -
-> -	/* Force complete all unfinished jobs. */
-> -	spin_lock_irqsave(&sched->lock, flags);
-> -	list_for_each_entry_safe(job, next, &sched->job_list, link)
-> -		list_move_tail(&job->link, &list);
-> -	spin_unlock_irqrestore(&sched->lock, flags);
-> -
-> -	list_for_each_entry(job, &list, link)
-> -		hrtimer_cancel(&job->timer);
-> -
-> -	spin_lock_irqsave(&sched->lock, flags);
-> -	list_for_each_entry_safe(job, next, &list, link)
-> -		drm_mock_sched_job_complete(job);
-> -	spin_unlock_irqrestore(&sched->lock, flags);
-> -
-> -	/*
-> -	 * Free completed jobs and jobs not yet processed by the DRM scheduler
-> -	 * free worker.
-> -	 */
-> -	spin_lock_irqsave(&sched->lock, flags);
-> -	list_for_each_entry_safe(job, next, &sched->done_list, link)
-> -		list_move_tail(&job->link, &list);
-> -	spin_unlock_irqrestore(&sched->lock, flags);
-> -
-> -	list_for_each_entry_safe(job, next, &list, link)
-> -		mock_sched_free_job(&job->base);
-> -
->   	drm_sched_fini(&sched->base);
->   }
->   
+Link to v1: https://lore.kernel.org/lkml/20250202-gpuvm-single-page-v1-0-8cbd44fdcbd4@asahilina.net/
+
+Asahi Lina (2):
+  drm/gpuvm: Add a flags field to drm_gpuvm_map_req/drm_gpuva_op_map
+  drm/gpuvm: Add DRM_GPUVA_REPEAT flag and logic
+
+Boris Brezillon (5):
+  drm/panthor: Add support for atomic page table updates
+  drm/gpuvm: Kill drm_gpuva_init()
+  drm/gpuvm: Pass map arguments through a struct
+  drm/gpuvm: Add a helper to check if two VA can be merged
+  drm/panthor: Add support for repeated mappings
+
+ drivers/gpu/drm/drm_gpuvm.c            | 182 ++++++++++++++++++-------
+ drivers/gpu/drm/imagination/pvr_vm.c   |  15 +-
+ drivers/gpu/drm/nouveau/nouveau_uvmm.c |  11 +-
+ drivers/gpu/drm/panthor/panthor_drv.c  |   3 +-
+ drivers/gpu/drm/panthor/panthor_mmu.c  | 154 +++++++++++++++++++--
+ drivers/gpu/drm/xe/xe_vm.c             |  13 +-
+ include/drm/drm_gpuvm.h                | 101 +++++++++++---
+ include/uapi/drm/panthor_drm.h         |  23 ++++
+ 8 files changed, 408 insertions(+), 94 deletions(-)
+
+
+base-commit: 482c7e296edc0f594e8869a789a40be53c49bd6a
+--
+2.47.2
 
