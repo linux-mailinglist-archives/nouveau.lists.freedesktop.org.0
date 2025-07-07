@@ -2,82 +2,63 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id 79756CBAD7A
-	for <lists+nouveau@lfdr.de>; Sat, 13 Dec 2025 13:45:10 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 98CF5CBAD5E
+	for <lists+nouveau@lfdr.de>; Sat, 13 Dec 2025 13:45:01 +0100 (CET)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 8C44D10EB37;
-	Sat, 13 Dec 2025 12:41:31 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 7EDF010EAD1;
+	Sat, 13 Dec 2025 12:41:30 +0000 (UTC)
 Authentication-Results: gabe.freedesktop.org;
-	dkim=permerror (0-bit key) header.d=gmail.com header.i=@gmail.com header.b="bZsRHXtD";
+	dkim=pass (2048-bit key; secure) header.d=mailbox.org header.i=@mailbox.org header.b="DXOoGT8M";
 	dkim-atps=neutral
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from mail-pf1-f171.google.com (mail-pf1-f171.google.com
- [209.85.210.171])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 7115E10E2B6;
- Sun,  6 Jul 2025 13:48:27 +0000 (UTC)
-Received: by mail-pf1-f171.google.com with SMTP id
- d2e1a72fcca58-748e60725fcso395264b3a.3; 
- Sun, 06 Jul 2025 06:48:27 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1751809707; x=1752414507; darn=lists.freedesktop.org;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=xYKciehQldNCWNbYvySdSPRLgccg1yQ6KwqlWwrggR8=;
- b=bZsRHXtDuGlScUyo6nxUrbu6oCfFbcMEF/vTj3sLAUKS9dDWdbLE2fCbwgy+UTs9Np
- ut1c4jAtct9c/5Gfp3RI3yCizIrYfnhSWQIjcQNAuZdbddUzmbhI2WEAYMsd+DdAknSv
- XB6oWhUuIHz2fBTuzoHdvuTMcBH3uA8S22hlla88aB6xk8In9Y9tCxOMxYqfu6vQ6P9v
- K4IRaoZDTmjA+MxyDzPvwQd4GlGPDcHG6EV+cV6DujwHHro/Doled8W6Oq/rsh6equZM
- PS2RPi6fKNKt9IjuaHDOmK+Pj/Lajyop2clfR+3w1mpCbyQwBw0jumjlWmhjUaasx56+
- 7f0Q==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1751809707; x=1752414507;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=xYKciehQldNCWNbYvySdSPRLgccg1yQ6KwqlWwrggR8=;
- b=w/ySrCYGJ3CYL7sv0F9XkPcBZ3zuih/T1GgyoqRKuJhbifXztBSQ1C/CZPk6NHbPdf
- tWhyAJ7n1cHHGP3XD6l05MigTF95aJtEre2fW0MCi6+/3G/33rFnI6dZkBW7FoQb7t1d
- BLADQF1Hx4/D/+dUIR2EAyb+0h3yTefFuMc/WfnZ/LeJOzOqCKX5/Z4iJRZLBdcUYrRh
- EWQRZeToMU4iu5mPSsj4LuGxXT3MMsrQPZhYdDtoPZCB07CW2JJwMILRCsbt0Axg/8M3
- JuV9ERfyGoO2wxgHKs9lok048hUHJDg0YUjxysxZaJmssJslrI5rrcGZjcuMsDvt+zxY
- kw0A==
-X-Forwarded-Encrypted: i=1;
- AJvYcCV/sVf7vdi9BF4DZzfHUlTR84Ecu8mi+PFpxp3wEcv2YPKN9oSloUjETHN/DgAYCueVwp96U+0Sgw==@lists.freedesktop.org,
- AJvYcCVJIGkcuWLz363bNQs+fQUWUCYCp4tLLT8vN0FflA9EUzpAD8iJDLNOFbqCXG3ecnQwpY3j2QPzKX4=@lists.freedesktop.org
-X-Gm-Message-State: AOJu0YxVlQqCSLRv+Qi57aAp1XowCjP5rTSEvzlDvB60dav3u96k+Qpk
- 28VjR0D0PF/xdiLZ3Z8FGcb65BKGl9GuIKYpMf8LfhNig8G2EEhdQYnoX+YEaJLuuAzqz4QosXz
- G1p0Ll3O0c5HvkojeHsAwPPm6t0r1Los=
-X-Gm-Gg: ASbGncv6NoNrTrbcRt3NmbFEZy/FrZ12bRUj9uRyGb88xr1lMrUvHOxE0oHQpIbSCXQ
- D6NS2Tse8/SnC/JyHE4Webaqp++Oq4pRqH0oIknT3/RAJMvE6rQgWadza5S7GQA+nWBLOSntz0N
- V2zwD6nPwrZ4GsxmHzohEZVfB5fH3J0In3txOUGQcTQa9L
-X-Google-Smtp-Source: AGHT+IFqHFRxQ28XQjLZpfvmhn5YmIh0OO8Ja2iDdNN2ikIwdHYKc1UcSVFvIdbvc4AZLM+3HErNUU0W9hnjgzF5l0E=
-X-Received: by 2002:a17:902:da84:b0:235:1ae7:a9ab with SMTP id
- d9443c01a7336-23c8723fc2cmr52851595ad.3.1751809706916; Sun, 06 Jul 2025
- 06:48:26 -0700 (PDT)
-MIME-Version: 1.0
-References: <20250702-nova-docs-v3-0-f362260813e2@nvidia.com>
- <20250702-nova-docs-v3-3-f362260813e2@nvidia.com>
-In-Reply-To: <20250702-nova-docs-v3-3-f362260813e2@nvidia.com>
-From: Miguel Ojeda <miguel.ojeda.sandonis@gmail.com>
-Date: Sun, 6 Jul 2025 15:48:14 +0200
-X-Gm-Features: Ac12FXw4cJR6Uk3sqxMz-s6K2lBMkqlUu9xIxjdxhngi407laQ3US_Gq4qFUtwM
-Message-ID: <CANiq72mW-tmqeKjH_5-Xz5jb54m2d4XfXX_Z6V6GpogfJ5TmgQ@mail.gmail.com>
-Subject: Re: [PATCH v3 3/7] gpu: nova-core: Clarify falcon code
-To: Alexandre Courbot <acourbot@nvidia.com>
-Cc: Danilo Krummrich <dakr@kernel.org>, David Airlie <airlied@gmail.com>,
- Simona Vetter <simona@ffwll.ch>, 
- Maarten Lankhorst <maarten.lankhorst@linux.intel.com>,
- Maxime Ripard <mripard@kernel.org>, 
- Thomas Zimmermann <tzimmermann@suse.de>, Jonathan Corbet <corbet@lwn.net>,
- nouveau@lists.freedesktop.org, 
- dri-devel@lists.freedesktop.org, linux-kernel@vger.kernel.org, 
- linux-doc@vger.kernel.org, rust-for-linux@vger.kernel.org, 
- Joel Fernandes <joelagnelf@nvidia.com>
+Received: from mout-p-101.mailbox.org (mout-p-101.mailbox.org [80.241.56.151])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id B3ECC10E4A6;
+ Mon,  7 Jul 2025 13:54:37 +0000 (UTC)
+Received: from smtp2.mailbox.org (smtp2.mailbox.org
+ [IPv6:2001:67c:2050:b231:465::2])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
+ (No client certificate requested)
+ by mout-p-101.mailbox.org (Postfix) with ESMTPS id 4bbQhp2bbYz9snN;
+ Mon,  7 Jul 2025 15:54:34 +0200 (CEST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
+ s=mail20150812; 
+ t=1751896474; h=from:from:reply-to:reply-to:subject:subject:date:date:
+ message-id:message-id:to:to:cc:cc:mime-version:mime-version:
+ content-type:content-type:
+ content-transfer-encoding:content-transfer-encoding:
+ in-reply-to:in-reply-to:references:references;
+ bh=2BqhwT8Nr4vG7FFUJaWUmxP9QQSwgaOjItrDKQSh2ZI=;
+ b=DXOoGT8MhARLRaliROBmSJNijpxY/AbJ1O2N+jsG4asOTxRB2QMjWeigPRlxYJ19SFGNAB
+ H78kQ3V6kMaRn5qC9e0bVKE3bg7a3N+yhqp+UwMMVZuksOuojGriUpoNOkWuPIubPoxRlF
+ bQEluWwQELB92vGG+VKzOI7RB8a25NY+BsW8/tx2d4NHVok3qpujZv97NnMYg76/jCDoFf
+ 4/404RsQyMoxxzVQghu+dDOeTDXLU0h1x2JhTzlY+AZlShxjk5gREAu6K58ychlZUC/Cyq
+ ymms1NCjYmdCo3qpHT/4vFCpMaaqbjqL3TaoXdlw779PSJQ/jiQYHvBC6klDag==
+Message-ID: <7d5137a8c71c525c4e806f8ff06102d2e3a47ccc.camel@mailbox.org>
+Subject: Re: [PATCH v2 7/7] drm/nouveau: Remove waitque for sched teardown
+From: Philipp Stanner <phasta@mailbox.org>
+To: Danilo Krummrich <dakr@kernel.org>, Philipp Stanner <phasta@kernel.org>
+Cc: Lyude Paul <lyude@redhat.com>, David Airlie <airlied@gmail.com>, Simona
+ Vetter <simona@ffwll.ch>, Matthew Brost <matthew.brost@intel.com>,
+ Christian =?ISO-8859-1?Q?K=F6nig?= <ckoenig.leichtzumerken@gmail.com>,
+ Maarten Lankhorst <maarten.lankhorst@linux.intel.com>, Maxime Ripard
+ <mripard@kernel.org>, Thomas Zimmermann <tzimmermann@suse.de>, Sumit Semwal
+ <sumit.semwal@linaro.org>, Tvrtko Ursulin <tvrtko.ursulin@igalia.com>, 
+ Pierre-Eric Pelloux-Prayer <pierre-eric.pelloux-prayer@amd.com>,
+ dri-devel@lists.freedesktop.org, nouveau@lists.freedesktop.org, 
+ linux-kernel@vger.kernel.org, linux-media@vger.kernel.org
+Date: Mon, 07 Jul 2025 15:54:26 +0200
+In-Reply-To: <89b0a4bf-2a66-4610-93d2-8f2f096592a3@kernel.org>
+References: <20250707134221.34291-2-phasta@kernel.org>
+ <20250707134221.34291-9-phasta@kernel.org>
+ <89b0a4bf-2a66-4610-93d2-8f2f096592a3@kernel.org>
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
-X-Mailman-Approved-At: Sat, 13 Dec 2025 12:40:47 +0000
+MIME-Version: 1.0
+X-MBO-RS-ID: b05b9421ee7d28b08f7
+X-MBO-RS-META: kuh7iboedyuumzst34pgyixoy47xmkat
+X-Mailman-Approved-At: Sat, 13 Dec 2025 12:40:51 +0000
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -89,23 +70,34 @@ List-Post: <mailto:nouveau@lists.freedesktop.org>
 List-Help: <mailto:nouveau-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
  <mailto:nouveau-request@lists.freedesktop.org?subject=subscribe>
+Reply-To: phasta@kernel.org
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-On Wed, Jul 2, 2025 at 1:32=E2=80=AFPM Alexandre Courbot <acourbot@nvidia.c=
-om> wrote:
->
-> +/// Security mode of the Falcon microprocessor.
-> +/// See falcon.rst for more details.
+On Mon, 2025-07-07 at 15:47 +0200, Danilo Krummrich wrote:
+> On 7/7/25 3:42 PM, Philipp Stanner wrote:
+> > struct nouveau_sched contains a waitque needed to prevent
+> > drm_sched_fini() from being called while there are still jobs
+> > pending.
+> > Doing so so far would have caused memory leaks.
+> >=20
+> > With the new memleak-free mode of operation switched on in
+> > drm_sched_fini() by providing the callback
+> > nouveau_sched_fence_context_kill() the waitque is not necessary
+> > anymore.
+> >=20
+> > Remove the waitque.
+> >=20
+> > Signed-off-by: Philipp Stanner <phasta@kernel.org>
+>=20
+> Doesn't this break the driver until fixed up by the subsequent patch?
+>=20
 
-Please add a newline between those -- the first paragraph is a title
-("short description"). A few more instances below, too.
+Did you mean to answer to patch 6?
 
-`falcon.rst`
+Patch 6 implements the cancel_job() callback for nouveau, which makes
+sure the (still existing) waitque will never block. The, now redundant,
+waitque then gets removed in patch 7.
 
-> +    /// Local Framebuffer (GPU's VRAM memory)
 
-Missing period at the end.
-
-Cheers,
-Miguel
+P.
