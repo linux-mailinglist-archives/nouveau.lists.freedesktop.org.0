@@ -2,82 +2,82 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id 98684AFCD04
-	for <lists+nouveau@lfdr.de>; Tue,  8 Jul 2025 16:11:17 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 19EE1AFCD9F
+	for <lists+nouveau@lfdr.de>; Tue,  8 Jul 2025 16:31:16 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 3221C10E0DC;
-	Tue,  8 Jul 2025 14:11:03 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id BD39B10E686;
+	Tue,  8 Jul 2025 14:31:14 +0000 (UTC)
 Authentication-Results: gabe.freedesktop.org;
-	dkim=pass (1024-bit key; unprotected) header.d=redhat.com header.i=@redhat.com header.b="VQWN4NBC";
+	dkim=pass (1024-bit key; unprotected) header.d=redhat.com header.i=@redhat.com header.b="XpScZ7bm";
 	dkim-atps=neutral
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
 Received: from us-smtp-delivery-124.mimecast.com
- (us-smtp-delivery-124.mimecast.com [170.10.129.124])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 769EB10E0DC
- for <nouveau@lists.freedesktop.org>; Tue,  8 Jul 2025 14:11:02 +0000 (UTC)
+ (us-smtp-delivery-124.mimecast.com [170.10.133.124])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 1FF9910E66B
+ for <nouveau@lists.freedesktop.org>; Tue,  8 Jul 2025 14:31:13 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1751983861;
+ s=mimecast20190719; t=1751985072;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:content-type:content-type:
  content-transfer-encoding:content-transfer-encoding:
  in-reply-to:in-reply-to:references:references:autocrypt:autocrypt;
- bh=2feGrULhpAl9VLhWpuYvxvXB7WeIFZRAdrQSQq56LLk=;
- b=VQWN4NBCk/vfwOlwK5S76pHp3q5sw9+GVFNcTy86UWBf390zdLMIVK0fB22Ss0T2J0fD2l
- GRKBGqEWjGD1lQhuHkAjgSvSJYbsrADyxvQ8TXD77Hn3tXhl3YhMU50ik2uEX6rK7P3nXo
- Z+t/wo2MW9cU2S0laUq2LflUSdtDgQE=
-Received: from mail-wm1-f69.google.com (mail-wm1-f69.google.com
- [209.85.128.69]) by relay.mimecast.com with ESMTP with STARTTLS
+ bh=f30AiRiu83THpcfglthOdo9U6Yf3sX8E34Z3cjlwv24=;
+ b=XpScZ7bmhPddoory3CUyjJbqQCoBHTnNTbOtYDLLdGcI4sjpbcg8ay0na/wtMUmdaomyXA
+ jPr9tBGNCKY3yRJEShWRY+fzZ5EBNAgEC5CSfuSBWnVq0uOwtcRqRW3hnR0NP6mAt3T8LU
+ m3o1OkKiC8zTuqHn3EXiiwkX+t19n84=
+Received: from mail-wm1-f72.google.com (mail-wm1-f72.google.com
+ [209.85.128.72]) by relay.mimecast.com with ESMTP with STARTTLS
  (version=TLSv1.3, cipher=TLS_AES_256_GCM_SHA384) id
- us-mta-657-i1PDNwjpPWOBRpScDucWYw-1; Tue, 08 Jul 2025 10:11:00 -0400
-X-MC-Unique: i1PDNwjpPWOBRpScDucWYw-1
-X-Mimecast-MFC-AGG-ID: i1PDNwjpPWOBRpScDucWYw_1751983859
-Received: by mail-wm1-f69.google.com with SMTP id
- 5b1f17b1804b1-450d6768d4dso25201095e9.2
- for <nouveau@lists.freedesktop.org>; Tue, 08 Jul 2025 07:10:59 -0700 (PDT)
+ us-mta-346-TgJ32DzJNKurNTng_ewnUQ-1; Tue, 08 Jul 2025 10:31:10 -0400
+X-MC-Unique: TgJ32DzJNKurNTng_ewnUQ-1
+X-Mimecast-MFC-AGG-ID: TgJ32DzJNKurNTng_ewnUQ_1751985069
+Received: by mail-wm1-f72.google.com with SMTP id
+ 5b1f17b1804b1-4530c186394so17450015e9.0
+ for <nouveau@lists.freedesktop.org>; Tue, 08 Jul 2025 07:31:10 -0700 (PDT)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1751983859; x=1752588659;
+ d=1e100.net; s=20230601; t=1751985069; x=1752589869;
  h=content-transfer-encoding:in-reply-to:organization:autocrypt
  :content-language:from:references:cc:to:subject:user-agent
  :mime-version:date:message-id:x-gm-message-state:from:to:cc:subject
  :date:message-id:reply-to;
- bh=2feGrULhpAl9VLhWpuYvxvXB7WeIFZRAdrQSQq56LLk=;
- b=Xb5mn9jWiE5i9CFSbLtitwViNNZZ9AjohiO+RWzZD/riGNitjTDLe36B3e7zo4/SE6
- Z0dyo1nI6zzgxZMuORQNvTB8545VngirWMvpSNkcOEIf479RHLNWG7WVE/VZBn3qss3C
- BWzF9aSS4e5k6Ny3LKyRK2s5Lb3TVXO2zB3l5fhbKMrbHUDh77JJykCuuTdCugeE9kCY
- c0H1scL2jRIfwWPrUd/0XfoCxzGbuja5N6yIoHqpYLb6RqUY2DD8SlPGDFAv7+hUuftA
- AcFKsBAd6mjNmmAA1orTBVNzMkgQ9UobI2rAGWWNB4GYabwDkLa/afcCu80Wnc6evchT
- lm7w==
+ bh=f30AiRiu83THpcfglthOdo9U6Yf3sX8E34Z3cjlwv24=;
+ b=raOspPYAGfNh21L0+GQxfSMRMOQiTC9JsUX7moJzFpwWZGUUO6SNfhDQYubFW+W19a
+ QRHpzJ0qZkTR6EeEPpV1LYBryitX0r3r12NtH+1qPkN7CzeP5p4Ycw3z/uLIzUOkguQd
+ kV14YS2Malzl2V2tXnkBOPvqORJYAhvHcIgIF83voIyyTYDd0VFaQd14Pp6gqYEZm2at
+ j1sWz7C36db7bPrdDOg277S1FBU7LE2Y2I/jJD6NfJntwJnYeuEbSKvZrPWSoLjEoymE
+ LI2rCsQRJFX1hTsWbcXb9mpcz1kjrSPw4C5F33ppn3F6w+1qrnLb7Vs5T4UhftMiwiZi
+ Qiag==
 X-Forwarded-Encrypted: i=1;
- AJvYcCX74GOmAOj7lYhXSWnWAksTxrWCecCsMO0KQCNTFYuOZ31HHRmgELAPk7v47ap0Bc/fARgpoiQD@lists.freedesktop.org
-X-Gm-Message-State: AOJu0YyLztGh95qjs+AWG3BMT46VThwyJxOxTeMiyJG3nWzuqcaxCl4M
- /g8gwLbal+OJ+QqedlFKzCD4oXNoldPCnI5GSzAHvt6DLifLhf2JM5AS85GrWzDf4G/TXbpX+3N
- iKu4a43l/J1s4ey99LXPdNko9qeYlZ0/Fo5Jg76Csq3dgZoncVVtYTDDZvHyWwRONvJU=
-X-Gm-Gg: ASbGncvB7GuMwQa7Wh7Ug+HZa3e79labQ6umDQPWdF7ZFZcHXevAAxTBytPc5iBgSmo
- PPVAce5L61MFkxuN4+0C02W8GMudtYzhzZbl4jXbex15dmUYP8cJWp6GyZYCQ484h1CfQtp+Nix
- /GJjGh+xBhBpMMEQ0dpMlwkr7yjr9pcxxfWo39c2y5jOBGchAqrztG4qGm3qkGWZ0lrRDmDmvei
- ctGM2sJSbwMpG9pNJYV6s12Q3DIlCxVZdmNFU3V09bMA6AI1TPWfpt8u5mU/1/TfgRMIGmDxqst
- Li+BqalIqjCKoBZRdZIVKvTJYpiMcuwE/8/QjeIEo6YBL4nerr41DPzUn5IXb5I+GT/qh/Kxa3V
- RvmqjthZHMFmviUBHzqvYTmRca/u1eCQOXA1ESHvYpaD9V96j1g==
-X-Received: by 2002:a05:600c:502b:b0:450:ceb2:67dd with SMTP id
- 5b1f17b1804b1-454b3196658mr138967175e9.33.1751983858458; 
- Tue, 08 Jul 2025 07:10:58 -0700 (PDT)
-X-Google-Smtp-Source: AGHT+IFWCZzfSlQCTmEqUNSRpr1IkxwsQcI7hEJPjNFjHibjyZjoTIZV7oluRQuTY7gNBR/EYLpm2w==
-X-Received: by 2002:a05:600c:502b:b0:450:ceb2:67dd with SMTP id
- 5b1f17b1804b1-454b3196658mr138966235e9.33.1751983857615; 
- Tue, 08 Jul 2025 07:10:57 -0700 (PDT)
+ AJvYcCUa0cPsAMwcxcPgQCb/a9eDFFx1Ti7itMVzSOx5MQSp4L0rDwnuch8J3yMa9+ZR/9mhW6tfGsoq@lists.freedesktop.org
+X-Gm-Message-State: AOJu0Yw4IR2btf5Yf8ucsMvs15olxXPQJhqeadwkW0E7XUq/l5771UUi
+ fUjkpMnmMFVxXylwtGKtUCwWhIXNcsSC/0iP6yDXTIdHkdNkQ+OocPSAWMp5WrVWHWVmiSz75ra
+ ww3IxckEDzGBzyb7jg3T5+rodu88Dvf1EEGtohMkDEsbBLlYyYLLijGBgw60jw98BJZo=
+X-Gm-Gg: ASbGncvoPB8z9GJLmEERzTs5uXrIw3jVVP/WMHVno8BrfqgfW7358KzxD9GQ3e6K/Yi
+ IG49C102y8f+YfEnzh3NfqLUvOObBkiuIk/KCZN/K2WRz4Hc16WVz0645zb51O09DvUhzrQx+I+
+ w8/KY1SsmXB/ES+Uf7bBWoX3KnoQCVAoaswd7vI4Wp2ttrdSzJkwWrbPNq7xmRVRCKZffIfY5Ll
+ 9gGqFVTB2sDnBwt3BnHh7AtfQsv9NbLxcKNg3o9dRMh/Csty/7w/FziMq5EQVpSSEgsc7g2ZTNR
+ 6o9hxJS/BiD6Gco8yZn5us8BLyAm7KAhBx7AX/Kk1bhUKCPDqOsPr6J7KYvVyX4l0x0HOxE4L9N
+ lgqvaQymqznodOGgzQelkmd18GqkuS1wwM4GocZluflC5AYvBfg==
+X-Received: by 2002:a05:600c:19c9:b0:43c:f629:66f4 with SMTP id
+ 5b1f17b1804b1-454b305fcb1mr171466795e9.0.1751985069209; 
+ Tue, 08 Jul 2025 07:31:09 -0700 (PDT)
+X-Google-Smtp-Source: AGHT+IFWGRrMb9BJjJO2DTEd6f/RxIyRkezBsBP3T5rnNrCC4JPUdxPSSzV9Y9MBFk+53+FOzAZhGw==
+X-Received: by 2002:a05:600c:19c9:b0:43c:f629:66f4 with SMTP id
+ 5b1f17b1804b1-454b305fcb1mr171465925e9.0.1751985068571; 
+ Tue, 08 Jul 2025 07:31:08 -0700 (PDT)
 Received: from ?IPV6:2003:d8:2f1a:f500:4346:f17c:2bde:808c?
  (p200300d82f1af5004346f17c2bde808c.dip0.t-ipconnect.de.
  [2003:d8:2f1a:f500:4346:f17c:2bde:808c])
  by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-454cd39d0f6sm23453675e9.16.2025.07.08.07.10.56
+ ffacd0b85a97d-3b4708d0ae0sm13394704f8f.33.2025.07.08.07.31.06
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Tue, 08 Jul 2025 07:10:57 -0700 (PDT)
-Message-ID: <be029205-9d03-43b0-84f7-1dab530639ca@redhat.com>
-Date: Tue, 8 Jul 2025 16:10:55 +0200
+ Tue, 08 Jul 2025 07:31:08 -0700 (PDT)
+Message-ID: <9e8771ef-e734-4d56-aa20-c3fdba0fd5ab@redhat.com>
+Date: Tue, 8 Jul 2025 16:31:06 +0200
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [RFC 03/11] mm/thp: zone_device awareness in THP handling code
+Subject: Re: [RFC 07/11] mm/memremap: Add folio_split support
 To: Balbir Singh <balbirs@nvidia.com>, linux-mm@kvack.org,
  akpm@linux-foundation.org
 Cc: dri-devel@lists.freedesktop.org, nouveau@lists.freedesktop.org,
@@ -91,7 +91,7 @@ Cc: dri-devel@lists.freedesktop.org, nouveau@lists.freedesktop.org,
  Kefeng Wang <wangkefeng.wang@huawei.com>, Jane Chu <jane.chu@oracle.com>,
  Alistair Popple <apopple@nvidia.com>, Donet Tom <donettom@linux.ibm.com>
 References: <20250306044239.3874247-1-balbirs@nvidia.com>
- <20250306044239.3874247-4-balbirs@nvidia.com>
+ <20250306044239.3874247-8-balbirs@nvidia.com>
 From: David Hildenbrand <david@redhat.com>
 Autocrypt: addr=david@redhat.com; keydata=
  xsFNBFXLn5EBEAC+zYvAFJxCBY9Tr1xZgcESmxVNI/0ffzE/ZQOiHJl6mGkmA1R7/uUpiCjJ
@@ -138,9 +138,9 @@ Autocrypt: addr=david@redhat.com; keydata=
  jPrnvUsUUsjRoRNJjKKA/REq+sAnhkNPPZ/NNMjaZ5b8Tovi8C0tmxiCHaQYqj7G2rgnT0kt
  WNyWQQ==
 Organization: Red Hat
-In-Reply-To: <20250306044239.3874247-4-balbirs@nvidia.com>
+In-Reply-To: <20250306044239.3874247-8-balbirs@nvidia.com>
 X-Mimecast-Spam-Score: 0
-X-Mimecast-MFC-PROC-ID: J77X7b4t8dWXijOj24CbCpgbyzKwz__0wdP6UaFI4o4_1751983859
+X-Mimecast-MFC-PROC-ID: b_t_ekFuhYOa0EhJ1pyqotqM4GOsH-GQIwUsWhjxJ2k_1751985069
 X-Mimecast-Originator: redhat.com
 Content-Language: en-US
 Content-Type: text/plain; charset=UTF-8; format=flowed
@@ -160,429 +160,157 @@ Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
 On 06.03.25 05:42, Balbir Singh wrote:
-> Make THP handling code in the mm subsystem for THP pages
-> aware of zone device pages. Although the code is
-> designed to be generic when it comes to handling splitting
-> of pages, the code is designed to work for THP page sizes
-> corresponding to HPAGE_PMD_NR.
+> When a zone device page is split (via huge pmd folio split). The
+> driver callback for folio_split is invoked to let the device driver
+> know that the folio size has been split into a smaller order.
 > 
-> Modify page_vma_mapped_walk() to return true when a zone
-> device huge entry is present, enabling try_to_migrate()
-> and other code migration paths to appropriately process the
-> entry
-> 
-> pmd_pfn() does not work well with zone device entries, use
-> pfn_pmd_entry_to_swap() for checking and comparison as for
-> zone device entries.
-> 
-> try_to_map_to_unused_zeropage() does not apply to zone device
-> entries, zone device entries are ignored in the call.
+> The HMM test driver has been updated to handle the split, since the
+> test driver uses backing pages, it requires a mechanism of reorganizing
+> the backing pages (backing pages are used to create a mirror device)
+> again into the right sized order pages. This is supported by exporting
+> prep_compound_page().
 > 
 > Signed-off-by: Balbir Singh <balbirs@nvidia.com>
 > ---
->   mm/huge_memory.c     | 151 +++++++++++++++++++++++++++++++------------
->   mm/migrate.c         |   2 +
->   mm/page_vma_mapped.c |  10 +++
->   mm/rmap.c            |  19 +++++-
->   4 files changed, 138 insertions(+), 44 deletions(-)
+>   include/linux/memremap.h |  7 +++++++
+>   include/linux/mm.h       |  1 +
+>   lib/test_hmm.c           | 35 +++++++++++++++++++++++++++++++++++
+>   mm/huge_memory.c         |  5 +++++
+>   mm/page_alloc.c          |  1 +
+>   5 files changed, 49 insertions(+)
 > 
-> diff --git a/mm/huge_memory.c b/mm/huge_memory.c
-> index 826bfe907017..d8e018d1bdbd 100644
-> --- a/mm/huge_memory.c
-> +++ b/mm/huge_memory.c
-> @@ -2247,10 +2247,17 @@ int zap_huge_pmd(struct mmu_gather *tlb, struct vm_area_struct *vma,
->   		} else if (thp_migration_supported()) {
->   			swp_entry_t entry;
->   
-> -			VM_BUG_ON(!is_pmd_migration_entry(orig_pmd));
->   			entry = pmd_to_swp_entry(orig_pmd);
->   			folio = pfn_swap_entry_folio(entry);
->   			flush_needed = 0;
-> +
-> +			VM_BUG_ON(!is_pmd_migration_entry(*pmd) &&
-> +					!folio_is_device_private(folio));
-
-Convert that to a VM_WARN_ON_ONCE() while you are at it.
-
-But really, check that the *pmd* is as expected (device_pritavte entry), 
-and not the folio after the effects.
-
-Also, hiding all that under the thp_migration_supported() looks wrong.
-
-Likely you must clean that up first, to have something that expresses 
-that we support PMD swap entries or sth like that. Not just "migration 
-entries".
-
-
-> +
-> +			if (folio_is_device_private(folio)) {
-> +				folio_remove_rmap_pmd(folio, folio_page(folio, 0), vma);
-> +				WARN_ON_ONCE(folio_mapcount(folio) < 0);
-> +			}
-
-
-zap_nonpresent_ptes() does
-
-if (is_device_private_entry(entry)) {
-	...
-} else if (is_migration_entry(entry)) {
-	....
-}
-
-Can we adjust the same way of foing things? (yes, we might want a 
-thp_migration_supported() check somewhere)
-
->   		} else
->   			WARN_ONCE(1, "Non present huge pmd without pmd migration enabled!");
->   
-> @@ -2264,6 +2271,15 @@ int zap_huge_pmd(struct mmu_gather *tlb, struct vm_area_struct *vma,
->   				       -HPAGE_PMD_NR);
->   		}
->   
-> +		/*
-> +		 * Do a folio put on zone device private pages after
-> +		 * changes to mm_counter, because the folio_put() will
-> +		 * clean folio->mapping and the folio_test_anon() check
-> +		 * will not be usable.
-> +		 */
-> +		if (folio_is_device_private(folio))
-> +			folio_put(folio);
-> +
->   		spin_unlock(ptl);
->   		if (flush_needed)
->   			tlb_remove_page_size(tlb, &folio->page, HPAGE_PMD_SIZE);
-> @@ -2392,7 +2408,8 @@ int change_huge_pmd(struct mmu_gather *tlb, struct vm_area_struct *vma,
->   		struct folio *folio = pfn_swap_entry_folio(entry);
->   		pmd_t newpmd;
->   
-> -		VM_BUG_ON(!is_pmd_migration_entry(*pmd));
-> +		VM_BUG_ON(!is_pmd_migration_entry(*pmd) &&
-> +			  !folio_is_device_private(folio));
->   		if (is_writable_migration_entry(entry)) {
->   			/*
->   			 * A protection check is difficult so
-> @@ -2405,9 +2422,11 @@ int change_huge_pmd(struct mmu_gather *tlb, struct vm_area_struct *vma,
->   			newpmd = swp_entry_to_pmd(entry);
->   			if (pmd_swp_soft_dirty(*pmd))
->   				newpmd = pmd_swp_mksoft_dirty(newpmd);
-> -		} else {
-> +		} else if (is_writable_device_private_entry(entry)) {
-> +			newpmd = swp_entry_to_pmd(entry);
-> +			entry = make_device_exclusive_entry(swp_offset(entry));
-> +		} else
->   			newpmd = *pmd;
-> -		}
->   
->   		if (uffd_wp)
->   			newpmd = pmd_swp_mkuffd_wp(newpmd);
-> @@ -2860,11 +2879,12 @@ static void __split_huge_pmd_locked(struct vm_area_struct *vma, pmd_t *pmd,
->   	struct page *page;
->   	pgtable_t pgtable;
->   	pmd_t old_pmd, _pmd;
-> -	bool young, write, soft_dirty, pmd_migration = false, uffd_wp = false;
-> -	bool anon_exclusive = false, dirty = false;
-> +	bool young, write, soft_dirty, uffd_wp = false;
-> +	bool anon_exclusive = false, dirty = false, present = false;
->   	unsigned long addr;
->   	pte_t *pte;
->   	int i;
-> +	swp_entry_t swp_entry;
->   
->   	VM_BUG_ON(haddr & ~HPAGE_PMD_MASK);
->   	VM_BUG_ON_VMA(vma->vm_start > haddr, vma);
-> @@ -2918,20 +2938,25 @@ static void __split_huge_pmd_locked(struct vm_area_struct *vma, pmd_t *pmd,
->   		return __split_huge_zero_page_pmd(vma, haddr, pmd);
->   	}
->   
-> -	pmd_migration = is_pmd_migration_entry(*pmd);
-> -	if (unlikely(pmd_migration)) {
-> -		swp_entry_t entry;
->   
-> +	present = pmd_present(*pmd);
-> +	if (unlikely(!present)) {
-> +		swp_entry = pmd_to_swp_entry(*pmd);
->   		old_pmd = *pmd;
-> -		entry = pmd_to_swp_entry(old_pmd);
-> -		page = pfn_swap_entry_to_page(entry);
-> -		write = is_writable_migration_entry(entry);
-> +
-> +		folio = pfn_swap_entry_folio(swp_entry);
-> +		VM_BUG_ON(!is_migration_entry(swp_entry) &&
-> +				!is_device_private_entry(swp_entry));
-> +		page = pfn_swap_entry_to_page(swp_entry);
-> +		write = is_writable_migration_entry(swp_entry);
-> +
->   		if (PageAnon(page))
-> -			anon_exclusive = is_readable_exclusive_migration_entry(entry);
-> -		young = is_migration_entry_young(entry);
-> -		dirty = is_migration_entry_dirty(entry);
-> +			anon_exclusive =
-> +				is_readable_exclusive_migration_entry(swp_entry);
->   		soft_dirty = pmd_swp_soft_dirty(old_pmd);
->   		uffd_wp = pmd_swp_uffd_wp(old_pmd);
-> +		young = is_migration_entry_young(swp_entry);
-> +		dirty = is_migration_entry_dirty(swp_entry);
->   	} else {
->   		/*
->   		 * Up to this point the pmd is present and huge and userland has
-> @@ -3015,30 +3040,45 @@ static void __split_huge_pmd_locked(struct vm_area_struct *vma, pmd_t *pmd,
->   	 * Note that NUMA hinting access restrictions are not transferred to
->   	 * avoid any possibility of altering permissions across VMAs.
+> diff --git a/include/linux/memremap.h b/include/linux/memremap.h
+> index 11d586dd8ef1..2091b754f1da 100644
+> --- a/include/linux/memremap.h
+> +++ b/include/linux/memremap.h
+> @@ -100,6 +100,13 @@ struct dev_pagemap_ops {
 >   	 */
-> -	if (freeze || pmd_migration) {
-> +	if (freeze || !present) {
->   		for (i = 0, addr = haddr; i < HPAGE_PMD_NR; i++, addr += PAGE_SIZE) {
->   			pte_t entry;
-> -			swp_entry_t swp_entry;
-> -
-> -			if (write)
-> -				swp_entry = make_writable_migration_entry(
-> -							page_to_pfn(page + i));
-> -			else if (anon_exclusive)
-> -				swp_entry = make_readable_exclusive_migration_entry(
-> -							page_to_pfn(page + i));
-> -			else
-> -				swp_entry = make_readable_migration_entry(
-> -							page_to_pfn(page + i));
-> -			if (young)
-> -				swp_entry = make_migration_entry_young(swp_entry);
-> -			if (dirty)
-> -				swp_entry = make_migration_entry_dirty(swp_entry);
-> -			entry = swp_entry_to_pte(swp_entry);
-> -			if (soft_dirty)
-> -				entry = pte_swp_mksoft_dirty(entry);
-> -			if (uffd_wp)
-> -				entry = pte_swp_mkuffd_wp(entry);
-> -
-> +			if (freeze || is_migration_entry(swp_entry)) {
-> +				if (write)
-> +					swp_entry = make_writable_migration_entry(
-> +								page_to_pfn(page + i));
-> +				else if (anon_exclusive)
-> +					swp_entry = make_readable_exclusive_migration_entry(
-> +								page_to_pfn(page + i));
-> +				else
-> +					swp_entry = make_readable_migration_entry(
-> +								page_to_pfn(page + i));
-> +				if (young)
-> +					swp_entry = make_migration_entry_young(swp_entry);
-> +				if (dirty)
-> +					swp_entry = make_migration_entry_dirty(swp_entry);
-> +				entry = swp_entry_to_pte(swp_entry);
-> +				if (soft_dirty)
-> +					entry = pte_swp_mksoft_dirty(entry);
-> +				if (uffd_wp)
-> +					entry = pte_swp_mkuffd_wp(entry);
-> +			} else {
-> +				VM_BUG_ON(!is_device_private_entry(swp_entry));
-> +				if (write)
-> +					swp_entry = make_writable_device_private_entry(
-> +								page_to_pfn(page + i));
-> +				else if (anon_exclusive)
-> +					swp_entry = make_device_exclusive_entry(
-> +								page_to_pfn(page + i));
-
-I am pretty sure this is wrong. You cannot suddenly mix in 
-device-exclusive entries.
-
-And now I am confused again how device-private, anon and GUP interact.
-
-> +				else
-> +					swp_entry = make_readable_device_private_entry(
-> +								page_to_pfn(page + i));
-> +				entry = swp_entry_to_pte(swp_entry);
-> +				if (soft_dirty)
-> +					entry = pte_swp_mksoft_dirty(entry);
-> +				if (uffd_wp)
-> +					entry = pte_swp_mkuffd_wp(entry);
-> +			}
->   			VM_WARN_ON(!pte_none(ptep_get(pte + i)));
->   			set_pte_at(mm, addr, pte + i, entry);
->   		}
-> @@ -3065,7 +3105,7 @@ static void __split_huge_pmd_locked(struct vm_area_struct *vma, pmd_t *pmd,
->   	}
->   	pte_unmap(pte);
->   
-> -	if (!pmd_migration)
-> +	if (present)
->   		folio_remove_rmap_pmd(folio, page, vma);
->   	if (freeze)
->   		put_page(page);
-> @@ -3077,6 +3117,7 @@ static void __split_huge_pmd_locked(struct vm_area_struct *vma, pmd_t *pmd,
->   void split_huge_pmd_locked(struct vm_area_struct *vma, unsigned long address,
->   			   pmd_t *pmd, bool freeze, struct folio *folio)
->   {
-> +	struct folio *pmd_folio;
->   	VM_WARN_ON_ONCE(folio && !folio_test_pmd_mappable(folio));
->   	VM_WARN_ON_ONCE(!IS_ALIGNED(address, HPAGE_PMD_SIZE));
->   	VM_WARN_ON_ONCE(folio && !folio_test_locked(folio));
-> @@ -3089,7 +3130,14 @@ void split_huge_pmd_locked(struct vm_area_struct *vma, unsigned long address,
->   	 */
->   	if (pmd_trans_huge(*pmd) || pmd_devmap(*pmd) ||
->   	    is_pmd_migration_entry(*pmd)) {
-> -		if (folio && folio != pmd_folio(*pmd))
-> +		if (folio && !pmd_present(*pmd)) {
-> +			swp_entry_t swp_entry = pmd_to_swp_entry(*pmd);
+>   	int (*memory_failure)(struct dev_pagemap *pgmap, unsigned long pfn,
+>   			      unsigned long nr_pages, int mf_flags);
 > +
-> +			pmd_folio = page_folio(pfn_swap_entry_to_page(swp_entry));
-> +		} else {
-> +			pmd_folio = pmd_folio(*pmd);
-> +		}
-> +		if (folio && folio != pmd_folio)
->   			return;
->   		__split_huge_pmd_locked(vma, pmd, address, freeze);
->   	}
-> @@ -3581,11 +3629,16 @@ static int __split_unmapped_folio(struct folio *folio, int new_order,
->   				     folio_test_swapcache(origin_folio)) ?
->   					     folio_nr_pages(release) : 0));
+> +	/*
+> +	 * Used for private (un-addressable) device memory only.
+> +	 * This callback is used when a folio is split into
+> +	 * a smaller folio
+
+Confusing. When a folio is split, it is split into multiple folios.
+
+So when will this be invoked?
+
+> +	 */
+> +	void (*folio_split)(struct folio *head, struct folio *tail);
+
+head and tail are really suboptimal termonology. They refer to head and 
+tail pages, which is not really the case with folios (in the long run).
+
+>   };
 >   
-> +			if (folio_is_device_private(release))
-> +				percpu_ref_get_many(&release->pgmap->ref,
-> +							(1 << new_order) - 1);
+>   #define PGMAP_ALTMAP_VALID	(1 << 0)
+> diff --git a/include/linux/mm.h b/include/linux/mm.h
+> index 98a67488b5fe..3d0e91e0a923 100644
+> --- a/include/linux/mm.h
+> +++ b/include/linux/mm.h
+> @@ -1415,6 +1415,7 @@ static inline struct folio *virt_to_folio(const void *x)
+>   void __folio_put(struct folio *folio);
+>   
+>   void split_page(struct page *page, unsigned int order);
+> +void prep_compound_page(struct page *page, unsigned int order);
+>   void folio_copy(struct folio *dst, struct folio *src);
+>   int folio_mc_copy(struct folio *dst, struct folio *src);
+>   
+> diff --git a/lib/test_hmm.c b/lib/test_hmm.c
+> index a81d2f8a0426..18b6a7b061d7 100644
+> --- a/lib/test_hmm.c
+> +++ b/lib/test_hmm.c
+> @@ -1640,10 +1640,45 @@ static vm_fault_t dmirror_devmem_fault(struct vm_fault *vmf)
+>   	return ret;
+>   }
+>   
 > +
->   			if (release == origin_folio)
->   				continue;
->   
-> -			lru_add_page_tail(origin_folio, &release->page,
-> -						lruvec, list);
-> +			if (!folio_is_device_private(origin_folio))
-> +				lru_add_page_tail(origin_folio, &release->page,
-> +							lruvec, list);
->   
->   			/* Some pages can be beyond EOF: drop them from page cache */
->   			if (release->index >= end) {
-> @@ -4625,7 +4678,10 @@ int set_pmd_migration_entry(struct page_vma_mapped_walk *pvmw,
->   		return 0;
->   
->   	flush_cache_range(vma, address, address + HPAGE_PMD_SIZE);
-> -	pmdval = pmdp_invalidate(vma, address, pvmw->pmd);
-> +	if (!folio_is_device_private(folio))
-> +		pmdval = pmdp_invalidate(vma, address, pvmw->pmd);
-> +	else
-> +		pmdval = pmdp_huge_clear_flush(vma, address, pvmw->pmd);
-
-Please handle this like we handle the PTE case -- checking for 
-pmd_present() instead.
-
-Avoid placing these nasty folio_is_device_private() all over the place 
-where avoidable.
-
->   
->   	/* See folio_try_share_anon_rmap_pmd(): invalidate PMD first. */
->   	anon_exclusive = folio_test_anon(folio) && PageAnonExclusive(page);
-> @@ -4675,6 +4731,17 @@ void remove_migration_pmd(struct page_vma_mapped_walk *pvmw, struct page *new)
->   	entry = pmd_to_swp_entry(*pvmw->pmd);
->   	folio_get(folio);
->   	pmde = mk_huge_pmd(new, READ_ONCE(vma->vm_page_prot));
+> +static void dmirror_devmem_folio_split(struct folio *head, struct folio *tail)
+> +{
+> +	struct page *rpage = BACKING_PAGE(folio_page(head, 0));
+> +	struct folio *new_rfolio;
+> +	struct folio *rfolio;
+> +	unsigned long offset = 0;
 > +
-> +	if (unlikely(folio_is_device_private(folio))) {
-> +		if (pmd_write(pmde))
-> +			entry = make_writable_device_private_entry(
-> +							page_to_pfn(new));
-> +		else
-> +			entry = make_readable_device_private_entry(
-> +							page_to_pfn(new));
-> +		pmde = swp_entry_to_pmd(entry);
+> +	if (!rpage) {
+> +		folio_page(tail, 0)->zone_device_data = NULL;
+> +		return;
 > +	}
 > +
->   	if (pmd_swp_soft_dirty(*pvmw->pmd))
->   		pmde = pmd_mksoft_dirty(pmde);
->   	if (is_writable_migration_entry(entry))
-> diff --git a/mm/migrate.c b/mm/migrate.c
-> index 59e39aaa74e7..0aa1bdb711c3 100644
-> --- a/mm/migrate.c
-> +++ b/mm/migrate.c
-> @@ -200,6 +200,8 @@ static bool try_to_map_unused_to_zeropage(struct page_vma_mapped_walk *pvmw,
+> +	offset = folio_pfn(tail) - folio_pfn(head);
+> +	rfolio = page_folio(rpage);
+> +	new_rfolio = page_folio(folio_page(rfolio, offset));
+> +
+> +	folio_page(tail, 0)->zone_device_data = folio_page(new_rfolio, 0);
+> +
+> +	if (folio_pfn(tail) - folio_pfn(head) == 1) {
+> +		if (folio_order(head))
+> +			prep_compound_page(folio_page(rfolio, 0),
+> +						folio_order(head));
+> +		folio_set_count(rfolio, 1);
+> +	}
+> +	clear_compound_head(folio_page(new_rfolio, 0));
+> +	if (folio_order(tail))
+> +		prep_compound_page(folio_page(new_rfolio, 0),
+> +						folio_order(tail));
+> +	folio_set_count(new_rfolio, 1);
+> +	folio_page(new_rfolio, 0)->mapping = folio_page(rfolio, 0)->mapping;
+> +	tail->pgmap = head->pgmap;
+
+Most of this doesn't look like it should be the responsibility of this 
+callback.
+
+Setting up a new folio after the split (messing with compound pages etc) 
+really should not be the responsibility of this callback.
+
+So no, this looks misplaced.
+
+> +}
+> +
+>   static const struct dev_pagemap_ops dmirror_devmem_ops = {
+>   	.page_free	= dmirror_devmem_free,
+>   	.migrate_to_ram	= dmirror_devmem_fault,
+>   	.page_free	= dmirror_devmem_free,
+> +	.folio_split	= dmirror_devmem_folio_split,
+>   };
 >   
->   	if (PageCompound(page))
->   		return false;
-> +	if (folio_is_device_private(folio))
-> +		return false;
+>   static int dmirror_device_init(struct dmirror_device *mdevice, int id)
+> diff --git a/mm/huge_memory.c b/mm/huge_memory.c
+> index 995ac8be5709..518a70d1b58a 100644
+> --- a/mm/huge_memory.c
+> +++ b/mm/huge_memory.c
+> @@ -3655,6 +3655,11 @@ static int __split_unmapped_folio(struct folio *folio, int new_order,
+>   						MTHP_STAT_NR_ANON, 1);
+>   			}
+>   
+> +			if (folio_is_device_private(origin_folio) &&
+> +					origin_folio->pgmap->ops->folio_split)
+> +				origin_folio->pgmap->ops->folio_split(
+> +					origin_folio, release);
 
-Why is that check required when you are adding THP handling and there is 
-a PageCompound check right there?
+Absolutely ugly. I think we need a wrapper for the
 
->   	VM_BUG_ON_PAGE(!PageAnon(page), page);
->   	VM_BUG_ON_PAGE(!PageLocked(page), page);
->   	VM_BUG_ON_PAGE(pte_present(*pvmw->pte), page);
-> diff --git a/mm/page_vma_mapped.c b/mm/page_vma_mapped.c
-> index e463c3be934a..5dd2e51477d3 100644
-> --- a/mm/page_vma_mapped.c
-> +++ b/mm/page_vma_mapped.c
-> @@ -278,6 +278,16 @@ bool page_vma_mapped_walk(struct page_vma_mapped_walk *pvmw)
->   			 * cannot return prematurely, while zap_huge_pmd() has
->   			 * cleared *pmd but not decremented compound_mapcount().
->   			 */
-> +			swp_entry_t entry;
 > +
-> +			if (!thp_migration_supported())
-> +				return not_found(pvmw);
+>   			/*
+>   			 * Unfreeze refcount first. Additional reference from
+>   			 * page cache.
+> diff --git a/mm/page_alloc.c b/mm/page_alloc.c
+> index 17ea8fb27cbf..563f7e39aa79 100644
+> --- a/mm/page_alloc.c
+> +++ b/mm/page_alloc.c
+> @@ -573,6 +573,7 @@ void prep_compound_page(struct page *page, unsigned int order)
+>   
+>   	prep_compound_head(page, order);
+>   }
+> +EXPORT_SYMBOL_GPL(prep_compound_page);
 
-This check looks misplaced. We should follow the same model as check_pte().
+Hmmm, that is questionable. We don't want arbitrary modules to make use 
+of that.
 
-Checking for THP migration support when you are actually caring about 
-device-private entries is weird.
-
-That is, I would expect something like
-
-} else if (is_swap_pmd(pmde)) {
-	swp_entry_t entry;
-
-	entry = pmd_to_swp_entry(pmde);
-	if (!is_device_private_entry(entry))
-		return false;
-
-	...
-}
-
-> +			entry = pmd_to_swp_entry(pmde);
-> +			if (is_device_private_entry(entry)) {
-> +				pvmw->ptl = pmd_lock(mm, pvmw->pmd);
-> +				return true;
-> +			}
-> +
->   			if ((pvmw->flags & PVMW_SYNC) &&
->   			    thp_vma_suitable_order(vma, pvmw->address,
->   						   PMD_ORDER) &&
-> diff --git a/mm/rmap.c b/mm/rmap.c
-> index 67bb273dfb80..67e99dc5f2ef 100644
-> --- a/mm/rmap.c
-> +++ b/mm/rmap.c
-> @@ -2326,8 +2326,23 @@ static bool try_to_migrate_one(struct folio *folio, struct vm_area_struct *vma,
->   #ifdef CONFIG_ARCH_ENABLE_THP_MIGRATION
->   		/* PMD-mapped THP migration entry */
->   		if (!pvmw.pte) {
-> -			subpage = folio_page(folio,
-> -				pmd_pfn(*pvmw.pmd) - folio_pfn(folio));
-> +			/*
-> +			 * Zone device private folios do not work well with
-> +			 * pmd_pfn() on some architectures due to pte
-> +			 * inversion.
-> +			 */
-> +			if (folio_is_device_private(folio)) {
-> +				swp_entry_t entry = pmd_to_swp_entry(*pvmw.pmd);
-> +				unsigned long pfn = swp_offset_pfn(entry);
-> +
-> +				subpage = folio_page(folio, pfn
-> +							- folio_pfn(folio));
-> +			} else {
-> +				subpage = folio_page(folio,
-> +							pmd_pfn(*pvmw.pmd)
-> +							- folio_pfn(folio));
-> +			}
-> +
-
-
-Please follow the same model we use for PTEs.
-
-/*
-  * Handle PFN swap PMDs, such as device-exclusive ones, that
-  * actually map pages.
-  */
-if (likely(pmd_present(...))) {
-
-}
-
+Another sign that you are exposing the wrong functionality/interface 
+(folio_split) to modules.
 
 -- 
 Cheers,
