@@ -2,82 +2,82 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id 19EE1AFCD9F
-	for <lists+nouveau@lfdr.de>; Tue,  8 Jul 2025 16:31:16 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 57B2EAFCDD8
+	for <lists+nouveau@lfdr.de>; Tue,  8 Jul 2025 16:38:17 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id BD39B10E686;
-	Tue,  8 Jul 2025 14:31:14 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 78D2B10E66F;
+	Tue,  8 Jul 2025 14:38:15 +0000 (UTC)
 Authentication-Results: gabe.freedesktop.org;
-	dkim=pass (1024-bit key; unprotected) header.d=redhat.com header.i=@redhat.com header.b="XpScZ7bm";
+	dkim=pass (1024-bit key; unprotected) header.d=redhat.com header.i=@redhat.com header.b="HP/A8IQ7";
 	dkim-atps=neutral
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
 Received: from us-smtp-delivery-124.mimecast.com
  (us-smtp-delivery-124.mimecast.com [170.10.133.124])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 1FF9910E66B
- for <nouveau@lists.freedesktop.org>; Tue,  8 Jul 2025 14:31:13 +0000 (UTC)
+ by gabe.freedesktop.org (Postfix) with ESMTPS id B367010E675
+ for <nouveau@lists.freedesktop.org>; Tue,  8 Jul 2025 14:38:13 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1751985072;
+ s=mimecast20190719; t=1751985492;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:content-type:content-type:
  content-transfer-encoding:content-transfer-encoding:
  in-reply-to:in-reply-to:references:references:autocrypt:autocrypt;
- bh=f30AiRiu83THpcfglthOdo9U6Yf3sX8E34Z3cjlwv24=;
- b=XpScZ7bmhPddoory3CUyjJbqQCoBHTnNTbOtYDLLdGcI4sjpbcg8ay0na/wtMUmdaomyXA
- jPr9tBGNCKY3yRJEShWRY+fzZ5EBNAgEC5CSfuSBWnVq0uOwtcRqRW3hnR0NP6mAt3T8LU
- m3o1OkKiC8zTuqHn3EXiiwkX+t19n84=
-Received: from mail-wm1-f72.google.com (mail-wm1-f72.google.com
- [209.85.128.72]) by relay.mimecast.com with ESMTP with STARTTLS
+ bh=EoQP04KByMD1Sm77x5AnudeBRGOmO431zL0RQv2jrp4=;
+ b=HP/A8IQ7zGfspwd07oyLHyDJq9WgHe2cRTOopKY/009CqLm4MOU51FQH/DuqgQ+mdUGPMz
+ HuOmtGTagtJmHQyI7eOfWY98silI1hA2HLMZYW8GLFGR/OsOrWnk28d2vePFLUCQxf5hUW
+ uHJYepIWUfuXwHU5nFsYL+qKCL7opf4=
+Received: from mail-wm1-f70.google.com (mail-wm1-f70.google.com
+ [209.85.128.70]) by relay.mimecast.com with ESMTP with STARTTLS
  (version=TLSv1.3, cipher=TLS_AES_256_GCM_SHA384) id
- us-mta-346-TgJ32DzJNKurNTng_ewnUQ-1; Tue, 08 Jul 2025 10:31:10 -0400
-X-MC-Unique: TgJ32DzJNKurNTng_ewnUQ-1
-X-Mimecast-MFC-AGG-ID: TgJ32DzJNKurNTng_ewnUQ_1751985069
-Received: by mail-wm1-f72.google.com with SMTP id
- 5b1f17b1804b1-4530c186394so17450015e9.0
- for <nouveau@lists.freedesktop.org>; Tue, 08 Jul 2025 07:31:10 -0700 (PDT)
+ us-mta-686-gF0pOEkgNaGJ_aEu0QpcRA-1; Tue, 08 Jul 2025 10:38:11 -0400
+X-MC-Unique: gF0pOEkgNaGJ_aEu0QpcRA-1
+X-Mimecast-MFC-AGG-ID: gF0pOEkgNaGJ_aEu0QpcRA_1751985490
+Received: by mail-wm1-f70.google.com with SMTP id
+ 5b1f17b1804b1-451d2037f1eso25987605e9.0
+ for <nouveau@lists.freedesktop.org>; Tue, 08 Jul 2025 07:38:11 -0700 (PDT)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1751985069; x=1752589869;
+ d=1e100.net; s=20230601; t=1751985490; x=1752590290;
  h=content-transfer-encoding:in-reply-to:organization:autocrypt
  :content-language:from:references:cc:to:subject:user-agent
  :mime-version:date:message-id:x-gm-message-state:from:to:cc:subject
  :date:message-id:reply-to;
- bh=f30AiRiu83THpcfglthOdo9U6Yf3sX8E34Z3cjlwv24=;
- b=raOspPYAGfNh21L0+GQxfSMRMOQiTC9JsUX7moJzFpwWZGUUO6SNfhDQYubFW+W19a
- QRHpzJ0qZkTR6EeEPpV1LYBryitX0r3r12NtH+1qPkN7CzeP5p4Ycw3z/uLIzUOkguQd
- kV14YS2Malzl2V2tXnkBOPvqORJYAhvHcIgIF83voIyyTYDd0VFaQd14Pp6gqYEZm2at
- j1sWz7C36db7bPrdDOg277S1FBU7LE2Y2I/jJD6NfJntwJnYeuEbSKvZrPWSoLjEoymE
- LI2rCsQRJFX1hTsWbcXb9mpcz1kjrSPw4C5F33ppn3F6w+1qrnLb7Vs5T4UhftMiwiZi
- Qiag==
+ bh=EoQP04KByMD1Sm77x5AnudeBRGOmO431zL0RQv2jrp4=;
+ b=FJne6KCVZDM51XVzC2rRcatv6IJB6mcfpsRSJ4VTiUDeCD0wafNvJFLStY37xCj5rC
+ ZKboWa+H9diuNWuIfeYIGY+zyEfPiFoYFpfI4mNBW3qGfBi39c1Tly4bq+UQQManJW2I
+ I2LdCupLshZ8ly8maZUnIq+Sf7FACN3pREJsrcef0lk9NtTP1k2jYVBpGz76AwuDX63m
+ Wd0ijh2I9AAFpSSQiObYcWOXLorcLFRcGInmNwZwORGvxN+d+1kcK4b8DSI8AMBQFrB9
+ k5dddGCAB984ycfBhUkK7YdjN3P7e6ZWWXYHdXGpIRdOqkKFqWSbTGmUfexUl+YkImxq
+ vjmg==
 X-Forwarded-Encrypted: i=1;
- AJvYcCUa0cPsAMwcxcPgQCb/a9eDFFx1Ti7itMVzSOx5MQSp4L0rDwnuch8J3yMa9+ZR/9mhW6tfGsoq@lists.freedesktop.org
-X-Gm-Message-State: AOJu0Yw4IR2btf5Yf8ucsMvs15olxXPQJhqeadwkW0E7XUq/l5771UUi
- fUjkpMnmMFVxXylwtGKtUCwWhIXNcsSC/0iP6yDXTIdHkdNkQ+OocPSAWMp5WrVWHWVmiSz75ra
- ww3IxckEDzGBzyb7jg3T5+rodu88Dvf1EEGtohMkDEsbBLlYyYLLijGBgw60jw98BJZo=
-X-Gm-Gg: ASbGncvoPB8z9GJLmEERzTs5uXrIw3jVVP/WMHVno8BrfqgfW7358KzxD9GQ3e6K/Yi
- IG49C102y8f+YfEnzh3NfqLUvOObBkiuIk/KCZN/K2WRz4Hc16WVz0645zb51O09DvUhzrQx+I+
- w8/KY1SsmXB/ES+Uf7bBWoX3KnoQCVAoaswd7vI4Wp2ttrdSzJkwWrbPNq7xmRVRCKZffIfY5Ll
- 9gGqFVTB2sDnBwt3BnHh7AtfQsv9NbLxcKNg3o9dRMh/Csty/7w/FziMq5EQVpSSEgsc7g2ZTNR
- 6o9hxJS/BiD6Gco8yZn5us8BLyAm7KAhBx7AX/Kk1bhUKCPDqOsPr6J7KYvVyX4l0x0HOxE4L9N
- lgqvaQymqznodOGgzQelkmd18GqkuS1wwM4GocZluflC5AYvBfg==
-X-Received: by 2002:a05:600c:19c9:b0:43c:f629:66f4 with SMTP id
- 5b1f17b1804b1-454b305fcb1mr171466795e9.0.1751985069209; 
- Tue, 08 Jul 2025 07:31:09 -0700 (PDT)
-X-Google-Smtp-Source: AGHT+IFWGRrMb9BJjJO2DTEd6f/RxIyRkezBsBP3T5rnNrCC4JPUdxPSSzV9Y9MBFk+53+FOzAZhGw==
-X-Received: by 2002:a05:600c:19c9:b0:43c:f629:66f4 with SMTP id
- 5b1f17b1804b1-454b305fcb1mr171465925e9.0.1751985068571; 
- Tue, 08 Jul 2025 07:31:08 -0700 (PDT)
+ AJvYcCXXn8LKWUhmMbvEYC4EdIWq3DZxhQ3Rnb75rnL2uhuGVGzOpRZFbmN0SagpBq/uGGSsojsNvgB1@lists.freedesktop.org
+X-Gm-Message-State: AOJu0YwzeIv2yu/zDZJc0GPTSgpVnM74fP55LIPeUqZTHrLUGLiD+1Eo
+ 0XlsgyJoAi0ciDlivBlTKy1C9LecFe/UreXP3CA6du94W0ob7flcCEKjN+pQvydLB1Uq6BC08EN
+ nK7UoledVlRAke5C5LwRVKrkvwbVsayZevhtjsj/j43um13A0u0qFWVsgS5DE0yHUATg=
+X-Gm-Gg: ASbGncsPxiq7AVOrSlQkojQtevyTK+KjXghsfAwv1tb+afz7yleyVzoZL/anftkVzVd
+ d9ZcswX9lPvoe+ImB94VlUSYSzfyk2bkuVsj+qD5ayFKjq6GaQmd2lqToReJBvG5+U2l+YiAsKD
+ NBOx6hLnl+Ls+hKsIoz83kd/9Z4IsKpr4JA9ys3lWxumb6w24dSu1UMbFgeLskxvZ2Gd/ukIdZ/
+ iXheomdyG5G9XTLtPbXMrNmnKZZzdIaTjgVO3xoln5T0bogV9P3ERs0dRUzVOhdElSDBWGtpiCa
+ IfRI1gyuewerGJU1rIahCwjvDj/zTw5ax0wDeozcLvbX3ECoWzG3XvurxvWsbAQ5GzZD5quUbtg
+ lxVRIAdc+wREvUgyJz2ZbLrtFjJnj3iVfCLaeXwwAE5F1jAcd2A==
+X-Received: by 2002:a05:600c:1549:b0:43d:17f1:2640 with SMTP id
+ 5b1f17b1804b1-454bc49ecbamr119364215e9.26.1751985490016; 
+ Tue, 08 Jul 2025 07:38:10 -0700 (PDT)
+X-Google-Smtp-Source: AGHT+IGJMfWU4WGPVjUWRaLhwNMDAFfUqrlpllAhTnFfHigjAx7GDb43eQYHXrqfR9dAJOxfGUqqYQ==
+X-Received: by 2002:a05:600c:1549:b0:43d:17f1:2640 with SMTP id
+ 5b1f17b1804b1-454bc49ecbamr119363605e9.26.1751985489485; 
+ Tue, 08 Jul 2025 07:38:09 -0700 (PDT)
 Received: from ?IPV6:2003:d8:2f1a:f500:4346:f17c:2bde:808c?
  (p200300d82f1af5004346f17c2bde808c.dip0.t-ipconnect.de.
  [2003:d8:2f1a:f500:4346:f17c:2bde:808c])
  by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-3b4708d0ae0sm13394704f8f.33.2025.07.08.07.31.06
+ 5b1f17b1804b1-454cd3d2661sm24623995e9.19.2025.07.08.07.38.08
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Tue, 08 Jul 2025 07:31:08 -0700 (PDT)
-Message-ID: <9e8771ef-e734-4d56-aa20-c3fdba0fd5ab@redhat.com>
-Date: Tue, 8 Jul 2025 16:31:06 +0200
+ Tue, 08 Jul 2025 07:38:09 -0700 (PDT)
+Message-ID: <fd22621c-ad89-4ae2-bdee-b0ec6a828059@redhat.com>
+Date: Tue, 8 Jul 2025 16:38:07 +0200
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [RFC 07/11] mm/memremap: Add folio_split support
+Subject: Re: [RFC 08/11] mm/thp: add split during migration support
 To: Balbir Singh <balbirs@nvidia.com>, linux-mm@kvack.org,
  akpm@linux-foundation.org
 Cc: dri-devel@lists.freedesktop.org, nouveau@lists.freedesktop.org,
@@ -91,7 +91,7 @@ Cc: dri-devel@lists.freedesktop.org, nouveau@lists.freedesktop.org,
  Kefeng Wang <wangkefeng.wang@huawei.com>, Jane Chu <jane.chu@oracle.com>,
  Alistair Popple <apopple@nvidia.com>, Donet Tom <donettom@linux.ibm.com>
 References: <20250306044239.3874247-1-balbirs@nvidia.com>
- <20250306044239.3874247-8-balbirs@nvidia.com>
+ <20250306044239.3874247-9-balbirs@nvidia.com>
 From: David Hildenbrand <david@redhat.com>
 Autocrypt: addr=david@redhat.com; keydata=
  xsFNBFXLn5EBEAC+zYvAFJxCBY9Tr1xZgcESmxVNI/0ffzE/ZQOiHJl6mGkmA1R7/uUpiCjJ
@@ -138,9 +138,9 @@ Autocrypt: addr=david@redhat.com; keydata=
  jPrnvUsUUsjRoRNJjKKA/REq+sAnhkNPPZ/NNMjaZ5b8Tovi8C0tmxiCHaQYqj7G2rgnT0kt
  WNyWQQ==
 Organization: Red Hat
-In-Reply-To: <20250306044239.3874247-8-balbirs@nvidia.com>
+In-Reply-To: <20250306044239.3874247-9-balbirs@nvidia.com>
 X-Mimecast-Spam-Score: 0
-X-Mimecast-MFC-PROC-ID: b_t_ekFuhYOa0EhJ1pyqotqM4GOsH-GQIwUsWhjxJ2k_1751985069
+X-Mimecast-MFC-PROC-ID: ts-jZloiVkx3_S6rqPVyNt1cRs-tVcgm8Y0er21WEY0_1751985490
 X-Mimecast-Originator: redhat.com
 Content-Language: en-US
 Content-Type: text/plain; charset=UTF-8; format=flowed
@@ -160,157 +160,41 @@ Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
 On 06.03.25 05:42, Balbir Singh wrote:
-> When a zone device page is split (via huge pmd folio split). The
-> driver callback for folio_split is invoked to let the device driver
-> know that the folio size has been split into a smaller order.
+> Support splitting pages during THP zone device migration as needed.
+> The common case that arises is that after setup, during migrate
+> the destination might not be able to allocate MIGRATE_PFN_COMPOUND
+> pages.
 > 
-> The HMM test driver has been updated to handle the split, since the
-> test driver uses backing pages, it requires a mechanism of reorganizing
-> the backing pages (backing pages are used to create a mirror device)
-> again into the right sized order pages. This is supported by exporting
-> prep_compound_page().
+> Add a new routine migrate_vma_split_pages() to support the splitting
+> of already isolated pages. The pages being migrated are already unmapped
+> and marked for migration during setup (via unmap). folio_split() and
+> __split_unmapped_folio() take additional isolated arguments, to avoid
+> unmapping and remaping these pages and unlocking/putting the folio.
+> 
+> Since unmap/remap is avoided in these code paths, an extra reference
+> count is added to the split folio pages, which will be dropped in
+> the finalize phase.
 > 
 > Signed-off-by: Balbir Singh <balbirs@nvidia.com>
 > ---
->   include/linux/memremap.h |  7 +++++++
->   include/linux/mm.h       |  1 +
->   lib/test_hmm.c           | 35 +++++++++++++++++++++++++++++++++++
->   mm/huge_memory.c         |  5 +++++
->   mm/page_alloc.c          |  1 +
->   5 files changed, 49 insertions(+)
-> 
-> diff --git a/include/linux/memremap.h b/include/linux/memremap.h
-> index 11d586dd8ef1..2091b754f1da 100644
-> --- a/include/linux/memremap.h
-> +++ b/include/linux/memremap.h
-> @@ -100,6 +100,13 @@ struct dev_pagemap_ops {
->   	 */
->   	int (*memory_failure)(struct dev_pagemap *pgmap, unsigned long pfn,
->   			      unsigned long nr_pages, int mf_flags);
-> +
-> +	/*
-> +	 * Used for private (un-addressable) device memory only.
-> +	 * This callback is used when a folio is split into
-> +	 * a smaller folio
 
-Confusing. When a folio is split, it is split into multiple folios.
+[...]
 
-So when will this be invoked?
+>   	remap_page(origin_folio, 1 << order,
+>   			folio_test_anon(origin_folio) ?
+>   				RMP_USE_SHARED_ZEROPAGE : 0);
+> @@ -3808,6 +3823,7 @@ bool uniform_split_supported(struct folio *folio, unsigned int new_order,
+>    * @lock_at: a page within @folio to be left locked to caller
+>    * @list: after-split folios will be put on it if non NULL
+>    * @uniform_split: perform uniform split or not (non-uniform split)
+> + * @isolated: The pages are already unmapped
 
-> +	 */
-> +	void (*folio_split)(struct folio *head, struct folio *tail);
+Isolated -> unmapped? Huh?
 
-head and tail are really suboptimal termonology. They refer to head and 
-tail pages, which is not really the case with folios (in the long run).
+Can we just detect that state from the folio so we don't have to pass 
+random boolean variables around?
 
->   };
->   
->   #define PGMAP_ALTMAP_VALID	(1 << 0)
-> diff --git a/include/linux/mm.h b/include/linux/mm.h
-> index 98a67488b5fe..3d0e91e0a923 100644
-> --- a/include/linux/mm.h
-> +++ b/include/linux/mm.h
-> @@ -1415,6 +1415,7 @@ static inline struct folio *virt_to_folio(const void *x)
->   void __folio_put(struct folio *folio);
->   
->   void split_page(struct page *page, unsigned int order);
-> +void prep_compound_page(struct page *page, unsigned int order);
->   void folio_copy(struct folio *dst, struct folio *src);
->   int folio_mc_copy(struct folio *dst, struct folio *src);
->   
-> diff --git a/lib/test_hmm.c b/lib/test_hmm.c
-> index a81d2f8a0426..18b6a7b061d7 100644
-> --- a/lib/test_hmm.c
-> +++ b/lib/test_hmm.c
-> @@ -1640,10 +1640,45 @@ static vm_fault_t dmirror_devmem_fault(struct vm_fault *vmf)
->   	return ret;
->   }
->   
-> +
-> +static void dmirror_devmem_folio_split(struct folio *head, struct folio *tail)
-> +{
-> +	struct page *rpage = BACKING_PAGE(folio_page(head, 0));
-> +	struct folio *new_rfolio;
-> +	struct folio *rfolio;
-> +	unsigned long offset = 0;
-> +
-> +	if (!rpage) {
-> +		folio_page(tail, 0)->zone_device_data = NULL;
-> +		return;
-> +	}
-> +
-> +	offset = folio_pfn(tail) - folio_pfn(head);
-> +	rfolio = page_folio(rpage);
-> +	new_rfolio = page_folio(folio_page(rfolio, offset));
-> +
-> +	folio_page(tail, 0)->zone_device_data = folio_page(new_rfolio, 0);
-> +
-> +	if (folio_pfn(tail) - folio_pfn(head) == 1) {
-> +		if (folio_order(head))
-> +			prep_compound_page(folio_page(rfolio, 0),
-> +						folio_order(head));
-> +		folio_set_count(rfolio, 1);
-> +	}
-> +	clear_compound_head(folio_page(new_rfolio, 0));
-> +	if (folio_order(tail))
-> +		prep_compound_page(folio_page(new_rfolio, 0),
-> +						folio_order(tail));
-> +	folio_set_count(new_rfolio, 1);
-> +	folio_page(new_rfolio, 0)->mapping = folio_page(rfolio, 0)->mapping;
-> +	tail->pgmap = head->pgmap;
-
-Most of this doesn't look like it should be the responsibility of this 
-callback.
-
-Setting up a new folio after the split (messing with compound pages etc) 
-really should not be the responsibility of this callback.
-
-So no, this looks misplaced.
-
-> +}
-> +
->   static const struct dev_pagemap_ops dmirror_devmem_ops = {
->   	.page_free	= dmirror_devmem_free,
->   	.migrate_to_ram	= dmirror_devmem_fault,
->   	.page_free	= dmirror_devmem_free,
-> +	.folio_split	= dmirror_devmem_folio_split,
->   };
->   
->   static int dmirror_device_init(struct dmirror_device *mdevice, int id)
-> diff --git a/mm/huge_memory.c b/mm/huge_memory.c
-> index 995ac8be5709..518a70d1b58a 100644
-> --- a/mm/huge_memory.c
-> +++ b/mm/huge_memory.c
-> @@ -3655,6 +3655,11 @@ static int __split_unmapped_folio(struct folio *folio, int new_order,
->   						MTHP_STAT_NR_ANON, 1);
->   			}
->   
-> +			if (folio_is_device_private(origin_folio) &&
-> +					origin_folio->pgmap->ops->folio_split)
-> +				origin_folio->pgmap->ops->folio_split(
-> +					origin_folio, release);
-
-Absolutely ugly. I think we need a wrapper for the
-
-> +
->   			/*
->   			 * Unfreeze refcount first. Additional reference from
->   			 * page cache.
-> diff --git a/mm/page_alloc.c b/mm/page_alloc.c
-> index 17ea8fb27cbf..563f7e39aa79 100644
-> --- a/mm/page_alloc.c
-> +++ b/mm/page_alloc.c
-> @@ -573,6 +573,7 @@ void prep_compound_page(struct page *page, unsigned int order)
->   
->   	prep_compound_head(page, order);
->   }
-> +EXPORT_SYMBOL_GPL(prep_compound_page);
-
-Hmmm, that is questionable. We don't want arbitrary modules to make use 
-of that.
-
-Another sign that you are exposing the wrong functionality/interface 
-(folio_split) to modules.
+For example, folio_mapped() can tell you if the folio is currently mapped.
 
 -- 
 Cheers,
