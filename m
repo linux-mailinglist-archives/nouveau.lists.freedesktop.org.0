@@ -2,80 +2,150 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id C20BCAFCB41
-	for <lists+nouveau@lfdr.de>; Tue,  8 Jul 2025 15:03:05 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id B8964AFCC4C
+	for <lists+nouveau@lfdr.de>; Tue,  8 Jul 2025 15:37:46 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 6E94310E635;
-	Tue,  8 Jul 2025 13:03:04 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id CA3D410E17F;
+	Tue,  8 Jul 2025 13:37:44 +0000 (UTC)
 Authentication-Results: gabe.freedesktop.org;
-	dkim=fail reason="signature verification failed" (2048-bit key; unprotected) header.d=igalia.com header.i=@igalia.com header.b="JdFEu7PE";
+	dkim=pass (1024-bit key; unprotected) header.d=redhat.com header.i=@redhat.com header.b="BG/0LKr1";
 	dkim-atps=neutral
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from fanzine2.igalia.com (fanzine2.igalia.com [213.97.179.56])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 843CD10E633;
- Tue,  8 Jul 2025 13:03:03 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=igalia.com; 
- s=20170329;
- h=Content-Transfer-Encoding:Content-Type:In-Reply-To:From:
- References:Cc:To:Subject:MIME-Version:Date:Message-ID:Sender:Reply-To:
- Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
- Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
- List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=CyMyoOzxPeWjgAxgKPF6kohtSbJRtTIW2hnbquSOXqk=; b=JdFEu7PEjSL5zluijTDqwm7bFA
- KDlzpRB62hDf7FTri4sgFMFKZ9IAbPwIbYxurQtIBHxzwiWvg5jpYcdIw5ZV6JcMx18tCRGq54vWL
- K8zJscgwk4rVzcCcRm85O7NyKIaWwzFgKqUUD09LpuHl8Kw5Vc2NFrjxyc4gUZnr8kkxmIhhJFAzi
- WJdR3Rqn1sgRx4mr0s0c/UH5926jQuHMDLbdyLOnd/A/M7EZNEgwT9GQk9TkS5fSAvboLI2hv7Jv1
- nNXvHxy60BlEKNAApOnC74HQN94woOay2aU4owCh1Ue/GWN7kAGbHNIRnUnwCZRuHk+y1l+jvswqS
- DYPnZUTw==;
-Received: from [84.65.48.237] (helo=[192.168.0.101])
- by fanzine2.igalia.com with esmtpsa 
- (Cipher TLS1.3:ECDHE_X25519__RSA_PSS_RSAE_SHA256__AES_128_GCM:128) (Exim)
- id 1uZ7xn-00E173-9x; Tue, 08 Jul 2025 15:02:23 +0200
-Message-ID: <b5d0921c-7cbf-4d55-aa47-c35cd7861c02@igalia.com>
-Date: Tue, 8 Jul 2025 14:02:20 +0100
+Received: from us-smtp-delivery-124.mimecast.com
+ (us-smtp-delivery-124.mimecast.com [170.10.133.124])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id CF72B10E63E
+ for <nouveau@lists.freedesktop.org>; Tue,  8 Jul 2025 13:37:43 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
+ s=mimecast20190719; t=1751981862;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ content-transfer-encoding:content-transfer-encoding:
+ in-reply-to:in-reply-to:references:references:autocrypt:autocrypt;
+ bh=IEF+8chj2MkyfolWhjd4h/R7sCyuSgO1z/RGJyUjjsA=;
+ b=BG/0LKr1aPVQo9FThyf5UlCeF8VnuVgRAGBk+dJNntLZL98ph+WbzUS71br5CD22tt3yRp
+ W3rAyz/gMFIsQSRqYmkiXPrszjQdDCsdKiKrhIVc6TmC8EBUlaTqxK+dpVdFmmCHjmovyx
+ EqNO1EDwszi28Uxg7QoR0Pmo7lIRnxQ=
+Received: from mail-wr1-f72.google.com (mail-wr1-f72.google.com
+ [209.85.221.72]) by relay.mimecast.com with ESMTP with STARTTLS
+ (version=TLSv1.3, cipher=TLS_AES_256_GCM_SHA384) id
+ us-mta-168-ENuaQzxfMT2Nbd1pvh3z3A-1; Tue, 08 Jul 2025 09:37:41 -0400
+X-MC-Unique: ENuaQzxfMT2Nbd1pvh3z3A-1
+X-Mimecast-MFC-AGG-ID: ENuaQzxfMT2Nbd1pvh3z3A_1751981860
+Received: by mail-wr1-f72.google.com with SMTP id
+ ffacd0b85a97d-3a4f65a705dso2574356f8f.2
+ for <nouveau@lists.freedesktop.org>; Tue, 08 Jul 2025 06:37:41 -0700 (PDT)
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1751981860; x=1752586660;
+ h=content-transfer-encoding:in-reply-to:organization:autocrypt
+ :content-language:from:references:cc:to:subject:user-agent
+ :mime-version:date:message-id:x-gm-message-state:from:to:cc:subject
+ :date:message-id:reply-to;
+ bh=IEF+8chj2MkyfolWhjd4h/R7sCyuSgO1z/RGJyUjjsA=;
+ b=CAAyWxHBeQt0OhrNzNPFe+8vQH39SuGzPeErm7WvPBZ8uOO3lK8IxSBS3jzdpOVu4p
+ /Y5Trif42QPwSNgejhJb3s+ZcKn/bsR/0jWeZExTouIh17UchlnB10wSOICgeEi9/e/2
+ WG6CHrFxFW74K/cxyYPbguxf7IT1+9a92urf6t0W8/Q7qHbCL3OlIjxpNQSc81oI+B0n
+ jOXpp7WpLToqQB42MGTzY4jNKdtSEPGbaQ5mO+2TeopKW5osGA6F0sswo8rH/LlzKWpE
+ yfhIbjMWeoB/nhkBezgCohOasmbDJGsgxsZbDII7tYzanMHJwj0efaD/p0ZjwIRLPfMm
+ kN9g==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCV1hXq8hB403Aal61CDBzldRR3ft/JMHn7Z52ve0uDiHNt2jDNSzpsuNzCvImpSVfd0IleiR9rY@lists.freedesktop.org
+X-Gm-Message-State: AOJu0YzgLK1Z14weD7AJFS1ZFMcovXnmeE1/R5OGYgLEzbr1qwAGgabw
+ jR1YrLJiAvAr3+/yn81wAWxoXFlJ3kGfp11agLj+SpXEMopsN7P0/aj/08b9YoSDDrWRApL5UBD
+ XU+JtRiC0iRCxANVhH3f1yvSxxGFbXo586kJcfVGziLi9jZO6UgG0tg46ViSPtOp74qk=
+X-Gm-Gg: ASbGncv6lG+zYp24/xopOcs8za/pVUJ2xo/dGpPoolqJ/dXNxxcclJrXvMIzyuyUNH3
+ glzf0/jRhxqZOzJlDrfs9omCSFaAn4Q87DNbo9zc0ZJHvxYK1tcpeAqNHwJEuXiu5f3xY9m4OiI
+ 0BhV7L9gqtsrCCA5DBYxmX3pzlwQp6rzWudhVBXTLK2ForbrkiZ9O/Ok1zfuixVLZOxQxseKt76
+ A6xF0545tg9NXSrB9IT8zWl8Gnu1haZ6D0fw4SPpuxVys7EbROrAk7/bKbeAay5On39QXW16aA1
+ pnTCZdMOraLfEf26jd5EDVHWR7Zelqhq2m/PzrnlXwU92YYzPmAJb6NtECfTMyxbwH9Xge6nvkg
+ CV4ShDR5+EI5yRHge8f8sM3Q5bK3dQDzpcYFj+Xllv92iEHz+qg==
+X-Received: by 2002:a05:6000:25f8:b0:3a1:fcd6:1e6b with SMTP id
+ ffacd0b85a97d-3b49704279emr11994794f8f.57.1751981859961; 
+ Tue, 08 Jul 2025 06:37:39 -0700 (PDT)
+X-Google-Smtp-Source: AGHT+IHyStiHSBwGZxWxlcaJkgqzmyO/mAjpR9b6IG99crQSPHfqfD1DaeJswhgokapiT94/TM5Vyg==
+X-Received: by 2002:a05:6000:25f8:b0:3a1:fcd6:1e6b with SMTP id
+ ffacd0b85a97d-3b49704279emr11994762f8f.57.1751981859378; 
+ Tue, 08 Jul 2025 06:37:39 -0700 (PDT)
+Received: from ?IPV6:2003:d8:2f1a:f500:4346:f17c:2bde:808c?
+ (p200300d82f1af5004346f17c2bde808c.dip0.t-ipconnect.de.
+ [2003:d8:2f1a:f500:4346:f17c:2bde:808c])
+ by smtp.gmail.com with ESMTPSA id
+ ffacd0b85a97d-3b471b97376sm13208221f8f.61.2025.07.08.06.37.37
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Tue, 08 Jul 2025 06:37:38 -0700 (PDT)
+Message-ID: <564babd9-fe33-4ca7-b63f-73f007fbfb51@redhat.com>
+Date: Tue, 8 Jul 2025 15:37:37 +0200
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v4] drm/sched: Use struct for drm_sched_init() params
-To: Philipp Stanner <phasta@kernel.org>, Min Ma <min.ma@amd.com>,
- Lizhi Hou <lizhi.hou@amd.com>, Oded Gabbay <ogabbay@kernel.org>,
- Alex Deucher <alexander.deucher@amd.com>,
- =?UTF-8?Q?Christian_K=C3=B6nig?= <christian.koenig@amd.com>,
- Xinhui Pan <Xinhui.Pan@amd.com>, David Airlie <airlied@gmail.com>,
- Simona Vetter <simona@ffwll.ch>, Lucas Stach <l.stach@pengutronix.de>,
- Russell King <linux+etnaviv@armlinux.org.uk>,
- Christian Gmeiner <christian.gmeiner@gmail.com>,
- Frank Binns <frank.binns@imgtec.com>, Matt Coster <matt.coster@imgtec.com>,
- Maarten Lankhorst <maarten.lankhorst@linux.intel.com>,
- Maxime Ripard <mripard@kernel.org>, Thomas Zimmermann <tzimmermann@suse.de>,
- Qiang Yu <yuq825@gmail.com>, Rob Clark <robdclark@gmail.com>,
- Sean Paul <sean@poorly.run>, Konrad Dybcio <konradybcio@kernel.org>,
- Abhinav Kumar <quic_abhinavk@quicinc.com>,
- Dmitry Baryshkov <dmitry.baryshkov@linaro.org>,
- Marijn Suijten <marijn.suijten@somainline.org>,
+Subject: Re: [RFC 01/11] mm/zone_device: support large zone device private
+ folios
+To: Balbir Singh <balbirs@nvidia.com>, linux-mm@kvack.org,
+ akpm@linux-foundation.org
+Cc: dri-devel@lists.freedesktop.org, nouveau@lists.freedesktop.org,
  Karol Herbst <kherbst@redhat.com>, Lyude Paul <lyude@redhat.com>,
- Danilo Krummrich <dakr@redhat.com>,
- Boris Brezillon <boris.brezillon@collabora.com>,
- Rob Herring <robh@kernel.org>, Steven Price <steven.price@arm.com>,
- Liviu Dudau <liviu.dudau@arm.com>, Matthew Brost <matthew.brost@intel.com>,
- Melissa Wen <mwen@igalia.com>, =?UTF-8?Q?Ma=C3=ADra_Canal?=
- <mcanal@igalia.com>, Lucas De Marchi <lucas.demarchi@intel.com>,
- =?UTF-8?Q?Thomas_Hellstr=C3=B6m?= <thomas.hellstrom@linux.intel.com>,
- Rodrigo Vivi <rodrigo.vivi@intel.com>, Sunil Khatri <sunil.khatri@amd.com>,
- Lijo Lazar <lijo.lazar@amd.com>, Hawking Zhang <Hawking.Zhang@amd.com>,
- Mario Limonciello <mario.limonciello@amd.com>, Ma Jun <Jun.Ma2@amd.com>,
- Yunxiang Li <Yunxiang.Li@amd.com>
-Cc: dri-devel@lists.freedesktop.org, linux-kernel@vger.kernel.org,
- amd-gfx@lists.freedesktop.org, etnaviv@lists.freedesktop.org,
- lima@lists.freedesktop.org, linux-arm-msm@vger.kernel.org,
- freedreno@lists.freedesktop.org, nouveau@lists.freedesktop.org,
- intel-xe@lists.freedesktop.org, Christian Gmeiner <cgmeiner@igalia.com>
-References: <20250211111422.21235-2-phasta@kernel.org>
-Content-Language: en-GB
-From: Tvrtko Ursulin <tvrtko.ursulin@igalia.com>
-In-Reply-To: <20250211111422.21235-2-phasta@kernel.org>
+ Danilo Krummrich <dakr@kernel.org>, David Airlie <airlied@gmail.com>,
+ Simona Vetter <simona@ffwll.ch>, =?UTF-8?B?SsOpcsO0bWUgR2xpc3Nl?=
+ <jglisse@redhat.com>, Shuah Khan <shuah@kernel.org>,
+ Barry Song <baohua@kernel.org>, Baolin Wang <baolin.wang@linux.alibaba.com>,
+ Ryan Roberts <ryan.roberts@arm.com>, Matthew Wilcox <willy@infradead.org>,
+ Peter Xu <peterx@redhat.com>, Zi Yan <ziy@nvidia.com>,
+ Kefeng Wang <wangkefeng.wang@huawei.com>, Jane Chu <jane.chu@oracle.com>,
+ Alistair Popple <apopple@nvidia.com>, Donet Tom <donettom@linux.ibm.com>
+References: <20250306044239.3874247-1-balbirs@nvidia.com>
+ <20250306044239.3874247-2-balbirs@nvidia.com>
+From: David Hildenbrand <david@redhat.com>
+Autocrypt: addr=david@redhat.com; keydata=
+ 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
+ WNyWQQ==
+Organization: Red Hat
+In-Reply-To: <20250306044239.3874247-2-balbirs@nvidia.com>
+X-Mimecast-Spam-Score: 0
+X-Mimecast-MFC-PROC-ID: jVSneVmF5VKG0y3DJXFvyoxc7TmWXwNdixvn-NS1Moo_1751981860
+X-Mimecast-Originator: redhat.com
+Content-Language: en-US
 Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 8bit
+Content-Transfer-Encoding: 7bit
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -90,116 +160,204 @@ List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-
-
-On 11/02/2025 11:14, Philipp Stanner wrote:
-> drm_sched_init() has a great many parameters and upcoming new
-> functionality for the scheduler might add even more. Generally, the
-> great number of parameters reduces readability and has already caused
-> one missnaming, addressed in:
+On 06.03.25 05:42, Balbir Singh wrote:
+> Add routines to support allocation of large order zone device folios
+> and helper functions for zone device folios, to check if a folio is
+> device private and helpers for setting zone device data.
 > 
-> commit 6f1cacf4eba7 ("drm/nouveau: Improve variable name in
-> nouveau_sched_init()").
+> When large folios are used, the existing page_free() callback in
+> pgmap is called when the folio is freed, this is true for both
+> PAGE_SIZE and higher order pages.
 > 
-> Introduce a new struct for the scheduler init parameters and port all
-> users.
-> 
-> Signed-off-by: Philipp Stanner <phasta@kernel.org>
-> Reviewed-by: Liviu Dudau <liviu.dudau@arm.com>
-> Acked-by: Matthew Brost <matthew.brost@intel.com> # for Xe
-> Reviewed-by: Boris Brezillon <boris.brezillon@collabora.com> # for Panfrost and Panthor
-> Reviewed-by: Christian Gmeiner <cgmeiner@igalia.com> # for Etnaviv
-> Reviewed-by: Frank Binns <frank.binns@imgtec.com> # for Imagination
-> Reviewed-by: Tvrtko Ursulin <tvrtko.ursulin@igalia.com> # for Sched
-> Reviewed-by: Maíra Canal <mcanal@igalia.com> # for v3d
+> Signed-off-by: Balbir Singh <balbirs@nvidia.com>
 > ---
-> Changes in v4:
->    - Add forgotten driver accel/amdxdna. (Me)
->    - Rephrase the "init to NULL" comments. (Tvrtko)
->    - Apply RBs by Tvrtko and Maira.
->    - Terminate the last struct members with a comma, so that future
->      fields can be added with a minimal patch diff. (Me)
+>   include/linux/memremap.h | 22 +++++++++++++++++-
+>   mm/memremap.c            | 50 +++++++++++++++++++++++++++++-----------
+>   2 files changed, 58 insertions(+), 14 deletions(-)
 > 
-> Changes in v3:
->    - Various formatting requirements.
-> 
-> Changes in v2:
->    - Point out that the hang-limit is deprecated. (Christian)
->    - Initialize the structs to 0 at declaration. (Planet Earth)
->    - Don't set stuff explicitly to 0 / NULL. (Tvrtko)
->    - Make the structs const where possible. (Boris)
->    - v3d: Use just 1, universal, function for sched-init. (Maíra)
-> ---
-
-8><
-
-> diff --git a/drivers/gpu/drm/panfrost/panfrost_job.c b/drivers/gpu/drm/panfrost/panfrost_job.c
-> index 9b8e82fb8bc4..5657106c2f7d 100644
-> --- a/drivers/gpu/drm/panfrost/panfrost_job.c
-> +++ b/drivers/gpu/drm/panfrost/panfrost_job.c
-> @@ -836,8 +836,16 @@ static irqreturn_t panfrost_job_irq_handler(int irq, void *data)
+> diff --git a/include/linux/memremap.h b/include/linux/memremap.h
+> index 4aa151914eab..11d586dd8ef1 100644
+> --- a/include/linux/memremap.h
+> +++ b/include/linux/memremap.h
+> @@ -169,6 +169,18 @@ static inline bool folio_is_device_private(const struct folio *folio)
+>   	return is_device_private_page(&folio->page);
+>   }
 >   
->   int panfrost_job_init(struct panfrost_device *pfdev)
+> +static inline void *folio_zone_device_data(const struct folio *folio)
+> +{
+> +	VM_BUG_ON_FOLIO(!folio_is_device_private(folio), folio);
+> +	return folio->page.zone_device_data;
+> +}
+
+Not used.
+
+> +
+> +static inline void folio_set_zone_device_data(struct folio *folio, void *data)
+> +{
+> +	VM_BUG_ON_FOLIO(!folio_is_device_private(folio), folio);
+> +	folio->page.zone_device_data = data;
+> +}
+> +
+
+Not used.
+
+Move both into the patch where they are actually used.
+
+>   static inline bool is_pci_p2pdma_page(const struct page *page)
 >   {
-> +	struct drm_sched_init_args args = {
-> +		.ops = &panfrost_sched_ops,
-> +		.num_rqs = DRM_SCHED_PRIORITY_COUNT,
-> +		.credit_limit = 2,
-> +		.timeout = msecs_to_jiffies(JOB_TIMEOUT_MS),
-> +		.timeout_wq = pfdev->reset.wq,
-
-^^^
-
-> +		.name = "pan_js",
-> +		.dev = pfdev->dev,
-> +	};
->   	struct panfrost_job_slot *js;
-> -	unsigned int nentries = 2;
->   	int ret, j;
+>   	return IS_ENABLED(CONFIG_PCI_P2PDMA) &&
+> @@ -199,7 +211,7 @@ static inline bool folio_is_fsdax(const struct folio *folio)
+>   }
 >   
->   	/* All GPUs have two entries per queue, but without jobchain
-> @@ -845,7 +853,7 @@ int panfrost_job_init(struct panfrost_device *pfdev)
->   	 * so let's just advertise one entry in that case.
+>   #ifdef CONFIG_ZONE_DEVICE
+> -void zone_device_page_init(struct page *page);
+> +void init_zone_device_folio(struct folio *folio, unsigned int order);
+>   void *memremap_pages(struct dev_pagemap *pgmap, int nid);
+>   void memunmap_pages(struct dev_pagemap *pgmap);
+>   void *devm_memremap_pages(struct device *dev, struct dev_pagemap *pgmap);
+> @@ -209,6 +221,14 @@ struct dev_pagemap *get_dev_pagemap(unsigned long pfn,
+>   bool pgmap_pfn_valid(struct dev_pagemap *pgmap, unsigned long pfn);
+>   
+>   unsigned long memremap_compat_align(void);
+> +
+> +static inline void zone_device_page_init(struct page *page)
+> +{
+> +	struct folio *folio = page_folio(page);
+> +
+> +	init_zone_device_folio(folio, 0);
+> +}
+> +
+>   #else
+>   static inline void *devm_memremap_pages(struct device *dev,
+>   		struct dev_pagemap *pgmap)
+> diff --git a/mm/memremap.c b/mm/memremap.c
+> index 2aebc1b192da..7d98d0a4c0cd 100644
+> --- a/mm/memremap.c
+> +++ b/mm/memremap.c
+> @@ -459,20 +459,21 @@ EXPORT_SYMBOL_GPL(get_dev_pagemap);
+>   void free_zone_device_folio(struct folio *folio)
+>   {
+>   	struct dev_pagemap *pgmap = folio->pgmap;
+> +	unsigned int nr = folio_nr_pages(folio);
+> +	int i;
+> +	bool anon = folio_test_anon(folio);
+
+You can easily get rid of this (see below).
+
+> +	struct page *page = folio_page(folio, 0);
+
+Please inline folio_page(folio, 0) below instead.
+
+>   
+>   	if (WARN_ON_ONCE(!pgmap))
+>   		return;
+>   
+>   	mem_cgroup_uncharge(folio);
+>   
+> -	/*
+> -	 * Note: we don't expect anonymous compound pages yet. Once supported
+> -	 * and we could PTE-map them similar to THP, we'd have to clear
+> -	 * PG_anon_exclusive on all tail pages.
+> -	 */
+> -	if (folio_test_anon(folio)) {
+> -		VM_BUG_ON_FOLIO(folio_test_large(folio), folio);
+> -		__ClearPageAnonExclusive(folio_page(folio, 0));
+> +	WARN_ON_ONCE(folio_test_large(folio) && !anon);
+> +
+> +	for (i = 0; i < nr; i++) {
+> +		if (anon)
+> +			__ClearPageAnonExclusive(folio_page(folio, i));
+>   	}
+
+if (folio_test_anon(folio)) {
+	for (i = 0; i < nr; i++)
+		__ClearPageAnonExclusive(folio_page(folio, i));
+} else {
+	VM_WARN_ON_ONCE(folio_test_large(folio));
+}
+
+>   
+>   	/*
+> @@ -496,10 +497,19 @@ void free_zone_device_folio(struct folio *folio)
+>   
+>   	switch (pgmap->type) {
+>   	case MEMORY_DEVICE_PRIVATE:
+> +		if (folio_test_large(folio)) {
+> +			folio_unqueue_deferred_split(folio);
+
+Is deferred splitting even a thing for device-private?
+
+Should we ever queue them for deferred splitting?
+
+> +
+> +			percpu_ref_put_many(&folio->pgmap->ref, nr - 1);
+
+Looks like we instead want a helper put_dev_pagemap_refs(pgmap, nr) 
+below instead
+
+> +		}
+> +		pgmap->ops->page_free(page);
+> +		put_dev_pagemap(pgmap);
+> +		page->mapping = NULL;
+> +		break;
+>   	case MEMORY_DEVICE_COHERENT:
+>   		if (WARN_ON_ONCE(!pgmap->ops || !pgmap->ops->page_free))
+>   			break;
+> -		pgmap->ops->page_free(folio_page(folio, 0));
+> +		pgmap->ops->page_free(page);
+>   		put_dev_pagemap(pgmap);
+>   		break;
+>   
+> @@ -523,14 +533,28 @@ void free_zone_device_folio(struct folio *folio)
+>   	}
+>   }
+>   
+> -void zone_device_page_init(struct page *page)
+> +void init_zone_device_folio(struct folio *folio, unsigned int order)
+>   {
+> +	struct page *page = folio_page(folio, 0);
+> +
+> +	VM_BUG_ON(order > MAX_ORDER_NR_PAGES);
+
+VM_WARN_ON_ONCE() or anything else that is not *BUG, please.
+
+> +
+> +	WARN_ON_ONCE(order && order != HPAGE_PMD_ORDER);
+
+Why do we need that limitation?
+
+> +
+>   	/*
+>   	 * Drivers shouldn't be allocating pages after calling
+>   	 * memunmap_pages().
 >   	 */
->   	if (!panfrost_has_hw_feature(pfdev, HW_FEATURE_JOBCHAIN_DISAMBIGUATION))
-> -		nentries = 1;
-> +		args.credit_limit = 1;
->   
->   	pfdev->js = js = devm_kzalloc(pfdev->dev, sizeof(*js), GFP_KERNEL);
->   	if (!js)
+> -	WARN_ON_ONCE(!percpu_ref_tryget_live(&page_pgmap(page)->ref));
+> -	set_page_count(page, 1);
+> +	WARN_ON_ONCE(!percpu_ref_tryget_many(&page_pgmap(page)->ref, 1 << order));
+> +	folio_set_count(folio, 1);
+>   	lock_page(page);
+> +
+> +	/*
+> +	 * Only PMD level migration is supported for THP migration
+> +	 */
 
-Stumbled on this while looking at drm_sched_init() workqueue usage.
+I don't understand how that comment interacts with the code below. This 
+is basic large folio initialization.
 
-I think this patch might need a fixup. Because somewhere around here in 
-the code there is this:
+Drop the comment, or move it above the HPAGE_PMD_ORDER check with a 
+clear reason why that limitation excists.
 
-	pfdev->reset.wq = alloc_ordered_workqueue("panfrost-reset", 0);
-	if (!pfdev->reset.wq)
-		return -ENOMEM;
+> +	if (order > 1) {
+> +		prep_compound_page(page, order);
+> +		folio_set_large_rmappable(folio);
+> +	}
+>   }
+> -EXPORT_SYMBOL_GPL(zone_device_page_init);
+> +EXPORT_SYMBOL_GPL(init_zone_device_folio);
 
-Which means that after the patch panfrost is using system_wq for the 
-timeout handler instead the one it creates.
 
-> @@ -875,13 +883,7 @@ int panfrost_job_init(struct panfrost_device *pfdev)
->   	for (j = 0; j < NUM_JOB_SLOTS; j++) {
->   		js->queue[j].fence_context = dma_fence_context_alloc(1);
->   
-> -		ret = drm_sched_init(&js->queue[j].sched,
-> -				     &panfrost_sched_ops, NULL,
-> -				     DRM_SCHED_PRIORITY_COUNT,
-> -				     nentries, 0,
-> -				     msecs_to_jiffies(JOB_TIMEOUT_MS),
-> -				     pfdev->reset.wq,
-> -				     NULL, "pan_js", pfdev->dev);
-> +		ret = drm_sched_init(&js->queue[j].sched, &args);
+-- 
+Cheers,
 
-^^^
-
->   		if (ret) {
->   			dev_err(pfdev->dev, "Failed to create scheduler: %d.", ret);
->   			goto err_sched;
-
-Regards,
-
-Tvrtko
+David / dhildenb
 
