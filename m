@@ -2,74 +2,55 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id 61191AFE804
-	for <lists+nouveau@lfdr.de>; Wed,  9 Jul 2025 13:45:36 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id DDD80AFE844
+	for <lists+nouveau@lfdr.de>; Wed,  9 Jul 2025 13:53:25 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 47A5510E064;
-	Wed,  9 Jul 2025 11:45:34 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id E684489BE8;
+	Wed,  9 Jul 2025 11:53:23 +0000 (UTC)
 Authentication-Results: gabe.freedesktop.org;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="XQYb8/Yg";
+	dkim=pass (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="PvlIVi3E";
 	dkim-atps=neutral
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from mail-pl1-f182.google.com (mail-pl1-f182.google.com
- [209.85.214.182])
- by gabe.freedesktop.org (Postfix) with ESMTPS id CF9DE10E064;
- Wed,  9 Jul 2025 11:45:33 +0000 (UTC)
-Received: by mail-pl1-f182.google.com with SMTP id
- d9443c01a7336-236377f00a1so49545325ad.3; 
- Wed, 09 Jul 2025 04:45:33 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1752061533; x=1752666333; darn=lists.freedesktop.org;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=BmmE+ZvJPR6oGSAShFV2FgbxlwcSMnJ2ZYq+K0udWPw=;
- b=XQYb8/Yg+T2mLu/f2cnUDKtQT1MwVMcypZoC0wiMlsC4U56RC2PlP6ATMFx+kYeIzT
- OKHulALQYwIm6gEXQwp4QvOV46RqUgX/PqU2DCO2PV5IAkaduDyFZ4p0hwk/m3f/Ic9/
- uX35yxzvBaDsYmFjw1rrMXdZJad9LDKS72r+evjchJj0DKE6Si1kXQTy8tbBUK4s608w
- nAYGZXvePpTDGMCnv4+93wRXnUD3i1k6HFqpKYjo7GTpC/6a5u6M4Gk732vET0MAO41O
- 1TNc2KiHthP7z7MwqvIXbX2DPs3SQEYTnkhOf86LLxIv1Lvl8kywrddj3KP+88QZ0ZF0
- NOkg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1752061533; x=1752666333;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=BmmE+ZvJPR6oGSAShFV2FgbxlwcSMnJ2ZYq+K0udWPw=;
- b=dBh+4gx6maeTreLQanRxzDg+eG4ZdzwBZYaoIAxe9bsASYQxqGUJw3T/dmQKggJNGb
- f/hNNI9Ka+403CeS+NpOha9spDul+T+L7OH0pdCglkgaFjqiAydlOTYvesMuS33rpxc7
- MFXEaGVy/+QPGwLIrRGkvnY7tVcsjAwYywjB7l9uLKvVb5CUEYdQB06cG3jLLaGtupBU
- PD5uTXmYob86CN7VurPgkIWo7QR0NWMlocpnXshiuWYLc7Xoq4zSDgyH93k2o5AjaVMt
- wlWdzeMVAT6G37BygrhD6aaK06Gjdx3rCR+AFOmiUAMoAfNXdg5AWoCDG8TSpHIt9MKo
- Bqtg==
-X-Forwarded-Encrypted: i=1;
- AJvYcCVUm8cvHo78E+690xx5A4MgAHOJm/g8QpLAoE5dmcrriuUzEy2iOThQHzSV2Cxc4gMUmMCCCF4VaIg=@lists.freedesktop.org,
- AJvYcCWKDGaHHy+A7ns4AyMYWddsfSfIqnlUuj6w9kj4y7F+DP1NYqL5L6tfkwj2sP7KnjczyIzu0yVTPQ==@lists.freedesktop.org
-X-Gm-Message-State: AOJu0YyBdj9q319QHGtNPTjPvxAEpAXGtu7eHrWAgMO+NE37o/X6/BWR
- S9hswMFxgf1MhkSoFb943HKT2QHTn8NKGQxRqPl85B/bnO5YJviKWsPC2Ei3+bCbhyEwY9h4goE
- 3I0YPXwK5WPJoTGknfUTlAlz56prqBA==
-X-Gm-Gg: ASbGnctOB28FLkGS6RnuPq78cZPkQ5PpH5yiymMuIo9PSH4GKJSZtlzLHFXDFQoEDXO
- wnzJ6nI83LXh9+6Ne8ILYu0LzE8oJeZngIeKR1pbj7JHdFxTDtIaUSXfUeH5t1UNpD6b3Bg956U
- 1i0uZjV2xI74hG9oaLTzoyk7Yf+gMWekVtEY2LBXtbx5xFE73H2gk4JxqVMuhZRG7T74OFW+DqM
- aMU
-X-Google-Smtp-Source: AGHT+IHsP2TAZOk9rsqB+paL+wHnXHKFH1crGCu1hgMUt07KQJCg8BJz7PPGw9RCEIV87AidDU1pWs8Cip8GPH1988c=
-X-Received: by 2002:a17:902:ebc3:b0:236:93cb:48b with SMTP id
- d9443c01a7336-23ddb34434cmr36434895ad.44.1752061533265; Wed, 09 Jul 2025
- 04:45:33 -0700 (PDT)
+Received: from dfw.source.kernel.org (dfw.source.kernel.org [139.178.84.217])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id D948389BE8;
+ Wed,  9 Jul 2025 11:53:22 +0000 (UTC)
+Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
+ by dfw.source.kernel.org (Postfix) with ESMTP id 7607C5C6850;
+ Wed,  9 Jul 2025 11:53:21 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 3BD2CC4CEEF;
+ Wed,  9 Jul 2025 11:53:17 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+ s=k20201202; t=1752062001;
+ bh=CzB6mDElDR+VEne/1VLgWZHCNaUK9k/sY72VkqmQsB8=;
+ h=From:To:Cc:Subject:Date:From;
+ b=PvlIVi3EIvVO8SXFThZm0t7FVpOUXK7jeODwMyf8k68JZqM4sYH7x5C2PPRxB3yJe
+ kOVIpqpz+41eNjPwvzSTn+CxXFicIrOq9Q1bqV+arXsVfG0A2tJpsFWhwqk4+wNPOz
+ C3ze1Q+CHpb8YSYSsa6rKUdvAweYNbqy1lpyYW45JEeYFBSiR6+R8U3zE/QzXXq6D0
+ JsyPB6p2OlBoRIGayNZ3XkCmHdPJGJtt2YLvePNtUSGRHMaZd1Nvn0/SpEwc4iME6w
+ YtxKALfZ7uk+9qhBWU4nZFFopGTm+nhrIOt1qQasR78eeKOPzvkWz54btF2iRzw+jX
+ DgsMxbpY97Vlw==
+From: Philipp Stanner <phasta@kernel.org>
+To: Lyude Paul <lyude@redhat.com>, Danilo Krummrich <dakr@kernel.org>,
+ David Airlie <airlied@gmail.com>, Simona Vetter <simona@ffwll.ch>,
+ Matthew Brost <matthew.brost@intel.com>,
+ Philipp Stanner <phasta@kernel.org>,
+ =?UTF-8?q?Christian=20K=C3=B6nig?= <ckoenig.leichtzumerken@gmail.com>,
+ Maarten Lankhorst <maarten.lankhorst@linux.intel.com>,
+ Maxime Ripard <mripard@kernel.org>,
+ Thomas Zimmermann <tzimmermann@suse.de>,
+ Sumit Semwal <sumit.semwal@linaro.org>,
+ Tvrtko Ursulin <tvrtko.ursulin@igalia.com>,
+ Pierre-Eric Pelloux-Prayer <pierre-eric.pelloux-prayer@amd.com>
+Cc: dri-devel@lists.freedesktop.org, nouveau@lists.freedesktop.org,
+ linux-kernel@vger.kernel.org, linux-media@vger.kernel.org
+Subject: [PATCH v3 0/7] drm/sched: Fix memory leaks with cancel_job() callback
+Date: Wed,  9 Jul 2025 13:52:50 +0200
+Message-ID: <20250709115257.106370-2-phasta@kernel.org>
+X-Mailer: git-send-email 2.49.0
 MIME-Version: 1.0
-References: <CALjTZvZgH0N43rMTcZiDVSX93PFL680hsYPwtp8=Ja1OWPvZ1A@mail.gmail.com>
- <aG2mzB58k3tkxvK-@audible.transient.net>
- <25642e5b-25ee-49b2-b08d-4c64fa2e505a@nvidia.com>
-In-Reply-To: <25642e5b-25ee-49b2-b08d-4c64fa2e505a@nvidia.com>
-From: Rui Salvaterra <rsalvaterra@gmail.com>
-Date: Wed, 9 Jul 2025 12:45:21 +0100
-X-Gm-Features: Ac12FXz0xyncJrPDgXwux4UGvTbFTmk_zafg_rpj26GR6Zjp2-JF_HWcaE2aOvI
-Message-ID: <CALjTZvbwY=wLvGAJvFb7q9G038FNjR6jG5L3eEGJkoEd5xiP8g@mail.gmail.com>
-Subject: Re: [REGRESSION] NVIDIA ION graphics broken with Linux 6.16-rc*
-To: Ben Skeggs <bskeggs@nvidia.com>
-Cc: airlied@gmail.com, nouveau@lists.freedesktop.org, 
- dri-devel@lists.freedesktop.org, linux-kernel@vger.kernel.org
-Content-Type: text/plain; charset="UTF-8"
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -84,20 +65,49 @@ List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-Hi, Ben,
+Changes in v3:
+  - Remove forgotten copy-past artifacts. (Tvrtko)
+  - Remove forgotten done_list struct member. (Tvrtko)
+  - Slightly adjust commit message of patch 7.
+  - Add RBs. (Maira, Danilo, Tvrtko)
+
+Changes in v2:
+  - Add new unit test to test cancel_job()'s behavior. (Tvrtko)
+  - Add RB from Maíra
+
+Changes since the RFC:
+  - Rename helper function for drm_sched_fini(). (Tvrtko)
+  - Add Link to Tvrtko's RFC patch to patch 1.
 
 
-On Wed, 9 Jul 2025 at 02:15, Ben Skeggs <bskeggs@nvidia.com> wrote:
->
-[snipped]
->
-> Thank you for bisecting!  Are you able to try the attached patch?
+Since a long time, drm_sched_fini() can leak jobs that are still in
+drm_sched.pending_list.
 
-Thanks a lot, your patch fixes the issue for me! Feel free to add my...
+This series solves the leaks in a backwards-compatible manner by adding
+a new, optional callback. If that callback is implemented, the scheduler
+uses it to cancel all jobs from pending_list and then frees them.
 
-Tested-by: Rui Salvaterra <rsalvaterra@gmail.com>
+Philipp Stanner (7):
+  drm/sched: Avoid memory leaks with cancel_job() callback
+  drm/sched/tests: Implement cancel_job() callback
+  drm/sched/tests: Add unit test for cancel_job()
+  drm/sched: Warn if pending_list is not empty
+  drm/nouveau: Make fence container helper usable driver-wide
+  drm/nouveau: Add new callback for scheduler teardown
+  drm/nouveau: Remove waitque for sched teardown
 
+ drivers/gpu/drm/nouveau/nouveau_fence.c       | 35 ++++++----
+ drivers/gpu/drm/nouveau/nouveau_fence.h       |  7 ++
+ drivers/gpu/drm/nouveau/nouveau_sched.c       | 35 ++++++----
+ drivers/gpu/drm/nouveau/nouveau_sched.h       |  9 +--
+ drivers/gpu/drm/nouveau/nouveau_uvmm.c        |  8 +--
+ drivers/gpu/drm/scheduler/sched_main.c        | 37 ++++++----
+ .../gpu/drm/scheduler/tests/mock_scheduler.c  | 68 +++++++------------
+ drivers/gpu/drm/scheduler/tests/sched_tests.h |  1 -
+ drivers/gpu/drm/scheduler/tests/tests_basic.c | 42 ++++++++++++
+ include/drm/gpu_scheduler.h                   | 18 +++++
+ 10 files changed, 166 insertions(+), 94 deletions(-)
 
-Kind regards,
+-- 
+2.49.0
 
-Rui
