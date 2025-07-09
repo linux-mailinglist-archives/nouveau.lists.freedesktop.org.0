@@ -2,99 +2,159 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id 7A2F3BBF7AA
-	for <lists+nouveau@lfdr.de>; Mon, 06 Oct 2025 22:58:20 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 66CBABBF5D1
+	for <lists+nouveau@lfdr.de>; Mon, 06 Oct 2025 22:48:12 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 3D0C010E63C;
-	Mon,  6 Oct 2025 20:58:00 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id A4A5A10E51D;
+	Mon,  6 Oct 2025 20:47:14 +0000 (UTC)
 Authentication-Results: gabe.freedesktop.org;
-	dkim=permerror (0-bit key) header.d=gmail.com header.i=@gmail.com header.b="R1Ajk/tc";
+	dkim=pass (2048-bit key; unprotected) header.d=Nvidia.com header.i=@Nvidia.com header.b="gs33wVg3";
 	dkim-atps=neutral
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from mail-qt1-f173.google.com (mail-qt1-f173.google.com
- [209.85.160.173])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 3892910EA78;
- Fri,  4 Jul 2025 20:16:11 +0000 (UTC)
-Received: by mail-qt1-f173.google.com with SMTP id
- d75a77b69052e-4a9741b513eso26494161cf.1; 
- Fri, 04 Jul 2025 13:16:11 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1751660170; x=1752264970; darn=lists.freedesktop.org;
- h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
- :mime-version:subject:date:from:from:to:cc:subject:date:message-id
- :reply-to; bh=rFX61eKYEcol9kAG3M8tjgApkaTg0NmTOXaZhr2OWW4=;
- b=R1Ajk/tcHMHKOqz6iT+0zQ/3g32b1gnBtH//ZijmFu1R49BcxyjQuRsDBHDKLumrzW
- 79kiNgPovUdIvcO4MtDkjANOWktieIgOvuXvRibNEyBINloYUIj3ombwpY65HMbBsaBO
- lBjjNPgreySXDkLeFwUNOATSKp9epLLYRfQlNJeCf4p2HZH+uIQvWK4Fcwc/k3eeVvhv
- VQkl87rbBN1UIxPTOvs+Y1saLc6saP8IqXawpmZ1N+zfx0XqZo3Z0BuWBnhoFnZcNbFz
- 3hMbz/AaRqYlHnawc9hjd0x0ZAnBH5840LLN+LoLXb73toytLT2UL76WQ+VbnIPbcdUL
- Idjg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1751660170; x=1752264970;
- h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
- :mime-version:subject:date:from:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=rFX61eKYEcol9kAG3M8tjgApkaTg0NmTOXaZhr2OWW4=;
- b=TMF/G9QU/pDvLqU3FRAXpsFXotIcRqFsZ4TSVc0X4CxmUpG5yTg5vXDTyuRrW/Zfzc
- jG7dfswL5xHV+BG9q1XCA2ZNN6SRCnB6z7HmXb2YU77Qs632lxrQ5safo2cUGbyxNYgh
- /aKVh8xxzqInvyItqdmDYDf5/m6VvJr5a5ALwnRNF2I1Oze30Gq896y/zjTsVHpWMsHF
- H6nIGMRTAY/cnYcb2KxFCI6zQXFsTDukQNHpZFJFJZxPR49EZWhi3xiKFFT+LFWX7J1+
- pppvg73tNuNTKfsA0IrsGkMaK16XnMMEEUyJX2aVRgP9U3fSLcWBE0gEBr4hvGSKdamk
- IqRw==
-X-Forwarded-Encrypted: i=1;
- AJvYcCWsKMn8pjVLPwJb9GvqX+Kjkqq0ADqWQfUX4SdyXtQXRFXD5DUBQIYNlImwzLvubaBhoiGQuFKPTg==@lists.freedesktop.org,
- AJvYcCX+aYTXGKUcCmjiygmP8xcnjN4J7R5G/NfSEHgLI0cebvysnZNqsmCfDwrLZJVxjMVmPq4sSA+E+0w=@lists.freedesktop.org
-X-Gm-Message-State: AOJu0YxnehhZcq+Q8eZB8aidthLya1TrG97iH3H76mu2cckFbzO6QQxO
- aV/lDVFcfbDup4coNYoLLF+9j79miGL+/Xofa3OVbZGnUxivkYe6JHfu
-X-Gm-Gg: ASbGncs3yguAXmY6iUEZwns4UZscdioXb6C5SkLGCNkb0i9+dSXFPPa6wfOYAeBcLjL
- XOskfz6azmTvH+mBs9QRZU9VdIgFjqvP647ila1PSB1UvZnBIyIhBLJBkqIDwy40Yb+6muUlCQQ
- p7abo+Pynqtxi2hCXgVdbRjDus3/xgzb7Y9U9uloalGyQZdxD8iTIkFyWd0I8wejI0accy96Oyj
- GynyrU3x6jlkyN/9ZKJtT5HsLS465zVnsDpy8qzq2t3lztftMdvX9/K5TAyzmmXy7ZzGcUGTWVZ
- eoSDYrEPAB6QASGfX5Ecs7oVWOFc+CuZCPwm++UcC/8lbc6vKEtk0HRstvyLzxpgWWKskS7KpYI
- wCtR4dhI=
-X-Google-Smtp-Source: AGHT+IHCClMp3qYZhSGQu4QEJmyo61DmZpj8XQCRl0CIpaNBHANR9wOTxi6Qz7IzHn6a7YD26jNiWw==
-X-Received: by 2002:ac8:7f8f:0:b0:494:59b0:7347 with SMTP id
- d75a77b69052e-4a9a69f76cfmr2280131cf.37.1751660170283; 
- Fri, 04 Jul 2025 13:16:10 -0700 (PDT)
-Received: from 156.1.168.192.in-addr.arpa
- ([2600:4041:5c29:e400:94f3:d2bb:5ace:77a1])
- by smtp.gmail.com with ESMTPSA id
- d75a77b69052e-4a9949e5221sm19772941cf.2.2025.07.04.13.16.09
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 04 Jul 2025 13:16:09 -0700 (PDT)
-From: Tamir Duberstein <tamird@gmail.com>
-Date: Fri, 04 Jul 2025 16:14:57 -0400
-Subject: [PATCH 6/6] rust: use `core::ffi::CStr` method names
+Received: from NAM04-BN8-obe.outbound.protection.outlook.com
+ (mail-bn8nam04on2056.outbound.protection.outlook.com [40.107.100.56])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id C158910E6F6;
+ Wed,  9 Jul 2025 01:31:56 +0000 (UTC)
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=QXTk2DZ8BVcmoWkasLvlFYwVx+ksbEtyzHvI4EnfvGDGGaA5KJy9tbM6k+OH0PcQTpszGbnaMdjXe5eCGP861hPnjc+c2ZQacYXC/nfZCduAV/zR3vo3RcbD11mU3DFRYfImrm4YmivMlIQAbaM1hGhAbHi376+sd6yqEpj6DEF97KFCty59lHj4Csy4q/lcAoKsJIjCR5cWr7wDOA3GvuGSPwdVUkoC7mAC67LF8nkU/p0HWG9QzQQDUOHQYfivF7jxLI6BY3f7SYM4JIXLHlXYvYl268UsPaHHwdXL/f5aHGeaIXICmuV7jmcTjqAD3Nb92ac5hcnn7nHQ0PVV/A==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=c3uDIEASyYJ2w+eVFRHp1ZmJkC2bYpcprj3cMlosmfQ=;
+ b=oYdlhpW8GHcKxg55oYwPGBteQahYWSnYxUpNNKzA+Pklg2VOhxeDxlLtTwBssQIil3cQ4KUFTVHXSW8F2I2wnwZe/KoYb7lETrNftwnotIBrI9GlJgY62bvhXJzn6u9flt++8JxsClZTj0tlHmt9vaqg2deIgzi8d9EiPTU6wipXRjagLa69n/RAQQs8gGNI3x8DcZOCxq0SjIXYPTQMoHt2nj+V/F0U+vPMuaFLBCZ9VzlkLgDeMNwhCaOTbN0R1utkTTLCNZU9LgOavuEK9vy2rerMy0P3dR1n7by1mMHn1vxohUOl9JCC6xr7KyCUb+qJiijfifZhB7TtEqFeGA==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=nvidia.com; dmarc=pass action=none header.from=nvidia.com;
+ dkim=pass header.d=nvidia.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=Nvidia.com;
+ s=selector2;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=c3uDIEASyYJ2w+eVFRHp1ZmJkC2bYpcprj3cMlosmfQ=;
+ b=gs33wVg3FE9tzJyEBqO+FUg4KgiVbTmXaka4Pe5Ad+y1rLwFh3n7ws5e5zeHoqD86huloKmG9ixomDNcZd1pIfgiT4fzSfMscrpB+gGPLhR7uotZlwJ5jNtZGBxpCf6QhFQZrezYaCu0HsBDI0CyjXzaC9jjM+qFIhMsGjkmYJKyqkUjH06GABYWollnd3/ahigXqfqN8VXcMem2e6PP8WS8iqhv+znHvjys8fYgKdSbuDsdzRbbsOJJ3tvvKZsnNo7U6g7MGaNaAy12TkdwAI5IjCCO0HVrCb9SkaJOmS//86GJPT7ZLXEQ3Cg+3C+Yj8EGoyYFlmatga/4Z1Y2bg==
+Authentication-Results: dkim=none (message not signed)
+ header.d=none;dmarc=none action=none header.from=nvidia.com;
+Received: from SN7PR12MB8059.namprd12.prod.outlook.com (2603:10b6:806:32b::7)
+ by MW4PR12MB7167.namprd12.prod.outlook.com (2603:10b6:303:225::19)
+ with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.8835.18; Wed, 9 Jul
+ 2025 01:31:51 +0000
+Received: from SN7PR12MB8059.namprd12.prod.outlook.com
+ ([fe80::4ee2:654e:1fe8:4b91]) by SN7PR12MB8059.namprd12.prod.outlook.com
+ ([fe80::4ee2:654e:1fe8:4b91%7]) with mapi id 15.20.8901.018; Wed, 9 Jul 2025
+ 01:31:51 +0000
+Message-ID: <c1fb6737-9027-4e7f-a45d-f081eab9f30a@nvidia.com>
+Date: Tue, 8 Jul 2025 21:31:48 -0400
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v4 0/8] Documentation for nova-core
+To: Danilo Krummrich <dakr@kernel.org>, Alexandre Courbot <acourbot@nvidia.com>
+Cc: David Airlie <airlied@gmail.com>, Simona Vetter <simona@ffwll.ch>,
+ Maarten Lankhorst <maarten.lankhorst@linux.intel.com>,
+ Maxime Ripard <mripard@kernel.org>, Thomas Zimmermann <tzimmermann@suse.de>,
+ Jonathan Corbet <corbet@lwn.net>, nouveau@lists.freedesktop.org,
+ dri-devel@lists.freedesktop.org, linux-kernel@vger.kernel.org,
+ linux-doc@vger.kernel.org, rust-for-linux@vger.kernel.org,
+ Bagas Sanjaya <bagasdotme@gmail.com>
+References: <20250708-nova-docs-v4-0-9d188772c4c7@nvidia.com>
+ <aG2dcwDOVlh3ePGa@cassiopeiae>
+Content-Language: en-US
+From: Joel Fernandes <joelagnelf@nvidia.com>
+In-Reply-To: <aG2dcwDOVlh3ePGa@cassiopeiae>
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
+X-ClientProxiedBy: BLAPR03CA0115.namprd03.prod.outlook.com
+ (2603:10b6:208:32a::30) To SN7PR12MB8059.namprd12.prod.outlook.com
+ (2603:10b6:806:32b::7)
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 8bit
-Message-Id: <20250704-core-cstr-prepare-v1-6-a91524037783@gmail.com>
-References: <20250704-core-cstr-prepare-v1-0-a91524037783@gmail.com>
-In-Reply-To: <20250704-core-cstr-prepare-v1-0-a91524037783@gmail.com>
-To: "Rafael J. Wysocki" <rafael@kernel.org>, 
- Viresh Kumar <viresh.kumar@linaro.org>, Danilo Krummrich <dakr@kernel.org>, 
- David Airlie <airlied@gmail.com>, Simona Vetter <simona@ffwll.ch>, 
- Nishanth Menon <nm@ti.com>, Stephen Boyd <sboyd@kernel.org>, 
- Miguel Ojeda <ojeda@kernel.org>, Alex Gaynor <alex.gaynor@gmail.com>, 
- Boqun Feng <boqun.feng@gmail.com>, Gary Guo <gary@garyguo.net>, 
- =?utf-8?q?Bj=C3=B6rn_Roy_Baron?= <bjorn3_gh@protonmail.com>, 
- Benno Lossin <lossin@kernel.org>, Andreas Hindborg <a.hindborg@kernel.org>, 
- Alice Ryhl <aliceryhl@google.com>, Trevor Gross <tmgross@umich.edu>
-Cc: linux-pm@vger.kernel.org, linux-kernel@vger.kernel.org, 
- nouveau@lists.freedesktop.org, dri-devel@lists.freedesktop.org, 
- rust-for-linux@vger.kernel.org, Tamir Duberstein <tamird@gmail.com>
-X-Mailer: b4 0.15-dev
-X-Developer-Signature: v=1; a=openssh-sha256; t=1751660161; l=4785;
- i=tamird@gmail.com; h=from:subject:message-id;
- bh=Gr5Y82FzFOHSFgE4bAXR4LJsBEIiMIFEwMxnG28mI/k=;
- b=U1NIU0lHAAAAAQAAADMAAAALc3NoLWVkMjU1MTkAAAAgtYz36g7iDMSkY5K7Ab51ksGX7hJgs
- MRt+XVZTrIzMVIAAAAGcGF0YXR0AAAAAAAAAAZzaGE1MTIAAABTAAAAC3NzaC1lZDI1NTE5AAAA
- QLas4zvU0lCc78yU+Yb9DLjcVMQs5g7e5Va+eCFZgvaWEOcJlCw4GoHKAaftU93fC6280TgpoTe
- TE2iS8TMjrAY=
-X-Developer-Key: i=tamird@gmail.com; a=openssh;
- fpr=SHA256:264rPmnnrb+ERkS7DDS3tuwqcJss/zevJRzoylqMsbc
-X-Mailman-Approved-At: Mon, 06 Oct 2025 20:57:15 +0000
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: SN7PR12MB8059:EE_|MW4PR12MB7167:EE_
+X-MS-Office365-Filtering-Correlation-Id: 730f517b-46a9-4ba1-a75e-08ddbe886114
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: BCL:0;ARA:13230040|1800799024|366016|376014|7416014;
+X-Microsoft-Antispam-Message-Info: =?utf-8?B?cEVwQ2QwQ3UvbkNadWhYbis2eE1aK21iaC8zSkc3NDY5TnoxbER3bGptRG5S?=
+ =?utf-8?B?T3lUZFEyVDRPTCttYm44MytKTU9NVUkxeGN3L1RRdXpqY0xuN1ZXWEZHU2NB?=
+ =?utf-8?B?ajBUa2tQUnZGek5jYW56RUxpSUhlNmFNSWZwc0Z4cXdDbkV2NnBZR3M3WE9L?=
+ =?utf-8?B?N2RlQmxKR3RnK3RJaUhjcVZ3ajFQTHdLdDV0b2VWb1VReFJhUUpVekNaTEF6?=
+ =?utf-8?B?a1lVcW9KNzBjOGNxcEhiQVVJU2tYVkE2bUhuUEJDMzdMcXVHemNwMjlYQTZx?=
+ =?utf-8?B?aDcwVy8zVUR2U3hxTHJQT3krK0hqSlZIZXZFVC9abXNESkFMZk1LYzQ4OTBV?=
+ =?utf-8?B?UmVweGZHM1VMcDBTWHdGSXErUEJCbENtVlBPK0swTUZnenByekVwTU9tdjlu?=
+ =?utf-8?B?ek9EKytmeHRic1BNU1FqK2VsOFdnRU5ML0hpbVI0NFkwVGFDTzAzYVFBaUVJ?=
+ =?utf-8?B?VjJsOU5QcFVKb3JmNUlrK0phSUpqa1lYelpzcnZMY0JjdkhtZXhmVXNNYWRM?=
+ =?utf-8?B?VTJkZkgwcWlGVFdzNGVZOGNaK3JsNjZzTURpTlFPQ3JXQURMTkJ2dWNsRytC?=
+ =?utf-8?B?aHhPa29NWldoOU8rWUEvS3NsbEJKTG8wM09DTy9JWHBvNEoybUJ1cTNTS2NY?=
+ =?utf-8?B?MEcvdnBScDgzWVpQTDJ1Q0lVNE9CNmpxRGxpaGdJMzVwK1p5NmF4NnlXV0U3?=
+ =?utf-8?B?TnI2SlUzQi9sOC9BYnZiVDdxTkZGQk5VaWlSa1dsREhEbjlabk9WVkE4alcy?=
+ =?utf-8?B?WEZUMDRoeHBmaE52WGVXTEdJV0dMc2hYc09KQU8wSnRZaVMvSzVzR3dhdTh3?=
+ =?utf-8?B?NnlqUVI4TXFJVy9pQzcxVzVPYXhYMjdOcDFUYnhjNWlmSWk1YnZYdDBnTjMz?=
+ =?utf-8?B?TUtMSHRFd2tLMkhyVDYwYVZ3TU1ydXFKRkVtMEg5amlHQU9uZjcvNG96UE0x?=
+ =?utf-8?B?ektzOExSbFJjQmp3N2RuOE9YT1BkL2pHa0IveENWN1VsV3I0ZHN3OWdtNFBx?=
+ =?utf-8?B?Qk50TlVseDh3V1piZ2Z4MExOcy9xOXcrYmpaNnZlVVBtbWhueGFqSXNBNlRw?=
+ =?utf-8?B?czEvRVcwenhIRXpBc0g4citTcWtPQXRqRFpQeEpzWjJrR2gwYlEwZncrenJz?=
+ =?utf-8?B?MVN5Qi85TVBsS1hTNUZ3Zm5mV04zVDViS0QvOHZyRkVYMFl4MFNkSkZ4NXE0?=
+ =?utf-8?B?bWtZb0pvQkl0eW5RQ2F4TGhWSFNJdk1HcytTU2o0QWNkWVpYaGJoVitwSmFV?=
+ =?utf-8?B?dWJjbURtdEVnWkFnSlB0ZmVpZXBuaGxBamZkS1hRZmtXa2xTUnpGRGxyZW1p?=
+ =?utf-8?B?WFJjRk9UcEFyQWdzeWhVRDNkK0dObFhMZW1FL2QvRG5WTkRRcmt0elF5MHIv?=
+ =?utf-8?B?a251a2tEelZpb0VjZm1qMzBnb1dabGo2L0pMdlV1SzVmSFRXZmRuOWkrbXo3?=
+ =?utf-8?B?SXo2a2tEdE1QS003UHBNYWlzRjRHb2t3dHlaWWFlSEc0cTJUcFR4MFc0SXRF?=
+ =?utf-8?B?cTBoNlhkQ3R2enJqeHVIZVh0K0gzK2tTUkEwRGJOaEhZcStwR3NwZDJHK1J0?=
+ =?utf-8?B?ejl2SFpMVnZ0Wk94aldBckNFVW5PV3MrMy9sK3I5a1p0Z3VsRnowT3FZdysx?=
+ =?utf-8?B?a2tZMFlWa05rWmNscUM1ZFdEOXlMVVBjdzJpS2hmYnlxeFdBaDlMYmZaOW55?=
+ =?utf-8?B?SUdqdlV6SjlKT1U4KzhMY1VsQ2lpK1RtcmFYY2E4VVlLN2ljZ0MvNWlQNWY5?=
+ =?utf-8?B?cEpRUk5VcEhrU3FvOXhNb0RwNUsrMWZtUm0zZ1A3RXhQelpvTkVSQ3lPK3du?=
+ =?utf-8?B?VS96Z0NPYmRtNk0wZGxGNHFubi9sbjBWelVtaWhVUzRNQytOMjJEeWdzbnBT?=
+ =?utf-8?B?YnMrK3B2MlRkakh4TCtENHJEbjNzbTRTbVlkUmhpL2lPWnY1aDhnbW5lVkFr?=
+ =?utf-8?Q?E9cihIG/DhQ=3D?=
+X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
+ IPV:NLI; SFV:NSPM; H:SN7PR12MB8059.namprd12.prod.outlook.com; PTR:; CAT:NONE;
+ SFS:(13230040)(1800799024)(366016)(376014)(7416014); DIR:OUT; SFP:1101; 
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?T3h0VUlJZmRBOWdxYnZKbU9UVnNCUWhWWFBFLzJlOWJ0N05hczNRMWhJNWg2?=
+ =?utf-8?B?K1BWSEV2YmlLdmNPd2J6eE14a0RoQ3UwVXk0REpMVlEvTE9YYTFyS2U3YWlj?=
+ =?utf-8?B?OEVaR09HRFJDVVJFTUp1MnlCZFpJdG5UWUQ2WnlmNUJ1d2ovSUEyWUVqcEp0?=
+ =?utf-8?B?NlI3MWZ2OGVUWG9CQ2xXYklKYjFIV1FJZlpDVUFTYzhxYVo5YWVJdXNkeGd3?=
+ =?utf-8?B?MUVaTzQzNThHa0RwTzR5SkRsWnVyR0JqWldpV1hjVjRPY1VISWhMVGExS2Ex?=
+ =?utf-8?B?RnJDeVNXZXByVFFnQ0xpUndkYkZLQWI5ajFSOVUzL1RDMVVpcktsdHRybFdj?=
+ =?utf-8?B?bzRoY0U3cU5wbmVMN2hOVzhuTXUzWjREbXJtemZpY3FNem52eDVkSnp4NmhG?=
+ =?utf-8?B?Ly9ySEZVR09MSmFwUkJGMHlJSnJKTElraVAvRGNBNmFWTVZheW54bWdBVVEx?=
+ =?utf-8?B?L3FoLzkwUDlGY0pQeXVmc2d2Z1VlcFUwaGRpcGhobzN0Q2Nhd3dTZkJBYnZw?=
+ =?utf-8?B?ZE9zZHh6ZU90ZkEzMzFvTFUva1E5Ly9laWczU01KYnZEOExTblM1SlBmNjlq?=
+ =?utf-8?B?TVFEYWNHTW9rcEE0MHhUWVRONVRqUCtzejRRK2pOM0tIeUh4ZW9vV0IvanYx?=
+ =?utf-8?B?aEw4b1hONHVMTDY5YjE2bDdkTzJPY0lreDRkZFBEdGpTZS9pTzFVeDd0WUxr?=
+ =?utf-8?B?LzM5eCt0WmQxRFBKQTBZVFl6THdmV3RVV0NvTTg2eWpEL0tqc21oekxqOFlS?=
+ =?utf-8?B?ekVrZXh4RUpVaHM4dU9yeG83dXVIQ21ubngwZHRQOXN2eTNLcUMzQy9QaXV0?=
+ =?utf-8?B?cDc1VVcyMVM2QUZ0UVV3Rmhady9FN3NIUFhuUzJPeG9oS2ptL2NidTZjejNa?=
+ =?utf-8?B?WGFFK0x3WjRXemVlNnJaaTU5S0JiN1hqeWtuaEwxc3pDbVBiVTFnQnBrak9n?=
+ =?utf-8?B?TWdjeGxPZk9TZWtYWmZiRnpFekVVNnl1VkJiZnF2bnR1YzNlelFCQS95ZGZ6?=
+ =?utf-8?B?M2RMUG5oYzdNWE5JUGxDZVNSRy9ybG1meGdlbDNDWUdmUkc1L0lHWUhzSkZK?=
+ =?utf-8?B?TElac2JOQ2Y1eEpmQnI0eWdpOXZxYUJzeFgvL0VscDlhS2NjaC9nbmZvbWN6?=
+ =?utf-8?B?YzE3aGRPTmtlbG50WEU3Wkl4Q0RDcVlaNjkxNFlIaWx2cGdGSkhNdkwxcFNZ?=
+ =?utf-8?B?TmJ0L05xSDVvNlpZMG5GaXdxdERQQmlJMSt3d21kMVpwZGFLUWNDY0hTcFNa?=
+ =?utf-8?B?TE80VkIvWkZJdkEzWW9pTU8rVlgvNlByMFRXcUwyMWtaVk56NlhHcnN3ekQ3?=
+ =?utf-8?B?TlFIaEhGSnQwZ0xkeGRXYUUrNThoS0U4VXZWYlJsYzlHbUUxNUE3RWpMNUJ4?=
+ =?utf-8?B?YTFmRFlPNnBqU0pXZVJRajJJUDU1YnM2djFabi9hR05uOURpUXJmWjZHbHlM?=
+ =?utf-8?B?VkcrMnFwWXBYZlpZazBVSlhCOHBXaHpiVUFPekNmREhpQzVFUEtOT0FRYVBV?=
+ =?utf-8?B?VkxydTVsWk5aTTdmb293d1plVWRwYVBOVE5pTSt3ZGhtaE1QbjZKVUwyb3NF?=
+ =?utf-8?B?aGdGT21xUmlqRmtKN0lrUk5kdkdNRWtaUk9NZmQwQ0p2Q0pSZStJVTF4bkU0?=
+ =?utf-8?B?b3ZPNkxXL040VTlMd0UyaUQwbGh2TWkwTW15Mno3NVhuT1h2VTNxQ2NYS1py?=
+ =?utf-8?B?ejA3RXFBYTNyY2dnckd5MUJmZzdPR0JJRyszMkY5K0JFTDMwcVpMUmwxcEZW?=
+ =?utf-8?B?b2FGTnQvd0U1Y0tmRmh5OWtXcjNKY1ptUTNvMmx3VkpwRlNBK3QrVVBRVHBU?=
+ =?utf-8?B?UmZnYk9EaGkyMTBUUFZ0YlVGVnh2WXVWc0FJTm01V2poeGd2VTE3L1prWmRr?=
+ =?utf-8?B?a3ozaTkyb1RJQ0lQVHFxWmlVMm9OcFZhTm9MQkxPV2wyTDFGOHFCZmxub1RS?=
+ =?utf-8?B?cUlKYi9XdXNvSG1UZkFidk43KzB2Z3hTTExpa2JqWCtXQnhZN0VncnBCZGFZ?=
+ =?utf-8?B?MGFOaGZoZFBKZS9EUWVHZnpkblhGWUl5b3dSNnpacjY5b3V0RUR0VkZrcUVJ?=
+ =?utf-8?B?aDQwRko5dEZXMjI0ZmM3S01rT0RpaVVSMzRxSkdSZm1HZkVLOEZTcDJlZlBz?=
+ =?utf-8?Q?/6gUZiooet2NOs3J5pm3EeDcG?=
+X-OriginatorOrg: Nvidia.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: 730f517b-46a9-4ba1-a75e-08ddbe886114
+X-MS-Exchange-CrossTenant-AuthSource: SN7PR12MB8059.namprd12.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 09 Jul 2025 01:31:51.2001 (UTC)
+X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
+X-MS-Exchange-CrossTenant-Id: 43083d15-7273-40c1-b7db-39efd9ccc17a
+X-MS-Exchange-CrossTenant-MailboxType: HOSTED
+X-MS-Exchange-CrossTenant-UserPrincipalName: H16U9PPJmhqIzuiULF4anbe5RswMTyWSwGoeL8GQR8VDfZzMrDPAReREnqsAih9jwP/n3+gciiGAUWuot8eiWA==
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: MW4PR12MB7167
+X-Mailman-Approved-At: Mon, 06 Oct 2025 20:46:16 +0000
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -109,107 +169,24 @@ List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-Prepare for `core::ffi::CStr` taking the place of `kernel::str::CStr` by
-avoiding methods that only exist on the latter.
 
-Also avoid `Deref<Target=BStr> for CStr` as that impl doesn't exist on
-`core::ffi::CStr`.
 
-Link: https://github.com/Rust-for-Linux/linux/issues/1075
-Signed-off-by: Tamir Duberstein <tamird@gmail.com>
----
- rust/kernel/error.rs |  2 +-
- rust/kernel/str.rs   | 20 ++++++++++----------
- 2 files changed, 11 insertions(+), 11 deletions(-)
+On 7/8/2025 6:36 PM, Danilo Krummrich wrote:
+> On Tue, Jul 08, 2025 at 03:49:40PM +0900, Alexandre Courbot wrote:
+>> This series adds some documentation that was relevant to the FWSEC-FRTS
+>> [1] series, but wasn't sent alongside it as it was worked on in
+>> parallel.
+> 
+> Joel, thanks a lot for this series. It's great to have this documentation --
+> very much appreciated.
 
-diff --git a/rust/kernel/error.rs b/rust/kernel/error.rs
-index ffa8efd2d547..e29a5d76300e 100644
---- a/rust/kernel/error.rs
-+++ b/rust/kernel/error.rs
-@@ -188,7 +188,7 @@ fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
-             Some(name) => f
-                 .debug_tuple(
-                     // SAFETY: These strings are ASCII-only.
--                    unsafe { core::str::from_utf8_unchecked(name) },
-+                    unsafe { core::str::from_utf8_unchecked(name.to_bytes()) },
-                 )
-                 .finish(),
-         }
-diff --git a/rust/kernel/str.rs b/rust/kernel/str.rs
-index cbb357fc0111..6c892550c0ba 100644
---- a/rust/kernel/str.rs
-+++ b/rust/kernel/str.rs
-@@ -57,11 +57,11 @@ impl fmt::Display for BStr {
-     /// # use kernel::{prelude::fmt, b_str, str::{BStr, CString}};
-     /// let ascii = b_str!("Hello, BStr!");
-     /// let s = CString::try_from_fmt(fmt!("{ascii}"))?;
--    /// assert_eq!(s.as_bytes(), "Hello, BStr!".as_bytes());
-+    /// assert_eq!(s.to_bytes(), "Hello, BStr!".as_bytes());
-     ///
-     /// let non_ascii = b_str!("🦀");
-     /// let s = CString::try_from_fmt(fmt!("{non_ascii}"))?;
--    /// assert_eq!(s.as_bytes(), "\\xf0\\x9f\\xa6\\x80".as_bytes());
-+    /// assert_eq!(s.to_bytes(), "\\xf0\\x9f\\xa6\\x80".as_bytes());
-     /// # Ok::<(), kernel::error::Error>(())
-     /// ```
-     fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
-@@ -89,11 +89,11 @@ impl fmt::Debug for BStr {
-     /// // Embedded double quotes are escaped.
-     /// let ascii = b_str!("Hello, \"BStr\"!");
-     /// let s = CString::try_from_fmt(fmt!("{ascii:?}"))?;
--    /// assert_eq!(s.as_bytes(), "\"Hello, \\\"BStr\\\"!\"".as_bytes());
-+    /// assert_eq!(s.to_bytes(), "\"Hello, \\\"BStr\\\"!\"".as_bytes());
-     ///
-     /// let non_ascii = b_str!("😺");
-     /// let s = CString::try_from_fmt(fmt!("{non_ascii:?}"))?;
--    /// assert_eq!(s.as_bytes(), "\"\\xf0\\x9f\\x98\\xba\"".as_bytes());
-+    /// assert_eq!(s.to_bytes(), "\"\\xf0\\x9f\\x98\\xba\"".as_bytes());
-     /// # Ok::<(), kernel::error::Error>(())
-     /// ```
-     fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
-@@ -465,15 +465,15 @@ impl fmt::Display for CStr {
-     /// # use kernel::str::CString;
-     /// let penguin = c_str!("🐧");
-     /// let s = CString::try_from_fmt(fmt!("{penguin}"))?;
--    /// assert_eq!(s.as_bytes_with_nul(), "\\xf0\\x9f\\x90\\xa7\0".as_bytes());
-+    /// assert_eq!(s.to_bytes_with_nul(), "\\xf0\\x9f\\x90\\xa7\0".as_bytes());
-     ///
-     /// let ascii = c_str!("so \"cool\"");
-     /// let s = CString::try_from_fmt(fmt!("{ascii}"))?;
--    /// assert_eq!(s.as_bytes_with_nul(), "so \"cool\"\0".as_bytes());
-+    /// assert_eq!(s.to_bytes_with_nul(), "so \"cool\"\0".as_bytes());
-     /// # Ok::<(), kernel::error::Error>(())
-     /// ```
-     fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
--        for &c in self.as_bytes() {
-+        for &c in self.to_bytes() {
-             if (0x20..0x7f).contains(&c) {
-                 // Printable character.
-                 f.write_char(c as char)?;
-@@ -874,11 +874,11 @@ fn write_str(&mut self, s: &str) -> fmt::Result {
- /// use kernel::{str::CString, prelude::fmt};
- ///
- /// let s = CString::try_from_fmt(fmt!("{}{}{}", "abc", 10, 20))?;
--/// assert_eq!(s.as_bytes_with_nul(), "abc1020\0".as_bytes());
-+/// assert_eq!(s.to_bytes_with_nul(), "abc1020\0".as_bytes());
- ///
- /// let tmp = "testing";
- /// let s = CString::try_from_fmt(fmt!("{tmp}{}", 123))?;
--/// assert_eq!(s.as_bytes_with_nul(), "testing123\0".as_bytes());
-+/// assert_eq!(s.to_bytes_with_nul(), "testing123\0".as_bytes());
- ///
- /// // This fails because it has an embedded `NUL` byte.
- /// let s = CString::try_from_fmt(fmt!("a\0b{}", 123));
-@@ -948,7 +948,7 @@ impl<'a> TryFrom<&'a CStr> for CString {
-     fn try_from(cstr: &'a CStr) -> Result<CString, AllocError> {
-         let mut buf = KVec::new();
- 
--        buf.extend_from_slice(cstr.as_bytes_with_nul(), GFP_KERNEL)?;
-+        buf.extend_from_slice(cstr.to_bytes_with_nul(), GFP_KERNEL)?;
- 
-         // INVARIANT: The `CStr` and `CString` types have the same invariants for
-         // the string data, and we copied it over without changes.
+My pleasure! Thanks! Looking forward to many more. And thanks a lot Alex for
+fixing these up and posting.
 
--- 
-2.50.0
+cheers,
+
+ - Joel
+
+> 
+> Applied to nova-next, thanks!
 
