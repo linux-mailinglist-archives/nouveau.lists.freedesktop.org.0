@@ -2,39 +2,83 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id 52F6ECBACD3
-	for <lists+nouveau@lfdr.de>; Sat, 13 Dec 2025 13:44:23 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 94EB7CBAE73
+	for <lists+nouveau@lfdr.de>; Sat, 13 Dec 2025 13:46:08 +0100 (CET)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 1B44A10EB7B;
-	Sat, 13 Dec 2025 12:41:09 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 2AA9D10EC1B;
+	Sat, 13 Dec 2025 12:42:15 +0000 (UTC)
+Authentication-Results: gabe.freedesktop.org;
+	dkim=pass (2048-bit key; secure) header.d=mailbox.org header.i=@mailbox.org header.b="WDgn0IoC";
+	dkim-atps=neutral
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-X-Greylist: delayed 400 seconds by postgrey-1.36 at gabe;
- Tue, 08 Jul 2025 23:23:10 UTC
-Received: from audible.transient.net (audible.transient.net [24.143.126.66])
- by gabe.freedesktop.org (Postfix) with SMTP id C888C10E6F2
- for <nouveau@lists.freedesktop.org>; Tue,  8 Jul 2025 23:23:10 +0000 (UTC)
-Received: (qmail 4351 invoked from network); 8 Jul 2025 23:16:28 -0000
-Received: from cucamonga.audible.transient.net (192.168.2.5)
- by canarsie.audible.transient.net with QMQP; 8 Jul 2025 23:16:28 -0000
-Received: (nullmailer pid 16665 invoked by uid 1000);
- Tue, 08 Jul 2025 23:16:28 -0000
-Date: Tue, 8 Jul 2025 23:16:28 +0000
-From: Jamie Heilman <jamie@audible.transient.net>
-To: Rui Salvaterra <rsalvaterra@gmail.com>
-Cc: bskeggs@nvidia.com, airlied@gmail.com, nouveau@lists.freedesktop.org,
- dri-devel@lists.freedesktop.org, linux-kernel@vger.kernel.org
-Subject: Re: [REGRESSION] NVIDIA ION graphics broken with Linux 6.16-rc*
-Message-ID: <aG2mzB58k3tkxvK-@audible.transient.net>
-Mail-Followup-To: Rui Salvaterra <rsalvaterra@gmail.com>,
- bskeggs@nvidia.com, airlied@gmail.com,
- nouveau@lists.freedesktop.org, dri-devel@lists.freedesktop.org,
- linux-kernel@vger.kernel.org
-References: <CALjTZvZgH0N43rMTcZiDVSX93PFL680hsYPwtp8=Ja1OWPvZ1A@mail.gmail.com>
+Received: from mout-p-102.mailbox.org (mout-p-102.mailbox.org [80.241.56.152])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id E530010E789;
+ Wed,  9 Jul 2025 10:15:13 +0000 (UTC)
+Received: from smtp2.mailbox.org (smtp2.mailbox.org
+ [IPv6:2001:67c:2050:b231:465::2])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
+ (No client certificate requested)
+ by mout-p-102.mailbox.org (Postfix) with ESMTPS id 4bcYkk5Z6Tz9v0W;
+ Wed,  9 Jul 2025 12:15:10 +0200 (CEST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
+ s=mail20150812; 
+ t=1752056110; h=from:from:reply-to:reply-to:subject:subject:date:date:
+ message-id:message-id:to:to:cc:cc:mime-version:mime-version:
+ content-type:content-type:
+ content-transfer-encoding:content-transfer-encoding:
+ in-reply-to:in-reply-to:references:references;
+ bh=mFira+KRxdt8d2FwCbb09WeKAggOn2O87AQVoaADDDg=;
+ b=WDgn0IoCwgiKpF286Do31Pin7PJ2guwZj4o9mUTgcnO0KxKRTMpqV1aW5zxiX3N5htkerQ
+ kLhuJfncnmUQFLRQycp7T3gADDfsZpqselBwPENiHlokvruIwHszV22QpuL2+jmHRmt6SC
+ 2yWvgFkRY9erkLCMUhDcYQiYSuAD9QcIo7iKFxOvDGh2JLrZV6jU9u+yBUUarJcP9qa938
+ xzxeTJYjxtsL2NhiXfY1Iu86YK4LH1w0II4PxVwZh64bszBzCJlB/lXJnIgWpIqwwXfUWN
+ OnrrZ4LsSmNbTztfn1SQlVuOOhFrIzV65WwXMXNPPStL+o/Z9X9QGj9JNOiJlQ==
+Message-ID: <acb81a4e86f4f683c4f83509afdc5f24ea01e64d.camel@mailbox.org>
+Subject: Re: [PATCH v4] drm/sched: Use struct for drm_sched_init() params
+From: Philipp Stanner <phasta@mailbox.org>
+To: Tvrtko Ursulin <tvrtko.ursulin@igalia.com>, Philipp Stanner
+ <phasta@kernel.org>, Min Ma <min.ma@amd.com>, Lizhi Hou
+ <lizhi.hou@amd.com>,  Oded Gabbay <ogabbay@kernel.org>, Alex Deucher
+ <alexander.deucher@amd.com>, Christian =?ISO-8859-1?Q?K=F6nig?=
+ <christian.koenig@amd.com>, Xinhui Pan <Xinhui.Pan@amd.com>, David Airlie
+ <airlied@gmail.com>, Simona Vetter <simona@ffwll.ch>, Lucas Stach
+ <l.stach@pengutronix.de>, Russell King <linux+etnaviv@armlinux.org.uk>, 
+ Christian Gmeiner <christian.gmeiner@gmail.com>, Frank Binns
+ <frank.binns@imgtec.com>, Matt Coster <matt.coster@imgtec.com>, Maarten
+ Lankhorst <maarten.lankhorst@linux.intel.com>,  Maxime Ripard
+ <mripard@kernel.org>, Thomas Zimmermann <tzimmermann@suse.de>, Qiang Yu
+ <yuq825@gmail.com>,  Rob Clark <robdclark@gmail.com>, Sean Paul
+ <sean@poorly.run>, Konrad Dybcio <konradybcio@kernel.org>,  Abhinav Kumar
+ <quic_abhinavk@quicinc.com>, Dmitry Baryshkov
+ <dmitry.baryshkov@linaro.org>, Marijn Suijten
+ <marijn.suijten@somainline.org>, Karol Herbst <kherbst@redhat.com>, Lyude
+ Paul <lyude@redhat.com>, Danilo Krummrich <dakr@redhat.com>, Boris
+ Brezillon <boris.brezillon@collabora.com>, Rob Herring <robh@kernel.org>,
+ Steven Price <steven.price@arm.com>, Liviu Dudau <liviu.dudau@arm.com>,
+ Matthew Brost <matthew.brost@intel.com>, Melissa Wen <mwen@igalia.com>, 
+ =?ISO-8859-1?Q?Ma=EDra?= Canal <mcanal@igalia.com>, Lucas De Marchi
+ <lucas.demarchi@intel.com>, Thomas =?ISO-8859-1?Q?Hellstr=F6m?=
+ <thomas.hellstrom@linux.intel.com>, Rodrigo Vivi <rodrigo.vivi@intel.com>,
+ Sunil Khatri <sunil.khatri@amd.com>,  Lijo Lazar <lijo.lazar@amd.com>,
+ Hawking Zhang <Hawking.Zhang@amd.com>, Mario Limonciello
+ <mario.limonciello@amd.com>, Ma Jun <Jun.Ma2@amd.com>, Yunxiang Li
+ <Yunxiang.Li@amd.com>
+Cc: dri-devel@lists.freedesktop.org, linux-kernel@vger.kernel.org, 
+ amd-gfx@lists.freedesktop.org, etnaviv@lists.freedesktop.org, 
+ lima@lists.freedesktop.org, linux-arm-msm@vger.kernel.org, 
+ freedreno@lists.freedesktop.org, nouveau@lists.freedesktop.org, 
+ intel-xe@lists.freedesktop.org, Christian Gmeiner <cgmeiner@igalia.com>
+Date: Wed, 09 Jul 2025 12:14:54 +0200
+In-Reply-To: <b5d0921c-7cbf-4d55-aa47-c35cd7861c02@igalia.com>
+References: <20250211111422.21235-2-phasta@kernel.org>
+ <b5d0921c-7cbf-4d55-aa47-c35cd7861c02@igalia.com>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <CALjTZvZgH0N43rMTcZiDVSX93PFL680hsYPwtp8=Ja1OWPvZ1A@mail.gmail.com>
+X-MBO-RS-ID: 2cfb6c6c64b390fa220
+X-MBO-RS-META: ay4k4wqr33dnoj1dmtnedfghmj9cfjnj
 X-Mailman-Approved-At: Sat, 13 Dec 2025 12:40:51 +0000
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
@@ -47,88 +91,149 @@ List-Post: <mailto:nouveau@lists.freedesktop.org>
 List-Help: <mailto:nouveau-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
  <mailto:nouveau-request@lists.freedesktop.org?subject=subscribe>
+Reply-To: phasta@kernel.org
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-Rui Salvaterra wrote:
-> Hi,
-> 
-> 
-> The machine (Atom 330 CPU, ION chipset, GeForce 9400M graphics) works,
-> but graphics are dead. Dmesg shows the following (Linux 6.16-rc5):
->
-> [   34.408331] BUG: kernel NULL pointer dereference, address: 0000000000000000
-> [   34.408351] #PF: supervisor instruction fetch in kernel mode
-> [   34.408358] #PF: error_code(0x0010) - not-present page
-> [   34.408364] PGD 0 P4D 0
-> [   34.408373] Oops: Oops: 0010 [#1] SMP
-> [   34.408383] CPU: 2 UID: 0 PID: 583 Comm: Xorg Not tainted
-> 6.16.0-rc5-dbg+ #187 PREEMPTLAZY
-> [   34.408393] Hardware name: To Be Filled By O.E.M. To Be Filled By
-> O.E.M./To be filled by O.E.M., BIOS 080015  08/13/2009
-> [   34.408399] RIP: 0010:0x0
-> [   34.408414] Code: Unable to access opcode bytes at 0xffffffffffffffd6.
-> [   34.408420] RSP: 0018:ffff88800378bc08 EFLAGS: 00010202
-> [   34.408428] RAX: ffffffff82071c60 RBX: ffff888008e6f000 RCX: 0000000000000978
-> [   34.408434] RDX: 0000000000000020 RSI: 0000000000000002 RDI: ffff888008e6f000
-> [   34.408440] RBP: ffff88800378bd18 R08: 0000000000000000 R09: 00000000000003ff
-> [   34.408445] R10: 0000000000000000 R11: ffff88800378bcc0 R12: ffff88800378bdb8
-> [   34.408451] R13: ffff888007dad9c0 R14: ffff888004285680 R15: ffff888007e671c0
-> [   34.408457] FS:  00007f2cc7b2eb00(0000) GS:ffff888149ecf000(0000)
-> knlGS:0000000000000000
-> [   34.408464] CS:  0010 DS: 0000 ES: 0000 CR0: 0000000080050033
-> [   34.408469] CR2: ffffffffffffffd6 CR3: 0000000008a08000 CR4: 00000000000006f0
-> [   34.408475] Call Trace:
-> [   34.408482]  <TASK>
-> [   34.408486]  nouveau_gem_ioctl_pushbuf+0x10d8/0x1240
-> [   34.408504]  ? nouveau_gem_ioctl_new+0x160/0x160
-> [   34.408513]  drm_ioctl_kernel+0x7a/0xe0
-> [   34.408524]  drm_ioctl+0x1ef/0x490
-> [   34.408532]  ? nouveau_gem_ioctl_new+0x160/0x160
-> [   34.408541]  ? __handle_mm_fault+0xff2/0x1510
-> [   34.408552]  nouveau_drm_ioctl+0x50/0xa0
-> [   34.408560]  __x64_sys_ioctl+0x4be/0xa90
-> [   34.408570]  ? handle_mm_fault+0xb5/0x1a0
-> [   34.408578]  ? lock_mm_and_find_vma+0x34/0x170
-> [   34.408587]  do_syscall_64+0x51/0x1d0
-> [   34.408596]  entry_SYSCALL_64_after_hwframe+0x4b/0x53
-> [   34.408605] RIP: 0033:0x7f2cc7d2f9dd
-> [   34.408612] Code: 04 25 28 00 00 00 48 89 45 c8 31 c0 48 8d 45 10
-> c7 45 b0 10 00 00 00 48 89 45 b8 48 8d 45 d0 48 89 45 c0 b8 10 00 00
-> 00 0f 05 <89> c2 3d 00 f0 ff ff 77 1a 48 8b 45 c8 64 48 2b 04 25 28 00
-> 00 00
-> [   34.408620] RSP: 002b:00007fff6a501ee0 EFLAGS: 00000246 ORIG_RAX:
-> 0000000000000010
-> [   34.408628] RAX: ffffffffffffffda RBX: 000055c7792b3f78 RCX: 00007f2cc7d2f9dd
-> [   34.408634] RDX: 00007fff6a501fa0 RSI: 00000000c0406481 RDI: 0000000000000011
-> [   34.408640] RBP: 00007fff6a501f30 R08: 0000000000000978 R09: 000055c7792af740
-> [   34.408645] R10: 0000000000000002 R11: 0000000000000246 R12: 00007fff6a501fa0
-> [   34.408651] R13: 00000000c0406481 R14: 0000000000000011 R15: 000055c7792ac700
-> [   34.408660]  </TASK>
-> [   34.408664] Modules linked in:
-> [   34.408671] CR2: 0000000000000000
-> [   34.408678] ---[ end trace 0000000000000000 ]---
-> [   34.408682] RIP: 0010:0x0
-> [   34.408691] Code: Unable to access opcode bytes at 0xffffffffffffffd6.
-> [   34.408696] RSP: 0018:ffff88800378bc08 EFLAGS: 00010202
-> [   34.408703] RAX: ffffffff82071c60 RBX: ffff888008e6f000 RCX: 0000000000000978
-> [   34.408709] RDX: 0000000000000020 RSI: 0000000000000002 RDI: ffff888008e6f000
-> [   34.408715] RBP: ffff88800378bd18 R08: 0000000000000000 R09: 00000000000003ff
-> [   34.408720] R10: 0000000000000000 R11: ffff88800378bcc0 R12: ffff88800378bdb8
-> [   34.408726] R13: ffff888007dad9c0 R14: ffff888004285680 R15: ffff888007e671c0
-> [   34.408731] FS:  00007f2cc7b2eb00(0000) GS:ffff888149ecf000(0000)
-> knlGS:0000000000000000
-> [   34.408738] CS:  0010 DS: 0000 ES: 0000 CR0: 0000000080050033
-> [   34.408743] CR2: ffffffffffffffd6 CR3: 0000000008a08000 CR4: 00000000000006f0
-> [   34.408750] note: Xorg[583] exited with irqs disabled
-> 
-> Unfortunately, bisecting is not feasible for me.
+On Tue, 2025-07-08 at 14:02 +0100, Tvrtko Ursulin wrote:
+>=20
+>=20
+> On 11/02/2025 11:14, Philipp Stanner wrote:
+> > drm_sched_init() has a great many parameters and upcoming new
+> > functionality for the scheduler might add even more. Generally, the
+> > great number of parameters reduces readability and has already
+> > caused
+> > one missnaming, addressed in:
+> >=20
+> > commit 6f1cacf4eba7 ("drm/nouveau: Improve variable name in
+> > nouveau_sched_init()").
+> >=20
+> > Introduce a new struct for the scheduler init parameters and port
+> > all
+> > users.
+> >=20
+> > Signed-off-by: Philipp Stanner <phasta@kernel.org>
+> > Reviewed-by: Liviu Dudau <liviu.dudau@arm.com>
+> > Acked-by: Matthew Brost <matthew.brost@intel.com> # for Xe
+> > Reviewed-by: Boris Brezillon <boris.brezillon@collabora.com> # for
+> > Panfrost and Panthor
+> > Reviewed-by: Christian Gmeiner <cgmeiner@igalia.com> # for Etnaviv
+> > Reviewed-by: Frank Binns <frank.binns@imgtec.com> # for Imagination
+> > Reviewed-by: Tvrtko Ursulin <tvrtko.ursulin@igalia.com> # for Sched
+> > Reviewed-by: Ma=C3=ADra Canal <mcanal@igalia.com> # for v3d
+> > ---
+> > Changes in v4:
+> > =C2=A0=C2=A0 - Add forgotten driver accel/amdxdna. (Me)
+> > =C2=A0=C2=A0 - Rephrase the "init to NULL" comments. (Tvrtko)
+> > =C2=A0=C2=A0 - Apply RBs by Tvrtko and Maira.
+> > =C2=A0=C2=A0 - Terminate the last struct members with a comma, so that =
+future
+> > =C2=A0=C2=A0=C2=A0=C2=A0 fields can be added with a minimal patch diff.=
+ (Me)
+> >=20
+> > Changes in v3:
+> > =C2=A0=C2=A0 - Various formatting requirements.
+> >=20
+> > Changes in v2:
+> > =C2=A0=C2=A0 - Point out that the hang-limit is deprecated. (Christian)
+> > =C2=A0=C2=A0 - Initialize the structs to 0 at declaration. (Planet Eart=
+h)
+> > =C2=A0=C2=A0 - Don't set stuff explicitly to 0 / NULL. (Tvrtko)
+> > =C2=A0=C2=A0 - Make the structs const where possible. (Boris)
+> > =C2=A0=C2=A0 - v3d: Use just 1, universal, function for sched-init. (Ma=
+=C3=ADra)
+> > ---
+>=20
+> 8><
+>=20
+> > diff --git a/drivers/gpu/drm/panfrost/panfrost_job.c
+> > b/drivers/gpu/drm/panfrost/panfrost_job.c
+> > index 9b8e82fb8bc4..5657106c2f7d 100644
+> > --- a/drivers/gpu/drm/panfrost/panfrost_job.c
+> > +++ b/drivers/gpu/drm/panfrost/panfrost_job.c
+> > @@ -836,8 +836,16 @@ static irqreturn_t
+> > panfrost_job_irq_handler(int irq, void *data)
+> > =C2=A0=20
+> > =C2=A0 int panfrost_job_init(struct panfrost_device *pfdev)
+> > =C2=A0 {
+> > +	struct drm_sched_init_args args =3D {
+> > +		.ops =3D &panfrost_sched_ops,
+> > +		.num_rqs =3D DRM_SCHED_PRIORITY_COUNT,
+> > +		.credit_limit =3D 2,
+> > +		.timeout =3D msecs_to_jiffies(JOB_TIMEOUT_MS),
+> > +		.timeout_wq =3D pfdev->reset.wq,
+>=20
+> ^^^
+>=20
+> > +		.name =3D "pan_js",
+> > +		.dev =3D pfdev->dev,
+> > +	};
+> > =C2=A0=C2=A0	struct panfrost_job_slot *js;
+> > -	unsigned int nentries =3D 2;
+> > =C2=A0=C2=A0	int ret, j;
+> > =C2=A0=20
+> > =C2=A0=C2=A0	/* All GPUs have two entries per queue, but without
+> > jobchain
+> > @@ -845,7 +853,7 @@ int panfrost_job_init(struct panfrost_device
+> > *pfdev)
+> > =C2=A0=C2=A0	 * so let's just advertise one entry in that case.
+> > =C2=A0=C2=A0	 */
+> > =C2=A0=C2=A0	if (!panfrost_has_hw_feature(pfdev,
+> > HW_FEATURE_JOBCHAIN_DISAMBIGUATION))
+> > -		nentries =3D 1;
+> > +		args.credit_limit =3D 1;
+> > =C2=A0=20
+> > =C2=A0=C2=A0	pfdev->js =3D js =3D devm_kzalloc(pfdev->dev, sizeof(*js),
+> > GFP_KERNEL);
+> > =C2=A0=C2=A0	if (!js)
+>=20
+> Stumbled on this while looking at drm_sched_init() workqueue usage.
+>=20
+> I think this patch might need a fixup. Because somewhere around here
+> in=20
+> the code there is this:
+>=20
+> 	pfdev->reset.wq =3D alloc_ordered_workqueue("panfrost-reset",
+> 0);
+> 	if (!pfdev->reset.wq)
+> 		return -ENOMEM;
+>=20
+> Which means that after the patch panfrost is using system_wq for the=20
+> timeout handler instead the one it creates.
 
-That looks pretty similar to the problem I posted
-(https://lore.kernel.org/lkml/aElJIo9_Se6tAR1a@audible.transient.net/)
-that I bisected to 862450a85b85 ("drm/nouveau/gf100-: track chan
-progress with non-WFI semaphore release").  It still reverts cleanly
-as of v6.16-rc5 so you might want to give that a shot.
+Ouch yes, that's definitely a very subtle bug. AFAICS it comes to be by
+pfdev being initialized to 0.
 
--- 
-Jamie Heilman                     http://audible.transient.net/~jamie/
+Let me provide a fix..
+
+P.
+
+>=20
+> > @@ -875,13 +883,7 @@ int panfrost_job_init(struct panfrost_device
+> > *pfdev)
+> > =C2=A0=C2=A0	for (j =3D 0; j < NUM_JOB_SLOTS; j++) {
+> > =C2=A0=C2=A0		js->queue[j].fence_context =3D
+> > dma_fence_context_alloc(1);
+> > =C2=A0=20
+> > -		ret =3D drm_sched_init(&js->queue[j].sched,
+> > -				=C2=A0=C2=A0=C2=A0=C2=A0 &panfrost_sched_ops, NULL,
+> > -				=C2=A0=C2=A0=C2=A0=C2=A0 DRM_SCHED_PRIORITY_COUNT,
+> > -				=C2=A0=C2=A0=C2=A0=C2=A0 nentries, 0,
+> > -				=C2=A0=C2=A0=C2=A0=C2=A0
+> > msecs_to_jiffies(JOB_TIMEOUT_MS),
+> > -				=C2=A0=C2=A0=C2=A0=C2=A0 pfdev->reset.wq,
+> > -				=C2=A0=C2=A0=C2=A0=C2=A0 NULL, "pan_js", pfdev->dev);
+> > +		ret =3D drm_sched_init(&js->queue[j].sched, &args);
+>=20
+> ^^^
+>=20
+> > =C2=A0=C2=A0		if (ret) {
+> > =C2=A0=C2=A0			dev_err(pfdev->dev, "Failed to create
+> > scheduler: %d.", ret);
+> > =C2=A0=C2=A0			goto err_sched;
+>=20
+> Regards,
+>=20
+> Tvrtko
+>=20
+
