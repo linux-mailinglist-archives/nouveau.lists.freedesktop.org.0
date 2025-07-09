@@ -2,101 +2,87 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id 839F6BBF6B4
-	for <lists+nouveau@lfdr.de>; Mon, 06 Oct 2025 22:57:31 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 6EABCBBF6FC
+	for <lists+nouveau@lfdr.de>; Mon, 06 Oct 2025 22:57:42 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id E63A910E5D5;
-	Mon,  6 Oct 2025 20:57:23 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id D6BBD10E5EC;
+	Mon,  6 Oct 2025 20:57:25 +0000 (UTC)
 Authentication-Results: gabe.freedesktop.org;
-	dkim=permerror (0-bit key) header.d=gmail.com header.i=@gmail.com header.b="ic5Jaa5/";
+	dkim=permerror (0-bit key) header.d=gmail.com header.i=@gmail.com header.b="U83rlo5V";
 	dkim-atps=neutral
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from mail-qt1-f172.google.com (mail-qt1-f172.google.com
- [209.85.160.172])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 1547A10E848;
- Wed,  9 Jul 2025 20:00:29 +0000 (UTC)
-Received: by mail-qt1-f172.google.com with SMTP id
- d75a77b69052e-4a44b9b2af8so2020231cf.3; 
- Wed, 09 Jul 2025 13:00:29 -0700 (PDT)
+Received: from mail-lj1-f174.google.com (mail-lj1-f174.google.com
+ [209.85.208.174])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 6873610E867;
+ Wed,  9 Jul 2025 21:02:08 +0000 (UTC)
+Received: by mail-lj1-f174.google.com with SMTP id
+ 38308e7fff4ca-32b31afa781so2085351fa.3; 
+ Wed, 09 Jul 2025 14:02:08 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1752091228; x=1752696028; darn=lists.freedesktop.org;
- h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
- :mime-version:subject:date:from:from:to:cc:subject:date:message-id
- :reply-to; bh=t/DcNjK+ad89tRBvsQX+S6zpol8aKve5l6g7f8vctP0=;
- b=ic5Jaa5/fgmds97L4/Q/32maupgFmpLyLaBy0UG5gnYCuWpsqCjqWQ27ePtzwkycFv
- 39Pgo4CQ+iAZcF6sJoAvo9kgnq5Vmn14Sd8+JNTqUD0Ac8QjaesEUHrS2mHjlAnc2lL9
- kt7OhC0/CUcHeC2Tw4OymNFZCZMPfC179OQPtL250w3cEA0vbR1h7cc0YqfS23jo5YK7
- QRDtxouT6+P1RnUjCA8q3y6rWl9JPiE64OvLL4BgL7cZTXpfVgS+OU9GpwBXTvcCrmes
- l6f750TEsAGsWaKwvdBtlaFTViT90qwr/pHUc4F9mbNC0guIk2CG0REC1NscdpL/WDGf
- hhyg==
+ d=gmail.com; s=20230601; t=1752094927; x=1752699727; darn=lists.freedesktop.org;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=i/NYN5eCrplLxDbEYSWBaln4nRDogh/r4mbR4dmIqRU=;
+ b=U83rlo5Vbl+IpEzkG5TUJl0ENwObKNmgPxeGDaAQf4WhqHKTRSg00dYhhCB54YnDSS
+ uY91M/hDI/QDNy2RJzIYDcA9IhF2H3ADt1cstiQKRluWFfjzeIluEpQVyKpxSMoWcc9S
+ X7dtUpRGflvr1dZR8VPPBPdpyWT6xz4hF4CTPBp9kOPEXAyC/RgZsm0Z2QZIrYZonN6y
+ KVNq0cGwD1nq+nKarPlsP+a2uGOSpo7OP99tSJahEC8tYdUI7cf0VQOWXlFGO121F++n
+ CYy2/qUlmnHjwkZH/9/zVprd/ui+bZAZ70Qn7KeqZTdBhSjnrH61KCfCCRG+arseI6U5
+ GKsA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1752091228; x=1752696028;
- h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
- :mime-version:subject:date:from:x-gm-message-state:from:to:cc
+ d=1e100.net; s=20230601; t=1752094927; x=1752699727;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=t/DcNjK+ad89tRBvsQX+S6zpol8aKve5l6g7f8vctP0=;
- b=xT1pZqg0x0awYIEupzYWYUETP+NYpZNxAfcge9RqoxACbGrEjWKmLHEtF4tAi/W3Xv
- wPz0T6TSP/GvDmR1osAqIdt3mmosP2hhixNA8X4/0u49/F1Flca8Px1U7xnXgBFGE6Yd
- hqK6dbxnsljRKH+0F9D4NUjT5lsJ1TiD3Tnl61Hvb0JoXkGZ5x1IVOrHNTSG4Dl2iptd
- xg3PcRJdW+otf7Qc/IW2nfdB+VFHBhyGzAa/5RVdJ/Na+DrL3ncRcgP1AVq+oCJus72N
- 4FFLIVKp0NVIGKOYjpiJl4/X2DdgZ0/NajyC1N56c7lF+G2f11MGirDG8j3hm+nEMsrN
- T/rg==
+ bh=i/NYN5eCrplLxDbEYSWBaln4nRDogh/r4mbR4dmIqRU=;
+ b=MWytniu9WeP86vr5c8Coq6NhMQP2jPXTq4gbs2xEgmw5RdmoLnCl/1kTTkMPxsX9fi
+ 8Wt+rLuA6yhSmB4YNY0yH7X+ObJsmqMzsvhC7CDkHcButqF8j/K1QIfw1yjSPl2kdbib
+ +3tcjwfxsk1oqtPfmS1PEbjKjnnGt7EuwG/3K2LZaM/eex7M8MScw/6Gaye3wY1iSavD
+ 0xUyJWxwOqgQ95aGgJjNrf4C4u1xX7ZZ5CTBdUF2+DmNrU8ZkP2P6AYQ9CuZmGDNTqLb
+ tbc9BVqNo+veE0PI+TLO3M5PnrO+ai3ijraltGGhh/9zv6WK29vPHNDbpiJeZ2CtgAHx
+ w/Mg==
 X-Forwarded-Encrypted: i=1;
- AJvYcCUH3jeBv4II8gyGi7exrjIV6Vn9+nsegqC0fmQTIUN8pRhuyWAhY7sQL39zWhrlShGLrx+f+rjAC1E=@lists.freedesktop.org
-X-Gm-Message-State: AOJu0YzLlcTyDaC509YciNSZOx9Hhs+z6gICcljQ12nBUjdPYGimdjlM
- bBgVfd/CHwtrUvMEg9mKR6yXPFUIa71U49uSIPDEQbWwmd02yKc9ZMV/
-X-Gm-Gg: ASbGncvZkl3c9EDRHqKdywxCjvi0gBek/YMmsx/VlD+AdYA2M69X95FMj4u9OdmtRKA
- c7ANPtil7eMqN2r7BABCFDkzDmHwSD12vYxBAYwuM6XeuzFB2iAVVhs0Pijbr52Z95QM/ksmNFo
- 6isIQjUG2RlCLG0VTc9EQS38z4t20SZ+kVeZdx1QONpwgTe+sBIgCE/RWjQkf3kkfoeFh1nrb7r
- a1iLQUw9bJOh360CKEUrDOL7DDmj1+eQhkCvbLjP969aW7aWaNkd0i78M1uiNLqIjQ6gC6EOD3p
- 6Vqetp2+DLYHpsEggORcKEtV8Iym8Tx705/pdm5EhPNaVs6kFoPjH+PF1B2xV+tXwjYM79m6/vf
- XfvuyT/BaLtvM0ohJX/WpV1enqwwHltoj9M7TIYKPns4PZOq4dpRDKT6KyA==
-X-Google-Smtp-Source: AGHT+IGDPYWz+E3dnMDl2IGcpOC6d+1Nh292sF9LOImxi5N/DxYBIIqZq2RWfnk0uSSfN7WXQL9XKg==
-X-Received: by 2002:ac8:5713:0:b0:4a5:a96d:606d with SMTP id
- d75a77b69052e-4a9ded52558mr52943921cf.46.1752091225141; 
- Wed, 09 Jul 2025 13:00:25 -0700 (PDT)
-Received: from
- 1.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.ip6.arpa
- ([148.76.185.197]) by smtp.gmail.com with ESMTPSA id
- d75a77b69052e-4a9949e4aaasm100432891cf.3.2025.07.09.13.00.23
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 09 Jul 2025 13:00:24 -0700 (PDT)
-From: Tamir Duberstein <tamird@gmail.com>
-Date: Wed, 09 Jul 2025 16:00:08 -0400
-Subject: [PATCH 9/9] rust: sync: use `kernel::{fmt,prelude::fmt!}`
+ AJvYcCWFARe5IwtbYAdd030bQFJUOkPX1wdQvYHklTwrm0cRByDjWFJxo0GaDJHME03BNFQtYggJZQwSYYE=@lists.freedesktop.org,
+ AJvYcCXJxrhKjKh8gYbUr1gtNfljMamXkMm1S1PuPVFcbZwWl5D9yVqPQJ77W1ZwGw3tFIvDGcD8eefmqA==@lists.freedesktop.org
+X-Gm-Message-State: AOJu0Yz26LN2ZmbDFN39o11fNb2oPCYmTmcKorC6a9B3fXchAs477esO
+ vR6TjDmVlmkZJqnKmfOi2aNe3bwe/zhwSnazS7oyHCVXrYHpo8P1YM1N9TdUIO1WJR8Hln9BKc5
+ 6aXV/3JCQbbP7QHEswLT3dC05DbgCkts=
+X-Gm-Gg: ASbGncuBv2hJeHb3GcZjVWt9ojo7N22CnhKHaJ7JYknVYzl6sgBsW0H4Zdjrutv+XzY
+ Z+3BcNTbwxkHlA0NMnSm1K+wogkIaxfLQQCJlJpKEHdGG3nGuKE19a1g8IESGueAlAqDPftK9tP
+ bHT/npLZhhoV5Dg216FFxek8U1eyYBioy0+2ELVR8ZszN7
+X-Google-Smtp-Source: AGHT+IExWIJ6hhfEb6UoxlwctM02YNDW0TZ2aarCHGVCLMDXTN2AKn+P851gVPEhqrddHdHhddIZDLinIFW32pqJpSE=
+X-Received: by 2002:a2e:9d09:0:b0:310:81a0:64f7 with SMTP id
+ 38308e7fff4ca-32f5011b1ddmr2792091fa.24.1752094926332; Wed, 09 Jul 2025
+ 14:02:06 -0700 (PDT)
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 7bit
-Message-Id: <20250709-core-cstr-fanout-1-v1-9-64308e7203fc@gmail.com>
 References: <20250709-core-cstr-fanout-1-v1-0-64308e7203fc@gmail.com>
-In-Reply-To: <20250709-core-cstr-fanout-1-v1-0-64308e7203fc@gmail.com>
-To: Danilo Krummrich <dakr@kernel.org>, David Airlie <airlied@gmail.com>, 
- Simona Vetter <simona@ffwll.ch>, Miguel Ojeda <ojeda@kernel.org>, 
- Alex Gaynor <alex.gaynor@gmail.com>, Boqun Feng <boqun.feng@gmail.com>, 
- Gary Guo <gary@garyguo.net>, 
- =?utf-8?q?Bj=C3=B6rn_Roy_Baron?= <bjorn3_gh@protonmail.com>, 
- Benno Lossin <lossin@kernel.org>, Andreas Hindborg <a.hindborg@kernel.org>, 
- Alice Ryhl <aliceryhl@google.com>, Trevor Gross <tmgross@umich.edu>, 
- Jens Axboe <axboe@kernel.dk>, 
- Greg Kroah-Hartman <gregkh@linuxfoundation.org>, 
+ <20250709-core-cstr-fanout-1-v1-7-64308e7203fc@gmail.com>
+ <DB7SVTBZ46QB.31WTHFLWDHPZY@kernel.org>
+In-Reply-To: <DB7SVTBZ46QB.31WTHFLWDHPZY@kernel.org>
+From: Tamir Duberstein <tamird@gmail.com>
+Date: Wed, 9 Jul 2025 17:01:28 -0400
+X-Gm-Features: Ac12FXyhsUe6smRBxo6FiBw1g5N18SKhkX08Ac6QMkarBxohB2ddH5MIOdKITP8
+Message-ID: <CAJ-ks9nNc_pThtb+gHUcjEnvR6V0RAEG0tkv+_DHYYjXs1N7=A@mail.gmail.com>
+Subject: Re: [PATCH 7/9] rust: pin-init: use `kernel::{fmt,prelude::fmt!}`
+To: Benno Lossin <lossin@kernel.org>
+Cc: Danilo Krummrich <dakr@kernel.org>, David Airlie <airlied@gmail.com>,
+ Simona Vetter <simona@ffwll.ch>, 
+ Miguel Ojeda <ojeda@kernel.org>, Alex Gaynor <alex.gaynor@gmail.com>, 
+ Boqun Feng <boqun.feng@gmail.com>, Gary Guo <gary@garyguo.net>, 
+ =?UTF-8?Q?Bj=C3=B6rn_Roy_Baron?= <bjorn3_gh@protonmail.com>, 
+ Andreas Hindborg <a.hindborg@kernel.org>, Alice Ryhl <aliceryhl@google.com>, 
+ Trevor Gross <tmgross@umich.edu>, Jens Axboe <axboe@kernel.dk>, 
+ Greg Kroah-Hartman <gregkh@linuxfoundation.org>,
  "Rafael J. Wysocki" <rafael@kernel.org>, 
- Brendan Higgins <brendan.higgins@linux.dev>, 
- David Gow <davidgow@google.com>, Rae Moar <rmoar@google.com>
-Cc: nouveau@lists.freedesktop.org, dri-devel@lists.freedesktop.org, 
- linux-kernel@vger.kernel.org, rust-for-linux@vger.kernel.org, 
- linux-block@vger.kernel.org, linux-kselftest@vger.kernel.org, 
- kunit-dev@googlegroups.com, Tamir Duberstein <tamird@gmail.com>
-X-Mailer: b4 0.15-dev
-X-Developer-Signature: v=1; a=openssh-sha256; t=1752091204; l=915;
- i=tamird@gmail.com; h=from:subject:message-id;
- bh=6Oa3cXehoAzpEzhSDCacIqKa9qd81pBdJbPezrggmQs=;
- b=U1NIU0lHAAAAAQAAADMAAAALc3NoLWVkMjU1MTkAAAAgtYz36g7iDMSkY5K7Ab51ksGX7hJgs
- MRt+XVZTrIzMVIAAAAGcGF0YXR0AAAAAAAAAAZzaGE1MTIAAABTAAAAC3NzaC1lZDI1NTE5AAAA
- QKYLyzXzfoucuo4J/QNdzaRaKqUYTTxwz+z6ySMVetanHNnBRutB6OmGm/FR1SsxfYNVnaPWV3g
- F0cQtdEM7Tgs=
-X-Developer-Key: i=tamird@gmail.com; a=openssh;
- fpr=SHA256:264rPmnnrb+ERkS7DDS3tuwqcJss/zevJRzoylqMsbc
+ Brendan Higgins <brendan.higgins@linux.dev>, David Gow <davidgow@google.com>, 
+ Rae Moar <rmoar@google.com>, nouveau@lists.freedesktop.org, 
+ dri-devel@lists.freedesktop.org, linux-kernel@vger.kernel.org, 
+ rust-for-linux@vger.kernel.org, linux-block@vger.kernel.org, 
+ linux-kselftest@vger.kernel.org, kunit-dev@googlegroups.com
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 X-Mailman-Approved-At: Mon, 06 Oct 2025 20:57:15 +0000
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
@@ -112,37 +98,31 @@ List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-Reduce coupling to implementation details of the formatting machinery by
-avoiding direct use for `core`'s formatting traits and macros.
+On Wed, Jul 9, 2025 at 4:18=E2=80=AFPM Benno Lossin <lossin@kernel.org> wro=
+te:
+>
+> On Wed Jul 9, 2025 at 10:00 PM CEST, Tamir Duberstein wrote:
+> > Reduce coupling to implementation details of the formatting machinery b=
+y
+> > avoiding direct use for `core`'s formatting traits and macros.
+> >
+> > Acked-by: Greg Kroah-Hartman <gregkh@linuxfoundation.org>
+> > Reviewed-by: Alice Ryhl <aliceryhl@google.com>
+> > Signed-off-by: Tamir Duberstein <tamird@gmail.com>
+> > ---
+> >  rust/kernel/init.rs | 4 ++--
+> >  1 file changed, 2 insertions(+), 2 deletions(-)
+>
+> I usually prefix patches to init.rs with `rust: init`. I'll fix it up
+> when picking the patch or Miguel can do it if he takes it:
+>
+> Acked-by: Benno Lossin <lossin@kernel.org>
 
-Acked-by: Greg Kroah-Hartman <gregkh@linuxfoundation.org>
-Reviewed-by: Alice Ryhl <aliceryhl@google.com>
-Signed-off-by: Tamir Duberstein <tamird@gmail.com>
----
- rust/kernel/sync/arc.rs | 3 +--
- 1 file changed, 1 insertion(+), 2 deletions(-)
+Actually, squinting at this patch more closely now, I think this isn't
+what you had in mind. The comment says "Dummy error that can be
+constructed outside the `kernel` crate." but the error now comes from
+the kernel crate :(
 
-diff --git a/rust/kernel/sync/arc.rs b/rust/kernel/sync/arc.rs
-index c7af0aa48a0a..b366260f56b3 100644
---- a/rust/kernel/sync/arc.rs
-+++ b/rust/kernel/sync/arc.rs
-@@ -18,14 +18,13 @@
- 
- use crate::{
-     alloc::{AllocError, Flags, KBox},
--    bindings,
-+    bindings, fmt,
-     init::InPlaceInit,
-     try_init,
-     types::{ForeignOwnable, Opaque},
- };
- use core::{
-     alloc::Layout,
--    fmt,
-     marker::PhantomData,
-     mem::{ManuallyDrop, MaybeUninit},
-     ops::{Deref, DerefMut},
-
--- 
-2.50.0
-
+Perhaps you could suggest a different modification that would both
+meet the original intent and allow references to core::fmt to
+disappear?
