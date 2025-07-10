@@ -2,61 +2,83 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id B5D95CBAB39
-	for <lists+nouveau@lfdr.de>; Sat, 13 Dec 2025 13:42:48 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 73182CBAC6A
+	for <lists+nouveau@lfdr.de>; Sat, 13 Dec 2025 13:43:59 +0100 (CET)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id F328410EA9E;
-	Sat, 13 Dec 2025 12:41:01 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 4ACFE10EB60;
+	Sat, 13 Dec 2025 12:41:08 +0000 (UTC)
 Authentication-Results: gabe.freedesktop.org;
-	dkim=pass (2048-bit key; secure) header.d=mailbox.org header.i=@mailbox.org header.b="seWBBlm9";
+	dkim=permerror (0-bit key) header.d=gmail.com header.i=@gmail.com header.b="FbTY2aO2";
 	dkim-atps=neutral
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from mout-p-101.mailbox.org (mout-p-101.mailbox.org [80.241.56.151])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 10EC010E8F0;
- Thu, 10 Jul 2025 15:12:08 +0000 (UTC)
-Received: from smtp102.mailbox.org (smtp102.mailbox.org
- [IPv6:2001:67c:2050:b231:465::102])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
- (No client certificate requested)
- by mout-p-101.mailbox.org (Postfix) with ESMTPS id 4bdJGr6fcCz9t3p;
- Thu, 10 Jul 2025 17:12:04 +0200 (CEST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
- s=mail20150812; 
- t=1752160325; h=from:from:reply-to:reply-to:subject:subject:date:date:
- message-id:message-id:to:to:cc:cc:mime-version:mime-version:
- content-type:content-type:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references;
- bh=8a6CBOKhPIyH24xt7AaX6qplNBfoOrI4hf0FBujJDRw=;
- b=seWBBlm9HM/1XHghbgmmDne+xfaEPW/l2j5x0R8cfMi8T57g7nxCyH4cqJhlEa/+Zlvcul
- eCobsslJoDrTn200xlNSccbSrkB83lZFfh8IVc4Nckq5Sr4bErNGC3HA4887PPZTzWZYSe
- SHlpLKwOneUezNU7NHmTv9qfBp45OBZclmfJ6/GpnSJ8c8YK4otGSGjJZRBK/Fcr5QiJN1
- V4GIPXF16cq4n0d3l2EWqNv8QIawIRtc0j6av5hZAqwSw/15uW9Oe2atuKnFkDFakXfH4Z
- Jjzpy+iikc0986YoinAoUMndgaQdG+6TbLtqWcFAgpYi1l0sh5pHB0SXpXoaiA==
-Message-ID: <18f514ef3a61c877bc80f403db67a2106f4bdd44.camel@mailbox.org>
-Subject: Re: [PATCH v4 0/8] drm/sched: Fix memory leaks with cancel_job()
- callback
-From: Philipp Stanner <phasta@mailbox.org>
-To: Philipp Stanner <phasta@kernel.org>, Danilo Krummrich <dakr@kernel.org>,
- David Airlie <airlied@gmail.com>, Simona Vetter <simona@ffwll.ch>, Matthew
- Brost <matthew.brost@intel.com>,  Christian =?ISO-8859-1?Q?K=F6nig?=
- <ckoenig.leichtzumerken@gmail.com>, Maarten Lankhorst
- <maarten.lankhorst@linux.intel.com>, Thomas Zimmermann
- <tzimmermann@suse.de>,  Tvrtko Ursulin <tvrtko.ursulin@igalia.com>,
- Pierre-Eric Pelloux-Prayer <pierre-eric.pelloux-prayer@amd.com>
-Cc: dri-devel@lists.freedesktop.org, nouveau@lists.freedesktop.org, 
- linux-kernel@vger.kernel.org, linux-media@vger.kernel.org
-Date: Thu, 10 Jul 2025 17:11:58 +0200
-In-Reply-To: <20250710125412.128476-2-phasta@kernel.org>
-References: <20250710125412.128476-2-phasta@kernel.org>
+Received: from mail-pf1-f175.google.com (mail-pf1-f175.google.com
+ [209.85.210.175])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id C0A7110E942;
+ Thu, 10 Jul 2025 19:06:39 +0000 (UTC)
+Received: by mail-pf1-f175.google.com with SMTP id
+ d2e1a72fcca58-748fadc0bc5so228130b3a.0; 
+ Thu, 10 Jul 2025 12:06:39 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=gmail.com; s=20230601; t=1752174399; x=1752779199; darn=lists.freedesktop.org;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=68qpC4Y4uSheoQEbmMxx5RKOE+wIAn+KKwc+9lT74pM=;
+ b=FbTY2aO2vhNiTQb09I97V0oZF/Aq0TPs7bB02BP+bmnbbKzLsaY6/46gHsx/qOVdYo
+ huszeuDdnnIW16K4C7vPBn6BqO+b+lAG3ifPrFUF8Niw36Xh2Dx4OapkksFSlPweS8YL
+ TeM8CqgFk/JG9Y9xGQlsoKu0YYwGVaxNOvNojemL6a9y1TDU9e5vp8493u8ClWetKKnC
+ 2ukSKqoGH+FLkevh6RV6jRIC4Vcp1CJKHaxzVF58qMQRk4pTDWIcGTxgZqSyrJx4bj3l
+ UbirBhJ2dqR2p5abPZynCuvkmQl68TUuhLfKdd4doUc0/IzOY0uRsqLEWUHVbOGKIN6I
+ h5Rg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1752174399; x=1752779199;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=68qpC4Y4uSheoQEbmMxx5RKOE+wIAn+KKwc+9lT74pM=;
+ b=tRZpAsVfYX+dVYBkHuYouBhNfO8dtm8iVV5b+lvOKPWuf1SYIBNJJaboao573uepaA
+ 76Z07rbhb373Xx2qlKtMhQc4U0zeA2BBaNA+ZtPC3SsdB+H3yT4k4Nigmwy8KPofHTdZ
+ uZEvsIQKf4g66tp9pzFTOCQm6VwdVRuCk2/yApCnYQJ3TfqE0DXCA7DjVXEgiZ52UARA
+ uAjRKBC8/mNvDSBS9V5kzEslkS5XbGi/Ysc0QCp6CpDunC/O6KheJ2W5QNMdwlq1DZ2j
+ tAlTuqSadOl3YT+X5Yii8ORO6I9rw5Lb3kegwK8xtpoTMBhRtqFg/9ywbGn6RFEKcYaK
+ f1Eg==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCVUdb5lTIE19YnnODvBIV/sJxBhwWtPNkEezlZUZRzXgdeGXpipJy9iOERXuZYVYs0pVjqJzLuwuQ==@lists.freedesktop.org,
+ AJvYcCViCZsD8xlhSB4610esPwIGtOKFyo7qs/3v9tHmhjy8WaWZEi9145cIXzIMRuhv3WeQf3ipcTEMWgo=@lists.freedesktop.org
+X-Gm-Message-State: AOJu0Yznv0l64TqBzULSZktb2m+uvlnPhqJk/eTKD8hBZdCSJt4p6joG
+ BZggFgrryhJlVToOwo8pglg6tP8/3v8qRxZTNPem9QTMRztLgG/kVmC6rxtoHKw0bJCSxcRLLHZ
+ wMUqZq06zA4+cecvlqPyUai/bnoV61gM=
+X-Gm-Gg: ASbGncsQ5TQOt+IfiGMU+HOGYI3TA27OTKvPAU13L+s/wDO58wGJjytxF2Jjh8p6jU3
+ jgr0CWOx6+hUFexToLdvoB824CtS0iuliLFtRaFPf/ZdHjtkwyUK/kVbLQKqjV6I/8YrD9nSInm
+ geFtuW5idp1aXf9LYW+Acbwrpb111jYc++EiG7uQFZ
+X-Google-Smtp-Source: AGHT+IG0VJqe3uNAcjU3Xxte+v+hYbWn4ghp69RsSsnwscX/+eeuYBtfenFCSddGxjjaiQm1KOImr0VmDgF/3kDaWcw=
+X-Received: by 2002:a17:90b:5645:b0:312:1ae9:1537 with SMTP id
+ 98e67ed59e1d1-31c4c972591mr333377a91.0.1752174399128; Thu, 10 Jul 2025
+ 12:06:39 -0700 (PDT)
+MIME-Version: 1.0
+References: <20250702-nova-docs-v3-0-f362260813e2@nvidia.com>
+ <20250702-nova-docs-v3-2-f362260813e2@nvidia.com>
+ <CANiq72nh71s9to5v1KHJWN79bEFv97zN6jcGJyEQkaJZ5UuJfg@mail.gmail.com>
+In-Reply-To: <CANiq72nh71s9to5v1KHJWN79bEFv97zN6jcGJyEQkaJZ5UuJfg@mail.gmail.com>
+From: Miguel Ojeda <miguel.ojeda.sandonis@gmail.com>
+Date: Thu, 10 Jul 2025 21:06:25 +0200
+X-Gm-Features: Ac12FXw_q-goG-jOjFcf1y4t2ncn8eM_tujmaC9ue0dJR_ud1nXJSMx9bb--WFg
+Message-ID: <CANiq72n6759SXO4_8jUryge3s0scp00hiKBnkhnbieObQdqL7Q@mail.gmail.com>
+Subject: Re: [PATCH v3 2/7] gpu: nova-core: Clarify sysmembar operations
+To: Alexandre Courbot <acourbot@nvidia.com>
+Cc: Danilo Krummrich <dakr@kernel.org>, David Airlie <airlied@gmail.com>,
+ Simona Vetter <simona@ffwll.ch>, 
+ Maarten Lankhorst <maarten.lankhorst@linux.intel.com>,
+ Maxime Ripard <mripard@kernel.org>, 
+ Thomas Zimmermann <tzimmermann@suse.de>, Jonathan Corbet <corbet@lwn.net>,
+ nouveau@lists.freedesktop.org, 
+ dri-devel@lists.freedesktop.org, linux-kernel@vger.kernel.org, 
+ linux-doc@vger.kernel.org, rust-for-linux@vger.kernel.org, 
+ Joel Fernandes <joelagnelf@nvidia.com>
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
-MIME-Version: 1.0
-X-MBO-RS-ID: 5c40c1a7c2a9a3dbc09
-X-MBO-RS-META: 1nps9qp9r8sikmsso7bmcbxeyzd9bro1
-X-Mailman-Approved-At: Sat, 13 Dec 2025 12:40:51 +0000
+X-Mailman-Approved-At: Sat, 13 Dec 2025 12:40:47 +0000
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -68,81 +90,19 @@ List-Post: <mailto:nouveau@lists.freedesktop.org>
 List-Help: <mailto:nouveau-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
  <mailto:nouveau-request@lists.freedesktop.org?subject=subscribe>
-Reply-To: phasta@kernel.org
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-On Thu, 2025-07-10 at 14:54 +0200, Philipp Stanner wrote:
-> Changes in v4:
-> =C2=A0 - Change dev_err() to dev_warn() in pending_list emptyness check.
->=20
-> Changes in v3:
-> =C2=A0 - Remove forgotten copy-past artifacts. (Tvrtko)
-> =C2=A0 - Remove forgotten done_list struct member. (Tvrtko)
-> =C2=A0 - Slightly adjust commit message of patch 7.
-> =C2=A0 - Add RBs. (Maira, Danilo, Tvrtko)
->=20
-> Changes in v2:
-> =C2=A0 - Add new unit test to test cancel_job()'s behavior. (Tvrtko)
-> =C2=A0 - Add RB from Ma=C3=ADra
->=20
-> Changes since the RFC:
-> =C2=A0 - Rename helper function for drm_sched_fini(). (Tvrtko)
-> =C2=A0 - Add Link to Tvrtko's RFC patch to patch 1.
->=20
->=20
-> Since a long time, drm_sched_fini() can leak jobs that are still in
-> drm_sched.pending_list.
->=20
-> This series solves the leaks in a backwards-compatible manner by
-> adding
-> a new, optional callback. If that callback is implemented, the
-> scheduler
-> uses it to cancel all jobs from pending_list and then frees them.
->=20
-> Philipp Stanner (8):
-> =C2=A0 drm/panfrost: Fix scheduler workqueue bug
-> =C2=A0 drm/sched: Avoid memory leaks with cancel_job() callback
-> =C2=A0 drm/sched/tests: Implement cancel_job() callback
-> =C2=A0 drm/sched/tests: Add unit test for cancel_job()
-> =C2=A0 drm/sched: Warn if pending_list is not empty
-> =C2=A0 drm/nouveau: Make fence container helper usable driver-wide
-> =C2=A0 drm/nouveau: Add new callback for scheduler teardown
-> =C2=A0 drm/nouveau: Remove waitque for sched teardown
->=20
-> =C2=A0drivers/gpu/drm/nouveau/nouveau_fence.c=C2=A0=C2=A0=C2=A0=C2=A0=C2=
-=A0=C2=A0 | 35 ++++++----
-> =C2=A0drivers/gpu/drm/nouveau/nouveau_fence.h=C2=A0=C2=A0=C2=A0=C2=A0=C2=
-=A0=C2=A0 |=C2=A0 7 ++
-> =C2=A0drivers/gpu/drm/nouveau/nouveau_sched.c=C2=A0=C2=A0=C2=A0=C2=A0=C2=
-=A0=C2=A0 | 35 ++++++----
-> =C2=A0drivers/gpu/drm/nouveau/nouveau_sched.h=C2=A0=C2=A0=C2=A0=C2=A0=C2=
-=A0=C2=A0 |=C2=A0 9 +--
-> =C2=A0drivers/gpu/drm/nouveau/nouveau_uvmm.c=C2=A0=C2=A0=C2=A0=C2=A0=C2=
-=A0=C2=A0=C2=A0 |=C2=A0 8 +--
-> =C2=A0drivers/gpu/drm/panfrost/panfrost_job.c=C2=A0=C2=A0=C2=A0=C2=A0=C2=
-=A0=C2=A0 |=C2=A0 2 +-
-> =C2=A0drivers/gpu/drm/scheduler/sched_main.c=C2=A0=C2=A0=C2=A0=C2=A0=C2=
-=A0=C2=A0=C2=A0 | 37 ++++++----
-> =C2=A0.../gpu/drm/scheduler/tests/mock_scheduler.c=C2=A0 | 68 +++++++----=
-------
-> --
-> =C2=A0drivers/gpu/drm/scheduler/tests/sched_tests.h |=C2=A0 1 -
-> =C2=A0drivers/gpu/drm/scheduler/tests/tests_basic.c | 42 ++++++++++++
-> =C2=A0include/drm/gpu_scheduler.h=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=
-=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 | 18 =
-+++++
-> =C2=A011 files changed, 167 insertions(+), 95 deletions(-)
->=20
+On Sun, Jul 6, 2025 at 3:46=E2=80=AFPM Miguel Ojeda
+<miguel.ojeda.sandonis@gmail.com> wrote:
+>
+> Added the possibility of catching this automatically in e.g. `rustdoc` to=
+:
+>
+>     https://github.com/Rust-for-Linux/linux/issues/350
 
+Filled: https://github.com/rust-lang/rust-clippy/issues/15245 so that
+they have it upstream.
 
-Pushed to drm-misc-next, with an RB from Tvrtko I had forgot, and
-without the misplaced panfrost patch.
-
-Thanks guys. Good to see that we finally solved this issue. Had been
-around for quite some time. We celebrate that with a beer or sth at XDC
-:)
-
-
-P.
-
+Cheers,
+Miguel
