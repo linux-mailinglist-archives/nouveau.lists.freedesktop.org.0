@@ -2,37 +2,60 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id 6B2A5CBAE64
-	for <lists+nouveau@lfdr.de>; Sat, 13 Dec 2025 13:46:05 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 37856CBAA33
+	for <lists+nouveau@lfdr.de>; Sat, 13 Dec 2025 13:41:55 +0100 (CET)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id D9B5510EC16;
-	Sat, 13 Dec 2025 12:42:14 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id E054F10EA5B;
+	Sat, 13 Dec 2025 12:40:59 +0000 (UTC)
+Authentication-Results: gabe.freedesktop.org;
+	dkim=pass (2048-bit key; secure) header.d=mailbox.org header.i=@mailbox.org header.b="q3GiOvBz";
+	dkim-atps=neutral
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from audible.transient.net (audible.transient.net [24.143.126.66])
- by gabe.freedesktop.org (Postfix) with SMTP id 2423910E0F2
- for <nouveau@lists.freedesktop.org>; Thu, 10 Jul 2025 00:16:05 +0000 (UTC)
-Received: (qmail 4019 invoked by uid 1000); 9 Jul 2025 12:04:22 -0000
-Date: Wed, 9 Jul 2025 12:04:22 +0000
-From: Jamie Heilman <jamie@audible.transient.net>
-To: Ben Skeggs <bskeggs@nvidia.com>
-Cc: Rui Salvaterra <rsalvaterra@gmail.com>, airlied@gmail.com,
- nouveau@lists.freedesktop.org, dri-devel@lists.freedesktop.org,
- linux-kernel@vger.kernel.org
-Subject: Re: [REGRESSION] NVIDIA ION graphics broken with Linux 6.16-rc*
-Message-ID: <aG5axlstlhnUYks2@audible.transient.net>
-Mail-Followup-To: Ben Skeggs <bskeggs@nvidia.com>,
- Rui Salvaterra <rsalvaterra@gmail.com>, airlied@gmail.com,
- nouveau@lists.freedesktop.org, dri-devel@lists.freedesktop.org,
- linux-kernel@vger.kernel.org
-References: <CALjTZvZgH0N43rMTcZiDVSX93PFL680hsYPwtp8=Ja1OWPvZ1A@mail.gmail.com>
- <aG2mzB58k3tkxvK-@audible.transient.net>
- <25642e5b-25ee-49b2-b08d-4c64fa2e505a@nvidia.com>
+Received: from mout-p-201.mailbox.org (mout-p-201.mailbox.org [80.241.56.171])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id AF68810E8C8;
+ Thu, 10 Jul 2025 12:58:14 +0000 (UTC)
+Received: from smtp102.mailbox.org (smtp102.mailbox.org [10.196.197.102])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
+ (No client certificate requested)
+ by mout-p-201.mailbox.org (Postfix) with ESMTPS id 4bdFJM2n5Sz9sx4;
+ Thu, 10 Jul 2025 14:58:11 +0200 (CEST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
+ s=mail20150812; 
+ t=1752152291; h=from:from:reply-to:reply-to:subject:subject:date:date:
+ message-id:message-id:to:to:cc:cc:mime-version:mime-version:
+ content-type:content-type:
+ content-transfer-encoding:content-transfer-encoding:
+ in-reply-to:in-reply-to:references:references;
+ bh=XUdTgSu/zHvFvHHBAYxFI7WNZhlx1N0C5aZ+BZgA/hg=;
+ b=q3GiOvBzyHujBbSJyAfbiklhFM/WL6aD01vbIbLLVfn3xsMoDfFurOVoZidipbO6tdQSCm
+ +jp+NwxFcqSX0dn491UeCiC85OkRiX6DRkUGbRyykenUQnIOAm0ZXo3fOR+ll//rzXmAbh
+ 7uZMY6GrfjZxxJ+E8dEhNHds3xsFBvNz1okgpTa9fVoO0TbEpLL6miqPva47X12iZiQ2d2
+ iH8wNIwu8RjH9obhhxlvnS8hZNHfJTweC3qsF01o52IugnS9sKwBK0Z7iTYc92c3dCHQ8/
+ t4IE0FtScpgYTbTcHgYBuJ8Pj9tAxDWccbazxeLl/GDe3PrX1hOpy5z8gQINEA==
+Message-ID: <bec98a82435d7f448dff219a2238b15b6b3eb754.camel@mailbox.org>
+Subject: Re: [PATCH v4 1/8] drm/panfrost: Fix scheduler workqueue bug
+From: Philipp Stanner <phasta@mailbox.org>
+To: Philipp Stanner <phasta@kernel.org>, Danilo Krummrich <dakr@kernel.org>,
+ David Airlie <airlied@gmail.com>, Simona Vetter <simona@ffwll.ch>, Matthew
+ Brost <matthew.brost@intel.com>,  Christian =?ISO-8859-1?Q?K=F6nig?=
+ <ckoenig.leichtzumerken@gmail.com>, Maarten Lankhorst
+ <maarten.lankhorst@linux.intel.com>, Thomas Zimmermann
+ <tzimmermann@suse.de>,  Tvrtko Ursulin <tvrtko.ursulin@igalia.com>,
+ Pierre-Eric Pelloux-Prayer <pierre-eric.pelloux-prayer@amd.com>
+Cc: dri-devel@lists.freedesktop.org, nouveau@lists.freedesktop.org, 
+ linux-kernel@vger.kernel.org, linux-media@vger.kernel.org, 
+ stable@vger.kernel.org
+Date: Thu, 10 Jul 2025 14:58:05 +0200
+In-Reply-To: <20250710125412.128476-3-phasta@kernel.org>
+References: <20250710125412.128476-2-phasta@kernel.org>
+ <20250710125412.128476-3-phasta@kernel.org>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 MIME-Version: 1.0
-Content-Type: text/plain; charset=iso-8859-1
-Content-Disposition: inline
-Content-Transfer-Encoding: 8bit
-In-Reply-To: <25642e5b-25ee-49b2-b08d-4c64fa2e505a@nvidia.com>
+X-MBO-RS-ID: 836fbb2b50af0e52d75
+X-MBO-RS-META: q7ni9ki5c4orx1jns8zppxa9ufa6zses
 X-Mailman-Approved-At: Sat, 13 Dec 2025 12:40:51 +0000
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
@@ -45,64 +68,64 @@ List-Post: <mailto:nouveau@lists.freedesktop.org>
 List-Help: <mailto:nouveau-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
  <mailto:nouveau-request@lists.freedesktop.org?subject=subscribe>
+Reply-To: phasta@kernel.org
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-Ben Skeggs wrote:
-> On 7/9/25 09:16, Jamie Heilman wrote:
-> > Rui Salvaterra wrote:
-> > > Unfortunately, bisecting is not feasible for me.
-> > That looks pretty similar to the problem I posted
-> > (https://lore.kernel.org/lkml/aElJIo9_Se6tAR1a@audible.transient.net/)
-> > that I bisected to 862450a85b85 ("drm/nouveau/gf100-: track chan
-> > progress with non-WFI semaphore release").  It still reverts cleanly
-> > as of v6.16-rc5 so you might want to give that a shot.
-> 
-> Hi,
-> 
-> Thank you for bisecting!  Are you able to try the attached patch?
-
-Yeah that got graphics visible again for me, though there's something
-else horrible going on now (still? I'm not sure if its new behavior or
-not) and it blows out my dmesg ringbuffer with errors or warnings of
-some kind, that I was just about to start trying to debug that when
-some power event seems to have fried my PSU.  Combined with a bunch of
-filesystem corruption, its going to be a while a before I can get that
-system back up to that spot where I can troubleshoot it again, the
-root volume is fried and I'm going to have rebuild.  Anyway, I think
-whatever it is was probably an entirely separate issue.
-
-> From 6987c1c254285305fdc20270e21709a313632e0d Mon Sep 17 00:00:00 2001
-> From: Ben Skeggs <bskeggs@nvidia.com>
-> Date: Wed, 9 Jul 2025 10:54:15 +1000
-> Subject: [PATCH] drm/nouveau/nvif: fix null ptr deref on pre-fermi boards
-> 
-> Check that gpfifo.post() exists before trying to call it.
-> 
-> Fixes: 862450a85b85 ("drm/nouveau/gf100-: track chan progress with non-WFI semaphore release")
-> Signed-off-by: Ben Skeggs <bskeggs@nvidia.com>
+On Thu, 2025-07-10 at 14:54 +0200, Philipp Stanner wrote:
+> When the GPU scheduler was ported to using a struct for its
+> initialization parameters, it was overlooked that panfrost creates a
+> distinct workqueue for timeout handling.
+>=20
+> The pointer to this new workqueue is not initialized to the struct,
+> resulting in NULL being passed to the scheduler, which then uses the
+> system_wq for timeout handling.
+>=20
+> Set the correct workqueue to the init args struct.
+>=20
+> Cc: stable@vger.kernel.org=C2=A0# 6.15+
+> Fixes: 796a9f55a8d1 ("drm/sched: Use struct for drm_sched_init()
+> params")
+> Reported-by: Tvrtko Ursulin <tvrtko.ursulin@igalia.com>
+> Closes:
+> https://lore.kernel.org/dri-devel/b5d0921c-7cbf-4d55-aa47-c35cd7861c02@ig=
+alia.com/
+> Signed-off-by: Philipp Stanner <phasta@kernel.org>
 > ---
->  drivers/gpu/drm/nouveau/nvif/chan.c | 3 +++
->  1 file changed, 3 insertions(+)
-> 
-> diff --git a/drivers/gpu/drm/nouveau/nvif/chan.c b/drivers/gpu/drm/nouveau/nvif/chan.c
-> index baa10227d51a..80c01017d642 100644
-> --- a/drivers/gpu/drm/nouveau/nvif/chan.c
-> +++ b/drivers/gpu/drm/nouveau/nvif/chan.c
-> @@ -39,6 +39,9 @@ nvif_chan_gpfifo_post(struct nvif_chan *chan)
->  	const u32 pbptr = (chan->push.cur - map) + chan->func->gpfifo.post_size;
->  	const u32 gpptr = (chan->gpfifo.cur + 1) & chan->gpfifo.max;
->  
-> +	if (!chan->func->gpfifo.post)
-> +		return 0;
-> +
->  	return chan->func->gpfifo.post(chan, gpptr, pbptr);
->  }
->  
-> -- 
-> 2.49.0
-> 
+
+aaaarrrgh, how did that one get here!
+
+Ignore that. Will not be merged through this series.
 
 
--- 
-Jamie Heilman                     http://audible.transient.net/~jamie/
+P.
+
+> =C2=A0drivers/gpu/drm/panfrost/panfrost_job.c | 2 +-
+> =C2=A01 file changed, 1 insertion(+), 1 deletion(-)
+>=20
+> diff --git a/drivers/gpu/drm/panfrost/panfrost_job.c
+> b/drivers/gpu/drm/panfrost/panfrost_job.c
+> index 5657106c2f7d..15e2d505550f 100644
+> --- a/drivers/gpu/drm/panfrost/panfrost_job.c
+> +++ b/drivers/gpu/drm/panfrost/panfrost_job.c
+> @@ -841,7 +841,6 @@ int panfrost_job_init(struct panfrost_device
+> *pfdev)
+> =C2=A0		.num_rqs =3D DRM_SCHED_PRIORITY_COUNT,
+> =C2=A0		.credit_limit =3D 2,
+> =C2=A0		.timeout =3D msecs_to_jiffies(JOB_TIMEOUT_MS),
+> -		.timeout_wq =3D pfdev->reset.wq,
+> =C2=A0		.name =3D "pan_js",
+> =C2=A0		.dev =3D pfdev->dev,
+> =C2=A0	};
+> @@ -879,6 +878,7 @@ int panfrost_job_init(struct panfrost_device
+> *pfdev)
+> =C2=A0	pfdev->reset.wq =3D alloc_ordered_workqueue("panfrost-reset",
+> 0);
+> =C2=A0	if (!pfdev->reset.wq)
+> =C2=A0		return -ENOMEM;
+> +	args.timeout_wq =3D pfdev->reset.wq;
+> =C2=A0
+> =C2=A0	for (j =3D 0; j < NUM_JOB_SLOTS; j++) {
+> =C2=A0		js->queue[j].fence_context =3D
+> dma_fence_context_alloc(1);
+
