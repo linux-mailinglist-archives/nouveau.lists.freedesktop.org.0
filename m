@@ -2,87 +2,48 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id C845FB00330
-	for <lists+nouveau@lfdr.de>; Thu, 10 Jul 2025 15:21:01 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 11E6FB0147D
+	for <lists+nouveau@lfdr.de>; Fri, 11 Jul 2025 09:25:09 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id A5B4810E8DC;
-	Thu, 10 Jul 2025 13:20:57 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id AA70410E9B8;
+	Fri, 11 Jul 2025 07:25:07 +0000 (UTC)
 Authentication-Results: gabe.freedesktop.org;
-	dkim=pass (2048-bit key; unprotected) header.d=google.com header.i=@google.com header.b="MyfFEi35";
+	dkim=pass (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="pgZ8WbA7";
 	dkim-atps=neutral
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from mail-wr1-f42.google.com (mail-wr1-f42.google.com
- [209.85.221.42])
- by gabe.freedesktop.org (Postfix) with ESMTPS id DF9E110E8D8
- for <nouveau@lists.freedesktop.org>; Thu, 10 Jul 2025 13:20:55 +0000 (UTC)
-Received: by mail-wr1-f42.google.com with SMTP id
- ffacd0b85a97d-3a6e8b1fa37so883115f8f.2
- for <nouveau@lists.freedesktop.org>; Thu, 10 Jul 2025 06:20:55 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=google.com; s=20230601; t=1752153654; x=1752758454;
- darn=lists.freedesktop.org; 
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=/d3JWJXTPbcoiacIjfsqcFG5gW+YCew8k+ctgwhFlQI=;
- b=MyfFEi35Kr+iTzjME+6300aKpTDri+yX3mWlIXak2qCzVTs3JAOlRMCA80J3EQepuu
- uy8Gcs1mDuhOngjSMj0kmKK+lGDEfLs0eYgzap3ynWvN/F3kCY4sIHbnJ6FqOR5Dq9lo
- mCgu506a6Qw/qBUjgkmoWhR9qAaR8cGA81xF9Lq0OW6Eo5HUNXtCJNa6J6pTf88tpJg7
- BEhzno2P7lE7GiRub2wEVLoQ8lTRFhHPv11gGONkb7FkVHdq+FrRL9s1ONzhvlHEV5GK
- ot7FHCAYrmIR4XEdsMwVjS7iqyRPZrsahVXnQm3Wnh5jkFVcE/CX4eRYvGj0n0/2MwFS
- N9zA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1752153654; x=1752758454;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=/d3JWJXTPbcoiacIjfsqcFG5gW+YCew8k+ctgwhFlQI=;
- b=gi1mo37avuge0fIdy4iZsRewDhg6qWZykmNpKlu90e1ei58kT94ZYguviONAyS0a8R
- eKMgEnkwqhzkpD6gQ39TmBQeNgCu9k406uyWJnNy00YrVLxv744L1gckAGCzoKrGr0jm
- QdPEA8cJepyR7TACP1s29AHnF8DtMeJrIWcLB8AePvO6stYcxHoQnI5n5u4lJ6Q+bYoz
- ecsGIjbou0/UxMHJaC6cb+rdaFneFiBo38lQd76gi89H2yn5SFFBOlzcLOFBhIzx2Nk0
- P2J2InpBExvq7rMbCwUXf+RQuGONuyRthTzdF8YY3kwqooKYB06rYNfvY3EVewNgwo5T
- D5vg==
-X-Forwarded-Encrypted: i=1;
- AJvYcCVsx/H2vLysbbr9Q2wq6Ts8knpGixl2xa283Vr+iWFr3FCrOJXuR1SP2fS79Xx2/L037S9kGNfw@lists.freedesktop.org
-X-Gm-Message-State: AOJu0YwGv8lFT3ZMLt0gdrCOyaEG5Xup1Kt3axKAI9/YK4BlMl4u+j/S
- K0oSOFgpchPaD0BnJYT2Qw86aO9ET1az9Sccym9IdiaozhMQzCKdpACcH7+M3Zc/+05KVEYqyTB
- cR2BBEapcn9qjygbOHO9iwINmSxWzbHvN9o8bfyPG
-X-Gm-Gg: ASbGnctZJjPr7HcIfYy4/uKmSUEKYRFfjVqHWxM808i2aZzfrotcrBSGodSm6RKIGSH
- kPyYPH+Ads0VOgjqiyh+mFmOKz5me91UJyq1sUCJ5ur+Pb3vEBhg7yMsp7FW+E0JuHHUfo7sJHl
- LlN7o9z2iumUNXnnCDPvRsH0W01Lbc/0kReHd0bzrcVXfStvhwDATrmNPtRMcCgFs+r0AiRl5QN
- w==
-X-Google-Smtp-Source: AGHT+IFujM42vH3V09euhJ0T7/vZlUGl5l2Mqd+XJHCpPSNb1kApqRjCh9Jtd3SgLVxJgkK09tgAyiBl1EsMOOSUJIA=
-X-Received: by 2002:a05:6000:2806:b0:3b2:e07f:757 with SMTP id
- ffacd0b85a97d-3b5e788d3d0mr2685032f8f.1.1752153654256; Thu, 10 Jul 2025
- 06:20:54 -0700 (PDT)
+Received: from dfw.source.kernel.org (dfw.source.kernel.org [139.178.84.217])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 82F6510E9B7;
+ Fri, 11 Jul 2025 07:25:06 +0000 (UTC)
+Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
+ by dfw.source.kernel.org (Postfix) with ESMTP id 09A785C6E21;
+ Fri, 11 Jul 2025 07:25:06 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 040BFC4CEED;
+ Fri, 11 Jul 2025 07:25:02 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+ s=k20201202; t=1752218705;
+ bh=qPMlPEUHasRhfrBOHDDaZo3TRKfCZ37IbFpQ9rOiGe4=;
+ h=From:To:Cc:Subject:Date:From;
+ b=pgZ8WbA7/Bq9U0ukiV55otfOvwZgPBBioQ/G4y/je8S7gI/QTQMyn12CuONYrXHFb
+ dhNhNAQGZnTAb95KRgD3qLrM01lSP3tDKZ0e+7ibD8yFUS37R6JLFrKK64HmLcRMS4
+ w3e7EwgWe6///Ileli0cZLLKqmbtSoZ+/ZuGMlc20GjT8wtLZqDkY2HdT1SU+eijLT
+ JMYjODCPXuM0rtz276g+sklH2QmgH80GYswN/K2wJSXiSHId0lciNHN1463ICdP3zM
+ DvekFp1Y/l36hLkVPMEQRa92xGrbLwapoPXHLCs05kgSToleA/oQjEWJo3fw+tPpUO
+ YydSDXgpha74g==
+From: Arnd Bergmann <arnd@kernel.org>
+To: Lyude Paul <lyude@redhat.com>, Danilo Krummrich <dakr@kernel.org>,
+ David Airlie <airlied@gmail.com>, Simona Vetter <simona@ffwll.ch>,
+ Ben Skeggs <bskeggs@redhat.com>
+Cc: Arnd Bergmann <arnd@arndb.de>, Ben Skeggs <bskeggs@nvidia.com>,
+ Timur Tabi <ttabi@nvidia.com>, Dave Airlie <airlied@redhat.com>,
+ Thomas Zimmermann <tzimmermann@suse.de>, dri-devel@lists.freedesktop.org,
+ nouveau@lists.freedesktop.org, linux-kernel@vger.kernel.org
+Subject: [PATCH] drm/nouveau: check ioctl command codes better
+Date: Fri, 11 Jul 2025 09:24:53 +0200
+Message-Id: <20250711072458.2665325-1-arnd@kernel.org>
+X-Mailer: git-send-email 2.39.5
 MIME-Version: 1.0
-References: <20250704-core-cstr-prepare-v1-0-a91524037783@gmail.com>
-In-Reply-To: <20250704-core-cstr-prepare-v1-0-a91524037783@gmail.com>
-From: Alice Ryhl <aliceryhl@google.com>
-Date: Thu, 10 Jul 2025 15:20:41 +0200
-X-Gm-Features: Ac12FXzitYxvRbQjbTDWexl7FT9vfcJPNeta0DSIvcawfTODepd7_rNw8p5wCA4
-Message-ID: <CAH5fLggU_DsJ4-gj_xBeGgG8mS4CSrypNsmOqu6c677Lyyvqxw@mail.gmail.com>
-Subject: Re: [PATCH 0/6] Replace `kernel::str::CStr` with `core::ffi::CStr`
- (cycle 1)
-To: Tamir Duberstein <tamird@gmail.com>
-Cc: "Rafael J. Wysocki" <rafael@kernel.org>,
- Viresh Kumar <viresh.kumar@linaro.org>, 
- Danilo Krummrich <dakr@kernel.org>, David Airlie <airlied@gmail.com>,
- Simona Vetter <simona@ffwll.ch>, 
- Nishanth Menon <nm@ti.com>, Stephen Boyd <sboyd@kernel.org>,
- Miguel Ojeda <ojeda@kernel.org>, 
- Alex Gaynor <alex.gaynor@gmail.com>, Boqun Feng <boqun.feng@gmail.com>, 
- Gary Guo <gary@garyguo.net>,
- =?UTF-8?Q?Bj=C3=B6rn_Roy_Baron?= <bjorn3_gh@protonmail.com>, 
- Benno Lossin <lossin@kernel.org>, Andreas Hindborg <a.hindborg@kernel.org>, 
- Trevor Gross <tmgross@umich.edu>, linux-pm@vger.kernel.org,
- linux-kernel@vger.kernel.org, 
- nouveau@lists.freedesktop.org, dri-devel@lists.freedesktop.org, 
- rust-for-linux@vger.kernel.org
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+Content-Transfer-Encoding: 8bit
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -97,55 +58,52 @@ List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-On Fri, Jul 4, 2025 at 10:16=E2=80=AFPM Tamir Duberstein <tamird@gmail.com>=
- wrote:
->
-> This series makes preparations for the replacement of our custom `CStr`
-> type with the analogous type available in `core`.
->
-> As this is a large migration that touches many subsystems, it will take
-> place in several cycles, each of which may see multiple series:
-> 1. introduces facades in the kernel crate that downstream
->    code can reference. [this series]
-> 2. migrate downstream code to kernel crate facades. (N series, divided
->    by subsystem).
-> 3. replace kernel crate facades to allow `Display`ing foreign types
->    (such as `core::ffi::CStr`). Replace `CStr` with `core::ffi::CStr`.
-> 4. migrate uses of `c_str!` to C-String literals. Replace references to
->    `kernel::str::CStr` with `kernel::ffi::CStr`. (N series, divided by
->    subsystem).
-> 5. rename `c_str!` to discourage use. Remove `CStr` reexport from
->    `kernel/str.rs`.
->
-> Signed-off-by: Tamir Duberstein <tamird@gmail.com>
-> ---
-> Tamir Duberstein (6):
->       rust: kernel: remove `fmt!`, fix clippy::uninlined-format-args
->       rust: kernel: add `fmt` module
->       rust: use `kernel::{fmt,prelude::fmt!}`
->       rust: str: remove unnecessary qualification
->       rust: add `CStr` methods matching `core::ffi::CStr`
->       rust: use `core::ffi::CStr` method names
->
->  drivers/cpufreq/rcpufreq_dt.rs    |  3 +-
->  drivers/gpu/nova-core/firmware.rs |  5 +-
->  rust/kernel/error.rs              |  8 ++--
->  rust/kernel/fmt.rs                |  7 +++
->  rust/kernel/lib.rs                |  1 +
->  rust/kernel/opp.rs                |  2 +-
->  rust/kernel/prelude.rs            |  2 +-
->  rust/kernel/print.rs              |  6 +--
->  rust/kernel/str.rs                | 97 ++++++++++++++++++++++++---------=
-------
->  samples/rust/rust_print_main.rs   |  2 +-
->  10 files changed, 83 insertions(+), 50 deletions(-)
-> ---
-> base-commit: 769e324b66b0d92d04f315d0c45a0f72737c7494
-> change-id: 20250704-core-cstr-prepare-9b9e6a7bd57e
->
-> Best regards,
-> --
-> Tamir Duberstein <tamird@gmail.com>
->
+From: Arnd Bergmann <arnd@arndb.de>
 
-Reviewed-by: Alice Ryhl <aliceryhl@google.com>
+nouveau_drm_ioctl() only checks the _IOC_NR() bits in the DRM_NOUVEAU_NVIF
+command, but ignores the type and direction bits, so any command with
+'7' in the low eight bits gets passed into nouveau_abi16_ioctl() instead
+of drm_ioctl().
+
+Check for all the bits except the size that is handled inside of the handler.
+
+Fixes: 27111a23d01c ("drm/nouveau: expose the full object/event interfaces to userspace")
+Signed-off-by: Arnd Bergmann <arnd@arndb.de>
+---
+ drivers/gpu/drm/nouveau/nouveau_drm.c | 11 +++++------
+ 1 file changed, 5 insertions(+), 6 deletions(-)
+
+diff --git a/drivers/gpu/drm/nouveau/nouveau_drm.c b/drivers/gpu/drm/nouveau/nouveau_drm.c
+index 1527b801f013..506eeb44f0d4 100644
+--- a/drivers/gpu/drm/nouveau/nouveau_drm.c
++++ b/drivers/gpu/drm/nouveau/nouveau_drm.c
+@@ -1284,6 +1284,9 @@ nouveau_ioctls[] = {
+ 	DRM_IOCTL_DEF_DRV(NOUVEAU_EXEC, nouveau_exec_ioctl_exec, DRM_RENDER_ALLOW),
+ };
+ 
++#define DRM_IOCTL_NOUVEAU_NVIV _IOC(_IOC_READ|_IOC_WRITE, DRM_IOCTL_BASE, \
++				    DRM_COMMAND_BASE + DRM_NOUVEAU_NVIF, 0)
++
+ long
+ nouveau_drm_ioctl(struct file *file, unsigned int cmd, unsigned long arg)
+ {
+@@ -1297,14 +1300,10 @@ nouveau_drm_ioctl(struct file *file, unsigned int cmd, unsigned long arg)
+ 		return ret;
+ 	}
+ 
+-	switch (_IOC_NR(cmd) - DRM_COMMAND_BASE) {
+-	case DRM_NOUVEAU_NVIF:
++	if ((cmd & ~IOCSIZE_MASK) == DRM_IOCTL_NOUVEAU_NVIV)
+ 		ret = nouveau_abi16_ioctl(filp, (void __user *)arg, _IOC_SIZE(cmd));
+-		break;
+-	default:
++	else
+ 		ret = drm_ioctl(file, cmd, arg);
+-		break;
+-	}
+ 
+ 	pm_runtime_mark_last_busy(dev->dev);
+ 	pm_runtime_put_autosuspend(dev->dev);
+-- 
+2.39.5
+
