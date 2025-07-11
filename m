@@ -2,50 +2,47 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id 70156B022D9
-	for <lists+nouveau@lfdr.de>; Fri, 11 Jul 2025 19:42:05 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id D643EB0234C
+	for <lists+nouveau@lfdr.de>; Fri, 11 Jul 2025 20:03:48 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 817C010E3AE;
-	Fri, 11 Jul 2025 17:42:03 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 731C110E2D2;
+	Fri, 11 Jul 2025 18:03:47 +0000 (UTC)
 Authentication-Results: gabe.freedesktop.org;
-	dkim=pass (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="Xo4b895n";
+	dkim=pass (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="dSLqWkxc";
 	dkim-atps=neutral
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from nyc.source.kernel.org (nyc.source.kernel.org [147.75.193.91])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 888E110E3AD;
- Fri, 11 Jul 2025 17:42:01 +0000 (UTC)
+Received: from tor.source.kernel.org (tor.source.kernel.org [172.105.4.254])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 35C8310E2D2
+ for <nouveau@lists.freedesktop.org>; Fri, 11 Jul 2025 18:03:47 +0000 (UTC)
 Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by nyc.source.kernel.org (Postfix) with ESMTP id CDF24A54F91;
- Fri, 11 Jul 2025 17:42:00 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 1473CC4CEED;
- Fri, 11 Jul 2025 17:41:57 +0000 (UTC)
+ by tor.source.kernel.org (Postfix) with ESMTP id 664C661438;
+ Fri, 11 Jul 2025 18:03:46 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 6D517C4CEED;
+ Fri, 11 Jul 2025 18:03:45 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1752255720;
- bh=sb4Xf0ULCx2Ti9sAnwhk9/aOAFZICH+JDYlm80FvR6c=;
- h=Date:Subject:Cc:To:From:References:In-Reply-To:From;
- b=Xo4b895nuT7lxuwx0uddkCG8D0N+iV8pxQbVl+/ov6kLwHP5Ih0PT1nfPFsF3ltxa
- vN7mkTbxD/jnWW57qLt/8OwM23tmcRlKiO5XlQ/rVsW7vvNIwd2GXY9/UUH5Hpf3bN
- vj6OhS9HgyJ+1eh9dWSOJuJOSP+VygwUt2V1lIZSpObV9MJlow5RLmVi1q2GVW/vsK
- oIz32xhPk7iG64PmgJqDStWdpsqm7hTR+ahk5NFz5uMX5kgsSpxLQTC+XQLp+ecNlL
- yKwf/QQU1J2UG9ZaB7nz+KDuAOSmYXXdUVyxaIIMtGnCVFrzyme+SpnSzJw3FEtNyj
- /IK2muToGegtg==
+ s=k20201202; t=1752257026;
+ bh=ZkrKoyAVIz40/7Y5/MncnPuno3pbTAV1np82fq7nNio=;
+ h=Date:From:Subject:Cc:To:References:In-Reply-To:From;
+ b=dSLqWkxc/P8oL/GXGSBsfl6gBXXt0lfc9U1UaRIuY4MoAQ7TbTv7PTauzvGOaAJME
+ 2J91tUWwc3dxJTEGbNKgK+wzaepneLUDFvzQ/UkLHP1OFT3KGyV8tNQ8HMap6aKjJN
+ RZpGdumwuDbMk78+oZuiSXWaaZCkhxXOl56Rpb3db5Ys8mc2fqUCwwNPNy/qFg0Ttm
+ RayyMXdYZfDHo9hXT8iklOt7CmNE96/9OZ5FVCn2TZK1MDmdvCkPFgoLVYcnuNxXrG
+ HAiZC5CloJIwG1asvYd3AVeUMi7jWlapj9whIOj6/eU6ZnFU6UtaMv3pCGp3h5Pw2P
+ GUSV6ft4SOzbg==
 Mime-Version: 1.0
 Content-Transfer-Encoding: quoted-printable
 Content-Type: text/plain; charset=UTF-8
-Date: Fri, 11 Jul 2025 19:41:56 +0200
-Message-Id: <DB9ET7AG2N2D.YCVQRF9398V2@kernel.org>
-Subject: Re: [PATCH] drm/nouveau: check ioctl command codes better
-Cc: "Lyude Paul" <lyude@redhat.com>, "David Airlie" <airlied@gmail.com>,
- "Simona Vetter" <simona@ffwll.ch>, "Ben Skeggs" <bskeggs@redhat.com>, "Arnd
- Bergmann" <arnd@arndb.de>, "Ben Skeggs" <bskeggs@nvidia.com>, "Timur Tabi"
- <ttabi@nvidia.com>, "Dave Airlie" <airlied@redhat.com>, "Thomas Zimmermann"
- <tzimmermann@suse.de>, <dri-devel@lists.freedesktop.org>,
- <nouveau@lists.freedesktop.org>, <linux-kernel@vger.kernel.org>
-To: "Arnd Bergmann" <arnd@kernel.org>
+Date: Fri, 11 Jul 2025 20:03:43 +0200
+Message-Id: <DB9F9VX833TY.1UG2ZE2K2ZGNQ@kernel.org>
 From: "Danilo Krummrich" <dakr@kernel.org>
-References: <20250711072458.2665325-1-arnd@kernel.org>
-In-Reply-To: <20250711072458.2665325-1-arnd@kernel.org>
+Subject: Re: [PATCH] gpu: nova-core: fix bounds check In
+ PmuLookupTableEntry::new, data is sliced from 2..6, but the bounds check
+ data.len() < 5 does not satisfy those bounds.
+Cc: <nouveau@lists.freedesktop.org>, <acourbot@nvidia.com>
+To: "Quaternions" <krakow20@gmail.com>
+References: <20250711093015.28785-1-krakow20@gmail.com>
+In-Reply-To: <20250711093015.28785-1-krakow20@gmail.com>
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -60,63 +57,30 @@ List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-On Fri Jul 11, 2025 at 9:24 AM CEST, Arnd Bergmann wrote:
-> From: Arnd Bergmann <arnd@arndb.de>
->
-> nouveau_drm_ioctl() only checks the _IOC_NR() bits in the DRM_NOUVEAU_NVI=
-F
-> command, but ignores the type and direction bits, so any command with
-> '7' in the low eight bits gets passed into nouveau_abi16_ioctl() instead
-> of drm_ioctl().
->
-> Check for all the bits except the size that is handled inside of the hand=
-ler.
->
-> Fixes: 27111a23d01c ("drm/nouveau: expose the full object/event interface=
-s to userspace")
-> Signed-off-by: Arnd Bergmann <arnd@arndb.de>
-> ---
->  drivers/gpu/drm/nouveau/nouveau_drm.c | 11 +++++------
->  1 file changed, 5 insertions(+), 6 deletions(-)
->
-> diff --git a/drivers/gpu/drm/nouveau/nouveau_drm.c b/drivers/gpu/drm/nouv=
-eau/nouveau_drm.c
-> index 1527b801f013..506eeb44f0d4 100644
-> --- a/drivers/gpu/drm/nouveau/nouveau_drm.c
-> +++ b/drivers/gpu/drm/nouveau/nouveau_drm.c
-> @@ -1284,6 +1284,9 @@ nouveau_ioctls[] =3D {
->  	DRM_IOCTL_DEF_DRV(NOUVEAU_EXEC, nouveau_exec_ioctl_exec, DRM_RENDER_ALL=
-OW),
->  };
-> =20
-> +#define DRM_IOCTL_NOUVEAU_NVIV _IOC(_IOC_READ|_IOC_WRITE, DRM_IOCTL_BASE=
-, \
-> +				    DRM_COMMAND_BASE + DRM_NOUVEAU_NVIF, 0)
+Hi Rhys,
 
-Is there any intention behind NVIV vs NVIF? Indicator that size is not
-considered?
+On Fri Jul 11, 2025 at 11:30 AM CEST, Quaternions wrote:
+> Signed-off-by: Rhys Lloyd <krakow20@gmail.com>
 
-> +
->  long
->  nouveau_drm_ioctl(struct file *file, unsigned int cmd, unsigned long arg=
-)
->  {
-> @@ -1297,14 +1300,10 @@ nouveau_drm_ioctl(struct file *file, unsigned int=
- cmd, unsigned long arg)
->  		return ret;
->  	}
-> =20
-> -	switch (_IOC_NR(cmd) - DRM_COMMAND_BASE) {
-> -	case DRM_NOUVEAU_NVIF:
-> +	if ((cmd & ~IOCSIZE_MASK) =3D=3D DRM_IOCTL_NOUVEAU_NVIV)
->  		ret =3D nouveau_abi16_ioctl(filp, (void __user *)arg, _IOC_SIZE(cmd));
-> -		break;
-> -	default:
-> +	else
->  		ret =3D drm_ioctl(file, cmd, arg);
-> -		break;
-> -	}
-> =20
->  	pm_runtime_mark_last_busy(dev->dev);
->  	pm_runtime_put_autosuspend(dev->dev);
+Thanks for your contribution.
 
+When sending patches, please make sure to follow the kernel's patch submiss=
+ion
+guidelines [1].
+
+In particular, please stick to short and meaningful commit subject, followe=
+d by
+a commit description, even if the patch is simple and obvious.
+
+Also make sure to run ./scripts/checkpatch.pl and ./scripts/get_maintainer.=
+pl to
+get your patches checked and find the correct list of people to send them t=
+o.
+
+Finally, please also consider the Rust submit checklist [2].
+
+Thanks,
+Danilo
+
+[1] https://docs.kernel.org/process/submitting-patches.html
+[2] https://rust-for-linux.com/contributing#submit-checklist-addendum
