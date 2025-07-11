@@ -2,83 +2,76 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id 73182CBAC6A
-	for <lists+nouveau@lfdr.de>; Sat, 13 Dec 2025 13:43:59 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 68CB3CBAB06
+	for <lists+nouveau@lfdr.de>; Sat, 13 Dec 2025 13:42:37 +0100 (CET)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 4ACFE10EB60;
-	Sat, 13 Dec 2025 12:41:08 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 5B42210EAAD;
+	Sat, 13 Dec 2025 12:41:02 +0000 (UTC)
 Authentication-Results: gabe.freedesktop.org;
-	dkim=permerror (0-bit key) header.d=gmail.com header.i=@gmail.com header.b="FbTY2aO2";
+	dkim=permerror (0-bit key) header.d=gmail.com header.i=@gmail.com header.b="bjFUHRrP";
 	dkim-atps=neutral
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from mail-pf1-f175.google.com (mail-pf1-f175.google.com
- [209.85.210.175])
- by gabe.freedesktop.org (Postfix) with ESMTPS id C0A7110E942;
- Thu, 10 Jul 2025 19:06:39 +0000 (UTC)
-Received: by mail-pf1-f175.google.com with SMTP id
- d2e1a72fcca58-748fadc0bc5so228130b3a.0; 
- Thu, 10 Jul 2025 12:06:39 -0700 (PDT)
+Received: from mail-pf1-f179.google.com (mail-pf1-f179.google.com
+ [209.85.210.179])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id AD2C110E9DB
+ for <nouveau@lists.freedesktop.org>; Fri, 11 Jul 2025 09:33:15 +0000 (UTC)
+Received: by mail-pf1-f179.google.com with SMTP id
+ d2e1a72fcca58-748d982e97cso1678553b3a.1
+ for <nouveau@lists.freedesktop.org>; Fri, 11 Jul 2025 02:33:15 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1752174399; x=1752779199; darn=lists.freedesktop.org;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=68qpC4Y4uSheoQEbmMxx5RKOE+wIAn+KKwc+9lT74pM=;
- b=FbTY2aO2vhNiTQb09I97V0oZF/Aq0TPs7bB02BP+bmnbbKzLsaY6/46gHsx/qOVdYo
- huszeuDdnnIW16K4C7vPBn6BqO+b+lAG3ifPrFUF8Niw36Xh2Dx4OapkksFSlPweS8YL
- TeM8CqgFk/JG9Y9xGQlsoKu0YYwGVaxNOvNojemL6a9y1TDU9e5vp8493u8ClWetKKnC
- 2ukSKqoGH+FLkevh6RV6jRIC4Vcp1CJKHaxzVF58qMQRk4pTDWIcGTxgZqSyrJx4bj3l
- UbirBhJ2dqR2p5abPZynCuvkmQl68TUuhLfKdd4doUc0/IzOY0uRsqLEWUHVbOGKIN6I
- h5Rg==
+ d=gmail.com; s=20230601; t=1752226395; x=1752831195; darn=lists.freedesktop.org;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=8wFTFvOPl9z0oMG+Q2qe8rihqJLxAx1U3xn0MBTrYNM=;
+ b=bjFUHRrPik7rZ0OfDXxGSFLOKPCsEnMCUq9vrepteEwqkXg3boW1VpCybJkSm076qU
+ IZ6xEEBgJ/NeyxuA4GYNu0njxkgeRK6NVTaEqubUi5MRuZbS5vEmW7xKJg4Kc8uctFgK
+ xdUGoy4j37kLNXfcYDXENE9C40nRvxH6ahxAMw8jmE/Z5F3aJWLb1IKKZI2cybaVpAJq
+ GxKHM91MXPEa9oLhSmACz7hkek0qiBnu2CWFL2gNFIlha9mddnhqFl7a93oN0IoaDijW
+ NawWDXh72WnOAtS1fet3OZaj3JJC7UQvjV4mqApbyVrG/OKSD76O05KPWBiP7k4u8fYx
+ yZLQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1752174399; x=1752779199;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=68qpC4Y4uSheoQEbmMxx5RKOE+wIAn+KKwc+9lT74pM=;
- b=tRZpAsVfYX+dVYBkHuYouBhNfO8dtm8iVV5b+lvOKPWuf1SYIBNJJaboao573uepaA
- 76Z07rbhb373Xx2qlKtMhQc4U0zeA2BBaNA+ZtPC3SsdB+H3yT4k4Nigmwy8KPofHTdZ
- uZEvsIQKf4g66tp9pzFTOCQm6VwdVRuCk2/yApCnYQJ3TfqE0DXCA7DjVXEgiZ52UARA
- uAjRKBC8/mNvDSBS9V5kzEslkS5XbGi/Ysc0QCp6CpDunC/O6KheJ2W5QNMdwlq1DZ2j
- tAlTuqSadOl3YT+X5Yii8ORO6I9rw5Lb3kegwK8xtpoTMBhRtqFg/9ywbGn6RFEKcYaK
- f1Eg==
-X-Forwarded-Encrypted: i=1;
- AJvYcCVUdb5lTIE19YnnODvBIV/sJxBhwWtPNkEezlZUZRzXgdeGXpipJy9iOERXuZYVYs0pVjqJzLuwuQ==@lists.freedesktop.org,
- AJvYcCViCZsD8xlhSB4610esPwIGtOKFyo7qs/3v9tHmhjy8WaWZEi9145cIXzIMRuhv3WeQf3ipcTEMWgo=@lists.freedesktop.org
-X-Gm-Message-State: AOJu0Yznv0l64TqBzULSZktb2m+uvlnPhqJk/eTKD8hBZdCSJt4p6joG
- BZggFgrryhJlVToOwo8pglg6tP8/3v8qRxZTNPem9QTMRztLgG/kVmC6rxtoHKw0bJCSxcRLLHZ
- wMUqZq06zA4+cecvlqPyUai/bnoV61gM=
-X-Gm-Gg: ASbGncsQ5TQOt+IfiGMU+HOGYI3TA27OTKvPAU13L+s/wDO58wGJjytxF2Jjh8p6jU3
- jgr0CWOx6+hUFexToLdvoB824CtS0iuliLFtRaFPf/ZdHjtkwyUK/kVbLQKqjV6I/8YrD9nSInm
- geFtuW5idp1aXf9LYW+Acbwrpb111jYc++EiG7uQFZ
-X-Google-Smtp-Source: AGHT+IG0VJqe3uNAcjU3Xxte+v+hYbWn4ghp69RsSsnwscX/+eeuYBtfenFCSddGxjjaiQm1KOImr0VmDgF/3kDaWcw=
-X-Received: by 2002:a17:90b:5645:b0:312:1ae9:1537 with SMTP id
- 98e67ed59e1d1-31c4c972591mr333377a91.0.1752174399128; Thu, 10 Jul 2025
- 12:06:39 -0700 (PDT)
+ d=1e100.net; s=20230601; t=1752226395; x=1752831195;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=8wFTFvOPl9z0oMG+Q2qe8rihqJLxAx1U3xn0MBTrYNM=;
+ b=Tqe6rPzxaT1h3diJq/d9yJNvMSJWkDuPUjJ4Az7m+QxnZwXXSONZUUTdz4r3NhQWFq
+ XUUlsTDwWRfZ8rhVRIRDK8h9CeNVChnNQM5/SOiWn8EDyD+Je1OkhFppKsyIPUEyNA+i
+ s8221eFUOfrwuI1BBuWluFy1pCiMUQyC9cheKR1CV4pWiKe0OpZrJU7ycvJPJKiZhiws
+ /m0WR1EV40YgLd2NcD52ThNle4glzOO6AVhT6j4wjuYpely9CoIn4r5w+b2mQEEfhkzP
+ hjqYPbI6/zjKEPTuxTQPpvhvJwIy3ErfRyoBcBTr1q4U984iI2dYCzJKokhbUUxefcdK
+ lfZA==
+X-Gm-Message-State: AOJu0Yw2p68jyPfzZUxYFQL7pkgEgd4D9fei0hz1ivAGzYBt9LaWCSQn
+ CKp1F0cK6nBzOAEeYkb1SE8Iw2LfkoHPbnTQZRp/1SjoYdrk2YkZ8ukqUUZis+EfsI0=
+X-Gm-Gg: ASbGncsF4Nm8bZMF1NhKTcrQYaKryiYAlpaCvNeUMP1QJRBtZ/4k9z+5k3YCjmEA00b
+ SqEk4/MctSjT6ZjB2jZzF45e7w7jqIr3C6VAde0cQyTQBE8rzHChJAincp0qIMwv5ooqnl1Z62l
+ oDKIkmlx2NtFMWm3OAzX8y3ktLNrWzYUNoE4MZhP+54GRZBq972g4YuZ0BA0ZChzEu2BWtLwKCG
+ 35bK1c4RnjZXu49b1l/Hq3ypgbUnSjk47fBpKGoFDGkFckvF8ty+VBngl5aCHOIJLNONcK5Isfg
+ KLCCgm4EVd+ekyeQ963Qwryz1YhUPbfR79rhZig2TYumJg+CZk699ACz0ml+4LEVV5v+jeiDnxn
+ 9RcFeHURUIsdybGo/Xna2e6+U
+X-Google-Smtp-Source: AGHT+IFFSuwIaCLVBb5ZROldrGzN0JMgD47p666PcsnY0hEhFbgeDqm2l5kN/9yg7CgsXFKs8rYxeg==
+X-Received: by 2002:a05:6a20:6f03:b0:21c:fbf0:21bb with SMTP id
+ adf61e73a8af0-2311ee4b155mr4208715637.24.1752226395106; 
+ Fri, 11 Jul 2025 02:33:15 -0700 (PDT)
+Received: from quat-desktop ([2001:569:514a:9100:3f23:7b0f:f6a2:1ebd])
+ by smtp.gmail.com with ESMTPSA id
+ 41be03b00d2f7-b3bbe6bc84asm4557889a12.44.2025.07.11.02.33.14
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Fri, 11 Jul 2025 02:33:14 -0700 (PDT)
+From: Quaternions <krakow20@gmail.com>
+To: dakr@kernel.org
+Cc: nouveau@lists.freedesktop.org,
+	Quaternions <krakow20@gmail.com>
+Subject: [PATCH] gpu: nova-core: fix bounds check In PmuLookupTableEntry::new,
+ data is sliced from 2..6,
+ but the bounds check data.len() < 5 does not satisfy those bounds.
+Date: Fri, 11 Jul 2025 02:30:14 -0700
+Message-ID: <20250711093015.28785-1-krakow20@gmail.com>
+X-Mailer: git-send-email 2.50.1
 MIME-Version: 1.0
-References: <20250702-nova-docs-v3-0-f362260813e2@nvidia.com>
- <20250702-nova-docs-v3-2-f362260813e2@nvidia.com>
- <CANiq72nh71s9to5v1KHJWN79bEFv97zN6jcGJyEQkaJZ5UuJfg@mail.gmail.com>
-In-Reply-To: <CANiq72nh71s9to5v1KHJWN79bEFv97zN6jcGJyEQkaJZ5UuJfg@mail.gmail.com>
-From: Miguel Ojeda <miguel.ojeda.sandonis@gmail.com>
-Date: Thu, 10 Jul 2025 21:06:25 +0200
-X-Gm-Features: Ac12FXw_q-goG-jOjFcf1y4t2ncn8eM_tujmaC9ue0dJR_ud1nXJSMx9bb--WFg
-Message-ID: <CANiq72n6759SXO4_8jUryge3s0scp00hiKBnkhnbieObQdqL7Q@mail.gmail.com>
-Subject: Re: [PATCH v3 2/7] gpu: nova-core: Clarify sysmembar operations
-To: Alexandre Courbot <acourbot@nvidia.com>
-Cc: Danilo Krummrich <dakr@kernel.org>, David Airlie <airlied@gmail.com>,
- Simona Vetter <simona@ffwll.ch>, 
- Maarten Lankhorst <maarten.lankhorst@linux.intel.com>,
- Maxime Ripard <mripard@kernel.org>, 
- Thomas Zimmermann <tzimmermann@suse.de>, Jonathan Corbet <corbet@lwn.net>,
- nouveau@lists.freedesktop.org, 
- dri-devel@lists.freedesktop.org, linux-kernel@vger.kernel.org, 
- linux-doc@vger.kernel.org, rust-for-linux@vger.kernel.org, 
- Joel Fernandes <joelagnelf@nvidia.com>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-X-Mailman-Approved-At: Sat, 13 Dec 2025 12:40:47 +0000
+Content-Transfer-Encoding: 8bit
+X-Mailman-Approved-At: Sat, 13 Dec 2025 12:40:51 +0000
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -93,16 +86,24 @@ List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-On Sun, Jul 6, 2025 at 3:46=E2=80=AFPM Miguel Ojeda
-<miguel.ojeda.sandonis@gmail.com> wrote:
->
-> Added the possibility of catching this automatically in e.g. `rustdoc` to=
-:
->
->     https://github.com/Rust-for-Linux/linux/issues/350
+Signed-off-by: Rhys Lloyd <krakow20@gmail.com>
+---
+ drivers/gpu/nova-core/vbios.rs | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-Filled: https://github.com/rust-lang/rust-clippy/issues/15245 so that
-they have it upstream.
+diff --git a/drivers/gpu/nova-core/vbios.rs b/drivers/gpu/nova-core/vbios.rs
+index 663fc50e8b66..5b5d9f38cbb3 100644
+--- a/drivers/gpu/nova-core/vbios.rs
++++ b/drivers/gpu/nova-core/vbios.rs
+@@ -901,7 +901,7 @@ struct PmuLookupTableEntry {
+ 
+ impl PmuLookupTableEntry {
+     fn new(data: &[u8]) -> Result<Self> {
+-        if data.len() < 5 {
++        if data.len() < 6 {
+             return Err(EINVAL);
+         }
+ 
+-- 
+2.50.1
 
-Cheers,
-Miguel
