@@ -2,81 +2,41 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id B69A5CBAD4F
+	by mail.lfdr.de (Postfix) with ESMTPS id 16FDBCBAD4C
 	for <lists+nouveau@lfdr.de>; Sat, 13 Dec 2025 13:44:57 +0100 (CET)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 40F3910EABE;
+	by gabe.freedesktop.org (Postfix) with ESMTP id 2153E10EAEE;
 	Sat, 13 Dec 2025 12:41:30 +0000 (UTC)
-Authentication-Results: gabe.freedesktop.org;
-	dkim=permerror (0-bit key) header.d=gmail.com header.i=@gmail.com header.b="cCXM7Rj3";
-	dkim-atps=neutral
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from mail-pj1-f52.google.com (mail-pj1-f52.google.com
- [209.85.216.52])
- by gabe.freedesktop.org (Postfix) with ESMTPS id C687C10E033;
- Sun, 13 Jul 2025 02:53:46 +0000 (UTC)
-Received: by mail-pj1-f52.google.com with SMTP id
- 98e67ed59e1d1-313eeb77b1fso2793844a91.1; 
- Sat, 12 Jul 2025 19:53:46 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1752375226; x=1752980026; darn=lists.freedesktop.org;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:from:to:cc:subject:date
- :message-id:reply-to;
- bh=6BjtA+38PaXu4R7KEWbDJSP4mSWUP1v/3PF8r8C6k8w=;
- b=cCXM7Rj3mHF+NbLb3GpIAao2+Nr8rShQiaU6Ti2Ee837xRnulCoIXwp+pzW9cyj55s
- /y4q3Mvss5Vi0LArDjW7/7l4iT+6u9xX2zv2OhIfZU4HgWPALOF9jlvl1yQmNvhCWez8
- qqyq1pOa9hxJYaKWFDalo2NXb3QHSPRoYDi+If1lf41YmBip2HWtZpBhSaxD2Zz2k1GH
- GPqL6bv3aYEzgMZ6G/fkyAUwjAgpyTCoVrW8x6NJxInEtG+KqK4bWi5kISPqqs3z7zFt
- 9W5jmWFFYoXRTciWNgoioF8wGRJmYJkOhbu5F4Bbc7fE5OsK/5XGlqOZ+L45L0snkPMB
- QMBA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1752375226; x=1752980026;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=6BjtA+38PaXu4R7KEWbDJSP4mSWUP1v/3PF8r8C6k8w=;
- b=WAPlHqsBaBLEGOIFjtu+iPUsPIy7c6kd8y7FZiKpqgynXf+eunqA6+vH2SyDjUJHDA
- 97XafUiXP0Q5BaZRrHxHLLQZD/gNMUEqcsDMMT4exe3TIv4x4UBQh3PccgXCWCxC5wGs
- c8UMRY+4Y3OgEOfkfz5FfJbhKn2GBYGklzJblyY8jNmhWweeQ8nQAZF3A6gLPRkiHuMh
- 7uH9kwy9eGReiJzG9gO8NXZ5MLcdYdB2RarfBB4gZDBpNDhkeGQW/iW6Rr9f24hTBzO7
- E7oBegyEH5/dxiZvM2SoSQvzPivBJXQXCMRPZha4px1bwKZz7ACJe4zyWQmZeHMz+de5
- QOFw==
-X-Forwarded-Encrypted: i=1;
- AJvYcCUa0k4ZOf2G+IuLT+Ayo87mc3FoZU+Az10kuxX6vYkMvynGdNwzvrE2eqE6dP8crgEkiMwF4sDUoQ==@lists.freedesktop.org,
- AJvYcCVliATgOEPwUmgtnvq52l3uqdH+oHuTmocSKT3t02bL9HyKOm3sJr8UlLOJREPEV8V3II8RTPaLBf0=@lists.freedesktop.org
-X-Gm-Message-State: AOJu0YyCrmkEUvxUvW78CZxTGJ3Ln/artGx78qcfoyHqLdeQGhtoN9Sf
- yBpjn/H0VWV17jrmoLT4RjJijBsXFU2Hj9PGCj7jSyhiMg0Xefo2tXNa
-X-Gm-Gg: ASbGncsafvm8jveaOwMbygge+94X7YvkDDN6SDAi0XLgfTS2/dt2X5GjF5F5PSmnirX
- GwSyzrKVE1cjr8v8jr803ZKr8FZVfPKuEn0RmUmchZtV+JrL7pp2exoh9oi0CoFZVhedSZUCZ/T
- yYv91autAbnq58B/5teIpkaHCcxg2QJacF7wyoK3a9CMt2I7VaKSP8XKxYBgwhx9HUlENIuOafv
- QMzJLCLxNoJqk86vcuiIDndA5xHAQfAnER+svh6qIYpkA9AtleoBJ773rFXfdKCx1qmqjndQ0D+
- j34qswJrrUx/cZRAWx+M25K8Vwi3kOlQh/s5x+AgFU3Qt5jCDn88E3y7q+GBXm8pnXFN2W5kdVj
- iOJgfT6mDxtvvHKbC551KbPbZ
-X-Google-Smtp-Source: AGHT+IEho1Foj4fnk6PgnQ8W8nqUpc5SNVdnaWd11d+U1bW/ogI/EC1H+8IGCCJPQ3wJ6U4piH66Dg==
-X-Received: by 2002:a17:90a:c88c:b0:31c:23f2:d2ac with SMTP id
- 98e67ed59e1d1-31c4f53f737mr10947368a91.19.1752375225640; 
- Sat, 12 Jul 2025 19:53:45 -0700 (PDT)
-Received: from quat-desktop ([2001:569:514a:9100:3f23:7b0f:f6a2:1ebd])
- by smtp.gmail.com with ESMTPSA id
- d9443c01a7336-23de4286da3sm76345145ad.34.2025.07.12.19.53.44
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sat, 12 Jul 2025 19:53:45 -0700 (PDT)
-From: Rhys Lloyd <krakow20@gmail.com>
-To: dakr@kernel.org,
-	acourbot@nvidia.com
-Cc: airlied@gmail.com, simona@ffwll.ch, nouveau@lists.freedesktop.org,
- dri-devel@lists.freedesktop.org, linux-kernel@vger.kernel.org,
- rust-for-linux@vger.kernel.org, Rhys Lloyd <krakow20@gmail.com>
-Subject: [PATCH] gpu: nova-core: define named constants for magic numbers
-Date: Sat, 12 Jul 2025 19:51:10 -0700
-Message-ID: <20250713025108.9364-4-krakow20@gmail.com>
-X-Mailer: git-send-email 2.50.1
-In-Reply-To: <20250713025108.9364-2-krakow20@gmail.com>
-References: <20250713025108.9364-2-krakow20@gmail.com>
+Received: from audible.transient.net (audible.transient.net [24.143.126.66])
+ by gabe.freedesktop.org (Postfix) with SMTP id 7047610E1F3
+ for <nouveau@lists.freedesktop.org>; Mon, 14 Jul 2025 04:29:37 +0000 (UTC)
+Received: (qmail 8375 invoked from network); 14 Jul 2025 04:29:35 -0000
+Received: from stink-foot.audible.transient.net (192.168.2.99)
+ by canarsie.audible.transient.net with QMQP; 14 Jul 2025 04:29:35 -0000
+Received: (nullmailer pid 1746 invoked by uid 1000);
+ Mon, 14 Jul 2025 02:44:42 -0000
+Date: Mon, 14 Jul 2025 02:44:42 +0000
+From: Jamie Heilman <jamie@audible.transient.net>
+To: Ben Skeggs <bskeggs@nvidia.com>, Rui Salvaterra <rsalvaterra@gmail.com>,
+ airlied@gmail.com, nouveau@lists.freedesktop.org,
+ dri-devel@lists.freedesktop.org, linux-kernel@vger.kernel.org
+Subject: Re: [REGRESSION] NVIDIA ION graphics broken with Linux 6.16-rc*
+Message-ID: <aHRvGvqbeGufqJQI@audible.transient.net>
+Mail-Followup-To: Ben Skeggs <bskeggs@nvidia.com>,
+ Rui Salvaterra <rsalvaterra@gmail.com>, airlied@gmail.com,
+ nouveau@lists.freedesktop.org, dri-devel@lists.freedesktop.org,
+ linux-kernel@vger.kernel.org
+References: <CALjTZvZgH0N43rMTcZiDVSX93PFL680hsYPwtp8=Ja1OWPvZ1A@mail.gmail.com>
+ <aG2mzB58k3tkxvK-@audible.transient.net>
+ <25642e5b-25ee-49b2-b08d-4c64fa2e505a@nvidia.com>
+ <aG5axlstlhnUYks2@audible.transient.net>
 MIME-Version: 1.0
+Content-Type: text/plain; charset=iso-8859-1
+Content-Disposition: inline
 Content-Transfer-Encoding: 8bit
+In-Reply-To: <aG5axlstlhnUYks2@audible.transient.net>
 X-Mailman-Approved-At: Sat, 13 Dec 2025 12:40:51 +0000
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
@@ -92,84 +52,65 @@ List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-Introduce an associated constant `MIN_LEN` for each struct that checks
-the length of the input data in its constructor against a magic number.
+Jamie Heilman wrote:
+> Ben Skeggs wrote:
+> > On 7/9/25 09:16, Jamie Heilman wrote:
+> > > Rui Salvaterra wrote:
+> > > > Unfortunately, bisecting is not feasible for me.
+> > > That looks pretty similar to the problem I posted
+> > > (https://lore.kernel.org/lkml/aElJIo9_Se6tAR1a@audible.transient.net/)
+> > > that I bisected to 862450a85b85 ("drm/nouveau/gf100-: track chan
+> > > progress with non-WFI semaphore release").  It still reverts cleanly
+> > > as of v6.16-rc5 so you might want to give that a shot.
+> > 
+> > Hi,
+> > 
+> > Thank you for bisecting!  Are you able to try the attached patch?
+> 
+> Yeah that got graphics visible again for me, though there's something
+> else horrible going on now (still? I'm not sure if its new behavior or
+> not) and it blows out my dmesg ringbuffer with errors or warnings of
+> some kind, that I was just about to start trying to debug that when
+> some power event seems to have fried my PSU.  Combined with a bunch of
+> filesystem corruption, its going to be a while a before I can get that
+> system back up to that spot where I can troubleshoot it again, the
+> root volume is fried and I'm going to have rebuild.  Anyway, I think
+> whatever it is was probably an entirely separate issue.
 
-Signed-off-by: Rhys Lloyd <krakow20@gmail.com>
----
-Changes in v2:
-- Add commit description
-- Fix author to match SoB
-- Add base commit
+OK, validated, this solves the problem for me completely too.  (The
+other traces were a byproduct of my userspace doing the wrong thing
+when putting together a partitioned-md / lvm stack and the resulting
+filesystem corruption.)
 
----
- drivers/gpu/nova-core/vbios.rs | 15 ++++++++++-----
- 1 file changed, 10 insertions(+), 5 deletions(-)
+> > From 6987c1c254285305fdc20270e21709a313632e0d Mon Sep 17 00:00:00 2001
+> > From: Ben Skeggs <bskeggs@nvidia.com>
+> > Date: Wed, 9 Jul 2025 10:54:15 +1000
+> > Subject: [PATCH] drm/nouveau/nvif: fix null ptr deref on pre-fermi boards
+> > 
+> > Check that gpfifo.post() exists before trying to call it.
+> > 
+> > Fixes: 862450a85b85 ("drm/nouveau/gf100-: track chan progress with non-WFI semaphore release")
+> > Signed-off-by: Ben Skeggs <bskeggs@nvidia.com>
+> > ---
+> >  drivers/gpu/drm/nouveau/nvif/chan.c | 3 +++
+> >  1 file changed, 3 insertions(+)
+> > 
+> > diff --git a/drivers/gpu/drm/nouveau/nvif/chan.c b/drivers/gpu/drm/nouveau/nvif/chan.c
+> > index baa10227d51a..80c01017d642 100644
+> > --- a/drivers/gpu/drm/nouveau/nvif/chan.c
+> > +++ b/drivers/gpu/drm/nouveau/nvif/chan.c
+> > @@ -39,6 +39,9 @@ nvif_chan_gpfifo_post(struct nvif_chan *chan)
+> >  	const u32 pbptr = (chan->push.cur - map) + chan->func->gpfifo.post_size;
+> >  	const u32 gpptr = (chan->gpfifo.cur + 1) & chan->gpfifo.max;
+> >  
+> > +	if (!chan->func->gpfifo.post)
+> > +		return 0;
+> > +
+> >  	return chan->func->gpfifo.post(chan, gpptr, pbptr);
+> >  }
+> >  
+> > -- 
+> > 2.49.0
 
-diff --git a/drivers/gpu/nova-core/vbios.rs b/drivers/gpu/nova-core/vbios.rs
-index 5b5d9f38cbb3..d456c494374d 100644
---- a/drivers/gpu/nova-core/vbios.rs
-+++ b/drivers/gpu/nova-core/vbios.rs
-@@ -364,8 +364,9 @@ struct BitHeader {
- }
- 
- impl BitHeader {
-+    const MIN_LEN: usize = 12;
-     fn new(data: &[u8]) -> Result<Self> {
--        if data.len() < 12 {
-+        if data.len() < Self::MIN_LEN {
-             return Err(EINVAL);
-         }
- 
-@@ -467,8 +468,9 @@ struct PciRomHeader {
- }
- 
- impl PciRomHeader {
-+    const MIN_LEN: usize = 26;
-     fn new(pdev: &pci::Device, data: &[u8]) -> Result<Self> {
--        if data.len() < 26 {
-+        if data.len() < Self::MIN_LEN {
-             // Need at least 26 bytes to read pciDataStrucPtr and sizeOfBlock.
-             return Err(EINVAL);
-         }
-@@ -772,10 +774,11 @@ fn into_image(self) -> Result<BiosImage> {
-         BiosImage::try_from(self)
-     }
- 
-+    const MIN_LEN: usize = 26;
-     /// Creates a new BiosImageBase from raw byte data.
-     fn new(pdev: &pci::Device, data: &[u8]) -> Result<Self> {
-         // Ensure we have enough data for the ROM header.
--        if data.len() < 26 {
-+        if data.len() < Self::MIN_LEN {
-             dev_err!(pdev.as_ref(), "Not enough data for ROM header\n");
-             return Err(EINVAL);
-         }
-@@ -900,8 +903,9 @@ struct PmuLookupTableEntry {
- }
- 
- impl PmuLookupTableEntry {
-+    const MIN_LEN: usize = 6;
-     fn new(data: &[u8]) -> Result<Self> {
--        if data.len() < 6 {
-+        if data.len() < Self::MIN_LEN {
-             return Err(EINVAL);
-         }
- 
-@@ -928,8 +932,9 @@ struct PmuLookupTable {
- }
- 
- impl PmuLookupTable {
-+    const MIN_LEN: usize = 4;
-     fn new(pdev: &pci::Device, data: &[u8]) -> Result<Self> {
--        if data.len() < 4 {
-+        if data.len() < Self::MIN_LEN {
-             return Err(EINVAL);
-         }
- 
-
-base-commit: 215a3f91713383a3c0d2da82d223a608a3c17ac1
-prerequisite-patch-id: d80f92d314a0693d4c89ffb7810d9ab6990336fa
 -- 
-2.50.1
-
+Jamie Heilman                     http://audible.transient.net/~jamie/
