@@ -2,41 +2,85 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id 16FDBCBAD4C
-	for <lists+nouveau@lfdr.de>; Sat, 13 Dec 2025 13:44:57 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 9E0E0CBAC3A
+	for <lists+nouveau@lfdr.de>; Sat, 13 Dec 2025 13:43:48 +0100 (CET)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 2153E10EAEE;
-	Sat, 13 Dec 2025 12:41:30 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 35C1E10EAAF;
+	Sat, 13 Dec 2025 12:41:08 +0000 (UTC)
+Authentication-Results: gabe.freedesktop.org;
+	dkim=permerror (0-bit key) header.d=gmail.com header.i=@gmail.com header.b="RtHEPuWt";
+	dkim-atps=neutral
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from audible.transient.net (audible.transient.net [24.143.126.66])
- by gabe.freedesktop.org (Postfix) with SMTP id 7047610E1F3
- for <nouveau@lists.freedesktop.org>; Mon, 14 Jul 2025 04:29:37 +0000 (UTC)
-Received: (qmail 8375 invoked from network); 14 Jul 2025 04:29:35 -0000
-Received: from stink-foot.audible.transient.net (192.168.2.99)
- by canarsie.audible.transient.net with QMQP; 14 Jul 2025 04:29:35 -0000
-Received: (nullmailer pid 1746 invoked by uid 1000);
- Mon, 14 Jul 2025 02:44:42 -0000
-Date: Mon, 14 Jul 2025 02:44:42 +0000
-From: Jamie Heilman <jamie@audible.transient.net>
-To: Ben Skeggs <bskeggs@nvidia.com>, Rui Salvaterra <rsalvaterra@gmail.com>,
- airlied@gmail.com, nouveau@lists.freedesktop.org,
- dri-devel@lists.freedesktop.org, linux-kernel@vger.kernel.org
-Subject: Re: [REGRESSION] NVIDIA ION graphics broken with Linux 6.16-rc*
-Message-ID: <aHRvGvqbeGufqJQI@audible.transient.net>
-Mail-Followup-To: Ben Skeggs <bskeggs@nvidia.com>,
- Rui Salvaterra <rsalvaterra@gmail.com>, airlied@gmail.com,
- nouveau@lists.freedesktop.org, dri-devel@lists.freedesktop.org,
- linux-kernel@vger.kernel.org
-References: <CALjTZvZgH0N43rMTcZiDVSX93PFL680hsYPwtp8=Ja1OWPvZ1A@mail.gmail.com>
- <aG2mzB58k3tkxvK-@audible.transient.net>
- <25642e5b-25ee-49b2-b08d-4c64fa2e505a@nvidia.com>
- <aG5axlstlhnUYks2@audible.transient.net>
+Received: from mail-pl1-f171.google.com (mail-pl1-f171.google.com
+ [209.85.214.171])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 65EC710E3FB;
+ Mon, 14 Jul 2025 06:10:39 +0000 (UTC)
+Received: by mail-pl1-f171.google.com with SMTP id
+ d9443c01a7336-2350fc2591dso36817295ad.1; 
+ Sun, 13 Jul 2025 23:10:39 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=gmail.com; s=20230601; t=1752473439; x=1753078239; darn=lists.freedesktop.org;
+ h=content-transfer-encoding:in-reply-to:from:content-language
+ :references:cc:to:subject:user-agent:mime-version:date:message-id
+ :from:to:cc:subject:date:message-id:reply-to;
+ bh=OfFqMeZyU9HS+WHoyGh+rEgFUDR1EqSVoqNyn1ejI2E=;
+ b=RtHEPuWtp9KcLoqxKxeWOlgQsQL/wyJQF7HxfRAAJLLNgljG1c/jvkdnli3ilwS2//
+ SFDWGzXEmdgUJyDN8JtZCRbWxenz2J8HZGgWgJuKNlKM7PDRxLO2swF/4YcDbrbPeuy9
+ UfCIU2hX2li5HgXMupxNOtFYpi3ShJCPEpbaw7gRcZRMgrGr6BxvxsAIB/vSE1nbiCWs
+ VrDghWxVmvCZQ+swXnSp3gm5BEVlMWObDYZV3uaGsyX9xzs4uQqzzXC+/yf0ncIAWHiM
+ 7C71yNV6ib/U8LmA2h5FMg92jSGRP/PiRKb+0FTPjRuJZOYx3TPWuHJwiNBROpvsVSUp
+ ztCw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1752473439; x=1753078239;
+ h=content-transfer-encoding:in-reply-to:from:content-language
+ :references:cc:to:subject:user-agent:mime-version:date:message-id
+ :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+ bh=OfFqMeZyU9HS+WHoyGh+rEgFUDR1EqSVoqNyn1ejI2E=;
+ b=gisIm1vaMrSArbdClyAJfjD9IuaSoYsfgdyJA6dseDE+SLeRA3AbJZWrruTzt2ICX4
+ WCdAArdZdxV3JixD7aZjlCSjlVrVocjZuj7ipt0jotCkYbMbFPX6WvqEr4uwA8X8RYe7
+ GZP+SRzFG1VMvT2cGLFs+0b9wrhzPSwCohehh+qpE+OmPne+EcnqnSZtlZ17tyfYzkPP
+ ZAI69U3FZ/NSALUEJZr2Quysc3vRNPNwKKVDv8+AsHsfPkvipL6fw9W3RIaKrBZVTMYG
+ lfYQ9OMxs7GtsgL7yCbX62t/C4E02lSQvwtgj3XWUxN9CXThlV+CAm/RxlatBzZ2HQQm
+ P/Yg==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCVU4pHyT2WMCJLzRFJDn911nnt7wFtpwylz2Z4CGtwdh175EKH9Rb6stcr1YkRsGAd4g050RobvxvU=@lists.freedesktop.org,
+ AJvYcCX7D4zUaqWZ5Ys2s7NyrN/BtF3snsX+ximbF4fZBPHm/Tsk4++U+Gmvr++P9DXK8T5eYzcQWywLKg==@lists.freedesktop.org
+X-Gm-Message-State: AOJu0YxzdswIxMqOaG0tHDR+fkzoyHSkYbDCewIZlzLhV/YdETPq7ZLU
+ 8sjoKcg3+hy0Tr+9sMiL/vWRn5q5zQCN1FlKOAG7irToEgqzQJNBUm3S
+X-Gm-Gg: ASbGncuuYpYegFRMFT6rFP8K4IyTnBx+EJ4KmmCDhj1BYdotFZipFrt20mWYq0WCTKU
+ 3OwpgLONw9lOff6patr67XQjoZx3Pw2/EawLJoPyZ0ZVxatQD1+tGTvSVnWhb/dDwSlIdw9v1DG
+ zyBS1JnKUNso0/75rRObLzqAxDclLYmjgKSq03XQsz7DFdGeytgTkxMJg+S2pu/Q+Nj7DQjdwbX
+ ik6Unxx4BEGeKtsQGyNBDsW/a3pIKw0FCObX/VzCkV9Vv37fJh8WMH2i/3Cvc3GLBt1/ix/6gW1
+ a06Fyp+aCAfOnyGA/5biDopwm/B9F2pTTxRav47FLZERIvUzNJhprnF/AjHeJPLHesLGOPG4Ieq
+ oRT7WbRXJlnbWUohE5zY/H9B0FAyETKqQm8sFSyuCwT2t88rarUHIrVyqOJmjMbSMtZhE
+X-Google-Smtp-Source: AGHT+IEh5rmOi9OTdgxMZ+ZYCCwxnVNNOCtSZ7HLSFh73cHwYUInliH9Wmy7ojp7o6gQDl2FOpbi5w==
+X-Received: by 2002:a17:902:f606:b0:23c:6d5e:db4e with SMTP id
+ d9443c01a7336-23de2f47919mr267449435ad.8.1752473438744; 
+ Sun, 13 Jul 2025 23:10:38 -0700 (PDT)
+Received: from ?IPV6:2001:569:514a:9100:3f23:7b0f:f6a2:1ebd?
+ ([2001:569:514a:9100:3f23:7b0f:f6a2:1ebd])
+ by smtp.gmail.com with ESMTPSA id
+ d9443c01a7336-23de43655fbsm83226305ad.239.2025.07.13.23.10.38
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Sun, 13 Jul 2025 23:10:38 -0700 (PDT)
+Message-ID: <cda61d51-ad85-4464-a637-426b960a83c6@gmail.com>
+Date: Sun, 13 Jul 2025 23:10:37 -0700
 MIME-Version: 1.0
-Content-Type: text/plain; charset=iso-8859-1
-Content-Disposition: inline
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH] gpu: nova-core: define named constants for magic numbers
+To: Alexandre Courbot <acourbot@nvidia.com>, dakr@kernel.org
+Cc: airlied@gmail.com, simona@ffwll.ch, nouveau@lists.freedesktop.org,
+ dri-devel@lists.freedesktop.org, linux-kernel@vger.kernel.org,
+ rust-for-linux@vger.kernel.org
+References: <20250713025108.9364-2-krakow20@gmail.com>
+ <20250713025108.9364-4-krakow20@gmail.com>
+ <DBBG6Q86XAAQ.43DPC0D210TI@nvidia.com>
+Content-Language: en-US
+From: Rhys Lloyd <krakow20@gmail.com>
+In-Reply-To: <DBBG6Q86XAAQ.43DPC0D210TI@nvidia.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 8bit
-In-Reply-To: <aG5axlstlhnUYks2@audible.transient.net>
 X-Mailman-Approved-At: Sat, 13 Dec 2025 12:40:51 +0000
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
@@ -52,65 +96,34 @@ List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-Jamie Heilman wrote:
-> Ben Skeggs wrote:
-> > On 7/9/25 09:16, Jamie Heilman wrote:
-> > > Rui Salvaterra wrote:
-> > > > Unfortunately, bisecting is not feasible for me.
-> > > That looks pretty similar to the problem I posted
-> > > (https://lore.kernel.org/lkml/aElJIo9_Se6tAR1a@audible.transient.net/)
-> > > that I bisected to 862450a85b85 ("drm/nouveau/gf100-: track chan
-> > > progress with non-WFI semaphore release").  It still reverts cleanly
-> > > as of v6.16-rc5 so you might want to give that a shot.
-> > 
-> > Hi,
-> > 
-> > Thank you for bisecting!� Are you able to try the attached patch?
-> 
-> Yeah that got graphics visible again for me, though there's something
-> else horrible going on now (still? I'm not sure if its new behavior or
-> not) and it blows out my dmesg ringbuffer with errors or warnings of
-> some kind, that I was just about to start trying to debug that when
-> some power event seems to have fried my PSU.  Combined with a bunch of
-> filesystem corruption, its going to be a while a before I can get that
-> system back up to that spot where I can troubleshoot it again, the
-> root volume is fried and I'm going to have rebuild.  Anyway, I think
-> whatever it is was probably an entirely separate issue.
+On 7/13/25 8:11 PM, Alexandre Courbot wrote:
+> On Sun Jul 13, 2025 at 11:51 AM JST, Rhys Lloyd wrote:
+>> Introduce an associated constant `MIN_LEN` for each struct that checks
+>> the length of the input data in its constructor against a magic number.
+>>
+>> Signed-off-by: Rhys Lloyd <krakow20@gmail.com>
+> As I mentioned in [1], I think this would be better addressed by working
+> in terms of `sizeof` upon the relevant structures, after making them
+> `#[repr(C)]`. It might require splitting them a bit since some contain
+> other data (or we can maybe turn them into DSTs).
+>
+> [1] https://lore.kernel.org/rust-for-linux/DB97X8JAJFI4.3G1I8ZPC1MWLS@nvidia.com/
 
-OK, validated, this solves the problem for me completely too.  (The
-other traces were a byproduct of my userspace doing the wrong thing
-when putting together a partitioned-md / lvm stack and the resulting
-filesystem corruption.)
+As far as I can tell, only one of the five structs with `MIN_LEN` have 
+the same layout in-memory as they do in the `data` byte slice, that 
+being `BitHeader`.  Perhaps `#[repr(packed)]` could be used for 
+`PmuLookupTableEntry`, sacrificing alignment, but that is undesirable as 
+it comes with its own footguns such as unaligned loads.  The other 
+structs include optional values and vectors which do not have the same 
+encoding when reading from the `data` byte slice as they do in memory.  
+I have worked with DSTs before, but I don't recommend them for 
+non-library code since they are not first-class citizens in Rust.  
+Notably the fat pointer is not resized when taking a reference to the 
+unsized struct field, and constructing such objects is cumbersome.  
+Also, in the current version of Rust (1.88), DSTs cannot yet live 
+comfortably on the stack.
 
-> > From 6987c1c254285305fdc20270e21709a313632e0d Mon Sep 17 00:00:00 2001
-> > From: Ben Skeggs <bskeggs@nvidia.com>
-> > Date: Wed, 9 Jul 2025 10:54:15 +1000
-> > Subject: [PATCH] drm/nouveau/nvif: fix null ptr deref on pre-fermi boards
-> > 
-> > Check that gpfifo.post() exists before trying to call it.
-> > 
-> > Fixes: 862450a85b85 ("drm/nouveau/gf100-: track chan progress with non-WFI semaphore release")
-> > Signed-off-by: Ben Skeggs <bskeggs@nvidia.com>
-> > ---
-> >  drivers/gpu/drm/nouveau/nvif/chan.c | 3 +++
-> >  1 file changed, 3 insertions(+)
-> > 
-> > diff --git a/drivers/gpu/drm/nouveau/nvif/chan.c b/drivers/gpu/drm/nouveau/nvif/chan.c
-> > index baa10227d51a..80c01017d642 100644
-> > --- a/drivers/gpu/drm/nouveau/nvif/chan.c
-> > +++ b/drivers/gpu/drm/nouveau/nvif/chan.c
-> > @@ -39,6 +39,9 @@ nvif_chan_gpfifo_post(struct nvif_chan *chan)
-> >  	const u32 pbptr = (chan->push.cur - map) + chan->func->gpfifo.post_size;
-> >  	const u32 gpptr = (chan->gpfifo.cur + 1) & chan->gpfifo.max;
-> >  
-> > +	if (!chan->func->gpfifo.post)
-> > +		return 0;
-> > +
-> >  	return chan->func->gpfifo.post(chan, gpptr, pbptr);
-> >  }
-> >  
-> > -- 
-> > 2.49.0
+This patch can be dropped if it's not valuable enough to warrant the 
+change, I only made it because of your comment here: 
+https://gitlab.freedesktop.org/drm/nova/-/merge_requests/4#note_2999761
 
--- 
-Jamie Heilman                     http://audible.transient.net/~jamie/
