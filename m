@@ -2,119 +2,136 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id B3E6ABBF7CB
-	for <lists+nouveau@lfdr.de>; Mon, 06 Oct 2025 22:58:27 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id DFBC1BBF436
+	for <lists+nouveau@lfdr.de>; Mon, 06 Oct 2025 22:46:50 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 2177C10E638;
-	Mon,  6 Oct 2025 20:58:03 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 43F4010E4A4;
+	Mon,  6 Oct 2025 20:46:25 +0000 (UTC)
 Authentication-Results: gabe.freedesktop.org;
-	dkim=permerror (0-bit key) header.d=gmail.com header.i=@gmail.com header.b="gn4zlhC5";
+	dkim=pass (2048-bit key; unprotected) header.d=Nvidia.com header.i=@Nvidia.com header.b="CqYLcRHF";
 	dkim-atps=neutral
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from mail-qv1-f47.google.com (mail-qv1-f47.google.com
- [209.85.219.47])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 7CC6D10E910;
- Thu, 10 Jul 2025 15:32:10 +0000 (UTC)
-Received: by mail-qv1-f47.google.com with SMTP id
- 6a1803df08f44-6fadb9a0325so9307956d6.2; 
- Thu, 10 Jul 2025 08:32:10 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1752161529; x=1752766329; darn=lists.freedesktop.org;
- h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
- :mime-version:subject:date:from:from:to:cc:subject:date:message-id
- :reply-to; bh=qg9MyoLzW2O/wZTFQuwcCSu9JeslcLq4bzCQcPCtBGw=;
- b=gn4zlhC5U5VqY760TCYZ4Ra0eAkVydtQeqEokPJvtH7JyMyDpxpQOTWwuXLgjkrO4Z
- kyf7mLHCBOCiVZdZwfNhSzUM5eQZlE0zIZqG9pU/fiJs0cXgVTz4d0uBAbBjv/HXAhnQ
- j9P7Fl0f2AGUOeZESIpxqZmhOkQURUVjciaK8IjgHfB3MBTDaoJhJjIm5sxVyGq7twcN
- 0G+jUVUq6ZxxufHb2IX/3Vx7Dk6OZqr6cuCVdllSR7NRCrbuMIltN+EfkrcN7eHFquTy
- molUBNUwW3lXJgjIqO/6uY/kTddMYfXtg5+bXA0uWG044E7S/Uk09/r1NUXh0Z2hbek/
- +/cQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1752161529; x=1752766329;
- h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
- :mime-version:subject:date:from:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=qg9MyoLzW2O/wZTFQuwcCSu9JeslcLq4bzCQcPCtBGw=;
- b=UjEd7wprASDbZbKe7AYwjZARDGq0IPXvdKH/Bj4RSQQkHDZjYOLWGPa4XAPV4RJNlm
- sIttKT6LaAGK0R9FbcVrBh7B8tGB2V52fpADquUu30wWvy1XKxFgQ8gZ27qjQhcOFnIo
- I6DR5GA9aX3yBq+xKANG5nzRLQVf04XgRE0rn8Ich3wJOXsjkGBDbm8VNTkt2hWRzpuM
- WEHgyKFbb9Uo53yqcX7aW2s0ExvQkDEMrD4wx5eF2jiDLqBN5Xqdtfa7xzhmMgHqmzKu
- NvIRiREI0CmDDUwe6Jtp8rU3AOqW8E/WheDcz2x+tJvSZlNSp2RJddPEqVxL/R9MxIOe
- S4hA==
-X-Forwarded-Encrypted: i=1;
- AJvYcCVmWW4qC2uA8yo6ib2YWsdrHXUZshH2L180fX5ivav1HSUayYhoHvPcsMDcXHIScy2fd7LJXF4tZeU=@lists.freedesktop.org,
- AJvYcCX8TFiZgeGlOkQYcRGoZkTF1JwnLa/t25Mcin5hk/2BMNN/Xbx6CTF+uXtKLS4vqBx5f1VoNh+TrQ==@lists.freedesktop.org
-X-Gm-Message-State: AOJu0Yyo44HrbtEP5ug/lzCT0216cwA5iIWx5VR4nAGWVjvRCeeciAsr
- dXzsql5rAGfdinPa+xhGrtphBpoauOR8PyozuqCOpRyvFxxFAz9Z0oU/
-X-Gm-Gg: ASbGncv6g4od94soE7j6Vc5oXau9qk0/P5j7mAG5v/JTElcqHrCWKf0cngm9l9kXNwN
- Y3s86V0QqWeWKjHtJbTTGhNkfIk0sYtMT6+bRcS8jsyPZkyP08W9dAwdjZo4NdpcxT98JQ/Qpmh
- fnVEoNndmh+waN95c6Nce4BpkHlhbO3Uuw1Je3qN5SOIFwsp1oR/Fgnw7w7UQ31mVIrA9fXAgd6
- GKmQsBMec9Qln5qPCc7NTphZT7YJGwYkmVZYlsO9FUWxkPjLfL/8XHu6XjHpnZBvfbwQdbYI7RA
- VSHZgBanzWlTqBD+0r80ZCSgsEVBbPIBDyetyvJukIU/5ahkVgWX7hiLgxvk/x1qAPz5WLFSo8e
- j4/62knPA5QmpznnuLfrk8SZfG06QuGsscjl/90zhlnf2EPOEroFYrPJddw==
-X-Google-Smtp-Source: AGHT+IGR2RRZQW2bcini0bMXKS9fKRmwAOf5eVXkkfrEVuuKui6PaVOKJy0ulnbPEP69BzEKMolKgw==
-X-Received: by 2002:a05:6214:328e:b0:6fa:bb26:1459 with SMTP id
- 6a1803df08f44-70494eeb96cmr79324366d6.7.1752161529395; 
- Thu, 10 Jul 2025 08:32:09 -0700 (PDT)
-Received: from
- 1.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.ip6.arpa
- ([148.76.185.197]) by smtp.gmail.com with ESMTPSA id
- 6a1803df08f44-704979dbc3asm9449496d6.38.2025.07.10.08.32.07
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 10 Jul 2025 08:32:08 -0700 (PDT)
-From: Tamir Duberstein <tamird@gmail.com>
-Date: Thu, 10 Jul 2025 11:31:20 -0400
-Subject: [PATCH 17/17] rust: sync: replace `kernel::c_str!` with C-Strings
+Received: from NAM12-BN8-obe.outbound.protection.outlook.com
+ (mail-bn8nam12on2057.outbound.protection.outlook.com [40.107.237.57])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id A9BCF10E032;
+ Mon, 14 Jul 2025 14:48:45 +0000 (UTC)
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=C2uu0iE6P0gjgz71jJoblfF73F02xFuUiUbkd5aiqldfnrNhRVgBGQN7LHWISjnhlwdKbmr02SuTy4LaoV1+au1ljSZDIaFTa7yBsQXMK4U/sswBM6I1exYOEpHpmsjZJnnWkN6impTfOudQz2fWgotSRFGaqFvi/eENmS3RGcYxwziNG4mkcFG9YtKxe/VloUap86Ov6LwR4Nd7kSnxP1gfBIKZsbZBtM5mlx0hWNyDfD+GHbD/yeLUz2ZzVNYYf5OwUX73e30PXREpNbfnE028LD3TgHgjrfHlD5Ha1Zz+3EL/eVf+wyQFm3aJrSDWHcGlkwYWJc6qfm3bWRR87A==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=0+JUplmFphDlTBpqxGzRPCAHXx/cIvC15u1tCmfxAW8=;
+ b=Uo2O/J43rCqZ7TlBmCRliv/FLEo842QAtMhFn+0y4gs3DatnpRWMV8YAtKXGxV6hczYrQdfq64U6AyfLcLKt5E5lV7zOpuU2pF0QASy5d5ehOAagZCftak1o036j2Ty6zJUxJln2gSLh3KO3Qh9kbvxm2bb/ZbeV8pIUk6GsMAMw5ibNSX7F4m7Frn19J2rT5HDWo1USa4sPSIAOrNHI5/VBaVONkzv4Se2+HBc6Mias3qCM5dUA/4W5a1LlqYJ/U56IAn7Aa3CESXni4BbbvmhkKjBz1UgD3pkMmm7t0a+rBNxHxBETUoFoL/FyzayNGxVZ6ko48GoetkpWUa45ZQ==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=nvidia.com; dmarc=pass action=none header.from=nvidia.com;
+ dkim=pass header.d=nvidia.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=Nvidia.com;
+ s=selector2;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=0+JUplmFphDlTBpqxGzRPCAHXx/cIvC15u1tCmfxAW8=;
+ b=CqYLcRHFHvR0cDqNP9MvHrLr7Yq3ZBRSKYGVyj2UJHbrq9Rl5zhmNm0+TdXripS2t9eInXHsejFD1KrgUhf0iG30+0ECIg8r7vqpXIQYg+tB8QEJK4G4smVMW9SXpdfCRF4lijoJpYPGE5eZ2M2p0FPhMHEihndHrCta/dp2QeVXGKpKxIFh6o0cMeyKu6+F/sEWlQ871vqXzpKWK7aHo55fY34V528xLCKkdiavlLELlFLBvpcwzki/fojIyph+S/QyP5PlBvZdH+F2VtjMRgR04d2GI5bsmykwOBcezT+hZOI7HU4BB8rCRtNQdiHP2fwQEthfmOO3vGeAqmUBdQ==
+Authentication-Results: dkim=none (message not signed)
+ header.d=none;dmarc=none action=none header.from=nvidia.com;
+Received: from SN7PR12MB8059.namprd12.prod.outlook.com (2603:10b6:806:32b::7)
+ by CY8PR12MB7171.namprd12.prod.outlook.com (2603:10b6:930:5c::20)
+ with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.8922.25; Mon, 14 Jul
+ 2025 14:48:39 +0000
+Received: from SN7PR12MB8059.namprd12.prod.outlook.com
+ ([fe80::4ee2:654e:1fe8:4b91]) by SN7PR12MB8059.namprd12.prod.outlook.com
+ ([fe80::4ee2:654e:1fe8:4b91%7]) with mapi id 15.20.8901.018; Mon, 14 Jul 2025
+ 14:48:39 +0000
+Date: Mon, 14 Jul 2025 10:48:37 -0400
+From: Joel Fernandes <joelagnelf@nvidia.com>
+To: Rhys Lloyd <krakow20@gmail.com>
+Cc: acourbot@nvidia.com, dakr@kernel.org, rust-for-linux@vger.kernel.org,
+ airlied@gmail.com, simona@ffwll.ch, nouveau@lists.freedesktop.org,
+ dri-devel@lists.freedesktop.org, linux-kernel@vger.kernel.org
+Subject: Re: [PATCH v2] gpu: nova-core: vbios: change PmuLookupTableEntry to
+ relax alignment
+Message-ID: <20250714144837.GA2996266@joelnvbox>
+References: <20250714110229.141221-1-krakow20@gmail.com>
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <20250714110229.141221-1-krakow20@gmail.com>
+X-ClientProxiedBy: MN2PR07CA0010.namprd07.prod.outlook.com
+ (2603:10b6:208:1a0::20) To SN7PR12MB8059.namprd12.prod.outlook.com
+ (2603:10b6:806:32b::7)
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 7bit
-Message-Id: <20250710-core-cstr-cstrings-v1-17-027420ea799e@gmail.com>
-References: <20250710-core-cstr-cstrings-v1-0-027420ea799e@gmail.com>
-In-Reply-To: <20250710-core-cstr-cstrings-v1-0-027420ea799e@gmail.com>
-To: "Rafael J. Wysocki" <rafael@kernel.org>, 
- Viresh Kumar <viresh.kumar@linaro.org>, Miguel Ojeda <ojeda@kernel.org>, 
- Alex Gaynor <alex.gaynor@gmail.com>, Boqun Feng <boqun.feng@gmail.com>, 
- Gary Guo <gary@garyguo.net>, 
- =?utf-8?q?Bj=C3=B6rn_Roy_Baron?= <bjorn3_gh@protonmail.com>, 
- Benno Lossin <lossin@kernel.org>, Andreas Hindborg <a.hindborg@kernel.org>, 
- Alice Ryhl <aliceryhl@google.com>, Trevor Gross <tmgross@umich.edu>, 
- Danilo Krummrich <dakr@kernel.org>, 
- Maarten Lankhorst <maarten.lankhorst@linux.intel.com>, 
- Maxime Ripard <mripard@kernel.org>, Thomas Zimmermann <tzimmermann@suse.de>, 
- David Airlie <airlied@gmail.com>, Simona Vetter <simona@ffwll.ch>, 
- FUJITA Tomonori <fujita.tomonori@gmail.com>, Andrew Lunn <andrew@lunn.ch>, 
- Heiner Kallweit <hkallweit1@gmail.com>, 
- Russell King <linux@armlinux.org.uk>, 
- "David S. Miller" <davem@davemloft.net>, Eric Dumazet <edumazet@google.com>, 
- Jakub Kicinski <kuba@kernel.org>, Paolo Abeni <pabeni@redhat.com>, 
- Michael Turquette <mturquette@baylibre.com>, 
- Stephen Boyd <sboyd@kernel.org>, Breno Leitao <leitao@debian.org>, 
- Greg Kroah-Hartman <gregkh@linuxfoundation.org>, 
- Luis Chamberlain <mcgrof@kernel.org>, Russ Weight <russ.weight@linux.dev>, 
- Dave Ertman <david.m.ertman@intel.com>, Ira Weiny <ira.weiny@intel.com>, 
- Leon Romanovsky <leon@kernel.org>, Bjorn Helgaas <bhelgaas@google.com>, 
- =?utf-8?q?Krzysztof_Wilczy=C5=84ski?= <kwilczynski@kernel.org>, 
- Arnd Bergmann <arnd@arndb.de>, Brendan Higgins <brendan.higgins@linux.dev>, 
- David Gow <davidgow@google.com>, Rae Moar <rmoar@google.com>, 
- Jens Axboe <axboe@kernel.dk>
-Cc: linux-pm@vger.kernel.org, linux-kernel@vger.kernel.org, 
- rust-for-linux@vger.kernel.org, nouveau@lists.freedesktop.org, 
- dri-devel@lists.freedesktop.org, netdev@vger.kernel.org, 
- linux-clk@vger.kernel.org, linux-pci@vger.kernel.org, 
- linux-kselftest@vger.kernel.org, kunit-dev@googlegroups.com, 
- linux-block@vger.kernel.org, Tamir Duberstein <tamird@gmail.com>
-X-Mailer: b4 0.15-dev
-X-Developer-Signature: v=1; a=openssh-sha256; t=1752161491; l=3792;
- i=tamird@gmail.com; h=from:subject:message-id;
- bh=lLdnM+NUEuXkQdsCZ2Zc/ZWA5W8wgiORDQ2a6677Zzo=;
- b=U1NIU0lHAAAAAQAAADMAAAALc3NoLWVkMjU1MTkAAAAgtYz36g7iDMSkY5K7Ab51ksGX7hJgs
- MRt+XVZTrIzMVIAAAAGcGF0YXR0AAAAAAAAAAZzaGE1MTIAAABTAAAAC3NzaC1lZDI1NTE5AAAA
- QEQCLdocV7E4OivASyLh0mReapGH3HAqrlKw6p+xfkfcFh+9TajU5mVNbgdK6iJLvlwtkJLY9Sp
- YR4gNbcIrDgs=
-X-Developer-Key: i=tamird@gmail.com; a=openssh;
- fpr=SHA256:264rPmnnrb+ERkS7DDS3tuwqcJss/zevJRzoylqMsbc
-X-Mailman-Approved-At: Mon, 06 Oct 2025 20:57:16 +0000
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: SN7PR12MB8059:EE_|CY8PR12MB7171:EE_
+X-MS-Office365-Filtering-Correlation-Id: 999cee87-0e9e-46c8-e2e4-08ddc2e58538
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: BCL:0;ARA:13230040|1800799024|376014|366016|7053199007;
+X-Microsoft-Antispam-Message-Info: =?us-ascii?Q?yIWcutlKhwTsc9W4Zdx8SzWK6pGlQ8xSVU3RJzbmcMpjMTxKawkHDYuNctgw?=
+ =?us-ascii?Q?xs94XqP4KeQyrpii7GId2MOHsDLm3n2wTAwst5U9GAtShb9GQCPOxmAO/wLj?=
+ =?us-ascii?Q?3S5SsiumUdQnpMqAe1gk36QY4AB6YBehUjv0UCy4WEF1oAcUdvuRrhV7Dzs+?=
+ =?us-ascii?Q?LN6Xgr9NsuBaH2YWqb+B1L+EJiHbq62WOtj3gxjCKQ5UKoEaQSidxbzuykNZ?=
+ =?us-ascii?Q?U+p9Lz3s54ZBG2+XKYiu9vbeO8gI/oeuwafsbiVIBP02qvCSwByZbtDsF7Mi?=
+ =?us-ascii?Q?ike5Pz/O8lFf2ncRSCkp1JxwEJOMixYbRovMj6Huc4IjTFNy7y2k/nBY0rD3?=
+ =?us-ascii?Q?xtm5PTRtegVXV5egMsvRyUpziWjJKaIA3LgYq9QldbSISUBBYPEBAI1HAEH+?=
+ =?us-ascii?Q?c3GEKFQLLt4gcjQVoxXPXlPocUT8l7ofwza704x/w+HOfB06vV7lDeqV6OkM?=
+ =?us-ascii?Q?O0onQlU2I35QNLGshf+44h6LZN27KPbLmm/pZzytz+4Y17HuabIWgjgVnR8j?=
+ =?us-ascii?Q?B0EU63eXKCSoCsYatHY5DoFSLxUYW/eQKsCTkZ4/2ZK7syQlITsxKG81pJy8?=
+ =?us-ascii?Q?Y1LUqZnyltnkrPxLaPi2j4WhkL6gwH4tz0Sdn8jHndOwwChT7wTKDKAaLRQh?=
+ =?us-ascii?Q?JHeYEmz1w5OG9toSS3bQnp6wAFthYL+Pu423fWI5BL+FU5vmfUVe4WanM1Hc?=
+ =?us-ascii?Q?SOI04GKYIZsb6GH9gzHnZHx7KmyWYuxbL5FZ17gb63nYz8MZs3SlNgltIMvk?=
+ =?us-ascii?Q?KhfkndAuzt2bNlr1ThpgzXNuqdhue4ppSZ8hXQY8mf9DUku9fdE6YuVR0tu2?=
+ =?us-ascii?Q?XWtDl6/b2tbKUB8blLnhAE2x3/R0UJBWkpTmwnwZ/UWMjVxpQKku5oZ9zooA?=
+ =?us-ascii?Q?ssIhwOu57O7eT1EHMdnVSbafB5v7TO/jUdNvwFEPBpA96aVd9wQ725496B9H?=
+ =?us-ascii?Q?g9G/HJjreJRNl16lQdEX9byV0h70y4wRMS+1+Y6JtMcfDDYY8LRtZ/hay+G7?=
+ =?us-ascii?Q?IEL2nwWeczRlF6LHfhhnIzEj3X/plAw/hNx+krvQVz3UkqThgN62GdU/b/+s?=
+ =?us-ascii?Q?GSzmPoSXnB8mmeuERZeFRyxlxavaR6QikEwzVVpWWvQwObDXXj+WfeJkN8s8?=
+ =?us-ascii?Q?oNehjlc6mzAKTia10gtVXtjUbGkCNJ//9icpOL5a7NB7OGlXx5ZKn3MN/xGv?=
+ =?us-ascii?Q?i82GBNpZU31+pBVzaSFU9ZOaU5+JS0tRSVzQkuvIxpDXtt9lpqW9/FatEJJh?=
+ =?us-ascii?Q?FeWP4v9UXFhLs1nAQtqqCnWwploV9xkdsy4wA5OjKKgqUkm2jiwMDWZkp1mL?=
+ =?us-ascii?Q?wUA1udjvB+CMgVMyyKmLSUCre2gwo8mU4lHpgoW+b82JDE4PSsinXdjoS+4a?=
+ =?us-ascii?Q?uHKgh/cva1neVh3hXUvS8SbzG4WRrVcrjVOwo8Immw5e5OSYI+oMk159ULxw?=
+ =?us-ascii?Q?HO4zy7oZUAA=3D?=
+X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
+ IPV:NLI; SFV:NSPM; H:SN7PR12MB8059.namprd12.prod.outlook.com; PTR:; CAT:NONE;
+ SFS:(13230040)(1800799024)(376014)(366016)(7053199007); DIR:OUT; SFP:1101; 
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0: =?us-ascii?Q?94VOolwSbe9nSx0jtc83fKwq7u5PseCo1UbYPjwCTnvGyhiowG5Vd0HMhI8j?=
+ =?us-ascii?Q?UggJUywzr7DSKs1cXNVAXaKQ0d6tuZDVGIx/iYXZe2Gc85gk6mEyve6RyPbG?=
+ =?us-ascii?Q?/3q+kzEtL5tKwKlGTJgvO4mUoKVLJlViB4FF0UkNReFmiWb+OmVOA+vSgJ82?=
+ =?us-ascii?Q?Ho2mDFCCqNGaU9yd78kg/nvV2c/CW0AC//tsxzBOk57vOja6LMRiJgoNTUxG?=
+ =?us-ascii?Q?p496iJjUKNH3o9yTrKfU8OCfyIQpz82Dvl7IKOfbbLfjtcN/0iPnqs/QAcW5?=
+ =?us-ascii?Q?CuE8J6gBVQpCmplmM892vMxXtK9p8d+WdWG+Jw7XQWtQixNMm19at01cyRHQ?=
+ =?us-ascii?Q?ARi8SgBe3tckn3kEd9hNVpXM5XUIfkwsrADEkItQVdvEDE+7r5VhgBoIBgQa?=
+ =?us-ascii?Q?WxOwj2ESrxoFJYjP95EPR5Mi9VARL5pyVKwERrf9Lux/DJQasxNWP2yJ4y1e?=
+ =?us-ascii?Q?F4uL3TRqi3T+eyqj8oXpq90XXFSmRErQFr4UAq4iQtVhzdbllMso89fDqg/N?=
+ =?us-ascii?Q?ulAM+nIhpMi0eVsRycz5sflLqpWDExxEGw+P5WAb8B8YUBsujOGzb+hk4IE2?=
+ =?us-ascii?Q?TSRt9ThxvZLtc9yvYupCgYab0eliXc1YwT+1xZIkPlzA9llzlZCnuiYD5r8P?=
+ =?us-ascii?Q?EfBPwSmjfhZ7Eig0LuvkeQEfIzxTM70F9BOIcxMN5rGBa/0Q7Btzed0hh6VJ?=
+ =?us-ascii?Q?oargTf67V46lIHZUwhAcsxI8UbGhgHpNXqVwzrGpWPz7VY/VmCFOmAXZG5vL?=
+ =?us-ascii?Q?TZFHmn5uqbcQOeydQalAYM1fEtHQI11tBRi3s1Q3DqCyvXBtH9bvsav8YRiZ?=
+ =?us-ascii?Q?zy2JilQ8aDcx+AbcDZDQpvLxqHz89ympep9jpMt5mLiI07eS3xVn1M8U8oil?=
+ =?us-ascii?Q?3n3zXn6jFSpQEd4POpg9we/cILwJtBZnI10Ef3xLwABHsW0nxK80IVDMeOUd?=
+ =?us-ascii?Q?3U9D9Jt4yc6Y2yhhjm4Qb7W2NrNXuwHrNLE0V8McvmnUBRSSE0X7iJy2H5+t?=
+ =?us-ascii?Q?m6F/jqLPetU91sgyU7ULlHujrbvRbIX//Q7RV8HZipV70+7izkLIe4V6wSsV?=
+ =?us-ascii?Q?/jgBwh4VxliscaAUqruZeJaIJq4Ej1uGYe188z1cBC32jyzpBfb6iviSAnyj?=
+ =?us-ascii?Q?cGJ+bSpL502m3ZPoJuElvhi4PgBc5bP06DcuvQX0cVFDAIdIkuVOgSgyYtgr?=
+ =?us-ascii?Q?QlyN6BHoF926dpmmsO2Es9y8Q6qjF3ieSJ6XrRBfKOFjv7tT7k/HJNoqwDnN?=
+ =?us-ascii?Q?mWsG3I63NsbfXif/QTHUrlU6k+vHHdwWPONg7jedzUpy0Ba+U/fdNN9axl6i?=
+ =?us-ascii?Q?H0ZwA/cGzjjT6Hiqf1fZrNz5ZCwky/jlSJQJ4Ix6utw2Q5LcSk/abkgnM0tc?=
+ =?us-ascii?Q?84zUmgzS7FkoOoFKyNANFkSGIf60WdHxJ7IuIncDQfkwOaGbph84P3YBVTLZ?=
+ =?us-ascii?Q?Gy0Oukm2RzKCoKzMeryTi35WTA7+Mi+0AhFm4fjBEe8RwUSE8JwRw9yf9PVT?=
+ =?us-ascii?Q?Gwj624QW2riwWesrAG8fOZdfUEXhUWtmEgRl3ZuMRuuUV/9IelofMO4VBOTa?=
+ =?us-ascii?Q?X70JWNtKMSNwiiY7if13WBhuvIDgsU+m3aDLaFs2?=
+X-OriginatorOrg: Nvidia.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: 999cee87-0e9e-46c8-e2e4-08ddc2e58538
+X-MS-Exchange-CrossTenant-AuthSource: SN7PR12MB8059.namprd12.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 14 Jul 2025 14:48:39.6192 (UTC)
+X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
+X-MS-Exchange-CrossTenant-Id: 43083d15-7273-40c1-b7db-39efd9ccc17a
+X-MS-Exchange-CrossTenant-MailboxType: HOSTED
+X-MS-Exchange-CrossTenant-UserPrincipalName: oWYXR8CazjgxMoC7NrMIm7KyjEEYfa39yOK6WxVsULBcT/k+tFuibq3O4QnJJrxqlaHE4XwImYidKH5tYYy8tg==
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: CY8PR12MB7171
+X-Mailman-Approved-At: Mon, 06 Oct 2025 20:46:16 +0000
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -129,108 +146,85 @@ List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-C-String literals were added in Rust 1.77. Replace instances of
-`kernel::c_str!` with C-String literals where possible.
+Hello, Rhys,
 
-Acked-by: Greg Kroah-Hartman <gregkh@linuxfoundation.org>
-Reviewed-by: Alice Ryhl <aliceryhl@google.com>
-Signed-off-by: Tamir Duberstein <tamird@gmail.com>
----
- drivers/block/rnull.rs         | 2 +-
- rust/kernel/sync.rs            | 5 ++---
- rust/kernel/sync/completion.rs | 2 +-
- rust/kernel/workqueue.rs       | 8 ++++----
- 4 files changed, 8 insertions(+), 9 deletions(-)
+On Mon, Jul 14, 2025 at 04:02:23AM -0700, Rhys Lloyd wrote:
+> Instead of the data field containing a u32 and changing the alignment,
+> change data to [u8; 4] and convert to u32 with a helper function.
+> Removes another magic number by making the struct the same size as
+> the data it needs to read, allowing the use of
+> `size_of::<PmuLookupTableEntry>()`
+> 
+> Signed-off-by: Rhys Lloyd <krakow20@gmail.com>
+> ---
+> Changes in v2:
+> - get_data helper function renamed to data
+> 
+> ---
+>  drivers/gpu/nova-core/vbios.rs | 13 +++++++++----
+>  1 file changed, 9 insertions(+), 4 deletions(-)
+> 
+> diff --git a/drivers/gpu/nova-core/vbios.rs b/drivers/gpu/nova-core/vbios.rs
+> index 5b5d9f38cbb3..339c66e63c7e 100644
+> --- a/drivers/gpu/nova-core/vbios.rs
+> +++ b/drivers/gpu/nova-core/vbios.rs
+> @@ -896,21 +896,26 @@ fn try_from(base: BiosImageBase) -> Result<Self> {
+>  struct PmuLookupTableEntry {
+>      application_id: u8,
+>      target_id: u8,
+> -    data: u32,
+> +    data: [u8; 4],
 
-diff --git a/drivers/block/rnull.rs b/drivers/block/rnull.rs
-index 6366da12c5a5..9aa79b862b63 100644
---- a/drivers/block/rnull.rs
-+++ b/drivers/block/rnull.rs
-@@ -55,7 +55,7 @@ fn init(_module: &'static ThisModule) -> impl PinInit<Self, Error> {
-         })();
- 
-         try_pin_init!(Self {
--            _disk <- new_mutex!(disk?, "nullb:disk"),
-+            _disk <- new_mutex!(disk?, c"nullb:disk"),
-         })
-     }
- }
-diff --git a/rust/kernel/sync.rs b/rust/kernel/sync.rs
-index 63c99e015ad6..9a6d2753937d 100644
---- a/rust/kernel/sync.rs
-+++ b/rust/kernel/sync.rs
-@@ -43,7 +43,6 @@ impl LockClassKey {
-     ///
-     /// # Examples
-     /// ```
--    /// # use kernel::c_str;
-     /// # use kernel::alloc::KBox;
-     /// # use kernel::types::ForeignOwnable;
-     /// # use kernel::sync::{LockClassKey, SpinLock};
-@@ -55,7 +54,7 @@ impl LockClassKey {
-     /// {
-     ///     stack_pin_init!(let num: SpinLock<u32> = SpinLock::new(
-     ///         0,
--    ///         c_str!("my_spinlock"),
-+    ///         c"my_spinlock",
-     ///         // SAFETY: `key_ptr` is returned by the above `into_foreign()`, whose
-     ///         // `from_foreign()` has not yet been called.
-     ///         unsafe { <Pin<KBox<LockClassKey>> as ForeignOwnable>::borrow(key_ptr) }
-@@ -111,6 +110,6 @@ macro_rules! optional_name {
-         $crate::c_str!(::core::concat!(::core::file!(), ":", ::core::line!()))
-     };
-     ($name:literal) => {
--        $crate::c_str!($name)
-+        $name
-     };
- }
-diff --git a/rust/kernel/sync/completion.rs b/rust/kernel/sync/completion.rs
-index c50012a940a3..97d39c248793 100644
---- a/rust/kernel/sync/completion.rs
-+++ b/rust/kernel/sync/completion.rs
-@@ -34,7 +34,7 @@
- /// impl MyTask {
- ///     fn new() -> Result<Arc<Self>> {
- ///         let this = Arc::pin_init(pin_init!(MyTask {
--///             work <- new_work!("MyTask::work"),
-+///             work <- new_work!(c"MyTask::work"),
- ///             done <- Completion::new(),
- ///         }), GFP_KERNEL)?;
- ///
-diff --git a/rust/kernel/workqueue.rs b/rust/kernel/workqueue.rs
-index cce23684af24..432624c69c72 100644
---- a/rust/kernel/workqueue.rs
-+++ b/rust/kernel/workqueue.rs
-@@ -51,7 +51,7 @@
- //!     fn new(value: i32) -> Result<Arc<Self>> {
- //!         Arc::pin_init(pin_init!(MyStruct {
- //!             value,
--//!             work <- new_work!("MyStruct::work"),
-+//!             work <- new_work!(c"MyStruct::work"),
- //!         }), GFP_KERNEL)
- //!     }
- //! }
-@@ -98,8 +98,8 @@
- //!         Arc::pin_init(pin_init!(MyStruct {
- //!             value_1,
- //!             value_2,
--//!             work_1 <- new_work!("MyStruct::work_1"),
--//!             work_2 <- new_work!("MyStruct::work_2"),
-+//!             work_1 <- new_work!(c"MyStruct::work_1"),
-+//!             work_2 <- new_work!(c"MyStruct::work_2"),
- //!         }), GFP_KERNEL)
- //!     }
- //! }
-@@ -215,7 +215,7 @@ pub fn try_spawn<T: 'static + Send + FnOnce()>(
-         func: T,
-     ) -> Result<(), AllocError> {
-         let init = pin_init!(ClosureWork {
--            work <- new_work!("Queue::try_spawn"),
-+            work <- new_work!(c"Queue::try_spawn"),
-             func: Some(func),
-         });
- 
+Instead of this, could we make the struct as #repr[(C, packed)] or does that
+not work for some reason?
 
--- 
-2.50.0
+>  }
+>  
+>  impl PmuLookupTableEntry {
+>      fn new(data: &[u8]) -> Result<Self> {
+> -        if data.len() < 6 {
+> +        if data.len() < core::mem::size_of::<Self>() {
 
+This part looks good, and thanks for the fix. Alex beat me to the review but
+for the actual fix [1], FWIW:
+Reviewed-by: Joel Fernandes <joelagnelf@nvidia.com>
+
+[1] https://lore.kernel.org/all/DBBG2S0ZQAMI.2KK26Z7U58DI8@nvidia.com/#t
+
+thanks,
+
+ - Joel
+
+>              return Err(EINVAL);
+>          }
+>  
+>          Ok(PmuLookupTableEntry {
+>              application_id: data[0],
+>              target_id: data[1],
+> -            data: u32::from_le_bytes(data[2..6].try_into().map_err(|_| EINVAL)?),
+> +            data: [data[2], data[3], data[4], data[5]],
+>          })
+>      }
+> +
+> +    /// Construct a u32 from `self.data`.
+> +    fn data(&self) -> u32 {
+> +        u32::from_le_bytes(self.data)
+> +    }
+>  }
+>  
+>  /// The [`PmuLookupTableEntry`] structure is used to find the [`PmuLookupTableEntry`] for a given
+> @@ -1037,7 +1042,7 @@ fn setup_falcon_data(
+>              .find_entry_by_type(FALCON_UCODE_ENTRY_APPID_FWSEC_PROD)
+>          {
+>              Ok(entry) => {
+> -                let mut ucode_offset = entry.data as usize;
+> +                let mut ucode_offset = entry.data() as usize;
+>                  ucode_offset -= pci_at_image.base.data.len();
+>                  if ucode_offset < first_fwsec.base.data.len() {
+>                      dev_err!(pdev.as_ref(), "Falcon Ucode offset not in second Fwsec.\n");
+> 
+> base-commit: 215a3f91713383a3c0d2da82d223a608a3c17ac1
+> prerequisite-patch-id: d80f92d314a0693d4c89ffb7810d9ab6990336fa
+> -- 
+> 2.50.1
+> 
