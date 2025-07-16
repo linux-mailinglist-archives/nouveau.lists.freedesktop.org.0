@@ -2,156 +2,51 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id 86C76B06B42
-	for <lists+nouveau@lfdr.de>; Wed, 16 Jul 2025 03:43:51 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 91AF0B07A26
+	for <lists+nouveau@lfdr.de>; Wed, 16 Jul 2025 17:43:35 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 520B610E6D2;
-	Wed, 16 Jul 2025 01:43:49 +0000 (UTC)
-Authentication-Results: gabe.freedesktop.org;
-	dkim=pass (2048-bit key; unprotected) header.d=Nvidia.com header.i=@Nvidia.com header.b="Du3M+c8+";
-	dkim-atps=neutral
+	by gabe.freedesktop.org (Postfix) with ESMTP id 85C4E10E39A;
+	Wed, 16 Jul 2025 15:43:33 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from NAM11-DM6-obe.outbound.protection.outlook.com
- (mail-dm6nam11on2061.outbound.protection.outlook.com [40.107.223.61])
- by gabe.freedesktop.org (Postfix) with ESMTPS id B59B910E241;
- Wed, 16 Jul 2025 01:43:47 +0000 (UTC)
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=Sp7j92qaBqKu28bxwcaxvxPh1wWYJTfBjE/1XgOn4VbhEbUkNWID595wyV0Ngms+DuR4pu93SVd0tKm8Cl0EZTppUCk6zEp/Ks+FUQk4AzXFrZXdXbQnBWW+VbFGrctTQ9CdllhTOib2FnfnrISAVID9Goujq1pfbNV4BSNF4XFloLsOca9JTJV6znlZxMlHdhcswG495MV11RoQO3fvG1r/o5YDdKqobeNq7POd2jshw5vxSo/4MUlmTMSQM4hOdRcTiZvhcPSRE7b9wzCnhvcm7gVEddiHaEfn8pG3s751OmYb55P29723jUTOGXOb/1KkEnLDMGpJ/BVjERqdMQ==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=dU0Bq4utsJESg3vB7PtygPXEPXxHtcqZ/H5JOIQA02o=;
- b=d3VY4oSLkMyu9umg5L/ZHMJCANUsoLu0xPvzallnw2y0xPuAviUl24n7wYef2D+MGw2x+SIsF6j/TGUe8YuxvVtZfDzYEx7Wam9VKnrZ4V4grF2A6oihBKJcpG5T6GXnsf5TnJBQzw6pj5qVRB8J39NHOy4SVNiMA+OlRD62zMRpa5OHeUnD6QIAWlL51ND27uXV5VtSkpyIP9KjwnVa9HZMwi8oBhZmQCyr1dmEk3I6GpQNacL9YiB5QelNJ+NNQQ5M7KhpNyn/TR1zsLYSte5+PdBtf4s/y+8TleTXoKDoLhbJol42PSC2NybiNuvmZnzeY2X7PC6ONW+V58y88g==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=nvidia.com; dmarc=pass action=none header.from=nvidia.com;
- dkim=pass header.d=nvidia.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=Nvidia.com;
- s=selector2;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=dU0Bq4utsJESg3vB7PtygPXEPXxHtcqZ/H5JOIQA02o=;
- b=Du3M+c8+IhZ0sxhHr2NqeRocP5e+YcqU/ZOk2fx4Vq4p7hASm+ug7EF8fC9lBjoxAip7AC+rjUba3XkbBcmjiDq2nZQHqQsZjRiQxJDdyMx9K6DMDX86Ogf5OoxP5y84zlMPmwSUVjHaNVkr0ECrZXfoMOMEdY9/6BwQJbOMYUyVcZCdomnGb4EtsHrEOdh2u/h67VrZWJ8rBmDgyTdDYyO+b6WBqsjhFxWGEOxZv+PhEDc0WOXdxENLAIQwIYQD1tenAh4pZqvXoV95ckc9rnaLqRtzlNjZwzQHDV+G62G0UDTxbcPQYXSafxu9vv3V497G5KEb+qUyEIQEcSKWhg==
-Authentication-Results: dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=nvidia.com;
-Received: from CH2PR12MB3990.namprd12.prod.outlook.com (2603:10b6:610:28::18)
- by PH0PR12MB8032.namprd12.prod.outlook.com (2603:10b6:510:26f::15)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.8901.22; Wed, 16 Jul
- 2025 01:43:44 +0000
-Received: from CH2PR12MB3990.namprd12.prod.outlook.com
- ([fe80::6e37:569f:82ee:3f99]) by CH2PR12MB3990.namprd12.prod.outlook.com
- ([fe80::6e37:569f:82ee:3f99%4]) with mapi id 15.20.8901.021; Wed, 16 Jul 2025
- 01:43:44 +0000
-Content-Transfer-Encoding: quoted-printable
-Content-Type: text/plain; charset=UTF-8
-Date: Wed, 16 Jul 2025 10:43:41 +0900
-Message-Id: <DBD3K8IK7UO5.2887TW6EM1CK5@nvidia.com>
-Cc: <rust-for-linux@vger.kernel.org>, <airlied@gmail.com>,
- <simona@ffwll.ch>, <nouveau@lists.freedesktop.org>,
- <dri-devel@lists.freedesktop.org>, <linux-kernel@vger.kernel.org>
-Subject: Re: [PATCH] gpu: nova-core: vbios: use size_of instead of magic number
-From: "Alexandre Courbot" <acourbot@nvidia.com>
-To: "Rhys Lloyd" <krakow20@gmail.com>, <dakr@kernel.org>
-X-Mailer: aerc 0.20.1-0-g2ecb8770224a-dirty
-References: <20250714104322.100511-1-krakow20@gmail.com>
- <20250714104322.100511-3-krakow20@gmail.com>
-In-Reply-To: <20250714104322.100511-3-krakow20@gmail.com>
-X-ClientProxiedBy: TYCP301CA0056.JPNP301.PROD.OUTLOOK.COM
- (2603:1096:400:384::18) To CH2PR12MB3990.namprd12.prod.outlook.com
- (2603:10b6:610:28::18)
+Received: from foss.arm.com (foss.arm.com [217.140.110.172])
+ by gabe.freedesktop.org (Postfix) with ESMTP id 95BF410E293;
+ Wed, 16 Jul 2025 15:43:32 +0000 (UTC)
+Received: from usa-sjc-imap-foss1.foss.arm.com (unknown [10.121.207.14])
+ by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id DDFD8113E;
+ Wed, 16 Jul 2025 08:43:23 -0700 (PDT)
+Received: from [10.57.86.212] (unknown [10.57.86.212])
+ by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id 1D3383F66E;
+ Wed, 16 Jul 2025 08:43:26 -0700 (PDT)
+Message-ID: <0108b3cd-dfdd-4e4c-a2d8-157458e26f77@arm.com>
+Date: Wed, 16 Jul 2025 16:43:24 +0100
 MIME-Version: 1.0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: CH2PR12MB3990:EE_|PH0PR12MB8032:EE_
-X-MS-Office365-Filtering-Correlation-Id: e34c319a-1c5c-41fe-562d-08ddc40a3318
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0;
- ARA:13230040|1800799024|10070799003|366016|376014|7053199007; 
-X-Microsoft-Antispam-Message-Info: =?utf-8?B?bjFmL0VrRkZaMG1RMTd1YmViejhpSTU1M2NRNFU4blZCOGlQRm9FQzY3QTQw?=
- =?utf-8?B?MkFpdVBTMTNsZGdBVGdBODBSNmZsNU5zNEUyZ2FHejhYV2FWSk0rdnM0d3B0?=
- =?utf-8?B?STlXcHFCOVoxc1ZwcEdjWFl0aExQYzZrNFBwUHlxN2U1akh6c1A4ZDhJQk9o?=
- =?utf-8?B?ODVBYytYL0tNTlFHQVBLeWJlTjUwUHU5cm9lbnpLQ1RLbWs5KzAyRVYwSzhm?=
- =?utf-8?B?dmhvYllEVlp4Qm5DeENzZy9OREh2S1JUMXp6dU1MSlgweDNWcHJEY2dNcTZB?=
- =?utf-8?B?SzdtamYxcndxUzkzQ25jY1ExckRSK3U1bmx6YUx1ZWlYVEVScy9zQUNGV1NY?=
- =?utf-8?B?U2NGM1l6Z2FYMi80dmNXUTJtdERNenRDeUc3RThFemxhVUNsUFpOWXlkTGVC?=
- =?utf-8?B?Y1F2SjZUSkozcFdNUTlxeWZqZXpNQnZRdFVrVC9mVm5pdlhSUU5zS0Ric2Fm?=
- =?utf-8?B?ZEZpNnM5NTR0VGcwbVVHT3dyN05VTUZTcmh5Tkp4UU5mZUVGa0tvYlRqL1JX?=
- =?utf-8?B?TmlyenRBK0lmWFJha2lVY0dCTnNXQnRRYVZiYmN2ZlIxcGlMM2g3ZkdzdTc4?=
- =?utf-8?B?cGFBdlkrTkxyUS8rb0xSUmR4OFJJc2lrMGVvYjFCbFN6d1hFVGhjbStha1Uv?=
- =?utf-8?B?cUhyWHJnbTVWcmdmZVNDdW5SclM1dHlNbTRoTXFDcFozNDdiWHVHaXUvSEVN?=
- =?utf-8?B?cWt0aHZnczBGNlo1elpUNkxLSWFGby8xRlZLbDZ6MFlxTzdCL0MweUVyc21X?=
- =?utf-8?B?V2FyY2xFZDUyMy92OVUzTzN0ZU5GZ2luK0NVQzYvVENxMWovalRHU3d5M3dI?=
- =?utf-8?B?emNxMmhyOGtNYVhWNm5JYTIzOHZPYlgzbkIveUxNczFwM05EL2NIWlNHc0dM?=
- =?utf-8?B?MFhoSkprckUwd0J4NStRb0FhRUtjaDlxcWhxb3daT3FReEJkT3lOczkrWml4?=
- =?utf-8?B?S05jU1RKdnhJZFpMSk8yOUs5bkJEU2dNRVFmQ0FSZXJyd3B5bEJGcXFPcGZo?=
- =?utf-8?B?MTgzcUZucmJRYWdFM0J4UCsvMURSYjJBbUlFY2RlUGJON3d5STlaUVlwQTht?=
- =?utf-8?B?a1VvZzdZa093azZVMFJwTXRsaVhKRHB3L0g0S1ZhaDdLOFA4U0xmbXJlTU5i?=
- =?utf-8?B?QTVwKzVYT09GbklvMTJMcGdqTi9KWVV1Ry9KTUxZbmdSTEVKNmMxUjBzRDNs?=
- =?utf-8?B?OUZIZHFSbjI5Z2dJNEIvNUFQbExsejE3d1ZpdEcrQlNzNi9NUER0ZkhXaUxS?=
- =?utf-8?B?Wlo1bjNXbGVXTlBoaTZNT0oycWozaEZ4djdUQkdocjh6QTVXTDB1T014enVR?=
- =?utf-8?B?ZnNtOHpOaFZRZXRBTjlXOTdVTFpRamVxV2pNNTd3WHFaY3JPQk9IWnpnR3ly?=
- =?utf-8?B?NXJBKytsWUVXUmRBaG1yK29ZZkkwS1JDVm4zMFhYNGFURXY0cm5weC9COC9P?=
- =?utf-8?B?OC8xakNxd3Y2M0NYTGQyT3NWUCtCZ3g5cGJjemNQRGFhaEFqSUZab3RXQUll?=
- =?utf-8?B?d1RNbU5PTDNZbEZpdWRUWmhQcHkrNXg5RE9ybmpwT1NWMWg1YnFBRG5aMEZE?=
- =?utf-8?B?Y1Fqb2h0RFY5Y1prWmVUZ2RwTGJ4TVRWMWZiV25iaDhmRVF6NVY5YjNIZ1Ew?=
- =?utf-8?B?cXd2MHVKbGVieFliOXVZL1ZlYXFWVkZJSVBBZU9JbHRPb1JXWDZ0WXJrMmlZ?=
- =?utf-8?B?SFBuQm9SU2xoRlBoMlNMdVppR29oZkhXOVBjaSsrUDhzTkVkSmVNNG9IUlRo?=
- =?utf-8?B?aTFlWmNOYk9MUjZ3L2YzclMwMjllbEYzR2wwSkRmSVgrUmUrTEQxenZMa1ZY?=
- =?utf-8?B?em9YbSt6SXJDT1hwQ0RlbGNEZkFJbXRsY05WcDl0RjRWc01ZaWJERU81V2hW?=
- =?utf-8?B?V3F4OFFCRXZwYzhCRDhuUnpmNk83cUx0Z1hsTDBXcnAxVVpFVlJxazBzb0VM?=
- =?utf-8?Q?vgzc9OpXf7k=3D?=
-X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
- IPV:NLI; SFV:NSPM; H:CH2PR12MB3990.namprd12.prod.outlook.com; PTR:; CAT:NONE;
- SFS:(13230040)(1800799024)(10070799003)(366016)(376014)(7053199007); DIR:OUT;
- SFP:1101; 
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?VmJISmtYSjN3TWhiTHVab3dZaUVjTjhWRVh1OWx0R2RsdVVEdkptSmx3dUVv?=
- =?utf-8?B?dWVpeFFxMUd1MDhCbzRSZXB0MTIzeUFmRG1SbHlkN2QrYmdZcWFXRDBNRDRE?=
- =?utf-8?B?dlo1NkpudFNqRTNKTEgxdUZ4MG92UlVBK2MrejNzWERXTnVVd0tMajhGSmlJ?=
- =?utf-8?B?VnVSb1hBNzc3bnRuOHNvVk52M1czbS8wb25hSzVPUUlzMWp5bDVLVEJhVDhx?=
- =?utf-8?B?dGs3TVlyeUhHL2dzVGJOWUpLaHQvZlk0dUI1K1J5OHBVYW5lczRCVzBXQXFx?=
- =?utf-8?B?R3pyb25pUHhiSDdIWEMyaC84NFgyVjR5Q3FMYzQ4VHlESjdaN3JxVEltc010?=
- =?utf-8?B?Kyt6YWtzVTYzMlplNUdlRlEwK1doTTdVRG5ndTlyTXd5TDNxWGhoMUtVcE1B?=
- =?utf-8?B?eUlMU08wTkh5QUxHNytXb0UxdEtWaHNNbTRndVNoVzVOUnA2bzdBSm51bVFW?=
- =?utf-8?B?OFM4RWtsOVpIZjR5aThwVTN0TlJxUE1ZN3BXa0w5N3NtWlNZS0NXUHkyVllq?=
- =?utf-8?B?QTdrNHlYMFhmWi9SUDhXczRuYjd6RURIbDcyMXFrOWpRbncwa1pJYVIxVTF0?=
- =?utf-8?B?STkzYUlZY3R6MndmM3JvYnRxa2prSjIwSGM0Y3NrNWxPYlpKb21rYzFxMkg3?=
- =?utf-8?B?RUdaZjhCMXRoUEhwVjV4T1lSRUxsRHhPc0czbUVoWVZTbUhZZHlOSHN6Qld2?=
- =?utf-8?B?dWc3ajhFY2hkcE84cXR1L25lK1M3RGVOVEhDZk9oZm9nbURldzNVRVM0RWxM?=
- =?utf-8?B?dzVvU1VxOFdsUGRFOC9LK0ZwZWRiaC9abDBvMTVRZW9hOEw1L2xQeHc2QWd2?=
- =?utf-8?B?VENKaTVQc0xZejQyMzMyQ09HZ2tGM201ZmhyZ3U5NnhTR3ora1cwQjkrTFJS?=
- =?utf-8?B?c2hWbVlFdlp6cm9odDg5QjdGM3BYVW1va0kzUGhEeURzNUtyQVROQ0R2ZGxL?=
- =?utf-8?B?Y1RSTzdJMHpjeHk5b0FSWmEzYWFmQmNQY1E3N1dkclVHQVFxclNMYytYS21h?=
- =?utf-8?B?bDBGQkQ3WTVGWGg3OUFuRTl2cDVjVk40dEVhTGg1cHhwaERVL0lnbkRPeEtk?=
- =?utf-8?B?MmpZQTJQYk9RTXlQbmFyWjBza3FCaHBYay9vNFlTUEg0bzFMS0tmamxNL2ZW?=
- =?utf-8?B?azlGQW9CcytxeDA2QWJRcXR3ZmdpOGNGT3lraUtpYk1vOXd6MmQ3MC81d3lH?=
- =?utf-8?B?ZGpKR3FRd2NteW5DaHExMG9pbFJ3M1lydDRMMzZPWmx3My9zTUhIQTVWd21m?=
- =?utf-8?B?WTMra3krWk9qbkR4andld3d0QU5WNk05ejVjdmNuSEJZemhYSHNPU0NMOFh6?=
- =?utf-8?B?L1gzV0FGV2dmQVA0Q21ncWlUbGpHT25CZzV2UitFSkVuWnc5alQvL1BwQU9u?=
- =?utf-8?B?Mk4vMkRnbHprWHN1d0RML3owdlltMVNQM28vT1ZZbFFSNEROVjFLYkRWUWR0?=
- =?utf-8?B?REZJMjloM2thNzVsZkRORmlaWnB3YWtGcUhwTDdUNkZVRXR5ckpLUSsyRlVZ?=
- =?utf-8?B?RDQ2MFZWTGpHeVhLc0hEN1RtN01hQTQxN0VxbHNPZXdrWmowTUU5YmVaempU?=
- =?utf-8?B?NkdDanFhRXFVOXBKMGp5VWJEU1lFWlhBbHkzeTY2TjlDZTNLdDVRQlZVaVlB?=
- =?utf-8?B?MTZNYWRjZUY4VjZzOXRLQXI4TjNPZGFybU4raUp5b2VQTzZieGhLcEZTbkJU?=
- =?utf-8?B?Y2RENWUweEhPQmkvcjFJL251RzdHVTN6K0plekZwNlJUZThMUjgvWnNlR0FI?=
- =?utf-8?B?NW1BeGhhZGVBeDRrKzZRN3NtMFV6VW1LSGR4d2JqUDZLRDd2clN0L3Nmd0U3?=
- =?utf-8?B?NWNUa29JTHo5VlFJc0NMbFlhU21PL0lGdUhpbFBWZGJRUTR6ZEdKWlNjM21r?=
- =?utf-8?B?VVBjUTIzSlRqMllOVlNpemZHb1hWSkJ1M3JPcE0wMzN5Y2wwVi9YUUpPQS9V?=
- =?utf-8?B?ZTRITE9NTFUzSnVoWnB0WTJxbG9GMmVYaTBuOUhRRVVuUzVOU2poMzdoZ3lD?=
- =?utf-8?B?UFFyM2xvcjZsd1h5bXFSYnozWjhDQnlOd3dJVm12aUtiL2xHVkNlTzJJRmhM?=
- =?utf-8?B?YVpvQlNtLytXUVZxa0tTaGh6bzRFbzBvckhvbUlaamdDS09SeGg2VGZDbnRG?=
- =?utf-8?B?SkpYcnIwQ2tBZUJUUUNiNi80UTZtZGx4RUdtT3ZMS1J3OTMvbzdWRFc1R2Rs?=
- =?utf-8?Q?kseTl/z3hSQEwubbCvdVZR78GMTI6SY+2mLMBjzB6oip?=
-X-OriginatorOrg: Nvidia.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: e34c319a-1c5c-41fe-562d-08ddc40a3318
-X-MS-Exchange-CrossTenant-AuthSource: CH2PR12MB3990.namprd12.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 16 Jul 2025 01:43:44.3936 (UTC)
-X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
-X-MS-Exchange-CrossTenant-Id: 43083d15-7273-40c1-b7db-39efd9ccc17a
-X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: fAMtOJXrqqTjwFumAf8PLFOKbIzMRf4utHwOjGeoz6yWm9BxaZ0CM02clPCrHgxtwn/rI1lnU16ZA+1I9GRTUA==
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: PH0PR12MB8032
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v4 1/7] drm/panthor: Add support for atomic page table
+ updates
+To: Caterina Shablia <caterina.shablia@collabora.com>,
+ Maarten Lankhorst <maarten.lankhorst@linux.intel.com>,
+ Maxime Ripard <mripard@kernel.org>, Thomas Zimmermann <tzimmermann@suse.de>,
+ David Airlie <airlied@gmail.com>, Simona Vetter <simona@ffwll.ch>,
+ Frank Binns <frank.binns@imgtec.com>, Matt Coster <matt.coster@imgtec.com>,
+ Karol Herbst <kherbst@redhat.com>, Lyude Paul <lyude@redhat.com>,
+ Danilo Krummrich <dakr@kernel.org>,
+ Boris Brezillon <boris.brezillon@collabora.com>,
+ Liviu Dudau <liviu.dudau@arm.com>, Lucas De Marchi
+ <lucas.demarchi@intel.com>,
+ =?UTF-8?Q?Thomas_Hellstr=C3=B6m?= <thomas.hellstrom@linux.intel.com>,
+ Rodrigo Vivi <rodrigo.vivi@intel.com>
+Cc: dri-devel@lists.freedesktop.org, linux-kernel@vger.kernel.org,
+ nouveau@lists.freedesktop.org, intel-xe@lists.freedesktop.org,
+ asahi@lists.linux.dev, Asahi Lina <lina@asahilina.net>
+References: <20250707170442.1437009-1-caterina.shablia@collabora.com>
+ <d4a6208b-a4a4-451f-9799-7b9f5fb20c37@arm.com> <2813151.QOukoFCf94@xps>
+ <2434159.cojqenx9y0@xps>
+From: Steven Price <steven.price@arm.com>
+Content-Language: en-GB
+In-Reply-To: <2434159.cojqenx9y0@xps>
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -166,28 +61,310 @@ List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-On Mon Jul 14, 2025 at 7:43 PM JST, Rhys Lloyd wrote:
-> 12 is identical to the value of `size_of::<BitHeader>()`,
-> so use the latter instead.
->
-> Signed-off-by: Rhys Lloyd <krakow20@gmail.com>
-> ---
->  drivers/gpu/nova-core/vbios.rs | 2 +-
->  1 file changed, 1 insertion(+), 1 deletion(-)
->
-> diff --git a/drivers/gpu/nova-core/vbios.rs b/drivers/gpu/nova-core/vbios=
-.rs
-> index 663fc50e8b66..ac35415b4ffb 100644
-> --- a/drivers/gpu/nova-core/vbios.rs
-> +++ b/drivers/gpu/nova-core/vbios.rs
-> @@ -365,7 +365,7 @@ struct BitHeader {
-> =20
->  impl BitHeader {
->      fn new(data: &[u8]) -> Result<Self> {
-> -        if data.len() < 12 {
-> +        if data.len() < core::mem::size_of::<Self>() {
+On 15/07/2025 16:33, Caterina Shablia wrote:
+> El martes, 15 de julio de 2025 17:08:09 (hora de verano de Europa central), 
+> Caterina Shablia escribió:
+>> El viernes, 11 de julio de 2025 15:30:21 (hora de verano de Europa central),
+>> Steven Price escribió:
+>>> On 07/07/2025 18:04, Caterina Shablia wrote:
+>>>> From: Boris Brezillon <boris.brezillon@collabora.com>
+>>>>
+>>>> Move the lock/flush_mem operations around the gpuvm_sm_map() calls so
+>>>> we can implement true atomic page updates, where any access in the
+>>>> locked range done by the GPU has to wait for the page table updates
+>>>> to land before proceeding.
+>>>>
+>>>> This is needed for vkQueueBindSparse(), so we can replace the dummy
+>>>> page mapped over the entire object by actual BO backed pages in an
+>>>> atomic
+>>>> way.
+>>>>
+>>>> Signed-off-by: Boris Brezillon <boris.brezillon@collabora.com>
+>>>> Signed-off-by: Caterina Shablia <caterina.shablia@collabora.com>
+>>>> ---
+>>>>
+>>>>  drivers/gpu/drm/panthor/panthor_mmu.c | 65 +++++++++++++++++++++++++--
+>>>>  1 file changed, 62 insertions(+), 3 deletions(-)
+>>>>
+>>>> diff --git a/drivers/gpu/drm/panthor/panthor_mmu.c
+>>>> b/drivers/gpu/drm/panthor/panthor_mmu.c index b39ea6acc6a9..9caaba03c5eb
+>>>> 100644
+>>>> --- a/drivers/gpu/drm/panthor/panthor_mmu.c
+>>>> +++ b/drivers/gpu/drm/panthor/panthor_mmu.c
+>>>> @@ -387,6 +387,15 @@ struct panthor_vm {
+>>>>
+>>>>  	 * flagged as faulty as a result.
+>>>>  	 */
+>>>>  	
+>>>>  	bool unhandled_fault;
+>>>>
+>>>> +
+>>>> +	/** @locked_region: Information about the currently locked region
+>>>> currently. */ +	struct {
+>>>> +		/** @locked_region.start: Start of the locked region.
+>>
+>> */
+>>
+>>>> +		u64 start;
+>>>> +
+>>>> +		/** @locked_region.size: Size of the locked region. */
+>>>> +		u64 size;
+>>>> +	} locked_region;
+>>>>
+>>>>  };
+>>>>  
+>>>>  /**
+>>>>
+>>>> @@ -775,6 +784,10 @@ int panthor_vm_active(struct panthor_vm *vm)
+>>>>
+>>>>  	}
+>>>>  	
+>>>>  	ret = panthor_mmu_as_enable(vm->ptdev, vm->as.id, transtab,
+>>
+>> transcfg,
+>>
+>>>>  	vm->memattr);>
+>>>>
+>>>> +	if (!ret && vm->locked_region.size) {
+>>>> +		lock_region(ptdev, vm->as.id, vm->locked_region.start,
+>>>> vm->locked_region.size); +		ret = wait_ready(ptdev, vm-
+>>>
+>>> as.id);
+>>>
+>>>> +	}
+>>>
+>>> Do we need to do this? It seems odd to restore a MMU context and
+>>> immediately set a lock region. Is there a good reason we can't just
+>>> WARN_ON if there's a lock region set in panthor_vm_idle()?
+>>
+>> So IIUC, when things are otherwise idle and we do a vm_bind, the vm will be
+>> inactive, in which case we're not going to poke the mmu to inform it of the
+>> locked region, because it literally is not aware of this vm. Now if in the
+>> meanwhile something submits a job and activates the vm, we need to inform
+>> the mmu of the locked region, as vm_bind job might still be going on. I
+>> don't see why panthor_vm_idle while a region is locked would be a problem?
+>> That can arise e.g. when a job completes but there's a concurrent vm_bind
+>> going on?
 
-I agree, but would feel better if we also made `BitHeader` `#[repr(C)]`
-to really guarantee this.
+So it's absolutely fine (and normal) to perform a vm_bind while the VM
+is idle. In this case there's no need to perform the lock because
+there's nothing running on the GPU which could be affected by the page
+tables being (temporarily) inconsistent.
 
-(or please educate me if this is unneeded :))
+What I'm questioning is the design where if, in the middle of a vm_bind
+operation, a job comes in and then we set the lock region rather than
+just waiting for the vm_bind operation to complete. AFAICT simply
+synchronising on the vm->op_lock should achieve this.
+
+>>> I think we need to briefly take vm->op_lock to ensure synchronisation
+>>> but that doesn't seem a big issue. Or perhaps there's a good reason that
+>>> I'm missing?
+>>
+>> I think you're right, all other accesses to locked_region are guarded by
+>> op_lock. GPU job submit poke vm_active concurrently with vm_bind jobs doing
+>> region {,un}locks.
+> Actually no, that's not necessary. Access to locked_region is protected by 
+> slots_lock, which is held here. Trying to lock vm->op_lock would also be 
+> detrimental here, because these locks are often taken together and slots_lock 
+> is taken after op_lock is taken, so taking op_lock here would be extremely 
+> deadlockful.
+
+It would obviously be necessary to acquire vm->op_lock before
+as.slots_lock as you say to avoid deadlocks. Note that as soon as
+as.slots_lock is held vm->op_lock can be dropped.
+
+I just find the current approach a little odd, and unless there's a good
+reason for it would prefer that we don't enable a VM on a new address
+space while there's an outstanding vm_bind still running. Obviously if
+there's a good reason (e.g. we really do expect long running vm_bind
+operations) then that just need documenting in the commit message. But
+I'm not aware that's the case here.
+
+Although in general I'm a bit wary of relying on the whole lock region
+feature - previous GPUs have an errata. But maybe I'm being over
+cautious there.
+
+Thanks,
+
+Steve
+
+>>
+>>>>  out_make_active:
+>>>>  	if (!ret) {
+>>>>
+>>>> @@ -902,6 +915,9 @@ static int panthor_vm_unmap_pages(struct panthor_vm
+>>>> *vm, u64 iova, u64 size)>
+>>>>
+>>>>  	struct io_pgtable_ops *ops = vm->pgtbl_ops;
+>>>>  	u64 offset = 0;
+>>>>
+>>>> +	drm_WARN_ON(&ptdev->base,
+>>>> +		    (iova < vm->locked_region.start) ||
+>>>> +		    (iova + size > vm->locked_region.start + vm-
+>>>
+>>> locked_region.size));
+>>>
+>>>>  	drm_dbg(&ptdev->base, "unmap: as=%d, iova=%llx, len=%llx", vm-
+>>>
+>>> as.id,
+>>>
+>>>>  	iova, size);
+>>>>  	
+>>>>  	while (offset < size) {
+>>>>
+>>>> @@ -915,13 +931,12 @@ static int panthor_vm_unmap_pages(struct
+>>>> panthor_vm
+>>>> *vm, u64 iova, u64 size)>
+>>>>
+>>>>  				iova + offset + unmapped_sz,
+>>>>  				iova + offset + pgsize * pgcount,
+>>>>  				iova, iova + size);
+>>>>
+>>>> -			panthor_vm_flush_range(vm, iova, offset +
+>>
+>> unmapped_sz);
+>>
+>>>>  			return  -EINVAL;
+>>>>  		
+>>>>  		}
+>>>>  		offset += unmapped_sz;
+>>>>  	
+>>>>  	}
+>>>>
+>>>> -	return panthor_vm_flush_range(vm, iova, size);
+>>>> +	return 0;
+>>>>
+>>>>  }
+>>>>  
+>>>>  static int
+>>>>
+>>>> @@ -938,6 +953,10 @@ panthor_vm_map_pages(struct panthor_vm *vm, u64
+>>>> iova,
+>>>> int prot,>
+>>>>
+>>>>  	if (!size)
+>>>>  	
+>>>>  		return 0;
+>>>>
+>>>> +	drm_WARN_ON(&ptdev->base,
+>>>> +		    (iova < vm->locked_region.start) ||
+>>>> +		    (iova + size > vm->locked_region.start + vm-
+>>>
+>>> locked_region.size));
+>>>
+>>>> +
+>>>>
+>>>>  	for_each_sgtable_dma_sg(sgt, sgl, count) {
+>>>>  	
+>>>>  		dma_addr_t paddr = sg_dma_address(sgl);
+>>>>  		size_t len = sg_dma_len(sgl);
+>>>>
+>>>> @@ -985,7 +1004,7 @@ panthor_vm_map_pages(struct panthor_vm *vm, u64
+>>>> iova,
+>>>> int prot,>
+>>>>
+>>>>  		offset = 0;
+>>>>  	
+>>>>  	}
+>>>>
+>>>> -	return panthor_vm_flush_range(vm, start_iova, iova - start_iova);
+>>>> +	return 0;
+>>>>
+>>>>  }
+>>>>  
+>>>>  static int flags_to_prot(u32 flags)
+>>>>
+>>>> @@ -1654,6 +1673,38 @@ static const char *access_type_name(struct
+>>>> panthor_device *ptdev,>
+>>>>
+>>>>  	}
+>>>>  
+>>>>  }
+>>>>
+>>>> +static int panthor_vm_lock_region(struct panthor_vm *vm, u64 start, u64
+>>>> size) +{
+>>>> +	struct panthor_device *ptdev = vm->ptdev;
+>>>> +	int ret = 0;
+>>>> +
+>>>> +	mutex_lock(&ptdev->mmu->as.slots_lock);
+>>>> +	drm_WARN_ON(&ptdev->base, vm->locked_region.start ||
+>>>> vm->locked_region.size); +	vm->locked_region.start = start;
+>>>> +	vm->locked_region.size = size;
+>>>> +	if (vm->as.id >= 0) {
+>>>> +		lock_region(ptdev, vm->as.id, start, size);
+>>>> +		ret = wait_ready(ptdev, vm->as.id);
+>>>> +	}
+>>>> +	mutex_unlock(&ptdev->mmu->as.slots_lock);
+>>>> +
+>>>> +	return ret;
+>>>> +}
+>>>> +
+>>>> +static void panthor_vm_unlock_region(struct panthor_vm *vm)
+>>>> +{
+>>>> +	struct panthor_device *ptdev = vm->ptdev;
+>>>> +
+>>>> +	mutex_lock(&ptdev->mmu->as.slots_lock);
+>>>> +	if (vm->as.id >= 0) {
+>>>> +		write_cmd(ptdev, vm->as.id, AS_COMMAND_FLUSH_MEM);
+>>>> +		drm_WARN_ON(&ptdev->base, wait_ready(ptdev, vm-
+>>>
+>>> as.id));
+>>>
+>>>> +	}
+>>>> +	vm->locked_region.start = 0;
+>>>> +	vm->locked_region.size = 0;
+>>>> +	mutex_unlock(&ptdev->mmu->as.slots_lock);
+>>>> +}
+>>>
+>>> Do we need to include a drm_dev_enter() somewhere here? I note that
+>>> panthor_vm_flush_range() has one and you've effectively replaced that
+>>> code with the above.
+>>
+>> Looks like we should.
+>>
+>>> Thanks,
+>>> Steve
+>>>
+>>>> +
+>>>>
+>>>>  static void panthor_mmu_irq_handler(struct panthor_device *ptdev, u32
+>>>>  status) {
+>>>>  
+>>>>  	bool has_unhandled_faults = false;
+>>>>
+>>>> @@ -2179,6 +2230,11 @@ panthor_vm_exec_op(struct panthor_vm *vm, struct
+>>>> panthor_vm_op_ctx *op,>
+>>>>
+>>>>  	mutex_lock(&vm->op_lock);
+>>>>  	vm->op_ctx = op;
+>>>>
+>>>> +
+>>>> +	ret = panthor_vm_lock_region(vm, op->va.addr, op->va.range);
+>>>> +	if (ret)
+>>>> +		goto out;
+>>>> +
+>>>>
+>>>>  	switch (op_type) {
+>>>>  	
+>>>>  	case DRM_PANTHOR_VM_BIND_OP_TYPE_MAP:
+>>>>  		if (vm->unusable) {
+>>>>
+>>>> @@ -2199,6 +2255,9 @@ panthor_vm_exec_op(struct panthor_vm *vm, struct
+>>>> panthor_vm_op_ctx *op,>
+>>>>
+>>>>  		break;
+>>>>  	
+>>>>  	}
+>>>>
+>>>> +	panthor_vm_unlock_region(vm);
+>>>> +
+>>>>
+>>>> +out:
+>>>>  	if (ret && flag_vm_unusable_on_failure)
+>>>>  	
+>>>>  		vm->unusable = true;
+> 
+> 
+> 
+> 
+
