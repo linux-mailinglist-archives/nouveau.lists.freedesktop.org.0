@@ -2,24 +2,24 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id 91AF0B07A26
-	for <lists+nouveau@lfdr.de>; Wed, 16 Jul 2025 17:43:35 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 17208B07A60
+	for <lists+nouveau@lfdr.de>; Wed, 16 Jul 2025 17:53:44 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 85C4E10E39A;
-	Wed, 16 Jul 2025 15:43:33 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id AB49710E293;
+	Wed, 16 Jul 2025 15:53:42 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
 Received: from foss.arm.com (foss.arm.com [217.140.110.172])
- by gabe.freedesktop.org (Postfix) with ESMTP id 95BF410E293;
- Wed, 16 Jul 2025 15:43:32 +0000 (UTC)
+ by gabe.freedesktop.org (Postfix) with ESMTP id 7FF6510E293;
+ Wed, 16 Jul 2025 15:53:41 +0000 (UTC)
 Received: from usa-sjc-imap-foss1.foss.arm.com (unknown [10.121.207.14])
- by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id DDFD8113E;
- Wed, 16 Jul 2025 08:43:23 -0700 (PDT)
+ by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id DE59B113E;
+ Wed, 16 Jul 2025 08:53:32 -0700 (PDT)
 Received: from [10.57.86.212] (unknown [10.57.86.212])
- by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id 1D3383F66E;
- Wed, 16 Jul 2025 08:43:26 -0700 (PDT)
-Message-ID: <0108b3cd-dfdd-4e4c-a2d8-157458e26f77@arm.com>
-Date: Wed, 16 Jul 2025 16:43:24 +0100
+ by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id B03C53F694;
+ Wed, 16 Jul 2025 08:53:36 -0700 (PDT)
+Message-ID: <e65b31c6-ed4a-401b-a131-181fba62a092@arm.com>
+Date: Wed, 16 Jul 2025 16:53:34 +0100
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
 Subject: Re: [PATCH v4 1/7] drm/panthor: Add support for atomic page table
@@ -41,10 +41,10 @@ Cc: dri-devel@lists.freedesktop.org, linux-kernel@vger.kernel.org,
  asahi@lists.linux.dev, Asahi Lina <lina@asahilina.net>
 References: <20250707170442.1437009-1-caterina.shablia@collabora.com>
  <d4a6208b-a4a4-451f-9799-7b9f5fb20c37@arm.com> <2813151.QOukoFCf94@xps>
- <2434159.cojqenx9y0@xps>
+ <2150426.BFZWjSADLM@xps>
 From: Steven Price <steven.price@arm.com>
 Content-Language: en-GB
-In-Reply-To: <2434159.cojqenx9y0@xps>
+In-Reply-To: <2150426.BFZWjSADLM@xps>
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 X-BeenThere: nouveau@lists.freedesktop.org
@@ -61,7 +61,7 @@ List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-On 15/07/2025 16:33, Caterina Shablia wrote:
+On 15/07/2025 17:09, Caterina Shablia wrote:
 > El martes, 15 de julio de 2025 17:08:09 (hora de verano de Europa central), 
 > Caterina Shablia escribió:
 >> El viernes, 11 de julio de 2025 15:30:21 (hora de verano de Europa central),
@@ -145,17 +145,6 @@ On 15/07/2025 16:33, Caterina Shablia wrote:
 >> don't see why panthor_vm_idle while a region is locked would be a problem?
 >> That can arise e.g. when a job completes but there's a concurrent vm_bind
 >> going on?
-
-So it's absolutely fine (and normal) to perform a vm_bind while the VM
-is idle. In this case there's no need to perform the lock because
-there's nothing running on the GPU which could be affected by the page
-tables being (temporarily) inconsistent.
-
-What I'm questioning is the design where if, in the middle of a vm_bind
-operation, a job comes in and then we set the lock region rather than
-just waiting for the vm_bind operation to complete. AFAICT simply
-synchronising on the vm->op_lock should achieve this.
-
 >>> I think we need to briefly take vm->op_lock to ensure synchronisation
 >>> but that doesn't seem a big issue. Or perhaps there's a good reason that
 >>> I'm missing?
@@ -163,31 +152,6 @@ synchronising on the vm->op_lock should achieve this.
 >> I think you're right, all other accesses to locked_region are guarded by
 >> op_lock. GPU job submit poke vm_active concurrently with vm_bind jobs doing
 >> region {,un}locks.
-> Actually no, that's not necessary. Access to locked_region is protected by 
-> slots_lock, which is held here. Trying to lock vm->op_lock would also be 
-> detrimental here, because these locks are often taken together and slots_lock 
-> is taken after op_lock is taken, so taking op_lock here would be extremely 
-> deadlockful.
-
-It would obviously be necessary to acquire vm->op_lock before
-as.slots_lock as you say to avoid deadlocks. Note that as soon as
-as.slots_lock is held vm->op_lock can be dropped.
-
-I just find the current approach a little odd, and unless there's a good
-reason for it would prefer that we don't enable a VM on a new address
-space while there's an outstanding vm_bind still running. Obviously if
-there's a good reason (e.g. we really do expect long running vm_bind
-operations) then that just need documenting in the commit message. But
-I'm not aware that's the case here.
-
-Although in general I'm a bit wary of relying on the whole lock region
-feature - previous GPUs have an errata. But maybe I'm being over
-cautious there.
-
-Thanks,
-
-Steve
-
 >>
 >>>>  out_make_active:
 >>>>  	if (!ret) {
@@ -321,7 +285,34 @@ Steve
 >>> code with the above.
 >>
 >> Looks like we should.
->>
+> Actually not sure. I think I'm either misunderstanding what drm_dev_enter is, 
+> or there's other things that should be doing it. Notably 
+> panthor_mmu_as_{en,dis}able or their callers aren't doing drm_dev_enter, yet 
+> are poking the hw, so that seems to me like that code also runs the risk of 
+> poking the hw while/after it was unplugged, but I'm not confident in my 
+> understanding at all. I guess an extra drm_dev_enter here or there isn't going 
+> to harm anyone as it's recurrent so I'll put one around the call to 
+> lock_region in panthor_vm_lock_region as well.
+
+In theory all paths that touch GPU registers should be wrapped in a
+drm_dev_enter() somewhere so that we don't poke the hardware when it's
+gone. Of course in practice we don't really have hotpluggable hardware
+so this isn't exactly well tested. So there might be existing bugs. As
+you say it is possible to nest drm_dev_enter() so that might be easiest
+in this case.
+
+We do have the 'automotive' GPUs (not currently supported by panthor[1])
+which support virtualisation where it is potentially possible to "rip
+out" the GPU from a guest. So I suspect in the future we will start to
+care more about this.
+
+Thanks,
+Steve
+
+[1] I think the only public version is Mali-G78AE which is a job manager
+GPU which would be panfrost anyway. I've no idea what the roadmap is for
+future GPUs.
+
 >>> Thanks,
 >>> Steve
 >>>
