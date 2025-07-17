@@ -2,77 +2,158 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id CBCD1B08FD4
-	for <lists+nouveau@lfdr.de>; Thu, 17 Jul 2025 16:49:41 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 46E83B09029
+	for <lists+nouveau@lfdr.de>; Thu, 17 Jul 2025 17:06:34 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 0E70210E132;
-	Thu, 17 Jul 2025 14:49:40 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 99DD210E301;
+	Thu, 17 Jul 2025 15:06:32 +0000 (UTC)
 Authentication-Results: gabe.freedesktop.org;
-	dkim=pass (2048-bit key; unprotected) header.d=gfxstrand-net.20230601.gappssmtp.com header.i=@gfxstrand-net.20230601.gappssmtp.com header.b="NJCFt6J7";
+	dkim=pass (2048-bit key; unprotected) header.d=Nvidia.com header.i=@Nvidia.com header.b="j+526F8Q";
 	dkim-atps=neutral
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from mail-pg1-f182.google.com (mail-pg1-f182.google.com
- [209.85.215.182])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 3323910E132
- for <nouveau@lists.freedesktop.org>; Thu, 17 Jul 2025 14:49:38 +0000 (UTC)
-Received: by mail-pg1-f182.google.com with SMTP id
- 41be03b00d2f7-b3be5c0eb99so843764a12.1
- for <nouveau@lists.freedesktop.org>; Thu, 17 Jul 2025 07:49:38 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gfxstrand-net.20230601.gappssmtp.com; s=20230601; t=1752763778; x=1753368578;
- darn=lists.freedesktop.org; 
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=G/E4JkNnaNqQGz9MVNULZRq8nS9gNhNAwwmL24sE1XY=;
- b=NJCFt6J7BrCJ0vyXT8aiiQo5ap1tmKAt/55haFgdA4h/Zjr7iNMBIqILPsCMLL1snf
- j8Dwpc8QmCPL4uB5brLVocB4vWJxe1Z8kIlurXxKx3TbEUMXrUkTqmPJJynD1jOuTfLM
- Ixt0e6dA40cLu7sveAjhYGcAoZlA41v1SAwQ1TYuOPCSeYeaRayB1haeKm3OlfijTZqq
- ZJIur52CwoltOXt6nEEo8FdYq1+3CwouCVkB/p1FNb5HMv7QsWY8AxfjSuydjI8d+0wR
- FX6HL2Zk4pdvcjsqxghxfYH+0YFQ7QtEjKk9g2Tz114E5ZJN2Wz6bW957y7KWnWb5CXa
- hifg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1752763778; x=1753368578;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=G/E4JkNnaNqQGz9MVNULZRq8nS9gNhNAwwmL24sE1XY=;
- b=kZrKr0NHR7HBXLHSB+BFfX482KczokjSCiXuXeionS6cz5VzKdNRt4ntn8XhyE2BLs
- V5hEX5mltgz/Sw9pRrqDV+xvarN8SOBbQLBbELoDvy78HpWS4OAXoQJR1wKy4amA4bTa
- EDU9+jo7Zou3/LwlWj3m1svRLfTIMTTeN6gHcv23MVjQhT00cgaADXH89te+YzTx6IEg
- VzZpTxK0RzNVZ1rnV2RQpmxyOLuL1WCnlJH1DqUxAoYA66Nb6o0F1+fIJnteU5Y8GR+z
- fp72i6/dWqQAMcLH8gY5CJ5YXJfxfuFOkb0xSmQSo54GiQFBtAv2vLRoe2VaoOjIpuXL
- 6bmA==
-X-Forwarded-Encrypted: i=1;
- AJvYcCWZH7QViX0/4t85LvWQngMp9gZFxYYNU8z4kLiwNRpe6YNhOttai7gyzVEQPLP8AD4iwmGWZ2FQ@lists.freedesktop.org
-X-Gm-Message-State: AOJu0Yz+1UlPQm+Y34Pn7jeJlu/4aKTrNp034WxOBwQSPKykQ7WFA4ez
- +9Q8HBvrIUyxzpAGTvnlU9knQu446Chvm6H0Qe2G6lZiCpFj9Q9jRA56dh34571+6i4+AoT8Z9m
- UdtFlHei9D4HGpla1Eo4WtkwZuPmffaZcsmFndsI8kg==
-X-Gm-Gg: ASbGncv3sUVEY/UtKSmyXyCnK5Gtl5E6btV7uy/t47mb+unDw7biTjKd76HUNvLC2n+
- T7jtWqutzaMLGVqL2FxuB3LGH4tERiWl+doUfcL5OJfMmPA/96rxgug5CapGeUHpq3l3FKzh4q6
- vewg9xDZquAYOPkPko97cRSAl/xrsy9tzsv4SNCHP/YfRZJZa5vSR7gEb1U26o8a+L0NZQKkrO9
- SuRamc=
-X-Google-Smtp-Source: AGHT+IEwlIggUK9P4ZMIZrOUQNAuckqnYEdZ47o2EEEluvGu7UoaWDsAzOxrsI3ippc7c4ZFNG0/XYMirWbeN4OKivg=
-X-Received: by 2002:a17:90b:134e:b0:311:df4b:4b93 with SMTP id
- 98e67ed59e1d1-31c9e6e4061mr10547752a91.7.1752763777637; Thu, 17 Jul 2025
- 07:49:37 -0700 (PDT)
+Received: from NAM10-BN7-obe.outbound.protection.outlook.com
+ (mail-bn7nam10on2071.outbound.protection.outlook.com [40.107.92.71])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 537E610E83F
+ for <nouveau@lists.freedesktop.org>; Thu, 17 Jul 2025 15:06:30 +0000 (UTC)
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=EsK/FlddzwKJ02bL6WNPINJ0XSQUqxShL9OW1OMv2AQRp/Ii0SOoXYrboJr36XAfLeSLJduTifThGrC0+KKMyJyxh2Ob4eD8e97HnNg4mDkMx6VglEWPvbHMug1lmPy0MkjOYXge9QRfiOL8fUJdHCNf6kJnk0rA4U1RWRvt5WJGM6lPyqHMNgAQE8PKaEug/P/M2jznJ2fgigVWrlAIPZjsSSqNW9zr2cK9ZTfFDGnYL9tYtlLUcDxDN+i6PGpEPWiqWmdRbAP3Jp6cmpDZaC3ktJuUoe9VhXTq1J8gFqxnWxX5aotIK36lMPcarDC3am/ORIFUgY1AhTb0CsBq1w==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=S+tafOUa37dZIq3r1pwpDx7Vx/b7mCG7oKikl5pLBTY=;
+ b=sYqlKMxKEkM9w5xbL5uFduEmzw4lRhqY37AraA34vp/1z/j72VLJ4gGRYHAvjPxQk0JvfuXSTkJKK3jfwYxeaCY718ArpP6RvlyLuMrlRieKkTc81d/Rtrsx6qw+D13yTOZ3FPkC5wtgiibUOkvQCe5JFLbEf03WuWuNYreJtbMRfMa06f+vooUJS8EIPlQmE647mDgUuSz7ZtbKgIWITyQzjN5NtIEzUPPlT0VbzsjIT97435rN9PEA0p6SAW9dM7RK49Yga7JJuJSPk0lqqQF9e6UXPAXI4FcUcgIuzUko/9lXhoxw6KsXtOxZkH4F3Qg6NgGfmZlR6cKnj8qzug==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=nvidia.com; dmarc=pass action=none header.from=nvidia.com;
+ dkim=pass header.d=nvidia.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=Nvidia.com;
+ s=selector2;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=S+tafOUa37dZIq3r1pwpDx7Vx/b7mCG7oKikl5pLBTY=;
+ b=j+526F8Qq2fM3lcCVmHpQO3Jud1GZjWR21JbjfbqlMEfK01Qi5pB/eI7TCbJ8KpRRiI01Glph9h75W/I/ESvYJhV+XIbkx62T31nRoIPZsOZuIV33wSCGTnrOnmLvn0DxWpl3yZW0DIU/7GgcF36pKEPV7rqFwngyN/Q2YT/XsKlEuv7b6YbL3kEvpCR0ivlzNrR6iTMl3Rdq9STM0fIJhIkEpdFkl1eGiMS4s5xGa8Rzyw4D7TBzSdCGWc7yNpgPTXill8BoRX6ZcyCbOzNSnUTMiIxy/csuMHFKtA/16EeX1/hibhl/GACoQ0nRv2nIiWqSswjUhnWCmxJUGnimg==
+Received: from CY5PR12MB6526.namprd12.prod.outlook.com (2603:10b6:930:31::20)
+ by MW4PR12MB7439.namprd12.prod.outlook.com (2603:10b6:303:22b::7)
+ with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.8922.39; Thu, 17 Jul
+ 2025 15:06:24 +0000
+Received: from CY5PR12MB6526.namprd12.prod.outlook.com
+ ([fe80::e420:4e37:166:9c56]) by CY5PR12MB6526.namprd12.prod.outlook.com
+ ([fe80::e420:4e37:166:9c56%5]) with mapi id 15.20.8901.021; Thu, 17 Jul 2025
+ 15:06:24 +0000
+From: Timur Tabi <ttabi@nvidia.com>
+To: Zhi Wang <zhiw@nvidia.com>
+CC: "nouveau@lists.freedesktop.org" <nouveau@lists.freedesktop.org>, Ben
+ Skeggs <bskeggs@nvidia.com>
+Subject: Re: [PATCH] drm/nouveau: remove unused memory target test
+Thread-Topic: [PATCH] drm/nouveau: remove unused memory target test
+Thread-Index: AQHb9cxaUCrbyr88bkyhx2kLBD9+m7Q1+J4AgAB0gYA=
+Date: Thu, 17 Jul 2025 15:06:24 +0000
+Message-ID: <6b65fd5f25f3a8d91222025cb0a6bbadf7e8604a.camel@nvidia.com>
+References: <20250715210559.1188776-1-ttabi@nvidia.com>
+ <20250715210559.1188776-2-ttabi@nvidia.com>
+ <20250717110924.3bd285ea.zhiw@nvidia.com>
+In-Reply-To: <20250717110924.3bd285ea.zhiw@nvidia.com>
+Accept-Language: en-US
+Content-Language: en-US
+X-MS-Has-Attach: 
+X-MS-TNEF-Correlator: 
+user-agent: Evolution 3.56.0-1 
+authentication-results: dkim=none (message not signed)
+ header.d=none;dmarc=none action=none header.from=nvidia.com;
+x-ms-publictraffictype: Email
+x-ms-traffictypediagnostic: CY5PR12MB6526:EE_|MW4PR12MB7439:EE_
+x-ms-office365-filtering-correlation-id: a49a6d39-980a-45b0-e821-08ddc5437f4d
+x-ms-exchange-senderadcheck: 1
+x-ms-exchange-antispam-relay: 0
+x-microsoft-antispam: BCL:0; ARA:13230040|1800799024|376014|366016|38070700018;
+x-microsoft-antispam-message-info: =?utf-8?B?NUpYZzk4WUZuZUR4ZnIrMkErRTNQSWRuNlBKYmJkY2JPUHVxNmhvMG1KUmV5?=
+ =?utf-8?B?SXlNZU1jUURZaUV5L3Q2VTQ5VEhvSVVXY2RTK2FCeU9MQzluTjI3UGpNZVBY?=
+ =?utf-8?B?Ylo3czVuMXljK1JyUTlzS1o1WFJ5bU5hWmdSUXdWUEZoNXFBR0N1c25KQklk?=
+ =?utf-8?B?b3ZtQmIxUllMa3dFZGNJUFFORHV0QmwrRnA3YTRVVHZJRmxSZXRaV0FhVFQw?=
+ =?utf-8?B?ekNzejdjWVFFTllwbXdXUElqeHdWY3BKYmhsVGdEa2VRSUhXSW51SENPalNV?=
+ =?utf-8?B?M25PR2h5TnY0a0Z5Zzc5YjJqTGpLTTZvUm44K0pyNXlhUy9NOU4zakxRSWVy?=
+ =?utf-8?B?R1J4V0UrMTJQNkM3eVMvU2szTER3dGt3dFg1ZEpRS2JTQUFLQlhGZTBkWXZH?=
+ =?utf-8?B?VzMvRVlQSVpBc2gvRVlRem5yTnM1aGwwcWt2RlJXeWgrdUxWcERmdHJyclF5?=
+ =?utf-8?B?aUhCQ2ZDVjZkZjNSSml5Y215bHBSZUFRMGxnZGpkN0Y4OFpROWExMHI1ZU9B?=
+ =?utf-8?B?WHpNS2p6dmJ5MTVDSzVnTGxTR1dCSzVrbW50SGk5NjRDZmxIWTd3MFp3N2Rh?=
+ =?utf-8?B?em9tVjJFWkpOc0p3Z0VjVHU2QjlMbFp4dEphUnNha2l2aUJRSmJyVmRmRDZ0?=
+ =?utf-8?B?ZnQzMXdyUzBpbEQ5RThhWVRDMmdkaS9KaGN3c0MzbEhGdnJqeHgwOTA2TzFO?=
+ =?utf-8?B?WFNSZW5MU0doU2Z3VU1jY2dRMHdianYvUHdtZmhiT3A0aUp1VEZUdUk5ZTZD?=
+ =?utf-8?B?R05aTkp0eTM5cVhPME1WZ0VkU3lHeWE1dm1YTVVDRk1LeHVIU2RRZWZaQTVq?=
+ =?utf-8?B?SGd1Nmc2UVdLRDlJdDNvN1lydDVZK3hTd2g3NTMvWUZDcDY0Tk14bi9XdjBE?=
+ =?utf-8?B?cE9NRktDdzRBUzVUcldlQTlFV293S3lGZ2NsS21ySnBURTQ5ck10V1Rocmo1?=
+ =?utf-8?B?SElLNnF1aVNlL1lobitnbnJZbXZWQ1k5UmNUajNKUEphYW4wbnkxTjVKMTVz?=
+ =?utf-8?B?bWwva2tYZDAwSUZvUUtXaHRZZ2IvRTZJSExoczYwRFBabU5Rd0hwM3AyVnhZ?=
+ =?utf-8?B?UzFsT01lTDI2dlhyK1dzOVQ5MVIvN2I3YnF1R29wZWx6VWtPYWd5TGdyUUp3?=
+ =?utf-8?B?bi8xakgrQXpuQ3pDbmFEQkt4ZXAxRUdWUWFXcy92SGhoMzhKQlZsOEgxVzlN?=
+ =?utf-8?B?eXVNK05xalJVaCsrOFVsUHd5bncrVkM0bzdnWndnY3ZqNUt3MXhSSW9nRVpl?=
+ =?utf-8?B?bDhXN0ZrZi9zSUlBM3RBZzJneDlsSm5ieUxrZzlXdUVWTE1IbUJrdDdPdUQ5?=
+ =?utf-8?B?WGhLVmMvbWZQdzljcU1GbEdzaVRMa1JRWmpBRjFRWXlPUHRLQTF5UEROUzQv?=
+ =?utf-8?B?akZUczV4QmRBL3JqNC9zTmd2T1hmTGVxd1JONGVZS0xlSkVEVnNNMFlQYlVz?=
+ =?utf-8?B?aWZya1Zlb2I2NHFMeGhWQ3VFdHVQNzBzZ0hCQVE2RjdwcDdjakg5eE1yUFBX?=
+ =?utf-8?B?WUFOOUVBcWs0OFBxSXRNMkdGcm9yWHdlWjdOUVNJNlRxenV5eEV4Ym16Tlk4?=
+ =?utf-8?B?eGNzQlJzMGpUV3FEd1MrWGhvT3Nnb1diZjZmak16d0FxdlVMT2prdGVjZkVC?=
+ =?utf-8?B?RkszUnliNkIybWlLZ1BjZU91bVRZa0JmMmN0Z3daMnV1ZmpWUFJmSkFaNk9y?=
+ =?utf-8?B?NmZ2K0pvUXJNbzlkTFhWMFFZb0FLVFRmZmJBOW9YN3JmbzRNbWZmMHdRYkRB?=
+ =?utf-8?B?d2ZPakczZU9Sa2YrcE02Q09IdW9GTForVTEySjc5STU3dTg4dmdtRHJEQmov?=
+ =?utf-8?B?cWFuSVZNZFJyNXFHK1IrS2dWVnJyQjlMdjNIbUJDc2ZuWFRGNE90Yk82TE9I?=
+ =?utf-8?B?THExK1RSWjFwS3FiSlU3OUgvSGJGVVJwdDlIdEwraEwzaEp3akY5MjFZTnNH?=
+ =?utf-8?B?YUpEMEtCQ0h0M2N5ZWhtbmJ1YjBkYnk5dHZjblRleXl1TnBPb3M0T0p3WGRC?=
+ =?utf-8?B?U0ZVeUhxSGtnPT0=?=
+x-forefront-antispam-report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
+ IPV:NLI; SFV:NSPM; H:CY5PR12MB6526.namprd12.prod.outlook.com; PTR:; CAT:NONE;
+ SFS:(13230040)(1800799024)(376014)(366016)(38070700018); DIR:OUT; SFP:1101; 
+x-ms-exchange-antispam-messagedata-chunkcount: 1
+x-ms-exchange-antispam-messagedata-0: =?utf-8?B?LzFETEVJanZTMitPOHFnMXl0UUFUdCtZVlFmb0ZqVWhqVXlFMjVVRkFlMDZE?=
+ =?utf-8?B?YVFDMkVyN3E1Rlp2V0J3NUFJaXQ4RURMUXhhTk1JUEZaT1JNcmQ3M1JndldV?=
+ =?utf-8?B?ODJBa09sMXY4SHlwYnJrcVkvVTRuWkxwZU5peXA0RVhJckc2WjBIL3JsNVQv?=
+ =?utf-8?B?K2I1RXQ5OS9xSndQWFZhMythZXB4Y09uMGFib010OGNxa3BXalRhQmVDbFBF?=
+ =?utf-8?B?L0hUTzVFQ25PbkFUbVJHdno0c2J2SWpLNjZPbUdOUm5KMEpEZGE0Sk5NMHNG?=
+ =?utf-8?B?Sm9YYk0vc3FUMTYyUjBRcWoyQlNtRkx6UUM3MEZnbTJyQW95VWxtL2sydFdp?=
+ =?utf-8?B?Rk1pUHN2d3ZQc0psWkhuSDhXemRIRnNXempZQXpFMUVJN1Fvb2pvN2dZR3pp?=
+ =?utf-8?B?Q0NsQzNsQjZiRnFGZmdTVVFMUDdRYVlPOHdkQXo5ODIyUmxhcjJhKy9HZ1VT?=
+ =?utf-8?B?SFlyUTJVRWF1VFFFcVkyWjB2OXJTdXo3amJZbTVPTTFzN3IzTngwWDlRakZq?=
+ =?utf-8?B?L2dTaTFYVzNrNlp4OUhyYmZiLzR4SGd0MDRyOWI1U045Nno2dWMwckVUSWFl?=
+ =?utf-8?B?Q2lFZXZ0Q2tuRXhxeWx4cmFGVmdBcWI4eXZTZ3FpTEFtSEdWcW52OTdTU1gy?=
+ =?utf-8?B?K2FkRTRLQkZSZndqTXN3S2pGWG1ZMmFiK1VzMU45bUZrVGRSTEwzK3h5N1NT?=
+ =?utf-8?B?M2o2K2c4bzBFTzRlV01ReGpjYlRmRG00eHovVUtibDllUGJtVHRTVDNiRU94?=
+ =?utf-8?B?ZzZIYjV6WlAvMDVQK0JOWk9VSHR3YXBSZzNTRjQwQUZ1cHBRT3p3aFpGdkxK?=
+ =?utf-8?B?cXBzbmdIdEFlYVA1c1lzdlhZMnhZN1JGUVBiZlgySUNNRGdHdUZnNVhPMFZk?=
+ =?utf-8?B?TjY1dXkwZDY3cVp5RHhhN1lOM21HVkthYVhyMVNKbDRGUjZpWDY3N0lmcTYv?=
+ =?utf-8?B?THdpaGVLTjNhK0kwZ0RpdWpPelp4RWxJMThSa2NkMHk2RXVRVnppTFJqWkhh?=
+ =?utf-8?B?UHVWUTJ5T1UxR0xncnNYaSsyR3pERXZvSUhodFBqU1Q4bGNjNWcvMXJnbEs4?=
+ =?utf-8?B?RE14czl6RFZkU1d0Z0U4NHB2MkNEdk9UMnZsV3NmdnZVRHFlMkdIRHk5c3Nn?=
+ =?utf-8?B?Tm9ObHUzU3BHd09GQVJKaFBiY1VpdjRaTWpjeEJ1N1BjZnZkb1RicjQ1eEln?=
+ =?utf-8?B?SkFZZ3FrNTVqMTBUMWU1MW1lQXZsVjEzb1hiejdhVGl0bU9saGdldkdVNEE1?=
+ =?utf-8?B?ZHFGbVhLRFJYbWUwbHd1UWRWVmd4blJSL1dXY3BvWEZZQTM0RHFKNVpkTFNu?=
+ =?utf-8?B?WlNqNW00VEdkTHd0Qlc0UHhUMkNvU1NtREs3RUkxZG5VREt0U2Q1MkhPcHRi?=
+ =?utf-8?B?K1FuZjNabTZGeUhJWlBWRm9zN3VRMVA5WWFoTlpucXRLSTFNZ0lBVUtLVVli?=
+ =?utf-8?B?dlJJNWdMcXozNVRSajhzeURlNm5KMHZBK1poNnhETGpQRjVsQzZYN3dUZjBr?=
+ =?utf-8?B?ektSaHQxbHg3VUprcjRvd2JjOG1vTkNMRHhCd2pBOGFVeFM1QVhVZnExUDVB?=
+ =?utf-8?B?V0hFam1sK0R2UGlZNGl6SXdPby8xYTNnRVozVWZqUlBLaXdUUGthUE1USCsw?=
+ =?utf-8?B?K0NzME5kMHRsNmVkSWtxZnV4NzRXSUhpUlkvd3ROR2ZwQy9jdnNEczl1a0o0?=
+ =?utf-8?B?c3MrUWEwRzRFQytvbFl6RkJoNE9WLy9RR0EzRFAxZCtCRURmaUZCY1Q1a0Ni?=
+ =?utf-8?B?QUhSMVBYMmhtSVdON3RKRlNIWXBRRmJKZ2FaWmxnOTZEOTNDM2NjVmlaTEk5?=
+ =?utf-8?B?THV5bTlKWFZrYzN4c1YxWDFSclhGRzBIdDd3cE90ank0VS9YRTRDdE0rQ0dJ?=
+ =?utf-8?B?Q2M0SXRjcE9SZVVBQmxEcFdjOU9yMzg5Z28yZE5vbmJRODZTNjdzRHBDTlkz?=
+ =?utf-8?B?YkVuQ0dyOERmUWcxMlM0a3hDU2MxR3J3d2JIUnE4d3VyUjF1V21JOGZtUExL?=
+ =?utf-8?B?REl0QWdiYm05VTNsajhDRGlyc0lXWXAwTVh2R3BmdmZiY0dHNFY1UDdOeVhE?=
+ =?utf-8?B?SUEwVnpaZ0UxM2hnaWkwZzllNFp0anMxT2UxY2Iya0pHR3AxOThGSzJEK2V1?=
+ =?utf-8?Q?dvxMXYOdYQb4rcrknIbI62XF7?=
+Content-Type: text/plain; charset="utf-8"
+Content-ID: <654ADDEA2AFC134A8A586E3E580A5028@namprd12.prod.outlook.com>
+Content-Transfer-Encoding: base64
 MIME-Version: 1.0
-References: <20250703223658.1457-1-jajones@nvidia.com>
- <CAOFGe94OaQ0raM_c-AHsmmNE8WkdMVqvpTDdPaCEJ9d4Xy1uOA@mail.gmail.com>
- <9f6a1410-83f6-4a25-94a1-ae614897cc1f@nvidia.com>
-In-Reply-To: <9f6a1410-83f6-4a25-94a1-ae614897cc1f@nvidia.com>
-From: Faith Ekstrand <faith@gfxstrand.net>
-Date: Thu, 17 Jul 2025 10:49:26 -0400
-X-Gm-Features: Ac12FXxOAMvVzwNI0NSX3WQWjrFvclZeGpAR6Pflgy4NI06xhZww35YkJr0ywAU
-Message-ID: <CAOFGe95k-9U7v8eQ8bjSRt1RZ6Tg3WWDLOwJniXX3ViYCFGdDQ@mail.gmail.com>
-Subject: Re: [RFC 0/4] Add Format Modifiers for NVIDIA Blackwell chipsets
-To: James Jones <jajones@nvidia.com>
-Cc: David Airlie <airlied@gmail.com>, Lyude Paul <lyude@redhat.com>, 
- Danilo Krummrich <dakr@kernel.org>, nouveau@lists.freedesktop.org, 
- dri-devel@lists.freedesktop.org, 
- Faith Ekstrand <faith.ekstrand@collabora.com>,
- Alexandre Courbot <acourbot@nvidia.com>, Ben Skeggs <bskeggs@nvidia.com>
-Content-Type: multipart/alternative; boundary="000000000000577424063a211eb9"
+X-OriginatorOrg: Nvidia.com
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-AuthSource: CY5PR12MB6526.namprd12.prod.outlook.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: a49a6d39-980a-45b0-e821-08ddc5437f4d
+X-MS-Exchange-CrossTenant-originalarrivaltime: 17 Jul 2025 15:06:24.5263 (UTC)
+X-MS-Exchange-CrossTenant-fromentityheader: Hosted
+X-MS-Exchange-CrossTenant-id: 43083d15-7273-40c1-b7db-39efd9ccc17a
+X-MS-Exchange-CrossTenant-mailboxtype: HOSTED
+X-MS-Exchange-CrossTenant-userprincipalname: 51h4rfUku6iCyNNnbYERMiUCh38m8ERhHL+2BCnR2WlXL5wyDHMYnKqzGg0gjrm9tDlgblxL6tHCs/DMg6OhRg==
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: MW4PR12MB7439
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -87,293 +168,22 @@ List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
---000000000000577424063a211eb9
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-
-On Wed, Jul 16, 2025 at 6:36=E2=80=AFPM James Jones <jajones@nvidia.com> wr=
-ote:
-
-> On 7/4/25 07:45, Faith Ekstrand wrote:
-> > On Thu, Jul 3, 2025 at 6:34=E2=80=AFPM James Jones <jajones@nvidia.com
-> > <mailto:jajones@nvidia.com>> wrote:
-> >
-> >     The layout of bits within the individual tiles (referred to as
-> >     sectors in the DRM_FORMAT_MOD_NVIDIA_BLOCK_LINEAR_2D() macro)
-> >     changed for some formats starting in Blackwell 2 GPUs. New format
-> >     modifiers are needed to denote the difference and prevent direct
-> >     sharing of these incompatible buffers with older GPUs.
-> >
-> >     This patch series proposes first adding some helper macros and
-> >     inline functions to drm_fourcc.h to make the NVIDIA block-linear
-> >     format modifiers easier to work with given the proposed solution
-> >     makes them harder to parse, then extending the existing sector type
-> >     field in the parametric format modifier macro
-> >     DRM_FORMAT_MOD_NVIDIA_BLOCK_LINEAR_2D() by another bit to
-> >     accommodate the new layout type.
-> >
-> >     There are a few ways the parameteric format modifier definition
-> >     could have been altered to handle the new layouts:
-> >
-> >     -The GOB Height and Page Kind field has a reserved value that could
-> >       have been used. However, the GOB height and page kind enums did
-> >       not change relative to prior chips, so this is sort of a lie.
-> >       However, this is the least-invasive change.
-> >
-> >     -An entirely new field could have been added. This seems
-> >       inappropriate given the presence of an existing appropriate field=
-.
-> >       The advantage here is it avoids splitting the sector layout field
-> >       across two bitfields.
-> >
-> >     The proposed approach is the logically consistent one, but has the
-> >     downside of being the most complex, and that it causes the
-> >     DRM_FORMAT_MOD_NVIDIA_BLOCK_LINEAR_2D() macro to evaluate its
-> >     's' parameter twice. However, I believe the added helper functions
-> >     and macros address the complexity, and I have audited the relevant
-> >     code and do not believe the double evaluation should cause any
-> >     problems in practice.
-> >
-> >
-> > I think we'll converge pretty quickly on the last patch. I'm less sure
-> > about the first 3. While I like the idea of having static inlines for
-> > modifiers that are shared by everybody, we can't actually use them from
-> > NVK because our image layout code is in rust and bindgen can't generate
-> > bindings for inlines so we're going to end up re-typing that all anyway=
-.
->
-> (Sorry for the long delay. Back from a series of vacations now)
->
-> Oh, that's too bad. Is there some better way to express this that can be
-> consumed by Rust or a Rust generator script? Maybe just some defines for
-> the bitfield offsets and sizes? I'm not sure how to clearly encapsulate
-> the split sector field that way though. It might be useful in the
-> Nouveau kernel code below, but would probably have the same problem
-> moving to Nova. Might just have to type that part N times in each client
-> codebase. I'll give it some more thought.
->
-
-#defines usually work as long as clang can evaluate them to constants. It
-just can't handle macros with parameters. And sometimes macros that are
-cnstants but are defined in terms of macros with parameters fall over. An
-enum will definitely work 100%.
-
-
-> The main purpose of including all the inlines before the actual format
-> modifier update was to illustrate that although a split bitfield can
-> sound nasty (Or did to me initially anyway), it can be encapsulated well
-> enough to make it a non-issue. I'm not wedded to the actual
-> implementation of the helper code. If we're in general agreement on the
-> modifier layout, I'll send that out stand-alone and we can iterate on
-> the helpers as needed given they're much less urgent.
->
-
-Yeah, I get that. I'm not scared of a split bitfield, though, so no need to
-demonstrate anything to me. =F0=9F=98=89
-
-And, yeah, I'm a fan of getting the definition out there sooner rather than
-later. Mesa 25.2is shipping in a few weeks with Blackwell support and I
-would really like to have modifiers for 565 and 4444.
-
-~Faith
-
-
-
-> > Also, I'm not seeing a patch to fix KMS to advertise the correct
-> > modifiers. Were you planning to type that or should I ask Lyude or Ben?
->
-> This was just an RFC, so I didn't want to type everything out given it'd
-> take a lot more time to test it (I lightly tested the RFC patches with
-> some hacky one-off test code). I'll take a look at what's needed in
-> Nouveau to advertise the right display modifiers and see whether it's
-> something I can realistically sign up to do.
->
-> Thanks,
-> -James
->
-> > ~Faith
-> >
-> >     James Jones (4):
-> >        drm: macros defining fields of NVIDIA modifiers
-> >        drm: add inline helper funcs for NVIDIA modifiers
-> >        drm/nouveau: use format modifier helper funcs
-> >        drm: define NVIDIA DRM format modifiers for GB20x
-> >
-> >       drivers/gpu/drm/nouveau/nouveau_display.c |  12 ++-
-> >       include/uapi/drm/drm_fourcc.h             | 100
-> ++++++++++++++++++----
-> >       2 files changed, 92 insertions(+), 20 deletions(-)
-> >
-> >     --
-> >     2.49.0
-> >
->
->
-
---000000000000577424063a211eb9
-Content-Type: text/html; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-
-<div dir=3D"ltr"><div class=3D"gmail_quote gmail_quote_container"><div dir=
-=3D"ltr" class=3D"gmail_attr">On Wed, Jul 16, 2025 at 6:36=E2=80=AFPM James=
- Jones &lt;<a href=3D"mailto:jajones@nvidia.com">jajones@nvidia.com</a>&gt;=
- wrote:<br></div><blockquote class=3D"gmail_quote" style=3D"margin:0px 0px =
-0px 0.8ex;border-left:1px solid rgb(204,204,204);padding-left:1ex">On 7/4/2=
-5 07:45, Faith Ekstrand wrote:<br>
-&gt; On Thu, Jul 3, 2025 at 6:34=E2=80=AFPM James Jones &lt;<a href=3D"mail=
-to:jajones@nvidia.com" target=3D"_blank">jajones@nvidia.com</a> <br>
-&gt; &lt;mailto:<a href=3D"mailto:jajones@nvidia.com" target=3D"_blank">jaj=
-ones@nvidia.com</a>&gt;&gt; wrote:<br>
-&gt; <br>
-&gt;=C2=A0 =C2=A0 =C2=A0The layout of bits within the individual tiles (ref=
-erred to as<br>
-&gt;=C2=A0 =C2=A0 =C2=A0sectors in the DRM_FORMAT_MOD_NVIDIA_BLOCK_LINEAR_2=
-D() macro)<br>
-&gt;=C2=A0 =C2=A0 =C2=A0changed for some formats starting in Blackwell 2 GP=
-Us. New format<br>
-&gt;=C2=A0 =C2=A0 =C2=A0modifiers are needed to denote the difference and p=
-revent direct<br>
-&gt;=C2=A0 =C2=A0 =C2=A0sharing of these incompatible buffers with older GP=
-Us.<br>
-&gt; <br>
-&gt;=C2=A0 =C2=A0 =C2=A0This patch series proposes first adding some helper=
- macros and<br>
-&gt;=C2=A0 =C2=A0 =C2=A0inline functions to drm_fourcc.h to make the NVIDIA=
- block-linear<br>
-&gt;=C2=A0 =C2=A0 =C2=A0format modifiers easier to work with given the prop=
-osed solution<br>
-&gt;=C2=A0 =C2=A0 =C2=A0makes them harder to parse, then extending the exis=
-ting sector type<br>
-&gt;=C2=A0 =C2=A0 =C2=A0field in the parametric format modifier macro<br>
-&gt;=C2=A0 =C2=A0 =C2=A0DRM_FORMAT_MOD_NVIDIA_BLOCK_LINEAR_2D() by another =
-bit to<br>
-&gt;=C2=A0 =C2=A0 =C2=A0accommodate the new layout type.<br>
-&gt; <br>
-&gt;=C2=A0 =C2=A0 =C2=A0There are a few ways the parameteric format modifie=
-r definition<br>
-&gt;=C2=A0 =C2=A0 =C2=A0could have been altered to handle the new layouts:<=
-br>
-&gt; <br>
-&gt;=C2=A0 =C2=A0 =C2=A0-The GOB Height and Page Kind field has a reserved =
-value that could<br>
-&gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0have been used. However, the GOB height and =
-page kind enums did<br>
-&gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0not change relative to prior chips, so this =
-is sort of a lie.<br>
-&gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0However, this is the least-invasive change.<=
-br>
-&gt; <br>
-&gt;=C2=A0 =C2=A0 =C2=A0-An entirely new field could have been added. This =
-seems<br>
-&gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0inappropriate given the presence of an exist=
-ing appropriate field.<br>
-&gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0The advantage here is it avoids splitting th=
-e sector layout field<br>
-&gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0across two bitfields.<br>
-&gt; <br>
-&gt;=C2=A0 =C2=A0 =C2=A0The proposed approach is the logically consistent o=
-ne, but has the<br>
-&gt;=C2=A0 =C2=A0 =C2=A0downside of being the most complex, and that it cau=
-ses the<br>
-&gt;=C2=A0 =C2=A0 =C2=A0DRM_FORMAT_MOD_NVIDIA_BLOCK_LINEAR_2D() macro to ev=
-aluate its<br>
-&gt;=C2=A0 =C2=A0 =C2=A0&#39;s&#39; parameter twice. However, I believe the=
- added helper functions<br>
-&gt;=C2=A0 =C2=A0 =C2=A0and macros address the complexity, and I have audit=
-ed the relevant<br>
-&gt;=C2=A0 =C2=A0 =C2=A0code and do not believe the double evaluation shoul=
-d cause any<br>
-&gt;=C2=A0 =C2=A0 =C2=A0problems in practice.<br>
-&gt; <br>
-&gt; <br>
-&gt; I think we&#39;ll converge pretty quickly on the last patch. I&#39;m l=
-ess sure <br>
-&gt; about the first 3. While I like the idea of having static inlines for =
-<br>
-&gt; modifiers that are shared by everybody, we can&#39;t actually use them=
- from <br>
-&gt; NVK because our image layout code is in rust and bindgen can&#39;t gen=
-erate <br>
-&gt; bindings for inlines so we&#39;re going to end up re-typing that all a=
-nyway.<br>
-<br>
-(Sorry for the long delay. Back from a series of vacations now)<br>
-<br>
-Oh, that&#39;s too bad. Is there some better way to express this that can b=
-e <br>
-consumed by Rust or a Rust generator script? Maybe just some defines for <b=
-r>
-the bitfield offsets and sizes? I&#39;m not sure how to clearly encapsulate=
- <br>
-the split sector field that way though. It might be useful in the <br>
-Nouveau kernel code below, but would probably have the same problem <br>
-moving to Nova. Might just have to type that part N times in each client <b=
-r>
-codebase. I&#39;ll give it some more thought.<br></blockquote><div><br></di=
-v><div>#defines usually work as long as clang can evaluate them to constant=
-s. It just=C2=A0can&#39;t handle macros with parameters. And sometimes macr=
-os that are cnstants but are defined in terms of macros with parameters fal=
-l over. An enum will definitely work 100%.</div><div>=C2=A0</div><blockquot=
-e class=3D"gmail_quote" style=3D"margin:0px 0px 0px 0.8ex;border-left:1px s=
-olid rgb(204,204,204);padding-left:1ex">
-The main purpose of including all the inlines before the actual format <br>
-modifier update was to illustrate that although a split bitfield can <br>
-sound nasty (Or did to me initially anyway), it can be encapsulated well <b=
-r>
-enough to make it a non-issue. I&#39;m not wedded to the actual <br>
-implementation of the helper code. If we&#39;re in general agreement on the=
- <br>
-modifier layout, I&#39;ll send that out stand-alone and we can iterate on <=
-br>
-the helpers as needed given they&#39;re much less urgent.<br></blockquote><=
-div><br></div><div>Yeah, I get that. I&#39;m not scared of a split bitfield=
-, though, so no need to demonstrate anything to me.=C2=A0=F0=9F=98=89</div>=
-<div><br></div><div>And, yeah, I&#39;m a fan of getting the definition out =
-there sooner rather than later. Mesa 25.2is shipping in a few weeks with Bl=
-ackwell support and I would really like to have modifiers for 565 and 4444.=
-</div><div><br></div><div>~Faith</div><div><br></div><div>=C2=A0</div><bloc=
-kquote class=3D"gmail_quote" style=3D"margin:0px 0px 0px 0.8ex;border-left:=
-1px solid rgb(204,204,204);padding-left:1ex">
-&gt; Also, I&#39;m not seeing a patch to fix KMS to advertise the correct <=
-br>
-&gt; modifiers. Were you planning to type that or should I ask Lyude or Ben=
-?<br>
-<br>
-This was just an RFC, so I didn&#39;t want to type everything out given it&=
-#39;d <br>
-take a lot more time to test it (I lightly tested the RFC patches with <br>
-some hacky one-off test code). I&#39;ll take a look at what&#39;s needed in=
- <br>
-Nouveau to advertise the right display modifiers and see whether it&#39;s <=
-br>
-something I can realistically sign up to do.<br>
-<br>
-Thanks,<br>
--James<br>
-<br>
-&gt; ~Faith<br>
-&gt; <br>
-&gt;=C2=A0 =C2=A0 =C2=A0James Jones (4):<br>
-&gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0 drm: macros defining fields of NVIDIA modif=
-iers<br>
-&gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0 drm: add inline helper funcs for NVIDIA mod=
-ifiers<br>
-&gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0 drm/nouveau: use format modifier helper fun=
-cs<br>
-&gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0 drm: define NVIDIA DRM format modifiers for=
- GB20x<br>
-&gt; <br>
-&gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0drivers/gpu/drm/nouveau/nouveau_display.c |=
-=C2=A0 12 ++-<br>
-&gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0include/uapi/drm/drm_fourcc.h=C2=A0 =C2=A0 =
-=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0| 100 ++++++++++++++++++----<br>
-&gt;=C2=A0 =C2=A0 =C2=A0 =C2=A02 files changed, 92 insertions(+), 20 deleti=
-ons(-)<br>
-&gt; <br>
-&gt;=C2=A0 =C2=A0 =C2=A0-- <br>
-&gt;=C2=A0 =C2=A0 =C2=A02.49.0<br>
-&gt; <br>
-<br>
-</blockquote></div></div>
-
---000000000000577424063a211eb9--
+T24gVGh1LCAyMDI1LTA3LTE3IGF0IDExOjA5ICswMzAwLCBaaGkgV2FuZyB3cm90ZToKPiBPbiBU
+dWUsIDE1IEp1bCAyMDI1IDE2OjA1OjU5IC0wNTAwCj4gVGltdXIgVGFiaSA8dHRhYmlAbnZpZGlh
+LmNvbT4gd3JvdGU6Cj4gCj4gVGhlcmUgaXMgYWxzbyBhIHNpbWlsYXIgY29kZSBibG9jayBpbiB0
+aGlzIGZ1bmN0aW9uOgo+IAo+IMKgwqDCoMKgwqDCoMKgIGlmIChmdy0+aW5zdCkgewo+IMKgwqDC
+oMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoCBudmttX2ZhbGNvbl9tYXNrKGZhbGNvbiwgMHgwNDgs
+IDB4MDAwMDAwMDEsIDB4MDAwMDAwMDEpOwo+IAo+IMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKg
+wqDCoCBzd2l0Y2ggKG52a21fbWVtb3J5X3RhcmdldChmdy0+aW5zdCkpIHsKPiDCoMKgwqDCoMKg
+wqDCoMKgwqDCoMKgwqDCoMKgwqAgY2FzZSBOVktNX01FTV9UQVJHRVRfVlJBTTogdGFyZ2V0ID0g
+MDsgYnJlYWs7Cj4gwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgIGNhc2UgTlZLTV9NRU1f
+VEFSR0VUX0hPU1Q6IHRhcmdldCA9IDI7IGJyZWFrOwo+IMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDC
+oMKgwqDCoCBjYXNlIE5WS01fTUVNX1RBUkdFVF9OQ09IOiB0YXJnZXQgPSAzOyBicmVhazsKPiDC
+oMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqAgZGVmYXVsdDoKPiDCoMKgwqDCoMKgwqDCoMKg
+wqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgIFdBUk5fT04oMSk7Cj4gwqDCoMKgwqDCoMKg
+wqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoCByZXR1cm4gLUVJTlZBTDsKPiDCoMKg
+wqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqAgfQo+IAo+IFNob3VsZCB0aGlzIGJlIHJlbW92ZWQg
+d2l0aCB0aGUgc2FtZSBwdXJwb3NlIGhlcmU/CgpObywgJ3RhcmdldCcgaXMgYWN0dWFsbHkgdXNl
+ZCBpbiB0aGlzIGJsb2NrLiAgVGhhdCdzIHdoeSBJIG1vdmVkIHRoYXQgdmFyaWFibGUgdG8gaW5z
+aWRlIHRoZQpibG9jay4KCglmYWxjb24tPmZ1bmMtPmJpbmRfaW5zdChmYWxjb24sIHRhcmdldCwg
+bnZrbV9tZW1vcnlfYWRkcihmdy0+aW5zdCkpOwoK
