@@ -2,163 +2,46 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id 19D31B0AB19
-	for <lists+nouveau@lfdr.de>; Fri, 18 Jul 2025 22:23:19 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id E82DCB0AC8E
+	for <lists+nouveau@lfdr.de>; Sat, 19 Jul 2025 01:29:57 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 2580E10E1A7;
-	Fri, 18 Jul 2025 20:23:15 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id D79B010E19B;
+	Fri, 18 Jul 2025 23:29:55 +0000 (UTC)
 Authentication-Results: gabe.freedesktop.org;
-	dkim=pass (2048-bit key; unprotected) header.d=Nvidia.com header.i=@Nvidia.com header.b="mLNtqK84";
+	dkim=pass (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="JdgbfHtR";
 	dkim-atps=neutral
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from NAM11-CO1-obe.outbound.protection.outlook.com
- (mail-co1nam11on2044.outbound.protection.outlook.com [40.107.220.44])
- by gabe.freedesktop.org (Postfix) with ESMTPS id BA0BB10E06C;
- Fri, 18 Jul 2025 20:23:13 +0000 (UTC)
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=d+c9Bh7p7sWKizayAQuJbRHPpwps6d8FLo1563BS9QQd6eBuQ4BXCW3fj4GJgOuJnBGBdXfplkGkgUOwR5nXAWpond+UGBuTjo7KABKWOwJ33TLR69+SffW8REDLdmdbu1eIbBY/8dI6tsaVIf0TaTMqlsgZWWQCQ7POaTuOKyOUKLe9pmLrkv+/Czi8THkSO4/j0+rHoaVE9ynNU+R/OeA5GAGHMd5nfJYOkGI4Y3/ZhoK6xvsyxYF09zFdHkeQlkjQOhCs9XZfTTZIBJ5gfTb9dcMRjiigSqGVWD3drzsjU2H2HhT92tz1ZIEdUmKktth82Ct4vSB5eoQNG7kk8w==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=X8VvY8iE4vR0N97C1ryETYWqk+3ROER1X9jmGG7N2Lc=;
- b=MhOwdtVk32bxh2Rvx4/RUbxBBH9kD8kOmuxXmpKuzLy6IT0cR9W70AhDiDcLohKluXjFyqRJ8pFtMe/kn68W+py9anybR+D+HJxd5fDLPxZ4/Mt9GdOiWp7Z/bHfCNqJArd9VVN3+j+3UBed4zs5QgjRz4kFTOuX5PgT+q0Anl5FyfnP17g1Eq0UIP3GUOi4ETK5N+wvOLwLm14vLOVgl8EQEObu9eg+S4oEyylcCYaZwl0HJ27ws2MIi7uA52RjzU/xpcpH7paXE7IVBp1AheOil8MsqxF96KrzdipjNB6LLFnJ8hpvvR1VgsGANXk8jM9eCzVraHUyFK+SExqQKA==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=nvidia.com; dmarc=pass action=none header.from=nvidia.com;
- dkim=pass header.d=nvidia.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=Nvidia.com;
- s=selector2;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=X8VvY8iE4vR0N97C1ryETYWqk+3ROER1X9jmGG7N2Lc=;
- b=mLNtqK841oT+1E8p/s89wrnlF0aPUSoio9c/5a9v+FKj6nsrGAJkAS2ltmh/q6W9OIODblwb5kCqJvE52YYVhvlThOtoSu1hHr7BqeOmKEu00jRw2zJna0/s30Ch2H/Pho42jR03TWxCDdxLzmqZTMJXw8/adcP/4bzXIZZIZBFCGb8iFBhIV0uFgZ8wlVJGibybbVyPiZadwm2vodikLGUx3IsmMvusIbm/9Gsz9eEH8dw3ynCtTx8EG8+AC4oGj5O5ujitgjr6sZZEmzvJr3KwiDHesMn6spH5PS20pTxIEbqo4vSsgPtfQEtLG+PE5MHDxK8nt09kD1mnVl05dQ==
-Authentication-Results: dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=nvidia.com;
-Received: from LV2PR12MB5968.namprd12.prod.outlook.com (2603:10b6:408:14f::7)
- by PH0PR12MB8005.namprd12.prod.outlook.com (2603:10b6:510:26c::12)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.8901.20; Fri, 18 Jul
- 2025 20:23:09 +0000
-Received: from LV2PR12MB5968.namprd12.prod.outlook.com
- ([fe80::e6dd:1206:6677:f9c4]) by LV2PR12MB5968.namprd12.prod.outlook.com
- ([fe80::e6dd:1206:6677:f9c4%7]) with mapi id 15.20.8901.033; Fri, 18 Jul 2025
- 20:23:09 +0000
-Message-ID: <5beb884b-f0fe-46b8-ac62-f11637fcc93f@nvidia.com>
-Date: Fri, 18 Jul 2025 13:23:05 -0700
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v2 16/19] gpu: nova-core: falcon: add distinct base
- address for PFALCON2
-To: Alexandre Courbot <acourbot@nvidia.com>,
- Danilo Krummrich <dakr@kernel.org>, David Airlie <airlied@gmail.com>,
- Simona Vetter <simona@ffwll.ch>,
- Maarten Lankhorst <maarten.lankhorst@linux.intel.com>,
- Maxime Ripard <mripard@kernel.org>, Thomas Zimmermann <tzimmermann@suse.de>
-Cc: Daniel Almeida <daniel.almeida@collabora.com>,
- Beata Michalska <beata.michalska@arm.com>, nouveau@lists.freedesktop.org,
- dri-devel@lists.freedesktop.org, rust-for-linux@vger.kernel.org,
- linux-kernel@vger.kernel.org
-References: <20250718-nova-regs-v2-0-7b6a762aa1cd@nvidia.com>
- <20250718-nova-regs-v2-16-7b6a762aa1cd@nvidia.com>
-Content-Language: en-US
-From: John Hubbard <jhubbard@nvidia.com>
-In-Reply-To: <20250718-nova-regs-v2-16-7b6a762aa1cd@nvidia.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
-X-ClientProxiedBy: SJ0PR03CA0372.namprd03.prod.outlook.com
- (2603:10b6:a03:3a1::17) To LV2PR12MB5968.namprd12.prod.outlook.com
- (2603:10b6:408:14f::7)
-MIME-Version: 1.0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: LV2PR12MB5968:EE_|PH0PR12MB8005:EE_
-X-MS-Office365-Filtering-Correlation-Id: 33ab167c-21b5-489b-4f45-08ddc638e971
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0;
- ARA:13230040|10070799003|376014|7416014|366016|1800799024; 
-X-Microsoft-Antispam-Message-Info: =?utf-8?B?UHNpc3VXaGN2L0dJMVVyWUxNVFFHQWhTeTMyVUtiQjB2aHVHdmlneitkQ3Qx?=
- =?utf-8?B?MWQzbVZGRHVFSlgzNy9udldrdjMrMXZQWkJySzF3QjludlVteVdWRmpDS3Bz?=
- =?utf-8?B?amlmamxoWEY0SG5VRlNTQ0xtelB3Nm9vb1BDRlZJUDdJOXFkUStFU3hWWlcw?=
- =?utf-8?B?SCtrZUJjem5aSTdzdzJmNWxMdUpLdkNaei90dXNXellhR3hCNU5ScG9IN2FM?=
- =?utf-8?B?OGJpaDJtZ1loSDQwQjZPK2cvZ1Fkb2JtczJWZVg3TmFQL1dUVHZrVWszS2tV?=
- =?utf-8?B?MytyMGRxMytzVERlT3pldGJocFdQZThhSjBmV0tib0JOL2ZJZTlRMXBMVEVV?=
- =?utf-8?B?dFl2TVVwMFp2VkZmVG1keVpMY0dzSUFBVHNZOFY5bytJV2ttTGU2ZEJLUWdF?=
- =?utf-8?B?QUE0bDRIK2lOcGNQdkhCbDd1a25MMmdRMHd5VERBdnlYamttcnJkbGlMOWQz?=
- =?utf-8?B?SUpWSlVVbkRQVmFBVzd6NkttNkdObFB0WEIrbGtJelFxYjVuSG8wZ1BwSlJa?=
- =?utf-8?B?R1UvRWV6bUIxelVTaVFpemUxdE1IMCtOTlZSRWdBSiszVFo1TkdPR2lBaTgy?=
- =?utf-8?B?emk5MXhNcDBrVUgwTlNIWGlqaDRWWGRQOHZETzN3K0tyamFUV3lzRWZXR3ln?=
- =?utf-8?B?a2QyYkpMOHdUb0V0d2NOdDlGc3pZN1dxZkwrMjJVMDlVZjlUUDcvTm5rQ0F0?=
- =?utf-8?B?OFczb1I4ZlRZQVp1WlBxMkZKSzFwQk1YR1VRa2RZNi8zbFNXaWFmbytQQjU5?=
- =?utf-8?B?QkNqNzlGNkpNTzI4aFdFNDQ2WDBsb3pNOWpGMFhIbE9vOUsyeHhSR3l4UEYx?=
- =?utf-8?B?dTcyd1VNa0dOS0xEbE1yRVVuQk9IRWZrS0NXREtkWEtPbHd2NHJPc3FCZ2Ey?=
- =?utf-8?B?azFiNGlTa0xIeDZ3WFUrM1FMdW54b3NuMWhtVnVSSG93MGcvZ0JZSEZ4WWZM?=
- =?utf-8?B?WURQTDR5UzBnVUF1djFrdERheW9qVlBaSWY3L2hUWWgyK0ZKYmhxWVM4Qmts?=
- =?utf-8?B?QjdRT1ZQSlowTDB6dXg3MlNMUnkrb1V0NUpMdVA5SW85TkxWUTdsMmZRUk9l?=
- =?utf-8?B?M0lzYXpEUUNhcXhxU3lWbDFmZ0ZqeVd5SWtVUjdtdmt0c29HdHEwWjdSSEJS?=
- =?utf-8?B?alRBL0FvZFRoTGxtS2FYZjlVVkkra1NpT0JlRDlZbUVSSTdHZy9NTFNMWFE3?=
- =?utf-8?B?L3AvajVuOWRjN3YrSmJSMGJtbkFocnZrb3VLbVZjMk1DaldNdVZVenQ2bHAz?=
- =?utf-8?B?SkVZdStPMDFuZ1lrdXJpZ0lNN2FSMys1bDZQOEFCSHF4SkZLN1pneURFZUNV?=
- =?utf-8?B?UVZwTjA0amFDK25WTURoYzVUeWZIMGtiT0IzQjB5ZVdnTnEyd1VDYUh0bHVK?=
- =?utf-8?B?ZHFQMkNSRlhibkpROGZhYjNQcFlPWEpnaWRkakFjaDlQay96Nlc3RVNZREdj?=
- =?utf-8?B?am96bXJHT3lFeWoyWDRIYXJNcHBybWcvQVZhNDVocytpa0xoMUx2dDJRdS9v?=
- =?utf-8?B?RWwycXF6SlFSbkxteGo0Mm00WSthOTRYRUhIVkxkVS9WR1U3dkNWdjgrVXNQ?=
- =?utf-8?B?TVAwTmxTSHgwNlRad08wbWpVYzJJOERlUno1eExITjlhWTcwZi9nRlpaVkxP?=
- =?utf-8?B?SXg5RE9VbnZRVCtXUmZnMEtuNC96azRqQlFmdm5WUmdYSTY4ZGF4Wlp0cjls?=
- =?utf-8?B?bHZ3Ly9sNjk5S0VURTRCaUNVNEI1YlE2SVJMZ2paS0JNbXcweXExd3NFQ1Vx?=
- =?utf-8?B?dUdqaVpZeHFLaWJNdEV2Wml0MUh5clBqaklJSitGekp1TUh1TjFCSSs3eklu?=
- =?utf-8?B?bEZNQ3hRRStETUdBb0VLeW5KK0NGRHl0aVJjQ0hsbUJHTGIyR28vQmlKbG9I?=
- =?utf-8?B?S2VUSWRFWWFKT25OL1pUZ082SGZWZ2VlN1ZZQzRCMnhHV3lHOTRxaVcrY25M?=
- =?utf-8?Q?1zdVN4wU5mI=3D?=
-X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
- IPV:NLI; SFV:NSPM; H:LV2PR12MB5968.namprd12.prod.outlook.com; PTR:; CAT:NONE;
- SFS:(13230040)(10070799003)(376014)(7416014)(366016)(1800799024); DIR:OUT;
- SFP:1101; 
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?UWU1WmZ4TlFYcXFKTG9OS1dvR3c1ZlNkeHNpUEZ3VWlXaWNkalRZQWlpazJE?=
- =?utf-8?B?bUVOaGZrd3ZzVENrRXB2M0docDVMelBxVXpKMEJNZEpyVzFHRjdkK0RUNnVW?=
- =?utf-8?B?M3V3cFgxVTRCY0xvVWRxMGpvZ2ZDNW93RnpvNzFVOVBCRFdzQmNQOHN0S2R3?=
- =?utf-8?B?bzFlMW80c1o1enVHeG9sV1pGWmxjRm1nMUxLeEl5M3BUM3g5aE1hV3l4Nk11?=
- =?utf-8?B?a0VFSmhXeTVMdHA1VnppOGR6eUh5Z1poY2I5Y3VsRS9yQ1IrVzdUN0YxNjRs?=
- =?utf-8?B?RFVVRXROaVFBZHhZTERsZElrNkNTVWNwSmlXeHdFbFI3K1l4SHpwTzVlVkht?=
- =?utf-8?B?d01hN29teGprenJ5dDBxMlcveExtcis2b09XVzRnUDVwMlg4R2U1L2l0aW03?=
- =?utf-8?B?M3FlYU9aYlU4ejVpN0tHQzhJVTd1VnArU090OWRwd0xYVkE3ZFVOeGJKR05K?=
- =?utf-8?B?Vm5FNFFrUEdHV2VRdDIyMFowcC9YNEtlVGxYKzZCVlR6c1lSNDk2NHkzN3BP?=
- =?utf-8?B?YjRuZjVJeC9ibjdDZnBQSGdLQ1lwVGw4MXU2M25ZUCtBSjdENzU5OHExL01Z?=
- =?utf-8?B?eUx4aFBzbW5nSkZDS2kvK0d2eCtJTys0eXZMeGNFUWFFNHlQNi9XcTkvMUJR?=
- =?utf-8?B?b0FsRmdMekRGTStHVThCbEJmV0FHa2x6N25sSGZtSnQ0YkRGN2xRUE1rRDVL?=
- =?utf-8?B?KzVXN2tRYmFoVHVHcDhHaTFDT2ZlL0pwNEM2UHNaOGdlYUZLMDNpQVdVNVlN?=
- =?utf-8?B?cFNQcXhtQXY2cGRWNHFhaksxUXp1YlA4cjdmVDVjVG5TT254Mzh4UGZJQ0hh?=
- =?utf-8?B?ZitjYkc3TCthTWhiQzBhY0h5bHJLT2RwRFBiQ1JjRVMvZHhPUVRNWDBveVh5?=
- =?utf-8?B?dStYMFgyRUhqZE1adnM5eUF3L3hoNE5tdkYybHRjbnVnVUptSUxlRWpPQSs2?=
- =?utf-8?B?dGxUblRoSEYzN2p4WS9QQU4wSHBlZ2krWnYxeHZxUEswN3p6cGx0YXFBZjZB?=
- =?utf-8?B?OGpmUWRuNnU4VmJDaXY1SUZlRFRYM2xzd0pOSjBERWhNY2pvK1JmUXlCSWpT?=
- =?utf-8?B?VzNtOUFkWkNRTW1HWGh0YnZ0RmlyMXhwU3M5aHlTNjJtZ1JNN29SV3luUW1E?=
- =?utf-8?B?VG9qQ1o5L25jTUZ2Z3J0L25tQnFwZXRhSndiNnFzOFFmakxORWF4SEhJb0lH?=
- =?utf-8?B?SFJpNkVDQXMycFRqb0hCMFNuRkx5enN2ZjQxRVJHM3VNQnhnM2xmQnk4aDBM?=
- =?utf-8?B?Q2FuUlFWNlhZa3Z4azlDOVkyeEFWcWtiQ0t0K0FnU3ZhQU1kbUhiZzhRbTg5?=
- =?utf-8?B?Q05OL3VTbEx4a1QrRkNIMVlyZHBFNmZZNjhzSGJPNGM5MENVNDdwSDFiOEJV?=
- =?utf-8?B?ejl2OEFldys4eHdmTzlZcnM4ak5uMjdWN3dya2VhMTkrN3lIWjcrVWZRR2kz?=
- =?utf-8?B?YXVNTzYxdUQxaU9Qdm42ZEZtakNiZ1c4b1hEZXExbWdKUW0zeCt5djlzV0pp?=
- =?utf-8?B?cTJhOWN2V08weVNLOTY0K3pmR3E0TUhIdS93a2E4LzlOVzJVN3U5TGtUOFlN?=
- =?utf-8?B?VVQraEtxdXlPd2xoQldTVWxRekhQVFpMcXRMd1dQcUpnNU85ZUtKY3NQK1RU?=
- =?utf-8?B?MmluS2kwK2RaeUM2MmhlUWpIcGE2eDg3T0s1QmJiU1E1M2NXZzNlMjkyYkln?=
- =?utf-8?B?WmFwNGs0L2x0aGkxL1JMY3VkRk9qQ1dxNFc2SUgyNU1ZMGRXMmN0aXF6YS9T?=
- =?utf-8?B?Z0xtbGpDS3F4aGJUTUs2RU9scXlLLzlJalFkRXNNVlJFM0Z0UmhUbEhQSmFH?=
- =?utf-8?B?eVB2R1ZQRHRIUFBKM3NidWJFSmFNU0d6NlkrVXZ4VlNDNTNXSUFtbm5oQzhF?=
- =?utf-8?B?Vmpnc0syNWh4K1BhZ1hFbUhOM0U3TkcrQXkvc1oxUkFmVlZHMVdUcWFoUFlu?=
- =?utf-8?B?c1lyYkJxUy9yUGlwWXF2dElTYnNwZFYxa0ZEU05NdlpyV2VHSUJyQXFWdFVJ?=
- =?utf-8?B?NE1OS1hQY25XRm14OEs5NkRYTm5FazdlU3hvRkxoeVFCK2cwV2hGYjlIempx?=
- =?utf-8?B?d3NtSU1JZU9tTkZVcU9Mcml0NmxCeThzZExzQ1lKRldNN3d2VTAzODQrUk52?=
- =?utf-8?B?Y1g4ejl3YnBVS1RuWTE1Qll2WU9oK0hlUzR0MUhjSmxYbCtqUHNnVU8xUUV1?=
- =?utf-8?Q?HhJH79IBgdBAHimMPg2JsWI=3D?=
-X-OriginatorOrg: Nvidia.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 33ab167c-21b5-489b-4f45-08ddc638e971
-X-MS-Exchange-CrossTenant-AuthSource: LV2PR12MB5968.namprd12.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 18 Jul 2025 20:23:09.5639 (UTC)
-X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
-X-MS-Exchange-CrossTenant-Id: 43083d15-7273-40c1-b7db-39efd9ccc17a
-X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: oqN3PWwd4GbPdIyQXi43Myp4kneyHUmyNVJNWwO7Vnldx/sKp/BabFc7/fDVGsxvTytHo/jL76FzzbQM7Ur5zA==
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: PH0PR12MB8005
+Received: from tor.source.kernel.org (tor.source.kernel.org [172.105.4.254])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 0D41C10E19B;
+ Fri, 18 Jul 2025 23:29:54 +0000 (UTC)
+Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
+ by tor.source.kernel.org (Postfix) with ESMTP id 50C83600BB;
+ Fri, 18 Jul 2025 23:29:53 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 8CF0BC4CEEB;
+ Fri, 18 Jul 2025 23:29:51 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+ s=k20201202; t=1752881393;
+ bh=IM5KGd7zbNMCDODiEIkjmudPH7hPFnnML1oMs5F1Q7k=;
+ h=Date:Cc:To:From:Subject:From;
+ b=JdgbfHtRc4o98AwL8CxLQOYG1YNz5gg8yT8AVtFJPeo857agKNcQ4HBsY4Yihm6fD
+ 8Kme0qPURa8OCcSVQyRnd3pJaFShjM6WmujF65MTghSj5zrpwNZu1qtrkDpqw3tt3a
+ lb5lXEUMuqqJwkDUjzwk2hMjThv50pHhNVO6yvVeceLfSIrBaomKlYxkcTfe9u9zBU
+ 8QGoT5XwCI3U+IljWgsD5a/0vJF2NTpiT6Lelp1X5FOLSufIlBdSNZ4uzG/X5BNHXy
+ g/ml5yoXLBHc1Wn9CDIbSLS0TT+UBd+cpT/lPjH2d82L/wbpwR4ppwELRZN6t6Wb4K
+ OD/amHnLppNXw==
+Mime-Version: 1.0
+Content-Transfer-Encoding: quoted-printable
+Content-Type: text/plain; charset=UTF-8
+Date: Sat, 19 Jul 2025 01:29:49 +0200
+Message-Id: <DBFKLDMUGZD9.Z93GN2N5B0FI@kernel.org>
+Cc: "Alexandre Courbot" <acourbot@nvidia.com>, "Miguel Ojeda"
+ <ojeda@kernel.org>, "Abdiel Janulgue" <abdiel.janulgue@gmail.com>,
+ <nouveau@lists.freedesktop.org>, <dri-devel@lists.freedesktop.org>
+To: "David Airlie" <airlied@gmail.com>, "Simona Vetter" <simona@ffwll.ch>
+From: "Danilo Krummrich" <dakr@kernel.org>
+Subject: [GIT PULL] Nova changes for v6.17
+X-Mailer: aerc 0.20.1
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -173,63 +56,204 @@ List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-On 7/18/25 12:26 AM, Alexandre Courbot wrote:
-...
-> diff --git a/drivers/gpu/nova-core/falcon/gsp.rs b/drivers/gpu/nova-core/falcon/gsp.rs
-> index 0db9f94036a6a7ced5a461aec2cff2ce246a5e0e..f17599cb49fa1e5077a554dc14b3715aa62a4ebd 100644
-> --- a/drivers/gpu/nova-core/falcon/gsp.rs
-> +++ b/drivers/gpu/nova-core/falcon/gsp.rs
-> @@ -2,7 +2,7 @@
->   
->   use crate::{
->       driver::Bar0,
-> -    falcon::{Falcon, FalconEngine, PFalconBase},
-> +    falcon::{Falcon, FalconEngine, PFalcon2Base, PFalconBase},
->       regs::{self, macros::RegisterBase},
->   };
->   
-> @@ -13,6 +13,10 @@ impl RegisterBase<PFalconBase> for Gsp {
->       const BASE: usize = 0x00110000;
+Hi Dave and Sima,
 
-This approach means that the reference manual values such as these, end
-up being scattered throughout the code base, as magic numbers.
+Please pull the following nova changes and other dependencies.
 
-I'm thinking that there should be no problem with using a symbol from
-the manuals, listed in a common area, instead, right?
+There's a minor conflict with the rust-timekeeping tree [1] with a resoluti=
+on
+in [2].
 
->   }
->   
-> +impl RegisterBase<PFalcon2Base> for Gsp {
-> +    const BASE: usize = 0x00111000;
-> +}
-> +
->   impl FalconEngine for Gsp {
->       const ID: Self = Gsp(());
->   }
-> diff --git a/drivers/gpu/nova-core/falcon/sec2.rs b/drivers/gpu/nova-core/falcon/sec2.rs
-> index dbc486a712ffce30efa3a4264b0757974962302e..815786c8480db6cb74541d7ab574112baeb816fe 100644
-> --- a/drivers/gpu/nova-core/falcon/sec2.rs
-> +++ b/drivers/gpu/nova-core/falcon/sec2.rs
-> @@ -1,6 +1,6 @@
->   // SPDX-License-Identifier: GPL-2.0
->   
-> -use crate::falcon::{FalconEngine, PFalconBase};
-> +use crate::falcon::{FalconEngine, PFalcon2Base, PFalconBase};
->   use crate::regs::macros::RegisterBase;
->   
->   /// Type specifying the `Sec2` falcon engine. Cannot be instantiated.
-> @@ -10,6 +10,10 @@ impl RegisterBase<PFalconBase> for Sec2 {
->       const BASE: usize = 0x00840000;
->   }
->   
-> +impl RegisterBase<PFalcon2Base> for Sec2 {
-> +    const BASE: usize = 0x00841000;
-> +}
+[1] https://lore.kernel.org/all/20250624195142.1050e147@canb.auug.org.au/
+[2] https://lore.kernel.org/all/20250626170538.67e26afc@canb.auug.org.au/
 
-Here are a re more examples of that.
+The following changes since commit e04c78d86a9699d136910cfc0bdcf01087e3267e=
+:
 
+  Linux 6.16-rc2 (2025-06-15 13:49:41 -0700)
 
-thanks,
--- 
-John Hubbard
+are available in the Git repository at:
 
+  https://gitlab.freedesktop.org/drm/nova.git tags/nova-next-v6.17-2025-07-=
+18
+
+for you to fetch changes up to 14ae91a81ec8fa0bc23170d4aa16dd2a20d54105:
+
+  gpu: nova-core: fix bounds check in PmuLookupTableEntry::new (2025-07-17 =
+14:10:58 +0900)
+
+----------------------------------------------------------------
+Nova changes for v6.17
+
+DMA:
+
+  - Merge topic/dma-features-2025-06-23 from alloc tree.
+
+    - Clarify wording and be consistent in 'coherent' nomenclature.
+
+    - Convert the read!() / write!() macros to return a Result.
+
+    - Add as_slice() / write() methods in CoherentAllocation.
+
+    - Fix doc-comment of dma_handle().
+
+    - Expose count() and size() in CoherentAllocation and add the
+      corresponding type invariants.
+
+    - Implement CoherentAllocation::dma_handle_with_offset().
+
+nova-core:
+
+  - Various register!() macro improvements.
+
+  - Custom Sleep / Delay helpers (until the actual abstractions land).
+
+  - Add DMA object abstraction.
+
+  - VBIOS
+
+    - Image parser / iterator.
+
+    - PMU table look up in FWSEC.
+
+    - FWSEC ucode extraction.
+
+  - Register sysmem flush page.
+
+  - Falcon
+
+    - Generic falcon boot code and HAL (Ampere).
+
+    - GSP / SEC2 specific code.
+
+  - FWSEC-FRTS
+
+    - Compute layout of FRTS region (FbLayout and HAL).
+
+    - Load into GSP falcon and execute.
+
+  - Add Documentation for VBIOS layout, Devinit process, Fwsec operation
+    and layout, Falcon basics.
+
+  - Update and annotate TODO list.
+
+  - Add Alexandre Courbot as co-maintainer.
+
+Rust:
+
+  - Make ETIMEDOUT error available.
+
+  - Add size constants up to SZ_2G.
+
+----------------------------------------------------------------
+Abdiel Janulgue (3):
+      rust: dma: clarify wording and be consistent in `coherent` nomenclatu=
+re
+      rust: dma: convert the read/write macros to return Result
+      rust: dma: add as_slice/write functions for CoherentAllocation
+
+Alexandre Courbot (23):
+      rust: dma: fix doc-comment of dma_handle()
+      rust: dma: expose the count and size of CoherentAllocation
+      rust: dma: add dma_handle_with_offset method to CoherentAllocation
+      rust: make ETIMEDOUT error available
+      rust: sizes: add constants up to SZ_2G
+      gpu: nova-core: use absolute paths in register!() macro
+      gpu: nova-core: add delimiter for helper rules in register!() macro
+      gpu: nova-core: expose the offset of each register as a type constant
+      gpu: nova-core: allow register aliases
+      gpu: nova-core: increase BAR0 size to 16MB
+      gpu: nova-core: add helper function to wait on condition
+      gpu: nova-core: wait for GFW_BOOT completion
+      gpu: nova-core: add DMA object struct
+      gpu: nova-core: register sysmem flush page
+      gpu: nova-core: add falcon register definitions and base code
+      gpu: nova-core: firmware: add ucode descriptor used by FWSEC-FRTS
+      gpu: nova-core: compute layout of the FRTS region
+      gpu: nova-core: add types for patching firmware binaries
+      gpu: nova-core: extract FWSEC from BIOS and patch it to run FWSEC-FRT=
+S
+      gpu: nova-core: load and run FWSEC-FRTS
+      gpu: nova-core: update and annotate TODO list
+      gpu: nova-core: replace `Duration` with `Delta`
+      gpu: nova-core: convert `/*` comments to `//`
+
+Danilo Krummrich (4):
+      Merge tag 'topic/dma-features-2025-06-23' of https://github.com/Rust-=
+for-Linux/linux.git
+      gpu: nova-core: impl From for u32 for enums used from register!
+      gpu: nova-core: consider `clippy::cast_lossless`
+      MAINTAINERS: Add Alexandre Courbot as co-maintainer to nova-core
+
+Joel Fernandes (10):
+      gpu: nova-core: vbios: Add base support for VBIOS construction and it=
+eration
+      gpu: nova-core: vbios: Add support to look up PMU table in FWSEC
+      gpu: nova-core: vbios: Add support for FWSEC ucode extraction
+      gpu: nova-core: Add code comments related to devinit
+      gpu: nova-core: Clarify sysmembar operations
+      gpu: nova-core: Clarify falcon code
+      Documentation: gpu: nova-core: Document vbios layout
+      Documentation: gpu: nova-core: Document devinit process
+      Documentation: gpu: nova-core: Document fwsec operation and layout
+      Documentation: gpu: nova-core: Document basics of the Falcon
+
+Rhys Lloyd (1):
+      gpu: nova-core: fix bounds check in PmuLookupTableEntry::new
+
+ Documentation/gpu/nova/core/devinit.rst   |   61 ++++++
+ Documentation/gpu/nova/core/falcon.rst    |  158 +++++++++++++++
+ Documentation/gpu/nova/core/fwsec.rst     |  181 +++++++++++++++++
+ Documentation/gpu/nova/core/todo.rst      |  107 ++++++-----
+ Documentation/gpu/nova/core/vbios.rst     |  181 +++++++++++++++++
+ Documentation/gpu/nova/index.rst          |    4 +
+ MAINTAINERS                               |    1 +
+ drivers/gpu/nova-core/dma.rs              |   58 ++++++
+ drivers/gpu/nova-core/driver.rs           |    6 +-
+ drivers/gpu/nova-core/falcon.rs           |  588 +++++++++++++++++++++++++=
+++++++++++++++++++++++++++++++
+ drivers/gpu/nova-core/falcon/gsp.rs       |   24 +++
+ drivers/gpu/nova-core/falcon/hal.rs       |   54 ++++++
+ drivers/gpu/nova-core/falcon/hal/ga102.rs |  119 ++++++++++++
+ drivers/gpu/nova-core/falcon/sec2.rs      |   10 +
+ drivers/gpu/nova-core/fb.rs               |  147 ++++++++++++++
+ drivers/gpu/nova-core/fb/hal.rs           |   39 ++++
+ drivers/gpu/nova-core/fb/hal/ga100.rs     |   57 ++++++
+ drivers/gpu/nova-core/fb/hal/ga102.rs     |   36 ++++
+ drivers/gpu/nova-core/fb/hal/tu102.rs     |   58 ++++++
+ drivers/gpu/nova-core/firmware.rs         |  108 +++++++++++
+ drivers/gpu/nova-core/firmware/fwsec.rs   |  423 +++++++++++++++++++++++++=
++++++++++++++++
+ drivers/gpu/nova-core/gfw.rs              |   71 +++++++
+ drivers/gpu/nova-core/gpu.rs              |  127 +++++++++++-
+ drivers/gpu/nova-core/nova_core.rs        |    5 +
+ drivers/gpu/nova-core/regs.rs             |  303 +++++++++++++++++++++++++=
++++-
+ drivers/gpu/nova-core/regs/macros.rs      |   65 +++++--
+ drivers/gpu/nova-core/util.rs             |   26 +++
+ drivers/gpu/nova-core/vbios.rs            | 1166 +++++++++++++++++++++++++=
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++=
+++++++++++
+ rust/kernel/dma.rs                        |  199 +++++++++++++++----
+ rust/kernel/error.rs                      |    1 +
+ rust/kernel/sizes.rs                      |   24 +++
+ samples/rust/rust_dma.rs                  |   28 +--
+ 32 files changed, 4320 insertions(+), 115 deletions(-)
+ create mode 100644 Documentation/gpu/nova/core/devinit.rst
+ create mode 100644 Documentation/gpu/nova/core/falcon.rst
+ create mode 100644 Documentation/gpu/nova/core/fwsec.rst
+ create mode 100644 Documentation/gpu/nova/core/vbios.rst
+ create mode 100644 drivers/gpu/nova-core/dma.rs
+ create mode 100644 drivers/gpu/nova-core/falcon.rs
+ create mode 100644 drivers/gpu/nova-core/falcon/gsp.rs
+ create mode 100644 drivers/gpu/nova-core/falcon/hal.rs
+ create mode 100644 drivers/gpu/nova-core/falcon/hal/ga102.rs
+ create mode 100644 drivers/gpu/nova-core/falcon/sec2.rs
+ create mode 100644 drivers/gpu/nova-core/fb.rs
+ create mode 100644 drivers/gpu/nova-core/fb/hal.rs
+ create mode 100644 drivers/gpu/nova-core/fb/hal/ga100.rs
+ create mode 100644 drivers/gpu/nova-core/fb/hal/ga102.rs
+ create mode 100644 drivers/gpu/nova-core/fb/hal/tu102.rs
+ create mode 100644 drivers/gpu/nova-core/firmware/fwsec.rs
+ create mode 100644 drivers/gpu/nova-core/gfw.rs
+ create mode 100644 drivers/gpu/nova-core/vbios.rs
