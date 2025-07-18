@@ -2,83 +2,126 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id 925EFCBAD91
-	for <lists+nouveau@lfdr.de>; Sat, 13 Dec 2025 13:45:14 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 344EDCBA8F2
+	for <lists+nouveau@lfdr.de>; Sat, 13 Dec 2025 13:17:26 +0100 (CET)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 05E5F10EB57;
-	Sat, 13 Dec 2025 12:41:32 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id B0A1010E41A;
+	Sat, 13 Dec 2025 12:17:24 +0000 (UTC)
 Authentication-Results: gabe.freedesktop.org;
-	dkim=permerror (0-bit key) header.d=gmail.com header.i=@gmail.com header.b="lsdvfmTT";
+	dkim=permerror (0-bit key) header.d=gmail.com header.i=@gmail.com header.b="GoY/AiUp";
 	dkim-atps=neutral
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from mail-pl1-f174.google.com (mail-pl1-f174.google.com
- [209.85.214.174])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 6020C10E91F;
- Fri, 18 Jul 2025 07:37:48 +0000 (UTC)
-Received: by mail-pl1-f174.google.com with SMTP id
- d9443c01a7336-23636167b30so17078735ad.1; 
- Fri, 18 Jul 2025 00:37:48 -0700 (PDT)
+Received: from mail-qk1-f177.google.com (mail-qk1-f177.google.com
+ [209.85.222.177])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 31B0210E197;
+ Fri, 18 Jul 2025 19:05:08 +0000 (UTC)
+Received: by mail-qk1-f177.google.com with SMTP id
+ af79cd13be357-7e3142e58cfso148334485a.0; 
+ Fri, 18 Jul 2025 12:05:08 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1752824268; x=1753429068; darn=lists.freedesktop.org;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:from:to:cc:subject:date
+ d=gmail.com; s=20230601; t=1752865507; x=1753470307; darn=lists.freedesktop.org;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:feedback-id:from:to:cc:subject:date
  :message-id:reply-to;
- bh=F331rKpZ7Oe6FYaTJXdFG2PxN8OlPB5pXAO1vVr7BtA=;
- b=lsdvfmTT64yn7wzWDesRD9eO7Gp2ZvtJYhLGMHYNNHF/UPrNHx7ONf5HM5NEIb/qpN
- DXtqE2AntYvdNeebzJSJNhelomda7Ao6WXNIRon23rEXkFya918CPJ1Okn7cG5dyCzmZ
- VYQqSNqEGJt/S65vuj0ko86ZwtYDgY8xvrHlXoeqQJW9ImDdji9zD4OdV4W8psZEHz+H
- oN2HRg57UQukeHIQoGww2VG5wI6t3La6w1j5bB2XhVxCyjPDKjZpj8u2BzmJbMX9W2ZQ
- XMUEfT5mXXf+XZzp3ZUhwzXMjXJVWD4VukpXENZeoS90F8lhNN/+Fh4dFGGtecvpyMWw
- 98mQ==
+ bh=5j79F8WX6g4zI7dhSEPRiOOy0m3FlFhAAbp2BrZjtaQ=;
+ b=GoY/AiUpqxPVc93alt6gnu9yWkCLhTNL/jCwq9jK3r566vD+9XKsAmqgMPCdSqdh+x
+ oFsaT/xtXwm7rkNy7EzlmryE7JnK8nX79KNqruA+sqkH19z2gjT9/iZrAzrH3VbknK1c
+ B8QdTzAr15r+lsqAn+xnU88MTvIIVEPcDy6owDu54T6eSuSpTEBbRdzY94CbZSozxIyv
+ TbwPfIBLzn8i0EvKG9MIsTJ4brADRO9+iwY4hXCwlUGW+GKkT3NiFlNgORnRrmg6HD0r
+ pwqdNDdFBpgX8wTiSTV+pTB9SzBYmNjcNXxVbwxtekLSdChpilreky5idQ9MvOKON9Rk
+ SvTw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1752824268; x=1753429068;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
+ d=1e100.net; s=20230601; t=1752865507; x=1753470307;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:feedback-id:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=F331rKpZ7Oe6FYaTJXdFG2PxN8OlPB5pXAO1vVr7BtA=;
- b=lZOfi78UfGhMc4xKCZhiea+9aBjAh5i42256I3hcQDZ08O/54ujtSwaw5aJ3TBIa/Q
- Bz1xlU05BDkk0Wlk6Vq4LStPLMLOQna0U/50Flcu54xUl/WouhCBj+1hD0UAgaqSq3Tq
- ilwtUgYx+B2EFwNC4qGd+TtqTdBAll/rD+Kki+mTlF6adSH8r1Kh4vzki9Fku3efE8JM
- 2Pt9cglCHkC5ZcMZQnIbAaXDfAQEpTfQVEZ0Yw0WW6RaIpv0bnVqnXWkP45U2GzLWeJU
- uIBFA3rMy4IMElezqxv/k/87l6gPJGBD1vmZb18NX0zVnGFIgenodt9iUYXTJoIp51Hj
- ISmg==
+ bh=5j79F8WX6g4zI7dhSEPRiOOy0m3FlFhAAbp2BrZjtaQ=;
+ b=vNb6z8tqO4t/z1c7nvvZAzjbJHg68u1vuQWq+ihiK51lNvuu4gepMmKrMfXxdoJwrs
+ Z5PvY70ITCnIvqHQWzZfzyF4ORNtm0vkpmsFdUWXnILifmkddroz9J/1IMPSHyj3ZvTm
+ ujKN0+hQ5euetn7bj63qhpQfv0AFTdnzBAlIjE62fqZdRTa6mxRZB25gLLb8ppWkYTrp
+ mBRegdH4j3pBBGjFL9r8jFvEPAjRa5hNNiTGliYW1dhQHcDgEK7bkF9GedH9VJDwtThP
+ u6NcNLGtsxyT0t5+P+FUEhTUDm/VIR17lXPYxTHbOo38f82tl3f0bIb5k+5LC/dUn5CS
+ fojA==
 X-Forwarded-Encrypted: i=1;
- AJvYcCUhRl3zcYxsi7PxMdJL2D0oqwI6Iy6QgviqW2f/ReB334gBBofbXWbDQyRvn6aIIvB4nQsRLh/DXrw=@lists.freedesktop.org,
- AJvYcCWAsVk04b7/CnkNDmK26ybRdB6KPcuCaUO3A0mHIxKkjkDuZ9c0dtmxTEEnSEHoShqUMuH8WAVnlg==@lists.freedesktop.org
-X-Gm-Message-State: AOJu0YyRkRbFYXSANW3bev6Nq8ud6YCdrCIrnAjhyASx1zq1aqWVUtBO
- hb+z3hDosANeNmpcXHUtX3cn9p0Z46i44fSuSptOmoRG4p0i50RwuV9V
-X-Gm-Gg: ASbGncvVcel5WNLhb1TE/ioHhZ0RXt4ynO70C7xtgMaprrb0vtyfbT1m4wiRIhqQuG7
- yzEb8GSnayxarpQ5VOPtPmAtgxpMxc4wuGJ7xKwtZTqIfmz94b1WxCXCvuNuGXygmbp0z3sWJMM
- wCVHl/h4N+glX3xYcgvf2Opz9sRzbcM15v4nS+cOXu7cal1D9l5vfE3KFkJQG2jPG31n2i6YZau
- XOgMXstUPCZGhDEEQG+UETPTRod0kFblxsnhja+SmULuR51YP8iyrT9c7reW+ou2DNcHrJlcGJw
- B0FgVib+LZrq3HdcYlUb/4+6EAPb5xAwWODuXROVDIU1iQJQBjlzumpwxV7iMlYQtNmsKEiGnhp
- 6kpQrNA0fR6HJihRVZ9Fvq1Fb81zLi8EaIp0=
-X-Google-Smtp-Source: AGHT+IETRPva4ck7C9Si6yZrkvK+/vXb7rDOjcKQ4Tbk1nNlqyAeaw2WVm2q8RtQKEDPzQzyQtR9Rg==
-X-Received: by 2002:a17:902:c941:b0:234:c2e7:a103 with SMTP id
- d9443c01a7336-23e2572ffe3mr115592075ad.33.1752824267824; 
- Fri, 18 Jul 2025 00:37:47 -0700 (PDT)
-Received: from quat-desktop ([2001:569:514a:9100:3f23:7b0f:f6a2:1ebd])
+ AJvYcCUqnjuVhIArd47HThcmGp9vRxPtLPmQoRF4cQGhYe1PL1UU7UJgj2WR8f8tiM2pz5zJZBTAw/ghNjw=@lists.freedesktop.org,
+ AJvYcCXisI6KmvvWADICCO6cvd1ukeg/esdCGC4o3AUjCGlFgkmqckHmRq7/HSRoiuerR9dN2nUzkjKzTg==@lists.freedesktop.org
+X-Gm-Message-State: AOJu0Yy+iGt7sOGvGUbZ5N2jzpMnUDXF9gebY4aE955T7iTUGkq01YMv
+ RagGlHpyELuC6zuUuIfYKWl6UQTJ1pqTYwbrfezkW1pF/u0wkg84sYKy
+X-Gm-Gg: ASbGncuGy4CpJ8veNvA1QLsN665GWb6LH/O83SBeBeSFTCyPlU9/EvgdPjQsu1EyU7y
+ u8x6r81aEvmsdEwIFjNPIkCnE7HuJ7DYJWQX84ZHpEt0wfrK09R4e4VlclSsR7n3crG3dOiXLYG
+ mozkR+mZoXPIv811/kaAnbKIptkuQB46uwreUYLWGENCFb3xqWDSLVKBWSFO2nh8mrGbB8ecnTC
+ aOTHIkg2OZPg3HL5Pe6LwQM3JQDE3Vk+mO/+Mj4DaOdGCbfKBj29I5nfHAj/parKDjdsJmwMa8N
+ BvynLPfbgl7YC64ZiW4Qzl8qRT+rXOznPgEJJTQBnh6c/02I68BnrxGzLHdVjt31SUDC5a5BO/W
+ XhbEg6eaJdkpO+WdbX6WLBRxmLepZQIJ9h/PMAlw/u1PZ0WIu49U3Z+cz+DwUjzCx6Oi4gAwdLs
+ rYjlW8WJb5DSoXoW5RiOLkX06kpBsiyT878g==
+X-Google-Smtp-Source: AGHT+IHH/NifKTKz2dbR90WbWGGqf2VV3ZDVe1t3kE2kVXHFT8QLOk9feQkrf4IyGuzEzg2JakRnyA==
+X-Received: by 2002:a05:620a:2811:b0:7e0:9977:a803 with SMTP id
+ af79cd13be357-7e34363599dmr1583267185a.54.1752865506723; 
+ Fri, 18 Jul 2025 12:05:06 -0700 (PDT)
+Received: from fauth-a1-smtp.messagingengine.com
+ (fauth-a1-smtp.messagingengine.com. [103.168.172.200])
  by smtp.gmail.com with ESMTPSA id
- d9443c01a7336-23e3b6b4e84sm7671725ad.104.2025.07.18.00.37.47
+ af79cd13be357-7e356b62e63sm120881285a.47.2025.07.18.12.05.03
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 18 Jul 2025 00:37:47 -0700 (PDT)
-From: Rhys Lloyd <krakow20@gmail.com>
-To: acourbot@nvidia.com,
-	dakr@kernel.org
-Cc: Rhys Lloyd <krakow20@gmail.com>, rust-for-linux@vger.kernel.org,
- airlied@gmail.com, simona@ffwll.ch, nouveau@lists.freedesktop.org,
- dri-devel@lists.freedesktop.org, linux-kernel@vger.kernel.org
-Subject: [PATCH v3] gpu: nova-core: vbios: change PmuLookupTableEntry to use
- size_of
-Date: Fri, 18 Jul 2025 00:36:25 -0700
-Message-ID: <20250718073633.194032-3-krakow20@gmail.com>
-X-Mailer: git-send-email 2.50.1
-In-Reply-To: <20250718073633.194032-1-krakow20@gmail.com>
-References: <20250718073633.194032-1-krakow20@gmail.com>
+ Fri, 18 Jul 2025 12:05:05 -0700 (PDT)
+Received: from phl-compute-08.internal (phl-compute-08.phl.internal
+ [10.202.2.48])
+ by mailfauth.phl.internal (Postfix) with ESMTP id 3B879F40070;
+ Fri, 18 Jul 2025 15:05:03 -0400 (EDT)
+Received: from phl-mailfrontend-01 ([10.202.2.162])
+ by phl-compute-08.internal (MEProxy); Fri, 18 Jul 2025 15:05:03 -0400
+X-ME-Sender: <xms:35p6aKs_0L9U1v9PEKDAHghrb8pBMTy6Y_CSJVs2sxTVoTEhmG7DLA>
+ <xme:35p6aLRdSW2XmEFlD9KxPuMSpgDYq67TpE8rivNKbQkE9g74EEG_frD4xNPenvUGl
+ 2Fei3aKqk913i14VQ>
+X-ME-Received: <xmr:35p6aMPBwwc2QfgaCuu05VCiZPH9ydnYVNS_PW32DK9zsQg9Vu3wS2k--Q>
+X-ME-Proxy-Cause: gggruggvucftvghtrhhoucdtuddrgeeffedrtdefgdeigedvgecutefuodetggdotefrod
+ ftvfcurfhrohhfihhlvgemucfhrghsthforghilhdpuffrtefokffrpgfnqfghnecuuegr
+ ihhlohhuthemuceftddtnecusecvtfgvtghiphhivghnthhsucdlqddutddtmdenucfjug
+ hrpeffhffvvefukfhfgggtuggjsehttdertddttddvnecuhfhrohhmpeeuohhquhhnucfh
+ vghnghcuoegsohhquhhnrdhfvghnghesghhmrghilhdrtghomheqnecuggftrfgrthhtvg
+ hrnhephedugfduffffteeutddvheeuveelvdfhleelieevtdeguefhgeeuveeiudffiedv
+ necuvehluhhsthgvrhfuihiivgeptdenucfrrghrrghmpehmrghilhhfrhhomhepsghoqh
+ hunhdomhgvshhmthhprghuthhhphgvrhhsohhnrghlihhthidqieelvdeghedtieegqddu
+ jeejkeehheehvddqsghoqhhunhdrfhgvnhhgpeepghhmrghilhdrtghomhesfhhigihmvg
+ drnhgrmhgvpdhnsggprhgtphhtthhopedugedpmhhouggvpehsmhhtphhouhhtpdhrtghp
+ thhtoheprggtohhurhgsohhtsehnvhhiughirgdrtghomhdprhgtphhtthhopegurghkrh
+ eskhgvrhhnvghlrdhorhhgpdhrtghpthhtoheprghirhhlihgvugesghhmrghilhdrtgho
+ mhdprhgtphhtthhopehsihhmohhnrgesfhhffihllhdrtghhpdhrtghpthhtohepmhgrrg
+ hrthgvnhdrlhgrnhhkhhhorhhstheslhhinhhugidrihhnthgvlhdrtghomhdprhgtphht
+ thhopehmrhhiphgrrhgusehkvghrnhgvlhdrohhrghdprhgtphhtthhopehtiihimhhmvg
+ hrmhgrnhhnsehsuhhsvgdruggvpdhrtghpthhtohepuggrnhhivghlrdgrlhhmvghiuggr
+ segtohhllhgrsghorhgrrdgtohhmpdhrtghpthhtohepsggvrghtrgdrmhhitghhrghlsh
+ hkrgesrghrmhdrtghomh
+X-ME-Proxy: <xmx:35p6aB63XXyz8ju8xf2icVscA4L8vXiK6DrLQCcWzQsJgW3hZrYU2g>
+ <xmx:35p6aPVevi0ooEtaSNsSsdGrEIwePW1wWUAKNqsrfQDxpeWaSX1OZw>
+ <xmx:35p6aIP8HeSkU_tBsNcNzqWa9DUz1ZWFcxmvajorjI32IYqAaDLb2g>
+ <xmx:35p6aGgF-Moe335sqLuvWFUTe7_TofctfCedLXnMpuZiXJu9Uckhcw>
+ <xmx:35p6aO7HAIcMVeE7dESfP_QlvJHWJshyCbdI6rYJuOmvCkWz2WFBH-JW>
+Feedback-ID: iad51458e:Fastmail
+Received: by mail.messagingengine.com (Postfix) with ESMTPA; Fri,
+ 18 Jul 2025 15:05:02 -0400 (EDT)
+Date: Fri, 18 Jul 2025 12:05:00 -0700
+From: Boqun Feng <boqun.feng@gmail.com>
+To: Alexandre Courbot <acourbot@nvidia.com>
+Cc: Danilo Krummrich <dakr@kernel.org>, David Airlie <airlied@gmail.com>,
+ Simona Vetter <simona@ffwll.ch>,
+ Maarten Lankhorst <maarten.lankhorst@linux.intel.com>,
+ Maxime Ripard <mripard@kernel.org>,
+ Thomas Zimmermann <tzimmermann@suse.de>,
+ Daniel Almeida <daniel.almeida@collabora.com>,
+ Beata Michalska <beata.michalska@arm.com>,
+ nouveau@lists.freedesktop.org, dri-devel@lists.freedesktop.org,
+ rust-for-linux@vger.kernel.org, linux-kernel@vger.kernel.org
+Subject: Re: [PATCH v2 02/19] gpu: nova-core: register: fix typo
+Message-ID: <aHqa3HVUjIC7zHAr@tardis.local>
+References: <20250718-nova-regs-v2-0-7b6a762aa1cd@nvidia.com>
+ <20250718-nova-regs-v2-2-7b6a762aa1cd@nvidia.com>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-X-Mailman-Approved-At: Sat, 13 Dec 2025 12:40:51 +0000
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <20250718-nova-regs-v2-2-7b6a762aa1cd@nvidia.com>
+X-Mailman-Approved-At: Sat, 13 Dec 2025 12:17:01 +0000
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -93,46 +136,45 @@ List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-Annotate the PmuLookupTableEntry with an `#[repr(C, packed)]` attribute.
-Removes another magic number by making the struct the same size as
-the data it needs to read, allowing the use of
-`size_of::<PmuLookupTableEntry>()`
+On Fri, Jul 18, 2025 at 04:26:07PM +0900, Alexandre Courbot wrote:
+> A space was missing between arguments in this invocation.
+> 
 
-Signed-off-by: Rhys Lloyd <krakow20@gmail.com>
----
-Changes in v2:
-- get_data helper function renamed to data
-Changes in v3:
-- Change PmuLookupTableEntry.data back to u32
-- Remove helper function
-- Annotate `PmuLookupTableEntry` with `#[repr(C, packed)]`
+It's obvious up to driver and Nova folks, but I feel this commit better
+folded into another patch or we make the title a bit more clear, say:
 
----
- drivers/gpu/nova-core/vbios.rs | 3 ++-
- 1 file changed, 2 insertions(+), 1 deletion(-)
+gpu: nova-core: register: add the missing space in register!()
 
-diff --git a/drivers/gpu/nova-core/vbios.rs b/drivers/gpu/nova-core/vbios.rs
-index 5b5d9f38cbb3..4c8368946bd6 100644
---- a/drivers/gpu/nova-core/vbios.rs
-+++ b/drivers/gpu/nova-core/vbios.rs
-@@ -893,6 +893,7 @@ fn try_from(base: BiosImageBase) -> Result<Self> {
- ///
- /// See the [`PmuLookupTable`] description for more information.
- #[expect(dead_code)]
-+#[repr(C, packed)]
- struct PmuLookupTableEntry {
-     application_id: u8,
-     target_id: u8,
-@@ -901,7 +902,7 @@ struct PmuLookupTableEntry {
+Otherwise my fear is we're going to end up with a few "fix typo" commits
+in the future.
 
- impl PmuLookupTableEntry {
-     fn new(data: &[u8]) -> Result<Self> {
--        if data.len() < 6 {
-+        if data.len() < core::mem::size_of::<Self>() {
-             return Err(EINVAL);
-         }
+Anyway
 
+Reviewed-by: Boqun Feng <boqun.feng@gmail.com>
 
-base-commit: 14ae91a81ec8fa0bc23170d4aa16dd2a20d54105
---
-2.50.1
+Regards,
+Boqun
+
+> Signed-off-by: Alexandre Courbot <acourbot@nvidia.com>
+> ---
+>  drivers/gpu/nova-core/regs/macros.rs | 2 +-
+>  1 file changed, 1 insertion(+), 1 deletion(-)
+> 
+> diff --git a/drivers/gpu/nova-core/regs/macros.rs b/drivers/gpu/nova-core/regs/macros.rs
+> index 864d1e83bed2979f5661e038f4c9fd87d33f69a7..93e9055d5ebd5f78ea534aafd44d884da0fce345 100644
+> --- a/drivers/gpu/nova-core/regs/macros.rs
+> +++ b/drivers/gpu/nova-core/regs/macros.rs
+> @@ -116,7 +116,7 @@ macro_rules! register {
+>      ) => {
+>          register!(@common $name @ $offset $(, $comment)?);
+>          register!(@field_accessors $name { $($fields)* });
+> -        register!(@io$name @ + $offset);
+> +        register!(@io $name @ + $offset);
+>      };
+>  
+>      // Creates a alias register of relative offset register `alias` with its own fields.
+> 
+> -- 
+> 2.50.1
+> 
+> 
