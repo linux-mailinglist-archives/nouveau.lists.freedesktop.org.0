@@ -2,126 +2,87 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id 344EDCBA8F2
-	for <lists+nouveau@lfdr.de>; Sat, 13 Dec 2025 13:17:26 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id EC663CBAAA0
+	for <lists+nouveau@lfdr.de>; Sat, 13 Dec 2025 13:42:15 +0100 (CET)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id B0A1010E41A;
-	Sat, 13 Dec 2025 12:17:24 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 33A1B10EA0F;
+	Sat, 13 Dec 2025 12:41:00 +0000 (UTC)
 Authentication-Results: gabe.freedesktop.org;
-	dkim=permerror (0-bit key) header.d=gmail.com header.i=@gmail.com header.b="GoY/AiUp";
+	dkim=permerror (0-bit key) header.d=gmail.com header.i=@gmail.com header.b="EqfbzRRx";
 	dkim-atps=neutral
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from mail-qk1-f177.google.com (mail-qk1-f177.google.com
- [209.85.222.177])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 31B0210E197;
- Fri, 18 Jul 2025 19:05:08 +0000 (UTC)
-Received: by mail-qk1-f177.google.com with SMTP id
- af79cd13be357-7e3142e58cfso148334485a.0; 
- Fri, 18 Jul 2025 12:05:08 -0700 (PDT)
+Received: from mail-pj1-f42.google.com (mail-pj1-f42.google.com
+ [209.85.216.42])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 3D43E10E053;
+ Sun, 20 Jul 2025 21:25:08 +0000 (UTC)
+Received: by mail-pj1-f42.google.com with SMTP id
+ 98e67ed59e1d1-313862d48e7so490294a91.1; 
+ Sun, 20 Jul 2025 14:25:08 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1752865507; x=1753470307; darn=lists.freedesktop.org;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:feedback-id:from:to:cc:subject:date
+ d=gmail.com; s=20230601; t=1753046708; x=1753651508; darn=lists.freedesktop.org;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
  :message-id:reply-to;
- bh=5j79F8WX6g4zI7dhSEPRiOOy0m3FlFhAAbp2BrZjtaQ=;
- b=GoY/AiUpqxPVc93alt6gnu9yWkCLhTNL/jCwq9jK3r566vD+9XKsAmqgMPCdSqdh+x
- oFsaT/xtXwm7rkNy7EzlmryE7JnK8nX79KNqruA+sqkH19z2gjT9/iZrAzrH3VbknK1c
- B8QdTzAr15r+lsqAn+xnU88MTvIIVEPcDy6owDu54T6eSuSpTEBbRdzY94CbZSozxIyv
- TbwPfIBLzn8i0EvKG9MIsTJ4brADRO9+iwY4hXCwlUGW+GKkT3NiFlNgORnRrmg6HD0r
- pwqdNDdFBpgX8wTiSTV+pTB9SzBYmNjcNXxVbwxtekLSdChpilreky5idQ9MvOKON9Rk
- SvTw==
+ bh=ZOfGo0Jsenpn6hZiffPRs915jB+hKQfehNQr85qBjhw=;
+ b=EqfbzRRxC594EHoQgIuzWqVRo6eI62B6rig+sBXspW0JrRrseJtV+TnkaJ6zJCJncx
+ dnW30E7rE963Au+qP1Uyd0P9jLTKwrMaSnNSEAl/DScbV6/z7SK4XccqI0tZ+dyG1CyI
+ IB5y+5FPGCMQguHTwZ0qOIsm5M748PUNvS4RM0sI8h1Z1+nMxWgxsrds2fx7QxKTm3dr
+ iROwRfcbgBZ1PMlD6Pcdt6t1XvS6MF9VGtRa5TmNiik220H5xsXNW9C4VM3nty2mfcpj
+ 5/HmdIBRjbfGCZwnVAwHAaFLNHyLoMvl8Fbdrd5CiP3XPOm9vGRvDzh7pUdfm7vOvdTE
+ TSEw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1752865507; x=1753470307;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:feedback-id:x-gm-message-state:from:to:cc
+ d=1e100.net; s=20230601; t=1753046708; x=1753651508;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=5j79F8WX6g4zI7dhSEPRiOOy0m3FlFhAAbp2BrZjtaQ=;
- b=vNb6z8tqO4t/z1c7nvvZAzjbJHg68u1vuQWq+ihiK51lNvuu4gepMmKrMfXxdoJwrs
- Z5PvY70ITCnIvqHQWzZfzyF4ORNtm0vkpmsFdUWXnILifmkddroz9J/1IMPSHyj3ZvTm
- ujKN0+hQ5euetn7bj63qhpQfv0AFTdnzBAlIjE62fqZdRTa6mxRZB25gLLb8ppWkYTrp
- mBRegdH4j3pBBGjFL9r8jFvEPAjRa5hNNiTGliYW1dhQHcDgEK7bkF9GedH9VJDwtThP
- u6NcNLGtsxyT0t5+P+FUEhTUDm/VIR17lXPYxTHbOo38f82tl3f0bIb5k+5LC/dUn5CS
- fojA==
+ bh=ZOfGo0Jsenpn6hZiffPRs915jB+hKQfehNQr85qBjhw=;
+ b=CG2KkTDI90bhv/QSfeEkvNqAYQrDRKCouLMkSHl3YmKehQvk2FmITgqZ5rAknUyi92
+ PqgBeJk95CurqaskywDfZXa6QPrC75OAv9G/sBrSSX4QSyL66NL1POTMXKZoS7udg2Uv
+ KAaSluZylS/EdVjH+ebmK6hB7OwdCel//WW8R8JZqVvHbvIs0kc7zksCkd4yz+zzMydF
+ BYobmO4BYSk96BAE+cx79FFqieBxd+Qa2crcyyrnc1zxMpO3nZrWSUWTVtJ73P0aLz6z
+ /aElkutwqcr/sq5jrYBT2v96s6vYApzz6C/il4a9bAE5a1Ud8S+AtSn10fO5iBazJA1V
+ +3TA==
 X-Forwarded-Encrypted: i=1;
- AJvYcCUqnjuVhIArd47HThcmGp9vRxPtLPmQoRF4cQGhYe1PL1UU7UJgj2WR8f8tiM2pz5zJZBTAw/ghNjw=@lists.freedesktop.org,
- AJvYcCXisI6KmvvWADICCO6cvd1ukeg/esdCGC4o3AUjCGlFgkmqckHmRq7/HSRoiuerR9dN2nUzkjKzTg==@lists.freedesktop.org
-X-Gm-Message-State: AOJu0Yy+iGt7sOGvGUbZ5N2jzpMnUDXF9gebY4aE955T7iTUGkq01YMv
- RagGlHpyELuC6zuUuIfYKWl6UQTJ1pqTYwbrfezkW1pF/u0wkg84sYKy
-X-Gm-Gg: ASbGncuGy4CpJ8veNvA1QLsN665GWb6LH/O83SBeBeSFTCyPlU9/EvgdPjQsu1EyU7y
- u8x6r81aEvmsdEwIFjNPIkCnE7HuJ7DYJWQX84ZHpEt0wfrK09R4e4VlclSsR7n3crG3dOiXLYG
- mozkR+mZoXPIv811/kaAnbKIptkuQB46uwreUYLWGENCFb3xqWDSLVKBWSFO2nh8mrGbB8ecnTC
- aOTHIkg2OZPg3HL5Pe6LwQM3JQDE3Vk+mO/+Mj4DaOdGCbfKBj29I5nfHAj/parKDjdsJmwMa8N
- BvynLPfbgl7YC64ZiW4Qzl8qRT+rXOznPgEJJTQBnh6c/02I68BnrxGzLHdVjt31SUDC5a5BO/W
- XhbEg6eaJdkpO+WdbX6WLBRxmLepZQIJ9h/PMAlw/u1PZ0WIu49U3Z+cz+DwUjzCx6Oi4gAwdLs
- rYjlW8WJb5DSoXoW5RiOLkX06kpBsiyT878g==
-X-Google-Smtp-Source: AGHT+IHH/NifKTKz2dbR90WbWGGqf2VV3ZDVe1t3kE2kVXHFT8QLOk9feQkrf4IyGuzEzg2JakRnyA==
-X-Received: by 2002:a05:620a:2811:b0:7e0:9977:a803 with SMTP id
- af79cd13be357-7e34363599dmr1583267185a.54.1752865506723; 
- Fri, 18 Jul 2025 12:05:06 -0700 (PDT)
-Received: from fauth-a1-smtp.messagingengine.com
- (fauth-a1-smtp.messagingengine.com. [103.168.172.200])
- by smtp.gmail.com with ESMTPSA id
- af79cd13be357-7e356b62e63sm120881285a.47.2025.07.18.12.05.03
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 18 Jul 2025 12:05:05 -0700 (PDT)
-Received: from phl-compute-08.internal (phl-compute-08.phl.internal
- [10.202.2.48])
- by mailfauth.phl.internal (Postfix) with ESMTP id 3B879F40070;
- Fri, 18 Jul 2025 15:05:03 -0400 (EDT)
-Received: from phl-mailfrontend-01 ([10.202.2.162])
- by phl-compute-08.internal (MEProxy); Fri, 18 Jul 2025 15:05:03 -0400
-X-ME-Sender: <xms:35p6aKs_0L9U1v9PEKDAHghrb8pBMTy6Y_CSJVs2sxTVoTEhmG7DLA>
- <xme:35p6aLRdSW2XmEFlD9KxPuMSpgDYq67TpE8rivNKbQkE9g74EEG_frD4xNPenvUGl
- 2Fei3aKqk913i14VQ>
-X-ME-Received: <xmr:35p6aMPBwwc2QfgaCuu05VCiZPH9ydnYVNS_PW32DK9zsQg9Vu3wS2k--Q>
-X-ME-Proxy-Cause: gggruggvucftvghtrhhoucdtuddrgeeffedrtdefgdeigedvgecutefuodetggdotefrod
- ftvfcurfhrohhfihhlvgemucfhrghsthforghilhdpuffrtefokffrpgfnqfghnecuuegr
- ihhlohhuthemuceftddtnecusecvtfgvtghiphhivghnthhsucdlqddutddtmdenucfjug
- hrpeffhffvvefukfhfgggtuggjsehttdertddttddvnecuhfhrohhmpeeuohhquhhnucfh
- vghnghcuoegsohhquhhnrdhfvghnghesghhmrghilhdrtghomheqnecuggftrfgrthhtvg
- hrnhephedugfduffffteeutddvheeuveelvdfhleelieevtdeguefhgeeuveeiudffiedv
- necuvehluhhsthgvrhfuihiivgeptdenucfrrghrrghmpehmrghilhhfrhhomhepsghoqh
- hunhdomhgvshhmthhprghuthhhphgvrhhsohhnrghlihhthidqieelvdeghedtieegqddu
- jeejkeehheehvddqsghoqhhunhdrfhgvnhhgpeepghhmrghilhdrtghomhesfhhigihmvg
- drnhgrmhgvpdhnsggprhgtphhtthhopedugedpmhhouggvpehsmhhtphhouhhtpdhrtghp
- thhtoheprggtohhurhgsohhtsehnvhhiughirgdrtghomhdprhgtphhtthhopegurghkrh
- eskhgvrhhnvghlrdhorhhgpdhrtghpthhtoheprghirhhlihgvugesghhmrghilhdrtgho
- mhdprhgtphhtthhopehsihhmohhnrgesfhhffihllhdrtghhpdhrtghpthhtohepmhgrrg
- hrthgvnhdrlhgrnhhkhhhorhhstheslhhinhhugidrihhnthgvlhdrtghomhdprhgtphht
- thhopehmrhhiphgrrhgusehkvghrnhgvlhdrohhrghdprhgtphhtthhopehtiihimhhmvg
- hrmhgrnhhnsehsuhhsvgdruggvpdhrtghpthhtohepuggrnhhivghlrdgrlhhmvghiuggr
- segtohhllhgrsghorhgrrdgtohhmpdhrtghpthhtohepsggvrghtrgdrmhhitghhrghlsh
- hkrgesrghrmhdrtghomh
-X-ME-Proxy: <xmx:35p6aB63XXyz8ju8xf2icVscA4L8vXiK6DrLQCcWzQsJgW3hZrYU2g>
- <xmx:35p6aPVevi0ooEtaSNsSsdGrEIwePW1wWUAKNqsrfQDxpeWaSX1OZw>
- <xmx:35p6aIP8HeSkU_tBsNcNzqWa9DUz1ZWFcxmvajorjI32IYqAaDLb2g>
- <xmx:35p6aGgF-Moe335sqLuvWFUTe7_TofctfCedLXnMpuZiXJu9Uckhcw>
- <xmx:35p6aO7HAIcMVeE7dESfP_QlvJHWJshyCbdI6rYJuOmvCkWz2WFBH-JW>
-Feedback-ID: iad51458e:Fastmail
-Received: by mail.messagingengine.com (Postfix) with ESMTPA; Fri,
- 18 Jul 2025 15:05:02 -0400 (EDT)
-Date: Fri, 18 Jul 2025 12:05:00 -0700
-From: Boqun Feng <boqun.feng@gmail.com>
-To: Alexandre Courbot <acourbot@nvidia.com>
-Cc: Danilo Krummrich <dakr@kernel.org>, David Airlie <airlied@gmail.com>,
- Simona Vetter <simona@ffwll.ch>,
- Maarten Lankhorst <maarten.lankhorst@linux.intel.com>,
- Maxime Ripard <mripard@kernel.org>,
- Thomas Zimmermann <tzimmermann@suse.de>,
- Daniel Almeida <daniel.almeida@collabora.com>,
- Beata Michalska <beata.michalska@arm.com>,
- nouveau@lists.freedesktop.org, dri-devel@lists.freedesktop.org,
- rust-for-linux@vger.kernel.org, linux-kernel@vger.kernel.org
-Subject: Re: [PATCH v2 02/19] gpu: nova-core: register: fix typo
-Message-ID: <aHqa3HVUjIC7zHAr@tardis.local>
-References: <20250718-nova-regs-v2-0-7b6a762aa1cd@nvidia.com>
- <20250718-nova-regs-v2-2-7b6a762aa1cd@nvidia.com>
+ AJvYcCUt10ltC+Gn29AmrAPoS/fhmgnlOUuuKZxYDjBjfD8+sK+G0jrq16R+H2ng/i/dr0bZNslY37hjbA==@lists.freedesktop.org,
+ AJvYcCW8/+o/9ePVeqS9SOvgTMmsRfTSe+tyeY4mY4x/LjQki+Q4EJV+/b40gr4vQUTRfsl47vFRfCrx03o=@lists.freedesktop.org
+X-Gm-Message-State: AOJu0YwhQulO0zI6u2utwqCmUtXYZ7b0ma9OhgbgnsEa4Q4yZ2oL9yit
+ rD0OlEpekE0aX98F/k97n6fwz/4gSajWFhaUHksYzwbrEFaqntlhRdYBQzsJBlTKluBdnFLrEmQ
+ G7n+0HGgAw6P1PcuYx4SytIFm3PWVY90=
+X-Gm-Gg: ASbGncvG4+bWHr6pBFtC4fsGh2CQ5SC6iPg5qHBLouKT7czcjr382HvOnNEtY3byi0Z
+ P6YrQhYZa1KX5qeRstUrxhakvux2sA7ffc6HrPzQRcxGUzgPuQ+brAvTk/hPm4Dz8W6g+BVRX+R
+ jAF59NecuywtyKnyk6eE0Goh2G7l8Q/I7tO4ac0g6ojYt2PTI9qN3MUzDoNFRxzpZQcE+ZwTkoO
+ O7Y8CKELxdbIqzRWzk=
+X-Google-Smtp-Source: AGHT+IEkcEPFJWVoqDC95ubnHjSmK+HgnV7Pk/LSgyHRbODBMgxYD03I2CuqEZBVSHRbSPTpfzdWXJRqkBiOadC0OLg=
+X-Received: by 2002:a17:903:18d:b0:235:f1e4:3381 with SMTP id
+ d9443c01a7336-23e24f33804mr97588565ad.8.1753046707493; Sun, 20 Jul 2025
+ 14:25:07 -0700 (PDT)
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <20250718-nova-regs-v2-2-7b6a762aa1cd@nvidia.com>
-X-Mailman-Approved-At: Sat, 13 Dec 2025 12:17:01 +0000
+References: <20250704-core-cstr-prepare-v1-0-a91524037783@gmail.com>
+ <20250704-core-cstr-prepare-v1-1-a91524037783@gmail.com>
+In-Reply-To: <20250704-core-cstr-prepare-v1-1-a91524037783@gmail.com>
+From: Miguel Ojeda <miguel.ojeda.sandonis@gmail.com>
+Date: Sun, 20 Jul 2025 23:24:54 +0200
+X-Gm-Features: Ac12FXxNjw8Q4g3oEBeaU3nmS0KVSD6HWujMXOZAqRuJ_29r1bVUJEDsypVG_d0
+Message-ID: <CANiq72mjiBK+DE-NOx1p+wWuZpnK=aPtgnMUUEzig+4jHZzemA@mail.gmail.com>
+Subject: Re: [PATCH 1/6] rust: kernel: remove `fmt!`,
+ fix clippy::uninlined-format-args
+To: Tamir Duberstein <tamird@gmail.com>, Danilo Krummrich <dakr@kernel.org>, 
+ Viresh Kumar <viresh.kumar@linaro.org>
+Cc: "Rafael J. Wysocki" <rafael@kernel.org>, David Airlie <airlied@gmail.com>, 
+ Simona Vetter <simona@ffwll.ch>, Nishanth Menon <nm@ti.com>,
+ Stephen Boyd <sboyd@kernel.org>, 
+ Miguel Ojeda <ojeda@kernel.org>, Alex Gaynor <alex.gaynor@gmail.com>, 
+ Boqun Feng <boqun.feng@gmail.com>, Gary Guo <gary@garyguo.net>, 
+ =?UTF-8?Q?Bj=C3=B6rn_Roy_Baron?= <bjorn3_gh@protonmail.com>, 
+ Benno Lossin <lossin@kernel.org>, Andreas Hindborg <a.hindborg@kernel.org>, 
+ Alice Ryhl <aliceryhl@google.com>, Trevor Gross <tmgross@umich.edu>,
+ linux-pm@vger.kernel.org, 
+ linux-kernel@vger.kernel.org, nouveau@lists.freedesktop.org, 
+ dri-devel@lists.freedesktop.org, rust-for-linux@vger.kernel.org
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+X-Mailman-Approved-At: Sat, 13 Dec 2025 12:40:47 +0000
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -136,45 +97,15 @@ List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-On Fri, Jul 18, 2025 at 04:26:07PM +0900, Alexandre Courbot wrote:
-> A space was missing between arguments in this invocation.
-> 
+On Fri, Jul 4, 2025 at 10:16=E2=80=AFPM Tamir Duberstein <tamird@gmail.com>=
+ wrote:
+>
+>  drivers/cpufreq/rcpufreq_dt.rs    |  3 +--
+>  drivers/gpu/nova-core/firmware.rs |  5 +++--
+>  rust/kernel/opp.rs                |  2 +-
 
-It's obvious up to driver and Nova folks, but I feel this commit better
-folded into another patch or we make the title a bit more clear, say:
+Danilo, Viresh: I assume you are OK with this, but let me know
+otherwise, thanks!
 
-gpu: nova-core: register: add the missing space in register!()
-
-Otherwise my fear is we're going to end up with a few "fix typo" commits
-in the future.
-
-Anyway
-
-Reviewed-by: Boqun Feng <boqun.feng@gmail.com>
-
-Regards,
-Boqun
-
-> Signed-off-by: Alexandre Courbot <acourbot@nvidia.com>
-> ---
->  drivers/gpu/nova-core/regs/macros.rs | 2 +-
->  1 file changed, 1 insertion(+), 1 deletion(-)
-> 
-> diff --git a/drivers/gpu/nova-core/regs/macros.rs b/drivers/gpu/nova-core/regs/macros.rs
-> index 864d1e83bed2979f5661e038f4c9fd87d33f69a7..93e9055d5ebd5f78ea534aafd44d884da0fce345 100644
-> --- a/drivers/gpu/nova-core/regs/macros.rs
-> +++ b/drivers/gpu/nova-core/regs/macros.rs
-> @@ -116,7 +116,7 @@ macro_rules! register {
->      ) => {
->          register!(@common $name @ $offset $(, $comment)?);
->          register!(@field_accessors $name { $($fields)* });
-> -        register!(@io$name @ + $offset);
-> +        register!(@io $name @ + $offset);
->      };
->  
->      // Creates a alias register of relative offset register `alias` with its own fields.
-> 
-> -- 
-> 2.50.1
-> 
-> 
+Cheers,
+Miguel
