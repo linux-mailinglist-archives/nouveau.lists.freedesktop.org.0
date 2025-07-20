@@ -2,70 +2,72 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id 27076CBADCA
-	for <lists+nouveau@lfdr.de>; Sat, 13 Dec 2025 13:45:28 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id B2C24CBACC4
+	for <lists+nouveau@lfdr.de>; Sat, 13 Dec 2025 13:44:19 +0100 (CET)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 8FCA410EB17;
-	Sat, 13 Dec 2025 12:41:36 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 97B8210EA32;
+	Sat, 13 Dec 2025 12:41:08 +0000 (UTC)
 Authentication-Results: gabe.freedesktop.org;
-	dkim=permerror (0-bit key) header.d=gmail.com header.i=@gmail.com header.b="e/TNHY0C";
+	dkim=permerror (0-bit key) header.d=gmail.com header.i=@gmail.com header.b="P0iKlxJs";
 	dkim-atps=neutral
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from mail-pj1-f47.google.com (mail-pj1-f47.google.com
- [209.85.216.47])
- by gabe.freedesktop.org (Postfix) with ESMTPS id B9C4810E45C;
- Sun, 20 Jul 2025 22:58:05 +0000 (UTC)
-Received: by mail-pj1-f47.google.com with SMTP id
- 98e67ed59e1d1-313336f8438so685415a91.0; 
- Sun, 20 Jul 2025 15:58:05 -0700 (PDT)
+Received: from mail-pj1-f42.google.com (mail-pj1-f42.google.com
+ [209.85.216.42])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id F2AD710E391;
+ Sun, 20 Jul 2025 23:17:54 +0000 (UTC)
+Received: by mail-pj1-f42.google.com with SMTP id
+ 98e67ed59e1d1-313290ea247so662147a91.3; 
+ Sun, 20 Jul 2025 16:17:54 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1753052285; x=1753657085; darn=lists.freedesktop.org;
+ d=gmail.com; s=20230601; t=1753053474; x=1753658274; darn=lists.freedesktop.org;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:from:to:cc:subject:date
  :message-id:reply-to;
- bh=daKnTV4fSp02pGETIV5FEMpqyBsp4GEPOMMbZuGBz/g=;
- b=e/TNHY0CWcKELNucbm/8hT1f9K3E2V2fzeC1vvb7cuS9YgszQ6gobCg00tFREgB1Wt
- PoI411CfNw5g7uRTjHFZGjcRdbFpgT+JTKcXunKaaXpPjH7tb7BKcqL8RuQm0Px4vN/K
- OWUbHVYt266e1mGbXFm9z/uJKhokcYrIYpmM8RKrjJY/zDyCDWRKEINj3v9PosaDXh1m
- wxIZyRE1TQULll33nbCra62TlWH8o4byXYn1oX36BbLCV2ombd0fliHf3sxYhoXMMIb7
- cyKaMHO5901bl768LetOw814kUoCxJO3DvtMt/nUPWjkqGzRVMoRq6Y9iUu2clEDgScz
- OeDA==
+ bh=pGT0xhBqBHbFWdDdZyKQSNOHcvRWrnAJlLeBlypIO4U=;
+ b=P0iKlxJs/vN4ltZk+mH2SVrEv+/mvYg4X+WaOD9HFyHBrXJ1XH43QXCUdDlemVVIs6
+ xxtpxhDwk+A8WphONmEHGhRx7s0paumWb6YHAzExkOupDVrsaKVDCdgOnAgyS7Crf4ZK
+ +p1umrqAA4koPykAtiUGblijwrP3ku5hEomYhE2Yps62TqKpqh+EI6SC2ITdOH2RZvB3
+ yMhueedHd52KnA7CMNrJcEQ8lkaZPIgkpee0MGqZQFT37o2hFQrl5JG7twKRvMwu1WsR
+ lKLBB3FxIP7ApSoJBgf2Pf8yb24SKRLGYbGYJpY1DwXWLKBRwk7cVTurrqI1Mq06t73Y
+ a7Cw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1753052285; x=1753657085;
+ d=1e100.net; s=20230601; t=1753053474; x=1753658274;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=daKnTV4fSp02pGETIV5FEMpqyBsp4GEPOMMbZuGBz/g=;
- b=vzv5FQdPGE9fx+0iSC5yGZ5coy+mipSGZgNoiEpgCCiJOqGoXxbYmq/613DuhtpwJT
- 7iA2LO/C1JOF6RxhFBeRrjIZpNil8rp9V48qFrPBxeSnwJhAbESDOH6lDrm24L//8+I4
- cyxCclrULeTnfb3urT3PFtL2GGcd+rGjz2FYNQ6/2h9qlL9SqEIv4fSb49qWDHaNzEwU
- sZQFPNM+jqfd6mhSGsYHVNB7S345dCG47X57DJ8mfHBKUN7dkpZrMzWMIAgEAkYhsFkZ
- GU1Uk7SK9plGwjB132AwXm+4vBZhpLK4D6fi+zDOmtapWZkZJzF5RGVCYDxLPx0/otC8
- 6A5Q==
+ bh=pGT0xhBqBHbFWdDdZyKQSNOHcvRWrnAJlLeBlypIO4U=;
+ b=o1WMh7TTVt7wTUx/ThFrFGZfyKVrZD3yWEc6L5pXA87D+i3pzZ2ybs5tXbJ1j1+XcT
+ JcD1Fa7Jco0yiH3MQfm853pUZXAbJnCUjCXV0/WlTr9UNkpkVC1Ek4fYTCPvDcuTV28S
+ tw9342U2CSJ8ZfQRJRfAOkQKHYF2v01UZcTmr03FBTiOKH2HYC9Nuo8c8ln9ndbB2UhL
+ gTLxlozBlEjslvO3m/v91L+lVD2A1RUpF3kVaof8zXpYOa0jaQelUgcHQNbf74A4Zy1J
+ zjfqka+9PS9TC1+S9XwMJip3fEzsl4RstvXR1bFa9t/BJGy2KbS5EGmis9SCQBzYTcbW
+ PYGw==
 X-Forwarded-Encrypted: i=1;
- AJvYcCVWEGDMI7Q7+8zD8FH90ersiIN4e0vqXo70J53vdwidjYucShmVCbpgfc4LYNYvI5I3/v+OQP21Gg==@lists.freedesktop.org,
- AJvYcCVzVohzftW8ixBFfDoYTM8cAFO/oqOPGPnUb+iWkLCVej00fTnnBpR649XRFNLZ7KDbwvjlfA2Qvfk=@lists.freedesktop.org
-X-Gm-Message-State: AOJu0YwNw7iDhhNSUUVQW2P1vfVvSzgMw9QArMb+EYTwtcEHFLXsTU4i
- njlrLQYdaYUYz6MydlinaEo84hAAsNasfMk4pcVzpDjmJBiFzJSP4s8Gug+qO60DhoaM6p1tocT
- DF1GNzkgF6O8PyllsIPV/2KshffWIA0A=
-X-Gm-Gg: ASbGncuDWmcCvaylPTedqqrNsbAZqFWjWxr4bzevWMCA1SFg1fRCJS1iYLcwY+sS5wj
- CvnpBCu0Xb8fu7QAG2TGWeBZVb5i0iyFrs01Y/owH95fRMT3pA+bxHvAy1Q1RUzNDQlLF73hlIh
- OlkG4TDxCIoJAc3dez0A2QgGwU+emCdstq8Th7AKEq4uljhEFbWmIuOpfdqjaLypeVCdEl/oqna
- /gJVVM4
-X-Google-Smtp-Source: AGHT+IFzjmvc0kMfKRG7U+xZ8wdQiM8shuAqXzIYwkhDrfmjAGRQWO9y1Uiy4Ste1/hFhJYypkZPHvTw/dT2WozP73o=
-X-Received: by 2002:a17:90b:5307:b0:311:b0d3:851 with SMTP id
- 98e67ed59e1d1-31c9e75ef14mr12278425a91.4.1753052285238; Sun, 20 Jul 2025
- 15:58:05 -0700 (PDT)
+ AJvYcCUQm78FHpf+lWzogtgt2zIhC0VnprJ+j5yHEdM9eR2MUZ0Myd6jmhWZAR+ZQ4ggmvin4T1+jr/rUg==@lists.freedesktop.org,
+ AJvYcCXObZzWUAuOLKa57A7YQ6sKyow1sb43h4WaVjg06Ebo8e/y+hyF0DOJiSfNN6dPgjr7S7J8qo9frEw=@lists.freedesktop.org
+X-Gm-Message-State: AOJu0Ywfc8SvFMBoDsdpX56Twmeq0DdIgkTTXCm81pQyfDjXzGRUjkoo
+ V9pnM6EODOdTakGpHj/2GTkabvt4wp7YLwSW7ZGZNhzMOF6q5A1cE3SWr7qhkfUJF/iurUs4xTW
+ iLBs/mYs7p2H5wg6vdd1gRDW+Lkm/QWo=
+X-Gm-Gg: ASbGnctUkNcSLh0UjlDTPrU9DKaG7lmTlSkTtWZiQ5n6FjgJG5us1iVwhEojDNHOZKl
+ IQlsFMxf8onARP7+NZoIFtfEBjxfsMf4X99ilOq65PlGxeiWFCiFdw+3kIdQ1zUkJ/MOMDKQBU1
+ bahiAtiDGvYJEO2gz1ANlMzGWm7n/sFAw5xHqkDCvOZCCL9RWswfDk4d4KS3hMrvjMWs+2YjxtB
+ FBAWjn8
+X-Google-Smtp-Source: AGHT+IEbrcR8MgMgRAo5KnPtJx24JMikPAIly+rpRUggWdS/YqBt5ySVGDI/rtXvTVmG4G/B9031gk3IdnUlb0cu6aI=
+X-Received: by 2002:a17:90b:5285:b0:313:2bfc:94c with SMTP id
+ 98e67ed59e1d1-31c9e7afd78mr10304315a91.8.1753053474405; Sun, 20 Jul 2025
+ 16:17:54 -0700 (PDT)
 MIME-Version: 1.0
 References: <20250704-core-cstr-prepare-v1-0-a91524037783@gmail.com>
-In-Reply-To: <20250704-core-cstr-prepare-v1-0-a91524037783@gmail.com>
+ <20250704-core-cstr-prepare-v1-1-a91524037783@gmail.com>
+ <CAJ-ks9nBrT4C5xYk4eWUFX_nX5XXBYHEGo+fLtLWJE-D9Y5hKQ@mail.gmail.com>
+In-Reply-To: <CAJ-ks9nBrT4C5xYk4eWUFX_nX5XXBYHEGo+fLtLWJE-D9Y5hKQ@mail.gmail.com>
 From: Miguel Ojeda <miguel.ojeda.sandonis@gmail.com>
-Date: Mon, 21 Jul 2025 00:57:51 +0200
-X-Gm-Features: Ac12FXxrHoi9ILUmBTRKm1OiT5BshvaFgsQVGJOA5I6_EA8yoKmhyCiVsD11rgg
-Message-ID: <CANiq72mF8v7Gzr-dgfd68OPjJXDp=q+-asMiqcet0R0viqMbkw@mail.gmail.com>
-Subject: Re: [PATCH 0/6] Replace `kernel::str::CStr` with `core::ffi::CStr`
- (cycle 1)
+Date: Mon, 21 Jul 2025 01:17:40 +0200
+X-Gm-Features: Ac12FXzxtp1UNQgsWc3xcIVA0zM-1eUXS6ehJ4njC6usGr6NPOzcDPlluaIG_s4
+Message-ID: <CANiq72=pS1iPePhi2Vs2AkLs3+tV=TASStPuSCnRNnHNHaawsw@mail.gmail.com>
+Subject: Re: [PATCH 1/6] rust: kernel: remove `fmt!`,
+ fix clippy::uninlined-format-args
 To: Tamir Duberstein <tamird@gmail.com>
 Cc: "Rafael J. Wysocki" <rafael@kernel.org>,
  Viresh Kumar <viresh.kumar@linaro.org>, 
@@ -98,19 +100,15 @@ List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-On Fri, Jul 4, 2025 at 10:16=E2=80=AFPM Tamir Duberstein <tamird@gmail.com>=
+On Mon, Jul 21, 2025 at 1:04=E2=80=AFAM Tamir Duberstein <tamird@gmail.com>=
  wrote:
 >
-> As this is a large migration that touches many subsystems, it will take
-> place in several cycles, each of which may see multiple series:
+> Just noticed a tiny typo here: it should say "can *be* taken".
+>
+> Miguel, if you can fix that on apply, please do - but if not, no worries.
 
-Let's start the long road, then...
-
-Applied to `rust-next` -- thanks everyone!
-
-    [ Reworded title. - Miguel ]
-
-    [ Reworded title. - Miguel ]
+Done! (We could also have removed that sentence too, since it sounds a
+bit like something one would write after the `---` line).
 
 Cheers,
 Miguel
