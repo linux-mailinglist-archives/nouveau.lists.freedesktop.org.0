@@ -2,78 +2,79 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id EC663CBAAA0
-	for <lists+nouveau@lfdr.de>; Sat, 13 Dec 2025 13:42:15 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 27076CBADCA
+	for <lists+nouveau@lfdr.de>; Sat, 13 Dec 2025 13:45:28 +0100 (CET)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 33A1B10EA0F;
-	Sat, 13 Dec 2025 12:41:00 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 8FCA410EB17;
+	Sat, 13 Dec 2025 12:41:36 +0000 (UTC)
 Authentication-Results: gabe.freedesktop.org;
-	dkim=permerror (0-bit key) header.d=gmail.com header.i=@gmail.com header.b="EqfbzRRx";
+	dkim=permerror (0-bit key) header.d=gmail.com header.i=@gmail.com header.b="e/TNHY0C";
 	dkim-atps=neutral
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from mail-pj1-f42.google.com (mail-pj1-f42.google.com
- [209.85.216.42])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 3D43E10E053;
- Sun, 20 Jul 2025 21:25:08 +0000 (UTC)
-Received: by mail-pj1-f42.google.com with SMTP id
- 98e67ed59e1d1-313862d48e7so490294a91.1; 
- Sun, 20 Jul 2025 14:25:08 -0700 (PDT)
+Received: from mail-pj1-f47.google.com (mail-pj1-f47.google.com
+ [209.85.216.47])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id B9C4810E45C;
+ Sun, 20 Jul 2025 22:58:05 +0000 (UTC)
+Received: by mail-pj1-f47.google.com with SMTP id
+ 98e67ed59e1d1-313336f8438so685415a91.0; 
+ Sun, 20 Jul 2025 15:58:05 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1753046708; x=1753651508; darn=lists.freedesktop.org;
+ d=gmail.com; s=20230601; t=1753052285; x=1753657085; darn=lists.freedesktop.org;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:from:to:cc:subject:date
  :message-id:reply-to;
- bh=ZOfGo0Jsenpn6hZiffPRs915jB+hKQfehNQr85qBjhw=;
- b=EqfbzRRxC594EHoQgIuzWqVRo6eI62B6rig+sBXspW0JrRrseJtV+TnkaJ6zJCJncx
- dnW30E7rE963Au+qP1Uyd0P9jLTKwrMaSnNSEAl/DScbV6/z7SK4XccqI0tZ+dyG1CyI
- IB5y+5FPGCMQguHTwZ0qOIsm5M748PUNvS4RM0sI8h1Z1+nMxWgxsrds2fx7QxKTm3dr
- iROwRfcbgBZ1PMlD6Pcdt6t1XvS6MF9VGtRa5TmNiik220H5xsXNW9C4VM3nty2mfcpj
- 5/HmdIBRjbfGCZwnVAwHAaFLNHyLoMvl8Fbdrd5CiP3XPOm9vGRvDzh7pUdfm7vOvdTE
- TSEw==
+ bh=daKnTV4fSp02pGETIV5FEMpqyBsp4GEPOMMbZuGBz/g=;
+ b=e/TNHY0CWcKELNucbm/8hT1f9K3E2V2fzeC1vvb7cuS9YgszQ6gobCg00tFREgB1Wt
+ PoI411CfNw5g7uRTjHFZGjcRdbFpgT+JTKcXunKaaXpPjH7tb7BKcqL8RuQm0Px4vN/K
+ OWUbHVYt266e1mGbXFm9z/uJKhokcYrIYpmM8RKrjJY/zDyCDWRKEINj3v9PosaDXh1m
+ wxIZyRE1TQULll33nbCra62TlWH8o4byXYn1oX36BbLCV2ombd0fliHf3sxYhoXMMIb7
+ cyKaMHO5901bl768LetOw814kUoCxJO3DvtMt/nUPWjkqGzRVMoRq6Y9iUu2clEDgScz
+ OeDA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1753046708; x=1753651508;
+ d=1e100.net; s=20230601; t=1753052285; x=1753657085;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=ZOfGo0Jsenpn6hZiffPRs915jB+hKQfehNQr85qBjhw=;
- b=CG2KkTDI90bhv/QSfeEkvNqAYQrDRKCouLMkSHl3YmKehQvk2FmITgqZ5rAknUyi92
- PqgBeJk95CurqaskywDfZXa6QPrC75OAv9G/sBrSSX4QSyL66NL1POTMXKZoS7udg2Uv
- KAaSluZylS/EdVjH+ebmK6hB7OwdCel//WW8R8JZqVvHbvIs0kc7zksCkd4yz+zzMydF
- BYobmO4BYSk96BAE+cx79FFqieBxd+Qa2crcyyrnc1zxMpO3nZrWSUWTVtJ73P0aLz6z
- /aElkutwqcr/sq5jrYBT2v96s6vYApzz6C/il4a9bAE5a1Ud8S+AtSn10fO5iBazJA1V
- +3TA==
+ bh=daKnTV4fSp02pGETIV5FEMpqyBsp4GEPOMMbZuGBz/g=;
+ b=vzv5FQdPGE9fx+0iSC5yGZ5coy+mipSGZgNoiEpgCCiJOqGoXxbYmq/613DuhtpwJT
+ 7iA2LO/C1JOF6RxhFBeRrjIZpNil8rp9V48qFrPBxeSnwJhAbESDOH6lDrm24L//8+I4
+ cyxCclrULeTnfb3urT3PFtL2GGcd+rGjz2FYNQ6/2h9qlL9SqEIv4fSb49qWDHaNzEwU
+ sZQFPNM+jqfd6mhSGsYHVNB7S345dCG47X57DJ8mfHBKUN7dkpZrMzWMIAgEAkYhsFkZ
+ GU1Uk7SK9plGwjB132AwXm+4vBZhpLK4D6fi+zDOmtapWZkZJzF5RGVCYDxLPx0/otC8
+ 6A5Q==
 X-Forwarded-Encrypted: i=1;
- AJvYcCUt10ltC+Gn29AmrAPoS/fhmgnlOUuuKZxYDjBjfD8+sK+G0jrq16R+H2ng/i/dr0bZNslY37hjbA==@lists.freedesktop.org,
- AJvYcCW8/+o/9ePVeqS9SOvgTMmsRfTSe+tyeY4mY4x/LjQki+Q4EJV+/b40gr4vQUTRfsl47vFRfCrx03o=@lists.freedesktop.org
-X-Gm-Message-State: AOJu0YwhQulO0zI6u2utwqCmUtXYZ7b0ma9OhgbgnsEa4Q4yZ2oL9yit
- rD0OlEpekE0aX98F/k97n6fwz/4gSajWFhaUHksYzwbrEFaqntlhRdYBQzsJBlTKluBdnFLrEmQ
- G7n+0HGgAw6P1PcuYx4SytIFm3PWVY90=
-X-Gm-Gg: ASbGncvG4+bWHr6pBFtC4fsGh2CQ5SC6iPg5qHBLouKT7czcjr382HvOnNEtY3byi0Z
- P6YrQhYZa1KX5qeRstUrxhakvux2sA7ffc6HrPzQRcxGUzgPuQ+brAvTk/hPm4Dz8W6g+BVRX+R
- jAF59NecuywtyKnyk6eE0Goh2G7l8Q/I7tO4ac0g6ojYt2PTI9qN3MUzDoNFRxzpZQcE+ZwTkoO
- O7Y8CKELxdbIqzRWzk=
-X-Google-Smtp-Source: AGHT+IEkcEPFJWVoqDC95ubnHjSmK+HgnV7Pk/LSgyHRbODBMgxYD03I2CuqEZBVSHRbSPTpfzdWXJRqkBiOadC0OLg=
-X-Received: by 2002:a17:903:18d:b0:235:f1e4:3381 with SMTP id
- d9443c01a7336-23e24f33804mr97588565ad.8.1753046707493; Sun, 20 Jul 2025
- 14:25:07 -0700 (PDT)
+ AJvYcCVWEGDMI7Q7+8zD8FH90ersiIN4e0vqXo70J53vdwidjYucShmVCbpgfc4LYNYvI5I3/v+OQP21Gg==@lists.freedesktop.org,
+ AJvYcCVzVohzftW8ixBFfDoYTM8cAFO/oqOPGPnUb+iWkLCVej00fTnnBpR649XRFNLZ7KDbwvjlfA2Qvfk=@lists.freedesktop.org
+X-Gm-Message-State: AOJu0YwNw7iDhhNSUUVQW2P1vfVvSzgMw9QArMb+EYTwtcEHFLXsTU4i
+ njlrLQYdaYUYz6MydlinaEo84hAAsNasfMk4pcVzpDjmJBiFzJSP4s8Gug+qO60DhoaM6p1tocT
+ DF1GNzkgF6O8PyllsIPV/2KshffWIA0A=
+X-Gm-Gg: ASbGncuDWmcCvaylPTedqqrNsbAZqFWjWxr4bzevWMCA1SFg1fRCJS1iYLcwY+sS5wj
+ CvnpBCu0Xb8fu7QAG2TGWeBZVb5i0iyFrs01Y/owH95fRMT3pA+bxHvAy1Q1RUzNDQlLF73hlIh
+ OlkG4TDxCIoJAc3dez0A2QgGwU+emCdstq8Th7AKEq4uljhEFbWmIuOpfdqjaLypeVCdEl/oqna
+ /gJVVM4
+X-Google-Smtp-Source: AGHT+IFzjmvc0kMfKRG7U+xZ8wdQiM8shuAqXzIYwkhDrfmjAGRQWO9y1Uiy4Ste1/hFhJYypkZPHvTw/dT2WozP73o=
+X-Received: by 2002:a17:90b:5307:b0:311:b0d3:851 with SMTP id
+ 98e67ed59e1d1-31c9e75ef14mr12278425a91.4.1753052285238; Sun, 20 Jul 2025
+ 15:58:05 -0700 (PDT)
 MIME-Version: 1.0
 References: <20250704-core-cstr-prepare-v1-0-a91524037783@gmail.com>
- <20250704-core-cstr-prepare-v1-1-a91524037783@gmail.com>
-In-Reply-To: <20250704-core-cstr-prepare-v1-1-a91524037783@gmail.com>
+In-Reply-To: <20250704-core-cstr-prepare-v1-0-a91524037783@gmail.com>
 From: Miguel Ojeda <miguel.ojeda.sandonis@gmail.com>
-Date: Sun, 20 Jul 2025 23:24:54 +0200
-X-Gm-Features: Ac12FXxNjw8Q4g3oEBeaU3nmS0KVSD6HWujMXOZAqRuJ_29r1bVUJEDsypVG_d0
-Message-ID: <CANiq72mjiBK+DE-NOx1p+wWuZpnK=aPtgnMUUEzig+4jHZzemA@mail.gmail.com>
-Subject: Re: [PATCH 1/6] rust: kernel: remove `fmt!`,
- fix clippy::uninlined-format-args
-To: Tamir Duberstein <tamird@gmail.com>, Danilo Krummrich <dakr@kernel.org>, 
- Viresh Kumar <viresh.kumar@linaro.org>
-Cc: "Rafael J. Wysocki" <rafael@kernel.org>, David Airlie <airlied@gmail.com>, 
- Simona Vetter <simona@ffwll.ch>, Nishanth Menon <nm@ti.com>,
- Stephen Boyd <sboyd@kernel.org>, 
- Miguel Ojeda <ojeda@kernel.org>, Alex Gaynor <alex.gaynor@gmail.com>, 
- Boqun Feng <boqun.feng@gmail.com>, Gary Guo <gary@garyguo.net>, 
+Date: Mon, 21 Jul 2025 00:57:51 +0200
+X-Gm-Features: Ac12FXxrHoi9ILUmBTRKm1OiT5BshvaFgsQVGJOA5I6_EA8yoKmhyCiVsD11rgg
+Message-ID: <CANiq72mF8v7Gzr-dgfd68OPjJXDp=q+-asMiqcet0R0viqMbkw@mail.gmail.com>
+Subject: Re: [PATCH 0/6] Replace `kernel::str::CStr` with `core::ffi::CStr`
+ (cycle 1)
+To: Tamir Duberstein <tamird@gmail.com>
+Cc: "Rafael J. Wysocki" <rafael@kernel.org>,
+ Viresh Kumar <viresh.kumar@linaro.org>, 
+ Danilo Krummrich <dakr@kernel.org>, David Airlie <airlied@gmail.com>,
+ Simona Vetter <simona@ffwll.ch>, 
+ Nishanth Menon <nm@ti.com>, Stephen Boyd <sboyd@kernel.org>,
+ Miguel Ojeda <ojeda@kernel.org>, 
+ Alex Gaynor <alex.gaynor@gmail.com>, Boqun Feng <boqun.feng@gmail.com>, 
+ Gary Guo <gary@garyguo.net>,
  =?UTF-8?Q?Bj=C3=B6rn_Roy_Baron?= <bjorn3_gh@protonmail.com>, 
  Benno Lossin <lossin@kernel.org>, Andreas Hindborg <a.hindborg@kernel.org>, 
  Alice Ryhl <aliceryhl@google.com>, Trevor Gross <tmgross@umich.edu>,
@@ -100,12 +101,16 @@ Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 On Fri, Jul 4, 2025 at 10:16=E2=80=AFPM Tamir Duberstein <tamird@gmail.com>=
  wrote:
 >
->  drivers/cpufreq/rcpufreq_dt.rs    |  3 +--
->  drivers/gpu/nova-core/firmware.rs |  5 +++--
->  rust/kernel/opp.rs                |  2 +-
+> As this is a large migration that touches many subsystems, it will take
+> place in several cycles, each of which may see multiple series:
 
-Danilo, Viresh: I assume you are OK with this, but let me know
-otherwise, thanks!
+Let's start the long road, then...
+
+Applied to `rust-next` -- thanks everyone!
+
+    [ Reworded title. - Miguel ]
+
+    [ Reworded title. - Miguel ]
 
 Cheers,
 Miguel
