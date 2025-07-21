@@ -2,66 +2,67 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id EB313B0CAD8
-	for <lists+nouveau@lfdr.de>; Mon, 21 Jul 2025 21:12:30 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 81883B0CADA
+	for <lists+nouveau@lfdr.de>; Mon, 21 Jul 2025 21:12:34 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id CA90D10E2D5;
-	Mon, 21 Jul 2025 19:12:28 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id DC51910E3B2;
+	Mon, 21 Jul 2025 19:12:32 +0000 (UTC)
 Authentication-Results: gabe.freedesktop.org;
-	dkim=pass (2048-bit key; unprotected) header.d=darkrefraction-com.20230601.gappssmtp.com header.i=@darkrefraction-com.20230601.gappssmtp.com header.b="jPUqHwqU";
+	dkim=pass (2048-bit key; unprotected) header.d=darkrefraction-com.20230601.gappssmtp.com header.i=@darkrefraction-com.20230601.gappssmtp.com header.b="BVRz0u/h";
 	dkim-atps=neutral
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from mail-qt1-f173.google.com (mail-qt1-f173.google.com
- [209.85.160.173])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 8754A10E2D5
- for <nouveau@lists.freedesktop.org>; Mon, 21 Jul 2025 19:12:27 +0000 (UTC)
-Received: by mail-qt1-f173.google.com with SMTP id
- d75a77b69052e-4ab554fd8fbso46458011cf.1
- for <nouveau@lists.freedesktop.org>; Mon, 21 Jul 2025 12:12:27 -0700 (PDT)
+Received: from mail-qt1-f176.google.com (mail-qt1-f176.google.com
+ [209.85.160.176])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 470E710E3AB
+ for <nouveau@lists.freedesktop.org>; Mon, 21 Jul 2025 19:12:31 +0000 (UTC)
+Received: by mail-qt1-f176.google.com with SMTP id
+ d75a77b69052e-4aba1bc7f44so32646611cf.0
+ for <nouveau@lists.freedesktop.org>; Mon, 21 Jul 2025 12:12:31 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=darkrefraction-com.20230601.gappssmtp.com; s=20230601; t=1753125146;
- x=1753729946; darn=lists.freedesktop.org; 
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:from:to:cc:subject:date:message-id:reply-to;
- bh=/lUkAmcsFJuKtRa8jpai2ZZYWb/fYbdKwA84kAMpapI=;
- b=jPUqHwqUqOjdYGXf/4QAGaYYPgecZHMxZZi3obKb5aQUHjT5O2fYAlRxvxYH4rrJ66
- jFoJhYARmxq0DJ4NX8DYy50/4onbY3EIuxWwdemy3Few0mSpS99kW1fmc1R3ZtAL1YFP
- 0PcxUSeZkYSsxuiW9QlUf8X1VpHlepCEahaIgHnQcI8uL4QKLDa3zLFA5BBcDYdwwpKn
- Czl10XEe7ng7GZlK5J/+XeLitRKY+OEIsWS01XwbKDZqQQpsRdqWzhhbH6GjB/oEfrff
- Lb1HLW8x2nqvHXoxpsLwaaKHkoGK3UsjuGwvMfKenn6HRh8uxIARTsff4gm/2rVSf7Rc
- DPBw==
+ d=darkrefraction-com.20230601.gappssmtp.com; s=20230601; t=1753125150;
+ x=1753729950; darn=lists.freedesktop.org; 
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=MLFY/gPsJryxB7dKnCFP91YGCa6bmOw593PDTexR7mY=;
+ b=BVRz0u/h9N9MRxgJebNNQnrCz/mX3F0YJ+MHaxDVKr6ACAOjBXJv7RfMPggs11yYpg
+ 2UrelIupLKqkF97hcSze6QGJml5bZEpXjDAL/8mj23eIkUa+gn6DIXU9rkmwIsRXgz0D
+ Jz2HyfTPrRT3L1znmKF1Yjn5IqJHjP6t2TbJDerWlMmUG1XdOtevUzXz7I7nsK85PO2v
+ 28rcn2cZUMXJIrsX+8H5ib0QUIeXcZsTR/UblG+uMjDZlGgJMb51ebyjqtJqBAsn/I/C
+ YCX1A/SstJRJBTpOxlEDGlDifkEieTLNH4KOTpO7z6abPEge/7Jmkd8wEm+yjRDsDJ1k
+ vqkQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1753125146; x=1753729946;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=/lUkAmcsFJuKtRa8jpai2ZZYWb/fYbdKwA84kAMpapI=;
- b=lnkF52+doI4ckdtSh8vpRK9d5Yz1wBjGdBm57Xed94fO7QgsqEASka8Ffjjkgvc17y
- j9MaedM2+lXqO1QEzzwZFlAwWmVNt7eSXQVdF65O+pSVW9L6iEJniwVWHWbavEKFercQ
- MZsI4mVKfdIQjNmIdLb2fncXLb1YhutPW8b1bjYGGC6zWmUqVBM70Dm+y/doxn0/J/g4
- 5fc3y4GlqWdcmI+B/ATh9oYS1MGG3IghniFnnQL12iwPXuA8Q2UE6XX04wEeqBK1vl83
- k2yoRxTGE7dWGcO/tviIu88xfeUuLVborEZo5YIm6wH5zxNnDJujpZlvSHkkN0eYueRz
- uhXQ==
+ d=1e100.net; s=20230601; t=1753125150; x=1753729950;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=MLFY/gPsJryxB7dKnCFP91YGCa6bmOw593PDTexR7mY=;
+ b=H52yATbEO97/L14LpGUxvh60I182LaRE1/JGET4bh8CKWWod6g6F1V/S3rUbCkcg5J
+ vYAKVp8VSYkoulMLhvyGSqbiYL2Xsb6u9RGeVrFeJZROCEJWhrcscsJtxaQCoYjMsmlr
+ MvJ5pq19hckDPKXQ19RqotbMFeW9Qfyh0gvaf+ZjrjYLfQaofkg0f4kgqr8xf1a0tZjP
+ j1UPeFpUfMKwwfgdGdAeIKrVby5f34DOQq4nKLwQ5aqDZyZZqM9Rx/4IXWxV+d7BMc4u
+ cUoQQFX3ofn+nriNchn9PEYVTIMoS9+r1Y9UggKVLSTfqgseBIMKz9ZmmTyDX5cmls7D
+ HTyA==
 X-Forwarded-Encrypted: i=1;
- AJvYcCUq4K6N6/7+xwumxxtK4b5q6X1WSsZ4jSqfp+gYvZsX4d5zRIZ5uBi9eCKrJmJcPmvLubnmfj4x@lists.freedesktop.org
-X-Gm-Message-State: AOJu0YzXPzwSWIlkliS+SX4avhCWenThfj7AEnk/BYq3NpZp1oDLGLmI
- V0cAnjQVgvH3ThdmuKGFD/0tGcDcUWw6lhMi97ZvreLVtSdJo6LyaEDC12GoLj6GarM=
-X-Gm-Gg: ASbGncuxfX72Qy43iXKmjEu9o1DTdLH9+UrUEhYxNvQu3IjF2S1iPcFYsdyo+wjBG81
- KYCDtKA1JoIG7fVRNuTHGR4zDbwOhO8qXqIImYDRExcIoCA6qXBEJ58wye7m9tcTSIfR2oCfBlO
- pBqWwPaJAwB1b7+gEtMLpPe55PBG7+tUV7HNlprQSyhB+gnIa2EJl1cm09i2+iub0VGLIBeqL5z
- 1Kj9VTNCCkYzeXK4KsvV13zWsX+SuOBBWqKCYXf5UOFOOXHTy/guBVlEiKYjTHO5CFo4JsSGaHs
- uitaIjvw6HAnBeYvddlXyt0xidfN0AfuNtgQ989j+kWJ3s765odPnqvnsd8deiuH6TBb75HOoga
- LHCP9u9wJn5c7lphlIEAprAGksekpLPCRx3WpZtAFuw==
-X-Google-Smtp-Source: AGHT+IE1V8c9uplMGuY3pa4ZHwW+fD6G3k8YPKLQmOAwc6WL4bYVHqr7BUKzKekHOuoNGznzU/qCKQ==
-X-Received: by 2002:a05:622a:4c89:b0:4ab:731a:541c with SMTP id
- d75a77b69052e-4ae5b72633dmr11924731cf.2.1753125146207; 
- Mon, 21 Jul 2025 12:12:26 -0700 (PDT)
+ AJvYcCW7Qi+f8kMPudfPG7zQjQxZyoRA5T4pQwGwLAueWmwBUsP6TyPHANp/WexrDLwnOz5W1v0V1al3@lists.freedesktop.org
+X-Gm-Message-State: AOJu0YzhSdf7dciWvtXrFbWA90h+tvXsNqhdxSRoUZAaW+8xW0AOXltQ
+ dXq7BdwloUKoHtjKAQl7ICHB0sbtfFI+qHDe7CGV/AA+SaomwtEwcstDe/7LKd8sfu0=
+X-Gm-Gg: ASbGncu6XF4ioe4u0f6wzDRagIgejVSzlif6uXg/kkqINdMBtZv9GD2E4eC04S0n8tw
+ FZWd68bKPM3BnLaKDyMmCumJSp1KK7ED8yPRFFJp64LznnAS3PIxc8fxGzKt5DqlYDQy4ylzr03
+ WlJbtWXARpiqQKyH5h+6uUZF3vkwCkD7RPC0mXmaYQWChQ9NMHGd6p9E70r23cGrvodIy4ehSce
+ DaK4WilibwlaJj62z7vWYht4xSJY+e2jWuvk0PJK49Q/bvW3d6UeRmCgvw2pOt6RWJlzxUrIGpO
+ 52djZ/JCJAFNuECx6IHYO166cQ8UB5VCu+3qSuz1eJtok1Q/5tDLCISfXQrgEhXeOJHT6Va9JDC
+ qXuzYpJMSOIEVy4vO6hr7Uds/L6EMaA+cavznmKUQ3Q==
+X-Google-Smtp-Source: AGHT+IEJax/vuZ7vgG1pzF0jGnCfka7McK3Lzo3THd/DwTYQfHwde8kP7APhvWBM20hHyfnEPjF4Ww==
+X-Received: by 2002:a05:622a:5e0f:b0:4ab:5b15:fdb1 with SMTP id
+ d75a77b69052e-4ae5b8c6c7emr13012311cf.15.1753125150216; 
+ Mon, 21 Jul 2025 12:12:30 -0700 (PDT)
 Received: from m-kiwi.verizon.net ([108.27.160.38])
  by smtp.gmail.com with ESMTPSA id
- d75a77b69052e-4abb4b24930sm44626211cf.51.2025.07.21.12.12.25
+ d75a77b69052e-4abb4b24930sm44626211cf.51.2025.07.21.12.12.29
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 21 Jul 2025 12:12:25 -0700 (PDT)
+ Mon, 21 Jul 2025 12:12:29 -0700 (PDT)
 From: Mel Henning <mhenning@darkrefraction.com>
 To: Karol Herbst <kherbst@redhat.com>, Lyude Paul <lyude@redhat.com>,
  Danilo Krummrich <dakr@kernel.org>,
@@ -69,10 +70,12 @@ To: Karol Herbst <kherbst@redhat.com>, Lyude Paul <lyude@redhat.com>,
  bskeggs@nvidia.com, martin.peres@free.fr, dri-devel@lists.freedesktop.org,
  nouveau@lists.freedesktop.org
 Cc: Mel Henning <mhenning@darkrefraction.com>
-Subject: [PATCH V2 0/3] drm/nouveau: Remove DRM_NOUVEAU_GSP_DEFAULT config
-Date: Mon, 21 Jul 2025 15:09:13 -0400
-Message-ID: <20250721191214.19800-1-mhenning@darkrefraction.com>
+Subject: [PATCH V2 1/3] drm/nouveau: Remove DRM_NOUVEAU_GSP_DEFAULT config
+Date: Mon, 21 Jul 2025 15:09:14 -0400
+Message-ID: <20250721191214.19800-2-mhenning@darkrefraction.com>
 X-Mailer: git-send-email 2.50.1
+In-Reply-To: <20250721191214.19800-1-mhenning@darkrefraction.com>
+References: <20250721191214.19800-1-mhenning@darkrefraction.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 X-BeenThere: nouveau@lists.freedesktop.org
@@ -89,28 +92,64 @@ List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-Following earlier discussion at
-https://lists.freedesktop.org/archives/nouveau/2025-June/047887.html
-this series removes DRM_NOUVEAU_GSP_DEFAULT.
+This option was originally intoduced because the GSP code path was
+not well tested and we wanted to leave it up to distros which code path
+they shipped by default. By now though, the GSP path is probably better
+tested than the old firmware eg. Fedora ships GSP by default and we
+generally run CTS on GSP. We've always been GSP-only on Ada and later.
 
-The first two patches are the same as they were in V1. V2 adds a third
-commit that improves an error message in response to feedback from V1.
+So, this path removes the option and effectively sets the option to
+always on. We still fall back to the old firmware if GSP is not found.
+This change only affects Turing and Ampere.
 
-Mel Henning (3):
-  drm/nouveau: Remove DRM_NOUVEAU_GSP_DEFAULT config
-  drm/nouveau: Remove nvkm_gsp_fwif.enable
-  drm/nouveau: Improve message for missing firmware
+Users can still set nouveau.config=NvGspRm=0 on the kernel command line
+to force using the old firmware on Turing/Ampere.
 
+Signed-off-by: Mel Henning <mhenning@darkrefraction.com>
+Reviewed-by: Ben Skeggs <bskeggs@nvidia.com>
+---
  drivers/gpu/drm/nouveau/Kconfig                 | 8 --------
- drivers/gpu/drm/nouveau/nvkm/subdev/gsp/ad102.c | 4 ++--
- drivers/gpu/drm/nouveau/nvkm/subdev/gsp/base.c  | 4 +++-
- drivers/gpu/drm/nouveau/nvkm/subdev/gsp/gb100.c | 2 +-
- drivers/gpu/drm/nouveau/nvkm/subdev/gsp/gb202.c | 2 +-
- drivers/gpu/drm/nouveau/nvkm/subdev/gsp/gh100.c | 2 +-
- drivers/gpu/drm/nouveau/nvkm/subdev/gsp/priv.h  | 1 -
  drivers/gpu/drm/nouveau/nvkm/subdev/gsp/tu102.c | 6 +-----
- 8 files changed, 9 insertions(+), 20 deletions(-)
+ 2 files changed, 1 insertion(+), 13 deletions(-)
 
+diff --git a/drivers/gpu/drm/nouveau/Kconfig b/drivers/gpu/drm/nouveau/Kconfig
+index d1587639ebb0..c88776d1e784 100644
+--- a/drivers/gpu/drm/nouveau/Kconfig
++++ b/drivers/gpu/drm/nouveau/Kconfig
+@@ -102,14 +102,6 @@ config DRM_NOUVEAU_SVM
+ 	  Say Y here if you want to enable experimental support for
+ 	  Shared Virtual Memory (SVM).
+ 
+-config DRM_NOUVEAU_GSP_DEFAULT
+-	bool "Use GSP firmware for Turing/Ampere (needs firmware installed)"
+-	depends on DRM_NOUVEAU
+-	default n
+-	help
+-	  Say Y here if you want to use the GSP codepaths by default on
+-	  Turing and Ampere GPUs.
+-
+ config DRM_NOUVEAU_CH7006
+ 	tristate "Chrontel ch7006 TV encoder"
+ 	depends on DRM_NOUVEAU
+diff --git a/drivers/gpu/drm/nouveau/nvkm/subdev/gsp/tu102.c b/drivers/gpu/drm/nouveau/nvkm/subdev/gsp/tu102.c
+index 58e233bc53b1..81e56da0474a 100644
+--- a/drivers/gpu/drm/nouveau/nvkm/subdev/gsp/tu102.c
++++ b/drivers/gpu/drm/nouveau/nvkm/subdev/gsp/tu102.c
+@@ -383,13 +383,9 @@ int
+ tu102_gsp_load_rm(struct nvkm_gsp *gsp, const struct nvkm_gsp_fwif *fwif)
+ {
+ 	struct nvkm_subdev *subdev = &gsp->subdev;
+-	bool enable_gsp = fwif->enable;
+ 	int ret;
+ 
+-#if IS_ENABLED(CONFIG_DRM_NOUVEAU_GSP_DEFAULT)
+-	enable_gsp = true;
+-#endif
+-	if (!nvkm_boolopt(subdev->device->cfgopt, "NvGspRm", enable_gsp))
++	if (!nvkm_boolopt(subdev->device->cfgopt, "NvGspRm", true))
+ 		return -EINVAL;
+ 
+ 	ret = nvkm_gsp_load_fw(gsp, "gsp", fwif->ver, &gsp->fws.rm);
 -- 
 2.50.1
 
