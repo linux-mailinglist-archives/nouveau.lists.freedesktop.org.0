@@ -2,70 +2,71 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id 949D4CBAE1B
-	for <lists+nouveau@lfdr.de>; Sat, 13 Dec 2025 13:45:47 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id C9436CBAE00
+	for <lists+nouveau@lfdr.de>; Sat, 13 Dec 2025 13:45:40 +0100 (CET)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 72C9110EBDF;
-	Sat, 13 Dec 2025 12:41:38 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id B1E3C10EB8A;
+	Sat, 13 Dec 2025 12:41:37 +0000 (UTC)
 Authentication-Results: gabe.freedesktop.org;
-	dkim=permerror (0-bit key) header.d=gmail.com header.i=@gmail.com header.b="TsRvTRkk";
+	dkim=permerror (0-bit key) header.d=gmail.com header.i=@gmail.com header.b="DszeMJ84";
 	dkim-atps=neutral
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from mail-pl1-f176.google.com (mail-pl1-f176.google.com
- [209.85.214.176])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 68B0910E3B9;
- Mon, 21 Jul 2025 20:25:26 +0000 (UTC)
-Received: by mail-pl1-f176.google.com with SMTP id
- d9443c01a7336-23c71b21f72so8225445ad.2; 
- Mon, 21 Jul 2025 13:25:26 -0700 (PDT)
+Received: from mail-pj1-f44.google.com (mail-pj1-f44.google.com
+ [209.85.216.44])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id E4F6E10E3BD;
+ Mon, 21 Jul 2025 21:24:58 +0000 (UTC)
+Received: by mail-pj1-f44.google.com with SMTP id
+ 98e67ed59e1d1-313756c602fso949120a91.3; 
+ Mon, 21 Jul 2025 14:24:58 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1753129526; x=1753734326; darn=lists.freedesktop.org;
+ d=gmail.com; s=20230601; t=1753133098; x=1753737898; darn=lists.freedesktop.org;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:from:to:cc:subject:date
  :message-id:reply-to;
- bh=f8KRAlo0QLnfXVhaUwy/xRDf2SviIgIlGB4FAr6L1pM=;
- b=TsRvTRkko96A/Y9ymvhhj3n9XAd1tdVm/bv7MOxF9gdg2dAvKFoOOGBZxoqAKS9Qcs
- g64m9w5iJCIhangapdVrCzjwvyFTJT2ZPjmaF9XHDH3f2dpdhNWF/0S70nmQpzFYXiVB
- JtQ6UjCeoSUndVUYvRNsCfla648FXmmpn4pvbp5dLe1oFfw36IwEx7/+DPXMWOaw9gLl
- GUAKzOSpNKFs8ahSCIFzf+o0U3/HHSdq0ELVUIEQRnDumSCs4Gc3vu4a+Q7Mb2WrISXW
- gUYRkmvdSZrExOIFD+rCetIzJ+ysvSEFu7wdzYLeu0RcAXTqnJJ3BcFyRoJPSmCFA2Bm
- MO5w==
+ bh=9iFLdp2ndiNM8RNps+ppve+VMxv1HIOTDVN1LN5NGOw=;
+ b=DszeMJ84MqMr1q9VwNaZh9LL8a4ZHPB1rgJcZi1omkK98B33ymRvUKNIOw4oz8//Af
+ T6MuMhwg9HUvy+1yR+7lrmS/Yqw8noaD0q4sRp2o5ZrqLt66VQEa7nSRM3ajUt/B5/6I
+ fydf080rJrNy5G4F/cwWU2y1jd/w/o5gVzsR6/lexoaQB8m1cf6QYhPfCe2cXmWmkry8
+ GIMVvoAuHTFektn5HZNJnUQt7aWJMIUYrVYtHJOXdgSPCzNsH2ivfZfGo00tz0FF/CMH
+ k7xm+0ztdcPOJEm3PcCpqhuvwqBYGyGuM4HGZ+c7Bnh6IhBzzSDTgJm9d0CUrxDRmD54
+ vTUQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1753129526; x=1753734326;
+ d=1e100.net; s=20230601; t=1753133098; x=1753737898;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=f8KRAlo0QLnfXVhaUwy/xRDf2SviIgIlGB4FAr6L1pM=;
- b=aMQtgkzUxIElbAxHlLwZ3zllKnBNPeGNWw74iWRKTAbjg3zAPMKUsfV0Eis79lOb94
- cRZFLYX5NdkulC9a5WnEaxCK9Qs5qIeLXc6aUeMDbhnaZZkZ9VuznVF1AfPcwfGpZHK8
- BVnMVUstJKnTlZwwcmnqK359n+MQSo6MHC8Dkr67UJ5dISKSUYXGl8nbygU+3Pk+8Onf
- wOvJHwdBfOm+VjqjUTFHRczEG5aU+LMhncSFyTjbMfSK5Ir9Bg1ptb5J4Xpg9jACEXOp
- Q9aMMI8XMfMipEnSfKFT8VOmn1lmPYov0QfJytoP8pflj8ypB/lz18bjrBRwtv2GkG7K
- rfOQ==
+ bh=9iFLdp2ndiNM8RNps+ppve+VMxv1HIOTDVN1LN5NGOw=;
+ b=Q1wusWrhpdARFTRNr8vIIajibCGG0+ED2NMo2YlEiJjr4x2oSLDIlnG9cE1Pksd3jH
+ MF78mb8jX99D0a7Dky49w5/uoF6oL+Sd1lALaq5VKzzGjbkCT9PszcvOy9qvIcHMopQv
+ Yda5mCvY0WUgBfqdriN0+4j3wuL+mutE7lYUEj6swBi6rhahk04QlMlK4x+6KbqnrH9I
+ kESOoQ1hSe7OSYj4xp2F3p6NZ53czLp5cbIXeUTiUGBqVVEsQO6yFBTV6wlLK//yOOvU
+ 7jJp432gnLpz77E1Uuj6W47J5cXXxFUwpYh8ZYNfrMUYH/T6G5V1u0m839cTY9XJsZLX
+ LTZw==
 X-Forwarded-Encrypted: i=1;
- AJvYcCUWjRVOr2v5XpggUVJ4BWEvWuAK06icng9r+7UIvBC1siyGHk/zfZRvgdLqgQK7KMq5HQSpGUJEZg==@lists.freedesktop.org,
- AJvYcCUjjFMjNQ0YrlEN+6q6i4v2WTmbcjIm6asyfqTwvUhsKNP8JgOJZ0RdR1u5FdO8YB1rbuq7MbEkhhk=@lists.freedesktop.org
-X-Gm-Message-State: AOJu0YzetRyVyYWgxl2jJf3CNM3Gj8JTqOm80MU85gdNYFIk0vveGkTE
- JPR/MkPftTNniTJ2LRHTd/LfN9LWS3rK0vgFowSQahsX/ygxThKNt9ANYVmq0wNT2OVXSISTe0R
- 4VXlWrgOExRPg3MUzleCabkPenYQrkLs=
-X-Gm-Gg: ASbGncv6vcPfpib54OchbiggKyM2Oh0q4/vsPxeGJ8JAt6gcSOOzr7YEXwITd4bKYoI
- geIUDS6JysAdR9o0zWMPG54BGAriKwVvZRZ/fBfbg1GH3OgyaZprVaqJrWY/AldBaZ4oGRFrpQk
- etSw+8pa9nqzUxI9Ip+rJwGLeEIU6o6ochOy6DuH/L1Un20U72ggnWQGJwkfcHYJFaKYCpcZTTP
- EH/yNjs
-X-Google-Smtp-Source: AGHT+IEF5YN5432flc4/QE1zXKc1vo1Qf6L24RfKDUkpQAWK8t4LLjpclkw1eCW9FSShKm7fPI0nlYBcZRk2yoWmOxs=
-X-Received: by 2002:a17:902:ecce:b0:236:9302:bf11 with SMTP id
- d9443c01a7336-23e24fb217cmr121257125ad.13.1753129525871; Mon, 21 Jul 2025
- 13:25:25 -0700 (PDT)
+ AJvYcCUKXZzC6HkzK0F/Xr/MoeS6IWCEI29M6cwwgmAajbFTBlSETBFEjjBeUK1Dm6weeWgFMMow13oZ9vU=@lists.freedesktop.org,
+ AJvYcCVNUp5VeN3iex1tcv1E9aRFvTv9b/ggYXzHb3LTQSyWqT38erRTY1z16PYwt2o0kNSqmXZJeJ3uDg==@lists.freedesktop.org
+X-Gm-Message-State: AOJu0YwTnLAnbyDWQqub7FouIfVW92hXYkJikJ4AafefWKKJ/XH88q9K
+ Q1gWuaBp97NpsocvJMza+ARZBSziU4v4CdjIXyt2/0mA5Y2GeaWYiWIr1jgERggcVHy9X9L0WSL
+ PMDMTvFaFTamaxeIutnJYd/A00zS1OnU=
+X-Gm-Gg: ASbGncspo6TykHoOhXVHU/nDt2lEPfuEadTUArB/s3STT/d6LwLZ0DU+FfLvjBVo4vH
+ ZH7Sl0Ae5gYH7fwK88R1RV1NVOrExjW0NfmP3Eqo0EDuPqVyxfUEFVw8/rvWEL7X+BKlHZAcu1u
+ J2/+xmdqMg1yezSTC8SoLVeW8K7Qfbn7mzYPtPuQnFUnKoVH2gIJQrwWf9CrJ488osjll4j8VIy
+ oOCFVKn
+X-Google-Smtp-Source: AGHT+IE0OY7j57nPCKJ0BdsYahqNyN4nWsTb/RzoD5KDOD/WbbJfSbNPT9Nrk4IsCyqaxcHOFNn3XGvOFDRdAz5jjUw=
+X-Received: by 2002:a17:90b:1cc3:b0:311:c5d9:2c8b with SMTP id
+ 98e67ed59e1d1-31c9e7767fbmr12172720a91.5.1753133098418; Mon, 21 Jul 2025
+ 14:24:58 -0700 (PDT)
 MIME-Version: 1.0
 References: <20250719-core-cstr-fanout-1-v2-0-1ab5ba189c6e@gmail.com>
-In-Reply-To: <20250719-core-cstr-fanout-1-v2-0-1ab5ba189c6e@gmail.com>
+ <20250719-core-cstr-fanout-1-v2-5-1ab5ba189c6e@gmail.com>
+In-Reply-To: <20250719-core-cstr-fanout-1-v2-5-1ab5ba189c6e@gmail.com>
 From: Miguel Ojeda <miguel.ojeda.sandonis@gmail.com>
-Date: Mon, 21 Jul 2025 22:25:12 +0200
-X-Gm-Features: Ac12FXx9U3N74aGu_SHuXKRdBAKhnaP347PEyM-2E4UxAJ_SLOxUcgsXScqoJqg
-Message-ID: <CANiq72nxL9RORJA-w=rtnkwMKcXcLva3dGbMDLc71o1bqAHUsw@mail.gmail.com>
-Subject: Re: [PATCH v2 0/8] rust: use `kernel::{fmt,prelude::fmt!}`
-To: Tamir Duberstein <tamird@gmail.com>
+Date: Mon, 21 Jul 2025 23:24:45 +0200
+X-Gm-Features: Ac12FXyOfRpHyH2Hg4yjOdknVbhdKtQMd07LdKW2ll06eE6NGx73z6HhQYfeb4A
+Message-ID: <CANiq72=wxjOwpbSKvmRV4Nb1Na_fsvajGYCbaiCdD7NwZkgc7A@mail.gmail.com>
+Subject: Re: [PATCH v2 5/8] rust: file: use `kernel::{fmt,prelude::fmt!}`
+To: Tamir Duberstein <tamird@gmail.com>, Christian Brauner <brauner@kernel.org>
 Cc: Danilo Krummrich <dakr@kernel.org>, David Airlie <airlied@gmail.com>,
  Simona Vetter <simona@ffwll.ch>, 
  Miguel Ojeda <ojeda@kernel.org>, Alex Gaynor <alex.gaynor@gmail.com>, 
@@ -82,7 +83,9 @@ Cc: Danilo Krummrich <dakr@kernel.org>, David Airlie <airlied@gmail.com>,
  Uladzislau Rezki <urezki@gmail.com>, nouveau@lists.freedesktop.org, 
  dri-devel@lists.freedesktop.org, linux-kernel@vger.kernel.org, 
  rust-for-linux@vger.kernel.org, linux-block@vger.kernel.org, 
- linux-kselftest@vger.kernel.org, kunit-dev@googlegroups.com
+ linux-kselftest@vger.kernel.org, kunit-dev@googlegroups.com, 
+ Alexander Viro <viro@zeniv.linux.org.uk>, Jan Kara <jack@suse.cz>, 
+ linux-fsdevel <linux-fsdevel@vger.kernel.org>
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
 X-Mailman-Approved-At: Sat, 13 Dec 2025 12:40:47 +0000
@@ -103,17 +106,20 @@ Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 On Sun, Jul 20, 2025 at 12:42=E2=80=AFAM Tamir Duberstein <tamird@gmail.com=
 > wrote:
 >
-> Subsystem maintainers: I would appreciate your `Acked-by`s so that this
-> can be taken through Miguel's tree (where the other series must go).
+> Reduce coupling to implementation details of the formatting machinery by
+> avoiding direct use for `core`'s formatting traits and macros.
+>
+> Acked-by: Greg Kroah-Hartman <gregkh@linuxfoundation.org>
+> Reviewed-by: Alice Ryhl <aliceryhl@google.com>
+> Reviewed-by: Benno Lossin <lossin@kernel.org>
+> Acked-by: Danilo Krummrich <dakr@kernel.org>
+> Signed-off-by: Tamir Duberstein <tamird@gmail.com>
 
-Same here as in step 2b/5, i.e. Danilo's Acked-by was picked up for
-things he didn't Acked-by.
+VFS should be Cc'd on this one, so doing so here.
 
-I imagine it was automatically done by `b4`, but that is why we need
-to be careful about automatically applying tags. I am mentioning this
-mainly to confirm I am not confused and to avoid forgetting about it,
-and also I hope it helps if you eventually apply patches yourself,
-e.g. if you eventually take care of a branch yourself.
+Christian: I will eventually apply this series, so please let me know
+if you are against this one (Acked-by's appreciated, of course),
+thanks!
 
 Cheers,
 Miguel
