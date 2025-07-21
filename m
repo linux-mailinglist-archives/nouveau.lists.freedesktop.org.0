@@ -2,74 +2,90 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id 8CD48CBAB4B
-	for <lists+nouveau@lfdr.de>; Sat, 13 Dec 2025 13:42:52 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id C03BECBACB2
+	for <lists+nouveau@lfdr.de>; Sat, 13 Dec 2025 13:44:15 +0100 (CET)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 3543910E955;
-	Sat, 13 Dec 2025 12:41:03 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id F0FF010EB56;
+	Sat, 13 Dec 2025 12:41:09 +0000 (UTC)
 Authentication-Results: gabe.freedesktop.org;
-	dkim=permerror (0-bit key) header.d=gmail.com header.i=@gmail.com header.b="GPST+UwV";
+	dkim=permerror (0-bit key) header.d=gmail.com header.i=@gmail.com header.b="e9UrPh7O";
 	dkim-atps=neutral
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from mail-yb1-f180.google.com (mail-yb1-f180.google.com
- [209.85.219.180])
- by gabe.freedesktop.org (Postfix) with ESMTPS id BDE4110E068;
- Mon, 21 Jul 2025 12:23:00 +0000 (UTC)
-Received: by mail-yb1-f180.google.com with SMTP id
- 3f1490d57ef6-e8bd3fbd9f7so3559904276.3; 
- Mon, 21 Jul 2025 05:23:00 -0700 (PDT)
+Received: from mail-pj1-f45.google.com (mail-pj1-f45.google.com
+ [209.85.216.45])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id ED03910E042;
+ Mon, 21 Jul 2025 12:54:41 +0000 (UTC)
+Received: by mail-pj1-f45.google.com with SMTP id
+ 98e67ed59e1d1-313dc7be67aso530978a91.0; 
+ Mon, 21 Jul 2025 05:54:41 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1753100580; x=1753705380; darn=lists.freedesktop.org;
- h=cc:to:subject:message-id:date:from:mime-version:from:to:cc:subject
- :date:message-id:reply-to;
- bh=eCEGSN3M10MrjOFjG0lLCegL5PcRSqy0h0h9sELILDA=;
- b=GPST+UwV/jMsguTAMMS1iQiQGagNgVkbLZspla1RHvlDBx55P9ww1ZO0+qzDec6EKg
- wGn2BWFbVKbnPANzdoBebYQFs4B4tspDsCh8BEfLu4cKYLPNs+IRZBEsQowZ+53Tce/o
- y/AdMTbyT/t/W6QmzqVuwtT8K3SWErVDz7YVbrlEUPBR/R3K9NMGXgjBjBlKF9WpX20S
- dVdsk7qwogmQu4e9hyG/N64qT6WKFDBLYN+LMydHUBQEH7RhNQGie48ZqEoZUnpj6hZ9
- jUSVS8Jvy1UztxcL4N69hUMUwhkYwIQh3axbQja863ZL/dgzaikBweahNh72atYloNVO
- 1D8A==
+ d=gmail.com; s=20230601; t=1753102481; x=1753707281; darn=lists.freedesktop.org;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=Bq5VgfjTkqyHZmMsa4CuFn3fXsUBDjAcxmYxO2xVUQQ=;
+ b=e9UrPh7OZqUQS7e92qBPqGEArNzNOZR4GXnOg90o2CkGGixtosfkJXZMnFy2d0DMdQ
+ /HJl/xu3FnWZS2xncT2Rl8XC9A7U21bqCexwJ31tp1Kb39UdrDVB5uRfja9ZSqTNGbU8
+ 2WRHLZ01PfWScsvs0z6fjaHPgpi98dFu8kJegGKhjwrPnB8iSDUvvInuoF6EPibDQg9C
+ ySCIRdEcGeNEKEQ8NSzDHOeooph/zXs9IbQQBN3YsuKn6IB9D1SA/Bc5SdpzuexCxTd9
+ FTcbJmMkp5qFTp3av+G08gKQm588bkQzexJLmp74uIaFkHEXtVDNsQeSdQv6eIEiWag9
+ DvFQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1753100580; x=1753705380;
- h=cc:to:subject:message-id:date:from:mime-version:x-gm-message-state
- :from:to:cc:subject:date:message-id:reply-to;
- bh=eCEGSN3M10MrjOFjG0lLCegL5PcRSqy0h0h9sELILDA=;
- b=lFynBN3E6hu765CTScfVv7bynZm7b60pgr//BZGJEh8rZdh59ipYRCmVWKNmFv7u5m
- jbEZLbTGpXpJbVnNMsR+3R5B4KaTIwvdGd1nx/v8xIJUbGf0JDBw6JfWyW6EOHkWGxJK
- DfKvAV4AIljQh/5SQw2Q0EWGzveJtoOVEIIuZqomMWOVbUPiwzfO53YS+heZny2U9lRo
- 4Q7NNXyOyuoeamgFctUhIQpR7Sv26eiCNdH+1xZb3V9Mhz5xtNVEfNkcOv+rRxQbESCh
- rEPsTsvSSebhuy+8qPNb3wsfCOVQOZPygX+Mdsb8JwP1Q3mxcJlont5w/9KPbjAaRgON
- PGaw==
+ d=1e100.net; s=20230601; t=1753102481; x=1753707281;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=Bq5VgfjTkqyHZmMsa4CuFn3fXsUBDjAcxmYxO2xVUQQ=;
+ b=mGABn6VpE3Hj8jxa+WeFX5uKj0V/xf052OCrpy0JwBGkw5PTV+SriawZuTLHAAb++O
+ IB1moGwLn10RfMqDA3efO4vhzxQrlM8SLc4LbPVWDOjdWD9IEJ6vc8Fo/TVYB+ZChXYv
+ RmyPfAL9tF/LeK8dKe+uVuvPUrwtWKwZmzsIGeMZ1CV5LP1ynsNX6fWqZdbhsFh7Osei
+ AK1Ub9yaP6uPBbefwc+X2kx20v91x4z7pycCmF8C4Mb0IU/3VTpsT30ZGUKiJAOI/6Jm
+ TBrdMGq3s16Cnd8u7rHUIJr/DEADt/+61ldl2oFaQsB7gse3gj/Yu2dG98/+nvE4szDh
+ wxJw==
 X-Forwarded-Encrypted: i=1;
- AJvYcCVKFWrTAJXnhDWr7mQbQeEmfZzCeukXiugKifpGUvMwFJeb2I6fvgu6jHJ/1DfmuHZHH+YTs39+dg==@lists.freedesktop.org,
- AJvYcCXcf11IdAhAXnDRfhsHoFI536zqhZsgghR4mWONgqP9Qb1QARPMo+B0hRr2gbwiKkLfewyz0hyUHOk=@lists.freedesktop.org
-X-Gm-Message-State: AOJu0YyEV+a7x9/IMHONiMQLp1oQb5724rAZt/cRzRKWk2I8IfEVE731
- 5lpLttuwjh9fYJwlWREhNwtj/N9SQd7eu00rIK2SPbGZVtKWi8ynbbwmKURhanjUyQJeTyEEurK
- C6F7vD1/I5ie6RF1+TACABxxmasm53NU=
-X-Gm-Gg: ASbGncsu9cd5oHAdhVPSubX4bEbuPyjjJOnmDpm0rzX5uD0UjmQqZoOpZJrgMzMdMrC
- SgsyUhYFpi/k4DuDWeWzUxwk8L4zbvk/sAAShG55Tf3Sa83HSUD+udah+5YV0ysasrOiGdSC63Y
- BCVktvoKeEPWuowbcvCQUOjnMRAkzewt6+3s3xJLiDwA0m9dsRFBrKQDtqfrwEnyqlK162w0kVR
- BL3jg==
-X-Google-Smtp-Source: AGHT+IEWB7JrFoMbHrRALXWP1vhD6NN5YpFLPFz8a0z6KxSPI5Oh15vQ4Zsncp+bvRHP3+gphdxUKvzFK9fNg5W9TvY=
-X-Received: by 2002:a05:690c:868a:20b0:718:38bd:bb42 with SMTP id
- 00721157ae682-71838bdd021mr184209147b3.41.1753100579541; Mon, 21 Jul 2025
- 05:22:59 -0700 (PDT)
+ AJvYcCUgtX6v2ZfzrhSteK8JcgZYQkz4u0HlyvROo/gvPWbpWmo1h26BMel1j5lb7Nowd03VXXDh0VqUdQ==@lists.freedesktop.org,
+ AJvYcCVpWaBEL//8Ef3DyQH4w4XUk5Y3OrmCr71OeIFkRESBEgywdmYY4qXQv2IOwq2GjxHaIc/+wsi+ewU=@lists.freedesktop.org
+X-Gm-Message-State: AOJu0YzEBVnh3bW5SQ8WRcRma7NO6CBDy1xjA9qRPWpevLUq+DTTOk5E
+ E+Gbl6B1EpPhFq2oQFzd7weoxsgf9gueH4vyo39343o2F9BsWD+CekWFV7nU7Ux59UF5vHCrPyR
+ hbnjg4ziGxi8Q2hGr44/D30/Pso/QcDk=
+X-Gm-Gg: ASbGncsxqTulFqRk5Hc6WZYGqV0gRSKPwXTMIuDpkWC2XZwxgI+lHLgfQWbCag3OpST
+ HhVUUB3WGHXpR3mjCIFFY2lOrRsEg2mFLT+xpsnUONuxBt9qZzxKJ20cRJmOu0dy98Ky+ZsE0j2
+ iTLms0xxoHO3RuNI0NY4MgyjSVz/+7UEl9YjDmzrtaEpeXYgF9nUZtoQGsTotmqK/kyi6msMcwv
+ LECXsW3Yw1eU+7e3u0=
+X-Google-Smtp-Source: AGHT+IFI0uNUbtO1EL18MgqcISBuZun5VUryvqrsQhtAKtldt6P/mlWmjlPr/GgmBjbnB7SvG/K7ChJXEi849ooHmqA=
+X-Received: by 2002:a17:90b:562c:b0:312:25dd:1c8a with SMTP id
+ 98e67ed59e1d1-31c9e6e8348mr11443694a91.2.1753102481364; Mon, 21 Jul 2025
+ 05:54:41 -0700 (PDT)
 MIME-Version: 1.0
-From: Satadru Pramanik <satadru@gmail.com>
-Date: Mon, 21 Jul 2025 08:22:48 -0400
-X-Gm-Features: Ac12FXy7wN3KNUOiIVLumsXVvu9VY7MUOOaJsu-IjLq8qTEhzCqLvUhvpKWfvAw
-Message-ID: <CAFrh3J85tsZRpOHQtKgNHUVnn=EG=QKBnZTRtWS8eWSc1K1xkA@mail.gmail.com>
-Subject: Re: [PATCH] drm/nouveau: check ioctl command codes better
-To: Arnd Bergmann <arnd@kernel.org>
-Cc: airlied@gmail.com, airlied@redhat.com, arnd@arndb.de, bskeggs@nvidia.com, 
- bskeggs@redhat.com,
- "open list:DRM DRIVERS" <dri-devel@lists.freedesktop.org>, 
- open list <linux-kernel@vger.kernel.org>, Lyude Paul <lyude@redhat.com>, 
- nouveau@lists.freedesktop.org, simona@ffwll.ch, ttabi@nvidia.com, 
- Thomas Zimmermann <tzimmermann@suse.de>, Satadru Pramanik <satadru@gmail.com>
+References: <20250704-core-cstr-prepare-v1-0-a91524037783@gmail.com>
+ <20250704-core-cstr-prepare-v1-1-a91524037783@gmail.com>
+ <20250721073717.i6hr4iesfupzvtwf@vireshk-i7>
+In-Reply-To: <20250721073717.i6hr4iesfupzvtwf@vireshk-i7>
+From: Miguel Ojeda <miguel.ojeda.sandonis@gmail.com>
+Date: Mon, 21 Jul 2025 14:54:29 +0200
+X-Gm-Features: Ac12FXy9X7WoYLkMFLbQ__okKUv8h09D5Y5ZLeDybojK9NFQlmOXBw1vbHf4mSI
+Message-ID: <CANiq72mZxcwDX2X3RfRpHzqkmU6GBVadKPLJYF03Hj14O2x4PA@mail.gmail.com>
+Subject: Re: [PATCH 1/6] rust: kernel: remove `fmt!`,
+ fix clippy::uninlined-format-args
+To: Viresh Kumar <viresh.kumar@linaro.org>
+Cc: Tamir Duberstein <tamird@gmail.com>,
+ "Rafael J. Wysocki" <rafael@kernel.org>, 
+ Danilo Krummrich <dakr@kernel.org>, David Airlie <airlied@gmail.com>,
+ Simona Vetter <simona@ffwll.ch>, 
+ Nishanth Menon <nm@ti.com>, Stephen Boyd <sboyd@kernel.org>,
+ Miguel Ojeda <ojeda@kernel.org>, 
+ Alex Gaynor <alex.gaynor@gmail.com>, Boqun Feng <boqun.feng@gmail.com>, 
+ Gary Guo <gary@garyguo.net>,
+ =?UTF-8?Q?Bj=C3=B6rn_Roy_Baron?= <bjorn3_gh@protonmail.com>, 
+ Benno Lossin <lossin@kernel.org>, Andreas Hindborg <a.hindborg@kernel.org>, 
+ Alice Ryhl <aliceryhl@google.com>, Trevor Gross <tmgross@umich.edu>,
+ linux-pm@vger.kernel.org, 
+ linux-kernel@vger.kernel.org, nouveau@lists.freedesktop.org, 
+ dri-devel@lists.freedesktop.org, rust-for-linux@vger.kernel.org
 Content-Type: text/plain; charset="UTF-8"
-X-Mailman-Approved-At: Sat, 13 Dec 2025 12:40:43 +0000
+Content-Transfer-Encoding: quoted-printable
+X-Mailman-Approved-At: Sat, 13 Dec 2025 12:40:47 +0000
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -84,30 +100,15 @@ List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-Hello all,
+On Mon, Jul 21, 2025 at 9:37=E2=80=AFAM Viresh Kumar <viresh.kumar@linaro.o=
+rg> wrote:
+>
+> Acked-by: Viresh Kumar <viresh.kumar@linaro.org>
 
-I suspect this commit in 6.16-rc7 has broken acceleration with Mesa's
-nouveau drivers on my machine.
+Thanks Viresh -- I will add this one if I rebase, since Stephen
+already solved a conflict with it (I should have pinged earlier I
+guess, sorry; I thought you guys didn't Ack so far since it was
+trivial, but thanks to you both for them).
 
-glxinfo -B reports that I'm using llvmpipe.
-
-Reverting this in 6.16-rc7 restores nouveau acceleration, and glxinfo
-then reports: "OpenGL renderer string: NVE7"
-
-inxi -G
-Graphics:
-  Device-1: NVIDIA GK107M [GeForce GT 750M Mac Edition] driver: nouveau
-    v: kernel
-  Display: wayland server: X.Org v: 24.1.8 with: Xwayland v: 24.1.8
-    compositor: gnome-shell v: 48.0 driver: X: loaded: modesetting
-    unloaded: fbdev,vesa dri: nouveau gpu: nouveau resolution: 2880x1800~60Hz
-  API: EGL v: 1.5 drivers: nouveau,swrast
-    platforms: gbm,wayland,x11,surfaceless,device
-  API: OpenGL v: 4.5 compat-v: 4.3 vendor: mesa
-    v: 25.2.0~rc1+git2507191056.03f67b52319~p~mesarc0 renderer: NVE7
-  API: Vulkan v: 1.4.304 drivers: N/A surfaces: xcb,xlib,wayland
-  Info: Tools: api: eglinfo, glxinfo, vulkaninfo x11: xdriinfo, xdpyinfo,
-    xprop, xrandr
-
-Best,
-Satadru Pramanik
+Cheers,
+Miguel
