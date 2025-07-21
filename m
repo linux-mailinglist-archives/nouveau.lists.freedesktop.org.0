@@ -2,99 +2,59 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id 0D64BB0C452
-	for <lists+nouveau@lfdr.de>; Mon, 21 Jul 2025 14:46:11 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id EAB26B0C514
+	for <lists+nouveau@lfdr.de>; Mon, 21 Jul 2025 15:23:23 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 430EE10E118;
-	Mon, 21 Jul 2025 12:46:09 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id A252110E2A5;
+	Mon, 21 Jul 2025 13:23:22 +0000 (UTC)
 Authentication-Results: gabe.freedesktop.org;
-	dkim=pass (2048-bit key; unprotected) header.d=arndb.de header.i=@arndb.de header.b="BfCZgb+7";
-	dkim=pass (2048-bit key; unprotected) header.d=messagingengine.com header.i=@messagingengine.com header.b="NabAMEtn";
+	dkim=fail reason="signature verification failed" (2048-bit key; secure) header.d=infradead.org header.i=@infradead.org header.b="T3eT+XSs";
 	dkim-atps=neutral
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-X-Greylist: delayed 479 seconds by postgrey-1.36 at gabe;
- Mon, 21 Jul 2025 12:46:08 UTC
-Received: from fhigh-b1-smtp.messagingengine.com
- (fhigh-b1-smtp.messagingengine.com [202.12.124.152])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 77EF210E118
- for <nouveau@lists.freedesktop.org>; Mon, 21 Jul 2025 12:46:08 +0000 (UTC)
-Received: from phl-compute-05.internal (phl-compute-05.phl.internal
- [10.202.2.45])
- by mailfhigh.stl.internal (Postfix) with ESMTP id 7396D7A026D;
- Mon, 21 Jul 2025 08:38:08 -0400 (EDT)
-Received: from phl-imap-02 ([10.202.2.81])
- by phl-compute-05.internal (MEProxy); Mon, 21 Jul 2025 08:38:08 -0400
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=arndb.de; h=cc
- :cc:content-transfer-encoding:content-type:content-type:date
- :date:from:from:in-reply-to:in-reply-to:message-id:mime-version
- :references:reply-to:subject:subject:to:to; s=fm2; t=1753101488;
- x=1753187888; bh=uhrRzy+iePLdd1xy19cjDPimBozdlhjYyOfYRcsgTf4=; b=
- BfCZgb+7YEIueLEPbSU9ymc7AcLw18hz1kBQP0dQ/mjVDMD6B+P/TcuBX8hdauuD
- ToKg0jZ03S09Qkx0TVLSf5j39ThS7pwjl2IPJTF5++EneQWxGA05QMU+KsoE9vx7
- Jgw/99OO1GDCzy9yryf2no8K/HT43jcGQ6Cx/z7dUQdYFZoMxw7HzaJ+yGnCBP4y
- POpDpmpYxJDbZHN2rNhTUWS0znbbYGsMil7HSbhcSHz1nFwNDfd9qCE+1BwUx34s
- tZ27rk/6Wr0Naq0IMBAxWnY3pE6hCuuLwba8adICbndum60ReCZzrAsz17rpMFmv
- TWNC2UowVFTAv8OGlc2FKw==
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=
- messagingengine.com; h=cc:cc:content-transfer-encoding
- :content-type:content-type:date:date:feedback-id:feedback-id
- :from:from:in-reply-to:in-reply-to:message-id:mime-version
- :references:reply-to:subject:subject:to:to:x-me-proxy
- :x-me-sender:x-me-sender:x-sasl-enc; s=fm2; t=1753101488; x=
- 1753187888; bh=uhrRzy+iePLdd1xy19cjDPimBozdlhjYyOfYRcsgTf4=; b=N
- abAMEtnjkUlEqDe6uKqSgr71BZGPvwjSjInYXKxP65GTajjPsZx2UuV1rfolKOuw
- EWY8EvJyERmdSyexixNjt9YNlnMbVcu4OjpDCVWbnMmeFJ2yGzg2fU0AoaPMF8+m
- SDMYG7yYk5NEM6mEfZoTc7fFJ36nmOPDghxlJ7swkrFm2vNLDF/kLjJbjEvViCI5
- X002hjbKuff6Z7+oL0VFSSWF60PT9HpDqfM3TywttwTck93SJaXvBxZZV2cOx8ne
- 9PEoRtwdflTbI1pQAJPMeM+pYpKGLh9SJIeWJNZrI22xhkCy6VNnL8k95QDtVisM
- rCHrLx0mSW0hu5rhW1QrQ==
-X-ME-Sender: <xms:rzR-aBaF_rvfgdjdDwGmePX0o0bsVzGSOnEjt4_RwaaK8Y3cQz89Qg>
- <xme:rzR-aIaKLsNSFGls_tOQ8gj-Wx7WObhviitQcNPsc2VZTmBLELsj_KRVgwK7abwR9
- 2A-e7blhjzOiluvEh4>
-X-ME-Proxy-Cause: gggruggvucftvghtrhhoucdtuddrgeeffedrtdefgdejvddutdcutefuodetggdotefrod
- ftvfcurfhrohhfihhlvgemucfhrghsthforghilhdpuffrtefokffrpgfnqfghnecuuegr
- ihhlohhuthemuceftddtnecusecvtfgvtghiphhivghnthhsucdlqddutddtmdenucfjug
- hrpefoggffhffvvefkjghfufgtgfesthejredtredttdenucfhrhhomhepfdetrhhnugcu
- uegvrhhgmhgrnhhnfdcuoegrrhhnugesrghrnhgusgdruggvqeenucggtffrrghtthgvrh
- hnpefhtdfhvddtfeehudekteeggffghfejgeegteefgffgvedugeduveelvdekhfdvieen
- ucevlhhushhtvghrufhiiigvpedtnecurfgrrhgrmhepmhgrihhlfhhrohhmpegrrhhnug
- esrghrnhgusgdruggvpdhnsggprhgtphhtthhopedufedpmhhouggvpehsmhhtphhouhht
- pdhrtghpthhtohepshhimhhonhgrsehffhiflhhlrdgthhdprhgtphhtthhopegrihhrlh
- hivggusehgmhgrihhlrdgtohhmpdhrtghpthhtohepshgrthgrughruhesghhmrghilhdr
- tghomhdprhgtphhtthhopegrrhhnugeskhgvrhhnvghlrdhorhhgpdhrtghpthhtohepug
- hrihdquggvvhgvlheslhhishhtshdrfhhrvggvuggvshhkthhophdrohhrghdprhgtphht
- thhopehnohhuvhgvrghusehlihhsthhsrdhfrhgvvgguvghskhhtohhprdhorhhgpdhrtg
- hpthhtohepsghskhgvghhgshesnhhvihguihgrrdgtohhmpdhrtghpthhtohepthhtrggs
- ihesnhhvihguihgrrdgtohhmpdhrtghpthhtoheprghirhhlihgvugesrhgvughhrghtrd
- gtohhm
-X-ME-Proxy: <xmx:rzR-aLiuzSvMsKj7O5_2letYTW8aoEvpiSuH133H7ShzkDLGEOe7OQ>
- <xmx:rzR-aPQBpNr6Idk_c7g4wY8A9umXp6VI2vagx0uV6gPF-0FXVvXrYQ>
- <xmx:rzR-aF9UBgdXUhkeb0tGozRlO5I4k1d0nj93aahF63Q8tIlU8nI0OA>
- <xmx:rzR-aIPOffZGm9Brvzz_CUTXBMxIwbQOj8wiWpOYDTvz9LEVc3GxEg>
- <xmx:sDR-aJ_IPMld6rXO9HGowjncV4p4ztf_COLjlG4DLrGlaVgyhLy-KS5Z>
-Feedback-ID: i56a14606:Fastmail
-Received: by mailuser.phl.internal (Postfix, from userid 501)
- id C1DE970006A; Mon, 21 Jul 2025 08:38:07 -0400 (EDT)
-X-Mailer: MessagingEngine.com Webmail Interface
+Received: from casper.infradead.org (casper.infradead.org [90.155.50.34])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 55C7510E2A5;
+ Mon, 21 Jul 2025 13:23:21 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
+ d=infradead.org; s=casper.20170209; h=In-Reply-To:Content-Type:MIME-Version:
+ References:Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:
+ Content-Transfer-Encoding:Content-ID:Content-Description;
+ bh=6M2lfrqiVCmiF0Wc9FAkpPta+B8beY73GHDzTT0mJuM=; b=T3eT+XSsrzwbV1XqZcbUbrh7LZ
+ H776ohxzo3FqBHlR9iUOMKsWSekI3pZ2M4Q7fI3qVGcz8XFiL3A0Yco+hW77J4VJd3rKMznaLp8yp
+ MhkgVuYw+ssT8lWfZ9qJ5xN1I2wjh7NvJujhQpqfQm5ICcjwsvs0nSZJrBnvpAO6PuAGQZcA87TEN
+ UPVibCOP1YOVHX5l2Zwpe0VC6AATkYZ4hZKzd70J5wAi2Nm0jXmh5tW/s8Uk1NdxUopZSV1scRPsx
+ g0lzFIdaw3LFkEtZ3C62ZL7TK8ZXrnvYG7yTpAuzxv+1TZqlQkkSpJdv1B8ROa/69QRxMtWJapMgs
+ ky127NWw==;
+Received: from willy by casper.infradead.org with local (Exim 4.98.2 #2 (Red
+ Hat Linux)) id 1udqU5-0000000D9wk-1SEe;
+ Mon, 21 Jul 2025 13:23:13 +0000
+Date: Mon, 21 Jul 2025 14:23:13 +0100
+From: Matthew Wilcox <willy@infradead.org>
+To: Jason Gunthorpe <jgg@ziepe.ca>
+Cc: Yonatan Maman <ymaman@nvidia.com>,
+ =?iso-8859-1?B?Suly9G1l?= Glisse <jglisse@redhat.com>,
+ Andrew Morton <akpm@linux-foundation.org>,
+ Leon Romanovsky <leon@kernel.org>, Lyude Paul <lyude@redhat.com>,
+ Danilo Krummrich <dakr@kernel.org>,
+ David Airlie <airlied@gmail.com>, Simona Vetter <simona@ffwll.ch>,
+ Alistair Popple <apopple@nvidia.com>, Ben Skeggs <bskeggs@nvidia.com>,
+ Michael Guralnik <michaelgur@nvidia.com>,
+ Or Har-Toov <ohartoov@nvidia.com>,
+ Daisuke Matsuda <dskmtsd@gmail.com>, Shay Drory <shayd@nvidia.com>,
+ linux-mm@kvack.org, linux-rdma@vger.kernel.org,
+ dri-devel@lists.freedesktop.org, nouveau@lists.freedesktop.org,
+ linux-kernel@vger.kernel.org, Gal Shalom <GalShalom@nvidia.com>
+Subject: Re: [PATCH v2 1/5] mm/hmm: HMM API to enable P2P DMA for device
+ private pages
+Message-ID: <aH4_QaNtIJMrPqOw@casper.infradead.org>
+References: <20250718115112.3881129-1-ymaman@nvidia.com>
+ <20250718115112.3881129-2-ymaman@nvidia.com>
+ <aHpXXKTaqp8FUhmq@casper.infradead.org>
+ <20250718144442.GG2206214@ziepe.ca>
 MIME-Version: 1.0
-X-ThreadId: T0fa10d1000c4a2fe
-Date: Mon, 21 Jul 2025 14:37:36 +0200
-From: "Arnd Bergmann" <arnd@arndb.de>
-To: "Satadru Pramanik" <satadru@gmail.com>, "Arnd Bergmann" <arnd@kernel.org>
-Cc: "Dave Airlie" <airlied@gmail.com>, "Dave Airlie" <airlied@redhat.com>,
- "Ben Skeggs" <bskeggs@nvidia.com>, "bskeggs@redhat.com" <bskeggs@redhat.com>, 
- "open list:DRM DRIVERS" <dri-devel@lists.freedesktop.org>,
- "open list" <linux-kernel@vger.kernel.org>, "Lyude Paul" <lyude@redhat.com>,
- "nouveau@lists.freedesktop.org" <nouveau@lists.freedesktop.org>,
- "Simona Vetter" <simona@ffwll.ch>, "Timur Tabi" <ttabi@nvidia.com>,
- "Thomas Zimmermann" <tzimmermann@suse.de>
-Message-Id: <c32114e7-a61a-4c2b-ab4b-b103d028d05f@app.fastmail.com>
-In-Reply-To: <CAFrh3J85tsZRpOHQtKgNHUVnn=EG=QKBnZTRtWS8eWSc1K1xkA@mail.gmail.com>
-References: <CAFrh3J85tsZRpOHQtKgNHUVnn=EG=QKBnZTRtWS8eWSc1K1xkA@mail.gmail.com>
-Subject: Re: [PATCH] drm/nouveau: check ioctl command codes better
-Content-Type: text/plain
-Content-Transfer-Encoding: 7bit
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <20250718144442.GG2206214@ziepe.ca>
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -109,20 +69,40 @@ List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-On Mon, Jul 21, 2025, at 14:22, Satadru Pramanik wrote:
-> Hello all,
->
-> I suspect this commit in 6.16-rc7 has broken acceleration with Mesa's
-> nouveau drivers on my machine.
->
-> glxinfo -B reports that I'm using llvmpipe.
+On Fri, Jul 18, 2025 at 11:44:42AM -0300, Jason Gunthorpe wrote:
+> On Fri, Jul 18, 2025 at 03:17:00PM +0100, Matthew Wilcox wrote:
+> > On Fri, Jul 18, 2025 at 02:51:08PM +0300, Yonatan Maman wrote:
+> > > +++ b/include/linux/memremap.h
+> > > @@ -89,6 +89,14 @@ struct dev_pagemap_ops {
+> > >  	 */
+> > >  	vm_fault_t (*migrate_to_ram)(struct vm_fault *vmf);
+> > >  
+> > > +	/*
+> > > +	 * Used for private (un-addressable) device memory only. Return a
+> > > +	 * corresponding PFN for a page that can be mapped to device
+> > > +	 * (e.g using dma_map_page)
+> > > +	 */
+> > > +	int (*get_dma_pfn_for_device)(struct page *private_page,
+> > > +				      unsigned long *dma_pfn);
+> > 
+> > This makes no sense.  If a page is addressable then it has a PFN.
+> > If a page is not addressable then it doesn't have a PFN.
+> 
+> The DEVICE_PRIVATE pages have a PFN, but it is not usable for
+> anything.
 
-Thanks for the report!  Can you run the failing command with
-'strace -f -o logfile.txt -e trace=ioctl ...' to see which command
-it tries?
+OK, then I don't understand what DEVICE PRIVATE means.
 
-Either I made a stupid mistake in my patch and don't catch the
-intended command any more, or the command that gets sent is actually
-different from the one that the kernel expects.
+I thought it was for memory on a PCIe device that isn't even visible
+through a BAR and so the CPU has no way of addressing it directly.
+But now you say that it has a PFN, which means it has a physical
+address, which means it's accessible to the CPU.
 
-      Arnd
+So what is it?
+
+> This is effectively converting from a DEVICE_PRIVATE page to an actual
+> DMA'able address of some kind. The DEVICE_PRIVATE is just a non-usable
+> proxy, like a swap entry, for where the real data is sitting.
+> 
+> Jason
+> 
