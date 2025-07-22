@@ -2,93 +2,83 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id 6D6FCCBACAC
-	for <lists+nouveau@lfdr.de>; Sat, 13 Dec 2025 13:44:14 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 447D5CBAA9D
+	for <lists+nouveau@lfdr.de>; Sat, 13 Dec 2025 13:42:15 +0100 (CET)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 3448F10EAB2;
-	Sat, 13 Dec 2025 12:41:09 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 6544410EA8D;
+	Sat, 13 Dec 2025 12:41:01 +0000 (UTC)
 Authentication-Results: gabe.freedesktop.org;
-	dkim=permerror (0-bit key) header.d=gmail.com header.i=@gmail.com header.b="k6IZRKXS";
+	dkim=permerror (0-bit key) header.d=gmail.com header.i=@gmail.com header.b="O199kb5K";
 	dkim-atps=neutral
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from mail-pj1-f42.google.com (mail-pj1-f42.google.com
- [209.85.216.42])
- by gabe.freedesktop.org (Postfix) with ESMTPS id AC2C710E3C8;
- Mon, 21 Jul 2025 21:25:22 +0000 (UTC)
-Received: by mail-pj1-f42.google.com with SMTP id
- 98e67ed59e1d1-313862d48e7so660986a91.1; 
- Mon, 21 Jul 2025 14:25:22 -0700 (PDT)
+Received: from mail-wr1-f51.google.com (mail-wr1-f51.google.com
+ [209.85.221.51])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 8619D10E650;
+ Tue, 22 Jul 2025 10:29:22 +0000 (UTC)
+Received: by mail-wr1-f51.google.com with SMTP id
+ ffacd0b85a97d-3a52874d593so3945659f8f.0; 
+ Tue, 22 Jul 2025 03:29:22 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1753133122; x=1753737922; darn=lists.freedesktop.org;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=9iFLdp2ndiNM8RNps+ppve+VMxv1HIOTDVN1LN5NGOw=;
- b=k6IZRKXShXCj89TqP5DM1T3dmaNY2CXPU0PiC24+BibEr1zIXAUnsJxds7PAl3H0km
- qynIjUMZuwlUsw6tWwmM8wiLbOrQljjUpM8Yb1qDT93MTfJMRSMRC8zOzDxGCbfHzSz5
- QlaJfbumwkD7qFICzAE19BLKxKsmWnZQjUsDIpS54nXYHOYF6zau9XxnkQ5jtgXeDFR5
- RM/owI7mM21UtEmDOBeAy0fb4TMifqNwF3/nhWqExse3PBnTeR+q02hX9uNmddJeoQWn
- +XWyXIbUC+8vYERSOr71bhI4ntMpy1D2OBocV6Nv4PTV0CJrbE5GyLuSmVxt34+qZoyj
- tqCg==
+ d=gmail.com; s=20230601; t=1753180161; x=1753784961; darn=lists.freedesktop.org;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=fxZUVGACW46ROFRrurwhfL/bIVT9DSzn+Z7eP3oj7pY=;
+ b=O199kb5KgmLkOOxU/JeRvW7KbRIzqrefocFrahXNFxhW3f7te0qPGCLCkGLk6PX1Mk
+ Jpw816fDZbzEk34+U1XSRGjIVEcn94jEk4C1me4Ykr6N3KzwDF36BvO057L+wu5L3oiR
+ 6tUeLqM4My44ybROCRtVXpFQRA/0I/9PWUfNvyVOomT34jOhWb/7b6aEdSBLa0m59K9C
+ +ORgOUaxCeNLq/oyYz66qSjVVcG9HSrZZtiMsB2AqQPp7eQnJz3djEn4rwFETxj9uKJc
+ jN3Ja9mTkPW0CbuTsj5Xb39qQbyDAjoRHfYWfTdRNr+x5p9wiz9kUwYSp7251kiws1eQ
+ Arsg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1753133122; x=1753737922;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=9iFLdp2ndiNM8RNps+ppve+VMxv1HIOTDVN1LN5NGOw=;
- b=Rz127/APDJXn7ClOF+Inc9Z3H0YVcW/3+ue4kGUiBq5BWPTSG/icmUYiftSitdsrzO
- 9IXiuNT8gfKEroAsRJQ4jP6P48SYwJXGSyaR3CJXsFBeKkM9iRyLoCwsAdifbwkMLqta
- dYsqgjKRUuRaLVNPEOUftj5VdvzHxaVjr9kutOCPGTuwHqLm93IjS92z75oE7OYu/+wq
- 16JTvuqi8t5Id7JYgp57B+SZ1/Vhy36sxqcCFO4apRrGB9Bs38+0cvAlFgw/5pO+hy7k
- Tcak0pjUaCwJDUO866MQh2nOdLG+uJ4/K4XA/69AVSQLWHK6FsIBV52G77xrq0Zl7mkL
- G45A==
+ d=1e100.net; s=20230601; t=1753180161; x=1753784961;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=fxZUVGACW46ROFRrurwhfL/bIVT9DSzn+Z7eP3oj7pY=;
+ b=i92RmpZBkVf5bt9mHUVugpKaUuZV2oUOh7TGRCzKShuQZWIRpgdVcjkrswXdWm0Mic
+ rrBj5nryPf6x9US1AiwFKyka6L94FdemA3ASNIPvbz3HwDez5BFNo2z+s+C0ATJtJy1e
+ 7UcIhh346ViHwPzqxPhyZk97MWAfh2DZL11aXwBgLdKJcwg1XtOm4fUo9L6uHGNi+Yku
+ eY4EZG+haeLHeEn/eDugl4eM10FSWppApfFCfEYGzUmwBS7kj5wyeqPswXftiu2UdR/o
+ tqQMoUXhSADsM/d+TnvqJ3zUFgVNpCl7+Us7LxT9MLV8Nu8/BGEIclzZy59ROIZPVmMl
+ 9pKA==
 X-Forwarded-Encrypted: i=1;
- AJvYcCV+6qeBhkw4t7Cu6iPYXFtK5sXdJqh7wd5ZY+XsqqwF7ihtIMr1KOvcoQhDVdAICBaCxUIkm82gAIs=@lists.freedesktop.org,
- AJvYcCWLFX9OKMFYw3Erm2BgeTUGJkGLeHlIxW6e6k4DTOEGYXsYbvNbTsAbbCd+Tb1zqSYdKYVsrl3T/g==@lists.freedesktop.org
-X-Gm-Message-State: AOJu0Yxz6wmDXCDLJTxMsulBzC6WeEkgzQq7gcrM9Wn/Kw8CVT0u9VkI
- TyRpcgv/s8d5bx6sGrFQKiCuGlCpajPlfspf7YlUOVxpHXsBLs2772Qv6psMqLKlSqEqf41HqWT
- UlrtzoA+UgHaOuptIAIa0qdmtoZLB//E=
-X-Gm-Gg: ASbGncvq7FHM0ihlKcKpvLWOjqY2E4dS4WkGc6kZAE3VaYpaLLzHDPSsXPh91q1x81q
- WccDoQ2OcIMFFhoiLsk6+Z1rEpbDX5w4Ymqls6DUYZR6OYxYftL0E55g7id0WVpitSMpM+AdF17
- G8uU5ftifsJnjtBA8TbJK/dFpLkzbzvkwZ6mb3jsmPzLbgqNjlCdCBaK2XaPjdglokXRoWYgluu
- bDX0pQExJ6HOJVp3gM=
-X-Google-Smtp-Source: AGHT+IGMwqakNKOUFXVAu2/3PXle8MucW9ApQqtEvS19+SeB54BAypNZzC2R/JPDOK0p7gPei/ELcvNLwjB5DUmNGHY=
-X-Received: by 2002:a17:90b:4a85:b0:312:1d2d:18f8 with SMTP id
- 98e67ed59e1d1-31c9e7a47d2mr12006266a91.7.1753133122141; Mon, 21 Jul 2025
- 14:25:22 -0700 (PDT)
+ AJvYcCVf5iiuQz1hKjqupW1OiEjlCUG7f1GR9WZvYeu2ovbUsHkNUZbKAu2SqqMDzWTq1s9+ZmiaMXnaoQ==@lists.freedesktop.org,
+ AJvYcCXeyOjbYTMiDVlM81UWTa/H+NPuFlF+boA+PyC+PWfWxx2N4bXLTJ6WnYKSsbWoAe0T2hybODGMLoA=@lists.freedesktop.org
+X-Gm-Message-State: AOJu0Yw7EyTBXzm6kV4HDyMIviYiSD9lpGcXEfUeG9B5sFW/IdSy70d+
+ JeMpk/HUQ5T/uozGH/+q+nUK52jWSpyjnWZazDiOhT9kNJn1ovJwO4/c
+X-Gm-Gg: ASbGncu/UC7ZzobldYAVXRxDlskqComagNE7LCgvN8cCbCAa/Vw2cpK4qgsDdDowEm8
+ V7t0ZKx9KAkJMc0lq/+J2PbVnJV1YhSP4pAHACb7Jk3CA12m0mTNkeGfBrMEHlx4bGdB6Mpx0Jc
+ 4s7+bYVM9NnbVl7T1snJo4atz6f9JlCR9oSCLQztESAhPRiuLKhFw92DaeU6Ur1CGQAGh+rxRQc
+ BhlA5AlA2AyNCKR4tSF9LbsBZ4gRlzh3TQBHpAPqG+XAc5x4ikGZyc0SP7QZMx9bSTTvxLubgkV
+ DI/41eHOkSWF4U+WrA5raXcktWDfESU153xk/jt1qY11ENl9fX/fV1INq6fd2DJFroSqW7Hit1m
+ fuFUunXQRN19cE75ua0vAsg76k7wnK5I=
+X-Google-Smtp-Source: AGHT+IEHBlNbQ1YPEWSxQJSYPHljQ9UoaZeqhCRzRGrQ0XzA5BTAIrm5I1v2Kds708E89K2m5lCgjg==
+X-Received: by 2002:a05:6000:4b17:b0:3a4:e1e1:7779 with SMTP id
+ ffacd0b85a97d-3b60e50ff22mr18202349f8f.32.1753180160588; 
+ Tue, 22 Jul 2025 03:29:20 -0700 (PDT)
+Received: from debian.local ([81.78.104.57]) by smtp.gmail.com with ESMTPSA id
+ 5b1f17b1804b1-4563b75de26sm125434925e9.33.2025.07.22.03.29.19
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Tue, 22 Jul 2025 03:29:20 -0700 (PDT)
+Date: Tue, 22 Jul 2025 11:29:17 +0100
+From: Chris Bainbridge <chris.bainbridge@gmail.com>
+To: Satadru Pramanik <satadru@gmail.com>
+Cc: Arnd Bergmann <arnd@kernel.org>, airlied@gmail.com, airlied@redhat.com,
+ arnd@arndb.de, bskeggs@nvidia.com, bskeggs@redhat.com,
+ "open list:DRM DRIVERS" <dri-devel@lists.freedesktop.org>,
+ open list <linux-kernel@vger.kernel.org>,
+ Lyude Paul <lyude@redhat.com>, nouveau@lists.freedesktop.org,
+ simona@ffwll.ch, ttabi@nvidia.com, Thomas Zimmermann <tzimmermann@suse.de>,
+ regressions@lists.linux.dev
+Subject: Re: [PATCH] drm/nouveau: check ioctl command codes better
+Message-ID: <aH9n_QGMFx2ZbKlw@debian.local>
+References: <CAFrh3J85tsZRpOHQtKgNHUVnn=EG=QKBnZTRtWS8eWSc1K1xkA@mail.gmail.com>
 MIME-Version: 1.0
-References: <20250719-core-cstr-fanout-1-v2-0-1ab5ba189c6e@gmail.com>
- <20250719-core-cstr-fanout-1-v2-7-1ab5ba189c6e@gmail.com>
-In-Reply-To: <20250719-core-cstr-fanout-1-v2-7-1ab5ba189c6e@gmail.com>
-From: Miguel Ojeda <miguel.ojeda.sandonis@gmail.com>
-Date: Mon, 21 Jul 2025 23:25:07 +0200
-X-Gm-Features: Ac12FXx1fxLwm1B3q35hYDSm0FBUzbFOkBoCCwDTqVlcqaSOlmPogm9Pbry1ihw
-Message-ID: <CANiq72nQT=uX4E997rVDOjNGzVbEx0_kqpa70OkAXPHy7bffSw@mail.gmail.com>
-Subject: Re: [PATCH v2 7/8] rust: seq_file: use `kernel::{fmt,prelude::fmt!}`
-To: Tamir Duberstein <tamird@gmail.com>, Christian Brauner <brauner@kernel.org>
-Cc: Danilo Krummrich <dakr@kernel.org>, David Airlie <airlied@gmail.com>,
- Simona Vetter <simona@ffwll.ch>, 
- Miguel Ojeda <ojeda@kernel.org>, Alex Gaynor <alex.gaynor@gmail.com>, 
- Boqun Feng <boqun.feng@gmail.com>, Gary Guo <gary@garyguo.net>, 
- =?UTF-8?Q?Bj=C3=B6rn_Roy_Baron?= <bjorn3_gh@protonmail.com>, 
- Benno Lossin <lossin@kernel.org>, Andreas Hindborg <a.hindborg@kernel.org>, 
- Alice Ryhl <aliceryhl@google.com>, Trevor Gross <tmgross@umich.edu>,
- Jens Axboe <axboe@kernel.dk>, 
- Greg Kroah-Hartman <gregkh@linuxfoundation.org>,
- "Rafael J. Wysocki" <rafael@kernel.org>, 
- Brendan Higgins <brendan.higgins@linux.dev>, David Gow <davidgow@google.com>, 
- Rae Moar <rmoar@google.com>, Lorenzo Stoakes <lorenzo.stoakes@oracle.com>, 
- Vlastimil Babka <vbabka@suse.cz>, "Liam R. Howlett" <Liam.Howlett@oracle.com>, 
- Uladzislau Rezki <urezki@gmail.com>, nouveau@lists.freedesktop.org, 
- dri-devel@lists.freedesktop.org, linux-kernel@vger.kernel.org, 
- rust-for-linux@vger.kernel.org, linux-block@vger.kernel.org, 
- linux-kselftest@vger.kernel.org, kunit-dev@googlegroups.com, 
- Alexander Viro <viro@zeniv.linux.org.uk>, Jan Kara <jack@suse.cz>, 
- linux-fsdevel <linux-fsdevel@vger.kernel.org>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-X-Mailman-Approved-At: Sat, 13 Dec 2025 12:40:47 +0000
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <CAFrh3J85tsZRpOHQtKgNHUVnn=EG=QKBnZTRtWS8eWSc1K1xkA@mail.gmail.com>
+X-Mailman-Approved-At: Sat, 13 Dec 2025 12:40:42 +0000
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -103,23 +93,47 @@ List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-On Sun, Jul 20, 2025 at 12:42=E2=80=AFAM Tamir Duberstein <tamird@gmail.com=
-> wrote:
->
-> Reduce coupling to implementation details of the formatting machinery by
-> avoiding direct use for `core`'s formatting traits and macros.
->
-> Acked-by: Greg Kroah-Hartman <gregkh@linuxfoundation.org>
-> Reviewed-by: Alice Ryhl <aliceryhl@google.com>
-> Reviewed-by: Benno Lossin <lossin@kernel.org>
-> Acked-by: Danilo Krummrich <dakr@kernel.org>
-> Signed-off-by: Tamir Duberstein <tamird@gmail.com>
+On Mon, Jul 21, 2025 at 08:22:48AM -0400, Satadru Pramanik wrote:
+> Hello all,
+> 
+> I suspect this commit in 6.16-rc7 has broken acceleration with Mesa's
+> nouveau drivers on my machine.
+> 
+> glxinfo -B reports that I'm using llvmpipe.
+> 
+> Reverting this in 6.16-rc7 restores nouveau acceleration, and glxinfo
+> then reports: "OpenGL renderer string: NVE7"
+> 
+> inxi -G
+> Graphics:
+>   Device-1: NVIDIA GK107M [GeForce GT 750M Mac Edition] driver: nouveau
+>     v: kernel
+>   Display: wayland server: X.Org v: 24.1.8 with: Xwayland v: 24.1.8
+>     compositor: gnome-shell v: 48.0 driver: X: loaded: modesetting
+>     unloaded: fbdev,vesa dri: nouveau gpu: nouveau resolution: 2880x1800~60Hz
+>   API: EGL v: 1.5 drivers: nouveau,swrast
+>     platforms: gbm,wayland,x11,surfaceless,device
+>   API: OpenGL v: 4.5 compat-v: 4.3 vendor: mesa
+>     v: 25.2.0~rc1+git2507191056.03f67b52319~p~mesarc0 renderer: NVE7
+>   API: Vulkan v: 1.4.304 drivers: N/A surfaces: xcb,xlib,wayland
+>   Info: Tools: api: eglinfo, glxinfo, vulkaninfo x11: xdriinfo, xdpyinfo,
+>     xprop, xrandr
+> 
+> Best,
+> Satadru Pramanik
 
-VFS should be Cc'd on this one, so doing so here.
+I also bisected an issue to this commit. On my laptop, this commit
+results in an intermittent desktop crash (Xorg segfault) when changing
+display scale, which can be more reliably reproduced with:
 
-Christian: I will eventually apply this series, so please let me know
-if you are against this one (Acked-by's appreciated, of course),
-thanks!
+for x in {1..100}; do
+  xrandr --output eDP-1 --mode 2560x1600 --scale 0.5 --filter nearest
+  xrandr --output eDP-1 --mode 2560x1600 --scale 1 --filter nearest
+done
 
-Cheers,
-Miguel
+I also see the same glxinfo llvmpipe change that Satadru reported.
+Reverting the commit fixes my scale test case, and also the glxinfo
+renderer.
+
+#regzbot introduced: e5478166dffb51fa64e76cdbb5c24421f22f2d43 ^
+#regzbot title: nouveau hardware acceleration broken
