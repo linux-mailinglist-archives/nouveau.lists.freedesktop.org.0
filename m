@@ -2,39 +2,50 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id 8B8B7B0D89B
-	for <lists+nouveau@lfdr.de>; Tue, 22 Jul 2025 13:54:53 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 67B28B0D8A8
+	for <lists+nouveau@lfdr.de>; Tue, 22 Jul 2025 13:58:42 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 2F2AE10E059;
-	Tue, 22 Jul 2025 11:54:52 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id C960610E672;
+	Tue, 22 Jul 2025 11:58:40 +0000 (UTC)
+Authentication-Results: gabe.freedesktop.org;
+	dkim=pass (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="nIAbi65q";
+	dkim-atps=neutral
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-X-Greylist: delayed 546 seconds by postgrey-1.36 at gabe;
- Tue, 22 Jul 2025 11:54:51 UTC
-Received: from hs01.dakr.org (hs01.dakr.org [173.249.23.66])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 3E9C810E059;
- Tue, 22 Jul 2025 11:54:51 +0000 (UTC)
-Message-ID: <2e94329d-04c7-4cd5-bce4-235a81db214b@dakr.org>
-Date: Tue, 22 Jul 2025 13:45:41 +0200
+Received: from nyc.source.kernel.org (nyc.source.kernel.org [147.75.193.91])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 86EC710E671;
+ Tue, 22 Jul 2025 11:58:39 +0000 (UTC)
+Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
+ by nyc.source.kernel.org (Postfix) with ESMTP id 5A5C1A55EE3;
+ Tue, 22 Jul 2025 11:58:37 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 4F9C2C4CEEB;
+ Tue, 22 Jul 2025 11:58:34 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+ s=k20201202; t=1753185517;
+ bh=VRNKdOARxyNPiIG9RaGx/LmFv7pgt5os0GiM6h2e3U0=;
+ h=From:To:Cc:Subject:Date:From;
+ b=nIAbi65qjf9cnS+TorEe2+9FEwihDkYar+X0ybyntOh810E7zZqNCJnMvdCm2uYEC
+ V9MXrMaDiq7oRRQ8uyfJ6YPbs3gEqbBy6yNUssRPSA0aOzxsIrt3QVTfs9CIZVa0rl
+ 7YtlvIoyur0fa4ysyZr9zYREVF5ncTADJEBL72VH+U4WxqHU/mfD5vK3R4e3H8EplL
+ 7DyWa5GsNYETBrWPOudp/VYzusJSNscayVR8MrasRCW0YcQPJuFKvLKDaK6wPLQDhH
+ 3GzghzRyhtVPdIDXvaKgTy23vLYlQD8K1UyU6p+07sZCloU1I/9Z2pGoYA7824TnU9
+ 55Oi5zob3ytzw==
+From: Arnd Bergmann <arnd@kernel.org>
+To: Lyude Paul <lyude@redhat.com>, Danilo Krummrich <dakr@kernel.org>,
+ David Airlie <airlied@gmail.com>, Simona Vetter <simona@ffwll.ch>,
+ Arnd Bergmann <arnd@arndb.de>
+Cc: Satadru Pramanik <satadru@gmail.com>,
+ Chris Bainbridge <chris.bainbridge@gmail.com>,
+ Ben Skeggs <bskeggs@nvidia.com>, Timur Tabi <ttabi@nvidia.com>,
+ Dave Airlie <airlied@redhat.com>, Thomas Zimmermann <tzimmermann@suse.de>,
+ dri-devel@lists.freedesktop.org, nouveau@lists.freedesktop.org,
+ linux-kernel@vger.kernel.org
+Subject: [PATCH] Revert "drm/nouveau: check ioctl command codes better"
+Date: Tue, 22 Jul 2025 13:58:18 +0200
+Message-Id: <20250722115830.2587297-1-arnd@kernel.org>
+X-Mailer: git-send-email 2.39.5
 MIME-Version: 1.0
-Subject: Re: [PATCH] drm/nouveau: check ioctl command codes better
-To: Arnd Bergmann <arnd@arndb.de>, Satadru Pramanik <satadru@gmail.com>
-Cc: Chris Bainbridge <chris.bainbridge@gmail.com>,
- Arnd Bergmann <arnd@kernel.org>, Dave Airlie <airlied@gmail.com>,
- Dave Airlie <airlied@redhat.com>, Ben Skeggs <bskeggs@nvidia.com>,
- "open list:DRM DRIVERS" <dri-devel@lists.freedesktop.org>,
- open list <linux-kernel@vger.kernel.org>, Lyude Paul <lyude@redhat.com>,
- "nouveau@lists.freedesktop.org" <nouveau@lists.freedesktop.org>,
- Simona Vetter <simona@ffwll.ch>, Timur Tabi <ttabi@nvidia.com>,
- Thomas Zimmermann <tzimmermann@suse.de>, regressions@lists.linux.dev
-References: <CAFrh3J85tsZRpOHQtKgNHUVnn=EG=QKBnZTRtWS8eWSc1K1xkA@mail.gmail.com>
- <aH9n_QGMFx2ZbKlw@debian.local>
- <d5010230-b718-4770-b731-f62225f1f808@app.fastmail.com>
-From: Danilo Krummrich <kernel@dakr.org>
-Content-Language: en-US
-In-Reply-To: <d5010230-b718-4770-b731-f62225f1f808@app.fastmail.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
+Content-Transfer-Encoding: 8bit
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -49,37 +60,63 @@ List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-On 7/22/25 12:52 PM, Arnd Bergmann wrote:
-> On Tue, Jul 22, 2025, at 12:29, Chris Bainbridge wrote:
->> On Mon, Jul 21, 2025 at 08:22:48AM -0400, Satadru Pramanik wrote:
->>> Hello all,
->>>
->>> I suspect this commit in 6.16-rc7 has broken acceleration with Mesa's
->>> nouveau drivers on my machine.
+From: Arnd Bergmann <arnd@arndb.de>
 
-Thanks for the report!
+My previous patch ended up causing a regression for the
+DRM_IOCTL_NOUVEAU_NVIF ioctl. The intention of my patch was to only
+pass ioctl commands that have the correct dir/type/nr bits into the
+nouveau_abi16_ioctl() function.
 
-Please make sure to keep maintainers in the loop, for some reason I was removed
-from the recipient list for this regression report.
+This turned out to be too strict, as userspace does use at least
+write-only and write-read direction settings. Checking for both of these
+still did not fix the issue, so the best we can do for the 6.16 release
+is to revert back to what we've had since linux-3.16.
 
->>>
->>> glxinfo -B reports that I'm using llvmpipe.
->>>
->>> Reverting this in 6.16-rc7 restores nouveau acceleration, and glxinfo
->>> then reports: "OpenGL renderer string: NVE7"
->>
->> I also bisected an issue to this commit. On my laptop, this commit
->> results in an intermittent desktop crash (Xorg segfault) when changing
->> display scale, which can be more reliably reproduced with:
->>
->> for x in {1..100}; do
->>    xrandr --output eDP-1 --mode 2560x1600 --scale 0.5 --filter nearest
->>    xrandr --output eDP-1 --mode 2560x1600 --scale 1 --filter nearest
->> done
->>
-> 
-> I won't have time to work on fixing my patch before the merge window,
-> let's just revert it.
+This version is still fragile, but at least it is known to work with
+existing userspace. Fixing this properly requires a better understanding
+of what commands are being passed from userspace in practice, and how
+that relies on the undocumented (mis)behavior in nouveau_drm_ioctl().
 
-@Arnd: Yes, given the short timeframe I think that's the best. Can you please 
-send the revert?
+Fixes: e5478166dffb ("drm/nouveau: check ioctl command codes better")
+Link: https://lore.kernel.org/dri-devel/CAFrh3J85tsZRpOHQtKgNHUVnn=EG=QKBnZTRtWS8eWSc1K1xkA@mail.gmail.com/
+Reported-by: Satadru Pramanik <satadru@gmail.com>
+Reported-by: Chris Bainbridge <chris.bainbridge@gmail.com>
+Signed-off-by: Arnd Bergmann <arnd@arndb.de>
+---
+ drivers/gpu/drm/nouveau/nouveau_drm.c | 11 ++++++-----
+ 1 file changed, 6 insertions(+), 5 deletions(-)
+
+diff --git a/drivers/gpu/drm/nouveau/nouveau_drm.c b/drivers/gpu/drm/nouveau/nouveau_drm.c
+index 7bb64fcdd497..1527b801f013 100644
+--- a/drivers/gpu/drm/nouveau/nouveau_drm.c
++++ b/drivers/gpu/drm/nouveau/nouveau_drm.c
+@@ -1284,9 +1284,6 @@ nouveau_ioctls[] = {
+ 	DRM_IOCTL_DEF_DRV(NOUVEAU_EXEC, nouveau_exec_ioctl_exec, DRM_RENDER_ALLOW),
+ };
+ 
+-#define DRM_IOCTL_NOUVEAU_NVIF _IOC(_IOC_READ | _IOC_WRITE, DRM_IOCTL_BASE, \
+-				    DRM_COMMAND_BASE + DRM_NOUVEAU_NVIF, 0)
+-
+ long
+ nouveau_drm_ioctl(struct file *file, unsigned int cmd, unsigned long arg)
+ {
+@@ -1300,10 +1297,14 @@ nouveau_drm_ioctl(struct file *file, unsigned int cmd, unsigned long arg)
+ 		return ret;
+ 	}
+ 
+-	if ((cmd & ~IOCSIZE_MASK) == DRM_IOCTL_NOUVEAU_NVIF)
++	switch (_IOC_NR(cmd) - DRM_COMMAND_BASE) {
++	case DRM_NOUVEAU_NVIF:
+ 		ret = nouveau_abi16_ioctl(filp, (void __user *)arg, _IOC_SIZE(cmd));
+-	else
++		break;
++	default:
+ 		ret = drm_ioctl(file, cmd, arg);
++		break;
++	}
+ 
+ 	pm_runtime_mark_last_busy(dev->dev);
+ 	pm_runtime_put_autosuspend(dev->dev);
+-- 
+2.39.5
+
