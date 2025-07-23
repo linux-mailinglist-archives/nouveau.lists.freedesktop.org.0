@@ -2,96 +2,93 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id 5A3B4B0E957
-	for <lists+nouveau@lfdr.de>; Wed, 23 Jul 2025 05:51:49 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id ED3F4B0E95D
+	for <lists+nouveau@lfdr.de>; Wed, 23 Jul 2025 05:55:28 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 1DD0310E03B;
-	Wed, 23 Jul 2025 03:51:47 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id C590010E0D6;
+	Wed, 23 Jul 2025 03:55:26 +0000 (UTC)
 Authentication-Results: gabe.freedesktop.org;
-	dkim=pass (2048-bit key; secure) header.d=ziepe.ca header.i=@ziepe.ca header.b="iSAETgyp";
+	dkim=pass (2048-bit key; secure) header.d=ziepe.ca header.i=@ziepe.ca header.b="KqFw1uvj";
 	dkim-atps=neutral
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from mail-pf1-f180.google.com (mail-pf1-f180.google.com
- [209.85.210.180])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 9CAC010E098
- for <nouveau@lists.freedesktop.org>; Wed, 23 Jul 2025 03:51:46 +0000 (UTC)
-Received: by mail-pf1-f180.google.com with SMTP id
- d2e1a72fcca58-749248d06faso5294862b3a.2
- for <nouveau@lists.freedesktop.org>; Tue, 22 Jul 2025 20:51:46 -0700 (PDT)
+Received: from mail-pl1-f181.google.com (mail-pl1-f181.google.com
+ [209.85.214.181])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id ABE4610E033
+ for <nouveau@lists.freedesktop.org>; Wed, 23 Jul 2025 03:55:25 +0000 (UTC)
+Received: by mail-pl1-f181.google.com with SMTP id
+ d9443c01a7336-234c5b57557so55036215ad.3
+ for <nouveau@lists.freedesktop.org>; Tue, 22 Jul 2025 20:55:25 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=ziepe.ca; s=google; t=1753242706; x=1753847506; darn=lists.freedesktop.org; 
+ d=ziepe.ca; s=google; t=1753242925; x=1753847725; darn=lists.freedesktop.org; 
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=r0yhqhfmgcWd4Boy+yEMxc9KNWgoVjI2gD67+Le01vg=;
- b=iSAETgypmrizabcldGMRXIuOKBbJEAgGEcK5gh/3qHa4ZBW4y6nIOy0yjG6eJCa9NO
- 7ASj8XuKGnE5ZRzLB9Sbzs3+65tE54J9bWZHa6FCf+QyLbYQihDtFhpWY4aqus/hmdVu
- bpvAcsC7YYzok4xPRvN0r9pMQJ+wMp1XWgkMQrjyDQySpPWzZ6+0aNJId4xjCE/E+cpN
- lzNLLKp8Z9OZUDaA4vdN0CbgCsqqWWleS2tjHvUJCtCjVB2SSMWm2jou+6i2nFzC+BYT
- AnsgOdl56R+46UZ2XaUN4Ud35wtk1gMwLZKIf/2wNwx1SwzmNyWVTS4JxqMkIZQYhauB
- CBkQ==
+ bh=3YRcngTOmImRVZlU/kPn2yZwK6WlVIM67jiQ/OO/PWc=;
+ b=KqFw1uvjPC2PeDqWxPnhrE7gb1RIjSs4LU1cnzDgZVUdO+E3jhowRo+KFiedNKs6TF
+ tRL91zQUVfJHyp6pI2+lzAj/W4cpz5g1VyVwmxFB81it2VN5SxKu6+KFSf3ZZpRYNx5d
+ wxSrqlRyps3R9OGGrG0DGdTLRxS7VBgUCMsDvjJPXTxc6JBhx8UG6uIsWz+Ocm6eSDEO
+ UO2FA12hNCLPiKYTWa76sga3Np+2rTpdiLpxDcgffilvdYF6YwWEOHADp480wCnr6HSm
+ PVUwoO2nAK/ReuDxWJ8pnw0PXhEZnRuwg8Eio2mSKyqMOFurtgQKDENoMEgc3XWEUqCN
+ QM6w==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1753242706; x=1753847506;
+ d=1e100.net; s=20230601; t=1753242925; x=1753847725;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to;
- bh=r0yhqhfmgcWd4Boy+yEMxc9KNWgoVjI2gD67+Le01vg=;
- b=rAPoQY/Eh94NTWj0y9zTuvVrbWcHK+ZERjfOodj+r77GDK7XWoeLfWQq+ve4qoZE9y
- ilCwEzv5plmvoE6/uxnJAqPMqF0WXGXMdx/avbsCwO/GyLeMRSeROFzk6uXg4m2E46qu
- IZq1WOeZYbQTE7+TfU8lxbUUyurJpR9l8r3Vi8bEobduSmM/iaTzmjHI/p3T+mOjDjWH
- VJfNjVBMjRFTdq3wuS1+RzL2ktdIWcR0YMYaY0Uln3hnC6W4kfKdhglorHPSY2OAm+xp
- TvB8lwn+SzwtJ2vC+D01i1VQGofhQ5bC7SMEGk2OZ7zThVS1FvoNP5FB0qviG/8scTss
- AWTw==
+ bh=3YRcngTOmImRVZlU/kPn2yZwK6WlVIM67jiQ/OO/PWc=;
+ b=ISg+YRXB1olf1rhXkaQzXXeBq3D/hRGZnw7bs5mG+BP4taQHkkOMjb1GX4ni7JgRnE
+ 2OHuqtrqNHSj38nbWpQYXQL4wRFUKU+V9H97pe+rtStGhje6z2h9o6Gi/QHV0jY6UfG1
+ /txuiqCEWFA4qiK3yOhgby88FxQS1cY0smUfw2x5aEXq5vZc8sic4j4CDddQAEDedo6S
+ K4fs9/P/DczfsqmHvdr6QEDWvVPHkWW2cwQmIB9ItCNxMCecPypUuj8u+26muCazMOHE
+ baAuRHtkRrE+DoeBFzhZXn6IM/iGhqDQJke41ra/zo/cI/1HG4GV35mjoBLpFYJFOkwW
+ Z3iw==
 X-Forwarded-Encrypted: i=1;
- AJvYcCUNORtaV+FHF6hsJVGsqlwO9N+yoJlN8xB5WK/XDdWBfmr8B8bUFxCiQzOhDN7nov1LDLouUCJe@lists.freedesktop.org
-X-Gm-Message-State: AOJu0YzFM5gGaSp3aWATs0iJE5IN14aWTb+++ou689fHLt6ho4kr7nxp
- aqaFriA1P3YOnFzkeJMOBAspbVXkGNjiVnn0dCGq/8g2YkJHBUCpHu6t4VoyNe7BZT8=
-X-Gm-Gg: ASbGncv56frETv2nx84PUpoJQ+fRwlDLXgglDKwyUtENmaI7Mnb7l4Wb9BdaMoBmP+Q
- obZwRgOo4paIHqlsjNoMydB05ti0pddSIP1MiH5M8WLq8tYNE+QWK1LSeESzuNIKeVCIsmcfnS/
- OYlW889Ql+TTf9d3miEC5SR0Chh0zx7f59eIvgcHF64dmLnTnwmsoOmv+mfIKYKlB7Vy/ut/5R8
- skyAuajqaWVDUenHvrbniRQ76FzxOU61XvCnkBjqa3O+83w7ow7hbVubQ6x12MEllh0JcuoJ0ky
- W5tqTEZEsKVDhBzkTaY6jtG3Fu8VWa0zlNInknLv7ptnSnDeVYvG5Qjh4evIlgflG3/KOu9RBB5
- tvYovqdTRj0BIr6Fwwg1i2bX0853Dh91DYXI=
-X-Google-Smtp-Source: AGHT+IFhuc9YoswnVjbx+w6CW5AJc04rjosHA7fJ9MRqxxtRH8l6eukiOU6gxLlrv7CiSglvAulz8g==
-X-Received: by 2002:a05:6a00:1491:b0:748:f406:b09 with SMTP id
- d2e1a72fcca58-760367de539mr2440550b3a.23.1753242705935; 
- Tue, 22 Jul 2025 20:51:45 -0700 (PDT)
+ AJvYcCUvGV1oKklTccO60PX257eOgdqCgUONQoA20Mj0wMNYs0BkTkRXZxYMI3LdIRXfesGT0mEoEpP6@lists.freedesktop.org
+X-Gm-Message-State: AOJu0YwgyulLMcYZMWP7Nn86cWkyXRtsvX9Um6k6ArQD56h+FeudNcG4
+ 2vXNob0FuvEZ3TOIAGiMX57Ji5icAi4qsYypanA8QHlUrl1J3wj3CNfGs6TG2BNlooQ=
+X-Gm-Gg: ASbGnctINT6htnYGT/w25sXMExOk2cHC3/75OPp31Y3RocKSlAhVQ7Oov8cnaKBxHyk
+ zNZZ/LO8KIfOW9I+4sHCcKQZawFQUqFwlWomumJdIf0zJ02VATceetefC+Trpi4GXO2TaAxRlTg
+ c7J9L4aMN71+9SMv33vpJ7lZPPGGnSZoBh8L+NJW88M0BnxhN+EI0cHZI2RXw22E3HoMN9VhJF9
+ 0op5Sqk8bQMFaiTkphDurRiIqS7KoeiI211pNQOZ/xTBFUTJLbdvlq8qVrd2Gc991unNmsTBnrW
+ 1cEhjcJyfONuXj51g1lNk7KuQDClttFzuhWI9cbR9sPnaBGwSdlaU6o66OvyaOqyomWNXMHSVEC
+ 2asE19Txt0W8v57+OukeF2QcZS/kmaZRco6VogONSYkPp0A==
+X-Google-Smtp-Source: AGHT+IFPdkG2Deg66tYuBh/VvcuRb6SoC/z/9RlnC+W1ttjW1jVLRuT1P2yag8dd/CsKREgJkG37KA==
+X-Received: by 2002:a17:902:e747:b0:234:c2e7:a0e4 with SMTP id
+ d9443c01a7336-23f98164db9mr18866095ad.3.1753242924942; 
+ Tue, 22 Jul 2025 20:55:24 -0700 (PDT)
 Received: from ziepe.ca (S010670037e345dea.cg.shawcable.net. [68.146.128.183])
  by smtp.gmail.com with ESMTPSA id
- d2e1a72fcca58-759c89d3190sm8518497b3a.39.2025.07.22.20.51.42
+ d9443c01a7336-23e3b6efb69sm85898495ad.195.2025.07.22.20.55.23
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 22 Jul 2025 20:51:43 -0700 (PDT)
+ Tue, 22 Jul 2025 20:55:23 -0700 (PDT)
 Received: from jgg by jggl with local (Exim 4.95)
- (envelope-from <jgg@ziepe.ca>) id 1ueQW6-0003Fi-CT;
- Wed, 23 Jul 2025 00:51:42 -0300
-Date: Wed, 23 Jul 2025 00:51:42 -0300
+ (envelope-from <jgg@ziepe.ca>) id 1ueQZe-0003Gp-Gf;
+ Wed, 23 Jul 2025 00:55:22 -0300
+Date: Wed, 23 Jul 2025 00:55:22 -0300
 From: Jason Gunthorpe <jgg@ziepe.ca>
-To: Alistair Popple <apopple@nvidia.com>
-Cc: Matthew Wilcox <willy@infradead.org>, Yonatan Maman <ymaman@nvidia.com>,
+To: Christoph Hellwig <hch@infradead.org>
+Cc: Yonatan Maman <ymaman@nvidia.com>,
  =?utf-8?B?SsOpcsO0bWU=?= Glisse <jglisse@redhat.com>,
  Andrew Morton <akpm@linux-foundation.org>,
  Leon Romanovsky <leon@kernel.org>, Lyude Paul <lyude@redhat.com>,
  Danilo Krummrich <dakr@kernel.org>,
  David Airlie <airlied@gmail.com>, Simona Vetter <simona@ffwll.ch>,
- Ben Skeggs <bskeggs@nvidia.com>, Michael Guralnik <michaelgur@nvidia.com>,
+ Alistair Popple <apopple@nvidia.com>, Ben Skeggs <bskeggs@nvidia.com>,
+ Michael Guralnik <michaelgur@nvidia.com>,
  Or Har-Toov <ohartoov@nvidia.com>,
  Daisuke Matsuda <dskmtsd@gmail.com>, Shay Drory <shayd@nvidia.com>,
  linux-mm@kvack.org, linux-rdma@vger.kernel.org,
  dri-devel@lists.freedesktop.org, nouveau@lists.freedesktop.org,
  linux-kernel@vger.kernel.org, Gal Shalom <GalShalom@nvidia.com>
-Subject: Re: [PATCH v2 1/5] mm/hmm: HMM API to enable P2P DMA for device
- private pages
-Message-ID: <aIBcTpC9Te7YIe4J@ziepe.ca>
+Subject: Re: [PATCH v2 4/5] RDMA/mlx5: Enable P2P DMA with fallback mechanism
+Message-ID: <aIBdKhzft4umCGZO@ziepe.ca>
 References: <20250718115112.3881129-1-ymaman@nvidia.com>
- <20250718115112.3881129-2-ymaman@nvidia.com>
- <aHpXXKTaqp8FUhmq@casper.infradead.org>
- <20250718144442.GG2206214@ziepe.ca>
- <aH4_QaNtIJMrPqOw@casper.infradead.org>
- <7lvduvov3rvfsgixbkyyinnzz3plpp3szxam46ccgjmh6v5d7q@zoz4k723vs3d>
+ <20250718115112.3881129-5-ymaman@nvidia.com>
+ <aH3mTZP7w8KnMLx1@infradead.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
-In-Reply-To: <7lvduvov3rvfsgixbkyyinnzz3plpp3szxam46ccgjmh6v5d7q@zoz4k723vs3d>
+In-Reply-To: <aH3mTZP7w8KnMLx1@infradead.org>
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -106,27 +103,22 @@ List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-On Tue, Jul 22, 2025 at 10:49:10AM +1000, Alistair Popple wrote:
-> > So what is it?
+On Mon, Jul 21, 2025 at 12:03:41AM -0700, Christoph Hellwig wrote:
+> On Fri, Jul 18, 2025 at 02:51:11PM +0300, Yonatan Maman wrote:
+> > From: Yonatan Maman <Ymaman@Nvidia.com>
+> > 
+> > Add support for P2P for MLX5 NIC devices with automatic fallback to
+> > standard DMA when P2P mapping fails.
 > 
-> IMHO a hack, because obviously we shouldn't require real physical addresses for
-> something the CPU can't actually address anyway and this causes real
-> problems
+> That's now how the P2P API works.  You need to check the P2P availability
+> higher up.
 
-IMHO what DEVICE PRIVATE really boils down to is a way to have swap
-entries that point to some kind of opaque driver managed memory.
+How do you mean?
 
-We have alot of assumptions all over about pfn/phys to page
-relationships so anything that has a struct page also has to come with
-a fake PFN today..
+This looks OKish to me, for ODP and HMM it has to check the P2P
+availability on a page by page basis because every single page can be
+a different origin device.
 
-> (eg. it doesn't actually work on anything other than x86_64). There's no reason
-> the "PFN" we store in device-private entries couldn't instead just be an index
-> into some data structure holding pointers to the struct pages. So instead of
-> using pfn_to_page()/page_to_pfn() we would use device_private_index_to_page()
-> and page_to_device_private_index().
-
-It could work, but any of the pfn conversions would have to be tracked
-down.. Could be troublesome.
+There isn't really a higher up here...
 
 Jason
