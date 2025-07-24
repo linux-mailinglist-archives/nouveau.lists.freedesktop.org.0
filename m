@@ -2,84 +2,80 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id 8E947CBAB18
-	for <lists+nouveau@lfdr.de>; Sat, 13 Dec 2025 13:42:41 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id BF642CBAC55
+	for <lists+nouveau@lfdr.de>; Sat, 13 Dec 2025 13:43:54 +0100 (CET)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 5D09F10EA3A;
-	Sat, 13 Dec 2025 12:41:02 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id EAA3610EB54;
+	Sat, 13 Dec 2025 12:41:07 +0000 (UTC)
 Authentication-Results: gabe.freedesktop.org;
-	dkim=permerror (0-bit key) header.d=gmail.com header.i=@gmail.com header.b="SQ3PRlaV";
+	dkim=permerror (0-bit key) header.d=gmail.com header.i=@gmail.com header.b="Ki4/z4Jc";
 	dkim-atps=neutral
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from mail-pl1-f182.google.com (mail-pl1-f182.google.com
- [209.85.214.182])
- by gabe.freedesktop.org (Postfix) with ESMTPS id BD82B10E109;
- Thu, 24 Jul 2025 17:57:54 +0000 (UTC)
-Received: by mail-pl1-f182.google.com with SMTP id
- d9443c01a7336-234b122f2feso117485ad.0; 
- Thu, 24 Jul 2025 10:57:54 -0700 (PDT)
+Received: from mail-qk1-f174.google.com (mail-qk1-f174.google.com
+ [209.85.222.174])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 1344710E29D;
+ Thu, 24 Jul 2025 19:59:28 +0000 (UTC)
+Received: by mail-qk1-f174.google.com with SMTP id
+ af79cd13be357-7e32c95775aso157710385a.3; 
+ Thu, 24 Jul 2025 12:59:28 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1753379874; x=1753984674; darn=lists.freedesktop.org;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=+8UvJuIn0OPJI+DjMgO3jk5kaVoeuzRgCCA1dECQ/gA=;
- b=SQ3PRlaVBom8q1NBcjyZwOtUwsUei+ujjxQ7fE2bx0w9mCWfxMTZ7jn+Fz8dMt5Gfv
- o1NmTkY7VF+x5n7YQ70GrJ4qbMqzXBfhJPKmUjycaLLKP2gl2iJAJf8wJcDt9XGkFWW1
- gGcqzM61p3Z8JAMf4ZEX/CG36qK07tJLF3GUTbeS7qbftV2Od/YhJBmqECWIQq5feBYr
- SU+vLBoFU93l6Ea8asOxHM+PdmiGdzeAFUBC9lLZ8txjmt9OVDxxPwiFLu9f9qMcZtgw
- F3iqCnWKlT52hQOLEnekmpjtQxrFCNAJzHr2yxQsoasAT9r5ryPu+Ewn/AHz7ZGKmEDc
- rUjA==
+ d=gmail.com; s=20230601; t=1753387168; x=1753991968; darn=lists.freedesktop.org;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=2glPXiLDXj+7i+zys0K4XQZSPXsH6Jhnylbt4ZU6Pz8=;
+ b=Ki4/z4JckEC/8lvzC/q5pcUq/sU2yKv+0RvoVrUHjGyNhjbFYUK4hiJAS9qafpooLR
+ Jo1VkMz2PBNQNygEzg0+tiy0hH6DeULh5dEkI2XHa0ELM2AwYuH7f8HkqtS10q6LtWHw
+ bxE7qAPozB0u5hZx39y+AZK0tXUI+tTu3TtCGWXMHXr8ckKkgaSjPTJiR1pdgL7WBbqN
+ NcfEObUSR4COcmXpjnJ+6wzhp493noRtyKtsa75Csw9xpRXnTg0+PGFOmYsbLeXsRPP3
+ F4tX5ttoWOkhejKv1BNYxged0oCT5xniqkKGMJiujyPzzZEmy0Dd5JbO29JeGjKw2TnC
+ xPFQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1753379874; x=1753984674;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=+8UvJuIn0OPJI+DjMgO3jk5kaVoeuzRgCCA1dECQ/gA=;
- b=BLT8X+Yfup4rbzaFtLZcZ3cotsxd6uy3XNnT6PgsiCXr4K0HpnaIQYJrbQICsAtbtE
- K4o/hQXn4wUBUA/ye+eZnXJZHiqIm+ixzWugucBWlgjotfRNIlbETNdFggOSF82redTg
- DwVBbwMNwb6P13afukHSJ8PCxobLHnWRau5OTURs9RmEDyh2ClAWnarqP9S8+Dw6ffu0
- Pwj0e4vf12M8pPho9lEBc3P9d7YbqC6On65B+dA4VZqryf6vY08OHiPina7dYK4VOQ8e
- Q2x8Xk9RS71PFw//fTNOckVL381ZAkDBL3a0GVYlLMULTIPVZsYZ76VFFAt4etdOG39n
- ftow==
+ d=1e100.net; s=20230601; t=1753387168; x=1753991968;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=2glPXiLDXj+7i+zys0K4XQZSPXsH6Jhnylbt4ZU6Pz8=;
+ b=tis+KmOfjOSXAndCqdDyVf6S5QuaUAM+8CS8/61/q4Tmj0nNsQkG46w2X9da1G1Pq9
+ q0VbQNQQdoZRBsJMpzuLZAr+otFQVkvMB4WpZ0X6YJH+KcpV+77P3nfIm8aQXaF8sx9A
+ NN/PgaQ8QJdGnkbRrKwgyYy5nRP8uwy1bt+xHhkxzbE94Bfmu236JfObPGSDxgSkwo+c
+ uVTSmWupTuhMDDcunyqLgIBgtysS1KzgFqydpGPosbf6ys013/p1NMRoIxI3HZXRGIt5
+ 8U7v32fMYnoDvqLI5nNVzxvjqhJN8YIB7Tg82ASxSwQ7Ur6dRSKg0yd/b0U9K68Llwoq
+ 0Q5Q==
 X-Forwarded-Encrypted: i=1;
- AJvYcCWoR2zpO3E/eRkgk8q4JztNf8fnTFEtsk/V3owaS9sAYSB74SpbfXv8T02nB3OgnmXkQpAUWKCGSzM=@lists.freedesktop.org,
- AJvYcCXqG6tU25ExDNdYtjjHgO3pfw7f32FR4zxbGrzROdQwMzmXOSA/GtklOOKr8Q8aUnS7x5nRqQTzmA==@lists.freedesktop.org
-X-Gm-Message-State: AOJu0YytmSsLY+nxCxmkMS9Ge2J2Mgm0aWrT8Yfst8/UFWnQG+u68lfn
- QMRk/k9/S9DbDvs1jtbCxDP1rPdu0jYy9kMcBKxLGW9t+LfExJngXtoNFYYyvqhNrFu1I/qzCUL
- sH7XYw5ly7Cm6JtNv2aQCdN+0hcMVo1Q=
-X-Gm-Gg: ASbGnctZN5LYNoUPjJWt1G7hCKQZyyuz1xzNawrH1wYUjbDJQBpRtledBI/KO66uSXv
- FVlXR2lZ+DH62LZX2UUbLmOLrO1u5O3tM+WkQAjkE49Zcq7OHJhjmTQmVYNGOqSsomt5pwVbsap
- KO75Std3LlbhYglUCIZi26ICPdpqXNPBUl53Y1xD6CKOolaFfRivM7cHunvsOApATULmzvYZHzB
- wHPSmyB
-X-Google-Smtp-Source: AGHT+IEAhOyud9kcbqXxowjJUbxNlqWbJT7GJpdyKPEF2m9XE+mf16rjfgmV2MlnEZtVjRLDvU7+lrC48/cD3la2z1c=
-X-Received: by 2002:a17:903:1aac:b0:23f:9aae:6f0d with SMTP id
- d9443c01a7336-23f9aae7183mr37615165ad.6.1753379873956; Thu, 24 Jul 2025
- 10:57:53 -0700 (PDT)
+ AJvYcCXUxTVl9QxL3JkQFjwCc5+yfYwADBtFg3s7WJqnA/yrUhBqXktSd9qKxuk0x+jpgW/msuwWHCM0@lists.freedesktop.org
+X-Gm-Message-State: AOJu0Yx/wLyplcewpdSUIPnI5Szj3DAgSDt98kZlCdxg/+4SGaeXT+oF
+ Z+o3u7VAyqQTzUIIXtWFgsaElJM8RworTrFsWd4bt7C6cDJIyJBe9bjk
+X-Gm-Gg: ASbGnctdcsftUz0l28Y4D44Ag9Idsz7qDiyVWbD42n2s5k9mLu2tdWj0bqbZRR41EMp
+ HjrU8sCYkf/985PeNevTEQGmXFJcM6xbkzEOYjUfmJ3mmeWIiLBBPLr0GHWgoHXxXCpTnXct6fp
+ +d98jGH6pIG0sdh53Rc8blTqhawnLYuc+GxpAswWXqdyKcgiS9MsjJHlXmopPv4ibk+WPOZ9s2S
+ RtYnRbbhsUt1Qb+PI0VcEUrhRbifcSTQRErNItJVQmHEn5MZUtmDov0sSLPtg4Kv0a/ArtSRQrg
+ oYn8lz28ubZM0u+bKkgeuWuD1o5/md7uXF860Wt/oyH7/OnI5ENCnsBrro703flCu0IxvNa25tw
+ c80E2yHSILXKBdfvsH2oy4g==
+X-Google-Smtp-Source: AGHT+IE8tiKXPF+rPmVC2uaEgbgWJXzxROd8gqRk6866T7szqRWjDH57DUs1ux8XzdCpbhD/gUk/rg==
+X-Received: by 2002:a05:620a:306:b0:7d4:4e42:7b43 with SMTP id
+ af79cd13be357-7e62a17cd67mr977879985a.30.1753387167675; 
+ Thu, 24 Jul 2025 12:59:27 -0700 (PDT)
+Received: from iman-pc.home ([142.186.9.88]) by smtp.gmail.com with ESMTPSA id
+ af79cd13be357-7e632e1a687sm165994985a.50.2025.07.24.12.59.26
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Thu, 24 Jul 2025 12:59:27 -0700 (PDT)
+From: Seyediman Seyedarab <imandevel@gmail.com>
+X-Google-Original-From: Seyediman Seyedarab <ImanDevel@gmail.com>
+To: lyude@redhat.com,
+	dakr@kernel.org,
+	airlied@gmail.com,
+	simona@ffwll.ch
+Cc: dri-devel@lists.freedesktop.org, nouveau@lists.freedesktop.org,
+ linux-kernel@vger.kernel.org, Seyediman Seyedarab <ImanDevel@gmail.com>
+Subject: [PATCH] drm/nouveau: replace snprintf() with scnprintf() in
+ nvkm_snprintbf()
+Date: Thu, 24 Jul 2025 15:59:13 -0400
+Message-ID: <20250724195913.60742-1-ImanDevel@gmail.com>
+X-Mailer: git-send-email 2.50.1
 MIME-Version: 1.0
-References: <20250724165441.2105632-1-ojeda@kernel.org>
- <DBKG6CA32OO0.368N1Y6VMIUTL@kernel.org>
-In-Reply-To: <DBKG6CA32OO0.368N1Y6VMIUTL@kernel.org>
-From: Miguel Ojeda <miguel.ojeda.sandonis@gmail.com>
-Date: Thu, 24 Jul 2025 19:57:40 +0200
-X-Gm-Features: Ac12FXwN0CMehniS1G7J0FWaHdQIDWYqXa1YTpgsiVMs45pPNA405NE1QlSsAHI
-Message-ID: <CANiq72ktx9JsTXN_HTfjGWHxpBh430tkxHE2xL_1BQB2yb16rA@mail.gmail.com>
-Subject: Re: [PATCH] drm: nova-drm: fix 32-bit arm build
-To: Danilo Krummrich <dakr@kernel.org>
-Cc: Miguel Ojeda <ojeda@kernel.org>, David Airlie <airlied@gmail.com>,
- Simona Vetter <simona@ffwll.ch>, 
- Alex Gaynor <alex.gaynor@gmail.com>, nouveau@lists.freedesktop.org, 
- dri-devel@lists.freedesktop.org, Boqun Feng <boqun.feng@gmail.com>, 
- Gary Guo <gary@garyguo.net>,
- =?UTF-8?Q?Bj=C3=B6rn_Roy_Baron?= <bjorn3_gh@protonmail.com>, 
- Benno Lossin <lossin@kernel.org>, Andreas Hindborg <a.hindborg@kernel.org>, 
- Alice Ryhl <aliceryhl@google.com>, Trevor Gross <tmgross@umich.edu>,
- rust-for-linux@vger.kernel.org, 
- linux-kernel@vger.kernel.org, patches@lists.linux.dev
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-X-Mailman-Approved-At: Sat, 13 Dec 2025 12:40:47 +0000
+Content-Transfer-Encoding: 8bit
+X-Mailman-Approved-At: Sat, 13 Dec 2025 12:40:52 +0000
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -94,32 +90,32 @@ List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-On Thu, Jul 24, 2025 at 7:05=E2=80=AFPM Danilo Krummrich <dakr@kernel.org> =
-wrote:
->
-> I think I will follow up with a function to perform the conversion in a s=
-ingle
-> place, but I really like the idea of a special clippy annotation to tell =
-clippy
-> to not warn about unnecessary into() conversions for a specific type alia=
-s, such
-> as ResourceSize.
->
-> Do we agree that we want something like this? Do we even have a feature r=
-equest
-> for this already?
+snprintf() returns the number of characters that *would* have been
+written, which can overestimate how much you actually wrote to the
+buffer in case of truncation. That leads to 'data += this' advancing
+the pointer past the end of the buffer and size going negative.
 
-I think we should at least ask -- done here:
+Switching to scnprintf() prevents potential buffer overflows and ensures
+consistent behavior when building the output string.
 
-    https://github.com/rust-lang/rust-clippy/issues/15337
+Signed-off-by: Seyediman Seyedarab <ImanDevel@gmail.com>
+---
+ drivers/gpu/drm/nouveau/nvkm/core/enum.c | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-Though, thinking about it, an explicit function may provide value
-nevertheless to clearly see where this happens, and it also means that
-when we see `into()` we know it cannot be a no-op.
+diff --git a/drivers/gpu/drm/nouveau/nvkm/core/enum.c b/drivers/gpu/drm/nouveau/nvkm/core/enum.c
+index b9581feb24cc..a23b40b27b81 100644
+--- a/drivers/gpu/drm/nouveau/nvkm/core/enum.c
++++ b/drivers/gpu/drm/nouveau/nvkm/core/enum.c
+@@ -44,7 +44,7 @@ nvkm_snprintbf(char *data, int size, const struct nvkm_bitfield *bf, u32 value)
+ 	bool space = false;
+ 	while (size >= 1 && bf->name) {
+ 		if (value & bf->mask) {
+-			int this = snprintf(data, size, "%s%s",
++			int this = scnprintf(data, size, "%s%s",
+ 					    space ? " " : "", bf->name);
+ 			size -= this;
+ 			data += this;
+-- 
+2.50.1
 
-Having said that, regardless of what we do for that lint, giving more
-information to the compiler is generally a good idea, even if only for
-notes/diagnostics etc.
-
-Cheers,
-Miguel
