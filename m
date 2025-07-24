@@ -2,52 +2,70 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id 240F7B11027
-	for <lists+nouveau@lfdr.de>; Thu, 24 Jul 2025 19:05:36 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 568DAB1117D
+	for <lists+nouveau@lfdr.de>; Thu, 24 Jul 2025 21:16:01 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 43CA910E047;
-	Thu, 24 Jul 2025 17:05:34 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 21E4810E08E;
+	Thu, 24 Jul 2025 19:15:59 +0000 (UTC)
 Authentication-Results: gabe.freedesktop.org;
-	dkim=pass (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="HRJnJSQR";
+	dkim=pass (1024-bit key; unprotected) header.d=redhat.com header.i=@redhat.com header.b="BS1stWJ2";
 	dkim-atps=neutral
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from dfw.source.kernel.org (dfw.source.kernel.org [139.178.84.217])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 899B410E047;
- Thu, 24 Jul 2025 17:05:32 +0000 (UTC)
-Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by dfw.source.kernel.org (Postfix) with ESMTP id 137875C564D;
- Thu, 24 Jul 2025 17:05:32 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id AFBD1C4CEF8;
- Thu, 24 Jul 2025 17:05:28 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1753376731;
- bh=sg3NW9AjretcgkE6d+kewjNw2dnztGx4Ya+hYU2OpQc=;
- h=Date:Subject:Cc:To:From:References:In-Reply-To:From;
- b=HRJnJSQR+MK9Oxsd87E6Fac8XKPvf1Qd97ZHcE/xZ6lVVOgaVltIC89t11uYBwJ2w
- MEorXePy7QsGfObA8m2y+mV5jY9WKjWBDCvK0/oIdlyd6T3QwE8IoxV05g8BIRH4Ew
- 08sAjcD44S0Me6cNaCxw25YUNZRbVcJae/ijfWKKj+70N1EzQoQISa80qqiWNEZVt0
- Eay+rWLHD6J27K8mclV247u2nLNLTs4DtCXsmm4kEHVFR+pFe5mWj//b5+ZmYVXHUQ
- XEwnAva69qbiKTEy6R+ndUYvduz9cq8tCcUy9PLoERluxdL8W3Mkv6ARAffG7/UVHT
- JF70LX/uKROUg==
-Mime-Version: 1.0
-Content-Transfer-Encoding: quoted-printable
-Content-Type: text/plain; charset=UTF-8
-Date: Thu, 24 Jul 2025 19:05:26 +0200
-Message-Id: <DBKG6CA32OO0.368N1Y6VMIUTL@kernel.org>
-Subject: Re: [PATCH] drm: nova-drm: fix 32-bit arm build
-Cc: "David Airlie" <airlied@gmail.com>, "Simona Vetter" <simona@ffwll.ch>,
- "Alex Gaynor" <alex.gaynor@gmail.com>, <nouveau@lists.freedesktop.org>,
- <dri-devel@lists.freedesktop.org>, "Boqun Feng" <boqun.feng@gmail.com>,
- "Gary Guo" <gary@garyguo.net>, =?utf-8?q?Bj=C3=B6rn_Roy_Baron?=
- <bjorn3_gh@protonmail.com>, "Benno Lossin" <lossin@kernel.org>, "Andreas
- Hindborg" <a.hindborg@kernel.org>, "Alice Ryhl" <aliceryhl@google.com>,
- "Trevor Gross" <tmgross@umich.edu>, <rust-for-linux@vger.kernel.org>,
- <linux-kernel@vger.kernel.org>, <patches@lists.linux.dev>
-To: "Miguel Ojeda" <ojeda@kernel.org>
-From: "Danilo Krummrich" <dakr@kernel.org>
-References: <20250724165441.2105632-1-ojeda@kernel.org>
-In-Reply-To: <20250724165441.2105632-1-ojeda@kernel.org>
+Received: from us-smtp-delivery-124.mimecast.com
+ (us-smtp-delivery-124.mimecast.com [170.10.129.124])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id AB1F510E02E
+ for <nouveau@lists.freedesktop.org>; Thu, 24 Jul 2025 19:15:56 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
+ s=mimecast20190719; t=1753384555;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:
+ content-transfer-encoding:content-transfer-encoding;
+ bh=rDZbSpivZvNtqNNz2nVMJ9AyhIB6jJidbuEul+8M8EM=;
+ b=BS1stWJ21QhxizY8jhC/aAoX38Vgynj4UWjOAbpxQf6vfwCoSl9CADo2yWiWZf1frzzts1
+ DdvMbFzI58z0xNTnpEAeekrEPKJki7d9VOwkA0GskFaHawTAhF/poGrxY20lWNsGNtZ4ue
+ jjlO6EzaIZTAgjc9vGDETbYoEyg8jyc=
+Received: from mx-prod-mc-02.mail-002.prod.us-west-2.aws.redhat.com
+ (ec2-54-186-198-63.us-west-2.compute.amazonaws.com [54.186.198.63]) by
+ relay.mimecast.com with ESMTP with STARTTLS (version=TLSv1.3,
+ cipher=TLS_AES_256_GCM_SHA384) id us-mta-399-_7VPjU56PVStwyCwyxYvTQ-1; Thu,
+ 24 Jul 2025 15:15:51 -0400
+X-MC-Unique: _7VPjU56PVStwyCwyxYvTQ-1
+X-Mimecast-MFC-AGG-ID: _7VPjU56PVStwyCwyxYvTQ_1753384549
+Received: from mx-prod-int-03.mail-002.prod.us-west-2.aws.redhat.com
+ (mx-prod-int-03.mail-002.prod.us-west-2.aws.redhat.com [10.30.177.12])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
+ (No client certificate requested)
+ by mx-prod-mc-02.mail-002.prod.us-west-2.aws.redhat.com (Postfix) with ESMTPS
+ id 2213B1956056; Thu, 24 Jul 2025 19:15:48 +0000 (UTC)
+Received: from chopper.lyude.net (unknown [10.22.88.223])
+ by mx-prod-int-03.mail-002.prod.us-west-2.aws.redhat.com (Postfix) with ESMTP
+ id D5C4B1966665; Thu, 24 Jul 2025 19:15:42 +0000 (UTC)
+From: Lyude Paul <lyude@redhat.com>
+To: nouveau@lists.freedesktop.org, dri-devel@lists.freedesktop.org,
+ rust-for-linux@vger.kernel.org,
+ Daniel Almeida <daniel.almeida@collabora.com>,
+ Danilo Krummrich <dakr@kernel.org>
+Cc: David Airlie <airlied@gmail.com>, Simona Vetter <simona@ffwll.ch>,
+ Maarten Lankhorst <maarten.lankhorst@linux.intel.com>,
+ Maxime Ripard <mripard@kernel.org>,
+ Thomas Zimmermann <tzimmermann@suse.de>, Miguel Ojeda <ojeda@kernel.org>,
+ Alex Gaynor <alex.gaynor@gmail.com>, Boqun Feng <boqun.feng@gmail.com>,
+ Gary Guo <gary@garyguo.net>,
+ =?UTF-8?q?Bj=C3=B6rn=20Roy=20Baron?= <bjorn3_gh@protonmail.com>,
+ Benno Lossin <lossin@kernel.org>, Andreas Hindborg <a.hindborg@kernel.org>,
+ Alice Ryhl <aliceryhl@google.com>, Trevor Gross <tmgross@umich.edu>,
+ Asahi Lina <lina+kernel@asahilina.net>,
+ Alyssa Rosenzweig <alyssa@rosenzweig.io>,
+ linux-kernel@vger.kernel.org (open list)
+Subject: [PATCH] Partially revert "rust: drm: gem: Implement AlwaysRefCounted
+ for all gem objects automatically"
+Date: Thu, 24 Jul 2025 15:15:18 -0400
+Message-ID: <20250724191523.561314-1-lyude@redhat.com>
+MIME-Version: 1.0
+Content-Transfer-Encoding: 8bit
+X-Scanned-By: MIMEDefang 3.0 on 10.30.177.12
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -62,51 +80,82 @@ List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-On Thu Jul 24, 2025 at 6:54 PM CEST, Miguel Ojeda wrote:
-> In 32-bit arm, the build fails with:
->
->     error[E0308]: mismatched types
->       --> drivers/gpu/drm/nova/file.rs:42:28
->        |
->     42 |         getparam.set_value(value);
->        |                  --------- ^^^^^ expected `u64`, found `u32`
->        |                  |
->        |                  arguments to this method are incorrect
->        |
->     note: method defined here
->       --> drivers/gpu/drm/nova/uapi.rs:29:12
->        |
->     29 |     pub fn set_value(&self, v: u64) {
->        |            ^^^^^^^^^        ------
->     help: you can convert a `u32` to a `u64`
->        |
->     42 |         getparam.set_value(value.into());
->        |                                 +++++++
->
-> The reason is that `Getparam::set_value` takes a `u64` (from the UAPI),
-> but `pci::Device::resource_len()` returns a `resource_size_t`, which is a
-> `phys_addr_t`, which may be 32- or 64-bit.
->
-> Thus add an `into()` call to support the 32-bit case, while allowing the
-> Clippy lint that complains in the 64-bit case where the type is the same.
->
-> Fixes: cdeaeb9dd762 ("drm: nova-drm: add initial driver skeleton")
-> Signed-off-by: Miguel Ojeda <ojeda@kernel.org>
+I made a very silly mistake with this commit that managed to slip by
+because I forgot to mzke sure rvkms was rebased before testing my work last
+- we can't do blanket implementations like this due to rust's orphan rule.
 
-Thanks -- will take it through -fixes once rc-1 is out.
+The code -does- build just fine right now, but it doesn't with the ongoing
+bindings for gem shmem. So, just revert this and we'll introduce a macro
+for implementing AlwaysRefCounted individually for each type of gem
+implementation.
 
-> ---
-> As discussed, it may be best to have a newtype, or at least a function
-> to perform this -- here it is the minimal fix nevertheless.
+Note that we leave the IntoGEMObject since it is true that all gem objects
+are refcounted, so any implementations that are added should be
+implementing AlwaysRefCounted anyhow.
 
-I think I will follow up with a function to perform the conversion in a sin=
-gle
-place, but I really like the idea of a special clippy annotation to tell cl=
-ippy
-to not warn about unnecessary into() conversions for a specific type alias,=
- such
-as ResourceSize.
+This reverts commit 38cb08c3fcd3f3b1d0225dcec8ae50fab5751549.
 
-Do we agree that we want something like this? Do we even have a feature req=
-uest
-for this already?
+Signed-off-by: Lyude Paul <lyude@redhat.com>
+---
+ rust/kernel/drm/gem/mod.rs | 36 ++++++++++++++++--------------------
+ 1 file changed, 16 insertions(+), 20 deletions(-)
+
+diff --git a/rust/kernel/drm/gem/mod.rs b/rust/kernel/drm/gem/mod.rs
+index 4cd69fa84318c..db65807dbce88 100644
+--- a/rust/kernel/drm/gem/mod.rs
++++ b/rust/kernel/drm/gem/mod.rs
+@@ -54,26 +54,6 @@ pub trait IntoGEMObject: Sized + super::private::Sealed + AlwaysRefCounted {
+     unsafe fn as_ref<'a>(self_ptr: *mut bindings::drm_gem_object) -> &'a Self;
+ }
+ 
+-// SAFETY: All gem objects are refcounted.
+-unsafe impl<T: IntoGEMObject> AlwaysRefCounted for T {
+-    fn inc_ref(&self) {
+-        // SAFETY: The existence of a shared reference guarantees that the refcount is non-zero.
+-        unsafe { bindings::drm_gem_object_get(self.as_raw()) };
+-    }
+-
+-    unsafe fn dec_ref(obj: NonNull<Self>) {
+-        // SAFETY: We either hold the only refcount on `obj`, or one of many - meaning that no one
+-        // else could possibly hold a mutable reference to `obj` and thus this immutable reference
+-        // is safe.
+-        let obj = unsafe { obj.as_ref() }.as_raw();
+-
+-        // SAFETY:
+-        // - The safety requirements guarantee that the refcount is non-zero.
+-        // - We hold no references to `obj` now, making it safe for us to potentially deallocate it.
+-        unsafe { bindings::drm_gem_object_put(obj) };
+-    }
+-}
+-
+ /// Trait which must be implemented by drivers using base GEM objects.
+ pub trait DriverObject: BaseDriverObject<Object<Self>> {
+     /// Parent `Driver` for this object.
+@@ -287,6 +267,22 @@ extern "C" fn free_callback(obj: *mut bindings::drm_gem_object) {
+     }
+ }
+ 
++// SAFETY: Instances of `Object<T>` are always reference-counted.
++unsafe impl<T: DriverObject> crate::types::AlwaysRefCounted for Object<T> {
++    fn inc_ref(&self) {
++        // SAFETY: The existence of a shared reference guarantees that the refcount is non-zero.
++        unsafe { bindings::drm_gem_object_get(self.as_raw()) };
++    }
++
++    unsafe fn dec_ref(obj: NonNull<Self>) {
++        // SAFETY: `obj` is a valid pointer to an `Object<T>`.
++        let obj = unsafe { obj.as_ref() };
++
++        // SAFETY: The safety requirements guarantee that the refcount is non-zero.
++        unsafe { bindings::drm_gem_object_put(obj.as_raw()) }
++    }
++}
++
+ impl<T: DriverObject> super::private::Sealed for Object<T> {}
+ 
+ impl<T: DriverObject> Deref for Object<T> {
+
+base-commit: 89be9a83ccf1f88522317ce02f854f30d6115c41
+-- 
+2.50.0
+
