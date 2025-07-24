@@ -2,41 +2,41 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id C0A8CB0ED85
-	for <lists+nouveau@lfdr.de>; Wed, 23 Jul 2025 10:44:21 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 28A5AB101C9
+	for <lists+nouveau@lfdr.de>; Thu, 24 Jul 2025 09:30:48 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 2262F10E0DE;
-	Wed, 23 Jul 2025 08:44:20 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 6FACB10E1CA;
+	Thu, 24 Jul 2025 07:30:46 +0000 (UTC)
 Authentication-Results: gabe.freedesktop.org;
-	dkim=pass (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="M/jQIqzd";
+	dkim=fail reason="signature verification failed" (2048-bit key; secure) header.d=infradead.org header.i=@infradead.org header.b="Wcm48Xl9";
 	dkim-atps=neutral
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from nyc.source.kernel.org (nyc.source.kernel.org [147.75.193.91])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 1399D10E0DE;
- Wed, 23 Jul 2025 08:44:19 +0000 (UTC)
-Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by nyc.source.kernel.org (Postfix) with ESMTP id E4377A4B4B4;
- Wed, 23 Jul 2025 08:44:17 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 077C7C4CEF4;
- Wed, 23 Jul 2025 08:44:16 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1753260257;
- bh=Cj91CGuGavrB/ilqOlKndjatFWOMgTxiTvWRwwSAyXM=;
- h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
- b=M/jQIqzdz82x0nWSTcq4f0buV83Pk0LJSgQODn5pjrmjpwv5oy9a1d8mvYOCYdVOH
- bdXSPn4PgwRtO9dST3nKHT5TYXR4D0lbuq0VYMy2LK2WQ8tGkqd62MiFZw3E5YA1+V
- APES5GMOW46WRZWXbPOt0PFGaEfxcmpX5ZU7O9INHYCZGqFw/ylFGGERRmyWD2Q5u+
- C0riJKs1eAlwPzfqs69FDmjTezmgWk9NwcQbHqxK4y8D01b28cCc7w3FT3bMoQXkso
- mDdwnRJk7eIzRHR57iMNUzD9DuAxsqerjLb5vvC3jhbdTL1pfEkFX8w1K57J9Sc/r3
- j+tg72bbOJh1Q==
-Date: Wed, 23 Jul 2025 11:44:13 +0300
-From: Leon Romanovsky <leon@kernel.org>
+Received: from bombadil.infradead.org (bombadil.infradead.org
+ [198.137.202.133])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 4019010E1CA;
+ Thu, 24 Jul 2025 07:30:40 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
+ d=infradead.org; s=bombadil.20210309; h=In-Reply-To:Content-Type:MIME-Version
+ :References:Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:
+ Content-Transfer-Encoding:Content-ID:Content-Description;
+ bh=x0ieeULae3wZoXFYbacES0pRJT+dyok9yRpzdF6F6T0=; b=Wcm48Xl9he+9gkl3mD7JfqaQce
+ x8ztVwaaQNB53A5F0yo+KJrnZBPNw4lAAfrPl0N8sY5OVPJkJwDMEuhieCsS8U2mg6MaQuEwoJP8A
+ xMtVgtwNnUmpskEXT899TV8M6A/t15OZ56RkAqlELlIhtEg6MJI7GHk5/pnYN3CooEIxTiMxJOupF
+ e/fzMsUaHaqch4kbHHT4PsbtVhXeYYpulwGUn4Mg0RNT9PSKNDvu085SQy4hz65m6cPkTug6Yab24
+ Ok2AgKIsmRhAGwRl+UsJpcNYYufuJ2+ztViaJE6jZJ4iGTvhPqtPDql8iGT7pCunDpG/dtx/NVm61
+ BqqmT/kw==;
+Received: from hch by bombadil.infradead.org with local (Exim 4.98.2 #2 (Red
+ Hat Linux)) id 1ueqPS-00000006i6Y-1TLE;
+ Thu, 24 Jul 2025 07:30:34 +0000
+Date: Thu, 24 Jul 2025 00:30:34 -0700
+From: Christoph Hellwig <hch@infradead.org>
 To: Jason Gunthorpe <jgg@ziepe.ca>
-Cc: Yonatan Maman <ymaman@nvidia.com>,
+Cc: Christoph Hellwig <hch@infradead.org>, Yonatan Maman <ymaman@nvidia.com>,
  =?iso-8859-1?B?Suly9G1l?= Glisse <jglisse@redhat.com>,
  Andrew Morton <akpm@linux-foundation.org>,
- Lyude Paul <lyude@redhat.com>, Danilo Krummrich <dakr@kernel.org>,
+ Leon Romanovsky <leon@kernel.org>, Lyude Paul <lyude@redhat.com>,
+ Danilo Krummrich <dakr@kernel.org>,
  David Airlie <airlied@gmail.com>, Simona Vetter <simona@ffwll.ch>,
  Alistair Popple <apopple@nvidia.com>, Ben Skeggs <bskeggs@nvidia.com>,
  Michael Guralnik <michaelgur@nvidia.com>,
@@ -44,18 +44,18 @@ Cc: Yonatan Maman <ymaman@nvidia.com>,
  Daisuke Matsuda <dskmtsd@gmail.com>, Shay Drory <shayd@nvidia.com>,
  linux-mm@kvack.org, linux-rdma@vger.kernel.org,
  dri-devel@lists.freedesktop.org, nouveau@lists.freedesktop.org,
- linux-kernel@vger.kernel.org
-Subject: Re: [PATCH v2 0/5] *** GPU Direct RDMA (P2P DMA) for Device Private
- Pages ***
-Message-ID: <20250723084413.GO402218@unreal>
+ linux-kernel@vger.kernel.org, Gal Shalom <GalShalom@nvidia.com>
+Subject: Re: [PATCH v2 4/5] RDMA/mlx5: Enable P2P DMA with fallback mechanism
+Message-ID: <aIHhGi3adOiLykJn@infradead.org>
 References: <20250718115112.3881129-1-ymaman@nvidia.com>
- <20250720103003.GH402218@unreal>
- <35ff6080-9cb8-43cf-b77a-9ef3afd2ae59@nvidia.com>
- <20250721064904.GK402218@unreal> <aIBfIxVBR/3ig/O/@ziepe.ca>
+ <20250718115112.3881129-5-ymaman@nvidia.com>
+ <aH3mTZP7w8KnMLx1@infradead.org> <aIBdKhzft4umCGZO@ziepe.ca>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
-In-Reply-To: <aIBfIxVBR/3ig/O/@ziepe.ca>
+In-Reply-To: <aIBdKhzft4umCGZO@ziepe.ca>
+X-SRS-Rewrite: SMTP reverse-path rewritten from <hch@infradead.org> by
+ bombadil.infradead.org. See http://www.infradead.org/rpr.html
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -70,18 +70,25 @@ List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-On Wed, Jul 23, 2025 at 01:03:47AM -0300, Jason Gunthorpe wrote:
-> On Mon, Jul 21, 2025 at 09:49:04AM +0300, Leon Romanovsky wrote:
-> > > In fact, hmm_range_fault doesn't have information about the destination
-> > > device that will perform the DMA mapping.
+On Wed, Jul 23, 2025 at 12:55:22AM -0300, Jason Gunthorpe wrote:
+> On Mon, Jul 21, 2025 at 12:03:41AM -0700, Christoph Hellwig wrote:
+> > On Fri, Jul 18, 2025 at 02:51:11PM +0300, Yonatan Maman wrote:
+> > > From: Yonatan Maman <Ymaman@Nvidia.com>
+> > > 
+> > > Add support for P2P for MLX5 NIC devices with automatic fallback to
+> > > standard DMA when P2P mapping fails.
 > > 
-> > So probably you need to teach HMM to perform page_faults on specific device.
+> > That's now how the P2P API works.  You need to check the P2P availability
+> > higher up.
 > 
-> That isn't how the HMM side is supposed to work, this API is just
-> giving the one and only P2P page that is backing the device private.
+> How do you mean?
+> 
+> This looks OKish to me, for ODP and HMM it has to check the P2P
+> availability on a page by page basis because every single page can be
+> a different origin device.
+> 
+> There isn't really a higher up here...
 
-I know, but somehow you need to say: "please give me p2p pages for
-specific device and not random device in the system as it is now".
-This is what is missing from my PoV.
+The DMA API expects the caller to already check for connectability,
+why can't HMM do that like everyone else?
 
-Thanks
