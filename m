@@ -2,84 +2,88 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id B80A8CBAC5E
-	for <lists+nouveau@lfdr.de>; Sat, 13 Dec 2025 13:43:56 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id BFB23CBAD9A
+	for <lists+nouveau@lfdr.de>; Sat, 13 Dec 2025 13:45:16 +0100 (CET)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id BC66F10EB4E;
-	Sat, 13 Dec 2025 12:41:07 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 5644A10EB73;
+	Sat, 13 Dec 2025 12:41:32 +0000 (UTC)
 Authentication-Results: gabe.freedesktop.org;
-	dkim=permerror (0-bit key) header.d=gmail.com header.i=@gmail.com header.b="WJ6RvsWL";
+	dkim=permerror (0-bit key) header.d=gmail.com header.i=@gmail.com header.b="TNXVP7mo";
 	dkim-atps=neutral
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from mail-pl1-f173.google.com (mail-pl1-f173.google.com
- [209.85.214.173])
- by gabe.freedesktop.org (Postfix) with ESMTPS id EF0EB10E091;
- Thu, 24 Jul 2025 20:29:11 +0000 (UTC)
-Received: by mail-pl1-f173.google.com with SMTP id
- d9443c01a7336-23c8f163476so1228585ad.2; 
- Thu, 24 Jul 2025 13:29:11 -0700 (PDT)
+Received: from mail-wm1-f44.google.com (mail-wm1-f44.google.com
+ [209.85.128.44])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 8194A10E1FA;
+ Fri, 25 Jul 2025 12:20:44 +0000 (UTC)
+Received: by mail-wm1-f44.google.com with SMTP id
+ 5b1f17b1804b1-454f428038eso19532145e9.2; 
+ Fri, 25 Jul 2025 05:20:44 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1753388951; x=1753993751; darn=lists.freedesktop.org;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=ZM/cVPMjqnDcAHexC1gwfwrsHc2MgoIp0pKcizUhlwQ=;
- b=WJ6RvsWLcrHDfoaxYTy9Oyk3CMSSULg1M+Um9kn7PGAFSYSS66AlsdyTe14+ZsBZmb
- yNLKoAhtvO3U3Ifuo5OdSkFjHij3Ju+dy7uHK3gpuaEDocBwhKDWSYNClqH6sJPvmI49
- 7p6i3+9rhC8n+zbHTd1Q/ZQ1uEZibIiRFFn09rNZI2E7gemMVNATxmsiHRf3SRtFJQAR
- npy1Y6Xm3+/MQ3accr/MJPyJMrRWon6L9eO+IHLSO6KWhdnlfCpDGXBHMs3sS1x4Gu4B
- aFM03JV+K7CoxJUw2t9OdPH6aTYq2+IboP0MiooJbFEQw1GBwfAj9KeMtQcvEGXveHF5
- ddtg==
+ d=gmail.com; s=20230601; t=1753446043; x=1754050843; darn=lists.freedesktop.org;
+ h=content-transfer-encoding:in-reply-to:from:content-language
+ :references:cc:to:subject:user-agent:mime-version:date:message-id
+ :from:to:cc:subject:date:message-id:reply-to;
+ bh=VA1aVk5ATgGwWP5YvZwY73Pqu6/2aciSmLuZYBAcU5o=;
+ b=TNXVP7mouv7n/Crc0jr2LN9LYVBGhNMTOhR8j4BKcCsdICTgWtl3DxhYKekzVwbm3H
+ D5Dj/YGT3MrYoxvZPxTogz5u15oXPOGnTlSPqIR86ToeSckwuyh9c6aM6vNx/Ed3k8Jx
+ KR7lTkpmYj7iJMVU+jwI3xoSLzIgyk0YXYIgojpQ3B2x0lA3Yp3vFSJUG46gxG+UDnQw
+ 0/uuHwwqqvFc9tLieZcgwlnS5zueJhgV8ACE6i6UVJpSuQxePTd7C3H+8R1blyQKWRhB
+ xA3w6JGSs5JfUGCxIm5uofMk5SdTdykdZCrMG0L6hHTdNbkJsz18AsMnUy7/yTM5kfW6
+ BZ2g==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1753388951; x=1753993751;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=ZM/cVPMjqnDcAHexC1gwfwrsHc2MgoIp0pKcizUhlwQ=;
- b=TRAg0JwD4st9mbrj3XEBQHTllqAaoyogOxMBrloP9Mb9NT7Q0biECLobGeGn9uKLvb
- FI4GlL9CIp8bhzHwOFiDYbldFpmGReWa6IJx3D+l18463hBiQ3v0kN+ppa0ODHh0Amc9
- tc2RGY8Zfj/FAvT3z+H4XkCZFCG93aF1HyqdKfeZCSivy85TITgpo3MZfBcx/Op+bWep
- LnR5lz25+k0z5r82QNCaoYXR1b00/nh7fLkl7VGpSl/+ORnE6Fik4mxWOry9gRQ/mvy4
- 8PaQpNospBAtJnQmEL7Mx48pQeLmXJNzWeon+y6XwBgX1+ZjjJbJ0kcXKCp8/aGxDGiU
- VAVg==
+ d=1e100.net; s=20230601; t=1753446043; x=1754050843;
+ h=content-transfer-encoding:in-reply-to:from:content-language
+ :references:cc:to:subject:user-agent:mime-version:date:message-id
+ :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+ bh=VA1aVk5ATgGwWP5YvZwY73Pqu6/2aciSmLuZYBAcU5o=;
+ b=tRMSwXGyFBhjXkg+kY4I54nDot+FI2DWuZvcZBpm1/8AeVGNCHpfrnMXcK5MTifOjx
+ q6Uz5DoXIlNhqg4BimE+h0qLEDr+kZxz9UHGkw0GJWsL71V+ozARq2nSf0CWO4THCE8T
+ z2RXJWwTk4VA9jBUv7/LW5B5sCFUO7u1SVwSjguWstHYCLQkFXhtbidI2wlefCbJpmY3
+ ZMQyWTtXdv9yr6Ck7D6WqaQJH58ZnxzZoOs1jmd5cyLjf1QmBxP2itkQJz1nwJUo7CpK
+ naQtTWFYSss4PQOplNPHwxKh5cP4rI5ig3W5IZbwJQYQVo7Ggy0/MBbv/46gwpPA7oRX
+ FvHg==
 X-Forwarded-Encrypted: i=1;
- AJvYcCVmIL3Siaw/bCOYUkN32saJVR0FPOx6k5qmKXYNmkueDxRH/7/AzkCozFGHSn9K3fui2NVbbLLgWQ==@lists.freedesktop.org,
- AJvYcCX2y2rjPtolcbfro4iwdIWI4yF4WfvmTwHbmq/qJJIGo6IBiAVEFZ2pd4l/gNLWetalvAGVITCjIwc=@lists.freedesktop.org
-X-Gm-Message-State: AOJu0YyMdJbGyOG/EHl2RMjK/HO/S8FHd79l6VDFvx9645ufvngyOr5W
- elTXjc2sXWwBZto7HEtrXuYh90Sc2B3uMwD3EN5ETVAKTK+LjZnr1Q0jk9Sg0hz8P7LF+pVhguU
- UQmgFEUK8+KSDB+u75F5NscFa2vY5wVY=
-X-Gm-Gg: ASbGnctcEeHfXznKX9SdGnucla3GajAht9RD1n4SCUEnPHssG4bL66lBzYbb/g0tKsa
- lTBaZ47p7Kbl0Vf4GK9TguEeIe5qn5MOsdHSHfweKO5IojozwjUd+NNsdT/zAtYjhn60H629gFz
- zCgTt7lAVhNB2DUVOrm7qKc2+rTu/Mzy7w15acYlc5Bmw18nrEwegmKlDn8T5FlfFNUYATBo/DL
- z6bLl+1
-X-Google-Smtp-Source: AGHT+IEAGFB37ZidsHLIIaba8FiGeBk2ECZccsALYfokim6qqvD8w9f6H1DHr7EVTrqZ0BiawsUQhH+jUVVtuE4an9o=
-X-Received: by 2002:a17:902:f54b:b0:234:ba37:87a3 with SMTP id
- d9443c01a7336-23f98172235mr43503445ad.3.1753388951451; Thu, 24 Jul 2025
- 13:29:11 -0700 (PDT)
+ AJvYcCWjo7ieol/nGuZj7Bm/1OKVxEmZkQZJrajsRvdkbIHsqjGwmHwJYK0gmTLgFfV28+RdHSXj/tgPUy4=@lists.freedesktop.org
+X-Gm-Message-State: AOJu0YwZGw6h77C2tH40Ed3BE8GKTT91yEudHbNdrahx2UKmqHx6LTub
+ IAE6MnMQwLXyhJ8ughZqVRzQXHXhUwqqwcBdVCDct4spcxSRWTKxVrJv
+X-Gm-Gg: ASbGncsBjQ+Z9W+Tr9IR8Rw38k4nxpVmhGnWLUwDCEWmvtN9OgzbcpThd2aw/rcDCHE
+ hNWjwvBZeW/5XSxVvd8QzZRK2rsAMNuKXde1kIS6hP7Yg1dJjnAaKNeZiRTr8tEYh5PxL9Svse/
+ TknC+4UpgcZLmKA08n5ZsFis6riH8Gn7XytdQSWD9q1AKMhCCDrNEJs+oSMUOAvHham9JSHFNLN
+ dBzsd1osdZfZGFQ8TRIbw0eO26ZWB0TF6L7b+7OBOFVfala5Ic8BVc6u8UWCuFH8QXS7sD++uEr
+ N5JwxeZnRxULEjdWRhJHmh2l2D32nYZbkXFKtZWCfM9oV10hIC7N+RIJrwG9Y0wkWHqpWICmxij
+ jzdrQ00Lnm3dy/syi+V/tOhoLaGKsYJppzoY=
+X-Google-Smtp-Source: AGHT+IHSdaknPrqijioY9HDWLiOWQTIycCby2q675AueD5MlPYeEPC0uzrUjYIL3oulhKhqiN6JSTw==
+X-Received: by 2002:a05:600c:8b11:b0:456:1d34:97a with SMTP id
+ 5b1f17b1804b1-4587631561fmr18307095e9.9.1753446042665; 
+ Fri, 25 Jul 2025 05:20:42 -0700 (PDT)
+Received: from ?IPV6:2001:871:22a:3587::1ad1? ([2001:871:22a:3587::1ad1])
+ by smtp.gmail.com with ESMTPSA id
+ 5b1f17b1804b1-4587054f686sm51705225e9.14.2025.07.25.05.20.41
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Fri, 25 Jul 2025 05:20:42 -0700 (PDT)
+Message-ID: <5b2951af-517b-4d5c-887f-417f486fd9a2@gmail.com>
+Date: Fri, 25 Jul 2025 14:20:40 +0200
 MIME-Version: 1.0
-References: <20250724165441.2105632-1-ojeda@kernel.org>
- <DBKG6CA32OO0.368N1Y6VMIUTL@kernel.org>
-In-Reply-To: <DBKG6CA32OO0.368N1Y6VMIUTL@kernel.org>
-From: Miguel Ojeda <miguel.ojeda.sandonis@gmail.com>
-Date: Thu, 24 Jul 2025 22:28:58 +0200
-X-Gm-Features: Ac12FXxpi3gEikt92Cs8uSRLZnJHZD2m6LWFkt4o9DdE2xrir2WW5NTAjXO6LT0
-Message-ID: <CANiq72m+t_vvBsSkgmHCtUvXOG0EOVTBoOij0XZTM1mzd7mNUQ@mail.gmail.com>
+User-Agent: Mozilla Thunderbird
 Subject: Re: [PATCH] drm: nova-drm: fix 32-bit arm build
-To: Danilo Krummrich <dakr@kernel.org>
-Cc: Miguel Ojeda <ojeda@kernel.org>, David Airlie <airlied@gmail.com>,
- Simona Vetter <simona@ffwll.ch>, 
- Alex Gaynor <alex.gaynor@gmail.com>, nouveau@lists.freedesktop.org, 
- dri-devel@lists.freedesktop.org, Boqun Feng <boqun.feng@gmail.com>, 
- Gary Guo <gary@garyguo.net>,
- =?UTF-8?Q?Bj=C3=B6rn_Roy_Baron?= <bjorn3_gh@protonmail.com>, 
- Benno Lossin <lossin@kernel.org>, Andreas Hindborg <a.hindborg@kernel.org>, 
+To: Miguel Ojeda <ojeda@kernel.org>, Danilo Krummrich <dakr@kernel.org>,
+ David Airlie <airlied@gmail.com>, Simona Vetter <simona@ffwll.ch>,
+ Alex Gaynor <alex.gaynor@gmail.com>
+Cc: nouveau@lists.freedesktop.org, dri-devel@lists.freedesktop.org,
+ Boqun Feng <boqun.feng@gmail.com>, Gary Guo <gary@garyguo.net>,
+ =?UTF-8?Q?Bj=C3=B6rn_Roy_Baron?= <bjorn3_gh@protonmail.com>,
+ Benno Lossin <lossin@kernel.org>, Andreas Hindborg <a.hindborg@kernel.org>,
  Alice Ryhl <aliceryhl@google.com>, Trevor Gross <tmgross@umich.edu>,
- rust-for-linux@vger.kernel.org, 
- linux-kernel@vger.kernel.org, patches@lists.linux.dev
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-X-Mailman-Approved-At: Sat, 13 Dec 2025 12:40:47 +0000
+ rust-for-linux@vger.kernel.org, linux-kernel@vger.kernel.org,
+ patches@lists.linux.dev
+References: <20250724165441.2105632-1-ojeda@kernel.org>
+Content-Language: en-US, de-DE
+From: Christian Schrefl <chrisi.schrefl@gmail.com>
+In-Reply-To: <20250724165441.2105632-1-ojeda@kernel.org>
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
+X-Mailman-Approved-At: Sat, 13 Dec 2025 12:40:51 +0000
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -94,14 +98,46 @@ List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-On Thu, Jul 24, 2025 at 7:05=E2=80=AFPM Danilo Krummrich <dakr@kernel.org> =
-wrote:
->
-> Thanks -- will take it through -fixes once rc-1 is out.
+Hi Miguel,
 
-By the way, in that case we should probably:
+On 24.07.25 6:54 PM, Miguel Ojeda wrote:
+> In 32-bit arm, the build fails with:
+> 
+>     error[E0308]: mismatched types
+>       --> drivers/gpu/drm/nova/file.rs:42:28
+>        |
+>     42 |         getparam.set_value(value);
+>        |                  --------- ^^^^^ expected `u64`, found `u32`
+>        |                  |
+>        |                  arguments to this method are incorrect
+>        |
+>     note: method defined here
+>       --> drivers/gpu/drm/nova/uapi.rs:29:12
+>        |
+>     29 |     pub fn set_value(&self, v: u64) {
+>        |            ^^^^^^^^^        ------
+>     help: you can convert a `u32` to a `u64`
+>        |
+>     42 |         getparam.set_value(value.into());
+>        |                                 +++++++
+> 
+> The reason is that `Getparam::set_value` takes a `u64` (from the UAPI),
+> but `pci::Device::resource_len()` returns a `resource_size_t`, which is a
+> `phys_addr_t`, which may be 32- or 64-bit.
+> 
+> Thus add an `into()` call to support the 32-bit case, while allowing the
+> Clippy lint that complains in the 64-bit case where the type is the same.
+> 
+> Fixes: cdeaeb9dd762 ("drm: nova-drm: add initial driver skeleton")
+> Signed-off-by: Miguel Ojeda <ojeda@kernel.org>
+> ---
+> As discussed, it may be best to have a newtype, or at least a function
+> to perform this -- here it is the minimal fix nevertheless.
 
-Cc: stable@vger.kernel.org
+I agree we should at least have a specific conversion function, but for now:
 
-Cheers,
-Miguel
+Reviewed-by: Christian Schrefl <chrisi.schrefl@gmail.com>
+
+Cheers Christian
+
+
