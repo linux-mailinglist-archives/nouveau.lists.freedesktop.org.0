@@ -2,49 +2,49 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id 2D10EB1236E
-	for <lists+nouveau@lfdr.de>; Fri, 25 Jul 2025 19:59:47 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 84AF3B12463
+	for <lists+nouveau@lfdr.de>; Fri, 25 Jul 2025 20:56:42 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id D079110E22C;
-	Fri, 25 Jul 2025 17:59:45 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 210C610E120;
+	Fri, 25 Jul 2025 18:56:41 +0000 (UTC)
 Authentication-Results: gabe.freedesktop.org;
-	dkim=pass (1024-bit key; unprotected) header.d=collabora.com header.i=daniel.almeida@collabora.com header.b="TrxnGsco";
+	dkim=pass (1024-bit key; unprotected) header.d=collabora.com header.i=daniel.almeida@collabora.com header.b="NU3BDFUt";
 	dkim-atps=neutral
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
 Received: from sender4-pp-f112.zoho.com (sender4-pp-f112.zoho.com
  [136.143.188.112])
- by gabe.freedesktop.org (Postfix) with ESMTPS id A445510E22C;
- Fri, 25 Jul 2025 17:59:44 +0000 (UTC)
-ARC-Seal: i=1; a=rsa-sha256; t=1753466380; cv=none; 
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 61FE010E120;
+ Fri, 25 Jul 2025 18:56:39 +0000 (UTC)
+ARC-Seal: i=1; a=rsa-sha256; t=1753469792; cv=none; 
  d=zohomail.com; s=zohoarc; 
- b=ivaxwE8EZyytMhEQ0gmz9+ZpLV6y2q8bh3pVrq89n54od03DDJaA5DzvnNBbfCX8JyT7+sEhpzX1SMSkxXjTTUAtKIWxhKqh7Dq9Q87jVIqg8wwmOahHOYc9+a43ckZKLmhnJdVCvbr/YXWRsEQ6Ksd7wEWLleIhmQsbyurDE2c=
+ b=TWAFnRBmW5sG1SXFpDtSRFAUhdo6qQjgsCzmI9eQxxAKe+rLvdWr2odE6uX1eagrgCVAyEiRKiSbHvZZsLiCsL2wGmpPrWbm9pL9gCInGlzG2VlEfcZlnUIA7Yzg1DeMa4lx6elWrQvmxDP+oZAuR+sYR4lculwEPDOhLjm6HSU=
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=zohomail.com;
- s=zohoarc; t=1753466380;
+ s=zohoarc; t=1753469792;
  h=Content-Type:Content-Transfer-Encoding:Cc:Cc:Date:Date:From:From:In-Reply-To:MIME-Version:Message-ID:References:Subject:Subject:To:To:Message-Id:Reply-To;
- bh=/gMV77BlIAy8KyUFz7OcEqEfPlu0qBZBOgi8au2RuEw=; 
- b=I3CHMpjaqDgQOm1Z//AqGxXDr/Dyir53XFlGT5e+BSxj8xbFQp+Ti80oTgC2SYJC6S4qEHwiB1beXP6jyNonxECHl+n0IJKtwJAUd6DbTHrRTbVkDSsW4XmGdaF8kYzahl+zW1Rwo2dh9JgpM/G8lOBZHw8Y+DqV3k6xbfKasEY=
+ bh=X1uK2olKYL8ou4YyzWVOCVnW71YBYE+pWaxRKyBZkk4=; 
+ b=VkWRvd2nGX6QiUb4d04YIgjivySNXU+WWUsXtdNlWweFtse2271R3NW8sioKFDAnFD14Yq/U4DUc8u3g57ZMzy3CpohZ42nC4r8u5l3/D9iVUz4t3rKclE2+S3CqcJLi3D1xMeWWlAoRHjiau+/Bo2mYW02yr/T48LfUQrSPISk=
 ARC-Authentication-Results: i=1; mx.zohomail.com;
  dkim=pass  header.i=collabora.com;
  spf=pass  smtp.mailfrom=daniel.almeida@collabora.com;
  dmarc=pass header.from=<daniel.almeida@collabora.com>
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; t=1753466380; 
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; t=1753469792; 
  s=zohomail; d=collabora.com; i=daniel.almeida@collabora.com;
  h=Content-Type:Mime-Version:Subject:Subject:From:From:In-Reply-To:Date:Date:Cc:Cc:Content-Transfer-Encoding:Message-Id:Message-Id:References:To:To:Reply-To;
- bh=/gMV77BlIAy8KyUFz7OcEqEfPlu0qBZBOgi8au2RuEw=;
- b=TrxnGscoaTGFXO9ldk/EGL2qIx+B0UYmbMbr5sSTf58ffTDKDQnzMhhE9RizdkAJ
- TjkKwZxLY0vDwcHtgf+u9Pzv/tEwE/bzZ89l4Ee1OE8c3s9bjzmrsMfS2uYWgo8KJAa
- AQkH/ii8YWkaJfzWfZOw3ZanTlr/DX8+64Z00P6g=
-Received: by mx.zohomail.com with SMTPS id 1753466377644926.1313834883316;
- Fri, 25 Jul 2025 10:59:37 -0700 (PDT)
+ bh=X1uK2olKYL8ou4YyzWVOCVnW71YBYE+pWaxRKyBZkk4=;
+ b=NU3BDFUt11IbXyU2pj3v4ojTvXzbVWS4GaFa98M5+ndUR0jHdMhH6fpr/H53At79
+ RWbSogIoY0xPUu9BoFx089lbZE/heudpDjVGyshoDl0ODWnuugTgVsgbklwhoDHn9Xl
+ JaMYGhWeFKrVdAHyQOS9nWgfI1heGENozNk3d2f0=
+Received: by mx.zohomail.com with SMTPS id 1753469789200186.12466149981094;
+ Fri, 25 Jul 2025 11:56:29 -0700 (PDT)
 Content-Type: text/plain;
-	charset=us-ascii
+	charset=utf-8
 Mime-Version: 1.0 (Mac OS X Mail 16.0 \(3826.600.51.1.1\))
-Subject: Re: [PATCH v2 14/19] gpu: nova-core: register: use #[inline(always)]
- for all methods
+Subject: Re: [PATCH v2 15/19] gpu: nova-core: register: redesign relative
+ registers
 From: Daniel Almeida <daniel.almeida@collabora.com>
-In-Reply-To: <20250718-nova-regs-v2-14-7b6a762aa1cd@nvidia.com>
-Date: Fri, 25 Jul 2025 14:59:24 -0300
+In-Reply-To: <20250718-nova-regs-v2-15-7b6a762aa1cd@nvidia.com>
+Date: Fri, 25 Jul 2025 15:56:14 -0300
 Cc: Danilo Krummrich <dakr@kernel.org>, David Airlie <airlied@gmail.com>,
  Simona Vetter <simona@ffwll.ch>,
  Maarten Lankhorst <maarten.lankhorst@linux.intel.com>,
@@ -54,9 +54,9 @@ Cc: Danilo Krummrich <dakr@kernel.org>, David Airlie <airlied@gmail.com>,
  dri-devel@lists.freedesktop.org, rust-for-linux@vger.kernel.org,
  linux-kernel@vger.kernel.org
 Content-Transfer-Encoding: quoted-printable
-Message-Id: <67E28AC5-3EE3-4E0B-9CA1-BBDADA5A28C0@collabora.com>
+Message-Id: <F19649A8-3002-4BAC-8FBF-095CF67B3946@collabora.com>
 References: <20250718-nova-regs-v2-0-7b6a762aa1cd@nvidia.com>
- <20250718-nova-regs-v2-14-7b6a762aa1cd@nvidia.com>
+ <20250718-nova-regs-v2-15-7b6a762aa1cd@nvidia.com>
 To: Alexandre Courbot <acourbot@nvidia.com>
 X-Mailer: Apple Mail (2.3826.600.51.1.1)
 X-ZohoMailClient: External
@@ -74,112 +74,119 @@ List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-
+Hi Alex,
 
 > On 18 Jul 2025, at 04:26, Alexandre Courbot <acourbot@nvidia.com> =
 wrote:
 >=20
-> These methods should always be inlined, so use the strongest compiler
-> hint that exists to maximize the chance they will indeed be.
+> The relative registers are currently very unsafe to use: callers can
+> specify any constant as the base address for access, meaning they can
+> effectively interpret any I/O address as any relative register.
+>=20
+> Ideally, valid base addresses for a family of registers should be
+> explicitly defined in the code, and could only be used with the =
+relevant
+> registers
+>=20
+> This patch changes the relative register declaration into this:
+>=20
+>    register!(REGISTER_NAME @ BaseTrait[offset] ...
+>=20
+> Where `BaseTrait` is the name of a ZST used as a parameter of the
+> `RegisterBase<>` trait to define a trait unique to a class of =
+register.
+> This specialized trait is then implemented for every type that =
+provides
+> a valid base address, enabling said types to be passed as the base
+> address provider for the register's I/O accessor methods.
+>=20
+> This design thus makes it impossible to pass an unexpected base =
+address
+> to a relative register, and, since the valid bases are all known at
+> compile-time, also guarantees that all I/O accesses are done within =
+the
+> valid bounds of the I/O range.
 >=20
 > Signed-off-by: Alexandre Courbot <acourbot@nvidia.com>
-> ---
-> drivers/gpu/nova-core/regs/macros.rs | 16 ++++++++--------
-> 1 file changed, 8 insertions(+), 8 deletions(-)
->=20
-> diff --git a/drivers/gpu/nova-core/regs/macros.rs =
-b/drivers/gpu/nova-core/regs/macros.rs
-> index =
-bfa0220050d4ba03c9fcd75c9be1ed8dbaa4f290..a9f754056c3521b2a288f34bf3d78ec5=
-6db53451 100644
-> --- a/drivers/gpu/nova-core/regs/macros.rs
-> +++ b/drivers/gpu/nova-core/regs/macros.rs
-> @@ -280,7 +280,7 @@ impl $name {
->         #[doc=3D"Returns the value of this field:"]
->         #[doc=3D$comment]
->         )?
-> -        #[inline]
-> +        #[inline(always)]
->         pub(crate) fn $field(self) -> $res_type {
->             ::kernel::macros::paste!(
->             const MASK: u32 =3D $name::[<$field:upper _MASK>];
-> @@ -296,7 +296,7 @@ pub(crate) fn $field(self) -> $res_type {
->         #[doc=3D"Sets the value of this field:"]
->         #[doc=3D$comment]
->         )?
-> -        #[inline]
-> +        #[inline(always)]
->         pub(crate) fn [<set_ $field>](mut self, value: $to_type) -> =
-Self {
->             const MASK: u32 =3D $name::[<$field:upper _MASK>];
->             const SHIFT: u32 =3D $name::[<$field:upper _SHIFT>];
-> @@ -348,7 +348,7 @@ impl $name {
->             pub(crate) const OFFSET: usize =3D $offset;
->=20
->             /// Read the register from its address in `io`.
-> -            #[inline]
-> +            #[inline(always)]
->             pub(crate) fn read<const SIZE: usize, T>(io: &T) -> Self =
-where
->                 T: ::core::ops::Deref<Target =3D =
-::kernel::io::Io<SIZE>>,
->             {
-> @@ -356,7 +356,7 @@ pub(crate) fn read<const SIZE: usize, T>(io: &T) =
--> Self where
->             }
->=20
->             /// Write the value contained in `self` to the register =
-address in `io`.
-> -            #[inline]
-> +            #[inline(always)]
->             pub(crate) fn write<const SIZE: usize, T>(self, io: &T) =
-where
->                 T: ::core::ops::Deref<Target =3D =
-::kernel::io::Io<SIZE>>,
->             {
-> @@ -365,7 +365,7 @@ pub(crate) fn write<const SIZE: usize, T>(self, =
-io: &T) where
->=20
->             /// Read the register from its address in `io` and run `f` =
-on its value to obtain a new
->             /// value to write back.
-> -            #[inline]
-> +            #[inline(always)]
->             pub(crate) fn alter<const SIZE: usize, T, F>(
->                 io: &T,
->                 f: F,
-> @@ -385,7 +385,7 @@ pub(crate) fn alter<const SIZE: usize, T, F>(
->         impl $name {
->             pub(crate) const OFFSET: usize =3D $offset;
->=20
-> -            #[inline]
-> +            #[inline(always)]
->             pub(crate) fn read<const SIZE: usize, T>(
->                 io: &T,
->                 base: usize,
-> @@ -395,7 +395,7 @@ pub(crate) fn read<const SIZE: usize, T>(
->                 Self(io.read32(base + $offset))
->             }
->=20
-> -            #[inline]
-> +            #[inline(always)]
->             pub(crate) fn write<const SIZE: usize, T>(
->                 self,
->                 io: &T,
-> @@ -406,7 +406,7 @@ pub(crate) fn write<const SIZE: usize, T>(
->                 io.write32(self.0, base + $offset)
->             }
->=20
-> -            #[inline]
-> +            #[inline(always)]
->             pub(crate) fn alter<const SIZE: usize, T, F>(
->                 io: &T,
->                 base: usize,
->=20
-> --=20
-> 2.50.1
->=20
->=20
 
-Reviewed-by: Daniel Almeida <daniel.almeida@collabora.com>
+
+I think it would be helpful to showcase a before/after in the commit =
+message. IIUC, we'd go from:
+
+/// Putting a `+` before the address of the register makes it relative =
+to a base: the `read` and
+/// `write` methods take a `base` argument that is added to the =
+specified address before access:
+///
+/// ```no_run
+/// register!(CPU_CTL @ +0x0000010, "CPU core control" {
+///    0:0     start as bool, "Start the CPU core";
+/// });
+
+
+To:
+
+/// ```no_run
+/// // Type used to identify the base.
+/// pub(crate) struct CpuCtlBase;
+///
+/// // ZST describing `CPU0`.
+/// struct Cpu0;
+/// impl RegisterBase<CpuCtlBase> for Cpu0 {
+///     const BASE: usize =3D 0x100;
+/// }
+/// // Singleton of `CPU0` used to identify it.
+/// const CPU0: Cpu0 =3D Cpu0;
+///
+/// // ZST describing `CPU1`.
+/// struct Cpu1;
+/// impl RegisterBase<CpuCtlBase> for Cpu1 {
+///     const BASE: usize =3D 0x200;
+/// }
+/// // Singleton of `CPU1` used to identify it.
+/// const CPU1: Cpu1 =3D Cpu1;
+
+So you can still pass whatever base you want, the difference (in this
+particular aspect) is whether it's specified in the macro itself, or as =
+an
+associated constant of RegisterBase<Foo>?
+
+In any case, have you considered what happens when the number of "CPUs" =
+in your
+example grows larger? I can only speak for Tyr, where (IIUC), I'd have =
+to
+define 16 structs, each representing a single AS region, i.e.:
+
++pub(crate) const MMU_BASE: usize =3D 0x2400;
++pub(crate) const MMU_AS_SHIFT: usize =3D 6;
++
++const fn mmu_as(as_nr: usize) -> usize {
++ MMU_BASE + (as_nr << MMU_AS_SHIFT)
++
++pub(crate) struct AsRegister(usize);
++
++impl AsRegister {
++    fn new(as_nr: usize, offset: usize) -> Result<Self> {
++        if as_nr >=3D 32 {
++            Err(EINVAL)
++        } else {
++            Ok(AsRegister(mmu_as(as_nr) + offset))
++        }
++    }
+
+It's still somewhat manageable, but I wonder if there are usecases out =
+there
+(in other drivers/devices) where this number will be even higher, which =
+will
+make this pattern impossible to implement.
+
+Or maybe I misunderstood the usecase?
+
+In any case, the patch itself looks fine to me.
+
+
+[=E2=80=A6]
+
+
+=E2=80=94 Daniel
 
