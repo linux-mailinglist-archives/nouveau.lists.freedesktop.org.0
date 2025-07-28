@@ -2,49 +2,63 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id 421B1B13B6D
-	for <lists+nouveau@lfdr.de>; Mon, 28 Jul 2025 15:25:34 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id BEC28B140CF
+	for <lists+nouveau@lfdr.de>; Mon, 28 Jul 2025 18:59:31 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 6E80610E161;
-	Mon, 28 Jul 2025 13:25:32 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 0465D10E193;
+	Mon, 28 Jul 2025 16:59:30 +0000 (UTC)
+Authentication-Results: gabe.freedesktop.org;
+	dkim=pass (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="g2hvpwks";
+	dkim-atps=neutral
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from foss.arm.com (foss.arm.com [217.140.110.172])
- by gabe.freedesktop.org (Postfix) with ESMTP id A311C10E161;
- Mon, 28 Jul 2025 13:25:31 +0000 (UTC)
-Received: from usa-sjc-imap-foss1.foss.arm.com (unknown [10.121.207.14])
- by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id 20F561516;
- Mon, 28 Jul 2025 06:25:23 -0700 (PDT)
-Received: from [10.57.53.40] (unknown [10.57.53.40])
- by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id 94C793F66E;
- Mon, 28 Jul 2025 06:25:27 -0700 (PDT)
-Message-ID: <ce8b4bd9-5122-4b85-b605-a1bf10556208@arm.com>
-Date: Mon, 28 Jul 2025 14:25:25 +0100
-MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v2 01/19] gpu: nova-core: register: minor grammar and
- spelling fixes
-To: Alexandre Courbot <acourbot@nvidia.com>,
- Daniel Almeida <daniel.almeida@collabora.com>
-Cc: Danilo Krummrich <dakr@kernel.org>, David Airlie <airlied@gmail.com>,
- Simona Vetter <simona@ffwll.ch>,
- Maarten Lankhorst <maarten.lankhorst@linux.intel.com>,
- Maxime Ripard <mripard@kernel.org>, Thomas Zimmermann <tzimmermann@suse.de>,
- Beata Michalska <beata.michalska@arm.com>, nouveau@lists.freedesktop.org,
- dri-devel@lists.freedesktop.org, rust-for-linux@vger.kernel.org,
- linux-kernel@vger.kernel.org, John Hubbard <jhubbard@nvidia.com>,
- Nouveau <nouveau-bounces@lists.freedesktop.org>
-References: <20250718-nova-regs-v2-0-7b6a762aa1cd@nvidia.com>
- <20250718-nova-regs-v2-1-7b6a762aa1cd@nvidia.com>
- <B1AA6359-7854-4284-B533-F5CA3C18AF34@collabora.com>
- <DBNF8SZWLI79.1NRX9AMW5QW45@nvidia.com>
- <d0ffb55b-690a-4a65-98b5-b83adebfd88b@arm.com>
- <DBNNTU14VH90.25AZCJSVT4JDR@nvidia.com>
-From: Steven Price <steven.price@arm.com>
-Content-Language: en-GB
-In-Reply-To: <DBNNTU14VH90.25AZCJSVT4JDR@nvidia.com>
+Received: from tor.source.kernel.org (tor.source.kernel.org [172.105.4.254])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 7C12210E193;
+ Mon, 28 Jul 2025 16:59:28 +0000 (UTC)
+Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
+ by tor.source.kernel.org (Postfix) with ESMTP id 78424601F8;
+ Mon, 28 Jul 2025 16:59:27 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id D1FDEC4CEE7;
+ Mon, 28 Jul 2025 16:59:22 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+ s=k20201202; t=1753721967;
+ bh=4uq4fCRih9TVY2hZXV4zIt0fgsKRUncQeoxuKcLnVG8=;
+ h=Date:To:From:Subject:Cc:References:In-Reply-To:From;
+ b=g2hvpwksLMQsZ24HAD+tutEX4Ff14lVEpJ+qRq4TemhFpURKtnmmgXdkZjbGhHIvq
+ Jy/D6RaJv3kDwSYBx7f59VPw77lEQS4ZxEqJUSUIh+sRZ1Urh6DlKh/ueV2hHXiIM7
+ 0GAv4NJmfQvmGwSoY/qf6jbl9mNq2g4jDLvjwR//ZKG+zQfVfuFVJVH4ZF+Y0wg51A
+ IMH2Kbq2wKo6nYni8j0zbJBj0QhxPYBqnlJKfMiL0EuScsz6Xmo9n1qmH6BmcEmUuj
+ 0to3RZ1goe+xMHKzHo5W8ErWU96ArKvg0KPVzE0jQ6GBXZI8xHlPBGE7sugxIDs/OH
+ Y56uGoYYrZskA==
+Mime-Version: 1.0
+Content-Transfer-Encoding: quoted-printable
 Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
+Date: Mon, 28 Jul 2025 18:59:21 +0200
+Message-Id: <DBNUJUSYG465.7YE1YER8B9K@kernel.org>
+To: "Lyude Paul" <lyude@redhat.com>
+From: "Danilo Krummrich" <dakr@kernel.org>
+Subject: Re: [PATCH] Partially revert "rust: drm: gem: Implement
+ AlwaysRefCounted for all gem objects automatically"
+Cc: "Daniel Almeida" <daniel.almeida@collabora.com>,
+ <nouveau@lists.freedesktop.org>, <dri-devel@lists.freedesktop.org>,
+ <rust-for-linux@vger.kernel.org>, "David Airlie" <airlied@gmail.com>,
+ "Simona Vetter" <simona@ffwll.ch>, "Maarten Lankhorst"
+ <maarten.lankhorst@linux.intel.com>, "Maxime Ripard" <mripard@kernel.org>,
+ "Thomas Zimmermann" <tzimmermann@suse.de>, "Miguel Ojeda"
+ <ojeda@kernel.org>, "Alex Gaynor" <alex.gaynor@gmail.com>, "Boqun Feng"
+ <boqun.feng@gmail.com>, "Gary Guo" <gary@garyguo.net>,
+ =?utf-8?q?Bj=C3=B6rn_Roy_Baron?= <bjorn3_gh@protonmail.com>, "Benno Lossin"
+ <lossin@kernel.org>, "Andreas Hindborg" <a.hindborg@kernel.org>, "Alice
+ Ryhl" <aliceryhl@google.com>, "Trevor Gross" <tmgross@umich.edu>, "Asahi
+ Lina" <lina+kernel@asahilina.net>, "Alyssa Rosenzweig"
+ <alyssa@rosenzweig.io>, "open list" <linux-kernel@vger.kernel.org>
+References: <20250724191523.561314-1-lyude@redhat.com>
+ <DBKJYLF9E3TY.IM6UZFA0BW9I@kernel.org>
+ <e7a4cb0cc55a2d19e6eb9bf5280c68c0dd04d61d.camel@redhat.com>
+ <DBKN0VSJH3TX.2FYLW17KL0SWW@kernel.org>
+ <E9028A26-2E47-4431-B4B4-C5B416EB36E2@collabora.com>
+ <2d4f0bb1f23f89e4e5bedf6346a6c21f8b6bb29b.camel@redhat.com>
+In-Reply-To: <2d4f0bb1f23f89e4e5bedf6346a6c21f8b6bb29b.camel@redhat.com>
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -59,170 +73,103 @@ List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-On 28/07/2025 12:43, Alexandre Courbot wrote:
-> On Mon Jul 28, 2025 at 4:51 PM JST, Steven Price wrote:
->> On 28/07/2025 05:59, Alexandre Courbot wrote:
->>> Hi Daniel, thanks for the review!
->>>
->>> On Sat Jul 26, 2025 at 1:14 AM JST, Daniel Almeida wrote:
->>>> Hi Alex. Thank you and John for working on this in general. It will be useful
->>>> for the whole ecosystem! :) 
->>>>
->>>>> On 18 Jul 2025, at 04:26, Alexandre Courbot <acourbot@nvidia.com> wrote:
->>>>>
->>>>> From: John Hubbard <jhubbard@nvidia.com>
->>>>>
->>>>> There is only one top-level macro in this file at the moment, but the
->>>>> "macros.rs" file name allows for more. Change the wording so that it
->>>>> will remain valid even if additional macros are added to the file.
->>>>>
->>>>> Fix a couple of spelling errors and grammatical errors, and break up a
->>>>> run-on sentence, for clarity.
->>>>>
->>>>> Cc: Alexandre Courbot <acourbot@nvidia.com>
->>>>> Cc: Danilo Krummrich <dakr@kernel.org>
->>>>> Signed-off-by: John Hubbard <jhubbard@nvidia.com>
->>>>> Signed-off-by: Alexandre Courbot <acourbot@nvidia.com>
->>>>> ---
->>>>> drivers/gpu/nova-core/regs/macros.rs | 14 +++++++-------
->>>>> 1 file changed, 7 insertions(+), 7 deletions(-)
->>>>>
->>>>> diff --git a/drivers/gpu/nova-core/regs/macros.rs b/drivers/gpu/nova-core/regs/macros.rs
->>>>> index cdf668073480ed703c89ffa8628f5c9de6494687..864d1e83bed2979f5661e038f4c9fd87d33f69a7 100644
->>>>> --- a/drivers/gpu/nova-core/regs/macros.rs
->>>>> +++ b/drivers/gpu/nova-core/regs/macros.rs
->>>>> @@ -1,17 +1,17 @@
->>>>> // SPDX-License-Identifier: GPL-2.0
->>>>>
->>>>> -//! Macro to define register layout and accessors.
->>>>> +//! `register!` macro to define register layout and accessors.
->>>>
->>>> I would have kept this line as-is. Users will most likely know the name of the
->>>> macro already. At this point, they will be looking for what it does, so
->>>> mentioning "register" here is a bit redundant IMHO.
->>>>
->>>>> //!
->>>>> //! A single register typically includes several fields, which are accessed through a combination
->>>>> //! of bit-shift and mask operations that introduce a class of potential mistakes, notably because
->>>>> //! not all possible field values are necessarily valid.
->>>>> //!
->>>>> -//! The macro in this module allow to define, using an intruitive and readable syntax, a dedicated
->>>>> -//! type for each register with its own field accessors that can return an error is a field's value
->>>>> -//! is invalid.
->>>>> +//! The `register!` macro in this module provides an intuitive and readable syntax for defining a
->>>>> +//! dedicated type for each register. Each such type comes with its own field accessors that can
->>>>> +//! return an error if a field's value is invalid.
->>>>>
->>>>> -/// Defines a dedicated type for a register with an absolute offset, alongside with getter and
->>>>> -/// setter methods for its fields and methods to read and write it from an `Io` region.
->>>>> +/// Defines a dedicated type for a register with an absolute offset, including getter and setter
->>>>> +/// methods for its fields and methods to read and write it from an `Io` region.
->>>>
->>>> +cc Steven Price,
->>>>
->>>> Sorry for hijacking this patch, but I think that we should be more flexible and
->>>> allow for non-literal offsets in the macro.
->>>>
->>>> In Tyr, for example, some of the offsets need to be computed at runtime, i.e.:
->>>>
->>>> +pub(crate) struct AsRegister(usize);
->>>> +
->>>> +impl AsRegister {
->>>> +    fn new(as_nr: usize, offset: usize) -> Result<Self> {
->>>> +        if as_nr >= 32 {
->>>> +            Err(EINVAL)
->>>> +        } else {
->>>> +            Ok(AsRegister(mmu_as(as_nr) + offset))
->>>> +        }
->>>> +    }
->>>>
->>>> Or:
->>>>
->>>> +pub(crate) struct Doorbell(usize);
->>>> +
->>>> +impl Doorbell {
->>>> +    pub(crate) fn new(doorbell_id: usize) -> Self {
->>>> +        Doorbell(0x80000 + (doorbell_id * 0x10000))
->>>> +    }
->>>>
->>>> I don't think this will work with the current macro, JFYI.
->>>
->>> IIUC from the comments on the next patches, your need is covered with
->>> the relative and array registers definitions, is that correct?
->>
->> My Rust is somewhat shaky, but I believe "non-contiguous register 
->> arrays" will do what we want. Although I'll admit it would be neater for 
->> the likes of the AS registers if there was a way to define a "block" of 
->> registers and then use an array of blocks. Something vaguely like this 
->> (excuse the poor Rust):
->>
->> register_block!(MMU_AS_CONTROL @ 0x2400[16 ; 64], "MMU Address Space registers" {
->> 	register!(TRANSTAB @ 0x0000, "Translation table base address" {
->> 		31:0	base as u32;
->> 	});
->> 	register!(MEMATTR @ 0x0008, "Memory attributes" {
->> 		7:0	attr0 as u8;
->> 		7:0	attr1 as u8;
->> 		// ...
->> 	});
->> 	// More registers
->> });
-> 
-> I can think of two ways to achieve something similar using the current
-> patchset:
-> 
-> - As you mentioned, a set of non-contiguous register arrays. This should
->   work rather well, as you could just do
->   `MMU_AS_CONTROL_MEMATTR::read(bar, 4)` to read the `MMU_AS_CONTROL_MEMATTR`
->   register of the 5th instance, with compile-time bound validation. It's
->   not what register arrays are for originally, but it does the job.
+On Fri Jul 25, 2025 at 9:41 PM CEST, Lyude Paul wrote:
+> a-ha, ok. I made a mistake here with misremembering where the compilation
+> issue I saw here really was.
+>
+> It's not that multiple gem object implementations are triggering it, it's=
+ that
+> it immediately breaks compilation if any other type tries to do a blanket
+> implementation with AlwaysRefCounted like this.
+>
+> Here's a properly compiling example with rvkms:
+>
+> https://gitlab.freedesktop.org/lyudess/linux/-/commits/rvkms-slim
+>
+> This builds fine because IntoGEMObject is the only one with a blanket
+> implementation of AlwaysRefCounted, and we implement AlwaysRefCounted usi=
+ng a
+> macro for refcounted Kms objects.
+>
+> But if we apply this patch which adds the second blanket impl:
+>
+> https://gitlab.freedesktop.org/lyudess/linux/-/commit/ec094d4fc209a7122b0=
+0168e7293f365fe7fc16c
+>
+> Then compilation fails:
+>
+>    =E2=9E=9C  nouveau-gsp git:(rvkms-slim) =E2=9C=97 nice make -j20
+>      DESCEND objtool
+>      DESCEND bpf/resolve_btfids
+>      CALL    scripts/checksyscalls.sh
+>      INSTALL libsubcmd_headers
+>      INSTALL libsubcmd_headers
+>      RUSTC L rust/kernel.o
+>    warning: unused import: `pin_init`
+>      --> rust/kernel/drm/driver.rs:18:5
+>       |
+>    18 | use pin_init;
+>       |     ^^^^^^^^
+>       |
+>       =3D note: `#[warn(unused_imports)]` on by default
+>   =20
+>    warning: unused import: `prelude::*`
+>     --> rust/kernel/drm/kms/modes.rs:4:13
+>      |
+>    4 | use crate::{prelude::*, types::Opaque};
+>      |             ^^^^^^^^^^
+>   =20
+>    error[E0119]: conflicting implementations of trait `types::AlwaysRefCo=
+unted`
+>       --> rust/kernel/drm/kms.rs:504:1
+>        |
+>    504 | unsafe impl<T: RcModeObject> AlwaysRefCounted for T {
+>        | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ conflicting =
+implementation
+>        |
+>       ::: rust/kernel/drm/gem/mod.rs:97:1
+>        |
+>    97  | unsafe impl<T: IntoGEMObject> AlwaysRefCounted for T {
+>        | ---------------------------------------------------- first imple=
+mentation here
+>   =20
+>    warning: unused import: `Sealed`
+>     --> rust/kernel/drm/kms/vblank.rs:7:44
+>      |
+>    7 | use super::{crtc::*, ModeObject, modes::*, Sealed};
+>      |                                            ^^^^^^
+>   =20
+>    error: aborting due to 1 previous error; 3 warnings emitted
+>   =20
+>    For more information about this error, try `rustc --explain E0119`.
+>    make[2]: *** [rust/Makefile:538: rust/kernel.o] Error 1
+>    make[1]: *** [/home/lyudess/Projects/linux/worktrees/nouveau-gsp/Makef=
+ile:1280: prepare] Error 2
+>    make: *** [Makefile:248: __sub-make] Error 2
+>
+> This is definitely part of the reason I didn't notice this problem until =
+later
+> too. My understanding is that this is a result of rust's orphan rule, whi=
+ch
+> basically just disallows trait impls where it would be ambiguous which im=
+pl
+> applies to a specific type. Here, the issue is that there's nothing stopp=
+ing a
+> type from implementing both RcModeObject and IntoGEMObject.
 
-Sadly we generally don't want a compile time index - the whole point is
-that each address space is functionally the same, so the index (address
-space ID) is going to be dynamic in the code. The disadvantage here is
-that every register access will involve a bounds check - the compiler
-might be able to optimise but the code will still have to deal with a
-potential error from every access.
+Yeah, this is pretty annoying. I don't think it's related to the orphan rul=
+e
+though; see also the example in [1].
 
-> - As a set of relative offset registers sharing the same group. This is
->   more in line with the idea of a register block, but it also means that
->   each instance needs to have its own type declared, which is a bit
->   cumbersome but can be mitigated with a macro. More inconvenient if the
->   fact that you cannot address using a simple number anymore...
+I think in this case we should just keep the generic
+impl<T: IntoGEMObject> AlwaysRefCounted for T and not introduce the blanket=
+ one
+for T: RcModeObject.
 
-Yeah this does sound cumbersome. Would you end up with a macro
-duplicating the code 16 times (once for each type of the 16 register
-blocks) and hoping the compiler can optimise it all back together?
+In theory it doesn't matter which one to drop, but I'd rather avoid the rev=
+ert
+and I think there's no reason for both to have the less nice macro solution=
+.
 
-> The idea of register blocks is interesting. I wonder how that would
-> translate in terms of access to invididual registers, i.e. does the
-> block end up just being a prefix into the full register name, or is it
-> something else? From your example declaration I picture that accesses
-> would look something like `MMU_AS_CONTROL[4]::MEMATTR::read(bar)`, which
-> ngl looks great, but I also cannot think of a construct that would allow
-> such a syntax... Happy to think more about it though.
-
-Yes, that is the sort of syntax I was imagining, although I was hoping
-you could do something like:
-
-  let as = MMU_AS_CONTROL[as_id]::try_get(&bar)?;
-
-  let memattr = as.MEMATTR.read(&bar);
-  memattr.set_attr0(3).write(&bar);
-  as.TRANSTAB.write(&bar, 0x1000);
-
-Which I'm sure shows how little Rust I've written, but hopefully you get
-the idea - only the first line is a try_xxx which can fail and takes the
-address space ID from a variable and bounds checks it. The other
-accesses we already know the bounds so there's no need to deal with
-failure, and we don't have to consider the situation where MEMATTR is
-written but the TRANSTAB write fails (which couldn't actually happen
-with non-contiguous register arrays but the compiler wouldn't be able to
-tell).
-
-[And of course having written the above I realise that MEMATTR being
-split up as separate named fields is also broken - we want to generate
-it by looping over the fields.]
-
-Steve
-
+[1] https://play.rust-lang.org/?version=3Dstable&mode=3Ddebug&edition=3D202=
+4&gist=3D23593da0e5e0ca0d9d2aa654e0c9bde6
