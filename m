@@ -2,73 +2,51 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id E0FD6B1609E
-	for <lists+nouveau@lfdr.de>; Wed, 30 Jul 2025 14:48:11 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id B1E05B1742F
+	for <lists+nouveau@lfdr.de>; Thu, 31 Jul 2025 17:51:52 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 4E9D410E699;
-	Wed, 30 Jul 2025 12:48:07 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 5515C10E7BF;
+	Thu, 31 Jul 2025 15:51:51 +0000 (UTC)
 Authentication-Results: gabe.freedesktop.org;
-	dkim=pass (1024-bit key; unprotected) header.d=collabora.com header.i=daniel.almeida@collabora.com header.b="LPqXtAj1";
+	dkim=pass (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="t8XCqO/G";
 	dkim-atps=neutral
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from sender4-pp-f112.zoho.com (sender4-pp-f112.zoho.com
- [136.143.188.112])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 1D93910E209;
- Wed, 30 Jul 2025 12:48:06 +0000 (UTC)
-ARC-Seal: i=1; a=rsa-sha256; t=1753879681; cv=none; 
- d=zohomail.com; s=zohoarc; 
- b=EgwO8/clcXidq7f5NTIpU176mTfpMVWmEDxmWj7WeOtZdm/NsMUDB2/ZNU2d2aa3ZjvNBp6vVpg5lWbdwIHC+GEAcH/TBqZ0x3XgSF4xhb6THIm+PxXbWYcXbFRUujREoVUETHhAwHbqvsDiD5cD3d0RYqrWtrVLNzSEq8lppdE=
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=zohomail.com;
- s=zohoarc; t=1753879681;
- h=Content-Type:Content-Transfer-Encoding:Cc:Cc:Date:Date:From:From:In-Reply-To:MIME-Version:Message-ID:References:Subject:Subject:To:To:Message-Id:Reply-To;
- bh=qCAvTtSpwv/bw10fNrHo7ZJSdHiHGn8ognmTiLYqv5c=; 
- b=FmKnqmnRVOZ+1fBoTHmkZiOjDr8ZZVdGCmuYmtaIK7IpL6j8dTtPmCsCwx0+IQmQWRpZX0ZsXdKOemmTQuGw1N3cGzb5vGuEkrGDDykflnVxH8crUP67YTmBhCHEJ/20+nMgz2744tPSu73LimhWhlpy1gOH3934gleto4pGGmc=
-ARC-Authentication-Results: i=1; mx.zohomail.com;
- dkim=pass  header.i=collabora.com;
- spf=pass  smtp.mailfrom=daniel.almeida@collabora.com;
- dmarc=pass header.from=<daniel.almeida@collabora.com>
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; t=1753879681; 
- s=zohomail; d=collabora.com; i=daniel.almeida@collabora.com;
- h=Content-Type:Mime-Version:Subject:Subject:From:From:In-Reply-To:Date:Date:Cc:Cc:Content-Transfer-Encoding:Message-Id:Message-Id:References:To:To:Reply-To;
- bh=qCAvTtSpwv/bw10fNrHo7ZJSdHiHGn8ognmTiLYqv5c=;
- b=LPqXtAj1Hq8kcKQOe+HKg8fp04yscpgn/dprQm29XC/UMsQoEAD/g57cA4xXPHX6
- G4Emvjg6u3GzaYnqZ/dtoV1hpx3XlcDmbnMSn6p1dwn/DKQic/yjcF9hEDrg6HcyqQv
- rjnL4czHLOpUTW2/V/zAB8fiThCkVELhpYZPm9Ag=
-Received: by mx.zohomail.com with SMTPS id 1753879678687259.03361556399955;
- Wed, 30 Jul 2025 05:47:58 -0700 (PDT)
-Content-Type: text/plain;
-	charset=utf-8
-Mime-Version: 1.0 (Mac OS X Mail 16.0 \(3826.600.51.1.1\))
-Subject: Re: [PATCH v2 01/19] gpu: nova-core: register: minor grammar and
- spelling fixes
-From: Daniel Almeida <daniel.almeida@collabora.com>
-In-Reply-To: <b1289f95-616f-4bb8-b408-222ce6925e21@arm.com>
-Date: Wed, 30 Jul 2025 09:47:43 -0300
-Cc: Alexandre Courbot <acourbot@nvidia.com>,
- Danilo Krummrich <dakr@kernel.org>, David Airlie <airlied@gmail.com>,
- Simona Vetter <simona@ffwll.ch>,
- Maarten Lankhorst <maarten.lankhorst@linux.intel.com>,
- Maxime Ripard <mripard@kernel.org>,
- Thomas Zimmermann <tzimmermann@suse.de>,
- Beata Michalska <beata.michalska@arm.com>, nouveau@lists.freedesktop.org,
- dri-devel@lists.freedesktop.org, rust-for-linux@vger.kernel.org,
- linux-kernel@vger.kernel.org, John Hubbard <jhubbard@nvidia.com>,
- Nouveau <nouveau-bounces@lists.freedesktop.org>
-Content-Transfer-Encoding: quoted-printable
-Message-Id: <DC0D1E12-75A9-4FFC-871C-05831FA67504@collabora.com>
-References: <20250718-nova-regs-v2-0-7b6a762aa1cd@nvidia.com>
- <20250718-nova-regs-v2-1-7b6a762aa1cd@nvidia.com>
- <B1AA6359-7854-4284-B533-F5CA3C18AF34@collabora.com>
- <DBNF8SZWLI79.1NRX9AMW5QW45@nvidia.com>
- <d0ffb55b-690a-4a65-98b5-b83adebfd88b@arm.com>
- <DBNNTU14VH90.25AZCJSVT4JDR@nvidia.com>
- <ce8b4bd9-5122-4b85-b605-a1bf10556208@arm.com>
- <DBOL3HSE1OUW.22PGYP5T6164C@nvidia.com>
- <b1289f95-616f-4bb8-b408-222ce6925e21@arm.com>
-To: Steven Price <steven.price@arm.com>
-X-Mailer: Apple Mail (2.3826.600.51.1.1)
-X-ZohoMailClient: External
+Received: from sea.source.kernel.org (sea.source.kernel.org [172.234.252.31])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 0CF0310E7BF
+ for <nouveau@lists.freedesktop.org>; Thu, 31 Jul 2025 15:51:51 +0000 (UTC)
+Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
+ by sea.source.kernel.org (Postfix) with ESMTP id BC6E144035;
+ Thu, 31 Jul 2025 15:51:50 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 53349C4CEEF;
+ Thu, 31 Jul 2025 15:51:49 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+ s=k20201202; t=1753977110;
+ bh=sGB12Nb5+7kiLqTzx0SVj+FvEp/whs1svfbRU12ISY0=;
+ h=Date:Subject:To:Cc:References:From:In-Reply-To:From;
+ b=t8XCqO/GhtH9dT78GjZw3Ht8IVHNOMOQXw5NRBmbC0W2r1Hg8sqDKmlDtpDH25NYC
+ hsIwOBM90sqaAXiiP8NKqpMO+l2x98oGSSc8Si2QvQf9s+8BZJwsptUF9s73+NyCsP
+ gzgJik7DoTZgNpFV5Suuh8Z36XcObm5EoVqqUqemJEwMH9+5GdHY6FouCmDb6WHs4n
+ 6s0OAcsyiIqu2RcEisfeB5YUZ6gm9lKszOyXW5qI5bTxORieuydauGUNbiJz7ebpUX
+ 4qTeH1f4uMokhttn5nuTm45EiUEoXXFNlSGQs+uavcqzOIGo0GDJVanb65Y5pMdaxG
+ Kjc6/ADOGqPLw==
+Message-ID: <af513e6e-b6a0-40ba-acf8-258bd4b95106@kernel.org>
+Date: Thu, 31 Jul 2025 17:51:47 +0200
+MIME-Version: 1.0
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH] drm/nouveau: Remove forgotten TODO
+To: phasta@kernel.org
+Cc: David Airlie <airlied@gmail.com>, Ben Skeggs <bskeggs@nvidia.com>,
+ Simona Vetter <simona@ffwll.ch>, nouveau@lists.freedesktop.org,
+ linux-kernel@vger.kernel.org
+References: <20250409091413.94102-2-phasta@kernel.org>
+ <Z_ZTrZ-dcD5YiSm4@cassiopeiae>
+ <481a2808c235f95726d17803503b2b6dc2746dc3.camel@mailbox.org>
+From: Danilo Krummrich <dakr@kernel.org>
+Content-Language: en-US
+In-Reply-To: <481a2808c235f95726d17803503b2b6dc2746dc3.camel@mailbox.org>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 8bit
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -83,81 +61,49 @@ List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-[=E2=80=A6]
 
->>>=20
->>>> The idea of register blocks is interesting. I wonder how that would
->>>> translate in terms of access to invididual registers, i.e. does the
->>>> block end up just being a prefix into the full register name, or is =
-it
->>>> something else? =46rom your example declaration I picture that =
-accesses
->>>> would look something like `MMU_AS_CONTROL[4]::MEMATTR::read(bar)`, =
-which
->>>> ngl looks great, but I also cannot think of a construct that would =
-allow
->>>> such a syntax... Happy to think more about it though.
->>>=20
->>> Yes, that is the sort of syntax I was imagining, although I was =
-hoping
->>> you could do something like:
->>>=20
->>>  let as =3D MMU_AS_CONTROL[as_id]::try_get(&bar)?;
->>>=20
->>>  let memattr =3D as.MEMATTR.read(&bar);
->>>  memattr.set_attr0(3).write(&bar);
->>>  as.TRANSTAB.write(&bar, 0x1000);
->>>=20
->>> Which I'm sure shows how little Rust I've written, but hopefully you =
-get
->>> the idea - only the first line is a try_xxx which can fail and takes =
-the
->>> address space ID from a variable and bounds checks it. The other
->>> accesses we already know the bounds so there's no need to deal with
->>> failure, and we don't have to consider the situation where MEMATTR =
-is
->>> written but the TRANSTAB write fails (which couldn't actually happen
->>> with non-contiguous register arrays but the compiler wouldn't be =
-able to
->>> tell).
->>=20
->> That for sure looks elegant. Now the question is how can we implement
->> something similar using only ZSTs? `MMU_AS_CONTROL` would have to be =
-a
->> static array. Then `as` needs to be some sort of struct?
->>=20
->> The way this works looks very similar to what I suggested above with
->> register arrays and validating once that a given index is valid for =
-the
->> register array accesses. Then the non-try accessors can be used, =
-knowing
->> that the compiler will be able to infer that the index is valid. The
->> only drawback being that each `read` and `write` will have to carry =
-the
->> `as_id`.
->=20
-> Presumably it should be possible to implement with 'as' being a type
-> which actually contains 'as_id' (as opposed to an actual ZST) so you
-> don't need to explicitly pass that in. Otherwise there's a possibility
-> of passing the wrong as_id in and so the compiler won't be able to =
-infer
-> that it must be valid.
->=20
->> This would work, but if someone wants to experiment to try and =
-implement
->> something closer to the interface you proposed, I'm very open to the
->> idea. I wonder if we could do this without any runtime overhead...
->=20
-> Since my Rust knowledge is very limited there might be a better way of
-> doing this, but that this seemed like the most natural interface to =
-me.
-> I can see how a similar approach could be used in C with minimal/no
-> overhead so I would have thought this is possible in Rust.
+On 7/31/25 5:46 PM, Philipp Stanner wrote:
+> On Wed, 2025-04-09 at 13:02 +0200, Danilo Krummrich wrote:
+>> (+ Ben)
+>>
+>> On Wed, Apr 09, 2025 at 11:14:14AM +0200, Philipp Stanner wrote:
+>>> commit ebb945a94bba ("drm/nouveau: port all engines to new engine module
+>>> format") introduced a TODO to nouveau_chan.h, stating that an
+>>> unspecified rework would take place in the "near future".
+>>>
+>>> Almost 13 years have passed since this "near future", so it can be
+>>> safely assumed that the TODO is not needed anymore. Besides, its content
+>>> is useless anyways since it does not specify *what* should have been
+>>> done.
+>>>
+>>> Remove the TODO.
+>>>
+>>> Signed-off-by: Philipp Stanner <phasta@kernel.org>
+>>> ---
+>>>   drivers/gpu/drm/nouveau/nouveau_chan.h | 1 -
+>>>   1 file changed, 1 deletion(-)
+>>>
+>>> diff --git a/drivers/gpu/drm/nouveau/nouveau_chan.h b/drivers/gpu/drm/nouveau/nouveau_chan.h
+>>> index 016f668c0bc1..3b73ec91c4ff 100644
+>>> --- a/drivers/gpu/drm/nouveau/nouveau_chan.h
+>>> +++ b/drivers/gpu/drm/nouveau/nouveau_chan.h
+>>> @@ -33,7 +33,6 @@ struct nouveau_channel {
+>>>   		u64 addr;
+>>>   	} push;
+>>>   
+>>> -	/* TODO: this will be reworked in the near future */
+>>>   	bool accel_done;
+>>
+>> After having a brief look, it seems that it may has actually been reworked;
+>> there is only a single use of accel_done, which is in FIRE_RING(), where it is
+>> set to true. But it doesn't seem to be read from anywhere.
+>>
+>> So, I think we should remove both, the TODO and the accel_done field.
+>>
+>> @Ben: Maybe you remember the history of this.
+> 
+> Since we didn't get an answer – how do we want to continue with that,
+> Danilo?
 
-I hate macros with a passion, but I can try tackling this in the =
-interest of
-moving it forward :)
-
-=E2=80=94 Daniel
-
-
+Removing the unused accel_done and the corresponding TODO should be fine, let's
+do that.
