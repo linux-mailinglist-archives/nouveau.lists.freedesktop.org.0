@@ -2,44 +2,29 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id 12F07B17DC8
-	for <lists+nouveau@lfdr.de>; Fri,  1 Aug 2025 09:46:10 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id E8AB6B17EBB
+	for <lists+nouveau@lfdr.de>; Fri,  1 Aug 2025 11:01:49 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 66CAC10E2E5;
-	Fri,  1 Aug 2025 07:46:08 +0000 (UTC)
-Authentication-Results: gabe.freedesktop.org;
-	dkim=pass (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="aj1tCNoZ";
-	dkim-atps=neutral
+	by gabe.freedesktop.org (Postfix) with ESMTP id 9BF6B10E809;
+	Fri,  1 Aug 2025 09:01:48 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from sea.source.kernel.org (sea.source.kernel.org [172.234.252.31])
- by gabe.freedesktop.org (Postfix) with ESMTPS id A616B10E2E5;
- Fri,  1 Aug 2025 07:46:07 +0000 (UTC)
-Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by sea.source.kernel.org (Postfix) with ESMTP id 6256A4554B;
- Fri,  1 Aug 2025 07:46:07 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 95863C4CEE7;
- Fri,  1 Aug 2025 07:46:05 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1754034367;
- bh=J6nfFiOOqDG78zHsPEpxmyy2x4qceu5t+JJbMCFLeH0=;
- h=From:To:Cc:Subject:Date:From;
- b=aj1tCNoZGZlj+x3WnOt7ruc6OG0j1vd+xYlGRHCDQEouPbGQ3S94YR8nMy80M9FBH
- vhNIN3Ia/hnHnIa2YIWj1ER96iOVeUPQ6jsOpT59ekPjmJ3iQUkJ43Jms5eWrmllBu
- V1JPANToOA9/e+oO804DPh/I1LUrfeccHDubE8d8WiABrkUdngQ1YXO4PtjKBw4WgX
- OJ9vpeeMqMg7TnFVfk1XzTS7I297oJxIe+GiSPMUJ9G+3v97AH4sHxEu5prR9dbZni
- 1I2wManj9DRlpFld5eS/9TZyTzLQdvGl2z/G20Xj8F0jueE/Xv9Ep+K7T/CHpfrorF
- c7KucmY0ThYlA==
-From: Philipp Stanner <phasta@kernel.org>
-To: Danilo Krummrich <dakr@kernel.org>
-Cc: dri-devel@lists.freedesktop.org, nouveau@lists.freedesktop.org,
- linux-kernel@vger.kernel.org, Philipp Stanner <phasta@kernel.org>
-Subject: [PATCH] drm/nouveau: Remove surplus struct member
-Date: Fri,  1 Aug 2025 09:45:32 +0200
-Message-ID: <20250801074531.79237-2-phasta@kernel.org>
-X-Mailer: git-send-email 2.49.0
+Received: from hs01.dakr.org (hs01.dakr.org [173.249.23.66])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id D613810E809
+ for <nouveau@lists.freedesktop.org>; Fri,  1 Aug 2025 09:01:47 +0000 (UTC)
+Message-ID: <407cb766-fef5-4d86-84c4-a6e6eaf25bdb@dakr.org>
+Date: Fri, 1 Aug 2025 11:01:45 +0200
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+Subject: Re: [RESEND][PATCH] drm/nouveau: remove unused increment in
+ gm200_flcn_pio_imem_wr
+To: Timur Tabi <ttabi@nvidia.com>
+References: <20250725221717.671983-1-ttabi@nvidia.com>
+From: Danilo Krummrich <kernel@dakr.org>
+Cc: nouveau@lists.freedesktop.org
+Content-Language: en-US
+In-Reply-To: <20250725221717.671983-1-ttabi@nvidia.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -54,43 +39,36 @@ List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-struct nouveau_channel contains the member 'accel_done' and a forgotten
-TODO which hints at that mechanism being removed in the "near future".
-Since that variable is read nowhere anymore, this "near future" is now.
+Hi Timur,
 
-Remove the variable and the TODO.
+Please Cc the relevant maintainers when sending patches.
 
-Signed-off-by: Philipp Stanner <phasta@kernel.org>
----
- drivers/gpu/drm/nouveau/nouveau_chan.h | 2 --
- drivers/gpu/drm/nouveau/nouveau_dma.h  | 1 -
- 2 files changed, 3 deletions(-)
+On 7/26/25 12:17 AM, Timur Tabi wrote:
+> The 'tag' parameter is passed by value and is not actually used after
+> being incremented, so remove the increment.
 
-diff --git a/drivers/gpu/drm/nouveau/nouveau_chan.h b/drivers/gpu/drm/nouveau/nouveau_chan.h
-index 561877725aac..bb34b0a6082d 100644
---- a/drivers/gpu/drm/nouveau/nouveau_chan.h
-+++ b/drivers/gpu/drm/nouveau/nouveau_chan.h
-@@ -31,8 +31,6 @@ struct nouveau_channel {
- 		u64 addr;
- 	} push;
- 
--	/* TODO: this will be reworked in the near future */
--	bool accel_done;
- 	void *fence;
- 	struct {
- 		int max;
-diff --git a/drivers/gpu/drm/nouveau/nouveau_dma.h b/drivers/gpu/drm/nouveau/nouveau_dma.h
-index 0e27b76d1e1c..c25ef9a54b9f 100644
---- a/drivers/gpu/drm/nouveau/nouveau_dma.h
-+++ b/drivers/gpu/drm/nouveau/nouveau_dma.h
-@@ -90,7 +90,6 @@ FIRE_RING(struct nouveau_channel *chan)
- {
- 	if (chan->dma.cur == chan->dma.put)
- 		return;
--	chan->accel_done = true;
- 
- 	WRITE_PUT(chan->dma.cur);
- 
--- 
-2.49.0
+Good catch, but the commit message should also mention that the "actual"
+increment is in nvkm_falcon_pio_wr(), otherwise it throws up the question if the
+increment is missing somewhere else instead.
+
+> Signed-off-by: Timur Tabi <ttabi@nvidia.com>
+> ---
+>   drivers/gpu/drm/nouveau/nvkm/falcon/gm200.c | 2 +-
+>   1 file changed, 1 insertion(+), 1 deletion(-)
+> 
+> diff --git a/drivers/gpu/drm/nouveau/nvkm/falcon/gm200.c b/drivers/gpu/drm/nouveau/nvkm/falcon/gm200.c
+> index f0acfaa153d1..7c43397c19e6 100644
+> --- a/drivers/gpu/drm/nouveau/nvkm/falcon/gm200.c
+> +++ b/drivers/gpu/drm/nouveau/nvkm/falcon/gm200.c
+> @@ -103,7 +103,7 @@ gm200_flcn_pio_imem_wr_init(struct nvkm_falcon *falcon, u8 port, bool sec, u32 i
+>   static void
+>   gm200_flcn_pio_imem_wr(struct nvkm_falcon *falcon, u8 port, const u8 *img, int len, u16 tag)
+>   {
+> -	nvkm_falcon_wr32(falcon, 0x188 + (port * 0x10), tag++);
+> +	nvkm_falcon_wr32(falcon, 0x188 + (port * 0x10), tag);
+>   	while (len >= 4) {
+>   		nvkm_falcon_wr32(falcon, 0x184 + (port * 0x10), *(u32 *)img);
+>   		img += 4;
+> 
+> base-commit: 155a3c003e555a7300d156a5252c004c392ec6b0
 
