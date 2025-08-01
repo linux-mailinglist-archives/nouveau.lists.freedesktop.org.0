@@ -2,153 +2,81 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id BF011B17A1B
-	for <lists+nouveau@lfdr.de>; Fri,  1 Aug 2025 01:38:21 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id EB045B17B21
+	for <lists+nouveau@lfdr.de>; Fri,  1 Aug 2025 04:16:01 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id E8E3810E2CE;
-	Thu, 31 Jul 2025 23:38:19 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 6A7CA10E2D5;
+	Fri,  1 Aug 2025 02:15:57 +0000 (UTC)
 Authentication-Results: gabe.freedesktop.org;
-	dkim=pass (2048-bit key; unprotected) header.d=Nvidia.com header.i=@Nvidia.com header.b="E057c/AQ";
+	dkim=pass (2048-bit key; unprotected) header.d=darkrefraction-com.20230601.gappssmtp.com header.i=@darkrefraction-com.20230601.gappssmtp.com header.b="v5Jx8MSw";
 	dkim-atps=neutral
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from NAM02-DM3-obe.outbound.protection.outlook.com
- (mail-dm3nam02on2042.outbound.protection.outlook.com [40.107.95.42])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 363FE10E135;
- Thu, 31 Jul 2025 23:38:18 +0000 (UTC)
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=CNNMTtZDUFXHddSrXrOVMB1jc/U7mwYMrohCSBUUS6CezftXvVbUPEgnbGtXnxyUC+50tXk+71zWQCLFugtDJtg9JdJ/BrNfPTz8hfQsXnQlEsIFo7g14oWkea0hmxzv/dYJzFstC0aAmUfchl3Aqp2CveB0c6OAKu/TAUdTBONugNtAlTmFNLQR4Aq6MH9LGJAnx3VBNr1CnFeeUzBbIgpQowCe/+z/DSNp3kVEK0APGHqmlopZ91pWJNQ6ETonjjQgH2W/F9GFpx6yEDOU37cxvjbrrEzWA07mUFuq8VmWkhEfZclqqY/it8uU7JudsBy+DVC+0PlTDjx77EfDug==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=bJfdJMQAh2zqfIucDQnb8AmO+tRvswGyRJ9BNlzO5iY=;
- b=Aswzi8Wws0KfcOfpXMMkyZjitljUGkbCBxfG83/ON+RBXsLRLNaYDy3kdRtn0CN/VtujSg4GivlXdW8SamDlaA8Lp0Xhlc/DeI3TXAFOszCVnieJJXW7vNmtFsFwxGE/LYp7/wwkgC3UmYWeImzt0aR56HNtIjS4ifVdgxb30WLl+3N/xXoCdwgBz5vzUEIFEWsodwDX9jt6HM3MdMTeBKBKCRwGNuxermfMtW069sWSOjsqa6/JeolYImKQ+jaAp7t885SJMk8Yubu/TVIKfl5rFx9zKpYPpnMO2LhsnoTfypXqOxLuEgKNkXj2c3sC2j0QwRvpdSPwo+Z2/W4YqA==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=nvidia.com; dmarc=pass action=none header.from=nvidia.com;
- dkim=pass header.d=nvidia.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=Nvidia.com;
- s=selector2;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=bJfdJMQAh2zqfIucDQnb8AmO+tRvswGyRJ9BNlzO5iY=;
- b=E057c/AQrqJNiFq7+APh1RM1nOZYVNS1ySyYD6Bpe6AsX8YVSypgXQAkMmOEb6MD6ZyMfT7REMS6FmpoAsFLW4yJgXLwYARZldeeNZbS1yThI9WxM0vImhCM0UI+NUJvLp5EjgnQ7YLnTewelWYpObSCnC9Cistwo38rAHIhxfZ8LxCZhH+7Hgc0Ja1rW/DrVZaBHJCt38LhaLeF9fP/IL1zquZSm4TwjNM14z1JV/dodZSMr2Ml12M052RyBY19dYt6n+gxajIEgfg7jLtAkbhPIHvwT6s1bfW0gVKBhbNG+H6p3fR+C1+pw48spJ8MS4863K8tXPmETl+pfNsXMA==
-Authentication-Results: dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=nvidia.com;
-Received: from SA1PR12MB6701.namprd12.prod.outlook.com (2603:10b6:806:251::18)
- by DS4PR12MB9636.namprd12.prod.outlook.com (2603:10b6:8:27f::13) with
- Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.8989.12; Thu, 31 Jul
- 2025 23:38:15 +0000
-Received: from SA1PR12MB6701.namprd12.prod.outlook.com
- ([fe80::2be0:c316:443d:da3a]) by SA1PR12MB6701.namprd12.prod.outlook.com
- ([fe80::2be0:c316:443d:da3a%6]) with mapi id 15.20.8989.010; Thu, 31 Jul 2025
- 23:38:14 +0000
-From: James Jones <jajones@nvidia.com>
-To: Danilo Krummrich <dakr@kernel.org>,
-	Lyude Paul <lyude@redhat.com>
-Cc: nouveau@lists.freedesktop.org, dri-devel@lists.freedesktop.org,
- linux-kernel@vger.kernel.org, David Airlie <airlied@gmail.com>,
- Simona Vetter <simona@ffwll.ch>, James Jones <jajones@nvidia.com>,
- =?UTF-8?q?Ville=20Syrj=C3=A4l=C3=A4?= <ville.syrjala@linux.intel.com>
-Subject: [PATCH] drm/nouveau: Pass along the format info from .fb_create()
- nouveau_framebuffer_new()
-Date: Thu, 31 Jul 2025 16:41:04 -0700
-Message-ID: <20250731234104.25243-1-jajones@nvidia.com>
-X-Mailer: git-send-email 2.50.1
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
-X-ClientProxiedBy: SJ0PR05CA0204.namprd05.prod.outlook.com
- (2603:10b6:a03:330::29) To SA1PR12MB6701.namprd12.prod.outlook.com
- (2603:10b6:806:251::18)
+Received: from mail-ed1-f45.google.com (mail-ed1-f45.google.com
+ [209.85.208.45])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 1A25910E28A
+ for <nouveau@lists.freedesktop.org>; Fri,  1 Aug 2025 02:15:56 +0000 (UTC)
+Received: by mail-ed1-f45.google.com with SMTP id
+ 4fb4d7f45d1cf-61589705b08so3236833a12.0
+ for <nouveau@lists.freedesktop.org>; Thu, 31 Jul 2025 19:15:55 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=darkrefraction-com.20230601.gappssmtp.com; s=20230601; t=1754014554;
+ x=1754619354; darn=lists.freedesktop.org; 
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=Ppf/vHIb0Abri4F+PeMzmW+LdmW8MhPB3OqpsCnahAk=;
+ b=v5Jx8MSwN0X3F0MnvTjvTx+9PeUF3LTF3qbPRWn5loZiz7egfS2Gy5fgyl7gN03Q4l
+ dnhFGSnQ9iNirIPgm02NfmwpnoHED8lkkZ5u4EUo8uHExFRuKNz6CSgYFmxvooj0Ic3g
+ aAaw+nwJlIy+atBuiNzdKIDD+sh7BmPc1zPF65vvApC7lCJq79vo+4l0V3JUAPjBGZSs
+ QIdUvlHZD9s5ULU5WUjP1gu7c285ya3ROb8BeEVUX/a/K69SIpf8XNAGxNMfG0fbwhfW
+ I7Mo/jY4HsHQqLqMS89ewp6oJnxh++52bLAZU6XlLGwfAETDKtYvvkMOhCP2YE3dSbsd
+ osvA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1754014554; x=1754619354;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=Ppf/vHIb0Abri4F+PeMzmW+LdmW8MhPB3OqpsCnahAk=;
+ b=kpk7XcFTzNGPEgGesuse2gr6IzQX267uyg3tVmNczPOcy/3pW+sy8jPLkNJo0dktxf
+ qvc5vmF6jFukfcB4diPhEUZ/ch60dCmBno2GKST56sbxn6tMW6Kf8C4N4q+rfxbavoPK
+ F/B4xfQf6quQdFmLKHUZwOk0bhAW7ttyTymG9ECBnemE28Xbi37H5BXTjQbSWrdieKfM
+ j1TQk0xoTuzlYAcCDsbpWv30obLmgBnlIUx5qHgYS/QCNx/XijMnlzsSWDlPktkfQNhY
+ Zv16HYricNtLfYXL9q/xcQxQGSVWoOk4o4IaxYcKmPMSxajzFrod3QS8pBsOSWKq/YO2
+ l/xw==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCUU9D16hBitCYwh+tpvkCp6CGb4FuRjni+OyS/n+9ROdNmzJcBaPk+Tp3+pINkchaNnApU/LAOo@lists.freedesktop.org
+X-Gm-Message-State: AOJu0Yw/CM3cA+Vkal0Kq7BvzGWPLfpof8ln+1R9iEdYwDHk/mZTGc7x
+ 6cERxko6L9EXQaiIP47aKUeosK+hKseCVXj6+3Aj/R12+su8YOQLtkWsNtMSpiMwCa/zWYoJ5WR
+ QE2Wr+LhiS+WlXzrF+PNdxeU9tQ9nT1jRL4gsnOoJh1RpGi3d5nSl
+X-Gm-Gg: ASbGnctkF6hSEjpn1Y9GJlXM4dbEa8uOUGk6D3krqBdlvWCsqbJVnN98upd31koRj3T
+ FDvgLwRIxhQjZtOTk/F1cvkvdy6ZnGSjWbHfJgNwW1zpVWiv3C8CP521GfpyFgiTUxr2B/+pkKp
+ jfWyt5SkRNkjT3oDCkCVheZOmDqnMp6YIkBGn+DrckfZt2UdeRkMqD/5tcZ01mnvmwutb5UCuTu
+ /GiiGE=
+X-Google-Smtp-Source: AGHT+IHo5X0FLwScBjI2ozXxC3gyiudT7NfjkUK6chYTTx0UIYsj0I3sItU/ini5nQy4mJUwVBaOV8I78AWLjlw83t4=
+X-Received: by 2002:a05:6402:26ca:b0:615:97fe:54c6 with SMTP id
+ 4fb4d7f45d1cf-61597fe5990mr8140844a12.31.1754014553917; Thu, 31 Jul 2025
+ 19:15:53 -0700 (PDT)
 MIME-Version: 1.0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: SA1PR12MB6701:EE_|DS4PR12MB9636:EE_
-X-MS-Office365-Filtering-Correlation-Id: 57fdcd7e-d4d1-4aed-3e65-08ddd08b517d
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0;ARA:13230040|366016|376014|1800799024;
-X-Microsoft-Antispam-Message-Info: =?utf-8?B?UW01YktybGcvdnN2MmM1eXg1R3M4Wlo0NU5ya1VyVFJPYmtDL0UzSjhjNW93?=
- =?utf-8?B?SGYrcC9TMHg4RC85Q2NTcjZIZVNMOTZLN2hEMkZhcDVrSWZXQUl4KzlSQThM?=
- =?utf-8?B?cXN0UmFweXJud3EzelcxdW1jSVZENWF5L29EZmxRMkIrVUp4Zzg3ZkhKbHJu?=
- =?utf-8?B?VXg5Sm9oaWUwZzJoSWE2dCtIMjlGWVhncitpZU1SZ3QwTStKYUNCVlBaeC9D?=
- =?utf-8?B?RHBkci9MRVkxLzFTTzc2UWJLYzRMemFINzBRTHFSMzFIc1BnRHhBZG5HREZh?=
- =?utf-8?B?Y1NpcVpJYVN1K0tYT2RoZktEOTVCZWlubVJydkRxK3YvaGhLbGVHUHdSVldi?=
- =?utf-8?B?a1Nkc0Rvc2wzR3JkU1hrRUlDSmkyeXBCMnZ5QzJDRjc5eklZRjZDNFc3OW52?=
- =?utf-8?B?bFpRbWYzUE1pa1B0OUpUcy9TSkxzUDBhTTNHUmNRb29KdDNUK3dwTjU3dlFh?=
- =?utf-8?B?MlN0L3U2dzRQTHVJUDdDKzBJM2lPVGJHWGtpQWwzSWw5R1NaQ1VBcVBlRHRj?=
- =?utf-8?B?eGJ0aDdKYjUvMHFXR0RyNVhmbkFyL2tLdUg1aDRTVERVSDBEUVZBc05uTnVm?=
- =?utf-8?B?WWNQV2YvbDlxMHBjck5pTk53c21SUy8ybVJVRy9HTTluNk5JVWNRQTRFVmw5?=
- =?utf-8?B?VUNpQ0lIVDNsckpRYVVtQXV3L2RkV2NxR2QxbHN5REFYbCt0bml1ajdEL0wv?=
- =?utf-8?B?R2hPdGZyNEdqTUUzUzdHaEs1WmdFdEZUQit1dm5YL01WSUlucGxYSVA3NlA4?=
- =?utf-8?B?SWVLNGk4SkxVSmNBaXprbi9BYWpFblE0Wi90TnQ5K1ZWT2ZjeENZY3Z1OTlu?=
- =?utf-8?B?a3k5Q2V5bDZnRDhzMGtTVkRMV3NQUER2bmFXWEw0UkUzQzVUZ01kOGR5bzJU?=
- =?utf-8?B?c25JMVI1cTNTbFA4dlhqZ2lnd2MwdzdZK2wzNWQxcUpacFJWM2o2LytFWWFG?=
- =?utf-8?B?SW5OTGZxQ0dEVld3Wk94ellvWmg1MWVINmkzckpaaWVqZi9RK2F4ZGYrRzkx?=
- =?utf-8?B?NE1zRDc5TldzQTRXaEpOSENKMGRMMkFDZDNBR0NERnNDcG1NRkFKM1VZOU1E?=
- =?utf-8?B?cXVIWlBiZG1DaS9pa0Z2TWR3UlpXclpjaVZBZzVQK0pzYTI0V0FKc2dLaTdo?=
- =?utf-8?B?bHh5bFdUaXY3VWdTbWNSdUViekpmLzlxYzhYektkbUU2eHNPMERjVHorNEwz?=
- =?utf-8?B?TEtHR1NCeHhqbUt3L0hZKzhzUHYyYjhkMndLbUhkQkJHZGpUVHZiTVRBRTdj?=
- =?utf-8?B?UHd6elROL1c0RXZCUTB2OVhJNjREU2VDYUExRVgxNGZtZUxwQXNNMjE5bWQ0?=
- =?utf-8?B?UXVsMUlsRlZpckdrbU5UUHV5RVJrcFhlVng0dnBBQWpzd2JDVno0ZUE3QVE3?=
- =?utf-8?B?NGoxaVRCODR0dVp2NmNjQ1FpdU91dTZwakZ3UWxHTTArMlQwTjFRQUZYRzdJ?=
- =?utf-8?B?WHJGdHd3a1JTRWN3K1NrVUwvOG0xWGZvWkpqVzNjRG90S2xRbXN5Vk9IejFz?=
- =?utf-8?B?cjZzMXl2RWxkUnRUZVQ3QWNaVk5vc0U0SFF2aXNHcDhvMWphNktpTVEvSEZV?=
- =?utf-8?B?d21ucnYwUytoN2xTOVhKSGo3cFJqYnpIMVduSzFWandWbUluUm94Yy80TkRx?=
- =?utf-8?B?UUtGcUQycVhKa0QxbHl4V1lqY0Z4MStQS1JEUFJqN1JwZTJVNFNPRmQvZW83?=
- =?utf-8?B?Yll3K2NEZ1dRempucHJ0K3k3NHZQeWJ3MkFGWnJFTGkvNUpLeHd3UHoxS3p0?=
- =?utf-8?B?QVZ1TTVNWVUzMDZtdVRkYkRtbk5uc3BPYkZ0ZmdXVUsyTG1uazlkTFUrN0Vy?=
- =?utf-8?B?TVA1em1ORHZwQXd4SFBSNmdqTDBPbkl2NzZIMFVDd0JFZVcwcjRSN3R0ODBC?=
- =?utf-8?B?YnM0Zzd0RXRYcVlnRjJEM1ZEOGl4RTh1WHpBM2h1TjkvY3BuR1N0eTRYTFZQ?=
- =?utf-8?Q?HgK4FAuFM80=3D?=
-X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
- IPV:NLI; SFV:NSPM; H:SA1PR12MB6701.namprd12.prod.outlook.com; PTR:; CAT:NONE;
- SFS:(13230040)(366016)(376014)(1800799024); DIR:OUT; SFP:1101; 
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?bk1SdDF4dGVIZENtUDVQMjVFYnpFK1ZRZyttTW5FSVBlL3V0TjNxUmFXbGVM?=
- =?utf-8?B?VXpOM2VpRGdGTHFHOHRBTXRMMWROTXgvam5BWHI2VGZaTllaVnRTb3VmN0E5?=
- =?utf-8?B?ajVaVnNHcnFOWndZMUQ0aVJkTURRcVNYenFWR01oV1E5UStzVHBqaFB2NEVX?=
- =?utf-8?B?ZVVHQjY4TkdoNERyeXZ2TU9ScktxVllqaUZSdjBBSkxENTk3eGJhZ1RnemRX?=
- =?utf-8?B?RVFobGxta012eFdtVDBZNGUrZXh2Z2huOVovcFJKSHF3L080L2pOZHJwRVNs?=
- =?utf-8?B?YmdmVFBSaSsrN056d1FRTDV5RkQ3VENFSTNULzgxOS9ZR1VxMDlrdFJIdnZB?=
- =?utf-8?B?a1RRbmZjRnFvTHcrWDg0S3ZDZnpyUG5rVTkzVGNadGtWTTVYM1MwYjlLaUVN?=
- =?utf-8?B?RlJLYWFVdDZWOVpySFpaa0NNejdPNE9pN1Z6anVuZG9MdzJTaGkraXZ0UllD?=
- =?utf-8?B?ZzJ1SVIxckt3YVdjRVR0SjVvdjd4Y1Q4amlWUWRHOFlWSWMxMEsrSndDMjZS?=
- =?utf-8?B?bi9rWTNZUlpFODBwUFZvTFhBaTJPZlYzYlpybzlMNGE4MkhicU1PWjIxeHl6?=
- =?utf-8?B?cGlJeHh3dGI3YmhLSWtzek0vS3R1a1RpMmRNN3U0b2hnNG0xSjVaS1N4N0tm?=
- =?utf-8?B?STVyZDBJSCtKSDRzS1dNTDltbVZRWElXOSszbXY0NWFhSDdoSUlqeVUrLzJs?=
- =?utf-8?B?WTJaSll3dnlVSFV5VVl5RXByb3JnRWdJUjZwak1ScHVPQm9LRnZMM0l5eDVG?=
- =?utf-8?B?MzlaeHdSUWxMSWpGWVhzazM5TmRNdFRWam96Z1ZHekxHV1BNa0F5V2NGUHlt?=
- =?utf-8?B?MHlCZEduR2Irb1BhODJRRk1GOC9iWHRxb3o3RUVPT0k5SEhkSFlPMnFPZFRM?=
- =?utf-8?B?d2doZG5HbkJMUEc2enV0dFAzd1FUODhMcFYza2ZNTUZMbUJyY0p1Vjc2Z2ox?=
- =?utf-8?B?UkZwVkptVEZhTUhtUllXclpsa29JV1JRWGozWWxtTlVHamQ2eEdHSkx6YzNz?=
- =?utf-8?B?bGROQURhNHhtSTJsc3FCQ3UwRzZXKzBTa2hWcXl2K0hmWWhvOEJBMUJONDhZ?=
- =?utf-8?B?NHlnempkMlBDZzBjdGpGUzhITFVBbysrenRHTzRtbHk2TjNQOTMxVWhtaHVV?=
- =?utf-8?B?RnRReHZzL2N4VGhzM1A5SzJjZUdPMFI1SlQ3MGxEYXhhUmRRV3hWbmk4U3BI?=
- =?utf-8?B?N1hDQjVWWWdLZWFBY3VDNzZPakVJd3RCN2NJVGZFaHIrcC9wOHJoZjZDMytG?=
- =?utf-8?B?cms1VU5IZ21GS1F0K0x4S0hWQnMwT3llaXhMeFRPRERnYTJFYzRlaWJzdU1C?=
- =?utf-8?B?TG9CaGtxVExDeXgra09LbnQybmhZM3NocFV1NjZwSGQxQ2l3NmdWaWZOLzY5?=
- =?utf-8?B?eWdEcFRFSWk2bTFnQUw3d2VpZmR0MnRaR0h3V0JwZ21kdE1Ka05ROE5sK1JV?=
- =?utf-8?B?NWFVamNvWHdwcUxkdWFaTDhsSFNEdCsxekYrelRvZHJBZFpuVjhYbnJiR1Fj?=
- =?utf-8?B?RVY2UlNtMlEveU91V3M2Zkc5ZkJUSTc2UE81cWF5YkR5SnltcUZFcldLYm5J?=
- =?utf-8?B?dHk0WGE0b3JtdEtCdktudm5HK3lKREJndCtvV2laZlpUTlRBTWhlUDBJdEEz?=
- =?utf-8?B?WHlGSXNPeVZCdEw2Qm5LUnVVNEYrVloxalQyN1hQOFdrMnNFQnRySDNTdzVB?=
- =?utf-8?B?U2cxdDhPUjRtTWtNZm1MNWlPQjdISjBRM0d4d1d5ZGhEdlVTN2NMVU9hV3NC?=
- =?utf-8?B?OStUSmd6TWtrM2JHQkpoRkFlaVl0dXczbjhzN2FkTmZLNlBzeElJODNKbWVv?=
- =?utf-8?B?d3hlNVllQmtCS0UzUXI3cEtsM2VteXNNSU1mMU9aRi9ya25qb1hSWHViR05K?=
- =?utf-8?B?NjV3OWd0NG80VzYyWEg0TzBNRHdLK1RUcXB5WDRNVVlKK0lpUHptTnJUTklT?=
- =?utf-8?B?M0N2bEdBTkFaajRHVU50a0hQekVZdXJzdFBwQlhCTlNnaVRpUXBMU2xSUmNa?=
- =?utf-8?B?WU9MRmx5OVJKSFpPQ1lEYjhReXYwMFRmWHY2STVvUGxEWG9tNHFBMjRwSGxD?=
- =?utf-8?B?bmUzK0RhY0cyV2t2ZWlBZFc3WlQrNkdkVW9jRklkSHBySXVZRm9zay9mZGVJ?=
- =?utf-8?Q?urgcNeaWBm2vV50tKXC6hezaU?=
-X-OriginatorOrg: Nvidia.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 57fdcd7e-d4d1-4aed-3e65-08ddd08b517d
-X-MS-Exchange-CrossTenant-AuthSource: SA1PR12MB6701.namprd12.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 31 Jul 2025 23:38:14.3900 (UTC)
-X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
-X-MS-Exchange-CrossTenant-Id: 43083d15-7273-40c1-b7db-39efd9ccc17a
-X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: qCamP7pv+j1uwQrLhx2bqV+YrCrk81nx22i26YsMvXglT9vOlpNZtd7HCWY1bvRxAM0IskBQ61ODAQoJrdUasg==
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: DS4PR12MB9636
+References: <20250312213746.228042-1-mhenning@darkrefraction.com>
+ <20250312213746.228042-3-mhenning@darkrefraction.com>
+ <Z9xfoS89yimS1Sb3@pollux>
+ <CAAgWFh2RtCwaKNinX9X4BjwNiaBj5BF_ypzbqoqV4LJgN4cPvg@mail.gmail.com>
+ <Z-VZlIc3E8ZQQmXa@cassiopeiae>
+ <CAAgWFh2F-MH_U1V6SY_Z3nWz0_meyvAcWjfUiEoXzpW697oi7w@mail.gmail.com>
+ <Z-aMlNW2-MvjETXV@pollux>
+In-Reply-To: <Z-aMlNW2-MvjETXV@pollux>
+From: M Henning <mhenning@darkrefraction.com>
+Date: Thu, 31 Jul 2025 22:15:27 -0400
+X-Gm-Features: Ac12FXzCKFr4ftuv7cwTomUyqRJMtDHPlIXsQW2gFn5E4-j_4OAQpY1XLlEXU28
+Message-ID: <CAAgWFh3Zvgb_yXsV2WHytNFjRZ5KQraCdG3+-EXS5n+xaacDXg@mail.gmail.com>
+Subject: Re: [PATCH 2/2] drm/nouveau: DRM_NOUVEAU_SET_ZCULL_CTXSW_BUFFER
+To: Danilo Krummrich <dakr@kernel.org>
+Cc: Karol Herbst <kherbst@redhat.com>, Lyude Paul <lyude@redhat.com>, 
+ Faith Ekstrand <faith.ekstrand@collabora.com>, dri-devel@lists.freedesktop.org,
+ nouveau@lists.freedesktop.org
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -163,81 +91,108 @@ List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-Plumb the format info from .fb_create() all the way to
-nouveau_framebuffer_new() to avoid the redundant lookup.
-Also plumb the format info from there down to
-drm_helper_mode_fill_fb_struct() as required, avoiding
-a WARN_ON() and failure every time this path is used,
-e.g., during fbdev init.
+On Fri, Mar 28, 2025 at 7:48=E2=80=AFAM Danilo Krummrich <dakr@kernel.org> =
+wrote:
+>
+> On Thu, Mar 27, 2025 at 03:01:54PM -0400, M Henning wrote:
+> > On Thu, Mar 27, 2025 at 9:58=E2=80=AFAM Danilo Krummrich <dakr@kernel.o=
+rg> wrote:
+> > >
+> > > On Fri, Mar 21, 2025 at 07:00:57PM -0400, M Henning wrote:
+> > > > This is a pointer in the gpu's virtual address space. It must be
+> > > > aligned according to ctxsw_align and be at least ctxsw_size bytes
+> > > > (where those values come from the nouveau_abi16_ioctl_get_zcull_inf=
+o
+> > > > structure). I'll change the description to say that much.
+> > > >
+> > > > Yes, this is GEM-backed. I'm actually not entirely sure what the
+> > > > requirements are here, since this part is reverse-engineered. I thi=
+nk
+> > > > NOUVEAU_GEM_DOMAIN_VRAM and NOUVEAU_GEM_DOMAIN_GART are both okay. =
+The
+> > > > proprietary driver allocates this buffer using
+> > > > NV_ESC_RM_VID_HEAP_CONTROL and sets attr =3D NVOS32_ATTR_LOCATION_A=
+NY |
+> > > > NVOS32_ATTR_PAGE_SIZE_BIG | NVOS32_ATTR_PHYSICALITY_CONTIGUOUS, att=
+r2
+> > > > =3D NVOS32_ATTR2_GPU_CACHEABLE_YES | NVOS32_ATTR2_ZBC_PREFER_NO_ZBC=
+.
+> > >
+> > > (Please do not top post.)
+> > >
+> > > What I mean is how do you map the backing GEM into the GPU's virtual =
+address
+> > > space? Since it's bound to a channel, I assume that it must be ensure=
+d it's
+> > > properly mapped when work is pushed to the channel. Is it mapped thro=
+ugh
+> > > VM_BIND?
+> >
+> > Yes. The userspace code for this is here:
+> > https://gitlab.freedesktop.org/mesa/mesa/-/merge_requests/33861/diffs?c=
+ommit_id=3D0c4baab863730f9fc8b417834ffcbb400f11d617
+> > It calls into the usual function for driver internal allocations
+> > (nvkmd_dev_alloc_mem) which calls VM_BIND internally.
+>
+> BOs mapped through VM_BIND are prone to eviction, is this a problem here,=
+ or is
+> it fine if it is only ensured that this mapping is valid for the duration=
+ of
+> subsequent EXEC jobs?
 
-Fixes: 41ab92d35ccd ("drm: Make passing of format info to drm_helper_mode_fill_fb_struct() mandatory")
-Signed-off-by: James Jones <jajones@nvidia.com>
-CC: Ville Syrjälä <ville.syrjala@linux.intel.com>
----
- drivers/gpu/drm/nouveau/nouveau_display.c | 9 +++------
- drivers/gpu/drm/nouveau/nouveau_display.h | 1 +
- 2 files changed, 4 insertions(+), 6 deletions(-)
+I don't see the proprietary driver doing anything special related to
+eviction in traces, which is to say that I think it's fine for it to
+just be valid for subsequent EXEC jobs. That being said, I don't have
+the deepest understanding of how memory mapping works in
+open-gpu-kernel-modules so I might have missed something.
 
-diff --git a/drivers/gpu/drm/nouveau/nouveau_display.c b/drivers/gpu/drm/nouveau/nouveau_display.c
-index e1e542126310..805d0a87aa54 100644
---- a/drivers/gpu/drm/nouveau/nouveau_display.c
-+++ b/drivers/gpu/drm/nouveau/nouveau_display.c
-@@ -253,6 +253,7 @@ nouveau_check_bl_size(struct nouveau_drm *drm, struct nouveau_bo *nvbo,
- 
- int
- nouveau_framebuffer_new(struct drm_device *dev,
-+			const struct drm_format_info *info,
- 			const struct drm_mode_fb_cmd2 *mode_cmd,
- 			struct drm_gem_object *gem,
- 			struct drm_framebuffer **pfb)
-@@ -260,7 +261,6 @@ nouveau_framebuffer_new(struct drm_device *dev,
- 	struct nouveau_drm *drm = nouveau_drm(dev);
- 	struct nouveau_bo *nvbo = nouveau_gem_object(gem);
- 	struct drm_framebuffer *fb;
--	const struct drm_format_info *info;
- 	unsigned int height, i;
- 	uint32_t tile_mode;
- 	uint8_t kind;
-@@ -295,9 +295,6 @@ nouveau_framebuffer_new(struct drm_device *dev,
- 		kind = nvbo->kind;
- 	}
- 
--	info = drm_get_format_info(dev, mode_cmd->pixel_format,
--				   mode_cmd->modifier[0]);
--
- 	for (i = 0; i < info->num_planes; i++) {
- 		height = drm_format_info_plane_height(info,
- 						      mode_cmd->height,
-@@ -321,7 +318,7 @@ nouveau_framebuffer_new(struct drm_device *dev,
- 	if (!(fb = *pfb = kzalloc(sizeof(*fb), GFP_KERNEL)))
- 		return -ENOMEM;
- 
--	drm_helper_mode_fill_fb_struct(dev, fb, NULL, mode_cmd);
-+	drm_helper_mode_fill_fb_struct(dev, fb, info, mode_cmd);
- 	fb->obj[0] = gem;
- 
- 	ret = drm_framebuffer_init(dev, fb, &nouveau_framebuffer_funcs);
-@@ -344,7 +341,7 @@ nouveau_user_framebuffer_create(struct drm_device *dev,
- 	if (!gem)
- 		return ERR_PTR(-ENOENT);
- 
--	ret = nouveau_framebuffer_new(dev, mode_cmd, gem, &fb);
-+	ret = nouveau_framebuffer_new(dev, info, mode_cmd, gem, &fb);
- 	if (ret == 0)
- 		return fb;
- 
-diff --git a/drivers/gpu/drm/nouveau/nouveau_display.h b/drivers/gpu/drm/nouveau/nouveau_display.h
-index e45f211501f6..d569240df354 100644
---- a/drivers/gpu/drm/nouveau/nouveau_display.h
-+++ b/drivers/gpu/drm/nouveau/nouveau_display.h
-@@ -10,6 +10,7 @@
- 
- int
- nouveau_framebuffer_new(struct drm_device *dev,
-+			const struct drm_format_info *info,
- 			const struct drm_mode_fb_cmd2 *mode_cmd,
- 			struct drm_gem_object *gem,
- 			struct drm_framebuffer **pfb);
--- 
-2.50.1
+Is there a good way to test this code path? Can I eg. force the kernel
+to evict everything in order to test that the context switching still
+works?
 
+> Does the mapping need to be valid when DRM_NOUVEAU_SET_ZCULL_CTXSW_BUFFER=
+ is
+> called? If so, how is this ensured?
+
+I don't think so. My understanding is that this call is just setting a poin=
+ter.
+
+> Can DRM_NOUVEAU_SET_ZCULL_CTXSW_BUFFER be called in between multiple
+> DRM_NOUVEAU_EXEC calls?
+
+Yes, there's nothing that requires a specific ordering - we can use
+the context normally before and after the
+DRM_NOUVEAU_SET_ZCULL_CTXSW_BUFFER call.
+
+> Does it maybe need an async mode, such as EXEC and VM_BIND? (To me it doe=
+sn't
+> seem to be the case, but those questions still need an answer.)
+
+I don't think so. Userspace calls it twice per context right now (once
+for init, once for teardown), so I don't expect it to be especially
+perf critical.
+
+> I also think we should document those things.
+>
+> > I don't understand: why is this line of questioning important?
+>
+> By sending those patches you ask me as the maintainer of the project to t=
+ake
+> resposibility of your changes. In this case it even goes further. In fact=
+, you
+> ask me to take resposibility of a new interface, which, since it is a uAP=
+I, can
+> *never* be removed in the future after being released.
+>
+> It is part of my job to act responsibly, which includes understanding wha=
+t the
+> interface does, how it is intended to be used, whether it is sufficient f=
+or its
+> purpose or if it has any flaws.
+
+Right, sorry about this - I didn't mean to question the purpose of you
+asking questions at all. You of course have every right to ask
+questions about a patch during code review. I was more just confused
+about why you were asking me specifically about VM_BIND, although I
+think that's a bit clearer to me now that you've asked questions about
+eviction.
