@@ -2,66 +2,87 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id B18D3CBAE6A
-	for <lists+nouveau@lfdr.de>; Sat, 13 Dec 2025 13:46:06 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 22F23CBAF7C
+	for <lists+nouveau@lfdr.de>; Sat, 13 Dec 2025 13:47:12 +0100 (CET)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id D85EB10EC09;
-	Sat, 13 Dec 2025 12:42:14 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id C3F0F10EC9E;
+	Sat, 13 Dec 2025 12:42:22 +0000 (UTC)
 Authentication-Results: gabe.freedesktop.org;
-	dkim=pass (2048-bit key; unprotected) header.d=ethancedwards.com header.i=@ethancedwards.com header.b="KBKETv+3";
+	dkim=permerror (0-bit key) header.d=gmail.com header.i=@gmail.com header.b="WO9Fw4kt";
 	dkim-atps=neutral
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-X-Greylist: delayed 456 seconds by postgrey-1.36 at gabe;
- Sat, 02 Aug 2025 01:57:22 UTC
-Received: from mout-p-101.mailbox.org (mout-p-101.mailbox.org [80.241.56.151])
- by gabe.freedesktop.org (Postfix) with ESMTPS id C9B8210E32E
- for <nouveau@lists.freedesktop.org>; Sat,  2 Aug 2025 01:57:22 +0000 (UTC)
-Received: from smtp1.mailbox.org (smtp1.mailbox.org [10.196.197.1])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
- (No client certificate requested)
- by mout-p-101.mailbox.org (Postfix) with ESMTPS id 4bv5NR3vbxz9sVv;
- Sat,  2 Aug 2025 03:49:43 +0200 (CEST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ethancedwards.com;
- s=MBO0001; t=1754099383;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:content-transfer-encoding;
- bh=EzGrUiyur0PDjcm61AO5Pdz6n1eUAx7WVBcJE1M5ghA=;
- b=KBKETv+3sEn4+XGT9mbrJOg0yaagruc0IT5vaeqTj2YVlqYcjzsH7KjETLEXJxPsy1hVwE
- E45fIwXmyhixaxPPKTeL/DQL6bp5OLr4Azj6DhyMTT6rlJ3heU8qh5P79xERxT8TQe++YA
- iNRExyn3f7fEvskBrg6iU+rm1Sx4sXFDCakS97jTyWMoHXDRDvGmgHBJ0LXlGx5/I2KlEZ
- z6fPO09U5Q0SoOtwMUFi8zaPTVSb/ub8uslLDqgfep7DvRr/O7Uzn5vKDOmNWkXa5ff22F
- Kz1yXvRpDxY/NEolfMIqimb/+YntgGVp3FXXpTGjDD8+lTvYk/asjxYXY+l9RQ==
-From: Ethan Carter Edwards <ethan@ethancedwards.com>
-Date: Fri, 01 Aug 2025 21:49:26 -0400
-Subject: [PATCH] drm/nouveau/gsp: remove always true if check
+Received: from mail-pj1-f47.google.com (mail-pj1-f47.google.com
+ [209.85.216.47])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 01B1B10E0F6;
+ Sat,  2 Aug 2025 14:18:23 +0000 (UTC)
+Received: by mail-pj1-f47.google.com with SMTP id
+ 98e67ed59e1d1-31ec977d203so568756a91.0; 
+ Sat, 02 Aug 2025 07:18:23 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=gmail.com; s=20230601; t=1754144303; x=1754749103; darn=lists.freedesktop.org;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=RL+4avU1H8oGKZXlNOwDFTlYSKmu/Vf7eqNV14tYb/M=;
+ b=WO9Fw4ktDO9DAXVzf91XiN+zt1kmzt92XXM+TH4QOxwrfzVcPDTlqnDaMa43mwIDZ+
+ LXdk8i2gyb++/gIL3VCuYNycJfBVQFXVuvpmnGW6ioUE3SgSqtLs0kGl0z4ftfWQVe+a
+ 2/Jb9ecK2H8H8dr8/aq1DdB+vcKcSbdinoNHJ1eE6T8u9QB0N5+ohWOEDGK98L6RtoHU
+ BcYjqa42qx5Cin07+E0YoZHUXDaZz2ypsP5syHsSiNRonT33IKhO9iRuCfAmEzA0xfeX
+ b5bL2RoCIf4wd40Yt+Us+9BUAKaBTyNG/biPklFYZem+wrEPntAqzQGfaz2SkJV/JCew
+ OhUw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1754144303; x=1754749103;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=RL+4avU1H8oGKZXlNOwDFTlYSKmu/Vf7eqNV14tYb/M=;
+ b=WriEHlqNgiC9ZUNKu8UFqp7P9BK8kcLpuCILNVgXldM0SypZiwlDpgBQ1QqQaY7WKI
+ HcBSawRCFPfTDbK7ocG2O4NTR3j7maOUZyNJAweI+IZWanPvE3LbC1mGbBd5zfMXulbf
+ 5zXxbl9bhWMub4h0bk+gGYJOUd+MwxOu6iQfY4ejkvTS2nlNH4jwnPRbVVacUt77+/Sx
+ fQKQuxm0ve0PxGVMo9DR4yoskMs+mPsB5DCOdgPI683FZc8/jleZ1pJy2OOnbp/m/+pv
+ jW9MrM6wR0cMsUQDm4uMt4BlK6ffo6iQqrpFovFkOw8mXgy5OsVnp9Of+bYmF10oHu/E
+ jwQQ==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCV9AfQl79R1Vv5akW4OdwXcu/NBF/Xi+E5H78rY/onhIFlLMeJFcX1uU36n8olo30L6B2p0gTWFcw==@lists.freedesktop.org,
+ AJvYcCXPgTamA46e8rQgKhUs7+soSWzK4P7tTHO8NiNR+eL+qXXgvl6nLteRdK5bgV0Ib30rKRSuTfap8tWZQ+FL6AE=@lists.freedesktop.org
+X-Gm-Message-State: AOJu0Yxa5UnGJN+Kabb2GQlokNykXRyv8bKRF1TQzoO5U/W82LENYkg3
+ qdPLUJ0cGJFttCWqBDS6WtF3miFGhH/ecpb6NC9XFPiLtdIwIOx+Ws352nTGVfRhVWSndw/7DQ0
+ sDEZVW+PPatOGlXTy1MVGk/n21o8Wsuw=
+X-Gm-Gg: ASbGnct8J9PEHkwVR+rXy0hCXxxUyNKriFBuYZon/uSNxFIRpVuk+qEikwSAttj20gw
+ kBh6eLcnOXmxADIKtP2pjbVUYSoVzPm8T13HGlIzIwjkekCA1jAekMYqiwxheGMjU2rUrCPdwTk
+ TQD/q9MRjC6ncFgRiirEmw1ZuRUUA9RUf//xPieYUIw1bBo12IeQusZXTEyYr9O8WZyZXxHF6TY
+ A5wbn9K
+X-Google-Smtp-Source: AGHT+IEYyK4FnrbzDvIfn4l13uARdRAi1BsUu+rKXOV0Jybw3LuyofhD64+Vp6yv6vQyxgpYLpFrKDkYAuq4rhRVUTw=
+X-Received: by 2002:a17:90b:38cf:b0:31f:3f2d:25ad with SMTP id
+ 98e67ed59e1d1-321162b5699mr1806962a91.3.1754144303280; Sat, 02 Aug 2025
+ 07:18:23 -0700 (PDT)
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 7bit
-Message-Id: <20250801-nouveau-fifo-v1-1-25b9db5283bc@ethancedwards.com>
-X-B4-Tracking: v=1; b=H4sIAKVujWgC/6tWKk4tykwtVrJSqFYqSi3LLM7MzwNyDHUUlJIzE
- vPSU3UzU4B8JSMDI1MDCwND3bz80rLUxFLdtMy0fF0zY9NkM+M0c/PkxFQloJaCotS0zAqwcdG
- xtbUAKUL4mV4AAAA=
-X-Change-ID: 20250801-nouveau-fifo-635c63f77cae
-To: Lyude Paul <lyude@redhat.com>, Danilo Krummrich <dakr@kernel.org>, 
- David Airlie <airlied@gmail.com>, Simona Vetter <simona@ffwll.ch>
-Cc: dri-devel@lists.freedesktop.org, nouveau@lists.freedesktop.org, 
- linux-kernel@vger.kernel.org, kernel-janitors@vger.kernel.org, 
- Ethan Carter Edwards <ethan@ethancedwards.com>
-X-Developer-Signature: v=1; a=openpgp-sha256; l=2182;
- i=ethan@ethancedwards.com; h=from:subject:message-id;
- bh=AyvojaMUL5GFQ+RGadkxrq01+rU8vIQIordppxfHfyk=;
- b=LS0tLS1CRUdJTiBQR1AgTUVTU0FHRS0tLS0tCgpvd0o0bkp2QXk4ekFKWGJEOXFoNThlVGp6e
- GhQcXlVeFpQVG1iZmtseEdmeHQ1Q0h3ZXllcWUyZFdjeHJsdmcvCkUrTFZ1dWprdGRyR3NvWHBW
- bjVIS1F1REdCZURySmdpeS84YzViU0htak1VZHY1MWFZS1p3OG9FTW9TQmkxTUEKSmhMNWlPRi9
- 4TzNMUW0vclp3Y0dpcC93RDNBU3FDdlU1UklxaUxHZGU5RFJZTWE4czB4bURQOXNWbjZ0MUZCTQ
- o3SlV1bmY1amJ1Q1U0SjZwRlp3TllsR1Jxcm9OT1FiL1ZaZ0JyYTlHV2c9PQo9a2RtRQotLS0tL
- UVORCBQR1AgTUVTU0FHRS0tLS0tCg==
-X-Developer-Key: i=ethan@ethancedwards.com; a=openpgp;
- fpr=2E51F61839D1FA947A7300C234C04305D581DBFE
-X-Mailman-Approved-At: Sat, 13 Dec 2025 12:40:52 +0000
+References: <20250620-num-v1-0-7ec3d3fb06c9@nvidia.com>
+ <20250620-num-v1-1-7ec3d3fb06c9@nvidia.com>
+ <CANiq72=BSnom-nQgzLvv-cqwSknK1uJ=CXGP51r0WRj1Y553Ew@mail.gmail.com>
+ <DAREXAUV51B6.7X7TPOJKK249@nvidia.com>
+ <CAH5fLghRJ7QqGKJdUq5Nic542cJsHKX_C+EL+xma_rFJrHd2QQ@mail.gmail.com>
+ <DBRZX7EAK13R.LTIJJPA9CCSO@nvidia.com>
+In-Reply-To: <DBRZX7EAK13R.LTIJJPA9CCSO@nvidia.com>
+From: Miguel Ojeda <miguel.ojeda.sandonis@gmail.com>
+Date: Sat, 2 Aug 2025 16:18:11 +0200
+X-Gm-Features: Ac12FXzP6tbJ3FK59a8caJxtumpeBsG760k67kwwrIw1GCiks-gr_mjRWnNBb2Q
+Message-ID: <CANiq72mjT5jJiRG2J4KAL7pupv5WoCb-T+hXJ=H5NG_4n0HLOQ@mail.gmail.com>
+Subject: Re: [PATCH 1/3] rust: add `num` module with `PowerOfTwo` type
+To: Alexandre Courbot <acourbot@nvidia.com>
+Cc: Alice Ryhl <aliceryhl@google.com>, Miguel Ojeda <ojeda@kernel.org>, 
+ Alex Gaynor <alex.gaynor@gmail.com>, Boqun Feng <boqun.feng@gmail.com>, 
+ Gary Guo <gary@garyguo.net>,
+ =?UTF-8?Q?Bj=C3=B6rn_Roy_Baron?= <bjorn3_gh@protonmail.com>, 
+ Benno Lossin <lossin@kernel.org>, Andreas Hindborg <a.hindborg@kernel.org>, 
+ Trevor Gross <tmgross@umich.edu>, Danilo Krummrich <dakr@kernel.org>,
+ linux-kernel@vger.kernel.org, 
+ rust-for-linux@vger.kernel.org, nouveau@lists.freedesktop.org, 
+ Nouveau <nouveau-bounces@lists.freedesktop.org>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+X-Mailman-Approved-At: Sat, 13 Dec 2025 12:40:47 +0000
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -76,72 +97,19 @@ List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-if (1) always evaluates to true. Remove the unneeded check.
+On Sat, Aug 2, 2025 at 4:02=E2=80=AFPM Alexandre Courbot <acourbot@nvidia.c=
+om> wrote:
+>
+> Belated thanks for the suggestion; I have finally opened an ACP for
+> `last_set_bit` (and `first_set_bit` while we are at it):
+> https://github.com/rust-lang/libs-team/issues/631
+>
+> I am still entangled with how to best leverage `Alignment` for our
+> purposes, but think I am getting close to a v2 of this patchset.
 
-Signed-off-by: Ethan Carter Edwards <ethan@ethancedwards.com>
----
- .../gpu/drm/nouveau/nvkm/subdev/gsp/rm/r535/fifo.c | 36 ++++++++++------------
- 1 file changed, 16 insertions(+), 20 deletions(-)
+Thanks for filling that one -- linked now from our usual lists :)
 
-diff --git a/drivers/gpu/drm/nouveau/nvkm/subdev/gsp/rm/r535/fifo.c b/drivers/gpu/drm/nouveau/nvkm/subdev/gsp/rm/r535/fifo.c
-index 1ac5628c5140e66d306a1aadce10c810886afad3..104c72ec359a07a318ac99f5c217f0b07db2b784 100644
---- a/drivers/gpu/drm/nouveau/nvkm/subdev/gsp/rm/r535/fifo.c
-+++ b/drivers/gpu/drm/nouveau/nvkm/subdev/gsp/rm/r535/fifo.c
-@@ -188,32 +188,28 @@ r535_chan_ramfc_write(struct nvkm_chan *chan, u64 offset, u64 length, u32 devm,
- 	if (ret)
- 		return ret;
- 
--	if (1) {
--		NVA06F_CTRL_GPFIFO_SCHEDULE_PARAMS *ctrl;
-+	NVA06F_CTRL_GPFIFO_SCHEDULE_PARAMS *ctrl;
- 
--		if (1) {
--			NVA06F_CTRL_BIND_PARAMS *ctrl;
-+	NVA06F_CTRL_BIND_PARAMS *ctrl;
- 
--			ctrl = nvkm_gsp_rm_ctrl_get(&chan->rm.object,
--						    NVA06F_CTRL_CMD_BIND, sizeof(*ctrl));
--			if (WARN_ON(IS_ERR(ctrl)))
--				return PTR_ERR(ctrl);
-+	ctrl = nvkm_gsp_rm_ctrl_get(&chan->rm.object,
-+						NVA06F_CTRL_CMD_BIND, sizeof(*ctrl));
-+	if (WARN_ON(IS_ERR(ctrl)))
-+		return PTR_ERR(ctrl);
- 
--			ctrl->engineType = eT;
-+	ctrl->engineType = eT;
- 
--			ret = nvkm_gsp_rm_ctrl_wr(&chan->rm.object, ctrl);
--			if (ret)
--				return ret;
--		}
-+	ret = nvkm_gsp_rm_ctrl_wr(&chan->rm.object, ctrl);
-+	if (ret)
-+		return ret;
- 
--		ctrl = nvkm_gsp_rm_ctrl_get(&chan->rm.object,
--					    NVA06F_CTRL_CMD_GPFIFO_SCHEDULE, sizeof(*ctrl));
--		if (WARN_ON(IS_ERR(ctrl)))
--			return PTR_ERR(ctrl);
-+	ctrl = nvkm_gsp_rm_ctrl_get(&chan->rm.object,
-+					NVA06F_CTRL_CMD_GPFIFO_SCHEDULE, sizeof(*ctrl));
-+	if (WARN_ON(IS_ERR(ctrl)))
-+		return PTR_ERR(ctrl);
- 
--		ctrl->bEnable = 1;
--		ret = nvkm_gsp_rm_ctrl_wr(&chan->rm.object, ctrl);
--	}
-+	ctrl->bEnable = 1;
-+	ret = nvkm_gsp_rm_ctrl_wr(&chan->rm.object, ctrl);
- 
- 	return ret;
- }
+    https://github.com/Rust-for-Linux/linux/issues/514
 
----
-base-commit: b9ddaa95fd283bce7041550ddbbe7e764c477110
-change-id: 20250801-nouveau-fifo-635c63f77cae
-
-Best regards,
--- 
-Ethan Carter Edwards <ethan@ethancedwards.com>
-
+Cheers,
+Miguel
