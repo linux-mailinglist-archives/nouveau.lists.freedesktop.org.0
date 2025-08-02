@@ -2,59 +2,66 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id 2515DCBAD55
-	for <lists+nouveau@lfdr.de>; Sat, 13 Dec 2025 13:44:59 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id B18D3CBAE6A
+	for <lists+nouveau@lfdr.de>; Sat, 13 Dec 2025 13:46:06 +0100 (CET)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 550E310EAC9;
-	Sat, 13 Dec 2025 12:41:30 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id D85EB10EC09;
+	Sat, 13 Dec 2025 12:42:14 +0000 (UTC)
 Authentication-Results: gabe.freedesktop.org;
-	dkim=pass (2048-bit key; secure) header.d=mailbox.org header.i=@mailbox.org header.b="oLva7SuN";
+	dkim=pass (2048-bit key; unprotected) header.d=ethancedwards.com header.i=@ethancedwards.com header.b="KBKETv+3";
 	dkim-atps=neutral
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from mout-p-103.mailbox.org (mout-p-103.mailbox.org [80.241.56.161])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 4F90B10E315;
- Fri,  1 Aug 2025 19:33:28 +0000 (UTC)
-Received: from smtp102.mailbox.org (smtp102.mailbox.org
- [IPv6:2001:67c:2050:b231:465::102])
+X-Greylist: delayed 456 seconds by postgrey-1.36 at gabe;
+ Sat, 02 Aug 2025 01:57:22 UTC
+Received: from mout-p-101.mailbox.org (mout-p-101.mailbox.org [80.241.56.151])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id C9B8210E32E
+ for <nouveau@lists.freedesktop.org>; Sat,  2 Aug 2025 01:57:22 +0000 (UTC)
+Received: from smtp1.mailbox.org (smtp1.mailbox.org [10.196.197.1])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
  (No client certificate requested)
- by mout-p-103.mailbox.org (Postfix) with ESMTPS id 4btx2F1VR0z9sd6;
- Fri,  1 Aug 2025 21:33:25 +0200 (CEST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
- s=mail20150812; 
- t=1754076805; h=from:from:reply-to:reply-to:subject:subject:date:date:
- message-id:message-id:to:to:cc:cc:mime-version:mime-version:
- content-type:content-type:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references;
- bh=RWaNLhbm24FN2VPxqLS0wEWVP3ckHjc8299w5KEB5CM=;
- b=oLva7SuNT6tG4OnBJa4DIwGdgJee+Xi/k6nkZqFA27OyTG4xVhvDr2FZ3QNHzWzTJPDgW6
- UXPi0gQBJj/z3AWvs7XOEUcv6XRqbmv7wHga/9WMH8GRsCxVkaXHuaBlVLssknjafQqcNu
- 04PyyEWVyG1RMzDZMiJ8WJSWD16P2OXKNweUWT13DnDJk1AY9zrWCf6aAkv7UG6IQgFJKK
- 4lmi7CSfnP8EQT5pMFz3f78IJA81j8cBCIA5vFED9Mvez0Hh3b579ncTZQGz98a+qm8Lu1
- lKMpWONxvlUtKBf59G5KNThsqkOmTeOhBSzw3y0GFEcQ6QQXZD+jZypzxDe0bw==
-Message-ID: <f429ce1c4c818d5e622bb6e9dc485e8e6b776e56.camel@mailbox.org>
-Subject: Re: [PATCH] drm/nouveau: Remove surplus struct member
-From: Philipp Stanner <phasta@mailbox.org>
-To: Timur Tabi <ttabi@nvidia.com>, "dakr@kernel.org" <dakr@kernel.org>
-Cc: "dri-devel@lists.freedesktop.org" <dri-devel@lists.freedesktop.org>, 
- "phasta@kernel.org" <phasta@kernel.org>, "nouveau@lists.freedesktop.org"
- <nouveau@lists.freedesktop.org>, "linux-kernel@vger.kernel.org"
- <linux-kernel@vger.kernel.org>
-Date: Fri, 01 Aug 2025 21:33:22 +0200
-In-Reply-To: <39dac3cf6ecef55a0e3dac7a381670491f09b8aa.camel@nvidia.com>
-References: <20250801074531.79237-2-phasta@kernel.org>
- <809d2ff29bb87f782f7a813d67d3d604882db320.camel@nvidia.com>
- <DBR6S322NP7E.1T932OJTX6A63@kernel.org>
- <39dac3cf6ecef55a0e3dac7a381670491f09b8aa.camel@nvidia.com>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+ by mout-p-101.mailbox.org (Postfix) with ESMTPS id 4bv5NR3vbxz9sVv;
+ Sat,  2 Aug 2025 03:49:43 +0200 (CEST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ethancedwards.com;
+ s=MBO0001; t=1754099383;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ content-transfer-encoding:content-transfer-encoding;
+ bh=EzGrUiyur0PDjcm61AO5Pdz6n1eUAx7WVBcJE1M5ghA=;
+ b=KBKETv+3sEn4+XGT9mbrJOg0yaagruc0IT5vaeqTj2YVlqYcjzsH7KjETLEXJxPsy1hVwE
+ E45fIwXmyhixaxPPKTeL/DQL6bp5OLr4Azj6DhyMTT6rlJ3heU8qh5P79xERxT8TQe++YA
+ iNRExyn3f7fEvskBrg6iU+rm1Sx4sXFDCakS97jTyWMoHXDRDvGmgHBJ0LXlGx5/I2KlEZ
+ z6fPO09U5Q0SoOtwMUFi8zaPTVSb/ub8uslLDqgfep7DvRr/O7Uzn5vKDOmNWkXa5ff22F
+ Kz1yXvRpDxY/NEolfMIqimb/+YntgGVp3FXXpTGjDD8+lTvYk/asjxYXY+l9RQ==
+From: Ethan Carter Edwards <ethan@ethancedwards.com>
+Date: Fri, 01 Aug 2025 21:49:26 -0400
+Subject: [PATCH] drm/nouveau/gsp: remove always true if check
 MIME-Version: 1.0
-X-MBO-RS-ID: 13c93f890bca2754489
-X-MBO-RS-META: xa1yr743g3p4es4ok5cfrhg7m5n13iux
-X-Mailman-Approved-At: Sat, 13 Dec 2025 12:40:51 +0000
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+Message-Id: <20250801-nouveau-fifo-v1-1-25b9db5283bc@ethancedwards.com>
+X-B4-Tracking: v=1; b=H4sIAKVujWgC/6tWKk4tykwtVrJSqFYqSi3LLM7MzwNyDHUUlJIzE
+ vPSU3UzU4B8JSMDI1MDCwND3bz80rLUxFLdtMy0fF0zY9NkM+M0c/PkxFQloJaCotS0zAqwcdG
+ xtbUAKUL4mV4AAAA=
+X-Change-ID: 20250801-nouveau-fifo-635c63f77cae
+To: Lyude Paul <lyude@redhat.com>, Danilo Krummrich <dakr@kernel.org>, 
+ David Airlie <airlied@gmail.com>, Simona Vetter <simona@ffwll.ch>
+Cc: dri-devel@lists.freedesktop.org, nouveau@lists.freedesktop.org, 
+ linux-kernel@vger.kernel.org, kernel-janitors@vger.kernel.org, 
+ Ethan Carter Edwards <ethan@ethancedwards.com>
+X-Developer-Signature: v=1; a=openpgp-sha256; l=2182;
+ i=ethan@ethancedwards.com; h=from:subject:message-id;
+ bh=AyvojaMUL5GFQ+RGadkxrq01+rU8vIQIordppxfHfyk=;
+ b=LS0tLS1CRUdJTiBQR1AgTUVTU0FHRS0tLS0tCgpvd0o0bkp2QXk4ekFKWGJEOXFoNThlVGp6e
+ GhQcXlVeFpQVG1iZmtseEdmeHQ1Q0h3ZXllcWUyZFdjeHJsdmcvCkUrTFZ1dWprdGRyR3NvWHBW
+ bjVIS1F1REdCZURySmdpeS84YzViU0htak1VZHY1MWFZS1p3OG9FTW9TQmkxTUEKSmhMNWlPRi9
+ 4TzNMUW0vclp3Y0dpcC93RDNBU3FDdlU1UklxaUxHZGU5RFJZTWE4czB4bURQOXNWbjZ0MUZCTQ
+ o3SlV1bmY1amJ1Q1U0SjZwRlp3TllsR1Jxcm9OT1FiL1ZaZ0JyYTlHV2c9PQo9a2RtRQotLS0tL
+ UVORCBQR1AgTUVTU0FHRS0tLS0tCg==
+X-Developer-Key: i=ethan@ethancedwards.com; a=openpgp;
+ fpr=2E51F61839D1FA947A7300C234C04305D581DBFE
+X-Mailman-Approved-At: Sat, 13 Dec 2025 12:40:52 +0000
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -66,58 +73,75 @@ List-Post: <mailto:nouveau@lists.freedesktop.org>
 List-Help: <mailto:nouveau-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
  <mailto:nouveau-request@lists.freedesktop.org?subject=subscribe>
-Reply-To: phasta@kernel.org
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-On Fri, 2025-08-01 at 15:42 +0000, Timur Tabi wrote:
-> On Fri, 2025-08-01 at 17:12 +0200, Danilo Krummrich wrote:
-> > On Fri Aug 1, 2025 at 4:50 PM CEST, Timur Tabi wrote:
-> > > Does mean that the TODO has been done, or that someone completely for=
-got and now your patch
-> > > is
-> > > remove all reminders?
-> > >=20
-> > > If it's the format, maybe add a fixes: tag for the commit that resolv=
-ed the TODO?
-> >=20
-> > The TODO was introduced by commit ebb945a94bba ("drm/nouveau: port all =
-engines
-> > to new engine module format") from 2012.
-> >=20
-> > It's a bit hard to know what exactly resolves "this will be reworked in=
- the near
-> > future" for a commit with the following diffstat. :)
-> >=20
-> > 	146 files changed, 14219 insertions(+), 11099 deletions(-)
-> >=20
-> > The last remains of accel_done were removed with commit
-> > 4e2ec2500bfc ("drm/nouveau: Remove file nouveau_fbcon.c"), but I don't =
-think we
-> > should mention this commit, given that apparently no one knows what was=
- intended
-> > to be reworked here [1].
-> >=20
-> > We could mention the above in the commit message, though it will also b=
-e
-> > available through the lore link in the commit message once the patch is=
- applied.
->=20
-> It's your call, I'm just leery of removing a TODO without any mention of =
-whether it's actually
-> done.
+if (1) always evaluates to true. Remove the unneeded check.
 
-We can't really tell whether "it" is done or not, because the original
-author didn't write down *what* exactly needs to be done, which makes
-the TODO kind of useless.
+Signed-off-by: Ethan Carter Edwards <ethan@ethancedwards.com>
+---
+ .../gpu/drm/nouveau/nvkm/subdev/gsp/rm/r535/fifo.c | 36 ++++++++++------------
+ 1 file changed, 16 insertions(+), 20 deletions(-)
 
-Since that information is lost forever, removing it arguably is
-alright.
+diff --git a/drivers/gpu/drm/nouveau/nvkm/subdev/gsp/rm/r535/fifo.c b/drivers/gpu/drm/nouveau/nvkm/subdev/gsp/rm/r535/fifo.c
+index 1ac5628c5140e66d306a1aadce10c810886afad3..104c72ec359a07a318ac99f5c217f0b07db2b784 100644
+--- a/drivers/gpu/drm/nouveau/nvkm/subdev/gsp/rm/r535/fifo.c
++++ b/drivers/gpu/drm/nouveau/nvkm/subdev/gsp/rm/r535/fifo.c
+@@ -188,32 +188,28 @@ r535_chan_ramfc_write(struct nvkm_chan *chan, u64 offset, u64 length, u32 devm,
+ 	if (ret)
+ 		return ret;
+ 
+-	if (1) {
+-		NVA06F_CTRL_GPFIFO_SCHEDULE_PARAMS *ctrl;
++	NVA06F_CTRL_GPFIFO_SCHEDULE_PARAMS *ctrl;
+ 
+-		if (1) {
+-			NVA06F_CTRL_BIND_PARAMS *ctrl;
++	NVA06F_CTRL_BIND_PARAMS *ctrl;
+ 
+-			ctrl = nvkm_gsp_rm_ctrl_get(&chan->rm.object,
+-						    NVA06F_CTRL_CMD_BIND, sizeof(*ctrl));
+-			if (WARN_ON(IS_ERR(ctrl)))
+-				return PTR_ERR(ctrl);
++	ctrl = nvkm_gsp_rm_ctrl_get(&chan->rm.object,
++						NVA06F_CTRL_CMD_BIND, sizeof(*ctrl));
++	if (WARN_ON(IS_ERR(ctrl)))
++		return PTR_ERR(ctrl);
+ 
+-			ctrl->engineType = eT;
++	ctrl->engineType = eT;
+ 
+-			ret = nvkm_gsp_rm_ctrl_wr(&chan->rm.object, ctrl);
+-			if (ret)
+-				return ret;
+-		}
++	ret = nvkm_gsp_rm_ctrl_wr(&chan->rm.object, ctrl);
++	if (ret)
++		return ret;
+ 
+-		ctrl = nvkm_gsp_rm_ctrl_get(&chan->rm.object,
+-					    NVA06F_CTRL_CMD_GPFIFO_SCHEDULE, sizeof(*ctrl));
+-		if (WARN_ON(IS_ERR(ctrl)))
+-			return PTR_ERR(ctrl);
++	ctrl = nvkm_gsp_rm_ctrl_get(&chan->rm.object,
++					NVA06F_CTRL_CMD_GPFIFO_SCHEDULE, sizeof(*ctrl));
++	if (WARN_ON(IS_ERR(ctrl)))
++		return PTR_ERR(ctrl);
+ 
+-		ctrl->bEnable = 1;
+-		ret = nvkm_gsp_rm_ctrl_wr(&chan->rm.object, ctrl);
+-	}
++	ctrl->bEnable = 1;
++	ret = nvkm_gsp_rm_ctrl_wr(&chan->rm.object, ctrl);
+ 
+ 	return ret;
+ }
 
-P.
+---
+base-commit: b9ddaa95fd283bce7041550ddbbe7e764c477110
+change-id: 20250801-nouveau-fifo-635c63f77cae
 
->=20
-> > NIT: Please don't top post, use interleaved style [2] instead.
->=20
-> Sorry, coffee didn't kick in yet.
+Best regards,
+-- 
+Ethan Carter Edwards <ethan@ethancedwards.com>
 
