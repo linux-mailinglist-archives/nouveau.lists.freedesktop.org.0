@@ -2,79 +2,81 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id 168AACBADFA
-	for <lists+nouveau@lfdr.de>; Sat, 13 Dec 2025 13:45:39 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 67EE2CBAE88
+	for <lists+nouveau@lfdr.de>; Sat, 13 Dec 2025 13:46:13 +0100 (CET)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 706BC10EB74;
-	Sat, 13 Dec 2025 12:41:37 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 9969F10EC29;
+	Sat, 13 Dec 2025 12:42:15 +0000 (UTC)
 Authentication-Results: gabe.freedesktop.org;
-	dkim=permerror (0-bit key) header.d=gmail.com header.i=@gmail.com header.b="g7zE4w18";
+	dkim=permerror (0-bit key) header.d=gmail.com header.i=@gmail.com header.b="E6pEWPNv";
 	dkim-atps=neutral
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from mail-qv1-f50.google.com (mail-qv1-f50.google.com
- [209.85.219.50])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 8C04710E002;
- Sat,  2 Aug 2025 21:25:10 +0000 (UTC)
-Received: by mail-qv1-f50.google.com with SMTP id
- 6a1803df08f44-707389a2fe3so32759326d6.2; 
- Sat, 02 Aug 2025 14:25:10 -0700 (PDT)
+Received: from mail-pf1-f182.google.com (mail-pf1-f182.google.com
+ [209.85.210.182])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 7E20210E00E
+ for <nouveau@lists.freedesktop.org>; Sun,  3 Aug 2025 14:21:25 +0000 (UTC)
+Received: by mail-pf1-f182.google.com with SMTP id
+ d2e1a72fcca58-76bee58e01cso1254793b3a.1
+ for <nouveau@lists.freedesktop.org>; Sun, 03 Aug 2025 07:21:25 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1754169909; x=1754774709; darn=lists.freedesktop.org;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:date:from:from:to:cc:subject:date:message-id:reply-to;
- bh=Cume3DFrFO7u3pL9Y1K1ypuZDFhhQLKijYnO66hZ+p0=;
- b=g7zE4w18y4MjQq0SIS0749xEyh6543vI2rY9ph/+zm866rqYGul1T4szgTfHgC6HoZ
- sVSq3dKmjHA9CnDX33g8gjbmYIm8s3rnjgPujPe0ztD7mo72qzali8W1AC/TJlvdHQF7
- 1+Hz2CjYOKh5C+LZ8I6yAXo0u+ovVq+Q33RKUG/FiFHEaGF3PAHiyobzDrMRZU7o6qzt
- EkX/OHD5fkTd98tfYcBETxHqnAb4ZqD6qm1aUFPDNeEvU9Fg8vs+OnC+i8dq7OHHBQIA
- o6IkXZsMVY0UuzVCmenE1fv6efFvVLGcbhmuSAXUoHYgMu7Kq3LTQmoKoBOPR8gCReMR
- 3KFg==
+ d=gmail.com; s=20230601; t=1754230885; x=1754835685; darn=lists.freedesktop.org;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=G673etPTXeIcmcx61zJWy5V5b2tMbETyox5/A/4S4cs=;
+ b=E6pEWPNvXHh8xtWD0C5wdLmZlOqB5wG9FAbswWzITPi3ZjBZfcWfIoAO3e81LSAmVo
+ FVMtpmImWBerAhvUHU7C2EH7eeGNT9gS9CVJFOOUr7czfyzr6wQTAwFVz3BJtL7lkKm0
+ KZCbrMfaqBHOGYJ0wob3lAm2QaQsOio3H2XxEYRhW7jy4Jz/qiyhFqjhTJhGeRDoziCg
+ 6vaYImkuBg1HA44gVoPrWz+vnOLY0LqeoKFRHzUUkVk1We/EKRwzMT2IB3+SaJ9tWXkK
+ lfkYX8ucRuMBEXgHjUzb73aLHbgQvsqW7pjGTes8ehu0oaZu4P7cMisRZUEsbus8yrVs
+ AqPQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1754169909; x=1754774709;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:date:from:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=Cume3DFrFO7u3pL9Y1K1ypuZDFhhQLKijYnO66hZ+p0=;
- b=h37lw38fkqG9o+BIYQbtm7rymSJNmPNYxASMrxgGF8i/vsStpaOJus/V5J3IX3fEdZ
- 8nzNanNmeAqrKhZZsUHqgZRDsZaBXZwq8BNOOKoV3ib9GKH8Tab1do1c+RPyHhwpqSBY
- etuyWtapBLfSQWwh2f3NJnKl+DYN3XlaQRyFgnqckfqfslUZtIcbLrFJMLDhvaNvnQO3
- I5jHTkYQ4YEYRxcL/Y7c12oGXeU31dFYA6tFpqeiq63HaHKsFnZgsvtBx2vq9+pMuZhG
- z548z/SpG/WBXXSD/RoAgrVvwEl1JTpDd7RGmydoPYTl7xNwpY40Un0O960zGFz35xlv
- HGBw==
+ d=1e100.net; s=20230601; t=1754230885; x=1754835685;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=G673etPTXeIcmcx61zJWy5V5b2tMbETyox5/A/4S4cs=;
+ b=kJ4hJhNRwrl/teO4a4HPJ90Amo9uv+Sw4rgJx3RnRfqNTrOTc5eqGP3AVPg68PHAgC
+ uTKM7QkJRFv2Rm7lojc3OmJPo7g+Bin27kJueUhEtNvL5cNeMjh32opD/lZLrfVan5VT
+ A9G1lYaQ0acLC49o9mYuarSxktta/nwT9bhNXgTR7uKUtbKD34ZdGqoxaO/gVq4euTZf
+ MHpNYtg/sk5/hJezcbrCaFd4Y/ttmGssVCe4K6DZquTR1uJFtGSNO08teHL4DvYU7KqS
+ pTnmRGDBhyaYj6zR0Ckn+t90MbclKvwIGNDDJS+sU06f04t8zP76JzzCAuSYkc2lRtbs
+ SKeg==
 X-Forwarded-Encrypted: i=1;
- AJvYcCW4w9eTWj1ipWsXs2uah9CE2yMPhEG7pn2A2gzOnqFBLdqYBr8pKBqBxz3sK7orIhf1OOYJx8kM@lists.freedesktop.org
-X-Gm-Message-State: AOJu0Yy0I1fmuHSTZsb29lo7xNa1LhmLuaPaAfP5KVTbOe3cHAxRPGl0
- isgnm/n95FaaSG7TvzAq9FxF0nSUuvaU8/Sup4br1jr5HUvL6VQjf0JJ
-X-Gm-Gg: ASbGncs6W+UCqiV7CIfj8g9eUW/jXfpDWF7G8FNuhOJznDzvSqZxjAsrsl3nzolDp6y
- 04oC2UkrGXrKZHFaL7hSOPins3CHQ4ctbB8SZifGJqCns5E06L1WpGAMRczEEsJDMV8fAue1fVY
- ywcmV1agOyXVIE3MWrDi1oL+OtA8GZ3VCsW6YzVcZ2IVMfGZbuiDbGFD0R44ruYEtwJHr8Itd5E
- +9qvtCoKrqR59JsdJpLeLbBhItkhLN5WJ3DerjPfNEESeeoO+TishfM5GdJ9jgGer7jBlblFLgM
- YcVKDuywOKKgw83M6n7H60kz9MJjlB1/l95ruriqnszTykFbJ8QxKXDfQatotTx81n+QSLAVdOQ
- d74wbqb3nNZq5N/82KmJeShc9z1x9
-X-Google-Smtp-Source: AGHT+IHa0klRSXCFoybBuOxSnH60N2w1w4ZPxIlHjK/RY58F32+CUo39TEE2TF8g+Okjk48Ak292RQ==
-X-Received: by 2002:a05:6214:c49:b0:707:61a9:8bdf with SMTP id
- 6a1803df08f44-70935fb5a2amr67384806d6.22.1754169909270; 
- Sat, 02 Aug 2025 14:25:09 -0700 (PDT)
-Received: from localhost ([142.186.9.88]) by smtp.gmail.com with UTF8SMTPSA id
- 6a1803df08f44-7077c9da463sm39398046d6.9.2025.08.02.14.25.08
+ AJvYcCVMwcz5OZpOj2sBkfQyWLU1mLnUuDdbsEas+t0SmUMrnHYJUE2O+ijX3/iz8LCxM9bjUvmxrjam@lists.freedesktop.org
+X-Gm-Message-State: AOJu0YzTNpChbrs24ADOkbe2nHMX7upGuf1cZKNuAkZ0VG2rdVupjcDN
+ ZXyIkmf7Csa4UFVnjnLsWkkZWXrkg3AITdfleUFVdIdr2MNrg5ZHe2qq
+X-Gm-Gg: ASbGncuybfRSDOjVGB1Un+LJ4csaDcvrD7PqzBji8w5hEjEjxfnZwdtGmk28uU00gYD
+ Ioh1aiZxEwwVAP3ljxuK4ryRYnpikiSBM1mf0XTC59L4Q4aE/x0S+gZ2eKKuzZ4suthnEHB8gfT
+ Uc44AykM8Fo7mPiCS5tUtfM3zK1gHyGk/Lpss4Cek3gjGTxGKQbxLb2OOuABwz084FRlW+nJ+K1
+ Ic493gzeU4/FXLXdZ2phMlcqwiMRZ25JV174CNN3vIuzozDDZq0MNbba1+tiAP1l5NRARdy+9Mv
+ btjZU3tWmd/y1H1xiFo3lEfXuWG0zRXEDHBhmwd8NaDpNWZSo8uFMWXuRIEztmEw6r/vpodWkDy
+ NS9uMIUHHvs+dBSeQO5l/b1P7JRZCorVyWA==
+X-Google-Smtp-Source: AGHT+IGe/BhUamFbhOMfZiORHg14lmOox+kl2v8y2ocGIRHR1Q9PfmfJpWEEIbsCp12zkytZhwQ9uw==
+X-Received: by 2002:a05:6a00:21d4:b0:74e:ab93:422b with SMTP id
+ d2e1a72fcca58-76bec2f304fmr8216752b3a.4.1754230884756; 
+ Sun, 03 Aug 2025 07:21:24 -0700 (PDT)
+Received: from localhost.localdomain ([104.28.217.213])
+ by smtp.gmail.com with ESMTPSA id
+ d2e1a72fcca58-76bccfd0279sm8431306b3a.98.2025.08.03.07.21.19
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sat, 02 Aug 2025 14:25:08 -0700 (PDT)
-From: Seyediman Seyedarab <imandevel@gmail.com>
-X-Google-Original-From: Seyediman Seyedarab <ImanDevel@gmail.com>
-Date: Sat, 2 Aug 2025 17:24:53 -0400
-To: lyude@redhat.com, dakr@kernel.org, airlied@gmail.com, simona@ffwll.ch
-Cc: dri-devel@lists.freedesktop.org, nouveau@lists.freedesktop.org, 
- linux-kernel@vger.kernel.org
-Subject: Re: [PATCH] drm/nouveau: replace snprintf() with scnprintf() in
- nvkm_snprintbf()
-Message-ID: <kbskd3rnp76mslqfxhy4fdnz3joce6ukzfq5au2c5p7vgmyhfe@f65dzwx7bd5j>
-References: <20250724195913.60742-1-ImanDevel@gmail.com>
+ Sun, 03 Aug 2025 07:21:24 -0700 (PDT)
+From: Jesung Yang <y.j3ms.n@gmail.com>
+To: Miguel Ojeda <ojeda@kernel.org>, Alex Gaynor <alex.gaynor@gmail.com>,
+ Boqun Feng <boqun.feng@gmail.com>, Gary Guo <gary@garyguo.net>,
+ =?UTF-8?q?Bj=C3=B6rn=20Roy=20Baron?= <bjorn3_gh@protonmail.com>,
+ Benno Lossin <lossin@kernel.org>, Andreas Hindborg <a.hindborg@kernel.org>,
+ Alice Ryhl <aliceryhl@google.com>, Trevor Gross <tmgross@umich.edu>,
+ Danilo Krummrich <dakr@kernel.org>, Alexandre Courbot <acourbot@nvidia.com>
+Cc: linux-kernel@vger.kernel.org, rust-for-linux@vger.kernel.org,
+ nouveau@lists.freedesktop.org, Jesung Yang <y.j3ms.n@gmail.com>
+Subject: [PATCH 0/4] rust: add `TryFrom` and `Into` derive macros
+Date: Sun,  3 Aug 2025 14:20:50 +0000
+Message-Id: <cover.1754228164.git.y.j3ms.n@gmail.com>
+X-Mailer: git-send-email 2.39.5
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <20250724195913.60742-1-ImanDevel@gmail.com>
-X-Mailman-Approved-At: Sat, 13 Dec 2025 12:40:52 +0000
+Content-Transfer-Encoding: 8bit
+X-Mailman-Approved-At: Sat, 13 Dec 2025 12:40:44 +0000
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -89,41 +91,39 @@ List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-On 25/07/24 03:59PM, Seyediman Seyedarab wrote:
-> snprintf() returns the number of characters that *would* have been
-> written, which can overestimate how much you actually wrote to the
-> buffer in case of truncation. That leads to 'data += this' advancing
-> the pointer past the end of the buffer and size going negative.
-> 
-> Switching to scnprintf() prevents potential buffer overflows and ensures
-> consistent behavior when building the output string.
-> 
-> Signed-off-by: Seyediman Seyedarab <ImanDevel@gmail.com>
-> ---
->  drivers/gpu/drm/nouveau/nvkm/core/enum.c | 2 +-
->  1 file changed, 1 insertion(+), 1 deletion(-)
-> 
-> diff --git a/drivers/gpu/drm/nouveau/nvkm/core/enum.c b/drivers/gpu/drm/nouveau/nvkm/core/enum.c
-> index b9581feb24cc..a23b40b27b81 100644
-> --- a/drivers/gpu/drm/nouveau/nvkm/core/enum.c
-> +++ b/drivers/gpu/drm/nouveau/nvkm/core/enum.c
-> @@ -44,7 +44,7 @@ nvkm_snprintbf(char *data, int size, const struct nvkm_bitfield *bf, u32 value)
->  	bool space = false;
->  	while (size >= 1 && bf->name) {
->  		if (value & bf->mask) {
-> -			int this = snprintf(data, size, "%s%s",
-> +			int this = scnprintf(data, size, "%s%s",
->  					    space ? " " : "", bf->name);
->  			size -= this;
->  			data += this;
-> -- 
-> 2.50.1
-> 
+This patch series introduces derive macros for `TryFrom` and `Into`
+traits.
 
-Hi there,
+A few enhancements were made to the custom `quote!()` macro to write
+the derive macro. These include support for additional punctuation
+tokens and a fix for an unused variable warning when quoting simple
+forms. Detailed information about these enhancements is provided in the
+relevant patches.
 
-Just following up on this patch. Please let me know if there's any
-feedback or if further changes are needed.
+This series builds on the previous work [1], where the `FromPrimitive`
+trait was considered too heavy for the current use cases. In response
+to the emerging need for functionality similar to `ToPrimitive`, this
+series also implements the `Into` derive macro.
 
-Regards,
-Seyediman
+The original discussion can be found on Zulip [2].
+
+[1] https://lore.kernel.org/rust-for-linux/cover.1750689857.git.y.j3ms.n@gmail.com/
+[2] https://rust-for-linux.zulipchat.com/#narrow/channel/288089/topic/x/near/524335626
+
+Jesung Yang (4):
+  rust: macros: extend custom `quote!()` macro
+  rust: macros: prefix variable `span` with underscore
+  rust: macro: add derive macro for `TryFrom`
+  rust: macro: add derive macro for `Into`
+
+ rust/macros/convert.rs | 361 +++++++++++++++++++++++++++++++++++++++++
+ rust/macros/lib.rs     | 239 +++++++++++++++++++++++++++
+ rust/macros/quote.rs   |  40 ++++-
+ 3 files changed, 638 insertions(+), 2 deletions(-)
+ create mode 100644 rust/macros/convert.rs
+
+
+base-commit: dff64b072708ffef23c117fa1ee1ea59eb417807
+-- 
+2.39.5
+
