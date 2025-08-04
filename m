@@ -2,62 +2,127 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id C96A3B1A666
-	for <lists+nouveau@lfdr.de>; Mon,  4 Aug 2025 17:47:57 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 093C7B1A9A3
+	for <lists+nouveau@lfdr.de>; Mon,  4 Aug 2025 21:26:40 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 821C810E388;
-	Mon,  4 Aug 2025 15:47:56 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 82B1710E37D;
+	Mon,  4 Aug 2025 19:26:36 +0000 (UTC)
 Authentication-Results: gabe.freedesktop.org;
-	dkim=pass (1024-bit key; unprotected) header.d=collabora.com header.i=daniel.almeida@collabora.com header.b="XgijLtNN";
+	dkim=pass (2048-bit key; unprotected) header.d=Nvidia.com header.i=@Nvidia.com header.b="c5z0WpgG";
 	dkim-atps=neutral
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from sender4-pp-f112.zoho.com (sender4-pp-f112.zoho.com
- [136.143.188.112])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 3F2FC10E388
- for <nouveau@lists.freedesktop.org>; Mon,  4 Aug 2025 15:47:55 +0000 (UTC)
-ARC-Seal: i=1; a=rsa-sha256; t=1754322468; cv=none; 
- d=zohomail.com; s=zohoarc; 
- b=R9bQUDhJuw93pt2lYWV7zKW73ZaECvForTb7nHCT/m+ui8reGDK3124eYUwnO+RMilRpyz1KLja8exZcA6Nkob4DV2NZ7b50uSbIcYyKuYUGc3IqI4hgmM5br2CVzR89vw1SbPh9YcI72/Keb5HkZyZRk52Z3QzH7ZB7IbZG9GU=
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=zohomail.com;
- s=zohoarc; t=1754322468;
- h=Content-Type:Content-Transfer-Encoding:Cc:Cc:Date:Date:From:From:In-Reply-To:MIME-Version:Message-ID:References:Subject:Subject:To:To:Message-Id:Reply-To;
- bh=0T/RWsewXHZeN+3s5jOGwdrn4Ucl16ES56csWxcyca0=; 
- b=PHmEfV98ITLTwaj2bGYFM2stFz09+amaLLFKE4kFsZu7g8OwKszNy3KzYcYfIgm39jomDD3Y93shqnNmAs+hYmr8gKC54CMelQCbi+J14y1CRDtVf7lQl6PlnuxK2otqWxEHY2Sz6dKkmkoaaFSMHq3yKGAjtY0FMqhpNqGU248=
-ARC-Authentication-Results: i=1; mx.zohomail.com;
- dkim=pass  header.i=collabora.com;
- spf=pass  smtp.mailfrom=daniel.almeida@collabora.com;
- dmarc=pass header.from=<daniel.almeida@collabora.com>
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; t=1754322468; 
- s=zohomail; d=collabora.com; i=daniel.almeida@collabora.com;
- h=Content-Type:Mime-Version:Subject:Subject:From:From:In-Reply-To:Date:Date:Cc:Cc:Content-Transfer-Encoding:Message-Id:Message-Id:References:To:To:Reply-To;
- bh=0T/RWsewXHZeN+3s5jOGwdrn4Ucl16ES56csWxcyca0=;
- b=XgijLtNNP2Nt9IVKCCn92JukTCCm66TrUmjwBxHDWqvN4GPjWhrOIkcwFVcwiav1
- qFponwBv8RndLLOveFHwxWkmGBb5HnPbZZz4zlXoxAtfsOb5jv1Rb0SxZtEKU3XATUc
- QABD4hrXkez2yT+gMJvIy/dAEuI9iCxLupEjKMsM=
-Received: by mx.zohomail.com with SMTPS id 1754322463977676.6869364729142;
- Mon, 4 Aug 2025 08:47:43 -0700 (PDT)
-Content-Type: text/plain;
-	charset=utf-8
-Mime-Version: 1.0 (Mac OS X Mail 16.0 \(3826.600.51.1.1\))
-Subject: Re: [PATCH v2 2/4] rust: add `Alignment` type
-From: Daniel Almeida <daniel.almeida@collabora.com>
-In-Reply-To: <20250804-num-v2-2-a96b9ca6eb02@nvidia.com>
-Date: Mon, 4 Aug 2025 12:47:27 -0300
-Cc: Miguel Ojeda <ojeda@kernel.org>, Alex Gaynor <alex.gaynor@gmail.com>,
- Boqun Feng <boqun.feng@gmail.com>, Gary Guo <gary@garyguo.net>,
- =?utf-8?Q?Bj=C3=B6rn_Roy_Baron?= <bjorn3_gh@protonmail.com>,
- Benno Lossin <lossin@kernel.org>, Andreas Hindborg <a.hindborg@kernel.org>,
- Alice Ryhl <aliceryhl@google.com>, Trevor Gross <tmgross@umich.edu>,
- Danilo Krummrich <dakr@kernel.org>, linux-kernel@vger.kernel.org,
- rust-for-linux@vger.kernel.org, nouveau@lists.freedesktop.org
-Content-Transfer-Encoding: quoted-printable
-Message-Id: <4A13D612-F5A6-4D7C-A2FC-2FF54646D4E4@collabora.com>
-References: <20250804-num-v2-0-a96b9ca6eb02@nvidia.com>
- <20250804-num-v2-2-a96b9ca6eb02@nvidia.com>
-To: Alexandre Courbot <acourbot@nvidia.com>
-X-Mailer: Apple Mail (2.3826.600.51.1.1)
-X-ZohoMailClient: External
+Received: from NAM10-MW2-obe.outbound.protection.outlook.com
+ (mail-mw2nam10on2085.outbound.protection.outlook.com [40.107.94.85])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 1DE8F10E220
+ for <nouveau@lists.freedesktop.org>; Mon,  4 Aug 2025 19:26:35 +0000 (UTC)
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=bTmLnwFVSORntxjCLuocqDhXgcjx5rORP67tXmCQSmRVTWvHOv7BZU+ZAHIvnyQofmDuyN6UmtqMwJT9AsPhDwERBlPXD98GtoBaUd9hoHViXCAjsPBRqC+G62ebqQ8vAzEn5VTIVAmaP7Il1aZYF8TjPioD4PLq9WCFgJSNCxdGQSlplEYKxY2jnSvxBt7ECxsO6zVzXdS5gOZDQSomrNmOt1rgFfp85JtO/0zs9cbO6yhqGiFj0p2FiAbVuozAnfZDmXGJsOU+/FCFARuhfGmhJy6P/LQFgP67RJUs4E/XEN6o9W//ltGLZZYMIO577SLSwHBnIz+VkbgaIMgyeA==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=mylBzry0bmG0U9FYpQutAFoJPb+dkRh5xP4IKe0ZwRk=;
+ b=xGf9BskKW2gayOXLTB2wB3XgUTdEV7yaEWoPfjd5Jhc1f/XjVmxre32ClsRkNXw1HKiCeL9Q18vw/jXGAkiOZZw45/xyUaoeYqNTvkjrZEMUfDgDWS8F71uHmacvIxGYz2ufsSH9UX/lwhStmDj4p9HPXRip/mo2cHWwcdNxSHURqki0gsz3x3ncnOwHvUDLf4lxgSWwrdkVXmVo3hOqaD0MqAJrVGEKq+rqRhBCP+KIy9/wfL79y+ppPG9V4OqZEQ6PVIatpDdZ3QlieQVg7xh3oReoXf+tK9gSlknGE8ngDL4oKw0ILgFLu4iyaGGHLTWHdygQYcU8ASjgn31mEQ==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
+ 216.228.117.160) smtp.rcpttodomain=redhat.com smtp.mailfrom=nvidia.com;
+ dmarc=pass (p=reject sp=reject pct=100) action=none header.from=nvidia.com;
+ dkim=none (message not signed); arc=none (0)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=Nvidia.com;
+ s=selector2;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=mylBzry0bmG0U9FYpQutAFoJPb+dkRh5xP4IKe0ZwRk=;
+ b=c5z0WpgGyZLb0Jwr2z3tHiem/NYcjBFuUxgEImlW/t9I9CeE5tVWXAXwsttr0rq9cox8qenCAbmsq4WG1P51HbgRn9iNyavuYW29cl4Le7AStEdWN+MOo//IqnlA92txTJl1AYvJduewDuz4SNlF/PvxHXvKGgFH+plHk5Rly3w6ZU3LchzH2AzGrLXqXm7fRGmxVU4YNpSWBA51OMxITtxPqNShQlDYA6Y8c8a/BGZR9nnbjlbnH1F4urq6ZqTiVb4hNYrTOzwCqlyKlkbzmDGlABJcNpd+nFp4CAF7qb6p0K5nimFgLrvq5w/nYdYg8vZJHHqllqXeWDGXG+N0SA==
+Received: from SJ0PR13CA0143.namprd13.prod.outlook.com (2603:10b6:a03:2c6::28)
+ by IA0PR12MB8349.namprd12.prod.outlook.com (2603:10b6:208:407::17)
+ with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.8989.20; Mon, 4 Aug
+ 2025 19:26:31 +0000
+Received: from SJ5PEPF00000204.namprd05.prod.outlook.com
+ (2603:10b6:a03:2c6:cafe::59) by SJ0PR13CA0143.outlook.office365.com
+ (2603:10b6:a03:2c6::28) with Microsoft SMTP Server (version=TLS1_3,
+ cipher=TLS_AES_256_GCM_SHA384) id 15.20.9009.12 via Frontend Transport; Mon,
+ 4 Aug 2025 19:26:30 +0000
+X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 216.228.117.160)
+ smtp.mailfrom=nvidia.com;
+ dkim=none (message not signed)
+ header.d=none;dmarc=pass action=none header.from=nvidia.com;
+Received-SPF: Pass (protection.outlook.com: domain of nvidia.com designates
+ 216.228.117.160 as permitted sender) receiver=protection.outlook.com;
+ client-ip=216.228.117.160; helo=mail.nvidia.com; pr=C
+Received: from mail.nvidia.com (216.228.117.160) by
+ SJ5PEPF00000204.mail.protection.outlook.com (10.167.244.37) with Microsoft
+ SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ 15.20.9009.8 via Frontend Transport; Mon, 4 Aug 2025 19:26:30 +0000
+Received: from rnnvmail201.nvidia.com (10.129.68.8) by mail.nvidia.com
+ (10.129.200.66) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.1544.14; Mon, 4 Aug
+ 2025 12:26:10 -0700
+Received: from ttabi.nvidia.com (10.126.231.35) by rnnvmail201.nvidia.com
+ (10.129.68.8) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.1544.14; Mon, 4 Aug
+ 2025 12:26:09 -0700
+From: Timur Tabi <ttabi@nvidia.com>
+To: Lyude Paul <lyude@redhat.com>, Danilo Krummrich <dakr@kernel.org>,
+ <nouveau@lists.freedesktop.org>
+Subject: [PATCH 0/3] Various minor fixes to Nouveau
+Date: Mon, 4 Aug 2025 14:25:57 -0500
+Message-ID: <20250804192601.10861-1-ttabi@nvidia.com>
+X-Mailer: git-send-email 2.43.0
+MIME-Version: 1.0
+X-NVConfidentiality: public
+Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
+X-Originating-IP: [10.126.231.35]
+X-ClientProxiedBy: rnnvmail202.nvidia.com (10.129.68.7) To
+ rnnvmail201.nvidia.com (10.129.68.8)
+X-EOPAttributedMessage: 0
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: SJ5PEPF00000204:EE_|IA0PR12MB8349:EE_
+X-MS-Office365-Filtering-Correlation-Id: 617732fd-998a-4082-fe14-08ddd38cd09e
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: BCL:0;
+ ARA:13230040|36860700013|1800799024|82310400026|376014; 
+X-Microsoft-Antispam-Message-Info: =?us-ascii?Q?7kEBFOhbSCsVpFQtBco8EeEUzoPInMPmCWAv02YEVb2hgf/Mvg+qBDo+eMtR?=
+ =?us-ascii?Q?9CxZ+yI20LsyqdWoifBntJcnlVVFcYJox6oZbRMXZ5oNeUuu3ENmXN5XCTGX?=
+ =?us-ascii?Q?bkdP1aXUtU8/cYnFyTsSbgnaSqPurkcb+MvuiGyNbAdndQ/+tnn9qydklBgz?=
+ =?us-ascii?Q?5MX8SqhV70W4BPEZKUdxNdqxl9+ZNHISy+rdcvWE7eOx08mImZawEYqKAG/8?=
+ =?us-ascii?Q?aR0LF0934sI3KvisZjAtb0mDLpeq2hEjBQsOHnBUxgEhpCIy/Ydt0urGw+xH?=
+ =?us-ascii?Q?H14VUmomyWVSgM3HiCnRfJIyCJOSM9omH8zq7EGCr4SRK7YNHismY+9rnSyO?=
+ =?us-ascii?Q?YS95rUe1Cr2YTAOPhCtkfeJgFjPJeZKRDy+rjRXYo2+Qr3zcN6FMeiuj7SeC?=
+ =?us-ascii?Q?GEIIF5NSZcqrwDXIQ9b+7HYIQP7zP3DyswbX3ZoFBN+xdDRXH3IailNxttLh?=
+ =?us-ascii?Q?Q1KUuWmKgi/mmk2Cct1Rb/uphd4dxaSbCcFIrQBsyfTCvMRjgoXL94IrHFNX?=
+ =?us-ascii?Q?890LMFMWvSqWOXgbJ9pN9Dg98dp2fjPB7Dmm0VdBPMY069e6b9Q9IFhAQrCG?=
+ =?us-ascii?Q?LOJCsuNkUBSTDeu4psvXaAwCic2ZwYTy5ZMkcn/4asP7qsavFgvBOp9JyuUL?=
+ =?us-ascii?Q?chiwYuFErxKX/RRUiZvG0YVaTJfa4vZM5YUf2zGVxFLuHOueVNrQC5GmsfcJ?=
+ =?us-ascii?Q?EeM7G9oGiwSwwqYRYQLk/9YDDGqXfgAAluPR4zATBw+dM4REVCDlmsnepfet?=
+ =?us-ascii?Q?EqdvXfWiWazMGsY+M1NAeAFn3ZlslhsXYjBuhwWLXpxj4L7+4fM9KrDdwkAs?=
+ =?us-ascii?Q?PAF4JqxRcqofgomQjDhzCgX5vGRhyb2/S+msvpttWt4g0QwjMBe4/Pfu8tvH?=
+ =?us-ascii?Q?aSq0aa5gW6nARcnZRo3WOW0I0c1Rp7S6i4mgiGqju2ixmsuSyWK8LBmL82ha?=
+ =?us-ascii?Q?Gr9O4GGKqoDLFK01WfkHpLMAKAIpNISPa+8ykIqGm+oZ6FCRDhcNKk06rv/7?=
+ =?us-ascii?Q?/GFOKMzAyhB43r/zVWWuLpjepaIWyfTLV1hJN4safZSUkiG1jQztIC5yZcjR?=
+ =?us-ascii?Q?ma4ZX3Ez4jVrgE/g1LAP0v/TMnbO18KBwXLwXtLvAqn8v0et8F9Auyh6GJpS?=
+ =?us-ascii?Q?FL9qbO6vx9xUXBVn4uqAfnrAQnoJ1VoX9pFwScF/BsW9QysfviAYzv8l2w4V?=
+ =?us-ascii?Q?ogb8vpHUvDaJ1AUyRizGHAlxA2ZO7bauwtyFkJ9zQTdaK5FbKYfWFdaHiXNu?=
+ =?us-ascii?Q?JFzDE2YWhMMCxGaxTDLkXOUicpmG0VJoWxlkDvv2ggX6+u3wPPND1ygD3AbT?=
+ =?us-ascii?Q?EdGTrjA/qySmmbZgHErzqRbXWiyMDAXUkJSML/LwqpIWXC0KpImpQN+vJBxF?=
+ =?us-ascii?Q?6L+GxiICAe8xQLGH/QC9pBQApNACNf64/rOgC8UPLH0oCmVAiiPW8viFoSjF?=
+ =?us-ascii?Q?RRAK45fjKuvqMXRZZnIWdQDLHkSfovxDmlG/nWI6jp0/rn/2FNbz+enWY2be?=
+ =?us-ascii?Q?QqWFrrmO5qs+q7awVYb3C7kbvBebuRLfHev5?=
+X-Forefront-Antispam-Report: CIP:216.228.117.160; CTRY:US; LANG:en; SCL:1; SRV:;
+ IPV:NLI; SFV:NSPM; H:mail.nvidia.com; PTR:dc6edge1.nvidia.com; CAT:NONE;
+ SFS:(13230040)(36860700013)(1800799024)(82310400026)(376014); DIR:OUT;
+ SFP:1101; 
+X-OriginatorOrg: Nvidia.com
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 04 Aug 2025 19:26:30.3253 (UTC)
+X-MS-Exchange-CrossTenant-Network-Message-Id: 617732fd-998a-4082-fe14-08ddd38cd09e
+X-MS-Exchange-CrossTenant-Id: 43083d15-7273-40c1-b7db-39efd9ccc17a
+X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=43083d15-7273-40c1-b7db-39efd9ccc17a; Ip=[216.228.117.160];
+ Helo=[mail.nvidia.com]
+X-MS-Exchange-CrossTenant-AuthSource: SJ5PEPF00000204.namprd05.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Anonymous
+X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: IA0PR12MB8349
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -72,307 +137,19 @@ List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-Hi Alex,
+Three minor fixes to Nouveau, discovered while working on Nova.
 
-> On 4 Aug 2025, at 08:45, Alexandre Courbot <acourbot@nvidia.com> =
-wrote:
->=20
-> Alignment operations are very common in the kernel. Since they are
-> always performed using a power of two value, enforcing this invariant
-> through a dedicated type leads to less bugs and can lead to improved
-> generated code.
->=20
-> Introduce the `Alignment` type, inspired by the nightly Rust feature =
-of
-> the same name. It provides the same interface as its upstream =
-namesake,
-> while extending it with `align_up` and `align_down` operations that =
-are
-> usable on any integer type.
->=20
-> Signed-off-by: Alexandre Courbot <acourbot@nvidia.com>
-> ---
-> rust/kernel/lib.rs |   1 +
-> rust/kernel/ptr.rs | 213 =
-+++++++++++++++++++++++++++++++++++++++++++++++++++++
-> 2 files changed, 214 insertions(+)
->=20
-> diff --git a/rust/kernel/lib.rs b/rust/kernel/lib.rs
-> index =
-2955f65da1278dd4cba1e4272ff178b8211a892c..0e66b55cde66ee1b274862cd78ad465a=
-572dc5d9 100644
-> --- a/rust/kernel/lib.rs
-> +++ b/rust/kernel/lib.rs
-> @@ -100,6 +100,7 @@
-> pub mod platform;
-> pub mod prelude;
-> pub mod print;
-> +pub mod ptr;
-> pub mod rbtree;
-> pub mod revocable;
-> pub mod security;
-> diff --git a/rust/kernel/ptr.rs b/rust/kernel/ptr.rs
-> new file mode 100644
-> index =
-0000000000000000000000000000000000000000..6d941db58944619ea5b05676af06981a=
-3ceaaca8
-> --- /dev/null
-> +++ b/rust/kernel/ptr.rs
-> @@ -0,0 +1,213 @@
-> +// SPDX-License-Identifier: GPL-2.0
-> +
-> +//! Types and functions to work with pointers and addresses.
-> +
-> +use core::fmt::Debug;
-> +use core::num::NonZero;
-> +use core::ops::{BitAnd, Not};
-> +
-> +use crate::build_assert;
-> +use crate::num::CheckedAdd;
-> +
-> +/// Type representing an alignment, which is always a power of two.
-> +///
-> +/// It be used to validate that a given value is a valid alignment, =
-and to perform masking and
-> +/// align down/up operations. The alignment operations are done using =
-the [`align_up!`] and
+Timur Tabi (3):
+  drm/nouveau: fix error path in nvkm_gsp_fwsec_v2
+  drm/nouveau: remove unused increment in gm200_flcn_pio_imem_wr
+  drm/nouveau: remove unused memory target test
 
-Nit: I=E2=80=99d go with =E2=80=9Calign up or align down operations=E2=80=9D=
- instead of using a slash.
+ drivers/gpu/drm/nouveau/nvkm/falcon/gm200.c     | 15 ++++-----------
+ drivers/gpu/drm/nouveau/nvkm/subdev/gsp/fwsec.c |  5 +++--
+ 2 files changed, 7 insertions(+), 13 deletions(-)
 
-> +/// [`align_down!`] macros.
-> +///
-> +/// Heavily inspired by the [`Alignment`] nightly feature from the =
-Rust standard library, and
-> +/// hopefully to be eventually replaced by it.
 
-It=E2=80=99s a bit hard to parse this.
-
-Also, I wonder if we should standardize some syntax for TODOs so we can =
-parse
-them using a script? This way we can actually keep track and perhaps =
-pipe them
-to our GitHub page as =E2=80=9Cgood first issues=E2=80=9D or just =
-regular issues.
-
-I guess a simple "// TODO: =E2=80=9C here will do, for example.
-
-> +///
-> +/// [`Alignment`]: https://github.com/rust-lang/rust/issues/102070
-> +///
-> +/// # Invariants
-> +///
-> +/// An alignment is always a power of two.
-> +#[repr(transparent)]
-> +#[derive(Debug, Clone, Copy, PartialEq, Eq, PartialOrd, Ord, Hash)]
-> +pub struct Alignment(NonZero<usize>);
-> +
-> +impl Alignment {
-> +    /// Validates that `align` is a power of two at build-time, and =
-returns an [`Alignment`] of the
-> +    /// same value.
-> +    ///
-> +    /// A build error is triggered if `align` cannot be asserted to =
-be a power of two.
-> +    ///
-> +    /// # Examples
-> +    ///
-> +    /// ```
-> +    /// use kernel::ptr::Alignment;
-> +    ///
-> +    /// let v =3D Alignment::new(16);
-> +    /// assert_eq!(v.as_usize(), 16);
-> +    /// ```
-> +    #[inline(always)]
-> +    pub const fn new(align: usize) -> Self {
-> +        build_assert!(align.is_power_of_two());
-> +
-> +        // INVARIANT: `align` is a power of two.
-> +        // SAFETY: `align` is a power of two, and thus non-zero.
-> +        Self(unsafe { NonZero::new_unchecked(align) })
-> +    }
-> +
-> +    /// Validates that `align` is a power of two at runtime, and =
-returns an
-> +    /// [`Alignment`] of the same value.
-> +    ///
-> +    /// [`None`] is returned if `align` was not a power of two.
-> +    ///
-> +    /// # Examples
-> +    ///
-> +    /// ```
-> +    /// use kernel::ptr::Alignment;
-> +    ///
-> +    /// assert_eq!(Alignment::new_checked(16), =
-Some(Alignment::new(16)));
-> +    /// assert_eq!(Alignment::new_checked(15), None);
-> +    /// assert_eq!(Alignment::new_checked(1), =
-Some(Alignment::new(1)));
-> +    /// assert_eq!(Alignment::new_checked(0), None);
-> +    /// ```
-> +    #[inline(always)]
-> +    pub const fn new_checked(align: usize) -> Option<Self> {
-> +        if align.is_power_of_two() {
-> +            // INVARIANT: `align` is a power of two.
-> +            // SAFETY: `align` is a power of two, and thus non-zero.
-> +            Some(Self(unsafe { NonZero::new_unchecked(align) }))
-> +        } else {
-> +            None
-> +        }
-> +    }
-> +
-> +    /// Returns the alignment of `T`.
-> +    #[inline(always)]
-> +    pub const fn of<T>() -> Self {
-> +        // INVARIANT: `align_of` always returns a power of 2.
-> +        Self(unsafe { NonZero::new_unchecked(align_of::<T>()) })
-> +    }
-
-> +
-> +    /// Returns the base-2 logarithm of the alignment.
-> +    ///
-> +    /// # Examples
-> +    ///
-> +    /// ```
-> +    /// use kernel::ptr::Alignment;
-> +    ///
-> +    /// assert_eq!(Alignment::of::<u8>().log2(), 0);
-> +    /// assert_eq!(Alignment::new(16).log2(), 4);
-> +    /// ```
-> +    #[inline(always)]
-> +    pub const fn log2(self) -> u32 {
-> +        self.0.ilog2()
-> +    }
-> +
-> +    /// Returns this alignment as a [`NonZero`].
-> +    ///
-> +    /// It is guaranteed to be a power of two.
-> +    ///
-> +    /// # Examples
-> +    ///
-> +    /// ```
-> +    /// use kernel::ptr::Alignment;
-> +    ///
-> +    /// assert_eq!(Alignment::new(16).as_nonzero().get(), 16);
-> +    /// ```
-> +    #[inline(always)]
-> +    pub const fn as_nonzero(self) -> NonZero<usize> {
-> +        if !self.0.is_power_of_two() {
-> +            // SAFETY: per the invariants, `self.0` is always a power =
-of two so this block will
-> +            // never be reached.
-> +            unsafe { core::hint::unreachable_unchecked() }
-> +        }
-> +        self.0
-> +    }
-> +
-> +    /// Returns this alignment as a `usize`.
-> +    ///
-> +    /// It is guaranteed to be a power of two.
-> +    ///
-> +    /// # Examples
-> +    ///
-> +    /// ```
-> +    /// use kernel::ptr::Alignment;
-> +    ///
-> +    /// assert_eq!(Alignment::new(16).as_usize(), 16);
-> +    /// ```
-> +    #[inline(always)]
-> +    pub const fn as_usize(self) -> usize {
-> +        self.as_nonzero().get()
-> +    }
-> +
-> +    /// Returns the mask corresponding to `self.as_usize() - 1`.
-> +    ///
-> +    /// # Examples
-> +    ///
-> +    /// ```
-> +    /// use kernel::ptr::Alignment;
-> +    ///
-> +    /// assert_eq!(Alignment::new(0x10).mask(), 0xf);
-> +    /// ```
-> +    #[inline(always)]
-> +    pub const fn mask(self) -> usize {
-> +        // INVARIANT: `self.as_usize()` is guaranteed to be a power =
-of two (i.e. non-zero), thus
-> +        // `1` can safely be substracted from it.
-> +        self.as_usize() - 1
-> +    }
-> +
-> +    /// Aligns `value` down to this alignment.
-> +    ///
-> +    /// If the alignment contained in `self` is too large for `T`, =
-then `0` is returned, which
-> +    /// is correct as it is also the result that would have been =
-returned if it did.
-
-I half get this, but still: If it did what?
-
-> +    ///
-> +    /// # Examples
-> +    ///
-> +    /// ```
-> +    /// use kernel::ptr::Alignment;
-> +    ///
-> +    /// assert_eq!(Alignment::new(0x10).align_down(0x2f), 0x20);
-> +    /// assert_eq!(Alignment::new(0x10).align_down(0x30), 0x30);
-> +    /// assert_eq!(Alignment::new(0x1000).align_down(0xf0u8), 0x0);
-> +    /// ```
-> +    #[inline(always)]
-> +    pub fn align_down<T>(self, value: T) -> T
-> +    where
-> +        T: TryFrom<usize> + BitAnd<Output =3D T> + Not<Output =3D T> =
-+ Default,
-> +    {
-> +        T::try_from(self.mask())
-> +            .map(|mask| value & !mask)
-> +            .unwrap_or(T::default())
-> +    }
-> +
-> +    /// Aligns `value` up to this alignment, returning `None` if =
-aligning pushes the result above
-> +    /// the limits of `value`'s type.
-> +    ///
-> +    /// # Examples
-> +    ///
-> +    /// ```
-> +    /// use kernel::ptr::Alignment;
-> +    ///
-> +    /// assert_eq!(Alignment::new(0x10).align_up(0x4f), Some(0x50));
-> +    /// assert_eq!(Alignment::new(0x10).align_up(0x40), Some(0x40));
-> +    /// assert_eq!(Alignment::new(0x10).align_up(0x0), Some(0x0));
-> +    /// assert_eq!(Alignment::new(0x10).align_up(u8::MAX), None);
-> +    /// assert_eq!(Alignment::new(0x100).align_up(0x10u8), None);
-> +    /// assert_eq!(Alignment::new(0x100).align_up(0x0u8), Some(0x0));
-> +    /// ```
-> +    #[inline(always)]
-> +    pub fn align_up<T>(self, value: T) -> Option<T>
-> +    where
-> +        T: TryFrom<usize>
-> +            + BitAnd<Output =3D T>
-> +            + Not<Output =3D T>
-> +            + Default
-> +            + PartialEq
-> +            + Copy
-> +            + CheckedAdd,
-> +    {
-> +        let aligned_down =3D self.align_down(value);
-> +        if value =3D=3D aligned_down {
-> +            Some(aligned_down)
-> +        } else {
-> +            T::try_from(self.as_usize())
-> +                .ok()
-> +                .and_then(|align| aligned_down.checked_add(align))
-> +        }
-> +    }
-> +}
->=20
-> --=20
-> 2.50.1
->=20
->=20
-
-Everything else looks fine, IMHO.
-
-=E2=80=94 Daniel
+base-commit: 6531a2cf07ef156956840853692755cc7e1621b7
+-- 
+2.43.0
 
