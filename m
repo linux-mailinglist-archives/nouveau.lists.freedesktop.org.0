@@ -2,80 +2,118 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id 39D90CBADE5
-	for <lists+nouveau@lfdr.de>; Sat, 13 Dec 2025 13:45:34 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id C4465CBABBC
+	for <lists+nouveau@lfdr.de>; Sat, 13 Dec 2025 13:43:18 +0100 (CET)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 1464C10EB7D;
-	Sat, 13 Dec 2025 12:41:37 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 9B43910EB14;
+	Sat, 13 Dec 2025 12:41:05 +0000 (UTC)
 Authentication-Results: gabe.freedesktop.org;
-	dkim=permerror (0-bit key) header.d=gmail.com header.i=@gmail.com header.b="aM5eeVz1";
+	dkim=pass (2048-bit key; unprotected) header.d=qualcomm.com header.i=@qualcomm.com header.b="U1I2kJOX";
 	dkim-atps=neutral
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from mail-pl1-f182.google.com (mail-pl1-f182.google.com
- [209.85.214.182])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 9A76A10E0C5
- for <nouveau@lists.freedesktop.org>; Mon,  4 Aug 2025 14:17:38 +0000 (UTC)
-Received: by mail-pl1-f182.google.com with SMTP id
- d9443c01a7336-24050da1b9eso5220915ad.3
- for <nouveau@lists.freedesktop.org>; Mon, 04 Aug 2025 07:17:38 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1754317058; x=1754921858; darn=lists.freedesktop.org;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=cj5LMXFCZ1M7KQUj/Qw+ZYW8TP1RxMgPY8c23lvf4BM=;
- b=aM5eeVz10ePYzyO9H9v1L8O6dA/Z5W804v5G5Ktb9dlycPHFMgHl89XsI6pcuBup/N
- S7iAztp+GuKUUryYhv5J+5J7FVW38aW9o7zWVmTnOrDotKTB8KD/T64kJA3mGgtc+kZr
- Uow6YxLHtQJ/tRi1kgQ89Rul4tsg7Ux74uXwiDDvPo13NWfy6TiAe7gm55lPdUw8mESb
- 6jY8IC+5y9Vsnz8HNLfx2qwWbxg2JNrhEAH3x4aXJ9zERti0JQhzEVl9KByxdN5Mtssb
- ZRp3aDevzNDSyEGs7gCXWEuTOQg8YA9sWYjOisQj88L20alRG4u5zlzrfDspbpFx+j/q
- 8srw==
+Received: from mx0a-0031df01.pphosted.com (mx0a-0031df01.pphosted.com
+ [205.220.168.131])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 658F210E45E
+ for <nouveau@lists.freedesktop.org>; Mon,  4 Aug 2025 21:43:21 +0000 (UTC)
+Received: from pps.filterd (m0279863.ppops.net [127.0.0.1])
+ by mx0a-0031df01.pphosted.com (8.18.1.2/8.18.1.2) with ESMTP id 574D02rl018248
+ for <nouveau@lists.freedesktop.org>; Mon, 4 Aug 2025 21:43:21 GMT
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
+ cc:content-transfer-encoding:date:from:message-id:mime-version
+ :subject:to; s=qcppdkim1; bh=Es8yYGkoaL9WsWMGWRUXzp1VH7ftdQ84HcS
+ owvwXJBw=; b=U1I2kJOXu5Ur4+sTw5Sjtrk6MaCayoLLEJ7Y3QgF2BJtdTpyCSy
+ 1ibQv0Xan7sDVGeT5SdNiPJfB9RfP82+zQ/K9kDoHoXQGb8fS9s1DFhAfx/kd7Fe
+ KyWn42hhOhM4+kZcA23Ky7/8+f3sYt+Mk0ZdOWAZz6dqS+Oh3PTBDlhoYCuPzyH+
+ f49Lgr7QfXcZf8FLh4GrwMeWeknEt6yzoZctsFOi8HsP4nc1D1/N6L2YJ0zc3uId
+ gVTOQG4nijVeiO4XrLNcpJhoq523VzB+QZqXEPAYbP1HU+lfhL/hppHEdsuWkC9D
+ 1dkCL0sQDAUSfSDhwcRjeeuSOt7vy5yLtGg==
+Received: from mail-pl1-f198.google.com (mail-pl1-f198.google.com
+ [209.85.214.198])
+ by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 48aqyv2k3j-1
+ (version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128 verify=NOT)
+ for <nouveau@lists.freedesktop.org>; Mon, 04 Aug 2025 21:43:20 +0000 (GMT)
+Received: by mail-pl1-f198.google.com with SMTP id
+ d9443c01a7336-24249098fd0so30288465ad.0
+ for <nouveau@lists.freedesktop.org>; Mon, 04 Aug 2025 14:43:20 -0700 (PDT)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1754317058; x=1754921858;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=cj5LMXFCZ1M7KQUj/Qw+ZYW8TP1RxMgPY8c23lvf4BM=;
- b=KgmiUlkCd0iETX1BfPUO3FGb+leMC7AijC/BDr8HYWcvJ5aBOvtzWPADvcaeOwlAku
- IJFgDPPuMhZLrq7ezkojZhUthvKrqe4/1/3HsPg71JtGx/dCNjLcjbEbcxg+lt+Gdk04
- rwsE5JosFKk4jqWEfRE82AeU2T0j7uzjGf/crWLSmUomDXF+ezrmGW/xY56i3OtiBQgn
- /Gt79kgZxjhX9Gp7nCrovu+QDTgLsaoMnjWX5h0eYU2Dp5vxySuSVszGQ2pYxo/7eQUl
- Pxazwg68QYX3+CJc24w2+v20uQRUG76g5zNaOF7h6gS2R06mTF7ZgQkZht+dzUoVYXKd
- JaNA==
+ d=1e100.net; s=20230601; t=1754343800; x=1754948600;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=Es8yYGkoaL9WsWMGWRUXzp1VH7ftdQ84HcSowvwXJBw=;
+ b=QqxMEDoBC+wsALV/vKZ5tGCd7czjRoP6HJbkZuY1DNCUj1zfy8tf7DSyrQKdqoqaoD
+ QD/ql1mr0TruTO2oeeBz2MSWJS17r+wh6qFotU6St6xgw3vct7aR4byax/Kp29Si1+Bu
+ jJYQFRXryOcPDrnjW+j2IxgmTVNiNnJ2jMlRnHfNfLWYJnp05zQ141I41WyyuO2e6vNa
+ 3KgXsqrCdGvn8aC0exnZaU/WRFNk+kGjqFWeRBfO41Wlc6AGqa7ggXJW5v/uZ3qda3VK
+ GA3+58T0zw6uITp4Oo9BULa17aDVvS14h8jhNlHItJHnO/hJunvq8hKlVDJk6qrZPS3J
+ blsQ==
 X-Forwarded-Encrypted: i=1;
- AJvYcCXgU29cGfvZwF+3EdRP5J4VlEhF+cys22IaHInqvN77bx7a2KD40BcpvfNw/yFBmNusiYCBfTjL@lists.freedesktop.org
-X-Gm-Message-State: AOJu0YwUeub+bGWqmLy/ggh/H9OpoWDTim7Z43FzCRrNrS7iNpGDS5ot
- ALbKvtiJ82eezBfZPS1UwuvqIidmPubMAOCmnNtH3FJmwYmrPSF13vrY4S7FX7qDLDcngytkWy0
- hXepiziqmc2oMzMSSKA/P2dHgWeu3/TI=
-X-Gm-Gg: ASbGncvbhEpxZ7jrabKknAma+VA8eNL4eAjVYna7pw/BfPNLHCAohXu8nSq/6OXgX+T
- qhFOYFs7684BSCsCpOfARHAbpjAdV+0tAQhV5W8s93s+5qkj6rdbA7I6oV+65RTqQBJ+kHNKUl9
- UbJtyn+ONs1vyiB65w4lKnnweuavDSIBzrynmg1VKk5o2CHe5/Bnk5dl79C3vxEY1N20xqF/UAC
- GyAGpTn
-X-Google-Smtp-Source: AGHT+IHoIKRTao7XkfgA4kePRWm3e59NNTaknJ0r8ZXP5Lhp3Ma7eKeiuMTWnPj5rGZqOm7Zr5ROoZlk5pWcnXNkUMQ=
-X-Received: by 2002:a17:902:e743:b0:240:71db:fd0 with SMTP id
- d9443c01a7336-24246fcb42emr54973825ad.8.1754317057946; Mon, 04 Aug 2025
- 07:17:37 -0700 (PDT)
+ AJvYcCW7EBdupxhdl2pb/XhroWjyafmUI68uVQ8/nLsfO+Tq4XMyozwN8U7DPvJJ6xHYJT+KXRw2dxSU@lists.freedesktop.org
+X-Gm-Message-State: AOJu0YyYH9T22L8AdiRb4LnS4NrIxyKHIVtVW5TrJxUQgn3af0uWrOfi
+ adm0EI0axPk3qJgsHgxHtKPg36V7qiKAHeA6jVSQBi/X4Lzlk0z3ANBpHFLzIGKYGMiNXfFKEE6
+ FCgCs9S3MiR4lIWdeHis0nTrtyUNERglwJVAKzB9wsiS0MPbb8zUehoCa81s3hHeHitoN
+X-Gm-Gg: ASbGncugr87CY1e0bvYbmh1AjEZAIRoTrMFNxfQlK1L4VZ6/BW2RbitmUuOwmtKtZis
+ vxCa+0zq6Rg4F099bgMis0KV4dnl7lzqd17Uy1pX/5lI4nxHT2D4mXYRMRfOcK6KLyYUT78ABfr
+ yw1Vw8QVjbR0aYjOCvGTQ524/jWlaVPv2hjb0IFvatQJiqXFk/b05r6s/roy3uXx1j+G6U7BpPH
+ rngSnq4LoeMItPOLxvLI/njvoR4NHQwD1vF+3H3qjL4JAlxMlriHNBvTNACZCLbXl385/nMI+Ka
+ wUWPvq5zRJvf4/F2mP80qRvrzsLEhVebqa46bXKLiGzw/trCygs=
+X-Received: by 2002:a17:902:db03:b0:240:a559:be6a with SMTP id
+ d9443c01a7336-24246ffc07fmr168919705ad.34.1754343799941; 
+ Mon, 04 Aug 2025 14:43:19 -0700 (PDT)
+X-Google-Smtp-Source: AGHT+IGMENcFBVOU5CPFNiVaukbmJxZDsOzIZHTpJidiDWnGmFiPem5d1xxZ1nYXWM9QrZ0SYd5T+A==
+X-Received: by 2002:a17:902:db03:b0:240:a559:be6a with SMTP id
+ d9443c01a7336-24246ffc07fmr168919345ad.34.1754343799505; 
+ Mon, 04 Aug 2025 14:43:19 -0700 (PDT)
+Received: from localhost ([2601:1c0:5000:d5c:5b3e:de60:4fda:e7b1])
+ by smtp.gmail.com with ESMTPSA id
+ d9443c01a7336-241e8976cfdsm116217775ad.101.2025.08.04.14.43.18
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Mon, 04 Aug 2025 14:43:19 -0700 (PDT)
+From: Rob Clark <robin.clark@oss.qualcomm.com>
+To: dri-devel@lists.freedesktop.org
+Cc: freedreno@lists.freedesktop.org, linux-arm-msm@vger.kernel.org,
+ Danilo Krummrich <dakr@redhat.com>, Connor Abbott <cwabbott0@gmail.com>,
+ Rob Clark <robin.clark@oss.qualcomm.com>,
+ Abhinav Kumar <abhinav.kumar@linux.dev>,
+ Danilo Krummrich <dakr@kernel.org>, David Airlie <airlied@gmail.com>,
+ Dmitry Baryshkov <lumag@kernel.org>,
+ Jessica Zhang <jessica.zhang@oss.qualcomm.com>,
+ linux-kernel@vger.kernel.org (open list), Lyude Paul <lyude@redhat.com>,
+ Maarten Lankhorst <maarten.lankhorst@linux.intel.com>,
+ Marijn Suijten <marijn.suijten@somainline.org>,
+ Maxime Ripard <mripard@kernel.org>,
+ nouveau@lists.freedesktop.org (open list:DRM DRIVER FOR NVIDIA GEFORCE/QUADRO
+ GPUS), Sean Paul <sean@poorly.run>, Simona Vetter <simona@ffwll.ch>,
+ Thomas Zimmermann <tzimmermann@suse.de>
+Subject: [PATCH RESEND 0/2] drm/gpuvm+msm: Handle in-place remaps
+Date: Mon,  4 Aug 2025 14:43:14 -0700
+Message-ID: <20250804214317.658704-1-robin.clark@oss.qualcomm.com>
+X-Mailer: git-send-email 2.50.1
 MIME-Version: 1.0
-References: <20250804-num-v2-0-a96b9ca6eb02@nvidia.com>
- <20250804-num-v2-2-a96b9ca6eb02@nvidia.com>
-In-Reply-To: <20250804-num-v2-2-a96b9ca6eb02@nvidia.com>
-From: Miguel Ojeda <miguel.ojeda.sandonis@gmail.com>
-Date: Mon, 4 Aug 2025 16:17:26 +0200
-X-Gm-Features: Ac12FXzf9euOeG2E0bVmnruyqbjbiK7AJnC-T013YUx-5fpBzzCknyhtAiw29Y8
-Message-ID: <CANiq72miQSuEEzKZsOhHKDah1kP+8PYcmODGqwtcaRwAggF-+g@mail.gmail.com>
-Subject: Re: [PATCH v2 2/4] rust: add `Alignment` type
-To: Alexandre Courbot <acourbot@nvidia.com>
-Cc: Miguel Ojeda <ojeda@kernel.org>, Alex Gaynor <alex.gaynor@gmail.com>, 
- Boqun Feng <boqun.feng@gmail.com>, Gary Guo <gary@garyguo.net>, 
- =?UTF-8?Q?Bj=C3=B6rn_Roy_Baron?= <bjorn3_gh@protonmail.com>, 
- Benno Lossin <lossin@kernel.org>, Andreas Hindborg <a.hindborg@kernel.org>, 
- Alice Ryhl <aliceryhl@google.com>, Trevor Gross <tmgross@umich.edu>, 
- Danilo Krummrich <dakr@kernel.org>, linux-kernel@vger.kernel.org, 
- rust-for-linux@vger.kernel.org, nouveau@lists.freedesktop.org
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-X-Mailman-Approved-At: Sat, 13 Dec 2025 12:40:47 +0000
+Content-Transfer-Encoding: 8bit
+X-Proofpoint-GUID: YuL0jOgQ3rwK7Barp0he0VPMfM83f83c
+X-Authority-Analysis: v=2.4 cv=F/xXdrhN c=1 sm=1 tr=0 ts=68912978 cx=c_pps
+ a=MTSHoo12Qbhz2p7MsH1ifg==:117 a=xqWC_Br6kY4A:10 a=2OwXVqhp2XgA:10
+ a=r9eiMqSCUvIwoLEqkV8A:9 a=GvdueXVYPmCkWapjIL-Q:22
+X-Proofpoint-ORIG-GUID: YuL0jOgQ3rwK7Barp0he0VPMfM83f83c
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjUwODA0MDEzMiBTYWx0ZWRfXwqcuLxJBx+HT
+ /besWqM6gz2AJZfJMutW14sbxoVnxfNkymumBK5RWkinauwa3Tq9opOIproblXUh+wqp4UCzy5l
+ w5zo3tJlE96HAlJcma/stgkaevQPP8v2h+GDhYDWLPLLZzsYP14gTQYqmtsQac6l5ZJ44P3peps
+ +7yJ0lwgRe0UUDdZ5BBamy4VZEyOor7bUVqJUz2+SyjZan0RhsiMBYIeA1stO5IaXtupKuZYoAF
+ FQPLcdztwi+F/EJBov1B9jNILxR2elMzHTIKMJEW9Ro9PgjzgZaYOq5wDoL6nmOfBQ5B/cegdaU
+ e4InUTKDq0rHpkn8+44G/NmqoN325SZBQMopnr+sujLU3Fflb3bszLYGWvhfb4XYBrU1+p2DixE
+ 2lA/nZdx+eTiXcG4l5hcFW5F5WsT2Bt99UbZHZBGUWGHhDY+xMWrsOMg9lMlbGJ8IZ7JrFQI
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.293,Aquarius:18.0.1099,Hydra:6.1.9,FMLib:17.12.80.40
+ definitions=2025-08-04_09,2025-08-04_01,2025-03-28_01
+X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
+ suspectscore=0 spamscore=0 mlxscore=0 phishscore=0 bulkscore=0 adultscore=0
+ clxscore=1015 mlxlogscore=728 priorityscore=1501 impostorscore=0
+ malwarescore=0 lowpriorityscore=0 classifier=spam authscore=0 authtc=n/a
+ authcc= route=outbound adjust=0 reason=mlx scancount=1
+ engine=8.19.0-2505280000 definitions=main-2508040132
+X-Mailman-Approved-At: Sat, 13 Dec 2025 12:40:42 +0000
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -90,52 +128,31 @@ List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-On Mon, Aug 4, 2025 at 1:45=E2=80=AFPM Alexandre Courbot <acourbot@nvidia.c=
-om> wrote:
->
-> +/// align down/up operations. The alignment operations are done using th=
-e [`align_up!`] and
-> +/// [`align_down!`] macros.
+turnip+msm uses a DUMP flag on the gpuva to indicate VA ranges to dump
+(ie. for devcoredump).  In most cases (internal BOs like shader
+instructions) this is known at the time the BO is MAPd, and the DUMP
+flag can be set at the same time as the BO is initially bound into the
+VM.  But for descriptor buffers, this isn't known until VkBuffer is
+bound to the already mapped VkDeviceMemory, requiring an atomic remap
+to set the flag.
 
-These intra-doc links don't work (they are not macros in this version at le=
-ast).
+The problem is that drmvm turns this into discreet unmap and remap
+steps.  So there is a window where the VA is not mapped, which can
+race with cmdstream exec (SUBMIT).
 
-> +    /// Returns the alignment of `T`.
-> +    #[inline(always)]
-> +    pub const fn of<T>() -> Self {
-> +        // INVARIANT: `align_of` always returns a power of 2.
-> +        Self(unsafe { NonZero::new_unchecked(align_of::<T>()) })
+This series attempts to avoid that by turning an exact-remap into a
+remap op instead, where the driver can handle the special case since
+it can see both the unmap and map steps at the same time.
 
-Missing safety comment (`CLIPPY=3D1` spots it).
+Rob Clark (2):
+  drm/gpuvm: Send in-place re-maps to the driver as remap
+  drm/msm: Handle in-place remaps
 
-Also, cannot we use `new()` here? i.e. the value will be known at compile-t=
-ime.
+ drivers/gpu/drm/drm_gpuvm.c            | 21 +++++++++++++++++++++
+ drivers/gpu/drm/msm/msm_gem_vma.c      | 17 +++++++++++++++--
+ drivers/gpu/drm/nouveau/nouveau_uvmm.c |  3 ++-
+ 3 files changed, 38 insertions(+), 3 deletions(-)
 
-> +        if !self.0.is_power_of_two() {
-> +            // SAFETY: per the invariants, `self.0` is always a power of=
- two so this block will
-> +            // never be reached.
-> +            unsafe { core::hint::unreachable_unchecked() }
-> +        }
+-- 
+2.50.1
 
-I guess this one is here to help optimize users after they inline the
-cal? Is there a particular case you noticed? i.e. it may be worth
-mentioning it.
-
-> +    pub const fn mask(self) -> usize {
-> +        // INVARIANT: `self.as_usize()` is guaranteed to be a power of t=
-wo (i.e. non-zero), thus
-> +        // `1` can safely be substracted from it.
-> +        self.as_usize() - 1
-> +    }
-
-I am not sure why there is `// INVARIANT` here, since we are not
-creating a new `Self`.
-
-I guess by "safely" you are trying to say there is no overflow risk --
-I would be explicit and avoid "safe", since it is safe to overflow.
-
-Typo: subtracted
-
-Cheers,
-Miguel
