@@ -2,103 +2,57 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id 9B0F5B1B5E5
-	for <lists+nouveau@lfdr.de>; Tue,  5 Aug 2025 16:09:31 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 76982B1B6D9
+	for <lists+nouveau@lfdr.de>; Tue,  5 Aug 2025 16:48:08 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id CA2FE10E22D;
-	Tue,  5 Aug 2025 14:09:29 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 1631710E6A6;
+	Tue,  5 Aug 2025 14:48:07 +0000 (UTC)
 Authentication-Results: gabe.freedesktop.org;
-	dkim=pass (2048-bit key; secure) header.d=ziepe.ca header.i=@ziepe.ca header.b="RSx1ldD1";
+	dkim=pass (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="Zl23PYxd";
 	dkim-atps=neutral
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from mail-qt1-f182.google.com (mail-qt1-f182.google.com
- [209.85.160.182])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 84C9310E276
- for <nouveau@lists.freedesktop.org>; Tue,  5 Aug 2025 14:09:28 +0000 (UTC)
-Received: by mail-qt1-f182.google.com with SMTP id
- d75a77b69052e-4ab63f8fb91so31881431cf.0
- for <nouveau@lists.freedesktop.org>; Tue, 05 Aug 2025 07:09:28 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=ziepe.ca; s=google; t=1754402967; x=1755007767; darn=lists.freedesktop.org; 
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=uzAYIR/shPSYacUrOQJo0K9+jh4P0UFNjUkTluGngLM=;
- b=RSx1ldD1zI2ZDlYuF6Ugnz0fGbwUYM3adITZFVEiU9lekvpprDe0OypwTwKOv92AC6
- +fzAbOMRIoRjPdH8t+1cUIem5XbQdUxIBiB1mVZ4003znfGi9QR9nFrgS96/wkmV7ufO
- wCuWAH6qPqiDBdJULrHfaXuUoPd7nPSdVdzsoyzWM7DcEh2crS+YYEuUVNQf4lUPIt+a
- lVKZZbNIpfwk3YkTCtGUEbv+pmyYc31vo9/+jGXPrywDKlul8Wy7V4mHrT1qJxYHZcqv
- pWYJxFJYcCLlwdhVNKm+1rGJ+Mn2MutJrb0nceaGy14ECdaLnSGaFXRHved1kuJcOgKW
- 78OQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1754402967; x=1755007767;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=uzAYIR/shPSYacUrOQJo0K9+jh4P0UFNjUkTluGngLM=;
- b=M66jI2UFYRQD3c1Gc2o2xWfHQffHCkdo93gcaEa1lnICMI9Hz8krI3YwaZerAHdbeT
- pLF49wBkbHS7tDO6TGfyUlvz/e3G4f+ZqMSbqG25nQt46aw0n/iOemT4uyef50hhSFRw
- wDXq/buLFJIyq2vN2a+yVMicgVh6uY+Jgrot1k4H/c4wQctMjjZJE+YXoJmNt5Uh12r3
- ++agNtOBueRKx+YOVrW31K4vwgjrzyYkg4YT1Z1IUowhDrdA830kREyIevSaMU6aVPF6
- QnouiWXpay3/6TX5e6vHFbzBmILYLIvmfVu11pHgo+2bTy2INcQGbsU/Gbyj3hqEO95X
- 7nAA==
-X-Forwarded-Encrypted: i=1;
- AJvYcCXiJRpGtAQgXM8JIiP323dPdRekr6sBysUwdZ8d0tQoOLlRmvIP269MvLxaAQLr9AHHQwblRsrU@lists.freedesktop.org
-X-Gm-Message-State: AOJu0Yz266xYO2wHKVLOKouKcBk8mWAH4pIPJWOpGVOMUK/wxXZz1dgN
- i4B8RgxYRA/yTj39cnWXkvQbJrWibbUOWjY4plhH0qkjBclPOuOf/WzAGhmKvM3CO5c=
-X-Gm-Gg: ASbGncv/ulZ144z3iXxh2+GuSvkaJ6sFOskw8MPjrFRL1lv8wKpFXYhDlyBbzNguqg1
- mRjYXDKWhlBrKlAKwvmNEIWbpW8uLcLK3n0fgTfC7c1kGz5sgca2ZE4ClPBWNRjxR1TofU06wam
- UZH2c2kZbz6ubzznE9vgmvmo9BBU9d/c3QczRIStkzhsvMvwSJMreAz0VyRi5MUrNtsRx0qhLIO
- D2sRD9jj1eAPZi7cw7Z5D2TZBXbHpDQv8GxkqIr2nbHvYvt9rDtvSZ31PS6Gr3MfZ/TUvYQU2fk
- SLcuNU9U+DsAcnyadyTf6sazZGq/KAz08JByKV8y0IGTaW29SoVZCSLs2PMOtW2O5TR+BQVodo7
- NVoI88SFwR3XbjGaoEy3IMnR+kzIrFLckvm9o2+oUvPRnMZafy1bZKxzYC7O0HUMVCAh3O+Q638
- QtP1k=
-X-Google-Smtp-Source: AGHT+IHL+J4sqP2SxcyYA/bm344OksrCpi3leJPwTfOOG1s5eCheuA6YOXSpbD6tw1CHk8ksExeFwQ==
-X-Received: by 2002:a05:622a:4a14:b0:4a9:a3ff:28bb with SMTP id
- d75a77b69052e-4af10a1abd0mr240543491cf.25.1754402967223; 
- Tue, 05 Aug 2025 07:09:27 -0700 (PDT)
-Received: from ziepe.ca
- (hlfxns017vw-47-55-120-4.dhcp-dynamic.fibreop.ns.bellaliant.net.
- [47.55.120.4]) by smtp.gmail.com with ESMTPSA id
- d75a77b69052e-4aeeed669c0sm65687951cf.33.2025.08.05.07.09.26
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 05 Aug 2025 07:09:26 -0700 (PDT)
-Received: from jgg by wakko with local (Exim 4.97)
- (envelope-from <jgg@ziepe.ca>) id 1ujIM1-00000001XVj-3WEg;
- Tue, 05 Aug 2025 11:09:25 -0300
-Date: Tue, 5 Aug 2025 11:09:25 -0300
-From: Jason Gunthorpe <jgg@ziepe.ca>
-To: Alistair Popple <apopple@nvidia.com>
-Cc: David Hildenbrand <david@redhat.com>, Matthew Wilcox <willy@infradead.org>,
- Yonatan Maman <ymaman@nvidia.com>,
- =?utf-8?B?SsOpcsO0bWU=?= Glisse <jglisse@redhat.com>,
- Andrew Morton <akpm@linux-foundation.org>,
- Leon Romanovsky <leon@kernel.org>, Lyude Paul <lyude@redhat.com>,
- Danilo Krummrich <dakr@kernel.org>,
- David Airlie <airlied@gmail.com>, Simona Vetter <simona@ffwll.ch>,
- Ben Skeggs <bskeggs@nvidia.com>, Michael Guralnik <michaelgur@nvidia.com>,
- Or Har-Toov <ohartoov@nvidia.com>,
- Daisuke Matsuda <dskmtsd@gmail.com>, Shay Drory <shayd@nvidia.com>,
- linux-mm@kvack.org, linux-rdma@vger.kernel.org,
- dri-devel@lists.freedesktop.org, nouveau@lists.freedesktop.org,
- linux-kernel@vger.kernel.org, Gal Shalom <GalShalom@nvidia.com>
-Subject: Re: [PATCH v2 1/5] mm/hmm: HMM API to enable P2P DMA for device
- private pages
-Message-ID: <20250805140925.GO26511@ziepe.ca>
-References: <aH4_QaNtIJMrPqOw@casper.infradead.org>
- <7lvduvov3rvfsgixbkyyinnzz3plpp3szxam46ccgjmh6v5d7q@zoz4k723vs3d>
- <aIBcTpC9Te7YIe4J@ziepe.ca>
- <cn7hcxskr5prkc3jnd4vzzeau5weevzumcspzfayeiwdexkkfe@ovvgraqo7svh>
- <a3f1af02-ef3f-40f8-be79-4c3929a59bb7@redhat.com>
- <i5ya3n7bhhufpczprtp2ndg7bxtykoyjtsfae6dfdqk2rfz6ix@nzwnhqfwh6rq>
- <20250801164058.GD26511@ziepe.ca>
- <b8009500-8b0b-4bb9-ae5e-6d2135adbfdd@redhat.com>
- <20250801165749.GF26511@ziepe.ca>
- <vscps6igy42u5limiigiok6y35mjx6acawi3qmvzbrpvltp4qp@mkydml7lz6fu>
-MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <vscps6igy42u5limiigiok6y35mjx6acawi3qmvzbrpvltp4qp@mkydml7lz6fu>
+Received: from dfw.source.kernel.org (dfw.source.kernel.org [139.178.84.217])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 7020710E6A5;
+ Tue,  5 Aug 2025 14:48:06 +0000 (UTC)
+Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
+ by dfw.source.kernel.org (Postfix) with ESMTP id 6A0DB5C5588;
+ Tue,  5 Aug 2025 14:48:05 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 5B763C4CEF0;
+ Tue,  5 Aug 2025 14:48:02 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+ s=k20201202; t=1754405285;
+ bh=yDTCqMbktP5T7/s/6qRHaUnSmDaSqNv3r3EwtVnqXMQ=;
+ h=Date:Subject:Cc:To:From:References:In-Reply-To:From;
+ b=Zl23PYxdyrbcMtf4QHnUXgEH+BAUYflh4vqk1AiWBRDYDwgmHTppBOdzdaSM9k9xx
+ WTw9QBVWN2U5SIyMqY4zMZsuJGVquhLUemjqGgDSSw7amSiyGnqrJG9koeMFUUin3e
+ 1MVL1tDp4/6oPQj2O9/u/d0JxxSOcmHYnT7V82nKx1xlmz904Fwo2snoBMi60OlVgP
+ hHXk49QPIzuMv/Vf926DbbsKu/EBXKCuFONEqQVsih2cgu9VaqwLnYl/RM7hMf33oV
+ yGv36wMeMhVs8J8zU10eLfOfMTFrGod+AFhum9ZlHlcFfh7IvaB9dxs4enM06NskHh
+ g01FNu3ce8a6w==
+Mime-Version: 1.0
+Content-Transfer-Encoding: quoted-printable
+Content-Type: text/plain; charset=UTF-8
+Date: Tue, 05 Aug 2025 16:48:00 +0200
+Message-Id: <DBUKRNHY14ZN.95GVIGMY7RAN@kernel.org>
+Subject: Re: [PATCH RESEND 1/2] drm/gpuvm: Send in-place re-maps to the
+ driver as remap
+Cc: <dri-devel@lists.freedesktop.org>, <freedreno@lists.freedesktop.org>,
+ <linux-arm-msm@vger.kernel.org>, "Danilo Krummrich" <dakr@redhat.com>,
+ "Connor Abbott" <cwabbott0@gmail.com>, "Maarten Lankhorst"
+ <maarten.lankhorst@linux.intel.com>, "Maxime Ripard" <mripard@kernel.org>,
+ "Thomas Zimmermann" <tzimmermann@suse.de>, "David Airlie"
+ <airlied@gmail.com>, "Simona Vetter" <simona@ffwll.ch>, "Lyude Paul"
+ <lyude@redhat.com>, "open list" <linux-kernel@vger.kernel.org>, "open
+ list:DRM DRIVER FOR NVIDIA GEFORCE/QUADRO GPUS"
+ <nouveau@lists.freedesktop.org>
+To: "Rob Clark" <rob.clark@oss.qualcomm.com>
+From: "Danilo Krummrich" <dakr@kernel.org>
+References: <20250804214317.658704-1-robin.clark@oss.qualcomm.com>
+ <20250804214317.658704-2-robin.clark@oss.qualcomm.com>
+ <DBUE2QU2CH9N.3C32KHT9LHMMB@kernel.org>
+ <CACSVV0270Zk4ApR_pGZ+sKgoi14kvfOo_NvzVq3-QALE0mpFsQ@mail.gmail.com>
+In-Reply-To: <CACSVV0270Zk4ApR_pGZ+sKgoi14kvfOo_NvzVq3-QALE0mpFsQ@mail.gmail.com>
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -113,32 +67,116 @@ List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-On Mon, Aug 04, 2025 at 11:51:38AM +1000, Alistair Popple wrote:
-> On Fri, Aug 01, 2025 at 01:57:49PM -0300, Jason Gunthorpe wrote:
-> > On Fri, Aug 01, 2025 at 06:50:18PM +0200, David Hildenbrand wrote:
-> > > On 01.08.25 18:40, Jason Gunthorpe wrote:
-> > > > On Fri, Jul 25, 2025 at 10:31:25AM +1000, Alistair Popple wrote:
-> > > > 
-> > > > > The only issue would be if there were generic code paths that somehow have a
-> > > > > raw pfn obtained from neither a page-table walk or struct page. My assumption
-> > > > > (yet to be proven/tested) is that these paths don't exist.
-> > > > 
-> > > > hmm does it, it encodes the device private into a pfn and expects the
-> > > > caller to do pfn to page.
-> 
-> What callers need to do pfn to page when finding a device private pfn via
-> hmm_range_fault()? GPU drivers don't, they tend just to use the pfn as an offset
-> from the start of the pgmap to find whatever data structure they are using to
-> track device memory allocations.
+On Tue Aug 5, 2025 at 4:32 PM CEST, Rob Clark wrote:
+> On Tue, Aug 5, 2025 at 2:33=E2=80=AFAM Danilo Krummrich <dakr@kernel.org>=
+ wrote:
+>> On Mon Aug 4, 2025 at 11:43 PM CEST, Rob Clark wrote:
+>> > diff --git a/drivers/gpu/drm/drm_gpuvm.c b/drivers/gpu/drm/drm_gpuvm.c
+>> > index bbc7fecb6f4a..e21782a97fbe 100644
+>> > --- a/drivers/gpu/drm/drm_gpuvm.c
+>> > +++ b/drivers/gpu/drm/drm_gpuvm.c
+>> > @@ -2125,6 +2125,27 @@ __drm_gpuvm_sm_map(struct drm_gpuvm *gpuvm,
+>> >                                offset =3D=3D req_offset;
+>> >
+>> >                       if (end =3D=3D req_end) {
+>> > +                             if (merge) {
+>> > +                                     /*
+>> > +                                      * This is an exact remap of the=
+ existing
+>> > +                                      * VA (potentially flags change)=
+?  Pass
+>> > +                                      * this to the driver as a remap=
+ so it can
+>> > +                                      * do an in-place update:
+>> > +                                      */
+>> > +                                     struct drm_gpuva_op_map n =3D {
+>> > +                                             .va.addr =3D va->va.addr=
+,
+>> > +                                             .va.range =3D va->va.ran=
+ge,
+>> > +                                             .gem.obj =3D va->gem.obj=
+,
+>> > +                                             .gem.offset =3D va->gem.=
+offset,
+>> > +                                     };
+>> > +                                     struct drm_gpuva_op_unmap u =3D =
+{
+>> > +                                             .va =3D va,
+>> > +                                             .keep =3D true,
+>> > +                                     };
+>> > +
+>> > +                                     return op_remap_cb(ops, priv, NU=
+LL, &n, &u);
+>> > +                             }
+>>
+>> I don't see why this is necessary, a struct drm_gpuva_op_unmap carries t=
+he
+>> struct drm_gpuva to unmap. You can easily compare this to the original r=
+equest
+>> you gave to GPUVM, i.e. req_addr, req_range, req_obj, req_offset, etc.
+>>
+>> Which is what you have to do for any other unmap operation that has keep=
+ =3D=3D true
+>> anyways, e.g. if D is the exact same as A, B and C.
+>>
+>>         Cur
+>>         ---
+>>         1                       N
+>>         |---A---|---B---|---C---|
+>>
+>>         Req
+>>         ---
+>>         1                       N
+>>         |-----------D-----------|
+>
+> Ugg, this means carrying around more state between the unmap and map
+> callbacks, vs. just handing all the data to the driver in a single
+> callback.  For the keep=3D=3Dtrue case, nouveau just seems to skip the
+> unmap.. I guess in your case the map operation is tolerant of
+> overwriting existing mappings so this works out, which isn't the case
+> with io_pgtable.
 
-All drivers today must. You have no idea if the PFN returned is a
-private or CPU page. The only way to know is to check the struct page
-type, by looking inside the struct page.
+There is no "your case" as far as I'm concerned. Please don't think that I =
+don't
+care about solving a problem, just because it's not relevant for any of the
+drivers or subsystems I maintain. :)
 
-> So other than adding a HMM_PFN flag to say this is really a device index I don't
-> see too many issues here.
+> I guess I could handle the specific case of an exact in-place remap in
+> the driver to handle this specific case.  But the example you give
+> with multiple mappings would be harder to cope with.
+>
+> I still feel there is some room for improvement in gpuvm to make this
+> easier for drivers.  Maybe what I proposed isn't the best general
+> solution, but somehow giving the drivers info about both the unmaps
+> and maps in the same callback would make things easier (and the remap
+> callback is _almost_ that).
 
-Christoph suggested exactly this, and it would solve the issue. Seems
-quite easy too. Let's do it.
+I generally agree with that, my concern is more about this specific patch.
 
-Jason
+There are patches on the list that replace all the req_* arguments of
+__drm_gpuvm_sm_map() with a new struct drm_gpuvm_map_req.
+
+Maybe the unmap callbacks could simply provide a pointer to this object?
+
+> BR,
+> -R
+>
+>>
+>> In this case you get three unmap ops with keep =3D=3D true, which you ca=
+n compare to
+>> your request to figure out that you can keep the corresponding PTEs.
+>>
+>> Besides that it changes the semantics that the documentation mentions an=
+d that
+>> drivers are allowed to rely on, i.e. a struct drm_gpuva_op_remap represe=
+nts
+>> an actual change and any call to __drm_gpuvm_sm_map() results in an arbi=
+trary
+>> number of unmap ops, a maximum of two remap ops and exactly one map oper=
+ation.
+>>
+>> >                               ret =3D op_unmap_cb(ops, priv, va, merge=
+);
+>> >                               if (ret)
+>> >                                       return ret;
+
