@@ -2,55 +2,76 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id 076C6B1B118
-	for <lists+nouveau@lfdr.de>; Tue,  5 Aug 2025 11:33:31 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 2DB3AB1B1EB
+	for <lists+nouveau@lfdr.de>; Tue,  5 Aug 2025 12:26:18 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id E574F10E62C;
-	Tue,  5 Aug 2025 09:33:28 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id C6B2210E63B;
+	Tue,  5 Aug 2025 10:26:10 +0000 (UTC)
 Authentication-Results: gabe.freedesktop.org;
-	dkim=pass (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="qOeHHveG";
+	dkim=pass (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="IwoTVTx4";
 	dkim-atps=neutral
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
 Received: from sea.source.kernel.org (sea.source.kernel.org [172.234.252.31])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 2A54F10E623;
- Tue,  5 Aug 2025 09:33:27 +0000 (UTC)
+ by gabe.freedesktop.org (Postfix) with ESMTPS id CFCC310E63B;
+ Tue,  5 Aug 2025 10:26:09 +0000 (UTC)
 Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by sea.source.kernel.org (Postfix) with ESMTP id D17B544D32;
- Tue,  5 Aug 2025 09:33:26 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 0C675C4CEF4;
- Tue,  5 Aug 2025 09:33:23 +0000 (UTC)
+ by sea.source.kernel.org (Postfix) with ESMTP id 363114418A;
+ Tue,  5 Aug 2025 10:26:09 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 6B305C4CEF0;
+ Tue,  5 Aug 2025 10:25:59 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1754386406;
- bh=skyxs9Z4sBhwoUDir0xa89YmAZ3DZFZzARtZtVKT9nY=;
- h=Date:Subject:Cc:To:From:References:In-Reply-To:From;
- b=qOeHHveGFku077OzUZ+BrjD3TfvDv5KQFpbJDXspG+4tSuPKU3/NqKVDdbvGwfAwf
- hOTlh7D0pbRVNRYo8w4GxLmMjJR0RETinJK5+IKvyC/YGX55v256iWAPUKm38kUjrQ
- 1v2UtcGjZi9nRKq7p6uJk4JdFvmKol9FXfj2jBermx0QKgdzYFFoWHyHzK5HV6kK0f
- wXsAyoyjKhgotdLpdhSiZ2xHr5VuAlMcsx4R9Gvpkha1MyDujrZXOaJ+FnsUi8SzgI
- lYCS36IkxHWiixj3joz/M2dhJ5yomLnTtkHrGsEvvfKTw/z5FKiDYrpPREuA1FX356
- Z1u4Qq8C3v+oA==
-Mime-Version: 1.0
-Content-Transfer-Encoding: quoted-printable
-Content-Type: text/plain; charset=UTF-8
-Date: Tue, 05 Aug 2025 11:33:22 +0200
-Message-Id: <DBUE2QU2CH9N.3C32KHT9LHMMB@kernel.org>
-Subject: Re: [PATCH RESEND 1/2] drm/gpuvm: Send in-place re-maps to the
- driver as remap
-Cc: <dri-devel@lists.freedesktop.org>, <freedreno@lists.freedesktop.org>,
- <linux-arm-msm@vger.kernel.org>, "Danilo Krummrich" <dakr@redhat.com>,
- "Connor Abbott" <cwabbott0@gmail.com>, "Maarten Lankhorst"
- <maarten.lankhorst@linux.intel.com>, "Maxime Ripard" <mripard@kernel.org>,
- "Thomas Zimmermann" <tzimmermann@suse.de>, "David Airlie"
- <airlied@gmail.com>, "Simona Vetter" <simona@ffwll.ch>, "Lyude Paul"
- <lyude@redhat.com>, "open list" <linux-kernel@vger.kernel.org>, "open
- list:DRM DRIVER FOR NVIDIA GEFORCE/QUADRO GPUS"
- <nouveau@lists.freedesktop.org>
-To: "Rob Clark" <robin.clark@oss.qualcomm.com>
-From: "Danilo Krummrich" <dakr@kernel.org>
-References: <20250804214317.658704-1-robin.clark@oss.qualcomm.com>
- <20250804214317.658704-2-robin.clark@oss.qualcomm.com>
-In-Reply-To: <20250804214317.658704-2-robin.clark@oss.qualcomm.com>
+ s=k20201202; t=1754389569;
+ bh=7rVCW8r3zVl85kYTCUUV6L2jUD/buUjnRV58z2gANgw=;
+ h=From:To:Cc:Subject:In-Reply-To:References:Date:From;
+ b=IwoTVTx4oNSU7IOKbmF7O2xSfNdMOPq0wbdkfw4i7d5TfO5D3heN8DJqVZr1VEYnK
+ quER2OQsDmLwn1JObdmMN+13OmNTo4cX/uvdiDUuF/WOROEJb7q6/2gjIx0dmjIDv5
+ i3AP17v9diEQ9fP7XVQPphxJDAufssFw+w8vNEKubh5hIrSIDmlpODh1tI3bmm0ZtL
+ 3/24lzJZyv0+rS7ImFsU+61TcSAlJ0Tmli5ZDZUwzwWKa6SpwNeJo4HksoiUnDAMK6
+ VoLVZbjkcQeazkEvm4Sy+OGtHKVdKZuHCyl0lktdkLpQk/m0BRI5Ddwk1C7KVosqm1
+ ytphFokTAMVfg==
+From: Andreas Hindborg <a.hindborg@kernel.org>
+To: Tamir Duberstein <tamird@gmail.com>, "Rafael J. Wysocki"
+ <rafael@kernel.org>, Viresh Kumar <viresh.kumar@linaro.org>, Miguel Ojeda
+ <ojeda@kernel.org>, Alex Gaynor <alex.gaynor@gmail.com>, Boqun Feng
+ <boqun.feng@gmail.com>, Gary Guo <gary@garyguo.net>, =?utf-8?Q?Bj=C3=B6rn?=
+ Roy Baron
+ <bjorn3_gh@protonmail.com>, Benno Lossin <lossin@kernel.org>, Alice Ryhl
+ <aliceryhl@google.com>, Trevor Gross <tmgross@umich.edu>, Danilo Krummrich
+ <dakr@kernel.org>, Maarten Lankhorst <maarten.lankhorst@linux.intel.com>,
+ Maxime Ripard <mripard@kernel.org>, Thomas Zimmermann
+ <tzimmermann@suse.de>, David
+ Airlie <airlied@gmail.com>, Simona Vetter <simona@ffwll.ch>, FUJITA
+ Tomonori <fujita.tomonori@gmail.com>, Andrew Lunn <andrew@lunn.ch>, Heiner
+ Kallweit <hkallweit1@gmail.com>, Russell King <linux@armlinux.org.uk>,
+ "David S. Miller" <davem@davemloft.net>, Eric
+ Dumazet <edumazet@google.com>, Jakub Kicinski <kuba@kernel.org>, Paolo
+ Abeni <pabeni@redhat.com>, Michael Turquette <mturquette@baylibre.com>,
+ Stephen Boyd <sboyd@kernel.org>, Breno Leitao <leitao@debian.org>, Greg
+ Kroah-Hartman <gregkh@linuxfoundation.org>, Luis Chamberlain
+ <mcgrof@kernel.org>, Russ Weight <russ.weight@linux.dev>, Dave Ertman
+ <david.m.ertman@intel.com>, Ira Weiny <ira.weiny@intel.com>, Leon
+ Romanovsky <leon@kernel.org>, Bjorn Helgaas <bhelgaas@google.com>,
+ Krzysztof =?utf-8?Q?Wilczy=C5=84ski?= <kwilczynski@kernel.org>, Arnd
+ Bergmann <arnd@arndb.de>, Brendan Higgins <brendan.higgins@linux.dev>,
+ David Gow <davidgow@google.com>, Rae Moar <rmoar@google.com>, Jens
+ Axboe <axboe@kernel.dk>
+Cc: linux-pm@vger.kernel.org, linux-kernel@vger.kernel.org,
+ rust-for-linux@vger.kernel.org, nouveau@lists.freedesktop.org,
+ dri-devel@lists.freedesktop.org, netdev@vger.kernel.org,
+ linux-clk@vger.kernel.org, linux-pci@vger.kernel.org,
+ linux-kselftest@vger.kernel.org, kunit-dev@googlegroups.com,
+ linux-block@vger.kernel.org, Tamir Duberstein <tamird@gmail.com>
+Subject: Re: [PATCH 05/17] rust: configfs: replace `kernel::c_str!` with
+ C-Strings
+In-Reply-To: <20250710-core-cstr-cstrings-v1-5-027420ea799e@gmail.com>
+References: <20250710-core-cstr-cstrings-v1-0-027420ea799e@gmail.com>
+ <TL_feIg3npvj8WCrzUSpylClaDUBbZJFcZH8Z98hw2z7jzoH6u9Jbai8xtai6QsrTCDBbQD-cg_IpvXq1ZxqgQ==@protonmail.internalid>
+ <20250710-core-cstr-cstrings-v1-5-027420ea799e@gmail.com>
+Date: Tue, 05 Aug 2025 12:25:50 +0200
+Message-ID: <878qjy9ia9.fsf@kernel.org>
+MIME-Version: 1.0
+Content-Type: text/plain
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -65,79 +86,19 @@ List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-(Cc: Thomas, Boris, Matt, Alice)
+"Tamir Duberstein" <tamird@gmail.com> writes:
 
-On Mon Aug 4, 2025 at 11:43 PM CEST, Rob Clark wrote:
-> The 'keep' hint on the unmap is only half useful, without being able to
-> link it to a map cb.  Instead combine the two ops into a remap op to
-> give the driver a chance to figure things out.
+> C-String literals were added in Rust 1.77. Replace instances of
+> `kernel::c_str!` with C-String literals where possible.
 >
-> Signed-off-by: Rob Clark <robin.clark@oss.qualcomm.com>
-> ---
->  drivers/gpu/drm/drm_gpuvm.c            | 21 +++++++++++++++++++++
->  drivers/gpu/drm/nouveau/nouveau_uvmm.c |  3 ++-
->  2 files changed, 23 insertions(+), 1 deletion(-)
->
-> diff --git a/drivers/gpu/drm/drm_gpuvm.c b/drivers/gpu/drm/drm_gpuvm.c
-> index bbc7fecb6f4a..e21782a97fbe 100644
-> --- a/drivers/gpu/drm/drm_gpuvm.c
-> +++ b/drivers/gpu/drm/drm_gpuvm.c
-> @@ -2125,6 +2125,27 @@ __drm_gpuvm_sm_map(struct drm_gpuvm *gpuvm,
->  				 offset =3D=3D req_offset;
-> =20
->  			if (end =3D=3D req_end) {
-> +				if (merge) {
-> +					/*
-> +					 * This is an exact remap of the existing
-> +					 * VA (potentially flags change)?  Pass
-> +					 * this to the driver as a remap so it can
-> +					 * do an in-place update:
-> +					 */
-> +					struct drm_gpuva_op_map n =3D {
-> +						.va.addr =3D va->va.addr,
-> +						.va.range =3D va->va.range,
-> +						.gem.obj =3D va->gem.obj,
-> +						.gem.offset =3D va->gem.offset,
-> +					};
-> +					struct drm_gpuva_op_unmap u =3D {
-> +						.va =3D va,
-> +						.keep =3D true,
-> +					};
-> +
-> +					return op_remap_cb(ops, priv, NULL, &n, &u);
-> +				}
+> Acked-by: Greg Kroah-Hartman <gregkh@linuxfoundation.org>
+> Reviewed-by: Alice Ryhl <aliceryhl@google.com>
+> Signed-off-by: Tamir Duberstein <tamird@gmail.com>
 
-I don't see why this is necessary, a struct drm_gpuva_op_unmap carries the
-struct drm_gpuva to unmap. You can easily compare this to the original requ=
-est
-you gave to GPUVM, i.e. req_addr, req_range, req_obj, req_offset, etc.
+Acked-by: Andreas Hindborg <a.hindborg@kernel.org>
 
-Which is what you have to do for any other unmap operation that has keep =
-=3D=3D true
-anyways, e.g. if D is the exact same as A, B and C.
 
-	Cur
-	---
-	1                       N
-	|---A---|---B---|---C---|
-=09
-	Req
-	---
-	1                       N
-	|-----------D-----------|
+Best regards,
+Andreas Hindborg
 
-In this case you get three unmap ops with keep =3D=3D true, which you can c=
-ompare to
-your request to figure out that you can keep the corresponding PTEs.
 
-Besides that it changes the semantics that the documentation mentions and t=
-hat
-drivers are allowed to rely on, i.e. a struct drm_gpuva_op_remap represents
-an actual change and any call to __drm_gpuvm_sm_map() results in an arbitra=
-ry
-number of unmap ops, a maximum of two remap ops and exactly one map operati=
-on.
-
->  				ret =3D op_unmap_cb(ops, priv, va, merge);
->  				if (ret)
->  					return ret;
