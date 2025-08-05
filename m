@@ -2,92 +2,55 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id 31F64B1B0C8
-	for <lists+nouveau@lfdr.de>; Tue,  5 Aug 2025 11:16:21 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 076C6B1B118
+	for <lists+nouveau@lfdr.de>; Tue,  5 Aug 2025 11:33:31 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 4DCC910E632;
-	Tue,  5 Aug 2025 09:16:19 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id E574F10E62C;
+	Tue,  5 Aug 2025 09:33:28 +0000 (UTC)
 Authentication-Results: gabe.freedesktop.org;
-	dkim=pass (1024-bit key; unprotected) header.d=redhat.com header.i=@redhat.com header.b="a4GygZ++";
+	dkim=pass (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="qOeHHveG";
 	dkim-atps=neutral
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from us-smtp-delivery-124.mimecast.com
- (us-smtp-delivery-124.mimecast.com [170.10.133.124])
- by gabe.freedesktop.org (Postfix) with ESMTPS id F1D9310E635
- for <nouveau@lists.freedesktop.org>; Tue,  5 Aug 2025 09:16:17 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1754385376;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references;
- bh=mOXJ0l1oyVJ7d2CaE8Nzq9ax/9ZzYtU7ziWstjFONDo=;
- b=a4GygZ++OZf4rURFd0UePXISnKhmLT2fXD/AKCnyRk5dJM1LfykFDxkNlo7EgZ/T+UoK6d
- U/G57mVeaAcS4lGC8qiF9igtn3Pk1HvHQuou/mw/n9xzU4m4D3GmogGuX8VLbBbjTmffph
- eRoUlMQtQ2aKcid8sEd7WL2Bv8dqZaQ=
-Received: from mail-wm1-f69.google.com (mail-wm1-f69.google.com
- [209.85.128.69]) by relay.mimecast.com with ESMTP with STARTTLS
- (version=TLSv1.3, cipher=TLS_AES_256_GCM_SHA384) id
- us-mta-558-YlTP_daCOPCNstmgT3K7Ow-1; Tue, 05 Aug 2025 05:16:12 -0400
-X-MC-Unique: YlTP_daCOPCNstmgT3K7Ow-1
-X-Mimecast-MFC-AGG-ID: YlTP_daCOPCNstmgT3K7Ow_1754385371
-Received: by mail-wm1-f69.google.com with SMTP id
- 5b1f17b1804b1-459e0f54c88so4099775e9.1
- for <nouveau@lists.freedesktop.org>; Tue, 05 Aug 2025 02:16:12 -0700 (PDT)
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1754385371; x=1754990171;
- h=mime-version:user-agent:content-transfer-encoding:references
- :in-reply-to:date:cc:to:from:subject:message-id:x-gm-message-state
- :from:to:cc:subject:date:message-id:reply-to;
- bh=p1mMNUopLHd4FF/6Wq/sWgjQ/0t6kpGK8wiGV6xzDPU=;
- b=St6b3rQrKaLz3ZgWyosX//EpPur9pxhHCANP8WhiKIpVH8flGJ5593gZnLlqXon6fB
- OpSrQx4Y62DC4JZqxCA5AMZfvNEbW5vKTzr0hH/Zc0xNYDdD/4zawRp00gZd3EFdovTk
- bmpiZ0daQ7e5ygvyGwdoQc7OXw69Z4STEoPnXmXvbiTfsj/LjoCl5zadyYt6TUvd6G19
- FyO+umU4W0T+4IyLAJkdSMHa0izOJCiUoQxvZ6Pths6RZOMwMvTc8ez4ixuWmn7TyPPi
- IMrbU3hoORW+He3AWkK+JnUP+Djues8x0dZboD+CwB5y3kWA+uglrxU4BxZG3IO0X9Mv
- 0neA==
-X-Forwarded-Encrypted: i=1;
- AJvYcCX3hBqzbc3ZmSBtgieGl3J3a18xZQrbAGrDbvH5tMK5AV9L/lJhis/TTZfSqZk7wz9F8hNgjRVw@lists.freedesktop.org
-X-Gm-Message-State: AOJu0YwCO7/7c1VUnzK8cf5OP0GogEtVlKgdNHocsHnX6GJyI9oV9HCL
- hie82Ds3CigH/z79QDEfhNY45YsEtFl1Pniaoxhj2Yp+7j2TgFb5gBBbJtlSHYLpsMBvCjcAMq7
- lgvfugpNyWvde5BJklRNf5XXOHCguQkhUfuFBKhnroBKgP5xs7auTItaPbFeNfg85Kyy7YNGC9f
- s=
-X-Gm-Gg: ASbGncsKJknbCIsukO8VvXrVWAAnIDbFdKg0GKlG6dZABe8F8IrwGsj2gFqmmjedy6M
- MK0XG0WhoNnFcBGbVXq5aUGXjlq4Hi6yIktqH1umeEFthCBGfTxnoSVTsCvW4btn5FGY8Vn5PD+
- pTvLKHqc+0SHZIsGhyQjc4Hlzdn9XGtwgjQ02ecuD0dk1RgMeOt80IJE2ntd/gnF3YWR2WRIVm9
- QWxx0+KYJ6F0l6sTdrlkenzP5xDwEd3y0Es0/KAjZLbFMBkTZYf9yCwkagYfrW40J/OUo4MTvlm
- J3/pZZHJwQyIHzbQZl0p1E594mlnrAusaDh6e5zqZNSLxbFZrYtoBl5LXupeYWWWLRn03dfmk/W
- EwyaMma3UFRs=
-X-Received: by 2002:a05:600c:1e27:b0:459:e002:8b1e with SMTP id
- 5b1f17b1804b1-459e0d0a8dfmr22378425e9.13.1754385371216; 
- Tue, 05 Aug 2025 02:16:11 -0700 (PDT)
-X-Google-Smtp-Source: AGHT+IGeq9UeXT2TQ7XkpDietfHt1zBwSAMYvLzbbOHC7UsuY66UegALSutX9e1rsCUKC+wOvcLz2A==
-X-Received: by 2002:a05:600c:1e27:b0:459:e002:8b1e with SMTP id
- 5b1f17b1804b1-459e0d0a8dfmr22378175e9.13.1754385370778; 
- Tue, 05 Aug 2025 02:16:10 -0700 (PDT)
-Received: from ?IPv6:2001:16b8:3d90:a700:522d:5615:dfb:4451?
- ([2001:16b8:3d90:a700:522d:5615:dfb:4451])
- by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-4589ee5790dsm196310565e9.27.2025.08.05.02.16.09
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 05 Aug 2025 02:16:09 -0700 (PDT)
-Message-ID: <ac616b700cac2a93b5011ea5928994ab1ddc53a3.camel@redhat.com>
-Subject: Re: [PATCH] drm/nouveau/gsp: fix potential leak of memory used
- during acpi init
-From: Philipp Stanner <pstanner@redhat.com>
-To: Ben Skeggs <bskeggs@nvidia.com>, nouveau@lists.freedesktop.org
-Cc: Danilo Krummrich <dakr@kernel.org>
-Date: Tue, 05 Aug 2025 11:16:08 +0200
-In-Reply-To: <20250617040036.2932-1-bskeggs@nvidia.com>
-References: <20250617040036.2932-1-bskeggs@nvidia.com>
-User-Agent: Evolution 3.52.4 (3.52.4-2.fc40)
-MIME-Version: 1.0
-X-Mimecast-Spam-Score: 0
-X-Mimecast-MFC-PROC-ID: PpmOhTxAFSc-YZGjT5GBgypG0digFhAOjctKyqDAhto_1754385371
-X-Mimecast-Originator: redhat.com
-Content-Type: text/plain; charset="UTF-8"
+Received: from sea.source.kernel.org (sea.source.kernel.org [172.234.252.31])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 2A54F10E623;
+ Tue,  5 Aug 2025 09:33:27 +0000 (UTC)
+Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
+ by sea.source.kernel.org (Postfix) with ESMTP id D17B544D32;
+ Tue,  5 Aug 2025 09:33:26 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 0C675C4CEF4;
+ Tue,  5 Aug 2025 09:33:23 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+ s=k20201202; t=1754386406;
+ bh=skyxs9Z4sBhwoUDir0xa89YmAZ3DZFZzARtZtVKT9nY=;
+ h=Date:Subject:Cc:To:From:References:In-Reply-To:From;
+ b=qOeHHveGFku077OzUZ+BrjD3TfvDv5KQFpbJDXspG+4tSuPKU3/NqKVDdbvGwfAwf
+ hOTlh7D0pbRVNRYo8w4GxLmMjJR0RETinJK5+IKvyC/YGX55v256iWAPUKm38kUjrQ
+ 1v2UtcGjZi9nRKq7p6uJk4JdFvmKol9FXfj2jBermx0QKgdzYFFoWHyHzK5HV6kK0f
+ wXsAyoyjKhgotdLpdhSiZ2xHr5VuAlMcsx4R9Gvpkha1MyDujrZXOaJ+FnsUi8SzgI
+ lYCS36IkxHWiixj3joz/M2dhJ5yomLnTtkHrGsEvvfKTw/z5FKiDYrpPREuA1FX356
+ Z1u4Qq8C3v+oA==
+Mime-Version: 1.0
 Content-Transfer-Encoding: quoted-printable
+Content-Type: text/plain; charset=UTF-8
+Date: Tue, 05 Aug 2025 11:33:22 +0200
+Message-Id: <DBUE2QU2CH9N.3C32KHT9LHMMB@kernel.org>
+Subject: Re: [PATCH RESEND 1/2] drm/gpuvm: Send in-place re-maps to the
+ driver as remap
+Cc: <dri-devel@lists.freedesktop.org>, <freedreno@lists.freedesktop.org>,
+ <linux-arm-msm@vger.kernel.org>, "Danilo Krummrich" <dakr@redhat.com>,
+ "Connor Abbott" <cwabbott0@gmail.com>, "Maarten Lankhorst"
+ <maarten.lankhorst@linux.intel.com>, "Maxime Ripard" <mripard@kernel.org>,
+ "Thomas Zimmermann" <tzimmermann@suse.de>, "David Airlie"
+ <airlied@gmail.com>, "Simona Vetter" <simona@ffwll.ch>, "Lyude Paul"
+ <lyude@redhat.com>, "open list" <linux-kernel@vger.kernel.org>, "open
+ list:DRM DRIVER FOR NVIDIA GEFORCE/QUADRO GPUS"
+ <nouveau@lists.freedesktop.org>
+To: "Rob Clark" <robin.clark@oss.qualcomm.com>
+From: "Danilo Krummrich" <dakr@kernel.org>
+References: <20250804214317.658704-1-robin.clark@oss.qualcomm.com>
+ <20250804214317.658704-2-robin.clark@oss.qualcomm.com>
+In-Reply-To: <20250804214317.658704-2-robin.clark@oss.qualcomm.com>
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -102,107 +65,79 @@ List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-On Tue, 2025-06-17 at 14:00 +1000, Ben Skeggs wrote:
-> If any of the ACPI calls fail, memory allocated for the input buffer
-> would be leaked.=C2=A0 Fix failure paths to free allocated memory.
->=20
-> Also add checks to ensure the allocations succeeded in the first place.
->=20
-> Reported-by: Danilo Krummrich <dakr@kernel.org>
-> Fixes: 176fdcbddfd2 ("drm/nouveau/gsp/r535: add support for booting GSP-R=
-M")
-> Signed-off-by: Ben Skeggs <bskeggs@nvidia.com>
+(Cc: Thomas, Boris, Matt, Alice)
 
-Tested-by: Philipp Stanner <phasta@kernel.org>
-
-
-This
-
-Closes: https://www.spinics.net/lists/nouveau/msg16319.html
-
-
-
-P.
-
+On Mon Aug 4, 2025 at 11:43 PM CEST, Rob Clark wrote:
+> The 'keep' hint on the unmap is only half useful, without being able to
+> link it to a map cb.  Instead combine the two ops into a remap op to
+> give the driver a chance to figure things out.
+>
+> Signed-off-by: Rob Clark <robin.clark@oss.qualcomm.com>
 > ---
-> =C2=A0.../drm/nouveau/nvkm/subdev/gsp/rm/r535/gsp.c | 20 +++++++++++++---=
----
-> =C2=A01 file changed, 14 insertions(+), 6 deletions(-)
->=20
-> diff --git a/drivers/gpu/drm/nouveau/nvkm/subdev/gsp/rm/r535/gsp.c b/driv=
-ers/gpu/drm/nouveau/nvkm/subdev/gsp/rm/r535/gsp.c
-> index baf42339f93e..b098a7555fde 100644
-> --- a/drivers/gpu/drm/nouveau/nvkm/subdev/gsp/rm/r535/gsp.c
-> +++ b/drivers/gpu/drm/nouveau/nvkm/subdev/gsp/rm/r535/gsp.c
-> @@ -719,7 +719,6 @@ r535_gsp_acpi_caps(acpi_handle handle, CAPS_METHOD_DA=
-TA *caps)
-> =C2=A0=09union acpi_object argv4 =3D {
-> =C2=A0=09=09.buffer.type=C2=A0=C2=A0=C2=A0 =3D ACPI_TYPE_BUFFER,
-> =C2=A0=09=09.buffer.length=C2=A0 =3D 4,
-> -=09=09.buffer.pointer =3D kmalloc(argv4.buffer.length, GFP_KERNEL),
-> =C2=A0=09}, *obj;
-> =C2=A0
-> =C2=A0=09caps->status =3D 0xffff;
-> @@ -727,17 +726,22 @@ r535_gsp_acpi_caps(acpi_handle handle, CAPS_METHOD_=
-DATA *caps)
-> =C2=A0=09if (!acpi_check_dsm(handle, &NVOP_DSM_GUID, NVOP_DSM_REV, BIT_UL=
-L(0x1a)))
-> =C2=A0=09=09return;
-> =C2=A0
-> +=09argv4.buffer.pointer =3D kmalloc(argv4.buffer.length, GFP_KERNEL);
-> +=09if (!argv4.buffer.pointer)
-> +=09=09return;
+>  drivers/gpu/drm/drm_gpuvm.c            | 21 +++++++++++++++++++++
+>  drivers/gpu/drm/nouveau/nouveau_uvmm.c |  3 ++-
+>  2 files changed, 23 insertions(+), 1 deletion(-)
+>
+> diff --git a/drivers/gpu/drm/drm_gpuvm.c b/drivers/gpu/drm/drm_gpuvm.c
+> index bbc7fecb6f4a..e21782a97fbe 100644
+> --- a/drivers/gpu/drm/drm_gpuvm.c
+> +++ b/drivers/gpu/drm/drm_gpuvm.c
+> @@ -2125,6 +2125,27 @@ __drm_gpuvm_sm_map(struct drm_gpuvm *gpuvm,
+>  				 offset =3D=3D req_offset;
+> =20
+>  			if (end =3D=3D req_end) {
+> +				if (merge) {
+> +					/*
+> +					 * This is an exact remap of the existing
+> +					 * VA (potentially flags change)?  Pass
+> +					 * this to the driver as a remap so it can
+> +					 * do an in-place update:
+> +					 */
+> +					struct drm_gpuva_op_map n =3D {
+> +						.va.addr =3D va->va.addr,
+> +						.va.range =3D va->va.range,
+> +						.gem.obj =3D va->gem.obj,
+> +						.gem.offset =3D va->gem.offset,
+> +					};
+> +					struct drm_gpuva_op_unmap u =3D {
+> +						.va =3D va,
+> +						.keep =3D true,
+> +					};
 > +
-> =C2=A0=09obj =3D acpi_evaluate_dsm(handle, &NVOP_DSM_GUID, NVOP_DSM_REV, =
-0x1a, &argv4);
-> =C2=A0=09if (!obj)
-> -=09=09return;
-> +=09=09goto done;
-> =C2=A0
-> =C2=A0=09if (WARN_ON(obj->type !=3D ACPI_TYPE_BUFFER) ||
-> =C2=A0=09=C2=A0=C2=A0=C2=A0 WARN_ON(obj->buffer.length !=3D 4))
-> -=09=09return;
-> +=09=09goto done;
-> =C2=A0
-> =C2=A0=09caps->status =3D 0;
-> =C2=A0=09caps->optimusCaps =3D *(u32 *)obj->buffer.pointer;
-> =C2=A0
-> +done:
-> =C2=A0=09ACPI_FREE(obj);
-> =C2=A0
-> =C2=A0=09kfree(argv4.buffer.pointer);
-> @@ -754,24 +758,28 @@ r535_gsp_acpi_jt(acpi_handle handle, JT_METHOD_DATA=
- *jt)
-> =C2=A0=09union acpi_object argv4 =3D {
-> =C2=A0=09=09.buffer.type=C2=A0=C2=A0=C2=A0 =3D ACPI_TYPE_BUFFER,
-> =C2=A0=09=09.buffer.length=C2=A0 =3D sizeof(caps),
-> -=09=09.buffer.pointer =3D kmalloc(argv4.buffer.length, GFP_KERNEL),
-> =C2=A0=09}, *obj;
-> =C2=A0
-> =C2=A0=09jt->status =3D 0xffff;
-> =C2=A0
-> +=09argv4.buffer.pointer =3D kmalloc(argv4.buffer.length, GFP_KERNEL);
-> +=09if (!argv4.buffer.pointer)
-> +=09=09return;
-> +
-> =C2=A0=09obj =3D acpi_evaluate_dsm(handle, &JT_DSM_GUID, JT_DSM_REV, 0x1,=
- &argv4);
-> =C2=A0=09if (!obj)
-> -=09=09return;
-> +=09=09goto done;
-> =C2=A0
-> =C2=A0=09if (WARN_ON(obj->type !=3D ACPI_TYPE_BUFFER) ||
-> =C2=A0=09=C2=A0=C2=A0=C2=A0 WARN_ON(obj->buffer.length !=3D 4))
-> -=09=09return;
-> +=09=09goto done;
-> =C2=A0
-> =C2=A0=09jt->status =3D 0;
-> =C2=A0=09jt->jtCaps =3D *(u32 *)obj->buffer.pointer;
-> =C2=A0=09jt->jtRevId =3D (jt->jtCaps & 0xfff00000) >> 20;
-> =C2=A0=09jt->bSBIOSCaps =3D 0;
-> =C2=A0
-> +done:
-> =C2=A0=09ACPI_FREE(obj);
-> =C2=A0
-> =C2=A0=09kfree(argv4.buffer.pointer);
+> +					return op_remap_cb(ops, priv, NULL, &n, &u);
+> +				}
 
+I don't see why this is necessary, a struct drm_gpuva_op_unmap carries the
+struct drm_gpuva to unmap. You can easily compare this to the original requ=
+est
+you gave to GPUVM, i.e. req_addr, req_range, req_obj, req_offset, etc.
+
+Which is what you have to do for any other unmap operation that has keep =
+=3D=3D true
+anyways, e.g. if D is the exact same as A, B and C.
+
+	Cur
+	---
+	1                       N
+	|---A---|---B---|---C---|
+=09
+	Req
+	---
+	1                       N
+	|-----------D-----------|
+
+In this case you get three unmap ops with keep =3D=3D true, which you can c=
+ompare to
+your request to figure out that you can keep the corresponding PTEs.
+
+Besides that it changes the semantics that the documentation mentions and t=
+hat
+drivers are allowed to rely on, i.e. a struct drm_gpuva_op_remap represents
+an actual change and any call to __drm_gpuvm_sm_map() results in an arbitra=
+ry
+number of unmap ops, a maximum of two remap ops and exactly one map operati=
+on.
+
+>  				ret =3D op_unmap_cb(ops, priv, va, merge);
+>  				if (ret)
+>  					return ret;
