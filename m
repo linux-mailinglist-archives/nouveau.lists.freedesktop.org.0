@@ -2,129 +2,91 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id D871FB1A9A5
-	for <lists+nouveau@lfdr.de>; Mon,  4 Aug 2025 21:26:52 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 38298B1AE2C
+	for <lists+nouveau@lfdr.de>; Tue,  5 Aug 2025 08:23:46 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 8A49210E450;
-	Mon,  4 Aug 2025 19:26:51 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id E4E8410E5E0;
+	Tue,  5 Aug 2025 06:23:43 +0000 (UTC)
 Authentication-Results: gabe.freedesktop.org;
-	dkim=pass (2048-bit key; unprotected) header.d=Nvidia.com header.i=@Nvidia.com header.b="A+75abbw";
+	dkim=pass (1024-bit key; unprotected) header.d=redhat.com header.i=@redhat.com header.b="F0uZNcob";
 	dkim-atps=neutral
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from NAM12-BN8-obe.outbound.protection.outlook.com
- (mail-bn8nam12on2084.outbound.protection.outlook.com [40.107.237.84])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 65D8310E453
- for <nouveau@lists.freedesktop.org>; Mon,  4 Aug 2025 19:26:50 +0000 (UTC)
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=Fmv9wQCWl1NNhR5xk+6Mk0cynJF3K30V0dy1AzQT8kCFQNx7xOAblwJLimLJQo71EfqSIwjqSSuAA96uZsKMYFgrZbFUhtuEjUaBEhK8v4opZqP5GLEGPaqsnxLG5L7BRc7G0itAQSe2pGh12TromaWIwYzleFo+2LEB2EjDqe4AvPnLH+rTVhCNPx2ofbxlemdWs26FI7bye6pVGUqC8QKjE0zVgrPU390sGnKQKHV35QLkfjFGtzVfnL1l5bqtJ/+jgCsq/ncFTUJMs0Aq0m1tTvgL1N0a87Chh0XzcypCAQg/sTLt1Atp28twl6wnRPNENqkHTOG4n2s8AqSyLw==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=y9diSkarxErMpqk+ZoOsa1Wr3GvcF9YWdIYkqkEGPIY=;
- b=GD0a4ff8RNSHO8lgtEL44U4Zv0qk5ajEHDzCV6OOLn3ibDzJoN6FP28EzhTt2C0yvRrvluKDntXWhR4/yGyi9n5brF0rk7wVw6aRb9lHbt4cH4dD332FavO6B1/qrDdHh8JFUE/oKCH4hFkuTUsqP4aIao7Gd8Wz+Fq9CifgBqKyTmX9lUc+Tu1+TkR7CYn5hIPiBY9tAhvcK6TwZc2q1VsTAWMaOvg42Qpsxhp5j7LfF8fHBuft5Pd9uhb37YECxmBTIw2hsiBAm78FRrB8EWgypdnUnWfZo20QzusVz7qxCkv+uxImKZBA8/mHHKcnHPTCzqxGsVOlohIFKwH1ug==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
- 216.228.117.161) smtp.rcpttodomain=redhat.com smtp.mailfrom=nvidia.com;
- dmarc=pass (p=reject sp=reject pct=100) action=none header.from=nvidia.com;
- dkim=none (message not signed); arc=none (0)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=Nvidia.com;
- s=selector2;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=y9diSkarxErMpqk+ZoOsa1Wr3GvcF9YWdIYkqkEGPIY=;
- b=A+75abbwLzSA+Wjphe3K1CKiaFSWkCAXqa3DnZQuBnV5Vgs/armrv8SXuqg6o4n3RmQTMyYQHKrjz3Lx67qYRg6HWbkm1QBMK/ZaR9xOw+TLZQMYLUJYDz/DuliW0QCuT1p21SuTRP4/Y1ooZWeD5rd7CskhMMENkHTBpoxbcgDfTupGqtwmw7OkKTcZUKXMDvpg78g9rcw90N3cxsg8SEk/TEgYqG3Fx/spiBONmr17ZWheXK7esoNBchSi5bvkYZeGxc/gAbXN1GyEAfLSplBNMpNGgVIfrVqXF2AFfjAxpocAhwjURjyYxOZA7fyARrP1jxMkmvPDpkWVnJf39g==
-Received: from BYAPR05CA0043.namprd05.prod.outlook.com (2603:10b6:a03:74::20)
- by SA0PR12MB4494.namprd12.prod.outlook.com (2603:10b6:806:94::20)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.8989.20; Mon, 4 Aug
- 2025 19:26:47 +0000
-Received: from MWH0EPF000A6730.namprd04.prod.outlook.com
- (2603:10b6:a03:74:cafe::90) by BYAPR05CA0043.outlook.office365.com
- (2603:10b6:a03:74::20) with Microsoft SMTP Server (version=TLS1_3,
- cipher=TLS_AES_256_GCM_SHA384) id 15.20.9009.12 via Frontend Transport; Mon,
- 4 Aug 2025 19:26:46 +0000
-X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 216.228.117.161)
- smtp.mailfrom=nvidia.com;
- dkim=none (message not signed)
- header.d=none;dmarc=pass action=none header.from=nvidia.com;
-Received-SPF: Pass (protection.outlook.com: domain of nvidia.com designates
- 216.228.117.161 as permitted sender) receiver=protection.outlook.com;
- client-ip=216.228.117.161; helo=mail.nvidia.com; pr=C
-Received: from mail.nvidia.com (216.228.117.161) by
- MWH0EPF000A6730.mail.protection.outlook.com (10.167.249.22) with Microsoft
- SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.20.9009.8 via Frontend Transport; Mon, 4 Aug 2025 19:26:46 +0000
-Received: from rnnvmail201.nvidia.com (10.129.68.8) by mail.nvidia.com
- (10.129.200.67) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.1544.14; Mon, 4 Aug
- 2025 12:26:11 -0700
-Received: from ttabi.nvidia.com (10.126.231.35) by rnnvmail201.nvidia.com
- (10.129.68.8) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.1544.14; Mon, 4 Aug
- 2025 12:26:11 -0700
-From: Timur Tabi <ttabi@nvidia.com>
-To: Lyude Paul <lyude@redhat.com>, Danilo Krummrich <dakr@kernel.org>,
- <nouveau@lists.freedesktop.org>
-Subject: [PATCH v2 3/3] drm/nouveau: remove unused memory target test
-Date: Mon, 4 Aug 2025 14:26:00 -0500
-Message-ID: <20250804192601.10861-4-ttabi@nvidia.com>
-X-Mailer: git-send-email 2.43.0
-In-Reply-To: <20250804192601.10861-1-ttabi@nvidia.com>
+Received: from us-smtp-delivery-124.mimecast.com
+ (us-smtp-delivery-124.mimecast.com [170.10.129.124])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 5821910E5DD
+ for <nouveau@lists.freedesktop.org>; Tue,  5 Aug 2025 06:23:42 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
+ s=mimecast20190719; t=1754375021;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:mime-version:mime-version:content-type:content-type:
+ content-transfer-encoding:content-transfer-encoding:
+ in-reply-to:in-reply-to:references:references;
+ bh=HgJ72159TM3a8pDF8kOfKqK1Y6OK64QwEENdeXXTxak=;
+ b=F0uZNcobGtc/7o3VsA7JA5nMpoB1LaMYsuam5RWzOT09kBEFomEDw79mn8ZxEX74hGFem7
+ ORE8/frijrlWyJyszcNqW/rxd6uowD9IuaTr3uiOGuGFIFGCC9BesSyfL6seLu7RzPUFq/
+ f5MX8ThM6zhDQTqIS34xVY4gM2Yp8uE=
+Received: from mail-ed1-f71.google.com (mail-ed1-f71.google.com
+ [209.85.208.71]) by relay.mimecast.com with ESMTP with STARTTLS
+ (version=TLSv1.3, cipher=TLS_AES_256_GCM_SHA384) id
+ us-mta-543-YgFaQVbFP7KqGnhU5Jwueg-1; Tue, 05 Aug 2025 02:23:39 -0400
+X-MC-Unique: YgFaQVbFP7KqGnhU5Jwueg-1
+X-Mimecast-MFC-AGG-ID: YgFaQVbFP7KqGnhU5Jwueg_1754375019
+Received: by mail-ed1-f71.google.com with SMTP id
+ 4fb4d7f45d1cf-61530559847so4777036a12.0
+ for <nouveau@lists.freedesktop.org>; Mon, 04 Aug 2025 23:23:39 -0700 (PDT)
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1754375018; x=1754979818;
+ h=mime-version:user-agent:content-transfer-encoding:references
+ :in-reply-to:date:to:from:subject:message-id:x-gm-message-state:from
+ :to:cc:subject:date:message-id:reply-to;
+ bh=UeFt73RzQ/uweSYlOm2mtSs/Tm/j4qVUd2ADIHfcBQI=;
+ b=Np1Wz4FfeH612VyGJEqNNucTcNMyJiPIo1gzl/R75UEDCWfuQAWbzuQOQwuAUYem/o
+ fUurqA5UlaarEBgAXRR9InwRYWazbEFHAUlPiXwPiqd7odgSehS+iKntD1OUlw+6wjaV
+ A3Q3Pswgtb5n5bxFlZP3YU7VGk3q9r33dHCuFy7XrVQaAPZ2cgBVF6SmNqk+pThpK3bm
+ a6oaqUNyti3ZGKhgeaUAQGNJ8txp9K2qc2BYDZFbIGlwLVWF478SZM+Or+ZeBVZlh0zi
+ AkoMzLVq+Atl9CO/PHPlLiTb0l861q7fy98xl8rhFB5vVHgEZsuzpjZ4AwWMiyqR2tn0
+ Eq8w==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCX+AiSroQjG7e+hZmh95y7DpIeV86AlW3ddvml+n5E+0gwIwO4wRlNAzXz+1RgfK6pe8qbf6nWO@lists.freedesktop.org
+X-Gm-Message-State: AOJu0YwnBS3XXrm9yUO8IqBH7dUUgX7lSshMLBrQ7c9Ysd06/H1j8elX
+ LNCB1ClB0GelNClFsKgAAzYyF1bGxzvnLNkRsMl4wAxb6pBMO5/2v2o7bF6WtFgUCx2naiEhXeV
+ hKhirF22gSK4iLfKi+8ueR7dF1KufpNXVBdotdMxYeNn8B1R8Q2bY2nWi4v641a7PrjY=
+X-Gm-Gg: ASbGncvnFwo7JxLTxgT3DcL0pZekS+viKv79yejTMOyVMaiDl3utFQH/mIS8gKRu+37
+ O47dnbDsami0TThg3Ahq7s3F1SOepqpYTtbBiJUCFycdTfAvOS/Uwld24opWqPJaz3oaHDiP1zI
+ ZogvrNSQri1sL85WaZCb7HEkXZklGNTBkVJO1xT7s+DO7QrVlhoPEZ0rR27iBIO9dSut/KyNMWO
+ q54zIxTeY8Mz5wWOX2BQwm1D4DQZfNwSFpOKFI3vNyIXUkajMD4TolTaH9jWA7m7bvZcr7nTiBM
+ YQpl+X1NqFcMwpHoxY86WjKwfCw+ljaX2cH7l534ETO28IWZWSXHDjdY9QZJNVRcuEgeLKgpxn1
+ xwQPJ4oCucog=
+X-Received: by 2002:a17:907:2da5:b0:af2:5a26:b32a with SMTP id
+ a640c23a62f3a-af9401a7898mr1281048766b.30.1754375018532; 
+ Mon, 04 Aug 2025 23:23:38 -0700 (PDT)
+X-Google-Smtp-Source: AGHT+IFWevmxdFJZDRfpqCJjxeyieFP+a9nS8vrGFjeAtKPO/WYQoD9uLDDSJikUDwLgaYr8pTZTDg==
+X-Received: by 2002:a17:907:2da5:b0:af2:5a26:b32a with SMTP id
+ a640c23a62f3a-af9401a7898mr1281046166b.30.1754375018055; 
+ Mon, 04 Aug 2025 23:23:38 -0700 (PDT)
+Received: from ?IPv6:2001:16b8:3d90:a700:522d:5615:dfb:4451?
+ ([2001:16b8:3d90:a700:522d:5615:dfb:4451])
+ by smtp.gmail.com with ESMTPSA id
+ a640c23a62f3a-af91a0df08dsm836915666b.60.2025.08.04.23.23.37
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Mon, 04 Aug 2025 23:23:37 -0700 (PDT)
+Message-ID: <c43f01911f30ab13b2529856772ced4327420b52.camel@redhat.com>
+Subject: Re: [PATCH v2 1/3] drm/nouveau: fix error path in nvkm_gsp_fwsec_v2
+From: Philipp Stanner <pstanner@redhat.com>
+To: Timur Tabi <ttabi@nvidia.com>, Lyude Paul <lyude@redhat.com>, Danilo
+ Krummrich <dakr@kernel.org>, nouveau@lists.freedesktop.org
+Date: Tue, 05 Aug 2025 08:23:36 +0200
+In-Reply-To: <20250804192601.10861-2-ttabi@nvidia.com>
 References: <20250804192601.10861-1-ttabi@nvidia.com>
+ <20250804192601.10861-2-ttabi@nvidia.com>
+User-Agent: Evolution 3.52.4 (3.52.4-2.fc40)
 MIME-Version: 1.0
-X-NVConfidentiality: public
-Content-Transfer-Encoding: 8bit
-Content-Type: text/plain
-X-Originating-IP: [10.126.231.35]
-X-ClientProxiedBy: rnnvmail202.nvidia.com (10.129.68.7) To
- rnnvmail201.nvidia.com (10.129.68.8)
-X-EOPAttributedMessage: 0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: MWH0EPF000A6730:EE_|SA0PR12MB4494:EE_
-X-MS-Office365-Filtering-Correlation-Id: 5bdc30f7-608c-4e04-d75f-08ddd38cda34
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0;
- ARA:13230040|36860700013|82310400026|1800799024|376014; 
-X-Microsoft-Antispam-Message-Info: =?us-ascii?Q?uttL5pGVGB+RuYOWCgNKDSRUQT6LQ0iHN9ca/1Lw/opGZeKV9ZSJu0Wl+1RP?=
- =?us-ascii?Q?v27/3ABVPm1Jy6siOGTZ6UdNSG676PJsTOkxjaP+dCR5zOddr0AL2c6UynN0?=
- =?us-ascii?Q?K544p92rKeZCD/5eFvVvyyZs8hmPrqrsQLr9Rx1AamZC+qUUsN3RWQtFkyWI?=
- =?us-ascii?Q?YkNY9zX5g0oOinSnlPeHoub+yhFzoD06O9BgA0KYcpmtOvHUr8oSHov/9gWE?=
- =?us-ascii?Q?tfrYX/oXNOUwmwQJtv0Mry7KzJm+SpttlhIZuzXmd5d2DuN4qf7SmBY2FqET?=
- =?us-ascii?Q?9h1TYQ4p3ePbxIPGw6RnDZnFhjSoq6LgFsInAE8T3/pZtOU0uT3UqpYpcGHo?=
- =?us-ascii?Q?fnt29keea31TBURpcUQsq0Kro7B8t4mDJHcXuf5I3IMWtoy6clOZ7ahXDh3e?=
- =?us-ascii?Q?VnPTsFEk4b7dUc5MYentPHHXfWwV1VSWUiGPpa0u1NirAOCQha3/YEI3XHq+?=
- =?us-ascii?Q?rD/XXu85NI5y7X8zcI+lE9MbQyim9/qfi/pMcfGORaLsP6yvXdA5i8zIUlWo?=
- =?us-ascii?Q?ZzN0U3yYH+ZQ/yhN4fZKhv426QWBNZfkk6jRmFiHfh2xEU0tZ3SLjilRmEkN?=
- =?us-ascii?Q?9ZEMHU3MeE48IZJrLM8vFJg+XM21YePPWdFPbBJbVoGNRCBV0avtG8EbjGAA?=
- =?us-ascii?Q?QJKqUWSmDbqC7ia3+nIz6Rk+HMRLwMf0q7m1hIEYhaW5yRZJfgCUm6LN6Kbp?=
- =?us-ascii?Q?uGo3WRHIfjAcb/oWqL8s5riklAvYPtLnUbUlznvO4jc7Fig7f6C8u8bKc5aV?=
- =?us-ascii?Q?ofUOCaXHRhkGPf/p1UzQB7G+zzEfG1OOq1U6lrtuf+5aL5WtKxDAoe2KdkN5?=
- =?us-ascii?Q?4CyiJn9kGF63DqPYoce76HKWOmDJ6vJs4ouP/uVy3crnpvEL2fKOC/w+ZdsV?=
- =?us-ascii?Q?aWKqz4GUwNeZa1h8MheUK1A8t3jeiHsILCPGEp2QgGat06yFm4W/+Eln340f?=
- =?us-ascii?Q?rRrICbGX5UqkA8fZuHCQcXEEvKhP1c99Smpb/fxeSbPhsAzZV5XiSTGQ8PEs?=
- =?us-ascii?Q?1wYkvrsxOROD2y9s4quy59LfExbTeAW2jQnBqEZZA9aJBB27xskODhx2L+MY?=
- =?us-ascii?Q?ONh5ZPVd8YUy7MpFUcZ+BNzLOa3B93adrgMSHlPS/sEvYNPCzeaATeRwJQG5?=
- =?us-ascii?Q?C/kaPsZhQJNa2rek9RHzeqojkg/bIkiCemjUBcBImjheQ7NQqapHG+Ee5Qg4?=
- =?us-ascii?Q?jIWvEnEMzhnmg7hRHIT09YXVzbHcu7XHwTeF1FBqiPAWwvMjwfN9tkWlV9Ue?=
- =?us-ascii?Q?PqDx/ag7lgr1ei4CNReWartH2CliT9srLNPyoJNN+tr1CGW5uU4ksef5nviN?=
- =?us-ascii?Q?rW3RKyxOp0fyD271kg+Hw9kAAj8ZVo1BGmC0HItGRdu2z3t7W/wPIiwEqUxS?=
- =?us-ascii?Q?Cawv+x7TOhSbj3Xq+FQOfVnHecmZTz0zcklSthZ/oU22Fj47Hbz8qjRCz/cS?=
- =?us-ascii?Q?7zzq1HgTsxDJX71fP6rp9ETiOwmTA29dwZ/fqKcywqaszkj+iWKR1U+tvytu?=
- =?us-ascii?Q?lAQ9gdGFL6lQSzerlfJUROB5xE8OfeIKzbk7?=
-X-Forefront-Antispam-Report: CIP:216.228.117.161; CTRY:US; LANG:en; SCL:1; SRV:;
- IPV:NLI; SFV:NSPM; H:mail.nvidia.com; PTR:dc6edge2.nvidia.com; CAT:NONE;
- SFS:(13230040)(36860700013)(82310400026)(1800799024)(376014); DIR:OUT;
- SFP:1101; 
-X-OriginatorOrg: Nvidia.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 04 Aug 2025 19:26:46.3914 (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: 5bdc30f7-608c-4e04-d75f-08ddd38cda34
-X-MS-Exchange-CrossTenant-Id: 43083d15-7273-40c1-b7db-39efd9ccc17a
-X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=43083d15-7273-40c1-b7db-39efd9ccc17a; Ip=[216.228.117.161];
- Helo=[mail.nvidia.com]
-X-MS-Exchange-CrossTenant-AuthSource: MWH0EPF000A6730.namprd04.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Anonymous
-X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: SA0PR12MB4494
+X-Mimecast-Spam-Score: 0
+X-Mimecast-MFC-PROC-ID: RazDuQ-hQP7qRd_0tH5h94W7Tqza4Rkzk7OEWebfSok_1754375019
+X-Mimecast-Originator: redhat.com
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -139,47 +101,48 @@ List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-The memory target check is a hold-over from a refactor.  It's harmless
-but distracting, so just remove it.
+On Mon, 2025-08-04 at 14:25 -0500, Timur Tabi wrote:
+> Function nvkm_gsp_fwsec_v2() sets 'ret' if the kmemdup() call fails,
+> but
+> it never uses or returns 'ret' after that point.=C2=A0 We always need to
+> release
+> the firmware regardless, so do that and then check for error.
+>=20
+> Fixes: 176fdcbddfd2 ("drm/nouveau/gsp/r535: add support for booting
+> GSP-RM")
+> Signed-off-by: Timur Tabi <ttabi@nvidia.com>
 
-Signed-off-by: Timur Tabi <ttabi@nvidia.com>
----
- drivers/gpu/drm/nouveau/nvkm/falcon/gm200.c | 13 +++----------
- 1 file changed, 3 insertions(+), 10 deletions(-)
+That looks like a bug (leak?) to me.
 
-diff --git a/drivers/gpu/drm/nouveau/nvkm/falcon/gm200.c b/drivers/gpu/drm/nouveau/nvkm/falcon/gm200.c
-index 6a004c6e6742..7c43397c19e6 100644
---- a/drivers/gpu/drm/nouveau/nvkm/falcon/gm200.c
-+++ b/drivers/gpu/drm/nouveau/nvkm/falcon/gm200.c
-@@ -249,9 +249,11 @@ int
- gm200_flcn_fw_load(struct nvkm_falcon_fw *fw)
- {
- 	struct nvkm_falcon *falcon = fw->falcon;
--	int target, ret;
-+	int ret;
- 
- 	if (fw->inst) {
-+		int target;
-+
- 		nvkm_falcon_mask(falcon, 0x048, 0x00000001, 0x00000001);
- 
- 		switch (nvkm_memory_target(fw->inst)) {
-@@ -285,15 +287,6 @@ gm200_flcn_fw_load(struct nvkm_falcon_fw *fw)
- 	}
- 
- 	if (fw->boot) {
--		switch (nvkm_memory_target(&fw->fw.mem.memory)) {
--		case NVKM_MEM_TARGET_VRAM: target = 4; break;
--		case NVKM_MEM_TARGET_HOST: target = 5; break;
--		case NVKM_MEM_TARGET_NCOH: target = 6; break;
--		default:
--			WARN_ON(1);
--			return -EINVAL;
--		}
--
- 		ret = nvkm_falcon_pio_wr(falcon, fw->boot, 0, 0,
- 					 IMEM, falcon->code.limit - fw->boot_size, fw->boot_size,
- 					 fw->boot_addr >> 8, false);
--- 
-2.43.0
++Cc stable?
+
+P.
+
+> ---
+> =C2=A0drivers/gpu/drm/nouveau/nvkm/subdev/gsp/fwsec.c | 5 +++--
+> =C2=A01 file changed, 3 insertions(+), 2 deletions(-)
+>=20
+> diff --git a/drivers/gpu/drm/nouveau/nvkm/subdev/gsp/fwsec.c
+> b/drivers/gpu/drm/nouveau/nvkm/subdev/gsp/fwsec.c
+> index 52412965fac1..5b721bd9d799 100644
+> --- a/drivers/gpu/drm/nouveau/nvkm/subdev/gsp/fwsec.c
+> +++ b/drivers/gpu/drm/nouveau/nvkm/subdev/gsp/fwsec.c
+> @@ -209,11 +209,12 @@ nvkm_gsp_fwsec_v2(struct nvkm_gsp *gsp, const
+> char *name,
+> =C2=A0=09fw->boot_addr =3D bld->start_tag << 8;
+> =C2=A0=09fw->boot_size =3D bld->code_size;
+> =C2=A0=09fw->boot =3D kmemdup(bl->data + hdr->data_offset + bld-
+> >code_off, fw->boot_size, GFP_KERNEL);
+> -=09if (!fw->boot)
+> -=09=09ret =3D -ENOMEM;
+> =C2=A0
+> =C2=A0=09nvkm_firmware_put(bl);
+> =C2=A0
+> +=09if (!fw->boot)
+> +=09=09return -ENOMEM;
+> +
+> =C2=A0=09/* Patch in interface data. */
+> =C2=A0=09return nvkm_gsp_fwsec_patch(gsp, fw, desc->InterfaceOffset,
+> init_cmd);
+> =C2=A0}
 
