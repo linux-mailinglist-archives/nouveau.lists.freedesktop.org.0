@@ -2,36 +2,36 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id CE212B1E6A6
-	for <lists+nouveau@lfdr.de>; Fri,  8 Aug 2025 12:44:44 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 7F651B1E6B6
+	for <lists+nouveau@lfdr.de>; Fri,  8 Aug 2025 12:46:56 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 7EBE110E03F;
-	Fri,  8 Aug 2025 10:44:43 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 644A310E918;
+	Fri,  8 Aug 2025 10:46:54 +0000 (UTC)
 Authentication-Results: gabe.freedesktop.org;
-	dkim=pass (1024-bit key; unprotected) header.d=ideasonboard.com header.i=@ideasonboard.com header.b="Na62xKvL";
+	dkim=pass (1024-bit key; unprotected) header.d=ideasonboard.com header.i=@ideasonboard.com header.b="wZUMfrjy";
 	dkim-atps=neutral
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
 Received: from perceval.ideasonboard.com (perceval.ideasonboard.com
  [213.167.242.64])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 9AC0510E4E8;
- Fri,  8 Aug 2025 10:44:42 +0000 (UTC)
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 83D6710E915;
+ Fri,  8 Aug 2025 10:46:52 +0000 (UTC)
 Received: from [192.168.88.20] (91-158-153-178.elisa-laajakaista.fi
  [91.158.153.178])
- by perceval.ideasonboard.com (Postfix) with ESMTPSA id E822C185B;
- Fri,  8 Aug 2025 12:43:50 +0200 (CEST)
+ by perceval.ideasonboard.com (Postfix) with ESMTPSA id A9F54185B;
+ Fri,  8 Aug 2025 12:46:00 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=ideasonboard.com;
- s=mail; t=1754649831;
- bh=1uVulE40X4A2dJjstqLNnHit5pUAxqYUenS5oB3Qshc=;
+ s=mail; t=1754649961;
+ bh=aQZJ/ACAteL1Xe/fs+a56dnUeh7YIhfVoFkhEVZ11OI=;
  h=Date:Subject:To:Cc:References:From:In-Reply-To:From;
- b=Na62xKvLb7i4tgr4FK8HULEj00O/gbqHgF1NdnNweCcID9WZux7UGeurwH82Y58uP
- oKRwkTfn+fpMOivDVGso/cHD2WFNzuxmtQe+4whQsY2YchPCsOzwvF14BNaQtCh8h1
- /zAR7f7UvaWEK9x8X34b/o8W/EXw3mB5NoNN78P8=
-Message-ID: <88b35dcb-70cb-4be1-9d6d-3cfb0920ecb5@ideasonboard.com>
-Date: Fri, 8 Aug 2025 13:44:37 +0300
+ b=wZUMfrjyCRUxfFQYD2A6qF3ZH6eFLp8DLnCkLjR1H5yIUW8fWHy0BO+JVzjmrQfkA
+ TPRktYsf0e/oWVJtiBcF/INX79qdjT+sK4Yi+HtJoigCiC95TT5u7jtd0ziBzxu29v
+ Q4LLAsWDuHGyhnkeyE3UicJEnQv6TJJcXZjtGT2k=
+Message-ID: <1aaa3b42-a80e-48cf-b5ba-a4cece86b620@ideasonboard.com>
+Date: Fri, 8 Aug 2025 13:46:47 +0300
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v5 04/25] drm/gem-shmem: Compute dumb-buffer sizes with
+Subject: Re: [PATCH v5 25/25] drm/xlnx: Compute dumb-buffer sizes with
  drm_mode_size_dumb()
 To: Thomas Zimmermann <tzimmermann@suse.de>
 Cc: dri-devel@lists.freedesktop.org, linux-mediatek@lists.infradead.org,
@@ -41,10 +41,11 @@ Cc: dri-devel@lists.freedesktop.org, linux-mediatek@lists.infradead.org,
  spice-devel@lists.freedesktop.org, linux-renesas-soc@vger.kernel.org,
  linux-rockchip@lists.infradead.org, linux-tegra@vger.kernel.org,
  intel-xe@lists.freedesktop.org, xen-devel@lists.xenproject.org,
- simona@ffwll.ch, airlied@gmail.com, mripard@kernel.org,
- maarten.lankhorst@linux.intel.com, geert@linux-m68k.org
+ Laurent Pinchart <laurent.pinchart@ideasonboard.com>, simona@ffwll.ch,
+ airlied@gmail.com, mripard@kernel.org, maarten.lankhorst@linux.intel.com,
+ geert@linux-m68k.org
 References: <20250613090431.127087-1-tzimmermann@suse.de>
- <20250613090431.127087-5-tzimmermann@suse.de>
+ <20250613090431.127087-26-tzimmermann@suse.de>
 Content-Language: en-US
 From: Tomi Valkeinen <tomi.valkeinen@ideasonboard.com>
 Autocrypt: addr=tomi.valkeinen@ideasonboard.com; keydata=
@@ -90,7 +91,7 @@ Autocrypt: addr=tomi.valkeinen@ideasonboard.com; keydata=
  ueeIlwJl5CpT5l8RpoZXEOVtXYn8zzOJ7oGZYINRV9Pf8qKGLf3Dft7zKBP832I3PQjeok7F
  yjt+9S+KgSFSHP3Pa4E7lsSdWhSlHYNdG/czhoUkSCN09C0rEK93wxACx3vtxPLjXu6RptBw
  3dRq7n+mQChEB1am0BueV1JZaBboIL0AGlSJkm23kw==
-In-Reply-To: <20250613090431.127087-5-tzimmermann@suse.de>
+In-Reply-To: <20250613090431.127087-26-tzimmermann@suse.de>
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 7bit
 X-BeenThere: nouveau@lists.freedesktop.org
@@ -109,47 +110,41 @@ Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
 On 13/06/2025 12:00, Thomas Zimmermann wrote:
 > Call drm_mode_size_dumb() to compute dumb-buffer scanline pitch and
-> buffer size. Align the pitch to a multiple of 8.
+> buffer size. Align the pitch according to hardware requirements.
 > 
 > Signed-off-by: Thomas Zimmermann <tzimmermann@suse.de>
+> Cc: Laurent Pinchart <laurent.pinchart@ideasonboard.com>
+> Cc: Tomi Valkeinen <tomi.valkeinen@ideasonboard.com>
 > ---
->  drivers/gpu/drm/drm_gem_shmem_helper.c | 16 +++++-----------
->  1 file changed, 5 insertions(+), 11 deletions(-)
+>  drivers/gpu/drm/xlnx/zynqmp_kms.c | 7 +++++--
+>  1 file changed, 5 insertions(+), 2 deletions(-)
 > 
-> diff --git a/drivers/gpu/drm/drm_gem_shmem_helper.c b/drivers/gpu/drm/drm_gem_shmem_helper.c
-> index 8ac0b1fa5287..0fc09484dfa6 100644
-> --- a/drivers/gpu/drm/drm_gem_shmem_helper.c
-> +++ b/drivers/gpu/drm/drm_gem_shmem_helper.c
-> @@ -18,6 +18,7 @@
->  #include <drm/drm.h>
+> diff --git a/drivers/gpu/drm/xlnx/zynqmp_kms.c b/drivers/gpu/drm/xlnx/zynqmp_kms.c
+> index b47463473472..7ea0cd4f71d3 100644
+> --- a/drivers/gpu/drm/xlnx/zynqmp_kms.c
+> +++ b/drivers/gpu/drm/xlnx/zynqmp_kms.c
+> @@ -19,6 +19,7 @@
+>  #include <drm/drm_crtc.h>
 >  #include <drm/drm_device.h>
 >  #include <drm/drm_drv.h>
 > +#include <drm/drm_dumb_buffers.h>
->  #include <drm/drm_gem_shmem_helper.h>
->  #include <drm/drm_prime.h>
->  #include <drm/drm_print.h>
-> @@ -518,18 +519,11 @@ EXPORT_SYMBOL_GPL(drm_gem_shmem_purge_locked);
->  int drm_gem_shmem_dumb_create(struct drm_file *file, struct drm_device *dev,
->  			      struct drm_mode_create_dumb *args)
+>  #include <drm/drm_encoder.h>
+>  #include <drm/drm_fbdev_dma.h>
+>  #include <drm/drm_fourcc.h>
+> @@ -363,10 +364,12 @@ static int zynqmp_dpsub_dumb_create(struct drm_file *file_priv,
+>  				    struct drm_mode_create_dumb *args)
 >  {
-> -	u32 min_pitch = DIV_ROUND_UP(args->width * args->bpp, 8);
+>  	struct zynqmp_dpsub *dpsub = to_zynqmp_dpsub(drm);
+> -	unsigned int pitch = DIV_ROUND_UP(args->width * args->bpp, 8);
 > +	int ret;
 >  
-> -	if (!args->pitch || !args->size) {
-> -		args->pitch = min_pitch;
-> -		args->size = PAGE_ALIGN(args->pitch * args->height);
-> -	} else {
-> -		/* ensure sane minimum values */
-> -		if (args->pitch < min_pitch)
-> -			args->pitch = min_pitch;
-> -		if (args->size < args->pitch * args->height)
-> -			args->size = PAGE_ALIGN(args->pitch * args->height);
-> -	}
-> +	ret = drm_mode_size_dumb(dev, args, SZ_8, 0);
+>  	/* Enforce the alignment constraints of the DMA engine. */
+> -	args->pitch = ALIGN(pitch, dpsub->dma_align);
+> +	ret = drm_mode_size_dumb(drm, args, dpsub->dma_align, 0);
 > +	if (ret)
 > +		return ret;
 >  
->  	return drm_gem_shmem_create_with_handle(file, dev, args->size, &args->handle);
+>  	return drm_gem_dma_dumb_create_internal(file_priv, drm, args);
 >  }
 
 Reviewed-by: Tomi Valkeinen <tomi.valkeinen@ideasonboard.com>
