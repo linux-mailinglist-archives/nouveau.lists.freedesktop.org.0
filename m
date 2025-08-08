@@ -2,79 +2,57 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id 37A21CBAA39
-	for <lists+nouveau@lfdr.de>; Sat, 13 Dec 2025 13:41:56 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id B0182CBAE9A
+	for <lists+nouveau@lfdr.de>; Sat, 13 Dec 2025 13:46:17 +0100 (CET)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id A1E5B10EA54;
-	Sat, 13 Dec 2025 12:40:59 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 00C4B10EC1E;
+	Sat, 13 Dec 2025 12:42:15 +0000 (UTC)
 Authentication-Results: gabe.freedesktop.org;
-	dkim=permerror (0-bit key) header.d=gmail.com header.i=@gmail.com header.b="Y/CInVcK";
+	dkim=pass (1024-bit key; unprotected) header.d=ideasonboard.com header.i=@ideasonboard.com header.b="bpVMEvVV";
 	dkim-atps=neutral
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from mail-pl1-f181.google.com (mail-pl1-f181.google.com
- [209.85.214.181])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 9688210E4DA;
- Fri,  8 Aug 2025 07:39:27 +0000 (UTC)
-Received: by mail-pl1-f181.google.com with SMTP id
- d9443c01a7336-2402774851fso16811945ad.1; 
- Fri, 08 Aug 2025 00:39:27 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1754638767; x=1755243567; darn=lists.freedesktop.org;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:from:to:cc:subject:date:message-id:reply-to;
- bh=yO1YpKtKP+ptfoFXdPV58S+ud0mO9FZrS4sipO+FnaU=;
- b=Y/CInVcKECFDXWA4Wf8aF/bPeT9QICxHmEEcZrOUirHUcNjpklJdYZBQQH+B3aFmtT
- BHxs+huOoBRehcPhAoeX0RDOJNXVhMO9UgsRFIgmvYHSOwecWm+6u3ldmo56oxes3odv
- i+NWG/SfGbbtkQKqS+glQBCOtBbDkv3e7HmlLUX4OSCa+KXksfK1TSEjMIP1h94E/+RH
- Q0GpSdMPjwZUOeD8wVIOp5+q+r7GrUg49lK7IAGUqQ1l8/LJAk9U8GycbG2iHCzmmHDX
- ad0Q+Kf/BB+iO5cD07rayzEtu9DeoE2iOab51aRQ4x+qUUqSy/OZNMVFPVrQiC4uFEo5
- JiMQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1754638767; x=1755243567;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=yO1YpKtKP+ptfoFXdPV58S+ud0mO9FZrS4sipO+FnaU=;
- b=KmAtw1e0DvTjh3lFMxs1sTRnQUxc6PdF5cMZD26EkmCDNrIV9g9TyRZNMdk92iEllx
- OrGy6L392dfXK7l8djEBB3APMjz4lEBGEs1A+GYItlALrakm3bo3IVHbIau/AmsR/YaU
- A8u0DxMk/73/E/6MfmB/mNCOh8eL8HJ0pxlhkeDinGHC5QbsScj8bagKbCUiphQtzvOr
- vkdORhdSsthJ9rixNACY5Bq3x+T1cRri3sKGsks85nUYUElcQ3S27Va3zc3xVrJTE59K
- 1ElbIruHesE1dHxhakdDHT9i1St5SOgfHgPq7a8dw1+PQcG8zNFakXcYS2H8UpiNjbBj
- Wbug==
-X-Forwarded-Encrypted: i=1;
- AJvYcCWsTFC3P990fZ7ootDjfY0hL3sd8WVgcMqJTuF2JYPGMqgRP1uWceSub9xu6hOI+XOrbJjgPVb3rOM=@lists.freedesktop.org,
- AJvYcCWvjIS4IdAucMt/bzGleKrJuqVrvoVxaO3Wkor5erofpZnUmoGW6Rh1DIlXHZrXMXmiDzhQ0yf3Zw==@lists.freedesktop.org
-X-Gm-Message-State: AOJu0Yx3rv/zRgPk2UIazDe8IpYHVbTsRkVCttioCAckfvxGL+s8V5IH
- IyUwxpVPAy4vKiF2QDj5tx9UBWJtaUZZ8yFa+IjTj60INag3X4pN6G5A
-X-Gm-Gg: ASbGncvbcU74Nh2xyxPNOi/Ad0iRGYEYR6r/xBmPssCW77BLMu8MVVQ+dBIgkJuSV/G
- kTyKGl/EBuqoTCv48YREIqy6fNF0K+Li/g5OnlymOr8o3SKzxvRG7dqZrJT0QMo1vpieMf+mul6
- 4oiK9VHAwDdK4a++dknoEp26edBu/dwP+dEdmSkLdAFZCrKt3RGwxR0nKDMiNoiQ48uYcREqWId
- IZ9Mk+DzkmiOj6uwK6lHAei7Sbe4RtOr85MUxggEUlsVFgwDzYBeEm8R0wO7R2YoJufTS5+WC+w
- +ZfKDB8IzhcE+zDVpWH248H1pGo4hhzI0XlhwhD4G3saG/zwvhZ73OSHWegJ7DwIMyzMxqXfD33
- tQmmPjrd6tLAhyBjaI4QGByY18A==
-X-Google-Smtp-Source: AGHT+IHJAphSCGcCrKjr0TL4KujAuKvrfgHh/ezbsFmtY7IQENr8gP6eoXWCL6JC+pybzPRmoIEHjA==
-X-Received: by 2002:a17:903:40d1:b0:240:1831:eeeb with SMTP id
- d9443c01a7336-242c22c59bemr31998535ad.40.1754638766916; 
- Fri, 08 Aug 2025 00:39:26 -0700 (PDT)
-Received: from archlinux ([2409:40d6:1b:7e6e:e637:1b70:a72e:cd3d])
- by smtp.gmail.com with ESMTPSA id
- d9443c01a7336-2426dec66desm121202935ad.54.2025.08.08.00.39.22
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 08 Aug 2025 00:39:26 -0700 (PDT)
-From: Madhur Kumar <madhurkumar004@gmail.com>
-To: lyude@redhat.com
-Cc: dakr@kernel.org, airlied@gmail.com, simona@ffwll.ch,
- dri-devel@lists.freedesktop.org, nouveau@lists.freedesktop.org,
- linux-kernel@vger.kernel.org, skhan@linuxfoundation.org,
- Madhur Kumar <madhurkumar004@gmail.com>
-Subject: [PATCH] drm/nouveau: fix typos in comments
-Date: Fri,  8 Aug 2025 13:08:40 +0530
-Message-ID: <20250808073840.376764-1-madhurkumar004@gmail.com>
-X-Mailer: git-send-email 2.50.1
+Received: from perceval.ideasonboard.com (perceval.ideasonboard.com
+ [213.167.242.64])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 6419010E911;
+ Fri,  8 Aug 2025 10:45:59 +0000 (UTC)
+Received: from [192.168.88.20] (91-158-153-178.elisa-laajakaista.fi
+ [91.158.153.178])
+ by perceval.ideasonboard.com (Postfix) with ESMTPSA id 6F313185B;
+ Fri,  8 Aug 2025 12:45:07 +0200 (CEST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=ideasonboard.com;
+ s=mail; t=1754649908;
+ bh=brJMRHo/8Tl3e7xMygG9eyiFT2hDjy5O7wtChHaeNYM=;
+ h=Date:Subject:To:Cc:References:From:In-Reply-To:From;
+ b=bpVMEvVV/KjgNPSTx09Y1zAid5VLUpMgHxMncGlh/eIqSnOEbYo/e7pfZcCaLnvMR
+ a4WP/S0JCHnwihLwBpo0WvGkuChuDoTi3adY52UACj4F5WD116oIVmo+wa34Zq++Sp
+ qyMsD/KygsGrVig9ySGURL4Ju5+a5JMr5a6kJVSM=
+Message-ID: <20be7c9d-ad67-4157-b03e-18f91534a1cd@ideasonboard.com>
+Date: Fri, 8 Aug 2025 13:45:54 +0300
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-X-Mailman-Approved-At: Sat, 13 Dec 2025 12:40:48 +0000
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v5 17/25] drm/renesas/rcar-du: Compute dumb-buffer sizes
+ with drm_mode_size_dumb()
+To: Thomas Zimmermann <tzimmermann@suse.de>
+Cc: dri-devel@lists.freedesktop.org, linux-mediatek@lists.infradead.org,
+ freedreno@lists.freedesktop.org, linux-arm-msm@vger.kernel.org,
+ imx@lists.linux.dev, linux-samsung-soc@vger.kernel.org,
+ nouveau@lists.freedesktop.org, virtualization@lists.linux.dev,
+ spice-devel@lists.freedesktop.org, linux-renesas-soc@vger.kernel.org,
+ linux-rockchip@lists.infradead.org, linux-tegra@vger.kernel.org,
+ intel-xe@lists.freedesktop.org, xen-devel@lists.xenproject.org,
+ Laurent Pinchart <laurent.pinchart@ideasonboard.com>,
+ Kieran Bingham <kieran.bingham+renesas@ideasonboard.com>, simona@ffwll.ch,
+ airlied@gmail.com, mripard@kernel.org, maarten.lankhorst@linux.intel.com,
+ geert@linux-m68k.org
+References: <20250613090431.127087-1-tzimmermann@suse.de>
+ <20250613090431.127087-18-tzimmermann@suse.de>
+Content-Language: en-US
+From: Tomi Valkeinen <tomi.valkeinen+renesas@ideasonboard.com>
+In-Reply-To: <20250613090431.127087-18-tzimmermann@suse.de>
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
+X-Mailman-Approved-At: Sat, 13 Dec 2025 12:40:44 +0000
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -89,48 +67,52 @@ List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-Fixed three spelling mistakes in nouveau_exec.c comments:
- - alloctor -> allocator
- - exectued -> executed
- - depent -> depend
+On 13/06/2025 12:00, Thomas Zimmermann wrote:
+> Call drm_mode_size_dumb() to compute dumb-buffer scanline pitch and
+> buffer size. Align the pitch according to hardware requirements.
+> 
+> Signed-off-by: Thomas Zimmermann <tzimmermann@suse.de>
+> Cc: Laurent Pinchart <laurent.pinchart@ideasonboard.com>
+> Cc: Kieran Bingham <kieran.bingham+renesas@ideasonboard.com>
+> ---
+>  drivers/gpu/drm/renesas/rcar-du/rcar_du_kms.c | 7 +++++--
+>  1 file changed, 5 insertions(+), 2 deletions(-)
+> 
+> diff --git a/drivers/gpu/drm/renesas/rcar-du/rcar_du_kms.c b/drivers/gpu/drm/renesas/rcar-du/rcar_du_kms.c
+> index 4c8fe83dd610..dd353fb858ef 100644
+> --- a/drivers/gpu/drm/renesas/rcar-du/rcar_du_kms.c
+> +++ b/drivers/gpu/drm/renesas/rcar-du/rcar_du_kms.c
+> @@ -11,6 +11,7 @@
+>  #include <drm/drm_atomic_helper.h>
+>  #include <drm/drm_crtc.h>
+>  #include <drm/drm_device.h>
+> +#include <drm/drm_dumb_buffers.h>
+>  #include <drm/drm_framebuffer.h>
+>  #include <drm/drm_gem_dma_helper.h>
+>  #include <drm/drm_gem_framebuffer_helper.h>
+> @@ -407,8 +408,8 @@ int rcar_du_dumb_create(struct drm_file *file, struct drm_device *dev,
+>  			struct drm_mode_create_dumb *args)
+>  {
+>  	struct rcar_du_device *rcdu = to_rcar_du_device(dev);
+> -	unsigned int min_pitch = DIV_ROUND_UP(args->width * args->bpp, 8);
+>  	unsigned int align;
+> +	int ret;
+>  
+>  	/*
+>  	 * The R8A7779 DU requires a 16 pixels pitch alignment as documented,
+> @@ -419,7 +420,9 @@ int rcar_du_dumb_create(struct drm_file *file, struct drm_device *dev,
+>  	else
+>  		align = 16 * args->bpp / 8;
+>  
+> -	args->pitch = roundup(min_pitch, align);
+> +	ret = drm_mode_size_dumb(dev, args, align, 0);
+> +	if (ret)
+> +		return ret;
+>  
+>  	return drm_gem_dma_dumb_create_internal(file, dev, args);
+>  }
 
-No functional changes.
+Reviewed-by: Tomi Valkeinen <tomi.valkeinen+renesas@ideasonboard.com>
 
-Signed-off-by: Madhur Kumar <madhurkumar004@gmail.com>
----
- drivers/gpu/drm/nouveau/nouveau_exec.c | 6 +++---
- 1 file changed, 3 insertions(+), 3 deletions(-)
-
-diff --git a/drivers/gpu/drm/nouveau/nouveau_exec.c b/drivers/gpu/drm/nouveau/nouveau_exec.c
-index 41b7c608c905..46294134f294 100644
---- a/drivers/gpu/drm/nouveau/nouveau_exec.c
-+++ b/drivers/gpu/drm/nouveau/nouveau_exec.c
-@@ -60,14 +60,14 @@
-  * virtual address in the GPU's VA space there is no guarantee that the actual
-  * mappings are created in the GPU's MMU. If the given memory is swapped out
-  * at the time the bind operation is executed the kernel will stash the mapping
-- * details into it's internal alloctor and create the actual MMU mappings once
-+ * details into it's internal allocator and create the actual MMU mappings once
-  * the memory is swapped back in. While this is transparent for userspace, it is
-  * guaranteed that all the backing memory is swapped back in and all the memory
-  * mappings, as requested by userspace previously, are actually mapped once the
-  * DRM_NOUVEAU_EXEC ioctl is called to submit an exec job.
-  *
-  * A VM_BIND job can be executed either synchronously or asynchronously. If
-- * exectued asynchronously, userspace may provide a list of syncobjs this job
-+ * executed asynchronously, userspace may provide a list of syncobjs this job
-  * will wait for and/or a list of syncobj the kernel will signal once the
-  * VM_BIND job finished execution. If executed synchronously the ioctl will
-  * block until the bind job is finished. For synchronous jobs the kernel will
-@@ -82,7 +82,7 @@
-  * Since VM_BIND jobs update the GPU's VA space on job submit, EXEC jobs do have
-  * an up to date view of the VA space. However, the actual mappings might still
-  * be pending. Hence, EXEC jobs require to have the particular fences - of
-- * the corresponding VM_BIND jobs they depent on - attached to them.
-+ * the corresponding VM_BIND jobs they depend on - attached to them.
-  */
- 
- static int
--- 
-2.50.1
+ Tomi
 
