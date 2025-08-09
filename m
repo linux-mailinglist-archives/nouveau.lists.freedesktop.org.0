@@ -2,57 +2,67 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id B0182CBAE9A
-	for <lists+nouveau@lfdr.de>; Sat, 13 Dec 2025 13:46:17 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id DAC08C87233
+	for <lists+nouveau@lfdr.de>; Tue, 25 Nov 2025 21:48:26 +0100 (CET)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 00C4B10EC1E;
-	Sat, 13 Dec 2025 12:42:15 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 4545410E4F4;
+	Tue, 25 Nov 2025 20:47:35 +0000 (UTC)
 Authentication-Results: gabe.freedesktop.org;
-	dkim=pass (1024-bit key; unprotected) header.d=ideasonboard.com header.i=@ideasonboard.com header.b="bpVMEvVV";
+	dkim=pass (1024-bit key; unprotected) header.d=iitb.ac.in header.i=@iitb.ac.in header.b="ZrO0BGTM";
 	dkim-atps=neutral
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from perceval.ideasonboard.com (perceval.ideasonboard.com
- [213.167.242.64])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 6419010E911;
- Fri,  8 Aug 2025 10:45:59 +0000 (UTC)
-Received: from [192.168.88.20] (91-158-153-178.elisa-laajakaista.fi
- [91.158.153.178])
- by perceval.ideasonboard.com (Postfix) with ESMTPSA id 6F313185B;
- Fri,  8 Aug 2025 12:45:07 +0200 (CEST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=ideasonboard.com;
- s=mail; t=1754649908;
- bh=brJMRHo/8Tl3e7xMygG9eyiFT2hDjy5O7wtChHaeNYM=;
- h=Date:Subject:To:Cc:References:From:In-Reply-To:From;
- b=bpVMEvVV/KjgNPSTx09Y1zAid5VLUpMgHxMncGlh/eIqSnOEbYo/e7pfZcCaLnvMR
- a4WP/S0JCHnwihLwBpo0WvGkuChuDoTi3adY52UACj4F5WD116oIVmo+wa34Zq++Sp
- qyMsD/KygsGrVig9ySGURL4Ju5+a5JMr5a6kJVSM=
-Message-ID: <20be7c9d-ad67-4157-b03e-18f91534a1cd@ideasonboard.com>
-Date: Fri, 8 Aug 2025 13:45:54 +0300
+X-Greylist: delayed 462 seconds by postgrey-1.36 at gabe;
+ Sat, 09 Aug 2025 08:08:04 UTC
+Received: from smtp1.iitb.ac.in (smtpd7.iitb.ac.in [103.21.126.62])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id E7C1F10E27B
+ for <nouveau@lists.freedesktop.org>; Sat,  9 Aug 2025 08:08:04 +0000 (UTC)
+Received: from ldns1.iitb.ac.in (ldns1.iitb.ac.in [10.200.12.1])
+ by smtp1.iitb.ac.in (Postfix) with SMTP id 7B970101C947
+ for <nouveau@lists.freedesktop.org>; Sat,  9 Aug 2025 13:30:18 +0530 (IST)
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp1.iitb.ac.in 7B970101C947
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=iitb.ac.in; s=mail;
+ t=1754726418; bh=zisvSLce1+aXq35EDvfK2Fr8uFmjstmeaklYSS/7hDw=;
+ h=Date:From:To:Cc:Subject:From;
+ b=ZrO0BGTMl4F1Qy/Pq0xjwIaCEW6Guu3oqd8gyl96uLkGcOyg+Xk5P2jEI3P4PmTWa
+ 8fS1xT93Pt6HlnaPBgEgHNHej7qTy5H8+4PmG5AnvbighmHPtaydAbQbGCSiyIrsOM
+ 2lTztwO/YGwZfKvzkkpqS1hb9R3V1rp0MXerpusc=
+Received: (qmail 21441 invoked by uid 510); 9 Aug 2025 13:30:18 +0530
+X-Qmail-Scanner-Diagnostics: from 10.200.1.25 by ldns1 (envelope-from
+ <akhilesh@ee.iitb.ac.in>, uid 501) with qmail-scanner-2.11
+ spamassassin: 3.4.1. mhr: 1.0. {clamdscan: 0.101.4/26439} 
+ Clear:RC:1(10.200.1.25):SA:0(0.0/7.0):. Processed in 0.653874 secs;
+ 09 Aug 2025 13:30:18 +0530
+X-Spam-Checker-Version: SpamAssassin 3.4.1 (2015-04-28) on ldns1.iitb.ac.in
+X-Spam-Level: 
+X-Spam-Status: No, score=0.0 required=7.0 tests=IITB_ORIG,PROPER_IITB_MSGID,
+ T_RP_MATCHES_RCVD autolearn=disabled version=3.4.1
+X-Spam-Pyzor: Reported 0 times.
+X-Envelope-From: akhilesh@ee.iitb.ac.in
+X-Qmail-Scanner-Mime-Attachments: |
+X-Qmail-Scanner-Zip-Files: |
+Received: from unknown (HELO ldns1.iitb.ac.in) (10.200.1.25)
+ by ldns1.iitb.ac.in with SMTP; 9 Aug 2025 13:30:17 +0530
+Received: from bhairav.ee.iitb.ac.in (bhairav.ee.iitb.ac.in [10.107.1.1])
+ by ldns1.iitb.ac.in (Postfix) with ESMTP id 25615360083;
+ Sat,  9 Aug 2025 13:30:17 +0530 (IST)
+Received: from bhairav-test.ee.iitb.ac.in (bhairav.ee.iitb.ac.in [10.107.1.1])
+ (Authenticated sender: akhilesh)
+ by bhairav.ee.iitb.ac.in (Postfix) with ESMTPSA id E483C1E8138A;
+ Sat,  9 Aug 2025 13:30:16 +0530 (IST)
+Date: Sat, 9 Aug 2025 13:30:11 +0530
+From: Akhilesh Patil <akhilesh@ee.iitb.ac.in>
+To: lyude@redhat.com, dakr@kernel.org, airlied@gmail.com, simona@ffwll.ch,
+ bskeggs@redhat.com, kherbst@redhat.com
+Cc: dri-devel@lists.freedesktop.org, nouveau@lists.freedesktop.org,
+ linux-kernel@vger.kernel.org, akhileshpatilvnit@gmail.com,
+ skhan@linuxfoundation.org
+Subject: [PATCH] drm: nouveau: fifo: ga100: fix null pointer dereferences
+Message-ID: <aJcACwrvcjCq78eH@bhairav-test.ee.iitb.ac.in>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v5 17/25] drm/renesas/rcar-du: Compute dumb-buffer sizes
- with drm_mode_size_dumb()
-To: Thomas Zimmermann <tzimmermann@suse.de>
-Cc: dri-devel@lists.freedesktop.org, linux-mediatek@lists.infradead.org,
- freedreno@lists.freedesktop.org, linux-arm-msm@vger.kernel.org,
- imx@lists.linux.dev, linux-samsung-soc@vger.kernel.org,
- nouveau@lists.freedesktop.org, virtualization@lists.linux.dev,
- spice-devel@lists.freedesktop.org, linux-renesas-soc@vger.kernel.org,
- linux-rockchip@lists.infradead.org, linux-tegra@vger.kernel.org,
- intel-xe@lists.freedesktop.org, xen-devel@lists.xenproject.org,
- Laurent Pinchart <laurent.pinchart@ideasonboard.com>,
- Kieran Bingham <kieran.bingham+renesas@ideasonboard.com>, simona@ffwll.ch,
- airlied@gmail.com, mripard@kernel.org, maarten.lankhorst@linux.intel.com,
- geert@linux-m68k.org
-References: <20250613090431.127087-1-tzimmermann@suse.de>
- <20250613090431.127087-18-tzimmermann@suse.de>
-Content-Language: en-US
-From: Tomi Valkeinen <tomi.valkeinen+renesas@ideasonboard.com>
-In-Reply-To: <20250613090431.127087-18-tzimmermann@suse.de>
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
-X-Mailman-Approved-At: Sat, 13 Dec 2025 12:40:44 +0000
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+X-Mailman-Approved-At: Tue, 25 Nov 2025 20:47:23 +0000
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -67,52 +77,43 @@ List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-On 13/06/2025 12:00, Thomas Zimmermann wrote:
-> Call drm_mode_size_dumb() to compute dumb-buffer scanline pitch and
-> buffer size. Align the pitch according to hardware requirements.
-> 
-> Signed-off-by: Thomas Zimmermann <tzimmermann@suse.de>
-> Cc: Laurent Pinchart <laurent.pinchart@ideasonboard.com>
-> Cc: Kieran Bingham <kieran.bingham+renesas@ideasonboard.com>
-> ---
->  drivers/gpu/drm/renesas/rcar-du/rcar_du_kms.c | 7 +++++--
->  1 file changed, 5 insertions(+), 2 deletions(-)
-> 
-> diff --git a/drivers/gpu/drm/renesas/rcar-du/rcar_du_kms.c b/drivers/gpu/drm/renesas/rcar-du/rcar_du_kms.c
-> index 4c8fe83dd610..dd353fb858ef 100644
-> --- a/drivers/gpu/drm/renesas/rcar-du/rcar_du_kms.c
-> +++ b/drivers/gpu/drm/renesas/rcar-du/rcar_du_kms.c
-> @@ -11,6 +11,7 @@
->  #include <drm/drm_atomic_helper.h>
->  #include <drm/drm_crtc.h>
->  #include <drm/drm_device.h>
-> +#include <drm/drm_dumb_buffers.h>
->  #include <drm/drm_framebuffer.h>
->  #include <drm/drm_gem_dma_helper.h>
->  #include <drm/drm_gem_framebuffer_helper.h>
-> @@ -407,8 +408,8 @@ int rcar_du_dumb_create(struct drm_file *file, struct drm_device *dev,
->  			struct drm_mode_create_dumb *args)
->  {
->  	struct rcar_du_device *rcdu = to_rcar_du_device(dev);
-> -	unsigned int min_pitch = DIV_ROUND_UP(args->width * args->bpp, 8);
->  	unsigned int align;
-> +	int ret;
->  
->  	/*
->  	 * The R8A7779 DU requires a 16 pixels pitch alignment as documented,
-> @@ -419,7 +420,9 @@ int rcar_du_dumb_create(struct drm_file *file, struct drm_device *dev,
->  	else
->  		align = 16 * args->bpp / 8;
->  
-> -	args->pitch = roundup(min_pitch, align);
-> +	ret = drm_mode_size_dumb(dev, args, align, 0);
-> +	if (ret)
-> +		return ret;
->  
->  	return drm_gem_dma_dumb_create_internal(file, dev, args);
->  }
+Fix potential NULL pointer dereference in ga100_fifo_nonstall_allow()
+and ga100_fifo_nonstall_block() when nvkm_runl_get() returns NULL.
+Fix CVE-476 as reported by coverity tool (CID: 1660771)
 
-Reviewed-by: Tomi Valkeinen <tomi.valkeinen+renesas@ideasonboard.com>
+Fixes: 55e1a5996085 ("drm/nouveau/fifo/ga100-: add per-runlist nonstall intr handling")
+Addresses-Coverity-ID: 1660771
+Signed-off-by: Akhilesh Patil <akhilesh@ee.iitb.ac.in>
+---
+ drivers/gpu/drm/nouveau/nvkm/engine/fifo/ga100.c | 8 ++++++--
+ 1 file changed, 6 insertions(+), 2 deletions(-)
 
- Tomi
+diff --git a/drivers/gpu/drm/nouveau/nvkm/engine/fifo/ga100.c b/drivers/gpu/drm/nouveau/nvkm/engine/fifo/ga100.c
+index e74493a4569e..a441fb602f28 100644
+--- a/drivers/gpu/drm/nouveau/nvkm/engine/fifo/ga100.c
++++ b/drivers/gpu/drm/nouveau/nvkm/engine/fifo/ga100.c
+@@ -520,7 +520,9 @@ ga100_fifo_nonstall_block(struct nvkm_event *event, int type, int index)
+ 	struct nvkm_fifo *fifo = container_of(event, typeof(*fifo), nonstall.event);
+ 	struct nvkm_runl *runl = nvkm_runl_get(fifo, index, 0);
+ 
+-	nvkm_inth_block(&runl->nonstall.inth);
++	WARN_ON(!runl);
++	if (runl)
++		nvkm_inth_block(&runl->nonstall.inth);
+ }
+ 
+ static void
+@@ -529,7 +531,9 @@ ga100_fifo_nonstall_allow(struct nvkm_event *event, int type, int index)
+ 	struct nvkm_fifo *fifo = container_of(event, typeof(*fifo), nonstall.event);
+ 	struct nvkm_runl *runl = nvkm_runl_get(fifo, index, 0);
+ 
+-	nvkm_inth_allow(&runl->nonstall.inth);
++	WARN_ON(!runl);
++	if (runl)
++		nvkm_inth_allow(&runl->nonstall.inth);
+ }
+ 
+ const struct nvkm_event_func
+-- 
+2.34.1
 
