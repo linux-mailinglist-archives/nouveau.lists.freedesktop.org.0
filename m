@@ -2,47 +2,49 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id ED33EB1F498
-	for <lists+nouveau@lfdr.de>; Sat,  9 Aug 2025 14:38:31 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id C6E17B1F499
+	for <lists+nouveau@lfdr.de>; Sat,  9 Aug 2025 14:38:32 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 2331D10E198;
-	Sat,  9 Aug 2025 12:38:28 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 1D88010E1C0;
+	Sat,  9 Aug 2025 12:38:30 +0000 (UTC)
 Authentication-Results: gabe.freedesktop.org;
-	dkim=pass (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="oIRviGx2";
+	dkim=pass (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="jWuCVM+5";
 	dkim-atps=neutral
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
 Received: from tor.source.kernel.org (tor.source.kernel.org [172.105.4.254])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 4D25610E0EC;
- Sat,  9 Aug 2025 12:38:26 +0000 (UTC)
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 52BA810E1B6;
+ Sat,  9 Aug 2025 12:38:28 +0000 (UTC)
 Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by tor.source.kernel.org (Postfix) with ESMTP id 26B60601E0;
- Sat,  9 Aug 2025 12:38:25 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id E7C23C4CEE7;
- Sat,  9 Aug 2025 12:38:22 +0000 (UTC)
+ by tor.source.kernel.org (Postfix) with ESMTP id 5CADB601E0;
+ Sat,  9 Aug 2025 12:38:27 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id F1675C4CEF0;
+ Sat,  9 Aug 2025 12:38:24 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1754743104;
- bh=mfj8l/jji6+mSWO4VqUyU4IwT2ivmhxapsG2ScXQlVk=;
+ s=k20201202; t=1754743107;
+ bh=xnFHorLNEJtWO8XBpeP45stKZBT3GxS5WM+7abvByIY=;
  h=Date:Subject:To:Cc:References:From:In-Reply-To:From;
- b=oIRviGx2luQmHQHen1bqtwnjHv1Q83WQRePmFTPW0SBC6RlaGPQ6JakssQU0dhmv4
- Dfw7q5GjSiQkEUKxXtJjvky3lBmBJgtX+xEbISAqz28S3kYip7/w73Phh/DrSNuYnz
- 6SwIoFqGl8fsFEDEyKZl2nIWh//AzziUEKFwxU8Yv5xUbCdztMkhfo3EZsLwk33HhK
- WkmRWtsYepNvxEjSnQFbVgy8e6sJD7PZUncof8ZqcFTQikfuMbM1cOCMrUkN36/ZAG
- y3TuQmg1lpPzyUkZpmsNIvIEc6r4v5+l2XdqB4sCILsTHvZfOQqCW6TtcBQ28C6cy3
- cKoQRHsJnPehg==
-Message-ID: <689070db-1afc-42dd-857d-4edd0ee3d040@kernel.org>
-Date: Sat, 9 Aug 2025 14:38:20 +0200
+ b=jWuCVM+5iDsAHOH2rlzPfsg5hyxs36MzYPDDW/sIf2j2jNoKzqnSSBPVSlPatC5J+
+ YG/Ueu4f0Sk4ki6Np5CbXLX8ZuCCrwgqh87VDg8wIklb9kKQnqmswUl5uN6Ct2PeEn
+ m2Ihp4VwukNfmkzRhIBaZBRpkXSzhIVOrH0UObuMXrZKayVzm66R37GMwxo5/vB/H6
+ 5MfCaEKsV8+RF/zhgPFCkbzP743IiKqwzdFa2jGsMkfGpKtrsYe40a/T2TxrY+QNIn
+ SyQtEhMhY05uZgvf+hNqSHjsoFY65xUcuCm2RIUG3g0GryouyNuFEh0JejQwy1YrOC
+ M3gXhV6l4gZWw==
+Message-ID: <a657ead8-7f2c-4165-9a4c-ce4d82ea2adc@kernel.org>
+Date: Sat, 9 Aug 2025 14:38:21 +0200
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH] drm/nouveau: fix typos in comments
-To: Madhur Kumar <madhurkumar004@gmail.com>
-Cc: lyude@redhat.com, airlied@gmail.com, simona@ffwll.ch,
- dri-devel@lists.freedesktop.org, nouveau@lists.freedesktop.org,
- linux-kernel@vger.kernel.org, skhan@linuxfoundation.org
-References: <20250808073840.376764-1-madhurkumar004@gmail.com>
+Subject: Re: [PATCH] drm/nouveau/nvif: Fix potential memory leak in
+ nvif_vmm_ctor().
+To: Fanhua Li <lifanhua5@huawei.com>
+Cc: dri-devel@lists.freedesktop.org, nouveau@lists.freedesktop.org,
+ liuyongqiang13@huawei.com, lyude@redhat.com, airlied@gmail.com,
+ simona@ffwll.ch, airlied@redhat.com, linux-kernel@vger.kernel.org,
+ suhui@nfschina.com
+References: <20250728115027.50878-1-lifanhua5@huawei.com>
 From: Danilo Krummrich <dakr@kernel.org>
 Content-Language: en-US
-In-Reply-To: <20250808073840.376764-1-madhurkumar004@gmail.com>
+In-Reply-To: <20250728115027.50878-1-lifanhua5@huawei.com>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
 X-BeenThere: nouveau@lists.freedesktop.org
@@ -59,14 +61,14 @@ List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-On 8/8/25 9:38 AM, Madhur Kumar wrote:
-> Fixed three spelling mistakes in nouveau_exec.c comments:
->   - alloctor -> allocator
->   - exectued -> executed
->   - depent -> depend
+On 7/28/25 1:50 PM, Fanhua Li wrote:
+> When the nvif_vmm_type is invalid, we will return error directly
+> without freeing the args in nvif_vmm_ctor(), which leading a memory
+> leak. Fix it by setting the ret -EINVAL and goto done.
 > 
-> No functional changes.
-> 
-> Signed-off-by: Madhur Kumar <madhurkumar004@gmail.com>
+> Reported-by: kernel test robot <lkp@intel.com>
+> Closes: https://lore.kernel.org/all/202312040659.4pJpMafN-lkp@intel.com/
+> Fixes: 6b252cf42281 ("drm/nouveau: nvkm/vmm: implement raw ops to manage uvmm")
+> Signed-off-by: Fanhua Li <lifanhua5@huawei.com>
 
 Applied to drm-misc-fixes, thanks!
