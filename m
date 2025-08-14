@@ -2,114 +2,48 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id 0D6E2B25A61
-	for <lists+nouveau@lfdr.de>; Thu, 14 Aug 2025 06:15:41 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 6D2ECB25B77
+	for <lists+nouveau@lfdr.de>; Thu, 14 Aug 2025 08:01:17 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id B456310E204;
-	Thu, 14 Aug 2025 04:15:39 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 3318510E7ED;
+	Thu, 14 Aug 2025 06:01:15 +0000 (UTC)
 Authentication-Results: gabe.freedesktop.org;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="IQvcdyWG";
+	dkim=pass (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="lCQ7iZsU";
 	dkim-atps=neutral
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from mail-pf1-f177.google.com (mail-pf1-f177.google.com
- [209.85.210.177])
- by gabe.freedesktop.org (Postfix) with ESMTPS id A60BC10E204
- for <nouveau@lists.freedesktop.org>; Thu, 14 Aug 2025 04:15:38 +0000 (UTC)
-Received: by mail-pf1-f177.google.com with SMTP id
- d2e1a72fcca58-76e2e5d244cso602437b3a.0
- for <nouveau@lists.freedesktop.org>; Wed, 13 Aug 2025 21:15:38 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1755144938; x=1755749738; darn=lists.freedesktop.org;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=34KWmLyAieUzqtSrdM5jM6hi2YW8C3abPtgGolrQZzs=;
- b=IQvcdyWGyYFC9QsnOOC9BVPx3ikASsy/5vFQzdPitdY054pWOEEVoyU6tJiOEZKme1
- ICxKnQRVA4YTgOC8RMMVl3QMUUX9fS3ixN7hmvZ2cRx+dvorHQ/WXql12wz4Ppjy4geD
- t8weVQW0XnYQf/94mRPbKsNyHgGWy/HBI0/36YjuXYQFNSnnWvu35RPtLZwaz3XaiH2R
- HbwqcAHIxM+8h5KjPlPFhc0tykCN9NO8yxXnWbglOckRkFvvABOZsqTbfbyR4u7tomnC
- IV3oaDGjsPzYbv09pf+LFpeiQLpkbwpFIR8awei6NP4wJOrfUQDKfsaLFML4DjTiFpZd
- 7LRA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1755144938; x=1755749738;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=34KWmLyAieUzqtSrdM5jM6hi2YW8C3abPtgGolrQZzs=;
- b=NoKn+FKmDSpGb3/p1D/Iu5n44eYPSxTjc8wlzYOOPp1dtipFcqbyMlyx1853tehY10
- pEohZN2+rR2GyrtZ3vrgUmUr3BoS4tD+lfIEQnWJVvDaPoQsYu0p4rbPnDYFdB/k/80k
- gtLf+YJ5P9BWfyYa+oy24TiL1xwftOZzHfJlP4ZVMYgYdGe/ICdhqBlli8CP7vsjXmfe
- XJ+JxNFnGBFjop7Go/Vbeby9uRtcDho4trSbbGtCB5qAwFJ2zxQJOy9kyFTm/oNhpP4X
- s/HfQWz6kgVAvt7nc+9j18BFEUrTkeQZZ4HVEHJTLzYdRIJYcFZrbYpWDLWM49RVBKwJ
- 3zxQ==
-X-Forwarded-Encrypted: i=1;
- AJvYcCVwfBi0kZ5ig/dw/RbXI8ZCd6D3Jv9wvK3Z5SFfiLWgkmoSfLehmLerDDOulHp/rsWu4dO05eRY@lists.freedesktop.org
-X-Gm-Message-State: AOJu0YxxPKMFFa392QnuBBL78P6E2f7ppT5Rkmnd7ThWeKhquIINddzN
- xkJ5XYNTb+wspguyusuequgBNfP85s0Cs+sT9Ejcyui1SMByo2LrtLC25DUhHEKEmPI=
-X-Gm-Gg: ASbGncsUHn4IHq38L6Id4bHrijuo6mpK+hBy3IWtxb86kp06gnmgIOLFzeutPBDC/Mg
- sOeaIAJWquTHrJvhNypaXLxy5y5EK4oLUPtYmkVtS2DBsOrq9D/YPWR5thsCzWb9dPOPVYtZ72f
- U8TqK0Y84lHz3qeVLd5nYYn8L1RduExadYOa0L+aK2/hTpf5vNL3YWKD13jZGeTAqtNx+qgKNAz
- 2zZqzBYEGxwruJqvcwag1lvL+NyX39/+VbgPlJpTiTOpR4F1L80Q4izZ6od3YcOof9eTtC2rq8W
- DjMQqyrPhgfGejFlqYvs4EsO3c2W+5sfAhDMpgsPEChiRO9ZcJT9HDhQPyBL+TbNwtH+4tjeQTY
- kJkK8Y/te4Ilq4kHzYQE2daiv9zUMLeFYj54=
-X-Google-Smtp-Source: AGHT+IFKmQVKtrRTGaZ8hTWhd7nE8H1E8AgUXml21TmSiOXRMbfiiTxpX/j+26/xYc1Zfc3ne6Vv/g==
-X-Received: by 2002:a05:6a20:7d8b:b0:240:1204:dd5 with SMTP id
- adf61e73a8af0-240bcfbba85mr2301691637.8.1755144938050; 
- Wed, 13 Aug 2025 21:15:38 -0700 (PDT)
-Received: from localhost ([122.172.87.165]) by smtp.gmail.com with ESMTPSA id
- d2e1a72fcca58-76bd9795200sm31652911b3a.114.2025.08.13.21.15.36
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 13 Aug 2025 21:15:37 -0700 (PDT)
-Date: Thu, 14 Aug 2025 09:45:35 +0530
-From: Viresh Kumar <viresh.kumar@linaro.org>
-To: Tamir Duberstein <tamird@gmail.com>
-Cc: "Rafael J. Wysocki" <rafael@kernel.org>, Miguel Ojeda <ojeda@kernel.org>,
- Alex Gaynor <alex.gaynor@gmail.com>,
- Boqun Feng <boqun.feng@gmail.com>, Gary Guo <gary@garyguo.net>,
- =?utf-8?B?QmrDtnJu?= Roy Baron <bjorn3_gh@protonmail.com>,
- Benno Lossin <lossin@kernel.org>, Andreas Hindborg <a.hindborg@kernel.org>,
- Alice Ryhl <aliceryhl@google.com>, Trevor Gross <tmgross@umich.edu>,
- Danilo Krummrich <dakr@kernel.org>,
- Maarten Lankhorst <maarten.lankhorst@linux.intel.com>,
- Maxime Ripard <mripard@kernel.org>,
- Thomas Zimmermann <tzimmermann@suse.de>,
- David Airlie <airlied@gmail.com>, Simona Vetter <simona@ffwll.ch>,
- FUJITA Tomonori <fujita.tomonori@gmail.com>, Andrew Lunn <andrew@lunn.ch>,
- Heiner Kallweit <hkallweit1@gmail.com>,
- Russell King <linux@armlinux.org.uk>,
- "David S. Miller" <davem@davemloft.net>,
- Eric Dumazet <edumazet@google.com>,
- Jakub Kicinski <kuba@kernel.org>, Paolo Abeni <pabeni@redhat.com>,
- Michael Turquette <mturquette@baylibre.com>,
- Stephen Boyd <sboyd@kernel.org>, Breno Leitao <leitao@debian.org>,
- Greg Kroah-Hartman <gregkh@linuxfoundation.org>,
- Luis Chamberlain <mcgrof@kernel.org>, Russ Weight <russ.weight@linux.dev>,
- Dave Ertman <david.m.ertman@intel.com>,
- Ira Weiny <ira.weiny@intel.com>, Leon Romanovsky <leon@kernel.org>,
- Bjorn Helgaas <bhelgaas@google.com>,
- Krzysztof =?utf-8?Q?Wilczy=C5=84ski?= <kwilczynski@kernel.org>,
- Arnd Bergmann <arnd@arndb.de>, Brendan Higgins <brendan.higgins@linux.dev>,
- David Gow <davidgow@google.com>, Rae Moar <rmoar@google.com>,
- Jens Axboe <axboe@kernel.dk>, Alexandre Courbot <acourbot@nvidia.com>,
- Alexander Viro <viro@zeniv.linux.org.uk>,
- Christian Brauner <brauner@kernel.org>, Jan Kara <jack@suse.cz>,
- Liam Girdwood <lgirdwood@gmail.com>,
- Mark Brown <broonie@kernel.org>, linux-pm@vger.kernel.org,
- linux-kernel@vger.kernel.org, rust-for-linux@vger.kernel.org,
- nouveau@lists.freedesktop.org, dri-devel@lists.freedesktop.org,
- netdev@vger.kernel.org, linux-clk@vger.kernel.org,
- linux-pci@vger.kernel.org, linux-kselftest@vger.kernel.org,
- kunit-dev@googlegroups.com, linux-block@vger.kernel.org,
- linux-fsdevel@vger.kernel.org
-Subject: Re: [PATCH v2 04/19] rust: clk: replace `kernel::c_str!` with
- C-Strings
-Message-ID: <20250814041535.l7yj2wm4ae3l4k7p@vireshk-i7>
-References: <20250813-core-cstr-cstrings-v2-0-00be80fc541b@gmail.com>
- <20250813-core-cstr-cstrings-v2-4-00be80fc541b@gmail.com>
+Received: from sea.source.kernel.org (sea.source.kernel.org [172.234.252.31])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 9D4A910E7ED;
+ Thu, 14 Aug 2025 06:01:13 +0000 (UTC)
+Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
+ by sea.source.kernel.org (Postfix) with ESMTP id 2EDE843973;
+ Thu, 14 Aug 2025 06:01:13 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id CE3EBC4CEEF;
+ Thu, 14 Aug 2025 06:01:10 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+ s=k20201202; t=1755151273;
+ bh=7vPHh6uzcmYyhzSxVfwn2NBujgPJ544BwypiXhxBzzU=;
+ h=Date:From:To:Cc:Subject:From;
+ b=lCQ7iZsU4vTCi/Qtl/lBCWUVPeGi2GVqLbuwU1FMAsX4xiLF49sU2owGOwyfUQisz
+ CGjLeni5abt+oFdrKw5fS00eMpa4LrQm8T8HxG8t1/2p010Q/w7AlNoKSR8rAhluy7
+ MAYOL4t7Zo8pS/6cBpkdqKo/ivgM2uBe3JUDyKy5Mu54dnC33uo7CmHU3tzfqFuZGt
+ Gvsx1CsiWq602MCK7d7cnv5eYjO0miU/5cbgPbgvWkneISuiUb9FlFUJnx/LSx6Uiq
+ 8YKmseoc5Avp7XKAF4xLmMzCRLeYVIt0U9e7KUQ/HJwDcKq6wpVTiC9H7Mr2i53nnQ
+ hERtcjQJgMMjA==
+Date: Thu, 14 Aug 2025 15:01:07 +0900
+From: "Gustavo A. R. Silva" <gustavoars@kernel.org>
+To: Lyude Paul <lyude@redhat.com>, Danilo Krummrich <dakr@kernel.org>,
+ David Airlie <airlied@gmail.com>, Simona Vetter <simona@ffwll.ch>
+Cc: dri-devel@lists.freedesktop.org, nouveau@lists.freedesktop.org,
+ linux-kernel@vger.kernel.org,
+ "Gustavo A. R. Silva" <gustavoars@kernel.org>,
+ linux-hardening@vger.kernel.org
+Subject: [PATCH v3][next] drm/nouveau: fifo: Avoid
+ -Wflex-array-member-not-at-end warning
+Message-ID: <aJ17oxJYcqqr3946@kspp>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
-In-Reply-To: <20250813-core-cstr-cstrings-v2-4-00be80fc541b@gmail.com>
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -124,20 +58,49 @@ List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-On 13-08-25, 11:59, Tamir Duberstein wrote:
-> C-String literals were added in Rust 1.77. Replace instances of
-> `kernel::c_str!` with C-String literals where possible.
-> 
-> Acked-by: Greg Kroah-Hartman <gregkh@linuxfoundation.org>
-> Reviewed-by: Alice Ryhl <aliceryhl@google.com>
-> Reviewed-by: Benno Lossin <lossin@kernel.org>
-> Signed-off-by: Tamir Duberstein <tamird@gmail.com>
-> Acked-by: Stephen Boyd <sboyd@kernel.org>
-> ---
->  rust/kernel/clk.rs | 6 ++----
->  1 file changed, 2 insertions(+), 4 deletions(-)
+-Wflex-array-member-not-at-end was introduced in GCC-14, and we are
+getting ready to enable it, globally.
 
-Acked-by: Viresh Kumar <viresh.kumar@linaro.org>
+Use the new TRAILING_OVERLAP() helper to fix the following warning:
 
+drivers/gpu/drm/nouveau/nvif/fifo.c:29:42: warning: structure containing a flexible array member is not at the end of another structure [-Wflex-array-member-not-at-end]
+
+This helper creates a union between a flexible-array member (FAM)
+and a set of members that would otherwise follow it. This overlays
+the trailing members onto the FAM while preserving the original
+memory layout.
+
+Signed-off-by: Gustavo A. R. Silva <gustavoars@kernel.org>
+---
+Changes in v3:
+ - Use the new TRAILING_OVERLAP() helper.
+
+Changes in v2:
+ - Adjust heap allocation.
+
+ drivers/gpu/drm/nouveau/nvif/fifo.c | 5 ++---
+ 1 file changed, 2 insertions(+), 3 deletions(-)
+
+diff --git a/drivers/gpu/drm/nouveau/nvif/fifo.c b/drivers/gpu/drm/nouveau/nvif/fifo.c
+index a463289962b2..b0ab80995d98 100644
+--- a/drivers/gpu/drm/nouveau/nvif/fifo.c
++++ b/drivers/gpu/drm/nouveau/nvif/fifo.c
+@@ -25,13 +25,12 @@ static int
+ nvif_fifo_runlists(struct nvif_device *device)
+ {
+ 	struct nvif_object *object = &device->object;
+-	struct {
+-		struct nv_device_info_v1 m;
++	TRAILING_OVERLAP(struct nv_device_info_v1, m, data,
+ 		struct {
+ 			struct nv_device_info_v1_data runlists;
+ 			struct nv_device_info_v1_data runlist[64];
+ 		} v;
+-	} *a;
++	) *a;
+ 	int ret, i;
+ 
+ 	if (device->runlist)
 -- 
-viresh
+2.43.0
+
