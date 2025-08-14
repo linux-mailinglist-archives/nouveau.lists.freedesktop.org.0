@@ -2,48 +2,65 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id 6D2ECB25B77
-	for <lists+nouveau@lfdr.de>; Thu, 14 Aug 2025 08:01:17 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 15F49B25E13
+	for <lists+nouveau@lfdr.de>; Thu, 14 Aug 2025 09:54:23 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 3318510E7ED;
-	Thu, 14 Aug 2025 06:01:15 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 268BC10E085;
+	Thu, 14 Aug 2025 07:54:21 +0000 (UTC)
 Authentication-Results: gabe.freedesktop.org;
-	dkim=pass (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="lCQ7iZsU";
+	dkim=pass (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="XwG6sxcS";
 	dkim-atps=neutral
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from sea.source.kernel.org (sea.source.kernel.org [172.234.252.31])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 9D4A910E7ED;
- Thu, 14 Aug 2025 06:01:13 +0000 (UTC)
+Received: from dfw.source.kernel.org (dfw.source.kernel.org [139.178.84.217])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 207A810E085;
+ Thu, 14 Aug 2025 07:54:20 +0000 (UTC)
 Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by sea.source.kernel.org (Postfix) with ESMTP id 2EDE843973;
- Thu, 14 Aug 2025 06:01:13 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id CE3EBC4CEEF;
- Thu, 14 Aug 2025 06:01:10 +0000 (UTC)
+ by dfw.source.kernel.org (Postfix) with ESMTP id 9EE035C670A;
+ Thu, 14 Aug 2025 07:54:18 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 3FD96C4CEEF;
+ Thu, 14 Aug 2025 07:54:12 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1755151273;
- bh=7vPHh6uzcmYyhzSxVfwn2NBujgPJ544BwypiXhxBzzU=;
- h=Date:From:To:Cc:Subject:From;
- b=lCQ7iZsU4vTCi/Qtl/lBCWUVPeGi2GVqLbuwU1FMAsX4xiLF49sU2owGOwyfUQisz
- CGjLeni5abt+oFdrKw5fS00eMpa4LrQm8T8HxG8t1/2p010Q/w7AlNoKSR8rAhluy7
- MAYOL4t7Zo8pS/6cBpkdqKo/ivgM2uBe3JUDyKy5Mu54dnC33uo7CmHU3tzfqFuZGt
- Gvsx1CsiWq602MCK7d7cnv5eYjO0miU/5cbgPbgvWkneISuiUb9FlFUJnx/LSx6Uiq
- 8YKmseoc5Avp7XKAF4xLmMzCRLeYVIt0U9e7KUQ/HJwDcKq6wpVTiC9H7Mr2i53nnQ
- hERtcjQJgMMjA==
-Date: Thu, 14 Aug 2025 15:01:07 +0900
-From: "Gustavo A. R. Silva" <gustavoars@kernel.org>
-To: Lyude Paul <lyude@redhat.com>, Danilo Krummrich <dakr@kernel.org>,
- David Airlie <airlied@gmail.com>, Simona Vetter <simona@ffwll.ch>
-Cc: dri-devel@lists.freedesktop.org, nouveau@lists.freedesktop.org,
- linux-kernel@vger.kernel.org,
- "Gustavo A. R. Silva" <gustavoars@kernel.org>,
- linux-hardening@vger.kernel.org
-Subject: [PATCH v3][next] drm/nouveau: fifo: Avoid
- -Wflex-array-member-not-at-end warning
-Message-ID: <aJ17oxJYcqqr3946@kspp>
-MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
+ s=k20201202; t=1755158058;
+ bh=8n2URVW1zH35PTkcFhfdDY6JdVB2waPtDBeuhXieSmc=;
+ h=Date:Cc:Subject:From:To:References:In-Reply-To:From;
+ b=XwG6sxcSZ4e7RBPNZDqVWlc3ShcGu5AG24wQYLVS5LuPGPuFBTFuMUCfAU9DlDul3
+ YqAuR5TsBysOtbQlj172ZmkZPYKd/7ItYBX8xn88aB0G/Z+kY515VurN2zAL9MK+aP
+ 2MG1rFQwZ3KyVb4cEWKd1tWhVQdukyPiHI8Yh3wLIVATqkFlhbQQImhS5e/7yMLNHR
+ g4k8WyYDr386xoOcjRyzRjEC8hppnuQiX2NLbtUlHHCbwZ5ifMdulAfJM2VT+XMC7r
+ c3m+hh/ldIFcj/wcOXssueSZ7r00TCMS+BmzLqghaiMWPzbkWNstIT4NASnh2yY2Pt
+ VKLxy8v3XucDg==
+Mime-Version: 1.0
+Content-Transfer-Encoding: quoted-printable
+Content-Type: text/plain; charset=UTF-8
+Date: Thu, 14 Aug 2025 09:54:10 +0200
+Message-Id: <DC1ZLP61HJAL.3I2YF82Y4T7L9@kernel.org>
+Cc: <nouveau@lists.freedesktop.org>, <dri-devel@lists.freedesktop.org>,
+ <linux-kernel@vger.kernel.org>, <rust-for-linux@vger.kernel.org>,
+ <linux-block@vger.kernel.org>, <linux-kselftest@vger.kernel.org>,
+ <kunit-dev@googlegroups.com>, <linux-fsdevel@vger.kernel.org>
+Subject: Re: [PATCH v3 9/9] rust: device: use `kernel::{fmt,prelude::fmt!}`
+From: "Benno Lossin" <lossin@kernel.org>
+To: "Tamir Duberstein" <tamird@gmail.com>, "Danilo Krummrich"
+ <dakr@kernel.org>, "David Airlie" <airlied@gmail.com>, "Simona Vetter"
+ <simona@ffwll.ch>, "Miguel Ojeda" <ojeda@kernel.org>, "Alex Gaynor"
+ <alex.gaynor@gmail.com>, "Boqun Feng" <boqun.feng@gmail.com>, "Gary Guo"
+ <gary@garyguo.net>, =?utf-8?q?Bj=C3=B6rn_Roy_Baron?=
+ <bjorn3_gh@protonmail.com>, "Andreas Hindborg" <a.hindborg@kernel.org>,
+ "Alice Ryhl" <aliceryhl@google.com>, "Trevor Gross" <tmgross@umich.edu>,
+ "Jens Axboe" <axboe@kernel.dk>, "Greg Kroah-Hartman"
+ <gregkh@linuxfoundation.org>, "Rafael J. Wysocki" <rafael@kernel.org>,
+ "Brendan Higgins" <brendan.higgins@linux.dev>, "David Gow"
+ <davidgow@google.com>, "Rae Moar" <rmoar@google.com>, "Lorenzo Stoakes"
+ <lorenzo.stoakes@oracle.com>, "Vlastimil Babka" <vbabka@suse.cz>, "Liam R.
+ Howlett" <Liam.Howlett@oracle.com>, "Uladzislau Rezki" <urezki@gmail.com>,
+ "Alexandre Courbot" <acourbot@nvidia.com>, "Alexander Viro"
+ <viro@zeniv.linux.org.uk>, "Christian Brauner" <brauner@kernel.org>, "Jan
+ Kara" <jack@suse.cz>
+X-Mailer: aerc 0.20.1
+References: <20250813-core-cstr-fanout-1-v3-0-a15eca059c51@gmail.com>
+ <20250813-core-cstr-fanout-1-v3-9-a15eca059c51@gmail.com>
+In-Reply-To: <20250813-core-cstr-fanout-1-v3-9-a15eca059c51@gmail.com>
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -58,49 +75,38 @@ List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
--Wflex-array-member-not-at-end was introduced in GCC-14, and we are
-getting ready to enable it, globally.
+On Wed Aug 13, 2025 at 5:39 PM CEST, Tamir Duberstein wrote:
+> Reduce coupling to implementation details of the formatting machinery by
+> avoiding direct use for `core`'s formatting traits and macros.
+>
+> Signed-off-by: Tamir Duberstein <tamird@gmail.com>
 
-Use the new TRAILING_OVERLAP() helper to fix the following warning:
+Reviewed-by: Benno Lossin <lossin@kernel.org>
 
-drivers/gpu/drm/nouveau/nvif/fifo.c:29:42: warning: structure containing a flexible array member is not at the end of another structure [-Wflex-array-member-not-at-end]
+> ---
+>  rust/kernel/device/property.rs | 23 ++++++++++++-----------
+>  1 file changed, 12 insertions(+), 11 deletions(-)
+   =20
+> @@ -413,9 +414,9 @@ fn fmt(&self, f: &mut core::fmt::Formatter<'_>) -> co=
+re::fmt::Result {
+>                  // SAFETY: `fwnode_get_name_prefix` returns null or a
+>                  // valid C string.
+>                  let prefix =3D unsafe { CStr::from_char_ptr(prefix) };
+> -                write!(f, "{prefix}")?;
+> +                fmt::Display::fmt(prefix, f)?;
+>              }
+> -            write!(f, "{}", fwnode.display_name())?;
 
-This helper creates a union between a flexible-array member (FAM)
-and a set of members that would otherwise follow it. This overlays
-the trailing members onto the FAM while preserving the original
-memory layout.
+So we're not able to use `write!` with our `Display` or did you also
+write a `FmtAdapter` wrapper for that? (don't think we need it now, just
+wanted to know if we have this issue possibly in the future)
 
-Signed-off-by: Gustavo A. R. Silva <gustavoars@kernel.org>
 ---
-Changes in v3:
- - Use the new TRAILING_OVERLAP() helper.
+Cheers,
+Benno
 
-Changes in v2:
- - Adjust heap allocation.
-
- drivers/gpu/drm/nouveau/nvif/fifo.c | 5 ++---
- 1 file changed, 2 insertions(+), 3 deletions(-)
-
-diff --git a/drivers/gpu/drm/nouveau/nvif/fifo.c b/drivers/gpu/drm/nouveau/nvif/fifo.c
-index a463289962b2..b0ab80995d98 100644
---- a/drivers/gpu/drm/nouveau/nvif/fifo.c
-+++ b/drivers/gpu/drm/nouveau/nvif/fifo.c
-@@ -25,13 +25,12 @@ static int
- nvif_fifo_runlists(struct nvif_device *device)
- {
- 	struct nvif_object *object = &device->object;
--	struct {
--		struct nv_device_info_v1 m;
-+	TRAILING_OVERLAP(struct nv_device_info_v1, m, data,
- 		struct {
- 			struct nv_device_info_v1_data runlists;
- 			struct nv_device_info_v1_data runlist[64];
- 		} v;
--	} *a;
-+	) *a;
- 	int ret, i;
- 
- 	if (device->runlist)
--- 
-2.43.0
+> +            fmt::Display::fmt(&fwnode.display_name(), f)?;
+>          }
+> =20
+>          Ok(())
 
