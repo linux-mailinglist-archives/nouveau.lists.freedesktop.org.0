@@ -2,65 +2,104 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id 15F49B25E13
-	for <lists+nouveau@lfdr.de>; Thu, 14 Aug 2025 09:54:23 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 367ADB25EAD
+	for <lists+nouveau@lfdr.de>; Thu, 14 Aug 2025 10:24:46 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 268BC10E085;
-	Thu, 14 Aug 2025 07:54:21 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id D43A710E81E;
+	Thu, 14 Aug 2025 08:24:44 +0000 (UTC)
 Authentication-Results: gabe.freedesktop.org;
-	dkim=pass (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="XwG6sxcS";
+	dkim=pass (2048-bit key; unprotected) header.d=google.com header.i=@google.com header.b="br94YOue";
 	dkim-atps=neutral
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from dfw.source.kernel.org (dfw.source.kernel.org [139.178.84.217])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 207A810E085;
- Thu, 14 Aug 2025 07:54:20 +0000 (UTC)
-Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by dfw.source.kernel.org (Postfix) with ESMTP id 9EE035C670A;
- Thu, 14 Aug 2025 07:54:18 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 3FD96C4CEEF;
- Thu, 14 Aug 2025 07:54:12 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1755158058;
- bh=8n2URVW1zH35PTkcFhfdDY6JdVB2waPtDBeuhXieSmc=;
- h=Date:Cc:Subject:From:To:References:In-Reply-To:From;
- b=XwG6sxcSZ4e7RBPNZDqVWlc3ShcGu5AG24wQYLVS5LuPGPuFBTFuMUCfAU9DlDul3
- YqAuR5TsBysOtbQlj172ZmkZPYKd/7ItYBX8xn88aB0G/Z+kY515VurN2zAL9MK+aP
- 2MG1rFQwZ3KyVb4cEWKd1tWhVQdukyPiHI8Yh3wLIVATqkFlhbQQImhS5e/7yMLNHR
- g4k8WyYDr386xoOcjRyzRjEC8hppnuQiX2NLbtUlHHCbwZ5ifMdulAfJM2VT+XMC7r
- c3m+hh/ldIFcj/wcOXssueSZ7r00TCMS+BmzLqghaiMWPzbkWNstIT4NASnh2yY2Pt
- VKLxy8v3XucDg==
+Received: from mail-wm1-f74.google.com (mail-wm1-f74.google.com
+ [209.85.128.74])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id DD6D310E81E
+ for <nouveau@lists.freedesktop.org>; Thu, 14 Aug 2025 08:24:43 +0000 (UTC)
+Received: by mail-wm1-f74.google.com with SMTP id
+ 5b1f17b1804b1-45a1b0c5377so2970855e9.3
+ for <nouveau@lists.freedesktop.org>; Thu, 14 Aug 2025 01:24:43 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=google.com; s=20230601; t=1755159882; x=1755764682;
+ darn=lists.freedesktop.org; 
+ h=cc:to:from:subject:message-id:references:mime-version:in-reply-to
+ :date:from:to:cc:subject:date:message-id:reply-to;
+ bh=XjZ/eR6SQYjR+SXWKMp+2N2e/5Kxjm09W05WAM7WjMU=;
+ b=br94YOueVmso4x2j8T9sa/8Uqz/oM/C+X5i5K4M8wMJhzmlUDjwX6ij6nEzOOkpgAi
+ 5exRF/KyG3gG3k57NspU+EaCSDDPRRgt7I8XQ1P5xY4fxm+RGwIaJvM4VRLhL1tUK/o5
+ vEohKnH/8jxJIqWnkJsFA/lZXkUIGu2mlxu0UC+M04cT1l57Tuirp73VlzsUamlNdDLW
+ VwWCgW/4Qoc0Y6HoxVB6zuqtq1hPCpRCQARvQMH47Iwt7rl2A69NEBdI/HkFrPYrkdLW
+ PgDd5DXMX6jwkHDBPB1S4opsGnRzshN39csstM8BVuLJxLYpNOcIUeYa7kZHnLGjB/r4
+ yzrA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1755159882; x=1755764682;
+ h=cc:to:from:subject:message-id:references:mime-version:in-reply-to
+ :date:x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+ bh=XjZ/eR6SQYjR+SXWKMp+2N2e/5Kxjm09W05WAM7WjMU=;
+ b=PpnEEZnk3bttNR+dwjygvUM0qSIQYom7DNxUsEKrdLk/sXEe/9VKXGNrpIvG6auqq9
+ Mwb8u2EhDqpzNaQlLDtzJfQSSrk+XKc7pjwGAfQS/xTKGcBiAEirFxgS92UrWNjrt+4W
+ lJRWMxVeeDzE2qXNrNzomO2dZss67dYBVS0MTv0jn2b6Q1yhjGttmPswRs77e/vyfQ7Y
+ J/928uZ+F5sEE6Y84d7pT6bFyXMccOKYWWFPOkzYjgoJF/skmIQI2Dc/p7ctErD9hpfS
+ 9gvz/UlBIyTVAyKdaHijyq6YK91JyLzK+ce4QQ0NXPpeRCjFMcJXmRTw5uL1UBczJLzo
+ qTaA==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCUSPhWiuEjFPyZA9pNE+xROkQVMNreXe48eczBdVA0qmqzUZKF4tQnJYmDlg0Am8V1ZjmAdfTIY@lists.freedesktop.org
+X-Gm-Message-State: AOJu0YwDLb0i+2YE2NPa1lduYcy4cj0DH5ssKhAWC2pZuaFq4h0+BwFQ
+ U2rfRylJYDyyCcpNMJh0s8jo5b9wBHLgUwRAMxHACoJHZGaAdy/htxL7vEUZKvVLPeV2A1E/gL0
+ 3uY/Uth2shr2Klg89ZQ==
+X-Google-Smtp-Source: AGHT+IEGivgrzos4CoGDHY7uH0CTjOvIWOyqPK2uMv3U+POUyDq1mhFpmt0OotkxsQj2w6KHcsTz1JVeOL0tM4c=
+X-Received: from wmbjg12.prod.google.com
+ ([2002:a05:600c:a00c:b0:458:a7ae:4acf])
+ (user=aliceryhl job=prod-delivery.src-stubby-dispatcher) by
+ 2002:a05:600c:190a:b0:459:d6a6:792 with SMTP id
+ 5b1f17b1804b1-45a1b67a1ddmr13345765e9.29.1755159881981; 
+ Thu, 14 Aug 2025 01:24:41 -0700 (PDT)
+Date: Thu, 14 Aug 2025 08:24:41 +0000
+In-Reply-To: <34d384af-6123-4602-bde0-85ca3d14fe09@sirena.org.uk>
 Mime-Version: 1.0
-Content-Transfer-Encoding: quoted-printable
-Content-Type: text/plain; charset=UTF-8
-Date: Thu, 14 Aug 2025 09:54:10 +0200
-Message-Id: <DC1ZLP61HJAL.3I2YF82Y4T7L9@kernel.org>
-Cc: <nouveau@lists.freedesktop.org>, <dri-devel@lists.freedesktop.org>,
- <linux-kernel@vger.kernel.org>, <rust-for-linux@vger.kernel.org>,
- <linux-block@vger.kernel.org>, <linux-kselftest@vger.kernel.org>,
- <kunit-dev@googlegroups.com>, <linux-fsdevel@vger.kernel.org>
-Subject: Re: [PATCH v3 9/9] rust: device: use `kernel::{fmt,prelude::fmt!}`
-From: "Benno Lossin" <lossin@kernel.org>
-To: "Tamir Duberstein" <tamird@gmail.com>, "Danilo Krummrich"
- <dakr@kernel.org>, "David Airlie" <airlied@gmail.com>, "Simona Vetter"
- <simona@ffwll.ch>, "Miguel Ojeda" <ojeda@kernel.org>, "Alex Gaynor"
- <alex.gaynor@gmail.com>, "Boqun Feng" <boqun.feng@gmail.com>, "Gary Guo"
- <gary@garyguo.net>, =?utf-8?q?Bj=C3=B6rn_Roy_Baron?=
- <bjorn3_gh@protonmail.com>, "Andreas Hindborg" <a.hindborg@kernel.org>,
- "Alice Ryhl" <aliceryhl@google.com>, "Trevor Gross" <tmgross@umich.edu>,
- "Jens Axboe" <axboe@kernel.dk>, "Greg Kroah-Hartman"
- <gregkh@linuxfoundation.org>, "Rafael J. Wysocki" <rafael@kernel.org>,
- "Brendan Higgins" <brendan.higgins@linux.dev>, "David Gow"
- <davidgow@google.com>, "Rae Moar" <rmoar@google.com>, "Lorenzo Stoakes"
- <lorenzo.stoakes@oracle.com>, "Vlastimil Babka" <vbabka@suse.cz>, "Liam R.
- Howlett" <Liam.Howlett@oracle.com>, "Uladzislau Rezki" <urezki@gmail.com>,
- "Alexandre Courbot" <acourbot@nvidia.com>, "Alexander Viro"
- <viro@zeniv.linux.org.uk>, "Christian Brauner" <brauner@kernel.org>, "Jan
- Kara" <jack@suse.cz>
-X-Mailer: aerc 0.20.1
-References: <20250813-core-cstr-fanout-1-v3-0-a15eca059c51@gmail.com>
- <20250813-core-cstr-fanout-1-v3-9-a15eca059c51@gmail.com>
-In-Reply-To: <20250813-core-cstr-fanout-1-v3-9-a15eca059c51@gmail.com>
+References: <20250813-core-cstr-cstrings-v2-0-00be80fc541b@gmail.com>
+ <34d384af-6123-4602-bde0-85ca3d14fe09@sirena.org.uk>
+Message-ID: <aJ2dST9C8QLUcftA@google.com>
+Subject: Re: [PATCH v2 00/19] rust: replace `kernel::c_str!` with C-Strings
+From: Alice Ryhl <aliceryhl@google.com>
+To: Mark Brown <broonie@debian.org>
+Cc: Tamir Duberstein <tamird@gmail.com>,
+ "Rafael J. Wysocki" <rafael@kernel.org>, 
+ Viresh Kumar <viresh.kumar@linaro.org>, Miguel Ojeda <ojeda@kernel.org>, 
+ Alex Gaynor <alex.gaynor@gmail.com>, Boqun Feng <boqun.feng@gmail.com>, 
+ Gary Guo <gary@garyguo.net>, 
+ "=?utf-8?B?QmrDtnJu?= Roy Baron" <bjorn3_gh@protonmail.com>,
+ Benno Lossin <lossin@kernel.org>, 
+ Andreas Hindborg <a.hindborg@kernel.org>, Trevor Gross <tmgross@umich.edu>, 
+ Danilo Krummrich <dakr@kernel.org>,
+ Maarten Lankhorst <maarten.lankhorst@linux.intel.com>, 
+ Maxime Ripard <mripard@kernel.org>, Thomas Zimmermann <tzimmermann@suse.de>, 
+ David Airlie <airlied@gmail.com>, Simona Vetter <simona@ffwll.ch>, 
+ FUJITA Tomonori <fujita.tomonori@gmail.com>, Andrew Lunn <andrew@lunn.ch>, 
+ Heiner Kallweit <hkallweit1@gmail.com>, Russell King <linux@armlinux.org.uk>, 
+ "David S. Miller" <davem@davemloft.net>, Eric Dumazet <edumazet@google.com>, 
+ Jakub Kicinski <kuba@kernel.org>, Paolo Abeni <pabeni@redhat.com>, 
+ Michael Turquette <mturquette@baylibre.com>, Stephen Boyd <sboyd@kernel.org>, 
+ Breno Leitao <leitao@debian.org>,
+ Greg Kroah-Hartman <gregkh@linuxfoundation.org>, 
+ Luis Chamberlain <mcgrof@kernel.org>, Russ Weight <russ.weight@linux.dev>, 
+ Dave Ertman <david.m.ertman@intel.com>, Ira Weiny <ira.weiny@intel.com>, 
+ Leon Romanovsky <leon@kernel.org>, Bjorn Helgaas <bhelgaas@google.com>, 
+ "Krzysztof =?utf-8?Q?Wilczy=C5=84ski?=" <kwilczynski@kernel.org>,
+ Arnd Bergmann <arnd@arndb.de>, 
+ Brendan Higgins <brendan.higgins@linux.dev>, David Gow <davidgow@google.com>, 
+ Rae Moar <rmoar@google.com>, Jens Axboe <axboe@kernel.dk>, 
+ Alexandre Courbot <acourbot@nvidia.com>,
+ Alexander Viro <viro@zeniv.linux.org.uk>, 
+ Christian Brauner <brauner@kernel.org>, Jan Kara <jack@suse.cz>,
+ Liam Girdwood <lgirdwood@gmail.com>, 
+ linux-pm@vger.kernel.org, linux-kernel@vger.kernel.org, 
+ rust-for-linux@vger.kernel.org, nouveau@lists.freedesktop.org, 
+ dri-devel@lists.freedesktop.org, netdev@vger.kernel.org, 
+ linux-clk@vger.kernel.org, linux-pci@vger.kernel.org, 
+ linux-kselftest@vger.kernel.org, kunit-dev@googlegroups.com, 
+ linux-block@vger.kernel.org, linux-fsdevel@vger.kernel.org
+Content-Type: text/plain; charset="utf-8"
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -75,38 +114,24 @@ List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-On Wed Aug 13, 2025 at 5:39 PM CEST, Tamir Duberstein wrote:
-> Reduce coupling to implementation details of the formatting machinery by
-> avoiding direct use for `core`'s formatting traits and macros.
->
-> Signed-off-by: Tamir Duberstein <tamird@gmail.com>
+On Wed, Aug 13, 2025 at 09:11:51PM +0100, Mark Brown wrote:
+> On Wed, Aug 13, 2025 at 11:59:10AM -0400, Tamir Duberstein wrote:
+> > This series depends on step 3[0] which depends on steps 2a[1] and 2b[2]
+> > which both depend on step 1[3].
+> > 
+> > This series also has a minor merge conflict with a small change[4] that
+> > was taken through driver-core-testing. This series is marked as
+> > depending on that change; as such it contains the post-conflict patch.
+> > 
+> > Subsystem maintainers: I would appreciate your `Acked-by`s so that this
+> > can be taken through Miguel's tree (where the previous series must go).
+> 
+> Something seems to have gone wrong with your posting, both my mail
+> server and the mail archives stop at patch 15.  If it were just rate
+> limiting or greylisting I'd have expected things to have sorted
+> themselves out by now for one or the other.
 
-Reviewed-by: Benno Lossin <lossin@kernel.org>
+Tamir mentioned to me that he ran into a daily limit on the number of
+emails he could send.
 
-> ---
->  rust/kernel/device/property.rs | 23 ++++++++++++-----------
->  1 file changed, 12 insertions(+), 11 deletions(-)
-   =20
-> @@ -413,9 +414,9 @@ fn fmt(&self, f: &mut core::fmt::Formatter<'_>) -> co=
-re::fmt::Result {
->                  // SAFETY: `fwnode_get_name_prefix` returns null or a
->                  // valid C string.
->                  let prefix =3D unsafe { CStr::from_char_ptr(prefix) };
-> -                write!(f, "{prefix}")?;
-> +                fmt::Display::fmt(prefix, f)?;
->              }
-> -            write!(f, "{}", fwnode.display_name())?;
-
-So we're not able to use `write!` with our `Display` or did you also
-write a `FmtAdapter` wrapper for that? (don't think we need it now, just
-wanted to know if we have this issue possibly in the future)
-
----
-Cheers,
-Benno
-
-> +            fmt::Display::fmt(&fwnode.display_name(), f)?;
->          }
-> =20
->          Ok(())
-
+Alice
