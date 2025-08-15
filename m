@@ -2,66 +2,66 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id 8AABCCBAD85
-	for <lists+nouveau@lfdr.de>; Sat, 13 Dec 2025 13:45:11 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id F3492CBAAAA
+	for <lists+nouveau@lfdr.de>; Sat, 13 Dec 2025 13:42:17 +0100 (CET)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 5150410EB19;
-	Sat, 13 Dec 2025 12:41:31 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 4DEB210EA69;
+	Sat, 13 Dec 2025 12:41:00 +0000 (UTC)
 Authentication-Results: gabe.freedesktop.org;
-	dkim=permerror (0-bit key) header.d=gmail.com header.i=@gmail.com header.b="Q9TRTGJM";
+	dkim=permerror (0-bit key) header.d=gmail.com header.i=@gmail.com header.b="bRBHMhdX";
 	dkim-atps=neutral
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
 Received: from mail-pf1-f174.google.com (mail-pf1-f174.google.com
  [209.85.210.174])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 75E3410E1AB
- for <nouveau@lists.freedesktop.org>; Fri, 15 Aug 2025 05:32:37 +0000 (UTC)
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 88C0910E1AB
+ for <nouveau@lists.freedesktop.org>; Fri, 15 Aug 2025 05:32:42 +0000 (UTC)
 Received: by mail-pf1-f174.google.com with SMTP id
- d2e1a72fcca58-76e39ec6f52so1205485b3a.1
- for <nouveau@lists.freedesktop.org>; Thu, 14 Aug 2025 22:32:37 -0700 (PDT)
+ d2e1a72fcca58-76e2ead794eso1436547b3a.2
+ for <nouveau@lists.freedesktop.org>; Thu, 14 Aug 2025 22:32:42 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1755235957; x=1755840757; darn=lists.freedesktop.org;
+ d=gmail.com; s=20230601; t=1755235962; x=1755840762; darn=lists.freedesktop.org;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=QXSg086tVDmosf88eO3jx6G+rWDU/dGxOYa3gmyNHdQ=;
- b=Q9TRTGJMmG7nxPiilG5yuJaTLfKzSlzyYGK7leGEQSNFjMdE+2FxxiqYFU8LYPFZ+5
- ATQr17tyc1fMigvN5zFG4VVDU0eU/2iyac79Kg1Oq69A231Alwfifj6i4vLr56d2Px98
- 72KtveReP/6RCzmUx+bMRilmIorxVea4G1F14MSzlLJxZl+Kx6AjO1FRoYVnQIqzhL+/
- Wpec/OBx8mD15QuD7MHpHQKJ6VJHfakZiKt/iWaiRKxi26YGkVsQP4WkIgZF7V5fShNw
- RHC3Z+Y3JaAiWONu4TO6GEBcJA4D0zhTHSuVJcvGk3z+VJjF7TMln+L/BNJQBYGL4Ns9
- q4Eg==
+ bh=5ItkcH2oOrHmGXKS1kIzQCIhIchwgBZlnH8595tjW2Y=;
+ b=bRBHMhdX2gk2QPBv5ZxlboBlTsi9cg810W+n0+8dEa02ccdg7jUF+/j4hY5YXhdG23
+ 2N7R0vINonu/ep7vgUWYgLtmPqyZs6AVLvqRcP0lm0zQT/DIc0V0/751Whs0MSO+DAgS
+ Q5K6jytZS06DLA1QIXRMMTlgxcC+xdOhYOsgCXftIHa5UP+abEdPWwD5a9+t5MGuJYf8
+ DcaRz5f8ioEVaMk5krwEpTjRw0xnvYNTCmF6zYRRVkECCnZslD2W4uCZdlkWV0h9jw5z
+ Ml6+E0cgAoRPgOtHqEK8g+My6+HdlMPuzB1XjUhIqkl4N5ogaX5pgzgkBs1SshBdE2Do
+ RdFw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1755235957; x=1755840757;
+ d=1e100.net; s=20230601; t=1755235962; x=1755840762;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=QXSg086tVDmosf88eO3jx6G+rWDU/dGxOYa3gmyNHdQ=;
- b=d1FbY2V71jibbYbQW0rWom2MJ9GAm8JVsmLpS70yg6Vt430fWfeA2iQgyPxi9sbDKO
- 9weX3xk7Kvt3XhxQ4y6p0dOWyaVrJRi1plMFVBBImUz+UCvIeBrNnnt5EdlfqHG8nOTa
- Qb4Q2Vwnq3Fk83IynCo0bF3Kw+f9K/3PoEP+VswJ4T86fskaQ6gKppmcHq52lveLG/1+
- bF5wN7zVuCeLDlSFKIFruO+gZRMJJqoTZW6UnVZkDZ0XG3cyY7z/Wv9Yx94u/KAdZXIb
- SGw5Z2pHwHtr3L4bLmJuxfASuz0qgzpv6Dwt2pjSVl1KQ0wifwoamryouP5nXT/zys9i
- 9gUw==
+ bh=5ItkcH2oOrHmGXKS1kIzQCIhIchwgBZlnH8595tjW2Y=;
+ b=g8eIBb6Rvu7sXHvhcyEULSVBoqvPKCfRz2SoBCL2yQa8se+ro8piE76qQx8/ZIxSgh
+ 9k2YSHg1kXLkPcBARmgA6eYH9t+RKf83JsxuRxiww2k3EgfcEma1AV50ChiKdpOCzyPy
+ dBm1OqaQzjqCB65jVINfZGIunGyj3YX/lupQyPbmzeLsCL23bJYodChjLX4vdBHx8z1V
+ vDTgjvPf4Y6V59BISN+8nBdU3oCiUF9X+xD6jaWHjc74JwGNT7e0vCuSIPeEHwCcI1Iu
+ /dUixYYct5IhMJIpaxpV4riOFwYe6jCcdoJG48Ip8waYswQH8DXUbyJHJeecl6FkdCOx
+ Bd4g==
 X-Forwarded-Encrypted: i=1;
- AJvYcCWAmFLEhfY7T3q7gDNkITaEkAm7SOE9t5o8/YueyJPnfocdv3JhGgbk7y03Z+PcZsVVHTeAAdre@lists.freedesktop.org
-X-Gm-Message-State: AOJu0YyeAcnGlwCFiUbFGTXnvlEObilCOza6CE+bURjTc8stC9h7Cuko
- rMdCz4cNBSBBZYrhqR9NYT9I5SMADoqzuMgReQfTXZhYwFvUh600L0i/
-X-Gm-Gg: ASbGncshY1AclNEMqjwgcybP8oqaORP8QjonpP9Nqsv9UueCXm4mxAGIRYBxa5Ck2lH
- KYgwx9y2yLb5oaIHTuf9FATrUULAqSprleyAN32cI4WVfUfY8HLqJsQD/E83MRkx8Y89Xg8hv4l
- KRCSXIbT8ZWfZLps+M1n5hpPHNMgcLtsknxuP3PwU8HRJooNxAtsnxfViVhDq55yvk6ZjIrFklA
- XEAv/6gfHdL4UOGzSMqASvTLJ2LtLz0p7JtBMYYPovlckXt3eCilqWWdMP0R5JBkGzyQ+htkw9J
- GlUs1AGhYq+hyHeEODRoxQvzwYWQhOXzBEYNLhVg0QIdNjQgXqkux3jqVTC45kb6nzziAehOYd+
- 5YGhF12Hr55feXQmcRkeOYEd6rge1yhCojB2c4OkhUB0=
-X-Google-Smtp-Source: AGHT+IG4HU8MP0xJ+330waF1yTeFRAjq/5O+h8g/Lloz/jm6OtLbcslz6UUMOu+0mWZdRzPENl618A==
-X-Received: by 2002:a05:6a00:14c8:b0:76b:42e5:fa84 with SMTP id
- d2e1a72fcca58-76e446ee0afmr1193988b3a.7.1755235956849; 
- Thu, 14 Aug 2025 22:32:36 -0700 (PDT)
+ AJvYcCVjLpZHTDRtmGjd7ZNuNpAoesr7VtQraK6nfnScqeaX48iXVIr1RBtxwrfy1rCEK5VmtOREipth@lists.freedesktop.org
+X-Gm-Message-State: AOJu0Yxb2XYcVNagdkn95sg2PZtaRnkgXGa722jHjejPaVAp2YcDwzQw
+ +GFRG1nwD38ok99q6eAgazXDpIoA6d83trkOevf7CNkDww5N3Q2/DNfRTfL/YQ==
+X-Gm-Gg: ASbGnct++YR+YkswwWmDipS3jfWa7M8DY0zEa8FOetZvZlGM6QZmGAa/mku9ZSuy9oY
+ D8SGZNYA316yvO08qdT69906mLcK5RGcm67KrBB2UkjFW5cQavVb+KPVP5nFx8x0z0vc8953O0b
+ IYgFNIs5imQmjseKnkkKZrrhgfiYJAUj/k3pcwQjwLFzXZAOl52Z3GhobaGZ6TB9ilVtAs2qoJ5
+ rdOkb8c/e3w3MJmiWmRO/gR2AaEIDR6xekeFUOd+Zv3y6SdaYeEDqeF3OV/3RZb7eze7HJoTgVs
+ cHpJF+kSB2dq/piNdRotTernEpSDxjXhS6w6YDHZHSCHcMjExP5fU9QqhzBbFaSC0QcZE0y/cK3
+ WPhEO1OwzrpvCf5muBz0U6IqdOfNt9oPMSqAWPxQw/bz7ROMz2K876g==
+X-Google-Smtp-Source: AGHT+IG6RpS5kBDo1uNCaTTuFsahy7gN7SvHmXtqbjLO2J8QO2AfC+R3FC64Kl85jAXYtBoEFXRCqg==
+X-Received: by 2002:a05:6a00:92a4:b0:76b:fcac:f2ad with SMTP id
+ d2e1a72fcca58-76e44847105mr1187592b3a.20.1755235961994; 
+ Thu, 14 Aug 2025 22:32:41 -0700 (PDT)
 Received: from localhost.localdomain ([112.149.32.52])
  by smtp.gmail.com with ESMTPSA id
- d2e1a72fcca58-76e4556692bsm335234b3a.61.2025.08.14.22.32.31
+ d2e1a72fcca58-76e4556692bsm335234b3a.61.2025.08.14.22.32.37
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 14 Aug 2025 22:32:36 -0700 (PDT)
+ Thu, 14 Aug 2025 22:32:41 -0700 (PDT)
 From: Jesung Yang <y.j3ms.n@gmail.com>
 To: Miguel Ojeda <ojeda@kernel.org>, Alex Gaynor <alex.gaynor@gmail.com>,
  Boqun Feng <boqun.feng@gmail.com>, Gary Guo <gary@garyguo.net>,
@@ -71,9 +71,9 @@ To: Miguel Ojeda <ojeda@kernel.org>, Alex Gaynor <alex.gaynor@gmail.com>,
  Danilo Krummrich <dakr@kernel.org>, Alexandre Courbot <acourbot@nvidia.com>
 Cc: linux-kernel@vger.kernel.org, rust-for-linux@vger.kernel.org,
  nouveau@lists.freedesktop.org, Jesung Yang <y.j3ms.n@gmail.com>
-Subject: [PATCH v2 2/5] rust: macros: extend custom `quote!()` macro
-Date: Fri, 15 Aug 2025 05:32:12 +0000
-Message-Id: <948a28f26a0e9924d82eb1d8d377e3ddc7335b24.1755235180.git.y.j3ms.n@gmail.com>
+Subject: [PATCH v2 3/5] rust: macros: prefix variable `span` with underscore
+Date: Fri, 15 Aug 2025 05:32:13 +0000
+Message-Id: <1455d8540acc62ad3acc1dd8ead71b1ad38935da.1755235180.git.y.j3ms.n@gmail.com>
 X-Mailer: git-send-email 2.39.5
 In-Reply-To: <cover.1755235180.git.y.j3ms.n@gmail.com>
 References: <cover.1755235180.git.y.j3ms.n@gmail.com>
@@ -94,57 +94,42 @@ List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-Extend the `quote_spanned!()` macro to support additional punctuation
-tokens: `->`, `<`, `>`, and `==`. This symbols are commonly needed when
-dealing with functions, generic bounds, and equality comparisons.
+Prefix the variable `span` in `quote_spanned!()` macro with an
+underscore to silence unused variable warnings.
+
+The warning occurs when the macro is used without any uninterpolated
+identifiers. For example:
+
+    // Triggers a warning: "unused variable: `span`"
+    quote! { #foo }
+
+    // This is fine
+    quote! { Some(#foo) }
+
+There is no good reason to disallow such quoting patterns, so fix the
+warning instead.
 
 Tested-by: Alexandre Courbot <acourbot@nvidia.com>
 Signed-off-by: Jesung Yang <y.j3ms.n@gmail.com>
 ---
- rust/macros/quote.rs | 30 ++++++++++++++++++++++++++++++
- 1 file changed, 30 insertions(+)
+ rust/macros/quote.rs | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
 
 diff --git a/rust/macros/quote.rs b/rust/macros/quote.rs
-index 8a89f0b1e785..24764b04a07d 100644
+index 24764b04a07d..75367a93e0d3 100644
 --- a/rust/macros/quote.rs
 +++ b/rust/macros/quote.rs
-@@ -150,6 +150,36 @@ macro_rules! quote_spanned {
-         ));
-         quote_spanned!(@proc $v $span $($tt)*);
-     };
-+    (@proc $v:ident $span:ident -> $($tt:tt)*) => {
-+        $v.push(::proc_macro::TokenTree::Punct(
-+                ::proc_macro::Punct::new('-', ::proc_macro::Spacing::Joint)
-+        ));
-+        $v.push(::proc_macro::TokenTree::Punct(
-+                ::proc_macro::Punct::new('>', ::proc_macro::Spacing::Alone)
-+        ));
-+        quote_spanned!(@proc $v $span $($tt)*);
-+    };
-+    (@proc $v:ident $span:ident < $($tt:tt)*) => {
-+        $v.push(::proc_macro::TokenTree::Punct(
-+                ::proc_macro::Punct::new('<', ::proc_macro::Spacing::Alone)
-+        ));
-+        quote_spanned!(@proc $v $span $($tt)*);
-+    };
-+    (@proc $v:ident $span:ident > $($tt:tt)*) => {
-+        $v.push(::proc_macro::TokenTree::Punct(
-+                ::proc_macro::Punct::new('>', ::proc_macro::Spacing::Alone)
-+        ));
-+        quote_spanned!(@proc $v $span $($tt)*);
-+    };
-+    (@proc $v:ident $span:ident == $($tt:tt)*) => {
-+        $v.push(::proc_macro::TokenTree::Punct(
-+                ::proc_macro::Punct::new('=', ::proc_macro::Spacing::Joint)
-+        ));
-+        $v.push(::proc_macro::TokenTree::Punct(
-+                ::proc_macro::Punct::new('=', ::proc_macro::Spacing::Alone)
-+        ));
-+        quote_spanned!(@proc $v $span $($tt)*);
-+    };
-     (@proc $v:ident $span:ident = $($tt:tt)*) => {
-         $v.push(::proc_macro::TokenTree::Punct(
-                 ::proc_macro::Punct::new('=', ::proc_macro::Spacing::Alone)
+@@ -57,8 +57,8 @@ macro_rules! quote_spanned {
+         #[allow(clippy::vec_init_then_push)]
+         {
+             tokens = ::std::vec::Vec::new();
+-            let span = $span;
+-            quote_spanned!(@proc tokens span $($tt)*);
++            let _span = $span;
++            quote_spanned!(@proc tokens _span $($tt)*);
+         }
+         ::proc_macro::TokenStream::from_iter(tokens)
+     }};
 -- 
 2.39.5
 
