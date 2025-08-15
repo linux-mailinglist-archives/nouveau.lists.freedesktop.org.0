@@ -2,109 +2,81 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id 2FB89CBAA8B
-	for <lists+nouveau@lfdr.de>; Sat, 13 Dec 2025 13:42:12 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 7E12ACBAE0F
+	for <lists+nouveau@lfdr.de>; Sat, 13 Dec 2025 13:45:44 +0100 (CET)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id E140810EA7C;
-	Sat, 13 Dec 2025 12:41:00 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id EE4C210EBBD;
+	Sat, 13 Dec 2025 12:41:37 +0000 (UTC)
 Authentication-Results: gabe.freedesktop.org;
-	dkim=permerror (0-bit key) header.d=gmail.com header.i=@gmail.com header.b="Rl3mgwzy";
+	dkim=permerror (0-bit key) header.d=gmail.com header.i=@gmail.com header.b="hLk27NuC";
 	dkim-atps=neutral
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from mail-pl1-f175.google.com (mail-pl1-f175.google.com
- [209.85.214.175])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 4F5A210E223;
- Thu, 14 Aug 2025 09:07:35 +0000 (UTC)
-Received: by mail-pl1-f175.google.com with SMTP id
- d9443c01a7336-24458276e4cso911375ad.3; 
- Thu, 14 Aug 2025 02:07:35 -0700 (PDT)
+Received: from mail-pf1-f179.google.com (mail-pf1-f179.google.com
+ [209.85.210.179])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id D27C710E1AB
+ for <nouveau@lists.freedesktop.org>; Fri, 15 Aug 2025 05:32:26 +0000 (UTC)
+Received: by mail-pf1-f179.google.com with SMTP id
+ d2e1a72fcca58-76e34c4ce54so1209298b3a.0
+ for <nouveau@lists.freedesktop.org>; Thu, 14 Aug 2025 22:32:26 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1755162455; x=1755767255; darn=lists.freedesktop.org;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=L58BGBn53CdEaQI/pHX66dG5GkpXtAAIQcYXknidNg4=;
- b=Rl3mgwzyvNCvsFTVlflzaMUGot0E542BdkTWnGf8ytA8BGkGFiQ6WCrceIOY55l+iX
- S/a/M2e/QXxfstWL0U3Yze7lmS+f8iukMoUlhEK4BKNNWt9qK8Nv8DW5qcTNXXv9EGci
- QaiPt3To9gNmvhYke2dEuzotFdRL4c1FzIfEA6SHn5v2XwooiFStJLTxPgvvx/tMEJji
- J7enIkGcm0bHIOhicQatjTdPYTTRxcOVQ8oFySLV/aYOjj/f8o1RtiYJtWuwTlM+e8Fb
- uWwdPZOT2rJYoM78Vs+oOvblTnIo0Yr2EV4HPvbl6DsQHL07LOeMv3nFjy0Bblsm/DKq
- 9hwA==
+ d=gmail.com; s=20230601; t=1755235946; x=1755840746; darn=lists.freedesktop.org;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=Tj8alhnC42zOgdWmbReIStJyeIvcsx7DOGYTDPXIH3o=;
+ b=hLk27NuC4mznhMaNo1gDrZ+TI7CQktGlP7hP7eR40lXs1GgqpF8X06Un5kSVwrwetP
+ j2Ulz0A2CQHHvajo8EWb6oUW8Xm+Q1e/89fOjOK2HQiRSuThhxlUTVl+aD9etzqxmH4j
+ jjBVLyHfiDH6oaPgUNHc1MGkDFpcqHjx3EGY1dCdNYClV5JNeO8Q1jPdjQraMjQC8Vv/
+ OC/1Cp7FoVCBri/JXk5mnJliT0iRl5WzG3CQ2x20wr8zMr/VOU63RgKEyEvNTLmXcwtb
+ IsO3E0Prxw+X9Rrx140f5qWwiu0qTsr3Esrl3XPDJZ1u4iKVse/93gyh9PqUV+Lr0qpf
+ BLCA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1755162455; x=1755767255;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=L58BGBn53CdEaQI/pHX66dG5GkpXtAAIQcYXknidNg4=;
- b=wa2f+tLNLwVT/gWpQ7jhAUhf9/dwTU+whnoMxxe84Kph3/SiJVF7w0tnGAZ6/VT1nl
- UfoTgyI2oPX5eBkRGvBcBwD+6j7Uw29mAzPD3ugty5wonzna/uzbkP7Pc2jKRFGxp8pK
- 2A0m8Ar6uwSXeCa+hEer68DqB7rJzO1FjBqhUvx6AxNnfNA+AqrnBLoRpQCavuFzFU1u
- HRnhzLtlmG+kvf9bmzQFU6Mfe9qS/Hn/Er2jXGrXgFTaja6YoRhD1I2wSvXOxYiq9keD
- 3k+7d3zuPvKACdDi8sMg6qes8U6SGAlM8LEnoNI47WxfljXYIYfADlFUyxFIUIycb5WO
- AyXA==
+ d=1e100.net; s=20230601; t=1755235946; x=1755840746;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=Tj8alhnC42zOgdWmbReIStJyeIvcsx7DOGYTDPXIH3o=;
+ b=abFNvlMBRSw91o1xcii7N8A6fAdhBIUfbsGLr7ECCzEECCvZyGP3+AKnLai/rJGLY4
+ ROMk7p/VNwqOQUGq6RiAa9td4Mw5VuIOrLp6qnSGG8H/WzlCzI1vDws6lxXJq7cyMPy8
+ Y/ig46TIlhguPKQo4sCJfg3B9Mxo4xFBL+MXyx6+0a8WiOzUvDacIHyj/1RkJTRKzLdH
+ PBaWN2YCKA+2Ca1T1ZG20NlMVRtY0RIMdELIzz54+Fd+USwP5WElK1dFNDaEcfnk+YyK
+ mP/Ch8ehrshAvHJiG40g6JsAUoqnIsw7EgO3ckm/m/ifaXtSYtEvCGTysUDfcb8R0mi4
+ 7f6Q==
 X-Forwarded-Encrypted: i=1;
- AJvYcCWTJN9HtdS/NYqa9PR2NUIh+aJ7mC+hSzyeHfUJ913MlXIm1r6ZGKc5R2fGXL9N3gwj4Z6cDHsJXSg=@lists.freedesktop.org,
- AJvYcCWuZYhm98MLocv8ZCaiPY8S2XlKlEqcI5I/rzq+trsPfcZRf5wNlb6Vys09IM5FYTm48VXw2/wt+Q==@lists.freedesktop.org
-X-Gm-Message-State: AOJu0Yx2gb7Xy3iO6h9kqusqI0yQO1ert3X9MJjCyGM2JXvgNlBw0a0Y
- cu0n4lsJ+eYRvvDW4UIM9Arfe6ktp/aoF2rNTQSN5c0YduQpraGvHaW/s4sJW4dfJzGaSR3c1lD
- PqGJxVNATD434aV4grsXBEJ951ylJ0P4=
-X-Gm-Gg: ASbGncutOYj1bb8+pOO/TH8/HdDEWmvENGxrvwZBFbtN/uQDvhuVh5y2ObV4tclfNb5
- 05/DG3sxDFLRCrvpR0nG55ykKvrigr+LcIUm60KADQ5A8pvKXdtjyceoURGz5qAJeWTDUxbWep/
- 4iqrs6fJYalRkLfR+32Hs4/M/uLRpcMHWdWNFzGtl4lm467nX13NEbcdTIS8LQUjf9QFTsv+BxE
- PIH
-X-Google-Smtp-Source: AGHT+IGz6bvQQDm0FDjw3b6Z4zK6LWUctdhJrkeBml6MEiQLxKVKVm/2E3KeNDssnbiZd1rTjK+/reiEgrFQf4jGtow=
-X-Received: by 2002:a17:902:ec8d:b0:240:5c13:979a with SMTP id
- d9443c01a7336-2430d22a83dmr44771485ad.9.1755162454741; Thu, 14 Aug 2025
- 02:07:34 -0700 (PDT)
+ AJvYcCWGTY+1PZJd0kU1AV9rK1cQFZd5RctPvFWEI69ziXO+MYS5l3uj2d62lUlzK6budfVBosZ+xiek@lists.freedesktop.org
+X-Gm-Message-State: AOJu0YyUwHYJ2qJ9gOo2EPVBOkstjiBGU0QHy6+orXjZsFcPqdrFubsD
+ ntcjzKS69dvp/Zl6szWIowarrm7WhE7Y2QUogOakdJzIIRNOiKtlZVKzTzmCl82P
+X-Gm-Gg: ASbGncu4iGHMhxorArXg9JoqtN1H3XaqVioUNGuJYjQKa3xIn5M/Zfy6o+PcPwBsRJW
+ 1EW5jVAZbrtqNpyPFkCPUtCRBwWA/nHp/f3eCNFHbkuIKfwwJBnWdOWtaTL3IoZZW0VyVGkQR5b
+ ie7nvPkVZpNqTReib/Z1ummXRpZzl0hPb4tH0rDGsWshNpVpNpY59ErKdqQ7Xayig6YN2gqoAl5
+ RUJcGpjeXhXaGHwkVclQnsY/E9TGGEQap3hJwNOvLMxvqMCsEf34quVNhRqvJlTMpwLU8SgcQvc
+ +ZMvRchejoOmJa4W0gRfY9Bxzyz57WIOogNAPPEe2uEtQziHtLt4Qs460+B16bjCSsR0kDEM3Iq
+ 1kemykjeKzYQIYYveFmd1mVnxWWT1D52xeVYssPoOnUA=
+X-Google-Smtp-Source: AGHT+IFCsRaNxSKfgdKIzJGdC3kmDJE1saL5U/096QghmpyQmx94QRHF2hQOXKrFPWiqlWYXXcOugw==
+X-Received: by 2002:a05:6a00:6f1a:b0:76c:44b5:4f62 with SMTP id
+ d2e1a72fcca58-76e320e4f97mr7429186b3a.0.1755235946165; 
+ Thu, 14 Aug 2025 22:32:26 -0700 (PDT)
+Received: from localhost.localdomain ([112.149.32.52])
+ by smtp.gmail.com with ESMTPSA id
+ d2e1a72fcca58-76e4556692bsm335234b3a.61.2025.08.14.22.32.20
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Thu, 14 Aug 2025 22:32:25 -0700 (PDT)
+From: Jesung Yang <y.j3ms.n@gmail.com>
+To: Miguel Ojeda <ojeda@kernel.org>, Alex Gaynor <alex.gaynor@gmail.com>,
+ Boqun Feng <boqun.feng@gmail.com>, Gary Guo <gary@garyguo.net>,
+ =?UTF-8?q?Bj=C3=B6rn=20Roy=20Baron?= <bjorn3_gh@protonmail.com>,
+ Benno Lossin <lossin@kernel.org>, Andreas Hindborg <a.hindborg@kernel.org>,
+ Alice Ryhl <aliceryhl@google.com>, Trevor Gross <tmgross@umich.edu>,
+ Danilo Krummrich <dakr@kernel.org>, Alexandre Courbot <acourbot@nvidia.com>
+Cc: linux-kernel@vger.kernel.org, rust-for-linux@vger.kernel.org,
+ nouveau@lists.freedesktop.org, Jesung Yang <y.j3ms.n@gmail.com>
+Subject: [PATCH v2 0/5] rust: add `TryFrom` and `Into` derive macros
+Date: Fri, 15 Aug 2025 05:32:10 +0000
+Message-Id: <cover.1755235180.git.y.j3ms.n@gmail.com>
+X-Mailer: git-send-email 2.39.5
 MIME-Version: 1.0
-References: <20250813-core-cstr-cstrings-v2-0-00be80fc541b@gmail.com>
- <34d384af-6123-4602-bde0-85ca3d14fe09@sirena.org.uk>
- <aJ2dST9C8QLUcftA@google.com>
-In-Reply-To: <aJ2dST9C8QLUcftA@google.com>
-From: Miguel Ojeda <miguel.ojeda.sandonis@gmail.com>
-Date: Thu, 14 Aug 2025 11:07:23 +0200
-X-Gm-Features: Ac12FXw9McZU8Dlo3fmof7Lor15J3uB_TM7gEYyMiiYtjURPvTaxggH_LYJAg0o
-Message-ID: <CANiq72nnXG8mzGD5ydu1pMpaBAHTWvfQWSo0w38xefu=1JSURA@mail.gmail.com>
-Subject: Re: [PATCH v2 00/19] rust: replace `kernel::c_str!` with C-Strings
-To: Alice Ryhl <aliceryhl@google.com>
-Cc: Mark Brown <broonie@debian.org>, Tamir Duberstein <tamird@gmail.com>, 
- "Rafael J. Wysocki" <rafael@kernel.org>, Viresh Kumar <viresh.kumar@linaro.org>,
- Miguel Ojeda <ojeda@kernel.org>, Alex Gaynor <alex.gaynor@gmail.com>, 
- Boqun Feng <boqun.feng@gmail.com>, Gary Guo <gary@garyguo.net>, 
- =?UTF-8?Q?Bj=C3=B6rn_Roy_Baron?= <bjorn3_gh@protonmail.com>, 
- Benno Lossin <lossin@kernel.org>, Andreas Hindborg <a.hindborg@kernel.org>, 
- Trevor Gross <tmgross@umich.edu>, Danilo Krummrich <dakr@kernel.org>, 
- Maarten Lankhorst <maarten.lankhorst@linux.intel.com>,
- Maxime Ripard <mripard@kernel.org>, 
- Thomas Zimmermann <tzimmermann@suse.de>, David Airlie <airlied@gmail.com>,
- Simona Vetter <simona@ffwll.ch>, 
- FUJITA Tomonori <fujita.tomonori@gmail.com>, Andrew Lunn <andrew@lunn.ch>, 
- Heiner Kallweit <hkallweit1@gmail.com>, Russell King <linux@armlinux.org.uk>, 
- "David S. Miller" <davem@davemloft.net>, Eric Dumazet <edumazet@google.com>, 
- Jakub Kicinski <kuba@kernel.org>, Paolo Abeni <pabeni@redhat.com>, 
- Michael Turquette <mturquette@baylibre.com>, Stephen Boyd <sboyd@kernel.org>, 
- Breno Leitao <leitao@debian.org>,
- Greg Kroah-Hartman <gregkh@linuxfoundation.org>, 
- Luis Chamberlain <mcgrof@kernel.org>, Russ Weight <russ.weight@linux.dev>, 
- Dave Ertman <david.m.ertman@intel.com>, Ira Weiny <ira.weiny@intel.com>, 
- Leon Romanovsky <leon@kernel.org>, Bjorn Helgaas <bhelgaas@google.com>, 
- =?UTF-8?Q?Krzysztof_Wilczy=C5=84ski?= <kwilczynski@kernel.org>, 
- Arnd Bergmann <arnd@arndb.de>, Brendan Higgins <brendan.higgins@linux.dev>, 
- David Gow <davidgow@google.com>, Rae Moar <rmoar@google.com>,
- Jens Axboe <axboe@kernel.dk>, Alexandre Courbot <acourbot@nvidia.com>,
- Alexander Viro <viro@zeniv.linux.org.uk>, 
- Christian Brauner <brauner@kernel.org>, Jan Kara <jack@suse.cz>,
- Liam Girdwood <lgirdwood@gmail.com>, 
- linux-pm@vger.kernel.org, linux-kernel@vger.kernel.org, 
- rust-for-linux@vger.kernel.org, nouveau@lists.freedesktop.org, 
- dri-devel@lists.freedesktop.org, netdev@vger.kernel.org, 
- linux-clk@vger.kernel.org, linux-pci@vger.kernel.org, 
- linux-kselftest@vger.kernel.org, kunit-dev@googlegroups.com, 
- linux-block@vger.kernel.org, linux-fsdevel@vger.kernel.org
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-X-Mailman-Approved-At: Sat, 13 Dec 2025 12:40:47 +0000
+Content-Transfer-Encoding: 8bit
+X-Mailman-Approved-At: Sat, 13 Dec 2025 12:40:45 +0000
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -119,16 +91,48 @@ List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-On Thu, Aug 14, 2025 at 10:24=E2=80=AFAM Alice Ryhl <aliceryhl@google.com> =
-wrote:
->
-> Tamir mentioned to me that he ran into a daily limit on the number of
-> emails he could send.
+This patch series introduces derive macros for `TryFrom` and `Into`
+traits.
 
-He is posting the updates around the migration in Zulip:
+A few enhancements were made to the custom `quote!()` macro to write
+the derive macro. These include support for additional punctuation
+tokens and a fix for an unused variable warning when quoting simple
+forms. Detailed information about these enhancements is provided in the
+relevant patches.
 
-    https://rust-for-linux.zulipchat.com/#narrow/channel/288089-General/top=
-ic/CStr.20migration/near/527957336
+This series builds on the previous work [1], where the `FromPrimitive`
+trait was considered too heavy for the current use cases. In response
+to the emerging need for functionality similar to `ToPrimitive`, this
+series also implements the `Into` derive macro.
 
-Cheers,
-Miguel
+The original discussion can be found on Zulip [2].
+
+[1] https://lore.kernel.org/rust-for-linux/cover.1750689857.git.y.j3ms.n@gmail.com/
+[2] https://rust-for-linux.zulipchat.com/#narrow/channel/288089/topic/x/near/524335626
+
+Changes in v2 (no functional changes):
+  - Split the patch "rust: macros: extend custom `quote!()` macro"
+    into two separate patches.
+  - Remove unnecessary spaces between tags.
+  - Use a consistent commit subject prefix: "rust: macros:".
+  - Add Tested-by tags.
+
+
+Jesung Yang (5):
+  rust: macros: allow conversion from `&T` to `TokenStream`
+  rust: macros: extend custom `quote!()` macro
+  rust: macros: prefix variable `span` with underscore
+  rust: macros: add derive macro for `TryFrom`
+  rust: macros: add derive macro for `Into`
+
+ rust/macros/convert.rs | 361 +++++++++++++++++++++++++++++++++++++++++
+ rust/macros/lib.rs     | 239 +++++++++++++++++++++++++++
+ rust/macros/quote.rs   |  40 ++++-
+ 3 files changed, 638 insertions(+), 2 deletions(-)
+ create mode 100644 rust/macros/convert.rs
+
+
+base-commit: dff64b072708ffef23c117fa1ee1ea59eb417807
+-- 
+2.39.5
+
