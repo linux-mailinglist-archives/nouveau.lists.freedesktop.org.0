@@ -2,166 +2,58 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id 5F25EB2A16A
-	for <lists+nouveau@lfdr.de>; Mon, 18 Aug 2025 14:23:14 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 55376B2ABDB
+	for <lists+nouveau@lfdr.de>; Mon, 18 Aug 2025 16:57:47 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 14E2410E075;
-	Mon, 18 Aug 2025 12:23:12 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 0CC0F10E463;
+	Mon, 18 Aug 2025 14:57:46 +0000 (UTC)
 Authentication-Results: gabe.freedesktop.org;
-	dkim=pass (2048-bit key; unprotected) header.d=Nvidia.com header.i=@Nvidia.com header.b="XDiIKcA2";
+	dkim=pass (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="o961xHW1";
 	dkim-atps=neutral
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from NAM11-DM6-obe.outbound.protection.outlook.com
- (mail-dm6nam11on2077.outbound.protection.outlook.com [40.107.223.77])
- by gabe.freedesktop.org (Postfix) with ESMTPS id B235A10E075
- for <nouveau@lists.freedesktop.org>; Mon, 18 Aug 2025 12:23:10 +0000 (UTC)
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=Lq1rWsUae8qRjidgSwh0vbK/Y7ZAw7azp2RrT2qKEpOinkqdPDIJteisKb1EgyvPbe1IDVl4uVsX7IeTvrFoFgF0fDQMoHFITRpyLNCTiNfyY5i5JoAZuaW1UvBZGoHI94jtG/qK1NXiVbldoIxOayk9dAITjje5q+MENsoHnaN4TBXcrxvvaAZfZxqsQq8d/SB0yHhqOVqWmUnV3NQWAP9LVkpm47saQrg40o87yO+2GIdnYTCUAlcNAYWqMRVysmY3LHfcKvz4jGPdmjVZq/37tlXRI5jf0+GCQSKAGqi8c53jPpI0jt6kdI+8cBw4jk3AWSyBi4CL4U3eEtektw==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=2V0cfEFVUxxUetCHuKsOovxC2r9sVdhNcTkS+/aIScs=;
- b=hW2walgGNyFsWh9ODTF05b4zyKsQZoBxZJFbF+qI0qGTQAn0EHyl4mU9Moqw1O4LhUTdVU9mIWmrE9cjaTgAwLKCHHnd0z7DhgmzkBYSic9bAWVAlqDVYlBZd1Ed+m8YDrIyopGWw5Y4/jk/MocgDkGh3w7K2hRFlBGv6BbXOUyVH4mnoXNmgAQxcTYSE5EKhsRXtpqXNRS/0eV4S/M6EAVDy5Rly5Hu78ksT3k7jnDUDZo7yWbR+2gOjmC2bKYLAr2W+J8McNWZage6qvphkf6D1XZ34y5ZKDI78zqfaXDaDUrRWRnSxpkfROz2/POUdx2QivBI5eQTdvUAsd20Ig==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=nvidia.com; dmarc=pass action=none header.from=nvidia.com;
- dkim=pass header.d=nvidia.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=Nvidia.com;
- s=selector2;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=2V0cfEFVUxxUetCHuKsOovxC2r9sVdhNcTkS+/aIScs=;
- b=XDiIKcA2qcyPjSybbV7CtaM3glUBtuKr5hiCp3skBM8RWLFabazRFjb7IDLzug/AeQUiK50t6jodLpU3QqAJINUGMINYD4q/E/5E6eGLV/esGQgXi6K01SWM57C31ptHB6y9qmB4X2D8Qq9tz5zI8P2pwSfCw0x/SJupwCnTQOOwrFuzFt6nDuIl9odkpl77fcXNNBXh2fK9tFIeXrPEpqGc9jYNX1gfsPnP9xyj50piOJFpqZ4yFTte3p68oCiG0NuyNHB2EYM8zwP66sFeWMpeLucBoRZCb/Tbh+h9fAsOyIlI56MTU+W2fBxOnOjQij49hqrjkATZf23put60XQ==
-Authentication-Results: dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=nvidia.com;
-Received: from CH2PR12MB3990.namprd12.prod.outlook.com (2603:10b6:610:28::18)
- by CH3PR12MB8484.namprd12.prod.outlook.com (2603:10b6:610:158::8)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9031.24; Mon, 18 Aug
- 2025 12:23:05 +0000
-Received: from CH2PR12MB3990.namprd12.prod.outlook.com
- ([fe80::6e37:569f:82ee:3f99]) by CH2PR12MB3990.namprd12.prod.outlook.com
- ([fe80::6e37:569f:82ee:3f99%3]) with mapi id 15.20.9031.023; Mon, 18 Aug 2025
- 12:23:05 +0000
+Received: from tor.source.kernel.org (tor.source.kernel.org [172.105.4.254])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 4A76B10E463
+ for <nouveau@lists.freedesktop.org>; Mon, 18 Aug 2025 14:57:44 +0000 (UTC)
+Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
+ by tor.source.kernel.org (Postfix) with ESMTP id 6BB0F601D2;
+ Mon, 18 Aug 2025 14:57:43 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 1DA8FC4CEEB;
+ Mon, 18 Aug 2025 14:57:38 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+ s=k20201202; t=1755529063;
+ bh=fxjpl7asl8KgiwlfZoIW1bbJhs+WMizR72o5Nm2FTt4=;
+ h=Date:Subject:Cc:To:From:References:In-Reply-To:From;
+ b=o961xHW1StP2YxwSH+foXj9a462Mbib7uaamtopiOykiFOo8Lqp488gNnQZiKVOra
+ MM0uwwNLsx0nxoqW+9XrItJcOQShnLNMM5CnNYTmZ6qPu8lWkaMCIcYzh/E/r+CYzN
+ mdOqIvq7SF83SDYQiHe33rkzRhC3h/y0kGHaCVMzVXawtgokZlj4DrARzFfVcMu85Y
+ +/NWuIiWY7r52y57iLA8HnB7JsoGMmwdJ+EcUkLzV6LS+WN1qzAK9k7nzwy1dVoSrz
+ U6N54yRdCXkvq0k5nchDsBqn3z00X7VeHgKxyBB7zrwuT3D6Z6rMKN4fXJOtQxO63F
+ HRVE5SWhU0zTA==
+Mime-Version: 1.0
 Content-Transfer-Encoding: quoted-printable
 Content-Type: text/plain; charset=UTF-8
-Date: Mon, 18 Aug 2025 21:23:01 +0900
-Message-Id: <DC5JTQ7VHA65.2SNDMXYIKB9GO@nvidia.com>
-Cc: "Joel Fernandes" <joelagnelf@nvidia.com>, "Timur Tabi"
- <ttabi@nvidia.com>, "Alistair Popple" <apopple@nvidia.com>, "David Airlie"
- <airlied@gmail.com>, "Simona Vetter" <simona@ffwll.ch>, "Bjorn Helgaas"
- <bhelgaas@google.com>, =?utf-8?q?Krzysztof_Wilczy=C5=84ski?=
- <kwilczynski@kernel.org>, "Miguel Ojeda" <ojeda@kernel.org>, "Alex Gaynor"
- <alex.gaynor@gmail.com>, "Boqun Feng" <boqun.feng@gmail.com>, "Gary Guo"
- <gary@garyguo.net>, =?utf-8?q?Bj=C3=B6rn_Roy_Baron?=
- <bjorn3_gh@protonmail.com>, "Benno Lossin" <lossin@kernel.org>, "Andreas
- Hindborg" <a.hindborg@kernel.org>, "Alice Ryhl" <aliceryhl@google.com>,
- "Trevor Gross" <tmgross@umich.edu>, <nouveau@lists.freedesktop.org>,
- <linux-pci@vger.kernel.org>, <rust-for-linux@vger.kernel.org>, "LKML"
- <linux-kernel@vger.kernel.org>
+Date: Mon, 18 Aug 2025 16:57:37 +0200
+Message-Id: <DC5N439ZNA6E.34LSQ3K5366P7@kernel.org>
 Subject: Re: [PATCH v2 1/3] rust: pci: provide access to PCI Class,
  subclass, implementation values
-From: "Alexandre Courbot" <acourbot@nvidia.com>
-To: "John Hubbard" <jhubbard@nvidia.com>, "Danilo Krummrich" <dakr@kernel.org>
-X-Mailer: aerc 0.20.1-0-g2ecb8770224a-dirty
+Cc: "Alexandre Courbot" <acourbot@nvidia.com>, "Joel Fernandes"
+ <joelagnelf@nvidia.com>, "Timur Tabi" <ttabi@nvidia.com>, "Alistair Popple"
+ <apopple@nvidia.com>, "David Airlie" <airlied@gmail.com>, "Simona Vetter"
+ <simona@ffwll.ch>, "Bjorn Helgaas" <bhelgaas@google.com>,
+ =?utf-8?q?Krzysztof_Wilczy=C5=84ski?= <kwilczynski@kernel.org>, "Miguel
+ Ojeda" <ojeda@kernel.org>, "Alex Gaynor" <alex.gaynor@gmail.com>, "Boqun
+ Feng" <boqun.feng@gmail.com>, "Gary Guo" <gary@garyguo.net>,
+ =?utf-8?q?Bj=C3=B6rn_Roy_Baron?= <bjorn3_gh@protonmail.com>, "Benno Lossin"
+ <lossin@kernel.org>, "Andreas Hindborg" <a.hindborg@kernel.org>, "Alice
+ Ryhl" <aliceryhl@google.com>, "Trevor Gross" <tmgross@umich.edu>,
+ <nouveau@lists.freedesktop.org>, <linux-pci@vger.kernel.org>,
+ <rust-for-linux@vger.kernel.org>, "LKML" <linux-kernel@vger.kernel.org>
+To: "John Hubbard" <jhubbard@nvidia.com>
+From: "Danilo Krummrich" <dakr@kernel.org>
 References: <20250818013305.1089446-1-jhubbard@nvidia.com>
  <20250818013305.1089446-2-jhubbard@nvidia.com>
 In-Reply-To: <20250818013305.1089446-2-jhubbard@nvidia.com>
-X-ClientProxiedBy: TYAPR01CA0020.jpnprd01.prod.outlook.com (2603:1096:404::32)
- To CH2PR12MB3990.namprd12.prod.outlook.com
- (2603:10b6:610:28::18)
-MIME-Version: 1.0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: CH2PR12MB3990:EE_|CH3PR12MB8484:EE_
-X-MS-Office365-Filtering-Correlation-Id: 5977178c-c77d-4032-6bd1-08ddde51fb54
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0;
- ARA:13230040|376014|7416014|366016|10070799003|1800799024|7053199007; 
-X-Microsoft-Antispam-Message-Info: =?utf-8?B?NE1NemlRWmdZVk1TRUY1V0hDWWszYitGK1FQcjF5UURuY3VTTkdFd0M4dDYy?=
- =?utf-8?B?NTlXREwxQnZSZHZMYWhKd09IM0VzTE5hT3dkbzFEM0lac2FydnEyY1M3UUV6?=
- =?utf-8?B?cC9YK3ZrVDdqbUxVVmlJL1ZJcHNiZExqNmV0U0Q1Z3I3NmZDNVNXME9mRzVh?=
- =?utf-8?B?eVpvbEFZQmJ1UDZGNWFHN2JPWXJMaThBdVNrdzB6QU5aRmN3SlBWT2hkanND?=
- =?utf-8?B?WkhQc09rRjBWNjN4M0RHRnFpQXNGaEQ3UnNlSGw2ZDdMTkozeEpXWm13ZEVS?=
- =?utf-8?B?aStxdE9FVjlKRCtZNXp0ZEZNVFY1YnBPTTNYNWtsTUlQVGNHKzR2a1orZ1dR?=
- =?utf-8?B?RlNWQlRYWjMyL1JDYlF6RnBUY0J4amFLYVliVktXWUg4bTRDb2Y5c25WZkxX?=
- =?utf-8?B?L1A2Y2xibCt4c1c1akJvWVBQbjloVXRRTVBVcTF1cVhLRjVLYUdTeFBrdG1B?=
- =?utf-8?B?bUMrT0I1UjlQcWFGQ2FRMlJKOSt1bGV0cjFSRkdSVmRyVm5xdVdCWk5MVW1h?=
- =?utf-8?B?emRpN1dhUVZQWlNhWERKNERvT1I1aFZqVjdIcVd2MjIvNDZsSnR2NmNSdTBs?=
- =?utf-8?B?R2E2RjBUQlJ5NkJTWmo3S081aVFsZHZSR3dYaEkzUzBVZndaQ1BFRXNmTFk2?=
- =?utf-8?B?dTJvblVaZzFpTERPMzJKQmZlZ0d6ajdoTjE0MUFncHJDNUZGRlRjazk2WkF0?=
- =?utf-8?B?M1JZeHJOVDhlKzIyT1VnZGZvaTBaVlE1QWJCdzRlTDRoUmxYRmh5MzVWZ0FR?=
- =?utf-8?B?TERnVmNqZUhESFE4Mk4yL2JNWHlra1cxTVExR1pySExBeVlPeEZjM2hNZ0Nv?=
- =?utf-8?B?N1RiZUloWnVUcTZoUExLNlF3d2llREY3am1ncHdlZHBUdWtJTFBzR1dwcGlr?=
- =?utf-8?B?VkhhOGVNVkVMQkpLSFB1cWZ3U2hvMFBNUTQ2V3pMZWxQdHpUdStGTTNzeDhB?=
- =?utf-8?B?NGdQblhBazhIZk83OXBuV0JFM0drbitaZGZqeTBqcWNwYmpMTEFINXNvRFlT?=
- =?utf-8?B?TDA5ZFBPeVl2UkcvZU1DVEJ1eTRDMS9YVlMrbTE2cHVjRmJXVmU4QW0xS3Vy?=
- =?utf-8?B?VGkxRnBtbnl2dlBlQzNlRmgyTkRLWWt6My9mbmtBN0pHUDAxeHN5UU1pQTJ6?=
- =?utf-8?B?a3l2NFRxcnUweWtwakMyOEdxSWpsQndWWUxUaXVHNVdadklFdjkrWXpNWGd1?=
- =?utf-8?B?ay94djBLdmtSY2RUeldUOW1vOEd1Q245NzlGOWlsenlDV05EWXZvQmRIR2lD?=
- =?utf-8?B?S0hrRFd0bWxBanRobTNEa2tFa3o1VXAxaHM4d1MrWjZXeCs0S3lhZ1pYY3B2?=
- =?utf-8?B?c0ZBVDNONHZBM0svUjhjT1ZpdG5uS2xINzdQWjNnL2NjVGs2SCtRT0s2YStI?=
- =?utf-8?B?WGcwRlpJMkdPaEZXdjUzL2dIcFFlbWZ3Z1dzazJ0RTZkc01IVDBqT2pSU0to?=
- =?utf-8?B?bFNtQWFQYms5UzBNdUJqYURBMkNlTWpXaGk5aStxNGFQVXBiZCt0NUtKMFVz?=
- =?utf-8?B?T3FLTE9BWEx3ZTlWTGtuU3lweVYxUHdDeTErcTB6Kzd5Mk5oL3ZCbjF2blBw?=
- =?utf-8?B?S2t1Z3FlVUNjVGZ4Y2ZQNkdGQjFLZXRBNDAwc09YdDJURVFHNXAvaWF2dGV4?=
- =?utf-8?B?aUxGeGoyWFlRNEd6TEUyMUpPZXg1TEZCZVlGMGVDKys5b2RiTStKK2FTNGM4?=
- =?utf-8?B?RTNCOGxVenRFQmk0SkRrNUJsR09ZTXZiK1NkamFYb24rQUxlUjdjOWF5cmJM?=
- =?utf-8?B?YmJ2UzlZbjZQOEFzeXA2am1YWitFQnM0NVY1S2Y5Vy9PYnY0eUgvUmZXMTJ2?=
- =?utf-8?B?aTFIVVBSYmIzRXdIMzJFR3NNbXVYcEJ4dklxTzF4SHYraHJ4SjBDZWZSWWVB?=
- =?utf-8?B?bGhXajhNckRoTjJwM2RrZDVTNmpwRWJjWnNmNTArdDVqVHZWZlBCVHJwbmNh?=
- =?utf-8?Q?sgzhmvBMyvA=3D?=
-X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
- IPV:NLI; SFV:NSPM; H:CH2PR12MB3990.namprd12.prod.outlook.com; PTR:; CAT:NONE;
- SFS:(13230040)(376014)(7416014)(366016)(10070799003)(1800799024)(7053199007);
- DIR:OUT; SFP:1101; 
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?SWpaS0NUUC9SdnZUWEcwc2NRaTZEeisrVlNNZHdTbFFxZ1lJT0hKWUpjWVYx?=
- =?utf-8?B?bkd3WWYxWFZQNG5XL0d3TzFuK01tYVVaKy9HamdlL01yN0VRSnVGUFNBYTlq?=
- =?utf-8?B?NWh1YXN3YTQ0ZWNLeGVRd2ZNR1ZvMUtWRkREbXhRRGFEeDZEc0tiSldZVUdC?=
- =?utf-8?B?NFZ2TWNOR3huRHA5TjRGancyM0xHeUFrbDJYbE1PN3AzQjg1TGVQeVc1bDBy?=
- =?utf-8?B?S2RMRnFUbHN2ZGhmQlNJYUNiRE5VblRDZCtVTDZINXQ1OVNRU3FvaksvcXF0?=
- =?utf-8?B?TnBGMFp6Q3VGNWxpd3luV0FTeVRwbUFkMkxxdk1pMlFsb2Q0R3N2a2ZtaDhZ?=
- =?utf-8?B?ZVZQbzlmS2c2elVkeFc2M0dpUmJIbUZDNTVibm14cXNTN0ZLTW5CR0Z1L3Rl?=
- =?utf-8?B?TDU5b29QWmgvN2h0ZDNXK01aYUJKdjZwOVFwSUI4SnIzalRGckhzK2JqbjRY?=
- =?utf-8?B?WDhsVWg4V2RYMDFINjRCdldTeCtpZDQyc3FPYVFmWEZydEFiWmVYV0NWOVd2?=
- =?utf-8?B?NGdwMlRMVlFFRm5VS2tKWWFDakRPNFZaVzBxQXkxMlNNQVFmZS9pTkhwZlBM?=
- =?utf-8?B?ZUxpQ1VFNDdXWjJ2WVJRQlk0Y1duQ25BMC81eEJTbnBmalJpSkFMMktDMk1B?=
- =?utf-8?B?VXkzOUptbWpVQXZPOVpMRTZHTHYrQ3pHNU1TNUUzV2RnV0FwWDNwZ3NYbVBn?=
- =?utf-8?B?U0g5aEVnZXJIekN2aEVOcUc3ajJuekdGdlJLNXc4dHVHb3Q5WkYyVlR1QmhY?=
- =?utf-8?B?NklYb05VMEc5NWdQdzgrL3l5ZjVMZUJmTkhyVks4b3UyVG9vTEhUVGNWWmI1?=
- =?utf-8?B?Qzg5VmNLL0tPa3doemFYckV6L3ZFaFV2MVJzTjMrVzUxaVl5SDc5VVNQc1ZU?=
- =?utf-8?B?SG5LUE85TGV0M2hNWEdPZmFvSTFqUkJham1OVnk5bmprbE4xaTgzTmtSVVVB?=
- =?utf-8?B?WGwrOWFldXdieTNqTFhrSlJMZzFkRmcrUnlBbFVxM2hmNHJ5Sjl1RzZQVmVC?=
- =?utf-8?B?aG9CUm5pLzdhVXFlMkNUSVY4bW02UDJndFVRVXM3Vk1YWTVXd0FsYTlsVWxn?=
- =?utf-8?B?NFc1QVFkY0x4ZGEwZ3B0djlrNmxHN1lJMjc3WWVGZDBwckV4MnRQeTBJcTFI?=
- =?utf-8?B?aHNkekx0Q2doS0wzdFpkdlBvWUdmcDV3TC82SDRxa3NEZzRrS0gvNnZCMHA1?=
- =?utf-8?B?ekpsVlVqb1RJRG1zTDMrYXJ4TFVEeFRiM0l1Z2VyOHBheFdnR2lwYVlqNVFn?=
- =?utf-8?B?WGNzNmF5UDVVRm51OTJHdytPd0tqNTd4K3lNWmQ2UGRnbzVXK0VJSDJOZXha?=
- =?utf-8?B?QnJKVEtidEJrQndOSTZhc0lQRDM4UEllWDd1WDZsS2ZEVEJNekhpaHlaMTNG?=
- =?utf-8?B?NnVRMmtIT2JjeHEwSzRzQXJ0WFVxTVlMdE1NODlvKyt1SXdDWUVHSUpSN050?=
- =?utf-8?B?UktZWVdHd2docUpNQ2I4Yzc2UUVsQkhJVU5ZbkExbkNMK0pJTFRScGFsMzBi?=
- =?utf-8?B?NVVJZ3R4UnVld3p3OEtMNmtlbVpnNVh3MHcwZWFENFhyQ3dUaitZNHlEUm9M?=
- =?utf-8?B?QUJ4S1EzQmhTWndFaHh4M2xXd2h6dzR5SWx0SzZTYmdyZ2wrdmZIQ1dDZmx4?=
- =?utf-8?B?ZjFTMWROdXUzL2dZNEp6MkdHc1ZYUnpac1JaVTE2MktBK3hFWEhKU2RhNUVi?=
- =?utf-8?B?S2t4dGs1TlFOWlR1Yk9mL094OVVWSTIxTkd2U1IwOXVubEg5MDdYMFJ6YTRn?=
- =?utf-8?B?dzg2OVNnZkxhQ3U0R0dUSTAwaG5RdUluSmdycmFEclRWWXJoZUY3Yi92RmdE?=
- =?utf-8?B?ekhOaVBYY3MxcG9BbkdpYTBMK0xMRXRRWENHdGZQZVd6eFNwVmx3NjFYWTh4?=
- =?utf-8?B?SzA4b3VHRHhGRkMxb1FacmlZcmZWem9CcFRiU3h2a3Mrd1V3UzUyNkpRV2Ji?=
- =?utf-8?B?M2h3RGNKRWZpT2g2aEhGQmF6RXN6NTVYa3Z6ekhsa2NOdlgrNkl3RFYxZHhi?=
- =?utf-8?B?d2NHUTYzekorZW9EZjFyblRMbFhDVStjbWhtRHBRR09NcW5HLzJsU0VsbU95?=
- =?utf-8?B?RUdqZXpCUElxeVY2OFpUWjBzN1ZjRUYzUForSVdFSDlDUDJkc0NEZTdYRnB0?=
- =?utf-8?B?WlhJOXI0WHNGNy9zR1RnL1QvcXJJQW8wY3c3RmdOOVljNC85L0RucjQ1UEpB?=
- =?utf-8?Q?CL+XJT+mDPqEZxqLTafdmJ8lEGEKOq0SjW2QIxlgM2VJ?=
-X-OriginatorOrg: Nvidia.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 5977178c-c77d-4032-6bd1-08ddde51fb54
-X-MS-Exchange-CrossTenant-AuthSource: CH2PR12MB3990.namprd12.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 18 Aug 2025 12:23:05.0221 (UTC)
-X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
-X-MS-Exchange-CrossTenant-Id: 43083d15-7273-40c1-b7db-39efd9ccc17a
-X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: qE9CBgFdMwW5wVM7Jy6xzvwViiXiUisowdrqeJRQ7mSP3+z7YPTbJ6/2hrHupgAx69ogf1RHa5zPqxnVndziog==
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: CH3PR12MB8484
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -176,84 +68,7 @@ List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-On Mon Aug 18, 2025 at 10:33 AM JST, John Hubbard wrote:
-> Allow callers to write Class::STORAGE_SCSI instead of
-> bindings::PCI_CLASS_STORAGE_SCSI, for example.
->
-> New APIs:
->     Class::STORAGE_SCSI, Class::NETWORK_ETHERNET, etc.
->     Class::from_u32(), as_u32()
->     Class::MASK_FULL, MASK_CLASS_SUBCLASS
->     DeviceId::from_class_and_vendor()
->     Device::class_code_raw(), class_enum()
->
-> Cc: Danilo Krummrich <dakr@kernel.org>
-> Signed-off-by: John Hubbard <jhubbard@nvidia.com>
-> ---
->  rust/kernel/pci.rs | 202 +++++++++++++++++++++++++++++++++++++++++++++
->  1 file changed, 202 insertions(+)
->
-> diff --git a/rust/kernel/pci.rs b/rust/kernel/pci.rs
-> index 887ee611b553..9caa1d342d52 100644
-> --- a/rust/kernel/pci.rs
-> +++ b/rust/kernel/pci.rs
-> @@ -23,6 +23,179 @@
->  };
->  use kernel::prelude::*;
-> =20
-> +macro_rules! define_all_pci_classes {
-> +    (
-> +        $($variant:ident =3D $binding:expr,)+
-> +    ) =3D> {
-> +        /// Converts a PCI class constant to 24-bit format.
-> +        ///
-> +        /// Many device drivers use only the upper 16 bits (base class a=
-nd subclass), but some
-> +        /// use the full 24 bits. In order to support both cases, store =
-the class code as a 24-bit
-> +        /// value, where 16-bit values are shifted up 8 bits.
-> +        const fn to_24bit_class(val: u32) -> u32 {
-> +            if val > 0xFFFF { val } else { val << 8 }
-> +        }
-
-This convenience function doesn't look like it needs to be defined
-inside the macro.
-
-> +
-> +        /// PCI device class codes.
-> +        ///
-> +        /// Each entry contains the full 24-bit PCI class code (base cla=
-ss in bits 23-16, subclass
-> +        /// in bits 15-8, programming interface in bits 7-0).
-> +        ///
-> +        #[derive(Debug, Clone, Copy, PartialEq, Eq)]
-> +        #[repr(transparent)]
-> +        pub struct Class(u32);
-
-Same for this struct.
-
-> +
-> +        impl Class {
-> +            $(
-> +                #[allow(missing_docs)]
-> +                pub const $variant: Self =3D Self(to_24bit_class($bindin=
-g));
-> +            )+
-
-This obviously needs to be part of the macro...
-
-> +
-> +            /// Match the full class code.
-> +            pub const MASK_FULL: u32 =3D 0xffffff;
-> +
-> +            /// Match the upper 16 bits of the class code (base class an=
-d subclass only).
-> +            pub const MASK_CLASS_SUBCLASS: u32 =3D 0xffff00;
-
-But these two definitions (and `as_u32` below) can again be part of
-their own impl block outside of it.
-
-> +
+On Mon Aug 18, 2025 at 3:33 AM CEST, John Hubbard wrote:
 > +            /// Create a `Class` from the raw class code value, or `None=
 ` if the value doesn't
 > +            /// match any known class.
@@ -264,32 +79,56 @@ riant),)+
 > +                    _ =3D> None,
 > +                }
 > +            }
+
+Additional to the comments from Alex, I think one should be
+`impl TryFrom<u32> for Class`.
+
 > +
-> +            /// Get the raw 24-bit class code value.
-> +            pub const fn as_u32(self) -> u32 {
-> +                self.0
-> +            }
-> +        }
+> +    /// Create a new `pci::DeviceId` from a class number, mask, and spec=
+ific vendor.
+> +    ///
+> +    /// This is more targeted than [`DeviceId::from_class`]: in addition=
+ to matching by Vendor, it
+> +    /// also matches the PCI Class (up to the entire 24 bits, depending =
+on the mask).
+> +    pub const fn from_class_and_vendor(class: Class, class_mask: u32, ve=
+ndor: u32) -> Self {
+> +        Self(bindings::pci_device_id {
+> +            vendor,
+> +            device: DeviceId::PCI_ANY_ID,
+> +            subvendor: DeviceId::PCI_ANY_ID,
+> +            subdevice: DeviceId::PCI_ANY_ID,
+> +            class: class.as_u32(),
+> +            class_mask,
+> +            driver_data: 0,
+> +            override_only: 0,
+> +        })
+> +    }
+>  }
+> =20
+>  // SAFETY: `DeviceId` is a `#[repr(transparent)]` wrapper of `pci_device=
+_id` and does not add
+> @@ -410,6 +600,18 @@ pub fn resource_len(&self, bar: u32) -> Result<bindi=
+ngs::resource_size_t> {
+>          // - by its type invariant `self.as_raw` is always a valid point=
+er to a `struct pci_dev`.
+>          Ok(unsafe { bindings::pci_resource_len(self.as_raw(), bar.try_in=
+to()?) })
+>      }
+> +
+> +    /// Returns the full 24-bit PCI class code as stored in hardware.
+> +    /// This includes base class, subclass, and programming interface.
+> +    pub fn class_code_raw(&self) -> u32 {
+> +        // SAFETY: `self.as_raw` is a valid pointer to a `struct pci_dev=
+`.
+> +        unsafe { (*self.as_raw()).class }
+> +    }
+> +
+> +    /// Returns the PCI class as a `Class` struct, or `None` if the clas=
+s code is invalid.
+> +    pub fn class_enum(&self) -> Option<Class> {
+> +        Class::from_u32(self.class_code_raw())
+> +    }
 
-So I believe that if you move the declarations that do not depend on the
-macro parameters outside of if, the macro's body could be limited to the
-following:
-
-       impl Class {
-           $(
-               #[allow(missing_docs)]
-               pub const $variant: Self =3D Self(to_24bit_class($binding));
-           )+
-
-           /// Create a `Class` from the raw class code value, or `None` if=
- the value doesn't
-           /// match any known class.
-           pub fn from_u32(value: u32) -> Option<Self> {
-               match value {
-                   $(x if x =3D=3D Self::$variant.0 =3D> Some(Self::$varian=
-t),)+
-                   _ =3D> None,
-               }
-           }
-
-Shorter macros are generally considered better. :)
+I don't think we have struct pci_dev instances without a valid class code,
+can we? Maybe we should convert infallibly here.
