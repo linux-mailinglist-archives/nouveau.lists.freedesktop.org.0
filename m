@@ -2,41 +2,40 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id 55376B2ABDB
-	for <lists+nouveau@lfdr.de>; Mon, 18 Aug 2025 16:57:47 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 02ACCB2ADBC
+	for <lists+nouveau@lfdr.de>; Mon, 18 Aug 2025 18:06:52 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 0CC0F10E463;
-	Mon, 18 Aug 2025 14:57:46 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 4AF5010E494;
+	Mon, 18 Aug 2025 16:06:50 +0000 (UTC)
 Authentication-Results: gabe.freedesktop.org;
-	dkim=pass (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="o961xHW1";
+	dkim=pass (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="nLhkO/I5";
 	dkim-atps=neutral
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from tor.source.kernel.org (tor.source.kernel.org [172.105.4.254])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 4A76B10E463
- for <nouveau@lists.freedesktop.org>; Mon, 18 Aug 2025 14:57:44 +0000 (UTC)
+Received: from sea.source.kernel.org (sea.source.kernel.org [172.234.252.31])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id BADB710E494
+ for <nouveau@lists.freedesktop.org>; Mon, 18 Aug 2025 16:06:48 +0000 (UTC)
 Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by tor.source.kernel.org (Postfix) with ESMTP id 6BB0F601D2;
- Mon, 18 Aug 2025 14:57:43 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 1DA8FC4CEEB;
- Mon, 18 Aug 2025 14:57:38 +0000 (UTC)
+ by sea.source.kernel.org (Postfix) with ESMTP id 4581C4198E;
+ Mon, 18 Aug 2025 16:06:48 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 06318C4CEEB;
+ Mon, 18 Aug 2025 16:06:43 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1755529063;
- bh=fxjpl7asl8KgiwlfZoIW1bbJhs+WMizR72o5Nm2FTt4=;
+ s=k20201202; t=1755533208;
+ bh=8v0DGj5nN7LXQV4s3kH37ZEpxqadMxuWtRA9XKaDv9Y=;
  h=Date:Subject:Cc:To:From:References:In-Reply-To:From;
- b=o961xHW1StP2YxwSH+foXj9a462Mbib7uaamtopiOykiFOo8Lqp488gNnQZiKVOra
- MM0uwwNLsx0nxoqW+9XrItJcOQShnLNMM5CnNYTmZ6qPu8lWkaMCIcYzh/E/r+CYzN
- mdOqIvq7SF83SDYQiHe33rkzRhC3h/y0kGHaCVMzVXawtgokZlj4DrARzFfVcMu85Y
- +/NWuIiWY7r52y57iLA8HnB7JsoGMmwdJ+EcUkLzV6LS+WN1qzAK9k7nzwy1dVoSrz
- U6N54yRdCXkvq0k5nchDsBqn3z00X7VeHgKxyBB7zrwuT3D6Z6rMKN4fXJOtQxO63F
- HRVE5SWhU0zTA==
+ b=nLhkO/I5LOKz8LcXkJw6s406OXNSXyb2a8ICLRCrn0YxIbTmVUchl9L0VOnJ1hNzm
+ h+UKxqH0PksQediircWskG1IV4nc3tC4Tiq4BRaP9Tvjg0OeTS0o4M4zg5HcNNp5el
+ chwhjTzmvI//dfy5Y1A+B41xCDfte+A6e+4ZXH8JzMTLmI4PeWMWms3UvQsSrt+y36
+ 33dFrnFPfHFZiAHxD5NVSVt+sQCfUjJNcLOo1ChgIuHgJdaqVXo2oXSe3VmZKgbVEw
+ SGqBH9NzwKYyGE/DWsLuRBEqnkmKRvE5bBj4HNMszv9S/0UdGUGbU8TZi/rQQGYQQk
+ DMdojNV4K+e2w==
 Mime-Version: 1.0
 Content-Transfer-Encoding: quoted-printable
 Content-Type: text/plain; charset=UTF-8
-Date: Mon, 18 Aug 2025 16:57:37 +0200
-Message-Id: <DC5N439ZNA6E.34LSQ3K5366P7@kernel.org>
-Subject: Re: [PATCH v2 1/3] rust: pci: provide access to PCI Class,
- subclass, implementation values
+Date: Mon, 18 Aug 2025 18:06:42 +0200
+Message-Id: <DC5OKZHPTDWC.L6YD327Z0WJN@kernel.org>
+Subject: Re: [PATCH v2 3/3] rust: pci: provide access to PCI Vendor values
 Cc: "Alexandre Courbot" <acourbot@nvidia.com>, "Joel Fernandes"
  <joelagnelf@nvidia.com>, "Timur Tabi" <ttabi@nvidia.com>, "Alistair Popple"
  <apopple@nvidia.com>, "David Airlie" <airlied@gmail.com>, "Simona Vetter"
@@ -52,8 +51,8 @@ Cc: "Alexandre Courbot" <acourbot@nvidia.com>, "Joel Fernandes"
 To: "John Hubbard" <jhubbard@nvidia.com>
 From: "Danilo Krummrich" <dakr@kernel.org>
 References: <20250818013305.1089446-1-jhubbard@nvidia.com>
- <20250818013305.1089446-2-jhubbard@nvidia.com>
-In-Reply-To: <20250818013305.1089446-2-jhubbard@nvidia.com>
+ <20250818013305.1089446-4-jhubbard@nvidia.com>
+In-Reply-To: <20250818013305.1089446-4-jhubbard@nvidia.com>
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -69,9 +68,9 @@ Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
 On Mon Aug 18, 2025 at 3:33 AM CEST, John Hubbard wrote:
-> +            /// Create a `Class` from the raw class code value, or `None=
+> +            /// Create a `Vendor` from the raw vendor ID value, or `None=
 ` if the value doesn't
-> +            /// match any known class.
+> +            /// match any known vendor.
 > +            pub fn from_u32(value: u32) -> Option<Self> {
 > +                match value {
 > +                    $(x if x =3D=3D Self::$variant.0 =3D> Some(Self::$va=
@@ -80,55 +79,45 @@ riant),)+
 > +                }
 > +            }
 
-Additional to the comments from Alex, I think one should be
-`impl TryFrom<u32> for Class`.
+Same here, I think this should be `impl TryFrom<u32> for Vendor`.
 
 > +
-> +    /// Create a new `pci::DeviceId` from a class number, mask, and spec=
-ific vendor.
-> +    ///
-> +    /// This is more targeted than [`DeviceId::from_class`]: in addition=
- to matching by Vendor, it
-> +    /// also matches the PCI Class (up to the entire 24 bits, depending =
-on the mask).
-> +    pub const fn from_class_and_vendor(class: Class, class_mask: u32, ve=
-ndor: u32) -> Self {
-> +        Self(bindings::pci_device_id {
-> +            vendor,
-> +            device: DeviceId::PCI_ANY_ID,
-> +            subvendor: DeviceId::PCI_ANY_ID,
-> +            subdevice: DeviceId::PCI_ANY_ID,
-> +            class: class.as_u32(),
-> +            class_mask,
-> +            driver_data: 0,
-> +            override_only: 0,
-> +        })
-> +    }
->  }
+> +            /// Get the raw 16-bit vendor ID value.
+> +            pub const fn as_u32(self) -> u32 {
+> +                self.0
+> +            }
+> +        }
+> +    };
+> +}
+
+>  /// An adapter for the registration of PCI drivers.
+>  pub struct Adapter<T: Driver>(T);
 > =20
->  // SAFETY: `DeviceId` is a `#[repr(transparent)]` wrapper of `pci_device=
-_id` and does not add
-> @@ -410,6 +600,18 @@ pub fn resource_len(&self, bar: u32) -> Result<bindi=
-ngs::resource_size_t> {
->          // - by its type invariant `self.as_raw` is always a valid point=
-er to a `struct pci_dev`.
->          Ok(unsafe { bindings::pci_resource_len(self.as_raw(), bar.try_in=
-to()?) })
->      }
-> +
-> +    /// Returns the full 24-bit PCI class code as stored in hardware.
-> +    /// This includes base class, subclass, and programming interface.
-> +    pub fn class_code_raw(&self) -> u32 {
-> +        // SAFETY: `self.as_raw` is a valid pointer to a `struct pci_dev=
-`.
-> +        unsafe { (*self.as_raw()).class }
-> +    }
-> +
-> +    /// Returns the PCI class as a `Class` struct, or `None` if the clas=
-s code is invalid.
-> +    pub fn class_enum(&self) -> Option<Class> {
-> +        Class::from_u32(self.class_code_raw())
-> +    }
+> @@ -335,9 +656,9 @@ pub const fn from_class(class: u32, class_mask: u32) =
+-> Self {
+>      ///
+>      /// This is more targeted than [`DeviceId::from_class`]: in addition=
+ to matching by Vendor, it
+>      /// also matches the PCI Class (up to the entire 24 bits, depending =
+on the mask).
+> -    pub const fn from_class_and_vendor(class: Class, class_mask: u32, ve=
+ndor: u32) -> Self {
+> +    pub const fn from_class_and_vendor(class: Class, class_mask: u32, ve=
+ndor: Vendor) -> Self {
+>          Self(bindings::pci_device_id {
+> -            vendor,
+> +            vendor: vendor.as_u32(),
+>              device: DeviceId::PCI_ANY_ID,
+>              subvendor: DeviceId::PCI_ANY_ID,
+>              subdevice: DeviceId::PCI_ANY_ID,
+> @@ -396,7 +717,7 @@ macro_rules! pci_device_table {
+>  ///     <MyDriver as pci::Driver>::IdInfo,
+>  ///     [
+>  ///         (
+> -///             pci::DeviceId::from_id(bindings::PCI_VENDOR_ID_REDHAT, b=
+indings::PCI_ANY_ID as u32),
+> +///             pci::DeviceId::from_id(pci::Vendor::REDHAT.as_u32(), bin=
+dings::PCI_ANY_ID as u32),
 
-I don't think we have struct pci_dev instances without a valid class code,
-can we? Maybe we should convert infallibly here.
+We should change DeviceId::from_id() to consume a pci::Vendor value directl=
+y.
