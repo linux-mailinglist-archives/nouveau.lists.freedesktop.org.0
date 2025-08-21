@@ -2,115 +2,59 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id 905B3B2F155
-	for <lists+nouveau@lfdr.de>; Thu, 21 Aug 2025 10:23:14 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 267A1B2F5A6
+	for <lists+nouveau@lfdr.de>; Thu, 21 Aug 2025 12:51:36 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id E99AC10E91A;
-	Thu, 21 Aug 2025 08:23:02 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 2F13410E083;
+	Thu, 21 Aug 2025 10:51:34 +0000 (UTC)
 Authentication-Results: gabe.freedesktop.org;
-	dkim=pass (1024-bit key; unprotected) header.d=suse.de header.i=@suse.de header.b="CYfqfqJh";
-	dkim=permerror (0-bit key) header.d=suse.de header.i=@suse.de header.b="+9vMn/zl";
-	dkim=pass (1024-bit key) header.d=suse.de header.i=@suse.de header.b="CYfqfqJh";
-	dkim=permerror (0-bit key) header.d=suse.de header.i=@suse.de header.b="+9vMn/zl";
+	dkim=pass (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="IB04F8o0";
 	dkim-atps=neutral
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from smtp-out1.suse.de (smtp-out1.suse.de [195.135.223.130])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 21AB610E91C
- for <nouveau@lists.freedesktop.org>; Thu, 21 Aug 2025 08:23:02 +0000 (UTC)
-Received: from imap1.dmz-prg2.suse.org (unknown [10.150.64.97])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
- (No client certificate requested)
- by smtp-out1.suse.de (Postfix) with ESMTPS id 1F1B92186F;
- Thu, 21 Aug 2025 08:22:27 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.de; s=susede2_rsa;
- t=1755764547; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
- mime-version:mime-version:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references;
- bh=eU7TYaqJ6duBML6uqVqJigVOdQm0L8koItjVVhsfmDY=;
- b=CYfqfqJht5lUOE4zN33sX1KK1JeKs87F5FxRoURqIJ2T5ShyZwV3g4qBgEZ+KqP8nTsFZf
- nLT7rWhlvWkQDn7dQmdhdw/fdrlD1qNCwuZ8v/WulaOXUTCyiF16OT4nbbkwL8PZYvrsh9
- hROe7QacKTe/RBk0/FyjaSo8QRb/I00=
-DKIM-Signature: v=1; a=ed25519-sha256; c=relaxed/relaxed; d=suse.de;
- s=susede2_ed25519; t=1755764547;
- h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
- mime-version:mime-version:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references;
- bh=eU7TYaqJ6duBML6uqVqJigVOdQm0L8koItjVVhsfmDY=;
- b=+9vMn/zlV0/9G7plhgdmRfTkp3ACIUUvEf9Man6jSLLAQMGCg7LRLEpn6WXefo+gK4n8fz
- c7w74sX7QUxboSCw==
-Authentication-Results: smtp-out1.suse.de;
-	none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.de; s=susede2_rsa;
- t=1755764547; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
- mime-version:mime-version:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references;
- bh=eU7TYaqJ6duBML6uqVqJigVOdQm0L8koItjVVhsfmDY=;
- b=CYfqfqJht5lUOE4zN33sX1KK1JeKs87F5FxRoURqIJ2T5ShyZwV3g4qBgEZ+KqP8nTsFZf
- nLT7rWhlvWkQDn7dQmdhdw/fdrlD1qNCwuZ8v/WulaOXUTCyiF16OT4nbbkwL8PZYvrsh9
- hROe7QacKTe/RBk0/FyjaSo8QRb/I00=
-DKIM-Signature: v=1; a=ed25519-sha256; c=relaxed/relaxed; d=suse.de;
- s=susede2_ed25519; t=1755764547;
- h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
- mime-version:mime-version:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references;
- bh=eU7TYaqJ6duBML6uqVqJigVOdQm0L8koItjVVhsfmDY=;
- b=+9vMn/zlV0/9G7plhgdmRfTkp3ACIUUvEf9Man6jSLLAQMGCg7LRLEpn6WXefo+gK4n8fz
- c7w74sX7QUxboSCw==
-Received: from imap1.dmz-prg2.suse.org (localhost [127.0.0.1])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
- (No client certificate requested)
- by imap1.dmz-prg2.suse.org (Postfix) with ESMTPS id 90CBC139A8;
- Thu, 21 Aug 2025 08:22:26 +0000 (UTC)
-Received: from dovecot-director2.suse.de ([2a07:de40:b281:106:10:150:64:167])
- by imap1.dmz-prg2.suse.org with ESMTPSA id AO8bIkLXpmhzEwAAD6G6ig
- (envelope-from <tzimmermann@suse.de>); Thu, 21 Aug 2025 08:22:26 +0000
-From: Thomas Zimmermann <tzimmermann@suse.de>
-To: simona@ffwll.ch, airlied@gmail.com, mripard@kernel.org,
- maarten.lankhorst@linux.intel.com, geert@linux-m68k.org,
- tomi.valkeinen@ideasonboard.com
-Cc: dri-devel@lists.freedesktop.org, linux-mediatek@lists.infradead.org,
- freedreno@lists.freedesktop.org, linux-arm-msm@vger.kernel.org,
- imx@lists.linux.dev, linux-samsung-soc@vger.kernel.org,
- nouveau@lists.freedesktop.org, virtualization@lists.linux.dev,
- spice-devel@lists.freedesktop.org, linux-renesas-soc@vger.kernel.org,
- linux-rockchip@lists.infradead.org, linux-tegra@vger.kernel.org,
- intel-xe@lists.freedesktop.org, xen-devel@lists.xenproject.org,
- Thomas Zimmermann <tzimmermann@suse.de>,
- Laurent Pinchart <laurent.pinchart@ideasonboard.com>
-Subject: [PATCH v6 25/25] drm/xlnx: Compute dumb-buffer sizes with
- drm_mode_size_dumb()
-Date: Thu, 21 Aug 2025 10:17:32 +0200
-Message-ID: <20250821081918.79786-26-tzimmermann@suse.de>
-X-Mailer: git-send-email 2.50.1
-In-Reply-To: <20250821081918.79786-1-tzimmermann@suse.de>
-References: <20250821081918.79786-1-tzimmermann@suse.de>
-MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-X-Spam-Level: 
-X-Spamd-Result: default: False [-1.30 / 50.00]; BAYES_HAM(-3.00)[100.00%];
- SUSPICIOUS_RECIPS(1.50)[]; NEURAL_HAM_LONG(-1.00)[-1.000];
- MID_CONTAINS_FROM(1.00)[]; R_MISSING_CHARSET(0.50)[];
- NEURAL_HAM_SHORT(-0.20)[-1.000]; MIME_GOOD(-0.10)[text/plain];
- ARC_NA(0.00)[]; RCVD_VIA_SMTP_AUTH(0.00)[];
- DBL_BLOCKED_OPENRESOLVER(0.00)[suse.de:email,suse.de:mid];
- RCPT_COUNT_TWELVE(0.00)[22]; MIME_TRACE(0.00)[0:+];
- TO_DN_SOME(0.00)[]; FUZZY_RATELIMITED(0.00)[rspamd.com];
- FROM_HAS_DN(0.00)[];
- FREEMAIL_TO(0.00)[ffwll.ch,gmail.com,kernel.org,linux.intel.com,linux-m68k.org,ideasonboard.com];
- RCVD_COUNT_TWO(0.00)[2]; TO_MATCH_ENVRCPT_ALL(0.00)[];
- RCVD_TLS_ALL(0.00)[]; FROM_EQ_ENVFROM(0.00)[];
- R_RATELIMIT(0.00)[to_ip_from(RLqirfcw6gnbcr9a9yhi49fhi6),to(RLbwen1niosrcqbxsafh1)];
- DKIM_SIGNED(0.00)[suse.de:s=susede2_rsa,suse.de:s=susede2_ed25519];
- FREEMAIL_ENVRCPT(0.00)[gmail.com]
-X-Spam-Flag: NO
-X-Spam-Score: -1.30
+Received: from tor.source.kernel.org (tor.source.kernel.org [172.105.4.254])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 64F3C10E083
+ for <nouveau@lists.freedesktop.org>; Thu, 21 Aug 2025 10:51:33 +0000 (UTC)
+Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
+ by tor.source.kernel.org (Postfix) with ESMTP id 909AA60200;
+ Thu, 21 Aug 2025 10:51:32 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 6D22FC4CEEB;
+ Thu, 21 Aug 2025 10:51:28 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+ s=k20201202; t=1755773492;
+ bh=cMytUFE1fmlfUaGX9cWvvFMAHcz0yzHNBDICGtrf7sk=;
+ h=Date:Subject:Cc:To:From:References:In-Reply-To:From;
+ b=IB04F8o0JStewSEpV2ymvEO/zxxGwgvH1bK6Jr2UUPMiahi7qVV2NkjTaCjC00iZ8
+ BBv36c6YLtgB7Dl5ddxh3qtB0JFm6HgEoUG78aRRQBArXGRHlUeFJ7V4dB28g/tNaO
+ 1RkdVuZSm6ueWKFtwQAZ1s4JKLRHKOv+Tz4P6B0FsR0YMycztEt2sDxfITlSvhYjdi
+ 4Q1zdq6f3oz9kqvLBfDD4gEidTRkppcS8ClTsTQX+n80DKy8I/WXLW1UUn3HC+REU8
+ d5vKL5tMXNFT4vtyCuWzJ+2lyDJDiuGGwYdk+dLjbAwiL98bFT3qfLjmo/rHNFVv/i
+ iS7H8QZ8pfwAA==
+Mime-Version: 1.0
+Content-Transfer-Encoding: quoted-printable
+Content-Type: text/plain; charset=UTF-8
+Date: Thu, 21 Aug 2025 12:51:26 +0200
+Message-Id: <DC81R8RHTHTC.3J58ODZD3UQLQ@kernel.org>
+Subject: Re: [PATCH v5 1/4] rust: pci: provide access to PCI Class and
+ Class-related items
+Cc: "Alexandre Courbot" <acourbot@nvidia.com>, "Joel Fernandes"
+ <joelagnelf@nvidia.com>, "Timur Tabi" <ttabi@nvidia.com>, "Alistair Popple"
+ <apopple@nvidia.com>, "David Airlie" <airlied@gmail.com>, "Simona Vetter"
+ <simona@ffwll.ch>, "Bjorn Helgaas" <bhelgaas@google.com>,
+ =?utf-8?q?Krzysztof_Wilczy=C5=84ski?= <kwilczynski@kernel.org>, "Miguel
+ Ojeda" <ojeda@kernel.org>, "Alex Gaynor" <alex.gaynor@gmail.com>, "Boqun
+ Feng" <boqun.feng@gmail.com>, "Gary Guo" <gary@garyguo.net>,
+ =?utf-8?q?Bj=C3=B6rn_Roy_Baron?= <bjorn3_gh@protonmail.com>, "Benno Lossin"
+ <lossin@kernel.org>, "Andreas Hindborg" <a.hindborg@kernel.org>, "Alice
+ Ryhl" <aliceryhl@google.com>, "Trevor Gross" <tmgross@umich.edu>,
+ <nouveau@lists.freedesktop.org>, <linux-pci@vger.kernel.org>,
+ <rust-for-linux@vger.kernel.org>, "LKML" <linux-kernel@vger.kernel.org>,
+ "Elle Rhumsaa" <elle@weathered-steel.dev>
+To: "John Hubbard" <jhubbard@nvidia.com>
+From: "Danilo Krummrich" <dakr@kernel.org>
+References: <20250821044207.3732-1-jhubbard@nvidia.com>
+ <20250821044207.3732-2-jhubbard@nvidia.com>
+In-Reply-To: <20250821044207.3732-2-jhubbard@nvidia.com>
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -125,45 +69,28 @@ List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-Call drm_mode_size_dumb() to compute dumb-buffer scanline pitch and
-buffer size. Align the pitch according to hardware requirements.
+On Thu Aug 21, 2025 at 6:42 AM CEST, John Hubbard wrote:
+> Allow callers to write Class::STORAGE_SCSI instead of
+> bindings::PCI_CLASS_STORAGE_SCSI, for example.
+>
+> New APIs:
+>     Class::STORAGE_SCSI, Class::NETWORK_ETHERNET, etc.
+>     Class::as_raw()
+>     Class: From<u32> for Class
+>     ClassMask: Full, ClassSubclass
+>     Device::pci_class()
+>
+> Cc: Danilo Krummrich <dakr@kernel.org>
+> Cc: Alexandre Courbot <acourbot@nvidia.com>
+> Cc: Elle Rhumsaa <elle@weathered-steel.dev>
+> Signed-off-by: John Hubbard <jhubbard@nvidia.com>
+> ---
+>  rust/kernel/pci.rs    |  10 ++
+>  rust/kernel/pci/id.rs | 239 ++++++++++++++++++++++++++++++++++++++++++
 
-Signed-off-by: Thomas Zimmermann <tzimmermann@suse.de>
-Cc: Laurent Pinchart <laurent.pinchart@ideasonboard.com>
-Cc: Tomi Valkeinen <tomi.valkeinen@ideasonboard.com>
-Reviewed-by: Laurent Pinchart <laurent.pinchart@ideasonboard.com>
-Reviewed-by: Tomi Valkeinen <tomi.valkeinen@ideasonboard.com>
----
- drivers/gpu/drm/xlnx/zynqmp_kms.c | 7 +++++--
- 1 file changed, 5 insertions(+), 2 deletions(-)
+Please add rust/kernel/pci/ to the maintainers entry.
 
-diff --git a/drivers/gpu/drm/xlnx/zynqmp_kms.c b/drivers/gpu/drm/xlnx/zynqmp_kms.c
-index 2bee0a2275ed..02f3a7d78cf8 100644
---- a/drivers/gpu/drm/xlnx/zynqmp_kms.c
-+++ b/drivers/gpu/drm/xlnx/zynqmp_kms.c
-@@ -19,6 +19,7 @@
- #include <drm/drm_crtc.h>
- #include <drm/drm_device.h>
- #include <drm/drm_drv.h>
-+#include <drm/drm_dumb_buffers.h>
- #include <drm/drm_encoder.h>
- #include <drm/drm_fbdev_dma.h>
- #include <drm/drm_fourcc.h>
-@@ -363,10 +364,12 @@ static int zynqmp_dpsub_dumb_create(struct drm_file *file_priv,
- 				    struct drm_mode_create_dumb *args)
- {
- 	struct zynqmp_dpsub *dpsub = to_zynqmp_dpsub(drm);
--	unsigned int pitch = DIV_ROUND_UP(args->width * args->bpp, 8);
-+	int ret;
- 
- 	/* Enforce the alignment constraints of the DMA engine. */
--	args->pitch = ALIGN(pitch, dpsub->dma_align);
-+	ret = drm_mode_size_dumb(drm, args, dpsub->dma_align, 0);
-+	if (ret)
-+		return ret;
- 
- 	return drm_gem_dma_dumb_create_internal(file_priv, drm, args);
- }
--- 
-2.50.1
+(Would have done on apply, but I have another comment on patch 3.)
 
+>  2 files changed, 249 insertions(+)
+>  create mode 100644 rust/kernel/pci/id.rs
