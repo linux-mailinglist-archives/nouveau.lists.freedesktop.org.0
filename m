@@ -2,159 +2,64 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id D9A9BB2F740
-	for <lists+nouveau@lfdr.de>; Thu, 21 Aug 2025 13:56:05 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id B75DAB2F781
+	for <lists+nouveau@lfdr.de>; Thu, 21 Aug 2025 14:06:43 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 7CE8610E959;
-	Thu, 21 Aug 2025 11:56:04 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 5097710E95B;
+	Thu, 21 Aug 2025 12:06:34 +0000 (UTC)
 Authentication-Results: gabe.freedesktop.org;
-	dkim=pass (1024-bit key; unprotected) header.d=suse.de header.i=@suse.de header.b="NJDFrpGJ";
-	dkim=permerror (0-bit key) header.d=suse.de header.i=@suse.de header.b="Gj5tANSU";
-	dkim=pass (1024-bit key) header.d=suse.de header.i=@suse.de header.b="Tnc6NDIT";
-	dkim=permerror (0-bit key) header.d=suse.de header.i=@suse.de header.b="uTGuQaRo";
+	dkim=pass (2048-bit key; unprotected) header.d=collabora.com header.i=@collabora.com header.b="kCj1XYaS";
 	dkim-atps=neutral
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from smtp-out1.suse.de (smtp-out1.suse.de [195.135.223.130])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 0234510E957
- for <nouveau@lists.freedesktop.org>; Thu, 21 Aug 2025 11:56:03 +0000 (UTC)
-Received: from imap1.dmz-prg2.suse.org (imap1.dmz-prg2.suse.org
- [IPv6:2a07:de40:b281:104:10:150:64:97])
+Received: from bali.collaboradmins.com (bali.collaboradmins.com
+ [148.251.105.195])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id EFABF10E957;
+ Thu, 21 Aug 2025 12:06:32 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=collabora.com;
+ s=mail; t=1755777991;
+ bh=azA9B3z3wNJhuYfDiL6hn0MK71QZlZtvPMK9aLiNlzM=;
+ h=Date:From:To:Cc:Subject:In-Reply-To:References:From;
+ b=kCj1XYaS83k8mGgwFVzOGw/7T9Jyrr/FSA3T60nkcpG+AsxqHXoDD8gY5Mw1+ETQ1
+ HG5gD0g1ImsJwJduMuS6Sone9bNLFwhHUy41nA4Tv0qMZ7nx09B0Aaw7GAdZWWUj7R
+ vZvf+65iVW+iYtRzK6VIT5FJkRI2g8oGOWGC8qG9gF28tn8gPyFiGEoCCIe2//FzOD
+ pnvTv82D0U84uBclgLWP4iQaQSsEsa640xay1bwo+A4N6xfu7BIO7QVTIYvaykeRVT
+ 37Gx5/FY2u3bfXDToAPNU3/2IVr2COWOtpObFzYMXgqer+GxcsijlEwHczC0WwQCIS
+ 4xejSDYWju5Mw==
+Received: from fedora (unknown [IPv6:2a01:e0a:2c:6930:d919:a6e:5ea1:8a9f])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
- (No client certificate requested)
- by smtp-out1.suse.de (Postfix) with ESMTPS id E8C1D223BF;
- Thu, 21 Aug 2025 11:56:00 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.de; s=susede2_rsa;
- t=1755777361; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
- mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references:autocrypt:autocrypt;
- bh=sfJDevyhbJHQ4pRUZzGgDUzFw8/hjC9NL73k+UbtfNI=;
- b=NJDFrpGJO5iUNdKMkobo3gxiDs3KVSoOo+c0Kx7YFvkYIlgx7bnpDXIsS/c0P0cQgrh+OM
- dExS90hja4MkiIhNcN5ACrES3HoMUaxtBTvpFmwjVxAsz+p2OyiAVBW8rAxUPAhgsnlwwj
- CZwQn8osw/hfaBvpa9NaTEKf6lTT/M4=
-DKIM-Signature: v=1; a=ed25519-sha256; c=relaxed/relaxed; d=suse.de;
- s=susede2_ed25519; t=1755777361;
- h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
- mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references:autocrypt:autocrypt;
- bh=sfJDevyhbJHQ4pRUZzGgDUzFw8/hjC9NL73k+UbtfNI=;
- b=Gj5tANSUdM5J9dvfsooU4xEjtijJBFnr7I7ne0BmLL2IbI4EPgjzdAm3py48jgBwCGMxQT
- boIwMwnxQsGrzgBw==
-Authentication-Results: smtp-out1.suse.de;
- dkim=pass header.d=suse.de header.s=susede2_rsa header.b=Tnc6NDIT;
- dkim=pass header.d=suse.de header.s=susede2_ed25519 header.b=uTGuQaRo
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.de; s=susede2_rsa;
- t=1755777360; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
- mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references:autocrypt:autocrypt;
- bh=sfJDevyhbJHQ4pRUZzGgDUzFw8/hjC9NL73k+UbtfNI=;
- b=Tnc6NDIT4e91MUk3u/uv4DBnosFc2L+6LZYV25zaGB1PKdcEVuIh/llq9RiUXqkK4mkPMk
- PfJV61ySMLhVweEIcriS3pU6Ueb/KxgiopzgPBhPws1+a3mjWGyK16+rO3Zyq+/M8wuFE7
- qfdE97vz5rt+BUFGKinpdAml62Ot91s=
-DKIM-Signature: v=1; a=ed25519-sha256; c=relaxed/relaxed; d=suse.de;
- s=susede2_ed25519; t=1755777360;
- h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
- mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references:autocrypt:autocrypt;
- bh=sfJDevyhbJHQ4pRUZzGgDUzFw8/hjC9NL73k+UbtfNI=;
- b=uTGuQaRowDi9JsJ2CDS0TXWPegM6sn88iHyhpAFbnDit/r3KkSK5wNpUCdTeRnRo1G9Xoi
- pAPRiwf+LpsK+VAA==
-Received: from imap1.dmz-prg2.suse.org (localhost [127.0.0.1])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
- (No client certificate requested)
- by imap1.dmz-prg2.suse.org (Postfix) with ESMTPS id 30D9513867;
- Thu, 21 Aug 2025 11:56:00 +0000 (UTC)
-Received: from dovecot-director2.suse.de ([2a07:de40:b281:106:10:150:64:167])
- by imap1.dmz-prg2.suse.org with ESMTPSA id Ozw5ClAJp2j0UAAAD6G6ig
- (envelope-from <tzimmermann@suse.de>); Thu, 21 Aug 2025 11:56:00 +0000
-Message-ID: <7918ea7e-8914-4c0f-97be-d660043a4aab@suse.de>
-Date: Thu, 21 Aug 2025 13:55:59 +0200
+ (No client certificate requested) (Authenticated sender: bbrezillon)
+ by bali.collaboradmins.com (Postfix) with ESMTPSA id BD2E217E0071;
+ Thu, 21 Aug 2025 14:06:30 +0200 (CEST)
+Date: Thu, 21 Aug 2025 14:06:25 +0200
+From: Boris Brezillon <boris.brezillon@collabora.com>
+To: "Danilo Krummrich" <dakr@kernel.org>
+Cc: "Caterina Shablia" <caterina.shablia@collabora.com>, "Maarten Lankhorst"
+ <maarten.lankhorst@linux.intel.com>, "Maxime Ripard" <mripard@kernel.org>,
+ "Thomas Zimmermann" <tzimmermann@suse.de>, "David Airlie"
+ <airlied@gmail.com>, "Simona Vetter" <simona@ffwll.ch>, "Frank Binns"
+ <frank.binns@imgtec.com>, "Matt Coster" <matt.coster@imgtec.com>, "Karol
+ Herbst" <kherbst@redhat.com>, "Lyude Paul" <lyude@redhat.com>, "Steven
+ Price" <steven.price@arm.com>, "Liviu Dudau" <liviu.dudau@arm.com>, "Lucas
+ De Marchi" <lucas.demarchi@intel.com>, Thomas =?UTF-8?B?SGVsbHN0csO2bQ==?=
+ <thomas.hellstrom@linux.intel.com>, "Rodrigo Vivi"
+ <rodrigo.vivi@intel.com>, <dri-devel@lists.freedesktop.org>,
+ <linux-kernel@vger.kernel.org>, <nouveau@lists.freedesktop.org>,
+ <intel-xe@lists.freedesktop.org>, <asahi@lists.linux.dev>, "Asahi Lina"
+ <lina@asahilina.net>
+Subject: Re: [PATCH v4 4/7] drm/gpuvm: Add a helper to check if two VA can
+ be merged
+Message-ID: <20250821140625.6c33daba@fedora>
+In-Reply-To: <DB61ZHDINPNE.1VFXNF2XXSJPA@kernel.org>
+References: <20250707170442.1437009-1-caterina.shablia@collabora.com>
+ <20250707170442.1437009-5-caterina.shablia@collabora.com>
+ <DB61ZHDINPNE.1VFXNF2XXSJPA@kernel.org>
+Organization: Collabora
+X-Mailer: Claws Mail 4.3.1 (GTK 3.24.49; x86_64-redhat-linux-gnu)
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v6 18/25] drm/renesas/rz-du: Compute dumb-buffer sizes
- with drm_mode_size_dumb()
-To: Biju Das <biju.das.jz@bp.renesas.com>, "simona@ffwll.ch"
- <simona@ffwll.ch>, "airlied@gmail.com" <airlied@gmail.com>,
- "mripard@kernel.org" <mripard@kernel.org>,
- "maarten.lankhorst@linux.intel.com" <maarten.lankhorst@linux.intel.com>,
- geert <geert@linux-m68k.org>,
- "tomi.valkeinen" <tomi.valkeinen@ideasonboard.com>
-Cc: "dri-devel@lists.freedesktop.org" <dri-devel@lists.freedesktop.org>,
- "linux-mediatek@lists.infradead.org" <linux-mediatek@lists.infradead.org>,
- "freedreno@lists.freedesktop.org" <freedreno@lists.freedesktop.org>,
- "linux-arm-msm@vger.kernel.org" <linux-arm-msm@vger.kernel.org>,
- "imx@lists.linux.dev" <imx@lists.linux.dev>,
- "linux-samsung-soc@vger.kernel.org" <linux-samsung-soc@vger.kernel.org>,
- "nouveau@lists.freedesktop.org" <nouveau@lists.freedesktop.org>,
- "virtualization@lists.linux.dev" <virtualization@lists.linux.dev>,
- "spice-devel@lists.freedesktop.org" <spice-devel@lists.freedesktop.org>,
- "linux-renesas-soc@vger.kernel.org" <linux-renesas-soc@vger.kernel.org>,
- "linux-rockchip@lists.infradead.org" <linux-rockchip@lists.infradead.org>,
- "linux-tegra@vger.kernel.org" <linux-tegra@vger.kernel.org>,
- "intel-xe@lists.freedesktop.org" <intel-xe@lists.freedesktop.org>,
- "xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>
-References: <20250821081918.79786-1-tzimmermann@suse.de>
- <20250821081918.79786-19-tzimmermann@suse.de>
- <TY3PR01MB11346A4F40CE555D24C093F278632A@TY3PR01MB11346.jpnprd01.prod.outlook.com>
-Content-Language: en-US
-From: Thomas Zimmermann <tzimmermann@suse.de>
-Autocrypt: addr=tzimmermann@suse.de; keydata=
- xsBNBFs50uABCADEHPidWt974CaxBVbrIBwqcq/WURinJ3+2WlIrKWspiP83vfZKaXhFYsdg
- XH47fDVbPPj+d6tQrw5lPQCyqjwrCPYnq3WlIBnGPJ4/jreTL6V+qfKRDlGLWFjZcsrPJGE0
- BeB5BbqP5erN1qylK9i3gPoQjXGhpBpQYwRrEyQyjuvk+Ev0K1Jc5tVDeJAuau3TGNgah4Yc
- hdHm3bkPjz9EErV85RwvImQ1dptvx6s7xzwXTgGAsaYZsL8WCwDaTuqFa1d1jjlaxg6+tZsB
- 9GluwvIhSezPgnEmimZDkGnZRRSFiGP8yjqTjjWuf0bSj5rUnTGiyLyRZRNGcXmu6hjlABEB
- AAHNJ1Rob21hcyBaaW1tZXJtYW5uIDx0emltbWVybWFubkBzdXNlLmRlPsLAjgQTAQgAOAIb
- AwULCQgHAgYVCgkICwIEFgIDAQIeAQIXgBYhBHIX+6yM6c9jRKFo5WgNwR1TC3ojBQJftODH
- AAoJEGgNwR1TC3ojx1wH/0hKGWugiqDgLNXLRD/4TfHBEKmxIrmfu9Z5t7vwUKfwhFL6hqvo
- lXPJJKQpQ2z8+X2vZm/slsLn7J1yjrOsoJhKABDi+3QWWSGkaGwRJAdPVVyJMfJRNNNIKwVb
- U6B1BkX2XDKDGffF4TxlOpSQzdtNI/9gleOoUA8+jy8knnDYzjBNOZqLG2FuTdicBXblz0Mf
- vg41gd9kCwYXDnD91rJU8tzylXv03E75NCaTxTM+FBXPmsAVYQ4GYhhgFt8S2UWMoaaABLDe
- 7l5FdnLdDEcbmd8uLU2CaG4W2cLrUaI4jz2XbkcPQkqTQ3EB67hYkjiEE6Zy3ggOitiQGcqp
- j//OwE0EWznS4AEIAMYmP4M/V+T5RY5at/g7rUdNsLhWv1APYrh9RQefODYHrNRHUE9eosYb
- T6XMryR9hT8XlGOYRwKWwiQBoWSDiTMo/Xi29jUnn4BXfI2px2DTXwc22LKtLAgTRjP+qbU6
- 3Y0xnQN29UGDbYgyyK51DW3H0If2a3JNsheAAK+Xc9baj0LGIc8T9uiEWHBnCH+RdhgATnWW
- GKdDegUR5BkDfDg5O/FISymJBHx2Dyoklv5g4BzkgqTqwmaYzsl8UxZKvbaxq0zbehDda8lv
- hFXodNFMAgTLJlLuDYOGLK2AwbrS3Sp0AEbkpdJBb44qVlGm5bApZouHeJ/+n+7r12+lqdsA
- EQEAAcLAdgQYAQgAIAIbDBYhBHIX+6yM6c9jRKFo5WgNwR1TC3ojBQJftOH6AAoJEGgNwR1T
- C3ojVSkIALpAPkIJPQoURPb1VWjh34l0HlglmYHvZszJWTXYwavHR8+k6Baa6H7ufXNQtThR
- yIxJrQLW6rV5lm7TjhffEhxVCn37+cg0zZ3j7zIsSS0rx/aMwi6VhFJA5hfn3T0TtrijKP4A
- SAQO9xD1Zk9/61JWk8OysuIh7MXkl0fxbRKWE93XeQBhIJHQfnc+YBLprdnxR446Sh8Wn/2D
- Ya8cavuWf2zrB6cZurs048xe0UbSW5AOSo4V9M0jzYI4nZqTmPxYyXbm30Kvmz0rYVRaitYJ
- 4kyYYMhuULvrJDMjZRvaNe52tkKAvMevcGdt38H4KSVXAylqyQOW5zvPc4/sq9c=
-In-Reply-To: <TY3PR01MB11346A4F40CE555D24C093F278632A@TY3PR01MB11346.jpnprd01.prod.outlook.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Type: text/plain; charset=US-ASCII
 Content-Transfer-Encoding: 7bit
-X-Spam-Level: 
-X-Spam-Flag: NO
-X-Rspamd-Queue-Id: E8C1D223BF
-X-Rspamd-Action: no action
-X-Rspamd-Server: rspamd1.dmz-prg2.suse.org
-X-Spamd-Result: default: False [-3.01 / 50.00]; BAYES_HAM(-3.00)[100.00%];
- SUSPICIOUS_RECIPS(1.50)[]; NEURAL_HAM_LONG(-1.00)[-1.000];
- R_DKIM_ALLOW(-0.20)[suse.de:s=susede2_rsa,suse.de:s=susede2_ed25519];
- NEURAL_HAM_SHORT(-0.20)[-1.000]; MIME_GOOD(-0.10)[text/plain];
- MX_GOOD(-0.01)[];
- DKIM_SIGNED(0.00)[suse.de:s=susede2_rsa,suse.de:s=susede2_ed25519];
- FREEMAIL_TO(0.00)[bp.renesas.com,ffwll.ch,gmail.com,kernel.org,linux.intel.com,linux-m68k.org,ideasonboard.com];
- FUZZY_RATELIMITED(0.00)[rspamd.com];
- TO_DN_EQ_ADDR_SOME(0.00)[]; ARC_NA(0.00)[];
- RCPT_COUNT_TWELVE(0.00)[21]; MIME_TRACE(0.00)[0:+];
- TO_MATCH_ENVRCPT_ALL(0.00)[];
- FREEMAIL_ENVRCPT(0.00)[gmail.com]; RCVD_TLS_ALL(0.00)[];
- RCVD_COUNT_TWO(0.00)[2]; FROM_EQ_ENVFROM(0.00)[];
- FROM_HAS_DN(0.00)[]; TO_DN_SOME(0.00)[];
- MID_RHS_MATCH_FROM(0.00)[]; RCVD_VIA_SMTP_AUTH(0.00)[];
- RECEIVED_SPAMHAUS_BLOCKED_OPENRESOLVER(0.00)[2a07:de40:b281:106:10:150:64:167:received];
- DKIM_TRACE(0.00)[suse.de:+];
- DBL_BLOCKED_OPENRESOLVER(0.00)[suse.de:dkim,suse.de:mid,suse.de:email]
-X-Spam-Score: -3.01
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -169,44 +74,100 @@ List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-Hi
+On Mon, 07 Jul 2025 21:00:54 +0200
+"Danilo Krummrich" <dakr@kernel.org> wrote:
 
-Am 21.08.25 um 13:28 schrieb Biju Das:
-> Hi Thomas Zimmermann,
->
-> Thanks for the patch.
->
->> -----Original Message-----
->> From: Thomas Zimmermann <tzimmermann@suse.de>
->> Sent: 21 August 2025 09:17
->> Subject: [PATCH v6 18/25] drm/renesas/rz-du: Compute dumb-buffer sizes with drm_mode_size_dumb()
->>
->> Call drm_mode_size_dumb() to compute dumb-buffer scanline pitch and buffer size. Align the pitch
->> according to hardware requirements.
->>
->> v5:
->> - include dumb-buffers header for drm_mode_size_dumb() (kernel test robot)
->>
->> Signed-off-by: Thomas Zimmermann <tzimmermann@suse.de>
->> Cc: Biju Das <biju.das.jz@bp.renesas.com>
-> Tested-by: Biju Das <biju.das.jz@bp.renesas.com>
+> On Mon Jul 7, 2025 at 7:04 PM CEST, Caterina Shablia wrote:
+> > diff --git a/drivers/gpu/drm/drm_gpuvm.c b/drivers/gpu/drm/drm_gpuvm.c
+> > index 05978c5c38b1..dc3c2f906400 100644
+> > --- a/drivers/gpu/drm/drm_gpuvm.c
+> > +++ b/drivers/gpu/drm/drm_gpuvm.c
+> > @@ -2098,12 +2098,48 @@ op_unmap_cb(const struct drm_gpuvm_ops *fn, void *priv,
+> >  	return fn->sm_step_unmap(&op, priv);
+> >  }
+> >  
+> > +static bool can_merge(struct drm_gpuvm *gpuvm, const struct drm_gpuva *a,
+> > +		      const struct drm_gpuva *b)
+> > +{
+> > +	/* Only GEM-based mappings can be merged, and they must point to
+> > +	 * the same GEM object.
+> > +	 */
+> > +	if (a->gem.obj != b->gem.obj || !a->gem.obj)
+> > +		return false;
+> > +
+> > +	/* Let's keep things simple for now and force all flags to match. */
+> > +	if (a->flags != b->flags)
+> > +		return false;
+> > +
+> > +	/* Order VAs for the rest of the checks. */
+> > +	if (a->va.addr > b->va.addr)
+> > +		swap(a, b);
+> > +
+> > +	/* We assume the caller already checked that VAs overlap or are
+> > +	 * contiguous.
+> > +	 */
+> > +	if (drm_WARN_ON(gpuvm->drm, b->va.addr > a->va.addr + a->va.range))
+> > +		return false;
+> > +
+> > +	/* We intentionally ignore u64 underflows because all we care about
+> > +	 * here is whether the VA diff matches the GEM offset diff.
+> > +	 */
+> > +	return b->va.addr - a->va.addr == b->gem.offset - a->gem.offset;
+> > +}
+> > +
+> >  static int
+> >  __drm_gpuvm_sm_map(struct drm_gpuvm *gpuvm,
+> >  		   const struct drm_gpuvm_ops *ops, void *priv,
+> >  		   const struct drm_gpuvm_map_req *req)
+> >  {
+> >  	struct drm_gpuva *va, *next;
+> > +	struct drm_gpuva reqva = {
+> > +		.va.addr = req->va.addr,
+> > +		.va.range = req->va.range,
+> > +		.gem.offset = req->gem.offset,
+> > +		.gem.obj = req->gem.obj,
+> > +		.flags = req->flags,  
+> 
+> Huh? Where does req->flags come from? I don't remember that this flag exists in
+> struct drm_gpuvm_map_req in the preceding patch?
 
-Thanks for testing. Could you also review the patch, please?
+Oops, I re-ordered commits, and forgot to verify that the series was
+bisectable. This should be part of patch 4 actually.
 
-Best regards
-Thomas
+> 
+> > +	};
+> >  	u64 req_end = req->va.addr + req->va.range;
+> >  	int ret;
+> >  
+> > @@ -2116,12 +2152,9 @@ __drm_gpuvm_sm_map(struct drm_gpuvm *gpuvm,
+> >  		u64 addr = va->va.addr;
+> >  		u64 range = va->va.range;
+> >  		u64 end = addr + range;
+> > -		bool merge = !!va->gem.obj;
+> > +		bool merge = can_merge(gpuvm, va, &reqva);  
+> 
+> I know you want to do the swap() trick above, but I don't like creating a
+> temporary struct drm_gpuva with all the other uninitialized fields.
 
->
-> Cheers,
-> Biju
+I mean, I could do it the other way around (gpuva -> op_map), but it
+means doing it on each va with cross.
 
--- 
---
-Thomas Zimmermann
-Graphics Driver Developer
-SUSE Software Solutions Germany GmbH
-Frankenstrasse 146, 90461 Nuernberg, Germany
-GF: Ivo Totev, Andrew Myers, Andrew McDonald, Boudien Moerman
-HRB 36809 (AG Nuernberg)
+> 
+> If you really want this, can we please limit the scope? Maybe the following
+> helper:
+> 
+> 	static bool can_merge(struct drm_gpuvm *gpuvm,
+> 			      const struct drm_gpuva *va,
+> 			      struct drm_gpuvm_map_req *req)
+> 	{
+> 		struct drm_gpuva reqva = { ... };
+> 		return __can_merge(gpuvm, va, reqva);
 
+It's a bit of a shame though, because then this reqva is
+initialized every time can_merge() is called, instead of once at the
+beginning of an sm_map() operation. But maybe the compiler is smart
+enough to see through it when inlining (assuming it actually inlines
+the check).
+
+> 	}
 
