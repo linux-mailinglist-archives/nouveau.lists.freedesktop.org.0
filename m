@@ -2,41 +2,41 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id 267A1B2F5A6
-	for <lists+nouveau@lfdr.de>; Thu, 21 Aug 2025 12:51:36 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id EFFE2B2F5AC
+	for <lists+nouveau@lfdr.de>; Thu, 21 Aug 2025 12:52:47 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 2F13410E083;
-	Thu, 21 Aug 2025 10:51:34 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id A2F7710E2EA;
+	Thu, 21 Aug 2025 10:52:46 +0000 (UTC)
 Authentication-Results: gabe.freedesktop.org;
-	dkim=pass (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="IB04F8o0";
+	dkim=pass (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="cZiMedDg";
 	dkim-atps=neutral
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from tor.source.kernel.org (tor.source.kernel.org [172.105.4.254])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 64F3C10E083
- for <nouveau@lists.freedesktop.org>; Thu, 21 Aug 2025 10:51:33 +0000 (UTC)
+Received: from sea.source.kernel.org (sea.source.kernel.org [172.234.252.31])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 2297F10E2EA
+ for <nouveau@lists.freedesktop.org>; Thu, 21 Aug 2025 10:52:45 +0000 (UTC)
 Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by tor.source.kernel.org (Postfix) with ESMTP id 909AA60200;
- Thu, 21 Aug 2025 10:51:32 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 6D22FC4CEEB;
- Thu, 21 Aug 2025 10:51:28 +0000 (UTC)
+ by sea.source.kernel.org (Postfix) with ESMTP id 7FFB4449EA;
+ Thu, 21 Aug 2025 10:52:44 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 42508C4CEED;
+ Thu, 21 Aug 2025 10:52:40 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1755773492;
- bh=cMytUFE1fmlfUaGX9cWvvFMAHcz0yzHNBDICGtrf7sk=;
+ s=k20201202; t=1755773564;
+ bh=R1V1AwRna/S8N/EhSnIaw17FsINeg5f7DVVQw8h2ON4=;
  h=Date:Subject:Cc:To:From:References:In-Reply-To:From;
- b=IB04F8o0JStewSEpV2ymvEO/zxxGwgvH1bK6Jr2UUPMiahi7qVV2NkjTaCjC00iZ8
- BBv36c6YLtgB7Dl5ddxh3qtB0JFm6HgEoUG78aRRQBArXGRHlUeFJ7V4dB28g/tNaO
- 1RkdVuZSm6ueWKFtwQAZ1s4JKLRHKOv+Tz4P6B0FsR0YMycztEt2sDxfITlSvhYjdi
- 4Q1zdq6f3oz9kqvLBfDD4gEidTRkppcS8ClTsTQX+n80DKy8I/WXLW1UUn3HC+REU8
- d5vKL5tMXNFT4vtyCuWzJ+2lyDJDiuGGwYdk+dLjbAwiL98bFT3qfLjmo/rHNFVv/i
- iS7H8QZ8pfwAA==
+ b=cZiMedDgUMqwW3c+r9YzeXcJDpQqFJYlJ78w2zvhV9OUFIDzp56Gb1oMLnNNJYyz/
+ AhsjENOCWk4xjaeuNqrxJdVNOmuOwmbygmsyKgM1eV3nLDHQg902o4M+KWuLNekYGi
+ K6Avk/aw0OdBeQIGOqjAuqbS0OXHXsCiEWCXsx9l4Dv+IOsKkJW8duuI0PSYdGK2nw
+ E9AFbwyanXElhVNV34z2bpjdcJCh3vcDVfJEcCPCYkh3LgLnDSVb4fxgojqTGrD73v
+ BZ86KcW+d1VwgjHPXCDOGXdvQuK3hwdxrDobRO877jYn9kAe338WWnL1ZoiENoegu2
+ OmJb8j7tECFrg==
 Mime-Version: 1.0
 Content-Transfer-Encoding: quoted-printable
 Content-Type: text/plain; charset=UTF-8
-Date: Thu, 21 Aug 2025 12:51:26 +0200
-Message-Id: <DC81R8RHTHTC.3J58ODZD3UQLQ@kernel.org>
-Subject: Re: [PATCH v5 1/4] rust: pci: provide access to PCI Class and
- Class-related items
+Date: Thu, 21 Aug 2025 12:52:38 +0200
+Message-Id: <DC81S5SN8N76.YH4323TLNHJK@kernel.org>
+Subject: Re: [PATCH v5 3/4] gpu: nova-core: avoid probing
+ non-display/compute PCI functions
 Cc: "Alexandre Courbot" <acourbot@nvidia.com>, "Joel Fernandes"
  <joelagnelf@nvidia.com>, "Timur Tabi" <ttabi@nvidia.com>, "Alistair Popple"
  <apopple@nvidia.com>, "David Airlie" <airlied@gmail.com>, "Simona Vetter"
@@ -53,8 +53,8 @@ Cc: "Alexandre Courbot" <acourbot@nvidia.com>, "Joel Fernandes"
 To: "John Hubbard" <jhubbard@nvidia.com>
 From: "Danilo Krummrich" <dakr@kernel.org>
 References: <20250821044207.3732-1-jhubbard@nvidia.com>
- <20250821044207.3732-2-jhubbard@nvidia.com>
-In-Reply-To: <20250821044207.3732-2-jhubbard@nvidia.com>
+ <20250821044207.3732-4-jhubbard@nvidia.com>
+In-Reply-To: <20250821044207.3732-4-jhubbard@nvidia.com>
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -70,27 +70,29 @@ Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
 On Thu Aug 21, 2025 at 6:42 AM CEST, John Hubbard wrote:
-> Allow callers to write Class::STORAGE_SCSI instead of
-> bindings::PCI_CLASS_STORAGE_SCSI, for example.
+> NovaCore has so far been too imprecise about figuring out if .probe()
+> has found a supported PCI PF (Physical Function). By that I mean:
+> .probe() sets up BAR0 (which involves a lot of very careful devres and
+> Device<Bound> details behind the scenes). And then if it is dealing with
+> a non-supported device such as the .1 audio PF on many GPUs, it fails
+> out due to an unexpected BAR0 size. We have been fortunate that the BAR0
+> sizes are different.
 >
-> New APIs:
->     Class::STORAGE_SCSI, Class::NETWORK_ETHERNET, etc.
->     Class::as_raw()
->     Class: From<u32> for Class
->     ClassMask: Full, ClassSubclass
->     Device::pci_class()
+> Really, we should be filtering on PCI class ID instead. These days I
+> think we can confidently pick out Nova's supported PF's via PCI class
+> ID. And if not, then we'll revisit.
+>
+> The approach here is to filter on "Display VGA" or "Display 3D", which
+> is how PCI class IDs express "this is a modern GPU's PF".
 >
 > Cc: Danilo Krummrich <dakr@kernel.org>
 > Cc: Alexandre Courbot <acourbot@nvidia.com>
 > Cc: Elle Rhumsaa <elle@weathered-steel.dev>
 > Signed-off-by: John Hubbard <jhubbard@nvidia.com>
 > ---
->  rust/kernel/pci.rs    |  10 ++
->  rust/kernel/pci/id.rs | 239 ++++++++++++++++++++++++++++++++++++++++++
+>  drivers/gpu/nova-core/driver.rs | 33 ++++++++++++++++++++++++++++-----
+>  rust/kernel/pci.rs              | 21 +++++++++++++++++++++
 
-Please add rust/kernel/pci/ to the maintainers entry.
+Can you please split this one up in two patches?
 
-(Would have done on apply, but I have another comment on patch 3.)
-
->  2 files changed, 249 insertions(+)
->  create mode 100644 rust/kernel/pci/id.rs
+>  2 files changed, 49 insertions(+), 5 deletions(-)
