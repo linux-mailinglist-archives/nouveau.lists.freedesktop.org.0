@@ -2,165 +2,76 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id 46D34B318BC
-	for <lists+nouveau@lfdr.de>; Fri, 22 Aug 2025 15:04:37 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 01481B31F56
+	for <lists+nouveau@lfdr.de>; Fri, 22 Aug 2025 17:48:20 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 783D910EB06;
-	Fri, 22 Aug 2025 13:04:35 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id A2BF810EB5A;
+	Fri, 22 Aug 2025 15:48:17 +0000 (UTC)
 Authentication-Results: gabe.freedesktop.org;
-	dkim=pass (2048-bit key; unprotected) header.d=Nvidia.com header.i=@Nvidia.com header.b="BmCsoI1f";
+	dkim=pass (2048-bit key; unprotected) header.d=gfxstrand-net.20230601.gappssmtp.com header.i=@gfxstrand-net.20230601.gappssmtp.com header.b="gBDTbNGC";
 	dkim-atps=neutral
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from NAM10-DM6-obe.outbound.protection.outlook.com
- (mail-dm6nam10on2078.outbound.protection.outlook.com [40.107.93.78])
- by gabe.freedesktop.org (Postfix) with ESMTPS id B65C610EB06;
- Fri, 22 Aug 2025 13:04:34 +0000 (UTC)
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=e7wnQGXJ7LbL+xSx5XtZiDnHn/fWNQWC0G3LfTTEGX9SWq61Oer6tPuB+pR1lS10i6/np6nkg5AyFKrJq4em6Pbg0JLabA/A4JIabLnBqhx3IupDuoiWsXoD2N0eV83XrrftjjYOed1Ecqwn8Dsu1ntFiYWyeP+zA6KxuQZdTwmqB8XOxG07N76SBifymLgNpp169v6XiQJaf5U0FQtBgOLsApWIZRGB2w64uOd2/bfSM612e9O6ODtFYaJTa+OtuFgbD+0DaToq9gkMPOkq9NvZNn7WH5AfjlTHWWpWt25bzlyCyISFgAQT8IuS0rbniA6kD/xUFG1cVAvxBdHDmQ==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=eOYqs0EEhC53DQ5IKfppgH+wVW7+hl+SqMi97nllo7I=;
- b=t166lwlLhufZfxyqnir4nbjoRiE2DJRX6smYFOucA/IjUqdGXuWw4OCwqeEipUJNRaRc3aa6fUz1O/sapZT47jreriV/BlavakV7nEZ0cX+NdnGNRMaKbBOaHZ708s1PskTXNhsmzdA+bdwXYgpWvNarrqXqMjbdmSU7AYkyTsmitbcj02IgBzE0S8bAX7OvkHQpdmYXuuXOXPuFnaNWaCpggdU8dggy/HF9CX2Pj7f+7AjSg9yLMsjYzQWLwS2FgFe/6SUAK3WG6m/06In6m3Xe4UdL/qpM9dH9P+1lOIlt1Ztlp+nneHqQixwwE7P9GWtYa3E0pGUNo3IiW/K+7A==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=nvidia.com; dmarc=pass action=none header.from=nvidia.com;
- dkim=pass header.d=nvidia.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=Nvidia.com;
- s=selector2;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=eOYqs0EEhC53DQ5IKfppgH+wVW7+hl+SqMi97nllo7I=;
- b=BmCsoI1fpa5UiC2V27QCt0gGkbvHnHz6tUnSeR47At4s5TUdeCrvLboUuMsQJyQEt0hVk/KwyeKSXKNLXKpx9t8oXgz/s70oYwKZWT4S+VMx9VFRfKH5R1USQCuiKpX3HEcOCvdAh3nCEnxJKTf8ZMWNzG/2rtDb1AHs8QerkMPwIO5vf8cyNsKSAcDYYtQfT2sQDajalxCq0YtSG17KCMOc7HTSIq7Lhc2MHksxVq7jcdsV2wuSRvahXY5f4JIpAUWpp/8uRvWYjGuCNN/i7HSrpZxT7J6aFI8JgtG9zwzk76nj2ah+j4+UswMBLUS+9rc4QCxvSY6XwP6BbRRgfA==
-Authentication-Results: dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=nvidia.com;
-Received: from CH2PR12MB3990.namprd12.prod.outlook.com (2603:10b6:610:28::18)
- by DS2PR12MB9661.namprd12.prod.outlook.com (2603:10b6:8:27b::17) with
- Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9052.14; Fri, 22 Aug
- 2025 13:04:31 +0000
-Received: from CH2PR12MB3990.namprd12.prod.outlook.com
- ([fe80::6e37:569f:82ee:3f99]) by CH2PR12MB3990.namprd12.prod.outlook.com
- ([fe80::6e37:569f:82ee:3f99%3]) with mapi id 15.20.9052.014; Fri, 22 Aug 2025
- 13:04:30 +0000
-Content-Transfer-Encoding: quoted-printable
-Content-Type: text/plain; charset=UTF-8
-Date: Fri, 22 Aug 2025 22:04:27 +0900
-Message-Id: <DC8Z7MLH1J7K.176ZEFST32FS4@nvidia.com>
-Subject: Re: [PATCH 5/5] gpu: nova-core: firmware: process and prepare the
- GSP firmware
-From: "Alexandre Courbot" <acourbot@nvidia.com>
-To: "Danilo Krummrich" <dakr@kernel.org>
-Cc: "Miguel Ojeda" <ojeda@kernel.org>, "Alex Gaynor"
- <alex.gaynor@gmail.com>, "Boqun Feng" <boqun.feng@gmail.com>, "Gary Guo"
- <gary@garyguo.net>, =?utf-8?q?Bj=C3=B6rn_Roy_Baron?=
- <bjorn3_gh@protonmail.com>, "Benno Lossin" <lossin@kernel.org>, "Andreas
- Hindborg" <a.hindborg@kernel.org>, "Alice Ryhl" <aliceryhl@google.com>,
- "Trevor Gross" <tmgross@umich.edu>, "David Airlie" <airlied@gmail.com>,
- "Simona Vetter" <simona@ffwll.ch>, "Maarten Lankhorst"
- <maarten.lankhorst@linux.intel.com>, "Maxime Ripard" <mripard@kernel.org>,
- "Thomas Zimmermann" <tzimmermann@suse.de>,
- <rust-for-linux@vger.kernel.org>, <linux-kernel@vger.kernel.org>,
- <nouveau@lists.freedesktop.org>, <dri-devel@lists.freedesktop.org>
-X-Mailer: aerc 0.20.1-0-g2ecb8770224a-dirty
-References: <20250822-nova_firmware-v1-0-ff5633679460@nvidia.com>
- <20250822-nova_firmware-v1-5-ff5633679460@nvidia.com>
- <DC8Z2MLOJN7D.3IOSY6SJ7DPVD@kernel.org>
-In-Reply-To: <DC8Z2MLOJN7D.3IOSY6SJ7DPVD@kernel.org>
-X-ClientProxiedBy: TY2PR02CA0051.apcprd02.prod.outlook.com
- (2603:1096:404:e2::15) To CH2PR12MB3990.namprd12.prod.outlook.com
- (2603:10b6:610:28::18)
+Received: from mail-pl1-f178.google.com (mail-pl1-f178.google.com
+ [209.85.214.178])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id DA7F010EB5A
+ for <nouveau@lists.freedesktop.org>; Fri, 22 Aug 2025 15:48:15 +0000 (UTC)
+Received: by mail-pl1-f178.google.com with SMTP id
+ d9443c01a7336-2465cb0e81bso2442235ad.1
+ for <nouveau@lists.freedesktop.org>; Fri, 22 Aug 2025 08:48:15 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=gfxstrand-net.20230601.gappssmtp.com; s=20230601; t=1755877695; x=1756482495;
+ darn=lists.freedesktop.org; 
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=xN84CYhIFGwjQYLkrLimX0GikQ2L4MHKGoucIYno+Qo=;
+ b=gBDTbNGCAUr4UTpa3eIregxJtnSO0q5BuBcQW0vZ+gPMJts2bsiTc/hSsxvVxj3YI/
+ TuXxNi6WGu4plLfWL7sw3uxvN9nfU8TQ75v/jTz4mBcqhs+4cwADDvJxM7RhmSg/APXE
+ d7rcAmNq2nH73jCzMLZXr/q791vVyMAEMc+ZrYXRlv9sejgCkS6Xgm8jOk9XwOPWFn4L
+ awnfQq84hk/a9GYOfkpsa/XS1g4HHOee8jZKL+zdJ1kfHq/zvetxOHYStN+JWiVKgnh4
+ A6hPj+URzUAwAeBBNXSd91C0L3px1upwUOLrTX0pdbkWbkL7qBpr5183fiRdsl7Euq2B
+ dJ4g==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1755877695; x=1756482495;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=xN84CYhIFGwjQYLkrLimX0GikQ2L4MHKGoucIYno+Qo=;
+ b=sbgsMC9zs2uBbGTPu9G5whSqyWIjyNQMvTyGRj/YM1iTst7kCbWgdhwyPGS6m8ej+W
+ eTAWPxX83JVaPA8dsV2g1akPKOgeAPMcxKHkOjwWDVHsh2hqxrx5JSoNVdeIkZ32mJ3w
+ 9yRiy+ZbyLJUdl1J2ENBkFuNOG/4PaPQY8kDAiXI6PnM4CAx0RBpIRtfLf/YzqANxS84
+ 2IHcN/QnfBrBK/xKLHP7oSPvoPo91+dH2/ofHBVomdTtJvGpEJwPxix5CTYxqHgJwCiH
+ flZqiXIWDmi2ivQMBJ0/egmmDdHgN+awZgIGRYTWY0srNxLoEi9w2yi5OGkIMJAEZm+w
+ 49Aw==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCXnASL8CSu68MjmZhgz0x2Enbb6hEFxGZu5LJ09muM7Oa2oy+A87JOgw583ztTrvFO9OHg0TWcM@lists.freedesktop.org
+X-Gm-Message-State: AOJu0YwqRWmPU0Wi3z7IhIWeEYOeEQQf8wbq4KyVuuVdMFiKikzth/Bq
+ 3zitKfKXBNALfngmMi3mfDBKYNPlqI/A9QIwsMuHFNFHBsIwtYfNESJP36S4XhXLb3dUI57WeE1
+ kWZNZfQHOgR3Uf+5OObm6aDZKp7b+s27SXufTT+dWPg==
+X-Gm-Gg: ASbGncuvcBs0YzUAC2VNFX1BWt+oH4t8RT61R+aQ4Kz8buIcy3vwF4qURW9a5+jxgkN
+ e0QZ9SbkuO2+t4CTVV/0iia3B+OsrH867MsY4GzKw180+ezQELgBGtatSx1O4hwo1FYSeLk66EQ
+ KU/bclfVlygwPfb1Fi87bGFp+9zKt6BKPJH5xTQ8j4CiefIst9o2l1/HA5EIyXVPcBN71xPEAbR
+ vrdzwI=
+X-Google-Smtp-Source: AGHT+IFCRvbO57Wx+hx3aoKumInURzltnjKAdS397FD58bXr/9xH2xi6/VieOLFfRFxloa4Rv7Id3CtPvlWPO0tMwpo=
+X-Received: by 2002:a17:902:ce01:b0:240:967a:fec3 with SMTP id
+ d9443c01a7336-2462ef1f1c7mr48407055ad.29.1755877695167; Fri, 22 Aug 2025
+ 08:48:15 -0700 (PDT)
 MIME-Version: 1.0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: CH2PR12MB3990:EE_|DS2PR12MB9661:EE_
-X-MS-Office365-Filtering-Correlation-Id: c1248073-092c-4d8c-e55d-08dde17c6ea1
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0;
- ARA:13230040|7416014|376014|10070799003|366016|1800799024; 
-X-Microsoft-Antispam-Message-Info: =?utf-8?B?enFVYnFxMGFWV05OMTV0VEl2azBtQmJCQnl2UkR2MXVtdzV4d1RMWjlPZzIv?=
- =?utf-8?B?NmFWU1A5NEt2VjV4RTlEd08wTzlsUnJFU0NqS2RzR0J5eDJsemt2WEJpSDhr?=
- =?utf-8?B?YnpRR2RsNzJaWGFaV3ZHYWhMWWh5blRaYVVjdjRwZzR2QS8yOWEyNTU2K05p?=
- =?utf-8?B?VjlyYUNXNVcrU1FJV2V1YWxwYnV6RjhDd3Y2MkRxeVZvYTM1Uno0QlE5aDZ0?=
- =?utf-8?B?UWpnTHA0dW1kRjNJdXhaSlBCbnc4Uk5RR2d2VWkyZWhtUkY1cVN3TzhUZ3I2?=
- =?utf-8?B?VE1JcTUzcTNIcVdmWU5ubnhBSFhQRnRBRldhdFFsaTB3VVk1bUJ5b01zeEdl?=
- =?utf-8?B?ZnhIRGgwcEJwYnZ4OEY0RGtTS0MrOXZyL1BWYTZhUndpaSs0OWNMNFlXS1Nq?=
- =?utf-8?B?SUJkNk9VdEVodkdTYmtnUGxBdVRuN0FQVE5yRG4zOGtSYVh4dXhJTUZBQjVJ?=
- =?utf-8?B?ZzI5bUJMb2I1YU9DT1Foems3REpiQ3hHblMzdjlweEhZQVkwVTYxeGwrR1Ix?=
- =?utf-8?B?NXUzRjE1L3loT0JUOStnNDl2R2pnZVVFWnVRZnh0eWZtclpiWHVoL3hyWnVF?=
- =?utf-8?B?Zy8zMGVDeFFPa2trbUVKZUZ4M0U0SytWV0U3U1M0SUVTRTdFSnVBSXFGUCt3?=
- =?utf-8?B?RzVKa2xXWTIwMnVvSHovbXQxd3ZDdm1BTyt1QXNqb2JZMkY3WjV3V0JIbUh0?=
- =?utf-8?B?YkVXeFg0dUZEdEFrb055aVN6N2pxRjI0TGpJZzFPbXNoVVhRZGlqQTBXOUx2?=
- =?utf-8?B?S3NXR0dIeHJMWERQRjRhU2FNcTQ3K3lPSWxJemdPSFZJRndmWG9GblNhUmw4?=
- =?utf-8?B?YW5PSjZjYTEyMm5NQnVnYWV0SDF1R1gxa09RNUFjRVFtWnVPVWVQZ3hGVjhD?=
- =?utf-8?B?WVFMTFRTRWxMcWdqcHJzZllDWWZoM05GZFZzL2hidTBnR0FpTS9OM09Wc1NF?=
- =?utf-8?B?amo1UU0wUVpRTTlnN3pyOHVDTnpNaDhlcytoUE1reVZwZi9PQ1FHZ2lSZVg5?=
- =?utf-8?B?cWI1ZVVnQVdVR0ZncEZjY29pZVFxV2hUc2t1R0t5WE90SVZtZ0M1a1FWQlMw?=
- =?utf-8?B?bXRXa3ZiQUxyVnNmMExrcEc4S3htb2puWnNZZmRPZEJVWU4xcFVXWFZ1L1hO?=
- =?utf-8?B?NkN2Tm5uang1TUhPd1FpdzZPVHNYTTJVSVptU3dpTFhuRkhMZmtHL0Y1UGVq?=
- =?utf-8?B?TVIwZGpLL2VkZCtuY3RCVkpIWlluUGh0dHA1WFJTYkVsWEtKTVJLUEpUM0s0?=
- =?utf-8?B?ejhQSStFUTh2aG1iUk56RGlmVGlBT3VIT1Y0YzN6ZDdPemNJRXd4VTUrTjR0?=
- =?utf-8?B?eGR3UTJzeHRJOC8vUkNtMGR6WmhIdmltUFFaREs2MWVMVzhwSzByOGZMZHRt?=
- =?utf-8?B?UGRZVGdtc01abndWSDhnTXQyem5OeW4xTEp2ZmxWRnM3L1JTUno5c0dTbmo0?=
- =?utf-8?B?cDZwMGdCb1FSMmJHUTRnWGFlK1NlekNWUW5vL1A5cFo2UDZUOUpJU2xsdUw5?=
- =?utf-8?B?UEc0WE8rdVZSbnJRWGxta0JPcFNJUXhzZGI3YTB0VmtNRnh0TmYrYmVyWTRl?=
- =?utf-8?B?NzBucnpiVklYU1c4UGdoazRNcVd1eE0rTzRBaEVyK1NMTDJFODRqOUpxYXpu?=
- =?utf-8?B?a1pGRDk1Zy92Qlppblh1TkZzQ0hyeVBpQkhrcTZKM1NZd3QyT3hDNlVPRzBQ?=
- =?utf-8?B?NEdQMDI2b2kxUnpxR1FmNDNNVGVHUGpyNDJIaVJURHZuNy9NLzQwVGRuaWto?=
- =?utf-8?B?djM5MnVoa2VpYnpFQ0hZQjA5L3NyR1owWmhCRitjSzBVMFhoMnV1M00zbEE4?=
- =?utf-8?B?Rmh3bnYvUy9YWlYwMk5hU0ZnWmdkc0FnYndnVUVHV3ZRa240WEgyTE1sMUsv?=
- =?utf-8?B?S28vTEkyRlViVnhVeTRyVUtFWHVMOXBRa0ROL1Zyc1dhT1E9PQ==?=
-X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
- IPV:NLI; SFV:NSPM; H:CH2PR12MB3990.namprd12.prod.outlook.com; PTR:; CAT:NONE;
- SFS:(13230040)(7416014)(376014)(10070799003)(366016)(1800799024); DIR:OUT;
- SFP:1101; 
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?TUU4MURJN3JxMXdIU09DbVFVTmRaRDdndUkvc1FtT3ZQTEE3UVo0RXB5Y2pz?=
- =?utf-8?B?UDVXMXRWZFh1S2N1dEpCRTRWMjJVOW0yWEhDMC9zSUk0elcreVJyTVl5Ti9V?=
- =?utf-8?B?TjcrUmdZeFlGVGQ2QkFmbDR3Ujk2ZWltSnN0YXRxNTVNTzVMOHZPV1UrQkN6?=
- =?utf-8?B?eXpkem1uenNNcFd6MmhCS2IrcUdWM3JiU0tVaDMvMjgxSzdUUzBJTjE0Y3F4?=
- =?utf-8?B?WVk2RE5pek5JVFBQbVduVWlEeUhtM0xyLzFjYTNSUlRiK2FJMlUweUtqTFMv?=
- =?utf-8?B?Z0FPajQvU2lwVC84dFV0S0cxMVZPbXVrZmFBclZLcUlQUU9Bbys0ODRBTVNV?=
- =?utf-8?B?ZG15bFc4VjV0OTJsQVFHYklucncvWGVyNUVJUnlWWkRVY3EwMzBWVWVsNEFE?=
- =?utf-8?B?NTNxTHl6OHpKWmtJV1VrYmpNVGFGdlRsWGlXV1JpNXY5Q05zYU5URHpmYjJs?=
- =?utf-8?B?ZlQvdUZzL2dacVFuWWJLM0ZOWDNpNWJNQnJmaE9GeWJBTVdqMWlIbUxhYkNM?=
- =?utf-8?B?T29uQ0Fjbzl1VmtpRVp5ZjI3Ukl0a0F5YlpjdTVGY2o1WGZnT2s1RTZlRFI5?=
- =?utf-8?B?MVBtcVBnY3pSUHZ2MVMvU1laRWlwM1M2NlBLcFMycEkzMjhiWnAwSEZpMHND?=
- =?utf-8?B?UWNiRlkzZmF1T0hSUS9MdjJUa2MxRmNBYXNBWUZKUC8ra1UvcjJiRUhzNXgv?=
- =?utf-8?B?cm5jbUVvdDRlRUxJUEtqdGIzS3ZpeWl2YW12OXFqWlFNU1RVRWh3Z1ZuMGdv?=
- =?utf-8?B?M3FzcmlJbXFRRStXcFJSUEdnUFhwd1N4Yml2SFNjeStJenQ0aTZxcURoK0JM?=
- =?utf-8?B?UkV6Z2N6S1FUL0hUVGlvZDJJOE5Db1VHYXB0aU5SUHZNVWcvZ2NZQTZVbnJR?=
- =?utf-8?B?TExjOWZZMit0SUpiVDF1MXpNa3ZFVUdLYWVhamZEbHZ4b2Y2cUhwdnlwQzNy?=
- =?utf-8?B?VjBKY0kwNFh4dGNZaVVNeCtYK3IyNThZcGNpeCtIQzZ0TEwvdDQxdXM5d1pS?=
- =?utf-8?B?UlVzTXo2MlpHd0xKekRSSlNWcUc3dFFPNWVSdkNJeHFZUXJpb3YzYlcwZzVh?=
- =?utf-8?B?cGVycmZSSjRKRWN6Vk56OTBwY2NNZFJvSmV1NnN6bzVMMzhXdm4rNDFySlpn?=
- =?utf-8?B?RVFhUDh3YkhDUkZpck9vSWkwVEVtbmR0cHJnMEFOZldtY3R1Rml3VmJ2Rzcy?=
- =?utf-8?B?VHVDU25sOEwxR0h4OVJkYVdWWUZoR2RubUVkSlFibHBWR0FacXkyR1lPSWdP?=
- =?utf-8?B?aVNsL3RSbGxGRktxWlpSdHAzR0FUOGI3R28yVXphbW42eVRLbDdKV0J4TTdS?=
- =?utf-8?B?VkZheHVWWnR6bUlGWXoreTNic2NIQS8xU3djcjlLNmlvVHhWckU3YzBGdXJX?=
- =?utf-8?B?RzdjdzdtUGJTNVFKYktjZWxSdllrTitJaWxHNTd6ZHZkYzF4eStxV3Y5Y2Zx?=
- =?utf-8?B?cTVWQUk1OUZxYXhtNFU0WWZBVVppOWF3QzVoTEJEN1NmRHYwM1QvNytON25E?=
- =?utf-8?B?NVZia3NuZkdBRFVNVnJmTnN5ZkVjOGU0WU1ORkdTdngzTkl5UE9sbXNTUXRL?=
- =?utf-8?B?VWhFbUlVdXhIdm0wV1BrVHJMUGxpaS83VWdYZEJZOGFzTVk4dHpHQjNRMmRa?=
- =?utf-8?B?VmJVUFNMcllDNTdYRW9qc3Rlakt4NlFQU1QzQzM2T1RSbU1ubWlHZlJHT1lv?=
- =?utf-8?B?c2d6eUdIcDFlU1NNNm4wTUxSRUhDR1JWYmYzTkJzdWpkTmxWRnB5T3VjQVFV?=
- =?utf-8?B?b2s4ZC9PTWU0blpVbnRoYXVXWnBrNWVtL0pkUEcyZXI0UE5ndWM4cUZmdlFF?=
- =?utf-8?B?RE5oNVdnV2lwdWw2SUIxWlEyQjE1V1d1bjloZ3dkWGhGcUZydWFxRlBBOXhE?=
- =?utf-8?B?VFFsdDM1YzZaNmFrV05Dd3dYK0Z0MHlMd25GRWw1eFRPNVhjRlp0NTVKMzBK?=
- =?utf-8?B?MkliVE1tMXpaelpPWEh0cjBWTDg5VWd2RmpFa2RoM3RWeGNGQ2JoV2RMM3Bk?=
- =?utf-8?B?VktQZVJ2VXVBcjNsTkF4cjg4Z3RKWWM3UFZZcDlFTnJoZWxkdFZWWEVFME42?=
- =?utf-8?B?c0d3bll2SzNPTnZ4ZkJFT3JxUEhSQUtBSDdtcm1TZ29TZ21yaWNlZnY1WHhl?=
- =?utf-8?B?b1JTeE82MWVvaklOajg2Yk1iekxnMkM5Um9mR0NML1FJK3laR1hTekJoYmdJ?=
- =?utf-8?Q?hadel2HlU+qK+FljudQBil7uzRVBznOQ4EEd7KaWiris?=
-X-OriginatorOrg: Nvidia.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: c1248073-092c-4d8c-e55d-08dde17c6ea1
-X-MS-Exchange-CrossTenant-AuthSource: CH2PR12MB3990.namprd12.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 22 Aug 2025 13:04:30.6468 (UTC)
-X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
-X-MS-Exchange-CrossTenant-Id: 43083d15-7273-40c1-b7db-39efd9ccc17a
-X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: ar6bvxBg/DS9M0RTSuTvk6aXOwBrhuf0MfezSjWmtc3llkKCXjfD/bBVrReneH+UM4kTWvPdT0g9CPcO1qQAzw==
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: DS2PR12MB9661
+References: <20250811220017.1337-1-jajones@nvidia.com>
+ <20250811220017.1337-4-jajones@nvidia.com>
+In-Reply-To: <20250811220017.1337-4-jajones@nvidia.com>
+From: Faith Ekstrand <faith@gfxstrand.net>
+Date: Fri, 22 Aug 2025 11:48:04 -0400
+X-Gm-Features: Ac12FXwss5vbKtmD-ywCXJZxR_u6_vIicgyUcM5oN8nUNbYSwfNA-YxOq8gTi3M
+Message-ID: <CAOFGe97AN_yo7Mg4Z7s=qOFzSGzzs6CLEAhByf-ks2GthFj0aw@mail.gmail.com>
+Subject: Re: [PATCH 3/3] drm/nouveau: Advertise correct modifiers on GB20x
+To: James Jones <jajones@nvidia.com>
+Cc: Danilo Krummrich <dakr@kernel.org>, Lyude Paul <lyude@redhat.com>, 
+ Faith Ekstrand <faith.ekstrand@collabora.com>, nouveau@lists.freedesktop.org, 
+ dri-devel@lists.freedesktop.org, linux-kernel@vger.kernel.org, 
+ David Airlie <airlied@gmail.com>, Simona Vetter <simona@ffwll.ch>, 
+ Joel Fernandes <joelagnelf@nvidia.com>
+Content-Type: multipart/alternative; boundary="0000000000004a348e063cf6224c"
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -175,41 +86,427 @@ List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-On Fri Aug 22, 2025 at 9:57 PM JST, Danilo Krummrich wrote:
-> Hi Alex,
->
-> not a full review yet, but a few ad-hoc comments from skimming over it.
->
-> On Fri Aug 22, 2025 at 2:47 PM CEST, Alexandre Courbot wrote:
->> +/// A device-mapped firmware with a set of (also device-mapped) pages t=
-ables mapping the firmware
->> +/// to the start of their own address space.
->> +pub(crate) struct GspFirmware {
->> +    /// The GSP firmware inside a [`VVec`], device-mapped via a SG tabl=
-e.
->> +    #[expect(unused)]
->
-> Do we expect this to change? Otherwise, just prefix the field name with a=
-n
-> underscore.
+--0000000000004a348e063cf6224c
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 
-Yes, all the fields marked unused are eventually used in incoming
-patches.
+On Mon, Aug 11, 2025 at 5:57=E2=80=AFPM James Jones <jajones@nvidia.com> wr=
+ote:
 
+> 8 and 16 bit formats use a different layout on
+> GB20x than they did on prior chips. Add the
+> corresponding DRM format modifiers to the list of
+> modifiers supported by the display engine on such
+> chips, and filter the supported modifiers for each
+> format based on its bytes per pixel in
+> nv50_plane_format_mod_supported().
 >
->> +    fw: Pin<KBox<SGTable<Owned<VVec<u8>>>>>,
->> +    /// The level 2 page table, mapping [`Self::fw`] at its beginning.
->> +    #[expect(unused)]
->> +    lvl2: Pin<KBox<SGTable<Owned<VVec<u8>>>>>,
->> +    /// The level 1 page table, mapping [`Self::lvl2`] at its beginning=
-.
->> +    #[expect(unused)]
->> +    lvl1: Pin<KBox<SGTable<Owned<VVec<u8>>>>>,
+> Note this logic will need to be updated when GB10
+> support is added, since it is a GB20x chip that
+> uses the pre-GB20x sector layout for all formats.
 >
-> Instead of creating three allocations, just make struct GspFirmware pin_d=
-ata by
-> itself. This should even propagate down to struct Gpu, which is pin_data.
+> Signed-off-by: James Jones <jajones@nvidia.com>
+> ---
+>  drivers/gpu/drm/nouveau/dispnv50/disp.c     |  4 ++-
+>  drivers/gpu/drm/nouveau/dispnv50/disp.h     |  1 +
+>  drivers/gpu/drm/nouveau/dispnv50/wndw.c     | 24 +++++++++++++--
+>  drivers/gpu/drm/nouveau/dispnv50/wndwca7e.c | 33 +++++++++++++++++++++
+>  4 files changed, 59 insertions(+), 3 deletions(-)
 >
-> So everything can be in one single allocation.
+> diff --git a/drivers/gpu/drm/nouveau/dispnv50/disp.c
+> b/drivers/gpu/drm/nouveau/dispnv50/disp.c
+> index e97e39abf3a2..12b1dba8e05d 100644
+> --- a/drivers/gpu/drm/nouveau/dispnv50/disp.c
+> +++ b/drivers/gpu/drm/nouveau/dispnv50/disp.c
+> @@ -2867,7 +2867,9 @@ nv50_display_create(struct drm_device *dev)
+>         }
+>
+>         /* Assign the correct format modifiers */
+> -       if (disp->disp->object.oclass >=3D TU102_DISP)
+> +       if (disp->disp->object.oclass >=3D GB202_DISP)
+> +               nouveau_display(dev)->format_modifiers =3D
+> wndwca7e_modifiers;
+> +       else if (disp->disp->object.oclass >=3D TU102_DISP)
+>                 nouveau_display(dev)->format_modifiers =3D
+> wndwc57e_modifiers;
+>         else
+>         if (drm->client.device.info.family >=3D NV_DEVICE_INFO_V0_FERMI)
+> diff --git a/drivers/gpu/drm/nouveau/dispnv50/disp.h
+> b/drivers/gpu/drm/nouveau/dispnv50/disp.h
+> index 15f9242b72ac..5d998f0319dc 100644
+> --- a/drivers/gpu/drm/nouveau/dispnv50/disp.h
+> +++ b/drivers/gpu/drm/nouveau/dispnv50/disp.h
+> @@ -104,4 +104,5 @@ struct nouveau_encoder *nv50_real_outp(struct
+> drm_encoder *encoder);
+>  extern const u64 disp50xx_modifiers[];
+>  extern const u64 disp90xx_modifiers[];
+>  extern const u64 wndwc57e_modifiers[];
+> +extern const u64 wndwca7e_modifiers[];
+>  #endif
+> diff --git a/drivers/gpu/drm/nouveau/dispnv50/wndw.c
+> b/drivers/gpu/drm/nouveau/dispnv50/wndw.c
+> index e2c55f4b9c5a..ef9e410babbf 100644
+> --- a/drivers/gpu/drm/nouveau/dispnv50/wndw.c
+> +++ b/drivers/gpu/drm/nouveau/dispnv50/wndw.c
+> @@ -786,13 +786,14 @@ nv50_wndw_destroy(struct drm_plane *plane)
+>  }
+>
+>  /* This function assumes the format has already been validated against
+> the plane
+> - * and the modifier was validated against the device-wides modifier list
+> at FB
+> + * and the modifier was validated against the device-wide modifier list
+> at FB
+>   * creation time.
+>   */
+>  static bool nv50_plane_format_mod_supported(struct drm_plane *plane,
+>                                             u32 format, u64 modifier)
+>  {
+>         struct nouveau_drm *drm =3D nouveau_drm(plane->dev);
+> +       const struct drm_format_info *info =3D drm_format_info(format);
+>         uint8_t i;
+>
+>         /* All chipsets can display all formats in linear layout */
+> @@ -800,13 +801,32 @@ static bool nv50_plane_format_mod_supported(struct
+> drm_plane *plane,
+>                 return true;
+>
+>         if (drm->client.device.info.chipset < 0xc0) {
+> -               const struct drm_format_info *info =3D
+> drm_format_info(format);
+>                 const uint8_t kind =3D (modifier >> 12) & 0xff;
+>
+>                 if (!format) return false;
+>
+>                 for (i =3D 0; i < info->num_planes; i++)
+>                         if ((info->cpp[i] !=3D 4) && kind !=3D 0x70) retu=
+rn
+> false;
+> +       } else if (drm->client.device.info.chipset >=3D 0x1b2) {
+> +               const uint8_t slayout =3D ((modifier >> 22) & 0x1) |
+> +                       ((modifier >> 25) & 0x6);
+> +
+> +               if (!format)
+> +                       return false;
+> +
+> +               /*
+> +                * Note in practice this implies only formats where cpp i=
+s
+> equal
+> +                * for each plane, or >=3D 4 for all planes, are supporte=
+d.
+> +                */
+> +               for (i =3D 0; i < info->num_planes; i++) {
+> +                       if (((info->cpp[i] =3D=3D 2) && slayout !=3D 3) |=
+|
+> +                           ((info->cpp[i] =3D=3D 1) && slayout !=3D 2) |=
+|
+> +                           ((info->cpp[i] >=3D 4) && slayout !=3D 1))
+> +                               return false;
+> +
+> +                       /* 24-bit not supported. It has yet another layou=
+t
+> */
+> +                       WARN_ON(info->cpp[i] =3D=3D 3);
+>
 
-Ah, I was actually wondering - thanks, will try and do that.
+Should this really be a WARN_ON()? A DRM log message, maybe, but WARN_ON()
+implies something went funky inside the kernel, not that userspace asked
+for something it shouldn't.
+
+
+> +               }
+>         }
+>
+>         return true;
+> diff --git a/drivers/gpu/drm/nouveau/dispnv50/wndwca7e.c
+> b/drivers/gpu/drm/nouveau/dispnv50/wndwca7e.c
+> index 0d8e9a9d1a57..2cec8cfbd546 100644
+> --- a/drivers/gpu/drm/nouveau/dispnv50/wndwca7e.c
+> +++ b/drivers/gpu/drm/nouveau/dispnv50/wndwca7e.c
+> @@ -179,6 +179,39 @@ wndwca7e_ntfy_set(struct nv50_wndw *wndw, struct
+> nv50_wndw_atom *asyw)
+>         return 0;
+>  }
+>
+> +/****************************************************************
+> + *            Log2(block height) ----------------------------+  *
+> + *            Page Kind ----------------------------------+  |  *
+> + *            Gob Height/Page Kind Generation ------+     |  |  *
+> + *                          Sector layout -------+  |     |  |  *
+> + *                          Compression ------+  |  |     |  |  */
+> +const u64 wndwca7e_modifiers[] =3D { /*         |  |  |     |  |  */
+> +       /* 4cpp+ modifiers */
+> +       DRM_FORMAT_MOD_NVIDIA_BLOCK_LINEAR_2D(0, 1, 2, 0x06, 0),
+> +       DRM_FORMAT_MOD_NVIDIA_BLOCK_LINEAR_2D(0, 1, 2, 0x06, 1),
+> +       DRM_FORMAT_MOD_NVIDIA_BLOCK_LINEAR_2D(0, 1, 2, 0x06, 2),
+> +       DRM_FORMAT_MOD_NVIDIA_BLOCK_LINEAR_2D(0, 1, 2, 0x06, 3),
+> +       DRM_FORMAT_MOD_NVIDIA_BLOCK_LINEAR_2D(0, 1, 2, 0x06, 4),
+> +       DRM_FORMAT_MOD_NVIDIA_BLOCK_LINEAR_2D(0, 1, 2, 0x06, 5),
+> +       /* 1cpp/8bpp modifiers */
+> +       DRM_FORMAT_MOD_NVIDIA_BLOCK_LINEAR_2D(0, 2, 2, 0x06, 0),
+> +       DRM_FORMAT_MOD_NVIDIA_BLOCK_LINEAR_2D(0, 2, 2, 0x06, 1),
+> +       DRM_FORMAT_MOD_NVIDIA_BLOCK_LINEAR_2D(0, 2, 2, 0x06, 2),
+> +       DRM_FORMAT_MOD_NVIDIA_BLOCK_LINEAR_2D(0, 2, 2, 0x06, 3),
+> +       DRM_FORMAT_MOD_NVIDIA_BLOCK_LINEAR_2D(0, 2, 2, 0x06, 4),
+> +       DRM_FORMAT_MOD_NVIDIA_BLOCK_LINEAR_2D(0, 2, 2, 0x06, 5),
+> +       /* 2cpp/16bpp modifiers */
+> +       DRM_FORMAT_MOD_NVIDIA_BLOCK_LINEAR_2D(0, 3, 2, 0x06, 0),
+> +       DRM_FORMAT_MOD_NVIDIA_BLOCK_LINEAR_2D(0, 3, 2, 0x06, 1),
+> +       DRM_FORMAT_MOD_NVIDIA_BLOCK_LINEAR_2D(0, 3, 2, 0x06, 2),
+> +       DRM_FORMAT_MOD_NVIDIA_BLOCK_LINEAR_2D(0, 3, 2, 0x06, 3),
+> +       DRM_FORMAT_MOD_NVIDIA_BLOCK_LINEAR_2D(0, 3, 2, 0x06, 4),
+> +       DRM_FORMAT_MOD_NVIDIA_BLOCK_LINEAR_2D(0, 3, 2, 0x06, 5),
+> +       /* All formats support linear */
+> +       DRM_FORMAT_MOD_LINEAR,
+> +       DRM_FORMAT_MOD_INVALID
+> +};
+> +
+>  static const struct nv50_wndw_func
+>  wndwca7e =3D {
+>         .acquire =3D wndwc37e_acquire,
+> --
+> 2.50.1
+>
+>
+
+--0000000000004a348e063cf6224c
+Content-Type: text/html; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+
+<div dir=3D"ltr"><br><div class=3D"gmail_quote gmail_quote_container"><div =
+dir=3D"ltr" class=3D"gmail_attr">On Mon, Aug 11, 2025 at 5:57=E2=80=AFPM Ja=
+mes Jones &lt;<a href=3D"mailto:jajones@nvidia.com">jajones@nvidia.com</a>&=
+gt; wrote:<br></div><blockquote class=3D"gmail_quote" style=3D"margin:0px 0=
+px 0px 0.8ex;border-left:1px solid rgb(204,204,204);padding-left:1ex">8 and=
+ 16 bit formats use a different layout on<br>
+GB20x than they did on prior chips. Add the<br>
+corresponding DRM format modifiers to the list of<br>
+modifiers supported by the display engine on such<br>
+chips, and filter the supported modifiers for each<br>
+format based on its bytes per pixel in<br>
+nv50_plane_format_mod_supported().<br>
+<br>
+Note this logic will need to be updated when GB10<br>
+support is added, since it is a GB20x chip that<br>
+uses the pre-GB20x sector layout for all formats.<br>
+<br>
+Signed-off-by: James Jones &lt;<a href=3D"mailto:jajones@nvidia.com" target=
+=3D"_blank">jajones@nvidia.com</a>&gt;<br>
+---<br>
+=C2=A0drivers/gpu/drm/nouveau/dispnv50/disp.c=C2=A0 =C2=A0 =C2=A0|=C2=A0 4 =
+++-<br>
+=C2=A0drivers/gpu/drm/nouveau/dispnv50/disp.h=C2=A0 =C2=A0 =C2=A0|=C2=A0 1 =
++<br>
+=C2=A0drivers/gpu/drm/nouveau/dispnv50/wndw.c=C2=A0 =C2=A0 =C2=A0| 24 +++++=
+++++++++--<br>
+=C2=A0drivers/gpu/drm/nouveau/dispnv50/wndwca7e.c | 33 ++++++++++++++++++++=
++<br>
+=C2=A04 files changed, 59 insertions(+), 3 deletions(-)<br>
+<br>
+diff --git a/drivers/gpu/drm/nouveau/dispnv50/disp.c b/drivers/gpu/drm/nouv=
+eau/dispnv50/disp.c<br>
+index e97e39abf3a2..12b1dba8e05d 100644<br>
+--- a/drivers/gpu/drm/nouveau/dispnv50/disp.c<br>
++++ b/drivers/gpu/drm/nouveau/dispnv50/disp.c<br>
+@@ -2867,7 +2867,9 @@ nv50_display_create(struct drm_device *dev)<br>
+=C2=A0 =C2=A0 =C2=A0 =C2=A0 }<br>
+<br>
+=C2=A0 =C2=A0 =C2=A0 =C2=A0 /* Assign the correct format modifiers */<br>
+-=C2=A0 =C2=A0 =C2=A0 =C2=A0if (disp-&gt;disp-&gt;object.oclass &gt;=3D TU1=
+02_DISP)<br>
++=C2=A0 =C2=A0 =C2=A0 =C2=A0if (disp-&gt;disp-&gt;object.oclass &gt;=3D GB2=
+02_DISP)<br>
++=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0nouveau_display(dev=
+)-&gt;format_modifiers =3D wndwca7e_modifiers;<br>
++=C2=A0 =C2=A0 =C2=A0 =C2=A0else if (disp-&gt;disp-&gt;object.oclass &gt;=
+=3D TU102_DISP)<br>
+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 nouveau_display(dev=
+)-&gt;format_modifiers =3D wndwc57e_modifiers;<br>
+=C2=A0 =C2=A0 =C2=A0 =C2=A0 else<br>
+=C2=A0 =C2=A0 =C2=A0 =C2=A0 if (drm-&gt;<a href=3D"http://client.device.inf=
+o" target=3D"_blank">client.device.info</a>.family &gt;=3D NV_DEVICE_INFO_V=
+0_FERMI)<br>
+diff --git a/drivers/gpu/drm/nouveau/dispnv50/disp.h b/drivers/gpu/drm/nouv=
+eau/dispnv50/disp.h<br>
+index 15f9242b72ac..5d998f0319dc 100644<br>
+--- a/drivers/gpu/drm/nouveau/dispnv50/disp.h<br>
++++ b/drivers/gpu/drm/nouveau/dispnv50/disp.h<br>
+@@ -104,4 +104,5 @@ struct nouveau_encoder *nv50_real_outp(struct drm_encod=
+er *encoder);<br>
+=C2=A0extern const u64 disp50xx_modifiers[];<br>
+=C2=A0extern const u64 disp90xx_modifiers[];<br>
+=C2=A0extern const u64 wndwc57e_modifiers[];<br>
++extern const u64 wndwca7e_modifiers[];<br>
+=C2=A0#endif<br>
+diff --git a/drivers/gpu/drm/nouveau/dispnv50/wndw.c b/drivers/gpu/drm/nouv=
+eau/dispnv50/wndw.c<br>
+index e2c55f4b9c5a..ef9e410babbf 100644<br>
+--- a/drivers/gpu/drm/nouveau/dispnv50/wndw.c<br>
++++ b/drivers/gpu/drm/nouveau/dispnv50/wndw.c<br>
+@@ -786,13 +786,14 @@ nv50_wndw_destroy(struct drm_plane *plane)<br>
+=C2=A0}<br>
+<br>
+=C2=A0/* This function assumes the format has already been validated agains=
+t the plane<br>
+- * and the modifier was validated against the device-wides modifier list a=
+t FB<br>
++ * and the modifier was validated against the device-wide modifier list at=
+ FB<br>
+=C2=A0 * creation time.<br>
+=C2=A0 */<br>
+=C2=A0static bool nv50_plane_format_mod_supported(struct drm_plane *plane,<=
+br>
+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=
+=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =
+=C2=A0 u32 format, u64 modifier)<br>
+=C2=A0{<br>
+=C2=A0 =C2=A0 =C2=A0 =C2=A0 struct nouveau_drm *drm =3D nouveau_drm(plane-&=
+gt;dev);<br>
++=C2=A0 =C2=A0 =C2=A0 =C2=A0const struct drm_format_info *info =3D drm_form=
+at_info(format);<br>
+=C2=A0 =C2=A0 =C2=A0 =C2=A0 uint8_t i;<br>
+<br>
+=C2=A0 =C2=A0 =C2=A0 =C2=A0 /* All chipsets can display all formats in line=
+ar layout */<br>
+@@ -800,13 +801,32 @@ static bool nv50_plane_format_mod_supported(struct dr=
+m_plane *plane,<br>
+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 return true;<br>
+<br>
+=C2=A0 =C2=A0 =C2=A0 =C2=A0 if (drm-&gt;<a href=3D"http://client.device.inf=
+o" target=3D"_blank">client.device.info</a>.chipset &lt; 0xc0) {<br>
+-=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0const struct drm_fo=
+rmat_info *info =3D drm_format_info(format);<br>
+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 const uint8_t kind =
+=3D (modifier &gt;&gt; 12) &amp; 0xff;<br>
+<br>
+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 if (!format) return=
+ false;<br>
+<br>
+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 for (i =3D 0; i &lt=
+; info-&gt;num_planes; i++)<br>
+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=
+=A0 =C2=A0 if ((info-&gt;cpp[i] !=3D 4) &amp;&amp; kind !=3D 0x70) return f=
+alse;<br>
++=C2=A0 =C2=A0 =C2=A0 =C2=A0} else if (drm-&gt;<a href=3D"http://client.dev=
+ice.info" target=3D"_blank">client.device.info</a>.chipset &gt;=3D 0x1b2) {=
+<br>
++=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0const uint8_t slayo=
+ut =3D ((modifier &gt;&gt; 22) &amp; 0x1) |<br>
++=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=
+=A0 =C2=A0((modifier &gt;&gt; 25) &amp; 0x6);<br>
++<br>
++=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0if (!format)<br>
++=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=
+=A0 =C2=A0return false;<br>
++<br>
++=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0/*<br>
++=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 * Note in practice=
+ this implies only formats where cpp is equal<br>
++=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 * for each plane, =
+or &gt;=3D 4 for all planes, are supported.<br>
++=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 */<br>
++=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0for (i =3D 0; i &lt=
+; info-&gt;num_planes; i++) {<br>
++=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=
+=A0 =C2=A0if (((info-&gt;cpp[i] =3D=3D 2) &amp;&amp; slayout !=3D 3) ||<br>
++=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=
+=A0 =C2=A0 =C2=A0 =C2=A0((info-&gt;cpp[i] =3D=3D 1) &amp;&amp; slayout !=3D=
+ 2) ||<br>
++=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=
+=A0 =C2=A0 =C2=A0 =C2=A0((info-&gt;cpp[i] &gt;=3D 4) &amp;&amp; slayout !=
+=3D 1))<br>
++=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=
+=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0return false;<br>
++<br>
++=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=
+=A0 =C2=A0/* 24-bit not supported. It has yet another layout */<br>
++=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=
+=A0 =C2=A0WARN_ON(info-&gt;cpp[i] =3D=3D 3);<br></blockquote><div><br></div=
+><div>Should this really be a WARN_ON()? A DRM log message, maybe, but WARN=
+_ON() implies something went funky inside the kernel, not that userspace as=
+ked for something it shouldn&#39;t.</div><div>=C2=A0</div><blockquote class=
+=3D"gmail_quote" style=3D"margin:0px 0px 0px 0.8ex;border-left:1px solid rg=
+b(204,204,204);padding-left:1ex">
++=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0}<br>
+=C2=A0 =C2=A0 =C2=A0 =C2=A0 }<br>
+<br>
+=C2=A0 =C2=A0 =C2=A0 =C2=A0 return true;<br>
+diff --git a/drivers/gpu/drm/nouveau/dispnv50/wndwca7e.c b/drivers/gpu/drm/=
+nouveau/dispnv50/wndwca7e.c<br>
+index 0d8e9a9d1a57..2cec8cfbd546 100644<br>
+--- a/drivers/gpu/drm/nouveau/dispnv50/wndwca7e.c<br>
++++ b/drivers/gpu/drm/nouveau/dispnv50/wndwca7e.c<br>
+@@ -179,6 +179,39 @@ wndwca7e_ntfy_set(struct nv50_wndw *wndw, struct nv50_=
+wndw_atom *asyw)<br>
+=C2=A0 =C2=A0 =C2=A0 =C2=A0 return 0;<br>
+=C2=A0}<br>
+<br>
++/****************************************************************<br>
++ *=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 Log2(block height) -----------=
+-----------------+=C2=A0 *<br>
++ *=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 Page Kind --------------------=
+--------------+=C2=A0 |=C2=A0 *<br>
++ *=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 Gob Height/Page Kind Generatio=
+n ------+=C2=A0 =C2=A0 =C2=A0|=C2=A0 |=C2=A0 *<br>
++ *=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =
+=C2=A0 =C2=A0 =C2=A0 Sector layout -------+=C2=A0 |=C2=A0 =C2=A0 =C2=A0|=C2=
+=A0 |=C2=A0 *<br>
++ *=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =
+=C2=A0 =C2=A0 =C2=A0 Compression ------+=C2=A0 |=C2=A0 |=C2=A0 =C2=A0 =C2=
+=A0|=C2=A0 |=C2=A0 */<br>
++const u64 wndwca7e_modifiers[] =3D { /*=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0|=
+=C2=A0 |=C2=A0 |=C2=A0 =C2=A0 =C2=A0|=C2=A0 |=C2=A0 */<br>
++=C2=A0 =C2=A0 =C2=A0 =C2=A0/* 4cpp+ modifiers */<br>
++=C2=A0 =C2=A0 =C2=A0 =C2=A0DRM_FORMAT_MOD_NVIDIA_BLOCK_LINEAR_2D(0, 1, 2, =
+0x06, 0),<br>
++=C2=A0 =C2=A0 =C2=A0 =C2=A0DRM_FORMAT_MOD_NVIDIA_BLOCK_LINEAR_2D(0, 1, 2, =
+0x06, 1),<br>
++=C2=A0 =C2=A0 =C2=A0 =C2=A0DRM_FORMAT_MOD_NVIDIA_BLOCK_LINEAR_2D(0, 1, 2, =
+0x06, 2),<br>
++=C2=A0 =C2=A0 =C2=A0 =C2=A0DRM_FORMAT_MOD_NVIDIA_BLOCK_LINEAR_2D(0, 1, 2, =
+0x06, 3),<br>
++=C2=A0 =C2=A0 =C2=A0 =C2=A0DRM_FORMAT_MOD_NVIDIA_BLOCK_LINEAR_2D(0, 1, 2, =
+0x06, 4),<br>
++=C2=A0 =C2=A0 =C2=A0 =C2=A0DRM_FORMAT_MOD_NVIDIA_BLOCK_LINEAR_2D(0, 1, 2, =
+0x06, 5),<br>
++=C2=A0 =C2=A0 =C2=A0 =C2=A0/* 1cpp/8bpp modifiers */<br>
++=C2=A0 =C2=A0 =C2=A0 =C2=A0DRM_FORMAT_MOD_NVIDIA_BLOCK_LINEAR_2D(0, 2, 2, =
+0x06, 0),<br>
++=C2=A0 =C2=A0 =C2=A0 =C2=A0DRM_FORMAT_MOD_NVIDIA_BLOCK_LINEAR_2D(0, 2, 2, =
+0x06, 1),<br>
++=C2=A0 =C2=A0 =C2=A0 =C2=A0DRM_FORMAT_MOD_NVIDIA_BLOCK_LINEAR_2D(0, 2, 2, =
+0x06, 2),<br>
++=C2=A0 =C2=A0 =C2=A0 =C2=A0DRM_FORMAT_MOD_NVIDIA_BLOCK_LINEAR_2D(0, 2, 2, =
+0x06, 3),<br>
++=C2=A0 =C2=A0 =C2=A0 =C2=A0DRM_FORMAT_MOD_NVIDIA_BLOCK_LINEAR_2D(0, 2, 2, =
+0x06, 4),<br>
++=C2=A0 =C2=A0 =C2=A0 =C2=A0DRM_FORMAT_MOD_NVIDIA_BLOCK_LINEAR_2D(0, 2, 2, =
+0x06, 5),<br>
++=C2=A0 =C2=A0 =C2=A0 =C2=A0/* 2cpp/16bpp modifiers */<br>
++=C2=A0 =C2=A0 =C2=A0 =C2=A0DRM_FORMAT_MOD_NVIDIA_BLOCK_LINEAR_2D(0, 3, 2, =
+0x06, 0),<br>
++=C2=A0 =C2=A0 =C2=A0 =C2=A0DRM_FORMAT_MOD_NVIDIA_BLOCK_LINEAR_2D(0, 3, 2, =
+0x06, 1),<br>
++=C2=A0 =C2=A0 =C2=A0 =C2=A0DRM_FORMAT_MOD_NVIDIA_BLOCK_LINEAR_2D(0, 3, 2, =
+0x06, 2),<br>
++=C2=A0 =C2=A0 =C2=A0 =C2=A0DRM_FORMAT_MOD_NVIDIA_BLOCK_LINEAR_2D(0, 3, 2, =
+0x06, 3),<br>
++=C2=A0 =C2=A0 =C2=A0 =C2=A0DRM_FORMAT_MOD_NVIDIA_BLOCK_LINEAR_2D(0, 3, 2, =
+0x06, 4),<br>
++=C2=A0 =C2=A0 =C2=A0 =C2=A0DRM_FORMAT_MOD_NVIDIA_BLOCK_LINEAR_2D(0, 3, 2, =
+0x06, 5),<br>
++=C2=A0 =C2=A0 =C2=A0 =C2=A0/* All formats support linear */<br>
++=C2=A0 =C2=A0 =C2=A0 =C2=A0DRM_FORMAT_MOD_LINEAR,<br>
++=C2=A0 =C2=A0 =C2=A0 =C2=A0DRM_FORMAT_MOD_INVALID<br>
++};<br>
++<br>
+=C2=A0static const struct nv50_wndw_func<br>
+=C2=A0wndwca7e =3D {<br>
+=C2=A0 =C2=A0 =C2=A0 =C2=A0 .acquire =3D wndwc37e_acquire,<br>
+-- <br>
+2.50.1<br>
+<br>
+</blockquote></div></div>
+
+--0000000000004a348e063cf6224c--
