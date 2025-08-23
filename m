@@ -2,64 +2,62 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id 4EEEDB32611
-	for <lists+nouveau@lfdr.de>; Sat, 23 Aug 2025 02:58:53 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id B3C71B32888
+	for <lists+nouveau@lfdr.de>; Sat, 23 Aug 2025 14:29:43 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 644AB10E027;
-	Sat, 23 Aug 2025 00:58:51 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 031A310E1E1;
+	Sat, 23 Aug 2025 12:29:42 +0000 (UTC)
 Authentication-Results: gabe.freedesktop.org;
-	dkim=pass (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="ocS9cOpw";
+	dkim=pass (2048-bit key; unprotected) header.d=intel.com header.i=@intel.com header.b="DILsqVfG";
 	dkim-atps=neutral
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from dfw.source.kernel.org (dfw.source.kernel.org [139.178.84.217])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 8DD7B10E023;
- Sat, 23 Aug 2025 00:58:50 +0000 (UTC)
-Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by dfw.source.kernel.org (Postfix) with ESMTP id 947625C0C4D;
- Sat, 23 Aug 2025 00:58:49 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPS id 2B934C4CEED;
- Sat, 23 Aug 2025 00:58:49 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1755910729;
- bh=GEbuBVht10V2yhK8hk78rrvTcrn/qybKkKOMP5a7JEk=;
- h=From:Date:Subject:To:Cc:Reply-To:From;
- b=ocS9cOpwGrlNoVsVh1kn5SgywV6Nm+aVbM6HUTgq+rtGsral9/bpWeEfO8/AdhC8T
- IzKZdwZ+f/f9dfncJhoChKjoKLhf3HQhALuLbD73QGrB/hoZujhKABMNgiiFV/30Uh
- uVVWqgBaFxcRfCagzP7RhYYxqhLKIecPEMowfhCsmmjXJPWVae3NFPiOUcI0GoOGXH
- 3HR3oTqOncLGq1svPhSy+pejKmJOzUyFQPH+SBoplH3VMk6J2Ybgr8JxSQBklCGLFZ
- BppBYvHv8xwBd2dl0MaUBspO5gQXf21+zn2edFsCVPwcjfd1n9F51Thlq/gYZCkJ1a
- I58Ggu+bH9QAA==
-Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org
- (localhost.localdomain [127.0.0.1])
- by smtp.lore.kernel.org (Postfix) with ESMTP id 1B106CA0EFC;
- Sat, 23 Aug 2025 00:58:49 +0000 (UTC)
-From: Aaron Kling via B4 Relay <devnull+webgeek1234.gmail.com@kernel.org>
-Date: Fri, 22 Aug 2025 19:58:00 -0500
-Subject: [PATCH] drm/nouveau: Support reclocking on gp10b
-MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 7bit
-Message-Id: <20250822-gp10b-reclock-v1-1-5b03eaf3735a@gmail.com>
-X-B4-Tracking: v=1; b=H4sIABcSqWgC/6tWKk4tykwtVrJSqFYqSi3LLM7MzwNyDHUUlJIzE
- vPSU3UzU4B8JSMDI1MDCyMj3fQCQ4Mk3aLU5Jz85Gxdc/OkNGMzAwPTRAszJaCegqLUtMwKsHn
- RsbW1AEdlYG1fAAAA
-X-Change-ID: 20250822-gp10b-reclock-77bf36005a86
-To: Lyude Paul <lyude@redhat.com>, Danilo Krummrich <dakr@kernel.org>, 
+Received: from mgamail.intel.com (mgamail.intel.com [198.175.65.21])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 09C8F10E1E1;
+ Sat, 23 Aug 2025 12:29:41 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
+ d=intel.com; i=@intel.com; q=dns/txt; s=Intel;
+ t=1755952181; x=1787488181;
+ h=date:from:to:cc:subject:message-id:references:
+ mime-version:in-reply-to;
+ bh=v3xJNxOTA3ejstQq8SF/+geOe4Zrznj4F09Ilieo3V8=;
+ b=DILsqVfGtKsxZpVkYvWzK9UTo2n3+49HKCUPqQy+k8LN+sxzNeqZLWSz
+ LAGZPpIcuPWyvNmP+AeUeTaeVvxfUgGSDrAd3enzEA9xj/NuN0wrDzxwB
+ Cuxa3ZmTA+So8uqVKYsQbWdf8tjRB6WQBDZRMsgOG4xTgljqp7JpVZdtP
+ NlpUfFrRlSO71Q+B2nd60vL6R0LcgpQPOyPB23L3jn02hPWI+u3BIDFzx
+ CLtkXXv/41p6K9LSGkJ/2nLAU6VWWzzKyiK8NfMLxkz7ZqfVypJbebNn/
+ wM0gg+MNcgr17mtvbZG2cZsHu+DvMKkjlgcCoCn9JIBRlTAR1wep1e9WI Q==;
+X-CSE-ConnectionGUID: DjRrc+p2RN6zh10HE20pGA==
+X-CSE-MsgGUID: WQIlFWkMSzywLVufTxt7GA==
+X-IronPort-AV: E=McAfee;i="6800,10657,11529"; a="58158773"
+X-IronPort-AV: E=Sophos;i="6.17,312,1747724400"; d="scan'208";a="58158773"
+Received: from orviesa004.jf.intel.com ([10.64.159.144])
+ by orvoesa113.jf.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
+ 23 Aug 2025 05:29:41 -0700
+X-CSE-ConnectionGUID: vUjtLK17TbSU8Jj/Npw2PQ==
+X-CSE-MsgGUID: 9HVw6mUJQ9yrulwzZSkRhw==
+X-ExtLoop1: 1
+X-IronPort-AV: E=Sophos;i="6.17,312,1747724400"; d="scan'208";a="173316596"
+Received: from lkp-server02.sh.intel.com (HELO 4ea60e6ab079) ([10.239.97.151])
+ by orviesa004.jf.intel.com with ESMTP; 23 Aug 2025 05:29:38 -0700
+Received: from kbuild by 4ea60e6ab079 with local (Exim 4.96)
+ (envelope-from <lkp@intel.com>) id 1upnMm-000MIp-03;
+ Sat, 23 Aug 2025 12:29:13 +0000
+Date: Sat, 23 Aug 2025 20:28:18 +0800
+From: kernel test robot <lkp@intel.com>
+To: Aaron Kling via B4 Relay <devnull+webgeek1234.gmail.com@kernel.org>,
+ Lyude Paul <lyude@redhat.com>, Danilo Krummrich <dakr@kernel.org>,
  David Airlie <airlied@gmail.com>, Simona Vetter <simona@ffwll.ch>
-Cc: linux-kernel@vger.kernel.org, dri-devel@lists.freedesktop.org, 
- nouveau@lists.freedesktop.org, Aaron Kling <webgeek1234@gmail.com>
-X-Mailer: b4 0.14.2
-X-Developer-Signature: v=1; a=ed25519-sha256; t=1755910728; l=7670;
- i=webgeek1234@gmail.com; s=20250217; h=from:subject:message-id;
- bh=JGrVd9hnkLIjkMAR216GfQSoYVUlj9ur9vGETeozqoQ=;
- b=7CLqWpd25o1U/chnOF7hSNAUHHqJhjh2MKKOAUhlY533V11yuPngwZlPRsUEE6xYxNrqzgqea
- 0m6f5kQeY4QC7XrVEv3OlR4sKXLOX6kdPOXkrWbfVOJQZgjRbWoBpr+
-X-Developer-Key: i=webgeek1234@gmail.com; a=ed25519;
- pk=TQwd6q26txw7bkK7B8qtI/kcAohZc7bHHGSD7domdrU=
-X-Endpoint-Received: by B4 Relay for webgeek1234@gmail.com/20250217 with
- auth_id=342
-X-Original-From: Aaron Kling <webgeek1234@gmail.com>
+Cc: oe-kbuild-all@lists.linux.dev, linux-kernel@vger.kernel.org,
+ dri-devel@lists.freedesktop.org, nouveau@lists.freedesktop.org,
+ Aaron Kling <webgeek1234@gmail.com>
+Subject: Re: [PATCH] drm/nouveau: Support reclocking on gp10b
+Message-ID: <202508232014.eQOclzLG-lkp@intel.com>
+References: <20250822-gp10b-reclock-v1-1-5b03eaf3735a@gmail.com>
+MIME-Version: 1.0
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <20250822-gp10b-reclock-v1-1-5b03eaf3735a@gmail.com>
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -71,275 +69,54 @@ List-Post: <mailto:nouveau@lists.freedesktop.org>
 List-Help: <mailto:nouveau-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
  <mailto:nouveau-request@lists.freedesktop.org?subject=subscribe>
-Reply-To: webgeek1234@gmail.com
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-From: Aaron Kling <webgeek1234@gmail.com>
+Hi Aaron,
 
-Starting with Tegra186, gpu clock handling is done by the bpmp and there
-is little to be done by the kernel. The only thing necessary for
-reclocking is to set the gpcclk to the desired rate and the bpmp handles
-the rest. The pstate list is based on the downstream driver generates.
+kernel test robot noticed the following build warnings:
 
-Signed-off-by: Aaron Kling <webgeek1234@gmail.com>
----
- drivers/gpu/drm/nouveau/include/nvkm/subdev/clk.h |   1 +
- drivers/gpu/drm/nouveau/nvkm/engine/device/base.c |   1 +
- drivers/gpu/drm/nouveau/nvkm/subdev/clk/Kbuild    |   1 +
- drivers/gpu/drm/nouveau/nvkm/subdev/clk/gp10b.c   | 180 ++++++++++++++++++++++
- drivers/gpu/drm/nouveau/nvkm/subdev/clk/gp10b.h   |  16 ++
- 5 files changed, 199 insertions(+)
+[auto build test WARNING on c17b750b3ad9f45f2b6f7e6f7f4679844244f0b9]
 
-diff --git a/drivers/gpu/drm/nouveau/include/nvkm/subdev/clk.h b/drivers/gpu/drm/nouveau/include/nvkm/subdev/clk.h
-index d5d8877064a71581d8e9e92f30a3e28551dabf17..6a09d397c651aa94718aff3d1937162df39cc2ae 100644
---- a/drivers/gpu/drm/nouveau/include/nvkm/subdev/clk.h
-+++ b/drivers/gpu/drm/nouveau/include/nvkm/subdev/clk.h
-@@ -134,4 +134,5 @@ int gf100_clk_new(struct nvkm_device *, enum nvkm_subdev_type, int inst, struct
- int gk104_clk_new(struct nvkm_device *, enum nvkm_subdev_type, int inst, struct nvkm_clk **);
- int gk20a_clk_new(struct nvkm_device *, enum nvkm_subdev_type, int inst, struct nvkm_clk **);
- int gm20b_clk_new(struct nvkm_device *, enum nvkm_subdev_type, int inst, struct nvkm_clk **);
-+int gp10b_clk_new(struct nvkm_device *, enum nvkm_subdev_type, int inst, struct nvkm_clk **);
- #endif
-diff --git a/drivers/gpu/drm/nouveau/nvkm/engine/device/base.c b/drivers/gpu/drm/nouveau/nvkm/engine/device/base.c
-index 3375a59ebf1a4af73daf4c029605a10a7721c725..2517b65d8faad9947244707f540eb281ad7652e4 100644
---- a/drivers/gpu/drm/nouveau/nvkm/engine/device/base.c
-+++ b/drivers/gpu/drm/nouveau/nvkm/engine/device/base.c
-@@ -2280,6 +2280,7 @@ nv13b_chipset = {
- 	.acr      = { 0x00000001, gp10b_acr_new },
- 	.bar      = { 0x00000001, gm20b_bar_new },
- 	.bus      = { 0x00000001, gf100_bus_new },
-+	.clk      = { 0x00000001, gp10b_clk_new },
- 	.fault    = { 0x00000001, gp10b_fault_new },
- 	.fb       = { 0x00000001, gp10b_fb_new },
- 	.fuse     = { 0x00000001, gm107_fuse_new },
-diff --git a/drivers/gpu/drm/nouveau/nvkm/subdev/clk/Kbuild b/drivers/gpu/drm/nouveau/nvkm/subdev/clk/Kbuild
-index dcecd499d8dffae3b81276ed67bb8649dfa3efd1..9fe394740f568909de71a8c420cc8b6d8dc2235f 100644
---- a/drivers/gpu/drm/nouveau/nvkm/subdev/clk/Kbuild
-+++ b/drivers/gpu/drm/nouveau/nvkm/subdev/clk/Kbuild
-@@ -10,6 +10,7 @@ nvkm-y += nvkm/subdev/clk/gf100.o
- nvkm-y += nvkm/subdev/clk/gk104.o
- nvkm-y += nvkm/subdev/clk/gk20a.o
- nvkm-y += nvkm/subdev/clk/gm20b.o
-+nvkm-y += nvkm/subdev/clk/gp10b.o
- 
- nvkm-y += nvkm/subdev/clk/pllnv04.o
- nvkm-y += nvkm/subdev/clk/pllgt215.o
-diff --git a/drivers/gpu/drm/nouveau/nvkm/subdev/clk/gp10b.c b/drivers/gpu/drm/nouveau/nvkm/subdev/clk/gp10b.c
-new file mode 100644
-index 0000000000000000000000000000000000000000..eeee0b1f819a54b082dd33f6597e7dd1889abf99
---- /dev/null
-+++ b/drivers/gpu/drm/nouveau/nvkm/subdev/clk/gp10b.c
-@@ -0,0 +1,180 @@
-+// SPDX-License-Identifier: MIT
-+#include <subdev/clk.h>
-+#include <subdev/timer.h>
-+#include <core/device.h>
-+#include <core/tegra.h>
-+
-+#include "priv.h"
-+#include "gk20a.h"
-+#include "gp10b.h"
-+
-+static int
-+gp10b_clk_init(struct nvkm_clk *base)
-+{
-+	struct gp10b_clk *clk = gp10b_clk(base);
-+	struct nvkm_subdev *subdev = &clk->base.subdev;
-+	int ret;
-+
-+	/* Start with the highest frequency, matching the BPMP default */
-+	base->func->calc(base, &base->func->pstates[base->func->nr_pstates - 1].base);
-+	ret = base->func->prog(base);
-+	if (ret) {
-+		nvkm_error(subdev, "cannot initialize clock\n");
-+		return ret;
-+	}
-+
-+	return 0;
-+}
-+
-+int
-+gp10b_clk_read(struct nvkm_clk *base, enum nv_clk_src src)
-+{
-+	struct gp10b_clk *clk = gp10b_clk(base);
-+	struct nvkm_subdev *subdev = &clk->base.subdev;
-+
-+	switch (src) {
-+	case nv_clk_src_gpc:
-+		return clk_get_rate(clk->clk) / GK20A_CLK_GPC_MDIV;
-+	default:
-+		nvkm_error(subdev, "invalid clock source %d\n", src);
-+		return -EINVAL;
-+	}
-+}
-+
-+static int
-+gp10b_clk_calc(struct nvkm_clk *base, struct nvkm_cstate *cstate)
-+{
-+	struct gp10b_clk *clk = gp10b_clk(base);
-+	u32 target_rate = cstate->domain[nv_clk_src_gpc] * GK20A_CLK_GPC_MDIV;
-+
-+	clk->new_rate = clk_round_rate(clk->clk, target_rate) / GK20A_CLK_GPC_MDIV;
-+
-+	return 0;
-+}
-+
-+static int
-+gp10b_clk_prog(struct nvkm_clk *base)
-+{
-+	struct gp10b_clk *clk = gp10b_clk(base);
-+	int ret;
-+
-+	ret = clk_set_rate(clk->clk, clk->new_rate * GK20A_CLK_GPC_MDIV);
-+	if (ret < 0)
-+		return ret;
-+
-+	clk->rate = clk_get_rate(clk->clk) / GK20A_CLK_GPC_MDIV;
-+
-+	return 0;
-+}
-+
-+static struct nvkm_pstate
-+gp10b_pstates[] = {
-+	{
-+		.base = {
-+			.domain[nv_clk_src_gpc] = 114750,
-+		},
-+	},
-+	{
-+		.base = {
-+			.domain[nv_clk_src_gpc] = 216750,
-+		},
-+	},
-+	{
-+		.base = {
-+			.domain[nv_clk_src_gpc] = 318750,
-+		},
-+	},
-+	{
-+		.base = {
-+			.domain[nv_clk_src_gpc] = 420750,
-+		},
-+	},
-+	{
-+		.base = {
-+			.domain[nv_clk_src_gpc] = 522750,
-+		},
-+	},
-+	{
-+		.base = {
-+			.domain[nv_clk_src_gpc] = 624750,
-+		},
-+	},
-+	{
-+		.base = {
-+			.domain[nv_clk_src_gpc] = 726750,
-+		},
-+	},
-+	{
-+		.base = {
-+			.domain[nv_clk_src_gpc] = 828750,
-+		},
-+	},
-+	{
-+		.base = {
-+			.domain[nv_clk_src_gpc] = 930750,
-+		},
-+	},
-+	{
-+		.base = {
-+			.domain[nv_clk_src_gpc] = 1032750,
-+		},
-+	},
-+	{
-+		.base = {
-+			.domain[nv_clk_src_gpc] = 1134750,
-+		},
-+	},
-+	{
-+		.base = {
-+			.domain[nv_clk_src_gpc] = 1236750,
-+		},
-+	},
-+	{
-+		.base = {
-+			.domain[nv_clk_src_gpc] = 1300500,
-+		},
-+	},
-+};
-+
-+static const struct nvkm_clk_func
-+gp10b_clk = {
-+	.init = gp10b_clk_init,
-+	.read = gp10b_clk_read,
-+	.calc = gp10b_clk_calc,
-+	.prog = gp10b_clk_prog,
-+	.tidy = gk20a_clk_tidy,
-+	.pstates = gp10b_pstates,
-+	.nr_pstates = ARRAY_SIZE(gp10b_pstates),
-+	.domains = {
-+		{ nv_clk_src_gpc, 0xff, 0, "core", GK20A_CLK_GPC_MDIV },
-+		{ nv_clk_src_max }
-+	}
-+};
-+
-+int
-+gp10b_clk_new(struct nvkm_device *device, enum nvkm_subdev_type type, int inst,
-+	      struct nvkm_clk **pclk)
-+{
-+	struct nvkm_device_tegra *tdev = device->func->tegra(device);
-+	const struct nvkm_clk_func *func = &gp10b_clk;
-+	struct gp10b_clk *clk;
-+	int ret, i;
-+
-+	clk = kzalloc(sizeof(*clk), GFP_KERNEL);
-+	if (!clk)
-+		return -ENOMEM;
-+	*pclk = &clk->base;
-+	clk->clk = tdev->clk;
-+
-+	/* Finish initializing the pstates */
-+	for (i = 0; i < func->nr_pstates; i++) {
-+		INIT_LIST_HEAD(&func->pstates[i].list);
-+		func->pstates[i].pstate = i + 1;
-+	}
-+
-+	ret = nvkm_clk_ctor(func, device, type, inst, true, &clk->base);
-+	if (ret)
-+		return ret;
-+
-+	return 0;
-+}
-diff --git a/drivers/gpu/drm/nouveau/nvkm/subdev/clk/gp10b.h b/drivers/gpu/drm/nouveau/nvkm/subdev/clk/gp10b.h
-new file mode 100644
-index 0000000000000000000000000000000000000000..2f65a921a426e3f6339a31e964397f6eefa50250
---- /dev/null
-+++ b/drivers/gpu/drm/nouveau/nvkm/subdev/clk/gp10b.h
-@@ -0,0 +1,16 @@
-+/* SPDX-License-Identifier: MIT */
-+#ifndef __NVKM_CLK_GP10B_H__
-+#define __NVKM_CLK_GP10B_H__
-+
-+struct gp10b_clk {
-+	/* currently applied parameters */
-+	struct nvkm_clk base;
-+	struct clk *clk;
-+	u32 rate;
-+
-+	/* new parameters to apply */
-+	u32 new_rate;
-+};
-+#define gp10b_clk(p) container_of((p), struct gp10b_clk, base)
-+
-+#endif
+url:    https://github.com/intel-lab-lkp/linux/commits/Aaron-Kling-via-B4-Relay/drm-nouveau-Support-reclocking-on-gp10b/20250823-090132
+base:   c17b750b3ad9f45f2b6f7e6f7f4679844244f0b9
+patch link:    https://lore.kernel.org/r/20250822-gp10b-reclock-v1-1-5b03eaf3735a%40gmail.com
+patch subject: [PATCH] drm/nouveau: Support reclocking on gp10b
+config: x86_64-buildonly-randconfig-005-20250823 (https://download.01.org/0day-ci/archive/20250823/202508232014.eQOclzLG-lkp@intel.com/config)
+compiler: gcc-12 (Debian 12.2.0-14+deb12u1) 12.2.0
+reproduce (this is a W=1 build): (https://download.01.org/0day-ci/archive/20250823/202508232014.eQOclzLG-lkp@intel.com/reproduce)
 
----
-base-commit: c17b750b3ad9f45f2b6f7e6f7f4679844244f0b9
-change-id: 20250822-gp10b-reclock-77bf36005a86
+If you fix the issue in a separate patch/commit (i.e. not just a new version of
+the same patch/commit), kindly add following tags
+| Reported-by: kernel test robot <lkp@intel.com>
+| Closes: https://lore.kernel.org/oe-kbuild-all/202508232014.eQOclzLG-lkp@intel.com/
 
-Best regards,
+All warnings (new ones prefixed by >>):
+
+>> drivers/gpu/drm/nouveau/nvkm/subdev/clk/gp10b.c:30:1: warning: no previous prototype for 'gp10b_clk_read' [-Wmissing-prototypes]
+      30 | gp10b_clk_read(struct nvkm_clk *base, enum nv_clk_src src)
+         | ^~~~~~~~~~~~~~
+
+
+vim +/gp10b_clk_read +30 drivers/gpu/drm/nouveau/nvkm/subdev/clk/gp10b.c
+
+    28	
+    29	int
+  > 30	gp10b_clk_read(struct nvkm_clk *base, enum nv_clk_src src)
+    31	{
+    32		struct gp10b_clk *clk = gp10b_clk(base);
+    33		struct nvkm_subdev *subdev = &clk->base.subdev;
+    34	
+    35		switch (src) {
+    36		case nv_clk_src_gpc:
+    37			return clk_get_rate(clk->clk) / GK20A_CLK_GPC_MDIV;
+    38		default:
+    39			nvkm_error(subdev, "invalid clock source %d\n", src);
+    40			return -EINVAL;
+    41		}
+    42	}
+    43	
+
 -- 
-Aaron Kling <webgeek1234@gmail.com>
-
-
+0-DAY CI Kernel Test Service
+https://github.com/intel/lkp-tests/wiki
