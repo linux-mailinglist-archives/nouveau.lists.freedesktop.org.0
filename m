@@ -2,51 +2,175 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id 14EE2B3AC43
-	for <lists+nouveau@lfdr.de>; Thu, 28 Aug 2025 23:01:47 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 172E6B3AC18
+	for <lists+nouveau@lfdr.de>; Thu, 28 Aug 2025 22:59:07 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 8810A10EADE;
-	Thu, 28 Aug 2025 21:01:45 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id A812210EACF;
+	Thu, 28 Aug 2025 20:59:04 +0000 (UTC)
+Authentication-Results: gabe.freedesktop.org;
+	dkim=pass (2048-bit key; unprotected) header.d=Nvidia.com header.i=@Nvidia.com header.b="utrrBlfv";
+	dkim-atps=neutral
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from us-smtp-delivery-44.mimecast.com
- (us-smtp-delivery-44.mimecast.com [207.211.30.44])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 9866410EAD7
- for <nouveau@lists.freedesktop.org>; Thu, 28 Aug 2025 21:01:43 +0000 (UTC)
-Received: from mx-prod-mc-03.mail-002.prod.us-west-2.aws.redhat.com
- (ec2-54-186-198-63.us-west-2.compute.amazonaws.com [54.186.198.63]) by
- relay.mimecast.com with ESMTP with STARTTLS (version=TLSv1.3,
- cipher=TLS_AES_256_GCM_SHA384) id us-mta-167-8136KvKeMQ2PGwpZWQZYig-1; Thu,
- 28 Aug 2025 16:55:27 -0400
-X-MC-Unique: 8136KvKeMQ2PGwpZWQZYig-1
-X-Mimecast-MFC-AGG-ID: 8136KvKeMQ2PGwpZWQZYig_1756414526
-Received: from mx-prod-int-05.mail-002.prod.us-west-2.aws.redhat.com
- (mx-prod-int-05.mail-002.prod.us-west-2.aws.redhat.com [10.30.177.17])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
- (No client certificate requested)
- by mx-prod-mc-03.mail-002.prod.us-west-2.aws.redhat.com (Postfix) with ESMTPS
- id 7ADA019560BB; Thu, 28 Aug 2025 20:55:26 +0000 (UTC)
-Received: from dreadlord.redhat.com (unknown [10.67.32.4])
- by mx-prod-int-05.mail-002.prod.us-west-2.aws.redhat.com (Postfix) with ESMTP
- id 2AD5919560AB; Thu, 28 Aug 2025 20:55:23 +0000 (UTC)
-From: Dave Airlie <airlied@gmail.com>
-To: dri-devel@lists.freedesktop.org
-Cc: nouveau@lists.freedesktop.org,
-	dakr@kernel.org
-Subject: [PATCH 2/2] nouveau: Membar before between semaphore writes and the
- interrupt
-Date: Fri, 29 Aug 2025 06:55:17 +1000
-Message-ID: <20250828205517.1553768-2-airlied@gmail.com>
-In-Reply-To: <20250828205517.1553768-1-airlied@gmail.com>
-References: <20250828205517.1553768-1-airlied@gmail.com>
+Received: from NAM04-MW2-obe.outbound.protection.outlook.com
+ (mail-mw2nam04on2065.outbound.protection.outlook.com [40.107.101.65])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id CED5810EACB;
+ Thu, 28 Aug 2025 20:59:02 +0000 (UTC)
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=UviJ4yFoT8cp8wBCRzMsMA2MmfYANKxKo9qvkmb+G4y7gtJxnIPKDUqdcerD4OB1l8rby/NdpEzvNJ+4zwmRuaTA2Y8kW4XHTSs1zKoG/4WCvBNDw0WPiP9lKTJEUY1divqXxPaZ1TSJ1EYkLr1Q+vTMCNQwsaPhTwEdM6AzYuVQaaciXPd3tezum/fjdTxEEO7Kcd3I8Dz5U4GDXqxsL6iKIEvBbXDdCRJUQYhFR/1zdpeNrm0QEwH9hev5I5A7m4aKm+hkKzdWjhh4xRolgDLLiZYNXkaXCNGycO781Nz25XmsJq9ipYKAhT45jKNaT7nwzWUsRyNrFbnY+h+utg==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=xuOES7TyJVB40YqVH2j+mBJ57k54bKBEGPkkYDwU+oc=;
+ b=dAgUQxtzpGbuzsoNid2qYKgjJ75BnSRRjRJxzSNCK1Q2N7kEYV+qT4kMngSv51nErqOVhhYcL4s+lW9E/NVUiV0ni7nfAg2VeOnoLYk7KEey0Vwm5Xk4u+2yRTXv1YJF+bonIjQRVTuvrNUv8hU5wIwKlHEFdErx1i5KSDnnwdbNBC0AiQp4g96UsXbm9PT3nwxPqUYO0H8VMVZS6eB4p25Xs1gdxbh97cVgrNcZ2OQb4mDPSPp4AH4YfBe1NZVS3F3aU/uT1D5UJpGu19a2zvXXUF8kQlyXLt4vZO2H40VS267HN1XvvcQkHsIrxiovHzEShLEBcpcLQtHLKkiQuA==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=nvidia.com; dmarc=pass action=none header.from=nvidia.com;
+ dkim=pass header.d=nvidia.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=Nvidia.com;
+ s=selector2;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=xuOES7TyJVB40YqVH2j+mBJ57k54bKBEGPkkYDwU+oc=;
+ b=utrrBlfv4JcfiQZ+Lz57xsi560kk0JhuuUjO8wGOqTHU0h3jDzTOblj3c48/5gRZAs0qsDDap1BuWLeFTIuQxTlGA0Ak9eM4sJOrVycgYIIxD9Rq4g/s6TZgnoRcd0w3uLC8U82Q/Xipy1v8XbMmGoewFL4w7B7Kn/2r150rrMFrHgOSnqTIFKuaeSIxjcaqaj0/ZvggQcdjOcidRX66bLCv9UED0QETjnjg7ywPvi678nHCD1V+EIJmjiQHkH3/g82wfockGfti5VxG1tM5MORFx//y6Qeb5KcgsLfgnIBJo1l0ivIukS5si0d6WWbzE9sYvf9XiaD5w+290suESg==
+Received: from CY5PR12MB6526.namprd12.prod.outlook.com (2603:10b6:930:31::20)
+ by CY5PR12MB6381.namprd12.prod.outlook.com (2603:10b6:930:3f::18)
+ with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9073.16; Thu, 28 Aug
+ 2025 20:58:55 +0000
+Received: from CY5PR12MB6526.namprd12.prod.outlook.com
+ ([fe80::e420:4e37:166:9c56]) by CY5PR12MB6526.namprd12.prod.outlook.com
+ ([fe80::e420:4e37:166:9c56%6]) with mapi id 15.20.9052.021; Thu, 28 Aug 2025
+ 20:58:55 +0000
+From: Timur Tabi <ttabi@nvidia.com>
+To: Alexandre Courbot <acourbot@nvidia.com>, "lossin@kernel.org"
+ <lossin@kernel.org>, "ojeda@kernel.org" <ojeda@kernel.org>,
+ "boqun.feng@gmail.com" <boqun.feng@gmail.com>, "a.hindborg@kernel.org"
+ <a.hindborg@kernel.org>, "simona@ffwll.ch" <simona@ffwll.ch>,
+ "tmgross@umich.edu" <tmgross@umich.edu>, "alex.gaynor@gmail.com"
+ <alex.gaynor@gmail.com>, "tzimmermann@suse.de" <tzimmermann@suse.de>,
+ "mripard@kernel.org" <mripard@kernel.org>,
+ "maarten.lankhorst@linux.intel.com" <maarten.lankhorst@linux.intel.com>,
+ "bjorn3_gh@protonmail.com" <bjorn3_gh@protonmail.com>, "airlied@gmail.com"
+ <airlied@gmail.com>, "aliceryhl@google.com" <aliceryhl@google.com>,
+ "gary@garyguo.net" <gary@garyguo.net>, "dakr@kernel.org" <dakr@kernel.org>
+CC: "dri-devel@lists.freedesktop.org" <dri-devel@lists.freedesktop.org>,
+ Alistair Popple <apopple@nvidia.com>, Joel Fernandes <joelagnelf@nvidia.com>, 
+ "nouveau@lists.freedesktop.org" <nouveau@lists.freedesktop.org>,
+ "linux-kernel@vger.kernel.org" <linux-kernel@vger.kernel.org>, John Hubbard
+ <jhubbard@nvidia.com>, "rust-for-linux@vger.kernel.org"
+ <rust-for-linux@vger.kernel.org>
+Subject: Re: [PATCH v2 3/8] gpu: nova-core: firmware: process Booter and patch
+ its signature
+Thread-Topic: [PATCH v2 3/8] gpu: nova-core: firmware: process Booter and
+ patch its signature
+Thread-Index: AQHcFj8EsK7GTIDKG0e6dqx/BqyF07R4kKIA
+Date: Thu, 28 Aug 2025 20:58:55 +0000
+Message-ID: <0d7377cdca7f9aa1574c924073a2fcbcf0544218.camel@nvidia.com>
+References: <20250826-nova_firmware-v2-0-93566252fe3a@nvidia.com>
+ <20250826-nova_firmware-v2-3-93566252fe3a@nvidia.com>
+In-Reply-To: <20250826-nova_firmware-v2-3-93566252fe3a@nvidia.com>
+Accept-Language: en-US
+Content-Language: en-US
+X-MS-Has-Attach: 
+X-MS-TNEF-Correlator: 
+user-agent: Evolution 3.52.3-0ubuntu1 
+authentication-results: dkim=none (message not signed)
+ header.d=none;dmarc=none action=none header.from=nvidia.com;
+x-ms-publictraffictype: Email
+x-ms-traffictypediagnostic: CY5PR12MB6526:EE_|CY5PR12MB6381:EE_
+x-ms-office365-filtering-correlation-id: b2bf51b0-1916-4f27-d1d1-08dde675b36a
+x-ms-exchange-senderadcheck: 1
+x-ms-exchange-antispam-relay: 0
+x-microsoft-antispam: BCL:0;
+ ARA:13230040|366016|7416014|1800799024|376014|921020|38070700018; 
+x-microsoft-antispam-message-info: =?utf-8?B?Y09iSnBNT1MyQTRiL0lpMjhRRjkvNVJDQWluRGNYbTdzMTVLRXpsNHNQM1Zt?=
+ =?utf-8?B?TjJ3dFZMWjNDblA5YUo5dGltNFVwMWRac1BHZk9ZUHYvK0VpVm1NVlRpRTgy?=
+ =?utf-8?B?Q1EwRmJMclpaZnQzYk5tOGk0ek1RUGNRWTE2ak9Fclpwd3IvS3VxOW42MEdG?=
+ =?utf-8?B?RUVmbkdSODZQUHhGeU1lZXU4UGozOWNOL2loSy8xQVdxeGU2NFNEdjVJTVhK?=
+ =?utf-8?B?bVZCR3NiUHBaTEhQZnpHUEhXVGprN2JVbjVSUFZBSHV5Tzg4OWo5SEZEVUQz?=
+ =?utf-8?B?VnI2ZHRlYTd1c2tsRFZxRFo4aENkRWk1ejU0cldONFhORUhNMVVjc1V1RWF2?=
+ =?utf-8?B?SEhmdFVvZHZrV0k3MWMxcVF4eFdLZ2Q0aG1ueU91ZWp3dnVrMHhQa1IxNFJw?=
+ =?utf-8?B?UVJWdys1R3VCTHBWNjVVL2xQYU84VC9Xb2N0TmRYN3FUbEVMOHdnMUttMGlv?=
+ =?utf-8?B?V0s4VUVjRmh0alh4clFjYjIxdU10Y0NSYW1SY24rSk5OUEZwMHBzZCtZUTJ2?=
+ =?utf-8?B?TGs1dU9objhPUXJ1R0FOOU5TTWI0d2ZNaFBLeUh6Y1FhSHQ5N0ZvT2poMEVJ?=
+ =?utf-8?B?d3hYNEx2RVFrWGI1dU1JNm1mVkRZemIremREWHZYTWhYN0ZySlBHWkNtVW5D?=
+ =?utf-8?B?VEdZcVc2V0FxRWRzQWFFdVYrQ3ZOdkg1UkNBUEIrSUFGd3c5elJBUmJyNXNT?=
+ =?utf-8?B?MkQ4SlR0bWNHVG1Od3NvK3huemFOSmFZUUUzMWQ0RWlXcFhINGppVi94Wmdi?=
+ =?utf-8?B?WWxEcW8zckE0K0xIMGoxOGRBR1d2NHFBeVBic0pBVmdrSGthZ0cyZ3lXRFJz?=
+ =?utf-8?B?b3ZwcUlHVUxiMXRycCtKTFpvSFBJa3dNUll4aU1NZ0FoMlhUTlVzU2JHblh6?=
+ =?utf-8?B?RnVwM2xzT0EvU2lCZGZ1a3dNM3FzNFZIYzkrQ2hoRHp1bnBrbnNyTUZNcTNG?=
+ =?utf-8?B?QklDWnczeFloKzdoaXRXSGxJWEl6TXl3M2RIZkRKOG9aa2UvdGNXL1VJM1ht?=
+ =?utf-8?B?SXprRjJUdGpPeTE5ajR2N3hoYjJGQ3Z1blB2SStvZHNXcUtEaXpkdllPRGRx?=
+ =?utf-8?B?c29QNTB2RVNCL0JRejE1c3RGc05uZmEvR2N0QkQ0ZndjK2xSSUl5cEV4bHVi?=
+ =?utf-8?B?S3ZEenBOQ2l3TE9LYWdlV2FNcWsxZTZRNU1SWVAxTEdpSUkySUtPQ2ZpSjNH?=
+ =?utf-8?B?SW8ybnNXUVN3d0I3MkZlcUs5MUdmVmpFSG5GWFJzbUVpRUpYU3ByYnZ1OWsx?=
+ =?utf-8?B?RXlONE92UjJMSWxEZ0RHL2dTclY1MDNXT1BZeFJzZ0J4TGhWUEttWFFXa2M3?=
+ =?utf-8?B?eTNOSktjUGV2Vkxsd1UxVUNqUldLSklVbUE4MGRkdytkbUJlTnpuOEl2ZDgy?=
+ =?utf-8?B?bi9KTTlabHlSOFJVNzl1Ync3V0hFYnUzYmxySHBsTEllQy9vUFRKTjFyd2tt?=
+ =?utf-8?B?ei9CN2FvMWRZTTBadjB3T3JlUE1zNUVyUFdZK081U1pwSUFUWmR6djI3S0pr?=
+ =?utf-8?B?ZndNMXRXSkJxL0ErdzM4alZoSDRDdGZVU3gxMWt4OVNieC8zZEx5RjNlbnND?=
+ =?utf-8?B?OWFPdlAybUJrR2lpdUthWnFUTWQ0SjFwb1ErQUFhVWpVdkRaczdpVEtTUDJi?=
+ =?utf-8?B?MmFWWSsrT2FhYjNXcW1WU294ZlIxWDFzbGJBZWVrb1JJZ2RhWEMvUjExeTUr?=
+ =?utf-8?B?L3E2cG5JK0txRkxHWTlCL3owNlhWMVloVUtFSlZESjNrOHE0WDVNYWZJWkdN?=
+ =?utf-8?B?Wk9tNlBmOGIzbWJSTCsvYVJDZ0tUSTNzUGVDM3pQNkZCME1NUTBIMUZNdG9Q?=
+ =?utf-8?B?V3c0by9qV0RwcTdubDdzNmtEOEo2SEN6YjUzcXBNenFFZ0NVZGpPNkZFUW82?=
+ =?utf-8?B?R2lRR29WSUdnWFQ2L2IrcWhzU3FWZUpOOTVqRlo4UVh3SGlKVkR4ZFJtVWEv?=
+ =?utf-8?B?TDRmaS9yWi8vcEtySGR4eDJnWHp5enZEQkE1ZzQxTDNncHVNSXZXODg0dks4?=
+ =?utf-8?Q?8Wa++3gJtLnP79EoWmBX+CP8d1jTEU=3D?=
+x-forefront-antispam-report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
+ IPV:NLI; SFV:NSPM; H:CY5PR12MB6526.namprd12.prod.outlook.com; PTR:; CAT:NONE;
+ SFS:(13230040)(366016)(7416014)(1800799024)(376014)(921020)(38070700018);
+ DIR:OUT; SFP:1101; 
+x-ms-exchange-antispam-messagedata-chunkcount: 1
+x-ms-exchange-antispam-messagedata-0: =?utf-8?B?d3lValFaRVRTUVRxS0VhN0pRdit0cXBaRnNtQnZJQUE3ZDNpbGtiNTFDTjY1?=
+ =?utf-8?B?UklhMUZLZDJuQXVGZzFhdWtXTGtpZnhQRXVnc2swQ2E0TkxwRmxrK29wT1pW?=
+ =?utf-8?B?L3lhYndlQ3dsRGNnaXZPVW94ZVZBRkl2dXJaNkZqUGhqRkhrRS85UVpLZ25E?=
+ =?utf-8?B?RVliTzVyYm1HZ1pDaDJQREo0amFhVENCeE1uZEUzMkk1QnhoR1ZPQjJaMEdF?=
+ =?utf-8?B?aWVpUnFIWlhyNDZIa1ZNS0RLTVMxSDMxN2IzelAzbFQ3ZUw3QzVqUldvOGFu?=
+ =?utf-8?B?NXVtYW9tclVDUVh2aCs4bXdncEZVMFVXRDMzQmNqYnlXNjRtZnEvYXEwblJj?=
+ =?utf-8?B?VlZhb1o0UU1pYUxDWDZvMVhYSU5DbllRY3lMdjlQTGJ4bGt0L09vaFhvbitn?=
+ =?utf-8?B?VjhvMTdkY0F0UlZ4WnUrZis5NSs3WWdlUmZFcHkxNGpiU0t6ZDE0VFZqQVZ0?=
+ =?utf-8?B?L1d5aXNhRmdNOWlFblNZY2JjcUU0amtsaUlXL2tpUVFkNERjS0dHUUQ4OG4z?=
+ =?utf-8?B?citlWUtBNEVsdjZKOHBNeHJaNW9GYkpROFEwVVBHQ05XZzhNZjlZTWlSb3Vs?=
+ =?utf-8?B?V0IyQTZsQ1ZCTjBkN2dZZm52SzFqRHhUazVPa01hRFdwcFZRcitBUStwVGVn?=
+ =?utf-8?B?RHhQMmFGYktxdmYzT3FYdXVMQ2RTWDNQQm1Tc2ltWTh5SUpXcWg0SFc5QmN4?=
+ =?utf-8?B?SVJESmVRY2FwUWp0L1pJSk1IVkZyeXBGRFMyVXhqRWxNb050YkUzVDRpZ3FI?=
+ =?utf-8?B?L2VRYnBrNWZlbUtGbm9lZmp5MTJPQ05mL1hGem9idlhLbGtqRmplTDRzbUVS?=
+ =?utf-8?B?NlVTWWJJWWY4Mm43dmFQbERWb2wySEtONE1YVHJENFV2eXQ1bEZhMEhzL2xx?=
+ =?utf-8?B?Y0xuNi9IQnF5WEJncHl4ZndwYnBxMVZSZHlETW42VGZ2VVNIK1VHcDFHbVR0?=
+ =?utf-8?B?Ykw1ZHlLcXVBNUFWR21rSGw2NUNFZjJma1N1ZHEvWjNXMmNoQU5KYU1HMUla?=
+ =?utf-8?B?MldWT2h4ZW5VQUlpeEZCV1BMeEpSMVZobjVPYnZyTjlNa3NTZTNPVWpPQ3pR?=
+ =?utf-8?B?TGpIQ2Y3R2h5YnVNYmIvNEVPOHowZzhkenRlU0c1aGhHSkFxSzFjRDN1N1ZU?=
+ =?utf-8?B?L21xWEVwNU9TTm1LYXppNEJQcnlPdXBmMHNEYU9kazRJTjZBRVlNUWF2dmhV?=
+ =?utf-8?B?TW05ZExPNUp6UnNCTkVIVU9yUHkxdlJEQ1V2MjNoSVZ1cFZnRGxMVk9XdzMx?=
+ =?utf-8?B?azJpbGt2ZnphQlVnb0dieko1am1KcG1najkxbHY5STlDNHcyNnlnUk9Baldz?=
+ =?utf-8?B?aTV2ck93NjByNDJhV1dmUlcwRjMrTERPNUJkVUdBNVd2dEIxNEl6UkoxMWdM?=
+ =?utf-8?B?QnlvN0dnclBURmNzSVVGNnBzN2VxQlowQVZCV1Q3OTgxZ2tTc2pqM28rTHVh?=
+ =?utf-8?B?VnZucGFCQkwyK2tvQkY4U2d3VzNHQjBQZFE3UU54MEdMa0VSRDNUVjFHY1pX?=
+ =?utf-8?B?QlRzTkY5amo0WkZYUWFTL25rN0tNamxiZTUyS0pZNUMxc1pGTjV4OUd6NS9P?=
+ =?utf-8?B?WUtJL3Q2dVkzNUZzOUFJcnRJQnFmdzVzOUVGKyt4d29ZSm9hczN4anpndnRp?=
+ =?utf-8?B?VUxEV1VwbFp2WVh2NVRNWTBHZnBrb3lVVWo1bHR5U2JURXNVWm0yZFNXblQr?=
+ =?utf-8?B?a0EyL05ZYTliUldDQlVJQ21JMXl5N3NidkhySHZUaHBicFZWa2xPYis3cmJw?=
+ =?utf-8?B?bXhxb1I5a1FqVmZvSTFXY3hWZjE5MWdiYjBLUTFIdE91WnpiSVVVekpaUVZx?=
+ =?utf-8?B?T0NYVUlWQTMvV0tKcGQvN1p1bFRJaE8rSmdORFFYSEFVZjZhM01VN3h3OEZO?=
+ =?utf-8?B?bUcxUkdVcGk2N2p5M1lEdjcwZmw4cmRrZW91S1J1cFlmeDl0bnVJdzd0c0hw?=
+ =?utf-8?B?ZUtlWVNJekI5aWJid1ZET1NhUHBmNC9BY1JLa2d0bEh3WkhyU0o0U2xxeDQv?=
+ =?utf-8?B?TUZONVFxNFdrUS9DYmVYVWFpV0pCbzE0VkJkRDdrRWtXYWR4STAvRldJM1B5?=
+ =?utf-8?B?cnNaQTArTWtNYkRoZGRmYnFmSWZzL3ZvbEVzNHlHL0ppVEowbFNHdnJhUnUv?=
+ =?utf-8?Q?d7NcQcPsAO0gnpDdkrpg/s6N6?=
+Content-Type: text/plain; charset="utf-8"
+Content-ID: <C17B48CC6BBE5543985C92E4C3AB4F70@namprd12.prod.outlook.com>
+Content-Transfer-Encoding: base64
 MIME-Version: 1.0
-X-Scanned-By: MIMEDefang 3.0 on 10.30.177.17
-X-Mimecast-Spam-Score: 0
-X-Mimecast-MFC-PROC-ID: hDhZdj78kv5XgyQXSu22g5qBEeprHkbncBd0CYjJI9A_1756414526
-X-Mimecast-Originator: gmail.com
-Content-Transfer-Encoding: quoted-printable
-content-type: text/plain; charset=WINDOWS-1252; x-default=true
+X-OriginatorOrg: Nvidia.com
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-AuthSource: CY5PR12MB6526.namprd12.prod.outlook.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: b2bf51b0-1916-4f27-d1d1-08dde675b36a
+X-MS-Exchange-CrossTenant-originalarrivaltime: 28 Aug 2025 20:58:55.2147 (UTC)
+X-MS-Exchange-CrossTenant-fromentityheader: Hosted
+X-MS-Exchange-CrossTenant-id: 43083d15-7273-40c1-b7db-39efd9ccc17a
+X-MS-Exchange-CrossTenant-mailboxtype: HOSTED
+X-MS-Exchange-CrossTenant-userprincipalname: j9LnFQf7GJ3xWuiy4jjv9+Utgianj4M6zVHTOoUU7FThaQQ52YpwWzbvJ933YjQecO4OIOEg1K1XvyzmldhJtg==
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: CY5PR12MB6381
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -61,233 +185,24 @@ List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-From: Faith Ekstrand <faith.ekstrand@collabora.com>
-
-This ensures that the memory write and the interrupt are properly
-ordered and we won't wake up the kernel before the semaphore write has
-hit memory.
-
-Fixes: b1ca384772b6 ("drm/nouveau/gv100-: switch to volta semaphore methods=
-")
-Cc: stable@vger.kernel.org
-Signed-off-by: Faith Ekstrand <faith.ekstrand@collabora.com>
-Signed-off-by: Dave Airlie <airlied@redhat.com>
----
- drivers/gpu/drm/nouveau/gv100_fence.c         |  7 +-
- .../drm/nouveau/include/nvhw/class/clc36f.h   | 85 +++++++++++++++++++
- 2 files changed, 91 insertions(+), 1 deletion(-)
-
-diff --git a/drivers/gpu/drm/nouveau/gv100_fence.c b/drivers/gpu/drm/nouvea=
-u/gv100_fence.c
-index cccdeca72002..317e516c4ec7 100644
---- a/drivers/gpu/drm/nouveau/gv100_fence.c
-+++ b/drivers/gpu/drm/nouveau/gv100_fence.c
-@@ -18,7 +18,7 @@ gv100_fence_emit32(struct nouveau_channel *chan, u64 virt=
-ual, u32 sequence)
- =09struct nvif_push *push =3D &chan->chan.push;
- =09int ret;
-=20
--=09ret =3D PUSH_WAIT(push, 8);
-+=09ret =3D PUSH_WAIT(push, 13);
- =09if (ret)
- =09=09return ret;
-=20
-@@ -32,6 +32,11 @@ gv100_fence_emit32(struct nouveau_channel *chan, u64 vir=
-tual, u32 sequence)
- =09=09  NVDEF(NVC36F, SEM_EXECUTE, PAYLOAD_SIZE, 32BIT) |
- =09=09  NVDEF(NVC36F, SEM_EXECUTE, RELEASE_TIMESTAMP, DIS));
-=20
-+=09PUSH_MTHD(push, NVC36F, MEM_OP_A, 0,
-+=09=09=09=09MEM_OP_B, 0,
-+=09=09=09=09MEM_OP_C, NVDEF(NVC36F, MEM_OP_C, MEMBAR_TYPE, SYS_MEMBAR),
-+=09=09=09=09MEM_OP_D, NVDEF(NVC36F, MEM_OP_D, OPERATION, MEMBAR));
-+
- =09PUSH_MTHD(push, NVC36F, NON_STALL_INTERRUPT, 0);
-=20
- =09PUSH_KICK(push);
-diff --git a/drivers/gpu/drm/nouveau/include/nvhw/class/clc36f.h b/drivers/=
-gpu/drm/nouveau/include/nvhw/class/clc36f.h
-index 8735dda4c8a7..338f74b9f501 100644
---- a/drivers/gpu/drm/nouveau/include/nvhw/class/clc36f.h
-+++ b/drivers/gpu/drm/nouveau/include/nvhw/class/clc36f.h
-@@ -7,6 +7,91 @@
-=20
- #define NVC36F_NON_STALL_INTERRUPT                                 (0x0000=
-0020)
- #define NVC36F_NON_STALL_INTERRUPT_HANDLE                                 =
-31:0
-+// NOTE - MEM_OP_A and MEM_OP_B have been replaced in gp100 with methods f=
-or
-+// specifying the page address for a targeted TLB invalidate and the uTLB =
-for
-+// a targeted REPLAY_CANCEL for UVM.
-+// The previous MEM_OP_A/B functionality is in MEM_OP_C/D, with slightly
-+// rearranged fields.
-+#define NVC36F_MEM_OP_A                                            (0x0000=
-0028)
-+#define NVC36F_MEM_OP_A_TLB_INVALIDATE_CANCEL_TARGET_CLIENT_UNIT_ID       =
- 5:0  // only relevant for REPLAY_CANCEL_TARGETED
-+#define NVC36F_MEM_OP_A_TLB_INVALIDATE_INVALIDATION_SIZE                  =
- 5:0  // Used to specify size of invalidate, used for invalidates which are=
- not of the REPLAY_CANCEL_TARGETED type
-+#define NVC36F_MEM_OP_A_TLB_INVALIDATE_CANCEL_TARGET_GPC_ID               =
-10:6  // only relevant for REPLAY_CANCEL_TARGETED
-+#define NVC36F_MEM_OP_A_TLB_INVALIDATE_CANCEL_MMU_ENGINE_ID               =
- 6:0  // only relevant for REPLAY_CANCEL_VA_GLOBAL
-+#define NVC36F_MEM_OP_A_TLB_INVALIDATE_SYSMEMBAR                         1=
-1:11
-+#define NVC36F_MEM_OP_A_TLB_INVALIDATE_SYSMEMBAR_EN                 0x0000=
-0001
-+#define NVC36F_MEM_OP_A_TLB_INVALIDATE_SYSMEMBAR_DIS                0x0000=
-0000
-+#define NVC36F_MEM_OP_A_TLB_INVALIDATE_TARGET_ADDR_LO                    3=
-1:12
-+#define NVC36F_MEM_OP_B                                            (0x0000=
-002c)
-+#define NVC36F_MEM_OP_B_TLB_INVALIDATE_TARGET_ADDR_HI                     =
-31:0
-+#define NVC36F_MEM_OP_C                                            (0x0000=
-0030)
-+#define NVC36F_MEM_OP_C_MEMBAR_TYPE                                       =
- 2:0
-+#define NVC36F_MEM_OP_C_MEMBAR_TYPE_SYS_MEMBAR                      0x0000=
-0000
-+#define NVC36F_MEM_OP_C_MEMBAR_TYPE_MEMBAR                          0x0000=
-0001
-+#define NVC36F_MEM_OP_C_TLB_INVALIDATE_PDB                                =
- 0:0
-+#define NVC36F_MEM_OP_C_TLB_INVALIDATE_PDB_ONE                      0x0000=
-0000
-+#define NVC36F_MEM_OP_C_TLB_INVALIDATE_PDB_ALL                      0x0000=
-0001  // Probably nonsensical for MMU_TLB_INVALIDATE_TARGETED
-+#define NVC36F_MEM_OP_C_TLB_INVALIDATE_GPC                                =
- 1:1
-+#define NVC36F_MEM_OP_C_TLB_INVALIDATE_GPC_ENABLE                   0x0000=
-0000
-+#define NVC36F_MEM_OP_C_TLB_INVALIDATE_GPC_DISABLE                  0x0000=
-0001
-+#define NVC36F_MEM_OP_C_TLB_INVALIDATE_REPLAY                             =
- 4:2  // only relevant if GPC ENABLE
-+#define NVC36F_MEM_OP_C_TLB_INVALIDATE_REPLAY_NONE                  0x0000=
-0000
-+#define NVC36F_MEM_OP_C_TLB_INVALIDATE_REPLAY_START                 0x0000=
-0001
-+#define NVC36F_MEM_OP_C_TLB_INVALIDATE_REPLAY_START_ACK_ALL         0x0000=
-0002
-+#define NVC36F_MEM_OP_C_TLB_INVALIDATE_REPLAY_CANCEL_TARGETED       0x0000=
-0003
-+#define NVC36F_MEM_OP_C_TLB_INVALIDATE_REPLAY_CANCEL_GLOBAL         0x0000=
-0004
-+#define NVC36F_MEM_OP_C_TLB_INVALIDATE_REPLAY_CANCEL_VA_GLOBAL      0x0000=
-0005
-+#define NVC36F_MEM_OP_C_TLB_INVALIDATE_ACK_TYPE                           =
- 6:5  // only relevant if GPC ENABLE
-+#define NVC36F_MEM_OP_C_TLB_INVALIDATE_ACK_TYPE_NONE                0x0000=
-0000
-+#define NVC36F_MEM_OP_C_TLB_INVALIDATE_ACK_TYPE_GLOBALLY            0x0000=
-0001
-+#define NVC36F_MEM_OP_C_TLB_INVALIDATE_ACK_TYPE_INTRANODE           0x0000=
-0002
-+#define NVC36F_MEM_OP_C_TLB_INVALIDATE_ACCESS_TYPE                        =
- 9:7 //only relevant for REPLAY_CANCEL_VA_GLOBAL
-+#define NVC36F_MEM_OP_C_TLB_INVALIDATE_ACCESS_TYPE_VIRT_READ              =
-   0
-+#define NVC36F_MEM_OP_C_TLB_INVALIDATE_ACCESS_TYPE_VIRT_WRITE             =
-   1
-+#define NVC36F_MEM_OP_C_TLB_INVALIDATE_ACCESS_TYPE_VIRT_ATOMIC_STRONG     =
-   2
-+#define NVC36F_MEM_OP_C_TLB_INVALIDATE_ACCESS_TYPE_VIRT_RSVRVD            =
-   3
-+#define NVC36F_MEM_OP_C_TLB_INVALIDATE_ACCESS_TYPE_VIRT_ATOMIC_WEAK       =
-   4
-+#define NVC36F_MEM_OP_C_TLB_INVALIDATE_ACCESS_TYPE_VIRT_ATOMIC_ALL        =
-   5
-+#define NVC36F_MEM_OP_C_TLB_INVALIDATE_ACCESS_TYPE_VIRT_WRITE_AND_ATOMIC  =
-   6
-+#define NVC36F_MEM_OP_C_TLB_INVALIDATE_ACCESS_TYPE_VIRT_ALL               =
-   7
-+#define NVC36F_MEM_OP_C_TLB_INVALIDATE_PAGE_TABLE_LEVEL                   =
- 9:7  // Invalidate affects this level and all below
-+#define NVC36F_MEM_OP_C_TLB_INVALIDATE_PAGE_TABLE_LEVEL_ALL         0x0000=
-0000  // Invalidate tlb caches at all levels of the page table
-+#define NVC36F_MEM_OP_C_TLB_INVALIDATE_PAGE_TABLE_LEVEL_PTE_ONLY    0x0000=
-0001
-+#define NVC36F_MEM_OP_C_TLB_INVALIDATE_PAGE_TABLE_LEVEL_UP_TO_PDE0  0x0000=
-0002
-+#define NVC36F_MEM_OP_C_TLB_INVALIDATE_PAGE_TABLE_LEVEL_UP_TO_PDE1  0x0000=
-0003
-+#define NVC36F_MEM_OP_C_TLB_INVALIDATE_PAGE_TABLE_LEVEL_UP_TO_PDE2  0x0000=
-0004
-+#define NVC36F_MEM_OP_C_TLB_INVALIDATE_PAGE_TABLE_LEVEL_UP_TO_PDE3  0x0000=
-0005
-+#define NVC36F_MEM_OP_C_TLB_INVALIDATE_PAGE_TABLE_LEVEL_UP_TO_PDE4  0x0000=
-0006
-+#define NVC36F_MEM_OP_C_TLB_INVALIDATE_PAGE_TABLE_LEVEL_UP_TO_PDE5  0x0000=
-0007
-+#define NVC36F_MEM_OP_C_TLB_INVALIDATE_PDB_APERTURE                       =
-   11:10  // only relevant if PDB_ONE
-+#define NVC36F_MEM_OP_C_TLB_INVALIDATE_PDB_APERTURE_VID_MEM             0x=
-00000000
-+#define NVC36F_MEM_OP_C_TLB_INVALIDATE_PDB_APERTURE_SYS_MEM_COHERENT    0x=
-00000002
-+#define NVC36F_MEM_OP_C_TLB_INVALIDATE_PDB_APERTURE_SYS_MEM_NONCOHERENT 0x=
-00000003
-+#define NVC36F_MEM_OP_C_TLB_INVALIDATE_PDB_ADDR_LO                       3=
-1:12  // only relevant if PDB_ONE
-+#define NVC36F_MEM_OP_C_ACCESS_COUNTER_CLR_TARGETED_NOTIFY_TAG            =
-19:0
-+// MEM_OP_D MUST be preceded by MEM_OPs A-C.
-+#define NVC36F_MEM_OP_D                                            (0x0000=
-0034)
-+#define NVC36F_MEM_OP_D_TLB_INVALIDATE_PDB_ADDR_HI                        =
-26:0  // only relevant if PDB_ONE
-+#define NVC36F_MEM_OP_D_OPERATION                                        3=
-1:27
-+#define NVC36F_MEM_OP_D_OPERATION_MEMBAR                            0x0000=
-0005
-+#define NVC36F_MEM_OP_D_OPERATION_MMU_TLB_INVALIDATE                0x0000=
-0009
-+#define NVC36F_MEM_OP_D_OPERATION_MMU_TLB_INVALIDATE_TARGETED       0x0000=
-000a
-+#define NVC36F_MEM_OP_D_OPERATION_L2_PEERMEM_INVALIDATE             0x0000=
-000d
-+#define NVC36F_MEM_OP_D_OPERATION_L2_SYSMEM_INVALIDATE              0x0000=
-000e
-+// CLEAN_LINES is an alias for Tegra/GPU IP usage
-+#define NVC36F_MEM_OP_B_OPERATION_L2_INVALIDATE_CLEAN_LINES         0x0000=
-000e
-+#define NVC36F_MEM_OP_D_OPERATION_L2_CLEAN_COMPTAGS                 0x0000=
-000f
-+#define NVC36F_MEM_OP_D_OPERATION_L2_FLUSH_DIRTY                    0x0000=
-0010
-+#define NVC36F_MEM_OP_D_OPERATION_L2_WAIT_FOR_SYS_PENDING_READS     0x0000=
-0015
-+#define NVC36F_MEM_OP_D_OPERATION_ACCESS_COUNTER_CLR                0x0000=
-0016
-+#define NVC36F_MEM_OP_D_ACCESS_COUNTER_CLR_TYPE                           =
- 1:0
-+#define NVC36F_MEM_OP_D_ACCESS_COUNTER_CLR_TYPE_MIMC                0x0000=
-0000
-+#define NVC36F_MEM_OP_D_ACCESS_COUNTER_CLR_TYPE_MOMC                0x0000=
-0001
-+#define NVC36F_MEM_OP_D_ACCESS_COUNTER_CLR_TYPE_ALL                 0x0000=
-0002
-+#define NVC36F_MEM_OP_D_ACCESS_COUNTER_CLR_TYPE_TARGETED            0x0000=
-0003
-+#define NVC36F_MEM_OP_D_ACCESS_COUNTER_CLR_TARGETED_TYPE                  =
- 2:2
-+#define NVC36F_MEM_OP_D_ACCESS_COUNTER_CLR_TARGETED_TYPE_MIMC       0x0000=
-0000
-+#define NVC36F_MEM_OP_D_ACCESS_COUNTER_CLR_TARGETED_TYPE_MOMC       0x0000=
-0001
-+#define NVC36F_MEM_OP_D_ACCESS_COUNTER_CLR_TARGETED_BANK                  =
- 6:3
- #define NVC36F_SEM_ADDR_LO                                         (0x0000=
-005c)
- #define NVC36F_SEM_ADDR_LO_OFFSET                                         =
-31:2
- #define NVC36F_SEM_ADDR_HI                                         (0x0000=
-0060)
---=20
-2.50.1
-
+T24gVHVlLCAyMDI1LTA4LTI2IGF0IDEzOjA3ICswOTAwLCBBbGV4YW5kcmUgQ291cmJvdCB3cm90
+ZToNCj4gK3N0cnVjdCBIc0hlYWRlclYyIHsNCj4gK8KgwqDCoCAvLy8gT2Zmc2V0IHRvIHRoZSBz
+dGFydCBvZiB0aGUgc2lnbmF0dXJlcy4NCj4gK8KgwqDCoCBzaWdfcHJvZF9vZmZzZXQ6IHUzMiwN
+Cj4gK8KgwqDCoCAvLy8gU2l6ZSBpbiBieXRlcyBvZiB0aGUgc2lnbmF0dXJlcy4NCj4gK8KgwqDC
+oCBzaWdfcHJvZF9zaXplOiB1MzIsDQo+ICvCoMKgwqAgLy8vIE9mZnNldCB0byBhIGB1MzJgIGNv
+bnRhaW5pbmcgdGhlIGxvY2F0aW9uIGF0IHdoaWNoIHRvIHBhdGNoIHRoZSBzaWduYXR1cmUgaW4g
+dGhlDQo+IG1pY3JvY29kZQ0KPiArwqDCoMKgIC8vLyBpbWFnZS4NCj4gK8KgwqDCoCBwYXRjaF9s
+b2M6IHUzMiwNCj4gK8KgwqDCoCAvLy8gT2Zmc2V0IHRvIGEgYHUzMmAgY29udGFpbmluZyB0aGUg
+aW5kZXggb2YgdGhlIHNpZ25hdHVyZSB0byBwYXRjaC4NCj4gK8KgwqDCoCBwYXRjaF9zaWc6IHUz
+MiwNCj4gK8KgwqDCoCAvLy8gU3RhcnQgb2Zmc2V0IHRvIHRoZSBzaWduYXR1cmUgbWV0YWRhdGEu
+DQo+ICvCoMKgwqAgbWV0YV9kYXRhX29mZnNldDogdTMyLA0KPiArwqDCoMKgIC8vLyBTaXplIGlu
+IGJ5dGVzIG9mIHRoZSBzaWduYXR1cmUgbWV0YWRhdGEuDQo+ICvCoMKgwqAgbWV0YV9kYXRhX3Np
+emU6IHUzMiwNCj4gK8KgwqDCoCAvLy8gT2Zmc2V0IHRvIGEgYHUzMmAgY29udGFpbmluZyB0aGUg
+bnVtYmVyIG9mIHNpZ25hdHVyZXMgaW4gdGhlIHNpZ25hdHVyZXMgc2VjdGlvbi4NCj4gK8KgwqDC
+oCBudW1fc2lnOiB1MzIsDQo+ICvCoMKgwqAgLy8vIE9mZnNldCBvZiB0aGUgYXBwbGljYXRpb24t
+c3BlY2lmaWMgaGVhZGVyLg0KPiArwqDCoMKgIGhlYWRlcl9vZmZzZXQ6IHUzMiwNCj4gK8KgwqDC
+oCAvLy8gU2l6ZSBpbiBieXRlcyBvZiB0aGUgYXBwbGljYXRpb24tc3BlY2lmaWMgaGVhZGVyLg0K
+PiArwqDCoMKgIGhlYWRlcl9zaXplOiB1MzIsDQo+ICt9DQoNCllvdSBhcmUgaW5jb25zaXN0ZW50
+IHdpdGggdGhlIG5hbWVzIG9mIG9mZnNldCBmaWVsZHMgaW4gdGhpcyBzdHJ1Y3QuDQoNCnBhdGNo
+X2xvYyBzaG91bGQgYmUgcGF0Y2hfbG9jX29mZnNldA0KcGF0Y2hfc2lnIHNob3VsZCBiZSBwYXRj
+aF9zaWdfb2Zmc2V0DQpudW1fc2lnIHNob3VsZCBiZSBudW1fc2lnX29mZnNldA0KDQo=
