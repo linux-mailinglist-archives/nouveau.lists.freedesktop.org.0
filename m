@@ -2,78 +2,76 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id 667ADCBAD10
-	for <lists+nouveau@lfdr.de>; Sat, 13 Dec 2025 13:44:40 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id EA19ECBAB1E
+	for <lists+nouveau@lfdr.de>; Sat, 13 Dec 2025 13:42:42 +0100 (CET)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 9D4D810EBC6;
-	Sat, 13 Dec 2025 12:41:10 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id B890710E9F1;
+	Sat, 13 Dec 2025 12:41:02 +0000 (UTC)
 Authentication-Results: gabe.freedesktop.org;
-	dkim=permerror (0-bit key) header.d=gmail.com header.i=@gmail.com header.b="TXpZAKSN";
+	dkim=permerror (0-bit key) header.d=gmail.com header.i=@gmail.com header.b="dQPFiFEE";
 	dkim-atps=neutral
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from mail-pl1-f171.google.com (mail-pl1-f171.google.com
- [209.85.214.171])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 3AADA10E32B;
- Thu, 28 Aug 2025 11:26:47 +0000 (UTC)
-Received: by mail-pl1-f171.google.com with SMTP id
- d9443c01a7336-2488be81066so1821925ad.1; 
- Thu, 28 Aug 2025 04:26:47 -0700 (PDT)
+Received: from mail-pj1-f49.google.com (mail-pj1-f49.google.com
+ [209.85.216.49])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id C81E110E1D4;
+ Thu, 28 Aug 2025 11:45:55 +0000 (UTC)
+Received: by mail-pj1-f49.google.com with SMTP id
+ 98e67ed59e1d1-325006ff07eso77467a91.1; 
+ Thu, 28 Aug 2025 04:45:55 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1756380407; x=1756985207; darn=lists.freedesktop.org;
+ d=gmail.com; s=20230601; t=1756381555; x=1756986355; darn=lists.freedesktop.org;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:from:to:cc:subject:date
  :message-id:reply-to;
- bh=TB49lARAguv+2novlKNuN0CFuq7GTPMP7W+cgTo2Hmc=;
- b=TXpZAKSN/R9WGjSmiRuTzDr3tOBf358pOnECW2OJwtD1aLYKO7Da9UphAManmnWhBO
- ri8mSB9gtWndmOoSYo6wKHiGjuQbLsv/QD/sZda8LbkZU0bxF7kdTdOZ69Gdpe+lyRdG
- /YveO/ouaG2imX3PUAbIextgnFW6ti2DyLrptnIzw+7ggnXl9kN4HgJAwmnbR0foQ9Eb
- IE3F52xDcFDwZcRWDqSgij1I5mOilj0tNpowd8x6OlqplhgKRBv2fWzwzZA7jFBjQmH4
- WWN+tBQBWcLuZgV23MfvO/Hvn6W/wgYbBMG3AFgxTd0dleVylc4B3YN1U8oea4YpcXdV
- MBNA==
+ bh=I2H56yO/8NFGXQtE7p7bHZ/o1E70dyX3AMAnCJlBt6w=;
+ b=dQPFiFEE5trpogGtFcs+sw4czMozzXgKuhR/Mz5mNVeIwKmOB0PHHAvV9bLf98oYbb
+ RZ+oxHSY0PSFM72xzTveyPEZRdm2nbn3m4WYViQwDNSsz6gaox9rW57GAd0vX8nNu5wU
+ AhFNGUcuOz88GuZu7Wq1yn9hEQAhcrsMR+a3JH4G/fWNvUFoTAioaJcw8czbw/E3DRLy
+ oMokxgcVmaf3yCjjgD4QflUQSLRkjw02RnMsyGvVUwICGpg2pfPpxt+u2cx58nh9gFe4
+ CmBxWaEFiBIBfXHFVUGGFP7L9NpmqPh6LPFtsJJEYmGTEVDHK5dQ4V3wgeb3wNGIisk3
+ cKPA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1756380407; x=1756985207;
+ d=1e100.net; s=20230601; t=1756381555; x=1756986355;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=TB49lARAguv+2novlKNuN0CFuq7GTPMP7W+cgTo2Hmc=;
- b=gyyuCS9LZqQSIOjPvo9xYu/MjXnDLujxeUoYlI+YgyPO/bLEZcNNG6S/gT79TblTJJ
- aDPhfv8czUMU4uloa3OaUnBE6lSnIKnFWCbb2Z1uqsS+e0lL4asYU1wlD9ydLLcNZ9i2
- YtVrqBsF9/L4zLsAXBoO6cVF5UASUZwFvgLnV07kyhaoUNKAn8mYeBJOW2bMsYGf0a97
- k3Rf6w3qnjwVlMAl+0xZ2GUseSIb+fXBlgO9X+Qa5pegvqnfRjfmntzmOBq4bmV42RRN
- 74nVOsACyoGuQ/c7q3AfrqlZrK5FlwzOSjaYHPu8jUyCbx78DGUt9GgqO8FPjUvc9NtY
- qSkg==
+ bh=I2H56yO/8NFGXQtE7p7bHZ/o1E70dyX3AMAnCJlBt6w=;
+ b=LqTVXMFEvigGbaEELmR9ef4RlEehGwqI6Is8Dgqv95gUgwQWlxfI1QB4rfYVbeJ5si
+ u5vtW59tqVV1dYbHabLKiUR5FQY2FncnyHvlqOn9uBIDAllBCEXilXSfB4PulJD7fZ9p
+ txq7hr19NTW8UfoVbLNr+GodL6G2ls7J4VLrwSOw0rg82t/C+9XbrNgm7Y6qozesZPgj
+ kmCRelgyeE+0EBI76ddGKj8N4jAOUiH2lcr7YN8EQIdegqOBoc4mYqH16TDAZ3QwS7Ax
+ moOLwP6h3Kak9qe4XzpbWmH4M9AX547LPQ9aiV1bJd+vwRqeJekp30+Zy0/pEMQ/fbnx
+ uMAw==
 X-Forwarded-Encrypted: i=1;
- AJvYcCWwo8REp8Q6og2a3dpPBtS9+tKuC87krw4ffFNjuCBKq1tu1zoxYlRVOPtTOeFrreDUcm8aY4XNKCE=@lists.freedesktop.org,
- AJvYcCXt5t2Gneu/35MyvpBKEAD1sDSRv/xoHZBBUOpfa6wiceJ6ku9d6CCUhvuGE5npSXNTmTX9XCP8zQ==@lists.freedesktop.org
-X-Gm-Message-State: AOJu0YzNTPY1xWLM4JMEMoyly88UehDVOj/ryp0R+rHXbnSTwpU95+ET
- yIA3AdEj/a511PvtbVClL9sCTsX/uUrig4FymMDP4z/2NkIZSiMgwqUHf6eb9LMe+Jguq9zT2bW
- s1yKYUS6s4NUfbcLbV1RF3QYW+JeyiBw=
-X-Gm-Gg: ASbGncvoTHY0plk7VomRYemQolVqq9REkSrqTjgYyxh7Qm12JfZRT8kqkQ04qg1wTFo
- 5PHTHs7XqbjyC2NuZZmb4sKz8PB4/So1yIWktrGgxZgWMdMzMtlisAzw0OmtUMp/wnzFdgkSk0o
- BXGvjRyar08Bd6YWp8rjGOQfu4JTKOIlcLgnM1/wHTAOR5yu3EjY/hoEnU54WVO6cgHXTX7rf2e
- VdtpQxK6ZWy6VwYHdHOtM9955NN//CyQLot+XDlziTrq9ToIwBWaX1JNATO01sgTAxsQqWj9S8O
- FdtQtl8Lh7CHPgJNSChH8eWiwX6KWGVxo6i89iqlh6gqqdE=
-X-Google-Smtp-Source: AGHT+IHHmDIHqxhO7l79GLUkJwaWQ7dZNpLn1zpLg1iQnq0+hdNtOQx1/t6zWJjm/sSiYUD2aH3gJhMn/p7bQf7ZDaE=
-X-Received: by 2002:a17:902:f60d:b0:248:847b:8906 with SMTP id
- d9443c01a7336-248847b8b62mr52656055ad.11.1756380406614; Thu, 28 Aug 2025
- 04:26:46 -0700 (PDT)
+ AJvYcCVnMzjgIummVbDCp9QK8DofnOLb/+LcOmppIxtlPpPQmE9TWmcWpxRa3e1+/6paxVTSnNlXvoTufw0=@lists.freedesktop.org,
+ AJvYcCXAebKHvaJYmMM6KqRHda/TDhrU0Wyl/a71wLC9mOMA12QYfOqCkcphyoEk9X4IZ4GQhZkqDgwqOg==@lists.freedesktop.org
+X-Gm-Message-State: AOJu0Yz1cqKdOuJ+nJiSFshqkicr7EJ1PiLgtfdt3yHj3tUBe5TY2Xhs
+ X6cQfDnZXwAO+9W2CEJnXKbro0gGi48MPd4fwr93YOMj6W9+rbj6GkFyPiF7bNK2vseHr5eCTvW
+ IVJskXuF0lNj1kCoX8JydoOcE42ycnvY=
+X-Gm-Gg: ASbGncu5qFtNiuSX2k7vj1sUBupjZad/mbNTyFOcNQ2u6f3zB1kTRXWedm47UXWrqXm
+ vzaT9w7Da4nSUa7GjyzCQUTRO8rhvYSQQ/bxH4Fp8en64Zletq01wCAj9KyZawXxDoIQLMWoAM2
+ lQ3NGsMnjlWub9val/YccOCdOMVA4HuN88xuHQTGFNoPC9dN24qIthSuDxYwI9iech63rY04grz
+ j8QIOc/NUPmf/G2z6jRj762faOSZokWnslmhYjQdXFwkQs5Tqe7dmyUPVR3TQkUN+vlZWmknK+Q
+ voTy822yl/VMuwLQRIIk+L0j+aPNkt/7Ci/3
+X-Google-Smtp-Source: AGHT+IG1ihsWTuJC99RCEFetl0OaKKf7I0MSOaGMg4ugbXGYCXUCMWGrBO89xxuGWPNGJExxHbx0h7dAYm9Df/5VgN0=
+X-Received: by 2002:a17:90b:4d01:b0:31f:3d6:6d98 with SMTP id
+ 98e67ed59e1d1-32515ee8b50mr16448907a91.5.1756381555273; Thu, 28 Aug 2025
+ 04:45:55 -0700 (PDT)
 MIME-Version: 1.0
 References: <20250826-nova_firmware-v2-0-93566252fe3a@nvidia.com>
- <20250826-nova_firmware-v2-2-93566252fe3a@nvidia.com>
- <9adb92d4-6063-4032-bf76-f98dcfe2c824@nvidia.com>
- <DCD2VJ1WJW2O.VM7E4PD3DFYO@nvidia.com>
-In-Reply-To: <DCD2VJ1WJW2O.VM7E4PD3DFYO@nvidia.com>
+ <20250826-nova_firmware-v2-1-93566252fe3a@nvidia.com>
+ <DCE0VZXSP39I.FKGHKONUTB5L@nvidia.com>
+In-Reply-To: <DCE0VZXSP39I.FKGHKONUTB5L@nvidia.com>
 From: Miguel Ojeda <miguel.ojeda.sandonis@gmail.com>
-Date: Thu, 28 Aug 2025 13:26:34 +0200
-X-Gm-Features: Ac12FXzy24K1wGe7TQOMJcL6Fdf60t07YBP-70leUEy1vm3L-w174pbiaRtsL7M
-Message-ID: <CANiq72=nGbziZCKt=AneE_vXw76i=+td0dSVfbOJ8kJ9eYHw9w@mail.gmail.com>
-Subject: Re: [PATCH v2 2/8] gpu: nova-core: firmware: add support for common
- firmware header
+Date: Thu, 28 Aug 2025 13:45:43 +0200
+X-Gm-Features: Ac12FXzDZTEvSN_jSpG0n7-NSUbagH20PpVfLwEy9ehcrmoj8GVXqea9N91DQ_U
+Message-ID: <CANiq72=Z26jzVMbGfqL-_Wq8boX5qApmPCVGA1D6cwzOxgWWLg@mail.gmail.com>
+Subject: Re: [PATCH v2 1/8] rust: transmute: add `from_bytes_copy` method to
+ `FromBytes` trait
 To: Alexandre Courbot <acourbot@nvidia.com>
-Cc: John Hubbard <jhubbard@nvidia.com>, Miguel Ojeda <ojeda@kernel.org>, 
- Alex Gaynor <alex.gaynor@gmail.com>, Boqun Feng <boqun.feng@gmail.com>, 
- Gary Guo <gary@garyguo.net>,
+Cc: Miguel Ojeda <ojeda@kernel.org>, Alex Gaynor <alex.gaynor@gmail.com>, 
+ Boqun Feng <boqun.feng@gmail.com>, Gary Guo <gary@garyguo.net>, 
  =?UTF-8?Q?Bj=C3=B6rn_Roy_Baron?= <bjorn3_gh@protonmail.com>, 
  Benno Lossin <lossin@kernel.org>, Andreas Hindborg <a.hindborg@kernel.org>, 
  Alice Ryhl <aliceryhl@google.com>, Trevor Gross <tmgross@umich.edu>, 
@@ -81,9 +79,9 @@ Cc: John Hubbard <jhubbard@nvidia.com>, Miguel Ojeda <ojeda@kernel.org>,
  Simona Vetter <simona@ffwll.ch>, 
  Maarten Lankhorst <maarten.lankhorst@linux.intel.com>,
  Maxime Ripard <mripard@kernel.org>, 
- Thomas Zimmermann <tzimmermann@suse.de>, Alistair Popple <apopple@nvidia.com>, 
- Joel Fernandes <joelagnelf@nvidia.com>, Timur Tabi <ttabi@nvidia.com>,
- rust-for-linux@vger.kernel.org, 
+ Thomas Zimmermann <tzimmermann@suse.de>, John Hubbard <jhubbard@nvidia.com>, 
+ Alistair Popple <apopple@nvidia.com>, Joel Fernandes <joelagnelf@nvidia.com>, 
+ Timur Tabi <ttabi@nvidia.com>, rust-for-linux@vger.kernel.org, 
  linux-kernel@vger.kernel.org, nouveau@lists.freedesktop.org, 
  dri-devel@lists.freedesktop.org
 Content-Type: text/plain; charset="UTF-8"
@@ -103,48 +101,18 @@ List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-On Wed, Aug 27, 2025 at 10:47=E2=80=AFAM Alexandre Courbot <acourbot@nvidia=
-.com> wrote:
+On Thu, Aug 28, 2025 at 1:26=E2=80=AFPM Alexandre Courbot <acourbot@nvidia.=
+com> wrote:
 >
-> However, `fw_start + fw_size` can panic in debug configuration if it
-> overflows. In a release build I believe it will just happily wrap, and
+> We got 3 Reviewed-by on this patch - Miguel, are you ok if I merge it
+> together with Christian's `from_bytes` patch, since they are closely
+> related?
 
-In the kernel, it is a panic in the default configuration, not just a debug=
- one.
+If you are taking this series this cycle, then sure!
 
-We have debug assertions too -- and those are disabled by default, but
-they are separate from the overflow checking, which is the one enabled
-by default.
+Acked-by: Miguel Ojeda <ojeda@kernel.org>
 
-So, any use of those operators is limited to cases where one knows,
-somehow, that it will not overflow. And e.g. user-controlled inputs
-cannot use them at all.
-
-So, conceptually, something like this:
-
-  - Static assert if the compiler knows it cannot fail.
-  - Build assert if the optimizer knows it cannot fail.
-  - Unfallible (like the possibly panicking operators) if the
-developer knows it cannot fail.
-  - Fallible/wrapping/saturating/... if the developer isn't sure or it
-simply cannot be known until runtime. User-derived inputs must use
-this option (or rarely the unsafe one).
-  - Unsafe if the developer knows it cannot fail and the other options
-are not acceptable for some reason. Ideally paired with a debug
-assertion (the compiler adds these already for many unsafe
-preconditions).
-
-In the past I requested upstream Rust a way to have a "third mode"
-("report and continue") for the operators so that it would wrap (like
-the non-panicking mode) but allowing us to add a customization point
-so that we can e.g. `WARN_ON_ONCE`.
-
-That would be ideal, because it is a nice middle ground that is not as
-punishing if a developer gets it wrong, especially for "normal users",
-where panics typically mean lost reports etc. And other kernel users,
-like cloud operators, can keep the panicking mode.
-
-As for discussing no-panic, sure!
+Thanks!
 
 Cheers,
 Miguel
