@@ -2,88 +2,78 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id EA19ECBAB1E
-	for <lists+nouveau@lfdr.de>; Sat, 13 Dec 2025 13:42:42 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 7F171CBAB33
+	for <lists+nouveau@lfdr.de>; Sat, 13 Dec 2025 13:42:47 +0100 (CET)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id B890710E9F1;
+	by gabe.freedesktop.org (Postfix) with ESMTP id 646F310EAAE;
 	Sat, 13 Dec 2025 12:41:02 +0000 (UTC)
 Authentication-Results: gabe.freedesktop.org;
-	dkim=permerror (0-bit key) header.d=gmail.com header.i=@gmail.com header.b="dQPFiFEE";
+	dkim=permerror (0-bit key) header.d=gmail.com header.i=@gmail.com header.b="dfzMtSaY";
 	dkim-atps=neutral
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from mail-pj1-f49.google.com (mail-pj1-f49.google.com
- [209.85.216.49])
- by gabe.freedesktop.org (Postfix) with ESMTPS id C81E110E1D4;
- Thu, 28 Aug 2025 11:45:55 +0000 (UTC)
-Received: by mail-pj1-f49.google.com with SMTP id
- 98e67ed59e1d1-325006ff07eso77467a91.1; 
- Thu, 28 Aug 2025 04:45:55 -0700 (PDT)
+Received: from mail-pl1-f178.google.com (mail-pl1-f178.google.com
+ [209.85.214.178])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id C424F10EAA4;
+ Thu, 28 Aug 2025 19:31:41 +0000 (UTC)
+Received: by mail-pl1-f178.google.com with SMTP id
+ d9443c01a7336-248e01cd834so2094935ad.0; 
+ Thu, 28 Aug 2025 12:31:41 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1756381555; x=1756986355; darn=lists.freedesktop.org;
+ d=gmail.com; s=20230601; t=1756409501; x=1757014301; darn=lists.freedesktop.org;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:from:to:cc:subject:date
  :message-id:reply-to;
- bh=I2H56yO/8NFGXQtE7p7bHZ/o1E70dyX3AMAnCJlBt6w=;
- b=dQPFiFEE5trpogGtFcs+sw4czMozzXgKuhR/Mz5mNVeIwKmOB0PHHAvV9bLf98oYbb
- RZ+oxHSY0PSFM72xzTveyPEZRdm2nbn3m4WYViQwDNSsz6gaox9rW57GAd0vX8nNu5wU
- AhFNGUcuOz88GuZu7Wq1yn9hEQAhcrsMR+a3JH4G/fWNvUFoTAioaJcw8czbw/E3DRLy
- oMokxgcVmaf3yCjjgD4QflUQSLRkjw02RnMsyGvVUwICGpg2pfPpxt+u2cx58nh9gFe4
- CmBxWaEFiBIBfXHFVUGGFP7L9NpmqPh6LPFtsJJEYmGTEVDHK5dQ4V3wgeb3wNGIisk3
- cKPA==
+ bh=20L/t/dQg856UitOCMDzjeFNPY/n61oJgouq8+c/wpg=;
+ b=dfzMtSaYnrZZ2YBaxE+GM71E4cvnVG9i7K+66b/SUcJnydFZR5RzXE9coKBlA7pLnE
+ Ffej+dYc6wpXNQm4jTC2TnfJPiMwdvIyRx58XinN8rPqGUNUwtyZxe/NIwiVg/cBpL4L
+ eLHYr6EsX1fhez1LEf5qCQ/uTI85ys9vFuEvTde5PYhpenzER+u+n3pu5wCEzkltb/Bj
+ u2dAsbtf7EF5WdDfBwx+BB+1f6MSj10aG/xLQ6ecNalZfbUKulfxyMy9UsO1k9OJ8ADQ
+ Hmoct1IAu7o6kDxPDAQr9RSAbBgSinb4kch87N3VAX9HiOcCjMB/74FiXKWPosPr7Oft
+ SKTw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1756381555; x=1756986355;
+ d=1e100.net; s=20230601; t=1756409501; x=1757014301;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=I2H56yO/8NFGXQtE7p7bHZ/o1E70dyX3AMAnCJlBt6w=;
- b=LqTVXMFEvigGbaEELmR9ef4RlEehGwqI6Is8Dgqv95gUgwQWlxfI1QB4rfYVbeJ5si
- u5vtW59tqVV1dYbHabLKiUR5FQY2FncnyHvlqOn9uBIDAllBCEXilXSfB4PulJD7fZ9p
- txq7hr19NTW8UfoVbLNr+GodL6G2ls7J4VLrwSOw0rg82t/C+9XbrNgm7Y6qozesZPgj
- kmCRelgyeE+0EBI76ddGKj8N4jAOUiH2lcr7YN8EQIdegqOBoc4mYqH16TDAZ3QwS7Ax
- moOLwP6h3Kak9qe4XzpbWmH4M9AX547LPQ9aiV1bJd+vwRqeJekp30+Zy0/pEMQ/fbnx
- uMAw==
+ bh=20L/t/dQg856UitOCMDzjeFNPY/n61oJgouq8+c/wpg=;
+ b=KNOxJqrZJ9TkfK0o4mb9HxdmzFmBInaBIy/N+A3IS7z7IlX/UMOJ3wuZLNcdErWVde
+ H57eGb+4u+qD6XDW2Dx3Fz2HzCW0RmGSEvbiSQeT+fM72tA7zQnpT36kqgvjJ2M5cVWN
+ gky1tISwmqzseeNBfRx9PvQ0/AkmD1Jgv02o0juOYmvwvqQA4lbP9ltTXq/Tr+pGu8/v
+ 8TV/vdAkhlQvB01o/vKjhgKa58K3w1otYn/NNls/foJwjOdv60jr1WBlR4KXaqq1L6Yu
+ /wUgn1H+CqgTNnMAjL3wmQBqABl+gMYbbexV6BSD+Bn5Ai1v+4gWjQaxYDkwkAqUKoXi
+ EwiA==
 X-Forwarded-Encrypted: i=1;
- AJvYcCVnMzjgIummVbDCp9QK8DofnOLb/+LcOmppIxtlPpPQmE9TWmcWpxRa3e1+/6paxVTSnNlXvoTufw0=@lists.freedesktop.org,
- AJvYcCXAebKHvaJYmMM6KqRHda/TDhrU0Wyl/a71wLC9mOMA12QYfOqCkcphyoEk9X4IZ4GQhZkqDgwqOg==@lists.freedesktop.org
-X-Gm-Message-State: AOJu0Yz1cqKdOuJ+nJiSFshqkicr7EJ1PiLgtfdt3yHj3tUBe5TY2Xhs
- X6cQfDnZXwAO+9W2CEJnXKbro0gGi48MPd4fwr93YOMj6W9+rbj6GkFyPiF7bNK2vseHr5eCTvW
- IVJskXuF0lNj1kCoX8JydoOcE42ycnvY=
-X-Gm-Gg: ASbGncu5qFtNiuSX2k7vj1sUBupjZad/mbNTyFOcNQ2u6f3zB1kTRXWedm47UXWrqXm
- vzaT9w7Da4nSUa7GjyzCQUTRO8rhvYSQQ/bxH4Fp8en64Zletq01wCAj9KyZawXxDoIQLMWoAM2
- lQ3NGsMnjlWub9val/YccOCdOMVA4HuN88xuHQTGFNoPC9dN24qIthSuDxYwI9iech63rY04grz
- j8QIOc/NUPmf/G2z6jRj762faOSZokWnslmhYjQdXFwkQs5Tqe7dmyUPVR3TQkUN+vlZWmknK+Q
- voTy822yl/VMuwLQRIIk+L0j+aPNkt/7Ci/3
-X-Google-Smtp-Source: AGHT+IG1ihsWTuJC99RCEFetl0OaKKf7I0MSOaGMg4ugbXGYCXUCMWGrBO89xxuGWPNGJExxHbx0h7dAYm9Df/5VgN0=
-X-Received: by 2002:a17:90b:4d01:b0:31f:3d6:6d98 with SMTP id
- 98e67ed59e1d1-32515ee8b50mr16448907a91.5.1756381555273; Thu, 28 Aug 2025
- 04:45:55 -0700 (PDT)
+ AJvYcCV0U0VK9IEaxF3wdltQwGYnWkNmt0geOFc0twbZzUbkHwaUXRiu9oIThQSsEjv4g2gSuCkqxWi/fac=@lists.freedesktop.org,
+ AJvYcCWEvkqFM5g1KyGq12nCvdbfzR2OZEIlzmv+++IJDv4xxMbGRbyectLoOBzgWLs9k2WG+WIodq8iIg==@lists.freedesktop.org
+X-Gm-Message-State: AOJu0Yyjoq/NZZle989ZlRFtFg3CbkgH9rgBKUosBRa1ykKZmmDvaDo7
+ Z716YTsFCvhpo3I4qdoTlzTLTL/mpEPu0xP49KrRo5rIfHa/1YoQdRIgvf8/iwbALeQ5+lA9JzO
+ dkrmDhHTORwyuGabO/fVMF43xPjnch9I=
+X-Gm-Gg: ASbGncu/7Xjjz3p6qGbhnJDq+ldKX1l4TKqaxuCzz0x6133lKO315exVU4kH56TLo1Z
+ SLhcB+I4WK1WMEodbeJoI9RXUYTds6R0FcChFD0As5ot0UHBamTghwtdvHaUd265ST9httoT5xM
+ G2VMnEErpNNiZyjT5slRcm3DA6gJ2xdOkSLAxqrjzI0SWHi3i+rELOhI1T2q2q1n7LmfdBtFryy
+ O3gwJ/l9bGzLCnyB3QDVpbqgXuJxSC55N9Kjmt/JRDYNPdqObHxyjutr2ZM/Djt9IJJHvCNWZkE
+ omJpGiPDKLGiCE0dqHRBUCvqo+CNBEU+IxUG
+X-Google-Smtp-Source: AGHT+IFWdw6UhPiyKJrbHE7IDTwFisR1W8SRBwQA99k5or2f4Qr+eBc4mB2thKEKcqtoV9bQyWk8o9eMXoEOsRDv48Q=
+X-Received: by 2002:a17:902:d50d:b0:240:25f3:5be9 with SMTP id
+ d9443c01a7336-2462ef6f3fbmr183406685ad.10.1756409501161; Thu, 28 Aug 2025
+ 12:31:41 -0700 (PDT)
 MIME-Version: 1.0
-References: <20250826-nova_firmware-v2-0-93566252fe3a@nvidia.com>
- <20250826-nova_firmware-v2-1-93566252fe3a@nvidia.com>
- <DCE0VZXSP39I.FKGHKONUTB5L@nvidia.com>
-In-Reply-To: <DCE0VZXSP39I.FKGHKONUTB5L@nvidia.com>
+References: <20250828160247.37492-1-ojeda@kernel.org>
+ <b680c343-ba97-4eb4-b426-56e318dce492@kernel.org>
+ <DCEB1J2P3MZS.3IGXEYP0MAC5H@kernel.org>
+In-Reply-To: <DCEB1J2P3MZS.3IGXEYP0MAC5H@kernel.org>
 From: Miguel Ojeda <miguel.ojeda.sandonis@gmail.com>
-Date: Thu, 28 Aug 2025 13:45:43 +0200
-X-Gm-Features: Ac12FXzDZTEvSN_jSpG0n7-NSUbagH20PpVfLwEy9ehcrmoj8GVXqea9N91DQ_U
-Message-ID: <CANiq72=Z26jzVMbGfqL-_Wq8boX5qApmPCVGA1D6cwzOxgWWLg@mail.gmail.com>
-Subject: Re: [PATCH v2 1/8] rust: transmute: add `from_bytes_copy` method to
- `FromBytes` trait
-To: Alexandre Courbot <acourbot@nvidia.com>
-Cc: Miguel Ojeda <ojeda@kernel.org>, Alex Gaynor <alex.gaynor@gmail.com>, 
- Boqun Feng <boqun.feng@gmail.com>, Gary Guo <gary@garyguo.net>, 
- =?UTF-8?Q?Bj=C3=B6rn_Roy_Baron?= <bjorn3_gh@protonmail.com>, 
- Benno Lossin <lossin@kernel.org>, Andreas Hindborg <a.hindborg@kernel.org>, 
- Alice Ryhl <aliceryhl@google.com>, Trevor Gross <tmgross@umich.edu>, 
- Danilo Krummrich <dakr@kernel.org>, David Airlie <airlied@gmail.com>,
- Simona Vetter <simona@ffwll.ch>, 
- Maarten Lankhorst <maarten.lankhorst@linux.intel.com>,
- Maxime Ripard <mripard@kernel.org>, 
- Thomas Zimmermann <tzimmermann@suse.de>, John Hubbard <jhubbard@nvidia.com>, 
- Alistair Popple <apopple@nvidia.com>, Joel Fernandes <joelagnelf@nvidia.com>, 
- Timur Tabi <ttabi@nvidia.com>, rust-for-linux@vger.kernel.org, 
- linux-kernel@vger.kernel.org, nouveau@lists.freedesktop.org, 
- dri-devel@lists.freedesktop.org
+Date: Thu, 28 Aug 2025 21:31:28 +0200
+X-Gm-Features: Ac12FXwvQbB3YxWRKL103qR7GEVPMjkX_VgeadkNh7YUOWF4Fhw5ZECkLfkRVzk
+Message-ID: <CANiq72mkPqFnb4ztiCokE6+ntVSmgOTgERshg-4SMmLboFOqNg@mail.gmail.com>
+Subject: Re: gpu: nova-core: arm32 build errors
+To: Danilo Krummrich <dakr@kernel.org>
+Cc: Miguel Ojeda <ojeda@kernel.org>, Alexandre Courbot <acourbot@nvidia.com>, 
+ David Airlie <airlied@gmail.com>, Simona Vetter <simona@ffwll.ch>,
+ nouveau@lists.freedesktop.org, 
+ dri-devel@lists.freedesktop.org, rust-for-linux@vger.kernel.org, 
+ linux-kernel@vger.kernel.org
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
 X-Mailman-Approved-At: Sat, 13 Dec 2025 12:40:47 +0000
@@ -101,18 +91,28 @@ List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-On Thu, Aug 28, 2025 at 1:26=E2=80=AFPM Alexandre Courbot <acourbot@nvidia.=
-com> wrote:
+On Thu, Aug 28, 2025 at 9:24=E2=80=AFPM Danilo Krummrich <dakr@kernel.org> =
+wrote:
 >
-> We got 3 Reviewed-by on this patch - Miguel, are you ok if I merge it
-> together with Christian's `from_bytes` patch, since they are closely
-> related?
+> Maybe I spoke too soon, it's actually pretty painful to keep 32-bit
+> compatibility, even though it would be nice for testing purposes.
+>
+> I'll paste the diff to fix it below, I think that makes it obvious why I =
+say
+> that.
+>
+> Instead, we should really just depend on CONFIG_64BIT (which implies
+> ARCH_DMA_ADDR_T_64BIT).
 
-If you are taking this series this cycle, then sure!
+Yeah, it isn't great.
 
-Acked-by: Miguel Ojeda <ojeda@kernel.org>
+If it were just that, maybe it it is worth it (and a `DmaAddress`
+newtype, not just a typedef, could perhaps be nice anyway?), but if
+you think it will become increasingly painful later, then it may be
+best to focus on what matters.
 
-Thanks!
+It is unlikely there is going to be actual users on a 32-bit platform, righ=
+t?
 
 Cheers,
 Miguel
