@@ -2,68 +2,170 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id CA815B3D734
-	for <lists+nouveau@lfdr.de>; Mon,  1 Sep 2025 05:22:52 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 5D286B3DAD4
+	for <lists+nouveau@lfdr.de>; Mon,  1 Sep 2025 09:11:16 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id EF4DD10E0F4;
-	Mon,  1 Sep 2025 03:22:49 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id E7E7910E394;
+	Mon,  1 Sep 2025 07:11:13 +0000 (UTC)
 Authentication-Results: gabe.freedesktop.org;
-	dkim=pass (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="i0m1TxZS";
+	dkim=pass (2048-bit key; unprotected) header.d=Nvidia.com header.i=@Nvidia.com header.b="dq0v2mN3";
 	dkim-atps=neutral
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from sea.source.kernel.org (sea.source.kernel.org [172.234.252.31])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 43C1A10E0F4;
- Mon,  1 Sep 2025 03:22:49 +0000 (UTC)
-Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by sea.source.kernel.org (Postfix) with ESMTP id 7A76D44276;
- Mon,  1 Sep 2025 03:22:48 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPS id 525BDC4CEF0;
- Mon,  1 Sep 2025 03:22:48 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1756696968;
- bh=StUO5VnhJhQRZVLn1enpkS9EijuU3kKL+eiOOBaeQXs=;
- h=From:Date:Subject:To:Cc:Reply-To:From;
- b=i0m1TxZSSnC/OxLH80SkMF9g3QlpfYwVDzF82LT7nXzMTSo1G7+rA3RKdRNDuema+
- DxzZqaGIzOLQPiY6+hfB/SzpuFukiSjXbEDfl+UcPZfiY9TQBctuEchAckEb/UZXx5
- KblOJJnWprBcJ4sLuFxpYsxS20lQ2B53soVrD/K41/KDmL3Gbdk+tENAR1ubt1t19R
- zOAXTINOvtg3h0mgktWxqULhhogV27sagagxl7zrubYQXaA41YCXQavTe8pU78wGEa
- etE34QEBAsqX3+YXiZzc4mpAnbajV0pz6Ik1AeIWWN5ZY0L4cZr3gxreiMmVgy5WkY
- UyMjK4UBvaAPQ==
-Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org
- (localhost.localdomain [127.0.0.1])
- by smtp.lore.kernel.org (Postfix) with ESMTP id 4059DCA0FFD;
- Mon,  1 Sep 2025 03:22:48 +0000 (UTC)
-From: Aaron Kling via B4 Relay <devnull+webgeek1234.gmail.com@kernel.org>
-Date: Sun, 31 Aug 2025 22:22:25 -0500
-Subject: [PATCH] drm/nouveau: Support devfreq for Tegra
+Received: from NAM02-DM3-obe.outbound.protection.outlook.com
+ (mail-dm3nam02on2083.outbound.protection.outlook.com [40.107.95.83])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 4782A10E392;
+ Mon,  1 Sep 2025 07:11:12 +0000 (UTC)
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=LsN8EYlj4jzfAwU3+ibyA9WsthMYFsWC6+PFp+4So1rcvOP2WBMxU8vAXHFMw9CN6w5XfHTLFXNIiG+OTvhMw9t730JUWN2B0gsLSwXGgAheq8WIs+8K/qE0/tNeJCqPRQJYUkXEbPWZoszzA5Tp5yU/DypwjAPwHwO7M6k2DziIs9y9nN6WBZoPDN0NQV3zoODQrGeLovzQdYxaR66haBQr2JE1QfI/P+tXPl+oNgULvY94W65N6rAgpRS1WOIjFzqPhgNyXgNg94EEQGrNg90/Xl/PTl5VD3ViZEnQrxUO6bInlcAPxptPSLm6QDZdI2K+kNxb1EM8H2B02gXocg==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=vpVlHThswQ0YpCl7XuUxwDTNnM0LOvEiEdqtMB5YglE=;
+ b=J7ZTEt7iH4Y8ISxBzNjWRE2/deQphaWJjDyb7qwiw1Tdbg9lzy5ALU1TK70GzY/1QfXnnbacqKqVCHKRSSB7v8VsFbxGBkIuclqolkKO99pmAMIM7mTAZimKzoxk00szvKANxpW7Jd8XXlHcW6G8rT2s1q9h2/QftmPP+CVxQuj/jS2beStCjAf1epouL02gd+gTFdW/IwXglqhR56WnZ9OtjB8/wTEzq00Sar5CNvWE6WGWU/aUiVNO2uRwdKn5CS/Xr74qa3+HU4bPcVEjnn22ovIG98bBB0cxqMA7RcX7cMhEDBvtBCFVNaooaNmrl+1jv+5FdEXP8sgAERtLIg==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=nvidia.com; dmarc=pass action=none header.from=nvidia.com;
+ dkim=pass header.d=nvidia.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=Nvidia.com;
+ s=selector2;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=vpVlHThswQ0YpCl7XuUxwDTNnM0LOvEiEdqtMB5YglE=;
+ b=dq0v2mN3jozuh0GMAYtsIgKXSB9zX4QLXUCrv0oPQNpS3OpnEGj1x+Zam7ulZ9VF8VaEMFY1c2f1turgxHvcfYOmmRmpCFRsVxXm8vmGTDn2LpTKDh4m5Gv88dyKhvaREEzbN5ghqkJCxRM8lkenEHIvjZRA5n//MQY2j2QZqJnCkbaeVtvyCvQVnPysjHCBI7QBLF49kx5SiP65gmIPo+mWSovYdcNhFw7Adrq4RcWvdLk+rwf6dG69G/JQT/UmcU3S2uB/kx2h3VUoGTYTcrF0EpWfyXXxR2hbBOuBbBCe0OQmhnEn+wgCvep6wXDSXgklY9LHEQollFe1k/6kbg==
+Authentication-Results: dkim=none (message not signed)
+ header.d=none;dmarc=none action=none header.from=nvidia.com;
+Received: from CH2PR12MB3990.namprd12.prod.outlook.com (2603:10b6:610:28::18)
+ by PH8PR12MB6841.namprd12.prod.outlook.com (2603:10b6:510:1c8::21)
+ with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9009.22; Mon, 1 Sep
+ 2025 07:11:08 +0000
+Received: from CH2PR12MB3990.namprd12.prod.outlook.com
+ ([fe80::6e37:569f:82ee:3f99]) by CH2PR12MB3990.namprd12.prod.outlook.com
+ ([fe80::6e37:569f:82ee:3f99%3]) with mapi id 15.20.9052.019; Mon, 1 Sep 2025
+ 07:11:07 +0000
+Content-Transfer-Encoding: quoted-printable
+Content-Type: text/plain; charset=UTF-8
+Date: Mon, 01 Sep 2025 16:11:03 +0900
+Message-Id: <DCH9YHZ4ZCC7.36PEB9YXWP0E6@nvidia.com>
+Cc: "Miguel Ojeda" <ojeda@kernel.org>, "Alex Gaynor"
+ <alex.gaynor@gmail.com>, "Boqun Feng" <boqun.feng@gmail.com>, "Gary Guo"
+ <gary@garyguo.net>, =?utf-8?q?Bj=C3=B6rn_Roy_Baron?=
+ <bjorn3_gh@protonmail.com>, "Benno Lossin" <lossin@kernel.org>, "Andreas
+ Hindborg" <a.hindborg@kernel.org>, "Alice Ryhl" <aliceryhl@google.com>,
+ "Trevor Gross" <tmgross@umich.edu>, "David Airlie" <airlied@gmail.com>,
+ "Simona Vetter" <simona@ffwll.ch>, "Maarten Lankhorst"
+ <maarten.lankhorst@linux.intel.com>, "Maxime Ripard" <mripard@kernel.org>,
+ "Thomas Zimmermann" <tzimmermann@suse.de>, "John Hubbard"
+ <jhubbard@nvidia.com>, "Alistair Popple" <apopple@nvidia.com>, "Joel
+ Fernandes" <joelagnelf@nvidia.com>, "Timur Tabi" <ttabi@nvidia.com>,
+ <rust-for-linux@vger.kernel.org>, <linux-kernel@vger.kernel.org>,
+ <nouveau@lists.freedesktop.org>, <dri-devel@lists.freedesktop.org>
+Subject: Re: [PATCH v2 5/8] gpu: nova-core: firmware: process and prepare
+ the GSP firmware
+From: "Alexandre Courbot" <acourbot@nvidia.com>
+To: "Danilo Krummrich" <dakr@kernel.org>
+X-Mailer: aerc 0.20.1-0-g2ecb8770224a-dirty
+References: <20250826-nova_firmware-v2-0-93566252fe3a@nvidia.com>
+ <20250826-nova_firmware-v2-5-93566252fe3a@nvidia.com>
+ <5338bd30-f3ed-42c7-af0e-77c3ef7d675d@kernel.org>
+ <DCEVAXNB3EL9.YFTIP5RQCTUW@nvidia.com>
+ <e249a1d1-f1fb-4818-b9d6-e0b5c17c61a5@kernel.org>
+In-Reply-To: <e249a1d1-f1fb-4818-b9d6-e0b5c17c61a5@kernel.org>
+X-ClientProxiedBy: TYWPR01CA0046.jpnprd01.prod.outlook.com
+ (2603:1096:400:17f::10) To CH2PR12MB3990.namprd12.prod.outlook.com
+ (2603:10b6:610:28::18)
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 7bit
-Message-Id: <20250831-gk20a-devfreq-v1-1-c25a8f1169a8@gmail.com>
-X-B4-Tracking: v=1; b=H4sIAHARtWgC/02OSw7CMBBDr1LNmkiTT5umV0FdJOlMiaAfUqiQE
- HcnohsWXjzLtvyGjXKiDbrqDZn2tKVlLiBPFcSLn0cSaSgMClWNrUYxXhV6MdDOme6CtGOrnQ/
- SSSidNROn12/v3B9cYs8y+zhMCH4jEZdpSo+uitIGW2PQfnBsalahYUtFbBrrWmOUMYzBwf+dr
- jrOKCXGVWIQmeJtiVdhbWDdINa+bbpdQf/5fAHxV/GN4AAAAA==
-X-Change-ID: 20250830-gk20a-devfreq-e39f739ab191
-To: Lyude Paul <lyude@redhat.com>, Danilo Krummrich <dakr@kernel.org>, 
- David Airlie <airlied@gmail.com>, Simona Vetter <simona@ffwll.ch>, 
- Thierry Reding <thierry.reding@gmail.com>, 
- Jonathan Hunter <jonathanh@nvidia.com>
-Cc: linux-kernel@vger.kernel.org, dri-devel@lists.freedesktop.org, 
- nouveau@lists.freedesktop.org, linux-tegra@vger.kernel.org, 
- Aaron Kling <webgeek1234@gmail.com>
-X-Mailer: b4 0.14.2
-X-Developer-Signature: v=1; a=ed25519-sha256; t=1756696967; l=20029;
- i=webgeek1234@gmail.com; s=20250217; h=from:subject:message-id;
- bh=Xr6hXQu4yzVCR1Bkrqzjln5SWhf5njgdwi7PmzNazsM=;
- b=WJj5Skx/w1G03phy8wC70SdoCzGiH4vX0bhPpB4tjeKRuluNXXs6VFhfkZPnm55D7k38MER4r
- /3EgcC1+B0PAdL8YkrFXegFVChSyVB3RjWEBBM/dNUyhK2in4I+1ciZ
-X-Developer-Key: i=webgeek1234@gmail.com; a=ed25519;
- pk=TQwd6q26txw7bkK7B8qtI/kcAohZc7bHHGSD7domdrU=
-X-Endpoint-Received: by B4 Relay for webgeek1234@gmail.com/20250217 with
- auth_id=342
-X-Original-From: Aaron Kling <webgeek1234@gmail.com>
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: CH2PR12MB3990:EE_|PH8PR12MB6841:EE_
+X-MS-Office365-Filtering-Correlation-Id: 1df2f4f3-de3b-4c50-11b9-08dde926b8c2
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: BCL:0;
+ ARA:13230040|366016|7416014|376014|1800799024|10070799003; 
+X-Microsoft-Antispam-Message-Info: =?utf-8?B?VGJzN3IyaitzT0FDUGFDNGQ4YWdUazBLL01BOUd0Ymc1QjJmMFdPTk9yekFB?=
+ =?utf-8?B?WlpoVkp2ZldPK2lwdElta0tqQjZBY1BaR2FSaU13cjgxdWs4Q3l1eDN2MHE3?=
+ =?utf-8?B?c1llMGlVVkJwTzh2MStuVnNCSkZ5OFhYbkpqejV4M1NTTmZlTnAvbWM1VUQr?=
+ =?utf-8?B?OUlFM001MUdWVUUvY2Vzc3pjL0JVcW80bmpZUlpBQzdjdE5VWVpEMWp3V2hw?=
+ =?utf-8?B?TDNpMmRkM3hZZWNTd0VNZDBQNXBEM3o3NEd2aEZDVUYxek9XYlF5WTZqZ0pY?=
+ =?utf-8?B?bmJFNG5WRm14RjZVSG1SeDlLOFdWQy9KQ3NIUUZpcXh6RmtuQTFJNGpOZDJo?=
+ =?utf-8?B?ZE5BRS9jaDhBK3V0WHRBMzUrOGdXdzdyckVoT0M3ZHFzcU9hbHV2THRkS3hx?=
+ =?utf-8?B?NXR4UkYwallHVmIyOG9TL0hKTFZsVFVocmt2ZkVLSkxoUmdSek1QT0RBWDg1?=
+ =?utf-8?B?YlNoU3dNMCtWU1lPUHNwT2hNYkNTUzJ3RDJnNXpFdzQ5VWlmdTQ4S1prd3Z1?=
+ =?utf-8?B?K1U3Y0F4WW1Qdk13VGlocE1sdXZ2UGlVR2JVTjFqeElDZU05RGxOY2lWVXhF?=
+ =?utf-8?B?WEVIUWkyU3lGcHVGcGM0REZpQmwwaHJ0eUIxanp6cVpEcTFkbU90UzNoUHNH?=
+ =?utf-8?B?dGk3R0NHWVRMZnZHL3B6TU14TjVmT3A0ZndoWDROUmxPQ3Y2QkpIRmExdFdr?=
+ =?utf-8?B?UkZ5RU53QUV6bklUOGRIYU04dHI5cm5tQmJ5MU40dys1Rnd2Z3FDMFlRZy9Q?=
+ =?utf-8?B?Tytpbkl2VktteVRkQjdHRWlHZldTaXQ4dWxPQjZpWEtUc0lZVWhrTHlXVDZJ?=
+ =?utf-8?B?TDFGRE56RFRYVDM0bXdVRFhEczJXdmlubTdQT2Faajc4UUZjQXRndFVXNFBE?=
+ =?utf-8?B?VVo1TTFuU0hNWTV5QVVFNUJUNmtCVXMxWU9zRXRQKzVqRWxaMmw2KzgwdEx6?=
+ =?utf-8?B?ZW1hbkpUTEZBSTNZV1JuaXd2UnpzNFVOS0k0b0hvaHBnTFFZVW9Kb1c4czZJ?=
+ =?utf-8?B?TmVtNEY4UVhwMkx0QVNCV3dOM0kxZWdiVm9IR1ZGMGZYN25HRlBxTjdmQUVE?=
+ =?utf-8?B?UG16dWF1Q3BjeHNlbWZCZ2Q2eE1CWnZ2NWwxRkkwSWhmYVk5WUpCVGFReGRP?=
+ =?utf-8?B?c3JkS0FtSXlGQVhsZWRRUzNzelQ0YnlQVTRiTUZjano0cE5OUzN3RjRvcEhU?=
+ =?utf-8?B?b1hSdlVpTXBKMW1XNkNQVlVmbHZtVHlhV1pmd1ZPenRhSG16L24rNFlkZ1Rm?=
+ =?utf-8?B?VlRhV3ozdzlxdUNiUUl1ZG80WUh1cW10L20zVEp6bUZSMkNrK09pM1g5Q0h6?=
+ =?utf-8?B?VTk3UWpKUW9HcU5WY1lja3RMZG52ZFZIaUdaK29RU1JsVHdoOGUxRWc2Vmdl?=
+ =?utf-8?B?ZnY5RWF0N1FsbjZTcTdpM2RucFJNYkkwRVBITGpqaXBWTkNnL2g4Q3hnWGZO?=
+ =?utf-8?B?NGE0d3lpbmFjdTZycytqWjhoaWw0b3hvQUhBeVo4cnpWd0tYc2RzVzRCZzRh?=
+ =?utf-8?B?eWpTZ25uSFVVUGJhZCtVU0UvNEdLUlNWT210SGxEOXEweXdDQ0RJeURlbWVn?=
+ =?utf-8?B?VmkvdW9KVEVlaHFETzFNc0I2RHR0aTNwSy9USDhCZnVDVHA4TndMS1VJSHQr?=
+ =?utf-8?B?NzBuMHFSN1h0ek1uVzdlc2h3OWswN3FNNHFoMXFQZHBJcU1hOW5KU2NJZEZa?=
+ =?utf-8?B?WlFLRkJqRFIvZ2svdVhJVFppeXV1aFBIbnV6MmRyeC9vQllsbVEvYmlxUnJF?=
+ =?utf-8?B?NXBIVytRdmZGanFaQm55bXBVa2FYbjdqV3AwSDBNMFZRMDdKNDNkTmh3SFhY?=
+ =?utf-8?B?YmVib1JaV1B1Q3JJWStGTTQ0ZUJxWS9HaEd0cjZiRGh5TDdlb0I5MUxvYmEr?=
+ =?utf-8?B?enNMZzRTN1o1bmthVnk2MkVsaU1tNTEyWkV0ZHFsUW0rbmJBNFN6Y0NGYnBJ?=
+ =?utf-8?Q?kjK5CyP/f6k=3D?=
+X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
+ IPV:NLI; SFV:NSPM; H:CH2PR12MB3990.namprd12.prod.outlook.com; PTR:; CAT:NONE;
+ SFS:(13230040)(366016)(7416014)(376014)(1800799024)(10070799003); DIR:OUT;
+ SFP:1101; 
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?NS9ma29oTHdBZmRPY082ZjhTYTNCODNFbncrTVowTHJUVVI0SC93QWcrYjNY?=
+ =?utf-8?B?TVVOZFE3VmUxMUoveU54ejFqUFNEQ0lwRHVqeHdFRFJQVE80c21NWkMyMVN1?=
+ =?utf-8?B?Nmh3RFhYYzFGbDhMTUhrWXN2WllYYzB3NDQwY2l1NWVadGc1cmxaUSt5d0ZS?=
+ =?utf-8?B?UmU5Z21GYS9ScjdyVnFuak9vSUx2NTdZeW5BTnorSm5JaWtOZ25CaW9ucFhP?=
+ =?utf-8?B?d2Q3dkRBTXBTRkRuSDY4UzRqRE14dkx1R1dxUklXb3JybXFpdzJlNDhkOGtw?=
+ =?utf-8?B?YjZnbXlib3kwd1kwc0ZHQ2UvUlVaVE9lS0M3NytuYUdORzBZMDhiT1l0MWdu?=
+ =?utf-8?B?VzNNNmxGMUxJSTREQjBkUkttUHRXeTl5Q0VnNGMyYVNxUzJrL0crYVRvOGFB?=
+ =?utf-8?B?dTNzMjc0cHRIaE1xckhEWXlzRzliM2FGTXFxYVJCd1NNQUdlTTVOLzhTck91?=
+ =?utf-8?B?T2JmeG9JMDJzVWtZVlFUbS9sUWVJWHd0QUhNWGJPZDVHcWtKL0JzMlp2K0Y3?=
+ =?utf-8?B?emFWcUJjZGFUSDkzT1F6WmN3L0I4QjBWdGxxVC9lTXJKREZzbE82ZHpvRHhC?=
+ =?utf-8?B?MmlZM2kvQjA2RTRibkN3L2RlSkFYaWQvSGthdHMwL2tudmRTMmM4d2lETUhW?=
+ =?utf-8?B?eE1rS3N6SHMyT0cyeFFZbmd1Um9NSU84YlBDYUoweHhPVWJLbW9GRVdjZnJs?=
+ =?utf-8?B?S2l1RC9VQW4vaFlydVdxamdzNzVndU9WMEVQYlg4bmNRZURXVVA5MWdUd0lY?=
+ =?utf-8?B?SUZ1Nmo4N2ozdEViWlZRbnNhV1RxZ01BdkdGa00xS05FaWl2TWxsaEpFeGo1?=
+ =?utf-8?B?bUdGeWxlMFhRdnphTnlkMTlXM0VDVlFEV1FXVTJ2MUFCZGFORFZrbHN3RkNq?=
+ =?utf-8?B?YXE0WksrN0hLMU11UUpvT3RIbDJRT3RZTVBoUXBtaThINGtxeEdOTGNERGxm?=
+ =?utf-8?B?ODJRamdxQzNwS1EzeUFqaWJpOTJTRndubDVvdk1McHc3dEZya1JZYWpVWmpF?=
+ =?utf-8?B?Z3p3VmlzYXFwZGt3bG1jY2pWL0x3OFNWYWNQUFpHQ3lxMklma3ozMFlWUDZU?=
+ =?utf-8?B?SktDazJZdFh3T3RmN0luYWxzeFVUeE5uMWZraGZ3Y0Y3NllCTURmZEFGekFR?=
+ =?utf-8?B?MjA4ZjUvVE11SmZocGN0UVJZMkxPbUpZbjFxUkNuRkJ5N0lqQWFCUzBDUURs?=
+ =?utf-8?B?R1diNTgvZTcyNGdUeVI2T3ZhMHZac1I3cWdiaE5JeW9SSm9VeTN5QW1jTXR3?=
+ =?utf-8?B?blF4K1pMMUcrMTRmOGJJS0o2Mnp0Z3NRV3lWcFVmZ3c0S21WaTF5R3RpQnQ4?=
+ =?utf-8?B?Ukd6alA1NzJYeFJrOGd3T1BNZm5DT0RDL010R3hOYkVNRFVrVERCQVlsYVRk?=
+ =?utf-8?B?M290T1JHYWtWd0wzL0x2VGVMRmJ6NnFneDFFWC96T3RoTjkzTVA5Y3ZkT01N?=
+ =?utf-8?B?RmJQbHpKTTRyRVVNaEhNMTI4cWt6bDNQWFpYWEUzek5MQTBJaWFxVXRta3I3?=
+ =?utf-8?B?d1MwWTNGOXdNdllRS1NwV3Z0eWJjNlora2lNdHBoSDZVc20xL0MwR1dRbGh4?=
+ =?utf-8?B?UC92OXZZcXAvRXVEMEszNkVBTHZqZlI0WlNvWFFlQWlNU0NuZjh5M256UGpB?=
+ =?utf-8?B?VFBsZ0pJcUV5SlU0VXV0MG1nblhrUlA1KzNpYzhvMXJ5VGNzblJGcll0UG1k?=
+ =?utf-8?B?RENKcGJrTndEYzF4RnZjcnRQV2Jra0E3MjRvaUF2dENIUzBab2NrSE80NTNh?=
+ =?utf-8?B?cTREcjBjaUJMYmJ3eXl3bTFjdWM5WmVzcTVTZE44SC9jaGFDaER4bXlUcHZv?=
+ =?utf-8?B?Y212aWdEK0dTTFBybzBPdmowVmhlc3VLOHFFV2JXSU9iRWVHUTFvVm5YYTF6?=
+ =?utf-8?B?S0JpZ1RQdFo5aWZDemRYdkdpbXkwQjdMaWxmNWRzcHp1ZzBYRnBVQmx3L0xW?=
+ =?utf-8?B?cUEwWnJhVXU1QnVDV1p5UmI1RXNFU2N2UUd6Z2YyM0xxdC92ZDlhbWhHc1pQ?=
+ =?utf-8?B?VGdsakxPclNtNlVxRVRNRU5lRmtoYmticEt6cU8za0tmeUlUVG9GSkw4a2ln?=
+ =?utf-8?B?dkFGWi9pcm54U1Mvckg4dDEyMklzaWcxNmd2U1dmNWlHQUlheDY2M2RWVGxI?=
+ =?utf-8?B?V2c0Qm51bHBKelVXcWRnSXIvNkxEbTlRTG9ocjdDN2NlSkZHUmNZNHhsR3R2?=
+ =?utf-8?Q?BDkxhpvifee0X25sXbMmwcjcEb3n+xY8CDzv7gbXjUde?=
+X-OriginatorOrg: Nvidia.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: 1df2f4f3-de3b-4c50-11b9-08dde926b8c2
+X-MS-Exchange-CrossTenant-AuthSource: CH2PR12MB3990.namprd12.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 01 Sep 2025 07:11:07.6468 (UTC)
+X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
+X-MS-Exchange-CrossTenant-Id: 43083d15-7273-40c1-b7db-39efd9ccc17a
+X-MS-Exchange-CrossTenant-MailboxType: HOSTED
+X-MS-Exchange-CrossTenant-UserPrincipalName: O/ryeHELaKhFTJoglgpm1ELFRsVvIjuuIHt1zGtqQ3yZVzoUL8hkrqCcSOPeBvrEb1TXdhXY2YW/K/bYSkZDMw==
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: PH8PR12MB6841
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -75,588 +177,116 @@ List-Post: <mailto:nouveau@lists.freedesktop.org>
 List-Help: <mailto:nouveau-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
  <mailto:nouveau-request@lists.freedesktop.org?subject=subscribe>
-Reply-To: webgeek1234@gmail.com
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-From: Aaron Kling <webgeek1234@gmail.com>
+On Sat Aug 30, 2025 at 9:56 PM JST, Danilo Krummrich wrote:
+> On 8/29/25 1:16 PM, Alexandre Courbot wrote:
+>> On Thu Aug 28, 2025 at 8:27 PM JST, Danilo Krummrich wrote:
+>>> On 8/26/25 6:07 AM, Alexandre Courbot wrote:
+>>>>    /// Structure encapsulating the firmware blobs required for the GPU=
+ to operate.
+>>>>    #[expect(dead_code)]
+>>>>    pub(crate) struct Firmware {
+>>>> @@ -36,7 +123,10 @@ pub(crate) struct Firmware {
+>>>>        booter_unloader: BooterFirmware,
+>>>>        /// GSP bootloader, verifies the GSP firmware before loading an=
+d running it.
+>>>>        gsp_bootloader: RiscvFirmware,
+>>>> -    gsp: firmware::Firmware,
+>>>> +    /// GSP firmware.
+>>>> +    gsp: Pin<KBox<GspFirmware>>,
+>>>
+>>> Is there a reason why we don't just propagate it through struct Gpu, wh=
+ich uses
+>>> pin-init already?
+>>>
+>>> You can make Firmware pin_data too and then everything is within the si=
+ngle
+>>> allocation of struct Gpu.
+>
+> Thanks a lot for the write-up below!
+>
+>> I tried doing that at first, and hit the problem that the `impl PinInit`
+>> returned by `GspFirmware::new` borrows a reference to the GSP firmware
+>> binary loaded by `Firmware::new` - when `Firmware::new` returns, the
+>> firmware gets freed, and the borrow checker complains.
+>>=20
+>> We could move the GSP firmware loading code into the `pin_init!` of
+>> `Firmware::new`, but now we hit another problem: in `Gpu::new` the
+>> following code is executed:
+>>=20
+>>      FbLayout::new(chipset, bar, &fw.gsp_bootloader, &fw.gsp)?
+>>=20
+>> which requires the `Firmware` instance, which doesn't exist yet as the
+>> `Gpu` object isn't initialized until the end of the method.
+>>=20
+>> So we could move `FbLayout`, and everything else created by `Gpu::new`
+>> to become members of the `Gpu` instance. It does make sense actually:
+>> this `new` method is doing a lot of stuff, such as running FRTS, and
+>> with Alistair's series it even runs Booter, the sequencer and so on.
+>> Maybe we should move all firmware execution to a separate method that is
+>> called by `probe` after the `Gpu` is constructed, as right now the `Gpu`
+>> constructor looks like it does a bit more than it should.
+>
+> Absolutely, executing the firmware should be a separate method. Having it=
+ in the
+> constructor makes things more difficult.
+>> ... but even when doing that, `Firmware::new` and `FbLayout::new` still
+>> require a reference to the `Bar`, and... you get the idea. :)
+>
+> Lifetime wise this should be fine, the &Bar out-lives the constructor, si=
+nce
+> it's lifetime is bound to the &Device<Bound> which lives for the entire d=
+uration
+> of probe().
 
-Using pmu counters for usage stats. This enables dynamic frequency
-scaling on all of the currently supported Tegra gpus.
+The &Bar is actually obtained inside the constructor (which is passed
+the `Arc<Devres<Bar0>>`), so I don't think that would even work without
+more clever tricks. :)
 
-The register offsets are valid for gk20a, gm20b, gp10b, and gv11b. If
-support is added for ga10b, this will need rearchitected.
+>> So I don't think the current design allows us to do that easily or at
+>> all, and even if it does, it will be at a significant cost in code
+>> clarity. There is also the fact that I am considering making the
+>> firmware member of `Gpu` a trait object: the boot sequence is so
+>> different between pre and post-Hopper that I don't think it makes sense
+>> to share the same `Firmware` structure between the two. I would rather
+>> see `Firmware` as an opaque trait object, which provides high-level
+>> methods such as "start GSP" behind which the specifics of each GPU
+>> family are hidden. If we go with this design, `Firmware` will become a
+>> trait object and so cannot be pinned into `Gpu`.
+>>=20
+>> This doesn't change my observation that `Gpu::new` should not IMHO do
+>> steps like booting the GSP - it should just acquire the resources it
+>> needs, return the pinned GPU object, and then `probe` can continue the
+>> boot sequence. Having the GPU object pinned and constructed early
+>> simplifies things quite a bit as the more we progress with boot, the
+>> harder it becomes to construct everything in place (and the `PinInit`
+>> closure also becomes more and more complex).
+>>=20
+>> I'm still laying down the general design, but I'm pretty convinced that
+>> having `Firmware` as a trait object is the right way to abstract the
+>> differences between GPU families.
+>
+> Makes sense, it's fine with me to keep this in its separate allocation fo=
+r the
+> purpose of making Firmware an opaque trait object, which sounds reasonabl=
+e.
+>
+> But we should really properly separate construction of the GPU structure =
+from
+> firmware boot code execution as you say. And actually move the constructi=
+on of
+> the GPU object into try_pin_init!().
 
-Signed-off-by: Aaron Kling <webgeek1234@gmail.com>
----
- drivers/gpu/drm/nouveau/Kconfig                    |   1 +
- drivers/gpu/drm/nouveau/include/nvkm/core/tegra.h  |   2 +
- drivers/gpu/drm/nouveau/nouveau_platform.c         |  20 ++
- drivers/gpu/drm/nouveau/nvkm/engine/device/tegra.c |   4 +
- drivers/gpu/drm/nouveau/nvkm/subdev/clk/Kbuild     |   1 +
- drivers/gpu/drm/nouveau/nvkm/subdev/clk/gk20a.c    |   5 +
- drivers/gpu/drm/nouveau/nvkm/subdev/clk/gk20a.h    |   1 +
- .../drm/nouveau/nvkm/subdev/clk/gk20a_devfreq.c    | 319 +++++++++++++++++++++
- .../drm/nouveau/nvkm/subdev/clk/gk20a_devfreq.h    |  24 ++
- drivers/gpu/drm/nouveau/nvkm/subdev/clk/gm20b.c    |   5 +
- drivers/gpu/drm/nouveau/nvkm/subdev/clk/gp10b.c    |   5 +
- drivers/gpu/drm/nouveau/nvkm/subdev/clk/gp10b.h    |   1 +
- 12 files changed, 388 insertions(+)
+Yes, and I'm glad you agree with this idea as the current design of
+putting everything inside the GPU is a bit limiting.
 
-diff --git a/drivers/gpu/drm/nouveau/Kconfig b/drivers/gpu/drm/nouveau/Kconfig
-index d1587639ebb04f904d57bcc09933d1e3662594d3..803b9eb234b7b51fa2e55b778a864622ccadbcef 100644
---- a/drivers/gpu/drm/nouveau/Kconfig
-+++ b/drivers/gpu/drm/nouveau/Kconfig
-@@ -28,6 +28,7 @@ config DRM_NOUVEAU
- 	select THERMAL if ACPI && X86
- 	select ACPI_VIDEO if ACPI && X86
- 	select SND_HDA_COMPONENT if SND_HDA_CORE
-+	select PM_DEVFREQ if ARCH_TEGRA
- 	help
- 	  Choose this option for open-source NVIDIA support.
- 
-diff --git a/drivers/gpu/drm/nouveau/include/nvkm/core/tegra.h b/drivers/gpu/drm/nouveau/include/nvkm/core/tegra.h
-index 22f74fc88cd7554334e68bdf2eb72c31848e0304..57bc542780bbe5ffc5c30f18c139cb099b6d07ed 100644
---- a/drivers/gpu/drm/nouveau/include/nvkm/core/tegra.h
-+++ b/drivers/gpu/drm/nouveau/include/nvkm/core/tegra.h
-@@ -9,6 +9,8 @@ struct nvkm_device_tegra {
- 	struct nvkm_device device;
- 	struct platform_device *pdev;
- 
-+	void __iomem *regs;
-+
- 	struct reset_control *rst;
- 	struct clk *clk;
- 	struct clk *clk_ref;
-diff --git a/drivers/gpu/drm/nouveau/nouveau_platform.c b/drivers/gpu/drm/nouveau/nouveau_platform.c
-index a5ce8eb4a3be7a20988ea5515e8b58b1801e5842..164aaf09112b6617da2d42899d0fbf9ff75fc4af 100644
---- a/drivers/gpu/drm/nouveau/nouveau_platform.c
-+++ b/drivers/gpu/drm/nouveau/nouveau_platform.c
-@@ -21,6 +21,8 @@
-  */
- #include "nouveau_platform.h"
- 
-+#include <nvkm/subdev/clk/gk20a_devfreq.h>
-+
- static int nouveau_platform_probe(struct platform_device *pdev)
- {
- 	const struct nvkm_device_tegra_func *func;
-@@ -43,6 +45,21 @@ static void nouveau_platform_remove(struct platform_device *pdev)
- 	nouveau_drm_device_remove(drm);
- }
- 
-+#ifdef CONFIG_PM_SLEEP
-+static int nouveau_suspend(struct device *dev)
-+{
-+	return gk20a_devfreq_suspend(dev);
-+}
-+
-+static int nouveau_resume(struct device *dev)
-+{
-+	return gk20a_devfreq_resume(dev);
-+}
-+
-+static SIMPLE_DEV_PM_OPS(nouveau_pm_ops, nouveau_suspend,
-+			 nouveau_resume);
-+#endif
-+
- #if IS_ENABLED(CONFIG_OF)
- static const struct nvkm_device_tegra_func gk20a_platform_data = {
- 	.iommu_bit = 34,
-@@ -84,6 +101,9 @@ struct platform_driver nouveau_platform_driver = {
- 	.driver = {
- 		.name = "nouveau",
- 		.of_match_table = of_match_ptr(nouveau_platform_match),
-+#ifdef CONFIG_PM_SLEEP
-+		.pm = &nouveau_pm_ops,
-+#endif
- 	},
- 	.probe = nouveau_platform_probe,
- 	.remove = nouveau_platform_remove,
-diff --git a/drivers/gpu/drm/nouveau/nvkm/engine/device/tegra.c b/drivers/gpu/drm/nouveau/nvkm/engine/device/tegra.c
-index 114e50ca18270c90c32ad85f8bd8469740a950cb..03aa6f09ec89345225c302f7e5943055d9b715ba 100644
---- a/drivers/gpu/drm/nouveau/nvkm/engine/device/tegra.c
-+++ b/drivers/gpu/drm/nouveau/nvkm/engine/device/tegra.c
-@@ -259,6 +259,10 @@ nvkm_device_tegra_new(const struct nvkm_device_tegra_func *func,
- 	tdev->func = func;
- 	tdev->pdev = pdev;
- 
-+	tdev->regs = devm_platform_ioremap_resource(pdev, 0);
-+	if (IS_ERR(tdev->regs))
-+		return PTR_ERR(tdev->regs);
-+
- 	if (func->require_vdd) {
- 		tdev->vdd = devm_regulator_get(&pdev->dev, "vdd");
- 		if (IS_ERR(tdev->vdd)) {
-diff --git a/drivers/gpu/drm/nouveau/nvkm/subdev/clk/Kbuild b/drivers/gpu/drm/nouveau/nvkm/subdev/clk/Kbuild
-index 9fe394740f568909de71a8c420cc8b6d8dc2235f..be8f3283ee16f88842e3f0444a63e69cb149d2e0 100644
---- a/drivers/gpu/drm/nouveau/nvkm/subdev/clk/Kbuild
-+++ b/drivers/gpu/drm/nouveau/nvkm/subdev/clk/Kbuild
-@@ -11,6 +11,7 @@ nvkm-y += nvkm/subdev/clk/gk104.o
- nvkm-y += nvkm/subdev/clk/gk20a.o
- nvkm-y += nvkm/subdev/clk/gm20b.o
- nvkm-y += nvkm/subdev/clk/gp10b.o
-+nvkm-$(CONFIG_PM_DEVFREQ) += nvkm/subdev/clk/gk20a_devfreq.o
- 
- nvkm-y += nvkm/subdev/clk/pllnv04.o
- nvkm-y += nvkm/subdev/clk/pllgt215.o
-diff --git a/drivers/gpu/drm/nouveau/nvkm/subdev/clk/gk20a.c b/drivers/gpu/drm/nouveau/nvkm/subdev/clk/gk20a.c
-index d573fb0917fc535437a0b81bc3d88c56b036fb22..65f5d0f1f3bfcf88df68db32a3764e0868bcd6e5 100644
---- a/drivers/gpu/drm/nouveau/nvkm/subdev/clk/gk20a.c
-+++ b/drivers/gpu/drm/nouveau/nvkm/subdev/clk/gk20a.c
-@@ -23,6 +23,7 @@
-  *
-  */
- #include "priv.h"
-+#include "gk20a_devfreq.h"
- #include "gk20a.h"
- 
- #include <core/tegra.h>
-@@ -589,6 +590,10 @@ gk20a_clk_init(struct nvkm_clk *base)
- 		return ret;
- 	}
- 
-+	ret = gk20a_devfreq_init(base, &clk->devfreq);
-+	if (ret)
-+		return ret;
-+
- 	return 0;
- }
- 
-diff --git a/drivers/gpu/drm/nouveau/nvkm/subdev/clk/gk20a.h b/drivers/gpu/drm/nouveau/nvkm/subdev/clk/gk20a.h
-index 286413ff4a9ec7f2273c9446ac7a15eb1a843aeb..ea5b0bab4ccec6e4999531593c2cb03de7599c74 100644
---- a/drivers/gpu/drm/nouveau/nvkm/subdev/clk/gk20a.h
-+++ b/drivers/gpu/drm/nouveau/nvkm/subdev/clk/gk20a.h
-@@ -118,6 +118,7 @@ struct gk20a_clk {
- 	const struct gk20a_clk_pllg_params *params;
- 	struct gk20a_pll pll;
- 	u32 parent_rate;
-+	struct gk20a_devfreq *devfreq;
- 
- 	u32 (*div_to_pl)(u32);
- 	u32 (*pl_to_div)(u32);
-diff --git a/drivers/gpu/drm/nouveau/nvkm/subdev/clk/gk20a_devfreq.c b/drivers/gpu/drm/nouveau/nvkm/subdev/clk/gk20a_devfreq.c
-new file mode 100644
-index 0000000000000000000000000000000000000000..8362b1d9cc1fd7aeceba04f83b28d0d73db467dd
---- /dev/null
-+++ b/drivers/gpu/drm/nouveau/nvkm/subdev/clk/gk20a_devfreq.c
-@@ -0,0 +1,319 @@
-+// SPDX-License-Identifier: MIT
-+#include <linux/clk.h>
-+#include <linux/platform_device.h>
-+#include <linux/pm_opp.h>
-+
-+#include <drm/drm_managed.h>
-+
-+#include <subdev/clk.h>
-+
-+#include "nouveau_drv.h"
-+#include "nouveau_chan.h"
-+#include "priv.h"
-+#include "gk20a_devfreq.h"
-+#include "gk20a.h"
-+#include "gp10b.h"
-+
-+#define PMU_BUSY_CYCLES_NORM_MAX		1000U
-+
-+#define PWR_PMU_IDLE_COUNTER_TOTAL		0U
-+#define PWR_PMU_IDLE_COUNTER_BUSY		4U
-+
-+#define PWR_PMU_IDLE_COUNT_REG_OFFSET		0x0010A508U
-+#define PWR_PMU_IDLE_COUNT_REG_SIZE		16U
-+#define PWR_PMU_IDLE_COUNT_MASK			0x7FFFFFFFU
-+#define PWR_PMU_IDLE_COUNT_RESET_VALUE		(0x1U << 31U)
-+
-+#define PWR_PMU_IDLE_INTR_REG_OFFSET		0x0010A9E8U
-+#define PWR_PMU_IDLE_INTR_ENABLE_VALUE		0U
-+
-+#define PWR_PMU_IDLE_INTR_STATUS_REG_OFFSET	0x0010A9ECU
-+#define PWR_PMU_IDLE_INTR_STATUS_MASK		0x00000001U
-+#define PWR_PMU_IDLE_INTR_STATUS_RESET_VALUE	0x1U
-+
-+#define PWR_PMU_IDLE_THRESHOLD_REG_OFFSET	0x0010A8A0U
-+#define PWR_PMU_IDLE_THRESHOLD_REG_SIZE		4U
-+#define PWR_PMU_IDLE_THRESHOLD_MAX_VALUE	0x7FFFFFFFU
-+
-+#define PWR_PMU_IDLE_CTRL_REG_OFFSET		0x0010A50CU
-+#define PWR_PMU_IDLE_CTRL_REG_SIZE		16U
-+#define PWR_PMU_IDLE_CTRL_VALUE_MASK		0x3U
-+#define PWR_PMU_IDLE_CTRL_VALUE_BUSY		0x2U
-+#define PWR_PMU_IDLE_CTRL_VALUE_ALWAYS		0x3U
-+#define PWR_PMU_IDLE_CTRL_FILTER_MASK		(0x1U << 2)
-+#define PWR_PMU_IDLE_CTRL_FILTER_DISABLED	0x0U
-+
-+#define PWR_PMU_IDLE_MASK_REG_OFFSET		0x0010A504U
-+#define PWR_PMU_IDLE_MASK_REG_SIZE		16U
-+#define PWM_PMU_IDLE_MASK_GR_ENABLED		0x1U
-+#define PWM_PMU_IDLE_MASK_CE_2_ENABLED		0x200000U
-+
-+/**
-+ * struct gk20a_devfreq - Device frequency management
-+ */
-+struct gk20a_devfreq {
-+	/** @devfreq: devfreq device. */
-+	struct devfreq *devfreq;
-+
-+	/** @regs: Device registers. */
-+	void __iomem *regs;
-+
-+	/** @gov_data: Governor data. */
-+	struct devfreq_simple_ondemand_data gov_data;
-+
-+	/** @busy_time: Busy time. */
-+	ktime_t busy_time;
-+
-+	/** @total_time: Total time. */
-+	ktime_t total_time;
-+
-+	/** @time_last_update: Last update time. */
-+	ktime_t time_last_update;
-+};
-+
-+static struct gk20a_devfreq *dev_to_gk20a_devfreq(struct device *dev)
-+{
-+	struct nouveau_drm *drm = dev_get_drvdata(dev);
-+	struct nvkm_subdev *subdev = nvkm_device_subdev(drm->nvkm, NVKM_SUBDEV_CLK, 0);
-+	struct nvkm_clk *base = nvkm_clk(subdev);
-+
-+	switch (drm->nvkm->chipset) {
-+	case 0x13b: return gp10b_clk(base)->devfreq; break;
-+	default: return gk20a_clk(base)->devfreq; break;
-+	}
-+}
-+
-+static void gk20a_pmu_init_perfmon_counter(struct gk20a_devfreq *gdevfreq)
-+{
-+	u32 data;
-+
-+	// Set pmu idle intr status bit on total counter overflow
-+	writel(PWR_PMU_IDLE_INTR_ENABLE_VALUE,
-+	       gdevfreq->regs + PWR_PMU_IDLE_INTR_REG_OFFSET);
-+
-+	writel(PWR_PMU_IDLE_THRESHOLD_MAX_VALUE,
-+	       gdevfreq->regs + PWR_PMU_IDLE_THRESHOLD_REG_OFFSET +
-+	       (PWR_PMU_IDLE_COUNTER_TOTAL * PWR_PMU_IDLE_THRESHOLD_REG_SIZE));
-+
-+	// Setup counter for total cycles
-+	data = readl(gdevfreq->regs + PWR_PMU_IDLE_CTRL_REG_OFFSET +
-+		     (PWR_PMU_IDLE_COUNTER_TOTAL * PWR_PMU_IDLE_CTRL_REG_SIZE));
-+	data &= ~(PWR_PMU_IDLE_CTRL_VALUE_MASK | PWR_PMU_IDLE_CTRL_FILTER_MASK);
-+	data |= PWR_PMU_IDLE_CTRL_VALUE_ALWAYS | PWR_PMU_IDLE_CTRL_FILTER_DISABLED;
-+	writel(data, gdevfreq->regs + PWR_PMU_IDLE_CTRL_REG_OFFSET +
-+		     (PWR_PMU_IDLE_COUNTER_TOTAL * PWR_PMU_IDLE_CTRL_REG_SIZE));
-+
-+	// Setup counter for busy cycles
-+	writel(PWM_PMU_IDLE_MASK_GR_ENABLED | PWM_PMU_IDLE_MASK_CE_2_ENABLED,
-+	       gdevfreq->regs + PWR_PMU_IDLE_MASK_REG_OFFSET +
-+	       (PWR_PMU_IDLE_COUNTER_BUSY * PWR_PMU_IDLE_MASK_REG_SIZE));
-+
-+	data = readl(gdevfreq->regs + PWR_PMU_IDLE_CTRL_REG_OFFSET +
-+		     (PWR_PMU_IDLE_COUNTER_BUSY * PWR_PMU_IDLE_CTRL_REG_SIZE));
-+	data &= ~(PWR_PMU_IDLE_CTRL_VALUE_MASK | PWR_PMU_IDLE_CTRL_FILTER_MASK);
-+	data |= PWR_PMU_IDLE_CTRL_VALUE_BUSY | PWR_PMU_IDLE_CTRL_FILTER_DISABLED;
-+	writel(data, gdevfreq->regs + PWR_PMU_IDLE_CTRL_REG_OFFSET +
-+		     (PWR_PMU_IDLE_COUNTER_BUSY * PWR_PMU_IDLE_CTRL_REG_SIZE));
-+}
-+
-+static u32 gk20a_pmu_read_idle_counter(struct gk20a_devfreq *gdevfreq, u32 counter_id)
-+{
-+	u32 ret;
-+
-+	ret = readl(gdevfreq->regs + PWR_PMU_IDLE_COUNT_REG_OFFSET +
-+		    (counter_id * PWR_PMU_IDLE_COUNT_REG_SIZE));
-+
-+	return ret & PWR_PMU_IDLE_COUNT_MASK;
-+}
-+
-+static void gk20a_pmu_reset_idle_counter(struct gk20a_devfreq *gdevfreq, u32 counter_id)
-+{
-+	writel(PWR_PMU_IDLE_COUNT_RESET_VALUE, gdevfreq->regs + PWR_PMU_IDLE_COUNT_REG_OFFSET +
-+					       (counter_id * PWR_PMU_IDLE_COUNT_REG_SIZE));
-+}
-+
-+static u32 gk20a_pmu_read_idle_intr_status(struct gk20a_devfreq *gdevfreq)
-+{
-+	u32 ret;
-+
-+	ret = readl(gdevfreq->regs + PWR_PMU_IDLE_INTR_STATUS_REG_OFFSET);
-+
-+	return ret & PWR_PMU_IDLE_INTR_STATUS_MASK;
-+}
-+
-+static void gk20a_pmu_clear_idle_intr_status(struct gk20a_devfreq *gdevfreq)
-+{
-+	writel(PWR_PMU_IDLE_INTR_STATUS_RESET_VALUE,
-+	       gdevfreq->regs + PWR_PMU_IDLE_INTR_STATUS_REG_OFFSET);
-+}
-+
-+static void gk20a_devfreq_update_utilization(struct gk20a_devfreq *gdevfreq)
-+{
-+	ktime_t now, last;
-+	u64 busy_cycles, total_cycles;
-+	u32 norm, intr_status;
-+
-+	now = ktime_get();
-+	last = gdevfreq->time_last_update;
-+	gdevfreq->total_time = ktime_us_delta(now, last);
-+
-+	busy_cycles = gk20a_pmu_read_idle_counter(gdevfreq, PWR_PMU_IDLE_COUNTER_BUSY);
-+	total_cycles = gk20a_pmu_read_idle_counter(gdevfreq, PWR_PMU_IDLE_COUNTER_TOTAL);
-+	intr_status = gk20a_pmu_read_idle_intr_status(gdevfreq);
-+
-+	gk20a_pmu_reset_idle_counter(gdevfreq, PWR_PMU_IDLE_COUNTER_BUSY);
-+	gk20a_pmu_reset_idle_counter(gdevfreq, PWR_PMU_IDLE_COUNTER_TOTAL);
-+
-+	if (intr_status != 0UL) {
-+		norm = PMU_BUSY_CYCLES_NORM_MAX;
-+		gk20a_pmu_clear_idle_intr_status(gdevfreq);
-+	} else if (total_cycles == 0ULL || busy_cycles > total_cycles) {
-+		norm = PMU_BUSY_CYCLES_NORM_MAX;
-+	} else {
-+		norm = (u32)(busy_cycles * PMU_BUSY_CYCLES_NORM_MAX
-+				/ total_cycles);
-+	}
-+
-+	gdevfreq->busy_time = (gdevfreq->total_time * norm) / PMU_BUSY_CYCLES_NORM_MAX;
-+	gdevfreq->time_last_update = now;
-+}
-+
-+static int gk20a_devfreq_target(struct device *dev, unsigned long *freq,
-+				  u32 flags)
-+{
-+	struct nouveau_drm *drm = dev_get_drvdata(dev);
-+	struct nvkm_subdev *subdev = nvkm_device_subdev(drm->nvkm, NVKM_SUBDEV_CLK, 0);
-+	struct nvkm_clk *base = nvkm_clk(subdev);
-+	struct nvkm_pstate *pstates = base->func->pstates;
-+	int nr_pstates = base->func->nr_pstates;
-+	int i, ret;
-+
-+	for (i = 0; i < nr_pstates - 1; i++)
-+		if (pstates[i].base.domain[nv_clk_src_gpc] * GK20A_CLK_GPC_MDIV >= *freq)
-+			break;
-+
-+	ret = nvkm_clk_ustate(base, pstates[i].pstate, 0);
-+	ret |= nvkm_clk_ustate(base, pstates[i].pstate, 1);
-+	if (ret) {
-+		nvkm_error(subdev, "cannot update clock\n");
-+		return ret;
-+	}
-+
-+	*freq = pstates[i].base.domain[nv_clk_src_gpc] * GK20A_CLK_GPC_MDIV;
-+
-+	return 0;
-+}
-+
-+static int gk20a_devfreq_get_cur_freq(struct device *dev, unsigned long *freq)
-+{
-+	struct nouveau_drm *drm = dev_get_drvdata(dev);
-+	struct nvkm_subdev *subdev = nvkm_device_subdev(drm->nvkm, NVKM_SUBDEV_CLK, 0);
-+	struct nvkm_clk *base = nvkm_clk(subdev);
-+
-+	*freq = nvkm_clk_read(base, nv_clk_src_gpc) * GK20A_CLK_GPC_MDIV;
-+
-+	return 0;
-+}
-+
-+static void gk20a_devfreq_reset(struct gk20a_devfreq *gdevfreq)
-+{
-+	gk20a_pmu_reset_idle_counter(gdevfreq, PWR_PMU_IDLE_COUNTER_BUSY);
-+	gk20a_pmu_reset_idle_counter(gdevfreq, PWR_PMU_IDLE_COUNTER_TOTAL);
-+	gk20a_pmu_clear_idle_intr_status(gdevfreq);
-+
-+	gdevfreq->busy_time = 0;
-+	gdevfreq->total_time = 0;
-+	gdevfreq->time_last_update = ktime_get();
-+}
-+
-+static int gk20a_devfreq_get_dev_status(struct device *dev,
-+					struct devfreq_dev_status *status)
-+{
-+	struct nouveau_drm *drm = dev_get_drvdata(dev);
-+	struct gk20a_devfreq *gdevfreq = dev_to_gk20a_devfreq(dev);
-+
-+	gk20a_devfreq_get_cur_freq(dev, &status->current_frequency);
-+
-+	gk20a_devfreq_update_utilization(gdevfreq);
-+
-+	status->busy_time = ktime_to_ns(gdevfreq->busy_time);
-+	status->total_time = ktime_to_ns(gdevfreq->total_time);
-+
-+	gk20a_devfreq_reset(gdevfreq);
-+
-+	NV_DEBUG(drm, "busy %lu total %lu %lu %% freq %lu MHz\n",
-+		 status->busy_time, status->total_time,
-+		 status->busy_time / (status->total_time / 100),
-+		 status->current_frequency / 1000 / 1000);
-+
-+	return 0;
-+}
-+
-+static struct devfreq_dev_profile gk20a_devfreq_profile = {
-+	.timer = DEVFREQ_TIMER_DELAYED,
-+	.polling_ms = 50,
-+	.target = gk20a_devfreq_target,
-+	.get_cur_freq = gk20a_devfreq_get_cur_freq,
-+	.get_dev_status = gk20a_devfreq_get_dev_status,
-+};
-+
-+int gk20a_devfreq_init(struct nvkm_clk *base, struct gk20a_devfreq **gdevfreq)
-+{
-+	struct nvkm_device *device = base->subdev.device;
-+	struct nouveau_drm *drm = dev_get_drvdata(device->dev);
-+	struct nvkm_device_tegra *tdev = device->func->tegra(device);
-+	struct nvkm_pstate *pstates = base->func->pstates;
-+	int nr_pstates = base->func->nr_pstates;
-+	struct gk20a_devfreq *new_gdevfreq;
-+	int i;
-+
-+	new_gdevfreq = drmm_kzalloc(drm->dev, sizeof(struct gk20a_devfreq), GFP_KERNEL);
-+	if (!new_gdevfreq)
-+		return -ENOMEM;
-+
-+	new_gdevfreq->regs = tdev->regs;
-+
-+	for (i = 0; i < nr_pstates; i++)
-+		dev_pm_opp_add(base->subdev.device->dev,
-+			       pstates[i].base.domain[nv_clk_src_gpc] * GK20A_CLK_GPC_MDIV, 0);
-+
-+	gk20a_pmu_init_perfmon_counter(new_gdevfreq);
-+	gk20a_devfreq_reset(new_gdevfreq);
-+
-+	gk20a_devfreq_profile.initial_freq =
-+		nvkm_clk_read(base, nv_clk_src_gpc) * GK20A_CLK_GPC_MDIV;
-+
-+	new_gdevfreq->gov_data.upthreshold = 45;
-+	new_gdevfreq->gov_data.downdifferential = 5;
-+
-+	new_gdevfreq->devfreq = devm_devfreq_add_device(device->dev,
-+							&gk20a_devfreq_profile,
-+							DEVFREQ_GOV_SIMPLE_ONDEMAND,
-+							&new_gdevfreq->gov_data);
-+	if (IS_ERR(new_gdevfreq->devfreq))
-+		return PTR_ERR(new_gdevfreq->devfreq);
-+
-+	*gdevfreq = new_gdevfreq;
-+
-+	return 0;
-+}
-+
-+int gk20a_devfreq_resume(struct device *dev)
-+{
-+	struct gk20a_devfreq *gdevfreq = dev_to_gk20a_devfreq(dev);
-+
-+	if (!gdevfreq || !gdevfreq->devfreq)
-+		return 0;
-+
-+	return devfreq_resume_device(gdevfreq->devfreq);
-+}
-+
-+int gk20a_devfreq_suspend(struct device *dev)
-+{
-+	struct gk20a_devfreq *gdevfreq = dev_to_gk20a_devfreq(dev);
-+
-+	if (!gdevfreq || !gdevfreq->devfreq)
-+		return 0;
-+
-+	return devfreq_suspend_device(gdevfreq->devfreq);
-+}
-diff --git a/drivers/gpu/drm/nouveau/nvkm/subdev/clk/gk20a_devfreq.h b/drivers/gpu/drm/nouveau/nvkm/subdev/clk/gk20a_devfreq.h
-new file mode 100644
-index 0000000000000000000000000000000000000000..5b7ca8a7a5cdc050872743ea940efef6f033b7b9
---- /dev/null
-+++ b/drivers/gpu/drm/nouveau/nvkm/subdev/clk/gk20a_devfreq.h
-@@ -0,0 +1,24 @@
-+/* SPDX-License-Identifier: MIT */
-+#ifndef __GK20A_DEVFREQ_H__
-+#define __GK20A_DEVFREQ_H__
-+
-+#include <linux/devfreq.h>
-+
-+struct gk20a_devfreq;
-+
-+#if defined(CONFIG_PM_DEVFREQ)
-+int gk20a_devfreq_init(struct nvkm_clk *base, struct gk20a_devfreq **devfreq);
-+
-+int gk20a_devfreq_resume(struct device *dev);
-+int gk20a_devfreq_suspend(struct device *dev);
-+#else
-+static inline int gk20a_devfreq_init(struct nvkm_clk *base, struct gk20a_devfreq **devfreq)
-+{
-+	return 0;
-+}
-+
-+static inline int gk20a_devfreq_resume(struct device dev) { return 0; }
-+static inline int gk20a_devfreq_suspend(struct device *dev) { return 0; }
-+#endif /* CONFIG_PM_DEVFREQ */
-+
-+#endif /* __GK20A_DEVFREQ_H__ */
-diff --git a/drivers/gpu/drm/nouveau/nvkm/subdev/clk/gm20b.c b/drivers/gpu/drm/nouveau/nvkm/subdev/clk/gm20b.c
-index 7c33542f651b2ad011967a1e6ca8003b7b2e6fc5..fa8ca53acbd1a298c26444f23570bd4ca039d328 100644
---- a/drivers/gpu/drm/nouveau/nvkm/subdev/clk/gm20b.c
-+++ b/drivers/gpu/drm/nouveau/nvkm/subdev/clk/gm20b.c
-@@ -27,6 +27,7 @@
- #include <core/tegra.h>
- 
- #include "priv.h"
-+#include "gk20a_devfreq.h"
- #include "gk20a.h"
- 
- #define GPCPLL_CFG_SYNC_MODE	BIT(2)
-@@ -869,6 +870,10 @@ gm20b_clk_init(struct nvkm_clk *base)
- 		return ret;
- 	}
- 
-+	ret = gk20a_devfreq_init(base, &clk->devfreq);
-+	if (ret)
-+		return ret;
-+
- 	return 0;
- }
- 
-diff --git a/drivers/gpu/drm/nouveau/nvkm/subdev/clk/gp10b.c b/drivers/gpu/drm/nouveau/nvkm/subdev/clk/gp10b.c
-index a0be53ffeb4479e4c229bd6bde86bb6bdb082b56..492b62c0ee9633c08538330f1106cf01d6b62771 100644
---- a/drivers/gpu/drm/nouveau/nvkm/subdev/clk/gp10b.c
-+++ b/drivers/gpu/drm/nouveau/nvkm/subdev/clk/gp10b.c
-@@ -5,6 +5,7 @@
- #include <core/tegra.h>
- 
- #include "priv.h"
-+#include "gk20a_devfreq.h"
- #include "gk20a.h"
- #include "gp10b.h"
- 
-@@ -23,6 +24,10 @@ gp10b_clk_init(struct nvkm_clk *base)
- 		return ret;
- 	}
- 
-+	ret = gk20a_devfreq_init(base, &clk->devfreq);
-+	if (ret)
-+		return ret;
-+
- 	return 0;
- }
- 
-diff --git a/drivers/gpu/drm/nouveau/nvkm/subdev/clk/gp10b.h b/drivers/gpu/drm/nouveau/nvkm/subdev/clk/gp10b.h
-index 2f65a921a426e3f6339a31e964397f6eefa50250..1dd1c550484be7c643e86a6105d7282c536fe7ed 100644
---- a/drivers/gpu/drm/nouveau/nvkm/subdev/clk/gp10b.h
-+++ b/drivers/gpu/drm/nouveau/nvkm/subdev/clk/gp10b.h
-@@ -5,6 +5,7 @@
- struct gp10b_clk {
- 	/* currently applied parameters */
- 	struct nvkm_clk base;
-+	struct gk20a_devfreq *devfreq;
- 	struct clk *clk;
- 	u32 rate;
- 
+Regarding the firmware, I also think this should undergo a redesign -
+right now we are putting unrelated stuff inside the `Firmware`
+structure, and this won't scale well when we start supporting Hopper+
+which use a very different way to start the GSP.
 
----
-base-commit: c17b750b3ad9f45f2b6f7e6f7f4679844244f0b9
-change-id: 20250830-gk20a-devfreq-e39f739ab191
-prerequisite-change-id: 20250822-gp10b-reclock-77bf36005a86:v2
-prerequisite-patch-id: c4a76f247e85ffbcb8b7e1c4736764796754c3b4
-
-Best regards,
--- 
-Aaron Kling <webgeek1234@gmail.com>
-
+I'll give more details in my review of Alistair's series, and hopefully
+send a v3 with some of these ideas implemented soon.
 
