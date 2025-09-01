@@ -2,47 +2,47 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id 6033BB3DC63
-	for <lists+nouveau@lfdr.de>; Mon,  1 Sep 2025 10:31:48 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 8EF09B3E028
+	for <lists+nouveau@lfdr.de>; Mon,  1 Sep 2025 12:30:58 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 912F910E3A1;
-	Mon,  1 Sep 2025 08:31:30 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 65F9510E414;
+	Mon,  1 Sep 2025 10:30:54 +0000 (UTC)
 Authentication-Results: gabe.freedesktop.org;
-	dkim=pass (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="k1nAkyNn";
+	dkim=pass (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="doVDytrM";
 	dkim-atps=neutral
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
 Received: from tor.source.kernel.org (tor.source.kernel.org [172.105.4.254])
- by gabe.freedesktop.org (Postfix) with ESMTPS id DC38810E3A0;
- Mon,  1 Sep 2025 08:31:28 +0000 (UTC)
+ by gabe.freedesktop.org (Postfix) with ESMTPS id E7A4C10E40D;
+ Mon,  1 Sep 2025 10:30:52 +0000 (UTC)
 Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by tor.source.kernel.org (Postfix) with ESMTP id A9DC1601D9;
- Mon,  1 Sep 2025 08:31:27 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id D33C4C4CEF0;
- Mon,  1 Sep 2025 08:31:24 +0000 (UTC)
+ by tor.source.kernel.org (Postfix) with ESMTP id CBF95601D6;
+ Mon,  1 Sep 2025 10:30:51 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 61FBEC4CEF0;
+ Mon,  1 Sep 2025 10:30:50 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1756715487;
- bh=KH7Bi0satXiuEt+iUfxg2rFDS/DtKwZ5mSXucRghtVI=;
- h=From:To:Cc:Subject:Date:From;
- b=k1nAkyNnpNEhA8zBalU7njJx6iDL5Q1PvtolTvWHg5EhOZ5QutpNkJAkFwpGPKgGV
- 8DHY5gDYTh304lSkrjAHS233RPb+QimDLsV98/1DmA/LH4IYIEJ7OrcHMzMIdXvHjG
- ecnT0/jUVyi2qpIyP+1aJB5dbt7yWCV/0jdHR4dbtQNgYcIjnqWj9gvha0JbpPXOG1
- ZbvD0aefVJnhOQlvZV5dYDLLGsRCpx22tFnN9oRZIQEuiQFZ8lLTtRNOPWmBzBjjI7
- cdQxyFfPP6L7Ryl79Szpg3kus3P7+FlOJmXXlC/BXOr/naGKSDahDCKhFX0F485Wl8
- 6N4fNCNip8bpw==
-From: Philipp Stanner <phasta@kernel.org>
-To: Lyude Paul <lyude@redhat.com>, Danilo Krummrich <dakr@kernel.org>,
- David Airlie <airlied@gmail.com>, Simona Vetter <simona@ffwll.ch>,
- Sumit Semwal <sumit.semwal@linaro.org>,
- =?UTF-8?q?Christian=20K=C3=B6nig?= <christian.koenig@amd.com>
-Cc: dri-devel@lists.freedesktop.org, nouveau@lists.freedesktop.org,
- linux-kernel@vger.kernel.org, Philipp Stanner <phasta@kernel.org>
-Subject: [PATCH v2] Revert "drm/nouveau: Remove waitque for sched teardown"
-Date: Mon,  1 Sep 2025 10:31:08 +0200
-Message-ID: <20250901083107.10206-2-phasta@kernel.org>
-X-Mailer: git-send-email 2.49.0
-MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+ s=k20201202; t=1756722651;
+ bh=x9uQAJsHR48QDetfBJh1DPdUFvskIloDcyj/F28xWjw=;
+ h=Date:From:Subject:Cc:To:References:In-Reply-To:From;
+ b=doVDytrMHr7VZfEM2qN4zo9g08Zu6AVlQp18LtkdaIQTy5tiR1hsWRsKUAoJjx8oU
+ ASdt6BsD8P3itL4C49TesyValewvHdzXkI0dZVO5XHndGj6ZLd1wdDVJhNdSxOnGrT
+ GBh/sHHNo+tb5+tyfg1UaX5ptolu0LTvifn6abQ5Ev3DDo25YeMyjf3d0nRquPhT74
+ Tp+tHhmh7ogSrGzmxQAb/YHwYWxcw0ZYtuKQNta4GorOMVTmAGV5Jc7e9uKXak0arg
+ 1qTKlvNWODylKTZyqVj6rr4AJ7MGPPsWi9otIbpi7wBBun6HaWpH0dYDuT/43i3uVy
+ ZMGqeKL3Vlv7A==
+Mime-Version: 1.0
+Content-Transfer-Encoding: quoted-printable
+Content-Type: text/plain; charset=UTF-8
+Date: Mon, 01 Sep 2025 12:30:48 +0200
+Message-Id: <DCHE7FOG5ONY.9SVQATXHGM9M@kernel.org>
+From: "Danilo Krummrich" <dakr@kernel.org>
+Subject: Re: [PATCH] gpu: nova-core: depend on CONFIG_64BIT
+Cc: <nouveau@lists.freedesktop.org>, <dri-devel@lists.freedesktop.org>,
+ <rust-for-linux@vger.kernel.org>, "John Hubbard" <jhubbard@nvidia.com>,
+ "Miguel Ojeda" <ojeda@kernel.org>
+To: <acourbot@nvidia.com>
+References: <20250828223954.351348-1-dakr@kernel.org>
+In-Reply-To: <20250828223954.351348-1-dakr@kernel.org>
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -57,225 +57,92 @@ List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-This reverts:
+On Fri Aug 29, 2025 at 12:39 AM CEST, Danilo Krummrich wrote:
+> If built on architectures with CONFIG_ARCH_DMA_ADDR_T_64BIT=3Dy nova-core
+> produces that following build failures:
+>
+>     error[E0308]: mismatched types
+>       --> drivers/gpu/nova-core/fb.rs:49:59
+>        |
+>     49 |         hal::fb_hal(chipset).write_sysmem_flush_page(bar, page.d=
+ma_handle())?;
+>        |                              -----------------------      ^^^^^^=
+^^^^^^^^^^^ expected `u64`, found `u32`
+>        |                              |
+>        |                              arguments to this method are incorr=
+ect
+>        |
+>     note: method defined here
+>       --> drivers/gpu/nova-core/fb/hal.rs:19:8
+>        |
+>     19 |     fn write_sysmem_flush_page(&self, bar: &Bar0, addr: u64) -> =
+Result;
+>        |        ^^^^^^^^^^^^^^^^^^^^^^^
+>     help: you can convert a `u32` to a `u64`
+>        |
+>     49 |         hal::fb_hal(chipset).write_sysmem_flush_page(bar, page.d=
+ma_handle().into())?;
+>        |                                                                 =
+           +++++++
+>
+>     error[E0308]: mismatched types
+>       --> drivers/gpu/nova-core/fb.rs:65:47
+>        |
+>     65 |         if hal.read_sysmem_flush_page(bar) =3D=3D self.page.dma_=
+handle() {
+>        |            -------------------------------    ^^^^^^^^^^^^^^^^^^=
+^^^^ expected `u64`, found `u32`
+>        |            |
+>        |            expected because this is `u64`
+>        |
+>     help: you can convert a `u32` to a `u64`
+>        |
+>     65 |         if hal.read_sysmem_flush_page(bar) =3D=3D self.page.dma_=
+handle().into() {
+>        |                                                                 =
+    +++++++
+>
+>     error: this arithmetic operation will overflow
+>        --> drivers/gpu/nova-core/falcon.rs:469:23
+>         |
+>     469 |             .set_base((dma_start >> 40) as u16)
+>         |                       ^^^^^^^^^^^^^^^^^ attempt to shift right =
+by `40_i32`, which would overflow
+>         |
+>         =3D note: `#[deny(arithmetic_overflow)]` on by default
+>
+> This is due to the code making assumptions on the width of dma_addr_t to
+> be 64 bit.
+>
+> While this could technically be handled, it is rather painful to deal
+> with, as the following example illustrates:
+>
+> 	pub(super) fn read_sysmem_flush_page_ga100(bar: &Bar0) -> DmaAddress {
+> 	    let addr =3D u64::from(regs::NV_PFB_NISO_FLUSH_SYSMEM_ADDR::read(bar=
+).adr_39_08())
+> 	        << FLUSH_SYSMEM_ADDR_SHIFT
+> 	        | u64::from(regs::NV_PFB_NISO_FLUSH_SYSMEM_ADDR_HI::read(bar).ad=
+r_63_40())
+> 	            << FLUSH_SYSMEM_ADDR_SHIFT_HI;
+>
+> 	    addr.try_into().unwrap_or_else(|_| {
+> 	        kernel::warn_on!(true);
+>
+> 	        0
+> 	    })
+> 	}
+>
+> At the same time there's not much value for nova-core to support 32-bit,
+> given that the supported GPU architectures are Turing and later, hence
+> depend on CONFIG_64BIT.
+>
+> Cc: John Hubbard <jhubbard@nvidia.com>
+> Reported-by: Miguel Ojeda <ojeda@kernel.org>
+> Closes: https://lore.kernel.org/lkml/20250828160247.37492-1-ojeda@kernel.=
+org/
+> Fixes: 6554ad65b589 ("gpu: nova-core: register sysmem flush page")
+> Fixes: 69f5cd67ce41 ("gpu: nova-core: add falcon register definitions and=
+ base code")
+> Signed-off-by: Danilo Krummrich <dakr@kernel.org>
 
-commit bead88002227 ("drm/nouveau: Remove waitque for sched teardown")
-commit 5f46f5c7af8c ("drm/nouveau: Add new callback for scheduler teardown")
-
-from the drm/sched teardown leak fix series:
-
-https://lore.kernel.org/dri-devel/20250710125412.128476-2-phasta@kernel.org/
-
-The aforementioned series removed a blocking waitqueue from
-nouveau_sched_fini(). It was mistakenly assumed that this waitqueue only
-prevents jobs from leaking, which the series fixed.
-
-The waitqueue, however, also guarantees that all VM_BIND related jobs
-are finished in order, cleaning up mappings in the GPU's MMU. These jobs
-must be executed sequentially. Without the waitqueue, this is no longer
-guaranteed, because entity and scheduler teardown can race with each
-other.
-
-Revert all patches related to the waitqueue removal.
-
-Fixes: bead88002227 ("drm/nouveau: Remove waitque for sched teardown")
-Suggested-by: Danilo Krummrich <dakr@kernel.org>
-Signed-off-by: Philipp Stanner <phasta@kernel.org>
----
-Changes in v2:
-  - Don't revert commit 89b2675198ab ("drm/nouveau: Make fence container helper usable driver-wide")
-  - Add Fixes-tag
----
- drivers/gpu/drm/nouveau/nouveau_fence.c | 15 -----------
- drivers/gpu/drm/nouveau/nouveau_fence.h |  1 -
- drivers/gpu/drm/nouveau/nouveau_sched.c | 35 ++++++++++---------------
- drivers/gpu/drm/nouveau/nouveau_sched.h |  9 ++++---
- drivers/gpu/drm/nouveau/nouveau_uvmm.c  |  8 +++---
- 5 files changed, 24 insertions(+), 44 deletions(-)
-
-diff --git a/drivers/gpu/drm/nouveau/nouveau_fence.c b/drivers/gpu/drm/nouveau/nouveau_fence.c
-index 9f345a008717..869d4335c0f4 100644
---- a/drivers/gpu/drm/nouveau/nouveau_fence.c
-+++ b/drivers/gpu/drm/nouveau/nouveau_fence.c
-@@ -240,21 +240,6 @@ nouveau_fence_emit(struct nouveau_fence *fence)
- 	return ret;
- }
- 
--void
--nouveau_fence_cancel(struct nouveau_fence *fence)
--{
--	struct nouveau_fence_chan *fctx = nouveau_fctx(fence);
--	unsigned long flags;
--
--	spin_lock_irqsave(&fctx->lock, flags);
--	if (!dma_fence_is_signaled_locked(&fence->base)) {
--		dma_fence_set_error(&fence->base, -ECANCELED);
--		if (nouveau_fence_signal(fence))
--			nvif_event_block(&fctx->event);
--	}
--	spin_unlock_irqrestore(&fctx->lock, flags);
--}
--
- bool
- nouveau_fence_done(struct nouveau_fence *fence)
- {
-diff --git a/drivers/gpu/drm/nouveau/nouveau_fence.h b/drivers/gpu/drm/nouveau/nouveau_fence.h
-index 9957a919bd38..183dd43ecfff 100644
---- a/drivers/gpu/drm/nouveau/nouveau_fence.h
-+++ b/drivers/gpu/drm/nouveau/nouveau_fence.h
-@@ -29,7 +29,6 @@ void nouveau_fence_unref(struct nouveau_fence **);
- 
- int  nouveau_fence_emit(struct nouveau_fence *);
- bool nouveau_fence_done(struct nouveau_fence *);
--void nouveau_fence_cancel(struct nouveau_fence *fence);
- int  nouveau_fence_wait(struct nouveau_fence *, bool lazy, bool intr);
- int  nouveau_fence_sync(struct nouveau_bo *, struct nouveau_channel *, bool exclusive, bool intr);
- 
-diff --git a/drivers/gpu/drm/nouveau/nouveau_sched.c b/drivers/gpu/drm/nouveau/nouveau_sched.c
-index 0cc0bc9f9952..e60f7892f5ce 100644
---- a/drivers/gpu/drm/nouveau/nouveau_sched.c
-+++ b/drivers/gpu/drm/nouveau/nouveau_sched.c
-@@ -11,7 +11,6 @@
- #include "nouveau_exec.h"
- #include "nouveau_abi16.h"
- #include "nouveau_sched.h"
--#include "nouveau_chan.h"
- 
- #define NOUVEAU_SCHED_JOB_TIMEOUT_MS		10000
- 
-@@ -122,9 +121,11 @@ nouveau_job_done(struct nouveau_job *job)
- {
- 	struct nouveau_sched *sched = job->sched;
- 
--	spin_lock(&sched->job_list.lock);
-+	spin_lock(&sched->job.list.lock);
- 	list_del(&job->entry);
--	spin_unlock(&sched->job_list.lock);
-+	spin_unlock(&sched->job.list.lock);
-+
-+	wake_up(&sched->job.wq);
- }
- 
- void
-@@ -305,9 +306,9 @@ nouveau_job_submit(struct nouveau_job *job)
- 	}
- 
- 	/* Submit was successful; add the job to the schedulers job list. */
--	spin_lock(&sched->job_list.lock);
--	list_add(&job->entry, &sched->job_list.head);
--	spin_unlock(&sched->job_list.lock);
-+	spin_lock(&sched->job.list.lock);
-+	list_add(&job->entry, &sched->job.list.head);
-+	spin_unlock(&sched->job.list.lock);
- 
- 	drm_sched_job_arm(&job->base);
- 	job->done_fence = dma_fence_get(&job->base.s_fence->finished);
-@@ -392,23 +393,10 @@ nouveau_sched_free_job(struct drm_sched_job *sched_job)
- 	nouveau_job_fini(job);
- }
- 
--static void
--nouveau_sched_cancel_job(struct drm_sched_job *sched_job)
--{
--	struct nouveau_fence *fence;
--	struct nouveau_job *job;
--
--	job = to_nouveau_job(sched_job);
--	fence = to_nouveau_fence(job->done_fence);
--
--	nouveau_fence_cancel(fence);
--}
--
- static const struct drm_sched_backend_ops nouveau_sched_ops = {
- 	.run_job = nouveau_sched_run_job,
- 	.timedout_job = nouveau_sched_timedout_job,
- 	.free_job = nouveau_sched_free_job,
--	.cancel_job = nouveau_sched_cancel_job,
- };
- 
- static int
-@@ -458,8 +446,9 @@ nouveau_sched_init(struct nouveau_sched *sched, struct nouveau_drm *drm,
- 		goto fail_sched;
- 
- 	mutex_init(&sched->mutex);
--	spin_lock_init(&sched->job_list.lock);
--	INIT_LIST_HEAD(&sched->job_list.head);
-+	spin_lock_init(&sched->job.list.lock);
-+	INIT_LIST_HEAD(&sched->job.list.head);
-+	init_waitqueue_head(&sched->job.wq);
- 
- 	return 0;
- 
-@@ -493,12 +482,16 @@ nouveau_sched_create(struct nouveau_sched **psched, struct nouveau_drm *drm,
- 	return 0;
- }
- 
-+
- static void
- nouveau_sched_fini(struct nouveau_sched *sched)
- {
- 	struct drm_gpu_scheduler *drm_sched = &sched->base;
- 	struct drm_sched_entity *entity = &sched->entity;
- 
-+	rmb(); /* for list_empty to work without lock */
-+	wait_event(sched->job.wq, list_empty(&sched->job.list.head));
-+
- 	drm_sched_entity_fini(entity);
- 	drm_sched_fini(drm_sched);
- 
-diff --git a/drivers/gpu/drm/nouveau/nouveau_sched.h b/drivers/gpu/drm/nouveau/nouveau_sched.h
-index b98c3f0bef30..20cd1da8db73 100644
---- a/drivers/gpu/drm/nouveau/nouveau_sched.h
-+++ b/drivers/gpu/drm/nouveau/nouveau_sched.h
-@@ -103,9 +103,12 @@ struct nouveau_sched {
- 	struct mutex mutex;
- 
- 	struct {
--		struct list_head head;
--		spinlock_t lock;
--	} job_list;
-+		struct {
-+			struct list_head head;
-+			spinlock_t lock;
-+		} list;
-+		struct wait_queue_head wq;
-+	} job;
- };
- 
- int nouveau_sched_create(struct nouveau_sched **psched, struct nouveau_drm *drm,
-diff --git a/drivers/gpu/drm/nouveau/nouveau_uvmm.c b/drivers/gpu/drm/nouveau/nouveau_uvmm.c
-index d94a85509176..79eefdfd08a2 100644
---- a/drivers/gpu/drm/nouveau/nouveau_uvmm.c
-+++ b/drivers/gpu/drm/nouveau/nouveau_uvmm.c
-@@ -1019,8 +1019,8 @@ bind_validate_map_sparse(struct nouveau_job *job, u64 addr, u64 range)
- 	u64 end = addr + range;
- 
- again:
--	spin_lock(&sched->job_list.lock);
--	list_for_each_entry(__job, &sched->job_list.head, entry) {
-+	spin_lock(&sched->job.list.lock);
-+	list_for_each_entry(__job, &sched->job.list.head, entry) {
- 		struct nouveau_uvmm_bind_job *bind_job = to_uvmm_bind_job(__job);
- 
- 		list_for_each_op(op, &bind_job->ops) {
-@@ -1030,7 +1030,7 @@ bind_validate_map_sparse(struct nouveau_job *job, u64 addr, u64 range)
- 
- 				if (!(end <= op_addr || addr >= op_end)) {
- 					nouveau_uvmm_bind_job_get(bind_job);
--					spin_unlock(&sched->job_list.lock);
-+					spin_unlock(&sched->job.list.lock);
- 					wait_for_completion(&bind_job->complete);
- 					nouveau_uvmm_bind_job_put(bind_job);
- 					goto again;
-@@ -1038,7 +1038,7 @@ bind_validate_map_sparse(struct nouveau_job *job, u64 addr, u64 range)
- 			}
- 		}
- 	}
--	spin_unlock(&sched->job_list.lock);
-+	spin_unlock(&sched->job.list.lock);
- }
- 
- static int
--- 
-2.49.0
-
+Applied to drm-rust-fixes, thanks!
