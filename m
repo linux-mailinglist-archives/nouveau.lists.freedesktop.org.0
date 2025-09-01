@@ -2,44 +2,68 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id 9A12CB3E81A
-	for <lists+nouveau@lfdr.de>; Mon,  1 Sep 2025 17:02:21 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 306B6B3EADF
+	for <lists+nouveau@lfdr.de>; Mon,  1 Sep 2025 17:37:35 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 3F74810E481;
-	Mon,  1 Sep 2025 15:02:19 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 93F2010E160;
+	Mon,  1 Sep 2025 15:37:32 +0000 (UTC)
 Authentication-Results: gabe.freedesktop.org;
-	dkim=pass (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="ASpIzDXv";
+	dkim=pass (1024-bit key; unprotected) header.d=collabora.com header.i=daniel.almeida@collabora.com header.b="KpZcuocW";
 	dkim-atps=neutral
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from tor.source.kernel.org (tor.source.kernel.org [172.105.4.254])
- by gabe.freedesktop.org (Postfix) with ESMTPS id F237A10E481;
- Mon,  1 Sep 2025 15:02:17 +0000 (UTC)
-Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by tor.source.kernel.org (Postfix) with ESMTP id C3CDB60010;
- Mon,  1 Sep 2025 15:02:16 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 6629FC4CEF0;
- Mon,  1 Sep 2025 15:02:15 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1756738936;
- bh=lnc+um8VArbYMljrTCJrSlQx6rW9NJXP+JTcHgg6lmI=;
- h=From:To:Cc:Subject:Date:From;
- b=ASpIzDXviCLx1/5FGjw5eIOO7ADuGSeKnYiKHwpSUldf2FuOYxr6RKp73YTT7ldkc
- VOb6UOUa+pY0LzP/dqoyv/G8iabVr0Ktmy1kk/G7NCA8X5aU2/N88dPVkHDRAX0e8n
- PEmZXiOVdf2zjFxii58l6q4AF/3vgOnql+P9hTUF1ddYi8GRCdFl7erlvFbdd3T8rV
- Kf/ck7bIMPDDhgFRh/McZEiQB2wiz9DIU44COIRkjIxi3XjYZrn5C3bnDayfP4Abbo
- Vy64mkYm8uQYwiMTSs9US6g2VKrLJXuBDdHeVYVjUNd7AtRGce1pjlk5ftWAHw9Oau
- 5C2vddgNVP76A==
-From: Danilo Krummrich <dakr@kernel.org>
-To: acourbot@nvidia.com
-Cc: nouveau@lists.freedesktop.org, dri-devel@lists.freedesktop.org,
- Danilo Krummrich <dakr@kernel.org>
-Subject: [PATCH v2] gpu: nova-core: take advantage of pci::Device::unbind()
-Date: Mon,  1 Sep 2025 17:01:53 +0200
-Message-ID: <20250901150207.63094-1-dakr@kernel.org>
-X-Mailer: git-send-email 2.51.0
-MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+Received: from sender4-pp-f112.zoho.com (sender4-pp-f112.zoho.com
+ [136.143.188.112])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 74D1F10E160;
+ Mon,  1 Sep 2025 15:37:31 +0000 (UTC)
+ARC-Seal: i=1; a=rsa-sha256; t=1756741050; cv=none; 
+ d=zohomail.com; s=zohoarc; 
+ b=kGhneXmVXbR6/QfsJolRQDGhH48dehg/RmylKlOpuadFuZqXRIumn7Xv80GYgFFh0b/6jK3bB/ekrBS2G4mSfmY9iMgv322T9v5txORynQMxx0X46CLIIoK8pHC+QegFmusBjENR9XXeZE4tnOl9gWw8wOHYP58FWrdj+QiB7s8=
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=zohomail.com;
+ s=zohoarc; t=1756741050;
+ h=Content-Type:Content-Transfer-Encoding:Cc:Cc:Date:Date:From:From:In-Reply-To:MIME-Version:Message-ID:References:Subject:Subject:To:To:Message-Id:Reply-To;
+ bh=J7yNOxJZhdfDkiP8jJZkUqR/tXFBeS7v4u5qWtcTUEY=; 
+ b=HKAhVfOrzmyG5XLUQ0XJDV2MtCbypoEuvWQWY+4NYyRmjaGKyeTifj/bPLLX8bmvIZKDhUGFeg2WbHsPoVCZGnSlHKMXEcPfpJKAb9IKt0AyLiSDomNzAjHJv53687X5IbVHZ3uidTVBhE7jwpE1ZtE3g9oC6jH5huf3Zc6r4vc=
+ARC-Authentication-Results: i=1; mx.zohomail.com;
+ dkim=pass  header.i=collabora.com;
+ spf=pass  smtp.mailfrom=daniel.almeida@collabora.com;
+ dmarc=pass header.from=<daniel.almeida@collabora.com>
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; t=1756741050; 
+ s=zohomail; d=collabora.com; i=daniel.almeida@collabora.com;
+ h=Content-Type:Mime-Version:Subject:Subject:From:From:In-Reply-To:Date:Date:Cc:Cc:Content-Transfer-Encoding:Message-Id:Message-Id:References:To:To:Reply-To;
+ bh=J7yNOxJZhdfDkiP8jJZkUqR/tXFBeS7v4u5qWtcTUEY=;
+ b=KpZcuocWTgw2nu+e2eochKKy2UEKN00BFb65rWUcDTSr5jeUUSquOBYJE7KGwZhM
+ Du2wepEg4XMQswrwUOSyodSxJZmSMkC/3Fj6W7Q971Q2DctqMVxLFIAFD6k3f8mo44G
+ HIfJx04iViT7NFpPXe1vmybQo3Urk5qkptmsUQgg=
+Received: by mx.zohomail.com with SMTPS id 1756741048112173.95372647627437;
+ Mon, 1 Sep 2025 08:37:28 -0700 (PDT)
+Content-Type: text/plain;
+	charset=utf-8
+Mime-Version: 1.0 (Mac OS X Mail 16.0 \(3826.700.81\))
+Subject: Re: [PATCH v3 01/14] rust: drm: gem: Simplify use of generics
+From: Daniel Almeida <daniel.almeida@collabora.com>
+In-Reply-To: <20250829224116.477990-2-lyude@redhat.com>
+Date: Mon, 1 Sep 2025 12:37:10 -0300
+Cc: dri-devel@lists.freedesktop.org, rust-for-linux@vger.kernel.org,
+ linux-kernel@vger.kernel.org, Danilo Krummrich <dakr@kernel.org>,
+ Maarten Lankhorst <maarten.lankhorst@linux.intel.com>,
+ Maxime Ripard <mripard@kernel.org>,
+ Thomas Zimmermann <tzimmermann@suse.de>, David Airlie <airlied@gmail.com>,
+ Simona Vetter <simona@ffwll.ch>, Miguel Ojeda <ojeda@kernel.org>,
+ Alex Gaynor <alex.gaynor@gmail.com>, Boqun Feng <boqun.feng@gmail.com>,
+ Gary Guo <gary@garyguo.net>,
+ =?utf-8?Q?Bj=C3=B6rn_Roy_Baron?= <bjorn3_gh@protonmail.com>,
+ Benno Lossin <lossin@kernel.org>, Andreas Hindborg <a.hindborg@kernel.org>,
+ Alice Ryhl <aliceryhl@google.com>, Trevor Gross <tmgross@umich.edu>,
+ Asahi Lina <lina+kernel@asahilina.net>,
+ "open list:DRM DRIVER FOR NVIDIA GPUS [RUST]" <nouveau@lists.freedesktop.org>
+Content-Transfer-Encoding: quoted-printable
+Message-Id: <C036DE82-747A-4DCE-845F-CE832DA8991A@collabora.com>
+References: <20250829224116.477990-1-lyude@redhat.com>
+ <20250829224116.477990-2-lyude@redhat.com>
+To: Lyude Paul <lyude@redhat.com>
+X-Mailer: Apple Mail (2.3826.700.81)
+X-ZohoMailClient: External
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -54,80 +78,112 @@ List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-Now that we have pci::Device::unbind() we can unregister the sysmem
-flush page with a direct access the I/O resource, i.e. without RCU read
-side critical section.
+Hi Lyude, thanks a lot for working on this! :)
 
-Signed-off-by: Danilo Krummrich <dakr@kernel.org>
----
-Changes in v2:
-  - Use Device<Core>.
-  - Add doc-comment.
----
- drivers/gpu/nova-core/driver.rs |  4 ++++
- drivers/gpu/nova-core/gpu.rs    | 22 ++++++++++++----------
- 2 files changed, 16 insertions(+), 10 deletions(-)
+> On 29 Aug 2025, at 19:35, Lyude Paul <lyude@redhat.com> wrote:
+>=20
+> Now that my rust skills have been honed, I noticed that there's a lot =
+of
+> generics in our gem bindings that don't actually need to be here. =
+Currently
+> the hierarchy of traits in our gem bindings looks like this:
+>=20
+>  * Drivers implement:
+>    * BaseDriverObject<T: DriverObject> (has the callbacks)
+>    * DriverObject (has the drm::Driver type)
+>  * Crate implements:
+>    * IntoGEMObject for Object<T> where T: DriverObject
+>      Handles conversion to/from raw object pointers
+>    * BaseObject for T where T: IntoGEMObject
+>      Provides methods common to all gem interfaces
+>=20
+>  Also of note, this leaves us with two different drm::Driver =
+associated
+>  types:
+>    * DriverObject::Driver
+>    * IntoGEMObject::Driver
+>=20
+> I'm not entirely sure of the original intent here unfortunately (if =
+anyone
+> is, please let me know!), but my guess is that the idea would be that =
+some
+> objects can implement IntoGEMObject using a different ::Driver than
+> DriverObject - presumably to enable the usage of gem objects from =
+different
+> drivers. A reasonable usecase of course.
+>=20
+> However - if I'm not mistaken, I don't think that this is actually how
+> things would go in practice. Driver implementations are of course
+> implemented by their associated drivers, and generally drivers are not
+> linked to each-other when building the kernel. Which is to say that =
+even in
+> a situation where we would theoretically deal with gem objects from =
+another
+> driver, we still wouldn't have access to its drm::driver::Driver
+> implementation. It's more likely we would simply want a variant of gem
+> objects in such a situation that have no association with a
+> drm::driver::Driver type.
+>=20
+> Taking that into consideration, we can assume the following:
+> * Anything that implements BaseDriverObject will implement =
+DriverObject
+>  In other words, all BaseDriverObjects indirectly have an associated
+>  ::Driver type - so the two traits can be combined into one with no
+>  generics.
+> * Not everything that implements IntoGEMObject will have an associated
+>  ::Driver, and that's OK.
+>=20
+> And with this, we now can do quite a bit of cleanup with the use of
+> generics here. As such, this commit:
+>=20
+> * Removes the generics on BaseDriverObject
+> * Moves DriverObject::Driver into BaseDriverObject
+> * Removes DriverObject
+> * Removes IntoGEMObject::Driver
+> * Add AllocImpl::Driver, which we can use as a binding to figure out =
+the
+>  correct File type for BaseObject
+>=20
+> Leaving us with a simpler trait hierarchy that now looks like this:
+>=20
+>  * Drivers implement: BaseDriverObject
+>  * Crate implements:
+>    * IntoGEMObject for Object<T> where T: DriverObject
+>    * BaseObject for T where T: IntoGEMObject
+>=20
+> Which makes the code a lot easier to understand and build on :).
+>=20
+> Signed-off-by: Lyude Paul <lyude@redhat.com>
+>=20
+> ---
+> V2:
+> * Don't refer to Object<T> in callbacks, as this would result in =
+drivers
+>  getting the wrong gem object type for shmem gem objects once we add
+>  support for those. Instead, we'll just add a type alias to clean this
+>  part up.
+> V3:
+> * Fix nova compilation
+> * Also, add an associated driver type to AllocImpl - as we still need =
+the
+>  current driver accessible from BaseObject so that we can use the =
+driver's
+>  various associated types, like File
+> V4:
 
-diff --git a/drivers/gpu/nova-core/driver.rs b/drivers/gpu/nova-core/driver.rs
-index 274989ea1fb4..02b3edd7bbdc 100644
---- a/drivers/gpu/nova-core/driver.rs
-+++ b/drivers/gpu/nova-core/driver.rs
-@@ -54,4 +54,8 @@ fn probe(pdev: &pci::Device<Core>, _info: &Self::IdInfo) -> Result<Pin<KBox<Self
- 
-         Ok(this)
-     }
-+
-+    fn unbind(pdev: &pci::Device<Core>, this: Pin<&Self>) {
-+        this.gpu.unbind(pdev.as_ref());
-+    }
- }
-diff --git a/drivers/gpu/nova-core/gpu.rs b/drivers/gpu/nova-core/gpu.rs
-index 8caecaf7dfb4..80a54e303663 100644
---- a/drivers/gpu/nova-core/gpu.rs
-+++ b/drivers/gpu/nova-core/gpu.rs
-@@ -163,7 +163,7 @@ fn new(bar: &Bar0) -> Result<Spec> {
- }
- 
- /// Structure holding the resources required to operate the GPU.
--#[pin_data(PinnedDrop)]
-+#[pin_data]
- pub(crate) struct Gpu {
-     spec: Spec,
-     /// MMIO mapping of PCI BAR 0
-@@ -174,15 +174,6 @@ pub(crate) struct Gpu {
-     sysmem_flush: SysmemFlush,
- }
- 
--#[pinned_drop]
--impl PinnedDrop for Gpu {
--    fn drop(self: Pin<&mut Self>) {
--        // Unregister the sysmem flush page before we release it.
--        self.bar
--            .try_access_with(|b| self.sysmem_flush.unregister(b));
--    }
--}
--
- impl Gpu {
-     /// Helper function to load and run the FWSEC-FRTS firmware and confirm that it has properly
-     /// created the WPR2 region.
-@@ -309,4 +300,15 @@ pub(crate) fn new(
-             sysmem_flush,
-         }))
-     }
-+
-+    /// Called when the corresponding [`Device`](device::Device) is unbound.
-+    ///
-+    /// Note: This method must only be called from `Driver::unbind`.
-+    pub(crate) fn unbind(&self, dev: &device::Device<device::Core>) {
-+        kernel::warn_on!(self
-+            .bar
-+            .access(dev)
-+            .inspect(|bar| self.sysmem_flush.unregister(bar))
-+            .is_err());
-+    }
- }
+?
 
-base-commit: 09f90256e8902793f594517ef440698585eb3595
--- 
-2.51.0
+This is v3. Can you clarify this before we go further? :)
+
+> * Add missing Object =3D Self constraint to type bounds for =
+create_handle,
+>  lookup_handle. I forgot that if drivers can have private gem objects =
+with
+>  a different data layout, we can only guarantee gem objects with =
+handles
+>  are of the same gem object type as the main one in use by the driver.
+>=20
+> Signed-off-by: Lyude Paul <lyude@redhat.com>
+
+=E2=80=94 Daniel
 
