@@ -2,50 +2,47 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id 08EE5B3E04C
-	for <lists+nouveau@lfdr.de>; Mon,  1 Sep 2025 12:37:45 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 2D0D0B3E077
+	for <lists+nouveau@lfdr.de>; Mon,  1 Sep 2025 12:41:24 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 8619410E419;
-	Mon,  1 Sep 2025 10:37:43 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 1376510E420;
+	Mon,  1 Sep 2025 10:41:20 +0000 (UTC)
 Authentication-Results: gabe.freedesktop.org;
-	dkim=pass (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="e3zyxOqO";
+	dkim=pass (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="WnzzFHsC";
 	dkim-atps=neutral
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from tor.source.kernel.org (tor.source.kernel.org [172.105.4.254])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 80D5210E419;
- Mon,  1 Sep 2025 10:37:42 +0000 (UTC)
+Received: from sea.source.kernel.org (sea.source.kernel.org [172.234.252.31])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 8D95F10E41B;
+ Mon,  1 Sep 2025 10:41:18 +0000 (UTC)
 Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by tor.source.kernel.org (Postfix) with ESMTP id 6811C601DD;
- Mon,  1 Sep 2025 10:37:41 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 6184EC4CEF8;
- Mon,  1 Sep 2025 10:37:39 +0000 (UTC)
+ by sea.source.kernel.org (Postfix) with ESMTP id 2C83041A91;
+ Mon,  1 Sep 2025 10:41:18 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 2E5BFC4CEF0;
+ Mon,  1 Sep 2025 10:41:17 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1756723061;
- bh=WFGY4iWVgdB0iqOWCIEY4oE+1wGv78wpSjqVqokCbuo=;
- h=Date:Subject:To:Cc:References:From:In-Reply-To:From;
- b=e3zyxOqOGo97AMIfSE8iO5OAdozg7aZA4I7FsayqEiBT0GpqjXY+pkT0Oq+U63i13
- TJVxYN33NSTyQKhljy+IPaWL1Cy46Flti9bLUHGFcirWTc9GJLlUbukVyO50Zy+3WX
- 8ZbBU+zRH6ZPqEr0GrPzWeWdMOOmiowrOocStGLHG4Dn4FYrcrqGU5IXOcNsCylZLg
- JHnPZWOv3ZPyt9Q4yQzhy0NQhkxCE6zjPaWLduDE10rWC9HSPDN7sRZ2OSn+Hif1ow
- F3P2/4yLIKJ1GebTU4wbwmludSNN6nJs0gJVcifdqlk4xTth+izx4wlw53JgX2Pzaf
- WAG+NffUzySNw==
-Message-ID: <fc15c557-623b-40b5-8254-53888c847da6@kernel.org>
-Date: Mon, 1 Sep 2025 12:37:37 +0200
-MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 0/2] gpu: nova-core: vbios: simplify device use
-To: Alexandre Courbot <acourbot@nvidia.com>
-Cc: David Airlie <airlied@gmail.com>, Simona Vetter <simona@ffwll.ch>,
- Joel Fernandes <joelagnelf@nvidia.com>, nouveau@lists.freedesktop.org,
- dri-devel@lists.freedesktop.org, rust-for-linux@vger.kernel.org,
- linux-kernel@vger.kernel.org
-References: <20250808-vbios_device-v1-0-834bbbab6471@nvidia.com>
-From: Danilo Krummrich <dakr@kernel.org>
-Content-Language: en-US
-In-Reply-To: <20250808-vbios_device-v1-0-834bbbab6471@nvidia.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
+ s=k20201202; t=1756723278;
+ bh=yFIa/AwwszfMyv5NWD+c3BguAhI507kItLPHy2Owv/k=;
+ h=Date:Subject:Cc:To:From:References:In-Reply-To:From;
+ b=WnzzFHsC9cyub01CpDw7RUegQBEBQ72gB/21sGdXg2S5g0Zi8iDiYI9D4e/B6yDhm
+ VvsUQ9RWKRMux5EcXAcZyfEIoqWTBo8eplc6ResOD9Dye+IwTjL308GuEsn1IPXDYf
+ RyKX5Ut0m8xgqhZWCXwrlSeTQZY1FWojApNvcFmq+cJ5DxiYkTT3XP3YSrRcSTPE0n
+ bNm2yLnZTipBiaCO+rsKYHJ8c2l7JziyJN82pmTICrWJXUPQqp7WFC2ID8HfIvWNbs
+ c0Qb7v8zOafynNuYPgqUcKXSezzqh8PqYitga2fjPUsMnR9iNFcr4/AGullHVs6+E/
+ NE1oF86re3zLw==
+Mime-Version: 1.0
+Content-Transfer-Encoding: quoted-printable
+Content-Type: text/plain; charset=UTF-8
+Date: Mon, 01 Sep 2025 12:41:15 +0200
+Message-Id: <DCHEFFK24WF2.2RGNO3JUNLCUR@kernel.org>
+Subject: Re: [PATCH] gpu: nova-core: take advantage of pci::Device::unbind()
+Cc: <nouveau@lists.freedesktop.org>, <dri-devel@lists.freedesktop.org>,
+ "Nouveau" <nouveau-bounces@lists.freedesktop.org>
+To: "Alexandre Courbot" <acourbot@nvidia.com>
+From: "Danilo Krummrich" <dakr@kernel.org>
+References: <20250830133255.62380-1-dakr@kernel.org>
+ <DCGNTYLUDMUD.2OVROKOZ97QWP@nvidia.com>
+In-Reply-To: <DCGNTYLUDMUD.2OVROKOZ97QWP@nvidia.com>
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -60,16 +57,24 @@ List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-On 8/8/25 4:46 AM, Alexandre Courbot wrote:
-> This small cleanup series simplifies the use of `Device` in vbios
-> methods.
-> 
-> The device is used for logging purposes only; thus we don't need a
-> pci::Device, neither do we need it to be bound. This latter property
-> allows us to store an `ARef` to it into structures that require logging
-> instead of having all their methods take an extra `dev` argument.
-> Removing this argument streamlines the code a bit.
-> 
-> Signed-off-by: Alexandre Courbot <acourbot@nvidia.com>
+On Sun Aug 31, 2025 at 3:50 PM CEST, Alexandre Courbot wrote:
+>> +    pub(crate) fn unbind(&self, pdev: &pci::Device<device::Bound>) {
+>> +        // Unregister the sysmem flush page before we release it.
+>> +        kernel::warn_on!(self.bar.access(pdev.as_ref()).map_or(true, |b=
+ar| {
+>> +            self.sysmem_flush.unregister(bar);
+>> +
+>> +            false
+>> +        }));
+>> +    }
+>
+> Maybe I'm overtly cautious, but this method can be called from a large
+> part of the driver, leaving the Gpu device in a half-unbound state. The
+> `PinnedDrop` approach had the benefit of not allowing this.
+>
+> One way to solve the problem would be to make this method `pub(in
+> crate::driver)`, so other modules cannot call it.
 
-Acked-by: Danilo Krummrich <dakr@kernel.org>
+pub(in crate::driver) doesn't work, since hierarchically it's a sibling. :(
+
+However, I can add a doc-comment to make it a bit more obvious.
