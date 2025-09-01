@@ -2,57 +2,48 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id 134B2B3EF91
-	for <lists+nouveau@lfdr.de>; Mon,  1 Sep 2025 22:26:34 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id AB2C5B3EF9E
+	for <lists+nouveau@lfdr.de>; Mon,  1 Sep 2025 22:29:18 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id A174C10E174;
-	Mon,  1 Sep 2025 20:26:31 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id E0DB310E51D;
+	Mon,  1 Sep 2025 20:29:16 +0000 (UTC)
 Authentication-Results: gabe.freedesktop.org;
-	dkim=pass (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="Efs6hQT/";
+	dkim=pass (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="c1dzBGfJ";
 	dkim-atps=neutral
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
 Received: from sea.source.kernel.org (sea.source.kernel.org [172.234.252.31])
- by gabe.freedesktop.org (Postfix) with ESMTPS id B417A10E174
- for <nouveau@lists.freedesktop.org>; Mon,  1 Sep 2025 20:26:29 +0000 (UTC)
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 5192B10E51D;
+ Mon,  1 Sep 2025 20:29:16 +0000 (UTC)
 Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by sea.source.kernel.org (Postfix) with ESMTP id 5A70F412EC;
- Mon,  1 Sep 2025 20:26:29 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 02503C4CEF0;
- Mon,  1 Sep 2025 20:26:24 +0000 (UTC)
+ by sea.source.kernel.org (Postfix) with ESMTP id 25DF343766;
+ Mon,  1 Sep 2025 20:29:16 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 50358C4CEF5;
+ Mon,  1 Sep 2025 20:29:13 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1756758389;
- bh=eF5HEy70tfeo1yW+uH2DRuxqaYZppSmTaxduRb9MIZY=;
- h=Date:To:From:Subject:Cc:References:In-Reply-To:From;
- b=Efs6hQT/z3OP2aSlyCKjerM6VE+/hjqwZEEEoxacgYAA8Mj0rZtK+PGz65I04d7dH
- YTdzUr7z0tfxgqJM2BoSCquSZF2sRtIrbCkP5SO9oSchNtqZav5hwvMmMquW0J0ot5
- OLcFT+YNoO8s+Wv1Ftdrz3t70PECmC5eDU8rX35dgxVuAax2yp1D7q/odl77PkI8Mo
- yiU0cfTUaQKf6rWIiavJ/1/mUvYsQAklbh2KB2dSEzUSqXtTt7YXkwMiivgU/JIXpQ
- 9lUae+CoQ+JxFN0aMpyIt2JPVljdpIjbESYNcRFkfruixuuwyhAOW9IeBmnpbh4ZaM
- sGPPSkWDtJ0aA==
-Mime-Version: 1.0
-Content-Transfer-Encoding: quoted-printable
-Content-Type: text/plain; charset=UTF-8
-Date: Mon, 01 Sep 2025 22:26:23 +0200
-Message-Id: <DCHQVFTUYTLV.3F0N1WIXZHO96@kernel.org>
-To: "John Hubbard" <jhubbard@nvidia.com>
-From: "Danilo Krummrich" <dakr@kernel.org>
-Subject: Re: [PATCH v8 0/6] rust, nova-core: PCI Class, Vendor support
-Cc: "Alexandre Courbot" <acourbot@nvidia.com>, "Joel Fernandes"
- <joelagnelf@nvidia.com>, "Timur Tabi" <ttabi@nvidia.com>, "Alistair Popple"
- <apopple@nvidia.com>, "David Airlie" <airlied@gmail.com>, "Simona Vetter"
- <simona@ffwll.ch>, "Bjorn Helgaas" <bhelgaas@google.com>,
- =?utf-8?q?Krzysztof_Wilczy=C5=84ski?= <kwilczynski@kernel.org>, "Miguel
- Ojeda" <ojeda@kernel.org>, "Alex Gaynor" <alex.gaynor@gmail.com>, "Boqun
- Feng" <boqun.feng@gmail.com>, "Gary Guo" <gary@garyguo.net>,
- =?utf-8?q?Bj=C3=B6rn_Roy_Baron?= <bjorn3_gh@protonmail.com>, "Benno Lossin"
- <lossin@kernel.org>, "Andreas Hindborg" <a.hindborg@kernel.org>, "Alice
- Ryhl" <aliceryhl@google.com>, "Trevor Gross" <tmgross@umich.edu>,
- <nouveau@lists.freedesktop.org>, <linux-pci@vger.kernel.org>,
- <rust-for-linux@vger.kernel.org>, "LKML" <linux-kernel@vger.kernel.org>,
- "Elle Rhumsaa" <elle@weathered-steel.dev>
-References: <20250829223632.144030-1-jhubbard@nvidia.com>
-In-Reply-To: <20250829223632.144030-1-jhubbard@nvidia.com>
+ s=k20201202; t=1756758556;
+ bh=XSYHV22awvja2mSmk3TOqUCpr/T7KqGsGMSppJry2kE=;
+ h=From:To:Cc:Subject:Date:From;
+ b=c1dzBGfJiCN9+pKiTRE1eyR325/P7PthJNkDDf4IBUmDyHzhN3hwpyuqTMbXsmjB1
+ kScNk2z9VRBwzbeDVvgrYZes06a3yjmkzJ2SUAYFgkBou44MHA2yFxHPoCSgt+H2Gb
+ 14eP44p1TNZR9vLNpp6NvvzsBCpCPCGPYCC8S13rVUNOn8fOQI/oXlTDi4JAK+Njdw
+ ib4oP4B+jM+Qt9Z1G6xhiGzIpVAIfW4gvwyrTjkqwJNY/7PqJlv+RtteIzJN7QYj5T
+ AnnMmC3Baz8cpKWFNhuSWVuD3WzDiPreqZ9XQdA7wu2Q46bT7Iv8dduAs14k5wTmUh
+ xOrIMjFX9gHbQ==
+From: Danilo Krummrich <dakr@kernel.org>
+To: aliceryhl@google.com, airlied@gmail.com, simona@ffwll.ch,
+ maarten.lankhorst@linux.intel.com, mripard@kernel.org, tzimmermann@suse.de,
+ acourbot@nvidia.com, daniel.almeida@collabora.com
+Cc: nouveau@lists.freedesktop.org, dri-devel@lists.freedesktop.org,
+ rust-for-linux@vger.kernel.org, linux-kernel@vger.kernel.org,
+ Danilo Krummrich <dakr@kernel.org>
+Subject: [PATCH] MAINTAINERS: Add drm-rust tree for Rust DRM drivers and
+ infrastructure
+Date: Mon,  1 Sep 2025 22:26:39 +0200
+Message-ID: <20250901202850.208116-1-dakr@kernel.org>
+X-Mailer: git-send-email 2.51.0
+MIME-Version: 1.0
+Content-Transfer-Encoding: 8bit
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -67,26 +58,73 @@ List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-On Sat Aug 30, 2025 at 12:36 AM CEST, John Hubbard wrote:
-> John Hubbard (6):
+Multiple DRM Rust drivers (e.g. nova-core, nova-drm, Tyr, rvkms) are in
+development, with at least Nova and (soon) Tyr already upstream. Having a
+shared tree will ease and accelerate development, since all drivers can
+consume new infrastructure in the same release cycle.
 
-Applied to driver-core-testing, thanks!
+This includes infrastructure shared with other subsystem trees (e.g. Rust
+or driver-core). By consolidating in drm-rust, we avoid adding extra
+burden to drm-misc maintainers, e.g. dealing with cross-tree topic
+branches.
 
->   rust: pci: provide access to PCI Class and Class-related items
+The drm-misc tree is not a good fit for this stage of development, since
+its documented scope is small drivers with occasional large series.
 
-    [ Minor doc-comment improvements, align Debug and Display. - Danilo ]
+Rust drivers in development upstream, however, regularly involve large
+patch series, new infrastructure, and shared topic branches, which may
+not align well with drm-misc at this stage.
 
->   rust: pci: provide access to PCI Vendor values
+The drm-rust tree may not be a permanent solution. Once the core Rust,
+DRM, and KMS infrastructure have stabilized, drivers and infrastructure
+changes are expected to transition into drm-misc or standalone driver
+trees respectively. Until then, drm-rust provides a dedicated place to
+coordinate development without disrupting existing workflows too much.
 
-    [ Minor doc-comment improvements, align Debug and Display. - Danilo ]
+Cc: Alice Ryhl <aliceryhl@google.com>
+Cc: David Airlie <airlied@gmail.com>
+Cc: Simona Vetter <simona@ffwll.ch>
+Cc: Maarten Lankhorst <maarten.lankhorst@linux.intel.com>
+Cc: Maxime Ripard <mripard@kernel.org>
+Cc: Thomas Zimmermann <tzimmermann@suse.de>
+Cc: Alexandre Courbot <acourbot@nvidia.com>
+Cc: Daniel Almeida <daniel.almeida@collabora.com>
+Signed-off-by: Danilo Krummrich <dakr@kernel.org>
+---
+ MAINTAINERS | 11 ++++++++++-
+ 1 file changed, 10 insertions(+), 1 deletion(-)
 
->   rust: pci: add DeviceId::from_class_and_vendor() method
+diff --git a/MAINTAINERS b/MAINTAINERS
+index fe168477caa4..1cd6597c7f1d 100644
+--- a/MAINTAINERS
++++ b/MAINTAINERS
+@@ -8079,7 +8079,6 @@ F:	Documentation/devicetree/bindings/gpu/
+ F:	Documentation/gpu/
+ F:	drivers/gpu/drm/
+ F:	drivers/gpu/vga/
+-F:	rust/kernel/drm/
+ F:	include/drm/drm
+ F:	include/linux/vga*
+ F:	include/uapi/drm/
+@@ -8096,6 +8095,16 @@ X:	drivers/gpu/drm/radeon/
+ X:	drivers/gpu/drm/tegra/
+ X:	drivers/gpu/drm/xe/
+ 
++DRM DRIVERS AND COMMON INFRASTRUCTURE [RUST]
++M:	Danilo Krummrich <dakr@kernel.org>
++M:	Alice Ryhl <aliceryhl@google.com>
++S:	Supported
++W:	https://drm.pages.freedesktop.org/maintainer-tools/drm-rust.html
++T:	git https://gitlab.freedesktop.org/drm/rust/kernel.git
++F:	drivers/gpu/drm/nova/
++F:	drivers/gpu/nova-core/
++F:	rust/kernel/drm/
++
+ DRM DRIVERS FOR ALLWINNER A10
+ M:	Maxime Ripard <mripard@kernel.org>
+ M:	Chen-Yu Tsai <wens@csie.org>
 
-    [ Minor doc-comment improvements. - Danilo ]
+base-commit: 8f5ae30d69d7543eee0d70083daf4de8fe15d585
+-- 
+2.51.0
 
->   gpu: nova-core: avoid probing non-display/compute PCI functions
->   rust: pci: use pci::Vendor instead of bindings::PCI_VENDOR_ID_*
-
-    [ Replace "as a validated vendor" with "as [`Vendor`]". - Danilo ]
-
->   rust: pci: inline several tiny functions
