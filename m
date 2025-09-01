@@ -2,68 +2,57 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id 306B6B3EADF
-	for <lists+nouveau@lfdr.de>; Mon,  1 Sep 2025 17:37:35 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 3C608B3ED95
+	for <lists+nouveau@lfdr.de>; Mon,  1 Sep 2025 19:58:22 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 93F2010E160;
-	Mon,  1 Sep 2025 15:37:32 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id AAFAB10E03C;
+	Mon,  1 Sep 2025 17:58:19 +0000 (UTC)
 Authentication-Results: gabe.freedesktop.org;
-	dkim=pass (1024-bit key; unprotected) header.d=collabora.com header.i=daniel.almeida@collabora.com header.b="KpZcuocW";
+	dkim=pass (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="Xu6OJ+S4";
 	dkim-atps=neutral
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from sender4-pp-f112.zoho.com (sender4-pp-f112.zoho.com
- [136.143.188.112])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 74D1F10E160;
- Mon,  1 Sep 2025 15:37:31 +0000 (UTC)
-ARC-Seal: i=1; a=rsa-sha256; t=1756741050; cv=none; 
- d=zohomail.com; s=zohoarc; 
- b=kGhneXmVXbR6/QfsJolRQDGhH48dehg/RmylKlOpuadFuZqXRIumn7Xv80GYgFFh0b/6jK3bB/ekrBS2G4mSfmY9iMgv322T9v5txORynQMxx0X46CLIIoK8pHC+QegFmusBjENR9XXeZE4tnOl9gWw8wOHYP58FWrdj+QiB7s8=
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=zohomail.com;
- s=zohoarc; t=1756741050;
- h=Content-Type:Content-Transfer-Encoding:Cc:Cc:Date:Date:From:From:In-Reply-To:MIME-Version:Message-ID:References:Subject:Subject:To:To:Message-Id:Reply-To;
- bh=J7yNOxJZhdfDkiP8jJZkUqR/tXFBeS7v4u5qWtcTUEY=; 
- b=HKAhVfOrzmyG5XLUQ0XJDV2MtCbypoEuvWQWY+4NYyRmjaGKyeTifj/bPLLX8bmvIZKDhUGFeg2WbHsPoVCZGnSlHKMXEcPfpJKAb9IKt0AyLiSDomNzAjHJv53687X5IbVHZ3uidTVBhE7jwpE1ZtE3g9oC6jH5huf3Zc6r4vc=
-ARC-Authentication-Results: i=1; mx.zohomail.com;
- dkim=pass  header.i=collabora.com;
- spf=pass  smtp.mailfrom=daniel.almeida@collabora.com;
- dmarc=pass header.from=<daniel.almeida@collabora.com>
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; t=1756741050; 
- s=zohomail; d=collabora.com; i=daniel.almeida@collabora.com;
- h=Content-Type:Mime-Version:Subject:Subject:From:From:In-Reply-To:Date:Date:Cc:Cc:Content-Transfer-Encoding:Message-Id:Message-Id:References:To:To:Reply-To;
- bh=J7yNOxJZhdfDkiP8jJZkUqR/tXFBeS7v4u5qWtcTUEY=;
- b=KpZcuocWTgw2nu+e2eochKKy2UEKN00BFb65rWUcDTSr5jeUUSquOBYJE7KGwZhM
- Du2wepEg4XMQswrwUOSyodSxJZmSMkC/3Fj6W7Q971Q2DctqMVxLFIAFD6k3f8mo44G
- HIfJx04iViT7NFpPXe1vmybQo3Urk5qkptmsUQgg=
-Received: by mx.zohomail.com with SMTPS id 1756741048112173.95372647627437;
- Mon, 1 Sep 2025 08:37:28 -0700 (PDT)
-Content-Type: text/plain;
-	charset=utf-8
-Mime-Version: 1.0 (Mac OS X Mail 16.0 \(3826.700.81\))
-Subject: Re: [PATCH v3 01/14] rust: drm: gem: Simplify use of generics
-From: Daniel Almeida <daniel.almeida@collabora.com>
-In-Reply-To: <20250829224116.477990-2-lyude@redhat.com>
-Date: Mon, 1 Sep 2025 12:37:10 -0300
-Cc: dri-devel@lists.freedesktop.org, rust-for-linux@vger.kernel.org,
- linux-kernel@vger.kernel.org, Danilo Krummrich <dakr@kernel.org>,
- Maarten Lankhorst <maarten.lankhorst@linux.intel.com>,
- Maxime Ripard <mripard@kernel.org>,
- Thomas Zimmermann <tzimmermann@suse.de>, David Airlie <airlied@gmail.com>,
- Simona Vetter <simona@ffwll.ch>, Miguel Ojeda <ojeda@kernel.org>,
- Alex Gaynor <alex.gaynor@gmail.com>, Boqun Feng <boqun.feng@gmail.com>,
- Gary Guo <gary@garyguo.net>,
- =?utf-8?Q?Bj=C3=B6rn_Roy_Baron?= <bjorn3_gh@protonmail.com>,
- Benno Lossin <lossin@kernel.org>, Andreas Hindborg <a.hindborg@kernel.org>,
- Alice Ryhl <aliceryhl@google.com>, Trevor Gross <tmgross@umich.edu>,
- Asahi Lina <lina+kernel@asahilina.net>,
- "open list:DRM DRIVER FOR NVIDIA GPUS [RUST]" <nouveau@lists.freedesktop.org>
+Received: from sea.source.kernel.org (sea.source.kernel.org [172.234.252.31])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 37D6110E03C
+ for <nouveau@lists.freedesktop.org>; Mon,  1 Sep 2025 17:58:18 +0000 (UTC)
+Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
+ by sea.source.kernel.org (Postfix) with ESMTP id BD86D44840;
+ Mon,  1 Sep 2025 17:58:17 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 6E5EDC4CEF7;
+ Mon,  1 Sep 2025 17:58:13 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+ s=k20201202; t=1756749497;
+ bh=lnUYxEo+qbQ/4L8pc1O8ViES3IqqvQLMaCk/XcJ2ZZY=;
+ h=Date:To:From:Subject:Cc:References:In-Reply-To:From;
+ b=Xu6OJ+S416039lcQl4+pAQ8cJbk+JNPmi8uGtmHLpLMOU+d8DhBYVYD+qpvto5aXn
+ CaXjNnhZxpzdmX7Qyfi29U9SvWv6eFeYsmNOSBNjd+Jv6B01BHplQ47vHpfIgqiru3
+ xWOye+MsWB2q7for6LafODy2ijg7hQRnFigzy6ANdmbfbHpeszEsM8DiEj+pmwa9oT
+ oME75FpJxUOaZP/cfCR7EcMGqE6Q//F5cKQBO0iosgx8EmhHi0K3PqdW/srebeoAB2
+ eRxTxWBlOG2dx1g9CuNl7X7Jc6urnHpxh8YAauCuUQaqieytpdMp+yY/gdZ3JpdUZf
+ 6AH2ttoIWVGwA==
+Mime-Version: 1.0
 Content-Transfer-Encoding: quoted-printable
-Message-Id: <C036DE82-747A-4DCE-845F-CE832DA8991A@collabora.com>
-References: <20250829224116.477990-1-lyude@redhat.com>
- <20250829224116.477990-2-lyude@redhat.com>
-To: Lyude Paul <lyude@redhat.com>
-X-Mailer: Apple Mail (2.3826.700.81)
-X-ZohoMailClient: External
+Content-Type: text/plain; charset=UTF-8
+Date: Mon, 01 Sep 2025 19:58:11 +0200
+Message-Id: <DCHNPZ8G5FP8.3VTQ0RQMQ6NT@kernel.org>
+To: "John Hubbard" <jhubbard@nvidia.com>
+From: "Danilo Krummrich" <dakr@kernel.org>
+Subject: Re: [PATCH v8 0/6] rust, nova-core: PCI Class, Vendor support
+Cc: "Alexandre Courbot" <acourbot@nvidia.com>, "Joel Fernandes"
+ <joelagnelf@nvidia.com>, "Timur Tabi" <ttabi@nvidia.com>, "Alistair Popple"
+ <apopple@nvidia.com>, "David Airlie" <airlied@gmail.com>, "Simona Vetter"
+ <simona@ffwll.ch>, "Bjorn Helgaas" <bhelgaas@google.com>,
+ =?utf-8?q?Krzysztof_Wilczy=C5=84ski?= <kwilczynski@kernel.org>, "Miguel
+ Ojeda" <ojeda@kernel.org>, "Alex Gaynor" <alex.gaynor@gmail.com>, "Boqun
+ Feng" <boqun.feng@gmail.com>, "Gary Guo" <gary@garyguo.net>,
+ =?utf-8?q?Bj=C3=B6rn_Roy_Baron?= <bjorn3_gh@protonmail.com>, "Benno Lossin"
+ <lossin@kernel.org>, "Andreas Hindborg" <a.hindborg@kernel.org>, "Alice
+ Ryhl" <aliceryhl@google.com>, "Trevor Gross" <tmgross@umich.edu>,
+ <nouveau@lists.freedesktop.org>, <linux-pci@vger.kernel.org>,
+ <rust-for-linux@vger.kernel.org>, "LKML" <linux-kernel@vger.kernel.org>,
+ "Elle Rhumsaa" <elle@weathered-steel.dev>
+References: <20250829223632.144030-1-jhubbard@nvidia.com>
+In-Reply-To: <20250829223632.144030-1-jhubbard@nvidia.com>
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -78,112 +67,53 @@ List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-Hi Lyude, thanks a lot for working on this! :)
+On Sat Aug 30, 2025 at 12:36 AM CEST, John Hubbard wrote:
+> Changes since v7:
+>
+> * Applied changes from Danilo's and Alex's and reviews (thanks!):
+>     * Removed a blank line, one each, from the Class and Vendor macros.
+>     * Moved example code location from struct Vendor, to vendor_id(),
+>       and introduced it in a later commit, in its final form.
+>     * Applied Alex's Reviewed-by tag to the series.
 
-> On 29 Aug 2025, at 19:35, Lyude Paul <lyude@redhat.com> wrote:
->=20
-> Now that my rust skills have been honed, I noticed that there's a lot =
-of
-> generics in our gem bindings that don't actually need to be here. =
-Currently
-> the hierarchy of traits in our gem bindings looks like this:
->=20
->  * Drivers implement:
->    * BaseDriverObject<T: DriverObject> (has the callbacks)
->    * DriverObject (has the drm::Driver type)
->  * Crate implements:
->    * IntoGEMObject for Object<T> where T: DriverObject
->      Handles conversion to/from raw object pointers
->    * BaseObject for T where T: IntoGEMObject
->      Provides methods common to all gem interfaces
->=20
->  Also of note, this leaves us with two different drm::Driver =
-associated
->  types:
->    * DriverObject::Driver
->    * IntoGEMObject::Driver
->=20
-> I'm not entirely sure of the original intent here unfortunately (if =
-anyone
-> is, please let me know!), but my guess is that the idea would be that =
-some
-> objects can implement IntoGEMObject using a different ::Driver than
-> DriverObject - presumably to enable the usage of gem objects from =
-different
-> drivers. A reasonable usecase of course.
->=20
-> However - if I'm not mistaken, I don't think that this is actually how
-> things would go in practice. Driver implementations are of course
-> implemented by their associated drivers, and generally drivers are not
-> linked to each-other when building the kernel. Which is to say that =
-even in
-> a situation where we would theoretically deal with gem objects from =
-another
-> driver, we still wouldn't have access to its drm::driver::Driver
-> implementation. It's more likely we would simply want a variant of gem
-> objects in such a situation that have no association with a
-> drm::driver::Driver type.
->=20
-> Taking that into consideration, we can assume the following:
-> * Anything that implements BaseDriverObject will implement =
-DriverObject
->  In other words, all BaseDriverObjects indirectly have an associated
->  ::Driver type - so the two traits can be combined into one with no
->  generics.
-> * Not everything that implements IntoGEMObject will have an associated
->  ::Driver, and that's OK.
->=20
-> And with this, we now can do quite a bit of cleanup with the use of
-> generics here. As such, this commit:
->=20
-> * Removes the generics on BaseDriverObject
-> * Moves DriverObject::Driver into BaseDriverObject
-> * Removes DriverObject
-> * Removes IntoGEMObject::Driver
-> * Add AllocImpl::Driver, which we can use as a binding to figure out =
-the
->  correct File type for BaseObject
->=20
-> Leaving us with a simpler trait hierarchy that now looks like this:
->=20
->  * Drivers implement: BaseDriverObject
->  * Crate implements:
->    * IntoGEMObject for Object<T> where T: DriverObject
->    * BaseObject for T where T: IntoGEMObject
->=20
-> Which makes the code a lot easier to understand and build on :).
->=20
-> Signed-off-by: Lyude Paul <lyude@redhat.com>
->=20
-> ---
-> V2:
-> * Don't refer to Object<T> in callbacks, as this would result in =
-drivers
->  getting the wrong gem object type for shmem gem objects once we add
->  support for those. Instead, we'll just add a type alias to clean this
->  part up.
-> V3:
-> * Fix nova compilation
-> * Also, add an associated driver type to AllocImpl - as we still need =
-the
->  current driver accessible from BaseObject so that we can use the =
-driver's
->  various associated types, like File
-> V4:
+I think you forgot to align Debug and Display, i.e. Debug still prints deci=
+mal
+values.
 
-?
+Is this intentional? If not, no worries, I can fix it up on apply (which a =
+few
+minor doc-comment nits):
 
-This is v3. Can you clarify this before we go further? :)
+diff --git a/rust/kernel/pci/id.rs b/rust/kernel/pci/id.rs
+index f6ce8f8a2a4d..f534133aed3d 100644
+--- a/rust/kernel/pci/id.rs
++++ b/rust/kernel/pci/id.rs
+@@ -26,7 +26,7 @@
+ ///     Ok(())
+ /// }
+ /// ```
+-#[derive(Debug, Clone, Copy, PartialEq, Eq)]
++#[derive(Clone, Copy, PartialEq, Eq)]
+ #[repr(transparent)]
+ pub struct Class(u32);
 
-> * Add missing Object =3D Self constraint to type bounds for =
-create_handle,
->  lookup_handle. I forgot that if drivers can have private gem objects =
-with
->  a different data layout, we can only guarantee gem objects with =
-handles
->  are of the same gem object type as the main one in use by the driver.
->=20
-> Signed-off-by: Lyude Paul <lyude@redhat.com>
+@@ -81,12 +81,18 @@ const fn to_24bit_class(val: u32) -> u32 {
+     }
+ }
 
-=E2=80=94 Daniel
+-impl fmt::Display for Class {
++impl fmt::Debug for Class {
+     fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
+         write!(f, "0x{:06x}", self.0)
+     }
+ }
 
++impl fmt::Display for Class {
++    fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
++        <Self as fmt::Debug>::fmt(self, f)
++    }
++}
++
+ impl ClassMask {
+     /// Get the raw mask value.
+     #[inline]
