@@ -2,75 +2,167 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id 26B87B3EDB5
-	for <lists+nouveau@lfdr.de>; Mon,  1 Sep 2025 20:18:11 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 5BD8CB3EE07
+	for <lists+nouveau@lfdr.de>; Mon,  1 Sep 2025 20:45:04 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id D5FBA10E4F7;
-	Mon,  1 Sep 2025 18:18:08 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 29B7C10E170;
+	Mon,  1 Sep 2025 18:45:02 +0000 (UTC)
 Authentication-Results: gabe.freedesktop.org;
-	dkim=pass (2048-bit key; unprotected) header.d=darkrefraction-com.20230601.gappssmtp.com header.i=@darkrefraction-com.20230601.gappssmtp.com header.b="0VI2YUvC";
+	dkim=pass (2048-bit key; unprotected) header.d=Nvidia.com header.i=@Nvidia.com header.b="L2BJvXJg";
 	dkim-atps=neutral
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from mail-ed1-f49.google.com (mail-ed1-f49.google.com
- [209.85.208.49])
- by gabe.freedesktop.org (Postfix) with ESMTPS id E6AB610E4F7
- for <nouveau@lists.freedesktop.org>; Mon,  1 Sep 2025 18:18:06 +0000 (UTC)
-Received: by mail-ed1-f49.google.com with SMTP id
- 4fb4d7f45d1cf-61ce4c32a36so7246250a12.3
- for <nouveau@lists.freedesktop.org>; Mon, 01 Sep 2025 11:18:06 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=darkrefraction-com.20230601.gappssmtp.com; s=20230601; t=1756750685;
- x=1757355485; darn=lists.freedesktop.org; 
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=BMr1Irr8Ve+sqp2XbKFZPkDcuphJii2oL1w8Y4yVsWE=;
- b=0VI2YUvCgYfomVccNzdxlvPeNk06opupJr7l1Awc3godY0CVZLL7CrAqh/b2RjnDMT
- 5sCziRqfsNtBLtUIOYatPTDgOr2C0jIblCa8Vu1hXFADZ3jpt0D9BmrxnYXll6lUOqXI
- 6p2CZlMP6+xchDOr7fQDEj1ALXt0ueJ/U2E6/qvpC8iXGFuHjZZr4/tJsaqQo89Ydk1g
- ePbjc/Kr5SKwntiuJJ3k21ErU4m1mYMHJx8rMOMyj1GNaXDQkCo3umsOACyNpmemPICo
- pd4MxpQJA9NK2VbNzUGVMezLhLDVT/Dar9jNRP+txCdEExAXtGtGtYkpAnvBh0XD/JIH
- OE2w==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1756750685; x=1757355485;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=BMr1Irr8Ve+sqp2XbKFZPkDcuphJii2oL1w8Y4yVsWE=;
- b=bVkgRBpMKTt0qGSeLJQvwbdtp2SePTy3F87xdqPjIR9qSintV6u4++8niesQmMBDIH
- 665/NvlMdw677ahKCIwlZXOMpxqk8tQj281G/GAZjpRLE0fCnUAHixz6ZLV9XhK6c40Y
- eE9b2drnYNgbHDQC3f9ostekOrzKQP1ojrscnr6AvKjmE26o2Y93Tf9coH/5JbIpIPSu
- 9eDZ2BDYjwca7c47XyxTc8Wty9JXD+G1e78SVOyU6w1A0vdNI/JjsGaifoT6fcH1vzS/
- UAWlppvvzEMcyULTulOpDqqtVhgHe/9uzQh34g44JW4+c6qu2uRd48Iytr2k/wldbyzX
- YHLQ==
-X-Forwarded-Encrypted: i=1;
- AJvYcCXZ2LNZCXhGkK6W4IfiHtiPAUQlHXFs5RnY11azGcdDwbjicuRX/QKpNwF5oYZCVUqBXqF1THZy@lists.freedesktop.org
-X-Gm-Message-State: AOJu0YzeDs9F24M5LjWyqWBBiBNPDFowK8mIYByJdEWqDybluqHfdXs/
- kj/5EhZSA0ePp0ZWEnTwB6VuhTD0SsjFQlNKVZdce5y/ikqqyTxfOldmaFCZky9pjhd/H7PJIHN
- hEvvIqRPPEyhfhEqbBaaFqjdgqESremYDbv9pphgG0g==
-X-Gm-Gg: ASbGncsLghSaZ0LYCrXE3O6u6gOBKnnztQvngrdepTO7/j9KLUrzc1WRYoHYVT1TqHt
- YnToE+2GwSFMzpnDrScFidPG+B47wRkDE4EGUV4kKAFDPRTYNHljH48JctBniM6QY1p6mzvuS3p
- f1wdhu4Jhh0Og2tghxZBe0jX+N4wWL9B9R7n44R1syi4CLjTwgFC8WiBCRBxKYgHpL20rSmaAwN
- dYfkp/6WrP1wncl
-X-Google-Smtp-Source: AGHT+IGSj0uvd/fuKyQZnOG6Oz1OMdhUsP21aDFjYL0iUiajXSzgph8BYYUjp0jRidp5MrMkbyA+x12DMTgjCvnTkdE=
-X-Received: by 2002:a05:6402:26c3:b0:61e:ae59:5f02 with SMTP id
- 4fb4d7f45d1cf-61eae59726emr1428541a12.31.1756750684998; Mon, 01 Sep 2025
- 11:18:04 -0700 (PDT)
+Received: from NAM10-BN7-obe.outbound.protection.outlook.com
+ (mail-bn7nam10on2063.outbound.protection.outlook.com [40.107.92.63])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 4488010E170
+ for <nouveau@lists.freedesktop.org>; Mon,  1 Sep 2025 18:45:01 +0000 (UTC)
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=g+RL9BaDqqjp8vP9h6RpJlFy4b1F53HhJ4n0Q4GizL3ifH881nOv1KpUKgl6tgwaeotuSh75YdfwmLJeOHtllQQQJAX5Y8ebC2XrkAnSRuykCJVPhONPF6Rvo2doOOY4DyN7Lkzkf9X1C+s3Npt7uOcN3THL1S04gF1+4fFZsKo3UMHjwr4GSKayHh8jAEIkHEiV5EPolQApWZ0JoVa1dKM2S2NofrO7ml1+04EqPSsq0uVlEnseF4HBa2lGWShmzL1OlUKFXVKJ3AQqxw3NLHl+Qo0ILJAW1qqq0pU9wEk8hII2risXCWtpu1pcfbDVw0vwS++1TxulmBd7+wyNog==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=VA8K03HvpGM5Nxjlm4SmICOMAd6iAN9WR+HNhdh2LyU=;
+ b=rvvOa+QwpJopJjQhvyJtUb35u/waqcxX73I5sy8h6btPnS05ycp/+AG/9FaoNiYpbEZaaoVe9EPOH6HMpO+CPFlHZoLLuiLbe+3lT5TqQB4bcf5b+c7m4vUedNERaf8iem0X22ZBTs+hK6KTEv4Crj+YQ2UgA9oQE/5Jwuj+b4KwZ4PQv7Q6cdP3uIzKSzRyvTQF/4dewazPOnRXP2NlAH59CzdgjxNJ04WA3+SUlvgplQzWEWtUCWyhEQqT3H40VKTpgoE2guXxtuFrBI/kGCA3kzX33iOtKLCJ6aGkycNvZEY46YTFNln5zjUFZsMT9EzhYK2RNsfG/z2X3c1Fog==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=nvidia.com; dmarc=pass action=none header.from=nvidia.com;
+ dkim=pass header.d=nvidia.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=Nvidia.com;
+ s=selector2;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=VA8K03HvpGM5Nxjlm4SmICOMAd6iAN9WR+HNhdh2LyU=;
+ b=L2BJvXJgB9qAUcRR9Z8UERlepT4QzHdWzNaobKM4Dbrk2cFltmTPNvN3QuZ224xr2BOQy16mbkMBCUJWKDGFKGeRGruHrEjpkM1wEWWHGBsyGRLuD6MtgsNfwxhmZBpLUQRcGHVLqWVipTT3ZRxAZrHny9/aSU9YcxrH7DFpatZtIvs7uLkkMSczh3eJO11BDuSq781qZJxjpbGvejtBLvvfY3OgojPksuUm9hAE6RC4gd11XI6dOlY1JLNbiBrDeP2xCeWifuI2ZCWMpkCK8w5c1x5wUD3k/c5Q/nNlx2ARjdw7iwiuTSrH1DNTg8ssq8vtjx0PEDqR/tyKPHfMKA==
+Authentication-Results: dkim=none (message not signed)
+ header.d=none;dmarc=none action=none header.from=nvidia.com;
+Received: from LV2PR12MB5968.namprd12.prod.outlook.com (2603:10b6:408:14f::7)
+ by IA0PR12MB7676.namprd12.prod.outlook.com (2603:10b6:208:432::5)
+ with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9073.26; Mon, 1 Sep
+ 2025 18:44:55 +0000
+Received: from LV2PR12MB5968.namprd12.prod.outlook.com
+ ([fe80::e6dd:1206:6677:f9c4]) by LV2PR12MB5968.namprd12.prod.outlook.com
+ ([fe80::e6dd:1206:6677:f9c4%6]) with mapi id 15.20.9073.026; Mon, 1 Sep 2025
+ 18:44:53 +0000
+Message-ID: <c0cb3015-a01f-4148-9fca-1d42464376b5@nvidia.com>
+Date: Mon, 1 Sep 2025 08:44:48 -1000
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v8 0/6] rust, nova-core: PCI Class, Vendor support
+To: Danilo Krummrich <dakr@kernel.org>
+Cc: Alexandre Courbot <acourbot@nvidia.com>,
+ Joel Fernandes <joelagnelf@nvidia.com>, Timur Tabi <ttabi@nvidia.com>,
+ Alistair Popple <apopple@nvidia.com>, David Airlie <airlied@gmail.com>,
+ Simona Vetter <simona@ffwll.ch>, Bjorn Helgaas <bhelgaas@google.com>,
+ =?UTF-8?Q?Krzysztof_Wilczy=C5=84ski?= <kwilczynski@kernel.org>,
+ Miguel Ojeda <ojeda@kernel.org>, Alex Gaynor <alex.gaynor@gmail.com>,
+ Boqun Feng <boqun.feng@gmail.com>, Gary Guo <gary@garyguo.net>,
+ =?UTF-8?Q?Bj=C3=B6rn_Roy_Baron?= <bjorn3_gh@protonmail.com>,
+ Benno Lossin <lossin@kernel.org>, Andreas Hindborg <a.hindborg@kernel.org>,
+ Alice Ryhl <aliceryhl@google.com>, Trevor Gross <tmgross@umich.edu>,
+ nouveau@lists.freedesktop.org, linux-pci@vger.kernel.org,
+ rust-for-linux@vger.kernel.org, LKML <linux-kernel@vger.kernel.org>,
+ Elle Rhumsaa <elle@weathered-steel.dev>
+References: <20250829223632.144030-1-jhubbard@nvidia.com>
+ <DCHNPZ8G5FP8.3VTQ0RQMQ6NT@kernel.org>
+Content-Language: en-US
+From: John Hubbard <jhubbard@nvidia.com>
+In-Reply-To: <DCHNPZ8G5FP8.3VTQ0RQMQ6NT@kernel.org>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
+X-ClientProxiedBy: MW4PR04CA0111.namprd04.prod.outlook.com
+ (2603:10b6:303:83::26) To LV2PR12MB5968.namprd12.prod.outlook.com
+ (2603:10b6:408:14f::7)
 MIME-Version: 1.0
-References: <20250829021633.1674524-1-airlied@gmail.com>
-In-Reply-To: <20250829021633.1674524-1-airlied@gmail.com>
-From: M Henning <mhenning@darkrefraction.com>
-Date: Mon, 1 Sep 2025 14:17:38 -0400
-X-Gm-Features: Ac12FXx0_2IFUgdQ3F-_qtwuFIoMxlSu7gYpq_ItkcmqwvAv7tCMktRTBaogiCU
-Message-ID: <CAAgWFh0QgCe3MMExMkJqdRBj5NqDrJ7zq6eaQ-Yszm2xFaqRpQ@mail.gmail.com>
-Subject: Re: [PATCH 1/2] nouveau: fix disabling the nonstall irq due to storm
- code. (v2)
-To: Dave Airlie <airlied@gmail.com>
-Cc: dri-devel@lists.freedesktop.org, nouveau@lists.freedesktop.org, 
- dakr@kernel.org
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: LV2PR12MB5968:EE_|IA0PR12MB7676:EE_
+X-MS-Office365-Filtering-Correlation-Id: 31120a9d-e107-445d-7234-08dde987a3fc
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: BCL:0;
+ ARA:13230040|7416014|1800799024|376014|10070799003|366016; 
+X-Microsoft-Antispam-Message-Info: =?utf-8?B?TnhVYXBtNWtKZUVIbzN1WXlVWGt3S3l5cGN6NlBiTTVwMlo1TUlUM2IyTkpz?=
+ =?utf-8?B?WC80Skg2TXFXa1dBeXRYWnlTZy9nN2c1dWxuSng1cnB1TmxOSkhxS0lMY2dn?=
+ =?utf-8?B?cUdtcmhvZzB2Ulhtek1ITVZ6ZU5zamhnRGhoSFhhbnJVWkhDTWlUL1NKQU1N?=
+ =?utf-8?B?ZXVJbzhNVWFCU29YS2hqbjFIbElMOEk4Yjhmb3Zua3FRZVROa0pkbjdXN1Iz?=
+ =?utf-8?B?RHowamxxQzMrcUlRcnN3M2Rub2RSMkpJYjZaZFpBZ01aNThaT3VDSVZIL3ov?=
+ =?utf-8?B?dGpJNGZaM0cxaXoxb2lqdEFzdU5CWnh6dUYvRXJqVVhVaHpnTlZnTzk3UTNZ?=
+ =?utf-8?B?UkN4eXg5SG1HaDUvNDIxZ2h0aTFNZWsyZDcwNU1jUnhlLzE5QWIvYWFlUVIz?=
+ =?utf-8?B?UmhzNWFsRDVRZW1MV0pZNnB6RDBMaTR0ZFhlcXFYOEJKVENJVW1ISXIwcXhs?=
+ =?utf-8?B?blpoZDVOY0FWVVY5d1hoRzVhMFU1Mkl0eWVlR28zVXpzRmorMldNdURYbnN0?=
+ =?utf-8?B?aXBidFNBVkdac1FSejE0MXlsdXBsTXFDQkNHNkZaSExNNDVaWkJGWlJYYkNt?=
+ =?utf-8?B?anVjb3lvbXJXR1JlMHc5TDZvcStQNktOU3lna3lCTGE0dERuaFBZUGlQd3BG?=
+ =?utf-8?B?a3N1TlhQc0hQak9qaXhPYThMYStmb0YySWpMNGVpMUpYbzFlbUJZZno4YnNo?=
+ =?utf-8?B?MUpJN2s4ekt4SEdrd3V5MVY3YWVySkhZZHFTU3NpbWZCU0pyK0FFbVJjUnda?=
+ =?utf-8?B?NHVDZmNLcTBoZ0laTUpkaytxUDVuNUk1cC9NOE9jU2ExN09KVjJ2amlYWVRY?=
+ =?utf-8?B?cWZhVjlrMm9tVWZMekIyQ2RZKzl5Q1prbkQzZExvS2VHUVhMUWc0bHFXM2x2?=
+ =?utf-8?B?eFZ4QlhkSGxmNTdFYkFWTWpIcTJnMnFNYUkzWkVnQVpCRkFldWxWaXB0V0hm?=
+ =?utf-8?B?TllzdmpOcUozMXlyMEtFeEppQzVyUkN4SUFXQkVGRDFucVJ6YmtyTmdubVRu?=
+ =?utf-8?B?TmtZK1hUSmY1cFJpRnVWN1VFanJOS3ArRFNGY09TdDRETTMwT3pmTGt1NVE1?=
+ =?utf-8?B?U2FHWmx2SERQT0YyeURwUjFpbXdjVjNmYXdtN2U2TEJDdTlKMHpXazR1eW4r?=
+ =?utf-8?B?WThnL09pcGhWV09BM0F4WGs3L3JRcStrU0Y3QStPV3FweUJNclRJdDNQUlZ5?=
+ =?utf-8?B?TXpJWFNXK1MxR0Y5S0Q5Wml0ZVIrLzQrVUMyTEdvb3lGQ3dyOEtEZ3Ivc3lT?=
+ =?utf-8?B?ZkpIek52bkFRWjhEbDEyL2I1NE0xalVPZkFxbEdMY1FET2NWdDFGemNFSld5?=
+ =?utf-8?B?aXZXK2d4aGdSWkVLVmlJeHBUYW8xUmVVK2Z6VGRmY3ZhbFJJcUNtRW1IUEJi?=
+ =?utf-8?B?OWRCT1E5emdSYlRXamFUTlJIU0hwRHZyYmhSSDBFTnY1aDMvck05SFJxYTZr?=
+ =?utf-8?B?UFpYRE5BNDlRM21WZnI5bVJ2Z0ZjREg3aUc5R2ZpOWxSWU9EMmxXbFFycSs0?=
+ =?utf-8?B?NDg2ak5QSDhRWHR3NE1LTS9iT2srRkNlOTJNMU9VZDlDV0h1bnJHTkdHMzQ3?=
+ =?utf-8?B?Ti9IQlZjSy9oR0o1U3F4ZHZVbU52LzBSYkpuRkR1Yi9SMWpwTzZNWDFrSUdW?=
+ =?utf-8?B?Y095U0ZGUVRRMHhGZ25UMzQwdCtNYVVheTJmTWM1UkxYb1g2SDdUYmNGMkMr?=
+ =?utf-8?B?YXZ4RXJHUFZEWUxDS0FsbklycytOTTZJVnp2OEtTL0xLUExqNmI5bUFzVkVo?=
+ =?utf-8?B?Q0d5SXJCbkw1Z0JwODhjSXloYUpiL1ZrejFCQ0dtMWlqZlRiNFZQWWVSblMy?=
+ =?utf-8?B?MFIvRXc4dGZJMGJzOVNkVFd4SXdIbmY3OFNPTVlpNVdnWGIyTVFkUnI1eEdl?=
+ =?utf-8?B?VkhpcEpXWmJ5TnFFd3B3cTlaR2JOMjllNEREZ05jLytsSjdQM2F5b1IyUVpY?=
+ =?utf-8?Q?z6Y4rQH8eT8=3D?=
+X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
+ IPV:NLI; SFV:NSPM; H:LV2PR12MB5968.namprd12.prod.outlook.com; PTR:; CAT:NONE;
+ SFS:(13230040)(7416014)(1800799024)(376014)(10070799003)(366016); DIR:OUT;
+ SFP:1101; 
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?RlJySDFXcjM0TjU2UlNWUElDQWI5M0Uwdk9BenhZMnVXNFFKVEFsUVRDa3Vp?=
+ =?utf-8?B?ZklhSUVOK215MXR0bVJuaFNNZkpXRnZuNXpVL0ZqTEFVWmdjNllHVVFVV1VI?=
+ =?utf-8?B?ZTZiZVV1NDFoUXFNa3pMcFpWZkZoT1NyemdtQ01wTzd6V1pXY1U3THBhck9E?=
+ =?utf-8?B?eEVsQWNPQjEyazN2WjkxMzVSSG9rWmlIZ1pqNDFRQm03WWovVDhkdVRnUm4x?=
+ =?utf-8?B?OVN2TnNSUnJZV0FLa1Rya1pEdGNuVHdDbk1BK2U0bkdDY1hZOGV0WXlDaGpL?=
+ =?utf-8?B?ZFN0T3FsZnlGMkpYemtJekswMmxXUHVNZTgwajhWMDZUazNneTVsWUZBUDZV?=
+ =?utf-8?B?Z2ZYbGZCdWlrdnM0S1dUUHR5TTlPTGtIUHhYbW85V3RnN2RBOTd6K0gwdDZp?=
+ =?utf-8?B?L2t2RWNlTkJaRnRkSUNNUWNYQ2s2dE5OcWpRaUdiTm1QdXVSK0I4Skc4QTFW?=
+ =?utf-8?B?V1p1QTNucThLdHM3L045MjJ5bFNyeitDem5sdEkyKzNrdEFBL3BWRmxMZDhk?=
+ =?utf-8?B?cjNmakFESWU2ZXh2TG5JZXpzaDhJOFZyVnI5Qi9lejlWUFhWMWkraWhNeHdU?=
+ =?utf-8?B?UU5OU3I4K0JKWUNmY29rVEk0S3lQVzhzZzRYNjcrVXo1K2tFSm00ME9yL3JV?=
+ =?utf-8?B?WjREQWFsMWlCdm5BT09FQ2wvSmxwTkZWZkNpU3hCL0h3OUtsNzdoUDFWRytR?=
+ =?utf-8?B?U3BnUmp0bTQ5a09wZ2VBNXFEZktNSW9hY1dGbURNSFkvRTBlQnVaNVE1OUNZ?=
+ =?utf-8?B?T2NVSWUzNk5YdjJ0aDcyR2phT0RUUzMvQStPb1NpREJHenc2YUcvY21NY3Nw?=
+ =?utf-8?B?QmtNdGdnMzIzUTEwcTlGblpuciszcDlreWJ3b1NBUDkvN1hmNHpnbW9CMWtn?=
+ =?utf-8?B?Wmh2R3kvN29ocVdSZkM1d04ycnZqN0d3bmpsQk5qVzU4d1NZLytDaHN6Rlox?=
+ =?utf-8?B?Yk1PQjhzcUxhZVVZKzByYzNoOFFpVjZ2NnJMNC9MNWx2YjVnbEVzMWFuMGtO?=
+ =?utf-8?B?VVdYQUFONFlydUZnb2VwZnplRTdiOU43eCs0ZFRZSUM4bjQrMllMdmFpK1JK?=
+ =?utf-8?B?aXIrUTZ6cEtLbVQ5MXIvaFVwY1lRczY5U0VUUnFMeUlBaFFxcFZrUXRON2pq?=
+ =?utf-8?B?aWN6dHpKUXhBSkUxQW95Y2lqNUNaVmgzVTZnTklyRnFKUE56MVVLYTY5L0xh?=
+ =?utf-8?B?WVRyQThyekEwRVBVUFVKTjhmN3JKSzJSaGd5WDVBczhyZmVvbGVLRE9reVhs?=
+ =?utf-8?B?WXFXYWV0aUcyL1QxODFqdGFtUGxjVHdBNlNLMW12aGZkaFBwTEpHNzNqV0pS?=
+ =?utf-8?B?S0hLTVBxaE5kbFptQktQdkZ1Uml4eFM1YzFrTHEwdjJkenZqM0NZYk0vWHFs?=
+ =?utf-8?B?Vk1sNlhwQXNMN2FsMGprTC9RYXE5ZFJDVVZ4M3RWcHFuUkxOVUg3TEZObFE0?=
+ =?utf-8?B?Mk1HZk5hWlA0ZmhOVjlkbTdoOFF3WTNtL2FmZWNydEhCK0NaRkp5ZzNTU1h4?=
+ =?utf-8?B?U1RMZmgzbVFwSWp5LzBYQTRYWUJpaUpHa3dSb0hyZUJac3NxaTI0OHlJOXlp?=
+ =?utf-8?B?R1dXL2phQSt5ZGkrRnNabnJSWVJPZHpDMjNNVnB2VU9QKy9WazRZdkdQYVpK?=
+ =?utf-8?B?Zk9DSUdxUU83MFlUd01oOVYzUVRld3VCT1MxaDB4Q1I1VFdsZy9CUGdVcVdh?=
+ =?utf-8?B?TVdBOHJYNERaOGMrTXBVUVQxZ3lxK3l6QWpubFlGOFphTEp5cnFibmw0cU1x?=
+ =?utf-8?B?Z3ovZHNIY3lXRHFLT2JMTHNaTS9zalh3QkM4SW44cE1vOTFVWXNrdlFWRlc1?=
+ =?utf-8?B?SklkVERodzM4L2VXV0lrV0psK1NQcHFLbWRTUjQ3L2gyU1FqZ0tGN1ZzaXFU?=
+ =?utf-8?B?bmRTMEV4VElyTUFNTDJBZU9oaFRiTFd5dWRtVkkxTzYrRW1DYVJrL0NSVjFX?=
+ =?utf-8?B?U0VNSWNUL3lEOWNPOTBFSkZsSURiUlpQbzNDMWVZVStsNDlXSFJTOElpc1Zn?=
+ =?utf-8?B?TmZ2a0tiSmo4bFB1ZTZNY3dHVFlGV0d4aXBNanYvcFF3dDZXTzVPWi82WEd4?=
+ =?utf-8?B?OWd0VTF6UnBEYnJ4MUY0MzFCNGh2a1h3dHM4dXRHbnBkaGdWUWlWeFhaVzlj?=
+ =?utf-8?B?aGRaMVFIUFVsTlNMRjdrR2xpYncraVpLdFdGTzFQQlNKQlNmYzc1N1NLWDFB?=
+ =?utf-8?Q?cDResdf7ettiWmLC4XmNYtmpCsmWKppSFX6IVk4l8OxK?=
+X-OriginatorOrg: Nvidia.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: 31120a9d-e107-445d-7234-08dde987a3fc
+X-MS-Exchange-CrossTenant-AuthSource: LV2PR12MB5968.namprd12.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 01 Sep 2025 18:44:53.8815 (UTC)
+X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
+X-MS-Exchange-CrossTenant-Id: 43083d15-7273-40c1-b7db-39efd9ccc17a
+X-MS-Exchange-CrossTenant-MailboxType: HOSTED
+X-MS-Exchange-CrossTenant-UserPrincipalName: nhPLrxcb9y/jEylFHrtfwnCcEdl0rE0S681SP/TOZrqbVzFb5LjM6t4oSYwtDBmmjjKpoZRg80HWWGu17DnzhQ==
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: IA0PR12MB7676
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -85,169 +177,60 @@ List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-On Thu, Aug 28, 2025 at 10:17=E2=80=AFPM Dave Airlie <airlied@gmail.com> wr=
-ote:
->
-> From: Dave Airlie <airlied@redhat.com>
->
-> Nouveau has code that when it gets an IRQ with no allowed handler
-> it disables it to avoid storms.
->
-> However with nonstall interrupts, we often disable them from
-> the drm driver, but still request their emission via the push submission.
->
-> Just don't disable nonstall irqs ever in normal operation, the
-> event handling code will filter them out, and the driver will
-> just enable/disable them at load time.
->
-> This fixes timeouts we've been seeing on/off for a long time,
-> but they became a lot more noticable on Blackwell.
->
-> This doesn't fix all of them, there is a subsequent fence emission
-> fix to fix the last few.
->
-> Fixes: 3ebd64aa3c4f ("drm/nouveau/intr: support multiple trees, and expli=
-cit interfaces")
-> Cc: stable@vger.kernel.org
-> Signed-off-by: Dave Airlie <airlied@redhat.com>
->
-> ---
-> v2: add missing ga102.
-> ---
->  .../gpu/drm/nouveau/nvkm/engine/fifo/base.c   |  2 ++
->  .../gpu/drm/nouveau/nvkm/engine/fifo/ga100.c  | 22 ++++++++++++-------
->  .../gpu/drm/nouveau/nvkm/engine/fifo/ga102.c  |  1 +
->  .../gpu/drm/nouveau/nvkm/engine/fifo/priv.h   |  2 ++
->  .../nouveau/nvkm/subdev/gsp/rm/r535/fifo.c    |  2 +-
->  5 files changed, 20 insertions(+), 9 deletions(-)
->
-> diff --git a/drivers/gpu/drm/nouveau/nvkm/engine/fifo/base.c b/drivers/gp=
-u/drm/nouveau/nvkm/engine/fifo/base.c
-> index fdffa0391b31..6fd4e60634fb 100644
-> --- a/drivers/gpu/drm/nouveau/nvkm/engine/fifo/base.c
-> +++ b/drivers/gpu/drm/nouveau/nvkm/engine/fifo/base.c
-> @@ -350,6 +350,8 @@ nvkm_fifo_dtor(struct nvkm_engine *engine)
->         nvkm_chid_unref(&fifo->chid);
->
->         nvkm_event_fini(&fifo->nonstall.event);
-> +       if (fifo->func->nonstall_dtor)
-> +               fifo->func->nonstall_dtor(fifo);
->         mutex_destroy(&fifo->mutex);
->
->         if (fifo->func->dtor)
-> diff --git a/drivers/gpu/drm/nouveau/nvkm/engine/fifo/ga100.c b/drivers/g=
-pu/drm/nouveau/nvkm/engine/fifo/ga100.c
-> index e74493a4569e..81beae473122 100644
-> --- a/drivers/gpu/drm/nouveau/nvkm/engine/fifo/ga100.c
-> +++ b/drivers/gpu/drm/nouveau/nvkm/engine/fifo/ga100.c
-> @@ -517,19 +517,11 @@ ga100_fifo_nonstall_intr(struct nvkm_inth *inth)
->  static void
->  ga100_fifo_nonstall_block(struct nvkm_event *event, int type, int index)
->  {
-> -       struct nvkm_fifo *fifo =3D container_of(event, typeof(*fifo), non=
-stall.event);
-> -       struct nvkm_runl *runl =3D nvkm_runl_get(fifo, index, 0);
-> -
-> -       nvkm_inth_block(&runl->nonstall.inth);
->  }
->
->  static void
->  ga100_fifo_nonstall_allow(struct nvkm_event *event, int type, int index)
->  {
-> -       struct nvkm_fifo *fifo =3D container_of(event, typeof(*fifo), non=
-stall.event);
-> -       struct nvkm_runl *runl =3D nvkm_runl_get(fifo, index, 0);
-> -
-> -       nvkm_inth_allow(&runl->nonstall.inth);
->  }
->
->  const struct nvkm_event_func
-> @@ -564,12 +556,25 @@ ga100_fifo_nonstall_ctor(struct nvkm_fifo *fifo)
->                 if (ret)
->                         return ret;
->
-> +               nvkm_inth_allow(&runl->nonstall.inth);
-> +
->                 nr =3D max(nr, runl->id + 1);
->         }
->
->         return nr;
->  }
->
-> +void
-> +ga100_fifo_nonstall_dtor(struct nvkm_fifo *fifo)
-> +{
-> +       struct nvkm_runl *runl;
-> +       nvkm_runl_foreach(runl, fifo) {
-> +               if (runl->nonstall.vector < 0)
-> +                       continue;
-> +               nvkm_inth_block(&runl->nonstall.inth);
-> +       }
+On 9/1/25 7:58 AM, Danilo Krummrich wrote:
+> On Sat Aug 30, 2025 at 12:36 AM CEST, John Hubbard wrote:
+>> Changes since v7:
+>>
+>> * Applied changes from Danilo's and Alex's and reviews (thanks!):
+>>      * Removed a blank line, one each, from the Class and Vendor macros.
+>>      * Moved example code location from struct Vendor, to vendor_id(),
+>>        and introduced it in a later commit, in its final form.
+>>      * Applied Alex's Reviewed-by tag to the series.
+> 
+> I think you forgot to align Debug and Display, i.e. Debug still prints decimal
+> values.
+> 
+> Is this intentional? If not, no worries, I can fix it up on apply (which a few
+> minor doc-comment nits):
+
+Yes, I missed that one. Fixup on apply would be great, yes.
+
+
+thanks,
+John Hubbard
+
+> 
+> diff --git a/rust/kernel/pci/id.rs b/rust/kernel/pci/id.rs
+> index f6ce8f8a2a4d..f534133aed3d 100644
+> --- a/rust/kernel/pci/id.rs
+> +++ b/rust/kernel/pci/id.rs
+> @@ -26,7 +26,7 @@
+>   ///     Ok(())
+>   /// }
+>   /// ```
+> -#[derive(Debug, Clone, Copy, PartialEq, Eq)]
+> +#[derive(Clone, Copy, PartialEq, Eq)]
+>   #[repr(transparent)]
+>   pub struct Class(u32);
+> 
+> @@ -81,12 +81,18 @@ const fn to_24bit_class(val: u32) -> u32 {
+>       }
+>   }
+> 
+> -impl fmt::Display for Class {
+> +impl fmt::Debug for Class {
+>       fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
+>           write!(f, "0x{:06x}", self.0)
+>       }
+>   }
+> 
+> +impl fmt::Display for Class {
+> +    fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
+> +        <Self as fmt::Debug>::fmt(self, f)
+> +    }
 > +}
 > +
->  int
->  ga100_fifo_runl_ctor(struct nvkm_fifo *fifo)
->  {
-> @@ -599,6 +604,7 @@ ga100_fifo =3D {
->         .runl_ctor =3D ga100_fifo_runl_ctor,
->         .mmu_fault =3D &tu102_fifo_mmu_fault,
->         .nonstall_ctor =3D ga100_fifo_nonstall_ctor,
-> +       .nonstall_dtor =3D ga100_fifo_nonstall_dtor,
->         .nonstall =3D &ga100_fifo_nonstall,
->         .runl =3D &ga100_runl,
->         .runq =3D &ga100_runq,
-> diff --git a/drivers/gpu/drm/nouveau/nvkm/engine/fifo/ga102.c b/drivers/g=
-pu/drm/nouveau/nvkm/engine/fifo/ga102.c
-> index 755235f55b3a..18a0b1f4eab7 100644
-> --- a/drivers/gpu/drm/nouveau/nvkm/engine/fifo/ga102.c
-> +++ b/drivers/gpu/drm/nouveau/nvkm/engine/fifo/ga102.c
-> @@ -30,6 +30,7 @@ ga102_fifo =3D {
->         .runl_ctor =3D ga100_fifo_runl_ctor,
->         .mmu_fault =3D &tu102_fifo_mmu_fault,
->         .nonstall_ctor =3D ga100_fifo_nonstall_ctor,
-> +       .nonstall_dtor =3D ga100_fifo_nonstall_dtor,
->         .nonstall =3D &ga100_fifo_nonstall,
->         .runl =3D &ga100_runl,
->         .runq =3D &ga100_runq,
-> diff --git a/drivers/gpu/drm/nouveau/nvkm/engine/fifo/priv.h b/drivers/gp=
-u/drm/nouveau/nvkm/engine/fifo/priv.h
-> index 5e81ae195329..fff1428ef267 100644
-> --- a/drivers/gpu/drm/nouveau/nvkm/engine/fifo/priv.h
-> +++ b/drivers/gpu/drm/nouveau/nvkm/engine/fifo/priv.h
-> @@ -41,6 +41,7 @@ struct nvkm_fifo_func {
->         void (*start)(struct nvkm_fifo *, unsigned long *);
->
->         int (*nonstall_ctor)(struct nvkm_fifo *);
-> +       void (*nonstall_dtor)(struct nvkm_fifo *);
->         const struct nvkm_event_func *nonstall;
->
->         const struct nvkm_runl_func *runl;
-> @@ -200,6 +201,7 @@ u32 tu102_chan_doorbell_handle(struct nvkm_chan *);
->
->  int ga100_fifo_runl_ctor(struct nvkm_fifo *);
->  int ga100_fifo_nonstall_ctor(struct nvkm_fifo *);
-> +void ga100_fifo_nonstall_dtor(struct nvkm_fifo *);
->  extern const struct nvkm_event_func ga100_fifo_nonstall;
->  extern const struct nvkm_runl_func ga100_runl;
->  extern const struct nvkm_runq_func ga100_runq;
-> diff --git a/drivers/gpu/drm/nouveau/nvkm/subdev/gsp/rm/r535/fifo.c b/dri=
-vers/gpu/drm/nouveau/nvkm/subdev/gsp/rm/r535/fifo.c
-> index 1ac5628c5140..b8be0a872e7a 100644
-> --- a/drivers/gpu/drm/nouveau/nvkm/subdev/gsp/rm/r535/fifo.c
-> +++ b/drivers/gpu/drm/nouveau/nvkm/subdev/gsp/rm/r535/fifo.c
-> @@ -601,7 +601,7 @@ r535_fifo_new(const struct nvkm_fifo_func *hw, struct=
- nvkm_device *device,
->         rm->chan.func =3D &r535_chan;
->         rm->nonstall =3D &ga100_fifo_nonstall;
->         rm->nonstall_ctor =3D ga100_fifo_nonstall_ctor;
-> -
-> +       rm->nonstall_dtor =3D ga100_fifo_nonstall_dtor;
->         return nvkm_fifo_new_(rm, device, type, inst, pfifo);
->  }
->
-> --
-> 2.50.1
->
+>   impl ClassMask {
+>       /// Get the raw mask value.
+>       #[inline]
 
-Maybe we should also do this for older GPUs? eg. perhaps we should
-also update gf100_fifo_nonstall_allow / gf100_fifo_nonstall_block ?
