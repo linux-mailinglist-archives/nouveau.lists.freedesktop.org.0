@@ -2,52 +2,46 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id 32E46B40447
-	for <lists+nouveau@lfdr.de>; Tue,  2 Sep 2025 15:41:23 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 3AAFEB40542
+	for <lists+nouveau@lfdr.de>; Tue,  2 Sep 2025 15:51:46 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id AC95910E715;
-	Tue,  2 Sep 2025 13:41:21 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 0379210E72E;
+	Tue,  2 Sep 2025 13:51:25 +0000 (UTC)
 Authentication-Results: gabe.freedesktop.org;
-	dkim=pass (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="O+YlGHhB";
+	dkim=pass (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="qEf1MwSM";
 	dkim-atps=neutral
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from sea.source.kernel.org (sea.source.kernel.org [172.234.252.31])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 0E74710E714;
- Tue,  2 Sep 2025 13:41:21 +0000 (UTC)
+Received: from tor.source.kernel.org (tor.source.kernel.org [172.105.4.254])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id BDCF010E72C;
+ Tue,  2 Sep 2025 13:51:23 +0000 (UTC)
 Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by sea.source.kernel.org (Postfix) with ESMTP id 7922543CD7;
- Tue,  2 Sep 2025 13:41:20 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 7B077C4CEF7;
- Tue,  2 Sep 2025 13:41:18 +0000 (UTC)
+ by tor.source.kernel.org (Postfix) with ESMTP id 9DDE360212;
+ Tue,  2 Sep 2025 13:51:22 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 3D7FDC4CEED;
+ Tue,  2 Sep 2025 13:51:20 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1756820480;
- bh=CIaTo0E1ULIoJ6xDm4jWtClTGcvSLSjtzXFy6h3bR5E=;
- h=Date:Subject:To:Cc:References:From:In-Reply-To:From;
- b=O+YlGHhBEQjQJljvFKXyGPGLI2pM4wuej4KxPRExUz91y+G6L09AZQEB2ev1cvezu
- 4ZXho6qcsGacDL8ANA1Iid71xGYk1+cOYl+eoE7GYQXhuTzZxRH1WcTwvL1yGMP/h3
- 3ffijoPI9ZS2TSPVf1YNzxEo6FJQiUgIPQYx81/cazcRUk8/Hr2K4pG9lNjsmoF/kv
- 8HSGntq9JrMYCYBduucr3aR2/x1Tb2W50tPCAr2PDb6sav9ViguNOaahIiY4HX40UV
- ggVUIRBjas2A845CYODuGxZvJchx9urQsjqWVUSUM8zGy0fUHBGl/SgeZ1t2dsapw6
- 9/vjIuksWqa9g==
-Message-ID: <1cbcceed-6e95-4f20-8666-1c8f40154e3b@kernel.org>
-Date: Tue, 2 Sep 2025 15:41:16 +0200
-MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 1/3] drm: define NVIDIA DRM format modifiers for GB20x
-To: James Jones <jajones@nvidia.com>
-Cc: Lyude Paul <lyude@redhat.com>,
- Faith Ekstrand <faith.ekstrand@collabora.com>,
- nouveau@lists.freedesktop.org, dri-devel@lists.freedesktop.org,
- linux-kernel@vger.kernel.org, David Airlie <airlied@gmail.com>,
- Simona Vetter <simona@ffwll.ch>, Joel Fernandes <joelagnelf@nvidia.com>
-References: <20250811220017.1337-1-jajones@nvidia.com>
- <20250811220017.1337-2-jajones@nvidia.com>
-From: Danilo Krummrich <dakr@kernel.org>
-Content-Language: en-US
-In-Reply-To: <20250811220017.1337-2-jajones@nvidia.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
+ s=k20201202; t=1756821082;
+ bh=fzLIkjf13oqOrd9WScq2CantRkcwIt9xJt+QxtYtrfk=;
+ h=Date:To:From:Subject:Cc:References:In-Reply-To:From;
+ b=qEf1MwSMuq+W4iJ3Bdq7vDcaBoQHSuFhKUn5fCh/9K6QmK07O67h6V4KdMqVQweXY
+ R/ZyKAuR2+0SxCMBZTpWlxtFVYgjVG6lqDtCEJTRds+u2d5Evdb8AS+HGGXdRYuw0+
+ SVqaLnDNosakssraywfALd6o7N1+e8vH+iaTAr0iZxgXoZVGx43/HmZcdTeKsRViM5
+ RxAiJIXsterIbbfO790pqPRwcxRw9hR+uEvRginoleGRyp4TyV0Fq3hqrSZdMqIzmM
+ T316KwEcn3nq/7WU53CO1goNUcN473iCa2TeYVLwkJ6yvn9WEy8M9RsbLrwjnjT/x1
+ E8kOxKTl0VWWw==
+Mime-Version: 1.0
+Content-Transfer-Encoding: quoted-printable
+Content-Type: text/plain; charset=UTF-8
+Date: Tue, 02 Sep 2025 15:51:18 +0200
+Message-Id: <DCID3HS7BBSY.244VUJMOWACV8@kernel.org>
+To: "James Jones" <jajones@nvidia.com>
+From: "Danilo Krummrich" <dakr@kernel.org>
+Subject: Re: [PATCH] MAINTAINERS: Update git entry for nouveau
+Cc: "Lyude Paul" <lyude@redhat.com>, <nouveau@lists.freedesktop.org>,
+ <dri-devel@lists.freedesktop.org>, "LKML" <linux-kernel@vger.kernel.org>
+References: <20250826195716.1897-1-jajones@nvidia.com>
+In-Reply-To: <20250826195716.1897-1-jajones@nvidia.com>
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -62,32 +56,17 @@ List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-On 8/12/25 12:00 AM, James Jones wrote:
-> The layout of bits within the individual tiles
-> (referred to as sectors in the
-> DRM_FORMAT_MOD_NVIDIA_BLOCK_LINEAR_2D() macro)
-> changed for 8 and 16-bit surfaces starting in
-> Blackwell 2 GPUs (With the exception of GB10).
-> To denote the difference, extend the sector field
-> in the parametric format modifier definition used
-> to generate modifier values for NVIDIA hardware.
-> 
-> Without this change, it would be impossible to
-> differentiate the two layouts based on modifiers,
-> and as a result software could attempt to share
-> surfaces directly between pre-GB20x and GB20x
-> cards, resulting in corruption when the surface
-> was accessed on one of the GPUs after being
-> populated with content by the other.
-> 
-> Of note: This change causes the
-> DRM_FORMAT_MOD_NVIDIA_BLOCK_LINEAR_2D() macro to
-> evaluate its "s" parameter twice, with the side
-> effects that entails. I surveyed all usage of the
-> modifier in the kernel and Mesa code, and that
-> does not appear to be problematic in any current
-> usage, but I thought it was worth calling out.
-> 
+On Tue Aug 26, 2025 at 9:57 PM CEST, James Jones wrote:
+> The gitlab repository previously associated with
+> the nouveau module has fallen out of use. The
+> drm-misc tree here:
+>
+> https://gitlab.freedesktop.org/drm/misc/kernel.git
+>
+> Is now where most nouveau-related patches are
+> applied. This change updates the MAINTAINERS file
+> to reflect this.
+>
 > Signed-off-by: James Jones <jajones@nvidia.com>
 
-Having a second look on this, isn't this (and patch 3) a fix as well?
+Applied to drm-misc-fixes, thanks!
