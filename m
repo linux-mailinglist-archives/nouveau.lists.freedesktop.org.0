@@ -2,59 +2,60 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id 6B32AB40E22
-	for <lists+nouveau@lfdr.de>; Tue,  2 Sep 2025 21:53:22 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id F0469B4109F
+	for <lists+nouveau@lfdr.de>; Wed,  3 Sep 2025 01:12:26 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id E400310E82D;
-	Tue,  2 Sep 2025 19:53:20 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id B06E310E032;
+	Tue,  2 Sep 2025 23:12:22 +0000 (UTC)
 Authentication-Results: gabe.freedesktop.org;
-	dkim=pass (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="CCW3q19f";
+	dkim=pass (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="bDQTrL7u";
 	dkim-atps=neutral
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from sea.source.kernel.org (sea.source.kernel.org [172.234.252.31])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 2C2F210E82C;
- Tue,  2 Sep 2025 19:53:19 +0000 (UTC)
+Received: from tor.source.kernel.org (tor.source.kernel.org [172.105.4.254])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 176ED10E00A;
+ Tue,  2 Sep 2025 23:12:21 +0000 (UTC)
 Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by sea.source.kernel.org (Postfix) with ESMTP id B18BF41812;
- Tue,  2 Sep 2025 19:53:18 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 4DAF6C4CEED;
- Tue,  2 Sep 2025 19:53:14 +0000 (UTC)
+ by tor.source.kernel.org (Postfix) with ESMTP id 990AA60224;
+ Tue,  2 Sep 2025 23:12:19 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 05DDEC4CEED;
+ Tue,  2 Sep 2025 23:12:14 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1756842798;
- bh=EES9E4p0II9pKq1UKkB0kITaMd3S6hMDx8aHEP9YBYM=;
- h=Date:Cc:To:From:Subject:References:In-Reply-To:From;
- b=CCW3q19f1yy6u796iT5OMmZJMQLz+bWmn4U6nlUY7VzI2NWzyHxVfjszhxKJ93DmH
- ci8C/CpnQ5DDiJLgd0Q82xyrht1moay6Tn+b29iioYmVATBhO3UiDJ+yRVSBkmhSf/
- aNcG9zBu6bQpx7D4GL+hFKD50p6ue0RUxM8Rb6uTuLTDRT2adLnXhJQqRTIyl+md46
- ybLvLczL+ZeDR5e0Nb3f/1QyIQVX6Ow4VY5+gMGwOpbCvMS98XakCbuSiB4zsFDg+m
- kQFCbyjmGMUl+xAnJ/J4IBXXqtBKmBXqZn8emdVArub4WIhnBs/xk5elo0IQ/kz/+u
- lmO2IXDyaNg2Q==
-Mime-Version: 1.0
-Content-Transfer-Encoding: quoted-printable
-Content-Type: text/plain; charset=UTF-8
-Date: Tue, 02 Sep 2025 21:53:12 +0200
-Message-Id: <DCIKSL18GE9A.2R4BAGR56YVPF@kernel.org>
-Cc: "Miguel Ojeda" <ojeda@kernel.org>, "Alex Gaynor"
- <alex.gaynor@gmail.com>, "Boqun Feng" <boqun.feng@gmail.com>, "Gary Guo"
- <gary@garyguo.net>, =?utf-8?q?Bj=C3=B6rn_Roy_Baron?=
- <bjorn3_gh@protonmail.com>, "Benno Lossin" <lossin@kernel.org>, "Andreas
- Hindborg" <a.hindborg@kernel.org>, "Alice Ryhl" <aliceryhl@google.com>,
- "Trevor Gross" <tmgross@umich.edu>, "David Airlie" <airlied@gmail.com>,
- "Simona Vetter" <simona@ffwll.ch>, "Maarten Lankhorst"
- <maarten.lankhorst@linux.intel.com>, "Maxime Ripard" <mripard@kernel.org>,
- "Thomas Zimmermann" <tzimmermann@suse.de>, "John Hubbard"
- <jhubbard@nvidia.com>, "Alistair Popple" <apopple@nvidia.com>, "Joel
- Fernandes" <joelagnelf@nvidia.com>, "Timur Tabi" <ttabi@nvidia.com>,
- <rust-for-linux@vger.kernel.org>, <linux-kernel@vger.kernel.org>,
- <nouveau@lists.freedesktop.org>, <dri-devel@lists.freedesktop.org>
-To: "Alexandre Courbot" <acourbot@nvidia.com>
-From: "Danilo Krummrich" <dakr@kernel.org>
-Subject: Re: [PATCH v3 02/11] gpu: nova-core: move GSP boot code out of
- `Gpu` constructor
+ s=k20201202; t=1756854739;
+ bh=nGd6ubL9Tf/e1xXoHEq4QdDtCjYAfInQ7R9+GVfgkr0=;
+ h=Date:Subject:To:Cc:References:From:In-Reply-To:From;
+ b=bDQTrL7ukZTL5zgkIX5VBewQ0FdZgocbX6GbSmLy/+MdtvPcsEwaOnZStytUVCrML
+ 7Lrw5b1arUATJvNXgcR4Nvmms0kqYMACqF9yNduS4XCV4BcCj/JtJWZncuHwrIciTy
+ oQUtcInfo4Wcf47DtuIMQmm3bDJzkXWhhzXS+vlwJvkhMjuaI3WEdiaF1FD6OByiN+
+ hCHucubAA9r8rUX5zM+wfHcQ21+hmhMmtzwugJn9eyII0EA1k/rsjLAnuHuq5+1IIU
+ 7+Bp1ovO33f4F3vcGVs/36vNBtyowvZl/ZbuU/gEeFMqr5+rTBTb/CkdblfFanZHhJ
+ JWofrD5m+pJRg==
+Message-ID: <843554b1-f4c5-43f5-a23b-583339708bea@kernel.org>
+Date: Wed, 3 Sep 2025 01:12:13 +0200
+MIME-Version: 1.0
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v3 02/11] gpu: nova-core: move GSP boot code out of `Gpu`
+ constructor
+To: Alexandre Courbot <acourbot@nvidia.com>
+Cc: Miguel Ojeda <ojeda@kernel.org>, Alex Gaynor <alex.gaynor@gmail.com>,
+ Boqun Feng <boqun.feng@gmail.com>, Gary Guo <gary@garyguo.net>,
+ =?UTF-8?Q?Bj=C3=B6rn_Roy_Baron?= <bjorn3_gh@protonmail.com>,
+ Benno Lossin <lossin@kernel.org>, Andreas Hindborg <a.hindborg@kernel.org>,
+ Alice Ryhl <aliceryhl@google.com>, Trevor Gross <tmgross@umich.edu>,
+ David Airlie <airlied@gmail.com>, Simona Vetter <simona@ffwll.ch>,
+ Maarten Lankhorst <maarten.lankhorst@linux.intel.com>,
+ Maxime Ripard <mripard@kernel.org>, Thomas Zimmermann <tzimmermann@suse.de>,
+ John Hubbard <jhubbard@nvidia.com>, Alistair Popple <apopple@nvidia.com>,
+ Joel Fernandes <joelagnelf@nvidia.com>, Timur Tabi <ttabi@nvidia.com>,
+ rust-for-linux@vger.kernel.org, linux-kernel@vger.kernel.org,
+ nouveau@lists.freedesktop.org, dri-devel@lists.freedesktop.org
 References: <20250902-nova_firmware-v3-0-56854d9c5398@nvidia.com>
  <20250902-nova_firmware-v3-2-56854d9c5398@nvidia.com>
+From: Danilo Krummrich <dakr@kernel.org>
+Content-Language: en-US
 In-Reply-To: <20250902-nova_firmware-v3-2-56854d9c5398@nvidia.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -69,57 +70,39 @@ List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-On Tue Sep 2, 2025 at 4:31 PM CEST, Alexandre Courbot wrote:
-> diff --git a/drivers/gpu/nova-core/driver.rs b/drivers/gpu/nova-core/driv=
-er.rs
-> index 274989ea1fb4a5e3e6678a08920ddc76d2809ab2..1062014c0a488e959379f009c=
-2e8029ffaa1e2f8 100644
-> --- a/drivers/gpu/nova-core/driver.rs
-> +++ b/drivers/gpu/nova-core/driver.rs
-> @@ -6,6 +6,8 @@
-> =20
->  #[pin_data]
->  pub(crate) struct NovaCore {
-> +    // Placeholder for the real `Gsp` object once it is built.
-> +    pub(crate) gsp: (),
->      #[pin]
->      pub(crate) gpu: Gpu,
->      _reg: auxiliary::Registration,
-> @@ -40,8 +42,14 @@ fn probe(pdev: &pci::Device<Core>, _info: &Self::IdInf=
-o) -> Result<Pin<KBox<Self
->          )?;
-> =20
->          let this =3D KBox::pin_init(
-> -            try_pin_init!(Self {
-> +            try_pin_init!(&this in Self {
->                  gpu <- Gpu::new(pdev, bar)?,
-> +                gsp <- {
-> +                    // SAFETY: `this.gpu` is initialized to a valid valu=
-e.
-> +                    let gpu =3D unsafe { &(*this.as_ptr()).gpu };
-> +
-> +                    gpu.start_gsp(pdev)?
-> +                },
+On 9/2/25 4:31 PM, Alexandre Courbot wrote:
+>       pub(crate) fn new(
+>           pdev: &pci::Device<device::Bound>,
+>           devres_bar: Arc<Devres<Bar0>>,
 
-Please use pin_chain() [1] for this.
+The diff is hiding it, but with this patch we should also make sure that this 
+returns impl PinInit<Self, Error> rather than Result<impl PinInit<Self>.
 
-More in general, unsafe code should be the absolute last resort. If we add =
-new
-unsafe code I'd love to see a comment justifying why there's no other way t=
-han
-using unsafe code for this, as we agreed in [2].
+I think this should be possible now.
 
-I did a quick grep on this series and I see 21 occurrences of "unsafe", if =
-I
-substract the ones for annotations and for FromBytes impls, it's still 9 ne=
-w
-ones. :(
+> @@ -293,20 +317,15 @@ pub(crate) fn new(
+>           )?;
+>           gsp_falcon.clear_swgen0_intr(bar);
+>   
+> -        let _sec2_falcon = Falcon::<Sec2>::new(pdev.as_ref(), spec.chipset, bar, true)?;
+> -
+> -        let fb_layout = FbLayout::new(spec.chipset, bar)?;
+> -        dev_dbg!(pdev.as_ref(), "{:#x?}\n", fb_layout);
+> -
+> -        let bios = Vbios::new(pdev.as_ref(), bar)?;
+> -
+> -        Self::run_fwsec_frts(pdev.as_ref(), &gsp_falcon, bar, &bios, &fb_layout)?;
+> +        let sec2_falcon = Falcon::<Sec2>::new(pdev.as_ref(), spec.chipset, bar, true)?;
+>   
+>           Ok(pin_init!(Self {
+>               spec,
+>               bar: devres_bar,
+>               fw,
+>               sysmem_flush,
+> +            gsp_falcon,
+> +            sec2_falcon,
+>           }))
+>       }
+>   }
+> 
 
-Do we really need all of them?
-
-Otherwise, I really like this, it's a great improvement over initializing
-everything into the Gpu struct -- thanks for the refactoring!
-
-[1] https://rust.docs.kernel.org/kernel/prelude/trait.PinInit.html#method.p=
-in_chain
-[2] https://docs.kernel.org/gpu/nova/guidelines.html#language
