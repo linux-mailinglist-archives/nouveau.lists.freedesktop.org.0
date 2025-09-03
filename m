@@ -2,50 +2,41 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id 3EB4EB4164E
-	for <lists+nouveau@lfdr.de>; Wed,  3 Sep 2025 09:21:57 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 7ECB1B41862
+	for <lists+nouveau@lfdr.de>; Wed,  3 Sep 2025 10:26:29 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id C766B10E1FB;
-	Wed,  3 Sep 2025 07:21:55 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 097B910E487;
+	Wed,  3 Sep 2025 08:26:28 +0000 (UTC)
 Authentication-Results: gabe.freedesktop.org;
-	dkim=pass (2048-bit key; unprotected) header.d=Nvidia.com header.i=@Nvidia.com header.b="qAI2edrI";
+	dkim=pass (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="TL0ViPMF";
 	dkim-atps=neutral
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from NAM12-MW2-obe.outbound.protection.outlook.com
- (mail-mw2nam12on2068.outbound.protection.outlook.com [40.107.244.68])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 1DD0610E1FB;
- Wed,  3 Sep 2025 07:21:55 +0000 (UTC)
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=sVYqTqXYErLsjyZ4dGLvz5LK/Ku5K2MEmyHq2fPl8ShNKiUgX5cbkBWUOOceZJXztl4Cy+ZA6oh1TvYTkAemLdq4v9IngnZLU373TexkOIkdeLLs0LctRKnsQWVUIgpOsntEE7O1tn3uz+feNEPzTuTRroQMn/2Y20+ImB9ESBw5oHqMXRP+f5SY81HRXx81A8gZUf6H7dOyTuCUx8Hsp7vdGe0IF1T5ZMqWMsPNPdfDfz673qrPNKymHFBAJJNp2F9cVqm/ibLV0KclNsopESzzEZk+w8xEnReu0SSV9NTuSw7koMFzx1SGZkKc3Xh2Yd0+1Hdzix/zJmWzKGSrpg==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=qao3MHR0qcFVsnEIL5KMebRYsSj138zi0O/h33cYZiU=;
- b=YScIBgiGPoy2haLyarDVy3X8NQjBJ0nzP5Ss+iYH8Rj9io9G7lTmQplSi0p9CITeb1Zb/ndlfASIcgPLTVSBfDjKikz16t8Wp5xXC4GSUpYL3EplQ6MvNvnXHS2VmwvJ3FK4lR7bmeSmCK3AZw8d41DBLzh3tT1oBlSJfTgVbkoIKd61OvaE4NJaRVZEqJUizSq/uZ2/UOTiKX3/EpojAiiIkKX7tjIf0nkLf0nOt7AcfAaEhBuhGL5WxD71c/SGOiifuX7swxB4BxO2v9Fjkx2OUtGGd+Q8IuQsuS3u2aFCHqSGt5hMgC8cDDQKKv4F2afDTfUKUnCJ5aAfqKZXYw==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=nvidia.com; dmarc=pass action=none header.from=nvidia.com;
- dkim=pass header.d=nvidia.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=Nvidia.com;
- s=selector2;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=qao3MHR0qcFVsnEIL5KMebRYsSj138zi0O/h33cYZiU=;
- b=qAI2edrI4Dg6aT8rdmug9b4xAQD5yCQi4/pwKzA9ZMt9r3V/rkd5gziAO7ZxeKkUAwoe/HI6YRw2enBTUS50McxGiKQzL/o7eg3jwykBl8Ftrwc2BO22krECuzN+TSMSdq/9QrqeCfnEEtzcrFKGsnzvkdCdLxq9pZPMDiL7Ekx1pfs5OoDJueN9qlVBPAsfjRK+In91HXRWmlFHZX2knFw1xh48zKg1VN+mR2XUpk0y/R6WWCAk7pwE27lFb5zCpNELiH/sTVcmp1SayXGxBfEHJLm1PsMPpCO7F4xI5KlKf4Oy95mphH2Y7/KSZDLHHjiCC7CTBD2jjxNViA0NJQ==
-Authentication-Results: dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=nvidia.com;
-Received: from CH2PR12MB3990.namprd12.prod.outlook.com (2603:10b6:610:28::18)
- by DM4PR12MB6566.namprd12.prod.outlook.com (2603:10b6:8:8d::16) with
- Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9073.27; Wed, 3 Sep
- 2025 07:21:52 +0000
-Received: from CH2PR12MB3990.namprd12.prod.outlook.com
- ([fe80::6e37:569f:82ee:3f99]) by CH2PR12MB3990.namprd12.prod.outlook.com
- ([fe80::6e37:569f:82ee:3f99%3]) with mapi id 15.20.9052.027; Wed, 3 Sep 2025
- 07:21:52 +0000
+Received: from sea.source.kernel.org (sea.source.kernel.org [172.234.252.31])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 44C7310E485;
+ Wed,  3 Sep 2025 08:26:27 +0000 (UTC)
+Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
+ by sea.source.kernel.org (Postfix) with ESMTP id E7BFE43DD8;
+ Wed,  3 Sep 2025 08:26:26 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 5368BC4CEF0;
+ Wed,  3 Sep 2025 08:26:22 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+ s=k20201202; t=1756887986;
+ bh=zW7TNLfa4KbD81DgW3vApU7vw2XK4yGJuNII46K+LP8=;
+ h=Date:Subject:Cc:To:From:References:In-Reply-To:From;
+ b=TL0ViPMFzxCUOD60fpt2D70YnJ5+2MVzpcMuup7ylSEWM84B7/br1zhsKcfu9AHd4
+ nMgW0+W+12qBYP03uBqSojB7ZiMKFXpKltcmxdNfCeAHci8x7GmUm0CzobVxmt+4fK
+ jjwtYadsyI0Ett44NRPRQipLROyiPq3jINnsihMordfY8876pC+HXmjmYEG84QWZzT
+ KEQHbFXHGxtzKtketd1mYBPjX1cUrPqS/106h4DnfUYy8Y9M3ViYWjmVhvvK9suLpo
+ IPrpHNBcOhmabIyiaP4xGuAFo/5LXymYhFzKwAtwchdtcODQEii9WgezgFSQa2m/7F
+ fblJ9A//Vtj4w==
+Mime-Version: 1.0
 Content-Transfer-Encoding: quoted-printable
 Content-Type: text/plain; charset=UTF-8
-Date: Wed, 03 Sep 2025 16:21:48 +0900
-Message-Id: <DCIZFT5QJ4DT.1XDNISKTQKK56@nvidia.com>
+Date: Wed, 03 Sep 2025 10:26:20 +0200
+Message-Id: <DCJ0T81CZQ88.6IK6LG0E0R02@kernel.org>
+Subject: Re: [PATCH v3 02/11] gpu: nova-core: move GSP boot code out of
+ `Gpu` constructor
 Cc: "Miguel Ojeda" <ojeda@kernel.org>, "Alex Gaynor"
  <alex.gaynor@gmail.com>, "Boqun Feng" <boqun.feng@gmail.com>, "Gary Guo"
  <gary@garyguo.net>, =?utf-8?q?Bj=C3=B6rn_Roy_Baron?=
@@ -59,113 +50,13 @@ Cc: "Miguel Ojeda" <ojeda@kernel.org>, "Alex Gaynor"
  Fernandes" <joelagnelf@nvidia.com>, "Timur Tabi" <ttabi@nvidia.com>,
  <rust-for-linux@vger.kernel.org>, <linux-kernel@vger.kernel.org>,
  <nouveau@lists.freedesktop.org>, <dri-devel@lists.freedesktop.org>
-Subject: Re: [PATCH v3 02/11] gpu: nova-core: move GSP boot code out of
- `Gpu` constructor
-From: "Alexandre Courbot" <acourbot@nvidia.com>
-To: "Alexandre Courbot" <acourbot@nvidia.com>, "Danilo Krummrich"
- <dakr@kernel.org>
-X-Mailer: aerc 0.20.1-0-g2ecb8770224a-dirty
+To: "Alexandre Courbot" <acourbot@nvidia.com>
+From: "Danilo Krummrich" <dakr@kernel.org>
 References: <20250902-nova_firmware-v3-0-56854d9c5398@nvidia.com>
  <20250902-nova_firmware-v3-2-56854d9c5398@nvidia.com>
  <DCIKSL18GE9A.2R4BAGR56YVPF@kernel.org>
  <DCIZ5VVLACXO.1L0QTYM5YVRQV@nvidia.com>
 In-Reply-To: <DCIZ5VVLACXO.1L0QTYM5YVRQV@nvidia.com>
-X-ClientProxiedBy: OS7PR01CA0208.jpnprd01.prod.outlook.com
- (2603:1096:604:24a::19) To CH2PR12MB3990.namprd12.prod.outlook.com
- (2603:10b6:610:28::18)
-MIME-Version: 1.0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: CH2PR12MB3990:EE_|DM4PR12MB6566:EE_
-X-MS-Office365-Filtering-Correlation-Id: 0b085481-956c-460a-6ad1-08ddeaba8d96
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0;
- ARA:13230040|376014|366016|10070799003|7416014|1800799024; 
-X-Microsoft-Antispam-Message-Info: =?utf-8?B?c2dzSENVcWhhVWJpQ2Y5QUVRaVhtZG5GTlNKK1Blb2VIWWFBamJmbjNUaTRY?=
- =?utf-8?B?bkJHSFZrdWRUSzRwZnBTbnFNdkVRMWRqNnlUYlJhNVJTNU0zWVRYM1drR1E2?=
- =?utf-8?B?L1kvRXJPdDVUNW93VUoyK1UrWWJzRDhCVWRnWnQ5Tnp2RC9nWWRnM3dhdXE3?=
- =?utf-8?B?ekxMeGVXSjdIS25NRy95MS8xMXF6anY0MHMwWWRtQVJNaktmMlFMb2pmc292?=
- =?utf-8?B?Ulk2MjhSSk5WK2dRZTZ4M2lyaGRJbVh5QWZ4TWEzWFF2SFhBa29XY3FLSGg0?=
- =?utf-8?B?aXhvNjVZWk14bU0yc25UOS9HZ3UyQmFaWmkzSjhad0tLUXBlWWFGaUd5SkdY?=
- =?utf-8?B?a3dVbjVkRTVKUzdoMXVEWW92emt2NTZva25WZ0hEWWdrWm0zZ1k2cEpWY2c0?=
- =?utf-8?B?QUZGUnN5Z1ZXVTlCemNqajNBei9ZdUVsYkQvSGczcFRJMm1COGE5M3RiaEtO?=
- =?utf-8?B?QUZwT29EbXgrZ1VYcDJOMC9YSU5qN01rOEwxdW9lWjBmZnFtN09icHk0Um1P?=
- =?utf-8?B?bWoyNTBJTEVKaVZjTVlPZ3duNnlmNWFHWEZQeUdOSEZGTVFlUHhYUzNwYXpE?=
- =?utf-8?B?a1ArbFhsSVNQRXJVQ21WTHFaQWpaZkJXVW5qRGllYWZrNlFoaVIwelplYlRx?=
- =?utf-8?B?Z0VsbEMxdWFBZ0lRck5hamJKK09PMis1WmdPQjluclVnOUNHbElSNzBRTStF?=
- =?utf-8?B?ellMU3FKVXQ5TEJmMG9aUm5sbXNiWDBRa1VIQklsM2ZKbWNNWHhvYnh2UmhZ?=
- =?utf-8?B?QmEwSk1LSmtRRnB4WnVQRWxrNWl3MHdFYVN3czJFSUxiYnR4a0dZbEg1OXhJ?=
- =?utf-8?B?SVBmWi9GanZPaUNBSThLMHpTTzU5cWdRNDBvWWxzZ2pDLzZuVmFSNEVnNGxo?=
- =?utf-8?B?aVZmNFh5L2VyUVBiUm9WWUYycTFyUEJRMnRpZFFyem93clkySk5qMW56U0F4?=
- =?utf-8?B?VXRORGNOekRXZi9MQ1F2eWFnUmVhcUlJRzRabzc1Umh5MnM5dFMyMkl0VEg5?=
- =?utf-8?B?eDhTR1lqRkdPYWdsQTZzRDQ5MGduTVd5czFWaUp4WWdiN3hQNXFHSHE0amtJ?=
- =?utf-8?B?SmFLMFliWTlIa1ZQQ2YzVTBRYkNwaitRUWpFUTlWeE1KV0RiVHJiTmd5NXlq?=
- =?utf-8?B?V3dCWm1ZOGR4eHdrZ1ZEUjI0YnpXYlh6WGM5SHU3OUxtdmtMZmU3TllBemty?=
- =?utf-8?B?SzVzMzgwOEVPZS9YVHVTZ1JrQWhMdkN4UWJFYldWM0dPRk91eUxwM1NhUVZk?=
- =?utf-8?B?QlJtVTJtRm1iSWN2b3FCZWF2WjE4a3ppYUNrQmdYM0JtZDdmb0RMTVF5bFNl?=
- =?utf-8?B?YTVWVFNKU0FvVXhSbTZtTHpxRW92NVZ5K2hyc1VMcHRBRHpXMFd0WEMvUWNm?=
- =?utf-8?B?dUlFTDRZblNjNEViMldmMjZUNzhJQXpCVHpOaTJqUDgxUTVBZWQxdFpwUGJF?=
- =?utf-8?B?WVZoUVRQV2F3b08vNmg5dEJLeU9EWXdaTzR1R2VyZGJtY3VtcGxnK2s4dGhj?=
- =?utf-8?B?YkE0OUNTUFFvYkdNVDBBNk1mSlo3bGxNMWlBajZsSHoxRFEyUGtLRm4rOTI1?=
- =?utf-8?B?VmR2TkpzRW9qUGJjZ1NyY05BOEpUMWJDdTBHV09YcWtCc3JuamlFTjk2aExS?=
- =?utf-8?B?WXRKYzM2c2dQQ0NhK1ptUGpJVVB0RHJudmlVa3UyWlI2NlNqOUswWURaZUFm?=
- =?utf-8?B?TnBBeEM4YTBtTC9lNmJWZFIvUHNCUFlHY1M3TDBGeVpTRHFaY25wOVBwSVJN?=
- =?utf-8?B?U2RpWmpKWUZxczJoWE5SSXF1WGgzbWRUb0pJVkxXS0hCbHMvNU1jaWFsS0gv?=
- =?utf-8?B?c2x5eGlrbXJYbjhrZ2RMNDh4TnlEYW5BTUZpYStTRE9CYmxyaWNvNHE2dzVK?=
- =?utf-8?B?V1loV3BDME1jQ044N3VxUkordEtPdDFBTUdaV213TkgvWXBYMlpWSHgyRmVU?=
- =?utf-8?Q?J0LMAcpg8ZE=3D?=
-X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
- IPV:NLI; SFV:NSPM; H:CH2PR12MB3990.namprd12.prod.outlook.com; PTR:; CAT:NONE;
- SFS:(13230040)(376014)(366016)(10070799003)(7416014)(1800799024); DIR:OUT;
- SFP:1101; 
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?cjRCTG1XQlkrb1BlUVp6NkNpeWV3NWRSd2d6dFQ2VFFJMFVBcnJ1WkVLOXIz?=
- =?utf-8?B?QkZlb2FqQWljdFN0akRZaVFZQmtLMExZNU12Q0t4TXdMZSs1cHVzci9iUzlu?=
- =?utf-8?B?RVRXSUlPeTJzcm42NVZpRmtGSVhMdGowaGg0TUdpYUxGKy91T2JBS1lBcURt?=
- =?utf-8?B?czZEOFBUbTdjWElLMTdGb3I4ejVVOCtKY0lIek5iMjR2R2xVTzQzZHpHbnR5?=
- =?utf-8?B?aXlaY29yeHVidm1pQVhhY0F0c25nU3RuSFJtTFc2d0ZmTUpkMTIvMkwvT0x1?=
- =?utf-8?B?a0UwbmFxYnpxQ04xR3F2T0wydGJYUHpCS05KRFYyWHB1YnVFU09yS0VhSWxo?=
- =?utf-8?B?c3NUenhOQWhsclhlMUw5L0hiakdYZ2JjOU1uUzdsVmhra0dERmEvcnN6VkVz?=
- =?utf-8?B?SWRXYnBkYVJJaHl1aXRWYzI4MnhlZCtvZ09lS3NIZlFjWHM1SGVBQVY1d0pQ?=
- =?utf-8?B?Q2pjazJObWNaMzFTU1p6Z0dYNnZublg3c3hRYVlYRkNXVVhPSW1tZkhrVWE3?=
- =?utf-8?B?QzNVWGp2MUlvSm83U3IvV1Q4QytBbnd1M0JQc2xMdjg2d0NUei9ITXEyRWJt?=
- =?utf-8?B?UEhyZUd0MzRZbFM0anBjTmQxTFlwWHArVG9waXBkRFNZTnZFejNyUThqTUhR?=
- =?utf-8?B?cGlWbjRIVGtrZjEyUUk4QXBITWhINHJucVQ0RVFCbFRaWEF6RnVRM2p4RkU4?=
- =?utf-8?B?NHJtUTNsTHh1a1c5S1dNUVg0cmgydXRvVDFxMmFMNjB1MzdrekV0dm95VWd1?=
- =?utf-8?B?dWYybHJtSDNBZ3pZVWdtR051UXlLbkFnQlJnQmpUeU55d1JFOGRVNU0wakJS?=
- =?utf-8?B?V1BjeEE1RHNPQlVDSUhhV2dlbVNRNVFiTlZOZ0lldlZDcEwxYXRsMGdjWmdX?=
- =?utf-8?B?cFFrTlBIaXNGa2RLckJGcE5NS1BlU2hpME0xQkc0Q3dMbDh0SExTZjgyMlVm?=
- =?utf-8?B?Tm1MTTM4TU5BYURJY0FkYStmb0h4a3V4T3pNZWxoS1VBZjQ5MkZhWVlVWlJi?=
- =?utf-8?B?QUpjTFpUVE1wWmlzWndmcmswZEVoSFZ2U1gxc01CZFM2SUx6UFBKUlJkZ3RV?=
- =?utf-8?B?dS9QWEl1ckNlN1JsS2tFT29EV2xCSEdyKytnSC9SMkxUTmlJcWlRUmlDTmJE?=
- =?utf-8?B?SjhaclBqWmRwVEtiSXdYUXVwcXJnRktoMTlLMWRTcXdLcXV0QkloYzVuNFJ2?=
- =?utf-8?B?Q1pDNGdKVTl1VUczbVBya05IQTRmeC9IZFIrS2QwazFqNDhYT0JuM0IvOGdI?=
- =?utf-8?B?MlBsaVlOVnY0d3Y2R1RBWkxITEFKOEExcUJXTlFGSC9yY2x2OUlwbXNIa283?=
- =?utf-8?B?UnBwUGFqWjhSbDVOalBSNS85M0tTR1Q1L01SNmFScW1xaU1zRk5iaC9GNHBo?=
- =?utf-8?B?UzdEM05sNlBmaG9wYXJGL3pML3ZqeFJselhOZENiK0RWNmU1UmZ1U1JxYjRK?=
- =?utf-8?B?MTRtc2JLOGRiSHYwdGlrcUQvdUdXZ05EVzRMOTVDc1MxVEQwSVlOVk13djVY?=
- =?utf-8?B?cnl3Z1ZiUmswQUJ5MjBOcUVtemVWVitvZ2I0aHJNMm84azV0aU5NUFZLWDAz?=
- =?utf-8?B?VE9wN2lJTHQ0UGJrN1ovdEdRejIyNzhxdklVaDVzZHBKMXBJWjkzM1MrSHVI?=
- =?utf-8?B?dXdCTjdmbHRuT2FuUU5neTVhZ2RTd1JlWHVnM2NqYlF2c2ZvS09seEVMZStS?=
- =?utf-8?B?b2VWVXduZURvQnJtY0F3SGRLdkxGNU8yTVhnNHBqeVB3OWUxK3gwdXJ1Wjht?=
- =?utf-8?B?aWdwOUh5aHVrd2MwOUhucUh0eXJ3Nng5dWRsRk05RWpqL2JtREdKNnVQN2h2?=
- =?utf-8?B?U1FqWCtncFZRYWxQOHFOZnRoMXRFSG5mTTN2bk1aVDRyQ1NESmZGak5UcUl4?=
- =?utf-8?B?K2t1WGhIaFRZbXhuMWVVVmp4YkYvSWl6ZDFvL1ZsOUUyUG1qL1dCQ0VGQjlJ?=
- =?utf-8?B?eE5sZ3hsYmxoTVRzZkIzRGgvWlJnMnVXMGZyMEgxTldCZG1HT2hmZERHSGF0?=
- =?utf-8?B?MllPb1krQmowR25tdGNKK0QrUko3MGhjdHhIeGRnZTZFQjd6d2lWbU5PeEsx?=
- =?utf-8?B?bUkyU0NPWHhmcU5DczdXSEJ5eExoRzVPNDhjNm1CS1dsZ2IyeUtDMFludmNv?=
- =?utf-8?B?Z1FrUFVCZ00wMERQSXJ1NVBsV1NKOWhTYUZVUzBkSmthN0tsQXgwZ2xiY3l6?=
- =?utf-8?Q?SoBeiIZkPtyp82hW8Jd/6twRAIvxHlHjuBA6K/FTbq6a?=
-X-OriginatorOrg: Nvidia.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 0b085481-956c-460a-6ad1-08ddeaba8d96
-X-MS-Exchange-CrossTenant-AuthSource: CH2PR12MB3990.namprd12.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 03 Sep 2025 07:21:51.9475 (UTC)
-X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
-X-MS-Exchange-CrossTenant-Id: 43083d15-7273-40c1-b7db-39efd9ccc17a
-X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: LMwKrb1s6jPDurgl6lbT3nUY08Mf1Y0D14KaGLIvNVA9tx/gTU3yrud3FToj1ORISUir4Onw1kT2aR67NxklEA==
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: DM4PR12MB6566
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -180,7 +71,7 @@ List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-On Wed Sep 3, 2025 at 4:08 PM JST, Alexandre Courbot wrote:
+On Wed Sep 3, 2025 at 9:08 AM CEST, Alexandre Courbot wrote:
 > On Wed Sep 3, 2025 at 4:53 AM JST, Danilo Krummrich wrote:
 >> On Tue Sep 2, 2025 at 4:31 PM CEST, Alexandre Courbot wrote:
 >>> diff --git a/drivers/gpu/nova-core/driver.rs b/drivers/gpu/nova-core/dr=
@@ -220,10 +111,96 @@ lue.
 > couldn't find any relevant example in the kernel code either). Can you
 > elaborate a bit?
 
-To be more specific on what I don't get: I see how pin_chain could be
-used to initialize a structure which dependent member can take a
-temporary value (like a pointer set to `null`), but in this case `gsp`
-must be initialized with the result of `start_gsp`, and there is no
-"default" valid value for it meanwhile (I use `()` as its type, but it
-is a temporary placeholder). But maybe I am just misunderstanding
-something about how `pin_chain` can be used.
+I thought of just doing the following, which I think should be equivalent (=
+diff
+against current nova-next).
+
+diff --git a/drivers/gpu/nova-core/driver.rs b/drivers/gpu/nova-core/driver=
+.rs
+index 274989ea1fb4..6d62867f7503 100644
+--- a/drivers/gpu/nova-core/driver.rs
++++ b/drivers/gpu/nova-core/driver.rs
+@@ -41,7 +41,9 @@ fn probe(pdev: &pci::Device<Core>, _info: &Self::IdInfo) =
+-> Result<Pin<KBox<Self
+
+         let this =3D KBox::pin_init(
+             try_pin_init!(Self {
+-                gpu <- Gpu::new(pdev, bar)?,
++                gpu <- Gpu::new(pdev, bar)?.pin_chain(|gpu| {
++                    gpu.start_gsp(pdev)
++                }),
+                 _reg: auxiliary::Registration::new(
+                     pdev.as_ref(),
+                     c_str!("nova-drm"),
+diff --git a/drivers/gpu/nova-core/gpu.rs b/drivers/gpu/nova-core/gpu.rs
+index 8caecaf7dfb4..211bc1a5a5b3 100644
+--- a/drivers/gpu/nova-core/gpu.rs
++++ b/drivers/gpu/nova-core/gpu.rs
+@@ -266,7 +266,7 @@ fn run_fwsec_frts(
+     pub(crate) fn new(
+         pdev: &pci::Device<device::Bound>,
+         devres_bar: Arc<Devres<Bar0>>,
+-    ) -> Result<impl PinInit<Self>> {
++    ) -> Result<impl PinInit<Self, Error>> {
+         let bar =3D devres_bar.access(pdev.as_ref())?;
+         let spec =3D Spec::new(bar)?;
+         let fw =3D Firmware::new(pdev.as_ref(), spec.chipset, FIRMWARE_VER=
+SION)?;
+@@ -302,11 +302,16 @@ pub(crate) fn new(
+
+         Self::run_fwsec_frts(pdev.as_ref(), &gsp_falcon, bar, &bios, &fb_l=
+ayout)?;
+
+-        Ok(pin_init!(Self {
++        Ok(try_pin_init!(Self {
+             spec,
+             bar: devres_bar,
+             fw,
+             sysmem_flush,
+         }))
+     }
++
++    pub(crate) fn start_gsp(&self, _pdev: &pci::Device<device::Core>) -> R=
+esult {
++        // noop
++        Ok(())
++    }
+ }
+
+But maybe it doesn't capture your intend?
+
+>>
+>> More in general, unsafe code should be the absolute last resort. If we a=
+dd new
+>> unsafe code I'd love to see a comment justifying why there's no other wa=
+y than
+>> using unsafe code for this, as we agreed in [2].
+>>
+>> I did a quick grep on this series and I see 21 occurrences of "unsafe", =
+if I
+>> substract the ones for annotations and for FromBytes impls, it's still 9=
+ new
+>> ones. :(
+>>
+>> Do we really need all of them?
+>
+> I've counted 16 uses of `unsafe`. :)
+
+I did a grep | wc on the mbox file, so it includes the 5 additional occurre=
+nces
+from the annotations. :)
+
+Otherwise the 9 "real" ones I counted seem to match the 3 bindgen ones (fin=
+e of
+course) plus the 5 ones from the pin initializers (we should avoid them).
+
+>
+> - 3 in the bindgen-generated code (these can't be avoided),
+> - 7 to implement `FromBytes`,
+> - 1 to work around the fact that `FromBytes` doesn't work on slices yet
+>   (maybe that one can be removed)
+> - 5 as a result of intra-dependencies in PinInit initializers (which we
+>   might be able to remove if I figure out how to use `pin_chain`).
+>
+> So best-case scenario would be that we will be down to 10 that are truly
+> unavoidable.
