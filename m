@@ -2,88 +2,100 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id C83F2CBAEC7
-	for <lists+nouveau@lfdr.de>; Sat, 13 Dec 2025 13:46:27 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 8C8DBCBAEA3
+	for <lists+nouveau@lfdr.de>; Sat, 13 Dec 2025 13:46:19 +0100 (CET)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id EA4DC10EC44;
+	by gabe.freedesktop.org (Postfix) with ESMTP id 558F810EC34;
 	Sat, 13 Dec 2025 12:42:16 +0000 (UTC)
 Authentication-Results: gabe.freedesktop.org;
-	dkim=permerror (0-bit key) header.d=gmail.com header.i=@gmail.com header.b="Uk5F46ny";
+	dkim=permerror (0-bit key) header.d=jannau.net header.i=@jannau.net header.b="Q7MGT8W6";
+	dkim=permerror (0-bit key) header.d=messagingengine.com header.i=@messagingengine.com header.b="IG/ERKkY";
 	dkim-atps=neutral
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from mail-pj1-f52.google.com (mail-pj1-f52.google.com
- [209.85.216.52])
- by gabe.freedesktop.org (Postfix) with ESMTPS id CF33C10E204;
- Fri, 29 Aug 2025 10:01:20 +0000 (UTC)
-Received: by mail-pj1-f52.google.com with SMTP id
- 98e67ed59e1d1-32326e6fa7dso172890a91.3; 
- Fri, 29 Aug 2025 03:01:20 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1756461680; x=1757066480; darn=lists.freedesktop.org;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=oRH8f0w1otAreNEGbebgngaGLPIDb4bCYEPCriBHAFA=;
- b=Uk5F46nyTt0YGsYdinnXIvrNPDv6cwq68KR3jfjsMlCNYgR3SzL8qoD2kHUImIVQkE
- BnvwuV9HawQm1XTOdPDtiaXPR6GDynN2z3aYB6mo42j/raQrw335sTU1w6HxMhjtmjsu
- JEQlVzyECCzoloIK6gefn8I8kmRUsBlDaJ28Q1tgCCakkDYLykNMA45/Jmp2um3PSiK3
- SvaZzQZFkKXQ45HFydYwX7xyMTEpSGIm7wdsG9bD6K8yhdd0ChfJt1LVhAWGrh0qt7Fk
- 9XHAhoyEoMQ/4fD5KYO3M8IUz47n+XGi8pflfpBmlFCmVZKw5hCqCD2K6cffxJzrU23K
- jcvw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1756461680; x=1757066480;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=oRH8f0w1otAreNEGbebgngaGLPIDb4bCYEPCriBHAFA=;
- b=C6fiVNzVzs8d0fOt1rXchTgX2ltbVtot/HgiuMfL9AA3jMI5V5xlz1yVDVBIh7emGH
- c7MQv64yQZtQb1ltardCDcYjviy8MCY4Y/fjneKXWylgocgAeUOYg4q0o3LYRvtZWST+
- 1emu5aJ+DkrDfPaNtz4Nb3XAnQqwGt6GqYtMmWD0zKIeIB3msROZb1Y6AWBRmCewFC7p
- pICNhQ8jKEBBBvhDeJHwhqlZZJ2W8Gj5jy+TWkOn/kBynXgI0Uu0qAqTDwpSxIBPL3r5
- vt4yqhGjSTFaVg2BIqi7u9M6Of0+nhnbBYPhUZ+ZgrRvcaLbI1WERdMLyjzpgGbYGOeX
- 7/Ag==
-X-Forwarded-Encrypted: i=1;
- AJvYcCWXkiM3AJbrcnz1BtTo4BywDPFKktnl634ihbp9f++gGk9Vj8ihmkbgUVf10T8wp3qQfXsiiq3EGMA=@lists.freedesktop.org,
- AJvYcCX1hQm3GqGLeRR+n0P8VqqNHr7E/BWmjQO+W7ukx0T0/qaK/Xklz7eHp4oeC7UQnD+GRKRE1ugYRw==@lists.freedesktop.org,
- AJvYcCXLbct3XsPZp3z6tCw753Vg+GbLqHlkW0COxMSf4Zp2OFFz2sxM7jdE2a1jlYL4Bt0nF9THgyN+q3kvUlqgR5Yx@lists.freedesktop.org
-X-Gm-Message-State: AOJu0YyuYBk/mHIMxvXCnNnG1Hpcwl5gZYpKxwp1Sq33gZOwUitCPHKH
- 21p3NZDyP26T27ZqYWmarrcHUPqwtr4IJHEzwOZ1Ff44aHFiN9dTyWo+6JqAj6NFPkpS6DuGaof
- qmKRvKag8eqmOU95QHgkQLLHh1gmwIlU=
-X-Gm-Gg: ASbGncu40Lkbj4gcCDvZg3fu5ra4PrWXM1BgRBfTtCdpT7XPVNJPQPPHLxnKVFq+OvG
- ZW3MW1VZhV67JEEoKEYXDfzbeu1RadwJ3//JA+Q6Qg52mbm1ymTDaXff0JHXllFVxe1Dn1TZ/U2
- HqfQBFWqQqVB0Z2daD1L2PxGRk5yJAN2K0rq6g0OLTh2fYjwApbjoT9UlaLvfVVNy4pe+ikvL6z
- 6Uy/QXhRYLfDjJWo2QEQWtvCawRlyUjLiM73htnz9/73fOWCF7hOPPqi3Bfl8A8ox+m/YUhX8Do
- euj/QeY3Mr8uhVd3O+qedUt2pH0v1khhXNgb
-X-Google-Smtp-Source: AGHT+IGJ2lYXuFya1m4Ramq705Evx78C2MmKVqkr3itmOClvIB24UWN1rI/gpubgLX/l8W3IhjN7k4QwxP207019zQA=
-X-Received: by 2002:a17:90b:4a90:b0:325:cce7:f661 with SMTP id
- 98e67ed59e1d1-327f5b1c87dmr666852a91.1.1756461679909; Fri, 29 Aug 2025
- 03:01:19 -0700 (PDT)
+X-Greylist: delayed 538 seconds by postgrey-1.36 at gabe;
+ Wed, 03 Sep 2025 15:31:13 UTC
+Received: from fout-a1-smtp.messagingengine.com
+ (fout-a1-smtp.messagingengine.com [103.168.172.144])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id D36BB10E8C9
+ for <nouveau@lists.freedesktop.org>; Wed,  3 Sep 2025 15:31:13 +0000 (UTC)
+Received: from phl-compute-01.internal (phl-compute-01.internal [10.202.2.41])
+ by mailfout.phl.internal (Postfix) with ESMTP id 9AFD3EC0396;
+ Wed,  3 Sep 2025 11:22:14 -0400 (EDT)
+Received: from phl-imap-02 ([10.202.2.81])
+ by phl-compute-01.internal (MEProxy); Wed, 03 Sep 2025 11:22:14 -0400
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=jannau.net; h=cc
+ :cc:content-transfer-encoding:content-type:content-type:date
+ :date:from:from:in-reply-to:in-reply-to:message-id:mime-version
+ :references:reply-to:subject:subject:to:to; s=fm3; t=1756912934;
+ x=1756999334; bh=+AXXTnO/DsaC5LEgexoxh1xVHsHWM2RT4Q9VJHHYQHY=; b=
+ Q7MGT8W6SrBI/I4/SVwPJI40Xq5+wuvssqNx4RG3HzY9p2+fw8W/MauiLQdWxrO4
+ yezUpKVvZIPNkhEjY+5P05C7gUrVKm9T249zOo78tS0s343DG995c2eson102Hj9
+ f84/STbHvSy6oC+tI/Up501yIloNpWJ0ykGni1GAViFp/hX3/WM/tYxoH4V79Kk+
+ BA598huM2ANrIBYSlJvHV/BP1tkAzuTvwmj5uVBdhnBcGzJyP7iGMdF+1Vlfnm4j
+ 3YpFWiiAdfdKuYhy0eh2cIu6m9ShaLTyNohBu+fBrHsAgXFS5votMkEHdnG5mgum
+ RhiX1cvt+r59jK8IM4SdTQ==
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=
+ messagingengine.com; h=cc:cc:content-transfer-encoding
+ :content-type:content-type:date:date:feedback-id:feedback-id
+ :from:from:in-reply-to:in-reply-to:message-id:mime-version
+ :references:reply-to:subject:subject:to:to:x-me-proxy
+ :x-me-sender:x-me-sender:x-sasl-enc; s=fm1; t=1756912934; x=
+ 1756999334; bh=+AXXTnO/DsaC5LEgexoxh1xVHsHWM2RT4Q9VJHHYQHY=; b=I
+ G/ERKkYHTFyn68d7ueOQM9/5oYICsx8l+pWQXOFQ1mOV/c5nI/+uet3/cmAgKA6G
+ SE/YvR8vQjqDH9yPWLQ9PuzNl3gA8jOM+JM+9RG8F6ABRpuGtTOdYpbbnFxlf1Gb
+ vFucs4GCFpwcbvC2pYtW0RF8ynKe/6sW0N5aHi27koxnpCoQF+19uKC2Gbx9Tfm4
+ BcPqEqenL3//SaOidjMR81rHpi109uQhdN0gSAwNDDBukEeznQMmGa6WvsFTr1Vm
+ C/RWTkqsKAtFFBf9BH+XaggX7x5vC8T+mQvuOMBCDqWGvbfwV7QUgOTfk90Rhul1
+ g2Ye13Ygsg2LczzJ+sPIw==
+X-ME-Sender: <xms:JV24aM2HgdpoVdql9uOoB2Gfc3hNTKH1Miu7n_ta2hHdOMpiOiaVdg>
+ <xme:JV24aHEcG6iUyKZi2f3SGYBakiGAFpbqJc-4V-NSE4AwFIRNimdTkoKUUi3NiXrJV
+ PuC2s_OonJjkA_23cs>
+X-ME-Proxy-Cause: gggruggvucftvghtrhhoucdtuddrgeeffedrtdeggdefgeelucetufdoteggodetrfdotf
+ fvucfrrhhofhhilhgvmecuhfgrshhtofgrihhlpdfurfetoffkrfgpnffqhgenuceurghi
+ lhhouhhtmecufedttdenucesvcftvggtihhpihgvnhhtshculddquddttddmnecujfgurh
+ epofggfffhvfevkfgjfhfutgfgsehtjeertdertddtnecuhfhrohhmpedflfgrnhhnvgcu
+ ifhruhhnrghufdcuoehjsehjrghnnhgruhdrnhgvtheqnecuggftrfgrthhtvghrnhephe
+ ejtdeffeethfetgefhffejudegheefueejtedvhfeuheevfeekheetfeduffevnecuvehl
+ uhhsthgvrhfuihiivgeptdenucfrrghrrghmpehmrghilhhfrhhomhepjhesjhgrnhhnrg
+ hurdhnvghtpdhnsggprhgtphhtthhopedufedpmhhouggvpehsmhhtphhouhhtpdhrtghp
+ thhtohepuggrnhhivghlrdgrlhhmvghiuggrsegtohhllhgrsghorhgrrdgtohhmpdhrtg
+ hpthhtohepshhimhhonhgrsehffhiflhhlrdgthhdprhgtphhtthhopegrihhrlhhivggu
+ sehgmhgrihhlrdgtohhmpdhrtghpthhtoheprghlihgtvghrhihhlhesghhoohhglhgvrd
+ gtohhmpdhrtghpthhtohepuggrkhhrsehkvghrnhgvlhdrohhrghdprhgtphhtthhopehm
+ rhhiphgrrhgusehkvghrnhgvlhdrohhrghdprhgtphhtthhopehmrggrrhhtvghnrdhlrg
+ hnkhhhohhrshhtsehlihhnuhigrdhinhhtvghlrdgtohhmpdhrtghpthhtohepughrihdq
+ uggvvhgvlheslhhishhtshdrfhhrvggvuggvshhkthhophdrohhrghdprhgtphhtthhope
+ hnohhuvhgvrghusehlihhsthhsrdhfrhgvvgguvghskhhtohhprdhorhhg
+X-ME-Proxy: <xmx:JV24aJf1c2sLqelv-BOyVUJxgZsCEIGOoaB7KUtLdY-YM83PIgblew>
+ <xmx:JV24aLzOtCoJ4gsHYMpGxGS7gmlxZDJ9PEq6ZPTKqcNXU3nawz7imQ>
+ <xmx:JV24aPpt6X5I2uQYYYCycvujtMeU3eY1RFxlkoPPbQHbOZk7sHDpeA>
+ <xmx:JV24aJwAZjN1s5wPHvJt5D7auQ3x8oMkZ0_Kkj7ZBdjIpbW2Qco9IA>
+ <xmx:Jl24aOpB4djR-SR3dYB7A583cM074Jdqvq5fzeZTK3VoavlTEzmFdvSt>
+Feedback-ID: i47b949f6:Fastmail
+Received: by mailuser.phl.internal (Postfix, from userid 501)
+ id D0F72700065; Wed,  3 Sep 2025 11:22:13 -0400 (EDT)
+X-Mailer: MessagingEngine.com Webmail Interface
 MIME-Version: 1.0
-References: <20250827082015.959430-1-apopple@nvidia.com>
- <20250828083737.22214-1-ojeda@kernel.org>
- <DCEKTF8CP2GF.ED9G9ECQMBHM@nvidia.com>
- <6f32c400-1f8c-4367-8be9-f7082ea87626@kernel.org>
-In-Reply-To: <6f32c400-1f8c-4367-8be9-f7082ea87626@kernel.org>
-From: Miguel Ojeda <miguel.ojeda.sandonis@gmail.com>
-Date: Fri, 29 Aug 2025 12:01:07 +0200
-X-Gm-Features: Ac12FXznrXiVcLbGyYEw1vb2wal1r3wZH6fiCopGfQPJ8S6r4KIMuLcfzgZ6bWs
-Message-ID: <CANiq72n5N3yHU_vxjiHk=TeJ0ouW1+xLDw43hcOVv6qSPFa=sg@mail.gmail.com>
-Subject: Re: [PATCH 00/10] gpu: nova-core: Boot GSP to RISC-V active
-To: Danilo Krummrich <dakr@kernel.org>
-Cc: Alexandre Courbot <acourbot@nvidia.com>, Miguel Ojeda <ojeda@kernel.org>,
- apopple@nvidia.com, 
- a.hindborg@kernel.org, airlied@gmail.com, alex.gaynor@gmail.com, 
- aliceryhl@google.com, bjorn3_gh@protonmail.com, boqun.feng@gmail.com, 
- dri-devel@lists.freedesktop.org, gary@garyguo.net, jhubbard@nvidia.com, 
- joelagnelf@nvidia.com, linux-kernel@vger.kernel.org, lossin@kernel.org, 
- maarten.lankhorst@linux.intel.com, mripard@kernel.org, 
- nouveau@lists.freedesktop.org, simona@ffwll.ch, tmgross@umich.edu, 
- ttabi@nvidia.com, tzimmermann@suse.de, 
- Nouveau <nouveau-bounces@lists.freedesktop.org>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-X-Mailman-Approved-At: Sat, 13 Dec 2025 12:40:48 +0000
+X-ThreadId: Ahk4-nWWyfYc
+Date: Wed, 03 Sep 2025 17:21:52 +0200
+From: "Janne Grunau" <j@jannau.net>
+To: "Danilo Krummrich" <dakr@kernel.org>, "Alice Ryhl" <aliceryhl@google.com>, 
+ "David Airlie" <airlied@gmail.com>, simona@ffwll.ch,
+ "Maarten Lankhorst" <maarten.lankhorst@linux.intel.com>,
+ "Maxime Ripard" <mripard@kernel.org>,
+ "Thomas Zimmermann" <tzimmermann@suse.de>, acourbot@nvidia.com,
+ daniel.almeida@collabora.com
+Cc: nouveau@lists.freedesktop.org, dri-devel@lists.freedesktop.org,
+ rust-for-linux@vger.kernel.org, LKML <linux-kernel@vger.kernel.org>
+Message-Id: <a6ffa735-5678-4011-84af-b526ba31d53f@app.fastmail.com>
+In-Reply-To: <20250901202850.208116-1-dakr@kernel.org>
+References: <20250901202850.208116-1-dakr@kernel.org>
+Subject: Re: [PATCH] MAINTAINERS: Add drm-rust tree for Rust DRM drivers and
+ infrastructure
+Content-Type: text/plain
+Content-Transfer-Encoding: 7bit
+X-Mailman-Approved-At: Sat, 13 Dec 2025 12:40:44 +0000
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -98,26 +110,33 @@ List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-On Fri, Aug 29, 2025 at 9:40=E2=80=AFAM Danilo Krummrich <dakr@kernel.org> =
-wrote:
+Hej,
+
+On Mon, Sep 1, 2025, at 22:26, Danilo Krummrich wrote:
+> Multiple DRM Rust drivers (e.g. nova-core, nova-drm, Tyr, rvkms) are in
+> development, with at least Nova and (soon) Tyr already upstream. Having a
+> shared tree will ease and accelerate development, since all drivers can
+> consume new infrastructure in the same release cycle.
 >
-> I'm happy about every potential additional reviewer for Nova, but I'm not=
- sure
-> it scales very well for the rust-for-linux if we get more drivers. :)
+> This includes infrastructure shared with other subsystem trees (e.g. Rust
+> or driver-core). By consolidating in drm-rust, we avoid adding extra
+> burden to drm-misc maintainers, e.g. dealing with cross-tree topic
+> branches.
+>
+> The drm-misc tree is not a good fit for this stage of development, since
+> its documented scope is small drivers with occasional large series.
+>
+> Rust drivers in development upstream, however, regularly involve large
+> patch series, new infrastructure, and shared topic branches, which may
+> not align well with drm-misc at this stage.
+>
+> The drm-rust tree may not be a permanent solution. Once the core Rust,
+> DRM, and KMS infrastructure have stabilized, drivers and infrastructure
+> changes are expected to transition into drm-misc or standalone driver
+> trees respectively. Until then, drm-rust provides a dedicated place to
+> coordinate development without disrupting existing workflows too much.
 
-Yeah, it is an informal rule I/we added back then so that people
-interested in Rust in the early days can follow everything in that
-list.
+I think this good idea. I plan to make an initial asahi submission based
+on v6.18-rc1. Feel free to add asahi to the list.
 
-The expectation was that eventually it would go away organically as
-time passed if Rust grew -- I mentioned it here since I saw people
-mentioned explicitly otherwise.
-
-@Alexandre As for your `MAINTAINERS` suggestion, up to all of you --
-other entries do that currently, but it is not a requirement, and you
-are big enough already (have several people looking at patches etc.).
-
-Thanks!
-
-Cheers,
-Miguel
+Acked-by: Janne Grunau <j@jannau.net>
