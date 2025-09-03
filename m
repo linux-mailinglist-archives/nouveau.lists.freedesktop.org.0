@@ -2,172 +2,168 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id AF87DB41EFA
-	for <lists+nouveau@lfdr.de>; Wed,  3 Sep 2025 14:30:04 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id E9B83B41FEA
+	for <lists+nouveau@lfdr.de>; Wed,  3 Sep 2025 14:51:36 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 3B43B10E7D2;
-	Wed,  3 Sep 2025 12:30:01 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 387FD10E800;
+	Wed,  3 Sep 2025 12:51:32 +0000 (UTC)
 Authentication-Results: gabe.freedesktop.org;
-	dkim=pass (2048-bit key; unprotected) header.d=Nvidia.com header.i=@Nvidia.com header.b="YZ+yt8NE";
+	dkim=pass (2048-bit key; unprotected) header.d=Nvidia.com header.i=@Nvidia.com header.b="ZFFajYG1";
 	dkim-atps=neutral
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from NAM12-MW2-obe.outbound.protection.outlook.com
- (mail-mw2nam12on2066.outbound.protection.outlook.com [40.107.244.66])
- by gabe.freedesktop.org (Postfix) with ESMTPS id C507F10E7C9;
- Wed,  3 Sep 2025 12:29:58 +0000 (UTC)
+Received: from NAM10-MW2-obe.outbound.protection.outlook.com
+ (mail-mw2nam10on2058.outbound.protection.outlook.com [40.107.94.58])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id AF02210E051;
+ Wed,  3 Sep 2025 12:51:30 +0000 (UTC)
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=E5MawvM6/WY1albIPH2/hxK7leSqpDhYlN/Dwbk55UEm56kz2fpVnoEPhICi70zWQGfuaxmZ8ZBJNMBiQy7HtJ1ooPo06RRatwI7/DJBDq1UeF3y1N1Jrs0XI3ictNtEjQTfspoIHpcW9Y8fRtGSUZTvPNV0GBgZRvOVhhs0Xo9m9x+4g01IsAjxLfANJyciEphCqtkhsPYxWqJZzw9v7XGoIgbFX2jFlLT7aGa7Szwq9jBJVTS9LOxCBTpEDWr1kUfScWCCtRUP8zxuApKmD74SVNfO/1XtvwH1J2HGNy8RW0WB44J4m6W80bvX9WICnMmn95aqdXCbjGdAKCsh2A==
+ b=cFbJSXR0xYkkcdJF0GvUAmI2UlescLSEhL2s6BvfWpbeyYRR6A9BeirSkBjQcTN2MxWNzevpU8sk0Tht8akdmjKUEqjaZNUE8XqKCAOyv9t+5cDiL3avmXR7WKiplbDUoDRCB4whMyqKDurAwGJ4r/GfTcmT9sVVjlhGu1bHQ7+QTOT79x6uNVWMEWZ5NPEvrLeDs4p8iySbDmKqq/MFaYq8UnDdZLYqoBS2EP7JFdkwn50UNMsP/hqupyVduGWO65Ygc1tt5bDmEs53fMY1sFkbELQPEAWaVfVsAzNirjpIZpfV+4SDBeYc4AGYEEjTQ1D5DpsR3ARx+y6MJSCQJw==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
  s=arcselector10001;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=fBDWe0+J78vyzRgqZt8Ta2aWLGXt2xprRr1uK3wR/Bk=;
- b=J7eXQSoI5yNrTWW/FO0Rz5FeTv00BdssbKPn8x2E89gkPKCqZGM2Hx080pN0RJokzyh3hISgf5zFLUFyL0b7d7g8oCf7pExc7D4yPOGYI0NM0Y2gdfaD6oBgxUX6K1l4kZ+GtiBaBJ5LUtEPkT8bmDoNFZzlsG64JciSkTaYgBoGwvg5zFBC3znLmTX7rP9EHS4S3l79RYCYWmea0uDQuIYfnXqfVbj2pLL6m6XYbcKCsEJgKcnZPyk4IU0e0luSzqOm9ucJBFMFTPfCF8gOBChZkSRoemCmOQTjOFuGRzxUw/DS6JrIHJSVMqjyNZnjraTesdOvbBQh1kqSOqcrTg==
+ bh=tgsbHsheFR2iXaCJ5x2JXa25Fh1PQjR1HUEuo8pwUPc=;
+ b=fmdDmfnZDIcw3XTFbW3aV5p1Np31pN6AIeE0Mo5TyhUrZETJleQhXxMcCyzKCv+TKxC4fruYi/c0gADmGrgFfxML0PjVLeRXDbzni2OkWl5XQ13Nzmgf+ATjod7eRweMPDM+nxfbtFVQmYTdZmxFjgTWG+F0T5rVJtKqSjcqwp4YkQPoq6sPFuOX7F8ZSkBzyBb+mO0suiEnpXmpeg3CwWUHIvh5HBh6DhExpVQ3m8ZgliHNboR9R+t2Hdg+q+KqZymV03pwu7kB8bXwQCRxR1PECuQQwkZQKAdesE2A5h3BIHVwaBhbXDrS+Q1w/dh8xZSBlhrJNIV/iHPG9jTpgA==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
  smtp.mailfrom=nvidia.com; dmarc=pass action=none header.from=nvidia.com;
  dkim=pass header.d=nvidia.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=Nvidia.com;
  s=selector2;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=fBDWe0+J78vyzRgqZt8Ta2aWLGXt2xprRr1uK3wR/Bk=;
- b=YZ+yt8NE0nk+/zTmQDzpkmvBoXFJTojlYipxaCtRhx7TD6aZS0oMR2JhqZ2qnb3/eLQUVcrm0lQ7dpiHOWSn9yGxA9no3/6DfIeHwEOp1JsykN43L4cB3RTXaP6yoo4ipAWa2ZIhg//TpqDCrbomT0ceQQnsMp9vL432+fQm0lLBk1CrtLBvCvPeFXrpa2lUElZJp6OWEJh5RljR1KT/Z8p9HxzJa1AMgyiWKNUVeAU5Ue6P2+vYnZ1XhoVj6XfbOaTt6vPBGgOX5OFH8E18XjUDFrrIksubuWbKxJw6EQ7YvN1uCDfG2ckxBXmP+brw1/CgiYxIeFGM2shJiabedw==
+ bh=tgsbHsheFR2iXaCJ5x2JXa25Fh1PQjR1HUEuo8pwUPc=;
+ b=ZFFajYG166rFQ5YBex0LaqRQpXTFqK7sWCDhVzgel3jTVkY+wODdAk45B1zdtvCFoeEDArglBheH2I9pjt8goJLt+GE2XGdkD1G/qcXiVFv+QesZuPMBzukhCHEqduFS5fgFUa6BhMs7x5uf6QhT1BicDlADmz+dsdYdgcQtk85Q5N+Bs6bAcX5HzYf1OXGUhsvTamSAB/ZyC8ONqGgLP0GBKzS2iXvBiXLoxwwQ5OCqEj/F8BcPCVMCMwis6/ozJnCB70nOLbQm4syHPgiRc3HRLizR/TjLVket8mbKeGubPHS4JGlbiC3QG5L6HXEDQQEFHeoeh9veoWNYaBHHkg==
 Authentication-Results: dkim=none (message not signed)
  header.d=none;dmarc=none action=none header.from=nvidia.com;
 Received: from CH2PR12MB3990.namprd12.prod.outlook.com (2603:10b6:610:28::18)
- by CY1PR12MB9584.namprd12.prod.outlook.com (2603:10b6:930:fe::14)
+ by PH7PR12MB6418.namprd12.prod.outlook.com (2603:10b6:510:1fe::18)
  with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9073.27; Wed, 3 Sep
- 2025 12:29:55 +0000
+ 2025 12:51:23 +0000
 Received: from CH2PR12MB3990.namprd12.prod.outlook.com
  ([fe80::6e37:569f:82ee:3f99]) by CH2PR12MB3990.namprd12.prod.outlook.com
  ([fe80::6e37:569f:82ee:3f99%3]) with mapi id 15.20.9052.027; Wed, 3 Sep 2025
- 12:29:55 +0000
+ 12:51:23 +0000
 Content-Transfer-Encoding: quoted-printable
 Content-Type: text/plain; charset=UTF-8
-Date: Wed, 03 Sep 2025 21:29:51 +0900
-Message-Id: <DCJ5ZOH6DO2S.8GGF9FABSVNT@nvidia.com>
-To: "Danilo Krummrich" <dakr@kernel.org>
-Cc: "Miguel Ojeda" <ojeda@kernel.org>, "Alex Gaynor"
- <alex.gaynor@gmail.com>, "Boqun Feng" <boqun.feng@gmail.com>, "Gary Guo"
- <gary@garyguo.net>, =?utf-8?q?Bj=C3=B6rn_Roy_Baron?=
- <bjorn3_gh@protonmail.com>, "Benno Lossin" <lossin@kernel.org>, "Andreas
- Hindborg" <a.hindborg@kernel.org>, "Alice Ryhl" <aliceryhl@google.com>,
- "Trevor Gross" <tmgross@umich.edu>, "David Airlie" <airlied@gmail.com>,
- "Simona Vetter" <simona@ffwll.ch>, "Maarten Lankhorst"
- <maarten.lankhorst@linux.intel.com>, "Maxime Ripard" <mripard@kernel.org>,
- "Thomas Zimmermann" <tzimmermann@suse.de>, "John Hubbard"
- <jhubbard@nvidia.com>, "Alistair Popple" <apopple@nvidia.com>, "Joel
- Fernandes" <joelagnelf@nvidia.com>, "Timur Tabi" <ttabi@nvidia.com>,
- <rust-for-linux@vger.kernel.org>, <linux-kernel@vger.kernel.org>,
- <nouveau@lists.freedesktop.org>, <dri-devel@lists.freedesktop.org>
-Subject: Re: [PATCH v3 02/11] gpu: nova-core: move GSP boot code out of
- `Gpu` constructor
+Date: Wed, 03 Sep 2025 21:51:20 +0900
+Message-Id: <DCJ6G4DJ1JSY.1U6II6SNMZAZQ@nvidia.com>
 From: "Alexandre Courbot" <acourbot@nvidia.com>
+To: "Alistair Popple" <apopple@nvidia.com>
+Cc: <dri-devel@lists.freedesktop.org>, <dakr@kernel.org>, "Miguel Ojeda"
+ <ojeda@kernel.org>, "Alex Gaynor" <alex.gaynor@gmail.com>, "Boqun Feng"
+ <boqun.feng@gmail.com>, "Gary Guo" <gary@garyguo.net>,
+ =?utf-8?q?Bj=C3=B6rn_Roy_Baron?= <bjorn3_gh@protonmail.com>, "Benno Lossin"
+ <lossin@kernel.org>, "Andreas Hindborg" <a.hindborg@kernel.org>, "Alice
+ Ryhl" <aliceryhl@google.com>, "Trevor Gross" <tmgross@umich.edu>, "David
+ Airlie" <airlied@gmail.com>, "Simona Vetter" <simona@ffwll.ch>, "Maarten
+ Lankhorst" <maarten.lankhorst@linux.intel.com>, "Maxime Ripard"
+ <mripard@kernel.org>, "Thomas Zimmermann" <tzimmermann@suse.de>, "John
+ Hubbard" <jhubbard@nvidia.com>, "Joel Fernandes" <joelagnelf@nvidia.com>,
+ "Timur Tabi" <ttabi@nvidia.com>, <linux-kernel@vger.kernel.org>,
+ <nouveau@lists.freedesktop.org>, "Nouveau"
+ <nouveau-bounces@lists.freedesktop.org>
+Subject: Re: [PATCH 03/10] gpu: nova-core: gsp: Create wpr metadata
 X-Mailer: aerc 0.20.1-0-g2ecb8770224a-dirty
-References: <20250902-nova_firmware-v3-0-56854d9c5398@nvidia.com>
- <20250902-nova_firmware-v3-2-56854d9c5398@nvidia.com>
- <DCIKSL18GE9A.2R4BAGR56YVPF@kernel.org>
- <DCIZ5VVLACXO.1L0QTYM5YVRQV@nvidia.com>
- <DCJ0T81CZQ88.6IK6LG0E0R02@kernel.org>
- <DCJ3R8YQUYK1.3K5BCWHMAEOL7@nvidia.com>
- <DCJ46WGRUXR8.1GKGGL2568E1X@kernel.org>
-In-Reply-To: <DCJ46WGRUXR8.1GKGGL2568E1X@kernel.org>
-X-ClientProxiedBy: TYCPR01CA0094.jpnprd01.prod.outlook.com
- (2603:1096:405:3::34) To CH2PR12MB3990.namprd12.prod.outlook.com
+References: <20250827082015.959430-1-apopple@nvidia.com>
+ <20250827082015.959430-4-apopple@nvidia.com>
+ <DCHAPJRPKSSA.37QLQGAVCERCZ@nvidia.com>
+ <iyjecyybwyilem2ituw6esmufid72cximthc5qo2fgdpzz4fko@cb6n2vcrptb5>
+In-Reply-To: <iyjecyybwyilem2ituw6esmufid72cximthc5qo2fgdpzz4fko@cb6n2vcrptb5>
+X-ClientProxiedBy: TYCP286CA0287.JPNP286.PROD.OUTLOOK.COM
+ (2603:1096:400:3c8::9) To CH2PR12MB3990.namprd12.prod.outlook.com
  (2603:10b6:610:28::18)
 MIME-Version: 1.0
 X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: CH2PR12MB3990:EE_|CY1PR12MB9584:EE_
-X-MS-Office365-Filtering-Correlation-Id: cba819f0-0796-4501-c013-08ddeae5967e
+X-MS-TrafficTypeDiagnostic: CH2PR12MB3990:EE_|PH7PR12MB6418:EE_
+X-MS-Office365-Filtering-Correlation-Id: 3cc43ad7-f127-4cfb-fddf-08ddeae89659
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
 X-Microsoft-Antispam: BCL:0;
- ARA:13230040|366016|1800799024|376014|7416014|10070799003; 
-X-Microsoft-Antispam-Message-Info: =?utf-8?B?SGZUVnBMUEVHTmlHRityZUJUOEowZDFyb2hVRU1NSEczcFBYZmFzZlFsZ3BE?=
- =?utf-8?B?cCt6SkNOSUJoUEhxZnY1RnlsZVNJQkZZRk5uVDlUbmt5VVdBTklEVFE1Mk9Y?=
- =?utf-8?B?a04yTGVycVhLaUc3NTFSTUtFWThLMUpVbjRlSkVkVFNXZElvekgrdjRWak85?=
- =?utf-8?B?TWRaMGtiV21haGFpSUFXMFdacThCUElvVnN0NnEzYjlFOVVYQzUwMUhnVlFm?=
- =?utf-8?B?VVBzcHBlcXRFdUI3VThCL3RJWGI5NjErSDRnRk9GamJTbWhxY3ZjMkdhemQ1?=
- =?utf-8?B?WWlVK0tWUWU5OU5MSUZXQ2t6OU9YeWRvaVA0WXFsclp2WCtKSVJSckdzSXVy?=
- =?utf-8?B?NTVWdHoyaTE0b0ZhQzdXQSt3VXd4TE53K1c3VjA3cytoRTBHTEx2L3MwVnpR?=
- =?utf-8?B?WElqSHN0R3pZeTNWa3IzMFRWWCtPc1VPcUxlRnRGNXkvbG9tMVBhRVJaVjI3?=
- =?utf-8?B?TUxnOUhHWG9rOGxFM0JqZVROeWpUM2NQZjN0ZTNOUC82dEtFQ3cxdkVrZUl4?=
- =?utf-8?B?Tjd3Y3V6M25XVU1xUW94ZHJrb3EwR1RFMUdvWDB5RWl0UFh6YVVHdG40dmFE?=
- =?utf-8?B?ZkREbHdTcmZhRDYvZFUyaUZReFpXK0F4dkhwUnFka1VmaXdmWU1wM3dldjA4?=
- =?utf-8?B?UGdwS3Z6WFZWZXQrSGJCcEY1ZTJPekt4SlRUbzZmWXc3L1UvdkNNKytybzN4?=
- =?utf-8?B?WFhBTjZ2dURQUWJjZEhpaFFsWStuQmd0SllJRlE0dXVWU1lRNnQ2Sk5sY3Zw?=
- =?utf-8?B?bThydmpGRnRMSllvWk9rUmV1RmxlMFcxcEZLaHA0empGWE42emlLZ1lpMzdW?=
- =?utf-8?B?WFl4NGtzelR5K3piaktWa3pmRlBOS2xrSVRVeEhCaVYvVkN2QUVSblhvWEty?=
- =?utf-8?B?TTVxUzFVaGJGNDhGVGVRNTZFU2JRZS9ZQjhDQUZiMUlwM0RCZnBDZlR4YnFn?=
- =?utf-8?B?L2xWeWZyVFRxRW9EbnlCaUxtcnZzNFhvN1RhcTFlN0tSSGtDNHRTZ0t5WFJM?=
- =?utf-8?B?elBHTlJGa1lsZEpNQWpkSUpUdUFmeXB4Nkw1L1JoWCtWRVpxTjRHUXV1c0ts?=
- =?utf-8?B?VXc0Y2VSSXpRamRqRWVrS2wzcDFVOU9sT2lacjhscHdzN0J2ZGJkUlZLSnFw?=
- =?utf-8?B?bEtxNWtSUFk2dFd5M0RVN3RtY1cyNngwaW9qWGV4ZnRKaE5lUW5jN3ZxWlp5?=
- =?utf-8?B?bHRBNzNRUWlmNDJ6dVNSd1FHUXFmdDZiNjF0MzhqTjh6eUY5UWVDMGR2ajFX?=
- =?utf-8?B?bU43V0hIcnFKYy9LaDQ0dFZQZXcyTnk4Q0hzanhtRzRRZVkrWlB0cGFSV2lt?=
- =?utf-8?B?djFYOEZJZHUrWVNUaWtJY3VJZDBSZGFsTE5pWnRGWDRJYWJObXVNNk9IOWlT?=
- =?utf-8?B?QXEvcmlraFFwYkc0cWVhZGNacDdJZTY5MHZMNnA3cDg1Ynp6MEdQYTRSa3pN?=
- =?utf-8?B?cWRSTFFDOTFMQ3NOTGNadGQ3R1FFZVVNUlZSdFV4MkcybzBaeDgyL2RNaTBU?=
- =?utf-8?B?OWJyZjF5Q3Npc0RKdkxOeStXMlJKbjd2Rk9OZTdUb0VsVXluZFlMazlOREFX?=
- =?utf-8?B?Vy8rVE03K09UeEZ3cFM0WHZhdnJocjEvY1liQWNkM3h4V1ZQQXc4dXpKaDAr?=
- =?utf-8?B?cjZvbDJiQVRtZ1RwSk4yQVF1TXhlT0VhaXJrUzhldGJvQk4xdVRhYi9raUVh?=
- =?utf-8?B?SzJyU01xamg3dlNURjhIei9TRzg2clJwNmdYUVVEaHJLVVYwaVZmTWZ4bUZq?=
- =?utf-8?B?Q3ZEcmdtd0xGSHpGQVdZUFlROGJjTCtCQ05QbkVPY3pOVGo2UC82Z01CNGpD?=
- =?utf-8?B?WS8weUUzcXVNa2VSd0hzbXFONE5jUTNPbEs5OVgrUGREb092VEVDelhWTHB3?=
- =?utf-8?B?VmxyYkQxQk1xangyQ1U4S1V4cGdpRnU3TXptWUVuTFFhTmNXdjFGaW83UXh5?=
- =?utf-8?Q?SZaFDZks9J8=3D?=
+ ARA:13230040|366016|1800799024|7416014|10070799003|376014; 
+X-Microsoft-Antispam-Message-Info: =?utf-8?B?L3llR2JvYlQ0UExaN2RraGRCQnZsSFNWTkpHc3N6NnhQeTFRVHZtWE1Nd21H?=
+ =?utf-8?B?WHFKNCtMbzVnRnJ3QjVWZnBpalNKSEhTU3Zmd0V2WllEODhzWnUydWc1RWNB?=
+ =?utf-8?B?TVIyN0E0aHdpSDRaaXV6c1Q1UGFJNjl4QmdYeDFTRENwM0VBVVNQdFpFa3E2?=
+ =?utf-8?B?M1dyVmJaNjNYWVlIR1JsOXQ3RVV1K29JRzFaVFFDQlkySG5jSmZmaFhuL0Qw?=
+ =?utf-8?B?ck9wUjIzSDZNUEF6RGhCZVNhOWhmcXJFZnV3aFhjUTNua3RCc3Yza0ZpNTdI?=
+ =?utf-8?B?WkEra1RGeWExa29nVlU0WUtBTlBNdDFTSUJJdDJhdGJhTS9MVVpuZTBYUHYx?=
+ =?utf-8?B?dThxWDZ5d0FScGFVYTUwQ25GeFpKVnJvSVFZQWc4ZzZxK0wxVmIrclk3N3RT?=
+ =?utf-8?B?T04yVGlBRENqenJpeEpET2dINmRNWHFyQmRFZ2tNRStZVHlJU2hFR2lEY2Jq?=
+ =?utf-8?B?WHpkQU1HQUo5aWhrMVJGTkZMVitBSXFNRXBHVWNGTGRhTWp2VEZIdWpQZzVv?=
+ =?utf-8?B?UURCMUdLZ1hzSVdmSHB2L1Z4SGpGbVFWbXlSUFJqNUQ1RVNLd051b1g0TVg1?=
+ =?utf-8?B?bWxyYWYzck9DQm5zOCtJb3ZOaGFWVVFHaDAzS2VyVndwWnlUc29Fd0tTalp3?=
+ =?utf-8?B?VHBJcmE5R3dZVGtIZTVpUitzTURyV2x0eFYyM0J0UW13MXdKMUFyM0VCa2ta?=
+ =?utf-8?B?Y29YRU9lTVdyUm4rbnFBTmEwaTVISzRIQVpuUm5ENlNhVzd3YlJ0N0dlNVhm?=
+ =?utf-8?B?RGh2RDYwN1pybzIrT2RIUG5ROGVTNllINFlxRVdJNW5TNEdmOGNnRmltY05v?=
+ =?utf-8?B?d1ZVeUY1M0gwZ3JaSHE0WWNXSFhkOXVydTZneUJvUVlmaG5vTHkvNlhCeUE1?=
+ =?utf-8?B?Zk96aFZCdzhaSnFOUlFESWNjcUNic3pnVUpJSEt3dXlLVU01T0txMDBqTEVz?=
+ =?utf-8?B?SURPZ3pPKzNocGozaGhKRGlOVEV6dFVuTnoyeXBvK2V2U1pPNGxNeUVodXpr?=
+ =?utf-8?B?Yys2aktzTHY5TEVKdzl0aHoyQ2kxcDlvaFlxY09nS24wR1pneVk1ZWk1bm9n?=
+ =?utf-8?B?dU41d3Z5SVBDWExOWVBFZEFwcGp6NFp3d0Q3OE9SaTZQTmlTcFVCMzJkdENr?=
+ =?utf-8?B?L0ZPbEIrNlNoNWxpaEM5TDZRUktOcW40SGQ5WGYzbTVZWUpMTFFmNVRTNmwr?=
+ =?utf-8?B?UWlNUTZlVkRMWGNsNGNBazNPaUhBRGNMZnFqcmtjYjM1Tm1KZElldDVhQnk3?=
+ =?utf-8?B?d25DWDc1emhoKzYxZDdnb1JBWmJpVXNYdWt0bVIzUlVOZmp1Ti9yVmlLTWx0?=
+ =?utf-8?B?Ym0yYnpXcGRoVCtldFd1ZmxIU1NYQzdUY0U4Wm5PeWo5ZnFXY1QrY2ZXZ01J?=
+ =?utf-8?B?VXE4Wm1jK1NzOFFLWWdoNTQwQlZUTnE4cWU5VlJxeGdpNkVoMWdoRXEvRDhU?=
+ =?utf-8?B?RXRQQmF5RWF2WkVCaGg2akdwd2NoTzAyWFZPUUJ3RnRRNWlwVG9mbllEelVi?=
+ =?utf-8?B?V1B2U0hzamhtSE9VV0pFREVzbVhKUU53QlN6MGlBUjVNVXNhMXBDazFzdXda?=
+ =?utf-8?B?QjNHcDFrdDd1ajJxWUtoTCtQTGJGWGdzelFnRGMvUTkrOTlQeVVpTkRmdXdV?=
+ =?utf-8?B?ekZsWTZjMmZ6c3JPcENibGUzRitGbWxUMTN6ZkFPMENhNUhYZnV6WGVudUd3?=
+ =?utf-8?B?bzhTMXgxSU4rSVRDYXlnYjNRanhUQnJMc1NtcWVOOGZaZER2WGM3SlE0dHpx?=
+ =?utf-8?B?NlIrOW9FRGJ6bVlydEdHRithSzJnaisvbXhVeWFVUHFPWENlcHJabmtzSHF2?=
+ =?utf-8?B?OGRKNjFYbldYTmhEUGl0VWxFb1lYUlJVZVRUSDQ2ZzgxTnBqVnlmeTZJcXR2?=
+ =?utf-8?B?UmV1UERTUnBueWlHeHh2cDR3L1ZTNDZGYU5SeHpIMzQzTXZ3b1RyUzBhRnVK?=
+ =?utf-8?Q?b0rhTfhf7xQ=3D?=
 X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
  IPV:NLI; SFV:NSPM; H:CH2PR12MB3990.namprd12.prod.outlook.com; PTR:; CAT:NONE;
- SFS:(13230040)(366016)(1800799024)(376014)(7416014)(10070799003); DIR:OUT;
+ SFS:(13230040)(366016)(1800799024)(7416014)(10070799003)(376014); DIR:OUT;
  SFP:1101; 
 X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?KzR1bWFVWmdYUzl6WlZmblBlRFFhMGxGdS92NHU1ZjZXVHpsdXBKZTFVVUtX?=
- =?utf-8?B?NHdQMHFqUTNVNnZMWk9PcFA2ZENnS3hXWnBvMVJoa0hsaHJEYzhUVjB5cDl5?=
- =?utf-8?B?a1cwRU42VjJ2Sjk3YUZxVEZmMGNFTk1xMEFVRHJSYTYrLzJ2R3RFQ1ZkRVlY?=
- =?utf-8?B?eUh6UDhOUCtyOXB4YlRkVXpYa0VxU0IzdDFlNmpMcWVxTUY2VnpqbzdzSjNJ?=
- =?utf-8?B?K3FzeGJHa1RyZGRidnNBYzVLK3lObnlLb0VQdjVGQXdyM2N0Ni9BalFOQlVz?=
- =?utf-8?B?VlhvK21wdFhQaDZpVEZMN1VEK0UvQzBCUWdzWlNBWC85Mm1KdWJ0VDFDTnph?=
- =?utf-8?B?YmhhYU1JcEpTUEIydzI1STg2K0tyTWdPL0pzQkZ4L2pFSlk1M2JCY1ptM0Fz?=
- =?utf-8?B?bHhCZlFsM3BMeU8rT2RGd2lWNWN1MVRRRWliSC9jN3FENEdHbWljWGpzeHFK?=
- =?utf-8?B?K1pOTGgxMzBTd3g0bmtJZ21pUmp3Zm1YMlVkS3ROai9hOXl0VTlpVjhVeHVJ?=
- =?utf-8?B?TXFONzBabmUwZTI4ZVVubFRaTS9FZDB2RVNucVhNdlRnRUEvNVlmSnl5K01x?=
- =?utf-8?B?RTByN2d3Zk93dGwxUVJLRlRmOEsweUZYb0NIczhwcFBveitaM3VZMWZjU2Fq?=
- =?utf-8?B?RU81enVwZm1RL0xJeDNPNW5LMjFpSmtiTGQweUZCTTVtenIyTGxZSjBnYm14?=
- =?utf-8?B?WkRiTWRlZUNXVExTS3B3amEwTkcrbzM1QmpwSElOUFU4eDdOMmJJVXNsMmxw?=
- =?utf-8?B?UnN0b3VucGVHZ2lxL3Vxd0NhSjVia1JjbjRURzVMUndCc2QrYWR1a1FCd0hL?=
- =?utf-8?B?bGJYem1FN0ljU3RobFozNEJUa3kxVEI4VnZCc0NscURBa1BUYUlpSWNwWjNO?=
- =?utf-8?B?dUQ0aCtSUXY2NE9nNHQ0dzEyRWJ5MFEwT2NIUmRhQUdZZlhSZ1pQclNidFlq?=
- =?utf-8?B?NDFaQm54Y0swRkNPN1piU0F1QlRIY1NlVG5lNEhtbzhCK3BvZDAvT0hRaGcz?=
- =?utf-8?B?bEdOV2o1aEFjN25pV2ROVktqVytOVEtiK2dvWGVRclZOV1hlYTd0dmc0OFhX?=
- =?utf-8?B?a2N0MnY1dHZLUzd3dHp5T0VRNlREWFlWRHJJaFFqNkQ2RHZCTHFtQnBJNk9h?=
- =?utf-8?B?KzB3OFFmVWhIcGh0NlVLdjFtSnNTV3FydUZMMGppMjVHVUxSRlI3VnpRSGlO?=
- =?utf-8?B?blRES25XdHdXNXMvWkhXSjMydGt1MktjZTBHQVhaMThHNmVQditYOXBnTzNK?=
- =?utf-8?B?WVZ6UmZodXJCYk5UaDEwUkxUTzZyUkZmQ0hSUWdlN0ZIRW5kR1dSbEt0QW9W?=
- =?utf-8?B?QlJqOXRUbFRVT1NyMzhhZ3hXbzV5SklWNi8zMkhadmw2S2d4a3ZwN3NkTTFu?=
- =?utf-8?B?RlVTai90Mzh6RWVFcVp5bEZJUktPSTlPM1JyTm9WQ25WYVpabHZvcnR1WnU4?=
- =?utf-8?B?dVJSa2Fva3NaZDduNE03ZUpmTENTZ2NIMVRKakJQVUF6SVFGMnpGQXBMWWs4?=
- =?utf-8?B?N1c1a1lzU2xEaGR4cUgzYnhwVSt2T2hmdzgxblNQRDRtb1Bkd1ozaHdSdVJZ?=
- =?utf-8?B?dG5YekZldjRYcHZqM3pnTWZVdUFpblFMYW41a2NiTjFFdmYzSHlURnNsam1v?=
- =?utf-8?B?ZzBOTHU1TFJwZWY0LzJJZkNuVDh3alJTeWZGdkpJcTBpUlNydDR6V3hBN2JY?=
- =?utf-8?B?RmMzVWF2eFkvR3cyczlPNXltSmF0Vy9JbEwrZnJSb1JnbnZCOExaWEYzMnRB?=
- =?utf-8?B?Vm1vWUtnMUJjMS9Ua0Vla3l3MXJKczlOaWIvRzIrWi9nM2lMNFVacDhMdWl5?=
- =?utf-8?B?Y3VXMW9WT0l6MEYyTkMzNGpidTdIbkpuRVNER084YUhEK25RYzZOdjNBc2Ir?=
- =?utf-8?B?YmkvZHU5dTN1L0hBRUN2MmRuMVNtdXhWekdBL2VuYmhZUHJsV0trZXd5VGlX?=
- =?utf-8?B?UTJRbHU2eEhoU1lVQWN2UmZXcklDY0lxbUYxRndIOENwQTBOQUs1YVQ0WGI5?=
- =?utf-8?B?UVNWd2xjWWZjdGJ1VHhQT2FGS1FUQ2M3RVhjWjBma0tiZmhjcWRVTWFOMXgx?=
- =?utf-8?B?SWtZaHZFQWZVdFJ4ZTI4bXFLWGpNTDRRb2dROGFEcmVwWmd0bkhNQjZpUmZa?=
- =?utf-8?B?bDZMSFpCOGFkeHJWdHBGQWpJZ3NPd0xVMEZlOThHR0VBaVFWeTM2QmFPMTV6?=
- =?utf-8?Q?iaNSWL/kUdf7+XB4OgSzfOeVxSejgwKQRAHvUFBSfm9I?=
+X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?cTRSVGg0YkluK0xMSm5qK3hSWmFqdjNoTlJDdjZOZE1lVGoxUkxiTzBYMHdP?=
+ =?utf-8?B?Z2lSWXlaeUJFZ1I5anNSUnFxdWFsTWp1ZWJrWlFGbDFOMTFXZGtJMTBsb2Jh?=
+ =?utf-8?B?OHowaEFOMmwyMjFqYnd5WGRXYXJSQzZIcWEwU05RLzd2OUlqQVp0aTdad1JE?=
+ =?utf-8?B?NVY3a2hnc3JiK043YXZkZnNxdXZ0bzZqdlFZbGdIeFNHRGZXYWtsN3RyUE1i?=
+ =?utf-8?B?UHZ5SnJoSTQ0TkRMODhLZFFrb0xRd0hyTEZNWVhTM2I0WFJoUThYSkNOS1VF?=
+ =?utf-8?B?cUYwUVBPbDJydnN5cWlXNTdFcW9FMy85Mk1reGZadWdJSitJSlJDcWZKRHgv?=
+ =?utf-8?B?SVBVYjJ0bDVuVFRoT1B0S2k2RjhNajY5Q1FkWjhDZ1V0K056VUtFeitlOHZ2?=
+ =?utf-8?B?TlU0RFBDY2N5QlRON25lQ1Fwcyt3elgxQXAzb1FDcXZWbUFQb1Q3cDNIdDFY?=
+ =?utf-8?B?SDA1U2hYcnhoRWlvRkEwKy9aQ1VYVVQyOUx0OUJVSGpwcm1BSFdqd3g3Zmpk?=
+ =?utf-8?B?Vm9KYllVVGNZTVVnL3dIVDY2RnpkSHEwL25kL3ZjS2w4U2grK0Zha2tzMnR4?=
+ =?utf-8?B?SmxJQW9XQTliZW5rMDJKS3ArSUpWNE5hNFgzWGV0RTRaRU5YSTVXNXVkSDFr?=
+ =?utf-8?B?QXMwZDQrY1lLcUFkM0w1TmhTMW52b3F2VUxSNE9tZGlqcTEvK0U2RGx5SWxL?=
+ =?utf-8?B?dHo4eVNvWTdURU9SNkRXNUdrMVFuS04vRFFxbnBEcTRJMUJmaU54NFBPNEZa?=
+ =?utf-8?B?RGE1MG15d2FFdmN2Y3lMNWYvRnZTZnRHVkl1SXphQnRsa0hwa2lLMkNXMzMx?=
+ =?utf-8?B?NHJqVnFvYXpGZm1RMFFQZFVRREMzQWF0ZldvMEhZaDhoUmpueDc0OEU1ZWQz?=
+ =?utf-8?B?cFhiV0JGQTF3MHRWWHlyNXllTHpnaXVPWm9sNTlnZUZqYzE4V1M3cDNDZDRH?=
+ =?utf-8?B?WEZRazZyaU0yRnZPWnJXL0lkMmYxVUVUNHhpSzc5bXVwWk1Ta3dBVGphYVVJ?=
+ =?utf-8?B?d0NxTGFyMzJ4S3I5NkZhRlJHcjB0eExHS1kxREkvSW8zNWJhcmhOd2xNRnRQ?=
+ =?utf-8?B?K29melVWWDJUOXZMT3JBeHVXenlObGhaUk8zRUE3SVRJeis3SXcxdGYra1pY?=
+ =?utf-8?B?OWppUnlzREdZYm93Y1prektidXk2ZkJFU1ZvL01jR2hnMTRFSFgyWVlUWGRX?=
+ =?utf-8?B?SnUrVFVXTkZ5b24wTGxDVVc2VDhBOW1PZXV5YnNjSkE0ZVlHdFNVMFZXTWNv?=
+ =?utf-8?B?emVEcWhxdjhUL1Z1QXdDeHM5UnUyMUZ0dGprY0tmQklUaDNsTTlkUTdwam5m?=
+ =?utf-8?B?cU9kWXNNWGx4bm9odklVdXJOK1JTRWpSZ2dhRlF6cEdDN1pzdktwRXdtMTNM?=
+ =?utf-8?B?QmpMc0trMFowQnphbE9sb0hyTmlsZzM0WXZPU1ZTYi9uMnhNUlpjM1d3eG1J?=
+ =?utf-8?B?aHZ6T0liUENZU0xtVlNTVG5NYitUUUJ0TmhrNnZpRmQvaVRvcTZIOHB4cDNn?=
+ =?utf-8?B?ZVVoOExtS0J4Zlllcy83SDdMM3I5QVpwZjNscEZ3MEpaVlZaSkg4d1kvTVYy?=
+ =?utf-8?B?MVJaL2M2d0dUUit4QW1VaWRuZm15TW1FMWhrc1RPS3FldVIrQmgweDNSR25D?=
+ =?utf-8?B?eFg1WDVuY0EycE1FTVplWUdGbXhzVjdRWVU1QW5LNkIrMHBhWEdRU1djenNi?=
+ =?utf-8?B?SkQ1QkNaaklEQ2FKd0xLOXNCUjJ0dTVZQXRVcjNwUkZXOTF5ME9JK29aejBr?=
+ =?utf-8?B?MzdyYmxNM2k0OTRWSXJ3MU5qY0cyR1d1NUNBK3lBQ1AvZlJ0eGIxdHVJZlZV?=
+ =?utf-8?B?SEJCS0ZwR2JRZGJmMkVpYjE4MlVTZXZZb0M2bk1WS1QzKytLdnVVMDZiSmsz?=
+ =?utf-8?B?Y254VVc0bHFZWFJTSGFHSVhtZzNnY1NiTmplNTRYekZRYUQzTkgreVNLdTQ0?=
+ =?utf-8?B?MkFzUzJFa2wxdVRKbzc2Z1NNQ2RkV2NHMWJzUE1JaGlvdytORzJoazh1dHIx?=
+ =?utf-8?B?MFF2eUhVOGc4bTFING95eEJRUnlzZVZpMXQ5eWNyVzc4T0Z0dGxhcE1acmFX?=
+ =?utf-8?B?YU0xSG9MU3lESlZpYlRxTjlhUjlPdFNrUlNLa3VRUlNGaFpCenVwNHRmdDRs?=
+ =?utf-8?B?R2F5cml0UEo2ZFdqVXFDeVg0eWRweC9XVVdlMk5IK1EzV1RsUHdaUDJOWEVk?=
+ =?utf-8?Q?jmgpXl7L5226limQADLgf+6JDRU+P0mc/WGSeA9uqZyH?=
 X-OriginatorOrg: Nvidia.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: cba819f0-0796-4501-c013-08ddeae5967e
+X-MS-Exchange-CrossTenant-Network-Message-Id: 3cc43ad7-f127-4cfb-fddf-08ddeae89659
 X-MS-Exchange-CrossTenant-AuthSource: CH2PR12MB3990.namprd12.prod.outlook.com
 X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 03 Sep 2025 12:29:55.2725 (UTC)
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 03 Sep 2025 12:51:23.4179 (UTC)
 X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
 X-MS-Exchange-CrossTenant-Id: 43083d15-7273-40c1-b7db-39efd9ccc17a
 X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: YzZJv+YAvMjd1yyKXyj+r7h3RitFbiog+7DD1+XqSnC07l9OeQl9OYDnOvI4X3gVErSGOwyMsLbNwZFkZAmpqw==
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: CY1PR12MB9584
+X-MS-Exchange-CrossTenant-UserPrincipalName: zXywmIM3J2f+Sf3WPcKxAPJYN/FJkpKz0M7WkOzDWCDlzpQp/Efp3Vlw/rsGeM4ByaLPFaJ6qXjZ0PTIAcGrmQ==
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: PH7PR12MB6418
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -182,162 +178,117 @@ List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-On Wed Sep 3, 2025 at 8:05 PM JST, Danilo Krummrich wrote:
-> On Wed Sep 3, 2025 at 12:44 PM CEST, Alexandre Courbot wrote:
->> On Wed Sep 3, 2025 at 5:26 PM JST, Danilo Krummrich wrote:
->>> On Wed Sep 3, 2025 at 9:08 AM CEST, Alexandre Courbot wrote:
->>>> On Wed Sep 3, 2025 at 4:53 AM JST, Danilo Krummrich wrote:
->>>>> On Tue Sep 2, 2025 at 4:31 PM CEST, Alexandre Courbot wrote:
->>>>>> diff --git a/drivers/gpu/nova-core/driver.rs b/drivers/gpu/nova-core=
-/driver.rs
->>>>>> index 274989ea1fb4a5e3e6678a08920ddc76d2809ab2..1062014c0a488e959379=
-f009c2e8029ffaa1e2f8 100644
->>>>>> --- a/drivers/gpu/nova-core/driver.rs
->>>>>> +++ b/drivers/gpu/nova-core/driver.rs
->>>>>> @@ -6,6 +6,8 @@
->>>>>> =20
->>>>>>  #[pin_data]
->>>>>>  pub(crate) struct NovaCore {
->>>>>> +    // Placeholder for the real `Gsp` object once it is built.
->>>>>> +    pub(crate) gsp: (),
->>>>>>      #[pin]
->>>>>>      pub(crate) gpu: Gpu,
->>>>>>      _reg: auxiliary::Registration,
->>>>>> @@ -40,8 +42,14 @@ fn probe(pdev: &pci::Device<Core>, _info: &Self::=
-IdInfo) -> Result<Pin<KBox<Self
->>>>>>          )?;
->>>>>> =20
->>>>>>          let this =3D KBox::pin_init(
->>>>>> -            try_pin_init!(Self {
->>>>>> +            try_pin_init!(&this in Self {
->>>>>>                  gpu <- Gpu::new(pdev, bar)?,
->>>>>> +                gsp <- {
->>>>>> +                    // SAFETY: `this.gpu` is initialized to a valid=
- value.
->>>>>> +                    let gpu =3D unsafe { &(*this.as_ptr()).gpu };
->>>>>> +
->>>>>> +                    gpu.start_gsp(pdev)?
->>>>>> +                },
->>>>>
->>>>> Please use pin_chain() [1] for this.
->>>>
->>>> Sorry, but I couldn't figure out how I can use pin_chain here (and
->>>> couldn't find any relevant example in the kernel code either). Can you
->>>> elaborate a bit?
->>>
->>> I thought of just doing the following, which I think should be equivale=
-nt (diff
->>> against current nova-next).
->>>
->>> diff --git a/drivers/gpu/nova-core/driver.rs b/drivers/gpu/nova-core/dr=
-iver.rs
->>> index 274989ea1fb4..6d62867f7503 100644
->>> --- a/drivers/gpu/nova-core/driver.rs
->>> +++ b/drivers/gpu/nova-core/driver.rs
->>> @@ -41,7 +41,9 @@ fn probe(pdev: &pci::Device<Core>, _info: &Self::IdIn=
-fo) -> Result<Pin<KBox<Self
->>>
->>>          let this =3D KBox::pin_init(
->>>              try_pin_init!(Self {
->>> -                gpu <- Gpu::new(pdev, bar)?,
->>> +                gpu <- Gpu::new(pdev, bar)?.pin_chain(|gpu| {
->>> +                    gpu.start_gsp(pdev)
->>> +                }),
->>>                  _reg: auxiliary::Registration::new(
->>>                      pdev.as_ref(),
->>>                      c_str!("nova-drm"),
->>> diff --git a/drivers/gpu/nova-core/gpu.rs b/drivers/gpu/nova-core/gpu.r=
-s
->>> index 8caecaf7dfb4..211bc1a5a5b3 100644
->>> --- a/drivers/gpu/nova-core/gpu.rs
->>> +++ b/drivers/gpu/nova-core/gpu.rs
->>> @@ -266,7 +266,7 @@ fn run_fwsec_frts(
->>>      pub(crate) fn new(
->>>          pdev: &pci::Device<device::Bound>,
->>>          devres_bar: Arc<Devres<Bar0>>,
->>> -    ) -> Result<impl PinInit<Self>> {
->>> +    ) -> Result<impl PinInit<Self, Error>> {
->>>          let bar =3D devres_bar.access(pdev.as_ref())?;
->>>          let spec =3D Spec::new(bar)?;
->>>          let fw =3D Firmware::new(pdev.as_ref(), spec.chipset, FIRMWARE=
-_VERSION)?;
->>> @@ -302,11 +302,16 @@ pub(crate) fn new(
->>>
->>>          Self::run_fwsec_frts(pdev.as_ref(), &gsp_falcon, bar, &bios, &=
-fb_layout)?;
->>>
->>> -        Ok(pin_init!(Self {
->>> +        Ok(try_pin_init!(Self {
->>>              spec,
->>>              bar: devres_bar,
->>>              fw,
->>>              sysmem_flush,
->>>          }))
->>>      }
->>> +
->>> +    pub(crate) fn start_gsp(&self, _pdev: &pci::Device<device::Core>) =
--> Result {
->>> +        // noop
->>> +        Ok(())
->>> +    }
->>>  }
->>>
->>> But maybe it doesn't capture your intend?
->>
->> The issue is that `start_gsp` returns a value (currently a placeholder
->> `()`, but it will change into a real type) that needs to be stored into
->> the newly-introduced `gsp` member of `NovaCore`. I could not figure how
->> how `pin_chain` could help with this (and this is the same problem for
->> the other `unsafe` statements in `firmware/gsp.rs`).
+On Wed Sep 3, 2025 at 5:57 PM JST, Alistair Popple wrote:
+<snip>
+>> I've discussed the bindings abstractions with Danilo last week. We
+>> agreed that no layout information should ever escape the `nvfw` module.
+>> I.e. the fields of `GspFwWprMeta` should not even be visible here.
+>>=20
+>> Instead, `GspFwWprMeta` should be wrapped privately into another
+>> structure inside `nvfw`:
+>>=20
+>>   /// Structure passed to the GSP bootloader, containing the framebuffer=
+ layout as well as the DMA
+>>   /// addresses of the GSP bootloader and firmware.
+>>   #[repr(transparent)]
+>>   pub(crate) struct GspFwWprMeta(r570_144::GspFwWprMeta);
 >
-> Ok, I see, I think Benno is already working on a solution to access previ=
-ously
-> initialized fields from subsequent initializers.
+> I'm a little bit unsure what the advantage of this is? Admittedly I'm not=
+ sure
+> I've seen the discussion from last week so I may have missed something bu=
+t it's
+> not obvious how creating another layer of abstraction is better. How woul=
+d it
+> help contain any layout changes to nvfw? Supporting any new struct fields=
+ for
+> example would almost certainly still require code changes outside nvfw.
+
+It is not as much creating a new abstraction layer as it is controlling
+where it resides - nicely contained in `nvfw` or all over the place.
+This is particularly relevant if we consider that binding abstractions
+are more likely to require `unsafe` code, that we will then be able to
+confine to the `nvfw` module. As I got reminded in my own series, we
+don't want `unsafe` code in regular driver modules.
+
+Even if a new field is added to `GspFwWprMeta`, there is a good chance
+that the parameters of its current constructor will cover what we need
+to initialize it, so the calling code outside of `nvfw` won't need to
+change. Of course we cannot guarantee this will be true all the time,
+but it still covers us better than the alternative.
+
+And then there is the question of if/when we need to support several
+firmware versions. If we start having code in `gsp` that is specific to
+a given firmware version, this is already a non-starter. Whereas having
+all the abstractions in a single module leaves us in a better position
+to use trait objects and virtual calls, or apply proc-macro magic.
+
 >
-> @Benno: What's the status of this? I haven't seen an issue for that in th=
+> My thinking here was that the bindings (at least for GSP) probably want t=
+o live
+> in the Gsp crate/module, and the rest of the driver would be isolated fro=
+m Gsp
+> changes by the public API provided by the Gsp crate/module rather than tr=
+ying to
+> do that at the binding level. For example the get_gsp_info() command impl=
+emented
+> in [1] provides a separate public struct representing what the rest of th=
 e
-> pin-init GitHub repo, should we create one?
+> driver needs, thus ensuring the implementation specific details of Gsp (s=
+uch as
+> struct layout) do not leak into the wider nova-core driver.
 >
-> However, in this case I'm a bit confused why we want Gsp next to Gpu? Why=
- not
-> just make Gsp a member of Gpu then?
+>> All its implementations should also be there:
+>>=20
+>>   // SAFETY: Padding is explicit and will not contain uninitialized data=
+.
+>>   unsafe impl AsBytes for GspFwWprMeta {}
+>>=20
+>>   // SAFETY: This struct only contains integer types for which all bit p=
+atterns
+>>   // are valid.
+>>   unsafe impl FromBytes for GspFwWprMeta {}
+>
+> Makes sense.
+>
+>> And lastly, this `new` method can also be moved into `nvfw`, as an impl
+>> block for the wrapping `GspFwWprMeta` type. That way no layout detail
+>> escapes that module, and it will be easier to adapt the code to
+>> potential layout chances with new firmware versions.
+>>=20
+>> (note that my series is the one carelessly re-exporting `GspFwWprMeta`
+>> as-is - I'll fix that too in v3)
+>>=20
+>> The same applies to `LibosMemoryRegionInitArgument` of the previous
+>> patch, and other types introduced in subsequent patches. Usually there
+>> is little more work to do than moving the implentations into `nvfw` as
+>> everything is already abstracted correctly - just not where we
+>> eventually want it.
+>
+> This is where I get a little bit uncomfortable - this doesn't feel right =
+to me.
+> It seems to me moving all these implementations to the bindings would jus=
+t end
+> up with a significant amount of Gsp code in nvfw.rs rather than in the pl=
+aces
+> that actually use it, making nvfw.rs large and unwieldy and the code more
+> distributed and harder to follow.
 
-To be honest I am not completely sure about the best layout yet and will
-need more visibility to understand whether this is optimal. But
-considering that we want to run the GSP boot process over a built `Gpu`
-instance, we cannot store the result of said process inside `Gpu` unless
-we put it inside e.g. an `Option`. But then the variant will always be
-`Some` after `probe` returns, and yet we will have to perform a match
-every time we want to access it.
-
-The current separation sounds reasonable to me for the time being, with
-`Gpu` containing purely hardware resources obtained without help from
-user-space, while `Gsp` is the result of running a bunch of firmwares.
-An alternative design would be to store `Gpu` inside `Gsp`, but `Gsp`
-inside `Gpu` is trickier due to the build order. No matter what we do,
-switching the layout later should be trivial if we don't choose the
-best one now.
-
-There is also an easy workaround to the sibling initialization issue,
-which is to store `Gpu` and `Gsp` behind `Pin<KBox>` - that way we can
-initialize both outside `try_pin_init!`, at the cost of two more heap
-allocations over the whole lifetime of the device. If we don't have a
-proper solution to the problem now, this might be better than using
-`unsafe` as a temporary solution.
-
-The same workaround could also be used for to `GspFirmware` and its page
-tables - since `GspFirmware` is temporary and can apparently be
-discarded after the GSP is booted, this shouldn't be a big issue. This
-will allow the driver to probe, and we can add TODO items to fix that
-later if a solution is in sight.
+If we want to split things more logically, I think it's perfectly fine
+to have e.g. a `nvfw/gsp` module that contains all the GSP abstractions,
+another one for the sequencer, etc. As long as all the version-specific
+bits are contained below `nvfw`.
 
 >
-> I thought the intent was to keep temporary values local to start_gsp() an=
-d not
-> store them next to Gpu in the same allocation?
+> And it's all tightly coupled anyway - for example the Gsp boot arguments =
+require some
+> command queue offsets which are all pretty specific to the Gsp implementa=
+tion.
+> Ie. we can't define some nice public API in the Gsp crate for "getting ar=
+guments
+> required for booting Gsp" without that just being "here is a struct conta=
+ining
+> all the fields that must be packed into the Gsp arguments for this versio=
+n",
+> which at that point may as well just be the actual struct itself right?
 
-It is not visible in the current patchset, but `start_gsp` will
-eventually return the runtime data of the GSP - notably its log buffers
-and command queue, which are needed to operate it. All the rest (notably
-the loaded firmwares) will be local to `start_gsp` and discarded upon
-its return.
+Which particular structure are you refering to?
