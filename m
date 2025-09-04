@@ -2,59 +2,90 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id 07C8ACBAD97
-	for <lists+nouveau@lfdr.de>; Sat, 13 Dec 2025 13:45:16 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 3A6A6CBADDC
+	for <lists+nouveau@lfdr.de>; Sat, 13 Dec 2025 13:45:32 +0100 (CET)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 0D952890B6;
-	Sat, 13 Dec 2025 12:41:32 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id D4ADE10EB59;
+	Sat, 13 Dec 2025 12:41:36 +0000 (UTC)
 Authentication-Results: gabe.freedesktop.org;
-	dkim=pass (2048-bit key; secure) header.d=mailbox.org header.i=@mailbox.org header.b="SndjjUac";
+	dkim=permerror (0-bit key) header.d=gmail.com header.i=@gmail.com header.b="LoF8ywxW";
 	dkim-atps=neutral
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from mout-p-102.mailbox.org (mout-p-102.mailbox.org [80.241.56.152])
- by gabe.freedesktop.org (Postfix) with ESMTPS id ED0CA10EA1A;
- Thu,  4 Sep 2025 12:21:40 +0000 (UTC)
-Received: from smtp2.mailbox.org (smtp2.mailbox.org [10.196.197.2])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
- (No client certificate requested)
- by mout-p-102.mailbox.org (Postfix) with ESMTPS id 4cHdrK2Whbz9tln;
- Thu,  4 Sep 2025 14:21:37 +0200 (CEST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
- s=mail20150812; 
- t=1756988497; h=from:from:reply-to:reply-to:subject:subject:date:date:
- message-id:message-id:to:to:cc:cc:mime-version:mime-version:
- content-type:content-type:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references;
- bh=N9J1O3ytfo0P4VBaS4kMaz2qKZjQjAFNlOY0psjZpuE=;
- b=SndjjUaceL0QkzdtGUfnlX3lR35ZwKgOxBawGZP/MjlGfYSzEctuM3Rv9Xz0iOLb2Hhg31
- N2c3yJSWKQJHbUxmgenUGA2YSPc1FQPrWDG4yj5efyqJQihOSSxp2yZ3vu3fbSRyV09qzP
- oP0GuSSZZvLJvz5GjriJ2rmEa0USyU+V5o7avZuEvVNGV8HfanuCFHDVoimSIe9HoC7UNC
- X77GUAYVpkLH2DdvyiEoyFWwkEy6lVJZbzjkyZ6wpt8dp5XVxzYHXfINotNrBbNJ5VfPX0
- JIoWJFAQl1FxamGHojYURzUKGRIBge/fkOMVjavg65A22wipF5QvlT55T1V/3Q==
-Message-ID: <27521eb23cca7c75eb0e0249f1f1a307279a5dff.camel@mailbox.org>
-Subject: Re: [PATCH v2] Revert "drm/nouveau: Remove waitque for sched teardown"
-From: Philipp Stanner <phasta@mailbox.org>
-To: Christian =?ISO-8859-1?Q?K=F6nig?= <christian.koenig@amd.com>, 
- phasta@kernel.org, Lyude Paul <lyude@redhat.com>, Danilo Krummrich
- <dakr@kernel.org>, David Airlie <airlied@gmail.com>, Simona Vetter
- <simona@ffwll.ch>, Sumit Semwal <sumit.semwal@linaro.org>
-Cc: dri-devel@lists.freedesktop.org, nouveau@lists.freedesktop.org, 
- linux-kernel@vger.kernel.org
-Date: Thu, 04 Sep 2025 14:21:32 +0200
-In-Reply-To: <53ec7656-d5d7-460e-a245-0c9598a71f26@amd.com>
-References: <20250901083107.10206-2-phasta@kernel.org>
- <3407fd9d-68e0-4c45-9761-98ede450bb25@amd.com>
- <b35506de99be38f560709660b10667ca9f386181.camel@mailbox.org>
- <53ec7656-d5d7-460e-a245-0c9598a71f26@amd.com>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+Received: from mail-yb1-f177.google.com (mail-yb1-f177.google.com
+ [209.85.219.177])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 845D710EAED;
+ Thu,  4 Sep 2025 21:35:41 +0000 (UTC)
+Received: by mail-yb1-f177.google.com with SMTP id
+ 3f1490d57ef6-e96d65194c1so1555688276.1; 
+ Thu, 04 Sep 2025 14:35:41 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=gmail.com; s=20230601; t=1757021740; x=1757626540; darn=lists.freedesktop.org;
+ h=in-reply-to:content-transfer-encoding:content-disposition
+ :mime-version:references:message-id:subject:cc:to:from:date:from:to
+ :cc:subject:date:message-id:reply-to;
+ bh=IvCBV4RAVElTtuBlztSRnmNbm0dDQBJMrO8cYnccOd4=;
+ b=LoF8ywxWC9uS2UXabimVoj3BT7GldhkU9K1PZnEP3Yzzx6K3KWf/HQ0xy8LbRxGJ7v
+ /muTCROlMnesyY71Fo/9U+rwBpHq5sgVh37/zPC0SMCw40GpRJvMIr8nOG9TdKBaOevY
+ UhryFtFk8GIxcSUaGxjRkHr1AGCuelhQbbA2PGiU4vEv16SCIl1klsxnrcaW4mvYwMTH
+ 9275KywuupTc66mPKOOEB95RHa2j7GK0QF9EGzN3bpA8iygxjIerRQ2TRTjk52cWf7fV
+ DNKNGCuimNAcOYFCqTyLP9B2OW04toL66Wrp8Hx+Jk8D7XToFagflS8N2fhVYF9CSfiS
+ TOXA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1757021740; x=1757626540;
+ h=in-reply-to:content-transfer-encoding:content-disposition
+ :mime-version:references:message-id:subject:cc:to:from:date
+ :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+ bh=IvCBV4RAVElTtuBlztSRnmNbm0dDQBJMrO8cYnccOd4=;
+ b=GFc4LxsLbhTqLNMapvTHrpBaeRhrErjQNBd2ZA+1kCuKwu6XFDhcEW6hn6iB7paNa1
+ nPtzANGGKIohBrnEbyIemk+x6UVwzbp/Zd787Bkn8toxVTWbB/MFnz6BHOscb1WD6fGg
+ 9cbKlazAl5SmIqm2JCzj9F8ELm2EV/c8Ul9OVZO6VinBkVi1L1Ne49LIniU9H36bwwnF
+ /FgXMpopmBxPKTRodBazrFVFdvg9rlKZKlxIm4r+vmpcnl7ey+iPqcp+N0ID7+Q+1eSb
+ wbR5eRE4v677tG60rTZGPxVGhagbLxpRbuoODrYGAfEyDALVx9ofwOUemjhgaXQuO7dV
+ /Ecw==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCVqqbuQGAN+2mBdOTlWoDSI7w9hgJJIBIJzRh0yG8JWgz40cllrEpVt2H4//JOGDjUdo915ytOHOQ==@lists.freedesktop.org,
+ AJvYcCWrhaS/OdzMJ9OzGQwN8W8qrS2HQ001rlOkn21JDGtGvzCg1iahD4oyjIq2K/kbXkYrzScu2Fjkl4Y=@lists.freedesktop.org
+X-Gm-Message-State: AOJu0YxyuIFaFMnMAalJs9Li0hftbJpwGjGrydrfPFA3NlUQ3IFL+cyu
+ EFxGtemYPNx5WXuLb5sgoMLWv5FzhFiCLTvrXabrRiPRAKXSykCW2oGZ
+X-Gm-Gg: ASbGncv87zdhecx0bRTb8apnZ1Z3PrrF7cD+e4edLYAg2Xw31JLTgAuymRNlkRzPNGL
+ 5jAVSTbgcf6S4WUeeUj9QY7CND7K0R0FyWih0L0uI7nPvtptu9+szi81ITAFZ9kROcX+8O1u8Vw
+ CPhFXg2uBSsyAg0yVKcdwbSsQMj+O+od8V4DOR4WjUW5hHPZ7gChh9ewkx/mxwGd1phXMBPeVOP
+ 8jixGmsXzSEZxdDvMZ0XZISY2eO+p3mCAv144RZk7OvaS5mViHps8ez55YLZw0A85KY7w0PGDaQ
+ nBA7bwAMEGvOWhE78bL3Xnol5JsMzPanyeIf8BCXUoKSZ/Gm/eyeFRT6V8NDjQMMz4KZGnTQhxd
+ KGo/DHfDwrvoSoSSg8YGT1w==
+X-Google-Smtp-Source: AGHT+IGcjNZusnsLiR6R1wgbKQBrEhDGHmeQUz60B2AGaGgy+2NRFtq0i4WitkyqZVH+hfJ5zflfxw==
+X-Received: by 2002:a05:690e:424c:b0:5f3:319c:fec6 with SMTP id
+ 956f58d0204a3-60175b91dfcmr3275590d50.11.1757021740093; 
+ Thu, 04 Sep 2025 14:35:40 -0700 (PDT)
+Received: from localhost ([2601:347:100:5ea0:1218:85e4:58ab:e67f])
+ by smtp.gmail.com with ESMTPSA id
+ 956f58d0204a3-5ff8ef2b4cdsm1726511d50.7.2025.09.04.14.35.39
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Thu, 04 Sep 2025 14:35:39 -0700 (PDT)
+Date: Thu, 4 Sep 2025 17:35:38 -0400
+From: Yury Norov <yury.norov@gmail.com>
+To: Joel Fernandes <joelagnelf@nvidia.com>
+Cc: linux-kernel@vger.kernel.org, Danilo Krummrich <dakr@kernel.org>,
+ Alexandre Courbot <acourbot@nvidia.com>,
+ David Airlie <airlied@gmail.com>, Simona Vetter <simona@ffwll.ch>,
+ Miguel Ojeda <ojeda@kernel.org>, Alex Gaynor <alex.gaynor@gmail.com>,
+ Boqun Feng <boqun.feng@gmail.com>, Gary Guo <gary@garyguo.net>,
+ =?iso-8859-1?Q?Bj=F6rn?= Roy Baron <bjorn3_gh@protonmail.com>,
+ Benno Lossin <lossin@kernel.org>, Andreas Hindborg <a.hindborg@kernel.org>,
+ Alice Ryhl <aliceryhl@google.com>, Trevor Gross <tmgross@umich.edu>,
+ John Hubbard <jhubbard@nvidia.com>,
+ Alistair Popple <apopple@nvidia.com>, nouveau@lists.freedesktop.org,
+ dri-devel@lists.freedesktop.org, rust-for-linux@vger.kernel.org
+Subject: Re: [PATCH 1/2] nova-core: Add a library for bitfields in Rust structs
+Message-ID: <aLoGKilQPupPQkd2@yury>
+References: <20250824135954.2243774-1-joelagnelf@nvidia.com>
 MIME-Version: 1.0
-X-MBO-RS-META: 91x5maptto5obfsr6rmgp7z4x1yyhiu8
-X-MBO-RS-ID: cc295356d2fe4975c84
-X-Mailman-Approved-At: Sat, 13 Dec 2025 12:40:51 +0000
+Content-Type: text/plain; charset=utf-8
+Content-Disposition: inline
+Content-Transfer-Encoding: 8bit
+In-Reply-To: <20250824135954.2243774-1-joelagnelf@nvidia.com>
+X-Mailman-Approved-At: Sat, 13 Dec 2025 12:40:49 +0000
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -66,316 +97,230 @@ List-Post: <mailto:nouveau@lists.freedesktop.org>
 List-Help: <mailto:nouveau-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
  <mailto:nouveau-request@lists.freedesktop.org?subject=subscribe>
-Reply-To: phasta@kernel.org
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-On Thu, 2025-09-04 at 13:56 +0200, Christian K=C3=B6nig wrote:
-> On 04.09.25 13:12, Philipp Stanner wrote:
-> > On Thu, 2025-09-04 at 12:27 +0200, Christian K=C3=B6nig wrote:
-> > > On 01.09.25 10:31, Philipp Stanner wrote:
-> > > > This reverts:
-> > > >=20
-> > > > commit bead88002227 ("drm/nouveau: Remove waitque for sched teardow=
-n")
-> > > > commit 5f46f5c7af8c ("drm/nouveau: Add new callback for scheduler t=
-eardown")
-> > > >=20
-> > > > from the drm/sched teardown leak fix series:
-> > > >=20
-> > > > https://lore.kernel.org/dri-devel/20250710125412.128476-2-phasta@ke=
-rnel.org/
-> > > >=20
-> > > > The aforementioned series removed a blocking waitqueue from
-> > > > nouveau_sched_fini(). It was mistakenly assumed that this waitqueue=
- only
-> > > > prevents jobs from leaking, which the series fixed.
-> > > >=20
-> > > > The waitqueue, however, also guarantees that all VM_BIND related jo=
-bs
-> > > > are finished in order, cleaning up mappings in the GPU's MMU. These=
- jobs
-> > > > must be executed sequentially. Without the waitqueue, this is no lo=
-nger
-> > > > guaranteed, because entity and scheduler teardown can race with eac=
-h
-> > > > other.
-> > >=20
-> > > That sounds like exactly the kind of issues I tried to catch with the=
- recent dma_fence changes.
-> >=20
-> > Link? :)
->=20
-> dma-buf: add warning when dma_fence is signaled from IOCTL
->=20
-> >=20
-> > >=20
-> > > Going to keep working on that and potentially using this here as blue=
-print for something it should catch.
-> >=20
-> > This is more like a nouveau-specific issue. The problem is that
-> > unmapping mappings in the GPU's MMU must be done in a specific order,
-> > and all the unmappings must be performed, not canceled.
-> >=20
-> > For EXEC jobs, it's perfectly fine to cancel pending jobs, remove the
-> > waitqueue and just rush through drm_sched_fini().
-> >=20
-> > I don't know the issue you're describing, but I don't think a feature
-> > in dma_fence could help with that specific Nouveau problem. dma_fence
-> > can't force the driver to submit jobs in a specific order or to wait
-> > until they're all completed.
->=20
-> Well the updates are represented by a dma_fence, aren't they?
->=20
-> So the dma_fence framework could potentially warn if a fence from the sam=
-e context signals out of order.
+Hi Joel,
 
-Ah yes, it would warn.
+(Thanks to John for referencing this.)
 
-However, in this case, applications would have faulted anyways, making
-the problem obvious. But granted, some warning mechanism for out of
-order signaling would make it easier to find problems.
+On Sun, Aug 24, 2025 at 09:59:52AM -0400, Joel Fernandes wrote:
+> Add a minimal bitfield library for defining in Rust structures (called
+> bitstruct), similar in concept to bit fields in C structs.
 
-P.
+So maybe name it bitfield? 
 
+> This will be used
+> for defining page table entries and other structures in nova-core.
 
->=20
-> Regards,
-> Christian.
->=20
-> >=20
-> > Gr=C3=BC=C3=9Fe
-> > P.
-> >=20
-> > >=20
-> > > Regards,
-> > > Christian.
-> > >=20
-> > > >=20
-> > > > Revert all patches related to the waitqueue removal.
-> > > >=20
-> > > > Fixes: bead88002227 ("drm/nouveau: Remove waitque for sched teardow=
-n")
-> > > > Suggested-by: Danilo Krummrich <dakr@kernel.org>
-> > > > Signed-off-by: Philipp Stanner <phasta@kernel.org>
-> > > > ---
-> > > > Changes in v2:
-> > > > =C2=A0 - Don't revert commit 89b2675198ab ("drm/nouveau: Make fence=
- container helper usable driver-wide")
-> > > > =C2=A0 - Add Fixes-tag
-> > > > ---
-> > > > =C2=A0drivers/gpu/drm/nouveau/nouveau_fence.c | 15 -----------
-> > > > =C2=A0drivers/gpu/drm/nouveau/nouveau_fence.h |=C2=A0 1 -
-> > > > =C2=A0drivers/gpu/drm/nouveau/nouveau_sched.c | 35 ++++++++++------=
----------
-> > > > =C2=A0drivers/gpu/drm/nouveau/nouveau_sched.h |=C2=A0 9 ++++---
-> > > > =C2=A0drivers/gpu/drm/nouveau/nouveau_uvmm.c=C2=A0 |=C2=A0 8 +++---
-> > > > =C2=A05 files changed, 24 insertions(+), 44 deletions(-)
-> > > >=20
-> > > > diff --git a/drivers/gpu/drm/nouveau/nouveau_fence.c b/drivers/gpu/=
-drm/nouveau/nouveau_fence.c
-> > > > index 9f345a008717..869d4335c0f4 100644
-> > > > --- a/drivers/gpu/drm/nouveau/nouveau_fence.c
-> > > > +++ b/drivers/gpu/drm/nouveau/nouveau_fence.c
-> > > > @@ -240,21 +240,6 @@ nouveau_fence_emit(struct nouveau_fence *fence=
-)
-> > > > =C2=A0	return ret;
-> > > > =C2=A0}
-> > > > =C2=A0
-> > > > -void
-> > > > -nouveau_fence_cancel(struct nouveau_fence *fence)
-> > > > -{
-> > > > -	struct nouveau_fence_chan *fctx =3D nouveau_fctx(fence);
-> > > > -	unsigned long flags;
-> > > > -
-> > > > -	spin_lock_irqsave(&fctx->lock, flags);
-> > > > -	if (!dma_fence_is_signaled_locked(&fence->base)) {
-> > > > -		dma_fence_set_error(&fence->base, -ECANCELED);
-> > > > -		if (nouveau_fence_signal(fence))
-> > > > -			nvif_event_block(&fctx->event);
-> > > > -	}
-> > > > -	spin_unlock_irqrestore(&fctx->lock, flags);
-> > > > -}
-> > > > -
-> > > > =C2=A0bool
-> > > > =C2=A0nouveau_fence_done(struct nouveau_fence *fence)
-> > > > =C2=A0{
-> > > > diff --git a/drivers/gpu/drm/nouveau/nouveau_fence.h b/drivers/gpu/=
-drm/nouveau/nouveau_fence.h
-> > > > index 9957a919bd38..183dd43ecfff 100644
-> > > > --- a/drivers/gpu/drm/nouveau/nouveau_fence.h
-> > > > +++ b/drivers/gpu/drm/nouveau/nouveau_fence.h
-> > > > @@ -29,7 +29,6 @@ void nouveau_fence_unref(struct nouveau_fence **)=
-;
-> > > > =C2=A0
-> > > > =C2=A0int=C2=A0 nouveau_fence_emit(struct nouveau_fence *);
-> > > > =C2=A0bool nouveau_fence_done(struct nouveau_fence *);
-> > > > -void nouveau_fence_cancel(struct nouveau_fence *fence);
-> > > > =C2=A0int=C2=A0 nouveau_fence_wait(struct nouveau_fence *, bool laz=
-y, bool intr);
-> > > > =C2=A0int=C2=A0 nouveau_fence_sync(struct nouveau_bo *, struct nouv=
-eau_channel *, bool exclusive, bool intr);
-> > > > =C2=A0
-> > > > diff --git a/drivers/gpu/drm/nouveau/nouveau_sched.c b/drivers/gpu/=
-drm/nouveau/nouveau_sched.c
-> > > > index 0cc0bc9f9952..e60f7892f5ce 100644
-> > > > --- a/drivers/gpu/drm/nouveau/nouveau_sched.c
-> > > > +++ b/drivers/gpu/drm/nouveau/nouveau_sched.c
-> > > > @@ -11,7 +11,6 @@
-> > > > =C2=A0#include "nouveau_exec.h"
-> > > > =C2=A0#include "nouveau_abi16.h"
-> > > > =C2=A0#include "nouveau_sched.h"
-> > > > -#include "nouveau_chan.h"
-> > > > =C2=A0
-> > > > =C2=A0#define NOUVEAU_SCHED_JOB_TIMEOUT_MS		10000
-> > > > =C2=A0
-> > > > @@ -122,9 +121,11 @@ nouveau_job_done(struct nouveau_job *job)
-> > > > =C2=A0{
-> > > > =C2=A0	struct nouveau_sched *sched =3D job->sched;
-> > > > =C2=A0
-> > > > -	spin_lock(&sched->job_list.lock);
-> > > > +	spin_lock(&sched->job.list.lock);
-> > > > =C2=A0	list_del(&job->entry);
-> > > > -	spin_unlock(&sched->job_list.lock);
-> > > > +	spin_unlock(&sched->job.list.lock);
-> > > > +
-> > > > +	wake_up(&sched->job.wq);
-> > > > =C2=A0}
-> > > > =C2=A0
-> > > > =C2=A0void
-> > > > @@ -305,9 +306,9 @@ nouveau_job_submit(struct nouveau_job *job)
-> > > > =C2=A0	}
-> > > > =C2=A0
-> > > > =C2=A0	/* Submit was successful; add the job to the schedulers job =
-list. */
-> > > > -	spin_lock(&sched->job_list.lock);
-> > > > -	list_add(&job->entry, &sched->job_list.head);
-> > > > -	spin_unlock(&sched->job_list.lock);
-> > > > +	spin_lock(&sched->job.list.lock);
-> > > > +	list_add(&job->entry, &sched->job.list.head);
-> > > > +	spin_unlock(&sched->job.list.lock);
-> > > > =C2=A0
-> > > > =C2=A0	drm_sched_job_arm(&job->base);
-> > > > =C2=A0	job->done_fence =3D dma_fence_get(&job->base.s_fence->finish=
-ed);
-> > > > @@ -392,23 +393,10 @@ nouveau_sched_free_job(struct drm_sched_job *=
-sched_job)
-> > > > =C2=A0	nouveau_job_fini(job);
-> > > > =C2=A0}
-> > > > =C2=A0
-> > > > -static void
-> > > > -nouveau_sched_cancel_job(struct drm_sched_job *sched_job)
-> > > > -{
-> > > > -	struct nouveau_fence *fence;
-> > > > -	struct nouveau_job *job;
-> > > > -
-> > > > -	job =3D to_nouveau_job(sched_job);
-> > > > -	fence =3D to_nouveau_fence(job->done_fence);
-> > > > -
-> > > > -	nouveau_fence_cancel(fence);
-> > > > -}
-> > > > -
-> > > > =C2=A0static const struct drm_sched_backend_ops nouveau_sched_ops =
-=3D {
-> > > > =C2=A0	.run_job =3D nouveau_sched_run_job,
-> > > > =C2=A0	.timedout_job =3D nouveau_sched_timedout_job,
-> > > > =C2=A0	.free_job =3D nouveau_sched_free_job,
-> > > > -	.cancel_job =3D nouveau_sched_cancel_job,
-> > > > =C2=A0};
-> > > > =C2=A0
-> > > > =C2=A0static int
-> > > > @@ -458,8 +446,9 @@ nouveau_sched_init(struct nouveau_sched *sched,=
- struct nouveau_drm *drm,
-> > > > =C2=A0		goto fail_sched;
-> > > > =C2=A0
-> > > > =C2=A0	mutex_init(&sched->mutex);
-> > > > -	spin_lock_init(&sched->job_list.lock);
-> > > > -	INIT_LIST_HEAD(&sched->job_list.head);
-> > > > +	spin_lock_init(&sched->job.list.lock);
-> > > > +	INIT_LIST_HEAD(&sched->job.list.head);
-> > > > +	init_waitqueue_head(&sched->job.wq);
-> > > > =C2=A0
-> > > > =C2=A0	return 0;
-> > > > =C2=A0
-> > > > @@ -493,12 +482,16 @@ nouveau_sched_create(struct nouveau_sched **p=
-sched, struct nouveau_drm *drm,
-> > > > =C2=A0	return 0;
-> > > > =C2=A0}
-> > > > =C2=A0
-> > > > +
-> > > > =C2=A0static void
-> > > > =C2=A0nouveau_sched_fini(struct nouveau_sched *sched)
-> > > > =C2=A0{
-> > > > =C2=A0	struct drm_gpu_scheduler *drm_sched =3D &sched->base;
-> > > > =C2=A0	struct drm_sched_entity *entity =3D &sched->entity;
-> > > > =C2=A0
-> > > > +	rmb(); /* for list_empty to work without lock */
-> > > > +	wait_event(sched->job.wq, list_empty(&sched->job.list.head));
-> > > > +
-> > > > =C2=A0	drm_sched_entity_fini(entity);
-> > > > =C2=A0	drm_sched_fini(drm_sched);
-> > > > =C2=A0
-> > > > diff --git a/drivers/gpu/drm/nouveau/nouveau_sched.h b/drivers/gpu/=
-drm/nouveau/nouveau_sched.h
-> > > > index b98c3f0bef30..20cd1da8db73 100644
-> > > > --- a/drivers/gpu/drm/nouveau/nouveau_sched.h
-> > > > +++ b/drivers/gpu/drm/nouveau/nouveau_sched.h
-> > > > @@ -103,9 +103,12 @@ struct nouveau_sched {
-> > > > =C2=A0	struct mutex mutex;
-> > > > =C2=A0
-> > > > =C2=A0	struct {
-> > > > -		struct list_head head;
-> > > > -		spinlock_t lock;
-> > > > -	} job_list;
-> > > > +		struct {
-> > > > +			struct list_head head;
-> > > > +			spinlock_t lock;
-> > > > +		} list;
-> > > > +		struct wait_queue_head wq;
-> > > > +	} job;
-> > > > =C2=A0};
-> > > > =C2=A0
-> > > > =C2=A0int nouveau_sched_create(struct nouveau_sched **psched, struc=
-t nouveau_drm *drm,
-> > > > diff --git a/drivers/gpu/drm/nouveau/nouveau_uvmm.c b/drivers/gpu/d=
-rm/nouveau/nouveau_uvmm.c
-> > > > index d94a85509176..79eefdfd08a2 100644
-> > > > --- a/drivers/gpu/drm/nouveau/nouveau_uvmm.c
-> > > > +++ b/drivers/gpu/drm/nouveau/nouveau_uvmm.c
-> > > > @@ -1019,8 +1019,8 @@ bind_validate_map_sparse(struct nouveau_job *=
-job, u64 addr, u64 range)
-> > > > =C2=A0	u64 end =3D addr + range;
-> > > > =C2=A0
-> > > > =C2=A0again:
-> > > > -	spin_lock(&sched->job_list.lock);
-> > > > -	list_for_each_entry(__job, &sched->job_list.head, entry) {
-> > > > +	spin_lock(&sched->job.list.lock);
-> > > > +	list_for_each_entry(__job, &sched->job.list.head, entry) {
-> > > > =C2=A0		struct nouveau_uvmm_bind_job *bind_job =3D to_uvmm_bind_job=
-(__job);
-> > > > =C2=A0
-> > > > =C2=A0		list_for_each_op(op, &bind_job->ops) {
-> > > > @@ -1030,7 +1030,7 @@ bind_validate_map_sparse(struct nouveau_job *=
-job, u64 addr, u64 range)
-> > > > =C2=A0
-> > > > =C2=A0				if (!(end <=3D op_addr || addr >=3D op_end)) {
-> > > > =C2=A0					nouveau_uvmm_bind_job_get(bind_job);
-> > > > -					spin_unlock(&sched->job_list.lock);
-> > > > +					spin_unlock(&sched->job.list.lock);
-> > > > =C2=A0					wait_for_completion(&bind_job->complete);
-> > > > =C2=A0					nouveau_uvmm_bind_job_put(bind_job);
-> > > > =C2=A0					goto again;
-> > > > @@ -1038,7 +1038,7 @@ bind_validate_map_sparse(struct nouveau_job *=
-job, u64 addr, u64 range)
-> > > > =C2=A0			}
-> > > > =C2=A0		}
-> > > > =C2=A0	}
-> > > > -	spin_unlock(&sched->job_list.lock);
-> > > > +	spin_unlock(&sched->job.list.lock);
-> > > > =C2=A0}
-> > > > =C2=A0
-> > > > =C2=A0static int
-> > >=20
-> >=20
->=20
+I think this is understatement, and this will find a broader use. :)
 
+> Signed-off-by: Joel Fernandes <joelagnelf@nvidia.com>
+
+I agree with the others that this bitstruct is worth to live in core
+directory. I just merged bitmap wrapper in rust/kernel/bitmap.rs, and
+I think this one should go in rust/kernel/bitstruct.rs (or bitfield.rs?).
+
+Can you please consider this change for v2, and also add the new file in
+BITOPS API record in MAINTAINERS?
+
+A couple nits inline.
+
+Thanks,
+Yury
+
+> ---
+>  drivers/gpu/nova-core/bitstruct.rs | 149 +++++++++++++++++++++++++++++
+>  drivers/gpu/nova-core/nova_core.rs |   1 +
+>  2 files changed, 150 insertions(+)
+>  create mode 100644 drivers/gpu/nova-core/bitstruct.rs
+> 
+> diff --git a/drivers/gpu/nova-core/bitstruct.rs b/drivers/gpu/nova-core/bitstruct.rs
+> new file mode 100644
+> index 000000000000..661a75da0a9c
+> --- /dev/null
+> +++ b/drivers/gpu/nova-core/bitstruct.rs
+> @@ -0,0 +1,149 @@
+> +// SPDX-License-Identifier: GPL-2.0
+> +//
+> +// bitstruct.rs — C-style library for bitfield-packed Rust structures
+> +//
+> +// A library that provides support for defining bit fields in Rust
+> +// structures to circumvent lack of native language support for this.
+> +//
+> +// Similar usage syntax to the register! macro.
+> +
+> +use kernel::prelude::*;
+> +
+> +/// Macro for defining bitfield-packed structures in Rust.
+> +/// The size of the underlying storage type is specified with #[repr(TYPE)].
+> +///
+> +/// # Example (just for illustration)
+> +/// ```rust
+> +/// bitstruct! {
+> +///     #[repr(u64)]
+> +///     pub struct PageTableEntry {
+> +///         0:0       present     as bool,
+> +///         1:1       writable    as bool,
+> +///         11:9      available   as u8,
+> +///         51:12     pfn         as u64,
+> +///         62:52     available2  as u16,
+> +///         63:63     nx          as bool,
+> +///     }
+> +/// }
+
+Is it possible to create overlapping fields? Should we allow that?
+(I guess yes.) Does your machinery handle it correctly now?
+
+If the answer is yes, can you add a test for it?
+
+> +/// ```
+> +///
+> +/// This generates a struct with methods:
+> +/// - Constructor: `default()` sets all bits to zero.
+> +/// - Field accessors: `present()`, `pfn()`, etc.
+> +/// - Field setters: `set_present()`, `set_pfn()`, etc.
+> +/// - Builder methods: `with_present()`, `with_pfn()`, etc.
+> +/// - Raw conversion: `from_raw()`, `into_raw()`
+> +#[allow(unused_macros)]
+> +macro_rules! bitstruct {
+> +    (
+> +        #[repr($storage:ty)]
+> +        $vis:vis struct $name:ident {
+> +            $(
+> +                $hi:literal : $lo:literal $field:ident as $field_type:tt
+> +            ),* $(,)?
+> +        }
+> +    ) => {
+> +        #[repr(transparent)]
+> +        #[derive(Copy, Clone, Default)]
+> +        $vis struct $name($storage);
+> +
+> +        impl $name {
+> +            /// Create from raw value
+> +            #[inline(always)]
+> +            $vis const fn from_raw(val: $storage) -> Self {
+> +                Self(val)
+> +            }
+> +
+> +            /// Get raw value
+> +            #[inline(always)]
+> +            $vis const fn into_raw(self) -> $storage {
+> +                self.0
+> +            }
+> +        }
+> +
+> +        impl core::fmt::Debug for $name {
+> +            fn fmt(&self, f: &mut core::fmt::Formatter<'_>) -> core::fmt::Result {
+> +                write!(f, "{}({:#x})", stringify!($name), self.0)
+> +            }
+> +        }
+> +
+> +        // Generate all field methods
+> +        $(
+> +            bitstruct_field_impl!($vis, $name, $storage, $hi, $lo, $field as $field_type);
+> +        )*
+> +    };
+> +}
+> +
+> +/// Helper to calculate mask for bit fields
+> +#[allow(unused_macros)]
+> +macro_rules! bitstruct_mask {
+> +    ($hi:literal, $lo:literal, $storage:ty) => {{
+> +        let width = ($hi - $lo + 1) as usize;
+> +        let storage_bits = 8 * core::mem::size_of::<$storage>();
+
+Does this '8' mean BITS_PER_BYTE? If so, we've got BITS_PER_TYPE() macro. Can
+you use it here?
+
+> +        if width >= storage_bits {
+> +            <$storage>::MAX
+
+This is an attempt to make an out-of-boundary access. Maybe print a
+warning or similar? 
+
+I actually think that if user wants to make an out-of-boundary access,
+the best thing we can do is to keep the memory untouched. So, maybe
+return None here, or 0, and make sure that the upper code doesn't
+access it?
+
+> +        } else {
+> +            ((1 as $storage) << width) - 1
+> +        }
+> +    }};
+> +}
+> +
+> +#[allow(unused_macros)]
+> +macro_rules! bitstruct_field_impl {
+> +    ($vis:vis, $struct_name:ident, $storage:ty, $hi:literal, $lo:literal, $field:ident as $field_type:tt) => {
+> +        impl $struct_name {
+> +            #[inline(always)]
+> +            $vis const fn $field(&self) -> $field_type {
+> +                let field_val = (self.0 >> $lo) & bitstruct_mask!($hi, $lo, $storage);
+> +                bitstruct_cast_value!(field_val, $field_type)
+> +            }
+> +        }
+> +        bitstruct_make_setters!($vis, $struct_name, $storage, $hi, $lo, $field, $field_type);
+> +    };
+> +}
+> +
+> +/// Helper macro to convert extracted value to target type
+> +///
+> +/// Special handling for bool types is required because the `as` keyword
+> +/// cannot be used to convert to bool in Rust. For bool fields, we check
+> +/// if the extracted value is non-zero. For all other types, we use the
+> +/// standard `as` conversion.
+> +#[allow(unused_macros)]
+> +macro_rules! bitstruct_cast_value {
+> +    ($field_val:expr, bool) => {
+> +        $field_val != 0
+> +    };
+> +    ($field_val:expr, $field_type:tt) => {
+> +        $field_val as $field_type
+> +    };
+> +}
+> +
+> +#[allow(unused_macros)]
+> +macro_rules! bitstruct_write_bits {
+> +    ($raw:expr, $hi:literal, $lo:literal, $val:expr, $storage:ty) => {{
+> +        let mask = bitstruct_mask!($hi, $lo, $storage);
+> +        ($raw & !(mask << $lo)) | ((($val as $storage) & mask) << $lo)
+> +    }};
+> +}
+> +
+> +#[allow(unused_macros)]
+> +macro_rules! bitstruct_make_setters {
+> +    ($vis:vis, $struct_name:ident, $storage:ty, $hi:literal, $lo:literal, $field:ident, $field_type:tt) => {
+> +        ::kernel::macros::paste! {
+> +            impl $struct_name {
+> +                #[inline(always)]
+> +                #[allow(dead_code)]
+> +                $vis fn [<set_ $field>](&mut self, val: $field_type) {
+> +                    self.0 = bitstruct_write_bits!(self.0, $hi, $lo, val, $storage);
+> +                }
+> +
+> +                #[inline(always)]
+> +                #[allow(dead_code)]
+> +                $vis const fn [<with_ $field>](mut self, val: $field_type) -> Self {
+> +                    self.0 = bitstruct_write_bits!(self.0, $hi, $lo, val, $storage);
+> +                    self
+> +                }
+> +            }
+> +        }
+> +    };
+> +}
+> diff --git a/drivers/gpu/nova-core/nova_core.rs b/drivers/gpu/nova-core/nova_core.rs
+> index cb2bbb30cba1..54505cad4a73 100644
+> --- a/drivers/gpu/nova-core/nova_core.rs
+> +++ b/drivers/gpu/nova-core/nova_core.rs
+> @@ -2,6 +2,7 @@
+>  
+>  //! Nova Core GPU Driver
+>  
+> +mod bitstruct;
+>  mod dma;
+>  mod driver;
+>  mod falcon;
+> -- 
+> 2.34.1
+> 
