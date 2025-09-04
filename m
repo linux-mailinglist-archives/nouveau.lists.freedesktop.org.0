@@ -2,68 +2,141 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id 29E56B43B3A
-	for <lists+nouveau@lfdr.de>; Thu,  4 Sep 2025 14:12:22 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id B39C9B43B51
+	for <lists+nouveau@lfdr.de>; Thu,  4 Sep 2025 14:15:51 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id DF28510EA12;
-	Thu,  4 Sep 2025 12:12:17 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 6886910EA13;
+	Thu,  4 Sep 2025 12:15:50 +0000 (UTC)
 Authentication-Results: gabe.freedesktop.org;
-	dkim=pass (1024-bit key; unprotected) header.d=collabora.com header.i=daniel.almeida@collabora.com header.b="jMMy9td9";
+	dkim=pass (2048-bit key; unprotected) header.d=Nvidia.com header.i=@Nvidia.com header.b="iwIcKcde";
 	dkim-atps=neutral
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from sender4-pp-f112.zoho.com (sender4-pp-f112.zoho.com
- [136.143.188.112])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 92D6110EA10;
- Thu,  4 Sep 2025 12:12:16 +0000 (UTC)
-ARC-Seal: i=1; a=rsa-sha256; t=1756987933; cv=none; 
- d=zohomail.com; s=zohoarc; 
- b=TvKirX4c74x7jqN1tg6isOyPPEnZPs+fy4zd55xvA2Kog/pOh5jVY0IcNm9uvILjpgYC/MaPYRGnKJmj6emAOPNvfL6poMD5v2dfWX/9qzmd0ehQ9uSM3qC+f+60JaSmFHkv/tLJ/rpoTSizkvC4oMCVXcw1DHVZdmp2Qhcg0LA=
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=zohomail.com;
- s=zohoarc; t=1756987933;
- h=Content-Type:Content-Transfer-Encoding:Cc:Cc:Date:Date:From:From:In-Reply-To:MIME-Version:Message-ID:References:Subject:Subject:To:To:Message-Id:Reply-To;
- bh=Kg+imjEAl3CXmIfEbHlp4v245YFguRUUK5TRAGFXJso=; 
- b=dzP89dQ+z49VzlwEan2/Yl6RWm+w2nhq3AinO5RmzyLWd2Ev4fXVrVwJRSctuJrHnVmSYy1lXZWe3w051TJ2xg1lugn/OrukxfXwJmtVmnTPKZ3cCfv2q8k2DptnOCrkh984LLdEdTMfvZIv0Kysj3Nh0fo0U/BGqaJ+WrZCZLo=
-ARC-Authentication-Results: i=1; mx.zohomail.com;
- dkim=pass  header.i=collabora.com;
- spf=pass  smtp.mailfrom=daniel.almeida@collabora.com;
- dmarc=pass header.from=<daniel.almeida@collabora.com>
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; t=1756987933; 
- s=zohomail; d=collabora.com; i=daniel.almeida@collabora.com;
- h=Content-Type:Mime-Version:Subject:Subject:From:From:In-Reply-To:Date:Date:Cc:Cc:Content-Transfer-Encoding:Message-Id:Message-Id:References:To:To:Reply-To;
- bh=Kg+imjEAl3CXmIfEbHlp4v245YFguRUUK5TRAGFXJso=;
- b=jMMy9td9dP/h8xOOi6g/kSvcUIBDwA2A4iqcDR8bGLQRHpUv3G2kd2ywqfhKg/GL
- UsoBC55q5otWRoNIjhW+guh3cuuc0GLY6Bwz4q4cQfdDWlKY9gRKt5L13DD6cyhmjuf
- B/unwPc5DkYdxBlEBcWaQTAUDGhe2V4kPBdaidww=
-Received: by mx.zohomail.com with SMTPS id 1756987929589959.508568434057;
- Thu, 4 Sep 2025 05:12:09 -0700 (PDT)
-Content-Type: text/plain;
-	charset=utf-8
-Mime-Version: 1.0 (Mac OS X Mail 16.0 \(3826.700.81\))
-Subject: Re: [PATCH v3 01/14] rust: drm: gem: Simplify use of generics
-From: Daniel Almeida <daniel.almeida@collabora.com>
-In-Reply-To: <20250829224116.477990-2-lyude@redhat.com>
-Date: Thu, 4 Sep 2025 09:11:51 -0300
-Cc: dri-devel@lists.freedesktop.org, rust-for-linux@vger.kernel.org,
- linux-kernel@vger.kernel.org, Danilo Krummrich <dakr@kernel.org>,
- Maarten Lankhorst <maarten.lankhorst@linux.intel.com>,
- Maxime Ripard <mripard@kernel.org>,
- Thomas Zimmermann <tzimmermann@suse.de>, David Airlie <airlied@gmail.com>,
- Simona Vetter <simona@ffwll.ch>, Miguel Ojeda <ojeda@kernel.org>,
- Alex Gaynor <alex.gaynor@gmail.com>, Boqun Feng <boqun.feng@gmail.com>,
- Gary Guo <gary@garyguo.net>,
- =?utf-8?Q?Bj=C3=B6rn_Roy_Baron?= <bjorn3_gh@protonmail.com>,
- Benno Lossin <lossin@kernel.org>, Andreas Hindborg <a.hindborg@kernel.org>,
- Alice Ryhl <aliceryhl@google.com>, Trevor Gross <tmgross@umich.edu>,
- Asahi Lina <lina+kernel@asahilina.net>,
- "open list:DRM DRIVER FOR NVIDIA GPUS [RUST]" <nouveau@lists.freedesktop.org>
-Content-Transfer-Encoding: quoted-printable
-Message-Id: <662189D6-44B2-4880-971D-A3D2D748542D@collabora.com>
-References: <20250829224116.477990-1-lyude@redhat.com>
- <20250829224116.477990-2-lyude@redhat.com>
-To: Lyude Paul <lyude@redhat.com>
-X-Mailer: Apple Mail (2.3826.700.81)
-X-ZohoMailClient: External
+Received: from NAM10-MW2-obe.outbound.protection.outlook.com
+ (mail-mw2nam10on2085.outbound.protection.outlook.com [40.107.94.85])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id E77A810EA13
+ for <nouveau@lists.freedesktop.org>; Thu,  4 Sep 2025 12:15:48 +0000 (UTC)
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=yjjy90d1SYsTkJ3PdTpf/NspZ+9Z/TKuThJlpDn0Ic6y2QfJ2erGHpDvxMRrU/v3Kv3qsJF9Gsxj5zYAPFeNraFmhVDdl+AWvAFVMl6Z954mv4u8YoX2JW8p5FX0Twz7IrCmcz73TGVx0SdPAVpI71gN8TYcTmNr8mVE2qh4zvKL57ELJn/bHs2Ldt+r7guB0sR5bQoe4L+dgF0uK7K+cYHR3QtkeCMAz43vkbv3mSn/k0FmFet08F3fAw5xd+2IBqaqYeEj37V+SVa4Temv+6Y3rr4TCXip3R38OzWZQl+QdIGKZyEz4y9s81V+4yFEArULFo+O9RAYmUHZ6ZbC+A==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=JouLBPmStHEHn8tztXOQwEkdL5vKcfuxgC/Its08iec=;
+ b=k5Db99Gihuwkqq8YWmEHYlaBVR7YySaz7msU91XDoKBu/+qYNiptalXIDjMdBYlPmS8FknIQvEojvdBqcZRV7R3vQl0tmIwWipBFnjmK1Qa+dKgUyamO+9UVn3FQgKBnQjUs4bH6fSBQ6zxBZPm+dkZbUWjHAJSsFNmVkv81fwj41qh7TMTt+hzywgXt/laLlBoQtP8CpB9jaod+8Q1nZGRO7vfgtsPTpM+sPDecDMVPuGCBVK9z4unY/Eyog+DwWpLdu9a26NdsI+MtoZxjtLz9fgHtQi9bfVfarCHteQ0dCbceY2lwQkoGa8VW2LxXeiz4KVO1u8Uf1dDazkpfHA==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=nvidia.com; dmarc=pass action=none header.from=nvidia.com;
+ dkim=pass header.d=nvidia.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=Nvidia.com;
+ s=selector2;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=JouLBPmStHEHn8tztXOQwEkdL5vKcfuxgC/Its08iec=;
+ b=iwIcKcdeTdDGdmAQGLoQcbmy5IY3ZI1PN/P/4zcrIzvM3gr5iWsYmFZEqAJvHXjWAaJkT79cySKu6/6SB/iwYz08LAaeSHzG/lSZV3hVyzuXXGVSUcLWpeR2jykJvC4wjJ1Rh8VCU/jKcCCbEgxfUzeSjl4dm/lI8jTMLg14qGp97eemulfDM09VzMs6IdFjCqpM5fG2dqMWk9eCzKQYfcsBHpZdI7z/IAVs0dFi4R3luI2ttg4HUiSlJWHbClc6yCu1HCIS2gzNq9dS2DpSazbkPK/lMIQbyJV0UbxkTaJu+txCh0KMDJhyKdGNt4M1bx/GRuOWGNj7o7vn+MvHxA==
+Authentication-Results: dkim=none (message not signed)
+ header.d=none;dmarc=none action=none header.from=nvidia.com;
+Received: from PH7PR12MB5757.namprd12.prod.outlook.com (2603:10b6:510:1d0::13)
+ by CH3PR12MB8851.namprd12.prod.outlook.com (2603:10b6:610:180::11)
+ with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9094.17; Thu, 4 Sep
+ 2025 12:15:46 +0000
+Received: from PH7PR12MB5757.namprd12.prod.outlook.com
+ ([fe80::f012:300c:6bf4:7632]) by PH7PR12MB5757.namprd12.prod.outlook.com
+ ([fe80::f012:300c:6bf4:7632%2]) with mapi id 15.20.9094.017; Thu, 4 Sep 2025
+ 12:15:46 +0000
+Date: Thu, 4 Sep 2025 09:15:44 -0300
+From: Jason Gunthorpe <jgg@nvidia.com>
+To: Danilo Krummrich <dakr@kernel.org>
+Cc: Zhi Wang <zhiw@nvidia.com>, kvm@vger.kernel.org,
+ alex.williamson@redhat.com, kevin.tian@intel.com, airlied@gmail.com,
+ daniel@ffwll.ch, acurrid@nvidia.com, cjia@nvidia.com,
+ smitra@nvidia.com, ankita@nvidia.com, aniketa@nvidia.com,
+ kwankhede@nvidia.com, targupta@nvidia.com, zhiwang@kernel.org,
+ acourbot@nvidia.com, joelagnelf@nvidia.com, apopple@nvidia.com,
+ jhubbard@nvidia.com, nouveau@lists.freedesktop.org
+Subject: Re: [RFC v2 03/14] vfio/nvidia-vgpu: introduce vGPU type uploading
+Message-ID: <20250904121544.GL470103@nvidia.com>
+References: <20250903221111.3866249-1-zhiw@nvidia.com>
+ <20250903221111.3866249-4-zhiw@nvidia.com>
+ <DCJWXVLI2GWB.3UBHWIZCZXKD2@kernel.org>
+ <DCJX0ZBB1ATN.1WPXONLVV8RYD@kernel.org>
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <DCJX0ZBB1ATN.1WPXONLVV8RYD@kernel.org>
+X-ClientProxiedBy: YT4P288CA0091.CANP288.PROD.OUTLOOK.COM
+ (2603:10b6:b01:d0::28) To PH7PR12MB5757.namprd12.prod.outlook.com
+ (2603:10b6:510:1d0::13)
+MIME-Version: 1.0
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: PH7PR12MB5757:EE_|CH3PR12MB8851:EE_
+X-MS-Office365-Filtering-Correlation-Id: d11b092c-97b6-46b8-cfba-08ddebacc6cd
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: BCL:0;ARA:13230040|366016|1800799024|376014;
+X-Microsoft-Antispam-Message-Info: =?us-ascii?Q?C7vBbVQcqgrMm2zq+2z8A4EjSs4QP5k4pCR3xQ/suMWbqFKXL7/lnSdWSShS?=
+ =?us-ascii?Q?5M8/p/BfJ9l8LLlMnFvUxvSHj82RTfKFx6ft2otHxn9zqt8GG2QMAULPccVJ?=
+ =?us-ascii?Q?aAgkbMiTH1NjCsipmCs+W1mbehO2vgYfuoCsHXoGe4Gx3bUK6aHXOQc1D80Z?=
+ =?us-ascii?Q?I//T43NQ7r7pyFjHx7GanX90HYlnxPcjdGdGthbpwPa+rraRtGAXgAIk8Cfm?=
+ =?us-ascii?Q?t4cxSoy7IT6ewRwzLQmDn+GeV/13N6djBVW+2bZ6E2oV40XbTAMKD+ELlBKP?=
+ =?us-ascii?Q?7WECq92hVMj2+XjRDRKjOyD7xnJq5sbftJEFEQYHpLUcBB8wU/GUTRqyMMvH?=
+ =?us-ascii?Q?65zmvpeP57Gs3LKxefPaaeZaW9ZCkCktUtLmW1fPYw4DHvjVfzu+z9wH4GBq?=
+ =?us-ascii?Q?WfPjoFN5ub826LLkjm94JJU8atgiqF7/EtqZ2j5l2FJQm5JbsZediW9jGXAT?=
+ =?us-ascii?Q?tOZ3uw9iN82UhtFSIFuAmGE8qjv8PfgVFkHME/3DAcov3PNQk4+UnDpsOOou?=
+ =?us-ascii?Q?6mLFE26FfyYlSbW2pk0R0vmJS0yBc8atzi855CHTh4kgL9owLy3/H8Tj5VIm?=
+ =?us-ascii?Q?7+eoFQ98X+PJn0Xdf/0/yQHYT0FB7B6KcN45UMX54RRE+3nqXMI2j7iADCCI?=
+ =?us-ascii?Q?UM/yTuxGCFEDGJaQKgUsuRQZPVzxbk6NPp1nnLE1j6HPqUEfE4milf2ldzEZ?=
+ =?us-ascii?Q?4n/29uxjnUgb/gtb3FM6VeM6WrFoOzOYD86I+1eQ7CQKBwB/8xb8FnYZ1RZb?=
+ =?us-ascii?Q?1OqurFCrlAIaQVfVJx9GQn8XeFriY+pUT+orqjDGO19Y+IzZ9BlhORzCif4R?=
+ =?us-ascii?Q?bYyB4B32h8JZVUu3V8EVw9H9JLxrdSIEU/BFpGwa8zWwqyx7mmA2ERtO5Qt3?=
+ =?us-ascii?Q?lCVrVIAzas42EKUKaUAL10aHO8Fv/4UkxvudGNTOO86UdFQgenz6C8btvF2x?=
+ =?us-ascii?Q?qp9bPbSnpS4OQKZ7Z3c2ZjOosZhS55p6XQGCAHS7OOvT+J9pZ6NnhTxjnphQ?=
+ =?us-ascii?Q?6tG/hAfP9Zu02aG8rK8OuXpGK6OgN18tQJgZQTmUe0j0y/eZKzFBsy60X+gI?=
+ =?us-ascii?Q?r2f7kYp06zfkuhOpEefX4hvmA6VXKjow8YVyp2s3DnMblm/1P7neLCL6/CW+?=
+ =?us-ascii?Q?hccR2FF0fOagz0TFCrqKGKBzGVNJsFRIrtVj6WVU6Ud2rEP5cS1YrlwgYuNO?=
+ =?us-ascii?Q?Q2Y17QGcpTW1kGXq1aypGlhJyvEEUQKP9B+/fSH195ZnJmxcSoHnpnVFkBA0?=
+ =?us-ascii?Q?Sx9OwopFneltQUzPRvWWCZk4H2sjpRAqXUXQovjXdD2Xd8Kab2jvvi8zqwhI?=
+ =?us-ascii?Q?kGcImP57ydiJrQdEVFRlm2hyAb1N69+r1D5SwIzxcFWAEGeEsmGETI0RKqyH?=
+ =?us-ascii?Q?L3sJR1qEUjLK2UTtKqVzdGoICwi+r+HCA9ZiAsVctiLniJOWHr+vo9qXFefJ?=
+ =?us-ascii?Q?g+K7pU5cEJc=3D?=
+X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
+ IPV:NLI; SFV:NSPM; H:PH7PR12MB5757.namprd12.prod.outlook.com; PTR:; CAT:NONE;
+ SFS:(13230040)(366016)(1800799024)(376014); DIR:OUT; SFP:1101; 
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0: =?us-ascii?Q?rIeJG5UtDGuBUWNfQ2OoRuuhilNx4xHV+mW4nosbu7nvYPQnbM8A6GrVDdYQ?=
+ =?us-ascii?Q?hZwBnHq0etTaDkun7UDBvKgzHWmc6UYhJLeTSHuwfWP3vCI1UFi/ivuPA858?=
+ =?us-ascii?Q?sCbZ4trKIAmpqWYiT2wYYVuZFvMaY373QhkL+Xbv4oD9zY26qk9wKCht6IKD?=
+ =?us-ascii?Q?o0UEL1z84zuffHs9juMGuiT2/9mpTKkextfxJiSQ7VLhzD3xJg0zYIUFTY9+?=
+ =?us-ascii?Q?rE5dy7OjjVxiWQBycOXq1apWvPnVuPlbcSyr61zkvo0G9xQSSITvCjCtHdlj?=
+ =?us-ascii?Q?j9oO08YDhUauvOP19xPcBpFL00d43WcQGkdP/RJtBmq1wdSC5BXh9EfRhqzb?=
+ =?us-ascii?Q?szpBisirO2piT+upECbcR0fomUPcyzr/EfZ/AnFJCK5cGzjak4OLGr8LlKYS?=
+ =?us-ascii?Q?4sprdphzHOHsGjyzdleYAXBVn/XbzcNGKt3tE4kgV7s42EUucjOkp+JAXF8J?=
+ =?us-ascii?Q?844sqnnHucXGsPCcKhelXJrPZv6MVtmg9iE0z/cLDV8OGH/nd8OySolQtsMw?=
+ =?us-ascii?Q?wD5x5m9FOgwrkH1ZIjXIb+tj/4rr9G9Mg8UyqSQ2A6xf/UlbSGvD0dZzoaku?=
+ =?us-ascii?Q?FUFWjglw1wQWa0mrmyRAthq8P38ctM7/8H0tZZLwGeh1ARshc/n9sTNhwSSw?=
+ =?us-ascii?Q?+QLql27iEe5EwyxS+qduTdEaYKimRFO1KO+wh1/lK/UBDDTYU0jyQrjydU6v?=
+ =?us-ascii?Q?s5Px5Ny7rd9CjJB3wCAkaJt22j4Ri2xYU7IxYgafbldVAXsqDVu+UzJO+oJt?=
+ =?us-ascii?Q?ty6JL4VRgQHm7QyvtyZsS6FYSAMJv+sFGzw3pp5A9LDyWq+ziDEdD65rWIzN?=
+ =?us-ascii?Q?98YQwDB2uTggoNpGJQ7sEFd6iI+fx9iTHm04AjFBkgLdmC7ZiF9PAEiv+qme?=
+ =?us-ascii?Q?towW8Z0Im62rH86lUsDq6iLFp9yaZIGUSyMmVm3+6dtUz75i9D/zVPlHBUMl?=
+ =?us-ascii?Q?eBpyg8PkrgwVWgvKQk04ySzOeQRVTGWwMMPiXTIiyGZLx/tShfKjm/AU1Ec/?=
+ =?us-ascii?Q?SizBtfL02Fj1IKDZXgmFhHL0mfYdEv1gP3bIl6gL5QM5LQM0WWpLRgkYV0fZ?=
+ =?us-ascii?Q?97BfNd7nFxymiW160DeOsAdi9mxDm+2K/D4MehnCeoIWckqW4Z3lkNgHzLvn?=
+ =?us-ascii?Q?Rxc+eExgAT64jhbIo9+ZUeBpabbdc/2mTAPDemP8WCw4363dbrn3nm2QYRNI?=
+ =?us-ascii?Q?X6T/sEP1yPpp73d7KBq2mMXfO4cj7RSvjgYj/pn6c8DZ+673vzoKlPUiCB3r?=
+ =?us-ascii?Q?VpHyvZIbvS27xVKGrRfG6+KKYHhQCyIvsta/SPdDbEcFffWQMyNjodeAqtqO?=
+ =?us-ascii?Q?HgGkYXfkmhAdTkw0ZrOKhcLetvikkAaXlPjsJwe48RYn6ZyolUkKa6J5+FsU?=
+ =?us-ascii?Q?YMwnNK+sYCTDShfHNdVDwIU1bjg7nFCOpH1TMeKT5E2axGhtC5WdfTNip2YV?=
+ =?us-ascii?Q?7yOxPGJvZvMjGcR3zP6gWThAKmH2rdpKn67pFbSMSCLk/al1jIPfgl5yOjEm?=
+ =?us-ascii?Q?+xatCXjiGbwpwUmALog9cIN0rFjE4sSx+Tkev9+yDwNkWK8dRLMAQhMMZgma?=
+ =?us-ascii?Q?QNzL3r4lrZngDmIS3Io=3D?=
+X-OriginatorOrg: Nvidia.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: d11b092c-97b6-46b8-cfba-08ddebacc6cd
+X-MS-Exchange-CrossTenant-AuthSource: PH7PR12MB5757.namprd12.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 04 Sep 2025 12:15:46.1588 (UTC)
+X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
+X-MS-Exchange-CrossTenant-Id: 43083d15-7273-40c1-b7db-39efd9ccc17a
+X-MS-Exchange-CrossTenant-MailboxType: HOSTED
+X-MS-Exchange-CrossTenant-UserPrincipalName: aIYsbgNkajrizyzwVEziPI8FzqdwCHXmJ9rIqO+2ESy5W5zjuckjQZqdMpG0wMmK
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: CH3PR12MB8851
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -78,363 +151,18 @@ List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-Hi Lyude,
+On Thu, Sep 04, 2025 at 11:41:03AM +0200, Danilo Krummrich wrote:
 
-> On 29 Aug 2025, at 19:35, Lyude Paul <lyude@redhat.com> wrote:
->=20
-> Now that my rust skills have been honed, I noticed that there's a lot =
-of
-> generics in our gem bindings that don't actually need to be here. =
-Currently
-> the hierarchy of traits in our gem bindings looks like this:
->=20
->  * Drivers implement:
->    * BaseDriverObject<T: DriverObject> (has the callbacks)
->    * DriverObject (has the drm::Driver type)
->  * Crate implements:
->    * IntoGEMObject for Object<T> where T: DriverObject
->      Handles conversion to/from raw object pointers
->    * BaseObject for T where T: IntoGEMObject
->      Provides methods common to all gem interfaces
->=20
->  Also of note, this leaves us with two different drm::Driver =
-associated
->  types:
->    * DriverObject::Driver
->    * IntoGEMObject::Driver
->=20
-> I'm not entirely sure of the original intent here unfortunately (if =
-anyone
-> is, please let me know!), but my guess is that the idea would be that =
-some
-> objects can implement IntoGEMObject using a different ::Driver than
-> DriverObject - presumably to enable the usage of gem objects from =
-different
-> drivers. A reasonable usecase of course.
->=20
-> However - if I'm not mistaken, I don't think that this is actually how
-> things would go in practice. Driver implementations are of course
-> implemented by their associated drivers, and generally drivers are not
-> linked to each-other when building the kernel. Which is to say that =
-even in
-> a situation where we would theoretically deal with gem objects from =
-another
-> driver, we still wouldn't have access to its drm::driver::Driver
-> implementation. It's more likely we would simply want a variant of gem
-> objects in such a situation that have no association with a
-> drm::driver::Driver type.
->=20
-> Taking that into consideration, we can assume the following:
-> * Anything that implements BaseDriverObject will implement =
-DriverObject
->  In other words, all BaseDriverObjects indirectly have an associated
->  ::Driver type - so the two traits can be combined into one with no
->  generics.
-> * Not everything that implements IntoGEMObject will have an associated
->  ::Driver, and that's OK.
->=20
-> And with this, we now can do quite a bit of cleanup with the use of
-> generics here. As such, this commit:
->=20
-> * Removes the generics on BaseDriverObject
-> * Moves DriverObject::Driver into BaseDriverObject
-> * Removes DriverObject
-> * Removes IntoGEMObject::Driver
-> * Add AllocImpl::Driver, which we can use as a binding to figure out =
-the
->  correct File type for BaseObject
->=20
-> Leaving us with a simpler trait hierarchy that now looks like this:
->=20
->  * Drivers implement: BaseDriverObject
->  * Crate implements:
->    * IntoGEMObject for Object<T> where T: DriverObject
->    * BaseObject for T where T: IntoGEMObject
->=20
-> Which makes the code a lot easier to understand and build on :).
->=20
-> Signed-off-by: Lyude Paul <lyude@redhat.com>
->=20
-> ---
-> V2:
-> * Don't refer to Object<T> in callbacks, as this would result in =
-drivers
->  getting the wrong gem object type for shmem gem objects once we add
->  support for those. Instead, we'll just add a type alias to clean this
->  part up.
-> V3:
-> * Fix nova compilation
-> * Also, add an associated driver type to AllocImpl - as we still need =
-the
->  current driver accessible from BaseObject so that we can use the =
-driver's
->  various associated types, like File
-> V4:
-> * Add missing Object =3D Self constraint to type bounds for =
-create_handle,
->  lookup_handle. I forgot that if drivers can have private gem objects =
-with
->  a different data layout, we can only guarantee gem objects with =
-handles
->  are of the same gem object type as the main one in use by the driver.
->=20
-> Signed-off-by: Lyude Paul <lyude@redhat.com>
-> ---
-> drivers/gpu/drm/nova/gem.rs |  8 ++--
-> rust/kernel/drm/driver.rs   |  3 ++
-> rust/kernel/drm/gem/mod.rs  | 77 ++++++++++++++++---------------------
-> 3 files changed, 40 insertions(+), 48 deletions(-)
->=20
-> diff --git a/drivers/gpu/drm/nova/gem.rs b/drivers/gpu/drm/nova/gem.rs
-> index cd82773dab92c..2760ba4f3450b 100644
-> --- a/drivers/gpu/drm/nova/gem.rs
-> +++ b/drivers/gpu/drm/nova/gem.rs
-> @@ -16,16 +16,14 @@
-> #[pin_data]
-> pub(crate) struct NovaObject {}
->=20
-> -impl gem::BaseDriverObject<gem::Object<NovaObject>> for NovaObject {
-> +impl gem::DriverObject for NovaObject {
-> +    type Driver =3D NovaDriver;
-> +
->     fn new(_dev: &NovaDevice, _size: usize) -> impl PinInit<Self, =
-Error> {
->         try_pin_init!(NovaObject {})
->     }
-> }
->=20
-> -impl gem::DriverObject for NovaObject {
-> -    type Driver =3D NovaDriver;
-> -}
-> -
-> impl NovaObject {
->     /// Create a new DRM GEM object.
->     pub(crate) fn new(dev: &NovaDevice, size: usize) -> =
-Result<ARef<gem::Object<Self>>> {
-> diff --git a/rust/kernel/drm/driver.rs b/rust/kernel/drm/driver.rs
-> index fe7e8d06961aa..dae0f4d1bbe3c 100644
-> --- a/rust/kernel/drm/driver.rs
-> +++ b/rust/kernel/drm/driver.rs
-> @@ -86,6 +86,9 @@ pub struct AllocOps {
->=20
-> /// Trait for memory manager implementations. Implemented internally.
-> pub trait AllocImpl: super::private::Sealed + drm::gem::IntoGEMObject =
-{
-> +    /// The [`Driver`] implementation for this [`AllocImpl`].
-> +    type Driver: drm::Driver;
-> +
->     /// The C callback operations for this memory manager.
->     const ALLOC_OPS: AllocOps;
-> }
-> diff --git a/rust/kernel/drm/gem/mod.rs b/rust/kernel/drm/gem/mod.rs
-> index b71821cfb5eaa..31c5799d995c5 100644
-> --- a/rust/kernel/drm/gem/mod.rs
-> +++ b/rust/kernel/drm/gem/mod.rs
-> @@ -15,31 +15,31 @@
-> use core::{mem, ops::Deref, ptr::NonNull};
->=20
-> /// GEM object functions, which must be implemented by drivers.
-> -pub trait BaseDriverObject<T: BaseObject>: Sync + Send + Sized {
-> +pub trait DriverObject: Sync + Send + Sized {
-> +    /// Parent `Driver` for this object.
-> +    type Driver: drm::Driver;
-> +
->     /// Create a new driver data object for a GEM object of a given =
-size.
-> -    fn new(dev: &drm::Device<T::Driver>, size: usize) -> impl =
-PinInit<Self, Error>;
-> +    fn new(dev: &drm::Device<Self::Driver>, size: usize) -> impl =
-PinInit<Self, Error>;
->=20
->     /// Open a new handle to an existing object, associated with a =
-File.
->     fn open(
-> -        _obj: &<<T as IntoGEMObject>::Driver as drm::Driver>::Object,
-> -        _file: &drm::File<<<T as IntoGEMObject>::Driver as =
-drm::Driver>::File>,
-> +        _obj: &<Self::Driver as drm::Driver>::Object,
-> +        _file: &drm::File<<Self::Driver as drm::Driver>::File>,
->     ) -> Result {
->         Ok(())
->     }
->=20
->     /// Close a handle to an existing object, associated with a File.
->     fn close(
-> -        _obj: &<<T as IntoGEMObject>::Driver as drm::Driver>::Object,
-> -        _file: &drm::File<<<T as IntoGEMObject>::Driver as =
-drm::Driver>::File>,
-> +        _obj: &<Self::Driver as drm::Driver>::Object,
-> +        _file: &drm::File<<Self::Driver as drm::Driver>::File>,
->     ) {
->     }
-> }
->=20
-> /// Trait that represents a GEM object subtype
-> pub trait IntoGEMObject: Sized + super::private::Sealed + =
-AlwaysRefCounted {
-> -    /// Owning driver for this type
-> -    type Driver: drm::Driver;
-> -
->     /// Returns a reference to the raw `drm_gem_object` structure, =
-which must be valid as long as
->     /// this owning object is valid.
->     fn as_raw(&self) -> *mut bindings::drm_gem_object;
-> @@ -74,25 +74,15 @@ unsafe fn dec_ref(obj: NonNull<Self>) {
->     }
-> }
->=20
-> -/// Trait which must be implemented by drivers using base GEM =
-objects.
-> -pub trait DriverObject: BaseDriverObject<Object<Self>> {
-> -    /// Parent `Driver` for this object.
-> -    type Driver: drm::Driver;
-> -}
-> -
-> -extern "C" fn open_callback<T: BaseDriverObject<U>, U: BaseObject>(
-> +extern "C" fn open_callback<T: DriverObject>(
->     raw_obj: *mut bindings::drm_gem_object,
->     raw_file: *mut bindings::drm_file,
-> ) -> core::ffi::c_int {
->     // SAFETY: `open_callback` is only ever called with a valid =
-pointer to a `struct drm_file`.
-> -    let file =3D unsafe {
-> -        drm::File::<<<U as IntoGEMObject>::Driver as =
-drm::Driver>::File>::from_raw(raw_file)
-> -    };
-> -    // SAFETY: `open_callback` is specified in the AllocOps structure =
-for `Object<T>`, ensuring that
-> -    // `raw_obj` is indeed contained within a `Object<T>`.
-> -    let obj =3D unsafe {
-> -        <<<U as IntoGEMObject>::Driver as drm::Driver>::Object as =
-IntoGEMObject>::from_raw(raw_obj)
-> -    };
-> +    let file =3D unsafe { drm::File::<<T::Driver as =
-drm::Driver>::File>::from_raw(raw_file) };
-> +    // SAFETY: `open_callback` is specified in the AllocOps structure =
-for `DriverObject<T>`,
-> +    // ensuring that `raw_obj` is contained within a =
-`DriverObject<T>`
-> +    let obj =3D unsafe { <<T::Driver as drm::Driver>::Object as =
-IntoGEMObject>::from_raw(raw_obj) };
->=20
->     match T::open(obj, file) {
->         Err(e) =3D> e.to_errno(),
-> @@ -100,26 +90,21 @@ extern "C" fn open_callback<T: =
-BaseDriverObject<U>, U: BaseObject>(
->     }
-> }
->=20
-> -extern "C" fn close_callback<T: BaseDriverObject<U>, U: BaseObject>(
-> +extern "C" fn close_callback<T: DriverObject>(
->     raw_obj: *mut bindings::drm_gem_object,
->     raw_file: *mut bindings::drm_file,
-> ) {
->     // SAFETY: `open_callback` is only ever called with a valid =
-pointer to a `struct drm_file`.
-> -    let file =3D unsafe {
-> -        drm::File::<<<U as IntoGEMObject>::Driver as =
-drm::Driver>::File>::from_raw(raw_file)
-> -    };
-> +    let file =3D unsafe { drm::File::<<T::Driver as =
-drm::Driver>::File>::from_raw(raw_file) };
-> +
->     // SAFETY: `close_callback` is specified in the AllocOps structure =
-for `Object<T>`, ensuring
->     // that `raw_obj` is indeed contained within a `Object<T>`.
-> -    let obj =3D unsafe {
-> -        <<<U as IntoGEMObject>::Driver as drm::Driver>::Object as =
-IntoGEMObject>::from_raw(raw_obj)
-> -    };
-> +    let obj =3D unsafe { <<T::Driver as drm::Driver>::Object as =
-IntoGEMObject>::from_raw(raw_obj) };
->=20
->     T::close(obj, file);
-> }
->=20
-> impl<T: DriverObject> IntoGEMObject for Object<T> {
-> -    type Driver =3D T::Driver;
-> -
->     fn as_raw(&self) -> *mut bindings::drm_gem_object {
->         self.obj.get()
->     }
-> @@ -141,10 +126,12 @@ fn size(&self) -> usize {
->=20
->     /// Creates a new handle for the object associated with a given =
-`File`
->     /// (or returns an existing one).
-> -    fn create_handle(
-> -        &self,
-> -        file: &drm::File<<<Self as IntoGEMObject>::Driver as =
-drm::Driver>::File>,
-> -    ) -> Result<u32> {
-> +    fn create_handle<D, F>(&self, file: &drm::File<F>) -> Result<u32>
-> +    where
-> +        Self: AllocImpl<Driver =3D D>,
-> +        D: drm::Driver<Object =3D Self, File =3D F>,
-> +        F: drm::file::DriverFile,
+> > Another note: I don't see any use of the auxiliary bus in vGPU, any clients
+> > should attach via the auxiliary bus API, it provides proper matching where
+> > there's more than on compatible GPU in the system. nova-core already registers
+> > an auxiliary device for each bound PCI device.
 
-Shouldn=E2=80=99t this be F: drm::file::DriverFile<Driver =3DD>?
+The driver here attaches to the SRIOV VF pci_device, it should obtain the
+nova-core handle of the PF device through pci_iov_get_pf_drvdata().
 
-As you said in the commit message, I don=E2=80=99t see where exactly we =
-would have
-two competing drm::Driver types when calling this function, but we =
-should
-perhaps enforce this bound anyways.
+This is the expected design of VFIO drivers because the driver core
+does not support a single driver binding to two devices (aux and VF)
+today.
 
-> +    {
->         let mut handle: u32 =3D 0;
->         // SAFETY: The arguments are all valid per the type =
-invariants.
->         to_result(unsafe {
-> @@ -154,10 +141,12 @@ fn create_handle(
->     }
->=20
->     /// Looks up an object by its handle for a given `File`.
-> -    fn lookup_handle(
-> -        file: &drm::File<<<Self as IntoGEMObject>::Driver as =
-drm::Driver>::File>,
-> -        handle: u32,
-> -    ) -> Result<ARef<Self>> {
-> +    fn lookup_handle<D, F>(file: &drm::File<F>, handle: u32) -> =
-Result<ARef<Self>>
-> +    where
-> +        Self: AllocImpl<Driver =3D D>,
-> +        D: drm::Driver<Object =3D Self, File =3D F>,
-> +        F: drm::file::DriverFile,
-
-Same here?
-
-> +    {
->         // SAFETY: The arguments are all valid per the type =
-invariants.
->         let ptr =3D unsafe { =
-bindings::drm_gem_object_lookup(file.as_raw().cast(), handle) };
->         if ptr.is_null() {
-> @@ -212,8 +201,8 @@ impl<T: DriverObject> Object<T> {
->=20
->     const OBJECT_FUNCS: bindings::drm_gem_object_funcs =3D =
-bindings::drm_gem_object_funcs {
->         free: Some(Self::free_callback),
-> -        open: Some(open_callback::<T, Object<T>>),
-> -        close: Some(close_callback::<T, Object<T>>),
-> +        open: Some(open_callback::<T>),
-> +        close: Some(close_callback::<T>),
->         print_info: None,
->         export: None,
->         pin: None,
-> @@ -296,6 +285,8 @@ fn deref(&self) -> &Self::Target {
-> }
->=20
-> impl<T: DriverObject> AllocImpl for Object<T> {
-> +    type Driver =3D T::Driver;
-> +
->     const ALLOC_OPS: AllocOps =3D AllocOps {
->         gem_create_object: None,
->         prime_handle_to_fd: None,
-> --=20
-> 2.50.0
->=20
-
-With the DriverFile comment sorted out:
-
-Reviewed-by: Daniel Almeida <daniel.almeida@collabora.com>=
+Jason
