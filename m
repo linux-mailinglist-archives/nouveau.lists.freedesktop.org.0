@@ -2,57 +2,53 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id 0C6ABB43383
-	for <lists+nouveau@lfdr.de>; Thu,  4 Sep 2025 09:16:20 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id B4579B4375A
+	for <lists+nouveau@lfdr.de>; Thu,  4 Sep 2025 11:41:13 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 6E9D010E99F;
-	Thu,  4 Sep 2025 07:16:17 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 51EF710E9CC;
+	Thu,  4 Sep 2025 09:41:11 +0000 (UTC)
 Authentication-Results: gabe.freedesktop.org;
-	dkim=pass (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="EiHRXDVA";
+	dkim=pass (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="emZOx7j1";
 	dkim-atps=neutral
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from tor.source.kernel.org (tor.source.kernel.org [172.105.4.254])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 898A310E985;
- Thu,  4 Sep 2025 07:16:15 +0000 (UTC)
+Received: from sea.source.kernel.org (sea.source.kernel.org [172.234.252.31])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 14EE510E9CC
+ for <nouveau@lists.freedesktop.org>; Thu,  4 Sep 2025 09:41:10 +0000 (UTC)
 Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by tor.source.kernel.org (Postfix) with ESMTP id 8E5BA6013A;
- Thu,  4 Sep 2025 07:16:14 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 81238C4CEF0;
- Thu,  4 Sep 2025 07:16:10 +0000 (UTC)
+ by sea.source.kernel.org (Postfix) with ESMTP id A624F445B2;
+ Thu,  4 Sep 2025 09:41:09 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id B5E2CC4CEF0;
+ Thu,  4 Sep 2025 09:41:05 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1756970174;
- bh=LPZdm/buyXJ0xTVnIGoZtyA/LmkK+ghc/dp8KaZjL3M=;
+ s=k20201202; t=1756978869;
+ bh=XYdtB4QgovF+/4eIgDO6JOdgw1qaH6+X67HqQbA3+NA=;
  h=Date:Subject:Cc:To:From:References:In-Reply-To:From;
- b=EiHRXDVA82k7Cr9OTXAw9dXNT8pgAZCIFSnn/1dEFk2jAhv0XD2r9Eta//PpL+mG9
- iVNrUJtOTVmsw+zbCWLFuwl+SxclzDqY5c6ZWQFLChpztmT9tPVsedZK9g7OiLlG/p
- 5aD3YCHwH/tXG4+Jrw+zBKcAFCNdr86ssiSQyVxiPo7Z5sEKJS1xo8VJ68/54RIvZL
- iiFdRYt9axVaOxxuVdqRE41iUjmNtAEIl/Q6B7fhOEnC7hQFJoPU3sjlnlX0ypimlq
- /BcOCDuKX1qY535sifynGn+R+2ImolliCIOFrm4lhuEx4FGeQ3VvL8M9bZk/W0hsAf
- 5cGix/Fo052ig==
+ b=emZOx7j1dmRvG9tz6tSHCvhrVWXUU7ddp38STr5r/X91vmjD9gBl42jgA3duq/Usl
+ FYoAI67aenRw9P7j9jyjQ1dSYu9dOfWH5EJ2LtggRvIDijDhZ/QJHgEPTQwT46QedR
+ nKQjVLO1a7GWUbcwBz/rCi04elO5DhK4RBJFx9Gych2+PHwF2V6+snjYwQ0Ep3zRP9
+ j6KBvAjES8255+XPyFqCJqitNUB7rbZDQhxO1ockGOCSQs3RQLnAWyjkvjVq9zbfhZ
+ ICInW73iRQfgU8ShTte2Bws7+KueMHQo/wFDvI1iyqz5kS5Zk0IorznGEsoyoUKa89
+ PrL4Qq41iykXw==
 Mime-Version: 1.0
 Content-Transfer-Encoding: quoted-printable
 Content-Type: text/plain; charset=UTF-8
-Date: Thu, 04 Sep 2025 09:16:08 +0200
-Message-Id: <DCJTY0OQFG83.1AX49CQARXCEX@kernel.org>
-Subject: Re: [PATCH 1/2] nova-core: Add a library for bitfields in Rust structs
-Cc: "Joel Fernandes" <joelagnelf@nvidia.com>,
- <linux-kernel@vger.kernel.org>, "David Airlie" <airlied@gmail.com>, "Simona
- Vetter" <simona@ffwll.ch>, "Miguel Ojeda" <ojeda@kernel.org>, "Alex Gaynor"
- <alex.gaynor@gmail.com>, "Boqun Feng" <boqun.feng@gmail.com>, "Gary Guo"
- <gary@garyguo.net>, =?utf-8?q?Bj=C3=B6rn_Roy_Baron?=
- <bjorn3_gh@protonmail.com>, "Benno Lossin" <lossin@kernel.org>, "Andreas
- Hindborg" <a.hindborg@kernel.org>, "Alice Ryhl" <aliceryhl@google.com>,
- "Trevor Gross" <tmgross@umich.edu>, "John Hubbard" <jhubbard@nvidia.com>,
- "Alistair Popple" <apopple@nvidia.com>, <nouveau@lists.freedesktop.org>,
- <dri-devel@lists.freedesktop.org>, <rust-for-linux@vger.kernel.org>
-To: "Alexandre Courbot" <acourbot@nvidia.com>
+Date: Thu, 04 Sep 2025 11:41:03 +0200
+Message-Id: <DCJX0ZBB1ATN.1WPXONLVV8RYD@kernel.org>
+Subject: Re: [RFC v2 03/14] vfio/nvidia-vgpu: introduce vGPU type uploading
+Cc: <kvm@vger.kernel.org>, <alex.williamson@redhat.com>,
+ <kevin.tian@intel.com>, <jgg@nvidia.com>, <airlied@gmail.com>,
+ <daniel@ffwll.ch>, <acurrid@nvidia.com>, <cjia@nvidia.com>,
+ <smitra@nvidia.com>, <ankita@nvidia.com>, <aniketa@nvidia.com>,
+ <kwankhede@nvidia.com>, <targupta@nvidia.com>, <zhiwang@kernel.org>,
+ <acourbot@nvidia.com>, <joelagnelf@nvidia.com>, <apopple@nvidia.com>,
+ <jhubbard@nvidia.com>, <nouveau@lists.freedesktop.org>
+To: "Zhi Wang" <zhiw@nvidia.com>
 From: "Danilo Krummrich" <dakr@kernel.org>
-References: <20250824135954.2243774-1-joelagnelf@nvidia.com>
- <DCBGLCQVD1RF.6V5UT0NQ4GLB@nvidia.com>
- <444ebd64-7a90-46a6-b885-2c114aa59284@nvidia.com>
- <DCJOUO214EXC.32MFBN80VJW3K@nvidia.com>
-In-Reply-To: <DCJOUO214EXC.32MFBN80VJW3K@nvidia.com>
+References: <20250903221111.3866249-1-zhiw@nvidia.com>
+ <20250903221111.3866249-4-zhiw@nvidia.com>
+ <DCJWXVLI2GWB.3UBHWIZCZXKD2@kernel.org>
+In-Reply-To: <DCJWXVLI2GWB.3UBHWIZCZXKD2@kernel.org>
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -67,63 +63,107 @@ List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-On Thu Sep 4, 2025 at 5:16 AM CEST, Alexandre Courbot wrote:
-> On Thu Sep 4, 2025 at 12:15 AM JST, Joel Fernandes wrote:
-> <snip>
->>>> +use kernel::prelude::*;
->>>> +
->>>> +/// Macro for defining bitfield-packed structures in Rust.
->>>> +/// The size of the underlying storage type is specified with #[repr(=
-TYPE)].
->>>> +///
->>>> +/// # Example (just for illustration)
->>>> +/// ```rust
->>>> +/// bitstruct! {
->>>> +///     #[repr(u64)]
->>>> +///     pub struct PageTableEntry {
->>>> +///         0:0       present     as bool,
->>>> +///         1:1       writable    as bool,
->>>> +///         11:9      available   as u8,
->>>> +///         51:12     pfn         as u64,
->>>> +///         62:52     available2  as u16,
->>>> +///         63:63     nx          as bool,
->>>=20
->>> A note on syntax: for nova-core, we may want to use the `H:L` notation,
->>> as this is what OpenRM uses, but in the larger kernel we might want to
->>> use inclusive ranges (`L..=3DH`) as it will look more natural in Rust
->>> code (and is the notation the `bits` module already uses).
->>
->> Perhaps future add-on enhancement to have both syntax? I'd like to initi=
-ally
->> keep H:L and stabilize the code first, what do you think?
+(Cc: Alex, John, Joel, Alistair, nouveau)
+
+On Thu Sep 4, 2025 at 11:37 AM CEST, Danilo Krummrich wrote:
+> On Thu Sep 4, 2025 at 12:11 AM CEST, Zhi Wang wrote:
+>> diff --git a/drivers/vfio/pci/nvidia-vgpu/include/nvrm/gsp.h b/drivers/v=
+fio/pci/nvidia-vgpu/include/nvrm/gsp.h
+>> new file mode 100644
+>> index 000000000000..c3fb7b299533
+>> --- /dev/null
+>> +++ b/drivers/vfio/pci/nvidia-vgpu/include/nvrm/gsp.h
+>> @@ -0,0 +1,18 @@
+>> +/* SPDX-License-Identifier: MIT */
+>> +#ifndef __NVRM_GSP_H__
+>> +#define __NVRM_GSP_H__
+>> +
+>> +#include <nvrm/nvtypes.h>
+>> +
+>> +/* Excerpt of RM headers from https://github.com/NVIDIA/open-gpu-kernel=
+-modules/tree/570 */
+>> +
+>> +#define NV2080_CTRL_CMD_GSP_GET_FEATURES (0x20803601)
+>> +
+>> +typedef struct NV2080_CTRL_GSP_GET_FEATURES_PARAMS {
+>> +	NvU32  gspFeatures;
+>> +	NvBool bValid;
+>> +	NvBool bDefaultGspRmGpu;
+>> +	NvU8   firmwareVersion[GSP_MAX_BUILD_VERSION_LENGTH];
+>> +} NV2080_CTRL_GSP_GET_FEATURES_PARAMS;
+>> +
+>> +#endif
 >
-> Let's have the discussion with the other stakeholders (Daniel?). I think
-> in Nova we want to keep the `H:L` syntax, as it matches what the OpenRM
-> headers do (so Nova would have its own `register` macro that calls into
-> the common one, tweaking things as it needs). But in the kernel crate we
-> should use something intuitive for everyone.
+> <snip>
+>
+>> +static struct version supported_version_list[] =3D {
+>> +	{ 18, 1, "570.144" },
+>> +};
+>
+> nova-core won't provide any firmware specific APIs, it is meant to serve =
+as a
+> hardware and firmware abstraction layer for higher level drivers, such as=
+ vGPU
+> or nova-drm.
+>
+> As a general rule the interface between nova-core and higher level driver=
+s must
+> not leak any hardware or firmware specific details, but work on a higher =
+level
+> abstraction layer.
+>
+> Now, I recognize that at some point it might be necessary to do some kind=
+ of
+> versioning in this API anyways. For instance, when the semantics of the f=
+irmware
+> API changes too significantly.
+>
+> However, this would be a separte API where nova-core, at the initial hand=
+shake,
+> then asks clients to use e.g. v2 of the nova-core API, still hiding any f=
+irmware
+> and hardware details from the client.
+>
+> Some more general notes, since I also had a look at the nova-core <-> vGP=
+U
+> interface patches in your tree (even though I'm aware that they're not pa=
+rt of
+> the RFC of course):
+>
+> The interface for the general lifecycle management for any clients attach=
+ing to
+> nova-core (VGPU, nova-drm) should be common and not specific to vGPU. (Th=
+e same
+> goes for interfaces that will be used by vGPU and nova-drm.)
+>
+> The interface nova-core provides for that should be designed in Rust, so =
+we can
+> take advantage of all the features the type system provides us with conne=
+cting
+> to Rust clients (nova-drm).
+>
+> For vGPU, we can then monomorphize those types into the corresponding C
+> structures and provide the corresponding functions very easily.
+>
+> Doing it the other way around would be a very bad idea, since the Rust ty=
+pe
+> system is much more powerful and hence it'd be very hard to avoid introdu=
+cing
+> limitations on the Rust side of things.
+>
+> Hence, I recommend to start with some patches defining the API in nova-co=
+re for
+> the general lifecycle (in Rust), so we can take it from there.
+>
+> Another note: I don't see any use of the auxiliary bus in vGPU, any clien=
+ts
+> should attach via the auxiliary bus API, it provides proper matching wher=
+e
+> there's more than on compatible GPU in the system. nova-core already regi=
+sters
+> an auxiliary device for each bound PCI device.
+>
+> Please don't re-implement what the auxiliary bus already does for us.
+>
+> - Danilo
 
-I don't care too much about whether it's gonna be H:L or L:H [1], but I do =
-care
-about being consistent throughout the kernel. Let's not start the practice =
-of
-twisting kernel APIs to NV_* specific APIs that differ from what people are=
- used
-to work with in the kernel.
-
-[1] If it's gonna be H:L, I think we should also list things in reverse ord=
-er,
-    i.e.:
-
-	pub struct PageTableEntry {
-	    63:63     nx          as bool,
-	    62:52     available2  as u16,
-	    51:12     pfn         as u64,
-	    11:9      available   as u8,
-	    1:1       writable    as bool,
-	    0:0       present     as bool,
-	}
-
-This is also what would be my preferred style for the kernel in general.
-
-- Danilo
