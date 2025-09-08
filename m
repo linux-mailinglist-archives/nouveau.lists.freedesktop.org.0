@@ -2,59 +2,77 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id 7C321B4994D
-	for <lists+nouveau@lfdr.de>; Mon,  8 Sep 2025 21:04:54 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 792B4B49BC1
+	for <lists+nouveau@lfdr.de>; Mon,  8 Sep 2025 23:21:33 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 21B8A10E1CD;
-	Mon,  8 Sep 2025 19:04:53 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id DFD7A10E5DA;
+	Mon,  8 Sep 2025 21:21:31 +0000 (UTC)
 Authentication-Results: gabe.freedesktop.org;
-	dkim=pass (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="WQrd480F";
+	dkim=pass (2048-bit key; unprotected) header.d=darkrefraction-com.20230601.gappssmtp.com header.i=@darkrefraction-com.20230601.gappssmtp.com header.b="TtV3oWv6";
 	dkim-atps=neutral
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from sea.source.kernel.org (sea.source.kernel.org [172.234.252.31])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 1995610E1C0;
- Mon,  8 Sep 2025 19:04:52 +0000 (UTC)
-Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by sea.source.kernel.org (Postfix) with ESMTP id BDECF40A5E;
- Mon,  8 Sep 2025 19:04:51 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id DAB42C4CEF1;
- Mon,  8 Sep 2025 19:04:47 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1757358291;
- bh=OR+JDujD3Fb8Vx7FEcUt+VBJwg5Qbiq6BsKuLXHf/LM=;
- h=Date:Subject:To:Cc:References:From:In-Reply-To:From;
- b=WQrd480Fgq1Jk+JXmJmwR/YKiGCUZnUSTJaJWmH65DmuXpMi7ZhJAd/tQR9S6B0L6
- 5CI5ASp0pxqYnT42JJ0JIGqacWXGjtU/fZr/TixT3N0OvS3rue+r/Y9C086Teaq09V
- 3ob28CFsh9f/V7aAe86IQ9o2qzmWC/U8IdmltfKMStDN0s6qou6/JmXT3wbXgNKUnn
- X+Mz+PypoxQYqEsimeZ6Aksdqr+k1IQalM0oYEKEABekbnL3aDHQ6juQcXywI74paJ
- +XkOPuo00CNGtR9m+JrpVoDhzm0SoTzREMl/op2/4T3Sq1MUq90IAuwMDg/GQ0kALb
- AB/axqJgWK9Zg==
-Message-ID: <b92c52f8-d5b5-45ba-9195-9d8e20b41f0e@kernel.org>
-Date: Mon, 8 Sep 2025 21:04:46 +0200
+Received: from mail-ej1-f50.google.com (mail-ej1-f50.google.com
+ [209.85.218.50])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 5F1DF10E5DA
+ for <nouveau@lists.freedesktop.org>; Mon,  8 Sep 2025 21:21:30 +0000 (UTC)
+Received: by mail-ej1-f50.google.com with SMTP id
+ a640c23a62f3a-b043da5a55fso658591866b.0
+ for <nouveau@lists.freedesktop.org>; Mon, 08 Sep 2025 14:21:30 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=darkrefraction-com.20230601.gappssmtp.com; s=20230601; t=1757366489;
+ x=1757971289; darn=lists.freedesktop.org; 
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=eoNTJMKU9iOlrWl+MFmGasFoGj85suUe9BA2fsfDCVM=;
+ b=TtV3oWv6apgYABcSgHFNu+6y258U7nSgA7hBuXculYW4UwvIy2e2ioLVRzRV2POF4p
+ OTbNqX8bpMuPH7B+ssizmPz4sXITFVR5sQIe2nfWNddPDjuOb1BR/Pa/JqulBaSp8QHp
+ cwGNjSS+raclxyGoQGwe+3KmqaTSy72hpa5Ib8+WNhBpN8f6MOT6gtWtdzZQ/mfr/TnY
+ t2YlZrBBJfNeuRAzPAiQVuT/Ux8CD/4SK3f5avbAHaHA93czO61UIFjXXW6uu5QkqyOQ
+ nKwh69YHgMCZPB7mVDJWoXTHCEanDVKq3fpwWSND621kDyO/+Eu+G331C3NEFJir/qPi
+ a47A==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1757366489; x=1757971289;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=eoNTJMKU9iOlrWl+MFmGasFoGj85suUe9BA2fsfDCVM=;
+ b=eYSI2QmqU383Ac6Zlr1Mvg2ps3xdly6s6PxWKulCJBLf6LGUrBEssfEQgatTkG6QA9
+ Nc24vvvxgfm86dy8NLs57rnbH2jj8sfhg4Yr7oPkFNuVFy0PxSN1U8MUK/bap2DceEP2
+ BvU5EhGwyDGNyIa/fTO7TEIqFe2sYcmxTCA5ju05gTFRHx88anBCCJcfiAnluxDn4+57
+ HbHAJMsv1ioaoXKzTKzBsoJDiE0mtK6SngTFDZwx+FfUz8qVB96O98JYqqV/KTd6Sqeg
+ Yh6ae+gn5mukx/MyvPUpp1shIX+6ciM0tftvqMz0XbyHEuWgmcxnxS8961wDFaKa3npy
+ pqMg==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCVhNhWvf/o5regOkS7WpsKieU6YWl3gtSHCzy0/yDYoI5GmzxFPTqCyVlVedM3n7A7fBb4vIwcB@lists.freedesktop.org
+X-Gm-Message-State: AOJu0YzjShdb8w9vEqtyhnPf/zpgU8ArYMcfhKwZGNpZGBF9emB/BoMW
+ RPSWN8PKdyKme538FEhHBxsaMVj64S+XmigSM5UW6OBOgrd3kSjA/dFoIdrErE+cVMBlJWPbT+j
+ lYtxegb3LxKXfqBfaH50nSUWK3MlU7GnqZeqiKWD64Q==
+X-Gm-Gg: ASbGnctX3Z7BwKOB7LQswahZPaavREYzg40Ug2H09LLyR6b6DD9ROZqZqpun22sV/MW
+ jnaLU45ftBW71/7k44wpwi6tMhBC7IJ80G2RJm1VXqvVszNxS1ccoglSIuooXJWNzj+u3GnPve9
+ j+dSfcPL6mTZiiyFQvdJE8Ldt/sUVeKbcHCToOTiO5skahyLO1/ywEPA9BMt8tFmhXR97kfV0VT
+ zARsp3CZ4fxSXwZqDM=
+X-Google-Smtp-Source: AGHT+IH9SgiC3aVido2/N3XUr78h4QxbX+QTjJxuowVtNq1Ulr0lG4061PcI4Mlbk8tHASgcwtQ9iWL8bMNPlHCJx/U=
+X-Received: by 2002:a17:907:d8b:b0:afe:7909:f42a with SMTP id
+ a640c23a62f3a-b04b1714531mr871159366b.51.1757366488564; Mon, 08 Sep 2025
+ 14:21:28 -0700 (PDT)
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v4 1/3] rust: drm: gem: Simplify use of generics
-To: Lyude Paul <lyude@redhat.com>
-Cc: dri-devel@lists.freedesktop.org, linux-kernel@vger.kernel.org,
- rust-for-linux@vger.kernel.org, Alice Ryhl <aliceryhl@google.com>,
- Daniel Almeida <daniel.almeida@collabora.com>,
- Maarten Lankhorst <maarten.lankhorst@linux.intel.com>,
- Maxime Ripard <mripard@kernel.org>, Thomas Zimmermann <tzimmermann@suse.de>,
- David Airlie <airlied@gmail.com>, Simona Vetter <simona@ffwll.ch>,
- Miguel Ojeda <ojeda@kernel.org>, Alex Gaynor <alex.gaynor@gmail.com>,
- Boqun Feng <boqun.feng@gmail.com>, Gary Guo <gary@garyguo.net>,
- =?UTF-8?Q?Bj=C3=B6rn_Roy_Baron?= <bjorn3_gh@protonmail.com>,
- Benno Lossin <lossin@kernel.org>, Andreas Hindborg <a.hindborg@kernel.org>,
- Trevor Gross <tmgross@umich.edu>, Asahi Lina <lina+kernel@asahilina.net>,
- "open list:DRM DRIVER FOR NVIDIA GPUS [RUST]" <nouveau@lists.freedesktop.org>
-References: <20250908185239.135849-1-lyude@redhat.com>
- <20250908185239.135849-2-lyude@redhat.com>
-From: Danilo Krummrich <dakr@kernel.org>
-Content-Language: en-US
-In-Reply-To: <20250908185239.135849-2-lyude@redhat.com>
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
+References: <20250829021633.1674524-1-airlied@gmail.com>
+ <CAAgWFh0QgCe3MMExMkJqdRBj5NqDrJ7zq6eaQ-Yszm2xFaqRpQ@mail.gmail.com>
+ <CAPM=9twR-NFDnZUPy4WO8dte5wii+Wq+GTJxZaLDJRifYsMYDg@mail.gmail.com>
+In-Reply-To: <CAPM=9twR-NFDnZUPy4WO8dte5wii+Wq+GTJxZaLDJRifYsMYDg@mail.gmail.com>
+From: M Henning <mhenning@darkrefraction.com>
+Date: Mon, 8 Sep 2025 17:21:02 -0400
+X-Gm-Features: Ac12FXx7t9gI0ziNtm8oa1gkQg-8QJMhnpIna0JQI1IJ_9poC6WMReylPpnE6zE
+Message-ID: <CAAgWFh1aT37aTDUzXQhRbzV1Ha8Jz3PeKu4_PhsakFDBg4drkg@mail.gmail.com>
+Subject: Re: [PATCH 1/2] nouveau: fix disabling the nonstall irq due to storm
+ code. (v2)
+To: Dave Airlie <airlied@gmail.com>
+Cc: dri-devel@lists.freedesktop.org, nouveau@lists.freedesktop.org, 
+ dakr@kernel.org
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -69,71 +87,26 @@ List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
+On Mon, Sep 1, 2025 at 4:52=E2=80=AFPM Dave Airlie <airlied@gmail.com> wrot=
+e:
+>
+> On Tue, 2 Sept 2025 at 04:18, M Henning <mhenning@darkrefraction.com> wro=
+te:
+> > Maybe we should also do this for older GPUs? eg. perhaps we should
+> > also update gf100_fifo_nonstall_allow / gf100_fifo_nonstall_block ?
+>
+> Those actually turn off the irq at the hardware, and therefore
+> shouldn't hit the allowed path check, not touching that without
+> someone showing it's broken.
+>
+> Dave.
 
-
-On 9/8/25 8:46 PM, Lyude Paul wrote:
-> Now that my rust skills have been honed, I noticed that there's a lot of
-> generics in our gem bindings that don't actually need to be here. Currently
-> the hierarchy of traits in our gem bindings looks like this:
-> 
->   * Drivers implement:
->     * BaseDriverObject<T: DriverObject> (has the callbacks)
->     * DriverObject (has the drm::Driver type)
->   * Crate implements:
->     * IntoGEMObject for Object<T> where T: DriverObject
->       Handles conversion to/from raw object pointers
->     * BaseObject for T where T: IntoGEMObject
->       Provides methods common to all gem interfaces
-> 
->   Also of note, this leaves us with two different drm::Driver associated
->   types:
->     * DriverObject::Driver
->     * IntoGEMObject::Driver
-> 
-> I'm not entirely sure of the original intent here unfortunately (if anyone
-> is, please let me know!), but my guess is that the idea would be that some
-> objects can implement IntoGEMObject using a different ::Driver than
-> DriverObject - presumably to enable the usage of gem objects from different
-> drivers. A reasonable usecase of course.
-> 
-> However - if I'm not mistaken, I don't think that this is actually how
-> things would go in practice. Driver implementations are of course
-> implemented by their associated drivers, and generally drivers are not
-> linked to each-other when building the kernel. Which is to say that even in
-> a situation where we would theoretically deal with gem objects from another
-> driver, we still wouldn't have access to its drm::driver::Driver
-> implementation. It's more likely we would simply want a variant of gem
-> objects in such a situation that have no association with a
-> drm::driver::Driver type.
-> 
-> Taking that into consideration, we can assume the following:
-> * Anything that implements BaseDriverObject will implement DriverObject
->   In other words, all BaseDriverObjects indirectly have an associated
->   ::Driver type - so the two traits can be combined into one with no
->   generics.
-> * Not everything that implements IntoGEMObject will have an associated
->   ::Driver, and that's OK.
-> 
-> And with this, we now can do quite a bit of cleanup with the use of
-> generics here. As such, this commit:
-> 
-> * Removes the generics on BaseDriverObject
-> * Moves DriverObject::Driver into BaseDriverObject
-> * Removes DriverObject
-> * Removes IntoGEMObject::Driver
-> * Add AllocImpl::Driver, which we can use as a binding to figure out the
->   correct File type for BaseObject
-> 
-> Leaving us with a simpler trait hierarchy that now looks like this:
-> 
->   * Drivers implement: BaseDriverObject
->   * Crate implements:
->     * IntoGEMObject for Object<T> where T: DriverObject
->     * BaseObject for T where T: IntoGEMObject
-> 
-> Which makes the code a lot easier to understand and build on :).
-> 
-> Signed-off-by: Lyude Paul <lyude@redhat.com>
-> Reviewed-by: Daniel Almeida <daniel.almeida@collabora.com>
-
-Acked-by: Danilo Krummrich <dakr@kernel.org>
+I did some testing on kepler and it looks like it is broken. I can
+reproduce the Talos + transfer queue issue there easily. I wrote
+https://gitlab.freedesktop.org/mhenning/linux/-/commit/b3ef72898ae2bf19cf58=
+7b8679d193c9570ddb05
+to fix the membar half of the issue but that still doesn't load Talos
+with a transfer queue, which means that we either need to apply this
+fix (nouveau: fix disabling the nonstall irq due to storm code) for
+kepler and probably all the other gens, or there's yet another bug
+lurking somewhere.
