@@ -2,88 +2,77 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id 6A711CBAE7F
-	for <lists+nouveau@lfdr.de>; Sat, 13 Dec 2025 13:46:11 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id C4276CBAA51
+	for <lists+nouveau@lfdr.de>; Sat, 13 Dec 2025 13:42:00 +0100 (CET)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 8FCDC10EC25;
-	Sat, 13 Dec 2025 12:42:15 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 9C91C10EA51;
+	Sat, 13 Dec 2025 12:40:59 +0000 (UTC)
 Authentication-Results: gabe.freedesktop.org;
-	dkim=permerror (0-bit key) header.d=gmail.com header.i=@gmail.com header.b="BSpfTvAt";
+	dkim=permerror (0-bit key) header.d=gmail.com header.i=@gmail.com header.b="X+CxX6ik";
 	dkim-atps=neutral
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from mail-pj1-f53.google.com (mail-pj1-f53.google.com
- [209.85.216.53])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 87E1F10E029
- for <nouveau@lists.freedesktop.org>; Tue,  9 Sep 2025 21:36:39 +0000 (UTC)
-Received: by mail-pj1-f53.google.com with SMTP id
- 98e67ed59e1d1-3296a9d17d3so516573a91.1
- for <nouveau@lists.freedesktop.org>; Tue, 09 Sep 2025 14:36:39 -0700 (PDT)
+Received: from mail-lf1-f50.google.com (mail-lf1-f50.google.com
+ [209.85.167.50])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 3699F10E80D
+ for <nouveau@lists.freedesktop.org>; Tue,  9 Sep 2025 22:04:22 +0000 (UTC)
+Received: by mail-lf1-f50.google.com with SMTP id
+ 2adb3069b0e04-55f7c8b38a0so971110e87.2
+ for <nouveau@lists.freedesktop.org>; Tue, 09 Sep 2025 15:04:22 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1757453799; x=1758058599; darn=lists.freedesktop.org;
+ d=gmail.com; s=20230601; t=1757455460; x=1758060260; darn=lists.freedesktop.org;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:from:to:cc:subject:date
  :message-id:reply-to;
- bh=Tri659oiLVCd6VfYpPQXtF9OQ4WThWRJ/JELvDiFurY=;
- b=BSpfTvAthRhREeBDmJ18rqbotUxFcPncoNMhMkzUTDWhi0M7hHIcs/BMWNS2zucOJY
- nHDvYEyGh+ntfRAfALs11gkajyQsLfPj148z20NsMzRUzxRKAYtSg15V0JqTKllObLIw
- n26SpIwVDrQz+hxSo6JzI/8hjWmI2QwcV7AoTf3Q9NrkAiQS5LOqfDLFLSSng2CP/3y9
- 8fYCqvqT6pHdZV5BijRFCD1GCPr83X8W925H8jcOH+0RxG9RI37LzQqhv+cbTPJZ1vjP
- Ax4kzO3dXcbs2RJDW5f1uC0fOv3ucviz9xSsG+/7mg+7+YzRbnHCVhFVKTRB6rQJJOxH
- 5lNQ==
+ bh=vJE7SAtMU597GHTC8LkC90WpJdQrYFWukdI48tYxJKQ=;
+ b=X+CxX6ikLwX22Bk09wfnpKici+HVFrwJ9ryEIMF4tTsGj7ZhDpPcniYu7OJj4MeQ0f
+ pp/dlj2oVKpFQ5XiDD8dcisTpgkTfbxtugTOP94Di26ZFWkpHSsdEwcrMQCPEPXyFXw3
+ k3HL2kG/jk3Glc4ZHq8I0tgWsWSCUyKsEP7WxS/2dl7hl7zwBft7e6O8hiNFfHHOvcx2
+ ermZKRb/EbfEonSp3nyG/O9uu+RXHSSkug9WckWTrsSe1+bEmu1cmSB2y7tecV6voFNB
+ NelqyBsDIP94E2ApDo9jWYlMbkKW/T5ADDSIdUKjSQFeLNb/GWB4sF8628ifcbYppMf/
+ Js5A==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1757453799; x=1758058599;
+ d=1e100.net; s=20230601; t=1757455460; x=1758060260;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=Tri659oiLVCd6VfYpPQXtF9OQ4WThWRJ/JELvDiFurY=;
- b=xIY3fJU64QM3dicgzNcBn610LMA2UPRMsnywsGGeiI9SM5KDrTLBo6Ut1RZOV4tDt0
- VETtk8fQYZnAOaeimQz4hLJxnaLZjDmpmdyFU7VkmvXeTKk4l1RRIArE63kitJ9gYmgw
- UFaqGZL/vOcqE4v59KPo2g21TAjKYXxKsvdZ858N7ADLlA+QzGxPSwg7qoR8M8qzTJ7d
- H8gSc/3v4UjnUkiv6Grdp4L/ZmAsLH5gkvaelxhfz4pwCYe4OewYLFg02BF8K7lcoLjk
- /J8bOXEr89xeJYVZ4GONf5sOR2+T5Wj/CQ7Svmeg0ew/fESKxxyvoH0BsEqw4MSu2GMz
- z9Kw==
+ bh=vJE7SAtMU597GHTC8LkC90WpJdQrYFWukdI48tYxJKQ=;
+ b=tbozbU6xpIpXbnIpx4iAx7psV/1tHuQ/TvDS8tWhhxnQ3UmSBd4zsEv9kJ34J+aq52
+ TJ6CfFT/iegAMf0DmqMpH7YYe9VNLBLrtZ3GbBo1pWANGZGkCSOm7YfSK/DbhLbrFQGM
+ KNfUPO7tRjmAuGCIIyhsGNuSQctEInI/+wIKnoSmDlsJdO2IqRUIyoQtFbjWNw5REZ4T
+ Ln5wmFtThVVkP1uxBfw1dyXLA1uJa+MfSVtwKDiP9W4qPVGDzMLCtdPQPI0nMrrHXgXM
+ XVp3uHYqf7PVY4ESy7PewKVsu9D6UmuHv/ranLJvdnZFxSgYkpGC1ineRiZDL3uoHjzc
+ 7ZSA==
 X-Forwarded-Encrypted: i=1;
- AJvYcCXjV2afhCGrmgSzNaDb8+i1eMsnxoBLi+ZVZmCxwKyEjusJ9nrN01DJkl4QZVV3Ltu9VMMFjON+@lists.freedesktop.org
-X-Gm-Message-State: AOJu0YxtMLQiN7RH2fzeZcV3xzNZfTk6f3FvQCyem8C+1XDBN3ozNlDR
- 5FtqU8UxIn/aon1DGTPxTzRXX719JKIw3yjJUvvpYc6a/TvOt0LSvlo1s5yQ/UQ0Pj/yAJKHCJB
- 97VjbJZhN33lz/VkxF1N0V8GkjxkxPAs=
-X-Gm-Gg: ASbGncsisuu5vxYIy9fzpY4LkK8Ubzchf/naGgHAItzYmMw50RNoV45M3VBlP+mRa1Z
- UAYnZcdcwfoUPBmCJHkzX6rqj73g6DHwiMpVI+n9CSW+nFbkTdxEPatsLbMBj6eGPIqDqsitHf/
- 7SzO9dZNErPD9MQgEZ4zCeGeW2mj18FafQ4MdJHZ3PmshvH4hW3XdlYaJsLupj+E9uNICQbOm0l
- ERJz+wnCNO/gQsrsRMmbJVGeQ6oAkUiLHm8HEuv1rLh6dylDfj+NlYWVBdR2XReGhs2mNQvYSDd
- CtP48OIlszT7I/sfKP+t/NiupyhnbYF375m+Od7lIvsPrN0=
-X-Google-Smtp-Source: AGHT+IGfWuRbBLApbA1biIsSRGuFYUHQhWq6XH4sIOFxuFSe8wgAAY/n3W+S5dtyGYo44L8oScz+D23Y+e9Y2jG9A1c=
-X-Received: by 2002:a17:90a:c10d:b0:32d:a2c5:902a with SMTP id
- 98e67ed59e1d1-32da2c5994bmr2271358a91.5.1757453798983; Tue, 09 Sep 2025
- 14:36:38 -0700 (PDT)
+ AJvYcCU4UUkfGy4YztdAYORLf7TodWUVqYJcJrtFBjypDc8Ae1fiO3bUQYd273W2XkXLZZIR54NIWxkF@lists.freedesktop.org
+X-Gm-Message-State: AOJu0Yze6Rr6bOyFfkByaUUH5ZUgqWy/R4s5J5w4fZPo0VTovQmqLLj+
+ BB36FomkzCKzCZVK7fdUOptlBLUFWeT7AZr6xvf/8S7KXdx01u4bPNEgzVEjJvc5RL3bPG9rzsU
+ pUXEKuuKzNsVgptDkTqVqeSzciAYwCWs=
+X-Gm-Gg: ASbGnctxMIvWvz3iQkL0UrsUC4XZi2+KHXtZ/C+J92JVWr6SW52IIya26O2jdUuBVzc
+ PpRWcOGTGiD+tsNL0HRHhZYh5W3XGkEa6GqvfVt29cJi+r2hfcrelKi3YWG4EC4NDmbGPy630NM
+ X7ZcA442J1QpEGvZ7snrvSEqRZukce6iZtgJrP3zwF2m2vmggUtcUCLBzhEtKgPqRtGL/+PFY1H
+ ZTkuyWZPVNvcgquztolQ1T3iNd9k2X84rT63HhcbnjfiUf9BXQr6LmQwyFEG6qJp3pBn+N8iF5P
+ NCRSi1adQFF2rR1osln+3qkGICR0XIm6s0nL
+X-Google-Smtp-Source: AGHT+IGaa3tKhTEeaj82Fyo2xoHmCsDsP1VnOtUkctEIYGUN0qmz9E5woHXIzyMUU0VsfLfEZBQ0b8TrzmrdoI/zncM=
+X-Received: by 2002:a05:6512:3ca4:b0:55f:4a0d:3f50 with SMTP id
+ 2adb3069b0e04-56262a40f6amr2161481e87.7.1757455460118; Tue, 09 Sep 2025
+ 15:04:20 -0700 (PDT)
 MIME-Version: 1.0
-References: <20250909212039.227221-1-joelagnelf@nvidia.com>
- <20250909212039.227221-5-joelagnelf@nvidia.com>
-In-Reply-To: <20250909212039.227221-5-joelagnelf@nvidia.com>
+References: <20250908-num-v5-0-c0f2f681ea96@nvidia.com>
+In-Reply-To: <20250908-num-v5-0-c0f2f681ea96@nvidia.com>
 From: Miguel Ojeda <miguel.ojeda.sandonis@gmail.com>
-Date: Tue, 9 Sep 2025 23:36:25 +0200
-X-Gm-Features: AS18NWBWIRvK8uXY04bEb1NxF81YxjlANyREK55xtT2E0vJdhqdmuYSI_9VSyBo
-Message-ID: <CANiq72nPQps8ow00AmUe3shArHyhCUSSJX4=6QPHfHQZ_QeqcA@mail.gmail.com>
-Subject: Re: [PATCH v3 4/5] rust: Move register and bitfield macros out of Nova
-To: Joel Fernandes <joelagnelf@nvidia.com>
-Cc: linux-kernel@vger.kernel.org, dri-devel@lists.freedesktop.org, 
- dakr@kernel.org, acourbot@nvidia.com, Alistair Popple <apopple@nvidia.com>, 
- Miguel Ojeda <ojeda@kernel.org>, Alex Gaynor <alex.gaynor@gmail.com>, 
- Boqun Feng <boqun.feng@gmail.com>, Gary Guo <gary@garyguo.net>,
- bjorn3_gh@protonmail.com, 
+Date: Wed, 10 Sep 2025 00:04:04 +0200
+X-Gm-Features: AS18NWBzPuHqngmTpgXNZpIRD-OdqL2Y5OEaYpGUN_Vn-7watZfMYtmQRtqbWzI
+Message-ID: <CANiq72mYzgx0dB+yO4BFBRCNEKBcONx56Jp=h7HKVXzkbRn_Sg@mail.gmail.com>
+Subject: Re: [PATCH v5 0/2] rust: add `Alignment` type
+To: Alexandre Courbot <acourbot@nvidia.com>
+Cc: Miguel Ojeda <ojeda@kernel.org>, Alex Gaynor <alex.gaynor@gmail.com>, 
+ Boqun Feng <boqun.feng@gmail.com>, Gary Guo <gary@garyguo.net>, 
+ =?UTF-8?Q?Bj=C3=B6rn_Roy_Baron?= <bjorn3_gh@protonmail.com>, 
  Benno Lossin <lossin@kernel.org>, Andreas Hindborg <a.hindborg@kernel.org>, 
  Alice Ryhl <aliceryhl@google.com>, Trevor Gross <tmgross@umich.edu>, 
- David Airlie <airlied@gmail.com>, Simona Vetter <simona@ffwll.ch>, 
- Maarten Lankhorst <maarten.lankhorst@linux.intel.com>,
- Maxime Ripard <mripard@kernel.org>, 
- Thomas Zimmermann <tzimmermann@suse.de>, John Hubbard <jhubbard@nvidia.com>,
- Timur Tabi <ttabi@nvidia.com>, 
- joel@joelfernandes.org, Elle Rhumsaa <elle@weathered-steel.dev>, 
- Yury Norov <yury.norov@gmail.com>,
- Daniel Almeida <daniel.almeida@collabora.com>, 
- nouveau@lists.freedesktop.org, 
- rust-for-linux <rust-for-linux@vger.kernel.org>
+ Danilo Krummrich <dakr@kernel.org>, linux-kernel@vger.kernel.org, 
+ rust-for-linux@vger.kernel.org, nouveau@lists.freedesktop.org
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
 X-Mailman-Approved-At: Sat, 13 Dec 2025 12:40:48 +0000
@@ -101,27 +90,14 @@ List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-On Tue, Sep 9, 2025 at 11:21=E2=80=AFPM Joel Fernandes <joelagnelf@nvidia.c=
+On Mon, Sep 8, 2025 at 3:26=E2=80=AFPM Alexandre Courbot <acourbot@nvidia.c=
 om> wrote:
 >
-> Out of broad need for these macros in Rust, move them out. Several folks
-> have shown interest (Nova, Tyr GPU drivers).
+> prerequisite-message-id: <20250808-falcondma_256b-v1-1-15f911d89ffd@nvidi=
+a.com>
+> prerequisite-patch-id: 2439f5f9b560ee4867716f0018b5326dcd72cda3
 
-Please Cc the rust-for-Linux mailing list, especially so for patches
-that add things to the core infrastructure.
-
-I notice easily because I tag the ones that are in my client :)
-
-> [Added F: record to MAINTAINERS file entry as suggested by Yury.]
-
-Please don't use [ ... ] nor the past tense -- for normal changes,
-please use the imperative instead.
-
-(I guess you picked this up from other [ ... ] notation, but that is
-normally only done for modifications of a patch by someone else, e.g.
-by maintainers.)
-
-Thanks!
+I guess you had this in your branch but is not actually needed, right?
 
 Cheers,
 Miguel
