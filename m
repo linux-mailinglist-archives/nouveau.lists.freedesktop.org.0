@@ -2,147 +2,174 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id BE9B0BBF597
-	for <lists+nouveau@lfdr.de>; Mon, 06 Oct 2025 22:47:56 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 3EA36BBF5E3
+	for <lists+nouveau@lfdr.de>; Mon, 06 Oct 2025 22:48:15 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 1091310E57B;
-	Mon,  6 Oct 2025 20:46:31 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id D9FA710E532;
+	Mon,  6 Oct 2025 20:47:14 +0000 (UTC)
 Authentication-Results: gabe.freedesktop.org;
-	dkim=pass (2048-bit key; unprotected) header.d=Nvidia.com header.i=@Nvidia.com header.b="CWL+mVCL";
+	dkim=pass (2048-bit key; unprotected) header.d=Nvidia.com header.i=@Nvidia.com header.b="JzHskYwu";
 	dkim-atps=neutral
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from NAM10-MW2-obe.outbound.protection.outlook.com
- (mail-mw2nam10on2084.outbound.protection.outlook.com [40.107.94.84])
- by gabe.freedesktop.org (Postfix) with ESMTPS id CF3F210E7FF;
- Tue,  9 Sep 2025 21:21:01 +0000 (UTC)
+Received: from NAM11-DM6-obe.outbound.protection.outlook.com
+ (mail-dm6nam11on2055.outbound.protection.outlook.com [40.107.223.55])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 90B4D10E289;
+ Wed, 10 Sep 2025 00:15:27 +0000 (UTC)
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=y2UmbHt6SOE9UlRWdrcg/PYDMHPtWPSIITEEqdPTkGwfY8RHJUCfYUMO9I29o+oOxScxeccEnLAFKdAn/6g4w4fBIiCDjxj/x3YKevwVo6frBJJjwO0jLw3LivUcd+PJYNZ0KhfYphuYmiaZ3RI/8t873v7ZtXsxWULnTk40GHFFgSvGXB0tMVSIuHfIjpCrUGb560C2NudvvFI53Ogo0KuAzKIwWRkJ9mbxwLpdLs1Vwry+LPoBcHVpI+vbRkaj7oNP+hL0+rYcxt1pO94fnYjJ8XLMzkJi84plZ1qqtm0HlPn73tEpKSjb55UyiZfIG7XvgWUdOkxgHNPCOnM28w==
+ b=r6vIhIwxqVQG5Sp96CnZhWozBbuodhuCDY/nmpZRJs9f/lC6plLx86mgYgMOJ6UkK6M2tMOxZFUAugEX1YO08aZSV7LgXcpjvkt6evVolLzxrZTfYd20gDvm8kQ3b2g5jk8VoKzgtwBbzuy7u2a9IZZTXoPDtDL3M5S7aRo9i9YKj3nToaYdGA26tzyPOCaNIXbAWRjkcEuCF1/4fOEVjAM4JmxfWzv4zzdBxMEzsK3jqWevs6muPjDUugl0f/zead8rMBnSXKq01MdphgSOt3guI6ohzSDWmMNqJxQI7jlDbSrGppzpt1GjsAyWmVonjQyBes79W/0o65O5y6eu5g==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
  s=arcselector10001;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=dygLGICj0TKOZ542+yk7yMFeePqPVbCHPBwzVmwQXWk=;
- b=G5gPT63DLf6amzW54DzwDRXj7Gri5N6ttD6k0BRCZ6jwDR6sA/BY7X9ivQkjfQNA1TwokM2UDd8J9BlpH3/zIG5xq1XgQzG6vJqIRHmQMuzkG4ECfPexQIqM+N3p/FsHTw19hE+JHWCgeCuNZSdCjrAVqgiS46YTXixIGBAftPeDQ61h1D766sfyHlat95HVUe1ww0jNL6aGFNIHIbukIRMsqHNIY6Rm0mWAhwESwmU9GLH6WMkX7b0aGXNyj4G14P5PK6Yc+Iz7mEUAT2dD7rUDAEl/v7saqGqPqpnlUvkfqrq9vhQ6z39mFdgVYuFZNoZ7kUtk/LUCf1Z3EiFqnA==
+ bh=GbCOccew0Ld0yZTIOEbxP3xs68eukIj3zogkCX7ahuY=;
+ b=A+wYmxoO1LQoRNeWbyCIzw3Q4m9F8bs8rQuttPVQ2RL7/SlZ5IWlVgpDTBOHqKIGTF3mAsxzpZTchCC8Nx+3n544oQZmX3QbWq70L4hYQrgYkXs0hpMgoyus2PCcSUNfeTfpZYU8u4xICuhR8p8mFioCe6UZS1CLzw9ngu+ekfckKVybUP1ZDx1PnhUiCzheGoWoTNHhsXOFcBBY7a/ckYixKeIOzOEhOcLfxRY3Fh09S9DkgJ4zLb/440wgcR5kIqlzBKo66QjzJfLIEe29nMrEAEjCpMcm/A1NJ0FR4bmeegZ9B2su2i0GWzTDq86Qua5T2/8h8Xq8xblsr9j0vA==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
  smtp.mailfrom=nvidia.com; dmarc=pass action=none header.from=nvidia.com;
  dkim=pass header.d=nvidia.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=Nvidia.com;
  s=selector2;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=dygLGICj0TKOZ542+yk7yMFeePqPVbCHPBwzVmwQXWk=;
- b=CWL+mVCL5pqFdHycdiNNdCrPk9rYUIv38KrXJ0/HRYT4eRhuc53TVUA3H5TQj9IML7o9vMiHXMh2BM6gF+LRwoggtwQcK4XpPYAluyuHlV44a6251l95VmhXhEWMk3Kg8S/+gDNXsMjFKN6DR77CLVJBpm8Nis10CBZEiMYsSgUfy3YIe8RRN0zcbuUVl/dRzzyqgrGb9pJE+zRULQsAIwDrtbTGyVDqhskuzsWqfpK28AhOc5hB+5M3FkDjC0mesHNm58ZNTqBz8jKJGlqAass08eJYZwSUzCo+HBi17RKPtRznpmSz4QgnfD0TG+qh4T1TZ6ia1jT/52RyjAUL3Q==
-Authentication-Results: dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=nvidia.com;
-Received: from DS0PR12MB8044.namprd12.prod.outlook.com (2603:10b6:8:148::14)
- by MN0PR12MB6031.namprd12.prod.outlook.com (2603:10b6:208:3cd::7) with
+ bh=GbCOccew0Ld0yZTIOEbxP3xs68eukIj3zogkCX7ahuY=;
+ b=JzHskYwulRN3r15C/T05wnt12EJLXPeoigvKJ+InoCbFQrtq9l6TSIUyO1cFXw0DGIbVI/N4S1IMSWtfSoGgPOTGJOZwLtDJwZd96ARPapFgxs+8kpMCna/Dr8Qt5kd3O83P938W3csNHNjm4u6gCVdoNt3KirFe+jnX4e0l8Vyl4kvZwc6p5ncHg6A2qaC/ky3CpiXIC93M2g4W8LFKdaPg75SLTtaiAhmWAnZItUkboVPdMqfNJL2jAJjrltG8CpZmiojWyjmY29DSnv7FJPIKARot2vsnlRq7S/gWFL8tJTZYtdNvvDNZ49qDJ4k2lEafbs4KVpAzLHRuO0Cbtg==
+Received: from SN7PR12MB8059.namprd12.prod.outlook.com (2603:10b6:806:32b::7)
+ by DM4PR12MB7694.namprd12.prod.outlook.com (2603:10b6:8:102::6) with
  Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9094.22; Tue, 9 Sep
- 2025 21:20:58 +0000
-Received: from DS0PR12MB8044.namprd12.prod.outlook.com
- ([fe80::49af:9ef0:2373:1515]) by DS0PR12MB8044.namprd12.prod.outlook.com
- ([fe80::49af:9ef0:2373:1515%6]) with mapi id 15.20.9094.021; Tue, 9 Sep 2025
- 21:20:58 +0000
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9094.22; Wed, 10 Sep
+ 2025 00:15:24 +0000
+Received: from SN7PR12MB8059.namprd12.prod.outlook.com
+ ([fe80::4ee2:654e:1fe8:4b91]) by SN7PR12MB8059.namprd12.prod.outlook.com
+ ([fe80::4ee2:654e:1fe8:4b91%3]) with mapi id 15.20.9094.021; Wed, 10 Sep 2025
+ 00:15:23 +0000
 From: Joel Fernandes <joelagnelf@nvidia.com>
-To: linux-kernel@vger.kernel.org, dri-devel@lists.freedesktop.org,
- dakr@kernel.org, acourbot@nvidia.com
-Cc: Alistair Popple <apopple@nvidia.com>, Miguel Ojeda <ojeda@kernel.org>,
- Alex Gaynor <alex.gaynor@gmail.com>, Boqun Feng <boqun.feng@gmail.com>,
- Gary Guo <gary@garyguo.net>, bjorn3_gh@protonmail.com,
+To: Miguel Ojeda <miguel.ojeda.sandonis@gmail.com>
+CC: "linux-kernel@vger.kernel.org" <linux-kernel@vger.kernel.org>,
+ "dri-devel@lists.freedesktop.org" <dri-devel@lists.freedesktop.org>,
+ "dakr@kernel.org" <dakr@kernel.org>, Alexandre Courbot <acourbot@nvidia.com>, 
+ Alistair Popple <apopple@nvidia.com>, Miguel Ojeda <ojeda@kernel.org>, Alex
+ Gaynor <alex.gaynor@gmail.com>, Boqun Feng <boqun.feng@gmail.com>, Gary Guo
+ <gary@garyguo.net>, "bjorn3_gh@protonmail.com" <bjorn3_gh@protonmail.com>,
  Benno Lossin <lossin@kernel.org>, Andreas Hindborg <a.hindborg@kernel.org>,
- Alice Ryhl <aliceryhl@google.com>, Trevor Gross <tmgross@umich.edu>,
- David Airlie <airlied@gmail.com>, Simona Vetter <simona@ffwll.ch>,
- Maarten Lankhorst <maarten.lankhorst@linux.intel.com>,
- Maxime Ripard <mripard@kernel.org>,
- Thomas Zimmermann <tzimmermann@suse.de>,
- John Hubbard <jhubbard@nvidia.com>, Joel Fernandes <joelagnelf@nvidia.com>,
- Timur Tabi <ttabi@nvidia.com>, joel@joelfernandes.org,
- Elle Rhumsaa <elle@weathered-steel.dev>, Yury Norov <yury.norov@gmail.com>,
- Daniel Almeida <daniel.almeida@collabora.com>,
- nouveau@lists.freedesktop.org
-Subject: [PATCH v3 5/5] rust: Add KUNIT tests for bitfield
-Date: Tue,  9 Sep 2025 17:20:39 -0400
-Message-Id: <20250909212039.227221-6-joelagnelf@nvidia.com>
-X-Mailer: git-send-email 2.34.1
-In-Reply-To: <20250909212039.227221-1-joelagnelf@nvidia.com>
+ Alice Ryhl <aliceryhl@google.com>, Trevor Gross <tmgross@umich.edu>, David
+ Airlie <airlied@gmail.com>, Simona Vetter <simona@ffwll.ch>, Maarten
+ Lankhorst <maarten.lankhorst@linux.intel.com>, Maxime Ripard
+ <mripard@kernel.org>, Thomas Zimmermann <tzimmermann@suse.de>, John Hubbard
+ <jhubbard@nvidia.com>, Timur Tabi <ttabi@nvidia.com>,
+ "joel@joelfernandes.org" <joel@joelfernandes.org>, Elle Rhumsaa
+ <elle@weathered-steel.dev>, Yury Norov <yury.norov@gmail.com>, Daniel Almeida
+ <daniel.almeida@collabora.com>, "nouveau@lists.freedesktop.org"
+ <nouveau@lists.freedesktop.org>, rust-for-linux
+ <rust-for-linux@vger.kernel.org>
+Subject: Re: [PATCH v3 4/5] rust: Move register and bitfield macros out of Nova
+Thread-Topic: [PATCH v3 4/5] rust: Move register and bitfield macros out of
+ Nova
+Thread-Index: AQHcIc+h9Z7/a45JhUyCuj4pjfNMWLSLX/aAgAAsa7Y=
+Date: Wed, 10 Sep 2025 00:15:23 +0000
+Message-ID: <C5A11667-E82A-406D-A34D-78AFBD58FB9F@nvidia.com>
 References: <20250909212039.227221-1-joelagnelf@nvidia.com>
-Content-Transfer-Encoding: 8bit
-Content-Type: text/plain
-X-ClientProxiedBy: BL1P223CA0033.NAMP223.PROD.OUTLOOK.COM
- (2603:10b6:208:5b6::8) To DS0PR12MB8044.namprd12.prod.outlook.com
- (2603:10b6:8:148::14)
+ <20250909212039.227221-5-joelagnelf@nvidia.com>
+ <CANiq72nPQps8ow00AmUe3shArHyhCUSSJX4=6QPHfHQZ_QeqcA@mail.gmail.com>
+In-Reply-To: <CANiq72nPQps8ow00AmUe3shArHyhCUSSJX4=6QPHfHQZ_QeqcA@mail.gmail.com>
+Accept-Language: en-US
+Content-Language: en-US
+X-MS-Has-Attach: 
+X-MS-TNEF-Correlator: 
+authentication-results: dkim=none (message not signed)
+ header.d=none;dmarc=none action=none header.from=nvidia.com;
+x-ms-publictraffictype: Email
+x-ms-traffictypediagnostic: SN7PR12MB8059:EE_|DM4PR12MB7694:EE_
+x-ms-office365-filtering-correlation-id: 71999139-0c95-46d3-39ce-08ddefff22eb
+x-ms-exchange-senderadcheck: 1
+x-ms-exchange-antispam-relay: 0
+x-microsoft-antispam: BCL:0;
+ ARA:13230040|366016|376014|7416014|1800799024|38070700021; 
+x-microsoft-antispam-message-info: =?utf-8?B?RDVvekh6OERCV1JLNDd4bnR0ZVBoY05OSEFuRS8wRXVUM2srazNEWTdZZFR5?=
+ =?utf-8?B?anQ2T0lVZHFxOHpMSVkwMFNNNWs1OGUrNnR1ajNPWDMxZVhPMjZSSnlWWkVV?=
+ =?utf-8?B?M1NsUGEyMytnQmZ3Rnc1R2pPSUdLUkhqUngzVjdaRUNJenhiYnVGYkNnN055?=
+ =?utf-8?B?c2R6cktQNFNXaU9ZUFpQSEcvQTM0ZUFnbDlURjErRDVIbVVRS2FQVm5RTFow?=
+ =?utf-8?B?dEQ0eHNmUUFYV0t5dm8rMVRVMWpzMlZHS1VPbUsxRHFKT0QzOHM4RTBKOFV3?=
+ =?utf-8?B?eTVFb3U4WlJpSnA3dkEraFM3TlYrNHNKNHIyNVVud0tzSml6UFJOcnMxeDlC?=
+ =?utf-8?B?YjZWam9pMzl0S2RFd1BYckFMcUlxTHRRUFhIWk5sTzhvWWxRNE9BdWNxR0l2?=
+ =?utf-8?B?WnpnRXBuRGl2ZFgxVGFZeVBoSnZ3QjBmMnRWRGRqeVZ0b1JHZHlEOEhZK2gr?=
+ =?utf-8?B?MkZDQVFma2Y5Zy9ydkF0eG14eXdYUGJwTW1JdGV0RlJMZFZTQjNQZVNWaGl6?=
+ =?utf-8?B?Y2taS1NFNFBadU5ZMnVoSjhST1RtVWtZZFZZUkwyZFNVYXJnWWdmdEJQVmNH?=
+ =?utf-8?B?U29nTFBwRzMyU1NBQjJlWnJIaVpOTlFnV0gyMlBLMmNqMWdFbDBWTmhwZjhv?=
+ =?utf-8?B?c0tsaW9GNDlzVitacUw4ZjdFVkxEdURNSlVnbUs5NlpwUzFUK1lLQWpraSt6?=
+ =?utf-8?B?clVtSldOQ3ZBS093NVpLUFEzTnhkQ29FbzhXK3kvL21sbmJRWFpkSXV4KzFz?=
+ =?utf-8?B?dmF4dHdIOW44aDFSaEJucTYxcTRaMHB5STdWODR5WU1LS29NdkdkMTBnN2ZV?=
+ =?utf-8?B?TXQweFdHVFBlL3A4NGtXaWlidmUvZFJKb2xUS3BJTC9HUGJqako5OUlrZ3ly?=
+ =?utf-8?B?L1czcFAycTdpZ25jUzdkOGZJTndhbnlOczV1Q0R2SlZrakNQRGZYQnhuRzZp?=
+ =?utf-8?B?MWxON2VjYlgzaUI0K3NLMUtxWDl3a1NSYzhmSjdMcks3cFVxWmZjaHZ2T3Np?=
+ =?utf-8?B?aFdiZUVBTDROV1ZzSDBLTXMxdDFYMWQ2ZTMyMUV4aEV2VmZhNFVJSGFmRVJs?=
+ =?utf-8?B?V2lOLzhUUEZmSURPeEhPTitoUU1kUitOakU2R01zeHNXZURHc2tRU1JCbnpo?=
+ =?utf-8?B?UVdqM20zV0JwaTErb0g1UjNvRTRwUWlCaDg0Mk5hNFVBVExvcEkzR1QxUkli?=
+ =?utf-8?B?ZUNQSTlqdVdobUNnRnRNYjBxMDMvajdCSTJoaDlnUlBYa3prbUd6Wi91b0Nn?=
+ =?utf-8?B?MHJhRmV2N2dCRkszeHJsVUhPMG15UUlqWDBPUGd6VG51VEVKRHZXMk90Mllt?=
+ =?utf-8?B?MVllT29jNy96Tll3RHJ5Tld4RGs1eUdHZEFlWlBONHVFMDNHcXZaZVp0S0ZD?=
+ =?utf-8?B?MDd0TGFhTmZVRCt4dFBJSEFKRkRBVUwzU0VPZCtSbm9mZ3RUK3FPVE1rb0lT?=
+ =?utf-8?B?d1hFaDBUTTdHWkdCc3NnNUthOWQrRkNuZCtmNVBya2Z3cWpIS1REakZGenlM?=
+ =?utf-8?B?dW1nbGIwa0M1U2MxeHZTckhZMjNnQkJOS0hrVjVxM0ViU1FjUFB3K2RpVkVo?=
+ =?utf-8?B?QWttYmY0aVZKcE5jcHpjM003b01kclg3SzdBV3p1Z2R0enFHOVpaMzA3K1ds?=
+ =?utf-8?B?eTVQZTgxTll1MjlrNXlTSXZROXdKRTNNb0xxTVFlVDgwcWx2RXFiL1pRZ2ly?=
+ =?utf-8?B?bndYekpnY2VCVTJqUUdkdG51bmVPU2hiam11WjEySUVMU0JyQ3BwKy9XWFho?=
+ =?utf-8?B?T1VzakU4bFZWTVcyZ3VKOFVCN0lJMitjYkt2dTRkMCtCZXBpeXpFWE0xQkVX?=
+ =?utf-8?B?YjM3RUx1QWp4S290TDVMSUY5SU95dHB3cUlSUVdpMUFjbWNNcnVmenB2Q2NJ?=
+ =?utf-8?B?WEp1Nk4xTEViYmlnQ2N3dCszZ3h2WXpWVmZrS0ZVc1g3dy9qUHl5QitscXkv?=
+ =?utf-8?B?RWV1ZjFHN21PdmQ2Qm1rWExNMi8yYVFDMUNBSnJVNjJzVDNWSDM2RENScjFQ?=
+ =?utf-8?B?bUZhZ2xCOTBnPT0=?=
+x-forefront-antispam-report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
+ IPV:NLI; SFV:NSPM; H:SN7PR12MB8059.namprd12.prod.outlook.com; PTR:; CAT:NONE;
+ SFS:(13230040)(366016)(376014)(7416014)(1800799024)(38070700021); DIR:OUT;
+ SFP:1101; 
+x-ms-exchange-antispam-messagedata-chunkcount: 1
+x-ms-exchange-antispam-messagedata-0: =?utf-8?B?clN4bVFEblFXSVE0R09NT2h5c2x0aGVVNlNRcnA4N1phV0xNTUxDQWQxR2Fr?=
+ =?utf-8?B?TytnYjAwbllxUHdYNURMRmtTRXp1dVhONXllTWd6cE8rVDNRd3FHSFVmcnlX?=
+ =?utf-8?B?dlEwQmhEOHg0Tmk3bVlPYmlVZnE3c3pka2c5Vlo0Zjk5Z0VVU2NmcXNTaWpK?=
+ =?utf-8?B?ZXpiVGxIelFPamF5MTM0RmphcXJ4WGlFNTUrdHZEVC94aTRjTWpTSkIwRkRN?=
+ =?utf-8?B?M0VJdTVFbFVlbnArUnVQd2RucUllRVh4Tk9QZE54WlUwRExMZlAxeTd1b0JX?=
+ =?utf-8?B?RzNtT0ErdzA0RlNDc2dLRjM3MmlOaXQrWXd3UDhIa00wa3BwaXRrbld6QU13?=
+ =?utf-8?B?M0xUbTc3Q3RNdUdYaitQVVIwZVV4VHhSSTFhd0ZvVjhhRGkzVUl5d3B3ekpG?=
+ =?utf-8?B?dExHRTcwK2taUUE0bThkQnVaeDFiVmN0NjZWaGIydG9DT1NZbHJhc1dFbDV3?=
+ =?utf-8?B?VXhZYmJGeWJYbVBkaVNBUVVCbm5HTkNBZ1pxUzJTQlJLQWQrMUZsZzlsNmZM?=
+ =?utf-8?B?aDVyaFA5QUJzcmltWkhnbmlVcGJ3NHMxWVV1TXRsY3cxRXNsa0Q5QXk2YTBL?=
+ =?utf-8?B?bnZJZXRtdFRKTjhKdWdsYkgyODV4dmhNUmZWU1k5aVBBd2tEaVMzYWtEZmtl?=
+ =?utf-8?B?VDRDclEwRVBXYnJTNWxjeFMxK0xyY0x4NW5rT0x3YkJ0SnEzL29yVVhhZkVn?=
+ =?utf-8?B?K2RyU3o5d0lXZTJDSFRHLzNyWXQzbGpuaEVVL2dlcEN3TC96N1NGYXlrKzcy?=
+ =?utf-8?B?bWJBM3JPak0vdGNZQk9KQzljREY5TkYxSFlobUtLdkc1akczQXd5b0FmV09X?=
+ =?utf-8?B?VzVncUlMRzVnV0hKekdJR1RqTFlxVkFzTHV4VVBvOUt0MGFQblRMQ3ZiaDdp?=
+ =?utf-8?B?SXhWc2lucWx3VU5RclZTNENCcHM4akhCbnJhTllDTzlXckdZRXkxUzBvK2h3?=
+ =?utf-8?B?NUhQNG4vcm5SZ0lweS9iTUpoWDhKR3dvdDdnNnlWWWNDbXFpQUY2NGNkYkhR?=
+ =?utf-8?B?SWtIenFrcmtSWHJSTG9ubFRySEh4MmN6MlRZaWRMR1ljZSt1Nm43WFppTmhs?=
+ =?utf-8?B?d3UzTTN2aUpaL2ZKQmU3MUR5eVErNnVaaVoxYVBFeFk0RmlZb25HWDJkTU5k?=
+ =?utf-8?B?Z3lKNEJpdlRkV0hsdUlkZXlBUU1DNThnNkpuUVpRQ2FGeDhnZFhoK2VkWU83?=
+ =?utf-8?B?dFZXN3pHVG12Vk1CenRud3c3bXdRdDNSakREQURLa0MrbW1sN2lMSStTUWNt?=
+ =?utf-8?B?ZFB4MWx4TUpNSEQvODNKQVFLRFA3eW1XRVc1U0xhTTl3ZEU2LzdxSTBZU0d3?=
+ =?utf-8?B?M3NVZENQV1c3Zy9yN242N3hmTkZITlRxRm4ydElHOE1tZWQ0VEFxUUFjeXJo?=
+ =?utf-8?B?Tk9wU1d3WTBIM29sZ0pVaWNPdkE2SEcwa0FkY2VGY1AzTlBQb3U4QTlEZ1B4?=
+ =?utf-8?B?WEJYUUJ4am9kdkk0Ky9PSHlWb24vT2lMck1PUDRZaS91YVl1VjltdzZMLytL?=
+ =?utf-8?B?UFpudGo4aFZZODgxc3hxWk0zKzk2TDhyd3UzaDdPNGFjVmErZHVDeWtwMGJ3?=
+ =?utf-8?B?YVJkbnl2S2wyVTRFanFqM3p4YldzT0NyQzgrMTRJQnRyR3BRZzZ5ZGQ4ZENW?=
+ =?utf-8?B?ZmtJNDVjaUgwOTRkYlYwSWRoMHo2dkRMa3hBTmp6V3BsV2hPelV6MzZBVUUw?=
+ =?utf-8?B?R2IyYVdIaTNCbitIMGJTS1RYV2c5Zmd2RjFVYjlmMmREemhaL0lCZW9PdHRU?=
+ =?utf-8?B?N0t0Y3RrVUlNMkNaMFM3NUROT3MyVncwUTdMbjFiZ0x6OWI5OG5NTmlmeG5z?=
+ =?utf-8?B?UXFHalZKWlRsNmt5c1pwbERmTnM0Mkh6dkpGUGRRbjRyRWF6aHhDOXNDc2tN?=
+ =?utf-8?B?bFdJdEVtaXFEb094RUcrVTR4bFdlNFRUeFhGQ0U0M1duQUtJMU56S1NPWW9m?=
+ =?utf-8?B?N3JaODkrUXIzNnJ6WWsyK09qWHdJeUlwOUE1dUluUDgvTGNHcmJpOTBReHBr?=
+ =?utf-8?B?SzNrYWpGdmZNVmJDK21ibGsrb1hHUjl6NFRtTHJlSHRjdk0yTTI0eWdkOWIw?=
+ =?utf-8?B?bXV2WXNIOUhCei9uWnQwZVh2a1M1bzdqcWFEYnI3WkVFb3VTUCtSdXdGYnRI?=
+ =?utf-8?Q?B5+IzOz0oh+lmyhGH2lqf6mOv?=
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: base64
 MIME-Version: 1.0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: DS0PR12MB8044:EE_|MN0PR12MB6031:EE_
-X-MS-Office365-Filtering-Correlation-Id: 176406d9-7dc7-4ddd-d668-08ddefe6c4f9
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0;ARA:13230040|1800799024|366016|376014|7416014;
-X-Microsoft-Antispam-Message-Info: =?us-ascii?Q?QX7E39w62smhWHMkrEBfrl26fIcpxTJMeulQ2+NsjjWFjwNmgmk4n/j99qqs?=
- =?us-ascii?Q?p/iAuu8TVZN4RoHPrus1IAkrIxYTe2rTwZJfkUSqVqp0eKtfRulaCoryeZnC?=
- =?us-ascii?Q?MLyo8L9A6JDpfI4NidmFdUDga0cWg5bwTBNYFU8Dwq7KmULkNYBuSfV3UZ11?=
- =?us-ascii?Q?tCUsoWF4qOpqPSX0oShxhaqvAgmMqq98PSNAFL2eUK+JQP4dWiwBeHGIREp0?=
- =?us-ascii?Q?r6G/EfsjCrhSznwY1vMoEa8JckzfAyLZrRpsChL4NazgCAxXvGKbBHKEw6gq?=
- =?us-ascii?Q?feyZXEJOtX3nTKZdgQ8dCQt4F3TcrIsJo8uvjWa7nmSocoig7lnhnVZu2sNI?=
- =?us-ascii?Q?QPoZWRF8/q1KRrbI+AlkA5Xlnb4LiwYKyh617ohoxbgPCHElLU3EFJJ54PCa?=
- =?us-ascii?Q?1sO38YDfZJ/Hqrqfd6IQOb7AiX5mqiIIlMY6QDpOxRLlmckMKcDCm8sTEK6b?=
- =?us-ascii?Q?DnSKSZb2AEaLYk6mOYfnr8snT4f4oq+lJF/CbXlki+LJavGZbGDevpnhH6J6?=
- =?us-ascii?Q?tDmIIctbLIPetC5aHU9iEOcDfoJIPxKA01JD+7zJWEOea9IvamwsgN1ZyzBl?=
- =?us-ascii?Q?Nex0xmi+uFsJ3KOuciKnGyB9U05qJAs1HMaRZHItWcfhAqZJ2k1B1tBN4yF8?=
- =?us-ascii?Q?iAxov0RWuqqQoIhdtlyZ+ZtB7tCOcIw6FKR6s1OMLbSNcTjMrO/ugCq37p+y?=
- =?us-ascii?Q?umZj06iD5ZEZ05bUHh+Aci9otjNhZUR4HmhNIs3zegahB2wTMFiW4+1027Yu?=
- =?us-ascii?Q?6JZhgDo+T4kWErnyZJxZMqqhFeePIeBONVr69PtvA3BrlBU0s20AC4EHywB5?=
- =?us-ascii?Q?PggdCoztDFQGRoYg4isyU3D4VkOouxfhvkdnqAOZUNfzHkgIz8O2mTvLp1sK?=
- =?us-ascii?Q?XUdAirKn6tm4ITaZ/8ErC4HG1Cqnq6ex2eWPdj716DJ2V3I2EJzU6uhMVa7I?=
- =?us-ascii?Q?L1kg/gR+dmSHuF/2L0SFRoXO3M3rEolqBaKa+lzCiWmHQ+35cfhvJdq5riWy?=
- =?us-ascii?Q?Rn43zBribkEM5YZXBWvspG8VnJff5FB/fKHRJL7Qpu7psTr+DKpJmTrQSuvR?=
- =?us-ascii?Q?P2qWJMNbFkcu3SxcAFHRXeIMCcGH8W3pWNCEXrsa1ViFkOtFO6wM9w21T0fJ?=
- =?us-ascii?Q?3hbmGW8aO4fsiELUiOHVxwc8v1x1fFoZNGly7S6n3wJnAOTZTvZa2dQ/g24n?=
- =?us-ascii?Q?VOrBpCjgIXnxxyVUPCgQ5/1H57H2q3BI3V5SS9hbbWYwnb2CTfV69+cqpgCe?=
- =?us-ascii?Q?7QmwUAmntUSyM0Qn9auonzSPJ6C26asvRzJuw7xvz3tjmigmYSTAyjc+uWQN?=
- =?us-ascii?Q?RhOobbSXCtg3q99H27zU7bn1pVdABBHITR7IS66+ax9wifFwZpF/yWW6u1W0?=
- =?us-ascii?Q?qy5x2UTPPZSyhGzLl2Hq93C/08vFIXVEo/lh5mVvNk/w6UlVWMMIomnfx4rg?=
- =?us-ascii?Q?VSLArCiHhuw=3D?=
-X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
- IPV:NLI; SFV:NSPM; H:DS0PR12MB8044.namprd12.prod.outlook.com; PTR:; CAT:NONE;
- SFS:(13230040)(1800799024)(366016)(376014)(7416014); DIR:OUT; SFP:1101; 
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: =?us-ascii?Q?F2ZxOL9V5hOFbWFXTDvITpGcA1yF6sFFh/VikK9MkB3MmEPWzR+e7ld8qWFH?=
- =?us-ascii?Q?+QvzNEoOkOOHQaFbNB+BiAGEIl3OEVcSvfXSApZ3mWBpbWupiDbJubFcID33?=
- =?us-ascii?Q?vnDwGpAXtq1VBQVYqLC4aluHyYwDu8nchwsQ0AIL9OI6GwHgbfKX7Ab+0LET?=
- =?us-ascii?Q?POJ0+o9E6t/qVDsF6fhNpRxKDhIeJsrLmd6UOZoCReGluzq7EJ5XHfGuUmi6?=
- =?us-ascii?Q?cBSHwveuH6M9G84w51DzYTfFoW3ctISTen3PvhqR1vRjfM/6SwH2oXaO1bLE?=
- =?us-ascii?Q?WjY0qRF90pHkYTsuzs546hDQ1QbPuEPiwOR/8+6W1QnzmUbZJAPeA2oU7FLM?=
- =?us-ascii?Q?16m7hUHIdbRNSbx6ex3c4UwKJHiU1StJ3A0JXSW4U0inQ0HQqs55Ar7Qw/LA?=
- =?us-ascii?Q?15pXiBejmEZfQrc3cIgdfWhz9l8bULD7y8mONUpxJwJsBUD/GzHZZEy4Ho2e?=
- =?us-ascii?Q?P0rs4IEBxCJpdWJVB5+bgr3JQ6DZ2EZhiPVGDrZBNs9ydKKWzWtRQRL3Shhl?=
- =?us-ascii?Q?BmHkI6V3aNKkEV4SyRrtQ1WegU4mLN1kpDnyAt9iUXWnKoGmd1UX4gjkzhkm?=
- =?us-ascii?Q?SFie5nP9q+vGdjAQuihCr75qGcan+LLcpRRhWzf6d485FmXdE+te1xtQc0bF?=
- =?us-ascii?Q?a9iDQS+BhgzedEfvg2eIn5qHWMP2IRFiy6A6MegH8UU0ANuYgdyF6+a8Bv3G?=
- =?us-ascii?Q?Co/Qum6Vklmv6PRRZaBMDVTlHg7J9J5sc8e5UwBIAa3A0y0t6+1iGrYynOZB?=
- =?us-ascii?Q?GX8BNmmAjYtKCmRESwbK5xUOZc9f7Zy2KMGsInca84NYhdUILmUaeRNZ4FJP?=
- =?us-ascii?Q?7pcGKDXQU315jt3E/quOX42gZPqxiJNlpuuqUZRxVEsmZhPkJzHI8cB39XPk?=
- =?us-ascii?Q?ggMxCooSmPHmDlB3l6/ZXKeFS6bHHrASP8w/YUjHh739Jn574BgJ1fjBn4kY?=
- =?us-ascii?Q?9pWJA/LMQabGNW5nIbRvG0cN4bCQ14RpZRJ5IEmKaSvlrNRE8ke1A6wog4Xp?=
- =?us-ascii?Q?HpCz8R8JTQZ17vuRwrIHkhBuYMuWrB9/bzBIDDtfTtLF393Wwp0iFBEzm7iA?=
- =?us-ascii?Q?XvCuJPY0NwIqWwBPhArId5DLk0zF2FNpoZ9+QJvzfIq46pEC1QmFa50i5B4E?=
- =?us-ascii?Q?XNTsk2VW6+yIYSY2fZPv0hHpJ5ejwfce2mvq1/odOSaczaZdPjyDERwCEZ6F?=
- =?us-ascii?Q?U0LRbbax/Vhmgrv38BNJTg6d3wc07aNXbj2uFZHj5rUYM+skONskjUiX8CSs?=
- =?us-ascii?Q?yg2dwSBwIWjRmi3ZTW7fo+AsVndA3A2eDO1GOpo3YxliElbLHblshtLnOpje?=
- =?us-ascii?Q?KfyZlzcFwZrT7QYA3dbZ3HGESPbcwO0K5UkDN1bYMUKcMgfKt4Tsm7N5RxVs?=
- =?us-ascii?Q?NgA/3hQESyTnRUFTPBNhSdnCZq03jtMEYO8FkgsCIEIyhV19/9WaHYC/CT9L?=
- =?us-ascii?Q?4YUW+jlEIg2aoFOspBOJ/E2xcJwU2PzjQOnmHYz7nEHj7r1+rytdHKwo1ZQc?=
- =?us-ascii?Q?W9SGistzuSUBQSCgXTHfod77zPuY/irw7FW/s6O672eJThY3l9oZT/FWLjbr?=
- =?us-ascii?Q?CcLuSyafKKlAAU/iWdz/966JAWqFStbP8KucQy2j?=
 X-OriginatorOrg: Nvidia.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 176406d9-7dc7-4ddd-d668-08ddefe6c4f9
-X-MS-Exchange-CrossTenant-AuthSource: DS0PR12MB8044.namprd12.prod.outlook.com
 X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 09 Sep 2025 21:20:58.5896 (UTC)
-X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
-X-MS-Exchange-CrossTenant-Id: 43083d15-7273-40c1-b7db-39efd9ccc17a
-X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: rAcXF2lErk39CVtN39WQjIWF/Zo/pLo+L8RYyxnNuH+bhXMcfap2SqsBok8UeJ7jrNMzujyLg7uy+5cPNjswwg==
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: MN0PR12MB6031
+X-MS-Exchange-CrossTenant-AuthSource: SN7PR12MB8059.namprd12.prod.outlook.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: 71999139-0c95-46d3-39ce-08ddefff22eb
+X-MS-Exchange-CrossTenant-originalarrivaltime: 10 Sep 2025 00:15:23.7450 (UTC)
+X-MS-Exchange-CrossTenant-fromentityheader: Hosted
+X-MS-Exchange-CrossTenant-id: 43083d15-7273-40c1-b7db-39efd9ccc17a
+X-MS-Exchange-CrossTenant-mailboxtype: HOSTED
+X-MS-Exchange-CrossTenant-userprincipalname: 8xbbXxFnboDWpudGVqkgg/Hato9X8oFUlhk1x+3l3lkrCPaegzdAWjYD4TLK5QjAL/iq0d4srC2QZ31p7L1KIw==
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: DM4PR12MB7694
 X-Mailman-Approved-At: Mon, 06 Oct 2025 20:46:16 +0000
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
@@ -158,343 +185,22 @@ List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-Add KUNIT tests to make sure the macro is working correctly.
-
-[Added range overlap tests suggested by Yury].
-
-Signed-off-by: Joel Fernandes <joelagnelf@nvidia.com>
----
- rust/kernel/bits/bitfield.rs | 320 +++++++++++++++++++++++++++++++++++
- 1 file changed, 320 insertions(+)
-
-diff --git a/rust/kernel/bits/bitfield.rs b/rust/kernel/bits/bitfield.rs
-index 0837fefc270f..f3134f2ffd08 100644
---- a/rust/kernel/bits/bitfield.rs
-+++ b/rust/kernel/bits/bitfield.rs
-@@ -339,3 +339,323 @@ fn default() -> Self {
-         }
-     };
- }
-+
-+#[::kernel::macros::kunit_tests(kernel_bitfield)]
-+mod tests {
-+    use core::convert::TryFrom;
-+
-+    // Enum types for testing => and ?=> conversions
-+    #[derive(Debug, Clone, Copy, PartialEq)]
-+    enum MemoryType {
-+        Unmapped = 0,
-+        Normal = 1,
-+        Device = 2,
-+        Reserved = 3,
-+    }
-+
-+    impl Default for MemoryType {
-+        fn default() -> Self {
-+            MemoryType::Unmapped
-+        }
-+    }
-+
-+    impl TryFrom<u8> for MemoryType {
-+        type Error = u8;
-+        fn try_from(value: u8) -> Result<Self, Self::Error> {
-+            match value {
-+                0 => Ok(MemoryType::Unmapped),
-+                1 => Ok(MemoryType::Normal),
-+                2 => Ok(MemoryType::Device),
-+                3 => Ok(MemoryType::Reserved),
-+                _ => Err(value),
-+            }
-+        }
-+    }
-+
-+    impl From<MemoryType> for u64 {
-+        fn from(mt: MemoryType) -> u64 {
-+            mt as u64
-+        }
-+    }
-+
-+    #[derive(Debug, Clone, Copy, PartialEq)]
-+    enum Priority {
-+        Low = 0,
-+        Medium = 1,
-+        High = 2,
-+        Critical = 3,
-+    }
-+
-+    impl Default for Priority {
-+        fn default() -> Self {
-+            Priority::Low
-+        }
-+    }
-+
-+    impl From<u8> for Priority {
-+        fn from(value: u8) -> Self {
-+            match value & 0x3 {
-+                0 => Priority::Low,
-+                1 => Priority::Medium,
-+                2 => Priority::High,
-+                _ => Priority::Critical,
-+            }
-+        }
-+    }
-+
-+    impl From<Priority> for u16 {
-+        fn from(p: Priority) -> u16 {
-+            p as u16
-+        }
-+    }
-+
-+    bitfield! {
-+        struct TestPageTableEntry: u64 {
-+            0:0       present     as bool;
-+            1:1       writable    as bool;
-+            11:9      available   as u8;
-+            13:12     mem_type    as u8 ?=> MemoryType;
-+            17:14     extended_type as u8 ?=> MemoryType;  // 4-bit field for testing failures
-+            51:12     pfn         as u64;
-+            51:12     pfn_overlap as u64;  // Overlapping field
-+            61:52     available2  as u16;
-+        }
-+    }
-+
-+    bitfield! {
-+        struct TestControlRegister: u16 {
-+            0:0       enable      as bool;
-+            3:1       mode        as u8;
-+            5:4       priority    as u8 => Priority;
-+            7:4       priority_nibble as u8;  // Overlapping field
-+            15:8      channel     as u8;
-+        }
-+    }
-+
-+    bitfield! {
-+        struct TestStatusRegister: u8 {
-+            0:0       ready       as bool;
-+            1:1       error       as bool;
-+            3:2       state       as u8;
-+            7:4       reserved    as u8;
-+            7:0       full_byte   as u8;  // Overlapping field for entire register
-+        }
-+    }
-+
-+    #[test]
-+    fn test_single_bits() {
-+        let mut pte = TestPageTableEntry::default();
-+
-+        // Test bool field
-+        assert!(!pte.present());
-+        assert!(!pte.writable());
-+
-+        pte = pte.set_present(true);
-+        assert!(pte.present());
-+
-+        pte = pte.set_writable(true);
-+        assert!(pte.writable());
-+
-+        pte = pte.set_writable(false);
-+        assert!(!pte.writable());
-+
-+        assert_eq!(pte.available(), 0);
-+        pte = pte.set_available(0x5);
-+        assert_eq!(pte.available(), 0x5);
-+    }
-+
-+    #[test]
-+    fn test_range_fields() {
-+        let mut pte = TestPageTableEntry::default();
-+
-+        pte = pte.set_pfn(0x123456);
-+        assert_eq!(pte.pfn(), 0x123456);
-+        // Test overlapping field reads same value
-+        assert_eq!(pte.pfn_overlap(), 0x123456);
-+
-+        pte = pte.set_available(0x7);
-+        assert_eq!(pte.available(), 0x7);
-+
-+        pte = pte.set_available2(0x3FF);
-+        assert_eq!(pte.available2(), 0x3FF);
-+
-+        // Test TryFrom with ?=> for MemoryType
-+        pte = pte.set_mem_type(MemoryType::Device);
-+        assert_eq!(pte.mem_type(), Ok(MemoryType::Device));
-+
-+        pte = pte.set_mem_type(MemoryType::Normal);
-+        assert_eq!(pte.mem_type(), Ok(MemoryType::Normal));
-+
-+        // Test all valid values for mem_type
-+        pte = pte.set_mem_type(MemoryType::Reserved); // Valid value: 3
-+        assert_eq!(pte.mem_type(), Ok(MemoryType::Reserved));
-+
-+        // Test failure case using extended_type field which has 4 bits (0-15)
-+        // MemoryType only handles 0-3, so values 4-15 should return Err
-+        let mut raw = pte.raw();
-+        raw = (raw & !(0xF << 14)) | (0x7 << 14); // Set bits 17:14 to 7 (invalid for MemoryType)
-+        let invalid_pte = TestPageTableEntry::from(raw);
-+        assert_eq!(invalid_pte.extended_type(), Err(0x7)); // Should return Err with the invalid value
-+
-+        // Test a valid value after testing invalid to ensure both cases work
-+        raw = (raw & !(0xF << 14)) | (0x2 << 14); // Set bits 17:14 to 2 (valid: Device)
-+        let valid_pte = TestPageTableEntry::from(raw);
-+        assert_eq!(valid_pte.extended_type(), Ok(MemoryType::Device)); // Should return Ok with Device
-+
-+        let max_pfn = (1u64 << 40) - 1;
-+        pte = pte.set_pfn(max_pfn);
-+        assert_eq!(pte.pfn(), max_pfn);
-+        assert_eq!(pte.pfn_overlap(), max_pfn);
-+    }
-+
-+    #[test]
-+    fn test_builder_pattern() {
-+        let pte = TestPageTableEntry::default()
-+            .set_present(true)
-+            .set_writable(true)
-+            .set_available(0x7)
-+            .set_pfn(0xABCDEF)
-+            .set_mem_type(MemoryType::Reserved)
-+            .set_available2(0x3FF);
-+
-+        assert!(pte.present());
-+        assert!(pte.writable());
-+        assert_eq!(pte.available(), 0x7);
-+        assert_eq!(pte.pfn(), 0xABCDEF);
-+        assert_eq!(pte.pfn_overlap(), 0xABCDEF);
-+        assert_eq!(pte.mem_type(), Ok(MemoryType::Reserved));
-+        assert_eq!(pte.available2(), 0x3FF);
-+    }
-+
-+    #[test]
-+    fn test_raw_operations() {
-+        let raw_value = 0x3FF0000003123E03u64;
-+
-+        // Test using ::from() syntax
-+        let pte = TestPageTableEntry::from(raw_value);
-+        assert_eq!(pte.raw(), raw_value);
-+
-+        assert!(pte.present());
-+        assert!(pte.writable());
-+        assert_eq!(pte.available(), 0x7);
-+        assert_eq!(pte.pfn(), 0x3123);
-+        assert_eq!(pte.pfn_overlap(), 0x3123);
-+        assert_eq!(pte.mem_type(), Ok(MemoryType::Reserved));
-+        assert_eq!(pte.available2(), 0x3FF);
-+
-+        // Test using direct constructor syntax TestStruct(value)
-+        let pte2 = TestPageTableEntry(raw_value);
-+        assert_eq!(pte2.raw(), raw_value);
-+    }
-+
-+    #[test]
-+    fn test_u16_bitfield() {
-+        let mut ctrl = TestControlRegister::default();
-+
-+        assert!(!ctrl.enable());
-+        assert_eq!(ctrl.mode(), 0);
-+        assert_eq!(ctrl.priority(), Priority::Low);
-+        assert_eq!(ctrl.priority_nibble(), 0);
-+        assert_eq!(ctrl.channel(), 0);
-+
-+        ctrl = ctrl.set_enable(true);
-+        assert!(ctrl.enable());
-+
-+        ctrl = ctrl.set_mode(0x5);
-+        assert_eq!(ctrl.mode(), 0x5);
-+
-+        // Test From conversion with =>
-+        ctrl = ctrl.set_priority(Priority::High);
-+        assert_eq!(ctrl.priority(), Priority::High);
-+        assert_eq!(ctrl.priority_nibble(), 0x2); // High = 2 in bits 5:4
-+
-+        ctrl = ctrl.set_channel(0xAB);
-+        assert_eq!(ctrl.channel(), 0xAB);
-+
-+        // Test overlapping fields
-+        ctrl = ctrl.set_priority_nibble(0xF);
-+        assert_eq!(ctrl.priority_nibble(), 0xF);
-+        assert_eq!(ctrl.priority(), Priority::Critical); // bits 5:4 = 0x3
-+
-+        let ctrl2 = TestControlRegister::default()
-+            .set_enable(true)
-+            .set_mode(0x3)
-+            .set_priority(Priority::Medium)
-+            .set_channel(0x42);
-+
-+        assert!(ctrl2.enable());
-+        assert_eq!(ctrl2.mode(), 0x3);
-+        assert_eq!(ctrl2.priority(), Priority::Medium);
-+        assert_eq!(ctrl2.channel(), 0x42);
-+
-+        let raw_value: u16 = 0x4217;
-+        let ctrl3 = TestControlRegister::from(raw_value);
-+        assert_eq!(ctrl3.raw(), raw_value);
-+        assert!(ctrl3.enable());
-+        assert_eq!(ctrl3.priority(), Priority::Medium);
-+        assert_eq!(ctrl3.priority_nibble(), 0x1);
-+        assert_eq!(ctrl3.channel(), 0x42);
-+    }
-+
-+    #[test]
-+    fn test_u8_bitfield() {
-+        let mut status = TestStatusRegister::default();
-+
-+        assert!(!status.ready());
-+        assert!(!status.error());
-+        assert_eq!(status.state(), 0);
-+        assert_eq!(status.reserved(), 0);
-+        assert_eq!(status.full_byte(), 0);
-+
-+        status = status.set_ready(true);
-+        assert!(status.ready());
-+        assert_eq!(status.full_byte(), 0x01);
-+
-+        status = status.set_error(true);
-+        assert!(status.error());
-+        assert_eq!(status.full_byte(), 0x03);
-+
-+        status = status.set_state(0x3);
-+        assert_eq!(status.state(), 0x3);
-+        assert_eq!(status.full_byte(), 0x0F);
-+
-+        status = status.set_reserved(0xA);
-+        assert_eq!(status.reserved(), 0xA);
-+        assert_eq!(status.full_byte(), 0xAF);
-+
-+        // Test overlapping field
-+        status = status.set_full_byte(0x55);
-+        assert_eq!(status.full_byte(), 0x55);
-+        assert!(status.ready());
-+        assert!(!status.error());
-+        assert_eq!(status.state(), 0x1);
-+        assert_eq!(status.reserved(), 0x5);
-+
-+        let status2 = TestStatusRegister::default()
-+            .set_ready(true)
-+            .set_state(0x2)
-+            .set_reserved(0x5);
-+
-+        assert!(status2.ready());
-+        assert!(!status2.error());
-+        assert_eq!(status2.state(), 0x2);
-+        assert_eq!(status2.reserved(), 0x5);
-+        assert_eq!(status2.full_byte(), 0x59);
-+
-+        let raw_value: u8 = 0x59;
-+        let status3 = TestStatusRegister::from(raw_value);
-+        assert_eq!(status3.raw(), raw_value);
-+        assert!(status3.ready());
-+        assert!(!status3.error());
-+        assert_eq!(status3.state(), 0x2);
-+        assert_eq!(status3.reserved(), 0x5);
-+        assert_eq!(status3.full_byte(), 0x59);
-+
-+        let status4 = TestStatusRegister::from(0xFF);
-+        assert!(status4.ready());
-+        assert!(status4.error());
-+        assert_eq!(status4.state(), 0x3);
-+        assert_eq!(status4.reserved(), 0xF);
-+        assert_eq!(status4.full_byte(), 0xFF);
-+    }
-+}
--- 
-2.34.1
-
+DQoNCj4gT24gU2VwIDksIDIwMjUsIGF0IDU6MzbigK9QTSwgTWlndWVsIE9qZWRhIDxtaWd1ZWwu
+b2plZGEuc2FuZG9uaXNAZ21haWwuY29tPiB3cm90ZToNCj4gDQo+IO+7v09uIFR1ZSwgU2VwIDks
+IDIwMjUgYXQgMTE6MjHigK9QTSBKb2VsIEZlcm5hbmRlcyA8am9lbGFnbmVsZkBudmlkaWEuY29t
+PiB3cm90ZToNCj4+IA0KPj4gT3V0IG9mIGJyb2FkIG5lZWQgZm9yIHRoZXNlIG1hY3JvcyBpbiBS
+dXN0LCBtb3ZlIHRoZW0gb3V0LiBTZXZlcmFsIGZvbGtzDQo+PiBoYXZlIHNob3duIGludGVyZXN0
+IChOb3ZhLCBUeXIgR1BVIGRyaXZlcnMpLg0KPiANCj4gUGxlYXNlIENjIHRoZSBydXN0LWZvci1M
+aW51eCBtYWlsaW5nIGxpc3QsIGVzcGVjaWFsbHkgc28gZm9yIHBhdGNoZXMNCj4gdGhhdCBhZGQg
+dGhpbmdzIHRvIHRoZSBjb3JlIGluZnJhc3RydWN0dXJlLg0KPiANCj4gSSBub3RpY2UgZWFzaWx5
+IGJlY2F1c2UgSSB0YWcgdGhlIG9uZXMgdGhhdCBhcmUgaW4gbXkgY2xpZW50IDopDQoNCk9vcHMg
+bXkgYmFkLiBJIHNoYWxsIGRvIHNvLCB3aWxsIGF3YWl0IG90aGVyIGNvbW1lbnRzIGlmIGFueSBi
+ZWZvcmUgcmVwb3N0aW5nLg0KDQo+IA0KPj4gW0FkZGVkIEY6IHJlY29yZCB0byBNQUlOVEFJTkVS
+UyBmaWxlIGVudHJ5IGFzIHN1Z2dlc3RlZCBieSBZdXJ5Ll0NCj4gDQo+IFBsZWFzZSBkb24ndCB1
+c2UgWyAuLi4gXSBub3IgdGhlIHBhc3QgdGVuc2UgLS0gZm9yIG5vcm1hbCBjaGFuZ2VzLA0KPiBw
+bGVhc2UgdXNlIHRoZSBpbXBlcmF0aXZlIGluc3RlYWQuDQoNClN1cmUsIHdpbGwgZG8uDQoNCnRo
+YW5rcywNCg0KIC0gSm9lbA0KDQo+IA0KPiAoSSBndWVzcyB5b3UgcGlja2VkIHRoaXMgdXAgZnJv
+bSBvdGhlciBbIC4uLiBdIG5vdGF0aW9uLCBidXQgdGhhdCBpcw0KPiBub3JtYWxseSBvbmx5IGRv
+bmUgZm9yIG1vZGlmaWNhdGlvbnMgb2YgYSBwYXRjaCBieSBzb21lb25lIGVsc2UsIGUuZy4NCj4g
+YnkgbWFpbnRhaW5lcnMuKQ0KPiANCj4gVGhhbmtzIQ0KPiANCj4gQ2hlZXJzLA0KPiBNaWd1ZWwN
+Cg==
