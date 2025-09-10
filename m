@@ -2,65 +2,58 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id 10CF9B5105E
-	for <lists+nouveau@lfdr.de>; Wed, 10 Sep 2025 10:01:31 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id CD291B511C0
+	for <lists+nouveau@lfdr.de>; Wed, 10 Sep 2025 10:47:15 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id B4A5210E891;
-	Wed, 10 Sep 2025 08:01:29 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 7F16210E35C;
+	Wed, 10 Sep 2025 08:47:14 +0000 (UTC)
 Authentication-Results: gabe.freedesktop.org;
-	dkim=pass (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="O9hu+wut";
+	dkim=pass (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="ZJESPZ6l";
 	dkim-atps=neutral
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from sea.source.kernel.org (sea.source.kernel.org [172.234.252.31])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 6209F10E891;
- Wed, 10 Sep 2025 08:01:28 +0000 (UTC)
+Received: from tor.source.kernel.org (tor.source.kernel.org [172.105.4.254])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 58FB810E272;
+ Wed, 10 Sep 2025 08:47:13 +0000 (UTC)
 Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by sea.source.kernel.org (Postfix) with ESMTP id 1AA05447F4;
- Wed, 10 Sep 2025 08:01:28 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id B6E1DC4CEF5;
- Wed, 10 Sep 2025 08:01:23 +0000 (UTC)
+ by tor.source.kernel.org (Postfix) with ESMTP id 4996460226;
+ Wed, 10 Sep 2025 08:47:12 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 1DD53C4CEF0;
+ Wed, 10 Sep 2025 08:47:06 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1757491288;
- bh=W9AyICeigCjB4ZfW6Mn13qQroeZohBNvhnwa50EVj9s=;
+ s=k20201202; t=1757494031;
+ bh=WppBPowSewof/D5eVLXkCnHoKjpriLA2OUGq3Qnm2eI=;
  h=Date:Subject:Cc:To:From:References:In-Reply-To:From;
- b=O9hu+wutcuu/Q7972UJxuki8Y3HF4ragOWc7XGwFauq0XvJt5T/41JaU7f3ND83lO
- EVRVi9iOwSjLuwb6kX7NPM10qUQFLq0OnnSD35bMP+nXottJf4RDXgzxBESv7bUZgT
- AlwjvU4+dydveIghjt8smeGX8GqNRzYAUopY6BXbQhfZayr5d3hdU3NAFcOYyTvWXN
- xgIA1u/iIR0GClqtjHMuVTVU/y7N3th6G6/NoazYd+uoYfiOvKtQYu0xxxtCqQKtUP
- UoLc3sdaX9535hMlddg5lLAjLv8Z2XnGYx2dM73rzI8s74z9PjMVhTevClGKq8Lgcq
- VZ5K6xEMCyIrg==
+ b=ZJESPZ6lxzuProG9lMdkWZnUdwptCur8qCkwbnuymnB4OzQnTCSsZvNKwlM+l14av
+ avSWz9q2NGNPJ7zXztH7yMlB4il8x79co82w/jAbVLYOSFQ0aIbZHAU3hIJ4TayqDK
+ 1SawHkF2W6Q1FQO1zffxQ5+X7OzKE431V/h3dm5jqqM7H8V2oEPl+IWq8JRhrGAzB0
+ gsWRzii0hSeix6ew8EDmTjd/KjZxhaKX1befEeCYkL33hvqcdSnI6v6PYeNtQHodZf
+ d2Uxau1tFgH3LbK2rEQEmxF3f6r4NsaVDKfeeifUFW9TDSvZpKNOMc5EQyUv7chuA1
+ rwE9Mop5Dwncw==
 Mime-Version: 1.0
 Content-Transfer-Encoding: quoted-printable
 Content-Type: text/plain; charset=UTF-8
-Date: Wed, 10 Sep 2025 10:01:22 +0200
-Message-Id: <DCOYNWXYKBOK.XCRA4Z34RUXP@kernel.org>
-Subject: Re: [PATCH v3 02/11] gpu: nova-core: move GSP boot code out of
- `Gpu` constructor
-Cc: "Miguel Ojeda" <ojeda@kernel.org>, "Alex Gaynor"
+Date: Wed, 10 Sep 2025 10:47:05 +0200
+Message-Id: <DCOZMX59W82I.1AH7XVW3RUX2D@kernel.org>
+Subject: Re: [PATCH] rust: pci: add PCI interrupt allocation and management
+ support
+Cc: <linux-kernel@vger.kernel.org>, <dri-devel@lists.freedesktop.org>,
+ <nouveau@lists.freedesktop.org>, <rust-for-linux@vger.kernel.org>,
+ <linux-pci@vger.kernel.org>, <acourbot@nvidia.com>, "Alistair Popple"
+ <apopple@nvidia.com>, "Miguel Ojeda" <ojeda@kernel.org>, "Alex Gaynor"
  <alex.gaynor@gmail.com>, "Boqun Feng" <boqun.feng@gmail.com>, "Gary Guo"
  <gary@garyguo.net>, =?utf-8?q?Bj=C3=B6rn_Roy_Baron?=
  <bjorn3_gh@protonmail.com>, "Benno Lossin" <lossin@kernel.org>, "Andreas
  Hindborg" <a.hindborg@kernel.org>, "Alice Ryhl" <aliceryhl@google.com>,
  "Trevor Gross" <tmgross@umich.edu>, "David Airlie" <airlied@gmail.com>,
- "Simona Vetter" <simona@ffwll.ch>, "Maarten Lankhorst"
- <maarten.lankhorst@linux.intel.com>, "Maxime Ripard" <mripard@kernel.org>,
- "Thomas Zimmermann" <tzimmermann@suse.de>, "John Hubbard"
- <jhubbard@nvidia.com>, "Alistair Popple" <apopple@nvidia.com>, "Joel
- Fernandes" <joelagnelf@nvidia.com>, "Timur Tabi" <ttabi@nvidia.com>,
- <rust-for-linux@vger.kernel.org>, <linux-kernel@vger.kernel.org>,
- <nouveau@lists.freedesktop.org>, <dri-devel@lists.freedesktop.org>
-To: "Alexandre Courbot" <acourbot@nvidia.com>
+ "Simona Vetter" <simona@ffwll.ch>, "John Hubbard" <jhubbard@nvidia.com>,
+ "Timur Tabi" <ttabi@nvidia.com>, <joel@joelfernandes.org>, "Daniel Almeida"
+ <daniel.almeida@collabora.com>, "Bjorn Helgaas" <bhelgaas@google.com>,
+ =?utf-8?q?Krzysztof_Wilczy=C5=84ski?= <kwilczynski@kernel.org>
+To: "Joel Fernandes" <joelagnelf@nvidia.com>
 From: "Danilo Krummrich" <dakr@kernel.org>
-References: <20250902-nova_firmware-v3-0-56854d9c5398@nvidia.com>
- <20250902-nova_firmware-v3-2-56854d9c5398@nvidia.com>
- <843554b1-f4c5-43f5-a23b-583339708bea@kernel.org>
- <DCIZ79KKSSF1.25NJT5ZWR3OOS@nvidia.com>
- <DCJ0UA7KM9AP.OGO7EJB4ORQP@kernel.org>
- <DCOBWF0EZLHF.3FFVAB16SJ3FW@nvidia.com>
- <DCOCL398HXDH.3QH9U6UGGIUP1@kernel.org>
- <DCOUK0Z4YV6M.2R0CFE57DY5CR@nvidia.com>
-In-Reply-To: <DCOUK0Z4YV6M.2R0CFE57DY5CR@nvidia.com>
+References: <20250910035415.381753-1-joelagnelf@nvidia.com>
+In-Reply-To: <20250910035415.381753-1-joelagnelf@nvidia.com>
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -75,148 +68,141 @@ List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-On Wed Sep 10, 2025 at 6:48 AM CEST, Alexandre Courbot wrote:
-> On Tue Sep 9, 2025 at 11:43 PM JST, Danilo Krummrich wrote:
->> 	impl Gpu {
->> 	    pub(crate) fn new<'a>(
->> 	        dev: &'a Device<Bound>,
->> 	        bar: &'a Bar0
->> 	        devres_bar: Arc<Devres<Bar0>>,
->> 	    ) -> impl PinInit<Self, Error> + 'a {
->> 	        try_pin_init(Self {
->> 	            bar: devres_bar,
->> 	            spec: Spec::new(bar)?,
->> 	            gsp_falcon: Falcon::<Gsp>::new(dev, spec.chipset)?,
->> 	            sec2_falcon: Falcon::<Sec2>::new(dev, spec.chipset)?,
->> 	            sysmem_flush: SysmemFlush::register(dev, bar, spec.chipset)=
-?
->> 	            gsp <- Gsp::new(gsp_falcon, sec2_falcon, sysmem_flush)?,
->> 	        })
->> 	    }
->> 	}
->
-> It does work. The bizareness of passing the `bar` twice aside,
+On Wed Sep 10, 2025 at 5:54 AM CEST, Joel Fernandes wrote:
+>  impl Device<device::Bound> {
 
-Yeah, but it really seems like a minor inconvinience. (Especially, since th=
-is
-will be the only occurance of this we'll ever have.)
+The Bound context is not enough for some of the methods below, some of them
+require the Core context, more below.
 
-> here is what it looks like when I got it to compile:
+> +    /// Free all allocated IRQ vectors for this device.
+> +    ///
+> +    /// This should be called to release interrupt resources when they a=
+re no longer needed,
+> +    /// during driver unbind or removal.
+> +    pub fn free_irq_vectors(&self) {
+> +        // SAFETY: `self.as_raw` is guaranteed to be a pointer to a vali=
+d `struct pci_dev`.
+> +        // `pci_free_irq_vectors` is safe to call even if no vectors are=
+ currently allocated.
+> +        unsafe { bindings::pci_free_irq_vectors(self.as_raw()) };
+> +    }
 
-This looks great!
+This requires the Core context, but we should not provide this method at al=
+l to
+begin with; it puts the burden on drivers to remember calling this.
 
->     pub(crate) fn new<'a>(
->         pdev: &'a pci::Device<device::Bound>,
->         devres_bar: Arc<Devres<Bar0>>,
->         bar: &'a Bar0,
->     ) -> impl PinInit<Self, Error> + 'a {
->         try_pin_init!(Self {
->             spec: Spec::new(bar).inspect(|spec| {
->                 dev_info!(
->                     pdev.as_ref(),
->                     "NVIDIA (Chipset: {}, Architecture: {:?}, Revision: {=
-})\n",
->                     spec.chipset,
->                     spec.chipset.arch(),
->                     spec.revision
->                 );
->             })?,
+Instead, alloc_irq_vectors() should register a devres object with
+devres::register(), so this gets called automatically when the device is
+unbound.
 
-+             _: {
-+                 gfw::wait_gfw_boot_completion(bar)
-+                     .inspect_err(|_| dev_err!(pdev.as_ref(), "GFW boot di=
-d not complete"))?;
-+             },
->
->             sysmem_flush: SysmemFlush::register(pdev.as_ref(), bar, spec.=
-chipset)?,
->
->             gsp_falcon: Falcon::<Gsp>::new(
->                 pdev.as_ref(),
->                 spec.chipset,
->                 bar,
->                 spec.chipset > Chipset::GA100,
->             )
->             .inspect(|falcon| falcon.clear_swgen0_intr(bar))?,
->
->             sec2_falcon: Falcon::<Sec2>::new(pdev.as_ref(), spec.chipset,=
- bar, true)?,
->
--             gsp: Self::start_gsp(pdev, bar, spec.chipset, gsp_falcon, sec=
-2_falcon)?,
-+             gsp <- Self::start_gsp(pdev, bar, spec.chipset, gsp_falcon, s=
-ec2_falcon),
->
->             bar: devres_bar,
->         })
->     }
->
-> The wait for GFW initialization had to be moved to `probe`, but that's
-> fine IMO.
+Note that a cleanup through devres is not in conflict with the Core context
+requirement.
 
-That's not necessary, you can keep it in Gpu::new() -- I don't see what's
-preventing us from that. I inserted it in the code above.
+> +    /// Allocate IRQ vectors for this PCI device.
+> +    ///
+> +    /// Allocates between `min_vecs` and `max_vecs` interrupt vectors fo=
+r the device.
+> +    /// The allocation will use MSI-X, MSI, or legacy interrupts based o=
+n the `irq_types`
+> +    /// parameter and hardware capabilities. When multiple types are spe=
+cified, the kernel
+> +    /// will try them in order of preference: MSI-X first, then MSI, the=
+n legacy interrupts.
+> +    /// This is called during driver probe.
+> +    ///
+> +    /// # Arguments
+> +    ///
+> +    /// * `min_vecs` - Minimum number of vectors required
+> +    /// * `max_vecs` - Maximum number of vectors to allocate
+> +    /// * `irq_types` - Types of interrupts that can be used
+> +    ///
+> +    /// # Returns
+> +    ///
+> +    /// Returns the number of vectors successfully allocated, or an erro=
+r if the allocation
+> +    /// fails or cannot meet the minimum requirement.
+> +    ///
+> +    /// # Examples
+> +    ///
+> +    /// ```
+> +    /// // Allocate using any available interrupt type in the order ment=
+ioned above.
+> +    /// let nvecs =3D dev.alloc_irq_vectors(1, 32, IrqTypes::all())?;
+> +    ///
+> +    /// // Allocate MSI or MSI-X only (no legacy interrupts)
+> +    /// let msi_only =3D IrqTypes::default()
+> +    ///     .with(IrqType::Msi)
+> +    ///     .with(IrqType::MsiX);
+> +    /// let nvecs =3D dev.alloc_irq_vectors(4, 16, msi_only)?;
+> +    /// ```
+> +    pub fn alloc_irq_vectors(
+> +        &self,
+> +        min_vecs: u32,
+> +        max_vecs: u32,
+> +        irq_types: IrqTypes,
+> +    ) -> Result<u32> {
+> +        // SAFETY: `self.as_raw` is guaranteed to be a pointer to a vali=
+d `struct pci_dev`.
+> +        // `pci_alloc_irq_vectors` internally validates all parameters a=
+nd returns error codes.
+> +        let ret =3D unsafe {
+> +            bindings::pci_alloc_irq_vectors(self.as_raw(), min_vecs, max=
+_vecs, irq_types.raw())
+> +        };
+> +
+> +        to_result(ret)?;
+> +        Ok(ret as u32)
+> +    }
 
-> I do however find the code less readable in this form, less
-> editable as well. And LSP seems lost, so I don't get any syntax
-> highlighting in the `try_pin_init` block.
+This is only valid to be called from the Core context, as it modifies inter=
+nal
+fields of the inner struct device.
 
-Benno is working on a syntax update, so automatic formatting etc. will prop=
-erly
-work.
+Also, it would be nice if it would return a new type that can serve as argu=
+ment
+for irq_vector(), such that we don't have to rely on random integers.
 
-Otherwise, I can't see how this is a downgrade. It represents the initializ=
-ation
-process in a much clearer way that the current implementation of Gsp::new()=
-,
-which is rather messy.
+> +
+> +    /// Get the Linux IRQ number for a specific vector.
+> +    ///
+> +    /// This is called during driver probe after successful IRQ allocati=
+on
+> +    /// to obtain the IRQ numbers for registering interrupt handlers.
+> +    ///
+> +    /// # Arguments
+> +    ///
+> +    /// * `vector` - The vector index (0-based)
+> +    ///
+> +    /// # Returns
+> +    ///
+> +    /// Returns the Linux IRQ number for the specified vector, or an err=
+or if the vector
+> +    /// index is invalid or no vectors are allocated.
+> +    pub fn irq_vector(&self, vector: u32) -> Result<u32> {
 
-> Fundamentally, this changes the method from a fallible method returning
-> a non-fallible initializer into a non-fallible method returning a
-> fallible initializer.
+This method is already staged for inclusion in v6.18 in driver-core-next. P=
+lease
+make sure to base changes on top of the tree mentioned in the maintainers f=
+ile,
+driver-core in this case.
 
-Yeah, that's the best case when working with pin-init.
+The signature of the existing method is:
 
-> I'm ok with that, and maybe this new form will
-> encourage us to keep this method short, which is what we want, but other
-> than that what benefit are we getting from this change?
+	pub fn irq_vector(&self, index: u32) -> Result<IrqRequest<'_>>
 
-The immediate benefit is that we don't need an extra allocation for the Gsp
-structure.
+We return an IrqRequest, which captures the IRQ number *and* the correspond=
+ing
+device, such that you can't get the combination wrong.
 
-The general benefit is that once we need to add more fields to
-structures that require pinning (such as locks -- and we will need a lot of
-them) we're prepared for it.
+Maybe it's worth looking at improving the index argument with a new type as
+mentioned above.
 
-If we're not prepared for it, I'm pretty sure that everytime someone needs =
-to
-add e.g. a new lock for something, it will just result in a new Pin<KBox<T>=
->,
-because the initial pin-init hierarchy just isn't there, and creating a new
-allocation is more convinient than fixing the existing code.
-
-This is exactly what pin-init was introduced for in the kernel, such that w=
-e're
-not doing worse than equivalent C code.
-
-	struct Foo {
-	   struct Bar bar;
-	   void *data;
-	   struct mutex data_lock;
-	}
-
-	struct Bar {
-	   void *data;
-	   struct mutex data_lock;
-	}
-
-In C you can just kmalloc(sizeof(Foo), GFP_KERNEL) and subsequently initial=
-ize
-all fields.
-
-In Rust I don't want to fall back having to allocate for Bar *and* for Foo
-separately.
-
-If there are things to improve with pin-init, let's improve them, but let's=
- not
-do worse than C code in this aspect.
+> +        // SAFETY: `self.as_raw` is guaranteed to be a pointer to a vali=
+d `struct pci_dev`.
+> +        let irq =3D unsafe { bindings::pci_irq_vector(self.as_raw(), vec=
+tor) };
+> +
+> +        to_result(irq)?;
+> +        Ok(irq as u32)
+> +    }
+>  }
