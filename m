@@ -2,40 +2,40 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id DBE0AB53243
-	for <lists+nouveau@lfdr.de>; Thu, 11 Sep 2025 14:31:25 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 8E7C3B532AA
+	for <lists+nouveau@lfdr.de>; Thu, 11 Sep 2025 14:47:00 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 460B710EB08;
-	Thu, 11 Sep 2025 12:31:24 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id A3DE310EB13;
+	Thu, 11 Sep 2025 12:46:58 +0000 (UTC)
 Authentication-Results: gabe.freedesktop.org;
-	dkim=pass (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="c06Sp8Q/";
+	dkim=pass (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="b2Jgjxe0";
 	dkim-atps=neutral
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from tor.source.kernel.org (tor.source.kernel.org [172.105.4.254])
- by gabe.freedesktop.org (Postfix) with ESMTPS id AF16410EB09;
- Thu, 11 Sep 2025 12:31:22 +0000 (UTC)
+Received: from sea.source.kernel.org (sea.source.kernel.org [172.234.252.31])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 6167C10E315;
+ Thu, 11 Sep 2025 12:46:57 +0000 (UTC)
 Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by tor.source.kernel.org (Postfix) with ESMTP id AB1116023D;
- Thu, 11 Sep 2025 12:31:21 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id DB09DC4CEF0;
- Thu, 11 Sep 2025 12:31:16 +0000 (UTC)
+ by sea.source.kernel.org (Postfix) with ESMTP id 0057F44576;
+ Thu, 11 Sep 2025 12:46:57 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id B1842C4CEF1;
+ Thu, 11 Sep 2025 12:46:52 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1757593881;
- bh=K6b51fWzAg1h8jw+QOy5A/3DHSmlmOFYyUDsQ8bcEy0=;
+ s=k20201202; t=1757594816;
+ bh=ZMKRsM2d2FmjPym3iMEMNiiUE1WxtkOsfG1kTOUZ+po=;
  h=Date:Subject:To:Cc:References:From:In-Reply-To:From;
- b=c06Sp8Q/kv38/w351LhzH0bADeXIM27LzqOFWz+Nh46SiZueL60fgJC4Rsgoz1KYU
- lRoLc+FftCVZ+0Pz3zvuX7rtHL2L7LB2aWIBKuRpEQew3EqwhUasBxx20uyhfLyvif
- RmYeAS76hFZCosqOuSdEAwzU85otiOLypPQaEbSO+liL8POvXQRC+b4I0QvPVVvwHX
- qxdnjMyvYqOZCq6uCLI9TGGYS4rg0qIVoGYx69kCIgV8JEqQf1AlGPS3C6j6CwnDvB
- XQf5DeXP5Ykz3KAfTGuZ88nC2rjugKax/rip1CWx/eJ9ju7qdnNhsEcexIACZjx/6s
- uu7QwZIZ7oTWg==
-Message-ID: <ef1023cc-0dea-49d2-8d04-6666510b53e6@kernel.org>
-Date: Thu, 11 Sep 2025 14:31:13 +0200
+ b=b2Jgjxe0smjNxwt90PXOQmhfvrW+ekazryG1m+dsEte/g78R+1fK3qaDluF7kr6qw
+ DOUSJCOcA1AxyvONbB/ozhz0+y2dBOVqOu1Npn4WNDyBu0uKNYhPZcI5gSvrxShHsA
+ JahfpeIWpvJth+407eK40K+s2A6BHrfSYHtL/DPAdToRxSNbDeLCoCxQn86SIUuIGk
+ YWGOFAF4lrSbKcYkJPXMYY0KzQQ2SNnLs89YCEMmlxTVk8emI6d5xVNPdLO3qjITm7
+ qSlhqA5q/vBTAeTXwmixuXgvjIqOB/4KixRAVS5iQNIruTnDfHHodcyWPNoY4n/ayS
+ Y/RuMddb9f1Hw==
+Message-ID: <ce74db34-77bc-4207-94c8-6e0580189448@kernel.org>
+Date: Thu, 11 Sep 2025 14:46:51 +0200
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v5 08/12] gpu: nova-core: firmware: process and prepare
- the GSP firmware
+Subject: Re: [PATCH v5 02/12] gpu: nova-core: move GSP boot code to a
+ dedicated method
 To: Alexandre Courbot <acourbot@nvidia.com>
 Cc: Miguel Ojeda <ojeda@kernel.org>, Alex Gaynor <alex.gaynor@gmail.com>,
  Boqun Feng <boqun.feng@gmail.com>, Gary Guo <gary@garyguo.net>,
@@ -50,12 +50,12 @@ Cc: Miguel Ojeda <ojeda@kernel.org>, Alex Gaynor <alex.gaynor@gmail.com>,
  rust-for-linux@vger.kernel.org, linux-kernel@vger.kernel.org,
  nouveau@lists.freedesktop.org, dri-devel@lists.freedesktop.org
 References: <20250911-nova_firmware-v5-0-5a8a33bddca1@nvidia.com>
- <20250911-nova_firmware-v5-8-5a8a33bddca1@nvidia.com>
- <9c1a7902-4e14-4b25-ba32-57a475a0bccc@kernel.org>
- <DCPYZSLUJGZ1.2D835NAHYEM5U@nvidia.com>
+ <20250911-nova_firmware-v5-2-5a8a33bddca1@nvidia.com>
+ <e1755470-587b-4a43-8171-3d031b7fb4f4@kernel.org>
+ <DCPYQNZG1OJK.2EE4JWJAROK57@nvidia.com>
 From: Danilo Krummrich <dakr@kernel.org>
 Content-Language: en-US
-In-Reply-To: <DCPYZSLUJGZ1.2D835NAHYEM5U@nvidia.com>
+In-Reply-To: <DCPYQNZG1OJK.2EE4JWJAROK57@nvidia.com>
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 7bit
 X-BeenThere: nouveau@lists.freedesktop.org
@@ -72,43 +72,105 @@ List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-On 9/11/25 2:29 PM, Alexandre Courbot wrote:
-> On Thu Sep 11, 2025 at 8:27 PM JST, Danilo Krummrich wrote:
+On 9/11/25 2:17 PM, Alexandre Courbot wrote:
+> On Thu Sep 11, 2025 at 8:22 PM JST, Danilo Krummrich wrote:
 >> On 9/11/25 1:04 PM, Alexandre Courbot wrote:
->>> diff --git a/drivers/gpu/nova-core/gpu.rs b/drivers/gpu/nova-core/gpu.rs
->>> index 06a7ee8f4195759fb55ad483852724bb1ab46793..8505ee81c43e7628d1f099aff285244f8908c633 100644
->>> --- a/drivers/gpu/nova-core/gpu.rs
->>> +++ b/drivers/gpu/nova-core/gpu.rs
->>> @@ -8,6 +8,7 @@
->>>  use crate::fb::SysmemFlush;
->>>  use crate::firmware::booter::{BooterFirmware, BooterKind};
->>>  use crate::firmware::fwsec::{FwsecCommand, FwsecFirmware};
->>> +use crate::firmware::gsp::GspFirmware;
->>>  use crate::firmware::{Firmware, FIRMWARE_VERSION};
->>>  use crate::gfw;
->>>  use crate::regs;
->>> @@ -285,6 +286,11 @@ pub(crate) fn start_gsp(
->>>  
->>>          let bios = Vbios::new(dev, bar)?;
->>>  
->>> +        let _gsp_fw = KBox::pin_init(
->>> +            GspFirmware::new(dev, chipset, FIRMWARE_VERSION)?,
->>> +            GFP_KERNEL,
->>> +        )?;
+>>> +    /// Attempt to start the GSP.
+>>> +    ///
+>>> +    /// This is a GPU-dependent and complex procedure that involves loading firmware files from
+>>> +    /// user-space, patching them with signatures, and building firmware-specific intricate data
+>>> +    /// structures that the GSP will use at runtime.
+>>> +    ///
+>>> +    /// Upon return, the GSP is up and running, and its runtime object given as return value.
+>>> +    pub(crate) fn start_gsp(
+>>> +        pdev: &pci::Device<device::Bound>,
+>>> +        bar: &Bar0,
+>>> +        chipset: Chipset,
+>>> +        gsp_falcon: &Falcon<Gsp>,
+>>> +        _sec2_falcon: &Falcon<Sec2>,
+>>> +    ) -> Result<()> {> +        let dev = pdev.as_ref();
+>>> +
+>>> +        let bios = Vbios::new(dev, bar)?;
+>>> +
+>>> +        let fb_layout = FbLayout::new(chipset, bar)?;
+>>> +        dev_dbg!(dev, "{:#x?}\n", fb_layout);
+>>> +
+>>> +        Self::run_fwsec_frts(dev, gsp_falcon, bar, &bios, &fb_layout)?;
+>>> +
+>>> +        // Return an empty placeholder for now, to be replaced with the GSP runtime data.
+>>> +        Ok(())
+>>> +    }
 >>
->> Since we now have the infrastructure in place and the change is trival, I'd
->> prefer to make this a member of struct Gsp and make it part of the Gpu structure
->> directly (without separate allocation).
->>
->> Should we need dynamic dispatch in the future, it's also trivial to make it its
->> own allocation again, but maybe we also get around the dyn dispatch. :)
+>> I'd rather create the Gsp structure already, move the code to Gsp::new() and
+>> return an impl PinInit<Self, Error>. If you don't want to store any of the
+>> object instances you create above yet, you can just stuff all the code into an
+>> initializer code block, as you do in the next patch with
+>> gfw::wait_gfw_boot_completion().
 > 
-> Ah, my previous talk about dynamic dispatch is a bit obsolete now that
-> the `Firmware` struct is gone. :) Sorry if that created confusion.
-> 
-> Truth is, this object is not supposed to survive `start_gsp`, and we can
-> dispose of it after the GSP is started as the bootloader will have
-> validated and copied it into the WPR region. So we don't want to store
-> it into `Gpu`, now or ever.
+> I don't think that would work, or be any better even if it did. The full
+> GSP initialization is pretty complex and all we need to return is one
+> object created at the beginning that doesn't need to be pinned.
+> Moreover, the process is also dependent on the GPU family and completely
+> different on Hopper/Blackwell.
 
-Ah, makes sense, so that's fine then.
+Why would it not work? There is no difference between the code above being
+executed from an initializer block or directly in Gsp::new().
+> You can see the whole process on [1]. `libos` is the object that is
+> returned (although its name and type will change). All the rest it
+> loading, preparing and running firmware, and that is done on the GPU. I
+> think it would be very out of place in the GSP module.
+> 
+> It is also very step-by-step: run this firmware, wait for it to
+> complete, run another one, wait for a specific message from the GSP, run
+> the sequencer, etc. And most of this stuff is thrown away once the GSP
+> is running. That's where the limits of what we can do with `pin_init!`
+> are reached, and the GSP object doesn't need to be pinned anyway.
+
+I don't see that, in the code you linked you have a bunch of calls that don't
+return anything that needs to survive, this can be in an initializer block.
+
+And then you have
+
+let mut libos = gsp::GspMemObjects::new(pdev, bar)?;
+
+which only needs the device reference and the bar reference.
+
+So you can easily write this as:
+
+try_pin_init!(Self {
+   _: {
+      // all the throw-away stuff from above
+   },
+   libos <- gsp::GspMemObjects::new(pdev, bar),
+   _: {
+      libos.do_some_stuff_mutable()?;
+   }
+})
+> By keeping the initialization in the GPU, we can keep the GSP object
+> architecture-independent, and I think it makes sense from a design point
+> of view. That's not to say this code should be in `gpu.rs`, maybe we
+> want to move it to a GPU HAL, or if we really want this as part of the
+> GSP a `gsp/boot` module supporting all the different archs. But I'd
+> prefer to think about this when we start supporting several
+> architectures.
+
+Didn't we talk about a struct Gsp that will eventually be returned by
+Self::start_gsp(), or did I make this up in my head?
+
+The way I think about this is that we'll have a struct Gsp that represents the
+entry point in the driver to mess with the GSP command queue.
+
+But either way, this throws up two questions, if Self::start_gsp() return a
+struct GspMemObjects instead (which is probably the same thing with a different
+name), then:
+
+Are we sure this won't need any locks? If it will need locking (which I expect)
+then it needs pin-init.
+
+If it never needs pinning why did you write it as
+
+gsp <- Self::start_gsp(pdev, bar, spec.chipset, gsp_falcon, sec2_falcon)?,
+
+in a patch 3?
+> [1] https://github.com/Gnurou/linux/blob/gsp_init_rebase/drivers/gpu/nova-core/gpu.rs#L305
+
