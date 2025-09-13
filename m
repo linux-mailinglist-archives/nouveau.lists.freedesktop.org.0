@@ -2,50 +2,50 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id B9047BBF53F
-	for <lists+nouveau@lfdr.de>; Mon, 06 Oct 2025 22:47:41 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 45A73BBF4E4
+	for <lists+nouveau@lfdr.de>; Mon, 06 Oct 2025 22:47:21 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 1984310E51F;
-	Mon,  6 Oct 2025 20:46:29 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 6361C10E4E4;
+	Mon,  6 Oct 2025 20:46:27 +0000 (UTC)
 Authentication-Results: gabe.freedesktop.org;
-	dkim=pass (2048-bit key; unprotected) header.d=Nvidia.com header.i=@Nvidia.com header.b="AhigLUET";
+	dkim=pass (2048-bit key; unprotected) header.d=Nvidia.com header.i=@Nvidia.com header.b="f5Fi0lN5";
 	dkim-atps=neutral
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from NAM10-BN7-obe.outbound.protection.outlook.com
- (mail-bn7nam10on2085.outbound.protection.outlook.com [40.107.92.85])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 015ED10E1EC;
- Sat, 13 Sep 2025 01:02:31 +0000 (UTC)
+Received: from NAM11-CO1-obe.outbound.protection.outlook.com
+ (mail-co1nam11on2075.outbound.protection.outlook.com [40.107.220.75])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id CA27210E18B;
+ Sat, 13 Sep 2025 17:14:02 +0000 (UTC)
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=HRXdGjOiGU2aZw/pACB99OdjKEE3EGv4x0qvTmRY7R3TLWHrIz9DJVJtqMGjZJOEXc7CDhPWu153CNk5fWcgufPUbFxm6sFRKNL4OqontgrDu1E0dGwPc3J81pAS/cH5cxTLd9gVHZ8GA+f3I30PoLYxJyXiRY687qY3sbN8EQ5GjJKAhC1bdSeLHafDv+83UngjNu6ijk7u0rIIodhC5UiyZVp/ZYBGUGoodfeyf4RQjMej5omHMOoUl4jRRsglzpysvjTeDXP7kj1tWIy1jzQixyFK3ewjCFBVocgK/34OyS/ULjqX5YFdSrOFEt1vzFpO13aEyge46S375CN8MA==
+ b=oVixaXeivhVtt70Blnen/pnRWWw88uyHJ2JB6wK2VJ3QnW9F5++sdZVeeOUG58yRSGgk/s3W3ZLeGw14rEm2CazdWvelEQ8nmyw37b232RMESM3whL63LY4Tv5zThDJ/J9mGF1iQrBk0BW1UqoVUj41VvBx4B/xU0pZ0r109Hsgs6x+RW24+kEzfJpG+1AstBN4OIV95ZcxFRwArjNTAWIEMtVQ1zqp8B+L/CSnSGXo2bmH5Gnz73ukvkfpfVK1z//25h7mzUp9Fryxd7OP/PcFeNiC2vXZXMdDYUETOWIC/i6Wq0WCx+cIXBkTMq+FpscvBvM6P3aqe8sYfJZSDvA==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
  s=arcselector10001;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=SptTuagc5TVSshUl1KAM/wXVFI+zzM6rLEc3P0vm4so=;
- b=ImeiphDT+7p0/ZwLUHE+1kt4nJlZD+iSQiTC3P1iGmYOPI2Cv1GmgIltMHV/reSKAQRhZjAx+F31ab8pZr9uOiqqU2Bb2kUG+QbJY6cK1uf6xpTXXp6UhKbsBY9bKWpEdgcEQyeaMeCVdtSk/qgMSBEpZ4gY+LnA6Tk3fT1ujG+n51ZdJlVOBgVVcTjY3QF3e6Ve4yHTNFJezzZtiH8iyH1PfOpzUEl5V3SXjlG2n2vrCxbVTG3L/zy9h+wwgproW3PYNp75zlF8xkCDdxvYkj2yGhmt/0YdTcueSUfVkn1rrWThfzqNfGW+1+e2LnqyrNDs5WqiPZ+u2Vw/PzZibQ==
+ bh=anCWGi+rt+Y+XhJpuLf64DK2/ilgD1FRbemJH24mSAQ=;
+ b=izp83gNCcE8H0Q4pvat0CDGXpRb4bNfZ1lgn5moGx+HlArmChW1D1Ayl6Lr7VoGp55tz+sFK13+FQdhVOBH5a8LHCgnjFD2X1MGItYQaYNR9fnD/i2b/xvE3HUa7WC9eicns+jXsWcQ2mvvQQEmU7SRdxqp+hQMpJwmiYs+wqRPCVG78Sh/A5kLB37d8MS2AgpJV5cFChF66ei2jvhRnuuPeNoWvoMgXIklukuA/bgTVM7uHoXJjWVDMbCrZhry+cLSxFFy48VRm78f0WmKMa9nNl0ibxuV/vsGn4OBX4mZ3iR7N9AupmdjkVQP+2J4/gW2NnRi2e8rv/mvNeYQ5nQ==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
  smtp.mailfrom=nvidia.com; dmarc=pass action=none header.from=nvidia.com;
  dkim=pass header.d=nvidia.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=Nvidia.com;
  s=selector2;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=SptTuagc5TVSshUl1KAM/wXVFI+zzM6rLEc3P0vm4so=;
- b=AhigLUETnRZ5hciwPHBZjBRMoxGBDiT5qlFK4+l0X1jaTfUrs21KTJadVQB7QEaC7K12zAhHHWecIfXRvdrJpxw9AVn0zKopyrQbjp3KDEeX3C7oprvdJHsmZP3A7n+hijmwRD7FzGmrRfmfYq+uJRZFVi45e8NPxXS3c15My0D+zhGj0NCV60eKgMmr2HojBWBpuO6ga4xKMw+7KSnlm80SjoNpnbh1BcDrfb5nENS9e8JkrMSleA69XAgaCS2hG0rm0y5LC8fPYyTy0vPP7aH3KeENhg3yh7zRSdFNBiWi5QH/shu45WsaS5QQFR3XLPPgqbC7fKk8qc8pYPworg==
+ bh=anCWGi+rt+Y+XhJpuLf64DK2/ilgD1FRbemJH24mSAQ=;
+ b=f5Fi0lN5KKkyHJIV6jShHaWp7vKV1HKQwP0FH2jd2nJxqaG9JXZ4RkUh8Ogu87wZSodBLUmBfljjJVzfEfsJwT44W+NdgmiNkTEatoUTnFBMJ/WjF3qFnay5eH3ofF7J1lPKk6b5LkOIcrA0sRA1FLpEugAqeq9yDGFWGWMfAqRoPtWa1jlttPQgnVmrmgra6mxRR4utkDC296Tynf0+pRW0LQgzHc5//hN5dJ4zmyWGYD4AskhCqcQFz4eBb0PSnXXSIEt5GZ4/16PO6AUENGsfxN1ZyBCfObscvl0xtz310nW0apO4Pc2D4xVyw5RMgcWeWWoIsBhCBExezCuEog==
 Authentication-Results: dkim=none (message not signed)
  header.d=none;dmarc=none action=none header.from=nvidia.com;
 Received: from SN7PR12MB8059.namprd12.prod.outlook.com (2603:10b6:806:32b::7)
- by CY8PR12MB7241.namprd12.prod.outlook.com (2603:10b6:930:5a::12)
+ by CYYPR12MB8730.namprd12.prod.outlook.com (2603:10b6:930:c1::15)
  with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9094.22; Sat, 13 Sep
- 2025 01:02:28 +0000
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9115.19; Sat, 13 Sep
+ 2025 17:13:58 +0000
 Received: from SN7PR12MB8059.namprd12.prod.outlook.com
  ([fe80::4ee2:654e:1fe8:4b91]) by SN7PR12MB8059.namprd12.prod.outlook.com
- ([fe80::4ee2:654e:1fe8:4b91%3]) with mapi id 15.20.9094.021; Sat, 13 Sep 2025
- 01:02:28 +0000
-Date: Fri, 12 Sep 2025 21:02:26 -0400
+ ([fe80::4ee2:654e:1fe8:4b91%3]) with mapi id 15.20.9115.018; Sat, 13 Sep 2025
+ 17:13:58 +0000
+Date: Sat, 13 Sep 2025 13:13:57 -0400
 From: Joel Fernandes <joelagnelf@nvidia.com>
-To: Alexandre Courbot <acourbot@nvidia.com>
-Cc: Danilo Krummrich <dakr@kernel.org>, Miguel Ojeda <ojeda@kernel.org>,
+To: Danilo Krummrich <dakr@kernel.org>
+Cc: Alexandre Courbot <acourbot@nvidia.com>, Miguel Ojeda <ojeda@kernel.org>,
  Alex Gaynor <alex.gaynor@gmail.com>,
  Boqun Feng <boqun.feng@gmail.com>, Gary Guo <gary@garyguo.net>,
  =?iso-8859-1?Q?Bj=F6rn?= Roy Baron <bjorn3_gh@protonmail.com>,
@@ -61,92 +61,94 @@ Cc: Danilo Krummrich <dakr@kernel.org>, Miguel Ojeda <ojeda@kernel.org>,
  nouveau@lists.freedesktop.org, dri-devel@lists.freedesktop.org
 Subject: Re: [PATCH v5 02/12] gpu: nova-core: move GSP boot code to a
  dedicated method
-Message-ID: <20250913010226.GA1478480@joelbox2>
+Message-ID: <20250913171357.GA1551194@joelbox2>
 References: <20250911-nova_firmware-v5-0-5a8a33bddca1@nvidia.com>
  <20250911-nova_firmware-v5-2-5a8a33bddca1@nvidia.com>
  <e1755470-587b-4a43-8171-3d031b7fb4f4@kernel.org>
  <DCPYQNZG1OJK.2EE4JWJAROK57@nvidia.com>
  <ce74db34-77bc-4207-94c8-6e0580189448@kernel.org>
  <DCQ074EMFNIK.1OJLWJXWZLDXZ@nvidia.com>
+ <20250913010226.GA1478480@joelbox2>
+ <DCRPJKD0UHDQ.IOWSOB2IK06E@kernel.org>
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
-In-Reply-To: <DCQ074EMFNIK.1OJLWJXWZLDXZ@nvidia.com>
-X-ClientProxiedBy: BL1PR13CA0439.namprd13.prod.outlook.com
- (2603:10b6:208:2c3::24) To SN7PR12MB8059.namprd12.prod.outlook.com
+In-Reply-To: <DCRPJKD0UHDQ.IOWSOB2IK06E@kernel.org>
+X-ClientProxiedBy: BN0PR04CA0094.namprd04.prod.outlook.com
+ (2603:10b6:408:ec::9) To SN7PR12MB8059.namprd12.prod.outlook.com
  (2603:10b6:806:32b::7)
 MIME-Version: 1.0
 X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: SN7PR12MB8059:EE_|CY8PR12MB7241:EE_
-X-MS-Office365-Filtering-Correlation-Id: b7d8ef32-5623-4b53-af93-08ddf261357c
+X-MS-TrafficTypeDiagnostic: SN7PR12MB8059:EE_|CYYPR12MB8730:EE_
+X-MS-Office365-Filtering-Correlation-Id: c91e5f9f-2971-43ce-f264-08ddf2e8ed6d
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0;ARA:13230040|366016|7416014|376014|1800799024;
-X-Microsoft-Antispam-Message-Info: =?us-ascii?Q?bMlBW4lfOcd7PwqKbwuaVs2iOxwTJVEYiRfdT8r+hW9pCugq0uRh2k227zOc?=
- =?us-ascii?Q?UiifLvu7p8fQoGcbCXB/olQQK1XFYjs5oLvuxxF4OP8h6xOjHRB7UwfcHJn+?=
- =?us-ascii?Q?GKKsZO6UiFhKuhLH+4Z+UFzYikw6xMj+LsI2Q9hPCUm7D2zAJuDWHPkle/Hr?=
- =?us-ascii?Q?5wwAc/hQQLFy4TenwgVdnMa3b/0vfubtq5qdu18ul5kWukX9fSFjTswbCdPU?=
- =?us-ascii?Q?WSsuooQs6Iseyl563pXqA3piyA+jfnX7m3B/gOIprBcMXcxTz0+EClyAjCzd?=
- =?us-ascii?Q?2oBmRRaySypEcw89vYyVWkXCMy3ZHXSyM3DfHs6xYuXg/EdcbhxyPPLt5uhm?=
- =?us-ascii?Q?DxJ86ujB85KUIPXYTEw44keeSZqICq1EDTiMusc4V3lxV9F7Kse7b3nj2A0N?=
- =?us-ascii?Q?znuSu6YKuIwnJYvmpJ6E7cvUS00VWQNrZyUTJhpEljVO77WP1VpyXqkorN2O?=
- =?us-ascii?Q?OvCgistjLuNUPrzQ6W7hje6W09eeJi81jnzV0i3N7VUAWzn8XNIokjfSLKhG?=
- =?us-ascii?Q?d5XGzwhOGeUdg2z6rKYnOi8CST+lMa4QLtsKhAOJnb6hDr5/NQIEZzz4ELqy?=
- =?us-ascii?Q?PX8xvkxOzQUjbB/zRxp+FylU1yV98VHR97jjS3ecuxmvFiCwtBbhSo4lV4BA?=
- =?us-ascii?Q?CfWgAsGVIyGN9Zy+tjGrFlCV7/NXtNjdbjNuq/h6be+T6OZflH48qUzP0Jke?=
- =?us-ascii?Q?biYtUm+2q+ia4F3+VFhKdXZvFKf60YIvAzbbSb0KXb3TWwr+krY2A+c7SV10?=
- =?us-ascii?Q?bDeEY9UGa87e08nCamFYgTVdmBxGB+7r2hGIuXGKC/9qWCs+HATq72eiv90d?=
- =?us-ascii?Q?sEDmvqlZQ0DGylWGsjJDw6Dl+gnQxycGpy7VgLBn+1HFuNsq51N3vCeq8QgH?=
- =?us-ascii?Q?jM6YrAmRMiffoUyIC8MaETHpV9tYtAd5j50H4YXU2NBQ/BNaV0JtMIMLkmxj?=
- =?us-ascii?Q?u4V6/SPcFUNfy1VTgYJAdiWVpJ/YD9nu413XAHdrlKyga4niondGtSdb6sH/?=
- =?us-ascii?Q?rPzXgws/kLoViJTrT+/1vuNT+uNkJ0oIF5cR6gNSji0CS2FSgsAvStvFtrNG?=
- =?us-ascii?Q?TmCBTvHX61+K2tVMC3TOuG0IYtPsOinpm6N8qE7ecL7Ew4PCKqfxLZw1BDXA?=
- =?us-ascii?Q?RdjtZtSte3aiW0lvjm+AmpBYUpm7g4sVa1JkTavleqzJ8KZbzoZzWNYXpQkZ?=
- =?us-ascii?Q?Xai5PfW//ipdRjQRxgelBAsXGHBe/QPNx7GVcYFSGIMJQg3beQ2hMHtdQI+i?=
- =?us-ascii?Q?Iu1Z7tkvjs4yyBSLv7fJFSC3wiqUZNISHCfD1k162uA8FC8Oh3NzwK5Op0Vz?=
- =?us-ascii?Q?sEhYcxGDJOb0toQB0/UjSQKWHj0C0wIPPZWAH61RZKNigDlV6bVHOUSENXrk?=
- =?us-ascii?Q?A69Bf2egeysNiBIf9I44JHa8+VXFj3vF9jlnEshgdM2oR6TFNwj0RYPE9Hz8?=
- =?us-ascii?Q?SxZOgLfFkvY=3D?=
+X-Microsoft-Antispam: BCL:0;ARA:13230040|1800799024|366016|7416014|376014;
+X-Microsoft-Antispam-Message-Info: =?us-ascii?Q?/rLflRsoQpdCWRLTZIGqJeR1tyL9DxlTiGm4368ujmMWNO+I7RXQAwgC9Tvn?=
+ =?us-ascii?Q?fWe4Yv+bTAS+39HMPEU6juZGjn4EaqwLjGGAvquAN8lt5EFuzX8JU+ZYOdu4?=
+ =?us-ascii?Q?SKJI//BlpL/OfumTdIcwYaDToqWiiiH83LMq21Vut/V2vUj1OhRYTsl6oGel?=
+ =?us-ascii?Q?TvxjrkoTDTvSf0Cj0wku/8FvxcCtsTsSrennIRa8P5aLjz1WCOnSUUxXJ5dQ?=
+ =?us-ascii?Q?Bg+QrUNIbH5I0U3KBi9RLcYaKYffDDOjgWLFtVEsVxcMS+fq6F2D5E1K00rw?=
+ =?us-ascii?Q?7nAZ6xfQnFvchIMODJ1uO2+ViKdVZzQr1wLzRAXqcgPo/bSWSwz3rKLMI9xa?=
+ =?us-ascii?Q?dW8oWQQxlwYV7M4/B/VIpztNFrJZF+PIWTE2wreUMZzQlqNgEfzV0iYyiuap?=
+ =?us-ascii?Q?OICVMGLIaojkYff+LRCsdpgpiTBzhvicVCXxPHbeWDrJJjoyi8GK9Kh58f0d?=
+ =?us-ascii?Q?OAbtFdFBBhYo8J0I3UAQBWFGo2W9xdgT0mYXIvDunES8xusJ2T6RAFtywiLU?=
+ =?us-ascii?Q?KYPblo0g3iHIgshGQ1m8b0wjb+EnPhPqEkfRoMWnJTCiQtob7m6FOUUaZ8fj?=
+ =?us-ascii?Q?Jcfwab6TGlTBFxyKl3ItFP1meZCz6yKzlzFoFLKOybGoA4ztWal1CLFw86FP?=
+ =?us-ascii?Q?tdibrCs0oE6kvcCHqONVcPwMrb8YwClehL7SM4X8NWdjUnRIVA2ck6hdw+JZ?=
+ =?us-ascii?Q?kNSRgzwY9rjE0Xh4nZMpjT6jC06iLscfaULykQzCp3g4T6NiEYd/H8kzW9+f?=
+ =?us-ascii?Q?1AQVlmQ2L/CyVRtpEfO/35wtGV+YebUuJjDPmWU319TOJsqXXIoiqWAv/zJM?=
+ =?us-ascii?Q?HhNbBooSuSqxWgnLSY2WrhZNZY8zDDh6t3WIq8xC9SeqhSm9QbjDSsxxDojE?=
+ =?us-ascii?Q?lZr2rtKJXWKEK0UMPI+5PXeqjL0EDq/JwsFGUjaKCBJKdLG/imAtdwgnaGxB?=
+ =?us-ascii?Q?SUBDpJsgKCb6XezN6MV3Czu9yed6Pb36252Ku4t0eo+B0NRnopcTN5l4JQiu?=
+ =?us-ascii?Q?zeAzR2U590pNzGu0o3767kFe15TVde2WIYMbB4J8z9tlKIiKB224syd3LS2q?=
+ =?us-ascii?Q?NdDf62RO0QkXVkGRfXt6kyk1I86KYWK/kv5ROezg+uQC+OuhBwbAyQyrL1QS?=
+ =?us-ascii?Q?QOcPAjKm8GmNF6waFeOdXoJcHDjegPJ7ET/j8jvl0WFbHGH54kqpPxj35X+6?=
+ =?us-ascii?Q?ClbHeqV70/3C8hzFqMyVzaBvmx89AlEgRpNaVWXJWBzZzewbPgbD9xyU7JVs?=
+ =?us-ascii?Q?9U5YmK9zybLwa3H5H5CJTP+vPkHnUNWxmvtHmJdltFU6hxOjZNADbV+2IJWE?=
+ =?us-ascii?Q?F3g2RLtx9wgKeSDcQH9EQRU+pc/po8foCnYrH6dXtkH1VSdfkWos1zGxgpB0?=
+ =?us-ascii?Q?aQCy9hjxZmOiKutSf6nYgokbyWU20tn/LOT3QkE4/Jq34sMOR0XVAWDU1tCY?=
+ =?us-ascii?Q?kqaK9xFJcmE=3D?=
 X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
  IPV:NLI; SFV:NSPM; H:SN7PR12MB8059.namprd12.prod.outlook.com; PTR:; CAT:NONE;
- SFS:(13230040)(366016)(7416014)(376014)(1800799024); DIR:OUT; SFP:1101; 
+ SFS:(13230040)(1800799024)(366016)(7416014)(376014); DIR:OUT; SFP:1101; 
 X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: =?us-ascii?Q?4s9k1D1qH4qdKXTnrZP0S8jyfw83iQtD9/79atwcTcA7PXuMhnGuqOdDsdQn?=
- =?us-ascii?Q?qef+1hAuuVwHD0+o8Zm0iTF4OYZuyCXzImJohphsMz7ViT02PFw+fMnzfXXI?=
- =?us-ascii?Q?6qXAqL10ziqa8OE0Xe0iN8h7223P6HpU5Do/W6W/A2qfdYUs/CkR2tmi6Umx?=
- =?us-ascii?Q?9f3pPawOhDFmN5rixSYB3527T30A2WpZq4QVLYRhtApuYAqInrujoTEMeiht?=
- =?us-ascii?Q?mKHZaEStgxOOUROlWabkKrO4eD2TVVmAuxrGB+uANMsDjq82m+EQoy+eNNck?=
- =?us-ascii?Q?xUcmepCHR1DOAv8NgfuZthuUD+TwZRHEpDrQItNQOdhVI1rF/fC2NPQu9vfi?=
- =?us-ascii?Q?Lu5Z8VOKzSUbMwCEhADFYI+A1n1xOJZOj0NOXAxk7LhJCNlWpVnDzW+NUoMi?=
- =?us-ascii?Q?NoRgw529gZobsk3ffyTyBmkoM3TnZxWj49EpfmYt00cazquP7o2CRp/bGIYW?=
- =?us-ascii?Q?+3QBmg9muOfMd5glycbCwY+nGuiN0392arNpSvwzLARYNh301qjt7PadWRN9?=
- =?us-ascii?Q?zbHFdKRer6mECYG52N3CmcnpSADeNK7m+CfXbaTSco/OdiIaq2RKNLHa2quU?=
- =?us-ascii?Q?O+Ah1sH9ZfcXk49VVgeprROwOPZpFqqsm39nMdg7fB/AU8W27VuIbL6tbckP?=
- =?us-ascii?Q?7BQH9nmAczLsIjdKkfFj8EKkosbFoLzywDfyNd2GJ4fYGfzZu2Q1PfCm5k+i?=
- =?us-ascii?Q?7Tvfv20dGKciB8KTO4R6vQkGTPYuOudaf5NyKmGfi7o45w8VBVSWyjtMN0n9?=
- =?us-ascii?Q?gJ8K7F9srXq9X69hncX9AAc2R8xBUaNssljDR5x7lq2MWEfHXXnPJxvBb8Mq?=
- =?us-ascii?Q?yjy80rGArDYGmWogrFrNENWbwWTkascSIizSQkaDwQBcvGciUi/rp6lYteda?=
- =?us-ascii?Q?3M9JGc4bitDOU4O5F6s7FhtLysly+vLGlNnGCTLIknAzNBbrQ/bV72PlS/rD?=
- =?us-ascii?Q?B1+keYZDRafwKFTJ/eTDHlTDDMnvVJulZbjmIQiepyAYLMtmoWnn4du4QSMS?=
- =?us-ascii?Q?I3GQy/8qxwtfXguayLOIXdZsf9BULzi2WOt2z5izc27KvHYyuVJZfG0F/gUd?=
- =?us-ascii?Q?YcFe9E151A2nroEoaFoDYMtObFb9o7XCuRFGrdnInV5beAmaq6WLyR0NS+9b?=
- =?us-ascii?Q?bfbB/Kgf498vlLbbfRaheumkASkM/htHoDoHtiAVy9yPP/Ui/ihzTrKpk9PG?=
- =?us-ascii?Q?+vwWl88zlX32KKk+wP9Pap4HidSAkFS4Bg9KAtwgm1TlPChXCLnaQ1apBAxw?=
- =?us-ascii?Q?B0TnQoyX/tTO3Drd8wPXFwIKo5gCWQXXKUqG5wbD5H6Tny/F07zLJMbyzwuy?=
- =?us-ascii?Q?o8GAk4wYg1vkZ7viATheNQra1MxSo7U7M4PNTAs1pXAyCQr3KQAmPutlEe46?=
- =?us-ascii?Q?sg8ue0bkamxdnEkz2P0MEn5FJe725Sgk+U2aTw8BNJFriaqwPtGFnUhlo1Qz?=
- =?us-ascii?Q?qOqcZLXCTTkhUFSYrd7u8WYeZJ5YfI38nP5LdsjPNpYuI2fmzIu4SdP1Ktyz?=
- =?us-ascii?Q?ABIvwyqGDtH5qbggf4axZV9xr5NjDST8KeLNoyLFgum9f7HieQi3Oorhzesm?=
- =?us-ascii?Q?QHXSwxHADOzXix5koDDaMzys9GK9k+8bqiWgJNI5?=
+X-MS-Exchange-AntiSpam-MessageData-0: =?us-ascii?Q?zVYrv2pUhQKjzwHpNvXx3hU0sZ+t2cil/6MUhlhp/sl1CUq2BW34aK+YyHhO?=
+ =?us-ascii?Q?Exbb8HRGFkCygzuq2AaqHOB4KlJpFD1bl21xcfYUNTlgMjM4mGeBuXzNxUfj?=
+ =?us-ascii?Q?6GMsoyB1ytSuw8/kifupHpyfZ7yRKFqxYEIolfYlrB8Efaa4AWbRP+Vzpjf2?=
+ =?us-ascii?Q?LLPhKvPa6cLsiaRbOqlzUtgiPU87k5+L063KVGFE8ZLK+4pSHdi5PTA/Ewm3?=
+ =?us-ascii?Q?VyOEGVVRylAIZ93fld0RQ75/spoSQkqPtqVtpdMJ2tOCdLVXtS6ox8WgIyuz?=
+ =?us-ascii?Q?q9LwztMdIzj7vSvs6QjafapD9vMWBIAwUFWWJ1+wx4LcpPyHmF2xoR0e29KJ?=
+ =?us-ascii?Q?H+Z3bPF53Fn20qe353rOFl/XaHFGr+myvf/lvqZuRK8xf2Orc4biANCJJhVD?=
+ =?us-ascii?Q?0gnnfqcv9BKOYGwVIGW3v5xNYxaWPGQ3mCoA5kmmf/S2774f/G2NKIfHPiud?=
+ =?us-ascii?Q?7jHfIPVYwXoDUZU4Mattm4UFX3k6xFbVAxHU4h4aJnFbeTu42YX9t48RoK7/?=
+ =?us-ascii?Q?FTN4Q0SITjgQRxKKAIKS9amB7uB5kW6BtIxe26ofqmuL9v+9t9pQDAaHimHE?=
+ =?us-ascii?Q?Zjh9qTyfhOLjX3EcZY827m/WpvJ9bv5JjQtZfySD92ndYGs8+5sfr/cEaw8K?=
+ =?us-ascii?Q?ChlnAwQgJMvgcKKmxC2/lH7/RGMTFGIc6SSCojswnFS9SneV5squrHLNGQWC?=
+ =?us-ascii?Q?mwTx6fOR6pMiNYrnhNDTEzDZzAk56NXXv0uhzQhJ8dzahq6rHNUxo1zKOwKF?=
+ =?us-ascii?Q?wFc16jL/8Ls/eRYvVtk9P+z5aRUFs135TTUXgdRAsGtJQAlt3c6zgefIdF8V?=
+ =?us-ascii?Q?o/dVdGv0+xTL+5ogGYJKoL3REgy2/sRZ5AsjSR78a9+u42zwH1Q9LIPIc8na?=
+ =?us-ascii?Q?/02OnooLCnuZTFaNBxNDhUAq+uijLaDI2qOk8IxAjz72fQ7k4eofA95fDyVl?=
+ =?us-ascii?Q?uWriLakQr92nv3C6lh9OAAGJgLluOO6jrJMpTyLaJ11CHu96+9KnYwYbJV4V?=
+ =?us-ascii?Q?rFolyyxyzmoDZc6Tirm5jW4s1+BDTplj5IoEIhwUviRfcnB4b/FzbCWsaRw2?=
+ =?us-ascii?Q?zy6h4ygFto71vpyyEbWsWVXsh8r9s54BqjtrNg3ivgiSIyl0tykH/9BKjuk4?=
+ =?us-ascii?Q?0U9WLNNa1JQDPyhkfUFuLxkl87d38e9z/HejHTNrC8R/1LdPwAkFWCEFLS0+?=
+ =?us-ascii?Q?8g/9C8gxnKrPqvDw3rnPq6kx4hKeUFl1Ft9RFjbzkWvHbPXtoU+1O/Jx9cvL?=
+ =?us-ascii?Q?j9+se+SN5/FRq5SlqlRDzNEegXFBFnPrYnblQIetZVBnWTQy1C64Kg+k782X?=
+ =?us-ascii?Q?9VNXk2ufB7MTE4QPVlTffNHXmIBmnHcIbgaE/uLYC2odPmE/zgwSI2xG9uAm?=
+ =?us-ascii?Q?CXG90CtIJkuCWTD4dVGAq9Tk9OP3OGW34wTYR7UAJW4eh287w59U1lUHJrXR?=
+ =?us-ascii?Q?mDxRoQ1kniojSKEgJadbfjO5XcKpQ8zF9n76VgMZeEA/78FdBw67qx8ycPsL?=
+ =?us-ascii?Q?SkxvbChJmW5siiDqg8xLREnAAHK8MiAaLX+TiqAZcZEgTd3uZLqhldEehKvx?=
+ =?us-ascii?Q?X+pwl1vwgoGLt4TuZNvJmgfadDbc39q8WnzLxi1K?=
 X-OriginatorOrg: Nvidia.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: b7d8ef32-5623-4b53-af93-08ddf261357c
+X-MS-Exchange-CrossTenant-Network-Message-Id: c91e5f9f-2971-43ce-f264-08ddf2e8ed6d
 X-MS-Exchange-CrossTenant-AuthSource: SN7PR12MB8059.namprd12.prod.outlook.com
 X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 13 Sep 2025 01:02:28.1097 (UTC)
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 13 Sep 2025 17:13:58.7613 (UTC)
 X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
 X-MS-Exchange-CrossTenant-Id: 43083d15-7273-40c1-b7db-39efd9ccc17a
 X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: D0C4K7zGI0vPFf8M4JsbpEOBE5JlXKnnRchIbWCsbhe+F1nbLCxx1uOCibWarimxjQZc5VdEZXZP4oqqJVkbOw==
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: CY8PR12MB7241
+X-MS-Exchange-CrossTenant-UserPrincipalName: fzd5VToZb0N5KXe15X543LF1SoeTA0NmnDVynuXDi8fWCwKuqSgxIBR+nVhAtzFA7NvDGFx8AyKbmYy0eBFUvQ==
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: CYYPR12MB8730
 X-Mailman-Approved-At: Mon, 06 Oct 2025 20:46:16 +0000
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
@@ -162,52 +164,58 @@ List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-On Thu, Sep 11, 2025 at 10:26:08PM +0900, Alexandre Courbot wrote:
-> On Thu Sep 11, 2025 at 9:46 PM JST, Danilo Krummrich wrote:
-[..] 
-> >> By keeping the initialization in the GPU, we can keep the GSP object
-> >> architecture-independent, and I think it makes sense from a design point
-> >> of view. That's not to say this code should be in `gpu.rs`, maybe we
-> >> want to move it to a GPU HAL, or if we really want this as part of the
-> >> GSP a `gsp/boot` module supporting all the different archs. But I'd
-> >> prefer to think about this when we start supporting several
-> >> architectures.
-> >
-> > Didn't we talk about a struct Gsp that will eventually be returned by
-> > Self::start_gsp(), or did I make this up in my head?
-> >
-> > The way I think about this is that we'll have a struct Gsp that represents the
-> > entry point in the driver to mess with the GSP command queue.
-> >
-> > But either way, this throws up two questions, if Self::start_gsp() return a
-> > struct GspMemObjects instead (which is probably the same thing with a different
-> > name), then:
-> >
-> > Are we sure this won't need any locks? If it will need locking (which I expect)
-> > then it needs pin-init.
+On Sat, Sep 13, 2025 at 03:30:31PM +0200, Danilo Krummrich wrote:
+> On Sat Sep 13, 2025 at 3:02 AM CEST, Joel Fernandes wrote:
+> > Any chance we can initialize the locks later? We don't need locking until
+> > after the boot process is completed, and if there's a way we can dynamically
+> > "pin", where we hypothetically pin after the boot process completed, that
+> > might also work. Though I am not sure if that's something possible in
+> > Rust/rust4linux or if it makes sense.
 > 
-> Sorry, I have been imprecise: I should I said: "it can be moved" rather
-> than "it doesn't need to be pinned". In that case I don't think
-> `Gsp::new` needs to return an `impl PinInit`, right?
+> We can't partially initialize structures and then rely on accessing initialized
+> data only.
 
-If you don't mind clarifying for me, what is the difference between "it
-doesn't need to be pinned" and "it can be moved"? AFAICS, they mean the same
-thing. If you don't want move semantics on something, the only way to achieve
-that is pinning no?. If it can be moved, and it contains locks, then that will
-break unless pinned AFAICS. So if need locking in Gsp, which I think we'll
-need (to support sychrnoized command queue accesses), then I think pinning is
-unavoidable.
+Yet, that is exactly what the pin initialization sequence block does? The
+whole structure is not initialized yet you need access to already initialized
+fields.
 
-On the other hand, if just the firmware loading part is kept separate,
-then perhaps that part can remain unpinned?
+> This is one of the sources for memory bugs that Rust tries to solve.
+> You can wrap fields into Option types and initialize them later, which would
+> defer pin-init calls for the price of having Option fields around.
 
-Any chance we can initialize the locks later? We don't need locking until
-after the boot process is completed, and if there's a way we can dynamically
-"pin", where we hypothetically pin after the boot process completed, that
-might also work. Though I am not sure if that's something possible in
-Rust/rust4linux or if it makes sense.
+I am not denying the need for pinning. Also regarding Option, just thinking
+out loud but if something is optional temporary, maybe needing a new type
+like TempOption, and promote it to a non-option type later, I am not seeing
+that as completely outside the world, if there is a legitimate usecase that
+needs to be Option temporarily, but not later, what's wrong with that? It is
+"Optional" for the timebeing, but not later.
 
-Other thoughts?
+> However, we should never do such things. If there's the necessity to do
+> something like that, it indicates a design issue.
+> 
+> In this case, there's no problem, we can use pin-init without any issues right
+> away, and should do so.
+> 
+> pin-init is going to be an essential part of *every* Rust driver given that a
+> lot of the C infrastruture that we abstract requires pinned initialization, such
+> as locks and other synchronization primitives.
+
+To be honest, the pinning concept seems like an after thought for such a
+fundamental thing that we need, requiring additional macros, and bandaids on
+top of the language itself, to make it work for the kernel. I am not alone in
+that opinion. This should be first-class in a (systems) language, built into
+the language itself? I am talking about the whole pin initialization,
+accessing fields dances, etc.
+
+Also I am concerned that overusage of pinning defeats a lot of optimizations
+that Rust may be able to perform, especially forcefully pinning stuff that
+does not need all to be pinned (except to satisfy paranoia), thus generating
+suboptimal code gen. Not only does it require redesign and concerns over
+accesses to un-initialized fields, like we saw in the last 2-3 weeks, it also
+forces people into that when maybe there is a chance that underlying
+structures do not need to be pinned at all (for some usecases).
+
+These are just my opinions.
 
 thanks,
 
