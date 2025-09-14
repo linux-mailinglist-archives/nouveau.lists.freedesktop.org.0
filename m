@@ -2,67 +2,67 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id 91663B5674B
-	for <lists+nouveau@lfdr.de>; Sun, 14 Sep 2025 09:58:58 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 1A615B569C7
+	for <lists+nouveau@lfdr.de>; Sun, 14 Sep 2025 16:42:55 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 33AD710E053;
-	Sun, 14 Sep 2025 07:58:56 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 8AE0B10E140;
+	Sun, 14 Sep 2025 14:42:52 +0000 (UTC)
 Authentication-Results: gabe.freedesktop.org;
-	dkim=pass (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="iRwlpxRK";
+	dkim=pass (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="SyJ9u22k";
 	dkim-atps=neutral
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
 Received: from sea.source.kernel.org (sea.source.kernel.org [172.234.252.31])
- by gabe.freedesktop.org (Postfix) with ESMTPS id E80AD10E053;
- Sun, 14 Sep 2025 07:58:54 +0000 (UTC)
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 0B2DE10E140;
+ Sun, 14 Sep 2025 14:42:51 +0000 (UTC)
 Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by sea.source.kernel.org (Postfix) with ESMTP id 97409409D7;
- Sun, 14 Sep 2025 07:58:54 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 3F808C4CEF0;
- Sun, 14 Sep 2025 07:58:46 +0000 (UTC)
+ by sea.source.kernel.org (Postfix) with ESMTP id 6F9A841AF7;
+ Sun, 14 Sep 2025 14:42:50 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 90FD2C4CEF0;
+ Sun, 14 Sep 2025 14:42:42 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1757836734;
- bh=uz1xVp736uSxGyJV2q+yZ0bzLeyruMJpCl0NX2u+YDY=;
+ s=k20201202; t=1757860970;
+ bh=PzQNP+iXhbAYk0sG25Qch7JW6l/swG0JTlYB7VYGAkA=;
  h=Date:Cc:Subject:From:To:References:In-Reply-To:From;
- b=iRwlpxRKA0fAf/GCGQ9DQR0XqhKFY6HiWKEQ7dT1YIHzf9F7YYN47NraYtaedlYqD
- PH6vlJi6AEdcPanTIJNNr/HV40atxuXo7lrNNHwzEMexrd3Y88ofdVZ3yPfnm7sZ14
- bi6lSmsST+lW3D+ILXydyeZFCO/s3mDKlYv3CDgRpRc2w8D5SaOJpZi7kJZj5mBwuI
- 7ROzGVxdiFD8d3ts3SRuLuGepqqzFxMV4lxkmFB4MfRrnWLW1deLHyaYMnbn8krwIK
- HMFUjVHt6A7/qHjY0NEZyiIA3ADKGFD0q+m34Fk65rB9tKLwQge3d4szPjp8Ocdxtk
- RonRZtjFzk0wQ==
+ b=SyJ9u22kZEM6Iy0bBBL385iaJikOGqSCcxn6kHCIXdE55aDFRSzFnWoOFyM8oO2X0
+ SIL5oADcHfk8ScoXvbqrIvH88vkT7H3zunH9yAL589yrZK/X/QOED+GFejo1JvVYg7
+ eV9Yeo3L2S++pidfDuVhbjGcdf0vd/c43fH5nZTCgI4Ri77mgfZdUaVIQj8XG6xfy1
+ cn2GN9mUONavKphnFQbAXXjp/iq0y4OBSwwEh3oCRldFO1PpmE5jRUkaAxcy/eAilS
+ ZftbG+SKU7MEC8+hUcYjMkalaZWheyBM3F+hIagCwjlSVt4O+l1wwEJydCF0uO+TsU
+ 4k38Rf3H52BkQ==
 Mime-Version: 1.0
 Content-Transfer-Encoding: quoted-printable
 Content-Type: text/plain; charset=UTF-8
-Date: Sun, 14 Sep 2025 09:58:44 +0200
-Message-Id: <DCSD437J7EES.359ZQ732TXJY@kernel.org>
-Cc: "Alexandre Courbot" <acourbot@nvidia.com>, "Miguel Ojeda"
- <ojeda@kernel.org>, "Alex Gaynor" <alex.gaynor@gmail.com>, "Boqun Feng"
- <boqun.feng@gmail.com>, "Gary Guo" <gary@garyguo.net>,
- =?utf-8?q?Bj=C3=B6rn_Roy_Baron?= <bjorn3_gh@protonmail.com>, "Andreas
- Hindborg" <a.hindborg@kernel.org>, "Alice Ryhl" <aliceryhl@google.com>,
- "Trevor Gross" <tmgross@umich.edu>, "David Airlie" <airlied@gmail.com>,
- "Simona Vetter" <simona@ffwll.ch>, "Maarten Lankhorst"
- <maarten.lankhorst@linux.intel.com>, "Maxime Ripard" <mripard@kernel.org>,
- "Thomas Zimmermann" <tzimmermann@suse.de>, "John Hubbard"
- <jhubbard@nvidia.com>, "Alistair Popple" <apopple@nvidia.com>, "Timur Tabi"
- <ttabi@nvidia.com>, <rust-for-linux@vger.kernel.org>,
- <linux-kernel@vger.kernel.org>, <nouveau@lists.freedesktop.org>,
- <dri-devel@lists.freedesktop.org>
+Date: Sun, 14 Sep 2025 16:42:40 +0200
+Message-Id: <DCSLPCSQRYOY.3BX3008H5CVQP@kernel.org>
+Cc: "Miguel Ojeda" <miguel.ojeda.sandonis@gmail.com>, "Danilo Krummrich"
+ <dakr@kernel.org>, "Miguel Ojeda" <ojeda@kernel.org>, "Alex Gaynor"
+ <alex.gaynor@gmail.com>, "Boqun Feng" <boqun.feng@gmail.com>, "Gary Guo"
+ <gary@garyguo.net>, =?utf-8?q?Bj=C3=B6rn_Roy_Baron?=
+ <bjorn3_gh@protonmail.com>, "Andreas Hindborg" <a.hindborg@kernel.org>,
+ "Alice Ryhl" <aliceryhl@google.com>, "Trevor Gross" <tmgross@umich.edu>,
+ "David Airlie" <airlied@gmail.com>, "Simona Vetter" <simona@ffwll.ch>,
+ "Maarten Lankhorst" <maarten.lankhorst@linux.intel.com>, "Maxime Ripard"
+ <mripard@kernel.org>, "Thomas Zimmermann" <tzimmermann@suse.de>, "Alistair
+ Popple" <apopple@nvidia.com>, "Timur Tabi" <ttabi@nvidia.com>,
+ <rust-for-linux@vger.kernel.org>, <linux-kernel@vger.kernel.org>,
+ <nouveau@lists.freedesktop.org>, <dri-devel@lists.freedesktop.org>
 Subject: Re: [PATCH v5 02/12] gpu: nova-core: move GSP boot code to a
  dedicated method
 From: "Benno Lossin" <lossin@kernel.org>
-To: "Joel Fernandes" <joelagnelf@nvidia.com>, "Danilo Krummrich"
- <dakr@kernel.org>
+To: "Alexandre Courbot" <acourbot@nvidia.com>, "Joel Fernandes"
+ <joelagnelf@nvidia.com>, "John Hubbard" <jhubbard@nvidia.com>
 X-Mailer: aerc 0.21.0
-References: <20250911-nova_firmware-v5-0-5a8a33bddca1@nvidia.com>
- <20250911-nova_firmware-v5-2-5a8a33bddca1@nvidia.com>
+References: <20250911-nova_firmware-v5-2-5a8a33bddca1@nvidia.com>
  <e1755470-587b-4a43-8171-3d031b7fb4f4@kernel.org>
  <DCPYQNZG1OJK.2EE4JWJAROK57@nvidia.com>
  <ce74db34-77bc-4207-94c8-6e0580189448@kernel.org>
  <DCQ074EMFNIK.1OJLWJXWZLDXZ@nvidia.com> <20250913010226.GA1478480@joelbox2>
  <DCRPJKD0UHDQ.IOWSOB2IK06E@kernel.org> <20250913171357.GA1551194@joelbox2>
- <DCRXOMQN3Z20.2JCNP4BDEE79T@kernel.org> <20250913230254.GA1568515@joelbox2>
-In-Reply-To: <20250913230254.GA1568515@joelbox2>
+ <CANiq72n50MaMXeWdwvVOEQd3YEHbDRqeeRzbdY8hPnePtq-hnw@mail.gmail.com>
+ <b1aea815-68b4-4d6c-9e12-3a949ee290c6@nvidia.com>
+ <20250913220625.GA1564550@joelbox2> <DCS59IDCIKH1.2M3I6H0NVD0RG@nvidia.com>
+In-Reply-To: <DCS59IDCIKH1.2M3I6H0NVD0RG@nvidia.com>
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -77,97 +77,68 @@ List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-On Sun Sep 14, 2025 at 1:02 AM CEST, Joel Fernandes wrote:
-> On Sat, Sep 13, 2025 at 09:53:16PM +0200, Danilo Krummrich wrote:
->> On Sat Sep 13, 2025 at 7:13 PM CEST, Joel Fernandes wrote:
->> > On Sat, Sep 13, 2025 at 03:30:31PM +0200, Danilo Krummrich wrote:
->> >> However, we should never do such things. If there's the necessity to =
-do
->> >> something like that, it indicates a design issue.
->> >>=20
->> >> In this case, there's no problem, we can use pin-init without any iss=
-ues right
->> >> away, and should do so.
->> >>=20
->> >> pin-init is going to be an essential part of *every* Rust driver give=
-n that a
->> >> lot of the C infrastruture that we abstract requires pinned initializ=
-ation, such
->> >> as locks and other synchronization primitives.
->> >
->> > To be honest, the pinning concept seems like an after thought for such=
- a
->> > fundamental thing that we need, requiring additional macros, and banda=
-ids on
->> > top of the language itself, to make it work for the kernel. I am not a=
-lone in
->> > that opinion. This should be first-class in a (systems) language, buil=
-t into
->> > the language itself? I am talking about the whole pin initialization,
->> > accessing fields dances, etc.
->>=20
->> Yes, that's exactly why people (Benno) are already working on making thi=
-s a
->> language feature (here's a first step in this direction [1]).
->>=20
->> Benno should have more details on this.
->>=20
->> [1] https://github.com/rust-lang/rust/pull/146307
-
-That's the link to the implementation PR, if you know the internals of
-the compiler it sure is useful, but if not, only the first comment is :)
-
-> Ack, thanks for the pointer. I will study it further.
-
-I'd recommend looking at these links, as they talk more about the design
-& not the compiler implementation:
-
-* https://github.com/rust-lang/rust/issues/145383
-* https://hackmd.io/@rust-lang-team/S1I1aEc_lx
-* https://rust-lang.github.io/rust-project-goals/2025h2/field-projections.h=
-tml
-
-For pin specifically, there also is the pin-ergonomics effort:
-
-* https://github.com/rust-lang/rust/issues/130494
-
-Which is less general than the field projections that I'm working on,
-but more specific to pin & tries to make it more compiler internal.
-
-Now for pinned initialization, Alice has a project goal & proposal:
-
-* https://rust-lang.github.io/rust-project-goals/2025h2/in-place-initializa=
-tion.html
-* https://hackmd.io/%40aliceryhl/BJutRcPblx
-
-This proposal was heavily influenced by pin-init & we're actively
-working together with others from the Rust community in getting this to
-a language feature.
-
-It's a pretty complicated feature and people just worked around it
-before, which you can do when starting from the ground-up (similar to
-field projections).
-
->> > Also I am concerned that overusage of pinning defeats a lot of optimiz=
-ations
->>=20
->> pin-init does the oposite it allows us to use a single memory allocation=
- where
->> otherwise you would need multiple.
->>=20
->> Can you please show some optimizations that can not be done in drivers d=
-ue to
->> pin-init for dynamic allocations?
+On Sun Sep 14, 2025 at 3:49 AM CEST, Alexandre Courbot wrote:
+> On Sun Sep 14, 2025 at 7:06 AM JST, Joel Fernandes wrote:
+>> On Sat, Sep 13, 2025 at 02:29:54PM -0700, John Hubbard wrote:
+>>> Yes. It's only "paranoia" if the code is bug-free. So Rust itself
+>>> naturally will look "a little" paranoid, that's core to its mission. :)
+>>
+>> This seems to be taken out-of-context, I said "paranoia" mainly because =
+I am
+>> not sure if excessive use of pinning may tend to cause other problems. T=
+he
+>> "paranoia" is about over-usage of pinning. Personally, I don't prefer to=
+ pin
+>> stuff in my code until I absolutely need to, or when I start having need=
+s for
+>> pinning, like using spinlocks. Maybe I am wrong, but the way I learnt Ru=
+st,
+>> data movement is baked into it. I am not yet confident pinning will not
+>> constraint Rust code gen -- but that could just be a part of my learning
+>> journey that I have to convince myself it is Ok to do so in advance of
+>> actually requiring it even if you simply hypothetically anticipate needi=
+ng it
+>> (as Danilo pointed out that in practice this is not an issue and I do te=
+nd to
+>> agree with Miguel and Danilo because they are usually right :-D). I am
+>> researching counter examples :-)
 >
-> Aren't the vector resizing issues an example? The debugfs discussions for
-> example. You can't resize pinned vectors without boxing each element whic=
-h is
-> suboptimal due to requiring additional allocations?
+> You can look at the definition for `Pin` in [1], but it is so short we
+> can paste it here:
+>
+>     #[repr(transparent)]
+>     #[derive(Copy, Clone)]
+>     pub struct Pin<Ptr> {
+>         pointer: Ptr,
+>     }
+>
+> There isn't much getting in the way of optimized code generation - its
+> purpose is simply to constraint the acquisition of mutable references to
+> prevent moving the pointee out.
+>
+> I started this patchset a little bit skeptical about the need to pin so
+> many things, but after seeing the recent additions to `pin_init` and
+> rewriting the code as Danilo suggested, it starteds to click. The
+> supposed restrictions are in practice avoided by embracing the concept
+> fully, and in the end I got that feeling (familiar when writing Rust) of
+> being guided towards the right design - a bit like playing bowling with
+> gutter guards.
 
-Yes, but that's not really an optimization, is it? In the non-pinned
-case, the compiler wouldn't remove the allocation. You can select less
-efficient algorithms, since the objects aren't allowed to move, but that
-same restriction also applies in C.
+That's a great way to put it -- I had a similar experience when writing
+pin-init and thinking about it purely theoretically. Good to see that it
+works out in practice (and continues to do so :).
+
+> Yes, that means redesigning and rebasing our code, but that's also the
+> cost of learning a new language.
+>
+> And yes, things can still be a little bit rough around the edges, but
+> there is awareness and action taken to address these issues, at the
+> compiler level when relevant. This makes me confident for the future.
+
+If you have an issue that you cannot work around, or something that
+looks off, let me know. Maybe that's something that pin-init can deal
+better with or we can have another library that helps with it. After all
+pin-init is specially tailored for the kernel to work :)
 
 ---
 Cheers,
