@@ -2,69 +2,60 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id 14AD6B57092
-	for <lists+nouveau@lfdr.de>; Mon, 15 Sep 2025 08:44:52 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 3F76DB57532
+	for <lists+nouveau@lfdr.de>; Mon, 15 Sep 2025 11:48:31 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id B2AC610E2BA;
-	Mon, 15 Sep 2025 06:44:50 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 34F6710E27D;
+	Mon, 15 Sep 2025 09:48:29 +0000 (UTC)
 Authentication-Results: gabe.freedesktop.org;
-	dkim=pass (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="ragfCJFp";
+	dkim=pass (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="RDH2Pda8";
 	dkim-atps=neutral
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from tor.source.kernel.org (tor.source.kernel.org [172.105.4.254])
- by gabe.freedesktop.org (Postfix) with ESMTPS id D84CE10E2BA;
- Mon, 15 Sep 2025 06:44:49 +0000 (UTC)
+Received: from sea.source.kernel.org (sea.source.kernel.org [172.234.252.31])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id EF3BC10E27D;
+ Mon, 15 Sep 2025 09:48:27 +0000 (UTC)
 Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by tor.source.kernel.org (Postfix) with ESMTP id C291960191;
- Mon, 15 Sep 2025 06:44:48 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id C88CAC4CEF1;
- Mon, 15 Sep 2025 06:44:40 +0000 (UTC)
+ by sea.source.kernel.org (Postfix) with ESMTP id 7AFE444465;
+ Mon, 15 Sep 2025 09:48:27 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id EFB60C4CEF1;
+ Mon, 15 Sep 2025 09:48:21 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1757918688;
- bh=VAfu4F5dsdSIYPJ7m+h39bitRfmL3DD8Nk2X9dOJhtQ=;
- h=Date:Cc:Subject:From:To:References:In-Reply-To:From;
- b=ragfCJFpMq98eSjOvZnc9x4bbzLfT4wMQ01fDijHQdZh7LM9OkhjE3F1fZ74HrIcY
- sopGLJsszn2n4BRv0CdZ95jFgnyShWURJoGqX3SXTnuo0+YWrHoa412S2JfyMazepG
- KLRjF9QUYt/SV5WXgi8pwJYTTq0GQEUORXy7NEDpD37DcWgrhjwXXCLU6TnYhps3GP
- 8SNaBJ/AMr73WbgbSJWylotp1ZQELWaAFJp5Q/RnhlNo3D75E77EyUQXk0J9zlVqra
- C1xm44+rUYVMb8lwSeIR4hgvWfyZB8WO3R2ChkX7zwkcAurQcYZKC9WrfObwaF0WAi
- GoufU1EwP5CxQ==
+ s=k20201202; t=1757929707;
+ bh=aQeFPB6y0jxLv3hHgWg7/iEYKO+lhBgQVa0rrS32CaY=;
+ h=Date:Subject:Cc:To:From:References:In-Reply-To:From;
+ b=RDH2Pda8qSieRtXmX5Fs8NrBrvBEqpzxrH/66DX7dacK03qCw22kGwtLM9VPTv6Ih
+ ge9ps8VYDzSwYn1tJEvM9r6AaU7MhwrpOc6LUeMk4onwyo0Nttk1cZFFCdXhN6XNg7
+ aSui4SEMKc72HBG/mpPd2XYkmLbmnsVr2YdR/PvnmqTskrtHM4/zPhuKifec5rQ/p9
+ 60vtWmBksgxaibNvL0DGHDTUnUVN0zTwBHiguRy3v7rjoNFA0kqZ/kuhjLPqeZ2Nxo
+ 9y7zZkjYOBS+8RSKpHewzCB3My98T+AWhcimCM7Dii5Ez+JquIwoKCg+cvFqTU5hMg
+ KR1wVRytkmQEg==
 Mime-Version: 1.0
 Content-Transfer-Encoding: quoted-printable
 Content-Type: text/plain; charset=UTF-8
-Date: Mon, 15 Sep 2025 08:44:38 +0200
-Message-Id: <DCT65W48G0CN.19VOHM3178BWM@kernel.org>
-Cc: "Miguel Ojeda" <miguel.ojeda.sandonis@gmail.com>, "Danilo Krummrich"
- <dakr@kernel.org>, "Miguel Ojeda" <ojeda@kernel.org>, "Alex Gaynor"
+Date: Mon, 15 Sep 2025 11:48:19 +0200
+Message-Id: <DCTA2J6Y2PSC.1B48J5ZHUQCOI@kernel.org>
+Subject: Re: [PATCH] rust: pci: add PCI interrupt allocation and management
+ support
+Cc: <linux-kernel@vger.kernel.org>, <dri-devel@lists.freedesktop.org>,
+ <nouveau@lists.freedesktop.org>, <rust-for-linux@vger.kernel.org>,
+ <linux-pci@vger.kernel.org>, <acourbot@nvidia.com>, "Alistair Popple"
+ <apopple@nvidia.com>, "Miguel Ojeda" <ojeda@kernel.org>, "Alex Gaynor"
  <alex.gaynor@gmail.com>, "Boqun Feng" <boqun.feng@gmail.com>, "Gary Guo"
  <gary@garyguo.net>, =?utf-8?q?Bj=C3=B6rn_Roy_Baron?=
- <bjorn3_gh@protonmail.com>, "Andreas Hindborg" <a.hindborg@kernel.org>,
- "Alice Ryhl" <aliceryhl@google.com>, "Trevor Gross" <tmgross@umich.edu>,
- "David Airlie" <airlied@gmail.com>, "Simona Vetter" <simona@ffwll.ch>,
- "Maarten Lankhorst" <maarten.lankhorst@linux.intel.com>, "Maxime Ripard"
- <mripard@kernel.org>, "Thomas Zimmermann" <tzimmermann@suse.de>, "Alistair
- Popple" <apopple@nvidia.com>, "Timur Tabi" <ttabi@nvidia.com>,
- <rust-for-linux@vger.kernel.org>, <linux-kernel@vger.kernel.org>,
- <nouveau@lists.freedesktop.org>, <dri-devel@lists.freedesktop.org>
-Subject: Re: [PATCH v5 02/12] gpu: nova-core: move GSP boot code to a
- dedicated method
-From: "Benno Lossin" <lossin@kernel.org>
-To: "Alexandre Courbot" <acourbot@nvidia.com>, "Joel Fernandes"
- <joelagnelf@nvidia.com>, "John Hubbard" <jhubbard@nvidia.com>
-X-Mailer: aerc 0.21.0
-References: <20250911-nova_firmware-v5-2-5a8a33bddca1@nvidia.com>
- <e1755470-587b-4a43-8171-3d031b7fb4f4@kernel.org>
- <DCPYQNZG1OJK.2EE4JWJAROK57@nvidia.com>
- <ce74db34-77bc-4207-94c8-6e0580189448@kernel.org>
- <DCQ074EMFNIK.1OJLWJXWZLDXZ@nvidia.com> <20250913010226.GA1478480@joelbox2>
- <DCRPJKD0UHDQ.IOWSOB2IK06E@kernel.org> <20250913171357.GA1551194@joelbox2>
- <CANiq72n50MaMXeWdwvVOEQd3YEHbDRqeeRzbdY8hPnePtq-hnw@mail.gmail.com>
- <b1aea815-68b4-4d6c-9e12-3a949ee290c6@nvidia.com>
- <20250913220625.GA1564550@joelbox2> <DCS59IDCIKH1.2M3I6H0NVD0RG@nvidia.com>
- <DCSLPCSQRYOY.3BX3008H5CVQP@kernel.org>
- <DCT3XP3PVHJZ.2T0L221T3HW5R@nvidia.com>
-In-Reply-To: <DCT3XP3PVHJZ.2T0L221T3HW5R@nvidia.com>
+ <bjorn3_gh@protonmail.com>, "Benno Lossin" <lossin@kernel.org>, "Andreas
+ Hindborg" <a.hindborg@kernel.org>, "Alice Ryhl" <aliceryhl@google.com>,
+ "Trevor Gross" <tmgross@umich.edu>, "David Airlie" <airlied@gmail.com>,
+ "Simona Vetter" <simona@ffwll.ch>, "John Hubbard" <jhubbard@nvidia.com>,
+ "Timur Tabi" <ttabi@nvidia.com>, <joel@joelfernandes.org>, "Daniel Almeida"
+ <daniel.almeida@collabora.com>, "Bjorn Helgaas" <bhelgaas@google.com>,
+ =?utf-8?q?Krzysztof_Wilczy=C5=84ski?= <kwilczynski@kernel.org>
+To: "Joel Fernandes" <joelagnelf@nvidia.com>
+From: "Danilo Krummrich" <dakr@kernel.org>
+References: <20250910035415.381753-1-joelagnelf@nvidia.com>
+ <DCOZMX59W82I.1AH7XVW3RUX2D@kernel.org> <20250910180955.GA598866@joelbox2>
+ <20250910190239.GA727765@joelbox2>
+In-Reply-To: <20250910190239.GA727765@joelbox2>
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -79,95 +70,119 @@ List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-On Mon Sep 15, 2025 at 6:59 AM CEST, Alexandre Courbot wrote:
-> On Sun Sep 14, 2025 at 11:42 PM JST, Benno Lossin wrote:
->> On Sun Sep 14, 2025 at 3:49 AM CEST, Alexandre Courbot wrote:
->>> On Sun Sep 14, 2025 at 7:06 AM JST, Joel Fernandes wrote:
->>>> On Sat, Sep 13, 2025 at 02:29:54PM -0700, John Hubbard wrote:
->>>>> Yes. It's only "paranoia" if the code is bug-free. So Rust itself
->>>>> naturally will look "a little" paranoid, that's core to its mission. =
-:)
->>>>
->>>> This seems to be taken out-of-context, I said "paranoia" mainly becaus=
-e I am
->>>> not sure if excessive use of pinning may tend to cause other problems.=
- The
->>>> "paranoia" is about over-usage of pinning. Personally, I don't prefer =
-to pin
->>>> stuff in my code until I absolutely need to, or when I start having ne=
-eds for
->>>> pinning, like using spinlocks. Maybe I am wrong, but the way I learnt =
-Rust,
->>>> data movement is baked into it. I am not yet confident pinning will no=
-t
->>>> constraint Rust code gen -- but that could just be a part of my learni=
+On Wed Sep 10, 2025 at 9:02 PM CEST, Joel Fernandes wrote:
+> On Wed, Sep 10, 2025 at 02:09:55PM -0400, Joel Fernandes wrote:
+> [...]=20
+>> > > +    /// Allocate IRQ vectors for this PCI device.
+>> > > +    ///
+>> > > +    /// Allocates between `min_vecs` and `max_vecs` interrupt vecto=
+rs for the device.
+>> > > +    /// The allocation will use MSI-X, MSI, or legacy interrupts ba=
+sed on the `irq_types`
+>> > > +    /// parameter and hardware capabilities. When multiple types ar=
+e specified, the kernel
+>> > > +    /// will try them in order of preference: MSI-X first, then MSI=
+, then legacy interrupts.
+>> > > +    /// This is called during driver probe.
+>> > > +    ///
+>> > > +    /// # Arguments
+>> > > +    ///
+>> > > +    /// * `min_vecs` - Minimum number of vectors required
+>> > > +    /// * `max_vecs` - Maximum number of vectors to allocate
+>> > > +    /// * `irq_types` - Types of interrupts that can be used
+>> > > +    ///
+>> > > +    /// # Returns
+>> > > +    ///
+>> > > +    /// Returns the number of vectors successfully allocated, or an=
+ error if the allocation
+>> > > +    /// fails or cannot meet the minimum requirement.
+>> > > +    ///
+>> > > +    /// # Examples
+>> > > +    ///
+>> > > +    /// ```
+>> > > +    /// // Allocate using any available interrupt type in the order=
+ mentioned above.
+>> > > +    /// let nvecs =3D dev.alloc_irq_vectors(1, 32, IrqTypes::all())=
+?;
+>> > > +    ///
+>> > > +    /// // Allocate MSI or MSI-X only (no legacy interrupts)
+>> > > +    /// let msi_only =3D IrqTypes::default()
+>> > > +    ///     .with(IrqType::Msi)
+>> > > +    ///     .with(IrqType::MsiX);
+>> > > +    /// let nvecs =3D dev.alloc_irq_vectors(4, 16, msi_only)?;
+>> > > +    /// ```
+>> > > +    pub fn alloc_irq_vectors(
+>> > > +        &self,
+>> > > +        min_vecs: u32,
+>> > > +        max_vecs: u32,
+>> > > +        irq_types: IrqTypes,
+>> > > +    ) -> Result<u32> {
+>> > > +        // SAFETY: `self.as_raw` is guaranteed to be a pointer to a=
+ valid `struct pci_dev`.
+>> > > +        // `pci_alloc_irq_vectors` internally validates all paramet=
+ers and returns error codes.
+>> > > +        let ret =3D unsafe {
+>> > > +            bindings::pci_alloc_irq_vectors(self.as_raw(), min_vecs=
+, max_vecs, irq_types.raw())
+>> > > +        };
+>> > > +
+>> > > +        to_result(ret)?;
+>> > > +        Ok(ret as u32)
+>> > > +    }
+>> >=20
+>> > This is only valid to be called from the Core context, as it modifies =
+internal
+>> > fields of the inner struct device.
+>>=20
+>> It is called from core context, the diff format confuses.
+>> >=20
+>> > Also, it would be nice if it would return a new type that can serve as=
+ argument
+>> > for irq_vector(), such that we don't have to rely on random integers.
+>>=20
+>> Makes sense, I will do that.
+>>=20
+> By the way, the "ret" value returned by pci_alloc_irq_vectors() is the nu=
+mber
+> of vectors, not the vector index.
+
+Sure, but the vector index passed to pci_irq_vector() must be in the range
+defined by the return value of pci_alloc_irq_vectors().
+
+I thought of e.g. Range<pci::IrqVector> as return value. This way you can e=
+asily
+iterate it and prove that it's an allocated vector index.
+
+> So basically there are 3 numbers that mean
+> different things:
+> 1. Number of vectors (as returned by alloc_irq_vectors).
+> 2. Index of a vector (passed to pci_irq_vector).
+> 3. The Linux IRQ number (passed to request_irq).
+>
+> And your point is well taken, in fact even in current code there is
+> ambiguity: irq_vector() accepts a vector index, where as request_irq()
+> accepts a Linux IRQ number, which are different numbers. I can try to cle=
+an
+> that up as well but let me know if you had any other thoughts. In fact, I
+> think Device<device::Bound>::request_irq() pci should just accept IrqRequ=
+est?
+
+Currently, pci::Device::request_irq() takes an IRQ vector index and calls
+irq_vector() internally to convert the vector index into an IRQ number.
+
+I'd keep this semantics, but introduce a new type IrqVector rather than usi=
 ng
->>>> journey that I have to convince myself it is Ok to do so in advance of
->>>> actually requiring it even if you simply hypothetically anticipate nee=
-ding it
->>>> (as Danilo pointed out that in practice this is not an issue and I do =
-tend to
->>>> agree with Miguel and Danilo because they are usually right :-D). I am
->>>> researching counter examples :-)
->>>
->>> You can look at the definition for `Pin` in [1], but it is so short we
->>> can paste it here:
->>>
->>>     #[repr(transparent)]
->>>     #[derive(Copy, Clone)]
->>>     pub struct Pin<Ptr> {
->>>         pointer: Ptr,
->>>     }
->>>
->>> There isn't much getting in the way of optimized code generation - its
->>> purpose is simply to constraint the acquisition of mutable references t=
-o
->>> prevent moving the pointee out.
->>>
->>> I started this patchset a little bit skeptical about the need to pin so
->>> many things, but after seeing the recent additions to `pin_init` and
->>> rewriting the code as Danilo suggested, it starteds to click. The
->>> supposed restrictions are in practice avoided by embracing the concept
->>> fully, and in the end I got that feeling (familiar when writing Rust) o=
-f
->>> being guided towards the right design - a bit like playing bowling with
->>> gutter guards.
->>
->> That's a great way to put it -- I had a similar experience when writing
->> pin-init and thinking about it purely theoretically. Good to see that it
->> works out in practice (and continues to do so :).
->>
->>> Yes, that means redesigning and rebasing our code, but that's also the
->>> cost of learning a new language.
->>>
->>> And yes, things can still be a little bit rough around the edges, but
->>> there is awareness and action taken to address these issues, at the
->>> compiler level when relevant. This makes me confident for the future.
->>
->> If you have an issue that you cannot work around, or something that
->> looks off, let me know. Maybe that's something that pin-init can deal
->> better with or we can have another library that helps with it. After all
->> pin-init is specially tailored for the kernel to work :)
->
-> I was thinking about the lack of access to already-initialized fields in
-> the initializer when writing this, which has been covered so thanks for
-> that. :)
->
-> One more thing I still don't know how to do without unsafe code is
-> accessing structurally-pinned members of a pinned object. I had expected
-> that projection methods would be generated for such members marked
-> `#[pin]`, but I haven't found anything yet. For instance, we need to
-> call mutable methods on a pinned member of a pinned object, and the only
-> way I have found to do this is to use unsafe code. Is there a better
-> way?
+the raw integer. So, drivers would call
 
-That also lands together with access to initialized fields :) Danilo
-already merged it into drm-rust-next: 619db96daf94 ("rust: pin-init: add
-pin projections to `#[pin_data]`").
+	// `irq_vecs` is of type `Range<pci::IrqVector>`.
+	let irq_vecs =3D dev.alloc_irq_vectors(1, 1, pci::IrqTypes::ANY)?;
+	let irq =3D KBox::pin_init(
+	   dev.request_irq(irq_vecs.start, ...)?,
+	)?;
 
-You can only project the entire struct at once, but most of the time
-that should be sufficient.
-
----
-Cheers,
-Benno
+Alternatively, to request all of them, if we have multiple, we can leverage
+KBox::pin_slice(), which will land in v6.18 (see alloc-next or rust-next br=
+anch
+in the Rust tree), so all irq::Registration objects can be stored in a sing=
+le
+allocation.
