@@ -2,89 +2,142 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id 73748B58443
-	for <lists+nouveau@lfdr.de>; Mon, 15 Sep 2025 20:11:49 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id A27BFB58449
+	for <lists+nouveau@lfdr.de>; Mon, 15 Sep 2025 20:14:35 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id A01EB10E2FE;
-	Mon, 15 Sep 2025 18:11:45 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 19DE810E358;
+	Mon, 15 Sep 2025 18:14:33 +0000 (UTC)
 Authentication-Results: gabe.freedesktop.org;
-	dkim=pass (1024-bit key; unprotected) header.d=redhat.com header.i=@redhat.com header.b="bdbQIu4Z";
+	dkim=pass (1024-bit key; unprotected) header.d=redhat.com header.i=@redhat.com header.b="AfsvQVHu";
 	dkim-atps=neutral
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
 Received: from us-smtp-delivery-124.mimecast.com
  (us-smtp-delivery-124.mimecast.com [170.10.129.124])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 9AE2710E0DA
- for <nouveau@lists.freedesktop.org>; Mon, 15 Sep 2025 18:11:44 +0000 (UTC)
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 0C0EA10E50D
+ for <nouveau@lists.freedesktop.org>; Mon, 15 Sep 2025 18:14:31 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1757959903;
+ s=mimecast20190719; t=1757960071;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:content-type:content-type:
  content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references;
- bh=hK6/QxiqX1Ye0/EX+LGPSXUG196qxZI4uN4qai5sMqY=;
- b=bdbQIu4Zd7Njmj87TbvP7c0jOG874mr4rR3VRvQzyreMqNn+67yJEVN4KSRQS90CjVjV3H
- Km0ZoPRFJrvmS0MxxrXWHSNgUhI0huE2VO4VD3kWeLgIPNpy/w1sXmOwklkjTSf2e9IpSE
- vhq75n211SLXoA/9RjRL1tzIBFqKjGg=
-Received: from mail-qv1-f72.google.com (mail-qv1-f72.google.com
- [209.85.219.72]) by relay.mimecast.com with ESMTP with STARTTLS
+ in-reply-to:in-reply-to:references:references:autocrypt:autocrypt;
+ bh=ccmp1kxtm1r5yzvVRBCl6E1iJCUdKa+HfAyiSct8ACA=;
+ b=AfsvQVHuUGdfgLJL+OpLZPa/2ypude8KtcOespE4w6rtR1ewzypZgBZPQ6Pk8Hv17AwjGI
+ EwVo9X00niZBQzettFSa7b6ZaeiAb5wx2aSsVnF4tuZIzS0RM4ktDTIDeQ6Rq3e/PCWGjQ
+ sWwhSGRqkCXzvn21eSmnIc7yYsHSrXM=
+Received: from mail-qv1-f70.google.com (mail-qv1-f70.google.com
+ [209.85.219.70]) by relay.mimecast.com with ESMTP with STARTTLS
  (version=TLSv1.3, cipher=TLS_AES_256_GCM_SHA384) id
- us-mta-91-RisqDZMtO4-6Pq87OwyZkg-1; Mon, 15 Sep 2025 14:11:41 -0400
-X-MC-Unique: RisqDZMtO4-6Pq87OwyZkg-1
-X-Mimecast-MFC-AGG-ID: RisqDZMtO4-6Pq87OwyZkg_1757959901
-Received: by mail-qv1-f72.google.com with SMTP id
- 6a1803df08f44-778eac53ed9so55072546d6.2
- for <nouveau@lists.freedesktop.org>; Mon, 15 Sep 2025 11:11:41 -0700 (PDT)
+ us-mta-609-G0W1uKpBNfasQnTD0zAAtQ-1; Mon, 15 Sep 2025 14:14:29 -0400
+X-MC-Unique: G0W1uKpBNfasQnTD0zAAtQ-1
+X-Mimecast-MFC-AGG-ID: G0W1uKpBNfasQnTD0zAAtQ_1757960069
+Received: by mail-qv1-f70.google.com with SMTP id
+ 6a1803df08f44-77766aadfd4so22013046d6.1
+ for <nouveau@lists.freedesktop.org>; Mon, 15 Sep 2025 11:14:29 -0700 (PDT)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1757959901; x=1758564701;
+ d=1e100.net; s=20230601; t=1757960069; x=1758564869;
  h=mime-version:user-agent:content-transfer-encoding:organization
- :references:in-reply-to:date:cc:to:from:subject:message-id
+ :autocrypt:references:in-reply-to:date:cc:to:from:subject:message-id
  :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=Y+9P+kkjiNyu8HmX3JXQkzwNMf8Ri8DWwK4gZ6URbX8=;
- b=QKG1Pu4NPAw2pM9pKyMu0kcA709Y1e7x7jndOh9cr0BXtJca+cBa/UuOfq8wsSCY/s
- /asgdVLvvuAWZYDt6/V5dDCai1g522+3nQMcsvPfcCXV65FeX0Ey/UNmW4QfzVxDyBvz
- 3p9fG55FqrBIQ24aadvU9yLI5CoRB8K1ZlPwe462L9zOUlxcSr5j2nD637dH8QW2tbkX
- +Gy3d5kcZrlPrpzPeXJakWCxNv9khVY9YqcJUhoyMN46haPOwNMUNC+nziC6dNIt0dd7
- c4xjiDr7Tip6/yra36diNVGbIxTmJmn4L5P3lLuOT2aI5GuIox37sWIBFWKOMO4iMj4U
- ffqQ==
+ bh=BuHqv0TTzwNYFlIWgvengPGbo6i8SYm/JvnNDqbMl28=;
+ b=hJ1erxnTtpVhV/yg2znFMHoGdRC2jQoiGgcV+rUa6wANr/2ooIjJsSrQ7Atlv7iqPj
+ MLs1Su1rE0H0+59NEE6Ezo0heYLyl5vlLWY9j3yGs9XopBRoynHkucu7m4DFqTXCkwxV
+ klvALZX+DvWPg3o9ESJGRx/LHk6tah5IdY4+39b5JM+kWRYUUR1W+HiRPyhuo0m4tRjj
+ wTgFTwzPHWCTBn2HAuc8gj1qZslW6FUGxPNEXAVNPWGmqy8nOzyRrtaRR60ehPcqA2rC
+ 90l0Ie0rERVDp/CbusdyKeJ6onnpwM08JNDwwbBomjdwIAKrqcOEcxEDcuWwFY+X//UE
+ hoMA==
 X-Forwarded-Encrypted: i=1;
- AJvYcCWMOMgivGQmhc+HtUDvpoIPtH33ZrloS9XXGzC7Bu58jqhd9fzVBWbRP7P73j8fn7x7h21cWY88@lists.freedesktop.org
-X-Gm-Message-State: AOJu0Yzt46j1j3woBl18lghU0ckTm7jYYtWVigfKFNUTvSGGD8QFX6XC
- MRQUZYZCJGsdP027YSxOW8KV4KGesuagmiwi0oCvNEMfdHsa3cUfg0wuNmAqK4SdIsphIy6G+hK
- C2QBqMzF/0+kbhQvM2syC4thViaTDhJiABPDJPNerRvwIwJa2Yt2yR68F8jCvUJZuWNk=
-X-Gm-Gg: ASbGncuOGO0VU1sIr0pCXhVh/FlNe3K0FQW1zG3zmP0etfQm3JFDf2Y0y4CQb/gBg4K
- Ky1hp9RujZw+F/FcYCOdPmjavN5xqB/f5nKeUg1Bb3k3aT4qtPOzsFEQoJvtOHsFXJWXFFg4coo
- VfkuOT7u8vwtDDeIF0rvFmKMvS2ZcdW8kCu+BWK1+Ub/zPLP+bZJ6DW4D/iVxoP+omodSXCfWMR
- FJGBAxAGb2E0NXgVrAEnIpXEgQ/Tot14TxGamGrh+ZshHsdkaKkNW4uGo2rhUIB2BkaoGs5EdXA
- ucwgkBXxdt8JZL4cUJpct22np5X/PcQM7rSdnOP+tz1kXsZSHTVXF9aMrktXuRDEYGrm9yUQBZq
- PK9IDah6fpTrq
-X-Received: by 2002:a05:6214:1cc8:b0:70f:a142:afe8 with SMTP id
- 6a1803df08f44-767c1f716dcmr165013926d6.32.1757959900929; 
- Mon, 15 Sep 2025 11:11:40 -0700 (PDT)
-X-Google-Smtp-Source: AGHT+IFQZ7EMz6jKJcg++l+rXmK/uT31b4WiIy8swn7mxk4YIfNhw8/IyMTLQHSXugbqoXCOmx+evA==
-X-Received: by 2002:a05:6214:1cc8:b0:70f:a142:afe8 with SMTP id
- 6a1803df08f44-767c1f716dcmr165013556d6.32.1757959900434; 
- Mon, 15 Sep 2025 11:11:40 -0700 (PDT)
+ AJvYcCU6+Fcz0C4il1h63HKibe4C/Iy/Jbx8hkjYySIRZ1Ic9sc9vLkhcOQwGlzerXLZOUy62Lkq8Ri/@lists.freedesktop.org
+X-Gm-Message-State: AOJu0YxgkdPr3+LmsFpZ/um4gPeCZ+Z8+YxZnX71npP2juHYKd/m5kxz
+ 2U39LFZKkYx/VihsFqUxZtLNHxzvYHZyk+UahtiSl5a3gPFf0z29dtH8C6WuycxSRRJFb0BvpSj
+ jYKVsdZSW/shOx0E6H2j2UjBEwl9rHFKnymyFuBST9ksRtlsL2u7Ozy2eEVb9GlFPR30=
+X-Gm-Gg: ASbGncvl4cCw4hRp7ee1b8SHN48FVlvTsSARCGcxPKgGyfdQZsNm2vGJNRsEfMzKGEJ
+ +TtCiPuEhnH0Jwkg5oUdw/jofsW4TOy3hLaWX3dRDYUyBCvAfE3Be9KWrtOtR+45AuQrTHiAO+G
+ kmMf9NRQj5FYyyoRqleQCxCfRTY+zPNJW6th87rQRF0cZVvs41NFWW8jMqfluSu3cKJtrTcdNTE
+ w4z3kLIN3ME76+asa4HWlRS/VKH+qYK3Ex616KoVtl9oB8E8eWF+COQz/ktVlmH2R6ivrmIqwW/
+ cVyXI8YaZszqcbrr7R4aBKlrIgm5A9L1iVLFcnH8ZOxfQZwTRyfWzJgBilS/oLN00wYpeYsOVNC
+ yx7DfGLvdejPC
+X-Received: by 2002:a05:620a:4686:b0:829:b669:c772 with SMTP id
+ af79cd13be357-829b669e835mr438750385a.57.1757960068987; 
+ Mon, 15 Sep 2025 11:14:28 -0700 (PDT)
+X-Google-Smtp-Source: AGHT+IE6HLGQGEeUJgluKm0bwYCKGrtM7mHoIz+S6EhRr6Vxha/1OnzODcQRKjK0Kk932YXAI39I7A==
+X-Received: by 2002:a05:620a:4686:b0:829:b669:c772 with SMTP id
+ af79cd13be357-829b669e835mr438745985a.57.1757960068400; 
+ Mon, 15 Sep 2025 11:14:28 -0700 (PDT)
 Received: from [192.168.8.208] (pool-108-49-39-135.bstnma.fios.verizon.net.
  [108.49.39.135]) by smtp.gmail.com with ESMTPSA id
- 6a1803df08f44-763bf43aae6sm80709816d6.56.2025.09.15.11.11.39
+ af79cd13be357-820ce19e020sm825884385a.52.2025.09.15.11.14.27
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 15 Sep 2025 11:11:39 -0700 (PDT)
-Message-ID: <3a8481ec2f5ff081534e85c6eee62da19880112a.camel@redhat.com>
-Subject: Re: [PATCH] drm/nouveau: Support reclocking on gp10b
+ Mon, 15 Sep 2025 11:14:27 -0700 (PDT)
+Message-ID: <80b8d0cf72d409f0e7c6cdaa2cc455e3c706659e.camel@redhat.com>
+Subject: Re: [PATCH v2] drm/nouveau: Support reclocking on gp10b
 From: Lyude Paul <lyude@redhat.com>
 To: webgeek1234@gmail.com, Danilo Krummrich <dakr@kernel.org>, David Airlie
  <airlied@gmail.com>, Simona Vetter <simona@ffwll.ch>
 Cc: linux-kernel@vger.kernel.org, dri-devel@lists.freedesktop.org, 
  nouveau@lists.freedesktop.org
-Date: Mon, 15 Sep 2025 14:11:38 -0400
-In-Reply-To: <20250822-gp10b-reclock-v1-1-5b03eaf3735a@gmail.com>
-References: <20250822-gp10b-reclock-v1-1-5b03eaf3735a@gmail.com>
+Date: Mon, 15 Sep 2025 14:14:26 -0400
+In-Reply-To: <20250823-gp10b-reclock-v2-1-90a1974a54e3@gmail.com>
+References: <20250823-gp10b-reclock-v2-1-90a1974a54e3@gmail.com>
+Autocrypt: addr=lyude@redhat.com; prefer-encrypt=mutual;
+ keydata=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
+ 8doKQgPpApRcFGaE=
 Organization: Red Hat Inc.
 User-Agent: Evolution 3.56.2 (3.56.2-1.fc42)
 MIME-Version: 1.0
 X-Mimecast-Spam-Score: 0
-X-Mimecast-MFC-PROC-ID: XNFAAZHEkGmrgej6Rz0BkBdPwHpm_r5LqZ7Gj9EIZPo_1757959901
+X-Mimecast-MFC-PROC-ID: ey0icb5hxGHL3e9yiS7-uG0TIebSc8RHFw-ZvUwWeyY_1757960069
 X-Mimecast-Originator: redhat.com
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
@@ -102,13 +155,12 @@ List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
+....
+oops! Sorry - I meant to respond to this version :)
+
 Reviewed-by: Lyude Paul <lyude@redhat.com>
 
-Since this was tested already with the devfreq patches on top I will push t=
-his
-+ the devfreq patch to drm-misc-next
-
-On Fri, 2025-08-22 at 19:58 -0500, Aaron Kling via B4 Relay wrote:
+On Sat, 2025-08-23 at 12:26 -0500, Aaron Kling via B4 Relay wrote:
 > From: Aaron Kling <webgeek1234@gmail.com>
 >=20
 > Starting with Tegra186, gpu clock handling is done by the bpmp and there
@@ -117,6 +169,11 @@ On Fri, 2025-08-22 at 19:58 -0500, Aaron Kling via B4 Relay wrote:
 > the rest. The pstate list is based on the downstream driver generates.
 >=20
 > Signed-off-by: Aaron Kling <webgeek1234@gmail.com>
+> ---
+> Changes in v2:
+> - Fix missing static as reported by kernel ci
+> - Link to v1: https://lore.kernel.org/r/20250822-gp10b-reclock-v1-1-5b03e=
+af3735a@gmail.com
 > ---
 >  drivers/gpu/drm/nouveau/include/nvkm/subdev/clk.h |   1 +
 >  drivers/gpu/drm/nouveau/nvkm/engine/device/base.c |   1 +
@@ -174,8 +231,8 @@ gpu/drm/nouveau/nvkm/engine/device/base.c
 > diff --git a/drivers/gpu/drm/nouveau/nvkm/subdev/clk/gp10b.c b/drivers/gp=
 u/drm/nouveau/nvkm/subdev/clk/gp10b.c
 > new file mode 100644
-> index 0000000000000000000000000000000000000000..eeee0b1f819a54b082dd33f65=
-97e7dd1889abf99
+> index 0000000000000000000000000000000000000000..a0be53ffeb4479e4c229bd6bd=
+e86bb6bdb082b56
 > --- /dev/null
 > +++ b/drivers/gpu/drm/nouveau/nvkm/subdev/clk/gp10b.c
 > @@ -0,0 +1,180 @@
@@ -208,7 +265,7 @@ u/drm/nouveau/nvkm/subdev/clk/gp10b.c
 > +=09return 0;
 > +}
 > +
-> +int
+> +static int
 > +gp10b_clk_read(struct nvkm_clk *base, enum nv_clk_src src)
 > +{
 > +=09struct gp10b_clk *clk =3D gp10b_clk(base);
