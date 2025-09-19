@@ -2,150 +2,150 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id 1C788BBF49C
-	for <lists+nouveau@lfdr.de>; Mon, 06 Oct 2025 22:47:08 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id A1F29BBF54A
+	for <lists+nouveau@lfdr.de>; Mon, 06 Oct 2025 22:47:42 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 4EA0610E4C5;
-	Mon,  6 Oct 2025 20:46:26 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 14D6410E54B;
+	Mon,  6 Oct 2025 20:46:30 +0000 (UTC)
 Authentication-Results: gabe.freedesktop.org;
-	dkim=pass (2048-bit key; unprotected) header.d=Nvidia.com header.i=@Nvidia.com header.b="Yl9L/cE9";
+	dkim=pass (2048-bit key; unprotected) header.d=Nvidia.com header.i=@Nvidia.com header.b="BMvSaHwL";
 	dkim-atps=neutral
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
 Received: from PH7PR06CU001.outbound.protection.outlook.com
- (mail-westus3azon11010060.outbound.protection.outlook.com [52.101.201.60])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 536C210E720;
- Wed, 17 Sep 2025 11:09:20 +0000 (UTC)
+ (mail-westus3azon11010037.outbound.protection.outlook.com [52.101.201.37])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 561C110E231;
+ Fri, 19 Sep 2025 23:02:38 +0000 (UTC)
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=ZaDMimkmxOgU1u3GPpF8Tta6Kjbta6FJD+zHvDDyAsYkzguRheeHWvs6HdAGSS46mfonE95pyJqZz2XzHWiM9xzGqjunfO2EJq3Tx2PlrOKwWb0yR0MbtyA/k+hz9FyHjD07V7Cfjh04KXhA2+yYRecuE2N/ozIJDSLLzYPHOc/SkGQpmLut1gdR67ASdT8HW7YO9IG3NkOPvuL2KTLqlFPvzXbtXkx2Dzk/j2El1GQojmMNGrrF9NKPIRfHQKi3nDiOlc7fhklMNphD1pFqFOfjTxyTCkd2UdZH96Zlaf2yX54M/WBq1W+rwcCZnACd/mbMh0jGHApTO3/2q9Bp3w==
+ b=SP1KIGxX+jamoRioSgioE0iLWIkaWcrMX0+dFzR/kFmJSDypO/txYiyydTeN/oBb1vgmwuNVHE2W49kVv2ZFOxCNZj7x+fNVJMZA6ZG81Y1JujJ3/3EX3t2dyBgeOwZm4uf5+8oNcLS4UEg9ONO5rkj/8zd+aoDJuCr2qxfcDy11x+UukmRcndUSyPhKpKfbp014IC/3HH3885ly7106SsaS1IJ618CmQetiEaHKT7M1FuUwVmv+S7zSPROOBPxVG1PfP9fyvYsyW+NJb8ztqDWeqxlTmhzEEXJBsvbkh4slsTjvKDVK0dEDAHmgvecr2cSfhpj2tpIW9UJa5j+8cQ==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
  s=arcselector10001;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=FFQjmbwZuvgBLQlktU8gQrEZbnInbsD3jUSH3a6v7xs=;
- b=HNBgJzgTFGGLoESf050Mg4WYOHQwhFM0y+XcK2CsJ3Q3MLxrm2tn4IvXfGdXwFuX0hPCmV+pCTrzxwnMMx7bB5/Bm5Fq0JdCkRtDZbLZBIHlwK5INV9Crk1mZCZGe0NVnAKHs+yKdY71LRGhdIjyhzyo5X+HZfsJImwGgK2r7rZ4i/QWUvEul2fYTV94WhvzeH1jDllQDuyTqQWMmVTcveBWw1YdmdtroDNyiudEyW3vFTTKll33in/DgNavCXN6sTNS9pY4cWoOAjf7LFX75Ypr7sfdAdGeIYKgNKqouQVWnD1ZHDyAQpsbBWPvePZHeevIME/HXaljtGJwm6mMLA==
+ bh=tlexG0DONbiyAf0E9auLvdEXsGi6joZ4PIGE1SAmZKo=;
+ b=Fq/KAhLm5BxwcTYt36JdKmwJlMAK5DsMWx1CbjCrY+0OZnFrUKNwa9bNd2/sdu43Nom6aLk0YaMhlSOP6n2kuSNH+EaAN57QR4QPCiv6Qnd17IjrFj2wCkMJXvMyTyihpAlBMr7fO8Xz1s2XlfmiFUC9nUmBJQCnPy8Oapcg8LcI9TNgsUdMNb8CAGT1UlcpvRuhI8NnPdoohvYttVdYOouU0sI47OnMLWCnlQGpNhOIoQgnZdc8QUXRJ3wTiY8y0yDnWdZNKBC2v5qPeX86t9XyXIwOlemdYKO3lFtsV/UY+vUs8qYS1wf2FxkgNXdHBZzyvYsGL957sNF7+QOaqg==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
  smtp.mailfrom=nvidia.com; dmarc=pass action=none header.from=nvidia.com;
  dkim=pass header.d=nvidia.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=Nvidia.com;
  s=selector2;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=FFQjmbwZuvgBLQlktU8gQrEZbnInbsD3jUSH3a6v7xs=;
- b=Yl9L/cE9vPIY9um2zmCBiZh88wJqfZ1UosH7f6ratSPufGZAmEYEZ/Lx60ilAuKo3Jm+7gLQlVbilp/zUK29GGiS4yNuWJWKg876MXVBhRYGfxYbYm1StBfow9sua0Y8XSYZ6RItJ1AcxdamoD99SBqKFjkDrvMFRP/bvFab5TUywD91CHgJ9ZfETuS3/4ZpaHDlCYTwuwgDdkddijQLbI4NZJiE0qK2oLEiA2PVs6Ftsc/Ud9pcTCn0GFiPJSf56YphPLA4sGRUgtepPmBFHo7vmJdfkVUgqklREZysh2ArrcMfqUZQGrL/+haAPh7QxtgpG/F2qJdM/FHUXEpU1w==
+ bh=tlexG0DONbiyAf0E9auLvdEXsGi6joZ4PIGE1SAmZKo=;
+ b=BMvSaHwL7tQeAYtBJpq3iRUG3NxR5754G7k9vGCKiEUsle5IVb7jwCUqCi3sRkgFb8rFzOLTpFvwR3GA0YjR2bqfIc5Bgzd7iNZ9wVTcbM429XYB41QV0DxCk1dDx1nU9YWRqSmSjhGzIAULlXQMjzfop/jHkPHWlaFmdO6x41c/AwFUnf9GB+SBTLn58zeTjq+u6BiFdoIZoVlJGXoMIKd7RFt6DEmNITEJoFqmC7Oh5t6mQhuo0sF/JqycOXxNexsuEOexjSkmL0tvTxWV4VwiPa3ytwsjyvMWS/aV1gfa2peVAk6bFzgW1lFGLTGHonb48uVbeFkPZnzlgerdHA==
 Authentication-Results: dkim=none (message not signed)
  header.d=none;dmarc=none action=none header.from=nvidia.com;
 Received: from SN7PR12MB8059.namprd12.prod.outlook.com (2603:10b6:806:32b::7)
- by DS0PR12MB7826.namprd12.prod.outlook.com (2603:10b6:8:148::6) with
- Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9115.19; Wed, 17 Sep
- 2025 11:09:16 +0000
+ by IA1PR12MB6163.namprd12.prod.outlook.com (2603:10b6:208:3e9::22)
+ with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9137.14; Fri, 19 Sep
+ 2025 23:02:34 +0000
 Received: from SN7PR12MB8059.namprd12.prod.outlook.com
  ([fe80::4ee2:654e:1fe8:4b91]) by SN7PR12MB8059.namprd12.prod.outlook.com
- ([fe80::4ee2:654e:1fe8:4b91%3]) with mapi id 15.20.9115.022; Wed, 17 Sep 2025
- 11:09:16 +0000
-Date: Wed, 17 Sep 2025 07:09:14 -0400
+ ([fe80::4ee2:654e:1fe8:4b91%3]) with mapi id 15.20.9137.012; Fri, 19 Sep 2025
+ 23:02:34 +0000
+Date: Fri, 19 Sep 2025 19:02:27 -0400
 From: Joel Fernandes <joelagnelf@nvidia.com>
-To: Danilo Krummrich <dakr@kernel.org>
+To: Yury Norov <yury.norov@gmail.com>, acourbot@nvidia.com
 Cc: linux-kernel@vger.kernel.org, dri-devel@lists.freedesktop.org,
- nouveau@lists.freedesktop.org, rust-for-linux@vger.kernel.org,
- linux-pci@vger.kernel.org, acourbot@nvidia.com,
- Alistair Popple <apopple@nvidia.com>, Miguel Ojeda <ojeda@kernel.org>,
- Alex Gaynor <alex.gaynor@gmail.com>,
+ dakr@kernel.org, Alistair Popple <apopple@nvidia.com>,
+ Miguel Ojeda <ojeda@kernel.org>, Alex Gaynor <alex.gaynor@gmail.com>,
  Boqun Feng <boqun.feng@gmail.com>, Gary Guo <gary@garyguo.net>,
- =?iso-8859-1?Q?Bj=F6rn?= Roy Baron <bjorn3_gh@protonmail.com>,
- Benno Lossin <lossin@kernel.org>, Andreas Hindborg <a.hindborg@kernel.org>,
+ bjorn3_gh@protonmail.com, Benno Lossin <lossin@kernel.org>,
+ Andreas Hindborg <a.hindborg@kernel.org>,
  Alice Ryhl <aliceryhl@google.com>, Trevor Gross <tmgross@umich.edu>,
  David Airlie <airlied@gmail.com>, Simona Vetter <simona@ffwll.ch>,
+ Maarten Lankhorst <maarten.lankhorst@linux.intel.com>,
+ Maxime Ripard <mripard@kernel.org>,
+ Thomas Zimmermann <tzimmermann@suse.de>,
  John Hubbard <jhubbard@nvidia.com>, Timur Tabi <ttabi@nvidia.com>,
- joel@joelfernandes.org, Daniel Almeida <daniel.almeida@collabora.com>,
- Bjorn Helgaas <bhelgaas@google.com>,
- Krzysztof =?utf-8?Q?Wilczy=C5=84ski?= <kwilczynski@kernel.org>
-Subject: Re: [PATCH] rust: pci: add PCI interrupt allocation and management
- support
-Message-ID: <20250917110914.GA1797159@joelbox2>
-References: <20250910035415.381753-1-joelagnelf@nvidia.com>
- <DCOZMX59W82I.1AH7XVW3RUX2D@kernel.org>
- <20250910180955.GA598866@joelbox2>
- <20250910190239.GA727765@joelbox2>
- <DCTA2J6Y2PSC.1B48J5ZHUQCOI@kernel.org>
+ joel@joelfernandes.org, Elle Rhumsaa <elle@weathered-steel.dev>,
+ Daniel Almeida <daniel.almeida@collabora.com>,
+ nouveau@lists.freedesktop.org
+Subject: Re: [PATCH v3 5/5] rust: Add KUNIT tests for bitfield
+Message-ID: <20250919230227.GA1901670@joelbox2>
+References: <20250909212039.227221-1-joelagnelf@nvidia.com>
+ <20250909212039.227221-6-joelagnelf@nvidia.com>
+ <aMDq2ln1ivFol_Db@yury>
+ <bbd6c5f8-8ad2-4dac-a3a4-b08de52f187b@nvidia.com>
+ <aMIqGBoNaJ7rUrYQ@yury> <20250916095918.GA1647262@joelbox2>
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
-In-Reply-To: <DCTA2J6Y2PSC.1B48J5ZHUQCOI@kernel.org>
-X-ClientProxiedBy: BL6PEPF00016410.NAMP222.PROD.OUTLOOK.COM
- (2603:10b6:22e:400:0:1004:0:17) To SN7PR12MB8059.namprd12.prod.outlook.com
+In-Reply-To: <20250916095918.GA1647262@joelbox2>
+X-ClientProxiedBy: BLAPR03CA0053.namprd03.prod.outlook.com
+ (2603:10b6:208:32d::28) To SN7PR12MB8059.namprd12.prod.outlook.com
  (2603:10b6:806:32b::7)
 MIME-Version: 1.0
 X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: SN7PR12MB8059:EE_|DS0PR12MB7826:EE_
-X-MS-Office365-Filtering-Correlation-Id: cb4703f4-89e5-4ecb-ea6f-08ddf5daa417
+X-MS-TrafficTypeDiagnostic: SN7PR12MB8059:EE_|IA1PR12MB6163:EE_
+X-MS-Office365-Filtering-Correlation-Id: 75a36620-d55e-4835-1b8c-08ddf7d09e5a
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0;ARA:13230040|7416014|1800799024|376014|366016;
-X-Microsoft-Antispam-Message-Info: =?us-ascii?Q?SprWADx/u8ZpAEWoithsBQKLvhWbmOvg+mv6oC6ZCl92+KHf8SOqj0v7DSTz?=
- =?us-ascii?Q?+EJKbQP+aYdiSJuZYoY9cqUYcEP6ljehc8rSV48ciLhuxJVoskvy6fCa4kMT?=
- =?us-ascii?Q?j1glkcJv2NxkSo09xi9vMMnU8jRk1UsaKm9OyxZZG+gcnpgREXa7vtV1O0vT?=
- =?us-ascii?Q?mH+zpydngCQ/kxGNhCO/DTV3iXvnzMXwWNaU2Wi68QvBBm69FBjfRkTz2C81?=
- =?us-ascii?Q?LUKxPW2KFiKXd60s9I3Sc35s68KXFlq9iYnMRZroo1/rDAw2GhkhgWmiq2fd?=
- =?us-ascii?Q?4ERwlPY1YJlJ01dAmWpZNrLamnO3/nvLNpEDAY9dndLqzC1foRkokDe/ZjJO?=
- =?us-ascii?Q?UF3RKhMoLWMHzkuOFwU0Ujni3ULS2pN4NUqbZ+q5r1j1qOjOeWccrPeLNoq+?=
- =?us-ascii?Q?SNW2huXguzouvzMEOtC0Mk/NwDoBl0DQr3qec2gzN009Hf7USUejO0uEAzki?=
- =?us-ascii?Q?P/bRz5ku8goZndFvi2gUhk2YlBmj4niAf8YEUeF83FBMDJOwGNWJMd6OdlwV?=
- =?us-ascii?Q?TxpGVbTUMmI/FRckl79EjWkNHkv8NIe5oh2Ywt2TRH9gbwTWa9Hwlt0YD4OB?=
- =?us-ascii?Q?7N991UHM6PiPd5Xm2O0+RMfOpX192vJFxJFLZjnLb+jBZgGEtHF1uHQLNrkx?=
- =?us-ascii?Q?iYrlnnDD/iJXqdS010uk2q7zXBbdC8OWXerGHWxNIoqsQ+erRGgot90ZsGXX?=
- =?us-ascii?Q?uRnAF33mxEMH7kmHrMmgvi4nXKAheMnqknpiUcxaBda82X09YcyaQ1qw4fbP?=
- =?us-ascii?Q?IsYGxJoSmzXXIrK+PeLat/mw2hrtdSa9QRc8gkEPntOCYVgA9UXxyMiZS3Kr?=
- =?us-ascii?Q?cuZb9Y6E2sT/VuftM8ZndCT1RcYEGqMo4FTZ12eop4p68TR1mB38oRulP42T?=
- =?us-ascii?Q?VObVV9gRua4dfTwNDibFOLwWlHlvsFV3nEQVJvckWZh5+irFu1pQmMbimj9b?=
- =?us-ascii?Q?iFMgi4RfOd8S81sAel4sCZQuMBA5OpmZlJ0NJvV85pR0JyvW1JdALFYjE7sV?=
- =?us-ascii?Q?7WVB63Wtf010Q/z6a4sCxl0gYxLni9LvbGXS+Z8k1hCmrdeC5ExJ2IA+MnRJ?=
- =?us-ascii?Q?SASaAD4PxMFaqgIlKhiuKig26IKKn/vwORTafYDP9SZut7ZSaKCT7QvXYCui?=
- =?us-ascii?Q?VAIx4kFSEIqjOslVIDk4rzlNtBD8dhCgBLaWHBPszKrzv6laRhYmVl0urCUz?=
- =?us-ascii?Q?/He6VaY86pD4koufgdIDkhc1zodxaasW0WIRxtjQEd/ic+Rn/xl+A12a3Tcf?=
- =?us-ascii?Q?YfyIbwq8kAsKLwMoBd+hdgluudJr/5FiEsz9DtbYZruREsw3trDZcahqLhaH?=
- =?us-ascii?Q?ISTpnSJnj5XpadfCzbU0PAR6A5BivsFq+OVUXI/JYijuAOBf9tUzQDhqAQ5N?=
- =?us-ascii?Q?8LxT3XjGPqx1VLoq0t90wKVo6HMAqV6skAo6an51NyJFRaSf2v2PT6As18zA?=
- =?us-ascii?Q?k8il94QcnSA=3D?=
+X-Microsoft-Antispam: BCL:0;ARA:13230040|1800799024|376014|7416014|366016;
+X-Microsoft-Antispam-Message-Info: =?us-ascii?Q?dDD6WmqmxFug9+Iq94Rj0dXA7TyXPJBrDzMtm4W5vd20v4tvMjOw2645RKKe?=
+ =?us-ascii?Q?rsQuNs1ZzLNoxiHuADkEUIfGMxACmDPWrFJattsL0ylPxsVylLm9inaFm4on?=
+ =?us-ascii?Q?N9bNBE4pqujfcsW7efI/gigqLH0RxXnbrGlTlbymyC0zaCWTfBeu9qmICS5/?=
+ =?us-ascii?Q?0BJtsysBP7t/AcQ6LsbJbxB4+o1R8wLL08cJgksrhXTLZQM6xOuB5hUOt2En?=
+ =?us-ascii?Q?ZXYaaQbGp7muPO6rtmklisusriB2ixdensUSE1Z9pYhGcBveEx16RnkyjByz?=
+ =?us-ascii?Q?9W9Aho8Bl3xBt+cHVENYNz6H2uI9EdOj0ESlJ1//PnKvQoWfADbRFfYDvMRs?=
+ =?us-ascii?Q?eBVaaH57e/Jhh/8FDC1JnBH4ePAP5l5PU2ZomGPYGjej8tbQ1MjYkWpWsGIA?=
+ =?us-ascii?Q?6wM2Lcqtn/MbJbOEgHCVwrjgovVAZLPfWYh6CSbY72pB13yKkJjUxChYT0yr?=
+ =?us-ascii?Q?VmAnEGVrZjudnuOxCyXoJwcEbx++/vnYE9PJ2t2PGX5JF8Eg3OtERepECbGN?=
+ =?us-ascii?Q?QVc+sT4Hlef8+G0XEHaSv46z7DVYRWCmK1UjJXxqzE/Cy+/8OodDtig7XA3i?=
+ =?us-ascii?Q?X4fa2CW1b2z2tQptbA3rPBUhnhc9oLnxEClZ3+lELEib9XlFLVGwTyFxG19I?=
+ =?us-ascii?Q?B4KDBsEz+wUAA9oIzY5R0tP2s1Nz0EHkPmzoRZT6J8bIC0nennjRh9/ymimN?=
+ =?us-ascii?Q?5pCCGEyKwpfvyqXtk/4GGSrEdOdko9nsCWIOYtm+AAxneog9XIuI3Mesz0Jt?=
+ =?us-ascii?Q?OKZdwm1qDvicmleg6qfvhVMcj2fRmfrR4b8/KOHpvmHNnDPus5vK1EHycFKF?=
+ =?us-ascii?Q?drUwvOFfflRBe4ToDgfHp6NXP9bafWqGelkUV6FCM1Bc8PDMowDynxhBzMrv?=
+ =?us-ascii?Q?xQtFL8VcNeQshym8BODkDwmLwExuIXCTGenMeI4ZhnQmKyqPkd2ts+WcgLJX?=
+ =?us-ascii?Q?9vVneelFTCqehQBgzjQIER0xeIDI6BeKs/598MStw7ZkvU/lAMmKpyTw5Xtc?=
+ =?us-ascii?Q?oQb4dhzjF1OOw86Y2QVeGQjF44wrfFX2ajpiR3e3jaLzi78fB+/p5O2tK/jl?=
+ =?us-ascii?Q?GkimZuTpmxVjUHAt25cEKtln2FOSBXJQR8mQMBBZlBJ/Y1u3bTPrxnIeY+o7?=
+ =?us-ascii?Q?y2H3+B6ObesevUDZeCXXSPnnuz4nXP4bcSAUKknfn1w2PDK1vjrd4KY5csgY?=
+ =?us-ascii?Q?CDoc+LXexc+tRmskU3kD7FH78Hbf4Ci401fMRnmJb/NmDHc63jxqwisu+iuw?=
+ =?us-ascii?Q?8LopiWkXCD8lD2H+/9/QbKJO6cTG0tPtwOU3GdtB2qKBGSGWn8Tlxo7yZHP5?=
+ =?us-ascii?Q?i9lddRoQY14iKJIe4HOMVM4vEPkgdm5ORHrtdg3JCVMtD+sNFK+g4thcfkwC?=
+ =?us-ascii?Q?7mrlBGsxPVANIZ8lt/X4f41ij9lU81UmLHb2/nlBDKXousDkk0YzgwAmbR/R?=
+ =?us-ascii?Q?23RYkqJncj4=3D?=
 X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
  IPV:NLI; SFV:NSPM; H:SN7PR12MB8059.namprd12.prod.outlook.com; PTR:; CAT:NONE;
- SFS:(13230040)(7416014)(1800799024)(376014)(366016); DIR:OUT; SFP:1101; 
+ SFS:(13230040)(1800799024)(376014)(7416014)(366016); DIR:OUT; SFP:1101; 
 X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: =?us-ascii?Q?VHp4zImKoBuzt0oKLLJbG+/INZlo+JsMTpdBohfySkDauuWALZJJoy1Q5sYz?=
- =?us-ascii?Q?BZycsJeXyZRfYJ/x0TmrTH0qwTPnQjN/NbpGlcgJaFNBfmruqNFak3TtxaSd?=
- =?us-ascii?Q?VbiCDwc+MQep6EXpvByr7hqiW37Ci5vO/acEGmRxNCIdlYdUGP7DAiqYPyhs?=
- =?us-ascii?Q?nQndRn7jA0wNs4lJh+AoySrhcJ4I3MShtvL80aiiJQ8kwaGom9hbz4qJ55Nn?=
- =?us-ascii?Q?wbqUgkTRuGgILL2tfWsc2NfIY5uxX8DwNMHCibCG307gGAqExo7Iv82vMumg?=
- =?us-ascii?Q?Bk4rVnwxktelOzpqrWR+cmXa8R5tF1GwjODb+wJPH3zuc3mkabhnPYloExFA?=
- =?us-ascii?Q?reqxcvr/4qHbSDLhWhyMFboIPSVEmADwos3VoM7UfaVm5RvcXXz1tKcmINDW?=
- =?us-ascii?Q?duJhhYCMNQ8ENuKLwB0n4biUmCwAQjz1GZcWbjWw89YruB3PqQuszCbGcsRe?=
- =?us-ascii?Q?guUJTsoLLiaxJz7MgRP1pKfCM2Q9tyntB4VaW1xgcNmTa5H1gfKeK2b8II21?=
- =?us-ascii?Q?1WFFLT/0TV0cDEKylj3OK7wVz7KvdMUqLd/R4qSVJscZ8ztA1OZDmZOH/2db?=
- =?us-ascii?Q?ewfNxan8uQ825VUfcVygJnEpZHN2CrM6ser+w4if8SNOqr5HGeQbgebgeJjy?=
- =?us-ascii?Q?LVGlrA48C7YnGJQPajjiYNsKNifiNGMy7+RA9PICLfkkmh3Gju5aQA00oLrG?=
- =?us-ascii?Q?OIWSPEocV82b3AG1Wsd7VhHj6KFlL9iY36ahv0lfrmjTYZJ/0WwHEXaQhoNm?=
- =?us-ascii?Q?ULzYy3JTGHkzA/lIv+2jocr1dDQ9dWhRfeciN6SPJOjV0feLj5Ajz7WkNs3G?=
- =?us-ascii?Q?AoLc+BaRdBLnAHnSoAm+VfPtFYfFg1bsSzl3GpWPPslB1sDvmxGgqh7nQMy4?=
- =?us-ascii?Q?s4H8wFlxfYXRX8TFgKgDoEFf4DI2R0LcJre7lfTKWLca/GZvIGtolg5esP2t?=
- =?us-ascii?Q?g0Xg3EolarN/1UsewGAzFfurUrw7wtyXM/n8RNO2rnFqUNtVRrF8Ngj39evf?=
- =?us-ascii?Q?s2K46kYw0Fuc5B8ARbtZD1m12QAuBVSAxQOZbWV+8aXODm44ft/nNbIML4ur?=
- =?us-ascii?Q?0RLWNm5REPGrtbFO9ZXwu3+hNrBQqzqmXl6EiSpsv0t8poozgnTk1tQmUE8J?=
- =?us-ascii?Q?oa0IeDh+Zq5urUmtBV0y9RhDTVKgSKaUP55lfLMo+7nACgXKq1vuRrAnxQ6+?=
- =?us-ascii?Q?I3ECK23/8BU3JKXAgACB4cuHTH9iy92xiz+fpHVNQ7mgMoTsOgO3g/E4hXGt?=
- =?us-ascii?Q?5Rst6SlHVjsZkdZebPJ7WbjKheQywXiA2o6QK7HBW79j1o6f9KfHq4gm3msX?=
- =?us-ascii?Q?h4GTbz1jzS1ZR/WCKmwA2eGG3q65AzyCdBc3kHijIpTorhW55HYjTXrscPWG?=
- =?us-ascii?Q?FvhOyddslC3b3enQjX0oULDDwwcgVRdduFtGe2C38o9OZKXMjP2KY0EA0C1e?=
- =?us-ascii?Q?cdAxw1EoRUY7SzOjBTBjx/KF5VtNA9WqC3W3lCbhx/NQ1krjfV/1cU/PhFxE?=
- =?us-ascii?Q?nYOZdqkff0Z/4kq5kRKuV2lTzUh084ovX9DI+SP12mNWG8lSL2lziwYmUQtt?=
- =?us-ascii?Q?wdkYnRg7cOKZeMo4MwTAr9NVI6avKOu80j8sfVMZ?=
+X-MS-Exchange-AntiSpam-MessageData-0: =?us-ascii?Q?g2MG3tgN9J2nSbGb0aLmYVyELgTIf5VO6UYXCnkAxGY1E/MnHDT8t/KglJwu?=
+ =?us-ascii?Q?fBvpF3PIrJzyAHxNt9OSjkmxYoX4rNb0iT7tR3nA6hmNfD2XU6n4RXb28G2B?=
+ =?us-ascii?Q?kUhfK89U3fRDM5HAPWDISLSEAlsbw1QJ6J9fz7WNgtAfIQepJfGruZJet/sb?=
+ =?us-ascii?Q?9hvbC+iOvaNxFudVKm5nqYihmW0v3cFlqHw6YpDszpFmm4MvDbnGOnh16pw4?=
+ =?us-ascii?Q?MOvx0IZ0vnGmYFNiUjP8/NVI3paqSHBJZvUj5+1u/ndRjskaYTIb9G79SrDm?=
+ =?us-ascii?Q?lUoZIHLAdJcYuPYzjBbi8RkmkiIZJhgLBZJRDyMi4420tSh2v0/AiGnrVyB4?=
+ =?us-ascii?Q?EYzlc3iXQ9ALAtSPAgUu1vCdV6Y0VIt5XkBzvmkazhL4rGDt1/XEPwZqxkLq?=
+ =?us-ascii?Q?Uryxvq3fRon4jjjfx1pneoW9UQqUyeCOOyYi1SVzTuh7CWJExcouz1ZCzUqh?=
+ =?us-ascii?Q?swujC6g+BrP5zwE7mf0V/JbhmKxLx5eMD0MsO1bCEF3kEwMHWjrf0NlC7jyY?=
+ =?us-ascii?Q?pFDXJ7YAQt6Z8XWsYhFfq+mNbAYd+qncgTcWgIj/gPH4VqNXcwkoy1fYXAqQ?=
+ =?us-ascii?Q?EKYlxilD9h1u36E4k7gKnmiRaBE9hozov+r8SQ0dYmnAK4G+BLaYE6sKb4IJ?=
+ =?us-ascii?Q?uh4ir5qxIDaT5xpedEIR06nnSmTrK6vH4OGhNDUU7SxdxLz5Qz10j+B4lV9q?=
+ =?us-ascii?Q?DyTMdI+Vt7AOhSA7DXql0zk9blnoblUudyNvgm0juXqu+DlDzx2DZAnMhvcy?=
+ =?us-ascii?Q?v/3ulEf5vokwOk3VedBhiiV2uXvJbQbkpSS8q6XRJ5Nl7T7hLVZ9uaFVoAgb?=
+ =?us-ascii?Q?93exT6HhcKa3nYSJRWgfSVNAL8TDj3pNi3LD2E8+Vzf2KgfxLLcJ5XQ7ofIv?=
+ =?us-ascii?Q?s/HzzxRCdn3k0xjgvDZtjrAwTJVoePFM/qY0KOTKyLYl083ny7qVJyFvUJZE?=
+ =?us-ascii?Q?gwPjO/5OodbVa5i1J7izbyFnZDShdlo56Uc2YeAIfTdNwyAuxyF8rBP6i4cA?=
+ =?us-ascii?Q?5Zqlt+gg72ahfQ3tMK6tjo4784tjN4c0xF/58ww1OCkKNm3ISTjoav1k5CKl?=
+ =?us-ascii?Q?AYCXs3HqCdfY/xvvSErBj4w1zYPiOX847w5unjFm3tFeQ4WYPx1ID2AZ0ZRe?=
+ =?us-ascii?Q?4V8U0XYvS7i7cecLm1voeXNMbN0CuZYFVQqZv4/7OLBpUGfusUEnN7MXbxyw?=
+ =?us-ascii?Q?bY1NTSngeqIvMvnJiWrtD70DgitTK/mjvF0fPIhanTrIrqf65anUqzo+A2Y5?=
+ =?us-ascii?Q?bZRbbaytpYj2bR5V7PQCWtF+Cs5DpBAThEUCUK0kn62CCk+lDieuS/KoisG4?=
+ =?us-ascii?Q?q+z/drD5l2XF8CGxKzHyPIaksxCK/poc8WPO8vf3SZt/jJadxTHu0NkqIUf+?=
+ =?us-ascii?Q?1W0FNLrz7lsDZUqJp1fK4tndiHoKcWrV0OTpca2gfXumy4aH8Ul8skEG+1HC?=
+ =?us-ascii?Q?SnGHgKk+wETk2+jY8q40ytFKlUZugVem0qlCsdz7C12Vwaj3e+PDFOe1XNaP?=
+ =?us-ascii?Q?Gh+kFuuebaQk1IVbWPHYKrhtT0JCw/OeMusD/+aag6ZgtY4pGvCEfkfwGEmq?=
+ =?us-ascii?Q?QsPfCfuga/F2B/RvVVW+od134FDVmiIaJnGVLtB6?=
 X-OriginatorOrg: Nvidia.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: cb4703f4-89e5-4ecb-ea6f-08ddf5daa417
+X-MS-Exchange-CrossTenant-Network-Message-Id: 75a36620-d55e-4835-1b8c-08ddf7d09e5a
 X-MS-Exchange-CrossTenant-AuthSource: SN7PR12MB8059.namprd12.prod.outlook.com
 X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 17 Sep 2025 11:09:16.3103 (UTC)
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 19 Sep 2025 23:02:34.0205 (UTC)
 X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
 X-MS-Exchange-CrossTenant-Id: 43083d15-7273-40c1-b7db-39efd9ccc17a
 X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: h/97MtssD/QLljfwpsmKp9R5sRZbYvROqP5Mck3/nS8Bwy219ny0tFRZYoLVKW3dkTdIBznyktfym+DDxDMO8w==
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: DS0PR12MB7826
+X-MS-Exchange-CrossTenant-UserPrincipalName: CdkdCs754P8q7RyXIzeI5iZLI1Pj8oS2zXVSnLyHntcxw273c9zIcwAwGlo24+ujQR5g6UfcnFR+4ZLjiWqvEQ==
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: IA1PR12MB6163
 X-Mailman-Approved-At: Mon, 06 Oct 2025 20:46:17 +0000
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
@@ -161,103 +161,43 @@ List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-On Mon, Sep 15, 2025 at 11:48:19AM +0200, Danilo Krummrich wrote:
-> On Wed Sep 10, 2025 at 9:02 PM CEST, Joel Fernandes wrote:
-> > On Wed, Sep 10, 2025 at 02:09:55PM -0400, Joel Fernandes wrote:
-> > [...] 
-> >> > > +    /// Allocate IRQ vectors for this PCI device.
-> >> > > +    ///
-> >> > > +    /// Allocates between `min_vecs` and `max_vecs` interrupt vectors for the device.
-> >> > > +    /// The allocation will use MSI-X, MSI, or legacy interrupts based on the `irq_types`
-> >> > > +    /// parameter and hardware capabilities. When multiple types are specified, the kernel
-> >> > > +    /// will try them in order of preference: MSI-X first, then MSI, then legacy interrupts.
-> >> > > +    /// This is called during driver probe.
-> >> > > +    ///
-> >> > > +    /// # Arguments
-> >> > > +    ///
-> >> > > +    /// * `min_vecs` - Minimum number of vectors required
-> >> > > +    /// * `max_vecs` - Maximum number of vectors to allocate
-> >> > > +    /// * `irq_types` - Types of interrupts that can be used
-> >> > > +    ///
-> >> > > +    /// # Returns
-> >> > > +    ///
-> >> > > +    /// Returns the number of vectors successfully allocated, or an error if the allocation
-> >> > > +    /// fails or cannot meet the minimum requirement.
-> >> > > +    ///
-> >> > > +    /// # Examples
-> >> > > +    ///
-> >> > > +    /// ```
-> >> > > +    /// // Allocate using any available interrupt type in the order mentioned above.
-> >> > > +    /// let nvecs = dev.alloc_irq_vectors(1, 32, IrqTypes::all())?;
-> >> > > +    ///
-> >> > > +    /// // Allocate MSI or MSI-X only (no legacy interrupts)
-> >> > > +    /// let msi_only = IrqTypes::default()
-> >> > > +    ///     .with(IrqType::Msi)
-> >> > > +    ///     .with(IrqType::MsiX);
-> >> > > +    /// let nvecs = dev.alloc_irq_vectors(4, 16, msi_only)?;
-> >> > > +    /// ```
-> >> > > +    pub fn alloc_irq_vectors(
-> >> > > +        &self,
-> >> > > +        min_vecs: u32,
-> >> > > +        max_vecs: u32,
-> >> > > +        irq_types: IrqTypes,
-> >> > > +    ) -> Result<u32> {
-> >> > > +        // SAFETY: `self.as_raw` is guaranteed to be a pointer to a valid `struct pci_dev`.
-> >> > > +        // `pci_alloc_irq_vectors` internally validates all parameters and returns error codes.
-> >> > > +        let ret = unsafe {
-> >> > > +            bindings::pci_alloc_irq_vectors(self.as_raw(), min_vecs, max_vecs, irq_types.raw())
-> >> > > +        };
-> >> > > +
-> >> > > +        to_result(ret)?;
-> >> > > +        Ok(ret as u32)
-> >> > > +    }
-> >> > 
-> >> > This is only valid to be called from the Core context, as it modifies internal
-> >> > fields of the inner struct device.
-> >> 
-> >> It is called from core context, the diff format confuses.
-> >> > 
-> >> > Also, it would be nice if it would return a new type that can serve as argument
-> >> > for irq_vector(), such that we don't have to rely on random integers.
-> >> 
-> >> Makes sense, I will do that.
-> >> 
-> > By the way, the "ret" value returned by pci_alloc_irq_vectors() is the number
-> > of vectors, not the vector index.
+On Tue, Sep 16, 2025 at 05:59:18AM -0400, Joel Fernandes wrote:
+[...]
+> > > > The same question for the setters. What would happen for this:
+> > > > 
+> > > >     let bf = bf::default()
+> > > >              .set_state(0xf)
+> > > >              .set_ready(true);
+> > > > 
+> > > > I think that after the first out-of-boundary in set_state(), you
+> > > > should abort the call chain, make sure you're not touching memory
+> > > > in set_ready() and returning some type of error.
+> > > 
+> > > Here, on out of boundary, we just ignore the extra bits passed to
+> > > set_state. I think it would be odd if we errored out honestly. We are
+> > > using 'as u8' in the struct so we would accept any u8 as input, but
+> > > then if we complained that extra bits were sent, that would be odd.
+> > 
+> > That really depends on your purpose. If your end goal is the safest API
+> > in the world, and you're ready to sacrifice some performance (which is
+> > exactly opposite to the C case), then you'd return to your user with a
+> > simple question: are you sure you can fit this 8-bit number into a 3-bit
+> > storage?   
 > 
-> Sure, but the vector index passed to pci_irq_vector() must be in the range
-> defined by the return value of pci_alloc_irq_vectors().
-> 
-> I thought of e.g. Range<pci::IrqVector> as return value. This way you can easily
-> iterate it and prove that it's an allocated vector index.
+> I think personally I am OK with rejecting requests about this, so we can
+> agree on this.
 
-Agreed, I will do it like this.
+It is not possible to reject values passed to set, because it returns Self
+and follows the builder-pattern, to do this we will need to return Result,
+and have the caller unwrap it, and have to rename it to try_set().
 
-> > So basically there are 3 numbers that mean
-> > different things:
-> > 1. Number of vectors (as returned by alloc_irq_vectors).
-> > 2. Index of a vector (passed to pci_irq_vector).
-> > 3. The Linux IRQ number (passed to request_irq).
-> >
-> > And your point is well taken, in fact even in current code there is
-> > ambiguity: irq_vector() accepts a vector index, where as request_irq()
-> > accepts a Linux IRQ number, which are different numbers. I can try to clean
-> > that up as well but let me know if you had any other thoughts. In fact, I
-> > think Device<device::Bound>::request_irq() pci should just accept IrqRequest?
-> 
-> Currently, pci::Device::request_irq() takes an IRQ vector index and calls
-> irq_vector() internally to convert the vector index into an IRQ number.
-> 
-> I'd keep this semantics, but introduce a new type IrqVector rather than using
-> the raw integer. So, drivers would call
-> 
-> 	// `irq_vecs` is of type `Range<pci::IrqVector>`.
-> 	let irq_vecs = dev.alloc_irq_vectors(1, 1, pci::IrqTypes::ANY)?;
-> 	let irq = KBox::pin_init(
-> 	   dev.request_irq(irq_vecs.start, ...)?,
-> 	)?;
+Instead of that, I would just extract the bits from the value the user passed
+and ignore the rest (example if 0xff is passed for a 4-bit bitfield, then the
+field is 0xf.)
 
-This sounds good to me. Thanks,
+Alex what do you think, should set_ be fallible?
+
+thanks,
 
  - Joel
 
