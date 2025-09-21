@@ -2,37 +2,37 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id 118ACB8D8A8
-	for <lists+nouveau@lfdr.de>; Sun, 21 Sep 2025 11:36:15 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 494CBB8D9D9
+	for <lists+nouveau@lfdr.de>; Sun, 21 Sep 2025 13:23:10 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 5CB4E10E0A3;
-	Sun, 21 Sep 2025 09:36:13 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 4F4A510E066;
+	Sun, 21 Sep 2025 11:23:08 +0000 (UTC)
 Authentication-Results: gabe.freedesktop.org;
-	dkim=pass (1024-bit key; unprotected) header.d=linuxfoundation.org header.i=@linuxfoundation.org header.b="IBHp5ON4";
+	dkim=pass (1024-bit key; unprotected) header.d=linuxfoundation.org header.i=@linuxfoundation.org header.b="cToEv8ou";
 	dkim-atps=neutral
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
 Received: from sea.source.kernel.org (sea.source.kernel.org [172.234.252.31])
- by gabe.freedesktop.org (Postfix) with ESMTPS id E2C5710E0A3;
- Sun, 21 Sep 2025 09:36:11 +0000 (UTC)
+ by gabe.freedesktop.org (Postfix) with ESMTPS id DBFF410E066;
+ Sun, 21 Sep 2025 11:23:06 +0000 (UTC)
 Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by sea.source.kernel.org (Postfix) with ESMTP id DCEA240513;
- Sun, 21 Sep 2025 09:36:10 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 2E2D9C4CEE7;
- Sun, 21 Sep 2025 09:36:10 +0000 (UTC)
+ by sea.source.kernel.org (Postfix) with ESMTP id 18FA34073C;
+ Sun, 21 Sep 2025 11:23:06 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 7C7C9C4CEE7;
+ Sun, 21 Sep 2025 11:23:05 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=linuxfoundation.org;
- s=korg; t=1758447370;
- bh=B1a3RGharGmCIvj2BlNX0YJdxwU67f9Wln5wfzrRxaI=;
+ s=korg; t=1758453786;
+ bh=xZADwwqDSNPHGEJ8PpQUJjxdyZCNqEbjTS3lQUkoZ3U=;
  h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
- b=IBHp5ON4Y0MzVBdp/SQVrusWgdsQOkON1+sM4XMlqt2qWqQeldR2Kqn3flhTKRkFI
- XUQqDA5EPWnMsY8D8M9Lx7FQgu8PA3dq92euFw6Y5QzqNkJ1UO9tCIIHApLAPh+d1I
- KVr7iIDTR1iPy1a2XSuTc99aBCYwcdSPWUDgac3w=
-Date: Sun, 21 Sep 2025 11:36:07 +0200
+ b=cToEv8our3HW0yuRBchrTdZdREF/tWpBE7R+6dHrhUADoAZI1fXzLYdoSgjVO7stu
+ 7xm+uhl0xTjXziRtB/xWwNj9yuYOR/70of4Om/taeyoa+qqBgzytEJozgfme8kXoej
+ BjyYO/HdtiK0uTJtSvO4L7xEYGXmfOklOymr2+ow=
+Date: Sun, 21 Sep 2025 13:23:02 +0200
 From: Greg KH <gregkh@linuxfoundation.org>
-To: Joel Fernandes <joelagnelf@nvidia.com>
-Cc: linux-kernel@vger.kernel.org, rust-for-linux@vger.kernel.org,
- dri-devel@lists.freedesktop.org, dakr@kernel.org,
- acourbot@nvidia.com, Alistair Popple <apopple@nvidia.com>,
+To: Miguel Ojeda <miguel.ojeda.sandonis@gmail.com>
+Cc: Joel Fernandes <joelagnelf@nvidia.com>, linux-kernel@vger.kernel.org,
+ rust-for-linux@vger.kernel.org, dri-devel@lists.freedesktop.org,
+ dakr@kernel.org, acourbot@nvidia.com, Alistair Popple <apopple@nvidia.com>,
  Miguel Ojeda <ojeda@kernel.org>, Alex Gaynor <alex.gaynor@gmail.com>,
  Boqun Feng <boqun.feng@gmail.com>, Gary Guo <gary@garyguo.net>,
  bjorn3_gh@protonmail.com, Benno Lossin <lossin@kernel.org>,
@@ -49,13 +49,16 @@ Cc: linux-kernel@vger.kernel.org, rust-for-linux@vger.kernel.org,
  nouveau@lists.freedesktop.org
 Subject: Re: [PATCH v4 1/6] nova-core: bitfield: Move bitfield-specific code
  from register! into new macro
-Message-ID: <2025092157-pauper-snap-aad1@gregkh>
+Message-ID: <2025092148-huntsman-existing-5052@gregkh>
 References: <20250920182232.2095101-1-joelagnelf@nvidia.com>
  <20250920182232.2095101-2-joelagnelf@nvidia.com>
+ <2025092157-pauper-snap-aad1@gregkh>
+ <CANiq72mk1-Ew11RB0kfep5BtB8M_5H6o_Rb2MwamrZd-FmzFWA@mail.gmail.com>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
+Content-Type: text/plain; charset=utf-8
 Content-Disposition: inline
-In-Reply-To: <20250920182232.2095101-2-joelagnelf@nvidia.com>
+Content-Transfer-Encoding: 8bit
+In-Reply-To: <CANiq72mk1-Ew11RB0kfep5BtB8M_5H6o_Rb2MwamrZd-FmzFWA@mail.gmail.com>
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -70,121 +73,19 @@ List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-On Sat, Sep 20, 2025 at 02:22:27PM -0400, Joel Fernandes wrote:
-> The bitfield-specific into new macro. This will be used to define
-> structs with bitfields, similar to C language.
+On Sun, Sep 21, 2025 at 11:59:05AM +0200, Miguel Ojeda wrote:
+> On Sun, Sep 21, 2025 at 11:36 AM Greg KH <gregkh@linuxfoundation.org> wrote:
+> >
+> > And where does this allow us to define things like BIT(2) for values?
+> > (ok, that's kind of not the point of this patch series, but it will come
+> > up over time...)
 > 
-> Reviewed-by: Elle Rhumsaa <elle@weathered-steel.dev>
-> Signed-off-by: Joel Fernandes <joelagnelf@nvidia.com>
-> ---
->  drivers/gpu/nova-core/bitfield.rs    | 314 +++++++++++++++++++++++++++
->  drivers/gpu/nova-core/nova_core.rs   |   3 +
->  drivers/gpu/nova-core/regs/macros.rs | 259 +---------------------
->  3 files changed, 327 insertions(+), 249 deletions(-)
->  create mode 100644 drivers/gpu/nova-core/bitfield.rs
+> We have the `bits` module since 6.17:
 > 
-> diff --git a/drivers/gpu/nova-core/bitfield.rs b/drivers/gpu/nova-core/bitfield.rs
-> new file mode 100644
-> index 000000000000..ba6b7caa05d9
-> --- /dev/null
-> +++ b/drivers/gpu/nova-core/bitfield.rs
-> @@ -0,0 +1,314 @@
-> +// SPDX-License-Identifier: GPL-2.0
-> +
-> +//! Bitfield library for Rust structures
-> +//!
-> +//! Support for defining bitfields in Rust structures. Also used by the [`register!`] macro.
-> +//!
-> +//! # Syntax
-> +//!
-> +//! ```rust
-> +//! #[derive(Debug, Clone, Copy)]
-> +//! enum Mode {
-> +//!     Low = 0,
-> +//!     High = 1,
-> +//!     Auto = 2,
-> +//! }
-> +//!
-> +//! impl TryFrom<u8> for Mode {
-> +//!     type Error = u8;
-> +//!     fn try_from(value: u8) -> Result<Self, Self::Error> {
-> +//!         match value {
-> +//!             0 => Ok(Mode::Low),
-> +//!             1 => Ok(Mode::High),
-> +//!             2 => Ok(Mode::Auto),
-> +//!             _ => Err(value),
-> +//!         }
-> +//!     }
-> +//! }
-> +//!
-> +//! impl From<Mode> for u32 {
-> +//!     fn from(mode: Mode) -> u32 {
-> +//!         mode as u32
-> +//!     }
-> +//! }
-> +//!
-> +//! #[derive(Debug, Clone, Copy)]
-> +//! enum State {
-> +//!     Inactive = 0,
-> +//!     Active = 1,
-> +//! }
-> +//!
-> +//! impl From<bool> for State {
-> +//!     fn from(value: bool) -> Self {
-> +//!         if value { State::Active } else { State::Inactive }
-> +//!     }
-> +//! }
-> +//!
-> +//! impl From<State> for u32 {
-> +//!     fn from(state: State) -> u32 {
-> +//!         state as u32
-> +//!     }
-> +//! }
-> +//!
-> +//! bitfield! {
-> +//!     struct ControlReg {
-> +//!         3:0       mode        as u8 ?=> Mode;
-> +//!         7         state       as bool => State;
-> +//!     }
-> +//! }
+>     https://rust.docs.kernel.org/kernel/bits/index.html
+> 
+> (Or do you mean something else?)
 
-As discussed at the conference this week, I do object to this as it
-will allow the same mistakes to happen that we used to do in the kernel
-for a long time before the regmap() api happened, along with GENMASK().
-
-The issue is that you are going to want to take these bitfields as part
-of a larger structure, and attempt to "lay it over" a chunk of memory
-that came from, or is going to, hardware.  When that happens, all of the
-endian issues of mis-matches between hardware and cpus come into play,
-which is not able to be properly expressed here at all, unless you
-attempt to either resolve it all later on in something like the regmap
-api, or you have #ifdef stuff to attempt to capture all of the possible
-combinations and deal with it at build time (which is strongly never
-recommended, but is what we used to do in previous decades.)
-
-Your example code using this is nice, and it shows how to set up, and
-query these bits, but that's not anything anyone actually does in the
-kernel, what they want to do is read/write from hardware with this.
-
-So, how does that work?  Where does this "drop down" to the native
-bus/memory transactions and swizzle the bits properly to work correctly?
-
-And where does this allow us to define things like BIT(2) for values?
-(ok, that's kind of not the point of this patch series, but it will come
-up over time...)
-
-Ideally, this would map to our existing regmap api, which does handle
-all of this properly, but I know that's not usually used by PCI drivers
-like where this code is coming from, as they "just assume" endian
-formats are all little and can get away with it due to the limited
-nature of different hardware types for their hardware.
-
-Also, a larger meta-comment, why doesn't rust have bit types?  Why does
-everyone either have to roll their own or rely on an external crate?  Is
-anyone working to provide native bit support to the language?  I'm sure
-the embedded people would love it as I imagine it's what they reach for
-first when using the language on their hardware.
-
-thanks,
+No, that's exactly what I was thinking of, sorry, I missed that :)
 
 greg k-h
