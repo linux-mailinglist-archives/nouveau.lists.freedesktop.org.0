@@ -2,38 +2,93 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id 7FDCCCBAF70
-	for <lists+nouveau@lfdr.de>; Sat, 13 Dec 2025 13:47:09 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id DC9BACBAF88
+	for <lists+nouveau@lfdr.de>; Sat, 13 Dec 2025 13:47:14 +0100 (CET)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 8DEA110EC99;
+	by gabe.freedesktop.org (Postfix) with ESMTP id D6E0D10ECA0;
 	Sat, 13 Dec 2025 12:42:22 +0000 (UTC)
+Authentication-Results: gabe.freedesktop.org;
+	dkim=permerror (0-bit key) header.d=gmail.com header.i=@gmail.com header.b="NodQgKxP";
+	dkim-atps=neutral
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from sea.source.kernel.org (sea.source.kernel.org [172.234.252.31])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 1BE9D10E37F;
- Tue, 16 Sep 2025 15:34:02 +0000 (UTC)
-Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by sea.source.kernel.org (Postfix) with ESMTP id A5EF640702;
- Tue, 16 Sep 2025 15:34:01 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 7CD93C4CEEB;
- Tue, 16 Sep 2025 15:33:59 +0000 (UTC)
-Content-Transfer-Encoding: quoted-printable
-Content-Type: text/plain; charset=UTF-8
-Date: Tue, 16 Sep 2025 17:33:57 +0200
-Message-Id: <DCUC1PQWPSQJ.1LEHJPN9T49Z5@dakr.org>
-Subject: [GIT PULL] DRM Rust changes for v6.18
-Cc: "Alice Ryhl" <aliceryhl@google.com>, "Alexandre Courbot"
- <acourbot@nvidia.com>, "Daniel Almeida" <daniel.almeida@collabora.com>,
- "Miguel Ojeda" <ojeda@kernel.org>, "Benno Lossin" <lossin@kernel.org>,
- <nouveau@lists.freedesktop.org>, <dri-devel@lists.freedesktop.org>,
- <rust-for-linux@vger.kernel.org>, <linux-kernel@vger.kernel.org>
-To: "Dave Airlie" <airlied@gmail.com>, "Simona Vetter" <simona.vetter@ffwll.ch>
-From: "Danilo Krummrich" <me@dakr.org>
+Received: from mail-pl1-f177.google.com (mail-pl1-f177.google.com
+ [209.85.214.177])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 18E6510E06B
+ for <nouveau@lists.freedesktop.org>; Sun, 21 Sep 2025 09:59:19 +0000 (UTC)
+Received: by mail-pl1-f177.google.com with SMTP id
+ d9443c01a7336-26808b24a00so6384775ad.1
+ for <nouveau@lists.freedesktop.org>; Sun, 21 Sep 2025 02:59:19 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=gmail.com; s=20230601; t=1758448758; x=1759053558; darn=lists.freedesktop.org;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=EWKmsQdl2jsGwScL3RcU3RgGD8V6ji7p/wbvV6vfnGU=;
+ b=NodQgKxP8s4XG85Z5nuFoQN9gso1SpDNaz8Is0GPlUW/l2O6C7EiESA1ztWqLKYeNU
+ w/MpknwFRo1enhNgvrUDRJkEwXu9Gkll5ZLHWyiObklmwbxVOVbzRDOjLMdoZn5Qgwb/
+ G3afBuZDJPoTjLbN1IjXyqXNVfgjJjxttdXo4AiGvqen/nV/tyQdzcwT3yd3rPw40G87
+ NqaN+9AxpvGwh8MdAJaHQ8MjzqqeOblJtq9tZMA2cgr72xVVlHw1gUK8/hpdgP7bng0m
+ 2cxDWBxtBZyV4tN0YsQDYF/ZirLFqBU++hVOcbAzHwfprs2KiMzLM/T2WekZq4IQeekF
+ Y4Jg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1758448758; x=1759053558;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=EWKmsQdl2jsGwScL3RcU3RgGD8V6ji7p/wbvV6vfnGU=;
+ b=QYq6njz/tsc+uFzOvi2R9gvjmdbiHCCXiYuXgNKOD2v/mThArRQQKReU2djfenkRu4
+ vH4NEbhP8acaUwQm0RHfN7WJjo/tA3totoz2fP684PmTdB71h3srBAGcfVZ6x456PXvF
+ u36Ft3K22bbBmQzyTeDLchZZRvx5Kr54cIO9HrntvT/i885XPJN8bAglI5BLXq+FDdK7
+ 6HDzZRCs3VShGBDWJGTwINLXc07bhj2B2vK7VOuvt964xhXJ6F7BPOMYYRFdI5H/fIQh
+ JWWsQGZs5pzf0XMVW3XAnxbXXURwqn8gLFSQBIX28m1PEQrFbc3/RIuDMom1iWGLPXzE
+ aFqQ==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCULvttliorRf0XB3t4nsWbeWR2V2h75kdreEj/yvXy/KUazrzkV4BN0Tb0qFKhw7RZQ3T3HycL8@lists.freedesktop.org
+X-Gm-Message-State: AOJu0YwlZvK33/ejbgOxHvJUfL+BCOp2FTrwDMZ/cIrCoRti24AbVBKB
+ QXrj/CLKW34241om8WptkeNKtlJQQ4faTofDNd9NdPAcRNBrTTTuaz9/TmX5q7CGdtAiMs3dQiE
+ 1nfJzqX5d30Pv+eV57agh5aFNO6o38oI=
+X-Gm-Gg: ASbGncvbStYN4e8buGxRlOpDhbyEkVxVCMvvyRBOMBKp07vT/BsKPJPItKslbMkvymi
+ F0Amrxms8Ree6Db/qIHNu4aWkv6f+vOUBvHmZdUeWZKkLdiuGJl9Z56TKQFdkaO6neVZvpKWaT5
+ 7CqmE79lXl2uslb4KpFzx51XnneFpDXp7PeWy9Y9ikjFT9lG9UXU7xnoCgVsAWasFZn4e5cXk8W
+ KkSD+pH+pGC0ZdRsYY9YtcWSLEoJNCAx8fg1I1Uwdm4wpfP1wwlNCqQEZVWmib3LPiFoEcidgR8
+ WXAZ5O6/omwo+vvY7QcPeDkMF/IDe5gZd9dS
+X-Google-Smtp-Source: AGHT+IE/M5n7k5EV9oBMoTKSdZYNJ8k/u28SAzpBTSTXvI/1sciYsCvywr3oY6EDALdphOvsgrpqPOmhVakNTvvKCsI=
+X-Received: by 2002:a17:903:110c:b0:266:914a:2e7a with SMTP id
+ d9443c01a7336-269ba50450bmr70599375ad.6.1758448758376; Sun, 21 Sep 2025
+ 02:59:18 -0700 (PDT)
 MIME-Version: 1.0
-Content-Disposition: inline
-X-Mutt-Fcc: =Sent Items
-X-TUID: mKg+BHoYSeyx
-X-Mailman-Approved-At: Sat, 13 Dec 2025 12:40:47 +0000
+References: <20250920182232.2095101-1-joelagnelf@nvidia.com>
+ <20250920182232.2095101-2-joelagnelf@nvidia.com>
+ <2025092157-pauper-snap-aad1@gregkh>
+In-Reply-To: <2025092157-pauper-snap-aad1@gregkh>
+From: Miguel Ojeda <miguel.ojeda.sandonis@gmail.com>
+Date: Sun, 21 Sep 2025 11:59:05 +0200
+X-Gm-Features: AS18NWAX2coIcjtRAeKTjf4CFDI4YK6EYgm8hWO5NK1pOl2WGGAfjpcS8VVdy_0
+Message-ID: <CANiq72mk1-Ew11RB0kfep5BtB8M_5H6o_Rb2MwamrZd-FmzFWA@mail.gmail.com>
+Subject: Re: [PATCH v4 1/6] nova-core: bitfield: Move bitfield-specific code
+ from register! into new macro
+To: Greg KH <gregkh@linuxfoundation.org>
+Cc: Joel Fernandes <joelagnelf@nvidia.com>, linux-kernel@vger.kernel.org, 
+ rust-for-linux@vger.kernel.org, dri-devel@lists.freedesktop.org, 
+ dakr@kernel.org, acourbot@nvidia.com, Alistair Popple <apopple@nvidia.com>, 
+ Miguel Ojeda <ojeda@kernel.org>, Alex Gaynor <alex.gaynor@gmail.com>, 
+ Boqun Feng <boqun.feng@gmail.com>, Gary Guo <gary@garyguo.net>,
+ bjorn3_gh@protonmail.com, 
+ Benno Lossin <lossin@kernel.org>, Andreas Hindborg <a.hindborg@kernel.org>, 
+ Alice Ryhl <aliceryhl@google.com>, Trevor Gross <tmgross@umich.edu>, 
+ David Airlie <airlied@gmail.com>, Simona Vetter <simona@ffwll.ch>, 
+ Maarten Lankhorst <maarten.lankhorst@linux.intel.com>,
+ Maxime Ripard <mripard@kernel.org>, 
+ Thomas Zimmermann <tzimmermann@suse.de>, John Hubbard <jhubbard@nvidia.com>,
+ Timur Tabi <ttabi@nvidia.com>, 
+ joel@joelfernandes.org, Elle Rhumsaa <elle@weathered-steel.dev>, 
+ Yury Norov <yury.norov@gmail.com>,
+ Daniel Almeida <daniel.almeida@collabora.com>, 
+ nouveau@lists.freedesktop.org
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+X-Mailman-Approved-At: Sat, 13 Dec 2025 12:40:48 +0000
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -48,283 +103,18 @@ List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-Hi Dave and Sima,
+On Sun, Sep 21, 2025 at 11:36=E2=80=AFAM Greg KH <gregkh@linuxfoundation.or=
+g> wrote:
+>
+> And where does this allow us to define things like BIT(2) for values?
+> (ok, that's kind of not the point of this patch series, but it will come
+> up over time...)
 
-Please pull the following DRM Rust changes.
+We have the `bits` module since 6.17:
 
-Besides the DRM changes, this PR also contains some new DMA & scatterlist
-infrastructure (incl. some alloc dependencies), with Nova as a first user.
+    https://rust.docs.kernel.org/kernel/bits/index.html
 
-It also includes a few AsBytes and FromBytes additions needed by Nova.
+(Or do you mean something else?)
 
-I merged this cycle's pin-init PR from Benno, since Nova is the first user
-taking advantage of the new features included.
-
-There are a couple of conflicts with other trees (Rust, MM, Driver Core, Li=
-nus),
-but they are mostly around includes and all trivial [1..8] -- no semantic
-conflicts.
-
-All changes have been in -next for a couple of rounds; the latest nova-core
-series from Alex for one cycle.
-
-- Danilo
-
-[1] https://lore.kernel.org/all/20250905124634.68da9a1e@canb.auug.org.au/
-[2] https://lore.kernel.org/all/20250905125139.109081b2@canb.auug.org.au/
-[3] https://lore.kernel.org/all/20250905125653.0ebc7580@canb.auug.org.au/
-[4] https://lore.kernel.org/all/20250905144449.437ef3cf@canb.auug.org.au/
-[5] https://lore.kernel.org/all/20250912120159.1d6518cc@canb.auug.org.au/
-[6] https://lore.kernel.org/all/20250912135146.0c3ea18f@canb.auug.org.au/
-[7] https://lore.kernel.org/all/aMlfiBynRQrbW3BT@sirena.org.uk/
-[8] https://lore.kernel.org/all/aMlhpIhjbrDR4C8L@sirena.org.uk/
-
-The following changes since commit 043d9c6928b010be7902a01b5cdfa7d754535b1a=
-:
-
-  drm/bridge: anx7625: register content protect property (2025-08-20 08:22:=
-01 -0700)
-
-are available in the Git repository at:
-
-  https://gitlab.freedesktop.org/drm/rust/kernel.git tags/drm-rust-next-202=
-5-09-16
-
-for you to fetch changes up to 299eb32863e584cfff7c6b667c3e92ae7d4d2bf9:
-
-  gpu: nova-core: Add base files for r570.144 firmware bindings (2025-09-13=
- 23:17:48 +0900)
-
-----------------------------------------------------------------
-DRM Rust changes for v6.18
-
-Alloc
-  - Add BorrowedPage type and AsPageIter trait
-  - Implement Vmalloc::to_page() and VmallocPageIter
-  - Implement AsPageIter for VBox and VVec
-
-DMA & Scatterlist
-  - Add dma::DataDirection and type alias for dma_addr_t
-  - Abstraction for struct scatterlist and struct sg_table
-
-DRM
-  - In the DRM GEM module, simplify overall use of generics, add
-    DriverFile type alias and drop Object::SIZE.
-
-Nova (Core)
-  - Various register!() macro improvements (paving the way for lifting
-    it to common driver infrastructure)
-  - Minor VBios fixes and refactoring
-  - Minor firmware request refactoring
-  - Advance firmware boot stages; process Booter and patch its
-    signature, process GSP and GSP bootloader
-  - Switch development fimrware version to r570.144
-  - Add basic firmware bindings for r570.144
-  - Move GSP boot code to its own module
-  - Clean up and take advantage of pin-init features to store most of
-    the driver's private data within a single allocation
-  - Update ARef import from sync::aref
-  - Add website to MAINTAINERS entry
-
-Nova (DRM)
-  - Update ARef import from sync::aref
-  - Add website to MAINTAINERS entry
-
-Pin-Init
-  - Merge pin-init PR from Benno
-    - `#[pin_data]` now generates a `*Projection` struct similar to the
-      `pin-project` crate.
-
-    - Add initializer code blocks to `[try_][pin_]init!` macros: make
-      initializer macros accept any number of `_: {/* arbitrary code
-      */},` & make them run the code at that point.
-
-    - Make the `[try_][pin_]init!` macros expose initialized fields via
-      a `let` binding as `&mut T` or `Pin<&mut T>` for later fields.
-
-Rust
-  - Various methods for AsBytes and FromBytes traits
-
-Tyr
-  - Initial Rust driver skeleton for ARM Mali GPUs.
-    - It can power up the GPU, query for GPU metatdata through MMIO and
-      provide the metadata to userspace via DRM device IOCTL (struct
-      drm_panthor_dev_query).
-
-----------------------------------------------------------------
-Alexandre Courbot (33):
-      gpu: nova-core: register: add missing space in register!()
-      gpu: nova-core: register: allow fields named `offset`
-      gpu: nova-core: register: improve documentation for basic registers
-      gpu: nova-core: register: simplify @leaf_accessor rule
-      gpu: nova-core: register: remove `try_` accessors for relative regist=
-ers
-      gpu: nova-core: register: move OFFSET declaration to I/O impl block
-      gpu: nova-core: register: fix documentation and indentation
-      gpu: nova-core: register: add missing doccomments for fixed registers=
- I/O accessors
-      gpu: nova-core: register: add fields dispatcher internal rule
-      gpu: nova-core: register: improve `Debug` implementation
-      gpu: nova-core: register: generate correct `Default` implementation
-      gpu: nova-core: register: split @io rule into fixed and relative vers=
-ions
-      gpu: nova-core: register: use #[inline(always)] for all methods
-      gpu: nova-core: register: redesign relative registers
-      gpu: nova-core: falcon: add distinct base address for PFALCON2
-      gpu: nova-core: register: add support for register arrays
-      gpu: nova-core: falcon: use register arrays for FUSE registers
-      gpu: nova-core: register: add support for relative array registers
-      gpu: nova-core: falcon: align DMA transfers to 256 bytes
-      rust: transmute: add `as_bytes` method for `AsBytes` trait
-      rust: transmute: add `as_bytes_mut` method to `AsBytes` trait
-      rust: transmute: add `from_bytes_copy` method to `FromBytes` trait
-      gpu: nova-core: vbios: replace pci::Device with device::Device
-      gpu: nova-core: vbios: store reference to Device where relevant
-      gpu: nova-core: require `Send` on `FalconEngine` and `FalconHal`
-      gpu: nova-core: move GSP boot code to its own module
-      gpu: nova-core: add Chipset::name() method
-      gpu: nova-core: firmware: move firmware request code into a function
-      gpu: nova-core: firmware: add support for common firmware header
-      gpu: nova-core: firmware: process Booter and patch its signature
-      gpu: nova-core: firmware: process and prepare the GSP firmware
-      gpu: nova-core: firmware: process the GSP bootloader
-      gpu: nova-core: firmware: use 570.144 firmware
-
-Alistair Popple (1):
-      gpu: nova-core: Add base files for r570.144 firmware bindings
-
-Benno Lossin (6):
-      rust: pin-init: examples: error: use `Error` in `fn main()`
-      rust: pin-init: README: add information banner on the rename to `pin-=
-init`
-      rust: pin-init: rename `project` -> `project_this` in doctest
-      rust: pin-init: add pin projections to `#[pin_data]`
-      rust: pin-init: add code blocks to `[try_][pin_]init!` macros
-      rust: pin-init: add references to previously initialized fields
-
-Christian S. Lima (1):
-      rust: transmute: Add methods for FromBytes trait
-
-Daniel Almeida (1):
-      rust: drm: Introduce the Tyr driver for Arm Mali GPUs
-
-Danilo Krummrich (15):
-      rust: page: implement BorrowedPage
-      rust: alloc: vmalloc: implement Vmalloc::to_page()
-      rust: alloc: implement VmallocPageIter
-      rust: page: define trait AsPageIter
-      rust: alloc: kbox: implement AsPageIter for VBox
-      rust: alloc: layout: implement ArrayLayout::size()
-      rust: alloc: kvec: implement AsPageIter for VVec
-      rust: dma: implement DataDirection
-      rust: dma: add type alias for bindings::dma_addr_t
-      rust: scatterlist: Add abstraction for sg_table
-      samples: rust: dma: add sample code for SGTable
-      MAINTAINERS: rust: dma: add scatterlist files
-      gpu: nova-core: take advantage of pci::Device::unbind()
-      Merge drm-misc-next-2025-08-21 into drm-rust-next
-      Merge tag 'pin-init-v6.18' of https://github.com/Rust-for-Linux/linux=
- into drm-rust-next
-
-John Hubbard (1):
-      gpu: nova-core: register: minor grammar and spelling fixes
-
-Lyude Paul (3):
-      rust: drm: gem: Simplify use of generics
-      rust: drm: gem: Add DriverFile type alias
-      rust: drm: gem: Drop Object::SIZE
-
-Philipp Stanner (1):
-      MAINTAINERS: Add website of Nova GPU driver
-
-Rhys Lloyd (2):
-      gpu: nova-core: vbios: use size_of instead of magic number
-      gpu: nova-core: vbios: change PmuLookupTableEntry to use size_of
-
-Shankari Anand (2):
-      drm: nova: update ARef import from sync::aref
-      gpu: nova-core: Update ARef imports from sync::aref
-
- Documentation/gpu/nova/core/todo.rst              |  19 -
- MAINTAINERS                                       |  19 +-
- drivers/gpu/drm/Kconfig                           |   2 +
- drivers/gpu/drm/Makefile                          |   1 +
- drivers/gpu/drm/nova/driver.rs                    |   4 +-
- drivers/gpu/drm/nova/gem.rs                       |  10 +-
- drivers/gpu/drm/tyr/Kconfig                       |  19 +
- drivers/gpu/drm/tyr/Makefile                      |   3 +
- drivers/gpu/drm/tyr/driver.rs                     | 205 ++++++
- drivers/gpu/drm/tyr/file.rs                       |  56 ++
- drivers/gpu/drm/tyr/gem.rs                        |  18 +
- drivers/gpu/drm/tyr/gpu.rs                        | 219 ++++++
- drivers/gpu/drm/tyr/regs.rs                       | 108 +++
- drivers/gpu/drm/tyr/tyr.rs                        |  22 +
- drivers/gpu/nova-core/driver.rs                   |  13 +-
- drivers/gpu/nova-core/falcon.rs                   | 113 ++--
- drivers/gpu/nova-core/falcon/gsp.rs               |  16 +-
- drivers/gpu/nova-core/falcon/hal.rs               |   2 +-
- drivers/gpu/nova-core/falcon/hal/ga102.rs         |  47 +-
- drivers/gpu/nova-core/falcon/sec2.rs              |  13 +-
- drivers/gpu/nova-core/fb.rs                       |   2 +-
- drivers/gpu/nova-core/firmware.rs                 | 107 ++-
- drivers/gpu/nova-core/firmware/booter.rs          | 375 ++++++++++
- drivers/gpu/nova-core/firmware/fwsec.rs           |  17 +-
- drivers/gpu/nova-core/firmware/gsp.rs             | 243 +++++++
- drivers/gpu/nova-core/firmware/riscv.rs           |  91 +++
- drivers/gpu/nova-core/gpu.rs                      | 216 ++----
- drivers/gpu/nova-core/gsp.rs                      |  22 +
- drivers/gpu/nova-core/gsp/boot.rs                 | 137 ++++
- drivers/gpu/nova-core/gsp/fw.rs                   |   7 +
- drivers/gpu/nova-core/gsp/fw/r570_144.rs          |  29 +
- drivers/gpu/nova-core/gsp/fw/r570_144/bindings.rs |   1 +
- drivers/gpu/nova-core/nova_core.rs                |   1 +
- drivers/gpu/nova-core/regs.rs                     |  84 +--
- drivers/gpu/nova-core/regs/macros.rs              | 789 ++++++++++++++++++=
-----
- drivers/gpu/nova-core/util.rs                     |  20 -
- drivers/gpu/nova-core/vbios.rs                    | 176 +++--
- rust/bindings/bindings_helper.h                   |   2 +
- rust/helpers/helpers.c                            |   1 +
- rust/helpers/scatterlist.c                        |  24 +
- rust/kernel/alloc/allocator.rs                    |  52 ++
- rust/kernel/alloc/allocator/iter.rs               | 102 +++
- rust/kernel/alloc/allocator_test.rs               |  29 +
- rust/kernel/alloc/kbox.rs                         |  40 +-
- rust/kernel/alloc/kvec.rs                         |  40 +-
- rust/kernel/alloc/layout.rs                       |   5 +
- rust/kernel/devres.rs                             |   6 +-
- rust/kernel/dma.rs                                |  86 ++-
- rust/kernel/drm/driver.rs                         |   3 +
- rust/kernel/drm/gem/mod.rs                        |  93 ++-
- rust/kernel/lib.rs                                |   2 +
- rust/kernel/page.rs                               |  87 ++-
- rust/kernel/scatterlist.rs                        | 491 ++++++++++++++
- rust/kernel/transmute.rs                          | 114 +++-
- rust/kernel/workqueue.rs                          |   9 +-
- rust/pin-init/README.md                           |  12 +
- rust/pin-init/examples/error.rs                   |   4 +-
- rust/pin-init/src/lib.rs                          |   4 +-
- rust/pin-init/src/macros.rs                       | 239 ++++++-
- rust/uapi/uapi_helper.h                           |   1 +
- samples/rust/rust_dma.rs                          |  35 +-
- samples/rust/rust_driver_pci.rs                   |   2 +-
- 62 files changed, 4022 insertions(+), 687 deletions(-)
- create mode 100644 drivers/gpu/drm/tyr/Kconfig
- create mode 100644 drivers/gpu/drm/tyr/Makefile
- create mode 100644 drivers/gpu/drm/tyr/driver.rs
- create mode 100644 drivers/gpu/drm/tyr/file.rs
- create mode 100644 drivers/gpu/drm/tyr/gem.rs
- create mode 100644 drivers/gpu/drm/tyr/gpu.rs
- create mode 100644 drivers/gpu/drm/tyr/regs.rs
- create mode 100644 drivers/gpu/drm/tyr/tyr.rs
- create mode 100644 drivers/gpu/nova-core/firmware/booter.rs
- create mode 100644 drivers/gpu/nova-core/firmware/gsp.rs
- create mode 100644 drivers/gpu/nova-core/firmware/riscv.rs
- create mode 100644 drivers/gpu/nova-core/gsp.rs
- create mode 100644 drivers/gpu/nova-core/gsp/boot.rs
- create mode 100644 drivers/gpu/nova-core/gsp/fw.rs
- create mode 100644 drivers/gpu/nova-core/gsp/fw/r570_144.rs
- create mode 100644 drivers/gpu/nova-core/gsp/fw/r570_144/bindings.rs
- create mode 100644 rust/helpers/scatterlist.c
- create mode 100644 rust/kernel/alloc/allocator/iter.rs
- create mode 100644 rust/kernel/scatterlist.rs
+Cheers,
+Miguel
