@@ -2,38 +2,39 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id 36300B9975B
-	for <lists+nouveau@lfdr.de>; Wed, 24 Sep 2025 12:41:24 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 6BCD7B99800
+	for <lists+nouveau@lfdr.de>; Wed, 24 Sep 2025 12:52:55 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 7E5D710E6EB;
-	Wed, 24 Sep 2025 10:40:56 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 425D710E147;
+	Wed, 24 Sep 2025 10:52:53 +0000 (UTC)
 Authentication-Results: gabe.freedesktop.org;
-	dkim=pass (1024-bit key; unprotected) header.d=linuxfoundation.org header.i=@linuxfoundation.org header.b="LKFMqXQP";
+	dkim=pass (1024-bit key; unprotected) header.d=linuxfoundation.org header.i=@linuxfoundation.org header.b="pfXct+1S";
 	dkim-atps=neutral
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from sea.source.kernel.org (sea.source.kernel.org [172.234.252.31])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 540AC10E6E8;
- Wed, 24 Sep 2025 10:40:54 +0000 (UTC)
+Received: from tor.source.kernel.org (tor.source.kernel.org [172.105.4.254])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 58F4E10E147;
+ Wed, 24 Sep 2025 10:52:52 +0000 (UTC)
 Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by sea.source.kernel.org (Postfix) with ESMTP id C6F69436EF;
- Wed, 24 Sep 2025 10:40:53 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id DA070C4CEE7;
- Wed, 24 Sep 2025 10:40:52 +0000 (UTC)
+ by tor.source.kernel.org (Postfix) with ESMTP id 08DEF601A7;
+ Wed, 24 Sep 2025 10:52:51 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id F2231C4CEE7;
+ Wed, 24 Sep 2025 10:52:49 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=linuxfoundation.org;
- s=korg; t=1758710453;
- bh=WLTg6YhgypSTinJluMxh2Q1bjm4WVEf8y8wZlXZnQg0=;
+ s=korg; t=1758711170;
+ bh=mS9/Zki3fhvWxi5tDc3K8QUX3Ph2SWEaxUiy7dy4C9I=;
  h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
- b=LKFMqXQPRy4tKUX1osFG2qJmVgiVfCn4hrzZTfy6Hc0iDau9ChwwRcHsb93S7dFAq
- CRjAvxRLq0kPwdCkoQLeE0j+q2YFfAlMZn9y4CW022IV53eEvOkL0JkiErBgqoIvF3
- gH2uTYZs0FsR1VNgjSgu0uwikqlKDIqvfuwRbeIs=
-Date: Wed, 24 Sep 2025 12:40:50 +0200
+ b=pfXct+1STk1MPGFrPNKalM/8qJed+6n69m8u7MwE4Y9INm5+LrtlQ8TITuX3I7HGG
+ e/EOZlqXiTlyF7ciU82ciYJ/MD2NJvMj8LePhbu8UMvh6/AN4CsiYNQIycWhDZn7Pi
+ snoVRV4mJ5fQGkPQbOSGr81NZdiDBZt/hPB0DHLI=
+Date: Wed, 24 Sep 2025 12:52:41 +0200
 From: Greg KH <gregkh@linuxfoundation.org>
-To: Joel Fernandes <joelagnelf@nvidia.com>
-Cc: Benno Lossin <lossin@kernel.org>, linux-kernel@vger.kernel.org,
- rust-for-linux@vger.kernel.org, dri-devel@lists.freedesktop.org,
- dakr@kernel.org, acourbot@nvidia.com, Alistair Popple <apopple@nvidia.com>,
- Miguel Ojeda <ojeda@kernel.org>, Alex Gaynor <alex.gaynor@gmail.com>,
+To: Danilo Krummrich <dakr@kernel.org>
+Cc: Benno Lossin <lossin@kernel.org>, Joel Fernandes <joelagnelf@nvidia.com>,
+ linux-kernel@vger.kernel.org, rust-for-linux@vger.kernel.org,
+ dri-devel@lists.freedesktop.org, acourbot@nvidia.com,
+ Alistair Popple <apopple@nvidia.com>, Miguel Ojeda <ojeda@kernel.org>,
+ Alex Gaynor <alex.gaynor@gmail.com>,
  Boqun Feng <boqun.feng@gmail.com>, Gary Guo <gary@garyguo.net>,
  bjorn3_gh@protonmail.com, Andreas Hindborg <a.hindborg@kernel.org>,
  Alice Ryhl <aliceryhl@google.com>, Trevor Gross <tmgross@umich.edu>,
@@ -48,17 +49,17 @@ Cc: Benno Lossin <lossin@kernel.org>, linux-kernel@vger.kernel.org,
  nouveau@lists.freedesktop.org
 Subject: Re: [PATCH v4 1/6] nova-core: bitfield: Move bitfield-specific code
  from register! into new macro
-Message-ID: <2025092425-sinuous-playoff-3618@gregkh>
+Message-ID: <2025092432-entrust-citizen-0232@gregkh>
 References: <20250920182232.2095101-1-joelagnelf@nvidia.com>
  <20250920182232.2095101-2-joelagnelf@nvidia.com>
  <2025092157-pauper-snap-aad1@gregkh>
  <DCYHCLM67KRZ.366VS9PDKLYKY@kernel.org>
  <2025092125-urban-muppet-1c2f@gregkh>
- <20250923222434.GA2479829@joelbox2>
+ <DCYIX8URVIWM.2ZK3GHH3J82XQ@kernel.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
-In-Reply-To: <20250923222434.GA2479829@joelbox2>
+In-Reply-To: <DCYIX8URVIWM.2ZK3GHH3J82XQ@kernel.org>
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -73,190 +74,110 @@ List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-On Tue, Sep 23, 2025 at 06:24:34PM -0400, Joel Fernandes wrote:
-> Hi Greg,
+On Sun, Sep 21, 2025 at 03:47:55PM +0200, Danilo Krummrich wrote:
+> On Sun Sep 21, 2025 at 2:45 PM CEST, Greg KH wrote:
+> > Again, regmap handles this all just fine, why not just make bindings to
+> > that api here instead?
 > 
-> On Sun, Sep 21, 2025 at 02:45:27PM +0200, Greg KH wrote:
-> > On Sun, Sep 21, 2025 at 02:33:56PM +0200, Benno Lossin wrote:
-> > > On Sun Sep 21, 2025 at 11:36 AM CEST, Greg KH wrote:
-> > > > On Sat, Sep 20, 2025 at 02:22:27PM -0400, Joel Fernandes wrote:
-> > > >> The bitfield-specific into new macro. This will be used to define
-> > > >> structs with bitfields, similar to C language.
-> > > >> 
-> > > >> Reviewed-by: Elle Rhumsaa <elle@weathered-steel.dev>
-> > > >> Signed-off-by: Joel Fernandes <joelagnelf@nvidia.com>
-> > > >> ---
-> > > >>  drivers/gpu/nova-core/bitfield.rs    | 314 +++++++++++++++++++++++++++
-> > > >>  drivers/gpu/nova-core/nova_core.rs   |   3 +
-> > > >>  drivers/gpu/nova-core/regs/macros.rs | 259 +---------------------
-> > > >>  3 files changed, 327 insertions(+), 249 deletions(-)
-> > > >>  create mode 100644 drivers/gpu/nova-core/bitfield.rs
-> > > >> 
-> > > >> diff --git a/drivers/gpu/nova-core/bitfield.rs b/drivers/gpu/nova-core/bitfield.rs
-> > > >> new file mode 100644
-> > > >> index 000000000000..ba6b7caa05d9
-> > > >> --- /dev/null
-> > > >> +++ b/drivers/gpu/nova-core/bitfield.rs
-> > > >> @@ -0,0 +1,314 @@
-> > > >> +// SPDX-License-Identifier: GPL-2.0
-> > > >> +
-> > > >> +//! Bitfield library for Rust structures
-> > > >> +//!
-> > > >> +//! Support for defining bitfields in Rust structures. Also used by the [`register!`] macro.
-> > > >> +//!
-> > > >> +//! # Syntax
-> > > >> +//!
-> > > >> +//! ```rust
-> > > >> +//! #[derive(Debug, Clone, Copy)]
-> > > >> +//! enum Mode {
-> > > >> +//!     Low = 0,
-> > > >> +//!     High = 1,
-> > > >> +//!     Auto = 2,
-> > > >> +//! }
-> > > >> +//!
-> > > >> +//! impl TryFrom<u8> for Mode {
-> > > >> +//!     type Error = u8;
-> > > >> +//!     fn try_from(value: u8) -> Result<Self, Self::Error> {
-> > > >> +//!         match value {
-> > > >> +//!             0 => Ok(Mode::Low),
-> > > >> +//!             1 => Ok(Mode::High),
-> > > >> +//!             2 => Ok(Mode::Auto),
-> > > >> +//!             _ => Err(value),
-> > > >> +//!         }
-> > > >> +//!     }
-> > > >> +//! }
-> > > >> +//!
-> > > >> +//! impl From<Mode> for u32 {
-> > > >> +//!     fn from(mode: Mode) -> u32 {
-> > > >> +//!         mode as u32
-> > > >> +//!     }
-> > > >> +//! }
-> > > >> +//!
-> > > >> +//! #[derive(Debug, Clone, Copy)]
-> > > >> +//! enum State {
-> > > >> +//!     Inactive = 0,
-> > > >> +//!     Active = 1,
-> > > >> +//! }
-> > > >> +//!
-> > > >> +//! impl From<bool> for State {
-> > > >> +//!     fn from(value: bool) -> Self {
-> > > >> +//!         if value { State::Active } else { State::Inactive }
-> > > >> +//!     }
-> > > >> +//! }
-> > > >> +//!
-> > > >> +//! impl From<State> for u32 {
-> > > >> +//!     fn from(state: State) -> u32 {
-> > > >> +//!         state as u32
-> > > >> +//!     }
-> > > >> +//! }
-> > > >> +//!
-> > > >> +//! bitfield! {
-> > > >> +//!     struct ControlReg {
-> > > >> +//!         3:0       mode        as u8 ?=> Mode;
-> > > >> +//!         7         state       as bool => State;
-> > > >> +//!     }
-> > > >> +//! }
-> > > >
-> > > > As discussed at the conference this week, I do object to this as it
-> > > > will allow the same mistakes to happen that we used to do in the kernel
-> > > > for a long time before the regmap() api happened, along with GENMASK().
-> > > 
-> > > Have you read the following macro arm of the implementation?
-> > > 
-> > >     // Generates the accessor methods for a single field.
-> > >     (
-> > >         @leaf_accessor $name:ident $hi:tt:$lo:tt $field:ident
-> > >             { $process:expr } $to_type:ty => $res_type:ty $(, $comment:literal)?;
-> > >     ) => {
-> > >         ::kernel::macros::paste!(
-> > >         const [<$field:upper _RANGE>]: ::core::ops::RangeInclusive<u8> = $lo..=$hi;
-> > >         const [<$field:upper _MASK>]: u32 = ((((1 << $hi) - 1) << 1) + 1) - ((1 << $lo) - 1);
-> > >         const [<$field:upper _SHIFT>]: u32 = Self::[<$field:upper _MASK>].trailing_zeros();
-> > >         );
-> > >     
-> > >         $(
-> > >         #[doc="Returns the value of this field:"]
-> > >         #[doc=$comment]
-> > >         )?
-> > >         #[inline(always)]
-> > >         pub(crate) fn $field(self) -> $res_type {
-> > >             ::kernel::macros::paste!(
-> > >             const MASK: u32 = $name::[<$field:upper _MASK>];
-> > >             const SHIFT: u32 = $name::[<$field:upper _SHIFT>];
-> > >             );
-> > >             let field = ((self.0 & MASK) >> SHIFT);
-> > > 
-> > > Here you can see that it's just a mask + shift operation internally to
-> > > access the field.
-> > >     
-> > >             $process(field)
-> > >         }
-> > >     
-> > >         ::kernel::macros::paste!(
-> > >         $(
-> > >         #[doc="Sets the value of this field:"]
-> > >         #[doc=$comment]
-> > >         )?
-> > >         #[inline(always)]
-> > >         pub(crate) fn [<set_ $field>](mut self, value: $to_type) -> Self {
-> > >             const MASK: u32 = $name::[<$field:upper _MASK>];
-> > >             const SHIFT: u32 = $name::[<$field:upper _SHIFT>];
-> > >             let value = (u32::from(value) << SHIFT) & MASK;
-> > >             self.0 = (self.0 & !MASK) | value;
-> > >     
-> > >             self
-> > >         }
-> > >         );
-> > >     };
-> > 
-> > Yes, that's great, but that is all done in "native cpu" endian, and
-> > might not actually represent what the hardware does at all, which is
-> > what I was trying to get at here, sorry for not being more specific.
-> > 
-> > > Now I too would like to see how exactly this will be used to read data
-> > > from hardware. But at least in theory if the conversion from hardware
-> > > endianness to native endianness is done correctly, this will do the
-> > > right thing :)
-> > 
-> > That's great, so we are close, but it's not quite correct.  How about
-> > something like:
-> > 
-> > 	0:7	reg_X	as __le32
-> > 	8:15	reg_y	as __le32
+> The idea is to use this for the register!() macro, e.g.
 > 
-> I don't think we should force endianness requirements within specific fields in
-> the bitfield rust library itself, it is upto the user. bitfields are not only
-> for registers even in C. If you see on the C side, we have rcu_special union
-> which uses 'u32' and does not enforce endianness within the fields or bytes
-> of the struct with respect to the fields. Its all native CPU endian and works
-> fine. You're basically saying in terms of C that, the designers of the C
-> bitfield in C standard force the C language to use endianness in the types, no
-> they can't / shouldn't be forced to.
+> 	register!(NV_PMC_BOOT_0 @ 0x00000000, "Basic revision information about the GPU" {
+> 	    28:24   architecture_0 as u8, "Lower bits of the architecture";
+> 	    23:20   implementation as u8, "Implementation version of the architecture";
+> 	    8:8     architecture_1 as u8, "MSB of the architecture";
+> 	    7:4     major_revision as u8, "Major revision of the chip";
+> 	    3:0     minor_revision as u8, "Minor revision of the chip";
+> 	});
+> 
+> (More examples in [1].)
 
-For "cpu native" structures, just use the bit and genmask macros we have
-today, on top of a normal variable type and you should be fine.  The
-only place you need/want to do stuff like what is being proposed here is
-when you are trying to match up a data structure that is in hardware to
-be able to split the values out of it safely.
+Wonderful, but I fail to see where the endian-ness of this is set
+anywhere.  Am I just missing that?  The regmap api enforces this idea,
+and so the 
 
-And when dealing with data that goes outside of the kernel (i.e. to/from
-hardware), you HAVE to specify the endianness of that data as the
-hardware is the one that defines this, NOT the cpu that the kernel is
-running on.
+> 
+> This generates a structure with the relevant accessors; we can also implement
+> additional logic, such as:
+> 
+> 	impl NV_PMC_BOOT_0 {
+> 	    /// Combines `architecture_0` and `architecture_1` to obtain the architecture of the chip.
+> 	    pub(crate) fn architecture(self) -> Result<Architecture> {
+> 	        Architecture::try_from(
+> 	            self.architecture_0() | (self.architecture_1() << Self::ARCHITECTURE_0_RANGE.len()),
+> 	        )
+> 	    }
+> 	
+> 	    /// Combines `architecture` and `implementation` to obtain a code unique to the chipset.
+> 	    pub(crate) fn chipset(self) -> Result<Chipset> {
+> 	        self.architecture()
+> 	            .map(|arch| {
+> 	                ((arch as u32) << Self::IMPLEMENTATION_RANGE.len())
+> 	                    | u32::from(self.implementation())
+> 	            })
+> 	            .and_then(Chipset::try_from)
+> 	    }
+> 	}
+> 
+> This conviniently allows us to read the register with
+> 
+> 	let boot0 = regs::NV_PMC_BOOT_0::read(bar);
+> 
+> and obtain an instance of the entire Chipset structure with
+> 
+> 	let chipset = boot0.chipset()?;
+> 
+> or pass it to a constructor that creates a Revision instance
+> 
+> 	let rev = Revision::from_boot0(boot0);
+> 
+> Analogously it allows us to modify and write registers without having to mess
+> with error prone shifts, masks and casts, because that code is generated by the
+> register!() macro. (Of course, unless we have more complicated cases where
+> multiple fields have to be combined as illustrated above.)
+> 
+> Note that bar is of type pci::Bar<BAR0_SIZE> where BAR0_SIZE in our case is
+> SZ_16M.
+> 
+> However, the type required by read() as generated by the register!() macro
+> actually only requires something that implements an I/O backend, i.e
+> kernel::io::Io<SIZE>.
+> 
+> pci::Bar is a specific implementation of kernel::io::Io.
+> 
+> With this we can let the actual I/O backend handle the endianness of the bus.
 
-So you should NEVER see a bitfield structure that is defined just as a
-"u32" and expect that to work properly when read/written to hardware
-because while little-endian is what seems to have "won" the recent
-battles on this topic it's not always the case for many places that
-Linux runs on today.
+Ok, great, but right now it's not doing that from what I am seeing when
+reading the code.  Shouldn't IoMem::new() take that as an argument?
 
-> For the separate issue of enforcing endianness with respect to (across)
-> multiple fields, I agree with you that if the user's backend (the consumer of
-> the data) is not doing such conversion, say via regmap, then that becomes a
-> problem. But that problem is orthogonal/different and cannot be solved here.  
+But, that feels odd as our current iomem api in C doesn't care about
+endian issues at all because it "assumes" that the caller has already
+handle this properly and all that the caller "wants" is to write/read to
+some memory chunk and not twiddle bits.
 
-But that is exactly what these macros are being defined here for, so to
-ignore that is going to cause problems :)
+> (Actually, we could even implement an I/O backend that uses regmap.)
+
+That would probably be best to do eventually as most platform drivers
+use regmap today as it's the sanest api we have at the moment.
+
+> So, I think the register!() stuff is rather orthogonal.
+
+I think it's very relevant as people seem to just be "assuming" that all
+the world (hardware and cpus) are little-endian, while in reality, they
+are anything but.  As proof, the code that uses this register!() logic
+today totally ignores endian issues and just assumes that it is both
+running on a little-endian system, AND the hardware is little-endian.
+
+As a crazy example, look at the USB host controllers that at runtime,
+have to be queried to determine what endian they are running on and the
+kernel drivers have to handle this "on the fly".  Yes, one can argue
+that the hardware developers who came up with that should be forced to
+write the drivers as penance for such sins, but in the end, it's us that
+has to deal with it...
+
+So ignoring it will get us quite a ways forward with controlling sane
+hardware on sane systems, but when s390 finally realizes they can be
+writing their drivers in rust, we are going to have to have these
+conversations again :)
 
 thanks,
 
