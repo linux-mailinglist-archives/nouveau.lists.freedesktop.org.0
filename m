@@ -2,83 +2,63 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id 37629B97D0C
-	for <lists+nouveau@lfdr.de>; Wed, 24 Sep 2025 01:45:52 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 36300B9975B
+	for <lists+nouveau@lfdr.de>; Wed, 24 Sep 2025 12:41:24 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id B595010E20C;
-	Tue, 23 Sep 2025 23:45:50 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 7E5D710E6EB;
+	Wed, 24 Sep 2025 10:40:56 +0000 (UTC)
 Authentication-Results: gabe.freedesktop.org;
-	dkim=pass (2048-bit key; unprotected) header.d=darkrefraction-com.20230601.gappssmtp.com header.i=@darkrefraction-com.20230601.gappssmtp.com header.b="WULp/O/3";
+	dkim=pass (1024-bit key; unprotected) header.d=linuxfoundation.org header.i=@linuxfoundation.org header.b="LKFMqXQP";
 	dkim-atps=neutral
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from mail-qt1-f172.google.com (mail-qt1-f172.google.com
- [209.85.160.172])
- by gabe.freedesktop.org (Postfix) with ESMTPS id A36A810E209
- for <nouveau@lists.freedesktop.org>; Tue, 23 Sep 2025 23:45:49 +0000 (UTC)
-Received: by mail-qt1-f172.google.com with SMTP id
- d75a77b69052e-4cdf3772f1dso21593931cf.1
- for <nouveau@lists.freedesktop.org>; Tue, 23 Sep 2025 16:45:49 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=darkrefraction-com.20230601.gappssmtp.com; s=20230601; t=1758671148;
- x=1759275948; darn=lists.freedesktop.org; 
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:from:to:cc:subject:date
- :message-id:reply-to;
- bh=kjJ5XcCRhgyVZ2PYWS6peg4SdjwUuIqyqOgfFrpIYDU=;
- b=WULp/O/3/B0bGtT+Ce497AQw1NCaD1yllimpJuAM4jTr1HoW9HRYRIMqJf4+DM8tra
- ZfzAhKUtzig1H5PA6ozwaPBLt9WxNtmQ/aYs9dVSj89pjiNj8OAkdH4E3VeZ0M2FbZcg
- hhJnAaPjJKZDzUP37EhJraD1zYmtXuN42qFZrL6G5Hr4KIsNnop/QbNF90kH380SCjm9
- Vh76CSCKiPOYB+d1sT1UXCwhq+CiME2N2h3jZTVH5uuR8A7rTMWgSuTi1jwioSG4K1k6
- MhVUCZpFLYZ4rMYzQ1+FiymZkbSRCVW3O2kuamuEqTPm1nH3nxxk9W9UGNL1b8HtUHsO
- 2F+w==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1758671148; x=1759275948;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=kjJ5XcCRhgyVZ2PYWS6peg4SdjwUuIqyqOgfFrpIYDU=;
- b=q7OeV+J6+CFXcLp2HgpdPXDvXHecf3DsC9fIJvymLF7JEMcAvZarr6RD7Rsvj62eDB
- q2hyv12e+wOAFxBFBkypEu6DxzY7tL/t+CQZwBJN+bScXSMz7b7CsgdEwP2DV/069Qkz
- 7p/uB49UAHCiaIZUI1F2OBayFsJVA/wPMlwV2R2PrAapvtckJOOVB4Y3zd7OeKvw/U1n
- xXSaCg6jlQo/f0wcciLDz3pgoa7zxaADIjcqVPEq1sZqhjnVnQsPl0AOwXu75RQ08Dnu
- DV1izIYre6p/W5DZXo9x4OKUwIwOOCdvE7/UosAKyjkDNodWe7urf9VG2QLmF8lKrfTp
- jXmA==
-X-Forwarded-Encrypted: i=1;
- AJvYcCW6bq0nua42oYYPUXc+q1pEeuHmSpbF6rvL3A5gDggbwVuwa3qKd851iVUUOLhpxygLwZ1lKgcR@lists.freedesktop.org
-X-Gm-Message-State: AOJu0Yxe68o95R2QR7UrFHvFyTa/o3YnS+mqi4WC98zOqBHnpu03d6gW
- eBkD4ZKvRiiGyaUn3CvV0I5CD7Mi2ODKrOJuZmJH/V6XiC6JGQ+huTproolO4TM9Vdc=
-X-Gm-Gg: ASbGncsknS2Xt7dh1jtHty9tWKC8g+jkzxo2yJjxQ2e4OILsgxzdK4euItBhlKVX9No
- pJ3sAiG6GCOWbyjJDDQ1nF47INuHhcncDFToKFBMI466vdIviVA7RC+ySwzWIa/BAW9lVMVsPTX
- aPHNRamjufzXrRNHXHqINhubrYpuSnF65XbsIqRc0UKs/gPjFSFdgzKAp2Lz+iBgMh6PRxa5aOB
- Vb9pGhh5pvOTUpXwj3oSGEUBBLOATTRbZOiINh0fYihzkNtd6mF4w7YLmxjxFYbc1qhvj5zEleJ
- N+flWlS4yEuY5uzrKZkConw0liXzJRVpTF1vR3gZFCq+TaAp0TjiMAVvcVmbXjwSlfa8tPzC7z/
- 0sOGEEQ8hC+THI98FCjdygmyldVkLv6vNO7CUAEy6Kyg=
-X-Google-Smtp-Source: AGHT+IGaS+4ogbIuVFxDbsYybur0mw+fgKlMuWj1uG6NOugeh5atXxMdwJvYM/sryXDtfYV76X9pWQ==
-X-Received: by 2002:a05:622a:1206:b0:4cc:228d:4b8b with SMTP id
- d75a77b69052e-4d3698e74f7mr51677601cf.32.1758671148203; 
- Tue, 23 Sep 2025 16:45:48 -0700 (PDT)
-Received: from m-kiwi.verizon.net ([71.190.100.175])
- by smtp.gmail.com with ESMTPSA id
- d75a77b69052e-4bda86b4b94sm94131211cf.26.2025.09.23.16.45.46
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 23 Sep 2025 16:45:47 -0700 (PDT)
-From: Mel Henning <mhenning@darkrefraction.com>
-To: Karol Herbst <kherbst@redhat.com>, Lyude Paul <lyude@redhat.com>,
- Danilo Krummrich <dakr@kernel.org>,
- Faith Ekstrand <faith.ekstrand@collabora.com>,
- dri-devel@lists.freedesktop.org, nouveau@lists.freedesktop.org
-Cc: Mel Henning <mhenning@darkrefraction.com>,
-	stable@vger.kernel.org
-Subject: [PATCH 1/1] nouveau: On nvc0 membar between semaphore write and
- interrupt
-Date: Tue, 23 Sep 2025 19:42:59 -0400
-Message-ID: <20250923234511.114077-2-mhenning@darkrefraction.com>
-X-Mailer: git-send-email 2.51.0
-In-Reply-To: <20250923234511.114077-1-mhenning@darkrefraction.com>
-References: <20250923234511.114077-1-mhenning@darkrefraction.com>
+Received: from sea.source.kernel.org (sea.source.kernel.org [172.234.252.31])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 540AC10E6E8;
+ Wed, 24 Sep 2025 10:40:54 +0000 (UTC)
+Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
+ by sea.source.kernel.org (Postfix) with ESMTP id C6F69436EF;
+ Wed, 24 Sep 2025 10:40:53 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id DA070C4CEE7;
+ Wed, 24 Sep 2025 10:40:52 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=linuxfoundation.org;
+ s=korg; t=1758710453;
+ bh=WLTg6YhgypSTinJluMxh2Q1bjm4WVEf8y8wZlXZnQg0=;
+ h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
+ b=LKFMqXQPRy4tKUX1osFG2qJmVgiVfCn4hrzZTfy6Hc0iDau9ChwwRcHsb93S7dFAq
+ CRjAvxRLq0kPwdCkoQLeE0j+q2YFfAlMZn9y4CW022IV53eEvOkL0JkiErBgqoIvF3
+ gH2uTYZs0FsR1VNgjSgu0uwikqlKDIqvfuwRbeIs=
+Date: Wed, 24 Sep 2025 12:40:50 +0200
+From: Greg KH <gregkh@linuxfoundation.org>
+To: Joel Fernandes <joelagnelf@nvidia.com>
+Cc: Benno Lossin <lossin@kernel.org>, linux-kernel@vger.kernel.org,
+ rust-for-linux@vger.kernel.org, dri-devel@lists.freedesktop.org,
+ dakr@kernel.org, acourbot@nvidia.com, Alistair Popple <apopple@nvidia.com>,
+ Miguel Ojeda <ojeda@kernel.org>, Alex Gaynor <alex.gaynor@gmail.com>,
+ Boqun Feng <boqun.feng@gmail.com>, Gary Guo <gary@garyguo.net>,
+ bjorn3_gh@protonmail.com, Andreas Hindborg <a.hindborg@kernel.org>,
+ Alice Ryhl <aliceryhl@google.com>, Trevor Gross <tmgross@umich.edu>,
+ David Airlie <airlied@gmail.com>, Simona Vetter <simona@ffwll.ch>,
+ Maarten Lankhorst <maarten.lankhorst@linux.intel.com>,
+ Maxime Ripard <mripard@kernel.org>,
+ Thomas Zimmermann <tzimmermann@suse.de>,
+ John Hubbard <jhubbard@nvidia.com>, Timur Tabi <ttabi@nvidia.com>,
+ joel@joelfernandes.org, Elle Rhumsaa <elle@weathered-steel.dev>,
+ Yury Norov <yury.norov@gmail.com>,
+ Daniel Almeida <daniel.almeida@collabora.com>,
+ nouveau@lists.freedesktop.org
+Subject: Re: [PATCH v4 1/6] nova-core: bitfield: Move bitfield-specific code
+ from register! into new macro
+Message-ID: <2025092425-sinuous-playoff-3618@gregkh>
+References: <20250920182232.2095101-1-joelagnelf@nvidia.com>
+ <20250920182232.2095101-2-joelagnelf@nvidia.com>
+ <2025092157-pauper-snap-aad1@gregkh>
+ <DCYHCLM67KRZ.366VS9PDKLYKY@kernel.org>
+ <2025092125-urban-muppet-1c2f@gregkh>
+ <20250923222434.GA2479829@joelbox2>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <20250923222434.GA2479829@joelbox2>
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -93,291 +73,191 @@ List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-This takes the fix from 2cb66ae604 ("nouveau: Membar before between
-semaphore writes and the interrupt") and applies it to nvc0_fence.c.
+On Tue, Sep 23, 2025 at 06:24:34PM -0400, Joel Fernandes wrote:
+> Hi Greg,
+> 
+> On Sun, Sep 21, 2025 at 02:45:27PM +0200, Greg KH wrote:
+> > On Sun, Sep 21, 2025 at 02:33:56PM +0200, Benno Lossin wrote:
+> > > On Sun Sep 21, 2025 at 11:36 AM CEST, Greg KH wrote:
+> > > > On Sat, Sep 20, 2025 at 02:22:27PM -0400, Joel Fernandes wrote:
+> > > >> The bitfield-specific into new macro. This will be used to define
+> > > >> structs with bitfields, similar to C language.
+> > > >> 
+> > > >> Reviewed-by: Elle Rhumsaa <elle@weathered-steel.dev>
+> > > >> Signed-off-by: Joel Fernandes <joelagnelf@nvidia.com>
+> > > >> ---
+> > > >>  drivers/gpu/nova-core/bitfield.rs    | 314 +++++++++++++++++++++++++++
+> > > >>  drivers/gpu/nova-core/nova_core.rs   |   3 +
+> > > >>  drivers/gpu/nova-core/regs/macros.rs | 259 +---------------------
+> > > >>  3 files changed, 327 insertions(+), 249 deletions(-)
+> > > >>  create mode 100644 drivers/gpu/nova-core/bitfield.rs
+> > > >> 
+> > > >> diff --git a/drivers/gpu/nova-core/bitfield.rs b/drivers/gpu/nova-core/bitfield.rs
+> > > >> new file mode 100644
+> > > >> index 000000000000..ba6b7caa05d9
+> > > >> --- /dev/null
+> > > >> +++ b/drivers/gpu/nova-core/bitfield.rs
+> > > >> @@ -0,0 +1,314 @@
+> > > >> +// SPDX-License-Identifier: GPL-2.0
+> > > >> +
+> > > >> +//! Bitfield library for Rust structures
+> > > >> +//!
+> > > >> +//! Support for defining bitfields in Rust structures. Also used by the [`register!`] macro.
+> > > >> +//!
+> > > >> +//! # Syntax
+> > > >> +//!
+> > > >> +//! ```rust
+> > > >> +//! #[derive(Debug, Clone, Copy)]
+> > > >> +//! enum Mode {
+> > > >> +//!     Low = 0,
+> > > >> +//!     High = 1,
+> > > >> +//!     Auto = 2,
+> > > >> +//! }
+> > > >> +//!
+> > > >> +//! impl TryFrom<u8> for Mode {
+> > > >> +//!     type Error = u8;
+> > > >> +//!     fn try_from(value: u8) -> Result<Self, Self::Error> {
+> > > >> +//!         match value {
+> > > >> +//!             0 => Ok(Mode::Low),
+> > > >> +//!             1 => Ok(Mode::High),
+> > > >> +//!             2 => Ok(Mode::Auto),
+> > > >> +//!             _ => Err(value),
+> > > >> +//!         }
+> > > >> +//!     }
+> > > >> +//! }
+> > > >> +//!
+> > > >> +//! impl From<Mode> for u32 {
+> > > >> +//!     fn from(mode: Mode) -> u32 {
+> > > >> +//!         mode as u32
+> > > >> +//!     }
+> > > >> +//! }
+> > > >> +//!
+> > > >> +//! #[derive(Debug, Clone, Copy)]
+> > > >> +//! enum State {
+> > > >> +//!     Inactive = 0,
+> > > >> +//!     Active = 1,
+> > > >> +//! }
+> > > >> +//!
+> > > >> +//! impl From<bool> for State {
+> > > >> +//!     fn from(value: bool) -> Self {
+> > > >> +//!         if value { State::Active } else { State::Inactive }
+> > > >> +//!     }
+> > > >> +//! }
+> > > >> +//!
+> > > >> +//! impl From<State> for u32 {
+> > > >> +//!     fn from(state: State) -> u32 {
+> > > >> +//!         state as u32
+> > > >> +//!     }
+> > > >> +//! }
+> > > >> +//!
+> > > >> +//! bitfield! {
+> > > >> +//!     struct ControlReg {
+> > > >> +//!         3:0       mode        as u8 ?=> Mode;
+> > > >> +//!         7         state       as bool => State;
+> > > >> +//!     }
+> > > >> +//! }
+> > > >
+> > > > As discussed at the conference this week, I do object to this as it
+> > > > will allow the same mistakes to happen that we used to do in the kernel
+> > > > for a long time before the regmap() api happened, along with GENMASK().
+> > > 
+> > > Have you read the following macro arm of the implementation?
+> > > 
+> > >     // Generates the accessor methods for a single field.
+> > >     (
+> > >         @leaf_accessor $name:ident $hi:tt:$lo:tt $field:ident
+> > >             { $process:expr } $to_type:ty => $res_type:ty $(, $comment:literal)?;
+> > >     ) => {
+> > >         ::kernel::macros::paste!(
+> > >         const [<$field:upper _RANGE>]: ::core::ops::RangeInclusive<u8> = $lo..=$hi;
+> > >         const [<$field:upper _MASK>]: u32 = ((((1 << $hi) - 1) << 1) + 1) - ((1 << $lo) - 1);
+> > >         const [<$field:upper _SHIFT>]: u32 = Self::[<$field:upper _MASK>].trailing_zeros();
+> > >         );
+> > >     
+> > >         $(
+> > >         #[doc="Returns the value of this field:"]
+> > >         #[doc=$comment]
+> > >         )?
+> > >         #[inline(always)]
+> > >         pub(crate) fn $field(self) -> $res_type {
+> > >             ::kernel::macros::paste!(
+> > >             const MASK: u32 = $name::[<$field:upper _MASK>];
+> > >             const SHIFT: u32 = $name::[<$field:upper _SHIFT>];
+> > >             );
+> > >             let field = ((self.0 & MASK) >> SHIFT);
+> > > 
+> > > Here you can see that it's just a mask + shift operation internally to
+> > > access the field.
+> > >     
+> > >             $process(field)
+> > >         }
+> > >     
+> > >         ::kernel::macros::paste!(
+> > >         $(
+> > >         #[doc="Sets the value of this field:"]
+> > >         #[doc=$comment]
+> > >         )?
+> > >         #[inline(always)]
+> > >         pub(crate) fn [<set_ $field>](mut self, value: $to_type) -> Self {
+> > >             const MASK: u32 = $name::[<$field:upper _MASK>];
+> > >             const SHIFT: u32 = $name::[<$field:upper _SHIFT>];
+> > >             let value = (u32::from(value) << SHIFT) & MASK;
+> > >             self.0 = (self.0 & !MASK) | value;
+> > >     
+> > >             self
+> > >         }
+> > >         );
+> > >     };
+> > 
+> > Yes, that's great, but that is all done in "native cpu" endian, and
+> > might not actually represent what the hardware does at all, which is
+> > what I was trying to get at here, sorry for not being more specific.
+> > 
+> > > Now I too would like to see how exactly this will be used to read data
+> > > from hardware. But at least in theory if the conversion from hardware
+> > > endianness to native endianness is done correctly, this will do the
+> > > right thing :)
+> > 
+> > That's great, so we are close, but it's not quite correct.  How about
+> > something like:
+> > 
+> > 	0:7	reg_X	as __le32
+> > 	8:15	reg_y	as __le32
+> 
+> I don't think we should force endianness requirements within specific fields in
+> the bitfield rust library itself, it is upto the user. bitfields are not only
+> for registers even in C. If you see on the C side, we have rcu_special union
+> which uses 'u32' and does not enforce endianness within the fields or bytes
+> of the struct with respect to the fields. Its all native CPU endian and works
+> fine. You're basically saying in terms of C that, the designers of the C
+> bitfield in C standard force the C language to use endianness in the types, no
+> they can't / shouldn't be forced to.
 
-If I force my ampere system down the nvc0_fence path then I reproduce the
-same issues with transfer queues + The Talos Principle that were fixed by
-the above commit. This fixes that issue in exactly the same way for the
-old code path.
+For "cpu native" structures, just use the bit and genmask macros we have
+today, on top of a normal variable type and you should be fine.  The
+only place you need/want to do stuff like what is being proposed here is
+when you are trying to match up a data structure that is in hardware to
+be able to split the values out of it safely.
 
-Fixes: 60cdadace320 ("drm/nouveau/fence: use NVIDIA's headers for emit()")
-Signed-off-by: Mel Henning <mhenning@darkrefraction.com>
-Cc: stable@vger.kernel.org
----
- .../drm/nouveau/include/nvhw/class/cl906f.h   | 23 +++++
- .../drm/nouveau/include/nvhw/class/clb06f.h   | 54 +++++++++++
- .../drm/nouveau/include/nvhw/class/clc06f.h   | 93 +++++++++++++++++++
- .../gpu/drm/nouveau/include/nvif/push906f.h   |  2 +
- drivers/gpu/drm/nouveau/nvc0_fence.c          | 31 ++++++-
- 5 files changed, 200 insertions(+), 3 deletions(-)
- create mode 100644 drivers/gpu/drm/nouveau/include/nvhw/class/clb06f.h
- create mode 100644 drivers/gpu/drm/nouveau/include/nvhw/class/clc06f.h
+And when dealing with data that goes outside of the kernel (i.e. to/from
+hardware), you HAVE to specify the endianness of that data as the
+hardware is the one that defines this, NOT the cpu that the kernel is
+running on.
 
-diff --git a/drivers/gpu/drm/nouveau/include/nvhw/class/cl906f.h b/drivers/gpu/drm/nouveau/include/nvhw/class/cl906f.h
-index 673d668885bb..529c785b4651 100644
---- a/drivers/gpu/drm/nouveau/include/nvhw/class/cl906f.h
-+++ b/drivers/gpu/drm/nouveau/include/nvhw/class/cl906f.h
-@@ -47,6 +47,29 @@
- #define NV906F_SEMAPHORED_RELEASE_SIZE_4BYTE                        0x00000001
- #define NV906F_NON_STALL_INTERRUPT                                 (0x00000020)
- #define NV906F_NON_STALL_INTERRUPT_HANDLE                                 31:0
-+#define NV906F_MEM_OP_A                                            (0x00000028)
-+#define NV906F_MEM_OP_A_OPERAND_LOW                                       31:2
-+#define NV906F_MEM_OP_A_TLB_INVALIDATE_ADDR                               29:2
-+#define NV906F_MEM_OP_A_TLB_INVALIDATE_TARGET                            31:30
-+#define NV906F_MEM_OP_A_TLB_INVALIDATE_TARGET_VID_MEM               0x00000000
-+#define NV906F_MEM_OP_A_TLB_INVALIDATE_TARGET_SYS_MEM_COHERENT      0x00000002
-+#define NV906F_MEM_OP_A_TLB_INVALIDATE_TARGET_SYS_MEM_NONCOHERENT   0x00000003
-+#define NV906F_MEM_OP_B                                            (0x0000002c)
-+#define NV906F_MEM_OP_B_OPERAND_HIGH                                       7:0
-+#define NV906F_MEM_OP_B_OPERATION                                        31:27
-+#define NV906F_MEM_OP_B_OPERATION_SYSMEMBAR_FLUSH                   0x00000005
-+#define NV906F_MEM_OP_B_OPERATION_SOFT_FLUSH                        0x00000006
-+#define NV906F_MEM_OP_B_OPERATION_MMU_TLB_INVALIDATE                0x00000009
-+#define NV906F_MEM_OP_B_OPERATION_L2_PEERMEM_INVALIDATE             0x0000000d
-+#define NV906F_MEM_OP_B_OPERATION_L2_SYSMEM_INVALIDATE              0x0000000e
-+#define NV906F_MEM_OP_B_OPERATION_L2_CLEAN_COMPTAGS                 0x0000000f
-+#define NV906F_MEM_OP_B_OPERATION_L2_FLUSH_DIRTY                    0x00000010
-+#define NV906F_MEM_OP_B_MMU_TLB_INVALIDATE_PDB                             0:0
-+#define NV906F_MEM_OP_B_MMU_TLB_INVALIDATE_PDB_ONE                  0x00000000
-+#define NV906F_MEM_OP_B_MMU_TLB_INVALIDATE_PDB_ALL                  0x00000001
-+#define NV906F_MEM_OP_B_MMU_TLB_INVALIDATE_GPC                             1:1
-+#define NV906F_MEM_OP_B_MMU_TLB_INVALIDATE_GPC_ENABLE               0x00000000
-+#define NV906F_MEM_OP_B_MMU_TLB_INVALIDATE_GPC_DISABLE              0x00000001
- #define NV906F_SET_REFERENCE                                       (0x00000050)
- #define NV906F_SET_REFERENCE_COUNT                                        31:0
- 
-diff --git a/drivers/gpu/drm/nouveau/include/nvhw/class/clb06f.h b/drivers/gpu/drm/nouveau/include/nvhw/class/clb06f.h
-new file mode 100644
-index 000000000000..15edc9d8dcbe
---- /dev/null
-+++ b/drivers/gpu/drm/nouveau/include/nvhw/class/clb06f.h
-@@ -0,0 +1,54 @@
-+/*******************************************************************************
-+    Copyright (c) 2020, NVIDIA CORPORATION. All rights reserved.
-+
-+    Permission is hereby granted, free of charge, to any person obtaining a
-+    copy of this software and associated documentation files (the "Software"),
-+    to deal in the Software without restriction, including without limitation
-+    the rights to use, copy, modify, merge, publish, distribute, sublicense,
-+    and/or sell copies of the Software, and to permit persons to whom the
-+    Software is furnished to do so, subject to the following conditions:
-+
-+    The above copyright notice and this permission notice shall be included in
-+    all copies or substantial portions of the Software.
-+
-+    THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-+    IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-+    FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.  IN NO EVENT SHALL
-+    THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-+    LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
-+    FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
-+    DEALINGS IN THE SOFTWARE.
-+
-+*******************************************************************************/
-+#ifndef _clb06f_h_
-+#define _clb06f_h_
-+
-+/* fields and values */
-+// NOTE - MEM_OP_A and MEM_OP_B have been removed for gm20x to make room for
-+// possible future MEM_OP features.  MEM_OP_C/D have identical functionality
-+// to the previous MEM_OP_A/B methods.
-+#define NVB06F_MEM_OP_C                                            (0x00000030)
-+#define NVB06F_MEM_OP_C_OPERAND_LOW                                       31:2
-+#define NVB06F_MEM_OP_C_TLB_INVALIDATE_PDB                                 0:0
-+#define NVB06F_MEM_OP_C_TLB_INVALIDATE_PDB_ONE                      0x00000000
-+#define NVB06F_MEM_OP_C_TLB_INVALIDATE_PDB_ALL                      0x00000001
-+#define NVB06F_MEM_OP_C_TLB_INVALIDATE_GPC                                 1:1
-+#define NVB06F_MEM_OP_C_TLB_INVALIDATE_GPC_ENABLE                   0x00000000
-+#define NVB06F_MEM_OP_C_TLB_INVALIDATE_GPC_DISABLE                  0x00000001
-+#define NVB06F_MEM_OP_C_TLB_INVALIDATE_TARGET                            11:10
-+#define NVB06F_MEM_OP_C_TLB_INVALIDATE_TARGET_VID_MEM               0x00000000
-+#define NVB06F_MEM_OP_C_TLB_INVALIDATE_TARGET_SYS_MEM_COHERENT      0x00000002
-+#define NVB06F_MEM_OP_C_TLB_INVALIDATE_TARGET_SYS_MEM_NONCOHERENT   0x00000003
-+#define NVB06F_MEM_OP_C_TLB_INVALIDATE_ADDR_LO                           31:12
-+#define NVB06F_MEM_OP_D                                            (0x00000034)
-+#define NVB06F_MEM_OP_D_OPERAND_HIGH                                       7:0
-+#define NVB06F_MEM_OP_D_OPERATION                                        31:27
-+#define NVB06F_MEM_OP_D_OPERATION_MEMBAR                            0x00000005
-+#define NVB06F_MEM_OP_D_OPERATION_MMU_TLB_INVALIDATE                0x00000009
-+#define NVB06F_MEM_OP_D_OPERATION_L2_PEERMEM_INVALIDATE             0x0000000d
-+#define NVB06F_MEM_OP_D_OPERATION_L2_SYSMEM_INVALIDATE              0x0000000e
-+#define NVB06F_MEM_OP_D_OPERATION_L2_CLEAN_COMPTAGS                 0x0000000f
-+#define NVB06F_MEM_OP_D_OPERATION_L2_FLUSH_DIRTY                    0x00000010
-+#define NVB06F_MEM_OP_D_TLB_INVALIDATE_ADDR_HI                             7:0
-+
-+#endif /* _clb06f_h_ */
-diff --git a/drivers/gpu/drm/nouveau/include/nvhw/class/clc06f.h b/drivers/gpu/drm/nouveau/include/nvhw/class/clc06f.h
-new file mode 100644
-index 000000000000..4d0f13f79c17
---- /dev/null
-+++ b/drivers/gpu/drm/nouveau/include/nvhw/class/clc06f.h
-@@ -0,0 +1,93 @@
-+/*******************************************************************************
-+    Copyright (c) 2020, NVIDIA CORPORATION. All rights reserved.
-+
-+    Permission is hereby granted, free of charge, to any person obtaining a
-+    copy of this software and associated documentation files (the "Software"),
-+    to deal in the Software without restriction, including without limitation
-+    the rights to use, copy, modify, merge, publish, distribute, sublicense,
-+    and/or sell copies of the Software, and to permit persons to whom the
-+    Software is furnished to do so, subject to the following conditions:
-+
-+    The above copyright notice and this permission notice shall be included in
-+    all copies or substantial portions of the Software.
-+
-+    THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-+    IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-+    FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.  IN NO EVENT SHALL
-+    THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-+    LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
-+    FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
-+    DEALINGS IN THE SOFTWARE.
-+
-+*******************************************************************************/
-+#ifndef _clc06f_h_
-+#define _clc06f_h_
-+
-+/* fields and values */
-+// NOTE - MEM_OP_A and MEM_OP_B have been replaced in gp100 with methods for
-+// specifying the page address for a targeted TLB invalidate and the uTLB for
-+// a targeted REPLAY_CANCEL for UVM.
-+// The previous MEM_OP_A/B functionality is in MEM_OP_C/D, with slightly
-+// rearranged fields.
-+#define NVC06F_MEM_OP_A                                            (0x00000028)
-+#define NVC06F_MEM_OP_A_TLB_INVALIDATE_CANCEL_TARGET_CLIENT_UNIT_ID        5:0  // only relevant for REPLAY_CANCEL_TARGETED
-+#define NVC06F_MEM_OP_A_TLB_INVALIDATE_CANCEL_TARGET_GPC_ID               10:6  // only relevant for REPLAY_CANCEL_TARGETED
-+#define NVC06F_MEM_OP_A_TLB_INVALIDATE_SYSMEMBAR                         11:11
-+#define NVC06F_MEM_OP_A_TLB_INVALIDATE_SYSMEMBAR_EN                 0x00000001
-+#define NVC06F_MEM_OP_A_TLB_INVALIDATE_SYSMEMBAR_DIS                0x00000000
-+#define NVC06F_MEM_OP_A_TLB_INVALIDATE_TARGET_ADDR_LO                    31:12
-+#define NVC06F_MEM_OP_B                                            (0x0000002c)
-+#define NVC06F_MEM_OP_B_TLB_INVALIDATE_TARGET_ADDR_HI                     31:0
-+#define NVC06F_MEM_OP_C                                            (0x00000030)
-+#define NVC06F_MEM_OP_C_MEMBAR_TYPE                                        2:0
-+#define NVC06F_MEM_OP_C_MEMBAR_TYPE_SYS_MEMBAR                      0x00000000
-+#define NVC06F_MEM_OP_C_MEMBAR_TYPE_MEMBAR                          0x00000001
-+#define NVC06F_MEM_OP_C_TLB_INVALIDATE_PDB                                 0:0
-+#define NVC06F_MEM_OP_C_TLB_INVALIDATE_PDB_ONE                      0x00000000
-+#define NVC06F_MEM_OP_C_TLB_INVALIDATE_PDB_ALL                      0x00000001  // Probably nonsensical for MMU_TLB_INVALIDATE_TARGETED
-+#define NVC06F_MEM_OP_C_TLB_INVALIDATE_GPC                                 1:1
-+#define NVC06F_MEM_OP_C_TLB_INVALIDATE_GPC_ENABLE                   0x00000000
-+#define NVC06F_MEM_OP_C_TLB_INVALIDATE_GPC_DISABLE                  0x00000001
-+#define NVC06F_MEM_OP_C_TLB_INVALIDATE_REPLAY                              4:2  // only relevant if GPC ENABLE
-+#define NVC06F_MEM_OP_C_TLB_INVALIDATE_REPLAY_NONE                  0x00000000
-+#define NVC06F_MEM_OP_C_TLB_INVALIDATE_REPLAY_START                 0x00000001
-+#define NVC06F_MEM_OP_C_TLB_INVALIDATE_REPLAY_START_ACK_ALL         0x00000002
-+#define NVC06F_MEM_OP_C_TLB_INVALIDATE_REPLAY_CANCEL_TARGETED       0x00000003
-+#define NVC06F_MEM_OP_C_TLB_INVALIDATE_REPLAY_CANCEL_GLOBAL         0x00000004
-+#define NVC06F_MEM_OP_C_TLB_INVALIDATE_ACK_TYPE                            6:5  // only relevant if GPC ENABLE
-+#define NVC06F_MEM_OP_C_TLB_INVALIDATE_ACK_TYPE_NONE                0x00000000
-+#define NVC06F_MEM_OP_C_TLB_INVALIDATE_ACK_TYPE_GLOBALLY            0x00000001
-+#define NVC06F_MEM_OP_C_TLB_INVALIDATE_ACK_TYPE_INTRANODE           0x00000002
-+#define NVC06F_MEM_OP_C_TLB_INVALIDATE_PAGE_TABLE_LEVEL                    9:7  // Invalidate affects this level and all below
-+#define NVC06F_MEM_OP_C_TLB_INVALIDATE_PAGE_TABLE_LEVEL_ALL         0x00000000  // Invalidate tlb caches at all levels of the page table
-+#define NVC06F_MEM_OP_C_TLB_INVALIDATE_PAGE_TABLE_LEVEL_PTE_ONLY    0x00000001
-+#define NVC06F_MEM_OP_C_TLB_INVALIDATE_PAGE_TABLE_LEVEL_UP_TO_PDE0  0x00000002
-+#define NVC06F_MEM_OP_C_TLB_INVALIDATE_PAGE_TABLE_LEVEL_UP_TO_PDE1  0x00000003
-+#define NVC06F_MEM_OP_C_TLB_INVALIDATE_PAGE_TABLE_LEVEL_UP_TO_PDE2  0x00000004
-+#define NVC06F_MEM_OP_C_TLB_INVALIDATE_PAGE_TABLE_LEVEL_UP_TO_PDE3  0x00000005
-+#define NVC06F_MEM_OP_C_TLB_INVALIDATE_PAGE_TABLE_LEVEL_UP_TO_PDE4  0x00000006
-+#define NVC06F_MEM_OP_C_TLB_INVALIDATE_PAGE_TABLE_LEVEL_UP_TO_PDE5  0x00000007
-+#define NVC06F_MEM_OP_C_TLB_INVALIDATE_PDB_APERTURE                          11:10  // only relevant if PDB_ONE
-+#define NVC06F_MEM_OP_C_TLB_INVALIDATE_PDB_APERTURE_VID_MEM             0x00000000
-+#define NVC06F_MEM_OP_C_TLB_INVALIDATE_PDB_APERTURE_SYS_MEM_COHERENT    0x00000002
-+#define NVC06F_MEM_OP_C_TLB_INVALIDATE_PDB_APERTURE_SYS_MEM_NONCOHERENT 0x00000003
-+#define NVC06F_MEM_OP_C_TLB_INVALIDATE_PDB_ADDR_LO                       31:12  // only relevant if PDB_ONE
-+// MEM_OP_D MUST be preceded by MEM_OPs A-C.
-+#define NVC06F_MEM_OP_D                                            (0x00000034)
-+#define NVC06F_MEM_OP_D_TLB_INVALIDATE_PDB_ADDR_HI                        26:0  // only relevant if PDB_ONE
-+#define NVC06F_MEM_OP_D_OPERATION                                        31:27
-+#define NVC06F_MEM_OP_D_OPERATION_MEMBAR                            0x00000005
-+#define NVC06F_MEM_OP_D_OPERATION_MMU_TLB_INVALIDATE                0x00000009
-+#define NVC06F_MEM_OP_D_OPERATION_MMU_TLB_INVALIDATE_TARGETED       0x0000000a
-+#define NVC06F_MEM_OP_D_OPERATION_L2_PEERMEM_INVALIDATE             0x0000000d
-+#define NVC06F_MEM_OP_D_OPERATION_L2_SYSMEM_INVALIDATE              0x0000000e
-+// CLEAN_LINES is an alias for Tegra/GPU IP usage
-+#define NVC06F_MEM_OP_D_OPERATION_L2_INVALIDATE_CLEAN_LINES         0x0000000e
-+// This B alias is confusing but it was missed as part of the update. Left here
-+// for compatibility.
-+#define NVC06F_MEM_OP_B_OPERATION_L2_INVALIDATE_CLEAN_LINES         0x0000000e
-+#define NVC06F_MEM_OP_D_OPERATION_L2_CLEAN_COMPTAGS                 0x0000000f
-+#define NVC06F_MEM_OP_D_OPERATION_L2_FLUSH_DIRTY                    0x00000010
-+#define NVC06F_MEM_OP_D_OPERATION_L2_WAIT_FOR_SYS_PENDING_READS     0x00000015
-+
-+#endif /* _clc06f_h_ */
-diff --git a/drivers/gpu/drm/nouveau/include/nvif/push906f.h b/drivers/gpu/drm/nouveau/include/nvif/push906f.h
-index 79df71de98d2..3d506f4dc2c9 100644
---- a/drivers/gpu/drm/nouveau/include/nvif/push906f.h
-+++ b/drivers/gpu/drm/nouveau/include/nvif/push906f.h
-@@ -7,6 +7,8 @@
- #ifndef PUSH906F_SUBC
- // Host methods
- #define PUSH906F_SUBC_NV906F	0
-+#define PUSH906F_SUBC_NVB06F	0
-+#define PUSH906F_SUBC_NVC06F	0
- #define PUSH906F_SUBC_NVC36F	0
- 
- // Twod
-diff --git a/drivers/gpu/drm/nouveau/nvc0_fence.c b/drivers/gpu/drm/nouveau/nvc0_fence.c
-index a5e98d0d4217..8b36deaaf8cf 100644
---- a/drivers/gpu/drm/nouveau/nvc0_fence.c
-+++ b/drivers/gpu/drm/nouveau/nvc0_fence.c
-@@ -27,15 +27,18 @@
- 
- #include "nv50_display.h"
- 
-+#include <nvif/class.h>
- #include <nvif/push906f.h>
- 
- #include <nvhw/class/cl906f.h>
-+#include <nvhw/class/clb06f.h>
-+#include <nvhw/class/clc06f.h>
- 
- static int
- nvc0_fence_emit32(struct nouveau_channel *chan, u64 virtual, u32 sequence)
- {
- 	struct nvif_push *push = &chan->chan.push;
--	int ret = PUSH_WAIT(push, 6);
-+	int ret = PUSH_WAIT(push, 12);
- 	if (ret == 0) {
- 		PUSH_MTHD(push, NV906F, SEMAPHOREA,
- 			  NVVAL(NV906F, SEMAPHOREA, OFFSET_UPPER, upper_32_bits(virtual)),
-@@ -46,9 +49,31 @@ nvc0_fence_emit32(struct nouveau_channel *chan, u64 virtual, u32 sequence)
- 					SEMAPHORED,
- 			  NVDEF(NV906F, SEMAPHORED, OPERATION, RELEASE) |
- 			  NVDEF(NV906F, SEMAPHORED, RELEASE_WFI, EN) |
--			  NVDEF(NV906F, SEMAPHORED, RELEASE_SIZE, 16BYTE),
-+			  NVDEF(NV906F, SEMAPHORED, RELEASE_SIZE, 16BYTE));
-+
-+		if (chan->user.oclass >= PASCAL_CHANNEL_GPFIFO_A) {
-+			PUSH_MTHD(push, NVC06F, MEM_OP_A, 0,
-+						MEM_OP_B, 0,
-+
-+						MEM_OP_C,
-+				  NVDEF(NVC06F, MEM_OP_C, MEMBAR_TYPE, SYS_MEMBAR),
-+
-+						MEM_OP_D,
-+				  NVDEF(NVC06F, MEM_OP_D, OPERATION, MEMBAR));
-+		} else if (chan->user.oclass >= MAXWELL_CHANNEL_GPFIFO_A) {
-+			PUSH_MTHD(push, NVB06F, MEM_OP_C, 0,
-+
-+						MEM_OP_D,
-+				  NVDEF(NVC06F, MEM_OP_D, OPERATION, MEMBAR));
-+		} else {
-+			PUSH_MTHD(push, NV906F, MEM_OP_A, 0,
-+
-+						MEM_OP_B,
-+				  NVDEF(NV906F, MEM_OP_B, OPERATION, SYSMEMBAR_FLUSH));
-+		}
-+
-+		PUSH_MTHD(push, NV906F, NON_STALL_INTERRUPT, 0);
- 
--					NON_STALL_INTERRUPT, 0);
- 		PUSH_KICK(push);
- 	}
- 	return ret;
--- 
-2.51.0
+So you should NEVER see a bitfield structure that is defined just as a
+"u32" and expect that to work properly when read/written to hardware
+because while little-endian is what seems to have "won" the recent
+battles on this topic it's not always the case for many places that
+Linux runs on today.
 
+> For the separate issue of enforcing endianness with respect to (across)
+> multiple fields, I agree with you that if the user's backend (the consumer of
+> the data) is not doing such conversion, say via regmap, then that becomes a
+> problem. But that problem is orthogonal/different and cannot be solved here.  
+
+But that is exactly what these macros are being defined here for, so to
+ignore that is going to cause problems :)
+
+thanks,
+
+greg k-h
