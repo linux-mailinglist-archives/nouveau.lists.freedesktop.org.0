@@ -2,77 +2,77 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id C4AAEB9C550
-	for <lists+nouveau@lfdr.de>; Thu, 25 Sep 2025 00:12:52 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 6C615B9C55C
+	for <lists+nouveau@lfdr.de>; Thu, 25 Sep 2025 00:14:10 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 74B6210E804;
-	Wed, 24 Sep 2025 22:12:51 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 1AC7910E807;
+	Wed, 24 Sep 2025 22:14:09 +0000 (UTC)
 Authentication-Results: gabe.freedesktop.org;
-	dkim=pass (1024-bit key; unprotected) header.d=redhat.com header.i=@redhat.com header.b="D+u5Clg1";
+	dkim=pass (1024-bit key; unprotected) header.d=redhat.com header.i=@redhat.com header.b="H1BJBN+v";
 	dkim-atps=neutral
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
 Received: from us-smtp-delivery-124.mimecast.com
- (us-smtp-delivery-124.mimecast.com [170.10.133.124])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 218FF10E804
- for <nouveau@lists.freedesktop.org>; Wed, 24 Sep 2025 22:12:50 +0000 (UTC)
+ (us-smtp-delivery-124.mimecast.com [170.10.129.124])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id ABD5F10E807
+ for <nouveau@lists.freedesktop.org>; Wed, 24 Sep 2025 22:14:07 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1758751969;
+ s=mimecast20190719; t=1758752046;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:content-type:content-type:
  content-transfer-encoding:content-transfer-encoding:
  in-reply-to:in-reply-to:references:references;
- bh=tCucFY/8qMQ74h31+RyvyAB9MvTUqdmenxnV6GU9LgE=;
- b=D+u5Clg1HMWGP7a1fJooyP7BfmBuhNR0HIQ/I5hSxXlNYR0jW9zUciBzbW2eg8JSSYGEjF
- 7r9+GCPUL/pXqCEeAzJBQfcxWwvq+3vW3quAI1fMXvEoV1PPiQLA53mqoMwItrBzCw0ZX2
- LN745rrZi2Q8wWCLbQ6YmCKPb0G+XLQ=
-Received: from mail-qt1-f199.google.com (mail-qt1-f199.google.com
- [209.85.160.199]) by relay.mimecast.com with ESMTP with STARTTLS
+ bh=o8j7iV5FkPl2M9dbIOEmHdBWpWPt1HoMdUONe8SN81I=;
+ b=H1BJBN+vn+XGvAdG/zdyLlTO4SKQxY5omYim2eV8xmsauBPaA5AxV9Arf2Zeak0A+K5/VY
+ ZhKhiqYeh2eIC1Zhy31TaSYVEJd8es6jVcSqMwjVQ7dn56HHxfj9TalxpUH3QFHE+uE7ZJ
+ qD2hbijafkerhTfcu1LlnxEpgHDCOug=
+Received: from mail-qk1-f198.google.com (mail-qk1-f198.google.com
+ [209.85.222.198]) by relay.mimecast.com with ESMTP with STARTTLS
  (version=TLSv1.3, cipher=TLS_AES_256_GCM_SHA384) id
- us-mta-228-D7vKuCpTNvSBtP-2RlzbUw-1; Wed, 24 Sep 2025 18:12:48 -0400
-X-MC-Unique: D7vKuCpTNvSBtP-2RlzbUw-1
-X-Mimecast-MFC-AGG-ID: D7vKuCpTNvSBtP-2RlzbUw_1758751967
-Received: by mail-qt1-f199.google.com with SMTP id
- d75a77b69052e-4b7ad72bc9fso7073511cf.0
- for <nouveau@lists.freedesktop.org>; Wed, 24 Sep 2025 15:12:47 -0700 (PDT)
+ us-mta-561-0GUvV-dPN7GuHgqYbgVmyw-1; Wed, 24 Sep 2025 18:14:03 -0400
+X-MC-Unique: 0GUvV-dPN7GuHgqYbgVmyw-1
+X-Mimecast-MFC-AGG-ID: 0GUvV-dPN7GuHgqYbgVmyw_1758752042
+Received: by mail-qk1-f198.google.com with SMTP id
+ af79cd13be357-827061b4ca9so65397485a.3
+ for <nouveau@lists.freedesktop.org>; Wed, 24 Sep 2025 15:14:03 -0700 (PDT)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1758751967; x=1759356767;
+ d=1e100.net; s=20230601; t=1758752042; x=1759356842;
  h=mime-version:user-agent:content-transfer-encoding:organization
  :references:in-reply-to:date:cc:to:from:subject:message-id
  :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=tCucFY/8qMQ74h31+RyvyAB9MvTUqdmenxnV6GU9LgE=;
- b=G+UipAb/Z7jPud9gZ7Zu/omm/sh3+lRp0BDIqQkydFLPzhepFqSyojivJpp1QKntXh
- aOKTsFWS5NmJTs/igun4ZmcF3simGM7iIc18TW95OIl/CB9GVAq4n4K3L0lydBH3B/UQ
- /zD3x2GtzaAK0zu1vpmm82AVlsgq0LcDpvqi0veEUTk4Q0j8nmWvksMwlax51opf9yiy
- JP4IiYxWzWIqkxrJtxRXQ5uTM9GJ41oTUQZDYy3oDujRFKOSpJdo2Kq9T+4ou1U85y4X
- v4tfTvqXpSZ5Q9IFXsyfwV7DRR5WjIrEK0nO2oHDNnf92vne1izlGDeL1CyLPaegVTLR
- gt4g==
+ bh=o8j7iV5FkPl2M9dbIOEmHdBWpWPt1HoMdUONe8SN81I=;
+ b=vVTO7kR8wsDnm0sbHt9pVJGbrjFKyNXN/Dfnd+xewe+aoXapMkBkbPNqsNYm03mYJ6
+ SLRa1jEVDmhwsLr+mBHkiuteQ9veLtHGJntuNPgUOl1rkHo3j/7n3gu6OyxLpqi+VREV
+ sGQ+j29h82hZ6pGslosjkhWk7VmK+XLYV9GN3YmWiHVAToxblWFZbCb40g6CLx+0yLUo
+ QGHbDCBhpHrtxNnW2SNeY186kTgTSzxhzxy7wA5NuGpJW1Y+Ud3tu6vT24qRby8X1jug
+ ZeeKiKb3HHajDMMJxEBkhl1Ql0CP12ADdIKnwt6YcAm5tmKVLT7J9R2SSk3wQerYJke0
+ 11eg==
 X-Forwarded-Encrypted: i=1;
- AJvYcCWc4dJerLngBlwo5ktzln7CuYrcfuZwqbfDOYeo55Gzq0VOZW9a+E0jfDujUF8Av4VyrGftkYbR@lists.freedesktop.org
-X-Gm-Message-State: AOJu0Ywld5476rgxZcsBePecF/TIdcur8A0ZBAmebyJQMLFshf0E1vyu
- 1kNw44wdPFtoN653iq8faSPFVobqg0sqJR5OglEWVvUY5bGPTfKq3UCRUoTYMbBNTjfywxGWoa3
- pPyx4ssDjB60NUv6GELbuYtJrdJGpYkDmX23zlbLDB0mRgDiAIrmrqtOBAb5L/tf7BGI=
-X-Gm-Gg: ASbGncs4UzErOe1s+7SjXva+E2SbPb+/32FodyBwPBD5t0WkyzW1ZTsO8gjNoEDZ3+D
- 3RD8IrHQsqsk+Mgcrjg67GBv4VergPjK9qQv9bDoGccKyku5f8350HPyyVRLoezhUCXEaSkobLZ
- Fuw4c0az+fPxpS7YkML/iKqf4Gv3tALFEzKmlZ4uFZsFHWij+Cgow0gPxw6cUZjYoIGEEL7SOZJ
- kwlBlQB3283+bcPXcR74OD7L4u8ZIyyxMeHvpkwV0wr0iRosSxIGvfoKa+NHEENutF0opq5f+72
- gxd054bssHYN82P5nnC9iTTKMmsd6hCJKGGkRNm5+qpLPhskLlNxZjr2s9ALd/SYAhwvC9eZF4A
- Yp0zJUseK0/TQ
-X-Received: by 2002:a05:622a:1905:b0:4ce:9cdc:6f2f with SMTP id
- d75a77b69052e-4da481d81e3mr20121221cf.13.1758751967462; 
- Wed, 24 Sep 2025 15:12:47 -0700 (PDT)
-X-Google-Smtp-Source: AGHT+IEsCldtS7YCUoXRYkGz/STaYHNRtquxJvrgbzjFXE8dmQ042GIsExYIplPOQtNTW8kf+oqL0A==
-X-Received: by 2002:a05:622a:1905:b0:4ce:9cdc:6f2f with SMTP id
- d75a77b69052e-4da481d81e3mr20120771cf.13.1758751967087; 
- Wed, 24 Sep 2025 15:12:47 -0700 (PDT)
+ AJvYcCUZOuAVrTYLA9pBtx9p4FADucvEtyeSWDIpjuG7MxgbhRkUxFQIjkSHd08l8dhS537ZOkji7QTx@lists.freedesktop.org
+X-Gm-Message-State: AOJu0Yx7N46y+YH1MBxzQLNGlh3XDh9/rSjnHFCvpq1M3h9D15yTqhYE
+ kzA8KenANf4Lwfq9F1oaeoyBpWQSAcP851gcFYCEacevgKvWjJpX2hcnS+CIKNblsjuLgSiy5+G
+ Rwy6N3Z7a8QkmGfOOGqsfk0AGO84TLnKawfea/y0zQ80liUz1LUQ7fVbPvDeiJqnATlw=
+X-Gm-Gg: ASbGncvilcHCHDmetxx2Dn9hC+np6dARZDqbHXWsOzd2Ai7cFBhfL+6ONjdnIoO6WBy
+ RW12mYNRA0dmYjOvZH7S7i1E31i7kuAj4UfJos0bV7J8ycXhftmytoScN/MgtnKSVwXVAJetNHZ
+ zYPVd5WIA/ip1sR4RoaDbJ9kmm/MLwKHTdY2oK7RD689xjYwPhtejZaD/gUi+cjX4bSq/VgqL5/
+ OrFhv8lmPYGI4KjBpi5AFPeARx7HCU1pzjihq2vKzBYFhVdfnMcRSJky0cgAXr70y24+BfBdac6
+ mEw9tbJcoLgPJnW4ft48riCny8wHqQKHYzIVAyCpgBn2PnWvjG26c7DWajgR6+JZD/hEOOFDaCU
+ Z+AUNh76xkJ1b
+X-Received: by 2002:ad4:5c8c:0:b0:77f:2966:c30a with SMTP id
+ 6a1803df08f44-7fc4bd90845mr21389526d6.57.1758752042511; 
+ Wed, 24 Sep 2025 15:14:02 -0700 (PDT)
+X-Google-Smtp-Source: AGHT+IH06d8tFJJU/5/C4IFK2xkuHc6eirsKQRzUChX6AUNqxxj7G9XBeE0SQfU4U/rHINQCIfEP9A==
+X-Received: by 2002:ad4:5c8c:0:b0:77f:2966:c30a with SMTP id
+ 6a1803df08f44-7fc4bd90845mr21389076d6.57.1758752041998; 
+ Wed, 24 Sep 2025 15:14:01 -0700 (PDT)
 Received: from [192.168.8.208] (pool-108-49-39-135.bstnma.fios.verizon.net.
  [108.49.39.135]) by smtp.gmail.com with ESMTPSA id
- d75a77b69052e-4db108726a2sm177821cf.34.2025.09.24.15.12.45
+ 6a1803df08f44-8013ca1f1desm2124606d6.23.2025.09.24.15.14.00
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 24 Sep 2025 15:12:46 -0700 (PDT)
-Message-ID: <d067b6a45722c763b5c5434a276eb416faff03b8.camel@redhat.com>
-Subject: Re: [PATCH v2 08/10] nova-core: falcon: Add support to check if
- RISC-V is active
+ Wed, 24 Sep 2025 15:14:01 -0700 (PDT)
+Message-ID: <929da04e71b03884a5e9b48168db1131449c9435.camel@redhat.com>
+Subject: Re: [PATCH v2 09/10] nova-core: falcon: Add support to write
+ firmware version
 From: Lyude Paul <lyude@redhat.com>
 To: Alistair Popple <apopple@nvidia.com>, rust-for-linux@vger.kernel.org, 
  dri-devel@lists.freedesktop.org, dakr@kernel.org, acourbot@nvidia.com
@@ -87,15 +87,15 @@ Cc: Miguel Ojeda <ojeda@kernel.org>, Alex Gaynor <alex.gaynor@gmail.com>,
  <jhubbard@nvidia.com>,  Joel Fernandes <joelagnelf@nvidia.com>, Timur Tabi
  <ttabi@nvidia.com>, linux-kernel@vger.kernel.org, 
  nouveau@lists.freedesktop.org
-Date: Wed, 24 Sep 2025 18:12:44 -0400
-In-Reply-To: <20250922113026.3083103-9-apopple@nvidia.com>
+Date: Wed, 24 Sep 2025 18:14:00 -0400
+In-Reply-To: <20250922113026.3083103-10-apopple@nvidia.com>
 References: <20250922113026.3083103-1-apopple@nvidia.com>
- <20250922113026.3083103-9-apopple@nvidia.com>
+ <20250922113026.3083103-10-apopple@nvidia.com>
 Organization: Red Hat Inc.
 User-Agent: Evolution 3.56.2 (3.56.2-1.fc42)
 MIME-Version: 1.0
 X-Mimecast-Spam-Score: 0
-X-Mimecast-MFC-PROC-ID: ey3zM3_WvF6KnFamYBNgiNBvKPhUMVttvbjQ7YQWxak_1758751967
+X-Mimecast-MFC-PROC-ID: tmstjNIU_ULvz2rny9or5UzAGMZIGwB6QJUncpLOxhc_1758752042
 X-Mimecast-Originator: redhat.com
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
@@ -113,58 +113,60 @@ List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-Reviewed-by: Lyude Paul <lyude@redhat.com>
+Reviewed-b: Lyude Paul <lyude@redhat.com>
 
 On Mon, 2025-09-22 at 21:30 +1000, Alistair Popple wrote:
 > From: Joel Fernandes <joelagnelf@nvidia.com>
 >=20
-> Add definition for RISCV_CPUCTL register and use it in a new falcon API
-> to check if the RISC-V core of a Falcon is active. It is required by
-> the sequencer to know if the GSP's RISCV processor is active.
+> This will be needed by both the GSP boot code as well as GSP resume code
+> in the sequencer.
 >=20
 > Signed-off-by: Joel Fernandes <joelagnelf@nvidia.com>
 > ---
 >  drivers/gpu/nova-core/falcon.rs | 9 +++++++++
->  drivers/gpu/nova-core/regs.rs   | 5 +++++
->  2 files changed, 14 insertions(+)
+>  drivers/gpu/nova-core/regs.rs   | 6 ++++++
+>  2 files changed, 15 insertions(+)
 >=20
 > diff --git a/drivers/gpu/nova-core/falcon.rs b/drivers/gpu/nova-core/falc=
 on.rs
-> index 37e6298195e4..c7907f16bcf4 100644
+> index c7907f16bcf4..0cb7821341ed 100644
 > --- a/drivers/gpu/nova-core/falcon.rs
 > +++ b/drivers/gpu/nova-core/falcon.rs
-> @@ -610,4 +610,13 @@ pub(crate) fn signature_reg_fuse_version(
->          self.hal
->              .signature_reg_fuse_version(self, bar, engine_id_mask, ucode=
-_id)
+> @@ -619,4 +619,13 @@ pub(crate) fn is_riscv_active(&self, bar: &Bar0) -> =
+Result<bool> {
+>          let cpuctl =3D regs::NV_PRISCV_RISCV_CPUCTL::read(bar, &E::ID);
+>          Ok(cpuctl.active_stat())
 >      }
 > +
-> +    /// Check if the RISC-V core is active.
-> +    ///
-> +    /// Returns `true` if the RISC-V core is active, `false` otherwise.
-> +    #[expect(unused)]
-> +    pub(crate) fn is_riscv_active(&self, bar: &Bar0) -> Result<bool> {
-> +        let cpuctl =3D regs::NV_PRISCV_RISCV_CPUCTL::read(bar, &E::ID);
-> +        Ok(cpuctl.active_stat())
+> +    /// Write the application version to the OS register.
+> +    #[expect(dead_code)]
+> +    pub(crate) fn write_os_version(&self, bar: &Bar0, app_version: u32) =
+-> Result<()> {
+> +        regs::NV_PFALCON_FALCON_OS::default()
+> +            .set_value(app_version)
+> +            .write(bar, &E::ID);
+> +        Ok(())
 > +    }
 >  }
 > diff --git a/drivers/gpu/nova-core/regs.rs b/drivers/gpu/nova-core/regs.r=
 s
-> index 0585699ae951..5df6a2bf42ad 100644
+> index 5df6a2bf42ad..d9212fa50197 100644
 > --- a/drivers/gpu/nova-core/regs.rs
 > +++ b/drivers/gpu/nova-core/regs.rs
-> @@ -324,6 +324,11 @@ pub(crate) fn mem_scrubbing_done(self) -> bool {
+> @@ -215,6 +215,12 @@ pub(crate) fn vga_workspace_addr(self) -> Option<u64=
+> {
+>      31:0    value as u32;
+>  });
 > =20
->  // PRISCV
-> =20
-> +register!(NV_PRISCV_RISCV_CPUCTL @ PFalconBase[0x00001388] {
-> +    7:7     active_stat as bool;
-> +    0:0     halted as bool;
+> +// Used to store version information about the firmware running
+> +// on the Falcon processor.
+> +register!(NV_PFALCON_FALCON_OS @ PFalconBase[0x00000080] {
+> +    31:0    value as u32;
 > +});
 > +
->  register!(NV_PRISCV_RISCV_BCR_CTRL @ PFalconBase[0x00001668] {
->      0:0     valid as bool;
->      4:4     core_select as bool =3D> PeregrineCoreSelect;
+>  register!(NV_PFALCON_FALCON_RM @ PFalconBase[0x00000084] {
+>      31:0    value as u32;
+>  });
 
 --=20
 Cheers,
