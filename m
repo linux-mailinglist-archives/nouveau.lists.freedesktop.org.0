@@ -2,77 +2,76 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id 6C615B9C55C
-	for <lists+nouveau@lfdr.de>; Thu, 25 Sep 2025 00:14:10 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 1D989B9C56B
+	for <lists+nouveau@lfdr.de>; Thu, 25 Sep 2025 00:15:20 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 1AC7910E807;
-	Wed, 24 Sep 2025 22:14:09 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id C0BD810E808;
+	Wed, 24 Sep 2025 22:15:18 +0000 (UTC)
 Authentication-Results: gabe.freedesktop.org;
-	dkim=pass (1024-bit key; unprotected) header.d=redhat.com header.i=@redhat.com header.b="H1BJBN+v";
+	dkim=pass (1024-bit key; unprotected) header.d=redhat.com header.i=@redhat.com header.b="AqJcS8DJ";
 	dkim-atps=neutral
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
 Received: from us-smtp-delivery-124.mimecast.com
- (us-smtp-delivery-124.mimecast.com [170.10.129.124])
- by gabe.freedesktop.org (Postfix) with ESMTPS id ABD5F10E807
- for <nouveau@lists.freedesktop.org>; Wed, 24 Sep 2025 22:14:07 +0000 (UTC)
+ (us-smtp-delivery-124.mimecast.com [170.10.133.124])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 37D4610E808
+ for <nouveau@lists.freedesktop.org>; Wed, 24 Sep 2025 22:15:17 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1758752046;
+ s=mimecast20190719; t=1758752116;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:content-type:content-type:
  content-transfer-encoding:content-transfer-encoding:
  in-reply-to:in-reply-to:references:references;
- bh=o8j7iV5FkPl2M9dbIOEmHdBWpWPt1HoMdUONe8SN81I=;
- b=H1BJBN+vn+XGvAdG/zdyLlTO4SKQxY5omYim2eV8xmsauBPaA5AxV9Arf2Zeak0A+K5/VY
- ZhKhiqYeh2eIC1Zhy31TaSYVEJd8es6jVcSqMwjVQ7dn56HHxfj9TalxpUH3QFHE+uE7ZJ
- qD2hbijafkerhTfcu1LlnxEpgHDCOug=
-Received: from mail-qk1-f198.google.com (mail-qk1-f198.google.com
- [209.85.222.198]) by relay.mimecast.com with ESMTP with STARTTLS
+ bh=YaaNYfnivueDdmVQWIu0ivJ5WQBBjI+UHXeK/bH1n4Q=;
+ b=AqJcS8DJ4SMFgV3CV8UXeKoqPn3uVq0h65DF7WrDnbijCHkthKWMJjl2FLa/HkbOetcVOJ
+ tRl0J4xubCqyAzUSL5hqfBswCZSGglIugiEk2DUTFjwLA7vl9eU49k7Cxyx0eavS/KIHcp
+ VEBe8E+Zqg4LhqIcOFvERUo8JLHr+ks=
+Received: from mail-qt1-f198.google.com (mail-qt1-f198.google.com
+ [209.85.160.198]) by relay.mimecast.com with ESMTP with STARTTLS
  (version=TLSv1.3, cipher=TLS_AES_256_GCM_SHA384) id
- us-mta-561-0GUvV-dPN7GuHgqYbgVmyw-1; Wed, 24 Sep 2025 18:14:03 -0400
-X-MC-Unique: 0GUvV-dPN7GuHgqYbgVmyw-1
-X-Mimecast-MFC-AGG-ID: 0GUvV-dPN7GuHgqYbgVmyw_1758752042
-Received: by mail-qk1-f198.google.com with SMTP id
- af79cd13be357-827061b4ca9so65397485a.3
- for <nouveau@lists.freedesktop.org>; Wed, 24 Sep 2025 15:14:03 -0700 (PDT)
+ us-mta-622-vQxv6yUzPMGC-ISQ_Z-_gQ-1; Wed, 24 Sep 2025 18:15:15 -0400
+X-MC-Unique: vQxv6yUzPMGC-ISQ_Z-_gQ-1
+X-Mimecast-MFC-AGG-ID: vQxv6yUzPMGC-ISQ_Z-_gQ_1758752115
+Received: by mail-qt1-f198.google.com with SMTP id
+ d75a77b69052e-4ca4eeb9b06so7247461cf.2
+ for <nouveau@lists.freedesktop.org>; Wed, 24 Sep 2025 15:15:15 -0700 (PDT)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1758752042; x=1759356842;
+ d=1e100.net; s=20230601; t=1758752115; x=1759356915;
  h=mime-version:user-agent:content-transfer-encoding:organization
  :references:in-reply-to:date:cc:to:from:subject:message-id
  :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=o8j7iV5FkPl2M9dbIOEmHdBWpWPt1HoMdUONe8SN81I=;
- b=vVTO7kR8wsDnm0sbHt9pVJGbrjFKyNXN/Dfnd+xewe+aoXapMkBkbPNqsNYm03mYJ6
- SLRa1jEVDmhwsLr+mBHkiuteQ9veLtHGJntuNPgUOl1rkHo3j/7n3gu6OyxLpqi+VREV
- sGQ+j29h82hZ6pGslosjkhWk7VmK+XLYV9GN3YmWiHVAToxblWFZbCb40g6CLx+0yLUo
- QGHbDCBhpHrtxNnW2SNeY186kTgTSzxhzxy7wA5NuGpJW1Y+Ud3tu6vT24qRby8X1jug
- ZeeKiKb3HHajDMMJxEBkhl1Ql0CP12ADdIKnwt6YcAm5tmKVLT7J9R2SSk3wQerYJke0
- 11eg==
+ bh=YaaNYfnivueDdmVQWIu0ivJ5WQBBjI+UHXeK/bH1n4Q=;
+ b=Tz4jE8Hy6Yoeok/s2MQbpx47xE2GMwyuoWb/qEBhMMyl1xh6xhwAjFGF3OlIkrQOOp
+ c0U85hcfK6RkNIGnMf+smnvhqxJK5geEisz4w/sXzmhgNDg34pGYs1nTkMjmW/XKihDs
+ UsJYLxXOHqXrXxjxKZOfHq5++OBOGOkG9vUXXwNJti1k/DAECiQXnmHb7Ys4zV/tSCcg
+ hLmmLAccQM0BF6otr43W/zsS4tkJvLkgtQoKJSPU3LCzgUR+zoGryeni0P2QX9BDTyBR
+ uX4pOvFxld1p6rTb8hrKi18qvdjwAG0dr4DOQbdqSN8L9sS38rVk9bnP/ZPGiXQgVrn4
+ jWUQ==
 X-Forwarded-Encrypted: i=1;
- AJvYcCUZOuAVrTYLA9pBtx9p4FADucvEtyeSWDIpjuG7MxgbhRkUxFQIjkSHd08l8dhS537ZOkji7QTx@lists.freedesktop.org
-X-Gm-Message-State: AOJu0Yx7N46y+YH1MBxzQLNGlh3XDh9/rSjnHFCvpq1M3h9D15yTqhYE
- kzA8KenANf4Lwfq9F1oaeoyBpWQSAcP851gcFYCEacevgKvWjJpX2hcnS+CIKNblsjuLgSiy5+G
- Rwy6N3Z7a8QkmGfOOGqsfk0AGO84TLnKawfea/y0zQ80liUz1LUQ7fVbPvDeiJqnATlw=
-X-Gm-Gg: ASbGncvilcHCHDmetxx2Dn9hC+np6dARZDqbHXWsOzd2Ai7cFBhfL+6ONjdnIoO6WBy
- RW12mYNRA0dmYjOvZH7S7i1E31i7kuAj4UfJos0bV7J8ycXhftmytoScN/MgtnKSVwXVAJetNHZ
- zYPVd5WIA/ip1sR4RoaDbJ9kmm/MLwKHTdY2oK7RD689xjYwPhtejZaD/gUi+cjX4bSq/VgqL5/
- OrFhv8lmPYGI4KjBpi5AFPeARx7HCU1pzjihq2vKzBYFhVdfnMcRSJky0cgAXr70y24+BfBdac6
- mEw9tbJcoLgPJnW4ft48riCny8wHqQKHYzIVAyCpgBn2PnWvjG26c7DWajgR6+JZD/hEOOFDaCU
- Z+AUNh76xkJ1b
-X-Received: by 2002:ad4:5c8c:0:b0:77f:2966:c30a with SMTP id
- 6a1803df08f44-7fc4bd90845mr21389526d6.57.1758752042511; 
- Wed, 24 Sep 2025 15:14:02 -0700 (PDT)
-X-Google-Smtp-Source: AGHT+IH06d8tFJJU/5/C4IFK2xkuHc6eirsKQRzUChX6AUNqxxj7G9XBeE0SQfU4U/rHINQCIfEP9A==
-X-Received: by 2002:ad4:5c8c:0:b0:77f:2966:c30a with SMTP id
- 6a1803df08f44-7fc4bd90845mr21389076d6.57.1758752041998; 
- Wed, 24 Sep 2025 15:14:01 -0700 (PDT)
+ AJvYcCVC4ejFF9MF9ojy9f2OukqnYXTfdu2OJhZ00HlCJ1HY8YpK9mGa+/u6XSRIz2ljDpxba00mIFmT@lists.freedesktop.org
+X-Gm-Message-State: AOJu0Yy7lODQtjSmoTT6VpZQX7uXyXphwTa8SwKZXRPnkCC7TOF9+dTv
+ UxSBC/KsYnhyO8MMNqjIAUWu9tumxh+jFMFvQKo+0ak3kSaP2vHPK7dx/J3nnH4wkbnbgWKO57P
+ ibRhSotFHUn4YoXbinwgEn5fZTQB2a+lDZU6ezOz/t839cekVDT94LTM1LSMtcJcS3Yo=
+X-Gm-Gg: ASbGnctrLjE2pWcCNXAESs5PKjQgfqHFcPT9o7+Iw9MjtqdhSgvndWSwdp0gSw5EWTu
+ W0UfefXbLo7ARDEE3J6KEJf6WCJzs4JXpm4rizQSHu75GNAQnoy6oanSfI6MTYyJXbX+ApCUAVl
+ 3oZex2iKachut1x+rXFFweiKA2nAKiqRoT6DgXv23/co809VB+R7aNGImSagRHrjWh6fmCJdm2X
+ 1DWPTkXCim0uq+RcWA8Vkpfv0UQe2bMgXMksWd5MdS9U//lJaM4BoQhPPiMcT1lpFZLLpGOY9qv
+ 85Ehql/7YcF2R5vjf3yqmWcoQVlri4RK5d8D8hdzlCjtYnV8SIHCNb95hQko2gLX7WyNlQF6z2j
+ R1wd2kyDUWBzj
+X-Received: by 2002:a05:622a:344:b0:4d8:9cc4:494f with SMTP id
+ d75a77b69052e-4da485b8e21mr16346481cf.31.1758752114426; 
+ Wed, 24 Sep 2025 15:15:14 -0700 (PDT)
+X-Google-Smtp-Source: AGHT+IGD/VK9auAzGR3nxquVQOqdWaQcnzLnf1Vnk3sX/rW8S/PIuRWwQZzw54hrcihzTvx469vM7g==
+X-Received: by 2002:a05:622a:344:b0:4d8:9cc4:494f with SMTP id
+ d75a77b69052e-4da485b8e21mr16345991cf.31.1758752113752; 
+ Wed, 24 Sep 2025 15:15:13 -0700 (PDT)
 Received: from [192.168.8.208] (pool-108-49-39-135.bstnma.fios.verizon.net.
  [108.49.39.135]) by smtp.gmail.com with ESMTPSA id
- 6a1803df08f44-8013ca1f1desm2124606d6.23.2025.09.24.15.14.00
+ d75a77b69052e-4db11ce3921sm170231cf.46.2025.09.24.15.15.12
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 24 Sep 2025 15:14:01 -0700 (PDT)
-Message-ID: <929da04e71b03884a5e9b48168db1131449c9435.camel@redhat.com>
-Subject: Re: [PATCH v2 09/10] nova-core: falcon: Add support to write
- firmware version
+ Wed, 24 Sep 2025 15:15:12 -0700 (PDT)
+Message-ID: <550f8456c07c2dec27af87b2269b9cf5094b613c.camel@redhat.com>
+Subject: Re: [PATCH v2 10/10] nova-core: gsp: Boot GSP
 From: Lyude Paul <lyude@redhat.com>
 To: Alistair Popple <apopple@nvidia.com>, rust-for-linux@vger.kernel.org, 
  dri-devel@lists.freedesktop.org, dakr@kernel.org, acourbot@nvidia.com
@@ -87,15 +86,15 @@ Cc: Miguel Ojeda <ojeda@kernel.org>, Alex Gaynor <alex.gaynor@gmail.com>,
  <jhubbard@nvidia.com>,  Joel Fernandes <joelagnelf@nvidia.com>, Timur Tabi
  <ttabi@nvidia.com>, linux-kernel@vger.kernel.org, 
  nouveau@lists.freedesktop.org
-Date: Wed, 24 Sep 2025 18:14:00 -0400
-In-Reply-To: <20250922113026.3083103-10-apopple@nvidia.com>
+Date: Wed, 24 Sep 2025 18:15:12 -0400
+In-Reply-To: <20250922113026.3083103-11-apopple@nvidia.com>
 References: <20250922113026.3083103-1-apopple@nvidia.com>
- <20250922113026.3083103-10-apopple@nvidia.com>
+ <20250922113026.3083103-11-apopple@nvidia.com>
 Organization: Red Hat Inc.
 User-Agent: Evolution 3.56.2 (3.56.2-1.fc42)
 MIME-Version: 1.0
 X-Mimecast-Spam-Score: 0
-X-Mimecast-MFC-PROC-ID: tmstjNIU_ULvz2rny9or5UzAGMZIGwB6QJUncpLOxhc_1758752042
+X-Mimecast-MFC-PROC-ID: dpcdxNp9zDonRUySW94n__tZePCvlYWSEDc4TaNnA80_1758752115
 X-Mimecast-Originator: redhat.com
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
@@ -113,60 +112,171 @@ List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-Reviewed-b: Lyude Paul <lyude@redhat.com>
+Reviewed-by: Lyude Paul <lyude@redhat.com>
 
 On Mon, 2025-09-22 at 21:30 +1000, Alistair Popple wrote:
-> From: Joel Fernandes <joelagnelf@nvidia.com>
+> Boot the GSP to the RISC-V active state. Completing the boot requires
+> running the CPU sequencer which will be added in a future commit.
 >=20
-> This will be needed by both the GSP boot code as well as GSP resume code
-> in the sequencer.
+> Signed-off-by: Alistair Popple <apopple@nvidia.com>
 >=20
-> Signed-off-by: Joel Fernandes <joelagnelf@nvidia.com>
 > ---
->  drivers/gpu/nova-core/falcon.rs | 9 +++++++++
->  drivers/gpu/nova-core/regs.rs   | 6 ++++++
->  2 files changed, 15 insertions(+)
+>=20
+> Changes for v2:
+>  - Rebased on Alex's latest tree
+> ---
+>  drivers/gpu/nova-core/falcon.rs         |  2 -
+>  drivers/gpu/nova-core/firmware/riscv.rs |  3 +-
+>  drivers/gpu/nova-core/gsp.rs            |  2 +-
+>  drivers/gpu/nova-core/gsp/boot.rs       | 56 ++++++++++++++++++++++++-
+>  4 files changed, 57 insertions(+), 6 deletions(-)
 >=20
 > diff --git a/drivers/gpu/nova-core/falcon.rs b/drivers/gpu/nova-core/falc=
 on.rs
-> index c7907f16bcf4..0cb7821341ed 100644
+> index 0cb7821341ed..960801f74bf1 100644
 > --- a/drivers/gpu/nova-core/falcon.rs
 > +++ b/drivers/gpu/nova-core/falcon.rs
-> @@ -619,4 +619,13 @@ pub(crate) fn is_riscv_active(&self, bar: &Bar0) -> =
-Result<bool> {
+> @@ -614,14 +614,12 @@ pub(crate) fn signature_reg_fuse_version(
+>      /// Check if the RISC-V core is active.
+>      ///
+>      /// Returns `true` if the RISC-V core is active, `false` otherwise.
+> -    #[expect(unused)]
+>      pub(crate) fn is_riscv_active(&self, bar: &Bar0) -> Result<bool> {
 >          let cpuctl =3D regs::NV_PRISCV_RISCV_CPUCTL::read(bar, &E::ID);
 >          Ok(cpuctl.active_stat())
 >      }
-> +
-> +    /// Write the application version to the OS register.
-> +    #[expect(dead_code)]
-> +    pub(crate) fn write_os_version(&self, bar: &Bar0, app_version: u32) =
--> Result<()> {
-> +        regs::NV_PFALCON_FALCON_OS::default()
-> +            .set_value(app_version)
-> +            .write(bar, &E::ID);
-> +        Ok(())
-> +    }
->  }
-> diff --git a/drivers/gpu/nova-core/regs.rs b/drivers/gpu/nova-core/regs.r=
-s
-> index 5df6a2bf42ad..d9212fa50197 100644
-> --- a/drivers/gpu/nova-core/regs.rs
-> +++ b/drivers/gpu/nova-core/regs.rs
-> @@ -215,6 +215,12 @@ pub(crate) fn vga_workspace_addr(self) -> Option<u64=
-> {
->      31:0    value as u32;
->  });
 > =20
-> +// Used to store version information about the firmware running
-> +// on the Falcon processor.
-> +register!(NV_PFALCON_FALCON_OS @ PFalconBase[0x00000080] {
-> +    31:0    value as u32;
-> +});
+>      /// Write the application version to the OS register.
+> -    #[expect(dead_code)]
+>      pub(crate) fn write_os_version(&self, bar: &Bar0, app_version: u32) =
+-> Result<()> {
+>          regs::NV_PFALCON_FALCON_OS::default()
+>              .set_value(app_version)
+> diff --git a/drivers/gpu/nova-core/firmware/riscv.rs b/drivers/gpu/nova-c=
+ore/firmware/riscv.rs
+> index dec33d2b631a..d1a9e027bac3 100644
+> --- a/drivers/gpu/nova-core/firmware/riscv.rs
+> +++ b/drivers/gpu/nova-core/firmware/riscv.rs
+> @@ -50,7 +50,6 @@ fn new(bin_fw: &BinFirmware<'_>) -> Result<Self> {
+>  }
+> =20
+>  /// A parsed firmware for a RISC-V core, ready to be loaded and run.
+> -#[expect(unused)]
+>  pub(crate) struct RiscvFirmware {
+>      /// Offset at which the code starts in the firmware image.
+>      pub code_offset: u32,
+> @@ -59,7 +58,7 @@ pub(crate) struct RiscvFirmware {
+>      /// Offset at which the manifest starts in the firmware image.
+>      pub manifest_offset: u32,
+>      /// Application version.
+> -    app_version: u32,
+> +    pub app_version: u32,
+>      /// Device-mapped firmware image.
+>      pub ucode: DmaObject,
+>  }
+> diff --git a/drivers/gpu/nova-core/gsp.rs b/drivers/gpu/nova-core/gsp.rs
+> index 1f7427a530e5..8fcfd6447101 100644
+> --- a/drivers/gpu/nova-core/gsp.rs
+> +++ b/drivers/gpu/nova-core/gsp.rs
+> @@ -32,7 +32,7 @@
+>  /// GSP runtime data.
+>  #[pin_data]
+>  pub(crate) struct Gsp {
+> -    libos: CoherentAllocation<LibosMemoryRegionInitArgument>,
+> +    pub libos: CoherentAllocation<LibosMemoryRegionInitArgument>,
+>      pub loginit: CoherentAllocation<u8>,
+>      pub logintr: CoherentAllocation<u8>,
+>      pub logrm: CoherentAllocation<u8>,
+> diff --git a/drivers/gpu/nova-core/gsp/boot.rs b/drivers/gpu/nova-core/gs=
+p/boot.rs
+> index 0b306313ec53..0f3d40ade807 100644
+> --- a/drivers/gpu/nova-core/gsp/boot.rs
+> +++ b/drivers/gpu/nova-core/gsp/boot.rs
+> @@ -5,6 +5,7 @@
+>  use kernel::dma_write;
+>  use kernel::pci;
+>  use kernel::prelude::*;
+> +use kernel::time::Delta;
+> =20
+>  use crate::driver::Bar0;
+>  use crate::falcon::{gsp::Gsp, sec2::Sec2, Falcon};
+> @@ -19,6 +20,7 @@
+>  use crate::gsp::commands::{build_registry, set_system_info};
+>  use crate::gsp::GspFwWprMeta;
+>  use crate::regs;
+> +use crate::util;
+>  use crate::vbios::Vbios;
+> =20
+>  impl super::Gsp {
+> @@ -127,7 +129,7 @@ pub(crate) fn boot(
+> =20
+>          Self::run_fwsec_frts(dev, gsp_falcon, bar, &bios, &fb_layout)?;
+> =20
+> -        let _booter_loader =3D BooterFirmware::new(
+> +        let booter_loader =3D BooterFirmware::new(
+>              dev,
+>              BooterKind::Loader,
+>              chipset,
+> @@ -143,6 +145,58 @@ pub(crate) fn boot(
+>          set_system_info(&mut self.cmdq, pdev, bar)?;
+>          build_registry(&mut self.cmdq, bar)?;
+> =20
+> +        gsp_falcon.reset(bar)?;
+> +        let libos_handle =3D self.libos.dma_handle();
+> +        let (mbox0, mbox1) =3D gsp_falcon.boot(
+> +            bar,
+> +            Some(libos_handle as u32),
+> +            Some((libos_handle >> 32) as u32),
+> +        )?;
+> +        dev_dbg!(
+> +            pdev.as_ref(),
+> +            "GSP MBOX0: {:#x}, MBOX1: {:#x}\n",
+> +            mbox0,
+> +            mbox1
+> +        );
 > +
->  register!(NV_PFALCON_FALCON_RM @ PFalconBase[0x00000084] {
->      31:0    value as u32;
->  });
+> +        dev_dbg!(
+> +            pdev.as_ref(),
+> +            "Using SEC2 to load and run the booter_load firmware...\n"
+> +        );
+> +
+> +        sec2_falcon.reset(bar)?;
+> +        sec2_falcon.dma_load(bar, &booter_loader)?;
+> +        let wpr_handle =3D wpr_meta.dma_handle();
+> +        let (mbox0, mbox1) =3D sec2_falcon.boot(
+> +            bar,
+> +            Some(wpr_handle as u32),
+> +            Some((wpr_handle >> 32) as u32),
+> +        )?;
+> +        dev_dbg!(
+> +            pdev.as_ref(),
+> +            "SEC2 MBOX0: {:#x}, MBOX1{:#x}\n",
+> +            mbox0,
+> +            mbox1
+> +        );
+> +
+> +        // Match what Nouveau does here:
+> +        gsp_falcon.write_os_version(bar, gsp_fw.bootloader.app_version)?=
+;
+> +
+> +        // Poll for RISC-V to become active before running sequencer
+> +        util::wait_on(Delta::from_secs(5), || {
+> +            if gsp_falcon.is_riscv_active(bar).unwrap_or(false) {
+> +                Some(())
+> +            } else {
+> +                None
+> +            }
+> +        })?;
+> +
+> +        dev_dbg!(
+> +            pdev.as_ref(),
+> +            "RISC-V active? {}\n",
+> +            gsp_falcon.is_riscv_active(bar)?,
+> +        );
+> +
+>          Ok(())
+>      }
+>  }
 
 --=20
 Cheers,
