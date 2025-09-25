@@ -2,75 +2,74 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id 06240BBF7C8
-	for <lists+nouveau@lfdr.de>; Mon, 06 Oct 2025 22:58:27 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id F2E87BBF729
+	for <lists+nouveau@lfdr.de>; Mon, 06 Oct 2025 22:57:59 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id EB2BC10E62D;
-	Mon,  6 Oct 2025 20:58:02 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id AC9E310E5F7;
+	Mon,  6 Oct 2025 20:57:56 +0000 (UTC)
 Authentication-Results: gabe.freedesktop.org;
-	dkim=permerror (0-bit key) header.d=gmail.com header.i=@gmail.com header.b="kpwuyibs";
+	dkim=permerror (0-bit key) header.d=gmail.com header.i=@gmail.com header.b="FGBmR7ED";
 	dkim-atps=neutral
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from mail-qv1-f52.google.com (mail-qv1-f52.google.com
- [209.85.219.52])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 9E8AE10E944
- for <nouveau@lists.freedesktop.org>; Thu, 25 Sep 2025 13:55:55 +0000 (UTC)
-Received: by mail-qv1-f52.google.com with SMTP id
- 6a1803df08f44-792f273fbe4so4558766d6.3
- for <nouveau@lists.freedesktop.org>; Thu, 25 Sep 2025 06:55:55 -0700 (PDT)
+Received: from mail-qv1-f51.google.com (mail-qv1-f51.google.com
+ [209.85.219.51])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 3658710E945
+ for <nouveau@lists.freedesktop.org>; Thu, 25 Sep 2025 13:56:02 +0000 (UTC)
+Received: by mail-qv1-f51.google.com with SMTP id
+ 6a1803df08f44-7946137e7a2so8799136d6.0
+ for <nouveau@lists.freedesktop.org>; Thu, 25 Sep 2025 06:56:02 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1758808555; x=1759413355; darn=lists.freedesktop.org;
+ d=gmail.com; s=20230601; t=1758808561; x=1759413361; darn=lists.freedesktop.org;
  h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
  :mime-version:subject:date:from:from:to:cc:subject:date:message-id
- :reply-to; bh=IbRi9B/DaIaW8U9NAWZIVdIpXCsTnUCErxxV4ovxvuk=;
- b=kpwuyibsEXTMkN1LEUhWg+qHsebR+OiXi++aOoIUgaDXBcZ+Eq7OnjS83pwgyWjdf8
- gibFyHwbQMd+gbsxycUNtifWqURvGsF+M4nVOy0R39kmMy9mYvxVu329Z5nUUu0lhn5s
- oUNtknSpiIlRaNCZ6zEeLAstazgDKdmsKsY6gYZeKS7QvmkMIE4WNCH6HtttSqzB1ZBA
- 88wh3tMQRSExn98YrD7wAF7YXE1j+6CKT8gpjIjhxqXF/m7gN4YAx74tv9VSbpZcfLky
- c6Lr24UoX3wlGvf97T5gSoWI6O7Xc9UAx7C55He/4sgZjBIbvspMmCBDqAab1eQ5UUmO
- E5nQ==
+ :reply-to; bh=Su5ueCqg2TI764Opf/rKiovLX30DsPsrljKG6JdjfP0=;
+ b=FGBmR7EDgbz8TmM9AA1mnKcXdl7ls2yLuJ3kALMjR9PGwnVFq7WOQ/pQWCPXajMQdu
+ 5X4CF3cwE++CkuT9pR206obSSSylKIDU8rUY3FgoYjGOYOqmfadLQCcnrXNbUs/kqEm7
+ WrvmWE38WP82NmBBsba/m1xqejdAgYC/gw8I9M8NYHziR7RuHWOFWLYY2znPQH49/REK
+ SDDkLi249+OOSGd4Te4yhBT31t5YkksOvENI7OcPZ9/adjCs5AraUNXSwxqrgYiN1Lex
+ Y9EafwUPnG1OssAhYL468Zc+XqJ9BH1uy185HP6Mku20j49ilFECh/DhSQFU9mSC5QOr
+ RFNw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1758808555; x=1759413355;
+ d=1e100.net; s=20230601; t=1758808561; x=1759413361;
  h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
  :mime-version:subject:date:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=IbRi9B/DaIaW8U9NAWZIVdIpXCsTnUCErxxV4ovxvuk=;
- b=ui4jCyOKg8xVpPSDeoPxuEbPPBdw1NkcsVGtpFKDKMgJPhAEDkT0mY5vxGARioXSSi
- pHjUv1i/4qeX6QQPprSsQL9mgzQzmeOZaJevFYWhy95jzTUwb6HPXygbwrOxJCwVM2RJ
- 2ywOb1PX/ij0mdhnMKzi03TZQJbtx7dGBuMmcX0XwfrIkmbnl4nsNNH5j4taltcaKzxB
- 0/j8u+bhDsHHHGDll7C4qgLzMHI/1uGm9+UESm5WLLZZEsLGEPh5pV+tmiod3L8zu3Bl
- KlHqCO846Toj9YAx/VFDriV4svY0PVsLUp8STsLVuMh0W5/XXurHkXVJm0HK1jZeoA9v
- 3X1Q==
+ bh=Su5ueCqg2TI764Opf/rKiovLX30DsPsrljKG6JdjfP0=;
+ b=PBqhet68KKGTvaC12hukFzV8yHJhHM/b6l6dFsrICj+a5Cc2zzfLLsIDs2Re71qVZi
+ rs1oKym+hGw0TEWNfm5YxJahZHoOSKzzRKJ6u2qlkq2VPcklf6J1gWpKZoewlT3ayLz4
+ XX8jaBk1xVMh3PEPVwyFUdgucdVMCxNezXHwsdP6f1KpS+X7b02WoSqC+4pFssX0nRAm
+ HxfQfqgvBO8lRoLb1YYK4mRJkE8gdN6COJ8xbq/YJozPd6ESHP4D7AMrAhGXD8qQvWAw
+ +Q5zbQDqI1opysQ9j16Sh26qYd8rQS7KnvaXcvzQPm7PcJdRRtqG6frepuN88anRUukh
+ qWgA==
 X-Forwarded-Encrypted: i=1;
- AJvYcCUCvSNp7wIwqlOC46gZ2wA+uI4t+uIiIUNBuh8cj2Benw0nPnNNTA3Ryf+oquUWoP/AG7ju0fQg@lists.freedesktop.org
-X-Gm-Message-State: AOJu0YzUvHTONkGK4S2aMG5CwR4EO+L6kcWIkSXKnx1Bk1ROvd2fwdiE
- siDC9I+a+FfGE5oPUdp57Fwbn27hxR240g60eFqjEya0UcvjhKYdd+0I
-X-Gm-Gg: ASbGncucNPR+p/ozU62GbYZGltVJgDq9aKlqG/gsPNVgMUMeOqaUr0u5smwcBC24qJ9
- YPKmyx1Vae6DEW68THvnLtC5XlZmFhiTnNgPM9+ttWVdcuKFrp22+qKcb03SO7uPRphKoaH87V0
- luznaJhvqcFSeeevCchGUugl2x0GdYbVrd7pQML3VjbFD2S4bgDdR9MPBUjfs0fWHseR4wYeV93
- 9dvUKYpKPlYEodN6ijuHCfHmMes1GKF/w4vZgJrE1SVhquhcQYkgdNYLy/UUjKTn/tUqRmSY5rz
- Y4eNVSyEmaAcnVrmC5UlSdutomjcAb9i5n2CrDkDXBf5ef0lxDrwd6N650sZ1m6IkEqUfQSTMrL
- BkQbrnadc7bOQig9fF8F8UXV3aH8sCl9nIk4FzyzPAx5TllyNJMdaFZj8Q7VFEQW0fcdQBrCA+x
- oPP5LrvZnS3m1Ygr+7S0Up+68ynbjQyHLp4YnrYnDWtjv9FSHvM4W1vu8J7xVwe+c5H1Zr
-X-Google-Smtp-Source: AGHT+IG7SCiSfqv22MjkqMAx69OdDcsv0d2XWfzHnQ58HqF/5wRLVKKYuW5rQhqneJzNL2eu5F8jIg==
-X-Received: by 2002:a05:6214:5198:b0:77f:4415:6d8b with SMTP id
- 6a1803df08f44-7fc28076ae1mr36287846d6.8.1758808554316; 
- Thu, 25 Sep 2025 06:55:54 -0700 (PDT)
+ AJvYcCW80Q1bn+ezwDemKuByu9ubZ6+P9y8/nslCMYrhLguTPuY7CfPbxFCLPY7ObSsHjGsy11ZcGRMS@lists.freedesktop.org
+X-Gm-Message-State: AOJu0YxyKECGoAr8yiZN45CkfueGGS3yj97YJzr0ZFzGCXZ6STlEFaru
+ O8anpJ4+3KfTzKITvPaSSsyOzQAWBrHosVkJD/C6sCyb2JlT3kQCRjv5
+X-Gm-Gg: ASbGnctehOo2k3ur8QHvd+eu8/DRIXuuUnjI4pplW6kTvBTYXrqcRXI7UXVaWaHy+/q
+ Gd6xJmbxsr2Ehm8BNtylpidJNkWzTngC7H5DESsOdOgBZfIrrAGW1eGiICgAOk8+WVWxO3m9Fq7
+ tluHygEm41fhmL/8kRCxCiYTRTvR5B3fDE04Kv6S/fdu3az8LeCy38IOqcomAaTdvAKxAazYTU4
+ XoTa6qk8EhtiqInWVLC61kVVhce7KTZ9L7zZ4Vrr+iicxgELEKh03pBSXXGf9xW8CeFdKZT5j79
+ ZfcqoRC1yFDBLzJmlS0O1y5CzdtZJBdRVWLortQP3QUaM2GsnRtgZYj8grHvp2/bdnLCR7gD18p
+ PCj0FJB9Oy5mn52HHuuM/Nr2BS3tfUkHzq+fWJcaj3mAWEPQRjcIxvc0ePkcwKMqW3miC5fh9HL
+ 4fI0XyvQkY8xIf7SA3zS8C9lJfrdFBjkWJzDDvYcEHe9uOFOyXDjPYZrbwPVIshez3ehkk
+X-Google-Smtp-Source: AGHT+IEKGM1hlb41qJ9YisDvGGBXEq7SIWXMU0HV+6pPjw6gZQj4cUtrGlxKA4Eejw5JCAnnmfC1hg==
+X-Received: by 2002:a05:6214:2aaa:b0:7ef:4bbc:7767 with SMTP id
+ 6a1803df08f44-7fc400b2947mr55121666d6.52.1758808560892; 
+ Thu, 25 Sep 2025 06:56:00 -0700 (PDT)
 Received: from 137.1.168.192.in-addr.arpa
  ([2600:4808:6353:5c00:7c:b286:dba3:5ba8])
  by smtp.gmail.com with ESMTPSA id
- 6a1803df08f44-80135968d5esm11536916d6.12.2025.09.25.06.55.49
+ 6a1803df08f44-80135968d5esm11536916d6.12.2025.09.25.06.55.54
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 25 Sep 2025 06:55:53 -0700 (PDT)
+ Thu, 25 Sep 2025 06:56:00 -0700 (PDT)
 From: Tamir Duberstein <tamird@gmail.com>
-Date: Thu, 25 Sep 2025 09:54:04 -0400
-Subject: [PATCH v2 16/19] rust: str: replace `kernel::c_str!` with
- C-Strings
+Date: Thu, 25 Sep 2025 09:54:05 -0400
+Subject: [PATCH v2 17/19] rust: sync: replace `kernel::c_str!` with C-Strings
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 8bit
-Message-Id: <20250925-core-cstr-cstrings-v2-16-78e0aaace1cd@gmail.com>
+Content-Transfer-Encoding: 7bit
+Message-Id: <20250925-core-cstr-cstrings-v2-17-78e0aaace1cd@gmail.com>
 References: <20250925-core-cstr-cstrings-v2-0-78e0aaace1cd@gmail.com>
 In-Reply-To: <20250925-core-cstr-cstrings-v2-0-78e0aaace1cd@gmail.com>
 To: "Rafael J. Wysocki" <rafael@kernel.org>, 
@@ -110,13 +109,13 @@ Cc: linux-pm@vger.kernel.org, linux-kernel@vger.kernel.org,
  linux-block@vger.kernel.org, linux-fsdevel@vger.kernel.org, 
  Tamir Duberstein <tamird@gmail.com>
 X-Mailer: b4 0.15-dev
-X-Developer-Signature: v=1; a=openssh-sha256; t=1758808438; l=1351;
+X-Developer-Signature: v=1; a=openssh-sha256; t=1758808438; l=3839;
  i=tamird@gmail.com; h=from:subject:message-id;
- bh=TE76Xl7EtGwiL3k522JoFNelrGIHYPV5uXDUZx193fk=;
+ bh=VECNpd/2fGBh3QJ0YU9rU/w8zx6qBuVEWTaPGNBZjLs=;
  b=U1NIU0lHAAAAAQAAADMAAAALc3NoLWVkMjU1MTkAAAAgtYz36g7iDMSkY5K7Ab51ksGX7hJgs
  MRt+XVZTrIzMVIAAAAGcGF0YXR0AAAAAAAAAAZzaGE1MTIAAABTAAAAC3NzaC1lZDI1NTE5AAAA
- QNEkH2K217WCJVB+0mC1S+mvJu9BnNI6eCwPt0AKaTiMW7gojiLm71MaiB58vh7llyUCTN8zCSP
- N0RCtgv8pDgg=
+ QFx8Jxi6AjT1YSsescfenvnVsKv/V+CsWmgyG9TWGf4peefBqx8sfDGAJ3fkDpsXNUJgJQ5G9qv
+ 456V5li7HsQM=
 X-Developer-Key: i=tamird@gmail.com; a=openssh;
  fpr=SHA256:264rPmnnrb+ERkS7DDS3tuwqcJss/zevJRzoylqMsbc
 X-Mailman-Approved-At: Mon, 06 Oct 2025 20:57:16 +0000
@@ -142,31 +141,100 @@ Reviewed-by: Alice Ryhl <aliceryhl@google.com>
 Reviewed-by: Benno Lossin <lossin@kernel.org>
 Signed-off-by: Tamir Duberstein <tamird@gmail.com>
 ---
- rust/kernel/str.rs | 5 ++---
- 1 file changed, 2 insertions(+), 3 deletions(-)
+ drivers/block/rnull.rs         | 2 +-
+ rust/kernel/sync.rs            | 5 ++---
+ rust/kernel/sync/completion.rs | 2 +-
+ rust/kernel/workqueue.rs       | 8 ++++----
+ 4 files changed, 8 insertions(+), 9 deletions(-)
 
-diff --git a/rust/kernel/str.rs b/rust/kernel/str.rs
-index 624386cb07be..4203ce34ce98 100644
---- a/rust/kernel/str.rs
-+++ b/rust/kernel/str.rs
-@@ -272,15 +272,14 @@ impl fmt::Display for CStr {
-     /// Formats printable ASCII characters, escaping the rest.
+diff --git a/drivers/block/rnull.rs b/drivers/block/rnull.rs
+index 6366da12c5a5..9aa79b862b63 100644
+--- a/drivers/block/rnull.rs
++++ b/drivers/block/rnull.rs
+@@ -55,7 +55,7 @@ fn init(_module: &'static ThisModule) -> impl PinInit<Self, Error> {
+         })();
+ 
+         try_pin_init!(Self {
+-            _disk <- new_mutex!(disk?, "nullb:disk"),
++            _disk <- new_mutex!(disk?, c"nullb:disk"),
+         })
+     }
+ }
+diff --git a/rust/kernel/sync.rs b/rust/kernel/sync.rs
+index 00f9b558a3ad..672411058a92 100644
+--- a/rust/kernel/sync.rs
++++ b/rust/kernel/sync.rs
+@@ -44,7 +44,6 @@ impl LockClassKey {
      ///
+     /// # Examples
      /// ```
 -    /// # use kernel::c_str;
-     /// # use kernel::prelude::fmt;
-     /// # use kernel::str::CStr;
-     /// # use kernel::str::CString;
--    /// let penguin = c_str!("🐧");
-+    /// let penguin = c"🐧";
-     /// let s = CString::try_from_fmt(fmt!("{penguin}"))?;
-     /// assert_eq!(s.to_bytes_with_nul(), "\\xf0\\x9f\\x90\\xa7\0".as_bytes());
-     ///
--    /// let ascii = c_str!("so \"cool\"");
-+    /// let ascii = c"so \"cool\"";
-     /// let s = CString::try_from_fmt(fmt!("{ascii}"))?;
-     /// assert_eq!(s.to_bytes_with_nul(), "so \"cool\"\0".as_bytes());
-     /// # Ok::<(), kernel::error::Error>(())
+     /// # use kernel::alloc::KBox;
+     /// # use kernel::types::ForeignOwnable;
+     /// # use kernel::sync::{LockClassKey, SpinLock};
+@@ -56,7 +55,7 @@ impl LockClassKey {
+     /// {
+     ///     stack_pin_init!(let num: SpinLock<u32> = SpinLock::new(
+     ///         0,
+-    ///         c_str!("my_spinlock"),
++    ///         c"my_spinlock",
+     ///         // SAFETY: `key_ptr` is returned by the above `into_foreign()`, whose
+     ///         // `from_foreign()` has not yet been called.
+     ///         unsafe { <Pin<KBox<LockClassKey>> as ForeignOwnable>::borrow(key_ptr) }
+@@ -115,6 +114,6 @@ macro_rules! optional_name {
+         $crate::c_str!(::core::concat!(::core::file!(), ":", ::core::line!()))
+     };
+     ($name:literal) => {
+-        $crate::c_str!($name)
++        $name
+     };
+ }
+diff --git a/rust/kernel/sync/completion.rs b/rust/kernel/sync/completion.rs
+index c50012a940a3..97d39c248793 100644
+--- a/rust/kernel/sync/completion.rs
++++ b/rust/kernel/sync/completion.rs
+@@ -34,7 +34,7 @@
+ /// impl MyTask {
+ ///     fn new() -> Result<Arc<Self>> {
+ ///         let this = Arc::pin_init(pin_init!(MyTask {
+-///             work <- new_work!("MyTask::work"),
++///             work <- new_work!(c"MyTask::work"),
+ ///             done <- Completion::new(),
+ ///         }), GFP_KERNEL)?;
+ ///
+diff --git a/rust/kernel/workqueue.rs b/rust/kernel/workqueue.rs
+index b9343d5bc00f..261b827235ae 100644
+--- a/rust/kernel/workqueue.rs
++++ b/rust/kernel/workqueue.rs
+@@ -51,7 +51,7 @@
+ //!     fn new(value: i32) -> Result<Arc<Self>> {
+ //!         Arc::pin_init(pin_init!(MyStruct {
+ //!             value,
+-//!             work <- new_work!("MyStruct::work"),
++//!             work <- new_work!(c"MyStruct::work"),
+ //!         }), GFP_KERNEL)
+ //!     }
+ //! }
+@@ -98,8 +98,8 @@
+ //!         Arc::pin_init(pin_init!(MyStruct {
+ //!             value_1,
+ //!             value_2,
+-//!             work_1 <- new_work!("MyStruct::work_1"),
+-//!             work_2 <- new_work!("MyStruct::work_2"),
++//!             work_1 <- new_work!(c"MyStruct::work_1"),
++//!             work_2 <- new_work!(c"MyStruct::work_2"),
+ //!         }), GFP_KERNEL)
+ //!     }
+ //! }
+@@ -337,7 +337,7 @@ pub fn try_spawn<T: 'static + Send + FnOnce()>(
+         func: T,
+     ) -> Result<(), AllocError> {
+         let init = pin_init!(ClosureWork {
+-            work <- new_work!("Queue::try_spawn"),
++            work <- new_work!(c"Queue::try_spawn"),
+             func: Some(func),
+         });
+ 
 
 -- 
 2.51.0
