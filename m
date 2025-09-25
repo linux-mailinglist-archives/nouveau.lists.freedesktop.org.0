@@ -2,75 +2,75 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id B880CBBF7C2
-	for <lists+nouveau@lfdr.de>; Mon, 06 Oct 2025 22:58:25 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 0FA55BBF6F3
+	for <lists+nouveau@lfdr.de>; Mon, 06 Oct 2025 22:57:41 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id C5D0E10E626;
-	Mon,  6 Oct 2025 20:58:02 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 7FD8010E5ED;
+	Mon,  6 Oct 2025 20:57:25 +0000 (UTC)
 Authentication-Results: gabe.freedesktop.org;
-	dkim=permerror (0-bit key) header.d=gmail.com header.i=@gmail.com header.b="BgggwUs8";
+	dkim=permerror (0-bit key) header.d=gmail.com header.i=@gmail.com header.b="DPIgJSQS";
 	dkim-atps=neutral
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from mail-qv1-f50.google.com (mail-qv1-f50.google.com
- [209.85.219.50])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 39B1310E942
- for <nouveau@lists.freedesktop.org>; Thu, 25 Sep 2025 13:55:38 +0000 (UTC)
-Received: by mail-qv1-f50.google.com with SMTP id
- 6a1803df08f44-79390b83c7dso6779616d6.1
- for <nouveau@lists.freedesktop.org>; Thu, 25 Sep 2025 06:55:38 -0700 (PDT)
+Received: from mail-qv1-f41.google.com (mail-qv1-f41.google.com
+ [209.85.219.41])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id A9BF010E944
+ for <nouveau@lists.freedesktop.org>; Thu, 25 Sep 2025 13:55:44 +0000 (UTC)
+Received: by mail-qv1-f41.google.com with SMTP id
+ 6a1803df08f44-7f7835f4478so6060146d6.1
+ for <nouveau@lists.freedesktop.org>; Thu, 25 Sep 2025 06:55:44 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1758808537; x=1759413337; darn=lists.freedesktop.org;
+ d=gmail.com; s=20230601; t=1758808544; x=1759413344; darn=lists.freedesktop.org;
  h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
  :mime-version:subject:date:from:from:to:cc:subject:date:message-id
- :reply-to; bh=mswzqg1rIlmw6HicVVCtXv0e5vufLTaFX3VKtK98wJ4=;
- b=BgggwUs8L9wp138Fa7WyikZ43Q6RKEXjpDwPyl9+oNhPN3AjFKeO2ErtqHhfCpN+mK
- E4NaVf9N7INfJzA8444HBzVDcmg/JQYrUWrU6qxcg4iG6mnqQBiZ1ijtDguu/uC8Z4Wn
- riOfD/0q17+yH4PZ1wOqvNfKtEmYMPpIHH702PRZ2h1mhm5UyRyQ83tHVoFQYVL94oGo
- N8yZSFvdxA1cmIqfEjYtjNHB84PAfXjWBSy7L7BMWaAQjhpwzSEVKN1LfFxrD316PR+o
- zxQOWJvFzxXI2+hiZlmThBnIrl8pIE00W1zueT1VjwM4L6eelQfgK9OFn8BB4V0TFtIB
- H1og==
+ :reply-to; bh=WAkOv1RieyKvIfCAhJItgJq0V7Rg1TFOU5lVc6t6PUg=;
+ b=DPIgJSQStIgXCXZ7XrMt1zYMFwhY10OG3ywpnU7SuBqAIjpPRkIheRfa6FlKcuSTdF
+ H2i71A/nqQr+tBxOKd8j9jH9hgsFiSv6ZX0VpTEBlTeLeKPoC2iJmM4yYdDC6iAP6oF8
+ bHSULgVIZUMVSzvFqv+SUwZrc6B+7U41p5G1s7OJAt4P2VrtMW/i/7D5DLFvrSn7qU79
+ dYzy8J1al0ofiR6pJgKOcuHOiGGEdQkkrlA/cQmEO14I69ekO6IVMo2tv55TmrQtm3OP
+ JOl8tw6k6sWEM106YIOuTCufi591vC75zdvvNZRbXAFLuA48lJcGG1/9kyqaV+uZ+BWe
+ Qr2w==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1758808537; x=1759413337;
+ d=1e100.net; s=20230601; t=1758808544; x=1759413344;
  h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
  :mime-version:subject:date:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=mswzqg1rIlmw6HicVVCtXv0e5vufLTaFX3VKtK98wJ4=;
- b=amPCrPiGAOGwA+6RKoFEBo2INTfn9YBYqwn9b77+YrAYzaZB+GL2W4fdoQC5vv2KLn
- oo0EcPfEJ4lWnFlIIlphvQWKmtUe4iB0sUl41hWPaHHEDb+jVuc2Ux1Sz0S9RdeWZ2Ig
- 1ScNnrQj5f9Q44url9CGkbIkqGeyXOVoxs7mmGcySkYvfU4E3FztAItno3cL1A7x+yoX
- jONdiXih1d+ec10DYyWvUYZF6BX0hY7DppMgGHOCptb4F3tBbUaG9B7N9tZaOPiv/2ua
- EfQfjLMm1cmD/OrAStqbijkUnJ5AmEVoD8Vt1tUTRbjcDbRfhp6Ty+WH8hR9aon8kRND
- VxMw==
+ bh=WAkOv1RieyKvIfCAhJItgJq0V7Rg1TFOU5lVc6t6PUg=;
+ b=icrDbjA8019LRACkSzh3FD9zypEM16I+gGcCNKvGqx2WwmoM55gYh2Qa1mNlQDFjIK
+ u2wnaEUqJ9nV17cRlvIhYqtOiAi9EIbVVlWQFuZCbU6yM4SCD4gMtDWzl+mzVMgSn1in
+ BqESzZ9Q5jkiOxYuED5rVr2iY1cNFq9SG52PO5+vadcvqih0b3D0Oe0X8DmW91BkNuz5
+ f5mzmQYsOGjqyRNTr2qYeG3B777nhgS8jYhT7jZZkW/CtdW2Vnee7FlGK0dM9uv5xLgA
+ dJvveM84/wvVIjyRKKeDqtCj1IumfsInllomI/en5VdFyjJdZgnT5y31MKhTe7pCJHTV
+ p9rA==
 X-Forwarded-Encrypted: i=1;
- AJvYcCWXR0SY86NITbuhJparC6lRsE7rIojnCVGPXGmSEO4M+gWJryU24hozOEXqUx2c+UozY04sG9mj@lists.freedesktop.org
-X-Gm-Message-State: AOJu0Yyj3SVHIXWXlqb9n1t/eLjD+ztC/s5DE8/d2qMAgPeCjp6zdmaw
- Yyudpjr7RniSIWb0VlLtCF/N5JsQYLjvr5DRY6fo8EXGlp2fw67Hqyf1
-X-Gm-Gg: ASbGncvISawgQN/2578In/T0lKrZoQCzz50y7y0gDOCueGEHdv5EWQYhhKty0maCAlw
- RYEzuD87Aywn1/42Wy2bgAqCyWkGP39WdA+Kp7pUJnFqOixezvS0XT5G9RcjDtVHM8TKsi9HxPA
- d5ema7JUcTG9D7azjDQ6IVWH+kb4Dx80YsQnD67K3WiZ04v6tHEPQxaMfB80D1F8UfG0RyADdVJ
- 0gYYnVqLPXRju1suZw8i6h3bnAFXiXo8UpLzBFQKqo3DS9cH9D93N34zt/LJyE+BLTkBJLeGAe5
- rPy3amX97PTzWJh/9dYR11SOs/GjyS6KKRN+r33V2YNsq8bOmMkO/G5ks1IC+mOV0pO/c5YxFG8
- njUmcFxO+C6guflACHccPeikIvTlb9keEvlQzICKiqTJt10Bts5+R/TB5VR28+FkvVqrmMgm5wH
- lEEDmywAOV1eIeh62Ah6CTRBbFjBNmokRcP5FLNoNvzo8M/iSdy/cEw5Hkkbj8f09It1q1
-X-Google-Smtp-Source: AGHT+IG0JSBlGu1RB4uMilSaBh7PnIkXhnuatHF4cSQpYwaqP/zzSQ9G+tSnzQTTn3K53FoLTANywA==
-X-Received: by 2002:a05:6214:4001:b0:70d:6de2:50c0 with SMTP id
- 6a1803df08f44-7fc43a4e9e0mr40876536d6.61.1758808535790; 
- Thu, 25 Sep 2025 06:55:35 -0700 (PDT)
+ AJvYcCX/6oPxfbyYay9IMWAI3uWWxF8sbc+geNM/Uxxkyt2UWpi0AOoYrufK9mWcJ7ayVwCO2VuUiw4T@lists.freedesktop.org
+X-Gm-Message-State: AOJu0Yxv3aWo2G8VQjO4LE903b61S5drajuDjp/pIMfm6Vt2pD4hx1sS
+ JivfeyA9mIefXIpgj8ZpuBuxZ9cVLjXk41hBPHmphFBvhDejlY1y1fzX
+X-Gm-Gg: ASbGncvipBu+pN8hc0gyX4bW1MtpeAey54jhSWG5nwfLqnJXT/pUrN4etNo0r8k/5M/
+ 1kffgLfC1CoOBAkIjfM58DUPK5u0l2uyYneFh6MS4t/4gGJXAAFEdJ4AQg3NdDjdpcR1TrnIukj
+ IbLmdtJrg13GyabW4Fzvl8rKlmVw7/6HQqZUEsO3DWZrevtyXTO/0aoYaobkCtZ5X4nNEbXGFtn
+ FnoFT+y3s0XLoR9kqQyjK3vJtPENaR/Eao3nGD5Ba6pyG723Bo/eR/y5dq+HGNQdnvoRQknbg34
+ /lSXGw1kTN/+EDWwKSuHWGkbkPr4hT7qn5zAaQLIwqWjDO7bZdVhgQZ9sd8L9hfDKwqVNTV1cnu
+ i+6sIqTwv0/ahquOThhGhNXns2duVrLt0ig/xkgwR8rWWiA2OqqSmJOnaRVNvQGrA+b5swrMXde
+ 9Vfe8KwyfEypfYuQtfaOxpNBtvIu53F5O8u5sLhnlelvUpylaHV6P5xAAeAc1PiUAzLVLM
+X-Google-Smtp-Source: AGHT+IHF9UuB9For1/7YW0Qxf6nPTFMieeyDSqN58eT9nYnL6TeBAODoPScd1hJnleJiIi565hDfTQ==
+X-Received: by 2002:ad4:5bc9:0:b0:76a:fcee:97aa with SMTP id
+ 6a1803df08f44-7fc309ec826mr47856686d6.29.1758808543310; 
+ Thu, 25 Sep 2025 06:55:43 -0700 (PDT)
 Received: from 137.1.168.192.in-addr.arpa
  ([2600:4808:6353:5c00:7c:b286:dba3:5ba8])
  by smtp.gmail.com with ESMTPSA id
- 6a1803df08f44-80135968d5esm11536916d6.12.2025.09.25.06.55.29
+ 6a1803df08f44-80135968d5esm11536916d6.12.2025.09.25.06.55.36
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 25 Sep 2025 06:55:35 -0700 (PDT)
+ Thu, 25 Sep 2025 06:55:42 -0700 (PDT)
 From: Tamir Duberstein <tamird@gmail.com>
-Date: Thu, 25 Sep 2025 09:54:01 -0400
-Subject: [PATCH v2 13/19] rust: pci: replace `kernel::c_str!` with
+Date: Thu, 25 Sep 2025 09:54:02 -0400
+Subject: [PATCH v2 14/19] rust: platform: replace `kernel::c_str!` with
  C-Strings
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20250925-core-cstr-cstrings-v2-13-78e0aaace1cd@gmail.com>
+Message-Id: <20250925-core-cstr-cstrings-v2-14-78e0aaace1cd@gmail.com>
 References: <20250925-core-cstr-cstrings-v2-0-78e0aaace1cd@gmail.com>
 In-Reply-To: <20250925-core-cstr-cstrings-v2-0-78e0aaace1cd@gmail.com>
 To: "Rafael J. Wysocki" <rafael@kernel.org>, 
@@ -110,13 +110,13 @@ Cc: linux-pm@vger.kernel.org, linux-kernel@vger.kernel.org,
  linux-block@vger.kernel.org, linux-fsdevel@vger.kernel.org, 
  Tamir Duberstein <tamird@gmail.com>
 X-Mailer: b4 0.15-dev
-X-Developer-Signature: v=1; a=openssh-sha256; t=1758808438; l=1469;
+X-Developer-Signature: v=1; a=openssh-sha256; t=1758808438; l=6208;
  i=tamird@gmail.com; h=from:subject:message-id;
- bh=9ZmEu11QXJ8phGJATObrsBrPngKGUQeOptVynfUL8WM=;
+ bh=cGT2p8vWeMd9yhCscAqtKB14P0MqjieptZpD6VjuDnQ=;
  b=U1NIU0lHAAAAAQAAADMAAAALc3NoLWVkMjU1MTkAAAAgtYz36g7iDMSkY5K7Ab51ksGX7hJgs
  MRt+XVZTrIzMVIAAAAGcGF0YXR0AAAAAAAAAAZzaGE1MTIAAABTAAAAC3NzaC1lZDI1NTE5AAAA
- QLLvUlNLZLAaXK2MqYDhZdBweEQ8R3sKV9FI/C2n7BV5P0I7OA8y5a1a/1zJuYaQ3obw7TFfFmi
- JTjNJLSMGawU=
+ QAqXnSTSLC5DSGmrQ0rUUvFP5bu0JMFwcjJ+FLO2nGEH20VIfZHuQ47CF/8jOiBsSKPADtt8TtP
+ 7X9bJlhhLGw8=
 X-Developer-Key: i=tamird@gmail.com; a=openssh;
  fpr=SHA256:264rPmnnrb+ERkS7DDS3tuwqcJss/zevJRzoylqMsbc
 X-Mailman-Approved-At: Mon, 06 Oct 2025 20:57:16 +0000
@@ -143,31 +143,155 @@ Reviewed-by: Benno Lossin <lossin@kernel.org>
 Acked-by: Danilo Krummrich <dakr@kernel.org>
 Signed-off-by: Tamir Duberstein <tamird@gmail.com>
 ---
- samples/rust/rust_driver_pci.rs | 4 ++--
- 1 file changed, 2 insertions(+), 2 deletions(-)
+ rust/kernel/platform.rs              |  6 +++---
+ samples/rust/rust_driver_faux.rs     |  4 ++--
+ samples/rust/rust_driver_platform.rs | 30 ++++++++++++++----------------
+ 3 files changed, 19 insertions(+), 21 deletions(-)
 
-diff --git a/samples/rust/rust_driver_pci.rs b/samples/rust/rust_driver_pci.rs
-index 606946ff4d7f..e0e9d9fda484 100644
---- a/samples/rust/rust_driver_pci.rs
-+++ b/samples/rust/rust_driver_pci.rs
-@@ -4,7 +4,7 @@
+diff --git a/rust/kernel/platform.rs b/rust/kernel/platform.rs
+index 8f028c76f9fa..d1cc5cee1cf5 100644
+--- a/rust/kernel/platform.rs
++++ b/rust/kernel/platform.rs
+@@ -135,7 +135,7 @@ macro_rules! module_platform_driver {
+ /// # Examples
+ ///
+ ///```
+-/// # use kernel::{acpi, bindings, c_str, device::Core, of, platform};
++/// # use kernel::{acpi, bindings, device::Core, of, platform};
+ ///
+ /// struct MyDriver;
+ ///
+@@ -144,7 +144,7 @@ macro_rules! module_platform_driver {
+ ///     MODULE_OF_TABLE,
+ ///     <MyDriver as platform::Driver>::IdInfo,
+ ///     [
+-///         (of::DeviceId::new(c_str!("test,device")), ())
++///         (of::DeviceId::new(c"test,device"), ())
+ ///     ]
+ /// );
+ ///
+@@ -153,7 +153,7 @@ macro_rules! module_platform_driver {
+ ///     MODULE_ACPI_TABLE,
+ ///     <MyDriver as platform::Driver>::IdInfo,
+ ///     [
+-///         (acpi::DeviceId::new(c_str!("LNUXBEEF")), ())
++///         (acpi::DeviceId::new(c"LNUXBEEF"), ())
+ ///     ]
+ /// );
+ ///
+diff --git a/samples/rust/rust_driver_faux.rs b/samples/rust/rust_driver_faux.rs
+index ecc9fd378cbd..23add3160693 100644
+--- a/samples/rust/rust_driver_faux.rs
++++ b/samples/rust/rust_driver_faux.rs
+@@ -2,7 +2,7 @@
+ 
+ //! Rust faux device sample.
+ 
+-use kernel::{c_str, faux, prelude::*, Module};
++use kernel::{faux, prelude::*, Module};
+ 
+ module! {
+     type: SampleModule,
+@@ -20,7 +20,7 @@ impl Module for SampleModule {
+     fn init(_module: &'static ThisModule) -> Result<Self> {
+         pr_info!("Initialising Rust Faux Device Sample\n");
+ 
+-        let reg = faux::Registration::new(c_str!("rust-faux-sample-device"), None)?;
++        let reg = faux::Registration::new(c"rust-faux-sample-device", None)?;
+ 
+         dev_info!(reg.as_ref(), "Hello from faux device!\n");
+ 
+diff --git a/samples/rust/rust_driver_platform.rs b/samples/rust/rust_driver_platform.rs
+index ad08df0d73f0..b3fe45a43043 100644
+--- a/samples/rust/rust_driver_platform.rs
++++ b/samples/rust/rust_driver_platform.rs
+@@ -63,7 +63,7 @@
  //!
- //! To make this driver probe, QEMU must be run with `-device pci-testdev`.
  
--use kernel::{bindings, c_str, device::Core, devres::Devres, pci, prelude::*, types::ARef};
-+use kernel::{bindings, device::Core, devres::Devres, pci, prelude::*, types::ARef};
+ use kernel::{
+-    acpi, c_str,
++    acpi,
+     device::{
+         self,
+         property::{FwNodeReferenceArgs, NArgs},
+@@ -85,14 +85,14 @@ struct SampleDriver {
+     OF_TABLE,
+     MODULE_OF_TABLE,
+     <SampleDriver as platform::Driver>::IdInfo,
+-    [(of::DeviceId::new(c_str!("test,rust-device")), Info(42))]
++    [(of::DeviceId::new(c"test,rust-device"), Info(42))]
+ );
  
- struct Regs;
+ kernel::acpi_device_table!(
+     ACPI_TABLE,
+     MODULE_ACPI_TABLE,
+     <SampleDriver as platform::Driver>::IdInfo,
+-    [(acpi::DeviceId::new(c_str!("LNUXBEEF")), Info(0))]
++    [(acpi::DeviceId::new(c"LNUXBEEF"), Info(0))]
+ );
  
-@@ -79,7 +79,7 @@ fn probe(pdev: &pci::Device<Core>, info: &Self::IdInfo) -> Result<Pin<KBox<Self>
-         let drvdata = KBox::pin_init(
-             try_pin_init!(Self {
-                 pdev: pdev.into(),
--                bar <- pdev.iomap_region_sized::<{ Regs::END }>(0, c_str!("rust_driver_pci")),
-+                bar <- pdev.iomap_region_sized::<{ Regs::END }>(0, c"rust_driver_pci"),
-                 index: *info,
-             }),
-             GFP_KERNEL,
+ impl platform::Driver for SampleDriver {
+@@ -126,49 +126,47 @@ impl SampleDriver {
+     fn properties_parse(dev: &device::Device) -> Result {
+         let fwnode = dev.fwnode().ok_or(ENOENT)?;
+ 
+-        if let Ok(idx) =
+-            fwnode.property_match_string(c_str!("compatible"), c_str!("test,rust-device"))
+-        {
++        if let Ok(idx) = fwnode.property_match_string(c"compatible", c"test,rust-device") {
+             dev_info!(dev, "matched compatible string idx = {}\n", idx);
+         }
+ 
+-        let name = c_str!("compatible");
++        let name = c"compatible";
+         let prop = fwnode.property_read::<CString>(name).required_by(dev)?;
+         dev_info!(dev, "'{name}'='{prop:?}'\n");
+ 
+-        let name = c_str!("test,bool-prop");
+-        let prop = fwnode.property_read_bool(c_str!("test,bool-prop"));
++        let name = c"test,bool-prop";
++        let prop = fwnode.property_read_bool(c"test,bool-prop");
+         dev_info!(dev, "'{name}'='{prop}'\n");
+ 
+-        if fwnode.property_present(c_str!("test,u32-prop")) {
++        if fwnode.property_present(c"test,u32-prop") {
+             dev_info!(dev, "'test,u32-prop' is present\n");
+         }
+ 
+-        let name = c_str!("test,u32-optional-prop");
++        let name = c"test,u32-optional-prop";
+         let prop = fwnode.property_read::<u32>(name).or(0x12);
+         dev_info!(dev, "'{name}'='{prop:#x}' (default = 0x12)\n");
+ 
+         // A missing required property will print an error. Discard the error to
+         // prevent properties_parse from failing in that case.
+-        let name = c_str!("test,u32-required-prop");
++        let name = c"test,u32-required-prop";
+         let _ = fwnode.property_read::<u32>(name).required_by(dev);
+ 
+-        let name = c_str!("test,u32-prop");
++        let name = c"test,u32-prop";
+         let prop: u32 = fwnode.property_read(name).required_by(dev)?;
+         dev_info!(dev, "'{name}'='{prop:#x}'\n");
+ 
+-        let name = c_str!("test,i16-array");
++        let name = c"test,i16-array";
+         let prop: [i16; 4] = fwnode.property_read(name).required_by(dev)?;
+         dev_info!(dev, "'{name}'='{prop:?}'\n");
+         let len = fwnode.property_count_elem::<u16>(name)?;
+         dev_info!(dev, "'{name}' length is {len}\n");
+ 
+-        let name = c_str!("test,i16-array");
++        let name = c"test,i16-array";
+         let prop: KVec<i16> = fwnode.property_read_array_vec(name, 4)?.required_by(dev)?;
+         dev_info!(dev, "'{name}'='{prop:?}' (KVec)\n");
+ 
+         for child in fwnode.children() {
+-            let name = c_str!("test,ref-arg");
++            let name = c"test,ref-arg";
+             let nargs = NArgs::N(2);
+             let prop: FwNodeReferenceArgs = child.property_get_reference_args(name, nargs, 0)?;
+             dev_info!(dev, "'{name}'='{prop:?}'\n");
 
 -- 
 2.51.0
