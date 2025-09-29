@@ -2,51 +2,51 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id 0E0B2BA844F
-	for <lists+nouveau@lfdr.de>; Mon, 29 Sep 2025 09:40:30 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 4DC10BA8510
+	for <lists+nouveau@lfdr.de>; Mon, 29 Sep 2025 09:49:44 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 4109010E0E6;
-	Mon, 29 Sep 2025 07:40:07 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id A10D110E3AD;
+	Mon, 29 Sep 2025 07:49:42 +0000 (UTC)
 Authentication-Results: gabe.freedesktop.org;
-	dkim=pass (2048-bit key; unprotected) header.d=Nvidia.com header.i=@Nvidia.com header.b="HZ5snD6Y";
+	dkim=pass (2048-bit key; unprotected) header.d=Nvidia.com header.i=@Nvidia.com header.b="Wdhss4Mc";
 	dkim-atps=neutral
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from BYAPR05CU005.outbound.protection.outlook.com
- (mail-westusazon11010003.outbound.protection.outlook.com [52.101.85.3])
- by gabe.freedesktop.org (Postfix) with ESMTPS id C1C5110E0E6;
- Mon, 29 Sep 2025 07:40:05 +0000 (UTC)
+Received: from PH8PR06CU001.outbound.protection.outlook.com
+ (mail-westus3azon11012066.outbound.protection.outlook.com [40.107.209.66])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 771F310E3AD;
+ Mon, 29 Sep 2025 07:49:41 +0000 (UTC)
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=y6Mo9NeJw309QatemylCS8X44K2Z4UDyzKx3BmNTossxkxk4y5TyWoWSNHWt++yDl1T6kUdhNTE7SEL8AB6oQtcxvDbYhnd6NxbxErR7tW1m/qCmMY6xrK2datAW4bM3EMcXKBTDI48a5SdmaG248sSSWzmLOE/VeVTSxGflA852rvNFUSOK5FbAogpO6nPhTAFycyYXvw/FhxD2kjELwAYQ1a9hB2MjvpRx8vgWh3zkfey/2ZVZhgLT/LYW6sleFh7qV8GMc3u/kau4byB1nItA4VbZ8WTuJJh/Y1tqMJfZ8vXVfV6FdKa9uj7mHPa3oOB2kWAKUki1FzEqXuCS1w==
+ b=mZEmIGjdQ3tN7ayZXolJ+C7+2KCS3pKK6+UV26qiUfMO9p6J7bxLJywvzlHTioFU8YqEywjjuSlERmVrMIR/z7kLP1mebJWkzlidIHPg1mabC0gF01xo2VqWWRm/diXKLtedVGzdEztsNPcU0ZufS8dAZ/eoOINz8pPRPB6qLdhZLNwdoetIbjMihQ8X7hjGto477B9c75mEUeQ9o+SNDyhdasuDqaAQ+l7vCqAM5J3q4ksVM8CDzRDOMVMwkueZC/MjMMbxOSHIu4omfptaBgUScQAZcIKMLbGQ2Kbws7cyHFYnqz8l7z0j8s3SvLKYgp0XkoqdH01w0jjoH0o8zg==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
  s=arcselector10001;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=hYrX3c4KzIsKnD+as/XqfqaDMEnBtbqd6uekCPCI1xQ=;
- b=pxHUE8hxNVefN+1uBwVIhj72cXk7GAkZzXmkJWn1i5o5dHLdm0BfnAS45QbLuN1fesQ6eEqsHOus7OKcfDwpd6u0mw2QGovg6KmT+kbko8HLIRkLbeIzknk4NwI6pk7FVxrJVCSUhLpJbQj6mQMAeQWl+nFDoTYRM46r7+BpTHpijN/K/7GpnmVujxwNllPstFU0xwjDwk9DIB3DuH0/a1Thk/06VeHXW/7Afnzovgt8Jf7V/qOCEsnKn1VvtmtVzvK/e/m45MRS5pM/ieZvmAA5MeWUjoQDsstpo5d1yiAM9FCgKYaO9d4TzZa6rIB1cfUqVZpAx4YnbSUHpse3qQ==
+ bh=6EiVDl5mQGbg8Hby5QRoGybWt8Kf7ewoM4t1hI9HTm4=;
+ b=vHtv9HexagayA9DEk5LdraQiV/xvhIdgJL5KXd1/zpP6rgUIhNQYGIyS8+wYwi23PC9Dax3Xrqu22Hk7SSuR3J7guIz+B/okwoxt0yzCHAOLUZaIELbolp0sc+NWFX9eBmY+HIFysSYmW1yjBoirmq9Xc7Ra64IVrkHqCkvZPG5ZCWIozRHQmE+EHpFWJJXcWxA/JRTchXmWuCOmtZtue42nXEQJVmtC9+ffmMThohrH6uyixgp8Jy/zkr6+IxaTBKCrKr3nNwhRmUluNLRB+8gi6/B+753DzAbvUtHoIsZNP6P4PlSnqF0xg2aW9IIywEFIcb8hunhngEnImXbXBA==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
  smtp.mailfrom=nvidia.com; dmarc=pass action=none header.from=nvidia.com;
  dkim=pass header.d=nvidia.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=Nvidia.com;
  s=selector2;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=hYrX3c4KzIsKnD+as/XqfqaDMEnBtbqd6uekCPCI1xQ=;
- b=HZ5snD6Yk1iutOTH6cpzzFcJSRO1BouLqgryIVdVoPJpYK8G4I+Ase7g76AZg71bYf3yzsswEw30aAxf1Lg2Ve+q+jyVgqn2pdZ2EQU6pDd6ffgGLizEgdTMYONAJGHs+s7LSclTaNNTFCzn9kGppbRjxmsjttmxU7HubXGJJ8Zz81rCWdu9TM9WXwLMk+tsyQ/XczQTcbl6NAc+fguDzBmqH2+TVaHveFNJX6HvciXtzux/oBd3atUjK31pKL6RA/8pVEC/JSawuXc8kZxlGsyng827pQKmR5FzIvZ5TEydZb1k7r5aWu1y/DvSg/sWZAppT78SqNHXCmI+ODKkDw==
+ bh=6EiVDl5mQGbg8Hby5QRoGybWt8Kf7ewoM4t1hI9HTm4=;
+ b=Wdhss4McBn5/cJog9vFUikmVADUMxnBXSrMs27phtVwxPWFvGNFhKNP8+GURv3+Lb780eQZtYEeK5Fw/HhsakY9+Wnnw6wsIdRKyxkNyJIIZ4o49xsE27K2jQjfrqx4tlLYSid/0vcCpjyR/AxmKdD01iyhj/u0+JZjdamQ4PwD88dkt+Xv2RusyFxYYERhBhhLeKj6i6c8qK1IxVgLBEBGdxbWBWGKTwKlkrHzu4+SOwopm0884X26rL8L1Y0q5RiOE2GvqBzRHkGuowE/cp4kIvWW/IQQWKrfHs92gbiEksRunhZzXz/eHjkFctxsOrhZ14W2xT3Tmv9nl/RRwZA==
 Authentication-Results: dkim=none (message not signed)
  header.d=none;dmarc=none action=none header.from=nvidia.com;
 Received: from DS0PR12MB7726.namprd12.prod.outlook.com (2603:10b6:8:130::6) by
- IA1PR12MB9532.namprd12.prod.outlook.com (2603:10b6:208:595::12) with
+ PH7PR12MB5925.namprd12.prod.outlook.com (2603:10b6:510:1d8::10) with
  Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9160.14; Mon, 29 Sep
- 2025 07:40:02 +0000
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9160.17; Mon, 29 Sep
+ 2025 07:49:38 +0000
 Received: from DS0PR12MB7726.namprd12.prod.outlook.com
  ([fe80::953f:2f80:90c5:67fe]) by DS0PR12MB7726.namprd12.prod.outlook.com
  ([fe80::953f:2f80:90c5:67fe%4]) with mapi id 15.20.9160.015; Mon, 29 Sep 2025
- 07:40:01 +0000
-Date: Mon, 29 Sep 2025 17:39:57 +1000
+ 07:49:38 +0000
+Date: Mon, 29 Sep 2025 17:49:33 +1000
 From: Alistair Popple <apopple@nvidia.com>
 To: Danilo Krummrich <dakr@kernel.org>
-Cc: John Hubbard <jhubbard@nvidia.com>, rust-for-linux@vger.kernel.org, 
- dri-devel@lists.freedesktop.org, acourbot@nvidia.com,
+Cc: Alexandre Courbot <acourbot@nvidia.com>, 
+ rust-for-linux@vger.kernel.org, dri-devel@lists.freedesktop.org,
  Miguel Ojeda <ojeda@kernel.org>, 
  Alex Gaynor <alex.gaynor@gmail.com>, Boqun Feng <boqun.feng@gmail.com>,
  Gary Guo <gary@garyguo.net>, 
@@ -57,99 +57,97 @@ Cc: John Hubbard <jhubbard@nvidia.com>, rust-for-linux@vger.kernel.org,
  Simona Vetter <simona@ffwll.ch>,
  Maarten Lankhorst <maarten.lankhorst@linux.intel.com>, 
  Maxime Ripard <mripard@kernel.org>, Thomas Zimmermann <tzimmermann@suse.de>, 
- Joel Fernandes <joelagnelf@nvidia.com>, Timur Tabi <ttabi@nvidia.com>,
- linux-kernel@vger.kernel.org, nouveau@lists.freedesktop.org
-Subject: Re: [PATCH v2 01/10] gpu: nova-core: Set correct DMA mask
-Message-ID: <e2twlxdothcm4vbg3vytxppdpjdocx2l54mfnvhn7dbdncbxhx@ut4kpu7qwwe7>
+ John Hubbard <jhubbard@nvidia.com>, Joel Fernandes <joelagnelf@nvidia.com>, 
+ Timur Tabi <ttabi@nvidia.com>, linux-kernel@vger.kernel.org,
+ nouveau@lists.freedesktop.org
+Subject: Re: [PATCH v2 06/10] gpu: nova-core: gsp: Create rmargs
+Message-ID: <7o6s6pywcontekmrsplcehxvpxu3eyeesbaulen7ppz6t34c6b@xkdfoveyiwam>
 References: <20250922113026.3083103-1-apopple@nvidia.com>
- <20250922113026.3083103-2-apopple@nvidia.com>
- <7fb081e9-e607-401b-937f-f4e3a78a2874@kernel.org>
- <0dbc8f78-5cee-4741-8d33-df3358dd5383@nvidia.com>
- <eblaubjmsesi6gh64ekm74qyzvfk23vjcmotc33upkc5w6edin@rbsezy6f7bai>
- <DD2PRD2XEZRE.1YACAPZWRYLZO@kernel.org>
- <um3463eyjtecebxdgjpegankwxgezqgeiqff6xy5wducnv7ayf@pnjhxbro2sh5>
- <DD53EE5HJUZY.2EMREPXQ9P090@kernel.org>
+ <20250922113026.3083103-7-apopple@nvidia.com>
+ <DD2JYDPBOKA8.2QCK0P7CR1T3V@nvidia.com>
+ <q2ehvle73bvop6muga44cebwzgpm2g5tghf2txq2orvgsaryh2@hfmxjcymhsrl>
+ <DD53NQP11F11.1JAJXDG2NQRU7@kernel.org>
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
-In-Reply-To: <DD53EE5HJUZY.2EMREPXQ9P090@kernel.org>
-X-ClientProxiedBy: SY5PR01CA0057.ausprd01.prod.outlook.com
- (2603:10c6:10:1fc::13) To DS0PR12MB7726.namprd12.prod.outlook.com
+In-Reply-To: <DD53NQP11F11.1JAJXDG2NQRU7@kernel.org>
+X-ClientProxiedBy: SYCPR01CA0045.ausprd01.prod.outlook.com
+ (2603:10c6:10:e::33) To DS0PR12MB7726.namprd12.prod.outlook.com
  (2603:10b6:8:130::6)
 MIME-Version: 1.0
 X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: DS0PR12MB7726:EE_|IA1PR12MB9532:EE_
-X-MS-Office365-Filtering-Correlation-Id: cf25a7f5-434a-4ead-b26b-08ddff2b65cf
+X-MS-TrafficTypeDiagnostic: DS0PR12MB7726:EE_|PH7PR12MB5925:EE_
+X-MS-Office365-Filtering-Correlation-Id: 8fa38641-daa0-40a4-c155-08ddff2cbd91
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
 X-Microsoft-Antispam: BCL:0;
- ARA:13230040|366016|376014|7416014|1800799024|7053199007; 
-X-Microsoft-Antispam-Message-Info: =?us-ascii?Q?ZNGDPF3qRt0UiDCVhN/LStZIi/If8JJ3y/OzWb3LZHbXpZql0IiKNWH7g0mQ?=
- =?us-ascii?Q?lm4O6152+RHG3gsV1d/vtz1f6mSVkmaAAjMxmLPMdrCx0kAX3wQAH39D+kpq?=
- =?us-ascii?Q?Nn2qOxHYd8To6ghKvjvrM9vNdS0JGw0vFwhhP2P7ah94u5k7cs3xq8RvaWI1?=
- =?us-ascii?Q?SUVLBjbBA/Ila3bY8N5uoJavveSGIEqZsEuHKEjtQbhrZG9NPfTEOcs3fic5?=
- =?us-ascii?Q?XeOUl6D0gU0k/PGRUDSHE/pvasW3Tubw+WS06YJoBe4tFtgDDThZ3XkYj7/T?=
- =?us-ascii?Q?PDGg4kKh4k8d6y2AXQpepl3vTpc4b9/2+PS0D0hLqErTBtJLxT3/Ow9AL0Dh?=
- =?us-ascii?Q?/I1HHZXhAlt1iN42W7PTTamjmAltnOwqwKQHHiHzjX4QL8YrCq3ayZ41lt/z?=
- =?us-ascii?Q?49EDqaFmxt3hkLWPI22htUugZlkN9HBkTRhnxfvCA+t+lleXsqUjfpeVoOx7?=
- =?us-ascii?Q?ZlZXKqG/60JxewkBXZsQlFjVdJHMhWpqt7HV5eZE8Is7l4YGvQ+eQfSXB1xb?=
- =?us-ascii?Q?jNYZuci1JOOymbSp1iRdeuF77hqDjCVwxCYYrSxeB1Gtaec7P8uiKpbNjL2N?=
- =?us-ascii?Q?Xu64RMK6u8Wq9UlOEFDKMwCQ6HYNaExASEhN2oISimRkLtebtU2OpsjrS6sN?=
- =?us-ascii?Q?8wkKQ6CGf4YVgl6jucOqcSVY+pjpIEuIAYP86VgV0dCBHUPNH4ntsYuUUolV?=
- =?us-ascii?Q?xX0pmCxxbfjvn/6FOD40FkWl/rgHEHtOAfWEAckUCGe0iBhFZ9oKnJh6ZnaZ?=
- =?us-ascii?Q?rzk9jRyA/FEgibQydo2EmgaRqPRW9tgJ5hcfai6AI6shyHWz5K/84fuU0yQM?=
- =?us-ascii?Q?jTmhLPE81PDrsJSTMt7suunU0Wi3YAjUoBot/Owznt+1SXMUSKilDzyhSGhu?=
- =?us-ascii?Q?PWg2Eze+O926jfA9ZVBqlxpyELrWq8vAlt7+bz7FysOArLzDH/ME8K0ZEfb4?=
- =?us-ascii?Q?eTl+DfXzMaFSDXgWM3O+rOLucXOXJ9ZZSI6rRt117DTUDG7BdDiO79PLowsk?=
- =?us-ascii?Q?lzpHdylDuB2FTLiSthh+0r/jFB6HwdTImug4fBf0kD5+OdEJUGYtGZa45ZwZ?=
- =?us-ascii?Q?mZ1CTuOlvKU1rBAdTG3NJZ1W/t0a+ZKfSNy3N3tjVAR14wd/BFDQyZxcJTkW?=
- =?us-ascii?Q?3f3oQl7MQEUeP7x7nYYhE5Gx3pzdkf1nKk8UpFPbnP61giYp/JLKk/4gvrBV?=
- =?us-ascii?Q?j4/sXjnVz3Yxc1j+NCki2eCM8BaWTxJx9gJVNrpABIaTKCGI7i9jr4GxWfmr?=
- =?us-ascii?Q?hFbZt5Y8PAifKmJocBot9NSBTG4NwtinAqlXNAlTzAElWx12Deui3eCMmix0?=
- =?us-ascii?Q?au0gjWRvOnxJaji1JpIUY5SAr5gQ8KX/EB6LdjzpoCyMSShDvIpLJPVk7BNM?=
- =?us-ascii?Q?2HA1B6vu4bVdUBLj1iJDXVwUF82vZreCECUoZ4YVd8/l4AuV1zoruKXgRj2C?=
- =?us-ascii?Q?Q2l8wh6IE+zXPp8MUk33FN3OG/t4J6kA?=
+ ARA:13230040|1800799024|366016|376014|7416014|7053199007; 
+X-Microsoft-Antispam-Message-Info: =?us-ascii?Q?5LLyUPEbf9UkWa6XxCt4Dy8qN9zvkNOFj4653ffw5XZ2aJ8uHpQp6ZPDRWip?=
+ =?us-ascii?Q?VWRc4SczciI9LCcDVGIPUIxSBv5PgMRQHETmChmUWefUbdafFE6MECYe/Zxx?=
+ =?us-ascii?Q?AQ/hOfb4ygnR30h5P3c/ychg/nI4EXTveyEMEVaHhl1C3fw1V/XmmLA2LSIm?=
+ =?us-ascii?Q?Fdx8DKYW1xW28KJr+dzx5kc3sTcPVqL4rUvFGNwhAv3FbB2hE+bvAp5CMQZI?=
+ =?us-ascii?Q?95X898ffH5mGOTk95ihbPTduqyYFvY03C/wDauiV14OvJBzKEcWHtvldld2+?=
+ =?us-ascii?Q?MxbbtO6Slf6JmsHioNYy6269FUlTATzf6w5M48qxK5DruOKqAjivqPQTFxrj?=
+ =?us-ascii?Q?bTXkH+3KHfcaZsr/ETFlhvk1FnrZg2rpAVu2PuLSlqpHD60AtxCt5DDT1Qxt?=
+ =?us-ascii?Q?gZ5rrAhDfeccB/bndXftIXjyW53b0M2PGTrmJM1Do8COQsj4MeoyS/jqFqn2?=
+ =?us-ascii?Q?WMGOlrKgkvK1X0bIYyh5ZvC2NqICs1LlA93jF7srqv6/Y0dizXubBlwyDKJ5?=
+ =?us-ascii?Q?3Vk+xNF9Mxajv2DK41rX5cmY+v/VY9+OTmqu6JfL7WVcsCzssk6vt1ANt0tW?=
+ =?us-ascii?Q?qQXVg4DD9kdj7rzSMrXmWsY43wy9aR1ojwaS/ZrvKMTEgPWYMPDSTAFW6vOd?=
+ =?us-ascii?Q?E5ZjKuY9inWjjYWFhErx8hmua5z13AeKH0wOVudcFRDQUwUFU+NUfczZpzWR?=
+ =?us-ascii?Q?bqylry5xbHeyq4Ovh3IqjEF1fRrAQQoyTRCP5rQ3VTek/eMVsRmvwpI/XOkt?=
+ =?us-ascii?Q?w/9j1OkhwEA/lC96/d+1mPKRvR5c49Y85OyDbgBN05qadNizyvTaR3NFhltl?=
+ =?us-ascii?Q?lJJ/rOJcO0KGW+iMnnYgmmICv+IbeVKRdYA24c8+ICfzb+Uk8coGnOy6W+cr?=
+ =?us-ascii?Q?h+JLvC9og2JPpg5P0qeVi+DsN6bSxlhuZj5uB+NjkH6gCCkyk/hb86KHXAfw?=
+ =?us-ascii?Q?juYDfwx2h4GmXIdW6S9yp4U9iI+PVy4YBvDRxd+Tzuuq0xiddZcC/zxhKxSJ?=
+ =?us-ascii?Q?zAO1i2mDLoPQ3xkETCIqzAhSpatXdM1ZOEmr0YlkuC4kCuyOyow+murb5QcI?=
+ =?us-ascii?Q?lEFf4FtpDj2kJf7yt6zTdzD4zIzVSzMmj7ff4xloacWsBGyRiCaL/XQ0TpFX?=
+ =?us-ascii?Q?3ESn7Wqcf/lmmm0YIc4sh2CmO3w0bnysLD7y2gv/476GzyEvx0N7PeGtZ+fY?=
+ =?us-ascii?Q?FRWh072Txuo/l7LEUFTvNhTL4bXWtoTzqVf7kDnv70TlsVwCQYY1K+ZmnJ++?=
+ =?us-ascii?Q?whFw60c5UxNv6X1V4t20z+P1VXxPtWL+Caf0xwBodfonxNYM0hTX63xnzaLM?=
+ =?us-ascii?Q?v6Pd7rteVHGX2elgERKEQDCmj/N0Pcl3hVRHRK1v0IhRBUAva0Kr5Wm0mENl?=
+ =?us-ascii?Q?LN2Ds+TJj5T7lyjJwd6wWAvCITuiHGeV4jvt1WkRclSD9KhjvH8NRhbAhk0A?=
+ =?us-ascii?Q?eUSRUAMFFKvD5Ud0E22ZsFKT3BE59Fj/?=
 X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
  IPV:NLI; SFV:NSPM; H:DS0PR12MB7726.namprd12.prod.outlook.com; PTR:; CAT:NONE;
- SFS:(13230040)(366016)(376014)(7416014)(1800799024)(7053199007); DIR:OUT;
+ SFS:(13230040)(1800799024)(366016)(376014)(7416014)(7053199007); DIR:OUT;
  SFP:1101; 
 X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: =?us-ascii?Q?85r1ofYeKbhF0ka4b1rW+jSXFpDwcXhT0ABr+WKJNkiQekPSyCmxMjJlxP5o?=
- =?us-ascii?Q?31/bbGLVC4rKFUXdXjMgEue79FltHQj7XJQStVWr9jbot8uQhpK7DXzUHb0P?=
- =?us-ascii?Q?p5K81LivQRj5mVLbuVv8lvT2QFVltms2ILJTq1GO1xiyHjemuG2kcC8M1U0c?=
- =?us-ascii?Q?87LKOFIcv0IxhtEMDSScur851h/kMsVHSNNDsh4lllgMfhc1yPSIezDMo+XU?=
- =?us-ascii?Q?9topWlwOUmt/GmgVZwrnVLek5ID/A1iy9WVwgS452PvzPxAYr4xWtxR5akPN?=
- =?us-ascii?Q?xL97fpLNHHGtgDkQMoQbtXHARVlze5NXcWmKNS4SN7esCdU+zVT+ikPjzERj?=
- =?us-ascii?Q?Ll4c6c4jw8VXCIK1crMUm8EkeSgK0tw0ZtO9NIU8EhtIc49+X/qoqOgHsVUE?=
- =?us-ascii?Q?eXc85CAGXgLpevjRrWDK8XeAdz4Cj+k+JZq9F8C4cVxGiRW/04nNH+yZMdOb?=
- =?us-ascii?Q?2X43JIuTcnB2G21ueZMk4xD+H5yo28SymxMnDql175pKrst3v/cH+cxgI9Ad?=
- =?us-ascii?Q?2iPam2DbtVSpwrLjn+n8Z58kNNKzYt8CwsCsPh/ft0gq1geLB5w9XfBkqHIN?=
- =?us-ascii?Q?TOeeQXfW0QnneewBKZvYo1Q7mvoq0Ys9DsMPkg5XHfU6ujdDat4cqW4zgsvU?=
- =?us-ascii?Q?/T+VFO2zhS6+fs+bKo2ca70Lv9KofI7DPlubRhAAjq1X3jj1vJQ2V/ZAR4tx?=
- =?us-ascii?Q?HVaNRaSaNvIFlDkAdatn7eBPevlDrPi7vPbezNMuLtuP3hsrWFhlJ0NoBi8B?=
- =?us-ascii?Q?HG+nf4bWSxLDS3l5CbhsjYQeyHdrsi8dMHciP1EUWi0PHAOBE+w+1aui6GHC?=
- =?us-ascii?Q?kNrlId21Z5aY4Gpq+/QWDJ9K7MiK3Up1dysi6Q1XPiJZwk4nD7XK8sNWJewE?=
- =?us-ascii?Q?841zh74hQkT/6bCxwjBj5uAQ04Et1AQXfV0QGpVsVKZU796RaKeKv6BE7f5j?=
- =?us-ascii?Q?W5WQUE+1sTJIRriARZF+48QBhlcp32FbK+8V30KnHdisOVAQReCWwvgLgeFB?=
- =?us-ascii?Q?sRk1wDYzRmeaI4+X60P/UnPeiki6QftO2FfdA35fZ4nqonV8QpsJWmqufLdv?=
- =?us-ascii?Q?JCwY5WMUzFfrK6mWywm6Y0Rq8jy7RvOs/BHiDV+bMxp8pCHoyOGhG9zx6EHm?=
- =?us-ascii?Q?R4DHqBBCuIsho8enPTj3ATmnyMHE2HBaFyXXOKcnTVCNrQ000k8cRVd7SsR5?=
- =?us-ascii?Q?grIzOJVVbOOoSrpS8zo9GxOaABGbGv1KfLkWU5W7qEf/7ZhUeXAI305inDYx?=
- =?us-ascii?Q?5Mp06PzrRV4npPQCZPbqQuJv3ev93tj+xTDtHGiffePnZ6ujTPyGohf3ti/c?=
- =?us-ascii?Q?nWKhwxyajr9jXF/8cMcvXArygKQfLBKQzytimgrkhH0cxcY7qoBKelqC/7la?=
- =?us-ascii?Q?0JvdXWJQY08QmXXR98tYQS2t8CnNl8w/bGfPJb7Anb0jgZKYKTzrvILH+9Mn?=
- =?us-ascii?Q?v+EM5Cto18zBeuYJ4ZB+/HHWAgYNEkJ4V7OuhoGfHEEwFg5JQnSO30c65uea?=
- =?us-ascii?Q?igef46aIY6xZU33kpfz+XpJx6FeHhsaXjJAH0oQYELJ+9BEm+ajuUDFFnjq9?=
- =?us-ascii?Q?dtz4Wx55+wMviiwYuaWejo6gu0+CXyr7uGFE4Xs9?=
+X-MS-Exchange-AntiSpam-MessageData-0: =?us-ascii?Q?iV//giyosozG8aVvgOMmrDcwDcP7jfgJqRtMU3Ni6fqToTlbuYLTgbcDx0Vc?=
+ =?us-ascii?Q?+ks2PSjRjrTa6rZYACheYxWVNwVrHjEy5WcCSqnrhyUyqaByPTXzEJX8r9IQ?=
+ =?us-ascii?Q?wvljzKs3jBWQbtYWK9gMcr8q2+ZQvT8LtlIuoD56Ht//ExvG91TFuQO4sXFx?=
+ =?us-ascii?Q?CMC+nPktQpqQlmVII5MT1l63rOE7VpbNxzs9hOW9K0MEmIGr1OcSy9jEe+va?=
+ =?us-ascii?Q?G4a0tTdOJmoLUsc4R4vCWsyfb8kuX56oKj0KXDf8y1o1K5Bf7zoJmpOLR09r?=
+ =?us-ascii?Q?kuosgUaqszOg9IrgIZ6LJ2TsIh8O9upPRMoV4R8F8/oDg6Qlp9E/hPammwEk?=
+ =?us-ascii?Q?PHEm6xofE90IU4uwj2Qm6rnqIqenvuBP7g0Sg0oL+Kq+aOTfOaXDqQwkezxt?=
+ =?us-ascii?Q?r03mqENdxCpjaidUu5mPO1kVjcsBMsPbAcLa9jqNZF9sX014c+DuSq6xO3OC?=
+ =?us-ascii?Q?oChMLKcuvx7sPwATTa9wIt6XgXCOY2Cp2jnLClM4WUQ/diQHOaJiFd39y7+K?=
+ =?us-ascii?Q?3nSlvzt9ZWg7K/XhLPGRHA7BG9L/DDvj+7UlNY0lVPJe8SF+R5VuJuEYMOF0?=
+ =?us-ascii?Q?DAO5VEqvOYzcJyWUv1y7D+MD8S4eq/C3MviKNbDlkWkuz4J9ZguPGQu+lRro?=
+ =?us-ascii?Q?fCIdw+qJr6lF0wvtrCNz5riSBi63E1xsD9/sTqCtPBxcSE5aE9RoPO/ENaYC?=
+ =?us-ascii?Q?o2pd7NwdPryVwL+YupwQCMIcn7vzCrUcmRWjRKm758xgl7YVGGoiqp+FxDfC?=
+ =?us-ascii?Q?rdMqovtXbfbJNqgnh75rA4hK9Ej7Fryab6llyJuM7y5FOHMCKPpwuCB+XJTF?=
+ =?us-ascii?Q?Dm+SufB6eF1pwbzN64H2mSmjQutqae82gVB2QSkUYZUBZgU6VNvHOelUlUW7?=
+ =?us-ascii?Q?Mk0QyEaPQDrj6A64fRy2fKyX2CoSgq5L/GzuzdCF+8KZeeLU6AgX1RyMHXqd?=
+ =?us-ascii?Q?OahKNG3gWlp50Ef30vrzLk3eLZmBp/4VX11wM8Jo07QtXpM+c4FHitsWmx2K?=
+ =?us-ascii?Q?ALGAK/aU+5dQlSVd10LduRqF/Us5kALJmfxVr5IU3p7wX0Eid46ZM6nldZ2R?=
+ =?us-ascii?Q?YcfgNLl9N2ETJdp0XuVaiX443+qjsqt/gYkWdwU+PGdV53CYrS5d9fhPsQYE?=
+ =?us-ascii?Q?mrO0NAkvjkgQC8pZfJ5oa/Adg2ItBEOtng0J2lXMoFk/+7aBHzsrXZU2L1zW?=
+ =?us-ascii?Q?RFh6pfAZyxwUjTJXn3cZYMOHJz14U/xzER104pcHofuZwAvyqcuhJqX7tH+1?=
+ =?us-ascii?Q?Rd5SsAIFjzh49h4dESlQzVm9MQGTc7ZkU0nUsIDxiIki6lravCvyfLRhjogN?=
+ =?us-ascii?Q?IFxiVV43HNiM4fF8pMO+xXmPGDZ9rzXKMay756Px8dYhMMVq9WJHGQrbTeUp?=
+ =?us-ascii?Q?8TeM+luvpb8tT8D5hspXAG4JNEgTn7XKNf6L/5wl6uPXeOzYUHzaEl6RcziR?=
+ =?us-ascii?Q?4k5vDyp2DbLc1htK8letV14EeYXaN5MYlVmEafv26nmDGZ7HAR3hP62Xetuv?=
+ =?us-ascii?Q?0rKjfWHivRv3j2C4gfPLyR9leb+FVKpBboHw+QwUcI40XY8VrECPpdvLjRmd?=
+ =?us-ascii?Q?kWmocOUHaOM8V6VXYb2IbF1/Ox9d73uc4gMZLplR?=
 X-OriginatorOrg: Nvidia.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: cf25a7f5-434a-4ead-b26b-08ddff2b65cf
+X-MS-Exchange-CrossTenant-Network-Message-Id: 8fa38641-daa0-40a4-c155-08ddff2cbd91
 X-MS-Exchange-CrossTenant-AuthSource: DS0PR12MB7726.namprd12.prod.outlook.com
 X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 29 Sep 2025 07:40:01.6579 (UTC)
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 29 Sep 2025 07:49:38.2360 (UTC)
 X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
 X-MS-Exchange-CrossTenant-Id: 43083d15-7273-40c1-b7db-39efd9ccc17a
 X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: 7QMleFqz4/Sr9fkRu2jty9DZPQZaE+UUwIk4K6wsS49t2+LlHIdlUIpYZTVkNXI4/yEsbW6kuOEPGQ3l5AB27Q==
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: IA1PR12MB9532
+X-MS-Exchange-CrossTenant-UserPrincipalName: KM7o9MCPGztbTmquuqFuvyGsSFaRxIsaZrpMJWMi8ie1V2EunceD0Il6kvXbUKLNT5SERJ2OfmFuSC2oyJXYEQ==
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: PH7PR12MB5925
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -164,71 +162,196 @@ List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-On 2025-09-29 at 17:06 +1000, Danilo Krummrich <dakr@kernel.org> wrote...
-> On Mon Sep 29, 2025 at 2:19 AM CEST, Alistair Popple wrote:
-> > On 2025-09-26 at 22:00 +1000, Danilo Krummrich <dakr@kernel.org> wrote...
-> >> On Tue Sep 23, 2025 at 6:29 AM CEST, Alistair Popple wrote:
-> >> > On 2025-09-23 at 12:16 +1000, John Hubbard <jhubbard@nvidia.com> wrote...
-> >> >> On 9/22/25 9:08 AM, Danilo Krummrich wrote:
-> >> >> > On 9/22/25 1:30 PM, Alistair Popple wrote:
-> >> >> >> +        // SAFETY: No DMA allocations have been made yet
-> >> >> > 
-> >> >> > It's not really about DMA allocations that have been made previously, there is
-> >> >> > no unsafe behavior in that.
-> >> >> > 
-> >> >> > It's about the method must not be called concurrently with any DMA allocation or
-> >> >> > mapping primitives.
-> >> >> > 
-> >> >> > Can you please adjust the comment correspondingly?
-> >> >
-> >> > Sure.
-> >> >
-> >> >> >> +        unsafe { pdev.dma_set_mask_and_coherent(DmaMask::new::<47>())? };
-> >> >> > 
-> >> >> > As Boqun mentioned, we shouldn't have a magic number for this. I don't know if
-> >> >> > it will change for future chips, but maybe we should move this to gpu::Spec to
-> >> >> 
-> >> >> It changes to 52 bits for GH100+ (Hopper/Blackwell+). When I post those
-> >> >> patches, I'll use a HAL to select the value.
-> >> >> 
-> >> >> > be safe.
-> >> >> > 
-> >> >> > At least, create a constant for it (also in gpu::Spec?); in Nouveau I named this
-> >> >> > NOUVEAU_VA_SPACE_BITS back then. Not a great name, if you have a better idea,
-> >> >> > please go for it. :)
-> >> >
-> >> > Well it's certainly not the VA_SPACE width ... that's a different address space :-)
+On 2025-09-29 at 17:18 +1000, Danilo Krummrich <dakr@kernel.org> wrote...
+> On Mon Sep 29, 2025 at 8:36 AM CEST, Alistair Popple wrote:
+> > On 2025-09-26 at 17:27 +1000, Alexandre Courbot <acourbot@nvidia.com> wrote...
+> >> On Mon Sep 22, 2025 at 8:30 PM JST, Alistair Popple wrote:
+> >> > @@ -33,6 +36,7 @@ pub(crate) struct Gsp {
+> >> >      pub logintr: CoherentAllocation<u8>,
+> >> >      pub logrm: CoherentAllocation<u8>,
+> >> >      pub cmdq: GspCmdq,
+> >> > +    rmargs: CoherentAllocation<GSP_ARGUMENTS_CACHED>,
+> >> >  }
+> >> >  
+> >> >  /// Creates a self-mapping page table for `obj` at its beginning.
+> >> > @@ -90,12 +94,35 @@ pub(crate) fn new(pdev: &pci::Device<device::Bound>) -> Result<impl PinInit<Self
+> >> >  
+> >> >          // Creates its own PTE array
+> >> >          let cmdq = GspCmdq::new(dev)?;
+> >> > +        let rmargs =
+> >> > +            create_coherent_dma_object::<GSP_ARGUMENTS_CACHED>(dev, "RMARGS", 1, &mut libos, 3)?;
+> >> > +        let (shared_mem_phys_addr, cmd_queue_offset, stat_queue_offset) = cmdq.get_cmdq_offsets();
+> >> > +
+> >> > +        dma_write!(
+> >> > +            rmargs[0].messageQueueInitArguments = MESSAGE_QUEUE_INIT_ARGUMENTS {
+> >> > +                sharedMemPhysAddr: shared_mem_phys_addr,
+> >> > +                pageTableEntryCount: cmdq.nr_ptes,
+> >> > +                cmdQueueOffset: cmd_queue_offset,
+> >> > +                statQueueOffset: stat_queue_offset,
+> >> > +                ..Default::default()
+> >> > +            }
+> >> > +        )?;
+> >> > +        dma_write!(
+> >> > +            rmargs[0].srInitArguments = GSP_SR_INIT_ARGUMENTS {
+> >> > +                oldLevel: 0,
+> >> > +                flags: 0,
+> >> > +                bInPMTransition: 0,
+> >> > +                ..Default::default()
+> >> > +            }
+> >> > +        )?;
+> >> > +        dma_write!(rmargs[0].bDmemStack = 1)?;
 > >> 
-> >> I mean, sure. But isn't the limitation of 47 bits coming from the MMU and hence
-> >> defines the VA space width and the DMA bit width we can support?
+> >> Wrapping our bindings is going to help clean up this code as well.
+> >> 
+> >> First, types named in CAPITALS_SNAKE_CASE are not idiomatic Rust and
+> >> look like constants. And it's not even like the bindings types are
+> >> consistently named that way, since we also have e.g. `GspFwWprMeta` - so
+> >> let's give them a proper public name and bring some consistency at the
+> >> same time.
 > >
-> > Not at all. The 47 bit limitation comes from what the DMA engines can physically
-> > address, whilst the MMU converts virtual addresses to physical DMA addresses.
+> > I think there are two aspects to the bindings - one which was addressed in
+> > the comments for patch 5 is how to abstract them. The other is that the way we
+> > currently generate them results in some  ugly name.
+> >
+> > Given we want to generate these from our internal IDL eventually I would favour
+> > fixing this naming ugliness by touching up the currently generated bindings. So
+> > maybe I will do that for the next revision.
 > 
-> I'm well aware -- what I'm saying is that the number given to
-> dma_set_mask_and_coherent() does not necessarily only depend on the physical bus
-> and DMA controller capabilities.
+> It's not about fixing the name of the generated C bindings, it's about not
+> leaking firmware specific structures into core code of the driver.
+
+I don't disagree. Please see my comments on patch 5, which deals more with the
+type of abstraction we want to provide.
+
+> Please hide it in an abstraction that can deal with differences between firmware
+> version internally; see also [1].
 > 
-> It may also depend on the MMU, since we still need to be able to map DMA memory
-> in the GPU's virtual address space.
-
-Sure, I'm probably being a bit loose with terminology - I'm not saying it
-doesn't depend on the MMU capabilities just that the physical addressing limits
-are independent of the virtual addressing limits so setting the DMA mask based
-on VA_SPACE_BITS (ie. virtual addressing limits) seems incorrect.
-
-> > So the two address spaces are different and can have different widths. Indeed
-> > most of our current GPUs have a virtual address space of 49 bits whilst only
-> > supporting 47 bits of DMA address space.
+> [1] https://lore.kernel.org/all/DCUAYNNP97QI.1VOX5XUS9KP7K@kernel.org/
 > 
-> Now, it seems that in this case the DMA engine is the actual limiting factor,
-> but is this the case for all architectures or may we have cases where the MMU
-> (or something else) becomes the limiting factor, e.g. in future architectures?
+> >> This will make all the fields from `GSP_ARGUMENTS_CACHED` invisible to
+> >> this module as they should be, so the wrapping `GspArgumentsCached` type
+> >> should then have a constructor that receives a referene to the command
+> >> queue and takes the information is needs from it, similarly to
+> >> `GspFwWprMeta`. This will reduce the 3 `dma_write!` into a single one.
+> >> 
+> >> Then we should remove `get_cmdq_offsets`, which is super confusing. I am
+> >> also not fond of `cmdq.nr_ptes`. More on them below.
+> >
+> > I will admit that was a bit of a hack.
+> >
+> >> >  
+> >> >          Ok(try_pin_init!(Self {
+> >> >              libos,
+> >> >              loginit,
+> >> >              logintr,
+> >> >              logrm,
+> >> > +            rmargs,
+> >> >              cmdq,
+> >> >          }))
+> >> >      }
+> >> > diff --git a/drivers/gpu/nova-core/gsp/cmdq.rs b/drivers/gpu/nova-core/gsp/cmdq.rs
+> >> > index a9ba1a4c73d8..9170ccf4a064 100644
+> >> > --- a/drivers/gpu/nova-core/gsp/cmdq.rs
+> >> > +++ b/drivers/gpu/nova-core/gsp/cmdq.rs
+> >> > @@ -99,7 +99,6 @@ fn new(dev: &device::Device<device::Bound>) -> Result<Self> {
+> >> >          Ok(Self(gsp_mem))
+> >> >      }
+> >> >  
+> >> > -    #[expect(unused)]
+> >> >      fn dma_handle(&self) -> DmaAddress {
+> >> >          self.0.dma_handle()
+> >> >      }
+> >> > @@ -218,7 +217,7 @@ pub(crate) struct GspCmdq {
+> >> >      dev: ARef<device::Device>,
+> >> >      seq: u32,
+> >> >      gsp_mem: DmaGspMem,
+> >> > -    pub _nr_ptes: u32,
+> >> > +    pub nr_ptes: u32,
+> >> >  }
+> >> >  
+> >> >  impl GspCmdq {
+> >> > @@ -231,7 +230,7 @@ pub(crate) fn new(dev: &device::Device<device::Bound>) -> Result<GspCmdq> {
+> >> >              dev: dev.into(),
+> >> >              seq: 0,
+> >> >              gsp_mem,
+> >> > -            _nr_ptes: nr_ptes as u32,
+> >> > +            nr_ptes: nr_ptes as u32,
+> >> >          })
+> >> >      }
+> >> >  
+> >> > @@ -382,6 +381,15 @@ pub(crate) fn receive_msg_from_gsp<M: GspMessageFromGsp, R>(
+> >> >              .advance_cpu_read_ptr(msg_header.rpc.length.div_ceil(GSP_PAGE_SIZE as u32));
+> >> >          result
+> >> >      }
+> >> > +
+> >> > +    pub(crate) fn get_cmdq_offsets(&self) -> (u64, u64, u64) {
+> >> > +        (
+> >> > +            self.gsp_mem.dma_handle(),
+> >> > +            core::mem::offset_of!(Msgq, msgq) as u64,
+> >> > +            (core::mem::offset_of!(GspMem, gspq) - core::mem::offset_of!(GspMem, cpuq)
+> >> > +                + core::mem::offset_of!(Msgq, msgq)) as u64,
+> >> > +        )
+> >> > +    }
+> >> 
+> >> So this thing returns 3 u64s, one of which is actually a DMA handle,
+> >> while the two others are technically constants. The only thing that
+> >> needs to be inferred at runtime is the DMA handle - all the rest is
+> >> static.
+> >
+> > Thanks! That is a useful observation for cleaning these up.
+> 
+> Please also make sure to use the DmaAddress type instead of a raw u64 for DMA
+> addresses.
+> 
+> >> So we can make the two last returned values associated constants of
+> >> `GspCmdq`:
+> >> 
+> >>   impl GspCmdq {
+> >>       /// Offset of the data after the PTEs.
+> >>       const POST_PTE_OFFSET: usize = core::mem::offset_of!(GspMem, cpuq);
+> >> 
+> >>       /// Offset of command queue ring buffer.
+> >>       pub(crate) const CMDQ_OFFSET: usize = core::mem::offset_of!(GspMem, cpuq)
+> >>           + core::mem::offset_of!(Msgq, msgq)
+> >>           - Self::POST_PTE_OFFSET;
+> >> 
+> >>       /// Offset of message queue ring buffer.
+> >>       pub(crate) const STATQ_OFFSET: usize = core::mem::offset_of!(GspMem, gspq)
+> >>           + core::mem::offset_of!(Msgq, msgq)
+> >>           - Self::POST_PTE_OFFSET;
+> >> 
+> >> `GspArgumentsCached::new` can then import `GspCmdq` and use these to
+> >> initialize its corresponding members.
+> >> 
+> >> Remains `nr_ptes`. It was introduced in the previous patch as follows:
+> >> 
+> >>     let nr_ptes = size_of::<GspMem>() >> GSP_PAGE_SHIFT;
+> >> 
+> >> Which turns out to also be a constant! So let's add it next to the others:
+> >> 
+> >> impl GspCmdq {
+> >>     ...
+> >>     /// Number of page table entries for the GSP shared region.
+> >>     pub(crate) const NUM_PTES: usize = size_of::<GspMem>() >> GSP_PAGE_SHIFT;
+> >> 
+> >> And you can remove `GspCmdq::nr_ptes` altogether.
+> >> 
+> >> With this, `GspArgumentsCached::new` can take a reference to the
+> >> `GspCmdq` to initialize from, grab its DMA handle, and initialize
+> >> everything else using the constants we defined above. We remove a bunch
+> >> of inconsistently-named imports from `gsp.rs`, and replace
+> >> firmware-dependent incantations to initialize our GSP arguments with a
+> >> single constructor call that tells exactly what it does in a single
+> >> line.
+> >
+> > So this would also live in `fw.rs`? What I'm really concerned about is that if
+> > we're not allowed access the C bindings outside of `fw.rs` then everything ends
+> > up in `fw.rs`, and worse still `fw.rs` basically ends up importing everything as
+> > well, tightly coupling everything into one big blob.
+> 
+> You can (and probably should) extend the module structure, i.e. add a
+> sub-directory ./gsp/fw/ and structure things accordingly.
 
-Hmm. I'm not sure I follow - the virtual addressing capabilities of the GPU MMU
-are entirely indepedent of the DMA addressing capabilities of the GPU and bus.
-For example you can still use 49-bit GPU virtual addresses with 47-bits of DMA
-bits or less and vice-versa.
-
-So the DMA address mask has nothing to do with the virtual address (ie.
-VA_SPACE) width AFAICT? But maybe we've got slightly different terminology?
+This is what I thought the gsp directory was for, providing abstractions for the
+Gsp. IMHO another layer of abstraction below this seems unnecessary, although
+this is discussed in a bit more detail at the end of my comments on patch 5.
