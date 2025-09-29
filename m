@@ -2,88 +2,79 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id 3037CCBACAF
-	for <lists+nouveau@lfdr.de>; Sat, 13 Dec 2025 13:44:15 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 6691DCBAE06
+	for <lists+nouveau@lfdr.de>; Sat, 13 Dec 2025 13:45:42 +0100 (CET)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id C187A10EB9C;
-	Sat, 13 Dec 2025 12:41:09 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 9C1B410EBAB;
+	Sat, 13 Dec 2025 12:41:37 +0000 (UTC)
 Authentication-Results: gabe.freedesktop.org;
-	dkim=permerror (0-bit key) header.d=gmail.com header.i=@gmail.com header.b="laGcVbgx";
+	dkim=permerror (0-bit key) header.d=gmail.com header.i=@gmail.com header.b="hcY1BkRT";
 	dkim-atps=neutral
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from mail-pl1-f182.google.com (mail-pl1-f182.google.com
- [209.85.214.182])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 338C510E427
- for <nouveau@lists.freedesktop.org>; Mon, 29 Sep 2025 13:59:45 +0000 (UTC)
-Received: by mail-pl1-f182.google.com with SMTP id
- d9443c01a7336-26816246a0aso9467145ad.2
- for <nouveau@lists.freedesktop.org>; Mon, 29 Sep 2025 06:59:45 -0700 (PDT)
+Received: from mail-pg1-f169.google.com (mail-pg1-f169.google.com
+ [209.85.215.169])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 1F00510E23A
+ for <nouveau@lists.freedesktop.org>; Mon, 29 Sep 2025 14:24:54 +0000 (UTC)
+Received: by mail-pg1-f169.google.com with SMTP id
+ 41be03b00d2f7-b552e730f4aso145464a12.2
+ for <nouveau@lists.freedesktop.org>; Mon, 29 Sep 2025 07:24:54 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1759154385; x=1759759185; darn=lists.freedesktop.org;
+ d=gmail.com; s=20230601; t=1759155893; x=1759760693; darn=lists.freedesktop.org;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:from:to:cc:subject:date
  :message-id:reply-to;
- bh=owq4ojdUwUTymm10C9BTuXDtxr/QsVzPAyM6ekIbFlk=;
- b=laGcVbgxNPePL+/QhwUgn4GrGercTB5+tWN38As7RCu6T2zCrKTeyi66UGWzNIWAhP
- CieqPQnsIplkdC4F/aDiZ7uLVyGvG0sekiaVY2TPBA7Uj9r19VvgZeXsD3+s63clYfkJ
- nD7ZbPnJLaPojrTHIUkWX6n3gv8Staopy7eS9fFsimkbqzGWtAVt+H7y7CBwUuunjdsW
- ehtsYPhxLS3AVhJ5Wr6Jgzs0UYC/MKaGv8HibrFCADCN6zW4vbcHaBwv8EOZlcAVB5J/
- q/fwGWewJ5GtqO69JQ2V1pKq67qqWbhgjN+CG1MjGO9sAcK065hYoQ9iNKkcnNo14NyS
- wf6A==
+ bh=ot8hcRKjG+GhZEktY+15kwYYzRMRN2qEVMOH15R9us0=;
+ b=hcY1BkRTlKQwmceqNNVYtTF4n5HVCs1JTQt2yTWLsz4fVW6u6SKBRqiVJlj6JltZUF
+ VrsLAOBrrnnQNvEmScRzSCd4JkGCcV1WUdGc16BY4dHDhBBvj9+D93c7K3xOUiFHKlrf
+ pUJjDhwsasezKUvfS3ENyD24DP9sWBIFzxx1GUJYavDDaeYpr40D2thlnLkDN9m85DJg
+ niZRs64lPItFIpf9MoGMkyQnhK7DuNmzPe5FQNxV4I1sxM+bU7/q2e4nmUZAA9vVS1uV
+ ucnALl55+3NERZqdUHgE5Tm2d/EZM6aTnpUxc+8fGR/93LNFAyj7KntOGk8txrZV/Z6k
+ VTDA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1759154385; x=1759759185;
+ d=1e100.net; s=20230601; t=1759155894; x=1759760694;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=owq4ojdUwUTymm10C9BTuXDtxr/QsVzPAyM6ekIbFlk=;
- b=p95LUJrG1EytvYNnTQGJW9QINJbWIORiTj6Nt9gT26GaKfXyRtrhFpwf1XUpMSzkL4
- 1HlItpo5xZlxxWlKDMq09lc5m8MxpYmkJryiQDs8N6orHw3zooMBDWJjK5PuOhNIkpRG
- xAPXTJYRzlO0uJBDkVe2fRnPkENLvgZyu1IJveXu00KugBl11XIf6V6iPO8fDRDbiUYw
- s1Cb1cveIwp4vrOdDGwITW9xqxeNp/lWyQ15evKa5Bu1S2s4zA4U5/9MPzPI2LWD1eqv
- ht8fNusW54WoL9nog7mo9a8b/RtVktCcOAz397P3/qQO4otMxl/yGaRDVm8/ffLfD0m3
- wKZQ==
+ bh=ot8hcRKjG+GhZEktY+15kwYYzRMRN2qEVMOH15R9us0=;
+ b=maHZtKFWR+zhqIEoT9ZxOHV8q6oWI8UP+fVgr3tUMPgxkOVD/MoE9B/JdzKaLgK8hb
+ /uSFFmGRlF/kkT+LR36rlz9jfvP3h/kaeqZ0ZK7vPEGwwxn/BTm3OLOpkT7rdESA/HVV
+ SmWgeRudVQj+v9eUK76UQC1f96zuKeM9gUighkAPLmFMpls1ZOoNx1Z6DmrQlAhfSsR0
+ fJQ0gPywVnxrdNVFkjLAx7rF5EmROTA2S1yv946AWyQB4ILV3naISrNb9hmpyeocXsao
+ Qp6AW+W+C7ntonOP/Alvz8THBbVnA/AZUOg6WcwvxWpkzyws2zphjgtTsswsXmMG5ONt
+ al0w==
 X-Forwarded-Encrypted: i=1;
- AJvYcCXEo6hLHGYcSLxptoGNonXoSZi/wCEdaAckZ9iEMYCkXZKMFUMn/H1DHxlneqadP/1AeJKWci5P@lists.freedesktop.org
-X-Gm-Message-State: AOJu0Yy69URgLtHq1HIU6keVQpeLrE8s0obmtqGPJjTg+G5MmTLEX/0F
- +0dRrj4AykvCGWTV0rDeMO1F3zthPp4x0fj3Y70uj8tECtFH/NRwtM8ycj9FHJ9qxcL+47vlD8V
- K2ZMJEMcryzJUaiRh67EALsfVLtB/XSU=
-X-Gm-Gg: ASbGncurIZZkEVHeCOGJVFamlpzcHjU6InutmMbKAudMFNHwZTdYrUjTL7DdIkoAWM3
- YlZ+SZ3wxlKQsyNJHrX9hCsQrJnw1GcNsFEWHBFbJ+yaW8HIMPP/vDFHtHPPksCloB4M0DCNsIB
- TLlvi2lJw5xQWO+gEzpxBPtzAGpWe+04TN43eg6s7URCJFwS+tEwCTTRuolylA3NDRxW7lrJRJq
- ndCwwPzq8Um2J5bHlBujFs1O83v0HdLlxLGS8845OB91Kg5E6pWFTx2KK26dTP1IbfaTm8EyKYw
- 9+uGHvfNLQ46SQpW2rx3MbZvcQ8x2wKh7al7
-X-Google-Smtp-Source: AGHT+IEC1OH3LVB4V0oxft7FgJLhEwqNNj6rUnyOmnwsKLC7LLfd/i5cH3v8mOBtoJlF7/5PaCpYXgtDTbDZevnth5I=
-X-Received: by 2002:a17:903:1a68:b0:275:c066:33dd with SMTP id
- d9443c01a7336-27ed4ab64a4mr105372055ad.10.1759154384643; Mon, 29 Sep 2025
- 06:59:44 -0700 (PDT)
+ AJvYcCX9SQIompoJinj7X+6ZidkBXZnTr+NMVvK3pVjvVn4Kmtu7XQgBnKdNowp/K15rhDTP+atkUcfZ@lists.freedesktop.org
+X-Gm-Message-State: AOJu0Yxs0OFQ0zAFCfTArRFEdNrmHgn3EwNoAsRN1ycae31V7vgxstcr
+ mWIW+tnukf3m8Ix14UamFeAldk6ZvM6nMZY8vnQ0AUf6c/JfkK/faM3AEP4nK0FF4nbEr+5DxIT
+ oFWFL3K8tLAMHWQTiQtE4tHTBDEaSpoA=
+X-Gm-Gg: ASbGncsG+5mlqLoIe+P+0pHRZ8WwUat04hYf210KV2baq9QLSiSitAmrMyMJEZd3/H/
+ U/hMaP/qsOLVedA9fhFDNLhVNiDGYG7uJ6R2O6FFXF8C7E76ymqJF2RQq8glwrXwzKwFyYcQJHX
+ KADQEJ/Z/uHZl4UAKZmzGSfb6Rngofe8ZfjnQDonaCitdb871KOIMehXbNzX2wrU2s3LtEEK2SK
+ Tsj6H7IGng9+1++mqWUiEH8tLXTl60Zq3N+Xa0FzQEtiGh2tNSJw+QO/AP5DolsAo1OVK644fqH
+ 3L6qZXezi+ElQNnbD+9Bcl1c90HqBeAM3O/A
+X-Google-Smtp-Source: AGHT+IFO+CKcOfhjq3yagbAUNFRqtJ2JQPPv6IOGwZ4Z+4FHLSqV7RrX0bFPoMZ075YnvnY3rrn95mijVFVOb6eOUBY=
+X-Received: by 2002:a17:902:a507:b0:25a:4437:dbb7 with SMTP id
+ d9443c01a7336-27ed49d5fedmr70259715ad.4.1759155893602; Mon, 29 Sep 2025
+ 07:24:53 -0700 (PDT)
 MIME-Version: 1.0
-References: <20250920182232.2095101-1-joelagnelf@nvidia.com>
- <20250920182232.2095101-7-joelagnelf@nvidia.com>
-In-Reply-To: <20250920182232.2095101-7-joelagnelf@nvidia.com>
+References: <cover.1754228164.git.y.j3ms.n@gmail.com>
+ <DBWXJA6XF1VS.3PNHRWH030H0J@nvidia.com>
+In-Reply-To: <DBWXJA6XF1VS.3PNHRWH030H0J@nvidia.com>
 From: Miguel Ojeda <miguel.ojeda.sandonis@gmail.com>
-Date: Mon, 29 Sep 2025 15:59:32 +0200
-X-Gm-Features: AS18NWASygynDnatU4KPTeDzNXeVtgwJfzlJorCLrDvtP5k4ZufDBjnqp0W75-o
-Message-ID: <CANiq72k3kE-6KPkKwiDLgfkGHCQj4a2K7h9c4T13WMa5b4BAnQ@mail.gmail.com>
-Subject: Re: [PATCH v4 6/6] rust: bitfield: Use 'as' operator for setter type
- conversion
-To: Joel Fernandes <joelagnelf@nvidia.com>
-Cc: linux-kernel@vger.kernel.org, rust-for-linux@vger.kernel.org, 
- dri-devel@lists.freedesktop.org, dakr@kernel.org, acourbot@nvidia.com, 
- Alistair Popple <apopple@nvidia.com>, Miguel Ojeda <ojeda@kernel.org>, 
+Date: Mon, 29 Sep 2025 16:24:39 +0200
+X-Gm-Features: AS18NWAQUPZbXtjWExl55E-tjUwblkbPBQ5uQeLCMefcIVbUSmtt91RPmlpmau8
+Message-ID: <CANiq72na_d6JQdyZ1S22mus3oom_jz93rpY+ubr4yOuvMY_fSA@mail.gmail.com>
+Subject: Re: [PATCH 0/4] rust: add `TryFrom` and `Into` derive macros
+To: Alexandre Courbot <acourbot@nvidia.com>
+Cc: Jesung Yang <y.j3ms.n@gmail.com>, Miguel Ojeda <ojeda@kernel.org>, 
  Alex Gaynor <alex.gaynor@gmail.com>, Boqun Feng <boqun.feng@gmail.com>, 
- Gary Guo <gary@garyguo.net>, bjorn3_gh@protonmail.com, 
+ Gary Guo <gary@garyguo.net>,
+ =?UTF-8?Q?Bj=C3=B6rn_Roy_Baron?= <bjorn3_gh@protonmail.com>, 
  Benno Lossin <lossin@kernel.org>, Andreas Hindborg <a.hindborg@kernel.org>, 
  Alice Ryhl <aliceryhl@google.com>, Trevor Gross <tmgross@umich.edu>, 
- David Airlie <airlied@gmail.com>, Simona Vetter <simona@ffwll.ch>, 
- Maarten Lankhorst <maarten.lankhorst@linux.intel.com>,
- Maxime Ripard <mripard@kernel.org>, 
- Thomas Zimmermann <tzimmermann@suse.de>, John Hubbard <jhubbard@nvidia.com>,
- Timur Tabi <ttabi@nvidia.com>, 
- joel@joelfernandes.org, Elle Rhumsaa <elle@weathered-steel.dev>, 
- Yury Norov <yury.norov@gmail.com>,
- Daniel Almeida <daniel.almeida@collabora.com>, 
- nouveau@lists.freedesktop.org
+ Danilo Krummrich <dakr@kernel.org>, linux-kernel@vger.kernel.org, 
+ rust-for-linux@vger.kernel.org, nouveau@lists.freedesktop.org
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
 X-Mailman-Approved-At: Sat, 13 Dec 2025 12:40:48 +0000
@@ -101,30 +92,14 @@ List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-On Sat, Sep 20, 2025 at 8:23=E2=80=AFPM Joel Fernandes <joelagnelf@nvidia.c=
-om> wrote:
+On Fri, Aug 8, 2025 at 11:13=E2=80=AFAM Alexandre Courbot <acourbot@nvidia.=
+com> wrote:
 >
-> The bitfield macro's setter currently uses the From trait for type
-> conversion, which is overly restrictive and prevents use cases such as
-> narrowing conversions (e.g., u32 storage size to u8 field size) which
-> aren't supported by From.
+> I have tried this series on nova-core and it allowed me to remove 150
+> lines of boiletplate just like that. As far as nova-core is concerned,
+> this is a perfect fit.
 
-Being restrictive is a good thing -- it would be nice to know more
-context about this change, like Alexandre points out.
-
-In particular, the line:
-
-    .set_nibble(0x12345678_u32)    // truncated to 0x8
-
-sounds fairly alarming, and not what we usually want. Why cannot the
-caller cast on their side, if they really want that?
-
-We avoid `as` for similar reasons and nowadays enable some Clippy
-warnings to prevent its use where not needed.
-
-(By the way, please follow our usual coding conventions for comments.)
-
-Thanks!
+It would be nice to see the (possibly RFC) patch if you have it around!
 
 Cheers,
 Miguel
