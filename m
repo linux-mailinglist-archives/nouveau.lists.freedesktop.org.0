@@ -2,71 +2,71 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id B94A0BAFD88
-	for <lists+nouveau@lfdr.de>; Wed, 01 Oct 2025 11:28:39 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 928D4BAFDA6
+	for <lists+nouveau@lfdr.de>; Wed, 01 Oct 2025 11:29:25 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 5094710E08A;
-	Wed,  1 Oct 2025 09:28:38 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 31EF910E307;
+	Wed,  1 Oct 2025 09:29:24 +0000 (UTC)
 Authentication-Results: gabe.freedesktop.org;
-	dkim=pass (2048-bit key; unprotected) header.d=google.com header.i=@google.com header.b="C7TRBVFQ";
+	dkim=pass (2048-bit key; unprotected) header.d=google.com header.i=@google.com header.b="peLpBaP3";
 	dkim-atps=neutral
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from mail-wm1-f49.google.com (mail-wm1-f49.google.com
- [209.85.128.49])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 4040010E08A
- for <nouveau@lists.freedesktop.org>; Wed,  1 Oct 2025 09:28:37 +0000 (UTC)
-Received: by mail-wm1-f49.google.com with SMTP id
- 5b1f17b1804b1-46e2e363118so66759965e9.0
- for <nouveau@lists.freedesktop.org>; Wed, 01 Oct 2025 02:28:37 -0700 (PDT)
+Received: from mail-wr1-f43.google.com (mail-wr1-f43.google.com
+ [209.85.221.43])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id C5BDC10E307
+ for <nouveau@lists.freedesktop.org>; Wed,  1 Oct 2025 09:29:22 +0000 (UTC)
+Received: by mail-wr1-f43.google.com with SMTP id
+ ffacd0b85a97d-3ee15b5435bso3902721f8f.0
+ for <nouveau@lists.freedesktop.org>; Wed, 01 Oct 2025 02:29:22 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=google.com; s=20230601; t=1759310916; x=1759915716;
+ d=google.com; s=20230601; t=1759310961; x=1759915761;
  darn=lists.freedesktop.org; 
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:from:to:cc:subject:date
  :message-id:reply-to;
  bh=eWhaWIh1Ch5W+HrhvE/7nWxIJ4BqD2s5kUI/3gBmyEA=;
- b=C7TRBVFQQ++JPT4uedbale6thYFGw0UakoBxUqUYvNqOXxX1JbpITbODeA0yvuKmKX
- CbYPT0b7VfYTgisFulhx4My2QwT4dN5NgR5wcZU1T10ZyCTJY8vqJQwqbRqJf8ZuHKqX
- totj89Cmr61seEi5b9uMz3VJeJlIioTTCytrTXiallTz1H3bzUpfv9JEQbZDBej7RgHd
- cON2t/x8ZyJF1A4IivYGqbLywOuwRh9RAnuG9pNx42nIl31oYgnF+IYb+N9DMtctq76R
- hukJBLVTF+ChqgV62N0G7OPPXxUhZueTVbn4c4ywT4V4G7lL2i/KQ/BqF+01GtQ6N7WS
- yVmA==
+ b=peLpBaP3mucvkMjB9bsXLkHYoFmnmFf3Hb0Ueyl20tPydwVrsZYhw5crmAIkky4MEa
+ DWVcqQrS9IlGt2UkPncpITbnNAeLctVQcpEuAX6qKvpI6uTMN8EkOHINQSZs8XKgDRF6
+ ZhrVVun9PfPFrPAA43GLatI8KAmO+BY34FF8y5t+XNijrzSMosXIAGtcqIB2AtK/XLx+
+ ueLe2ZyLDFt0tDH+PGHhBVZwl/m7vd4RskKgMSWkvaFC8pt7Dy/vExsCh2D0n9icCyQN
+ KZklf5L/0+7fa1PUJzDBnGUToCJOxZzuig+FnwpZwdhpmTOL2z9Ykr2wjRUJH05uTc7P
+ UFOA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1759310916; x=1759915716;
+ d=1e100.net; s=20230601; t=1759310961; x=1759915761;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
  bh=eWhaWIh1Ch5W+HrhvE/7nWxIJ4BqD2s5kUI/3gBmyEA=;
- b=o2bJLH2cavNlie3JzKa13ttFQlz3493kNfgs9A7uVLsPQcSHEE22rRiDUmd+oD4Hl9
- v1z9w+rBDvZnhpCUtiLA18/mKQjj5SoiGyunKriTQhUay+3YQwTyltvHpNUAyx84MTgx
- nr244aX7zLNYFgEl2YcJte3EkiMptoXN6wbSAwoEkWCtBKP+uwSQ5U2vS2pLOLQqkMdk
- S2qXCz1m6p0irnG4xG6D6vEROrvwxPaLRf6GTLGYyE8Vu1TaRM9QUWJ6G7rHQbF7Jg1S
- jK6+eIguk2t5+FEgE6sZeR9E4XL+lEpI7Se2nu1Xc7waFo3CN0feSHWuvjtH4sf5jqFm
- tJcQ==
+ b=jM/W/IDg42R5hTQG3JRsw6A/rsm9E6q1kby2aSouQ6omIl+xrSktrwfHINACoLYmVN
+ gf3ahBFzIF1M60pYFE/2Oybje6I7uO504vtdoej9DhRs4BgZ6qM6FqaedfMdp/EA48lB
+ IgsjQ+1nGizISzPjpCCwoKjG7KirFo3o7ncM/t/i+iSBLrWsOpxzRF7zksdGZNDZpvUf
+ jUkgx6j5I5Mgm83qMH2XJPl3csAda29M4fdC0t2sxBwJ4UQQLyz0q8Qez9OXA9SBSadP
+ Y1WTcCz+QkSV8oW5IPi4F8XxJMI+YmyL3yLY3Ww9Zic1Q3YTyWRFY1NiX+i+wJ+b2kYg
+ Fcow==
 X-Forwarded-Encrypted: i=1;
- AJvYcCXLghqoAyqnQMvq0DjSxn0J+t0vxqsNrX9Siq1kbTjyVwzfr4chFlMt0jgWb1B5Do+snuttJd5S@lists.freedesktop.org
-X-Gm-Message-State: AOJu0YxsoxTsJ/CWmZBnoo/JYjonyvjMXVG8fgtejusuFaXhQWoj3FD3
- C7MEItmNJCZ7aYobbxpiVCcm6y2p7vfiBjl/Mk5d9+5rQDDJ29f4vcL6SVxgaA/lzJHlciEU4rZ
- JW963RBtnyKrcpPyCRcZ5JIa1uqW01s0RIE4gj4Sr
-X-Gm-Gg: ASbGncuWR6NdGKZGDQOlF1xHC71iZjYVb1BKr3JvrlDi+cnAUUiAXbabdfDwxt+GAzU
- PiwzJA5RfI/kak4REMTdo/BrfTo4pSzJHLuhcav1ndYgRsjVQUH81ATOAtv/g6YsYTm8G67rbtr
- Lx2C9gGiRteEOpK6vSnSP95ouSqoe6vNBmd0iXXQYmJMhkGHnDwsJUA11Aube3MpUk3El23FI+z
- oYjS5amGvFEVRFP+9Qn+U+EpR80+udcUumrFkp1MhAjYILo93XInAoFTSfsCaEbaMAd+cGfWZae
- O4g=
-X-Google-Smtp-Source: AGHT+IFcom3ihUiZsvQc7Ctd6T7AFUDP+BI45kum3YBKQg7Ja8eF4g1jmM9Rz4a7lPBApkzRM7m3vX/ZWyyP9taYRzo=
-X-Received: by 2002:a05:600c:1d12:b0:46e:3d41:5fe7 with SMTP id
- 5b1f17b1804b1-46e612dcff2mr22205905e9.29.1759310915370; Wed, 01 Oct 2025
- 02:28:35 -0700 (PDT)
+ AJvYcCUPuOg1XK8llkHFoU6pM6BNE5AYrgCJg3UzLFi0RKjwKiyB45YSLT93C/KSscTVexamh/co3FpQ@lists.freedesktop.org
+X-Gm-Message-State: AOJu0YyIGfCMfBTnUGdqFmYb74KCI/eefHY/E1e2KjCQmwvn93vc+yqV
+ gNWw23zpDjWKc7XOf7Jf7a4fJqt9FiB/JSiWHjbbb7YFG/t+jLj8+aOe0iFMgjyYcu/fHPuQHsx
+ 2+QIET2uQUT4L3gi3lzjBvw0UlBKuTapzLel2xvGY
+X-Gm-Gg: ASbGncuVVV2j5bWzfXDywC+XmcRqy7VuSg+IzdyKQoyeMPxm4p18x9xS1pZQi4UjelP
+ Pje4RfJckCyCapF/EgTeNzhPL9M4o27FEwfYX7VaG1AY//nVuzDmAHksMMZaNY9xgJZDkhlBtsl
+ oF5qFxdNJ/92tizoDNb32eSW/mKbp45JMKQRo0DJU/fV+ZpvRMEzrJLUPSinOOe9zve8y7RiHjt
+ Hp2fcde0Oi5c/GjTJO7ZlJk25qOc6tkaO/tDSnZg8le+3LMn1lHQMP+RWxPVJXHH0Ty
+X-Google-Smtp-Source: AGHT+IEGTvzQBJ51h7EDzxRa/Kisf+BfY+7cpvTrlEhl/iMUN4+q2HPEwsb4ysW4cM34kR4mPUadGwVDBMTe2U90ivY=
+X-Received: by 2002:a05:6000:610:b0:408:9c48:e27b with SMTP id
+ ffacd0b85a97d-42557820c81mr2042096f8f.62.1759310960773; Wed, 01 Oct 2025
+ 02:29:20 -0700 (PDT)
 MIME-Version: 1.0
 References: <20250925-core-cstr-cstrings-v2-0-78e0aaace1cd@gmail.com>
- <20250925-core-cstr-cstrings-v2-18-78e0aaace1cd@gmail.com>
-In-Reply-To: <20250925-core-cstr-cstrings-v2-18-78e0aaace1cd@gmail.com>
+ <20250925-core-cstr-cstrings-v2-19-78e0aaace1cd@gmail.com>
+In-Reply-To: <20250925-core-cstr-cstrings-v2-19-78e0aaace1cd@gmail.com>
 From: Alice Ryhl <aliceryhl@google.com>
-Date: Wed, 1 Oct 2025 11:28:23 +0200
-X-Gm-Features: AS18NWC0UIhXtF3ngdaaXlg7HajAeA8SvMGIxlOaATZh6gKK8pvCVQpA1AHU2RE
-Message-ID: <CAH5fLgh84SZznuv_BHMxSe4riF=YZekCp1Kx6KmiipzTOHmRsw@mail.gmail.com>
-Subject: Re: [PATCH v2 18/19] rust: io: replace `kernel::c_str!` with C-Strings
+Date: Wed, 1 Oct 2025 11:29:08 +0200
+X-Gm-Features: AS18NWCOfBcX2Vbfhr-fnk5GPcApSeOL4C5SAm45sMYmzlcHM8gTiQQ5VZSiyfk
+Message-ID: <CAH5fLggd09hodiDAdNRy6aXK9ANCP==YSJwy-GMbhNAAMm731A@mail.gmail.com>
+Subject: Re: [PATCH v2 19/19] rust: regulator: replace `kernel::c_str!` with
+ C-Strings
 To: Tamir Duberstein <tamird@gmail.com>
 Cc: "Rafael J. Wysocki" <rafael@kernel.org>,
  Viresh Kumar <viresh.kumar@linaro.org>, 
