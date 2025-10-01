@@ -2,109 +2,61 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id 928D4BAFDA6
-	for <lists+nouveau@lfdr.de>; Wed, 01 Oct 2025 11:29:25 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 0BD2EBB0055
+	for <lists+nouveau@lfdr.de>; Wed, 01 Oct 2025 12:32:12 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 31EF910E307;
-	Wed,  1 Oct 2025 09:29:24 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 38D9B10E310;
+	Wed,  1 Oct 2025 10:32:10 +0000 (UTC)
 Authentication-Results: gabe.freedesktop.org;
-	dkim=pass (2048-bit key; unprotected) header.d=google.com header.i=@google.com header.b="peLpBaP3";
+	dkim=pass (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="tKoY2KnL";
 	dkim-atps=neutral
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from mail-wr1-f43.google.com (mail-wr1-f43.google.com
- [209.85.221.43])
- by gabe.freedesktop.org (Postfix) with ESMTPS id C5BDC10E307
- for <nouveau@lists.freedesktop.org>; Wed,  1 Oct 2025 09:29:22 +0000 (UTC)
-Received: by mail-wr1-f43.google.com with SMTP id
- ffacd0b85a97d-3ee15b5435bso3902721f8f.0
- for <nouveau@lists.freedesktop.org>; Wed, 01 Oct 2025 02:29:22 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=google.com; s=20230601; t=1759310961; x=1759915761;
- darn=lists.freedesktop.org; 
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=eWhaWIh1Ch5W+HrhvE/7nWxIJ4BqD2s5kUI/3gBmyEA=;
- b=peLpBaP3mucvkMjB9bsXLkHYoFmnmFf3Hb0Ueyl20tPydwVrsZYhw5crmAIkky4MEa
- DWVcqQrS9IlGt2UkPncpITbnNAeLctVQcpEuAX6qKvpI6uTMN8EkOHINQSZs8XKgDRF6
- ZhrVVun9PfPFrPAA43GLatI8KAmO+BY34FF8y5t+XNijrzSMosXIAGtcqIB2AtK/XLx+
- ueLe2ZyLDFt0tDH+PGHhBVZwl/m7vd4RskKgMSWkvaFC8pt7Dy/vExsCh2D0n9icCyQN
- KZklf5L/0+7fa1PUJzDBnGUToCJOxZzuig+FnwpZwdhpmTOL2z9Ykr2wjRUJH05uTc7P
- UFOA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1759310961; x=1759915761;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=eWhaWIh1Ch5W+HrhvE/7nWxIJ4BqD2s5kUI/3gBmyEA=;
- b=jM/W/IDg42R5hTQG3JRsw6A/rsm9E6q1kby2aSouQ6omIl+xrSktrwfHINACoLYmVN
- gf3ahBFzIF1M60pYFE/2Oybje6I7uO504vtdoej9DhRs4BgZ6qM6FqaedfMdp/EA48lB
- IgsjQ+1nGizISzPjpCCwoKjG7KirFo3o7ncM/t/i+iSBLrWsOpxzRF7zksdGZNDZpvUf
- jUkgx6j5I5Mgm83qMH2XJPl3csAda29M4fdC0t2sxBwJ4UQQLyz0q8Qez9OXA9SBSadP
- Y1WTcCz+QkSV8oW5IPi4F8XxJMI+YmyL3yLY3Ww9Zic1Q3YTyWRFY1NiX+i+wJ+b2kYg
- Fcow==
-X-Forwarded-Encrypted: i=1;
- AJvYcCUPuOg1XK8llkHFoU6pM6BNE5AYrgCJg3UzLFi0RKjwKiyB45YSLT93C/KSscTVexamh/co3FpQ@lists.freedesktop.org
-X-Gm-Message-State: AOJu0YyIGfCMfBTnUGdqFmYb74KCI/eefHY/E1e2KjCQmwvn93vc+yqV
- gNWw23zpDjWKc7XOf7Jf7a4fJqt9FiB/JSiWHjbbb7YFG/t+jLj8+aOe0iFMgjyYcu/fHPuQHsx
- 2+QIET2uQUT4L3gi3lzjBvw0UlBKuTapzLel2xvGY
-X-Gm-Gg: ASbGncuVVV2j5bWzfXDywC+XmcRqy7VuSg+IzdyKQoyeMPxm4p18x9xS1pZQi4UjelP
- Pje4RfJckCyCapF/EgTeNzhPL9M4o27FEwfYX7VaG1AY//nVuzDmAHksMMZaNY9xgJZDkhlBtsl
- oF5qFxdNJ/92tizoDNb32eSW/mKbp45JMKQRo0DJU/fV+ZpvRMEzrJLUPSinOOe9zve8y7RiHjt
- Hp2fcde0Oi5c/GjTJO7ZlJk25qOc6tkaO/tDSnZg8le+3LMn1lHQMP+RWxPVJXHH0Ty
-X-Google-Smtp-Source: AGHT+IEGTvzQBJ51h7EDzxRa/Kisf+BfY+7cpvTrlEhl/iMUN4+q2HPEwsb4ysW4cM34kR4mPUadGwVDBMTe2U90ivY=
-X-Received: by 2002:a05:6000:610:b0:408:9c48:e27b with SMTP id
- ffacd0b85a97d-42557820c81mr2042096f8f.62.1759310960773; Wed, 01 Oct 2025
- 02:29:20 -0700 (PDT)
-MIME-Version: 1.0
-References: <20250925-core-cstr-cstrings-v2-0-78e0aaace1cd@gmail.com>
- <20250925-core-cstr-cstrings-v2-19-78e0aaace1cd@gmail.com>
-In-Reply-To: <20250925-core-cstr-cstrings-v2-19-78e0aaace1cd@gmail.com>
-From: Alice Ryhl <aliceryhl@google.com>
-Date: Wed, 1 Oct 2025 11:29:08 +0200
-X-Gm-Features: AS18NWCOfBcX2Vbfhr-fnk5GPcApSeOL4C5SAm45sMYmzlcHM8gTiQQ5VZSiyfk
-Message-ID: <CAH5fLggd09hodiDAdNRy6aXK9ANCP==YSJwy-GMbhNAAMm731A@mail.gmail.com>
-Subject: Re: [PATCH v2 19/19] rust: regulator: replace `kernel::c_str!` with
- C-Strings
-To: Tamir Duberstein <tamird@gmail.com>
-Cc: "Rafael J. Wysocki" <rafael@kernel.org>,
- Viresh Kumar <viresh.kumar@linaro.org>, 
- Miguel Ojeda <ojeda@kernel.org>, Alex Gaynor <alex.gaynor@gmail.com>, 
- Boqun Feng <boqun.feng@gmail.com>, Gary Guo <gary@garyguo.net>, 
- =?UTF-8?Q?Bj=C3=B6rn_Roy_Baron?= <bjorn3_gh@protonmail.com>, 
- Benno Lossin <lossin@kernel.org>, Andreas Hindborg <a.hindborg@kernel.org>, 
- Trevor Gross <tmgross@umich.edu>, Danilo Krummrich <dakr@kernel.org>, 
- Maarten Lankhorst <maarten.lankhorst@linux.intel.com>,
- Maxime Ripard <mripard@kernel.org>, 
- Thomas Zimmermann <tzimmermann@suse.de>, David Airlie <airlied@gmail.com>,
- Simona Vetter <simona@ffwll.ch>, 
- FUJITA Tomonori <fujita.tomonori@gmail.com>, Andrew Lunn <andrew@lunn.ch>, 
- Heiner Kallweit <hkallweit1@gmail.com>, Russell King <linux@armlinux.org.uk>, 
- "David S. Miller" <davem@davemloft.net>, Eric Dumazet <edumazet@google.com>, 
- Jakub Kicinski <kuba@kernel.org>, Paolo Abeni <pabeni@redhat.com>, 
- Michael Turquette <mturquette@baylibre.com>, Stephen Boyd <sboyd@kernel.org>, 
- Breno Leitao <leitao@debian.org>,
- Greg Kroah-Hartman <gregkh@linuxfoundation.org>, 
- Luis Chamberlain <mcgrof@kernel.org>, Russ Weight <russ.weight@linux.dev>, 
- Dave Ertman <david.m.ertman@intel.com>, Ira Weiny <ira.weiny@intel.com>, 
- Leon Romanovsky <leon@kernel.org>, Bjorn Helgaas <bhelgaas@google.com>, 
- =?UTF-8?Q?Krzysztof_Wilczy=C5=84ski?= <kwilczynski@kernel.org>, 
- Arnd Bergmann <arnd@arndb.de>, Brendan Higgins <brendan.higgins@linux.dev>, 
- David Gow <davidgow@google.com>, Rae Moar <rmoar@google.com>,
- Jens Axboe <axboe@kernel.dk>, Alexandre Courbot <acourbot@nvidia.com>,
- Alexander Viro <viro@zeniv.linux.org.uk>, 
- Christian Brauner <brauner@kernel.org>, Jan Kara <jack@suse.cz>,
- Liam Girdwood <lgirdwood@gmail.com>, 
- Mark Brown <broonie@kernel.org>, linux-pm@vger.kernel.org,
- linux-kernel@vger.kernel.org, 
- rust-for-linux@vger.kernel.org, nouveau@lists.freedesktop.org, 
- dri-devel@lists.freedesktop.org, netdev@vger.kernel.org, 
- linux-clk@vger.kernel.org, linux-pci@vger.kernel.org, 
- linux-kselftest@vger.kernel.org, kunit-dev@googlegroups.com, 
- linux-block@vger.kernel.org, linux-fsdevel@vger.kernel.org
-Content-Type: text/plain; charset="UTF-8"
+Received: from sea.source.kernel.org (sea.source.kernel.org [172.234.252.31])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 21C0210E310
+ for <nouveau@lists.freedesktop.org>; Wed,  1 Oct 2025 10:32:09 +0000 (UTC)
+Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
+ by sea.source.kernel.org (Postfix) with ESMTP id C2AA04889B;
+ Wed,  1 Oct 2025 10:32:08 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 45AD1C4CEF4;
+ Wed,  1 Oct 2025 10:32:04 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+ s=k20201202; t=1759314728;
+ bh=P+YFqwjAsyQVj+ajZA/B1KBSZKrqZK9v+m3Wiyc2kV0=;
+ h=Date:Subject:Cc:To:From:References:In-Reply-To:From;
+ b=tKoY2KnL8Xj76oTVo6g45E3T5ntWA8T8f6WWl5EpA50rhnXgrX2/kqqr0xjJ19izW
+ P/6MMZw0S7kFN2T7z2C8MLi4fVhnnuZD7wriXPiBnITh2FI7KK0KUG5HwPOeYshj13
+ 9pxzZtdM8rWiQA4U6VX0A7np0iOnn+5Jhb89q/+sRJWc7B3yFTiWDN4B5MebDNe4Vf
+ zor/ax/V2JBHOiqkIKrHVcylkoDQdbldtm/B6vWL4nB8R3YPW7/3TddnoIbjNl7LGH
+ SrZEE7ds/mGwl3LLCQtgGhwpbCgTRGEQdEADKiHn0J50zuq8zcDPsCawnFe3YSiNs3
+ cuTjOCLJqxG8A==
+Mime-Version: 1.0
 Content-Transfer-Encoding: quoted-printable
+Content-Type: text/plain; charset=UTF-8
+Date: Wed, 01 Oct 2025 12:32:02 +0200
+Message-Id: <DD6X0PXA0VAO.101O3FEAHJUH9@kernel.org>
+Subject: Re: [PATCH 0/2] rust: pci: expose is_virtfn() and reject VFs in
+ nova-core
+Cc: "Alexandre Courbot" <acourbot@nvidia.com>, "Joel Fernandes"
+ <joelagnelf@nvidia.com>, "Timur Tabi" <ttabi@nvidia.com>, "Zhi Wang"
+ <zhiw@nvidia.com>, "Surath Mitra" <smitra@nvidia.com>, "David Airlie"
+ <airlied@gmail.com>, "Simona Vetter" <simona@ffwll.ch>, "Bjorn Helgaas"
+ <bhelgaas@google.com>, =?utf-8?q?Krzysztof_Wilczy=C5=84ski?=
+ <kwilczynski@kernel.org>, "Miguel Ojeda" <ojeda@kernel.org>, "Alex Gaynor"
+ <alex.gaynor@gmail.com>, "Boqun Feng" <boqun.feng@gmail.com>, "Gary Guo"
+ <gary@garyguo.net>, =?utf-8?q?Bj=C3=B6rn_Roy_Baron?=
+ <bjorn3_gh@protonmail.com>, "Benno Lossin" <lossin@kernel.org>, "Andreas
+ Hindborg" <a.hindborg@kernel.org>, "Alice Ryhl" <aliceryhl@google.com>,
+ "Trevor Gross" <tmgross@umich.edu>, <nouveau@lists.freedesktop.org>,
+ <linux-pci@vger.kernel.org>, <rust-for-linux@vger.kernel.org>, "LKML"
+ <linux-kernel@vger.kernel.org>
+To: "John Hubbard" <jhubbard@nvidia.com>, "Alistair Popple"
+ <apopple@nvidia.com>
+From: "Danilo Krummrich" <dakr@kernel.org>
+References: <20250930220759.288528-1-jhubbard@nvidia.com>
+ <h6jdcfhhf3wuiwwj3bmqp5ohvy7il6sfyp6iufovdswgoz7vul@gjindki2pyeh>
+ <e77bbcda-35a3-4ec6-ac24-316ab34a201a@nvidia.com>
+In-Reply-To: <e77bbcda-35a3-4ec6-ac24-316ab34a201a@nvidia.com>
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -119,12 +71,77 @@ List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-On Thu, Sep 25, 2025 at 3:56=E2=80=AFPM Tamir Duberstein <tamird@gmail.com>=
- wrote:
+On Wed Oct 1, 2025 at 3:22 AM CEST, John Hubbard wrote:
+> On 9/30/25 5:29 PM, Alistair Popple wrote:
+>> On 2025-10-01 at 08:07 +1000, John Hubbard <jhubbard@nvidia.com> wrote..=
+.
+>>> Post-Kangrejos, the approach for NovaCore + VFIO has changed a bit: the
+>>> idea now is that VFIO drivers, for NVIDIA GPUs that are supported by
+>>> NovaCore, should bind directly to the GPU's VFs. (An earlier idea was t=
+o
+>>> let NovaCore bind to the VFs, and then have NovaCore call into the uppe=
+r
+>>> (VFIO) module via Aux Bus, but this turns out to be awkward and is no
+>>> longer in favor.) So, in order to support that:
+>>>
+>>> Nova-core must only bind to Physical Functions (PFs) and regular PCI
+>>> devices, not to Virtual Functions (VFs) created through SR-IOV.
+>>>
+>>> Add a method to check if a PCI device is a Virtual Function (VF). This
+>>> allows Rust drivers to determine whether a device is a VF created
+>>> through SR-IOV. This is required in order to implement VFIO, because
+>>> drivers such as NovaCore must only bind to Physical Functions (PFs) or
+>>> regular PCI devices. The VFs must be left unclaimed, so that a VFIO
+>>> kernel module can claim them.
+>>=20
+>> Curiously based on a quick glance I didn't see any other drivers doing t=
+his
+>> which makes me wonder why we're different here. But it seems likely thei=
+r
+>> virtual functions are supported by the same driver rather than requiring=
+ a
+>> different VF specific driver (or I glanced too quickly!).
 >
-> C-String literals were added in Rust 1.77. Replace instances of
-> `kernel::c_str!` with C-String literals where possible.
->
-> Signed-off-by: Tamir Duberstein <tamird@gmail.com>
+> I haven't checked into that, but it sounds reasonable.
 
-Reviewed-by: Alice Ryhl <aliceryhl@google.com>
+There are multiple cases:
+
+Some devices have different PCI device IDs for their physical and virtual
+functions and different drivers handling then. One example for that is Inte=
+l
+IXGBE.
+
+But there are also some drivers, which do a similar check and just stop pro=
+bing
+if they detect a virtual function.
+
+So, this patch series does not do anything uncommon.
+
+>> I'm guessing the proposal is to fail the probe() function in nova-core f=
+or
+>> the VFs - I'm not sure but does the driver core continue to try probing =
+other
+>> drivers if one fails probe()? It seems like this would be something best
+>> filtered on in the device id table, although I understand that's not pos=
+sible
+>> today.
+
+Yes, the driver core keeps going until it finds a driver that succeeds prob=
+ing
+or no driver is left to probe. (This behavior is also the reason for the na=
+me
+probe() in the first place.)
+
+However, nowadays we ideally know whether a driver fits a device before pro=
+be()
+is called, but there are still exceptions; with PCI virtual functions we've=
+ just
+hit one of those.
+
+Theoretically, we could also indicate whether a driver handles virtual func=
+tions
+through a boolean in struct pci_driver, which would be a bit more elegant.
+
+If you want I can also pick this up with my SR-IOV RFC which will probably =
+touch
+the driver structure as well; I plan to send something in a few days.
