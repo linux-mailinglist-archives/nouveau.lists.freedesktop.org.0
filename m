@@ -2,147 +2,150 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id 85EB5BB0C0B
-	for <lists+nouveau@lfdr.de>; Wed, 01 Oct 2025 16:40:00 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 2D8F5BB0C7D
+	for <lists+nouveau@lfdr.de>; Wed, 01 Oct 2025 16:46:40 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id DE16D10E721;
-	Wed,  1 Oct 2025 14:39:58 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 76B1E10E726;
+	Wed,  1 Oct 2025 14:46:38 +0000 (UTC)
 Authentication-Results: gabe.freedesktop.org;
-	dkim=pass (1024-bit key; unprotected) header.d=suse.de header.i=@suse.de header.b="DYZgpA4E";
-	dkim=permerror (0-bit key) header.d=suse.de header.i=@suse.de header.b="9y65HclI";
-	dkim=pass (1024-bit key) header.d=suse.de header.i=@suse.de header.b="DYZgpA4E";
-	dkim=permerror (0-bit key) header.d=suse.de header.i=@suse.de header.b="9y65HclI";
+	dkim=pass (2048-bit key; unprotected) header.d=Nvidia.com header.i=@Nvidia.com header.b="Ubpg2uhl";
 	dkim-atps=neutral
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from smtp-out2.suse.de (smtp-out2.suse.de [195.135.223.131])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 92C1C10E714
- for <nouveau@lists.freedesktop.org>; Wed,  1 Oct 2025 14:39:56 +0000 (UTC)
-Received: from imap1.dmz-prg2.suse.org (imap1.dmz-prg2.suse.org
- [IPv6:2a07:de40:b281:104:10:150:64:97])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
- (No client certificate requested)
- by smtp-out2.suse.de (Postfix) with ESMTPS id 48B171F7B7;
- Wed,  1 Oct 2025 14:39:54 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.de; s=susede2_rsa;
- t=1759329594; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
- mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references:autocrypt:autocrypt;
- bh=bFaBz7DcwAUQoUHhDf1TjuNHYD70SQcIcwLIkpMDcsY=;
- b=DYZgpA4EnII86+UPEeXZxENEv1c7mAJagKcA7is5UDPjzutxTvVI2joDGFAj+aMaadXK5i
- sTydPurSWcS/HDarZ5MLcOv5XAiVP/JcRBUaigU6N8eFRxpwHsxj3EwqyMoaZSgUgVs2eD
- beBRIFHl/+9HGa1GCkgw9UDao4w6hrs=
-DKIM-Signature: v=1; a=ed25519-sha256; c=relaxed/relaxed; d=suse.de;
- s=susede2_ed25519; t=1759329594;
- h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
- mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references:autocrypt:autocrypt;
- bh=bFaBz7DcwAUQoUHhDf1TjuNHYD70SQcIcwLIkpMDcsY=;
- b=9y65HclIusmbVhRREH82MoGESNTZTxPDv36r7fFDHxHlux7rkYSfequi19kBboksvhXO+b
- W3EN717TRw8cLDDA==
-Authentication-Results: smtp-out2.suse.de;
- dkim=pass header.d=suse.de header.s=susede2_rsa header.b=DYZgpA4E;
- dkim=pass header.d=suse.de header.s=susede2_ed25519 header.b=9y65HclI
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.de; s=susede2_rsa;
- t=1759329594; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
- mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references:autocrypt:autocrypt;
- bh=bFaBz7DcwAUQoUHhDf1TjuNHYD70SQcIcwLIkpMDcsY=;
- b=DYZgpA4EnII86+UPEeXZxENEv1c7mAJagKcA7is5UDPjzutxTvVI2joDGFAj+aMaadXK5i
- sTydPurSWcS/HDarZ5MLcOv5XAiVP/JcRBUaigU6N8eFRxpwHsxj3EwqyMoaZSgUgVs2eD
- beBRIFHl/+9HGa1GCkgw9UDao4w6hrs=
-DKIM-Signature: v=1; a=ed25519-sha256; c=relaxed/relaxed; d=suse.de;
- s=susede2_ed25519; t=1759329594;
- h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
- mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references:autocrypt:autocrypt;
- bh=bFaBz7DcwAUQoUHhDf1TjuNHYD70SQcIcwLIkpMDcsY=;
- b=9y65HclIusmbVhRREH82MoGESNTZTxPDv36r7fFDHxHlux7rkYSfequi19kBboksvhXO+b
- W3EN717TRw8cLDDA==
-Received: from imap1.dmz-prg2.suse.org (localhost [127.0.0.1])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
- (No client certificate requested)
- by imap1.dmz-prg2.suse.org (Postfix) with ESMTPS id C16B713A42;
- Wed,  1 Oct 2025 14:39:53 +0000 (UTC)
-Received: from dovecot-director2.suse.de ([2a07:de40:b281:106:10:150:64:167])
- by imap1.dmz-prg2.suse.org with ESMTPSA id 70bCLTk93WgVKgAAD6G6ig
- (envelope-from <tzimmermann@suse.de>); Wed, 01 Oct 2025 14:39:53 +0000
-Message-ID: <eecf1071-55a4-4cbe-bd8e-a00e5ef9b8ce@suse.de>
-Date: Wed, 1 Oct 2025 16:39:53 +0200
+Received: from SA9PR02CU001.outbound.protection.outlook.com
+ (mail-southcentralusazon11013039.outbound.protection.outlook.com
+ [40.93.196.39])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 9321F10E726
+ for <nouveau@lists.freedesktop.org>; Wed,  1 Oct 2025 14:46:37 +0000 (UTC)
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=tn6CNIppj4qC1Q7Pz6/GVZtkL8KRTbgmonIMdF4io165PYQeJf7JVGtvizpF4SRqJIVDG3a3t/ftQSNYGhweneT9Gmq9QYbj5db2LMYq/zEU2y9Eg48+ufdzNAl5MjA/44yBtuSXGmPwdZzVOL0c5MqG2M1g7cEb1LYWHjNM6nZywKcxcWovQ5UUBlLRRpZCiF8hmXN1ViNZvczMEskMgwT5uVnqpABlGbnXQYmar1yqwItwMs14HiPzkMp2gw7pOTamuw7m4AB/JwwqWUeBBw6dAQLJ7jYV3UgWLWj7HJCU/EM6tLsDrlmtBiPaCO+QMwBdliLvn1HqWwtCXGAQ9Q==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=f3BOvs4XsFw/cZRobmLGcF+mDiMD3Y26wE4t4QAMNCk=;
+ b=xREY5FmbKePuVNf7K0ZafIZkzsQQ4L1hnP7H17GF5ZyjfnNcGwGu4kp8Gkz8tkyBuLK0EH8qAiE4P1GHIogAWfkTpDqL6l8NEYwXNX7KK6VFGNuA5oNGtknWwL7ggMC7yp4jTgNID3KXSUXev7KLMrZqzyMQM6s5mlEuzyVPp0fkUnuZLM4S2/0ccKdAVEsLp0J3SqlhvZ73NjUOPGjp/3t8+BOV6u2r87qPiqSsy3TQ95mryQaggTS3GCRvLzzYa59EbruJKvJznM0z+rAzR47z5G019IAqv6JlM9sBqAXKAygvERK8nuvYNV1YgYB1mdCKkp5yxtuonPw1RDSn+g==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=nvidia.com; dmarc=pass action=none header.from=nvidia.com;
+ dkim=pass header.d=nvidia.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=Nvidia.com;
+ s=selector2;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=f3BOvs4XsFw/cZRobmLGcF+mDiMD3Y26wE4t4QAMNCk=;
+ b=Ubpg2uhlwKDXZ5BLQfUYbLc5aMROCu2k4dyiXgAEFoSBLs9abCL97zG+jnUzozmRbrq9ZEIqJ3ZzsDshBhLDYWrnnGyowjUhEsfmFlXGIt1hbOXZk7pZ95dFAEXhJIZoLZsqTxq40/AKEf+/rW/bgdtyI633K5fAcTKDm8Coo13OtDcEVh7oLdKvAwILHsp198wl7wJmpL56jvyTIndIAXIyDWX5JgWAivyNPCrg0dvJzrNFcttzJJ1gplJTx1mpB62YgxmIbnHfoJaH4ESFMln6WuwMVg3076ns24Rt09aXVA71H0yc9PsS/8JgeFlCWntVaCuUg5qNFMpRC94bsw==
+Authentication-Results: dkim=none (message not signed)
+ header.d=none;dmarc=none action=none header.from=nvidia.com;
+Received: from PH7PR12MB5757.namprd12.prod.outlook.com (2603:10b6:510:1d0::13)
+ by PH7PR12MB6587.namprd12.prod.outlook.com (2603:10b6:510:211::17)
+ with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9160.17; Wed, 1 Oct
+ 2025 14:46:32 +0000
+Received: from PH7PR12MB5757.namprd12.prod.outlook.com
+ ([fe80::f012:300c:6bf4:7632]) by PH7PR12MB5757.namprd12.prod.outlook.com
+ ([fe80::f012:300c:6bf4:7632%2]) with mapi id 15.20.9160.015; Wed, 1 Oct 2025
+ 14:46:31 +0000
+Date: Wed, 1 Oct 2025 11:46:29 -0300
+From: Jason Gunthorpe <jgg@nvidia.com>
+To: John Hubbard <jhubbard@nvidia.com>
+Cc: Alexandre Courbot <acourbot@nvidia.com>,
+ Danilo Krummrich <dakr@kernel.org>, Joel Fernandes <joelagnelf@nvidia.com>,
+ Timur Tabi <ttabi@nvidia.com>, Alistair Popple <apopple@nvidia.com>,
+ Zhi Wang <zhiw@nvidia.com>, Surath Mitra <smitra@nvidia.com>,
+ David Airlie <airlied@gmail.com>, Simona Vetter <simona@ffwll.ch>,
+ Bjorn Helgaas <bhelgaas@google.com>,
+ Krzysztof =?utf-8?Q?Wilczy=C5=84ski?= <kwilczynski@kernel.org>,
+ Miguel Ojeda <ojeda@kernel.org>, Alex Gaynor <alex.gaynor@gmail.com>,
+ Boqun Feng <boqun.feng@gmail.com>, Gary Guo <gary@garyguo.net>,
+ =?utf-8?B?QmrDtnJu?= Roy Baron <bjorn3_gh@protonmail.com>,
+ Benno Lossin <lossin@kernel.org>, Andreas Hindborg <a.hindborg@kernel.org>,
+ Alice Ryhl <aliceryhl@google.com>, Trevor Gross <tmgross@umich.edu>,
+ nouveau@lists.freedesktop.org, linux-pci@vger.kernel.org,
+ rust-for-linux@vger.kernel.org, LKML <linux-kernel@vger.kernel.org>,
+ Alex Williamson <alex.williamson@redhat.com>
+Subject: Re: [PATCH 0/2] rust: pci: expose is_virtfn() and reject VFs in
+ nova-core
+Message-ID: <20251001144629.GA3024065@nvidia.com>
+References: <20250930220759.288528-1-jhubbard@nvidia.com>
+ <DD6K5GQ143FZ.KGWUVMLB3Z26@nvidia.com>
+ <fb5c2be5-b104-4314-a1f5-728317d0ca53@nvidia.com>
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <fb5c2be5-b104-4314-a1f5-728317d0ca53@nvidia.com>
+X-ClientProxiedBy: SA1PR02CA0013.namprd02.prod.outlook.com
+ (2603:10b6:806:2cf::11) To PH7PR12MB5757.namprd12.prod.outlook.com
+ (2603:10b6:510:1d0::13)
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH] drm/client: Remove holds_console_lock parameter from
- suspend/resume
-To: Nirmoy Das <nirmoyd@nvidia.com>, alexander.deucher@amd.com,
- christian.koenig@amd.com, jani.nikula@linux.intel.com,
- joonas.lahtinen@linux.intel.com, rodrigo.vivi@intel.com,
- tursulin@ursulin.net, lyude@redhat.com, dakr@kernel.org,
- lucas.demarchi@intel.com, thomas.hellstrom@linux.intel.com,
- jfalempe@redhat.com, javierm@redhat.com
-Cc: dri-devel@lists.freedesktop.org, amd-gfx@lists.freedesktop.org,
- intel-gfx@lists.freedesktop.org, nouveau@lists.freedesktop.org,
- intel-xe@lists.freedesktop.org
-References: <20251001121610.367243-1-tzimmermann@suse.de>
- <f0cc9358-98b2-48c4-b080-c16728dcd40b@nvidia.com>
-Content-Language: en-US
-From: Thomas Zimmermann <tzimmermann@suse.de>
-Autocrypt: addr=tzimmermann@suse.de; keydata=
- xsBNBFs50uABCADEHPidWt974CaxBVbrIBwqcq/WURinJ3+2WlIrKWspiP83vfZKaXhFYsdg
- XH47fDVbPPj+d6tQrw5lPQCyqjwrCPYnq3WlIBnGPJ4/jreTL6V+qfKRDlGLWFjZcsrPJGE0
- BeB5BbqP5erN1qylK9i3gPoQjXGhpBpQYwRrEyQyjuvk+Ev0K1Jc5tVDeJAuau3TGNgah4Yc
- hdHm3bkPjz9EErV85RwvImQ1dptvx6s7xzwXTgGAsaYZsL8WCwDaTuqFa1d1jjlaxg6+tZsB
- 9GluwvIhSezPgnEmimZDkGnZRRSFiGP8yjqTjjWuf0bSj5rUnTGiyLyRZRNGcXmu6hjlABEB
- AAHNJ1Rob21hcyBaaW1tZXJtYW5uIDx0emltbWVybWFubkBzdXNlLmRlPsLAjgQTAQgAOAIb
- AwULCQgHAgYVCgkICwIEFgIDAQIeAQIXgBYhBHIX+6yM6c9jRKFo5WgNwR1TC3ojBQJftODH
- AAoJEGgNwR1TC3ojx1wH/0hKGWugiqDgLNXLRD/4TfHBEKmxIrmfu9Z5t7vwUKfwhFL6hqvo
- lXPJJKQpQ2z8+X2vZm/slsLn7J1yjrOsoJhKABDi+3QWWSGkaGwRJAdPVVyJMfJRNNNIKwVb
- U6B1BkX2XDKDGffF4TxlOpSQzdtNI/9gleOoUA8+jy8knnDYzjBNOZqLG2FuTdicBXblz0Mf
- vg41gd9kCwYXDnD91rJU8tzylXv03E75NCaTxTM+FBXPmsAVYQ4GYhhgFt8S2UWMoaaABLDe
- 7l5FdnLdDEcbmd8uLU2CaG4W2cLrUaI4jz2XbkcPQkqTQ3EB67hYkjiEE6Zy3ggOitiQGcqp
- j//OwE0EWznS4AEIAMYmP4M/V+T5RY5at/g7rUdNsLhWv1APYrh9RQefODYHrNRHUE9eosYb
- T6XMryR9hT8XlGOYRwKWwiQBoWSDiTMo/Xi29jUnn4BXfI2px2DTXwc22LKtLAgTRjP+qbU6
- 3Y0xnQN29UGDbYgyyK51DW3H0If2a3JNsheAAK+Xc9baj0LGIc8T9uiEWHBnCH+RdhgATnWW
- GKdDegUR5BkDfDg5O/FISymJBHx2Dyoklv5g4BzkgqTqwmaYzsl8UxZKvbaxq0zbehDda8lv
- hFXodNFMAgTLJlLuDYOGLK2AwbrS3Sp0AEbkpdJBb44qVlGm5bApZouHeJ/+n+7r12+lqdsA
- EQEAAcLAdgQYAQgAIAIbDBYhBHIX+6yM6c9jRKFo5WgNwR1TC3ojBQJftOH6AAoJEGgNwR1T
- C3ojVSkIALpAPkIJPQoURPb1VWjh34l0HlglmYHvZszJWTXYwavHR8+k6Baa6H7ufXNQtThR
- yIxJrQLW6rV5lm7TjhffEhxVCn37+cg0zZ3j7zIsSS0rx/aMwi6VhFJA5hfn3T0TtrijKP4A
- SAQO9xD1Zk9/61JWk8OysuIh7MXkl0fxbRKWE93XeQBhIJHQfnc+YBLprdnxR446Sh8Wn/2D
- Ya8cavuWf2zrB6cZurs048xe0UbSW5AOSo4V9M0jzYI4nZqTmPxYyXbm30Kvmz0rYVRaitYJ
- 4kyYYMhuULvrJDMjZRvaNe52tkKAvMevcGdt38H4KSVXAylqyQOW5zvPc4/sq9c=
-In-Reply-To: <f0cc9358-98b2-48c4-b080-c16728dcd40b@nvidia.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 8bit
-X-Spamd-Result: default: False [-4.51 / 50.00]; BAYES_HAM(-3.00)[100.00%];
- NEURAL_HAM_LONG(-1.00)[-1.000];
- R_DKIM_ALLOW(-0.20)[suse.de:s=susede2_rsa,suse.de:s=susede2_ed25519];
- NEURAL_HAM_SHORT(-0.20)[-1.000]; MIME_GOOD(-0.10)[text/plain];
- MX_GOOD(-0.01)[]; RCPT_COUNT_TWELVE(0.00)[18]; ARC_NA(0.00)[];
- RBL_SPAMHAUS_BLOCKED_OPENRESOLVER(0.00)[2a07:de40:b281:104:10:150:64:97:from]; 
- MIME_TRACE(0.00)[0:+]; FUZZY_RATELIMITED(0.00)[rspamd.com];
- DKIM_SIGNED(0.00)[suse.de:s=susede2_rsa,suse.de:s=susede2_ed25519];
- TO_MATCH_ENVRCPT_ALL(0.00)[]; FROM_HAS_DN(0.00)[];
- RCVD_TLS_ALL(0.00)[]; DKIM_TRACE(0.00)[suse.de:+];
- RCVD_COUNT_TWO(0.00)[2];
- SPAMHAUS_XBL(0.00)[2a07:de40:b281:104:10:150:64:97:from];
- FROM_EQ_ENVFROM(0.00)[]; TO_DN_SOME(0.00)[];
- DNSWL_BLOCKED(0.00)[2a07:de40:b281:104:10:150:64:97:from,2a07:de40:b281:106:10:150:64:167:received];
- RECEIVED_SPAMHAUS_BLOCKED_OPENRESOLVER(0.00)[2a07:de40:b281:106:10:150:64:167:received];
- MID_RHS_MATCH_FROM(0.00)[]; RCVD_VIA_SMTP_AUTH(0.00)[];
- DBL_BLOCKED_OPENRESOLVER(0.00)[suse.de:mid, suse.de:dkim, suse.de:email,
- imap1.dmz-prg2.suse.org:helo, imap1.dmz-prg2.suse.org:rdns]
-X-Spam-Flag: NO
-X-Spam-Level: 
-X-Rspamd-Queue-Id: 48B171F7B7
-X-Rspamd-Server: rspamd2.dmz-prg2.suse.org
-X-Rspamd-Action: no action
-X-Spam-Score: -4.51
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: PH7PR12MB5757:EE_|PH7PR12MB6587:EE_
+X-MS-Office365-Filtering-Correlation-Id: 8c112e2c-680d-4225-e769-08de00f94f7f
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: BCL:0;ARA:13230040|1800799024|366016|7416014|376014;
+X-Microsoft-Antispam-Message-Info: =?us-ascii?Q?0JjSkXKgsdtkHxb9g0pJsm5jVfXiDFwu27nsIrpBnNleIP0PSQ5AWaGis7o4?=
+ =?us-ascii?Q?GQzQal/sOT7P7qhPxKGAe3S8ieSY/1BIgc4csbuvAJuvN3HlKOSdvgluiaKg?=
+ =?us-ascii?Q?LyimETzVSGUzKSHQ8nIyqcYjDd2d1abmVnNRG3m89o4tRsyMjZZ16GwfXCSM?=
+ =?us-ascii?Q?QBeiD5bxYJ0yibY//bIXJlu3512rZeqe72ZGToPp4lRlQDqlvg+gRSKuRuPy?=
+ =?us-ascii?Q?kD6z/gWY5UReLy2JcQouT3LCXbyYynUIYuAOoGx5reP3naamgkNm/lTmABOy?=
+ =?us-ascii?Q?/OBKLDC6IQ32KACFd2WJfwSX+TVBleJnCeZMMzwLE5yU3/QnNvpzjeCZWIr9?=
+ =?us-ascii?Q?/TYfvm0r5I6aF0WctH0PSInZkTXnCZRsfofzYPPI5xPzbAOREHJZA4C7CWrz?=
+ =?us-ascii?Q?v+D/BE8cuioxXhhTY0G4sdlfgjAAOMuA5Vt1muZZ4JYG4mmeOYXpBKKOH0AU?=
+ =?us-ascii?Q?oKCEde7aIsNG+DOekFfeAXfqWn1IbNZP1FiX9k97dDwk5Xy4RkE1czRMatzq?=
+ =?us-ascii?Q?74TRj/QqRHl55A2LLy0qY+WQrAJKIBjP4BEHfsOWYGiigJwZ97xoYQDlNEIo?=
+ =?us-ascii?Q?xZLlnLbCbYWxCE/1nnQV2sJTvJoenXmyMl1YEw58p40iP6vMp+rr4d4GKzsp?=
+ =?us-ascii?Q?ZMLlmgFpo+gx2Chvhh0BqXv+wQjrpzTQ16kMG/h7YsCUGXJowwpuiL3X7oFs?=
+ =?us-ascii?Q?dAspI4JwzVUM4AdYc8ESp957FIF+Ov3NhOksXfEsFGLFtpHtwqGm2bobVnoA?=
+ =?us-ascii?Q?FtpsfHuORK0FEX1DMF5qCDb+SJHQHHR2oom0wGkrqU5rLfRH/NzakPU/2t9C?=
+ =?us-ascii?Q?VsI3mV4kOYp7YOT/siaK3zDBlW8/FasCUbRpyR3bmYuoqx8gBXjV38clw1M8?=
+ =?us-ascii?Q?BGTmMXs/YsEbyVXewzXhnE7KcDJISGm+Klfg/oggY+hGnj6xkRwG0Bwyow0+?=
+ =?us-ascii?Q?+r1GoHecn6nSvSjZhBq/1prqEEPQtv2YCk0QOGKz7ZKuIzjdFqf7OmMCWojL?=
+ =?us-ascii?Q?KUGO+6b1F+j1UwJRz+op7/Tg3BfOyxaJ5vZRq/qreuEJmODP9L4dQ14lwvzp?=
+ =?us-ascii?Q?cTrIYzLQGgSk4/qOmI7+zQtYjNheXe1yotHWEVJHvCTGVe+JsD4l23OsrjvJ?=
+ =?us-ascii?Q?vpFS9+er2at+92rPKVU9utupwRtJWpaEZG+KmsbR1FNRmbgWtmSC1+JwXVRA?=
+ =?us-ascii?Q?WndZ1Dh7fFPe9FzFUjFt7nQFZMm0Pc7U9QYd2SG2AwVbgG/wm2br7YsaO7h1?=
+ =?us-ascii?Q?K4zMoiVBwxX9VyuapF7hx508PVwUVQAObpH9Xo2RIRetr2P9NvdD4AH/J41H?=
+ =?us-ascii?Q?0U7hjSBOPEC380em5Q+fCuhJM4rkT33cM4T9v/LVuLsXpVYIcHtLq/0BvBjy?=
+ =?us-ascii?Q?KqLBOi6IYIFeYqPoT//qCoH9Pyo5Jbnjdp/wbqxAosFB1x83eB9zD2n8R/q+?=
+ =?us-ascii?Q?tL5quAPHudIQr02RHIj6/CU9030DOh16?=
+X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
+ IPV:NLI; SFV:NSPM; H:PH7PR12MB5757.namprd12.prod.outlook.com; PTR:; CAT:NONE;
+ SFS:(13230040)(1800799024)(366016)(7416014)(376014); DIR:OUT; SFP:1101; 
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0: =?us-ascii?Q?TP95/Qg5XYOHRIP7RcPDQ17Fy0rojIxDsG9mPiubwzUvTyW6+pwyG99kTNGh?=
+ =?us-ascii?Q?uyJN4E1as8VmdW+PubZQK48cWRO9T7qKYcU0phpm2gR34DNLOGoUAr0sy7YR?=
+ =?us-ascii?Q?RYmYKWc8NnOPrpefNQCdV6W187+k2w9S1+7emnumBJXp49PTgz0xEPCGxYMu?=
+ =?us-ascii?Q?QMsY3qyVKkDA3HxELIONNiCqLSWUMONQKuLTtfJJr8LlUkpRi8CB6e+54mSm?=
+ =?us-ascii?Q?1Y2ta4hWu76y+ZJ49Ofp0c7AKn6xyf5pjdz2vwp9zFnIjM1kq+5A5SYCE4ui?=
+ =?us-ascii?Q?/Ffbawyd/ET2svdWcb0TsWjzR1j+uthOtgewWnOVFe1kGhZjzfWwXxC+U2bq?=
+ =?us-ascii?Q?R+hcS4slpynmspA5sqHhaOhkk2j4/eDhp6BRBt/3eRbsjAv+oPwDLeSJ/uTM?=
+ =?us-ascii?Q?xf24BiiBgr55ch/nvy05ddUQNEs5fNHQw1q7b9AkEWKP/6nn8J9wt8m2rPgz?=
+ =?us-ascii?Q?D7Dz5S49DeSxQX/px1uJycbCpfXyuI54IoLd6jZ7Lx6GHC9BBEi+SyG1D/5n?=
+ =?us-ascii?Q?C+rpevb/AJu8qCxisuhigdTe0YgerC6GhJdGBvpoHBdAsqdIYS+8hEUsv2U3?=
+ =?us-ascii?Q?aNJOrBAUFvp84CXRG8Erx6R/+aN4bm4Wm0WA+FbfJpwsaYKfGQoPtJf7nULd?=
+ =?us-ascii?Q?kFJDUoxeW3RbevOoi3Z1lRid8RA5BaL+WWyjYDi6N5eMAq2pHNISgm4Rfq1V?=
+ =?us-ascii?Q?AMfceJzOw22xtg5bfWlg+0pJfwLWerQ2vAze542sM0RNS2OWa6VVMXYhCzpL?=
+ =?us-ascii?Q?rxMnqwTQ+SIj81lwtF5i/FKDTPbULeuZ2pWASqYslI4MTtrvGewVVbqWOagS?=
+ =?us-ascii?Q?rEAZ/poPBFI+e2nwaYmvAsE+O+3Zd/fNxA6JDA0JlGxYhEX3AlxXoRBBOQqW?=
+ =?us-ascii?Q?NXAPiAtyB7lfPwNFizCzEz9v+Qomr8ECFjVgP6OKudgmrBY+uiG1PgHWTPln?=
+ =?us-ascii?Q?qkLWbl37eIBYVsimlo1N5XwuErjc9tbdv2OHV6JHZ19L6uSeLa9Erx/0KZcT?=
+ =?us-ascii?Q?C98Oa7GP4YFTBlC/ixGFSsmOCzT0HYtw2NPUvyKjD5pUnqvL9Ousr0aTjKhS?=
+ =?us-ascii?Q?QpROwhjSVRkgGRl1tfV+JD09cPcopr5t/6VEpzYvPQRMsKaLZpgH+6mM4NHz?=
+ =?us-ascii?Q?+YNqAM7DOyA9MQ950rP2MFwO/NOUAKrJRrd+xPx+N/6ksuJlTpj+nAqO6xqu?=
+ =?us-ascii?Q?z667S14YJr3HmQkEYkrm5scmsWTXsq5C+dBWYSXAB/d/8xEWyEGFj7PAAZ0c?=
+ =?us-ascii?Q?15z32bHWdJxb2S9HcDuMqj6LDHHGz2jGaA4kdFNthg+1xJIkN3Al2e4v9BBH?=
+ =?us-ascii?Q?B+OLS+OcW9rgggrPsV5q27wBhJmdBT9bJB7gEMApBhdStECdddnlMtUjptN/?=
+ =?us-ascii?Q?lT2mL/PWGbrQz6h8bESorcez74NGPFfvsUEsrMTjxedRatvku0Ssf+PA79xO?=
+ =?us-ascii?Q?ct2TuQo/jHApAb9Htp8nrpapks7IN27MdAXmQdMrrc5BoSeZkbSSHQfQ6uwB?=
+ =?us-ascii?Q?8+NBcgNb9sndGVq2MO71aHOktFytcRwkVc2Cy85V33w18cUJ+Ok31vVioyG4?=
+ =?us-ascii?Q?9wnCnOOknxCuzZ6Pchh5DocYJ4Hng68eOJVRVOyO?=
+X-OriginatorOrg: Nvidia.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: 8c112e2c-680d-4225-e769-08de00f94f7f
+X-MS-Exchange-CrossTenant-AuthSource: PH7PR12MB5757.namprd12.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 01 Oct 2025 14:46:31.7808 (UTC)
+X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
+X-MS-Exchange-CrossTenant-Id: 43083d15-7273-40c1-b7db-39efd9ccc17a
+X-MS-Exchange-CrossTenant-MailboxType: HOSTED
+X-MS-Exchange-CrossTenant-UserPrincipalName: HU+r8kvEUp8VY3UAa6bUzNjZL2wOUH6tSCe5TAIleSeJeyRZf5PVEGLuJ/if2LBY
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: PH7PR12MB6587
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -157,388 +160,39 @@ List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-Hi
+On Tue, Sep 30, 2025 at 06:26:23PM -0700, John Hubbard wrote:
+> On 9/30/25 5:26 PM, Alexandre Courbot wrote:
+> > On Wed Oct 1, 2025 at 7:07 AM JST, John Hubbard wrote:
+> >> Post-Kangrejos, the approach for NovaCore + VFIO has changed a bit: the
+> >> idea now is that VFIO drivers, for NVIDIA GPUs that are supported by
+> >> NovaCore, should bind directly to the GPU's VFs. (An earlier idea was to
+> >> let NovaCore bind to the VFs, and then have NovaCore call into the upper
+> >> (VFIO) module via Aux Bus, but this turns out to be awkward and is no
+> >> longer in favor.) So, in order to support that:
+> >>
+> >> Nova-core must only bind to Physical Functions (PFs) and regular PCI
+> >> devices, not to Virtual Functions (VFs) created through SR-IOV.
+> > 
+> > Naive question: will guests also see the passed-through VF as a VF? If
+> > so, wouldn't this change also prevents guests from using Nova?
+> 
+> I'm also new to this area. I would expect that guests *must* see
+> these as PFs, otherwise...nothing makes any sense.
+> 
+> Maybe Alex Williamson or Jason Gunthorpe (+CC) can chime in.
 
-Am 01.10.25 um 14:46 schrieb Nirmoy Das:
->
-> On 01.10.25 14:15, Thomas Zimmermann wrote:
->> No caller of the client resume/suspend helpers holds the console
->> lock. The last such cases were removed from radeon in the patch
->> series at [1]. Now remove the related parameter and the TODO items.
->>
->> Signed-off-by: Thomas Zimmermann <tzimmermann@suse.de>
->> Link: https://patchwork.freedesktop.org/series/151624/ # [1]
-> Acked-by: Nirmoy Das <nirmoyd@nvidia.com>
+Driver should never do something like this.
 
-Thanks. I sent out an update that addresses the CI issue before seeing 
-your a-b, but it will be included when the patch lands.
+Novacore should work on a VF pretending to be a PF in a VM, and it
+should work directly on that same VF outside a VM.
 
-Best regards
-Thomas
+It is not the job of driver to make binding decisions like 'oh VFs of
+this devices are usually VFIO so I will fail probe'.
 
->> ---
->> This patch would preferably be merged through drm-misc.
->> ---
->>   drivers/gpu/drm/amd/amdgpu/amdgpu_device.c |  8 ++++----
->>   drivers/gpu/drm/clients/drm_fbdev_client.c | 14 ++++----------
->>   drivers/gpu/drm/clients/drm_log.c          |  4 ++--
->>   drivers/gpu/drm/drm_client_event.c         | 16 ++++++++--------
->>   drivers/gpu/drm/drm_modeset_helper.c       |  6 +++---
->>   drivers/gpu/drm/i915/i915_driver.c         |  6 +++---
->>   drivers/gpu/drm/nouveau/nouveau_display.c  |  4 ++--
->>   drivers/gpu/drm/radeon/radeon_device.c     |  4 ++--
->>   drivers/gpu/drm/xe/display/xe_display.c    |  6 +++---
->>   include/drm/drm_client.h                   | 14 ++------------
->>   include/drm/drm_client_event.h             |  4 ++--
->>   11 files changed, 35 insertions(+), 51 deletions(-)
->>
->> diff --git a/drivers/gpu/drm/amd/amdgpu/amdgpu_device.c 
->> b/drivers/gpu/drm/amd/amdgpu/amdgpu_device.c
->> index a77000c2e0bb..f068e26d5080 100644
->> --- a/drivers/gpu/drm/amd/amdgpu/amdgpu_device.c
->> +++ b/drivers/gpu/drm/amd/amdgpu/amdgpu_device.c
->> @@ -5212,7 +5212,7 @@ int amdgpu_device_suspend(struct drm_device 
->> *dev, bool notify_clients)
->>           dev_warn(adev->dev, "smart shift update failed\n");
->>         if (notify_clients)
->> -        drm_client_dev_suspend(adev_to_drm(adev), false);
->> +        drm_client_dev_suspend(adev_to_drm(adev));
->> cancel_delayed_work_sync(&adev->delayed_init_work);
->>   @@ -5346,7 +5346,7 @@ int amdgpu_device_resume(struct drm_device 
->> *dev, bool notify_clients)
->>       flush_delayed_work(&adev->delayed_init_work);
->>         if (notify_clients)
->> -        drm_client_dev_resume(adev_to_drm(adev), false);
->> +        drm_client_dev_resume(adev_to_drm(adev));
->>         amdgpu_ras_resume(adev);
->>   @@ -5951,7 +5951,7 @@ int amdgpu_device_reinit_after_reset(struct 
->> amdgpu_reset_context *reset_context)
->>                   if (r)
->>                       goto out;
->>   -                drm_client_dev_resume(adev_to_drm(tmp_adev), false);
->> +                drm_client_dev_resume(adev_to_drm(tmp_adev));
->>                     /*
->>                    * The GPU enters bad state once faulty pages
->> @@ -6286,7 +6286,7 @@ static void 
->> amdgpu_device_halt_activities(struct amdgpu_device *adev,
->>            */
->>           amdgpu_unregister_gpu_instance(tmp_adev);
->>   -        drm_client_dev_suspend(adev_to_drm(tmp_adev), false);
->> +        drm_client_dev_suspend(adev_to_drm(tmp_adev));
->>             /* disable ras on ALL IPs */
->>           if (!need_emergency_restart && !amdgpu_reset_in_dpc(adev) &&
->> diff --git a/drivers/gpu/drm/clients/drm_fbdev_client.c 
->> b/drivers/gpu/drm/clients/drm_fbdev_client.c
->> index f894ba52bdb5..ec5ab9f30547 100644
->> --- a/drivers/gpu/drm/clients/drm_fbdev_client.c
->> +++ b/drivers/gpu/drm/clients/drm_fbdev_client.c
->> @@ -62,26 +62,20 @@ static int drm_fbdev_client_hotplug(struct 
->> drm_client_dev *client)
->>       return ret;
->>   }
->>   -static int drm_fbdev_client_suspend(struct drm_client_dev *client, 
->> bool holds_console_lock)
->> +static int drm_fbdev_client_suspend(struct drm_client_dev *client)
->>   {
->>       struct drm_fb_helper *fb_helper = 
->> drm_fb_helper_from_client(client);
->>   -    if (holds_console_lock)
->> -        drm_fb_helper_set_suspend(fb_helper, true);
->> -    else
->> -        drm_fb_helper_set_suspend_unlocked(fb_helper, true);
->> +    drm_fb_helper_set_suspend_unlocked(fb_helper, true);
->>         return 0;
->>   }
->>   -static int drm_fbdev_client_resume(struct drm_client_dev *client, 
->> bool holds_console_lock)
->> +static int drm_fbdev_client_resume(struct drm_client_dev *client)
->>   {
->>       struct drm_fb_helper *fb_helper = 
->> drm_fb_helper_from_client(client);
->>   -    if (holds_console_lock)
->> -        drm_fb_helper_set_suspend(fb_helper, false);
->> -    else
->> -        drm_fb_helper_set_suspend_unlocked(fb_helper, false);
->> +    drm_fb_helper_set_suspend_unlocked(fb_helper, false);
->>         return 0;
->>   }
->> diff --git a/drivers/gpu/drm/clients/drm_log.c 
->> b/drivers/gpu/drm/clients/drm_log.c
->> index d239f1e3c456..fd8556dd58ed 100644
->> --- a/drivers/gpu/drm/clients/drm_log.c
->> +++ b/drivers/gpu/drm/clients/drm_log.c
->> @@ -319,7 +319,7 @@ static int drm_log_client_hotplug(struct 
->> drm_client_dev *client)
->>       return 0;
->>   }
->>   -static int drm_log_client_suspend(struct drm_client_dev *client, 
->> bool _console_lock)
->> +static int drm_log_client_suspend(struct drm_client_dev *client)
->>   {
->>       struct drm_log *dlog = client_to_drm_log(client);
->>   @@ -328,7 +328,7 @@ static int drm_log_client_suspend(struct 
->> drm_client_dev *client, bool _console_l
->>       return 0;
->>   }
->>   -static int drm_log_client_resume(struct drm_client_dev *client, 
->> bool _console_lock)
->> +static int drm_log_client_resume(struct drm_client_dev *client)
->>   {
->>       struct drm_log *dlog = client_to_drm_log(client);
->>   diff --git a/drivers/gpu/drm/drm_client_event.c 
->> b/drivers/gpu/drm/drm_client_event.c
->> index c83196ad8b59..c3baeb4d4e6b 100644
->> --- a/drivers/gpu/drm/drm_client_event.c
->> +++ b/drivers/gpu/drm/drm_client_event.c
->> @@ -122,7 +122,7 @@ void drm_client_dev_restore(struct drm_device *dev)
->>       mutex_unlock(&dev->clientlist_mutex);
->>   }
->>   -static int drm_client_suspend(struct drm_client_dev *client, bool 
->> holds_console_lock)
->> +static int drm_client_suspend(struct drm_client_dev *client)
->>   {
->>       struct drm_device *dev = client->dev;
->>       int ret = 0;
->> @@ -131,7 +131,7 @@ static int drm_client_suspend(struct 
->> drm_client_dev *client, bool holds_console_
->>           return 0;
->>         if (client->funcs && client->funcs->suspend)
->> -        ret = client->funcs->suspend(client, holds_console_lock);
->> +        ret = client->funcs->suspend(client);
->>       drm_dbg_kms(dev, "%s: ret=%d\n", client->name, ret);
->>         client->suspended = true;
->> @@ -139,20 +139,20 @@ static int drm_client_suspend(struct 
->> drm_client_dev *client, bool holds_console_
->>       return ret;
->>   }
->>   -void drm_client_dev_suspend(struct drm_device *dev, bool 
->> holds_console_lock)
->> +void drm_client_dev_suspend(struct drm_device *dev)
->>   {
->>       struct drm_client_dev *client;
->>         mutex_lock(&dev->clientlist_mutex);
->>       list_for_each_entry(client, &dev->clientlist, list) {
->>           if (!client->suspended)
->> -            drm_client_suspend(client, holds_console_lock);
->> +            drm_client_suspend(client);
->>       }
->>       mutex_unlock(&dev->clientlist_mutex);
->>   }
->>   EXPORT_SYMBOL(drm_client_dev_suspend);
->>   -static int drm_client_resume(struct drm_client_dev *client, bool 
->> holds_console_lock)
->> +static int drm_client_resume(struct drm_client_dev *client)
->>   {
->>       struct drm_device *dev = client->dev;
->>       int ret = 0;
->> @@ -161,7 +161,7 @@ static int drm_client_resume(struct 
->> drm_client_dev *client, bool holds_console_l
->>           return 0;
->>         if (client->funcs && client->funcs->resume)
->> -        ret = client->funcs->resume(client, holds_console_lock);
->> +        ret = client->funcs->resume(client);
->>       drm_dbg_kms(dev, "%s: ret=%d\n", client->name, ret);
->>         client->suspended = false;
->> @@ -172,14 +172,14 @@ static int drm_client_resume(struct 
->> drm_client_dev *client, bool holds_console_l
->>       return ret;
->>   }
->>   -void drm_client_dev_resume(struct drm_device *dev, bool 
->> holds_console_lock)
->> +void drm_client_dev_resume(struct drm_device *dev)
->>   {
->>       struct drm_client_dev *client;
->>         mutex_lock(&dev->clientlist_mutex);
->>       list_for_each_entry(client, &dev->clientlist, list) {
->>           if  (client->suspended)
->> -            drm_client_resume(client, holds_console_lock);
->> +            drm_client_resume(client);
->>       }
->>       mutex_unlock(&dev->clientlist_mutex);
->>   }
->> diff --git a/drivers/gpu/drm/drm_modeset_helper.c 
->> b/drivers/gpu/drm/drm_modeset_helper.c
->> index 988735560570..a57f6a10ada4 100644
->> --- a/drivers/gpu/drm/drm_modeset_helper.c
->> +++ b/drivers/gpu/drm/drm_modeset_helper.c
->> @@ -203,10 +203,10 @@ int drm_mode_config_helper_suspend(struct 
->> drm_device *dev)
->>       if (dev->mode_config.poll_enabled)
->>           drm_kms_helper_poll_disable(dev);
->>   -    drm_client_dev_suspend(dev, false);
->> +    drm_client_dev_suspend(dev);
->>       state = drm_atomic_helper_suspend(dev);
->>       if (IS_ERR(state)) {
->> -        drm_client_dev_resume(dev, false);
->> +        drm_client_dev_resume(dev);
->>             /*
->>            * Don't enable polling if it was never initialized
->> @@ -252,7 +252,7 @@ int drm_mode_config_helper_resume(struct 
->> drm_device *dev)
->>           DRM_ERROR("Failed to resume (%d)\n", ret);
->>       dev->mode_config.suspend_state = NULL;
->>   -    drm_client_dev_resume(dev, false);
->> +    drm_client_dev_resume(dev);
->>         /*
->>        * Don't enable polling if it is not initialized
->> diff --git a/drivers/gpu/drm/i915/i915_driver.c 
->> b/drivers/gpu/drm/i915/i915_driver.c
->> index 95165e45de74..162e50315beb 100644
->> --- a/drivers/gpu/drm/i915/i915_driver.c
->> +++ b/drivers/gpu/drm/i915/i915_driver.c
->> @@ -978,7 +978,7 @@ void i915_driver_shutdown(struct drm_i915_private 
->> *i915)
->>       intel_runtime_pm_disable(&i915->runtime_pm);
->>       intel_power_domains_disable(display);
->>   -    drm_client_dev_suspend(&i915->drm, false);
->> +    drm_client_dev_suspend(&i915->drm);
->>       if (intel_display_device_present(display)) {
->>           drm_kms_helper_poll_disable(&i915->drm);
->>           intel_display_driver_disable_user_access(display);
->> @@ -1060,7 +1060,7 @@ static int i915_drm_suspend(struct drm_device 
->> *dev)
->>       /* We do a lot of poking in a lot of registers, make sure they 
->> work
->>        * properly. */
->>       intel_power_domains_disable(display);
->> -    drm_client_dev_suspend(dev, false);
->> +    drm_client_dev_suspend(dev);
->>       if (intel_display_device_present(display)) {
->>           drm_kms_helper_poll_disable(dev);
->>           intel_display_driver_disable_user_access(display);
->> @@ -1257,7 +1257,7 @@ static int i915_drm_resume(struct drm_device *dev)
->>         intel_opregion_resume(display);
->>   -    drm_client_dev_resume(dev, false);
->> +    drm_client_dev_resume(dev);
->>         intel_power_domains_enable(display);
->>   diff --git a/drivers/gpu/drm/nouveau/nouveau_display.c 
->> b/drivers/gpu/drm/nouveau/nouveau_display.c
->> index 54aed3656a4c..00515623a2cc 100644
->> --- a/drivers/gpu/drm/nouveau/nouveau_display.c
->> +++ b/drivers/gpu/drm/nouveau/nouveau_display.c
->> @@ -765,7 +765,7 @@ nouveau_display_suspend(struct drm_device *dev, 
->> bool runtime)
->>   {
->>       struct nouveau_display *disp = nouveau_display(dev);
->>   -    drm_client_dev_suspend(dev, false);
->> +    drm_client_dev_suspend(dev);
->>         if (drm_drv_uses_atomic_modeset(dev)) {
->>           if (!runtime) {
->> @@ -796,7 +796,7 @@ nouveau_display_resume(struct drm_device *dev, 
->> bool runtime)
->>           }
->>       }
->>   -    drm_client_dev_resume(dev, false);
->> +    drm_client_dev_resume(dev);
->>   }
->>     int
->> diff --git a/drivers/gpu/drm/radeon/radeon_device.c 
->> b/drivers/gpu/drm/radeon/radeon_device.c
->> index 9e35b14e2bf0..60afaa8e56b4 100644
->> --- a/drivers/gpu/drm/radeon/radeon_device.c
->> +++ b/drivers/gpu/drm/radeon/radeon_device.c
->> @@ -1635,7 +1635,7 @@ int radeon_suspend_kms(struct drm_device *dev, 
->> bool suspend,
->>       }
->>         if (notify_clients)
->> -        drm_client_dev_suspend(dev, false);
->> +        drm_client_dev_suspend(dev);
->>         return 0;
->>   }
->> @@ -1739,7 +1739,7 @@ int radeon_resume_kms(struct drm_device *dev, 
->> bool resume, bool notify_clients)
->>           radeon_pm_compute_clocks(rdev);
->>         if (notify_clients)
->> -        drm_client_dev_resume(dev, false);
->> +        drm_client_dev_resume(dev);
->>         return 0;
->>   }
->> diff --git a/drivers/gpu/drm/xe/display/xe_display.c 
->> b/drivers/gpu/drm/xe/display/xe_display.c
->> index 19e691fccf8c..d3cc6181842c 100644
->> --- a/drivers/gpu/drm/xe/display/xe_display.c
->> +++ b/drivers/gpu/drm/xe/display/xe_display.c
->> @@ -324,7 +324,7 @@ void xe_display_pm_suspend(struct xe_device *xe)
->>        * properly.
->>        */
->>       intel_power_domains_disable(display);
->> -    drm_client_dev_suspend(&xe->drm, false);
->> +    drm_client_dev_suspend(&xe->drm);
->>         if (intel_display_device_present(display)) {
->>           drm_kms_helper_poll_disable(&xe->drm);
->> @@ -356,7 +356,7 @@ void xe_display_pm_shutdown(struct xe_device *xe)
->>           return;
->>         intel_power_domains_disable(display);
->> -    drm_client_dev_suspend(&xe->drm, false);
->> +    drm_client_dev_suspend(&xe->drm);
->>         if (intel_display_device_present(display)) {
->>           drm_kms_helper_poll_disable(&xe->drm);
->> @@ -481,7 +481,7 @@ void xe_display_pm_resume(struct xe_device *xe)
->>         intel_opregion_resume(display);
->>   -    drm_client_dev_resume(&xe->drm, false);
->> +    drm_client_dev_resume(&xe->drm);
->>         intel_power_domains_enable(display);
->>   }
->> diff --git a/include/drm/drm_client.h b/include/drm/drm_client.h
->> index bdd845e383ef..3556928d3938 100644
->> --- a/include/drm/drm_client.h
->> +++ b/include/drm/drm_client.h
->> @@ -70,13 +70,8 @@ struct drm_client_funcs {
->>        * Called when suspending the device.
->>        *
->>        * This callback is optional.
->> -     *
->> -     * FIXME: Some callers hold the console lock when invoking this
->> -     *        function. This interferes with fbdev emulation, which
->> -     *        also tries to acquire the lock. Push the console lock
->> -     *        into the callback and remove 'holds_console_lock'.
->>        */
->> -    int (*suspend)(struct drm_client_dev *client, bool 
->> holds_console_lock);
->> +    int (*suspend)(struct drm_client_dev *client);
->>         /**
->>        * @resume:
->> @@ -84,13 +79,8 @@ struct drm_client_funcs {
->>        * Called when resuming the device from suspend.
->>        *
->>        * This callback is optional.
->> -     *
->> -     * FIXME: Some callers hold the console lock when invoking this
->> -     *        function. This interferes with fbdev emulation, which
->> -     *        also tries to acquire the lock. Push the console lock
->> -     *        into the callback and remove 'holds_console_lock'.
->>        */
->> -    int (*resume)(struct drm_client_dev *client, bool 
->> holds_console_lock);
->> +    int (*resume)(struct drm_client_dev *client);
->>   };
->>     /**
->> diff --git a/include/drm/drm_client_event.h 
->> b/include/drm/drm_client_event.h
->> index 1d544d3a3228..c3f318788b71 100644
->> --- a/include/drm/drm_client_event.h
->> +++ b/include/drm/drm_client_event.h
->> @@ -11,8 +11,8 @@ struct drm_device;
->>   void drm_client_dev_unregister(struct drm_device *dev);
->>   void drm_client_dev_hotplug(struct drm_device *dev);
->>   void drm_client_dev_restore(struct drm_device *dev);
->> -void drm_client_dev_suspend(struct drm_device *dev, bool 
->> holds_console_lock);
->> -void drm_client_dev_resume(struct drm_device *dev, bool 
->> holds_console_lock);
->> +void drm_client_dev_suspend(struct drm_device *dev);
->> +void drm_client_dev_resume(struct drm_device *dev);
->>   #else
->>   static inline void drm_client_dev_unregister(struct drm_device *dev)
->>   { }
+VFIO users should use the disable driver autobinding sysfs before
+creating SRIOV instance to prevent this auto binding and then bind
+VFIO manually.
 
--- 
---
-Thomas Zimmermann
-Graphics Driver Developer
-SUSE Software Solutions Germany GmbH
-Frankenstrasse 146, 90461 Nuernberg, Germany
-GF: Ivo Totev, Andrew Myers, Andrew McDonald, Boudien Moerman
-HRB 36809 (AG Nuernberg)
+Or userspace can manually unbind novacore from the VF and rebind VFIO.
 
-
+Jason
