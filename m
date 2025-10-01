@@ -2,150 +2,181 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id D7BDCBBF60F
-	for <lists+nouveau@lfdr.de>; Mon, 06 Oct 2025 22:48:21 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id ACFD2BBF5B5
+	for <lists+nouveau@lfdr.de>; Mon, 06 Oct 2025 22:48:06 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id C48F710E53B;
-	Mon,  6 Oct 2025 20:47:15 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 030B210E4BF;
+	Mon,  6 Oct 2025 20:47:02 +0000 (UTC)
 Authentication-Results: gabe.freedesktop.org;
-	dkim=pass (2048-bit key; unprotected) header.d=Nvidia.com header.i=@Nvidia.com header.b="mVxlohFa";
+	dkim=pass (2048-bit key; unprotected) header.d=Nvidia.com header.i=@Nvidia.com header.b="EITobubQ";
 	dkim-atps=neutral
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from PH0PR06CU001.outbound.protection.outlook.com
- (mail-westus3azon11011029.outbound.protection.outlook.com [40.107.208.29])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 613CC10E6EF;
- Wed,  1 Oct 2025 14:54:53 +0000 (UTC)
+Received: from CH1PR05CU001.outbound.protection.outlook.com
+ (mail-northcentralusazon11010049.outbound.protection.outlook.com
+ [52.101.193.49])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 2AF0110E0FA
+ for <nouveau@lists.freedesktop.org>; Wed,  1 Oct 2025 23:47:43 +0000 (UTC)
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=qN853ZQAdmWetc+M3NMZC892kg1haeNJJ5bhLBbCCpiTKT6KDwr1GrtgMNHaPxFUiX4iFp7jOcbdgO+g2kjtS/7TykQXvOV8ZstKrlAU6kwmne+xKRp/tB7TO4GV8930f6rst1OOe07C1UHhhUSJ2exe9Ja9iTazrqEFI33k6QEnL5BtmAUvhIYjeOAVGAs+3bnWMMILrG6elNt4uGyq3nlJa/G1LqTooFMs5dnaWbpjXkoxLJseGINBlgX3vvhFwgHrVyt/SBgY6/khp6PGsigfrAju4JOWHKWLyC/MCCIofHJ4zTAwRSRrYZgYgcHm1Sk98EEql8phD+1rcSArcA==
+ b=TfWA3K93sXPItE+rTZkDzbBtpRkjWzH9rzXSmqdB0xJPYKWJXnd9sTynoxGDsOawAzka8G76zltfaQ/tKITyi4JFcoGn3nf6vJw/izlNcUl7GZEjwx+4aXrL2ACQrlJ5GI7pBqiECCcUsrJ8/ZOrY1i40GoFpCP3fMu5U3Z7xcciUoiAe9m+iOTVLECG2+PTOCZ7dA7T3YOKS2DYVepKD2WBhwcDzACM3Jyper1/BQ4tRBk4IOw1Rkb4PhmlLCCxrFSvUyw/TG3QZ0IIl/w8OCRqsyhc+uDy+gU+61Ti4B2boBYrft65xAS3AjRK6RFmRXzIK0+xhtREWlGI9eHy+A==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
  s=arcselector10001;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=JV/fQ5s8vz+bYZqZ02n58yn3beGK3L4HK2kvws+y3YY=;
- b=kQQycWuVAVjjHGUnwnNlz1HVoLCN5R0dquEbUjcazfdh4MlfZp0rydk1eUu43nFS0WdQ+baAxxLp8WQH9AeKDg/My5vhcgCnhnPp6uf8CRDU0kjGqgCcKVyduPZJDu8KQakrhEYdHxFkoJQsYU3eeBv7D6UnAYpJiP6JAXQUaOXfzI5IZoC/u2ZxGsQASJnHPrAm36xtoi0eFSHZxZxKkH4txUbmiNtKiZXJo9NIH5uxqUJefHvwnxllAIOpWeGkwc2Z4At53u5UsEMxXPt0aeyVaWiEc3tmN28jxki++52TRgjwXNR0h16fviMJR7cvNPqeFedWO+U87+YjgmvAKA==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
- 216.228.117.160) smtp.rcpttodomain=suse.de smtp.mailfrom=nvidia.com;
- dmarc=pass (p=reject sp=reject pct=100) action=none header.from=nvidia.com;
- dkim=none (message not signed); arc=none (0)
+ bh=EFi94AsSPFpLHwoBCvXaeAiPg42davxBpBiFVqOzMbs=;
+ b=E3YQuriVH9RQm/vkwyogzU5en2yZA5URC4EIR4ZHuSpJj/ySQOydFEwCSSjRTvDkwXBslro4nhy2vaAOubpu9caqWCPj4mV0Jl1LMe9HENFUgYyrqBUiyiQxaf9zlYn5RpyYdOLYjogmWJHblbhErp/+OZ/qoxH2QwfATk4dgR8O/PYPCkgDL8JiBombusR+ML3EHeM6jQzvnXIrbA/qSfALQelqPdDNx+wTDXD9mlmLc1MaZ9qiL3xy1kgmiOpmLK0e2ZfbLIjo3abGFo3f+qrzl2AfsLk8SIfNG467DYU2c756G+I6pjoJBXa4svqpo5nzc0OZ1sLBkuhz8gNjBw==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=nvidia.com; dmarc=pass action=none header.from=nvidia.com;
+ dkim=pass header.d=nvidia.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=Nvidia.com;
  s=selector2;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=JV/fQ5s8vz+bYZqZ02n58yn3beGK3L4HK2kvws+y3YY=;
- b=mVxlohFah28x7At527vKtflEK9bpifQM2Zq9igbnlTC0CRYhY5Vrr8PSnEi3HVIgUirG2FEKVvSut6QIgJxTFbS7OWZSv1ZxY2pyiGyBhWf/VjV49jrXjEDxxe+qe0L3jLbe11Oo5FqA2k8Tqs3Ufd78aNmllq6lDYr/QpBJEbimva444tcJ0YhJhbcmSD5IJy1+MmIvQMp7zMi6nED0v0fdIaNAJk2gC0BwOd+V8RMjL0eK9TE0706PGmo++LaV0dtpI8W2HJjkCgKCKpGvA9rBj3/3sJdSfvBEJ0NimxUVrrEWs/tqRFDfZ+chvpqKWTXOpQp03cDNqV9alLsNog==
-Received: from BN9PR03CA0158.namprd03.prod.outlook.com (2603:10b6:408:f4::13)
- by CY1PR12MB9649.namprd12.prod.outlook.com (2603:10b6:930:106::15)
+ bh=EFi94AsSPFpLHwoBCvXaeAiPg42davxBpBiFVqOzMbs=;
+ b=EITobubQFqKZkVWBp73xWqiw1IHo1/ZkgBHGskcN2gjHoLGmWkPg8qGNxmICU+wdKJGuFxY577T37vVJxxBQO/o8d3DKoBE/PNAUXZJLnCczlz0jKNoCgnhSp5uFKE1YulgYcMFOFC0vTtZ4MYqCFJYlVKe3dS9xCdhhyRq/U+RYU3JLvK6vxQbfl85Mwa44sjSKMW4KgAbD0CIqfVtB0yoW5/3jC3zJQtz9WiZaCEit1HlF0cSxbodWAZbfTpB8QgrOylaPxuvh3i9of6uNzOlfCJ9Kd/Fb9I4+GHAo9ZH1O7A8MNdGrGVooxzaWmB+337wBRGOg+wpB7njjC2S3Q==
+Received: from SN7PR12MB8059.namprd12.prod.outlook.com (2603:10b6:806:32b::7)
+ by IA0PR12MB8325.namprd12.prod.outlook.com (2603:10b6:208:407::11)
  with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9160.13; Wed, 1 Oct
- 2025 14:54:47 +0000
-Received: from BL6PEPF0001AB76.namprd02.prod.outlook.com
- (2603:10b6:408:f4:cafe::bc) by BN9PR03CA0158.outlook.office365.com
- (2603:10b6:408:f4::13) with Microsoft SMTP Server (version=TLS1_3,
- cipher=TLS_AES_256_GCM_SHA384) id 15.20.9182.14 via Frontend Transport; Wed,
- 1 Oct 2025 14:54:44 +0000
-X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 216.228.117.160)
- smtp.mailfrom=nvidia.com;
- dkim=none (message not signed)
- header.d=none;dmarc=pass action=none header.from=nvidia.com;
-Received-SPF: Pass (protection.outlook.com: domain of nvidia.com designates
- 216.228.117.160 as permitted sender) receiver=protection.outlook.com;
- client-ip=216.228.117.160; helo=mail.nvidia.com; pr=C
-Received: from mail.nvidia.com (216.228.117.160) by
- BL6PEPF0001AB76.mail.protection.outlook.com (10.167.242.169) with Microsoft
- SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.20.9182.15 via Frontend Transport; Wed, 1 Oct 2025 14:54:44 +0000
-Received: from rnnvmail201.nvidia.com (10.129.68.8) by mail.nvidia.com
- (10.129.200.66) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.1544.34; Wed, 1 Oct
- 2025 07:54:33 -0700
-Received: from [10.221.136.222] (10.126.231.35) by rnnvmail201.nvidia.com
- (10.129.68.8) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.20; Wed, 1 Oct
- 2025 07:54:29 -0700
-Message-ID: <0b5b5188-b24d-486c-8c7a-015848cdb9ce@nvidia.com>
-Date: Wed, 1 Oct 2025 16:53:27 +0200
-MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH] drm/client: Remove holds_console_lock parameter from
- suspend/resume
-To: Thomas Zimmermann <tzimmermann@suse.de>, <alexander.deucher@amd.com>,
- <christian.koenig@amd.com>, <jani.nikula@linux.intel.com>,
- <joonas.lahtinen@linux.intel.com>, <rodrigo.vivi@intel.com>,
- <tursulin@ursulin.net>, <lyude@redhat.com>, <dakr@kernel.org>,
- <lucas.demarchi@intel.com>, <thomas.hellstrom@linux.intel.com>,
- <jfalempe@redhat.com>, <javierm@redhat.com>
-CC: <dri-devel@lists.freedesktop.org>, <amd-gfx@lists.freedesktop.org>,
- <intel-gfx@lists.freedesktop.org>, <nouveau@lists.freedesktop.org>,
- <intel-xe@lists.freedesktop.org>
-References: <20251001121610.367243-1-tzimmermann@suse.de>
- <f0cc9358-98b2-48c4-b080-c16728dcd40b@nvidia.com>
- <eecf1071-55a4-4cbe-bd8e-a00e5ef9b8ce@suse.de>
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9160.18; Wed, 1 Oct
+ 2025 23:47:37 +0000
+Received: from SN7PR12MB8059.namprd12.prod.outlook.com
+ ([fe80::4ee2:654e:1fe8:4b91]) by SN7PR12MB8059.namprd12.prod.outlook.com
+ ([fe80::4ee2:654e:1fe8:4b91%2]) with mapi id 15.20.9160.017; Wed, 1 Oct 2025
+ 23:47:37 +0000
+From: Joel Fernandes <joelagnelf@nvidia.com>
+To: John Hubbard <jhubbard@nvidia.com>
+CC: Danilo Krummrich <dakr@kernel.org>, Zhi Wang <zhiw@nvidia.com>, Alistair
+ Popple <apopple@nvidia.com>, Alexandre Courbot <acourbot@nvidia.com>, Timur
+ Tabi <ttabi@nvidia.com>, Surath Mitra <smitra@nvidia.com>, David Airlie
+ <airlied@gmail.com>, Simona Vetter <simona@ffwll.ch>, Bjorn Helgaas
+ <bhelgaas@google.com>, =?utf-8?B?S3J6eXN6dG9mIFdpbGN6ecWEc2tp?=
+ <kwilczynski@kernel.org>, Miguel Ojeda <ojeda@kernel.org>, Alex Gaynor
+ <alex.gaynor@gmail.com>, Boqun Feng <boqun.feng@gmail.com>, Gary Guo
+ <gary@garyguo.net>, =?utf-8?B?QmrDtnJuIFJveSBCYXJvbg==?=
+ <bjorn3_gh@protonmail.com>, Benno Lossin <lossin@kernel.org>, Andreas
+ Hindborg <a.hindborg@kernel.org>, Alice Ryhl <aliceryhl@google.com>, Trevor
+ Gross <tmgross@umich.edu>, "nouveau@lists.freedesktop.org"
+ <nouveau@lists.freedesktop.org>, "linux-pci@vger.kernel.org"
+ <linux-pci@vger.kernel.org>, "rust-for-linux@vger.kernel.org"
+ <rust-for-linux@vger.kernel.org>, LKML <linux-kernel@vger.kernel.org>, Jason
+ Gunthorpe <jgg@nvidia.com>, Alex Williamson <alex.williamson@redhat.com>
+Subject: Re: [PATCH 0/2] rust: pci: expose is_virtfn() and reject VFs in
+ nova-core
+Thread-Topic: [PATCH 0/2] rust: pci: expose is_virtfn() and reject VFs in
+ nova-core
+Thread-Index: AQHcMlaxgAP9KUZ9sEWkb2Bjoc2DFrSscEuAgAAO2gCAAJltAIAAOAwAgACTD4CAAAOvAIAAAkgAgAANNuk=
+Date: Wed, 1 Oct 2025 23:47:36 +0000
+Message-ID: <1FA2746D-6F73-4D5A-A0DC-803D0563A5D7@nvidia.com>
+References: <20250930220759.288528-1-jhubbard@nvidia.com>
+ <h6jdcfhhf3wuiwwj3bmqp5ohvy7il6sfyp6iufovdswgoz7vul@gjindki2pyeh>
+ <e77bbcda-35a3-4ec6-ac24-316ab34a201a@nvidia.com>
+ <DD6X0PXA0VAO.101O3FEAHJUH9@kernel.org>
+ <f145fd29-e039-4621-b499-17ab55572ea4@nvidia.com>
+ <ae48fad0-d40e-4142-87d0-8205abdf42d6@nvidia.com>
+ <DD7CREVYE5L7.2FALGBC35L8CN@kernel.org>
+ <e19781f3-1451-4b4d-b4be-c71c9ec8dc63@nvidia.com>
+In-Reply-To: <e19781f3-1451-4b4d-b4be-c71c9ec8dc63@nvidia.com>
+Accept-Language: en-US
 Content-Language: en-US
-From: Nirmoy Das <nirmoyd@nvidia.com>
-In-Reply-To: <eecf1071-55a4-4cbe-bd8e-a00e5ef9b8ce@suse.de>
-Content-Type: text/plain; charset="UTF-8"; format=flowed
-Content-Transfer-Encoding: 8bit
-X-Originating-IP: [10.126.231.35]
-X-ClientProxiedBy: rnnvmail203.nvidia.com (10.129.68.9) To
- rnnvmail201.nvidia.com (10.129.68.8)
-X-EOPAttributedMessage: 0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: BL6PEPF0001AB76:EE_|CY1PR12MB9649:EE_
-X-MS-Office365-Filtering-Correlation-Id: 958c7902-68d9-47ca-372f-08de00fa75b2
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0;
- ARA:13230040|1800799024|82310400026|376014|7416014|36860700013|921020|7053199007;
-X-Microsoft-Antispam-Message-Info: =?utf-8?B?bjhvSzhtaTBmSnAza0haM3NlbXRpMmlSS1dvMVprQiswVld3ZzUzZ1NQTTYw?=
- =?utf-8?B?WmxXeFdnZXN2K0JwVlV0aG1ySHhBY1Y3VW5DMWdpeHJaekZUYjNtNE42WVVI?=
- =?utf-8?B?MzMzREpHU0xXUmxvTDZSQWV0QW1KZ255NU0zQ2tqd3FaMlFJdWNCOWUySXE1?=
- =?utf-8?B?QlI2OEM4aDNDaUVzWmFNSW5IZ1Y0ZHdkZ01YSmRKbnZmNFNiZ1hEbzZaZFp3?=
- =?utf-8?B?MUpTeGQwdXVZQ2JzREVSVVhwM0plcFBTM2FVQXZaQzY0T0tCRExJTTlZMnR3?=
- =?utf-8?B?bWp1bG1mQXBkN01hKzJQa3VVWTlWQjhsbU9ZQUxEK3pmSnlTWnQwMTVqc1c5?=
- =?utf-8?B?YTY5bHJHbTRTWmZzRHRCdzg2ZW5sbzZ5K3ZoV0RBcFJtVmZMZ0p2U2hQUTM3?=
- =?utf-8?B?djBFQUhBdkRiWE4rcHZ5aURmS2JTV0drVzZGdll4dkM2VFNpcUFPNWZPdXRm?=
- =?utf-8?B?dGk2ZGFzbHVia3NmZWZyb2ZkSWwveFhoYWVWTmU2VmF2K1hMbkd5TmxRTDJT?=
- =?utf-8?B?cFBnZ3JVeTFPWjYrSTdncjc0cW5SZGMvNUl2UjdZb1FqdmdFYk1pODFJV09k?=
- =?utf-8?B?RlNDNVpLbjdObWxZWGRPajBZaG1keSs4L29kbG1YTjZMemQvYktsSlYrbHhv?=
- =?utf-8?B?WXp5elp4N1k2cGVmY0t4czlwT3pmWWpMeTZOMllqd05DaVBSV2hzLytFVHdh?=
- =?utf-8?B?QzZYTmJoTzNXbG52VnJZKzZrS3QwaUgrRG9nSTcxcGxQcjJtY2NqdlcyaDVP?=
- =?utf-8?B?eUJkOE1Temp1SzF3NGN6UHJLTFNQNDBKN2Uxc2dzZlp3czM2R1VZclB2M3JP?=
- =?utf-8?B?WFVxektkUDY5TVpVTGpPT0xHNVRpYWlLRC8ycUZwaEhxakN3b0V0bEpNaThW?=
- =?utf-8?B?cnF1a25SMnl5WlhBcVRXU3dGWjJ2bHgwOGxYV0Q2R1NCZm04S1ozOGdIZ3hV?=
- =?utf-8?B?L1JGeFViVjdrL1JWdnlSZ2tVOTVzNkdDQ2lPWVdVcDhiRzZZVkxiRUJkUmVD?=
- =?utf-8?B?bTFLeE1oQlFwU0NIUndjbzA4MEdDYU1qdWRmNFdFeHNteXBldlc0NmdKTEE2?=
- =?utf-8?B?ZnNMNEZUODJKR2E3L1ExQ1BNaU5lUFVmRkxKUkdPWFVKbUtpN1FBSE5XOXdm?=
- =?utf-8?B?d3gxWEFvSkd4MHJTUS81UnlRN0xTWm0rUmFWVjRERWlpSVBueXhaamFWZGZk?=
- =?utf-8?B?aXR6dWJkSEVUMUI3aXlUWW4yWGRLYzBCTndKMDIxcTZaemk0LzZ2c3JVaTcv?=
- =?utf-8?B?Rjl0WEk1V3JGU0d2OUlCSUN2eXdOMXJZamtZd0NLcWJ4cGJsNTdMY0UyRzVz?=
- =?utf-8?B?N3RrOGRYbGg1cnVWU0JVM0lZRkFmZW9zUkdQTnNUMzg1ZFg4d2s4cXZoVERl?=
- =?utf-8?B?dmZwZzhCMlFPL01oMDF3Zi9RdmhndXRRWVdXcnhnY1EzcHZzdjVSdCtMVHUv?=
- =?utf-8?B?dnRuTVBncCs5UjJsVy9JdEw1UXVwdnpuenQ5bGExdjN0KzdYT3VpSXNtQXFI?=
- =?utf-8?B?cU9NOHRjRDBlMThkem1yWS9GSVdYUWtkL1JGc3BodUcvSGFyRDFwWEt1ejhp?=
- =?utf-8?B?OVhFa1dhYlpZRXhPNGpxK2kweTFHdTJiQ0lObEpYVndyMFhFOWVyUzhjRGRv?=
- =?utf-8?B?RXlaUVc2ZXpQMGVldEhFRFIvOFVEWEVjcTQ0cUw0WWxFTThNcE5pVUs0U0N1?=
- =?utf-8?B?RWpvU2dBcWdSb2lFR2JGdXZJTjBBRkNTbytOUUFEczdwV2JuTnlDbnU0VUtR?=
- =?utf-8?B?N1RtamVIZTNyV2xvWmVGUXliT1BYS0l3Vk1mUitua1JVeXRKbW1pUkJXd2Ur?=
- =?utf-8?B?Vmg1clpsMUVsZG5WR1pFVmtQeFJuYVRGb0hJYVhjV3FQYmJmTFVEdEJLeUI5?=
- =?utf-8?B?NTNWWnlNVnhDQU5ieDRFdmc1Rm0vYjhadHR6YmR2bWRzTnZZZmxnbzJlSEE3?=
- =?utf-8?B?elVVNXE4c1JmT3hjMmJmWHZCdXhLb2RWek1HbEZOOWRDQzBLUzUrdjBiZUt2?=
- =?utf-8?B?RWVyeHNDUHdFWFVhZ01PeVpka1lydjZYdHB1dGQ5ZWFDUjY4TXNvVkVrRTdN?=
- =?utf-8?B?OVF2UTRRWHkrNFRYL0h4ampJRTNYak9mZ0ptelc3Rk0xbmJWNkc1SkV0cVhK?=
- =?utf-8?Q?yjwiCdtjChxqWVeVORXavfkCj?=
-X-Forefront-Antispam-Report: CIP:216.228.117.160; CTRY:US; LANG:en; SCL:1; SRV:;
- IPV:NLI; SFV:NSPM; H:mail.nvidia.com; PTR:dc6edge1.nvidia.com; CAT:NONE;
- SFS:(13230040)(1800799024)(82310400026)(376014)(7416014)(36860700013)(921020)(7053199007);
- DIR:OUT; SFP:1101; 
+X-MS-Has-Attach: 
+X-MS-TNEF-Correlator: 
+authentication-results: dkim=none (message not signed)
+ header.d=none;dmarc=none action=none header.from=nvidia.com;
+x-ms-publictraffictype: Email
+x-ms-traffictypediagnostic: SN7PR12MB8059:EE_|IA0PR12MB8325:EE_
+x-ms-office365-filtering-correlation-id: 485eccdb-5f99-4456-d6cb-08de0144e67b
+x-ms-exchange-senderadcheck: 1
+x-ms-exchange-antispam-relay: 0
+x-microsoft-antispam: BCL:0;
+ ARA:13230040|1800799024|366016|376014|7416014|38070700021; 
+x-microsoft-antispam-message-info: =?utf-8?B?ZFovY2EyT1JOYUVTQm5raVp3VEJYMHVEVklqblBsQ3VxUlJkYkxTSklGbkRM?=
+ =?utf-8?B?Ni9KV21Idkk3MTRJdzRDSWtic1gzSXlxVDY5NExYaFErRFBkM3Z5N2ppZWYx?=
+ =?utf-8?B?UUlFOE8xQlFWbmprQlB4ZEhrZkpPSllVbWtCVk92YXBEbWd4Tm1GclNtSnJ5?=
+ =?utf-8?B?MnhSRjAzUWdNZndwZ0t5Y0FYM0pFQTRvNFNmbldBYm9JNkdnWStLOWF0Qmlr?=
+ =?utf-8?B?bmNpMWdwTk1kTHJ6T2o5dVlNWjJXNFhWeTdBdnJ6d04vZHB3ZFRsMFBuRTJ1?=
+ =?utf-8?B?ckk2S3dsekVPajdtMmdVUy92RHlMMnRHOXhuWmt5VFozTFpEdzMvUHJPS0pP?=
+ =?utf-8?B?S2ducG1ZdER1anNMcFBnYktOT055d0gxT2FqOG1RWEc0T2JtZ2dVb0Y3Uy9V?=
+ =?utf-8?B?YWVENUlDay9zeGtKUXMrMCtHM3FSNFBVSVJYcXVWZlF1dUVvelZsNVJQMzV3?=
+ =?utf-8?B?SXdxTTdqSGova2FKQVB6SENRdm95LzZRQWdHWFJHV3NGeUJoWHhOOXY1aGwz?=
+ =?utf-8?B?UW91angrWWRPT1Vwa1U1ZUZORmFUa2MzL2xiRnR6V0NPKzlSSmZFOEpKek9Q?=
+ =?utf-8?B?WHJoSDk1U1dySjh3bzhpQVozYW9KZlRJU0dEaWk4aE5paW1FUnNDdGsrcy9J?=
+ =?utf-8?B?ZUhyb0dDb0RJTUNVZjBYbXQrWVRXa2svbDZxYkNsdUpEVkJLdkwxVlF0ek9a?=
+ =?utf-8?B?N0ZtN2FJNFYwOStvNC9EUFZHOThhRTBiM0Q1UW9oQUZNOHl2b0c3bzVRVzF2?=
+ =?utf-8?B?eGY1OG1GNlhsSUl1Nmsrc3NmMG1rMjRDZUhHUEl3V1VvT3ROSytPMmkwTG5t?=
+ =?utf-8?B?K1BHZSswZnN2bHFRYlB3Tnc0YzErRllSejJ4Z3VNdm90WWtvNjczMVd6cUxL?=
+ =?utf-8?B?Mk55bG5sL1U5NzVhckVkckdtbDJxc3lrd2lTZ1F5TDFUS05XNWozZW1yVVls?=
+ =?utf-8?B?NlZpSXN6M1pZS1Y2Y0g5bjdLMEtHazYzclcrUGl6YnRRY0NBT2k0emVHeUNq?=
+ =?utf-8?B?SkxHUzBQWEpRRlZlU0hPWUtaejVZWHIzMVlBTFQwNDJLZitBQk0xRHFyOWx1?=
+ =?utf-8?B?SWxWOCtjRTZ5M3hwUXVvR1hBMGp4aVZndG5UVkk1Nm4zMWZONi8rUDl0c05K?=
+ =?utf-8?B?K1Y0WEV5UHFMREtJSkk0QUhhTWNaazgyVE82bVRXOEZGV2FzUEIzamR3V2Ey?=
+ =?utf-8?B?bEhDSTlPMlhQbnVzQktreFVzVHMwRGRDaVU1NVlkS0RoUVpLNS9uQmVONjNV?=
+ =?utf-8?B?REZFYmZSbHFVeGdMQVJzandxWnE2NmRRUzdtMTJlU0laU0NvU2NMTEw3Vyts?=
+ =?utf-8?B?VFBVeTJqdThGQ1RicDUrSXVPUWNFSkZGWDcxbjk4WDkxMUVMemU1YnV3VEc2?=
+ =?utf-8?B?S0MyclhjMC8yQnB5NUpySW1BRUhqc2FHeU95U25UcWordGpOZ1psV3hZV0dy?=
+ =?utf-8?B?bC9uSmcrMmkrejhGUlBjeTJtakl3d2pRdnZnZzhzY0NpcUlxVFU1YXFOdHFS?=
+ =?utf-8?B?d05qRUlzaDZhZThiSDJWRHZPV2dWUzhVOVhjdEI2cDY2MG1qb1RYanZIcm1h?=
+ =?utf-8?B?RlBXcjdJeVd4aTVhalFJTVYzVjhoM0tCOTVaZmNsUGJNMnZ5K3NnbEVqWXVV?=
+ =?utf-8?B?bXZMVTZrMzloL24wODN1c0poYjlYREY1MFFKSjJHL3ZSRTdmL1RJS0ROcG1p?=
+ =?utf-8?B?ekwzR2p5Y3FRWEEvRkRNWUVwWlRSaHVnT1lSbHo3R3FlRzlGNC9KTTlWUVc5?=
+ =?utf-8?B?bXVvZlliMExKcU9IUHE2eTZsUHNmUFYvbnZ4SlZONnJrdVFxa3NBSHROVjBU?=
+ =?utf-8?B?d0l5WDg4R1gycDd4TWRBN0J5YVBsZGpma1d1OWJjbGdJWU16TjVRY0VwWVov?=
+ =?utf-8?B?dGs4MUNjWVVnZG1oZEhQNkEzN2FwVVRETU5BSFAyb3c1aG5GbWIrT1o4Ujh4?=
+ =?utf-8?B?N1dTN1hQc0RSVS9UNStDMmx4Z1RrcUFXOWJjYU9lRTFhOGZBbEU4TklhekZJ?=
+ =?utf-8?B?RkpsTU93T3RMU1dJVEc1OVpVOEZSMTYrRDRhLzkvK0JObmc3OUh0dGdMUlFq?=
+ =?utf-8?Q?HdO7U7?=
+x-forefront-antispam-report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
+ IPV:NLI; SFV:NSPM; H:SN7PR12MB8059.namprd12.prod.outlook.com; PTR:; CAT:NONE;
+ SFS:(13230040)(1800799024)(366016)(376014)(7416014)(38070700021); DIR:OUT;
+ SFP:1101; 
+x-ms-exchange-antispam-messagedata-chunkcount: 1
+x-ms-exchange-antispam-messagedata-0: =?utf-8?B?SWJsZG96M1k4dTFQYmRwdnlqUkhZT0tCK0VTb0NBcSt4YXd2RWo3b2RHMU44?=
+ =?utf-8?B?M3k0b05hclBTS3dEQUdIdnd0REdkTFJBc0dyRmRqekpzdW1sMUJ4SFFlVVpa?=
+ =?utf-8?B?OXJCc0h0UEl6TFA0cXVVWTNpdWtwalN5VWVDMmdRRW5ra1BFT2ZDVDhRQVJ1?=
+ =?utf-8?B?NjBNVEVuV1J0ZnNVY2dmZnE3TVk1WXpkR2k1a3QwZG95ZzBZYmZWQU9xUkdL?=
+ =?utf-8?B?K3d4cFoyMUVqaGNFVG1WSldvb1ZCYzdlTmlpbDh2SzJ1cU5GQnBVYThaTTh3?=
+ =?utf-8?B?TWJpNU1KMHN1cVIwWjRLRWJwNk1OaEJVWGlTZnlhU3lpbEpzSlB5cnNqL3V4?=
+ =?utf-8?B?THg0OHNreGdITXlCNmc1U0NoL2ZNK0ttbmJQcmtiby92U3lQK0RRTGpsa01v?=
+ =?utf-8?B?aStCckkrVXN0T09WQnBFOXVnWmw3b1FiSnQ4Z3dYWU5TQ1pWZU5zb0FmeXdw?=
+ =?utf-8?B?U01IWkxYSEgyYWFGK3dPY0R3V2kvdUg3eXEyclZuMTBRSnUrbUF1R2ZqWGlD?=
+ =?utf-8?B?VkdXdjgzNmdtcHZad3ZDT090MjE3OFJ5RmhxTXdtWnRXYkpGa1VLOElTaHNT?=
+ =?utf-8?B?dVpNOGIrOVlBckFXK2hFVXI2ampraWNYK1dkVlQ5YXhLZEtHazJub0xoaGdU?=
+ =?utf-8?B?RVFYRDRlbXhqVnROQzZHeHB2QnordzFDc3BLTEtOZVk5czJFNUJ0dUc1blMv?=
+ =?utf-8?B?anV6YXRIb2ZobjVKQkxnQ3duaFJLS21yd3ZYMmN2U2tiLzdldFk1dERDQ3JT?=
+ =?utf-8?B?a2FyMHNZU3NUeVdSdEpibklZd3d3Z3JkcitnR2lsYk9qZHJvbDlLQjNMYmtn?=
+ =?utf-8?B?Njk1L0JJL3VYNm50MEEwU3hWSTdnWktscklrdTZ1VVZKSWhDUXpZcCtPSU1C?=
+ =?utf-8?B?VExzUm5lWEdST2FwWGFpd0xadS8xZ3RXWkFNRzM2blQwSHNTZzFicVc5c3cr?=
+ =?utf-8?B?VzMyaVkyZlFwQ0kxUDRGZjVTM1REUnVueVg5bWlqbGlkVnZOSE1yUkQ1Nk9I?=
+ =?utf-8?B?eVZVY0Y3L3lLQVB4TEJUOGF0elhaK2U3YkhRQ2ExdmlZeGx2MG5ld0ZxSnZ4?=
+ =?utf-8?B?S3E0elhtUjBvLytBV20wVGtOME9HYmpKb3hTSnNwUkhUM2tCYzBkcDRISkN3?=
+ =?utf-8?B?a2lsd2VUcHhENEdobzJDOW4yRE0wRURlTmZ5RnBmdEFGMTQwL3Ywd3p4NEN2?=
+ =?utf-8?B?OWpTUVNHa2xVTUhjYUh1Yi82ZWJUSDVySUJVYTZrMUZzN1JlZG03dUJtMWZ1?=
+ =?utf-8?B?d3BOTFE0YzcxY20xT3JIYk05WTBWd083L2V3UXJ4VFJsN2ZNVnZURE16NS9V?=
+ =?utf-8?B?ZCt5dCtUeHBkZ040d05EUllIMGQ5ZUtySENCSjRhejdRdnN4LzYwcGZEV3dL?=
+ =?utf-8?B?cWI2bE1TUGo5cUQzVmp0MWVNbFAwS2xzSkZrZ0pkTmhqa29mNWVJaW5oaGZu?=
+ =?utf-8?B?N2JaeDd5cmp3ZVRHaGVkK3VLSHE4NFVranFScVdTTGczTnc2YnB3ZlRZTHpX?=
+ =?utf-8?B?cU1GSkVzcFhUMlNxUVhmWDVGd0dRMGFBTHNwcjNrMkY2UHhrN2tBR2RiTmly?=
+ =?utf-8?B?b0NiYzRYSmJHRmY1cWx3VG5WZmhuMXFUN0J4WERLNk1aWVhnZ3M1dTJocFBH?=
+ =?utf-8?B?VURSNm9yT3NJMnlOUXN0VSttTU9TQnp0R29ybURiUW9sOGg2aTB6azlXR01v?=
+ =?utf-8?B?WkthWkZVdHhxN0tpTzBITm1uTWcxUlg5THpYTngycmN5ZGhuN05OK1dXRHlP?=
+ =?utf-8?B?blNCdEw5Q3pwSU56S2gwTnR1eDdYUVdEWXRveWJvNU1NdjJieElQUzFiUDNQ?=
+ =?utf-8?B?ZEozNWYrUFJCdG45M0dYZ0FITFpiUVJDWjdDa0RoMlA3MVBrUFl0OStTQ0g5?=
+ =?utf-8?B?VTlUME1BcmlZYUVINXd3VFRGc3JzUHkwUmJ6Zit1cHBGek1iaUltMnFGbnlW?=
+ =?utf-8?B?Mk5ZcENwN0hSaEpPYzZoWGx6TEJHTFZqd2pYS09CUEF1YlRkVTBRZ2xNOWVH?=
+ =?utf-8?B?NzJpNUQ0THBXdGUvalprV3oxMTFTakNDVGFWUlpEeHNrSEM1SGxhaDYyNnNN?=
+ =?utf-8?B?Wk5GdFNSbkJCMGRqTXdHN2dhS29HOU02R3EwL2N2UzJNbnJ0TFhyOW54a2Rs?=
+ =?utf-8?Q?VD3/u8DWjR9pG6OZOoWaTYWBz?=
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: base64
+MIME-Version: 1.0
 X-OriginatorOrg: Nvidia.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 01 Oct 2025 14:54:44.8115 (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: 958c7902-68d9-47ca-372f-08de00fa75b2
-X-MS-Exchange-CrossTenant-Id: 43083d15-7273-40c1-b7db-39efd9ccc17a
-X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=43083d15-7273-40c1-b7db-39efd9ccc17a; Ip=[216.228.117.160];
- Helo=[mail.nvidia.com]
-X-MS-Exchange-CrossTenant-AuthSource: BL6PEPF0001AB76.namprd02.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Anonymous
-X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: CY1PR12MB9649
-X-Mailman-Approved-At: Mon, 06 Oct 2025 20:47:09 +0000
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-AuthSource: SN7PR12MB8059.namprd12.prod.outlook.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: 485eccdb-5f99-4456-d6cb-08de0144e67b
+X-MS-Exchange-CrossTenant-originalarrivaltime: 01 Oct 2025 23:47:36.8853 (UTC)
+X-MS-Exchange-CrossTenant-fromentityheader: Hosted
+X-MS-Exchange-CrossTenant-id: 43083d15-7273-40c1-b7db-39efd9ccc17a
+X-MS-Exchange-CrossTenant-mailboxtype: HOSTED
+X-MS-Exchange-CrossTenant-userprincipalname: w8nVxCsB3S0xIKrHCdPK9mYEcKx08u05//j0Kxj/PfQJVZW8LS5ZucQDnlQ+AjbdNfU5bZae0iQgBpiSapziOQ==
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: IA0PR12MB8325
+X-Mailman-Approved-At: Mon, 06 Oct 2025 20:46:17 +0000
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -160,391 +191,43 @@ List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-
-On 01.10.25 16:39, Thomas Zimmermann wrote:
-> Hi
->
-> Am 01.10.25 um 14:46 schrieb Nirmoy Das:
->>
->> On 01.10.25 14:15, Thomas Zimmermann wrote:
->>> No caller of the client resume/suspend helpers holds the console
->>> lock. The last such cases were removed from radeon in the patch
->>> series at [1]. Now remove the related parameter and the TODO items.
->>>
->>> Signed-off-by: Thomas Zimmermann <tzimmermann@suse.de>
->>> Link: https://patchwork.freedesktop.org/series/151624/ # [1]
->> Acked-by: Nirmoy Das <nirmoyd@nvidia.com>
->
-> Thanks. I sent out an update that addresses the CI issue before seeing 
-> your a-b, but it will be included when the patch lands.
-
-No worries. I was about to resend my a-b to the v2. My a-b remains same 
-for the v2 as well.
-
-
-Thanks,
-
-Nirmoy
-
-
->
-> Best regards
-> Thomas
->
->>> ---
->>> This patch would preferably be merged through drm-misc.
->>> ---
->>>   drivers/gpu/drm/amd/amdgpu/amdgpu_device.c |  8 ++++----
->>>   drivers/gpu/drm/clients/drm_fbdev_client.c | 14 ++++----------
->>>   drivers/gpu/drm/clients/drm_log.c          |  4 ++--
->>>   drivers/gpu/drm/drm_client_event.c         | 16 ++++++++--------
->>>   drivers/gpu/drm/drm_modeset_helper.c       |  6 +++---
->>>   drivers/gpu/drm/i915/i915_driver.c         |  6 +++---
->>>   drivers/gpu/drm/nouveau/nouveau_display.c  |  4 ++--
->>>   drivers/gpu/drm/radeon/radeon_device.c     |  4 ++--
->>>   drivers/gpu/drm/xe/display/xe_display.c    |  6 +++---
->>>   include/drm/drm_client.h                   | 14 ++------------
->>>   include/drm/drm_client_event.h             |  4 ++--
->>>   11 files changed, 35 insertions(+), 51 deletions(-)
->>>
->>> diff --git a/drivers/gpu/drm/amd/amdgpu/amdgpu_device.c 
->>> b/drivers/gpu/drm/amd/amdgpu/amdgpu_device.c
->>> index a77000c2e0bb..f068e26d5080 100644
->>> --- a/drivers/gpu/drm/amd/amdgpu/amdgpu_device.c
->>> +++ b/drivers/gpu/drm/amd/amdgpu/amdgpu_device.c
->>> @@ -5212,7 +5212,7 @@ int amdgpu_device_suspend(struct drm_device 
->>> *dev, bool notify_clients)
->>>           dev_warn(adev->dev, "smart shift update failed\n");
->>>         if (notify_clients)
->>> -        drm_client_dev_suspend(adev_to_drm(adev), false);
->>> +        drm_client_dev_suspend(adev_to_drm(adev));
->>> cancel_delayed_work_sync(&adev->delayed_init_work);
->>>   @@ -5346,7 +5346,7 @@ int amdgpu_device_resume(struct drm_device 
->>> *dev, bool notify_clients)
->>>       flush_delayed_work(&adev->delayed_init_work);
->>>         if (notify_clients)
->>> -        drm_client_dev_resume(adev_to_drm(adev), false);
->>> +        drm_client_dev_resume(adev_to_drm(adev));
->>>         amdgpu_ras_resume(adev);
->>>   @@ -5951,7 +5951,7 @@ int amdgpu_device_reinit_after_reset(struct 
->>> amdgpu_reset_context *reset_context)
->>>                   if (r)
->>>                       goto out;
->>>   - drm_client_dev_resume(adev_to_drm(tmp_adev), false);
->>> +                drm_client_dev_resume(adev_to_drm(tmp_adev));
->>>                     /*
->>>                    * The GPU enters bad state once faulty pages
->>> @@ -6286,7 +6286,7 @@ static void 
->>> amdgpu_device_halt_activities(struct amdgpu_device *adev,
->>>            */
->>>           amdgpu_unregister_gpu_instance(tmp_adev);
->>>   -        drm_client_dev_suspend(adev_to_drm(tmp_adev), false);
->>> +        drm_client_dev_suspend(adev_to_drm(tmp_adev));
->>>             /* disable ras on ALL IPs */
->>>           if (!need_emergency_restart && !amdgpu_reset_in_dpc(adev) &&
->>> diff --git a/drivers/gpu/drm/clients/drm_fbdev_client.c 
->>> b/drivers/gpu/drm/clients/drm_fbdev_client.c
->>> index f894ba52bdb5..ec5ab9f30547 100644
->>> --- a/drivers/gpu/drm/clients/drm_fbdev_client.c
->>> +++ b/drivers/gpu/drm/clients/drm_fbdev_client.c
->>> @@ -62,26 +62,20 @@ static int drm_fbdev_client_hotplug(struct 
->>> drm_client_dev *client)
->>>       return ret;
->>>   }
->>>   -static int drm_fbdev_client_suspend(struct drm_client_dev 
->>> *client, bool holds_console_lock)
->>> +static int drm_fbdev_client_suspend(struct drm_client_dev *client)
->>>   {
->>>       struct drm_fb_helper *fb_helper = 
->>> drm_fb_helper_from_client(client);
->>>   -    if (holds_console_lock)
->>> -        drm_fb_helper_set_suspend(fb_helper, true);
->>> -    else
->>> -        drm_fb_helper_set_suspend_unlocked(fb_helper, true);
->>> +    drm_fb_helper_set_suspend_unlocked(fb_helper, true);
->>>         return 0;
->>>   }
->>>   -static int drm_fbdev_client_resume(struct drm_client_dev *client, 
->>> bool holds_console_lock)
->>> +static int drm_fbdev_client_resume(struct drm_client_dev *client)
->>>   {
->>>       struct drm_fb_helper *fb_helper = 
->>> drm_fb_helper_from_client(client);
->>>   -    if (holds_console_lock)
->>> -        drm_fb_helper_set_suspend(fb_helper, false);
->>> -    else
->>> -        drm_fb_helper_set_suspend_unlocked(fb_helper, false);
->>> +    drm_fb_helper_set_suspend_unlocked(fb_helper, false);
->>>         return 0;
->>>   }
->>> diff --git a/drivers/gpu/drm/clients/drm_log.c 
->>> b/drivers/gpu/drm/clients/drm_log.c
->>> index d239f1e3c456..fd8556dd58ed 100644
->>> --- a/drivers/gpu/drm/clients/drm_log.c
->>> +++ b/drivers/gpu/drm/clients/drm_log.c
->>> @@ -319,7 +319,7 @@ static int drm_log_client_hotplug(struct 
->>> drm_client_dev *client)
->>>       return 0;
->>>   }
->>>   -static int drm_log_client_suspend(struct drm_client_dev *client, 
->>> bool _console_lock)
->>> +static int drm_log_client_suspend(struct drm_client_dev *client)
->>>   {
->>>       struct drm_log *dlog = client_to_drm_log(client);
->>>   @@ -328,7 +328,7 @@ static int drm_log_client_suspend(struct 
->>> drm_client_dev *client, bool _console_l
->>>       return 0;
->>>   }
->>>   -static int drm_log_client_resume(struct drm_client_dev *client, 
->>> bool _console_lock)
->>> +static int drm_log_client_resume(struct drm_client_dev *client)
->>>   {
->>>       struct drm_log *dlog = client_to_drm_log(client);
->>>   diff --git a/drivers/gpu/drm/drm_client_event.c 
->>> b/drivers/gpu/drm/drm_client_event.c
->>> index c83196ad8b59..c3baeb4d4e6b 100644
->>> --- a/drivers/gpu/drm/drm_client_event.c
->>> +++ b/drivers/gpu/drm/drm_client_event.c
->>> @@ -122,7 +122,7 @@ void drm_client_dev_restore(struct drm_device *dev)
->>>       mutex_unlock(&dev->clientlist_mutex);
->>>   }
->>>   -static int drm_client_suspend(struct drm_client_dev *client, bool 
->>> holds_console_lock)
->>> +static int drm_client_suspend(struct drm_client_dev *client)
->>>   {
->>>       struct drm_device *dev = client->dev;
->>>       int ret = 0;
->>> @@ -131,7 +131,7 @@ static int drm_client_suspend(struct 
->>> drm_client_dev *client, bool holds_console_
->>>           return 0;
->>>         if (client->funcs && client->funcs->suspend)
->>> -        ret = client->funcs->suspend(client, holds_console_lock);
->>> +        ret = client->funcs->suspend(client);
->>>       drm_dbg_kms(dev, "%s: ret=%d\n", client->name, ret);
->>>         client->suspended = true;
->>> @@ -139,20 +139,20 @@ static int drm_client_suspend(struct 
->>> drm_client_dev *client, bool holds_console_
->>>       return ret;
->>>   }
->>>   -void drm_client_dev_suspend(struct drm_device *dev, bool 
->>> holds_console_lock)
->>> +void drm_client_dev_suspend(struct drm_device *dev)
->>>   {
->>>       struct drm_client_dev *client;
->>>         mutex_lock(&dev->clientlist_mutex);
->>>       list_for_each_entry(client, &dev->clientlist, list) {
->>>           if (!client->suspended)
->>> -            drm_client_suspend(client, holds_console_lock);
->>> +            drm_client_suspend(client);
->>>       }
->>>       mutex_unlock(&dev->clientlist_mutex);
->>>   }
->>>   EXPORT_SYMBOL(drm_client_dev_suspend);
->>>   -static int drm_client_resume(struct drm_client_dev *client, bool 
->>> holds_console_lock)
->>> +static int drm_client_resume(struct drm_client_dev *client)
->>>   {
->>>       struct drm_device *dev = client->dev;
->>>       int ret = 0;
->>> @@ -161,7 +161,7 @@ static int drm_client_resume(struct 
->>> drm_client_dev *client, bool holds_console_l
->>>           return 0;
->>>         if (client->funcs && client->funcs->resume)
->>> -        ret = client->funcs->resume(client, holds_console_lock);
->>> +        ret = client->funcs->resume(client);
->>>       drm_dbg_kms(dev, "%s: ret=%d\n", client->name, ret);
->>>         client->suspended = false;
->>> @@ -172,14 +172,14 @@ static int drm_client_resume(struct 
->>> drm_client_dev *client, bool holds_console_l
->>>       return ret;
->>>   }
->>>   -void drm_client_dev_resume(struct drm_device *dev, bool 
->>> holds_console_lock)
->>> +void drm_client_dev_resume(struct drm_device *dev)
->>>   {
->>>       struct drm_client_dev *client;
->>>         mutex_lock(&dev->clientlist_mutex);
->>>       list_for_each_entry(client, &dev->clientlist, list) {
->>>           if  (client->suspended)
->>> -            drm_client_resume(client, holds_console_lock);
->>> +            drm_client_resume(client);
->>>       }
->>>       mutex_unlock(&dev->clientlist_mutex);
->>>   }
->>> diff --git a/drivers/gpu/drm/drm_modeset_helper.c 
->>> b/drivers/gpu/drm/drm_modeset_helper.c
->>> index 988735560570..a57f6a10ada4 100644
->>> --- a/drivers/gpu/drm/drm_modeset_helper.c
->>> +++ b/drivers/gpu/drm/drm_modeset_helper.c
->>> @@ -203,10 +203,10 @@ int drm_mode_config_helper_suspend(struct 
->>> drm_device *dev)
->>>       if (dev->mode_config.poll_enabled)
->>>           drm_kms_helper_poll_disable(dev);
->>>   -    drm_client_dev_suspend(dev, false);
->>> +    drm_client_dev_suspend(dev);
->>>       state = drm_atomic_helper_suspend(dev);
->>>       if (IS_ERR(state)) {
->>> -        drm_client_dev_resume(dev, false);
->>> +        drm_client_dev_resume(dev);
->>>             /*
->>>            * Don't enable polling if it was never initialized
->>> @@ -252,7 +252,7 @@ int drm_mode_config_helper_resume(struct 
->>> drm_device *dev)
->>>           DRM_ERROR("Failed to resume (%d)\n", ret);
->>>       dev->mode_config.suspend_state = NULL;
->>>   -    drm_client_dev_resume(dev, false);
->>> +    drm_client_dev_resume(dev);
->>>         /*
->>>        * Don't enable polling if it is not initialized
->>> diff --git a/drivers/gpu/drm/i915/i915_driver.c 
->>> b/drivers/gpu/drm/i915/i915_driver.c
->>> index 95165e45de74..162e50315beb 100644
->>> --- a/drivers/gpu/drm/i915/i915_driver.c
->>> +++ b/drivers/gpu/drm/i915/i915_driver.c
->>> @@ -978,7 +978,7 @@ void i915_driver_shutdown(struct 
->>> drm_i915_private *i915)
->>>       intel_runtime_pm_disable(&i915->runtime_pm);
->>>       intel_power_domains_disable(display);
->>>   -    drm_client_dev_suspend(&i915->drm, false);
->>> +    drm_client_dev_suspend(&i915->drm);
->>>       if (intel_display_device_present(display)) {
->>>           drm_kms_helper_poll_disable(&i915->drm);
->>>           intel_display_driver_disable_user_access(display);
->>> @@ -1060,7 +1060,7 @@ static int i915_drm_suspend(struct drm_device 
->>> *dev)
->>>       /* We do a lot of poking in a lot of registers, make sure they 
->>> work
->>>        * properly. */
->>>       intel_power_domains_disable(display);
->>> -    drm_client_dev_suspend(dev, false);
->>> +    drm_client_dev_suspend(dev);
->>>       if (intel_display_device_present(display)) {
->>>           drm_kms_helper_poll_disable(dev);
->>>           intel_display_driver_disable_user_access(display);
->>> @@ -1257,7 +1257,7 @@ static int i915_drm_resume(struct drm_device 
->>> *dev)
->>>         intel_opregion_resume(display);
->>>   -    drm_client_dev_resume(dev, false);
->>> +    drm_client_dev_resume(dev);
->>>         intel_power_domains_enable(display);
->>>   diff --git a/drivers/gpu/drm/nouveau/nouveau_display.c 
->>> b/drivers/gpu/drm/nouveau/nouveau_display.c
->>> index 54aed3656a4c..00515623a2cc 100644
->>> --- a/drivers/gpu/drm/nouveau/nouveau_display.c
->>> +++ b/drivers/gpu/drm/nouveau/nouveau_display.c
->>> @@ -765,7 +765,7 @@ nouveau_display_suspend(struct drm_device *dev, 
->>> bool runtime)
->>>   {
->>>       struct nouveau_display *disp = nouveau_display(dev);
->>>   -    drm_client_dev_suspend(dev, false);
->>> +    drm_client_dev_suspend(dev);
->>>         if (drm_drv_uses_atomic_modeset(dev)) {
->>>           if (!runtime) {
->>> @@ -796,7 +796,7 @@ nouveau_display_resume(struct drm_device *dev, 
->>> bool runtime)
->>>           }
->>>       }
->>>   -    drm_client_dev_resume(dev, false);
->>> +    drm_client_dev_resume(dev);
->>>   }
->>>     int
->>> diff --git a/drivers/gpu/drm/radeon/radeon_device.c 
->>> b/drivers/gpu/drm/radeon/radeon_device.c
->>> index 9e35b14e2bf0..60afaa8e56b4 100644
->>> --- a/drivers/gpu/drm/radeon/radeon_device.c
->>> +++ b/drivers/gpu/drm/radeon/radeon_device.c
->>> @@ -1635,7 +1635,7 @@ int radeon_suspend_kms(struct drm_device *dev, 
->>> bool suspend,
->>>       }
->>>         if (notify_clients)
->>> -        drm_client_dev_suspend(dev, false);
->>> +        drm_client_dev_suspend(dev);
->>>         return 0;
->>>   }
->>> @@ -1739,7 +1739,7 @@ int radeon_resume_kms(struct drm_device *dev, 
->>> bool resume, bool notify_clients)
->>>           radeon_pm_compute_clocks(rdev);
->>>         if (notify_clients)
->>> -        drm_client_dev_resume(dev, false);
->>> +        drm_client_dev_resume(dev);
->>>         return 0;
->>>   }
->>> diff --git a/drivers/gpu/drm/xe/display/xe_display.c 
->>> b/drivers/gpu/drm/xe/display/xe_display.c
->>> index 19e691fccf8c..d3cc6181842c 100644
->>> --- a/drivers/gpu/drm/xe/display/xe_display.c
->>> +++ b/drivers/gpu/drm/xe/display/xe_display.c
->>> @@ -324,7 +324,7 @@ void xe_display_pm_suspend(struct xe_device *xe)
->>>        * properly.
->>>        */
->>>       intel_power_domains_disable(display);
->>> -    drm_client_dev_suspend(&xe->drm, false);
->>> +    drm_client_dev_suspend(&xe->drm);
->>>         if (intel_display_device_present(display)) {
->>>           drm_kms_helper_poll_disable(&xe->drm);
->>> @@ -356,7 +356,7 @@ void xe_display_pm_shutdown(struct xe_device *xe)
->>>           return;
->>>         intel_power_domains_disable(display);
->>> -    drm_client_dev_suspend(&xe->drm, false);
->>> +    drm_client_dev_suspend(&xe->drm);
->>>         if (intel_display_device_present(display)) {
->>>           drm_kms_helper_poll_disable(&xe->drm);
->>> @@ -481,7 +481,7 @@ void xe_display_pm_resume(struct xe_device *xe)
->>>         intel_opregion_resume(display);
->>>   -    drm_client_dev_resume(&xe->drm, false);
->>> +    drm_client_dev_resume(&xe->drm);
->>>         intel_power_domains_enable(display);
->>>   }
->>> diff --git a/include/drm/drm_client.h b/include/drm/drm_client.h
->>> index bdd845e383ef..3556928d3938 100644
->>> --- a/include/drm/drm_client.h
->>> +++ b/include/drm/drm_client.h
->>> @@ -70,13 +70,8 @@ struct drm_client_funcs {
->>>        * Called when suspending the device.
->>>        *
->>>        * This callback is optional.
->>> -     *
->>> -     * FIXME: Some callers hold the console lock when invoking this
->>> -     *        function. This interferes with fbdev emulation, which
->>> -     *        also tries to acquire the lock. Push the console lock
->>> -     *        into the callback and remove 'holds_console_lock'.
->>>        */
->>> -    int (*suspend)(struct drm_client_dev *client, bool 
->>> holds_console_lock);
->>> +    int (*suspend)(struct drm_client_dev *client);
->>>         /**
->>>        * @resume:
->>> @@ -84,13 +79,8 @@ struct drm_client_funcs {
->>>        * Called when resuming the device from suspend.
->>>        *
->>>        * This callback is optional.
->>> -     *
->>> -     * FIXME: Some callers hold the console lock when invoking this
->>> -     *        function. This interferes with fbdev emulation, which
->>> -     *        also tries to acquire the lock. Push the console lock
->>> -     *        into the callback and remove 'holds_console_lock'.
->>>        */
->>> -    int (*resume)(struct drm_client_dev *client, bool 
->>> holds_console_lock);
->>> +    int (*resume)(struct drm_client_dev *client);
->>>   };
->>>     /**
->>> diff --git a/include/drm/drm_client_event.h 
->>> b/include/drm/drm_client_event.h
->>> index 1d544d3a3228..c3f318788b71 100644
->>> --- a/include/drm/drm_client_event.h
->>> +++ b/include/drm/drm_client_event.h
->>> @@ -11,8 +11,8 @@ struct drm_device;
->>>   void drm_client_dev_unregister(struct drm_device *dev);
->>>   void drm_client_dev_hotplug(struct drm_device *dev);
->>>   void drm_client_dev_restore(struct drm_device *dev);
->>> -void drm_client_dev_suspend(struct drm_device *dev, bool 
->>> holds_console_lock);
->>> -void drm_client_dev_resume(struct drm_device *dev, bool 
->>> holds_console_lock);
->>> +void drm_client_dev_suspend(struct drm_device *dev);
->>> +void drm_client_dev_resume(struct drm_device *dev);
->>>   #else
->>>   static inline void drm_client_dev_unregister(struct drm_device *dev)
->>>   { }
->
+DQoNCj4gT24gT2N0IDEsIDIwMjUsIGF0IDc6MDDigK9QTSwgSm9obiBIdWJiYXJkIDxqaHViYmFy
+ZEBudmlkaWEuY29tPiB3cm90ZToNCj4gDQo+IO+7v09uIDEwLzEvMjUgMzo1MiBQTSwgRGFuaWxv
+IEtydW1tcmljaCB3cm90ZToNCj4+PiBPbiBUaHUgT2N0IDIsIDIwMjUgYXQgMTI6MzggQU0gQ0VT
+VCwgSm9obiBIdWJiYXJkIHdyb3RlOg0KPj4+IE9uIDEwLzEvMjUgNjo1MiBBTSwgWmhpIFdhbmcg
+d3JvdGU6DQo+Pj4+IE9uIDEuMTAuMjAyNSAxMy4zMiwgRGFuaWxvIEtydW1tcmljaCB3cm90ZToN
+Cj4+Pj4+IE9uIFdlZCBPY3QgMSwgMjAyNSBhdCAzOjIyIEFNIENFU1QsIEpvaG4gSHViYmFyZCB3
+cm90ZToNCj4+Pj4+PiBPbiA5LzMwLzI1IDU6MjkgUE0sIEFsaXN0YWlyIFBvcHBsZSB3cm90ZToN
+Cj4+Pj4+Pj4gT24gMjAyNS0xMC0wMSBhdCAwODowNyArMTAwMCwgSm9obiBIdWJiYXJkIDxqaHVi
+YmFyZEBudmlkaWEuY29tPiB3cm90ZS4uLg0KPj4+IC4uLg0KPj4+IEFzIEkgbWVudGlvbmVkIGlu
+IHRoZSBvdGhlciBmb3JrIG9mIHRoaXMgdGhyZWFkLCBJIGRvIHRoaW5rIHRoaXMgaXMNCj4+PiBh
+IGdvb2Qgc3RhcnQuIFNvIHVubGVzcyBzb21lb25lIGRpc2FncmVlcywgSSdkIGxpa2UgdG8gZ28g
+d2l0aCB0aGlzDQo+Pj4gc2VyaWVzIChwZXJoYXBzIHdpdGggYmV0dGVyIHdvcmRpbmcgaW4gdGhl
+IGNvbW1pdCBtZXNzYWdlcywgYW5kIG1heWJlDQo+Pj4gYSBiZXR0ZXIgY29tbWVudCBhYm92ZSB0
+aGUgcHJvYmUoKSBmYWlsdXJlIHJldHVybikgZm9yIG5vdy4NCj4+IA0KPj4gSW5kaWNhdGluZyB3
+aGV0aGVyIHRoZSBkcml2ZXIgc3VwcG9ydHMgVkZzIHRocm91Z2ggYSBib29sZWFuIGluIHN0cnVj
+dA0KPj4gcGNpX2RyaXZlciBpcyBhYm91dCB0aGUgc2FtZSBlZmZvcnQgKHdlbGwsIG1heWJlIHNs
+aWdodGx5IG1vcmUpLCBidXQgc29sdmVzIHRoZQ0KPj4gcHJvYmxlbSBpbiBhIGNsZWFuZXIgd2F5
+IHNpbmNlIGl0IGF2b2lkcyBwcm9iZSgpIGJlaW5nIGNhbGxlZCBpbiB0aGUgZmlyc3QNCj4+IHBs
+YWNlLiBPdGhlciBleGlzdGluZyBkcml2ZXJzIGJlbmVmaXQgZnJvbSB0aGF0IGFzIHdlbGwuDQo+
+IA0KPiBZZXMsIHRoYXQgaXMgY2xlYW5lciwgYW5kIGxpa2UgeW91IHNheSwgbmVhcmx5IGFzIGVh
+c3kuDQo+IA0KPj4gDQo+PiBGb3JnZXQgYWJvdXQgdGhlIFNSLUlPViBSRkMgSSB3YXMgdGFsa2lu
+ZyBhYm91dDsgSSByZWFsbHkganVzdCBpbnRlbmRlZCB0byBvZmZlcg0KPj4gdG8gdGFrZSBjYXJl
+IG9mIHRoYXQuIDopDQo+IA0KPiBJIGNhbiBzZW5kIG91dCBhIHYyIHdpdGggdGhhdCAiUENJIGRy
+aXZlciBib29sOiBzdXBwb3J0cyBWRnMiIGFwcHJvYWNoLA0KPiBnbGFkIHRvIGRvIHRoYXQuDQoN
+CkhlcmUgaXMgbXkgb3BpbmlvbiBhbmQgY29ycmVjdCBtZSBpZiBJIG1pc3NlZCBzb21ldGhpbmc6
+DQoNCkl0IGZlZWxzIHByZW1hdHVyZSB0byByZW1vdmUgdGhlIG9wdGlvbiBvZiBub3ZhLWNvcmUg
+YmluZGluZyB0byBhIFZGLCBzaW5jZSBvdGhlciBvcHRpb25zIHRvIGRpc2FibGUgYXV0byBwcm9i
+aW5nIGRvIGV4aXN0IGFzIEphc29uIHBvaW50ZWQgb3V0Lg0KDQpUYWtpbmcgYSBwYXJhbGxlbCB3
+aXRoIFZGSU8gcGFzcyB0aHJvdWdoIGZvciBpbnN0YW5jZSwgdGhlIHVzZXIgYWxyZWFkeSBoYXMg
+dG8gZG8gc29tZSBkaWxpZ2VuY2UgbGlrZSBwcmV2ZW50aW5nIGRyaXZlcnMgZnJvbSBiaW5kaW5n
+IGFuZCB0aGVuIG1ha2luZyB2ZmlvLXBjaSBiaW5kIHRvIHRoZSBkZXZpY2UgSURzLiBUaGlzIGNh
+c2UgaXMgc2ltaWxhciB0aG91Z2ggc2xpZ2h0bHkgZGlmZmVyZW50LCBidXQgVkZJTyBzZXR1cCBy
+ZXF1aXJlcyBzb21lIGNvbmZpZ3VyYXRpb24gYW55d2F5IHNvIHdpbGwgaXQgcmVhbGx5IGltcHJv
+dmUgYW55dGhpbmc/DQoNCkkgcXVpZXRseSBzdWdnZXN0IGhvbGRpbmcgb24gdGlsbCB0aGVyZSBp
+cyBhIHJlYWwgbmVlZCBvciB3ZSBhcmUgc3VyZSBub3ZhIGNhbm5vdCBiaW5kIHRvLCBvciBvcGVy
+YXRlIG9uIGEgVkYuIFRoaXMgbWlnaHQgYWxzbyBjbG9zZSB0aGUgZG9vciB0byBzYXkgYW55IGZ1
+dHVyZSB0ZXN0aW5nIHdlIG1heSBkbyBieSBiaW5kaW5nIHRvIGEgVkYgZm9yIGluc3RhbmNlICh5
+ZXMgd2UgY2FuIGRlbGV0ZSBhIHN0YXRlbWVudCBidXQuLikuDQoNCkp1c3QgbXkgc3VnZ2VzdGlv
+biwgYnV0IEkgZG8gbm90IHN0cm9uZ2x5IG9wcG9zZSBlaXRoZXIuDQoNCnRoYW5rcywNCg0KLSBK
+b2VsDQoNCj4gDQo+IA0KPiB0aGFua3MsDQo+IC0tDQo+IEpvaG4gSHViYmFyZA0KPiANCg==
