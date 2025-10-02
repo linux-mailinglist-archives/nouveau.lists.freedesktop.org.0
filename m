@@ -2,64 +2,82 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id BDB75CBAF6D
-	for <lists+nouveau@lfdr.de>; Sat, 13 Dec 2025 13:47:08 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id C2D43C8722E
+	for <lists+nouveau@lfdr.de>; Tue, 25 Nov 2025 21:48:26 +0100 (CET)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 91F9E10EC9A;
-	Sat, 13 Dec 2025 12:42:22 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id AFB0A10E503;
+	Tue, 25 Nov 2025 20:47:35 +0000 (UTC)
 Authentication-Results: gabe.freedesktop.org;
-	dkim=fail reason="signature verification failed" (2048-bit key; unprotected) header.d=weathered-steel.dev header.i=@weathered-steel.dev header.b="rHFw3M5x";
+	dkim=permerror (0-bit key) header.d=gmail.com header.i=@gmail.com header.b="KN0A0P4b";
 	dkim-atps=neutral
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from mx-out1.startmail.com (mx-out1.startmail.com [145.131.90.139])
- by gabe.freedesktop.org (Postfix) with ESMTPS id B585D10E05B;
- Thu,  2 Oct 2025 03:35:13 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=weathered-steel.dev;
- s=startmail1; t=1759376112;
- bh=1xyKrTZsjcargDYNHt+NS6g+2E+KNZ01uBZXtO8X4ew=;
- h=Message-ID:Date:Mime-Version:Subject:To:References:From:
- In-Reply-To:Content-Type:Content-Transfer-Encoding:From:Subject:To:
- Date:Sender:Content-Type:Content-Transfer-Encoding:
- Content-Disposition:Mime-Version:Reply-To:In-Reply-To:References:
- Message-Id:List-Unsubscribe:List-Unsubscribe-Post:Autocrypt;
- b=rHFw3M5xlAts0ia2uw2jww5WKJG1Vsf18gQg1t/rinjELHZafqNg4b0yozZAduXtG
- zX2wHm93B/8h+a2YojU/jKsE0LnxZfgxIhQum1OLG0kk5a3lr94JScbfpXCvAI9SvQ
- pSQzGjQiV7CTIfo6UkUaILniVPkeqoJHVtNcNHs07LEW06Ey3qUfMzChuihQL03Nsr
- hO3WHPFRNuBvrBRgGg5T31pN6QF3Nrp6zepk4an7PoL6DLRS5lW+i7k888u3zjPj0d
- VO5s/XzN0nJ0Vt9sWfUt9klkneN9gB8Nfe6yLm8zlvZ1G9+PufITnP6o+NX2OaIVcu
- T54PI6pGVoO5A==
-Message-ID: <a7acc840-8d95-451a-b431-f3755ad6f37c@weathered-steel.dev>
-Date: Thu, 2 Oct 2025 03:35:03 +0000
-Mime-Version: 1.0
-Subject: Re: [PATCH v5 6/9] rust: bitfield: Add KUNIT tests for bitfield
-To: Alexandre Courbot <acourbot@nvidia.com>,
- Joel Fernandes <joelagnelf@nvidia.com>, linux-kernel@vger.kernel.org,
- rust-for-linux@vger.kernel.org, dri-devel@lists.freedesktop.org,
- dakr@kernel.org
-Cc: Alistair Popple <apopple@nvidia.com>, Miguel Ojeda <ojeda@kernel.org>,
- Alex Gaynor <alex.gaynor@gmail.com>, Boqun Feng <boqun.feng@gmail.com>,
- Gary Guo <gary@garyguo.net>, bjorn3_gh@protonmail.com,
- Benno Lossin <lossin@kernel.org>, Andreas Hindborg <a.hindborg@kernel.org>,
- Alice Ryhl <aliceryhl@google.com>, Trevor Gross <tmgross@umich.edu>,
- David Airlie <airlied@gmail.com>, Simona Vetter <simona@ffwll.ch>,
- Maarten Lankhorst <maarten.lankhorst@linux.intel.com>,
- Maxime Ripard <mripard@kernel.org>, Thomas Zimmermann <tzimmermann@suse.de>,
- John Hubbard <jhubbard@nvidia.com>, Timur Tabi <ttabi@nvidia.com>,
- joel@joelfernandes.org, Yury Norov <yury.norov@gmail.com>,
- Daniel Almeida <daniel.almeida@collabora.com>,
- Andrea Righi <arighi@nvidia.com>, nouveau@lists.freedesktop.org
-References: <20250930144537.3559207-1-joelagnelf@nvidia.com>
- <20250930144537.3559207-7-joelagnelf@nvidia.com>
- <DD7GCYCZU3P3.1KK174S7MQ5BW@nvidia.com>
- <d238d9b7-8ec5-4063-8217-885d951d2f0c@weathered-steel.dev>
- <DD7HUD8WZAHD.12RKL7EGBWBFY@nvidia.com>
-Content-Language: en-US
-From: Elle Rhumsaa <elle@weathered-steel.dev>
-In-Reply-To: <DD7HUD8WZAHD.12RKL7EGBWBFY@nvidia.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
+Received: from mail-lf1-f42.google.com (mail-lf1-f42.google.com
+ [209.85.167.42])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 3533E10E077
+ for <nouveau@lists.freedesktop.org>; Thu,  2 Oct 2025 08:33:38 +0000 (UTC)
+Received: by mail-lf1-f42.google.com with SMTP id
+ 2adb3069b0e04-57e8e67aa3eso2624552e87.1
+ for <nouveau@lists.freedesktop.org>; Thu, 02 Oct 2025 01:33:38 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=gmail.com; s=20230601; t=1759394016; x=1759998816; darn=lists.freedesktop.org;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=rCnWTNE47EKUFdNbhO9xh7Mmv5d7MGU177iaBEqF0KQ=;
+ b=KN0A0P4bJWcEiEODwbwXhn0h958zNupTJ/l3tdVFEBOP5zl3+s1mFmZnVC7oF6Ille
+ A++rwKBQS8pOWzmq5zID9FMeNDZqorSpj+jl8bww2d1NFTUlIhMIl7BHK5m+axD+VfTm
+ EgAqSTA+WZqtgsSlmO5T52znVM86x7R8CMTBrDO0iUCUH6UudhuEjbOORDypSjRLI03K
+ Lz9lXuD+2CRzpk/hexdf8pXQ1iNvtoFxOgb8GBZzZuYQbXV1pHMjBIKK8iYFh1L3x7c1
+ gbaYIdiP9OS3vjyA2sbaMwEzfCmnnP2KPANiDbI/ghdFbNOEGbNxXRhwqVS9ODRk2hqS
+ PVpw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1759394016; x=1759998816;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=rCnWTNE47EKUFdNbhO9xh7Mmv5d7MGU177iaBEqF0KQ=;
+ b=TBEhxMNwZAJu7Z1P4esq1Ai4gAVQbW6b8kjEJ4iGTAa99fLZSjXinr/nznoA3EOeol
+ DRsicz++k5Gkvjr2NJ+/Zswqo85JqaPFJ4rCaceNl4S2VWxWJyuZBb6KR2Z8KQZUGghE
+ 4FJvYgJ/awwdHmHMwARzAqfKXdZ2p/gx00BQKeda5HcqTR/xgplzkEIjd4/9ABo28RbP
+ IBt7b4lbofcJuvkC5Nk/Gr7Q43YpQBaEGsgM/jGQFy+SBFMY695PKHtRKnZE+Lnk/Jq+
+ KLEFY5wJ7PbCEyiD2ua7rzdXqyAraJY2688iEUgKlvC6XW/eMpPnQYm54arX1E+otMp8
+ TxfQ==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCUzmDzeeVZA2bk9o+wLv3X2PE+pUirUS8ZxbthWb3i3oIyBjfCatZ35xDLJQwqkhoJju1oVxBK2@lists.freedesktop.org
+X-Gm-Message-State: AOJu0YyDbFha1aqxar4Bf8i+gsG9P0fF8Nf1AOVgJAYDcHnKVDpbyCMi
+ NWH3J4W3PuVvf1nft3AEt7NxIVbXIrcnR/wj1KQVfA93Dw5npJRc5zSv
+X-Gm-Gg: ASbGnctY7bpweveafjfJC1gdfsamWLDas9m1tLy/vzLpKBZM+TljNacpUDOV5d8KNC4
+ Ainh6MVSV4b7MZ7tDKS/aXvVZbnO9zQEn1Su3x7uM0hz8zCpETeaGj/NTHxpZkryPGMybBHF3Qs
+ 03flp9yRSxgjV4FOeYhIOxt/ih4l0gv1hLyc3Wl/vAwkopA6WcQIdS4Tr7sIrCtWlIlXk9pOIvc
+ 2j/kgv+dD9HB3ocVC5km+ZAC0ewPdNTrv+R64XXYdZ8dG7IaRzaS2n3DhZlQchlz4KV8Zp8VthL
+ WbKssj29WxIKRWy/1Itp8VYLI9A2sv082EKgSg8XEWJEj4W0JWirx7QvwPN72CRFUqsW1vLHoPj
+ nM/JsBJZP6SrXQGVQwQFRiIDS/GylA5gg7cRdxvGn071oxJd9KXJD2qbaqbGyQiWxWJiq1wPMSl
+ l2JNTgxuOY/NADEFlDzvZtPZa29zjwgsZCieoAHtOG
+X-Google-Smtp-Source: AGHT+IHjcjwtFqspT76BDrqWmxGqO8qvZJDfBRE/OUo2b+yHt06K2O/V4pEtvb4W9p4Ul/oCXQ8WRg==
+X-Received: by 2002:a05:6512:401a:b0:58a:ff9b:2234 with SMTP id
+ 2adb3069b0e04-58b00b3d66amr894765e87.2.1759394016142; 
+ Thu, 02 Oct 2025 01:33:36 -0700 (PDT)
+Received: from localhost.localdomain
+ (broadband-109-173-93-221.ip.moscow.rt.ru. [109.173.93.221])
+ by smtp.gmail.com with ESMTPSA id
+ 2adb3069b0e04-58b0114033dsm632852e87.53.2025.10.02.01.33.35
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Thu, 02 Oct 2025 01:33:35 -0700 (PDT)
+From: Alexandr Sapozhnkiov <alsp705@gmail.com>
+To: Karol Herbst <kherbst@redhat.com>, Lyude Paul <lyude@redhat.com>,
+ Danilo Krummrich <dakr@redhat.com>, David Airlie <airlied@gmail.com>,
+ Daniel Vetter <daniel@ffwll.ch>, dri-devel@lists.freedesktop.org,
+ nouveau@lists.freedesktop.org, linux-kernel@vger.kernel.org
+Cc: Alexandr Sapozhnikov <alsp705@gmail.com>,
+	lvc-project@linuxtesting.org
+Subject: [PATCH] gpu/drm/nouveau/nvif: fix a null dereference in
+ nvif_client_ctor()
+Date: Thu,  2 Oct 2025 11:33:30 +0300
+Message-ID: <20251002083332.11-1-alsp705@gmail.com>
+X-Mailer: git-send-email 2.43.0
+MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-X-Mailman-Approved-At: Sat, 13 Dec 2025 12:40:44 +0000
+X-Mailman-Approved-At: Tue, 25 Nov 2025 20:47:23 +0000
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -74,83 +92,31 @@ List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
+From: Alexandr Sapozhnikov <alsp705@gmail.com>
 
-On 10/2/25 2:51 AM, Alexandre Courbot wrote:
-> On Thu Oct 2, 2025 at 11:16 AM JST, Elle Rhumsaa wrote:
->> On 10/2/25 1:41 AM, Alexandre Courbot wrote:
->>
->>> On Tue Sep 30, 2025 at 11:45 PM JST, Joel Fernandes wrote:
->>>> Add KUNIT tests to make sure the macro is working correctly.
->>>>
->>>> Signed-off-by: Joel Fernandes <joelagnelf@nvidia.com>
->>>> ---
->>>>    rust/kernel/bitfield.rs | 321 ++++++++++++++++++++++++++++++++++++++++
->>>>    1 file changed, 321 insertions(+)
->>>>
->>>> diff --git a/rust/kernel/bitfield.rs b/rust/kernel/bitfield.rs
->>>> index fed19918c3b9..9a20bcd2eb60 100644
->>>> --- a/rust/kernel/bitfield.rs
->>>> +++ b/rust/kernel/bitfield.rs
->>>> @@ -402,3 +402,324 @@ fn default() -> Self {
->>>>            }
->>>>        };
->>>>    }
->>>> +
->>>> +#[::kernel::macros::kunit_tests(kernel_bitfield)]
->>>> +mod tests {
->>>> +    use core::convert::TryFrom;
->>>> +
->>>> +    // Enum types for testing => and ?=> conversions
->>>> +    #[derive(Debug, Clone, Copy, PartialEq)]
->>>> +    enum MemoryType {
->>>> +        Unmapped = 0,
->>>> +        Normal = 1,
->>>> +        Device = 2,
->>>> +        Reserved = 3,
->>>> +    }
->>>> +
->>>> +    impl Default for MemoryType {
->>>> +        fn default() -> Self {
->>>> +            MemoryType::Unmapped
->>>> +        }
->>>> +    }
->>> Tip: you can add `Default` to the `#[derive]` marker of `MemoryType` and
->>> mark the variant you want as default with `#[default]` instead of
->>> providing a full impl block:
->>>
->>>       #[derive(Debug, Default, Clone, Copy, PartialEq)]
->>>       enum MemoryType {
->>>           #[default]
->>>           Unmapped = 0,
->>>           Normal = 1,
->>>           Device = 2,
->>>           Reserved = 3,
->>>       }
->> I would alternatively recommend to provide a `MemoryType::new` impl with
->> a `const` definition:
->>
->> ```rust
->> impl MemoryType {
->>       pub const fn new() -> Self {
->>
->>           Self::Unmapped
->>
->>       }
->> }
->>
->> impl Default for MemoryType {
->>       fn default() -> Self {
->>           Self::new()
->>       }
->> }
->> ```
->>
->> This pattern allows using `MemoryType::new()` in `const` contexts, while
->> also providing the `Default` impl using the same default. It's somewhat
->> of a workaround until we get `const` traits.
-> That's an elegant pattern generally speaking, but I don't think we would
-> benefit from using it in these unit tests.
+If the name parameter can be NULL, then you should not do 
+strncpy before checking name for NULL.
 
-*facepalm* right, I lost the context that these data structures were 
-KUNIT-specific. Please disregard.
+Found by Linux Verification Center (linuxtesting.org) with SVACE.
+
+Signed-off-by: Alexandr Sapozhnikov <alsp705@gmail.com>
+---
+ drivers/gpu/drm/nouveau/nvif/client.c | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/drivers/gpu/drm/nouveau/nvif/client.c b/drivers/gpu/drm/nouveau/nvif/client.c
+index 3a27245f467f..3cfe420b5156 100644
+--- a/drivers/gpu/drm/nouveau/nvif/client.c
++++ b/drivers/gpu/drm/nouveau/nvif/client.c
+@@ -69,7 +69,7 @@ nvif_client_ctor(struct nvif_client *parent, const char *name, u64 device,
+ 	} nop = {};
+ 	int ret;
+ 
+-	strscpy_pad(args.name, name, sizeof(args.name));
++	strscpy_pad(args.name, name ? name : "nvifClient", sizeof(args.name));
+ 	ret = nvif_object_ctor(parent != client ? &parent->object : NULL,
+ 			       name ? name : "nvifClient", 0,
+ 			       NVIF_CLASS_CLIENT, &args, sizeof(args),
+-- 
+2.43.0
 
