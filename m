@@ -2,82 +2,107 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id C2D43C8722E
-	for <lists+nouveau@lfdr.de>; Tue, 25 Nov 2025 21:48:26 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 91CF3CBAEF2
+	for <lists+nouveau@lfdr.de>; Sat, 13 Dec 2025 13:46:38 +0100 (CET)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id AFB0A10E503;
-	Tue, 25 Nov 2025 20:47:35 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id ACCBC10EC4E;
+	Sat, 13 Dec 2025 12:42:17 +0000 (UTC)
 Authentication-Results: gabe.freedesktop.org;
-	dkim=permerror (0-bit key) header.d=gmail.com header.i=@gmail.com header.b="KN0A0P4b";
+	dkim=permerror (0-bit key) header.d=jannau.net header.i=@jannau.net header.b="JwFBJbaa";
+	dkim=permerror (0-bit key) header.d=messagingengine.com header.i=@messagingengine.com header.b="nE9vk/bI";
 	dkim-atps=neutral
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from mail-lf1-f42.google.com (mail-lf1-f42.google.com
- [209.85.167.42])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 3533E10E077
- for <nouveau@lists.freedesktop.org>; Thu,  2 Oct 2025 08:33:38 +0000 (UTC)
-Received: by mail-lf1-f42.google.com with SMTP id
- 2adb3069b0e04-57e8e67aa3eso2624552e87.1
- for <nouveau@lists.freedesktop.org>; Thu, 02 Oct 2025 01:33:38 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1759394016; x=1759998816; darn=lists.freedesktop.org;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:from:to:cc:subject:date:message-id:reply-to;
- bh=rCnWTNE47EKUFdNbhO9xh7Mmv5d7MGU177iaBEqF0KQ=;
- b=KN0A0P4bJWcEiEODwbwXhn0h958zNupTJ/l3tdVFEBOP5zl3+s1mFmZnVC7oF6Ille
- A++rwKBQS8pOWzmq5zID9FMeNDZqorSpj+jl8bww2d1NFTUlIhMIl7BHK5m+axD+VfTm
- EgAqSTA+WZqtgsSlmO5T52znVM86x7R8CMTBrDO0iUCUH6UudhuEjbOORDypSjRLI03K
- Lz9lXuD+2CRzpk/hexdf8pXQ1iNvtoFxOgb8GBZzZuYQbXV1pHMjBIKK8iYFh1L3x7c1
- gbaYIdiP9OS3vjyA2sbaMwEzfCmnnP2KPANiDbI/ghdFbNOEGbNxXRhwqVS9ODRk2hqS
- PVpw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1759394016; x=1759998816;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=rCnWTNE47EKUFdNbhO9xh7Mmv5d7MGU177iaBEqF0KQ=;
- b=TBEhxMNwZAJu7Z1P4esq1Ai4gAVQbW6b8kjEJ4iGTAa99fLZSjXinr/nznoA3EOeol
- DRsicz++k5Gkvjr2NJ+/Zswqo85JqaPFJ4rCaceNl4S2VWxWJyuZBb6KR2Z8KQZUGghE
- 4FJvYgJ/awwdHmHMwARzAqfKXdZ2p/gx00BQKeda5HcqTR/xgplzkEIjd4/9ABo28RbP
- IBt7b4lbofcJuvkC5Nk/Gr7Q43YpQBaEGsgM/jGQFy+SBFMY695PKHtRKnZE+Lnk/Jq+
- KLEFY5wJ7PbCEyiD2ua7rzdXqyAraJY2688iEUgKlvC6XW/eMpPnQYm54arX1E+otMp8
- TxfQ==
-X-Forwarded-Encrypted: i=1;
- AJvYcCUzmDzeeVZA2bk9o+wLv3X2PE+pUirUS8ZxbthWb3i3oIyBjfCatZ35xDLJQwqkhoJju1oVxBK2@lists.freedesktop.org
-X-Gm-Message-State: AOJu0YyDbFha1aqxar4Bf8i+gsG9P0fF8Nf1AOVgJAYDcHnKVDpbyCMi
- NWH3J4W3PuVvf1nft3AEt7NxIVbXIrcnR/wj1KQVfA93Dw5npJRc5zSv
-X-Gm-Gg: ASbGnctY7bpweveafjfJC1gdfsamWLDas9m1tLy/vzLpKBZM+TljNacpUDOV5d8KNC4
- Ainh6MVSV4b7MZ7tDKS/aXvVZbnO9zQEn1Su3x7uM0hz8zCpETeaGj/NTHxpZkryPGMybBHF3Qs
- 03flp9yRSxgjV4FOeYhIOxt/ih4l0gv1hLyc3Wl/vAwkopA6WcQIdS4Tr7sIrCtWlIlXk9pOIvc
- 2j/kgv+dD9HB3ocVC5km+ZAC0ewPdNTrv+R64XXYdZ8dG7IaRzaS2n3DhZlQchlz4KV8Zp8VthL
- WbKssj29WxIKRWy/1Itp8VYLI9A2sv082EKgSg8XEWJEj4W0JWirx7QvwPN72CRFUqsW1vLHoPj
- nM/JsBJZP6SrXQGVQwQFRiIDS/GylA5gg7cRdxvGn071oxJd9KXJD2qbaqbGyQiWxWJiq1wPMSl
- l2JNTgxuOY/NADEFlDzvZtPZa29zjwgsZCieoAHtOG
-X-Google-Smtp-Source: AGHT+IHjcjwtFqspT76BDrqWmxGqO8qvZJDfBRE/OUo2b+yHt06K2O/V4pEtvb4W9p4Ul/oCXQ8WRg==
-X-Received: by 2002:a05:6512:401a:b0:58a:ff9b:2234 with SMTP id
- 2adb3069b0e04-58b00b3d66amr894765e87.2.1759394016142; 
- Thu, 02 Oct 2025 01:33:36 -0700 (PDT)
-Received: from localhost.localdomain
- (broadband-109-173-93-221.ip.moscow.rt.ru. [109.173.93.221])
- by smtp.gmail.com with ESMTPSA id
- 2adb3069b0e04-58b0114033dsm632852e87.53.2025.10.02.01.33.35
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 02 Oct 2025 01:33:35 -0700 (PDT)
-From: Alexandr Sapozhnkiov <alsp705@gmail.com>
-To: Karol Herbst <kherbst@redhat.com>, Lyude Paul <lyude@redhat.com>,
- Danilo Krummrich <dakr@redhat.com>, David Airlie <airlied@gmail.com>,
- Daniel Vetter <daniel@ffwll.ch>, dri-devel@lists.freedesktop.org,
- nouveau@lists.freedesktop.org, linux-kernel@vger.kernel.org
-Cc: Alexandr Sapozhnikov <alsp705@gmail.com>,
-	lvc-project@linuxtesting.org
-Subject: [PATCH] gpu/drm/nouveau/nvif: fix a null dereference in
- nvif_client_ctor()
-Date: Thu,  2 Oct 2025 11:33:30 +0300
-Message-ID: <20251002083332.11-1-alsp705@gmail.com>
-X-Mailer: git-send-email 2.43.0
+Received: from fout-a6-smtp.messagingengine.com
+ (fout-a6-smtp.messagingengine.com [103.168.172.149])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 0901D10E950;
+ Fri,  3 Oct 2025 17:25:26 +0000 (UTC)
+Received: from phl-compute-01.internal (phl-compute-01.internal [10.202.2.41])
+ by mailfout.phl.internal (Postfix) with ESMTP id 4AEA3EC0213;
+ Fri,  3 Oct 2025 13:25:26 -0400 (EDT)
+Received: from phl-mailfrontend-01 ([10.202.2.162])
+ by phl-compute-01.internal (MEProxy); Fri, 03 Oct 2025 13:25:26 -0400
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=jannau.net; h=cc
+ :cc:content-type:content-type:date:date:from:from:in-reply-to
+ :in-reply-to:message-id:mime-version:references:reply-to:subject
+ :subject:to:to; s=fm3; t=1759512326; x=1759598726; bh=80zTLlNJzL
+ 69CstAw641a6XukyfcEwp1lxsA+QkUUPA=; b=JwFBJbaaRt/nqg+vVt7bZic0JU
+ 1GG0iknvBOLM6mMBiNUTG+6a/3VwxL13MFucddigVSTFQ+js7H5k6qPjDDmDQFhn
+ IRdBwg6gl9vWgBuYAL/a2w6XUNueG0AvPZNmvZza7DLsNXjEAu76gvpSJBSoTAqd
+ 7c7HZBx5DYxp+kY9ZYZTX6xenM1io/A3QZaI7k4gq4QN6UlzDmAw5Fl22TwXiLbP
+ KxLxGIvDoShk0KeLFOvO2AdEhFpanCyKt0IHr37w+K/r7VMYJ9Zo3QPKIAxa4ofc
+ Bl9TwdFP2OB05TfyraSog0OO7C+apf+TNVwYlZPMnW2/5qpOvkg4PAQc178A==
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=
+ messagingengine.com; h=cc:cc:content-type:content-type:date:date
+ :feedback-id:feedback-id:from:from:in-reply-to:in-reply-to
+ :message-id:mime-version:references:reply-to:subject:subject:to
+ :to:x-me-proxy:x-me-sender:x-me-sender:x-sasl-enc; s=fm2; t=
+ 1759512326; x=1759598726; bh=80zTLlNJzL69CstAw641a6XukyfcEwp1lxs
+ A+QkUUPA=; b=nE9vk/bI9WxRJaqgCcF4FUfBATlqE/SIujNFseORpqgb9oGu0TU
+ 7a/FRpUlAU4Y3iMQeH9vUPIn/HdMCK+1DY+QWpa9231HXKe8ZijAnippqPiSLoYe
+ J9XN6Zlp3YgM6Mg1fhy5Tmxf/TTdxFo/2qeiCqiX3ncWjiMsJsNWq8ioWyRvGIWL
+ Z8f1BzjMAzcdrwX+KC1AKfCcuSXSwQ7PXaBITzSsDzxQaJeck9TUuZhDLukbd3Ja
+ hmln0h3uQ2uYpdABdtfXE6H5y5tdvjhfq/ToVeSivSq4xqhq8+K1otHA5Q5SUGcS
+ jIN9Gl6zdsLjh9cgiBvK71Mng34MOJmitZg==
+X-ME-Sender: <xms:BQfgaK0s9bz71HRzDdcCzkofTBDXwamsY1LAuEdRlWPU4MGxnJUMGg>
+ <xme:BQfgaIGE32EnaFYFnc000ieZYcqTNJqZvPQBJn4XLQOgSZTezVgqX985L-GZ7fwev
+ uaxIt0F9qFXVFWy-NYsPoahcXBxuqFZV5tVb15bSvWilSHHP9JpgpU>
+X-ME-Received: <xmr:BQfgaJij61ATHgaTelHGIeImqKgTwJ4QoAjywWu2tsiizeFXg_2QBA7kMLoA6WjWACrcVP26Qp4WamvThvbCYqU3N8gSJHu3Yp_kgu8W3sw>
+X-ME-Proxy-Cause: gggruggvucftvghtrhhoucdtuddrgeeffedrtdeggdekleeglecutefuodetggdotefrod
+ ftvfcurfhrohhfihhlvgemucfhrghsthforghilhdpuffrtefokffrpgfnqfghnecuuegr
+ ihhlohhuthemuceftddtnecusecvtfgvtghiphhivghnthhsucdlqddutddtmdenucfjug
+ hrpeffhffvvefukfhfgggtuggjsehttdertddttdejnecuhfhrohhmpeflrghnnhgvucfi
+ rhhunhgruhcuoehjsehjrghnnhgruhdrnhgvtheqnecuggftrfgrthhtvghrnhepudefhf
+ ehudetjeeutdfhvefhtdeltdfgheefkeefleegveevtedtveelfffhiedtnecuffhomhgr
+ ihhnpehgihhthhhusgdrtghomhenucevlhhushhtvghrufhiiigvpedtnecurfgrrhgrmh
+ epmhgrihhlfhhrohhmpehjsehjrghnnhgruhdrnhgvthdpnhgspghrtghpthhtohepvdeg
+ pdhmohguvgepshhmthhpohhuthdprhgtphhtthhopehlohhsshhinheskhgvrhhnvghlrd
+ horhhgpdhrtghpthhtoheprggtohhurhgsohhtsehnvhhiughirgdrtghomhdprhgtphht
+ thhopegrphhophhplhgvsehnvhhiughirgdrtghomhdprhgtphhtthhopehruhhsthdqfh
+ horhdqlhhinhhugiesvhhgvghrrdhkvghrnhgvlhdrohhrghdprhgtphhtthhopegurhhi
+ qdguvghvvghlsehlihhsthhsrdhfrhgvvgguvghskhhtohhprdhorhhgpdhrtghpthhtoh
+ epuggrkhhrsehkvghrnhgvlhdrohhrghdprhgtphhtthhopehojhgvuggrsehkvghrnhgv
+ lhdrohhrghdprhgtphhtthhopegrlhgvgidrghgrhihnohhrsehgmhgrihhlrdgtohhmpd
+ hrtghpthhtohepsghoqhhunhdrfhgvnhhgsehgmhgrihhlrdgtohhm
+X-ME-Proxy: <xmx:BQfgaJdJuMiVM0mL5HUBuq92XcG0QHrRS6GLnSYY3bYcYfHiOOZ3_w>
+ <xmx:BQfgaHwluiGRTue-YMovY9T9fTXhYYlyVDEZ7fA755zyfd8IPPIJeA>
+ <xmx:BQfgaLaM4QgaUrIyiMc1a29mHZOq0oE1UWLcA7-ulbneamevMW4XxA>
+ <xmx:BQfgaNK5hiDFUgAVrD-Ur6gAIlLUM_H9kkt3CdiR1VKl3xJLt1L2nQ>
+ <xmx:BgfgaN_4owHecfQcS1nCMS0N6jNHBsF8eTLZL_QWqc7hrKrSnGFO3fcw>
+Feedback-ID: i47b949f6:Fastmail
+Received: by mail.messagingengine.com (Postfix) with ESMTPA; Fri,
+ 3 Oct 2025 13:25:24 -0400 (EDT)
+Date: Fri, 3 Oct 2025 19:25:17 +0200
+From: Janne Grunau <j@jannau.net>
+To: Benno Lossin <lossin@kernel.org>
+Cc: Alexandre Courbot <acourbot@nvidia.com>,
+ Alistair Popple <apopple@nvidia.com>,
+ rust-for-linux@vger.kernel.org, dri-devel@lists.freedesktop.org,
+ dakr@kernel.org, Miguel Ojeda <ojeda@kernel.org>,
+ Alex Gaynor <alex.gaynor@gmail.com>,
+ Boqun Feng <boqun.feng@gmail.com>, Gary Guo <gary@garyguo.net>,
+ =?utf-8?B?QmrDtnJu?= Roy Baron <bjorn3_gh@protonmail.com>,
+ Andreas Hindborg <a.hindborg@kernel.org>,
+ Alice Ryhl <aliceryhl@google.com>, Trevor Gross <tmgross@umich.edu>,
+ David Airlie <airlied@gmail.com>, Simona Vetter <simona@ffwll.ch>,
+ Maarten Lankhorst <maarten.lankhorst@linux.intel.com>,
+ Maxime Ripard <mripard@kernel.org>,
+ Thomas Zimmermann <tzimmermann@suse.de>,
+ John Hubbard <jhubbard@nvidia.com>, Joel Fernandes <joelagnelf@nvidia.com>,
+ Timur Tabi <ttabi@nvidia.com>, linux-kernel@vger.kernel.org,
+ nouveau@lists.freedesktop.org
+Subject: Re: [PATCH v3 08/13] gpu: nova-core: Add bindings and accessors for
+ GspSystemInfo
+Message-ID: <20251003172517.GA1574227@robin.jannau.net>
+References: <20250930131648.411720-1-apopple@nvidia.com>
+ <20250930131648.411720-9-apopple@nvidia.com>
+ <DD7VU4239GS2.2MKVFPBFEY1R4@nvidia.com>
+ <DD8TZ3TU57L3.2958OTC9UP4VF@kernel.org>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-X-Mailman-Approved-At: Tue, 25 Nov 2025 20:47:23 +0000
+Content-Type: text/plain; charset=utf-8
+Content-Disposition: inline
+In-Reply-To: <DD8TZ3TU57L3.2958OTC9UP4VF@kernel.org>
+X-Mailman-Approved-At: Sat, 13 Dec 2025 12:40:44 +0000
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -92,31 +117,50 @@ List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-From: Alexandr Sapozhnikov <alsp705@gmail.com>
+On Fri, Oct 03, 2025 at 06:34:12PM +0200, Benno Lossin wrote:
+> On Thu Oct 2, 2025 at 3:49 PM CEST, Alexandre Courbot wrote:
+> > Hi Alistair, (+Benno as this concerns the `init!` macros)
+> >
+> > On Tue Sep 30, 2025 at 10:16 PM JST, Alistair Popple wrote:
+> >> Adds bindings and an in-place initialiser for the GspSystemInfo struct.
+> >>
+> >> Signed-off-by: Alistair Popple <apopple@nvidia.com>
+> >>
+> >> ---
+> >>
+> >> It would be good to move to using the `init!` macros at some point, but
+> >> I couldn't figure out how to make that work to initialise an enum rather
+> >> than a struct as is required for the transparent representation.
+> >
+> > Indeed we have to jump through a few (minor) hoops.
+> >
+> > First the `init!` macros do not seem to support tuple structs. They
+> > match a `{` after the type name, which is not present in
+> > `GspSystemInfo`. By turning it into a regular struct with a single
+> > field, we can overcome this, and it doesn't affect the layout the
+> > `#[repr(transparent)]` can still be used.
+> 
+> Yeah that's the correct workaround at the moment. I'm tracking support
+> for tuple structs in [1]. Essentially the problem is that it requires
+> lots of effort to parse tuple structs using declarative macros. We will
+> get `syn` this cycle, which will enable me to support several things,
+> including tuple structs.
+> 
+> [1]: https://github.com/Rust-for-Linux/pin-init/issues/85
+> 
+> > Then, due to a limitation with declarative macros, `init!` interprets
+> > `::` as a separator for generic arguments, so `bindings::GspSystemInfo`
+> > also doesn't parse. Here the trick is to use a local type alias.
+> 
+> This one will also be solved when we switch to syn.
 
-If the name parameter can be NULL, then you should not do 
-strncpy before checking name for NULL.
+I was planning to submit
+https://github.com/AsahiLinux/linux/commit/2d95fd3b6c359634a0976f27f7a3c667826256da
+https://github.com/AsahiLinux/linux/commit/515638cb47cf0ebdac378686fcbbdc6a8364096a
+from the asahi downstream tree after 6.18-rc1. Does that still make
+sense timing wise?
 
-Found by Linux Verification Center (linuxtesting.org) with SVACE.
+Types with type paths are used extensively in the asahi driver but I can
+initially work around that.
 
-Signed-off-by: Alexandr Sapozhnikov <alsp705@gmail.com>
----
- drivers/gpu/drm/nouveau/nvif/client.c | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
-
-diff --git a/drivers/gpu/drm/nouveau/nvif/client.c b/drivers/gpu/drm/nouveau/nvif/client.c
-index 3a27245f467f..3cfe420b5156 100644
---- a/drivers/gpu/drm/nouveau/nvif/client.c
-+++ b/drivers/gpu/drm/nouveau/nvif/client.c
-@@ -69,7 +69,7 @@ nvif_client_ctor(struct nvif_client *parent, const char *name, u64 device,
- 	} nop = {};
- 	int ret;
- 
--	strscpy_pad(args.name, name, sizeof(args.name));
-+	strscpy_pad(args.name, name ? name : "nvifClient", sizeof(args.name));
- 	ret = nvif_object_ctor(parent != client ? &parent->object : NULL,
- 			       name ? name : "nvifClient", 0,
- 			       NVIF_CLASS_CLIENT, &args, sizeof(args),
--- 
-2.43.0
-
+Janne
