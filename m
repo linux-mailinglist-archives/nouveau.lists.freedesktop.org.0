@@ -2,65 +2,66 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id 76E1CBBF645
-	for <lists+nouveau@lfdr.de>; Mon, 06 Oct 2025 22:49:22 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id DD766BBF648
+	for <lists+nouveau@lfdr.de>; Mon, 06 Oct 2025 22:49:23 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 212D410E536;
-	Mon,  6 Oct 2025 20:49:21 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 871DC10E53A;
+	Mon,  6 Oct 2025 20:49:22 +0000 (UTC)
 Authentication-Results: gabe.freedesktop.org;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="OThpHShg";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="VyiXNkCy";
 	dkim-atps=neutral
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from mail-wr1-f44.google.com (mail-wr1-f44.google.com
- [209.85.221.44])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 9E02D10E44D
- for <nouveau@lists.freedesktop.org>; Mon,  6 Oct 2025 19:14:09 +0000 (UTC)
-Received: by mail-wr1-f44.google.com with SMTP id
- ffacd0b85a97d-4256866958bso2279918f8f.1
- for <nouveau@lists.freedesktop.org>; Mon, 06 Oct 2025 12:14:09 -0700 (PDT)
+Received: from mail-wm1-f42.google.com (mail-wm1-f42.google.com
+ [209.85.128.42])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 16FA210E450
+ for <nouveau@lists.freedesktop.org>; Mon,  6 Oct 2025 19:14:16 +0000 (UTC)
+Received: by mail-wm1-f42.google.com with SMTP id
+ 5b1f17b1804b1-46e2e6a708fso35470815e9.0
+ for <nouveau@lists.freedesktop.org>; Mon, 06 Oct 2025 12:14:16 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1759778048; x=1760382848; darn=lists.freedesktop.org;
+ d=gmail.com; s=20230601; t=1759778054; x=1760382854; darn=lists.freedesktop.org;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=D1fg5U/GyUHEUoYSW2uLA1ee/vFWzHy3xrE05+0l8NM=;
- b=OThpHShgpxfy9H2yL25ZSkGJKnK/xn9E4SPJm90hE3IiI5ibSuEuPWLy1wVWpvD+dl
- yalpBIlRLCNgOFlT2Utpy7NzqHPav+0FxA/UywmZh/rzUSs2CThWaF+UwG3mRt9VUxFY
- 7zn7QxgxOr6Dqoo9M6iPWB7JlpD9VwsNhgo47fDHFyeYCTbaoXBsqnQHL1LgWDE63zGB
- zxWOCDbMRorUeDmFlolG1n+N70VXkLSWXPjwp8ho9g0rOTw7nERcBHW1dskDpg1bZbC2
- /tyL3WTxi8LxAQgI9iJjZZniycXHSavnjSbA9nxzlcDsEgJ+AUKucslN4kIkZJzpAF/P
- YqVw==
+ bh=1j0V90HxcPRVTKrhHkvxSsBjf2AtjVnHy6SmuJWd4uc=;
+ b=VyiXNkCyI/ruPOOUtrfyqjZysCapCeA+OHMxG2fG9V9EIqbs1uWHYZpwXjCBJXSdyG
+ zZskBgVLoG2s/cEx512jk/iQqKDwKRR7prOQuwokWMtFCR8hrfiGLDKWtcd8MFRUnBHY
+ 0xYtpbUcVrS6g6ueB8X1f72+yB+nRopktv31s3SfU4GA7K7AYFLVKxxpwN6f+nS7l9qL
+ 2adJSsYtDMO6GTtApMmw5zhnDAwFoIUB7WT7cBN2MBt9BUYBCfqzD0Rhl+NLiGC2bIT1
+ thQXUaRRDuyLPbDeB+b7IicGxJhmjWxUUm64g0iqvTou7XOcg62v+plSqJ/C6V3Fu9WA
+ atCw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1759778048; x=1760382848;
+ d=1e100.net; s=20230601; t=1759778054; x=1760382854;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=D1fg5U/GyUHEUoYSW2uLA1ee/vFWzHy3xrE05+0l8NM=;
- b=YbY3a5ykWmPI59FLOANY08kSV2mY9xaZHXQozx/Vxv6+uwd7mUQVjDqIRspi6ycLQ7
- H1r9pAB5WG4kWUNE3sprwo9s/bPGHyXsM2FgLvKVK8xQq0824f76Q6oyBfcqQqIwbXCp
- plKOeuwEtMeJrXnissa2FPhnKfqZXgyyfk6IBFOC2FnceGLhmCOzcWko8WEMo73TX4At
- Ak7l3zWZ2S6ZOMEFLu7D0KCU28tYtwSq802vOTip7HSEhe4ol9rjUrrbEyYmAUniIZQi
- BvjjtES/OGuI18cZvNZmNWsKEkMAL/iwXds4Ow2K4aAveqNfvPgGxKQ+lpyX3zMgCoay
- Gw+w==
+ bh=1j0V90HxcPRVTKrhHkvxSsBjf2AtjVnHy6SmuJWd4uc=;
+ b=Tr8dsr4s6OIqdvFNUoUe4XFKoZewh+Uf0Eiv5lvWJFmEqWSmaqNdbqUbCZGCoZkuXE
+ m43v7WEfnmV8kfZW38F0CrgBC/2/jyw0oYq7ZYHaWI8qgKrF7FmzfO4g/U6kG3sycfml
+ LdRupHdyexJJay+lmCFT4LNh6vV+LSGG2NTE8y6Si0C4tQd8JDXKwAeTONL9zQrxC/uF
+ sak3EPos0rxqny7tU9TcjHWfiUW+iUa4/JJ7MqThtuWTTn5xHEOH4ceIaBAmKbyCyQpF
+ 2PnIW44HGHkbFAL4uB13wlMw5+u0Edcqrijw/5uFsjcuY72COhGz5l3tYPw7BTNKWgJK
+ PkXA==
 X-Forwarded-Encrypted: i=1;
- AJvYcCW9JsCxAkHhr53MUnhlB0IgL3TtaNYT6Fpj34E1lSwrv1N/nuxBXtZhfSkfVlWAAB/+B6TwAExn@lists.freedesktop.org
-X-Gm-Message-State: AOJu0Yw1q5FZqdhVydp85/c807TlubD2bWcn1309JApEDfZNV8aHJE5e
- y/qS2D9vFJwUCqzU3/Fn5eI8Onh6zt4TBbNiSz4AP3Zv+aJ3RcH6/Phx
-X-Gm-Gg: ASbGncvZufTSrAQiCYWO13ifeVivzDEf3B1TN243De5C5QILU2wletaVQN42VSuFhp6
- SdejqOSPJRGVjrY+jdIvLmiTeerVRwOjA0FZBreWTdpK5Zre38iEZRH6J4gsBRc7KJ1zL7Syrzi
- aH+HA7cjg28wkWT2Kzk4e4c/DCsyOOuZKO1kq6vJm0EYQPskYykV4mNa46pBXS93ZBCvoKOsknF
- Xz8F3/pR2gGPwm81wDgFNy4+4B2yD2iHg+JA50HJ9/8T9OQFNpQdpuWonnFmA2BT8YRZQcfRlPT
- w85EgjSy+QLw5slcKWrRZT9jTQMbBn0gCaYJ/BJh6O+VlgzPvndvOf2V0pL9cWtzTAj1s8oI9hJ
- pM6X4TK/xZ+vSRiF5PuMZ533gGRAaL74Lj933FwuA+p6XoW35IKNnZQQTgQW8nSU2KBC7
-X-Google-Smtp-Source: AGHT+IF6rR0frEg/vaEMe0ANf9gzsCwVmoWQdq/B0a+98WReh9cKA0vT6dOHdfdyl59Refztc7ueSw==
-X-Received: by 2002:a05:6000:2410:b0:3ff:d5c5:6b03 with SMTP id
- ffacd0b85a97d-425671952ecmr8137394f8f.35.1759778047749; 
- Mon, 06 Oct 2025 12:14:07 -0700 (PDT)
+ AJvYcCXGvJSSQvAugeYd1ImNnb7Qcu2GC3fkqpA8aAvHxewD1G95PPUI+1opDzn5/lt0MaGuxKEPSu74@lists.freedesktop.org
+X-Gm-Message-State: AOJu0YwE3KsfEwPYK2ZPENQB8fDGXpGMCLbqgS+b0uWQGsmUejXra8ww
+ jqEg9tR8UKJ49u1EtuWbHBnmVmVpjExXrXlxYRDHPxS3jFbIWdhwJQoG
+X-Gm-Gg: ASbGncsTWRDElB5uZ3PQ+AvD64OMZpld/W8USBjYsYRiT2LvZA3j0/E2KK2iKCQr1NR
+ PPqQOuv/NCbTMW1jHMF7BVbSc2Tq8981WeYHT5iIh2Kjru6OoCyyBnCeDq3lRrL2bbh50Oon8gv
+ dvTq7jieZiToOz4tk8Wn8s6B15gw+iC6NoLaALJ23xg40Ras4Fewmlxdl2h/6x//1N+3/4WUy6I
+ kDsvqDCnR4v7i+lT6aU+nohhx4eDk8P8vPOZnaUWmlO6HwdA5yqAEKjZXCeYHbF7tGCGyq06feG
+ 91rG9iCFwBOSrdkWXH+PewPLQLmlbmY0PJYdXsF8Sfc9nbxyjf6dzcHTWYVnx9b6UC2BbX+pI/g
+ ZmJCTn1Hbn2Zx/33rHZvLmNkG7mLNNPx4L6Ak7K1iFgMx3uo544vrV3cJ0HGrkoJEw1dT+AGYTM
+ r8C6M=
+X-Google-Smtp-Source: AGHT+IFUbfCqi9C93YR2bP5dtsE3l+2iS9CguomaGDGXJEXk2nSHZJBr5r0pl0Mosg68LCW/bIjt9A==
+X-Received: by 2002:a05:6000:1842:b0:3c8:7fbf:2d6d with SMTP id
+ ffacd0b85a97d-425671b28ecmr7651955f8f.50.1759778054388; 
+ Mon, 06 Oct 2025 12:14:14 -0700 (PDT)
 Received: from fedora ([154.182.208.105]) by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-4256866060fsm16646435f8f.14.2025.10.06.12.14.05
+ ffacd0b85a97d-4256866060fsm16646435f8f.14.2025.10.06.12.14.12
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 06 Oct 2025 12:14:06 -0700 (PDT)
+ Mon, 06 Oct 2025 12:14:13 -0700 (PDT)
 From: Mohamed Ahmed <mohamedahmedegypt2001@gmail.com>
 To: linux-kernel@vger.kernel.org
 Cc: dri-devel@lists.freedesktop.org, Mary Guillemard <mary@mary.zone>,
@@ -71,9 +72,9 @@ Cc: dri-devel@lists.freedesktop.org, Mary Guillemard <mary@mary.zone>,
  Maxime Ripard <mripard@kernel.org>,
  Thomas Zimmermann <tzimmermann@suse.de>, David Airlie <airlied@gmail.com>,
  Simona Vetter <simona@ffwll.ch>, nouveau@lists.freedesktop.org
-Subject: [PATCH 1/5] drm/nouveau/uvmm: Prepare for larger pages
-Date: Mon,  6 Oct 2025 22:13:24 +0300
-Message-ID: <20251006191329.277485-2-mohamedahmedegypt2001@gmail.com>
+Subject: [PATCH 2/5] drm/nouveau/uvmm: Allow larger pages
+Date: Mon,  6 Oct 2025 22:13:25 +0300
+Message-ID: <20251006191329.277485-3-mohamedahmedegypt2001@gmail.com>
 X-Mailer: git-send-email 2.51.0
 In-Reply-To: <20251006191329.277485-1-mohamedahmedegypt2001@gmail.com>
 References: <20251006191329.277485-1-mohamedahmedegypt2001@gmail.com>
@@ -96,255 +97,100 @@ Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
 From: Mary Guillemard <mary@mary.zone>
 
-Currently memory allocated by VM_BIND uAPI can only have a  granuality
-matching PAGE_SIZE (4KiB in common case)
+Now that everything in UVMM knows about the variable page shift, we can
+select larger values.
 
-To have a better memory management and to allow big (64KiB) and huge
-(2MiB) pages later in the serie, we are now passing the page shift all
-around the internals of UVMM.
+The proposed approach rely on nouveau_bo::page unless it would cause
+alignment issues (in which case we fall back to searching an appropriate
+shift)
 
 Co-developed-by: Mohamed Ahmed <mohamedahmedegypt2001@gmail.com>
 Signed-off-by: Mohamed Ahmed <mohamedahmedegypt2001@gmail.com>
 Signed-off-by: Mary Guillemard <mary@mary.zone>
 ---
- drivers/gpu/drm/nouveau/nouveau_uvmm.c | 55 ++++++++++++++++----------
- drivers/gpu/drm/nouveau/nouveau_uvmm.h |  1 +
- 2 files changed, 35 insertions(+), 21 deletions(-)
+ drivers/gpu/drm/nouveau/nouveau_uvmm.c | 55 +++++++++++++++++++++++++-
+ 1 file changed, 53 insertions(+), 2 deletions(-)
 
 diff --git a/drivers/gpu/drm/nouveau/nouveau_uvmm.c b/drivers/gpu/drm/nouveau/nouveau_uvmm.c
-index 79eefdfd08a2..a92c729600d6 100644
+index a92c729600d6..c336a121e320 100644
 --- a/drivers/gpu/drm/nouveau/nouveau_uvmm.c
 +++ b/drivers/gpu/drm/nouveau/nouveau_uvmm.c
-@@ -107,34 +107,34 @@ nouveau_uvmm_vmm_sparse_unref(struct nouveau_uvmm *uvmm,
- 
- static int
- nouveau_uvmm_vmm_get(struct nouveau_uvmm *uvmm,
--		     u64 addr, u64 range)
-+		     u64 addr, u64 range, u8 page_shift)
- {
- 	struct nvif_vmm *vmm = &uvmm->vmm.vmm;
- 
--	return nvif_vmm_raw_get(vmm, addr, range, PAGE_SHIFT);
-+	return nvif_vmm_raw_get(vmm, addr, range, page_shift);
+@@ -454,6 +454,56 @@ op_unmap_prepare_unwind(struct drm_gpuva *va)
+ 	drm_gpuva_insert(va->vm, va);
  }
  
- static int
- nouveau_uvmm_vmm_put(struct nouveau_uvmm *uvmm,
--		     u64 addr, u64 range)
-+		     u64 addr, u64 range, u8 page_shift)
- {
- 	struct nvif_vmm *vmm = &uvmm->vmm.vmm;
- 
--	return nvif_vmm_raw_put(vmm, addr, range, PAGE_SHIFT);
-+	return nvif_vmm_raw_put(vmm, addr, range, page_shift);
- }
- 
- static int
- nouveau_uvmm_vmm_unmap(struct nouveau_uvmm *uvmm,
--		       u64 addr, u64 range, bool sparse)
-+		       u64 addr, u64 range, u8 page_shift, bool sparse)
- {
- 	struct nvif_vmm *vmm = &uvmm->vmm.vmm;
- 
--	return nvif_vmm_raw_unmap(vmm, addr, range, PAGE_SHIFT, sparse);
-+	return nvif_vmm_raw_unmap(vmm, addr, range, page_shift, sparse);
- }
- 
- static int
- nouveau_uvmm_vmm_map(struct nouveau_uvmm *uvmm,
--		     u64 addr, u64 range,
-+		     u64 addr, u64 range, u8 page_shift,
- 		     u64 bo_offset, u8 kind,
- 		     struct nouveau_mem *mem)
- {
-@@ -163,7 +163,7 @@ nouveau_uvmm_vmm_map(struct nouveau_uvmm *uvmm,
- 		return -ENOSYS;
- 	}
- 
--	return nvif_vmm_raw_map(vmm, addr, range, PAGE_SHIFT,
-+	return nvif_vmm_raw_map(vmm, addr, range, page_shift,
- 				&args, argc,
- 				&mem->mem, bo_offset);
- }
-@@ -182,8 +182,9 @@ nouveau_uvma_vmm_put(struct nouveau_uvma *uvma)
- {
- 	u64 addr = uvma->va.va.addr;
- 	u64 range = uvma->va.va.range;
-+	u8 page_shift = uvma->page_shift;
- 
--	return nouveau_uvmm_vmm_put(to_uvmm(uvma), addr, range);
-+	return nouveau_uvmm_vmm_put(to_uvmm(uvma), addr, range, page_shift);
- }
- 
- static int
-@@ -193,9 +194,11 @@ nouveau_uvma_map(struct nouveau_uvma *uvma,
- 	u64 addr = uvma->va.va.addr;
- 	u64 offset = uvma->va.gem.offset;
- 	u64 range = uvma->va.va.range;
-+	u8 page_shift = uvma->page_shift;
- 
- 	return nouveau_uvmm_vmm_map(to_uvmm(uvma), addr, range,
--				    offset, uvma->kind, mem);
-+				    page_shift, offset, uvma->kind,
-+				    mem);
- }
- 
- static int
-@@ -203,12 +206,13 @@ nouveau_uvma_unmap(struct nouveau_uvma *uvma)
- {
- 	u64 addr = uvma->va.va.addr;
- 	u64 range = uvma->va.va.range;
-+	u8 page_shift = uvma->page_shift;
- 	bool sparse = !!uvma->region;
- 
- 	if (drm_gpuva_invalidated(&uvma->va))
- 		return 0;
- 
--	return nouveau_uvmm_vmm_unmap(to_uvmm(uvma), addr, range, sparse);
-+	return nouveau_uvmm_vmm_unmap(to_uvmm(uvma), addr, range, page_shift, sparse);
- }
- 
- static int
-@@ -501,7 +505,8 @@ nouveau_uvmm_sm_prepare_unwind(struct nouveau_uvmm *uvmm,
- 
++static bool
++op_map_aligned_to_page_shift(const struct drm_gpuva_op_map *op, u8 page_shift)
++{
++	u64 page_size = 1ULL << page_shift;
++
++	return op->va.addr % page_size == 0 && op->va.range % page_size == 0 &&
++		   op->gem.offset % page_size == 0;
++}
++
++static u8
++select_page_shift(struct nouveau_uvmm *uvmm, struct drm_gpuva_op_map *op)
++{
++	struct nouveau_bo *nvbo = nouveau_gem_object(op->gem.obj);
++
++	if (nvbo) {
++		/* If the BO preferred page shift already fits, use it. */
++		if (op_map_aligned_to_page_shift(op, nvbo->page))
++			return nvbo->page;
++
++		struct nouveau_mem *mem = nouveau_mem(nvbo->bo.resource);
++		struct nvif_vmm *vmm = &uvmm->vmm.vmm;
++		int i;
++
++		/* Otherwise let's find a granuality that will fit. */
++		for (i = 0; i < vmm->page_nr; i++) {
++			/* Ignore anything that is bigger or identical to the BO preference. */
++			if (vmm->page[i].shift >= nvbo->page)
++				continue;
++
++			/* Skip incompatible domains. */
++			if ((mem->mem.type & NVIF_MEM_VRAM) && !vmm->page[i].vram)
++				continue;
++			if ((mem->mem.type & NVIF_MEM_HOST) &&
++			    (!vmm->page[i].host || vmm->page[i].shift > PAGE_SHIFT))
++				continue;
++
++			/* If it fits, return the proposed shift. */
++			if (op_map_aligned_to_page_shift(op, vmm->page[i].shift))
++				return vmm->page[i].shift;
++		}
++
++		/* If we get here then nothing can reconcile the requirements. This should never
++		 * happen.
++		 */
++		WARN_ON(1);
++	}
++
++	return PAGE_SHIFT;
++}
++
+ static void
+ nouveau_uvmm_sm_prepare_unwind(struct nouveau_uvmm *uvmm,
+ 			       struct nouveau_uvma_prealloc *new,
+@@ -506,7 +556,7 @@ nouveau_uvmm_sm_prepare_unwind(struct nouveau_uvmm *uvmm,
  			if (vmm_get_range)
  				nouveau_uvmm_vmm_put(uvmm, vmm_get_start,
--						     vmm_get_range);
-+						     vmm_get_range,
-+						     PAGE_SHIFT);
+ 						     vmm_get_range,
+-						     PAGE_SHIFT);
++						     select_page_shift(uvmm, &op->map));
  			break;
  		}
  		case DRM_GPUVA_OP_REMAP: {
-@@ -528,6 +533,7 @@ nouveau_uvmm_sm_prepare_unwind(struct nouveau_uvmm *uvmm,
- 			u64 ustart = va->va.addr;
- 			u64 urange = va->va.range;
- 			u64 uend = ustart + urange;
-+			u8 page_shift = uvma_from_va(va)->page_shift;
- 
- 			/* Nothing to do for mappings we merge with. */
- 			if (uend == vmm_get_start ||
-@@ -538,7 +544,8 @@ nouveau_uvmm_sm_prepare_unwind(struct nouveau_uvmm *uvmm,
- 				u64 vmm_get_range = ustart - vmm_get_start;
- 
- 				nouveau_uvmm_vmm_put(uvmm, vmm_get_start,
--						     vmm_get_range);
-+						     vmm_get_range,
-+						     page_shift);
- 			}
- 			vmm_get_start = uend;
- 			break;
-@@ -581,7 +588,8 @@ static int
- op_map_prepare(struct nouveau_uvmm *uvmm,
- 	       struct nouveau_uvma **puvma,
- 	       struct drm_gpuva_op_map *op,
--	       struct uvmm_map_args *args)
-+	       struct uvmm_map_args *args,
-+	       u8 page_shift)
- {
- 	struct nouveau_uvma *uvma;
- 	int ret;
-@@ -592,6 +600,7 @@ op_map_prepare(struct nouveau_uvmm *uvmm,
- 
- 	uvma->region = args->region;
- 	uvma->kind = args->kind;
-+	uvma->page_shift = page_shift;
- 
- 	drm_gpuva_map(&uvmm->base, &uvma->va, op);
- 
-@@ -627,13 +636,14 @@ nouveau_uvmm_sm_prepare(struct nouveau_uvmm *uvmm,
+@@ -636,7 +686,8 @@ nouveau_uvmm_sm_prepare(struct nouveau_uvmm *uvmm,
  		case DRM_GPUVA_OP_MAP: {
  			u64 vmm_get_range = vmm_get_end - vmm_get_start;
  
--			ret = op_map_prepare(uvmm, &new->map, &op->map, args);
-+			ret = op_map_prepare(uvmm, &new->map, &op->map, args, PAGE_SHIFT);
+-			ret = op_map_prepare(uvmm, &new->map, &op->map, args, PAGE_SHIFT);
++			ret = op_map_prepare(uvmm, &new->map, &op->map, args,
++					     select_page_shift(uvmm, &op->map));
  			if (ret)
  				goto unwind;
  
- 			if (vmm_get_range) {
- 				ret = nouveau_uvmm_vmm_get(uvmm, vmm_get_start,
--							   vmm_get_range);
-+							   vmm_get_range,
-+							   new->map->page_shift);
- 				if (ret) {
- 					op_map_prepare_unwind(new->map);
- 					goto unwind;
-@@ -657,7 +667,7 @@ nouveau_uvmm_sm_prepare(struct nouveau_uvmm *uvmm,
- 
- 			if (r->prev) {
- 				ret = op_map_prepare(uvmm, &new->prev, r->prev,
--						     &remap_args);
-+						     &remap_args, uvma_from_va(va)->page_shift);
- 				if (ret)
- 					goto unwind;
- 
-@@ -667,7 +677,7 @@ nouveau_uvmm_sm_prepare(struct nouveau_uvmm *uvmm,
- 
- 			if (r->next) {
- 				ret = op_map_prepare(uvmm, &new->next, r->next,
--						     &remap_args);
-+						     &remap_args, uvma_from_va(va)->page_shift);
- 				if (ret) {
- 					if (r->prev)
- 						op_map_prepare_unwind(new->prev);
-@@ -689,6 +699,7 @@ nouveau_uvmm_sm_prepare(struct nouveau_uvmm *uvmm,
- 			u64 ustart = va->va.addr;
- 			u64 urange = va->va.range;
- 			u64 uend = ustart + urange;
-+			u8 page_shift = uvma_from_va(va)->page_shift;
- 
- 			op_unmap_prepare(u);
- 
-@@ -704,7 +715,7 @@ nouveau_uvmm_sm_prepare(struct nouveau_uvmm *uvmm,
- 				u64 vmm_get_range = ustart - vmm_get_start;
- 
- 				ret = nouveau_uvmm_vmm_get(uvmm, vmm_get_start,
--							   vmm_get_range);
-+							   vmm_get_range, page_shift);
- 				if (ret) {
- 					op_unmap_prepare_unwind(va);
- 					goto unwind;
-@@ -799,10 +810,11 @@ op_unmap_range(struct drm_gpuva_op_unmap *u,
- 	       u64 addr, u64 range)
- {
- 	struct nouveau_uvma *uvma = uvma_from_va(u->va);
-+	u8 page_shift = uvma->page_shift;
- 	bool sparse = !!uvma->region;
- 
- 	if (!drm_gpuva_invalidated(u->va))
--		nouveau_uvmm_vmm_unmap(to_uvmm(uvma), addr, range, sparse);
-+		nouveau_uvmm_vmm_unmap(to_uvmm(uvma), addr, range, page_shift, sparse);
- }
- 
- static void
-@@ -882,6 +894,7 @@ nouveau_uvmm_sm_cleanup(struct nouveau_uvmm *uvmm,
- 			struct drm_gpuva_op_map *n = r->next;
- 			struct drm_gpuva *va = r->unmap->va;
- 			struct nouveau_uvma *uvma = uvma_from_va(va);
-+			u8 page_shift = uvma->page_shift;
- 
- 			if (unmap) {
- 				u64 addr = va->va.addr;
-@@ -893,7 +906,7 @@ nouveau_uvmm_sm_cleanup(struct nouveau_uvmm *uvmm,
- 				if (n)
- 					end = n->va.addr;
- 
--				nouveau_uvmm_vmm_put(uvmm, addr, end - addr);
-+				nouveau_uvmm_vmm_put(uvmm, addr, end - addr, page_shift);
- 			}
- 
- 			nouveau_uvma_gem_put(uvma);
-diff --git a/drivers/gpu/drm/nouveau/nouveau_uvmm.h b/drivers/gpu/drm/nouveau/nouveau_uvmm.h
-index 9d3c348581eb..51925711ae90 100644
---- a/drivers/gpu/drm/nouveau/nouveau_uvmm.h
-+++ b/drivers/gpu/drm/nouveau/nouveau_uvmm.h
-@@ -33,6 +33,7 @@ struct nouveau_uvma {
- 
- 	struct nouveau_uvma_region *region;
- 	u8 kind;
-+	u8 page_shift;
- };
- 
- #define uvmm_from_gpuvm(x) container_of((x), struct nouveau_uvmm, base)
 -- 
 2.51.0
 
