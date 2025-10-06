@@ -2,50 +2,91 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id 573A3CBADF7
-	for <lists+nouveau@lfdr.de>; Sat, 13 Dec 2025 13:45:38 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 7C327CBAA88
+	for <lists+nouveau@lfdr.de>; Sat, 13 Dec 2025 13:42:11 +0100 (CET)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 3B2B610EAFC;
-	Sat, 13 Dec 2025 12:41:37 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 637F410EA8C;
+	Sat, 13 Dec 2025 12:41:01 +0000 (UTC)
 Authentication-Results: gabe.freedesktop.org;
-	dkim=pass (1024-bit key; unprotected) header.d=cse.ust.hk header.i=@cse.ust.hk header.b="rr1hTbhk";
+	dkim=permerror (0-bit key) header.d=gmail.com header.i=@gmail.com header.b="hbNEKZQf";
 	dkim-atps=neutral
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-X-Greylist: delayed 818 seconds by postgrey-1.36 at gabe;
- Mon, 06 Oct 2025 17:02:37 UTC
-Received: from cse.ust.hk (cssvr7.cse.ust.hk [143.89.41.157])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 7BA5710E039;
- Mon,  6 Oct 2025 17:02:37 +0000 (UTC)
-Received: from homelab ([58.82.196.128]) (authenticated bits=0)
- by cse.ust.hk (8.18.1/8.12.5) with ESMTPSA id 596GmgIw1681762
- (version=TLSv1.3 cipher=TLS_AES_256_GCM_SHA384 bits=256 verify=NOT);
- Tue, 7 Oct 2025 00:48:48 +0800
-ARC-Seal: i=1; a=rsa-sha256; d=cse.ust.hk; s=arccse; t=1759769329; cv=none;
- b=u6BffOttA8edvq5IIWlw9D1OXn2Vr3IujB1iv5/YVGSAyYWdvDXGKTveF+Qwt0EbM3s/zbje00wKGaV22g7Kjmeqad4oeTKo++3wNbK0UiDmEOT51cQmpI318YD3P5bUFI85a0z0KpdV4IskRWzE1R13hfLqd7+2P2maZJhNDOA=
-ARC-Message-Signature: i=1; a=rsa-sha256; d=cse.ust.hk; s=arccse;
- t=1759769329; c=relaxed/relaxed;
- bh=oGM5vpkyAsmTUtIk5RM/tQs1EUajj7ebFZCNrR8AKuM=;
- h=DKIM-Signature:Date:From:To:Subject:Message-ID:MIME-Version;
- b=dWG2tclzCd7pY3zf9u139f/jMzECNovrotpDIJz2ntrNKiiWcf7TR2piWkJ2/PRTacxjNwkCGb14W5JaMh8Nhq32pp66/2LesOrcygahuAQWrSNCBNjtJ9Bi6Up3JmUgmY49dEUug5akuW+toF8CWsJio3xW92P4fp9C+FtcrJc=
-ARC-Authentication-Results: i=1; cse.ust.hk
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=cse.ust.hk;
- s=cseusthk; t=1759769329;
- bh=oGM5vpkyAsmTUtIk5RM/tQs1EUajj7ebFZCNrR8AKuM=;
- h=Date:From:To:Cc:Subject:From;
- b=rr1hTbhk3kH283RzkS+LstTZ/Q6xtM/rNNbKf32pI4LBMi9nX0E7z1NbamBUsCqMD
- bQal8nrd73l9hHOSSXoYylr6ep+jsG5Utz4tOs2dMap+dj/M7Ni+fTepHvfLhAfUEb
- s97sW8Zkyo4FWz1TQz+wTDNhJNZIybfmOjeS28cw=
-Date: Tue, 7 Oct 2025 00:48:37 +0800
-From: Shuhao Fu <sfual@cse.ust.hk>
-To: Lyude Paul <lyude@redhat.com>, Danilo Krummrich <dakr@kernel.org>
-Cc: dri-devel@lists.freedesktop.org, nouveau@lists.freedesktop.org
-Subject: [PATCH] drm/nouveau: Fix refcount leak in nouveau_connector_detect
-Message-ID: <aOPy5aCiRTqb9kjR@homelab>
+Received: from mail-qt1-f181.google.com (mail-qt1-f181.google.com
+ [209.85.160.181])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id A213D10E0C4
+ for <nouveau@lists.freedesktop.org>; Mon,  6 Oct 2025 22:29:26 +0000 (UTC)
+Received: by mail-qt1-f181.google.com with SMTP id
+ d75a77b69052e-4db0b56f6e7so58788611cf.1
+ for <nouveau@lists.freedesktop.org>; Mon, 06 Oct 2025 15:29:26 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=gmail.com; s=20230601; t=1759789765; x=1760394565; darn=lists.freedesktop.org;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=NVmyDp3clLGLS8kIW7yJXXQisPoyp+nIoQv6rloL8GA=;
+ b=hbNEKZQfvA+2vxNaLnQTqynoyWqUT5deE3mZ2pC3Ug8lGSATExKxWOIfMH0JgNW5Ze
+ JQQyx0RQW25E0yggkSfQGfM0csra7fS6r4yhDdpg8NGbFwRb7PbUXoAXgm7msPEyPFDm
+ JAn0pO18ct5jf/JvrcVP5ZQ8+orN9L5aUi4qO9A7ROMKxV7N2z6htcS2u7rcoLE/otbx
+ J/PxthuzngZhcI8XC/TQnfF9IsdnFtTAbb2+fswZwz8Zk6WETzEjhYitM/4adS3aX5v0
+ 24jk6CFfEpBivXEQL1ziBSJCoIN/J8kFT8eTcc/KbF719FtAKbYs3GLW7FZvMuo/5BQs
+ WMxA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1759789765; x=1760394565;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=NVmyDp3clLGLS8kIW7yJXXQisPoyp+nIoQv6rloL8GA=;
+ b=w6bUMf6c7CWWkygwp7tnKjVkCCXncsRhYjmXYejMQKY3gkZ3xI4fvI3qrWVONFd2az
+ l88OdS8rTJGMApcG10fJ1Qb4UAKLYYDFjRYMJ9hKyAuK+hmuFTwIHIkrrPdr8pCvhKmA
+ dIVGsTgK5po08uFyHl7BZ9uKh3CInGVJN/zm7U7BYir2X99WQZ3ifyZ7CZwUik2b8kD0
+ rOofAXaAcMQJxMAOUDx57y5f2K8EQXKtWv0+E0koYPIIl1DhdvYPVKcI8o+cy3Nfdeq9
+ /cgO1ECJ5qByPhX08skJLTMPmEdzw7anNOTushWvieF137Lso23HpjPjed8Ibf9ePzGy
+ 0WeA==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCU+bLXiohqKip6EZX8UMwS/w3yTrsIgtsjsVDYoiYK7goYpPRIDvZyFD+pdhuDI6r247Q71SbaS@lists.freedesktop.org
+X-Gm-Message-State: AOJu0YyC9CGitmEl7cBTOpMskHe0InKxuF6t7xgcq+enkth8YHgdPPL0
+ ogYOQ2etUsl+BoDSamd/kiKgG4zpEMJ/mFFE3fCuEqlSZGkDdYz5sOMI
+X-Gm-Gg: ASbGncuaUxXIIWyepZRk35hLZrwShnCSXj6Yr8DOn7bpsOPj5V7N9QwbnU9cCZ65BnC
+ GRXKERMgH61R7laqYYXvPBa0Ky1QjWW+tnBF7/w/tG5NXhWBw8MlNVtalboCZXzrwuFPYk4VgcH
+ 2YAQIO5XRq4OW27jC/GlPXLPhTVBByd9N/6C/ffl1cbCYotMpPGua3oQKJoIS4pRlQr7hhKqas9
+ TQ4tGF1nkeAk9rO96rLG12K2FSJnZ/EnqzTFaNupS1oVbeam6ul/tTXI0gFSUUmkyysHca/fcKy
+ ceU2WI9Mt+pjoabMbSXt3cCFhPGXjzHPTn2uGzBKbzLxZ9uJH1E1JjYb/cePzq86nZLIXH5rX0Z
+ sArPMG7JyNPAGnVKXLI4nM1K1nFS+8J5yiacJznlXaNk=
+X-Google-Smtp-Source: AGHT+IHPqikPMwG5q0hEpff7no1z9szaNg+f/yIWTC45aDjchAEueYobJpT+cU5Ru6SV8Xq4v0V8Ug==
+X-Received: by 2002:a05:622a:1807:b0:4ab:6e3d:49b4 with SMTP id
+ d75a77b69052e-4e6de794646mr17493561cf.7.1759789765354; 
+ Mon, 06 Oct 2025 15:29:25 -0700 (PDT)
+Received: from localhost ([12.22.141.131]) by smtp.gmail.com with ESMTPSA id
+ d75a77b69052e-4e55c9e77bcsm131484451cf.24.2025.10.06.15.29.22
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Mon, 06 Oct 2025 15:29:23 -0700 (PDT)
+Date: Mon, 6 Oct 2025 18:29:21 -0400
+From: Yury Norov <yury.norov@gmail.com>
+To: Joel Fernandes <joelagnelf@nvidia.com>
+Cc: linux-kernel@vger.kernel.org, rust-for-linux@vger.kernel.org,
+ dri-devel@lists.freedesktop.org, dakr@kernel.org,
+ acourbot@nvidia.com, Alistair Popple <apopple@nvidia.com>,
+ Miguel Ojeda <ojeda@kernel.org>, Alex Gaynor <alex.gaynor@gmail.com>,
+ Boqun Feng <boqun.feng@gmail.com>, Gary Guo <gary@garyguo.net>,
+ bjorn3_gh@protonmail.com, Benno Lossin <lossin@kernel.org>,
+ Andreas Hindborg <a.hindborg@kernel.org>,
+ Alice Ryhl <aliceryhl@google.com>, Trevor Gross <tmgross@umich.edu>,
+ David Airlie <airlied@gmail.com>, Simona Vetter <simona@ffwll.ch>,
+ Maarten Lankhorst <maarten.lankhorst@linux.intel.com>,
+ Maxime Ripard <mripard@kernel.org>,
+ Thomas Zimmermann <tzimmermann@suse.de>,
+ John Hubbard <jhubbard@nvidia.com>, Timur Tabi <ttabi@nvidia.com>,
+ joel@joelfernandes.org, Elle Rhumsaa <elle@weathered-steel.dev>,
+ Daniel Almeida <daniel.almeida@collabora.com>,
+ Andrea Righi <arighi@nvidia.com>, nouveau@lists.freedesktop.org
+Subject: Re: [PATCH v6 0/5] Introduce bitfield and move register macro to
+ rust/kernel/
+Message-ID: <aORCwckUwZspBMfv@yury>
+References: <20251003154748.1687160-1-joelagnelf@nvidia.com>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
-X-Env-From: sfual
+In-Reply-To: <20251003154748.1687160-1-joelagnelf@nvidia.com>
 X-Mailman-Approved-At: Sat, 13 Dec 2025 12:40:49 +0000
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
@@ -61,37 +102,75 @@ List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-A possible inconsistent refcount update has been identified in function
-`nouveau_connector_detect`, which may cause a resource leak.
+On Fri, Oct 03, 2025 at 11:47:43AM -0400, Joel Fernandes wrote:
+> Hello!
+> 
+> These patches extract and enhance the bitfield support in the register macro in
+> nova to define Rust structures with bitfields. It then moves out the bitfield
+> support into the kenrel crate.
+> 
+> Since v5, I dropped several patches and only kept the simple ones that do code
+> movement, added a few features and added a KUNIT test. After Alex's bounded
+> integer [1] support is in, we can rewrite the dropped patches.
+> 
+> I also dropped the MAINTAINER entry for now, pending more clarity around that.
+> I am happy to maintain it, but I need more input on who all will co-maintain,
+> now that the last 4 patches were dropped. Perhaps we can maintain it was a part
+> of the core rust-for-linux? I suggest let us create the maintainer entry once
+> Alex's bounded integer support is integrated but I am open to suggestions.
+> 
+> Here are the v5 patches [2].
+> 
+> [1] https://lore.kernel.org/all/20251002-bounded_ints-v1-0-dd60f5804ea4@nvidia.com/
+> [2] https://lore.kernel.org/all/20250930144537.3559207-1-joelagnelf@nvidia.com/
 
-After calling `pm_runtime_get_*(dev->dev)`, the usage counter of `dev->dev`
-gets increased. In case function `nvif_outp_edid_get` returns negative,
-function `nouveau_connector_detect` returns without decreasing the usage
-counter of `dev->dev`, causing a refcount inconsistency.
+Hi Joel,
 
-Signed-off-by: Shuhao Fu <sfual@cse.ust.hk>
-Closes: https://gitlab.freedesktop.org/drm/nouveau/-/issues/450
----
- drivers/gpu/drm/nouveau/nouveau_connector.c | 6 ++++--
- 1 file changed, 4 insertions(+), 2 deletions(-)
+I returned back to v5 today to just find that you have posted a v6.
 
-diff --git a/drivers/gpu/drm/nouveau/nouveau_connector.c b/drivers/gpu/drm/nouveau/nouveau_connector.c
-index 63621b151..45caccade 100644
---- a/drivers/gpu/drm/nouveau/nouveau_connector.c
-+++ b/drivers/gpu/drm/nouveau/nouveau_connector.c
-@@ -600,8 +600,10 @@ nouveau_connector_detect(struct drm_connector *connector, bool force)
- 				new_edid = drm_get_edid(connector, nv_encoder->i2c);
- 		} else {
- 			ret = nvif_outp_edid_get(&nv_encoder->outp, (u8 **)&new_edid);
--			if (ret < 0)
--				return connector_status_disconnected;
-+			if (ret < 0) {
-+				conn_status = connector_status_disconnected;
-+				goto out;
-+			}
- 		}
- 
- 		nouveau_connector_set_edid(nv_connector, new_edid);
--- 
-2.39.5
+There's just 3 days between the versions, and I'm pretty sure most
+people were not able to even read the material. Moreover, there's
+an -rc1 window ongoing, which means that people may be busy.
 
+You're still receiving feedback to v5, and this makes even more mess
+because now I'm completely lost about what I should review and what
+should ignore.
+
+Please allow a usual 2 weeks between versions to let people have
+a chance to give you a valuable feedback.
+
+It seems that you decided to drop some material, comparing to v5, but
+don't even notice what exactly has been removed, except that vague
+"code movement and few features" notice.
+
+Regardless, I don't think that this is the right path to move the
+bitfields into the core. The natural path for a feature that has
+been originally developed on driver side is to mature in there and
+get merged to core libraries after a while. Resctrl from Intel is one
+recent example.
+
+With that said, I'm OK if you move the bitfields as a whole, like you
+do in v5, and I'm also OK if you split out the part essential for nova
+and take it into the driver. In that case the bitfields will stay in 
+drivers and you'll be able to focus on the features that _you_ need,
+not on generic considerations.
+
+I'm not OK to move bitfields in their current (v6) incomplete form in
+rust/kernel. We still have no solid understanding on the API and
+implementation that we've been all agreed on.
+
+On maintenance: no core functionality can be merged unmaintained - it's
+a strict rule. While in drivers, bitfields are maintained by the nova
+maintainers as part of the driver. If you make it a generic library,
+you need to define a responsible person(s) in advance. It's also a good
+practice to add a core maintainer as a reviewer or co-maintainer. Alice
+and Burak added me for bitmap/rust because I already look after bitmaps
+in C. You can do the same for bitfields, for the same reason.
+
+It looks like you have some offline discussions on the bitfields.
+(Particularly with me.) Before we move forward, can you please wrap
+up all the input you've got, so we'll all be sure that we are on the
+same page. Right now the process look really messy.
+
+Thanks,
+Yury
