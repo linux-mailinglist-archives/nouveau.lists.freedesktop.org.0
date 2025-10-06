@@ -2,107 +2,100 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id 91CF3CBAEF2
-	for <lists+nouveau@lfdr.de>; Sat, 13 Dec 2025 13:46:38 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id DDB9FCBABB0
+	for <lists+nouveau@lfdr.de>; Sat, 13 Dec 2025 13:43:15 +0100 (CET)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id ACCBC10EC4E;
-	Sat, 13 Dec 2025 12:42:17 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 1F21010EA1A;
+	Sat, 13 Dec 2025 12:41:05 +0000 (UTC)
 Authentication-Results: gabe.freedesktop.org;
-	dkim=permerror (0-bit key) header.d=jannau.net header.i=@jannau.net header.b="JwFBJbaa";
-	dkim=permerror (0-bit key) header.d=messagingengine.com header.i=@messagingengine.com header.b="nE9vk/bI";
+	dkim=permerror (0-bit key) header.d=gmail.com header.i=@gmail.com header.b="YauurWJr";
 	dkim-atps=neutral
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from fout-a6-smtp.messagingengine.com
- (fout-a6-smtp.messagingengine.com [103.168.172.149])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 0901D10E950;
- Fri,  3 Oct 2025 17:25:26 +0000 (UTC)
-Received: from phl-compute-01.internal (phl-compute-01.internal [10.202.2.41])
- by mailfout.phl.internal (Postfix) with ESMTP id 4AEA3EC0213;
- Fri,  3 Oct 2025 13:25:26 -0400 (EDT)
-Received: from phl-mailfrontend-01 ([10.202.2.162])
- by phl-compute-01.internal (MEProxy); Fri, 03 Oct 2025 13:25:26 -0400
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=jannau.net; h=cc
- :cc:content-type:content-type:date:date:from:from:in-reply-to
- :in-reply-to:message-id:mime-version:references:reply-to:subject
- :subject:to:to; s=fm3; t=1759512326; x=1759598726; bh=80zTLlNJzL
- 69CstAw641a6XukyfcEwp1lxsA+QkUUPA=; b=JwFBJbaaRt/nqg+vVt7bZic0JU
- 1GG0iknvBOLM6mMBiNUTG+6a/3VwxL13MFucddigVSTFQ+js7H5k6qPjDDmDQFhn
- IRdBwg6gl9vWgBuYAL/a2w6XUNueG0AvPZNmvZza7DLsNXjEAu76gvpSJBSoTAqd
- 7c7HZBx5DYxp+kY9ZYZTX6xenM1io/A3QZaI7k4gq4QN6UlzDmAw5Fl22TwXiLbP
- KxLxGIvDoShk0KeLFOvO2AdEhFpanCyKt0IHr37w+K/r7VMYJ9Zo3QPKIAxa4ofc
- Bl9TwdFP2OB05TfyraSog0OO7C+apf+TNVwYlZPMnW2/5qpOvkg4PAQc178A==
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=
- messagingengine.com; h=cc:cc:content-type:content-type:date:date
- :feedback-id:feedback-id:from:from:in-reply-to:in-reply-to
- :message-id:mime-version:references:reply-to:subject:subject:to
- :to:x-me-proxy:x-me-sender:x-me-sender:x-sasl-enc; s=fm2; t=
- 1759512326; x=1759598726; bh=80zTLlNJzL69CstAw641a6XukyfcEwp1lxs
- A+QkUUPA=; b=nE9vk/bI9WxRJaqgCcF4FUfBATlqE/SIujNFseORpqgb9oGu0TU
- 7a/FRpUlAU4Y3iMQeH9vUPIn/HdMCK+1DY+QWpa9231HXKe8ZijAnippqPiSLoYe
- J9XN6Zlp3YgM6Mg1fhy5Tmxf/TTdxFo/2qeiCqiX3ncWjiMsJsNWq8ioWyRvGIWL
- Z8f1BzjMAzcdrwX+KC1AKfCcuSXSwQ7PXaBITzSsDzxQaJeck9TUuZhDLukbd3Ja
- hmln0h3uQ2uYpdABdtfXE6H5y5tdvjhfq/ToVeSivSq4xqhq8+K1otHA5Q5SUGcS
- jIN9Gl6zdsLjh9cgiBvK71Mng34MOJmitZg==
-X-ME-Sender: <xms:BQfgaK0s9bz71HRzDdcCzkofTBDXwamsY1LAuEdRlWPU4MGxnJUMGg>
- <xme:BQfgaIGE32EnaFYFnc000ieZYcqTNJqZvPQBJn4XLQOgSZTezVgqX985L-GZ7fwev
- uaxIt0F9qFXVFWy-NYsPoahcXBxuqFZV5tVb15bSvWilSHHP9JpgpU>
-X-ME-Received: <xmr:BQfgaJij61ATHgaTelHGIeImqKgTwJ4QoAjywWu2tsiizeFXg_2QBA7kMLoA6WjWACrcVP26Qp4WamvThvbCYqU3N8gSJHu3Yp_kgu8W3sw>
-X-ME-Proxy-Cause: gggruggvucftvghtrhhoucdtuddrgeeffedrtdeggdekleeglecutefuodetggdotefrod
- ftvfcurfhrohhfihhlvgemucfhrghsthforghilhdpuffrtefokffrpgfnqfghnecuuegr
- ihhlohhuthemuceftddtnecusecvtfgvtghiphhivghnthhsucdlqddutddtmdenucfjug
- hrpeffhffvvefukfhfgggtuggjsehttdertddttdejnecuhfhrohhmpeflrghnnhgvucfi
- rhhunhgruhcuoehjsehjrghnnhgruhdrnhgvtheqnecuggftrfgrthhtvghrnhepudefhf
- ehudetjeeutdfhvefhtdeltdfgheefkeefleegveevtedtveelfffhiedtnecuffhomhgr
- ihhnpehgihhthhhusgdrtghomhenucevlhhushhtvghrufhiiigvpedtnecurfgrrhgrmh
- epmhgrihhlfhhrohhmpehjsehjrghnnhgruhdrnhgvthdpnhgspghrtghpthhtohepvdeg
- pdhmohguvgepshhmthhpohhuthdprhgtphhtthhopehlohhsshhinheskhgvrhhnvghlrd
- horhhgpdhrtghpthhtoheprggtohhurhgsohhtsehnvhhiughirgdrtghomhdprhgtphht
- thhopegrphhophhplhgvsehnvhhiughirgdrtghomhdprhgtphhtthhopehruhhsthdqfh
- horhdqlhhinhhugiesvhhgvghrrdhkvghrnhgvlhdrohhrghdprhgtphhtthhopegurhhi
- qdguvghvvghlsehlihhsthhsrdhfrhgvvgguvghskhhtohhprdhorhhgpdhrtghpthhtoh
- epuggrkhhrsehkvghrnhgvlhdrohhrghdprhgtphhtthhopehojhgvuggrsehkvghrnhgv
- lhdrohhrghdprhgtphhtthhopegrlhgvgidrghgrhihnohhrsehgmhgrihhlrdgtohhmpd
- hrtghpthhtohepsghoqhhunhdrfhgvnhhgsehgmhgrihhlrdgtohhm
-X-ME-Proxy: <xmx:BQfgaJdJuMiVM0mL5HUBuq92XcG0QHrRS6GLnSYY3bYcYfHiOOZ3_w>
- <xmx:BQfgaHwluiGRTue-YMovY9T9fTXhYYlyVDEZ7fA755zyfd8IPPIJeA>
- <xmx:BQfgaLaM4QgaUrIyiMc1a29mHZOq0oE1UWLcA7-ulbneamevMW4XxA>
- <xmx:BQfgaNK5hiDFUgAVrD-Ur6gAIlLUM_H9kkt3CdiR1VKl3xJLt1L2nQ>
- <xmx:BgfgaN_4owHecfQcS1nCMS0N6jNHBsF8eTLZL_QWqc7hrKrSnGFO3fcw>
-Feedback-ID: i47b949f6:Fastmail
-Received: by mail.messagingengine.com (Postfix) with ESMTPA; Fri,
- 3 Oct 2025 13:25:24 -0400 (EDT)
-Date: Fri, 3 Oct 2025 19:25:17 +0200
-From: Janne Grunau <j@jannau.net>
-To: Benno Lossin <lossin@kernel.org>
-Cc: Alexandre Courbot <acourbot@nvidia.com>,
- Alistair Popple <apopple@nvidia.com>,
- rust-for-linux@vger.kernel.org, dri-devel@lists.freedesktop.org,
- dakr@kernel.org, Miguel Ojeda <ojeda@kernel.org>,
- Alex Gaynor <alex.gaynor@gmail.com>,
- Boqun Feng <boqun.feng@gmail.com>, Gary Guo <gary@garyguo.net>,
- =?utf-8?B?QmrDtnJu?= Roy Baron <bjorn3_gh@protonmail.com>,
- Andreas Hindborg <a.hindborg@kernel.org>,
- Alice Ryhl <aliceryhl@google.com>, Trevor Gross <tmgross@umich.edu>,
- David Airlie <airlied@gmail.com>, Simona Vetter <simona@ffwll.ch>,
- Maarten Lankhorst <maarten.lankhorst@linux.intel.com>,
- Maxime Ripard <mripard@kernel.org>,
- Thomas Zimmermann <tzimmermann@suse.de>,
- John Hubbard <jhubbard@nvidia.com>, Joel Fernandes <joelagnelf@nvidia.com>,
- Timur Tabi <ttabi@nvidia.com>, linux-kernel@vger.kernel.org,
- nouveau@lists.freedesktop.org
-Subject: Re: [PATCH v3 08/13] gpu: nova-core: Add bindings and accessors for
- GspSystemInfo
-Message-ID: <20251003172517.GA1574227@robin.jannau.net>
-References: <20250930131648.411720-1-apopple@nvidia.com>
- <20250930131648.411720-9-apopple@nvidia.com>
- <DD7VU4239GS2.2MKVFPBFEY1R4@nvidia.com>
- <DD8TZ3TU57L3.2958OTC9UP4VF@kernel.org>
+Received: from mail-pg1-f182.google.com (mail-pg1-f182.google.com
+ [209.85.215.182])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id DFB5D10E42C
+ for <nouveau@lists.freedesktop.org>; Mon,  6 Oct 2025 16:40:33 +0000 (UTC)
+Received: by mail-pg1-f182.google.com with SMTP id
+ 41be03b00d2f7-b520539e95bso137776a12.3
+ for <nouveau@lists.freedesktop.org>; Mon, 06 Oct 2025 09:40:33 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=gmail.com; s=20230601; t=1759768833; x=1760373633; darn=lists.freedesktop.org;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=LBA6fOaVmQat7EDMxIX5UPGSZ7U9w/6YSIQNIRnUw64=;
+ b=YauurWJrREVBnozB2Q7B+T94yIsqTkvl2kzowEVT9V9GsgwkF2Z8hpEp9DefnjWUUS
+ M1MCm0rsIT3vYrKkKpDubIE06MpEx33AuGZt1GHFgmHJxYzybCV3Llo90F+FwR5xJVQy
+ CsMup65BngHZFS8Ysl61TrFZrujfUtO68FVIzhTSAkjMyqne0thiNtpJkWEFGJE65/yF
+ 7j/D6r0dX9NOwm+ZLOEhAntirlYA6PfY6YBLcF+ixg6USEGbQrSCISyH1iTyWyrwbaKv
+ ctAF+wFNAcyPksaOaUBKjLXKg/6QWOZLhZAOV8rRvnXCImuuR7BCgj8e9EzSxngh2tFJ
+ b3jw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1759768833; x=1760373633;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=LBA6fOaVmQat7EDMxIX5UPGSZ7U9w/6YSIQNIRnUw64=;
+ b=B0aUgWBdFAnMRIYYTj0CCvjCYHNMwQ65m+EWAi0w03cpFlW5B2haHknBjKwcbXwIKy
+ KtpvtDSR/9KHr6xUS83VJv772RYMm9QQ5bcY25Whs65BB+s0i3gRPOTCJuOLWM1vJ3pW
+ oG14JQu9tcvGh4YP3ZO8bhBCx18acCrfwky5wizxqG85eO3tlOBfSIcAQHUFyMoh13WG
+ jpGy/gOpJsybbORJKads2vmu+E6cucJxKq091e3IPfJCFu81FaPftm2xsMuNviabKPUK
+ yRmLCyR1rSlDcpCtbwRwByCogKMQWqoYQn764/6xbvQ3y8UAxe3ZF9nr85XzyHrSGggl
+ QXng==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCW8A7bgB56/7/7DDR6ycLTTzawo+eHKJsIiykqEke4c9jZBHFRyN0oSjTnggSzErAXAE5Qg2/O0@lists.freedesktop.org
+X-Gm-Message-State: AOJu0YzSMeVNg7NwlX4fpSXrf8TN8sLvXaRL4pOJUPhjl+M2CgvrHoRF
+ i9vYR4HxDzZrSM5z46xfX/gQf8/UYpjpSVGOAOE6lbu/iwkFB5S3b3EyputMkfbl3Yj1wUey8GE
+ HM0P6RHzjNfRT58Tyqkdj1CYjWl0P41o=
+X-Gm-Gg: ASbGncurSiwL5iXhZhd+KidpzmdOnF+IWrh9HwahrZWgvHZ2skzaw65giLCBYjbwB1q
+ 7dJTVOZ58XAH2t8ZpBKGk7d44/+rzNhB7zkL8AS0vo55Uye7Fo37x8xQIdmJHvXtjDTCyaWmViK
+ rURynOPM7AIkVy3GrqQMXYQM+oJLD77tzeTUIoz/Ksak1GRiEHKzkKT6MD5qDubOoyX41UQfXu8
+ bF4h8qxA0Aus7KRT+hPTSKiEnxyVxH9wYpE0ngmd5M07RGOvHInf5QKQHv+4LLZXDzMQiDWNMCJ
+ 7RU97QgDak/TkQZa3t9MCR1sr6yyBOqSOC4C48r0sYxj7GtvCt94BYR/+qBp
+X-Google-Smtp-Source: AGHT+IED5q3x4DCSIrQmSNaI/hNM8JVZko4zCwH8pMSwHQyx8XQQtYie0DUOqb6XI3JebRYkGwAJqCnOXAShGoi26PE=
+X-Received: by 2002:a17:902:d4cb:b0:25c:b66e:9c2a with SMTP id
+ d9443c01a7336-28e9a6d01b1mr103155035ad.6.1759768833343; Mon, 06 Oct 2025
+ 09:40:33 -0700 (PDT)
 MIME-Version: 1.0
-Content-Type: text/plain; charset=utf-8
-Content-Disposition: inline
-In-Reply-To: <DD8TZ3TU57L3.2958OTC9UP4VF@kernel.org>
-X-Mailman-Approved-At: Sat, 13 Dec 2025 12:40:44 +0000
+References: <20250930144537.3559207-1-joelagnelf@nvidia.com>
+ <20250930144537.3559207-7-joelagnelf@nvidia.com>
+ <DD7GCYCZU3P3.1KK174S7MQ5BW@nvidia.com>
+ <81490b32-6ea2-400f-a97e-ad2e33e6daab@nvidia.com>
+ <DD949OHGD5WP.1X9TCLIEKSHGB@nvidia.com>
+ <4324469D-4C47-441E-9AD3-54CEE379537C@nvidia.com>
+In-Reply-To: <4324469D-4C47-441E-9AD3-54CEE379537C@nvidia.com>
+From: Miguel Ojeda <miguel.ojeda.sandonis@gmail.com>
+Date: Mon, 6 Oct 2025 18:40:20 +0200
+X-Gm-Features: AS18NWCxy-Hq0OsmWL4xZOPiIrqjK1XDIHFlDGJPGtRa1Eva01va6UDuU96QULw
+Message-ID: <CANiq72mC5pWz92KYtOhtgOcMuTeuzOeM9xrbkna+HkrwHAQqVw@mail.gmail.com>
+Subject: Re: [PATCH v5 6/9] rust: bitfield: Add KUNIT tests for bitfield
+To: Joel Fernandes <joelagnelf@nvidia.com>
+Cc: Alexandre Courbot <acourbot@nvidia.com>, 
+ "linux-kernel@vger.kernel.org" <linux-kernel@vger.kernel.org>, 
+ "rust-for-linux@vger.kernel.org" <rust-for-linux@vger.kernel.org>, 
+ "dri-devel@lists.freedesktop.org" <dri-devel@lists.freedesktop.org>,
+ "dakr@kernel.org" <dakr@kernel.org>, 
+ Alistair Popple <apopple@nvidia.com>, Miguel Ojeda <ojeda@kernel.org>, 
+ Alex Gaynor <alex.gaynor@gmail.com>, Boqun Feng <boqun.feng@gmail.com>, 
+ Gary Guo <gary@garyguo.net>,
+ "bjorn3_gh@protonmail.com" <bjorn3_gh@protonmail.com>, 
+ Benno Lossin <lossin@kernel.org>, Andreas Hindborg <a.hindborg@kernel.org>, 
+ Alice Ryhl <aliceryhl@google.com>, Trevor Gross <tmgross@umich.edu>, 
+ David Airlie <airlied@gmail.com>, Simona Vetter <simona@ffwll.ch>, 
+ Maarten Lankhorst <maarten.lankhorst@linux.intel.com>,
+ Maxime Ripard <mripard@kernel.org>, 
+ Thomas Zimmermann <tzimmermann@suse.de>, John Hubbard <jhubbard@nvidia.com>,
+ Timur Tabi <ttabi@nvidia.com>, 
+ "joel@joelfernandes.org" <joel@joelfernandes.org>,
+ Elle Rhumsaa <elle@weathered-steel.dev>, 
+ Yury Norov <yury.norov@gmail.com>,
+ Daniel Almeida <daniel.almeida@collabora.com>, 
+ Andrea Righi <arighi@nvidia.com>, 
+ "nouveau@lists.freedesktop.org" <nouveau@lists.freedesktop.org>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+X-Mailman-Approved-At: Sat, 13 Dec 2025 12:40:48 +0000
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -117,50 +110,28 @@ List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-On Fri, Oct 03, 2025 at 06:34:12PM +0200, Benno Lossin wrote:
-> On Thu Oct 2, 2025 at 3:49 PM CEST, Alexandre Courbot wrote:
-> > Hi Alistair, (+Benno as this concerns the `init!` macros)
-> >
-> > On Tue Sep 30, 2025 at 10:16 PM JST, Alistair Popple wrote:
-> >> Adds bindings and an in-place initialiser for the GspSystemInfo struct.
-> >>
-> >> Signed-off-by: Alistair Popple <apopple@nvidia.com>
-> >>
-> >> ---
-> >>
-> >> It would be good to move to using the `init!` macros at some point, but
-> >> I couldn't figure out how to make that work to initialise an enum rather
-> >> than a struct as is required for the transparent representation.
-> >
-> > Indeed we have to jump through a few (minor) hoops.
-> >
-> > First the `init!` macros do not seem to support tuple structs. They
-> > match a `{` after the type name, which is not present in
-> > `GspSystemInfo`. By turning it into a regular struct with a single
-> > field, we can overcome this, and it doesn't affect the layout the
-> > `#[repr(transparent)]` can still be used.
-> 
-> Yeah that's the correct workaround at the moment. I'm tracking support
-> for tuple structs in [1]. Essentially the problem is that it requires
-> lots of effort to parse tuple structs using declarative macros. We will
-> get `syn` this cycle, which will enable me to support several things,
-> including tuple structs.
-> 
-> [1]: https://github.com/Rust-for-Linux/pin-init/issues/85
-> 
-> > Then, due to a limitation with declarative macros, `init!` interprets
-> > `::` as a separator for generic arguments, so `bindings::GspSystemInfo`
-> > also doesn't parse. Here the trick is to use a local type alias.
-> 
-> This one will also be solved when we switch to syn.
+On Sat, Oct 4, 2025 at 6:14=E2=80=AFPM Joel Fernandes <joelagnelf@nvidia.co=
+m> wrote:
+>
+> Well, it can be efficient. It really depends. I have been contributing up=
+stream for about 15 years if you see the git log, often when someone chats =
+privately with me like you did and they told me they are ok with a patch, I=
+ save them the trouble and add their review tag especially after they alrea=
+dy added their tag to all my other patches. Surprisingly though this is pro=
+bably the first time anyone has been pissed off about it.  Anyway I will no=
+t add your tag henceforth unless you publicly reply (or you let me know oth=
+erwise by chat).
 
-I was planning to submit
-https://github.com/AsahiLinux/linux/commit/2d95fd3b6c359634a0976f27f7a3c667826256da
-https://github.com/AsahiLinux/linux/commit/515638cb47cf0ebdac378686fcbbdc6a8364096a
-from the asahi downstream tree after 6.18-rc1. Does that still make
-sense timing wise?
+If they just say they are OK with a patch, that would just mean an
+Acked-by, not a Reviewed-by.
 
-Types with type paths are used extensively in the asahi driver but I can
-initially work around that.
+In any case, the documentation states those tags cannot be added
+without permission -- if someone gives you a tag privately, it is best
+that you tell them to please send it in the mailing list instead. That
+way there is no confusion and others (including tooling, e.g.
+patchwork and b4) can see it.
 
-Janne
+Thanks!
+
+Cheers,
+Miguel
