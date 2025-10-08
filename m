@@ -2,48 +2,51 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id 10208CBAC6D
-	for <lists+nouveau@lfdr.de>; Sat, 13 Dec 2025 13:44:00 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 47755CBADEE
+	for <lists+nouveau@lfdr.de>; Sat, 13 Dec 2025 13:45:36 +0100 (CET)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 919D010EB68;
-	Sat, 13 Dec 2025 12:41:08 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 5A91810EB35;
+	Sat, 13 Dec 2025 12:41:37 +0000 (UTC)
 Authentication-Results: gabe.freedesktop.org;
-	dkim=pass (1024-bit key; unprotected) header.d=cse.ust.hk header.i=@cse.ust.hk header.b="38CGOve4";
+	dkim=pass (1024-bit key; unprotected) header.d=cse.ust.hk header.i=@cse.ust.hk header.b="O1mWmbhe";
 	dkim-atps=neutral
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
 Received: from cse.ust.hk (cssvr7.cse.ust.hk [143.89.41.157])
- by gabe.freedesktop.org (Postfix) with ESMTPS id CD2DC10E1C3;
- Tue,  7 Oct 2025 16:17:33 +0000 (UTC)
-Received: from homelab ([58.82.196.128]) (authenticated bits=0)
- by cse.ust.hk (8.18.1/8.12.5) with ESMTPSA id 597GHFhK1883936
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 9208210E741;
+ Wed,  8 Oct 2025 03:20:23 +0000 (UTC)
+Received: from osx.local (ecs-119-8-240-33.compute.hwclouds-dns.com
+ [119.8.240.33]) (authenticated bits=0)
+ by cse.ust.hk (8.18.1/8.12.5) with ESMTPSA id 5983K89V1969764
  (version=TLSv1.3 cipher=TLS_AES_256_GCM_SHA384 bits=256 verify=NOT);
- Wed, 8 Oct 2025 00:17:24 +0800
-ARC-Seal: i=1; a=rsa-sha256; d=cse.ust.hk; s=arccse; t=1759853845; cv=none;
- b=g2O6RbwQmczahLkXKrHwGibNRFNhUAf9LaW8iLX+jepb/f/Z4lrGcP5uXHBqnmqo9efL+ZdsGMkqAZQDzdg2TSxpf9g3jVUE9qHHYhue3Jmx9NLJ6aEHJVTlM/7RJQZMjbjfOFMMXJEu3QkVJHKKBYsy2asALT8BiDpetNTPijw=
+ Wed, 8 Oct 2025 11:20:14 +0800
+ARC-Seal: i=1; a=rsa-sha256; d=cse.ust.hk; s=arccse; t=1759893615; cv=none;
+ b=rcPP8yLtXjCv4k/DLipdIwhSVZ5CwYt/xRFq7i0sc44nIC1QHO6MKK6f4NMvuQ8kYDya1k01xg07pUe2fM3cXzrsuq+OJWSQdo8LQCS9USU+itC8yK2FujLsLpkMTCmEiHkvUa3UPZ9mfTNiDN7YE8cQdqJhQjQDQJ2rOQyn4Rw=
 ARC-Message-Signature: i=1; a=rsa-sha256; d=cse.ust.hk; s=arccse;
- t=1759853845; c=relaxed/relaxed;
- bh=24DsaxGYM2c65pUUHqLrjY0RrgMH0pttOAS/k9JF3RU=;
+ t=1759893615; c=relaxed/relaxed;
+ bh=WuLSA2EjkrLhSQFnaBGCNZGIYOqkvds6auE54bA3lWQ=;
  h=DKIM-Signature:Date:From:To:Subject:Message-ID:MIME-Version;
- b=jmgP7+3Qp3OQ+DiOfFK8nbhMxMfT7kVfeHrR2f39rqcNbGfYsgzUCqANmUbr/6OYnRUzbFqgOGpYInwbYljKP0jMbJ9DxmgngBY6Few6oyh6T1HNkYBNViX1Ys7E31Jfwtmc3HxUK5nqpbV8JhI7ZyWC702KVNqGPTnTVkzxQC4=
+ b=cSCrFM+NEka5AqGCOg0vIypTESoI7v1+4r5/Iw+kIN7yny9+mcqkVFeAOpPi2vuB63bMjH9YfY+PwtIsi39lRszyy0eNcDlHUkBd47H0omi5RdOmJpJ6rmwT0PsW6f3y3S2JAcL3PwByrbKkfCTykeSXiS35+nefRX9kbPdq0w0=
 ARC-Authentication-Results: i=1; cse.ust.hk
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=cse.ust.hk;
- s=cseusthk; t=1759853845;
- bh=24DsaxGYM2c65pUUHqLrjY0RrgMH0pttOAS/k9JF3RU=;
- h=Date:From:To:Cc:Subject:From;
- b=38CGOve42jDY+Z9Qk/jeA3D4UncmB8zjjVtZeIOcGI2bjkuoLEhq56o6D9LV7tvZq
- OEtW++LVhGF8E+4L8ra9vuX50JV/g5ZGjCVH1vVy6uFUBDZqhTZRH//r6muHOXDoya
- PFnHumP/aKdMZ6FCLres6BSyvCTtGUYOotPNYI/I=
-Date: Wed, 8 Oct 2025 00:17:09 +0800
+ s=cseusthk; t=1759893615;
+ bh=WuLSA2EjkrLhSQFnaBGCNZGIYOqkvds6auE54bA3lWQ=;
+ h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
+ b=O1mWmbhe3wxDfirmk6JKjwo4Qc+QANnMrDAiMaxMv6vbHp21QI7HEUmaDtREupztT
+ ITsS1D23MTLgcXf6uISKfRLSIZ43UdPgZs0z8dh//rgVL68sU0qEaYGtX3KX+x5a4p
+ SIjm8/XVkjp/qyzWU2cfbTulg9rsFvv7Ircqe+jo=
+Date: Wed, 8 Oct 2025 11:20:03 +0800
 From: Shuhao Fu <sfual@cse.ust.hk>
 To: Lyude Paul <lyude@redhat.com>, Danilo Krummrich <dakr@kernel.org>
 Cc: dri-devel@lists.freedesktop.org, nouveau@lists.freedesktop.org,
- linux-kernel@vger.kernel.org
-Subject: [PATCH] drm/nouveau: fix bad ret code in nouveau_bo_move_prep
-Message-ID: <aOU9BXjYDNoPRQmf@homelab>
+ stable@vger.kernel.org, linux-kernel@vger.kernel.org
+Subject: [PATCH v3] drm/nouveau: Fix refcount leak in nouveau_connector_detect
+Message-ID: <aOXYV5pgilTvqMxR@osx.local>
+References: <aOPy5aCiRTqb9kjR@homelab>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
+In-Reply-To: <aOPy5aCiRTqb9kjR@homelab>
 X-Env-From: sfual
 X-Mailman-Approved-At: Sat, 13 Dec 2025 12:40:49 +0000
 X-BeenThere: nouveau@lists.freedesktop.org
@@ -60,29 +63,44 @@ List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-In `nouveau_bo_move_prep`, if `nouveau_mem_map` fails, an error code
-should be returned. Currently, it returns zero even if vmm addr is not
-correctly mapped.
+A possible inconsistent refcount update has been identified in function
+`nouveau_connector_detect`, which may cause a resource leak.
 
+After calling `pm_runtime_get_*(dev->dev)`, the usage counter of `dev->dev`
+gets increased. In case function `nvif_outp_edid_get` returns negative,
+function `nouveau_connector_detect` returns without decreasing the usage
+counter of `dev->dev`, causing a refcount inconsistency.
+
+Closes: https://gitlab.freedesktop.org/drm/nouveau/-/issues/450
+Fixes: 0cd7e0718139 ("drm/nouveau/disp: add output method to fetch edid")
 Signed-off-by: Shuhao Fu <sfual@cse.ust.hk>
-Fixes: 9ce523cc3bf2 ("drm/nouveau: separate buffer object backing memory from nvkm structures")
----
- drivers/gpu/drm/nouveau/nouveau_bo.c | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+Cc: stable@vger.kernel.org
 
-diff --git a/drivers/gpu/drm/nouveau/nouveau_bo.c b/drivers/gpu/drm/nouveau/nouveau_bo.c
-index b96f0555ca14..f26562eafffc 100644
---- a/drivers/gpu/drm/nouveau/nouveau_bo.c
-+++ b/drivers/gpu/drm/nouveau/nouveau_bo.c
-@@ -929,7 +929,7 @@ nouveau_bo_move_prep(struct nouveau_drm *drm, struct ttm_buffer_object *bo,
- 		nvif_vmm_put(vmm, &old_mem->vma[1]);
- 		nvif_vmm_put(vmm, &old_mem->vma[0]);
- 	}
--	return 0;
-+	return ret;
- }
- 
- static int
--- 
+Change in v3:
+- Cc stable
+Change in v2:
+- Add "Fixes" and "Cc" tags
+---
+ drivers/gpu/drm/nouveau/nouveau_connector.c | 6 ++++--
+ 1 file changed, 4 insertions(+), 2 deletions(-)
+
+diff --git a/drivers/gpu/drm/nouveau/nouveau_connector.c b/drivers/gpu/drm/nouveau/nouveau_connector.c
+index 63621b151..45caccade 100644
+--- a/drivers/gpu/drm/nouveau/nouveau_connector.c
++++ b/drivers/gpu/drm/nouveau/nouveau_connector.c
+@@ -600,8 +600,10 @@ nouveau_connector_detect(struct drm_connector *connector, bool force)
+                                new_edid = drm_get_edid(connector, nv_encoder->i2c);
+                } else {
+                        ret = nvif_outp_edid_get(&nv_encoder->outp, (u8 **)&new_edid);
+-                       if (ret < 0)
+-                               return connector_status_disconnected;
++                       if (ret < 0) {
++                               conn_status = connector_status_disconnected;
++                               goto out;
++                       }
+                }
+
+                nouveau_connector_set_edid(nv_connector, new_edid);
+--
 2.39.5
 
