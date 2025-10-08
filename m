@@ -2,64 +2,58 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id 0F282BC5803
-	for <lists+nouveau@lfdr.de>; Wed, 08 Oct 2025 17:00:24 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 15B6FBC5EB8
+	for <lists+nouveau@lfdr.de>; Wed, 08 Oct 2025 18:02:00 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id ABA5F10E127;
-	Wed,  8 Oct 2025 15:00:22 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 30D6C10E182;
+	Wed,  8 Oct 2025 16:01:58 +0000 (UTC)
 Authentication-Results: gabe.freedesktop.org;
-	dkim=pass (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="izyx4qeJ";
+	dkim=pass (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="jE/MAz4+";
 	dkim-atps=neutral
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from tor.source.kernel.org (tor.source.kernel.org [172.105.4.254])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 7E92710E84B;
- Wed,  8 Oct 2025 15:00:15 +0000 (UTC)
+Received: from sea.source.kernel.org (sea.source.kernel.org [172.234.252.31])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 242DA10E182;
+ Wed,  8 Oct 2025 16:01:57 +0000 (UTC)
 Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by tor.source.kernel.org (Postfix) with ESMTP id AAC2A61F91;
- Wed,  8 Oct 2025 15:00:08 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 45284C4CEE7;
- Wed,  8 Oct 2025 15:00:03 +0000 (UTC)
+ by sea.source.kernel.org (Postfix) with ESMTP id 953064409C;
+ Wed,  8 Oct 2025 16:01:56 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 22906C4CEE7;
+ Wed,  8 Oct 2025 16:01:51 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1759935608;
- bh=Zq4M4h4026xT+BGlmoGtIh/JGWUmGo07HG7ivwnX4b0=;
+ s=k20201202; t=1759939316;
+ bh=Z/pj9EeEZpiRWDMECyNi+t/QOBBplB0dNcZFdOYufDo=;
  h=Date:Subject:Cc:To:From:References:In-Reply-To:From;
- b=izyx4qeJQb2C5pEgtTwRd/dt0xDjWrxPxH8kFxMtHeiiYKekpB8WovdQserdiWVhd
- WOo8964xcCQppMRCby6GiMdy3k/9W9KueVb4PjVc0TbTV2r2qhay+jSZxbQPEUQEXt
- BNeKJsyP43lV8j6MTXpe7eNCCLDDdNYQW2MmEfDDNcS3Rml/gQ9ej2+1l+mP/iyCDf
- hweGdyr1kKNpG9WbuhWi+TMj7zOmro6ptx9WXG/Hs1/oxvFcdKaGVC9W9zScrvfgjw
- W3gzBvZLqQbJHyqegaPD1TBtEpyUSdM5DWxRWfath0BAxZ46fkIvwfiikI5d2S+GXB
- mNg8GebtPo/cQ==
+ b=jE/MAz4+Nz4X3fT4mtJ3cMIdN4wPoZHinJvgnfIAk9QPL4FOJhWLZ4qI+oip4xdef
+ tCYXw292xXo5ZiaIMREIpNY88NFlwD52X0X+EEZh0LOWF/3IEfgwRNFacnf6Lkd3qs
+ qjB4Vs06mgAg+RBSHu6ajV1Jyu+kYwdeXna1AjhCAfCGp4m1SvJ6LlWACdxRJisT8/
+ wFxrPJPo1LI76WAghoEMLk8iMlIIc3gy0vBX5IsB4iJClG/bXIwrDLp1L27mZuBDoG
+ 8IH36Zom0hPrchFgv9GMEimHKlSIJRnEaoVWTYLOrp1H8hBu1xfzCWe5Bwu33C3PwC
+ mgEOPDeIiT/JQ==
 Mime-Version: 1.0
 Content-Transfer-Encoding: quoted-printable
 Content-Type: text/plain; charset=UTF-8
-Date: Wed, 08 Oct 2025 17:00:01 +0200
-Message-Id: <DDD13PUEPSZO.ALDND33ZFFC7@kernel.org>
-Subject: Re: [PATCH v6 0/5] Introduce bitfield and move register macro to
- rust/kernel/
-Cc: "Joel Fernandes" <joelagnelf@nvidia.com>, "Alexandre Courbot"
- <acourbot@nvidia.com>, <linux-kernel@vger.kernel.org>,
- <rust-for-linux@vger.kernel.org>, <dri-devel@lists.freedesktop.org>,
- "Alistair Popple" <apopple@nvidia.com>, "Miguel Ojeda" <ojeda@kernel.org>,
- "Alex Gaynor" <alex.gaynor@gmail.com>, "Boqun Feng" <boqun.feng@gmail.com>,
- "Gary Guo" <gary@garyguo.net>, <bjorn3_gh@protonmail.com>, "Benno Lossin"
- <lossin@kernel.org>, "Andreas Hindborg" <a.hindborg@kernel.org>, "Alice
- Ryhl" <aliceryhl@google.com>, "Trevor Gross" <tmgross@umich.edu>, "David
- Airlie" <airlied@gmail.com>, "Simona Vetter" <simona@ffwll.ch>, "Maarten
- Lankhorst" <maarten.lankhorst@linux.intel.com>, "Maxime Ripard"
- <mripard@kernel.org>, "Thomas Zimmermann" <tzimmermann@suse.de>, "John
- Hubbard" <jhubbard@nvidia.com>, "Timur Tabi" <ttabi@nvidia.com>,
- <joel@joelfernandes.org>, "Elle Rhumsaa" <elle@weathered-steel.dev>,
- "Daniel Almeida" <daniel.almeida@collabora.com>, "Andrea Righi"
- <arighi@nvidia.com>, <nouveau@lists.freedesktop.org>
-To: "Yury Norov" <yury.norov@gmail.com>
+Date: Wed, 08 Oct 2025 18:01:50 +0200
+Message-Id: <DDD2F1NSSTVN.1VDRSX5O9ZIKM@kernel.org>
+Subject: Re: [PATCH v4 02/13] gpu: nova-core: Create initial Gsp
+Cc: <rust-for-linux@vger.kernel.org>, <dri-devel@lists.freedesktop.org>,
+ <acourbot@nvidia.com>, "Miguel Ojeda" <ojeda@kernel.org>, "Alex Gaynor"
+ <alex.gaynor@gmail.com>, "Boqun Feng" <boqun.feng@gmail.com>, "Gary Guo"
+ <gary@garyguo.net>, =?utf-8?q?Bj=C3=B6rn_Roy_Baron?=
+ <bjorn3_gh@protonmail.com>, "Benno Lossin" <lossin@kernel.org>, "Andreas
+ Hindborg" <a.hindborg@kernel.org>, "Alice Ryhl" <aliceryhl@google.com>,
+ "Trevor Gross" <tmgross@umich.edu>, "David Airlie" <airlied@gmail.com>,
+ "Simona Vetter" <simona@ffwll.ch>, "Maarten Lankhorst"
+ <maarten.lankhorst@linux.intel.com>, "Maxime Ripard" <mripard@kernel.org>,
+ "Thomas Zimmermann" <tzimmermann@suse.de>, "John Hubbard"
+ <jhubbard@nvidia.com>, "Joel Fernandes" <joelagnelf@nvidia.com>, "Timur
+ Tabi" <ttabi@nvidia.com>, <linux-kernel@vger.kernel.org>,
+ <nouveau@lists.freedesktop.org>
+To: "Alistair Popple" <apopple@nvidia.com>
 From: "Danilo Krummrich" <dakr@kernel.org>
-References: <20251003154748.1687160-1-joelagnelf@nvidia.com>
- <aORCwckUwZspBMfv@yury> <DDC0VAHL5OCP.DROT6CPKE5H5@nvidia.com>
- <DDC49ZIRX79X.2Q4KW0UY7WUF3@kernel.org>
- <faa99188-7ccb-4c7c-b705-3a207f5acd17@nvidia.com>
- <DDCFLM3P5MCC.NEBRVTU7X2G3@kernel.org> <aOZ0_7YQw81lyMWt@yury>
-In-Reply-To: <aOZ0_7YQw81lyMWt@yury>
+References: <20251008001253.437911-1-apopple@nvidia.com>
+ <20251008001253.437911-3-apopple@nvidia.com>
+In-Reply-To: <20251008001253.437911-3-apopple@nvidia.com>
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -74,49 +68,217 @@ List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-On Wed Oct 8, 2025 at 4:28 PM CEST, Yury Norov wrote:
-> On Wed, Oct 08, 2025 at 12:08:59AM +0200, Danilo Krummrich wrote:
->
->> Regarding the bitfields for page table management: Are we
->> sure that we can use raw bitfields for this?
->
-> As per my current understanding we can't. Bitfields are not suitable for
-> direct I/O and considered as a data storage. In the current scheme:
->
->         regs::NV_PFALCON_FALCON_DMATRFBASE::default()
->             .set_base((dma_start >> 8) as u32)
->             .write(bar, &E::ID);
->
-> we account for endianess in the .write() method, which would be a part
-> of register API, not bitfields.
+On Wed Oct 8, 2025 at 2:12 AM CEST, Alistair Popple wrote:
+> diff --git a/drivers/gpu/nova-core/gsp.rs b/drivers/gpu/nova-core/gsp.rs
+> index 221281da1a45..63099df77348 100644
+> --- a/drivers/gpu/nova-core/gsp.rs
+> +++ b/drivers/gpu/nova-core/gsp.rs
+> @@ -2,25 +2,94 @@
+> =20
+>  mod boot;
+> =20
+> +use kernel::device;
+> +use kernel::dma::CoherentAllocation;
+> +use kernel::dma::DmaAddress;
+> +use kernel::dma_write;
+> +use kernel::pci;
+>  use kernel::prelude::*;
+>  use kernel::ptr::Alignment;
+> +use kernel::transmute::AsBytes;
+> =20
+>  pub(crate) use fw::{GspFwWprMeta, LibosParams};
+> =20
+>  mod fw;
+> =20
+> +use fw::LibosMemoryRegionInitArgument;
+> +
+>  pub(crate) const GSP_PAGE_SHIFT: usize =3D 12;
+>  pub(crate) const GSP_PAGE_SIZE: usize =3D 1 << GSP_PAGE_SHIFT;
+>  pub(crate) const GSP_HEAP_ALIGNMENT: Alignment =3D Alignment::new::<{ 1 =
+<< 20 }>();
 
-I know, I proposed this register API design about a year ago, and Alex came=
- up
-with an awesome implementation for it. :)
+This looks like it could depend on the firmware version in the future, henc=
+e it
+should probably defined somewhere in fw/ with a corresponding comment. The
+actual version switch is fine to omit for now of course (we agreed to add t=
+he
+infrastructure for the version switch subsequently).
 
-And yes, your understanding is correct, the idea is that the I/O backend th=
-at
-knows about the underlying bus, etc. takes care of the endianess.
+> +/// Number of GSP pages to use in a RM log buffer.
+> +const RM_LOG_BUFFER_NUM_PAGES: usize =3D 0x10;
 
-However, we might still be able to use bitfields natively for page table
-management structures: In [1] I asked for the NV_PMC_BOOT_1 register, which
-might provide some endianess switch to ensure that we always match CPU
-endianess.
+Why 0x10? Is there a specific reason?
 
-> FYI: ARM64 is in process of dropping BE, and Linus announced the end
-> of BE support for RISC-V:
+> +
+>  /// GSP runtime data.
+> -///
+> -/// This is an empty pinned placeholder for now.
+>  #[pin_data]
+> -pub(crate) struct Gsp {}
+> +pub(crate) struct Gsp {
+> +    libos: CoherentAllocation<LibosMemoryRegionInitArgument>,
+> +    pub loginit: CoherentAllocation<u8>,
+> +    pub logintr: CoherentAllocation<u8>,
+> +    pub logrm: CoherentAllocation<u8>,
 
-Yeah, I'm aware of the thread. Also note that for RISC-V it was also clarif=
-ied
-that if it turns out that BE for RISC-V becomes relevant it would also find=
- its
-way into the kernel. If that's likely is of course a different question.
+This creates warnings for older compiler version, please use pub(crate) ins=
+tead.
 
-However, there are still architectures such as s390x that could be supporte=
-d.
+> +}
+> +
+> +#[repr(C)]
+> +struct PteArray<const NUM_ENTRIES: usize>([u64; NUM_ENTRIES]);
+> +/// SAFETY: arrays of `u64` implement `AsBytes` and we are but a wrapper=
+ around it.
+> +unsafe impl<const NUM_ENTRIES: usize> AsBytes for PteArray<NUM_ENTRIES> =
+{}
 
-So, long story short, my question from above is more meant to challenge if =
-we
-can really always guarantee that CPU and GPU endianess match for nova-core.
+Please separate struct definitions and impl blocks with an empty line.
 
-[1] https://lore.kernel.org/lkml/DDCV84IJHUML.126CB1CT0XMX5@kernel.org/
+> +impl<const NUM_PAGES: usize> PteArray<NUM_PAGES> {
+> +    fn new(handle: DmaAddress) -> Self {
+
+No check that NUM_PAGES actually fits the size of the DMA buffer handle pas=
+sed
+in? What happens if they do not match?
+
+> +        let mut ptes =3D [0u64; NUM_PAGES];
+> +        for (i, pte) in ptes.iter_mut().enumerate() {
+> +            *pte =3D handle + ((i as u64) << GSP_PAGE_SHIFT);
+
+I think this should be handle.checked_add(). Additionally we should add the
+following compile time check to make sure that the shift can never overflow=
+:
+
+	const _MAX_OFFSET: usize =3D NUM_PAGES << GSP_PAGE_SHIFT;
+
+> +        }
+> +
+> +        Self(ptes)
+> +    }
+> +}
+> +
+> +/// Creates a new `CoherentAllocation<A>` with `name` of `size` elements=
+, and
+> +/// register it into the `libos` object at argument position `libos_arg_=
+nr`.
+> +fn create_logbuffer_dma_object(
+> +    dev: &device::Device<device::Bound>,
+> +) -> Result<CoherentAllocation<u8>> {
+> +    let mut obj =3D CoherentAllocation::<u8>::alloc_coherent(
+> +        dev,
+> +        RM_LOG_BUFFER_NUM_PAGES * GSP_PAGE_SIZE,
+> +        GFP_KERNEL | __GFP_ZERO,
+> +    )?;
+> +    let ptes =3D PteArray::<RM_LOG_BUFFER_NUM_PAGES>::new(obj.dma_handle=
+());
+> +
+> +    // SAFETY: `obj` has just been created and we are its sole user.
+> +    unsafe {
+> +        // Copy the self-mapping PTE at the expected location.
+> +        obj.as_slice_mut(size_of::<u64>(), size_of_val(&ptes))?
+> +            .copy_from_slice(ptes.as_bytes())
+> +    };
+> +
+> +    Ok(obj)
+> +}
+
+I think we should just create a new gsp::Logbuffer type for this rather tha=
+n
+have a function as object constructor.
+
+> =20
+>  impl Gsp {
+> -    pub(crate) fn new() -> impl PinInit<Self> {
+> -        pin_init!(Self {})
+> +    pub(crate) fn new(pdev: &pci::Device<device::Bound>) -> Result<impl =
+PinInit<Self, Error>> {
+> +        let dev =3D pdev.as_ref();
+> +        let libos =3D CoherentAllocation::<LibosMemoryRegionInitArgument=
+>::alloc_coherent(
+> +            dev,
+> +            GSP_PAGE_SIZE / size_of::<LibosMemoryRegionInitArgument>(),
+> +            GFP_KERNEL | __GFP_ZERO,
+> +        )?;
+> +        let loginit =3D create_logbuffer_dma_object(dev)?;
+> +        dma_write!(libos[0] =3D LibosMemoryRegionInitArgument::new("LOGI=
+NIT", &loginit))?;
+> +        let logintr =3D create_logbuffer_dma_object(dev)?;
+> +        dma_write!(libos[1] =3D LibosMemoryRegionInitArgument::new("LOGI=
+NTR", &logintr))?;
+> +        let logrm =3D create_logbuffer_dma_object(dev)?;
+> +        dma_write!(libos[2] =3D LibosMemoryRegionInitArgument::new("LOGR=
+M", &logrm))?;
+> +
+> +        Ok(try_pin_init!(Self {
+> +            libos,
+> +            loginit,
+> +            logintr,
+> +            logrm,
+> +        }))
+>      }
+>  }
+> diff --git a/drivers/gpu/nova-core/gsp/fw.rs b/drivers/gpu/nova-core/gsp/=
+fw.rs
+> index 181baa401770..dd1e7fc85d85 100644
+> --- a/drivers/gpu/nova-core/gsp/fw.rs
+> +++ b/drivers/gpu/nova-core/gsp/fw.rs
+> @@ -7,8 +7,10 @@
+> =20
+>  use core::ops::Range;
+> =20
+> +use kernel::dma::CoherentAllocation;
+>  use kernel::ptr::Alignable;
+>  use kernel::sizes::SZ_1M;
+> +use kernel::transmute::{AsBytes, FromBytes};
+> =20
+>  use crate::gpu::Chipset;
+>  use crate::gsp;
+> @@ -99,3 +101,40 @@ pub(crate) fn wpr_heap_size(&self, chipset: Chipset, =
+fb_size: u64) -> u64 {
+>  /// addresses of the GSP bootloader and firmware.
+>  #[repr(transparent)]
+>  pub(crate) struct GspFwWprMeta(bindings::GspFwWprMeta);
+> +
+> +#[repr(transparent)]
+> +pub(crate) struct LibosMemoryRegionInitArgument(bindings::LibosMemoryReg=
+ionInitArgument);
+
+Please add some documentation for the type.
+
+> +
+> +// SAFETY: Padding is explicit and will not contain uninitialized data.
+> +unsafe impl AsBytes for LibosMemoryRegionInitArgument {}
+> +
+> +// SAFETY: This struct only contains integer types for which all bit pat=
+terns
+> +// are valid.
+> +unsafe impl FromBytes for LibosMemoryRegionInitArgument {}
+> +
+> +impl LibosMemoryRegionInitArgument {
+> +    pub(crate) fn new<A: AsBytes + FromBytes>(
+> +        name: &'static str,
+> +        obj: &CoherentAllocation<A>,
+> +    ) -> Self {
+> +        /// Generates the `ID8` identifier required for some GSP objects=
+.
+> +        fn id8(name: &str) -> u64 {
+> +            let mut bytes =3D [0u8; core::mem::size_of::<u64>()];
+> +
+> +            for (c, b) in name.bytes().rev().zip(&mut bytes) {
+> +                *b =3D c;
+> +            }
+> +
+> +            u64::from_ne_bytes(bytes)
+> +        }
+> +
+> +        Self(bindings::LibosMemoryRegionInitArgument {
+> +            id8: id8(name),
+> +            pa: obj.dma_handle(),
+> +            size: obj.size() as u64,
+> +            kind: bindings::LibosMemoryRegionKind_LIBOS_MEMORY_REGION_CO=
+NTIGUOUS as u8,
+> +            loc: bindings::LibosMemoryRegionLoc_LIBOS_MEMORY_REGION_LOC_=
+SYSMEM as u8,
+
+Please prefer into() if possible.
