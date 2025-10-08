@@ -2,66 +2,64 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id 99A24BC46F9
-	for <lists+nouveau@lfdr.de>; Wed, 08 Oct 2025 12:50:05 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 0F282BC5803
+	for <lists+nouveau@lfdr.de>; Wed, 08 Oct 2025 17:00:24 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 472EA10E07C;
-	Wed,  8 Oct 2025 10:50:03 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id ABA5F10E127;
+	Wed,  8 Oct 2025 15:00:22 +0000 (UTC)
 Authentication-Results: gabe.freedesktop.org;
-	dkim=pass (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="MxXnHkfd";
+	dkim=pass (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="izyx4qeJ";
 	dkim-atps=neutral
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
 Received: from tor.source.kernel.org (tor.source.kernel.org [172.105.4.254])
- by gabe.freedesktop.org (Postfix) with ESMTPS id F156910E07C;
- Wed,  8 Oct 2025 10:50:01 +0000 (UTC)
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 7E92710E84B;
+ Wed,  8 Oct 2025 15:00:15 +0000 (UTC)
 Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by tor.source.kernel.org (Postfix) with ESMTP id 17C9A612AE;
- Wed,  8 Oct 2025 10:50:01 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 85B3FC4CEF4;
- Wed,  8 Oct 2025 10:49:55 +0000 (UTC)
+ by tor.source.kernel.org (Postfix) with ESMTP id AAC2A61F91;
+ Wed,  8 Oct 2025 15:00:08 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 45284C4CEE7;
+ Wed,  8 Oct 2025 15:00:03 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1759920600;
- bh=2hOyFHWMo22nr714D5lkkesp5ykT8kzlR52ADooTRLI=;
- h=Date:Cc:To:From:Subject:References:In-Reply-To:From;
- b=MxXnHkfdijkCLancjr2NuW9oYgF7BJAy6t1DAo+J/7OidoL4rrxyYrNVfSKxu43m8
- Pchq0UtjXyEXCUT979pTZrY+oZXbY2k/zS4HyP/voD4O5OedcL1lJRMX9ly60py9L+
- l5Am9TRppBVyuiu2jIZj+PTFIIPYoPz4rReX3YSmSwl9XcQ6mkf/1Np6f3vzwA3qE7
- 2UiLI69Y5t34UsGq46JaUlzhWDiWpEOyIRVuHwXla88wRDzc3XibTAg/TagtStzJK2
- FW8bD5lAM1gIDPXy/PyShhj5jDF4r6tY8qUhJb0i5tP3eVwQnI1QkvdQrvyK6bxphl
- rkPuiI88LQT1A==
+ s=k20201202; t=1759935608;
+ bh=Zq4M4h4026xT+BGlmoGtIh/JGWUmGo07HG7ivwnX4b0=;
+ h=Date:Subject:Cc:To:From:References:In-Reply-To:From;
+ b=izyx4qeJQb2C5pEgtTwRd/dt0xDjWrxPxH8kFxMtHeiiYKekpB8WovdQserdiWVhd
+ WOo8964xcCQppMRCby6GiMdy3k/9W9KueVb4PjVc0TbTV2r2qhay+jSZxbQPEUQEXt
+ BNeKJsyP43lV8j6MTXpe7eNCCLDDdNYQW2MmEfDDNcS3Rml/gQ9ej2+1l+mP/iyCDf
+ hweGdyr1kKNpG9WbuhWi+TMj7zOmro6ptx9WXG/Hs1/oxvFcdKaGVC9W9zScrvfgjw
+ W3gzBvZLqQbJHyqegaPD1TBtEpyUSdM5DWxRWfath0BAxZ46fkIvwfiikI5d2S+GXB
+ mNg8GebtPo/cQ==
 Mime-Version: 1.0
 Content-Transfer-Encoding: quoted-printable
 Content-Type: text/plain; charset=UTF-8
-Date: Wed, 08 Oct 2025 12:49:54 +0200
-Message-Id: <DDCVS7HAHDSN.2X14HAKD13MZI@kernel.org>
-Cc: "Joel Fernandes" <joelagnelf@nvidia.com>, "Alexandre Courbot"
- <acourbot@nvidia.com>, "Yury Norov" <yury.norov@gmail.com>,
- "linux-kernel@vger.kernel.org" <linux-kernel@vger.kernel.org>,
- "rust-for-linux@vger.kernel.org" <rust-for-linux@vger.kernel.org>,
- "dri-devel@lists.freedesktop.org" <dri-devel@lists.freedesktop.org>,
- "Alistair Popple" <apopple@nvidia.com>, "Miguel Ojeda" <ojeda@kernel.org>,
- "Alex Gaynor" <alex.gaynor@gmail.com>, "Boqun Feng" <boqun.feng@gmail.com>,
- "Gary Guo" <gary@garyguo.net>, "bjorn3_gh@protonmail.com"
- <bjorn3_gh@protonmail.com>, "Benno Lossin" <lossin@kernel.org>, "Andreas
- Hindborg" <a.hindborg@kernel.org>, "Alice Ryhl" <aliceryhl@google.com>,
- "Trevor Gross" <tmgross@umich.edu>, "David Airlie" <airlied@gmail.com>,
- "Simona Vetter" <simona@ffwll.ch>, "Maarten Lankhorst"
- <maarten.lankhorst@linux.intel.com>, "Maxime Ripard" <mripard@kernel.org>,
- "Thomas Zimmermann" <tzimmermann@suse.de>, "John Hubbard"
- <jhubbard@nvidia.com>, "Timur Tabi" <ttabi@nvidia.com>,
- "joel@joelfernandes.org" <joel@joelfernandes.org>, "Elle Rhumsaa"
- <elle@weathered-steel.dev>, "Daniel Almeida"
- <daniel.almeida@collabora.com>, "Andrea Righi" <arighi@nvidia.com>,
- "nouveau@lists.freedesktop.org" <nouveau@lists.freedesktop.org>
-To: "Greg KH" <greg@kroah.com>
-From: "Danilo Krummrich" <dakr@kernel.org>
+Date: Wed, 08 Oct 2025 17:00:01 +0200
+Message-Id: <DDD13PUEPSZO.ALDND33ZFFC7@kernel.org>
 Subject: Re: [PATCH v6 0/5] Introduce bitfield and move register macro to
  rust/kernel/
-References: <695CCDCE-A205-4557-AA15-6F102B8CCF0C@nvidia.com>
- <DDCV84IJHUML.126CB1CT0XMX5@kernel.org>
- <2025100808-unpadded-unsubtle-1053@gregkh>
-In-Reply-To: <2025100808-unpadded-unsubtle-1053@gregkh>
+Cc: "Joel Fernandes" <joelagnelf@nvidia.com>, "Alexandre Courbot"
+ <acourbot@nvidia.com>, <linux-kernel@vger.kernel.org>,
+ <rust-for-linux@vger.kernel.org>, <dri-devel@lists.freedesktop.org>,
+ "Alistair Popple" <apopple@nvidia.com>, "Miguel Ojeda" <ojeda@kernel.org>,
+ "Alex Gaynor" <alex.gaynor@gmail.com>, "Boqun Feng" <boqun.feng@gmail.com>,
+ "Gary Guo" <gary@garyguo.net>, <bjorn3_gh@protonmail.com>, "Benno Lossin"
+ <lossin@kernel.org>, "Andreas Hindborg" <a.hindborg@kernel.org>, "Alice
+ Ryhl" <aliceryhl@google.com>, "Trevor Gross" <tmgross@umich.edu>, "David
+ Airlie" <airlied@gmail.com>, "Simona Vetter" <simona@ffwll.ch>, "Maarten
+ Lankhorst" <maarten.lankhorst@linux.intel.com>, "Maxime Ripard"
+ <mripard@kernel.org>, "Thomas Zimmermann" <tzimmermann@suse.de>, "John
+ Hubbard" <jhubbard@nvidia.com>, "Timur Tabi" <ttabi@nvidia.com>,
+ <joel@joelfernandes.org>, "Elle Rhumsaa" <elle@weathered-steel.dev>,
+ "Daniel Almeida" <daniel.almeida@collabora.com>, "Andrea Righi"
+ <arighi@nvidia.com>, <nouveau@lists.freedesktop.org>
+To: "Yury Norov" <yury.norov@gmail.com>
+From: "Danilo Krummrich" <dakr@kernel.org>
+References: <20251003154748.1687160-1-joelagnelf@nvidia.com>
+ <aORCwckUwZspBMfv@yury> <DDC0VAHL5OCP.DROT6CPKE5H5@nvidia.com>
+ <DDC49ZIRX79X.2Q4KW0UY7WUF3@kernel.org>
+ <faa99188-7ccb-4c7c-b705-3a207f5acd17@nvidia.com>
+ <DDCFLM3P5MCC.NEBRVTU7X2G3@kernel.org> <aOZ0_7YQw81lyMWt@yury>
+In-Reply-To: <aOZ0_7YQw81lyMWt@yury>
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -76,29 +74,49 @@ List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-On Wed Oct 8, 2025 at 12:47 PM CEST, Greg KH wrote:
-> On Wed, Oct 08, 2025 at 12:23:40PM +0200, Danilo Krummrich wrote:
->> On Wed Oct 8, 2025 at 1:37 AM CEST, Joel Fernandes wrote:
->> > The Nvidia GPU architecture is little-endian (including MMU structures=
- in VRAM).
->>=20
->> Yes, I'm aware (and I'd assume that there is no reason to ever change th=
-at).
->>=20
->> Just for the complete picture, there's also some endianness switch in th=
-e
->> NV_PMC_BOOT_1 register I think?
->>=20
->> > All the CPU architectures our drivers support are expected to be littl=
-e-endian.
->>=20
->> Technically, all Rust supported architectures are indeed little-endian.
+On Wed Oct 8, 2025 at 4:28 PM CEST, Yury Norov wrote:
+> On Wed, Oct 08, 2025 at 12:08:59AM +0200, Danilo Krummrich wrote:
 >
-> s390x is supported by rust as a tier2 output:
-> 	https://doc.rust-lang.org/beta/rustc/platform-support/s390x-unknown-linu=
-x-gnu.html
+>> Regarding the bitfields for page table management: Are we
+>> sure that we can use raw bitfields for this?
 >
-> so there really shouldn't be any reason why that platform couldn't add
-> rust support today, right?
+> As per my current understanding we can't. Bitfields are not suitable for
+> direct I/O and considered as a data storage. In the current scheme:
+>
+>         regs::NV_PFALCON_FALCON_DMATRFBASE::default()
+>             .set_base((dma_start >> 8) as u32)
+>             .write(bar, &E::ID);
+>
+> we account for endianess in the .write() method, which would be a part
+> of register API, not bitfields.
 
-That's the one I also had in mind. :)
+I know, I proposed this register API design about a year ago, and Alex came=
+ up
+with an awesome implementation for it. :)
+
+And yes, your understanding is correct, the idea is that the I/O backend th=
+at
+knows about the underlying bus, etc. takes care of the endianess.
+
+However, we might still be able to use bitfields natively for page table
+management structures: In [1] I asked for the NV_PMC_BOOT_1 register, which
+might provide some endianess switch to ensure that we always match CPU
+endianess.
+
+> FYI: ARM64 is in process of dropping BE, and Linus announced the end
+> of BE support for RISC-V:
+
+Yeah, I'm aware of the thread. Also note that for RISC-V it was also clarif=
+ied
+that if it turns out that BE for RISC-V becomes relevant it would also find=
+ its
+way into the kernel. If that's likely is of course a different question.
+
+However, there are still architectures such as s390x that could be supporte=
+d.
+
+So, long story short, my question from above is more meant to challenge if =
+we
+can really always guarantee that CPU and GPU endianess match for nova-core.
+
+[1] https://lore.kernel.org/lkml/DDCV84IJHUML.126CB1CT0XMX5@kernel.org/
