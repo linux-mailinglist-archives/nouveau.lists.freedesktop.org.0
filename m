@@ -2,54 +2,63 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id 03B3ABC43AF
-	for <lists+nouveau@lfdr.de>; Wed, 08 Oct 2025 11:58:04 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 8511DBC44C1
+	for <lists+nouveau@lfdr.de>; Wed, 08 Oct 2025 12:23:54 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id E554410E0FC;
-	Wed,  8 Oct 2025 09:57:59 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 2DD4010E0EA;
+	Wed,  8 Oct 2025 10:23:50 +0000 (UTC)
 Authentication-Results: gabe.freedesktop.org;
-	dkim=pass (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="uI+2DHzf";
+	dkim=pass (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="mS8v4XQi";
 	dkim-atps=neutral
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from sea.source.kernel.org (sea.source.kernel.org [172.234.252.31])
- by gabe.freedesktop.org (Postfix) with ESMTPS id D601E10E0E3;
- Wed,  8 Oct 2025 09:57:57 +0000 (UTC)
+Received: from tor.source.kernel.org (tor.source.kernel.org [172.105.4.254])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id D604A10E0D2;
+ Wed,  8 Oct 2025 10:23:48 +0000 (UTC)
 Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by sea.source.kernel.org (Postfix) with ESMTP id 8C2E443BDB;
- Wed,  8 Oct 2025 09:57:57 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 5609AC4CEF4;
- Wed,  8 Oct 2025 09:57:54 +0000 (UTC)
+ by tor.source.kernel.org (Postfix) with ESMTP id B4F4C61F49;
+ Wed,  8 Oct 2025 10:23:47 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 29291C4CEF4;
+ Wed,  8 Oct 2025 10:23:41 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1759917477;
- bh=Du3rFNkYwgdmoyPLOqFQnUZ5XJn5oBWCLYwxql0rNy4=;
- h=Date:Subject:To:Cc:References:From:In-Reply-To:From;
- b=uI+2DHzfiIT9dzxXoL7i0x/pAqr3Hm56UvCtm9CIGaJyBeOuCp8UyfQhf1Rnkw8Xx
- r0EZqPc4SXsX4NBElq4VUMU3hloHiNMxDq3REjaQX5+jl1Ar3afIQeoTvyTjHm/Saf
- ZdtN8gwZeP8QXyr5ChZFDAIUAx3+55fiMGEhv58WXLrf0hyyFUOvcwrgCShSFeKEP+
- 3CoEYBzKrjf0O/9NMBp2laBqWE1t1fmzkGduIAQOWyFtKri34JL8NZA3DwOQ1QH2Aq
- ofZLJHsIhhTZ4CGqOLo7fR9+i9yqKVXvCJSyrXYKGtgusalmKJeD4PGgg9rjJlOzDg
- wgUvmVS57yHHg==
-Message-ID: <1f26173d-6d02-4445-8a78-c8464a57c450@kernel.org>
-Date: Wed, 8 Oct 2025 11:57:52 +0200
-MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v2] drm/client: Remove holds_console_lock parameter from
- suspend/resume
-To: Thomas Zimmermann <tzimmermann@suse.de>
-Cc: alexander.deucher@amd.com, christian.koenig@amd.com,
- jani.nikula@linux.intel.com, joonas.lahtinen@linux.intel.com,
- rodrigo.vivi@intel.com, tursulin@ursulin.net, lyude@redhat.com,
- lucas.demarchi@intel.com, thomas.hellstrom@linux.intel.com,
- jfalempe@redhat.com, javierm@redhat.com, dri-devel@lists.freedesktop.org,
- amd-gfx@lists.freedesktop.org, intel-gfx@lists.freedesktop.org,
- nouveau@lists.freedesktop.org, intel-xe@lists.freedesktop.org
-References: <20251001143709.419736-1-tzimmermann@suse.de>
-From: Danilo Krummrich <dakr@kernel.org>
-Content-Language: en-US
-In-Reply-To: <20251001143709.419736-1-tzimmermann@suse.de>
+ s=k20201202; t=1759919027;
+ bh=pgyDd5U4lx90hBvX9nM6Mbf+EYCdvQf0+HPHy40vgt8=;
+ h=Date:Subject:Cc:To:From:References:In-Reply-To:From;
+ b=mS8v4XQiuMI+8/hdm6D67HTsv1lFRpRqd/9dRgiHCxvNhfGJGffAnfXAyBU3f1KF4
+ B+UnqCXC9/h9TkG8O9cV6GDttVb0OzlwKlnXZ2oyTsxn62YX++8u0zrsFjvSL/9fNC
+ yLK8DnXfSEnCCg4ZPFT/WChXNGS+7N0Z+DeUrhF6Ap+7DkD1GUibu7rNr3FAh0cp4F
+ ywYU+xVIL85CcLiofN7oZKB2g4vpo0hyWk6foZJygmi0aymK1mmahHFQJ5ieY2dVfS
+ 1n/MiYDhJfv4gmQ2s5L5F3AmGTToHgoSPiSaP4FBDtEStM8KSqboEWwyobwR4Zr7Pf
+ NdWDLDJHhQylA==
+Mime-Version: 1.0
+Content-Transfer-Encoding: quoted-printable
 Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
+Date: Wed, 08 Oct 2025 12:23:40 +0200
+Message-Id: <DDCV84IJHUML.126CB1CT0XMX5@kernel.org>
+Subject: Re: [PATCH v6 0/5] Introduce bitfield and move register macro to
+ rust/kernel/
+Cc: "Alexandre Courbot" <acourbot@nvidia.com>, "Yury Norov"
+ <yury.norov@gmail.com>, "linux-kernel@vger.kernel.org"
+ <linux-kernel@vger.kernel.org>, "rust-for-linux@vger.kernel.org"
+ <rust-for-linux@vger.kernel.org>, "dri-devel@lists.freedesktop.org"
+ <dri-devel@lists.freedesktop.org>, "Alistair Popple" <apopple@nvidia.com>,
+ "Miguel Ojeda" <ojeda@kernel.org>, "Alex Gaynor" <alex.gaynor@gmail.com>,
+ "Boqun Feng" <boqun.feng@gmail.com>, "Gary Guo" <gary@garyguo.net>,
+ "bjorn3_gh@protonmail.com" <bjorn3_gh@protonmail.com>, "Benno Lossin"
+ <lossin@kernel.org>, "Andreas Hindborg" <a.hindborg@kernel.org>, "Alice
+ Ryhl" <aliceryhl@google.com>, "Trevor Gross" <tmgross@umich.edu>, "David
+ Airlie" <airlied@gmail.com>, "Simona Vetter" <simona@ffwll.ch>, "Maarten
+ Lankhorst" <maarten.lankhorst@linux.intel.com>, "Maxime Ripard"
+ <mripard@kernel.org>, "Thomas Zimmermann" <tzimmermann@suse.de>, "John
+ Hubbard" <jhubbard@nvidia.com>, "Timur Tabi" <ttabi@nvidia.com>,
+ "joel@joelfernandes.org" <joel@joelfernandes.org>, "Elle Rhumsaa"
+ <elle@weathered-steel.dev>, "Daniel Almeida"
+ <daniel.almeida@collabora.com>, "Andrea Righi" <arighi@nvidia.com>,
+ "nouveau@lists.freedesktop.org" <nouveau@lists.freedesktop.org>
+To: "Joel Fernandes" <joelagnelf@nvidia.com>
+From: "Danilo Krummrich" <dakr@kernel.org>
+References: <695CCDCE-A205-4557-AA15-6F102B8CCF0C@nvidia.com>
+In-Reply-To: <695CCDCE-A205-4557-AA15-6F102B8CCF0C@nvidia.com>
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -64,14 +73,19 @@ List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-On 10/1/25 4:37 PM, Thomas Zimmermann wrote:
-> No caller of the client resume/suspend helpers holds the console
-> lock. The last such cases were removed from radeon in the patch
-> series at [1]. Now remove the related parameter and the TODO items.
-> 
-> v2:
-> - update placeholders for CONFIG_DRM_CLIENT=n
-> 
-> Signed-off-by: Thomas Zimmermann <tzimmermann@suse.de>
-> Link: https://patchwork.freedesktop.org/series/151624/ # [1]
-Acked-by: Danilo Krummrich <dakr@kernel.org>
+On Wed Oct 8, 2025 at 1:37 AM CEST, Joel Fernandes wrote:
+> The Nvidia GPU architecture is little-endian (including MMU structures in=
+ VRAM).
+
+Yes, I'm aware (and I'd assume that there is no reason to ever change that)=
+.
+
+Just for the complete picture, there's also some endianness switch in the
+NV_PMC_BOOT_1 register I think?
+
+> All the CPU architectures our drivers support are expected to be little-e=
+ndian.
+
+Technically, all Rust supported architectures are indeed little-endian.
+
+However, the only constraint for the Nova project as by now is 64-bit only.
