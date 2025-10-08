@@ -2,72 +2,74 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id E4BBCCBAE97
-	for <lists+nouveau@lfdr.de>; Sat, 13 Dec 2025 13:46:16 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 44809CBABAD
+	for <lists+nouveau@lfdr.de>; Sat, 13 Dec 2025 13:43:15 +0100 (CET)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id B2B9010EC2E;
-	Sat, 13 Dec 2025 12:42:15 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 56EF110EA71;
+	Sat, 13 Dec 2025 12:41:05 +0000 (UTC)
 Authentication-Results: gabe.freedesktop.org;
-	dkim=permerror (0-bit key) header.d=gmail.com header.i=@gmail.com header.b="MFAsxLEG";
+	dkim=permerror (0-bit key) header.d=gmail.com header.i=@gmail.com header.b="E/ysVkJ6";
 	dkim-atps=neutral
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from mail-qv1-f51.google.com (mail-qv1-f51.google.com
- [209.85.219.51])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 4426410E83B
- for <nouveau@lists.freedesktop.org>; Wed,  8 Oct 2025 14:28:19 +0000 (UTC)
-Received: by mail-qv1-f51.google.com with SMTP id
- 6a1803df08f44-791875a9071so73520246d6.1
- for <nouveau@lists.freedesktop.org>; Wed, 08 Oct 2025 07:28:19 -0700 (PDT)
+Received: from mail-vk1-f170.google.com (mail-vk1-f170.google.com
+ [209.85.221.170])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 0491210E847
+ for <nouveau@lists.freedesktop.org>; Wed,  8 Oct 2025 15:49:57 +0000 (UTC)
+Received: by mail-vk1-f170.google.com with SMTP id
+ 71dfb90a1353d-54a98bcdedeso1499225e0c.0
+ for <nouveau@lists.freedesktop.org>; Wed, 08 Oct 2025 08:49:56 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1759933698; x=1760538498; darn=lists.freedesktop.org;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=C3nyMQNps0AyLL97xzttuk+phB0DdoZh7JjDzOjB4po=;
- b=MFAsxLEGjCRTAdsXcqihNtVC6waBb8ZYlCNYSdQlhMwUM8A83fJpW0lpgIPTODBtrk
- FPjjNaKjD24dI8fbVDpcBBhTT90YCn6fwVMnrGk/HnQ2STGx2tMi1O+dNb+/AkunXV+b
- mFx8+0o8LMkIglLKMAgUU5lXRWpOXFIjCMqlB+aGYrT7Mg3TgTspT4+nJsqAthqvb9Gi
- ODmc78XC2Jn1v69t7tTqVyFIHmkVWlPxCGyeCWy6CCITohfuwoQk8yyjvwox9D7W8SY0
- N+sHpM7qiv/TSrdYendR4j5ss/Op4gypgH8on+NiAH/ci1naS2PHbfHNZdE9+rrmB5D7
- 5qNQ==
+ d=gmail.com; s=20230601; t=1759938596; x=1760543396; darn=lists.freedesktop.org;
+ h=in-reply-to:content-transfer-encoding:content-disposition
+ :mime-version:references:message-id:subject:cc:to:from:date:from:to
+ :cc:subject:date:message-id:reply-to;
+ bh=posWhcO7uW0YnkFBpk/sI6hl5Osok5DPG0Lk6uuLAiY=;
+ b=E/ysVkJ6PYV+F31rykG30SPINdTt8xV3oAtp6XZJiHlDiD8JFvZW9xxdF/7BiFx+4C
+ TNbIEtpikA6zFEBTvPfaSZnwVpBSg29sYMrKIQlDRlfLxn2dUCgq2cWkHlBA1upgnZK/
+ I7WH4ZrLo9Qzu30lct/T+1vw0WL+00DgIofsRh2XedejfkcQf0joe4W9WWzp99vr5Z6T
+ xGP+yhvFgomRX08kTwglJYmD7CbWfUIUtElUATBfSOZodGL+0d6mMURIQnZVxSm++dhR
+ r5Ct56TKXCksB2URh8vr05tQuCbZpkpCbU+PC+h18GRDoysToYUygxoI88sZosHI6enD
+ Gg8Q==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1759933698; x=1760538498;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=C3nyMQNps0AyLL97xzttuk+phB0DdoZh7JjDzOjB4po=;
- b=gFSatKeR1aZSyV3O53PCFIeknLwZRls4HmXeH7kJXgxweCH95RPHL3DtzC3p7+nKOj
- RD/tSpo1OjrTYSO8dA4xrGKtgHRzDtTGPy+MOrHAM+RYJncyKdfadjJFboglWci/GD0E
- Lqj/z8UNCk/Wp4iHCdY4FjSbmqZWlplrQRTg7NVVHU9LYmkGbQu/KqxoVN3Sooac8MrC
- xI7FupCSPGL+e5+tzTB+gXyPNxzuVrrVulK9qUju/70h+7USHwpR+p3nNxbMTu8SdruJ
- kmdu51iPC5fh2iWABvNu6m1Nl33I+mvj+f6FJ7mMOBnqAmAvhBSD+szycNiHZvtll6D4
- kPzA==
+ d=1e100.net; s=20230601; t=1759938596; x=1760543396;
+ h=in-reply-to:content-transfer-encoding:content-disposition
+ :mime-version:references:message-id:subject:cc:to:from:date
+ :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+ bh=posWhcO7uW0YnkFBpk/sI6hl5Osok5DPG0Lk6uuLAiY=;
+ b=dHtRWx7DPD7xZ1ooCVZ7+BVFq+56eeerpg/XBtGhhFTqnaGREVuhDnNxHyZU31BGTR
+ RTrgLjHnUqq2842DGvTiF/XDEe2Rl0KZ7/164AkHbvf4Z06H2gOOGiBrNM/D9T1z8k8O
+ 5TgobHHljvyFNqOA16WLPD8pUkK+EAYK1NliUxjdZrSExfx1mUbiVf95hXrgXr3oxN/v
+ SjB2GeCin28DLBPjKt+O/f0xvAWbhRYyX/hNHPBA7/SaNVwpJ9O+LeBzFlGKUzZ6fQpt
+ Iw3VbZTCgDY58Lv+mDmYeeIcuN4L5mBMU1xVX3p4LbzF77u7Jtjg2rHVlxz4M6cs40RB
+ ppww==
 X-Forwarded-Encrypted: i=1;
- AJvYcCW+KJs87q0ZTPcEL7sSiPumGylec3FuEuaixaRjDK/EGoYtxGEp0RG6LbQKnGYSyO/h4p6+Z4W2@lists.freedesktop.org
-X-Gm-Message-State: AOJu0YxEFL3N/mmH+dHMmhnWlBmc0do0SmMp2wdmroRl/HuvMk5z2J3E
- rMg6cjJv7dYxZIyDmrfdqcWHGc0WiLxGW+tb9y0XRm9lOadDvD50YC4z
-X-Gm-Gg: ASbGncu00puOeUxg/Xyp8g4GtEwpv0BEcgRJynTBYt9YsQsx6VgJqgPqgiZYYZUviIh
- bWBtNLzTpHsXAFE52i2mkh/Hq7Z1FgFNw8NoI4Q7KF8O+18wPEri+x0T0DaNtDhhpcDfexv6uAB
- zXXM4xcXTbndWYVjBVPhKVgDxEBUnNv6Y2OR7cl4070ouIHPSqCaTWceaZskNSN8eyGwaiSKrSn
- xTRIQCe0nHWIsTOGCM+V03UXTEn0HQ5MhcxOiyUvmZcM9F+rT1/X6NQo12xiv67Sd/kRWSN0xY6
- ycDGTCP9uN2IhwIijuzJy+yJYPeXoCRKKs1S3cvnNzttwixjO/+WGWmTHMKc4P7okNeqFMGlo5Z
- Q0WQuixZ/a95RMco/sdNUm22ayWLfDnuoIOAVRVyz3SI=
-X-Google-Smtp-Source: AGHT+IFntZefp3Ss0mi+6jECEAXuwb7eOj/bzue7nh8gRQKVbgbOiMWHYq2oEKWHI2USmbbKcqsDDg==
-X-Received: by 2002:a05:6214:2a87:b0:789:d698:d384 with SMTP id
- 6a1803df08f44-87b2103104bmr48809406d6.20.1759933697907; 
- Wed, 08 Oct 2025 07:28:17 -0700 (PDT)
+ AJvYcCULUapYoFeunapyNdbiRXCQfqCCM/qr488L7QIHTdg8LZj85MqWTNG9/QgkpmJA0tJ1nisZ+xib@lists.freedesktop.org
+X-Gm-Message-State: AOJu0YxTPmXNMUp+YtdsvAHqLMR3c91RsI8kjyaAoreVIkEDRggTZalj
+ Gxn32RVpXaaDWzCjSFCZ5psXUvGTMbcCslbdZzyeJnpuXHcmC4Ft/Iqe
+X-Gm-Gg: ASbGncuabOoGmb0P7s9QBmh5iq6OGIif9/wgK5AlSEAu+nYbfsqysLmSW4gFPldKsPg
+ VGkdFySI3pSzi3nz3uVjwIAONo15MSfVIkA+P/qdAypvMP/w5qycPT8/lYsbWlCuzd6HXvme/Ry
+ ATonWixLrZts+zQN7aecEsQ00k/tCR/BRsNvOvq0T37U4nNGANevnoVTIeGUNGyxQhfE5nodWeJ
+ s+67N/UL5MibWFTm0U+RU9KlGOxUaYZ5p6I82YkkTAiDncO2nemH8FCa6L5cKQJwOxRG9bkvj40
+ 2ELi4ZPiL5uAPuVUv5AaIErrZq9nG2JTXnf3bvTJKaGF8dRjPC+de9OFv11VF+9wwY+ow1VATF9
+ zgeD+YYsMMzczHg74w4tcagjLCyn5hau+nY4XqGiNLH0=
+X-Google-Smtp-Source: AGHT+IEJ9vfvjdDQtiPcrc3cIELW9OyuJZ/EAGgmwTi4uspcOFQieo0RXuDvRCYp8d25pdpbu0sCBg==
+X-Received: by 2002:a05:6122:a0a:b0:539:1dbf:3148 with SMTP id
+ 71dfb90a1353d-554b8b3f3f8mr1700186e0c.2.1759938595679; 
+ Wed, 08 Oct 2025 08:49:55 -0700 (PDT)
 Received: from localhost ([12.22.141.131]) by smtp.gmail.com with ESMTPSA id
- 6a1803df08f44-878be61f6bcsm163723216d6.65.2025.10.08.07.28.16
+ 71dfb90a1353d-55497ee3001sm2300503e0c.6.2025.10.08.08.49.54
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 08 Oct 2025 07:28:17 -0700 (PDT)
-Date: Wed, 8 Oct 2025 10:28:15 -0400
+ Wed, 08 Oct 2025 08:49:55 -0700 (PDT)
+Date: Wed, 8 Oct 2025 11:49:53 -0400
 From: Yury Norov <yury.norov@gmail.com>
-To: Danilo Krummrich <dakr@kernel.org>
-Cc: Joel Fernandes <joelagnelf@nvidia.com>,
- Alexandre Courbot <acourbot@nvidia.com>,
+To: Daniel Almeida <daniel.almeida@collabora.com>
+Cc: Alexandre Courbot <acourbot@nvidia.com>,
+ Joel Fernandes <joelagnelf@nvidia.com>,
  linux-kernel@vger.kernel.org, rust-for-linux@vger.kernel.org,
- dri-devel@lists.freedesktop.org, Alistair Popple <apopple@nvidia.com>,
- Miguel Ojeda <ojeda@kernel.org>, Alex Gaynor <alex.gaynor@gmail.com>,
+ dri-devel@lists.freedesktop.org, dakr@kernel.org,
+ Alistair Popple <apopple@nvidia.com>, Miguel Ojeda <ojeda@kernel.org>,
+ Alex Gaynor <alex.gaynor@gmail.com>,
  Boqun Feng <boqun.feng@gmail.com>, Gary Guo <gary@garyguo.net>,
  bjorn3_gh@protonmail.com, Benno Lossin <lossin@kernel.org>,
  Andreas Hindborg <a.hindborg@kernel.org>,
@@ -78,20 +80,19 @@ Cc: Joel Fernandes <joelagnelf@nvidia.com>,
  Thomas Zimmermann <tzimmermann@suse.de>,
  John Hubbard <jhubbard@nvidia.com>, Timur Tabi <ttabi@nvidia.com>,
  joel@joelfernandes.org, Elle Rhumsaa <elle@weathered-steel.dev>,
- Daniel Almeida <daniel.almeida@collabora.com>,
  Andrea Righi <arighi@nvidia.com>, nouveau@lists.freedesktop.org
 Subject: Re: [PATCH v6 0/5] Introduce bitfield and move register macro to
  rust/kernel/
-Message-ID: <aOZ0_7YQw81lyMWt@yury>
+Message-ID: <aOaIIV8KDA0GjF6E@yury>
 References: <20251003154748.1687160-1-joelagnelf@nvidia.com>
  <aORCwckUwZspBMfv@yury> <DDC0VAHL5OCP.DROT6CPKE5H5@nvidia.com>
- <DDC49ZIRX79X.2Q4KW0UY7WUF3@kernel.org>
- <faa99188-7ccb-4c7c-b705-3a207f5acd17@nvidia.com>
- <DDCFLM3P5MCC.NEBRVTU7X2G3@kernel.org>
+ <aOU0joJQZiU61GBB@yury>
+ <D421296D-FFF3-4998-B467-8E079AEB7499@collabora.com>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
+Content-Type: text/plain; charset=utf-8
 Content-Disposition: inline
-In-Reply-To: <DDCFLM3P5MCC.NEBRVTU7X2G3@kernel.org>
+Content-Transfer-Encoding: 8bit
+In-Reply-To: <D421296D-FFF3-4998-B467-8E079AEB7499@collabora.com>
 X-Mailman-Approved-At: Sat, 13 Dec 2025 12:40:49 +0000
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
@@ -107,25 +108,63 @@ List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-On Wed, Oct 08, 2025 at 12:08:59AM +0200, Danilo Krummrich wrote:
+On Tue, Oct 07, 2025 at 06:41:58PM -0300, Daniel Almeida wrote:
+> Hi,
+> 
+> First and foremost I’d like to say sorry for not having the bandwidth to
+> chime in here earlier. I’ve been pretty consumed by Tyr itself lately.
+> 
+> > On 7 Oct 2025, at 12:41, Yury Norov <yury.norov@gmail.com> wrote:
+> > 
+> > On Tue, Oct 07, 2025 at 07:36:21PM +0900, Alexandre Courbot wrote:
+> >> Hi Yuri,
+> >> 
+> >> On Tue Oct 7, 2025 at 7:29 AM JST, Yury Norov wrote:
+> >> <snip>
+> >>> Regardless, I don't think that this is the right path to move the
+> >>> bitfields into the core. The natural path for a feature that has
+> >>> been originally developed on driver side is to mature in there and
+> >>> get merged to core libraries after a while. Resctrl from Intel is one
+> >>> recent example.
+> >>> 
+> >>> With that said, I'm OK if you move the bitfields as a whole, like you
+> >>> do in v5, and I'm also OK if you split out the part essential for nova
+> >>> and take it into the driver. In that case the bitfields will stay in 
+> >>> drivers and you'll be able to focus on the features that _you_ need,
+> >>> not on generic considerations.
+> >>> 
+> >>> I'm not OK to move bitfields in their current (v6) incomplete form in
+> >>> rust/kernel. We still have no solid understanding on the API and
+> >>> implementation that we've been all agreed on.
+> >> 
+> >> Initially the plan was indeed to give this code some more time to mature
+> >> in nova-core before moving it out.
+> >> 
+> >> The reason for the early move is that we have another driver (Tyr) who
+> >> wants to start using the register macro. Without it, they would be left
+> >> with the option of either reinventing the wheel, or poking at registers
+> >> the old-fashioned way, which I think we can agree is not going to be any
+> >> safer than the current macro. :)
+> >> 
+> 
+> Tyr could use both register!() and bitfield!() today FYI. If you move it out, I can
+> follow with an actual patch to do so.
 
-> Regarding the bitfields for page table management: Are we
-> sure that we can use raw bitfields for this?
+Not sure I understand this. Does it mean that you have use cases
+for bitfields unrelated to I/O registers? Can you please share
+details on what you need and sketch some examples? Particularly,
+do you have arrays of bitfields in mind?
 
-As per my current understanding we can't. Bitfields are not suitable for
-direct I/O and considered as a data storage. In the current scheme:
+If my understanding is correct, then I think the strategy that
+meets your interests at best would be moving the registers out of
+Nova earlier. After that both Tyr and Nova people will get equally
+involved in bitfields (and possible BoundedInt) development.
 
-        regs::NV_PFALCON_FALCON_DMATRFBASE::default()
-            .set_base((dma_start >> 8) as u32)
-            .write(bar, &E::ID);
+This is what Danilo proposed in the other email, and I agree that it's
+the most structured path.
 
-we account for endianess in the .write() method, which would be a part
-of register API, not bitfields.
-
-FYI: ARM64 is in process of dropping BE, and Linus announced the end
-of BE support for RISC-V:
-
-https://lore.kernel.org/all/CAHk-=wgYcOiFvsJzFb+HfB4n6Wj6zM5H5EghUMfpXSCzyQVSfA@mail.gmail.com/
+Regarding timeline, I think 2-stage approach will eventually become
+faster.
 
 Thanks,
 Yury
