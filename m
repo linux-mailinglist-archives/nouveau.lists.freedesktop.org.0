@@ -2,146 +2,149 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id 4F52FBC707C
-	for <lists+nouveau@lfdr.de>; Thu, 09 Oct 2025 02:48:30 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id EC66FBC717C
+	for <lists+nouveau@lfdr.de>; Thu, 09 Oct 2025 03:15:14 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 62F9E10E8F6;
-	Thu,  9 Oct 2025 00:48:28 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 7A46B10E8FA;
+	Thu,  9 Oct 2025 01:15:12 +0000 (UTC)
 Authentication-Results: gabe.freedesktop.org;
-	dkim=pass (2048-bit key; unprotected) header.d=Nvidia.com header.i=@Nvidia.com header.b="iVfgvoE3";
+	dkim=pass (2048-bit key; unprotected) header.d=Nvidia.com header.i=@Nvidia.com header.b="Bh5aPmHu";
 	dkim-atps=neutral
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from CH4PR04CU002.outbound.protection.outlook.com
- (mail-northcentralusazon11013030.outbound.protection.outlook.com
- [40.107.201.30])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 2E55B10E8F1;
- Thu,  9 Oct 2025 00:48:26 +0000 (UTC)
+Received: from PH8PR06CU001.outbound.protection.outlook.com
+ (mail-westus3azon11012007.outbound.protection.outlook.com [40.107.209.7])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 25C6C10E04A;
+ Thu,  9 Oct 2025 01:15:11 +0000 (UTC)
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=wvaG4GLVDYLByh7hf4U1rp+5CULr3rLhnTC1wztUPVfzgCv6G7GnzlQZOaduZN7NkQZjQErO3lP4cbmndlhzxsJPD/zb73scuF/FT0p6DWgSyWG3qwlQUH51O89b2NE1TbvHPOfk9KttXNdNYcSmB8E5/EwmKK1XlYbfN8eIUZkawqBt84x5jbyeDPE/uvyLmCZPU/S0MTMqhsivcC14Pffzh6zX8QbBR494+wN7XuG2MWEDQArd8hycRHQK9keEifXcgytaP2vc0PluJYxYKYQxrj3ZVILKeowu+UouMOV+WaflvYi1tUpw+4e9pFBFbbEvP3j3dDqJ3ReeF8PQGA==
+ b=RogY9nGp9zxNi86ZoW1G8Xt2C7HdRfYOos8MLUzgNILRDbbPJrckhovKrD3NithiBA/5xAUkqphzRSKbCV6Dj1UVAwdwb+kJ05QKgo0bSp5tz5VrMIfG/2DpJCwSoghw+LlmhgRZInWds7vDJSW6k6s97O4POSKOfinAwAwAR+XpkrktYZcqhhdjZr74XajUFifCISvgUC4GVi0TD+uv8Vy8f/TjAdfEMLb4jzZAmvSbK99ojhWIYXn6D1g+sIwbbqywbYV+5lrvpzB3zheqbUt6f1jrICAJBJp7xdd7BiNP7xSmwmfz/6aLayJC5UoWGp20+UTnFpgLEsNxBjInJg==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
  s=arcselector10001;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=p2mjb430zEWyXJsjvEJdWGXtuEBZy+QH3btfLKjdbcg=;
- b=m9GwWeIvjpwYcfM6qQVjWITcmiAeLvTcB+E3tivFlRVeBUFROBiSsABdWYholXLpSBPGyydGAv6U4OqByvHGJhVUDNuPVap1BZqEemtEI5HoYPUxHo8MlgBoKyDAlCnpplO0pc97FIYaMF628aRdTi/kp2xRetbJZV15EV47d747Icdbw9ERNUmXWM3IOu687gWT3CRnRCNzG0eQNdo9Cj42JJ5x9eRIzwQOQyh4gX1JLcg3svhhaxwHWhGTJsmv6/MuHiCfs1QjIFawIqw8ZuC0fGSF70ZyHuzceuKGla0E2bND3UXepMN/QN58Bsy8vqTBXphp3NmWjdnNWta2aw==
+ bh=g892Y3v+lIqHVS3UqKVP6Gw8egb+fvk/ElwraJJncFg=;
+ b=sNRdEO9SgJP8wA3dc05D5B5HL01fA8kGb93EgDNRDHl6iZriC5jdzClwZzZ06+WHFyV41i1jxjdEkDltOs7zs43eaeXXY4EienTLaZLTQLRnLoGQjlf3c8UiO+it3gTsGQttdINDwALyCHVGw5lJfjbT4bjRwKhA/0V5ovAmd6GuFT4qDJSryKLGAgJzrQhDuiJqibIrDGNUo8pjubEo8yWXbsJkb/A9poYf2ti11vwKiNHNlC3eu7nxcAH1e+d0FPyxxqcNB/Wpvpa0Rav9XEzo7Fkn/kSEDqD7YQycufgPBRXst3CzIMfuFqswHAmPxb2lhWwmkhmBPtvSybb7YA==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
  smtp.mailfrom=nvidia.com; dmarc=pass action=none header.from=nvidia.com;
  dkim=pass header.d=nvidia.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=Nvidia.com;
  s=selector2;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=p2mjb430zEWyXJsjvEJdWGXtuEBZy+QH3btfLKjdbcg=;
- b=iVfgvoE3a+fvGZSh24mbpqH00bappQEojQtpfL9VnebLbRUvm97sgZ3w3jhoDcKP4rKfNYO3WXNyj9qjKJzYkKo8p8xT4w9KTSbHfIvv832O/RfYT6onCK3Wxk9PYF5+LfAn2TOkOqRcZJqteNUTmUa0IuQU+5c3UCyKrpPlxuq4aXqXD+6UEoqNzVZnfE48/zGso3KtS0G95+AdpMXop5ZcxQUlxRe4hh11G+7DJU8E18JQOHslEPsRJ9oVpwCvG8G0qfxx378eKEObKhW1J6u9ZgWaIopE1KVk0HmS0+uBf0JEuno+YIeVyDHsnRzok04dW9eUH9iqQGgmwljPEA==
+ bh=g892Y3v+lIqHVS3UqKVP6Gw8egb+fvk/ElwraJJncFg=;
+ b=Bh5aPmHuFvK/dKv0JrgTXf7tNe9czZ5JNvRcnRaUhIAzkdqa3wNoOH25SkvxNaieD1ThIfPSXlUy3BGjrpFdX75LbqPapRgfY7YLPKj8qXIDMPeb6K+xBXr3MULT/TVRT1QODXtJVWnPVd8wc3aUWCsqqvV/EDZ0NBcNc2tZmzG5JviPGXnkwe7CUOwrbsk16rFeFjZ0M1EnSEIgPOulqiB4C15afnO+Gw5DOv1dlwfNducXJawPkWOtHph0MxwIgOKjimJw+6GuRxAnZC4d4kxgrnGu+NBj3fXQmPnrB/o02UxkPkvGpDGr9T5Zonhtlru04uhB+Z5kdZFylRQYPg==
 Authentication-Results: dkim=none (message not signed)
  header.d=none;dmarc=none action=none header.from=nvidia.com;
-Received: from SN7PR12MB8059.namprd12.prod.outlook.com (2603:10b6:806:32b::7)
- by PH7PR12MB5927.namprd12.prod.outlook.com (2603:10b6:510:1da::9)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9203.9; Thu, 9 Oct
- 2025 00:48:21 +0000
-Received: from SN7PR12MB8059.namprd12.prod.outlook.com
- ([fe80::4ee2:654e:1fe8:4b91]) by SN7PR12MB8059.namprd12.prod.outlook.com
- ([fe80::4ee2:654e:1fe8:4b91%2]) with mapi id 15.20.9182.017; Thu, 9 Oct 2025
- 00:48:20 +0000
-From: Joel Fernandes <joelagnelf@nvidia.com>
-To: linux-kernel@vger.kernel.org, rust-for-linux@vger.kernel.org,
- dri-devel@lists.freedesktop.org, dakr@kernel.org, acourbot@nvidia.com
-Cc: Alistair Popple <apopple@nvidia.com>, Miguel Ojeda <ojeda@kernel.org>,
+Received: from DS0PR12MB7726.namprd12.prod.outlook.com (2603:10b6:8:130::6) by
+ SJ0PR12MB6902.namprd12.prod.outlook.com (2603:10b6:a03:484::7) with
+ Microsoft
+ SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ 15.20.9182.20; Thu, 9 Oct 2025 01:15:01 +0000
+Received: from DS0PR12MB7726.namprd12.prod.outlook.com
+ ([fe80::953f:2f80:90c5:67fe]) by DS0PR12MB7726.namprd12.prod.outlook.com
+ ([fe80::953f:2f80:90c5:67fe%4]) with mapi id 15.20.9203.007; Thu, 9 Oct 2025
+ 01:15:01 +0000
+Date: Thu, 9 Oct 2025 12:14:55 +1100
+From: Alistair Popple <apopple@nvidia.com>
+To: Danilo Krummrich <dakr@kernel.org>
+Cc: rust-for-linux@vger.kernel.org, dri-devel@lists.freedesktop.org, 
+ acourbot@nvidia.com, Miguel Ojeda <ojeda@kernel.org>, 
  Alex Gaynor <alex.gaynor@gmail.com>, Boqun Feng <boqun.feng@gmail.com>,
- Gary Guo <gary@garyguo.net>, bjorn3_gh@protonmail.com,
- Benno Lossin <lossin@kernel.org>, Andreas Hindborg <a.hindborg@kernel.org>,
- Alice Ryhl <aliceryhl@google.com>, Trevor Gross <tmgross@umich.edu>,
- David Airlie <airlied@gmail.com>, Simona Vetter <simona@ffwll.ch>,
- Maarten Lankhorst <maarten.lankhorst@linux.intel.com>,
- Maxime Ripard <mripard@kernel.org>,
- Thomas Zimmermann <tzimmermann@suse.de>,
- John Hubbard <jhubbard@nvidia.com>, Joel Fernandes <joelagnelf@nvidia.com>,
- Timur Tabi <ttabi@nvidia.com>, joel@joelfernandes.org,
- Daniel Almeida <daniel.almeida@collabora.com>,
+ Gary Guo <gary@garyguo.net>, 
+ =?utf-8?B?QmrDtnJu?= Roy Baron <bjorn3_gh@protonmail.com>,
+ Benno Lossin <lossin@kernel.org>, 
+ Andreas Hindborg <a.hindborg@kernel.org>, Alice Ryhl <aliceryhl@google.com>, 
+ Trevor Gross <tmgross@umich.edu>, David Airlie <airlied@gmail.com>, 
+ Simona Vetter <simona@ffwll.ch>,
+ Maarten Lankhorst <maarten.lankhorst@linux.intel.com>, 
+ Maxime Ripard <mripard@kernel.org>, Thomas Zimmermann <tzimmermann@suse.de>, 
+ John Hubbard <jhubbard@nvidia.com>, Joel Fernandes <joelagnelf@nvidia.com>, 
+ Timur Tabi <ttabi@nvidia.com>, linux-kernel@vger.kernel.org,
  nouveau@lists.freedesktop.org
-Subject: [PATCH v2] nova-core: vbios: Rework BiosImage to be simpler
-Date: Wed,  8 Oct 2025 20:47:32 -0400
-Message-Id: <20251009004732.2287050-1-joelagnelf@nvidia.com>
-X-Mailer: git-send-email 2.34.1
-Content-Transfer-Encoding: 8bit
-Content-Type: text/plain
-X-ClientProxiedBy: BN8PR04CA0049.namprd04.prod.outlook.com
- (2603:10b6:408:d4::23) To SN7PR12MB8059.namprd12.prod.outlook.com
- (2603:10b6:806:32b::7)
+Subject: Re: [PATCH v4 02/13] gpu: nova-core: Create initial Gsp
+Message-ID: <oi5mksfhvuumriuqtld4hhd46gcghawtemaxnv4qs7cx76ecio@6rp3taivotiw>
+References: <20251008001253.437911-1-apopple@nvidia.com>
+ <20251008001253.437911-3-apopple@nvidia.com>
+ <DDD2F1NSSTVN.1VDRSX5O9ZIKM@kernel.org>
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <DDD2F1NSSTVN.1VDRSX5O9ZIKM@kernel.org>
+X-ClientProxiedBy: SY5P282CA0150.AUSP282.PROD.OUTLOOK.COM
+ (2603:10c6:10:205::17) To DS0PR12MB7726.namprd12.prod.outlook.com
+ (2603:10b6:8:130::6)
 MIME-Version: 1.0
 X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: SN7PR12MB8059:EE_|PH7PR12MB5927:EE_
-X-MS-Office365-Filtering-Correlation-Id: 16853e06-e7b6-4bd2-597e-08de06cd86bb
+X-MS-TrafficTypeDiagnostic: DS0PR12MB7726:EE_|SJ0PR12MB6902:EE_
+X-MS-Office365-Filtering-Correlation-Id: 90701be0-4c3f-4f75-5485-08de06d14544
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0;ARA:13230040|1800799024|376014|7416014|366016;
-X-Microsoft-Antispam-Message-Info: =?us-ascii?Q?nZLWcpN0SZD/WO/orOSja+hNXShZspocwvJoR1UAC1mXHL2KW6pQteFuorh8?=
- =?us-ascii?Q?lyf1X8de6Pa/JiaFyvVT+ubqa9/mAqm9STKS+qUU3sewjE/KtE6shT/3PKWw?=
- =?us-ascii?Q?fjD33qPGabxL5CidFs2mu1BUxBUD17CLQTBWev849Zsg2amJ80ta8spRyVyM?=
- =?us-ascii?Q?pz0UKp9lRckfaYBeQHeyHyhY+wJpnG5y0nk2QW2hpBbw/AGGY8lUdd7Li3fF?=
- =?us-ascii?Q?GugQ0fdkYrStPs7sYdUzuzxX8ivkw0zykMMx7BWMrOrKSh4kyxN9fWgR6hz6?=
- =?us-ascii?Q?UG4mRMjyO9unyaWzinAyJ6OoNbMW7XGAyR9wYSUPYB/1OkhoY7Y7wC+0Klb2?=
- =?us-ascii?Q?7/XsmbXKe3W38W9JURrbEJuUvCntFvI6+bOmx/HUBxdnHkqnvcUMce3ZzQhc?=
- =?us-ascii?Q?a8OxtGP81PP9XT9U510TKmhWBpAv1bGK3UX9RiBmRQB8euemSACJ8nmLgBmb?=
- =?us-ascii?Q?J2YePIIO13BBDtIg5cDm4L3tMzh5C7xOpuwYEKjwSS86VcJmRWWFc5IQuOhK?=
- =?us-ascii?Q?3MtfV8xg/j3tM6H+7kKNpSXrR9GMZejBrpo9UAFRXweZIdFEs09FKjBQ2TR/?=
- =?us-ascii?Q?1Za24SlVXdkPSKtFB31mHTFi1Xej1LXLJMtBpM0PSHG1CCw9YwO8tfAYzmS7?=
- =?us-ascii?Q?NVYEm5OpNkuCoQrQo2YZ24J9bgS56twZDKJ9CCz2l83iamVGDNF1yyVyrHE0?=
- =?us-ascii?Q?IhJNvTiMLbtforNhsPY3KP1Jy8O7sWCgB19i49EPe9ajn7eu3iqmICUj7BgV?=
- =?us-ascii?Q?24+KEhF3OylkqHjOmg6gHk4t8HN6t7yFNXJ7bPISiKbFc/htznAO+01Lqf6r?=
- =?us-ascii?Q?Fz7u6+GNdu6xXCv28RRtYYQrD1Hp6UB6KGIuc7nK9jxqMZodQWjhv1uL8+af?=
- =?us-ascii?Q?eh07JyzEJca5T5fgR+r4z5iBStAAoMjAYIcv0zY622qrjR6m4g3TUUX3dw81?=
- =?us-ascii?Q?kiDr+nkhCTWZCDXFMJiZSuPw7pkfgBshQ1Y+aWe/tBqV8Qxah6//Fj560ldO?=
- =?us-ascii?Q?qcBUG1RcEsGos9rBjqcoeDEcjibYFMsR+mlkV43sdNdyeeVURoxVFdE3GecJ?=
- =?us-ascii?Q?5XGdN8Ggv6MfqeVBcqYi6kWymT3L1zx1BPl6kT8BD7jv7CR+WzrcVTUrDJ86?=
- =?us-ascii?Q?5mlvupTywDR+DMMEfjAWspSfYFz4+xUXN+TqP9ww+en920hTf0zFzcd/Rc57?=
- =?us-ascii?Q?/3IadfDSB5nH1Hplm97khbRXpzDA5XZaW5bIFfEOZsHNiaKt2mMz0xDQhQhE?=
- =?us-ascii?Q?k/NtWRMBOw6D1FzWldPm13vPwZir8PXbWYK5EMGLf+DhEML9KWHptW0H9Qzf?=
- =?us-ascii?Q?yTCnyNdbGg1LMwkUdGP/IrkM6KStQPDif3Zjj5FtNopTDtaAFCinfRAXUUhG?=
- =?us-ascii?Q?CZeDXrdZZskUAY0YgDseq5SuT/iyOE+EAFV7MsNLtA9wSZeqOWpNEz/7Gimu?=
- =?us-ascii?Q?ynLwQZQeMi2NAAr+6QRaBWTmJuwJl5dG?=
+X-Microsoft-Antispam: BCL:0;
+ ARA:13230040|7416014|376014|366016|1800799024|7053199007; 
+X-Microsoft-Antispam-Message-Info: =?us-ascii?Q?pgABugFXxfgAN2JRDmhfjfStMWXTsj8skv1t413PPIgMYxkrja7JoJx1SHBn?=
+ =?us-ascii?Q?4kbtGKhVmKyp2UXi84j10KQnzgEiMGAPycV4P2x9euovt3tr/lGjo9U3+qMl?=
+ =?us-ascii?Q?uNXXTMqsXKwtvfMcrx3WFQtsalNoKdivSUYRmaNwCg4JQD/WMF3tTIqQ31Ku?=
+ =?us-ascii?Q?YGI61BBvmFH2CyaqkuqOqoJKF4tcXHZOISI7tCaMJD+nKynjTvCYZ1FmRiNb?=
+ =?us-ascii?Q?PyGEmFGRk7kAEJCNvi4kq/eag/QEPFNyrEi5lcis5AXFkU5ODa6OV41DPtjO?=
+ =?us-ascii?Q?zKyEpoyILwGfdVRNfGQwoEMWUN9H6jT4ZtVZL8V7iC6DvXoJ+M7eA2D80r7E?=
+ =?us-ascii?Q?76vw3Q2cvApCddqQ909UujdmGqybze4JDiht6sJNbhsh2ESn9XWjNO1GeAZO?=
+ =?us-ascii?Q?B+q3xUPzm/+Lby8NNc/6C8q+v9AvrlsKHRjQpqmNGQsa79pGI5ew+qPxda6K?=
+ =?us-ascii?Q?MHDXNw+INUG+hlx5sa4En5iRva9zwkUfFWv1GevZfbxrddAR1Mt4PGrU5BxX?=
+ =?us-ascii?Q?P5zdbY+PkZhLJUiQCzEyxLzulnZDvU5TXeKbfJPr9nngAg+M+uNUERZNnrsD?=
+ =?us-ascii?Q?xvBINhPNDRFMIqxoN9vFPFHl3LPdT8xVTy+aaFF8Oll2+8b/GwvXR5TWCd1+?=
+ =?us-ascii?Q?++ZhBp4Cm5oIerA9aUfXV6YAUNk0WVA6VJcwMtkiERZS7e14LIcrFsNhLQMl?=
+ =?us-ascii?Q?3U9/vqjLyvaPpx8s59VXZ+sLFeeNfr8Z/HFh3wgyib2vHdrv+WZmscLOVUBO?=
+ =?us-ascii?Q?8dpey7b8RxIaRKqV0dMmX38wNHwcBsINAkqGXN88EOujmeYwnPuyi9QJ4oNP?=
+ =?us-ascii?Q?CpcpF/ztzvf3qfbagH9I6u8F1hpXoB+SDv0FruMKB7DqhFhsUxYsaApb/Qo0?=
+ =?us-ascii?Q?MwLyOxFBvZ8eIZTxnbKVLu6YFjKJHeNrYhykljMM3fRvFtXedbchvS3odl9M?=
+ =?us-ascii?Q?XJDkcsQQlU3tS8UvUQiPQra66Yzk9E6VBxdZYp+f+Vk+j3TQp9yZKiDwqEg5?=
+ =?us-ascii?Q?prxAdAbD9oB6ba5p1ua+rVg+WZC0H3056WUF9Ez37C0M7Ig5tZL07z+Gu4DF?=
+ =?us-ascii?Q?0WpvhvXV4zy4Oxt9PHjDNwVKaC09zplOSE0RVP2vcV0SgiiefvcCDDCcQSK0?=
+ =?us-ascii?Q?zvU4Vh9E5Mn/wskNeOqXRvjQ40zYgTDw6+Bw3AWI7qbmvy1QaLL8sGwSCoG3?=
+ =?us-ascii?Q?V3sAG0XCGPMKfSAUCcln6+P8ZXU6YiAyEvDRA7ZmcMtHJJlkYIvBB456xnwx?=
+ =?us-ascii?Q?wxdGJZE9Fo8NyRiOeAPcY+y//2LKWGHcuAsFpKrA3NfdnjHw95JP9OiEHhnQ?=
+ =?us-ascii?Q?KzMLWWuWOpeMJvCX5TNxUKqwqelgxlj/ENkZxjgyNfnGdARJteufeHUJlOUO?=
+ =?us-ascii?Q?tn1nxlDbG/pgF0aUlqPHzxXjH/OtU5nljqwoYHW7YtEKMox7Rzd1RcQtSOu1?=
+ =?us-ascii?Q?41IV/81pbNGmlLXrY+mT4jJKPvSF8FSn?=
 X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
- IPV:NLI; SFV:NSPM; H:SN7PR12MB8059.namprd12.prod.outlook.com; PTR:; CAT:NONE;
- SFS:(13230040)(1800799024)(376014)(7416014)(366016); DIR:OUT; SFP:1101; 
+ IPV:NLI; SFV:NSPM; H:DS0PR12MB7726.namprd12.prod.outlook.com; PTR:; CAT:NONE;
+ SFS:(13230040)(7416014)(376014)(366016)(1800799024)(7053199007); DIR:OUT;
+ SFP:1101; 
 X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: =?us-ascii?Q?YjIC7tzm9LJ4OC/reJePNP5hV++kUaO3yWLTtoTgt042Ykdo08Tx5fbdoRSz?=
- =?us-ascii?Q?eAJg1hy9W7mocLCjyKY6h9Ktj/9lL2N3o51ahSiguV23mI5oWCvShjJTFnem?=
- =?us-ascii?Q?yhMm9VLRYHxlqa6EQfHRZamnD2czXZ3SD+xr5LHx6joGkgrkeavNUnS9LG44?=
- =?us-ascii?Q?f+HeFqDgxsCO4nJ4NVSw7nVeuR0kf83wSEdG7kmorM0I997IQTXZrE+EV4Rw?=
- =?us-ascii?Q?VdEeYclHyR6wo6HMN+FIoBlPFAUum0jF7rPB4+t2HbQdkoQLWjkQ4/NdGeL8?=
- =?us-ascii?Q?b3SpA8bnbJC+RHO8ijnNJdG6+Sq/r4SDc/8n3l0+l9koABK9r2pBDLwQ08Qq?=
- =?us-ascii?Q?qWe2Eb8siir+AI2FDLE7A+KUsFw11I33UcAepMnOsIGeOW4bA18FhtlUAehU?=
- =?us-ascii?Q?14LX+uxEpfxs4NTQwfbsRSs/UUzUFuli6MbpQQE8DOV1Dz3XIDZKeZRkHnVD?=
- =?us-ascii?Q?npCmGBubi69Dbi3jvtkaLTiq1Y2NOaWFHE9MnYiMDZAGeytYNvvx9z5pO0+g?=
- =?us-ascii?Q?7qZs3g5spHxOGEtaQLTSR/wjVoYg0rfZ7NntwBevPpKyQB77K0eSR4pEonXM?=
- =?us-ascii?Q?gJtHenM5Xz0OIpdLBphy89+qLJyMonh9d54fgtuVn1RUqCxH0vaofRRbtcdQ?=
- =?us-ascii?Q?Vvfke98B92PZpobRSp+GZAJ9UrFpGJM6Dj1ABwy8szlW9BiSKbUGtLPYG4XM?=
- =?us-ascii?Q?3oPeML4pq9yAwPOsHe1DwEWkluZJuiK+Fi3E2jakY2nmKHlvWXRW2+v+y81L?=
- =?us-ascii?Q?OkwSAR2yDWtMznu7MYylJt5DUMxjyrj64xlHhB+nhAWSIfPCN9NkEqw2PCm+?=
- =?us-ascii?Q?UxVtHv/a3TP+AUFQKJsyXADASK+cO0+CmKtNEy/YoYUZ7vnFmlePta8Oea2o?=
- =?us-ascii?Q?ynVmRKJs7opL81XsrTm7Ee7BG2GDtUWlM7tb3ovd/67GWDzxmB2QFFnbWNyV?=
- =?us-ascii?Q?qG8g9bbX94xceHKOoMWBWhlGY2qEK4CiI0W++ZFHQVtyUWl7PDiO/8XcDanS?=
- =?us-ascii?Q?FuQJIavJ0dNAPog9LtJHG84YZ2KTDzYvVmoA1qO22U0cw05U43A15ZKFzeZQ?=
- =?us-ascii?Q?AhrpHl6mjZ8TxVmP9lJgmyI5wPINH5BCN8BMgTRpbnNxM9TipP1o/kmj80gq?=
- =?us-ascii?Q?URK1eXTDD/H/TuDyjKTlas1S3egsR8ayWIoMcpnHFfRHzKjEbTqZS0dHlAss?=
- =?us-ascii?Q?zNfI6VyFtPeiwJhH1gIzmU1VDF0eFza8zpSsdxDXjjbr2CsZV1beSHPYCocm?=
- =?us-ascii?Q?PX7iWhkVIxC/gZ3Q+ktxU3HGSZ1lDPza8qT1fUVZ0Mk1cB6bZO6twK/Alh0i?=
- =?us-ascii?Q?n58jjEBJSqTZISkulcsg+FYskjWj5D1neWVP+6tQB9wrTJBEsSOBrJgS2m5n?=
- =?us-ascii?Q?tPjYgnuIoCJeJR9CoR7r7oML3WlBws4rgtHQTQL4ww3+V+9S72mqG0Ehawfr?=
- =?us-ascii?Q?FWtNy0NlpCat+3Rvgbuv6Ixa4v4itEHW9DJPgS27dGONWFXP/fpXa0OSy2KE?=
- =?us-ascii?Q?4YBSu12L9OxXSOxPscqAViCJCfI/BIlI2Ai3MR6HgjJk/3KpjgG9uqrV4miQ?=
- =?us-ascii?Q?YEXOrZ39+kaNL+sjap5frlUv7ONT6TQ23NQwXvsk7b9ERx0JlTHEvyge8mIO?=
- =?us-ascii?Q?kA=3D=3D?=
+X-MS-Exchange-AntiSpam-MessageData-0: =?us-ascii?Q?6QnBLte6RamhORJ5gMNxPyCF3b49qCvbZt/AsgrHiXH2eXt6VE6DpR6K3mq5?=
+ =?us-ascii?Q?ywLA5VpIobbdxp3v5v2HT2kGNz/Ox/0+/kO6A5vk9PWbGyJVQN8UpnCBd+T5?=
+ =?us-ascii?Q?16nyP7N5bvsq8d1HpbEX2UOefXm7dalfoMyG9JdACGafOhoXFomB0Wiq7jgo?=
+ =?us-ascii?Q?YtgfhpHMeMpqNJA3JCFbkD2HgM2ktxwjAvUghE0g5cT4kiMaEbYxkmcgppMI?=
+ =?us-ascii?Q?EGj6UWj3h5Tm8d85hF7Jp0ZWhLMzvcRXPBp9iwy890JOYCUGBapkg/cvz3fC?=
+ =?us-ascii?Q?Upi53u1rBOYLcN6tXYJCS19MbYGB1WCWqGujOz0Waf6OleTHj18H/P3e5d/p?=
+ =?us-ascii?Q?IBIGCIVPyWSFGY8cf7fT7dNFaXZShcy/QZhxldgYKMcNLayd5+YdvRrd5HRS?=
+ =?us-ascii?Q?JN5CsLuwHl/+NtMeEHcMse8QLmtLxYd/FTDZDv3JIFWkFfCuo3AsKY6W0cuU?=
+ =?us-ascii?Q?GIwhAbuneKAHxrpQv67TBmzMCPh22fm83QgreBn9JwB9HJ8zRi6o7Ic1T9F2?=
+ =?us-ascii?Q?NpZ9xMmtaWBd0VzS1tu/y9xXQ+cpMZL9w6XjbEypBxz7ml5uztWpBTPCQD3U?=
+ =?us-ascii?Q?c4K6t3SiRjGHFzfPEwwYta+H/cDChYLBW/HJs1vCk+pWFsF5P6AW/k5/lCBN?=
+ =?us-ascii?Q?rcAZNN98YW4Ny+XycgmgzvdHz++I02wejMcTeAn2ai+WMVyWS+cmGVQ5rDN2?=
+ =?us-ascii?Q?a/HUM5eM2ttZVCGH1M8j5riLP0hTcBSfYsizelGJqaNoQS+r52RKE0+lrJy7?=
+ =?us-ascii?Q?Ytk6SPoY179DL8iGbFZNMgIWHRkyOAF1qZ5J/EI3qX8LAYX1ZqYzxZmPIpCv?=
+ =?us-ascii?Q?EuAqfKRBhIpwXjshv2Sx+HJgcwK5TI03O44tqhd1Itt/qETPK1lKJTyn0b4A?=
+ =?us-ascii?Q?N0Nt2WdQp0DTEsBDAwdOM5l9WJVp9m8kZV/5eWRV0KPGTRzN/J/mRXki+cGU?=
+ =?us-ascii?Q?agpdTqFd7lRh7Q/rEiHkNwKCmaDis4E+oLVHSkwWdu0g/e6gMx9ukWPVtul8?=
+ =?us-ascii?Q?zmM11+j/+6AFd/LhzCoCYx2/ONYohE0bhZ/k+H6gDjjrfT2E4LMyumlymNH8?=
+ =?us-ascii?Q?PLihg20bkkrWiqggTUNINAglPLgPiiQPf6UR9VJhl0ql8rsXddl3kYvMQcof?=
+ =?us-ascii?Q?u4gRSzi0dBEBMr4AQ4+x9NZ/OtgKFzVtpKlG0q1PMVI36NiAFK2qgOOHk6B8?=
+ =?us-ascii?Q?WjkeX1bsW5Rhxm0XEzioOtEGo8B4Cfv+8bgmHQcViVlYknY14Hhqa74bIbFC?=
+ =?us-ascii?Q?Y1+gzPu2YeLRUhEkv4wbQjJBvHzz0QUr66YfKTzdeyzuJMiTdqgm+2ivfgAK?=
+ =?us-ascii?Q?D+VwQB9h3NDtSAkryqxIi5lpqa/2O6ixQ3pQZI/Xo9NOPt40uaabh8u5XJI2?=
+ =?us-ascii?Q?m+riCUjBhbOtInmVBUew4caUwZvji0EsV7yT5fXtATMz5GPikNM7W1TJUG3v?=
+ =?us-ascii?Q?dXFWG3sIigICNpEc7lH4ZAkwz0LlQwjCq90yML7Np7d0PoYY0TGlsvAw3S/L?=
+ =?us-ascii?Q?LW6I92QIHQNwKbfY92oQBa7j+Hbr465zm9MhehratO9KJgZNNQFgM1d5zhAt?=
+ =?us-ascii?Q?dAnvBXo+KZRc6NI7zEgXpP51npvNkaYT8sjVMJc/?=
 X-OriginatorOrg: Nvidia.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 16853e06-e7b6-4bd2-597e-08de06cd86bb
-X-MS-Exchange-CrossTenant-AuthSource: SN7PR12MB8059.namprd12.prod.outlook.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: 90701be0-4c3f-4f75-5485-08de06d14544
+X-MS-Exchange-CrossTenant-AuthSource: DS0PR12MB7726.namprd12.prod.outlook.com
 X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 09 Oct 2025 00:48:20.8964 (UTC)
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 09 Oct 2025 01:15:01.5930 (UTC)
 X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
 X-MS-Exchange-CrossTenant-Id: 43083d15-7273-40c1-b7db-39efd9ccc17a
 X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: mXQr+zwgGsGqNUcNXgNQGAxcAttlyEF1BI8MVU+W799eaolKAW/S7mqN3MnD6b8UjrRUuPm2EKLdLWzpRCzdiw==
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: PH7PR12MB5927
+X-MS-Exchange-CrossTenant-UserPrincipalName: +JXdi6h+AYPMdWkpps8VHVtQwScrWECjn8oBHg3NZniwaA08/r7HrYLitnq/j7SnuCMLFopYLLwahQMStRPV3A==
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: SJ0PR12MB6902
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -156,347 +159,232 @@ List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-Currently, the BiosImage type in vbios code is implemented as a
-type-wrapping enum with the sole purpose of implementing a type that is
-common to all specific image types. To make this work, macros were used
-to overcome limitations of using enums. Ugly match statements were also
-required to route methods from the enum type to the specific image type.
+On 2025-10-09 at 03:01 +1100, Danilo Krummrich <dakr@kernel.org> wrote...
+> On Wed Oct 8, 2025 at 2:12 AM CEST, Alistair Popple wrote:
+> > diff --git a/drivers/gpu/nova-core/gsp.rs b/drivers/gpu/nova-core/gsp.rs
+> > index 221281da1a45..63099df77348 100644
+> > --- a/drivers/gpu/nova-core/gsp.rs
+> > +++ b/drivers/gpu/nova-core/gsp.rs
+> > @@ -2,25 +2,94 @@
+> >  
+> >  mod boot;
+> >  
+> > +use kernel::device;
+> > +use kernel::dma::CoherentAllocation;
+> > +use kernel::dma::DmaAddress;
+> > +use kernel::dma_write;
+> > +use kernel::pci;
+> >  use kernel::prelude::*;
+> >  use kernel::ptr::Alignment;
+> > +use kernel::transmute::AsBytes;
+> >  
+> >  pub(crate) use fw::{GspFwWprMeta, LibosParams};
+> >  
+> >  mod fw;
+> >  
+> > +use fw::LibosMemoryRegionInitArgument;
+> > +
+> >  pub(crate) const GSP_PAGE_SHIFT: usize = 12;
+> >  pub(crate) const GSP_PAGE_SIZE: usize = 1 << GSP_PAGE_SHIFT;
+> >  pub(crate) const GSP_HEAP_ALIGNMENT: Alignment = Alignment::new::<{ 1 << 20 }>();
+> 
+> This looks like it could depend on the firmware version in the future, hence it
+> should probably defined somewhere in fw/ with a corresponding comment. The
+> actual version switch is fine to omit for now of course (we agreed to add the
+> infrastructure for the version switch subsequently).
 
-Simplify the code by just creating the common BiosImage type in the
-iterator, and then converting it to specific image type after. This
-works well since all the methods common to different BiosImage are
-called only during the iteration and not later. Should we need to call
-these common methods later, we can use AsRef and traits, but for now not
-doing so gives us a nice ~50 negative line delta versus the existing code
-and is a lot simpler.
+Ok.
+ 
+> > +/// Number of GSP pages to use in a RM log buffer.
+> > +const RM_LOG_BUFFER_NUM_PAGES: usize = 0x10;
+> 
+> Why 0x10? Is there a specific reason?
 
-Also remove the now obsolete BiosImage enum type.
+No real reason other than 64K seems appropriate. It also happens to match what
+Nouveau does.
+ 
+> > +
+> >  /// GSP runtime data.
+> > -///
+> > -/// This is an empty pinned placeholder for now.
+> >  #[pin_data]
+> > -pub(crate) struct Gsp {}
+> > +pub(crate) struct Gsp {
+> > +    libos: CoherentAllocation<LibosMemoryRegionInitArgument>,
+> > +    pub loginit: CoherentAllocation<u8>,
+> > +    pub logintr: CoherentAllocation<u8>,
+> > +    pub logrm: CoherentAllocation<u8>,
+> 
+> This creates warnings for older compiler version, please use pub(crate) instead.
 
-Cc: Benno Lossin <lossin@kernel.org>
-Signed-off-by: Joel Fernandes <joelagnelf@nvidia.com>
----
-v1->v2: Removed deadcode (Alex).
+Ok. In fact I'm not even sure these need to public (for this series at least).
 
- drivers/gpu/nova-core/vbios.rs | 226 ++++++++++++++-------------------
- 1 file changed, 94 insertions(+), 132 deletions(-)
+> > +}
+> > +
+> > +#[repr(C)]
+> > +struct PteArray<const NUM_ENTRIES: usize>([u64; NUM_ENTRIES]);
+> > +/// SAFETY: arrays of `u64` implement `AsBytes` and we are but a wrapper around it.
+> > +unsafe impl<const NUM_ENTRIES: usize> AsBytes for PteArray<NUM_ENTRIES> {}
+> 
+> Please separate struct definitions and impl blocks with an empty line.
 
-diff --git a/drivers/gpu/nova-core/vbios.rs b/drivers/gpu/nova-core/vbios.rs
-index e6a060714205..696eedaab0c4 100644
---- a/drivers/gpu/nova-core/vbios.rs
-+++ b/drivers/gpu/nova-core/vbios.rs
-@@ -21,6 +21,34 @@
- /// indicates the last image. Bit 0-6 are reserved, bit 7 is last image bit.
- const LAST_IMAGE_BIT_MASK: u8 = 0x80;
- 
-+/// BIOS Image Type from PCI Data Structure code_type field.
-+#[derive(Debug, Clone, Copy, PartialEq, Eq)]
-+#[repr(u8)]
-+enum BiosImageType {
-+    /// PC-AT compatible BIOS image (x86 legacy)
-+    PciAt = 0x00,
-+    /// EFI (Extensible Firmware Interface) BIOS image
-+    Efi = 0x03,
-+    /// NBSI (Notebook System Information) BIOS image
-+    Nbsi = 0x70,
-+    /// FwSec (Firmware Security) BIOS image
-+    FwSec = 0xE0,
-+}
-+
-+impl TryFrom<u8> for BiosImageType {
-+    type Error = Error;
-+
-+    fn try_from(code: u8) -> Result<Self> {
-+        match code {
-+            0x00 => Ok(Self::PciAt),
-+            0x03 => Ok(Self::Efi),
-+            0x70 => Ok(Self::Nbsi),
-+            0xE0 => Ok(Self::FwSec),
-+            _ => Err(EINVAL),
-+        }
-+    }
-+}
-+
- // PMU lookup table entry types. Used to locate PMU table entries
- // in the Fwsec image, corresponding to falcon ucodes.
- #[expect(dead_code)]
-@@ -197,32 +225,37 @@ pub(crate) fn new(dev: &device::Device, bar0: &Bar0) -> Result<Vbios> {
- 
-         // Parse all VBIOS images in the ROM
-         for image_result in VbiosIterator::new(dev, bar0)? {
--            let full_image = image_result?;
-+            let image = image_result?;
- 
-             dev_dbg!(
-                 dev,
--                "Found BIOS image: size: {:#x}, type: {}, last: {}\n",
--                full_image.image_size_bytes(),
--                full_image.image_type_str(),
--                full_image.is_last()
-+                "Found BIOS image: size: {:#x}, type: {:?}, last: {}\n",
-+                image.image_size_bytes(),
-+                image.image_type(),
-+                image.is_last()
-             );
- 
--            // Get references to images we will need after the loop, in order to
--            // setup the falcon data offset.
--            match full_image {
--                BiosImage::PciAt(image) => {
--                    pci_at_image = Some(image);
-+            // Convert to a specific image type
-+            match BiosImageType::try_from(image.pcir.code_type) {
-+                Ok(BiosImageType::PciAt) => {
-+                    pci_at_image = Some(PciAtBiosImage::try_from(image)?);
-                 }
--                BiosImage::FwSec(image) => {
-+                Ok(BiosImageType::FwSec) => {
-+                    let fwsec = FwSecBiosBuilder {
-+                        base: image,
-+                        falcon_data_offset: None,
-+                        pmu_lookup_table: None,
-+                        falcon_ucode_offset: None,
-+                    };
-                     if first_fwsec_image.is_none() {
--                        first_fwsec_image = Some(image);
-+                        first_fwsec_image = Some(fwsec);
-                     } else {
--                        second_fwsec_image = Some(image);
-+                        second_fwsec_image = Some(fwsec);
-                     }
-                 }
--                // For now we don't need to handle these
--                BiosImage::Efi(_image) => {}
--                BiosImage::Nbsi(_image) => {}
-+                _ => {
-+                    // Ignore other image types or unknown types
-+                }
-             }
-         }
- 
-@@ -594,108 +627,29 @@ fn find_in_data(
-     }
- }
- 
--// Use a macro to implement BiosImage enum and methods. This avoids having to
--// repeat each enum type when implementing functions like base() in BiosImage.
--macro_rules! bios_image {
--    (
--        $($variant:ident: $class:ident),* $(,)?
--    ) => {
--        // BiosImage enum with variants for each image type
--        enum BiosImage {
--            $($variant($class)),*
--        }
--
--        impl BiosImage {
--            /// Get a reference to the common BIOS image data regardless of type
--            fn base(&self) -> &BiosImageBase {
--                match self {
--                    $(Self::$variant(img) => &img.base),*
--                }
--            }
--
--            /// Returns a string representing the type of BIOS image
--            fn image_type_str(&self) -> &'static str {
--                match self {
--                    $(Self::$variant(_) => stringify!($variant)),*
--                }
--            }
--        }
--    }
--}
--
--impl BiosImage {
--    /// Check if this is the last image.
--    fn is_last(&self) -> bool {
--        let base = self.base();
--
--        // For NBSI images (type == 0x70), return true as they're
--        // considered the last image
--        if matches!(self, Self::Nbsi(_)) {
--            return true;
--        }
--
--        // For other image types, check the NPDE first if available
--        if let Some(ref npde) = base.npde {
--            return npde.is_last();
--        }
--
--        // Otherwise, fall back to checking the PCIR last_image flag
--        base.pcir.is_last()
--    }
--
--    /// Get the image size in bytes.
--    fn image_size_bytes(&self) -> usize {
--        let base = self.base();
--
--        // Prefer NPDE image size if available
--        if let Some(ref npde) = base.npde {
--            return npde.image_size_bytes();
--        }
--
--        // Otherwise, fall back to the PCIR image size
--        base.pcir.image_size_bytes()
--    }
--
--    /// Create a [`BiosImageBase`] from a byte slice and convert it to a [`BiosImage`] which
--    /// triggers the constructor of the specific BiosImage enum variant.
--    fn new(dev: &device::Device, data: &[u8]) -> Result<Self> {
--        let base = BiosImageBase::new(dev, data)?;
--        let image = base.into_image().inspect_err(|e| {
--            dev_err!(dev, "Failed to create BiosImage: {:?}\n", e);
--        })?;
--
--        Ok(image)
--    }
--}
--
--bios_image! {
--    PciAt: PciAtBiosImage,   // PCI-AT compatible BIOS image
--    Efi: EfiBiosImage,       // EFI (Extensible Firmware Interface)
--    Nbsi: NbsiBiosImage,     // NBSI (Nvidia Bios System Interface)
--    FwSec: FwSecBiosBuilder, // FWSEC (Firmware Security)
--}
--
- /// The PciAt BIOS image is typically the first BIOS image type found in the BIOS image chain.
- ///
- /// It contains the BIT header and the BIT tokens.
- struct PciAtBiosImage {
--    base: BiosImageBase,
-+    base: BiosImage,
-     bit_header: BitHeader,
-     bit_offset: usize,
- }
- 
-+#[expect(dead_code)]
- struct EfiBiosImage {
--    base: BiosImageBase,
-+    base: BiosImage,
-     // EFI-specific fields can be added here in the future.
- }
- 
-+#[expect(dead_code)]
- struct NbsiBiosImage {
--    base: BiosImageBase,
-+    base: BiosImage,
-     // NBSI-specific fields can be added here in the future.
- }
- 
- struct FwSecBiosBuilder {
--    base: BiosImageBase,
-+    base: BiosImage,
-     /// These are temporary fields that are used during the construction of the
-     /// [`FwSecBiosBuilder`].
-     ///
-@@ -714,37 +668,16 @@ struct FwSecBiosBuilder {
- ///
- /// The PMU table contains voltage/frequency tables as well as a pointer to the Falcon Ucode.
- pub(crate) struct FwSecBiosImage {
--    base: BiosImageBase,
-+    base: BiosImage,
-     /// The offset of the Falcon ucode.
-     falcon_ucode_offset: usize,
- }
- 
--// Convert from BiosImageBase to BiosImage
--impl TryFrom<BiosImageBase> for BiosImage {
--    type Error = Error;
--
--    fn try_from(base: BiosImageBase) -> Result<Self> {
--        match base.pcir.code_type {
--            0x00 => Ok(BiosImage::PciAt(base.try_into()?)),
--            0x03 => Ok(BiosImage::Efi(EfiBiosImage { base })),
--            0x70 => Ok(BiosImage::Nbsi(NbsiBiosImage { base })),
--            0xE0 => Ok(BiosImage::FwSec(FwSecBiosBuilder {
--                base,
--                falcon_data_offset: None,
--                pmu_lookup_table: None,
--                falcon_ucode_offset: None,
--            })),
--            _ => Err(EINVAL),
--        }
--    }
--}
--
- /// BIOS Image structure containing various headers and reference fields to all BIOS images.
- ///
--/// Each BiosImage type has a BiosImageBase type along with other image-specific fields. Note that
--/// Rust favors composition of types over inheritance.
-+/// A BiosImage struct is embedded into all image types and implements common operations.
- #[expect(dead_code)]
--struct BiosImageBase {
-+struct BiosImage {
-     /// Used for logging.
-     dev: ARef<device::Device>,
-     /// PCI ROM Expansion Header
-@@ -757,12 +690,41 @@ struct BiosImageBase {
-     data: KVec<u8>,
- }
- 
--impl BiosImageBase {
--    fn into_image(self) -> Result<BiosImage> {
--        BiosImage::try_from(self)
-+impl BiosImage {
-+    /// Get the image size in bytes.
-+    fn image_size_bytes(&self) -> usize {
-+        // Prefer NPDE image size if available
-+        if let Some(ref npde) = self.npde {
-+            npde.image_size_bytes()
-+        } else {
-+            // Otherwise, fall back to the PCIR image size
-+            self.pcir.image_size_bytes()
-+        }
-+    }
-+
-+    /// Get the BIOS image type.
-+    fn image_type(&self) -> Result<BiosImageType> {
-+        BiosImageType::try_from(self.pcir.code_type)
-+    }
-+
-+    /// Check if this is the last image.
-+    fn is_last(&self) -> bool {
-+        // For NBSI images (type == 0x70), return true as they're
-+        // considered the last image
-+        if self.pcir.code_type == BiosImageType::Nbsi as u8 {
-+            return true;
-+        }
-+
-+        // For other image types, check the NPDE first if available
-+        if let Some(ref npde) = self.npde {
-+            return npde.is_last();
-+        }
-+
-+        // Otherwise, fall back to checking the PCIR last_image flag
-+        self.pcir.is_last()
-     }
- 
--    /// Creates a new BiosImageBase from raw byte data.
-+    /// Creates a new BiosImage from raw byte data.
-     fn new(dev: &device::Device, data: &[u8]) -> Result<Self> {
-         // Ensure we have enough data for the ROM header.
-         if data.len() < 26 {
-@@ -802,7 +764,7 @@ fn new(dev: &device::Device, data: &[u8]) -> Result<Self> {
-         let mut data_copy = KVec::new();
-         data_copy.extend_from_slice(data, GFP_KERNEL)?;
- 
--        Ok(BiosImageBase {
-+        Ok(BiosImage {
-             dev: dev.into(),
-             rom_header,
-             pcir,
-@@ -865,10 +827,10 @@ fn falcon_data_ptr(&self) -> Result<u32> {
-     }
- }
- 
--impl TryFrom<BiosImageBase> for PciAtBiosImage {
-+impl TryFrom<BiosImage> for PciAtBiosImage {
-     type Error = Error;
- 
--    fn try_from(base: BiosImageBase) -> Result<Self> {
-+    fn try_from(base: BiosImage) -> Result<Self> {
-         let data_slice = &base.data;
-         let (bit_header, bit_offset) = PciAtBiosImage::find_bit_header(data_slice)?;
- 
--- 
-2.34.1
+Done.
 
+> > +impl<const NUM_PAGES: usize> PteArray<NUM_PAGES> {
+> > +    fn new(handle: DmaAddress) -> Self {
+> 
+> No check that NUM_PAGES actually fits the size of the DMA buffer handle passed
+> in? What happens if they do not match?
+
+If it's bigger there's no issue, we just initialise a few more PTEs than
+necessary that don't get copied. If it's smaller there will be uninitialised
+PTEs. For v5 I've added another const to keep these the same.
+
+> > +        let mut ptes = [0u64; NUM_PAGES];
+> > +        for (i, pte) in ptes.iter_mut().enumerate() {
+> > +            *pte = handle + ((i as u64) << GSP_PAGE_SHIFT);
+> 
+> I think this should be handle.checked_add(). Additionally we should add the
+> following compile time check to make sure that the shift can never overflow:
+
+Sure.
+
+> 	const _MAX_OFFSET: usize = NUM_PAGES << GSP_PAGE_SHIFT;
+
+Hmm. My Rust wasn't good enough to make this work:
+
+impl<const NUM_PAGES: usize> PteArray<NUM_PAGES> {
+    fn new(handle: DmaAddress) -> Result<Self> {
+        // Compile time check to ensure the shift below never overflows.
+        const _MAX_OFFSET: usize = NUM_PAGES << GSP_PAGE_SHIFT;
+
+Results in:
+
+error[E0401]: can't use generic parameters from outer item
+
+Maybe I'm missing something (the documentation for E0401 didn't really enlighten
+me I'm afraid).
+
+> > +        }
+> > +
+> > +        Self(ptes)
+> > +    }
+> > +}
+> > +
+> > +/// Creates a new `CoherentAllocation<A>` with `name` of `size` elements, and
+> > +/// register it into the `libos` object at argument position `libos_arg_nr`.
+> > +fn create_logbuffer_dma_object(
+> > +    dev: &device::Device<device::Bound>,
+> > +) -> Result<CoherentAllocation<u8>> {
+> > +    let mut obj = CoherentAllocation::<u8>::alloc_coherent(
+> > +        dev,
+> > +        RM_LOG_BUFFER_NUM_PAGES * GSP_PAGE_SIZE,
+> > +        GFP_KERNEL | __GFP_ZERO,
+> > +    )?;
+> > +    let ptes = PteArray::<RM_LOG_BUFFER_NUM_PAGES>::new(obj.dma_handle());
+> > +
+> > +    // SAFETY: `obj` has just been created and we are its sole user.
+> > +    unsafe {
+> > +        // Copy the self-mapping PTE at the expected location.
+> > +        obj.as_slice_mut(size_of::<u64>(), size_of_val(&ptes))?
+> > +            .copy_from_slice(ptes.as_bytes())
+> > +    };
+> > +
+> > +    Ok(obj)
+> > +}
+> 
+> I think we should just create a new gsp::Logbuffer type for this rather than
+> have a function as object constructor.
+
+Have done for v5.
+
+> >  
+> >  impl Gsp {
+> > -    pub(crate) fn new() -> impl PinInit<Self> {
+> > -        pin_init!(Self {})
+> > +    pub(crate) fn new(pdev: &pci::Device<device::Bound>) -> Result<impl PinInit<Self, Error>> {
+> > +        let dev = pdev.as_ref();
+> > +        let libos = CoherentAllocation::<LibosMemoryRegionInitArgument>::alloc_coherent(
+> > +            dev,
+> > +            GSP_PAGE_SIZE / size_of::<LibosMemoryRegionInitArgument>(),
+> > +            GFP_KERNEL | __GFP_ZERO,
+> > +        )?;
+> > +        let loginit = create_logbuffer_dma_object(dev)?;
+> > +        dma_write!(libos[0] = LibosMemoryRegionInitArgument::new("LOGINIT", &loginit))?;
+> > +        let logintr = create_logbuffer_dma_object(dev)?;
+> > +        dma_write!(libos[1] = LibosMemoryRegionInitArgument::new("LOGINTR", &logintr))?;
+> > +        let logrm = create_logbuffer_dma_object(dev)?;
+> > +        dma_write!(libos[2] = LibosMemoryRegionInitArgument::new("LOGRM", &logrm))?;
+> > +
+> > +        Ok(try_pin_init!(Self {
+> > +            libos,
+> > +            loginit,
+> > +            logintr,
+> > +            logrm,
+> > +        }))
+> >      }
+> >  }
+> > diff --git a/drivers/gpu/nova-core/gsp/fw.rs b/drivers/gpu/nova-core/gsp/fw.rs
+> > index 181baa401770..dd1e7fc85d85 100644
+> > --- a/drivers/gpu/nova-core/gsp/fw.rs
+> > +++ b/drivers/gpu/nova-core/gsp/fw.rs
+> > @@ -7,8 +7,10 @@
+> >  
+> >  use core::ops::Range;
+> >  
+> > +use kernel::dma::CoherentAllocation;
+> >  use kernel::ptr::Alignable;
+> >  use kernel::sizes::SZ_1M;
+> > +use kernel::transmute::{AsBytes, FromBytes};
+> >  
+> >  use crate::gpu::Chipset;
+> >  use crate::gsp;
+> > @@ -99,3 +101,40 @@ pub(crate) fn wpr_heap_size(&self, chipset: Chipset, fb_size: u64) -> u64 {
+> >  /// addresses of the GSP bootloader and firmware.
+> >  #[repr(transparent)]
+> >  pub(crate) struct GspFwWprMeta(bindings::GspFwWprMeta);
+> > +
+> > +#[repr(transparent)]
+> > +pub(crate) struct LibosMemoryRegionInitArgument(bindings::LibosMemoryRegionInitArgument);
+> 
+> Please add some documentation for the type.
+
+Ok, I have shamelessly stolen some from Nouveau for v5.
+
+> > +
+> > +// SAFETY: Padding is explicit and will not contain uninitialized data.
+> > +unsafe impl AsBytes for LibosMemoryRegionInitArgument {}
+> > +
+> > +// SAFETY: This struct only contains integer types for which all bit patterns
+> > +// are valid.
+> > +unsafe impl FromBytes for LibosMemoryRegionInitArgument {}
+> > +
+> > +impl LibosMemoryRegionInitArgument {
+> > +    pub(crate) fn new<A: AsBytes + FromBytes>(
+> > +        name: &'static str,
+> > +        obj: &CoherentAllocation<A>,
+> > +    ) -> Self {
+> > +        /// Generates the `ID8` identifier required for some GSP objects.
+> > +        fn id8(name: &str) -> u64 {
+> > +            let mut bytes = [0u8; core::mem::size_of::<u64>()];
+> > +
+> > +            for (c, b) in name.bytes().rev().zip(&mut bytes) {
+> > +                *b = c;
+> > +            }
+> > +
+> > +            u64::from_ne_bytes(bytes)
+> > +        }
+> > +
+> > +        Self(bindings::LibosMemoryRegionInitArgument {
+> > +            id8: id8(name),
+> > +            pa: obj.dma_handle(),
+> > +            size: obj.size() as u64,
+> > +            kind: bindings::LibosMemoryRegionKind_LIBOS_MEMORY_REGION_CONTIGUOUS as u8,
+> > +            loc: bindings::LibosMemoryRegionLoc_LIBOS_MEMORY_REGION_LOC_SYSMEM as u8,
+> 
+> Please prefer into() if possible.
+
+In this case it won't work because obviously From<u32> isn't implemented
+for u8. It's kind of redundant, because hopefully our bindings are sane, but
+I've changed this to try_into() and made LibosMemoryRegionInitArgument::new()
+failable for v5.
