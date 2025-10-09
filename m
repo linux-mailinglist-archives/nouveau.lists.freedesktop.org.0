@@ -2,151 +2,58 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id 82C8CCBADA9
-	for <lists+nouveau@lfdr.de>; Sat, 13 Dec 2025 13:45:20 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 7640FCBAF01
+	for <lists+nouveau@lfdr.de>; Sat, 13 Dec 2025 13:46:42 +0100 (CET)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 0213E10EB90;
-	Sat, 13 Dec 2025 12:41:33 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 584F910EC5B;
+	Sat, 13 Dec 2025 12:42:18 +0000 (UTC)
 Authentication-Results: gabe.freedesktop.org;
-	dkim=pass (2048-bit key; unprotected) header.d=de.bosch.com header.i=@de.bosch.com header.b="FCGXxUIm";
+	dkim=pass (2048-bit key; secure) header.d=mailbox.org header.i=@mailbox.org header.b="mvnvxwKO";
 	dkim-atps=neutral
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from AS8PR04CU009.outbound.protection.outlook.com
- (mail-westeuropeazon11011021.outbound.protection.outlook.com [52.101.70.21])
- by gabe.freedesktop.org (Postfix) with ESMTPS id EDAAC10E91E;
- Thu,  9 Oct 2025 07:00:25 +0000 (UTC)
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=pUrwMvW7RZlxlDkZo6GNmFuy3+yN1JEksnxPACkpTIcyift25ECoXbcD7Wu0NyQQ95myzRv1yhT38bsefA0JJZ1DzB0CewQi0EOW8hTPjcdzw5xtNsfwcFrXOWLNREyejDGwe9G/uJnKl07RkZsfFs1F1Io10fhgqu3cM75t5YEDI2ZJhNGg6p2197oaUvdW8X2sTNGjgtdUwbYlxpjn9ndO1pQHBiAezv0OQ4RW0swChwqmFjpBHp4THivgplzdnMFqh1gYjR/lOX+ZAX55VARyRyHBrGirv1f9cZYpZ2JgX49KBpaat6SMJp4Iw/SHZqDxf/rdVPw6p61GBhH9Jg==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=17V7QUVJQSIRTH/4Qh7koqId21SkHMQ5JkQ5cdOeU54=;
- b=wKLrYnEu9WuY/0tT59UyMUNDdAYmU3tRTN3A4gvwS1av3bAi4HfyAapUWYDiKkGmTIm1rTKMt7XSZineLEiuRAzG6y6Nv4DQoihiYiclIvkEgCjbel1ZMg6WcN3LCIpbT6xdJhiAl3Qp3pKdcAHZJgASULnxjxnOfKLxPDLzDSe+CUSAx4xX808R1ajLoHrrTeRVXGkNva7/niHGha/PDG65icFhHQCxu7Bn0mf8Li0PQe2kJSVrS9u3x/GqXfHVDs7NT4mJqf8jyOWaUYRtC4GZI3O17TiM7G9vdj2P+jt7mFW9eZa0Pub2O7yOBn4k4byW03l8T6M5IngYLqiwMw==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
- 139.15.153.205) smtp.rcpttodomain=nvidia.com smtp.mailfrom=de.bosch.com;
- dmarc=pass (p=reject sp=none pct=100) action=none header.from=de.bosch.com;
- dkim=none (message not signed); arc=none (0)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=de.bosch.com;
- s=selector2;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=17V7QUVJQSIRTH/4Qh7koqId21SkHMQ5JkQ5cdOeU54=;
- b=FCGXxUImL894X74ZZFp9/dbwmK9IxpIwN1YysZpNC6ngAlFETq0YGDTMDoGYE1za5wE0gdmIvUddFWqi7VYTFKkId5i5VS32YMDZI+Pqu2fg7LD2heNJz5lijm4ZuRcaREA8oE+GGiUMcp26DpdsSIAP9Mzq0xvWpzGxyRIrxBjfDwUkzIeoCFDFpVAZ/3bDSXc86+8+VUn7UW3DQ8kJaqUw6t2GOAEFwKH9ovrBl4EzmFGfxTB6xq7lcT5G/rStLNRzQ98bZZcTXv6GeT3uJpSipgk8xiTtT++tE3sLuI99XuskRTocJ0LexIdgejL4EzKhsDkGyChWI8/Sis72Jg==
-Received: from DB9PR05CA0028.eurprd05.prod.outlook.com (2603:10a6:10:1da::33)
- by AS2PR10MB7322.EURPRD10.PROD.OUTLOOK.COM (2603:10a6:20b:606::19)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9203.10; Thu, 9 Oct
- 2025 07:00:14 +0000
-Received: from DB1PEPF000509E6.eurprd03.prod.outlook.com
- (2603:10a6:10:1da:cafe::ca) by DB9PR05CA0028.outlook.office365.com
- (2603:10a6:10:1da::33) with Microsoft SMTP Server (version=TLS1_3,
- cipher=TLS_AES_256_GCM_SHA384) id 15.20.9182.20 via Frontend Transport; Thu,
- 9 Oct 2025 07:00:14 +0000
-X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 139.15.153.205)
- smtp.mailfrom=de.bosch.com; dkim=none (message not signed)
- header.d=none;dmarc=pass action=none header.from=de.bosch.com;
-Received-SPF: Pass (protection.outlook.com: domain of de.bosch.com designates
- 139.15.153.205 as permitted sender)
- receiver=protection.outlook.com; 
- client-ip=139.15.153.205; helo=eop.bosch-org.com; pr=C
-Received: from eop.bosch-org.com (139.15.153.205) by
- DB1PEPF000509E6.mail.protection.outlook.com (10.167.242.56) with Microsoft
- SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.20.9203.9 via Frontend Transport; Thu, 9 Oct 2025 07:00:14 +0000
-Received: from RNGMBX3002.de.bosch.com (10.124.11.207) by eop.bosch-org.com
- (139.15.153.205) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.27; Thu, 9 Oct
- 2025 09:00:04 +0200
-Received: from [10.34.219.93] (10.34.219.93) by smtp.app.bosch.com
- (10.124.11.207) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.27; Thu, 9 Oct
- 2025 09:00:03 +0200
-Message-ID: <5a5bd549-f5b7-41ec-b493-bda427d1218f@de.bosch.com>
-Date: Thu, 9 Oct 2025 08:59:56 +0200
+Received: from mout-p-101.mailbox.org (mout-p-101.mailbox.org [80.241.56.151])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 7A52D10E147;
+ Thu,  9 Oct 2025 13:14:44 +0000 (UTC)
+Received: from smtp2.mailbox.org (smtp2.mailbox.org [10.196.197.2])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
+ (No client certificate requested)
+ by mout-p-101.mailbox.org (Postfix) with ESMTPS id 4cj9MP0lMDz9tK1;
+ Thu,  9 Oct 2025 15:14:41 +0200 (CEST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
+ s=mail20150812; 
+ t=1760015681; h=from:from:reply-to:reply-to:subject:subject:date:date:
+ message-id:message-id:to:to:cc:cc:mime-version:mime-version:
+ content-type:content-type:
+ content-transfer-encoding:content-transfer-encoding:
+ in-reply-to:in-reply-to:references:references;
+ bh=45j2hCCNJERTX+AtfiQ4lNWVmGgKvH9FSNQG0Mbnv4I=;
+ b=mvnvxwKOgCYYe5zxGsRYUvQwSfOy47ipJL+K+c64Ue9MTsJ3tUpp7lM5JMh33QM/vwcDpy
+ VEi3A4LJ2rUlFGjvHxxC+3N90LJ6SaWdAZpvNZeAktj7qlgCogqcFCtk3v+9M7wWn+MnSV
+ E14AAN+gBTO7XFEjGiV5OFY3k1l31lEfBw8GbTxRj7nu/QFxqZpJvGXd1LKZKkfbqOcRvL
+ KoKUDjImxNOMS1SSwZk7O8Ibp5/d50Z5JUBros2ha6Sfp22RT0krLgg2R3N6npcwk3c1uq
+ VEO3Pv9NqVXaL38+Go9qPoSp1itOEE/AcFf6S3hg2mnV75Q3TmnR/OBQFfQQGg==
+Message-ID: <727d723857f68d256f1050088673cad66626f47f.camel@mailbox.org>
+Subject: Re: [PATCH v2] Revert "drm/nouveau: Remove waitque for sched teardown"
+From: Philipp Stanner <phasta@mailbox.org>
+To: Matthew Brost <matthew.brost@intel.com>, phasta@kernel.org
+Cc: Lyude Paul <lyude@redhat.com>, Danilo Krummrich <dakr@kernel.org>, David
+ Airlie <airlied@gmail.com>, Simona Vetter <simona@ffwll.ch>, Sumit Semwal
+ <sumit.semwal@linaro.org>, Christian =?ISO-8859-1?Q?K=F6nig?=
+ <christian.koenig@amd.com>, dri-devel@lists.freedesktop.org, 
+ nouveau@lists.freedesktop.org, linux-kernel@vger.kernel.org
+Date: Thu, 09 Oct 2025 15:14:35 +0200
+In-Reply-To: <aOaSwJOEk1DVrQUS@lstrano-desk.jf.intel.com>
+References: <20250901083107.10206-2-phasta@kernel.org>
+ <aOVKt1kQlBEYxctO@lstrano-desk.jf.intel.com>
+ <6ecf62805e3d3bb6007d9bf645ed10006b599349.camel@mailbox.org>
+ <aOaSwJOEk1DVrQUS@lstrano-desk.jf.intel.com>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird Beta
-Subject: Re: [PATCH v6 4/5] rust: Move register and bitfield macros out of Nova
-To: Joel Fernandes <joelagnelf@nvidia.com>, <linux-kernel@vger.kernel.org>,
- <rust-for-linux@vger.kernel.org>, <dri-devel@lists.freedesktop.org>,
- <dakr@kernel.org>, <acourbot@nvidia.com>
-CC: Alistair Popple <apopple@nvidia.com>, Miguel Ojeda <ojeda@kernel.org>,
- Alex Gaynor <alex.gaynor@gmail.com>, Boqun Feng <boqun.feng@gmail.com>, "Gary
- Guo" <gary@garyguo.net>, <bjorn3_gh@protonmail.com>, Benno Lossin
- <lossin@kernel.org>, Andreas Hindborg <a.hindborg@kernel.org>, Alice Ryhl
- <aliceryhl@google.com>, Trevor Gross <tmgross@umich.edu>, David Airlie
- <airlied@gmail.com>, Simona Vetter <simona@ffwll.ch>, Maarten Lankhorst
- <maarten.lankhorst@linux.intel.com>, Maxime Ripard <mripard@kernel.org>,
- Thomas Zimmermann <tzimmermann@suse.de>, John Hubbard <jhubbard@nvidia.com>,
- Timur Tabi <ttabi@nvidia.com>, <joel@joelfernandes.org>, Elle Rhumsaa
- <elle@weathered-steel.dev>, Yury Norov <yury.norov@gmail.com>, Daniel Almeida
- <daniel.almeida@collabora.com>, Andrea Righi <arighi@nvidia.com>,
- <nouveau@lists.freedesktop.org>
-References: <20251003154748.1687160-1-joelagnelf@nvidia.com>
- <20251003154748.1687160-5-joelagnelf@nvidia.com>
-Content-Language: en-GB
-From: Dirk Behme <dirk.behme@de.bosch.com>
-In-Reply-To: <20251003154748.1687160-5-joelagnelf@nvidia.com>
-Content-Type: text/plain; charset="UTF-8"; format=flowed
-Content-Transfer-Encoding: 7bit
-X-Originating-IP: [10.34.219.93]
-X-EOPAttributedMessage: 0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: DB1PEPF000509E6:EE_|AS2PR10MB7322:EE_
-X-MS-Office365-Filtering-Correlation-Id: 1749e530-b0eb-46ec-9090-08de07017f74
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0;
- ARA:13230040|1800799024|36860700013|376014|7416014|82310400026|7053199007; 
-X-Microsoft-Antispam-Message-Info: =?utf-8?B?dHlnSUVLcFB3ZUVWbUFMRnpZeEI0UXpxdWcrTzF2dGV1RGRwZGpxNWFQdkwx?=
- =?utf-8?B?TFAwTXNVZXErRWJqdisrdFFZMVoxcTI5VU9scEc0RCtjVkFiMDdqVCtrbnEv?=
- =?utf-8?B?KzlSTG9VMGJDcWhXcElGSGRYNVE5WWlZa0t0WVhOaGo2V1BkSDZrTGpNR0k1?=
- =?utf-8?B?RTBsK2FVdUJxRzFIckhER0dGWms0WjNFZkFhSkUxNmdKbmRacGJDZS85ZjlC?=
- =?utf-8?B?K3MwZWFYYTQ2eWl4RWozZWEzU1dQaFh6VnR4L0lheGo2MVBpaFhsTFkxdGpW?=
- =?utf-8?B?ZEJiTEFka2djM2tNQXczYjJUUDE5SGtpYldPU0t1eEs0c0diazI1SkF1cGVY?=
- =?utf-8?B?TU1YNG45dGpvWk9GMHhVN1Y2bDdlS1pvaDJYQUJDMUk0UkQ3OVZEMGphMlRv?=
- =?utf-8?B?MzFYNzdlcitIMmlvTDJRUFpJWGw4YmhWM2VKekErWDRidVo4MTBEd042Z0xZ?=
- =?utf-8?B?RHVaMXhYZ0pOL2VObHFJamp0N3o4UzVOVm9GVFAzaUZ2U0tpN25Rdk1wNWdH?=
- =?utf-8?B?MFV0dlNlUllobFRnQzZVeHhGbUR1aHNtRHFSL2NYY3NjY1h3OGg0ajZrcEky?=
- =?utf-8?B?K3NtcGRlY0k3MHN0VEJnRWQvR2dlZjBWS0lvbFBUaVI4M2hHVDFyRXlFeTdF?=
- =?utf-8?B?S29xMUswdmRBb0RMVjZaTTZVQ0lVVjhTS01IdVpydUhHYUdxL1laWEYvMkNw?=
- =?utf-8?B?Ym8rck9nVU9hTE52VUF5emY5dU40SmNNYmdVcU1PR2wvUG40S1FaL0xOTnJM?=
- =?utf-8?B?K3JuU2tJcVErQm1aZDhLei96N0JtV0VhQ1lrcEtoRzJWaEdzR0Zyd3B0bmRq?=
- =?utf-8?B?Y0dvRVJWYkgxOVVuRk1GL2Nwc0Y2WVU1dmZ6SGQ2cHcreElhb1E5bHZEeWx1?=
- =?utf-8?B?blpjalFCbXJyV0ZEdTRRNlZETURGUW5kRU9XSVdpZ3lXWDU0TWduWk5zTTVz?=
- =?utf-8?B?R3FKVEE2SmJmbVRPRDA3ZXNNc0lYT1Z4V3hPdm1MMHl4NVliOFVzOG5wQ3c4?=
- =?utf-8?B?bXhDWkJQcW1zbUdkZmdhVzNvcUJlbGpaeGJlSkljSWVYMEJ5ZFhvcHhTWU1q?=
- =?utf-8?B?dWZMWERSMFdHRjA0UVJqSlBRSGozeFZlNlUwTmN4c2NXQW1ycWhCWXRTVlF1?=
- =?utf-8?B?RTFWOUxiUkZwVkxyMzdPVEd4RGppbzVIUmo2TVlmbTZsaDNpazhuUGZkWFls?=
- =?utf-8?B?RkYrSko5enVpY2pKQUppQzcxMk1UYXVuYmVhK3J3c05pYlhpQVhFRExpVWdO?=
- =?utf-8?B?VXlaY0phdFlmem5jNFpHSlFjV3g2LzJobFMyZkhrS0VzMCtsdEpMR1pkeGNQ?=
- =?utf-8?B?eTNqMVJEWG44bFJYQ0RtWWxxeGJobGJpWVJGYUtKUXRiTU0yTy9vRXNlNHcr?=
- =?utf-8?B?NGJCZW1Sc1U2N0swQ1h1a1c1R05KMER4clVUU0VrdWlnUklhRUJ0djlxeTlq?=
- =?utf-8?B?TjR6RWswYUF0Z3l4NUtqUDB1UW5PbUlQOVgrNllmZ0J3Mmo2V2gwVGxIM0RM?=
- =?utf-8?B?ejZ5UnRKaVFEVEJDb1BrTmdJVUpIMWdHcTRMNlV5NjNDTXdZTWFPMWhhU1dr?=
- =?utf-8?B?c2JIQy9xdWYwdmtycmxPS0FjNk9GQkJrVGcvVzBXOVlvYWF4YVIxNXVGMG5v?=
- =?utf-8?B?SWRFMjVqME8yRW05aWRPN1crVU5IL005aUJpKzJCaXRaTjJDVzZNeTJkVXh0?=
- =?utf-8?B?Q05hTXZ5UmpIdGpiRmlTbXZUWFVmUDRNcW0rOW15TFNxRFlxbG5qcUNsVWVR?=
- =?utf-8?B?ZkFLbnZYN3UwWmRzZWIvZXZuT3FJUFVFVk5TVVRkYUxKVmdKeGNrczJCMFpY?=
- =?utf-8?B?SnBTQ3B3UGI5algvd2N0SGdvc1B3bnF3T3UyZVBQTVhjT203cFVPOWlMNDdB?=
- =?utf-8?B?L0hLWURJK3RJby9QRTYzS0Z3S1U5YmppS3hDa0RFRnpTUjhWNzlKVTlzQVo4?=
- =?utf-8?B?aU9TNDVsMzhWdXc5Vnc4OXdZdDVxU3Q2cjRzM2JoVk9saDhxL1I0NEptUXEx?=
- =?utf-8?B?STJIL01ZbkFZOXdLOGMySkFoYkZURmJuaTdabFF5K2s3Z1VzQ1NyN1Y3RjFB?=
- =?utf-8?B?dk1mVVF2T1ZBY0o3emFwK1lSQ0hhWnFhaGhwVjV4MzNoandUVTEvbjZ6SkpM?=
- =?utf-8?Q?8JdI=3D?=
-X-Forefront-Antispam-Report: CIP:139.15.153.205; CTRY:DE; LANG:en; SCL:1; SRV:;
- IPV:NLI; SFV:NSPM; H:eop.bosch-org.com; PTR:InfoDomainNonexistent; CAT:NONE;
- SFS:(13230040)(1800799024)(36860700013)(376014)(7416014)(82310400026)(7053199007);
- DIR:OUT; SFP:1101; 
-X-OriginatorOrg: de.bosch.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 09 Oct 2025 07:00:14.7195 (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: 1749e530-b0eb-46ec-9090-08de07017f74
-X-MS-Exchange-CrossTenant-Id: 0ae51e19-07c8-4e4b-bb6d-648ee58410f4
-X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=0ae51e19-07c8-4e4b-bb6d-648ee58410f4; Ip=[139.15.153.205];
- Helo=[eop.bosch-org.com]
-X-MS-Exchange-CrossTenant-AuthSource: DB1PEPF000509E6.eurprd03.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Anonymous
-X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: AS2PR10MB7322
+X-MBO-RS-ID: 14925b7bc5cda33a666
+X-MBO-RS-META: qku564hn7us9r8nbibgp3uij1mzmbxko
 X-Mailman-Approved-At: Sat, 13 Dec 2025 12:40:51 +0000
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
@@ -159,82 +66,354 @@ List-Post: <mailto:nouveau@lists.freedesktop.org>
 List-Help: <mailto:nouveau-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
  <mailto:nouveau-request@lists.freedesktop.org?subject=subscribe>
+Reply-To: phasta@kernel.org
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-On 03/10/2025 17:47, Joel Fernandes wrote:
-> Out of broad need for the register and bitfield macros in Rust, move
-> them out of nova into the kernel crate. Several usecases need them (Nova
-> is already using these and Tyr developers said they need them).
-> 
-> bitfield moved into kernel crate - defines bitfields in Rust.
-> register moved into io module - defines hardware registers and accessors.
-> 
-> Reviewed-by: Alexandre Courbot <acourbot@nvidia.com>
-> Reviewed-by: Elle Rhumsaa <elle@weathered-steel.dev>
-> Signed-off-by: Joel Fernandes <joelagnelf@nvidia.com>
-> ---
->   drivers/gpu/nova-core/falcon.rs               |  2 +-
->   drivers/gpu/nova-core/falcon/gsp.rs           |  4 +-
->   drivers/gpu/nova-core/falcon/sec2.rs          |  2 +-
->   drivers/gpu/nova-core/nova_core.rs            |  3 -
->   drivers/gpu/nova-core/regs.rs                 |  6 +-
->   .../gpu/nova-core => rust/kernel}/bitfield.rs | 27 ++++-----
->   rust/kernel/io.rs                             |  1 +
->   .../macros.rs => rust/kernel/io/register.rs   | 58 ++++++++++---------
->   rust/kernel/lib.rs                            |  1 +
->   9 files changed, 54 insertions(+), 50 deletions(-)
->   rename {drivers/gpu/nova-core => rust/kernel}/bitfield.rs (91%)
->   rename drivers/gpu/nova-core/regs/macros.rs => rust/kernel/io/register.rs (93%)
-> 
-...
-> index c0a5194e8d97..c24d956f122f 100644
-> --- a/drivers/gpu/nova-core/regs/macros.rs
-> +++ b/rust/kernel/io/register.rs
+On Wed, 2025-10-08 at 09:35 -0700, Matthew Brost wrote:
+> On Wed, Oct 08, 2025 at 09:34:22AM +0200, Philipp Stanner wrote:
+> > On Tue, 2025-10-07 at 10:15 -0700, Matthew Brost wrote:
+> > > On Mon, Sep 01, 2025 at 10:31:08AM +0200, Philipp Stanner wrote:
+> > > > This reverts:
+> > > >=20
+> > > > commit bead88002227 ("drm/nouveau: Remove waitque for sched teardow=
+n")
+> > > > commit 5f46f5c7af8c ("drm/nouveau: Add new callback for scheduler t=
+eardown")
+> > >=20
+> > > I've been scanning some recent DRM scheduler changes.
+> > >=20
+> > > I think we should likely revert:
+> > >=20
+> > > bf8bbaefaa6a drm/sched: Avoid memory leaks with cancel_job() callback
+> > >=20
+> > > 5f46f5c7af8c was the only user of cancel_job. I'm not sure why we'd
+> > > carry dead code in DRM scheduler unless you have plans to make use of
+> > > this function soon.
+> >=20
+> > That will be added back to Nouveau soon. The reason it was removed from
+> > Nouveau was not that cancel_job() is broken, but that removing the
+> > waitqueue is not possible for other reasons.
+> >=20
+>=20
+> Okay. In general, carrying dead code is less than ideal, but if this is
+> going to be merged soon...
 
-Assuming that register.rs is supposed to become the "generic" way to 
-access hardware registers I started to have a look to it. Some weeks 
-back testing interrupts I used some quite simple timer with 4 registers 
-[1]. Now, thinking about converting it to register!() I have three 
-understanding / usage questions:
+There is still the unit test testing the code, so it is not completely
+dead.
 
-* At the moment register!() is for 32-bit registers, only? So it can't 
-be used for my example having 8-bit and 16-bit registers as well?
+In any case, I'll see to it.
 
-* In my example I used io.try_write*() and io.try_read*() for the 
-register access. What is the relationship between these and the 
-register!() accessors (e.g. from the examples BOOT_0::read(&bar);)? Will 
-both stay? When to use which?
+And besides, I tend to think that this callback or an equivalent
+mechanism should have been there from the beginning. IIRC Danilo back
+then even asked on-list who will free pending jobs on sched teardown,
+and the question was basically ignored and the code merged.
 
-Note: Due to the file move obviously not the full content of the "new" 
-file register.rs is shown in this patch. Therefore, let me try it this 
-way, citing from register.rs:
+So if you want to help, you could implement cancel_job() for Xe :)
 
--- cut --
-...
-/// This defines a `BOOT_0` type which can be read or written from 
-offset `0x100` of an `Io`
-/// region
-....
-/// ```ignore
-/// // Read from the register's defined offset (0x100).
-/// let boot0 = BOOT_0::read(&bar);
--- cut --
+>=20
+> > Implementing cancel_job() has the canonical way of handling the
+> > difficult life time issues and memory leaks associated with drm_sched
+> > has been discussed literally for about 8-9 months on the lists.
+> >=20
+>=20
+> Also, drm_sched_cancel_remaining_jobs appears to do something slightly
+> concerning.
+>=20
+> It signals DMA fences out of order by walking the pending list in
+> reverse, which is generally not advisable. This behavior should probably
+> be reviewed.
 
-* What is "&bar" in this example? Is it the `Io` region the explanation 
-talks about?
+I'm perfectly happy with reversing the iterator.
 
-Thanks!
+>=20
+> Additionally, for jobs in the SPSC queue that are killed via
+> drm_sched_entity_kill_jobs_work, we don=E2=80=99t call cancel_job.
 
-Dirk
+All work items are stopped when cancel_job() gets invoked.
+
+>=20
+> That might be intentional, but based on the cancel_job documentation,
+> the job=E2=80=99s fence may not get signaled. Depending on the driver=E2=
+=80=99s fence
+> refcounting scheme (e.g., if it takes a reference to the job=E2=80=99s fe=
+nce at
+> arm), the scheduler-side reference may or may not be released too. We
+> might want to investigate whether cancel_job should be invoked in that
+> path as well.
+
+Well, let's ask differently: when entity_kill_jobs_work() runs, who
+does currently guarantee that the job's fence gets signaled? Because
+that's what cancel_job() is fundamentally about: signal all fences
+before freeing the associated jobs.
 
 
-[1] 
-https://lore.kernel.org/rust-for-linux/dd34e5f4-5027-4096-9f32-129c8a067d0a@de.bosch.com/
+P.
 
-The registers:
+>=20
+> Also is the entity is killed after the drm_sched_fini, the same problem
+> with fencing signaling out-order mentioned above could occur too.
+>=20
+> > If we can't get to a solution for a problem after 9 months of on-list
+> > discussions, then we are lost.
+> >=20
+>=20
+> Par for the course upstream. Apoligize for not paying more attention
+> here.
+>=20
+> Matt
+> =C2=A0
+> > P.
+> >=20
+> > >=20
+> > > Matt
+> > >=20
+> > > >=20
+> > > > from the drm/sched teardown leak fix series:
+> > > >=20
+> > > > https://lore.kernel.org/dri-devel/20250710125412.128476-2-phasta@ke=
+rnel.org/
+> > > >=20
+> > > > The aforementioned series removed a blocking waitqueue from
+> > > > nouveau_sched_fini(). It was mistakenly assumed that this waitqueue=
+ only
+> > > > prevents jobs from leaking, which the series fixed.
+> > > >=20
+> > > > The waitqueue, however, also guarantees that all VM_BIND related jo=
+bs
+> > > > are finished in order, cleaning up mappings in the GPU's MMU. These=
+ jobs
+> > > > must be executed sequentially. Without the waitqueue, this is no lo=
+nger
+> > > > guaranteed, because entity and scheduler teardown can race with eac=
+h
+> > > > other.
+> > > >=20
+> > > > Revert all patches related to the waitqueue removal.
+> > > >=20
+> > > > Fixes: bead88002227 ("drm/nouveau: Remove waitque for sched teardow=
+n")
+> > > > Suggested-by: Danilo Krummrich <dakr@kernel.org>
+> > > > Signed-off-by: Philipp Stanner <phasta@kernel.org>
+> > > > ---
+> > > > Changes in v2:
+> > > > =C2=A0 - Don't revert commit 89b2675198ab ("drm/nouveau: Make fence=
+ container helper usable driver-wide")
+> > > > =C2=A0 - Add Fixes-tag
+> > > > ---
+> > > > =C2=A0drivers/gpu/drm/nouveau/nouveau_fence.c | 15 -----------
+> > > > =C2=A0drivers/gpu/drm/nouveau/nouveau_fence.h |=C2=A0 1 -
+> > > > =C2=A0drivers/gpu/drm/nouveau/nouveau_sched.c | 35 ++++++++++------=
+---------
+> > > > =C2=A0drivers/gpu/drm/nouveau/nouveau_sched.h |=C2=A0 9 ++++---
+> > > > =C2=A0drivers/gpu/drm/nouveau/nouveau_uvmm.c=C2=A0 |=C2=A0 8 +++---
+> > > > =C2=A05 files changed, 24 insertions(+), 44 deletions(-)
+> > > >=20
+> > > > diff --git a/drivers/gpu/drm/nouveau/nouveau_fence.c b/drivers/gpu/=
+drm/nouveau/nouveau_fence.c
+> > > > index 9f345a008717..869d4335c0f4 100644
+> > > > --- a/drivers/gpu/drm/nouveau/nouveau_fence.c
+> > > > +++ b/drivers/gpu/drm/nouveau/nouveau_fence.c
+> > > > @@ -240,21 +240,6 @@ nouveau_fence_emit(struct nouveau_fence *fence=
+)
+> > > > =C2=A0	return ret;
+> > > > =C2=A0}
+> > > > =C2=A0
+> > > > -void
+> > > > -nouveau_fence_cancel(struct nouveau_fence *fence)
+> > > > -{
+> > > > -	struct nouveau_fence_chan *fctx =3D nouveau_fctx(fence);
+> > > > -	unsigned long flags;
+> > > > -
+> > > > -	spin_lock_irqsave(&fctx->lock, flags);
+> > > > -	if (!dma_fence_is_signaled_locked(&fence->base)) {
+> > > > -		dma_fence_set_error(&fence->base, -ECANCELED);
+> > > > -		if (nouveau_fence_signal(fence))
+> > > > -			nvif_event_block(&fctx->event);
+> > > > -	}
+> > > > -	spin_unlock_irqrestore(&fctx->lock, flags);
+> > > > -}
+> > > > -
+> > > > =C2=A0bool
+> > > > =C2=A0nouveau_fence_done(struct nouveau_fence *fence)
+> > > > =C2=A0{
+> > > > diff --git a/drivers/gpu/drm/nouveau/nouveau_fence.h b/drivers/gpu/=
+drm/nouveau/nouveau_fence.h
+> > > > index 9957a919bd38..183dd43ecfff 100644
+> > > > --- a/drivers/gpu/drm/nouveau/nouveau_fence.h
+> > > > +++ b/drivers/gpu/drm/nouveau/nouveau_fence.h
+> > > > @@ -29,7 +29,6 @@ void nouveau_fence_unref(struct nouveau_fence **)=
+;
+> > > > =C2=A0
+> > > > =C2=A0int=C2=A0 nouveau_fence_emit(struct nouveau_fence *);
+> > > > =C2=A0bool nouveau_fence_done(struct nouveau_fence *);
+> > > > -void nouveau_fence_cancel(struct nouveau_fence *fence);
+> > > > =C2=A0int=C2=A0 nouveau_fence_wait(struct nouveau_fence *, bool laz=
+y, bool intr);
+> > > > =C2=A0int=C2=A0 nouveau_fence_sync(struct nouveau_bo *, struct nouv=
+eau_channel *, bool exclusive, bool intr);
+> > > > =C2=A0
+> > > > diff --git a/drivers/gpu/drm/nouveau/nouveau_sched.c b/drivers/gpu/=
+drm/nouveau/nouveau_sched.c
+> > > > index 0cc0bc9f9952..e60f7892f5ce 100644
+> > > > --- a/drivers/gpu/drm/nouveau/nouveau_sched.c
+> > > > +++ b/drivers/gpu/drm/nouveau/nouveau_sched.c
+> > > > @@ -11,7 +11,6 @@
+> > > > =C2=A0#include "nouveau_exec.h"
+> > > > =C2=A0#include "nouveau_abi16.h"
+> > > > =C2=A0#include "nouveau_sched.h"
+> > > > -#include "nouveau_chan.h"
+> > > > =C2=A0
+> > > > =C2=A0#define NOUVEAU_SCHED_JOB_TIMEOUT_MS		10000
+> > > > =C2=A0
+> > > > @@ -122,9 +121,11 @@ nouveau_job_done(struct nouveau_job *job)
+> > > > =C2=A0{
+> > > > =C2=A0	struct nouveau_sched *sched =3D job->sched;
+> > > > =C2=A0
+> > > > -	spin_lock(&sched->job_list.lock);
+> > > > +	spin_lock(&sched->job.list.lock);
+> > > > =C2=A0	list_del(&job->entry);
+> > > > -	spin_unlock(&sched->job_list.lock);
+> > > > +	spin_unlock(&sched->job.list.lock);
+> > > > +
+> > > > +	wake_up(&sched->job.wq);
+> > > > =C2=A0}
+> > > > =C2=A0
+> > > > =C2=A0void
+> > > > @@ -305,9 +306,9 @@ nouveau_job_submit(struct nouveau_job *job)
+> > > > =C2=A0	}
+> > > > =C2=A0
+> > > > =C2=A0	/* Submit was successful; add the job to the schedulers job =
+list. */
+> > > > -	spin_lock(&sched->job_list.lock);
+> > > > -	list_add(&job->entry, &sched->job_list.head);
+> > > > -	spin_unlock(&sched->job_list.lock);
+> > > > +	spin_lock(&sched->job.list.lock);
+> > > > +	list_add(&job->entry, &sched->job.list.head);
+> > > > +	spin_unlock(&sched->job.list.lock);
+> > > > =C2=A0
+> > > > =C2=A0	drm_sched_job_arm(&job->base);
+> > > > =C2=A0	job->done_fence =3D dma_fence_get(&job->base.s_fence->finish=
+ed);
+> > > > @@ -392,23 +393,10 @@ nouveau_sched_free_job(struct drm_sched_job *=
+sched_job)
+> > > > =C2=A0	nouveau_job_fini(job);
+> > > > =C2=A0}
+> > > > =C2=A0
+> > > > -static void
+> > > > -nouveau_sched_cancel_job(struct drm_sched_job *sched_job)
+> > > > -{
+> > > > -	struct nouveau_fence *fence;
+> > > > -	struct nouveau_job *job;
+> > > > -
+> > > > -	job =3D to_nouveau_job(sched_job);
+> > > > -	fence =3D to_nouveau_fence(job->done_fence);
+> > > > -
+> > > > -	nouveau_fence_cancel(fence);
+> > > > -}
+> > > > -
+> > > > =C2=A0static const struct drm_sched_backend_ops nouveau_sched_ops =
+=3D {
+> > > > =C2=A0	.run_job =3D nouveau_sched_run_job,
+> > > > =C2=A0	.timedout_job =3D nouveau_sched_timedout_job,
+> > > > =C2=A0	.free_job =3D nouveau_sched_free_job,
+> > > > -	.cancel_job =3D nouveau_sched_cancel_job,
+> > > > =C2=A0};
+> > > > =C2=A0
+> > > > =C2=A0static int
+> > > > @@ -458,8 +446,9 @@ nouveau_sched_init(struct nouveau_sched *sched,=
+ struct nouveau_drm *drm,
+> > > > =C2=A0		goto fail_sched;
+> > > > =C2=A0
+> > > > =C2=A0	mutex_init(&sched->mutex);
+> > > > -	spin_lock_init(&sched->job_list.lock);
+> > > > -	INIT_LIST_HEAD(&sched->job_list.head);
+> > > > +	spin_lock_init(&sched->job.list.lock);
+> > > > +	INIT_LIST_HEAD(&sched->job.list.head);
+> > > > +	init_waitqueue_head(&sched->job.wq);
+> > > > =C2=A0
+> > > > =C2=A0	return 0;
+> > > > =C2=A0
+> > > > @@ -493,12 +482,16 @@ nouveau_sched_create(struct nouveau_sched **p=
+sched, struct nouveau_drm *drm,
+> > > > =C2=A0	return 0;
+> > > > =C2=A0}
+> > > > =C2=A0
+> > > > +
+> > > > =C2=A0static void
+> > > > =C2=A0nouveau_sched_fini(struct nouveau_sched *sched)
+> > > > =C2=A0{
+> > > > =C2=A0	struct drm_gpu_scheduler *drm_sched =3D &sched->base;
+> > > > =C2=A0	struct drm_sched_entity *entity =3D &sched->entity;
+> > > > =C2=A0
+> > > > +	rmb(); /* for list_empty to work without lock */
+> > > > +	wait_event(sched->job.wq, list_empty(&sched->job.list.head));
+> > > > +
+> > > > =C2=A0	drm_sched_entity_fini(entity);
+> > > > =C2=A0	drm_sched_fini(drm_sched);
+> > > > =C2=A0
+> > > > diff --git a/drivers/gpu/drm/nouveau/nouveau_sched.h b/drivers/gpu/=
+drm/nouveau/nouveau_sched.h
+> > > > index b98c3f0bef30..20cd1da8db73 100644
+> > > > --- a/drivers/gpu/drm/nouveau/nouveau_sched.h
+> > > > +++ b/drivers/gpu/drm/nouveau/nouveau_sched.h
+> > > > @@ -103,9 +103,12 @@ struct nouveau_sched {
+> > > > =C2=A0	struct mutex mutex;
+> > > > =C2=A0
+> > > > =C2=A0	struct {
+> > > > -		struct list_head head;
+> > > > -		spinlock_t lock;
+> > > > -	} job_list;
+> > > > +		struct {
+> > > > +			struct list_head head;
+> > > > +			spinlock_t lock;
+> > > > +		} list;
+> > > > +		struct wait_queue_head wq;
+> > > > +	} job;
+> > > > =C2=A0};
+> > > > =C2=A0
+> > > > =C2=A0int nouveau_sched_create(struct nouveau_sched **psched, struc=
+t nouveau_drm *drm,
+> > > > diff --git a/drivers/gpu/drm/nouveau/nouveau_uvmm.c b/drivers/gpu/d=
+rm/nouveau/nouveau_uvmm.c
+> > > > index d94a85509176..79eefdfd08a2 100644
+> > > > --- a/drivers/gpu/drm/nouveau/nouveau_uvmm.c
+> > > > +++ b/drivers/gpu/drm/nouveau/nouveau_uvmm.c
+> > > > @@ -1019,8 +1019,8 @@ bind_validate_map_sparse(struct nouveau_job *=
+job, u64 addr, u64 range)
+> > > > =C2=A0	u64 end =3D addr + range;
+> > > > =C2=A0
+> > > > =C2=A0again:
+> > > > -	spin_lock(&sched->job_list.lock);
+> > > > -	list_for_each_entry(__job, &sched->job_list.head, entry) {
+> > > > +	spin_lock(&sched->job.list.lock);
+> > > > +	list_for_each_entry(__job, &sched->job.list.head, entry) {
+> > > > =C2=A0		struct nouveau_uvmm_bind_job *bind_job =3D to_uvmm_bind_job=
+(__job);
+> > > > =C2=A0
+> > > > =C2=A0		list_for_each_op(op, &bind_job->ops) {
+> > > > @@ -1030,7 +1030,7 @@ bind_validate_map_sparse(struct nouveau_job *=
+job, u64 addr, u64 range)
+> > > > =C2=A0
+> > > > =C2=A0				if (!(end <=3D op_addr || addr >=3D op_end)) {
+> > > > =C2=A0					nouveau_uvmm_bind_job_get(bind_job);
+> > > > -					spin_unlock(&sched->job_list.lock);
+> > > > +					spin_unlock(&sched->job.list.lock);
+> > > > =C2=A0					wait_for_completion(&bind_job->complete);
+> > > > =C2=A0					nouveau_uvmm_bind_job_put(bind_job);
+> > > > =C2=A0					goto again;
+> > > > @@ -1038,7 +1038,7 @@ bind_validate_map_sparse(struct nouveau_job *=
+job, u64 addr, u64 range)
+> > > > =C2=A0			}
+> > > > =C2=A0		}
+> > > > =C2=A0	}
+> > > > -	spin_unlock(&sched->job_list.lock);
+> > > > +	spin_unlock(&sched->job.list.lock);
+> > > > =C2=A0}
+> > > > =C2=A0
+> > > > =C2=A0static int
+> > > > --=20
+> > > > 2.49.0
+> > > >=20
+> >=20
 
-const TSTR: usize =  0x4; //  8 Bit register
-const TCOR: usize =  0x8; // 32 Bit register
-const TCNT: usize =  0xC; // 32 Bit register
-const TCR:  usize = 0x10; // 16 Bit register
