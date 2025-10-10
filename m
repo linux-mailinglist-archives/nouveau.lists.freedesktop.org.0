@@ -2,161 +2,161 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id C7DE8BCC36F
-	for <lists+nouveau@lfdr.de>; Fri, 10 Oct 2025 10:49:40 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 64AEDBCC4E5
+	for <lists+nouveau@lfdr.de>; Fri, 10 Oct 2025 11:19:29 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 74D4310E107;
-	Fri, 10 Oct 2025 08:49:39 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 149A510EB8F;
+	Fri, 10 Oct 2025 09:19:28 +0000 (UTC)
 Authentication-Results: gabe.freedesktop.org;
-	dkim=pass (2048-bit key; unprotected) header.d=Nvidia.com header.i=@Nvidia.com header.b="uA0WxC5v";
+	dkim=pass (2048-bit key; unprotected) header.d=Nvidia.com header.i=@Nvidia.com header.b="nKEmqtF7";
 	dkim-atps=neutral
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from MW6PR02CU001.outbound.protection.outlook.com
- (mail-westus2azon11012022.outbound.protection.outlook.com [52.101.48.22])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 8E14610E107;
- Fri, 10 Oct 2025 08:49:38 +0000 (UTC)
+Received: from BL0PR03CU003.outbound.protection.outlook.com
+ (mail-eastusazon11012033.outbound.protection.outlook.com [52.101.53.33])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id A374010EB93
+ for <nouveau@lists.freedesktop.org>; Fri, 10 Oct 2025 09:19:26 +0000 (UTC)
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=FjospqP0+qZCJEkQrrTwItu5kUs1IkiqY2F/p0VBHYUK+7KDl+Dterr7MoI7cn50VsdYoPiMrcasq1hmqYW9ATjp0lryDF/vEv9H12K9HNqt4/Np1XG1BWyVguz5JpmwR+PgmMo/5DyZ7q7kVU1Ie52//P3DdNGY5S68VmqKJcTWkTpSNmybD16n46UKPmOiKmKK5HBw6ijY9/i2qNSPY4rOz/fVLQBlDXnyYxCp9aTaZg2Ge8jv5bA2UN//aF6U6VlJk9Y4naQU0YgMc6/1AzzZvL61VFIQzdhiA57+bBEF+9MSeLLT7+ECanNdd6XA5TOJkp5udWCKex/Nzc1EYA==
+ b=O+PuWGxtqUjA96+9/R76p0qHZxeV70u4kDLsAMp+Vmg/pvk/dgZ05Sv9ko+C0yM3n1mjpE6DvqiRvmHN4R2EWiynRTiVZnFO/eAIV3fQCoyqthY87ILx42FVHO3T4lfcjavskAKMkDU6BFBv8E8FIu6aavUbXP2KojHrXVBVvmOYi7vZt5mdF2t7LQVt+dBuAwXHS6uRdkJnOeGO7KnfYZBTHkGoe2My7t7jeadP1pbRInsPNkZNN+8q9oofkw40+YwjG/yiK+ref+a3HqETAqk5lawvf1p/RsCfUrm7gEcal5V7LC1w0GFo30bUg2Omr0Pul2+qzm8QKmFe4oPTIw==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
  s=arcselector10001;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=r+Ue8i1qymd4ZsBPyaIIrjZTyHApgJWcv5IZ7D3dEsI=;
- b=rzC532NLiNyfEGV/V3KxvaD2DvuO62WW5oI85DN7qcshEZ84tF0+vvcaWZxsDdN5CqsYDFynriz565Ya/OaHPPkNp4yKDfDgFkSKGzRb0Q9JKbYklPRDRBgStN5vMiNahu61I94KREO2w+lhGPa6jZbdqhhTKntfMRD/b5zLRSqatrTpyU5XYHl32HhKFYz7cRBCraMG+yiC0aISF94D6UWr6kMZWuPp+7bMxxnqBehDJaXUKEy8in2MM0moLeoIEU4ySsNLwa4+hQN0dSXarhh1fDnF7FRYTryMIAH6h5wj7VmSoZAPBh180akw3mq/kmcBRNT1wnqLNGN2XUPCmg==
+ bh=rWOy46no9WAq3fEBY3nApwsAawKNIaG0aoJeBVsJFTk=;
+ b=BHlgKdadfXOolbvrum2XPSThyCb0LqsA9qw2Io8k5fw/DsQKqG25VyfuVetIHqyh3K4lVnpqeFtMu8ePjOttMcZpDq9+23rUtEBWvGock+761DZ9NBzXoCtUUHdvsgjUmeu++3b4BydYVTwSuAWrXfqVlUMyhoNLnzO3XFs3jTQYooHvuQ/relg/x9Q9XP1vWBqlkSWXUa2xKH9aC8czxk6KhWsJ/xOG9DzXjA5o74MedV4Dx2cEUXdyfLSC99V9pNUw3eSKZ2vKDIKjTFIWZNY5MMx+ZCcpsRbvXxFagHd5eUr46UszVZYUQyISGjuzUunABmAl9F3a/T02/TXRyA==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
  smtp.mailfrom=nvidia.com; dmarc=pass action=none header.from=nvidia.com;
  dkim=pass header.d=nvidia.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=Nvidia.com;
  s=selector2;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=r+Ue8i1qymd4ZsBPyaIIrjZTyHApgJWcv5IZ7D3dEsI=;
- b=uA0WxC5vbHFEgQytkHgUgcf+kglLZkKHSPwRwLwaLmMHV6RuEKJtYeDsn2iJXhoZEUSvT/rNFuy3LFMulEvcCNVqqgOf+CyasW/Vk8MoPUU7Of7MQ1UGDyYmG4awEcsP7aUiXiIb8Bq3wXIz4wNiMAD0wLpD/tzZFVmTKoODT9rop6er1vb0u7NlL0R+xYl9s1LbaunyYaIZsZDBrixHrZQ8tdyQGa69cd5LFTpfJYJ61MdgohcjDQCosrvyKBd/oN/R4/wTWZW3ZokxFLjaEAe8bISPHSWsi+QM0k7Asn/E21LOL+1ySCSjk0DF1VNNP00TWXqcxL3FgXGcP2t91g==
+ bh=rWOy46no9WAq3fEBY3nApwsAawKNIaG0aoJeBVsJFTk=;
+ b=nKEmqtF7IQRiHIN/QEgjTaU6yL8ADLINWzQtr/Nnnjlo+EFtUuiq5cZQZEEA/Jjt75Rq9ed3zKTNFkU9sNxv4RWtGwTmTMtga5YVgSufpGcofS6jOygcacSqAh9CbGnjLbkNDrz5h4uUOguTsTHiJBUghS/w1BEth7qhQ91+ZG99KPHs/cIDL9YM7wCtqDHDHNFXC/ZO3pdYqcgpjMXo24hvR3AcK3gB3xZiam0yKvtemNS+EdffVjfrYg0I4DhEzKD+EU6R1Opbs2wVI/PuzJrcxd3Z4ZwHEjbcSSj4QRMngLw1fbhQSgf4CahpDo7UstbbcmlpKHGlRJrxLFwsjQ==
 Authentication-Results: dkim=none (message not signed)
  header.d=none;dmarc=none action=none header.from=nvidia.com;
 Received: from CH2PR12MB3990.namprd12.prod.outlook.com (2603:10b6:610:28::18)
- by CH1PPF0316D269B.namprd12.prod.outlook.com
- (2603:10b6:61f:fc00::604) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9203.10; Fri, 10 Oct
- 2025 08:49:31 +0000
+ by BN7PPF28614436A.namprd12.prod.outlook.com
+ (2603:10b6:40f:fc02::6c9) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9182.18; Fri, 10 Oct
+ 2025 09:19:23 +0000
 Received: from CH2PR12MB3990.namprd12.prod.outlook.com
  ([fe80::7de1:4fe5:8ead:5989]) by CH2PR12MB3990.namprd12.prod.outlook.com
  ([fe80::7de1:4fe5:8ead:5989%6]) with mapi id 15.20.9203.009; Fri, 10 Oct 2025
- 08:49:29 +0000
-Content-Transfer-Encoding: quoted-printable
+ 09:19:22 +0000
 Content-Type: text/plain; charset=UTF-8
-Date: Fri, 10 Oct 2025 17:49:23 +0900
-Message-Id: <DDEIH181JDA9.2DG2C3DBOB2V@nvidia.com>
-Subject: Re: [PATCH RFC v2 2/3] rust: kernel: add bounded integer types
-From: "Alexandre Courbot" <acourbot@nvidia.com>
-To: "Joel Fernandes" <joelagnelf@nvidia.com>
-Cc: "Danilo Krummrich" <dakr@kernel.org>, "Yury Norov"
- <yury.norov@gmail.com>, "Jesung Yang" <y.j3ms.n@gmail.com>, "Miguel Ojeda"
+Date: Fri, 10 Oct 2025 18:19:17 +0900
+Message-Id: <DDEJ3X0C2RNH.13YEXJI3CTSPF@nvidia.com>
+Cc: "Danilo Krummrich" <dakr@kernel.org>, "Joel Fernandes"
+ <joelagnelf@nvidia.com>, "Jesung Yang" <y.j3ms.n@gmail.com>, "Miguel Ojeda"
  <ojeda@kernel.org>, "Alex Gaynor" <alex.gaynor@gmail.com>, "Boqun Feng"
- <boqun.feng@gmail.com>, "Gary Guo" <gary@garyguo.net>,
+ <boqun.feong@gmail.com>, "Gary Guo" <gary@garyguo.net>,
  =?utf-8?q?Bj=C3=B6rn_Roy_Baron?= <bjorn3_gh@protonmail.com>, "Benno Lossin"
  <lossin@kernel.org>, "Andreas Hindborg" <a.hindborg@kernel.org>, "Alice
  Ryhl" <aliceryhl@google.com>, "Trevor Gross" <tmgross@umich.edu>,
  <nouveau@lists.freedesktop.org>, <linux-kernel@vger.kernel.org>,
- <rust-for-linux@vger.kernel.org>, "Nouveau"
- <nouveau-bounces@lists.freedesktop.org>
+ <rust-for-linux@vger.kernel.org>
+Subject: Re: [PATCH RFC v2 3/3] gpu: nova-core: use BoundedInt
+From: "Alexandre Courbot" <acourbot@nvidia.com>
+To: "Yury Norov" <yury.norov@gmail.com>
+Content-Transfer-Encoding: quoted-printable
 X-Mailer: aerc 0.20.1-0-g2ecb8770224a-dirty
-References: <20251009-bounded_ints-v2-2-ff3d7fee3ffd@nvidia.com>
- <20251009213353.GA2326866@joelbox2>
-In-Reply-To: <20251009213353.GA2326866@joelbox2>
-X-ClientProxiedBy: SI2PR02CA0023.apcprd02.prod.outlook.com
- (2603:1096:4:195::11) To CH2PR12MB3990.namprd12.prod.outlook.com
+References: <20251009-bounded_ints-v2-0-ff3d7fee3ffd@nvidia.com>
+ <20251009-bounded_ints-v2-3-ff3d7fee3ffd@nvidia.com>
+ <aOflmmHe8O6Nx9Hp@yury>
+In-Reply-To: <aOflmmHe8O6Nx9Hp@yury>
+X-ClientProxiedBy: SG2PR02CA0119.apcprd02.prod.outlook.com
+ (2603:1096:4:92::35) To CH2PR12MB3990.namprd12.prod.outlook.com
  (2603:10b6:610:28::18)
 MIME-Version: 1.0
 X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: CH2PR12MB3990:EE_|CH1PPF0316D269B:EE_
-X-MS-Office365-Filtering-Correlation-Id: 5d9bc0c8-aee5-45ae-2bd9-08de07d9ecbf
+X-MS-TrafficTypeDiagnostic: CH2PR12MB3990:EE_|BN7PPF28614436A:EE_
+X-MS-Office365-Filtering-Correlation-Id: e752c292-a535-4da2-8f85-08de07de195c
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0;ARA:13230040|366016|7416014|376014|1800799024;
-X-Microsoft-Antispam-Message-Info: =?utf-8?B?UTVhMzZWVmd4emtVR0pmbzZMUmkwZkNxd1NmUjZ3Z01LMm5WMGpsd0dNQWJ6?=
- =?utf-8?B?TnEwMGtOa0tjNVhpN2VITjlBY2pRN1NIR0g3K1pYOGVtclB2TWtzUUJVd2Y3?=
- =?utf-8?B?Q0NoajVNTkZyc1N5OG1FRi8xWFp3cVppekNSa0hNQWdBcmtNd2M3NFA2WXFG?=
- =?utf-8?B?emsvSTRJdDBsTjQ1Z2tyaS9hdVdnbHJiOVplclQ4YVU1TUxSN1FzQ2R6YUFN?=
- =?utf-8?B?T3VkVGU2T0dQZzJZYndFNFp5NTN2MUZDaU1LYVl3VWtaQjNpczMvSHBzemhl?=
- =?utf-8?B?MGs0cmlWUVBVQ0hLSlVFRU1PNUFjeWhyTkc1ZmZvM3pxM2dKYlE5SE84Qktq?=
- =?utf-8?B?TmFkRHBhNnNZMExPQ1J5N25MdlMvSWtjb1l6bzdYZ2hiVFp4eW11T1dQNE9G?=
- =?utf-8?B?aWMrdHNFYmU3NlIxOUlBMWxyT1BOWVhYbWFJMkd2VWd4U3Z0VXZBS2NmRGdG?=
- =?utf-8?B?U1BaTFF4MEFGZDdpRVBEaDBwcVZTcnJqUmRzWkh2VEdnQThSd25IWnNueWFn?=
- =?utf-8?B?V0NWM2EvUFMvODFKcmZXS2o4Y2k1VHZJMlFWYjhkWjdPeW4yRng2UWtiMFBL?=
- =?utf-8?B?YklscTBIZVlrVTN1TUhyTmFaSUdldEJubWlQUTQrUjlVTWVncXNBZzU0YUd2?=
- =?utf-8?B?N0tVdy9rT1FLS2E3VndITUZHZkU2eXlHQkdtc2wzZGdhU3dIOG1ab2NvU1JW?=
- =?utf-8?B?ejhJa2g3d0hqY1R2OTZzWmlxSUtjUGxRUmxwL0dSblJsa2hQSHNVU2dQYlN2?=
- =?utf-8?B?UHYxdDlocmE4ZDdlVHFTK01hcnFWVUl4ZjJhYmJDV1dwNSsrY0xwRzR1bHpG?=
- =?utf-8?B?YzFPZ3FWdlZVWWZPRFhURlh4S2RWMWtXbTFETW8rVTNZWjNEUENtR3dyM0p6?=
- =?utf-8?B?YVpWWDkxVzdoR1lBWmZWcjVGZk52R2hydldyMS9hQzlZSG0rd1BTczlQVU4y?=
- =?utf-8?B?UnlMVU5LSGR0K1JXTFk5eXRKMDZVV3k4eHhGVmVyeVpOYUtGdEY0UGRhRnM4?=
- =?utf-8?B?WmdDdm9aYnBuNzY5dU5oNElHU21jd21tTlZ2TUs2cXphK1pMOWlMMzVQRmlM?=
- =?utf-8?B?dWd4L1g5ejkxQU44YmNrcXRmY1dEeTA2dkFiYjRaM1N5V2ZYVVNzdG5XZWRx?=
- =?utf-8?B?dFkvV0RudTJhb0ZtQkFaTy9DSXFjYjI1K1d5MExrVU1ZWnR5MUZzUkxucTIz?=
- =?utf-8?B?ZUdrdk9OTTJYZU91b1JzSTJoS3pTdmR1Vno3anBwV3haR0VwbHF3RFBQVnlG?=
- =?utf-8?B?Q09vS3dacGRzUHZvTlFzY0FVOVBQMEdnOUhmODFOYytNa0VLYlIzQUcxMUZZ?=
- =?utf-8?B?TTVmakljVmdzNWpJcmVtMkVTTUtHdUZ1T01GZEpMZVAwTHltWExka3BqUFRn?=
- =?utf-8?B?aFFaWXV5dTlMZElkUW5pQm1aZFRhMWQ2eHoveml0VG81K0tJc0VsVjQ2MUlj?=
- =?utf-8?B?NXFybUtUY21FdXd6MHRvQmdtNEpxZVpQM3hQQUxWQUhZcXFqdVZGLzREb3Z2?=
- =?utf-8?B?dnhQeVVTaEc1alhndzlZVU5BVzRmVXFNN1lua1VYOGJsamdBRkZLV2VlWmFU?=
- =?utf-8?B?d1lsVmZ1d2lZNFUzTFhTT2s5dC9td2hFTnZRNy81amJaaUx3cEN4R1RRUUM5?=
- =?utf-8?B?VVp4NkdhKzErK1NBZXZ3VDJlUWt2bUpiYVZqRXIraDFnTFNQL29MK3VzVmdl?=
- =?utf-8?B?ZGxJU0FWZmFETkJXeXNjV2Y3dTQwUkNGeERxT0dDM1lNUWRhRk13TDUvaUwr?=
- =?utf-8?B?MnYzeEk0czRCVXJsdUlOYWlCNnhzWlNDTEVqTmxWL2NlQm9YTkFJVktVdUQx?=
- =?utf-8?B?cnZpeExLbVNCeUE0djAzTXVzeE94Z0FleXdYVGM5V1Y5SkZqQlJYQVVxSTRu?=
- =?utf-8?B?d1gzR3JmMEI5NmkxdTNxa3lldDMwVHN1ZDV5c2lXTkRGS0RaU3hVZmNlMU11?=
- =?utf-8?B?eklTdGJyTkpuWWRoa3NvdHU0cEhjemYxOWR3QmZQMmNnQmJiYkNCSlp1VVdI?=
- =?utf-8?B?MXFiVnFTUWpBPT0=?=
+X-Microsoft-Antispam: BCL:0;ARA:13230040|7416014|376014|1800799024|366016;
+X-Microsoft-Antispam-Message-Info: =?utf-8?B?N1pBYm5KM3VMQW43NEVJTUVoMld2TjdBS1g5YVp6djlqenN3aC9yYm90R0R5?=
+ =?utf-8?B?dW9tNFBwTEE3ZUdyenBJczhLOERhL2tWVldLMk00dDVmVVVBZXM0U2FabXB4?=
+ =?utf-8?B?R0lUTno5VmxHUW5DTGhLdlhRemJCRTVwSkN3Sno4VDA3T3dBZmpRQkhxU3J6?=
+ =?utf-8?B?eDBGSjlKUngwQ0UyYytzdGhBSXdrcFltVWVmUm1MWlR3K3VIdnVyandwd2xI?=
+ =?utf-8?B?OU9CekdoeXZHRldSR0gwMHlwSGRHTjNWSFVuZFFtMENsQ25xM2o3a1ZaQTY1?=
+ =?utf-8?B?OWhWdUpOczArSG1tR3lMZEw1RE9pVUZ2RDh0aDM2Rm1oaTlzcjZxbHh6U2hB?=
+ =?utf-8?B?NW5zU0NXRC9YalhUcW5xYTIzSThUeVBwSFJ4aGtvV05IV3h2R2pmVWxrR0Vv?=
+ =?utf-8?B?eVNtd3FhTW9PWkNLbE5CcDhLOFRINzdTYk5zdG00SkRxL1lZbVhpSnJ3c25y?=
+ =?utf-8?B?enpmM3FrUnZKaGxBYVpjckdDRU5hYzhoek9qY2t1ZDlXcEFmbU45S3FnTFQw?=
+ =?utf-8?B?bmJNUGYyZ1VBbVlwWUFERmk0OFZqaXE3azRSMlhKSDVzUzFmVENLY2UwK0ZL?=
+ =?utf-8?B?S1ZXOGliM1E3UmtPSk93VE9UU1JqT3JiQ0FEOU9lMjJsNmZNOGQ4WkVsQ1k1?=
+ =?utf-8?B?SEhQdFV2aEhVREYydFRjYzloQzZZZHNqRUR6cW5BcnlaTjJqSE1SU01lcjQr?=
+ =?utf-8?B?SUZuWnorc1JPYzRhS2N5WmZmcHcwWEFqQTdPN3p2N0p0QXFFREVyNFpPMU9J?=
+ =?utf-8?B?WW5nYXNmcjVCcXhZVEI2WWhhRWdEcTlKM29zbnZNN2FXeVM3SWsxK2JnaC9l?=
+ =?utf-8?B?WFkreC93azRpa2dEOFk4enJFUVd3azFmWW5YcnRYdHhlcjlvUkZRM25YZ3kv?=
+ =?utf-8?B?RVZLWUcrcUNPQXhOendSVldsdmpCbWJsaXM5WitVdHg0b1RNZDBsYXBaWUtB?=
+ =?utf-8?B?aXUweS85VGZIelYwVUlSQ0E0djBNVGJoLzR4TTVaclV1YlhZYWphbkdCclpq?=
+ =?utf-8?B?Tzhpb0FncVZrc3J2S3p0OGxncHRBZEpzQ09Zbm9LaUR5N05VTjBtazRFR0E3?=
+ =?utf-8?B?MkdaV09uWlpVQzFteXFnUER3SHhEQ1JIWlNVdkxaM1JvbHZ6RUROS3RUUzN1?=
+ =?utf-8?B?dkxxRjEwdU9mZlI5ZlFMandzRTBhVUhPMTUxczJBZzJYTjZtQzlRVmRmRWFB?=
+ =?utf-8?B?L0cwUmduU014MXZNUXNvdVdIZjUxVTNqZDVxTXFZd2JvVUdVWWhFK0RaaXZY?=
+ =?utf-8?B?bHN4RVNuTk02RHdsTjJtZUVKbXpLYkxqcnV0UWtianlJZkhiTHFWMWNPcXJt?=
+ =?utf-8?B?Y08rOE16SDJ0ZTdhRUVMMEdiYkg2OTN0eTA4L1JLUU1HMnFjK2tzQlNacHZh?=
+ =?utf-8?B?YWVnUEJkazFaOFZYblRhdzU5OTRLMFVKNkZoK1lyamVpZ1ExSFp1b3JydDhR?=
+ =?utf-8?B?VmNWcE5NbWNXRlBQcXNXOWVkampUWlhLV3l6YklNbWZleC9ISDBTY2t6TEVy?=
+ =?utf-8?B?Yk5ycHU5RnNEWmx4UzVWZkFLYXQ1eG54T1F6Z1k1dHpWSVFSZ3FNa2NOaDR4?=
+ =?utf-8?B?K0J2dk9uUHoxYlJiSUFDMHIzQlJyQmhjY0JsZkc3REJDcEJqdGlqanZocWcw?=
+ =?utf-8?B?dnl1L0ZmN0VvZTROdnJlNXEwUlArTytVNjg4aU5Qck5Fcm5HdFE0YVZNZ044?=
+ =?utf-8?B?ZXZQWTJWZTZjSjRkTDM5elFtWGNtQlVrQUJibGdKZnNpZmdYMDF3ZzNSY0pM?=
+ =?utf-8?B?R1hnWE43ejBPUkhoc2xGaEFFNm5MaFVmSHlvcWJtOTE2K3NWWWR4RlRPUE5h?=
+ =?utf-8?B?Z0U0dzF3dVVxUkZIY3hhZXYwbEhSWWRodkFyZEMzRDlzTHIzTUVOZGZOaXU3?=
+ =?utf-8?B?Q3RUZGE0RERyckpEdXBodUVWNFN0VjZ2U3VoRm9nNDZxaVdVMXh3aHhEK29l?=
+ =?utf-8?B?STFMYXRqS3Z2MDBKZzlEdFdmczRRalMxWTdKRnozV0xLMjJRRG5VZTFmay80?=
+ =?utf-8?B?VFdEVGpKZXB3PT0=?=
 X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
  IPV:NLI; SFV:NSPM; H:CH2PR12MB3990.namprd12.prod.outlook.com; PTR:; CAT:NONE;
- SFS:(13230040)(366016)(7416014)(376014)(1800799024); DIR:OUT; SFP:1101; 
+ SFS:(13230040)(7416014)(376014)(1800799024)(366016); DIR:OUT; SFP:1101; 
 X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?Y05Sd2tlK2NKQUVvenkrcHUycWtGMHNEdjdJNTBoL0tkcWxZUzgrN2R3UVBa?=
- =?utf-8?B?aFd0RC9vWU9MSE43cjBuYmZQcjBvbVpFOVlvMHdxZjczL3dGVy9xaDl1MWJD?=
- =?utf-8?B?akxzWDd5dG40UGZ2b2xMVHNNUHRBTkU4Q2x1eXUwaS9ub0NoL3UyVWRCSFpS?=
- =?utf-8?B?ZWZLYWc5NGJVdHRNWUFCem00UW0wVDJkRXlvVHJHbTZMYVhZZ0xDSi9BcXBY?=
- =?utf-8?B?aGdycGpuczJZYy94aEFDUmJLbERmeGNHZ05SdWtPSnl1cXV5LzFZTGdRN05s?=
- =?utf-8?B?RTA1V3kva25abG43MmRvVC9xOXhid3QranVNcXdpQUltdVZvNUwycE9hUVlt?=
- =?utf-8?B?eGRsVVdvL1ZHeVgySlU4M3V2Ni9iSy9PVTlNMDZqWUErTmxzZHFZdTU1anBP?=
- =?utf-8?B?Uzlma3k5V2xVUmdmUG9HUVljS0w0QVAxU3dGZ2ttSGZLZXRIbDhyNkxkeFND?=
- =?utf-8?B?QTVvaFo2eXgyKzFNUHNrUVpVZGFKVXFyY2hXenFUUkNPTndBMm50OWVrNTZN?=
- =?utf-8?B?UTh4N3U3YzEwVWFVQWNUUmIyL2hJRldWelpob0lRelVYVjFmR2FuYzc4cUtl?=
- =?utf-8?B?RSsxNktMSm5XS0tLRFhpQ1ExSkxhNWs0OEVNemUvZ1dEZmF2SFpBSW5OWHRO?=
- =?utf-8?B?MXByeHVMYnNkWkJLT3hrMnRNemozODRvaU00c1piZVhtY2NEazhocnhQdVVj?=
- =?utf-8?B?aXpBRlBOYzBzRVhub2lmQjRJU2R0Q05lREhoZnBXejkwR04zL1RBd1FDbk5U?=
- =?utf-8?B?OEdPTmd5b0xPVzF5NEtVajNsWWNMeS9YZi9RRndYR0g4RVhzb25EamRHcFN1?=
- =?utf-8?B?bi91V1gxN3VwaysyRFY4Sm1kWlM2YWRkRU9HREg5b1IwUS8rVHZmY1lJbnoy?=
- =?utf-8?B?dkNDZFJ2MWJxY1JrMTIyajltSkI3SGZDNFd6N2JhYWl1eTlMR2hTUWVZOWFB?=
- =?utf-8?B?d2o3alZFS29hUmNHNGdDOGdKMzN3M0JpQXZSclZPWG0wZ3o4LzF5eGhqOXhG?=
- =?utf-8?B?T204eENVaXlPUDU3N2p0TDd4N0ZxVVRqamROVkRZVVM0S2xIcmhMNlhYRHhW?=
- =?utf-8?B?bnhwRm9CVmtUTEw2cGxUSlphYTk0bDJrK3c0QSt1ZXF2OXA5VCtGTWdVaC9K?=
- =?utf-8?B?djc1NGNMTkdsZW5MYjN5TTUvQ2p1a09zZGh3Q3RVL2p0b1ZablRRdk41cHEr?=
- =?utf-8?B?czFaTGQ3SU40SzhkclZZb0Z0YStQTjk2Y2l0aFMyeFBFeDk4M0FWdUVIeW9F?=
- =?utf-8?B?aWJPQTdyZkRkRmxMYnZKTG1rVzhSY3AyM3ltbVZVT3VBd1drK2FYQTVMR1Vy?=
- =?utf-8?B?aEo5YStSVkREcDZONTdKTFBZak50eFJCTk1Zck1QeDZrWlozNkZZUHBtTWtw?=
- =?utf-8?B?OTRXaGpkYXVWYU4rbXpQUUZERW5yOXFGdTJFYTFHbWFxMUtmOHlRN2RUY0Nm?=
- =?utf-8?B?UDhOWTdvK0E0UU9QTkpmRnBycGRrd1dkNC9oWEMxcWdScGRIc2QwY3VsUFVq?=
- =?utf-8?B?Wk9QUXVmbE5qY25ianY5bWtIdDBkTTFybEl5bDFZYTRvUXJXc3VmdWVwNjZw?=
- =?utf-8?B?TUk2R1pJU1phTzlad2VKdWJQWGlDR3hqVjZwY1VjKzhCYU90M1ZsRGtRVVY3?=
- =?utf-8?B?TzY2am9nSUZ1QmtpWjc5SW90RE5CMEVhQXhhTmg1emgyWTQxVVBFZFhTN2x0?=
- =?utf-8?B?TFkvVUh5RlA2U2I2RllLQ3dpbGFNdXUzbEoxUUprSDBFdkxpYVZ2MXRYbkth?=
- =?utf-8?B?T1JtOUZrSkE4WndZKyt3VElhYyswVWRVeUxIK2xBUWlpSEN4YTRmVDlHT0ps?=
- =?utf-8?B?RGFDRkdsaWdFMzR4Vng0SzZvOVJNZ2hrUk90WGl4N25kRVhpQWpiWHRqYnJD?=
- =?utf-8?B?YmRGTHVMK1RTL0FYRXY0WGoxYnFjV0tGKzJaRVU2SE4zb1YxU1VoUWNzLzRu?=
- =?utf-8?B?SWRCL3k2ZENrMEZFaVJ4dVZrdStqaTRsZVVqdlBjSFVYRGg1V3lBLzFmc3hm?=
- =?utf-8?B?QXJrTy8wWnBGVWRZZFJKNERFbjFkd3gzWWRuYkpLZDljd1g3Tk1JZ3pOMlpQ?=
- =?utf-8?B?bEc3U3hKbkR4ajlhMEZCaHlEa0xFTkNVQmlEbTVEc3NPcThwdGgvTHN0bmRQ?=
- =?utf-8?Q?lK39vuthuHgWU9fHaqQLqA0xu?=
+X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?M1E0WkcrMEo4cXFWMzJTQ2RLSU9FUHN0TVVad3RNQWF5UisxQ3U3U3R6Tk1o?=
+ =?utf-8?B?WW1qanQ0ZXI0OTU1NFdSU0c0S0NGUU44eGVpaDVKZ0VSaTNLcVdiOGlURW5V?=
+ =?utf-8?B?ZTdCUERpRnpva0hqS3JGSDZYZG55MUI3bytTSXBQdXQvalYyZ0Q5eU9xa2Nn?=
+ =?utf-8?B?TEJQWjZDTERhank1aHBqdmVFWXJJV0ppL2w0VDlkamk0QU5rekFLaDdDV0h4?=
+ =?utf-8?B?d3RMZk1GMGt1MUdiQWVmMFpXWnZ4RmZoVGlja1pOQWRMczdjSXpLOS9Xd1Y4?=
+ =?utf-8?B?VnZ6KzI0Y2RVZUVsMmdISEZxZ3N1dnhhVjJDMDlndnIwWVNSZkhaYS9FTjBi?=
+ =?utf-8?B?UUxLSkVMR24yRm1GZDlvYUlIL3hSNHY0b2VSTjlhUmhaMTlHUE1WRzF6ejh1?=
+ =?utf-8?B?OEdKeU04WW9wQjZteVVnblYzRXI1Z1VkVjRyZ00rZEJoRGFoUThGUHp0NkpT?=
+ =?utf-8?B?cVRDL0JRRnRDTmdCalp5Mk5hb3VRaktabHVHakNxTXZqcWhJbXVSMVZqRmF4?=
+ =?utf-8?B?eHJTMm9IcVlwN0h2NmRuOVZ4TzJwaFJyMkRJcktOU0RKeDVRUWJUdEV1emtW?=
+ =?utf-8?B?M201ZWRCWmJXbHpjSXRRQlNZZUtrK2VEdFFYbVJ5eEZCeUltUGpLbU93aWRT?=
+ =?utf-8?B?VFNHL1FHanAxZmFBRGpVcFFOR1RIQU5lTnd6RTlVeVY4OGVPUXpVdWZPVFNm?=
+ =?utf-8?B?WDBEbWttNEVjMkVDMU1pblloUUMzUTIxdlZFWlRQV0VuVEFGSFBFWTFweUh6?=
+ =?utf-8?B?WFFZamR3TStTMmFjbEUxbFo2ekpIZ3hmRE90NVl1bUphNTBqY0F0RkdCRm01?=
+ =?utf-8?B?SFNUM1BYSXhySUlPcWNuL09TRkdQaURya0g1QXpTUUxBdlhHaS9jRWlqanVS?=
+ =?utf-8?B?RlZvWWwzWkhuZVd4Q1lUdmlyd2Y5UnlkZ29RL2FkcXN5ZjZITHBVUUg3ZjFr?=
+ =?utf-8?B?bFBNaHlpM29IMU5sY1pkbW13L0R1UEs0RFlWbXMreXprUUpTWC9BWEk5R2U1?=
+ =?utf-8?B?ZzBETFJwQ1dvS0NidTEydGg4VkhTRDlwSlZJWk5qRU05WDFGUkpOQUIrempG?=
+ =?utf-8?B?Wm9USmJPTVlMd3VMZDZtc3FPcDFXUEc2N3hRYUN6VFQvYkdsNVN1K01lV0Nl?=
+ =?utf-8?B?YjJFbGdxR2pwaXorMS81ZmF1aGJrQ2RCRkNuY0pKa2hvZ1laQ0tYYTZQbWZV?=
+ =?utf-8?B?cDZTSFY1dnpGdVpNZ1F1ODNZUWVWOXlkSlNCMUtMaEV3TkJjVDV2N1NsWjVC?=
+ =?utf-8?B?NVJ4NExSdnNXWlF1U3g5RWlXdysxOTVBbGVjSVZJSnN3R2o0dnVJZmtINlcx?=
+ =?utf-8?B?U3RGZW5DY2NneXJzWk5yQzRWcW9LdlpNUHVrejlhZStTS0wxOWY5ZFcxMDlR?=
+ =?utf-8?B?Y0hURzIxVjNDUGtYRDJuS3J1SHpGUnM4Q1VYYXgwd2ZGYVV4TUgya25GYXoy?=
+ =?utf-8?B?dVBIaWFLT0xlUi9La3NESW1JMWV6MS9HVzl4bmtNVWtLb2R2U1ZrSC9kVDdR?=
+ =?utf-8?B?bmV0ck4rQWY3SFFzVXVLUHE3ZUVMV0pIbERTczg4c20zbzNHSER2OURGV0di?=
+ =?utf-8?B?czRkTEw2Q2VNN0VTQ3lnS3ZERzN3cDg2ZHJJN3Ntc2VNSUZsU2VBRDRmMXk0?=
+ =?utf-8?B?L2NNTXBIMFRwcXFDaVZHa00yN2pWU3ZrRUw0SGpZb3BEMW5jUm9wRFZEYS9W?=
+ =?utf-8?B?c2pPWGk0NXVHdjlRQ0pCWHBHUXgwcGVUczRCYUN6MWw0TWgwaFNTL0NvN1NJ?=
+ =?utf-8?B?cnRYMUZZQXJibVd2NW5nQTZaQm9uRXV3ckUxTERzYnVwaWM1L3VYTHhCUC9n?=
+ =?utf-8?B?OHNCTHdVZ3dJRzgzVGdFV3FUbldkWVl2cDZSUFB0S2lsSmpJeGNPdUZPN2tE?=
+ =?utf-8?B?R1YvK0lxRXVJYzZjY0NuU09ybXZkY2NQNWFRVjFvUkxVa0UrQ1VkWkNVNWpq?=
+ =?utf-8?B?MzBDaGZWM1pJcVZnQ0thZW5LWjNCMDcyTTQ2T3ZiS1RobzdDRGdMM3pjMGNj?=
+ =?utf-8?B?MG5QZ0NscjZDaElvMU82aXdyMVphNVZ0WFdPMnpIbkdTWkFGaVJtVllTT2VF?=
+ =?utf-8?B?bTRqZURlN1NoancydEZ4Y2JLQVMyWEgyNWpCaG9GMEJhcE80NjFkZS93bmtv?=
+ =?utf-8?Q?jfCjgUHLiedNQGeaU9EjYO/gh?=
 X-OriginatorOrg: Nvidia.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 5d9bc0c8-aee5-45ae-2bd9-08de07d9ecbf
+X-MS-Exchange-CrossTenant-Network-Message-Id: e752c292-a535-4da2-8f85-08de07de195c
 X-MS-Exchange-CrossTenant-AuthSource: CH2PR12MB3990.namprd12.prod.outlook.com
 X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 10 Oct 2025 08:49:29.7881 (UTC)
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 10 Oct 2025 09:19:22.6652 (UTC)
 X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
 X-MS-Exchange-CrossTenant-Id: 43083d15-7273-40c1-b7db-39efd9ccc17a
 X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: cYqfcQry9RkvKTMwWguQDWOpL/la5RCQbqyv93g+r4nOQbRbxQXVKbTBH+BbaiuYfI2ffsIi0uCxNdbYD95bmw==
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: CH1PPF0316D269B
+X-MS-Exchange-CrossTenant-UserPrincipalName: vPC5pCT3JCBjIx9dCTFU/vpza4m4gDi8ZF8FUAua47lkJ6mmVnd3k+KRgIK4W57FGpevGWFMA0XIBOAgxZOaLQ==
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: BN7PPF28614436A
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -171,337 +171,174 @@ List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-On Fri Oct 10, 2025 at 6:33 AM JST, Joel Fernandes wrote:
-> Hi Alex,
+On Fri Oct 10, 2025 at 1:40 AM JST, Yury Norov wrote:
+> Hi Alexandre,
 >
-> Great effort, thanks. I replied with few comments below. Since the patch =
-is
-> large, it would be great if could be possibly split. Maybe the From
-> primitives deserve a separate patch.
+> On Thu, Oct 09, 2025 at 09:37:10PM +0900, Alexandre Courbot wrote:
+>> Use BoundedInt with the register!() macro and adapt the nova-core code
+>> accordingly. This makes it impossible to trim values when setting a
+>> register field, because either the value of the field has been inferred
+>> at compile-time to fit within the bounds of the field, or the user has
+>> been forced to check at runtime that it does indeed fit.
+>
+> In C23 we've got _BitInt(), which works like:
+>
+>         unsigned _BitInt(2) a =3D 5; // compile-time error
+>
+> Can you consider a similar name and syntax in rust?
 
-I'm all for smaller patches when it makes reviewing easier, but in this
-case all it would achieve is making the second patch append code right
-after the next. :) Is there a benefit in doing so?
+I like the shorter `BitInt`! For the syntax, we will have to conform to
+what is idiomatic Rust. And I don't think we can make something similar
+to `=3D 5` work here - that would require overloading the `=3D` operator,
+which cannot be done AFAICT. A constructor is a requirement.
 
 >
-> On Thu, Oct 09, 2025 at 09:37:09PM +0900, Alexandre Courbot wrote:
->> Add the BoundedInt type, which restricts the number of bits allowed to
->> be used in a given integer value. This is useful to carry guarantees
->> when setting bitfields.
+>> The use of BoundedInt actually simplifies register fields definitions,
+>> as they don't need an intermediate storage type (the "as ..." part of
+>> fields definitions). Instead, the internal storage type for each field
+>> is now the bounded integer of its width in bits, which can optionally be
+>> converted to another type that implements `From`` or `TryFrom`` for that
+>> bounded integer type.
 >>=20
->> Alongside this type, many `From` and `TryFrom` implementations are
->> provided to reduce friction when using with regular integer types. Proxy
->> implementations of common integer traits are also provided.
+>> This means that something like
+>>=20
+>>   register!(NV_PDISP_VGA_WORKSPACE_BASE @ 0x00625f04 {
+>>       3:3     status_valid as bool,
+>>       31:8    addr as u32,
+>>   });
+>>=20
+>> Now becomes
+>>=20
+>>   register!(NV_PDISP_VGA_WORKSPACE_BASE @ 0x00625f04 {
+>>       3:3     status_valid =3D> bool,
+>>       31:8    addr,
+>>   });
+>
+> That looks nicer, really. But now that you don't make user to provide
+> a representation type, how would one distinguish signed and unsigned
+> fields? Assuming that BoundedInt is intended to become a generic type,
+> people may want to use it as a storage for counters and other
+> non-bitfield type of things. Maybe:
+>
+>    register!(NV_PDISP_VGA_WORKSPACE_BASE @ 0x00625f04 {
+>        s 3:0     cnt,
+>          7:4     flags, // implies unsigned - ?
+>        u 31:8    addr,
+>    });
+
+The expectation would be to use the `=3D>` syntax to convert the field to
+a signed type (similarly to how `status_valid` is turned into a `bool`
+in my example).
+
+> =20
+>> (here `status_valid` is infallibly converted to a bool for convenience
+>> and to remain compatible with the previous semantics)
+>>=20
+>> The field setter/getters are also simplified. If a field has no target
+>> type, then its setter expects any type that implements `Into` to the
+>> field's bounded integer type. Due to the many `From` implementations for
+>> primitive types, this means that most calls can be left unchanged. If
+>> the caller passes a value that is potentially larger than the field's
+>> capacity, it must use the `try_` variant of the setter, which returns an
+>> error if the value cannot be converted at runtime.
+>>=20
+>> For fields that use `=3D>` to convert to another type, both setter and
+>> getter are always infallible.
+>>=20
+>> For fields that use `?=3D>` to fallibly convert to another type, only th=
+e
+>> getter needs to be fallible as the setter always provide valid values by
+>> design.
+>
+> Can you share a couple examples? Not sure I understand this part,
+> especially how setters may not be fallible, and getters may fail.
+
+Imagine you have this enum:
+
+  enum GpioState {
+    Low =3D 0,
+    High =3D 1,
+    Floating =3D 2,
+  }
+
+and this field:
+
+  2:0 gpio_state ?=3D> GpioState,
+
+When you set it, you must pass an instance of `GpioState` as argument,
+which means that the value will always be valid. However, when you try
+to access the field, you have no guarantee at all that the value of the
+field won't be `3` - the IO space might be inaccessible, or the register
+value be forged arbitrarily. Thus the getter needs to return a
+`Result<GpioState>`.
+
+> =20
+>> Outside of the register macro, the biggest changes occur in `falcon.rs`,
+>> which defines many enums for fields - their conversion implementations
+>> need to be changed from the original primitive type of the field to the
+>> new corresponding bounded int type. Hopefully the TryFrom/Into derive
+>> macros [1] can take care of implementing these, but it will need to be
+>> adapted to support bounded integers... :/
+>>=20
+>> But overall, I am rather happy at how simple it was to convert the whole
+>> of nova-core to this.
+>>=20
+>> Note: This RFC uses nova-core's register!() macro for practical
+>> purposes, but the hope is to move this patch on top of the bitfield
+>> macro after it is split out [2].
+>>=20
+>> [1] https://lore.kernel.org/rust-for-linux/cover.1755235180.git.y.j3ms.n=
+@gmail.com/
+>> [2] https://lore.kernel.org/rust-for-linux/20251003154748.1687160-1-joel=
+agnelf@nvidia.com/
 >>=20
 >> Signed-off-by: Alexandre Courbot <acourbot@nvidia.com>
 >> ---
->>  rust/kernel/lib.rs |   1 +
->>  rust/kernel/num.rs | 499 ++++++++++++++++++++++++++++++++++++++++++++++=
-+++++++
->>  2 files changed, 500 insertions(+)
->>=20
->> diff --git a/rust/kernel/lib.rs b/rust/kernel/lib.rs
->> index fcffc3988a90..21c1f452ee6a 100644
->> --- a/rust/kernel/lib.rs
->> +++ b/rust/kernel/lib.rs
->> @@ -101,6 +101,7 @@
->>  pub mod mm;
->>  #[cfg(CONFIG_NET)]
->>  pub mod net;
->> +pub mod num;
->>  pub mod of;
->>  #[cfg(CONFIG_PM_OPP)]
->>  pub mod opp;
->> diff --git a/rust/kernel/num.rs b/rust/kernel/num.rs
->> new file mode 100644
->> index 000000000000..b2aad95ce51c
->> --- /dev/null
->> +++ b/rust/kernel/num.rs
->> @@ -0,0 +1,499 @@
->> +// SPDX-License-Identifier: GPL-2.0
->> +
->> +//! Numerical types for the kernel.
->> +
->> +use kernel::prelude::*;
->> +
->> +/// Integer type for which only the bits `0..NUM_BITS` are valid.
->> +///
->> +/// # Invariants
->> +///
->> +/// Stored values are represented with at most `NUM_BITS` bits.
->> +#[repr(transparent)]
->> +#[derive(Clone, Copy, Debug, Default, Hash)]
->> +pub struct BoundedInt<T, const NUM_BITS: u32>(T);
->> +
->> +/// Returns `true` if `$value` can be represented with at most `$NUM_BI=
-TS` on `$type`.
->> +macro_rules! is_in_bounds {
->> +    ($value:expr, $type:ty, $num_bits:expr) =3D> {{
->> +        let v =3D $value;
->> +        v & <$type as Boundable<NUM_BITS>>::MASK =3D=3D v
->> +    }};
->> +}
->> +
->> +/// Trait for primitive integer types that can be used with `BoundedInt=
-`.
->> +pub trait Boundable<const NUM_BITS: u32>
->> +where
->> +    Self: Sized + Copy + core::ops::BitAnd<Output =3D Self> + core::cmp=
-::PartialEq,
->> +    Self: TryInto<u8> + TryInto<u16> + TryInto<u32> + TryInto<u64>,
->> +{
->> +    /// Mask of the valid bits for this type.
->> +    const MASK: Self;
->> +
->> +    /// Returns `true` if `value` can be represented with at most `NUM_=
-BITS`.
->> +    ///
->> +    /// TODO: post-RFC: replace this with a left-shift followed by righ=
-t-shift operation. This will
->> +    /// allow us to handle signed values as well.
->> +    fn is_in_bounds(value: Self) -> bool {
->> +        is_in_bounds!(value, Self, NUM_BITS)
->> +    }
->> +}
->> +
->> +impl<const NUM_BITS: u32> Boundable<NUM_BITS> for u8 {
->> +    const MASK: u8 =3D crate::bits::genmask_u8(0..=3D(NUM_BITS - 1));
->> +}
->> +
->> +impl<const NUM_BITS: u32> Boundable<NUM_BITS> for u16 {
->> +    const MASK: u16 =3D crate::bits::genmask_u16(0..=3D(NUM_BITS - 1));
->> +}
->> +
->> +impl<const NUM_BITS: u32> Boundable<NUM_BITS> for u32 {
->> +    const MASK: u32 =3D crate::bits::genmask_u32(0..=3D(NUM_BITS - 1));
->> +}
->> +
->> +impl<const NUM_BITS: u32> Boundable<NUM_BITS> for u64 {
->> +    const MASK: u64 =3D crate::bits::genmask_u64(0..=3D(NUM_BITS - 1));
->> +}
->> +
->> +impl<T, const NUM_BITS: u32> BoundedInt<T, NUM_BITS>
->> +where
->> +    T: Boundable<NUM_BITS>,
->> +{
->> +    /// Checks that `value` is valid for this type at compile-time and =
-build a new value.
->> +    ///
->> +    /// This relies on [`build_assert!`] to perform validation at compi=
-le-time. If `value` cannot
->> +    /// be inferred to be in bounds at compile-time, use the fallible [=
-`Self::try_new`] instead.
->> +    ///
->> +    /// When possible, use one of the `new_const` methods instead of th=
-is method as it statically
->> +    /// validates `value` instead of relying on the compiler's optimiza=
-tions.
 >
-> This sounds like, users might use the less-optimal API first with the sam=
-e
-> build_assert issues we had with the IO accessors, since new() sounds very=
- obvious.
-> How about the following naming?
+> ...
 >
-> new::<VALUE>()        // Primary constructor for constants using const ge=
-nerics.
-> try_new(value)        // Keep as-is for fallible runtime
-> new_from_expr(value)  // For compile-time validated runtime values
+>>          regs::NV_PFALCON_FALCON_DMATRFBASE1::default()
+>> -            .set_base((dma_start >> 40) as u16)
+>> +            .try_set_base(dma_start >> 40)?
+>>              .write(bar, &E::ID);
 >
-> If new::<VALUE>() does not work for the user, the compiler will fail.
+> Does it mean that something like the following syntax is possible?
 >
-> Or, new_from_expr() could be from_value(), Ok with either naming or a bet=
-ter name.
+>         regs::NV_PFALCON_FALCON_DMATRFBASE1::default()
+>             .try_set_base1(base1 >> 40)?        // fail here
+>             .try_set_base2(base2 >> 40)?        // skip
+>             .write(bar, &E::ID) else { pr_err!(); return -EINVAL };
+>
+> This is my main concern: Rust is advertised a as runtime-safe language
+> (at lease safer than C), but current design isn't safe against one of
+> the most common errors: type overflow.
 
-Agreed, the preferred method should appear first. IIRC Alice also made a
-similar suggestion about v1 during the DRM sync, sorry for not picking
-it up.
+Not sure I understand what you mean, but if you are talking about fields
+overflow, this cannot happen with the current design. The non-fallible
+setter can only be invoked if the compiler can prove that the argument
+does fit withing the field. Otherwise, one has to use the fallible
+setter (as this chunk does, because `dma_start >> 40` can still spill
+over the capacity of `base`), which performs a runtime check and returns
+`EOVERFLOW` if the value didn't fit.
 
 >
->> +    ///
->> +    /// # Examples
->> +    ///
->> +    /// ```
->> +    /// use kernel::num::BoundedInt;
->> +    ///
->> +    /// # fn some_number() -> u32 { 0xffffffff }
->> +    ///
->> +    /// assert_eq!(BoundedInt::<u8, 1>::new(1).get(), 1);
->> +    /// assert_eq!(BoundedInt::<u16, 8>::new(0xff).get(), 0xff);
->> +    ///
->> +    /// // Triggers a build error as `0x1ff` doesn't fit into 8 bits.
->> +    /// // assert_eq!(BoundedInt::<u32, 8>::new(0x1ff).get(), 0x1ff);
->> +    ///
->> +    /// let v: u32 =3D some_number();
->> +    /// // Triggers a build error as `v` cannot be asserted to fit with=
-in 4 bits...
->> +    /// // let _ =3D BoundedInt::<u32, 4>::new(v);
->> +    /// // ... but this works as the compiler can assert the range from=
- the mask.
->> +    /// let _ =3D BoundedInt::<u32, 4>::new(v & 0xf);
->> +    /// ```
->> +    pub fn new(value: T) -> Self {
->> +        crate::build_assert!(
->> +            T::is_in_bounds(value),
->> +            "Provided parameter is larger than maximal supported value"
->> +        );
->> +
->> +        Self(value)
->> +    }
->> +
->> +    /// Attempts to convert `value` into a value bounded by `NUM_BITS`.
->> +    ///
->> +    /// # Examples
->> +    ///
->> +    /// ```
->> +    /// use kernel::num::BoundedInt;
->> +    ///
->> +    /// assert_eq!(BoundedInt::<u8, 1>::try_new(1).map(|v| v.get()), Ok=
-(1));
->> +    /// assert_eq!(BoundedInt::<u16, 8>::try_new(0xff).map(|v| v.get())=
-, Ok(0xff));
->> +    ///
->> +    /// // `0x1ff` doesn't fit into 8 bits.
->> +    /// assert_eq!(BoundedInt::<u32, 8>::try_new(0x1ff), Err(EOVERFLOW)=
-);
->> +    /// ```
->> +    pub fn try_new(value: T) -> Result<Self> {
->> +        if !T::is_in_bounds(value) {
->> +            Err(EOVERFLOW)
->> +        } else {
->> +            Ok(Self(value))
->> +        }
->> +    }
->> +
->> +    /// Returns the contained value as a primitive type.
->> +    ///
->> +    /// # Examples
->> +    ///
->> +    /// ```
->> +    /// use kernel::num::BoundedInt;
->> +    ///
->> +    /// let v =3D BoundedInt::<u32, 4>::new_const::<7>();
->> +    /// assert_eq!(v.get(), 7u32);
->> +    /// ```
->> +    pub fn get(self) -> T {
->> +        if !T::is_in_bounds(self.0) {
->> +            // SAFETY: Per the invariants, `self.0` cannot have bits se=
-t outside of `MASK`, so
->> +            // this block will
->> +            // never be reached.
->> +            unsafe { core::hint::unreachable_unchecked() }
->> +        }
+> If your syntax above allows to handle errors in .try_set() path this way
+> or another, I think the rest is manageable.=20
 >
-> Does this if block help the compiler generate better code? I wonder if co=
-de
-> gen could be checked to confirm the rationale.
+> As a side note: it's a huge pain in C to grep for functions that
+> defined by using a macro. Here you do a similar thing. One can't
+> easily grep the 'try_set_base' implementation, and would have to
+> make a not so pleasant detour to the low-level internals. Maybe
+> switch it to:
+>        =20
+>         regs::NV_PFALCON_FALCON_DMATRFBASE1::default()
+>             .try_set(base, dma_start >> 40)?
+>             .write(bar, &E::ID);
 
-Benno suggested that it would on a different patch:
+`base` here is passed by value, what type would it be? I don't think it
+is easily doable without jumping through many hoops.
 
-https://lore.kernel.org/rust-for-linux/DBL1ZGZCSJF3.29HNS9BSN89C6@kernel.or=
-g/
-
-OTOH as shown in patch 3/3, this doesn't exempt us from handling
-impossible values when using this in a match expression...
-
->
->> +        self.0
->> +    }
->> +
->> +    /// Increase the number of bits usable for `self`.
->> +    ///
->> +    /// This operation cannot fail.
->> +    ///
->> +    /// # Examples
->> +    ///
->> +    /// ```
->> +    /// use kernel::num::BoundedInt;
->> +    ///
->> +    /// let v =3D BoundedInt::<u32, 4>::new_const::<7>();
->> +    /// let larger_v =3D v.enlarge::<12>();
->> +    /// // The contained values are equal even though `larger_v` has a =
-bigger capacity.
->> +    /// assert_eq!(larger_v, v);
->> +    /// ```
->> +    pub const fn enlarge<const NEW_NUM_BITS: u32>(self) -> BoundedInt<T=
-, NEW_NUM_BITS>
->> +    where
->> +        T: Boundable<NEW_NUM_BITS>,
->> +        T: Copy,
->
-> Boundable already implies copy so T: Copy is redundant.
-
-Thanks. I need to do a thorough review of all the contraints as I've
-changed them quite a bit as the implementation matured.
-
->
->> +    {
->> +        build_assert!(NEW_NUM_BITS >=3D NUM_BITS);
->> +
->> +        // INVARIANT: the value did fit within `NUM_BITS`, so it will a=
-ll the more fit within
->> +        // `NEW_NUM_BITS` which is larger.
->> +        BoundedInt(self.0)
->> +    }
->> +
->> +    /// Shrink the number of bits usable for `self`.
->> +    ///
->> +    /// Returns `EOVERFLOW` if the value of `self` cannot be represente=
-d within `NEW_NUM_BITS`.
->> +    ///
->> +    /// # Examples
->> +    ///
->> +    /// ```
->> +    /// use kernel::num::BoundedInt;
->> +    ///
->> +    /// let v =3D BoundedInt::<u32, 12>::new_const::<7>();
->> +    /// let smaller_v =3D v.shrink::<4>()?;
->> +    /// // The contained values are equal even though `smaller_v` has a=
- smaller capacity.
->> +    /// assert_eq!(smaller_v, v);
->> +    ///
->> +    /// # Ok::<(), Error>(())
->> +    /// ```
->> +    pub fn shrink<const NEW_NUM_BITS: u32>(self) -> Result<BoundedInt<T=
-, NEW_NUM_BITS>>
->> +    where
->> +        T: Boundable<NEW_NUM_BITS>,
->> +        T: Copy,
->
-> Here too.
->
-> [...]
->> +impl_const_new!(u8 u16 u32 u64);
->> +
->> +/// Declares a new `$trait` and implements it for all bounded types rep=
-resented using `$num_bits`.
->> +///
->> +/// This is used to declare properties as traits that we can use for la=
-ter implementations.
->> +macro_rules! impl_size_rule {
->> +    ($trait:ident, $($num_bits:literal)*) =3D> {
->> +        trait $trait {}
->> +
->> +        $(
->> +        impl<T> $trait for BoundedInt<T, $num_bits> where T: Boundable<=
-$num_bits> {}
->> +        )*
->> +    };
->> +}
->> +
->> +// Bounds that are larger than a `u64`.
->> +impl_size_rule!(LargerThanU64, 64);
->> +
->> +// Bounds that are larger than a `u32`.
->> +impl_size_rule!(LargerThanU32,
->> +    32 33 34 35 36 37 38 39
->
-> If num_bits =3D=3D 32 (number of bits), how could BoundedInt<T, 32> a
-> LargerThanU32? It should be AtleastU32 or something.
->
-> Or the above list should start from 33. Only a >=3D 33-bit wide integer c=
-an be
-> LargerThanU32.
-
-The name is a bit ambiguous indeed. An accurate one would be
-`LargerOrEqualThanU32`, but `AtLeastU32` should also work.
+Using LSP with Rust actually makes it very easy to jump to either the
+definition of the register, or of the `try_set` block in the macro -=20
+I've done this many times. LSP is pretty much a requirement to code
+efficiently in Rust, so I think it is reasonable to rely on it here.
