@@ -2,79 +2,79 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id E4154BD6A21
-	for <lists+nouveau@lfdr.de>; Tue, 14 Oct 2025 00:37:42 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id C2DD9BD6A30
+	for <lists+nouveau@lfdr.de>; Tue, 14 Oct 2025 00:38:12 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id C1AD710E0D3;
-	Mon, 13 Oct 2025 22:37:40 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 4A31310E13A;
+	Mon, 13 Oct 2025 22:38:11 +0000 (UTC)
 Authentication-Results: gabe.freedesktop.org;
-	dkim=pass (2048-bit key; unprotected) header.d=rocketmail.com header.i=@rocketmail.com header.b="E57shRi0";
+	dkim=pass (2048-bit key; unprotected) header.d=rocketmail.com header.i=@rocketmail.com header.b="CGH/TjL+";
 	dkim-atps=neutral
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from sonic310-25.consmr.mail.ne1.yahoo.com
- (sonic310-25.consmr.mail.ne1.yahoo.com [66.163.186.206])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 5C78210E0D3
- for <nouveau@lists.freedesktop.org>; Mon, 13 Oct 2025 22:37:39 +0000 (UTC)
+Received: from sonic317-33.consmr.mail.ne1.yahoo.com
+ (sonic317-33.consmr.mail.ne1.yahoo.com [66.163.184.44])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id C5A9510E13A
+ for <nouveau@lists.freedesktop.org>; Mon, 13 Oct 2025 22:38:09 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=rocketmail.com; s=s2048;
- t=1760395058; bh=0HfDf/Sl+8lEc6G4W7nYh/m62hACpXOoW+uGVV25yXg=;
- h=From:To:Cc:Subject:Date:References:From:Subject:Reply-To;
- b=E57shRi0Kxe+XxB9ZnberEIWvd7h2XBMxSkfV4QAHItkB/HgUN2jjkYXvfeUFHKJjuPWE0HMRS+nt+LZs73kl2UbVh4vPIDo0VkLTJ9hzZd19vz0nMeIawrVIZgJJuV3yr0CHZvpL6XhMcR+NJzNSzVyhPb7zWiS7Mka5UvR0KRZVqWRDVPuSv71QB5ozvxAJzWsuBQRdh+nS6x76SAHExJ7MvSzVitTqDfAnXjRP0ejXEjyd7YRrhkhGSERVrIw06ypRD2zNoR9cxnKR0Cyn77X91zjqOMf/XT8ycvaVAkp1kBSO7MI+Q6MuTcF5EFCzGHuhxORa4Q7MaILWkNRgQ==
+ t=1760395089; bh=EDQkZ2vPmN5TwiGC3gNlshu2mu5Z6liBtUJK+1g45a8=;
+ h=From:To:Cc:Subject:Date:In-Reply-To:References:From:Subject:Reply-To;
+ b=CGH/TjL+myBYj5N30LY22lCmm1KtXs+QAT0OnvmBP5KOQ0U7p7/LeZXtgKVq5EivNCldyS6veF1I0u73aeEZlyucH5mRKHMo+iDcpcFWq6S3vuBHums5Px6zLVLO18H8cIAnNQlolS9HHRxk+nTzUNST92xHK2gOZw/OIYiFhso6eoylgVWTq0er2UCi6VfLXm7h6IQSTRGug7MbODq64tOWnXW7CgCKB0cL+xMLo8pMJOr/fNvdp9MPhSZMyoLp6CNxHxpkFE1aiWBM6HMlTvTty8p4w2QjHJoPZXVBpbgUM+67Afq0NiA2rMEkjxxSDaQ1ieeNB8TkxzwasUvTSg==
 X-SONIC-DKIM-SIGN: v=1; a=rsa-sha256; c=relaxed/relaxed; d=yahoo.com; s=s2048;
- t=1760395058; bh=2dH7HhGz1aAli47ES/XYR1W2N9W5JKBA0vM1JWzP+gs=;
+ t=1760395089; bh=/8Awfy1fvbYB248BhEzMF2riPms8rJz+Zle9CORoKnT=;
  h=X-Sonic-MF:From:To:Subject:Date:From:Subject;
- b=XGMyvZCZCBM8z+6yT0Ww2LQ3Q0mKzcEnm+yCNn2X1LnAzu2Js+oCed4C6C3T+yiDxKvvG/DGqScpj1c2bRC6b2eW7Zl5s7I+PIgyeTwBEbpoFnqG0D+tquULRHjsTpjoD/TZDMXSEVac2/3pIdFvioU8dY/uDdpCSngVk8psVYPbkCoA1XAVIR2urZWEAQ27BqdLZRhmhYTPZnMEnguwduK1430cT83JvDhwmt3P9m9d1BEmp63F4oIlWqO1gZEVGKA3qRR25GHpScTQO/gGJrZ59ptXdOmEfR0cW5CWbCtuQYGbSEuIburjSFGJHJPrsQLhWf7gpxGVo+1oXD7thw==
-X-YMail-OSG: FDboi5wVM1lH4GZf3x5zalqe9wy2rs6JVxngdZF4QCsd..C3g3S26SbC0tkgmNB
- T69VJY33eVWHNaY8PA6JvlodDxQgMh8Uq4KkV7BoJwpp6LMxhABv2OECYAL70ab8FjDDroGxlQtH
- a0ERmKT4rIcLST54d60uylA_wO0nHt0B.q9Fn5MdGoNXIyCk1Q1Ym5GvMjvRrPvOmeCcNO5T5nlA
- 5QuNbqmR3kpKDRZFP4OsYALEweTa1T9cpOpyFSBPZkn17gMet_zODBiB1WCc3bfwN7KKGg8jX7Rd
- k9x0MBx9nPTx2W.IHGsa0NzOgffXoOk3rPKjNbvgaW49vbOLuL3N.IL8JIJpXtR29H7YFLfTZ91o
- ga_fqZ08BDtQnXxHhtpkpq32Gjx0nsi.O6MLZteteKltU7Cycq0OcnmcnZ.bwqJvjLiNqzzikUGB
- HsHjFCLTxoLeQsaPhXVMU5qEeKpINkx8pa7nhWEM5S30ASnE8cPkN3IhLOlLvYL74mZPJqVFoSW.
- wYxcDBoYgO4.qbx5zRZ4_0YrgDwpoEdwQpzsl6L5PAnEY4BiRUH7znN3zE3W5tEwRRgFzx6FiFF6
- 4CtcVdi6Sy2.uZSdmiYWuvGNAOyOkye2Wn2pDstxNTZqppI1o4Jv8jNmGnQBFLYzXfzDpbgNTdrT
- ondOomat_q6_QagWu8vAbEq4rDO89_61Ixt8nxIXeBs0onzDCo_pz9sfXrPFieb0Q0jQNALT1A04
- g3rKcSxzZyoXAL.zZsgpdWF._ajN9TlmUtlyD3SNfOLCYIRSa2AWD9Tbp5Icrvz7yUcxtTw6YxJq
- wPEvo8IMeQ2lyeNb81_a8OLhtBWakZVXms06u3qNZLWwzXheYrs1vtHg8ucGCHJYcwX7Xg_nUnzY
- 6oBHJJpdnt2o.ppKo26..dDwchDuBj5D0gZq2F4Hr7r0CTchM_SzPcc7.B_IVhBn2c3g6SpI7P0T
- mXyPXehZhuVoovPzK6YrhaODfwjaAeqlouIhq9Z2_LjgSQHuOXC0NmfpSaVNCiDoNpHkLunY94fX
- .5ENpTU_x4_KFR.Z7nTF5HVm54SA.GKmDvvvzqOD50uH_7EGcoq11Y2dH36JvL0w0wlBzlpEqhOo
- nrM3HmfoPavcf9riuvAOX5CWkVgIbaos4d7W61.yj1Z8URfjpkgJo2NfCRmQ51hCXWxzCOOtCxyO
- K8PFcbM3Ur.T3N0nv0VLNulLBjuWxBSmaKnAxDgrUsmSDKDTmCAWYLUTRnjd7u0Wm_dXNCetEFlp
- xIzXaMjPb3BDNSNNSKUyuh7Vk5mGf2Ih7.2iioNlU8y66Gy9P5NFMxPxPxYYA00PrC0ydWQ768GU
- KSqegeZd7Y.aAI4JfIRO8Ohs9T0dlNyeoc7NunBzKlDZXd6qSeoGND3IA2.UEdOxCLvmFvQJ4.lg
- A1kg9v5n5RrRR2mRY.Iieoo79eRovoBoZ_5JcVSU2lWccCTWf.a6byu0kPKKQAFTLUPBkqP1hOPI
- _aTAr7Uo88vOrQVisvR2rX3PZg8tBV.wORooZxw2235f9Opu3qu61crFRZikE73OmViTfmW4aR.L
- e6Nf4_sbzPR7mBnbWcsm.h.rOD8gbVbbWG6X4cWTPwrnNvGclLLKBocLVSbc87ns6djpgiqTc1Z.
- A42cE.rZNfjpxj4sKwyzV5ztkxwr3u3K.z9CcD0MkL8TN8eLIglbdYSzZe2DSQZ00fhYJ4914WX3
- yeoY2WU_3Nq6im1qQhAQjMaYxCc3bDnzDonpF7dcQysGdMLCGTv5H4ir_X88d9pmdZ2S9nebfmg0
- NQVNo75JJ4CbjzUnCX927qD18hwCdmCUG97ViCildfTmWK8S5lPpFjP_lU7i1_SX6H29o_t9xv5d
- FrdBVgT7h8KsBmTwiItE4EReR.r774eICl9ulJZiM1jjF4m7d5UeBUmwLLqBArsYdRU0zqg.6VqZ
- Hi7wuuguMjk3Jkwoi3qRN2rQtChMolFrlcMzTcK3X1lZGYtf7vxrm12HiXp7eLUgLGm4.Yl4fJZU
- lZSVgIpsajxY7BtNsaJQs0b1W64M6OTA5_q802oPK_AqZ_mLh1n5LqdDIoGEOFsCBE9l3R9jdZz5
- h4tsssoAvwHTBH7.geS1uwsDF8cUTXF.IaHIJuZ3rUsZRBA5aTsTmi_Cd9UyAxJACUXqyP_lmwg4
- At0FMvc_T2GGGGOO3TEj7VWsvC.YyauPd7mTiZemZGbmnl3xPH_uTc_lv6STPn.RptNqUiw_u4.K
- tnGSmO7IAHic9nFktITmlsKsy_5KzzDNmTOlkCZJVD6tHFTUT2czCJ.OwVwBhellL8l742966BJ5
- lcLdivsa3VhWpkZdyisnn3IhbFTNX4CYXSit2ba.wSBY-
+ b=VgirLxqVZ+7g3HrtjelPhlVU6upewT9h8ii5/H+lnqjA7a+R8c5NJgbRDeuYBECpWrW0GEIfin/M0QVCfu551dROZ6BlaNH5PZhjirBaf1Gj3GrWCviQYGC/rp2GC1jEAOh59mOhhC/+qYO/L+/rvEQ+okpBw7MWdI/5kB4Q2T78dEEymcN4073zfvD3lpB8EWh3e5HLV6QaGYgnkFwlMDw13MBpS5cA64lU73k8TnUEgAozq7RNPMBu0rJgygxbQF5RQvfDUswJ0yaXqNkO85/1kO3YkHZWkpawWNioaJ5euEnp1BBo/ClZTqjmyP7JucMbHuE/1g/mmly1UWjuQQ==
+X-YMail-OSG: 3wdKmrEVM1mhvFI4vErvEjqWjdfuHpoL3IgI3KpcRHBjetrlrrxLbsWJ_1Cv7_a
+ nzdm1Qwz9xkNhuvygXGHpXsaFfLb4_.BGDXPCrID1Y1VzHdIl_Ms21nnEz2ihJ40h_IG0HArgHhL
+ AgMUxAhafLYsoK8cWpBHPD.g32R_Ykp5zYVrkMCb5tXCqdbk9Tc9BZQAS5XonAxHaHvIwhUQaqjs
+ bUN52qWDXvOISucnmq81ZGGE0aTQtxQSRwSa1PRAiKMPf7xxMqwdOXagzT2ksBHuI5XhR8LEaIr9
+ h0.UsXRvSCpBE4wdOkVTtPUzSdH4ywlLleCmfbnFB4oFFCY_9nT7n_nLXGAK_Hc3wd.QM5SlDJbL
+ zRbnNM3jPCeYwO0qstOePBFeGHEr1vsiESzRxXll5ywIbfSoCILLAyCjuTDEctWo24c54d9nETH9
+ 4GbWfgR_Jep4ASJep5ed1d5B8RCgyOn26N2dd5ivjzG5Q8P_BI45FtR.bv7_d0F52EqL1SRxCRdP
+ HJbJNKienrxny_UM4W5bMxX5vGxvfNLdSdgloYG3qJlrfyKg0PdEl4aI1mSGoUon8S_h46uVWz71
+ 2LTqdb5xhZ8QaXewaJ1Yn5nuIxQEOfMe.QtLHGgT5MdGRN7p0SrmiHFrdckCpUbda9U05Z17_T8f
+ COCecBbO7YxQl.KRqgLKU.W2iqx7SKvN0vQn979jJAyeR7EQYgQ3zvhLu16xYsJaSs58qCgIOh1M
+ 6FdCAhA_Mdt7Kn8QgdKXuNHFHuq7cet20pko_fTLVwlyavyLO.OlF2vhM1wGc1PSjc39dxlGaLoK
+ fug1W5HUrPbZ.vez09kPY8TyRSJMSpq4oEld.DD1y0vnrmndxd27G0.RACO.xxlY5bsIf.JI_7eO
+ VC4pgt_XIsVIlRXZy9j0Rq__r.VFqnmYtUIckRXV60RROqDufVwOyjK306y4qKizvjU5XbX3cqWZ
+ XNbFZwPmezIkgZfLtlUBDwbHOYSjIQJ7DPtjp_WQmHCY1JNL2QC.zmfJ3OdURlMACT0ljLLylznp
+ .KqXv.E5bY_AKI2ajEtNBqqUqO1BVuRFSAU1Gz49cttZG.cpuoKEW88CGhZn9B7RHEzsfgNiEn4X
+ eOafinCCSpl0TzP9iIiw1AFxnMoZeo1SbfS3YKSo54VlDAtue0isUaartIBASQHd8vq2Nr2PU5gT
+ b.kFglr5jIPP_gSsLhVadv_bfiE2ap4vCNNvWiA4I7VwL2Uo8fy3RgWQOxIQe4zYMWjnvTdAHubC
+ bWBXfpefpmHQzeLeK0apjnp.KaIIDkAHclMrqzR5zYNdLMT7MYIghtXytysUiYmmkskIGM53s6NB
+ pu5BqoW5MKfzM7bbQdWHjGfn7PPAqEv049mpDwDLklrs3ZqnGxRL7OWCWoCmM5r8BXEeljfLIPKJ
+ AKrXu4qc6UgErEed0lZ_4R6YQl0VBC3fZ11v6wbfoqxDyT8gHAXnx1xSd6KCdpdzl_a85j6TE7b4
+ HXhln93fEjc7NpoMlK651ladZxkimpZUraiJ3wfshSIBP1JZcugGue1.k0tsEu9BBJnDpV5QGF1h
+ _9g65Wn0R7h00lPeSFNrkpRwuFLMp_pzAGwQuf0nQ34Vz9Acw1QfG4wk1MS1N0HeMlTmMXofXdtD
+ d7mzgZM8om2jk_yfXqsdf2L9JS2GwAjRnOZ7R8Pey6L7KOTFV__9ybJGwMk9UurFtswvUi.8Juxn
+ sweyzXLkis2cp4E2FugVBh9gsPtXKH4bMtStlIbdD7aT8tacs.7AAF8DbhuRL8W6AdH8ovrMugsf
+ 2NUKU.VPvPvTNUCHMR8kzrlGqpo7ezt4v8ocV1tD.zLZa88TX40pquTSZwf2e0nl2o2FzrkR2SvD
+ U4UO5aQ_mReZuVQvKCkBe9skuATNQSqQ3RgMU5PsY.ZvZfiVJso3fJrw2GFYGPTjiO_c7XLxOeIQ
+ zdYe7MF6zufIAqNFsSv0LvGA6KHqjAfVwmcFc.GRbgZJa6.V2q4fjlxfVkcvn5KU4ayKr3y0s8Qy
+ YhuJSPVEbGgBKFUg.sKecOUC49VoT0xBpxuO3XtKwo_UHDVPgayQQRVetfwjOnPHiUtCiJSTTkuF
+ HIhqH7TKDNLHykxtEjPNSR3czJPUOcrMqh8YDmLbhiTnArnwhh3MG9UteGMFRPnfC3CVUAcRgjKX
+ dJoKEcQfocQgiYVUn_6F.9moLLr_a2DJdjJ6eTEOcUQnGWA_dj3wAiXZWYiy42KHj_phyl8XW6vO
+ phT6i00v.bxDrZu58VfLWBSNjFzTT1a4zgVc2VTfxMHdZV8nU58FDwMfmenV1xH14bC4NPibsf8Q
+ FGINbeBDEbwdXU05kEnyeFrmmDGf4x.kPrjKFksfNea9y
 X-Sonic-MF: <lxrmrz732@rocketmail.com>
-X-Sonic-ID: 0392e208-b364-42d8-8965-5b33ecd53d07
+X-Sonic-ID: 9a2f69fa-5ed3-4c11-b2f2-ca9b2583c757
 Received: from sonic.gate.mail.ne1.yahoo.com by
- sonic310.consmr.mail.ne1.yahoo.com with HTTP; Mon, 13 Oct 2025 22:37:38 +0000
+ sonic317.consmr.mail.ne1.yahoo.com with HTTP; Mon, 13 Oct 2025 22:38:09 +0000
 Received: by hermes--production-bf1-565465579b-69p8l (Yahoo Inc. Hermes SMTP
  Server) with ESMTPA ID ee1871ff4eb270e645c795535edeed4d; 
- Mon, 13 Oct 2025 22:37:36 +0000 (UTC)
+ Mon, 13 Oct 2025 22:38:03 +0000 (UTC)
 From: =?UTF-8?q?Alex=20Ram=C3=ADrez?= <lxrmrz732@rocketmail.com>
 To: nouveau@lists.freedesktop.org
 Cc: =?UTF-8?q?Alex=20Ram=C3=ADrez?= <lxrmrz732@rocketmail.com>
-Subject: [PATCH v2 0/2] drm/nouveau: add and implement missing DCB connector
- values
-Date: Mon, 13 Oct 2025 18:18:11 -0400
-Message-ID: <20251013222424.12613-3-lxrmrz732@rocketmail.com>
+Subject: [PATCH v2 1/2] drm/nouveau: add missing DCB connector types
+Date: Mon, 13 Oct 2025 18:18:13 -0400
+Message-ID: <20251013222424.12613-5-lxrmrz732@rocketmail.com>
 X-Mailer: git-send-email 2.51.0
+In-Reply-To: <20251013222424.12613-3-lxrmrz732@rocketmail.com>
+References: <20251013222424.12613-3-lxrmrz732@rocketmail.com>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
-References: <20251013222424.12613-3-lxrmrz732.ref@rocketmail.com>
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -89,36 +89,116 @@ List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-uconn.c's handling of display connectors was refactored for Linux v6.5,
-causing a regression that issues a warning on boot for GeForce 8600m GT (MacBookPro4,1)
-and likely other legacy GPUs.
+* Add missing DCB connectors in conn.h as per the NVIDIA DCB specification.
 
-Several connector types used to be implicitly supported before v6.5 by a branch in
-[drm/nouveau/nouveau_connector.c] line 1353 that determined connector types using
-encoder bits, but they have since been left entirely unhandled after the refactor due to
-the aforementioned kernel warning causing that path to never be taken in my testing:
+A lot of connector logic was rewritten for Linux v6.5; some display connector types
+went unaccounted-for which caused kernel warnings on devices with the now-unsupported
+DCB connectors. This patch adds all of the DCB connectors as defined by NVIDIA to the
+dcb_connector_type enum to bring back support for these connectors to the new logic.
 
-nv_connector->type is generally 0x0 (DCB_CONNECTOR_VGA) in the case of an unknown
-connector because the WARN_ON macro in the nvkm_uconn_new function in
-[drm/nouveau/nvkm/engine/disp/uconn.c] causes the function to bail out before
-a suitable connector value is chosen; it seems like the value is left undefined.
-
-This patch set implements the missing DCB connector values per NVIDIA spec to fix the
-root cause of the warning and changes the WARN_ON macro in uconn.c to a printk message
-to more gracefully handle unknown connector types.
-
-This version includes better commit messages. My original submission was partially
-blocked by a spam filter.
-
-Alex Ramírez (2):
-  drm/nouveau: add missing DCB connector types
-  drm/nouveau: implement missing DCB connector types; gracefully handle
-    unknown connectors
-
+Fixes: 8b7d92cad953 ("drm/nouveau/kms/nv50-: create connectors based on nvkm info")
+Link: https://download.nvidia.com/open-gpu-doc/DCB/1/DCB-4.0-Specification.html
+Signed-off-by: Alex Ramírez <lxrmrz732@rocketmail.com>
+---
  .../nouveau/include/nvkm/subdev/bios/conn.h   | 84 ++++++++++++++-----
- .../gpu/drm/nouveau/nvkm/engine/disp/uconn.c  | 73 +++++++++++-----
- 2 files changed, 116 insertions(+), 41 deletions(-)
+ 1 file changed, 63 insertions(+), 21 deletions(-)
 
+diff --git a/drivers/gpu/drm/nouveau/include/nvkm/subdev/bios/conn.h b/drivers/gpu/drm/nouveau/include/nvkm/subdev/bios/conn.h
+index d1beaad0c82b..538306522d9a 100644
+--- a/drivers/gpu/drm/nouveau/include/nvkm/subdev/bios/conn.h
++++ b/drivers/gpu/drm/nouveau/include/nvkm/subdev/bios/conn.h
+@@ -1,28 +1,70 @@
+ /* SPDX-License-Identifier: MIT */
+ #ifndef __NVBIOS_CONN_H__
+ #define __NVBIOS_CONN_H__
++
+ enum dcb_connector_type {
+-	DCB_CONNECTOR_VGA = 0x00,
+-	DCB_CONNECTOR_TV_0 = 0x10,
+-	DCB_CONNECTOR_TV_1 = 0x11,
+-	DCB_CONNECTOR_TV_3 = 0x13,
+-	DCB_CONNECTOR_DVI_I = 0x30,
+-	DCB_CONNECTOR_DVI_D = 0x31,
+-	DCB_CONNECTOR_DMS59_0 = 0x38,
+-	DCB_CONNECTOR_DMS59_1 = 0x39,
+-	DCB_CONNECTOR_LVDS = 0x40,
+-	DCB_CONNECTOR_LVDS_SPWG = 0x41,
+-	DCB_CONNECTOR_DP = 0x46,
+-	DCB_CONNECTOR_eDP = 0x47,
+-	DCB_CONNECTOR_mDP = 0x48,
+-	DCB_CONNECTOR_HDMI_0 = 0x60,
+-	DCB_CONNECTOR_HDMI_1 = 0x61,
+-	DCB_CONNECTOR_HDMI_C = 0x63,
+-	DCB_CONNECTOR_DMS59_DP0 = 0x64,
+-	DCB_CONNECTOR_DMS59_DP1 = 0x65,
+-	DCB_CONNECTOR_WFD	= 0x70,
+-	DCB_CONNECTOR_USB_C = 0x71,
+-	DCB_CONNECTOR_NONE = 0xff
++	/* Analog outputs */
++	DCB_CONNECTOR_VGA = 0x00,		// VGA 15-pin connector
++	DCB_CONNECTOR_DVI_A = 0x01,		// DVI-A
++	DCB_CONNECTOR_POD_VGA = 0x02,		// Pod - VGA 15-pin connector
++	DCB_CONNECTOR_TV_0 = 0x10,		// TV - Composite Out
++	DCB_CONNECTOR_TV_1 = 0x11,		// TV - S-Video Out
++	DCB_CONNECTOR_TV_2 = 0x12,		// TV - S-Video Breakout - Composite
++	DCB_CONNECTOR_TV_3 = 0x13,		// HDTV Component - YPrPb
++	DCB_CONNECTOR_TV_SCART = 0x14,		// TV - SCART Connector
++	DCB_CONNECTOR_TV_SCART_D = 0x16,	// TV - Composite SCART over D-connector
++	DCB_CONNECTOR_TV_DTERM = 0x17,		// HDTV - D-connector (EIAJ4120)
++	DCB_CONNECTOR_POD_TV_3 = 0x18,		// Pod - HDTV - YPrPb
++	DCB_CONNECTOR_POD_TV_1 = 0x19,		// Pod - S-Video
++	DCB_CONNECTOR_POD_TV_0 = 0x1a,		// Pod - Composite
++
++	/* DVI digital outputs */
++	DCB_CONNECTOR_DVI_I_TV_1 = 0x20,	// DVI-I-TV-S-Video
++	DCB_CONNECTOR_DVI_I_TV_0 = 0x21,	// DVI-I-TV-Composite
++	DCB_CONNECTOR_DVI_I_TV_2 = 0x22,	// DVI-I-TV-S-Video Breakout-Composite
++	DCB_CONNECTOR_DVI_I = 0x30,		// DVI-I
++	DCB_CONNECTOR_DVI_D = 0x31,		// DVI-D
++	DCB_CONNECTOR_DVI_ADC = 0x32,		// Apple Display Connector (ADC)
++	DCB_CONNECTOR_DMS59_0 = 0x38,		// LFH-DVI-I-1
++	DCB_CONNECTOR_DMS59_1 = 0x39,		// LFH-DVI-I-2
++	DCB_CONNECTOR_BNC = 0x3c,		// BNC Connector [for SDI?]
++
++	/* LVDS / TMDS digital outputs */
++	DCB_CONNECTOR_LVDS = 0x40,		// LVDS-SPWG-Attached [is this name correct?]
++	DCB_CONNECTOR_LVDS_SPWG = 0x41,		// LVDS-OEM-Attached (non-removable)
++	DCB_CONNECTOR_LVDS_REM = 0x42,		// LVDS-SPWG-Detached [following naming above]
++	DCB_CONNECTOR_LVDS_SPWG_REM = 0x43,	// LVDS-OEM-Detached (removable)
++	DCB_CONNECTOR_TMDS = 0x45,		// TMDS-OEM-Attached (non-removable)
++
++	/* DP digital outputs */
++	DCB_CONNECTOR_DP = 0x46,		// DisplayPort External Connector
++	DCB_CONNECTOR_eDP = 0x47,		// DisplayPort Internal Connector
++	DCB_CONNECTOR_mDP = 0x48,		// DisplayPort (Mini) External Connector
++
++	/* Dock outputs (not used) */
++	DCB_CONNECTOR_DOCK_VGA_0 = 0x50,	// VGA 15-pin if not docked
++	DCB_CONNECTOR_DOCK_VGA_1 = 0x51,	// VGA 15-pin if docked
++	DCB_CONNECTOR_DOCK_DVI_I_0 = 0x52,	// DVI-I if not docked
++	DCB_CONNECTOR_DOCK_DVI_I_1 = 0x53,	// DVI-I if docked
++	DCB_CONNECTOR_DOCK_DVI_D_0 = 0x54,	// DVI-D if not docked
++	DCB_CONNECTOR_DOCK_DVI_D_1 = 0x55,	// DVI-D if docked
++	DCB_CONNECTOR_DOCK_DP_0 = 0x56,		// DisplayPort if not docked
++	DCB_CONNECTOR_DOCK_DP_1 = 0x57,		// DisplayPort if docked
++	DCB_CONNECTOR_DOCK_mDP_0 = 0x58,	// DisplayPort (Mini) if not docked
++	DCB_CONNECTOR_DOCK_mDP_1 = 0x59,	// DisplayPort (Mini) if docked
++
++	/* HDMI? digital outputs */
++	DCB_CONNECTOR_HDMI_0 = 0x60,		// 3-Pin DIN Stereo Connector [for real?]
++	DCB_CONNECTOR_HDMI_1 = 0x61,		// HDMI-A connector
++	DCB_CONNECTOR_SPDIF = 0x62,		// Audio S/PDIF connector
++	DCB_CONNECTOR_HDMI_C = 0x63,		// HDMI-C (Mini) connector
++
++	/* Misc. digital outputs */
++	DCB_CONNECTOR_DMS59_DP0 = 0x64,		// LFH-DP-1
++	DCB_CONNECTOR_DMS59_DP1 = 0x65,		// LFH-DP-2
++	DCB_CONNECTOR_WFD = 0x70,		// Virtual connector for Wifi Display (WFD)
++	DCB_CONNECTOR_USB_C = 0x71,		// [DP over USB-C; not present in docs]
++	DCB_CONNECTOR_NONE = 0xff		// Skip Entry
+ };
+ 
+ struct nvbios_connT {
 -- 
 2.51.0
 
