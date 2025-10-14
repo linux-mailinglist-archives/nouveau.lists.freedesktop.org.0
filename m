@@ -2,80 +2,165 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id B716CBD6A33
-	for <lists+nouveau@lfdr.de>; Tue, 14 Oct 2025 00:38:18 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 4ED91BD7931
+	for <lists+nouveau@lfdr.de>; Tue, 14 Oct 2025 08:35:34 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 4773410E502;
-	Mon, 13 Oct 2025 22:38:17 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id DAA1210E542;
+	Tue, 14 Oct 2025 06:35:31 +0000 (UTC)
 Authentication-Results: gabe.freedesktop.org;
-	dkim=pass (2048-bit key; unprotected) header.d=rocketmail.com header.i=@rocketmail.com header.b="Yl+4VohK";
+	dkim=pass (2048-bit key; unprotected) header.d=Nvidia.com header.i=@Nvidia.com header.b="g4s57gtu";
 	dkim-atps=neutral
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from sonic309-21.consmr.mail.ne1.yahoo.com
- (sonic309-21.consmr.mail.ne1.yahoo.com [66.163.184.147])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 6A05410E502
- for <nouveau@lists.freedesktop.org>; Mon, 13 Oct 2025 22:38:16 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=rocketmail.com; s=s2048;
- t=1760395095; bh=oQGXnG7NG2kpi4BHCEXp37PQGWyIahbV2A27KvAHuqc=;
- h=From:To:Cc:Subject:Date:In-Reply-To:References:From:Subject:Reply-To;
- b=Yl+4VohKXRl53sPY6xo2Nhy11jbcJl/LhBp1fOh5GEMLq5Ua4QFvXihDoci4Umg6lMllGQhsSFk1Gn+kY9ctCE2lMhhMGnC4cGMrrQbGRvwHzGs9WN041luO2eiABVn9R+7/iw7EuflplfSxESKdoc70fGDtW6Dtq8m4Qu5hFZ8CBIqphw7xxV7690p0+cSK4aNkN7WpfLYTheLVQ86DMMZN4GZQeQR6avAZWYcJu7Xe9xlQBpVhxHZd5JpCPZdUksaTn7k81wrs5ZyBLyhAHZP1KfNksTspTkGib11MhCDR8rYQ+TR7iC7XLqdoFho7LzeROubZALtLss/MsW2g7w==
-X-SONIC-DKIM-SIGN: v=1; a=rsa-sha256; c=relaxed/relaxed; d=yahoo.com; s=s2048;
- t=1760395095; bh=hOqtrnhfVcSAKJhxuyvYWhb2toytWW7VrFh4SkeLXjw=;
- h=X-Sonic-MF:From:To:Subject:Date:From:Subject;
- b=pXDCt2JWBIC2OC0QGH8HMGC3G5rYELG2Q1/yvmg/tkKyS1OYJv8T6WdC+JZxxYc/2Ve4ef2BFmcNkt0BJ14O3y5NnIBKlABeksFpD5672J6OyU55v4V6EjffmAnPuKJCHjRFUrqDNrCFF+OI/RQAHVTdu5OH4Zsi+My6nsvevpRBJpt3QezBbwkDX+59Rz9kfcfY5+79lz7ZSJKNy8uczpUKYKqGgdGw6xw6vBsM5BH1Z/sK18/LVTe+PPZZOdLikkMadNFq/5bOQt9E3EznBT2b/nL7KqhCtEVj/9EF+Aw3P8S46cCJBXYQBn79+GsyUjnfCCTqeLWVHQwqbDdGuQ==
-X-YMail-OSG: TGNpQNkVM1me3jHpVMSR01.I6OwdFcFdkKMZl.k0Bgs3jseMQ77KN2vMT5sF7NA
- r0OM6U5QwBFsEPvwnC6zyOANTzHKvMqxfbfHWnHR9PgImO9vFv0wRmzQof9bKPFWzoiQ_MLAYlVD
- 5_8dolP81G9OpKQRqn.GFZgHre0Ox5O6UO04NICtzZzvuGgt8R3tLJ1YUonQdD6BcN.v5p_qQocZ
- c7EdOYO8z8G6Ob5w8MPQEwS1gWbVO9w1noa18pTvELh5YNom9770FtcHr.AseKiadDBCVpR02iEK
- ghMGEYRnAOxRyhwflETH8ginwbUEyiYegRfqsr4EczTzjr6KICF8wBfdRSuj4QGzOn6QKN8oMbMn
- tPLvstB7yy6EVi74yCeU.A_e1Tgb5y3ysgbyg40Q0UqaY9NaPiZQbhOJ9Vl_iH1HRZ3bKzi9wb2U
- iPWd5ffkeCpovUKEVkvP7pmBtTwYwh0D6mJZ9EkWeG2Tj42uSUPkXezJUgeRmw40Nco.8V_FSweS
- r5AOUD0p8Ch42HnLUE3ud5zGvf1ZALzsECMCAbAvyff__sIc._G9SRCndERGHcAf.M1fQPhrdleR
- ouEkapxWf2QQgIeHdO7vZ._YmPI9Ais..P61KT2K.Yp_fGSvtpkT093waVQd88NXr4xcEa9TRQVV
- cmj4ZPvAC9hbB_6Ykbah23q4X5K4l2VSlPsN8jO_KBwELaRliTwYmQO2BKWEwNJ8C2a6lwZNjfDs
- .lmMSv.Z6s.fKZqHYrq41YosU56h4.A1y8izvAP1FRcoTvb_.fsj6X4ssNqJ.wbwoA90.Lz9583.
- BnV.WL.AmSlR0P4VrE6tD5INCPN7tvcPHkpJ_J.T6gHlFldPiESXQXSKF0nHJ1FMyxt1gyIrTn95
- P00oZ4yBbf17P03u9dEmsj0Cy7U_qfx8DV17qHGztLY52w7J_wSbtcE8wOja9ixTVJu9VqVuEliU
- zl5i5sh2qCzkHdVd.qUrQkbKFFbpMeOX1.PWeZ12sRgwKGJ_NfY2Ru5JOr_JUekqSV.30G.V09J8
- e7Z6RmDWeskj8VHpVut2AS3cnd3ENh7zxVv2TVOBwoL9nPv2f3ov_3wzFHN9EqzjLNhIsnMDREth
- YjVf6d1S02x8FkSPZb6o1Ruu6Hxp7VtJlPJYPVcChAMmp3morukHqt19MGYKFmrWSrT14.XLHMq2
- jvH96duSVZfRKma.87JpQ6_X3v47mHRnl9hpyXpAinJmlolQsrm43P5H_XxqbJlZ0yio5OyhuDG0
- MX34OUcUD6iItfiMbXsQ5ZkxY_yzGg7s2ETJwPa2MjNAwpYT1S2S_B9vSLTWuBO4SlFVm6KFyxKi
- QszPNXtlLZh08qKWRXUVJrXsTFfkhIq0M0_z3AWylnH7ZG_.gYFJ4.dK3Sh1ZJZxmIoCj5t0zKHf
- X0J0LeCVu_aSh.XvUOXoMMsRWovhhwL1F4oD1K7eJ9UYbFkP0x6wV.p1RLcNDoN.T_VsDvu4Z5of
- reXfdJz.HcGV41sqvaizvnFdzDdHU9.WDBefTlIh.i7_L2HPtw6NDHBzafp8MlyTHWdV3Gz5x24v
- 9tdWEOuSmkld_Xo6.E_SIgVrHyR4r2z3xSrNO9xW5naSZWgMyI7nk8veIEBlHxnkk7fsJclnYoXx
- wecYRVDTbIyqUKauyLx2sLFTI4JHtxk73d0p0npD.qp11wDU6z5W1EhKC__sWc6jzHwPiQvUi4Fy
- bEYL1jKscLIUFL.FUE3AUvuV3D0E4U4QQ6DKZbNTW4tyHkvMPkmdUFXi13ajAmLl6Iz7hEBuI61A
- GLgLsciTGM7ho3BMaAWXF._bto5UycbEJuMWID0PGpSe_d8XJF7SiuH8.f4Aqc8v__UKeGwnkARl
- TP4ED8sMh6xxjzbUaewi7WCUATUL4ExNOD8IxPWiWMYIE92ksliymINA_DjnVGy85r5NZ_XXbNzQ
- z6CDWB2NRD5AwyJi.HuVM7DhY5g9ydclg0gYhYexRwkhR76Haj85Msq1zlGf3n0UWSl7x573g2QI
- vzymVm0xMFTOEyjuU6bNoMNkdV8B_QsXjRBMwTLWhs8S9Z_bGOxm4KrW.c6irM0Sifjqwm78oqN6
- oX1mLwhQsi3cOQFrDzL3ozjN5NbvQVEW8gJ4fpcaSQOLZ9Pe22sBYzwC68_FJvNKpZ.kNdneVPD9
- qrMD81d2.C2BtoSoi6JaEi5mttAShq4cCWA3c2eAGqJlacTD2hjjrq.D6hqSSCTxmqa5Moah4znr
- BkuFM8pqUgDVoUPMA8gHb2NpZtJVnhiwFbTZslV8Ksnh5c9S9QBihv1lPMnfuQ0aS2.qzjfbIN90
- uDmXQOBicWyMjheZzchtU11Rd6_1Wtg.g4GnutoKbYFQw
-X-Sonic-MF: <lxrmrz732@rocketmail.com>
-X-Sonic-ID: bf860b4e-fd17-47c7-ac70-b44ff2632dbd
-Received: from sonic.gate.mail.ne1.yahoo.com by
- sonic309.consmr.mail.ne1.yahoo.com with HTTP; Mon, 13 Oct 2025 22:38:15 +0000
-Received: by hermes--production-bf1-565465579b-69p8l (Yahoo Inc. Hermes SMTP
- Server) with ESMTPA ID ee1871ff4eb270e645c795535edeed4d; 
- Mon, 13 Oct 2025 22:38:12 +0000 (UTC)
-From: =?UTF-8?q?Alex=20Ram=C3=ADrez?= <lxrmrz732@rocketmail.com>
-To: nouveau@lists.freedesktop.org
-Cc: =?UTF-8?q?Alex=20Ram=C3=ADrez?= <lxrmrz732@rocketmail.com>
-Subject: [PATCH v2 2/2] drm/nouveau: implement missing DCB connector types;
- gracefully handle unknown connectors
-Date: Mon, 13 Oct 2025 18:18:15 -0400
-Message-ID: <20251013222424.12613-7-lxrmrz732@rocketmail.com>
-X-Mailer: git-send-email 2.51.0
-In-Reply-To: <20251013222424.12613-3-lxrmrz732@rocketmail.com>
-References: <20251013222424.12613-3-lxrmrz732@rocketmail.com>
-MIME-Version: 1.0
+Received: from SJ2PR03CU001.outbound.protection.outlook.com
+ (mail-westusazon11012024.outbound.protection.outlook.com [52.101.43.24])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 7697310E1F4
+ for <nouveau@lists.freedesktop.org>; Tue, 14 Oct 2025 06:35:30 +0000 (UTC)
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=mq9Dr8Wx7yXv6lk5Bs4SDNV1vMwFz8BqOyoPXJsj0Ady4N8ISiP27mMPQHzi+6hD+nSUqMnEqC15cWx/4kqcVXK0fxMWbBzTwPvieQWg3aHChYEwLTiR6NP32eIvsl1+7x+F4QxNxWO8++ZYSShJyEze27FM6dTrASTj6m72Xc91X1nUEJfgicAO6ts0e8wU+uV2dJQ5Vf62R3N2m1UeoZ0xyMQgpXDgUxU5wDBHa+EtJAkZPpy4iD66v+iAQAvaeU3mBYQ4UbVwNjNmkqMSHhstotKUnQ/9zX4GXYIQSHo8tIwwNViRULaLAscBS+jKUegPeSKQbAbahZvIeOXp5Q==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=uLI/NhfsOu0+ERQ5imltfLksnvkHaLZjUDB9X7QcsnQ=;
+ b=sOaREfxNcWFZ4bq9pKqxI38Ta7HfvACRHRxn7k/DJ4njSArZogO1bkQzug+Z4Q0mGSLmU6eB4JbjpG3lfyRB0ILRnKSkg7KI7ttywaOrXAjDEU/FLEUWQQnBDMXV0XlkP9rb/cqe4nlY3bF9ZMK9dnMpQa0KcFtHpFr3zpl+YO4dnMeZN2qlc5e7PghW2V+Rpe3FxnqkZo4oCqgmMo8qoat3Nar9ys4otn84mkbAENMNlqch5l8G5IzEje6aRR9c5Ajk+ADeK1aF8eNE8DDs5CpkpUu6a2W6Ku/MqVWuNjX5a1RdzO7dCAuLR+YwlXk/T0BriCmNWZt+VS0JsoINaw==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=nvidia.com; dmarc=pass action=none header.from=nvidia.com;
+ dkim=pass header.d=nvidia.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=Nvidia.com;
+ s=selector2;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=uLI/NhfsOu0+ERQ5imltfLksnvkHaLZjUDB9X7QcsnQ=;
+ b=g4s57gtuH64x9igYKbtnh2sJHd0YvT7e+8wAQUZq1nq+PcDZqRFYcMUiz1BOSRzGJIlOvq9CJfE5Olc/SuXMLi4Rm14+df4Ia2M9HH+BcOY0l4qutP7DWLWJdemFXqXlRr+3depfwUz95UHMNZ3Ss6cmsCvqPfRMzNebyplJPHmKYSiAbtRfAeO422+nB0OKdAya84ycWTkZ19gf2eI9t5ky3rE2+K+mnAsxpvjTlqZh2RNviYwnpLourrRl2dt6+wRpquaMP1N6xcJcgnssfZWzZAHs3pga6QdG0avKADdEO8YdSz6MqCT4mJ9j1y5sUx5Ffak/uvMiVq63TkfM7A==
+Authentication-Results: dkim=none (message not signed)
+ header.d=none;dmarc=none action=none header.from=nvidia.com;
+Received: from CH2PR12MB3990.namprd12.prod.outlook.com (2603:10b6:610:28::18)
+ by SA1PR12MB7319.namprd12.prod.outlook.com (2603:10b6:806:2b5::19)
+ with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9203.12; Tue, 14 Oct
+ 2025 06:35:26 +0000
+Received: from CH2PR12MB3990.namprd12.prod.outlook.com
+ ([fe80::7de1:4fe5:8ead:5989]) by CH2PR12MB3990.namprd12.prod.outlook.com
+ ([fe80::7de1:4fe5:8ead:5989%6]) with mapi id 15.20.9203.009; Tue, 14 Oct 2025
+ 06:35:26 +0000
+Content-Transfer-Encoding: quoted-printable
 Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
+Date: Tue, 14 Oct 2025 15:35:22 +0900
+Message-Id: <DDHU4LL4GGIY.16OJMIL7ZK58P@nvidia.com>
+Cc: "Miguel Ojeda" <ojeda@kernel.org>, "Alex Gaynor"
+ <alex.gaynor@gmail.com>, "Boqun Feng" <boqun.feng@gmail.com>, "Gary Guo"
+ <gary@garyguo.net>, =?utf-8?q?Bj=C3=B6rn_Roy_Baron?=
+ <bjorn3_gh@protonmail.com>, "Benno Lossin" <lossin@kernel.org>, "Andreas
+ Hindborg" <a.hindborg@kernel.org>, "Alice Ryhl" <aliceryhl@google.com>,
+ "Trevor Gross" <tmgross@umich.edu>, "Danilo Krummrich" <dakr@kernel.org>,
+ "Alexandre Courbot" <acourbot@nvidia.com>, <linux-kernel@vger.kernel.org>,
+ <rust-for-linux@vger.kernel.org>, <nouveau@lists.freedesktop.org>
+Subject: Re: [PATCH v2 0/5] rust: add `TryFrom` and `Into` derive macros
+From: "Alexandre Courbot" <acourbot@nvidia.com>
+To: "Jesung Yang" <y.j3ms.n@gmail.com>, "Miguel Ojeda"
+ <miguel.ojeda.sandonis@gmail.com>
+X-Mailer: aerc 0.21.0-0-g5549850facc2
+References: <cover.1755235180.git.y.j3ms.n@gmail.com>
+ <CANiq72nbERSOWKRUTJ96YYKCDeAoHLBuiVP+XkDUKg7JYkoyiA@mail.gmail.com>
+ <CA+tqQ4KG98XcWh3rkAxEOiACSUtPf7KM0Wqh9Af=POgVDHJzzw@mail.gmail.com>
+ <CANiq72kE89ukxpf3L0_jFOdv51TDtjjj3r=1mjJzdGWJwmAbaQ@mail.gmail.com>
+ <CA+tqQ4J7_z7_NmUNojJttF1e8GRR8Ua9w0Rap1t-U4gYPhQ1Yg@mail.gmail.com>
+In-Reply-To: <CA+tqQ4J7_z7_NmUNojJttF1e8GRR8Ua9w0Rap1t-U4gYPhQ1Yg@mail.gmail.com>
+X-ClientProxiedBy: TY4P286CA0086.JPNP286.PROD.OUTLOOK.COM
+ (2603:1096:405:369::16) To CH2PR12MB3990.namprd12.prod.outlook.com
+ (2603:10b6:610:28::18)
+MIME-Version: 1.0
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: CH2PR12MB3990:EE_|SA1PR12MB7319:EE_
+X-MS-Office365-Filtering-Correlation-Id: 11c37c96-afa3-49f9-e78b-08de0aebdbed
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: BCL:0;
+ ARA:13230040|7416014|376014|366016|1800799024|10070799003; 
+X-Microsoft-Antispam-Message-Info: =?utf-8?B?NE42aFk4TjV3SU52T0l3YzBRdm0rZUptQ1BRckp3NDFYakpGODM1VTV1cGx6?=
+ =?utf-8?B?TkwyOGhLVmk1eEM1QlhPQ1cvQVlXV2NIQjl6a3VQZktuWFdoTUdpVUUxM1lw?=
+ =?utf-8?B?cHhibUkrS0hxUGNkZGNJb2dDVXhqSkRtQUhjb0hUWE0xWWhMVUlPSjZIbjZp?=
+ =?utf-8?B?NitTZnR1NndTUTkrak5XUlJoV2JuOUtRWU90OU5QMnE3YkVjdlI0ditzalRV?=
+ =?utf-8?B?ZzBWZlJLVlFqR054eFVlVmNIV0JjZ0pCQk1ST1Z0M2NXazFIYkp1MWJxWDJQ?=
+ =?utf-8?B?SiswUndockJVdWdmN21MZEtSd2Vua1BwUjE4cmREckVhem9lL0xMMXZOWGM0?=
+ =?utf-8?B?UWpBSHJBNERtYW0wTlpEUFUvVkE3eEY5WCtpZUgrMzA3WmRSQTZsL0R6R1dQ?=
+ =?utf-8?B?VUU5TGx0WEFTWXVza3FQRjVuK0NSY1g3TGY5S3F4TGNaZUx4eWkwdUVUeTkv?=
+ =?utf-8?B?bkk2VDNmb2tpaXpjOEpRZldvVmUvZmI1WDdodkJtbEpuZWtDcWRqY3E0Vzlm?=
+ =?utf-8?B?RW1tNUlzd1ZiZi8vMHJzUDdLakQ2VVY0bFhnRmZtUTIvZ3BjRU9LcWpRd0Rt?=
+ =?utf-8?B?Qmd4RVB1d0FQSDlYbFZKejN5Y3Myd1ducGhvWUhVSUxubFVTZ1JPRzFwTkdo?=
+ =?utf-8?B?YlB0UVJ0RHAyZDB5MDUzTjh1aFBOT2FES1E3cDhoNWgxMW1rUnc1UTR0MWpX?=
+ =?utf-8?B?WjMybGNKUFcrUVNNOThQMmFodnhDaUZmQ0RjSGVmSWR3bDIreDJLRTJKa1N0?=
+ =?utf-8?B?bUVpMGlOSUxLSlQ1QUxRSVBHTmRaM3l5WnhPWDgzQUdZMTZYMmsvcC9DWWsw?=
+ =?utf-8?B?ZjN1dDIzYWsrSmN5cnFIRk5XV0FIZk5WUllzb2ZYdUZrRjJ3T2RCcm91elI3?=
+ =?utf-8?B?VVo4U2x0N205QVVpc3JxNTFXTmNIdHVxalYxelR6NmxScTJRR2ljMGF2OHdW?=
+ =?utf-8?B?bHN2OVgxdzZOWGFMZnEzckZ1RnRvTWswRm1QM3RLNWcrZDBqSnZwZG9zMUVh?=
+ =?utf-8?B?M3NSc2FHRVFVNE5wVU5GK0xtZFRkVmhKdXBOalM1Ky80WTZtV0w2dGJIdXZz?=
+ =?utf-8?B?eEJOY2l5K2JtZ1BHRkUzb1IwTEc3UjY0MmxBY2hwd1psbTBHSGNsdCtUSmJU?=
+ =?utf-8?B?MnZGMUZoRDlvbVFxZ3lrS1BzbERBNGN3STRhbHFiSTNHZnhVWW0rYk9GMkFj?=
+ =?utf-8?B?ZjY2eFFGYlNkcnNJcnJLVkdXUk5SMFZLWHNiQnkxdnY2dzlDSTB6dGJlMm54?=
+ =?utf-8?B?c0pNei9ud24wM0hzN3NyWEZUYjd0YWdEV1JGcDFzVG95endUYlBWMnk5TjBt?=
+ =?utf-8?B?MHVidVR3T0dXYllySHBmRUFWb1NLclZkRW9jOTJrNUxHSnVRWll5dTFub2xi?=
+ =?utf-8?B?bStrMlNGbGpCTkFCTHBXRitMWTVyWDkwajhnM28vaE9rcDY1ak5QUDFrL2V2?=
+ =?utf-8?B?MzJQeFh4WUVCUUNlL0o0NXJkUTN3d0JpUHNTTFByQU9Lb0x1TFJMTWhLNTNa?=
+ =?utf-8?B?QVV0S3VoWGhzSHpPOWVGWlNLRytQUHhLTVJsTVRZZ2p5ZnBlalFiKzZwNitv?=
+ =?utf-8?B?cjFoekFDVlcvbi9CMmRiVk56ajV5SnUyZFlSSmpGUEUzVDl5OGQ0Umh6UGs2?=
+ =?utf-8?B?RWcweW9KM050R0JPMlcrOXg3Z1FUTnVzdDdzNGV6NnlWc1FoNzlFaGk3cG1p?=
+ =?utf-8?B?a0dFcW83alZmZjViVTB6QlNybzUrOHBWdmZNbGFGZWpnd0RkcmJZbmFxcXhP?=
+ =?utf-8?B?TmlEM3E4OUx4Q2JMaG44bitrOFkzSmxrODFUeHd6TEo1QkQ2bjRjTUx2VDNq?=
+ =?utf-8?B?NnppR0JFQ1FUeldUdDh1N2ZSQUYxbDV6TUw2b0NSZFJmYUVwY1NnWDAvL25s?=
+ =?utf-8?B?bFQrQ1g0VVVqMko0bU45ak9DeERJR2FwZGFtNnIyOXRTUlNWS21ZVFBHdlVv?=
+ =?utf-8?Q?FDduHHoHSP5+vOEOuOVyx3i84Ju+Izi6?=
+X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
+ IPV:NLI; SFV:NSPM; H:CH2PR12MB3990.namprd12.prod.outlook.com; PTR:; CAT:NONE;
+ SFS:(13230040)(7416014)(376014)(366016)(1800799024)(10070799003); DIR:OUT;
+ SFP:1101; 
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?Qm9wVlA2YjgyMmFvS3Z0V2hraW13SXJubGJxbzBubFlMZ0huY2Zqd0pxZTJv?=
+ =?utf-8?B?QXlJd2NraGZ1M3pFYTlsNCtYQzI2T0c5MDIxTnVqcHNxV2NkRHE0QW9HSE4r?=
+ =?utf-8?B?b2YydVIyTFJxbUx6SkkyNE04ZUhDUkJIaDVjd1RPWFR3MlRtcTFrK0FidE1F?=
+ =?utf-8?B?cXpTOXJTSlkyOUNaYThmMkFiaU4zeDdSRDVqM1o3YWgrd3NvZ0w3SXNUWUtv?=
+ =?utf-8?B?YkhPYU5RaSsraS9VemNVbFRZVHdRdlp3YXRrd0ZGR09TOXV1dEdLeWtEV200?=
+ =?utf-8?B?YWt3RU5ya3M5TUNTQmVKYTBSc0QzeTVaWkMyWndwYUtJMVlocDZtekVUTXZa?=
+ =?utf-8?B?RFlXQnlxWkZ0ZnptYUlLNTNYRE5vMkdTM1JneDdnUEEwSUliUVhYbEQ1Y1VL?=
+ =?utf-8?B?SEhIb0hKWnV5cTRHUXA5UUZ0bTk1NnBGajFwWUpoVDB5VGVvOHhmTGlYZ29z?=
+ =?utf-8?B?QTNGM0VCMlErbmNaMTdqaE0yUGk0QzZhU09nUTcwK3djOVhpYlFBUmJTYXoz?=
+ =?utf-8?B?VWM4RDVSeVM1amp6SkpCWUZpZ0YvaVhXaW1UaThzRTdsQnIvUnM3cDZibnBp?=
+ =?utf-8?B?c1FEalRqQWJIWkVoWGVVcDc5RE9jaEhpbVQzZEpFeTFGWEZLdThkREVaZXNi?=
+ =?utf-8?B?TGtkYXVBNG0vZlFqdUp1ZzNtS2R2OWxGV2tkQVRYc0dWUzNnSVBhS0Z4QVhS?=
+ =?utf-8?B?a1hVcC9UU3NlTmR6ekZvaVRiaGNnNEg2c0VBdzJaQ0Y4YU9zeU4wQ3kxcXFv?=
+ =?utf-8?B?cEVIZXcwcisxYlJKM1JYRVFsU1FLaXRxeGgzQU03TG1TaDNvVk9zRFJCTHB0?=
+ =?utf-8?B?ZkJscHFnWmZNYmlUeEVSb3BKUXc3S0ZSVGpXU2RhcW1lWkFCamVMc0U4N1VO?=
+ =?utf-8?B?cmZSdWtmeFRldkpRUWJLdldIWktIQjdnMVdNS1NVWEZKZUEwNE94RndOa2Z5?=
+ =?utf-8?B?Wmh6dEZNUVhqanRVMkQ0czJMTGpDWkZLWDExb2pJaFpOUEJwcExFN3RmYlFN?=
+ =?utf-8?B?RGI2VDdKNDcwUEsvbGFOMnhSNG0zNFdYdE1pYWhOb1dDVHBibzJGdFg4eVAx?=
+ =?utf-8?B?TnNCSjlqL0JMTXRQamtTdkV5TWQvOFZiTkdxNzJ3RGI4eFdxUytnYWtVTmpa?=
+ =?utf-8?B?ZTFoWkR4NkF5aWpNNVRPYWlpYUdxekpjMEZuNTVDTWNsTDBOVnprZFVpWmlr?=
+ =?utf-8?B?aXpHUW5zUnlkTDRGaGRVWVFHSGxFamhEaHVVL1lzenN4VGZDc1NkWDYzVzhm?=
+ =?utf-8?B?Zk5Kb2M1NVVwU09Yb1hKWVpnT2t2VFRmbzBjVWhIZEo3TjE2eHh3YWVxMVhP?=
+ =?utf-8?B?M2gycnlnM2lzU2tmYTR1ZGF6OU1uNll1d1RYU2RNMW9EWWp0K0NzWG9zSCta?=
+ =?utf-8?B?ZVBpNXFCczF0OFJvZmUwVEorNy9rOXltdXJ3OEFHU2VGWnRUMVozOHVwaTVV?=
+ =?utf-8?B?QzFxcEJDREVpNFdGNzlVWXJ0d21IZ2w5MVFjb09sQUh2d2xNTlZreEFnTEZC?=
+ =?utf-8?B?dTdOV0trdEsrVkl0ZjRabVRFeHVDcG5UbHRBdWdWdTFDYTRMQ2pteng1Wm92?=
+ =?utf-8?B?bURhcktwN20rVk05OFFORmhsTDdyclcwQWtXajhoYjlnTTZRTENKWnlFSlBV?=
+ =?utf-8?B?c280cFBvZXNWL1NhYnFHY002b2ZPVGgwZkY2M3dETmQ1TzI3dGpWMlU1Z0dm?=
+ =?utf-8?B?RG45UnpUbUtmaFJsYkNJSmdRL0FYWHJZaThHSVVmbFJxVmhPNVp3M1lSU2dy?=
+ =?utf-8?B?MVlJUklzc1pES256Z0l3OGlwMFBrMnZzOGhGTHZmL29UcFkzb0JGL1ZuUmFv?=
+ =?utf-8?B?YTNEUHB1MGcxdTFuV1diTGY4UENxZk9HK2ZSWElpUEpReTFtZEx5VDB3Tkpr?=
+ =?utf-8?B?OTEyaGtMSUhTcFFnTUFwdXpwN0swRUh4dmZ0Vng5NnRyRVVXZ3dvY0dUbUNZ?=
+ =?utf-8?B?Vmxqa3A2R0pxK2hUamg0cnVhZ2V6T0FmVlN1N251c3lROFJSMVZhZ3JaWE1a?=
+ =?utf-8?B?eExDQ2lFYk1sQnp3a0p3YVFPY2ZmWjVLNnlMYTJBWWJWcWZwcjN4T09yMjZy?=
+ =?utf-8?B?S0RLM2lBMDFQMXhsRmhydXdZbm9jNGFsbjFMNXh3eVErZnhLL0kwZGVmQjVk?=
+ =?utf-8?B?NGJUcVdkSmJHcVFSVmc1cEV5NWtTOWo4YVJGM2tORCtvejkyRXBmaGJZTzMw?=
+ =?utf-8?Q?EQwlDYNyIToIHmA1zr2rEZXvLFsGv0RrVs/QDt9Uspkl?=
+X-OriginatorOrg: Nvidia.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: 11c37c96-afa3-49f9-e78b-08de0aebdbed
+X-MS-Exchange-CrossTenant-AuthSource: CH2PR12MB3990.namprd12.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 14 Oct 2025 06:35:26.2265 (UTC)
+X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
+X-MS-Exchange-CrossTenant-Id: 43083d15-7273-40c1-b7db-39efd9ccc17a
+X-MS-Exchange-CrossTenant-MailboxType: HOSTED
+X-MS-Exchange-CrossTenant-UserPrincipalName: tFuDusVnxK/LQ6lVojKY8WNT4Xb5DA3AKWLvudNqZNn+2TkQV0e53s/nGHu2zyTbtqa+y87TAOtFI1QzrFOYfA==
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: SA1PR12MB7319
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -90,106 +175,100 @@ List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-* Implement missing DCB connectors in uconn.c previously defined in conn.h.
-* Replace kernel WARN_ON macro with printk message to more gracefully signify
-  an unknown connector was encountered.
+On Sat Oct 11, 2025 at 11:53 PM JST, Jesung Yang wrote:
+> Hi,
+>
+> On Fri, Oct 10, 2025 at 10:04=E2=80=AFPM Miguel Ojeda
+> <miguel.ojeda.sandonis@gmail.com> wrote:
+> [...]
+>> But what case do you think we cannot assert? We can always take the
+>> discriminant and reject whatever inputs (e.g. ranges) we decide, no?
+>> And we know what type we are going into, so we can always decide what
+>> the values to check will be, i.e. we could in principle even support
+>> infallible conversions of the discriminant to other types like, say,
+>> the bounded integers or powers of two.
+>>
+>> Maybe the issue is in what you say at "the discriminant value
+>> interpreted as the target type" -- I am not sure what you mean by
+>> "interpreted", i.e. I would think of this as accepting only some bit
+>> patterns, i.e. working with in the discriminant space, not the target
+>> type one.
+>>
+>> I may be missing something, but in any case, at the end of the day,
+>> within a proc macro "everything" should be possible one way or another
+>> -- even if we had to inspect manually the literals :) And it seems
+>> worth to remove the pitfall.
+>>
+>> If really needed, we can always drop support for certain combinations.
+>> We already do, in the sense that we don't cover every single other
+>> type out there, like the ones I mention above, e.g. `Alignment`. But,
+>> just in case, I assume with that approach you mean skipping some
+>> combinations early (the ones that cannot be checked) and then still
+>> asserting the discriminants, right? Otherwise the caveat is still
+>> there.
+>
+> Sorry about the confusion -- the rough sketch I shared earlier had
+> several mistakes.
+>
+> My actual intention was to emit a compile-time error using
+> `compile_error!()` whenever a conversion could overflow. With this
+> approach, the caveat wouldn't exist, since proc macro users wouldn't be
+> able to generate `TryFrom` or `Into` (`From`) implementations that
+> could potentially cause overflow issues. For example:
+>
+>     // This emits a compile-time error because not all `i128` values
+>     // can be converted to `u128`, even though 0 and 1 are valid `u128`
+>     // values.
+>     #[derive(TryFrom, Into)]
+>     #[try_from(u128)]
+>     #[into(u128)]
+>     #[repr(i128)]
+>     enum MyEnum {
+>         A =3D 0,
+>         B =3D 1,
+>     }
+>
+> To make this idea work as intended, I should have revised the earlier
+> sketch as follows:
+>
+> - const U128_ALLOWED: [&str; 9] =3D
+> -     ["u8", "i8", "u16", "i16", "i32", "u32", "u64", "i64", "u128"];
+> - const I128_ALLOWED: [&str; 9] =3D
+> -     ["u8", "i8", "u16", "i16", "i32", "u32", "u64", "i64", "i128"];
+> + // Allowed helper inputs when `repr(u128)` is used.
+> + const U128_ALLOWED: [&str; 1] =3D ["u128"];
+> + // Allowed helper inputs when `repr(i128)` is used.
+> + const I128_ALLOWED: [&str; 1] =3D ["i128"];
+>
+> The downside of this approach is that, as you can see, it is overly
+> restrictive for large target types such as `u128` and `i128`, because
+> the remaining numeric types cannot accommodate their full range. As a
+> result, the macros could reject some valid use cases, for example when
+> the actual discriminants can be converted without overflow, since the
+> check operates at the type level rather than on specific discriminants.
+>
+> Considering this, and as you suggested, I think the right direction is
+> to introduce a compile-time check for each discriminant. I initially
+> thought it would be difficult, but after some exploration, it seems
+> doable.
+>
+> Thanks a lot for your feedback, I really appreciate it!
 
-With this patch, unknown connectors are explicitly marked with value 0
-(DCB_CONNECTOR_VGA) to match the tested current behavior. Although 0xff
-(DCB_CONNECTOR_NONE) may be more suitable, I don't want to introduce a breaking change.
+Note that if we adopt the bounded integer types [1], this problem might
+get exacerbated.
 
-Fixes: 8b7d92cad953 ("drm/nouveau/kms/nv50-: create connectors based on nvkm info")
-Link: https://download.nvidia.com/open-gpu-doc/DCB/1/DCB-4.0-Specification.html
-Signed-off-by: Alex Ramírez <lxrmrz732@rocketmail.com>
----
- .../gpu/drm/nouveau/nvkm/engine/disp/uconn.c  | 73 ++++++++++++++-----
- 1 file changed, 53 insertions(+), 20 deletions(-)
+The initial motivation for these macros was automatically generate the
+conversions between register fields and their Rust enum. This was
+working fine as long as the fields were represented using primitive
+integers, but we will likely switch to more restrictive types where only
+a given set of bits is valid. So it is highly desirable to support
+conversion from/to these bounded types as well.
 
-diff --git a/drivers/gpu/drm/nouveau/nvkm/engine/disp/uconn.c b/drivers/gpu/drm/nouveau/nvkm/engine/disp/uconn.c
-index 2dab6612c4fc..d1fed2beee63 100644
---- a/drivers/gpu/drm/nouveau/nvkm/engine/disp/uconn.c
-+++ b/drivers/gpu/drm/nouveau/nvkm/engine/disp/uconn.c
-@@ -191,27 +191,60 @@ nvkm_uconn_new(const struct nvkm_oclass *oclass, void *argv, u32 argc, struct nv
- 	spin_lock(&disp->client.lock);
- 	if (!conn->object.func) {
- 		switch (conn->info.type) {
--		case DCB_CONNECTOR_VGA      : args->v0.type = NVIF_CONN_V0_VGA; break;
--		case DCB_CONNECTOR_TV_0     :
--		case DCB_CONNECTOR_TV_1     :
--		case DCB_CONNECTOR_TV_3     : args->v0.type = NVIF_CONN_V0_TV; break;
--		case DCB_CONNECTOR_DMS59_0  :
--		case DCB_CONNECTOR_DMS59_1  :
--		case DCB_CONNECTOR_DVI_I    : args->v0.type = NVIF_CONN_V0_DVI_I; break;
--		case DCB_CONNECTOR_DVI_D    : args->v0.type = NVIF_CONN_V0_DVI_D; break;
--		case DCB_CONNECTOR_LVDS     : args->v0.type = NVIF_CONN_V0_LVDS; break;
--		case DCB_CONNECTOR_LVDS_SPWG: args->v0.type = NVIF_CONN_V0_LVDS_SPWG; break;
--		case DCB_CONNECTOR_DMS59_DP0:
--		case DCB_CONNECTOR_DMS59_DP1:
--		case DCB_CONNECTOR_DP       :
--		case DCB_CONNECTOR_mDP      :
--		case DCB_CONNECTOR_USB_C    : args->v0.type = NVIF_CONN_V0_DP; break;
--		case DCB_CONNECTOR_eDP      : args->v0.type = NVIF_CONN_V0_EDP; break;
--		case DCB_CONNECTOR_HDMI_0   :
--		case DCB_CONNECTOR_HDMI_1   :
--		case DCB_CONNECTOR_HDMI_C   : args->v0.type = NVIF_CONN_V0_HDMI; break;
-+		/* VGA */
-+		case DCB_CONNECTOR_DVI_A	:
-+		case DCB_CONNECTOR_POD_VGA	:
-+		case DCB_CONNECTOR_VGA		: args->v0.type = NVIF_CONN_V0_VGA; break;
-+
-+		/* TV */
-+		case DCB_CONNECTOR_TV_0		:
-+		case DCB_CONNECTOR_TV_1		:
-+		case DCB_CONNECTOR_TV_2		:
-+		case DCB_CONNECTOR_TV_SCART	:
-+		case DCB_CONNECTOR_TV_SCART_D	:
-+		case DCB_CONNECTOR_TV_DTERM	:
-+		case DCB_CONNECTOR_POD_TV_3	:
-+		case DCB_CONNECTOR_POD_TV_1	:
-+		case DCB_CONNECTOR_POD_TV_0	:
-+		case DCB_CONNECTOR_TV_3		: args->v0.type = NVIF_CONN_V0_TV; break;
-+
-+		/* DVI */
-+		case DCB_CONNECTOR_DVI_I_TV_1	:
-+		case DCB_CONNECTOR_DVI_I_TV_0	:
-+		case DCB_CONNECTOR_DVI_I_TV_2	:
-+		case DCB_CONNECTOR_DVI_ADC	:
-+		case DCB_CONNECTOR_DMS59_0	:
-+		case DCB_CONNECTOR_DMS59_1	:
-+		case DCB_CONNECTOR_DVI_I	: args->v0.type = NVIF_CONN_V0_DVI_I; break;
-+		case DCB_CONNECTOR_TMDS		:
-+		case DCB_CONNECTOR_DVI_D	: args->v0.type = NVIF_CONN_V0_DVI_D; break;
-+
-+		/* LVDS */
-+		case DCB_CONNECTOR_LVDS		: args->v0.type = NVIF_CONN_V0_LVDS; break;
-+		case DCB_CONNECTOR_LVDS_SPWG	: args->v0.type = NVIF_CONN_V0_LVDS_SPWG; break;
-+
-+		/* DP */
-+		case DCB_CONNECTOR_DMS59_DP0	:
-+		case DCB_CONNECTOR_DMS59_DP1	:
-+		case DCB_CONNECTOR_DP		:
-+		case DCB_CONNECTOR_mDP		:
-+		case DCB_CONNECTOR_USB_C	: args->v0.type = NVIF_CONN_V0_DP; break;
-+		case DCB_CONNECTOR_eDP		: args->v0.type = NVIF_CONN_V0_EDP; break;
-+
-+		/* HDMI */
-+		case DCB_CONNECTOR_HDMI_0	:
-+		case DCB_CONNECTOR_HDMI_1	:
-+		case DCB_CONNECTOR_HDMI_C	: args->v0.type = NVIF_CONN_V0_HDMI; break;
-+
-+		/*
-+		 * Dock & unused outputs.
-+		 * BNC, SPDIF, WFD, and detached LVDS go here.
-+		 */
- 		default:
--			WARN_ON(1);
-+			nvkm_warn(&(disp->engine.subdev),
-+				  "unimplemented connector type 0x%02x\n",
-+				  conn->info.type);
-+			args->v0.type = NVIF_CONN_V0_VGA;
- 			ret = -EINVAL;
- 			break;
- 		}
--- 
-2.51.0
+This might not be too difficult to shoehorn as there is an
+`is_in_bounds!` macro (which we can turn into a const method if that's
+more suitable) that your proc macro could leverage, but I can't help but
+thing that maybe there is a better, more general solution than
+special-casing this?
 
+[1] https://lore.kernel.org/rust-for-linux/20251009-bounded_ints-v2-0-ff3d7=
+fee3ffd@nvidia.com/
