@@ -2,74 +2,85 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id A190BCBA905
-	for <lists+nouveau@lfdr.de>; Sat, 13 Dec 2025 13:17:28 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 7B275CBABBF
+	for <lists+nouveau@lfdr.de>; Sat, 13 Dec 2025 13:43:19 +0100 (CET)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 7DD9A10E432;
-	Sat, 13 Dec 2025 12:17:25 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id C935B10EA7B;
+	Sat, 13 Dec 2025 12:41:05 +0000 (UTC)
+Authentication-Results: gabe.freedesktop.org;
+	dkim=permerror (0-bit key) header.d=gmail.com header.i=@gmail.com header.b="MajzK9qS";
+	dkim-atps=neutral
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from tor.source.kernel.org (tor.source.kernel.org [172.105.4.254])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 3A53C10E767;
- Wed, 15 Oct 2025 09:48:37 +0000 (UTC)
-Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by tor.source.kernel.org (Postfix) with ESMTP id 099AF62572;
- Wed, 15 Oct 2025 09:48:36 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id A0B69C4CEF8;
- Wed, 15 Oct 2025 09:48:24 +0000 (UTC)
-Date: Wed, 15 Oct 2025 10:48:21 +0100
-From: Mark Brown <broonie@debian.org>
-To: Tamir Duberstein <tamird@gmail.com>
-Cc: "Rafael J. Wysocki" <rafael@kernel.org>,
- Viresh Kumar <viresh.kumar@linaro.org>, Miguel Ojeda <ojeda@kernel.org>,
- Alex Gaynor <alex.gaynor@gmail.com>,
- Boqun Feng <boqun.feng@gmail.com>, Gary Guo <gary@garyguo.net>,
- =?iso-8859-1?Q?Bj=F6rn?= Roy Baron <bjorn3_gh@protonmail.com>,
+Received: from mail-wm1-f43.google.com (mail-wm1-f43.google.com
+ [209.85.128.43])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 7A39410E8E9
+ for <nouveau@lists.freedesktop.org>; Wed, 15 Oct 2025 19:50:26 +0000 (UTC)
+Received: by mail-wm1-f43.google.com with SMTP id
+ 5b1f17b1804b1-4710665e7deso4599405e9.1
+ for <nouveau@lists.freedesktop.org>; Wed, 15 Oct 2025 12:50:26 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=gmail.com; s=20230601; t=1760557825; x=1761162625; darn=lists.freedesktop.org;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=bdStip0PmH8uNxqvUSt7q9Mj9fkGcDmvgx0joPS4jZo=;
+ b=MajzK9qSSDnJdxVhAMbLaenaan2i0j1laS0sigU/w/bbMAYoVd+QZiW9olaKl3x+jT
+ G88SAvKAegjHG1YISlZlGyL9KjxWlw7Y/S3VlsZeupdMNZ2pCyoaPN2iDrDecWTIZXVH
+ knHsTH314GojSSxyGlawhgBZDQH83Zsn8ef2cZVSkiZVAP8TgLOEfo7rtCurHiD74ojJ
+ jXAS/rhOzVpCMxZ0fuBa+BoDh8zNZKTKds+QqXue2zOvVqpwS77l6WbR9s6cWwS0UflL
+ R5/u3qtPObVKo81ymYLB0w7Ia/7jqdls7Ift/2o7+2DBVHgfqHAbHo0+nCBoNxjKCgMv
+ Niyw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1760557825; x=1761162625;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=bdStip0PmH8uNxqvUSt7q9Mj9fkGcDmvgx0joPS4jZo=;
+ b=r+dqlXWxuWKMyEeHNTNAemAHb1PjrEKOUODKLRyLSYUBeKyJTr6rGH+4R88nGhJmch
+ c0pKQdbfOSbiJUjbtInYiEG+wV8X2cIvksuqAmjhRo+1jQIX6sdrXjkalTtVYT2kPDWo
+ FkwzQuzkMnADZ1NhEZl2LeqF3qfawURERBQ7ytMdg3nijPNA0WYRuzjvGb2G+0BxD0Vt
+ Xz9sAUdO3xPltnmDSDKT1HF+2grlSpIcI1PNgsqVPIH9y3ERm83+YViZayyhTZIUWRgI
+ GrFuiN0fL8V0OsWl2qkMB5VopIvMARipfQ8rOKGxBcHJjJLu/cUx1YeZKi8SUK8091o3
+ JlkA==
+X-Gm-Message-State: AOJu0YzXsAa1MdqFH+awpkxfaMRwOtHMRMZbEPadGVmit1pQTI4Sk9Z/
+ V8ArZW4WbF5ucg23DUUiblF127AIS+ARlzFNzVpE6aaH2971kGH1Vt2i
+X-Gm-Gg: ASbGncsDJkFK/uNIkAP9UeyO9Y3InBjdMmCOuZtgQRHd+lHNbxEEUyVW7eTImrmoVKc
+ snQSN61yMdge+XFfmWS75DX/AjuH7jx3LufhTFjvwnhfjUkJ0P2mLlg9EmclLa2vPwC43uJjem1
+ 6ZtmOo3/FnTErCEmnJJqcNtJXV596ZXr4uPpl+inr8NwC+zNO6XXetnr4hLWj1zftcmu5yngELx
+ uU9Ob0PJE27ZzmRudIYOM8eaygO2jJN9OZIotJTnT7F3l7liHlrBPy0d2202L89V+0rpIyJoBLL
+ H79hyE8IioCNm47dJL/R0p5lfpn6hcXqf8xP7gxWdna1xzJrjZyIasrUNU3ZLaZrRVihh80u8eg
+ FXi5meoPs+baRHLW7eRiPZuO5BxysZO3ye/utrYTj41usEF6dLb0VuOEBFLGomjHCk69iNI3fNT
+ Zc69g6mFPsMammMTx9irYHtMrNP1Sg
+X-Google-Smtp-Source: AGHT+IGddGrpCxX7OrSl23A+tvIURBAgb57PvaARooGLmVHLlO5kmYWtSLkEff3kH7Jc2lvzrUziFw==
+X-Received: by 2002:a05:600c:1990:b0:46e:37af:f90e with SMTP id
+ 5b1f17b1804b1-46fa9a8f085mr218854435e9.6.1760557824618; 
+ Wed, 15 Oct 2025 12:50:24 -0700 (PDT)
+Received: from archito.cern.ch ([2a01:e0a:acc:bb60:756b:64e3:20ef:1d08])
+ by smtp.gmail.com with ESMTPSA id
+ 5b1f17b1804b1-46fc155143fsm281464675e9.11.2025.10.15.12.50.23
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Wed, 15 Oct 2025 12:50:24 -0700 (PDT)
+From: Daniel del Castillo <delcastillodelarosadaniel@gmail.com>
+To: Danilo Krummrich <dakr@kernel.org>,
+ Alexandre Courbot <acourbot@nvidia.com>, David Airlie <airlied@gmail.com>,
+ Simona Vetter <simona@ffwll.ch>, Miguel Ojeda <ojeda@kernel.org>,
+ Alex Gaynor <alex.gaynor@gmail.com>
+Cc: nouveau@lists.freedesktop.org, dri-devel@lists.freedesktop.org,
+ linux-kernel@vger.kernel.org, Boqun Feng <boqun.feng@gmail.com>,
+ Gary Guo <gary@garyguo.net>,
+ =?UTF-8?q?Bj=C3=B6rn=20Roy=20Baron?= <bjorn3_gh@protonmail.com>,
  Benno Lossin <lossin@kernel.org>, Andreas Hindborg <a.hindborg@kernel.org>,
  Alice Ryhl <aliceryhl@google.com>, Trevor Gross <tmgross@umich.edu>,
- Danilo Krummrich <dakr@kernel.org>,
- Maarten Lankhorst <maarten.lankhorst@linux.intel.com>,
- Maxime Ripard <mripard@kernel.org>,
- Thomas Zimmermann <tzimmermann@suse.de>,
- David Airlie <airlied@gmail.com>, Simona Vetter <simona@ffwll.ch>,
- FUJITA Tomonori <fujita.tomonori@gmail.com>, Andrew Lunn <andrew@lunn.ch>,
- Heiner Kallweit <hkallweit1@gmail.com>,
- Russell King <linux@armlinux.org.uk>,
- "David S. Miller" <davem@davemloft.net>,
- Eric Dumazet <edumazet@google.com>,
- Jakub Kicinski <kuba@kernel.org>, Paolo Abeni <pabeni@redhat.com>,
- Michael Turquette <mturquette@baylibre.com>,
- Stephen Boyd <sboyd@kernel.org>, Breno Leitao <leitao@debian.org>,
- Greg Kroah-Hartman <gregkh@linuxfoundation.org>,
- Luis Chamberlain <mcgrof@kernel.org>, Russ Weight <russ.weight@linux.dev>,
- Dave Ertman <david.m.ertman@intel.com>,
- Ira Weiny <ira.weiny@intel.com>, Leon Romanovsky <leon@kernel.org>,
- Bjorn Helgaas <bhelgaas@google.com>,
- Krzysztof =?utf-8?Q?Wilczy=C5=84ski?= <kwilczynski@kernel.org>,
- Arnd Bergmann <arnd@arndb.de>, Brendan Higgins <brendan.higgins@linux.dev>,
- David Gow <davidgow@google.com>, Rae Moar <rmoar@google.com>,
- Jens Axboe <axboe@kernel.dk>, Alexandre Courbot <acourbot@nvidia.com>,
- Alexander Viro <viro@zeniv.linux.org.uk>,
- Christian Brauner <brauner@kernel.org>, Jan Kara <jack@suse.cz>,
- Liam Girdwood <lgirdwood@gmail.com>, linux-pm@vger.kernel.org,
- linux-kernel@vger.kernel.org, rust-for-linux@vger.kernel.org,
- nouveau@lists.freedesktop.org, dri-devel@lists.freedesktop.org,
- netdev@vger.kernel.org, linux-clk@vger.kernel.org,
- linux-pci@vger.kernel.org, linux-kselftest@vger.kernel.org,
- kunit-dev@googlegroups.com, linux-block@vger.kernel.org,
- linux-fsdevel@vger.kernel.org
-Subject: Re: [PATCH v2 19/19] rust: regulator: replace `kernel::c_str!` with
- C-Strings
-Message-ID: <a6d606c0-716f-49b5-81cf-362b325b7872@sirena.org.uk>
-References: <20250925-core-cstr-cstrings-v2-0-78e0aaace1cd@gmail.com>
- <20250925-core-cstr-cstrings-v2-19-78e0aaace1cd@gmail.com>
+ rust-for-linux@vger.kernel.org,
+ Daniel del Castillo <delcastillodelarosadaniel@gmail.com>
+Subject: [PATCH 1/2] nova-core: Solve mentions of `CoherentAllocation`
+ improvements [COHA]
+Date: Wed, 15 Oct 2025 21:49:35 +0200
+Message-ID: <20251015194936.121586-1-delcastillodelarosadaniel@gmail.com>
+X-Mailer: git-send-email 2.51.0
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="qu2IBVFvaIEaH/yu"
-Content-Disposition: inline
-In-Reply-To: <20250925-core-cstr-cstrings-v2-19-78e0aaace1cd@gmail.com>
-X-Cookie: Sentient plasmoids are a gas.
-X-Mailman-Approved-At: Sat, 13 Dec 2025 12:17:00 +0000
+Content-Transfer-Encoding: 8bit
+X-Mailman-Approved-At: Sat, 13 Dec 2025 12:40:46 +0000
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -84,30 +95,244 @@ List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
+This patch solves the existing mentions of COHA, a task
+in the Nova task list about improving the `CoherentAllocation` API.
+I confirmed by talking to Alexandre Courbot, that the reading/writing
+methods in `CoherentAllocation` can never be safe, so
+this patch doesn't actually change `CoherentAllocation`, but rather
+tries to solve the existing references to [COHA].
 
---qu2IBVFvaIEaH/yu
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
+Signed-off-by: Daniel del Castillo <delcastillodelarosadaniel@gmail.com>
+---
+ drivers/gpu/nova-core/dma.rs            |  20 ++---
+ drivers/gpu/nova-core/firmware/fwsec.rs | 104 ++++++++++--------------
+ 2 files changed, 50 insertions(+), 74 deletions(-)
 
-On Thu, Sep 25, 2025 at 09:54:07AM -0400, Tamir Duberstein wrote:
-> C-String literals were added in Rust 1.77. Replace instances of
-> `kernel::c_str!` with C-String literals where possible.
+diff --git a/drivers/gpu/nova-core/dma.rs b/drivers/gpu/nova-core/dma.rs
+index 94f44bcfd748..639a99cf72c4 100644
+--- a/drivers/gpu/nova-core/dma.rs
++++ b/drivers/gpu/nova-core/dma.rs
+@@ -25,21 +25,11 @@ pub(crate) fn new(dev: &device::Device<device::Bound>, len: usize) -> Result<Sel
+     }
+ 
+     pub(crate) fn from_data(dev: &device::Device<device::Bound>, data: &[u8]) -> Result<Self> {
+-        Self::new(dev, data.len()).map(|mut dma_obj| {
+-            // TODO[COHA]: replace with `CoherentAllocation::write()` once available.
+-            // SAFETY:
+-            // - `dma_obj`'s size is at least `data.len()`.
+-            // - We have just created this object and there is no other user at this stage.
+-            unsafe {
+-                core::ptr::copy_nonoverlapping(
+-                    data.as_ptr(),
+-                    dma_obj.dma.start_ptr_mut(),
+-                    data.len(),
+-                );
+-            }
+-
+-            dma_obj
+-        })
++        let mut dma_obj = Self::new(dev, data.len())?;
++        // SAFETY: We have just created this object and there is no other user at this stage.
++        unsafe { dma_obj.write(data, 0)? };
++
++        Ok(dma_obj)
+     }
+ }
+ 
+diff --git a/drivers/gpu/nova-core/firmware/fwsec.rs b/drivers/gpu/nova-core/firmware/fwsec.rs
+index 8edbb5c0572c..cc5a6200d0de 100644
+--- a/drivers/gpu/nova-core/firmware/fwsec.rs
++++ b/drivers/gpu/nova-core/firmware/fwsec.rs
+@@ -11,12 +11,12 @@
+ //! - The ucode signature, so the GSP falcon can run FWSEC in HS mode.
+ 
+ use core::marker::PhantomData;
+-use core::mem::{align_of, size_of};
++use core::mem::size_of;
+ use core::ops::Deref;
+ 
+ use kernel::device::{self, Device};
+ use kernel::prelude::*;
+-use kernel::transmute::FromBytes;
++use kernel::transmute::{AsBytes, FromBytes};
+ 
+ use crate::dma::DmaObject;
+ use crate::driver::Bar0;
+@@ -70,6 +70,8 @@ struct FalconAppifDmemmapperV3 {
+ }
+ // SAFETY: any byte sequence is valid for this struct.
+ unsafe impl FromBytes for FalconAppifDmemmapperV3 {}
++// SAFETY: any byte sequence is valid and it contains no padding nor kernel pointers.
++unsafe impl AsBytes for FalconAppifDmemmapperV3 {}
+ 
+ #[derive(Debug)]
+ #[repr(C, packed)]
+@@ -82,6 +84,8 @@ struct ReadVbios {
+ }
+ // SAFETY: any byte sequence is valid for this struct.
+ unsafe impl FromBytes for ReadVbios {}
++// SAFETY: any byte sequence is valid and it contains no padding nor kernel pointers.
++unsafe impl AsBytes for ReadVbios {}
+ 
+ #[derive(Debug)]
+ #[repr(C, packed)]
+@@ -94,6 +98,8 @@ struct FrtsRegion {
+ }
+ // SAFETY: any byte sequence is valid for this struct.
+ unsafe impl FromBytes for FrtsRegion {}
++// SAFETY: any byte sequence is valid and it contains no padding nor kernel pointers.
++unsafe impl AsBytes for FrtsRegion {}
+ 
+ const NVFW_FRTS_CMD_REGION_TYPE_FB: u32 = 2;
+ 
+@@ -104,6 +110,8 @@ struct FrtsCmd {
+ }
+ // SAFETY: any byte sequence is valid for this struct.
+ unsafe impl FromBytes for FrtsCmd {}
++// SAFETY: any byte sequence is valid and it contains no padding nor kernel pointers.
++unsafe impl AsBytes for FrtsCmd {}
+ 
+ const NVFW_FALCON_APPIF_DMEMMAPPER_CMD_FRTS: u32 = 0x15;
+ const NVFW_FALCON_APPIF_DMEMMAPPER_CMD_SB: u32 = 0x19;
+@@ -149,24 +157,9 @@ impl FirmwareSignature<FwsecFirmware> for Bcrt30Rsa3kSignature {}
+ ///
+ /// Callers must ensure that the region of memory returned is not written for as long as the
+ /// returned reference is alive.
+-///
+-/// TODO[TRSM][COHA]: Remove this and `transmute_mut` once `CoherentAllocation::as_slice` is
+-/// available and we have a way to transmute objects implementing FromBytes, e.g.:
+-/// https://lore.kernel.org/lkml/20250330234039.29814-1-christiansantoslima21@gmail.com/
+-unsafe fn transmute<'a, 'b, T: Sized + FromBytes>(
+-    fw: &'a DmaObject,
+-    offset: usize,
+-) -> Result<&'b T> {
+-    if offset + size_of::<T>() > fw.size() {
+-        return Err(EINVAL);
+-    }
+-    if (fw.start_ptr() as usize + offset) % align_of::<T>() != 0 {
+-        return Err(EINVAL);
+-    }
+-
+-    // SAFETY: we have checked that the pointer is properly aligned that its pointed memory is
+-    // large enough the contains an instance of `T`, which implements `FromBytes`.
+-    Ok(unsafe { &*(fw.start_ptr().add(offset).cast::<T>()) })
++unsafe fn transmute<T: Sized + FromBytes>(fw: &DmaObject, offset: usize) -> Result<&T> {
++    // SAFETY: Guaranteed by the safety requirements of the function.
++    T::from_bytes(unsafe { fw.as_slice(offset, size_of::<T>())? }).ok_or(EINVAL)
+ }
+ 
+ /// Reinterpret the area starting from `offset` in `fw` as a mutable instance of `T` (which must
+@@ -176,20 +169,12 @@ unsafe fn transmute<'a, 'b, T: Sized + FromBytes>(
+ ///
+ /// Callers must ensure that the region of memory returned is not read or written for as long as
+ /// the returned reference is alive.
+-unsafe fn transmute_mut<'a, 'b, T: Sized + FromBytes>(
+-    fw: &'a mut DmaObject,
++unsafe fn transmute_mut<T: Sized + FromBytes + AsBytes>(
++    fw: &mut DmaObject,
+     offset: usize,
+-) -> Result<&'b mut T> {
+-    if offset + size_of::<T>() > fw.size() {
+-        return Err(EINVAL);
+-    }
+-    if (fw.start_ptr_mut() as usize + offset) % align_of::<T>() != 0 {
+-        return Err(EINVAL);
+-    }
+-
+-    // SAFETY: we have checked that the pointer is properly aligned that its pointed memory is
+-    // large enough the contains an instance of `T`, which implements `FromBytes`.
+-    Ok(unsafe { &mut *(fw.start_ptr_mut().add(offset).cast::<T>()) })
++) -> Result<&mut T> {
++    // SAFETY: Guaranteed by the safety requirements of the function.
++    T::from_bytes_mut(unsafe { fw.as_slice_mut(offset, size_of::<T>())? }).ok_or(EINVAL)
+ }
+ 
+ /// The FWSEC microcode, extracted from the BIOS and to be run on the GSP falcon.
+@@ -260,32 +245,38 @@ fn new_fwsec(dev: &Device<device::Bound>, bios: &Vbios, cmd: FwsecCommand) -> Re
+ 
+         // Find the DMEM mapper section in the firmware.
+         for i in 0..hdr.entry_count as usize {
+-            let app: &FalconAppifV1 =
+             // SAFETY: we have exclusive access to `dma_object`.
+-            unsafe {
++            let app: &FalconAppifV1 = unsafe {
+                 transmute(
+                     &dma_object,
+-                    hdr_offset + hdr.header_size as usize + i * hdr.entry_size as usize
++                    hdr_offset + hdr.header_size as usize + i * hdr.entry_size as usize,
+                 )
+             }?;
+ 
+             if app.id != NVFW_FALCON_APPIF_ID_DMEMMAPPER {
+                 continue;
+             }
++            let dmem_base = app.dmem_base;
+ 
+             // SAFETY: we have exclusive access to `dma_object`.
+             let dmem_mapper: &mut FalconAppifDmemmapperV3 = unsafe {
+-                transmute_mut(
+-                    &mut dma_object,
+-                    (desc.imem_load_size + app.dmem_base) as usize,
+-                )
++                transmute_mut(&mut dma_object, (desc.imem_load_size + dmem_base) as usize)
+             }?;
+ 
++            dmem_mapper.init_cmd = match cmd {
++                FwsecCommand::Frts {
++                    frts_addr: _,
++                    frts_size: _,
++                } => NVFW_FALCON_APPIF_DMEMMAPPER_CMD_FRTS,
++                FwsecCommand::Sb => NVFW_FALCON_APPIF_DMEMMAPPER_CMD_SB,
++            };
++            let cmd_in_buffer_offset = dmem_mapper.cmd_in_buffer_offset;
++
+             // SAFETY: we have exclusive access to `dma_object`.
+             let frts_cmd: &mut FrtsCmd = unsafe {
+                 transmute_mut(
+                     &mut dma_object,
+-                    (desc.imem_load_size + dmem_mapper.cmd_in_buffer_offset) as usize,
++                    (desc.imem_load_size + cmd_in_buffer_offset) as usize,
+                 )
+             }?;
+ 
+@@ -296,24 +287,19 @@ fn new_fwsec(dev: &Device<device::Bound>, bios: &Vbios, cmd: FwsecCommand) -> Re
+                 size: 0,
+                 flags: 2,
+             };
+-
+-            dmem_mapper.init_cmd = match cmd {
+-                FwsecCommand::Frts {
+-                    frts_addr,
+-                    frts_size,
+-                } => {
+-                    frts_cmd.frts_region = FrtsRegion {
+-                        ver: 1,
+-                        hdr: size_of::<FrtsRegion>() as u32,
+-                        addr: (frts_addr >> 12) as u32,
+-                        size: (frts_size >> 12) as u32,
+-                        ftype: NVFW_FRTS_CMD_REGION_TYPE_FB,
+-                    };
+-
+-                    NVFW_FALCON_APPIF_DMEMMAPPER_CMD_FRTS
+-                }
+-                FwsecCommand::Sb => NVFW_FALCON_APPIF_DMEMMAPPER_CMD_SB,
+-            };
++            if let FwsecCommand::Frts {
++                frts_addr,
++                frts_size,
++            } = cmd
++            {
++                frts_cmd.frts_region = FrtsRegion {
++                    ver: 1,
++                    hdr: size_of::<FrtsRegion>() as u32,
++                    addr: (frts_addr >> 12) as u32,
++                    size: (frts_size >> 12) as u32,
++                    ftype: NVFW_FRTS_CMD_REGION_TYPE_FB,
++                };
++            }
+ 
+             // Return early as we found and patched the DMEMMAPPER region.
+             return Ok(Self(dma_object, PhantomData));
+-- 
+2.51.0
 
-This doesn't apply against current code, please check and resend.
-
---qu2IBVFvaIEaH/yu
-Content-Type: application/pgp-signature; name="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iQEzBAABCgAdFiEEreZoqmdXGLWf4p/qJNaLcl1Uh9AFAmjvbeQACgkQJNaLcl1U
-h9Dt8Af/TLwPaPEPyJKhHTg8cZeHf70d+vVL0moyk8tdCcvNggPRPd8mXg0NT9mO
-qmJvoWmet4bQC3McxDEI2hDArwrV6orbVM8LsRyd78hdChnLNP1058/WMu4IMsm9
-2BDs6OT5Nma+7YMa+KS6S7fkuUmt9AG/CkBR9NAGDX0K6kGd/GQ1E9I11cf8Cdqs
-YFLT67SrYyxGv3ZGtK5IkUOmqn8vSKPTtrQiuzfeSkwR6iBWmy5jq1VR/Qh2Kycq
-c/7pMyRZK1HaRL+RnAGvZaPuru3c9bRia03t2TS0BaJJYl8QMaNG2TqmOxxHBHNP
-0Dagzm72apYtzPFYbdE9flnTkc2o/Q==
-=ofuh
------END PGP SIGNATURE-----
-
---qu2IBVFvaIEaH/yu--
