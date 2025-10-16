@@ -2,69 +2,58 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id 7B266BE5879
-	for <lists+nouveau@lfdr.de>; Thu, 16 Oct 2025 23:10:42 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id ABC92BE58F2
+	for <lists+nouveau@lfdr.de>; Thu, 16 Oct 2025 23:19:39 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id EBAD810EA8A;
-	Thu, 16 Oct 2025 21:10:40 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id A170910EA97;
+	Thu, 16 Oct 2025 21:19:36 +0000 (UTC)
 Authentication-Results: gabe.freedesktop.org;
-	dkim=pass (1024-bit key; unprotected) header.d=redhat.com header.i=@redhat.com header.b="dYHtwlw4";
+	dkim=pass (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="nki/ULUq";
 	dkim-atps=neutral
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from us-smtp-delivery-124.mimecast.com
- (us-smtp-delivery-124.mimecast.com [170.10.133.124])
- by gabe.freedesktop.org (Postfix) with ESMTPS id E062710E382
- for <nouveau@lists.freedesktop.org>; Thu, 16 Oct 2025 21:10:38 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1760649038;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references;
- bh=RFGYI2GY+pZyjlwMees9S7niC3kaCabOLOovFrN+Si8=;
- b=dYHtwlw4FoX6S+yGMpIEoQjbtnOiLHLU6So2ChHi/bNMSn9mmu7Q+mUdlRUPKVN8UXKaTe
- PbotWRYwCZtrO2jx+nRd/C3CkwSClk425fi/fO547kyoSJsnNKRG4Qi3jee5XIYsBfgY8+
- /v/GgYO5hK9wl1kXLP+MeJGiTyCyvok=
-Received: from mx-prod-mc-06.mail-002.prod.us-west-2.aws.redhat.com
- (ec2-35-165-154-97.us-west-2.compute.amazonaws.com [35.165.154.97]) by
- relay.mimecast.com with ESMTP with STARTTLS (version=TLSv1.3,
- cipher=TLS_AES_256_GCM_SHA384) id us-mta-664-BvqlooD8PCyHmVkNPNnZ4Q-1; Thu,
- 16 Oct 2025 17:10:36 -0400
-X-MC-Unique: BvqlooD8PCyHmVkNPNnZ4Q-1
-X-Mimecast-MFC-AGG-ID: BvqlooD8PCyHmVkNPNnZ4Q_1760649034
-Received: from mx-prod-int-01.mail-002.prod.us-west-2.aws.redhat.com
- (mx-prod-int-01.mail-002.prod.us-west-2.aws.redhat.com [10.30.177.4])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
- (No client certificate requested)
- by mx-prod-mc-06.mail-002.prod.us-west-2.aws.redhat.com (Postfix) with ESMTPS
- id 13F5E180122A; Thu, 16 Oct 2025 21:10:34 +0000 (UTC)
-Received: from chopper.lan (unknown [10.22.80.252])
- by mx-prod-int-01.mail-002.prod.us-west-2.aws.redhat.com (Postfix) with ESMTP
- id 3206E300019F; Thu, 16 Oct 2025 21:10:31 +0000 (UTC)
-From: Lyude Paul <lyude@redhat.com>
-To: dri-devel@lists.freedesktop.org, rust-for-linux@vger.kernel.org,
- Daniel Almeida <daniel.almeida@collabora.com>,
- Alice Ryhl <aliceryhl@google.com>
-Cc: Danilo Krummrich <dakr@kernel.org>, David Airlie <airlied@gmail.com>,
- Simona Vetter <simona@ffwll.ch>, Miguel Ojeda <ojeda@kernel.org>,
- Alex Gaynor <alex.gaynor@gmail.com>, Boqun Feng <boqun.feng@gmail.com>,
- Gary Guo <gary@garyguo.net>,
- =?UTF-8?q?Bj=C3=B6rn=20Roy=20Baron?= <bjorn3_gh@protonmail.com>,
- Benno Lossin <lossin@kernel.org>, Andreas Hindborg <a.hindborg@kernel.org>,
- Trevor Gross <tmgross@umich.edu>, Asahi Lina <lina+kernel@asahilina.net>,
- Shankari Anand <shankari.ak0208@gmail.com>,
- nouveau@lists.freedesktop.org (open list:DRM DRIVER FOR NVIDIA GPUS [RUST]),
- linux-kernel@vger.kernel.org (open list)
-Subject: [PATCH v4 5/9] rust: gem: Introduce DriverObject::Args
-Date: Thu, 16 Oct 2025 17:08:18 -0400
-Message-ID: <20251016210955.2813186-6-lyude@redhat.com>
-In-Reply-To: <20251016210955.2813186-1-lyude@redhat.com>
-References: <20251016210955.2813186-1-lyude@redhat.com>
+Received: from sea.source.kernel.org (sea.source.kernel.org [172.234.252.31])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id D51FB10EA96;
+ Thu, 16 Oct 2025 21:19:34 +0000 (UTC)
+Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
+ by sea.source.kernel.org (Postfix) with ESMTP id 95F76418D6;
+ Thu, 16 Oct 2025 21:19:34 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 5463EC4CEF1;
+ Thu, 16 Oct 2025 21:19:31 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+ s=k20201202; t=1760649574;
+ bh=tLht0hogKAd9moeHeSio4bb2QbKG78zvDKNBY8e6Beo=;
+ h=Date:Subject:To:Cc:References:From:In-Reply-To:From;
+ b=nki/ULUqCLt0HVz0H2BEsvB08XnDngifRrqfMIme7ex6WmWEZFW/+PNYok88Ye1gk
+ 5NkZym2m9SvUva0L9vOd3k24C/OrFF5ArJXswfzpqive3b1e6TBqC7xi+BpAPcBjth
+ byES0LmjEvfGbSdV0K6MbJTkGWbZJqoCiF3HAwMoKhDIPsNgayYLGxZRhDg2nGtqGi
+ 1DB/Oox6qsSFGDFDyvLAP86L4wi5LOcBQLe4SSwCBP9ZCjIcGmmjFsMPayp1GWxg8y
+ Rxd2xN5GUFocpj2VjzV3n9k3pn7OKq1frxrABPcAQcMk4l/H+7F6XETeaT48Oi81KQ
+ rZeNKKHUmRNdw==
+Message-ID: <0eedf2b9-2e80-421a-9356-d5ba8e49a147@kernel.org>
+Date: Thu, 16 Oct 2025 23:19:29 +0200
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-X-Scanned-By: MIMEDefang 3.4.1 on 10.30.177.4
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH 1/2] nova-core: Solve mentions of `CoherentAllocation`
+ improvements [COHA]
+To: Daniel del Castillo <delcastillodelarosadaniel@gmail.com>
+Cc: Alexandre Courbot <acourbot@nvidia.com>, David Airlie
+ <airlied@gmail.com>, Simona Vetter <simona@ffwll.ch>,
+ Miguel Ojeda <ojeda@kernel.org>, Alex Gaynor <alex.gaynor@gmail.com>,
+ nouveau@lists.freedesktop.org, dri-devel@lists.freedesktop.org,
+ linux-kernel@vger.kernel.org, Boqun Feng <boqun.feng@gmail.com>,
+ Gary Guo <gary@garyguo.net>, =?UTF-8?Q?Bj=C3=B6rn_Roy_Baron?=
+ <bjorn3_gh@protonmail.com>, Benno Lossin <lossin@kernel.org>,
+ Andreas Hindborg <a.hindborg@kernel.org>, Alice Ryhl <aliceryhl@google.com>,
+ Trevor Gross <tmgross@umich.edu>, rust-for-linux@vger.kernel.org
+References: <20251015194936.121586-1-delcastillodelarosadaniel@gmail.com>
+ <409f2f03-2bc2-4cb8-9ca7-4e30f82077ff@kernel.org>
+ <21944b18-ac36-4acd-9d36-cc05579acc0d@gmail.com>
+From: Danilo Krummrich <dakr@kernel.org>
+Content-Language: en-US
+In-Reply-To: <21944b18-ac36-4acd-9d36-cc05579acc0d@gmail.com>
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -79,84 +68,9 @@ List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-This is an associated type that may be used in order to specify a data-type
-to pass to gem objects when construction them, allowing for drivers to more
-easily initialize their private-data for gem objects.
+On 10/16/25 11:13 PM, Daniel del Castillo wrote:
+> Sorry, I thought it was okay as they were part of the same task. Will do.
 
-Signed-off-by: Lyude Paul <lyude@redhat.com>
-
----
-V3:
-* s/BaseDriverObject/DriverObject/
-V4:
-* Fix leftover reference to BaseObjectDriver in rustdoc for
-  DriverObject::Args
-
-Signed-off-by: Lyude Paul <lyude@redhat.com>
----
- drivers/gpu/drm/nova/gem.rs |  5 +++--
- rust/kernel/drm/gem/mod.rs  | 13 ++++++++++---
- 2 files changed, 13 insertions(+), 5 deletions(-)
-
-diff --git a/drivers/gpu/drm/nova/gem.rs b/drivers/gpu/drm/nova/gem.rs
-index 2760ba4f3450b..173077eeb2def 100644
---- a/drivers/gpu/drm/nova/gem.rs
-+++ b/drivers/gpu/drm/nova/gem.rs
-@@ -18,8 +18,9 @@ pub(crate) struct NovaObject {}
- 
- impl gem::DriverObject for NovaObject {
-     type Driver = NovaDriver;
-+    type Args = ();
- 
--    fn new(_dev: &NovaDevice, _size: usize) -> impl PinInit<Self, Error> {
-+    fn new(_dev: &NovaDevice, _size: usize, _args: Self::Args) -> impl PinInit<Self, Error> {
-         try_pin_init!(NovaObject {})
-     }
- }
-@@ -33,7 +34,7 @@ pub(crate) fn new(dev: &NovaDevice, size: usize) -> Result<ARef<gem::Object<Self
-             return Err(EINVAL);
-         }
- 
--        gem::Object::new(dev, aligned_size)
-+        gem::Object::new(dev, aligned_size, ())
-     }
- 
-     /// Look up a GEM object handle for a `File` and return an `ObjectRef` for it.
-diff --git a/rust/kernel/drm/gem/mod.rs b/rust/kernel/drm/gem/mod.rs
-index 760fcd61da0b7..f271c9176bca5 100644
---- a/rust/kernel/drm/gem/mod.rs
-+++ b/rust/kernel/drm/gem/mod.rs
-@@ -64,8 +64,15 @@ pub trait DriverObject: Sync + Send + Sized {
-     /// Parent `Driver` for this object.
-     type Driver: drm::Driver;
- 
-+    /// The data type to use for passing arguments to [`DriverObject::new`].
-+    type Args;
-+
-     /// Create a new driver data object for a GEM object of a given size.
--    fn new(dev: &drm::Device<Self::Driver>, size: usize) -> impl PinInit<Self, Error>;
-+    fn new(
-+        dev: &drm::Device<Self::Driver>,
-+        size: usize,
-+        args: Self::Args,
-+    ) -> impl PinInit<Self, Error>;
- 
-     /// Open a new handle to an existing object, associated with a File.
-     fn open(_obj: &<Self::Driver as drm::Driver>::Object, _file: &DriverFile<Self>) -> Result {
-@@ -246,11 +253,11 @@ impl<T: DriverObject> Object<T> {
-     };
- 
-     /// Create a new GEM object.
--    pub fn new(dev: &drm::Device<T::Driver>, size: usize) -> Result<ARef<Self>> {
-+    pub fn new(dev: &drm::Device<T::Driver>, size: usize, args: T::Args) -> Result<ARef<Self>> {
-         let obj: Pin<KBox<Self>> = KBox::pin_init(
-             try_pin_init!(Self {
-                 obj: Opaque::new(bindings::drm_gem_object::default()),
--                data <- T::new(dev, size),
-+                data <- T::new(dev, size, args),
-                 // INVARIANT: The drm subsystem guarantees that the `struct drm_device` will live
-                 // as long as the GEM object lives.
-                 dev: dev.into(),
--- 
-2.51.0
-
+No worries, no need to apologize -- thanks for your contribution!
+> Thanks for the other comments as well, I'll apply them and send a new
+> version soon.
