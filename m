@@ -2,71 +2,71 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id 3CAB7CBADAC
-	for <lists+nouveau@lfdr.de>; Sat, 13 Dec 2025 13:45:21 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 2513FCBACCA
+	for <lists+nouveau@lfdr.de>; Sat, 13 Dec 2025 13:44:21 +0100 (CET)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 5044810EB9F;
-	Sat, 13 Dec 2025 12:41:33 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 008CD10EB77;
+	Sat, 13 Dec 2025 12:41:08 +0000 (UTC)
 Authentication-Results: gabe.freedesktop.org;
-	dkim=permerror (0-bit key) header.d=gmail.com header.i=@gmail.com header.b="hHSSKlEt";
+	dkim=permerror (0-bit key) header.d=gmail.com header.i=@gmail.com header.b="Rds6/S5S";
 	dkim-atps=neutral
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from mail-wr1-f54.google.com (mail-wr1-f54.google.com
- [209.85.221.54])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 5EFC010EA85
- for <nouveau@lists.freedesktop.org>; Thu, 16 Oct 2025 21:13:14 +0000 (UTC)
-Received: by mail-wr1-f54.google.com with SMTP id
- ffacd0b85a97d-426ed6f4db5so1410360f8f.0
- for <nouveau@lists.freedesktop.org>; Thu, 16 Oct 2025 14:13:14 -0700 (PDT)
+Received: from mail-wr1-f51.google.com (mail-wr1-f51.google.com
+ [209.85.221.51])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 1EB8210EAA8
+ for <nouveau@lists.freedesktop.org>; Thu, 16 Oct 2025 21:46:31 +0000 (UTC)
+Received: by mail-wr1-f51.google.com with SMTP id
+ ffacd0b85a97d-3ece0e4c5faso1120316f8f.1
+ for <nouveau@lists.freedesktop.org>; Thu, 16 Oct 2025 14:46:30 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1760649193; x=1761253993; darn=lists.freedesktop.org;
+ d=gmail.com; s=20230601; t=1760651189; x=1761255989; darn=lists.freedesktop.org;
  h=content-transfer-encoding:in-reply-to:from:content-language
  :references:cc:to:subject:user-agent:mime-version:date:message-id
  :from:to:cc:subject:date:message-id:reply-to;
- bh=t7dC9s7DUHDfq+JM4myzAQqHd029NncsnmY1lMtLvU4=;
- b=hHSSKlEtmc076z7La1l/33xNDf2kudF25pLeF/HU9zOkc8QTaOduA8munFr8L/679I
- UZMsZJmA3kTrGnbOF6gqsB13JXSYUvCV3lqjrwM3A7G61nMdW4h32iIvaYaQg+2iDprk
- 6Fxdhy7mONIU/MB451iVmkxMDWkYxRUZeu0yASA+m0pzOLr+NMMtx4vEFnZS1pCyYSz8
- cjKjykFB0ByX3upIMMSHa4GzvqS72aBku/hOYWMTraeNw0oZS2JAlXwKbglXnoc7Wuoi
- EfoxkoWQbypOVMY8Ii64JzQZN1xb/gbqhVBcsVTPwrongUMcGWWz4jdmX52zlLm/N6xe
- pFzQ==
+ bh=qLVbGWoACrgE9VODWgB1TKnJBzMVwNUtM6cFxhgg3wc=;
+ b=Rds6/S5SjgEEL3SyTBlCntcmdsi66P01NmBR0x1+MslmifFyqHrJgjtvehVZvxDt8B
+ JU5jxsmxk7BmTT4Wl4H3HobXTe+jVDCB2WAcsjoqRSQGKHQxZ0HDi8893M3IlnfjjySz
+ 6cawn+3LUzVmyK49RYggJ1BxQ7MU5W+kR8ZUzivjRN8ARYV2UIIG/09dFlsNaq26EmMk
+ rcxfIlhm3pjjpOBSiRB9DWnXP8CSX2hAKKj+PwS6CYM6aWWkfIr1xERfRxyCp4HSB45m
+ F+x2xNN3zEIpocEESTqBCIDiZ0z4yqX+iRisQDF/A2FKm5IQKWU3YtNSiZHUbJD7y2iv
+ tsqg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1760649193; x=1761253993;
+ d=1e100.net; s=20230601; t=1760651189; x=1761255989;
  h=content-transfer-encoding:in-reply-to:from:content-language
  :references:cc:to:subject:user-agent:mime-version:date:message-id
  :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=t7dC9s7DUHDfq+JM4myzAQqHd029NncsnmY1lMtLvU4=;
- b=VJjfvMZHV0teIg6OUbNFnoN/OCq+khAlO8JkmPiN8GKY3qlag4/Somyozls3QpuQOy
- nGgIJsGWKiI0N8fgErzI7WK4aO5DUh6rDo3o/NyZC8wRp+heonTJVDEv1V5hxYKU7wly
- cw9eKVGzUFDLVY+w6ruEy7tGWFO+/V0lwuYHWeuTasJgY2NuDTKRFN+sWD7VPWY3q1ji
- URxt9VT2c3+vnfTef8lXDjHnNnBJ/cv94DzoZJGKzNhOSAtCg3tgCakSpZSJstaSfZq2
- r013xl0CFTS0ORWuKJNy0wnQ/hmkX4oi6c0lB2/SGN27KdcBZvm4UKQtv5N2ZjK4C0KO
- xTtQ==
+ bh=qLVbGWoACrgE9VODWgB1TKnJBzMVwNUtM6cFxhgg3wc=;
+ b=Noxdcedz9stzqGNm2uBDT8tdlqhkhfIofRcwz1CqZwpNQBeV2jYVEE4UaE25Sq4Ndg
+ Po7CsUJGLRhYq+ZvcXO7CdjmC+7n7iJ2/+dW1Nnjq7dd9sJjZDEezPh3cXZAsa10X13q
+ ilgPPPDgN6U1sx55WNN0tQle7vS7BtUFgCGZ+OyVFfQeDawdtjCKm7yyO8XK1SJWdzPs
+ PxmgG06+JbjKWGAu8EviYHJro78XZUbl7SwV1d+nlBseJ1GD3I+iZ2LztiRL9KEjORiW
+ h0yrrc6C5QpsE/TAUttCJ+bwwI5HyMXuTQ5DAmNjE63a7hm0f7FYijuCZwmibssDLicK
+ PUMw==
 X-Forwarded-Encrypted: i=1;
- AJvYcCUMSAASc/bP6v1griXZKmNabtAM2g73q+j6gNrBfKmbfhsMvYvaH5c9Bw6VLqKXusl9E6QeTJIt@lists.freedesktop.org
-X-Gm-Message-State: AOJu0YwpXegHey6TBA5oDjxB3fAtRWRirdTWvLulTMi71NUYup8q592m
- 8tIDY/Ts0icnf2b58PWzj0DmNO1f919j+0fJq2GDN1KA0zIyDhQRZ5NI
-X-Gm-Gg: ASbGncvOV4gvz3yyOPoqBrG25A0unHKyxLj1NJ6dovxZXVdm9MaYpzYGbYHjMHW80Hf
- WPk7GHgjHvzGqLNvU3c4yyBFMstuOY3MyTMgxnrZXN/cWbwbhWYTwmD69Sbmsklh/GwuOgxaf1B
- j+S/iAAGhdDp3+xTOV3l8Tc0G4cN2+N4KD/YdtHsHeFB2Wpth+YqOxqlh5vTvmnc4CRWmmrnmgl
- YnhjQudIg7DKmItsrVuMlT+bZHJucnuIYBy8c3TRTTqwpVoiUiXY6fHS09dNj1Z0ZBRhgqYSRRi
- /KAjEV3RZtk8kiyo5AadhDOtqxL53ojlYHj3dBgrJ3DI//AADwAhQYUu2k41vnZkwj2v0xCXtzr
- VC+mNqdV4nWh1SO3WVN5a+kD3o9TGtN3BbjNYPAy3OCG90DNGEL7JeMxuk3VCuzWmyRkw5FuE06
- VbPa7wIVFa44Xg1ZEJYicod4Aa85PsUOCZdAObROAsQylWaPMALUM9to2W7naFsns9dHjZ+AsBf
- GyItg==
-X-Google-Smtp-Source: AGHT+IHKPJSTI0DmvT06VL4xwoZPAZid6jDY8psvVG06n9vCvu/0Q/oxZW5QmJcTU6PqNg2HD3zBYg==
-X-Received: by 2002:a05:6000:41f7:b0:427:548:6e3b with SMTP id
- ffacd0b85a97d-42705486e44mr815017f8f.13.1760649192715; 
- Thu, 16 Oct 2025 14:13:12 -0700 (PDT)
+ AJvYcCWruheIsrNnVfzODvhtYc8RNM8rAoKOAjWvitlT4iLqxejLgcGLzBxobrpBWhD11A4QmtXcVl+Y@lists.freedesktop.org
+X-Gm-Message-State: AOJu0YwI2FbJbKDAaagjb20Pr/zEcWUEyvdTF9HckIr5y1r4WFEdxmNw
+ 0vAvVrIt1eZ/8uHPtOLaaQpUc7kxtoZ9IcvkwqnOeSDlevZ6Mi7VuX6W
+X-Gm-Gg: ASbGnctquyE2bSFfVBVlqQ6xx1vcLbbCKhoIsTKw0BBKGZMs3T0Cpk/9XAr0Rd8WOOf
+ +IeY/hKsoMgOKTymL2zvS9TCOxHsOsdvQulr/u3xgwhPEsgODwRB/oWwAoJDPaCRPK67uUGEj/z
+ TOnb50psuxw96dltaAOyALE1IvgBVFxsc5D0tdS2yHD4HomuV5g9gDn4pS6TOf+6lue8MASYsa2
+ j1yQ3yHvHKeogqPFRwcjQjOrV2A2dBzCddOmI2Uq+Ek+lazzfTixoblay3hqtjv8O1VgvgZ+x1Z
+ gtR/D+1CP7ii6DoAJGARzhwX0VxA0mn09ESVj4vm62bgzgPxHSh8rAmEPEYOyfnMlnGGY37Ko0+
+ 6PzgMXaFqCbTA7BUwXatBhshKKc070vpMxTGXRhotoJFnY0twAe+c0eI2MBRpXnjneq/KWnlW0c
+ Ff1SCp0T+vCiKicIfxVVJ7ETbHv+oxGBYHSxzb7RlAPFdNor943HyRDTTx1IqJy6H09h/2bxS2K
+ ybp96ZC9zTq4Vsl
+X-Google-Smtp-Source: AGHT+IH/zjgPG/HV9ngqclxgSOqwAQJ1HFnhUiJ+6D/aP5dTWD4NXoIdy+KZQeUj/f6oIUnU/Azdag==
+X-Received: by 2002:a05:6000:2911:b0:425:8bc2:9c43 with SMTP id
+ ffacd0b85a97d-42704d7e987mr1012235f8f.1.1760651189397; 
+ Thu, 16 Oct 2025 14:46:29 -0700 (PDT)
 Received: from ?IPV6:2a01:e0a:acc:bb60:756b:64e3:20ef:1d08?
  ([2a01:e0a:acc:bb60:756b:64e3:20ef:1d08])
  by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-426ce5cf6b4sm37077374f8f.25.2025.10.16.14.13.11
+ ffacd0b85a97d-426ce57d4bbsm37423275f8f.2.2025.10.16.14.46.28
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Thu, 16 Oct 2025 14:13:12 -0700 (PDT)
-Message-ID: <21944b18-ac36-4acd-9d36-cc05579acc0d@gmail.com>
-Date: Thu, 16 Oct 2025 23:13:11 +0200
+ Thu, 16 Oct 2025 14:46:29 -0700 (PDT)
+Message-ID: <a7ccda73-2c40-419c-a7c3-3155739648d0@gmail.com>
+Date: Thu, 16 Oct 2025 23:46:28 +0200
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
 Subject: Re: [PATCH 1/2] nova-core: Solve mentions of `CoherentAllocation`
@@ -106,24 +106,40 @@ Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 Hi Danilo,
 
 On 10/15/25 22:04, Danilo Krummrich wrote:
-> Hi Daniel,
+>> diff --git a/drivers/gpu/nova-core/dma.rs b/drivers/gpu/nova-core/dma.rs
+>> index 94f44bcfd748..639a99cf72c4 100644
+>> --- a/drivers/gpu/nova-core/dma.rs
+>> +++ b/drivers/gpu/nova-core/dma.rs
+>> @@ -25,21 +25,11 @@ pub(crate) fn new(dev: &device::Device<device::Bound>, len: usize) -> Result<Sel
+>>      }
+>>  
+>>      pub(crate) fn from_data(dev: &device::Device<device::Bound>, data: &[u8]) -> Result<Self> {
+>> -        Self::new(dev, data.len()).map(|mut dma_obj| {
+>> -            // TODO[COHA]: replace with `CoherentAllocation::write()` once available.
+>> -            // SAFETY:
+>> -            // - `dma_obj`'s size is at least `data.len()`.
+>> -            // - We have just created this object and there is no other user at this stage.
+>> -            unsafe {
+>> -                core::ptr::copy_nonoverlapping(
+>> -                    data.as_ptr(),
+>> -                    dma_obj.dma.start_ptr_mut(),
+>> -                    data.len(),
+>> -                );
+>> -            }
+>> -
+>> -            dma_obj
+>> -        })
+>> +        let mut dma_obj = Self::new(dev, data.len())?;
+>> +        // SAFETY: We have just created this object and there is no other user at this stage.
 > 
-> On 10/15/25 9:49 PM, Daniel del Castillo wrote:
->> This patch solves the existing mentions of COHA, a task
->> in the Nova task list about improving the `CoherentAllocation` API.
->> I confirmed by talking to Alexandre Courbot, that the reading/writing
->> methods in `CoherentAllocation` can never be safe, so
->> this patch doesn't actually change `CoherentAllocation`, but rather
->> tries to solve the existing references to [COHA].
-> 
-> This patch seems to address two different TODOs. Please split up the patch
-> accordingly.
+> The safety comment should rather confirm that it is guaranteed that the device
+> won't access this memory concurrently.
 
-Sorry, I thought it was okay as they were part of the same task. Will do.
+I actually don't know how this is guaranteed. It wasn't explicitly
+explained before here, although unless I'm mistaken it was already a
+requirement. Could you help me? I guess it's related to the already
+mentioned fact that we just allocated this DMA memory and the device
+isn't yet initialized?
 
-Thanks for the other comments as well, I'll apply them and send a new
-version soon.
-
-Cheers,
+Thanks,
 Daniel
-
