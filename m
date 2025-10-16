@@ -2,93 +2,89 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id F15DECBAB8C
-	for <lists+nouveau@lfdr.de>; Sat, 13 Dec 2025 13:43:06 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 9F6BFCBAF9A
+	for <lists+nouveau@lfdr.de>; Sat, 13 Dec 2025 13:47:18 +0100 (CET)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 807F710EAEB;
-	Sat, 13 Dec 2025 12:41:04 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 68CD110ECAD;
+	Sat, 13 Dec 2025 12:42:23 +0000 (UTC)
 Authentication-Results: gabe.freedesktop.org;
-	dkim=permerror (0-bit key) header.d=gmail.com header.i=@gmail.com header.b="XnikXQYz";
+	dkim=permerror (0-bit key) header.d=gmail.com header.i=@gmail.com header.b="IcreTD8f";
 	dkim-atps=neutral
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from mail-qk1-f170.google.com (mail-qk1-f170.google.com
- [209.85.222.170])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 77DBD10E0D6
- for <nouveau@lists.freedesktop.org>; Thu, 16 Oct 2025 17:48:49 +0000 (UTC)
-Received: by mail-qk1-f170.google.com with SMTP id
- af79cd13be357-8599c274188so151750985a.1
- for <nouveau@lists.freedesktop.org>; Thu, 16 Oct 2025 10:48:49 -0700 (PDT)
+Received: from mail-pl1-f172.google.com (mail-pl1-f172.google.com
+ [209.85.214.172])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id AC74510E33C
+ for <nouveau@lists.freedesktop.org>; Thu, 16 Oct 2025 18:45:04 +0000 (UTC)
+Received: by mail-pl1-f172.google.com with SMTP id
+ d9443c01a7336-290af0e154fso1360035ad.3
+ for <nouveau@lists.freedesktop.org>; Thu, 16 Oct 2025 11:45:04 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1760636928; x=1761241728; darn=lists.freedesktop.org;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=fbAxek/XudSJdm/bilTDa/VZekS8oo3F9bSouHLDLDo=;
- b=XnikXQYzitZWQF1yKU56a6O3+agrOAmk5iVk50r+7wWa4ROYaRxCTrlM4aaAAH9aKs
- ZONTxV6sLrzb6m539euWdtrPBG0sYLHtWUFLzYrrLjsI/1L1U5PAbkUfFrDNBHM+9WEt
- xiJ5moMErdlBapCd4bQrE5wiVUEfc9tfigGv56LNXUuzbDBQdEdfYn8b6fZgv4wMbOCI
- ZOfGw7NrYx+3NVYxUZr5MQMVdHTWvVJ1HYKr/Ua7syAXTHyarPep0ypqfR9bEFfnCGuJ
- He3A94wGMHv2MZ/1nZKSsRuzCoUbooWdrjegxK5sBpDQrtZwO60vCmA4ZZbTTWUiQM84
- RZwQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1760636928; x=1761241728;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+ d=gmail.com; s=20230601; t=1760640304; x=1761245104; darn=lists.freedesktop.org;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
  :message-id:reply-to;
- bh=fbAxek/XudSJdm/bilTDa/VZekS8oo3F9bSouHLDLDo=;
- b=rdFC6PbSuwUDqXftEstnVZXMRhPBvkVEXSPoplaZrBn+5AA6OmeCFBuuePSXJZemfF
- M4ItdBUYFj7WVo5qPEq79VFcy0NBsKcagOoy35r0BviJoCkkc7bdmgsLy2Sgbbpra5Va
- H1mD1wa6NlnyXcWDNTkXHoIJNw2Ym9F+wsonsS0k6ImaKb6xgbVwgHs43bDQNyZJKbxe
- LMO7HCYeI5uafQ2r8jMZNKnZgw1hEJj4lRIjJn7QYY/cmh+AtAuDOMcrtVUrZXqL1wZM
- hrdt4u/Z9uaY0NF5NAdfa8fqbl5KbwCbA4A7XX8XxkMpS/AUOEMNjmyQZXB1NOsVM57z
- QAtA==
+ bh=FPl4GNeEvYNsD07xkIxR49GzR8yYXDLG1l9YclgP27g=;
+ b=IcreTD8fhAwhPFhFs+E1RlFiYax20q0EeD2hDE6UhlrQn1H941wVOizStTpgO3voL4
+ ej7YI6C21E+iHk4ia/Bs9DjluRYDr0k0hbVdJRlKzcUnNk3NCmu9CFkc3Eao4Nzqn7IR
+ gIqtA+VXYaRGr/IAupGbt9xKZGtSI1kS8J38Cawu1OxM4LZOxkvXDjjQddiqRdVywDJ8
+ sqORgliSwgpTziZr10KOfOFy4do5nRmzH4sjnfVrUoI5q3Fmhro8Olkb7b2IltsSF7DB
+ Ka5SMnQ2LQE3Msa9Hosk+tlDelRZ8ITSoxwqKeSZUyDDXfbtmOlDBHnuOQ0NhH0SdlaS
+ jyvA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1760640304; x=1761245104;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=FPl4GNeEvYNsD07xkIxR49GzR8yYXDLG1l9YclgP27g=;
+ b=e7bOZKKOeL3nTwffZtHgWgEYBqfKSKaGKvjRa/ES8r5Y7vJY4Wf03TbRoBFlAiunKj
+ FZnEOY4RrQ3n+YAzZS1GMFimoJJx3wWbMQurVISZJhT1XhAzFZeAi5Lr5L6rmYTLkNhP
+ +Rwe6FLOWj5Oqgw3+uCOrCoJZPJBO/YWAhX+Agm6FwXk8aiBlGr0+99m1NVCtCpA5GI0
+ Ni3CuczuDT1RIOMLlTV2hCBVoqjb4ARDXVnCuM4NhOxTLvdQBGjDlQeeOVU4gW2XkMRV
+ tdeS1jQrpJDx6vOO5CCaRvcTHCxV9Io1gTqgqKuq+Ej6PPAXxdTplb4E6pO5V9QKfavZ
+ nvYQ==
 X-Forwarded-Encrypted: i=1;
- AJvYcCULp2Lx5/qF/b82bXt4XgiCVpSibF3A0PoM3jUNIxjS/rLlxfCArHZ5TV4FeIPonZzleYcGoG1d@lists.freedesktop.org
-X-Gm-Message-State: AOJu0YwbSVekkcVhXBIr3y169T1kAu9VlcPyqKKjuDConnse/+lPzLaB
- fzCJynm7Bp+AxkI9t26QFJXsIqIALLzzboX5+fou4EESZ1e7Lzj6gyJB
-X-Gm-Gg: ASbGncs7pLzJ+a2Uy5vLcPGbZoZib0+wOIdt62OS3SgW9i6ZRxBVUGRz2AdVHBCqcKM
- ZKcoqte56/zE6Q9ffKruPzf2E1AYfdQxFuY7Hb4P0e98g5yI9zfpEzINWiR0UeKC4Dw7VcLu9q/
- bo6+KyJkPDJlF2e7PcdGZhT4PsRwLNUWXh5BO3u2Nqlao6GOFajMVQLMhzD2MqkvCzFaPNWDhDf
- 9brpiFoaQpedce6Meg66nT56cAsi9qqz/c8/zrL0OlET3XDUa0PWoJW6LXmYt4CEqhPX4RGkFe1
- j14FlkpZucA+6mEO6DPkkFoXji/QdrXWMgrwf6Bwqkgfq+fxLOa9Mj6VtGy+JWTQePHl9VH8Fms
- M2NC1t7YyFMePqjeJHFJa58YvvNeTVrKeuuqugQrmPR3ZA0wVTi//dlBktqiHX3RtH/dKDi5r
-X-Google-Smtp-Source: AGHT+IH3+Fae4k22gY3NVjEqt4enc7pxuqkgdu3bjhkqSWDqAE7JM060ERq759Poo6uBtl8GK/pyKA==
-X-Received: by 2002:a05:620a:25cf:b0:883:9b33:f6b6 with SMTP id
- af79cd13be357-890709ee994mr113167585a.84.1760636928217; 
- Thu, 16 Oct 2025 10:48:48 -0700 (PDT)
-Received: from localhost ([12.22.141.131]) by smtp.gmail.com with ESMTPSA id
- af79cd13be357-88f38bf32cdsm239783585a.57.2025.10.16.10.48.46
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 16 Oct 2025 10:48:47 -0700 (PDT)
-Date: Thu, 16 Oct 2025 13:48:45 -0400
-From: Yury Norov <yury.norov@gmail.com>
-To: Joel Fernandes <joelagnelf@nvidia.com>
-Cc: linux-kernel@vger.kernel.org, rust-for-linux@vger.kernel.org,
- dri-devel@lists.freedesktop.org, dakr@kernel.org,
- acourbot@nvidia.com, Alistair Popple <apopple@nvidia.com>,
- Miguel Ojeda <ojeda@kernel.org>, Alex Gaynor <alex.gaynor@gmail.com>,
- Boqun Feng <boqun.feng@gmail.com>, Gary Guo <gary@garyguo.net>,
- bjorn3_gh@protonmail.com, Benno Lossin <lossin@kernel.org>,
- Andreas Hindborg <a.hindborg@kernel.org>,
- Alice Ryhl <aliceryhl@google.com>, Trevor Gross <tmgross@umich.edu>,
- David Airlie <airlied@gmail.com>, Simona Vetter <simona@ffwll.ch>,
- Maarten Lankhorst <maarten.lankhorst@linux.intel.com>,
- Maxime Ripard <mripard@kernel.org>,
- Thomas Zimmermann <tzimmermann@suse.de>,
- John Hubbard <jhubbard@nvidia.com>, Timur Tabi <ttabi@nvidia.com>,
- joel@joelfernandes.org, Elle Rhumsaa <elle@weathered-steel.dev>,
- Daniel Almeida <daniel.almeida@collabora.com>,
- nouveau@lists.freedesktop.org, Edwin Peer <epeer@nvidia.com>
-Subject: Re: [PATCH v7.1 2/4] gpu: nova-core: bitfield: Move
- bitfield-specific code from register! into new macro
-Message-ID: <aPEv_UO4vViOcOvN@yury>
-References: <20251016151323.1201196-1-joelagnelf@nvidia.com>
- <20251016151323.1201196-3-joelagnelf@nvidia.com>
+ AJvYcCXVAjCDSN1H5yMPwnAac6NpmpbXDpI/aPl+U/1c1wf+bqkTrf92P6SneV6VhPsHTiw9Hl8GYb9S@lists.freedesktop.org
+X-Gm-Message-State: AOJu0Yyc05pFilYAFk3/mXCmEE4qwg1gOwpJMlXNLbIvVIwpcevG7D8k
+ FjNggjMQcTdCrvNkT0hoV03QvTuqgtfVzlBMuBOJzNjl/Z/5quuBBwIgfJeXhjE6IKRqKRM6cID
+ vkZrJd/uS8V/gxnssBhGcaJHhOxU6Uxw=
+X-Gm-Gg: ASbGnctlGh/+YXBtv0jT15h5dOfbTHEBk9JC44EOXm5Qhfu1YdNJcL9dFcdl2ioEk4K
+ s/TB49XFYt7zrbwyy6ZR7ATaaXgQPvGBJ+jDUwDMTz7HsIN/buHSLmcIOdCyR1HTZhOvLZM/Kdl
+ Rhl38coS2e9KCdKMPk9NznjMC7nYuKX/sq+Po5CZLWUfgkNwn8bhlLKj7/2FzxSSaI3lViT35GD
+ /BkYNdtpTs71OPsELDXcaKE7lOR+vTV38yyGrBFI5QWKf2Z9Ye2AKiwJ1jXiZoRBmdHx8OxzEi4
+ jlLZ8n/U7VL9KRni+4sTdQzOu9pZPubOB46lnW78duDobZOfvPdx+LT7jvNpMiQjY3Q0Q/K/HlF
+ Kyl4=
+X-Google-Smtp-Source: AGHT+IF9I6SSPaZXt6fObKsCwr8z4pX/yL7H2Swh89Pd5qRMIU65WohMKqiraRMDzUotqhTJ9xFy0vEvU+nF48HX4/Y=
+X-Received: by 2002:a17:903:2f87:b0:290:af0d:9381 with SMTP id
+ d9443c01a7336-290cba4effcmr5451435ad.7.1760640303984; Thu, 16 Oct 2025
+ 11:45:03 -0700 (PDT)
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <20251016151323.1201196-3-joelagnelf@nvidia.com>
-X-Mailman-Approved-At: Sat, 13 Dec 2025 12:40:49 +0000
+References: <20251013062041.1639529-1-apopple@nvidia.com>
+ <20251013062041.1639529-8-apopple@nvidia.com>
+In-Reply-To: <20251013062041.1639529-8-apopple@nvidia.com>
+From: Miguel Ojeda <miguel.ojeda.sandonis@gmail.com>
+Date: Thu, 16 Oct 2025 20:44:50 +0200
+X-Gm-Features: AS18NWCjsMPV451tdiawVF8gJgOdhZslUWuxkRt4tznLBhQSO2tbezIdx1gta_0
+Message-ID: <CANiq72kK4pG=O35NwxPNoTO17oRcg1yfGcvr3==Fi4edr+sfmw@mail.gmail.com>
+Subject: Re: [PATCH v5 07/14] gpu: nova-core: gsp: Add GSP command queue
+ handling
+To: Alistair Popple <apopple@nvidia.com>
+Cc: rust-for-linux@vger.kernel.org, dri-devel@lists.freedesktop.org, 
+ dakr@kernel.org, acourbot@nvidia.com, Miguel Ojeda <ojeda@kernel.org>, 
+ Alex Gaynor <alex.gaynor@gmail.com>, Boqun Feng <boqun.feng@gmail.com>, 
+ Gary Guo <gary@garyguo.net>,
+ =?UTF-8?Q?Bj=C3=B6rn_Roy_Baron?= <bjorn3_gh@protonmail.com>, 
+ Benno Lossin <lossin@kernel.org>, Andreas Hindborg <a.hindborg@kernel.org>, 
+ Alice Ryhl <aliceryhl@google.com>, Trevor Gross <tmgross@umich.edu>, 
+ David Airlie <airlied@gmail.com>, Simona Vetter <simona@ffwll.ch>, 
+ Maarten Lankhorst <maarten.lankhorst@linux.intel.com>,
+ Maxime Ripard <mripard@kernel.org>, 
+ Thomas Zimmermann <tzimmermann@suse.de>, John Hubbard <jhubbard@nvidia.com>, 
+ Joel Fernandes <joelagnelf@nvidia.com>, Timur Tabi <ttabi@nvidia.com>,
+ linux-kernel@vger.kernel.org, nouveau@lists.freedesktop.org
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+X-Mailman-Approved-At: Sat, 13 Dec 2025 12:40:48 +0000
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -103,106 +99,53 @@ List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-On Thu, Oct 16, 2025 at 11:13:21AM -0400, Joel Fernandes wrote:
-> Move the bitfield-specific code from the register macro into a new macro
-> called bitfield. This will be used to define structs with bitfields,
-> similar to C language.
+On Mon, Oct 13, 2025 at 8:21=E2=80=AFAM Alistair Popple <apopple@nvidia.com=
+> wrote:
+>
+> -rust_allowed_features :=3D asm_const,asm_goto,arbitrary_self_types,lint_=
+reasons,offset_of_nested,raw_ref_op,used_with_arg
+> +rust_allowed_features :=3D asm_const,asm_goto,arbitrary_self_types,lint_=
+reasons,offset_of_nested,raw_ref_op,used_with_arg,slice_flatten
 
-Can you please fix line length issues before v8?
+This is not sorted, and it is not mentioned in the comment right above
+it -- in general, please try to clearly mention this sort of addition
+in the commit message too.
 
-$ awk '{print length}' drivers/gpu/nova-core/bitfield.rs | sort -rn | uniq -c
-      1 118
-      1 116
-      1 113
-      1 109
-      1 105
-      1 103
-      ...
- 
-> Reviewed-by: Elle Rhumsaa <elle@weathered-steel.dev>
-> Reviewed-by: Alexandre Courbot <acourbot@nvidia.com>
-> Reviewed-by: Edwin Peer <epeer@nvidia.com>
-> Signed-off-by: Joel Fernandes <joelagnelf@nvidia.com>
-> ---
->  drivers/gpu/nova-core/bitfield.rs    | 319 +++++++++++++++++++++++++++
->  drivers/gpu/nova-core/nova_core.rs   |   3 +
->  drivers/gpu/nova-core/regs/macros.rs | 259 +---------------------
->  3 files changed, 332 insertions(+), 249 deletions(-)
->  create mode 100644 drivers/gpu/nova-core/bitfield.rs
- 
-...
+As Alexandre mentions, it will not work to use it as-is. However, what
+happened in 1.80 was just a rename, but the feature was available
+since 1.67 as `flatten`.
 
-> +///
-> +/// bitfield! {
-> +///     struct ControlReg {
-> +///         3:0 mode as u8 ?=> Mode;
-> +///         7:7 state as bool => State;
-> +///     }
-> +/// }
+If you want to still use it through an indirection or similar, then
+please move it to a new commit that explains the addition of the
+feature and the indirection to use it.
 
-This notation is really unwelcome this days. It may be OK for a random
-macro in some local driver, but doesn't really work for a global basic
-data type:
+See e.g. the `file()` function I added in e.g. rust/macros/helpers.rs
+in commit 36174d16f3ec ("rust: kunit: support KUnit-mapped `assert!`
+macros in `#[test]`s") to see how to set it up.
 
-https://lore.kernel.org/all/CAHk-=whoOUsqPKb7OQwhQf9H_3=5sXGPJrDbfQfwLB3Bi13tcQ@mail.gmail.com/
+Essentially it is:
 
-I've already shared this link with you, and shared my concern.
+    config RUSTC_HAS_SPAN_FILE
+           def_bool RUSTC_VERSION >=3D 108800
 
-I realize that rust/bitfield derives the GENMASK(hi, lo) notation here,
-and GENMASK() derives verilog or hardware specs popular notations. But
-software people prefer lo:hi. I'm probably OK if you choose C-style
-start:nbits, if you prefer. But let's stop this hi:lo early, please.
+And then:
 
-Let me quote Linus from the link above:
+    pub(crate) fn file() -> String {
+        #[cfg(not(CONFIG_RUSTC_HAS_SPAN_FILE))]
+        {
+            ...
+        }
 
-  It does "high, low", which is often very unintuitive, and in fact the
-  very commit that introduced this thing from hell had to convert the
-  sane "low,high" cases to the other way around.
-  
-  See commit 10ef6b0dffe4 ("bitops: Introduce a more generic BITMASK
-  macro"), and notice how ALMOST ALL use cases were switched around to
-  the illogical "high,low" format by that introductory phase.
-  
-  And yes, I understand why that person did it: many datasheets show
-  bits in a register graphically, and then you see that "high .. low"
-  thing in a rectangle that describes the register, and that ordering
-  them makes 100% sense IN THAT CONTEXT.
-  
-  But it damn well does not make sense in most other contexts.
+        #[cfg(CONFIG_RUSTC_HAS_SPAN_FILE)]
+        #[allow(clippy::incompatible_msrv)]
+        {
+            ...
+        }
+    }
 
-  In fact, even in the context of generating mask #defines, it actually
-  reads oddly, because you end up having things like
+I hope that helps.
 
-    /* Status register (SR) */
-    #define I2C_SR_OP               GENMASK(1, 0)   /* Operation */
-    #define I2C_SR_STATUS           GENMASK(3, 2)   /* controller status */
-    #define I2C_SR_CAUSE            GENMASK(6, 4)   /* Abort cause */
-    #define I2C_SR_TYPE             GENMASK(8, 7)   /* Receive type */
-    #define I2C_SR_LENGTH           GENMASK(19, 9)  /* Transfer length */
+Thanks!
 
-  ...
-
-Now compare it to what we've got in nova right now:
-
-  register!(NV_PMC_BOOT_0 @ 0x00000000, "Basic revision information about the GPU" {
-      3:0     minor_revision as u8, "Minor revision of the chip";
-      7:4     major_revision as u8, "Major revision of the chip";
-      8:8     architecture_1 as u8, "MSB of the architecture";
-      23:20   implementation as u8, "Implementation version of the architecture";
-      28:24   architecture_0 as u8, "Lower bits of the architecture";
-  });
-
-There's so far 36 thousands of GENMASK()s in the kernel, and only 67
-register!()s. It's a separate topic what to do with the GENMASK()
-codebase. But now that you do this massive refactoring for the
-register!() macro, let's convert those 67 users to the lo:hi notation.
-
-As a side note, for GENMASKs, I tried this trick:
-
-        #define GENMASK(a, b) UNSAFE_GENMASK(MIN(a, b), MAX(a, b))
-
-It works, but bloats defconfig kernel for another 1K. I don't think it
-would add to readability on both C and rust sides.
-
-Thanks,
-Yury
+Cheers,
+Miguel
