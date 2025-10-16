@@ -2,93 +2,92 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id 2513FCBACCA
-	for <lists+nouveau@lfdr.de>; Sat, 13 Dec 2025 13:44:21 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 45812CBACB8
+	for <lists+nouveau@lfdr.de>; Sat, 13 Dec 2025 13:44:17 +0100 (CET)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 008CD10EB77;
+	by gabe.freedesktop.org (Postfix) with ESMTP id C034910EB6D;
 	Sat, 13 Dec 2025 12:41:08 +0000 (UTC)
 Authentication-Results: gabe.freedesktop.org;
-	dkim=permerror (0-bit key) header.d=gmail.com header.i=@gmail.com header.b="Rds6/S5S";
+	dkim=permerror (0-bit key) header.d=gmail.com header.i=@gmail.com header.b="LeTpmcQz";
 	dkim-atps=neutral
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from mail-wr1-f51.google.com (mail-wr1-f51.google.com
- [209.85.221.51])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 1EB8210EAA8
- for <nouveau@lists.freedesktop.org>; Thu, 16 Oct 2025 21:46:31 +0000 (UTC)
-Received: by mail-wr1-f51.google.com with SMTP id
- ffacd0b85a97d-3ece0e4c5faso1120316f8f.1
- for <nouveau@lists.freedesktop.org>; Thu, 16 Oct 2025 14:46:30 -0700 (PDT)
+Received: from mail-pg1-f174.google.com (mail-pg1-f174.google.com
+ [209.85.215.174])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id A449310E004
+ for <nouveau@lists.freedesktop.org>; Thu, 16 Oct 2025 23:26:04 +0000 (UTC)
+Received: by mail-pg1-f174.google.com with SMTP id
+ 41be03b00d2f7-b6a42754723so25861a12.3
+ for <nouveau@lists.freedesktop.org>; Thu, 16 Oct 2025 16:26:04 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1760651189; x=1761255989; darn=lists.freedesktop.org;
- h=content-transfer-encoding:in-reply-to:from:content-language
- :references:cc:to:subject:user-agent:mime-version:date:message-id
- :from:to:cc:subject:date:message-id:reply-to;
- bh=qLVbGWoACrgE9VODWgB1TKnJBzMVwNUtM6cFxhgg3wc=;
- b=Rds6/S5SjgEEL3SyTBlCntcmdsi66P01NmBR0x1+MslmifFyqHrJgjtvehVZvxDt8B
- JU5jxsmxk7BmTT4Wl4H3HobXTe+jVDCB2WAcsjoqRSQGKHQxZ0HDi8893M3IlnfjjySz
- 6cawn+3LUzVmyK49RYggJ1BxQ7MU5W+kR8ZUzivjRN8ARYV2UIIG/09dFlsNaq26EmMk
- rcxfIlhm3pjjpOBSiRB9DWnXP8CSX2hAKKj+PwS6CYM6aWWkfIr1xERfRxyCp4HSB45m
- F+x2xNN3zEIpocEESTqBCIDiZ0z4yqX+iRisQDF/A2FKm5IQKWU3YtNSiZHUbJD7y2iv
- tsqg==
+ d=gmail.com; s=20230601; t=1760657164; x=1761261964; darn=lists.freedesktop.org;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=E+JggmdmCtBj6KDkuLqnnfKIt7/ceu80PeaihGVC/S0=;
+ b=LeTpmcQzoGIYyrqy1pwBs+eLsy3sP2nXueaz5noJCx0yvBk3hRsZPBKF657h/mzor/
+ o1DPjNRxIaVSVfEQZubL8DWvCZZbASTNFOaaqz/VNwniUnV53F5iOVChA7GGbQcp4VDS
+ cosCi3b59YmxwHHV5ORhBmg77d8Ar/iFReyjGt3WGR/6r//ibers5eJh+OeLHSCmVgkE
+ l+s4iKc3c9Tbp8hbkOsKM8tbBUMLEDtq3VT61YkNu05P2ImMiZQAEllrWl1rk3MHu/PC
+ Xv3rhp0NP15FbpQFBu7laDnxAlEJW+aX2pqMkx6280V/jwtk8k7Fkfv7L6zwsh6y0SLR
+ YaRA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1760651189; x=1761255989;
- h=content-transfer-encoding:in-reply-to:from:content-language
- :references:cc:to:subject:user-agent:mime-version:date:message-id
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=qLVbGWoACrgE9VODWgB1TKnJBzMVwNUtM6cFxhgg3wc=;
- b=Noxdcedz9stzqGNm2uBDT8tdlqhkhfIofRcwz1CqZwpNQBeV2jYVEE4UaE25Sq4Ndg
- Po7CsUJGLRhYq+ZvcXO7CdjmC+7n7iJ2/+dW1Nnjq7dd9sJjZDEezPh3cXZAsa10X13q
- ilgPPPDgN6U1sx55WNN0tQle7vS7BtUFgCGZ+OyVFfQeDawdtjCKm7yyO8XK1SJWdzPs
- PxmgG06+JbjKWGAu8EviYHJro78XZUbl7SwV1d+nlBseJ1GD3I+iZ2LztiRL9KEjORiW
- h0yrrc6C5QpsE/TAUttCJ+bwwI5HyMXuTQ5DAmNjE63a7hm0f7FYijuCZwmibssDLicK
- PUMw==
+ d=1e100.net; s=20230601; t=1760657164; x=1761261964;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=E+JggmdmCtBj6KDkuLqnnfKIt7/ceu80PeaihGVC/S0=;
+ b=nFV4I2qhTMDZxLn1eD3sb/QKPWnmi+vBOJ2Tzszfgg5xdKHKXPE9nj9TQPJbFJQXR0
+ 7NJ5NkSSwfQ2q6pJsLUjOV77x3/ftApSHpE1P+s0GGuZJOh/J1v/FFFkiwbOO1u5D6Wq
+ ishoztRG0vzpz8J0nW036sYIpi5KJ1rS63iq5x5z4/9gpd67asXPWD4Vko6UJZe5W+I7
+ yH1vAPJ67YBopi66Hnm7siijbMRgdy/7qhQEolTCiaprSqSNVVKV/grTXDfe4zd8qp9d
+ PkVbo0c+Vi3kRjmYpf38n3woWg70KPcvAy8CkaeWuJTJoCLaaAcU+oPG5gCrY3FUEZF0
+ yuFg==
 X-Forwarded-Encrypted: i=1;
- AJvYcCWruheIsrNnVfzODvhtYc8RNM8rAoKOAjWvitlT4iLqxejLgcGLzBxobrpBWhD11A4QmtXcVl+Y@lists.freedesktop.org
-X-Gm-Message-State: AOJu0YwI2FbJbKDAaagjb20Pr/zEcWUEyvdTF9HckIr5y1r4WFEdxmNw
- 0vAvVrIt1eZ/8uHPtOLaaQpUc7kxtoZ9IcvkwqnOeSDlevZ6Mi7VuX6W
-X-Gm-Gg: ASbGnctquyE2bSFfVBVlqQ6xx1vcLbbCKhoIsTKw0BBKGZMs3T0Cpk/9XAr0Rd8WOOf
- +IeY/hKsoMgOKTymL2zvS9TCOxHsOsdvQulr/u3xgwhPEsgODwRB/oWwAoJDPaCRPK67uUGEj/z
- TOnb50psuxw96dltaAOyALE1IvgBVFxsc5D0tdS2yHD4HomuV5g9gDn4pS6TOf+6lue8MASYsa2
- j1yQ3yHvHKeogqPFRwcjQjOrV2A2dBzCddOmI2Uq+Ek+lazzfTixoblay3hqtjv8O1VgvgZ+x1Z
- gtR/D+1CP7ii6DoAJGARzhwX0VxA0mn09ESVj4vm62bgzgPxHSh8rAmEPEYOyfnMlnGGY37Ko0+
- 6PzgMXaFqCbTA7BUwXatBhshKKc070vpMxTGXRhotoJFnY0twAe+c0eI2MBRpXnjneq/KWnlW0c
- Ff1SCp0T+vCiKicIfxVVJ7ETbHv+oxGBYHSxzb7RlAPFdNor943HyRDTTx1IqJy6H09h/2bxS2K
- ybp96ZC9zTq4Vsl
-X-Google-Smtp-Source: AGHT+IH/zjgPG/HV9ngqclxgSOqwAQJ1HFnhUiJ+6D/aP5dTWD4NXoIdy+KZQeUj/f6oIUnU/Azdag==
-X-Received: by 2002:a05:6000:2911:b0:425:8bc2:9c43 with SMTP id
- ffacd0b85a97d-42704d7e987mr1012235f8f.1.1760651189397; 
- Thu, 16 Oct 2025 14:46:29 -0700 (PDT)
-Received: from ?IPV6:2a01:e0a:acc:bb60:756b:64e3:20ef:1d08?
- ([2a01:e0a:acc:bb60:756b:64e3:20ef:1d08])
- by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-426ce57d4bbsm37423275f8f.2.2025.10.16.14.46.28
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Thu, 16 Oct 2025 14:46:29 -0700 (PDT)
-Message-ID: <a7ccda73-2c40-419c-a7c3-3155739648d0@gmail.com>
-Date: Thu, 16 Oct 2025 23:46:28 +0200
+ AJvYcCW1Xxdc959TZ8doCEYnnmSD7wkwUVnTkJO/h0uzdL7AIZGftNHr44nj3w9hHRPvc7Xom6KJJIBk@lists.freedesktop.org
+X-Gm-Message-State: AOJu0YyetFjaYgdvrQkwPQZgY6/A2+H6x/ZQdNBqBavjOMTL5zSzY1cV
+ K9rm+9d86h9ml2q2tAuQkrHSqQ9llLDDPOrUJJxEXtRlGsmrCfNQY8YjlMspAmtStC1BhFMj1ky
+ EynNx9ISdMOkvN27z1LKxh4DavmsD4yk=
+X-Gm-Gg: ASbGnctBV/KElx9dQrCSHJBCU9Nwx+YUlLYhZs0o9XopEgyOg0G036ZUi9WAkEO2bPA
+ SVf/lDcxUzCXkWwZY6/tVWQ7oMcs41YpPgt/BdZfmrgflcTmi0trYW7P2NrSE0V//i/caoePqsm
+ N571D/cYWKmclAXFOs2fcrojALQSkls4EDdeiAuUGmgxqxMbd1ykC1qXhyG2KWQbq+0C7uNshPX
+ vfPgtTyr/wMksyXooLSxjRmt6kdX2y6ML8glICoe1Kv5NIbyOpyeyuxDSKxayc7ak7gMkS/fV2m
+ FpkAtWmoqtwEYdlbr2OKFm4Pfrb0V1giMepBhiDgrolAWibIfT64UQBGsUeTtYuUtaQ6t1Ohwa9
+ CqYbqKwyEAmHlkA==
+X-Google-Smtp-Source: AGHT+IHnRUogCTLR4j2SRK3tnx9yJeIhgejmiTK6A9npVoSOmDy3a5IB+8s4WFVWl7NclfK6Oapzgp8ltJtmKXRKyH0=
+X-Received: by 2002:a17:902:d484:b0:269:80e2:c5a8 with SMTP id
+ d9443c01a7336-290cba419fdmr9896625ad.7.1760657163954; Thu, 16 Oct 2025
+ 16:26:03 -0700 (PDT)
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 1/2] nova-core: Solve mentions of `CoherentAllocation`
- improvements [COHA]
+References: <20251013062041.1639529-1-apopple@nvidia.com>
+ <20251013062041.1639529-4-apopple@nvidia.com>
+ <DDJJ4ECCSE2I.1EUAJRU9JBGNI@nvidia.com>
+ <zwaefk62to77b5nyakeiboyj53fge3lysc3z7arp54tyyherdo@nsqhuig7bmbc>
+ <DDK4KADWJHMG.1FUPL3SDR26XF@kernel.org>
+In-Reply-To: <DDK4KADWJHMG.1FUPL3SDR26XF@kernel.org>
+From: Miguel Ojeda <miguel.ojeda.sandonis@gmail.com>
+Date: Fri, 17 Oct 2025 01:25:51 +0200
+X-Gm-Features: AS18NWAntWCgqHJ-0gybXjQxgpqfISwElGAlnBfAxtiow_eCYUtIQUGW5snmefQ
+Message-ID: <CANiq72=bXR4oodrPS8_Dk59cNQa54EOzAPxp3r6e7BAKoZy2Wg@mail.gmail.com>
+Subject: Re: [PATCH v5 03/14] gpu: nova-core: gsp: Create wpr metadata
 To: Danilo Krummrich <dakr@kernel.org>
-Cc: Alexandre Courbot <acourbot@nvidia.com>, David Airlie
- <airlied@gmail.com>, Simona Vetter <simona@ffwll.ch>,
- Miguel Ojeda <ojeda@kernel.org>, Alex Gaynor <alex.gaynor@gmail.com>,
- nouveau@lists.freedesktop.org, dri-devel@lists.freedesktop.org,
- linux-kernel@vger.kernel.org, Boqun Feng <boqun.feng@gmail.com>,
- Gary Guo <gary@garyguo.net>, =?UTF-8?Q?Bj=C3=B6rn_Roy_Baron?=
- <bjorn3_gh@protonmail.com>, Benno Lossin <lossin@kernel.org>,
- Andreas Hindborg <a.hindborg@kernel.org>, Alice Ryhl <aliceryhl@google.com>,
- Trevor Gross <tmgross@umich.edu>, rust-for-linux@vger.kernel.org
-References: <20251015194936.121586-1-delcastillodelarosadaniel@gmail.com>
- <409f2f03-2bc2-4cb8-9ca7-4e30f82077ff@kernel.org>
-Content-Language: en-US
-From: Daniel del Castillo <delcastillodelarosadaniel@gmail.com>
-In-Reply-To: <409f2f03-2bc2-4cb8-9ca7-4e30f82077ff@kernel.org>
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
-X-Mailman-Approved-At: Sat, 13 Dec 2025 12:40:46 +0000
+Cc: Alistair Popple <apopple@nvidia.com>,
+ Alexandre Courbot <acourbot@nvidia.com>, 
+ rust-for-linux@vger.kernel.org, dri-devel@lists.freedesktop.org, 
+ Miguel Ojeda <ojeda@kernel.org>, Alex Gaynor <alex.gaynor@gmail.com>, 
+ Boqun Feng <boqun.feng@gmail.com>, Gary Guo <gary@garyguo.net>, 
+ =?UTF-8?Q?Bj=C3=B6rn_Roy_Baron?= <bjorn3_gh@protonmail.com>, 
+ Benno Lossin <lossin@kernel.org>, Andreas Hindborg <a.hindborg@kernel.org>, 
+ Alice Ryhl <aliceryhl@google.com>, Trevor Gross <tmgross@umich.edu>, 
+ David Airlie <airlied@gmail.com>, Simona Vetter <simona@ffwll.ch>, 
+ Maarten Lankhorst <maarten.lankhorst@linux.intel.com>,
+ Maxime Ripard <mripard@kernel.org>, 
+ Thomas Zimmermann <tzimmermann@suse.de>, John Hubbard <jhubbard@nvidia.com>, 
+ Joel Fernandes <joelagnelf@nvidia.com>, Timur Tabi <ttabi@nvidia.com>,
+ linux-kernel@vger.kernel.org, nouveau@lists.freedesktop.org
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+X-Mailman-Approved-At: Sat, 13 Dec 2025 12:40:48 +0000
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -103,43 +102,23 @@ List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-Hi Danilo,
+On Fri, Oct 17, 2025 at 1:11=E2=80=AFAM Danilo Krummrich <dakr@kernel.org> =
+wrote:
+>
+> Since nova-core depends on CONFIG_64BIT, I think we want a helper functio=
+n that
+> converts usize to u64 infallibly.
+>
+> This helper function can simply generate a compile time error, when
+> !CONFIG_64BIT, etc.
+>
+> We can do this locally in nova-core, but it could also find it's place in=
+ the
+> generic infrastructure. nova-core clearly won't be the last driver runnin=
+g into
+> this inconvinience.
 
-On 10/15/25 22:04, Danilo Krummrich wrote:
->> diff --git a/drivers/gpu/nova-core/dma.rs b/drivers/gpu/nova-core/dma.rs
->> index 94f44bcfd748..639a99cf72c4 100644
->> --- a/drivers/gpu/nova-core/dma.rs
->> +++ b/drivers/gpu/nova-core/dma.rs
->> @@ -25,21 +25,11 @@ pub(crate) fn new(dev: &device::Device<device::Bound>, len: usize) -> Result<Sel
->>      }
->>  
->>      pub(crate) fn from_data(dev: &device::Device<device::Bound>, data: &[u8]) -> Result<Self> {
->> -        Self::new(dev, data.len()).map(|mut dma_obj| {
->> -            // TODO[COHA]: replace with `CoherentAllocation::write()` once available.
->> -            // SAFETY:
->> -            // - `dma_obj`'s size is at least `data.len()`.
->> -            // - We have just created this object and there is no other user at this stage.
->> -            unsafe {
->> -                core::ptr::copy_nonoverlapping(
->> -                    data.as_ptr(),
->> -                    dma_obj.dma.start_ptr_mut(),
->> -                    data.len(),
->> -                );
->> -            }
->> -
->> -            dma_obj
->> -        })
->> +        let mut dma_obj = Self::new(dev, data.len())?;
->> +        // SAFETY: We have just created this object and there is no other user at this stage.
-> 
-> The safety comment should rather confirm that it is guaranteed that the device
-> won't access this memory concurrently.
+Indeed.
 
-I actually don't know how this is guaranteed. It wasn't explicitly
-explained before here, although unless I'm mistaken it was already a
-requirement. Could you help me? I guess it's related to the already
-mentioned fact that we just allocated this DMA memory and the device
-isn't yet initialized?
-
-Thanks,
-Daniel
+Cheers,
+Miguel
