@@ -2,81 +2,51 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id F0327BE8D28
-	for <lists+nouveau@lfdr.de>; Fri, 17 Oct 2025 15:24:44 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id B5055BE8EC5
+	for <lists+nouveau@lfdr.de>; Fri, 17 Oct 2025 15:37:14 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 767E110EBF1;
-	Fri, 17 Oct 2025 13:24:43 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 7D16A10EC21;
+	Fri, 17 Oct 2025 13:37:05 +0000 (UTC)
 Authentication-Results: gabe.freedesktop.org;
-	dkim=pass (2048-bit key; unprotected) header.d=google.com header.i=@google.com header.b="FxZd7vo7";
+	dkim=fail reason="signature verification failed" (2048-bit key; unprotected) header.d=igalia.com header.i=@igalia.com header.b="M1EIC/W0";
 	dkim-atps=neutral
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from mail-ej1-f73.google.com (mail-ej1-f73.google.com
- [209.85.218.73])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 1600E10EBF2
- for <nouveau@lists.freedesktop.org>; Fri, 17 Oct 2025 13:24:42 +0000 (UTC)
-Received: by mail-ej1-f73.google.com with SMTP id
- a640c23a62f3a-b3cb0f2b217so270654966b.2
- for <nouveau@lists.freedesktop.org>; Fri, 17 Oct 2025 06:24:42 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=google.com; s=20230601; t=1760707481; x=1761312281;
- darn=lists.freedesktop.org; 
- h=cc:to:from:subject:message-id:references:mime-version:in-reply-to
- :date:from:to:cc:subject:date:message-id:reply-to;
- bh=kAPzxmZAKRETv1aAgqTv/3Qe7/Q8DRU161MvWKOur7I=;
- b=FxZd7vo7OwNZNcQKxgJKSioAARPw7kCIuOBKkRU44rp+jODJChAXgHEgKM4fExBXyd
- A3e3Q1gmtxouec15A86kQt8f1n7ob4SMxl5kwfgNbTozrw1cCGLQGeRuWhxGHPp3IGOG
- Ny6toNkUtg5Wb9GMiGVIJs0akKlJ3+OSov3v/hztDbnRMHbqomoYjp1ga+BOmVOpI53m
- 23fS5BZu5obYuqO2Im/Pa9zZyI3MaAwGKGM9mvCLmT0kKohrLpSnGeJtT7q9r7gZCBo1
- RIj8oTt93c3SCRDZ+NLfG/3QOlUtoY1a8CrtNea7yWHVwYs9jRwlKtK3YuR5GAksDeA3
- 3kCA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1760707481; x=1761312281;
- h=cc:to:from:subject:message-id:references:mime-version:in-reply-to
- :date:x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=kAPzxmZAKRETv1aAgqTv/3Qe7/Q8DRU161MvWKOur7I=;
- b=wwvXSDb1ogaJtBMMUE5ChEkGrrd5aqtG+MuKpqukoLHxv1WXm8uxzXtCfpkb6//dgq
- JI7EnpMBAvdfqE+kBu3BKDerYhBk3JUkelEGmPUah6qXEKzALb9bjA7v4P64yOsLfciv
- 4KYo4DbH0Q5H2fSdZinWgyuZkWsgc05v9nGsmw3Gzfskb2H3g0GY1tLuk7f1XmIbTyUu
- DlHar2RexAVKaCYY+i6ylSDXe7sPsGjDG4BiPkn51Tk4AvFikgHUCMoRseB/Ngzyw8f1
- cWxb0r5TO/YvRtX0/zWZHOWSDmVG45b1vY9KSgG7Bi9ff1SiKRdXGcvlSkz1aeBvMUvG
- Bu9g==
-X-Forwarded-Encrypted: i=1;
- AJvYcCWe7qq3p+ZPsGHbshjILYSb+DThBOJ97xqlQqIGtwOeJULhzNSWZCdpgtOdCTYk3HL1dEDHQtVl@lists.freedesktop.org
-X-Gm-Message-State: AOJu0Yz1+ZMGt6fEVL6raT/cxzUFw54wA4Bp0CernusbbSFcnssuuspF
- Nrb8gQ2VrbnmO6T+wx+qw+20rz0TxfSug5pQGORlsG6XEY3ba60Oquf8mPHqk5SvnK46edAbQgo
- Jr6AJqtVAvb8naPcAGQ==
-X-Google-Smtp-Source: AGHT+IG+iL14vecShPyktC8BwMaW/uSlauMbjVXn7jXOXVhUbEdp41zM5x6FEcncWa9dDOidM50s71O00B81dbI=
-X-Received: from ejap10.prod.google.com ([2002:a17:906:228a:b0:b47:8176:fd79])
- (user=aliceryhl job=prod-delivery.src-stubby-dispatcher) by
- 2002:a17:907:3e85:b0:b3a:7af8:c4a2 with SMTP id
- a640c23a62f3a-b6472b5f826mr440021066b.10.1760707476223; 
- Fri, 17 Oct 2025 06:24:36 -0700 (PDT)
-Date: Fri, 17 Oct 2025 13:24:35 +0000
-In-Reply-To: <20251016210955.2813186-6-lyude@redhat.com>
-Mime-Version: 1.0
-References: <20251016210955.2813186-1-lyude@redhat.com>
- <20251016210955.2813186-6-lyude@redhat.com>
-Message-ID: <aPJDk2mEAOWoyZC7@google.com>
-Subject: Re: [PATCH v4 5/9] rust: gem: Introduce DriverObject::Args
-From: Alice Ryhl <aliceryhl@google.com>
-To: Lyude Paul <lyude@redhat.com>
-Cc: dri-devel@lists.freedesktop.org, rust-for-linux@vger.kernel.org, 
- Daniel Almeida <daniel.almeida@collabora.com>,
- Danilo Krummrich <dakr@kernel.org>, 
- David Airlie <airlied@gmail.com>, Simona Vetter <simona@ffwll.ch>,
- Miguel Ojeda <ojeda@kernel.org>, 
- Alex Gaynor <alex.gaynor@gmail.com>, Boqun Feng <boqun.feng@gmail.com>, 
- Gary Guo <gary@garyguo.net>, 
- "=?utf-8?B?QmrDtnJu?= Roy Baron" <bjorn3_gh@protonmail.com>,
- Benno Lossin <lossin@kernel.org>, 
- Andreas Hindborg <a.hindborg@kernel.org>, Trevor Gross <tmgross@umich.edu>, 
- Asahi Lina <lina+kernel@asahilina.net>,
- Shankari Anand <shankari.ak0208@gmail.com>, 
- "open list:DRM DRIVER FOR NVIDIA GPUS [RUST]" <nouveau@lists.freedesktop.org>,
- open list <linux-kernel@vger.kernel.org>
-Content-Type: text/plain; charset="utf-8"
+Received: from fanzine2.igalia.com (fanzine2.igalia.com [213.97.179.56])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 08E4F10EC1E;
+ Fri, 17 Oct 2025 13:37:04 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=igalia.com; 
+ s=20170329;
+ h=Content-Transfer-Encoding:MIME-Version:References:In-Reply-To:
+ Message-ID:Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:Content-ID:
+ Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
+ :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
+ List-Post:List-Owner:List-Archive;
+ bh=06Sr4sMZM/0D0PVTJe2vIG/IwY4n/vW0nrpr29EJPbg=; b=M1EIC/W0y7gKkMXWTm3WUvKwHo
+ Uab3o2jFfv0XQObdeuWixN64FNUGNynAFssYqni+CoZ30NRsPnGzwfn3ySTTqrNQqB9g4wU0AdJV2
+ sq26dG0dNfdL1aI3PmwAeATcKDNxzSewzNvSjurDlbWu1rbZynYgV619xjlh0PzHeuknY0+jbmiey
+ GnHw/hbf/uMjah9oQaC8oPZNIAsAeaqwcpOuhDqRYccQfDoHFPZjaRQngpbBMXVp++48Jwyz/zVXz
+ K8civpUDnAJXJCgZQkbDZr4YN1Vumkg7nIDCU9E1hixU9ODI/agEki0r6EHAHX80QJuTWk6kPelQe
+ om0p9RTg==;
+Received: from [90.242.12.242] (helo=localhost)
+ by fanzine2.igalia.com with esmtpsa 
+ (Cipher TLS1.3:ECDHE_SECP256R1__RSA_PSS_RSAE_SHA256__AES_256_GCM:256) (Exim)
+ id 1v9kdi-00B3xV-6E; Fri, 17 Oct 2025 15:37:02 +0200
+From: Tvrtko Ursulin <tvrtko.ursulin@igalia.com>
+To: amd-gfx@lists.freedesktop.org,
+	dri-devel@lists.freedesktop.org
+Cc: kernel-dev@igalia.com, Tvrtko Ursulin <tvrtko.ursulin@igalia.com>,
+ Lyude Paul <lyude@redhat.com>, Danilo Krummrich <dakr@kernel.org>,
+ nouveau@lists.freedesktop.org
+Subject: [PATCH v2 21/27] drm/nouveau: Remove drm_sched_init_args->num_rqs
+ usage
+Date: Fri, 17 Oct 2025 14:36:38 +0100
+Message-ID: <20251017133644.44747-22-tvrtko.ursulin@igalia.com>
+X-Mailer: git-send-email 2.48.0
+In-Reply-To: <20251017133644.44747-1-tvrtko.ursulin@igalia.com>
+References: <20251017133644.44747-1-tvrtko.ursulin@igalia.com>
+MIME-Version: 1.0
+Content-Transfer-Encoding: 8bit
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -91,11 +61,28 @@ List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-On Thu, Oct 16, 2025 at 05:08:18PM -0400, Lyude Paul wrote:
-> This is an associated type that may be used in order to specify a data-type
-> to pass to gem objects when construction them, allowing for drivers to more
-> easily initialize their private-data for gem objects.
-> 
-> Signed-off-by: Lyude Paul <lyude@redhat.com>
+Remove member no longer used by the scheduler core.
 
-Reviewed-by: Alice Ryhl <aliceryhl@google.com>
+Signed-off-by: Tvrtko Ursulin <tvrtko.ursulin@igalia.com>
+Cc: Lyude Paul <lyude@redhat.com>
+Cc: Danilo Krummrich <dakr@kernel.org>
+Cc: nouveau@lists.freedesktop.org
+---
+ drivers/gpu/drm/nouveau/nouveau_sched.c | 1 -
+ 1 file changed, 1 deletion(-)
+
+diff --git a/drivers/gpu/drm/nouveau/nouveau_sched.c b/drivers/gpu/drm/nouveau/nouveau_sched.c
+index e60f7892f5ce..d00e0f8dcfda 100644
+--- a/drivers/gpu/drm/nouveau/nouveau_sched.c
++++ b/drivers/gpu/drm/nouveau/nouveau_sched.c
+@@ -407,7 +407,6 @@ nouveau_sched_init(struct nouveau_sched *sched, struct nouveau_drm *drm,
+ 	struct drm_sched_entity *entity = &sched->entity;
+ 	struct drm_sched_init_args args = {
+ 		.ops = &nouveau_sched_ops,
+-		.num_rqs = DRM_SCHED_PRIORITY_COUNT,
+ 		.credit_limit = credit_limit,
+ 		.timeout = msecs_to_jiffies(NOUVEAU_SCHED_JOB_TIMEOUT_MS),
+ 		.name = "nouveau_sched",
+-- 
+2.48.0
+
