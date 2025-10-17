@@ -2,56 +2,64 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id 7625DBE7282
-	for <lists+nouveau@lfdr.de>; Fri, 17 Oct 2025 10:26:55 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 99607BE8185
+	for <lists+nouveau@lfdr.de>; Fri, 17 Oct 2025 12:39:54 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id E6FE610E15B;
-	Fri, 17 Oct 2025 08:26:51 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 425C310EBA1;
+	Fri, 17 Oct 2025 10:39:51 +0000 (UTC)
 Authentication-Results: gabe.freedesktop.org;
-	dkim=pass (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="r/FOHOK/";
+	dkim=pass (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="OtfpcKa6";
 	dkim-atps=neutral
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
 Received: from tor.source.kernel.org (tor.source.kernel.org [172.105.4.254])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 1F8FD10E15B;
- Fri, 17 Oct 2025 08:26:51 +0000 (UTC)
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 6C2ED10EBA0;
+ Fri, 17 Oct 2025 10:39:49 +0000 (UTC)
 Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by tor.source.kernel.org (Postfix) with ESMTP id 4B9CE64289;
- Fri, 17 Oct 2025 08:26:50 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 0C8C7C4CEF9;
- Fri, 17 Oct 2025 08:26:44 +0000 (UTC)
+ by tor.source.kernel.org (Postfix) with ESMTP id 8CF57642BA;
+ Fri, 17 Oct 2025 10:39:48 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id DF588C4CEE7;
+ Fri, 17 Oct 2025 10:39:43 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1760689610;
- bh=kbYlbb2vWzoBZ20nmxTT1jLO3BgY9QweNZ2+SNF6NR8=;
- h=Date:Cc:Subject:From:To:References:In-Reply-To:From;
- b=r/FOHOK/KV30W9AU1CLlFZr7Uo1nt7j3bZpfAoNf7pLarQJDffIexQ+Caee9cxKAE
- yWLtItXISda1kqRcnbW7Fq525yc0tSmY6FmHR+2l/kehCTieOvZViXTwGMODOBh0kO
- yhT4xZ7huZ4JJloh1JFwmwKqgu9MPcGketcuNCnak+Zuq7y4tSU7leFiIcH0xjMCeN
- 66ezK0K71KhY90ckpGXCToE8maTmVN4O3KA9iqr+4nssdX6YAc1vZNVBSqjqAma1CB
- 87r5pmy5mTtOmoEEQgZBEjNpZW2lTJ6WsSTyqMxPIOr2KJ7CtfbJAHJJ+KUmUHkLaH
- jcc1Oo3Qej4nw==
+ s=k20201202; t=1760697588;
+ bh=RprQ24Rtq4TN2VnVsUyJn/KZ51hCTF6QCkb5xO6r6UQ=;
+ h=Date:Subject:Cc:To:From:References:In-Reply-To:From;
+ b=OtfpcKa6PADCrYcmtw+fZoMJAbmridwn+1wDlyfExy4QDleWi4+KSH7EtJH27VPSa
+ lUkD9tW/P81U2V7+3rnYZx9KSdSOQNvIfBdI++Z0z4mKAK3qQFtRJY8qoKuW52Rwyg
+ 9G3gfBMDP0LUB7wmtEB2xUmsWun9sw4m9iYO1LbY0nGPk4OpuoOlkT5nf1zuHoIYA2
+ 6D3015o9H3A0uLjHCVEl146PSYMEpP6weoXbiqFFF24m7aRTlPsC25t8lpKsWtl/ul
+ eKhYzbJaoUXm0z1YmT3vexRnx5Vgx+VaNhfmmteutkS0moN/C5r4FVcJTrO34aLPf/
+ 74gzhxl5dxvbw==
 Mime-Version: 1.0
 Content-Transfer-Encoding: quoted-printable
 Content-Type: text/plain; charset=UTF-8
-Date: Fri, 17 Oct 2025 10:26:43 +0200
-Message-Id: <DDKGDHEH4QOJ.2QCE60PQ5OJRM@kernel.org>
-Cc: <viresh.kumar@linaro.org>, <ira.weiny@intel.com>, <leon@kernel.org>,
- <daniel.almeida@collabora.com>, <bhelgaas@google.com>,
- <kwilczynski@kernel.org>, <abdiel.janulgue@gmail.com>,
- <robin.murphy@arm.com>, <ojeda@kernel.org>, <alex.gaynor@gmail.com>,
- <boqun.feng@gmail.com>, <gary@garyguo.net>, <bjorn3_gh@protonmail.com>,
- <a.hindborg@kernel.org>, <aliceryhl@google.com>, <tmgross@umich.edu>,
- <rust-for-linux@vger.kernel.org>, <linux-pci@vger.kernel.org>,
- <linux-pm@vger.kernel.org>, <nouveau@lists.freedesktop.org>,
- <dri-devel@lists.freedesktop.org>, <linux-kernel@vger.kernel.org>
-Subject: Re: [PATCH] rust: driver: let probe() return impl PinInit<Self, Error>
-From: "Benno Lossin" <lossin@kernel.org>
-To: "Alexandre Courbot" <acourbot@nvidia.com>, "Danilo Krummrich"
- <dakr@kernel.org>, <gregkh@linuxfoundation.org>, <rafael@kernel.org>
-X-Mailer: aerc 0.21.0
-References: <20251016125544.15559-1-dakr@kernel.org>
- <DDK8EYINVIKJ.2ZK04J2C06GGR@nvidia.com>
-In-Reply-To: <DDK8EYINVIKJ.2ZK04J2C06GGR@nvidia.com>
+Date: Fri, 17 Oct 2025 12:39:42 +0200
+Message-Id: <DDKJ7AWIL0CN.32FB27N70K2YS@kernel.org>
+Subject: Re: [PATCH v5 03/14] gpu: nova-core: gsp: Create wpr metadata
+Cc: "Alistair Popple" <apopple@nvidia.com>,
+ <rust-for-linux@vger.kernel.org>, <dri-devel@lists.freedesktop.org>,
+ "Miguel Ojeda" <ojeda@kernel.org>, "Alex Gaynor" <alex.gaynor@gmail.com>,
+ "Boqun Feng" <boqun.feng@gmail.com>, "Gary Guo" <gary@garyguo.net>,
+ =?utf-8?q?Bj=C3=B6rn_Roy_Baron?= <bjorn3_gh@protonmail.com>, "Benno Lossin"
+ <lossin@kernel.org>, "Andreas Hindborg" <a.hindborg@kernel.org>, "Alice
+ Ryhl" <aliceryhl@google.com>, "Trevor Gross" <tmgross@umich.edu>, "David
+ Airlie" <airlied@gmail.com>, "Simona Vetter" <simona@ffwll.ch>, "Maarten
+ Lankhorst" <maarten.lankhorst@linux.intel.com>, "Maxime Ripard"
+ <mripard@kernel.org>, "Thomas Zimmermann" <tzimmermann@suse.de>, "John
+ Hubbard" <jhubbard@nvidia.com>, "Joel Fernandes" <joelagnelf@nvidia.com>,
+ "Timur Tabi" <ttabi@nvidia.com>, <linux-kernel@vger.kernel.org>,
+ <nouveau@lists.freedesktop.org>
+To: "Alexandre Courbot" <acourbot@nvidia.com>
+From: "Danilo Krummrich" <dakr@kernel.org>
+References: <20251013062041.1639529-1-apopple@nvidia.com>
+ <20251013062041.1639529-4-apopple@nvidia.com>
+ <DDJJ4ECCSE2I.1EUAJRU9JBGNI@nvidia.com>
+ <zwaefk62to77b5nyakeiboyj53fge3lysc3z7arp54tyyherdo@nsqhuig7bmbc>
+ <DDK4KADWJHMG.1FUPL3SDR26XF@kernel.org>
+ <DDK6IHKS13RS.3UVIM301BBFUP@nvidia.com>
+ <ckwuxk7ohtkbpqk345kzypkafu6bkshwbgshie2bq2vzwhj4pv@5wu4u6htkcuq>
+ <DDK7OP7VPVD0.1G6XJ4WCFFF02@nvidia.com>
+In-Reply-To: <DDK7OP7VPVD0.1G6XJ4WCFFF02@nvidia.com>
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -66,45 +74,73 @@ List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-On Fri Oct 17, 2025 at 4:12 AM CEST, Alexandre Courbot wrote:
-> On Thu Oct 16, 2025 at 9:55 PM JST, Danilo Krummrich wrote:
->> The driver model defines the lifetime of the private data stored in (and
->> owned by) a bus device to be valid from when the driver is bound to a
-
->> device (i.e. from successful probe()) until the driver is unbound from
->> the device.
+On Fri Oct 17, 2025 at 3:38 AM CEST, Alexandre Courbot wrote:
+> On Fri Oct 17, 2025 at 10:15 AM JST, Alistair Popple wrote:
+>> On 2025-10-17 at 11:43 +1100, Alexandre Courbot <acourbot@nvidia.com> wr=
+ote...
+>>> On Fri Oct 17, 2025 at 8:11 AM JST, Danilo Krummrich wrote:
+>>> > On Fri Oct 17, 2025 at 1:03 AM CEST, Alistair Popple wrote:
+>>> >> On 2025-10-16 at 17:23 +1100, Alexandre Courbot <acourbot@nvidia.com=
+> wrote...
+>>> >>> On Mon Oct 13, 2025 at 3:20 PM JST, Alistair Popple wrote:
+>>> >>> > +impl GspFwWprMeta {
+>>> >>> > +    pub(crate) fn new(gsp_firmware: &GspFirmware, fb_layout: &Fb=
+Layout) -> Self {
+>>> >>> > +        Self(bindings::GspFwWprMeta {
+>>> >>> > +            magic: r570_144::GSP_FW_WPR_META_MAGIC as u64,
+>>> >>> > +            revision: u64::from(r570_144::GSP_FW_WPR_META_REVISI=
+ON),
+>>> >>> > +            sysmemAddrOfRadix3Elf: gsp_firmware.radix3_dma_handl=
+e(),
+>>> >>> > +            sizeOfRadix3Elf: gsp_firmware.size as u64,
+>>> >>>=20
+>>> >>> Very unfortunately I'm afraid we will need to replace the `as` in t=
+his
+>>> >>> method with `u64::try_from` and make it return a `Result` for now.
+>>> >>
+>>> >> And presumably most of the other `as` keywords in this function deal=
+ing with
+>>> >> usize as well? Have made the change but would you mind quickly expla=
+ining
+>>> >> why this is needed? Is the concern that usize might be more than 64 =
+bits or
+>>> >> something?
+>>>=20
+>>> Indeed, the concern is that `as` performs a lossy conversion without
+>>> warning, which could catch us off-guard if e.g. some type changes in th=
+e
+>>> bindings.
+>>>=20
+>>> >
+>>> > Since nova-core depends on CONFIG_64BIT, I think we want a helper fun=
+ction that
+>>> > converts usize to u64 infallibly.
+>>> >
+>>> > This helper function can simply generate a compile time error, when
+>>> > !CONFIG_64BIT, etc.
+>>> >
+>>> > We can do this locally in nova-core, but it could also find it's plac=
+e in the
+>>> > generic infrastructure. nova-core clearly won't be the last driver ru=
+nning into
+>>> > this inconvinience.
+>>>=20
+>>> That would definitely be the correct way to address this.
 >>
->> This is already taken care of by the Rust implementation of the driver
->> model. However, we still ask drivers to return a Result<Pin<KBox<Self>>>
->> from probe().
->>
->> Unlike in C, where we do not have the concept of initializers, but
->> rather deal with uninitialized memory, drivers can just return an
->> impl PinInit<Self, Error> instead.
->>
->> This contributed to more clarity to the fact that a driver returns it's
+>> Sure. Although I don't really have a problem with the binding constructo=
+rs being
+>> fallible as plenty of the others are anyway.
 >
-> nit: s/it's/its
->
->> device private data in probe() and the Rust driver model owns the data,
->> manages the lifetime and - considering the lifetime - provides (safe)
->> accessors for the driver.
->>
->> Hence, let probe() functions return an impl PinInit<Self, Error> instead
->> of Result<Pin<KBox<Self>>>.
->>
->> Signed-off-by: Danilo Krummrich <dakr@kernel.org>
->
-> Short anecdote: I was curious about measuring the footprint impact of
-> pin initializers, so I did a `size vmlinux` before and after this patch
-> to compare the size of the `text` section. This patch removes exactly 60
-> bytes of binary code, which I guess corresponds to the duplicated `KBox`
-> allocations that are now gone. It's great to confirm once again how Rust
-> abstractions are indeed zero-overhead! :)
+> I think we can address the non-fallible conversions as a separate task
+> (as there are many sites that could be similarly optimized in the
+> nova-core code), so fallible constructors are acceptable imho.
 
-Thanks for the test! If you find that at any point they aren't, let me
-know, then we can fix that :)
+The infallible conversion function is trivial to implement.
 
----
-Cheers,
-Benno
+If you prefer, we can also add it in nova-core first and subsequently move =
+it to
+generic infrastructure.
+
+I prefer not to introduce more as-casts or fallible conversions we have to =
+clean
+up subsequently.
