@@ -2,51 +2,55 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id B5055BE8EC5
-	for <lists+nouveau@lfdr.de>; Fri, 17 Oct 2025 15:37:14 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 9A047BEB394
+	for <lists+nouveau@lfdr.de>; Fri, 17 Oct 2025 20:29:33 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 7D16A10EC21;
-	Fri, 17 Oct 2025 13:37:05 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 96F5110ECCF;
+	Fri, 17 Oct 2025 18:29:31 +0000 (UTC)
 Authentication-Results: gabe.freedesktop.org;
-	dkim=fail reason="signature verification failed" (2048-bit key; unprotected) header.d=igalia.com header.i=@igalia.com header.b="M1EIC/W0";
+	dkim=pass (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="i3naJv87";
 	dkim-atps=neutral
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from fanzine2.igalia.com (fanzine2.igalia.com [213.97.179.56])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 08E4F10EC1E;
- Fri, 17 Oct 2025 13:37:04 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=igalia.com; 
- s=20170329;
- h=Content-Transfer-Encoding:MIME-Version:References:In-Reply-To:
- Message-ID:Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:Content-ID:
- Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
- :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
- List-Post:List-Owner:List-Archive;
- bh=06Sr4sMZM/0D0PVTJe2vIG/IwY4n/vW0nrpr29EJPbg=; b=M1EIC/W0y7gKkMXWTm3WUvKwHo
- Uab3o2jFfv0XQObdeuWixN64FNUGNynAFssYqni+CoZ30NRsPnGzwfn3ySTTqrNQqB9g4wU0AdJV2
- sq26dG0dNfdL1aI3PmwAeATcKDNxzSewzNvSjurDlbWu1rbZynYgV619xjlh0PzHeuknY0+jbmiey
- GnHw/hbf/uMjah9oQaC8oPZNIAsAeaqwcpOuhDqRYccQfDoHFPZjaRQngpbBMXVp++48Jwyz/zVXz
- K8civpUDnAJXJCgZQkbDZr4YN1Vumkg7nIDCU9E1hixU9ODI/agEki0r6EHAHX80QJuTWk6kPelQe
- om0p9RTg==;
-Received: from [90.242.12.242] (helo=localhost)
- by fanzine2.igalia.com with esmtpsa 
- (Cipher TLS1.3:ECDHE_SECP256R1__RSA_PSS_RSAE_SHA256__AES_256_GCM:256) (Exim)
- id 1v9kdi-00B3xV-6E; Fri, 17 Oct 2025 15:37:02 +0200
-From: Tvrtko Ursulin <tvrtko.ursulin@igalia.com>
-To: amd-gfx@lists.freedesktop.org,
-	dri-devel@lists.freedesktop.org
-Cc: kernel-dev@igalia.com, Tvrtko Ursulin <tvrtko.ursulin@igalia.com>,
- Lyude Paul <lyude@redhat.com>, Danilo Krummrich <dakr@kernel.org>,
- nouveau@lists.freedesktop.org
-Subject: [PATCH v2 21/27] drm/nouveau: Remove drm_sched_init_args->num_rqs
- usage
-Date: Fri, 17 Oct 2025 14:36:38 +0100
-Message-ID: <20251017133644.44747-22-tvrtko.ursulin@igalia.com>
-X-Mailer: git-send-email 2.48.0
-In-Reply-To: <20251017133644.44747-1-tvrtko.ursulin@igalia.com>
-References: <20251017133644.44747-1-tvrtko.ursulin@igalia.com>
-MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+Received: from sea.source.kernel.org (sea.source.kernel.org [172.234.252.31])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id D86AC10ECCF;
+ Fri, 17 Oct 2025 18:29:29 +0000 (UTC)
+Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
+ by sea.source.kernel.org (Postfix) with ESMTP id A564E4186B;
+ Fri, 17 Oct 2025 18:29:29 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id A0F28C4CEE7;
+ Fri, 17 Oct 2025 18:29:24 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+ s=k20201202; t=1760725769;
+ bh=R22cE40QGrXnmRARyFiuKiJD1jh8qI6eDnspPf8uC4Y=;
+ h=Date:To:From:Subject:Cc:References:In-Reply-To:From;
+ b=i3naJv87wXwVGZofd8TWaof7oD3yKRQsy66d1XT5kstuVgGKKYFTODlLYkSvctGHo
+ nRmthlPkaGokYECROcAWd4JbvkytA3dBDKjAZPPHG1W7ke8BeCC2axEzqTnEX/lIT7
+ 9SggPHsKbVtIe+nWSYM5NGJuhrI4jAHT6/pV2vpmvAJ++dfSWBNWY+SzQRH5RbeIz9
+ C5JBwrlK1bKzldw+DGqadJUqpCAlv1B4004ki/I/+7PbOSkBPMM0qCos1RxUS0Yd3x
+ lp7uKorUZtc6W3bCEL/Za+M2y3afxxCF0/V7mO92eLSz6W4952nFcLmjv+Cz3kYuC2
+ tbAfQ1i7WLqaA==
+Mime-Version: 1.0
+Content-Transfer-Encoding: quoted-printable
+Content-Type: text/plain; charset=UTF-8
+Date: Fri, 17 Oct 2025 20:29:22 +0200
+Message-Id: <DDKT6WXI1S4I.30CBHFLJ9Q6CY@kernel.org>
+To: "Alice Ryhl" <aliceryhl@google.com>
+From: "Danilo Krummrich" <dakr@kernel.org>
+Subject: Re: [PATCH] rust: driver: let probe() return impl PinInit<Self, Error>
+Cc: <gregkh@linuxfoundation.org>, <rafael@kernel.org>,
+ <viresh.kumar@linaro.org>, <acourbot@nvidia.com>, <ira.weiny@intel.com>,
+ <leon@kernel.org>, <daniel.almeida@collabora.com>, <bhelgaas@google.com>,
+ <kwilczynski@kernel.org>, <abdiel.janulgue@gmail.com>,
+ <robin.murphy@arm.com>, <ojeda@kernel.org>, <alex.gaynor@gmail.com>,
+ <boqun.feng@gmail.com>, <gary@garyguo.net>, <bjorn3_gh@protonmail.com>,
+ <lossin@kernel.org>, <a.hindborg@kernel.org>, <tmgross@umich.edu>,
+ <rust-for-linux@vger.kernel.org>, <linux-pci@vger.kernel.org>,
+ <linux-pm@vger.kernel.org>, <nouveau@lists.freedesktop.org>,
+ <dri-devel@lists.freedesktop.org>, <linux-kernel@vger.kernel.org>
+References: <20251016125544.15559-1-dakr@kernel.org>
+ <aPI-9GoI7ZsNCpQr@google.com>
+In-Reply-To: <aPI-9GoI7ZsNCpQr@google.com>
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -61,28 +65,52 @@ List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-Remove member no longer used by the scheduler core.
+On Fri Oct 17, 2025 at 3:04 PM CEST, Alice Ryhl wrote:
+> On Thu, Oct 16, 2025 at 02:55:28PM +0200, Danilo Krummrich wrote:
+>> The driver model defines the lifetime of the private data stored in (and
+>> owned by) a bus device to be valid from when the driver is bound to a
+>> device (i.e. from successful probe()) until the driver is unbound from
+>> the device.
+>>=20
+>> This is already taken care of by the Rust implementation of the driver
+>> model. However, we still ask drivers to return a Result<Pin<KBox<Self>>>
+>> from probe().
+>>=20
+>> Unlike in C, where we do not have the concept of initializers, but
+>> rather deal with uninitialized memory, drivers can just return an
+>> impl PinInit<Self, Error> instead.
+>>=20
+>> This contributed to more clarity to the fact that a driver returns it's
+>> device private data in probe() and the Rust driver model owns the data,
+>> manages the lifetime and - considering the lifetime - provides (safe)
+>> accessors for the driver.
+>>=20
+>> Hence, let probe() functions return an impl PinInit<Self, Error> instead
+>> of Result<Pin<KBox<Self>>>.
+>>=20
+>> Signed-off-by: Danilo Krummrich <dakr@kernel.org>
+>> ---
+>> Depends on a minor pin-init patch [1] (Benno will send it to the list
+>> soon). A branch with this patch and the pin-init dependency is available
+>> in [2].
+>>=20
+>> [1] https://github.com/Rust-for-Linux/pin-init/pull/86/commits
+>> [2] https://git.kernel.org/pub/scm/linux/kernel/git/dakr/linux.git/log/?=
+h=3Dprobe_return
+>
+> Overall LGTM.
+> Reviewed-by: Alice Ryhl <aliceryhl@google.com>
 
-Signed-off-by: Tvrtko Ursulin <tvrtko.ursulin@igalia.com>
-Cc: Lyude Paul <lyude@redhat.com>
-Cc: Danilo Krummrich <dakr@kernel.org>
-Cc: nouveau@lists.freedesktop.org
----
- drivers/gpu/drm/nouveau/nouveau_sched.c | 1 -
- 1 file changed, 1 deletion(-)
+Thanks!
 
-diff --git a/drivers/gpu/drm/nouveau/nouveau_sched.c b/drivers/gpu/drm/nouveau/nouveau_sched.c
-index e60f7892f5ce..d00e0f8dcfda 100644
---- a/drivers/gpu/drm/nouveau/nouveau_sched.c
-+++ b/drivers/gpu/drm/nouveau/nouveau_sched.c
-@@ -407,7 +407,6 @@ nouveau_sched_init(struct nouveau_sched *sched, struct nouveau_drm *drm,
- 	struct drm_sched_entity *entity = &sched->entity;
- 	struct drm_sched_init_args args = {
- 		.ops = &nouveau_sched_ops,
--		.num_rqs = DRM_SCHED_PRIORITY_COUNT,
- 		.credit_limit = credit_limit,
- 		.timeout = msecs_to_jiffies(NOUVEAU_SCHED_JOB_TIMEOUT_MS),
- 		.name = "nouveau_sched",
--- 
-2.48.0
+>>  impl Device<CoreInternal> {
+>>      /// Store a pointer to the bound driver's private data.
+>> -    pub fn set_drvdata(&self, data: impl ForeignOwnable) {
+>> +    pub fn set_drvdata<T: 'static>(&self, data: impl PinInit<T, Error>)=
+ -> Result {
+>> +        let data =3D KBox::pin_init(data, GFP_KERNEL)?;
+>
+> Perhaps the gfp flags should be an argument set_drvdata?
 
+There shouldn't be a need, so I'd rather do that should we find a valid cas=
+e.
