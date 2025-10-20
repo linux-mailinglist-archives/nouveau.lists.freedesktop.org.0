@@ -2,52 +2,51 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id 5744ABF3C8C
-	for <lists+nouveau@lfdr.de>; Mon, 20 Oct 2025 23:49:35 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 73D3BBF3D35
+	for <lists+nouveau@lfdr.de>; Tue, 21 Oct 2025 00:08:39 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 2458F10E52D;
-	Mon, 20 Oct 2025 21:49:32 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 67AD210E10E;
+	Mon, 20 Oct 2025 22:08:22 +0000 (UTC)
 Authentication-Results: gabe.freedesktop.org;
-	dkim=pass (2048-bit key; unprotected) header.d=Nvidia.com header.i=@Nvidia.com header.b="kPbTvN9p";
+	dkim=pass (2048-bit key; unprotected) header.d=Nvidia.com header.i=@Nvidia.com header.b="cNATjEx5";
 	dkim-atps=neutral
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from SA9PR02CU001.outbound.protection.outlook.com
- (mail-southcentralusazon11013070.outbound.protection.outlook.com
- [40.93.196.70])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 36DAB10E09D;
- Mon, 20 Oct 2025 21:49:30 +0000 (UTC)
+Received: from BN8PR05CU002.outbound.protection.outlook.com
+ (mail-eastus2azon11011000.outbound.protection.outlook.com [52.101.57.0])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 0E38710E079;
+ Mon, 20 Oct 2025 22:08:21 +0000 (UTC)
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=Tlojf1QQh7Dn0yJOTEYdU/2nIYh5iO28VyLshhVJ3vZeSGsEehgbSLRdNCXwx+46ZN/ahwRBbBZv4CYvxZ/jEHmJCgwJ/NPfu6rCvqK5NeoK5Wz/hGF5+D3q0l73SrOnfOLFwngpYGk5PXIuWlqDqkT6jLFq+zXkY7GAGzRBwEyz24PMI4xKwkwdjy7pKL8y5cVWFtdbHEqmj7TcaljcslFiH0ee7ZbocCtbOv9CKFl1CHj+/0jc4ErCV0lyomYZPET40myjil2VFoYcM7hq5IPPBsoOBQeXdRfGRUxaWnWw5MEPswvCAc7CzjGqa2496zboXZ6KRjXyJ5sLA3wMWA==
+ b=FxZ0NUr+8IUbeWtwt29kp1T1DH1+8rE0u7PMeTQ8s3TkO+r+1m2vZ+VoD0k8Hgxe8lEEtp56rB9ny31AnZrfAcp6e60QGwY8Zsq2px1kYxeNvssNNnCI9kVrVOlyQAFKnekDPQccaSmpDNUXKB6lrokOd40pRVd+a4+l/jScw50p1rj/e8cy49pV0KbKI3XxOrUbAUO7TtdU6TWBfzsYA0pX/E3agdyNkqXeFnK2Co4pIjfe75llQc4OzApzGtNmKqg9x6uSp1hjmLGfHA4MxapuqV6OZIa/hfqD55YtT4G33VeZtytcqLyjCzSAuXZqpX0MPMatTDSksMkwaSBVAA==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
  s=arcselector10001;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=Wd31BwfTQw5IMnmuZHqDHfV3mCuUo5WiTbR1YQZhZyw=;
- b=LtLKINqq8u/KmiHwI1sHJUFacDkwyy6LKb2w/qYdeMNzFCnWjkx2l/vYZd2Xmf6TkIGNXVkM7c/N9h+Yj2ccJsZD4SXsxPjZzPq8aFqnpVcIv4ujdEyMsLCw5GHgUg+y5Ge/3k91TFMh1OWGwqtDKWPqe+/Hvl1i6yWoaxUn44fL5cgUWg92NTIGrgme5dm/y/C+xB4YgEHQ5+W/7qyNS+cJ+phUqFx6nSgsixfMR/3Qb5fU2GgXkkAy5KerFuxhrw9spF2dbKOMUqBUA+W0xKabc1OfZhHwc0nz0XDJGVTPid58U5+IyL6jVODjqXn5HA+1e2VVL7d4Zj6lbQs9lA==
+ bh=LQUHakKCr9UL8mKob8Rvc7OQh7j8RcxofJbJpp+BAMI=;
+ b=kzKmjW5Dyc0QMp9Aic7glVFDPU4mVVKTsfn9CgOujT3tkQMwu1c1Rqkv/iNJIi07xxdZThsmlyu+p8lw01D9abXV2iHSNFOQNjv1gh935Ph6I+lriOwpTQOxlSX1/x5kmmP1+bC++R4fNWs5tXS2SP6WjtDfUOVXK1gqmB7YuAnxneWmGtc8jvARY6riByqWOQw9XEj11MnOq9TVG0Ogy8tF1L62tkd3mXAt58oCT9nhfUm3tWewHvHHLt4ZwYyHNV097WjEUOxQXKxkNvSOxU34n/McJc2tLY9EtPs7+lN6YdgMAS91sybrTdn5izcn1oyjNAwWexe5+/xSnSTlWA==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
  smtp.mailfrom=nvidia.com; dmarc=pass action=none header.from=nvidia.com;
  dkim=pass header.d=nvidia.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=Nvidia.com;
  s=selector2;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=Wd31BwfTQw5IMnmuZHqDHfV3mCuUo5WiTbR1YQZhZyw=;
- b=kPbTvN9pjEowaMIcLjI5/3aRYbg02ALZCFkHl4dgyP8ovbst0kbKvCflp5Ozyd7PaC1s1S9z0oLBbMA0AiZismlK33OW9At6qXSNl7S2r49Xqqb1YDMV/Q3oeDFZ1nBix1plYrt93+Lb5I0Cfv1EOXmNlIfhYAT5sx1G+DONBlRbUCWds8XLRG7mLpncDwUSeOI+cuI0ht0mSB3v7teI/0xYhBvNhopT3dY4fYu4cm7kzKoe8UCZezc/cR7QgOXsV86o/h+GeqcdxIOTftiDvcKoO+urHABpiyN1s15zEv+odq+hnr3RPBhyURF2HuVCYzzgVigldJHgpHQXfIcHMQ==
+ bh=LQUHakKCr9UL8mKob8Rvc7OQh7j8RcxofJbJpp+BAMI=;
+ b=cNATjEx5wb/Cuh9dRLSS4yMd89uKmOUKaTmui9ruSTXbSyhOvj5ofVYRmglFGBlQ/GRS4TbbuOJX1hdbzAc6ME2a/Ik9+C47OVcbTV0jWNWKQSeLOW0MijEVT+SO7nnJV310PoRuiHnHUB37Pb5/eBnSoE2Tjb/wVR3/Z24N/WQToRi1ltZmW7aCAH33bfwOo4roQ1KiGhZOpf83sVX0mbmaaNsKVDq1s9J/rPmlRWavQLG5J8ZKli0yF9cZN3WNeq22nTmgWZXdlJMzCjPnknLbobc3lViDXbbSn6NKliqsEYlk9dgNWa6kwBMSyuNjd+iOIK0hXVI6irsZK1XB0A==
 Authentication-Results: dkim=none (message not signed)
  header.d=none;dmarc=none action=none header.from=nvidia.com;
 Received: from BY5PR12MB4116.namprd12.prod.outlook.com (2603:10b6:a03:210::13)
- by MN2PR12MB4221.namprd12.prod.outlook.com (2603:10b6:208:1d2::23)
+ by IA0PR12MB8896.namprd12.prod.outlook.com (2603:10b6:208:493::17)
  with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9228.17; Mon, 20 Oct
- 2025 21:49:26 +0000
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9228.14; Mon, 20 Oct
+ 2025 22:08:17 +0000
 Received: from BY5PR12MB4116.namprd12.prod.outlook.com
  ([fe80::81b6:1af8:921b:3fb4]) by BY5PR12MB4116.namprd12.prod.outlook.com
  ([fe80::81b6:1af8:921b:3fb4%4]) with mapi id 15.20.9228.015; Mon, 20 Oct 2025
- 21:49:26 +0000
-Message-ID: <c62474ef-ace4-4aa0-8dec-53cc52b7344c@nvidia.com>
-Date: Mon, 20 Oct 2025 14:49:22 -0700
+ 22:08:17 +0000
+Message-ID: <00a76912-497f-482d-b2c2-675e34ea92c1@nvidia.com>
+Date: Mon, 20 Oct 2025 15:08:16 -0700
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 3/7] docs: gpu: nova-core: Document GSP RPC message queue
- architecture
+Subject: Re: [PATCH 4/7] docs: gpu: nova-core: Document the PRAMIN aperture
+ mechanism
 To: Joel Fernandes <joelagnelf@nvidia.com>, linux-kernel@vger.kernel.org,
  rust-for-linux@vger.kernel.org, dri-devel@lists.freedesktop.org,
  dakr@kernel.org, acourbot@nvidia.com
@@ -63,105 +62,105 @@ Cc: Alistair Popple <apopple@nvidia.com>, Miguel Ojeda <ojeda@kernel.org>,
  Elle Rhumsaa <elle@weathered-steel.dev>,
  Daniel Almeida <daniel.almeida@collabora.com>, nouveau@lists.freedesktop.org
 References: <20251020185539.49986-1-joelagnelf@nvidia.com>
- <20251020185539.49986-4-joelagnelf@nvidia.com>
+ <20251020185539.49986-5-joelagnelf@nvidia.com>
 Content-Language: en-US
 From: John Hubbard <jhubbard@nvidia.com>
-In-Reply-To: <20251020185539.49986-4-joelagnelf@nvidia.com>
+In-Reply-To: <20251020185539.49986-5-joelagnelf@nvidia.com>
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 7bit
-X-ClientProxiedBy: BYAPR07CA0077.namprd07.prod.outlook.com
- (2603:10b6:a03:12b::18) To BY5PR12MB4116.namprd12.prod.outlook.com
+X-ClientProxiedBy: BYAPR05CA0069.namprd05.prod.outlook.com
+ (2603:10b6:a03:74::46) To BY5PR12MB4116.namprd12.prod.outlook.com
  (2603:10b6:a03:210::13)
 MIME-Version: 1.0
 X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: BY5PR12MB4116:EE_|MN2PR12MB4221:EE_
-X-MS-Office365-Filtering-Correlation-Id: 62939df4-4fe4-481f-8415-08de102289dc
+X-MS-TrafficTypeDiagnostic: BY5PR12MB4116:EE_|IA0PR12MB8896:EE_
+X-MS-Office365-Filtering-Correlation-Id: 62585ab4-2eb9-42bf-d503-08de10252c0c
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0;ARA:13230040|366016|7416014|376014|1800799024;
-X-Microsoft-Antispam-Message-Info: =?utf-8?B?bi91eWVYbEt2eGk1NVArTEk4Tk9GL0Z3K2Q1SmFLbTlNOFM5OURLbjYrVFVD?=
- =?utf-8?B?b0V6UTVtTXo2Q3VrcE5WSEVTcGV0QTlDczVwb0JNOGdpZnhIOU1ienNVSk1l?=
- =?utf-8?B?cCs0U1V3bmZrcGp4cllCanJuTFBMR0pXU0d4UTBqazZ1aUp1NXRyZHhYMDNq?=
- =?utf-8?B?THNGM1hLaWhPMFZSbWdBRzBDNE10THN4YXU5d1VEc3grSmx5ZHVxYlFOV1d3?=
- =?utf-8?B?SXFVcG5SQjdIVlliZmh6VjZjUWNOSGo2ZjM5cGxoV0hESnRja0kvUnVoek9L?=
- =?utf-8?B?b01Pb2RKNTVxSDFCaWJZUHQrSlBrdndVMFRZY0VydTYrZmZlcHZ3b3daZWRx?=
- =?utf-8?B?U2M1bjdzOWtnODJNUFJqN09tc2lHRGVKVzhOV3RKV21YTGU4WEJiSDNPVlBJ?=
- =?utf-8?B?b091c3czV1BVbnRFVU9tdzJNOEZOT3NhcG1mdVduaTlLRG5hSy9lSEV6U3lS?=
- =?utf-8?B?Uk84a0tyTUJiSkdpZUs3VFZhQ3E1eVNHemJpU1dKa01mTDQ3ckJKaFkvSUJE?=
- =?utf-8?B?eENtWlFqeDVqUUpqZE9ZRjJWbXEwTU1xUE1rV0NFTHN6QVhGdHNUOU1IRXJ3?=
- =?utf-8?B?SitsdCtZUTZYR3NKeU02Z0ZHSXdRcVpCaExMSzBBNnBJNDJZaGdBdXJnS2VH?=
- =?utf-8?B?a3J0VkhlTzFGUUpXbDN3OUtROTZ2d3llWjkwSFRlSFZPbGlMSjBVZG5uZysw?=
- =?utf-8?B?ZWZxL1U1TkVLS2lPb0l0dDVvMTdvTDdSa0czTG4zOW5DNHpSV0VQTkZkb1dl?=
- =?utf-8?B?OTdOT0lMUGJzSWZCaWtTa21hdmo4R1hmU1N3Q3lJdUJNemNvVExYdFF0SCt2?=
- =?utf-8?B?dTJmRHRiZU5pcmJsSGhDMGJBelJLVWdDUTFUVzZJeFc1QzYrODdHdFhFQnd2?=
- =?utf-8?B?d0FJenFTZEVST3F3aEt4YlhXMWFQOTJtVmQ0dGk3OEJPbnpJZkwyaG1GTjFX?=
- =?utf-8?B?b3FwQjY0em1iUXBUSHFzRnZNWWhTV0x1WCtXY1dpN0VlMUM4TVdNTFVCYnQ3?=
- =?utf-8?B?Q1JLcmhUNzVhb0k2U3UxMlJnUzUzeEtITmVLdXdydENGMGNtMHlkZUxyUHBO?=
- =?utf-8?B?YWpwQVg2RjFYSTdBSVZITG9YNUcrd1o4dnhiWmZKa0pEenBjK1N4R2JhdU9O?=
- =?utf-8?B?TE40ZzVCa2w4L0laZGUwNlpsOGxGVTRJVWVWU0hidFdRMVFCWjAzZEN4ZHFW?=
- =?utf-8?B?VFBTa1Z6QUJmSnJIQ2VLVnVGZ0JpKzRlYVQ2VkozcUVFMUNLeEN2R2h2djR3?=
- =?utf-8?B?clFOSHppVFR1ZktVd0dHUXVNQ0h6emd1dlI1NGhzRmJzaTNWZmdLK3JMVkNC?=
- =?utf-8?B?UWtJaldJV1lTWmdkKzZyQTVjNjNZRlJCbEVjd1JnSGZuOVltMzVBbkMrczFw?=
- =?utf-8?B?Z1JkNkora1gxcGNaUWY1L0VvRjhSdE1lOVZyaERCNlEyN1FTeDZoNTdOcVZN?=
- =?utf-8?B?cmIyOXBVWktOcUF2MGVqRFcxdnFhK211UmU2V0tjMlowOGdRTHhMQS9ET3E0?=
- =?utf-8?B?ZHJ6ZGg4VnRYaDJQMzlDVmh6ZEQxMkFMNXN3SlFTRTRCSUZtZUNoMmxvbldB?=
- =?utf-8?B?SmdSendROGlnenFvaTdiMjlmS1A0cEEwZkxyaE9QNnlqamhvOWxqMTIzVTlT?=
- =?utf-8?B?TElFa3NXTTZ2QVgydVBES1dOaTlVZU84NDUyRkR5S3dHSVNxN2QrOCsxRHVB?=
- =?utf-8?B?UkU2Uk1rUGlmZlhRVzNHNkJjcG9VczhlZkNDMzNYNVZhaG9KR1k1N2JNdC9J?=
- =?utf-8?B?Y2NiM2IrNDVtQURCbGtMSFNRL1hCYWFIaStTdGx1bUpwbWRCaXI5YWVIcGhs?=
- =?utf-8?B?MFAvblJ1ZlZ6dWxsL25hMnhoZnB4VU1XWmpPdzFPT0tTQ205QU5ZUWpnSnJI?=
- =?utf-8?B?UnlOWGxNY1FWUEE3R3BxdlZYVkJuRWpyMXlqYXo4a04ySjlTa1pSTXNrWUFr?=
- =?utf-8?Q?NOrqc/6F//ZeiovbfKB/AQ3yhQ3tTHmG?=
+X-Microsoft-Antispam: BCL:0;ARA:13230040|7416014|376014|1800799024|366016;
+X-Microsoft-Antispam-Message-Info: =?utf-8?B?blNCc0lZVTJCdXZPZlhnajUzKzNNTXMvQzdNVmhGUWordk14bHFpbmZqK2Nk?=
+ =?utf-8?B?S0hURENtR01CTkRIbUl6Q0FoNkZueXpKcE8rTk1hanJUdW5GOGd5WXpoZ0ZR?=
+ =?utf-8?B?ZTd2enI2ZERaeXlEZUV0aHh5VUF3b242bTNOTkpFN25qdHVMR1Q0UWJTMExZ?=
+ =?utf-8?B?NVJaZ3RxMVgxRXVTSjBxbzhOZHQxTnVjNjMyWk1ZZkl4M3VTTTJpc2pJaWlj?=
+ =?utf-8?B?K1lqMjNDTEx5UFF0dzVGRnMwZ2NOT2NkQmtIZlI2Tmh0OXFPSnBUWkRaU2xj?=
+ =?utf-8?B?RGU5TEVaKzE2SEszNGlVUDdJeXo0OFljaWN2ZysrRWNwNy9QcTFiOHhnNXZ4?=
+ =?utf-8?B?VE1mNGcxL0daQUZWV29ndzFwYTRzcWFPWWFoK3h2ZVFmSWhab0VIVlJkYlFC?=
+ =?utf-8?B?RXhMWC9DelA4Uk10bHRtWEdaUHNqUDBncVd6L21vcmhKWTdDYUI4OFVTVGVG?=
+ =?utf-8?B?cTBaZXFCcG81cXBiSHV2ZnJZWmdqVGlNSVhwNWU5S3YyRmNXUWZRaTBZZUhs?=
+ =?utf-8?B?djRqSjk3L0tzMTh6em43RmcxS1E0aTNrWWdPOERtenNRdjlvdzlvL2R5akJZ?=
+ =?utf-8?B?MlNFZ1V0UlhHdTFIRTFXY0hNSXBvMFpEV3JabU5IM01yNjNXKzBxWDlNcm5x?=
+ =?utf-8?B?Z1VqUVRlakwycFNBSUxGcG9PZFlQejdCRTBDY1k1SUg3UlA3Tm5wSThwa29t?=
+ =?utf-8?B?M2FZN2ZwRjhPWDRCQnd2VDlaWUZ1VGhyT1hlM1V3Z1kyaDlDMG9LaWwwWmF4?=
+ =?utf-8?B?dlZBQW13b2FPak8yY3MyQzN1d25BL1l4MVBtOWt6YTkyVklWVXlOZ1hORllj?=
+ =?utf-8?B?bDEzK3BrSWRMOXFFaUVUZWhrMDJiREN4OGhHQmtVbHljMDI2ZmE2Y2xqQ1Q1?=
+ =?utf-8?B?U0JRd3hXWlIrUmNLeG1jU2pQNnpWVzF6SHcvMWRraVAwQU9xZTIwTnhZWHYz?=
+ =?utf-8?B?N3Brc09NWmJsZFFLeG1HNFQ5THA2aUJ3OVpjdnlvbjdSNklnZnZnKzdSSTkv?=
+ =?utf-8?B?c0xUVHdCd2FycE5WN3VmTmQ5Qmp3ODdZRjBOK0VucjVZWTEyWWQ4THNZS3Bl?=
+ =?utf-8?B?eG0rVUdZUEplc1I2MWdSbnZWaFhaNmVWUlo1TCtHbXpLekkxWW1aQysvQ1Q1?=
+ =?utf-8?B?RlZ5VFdlbmYzUVpJTCt2S3BHTU5NOHdHaUI0eC9kQnRQa3ZWR0JHczVLWWNK?=
+ =?utf-8?B?R0MyS3FnVnhuRy9sZmdDZHBDamhkUjQzRHgzYXUvdnB2QXhRTU1xUlU0Y0Zi?=
+ =?utf-8?B?RUU5cEU3ajI1a3VUQncyZ3o5ZEpFUDkySTBSTzkxU1FCM2R3M08xdlIvbVNQ?=
+ =?utf-8?B?Q3BJK0NXaU1EeXBmZ3VXUTJkT3pYbDZRcnNobVVxQ0JGbkVmbXV4eG9kb3lm?=
+ =?utf-8?B?bnRPSnRmTXdCbEU0ZzlncFNNZjM2REIvTEdkb0JnREVza3JHUHRVSzhhTm81?=
+ =?utf-8?B?bDhtNm9UbksyU3Bnc1dnTEpwVy94bFVzVTY5V20vRHNBOWo1dE52Qys0R3dW?=
+ =?utf-8?B?R0EvcGxOMmFXNENUdFhoYmdKM3FyNnNWMU90ZlQweWhGUDNMZk16aUxkakNS?=
+ =?utf-8?B?K1EwU1RBVmFmcU9TUEo3WTc2ZlZuQ2VtazZyRS9GdFluSzEvd1dJMURyUWtw?=
+ =?utf-8?B?c1RCOHlnejFGdTMwODdwRHhNRnVlbVh5K2lSVlFKUGhnN0d5ZUdJTHBrN1FT?=
+ =?utf-8?B?YjRySElTMHJLZm5VQXpwM2lGaHFsaEkwVGxpZ09UYlVkdkFRVGh2cnNwcytD?=
+ =?utf-8?B?NC9SVmNIekluc053N2xVYjhOVTFmYWZmbUZ6ZFZEZHB6TlJlTUVMVDF0Y05W?=
+ =?utf-8?B?eGkxY1AzbStibjhraVJrWEZEb2dZYmxJdGQ3NFI5a3dxU0RyRFRyRUFPbEdO?=
+ =?utf-8?B?ZVUvSjN6S3dLUlgwVnRpNCs5VnIyMldQTDNDSkdLVUFiYlhocXAzUzVIbzFH?=
+ =?utf-8?Q?tJmy3+TA5toigy03gvcPMx33d9VfuUE7?=
 X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
  IPV:NLI; SFV:NSPM; H:BY5PR12MB4116.namprd12.prod.outlook.com; PTR:; CAT:NONE;
- SFS:(13230040)(366016)(7416014)(376014)(1800799024); DIR:OUT; SFP:1101; 
+ SFS:(13230040)(7416014)(376014)(1800799024)(366016); DIR:OUT; SFP:1101; 
 X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?enNRbTh4UEY4MjB1T3QzUVNXcFFnbkhwZ1daRFovT3QrMnUrS1VxbnZZcWxU?=
- =?utf-8?B?WGZucHRSNjN2OXJMbEJQZm42YnQ4UkpXSFphL21pOFdpell3UVp4ZGlKSWQ3?=
- =?utf-8?B?b0tnY1JyRVk2YWFGQXErejZSQjMxcHBxck5ab1lvWWRiY3lOa1Jxdyt4aE5j?=
- =?utf-8?B?VVdoZzVlTUJLanczaGlLM1R1cXBCZ1FoNWJ0ZHdjM09PSzMwTEdEd1MvRjZP?=
- =?utf-8?B?T2FCeFhMNGdGMWZQZmZmaWpqTC9LS0k4Yy9EMzluNjFJeXJaQU0wNFh4NlFY?=
- =?utf-8?B?VnRQSm9NM3hIeEJVczI3TUhudU5qbXRjRnMwUFZtS3FoNUFUbGp0T0VFaUFX?=
- =?utf-8?B?czVVekxOQTVxMWsxSlZYN0NHT3dDOGJJdWRZWSthU3ZzZFcxcTFlL0haV0di?=
- =?utf-8?B?M2JIRmJKMWdFNXBzOFdWYmk0ODJhTXZmQmFBWHY2TjdGLzVDZmtDRzFDVGp3?=
- =?utf-8?B?SXEvN1V3ZHNkbnVYanQ0QTE4Mlh6N244UjFUTjI5ODZBWHpwSVNnbXovSkU4?=
- =?utf-8?B?QjBMM2lhVVEzQTB6TkE5MkI2a3dlbFNmT3B2eHBoaDN0N0x4STN6QThwZEUy?=
- =?utf-8?B?c2FzeEZJWlZ0cnlTWkY4RG96K3FvaU1MK1ZGNW9YeFJLY3BSa29aZVFaNG5Q?=
- =?utf-8?B?clErWkhEdEN4VFR6U2YzalBFYVBQOVlKLzYzUTNvUHM2VzdBZjBiQnhYTEZR?=
- =?utf-8?B?UXNGWXlFKzQ0QmoycVBzWUNidzlTWTBsSlhzcVhXd0d0Ui9zanNIQ1h2UVlz?=
- =?utf-8?B?bDdVNDlqeFMrZXZtN09RZU83THRubXp4ZzBISXFhdFlQU3hkZGtXZ25ZS0Jw?=
- =?utf-8?B?MnhGSEZzYlVUYUR1SW9MMnk0TjFMVTh6TmwvMGdFTEpwNzlaeC9tZTE0Kzdi?=
- =?utf-8?B?OUxSWGh3S2ZDaTlEUGtxdWRMU1ppOGt6U3Rudzdwcm5xeFNXYktUT1lXaGc5?=
- =?utf-8?B?N25kaUpmZmRWUFJjbWg1aXZIWjRaakVOL0tWQzBrZFRRUEJqNUtXRzdqWlNu?=
- =?utf-8?B?eUhrK1YxcThzcUY1M1hiMUZOODJVd01Bb1V1QklzWmNLWWtWc2ExWGYrdk9O?=
- =?utf-8?B?QlN4ZGpHcXFGeXRyVHpYQ1hPTmZvMlVJZ1BBdWZpUUFhd0lKUldwYndyc1o3?=
- =?utf-8?B?Y25uUENmOElSMzVVRjhKeW82N3F0aVRhdUN4YllSR29xeithcmZxLzhhSXk0?=
- =?utf-8?B?MlJneUllaExWRjFCR3I4Ym1xSndqMzk0UnBEL2xHZjFYeFpNa1FVeWNuVTVi?=
- =?utf-8?B?WStkc3BxaFVpRXJPYzR2SkJBeW9odXcvd29ZaTZJT3p6NWQ1L2ZvWFhySTBL?=
- =?utf-8?B?MVlRWThiTXppekwwMFdmb3NwSWhIWURIazRhUCswMjd5aUVOUER4ZW9KWDh3?=
- =?utf-8?B?NGZ0K2dCNEYzVzZ6SG9aSE9GcXBtN0dSS2dQWFBkMG1QV0g4eFNFMnRxMHdl?=
- =?utf-8?B?TDI5cGtiNytyNG54RGdlMnA2SUcycnVrQ3pOS2VneFB2NXNTdFpIdUZ6VjZp?=
- =?utf-8?B?SXNCVHowK09sUGQ1NUFVQyt6RWZYS1R1VmRkQ2kxZjRSdG9yZzNUTFhEanlU?=
- =?utf-8?B?VkFJb3Qrb2tUcnlDcDVjRFhFeDRaczNoWjBJYVBPK3d1TmxpR252UThPSzQw?=
- =?utf-8?B?eTRRU3J6dEg0dk9HVHcxdGhWRHFQVDhRMUpueU9DczA1bDI5ZU1pSW8vNGg3?=
- =?utf-8?B?bURZelE4YWJ5STllL0d4SzRScWM1bVFEM2F3dllkaFZTbkhnNkVMalFQZ0Q3?=
- =?utf-8?B?d3lXU0pNbkNtcS8zRzhXMGROdlgwcjRjcE41cGdqYXNUampaUUdkMFRmRjdI?=
- =?utf-8?B?NFJZNmI1dFMzM1pjOEt5d0VNMmlxUndzbTcyY3ArUlRYUDl6TC9SR1U5MHVm?=
- =?utf-8?B?SDJranUrK3lscTFraVN0Vyt4Y25DWFdWVFU3eHBpbkZ1N24zVzZKUUlBOGsw?=
- =?utf-8?B?L1hNZGRTZ3B1Z0lHSFBURkFRckdjVWNuWmlFWkNLTWRoWFBZakJnVWNHaDdT?=
- =?utf-8?B?QkZ4d3hzZnk1QzB2YmhzT0xWMkVNTkhVZFpHcFEwcFV6WUQ5TU11eDJ5ZkdY?=
- =?utf-8?B?NGFIUjZadnMzZ3RNaFlJemsxT2NadXdBR0FxVE1BRG5GVG0vK2hLT3JqMVh6?=
- =?utf-8?Q?AQF/gbLOPXKV7oioR+qE+fks8?=
+X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?bk9rQlZwVkRYaGYvdUhXcE41VzloZTJIbXhxcHdyQ2RKY3RQMWQzSEcrV3dQ?=
+ =?utf-8?B?SEVPM05Hc2xLZjhBZDJNd2NlMkpFSFA1c3pZU1BVVXhoenJBdlpRbFFuTVMr?=
+ =?utf-8?B?TTVONUUyU1RaNmJ3amdmaTZNcGw0MmtKcmVEMGxQVS9NT0twZnZJcUZQUDcx?=
+ =?utf-8?B?b2Y3WnNocUMva0tMMUx4TEtReTFsczNGN3BxVTJRL0N3T0hFZE1PU2VuSEJ5?=
+ =?utf-8?B?K2dWK3pSWjJtSElvQXQvY3EzWlRsd2NRd04yajIxR2NIV1BiZ0RpWEdOVU9o?=
+ =?utf-8?B?SitoQnpIcy9LRVhHd0NabkduWS9aRTdxTGlOdUdSLzVxcXYrK2hmWXdtNHpa?=
+ =?utf-8?B?VDFaem1ScjRmMTN6WHM2RE5nK0V4VmFxc1VocmdkRWtUMmhLUGRDZWJNZTJE?=
+ =?utf-8?B?RE5KbUpLc05FZTM3eEVoKzdZVzJSUjBWUGNhUUFZQkFEeDVLQmhMakxaMDZk?=
+ =?utf-8?B?V29TanFpeHZGMjRKVmZHdVl4eHlPaGVGb3ZXOW4rZWJUT1Y5MXNTcnZhOWNU?=
+ =?utf-8?B?MWFyU0ZLaW5tU21ZZW1oQVZsWHc4ZDU0UXg5b0E5enRTcEY1VmRYMWoraFFP?=
+ =?utf-8?B?UnA1QzB0MTZsQ2prbmpTK0JMWWNPQWpLYzRHSkZqTTl0NUJpeUlOMmEvb1Jz?=
+ =?utf-8?B?dENFay93cGczb2ZpR2ZuRmRvTVl4N2hiNjNFUkZiRkRXdlY3MER4b1pHWEhE?=
+ =?utf-8?B?ckNXS2VCczE0Tmp0RVZqczZJNkg5Mlc3V0JxOVVZd3dQSkhtZlVic1JmOEVD?=
+ =?utf-8?B?ODRjdTA2VjZNZmEvL01URGxURFkwREhTVEo2amVJbVIyRGROdnRDOVFVaWdr?=
+ =?utf-8?B?VXdSS1RoOUsrR0tyQTV1L1NFR3ArVHNUcEhEVXQySlFyenFJR3hQc2hoOUNk?=
+ =?utf-8?B?VDBrOW1ZaUF6RkdzV3VUSUFPRHZIWUFqVFQ5VmdQekZsTHZpYjRFSENIbzVS?=
+ =?utf-8?B?MGN3RTNrR0JrZ0tnS051QmtwVUk4TjFWV3NpWHZlS28yTU1zdTdjcDlnRCtw?=
+ =?utf-8?B?ZWJ6eS9mVXFDUzNzTVhFeStzSEMzdkxzbUlsckJxWDVxdDBCUHNVSWFoUTVu?=
+ =?utf-8?B?bU9TOUI3aHN4T3pLRkFDRERvUkVwNlBQMnBWWU1GdHNFQkdVbVVOV0JIZElB?=
+ =?utf-8?B?R2RYWDgvUldtNVZnakxaNjVWSjl5NG94aHpEVGR2QU9XOEtFNVJnci9lbkpZ?=
+ =?utf-8?B?bmIxa1FVMnZDNzhzNG1aSzVkdUdSWE5wZVhSRjAxZENOZlc2cVRFZFgyQy9O?=
+ =?utf-8?B?R0Q0emY1OGdrOUNzUU41dUFDNVJZVXlkRDBRRXBRQ1dyTEZWWTQzeWtqYVlq?=
+ =?utf-8?B?WFhabndQV09tK3FzNkhXc1RQTEd3SkFYVHlld0c3Y2VFWS9oancxNTBtbkRM?=
+ =?utf-8?B?OTlPK3BRSzdSR3NuMHVEQTZIc2VYcnlLRzJaRkVRUW5NeG1vUnFneUJKaXNV?=
+ =?utf-8?B?RzljVWZNUTlnNjNOaTZNVnVDbWtueldkb24xekl4b1loUVRYaURKY3lhU3Fa?=
+ =?utf-8?B?djZTS21NNUJjWm1EblZDWmNaRDgrMTRDVmFtZE5nbE95ZnlQWkc3czJqc1NE?=
+ =?utf-8?B?blkvd1RJc09SQVBlUnU1UitoVkRUR0xTL2hZbFgrbzJmNStOTVJkakRnSWRU?=
+ =?utf-8?B?ZFgxYlVrd0pwNDJhSmY5dkJwRzRkZUNPcTJsV2ZJOTZ5N1pQcE5ZejVUZGEx?=
+ =?utf-8?B?RGdNVG15ckZuODBXV1E0eU8xRHpDTGdhcnZzaEt2UVNyMGxNMWhtTno3ZG0z?=
+ =?utf-8?B?RGltLy9hMWo4Q3N0dS91am1sMXpmc2xqVHZGQVhzcVhRMTVxTFVGc25LeGJP?=
+ =?utf-8?B?c2lGandROUxkRm9vK3J0TUxhd1Z1L1lwNlp2T1NzdmZNYVVsU3MvQkdXbGF2?=
+ =?utf-8?B?QmptY2szcm1NQU5wR0FVRDA1blp1d0tCdTNZMlhqby9QWUtFQkJEaDlyM3RP?=
+ =?utf-8?B?RjdmeGkyT0hKRkxJdnlSVHhIbTJ1UkpRbVdxY2FWVnU4VER0Y0tOV25FdFll?=
+ =?utf-8?B?aFJvaTFud3YxUlRJeU1WbU04SThMck1iWnNYUU14L2gvOUxSMWc1ZDBUNUdK?=
+ =?utf-8?B?c2p5NHpkRjY4cEpMbDA5L3MyY2dLbkVIckY1TDRPZXZ3Wk5NbHNyb3BjQUVF?=
+ =?utf-8?Q?TtZekmeyTswJ7SyuoDXPdoIyy?=
 X-OriginatorOrg: Nvidia.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 62939df4-4fe4-481f-8415-08de102289dc
+X-MS-Exchange-CrossTenant-Network-Message-Id: 62585ab4-2eb9-42bf-d503-08de10252c0c
 X-MS-Exchange-CrossTenant-AuthSource: BY5PR12MB4116.namprd12.prod.outlook.com
 X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 20 Oct 2025 21:49:26.2361 (UTC)
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 20 Oct 2025 22:08:17.3310 (UTC)
 X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
 X-MS-Exchange-CrossTenant-Id: 43083d15-7273-40c1-b7db-39efd9ccc17a
 X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: rsEqd8aWbH6LdgVTwAPOPGhBayIg6PMw4Wk5nfZlQbC/Hgnt2PCvKgxpR5yZvMuYsRc95iwlrLClczCfHCNF7Q==
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: MN2PR12MB4221
+X-MS-Exchange-CrossTenant-UserPrincipalName: Z8Bjex5xT4N69A3sHDvxBsdYbY/91dcpfNpi3CMa6dpcfSuBJrB0TqlQ3yc5b4qUnVlha+Xe45hxOkb750E7ww==
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: IA0PR12MB8896
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -177,269 +176,188 @@ Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
 On 10/20/25 11:55 AM, Joel Fernandes wrote:
-> Document the GSP RPC message queue architecture in detail.
+> While not terribly complicated, a little bit of documentation will help
+> augment the code for this very important mechanism.
 > 
 > Signed-off-by: Joel Fernandes <joelagnelf@nvidia.com>
 > ---
+>  Documentation/gpu/nova/core/pramin.rst | 113 +++++++++++++++++++++++++
+>  Documentation/gpu/nova/index.rst       |   1 +
+>  2 files changed, 114 insertions(+)
+>  create mode 100644 Documentation/gpu/nova/core/pramin.rst
 
 Hi Joel,
 
+Here's a more thorough review.
 
->  Documentation/gpu/nova/core/msgq.rst | 159 +++++++++++++++++++++++++++
-
-
-Can we please change the file name to approximately something like
-message_queue.rst? I'll buy you a few extra characters. :)
-
-
->  Documentation/gpu/nova/index.rst     |   1 +
->  2 files changed, 160 insertions(+)
->  create mode 100644 Documentation/gpu/nova/core/msgq.rst
 > 
-> diff --git a/Documentation/gpu/nova/core/msgq.rst b/Documentation/gpu/nova/core/msgq.rst
+> diff --git a/Documentation/gpu/nova/core/pramin.rst b/Documentation/gpu/nova/core/pramin.rst
 > new file mode 100644
-> index 000000000000..84e25be69cd6
+> index 000000000000..19615e504db9
 > --- /dev/null
-> +++ b/Documentation/gpu/nova/core/msgq.rst
-> @@ -0,0 +1,159 @@
+> +++ b/Documentation/gpu/nova/core/pramin.rst
+> @@ -0,0 +1,113 @@
 > +.. SPDX-License-Identifier: GPL-2.0
 > +
-> +=========================================
-> +Nova GPU RPC Message Passing Architecture
-> +=========================================
+> +=========================
+> +PRAMIN aperture mechanism
+> +=========================
 > +
 > +.. note::
 > +   The following description is approximate and current as of the Ampere family.
 > +   It may change for future generations and is intended to assist in understanding
 > +   the driver code.
 > +
-> +Overview
-> +========
+> +Introduction
+> +============
 > +
-> +The Nova GPU driver communicates with the GSP (GPU System Processor) firmware
-> +using an RPC (Remote Procedure Call) mechanism built on top of circular message
-> +queues in shared memory. This document describes the structure of RPC messages
-> +and the mechanics of the message passing system.
+> +PRAMIN is a hardware aperture mechanism that provides CPU access to GPU Video RAM (VRAM) before
+> +the GPU's Memory Management Unit (MMU) and page tables are initialized. This 1MB sliding window,
+> +located at a fixed offset within BAR0, is essential for setting up page tables and other critical
+> +GPU data structures without relying on the GPU's MMU.
 > +
-> +Message Queue Architecture
-> +==========================
+> +Architecture Overview
+> +=====================
 > +
-> +The communication between CPU and GSP uses two unidirectional circular queues:
-> +
-> +1. **CPU Queue (cpuq)**: CPU writes, GSP reads
-> +2. **GSP Queue (gspq)**: GSP writes, CPU reads
-> +
-> +The advantage of this approach is no synchronization is required to access the
-> +queues, if one entity wants to communicate with the other (CPU or GSP), they
-> +simply write into their own queue.
+> +Logically, the PRAMIN aperture mechanism is implemented by the GPU's PBUS (PCIe Bus Controller Unit)
 
-How about this:
+How about:
 
-The advantage of this approach is that no synchronization is required to access the
-queues. If one entity wants to communicate with the other (CPU or GSP), they
-simply write into their own queue.
+The PRAMIN aperture mechanism is logically implemented by the GPU's PBUS (PCIe Bus Controller Unit)
 
 
+> +and provides a CPU-accessible window into VRAM through the PCIe interface::
 > +
-> +Memory Layout
-> +-------------
+> +    +-----------------+    PCIe     +------------------------------+
+> +    |      CPU        |<----------->|           GPU                |
+> +    +-----------------+             |                              |
+> +                                    |  +----------------------+    |
+> +                                    |  |       PBUS           |    |
+> +                                    |  |  (Bus Controller)    |    |
+> +                                    |  |                      |    |
+> +                                    |  |  +--------------.<------------ (window always starts at
+> +                                    |  |  |   PRAMIN     |    |    |     BAR0 + 0x700000)
+> +                                    |  |  |   Window     |    |    |
+> +                                    |  |  |   (1MB)      |    |    |
+> +                                    |  |  +--------------+    |    |
+> +                                    |  |         |            |    |
+> +                                    |  +---------|------------+    |
+> +                                    |            |                 |
+> +                                    |            v                 |
+> +                                    |  .----------------------.<------------ (Program PRAMIN to any
+> +                                    |  |       VRAM           |    |    64KB VRAM physical boundary)
+> +                                    |  |    (Several GBs)     |    |
+> +                                    |  |                      |    |
+> +                                    |  |  FB[0x000000000000]  |    |
+> +                                    |  |          ...         |    |
+> +                                    |  |  FB[0x7FFFFFFFFFF]   |    |
+> +                                    |  +----------------------+    |
+> +                                    +------------------------------+
 > +
-> +The shared memory region (GspMem) where the queues reside has the following
-> +layout::
-> +
-> +    +------------------------+ GspMem DMA Handle (base address)
-> +    |    PTE Array (4KB)     |  <- Self-mapping page table
-> +    | PTE[0] = base + 0x0000 |     Points to this page
-> +    | PTE[1] = base + 0x1000 |     Points to CPU queue Header page
+> +PBUS (PCIe Bus Controller) among other things is responsible in the GPU for handling MMIO
 
-s/Header/header/
+How about:
 
-> +    | PTE[2] = base + 0x2000 |     Points to first page of CPU queue data
-> +    | ...                    |     ...
-> +    | ...                    |     ...
-> +    +------------------------+ base + 0x1000
-> +    |    CPU Queue Header    |  MsgqTxHeader + MsgqRxHeader
-> +    |    - TX Header (32B)   |
-> +    |    - RX Header (4B)    | (1 page)
-> +    |    - Padding           |
-> +    +------------------------+ base + 0x2000
-> +    |    CPU Queue Data      | (63 pages)
-> +    |    (63 x 4KB pages)    |  Circular buffer for messages
-> +    | ...                    |     ...
-> +    +------------------------+ base + 0x41000
-> +    |    GSP Queue Header    |  MsgqTxHeader + MsgqRxHeader
-> +    |    - TX Header (32B)   |
-> +    |    - RX Header (4B)    | (1 page)
-> +    |    - Padding           |
-> +    +------------------------+ base + 0x42000
-> +    |    GSP Queue Data      | (63 pages)
-> +    |    (63 x 4KB pages)    |  Circular buffer for messages
-> +    | ...                    |     ...
-> +    +------------------------+ base + 0x81000
+PBUS (PCIe Bus Controller) is responsible for, among other things, handling MMIO
+
+> +accesses to the BAR registers.
 > +
+> +PRAMIN Window Operation
+> +=======================
 > +
-> +Message Passing Mechanics
+> +The PRAMIN window provides a 1MB sliding aperture that can be repositioned over
+> +the entire VRAM address space using the NV_PBUS_BAR0_WINDOW register.
+> +
+> +Window Control Mechanism
 > +-------------------------
-> +The split read/write pointer design allows bidirectional communication between the
-> +CPU and GSP without synchronization (if it were a shared queue), for example, the
-> +following diagram illustrates pointer updates, when CPU sends message to GSP::
 > +
-> +    +--------------------------------------------------------------------------+
-> +    |                     DMA coherent Shared Memory (GspMem)                  |
-
-I think it would help to do this:
-
-s/DMA coherent/DMA-coherent/
-
-> +    +--------------------------------------------------------------------------+
-> +    |                          (CPU sending message to GSP)                    |
-> +    |  +-------------------+                      +-------------------+        |
-> +    |  |   GSP Queue       |                      |   CPU Queue       |        |
-> +    |  |                   |                      |                   |        |
-> +    |  | +-------------+   |                      | +-------------+   |        |
-> +    |  | |  TX Header  |   |                      | |  TX Header  |   |        |
-> +    |  | | write_ptr   |   |                      | | write_ptr   |---+----,   |
-> +    |  | |             |   |                      | |             |   |    |   |
-> +    |  | +-------------+   |                      | +-------------+   |    |   |
-> +    |  |                   |                      |                   |    |   |
-> +    |  | +-------------+   |                      | +-------------+   |    |   |
-> +    |  | |  RX Header  |   |                      | |  RX Header  |   |    |   |
-> +    |  | |  read_ptr ------+-------,              | |  read_ptr   |   |    |   |
-> +    |  | |             |   |       |              | |             |   |    |   |
-> +    |  | +-------------+   |       |              | +-------------+   |    |   |
-> +    |  |                   |       |              |                   |    |   |
-> +    |  | +-------------+   |       |              | +-------------+   |    |   |
-> +    |  | |   Page 0    |   |       |              | |   Page 0    |   |    |   |
-> +    |  | +-------------+   |       |              | +-------------+   |    |   |
-> +    |  | |   Page 1    |   |       `--------------> |   Page 1    |   |    |   |
-> +    |  | +-------------+   |                      | +-------------+   |    |   |
-> +    |  | |   Page 2    |   |                      | |   Page 2    |<--+----'   |
-> +    |  | +-------------+   |                      | +-------------+   |        |
-> +    |  | |     ...     |   |                      | |     ...     |   |        |
-> +    |  | +-------------+   |                      | +-------------+   |        |
-> +    |  | |   Page 62   |   |                      | |   Page 62   |   |        |
-> +    |  | +-------------+   |                      | +-------------+   |        |
-> +    |  |   (63 pages)      |                      |   (63 pages)      |        |
-> +    |  +-------------------+                      +-------------------+        |
-> +    |                                                                          |
-> +    +--------------------------------------------------------------------------+
+> +The window position is controlled via the PBUS BAR0_WINDOW register::
 > +
-> +When the CPU sends a message to the GSP, it writes the message to its own
-> +queue (CPU queue) and updates the write pointer in its queue's TX header. The GSP
-> +then reads the read pointer in its own queue's RX header and knows that there are
-> +pending messages from the CPU because its RX header's read pointer is behind the
-> +CPU's TX header's write pointer. After reading the message, the GSP updates its RX
-> +header's read pointer to catch up. The same happens in reverse.
+> +    NV_PBUS_BAR0_WINDOW Register
+> +    +-----+-----+--------------------------------------+
+> +    |31-26|25-24|           23-0                       |
 
-What do you think of this alternative wording:
+Should we use ":" notation here?
 
-When the CPU sends a message to the GSP, it writes the message to its own queue
-(CPU queue) and updates the write pointer in its queue's TX header. The GSP
-checks for pending messages by reading its RX header's read pointer and
-comparing it to the CPU's TX header's write pointer. If the GSP's read pointer
-lags behind, messages are waiting. After processing each message, the GSP
-advances its read pointer to acknowledge receipt. 
+31:26 | 25:24 | 23:0
 
-For GSP-to-CPU communication, the roles reverse: the GSP writes to its queue and
-updates its TX write pointer, while the CPU monitors its RX read pointer and
-advances it after consuming messages.
+> +    |     |TARG |         BASE_ADDR                    |
+> +    |     | ET  |        (bits 39:16 of VRAM address)  |
+> +    +-----+-----+--------------------------------------+
+> +
+> +    TARGET field values:
+> +    - 0x0: VID_MEM (Video Memory / VRAM)
+> +    - 0x1: SYS_MEM_COHERENT (Coherent system memory)
+> +    - 0x2: SYS_MEM_NONCOHERENT (Non-coherent system memory)
 
+These SYS_MEM_* items imply to the reader that PRAMIN can target
+sysmem. However, pramin.rs in this series hard-codes this field
+to VID_MEM:
+
+let window_reg = regs::NV_PBUS_BAR0_WINDOW::default().set_window_addr(fb_offset);
+
+It's not clear why that is done (I seem to recall a potential deadlock
+in older chips, in similar situations, but that's probably stale info).
+
+If, however, there is some limitation that prevents using SYS_MEM*, then
+we should document it, probably here.
 
 > +
-> +Page-based message passing
-> +--------------------------
-> +The message queue is page-based, which means that the message is stored in a
-> +page-aligned buffer. The page size is 4KB. Each message starts at the beginning of
-> +a page. If the message is shorter than a page, the remaining space in the page is
-> +wasted. The next message starts at the beginning of the next page no matter how
-> +small the previous message was.
+> +64KB Alignment Requirement
+> +---------------------------
 > +
-
-Error Handling: The document doesn't mention:
-
-a) What happens when queues are full
-b) How message corruption is detected and handled
-c) Recovery mechanisms for communication failures
-
-Performance Considerations: It would be helpful to add:
-a) Why 63 pages were chosen for each queue
-b) Typical message sizes and throughput expectations
-
-> +Note that messages larger than a page will span multiple pages. This means that
-> +it is possible that the first part of the message lands on the last page, and the
-> +second part of the message lands on the first page, thus requiring out-of-order
-> +memory access. The SBuffer data structure in Nova tackles this use case.
-
-I don't think SBuffer has landed in the kernel, nor in the pre-requisite bitfield
-patchset, yet, right? We could replace that last sentence with something like
-"TODO: show how the upcoming SBuffer data structure helps with this use case".
-
-
+> +The PRAMIN window must be aligned to 64KB boundaries in VRAM. This is enforced
+> +by the BASE_ADDR field representing bits [39:16] of the target address::
 > +
-> +RPC Message Structure:
+> +    VRAM Address Calculation:
+> +    actual_vram_addr = (BASE_ADDR << 16) + pramin_offset
+> +    Where:
+> +    - BASE_ADDR: 24-bit value from NV_PBUS_BAR0_WINDOW[23:0]
+> +    - pramin_offset: 20-bit offset within PRAMIN window [0x00000-0xFFFFF]
 
-Let's remove the trailing colon.
+How about:
 
-> +======================
-> +
-> +An RPC message is also called a "Message Element". The entire message has
-> +multiple headers. There is a "message element" header which handles message
-> +queue specific details and integrity, followed by a "RPC" header which handles
+      - pramin_offset: 20-bit offset within the PRAMIN window [0x00000-0xFFFFF]
 
-s/a "RPC"/an "RPC"/
+> +    Example Window Positioning:
+> +    +---------------------------------------------------------+
+> +    |                    VRAM Space                           |
+> +    |                                                         |
+> +    |  0x000000000  +-----------------+ <-- 64KB aligned      |
+> +    |               | PRAMIN Window   |                       |
+> +    |               |    (1MB)        |                       |
+> +    |  0x0000FFFFF  +-----------------+                       |
+> +    |                                                         |
+> +    |       |              ^                                  |
+> +    |       |              | Window can slide                 |
+> +    |       v              | to any 64KB boundary             |
 
-> +the RPC protocol details::
-> +
-> +    +----------------------------------+
-> +    |        GspMsgHeader (64B)        | (aka, Message Element Header)
-> +    +----------------------------------+
-> +    | auth_tag_buffer[16]              | --+
-> +    | aad_buffer[16]                   |   |
-> +    | checksum        (u32)            |   +-- Security & Integrity
+Maybe:
 
-Can we say anything useful here about:
+    s/any 64KB boundary/any 64KB-aligned boundary/
 
-a) What authentication mechanism is used
-b) How message integrity is verified
-c) Whether encryption is employed
-
-?
-
-> +    | sequence        (u32)            |   |
-> +    | elem_count      (u32)            |   |
-> +    | pad             (u32)            | --+
-> +    +----------------------------------+
-> +    |        GspRpcHeader (32B)        |
-> +    +----------------------------------+
-> +    | header_version  (0x03000000)     | --+
-> +    | signature       (0x43505256)     |   |
-> +    | length          (u32)            |   +-- RPC Protocol
-> +    | function        (u32)            |   |
-> +    | rpc_result      (u32)            |   |
-> +    | rpc_result_private (u32)         |   |
-> +    | sequence        (u32)            |   |
-> +    | cpu_rm_gfid     (u32)            | --+
-
-This shows field values but doesn't explain:
-
-a) What "signature (0x43505256)" represents (appears to be "CPRV" in ASCII)
-b) The purpose of cpu_rm_gfid field
-c) Valid ranges for the function field
-
-> +    +----------------------------------+
-> +    |                                  |
-> +    |        Payload (Variable)        | --- Function-specific data
-> +    |                                  |
-> +    +----------------------------------+
+> +    |                                                         |
+> +    |  0x123400000  +-----------------+ <-- 64KB aligned      |
+> +    |               | PRAMIN Window   |                       |
+> +    |               |    (1MB)        |                       |
+> +    |  0x1234FFFFF  +-----------------+                       |
+> +    |                                                         |
+> +    |                       ...                               |
+> +    |                                                         |
+> +    |  0x7FFFF0000  +-----------------+ <-- 64KB aligned      |
+> +    |               | PRAMIN Window   |                       |
+> +    |               |    (1MB)        |                       |
+> +    |  0x7FFFFFFFF  +-----------------+                       |
+> +    +---------------------------------------------------------+
 > diff --git a/Documentation/gpu/nova/index.rst b/Documentation/gpu/nova/index.rst
-> index e39cb3163581..46302daace34 100644
+> index 46302daace34..e77d3ee336a4 100644
 > --- a/Documentation/gpu/nova/index.rst
 > +++ b/Documentation/gpu/nova/index.rst
-> @@ -32,3 +32,4 @@ vGPU manager VFIO driver and the nova-drm driver.
->     core/devinit
+> @@ -33,3 +33,4 @@ vGPU manager VFIO driver and the nova-drm driver.
 >     core/fwsec
 >     core/falcon
-> +   core/msgq
+>     core/msgq
+> +   core/pramin
 
 thanks,
 -- 
