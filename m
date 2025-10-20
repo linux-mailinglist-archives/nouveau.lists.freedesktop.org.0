@@ -2,72 +2,71 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id E2373CBACBB
-	for <lists+nouveau@lfdr.de>; Sat, 13 Dec 2025 13:44:17 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 79D23CBAFC7
+	for <lists+nouveau@lfdr.de>; Sat, 13 Dec 2025 13:47:29 +0100 (CET)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 95BE310EB92;
-	Sat, 13 Dec 2025 12:41:09 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 63A7D10ECBF;
+	Sat, 13 Dec 2025 12:42:24 +0000 (UTC)
 Authentication-Results: gabe.freedesktop.org;
-	dkim=permerror (0-bit key) header.d=gmail.com header.i=@gmail.com header.b="g8u/TRCt";
+	dkim=permerror (0-bit key) header.d=gmail.com header.i=@gmail.com header.b="AyU4lpCm";
 	dkim-atps=neutral
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from mail-pl1-f170.google.com (mail-pl1-f170.google.com
- [209.85.214.170])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 80B1E10E528
- for <nouveau@lists.freedesktop.org>; Mon, 20 Oct 2025 21:30:56 +0000 (UTC)
-Received: by mail-pl1-f170.google.com with SMTP id
- d9443c01a7336-2699ef1b4e3so8403625ad.0
- for <nouveau@lists.freedesktop.org>; Mon, 20 Oct 2025 14:30:56 -0700 (PDT)
+Received: from mail-pg1-f173.google.com (mail-pg1-f173.google.com
+ [209.85.215.173])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id DD5DD10E52A
+ for <nouveau@lists.freedesktop.org>; Mon, 20 Oct 2025 21:34:07 +0000 (UTC)
+Received: by mail-pg1-f173.google.com with SMTP id
+ 41be03b00d2f7-b62e55af64aso154699a12.1
+ for <nouveau@lists.freedesktop.org>; Mon, 20 Oct 2025 14:34:07 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1760995856; x=1761600656; darn=lists.freedesktop.org;
+ d=gmail.com; s=20230601; t=1760996047; x=1761600847; darn=lists.freedesktop.org;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:from:to:cc:subject:date
  :message-id:reply-to;
- bh=ba6kY56LKajg5gR+mfYZ1l0Mti/V4+1lpEveR2gotOM=;
- b=g8u/TRCtMuerj/6WPtSZxs0mdLnnUc+WndlPVux+w7IMdEMscCkwRieq3xlcl/wuF0
- 8C/DEelgFCGRlOMevcDivICPijiQ6aT2ueo5q/tJwdibGrIE9BlhuV/uDvWaoihHpcE1
- v8BI2cCO730/RXWcFPZsa4VJApGb30vpc+S6r9JzECALrU3bWybywjg2fieZGIybfMmf
- eKxrCRA91CdelLQCvcgXW8d3taQvE+/JS18bClhTXRJxA3Y0ZgBKB6aFZ17k7DsMxuip
- jY9TgVSDEpmB3py78rJoMJTs0Qup9+s5YFmuhTqBfjChoh9QEtOVw7deNOI5ySVsTvb1
- HsSw==
+ bh=TIA8kHBtPk6GgWmqAWWXnwTpPlJ3gJjCHeq/XdJy1Q8=;
+ b=AyU4lpCmGrxKOD3IbKwZB+A2cHtg46X9gvFDDUAQeXS/UoO17xmNqzof2Tdr6hmDNe
+ uO9AIDmDv4551YT4jZblphVkn4tNahlV85El7cI+7NB1u0oFJAdbwI3mIZNxB3/QJiEu
+ ydsbYQRZNGOaMk/nna41tdeZ1OKWTU5M+XixQW7ty4xfQuLBHkrclWeHBKyhWa2Rs5R3
+ 3Pt1DPJ52lqZf0U3Vmxk+xpu2NiNm7lI6eg/4JbuLEJt0DbZyUr97vxMvnlmZs2jQXO7
+ 6ASqvDEfOAoFbHeeZWsOsRYM3QGj8GFucSZKPSvo9dEaoSOv6oWVKnAaF/VsqN5oYEfS
+ E8qg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1760995856; x=1761600656;
+ d=1e100.net; s=20230601; t=1760996047; x=1761600847;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=ba6kY56LKajg5gR+mfYZ1l0Mti/V4+1lpEveR2gotOM=;
- b=ISl1dz9GqwMCPaCuNGicoZamlVfu0R85Ad3viuXprJeOLMjFVoWhYXjMLqwHSyBIFm
- UIddWIZe78MHB6FDE/3oOW4P6PdTUct52Ijc3CagPl3opGV5xeu9pYxFuClw6Cbj61uq
- ks8cyMwMf6mJtCWFnqVNGvSx2FV69qwP4siySdTNBKx8c5b1WBd7GCLRw3m1PWLzV+gl
- CbSRJz7z7ejTyPzT0rZnR8gvPZtTnSNyTEANmqfBuzfx8dZqTF95L7NukXGesVglnGXW
- +6/5Wqnvpcst2Xo75hOpY8P4dx9WO3FBFZ3ok3P0I3HMdk5vMexAFtShDZqa7zX+oo6a
- jgNg==
+ bh=TIA8kHBtPk6GgWmqAWWXnwTpPlJ3gJjCHeq/XdJy1Q8=;
+ b=v62pTihBSG6f/tu1N9brk6sW1lK/qRgTQ1mOau7RZIirVRy6ANj5xYPZdOJ4FDPTUG
+ Bi4CpirIWDKkSALv/ZMTWd3btJd6+MZzWEwRJbRCTv85lzrAd6Kti1j5d1uYMKxU6eBL
+ dEaArYleB7yJjYMypfgsN3Q/manGePiA4oEsnUI/PJBTJ4MrSivE5/stKEuHlc1qwCW7
+ jr48/iZGel0zTI5ljkjDrc2LziSVEb5eO9Tt+g5J6t6TKizHeczJaD7hWec2+vBUF1Lh
+ Vk32cN9DxtvEoMFT2JKZvcthY5ihAd5iAPs13f1mtnTjON1EqGSPGQ4V/vyHyEknRNJW
+ uPSg==
 X-Forwarded-Encrypted: i=1;
- AJvYcCWBy8PIMQ5ZY0KsC0S1eWYAuysRPQuZB9xv0n6PdxLFrkOKbfDOJmiajiCjH2pt7IgUrWkERrwT@lists.freedesktop.org
-X-Gm-Message-State: AOJu0YyVJ1x04LvkajVjpzmF2rmW8y9jaGtTEgzUzlhA2VJlnyBVKj4e
- Dx9db7L16gb/WIjbHXS3eS/KK4hqaOpld6wSEw0gQsYE27YVlNHGaNI0WWzkMnv4kM3MeWGQkOE
- tn1GBPdcPAeLph8S7PLewlalggo4cZMW+npSCLMmBcg==
-X-Gm-Gg: ASbGnct1eheKS5I6Ws86DjiuskrSLSdeeG9DwQkONL6DTjrJlAxlXvO/XQCQ31eeoxg
- J/PHeqnt4asLmjscfXW51NHLSqxruadK6aiw7J8jq0dOLv0X0NJTD1wP1QVD9skz8QT13p1D28p
- +8A5m97p79KHLVQ4HRus9JItO3KnnpPt20Rdm9M6M+mIpwO6qCkI4UfNtppnthOBcX/p0L2x7lh
- MJfw5TnJ6Rptf+UPO+zM6txeohM3Glgik6+Lfxu8KnVnTAn0SatCtUN4PsBmHp4RBmco+TWVmY+
- 2CrxUz05NLigtoYTcCLGcPL/9HGlEbv2jjoRC4FxTS8WFG8sikbsNBdNAnCgxlSnfmHi8VozwEG
- p2TuHnQqpw5Nr3g==
-X-Google-Smtp-Source: AGHT+IGuIlogvO3qiXAz17lC+JAXlrcckH7vWCchmd8okkyTNJDWWsiiPF/LNLwVhABlkDWXY45TBR8ANM/9BveSOCo=
-X-Received: by 2002:a17:903:8c3:b0:25a:4437:dbb7 with SMTP id
- d9443c01a7336-290c9d2debcmr99091045ad.4.1760995856042; Mon, 20 Oct 2025
- 14:30:56 -0700 (PDT)
+ AJvYcCWROOiWbfTU96B+pcXwOs9mAeaWTDKs+OUMkevPU2jI3gYClRXIBBVBGNVEVbMH+cPMisMdjQSz@lists.freedesktop.org
+X-Gm-Message-State: AOJu0YxtBhdLwJgabVd6oW3lYAMSIyouFceOmWtsr4Zpit3pP3aizFg+
+ KahuOTO8WVd/S82k6pX0pJ5lxPVf9QccGzzIIOEekuJUu85ud2lLgL38yXNar3a0euRV5J1gb+g
+ gSHTtYTcYvvqpmIfb/jfkYF9v4ve6QN4=
+X-Gm-Gg: ASbGnct+zzIwUaKVVO0r+zQZZIxjFpI+Tg8Ez+MiQmM1z8TPmFdsJStJsa+mp9uYktg
+ AtXrD62MsgIopedoeGCJIf7fvhgOunziUAGdCwpUMHooG4Gvfx0c4EW4N+RL/MTLumZqSTM4A9d
+ eXsSacpTdhoymHoUHNuzbCygNN+Lp8gGmDcHxiDah+4veYHMtixjMxUb5h33PUV0KkntUkkHgD4
+ 8d+cVzjHvGwo/m6FsFgwnsmhqsdwDzrM7P66e9vEk1lpaLxqq7XdgeaD3ZLwliiOUtqmQFzsMuC
+ ZCJd+Zxh5sZmcm3zW9WQtdwHYWS+XnlEJ3ufpgJ4LKP7g6V8CWoUGx4UHyc+AGsTp4/X9b4Bke5
+ Sz1ymEXrlkHTfRg==
+X-Google-Smtp-Source: AGHT+IENeHKMjyzGTYHHZV28uVbTm7W0v2W0HGYIwZ1YpX54wVhZRXd1wDtmMhBidXjOzxTnYzIEdPK9TNFHSokqIok=
+X-Received: by 2002:a17:903:94e:b0:26a:3c75:5241 with SMTP id
+ d9443c01a7336-292d3fcce91mr5493965ad.9.1760996047308; Mon, 20 Oct 2025
+ 14:34:07 -0700 (PDT)
 MIME-Version: 1.0
 References: <20251020185539.49986-1-joelagnelf@nvidia.com>
- <20251020185539.49986-8-joelagnelf@nvidia.com>
-In-Reply-To: <20251020185539.49986-8-joelagnelf@nvidia.com>
+ <20251020185539.49986-2-joelagnelf@nvidia.com>
+In-Reply-To: <20251020185539.49986-2-joelagnelf@nvidia.com>
 From: Miguel Ojeda <miguel.ojeda.sandonis@gmail.com>
-Date: Mon, 20 Oct 2025 23:30:43 +0200
-X-Gm-Features: AS18NWBOQUVimKkWa1HJu_1dg-N_FwTUSitxLBjCaOz3GTuCAcSPB_k9_xk69eM
-Message-ID: <CANiq72=SSQ5nSjt9yzX_A3Tgo2ByGM5CV0VqFnF1cTOzrZ-pbg@mail.gmail.com>
-Subject: Re: [PATCH 7/7] nova-core: mm: Add data structures for page table
- management
+Date: Mon, 20 Oct 2025 23:33:54 +0200
+X-Gm-Features: AS18NWAADgBeA1nYLOcKyihsh6E3dmd5BWRM3ztrLw4uDz1-mBK39vAmoeM9Wwg
+Message-ID: <CANiq72nGPeLvrjQB-62Ht8TR7oWPgF9HFO=yPX7TT3faqxnNFg@mail.gmail.com>
+Subject: Re: [PATCH 1/7] docs: rust: Fix a few grammatical errors
 To: Joel Fernandes <joelagnelf@nvidia.com>
 Cc: linux-kernel@vger.kernel.org, rust-for-linux@vger.kernel.org, 
  dri-devel@lists.freedesktop.org, dakr@kernel.org, acourbot@nvidia.com, 
@@ -100,123 +99,15 @@ List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-Hi Joel,
-
-A few nits below (I do sometimes this kind of docs review to try to
-keep a consistent style across all Rust code).
-
-On Mon, Oct 20, 2025 at 8:56=E2=80=AFPM Joel Fernandes <joelagnelf@nvidia.c=
+On Mon, Oct 20, 2025 at 8:55=E2=80=AFPM Joel Fernandes <joelagnelf@nvidia.c=
 om> wrote:
 >
-> +//!     .set_table_frame_number(new_table.frame_number());
-> +//! // Call a function to write PDE to VRAM address
+> Fix two grammatical errors in the Rust coding guidelines document.
+>
+> Signed-off-by: Joel Fernandes <joelagnelf@nvidia.com>
 
-Newline between these. Period ad the end.
-
-> +//! ## Given a PTE, Get or allocate a PFN (page frame number).
-
-In headers, no period at the end. Also, is "Get" intended to be capitalized=
-?
-
-> +//!     // Call a function to read 64-bit PTE value from VRAM address
-
-Period at the end too (more of these elsewhere).
-
-> +//!     if pte.valid() {
-> +//!         // Return physical frame number from existing mapping
-> +//!         Ok(Pfn::new(pte.frame_number()))
-
-Early returns where possible, like in C, i.e. to avoid indentation on
-big `else` branches.
-
-> +/// Memory size constants
-> +pub(crate) const KB: usize =3D 1024;
-> +pub(crate) const MB: usize =3D KB * 1024;
-
-The docs will only apply to the first item, so this probably was meant
-to be a `//` instead of a `///`.
-
-Or you could use a module to contain these (and then possibly `use`
-them outside), and then you can have docs in the module itself, but
-that is heavier.
-
-> +/// Page size: 4 KiB
-> +pub(crate) const PAGE_SIZE: usize =3D 4 * KB;
-
-`rustdoc` would eventually render the value and the non-evaluated
-expression, and in the source code it already says `4 * KB`, so I
-think repeating the value isn't needed, unless you mean to show it is
-really a multiple of 2.
-
-> +pub(crate) enum PageTableLevel {
-> +    Pdb, // Level 0 - Page Directory Base
-> +    L1,  // Level 1
-> +    L2,  // Level 2
-> +    L3,  // Level 3 - Dual PDE (128-bit entries)
-> +    L4,  // Level 4 - PTEs
-
-In this case, I think you meant the other way around, i.e. actual
-docs: `///` instead of `//`.
-
-(Also, unless there is a particular reason (e.g. it is a big table),
-please generally put comments on top of things, not at the side, which
-matches closer to what is needed for docs.)
-
-> +    /// Convert an Address to a frame number.
-
-These should eventually be intra-doc links, but at least please use
-for the moment backticks when referring to Rust items like types etc.
-
-> +    /// # Example
-
-We always use the plural for these section headers, even if there is a
-single item (e.g. single example).
-
-> +    /// ```no_run
-> +    /// let va =3D VirtualAddress::default();
-> +    /// let pte_idx =3D va.level_index(PageTableLevel::L4);
-> +    /// ```
-
-This will need some `use` lines -- not needed now, but just as a
-reminder that these will get actually built eventually.
-
-> +    /// Get raw u64 value.
-
-Intra-doc link or at least backticks.
-
-> +    /// The valid bit is inverted so add an accessor to flip it.
-> +    pub(crate) fn set_valid(&self, value: bool) -> Pde {
-
-This docs string sounds like a commit message.
-
-> +/// Dual PDE at Level 3 - 128-bit entry containing both LPT and SPT poin=
-ters.
-> +/// Lower 64 bits =3D big/large page, upper 64 bits =3D small page.
-
-It sounds like a few of these details should be on its own paragraph
-to avoid having them in the short description (title).
-
-> +/// // Call a function to read dual PDE from VRAM address
-> +/// let mut dual_pde: DualPde =3D read_dual_pde(dpde_addr)?;
-> +/// // Call a function to allocate a page table and return its VRAM addr=
-ess
-> +/// let spt_addr =3D allocate_page_table()?;
-> +/// dual_pde.set_spt(Pfn::from(spt_addr), AperturePde::VideoMemory);
-> +/// // Call a function to write dual PDE to VRAM address
-> +/// write_dual_pde(dpde_addr, dual_pde)?;
-
-Newlines before the comments, i.e. between "conceptual blocks".
-
-> +    pub lpt: Pde, // Large/Big Page Table pointer (2MB pages) - bits 63:=
-0 (lower)
-> +    pub spt: Pde, // Small Page Table pointer (4KB pages) - bits 127:64 =
-(upper)
-
-Docs instead of comments.
-
-> +    /// Check if has valid Small Page Table.
-
-Missing word?
+In general, please submit independent patches like this one
+independently, e.g. this should go through the Rust tree.
 
 Thanks!
 
