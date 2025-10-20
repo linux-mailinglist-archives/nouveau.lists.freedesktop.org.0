@@ -2,90 +2,90 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id 1E355CBABCE
-	for <lists+nouveau@lfdr.de>; Sat, 13 Dec 2025 13:43:23 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id E2373CBACBB
+	for <lists+nouveau@lfdr.de>; Sat, 13 Dec 2025 13:44:17 +0100 (CET)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 2DD1A10EB23;
-	Sat, 13 Dec 2025 12:41:06 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 95BE310EB92;
+	Sat, 13 Dec 2025 12:41:09 +0000 (UTC)
 Authentication-Results: gabe.freedesktop.org;
-	dkim=permerror (0-bit key) header.d=gmail.com header.i=@gmail.com header.b="EbjDaLrt";
+	dkim=permerror (0-bit key) header.d=gmail.com header.i=@gmail.com header.b="g8u/TRCt";
 	dkim-atps=neutral
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from mail-wm1-f54.google.com (mail-wm1-f54.google.com
- [209.85.128.54])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 1575810E1E0
- for <nouveau@lists.freedesktop.org>; Sun, 19 Oct 2025 11:57:33 +0000 (UTC)
-Received: by mail-wm1-f54.google.com with SMTP id
- 5b1f17b1804b1-46e6ba26c50so23219115e9.2
- for <nouveau@lists.freedesktop.org>; Sun, 19 Oct 2025 04:57:33 -0700 (PDT)
+Received: from mail-pl1-f170.google.com (mail-pl1-f170.google.com
+ [209.85.214.170])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 80B1E10E528
+ for <nouveau@lists.freedesktop.org>; Mon, 20 Oct 2025 21:30:56 +0000 (UTC)
+Received: by mail-pl1-f170.google.com with SMTP id
+ d9443c01a7336-2699ef1b4e3so8403625ad.0
+ for <nouveau@lists.freedesktop.org>; Mon, 20 Oct 2025 14:30:56 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1760875051; x=1761479851; darn=lists.freedesktop.org;
- h=content-transfer-encoding:in-reply-to:from:content-language
- :references:cc:to:subject:user-agent:mime-version:date:message-id
- :from:to:cc:subject:date:message-id:reply-to;
- bh=CFyJz4TGbBiB8xKgL30elmXo6maKrPja2K5Egv8H5yA=;
- b=EbjDaLrt3MxyCEsZhNcftxXorWLKIhEuF3RhPlP2qFYrbQps9YvUflv8lANHOmF+oV
- NoeSw9peUOz5cX4U6dBPiAnoQwRS0HF76spwMkTIh5IHIiAF+ZssaHDuCxLHzkVxpbge
- MgBb7wmtDQWojH8dnPEl8Voq/AZ+ySbjFtAgoE2EBotyPvWQJzs3Bgb5bEJ1N/BYgrkB
- YPvkO3rWgWJRvLXgfTZXxJ3M6Z2SgvZ/gQROywFim788CqU8K2n3WrrUq1linRPvY/0k
- sdghJ5qMtPSmzBiKITnE1peN9owPfB1oVVAhH4CraKjqvxxVGbbc02DdEydy5/My8zT3
- L6NA==
+ d=gmail.com; s=20230601; t=1760995856; x=1761600656; darn=lists.freedesktop.org;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=ba6kY56LKajg5gR+mfYZ1l0Mti/V4+1lpEveR2gotOM=;
+ b=g8u/TRCtMuerj/6WPtSZxs0mdLnnUc+WndlPVux+w7IMdEMscCkwRieq3xlcl/wuF0
+ 8C/DEelgFCGRlOMevcDivICPijiQ6aT2ueo5q/tJwdibGrIE9BlhuV/uDvWaoihHpcE1
+ v8BI2cCO730/RXWcFPZsa4VJApGb30vpc+S6r9JzECALrU3bWybywjg2fieZGIybfMmf
+ eKxrCRA91CdelLQCvcgXW8d3taQvE+/JS18bClhTXRJxA3Y0ZgBKB6aFZ17k7DsMxuip
+ jY9TgVSDEpmB3py78rJoMJTs0Qup9+s5YFmuhTqBfjChoh9QEtOVw7deNOI5ySVsTvb1
+ HsSw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1760875051; x=1761479851;
- h=content-transfer-encoding:in-reply-to:from:content-language
- :references:cc:to:subject:user-agent:mime-version:date:message-id
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=CFyJz4TGbBiB8xKgL30elmXo6maKrPja2K5Egv8H5yA=;
- b=is+ckt7bejgeDcHYBcFkgGMX9lvkQMBr2MvbAcF0IrSOolIOaDpDw5T0ExI12DMilA
- VlW5H1NawmamHRS9u1WRU6I5ei1IoxJ+Ho5g8aLigUekSXMhPkh+dOUr13ScpHoOSeEW
- J3tSwmhihlrbmK5u7joVLGWJfImqba0FgOjQN5QLF33HXh0muF/Bcw71H/X9paDvEIgn
- lgUMBwLClF2wQZ9Se4OocUSooz4KJHGk0xhjNkE/gXSn/I1S4SrS7zaifQzsNVt5fqER
- B7bXyOsbu0ydfeF8ZALcaMdNQ+FkzVwOTzWgLS1eSqE4Xm6xMNn3pmocyTDrYY45u5oT
- wpXw==
-X-Gm-Message-State: AOJu0Yy3fhLQHk/xVRUghSn/+j08Rx2GM87nQPh3lpQ+qNpDnlFW+oPO
- U0njoE5xMLmYzLphY0/rAhkZxMmdeeboUjaiILaIa1hzRgzjmJCM1Dvk
-X-Gm-Gg: ASbGncv1XmndElB5zipVtYNMghyXXeHIfuCwkMdDjZay8ctWD8XuGcq+5l35lPGoOA0
- Oo5/GlTaJPfZe6Ei/v1NWBxTC9G+0+EDJgAVkqr4OHPLIqd7q9os/0UybcGmMExk/xhFLREkCZM
- Tjc64tvdi+bpO6JI9ZkzoTTJC3ytnfX7ucBCCC/xnXPO25XOMcGK8b0K7V7mfr+YIZiVhM8ebhc
- 0SvxZVfPlFYQkTFpnjUq8AAWOeo+oKmDQ73oNiplbKodBGWTc9R7SVaNWaA41vpX7zTttAQiHf8
- evgtUsrdrJSrd2+zGgyr2w/ljDkxoqidEK1gx0A5vuibrOb9GvM0nMRODiCPIfk0OQDvgUbMwh3
- kipLEMkPd5Q2zquwg6HxpC8biUej7FfUtyv5ooWbZYfZgLdveJ3kMtcnpBjk/clrwQU9SaLg6YV
- awfYbxNP9ixQ10uRDipycMGWY7jCOT9yH2cITHsGKrq1Tkrt52Y0pTJx5tlMBcgxUWlOE=
-X-Google-Smtp-Source: AGHT+IHvDD+ifAg+17oqux4wEgOfVHaOlLPFxtbGdrBBFjTGnfI9PU8wWphxIaLJLYGzyWFboM6Djg==
-X-Received: by 2002:a05:600c:548a:b0:471:669:e95d with SMTP id
- 5b1f17b1804b1-4711787dcc8mr62020415e9.12.1760875051305; 
- Sun, 19 Oct 2025 04:57:31 -0700 (PDT)
-Received: from ?IPV6:2a01:e0a:acc:bb60:756b:64e3:20ef:1d08?
- ([2a01:e0a:acc:bb60:756b:64e3:20ef:1d08])
- by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-471529598c9sm91035475e9.5.2025.10.19.04.57.30
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Sun, 19 Oct 2025 04:57:30 -0700 (PDT)
-Message-ID: <72cfbe83-e587-441e-abfb-b50155a326ab@gmail.com>
-Date: Sun, 19 Oct 2025 13:57:29 +0200
+ d=1e100.net; s=20230601; t=1760995856; x=1761600656;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=ba6kY56LKajg5gR+mfYZ1l0Mti/V4+1lpEveR2gotOM=;
+ b=ISl1dz9GqwMCPaCuNGicoZamlVfu0R85Ad3viuXprJeOLMjFVoWhYXjMLqwHSyBIFm
+ UIddWIZe78MHB6FDE/3oOW4P6PdTUct52Ijc3CagPl3opGV5xeu9pYxFuClw6Cbj61uq
+ ks8cyMwMf6mJtCWFnqVNGvSx2FV69qwP4siySdTNBKx8c5b1WBd7GCLRw3m1PWLzV+gl
+ CbSRJz7z7ejTyPzT0rZnR8gvPZtTnSNyTEANmqfBuzfx8dZqTF95L7NukXGesVglnGXW
+ +6/5Wqnvpcst2Xo75hOpY8P4dx9WO3FBFZ3ok3P0I3HMdk5vMexAFtShDZqa7zX+oo6a
+ jgNg==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCWBy8PIMQ5ZY0KsC0S1eWYAuysRPQuZB9xv0n6PdxLFrkOKbfDOJmiajiCjH2pt7IgUrWkERrwT@lists.freedesktop.org
+X-Gm-Message-State: AOJu0YyVJ1x04LvkajVjpzmF2rmW8y9jaGtTEgzUzlhA2VJlnyBVKj4e
+ Dx9db7L16gb/WIjbHXS3eS/KK4hqaOpld6wSEw0gQsYE27YVlNHGaNI0WWzkMnv4kM3MeWGQkOE
+ tn1GBPdcPAeLph8S7PLewlalggo4cZMW+npSCLMmBcg==
+X-Gm-Gg: ASbGnct1eheKS5I6Ws86DjiuskrSLSdeeG9DwQkONL6DTjrJlAxlXvO/XQCQ31eeoxg
+ J/PHeqnt4asLmjscfXW51NHLSqxruadK6aiw7J8jq0dOLv0X0NJTD1wP1QVD9skz8QT13p1D28p
+ +8A5m97p79KHLVQ4HRus9JItO3KnnpPt20Rdm9M6M+mIpwO6qCkI4UfNtppnthOBcX/p0L2x7lh
+ MJfw5TnJ6Rptf+UPO+zM6txeohM3Glgik6+Lfxu8KnVnTAn0SatCtUN4PsBmHp4RBmco+TWVmY+
+ 2CrxUz05NLigtoYTcCLGcPL/9HGlEbv2jjoRC4FxTS8WFG8sikbsNBdNAnCgxlSnfmHi8VozwEG
+ p2TuHnQqpw5Nr3g==
+X-Google-Smtp-Source: AGHT+IGuIlogvO3qiXAz17lC+JAXlrcckH7vWCchmd8okkyTNJDWWsiiPF/LNLwVhABlkDWXY45TBR8ANM/9BveSOCo=
+X-Received: by 2002:a17:903:8c3:b0:25a:4437:dbb7 with SMTP id
+ d9443c01a7336-290c9d2debcmr99091045ad.4.1760995856042; Mon, 20 Oct 2025
+ 14:30:56 -0700 (PDT)
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 1/2] nova-core: Solve mentions of `CoherentAllocation`
- improvements [COHA]
-To: Alexandre Courbot <acourbot@nvidia.com>,
- Danilo Krummrich <dakr@kernel.org>, David Airlie <airlied@gmail.com>,
- Simona Vetter <simona@ffwll.ch>, Miguel Ojeda <ojeda@kernel.org>,
- Alex Gaynor <alex.gaynor@gmail.com>
-Cc: nouveau@lists.freedesktop.org, dri-devel@lists.freedesktop.org,
- linux-kernel@vger.kernel.org, Boqun Feng <boqun.feng@gmail.com>,
- Gary Guo <gary@garyguo.net>, =?UTF-8?Q?Bj=C3=B6rn_Roy_Baron?=
- <bjorn3_gh@protonmail.com>, Benno Lossin <lossin@kernel.org>,
- Andreas Hindborg <a.hindborg@kernel.org>, Alice Ryhl <aliceryhl@google.com>,
- Trevor Gross <tmgross@umich.edu>, rust-for-linux@vger.kernel.org
-References: <20251015194936.121586-1-delcastillodelarosadaniel@gmail.com>
- <DDK7N52VX059.202D7SPGFV8A9@nvidia.com>
-Content-Language: en-US
-From: Daniel del Castillo <delcastillodelarosadaniel@gmail.com>
-In-Reply-To: <DDK7N52VX059.202D7SPGFV8A9@nvidia.com>
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
-X-Mailman-Approved-At: Sat, 13 Dec 2025 12:40:46 +0000
+References: <20251020185539.49986-1-joelagnelf@nvidia.com>
+ <20251020185539.49986-8-joelagnelf@nvidia.com>
+In-Reply-To: <20251020185539.49986-8-joelagnelf@nvidia.com>
+From: Miguel Ojeda <miguel.ojeda.sandonis@gmail.com>
+Date: Mon, 20 Oct 2025 23:30:43 +0200
+X-Gm-Features: AS18NWBOQUVimKkWa1HJu_1dg-N_FwTUSitxLBjCaOz3GTuCAcSPB_k9_xk69eM
+Message-ID: <CANiq72=SSQ5nSjt9yzX_A3Tgo2ByGM5CV0VqFnF1cTOzrZ-pbg@mail.gmail.com>
+Subject: Re: [PATCH 7/7] nova-core: mm: Add data structures for page table
+ management
+To: Joel Fernandes <joelagnelf@nvidia.com>
+Cc: linux-kernel@vger.kernel.org, rust-for-linux@vger.kernel.org, 
+ dri-devel@lists.freedesktop.org, dakr@kernel.org, acourbot@nvidia.com, 
+ Alistair Popple <apopple@nvidia.com>, Miguel Ojeda <ojeda@kernel.org>, 
+ Alex Gaynor <alex.gaynor@gmail.com>, Boqun Feng <boqun.feng@gmail.com>, 
+ Gary Guo <gary@garyguo.net>, bjorn3_gh@protonmail.com, 
+ Benno Lossin <lossin@kernel.org>, Andreas Hindborg <a.hindborg@kernel.org>, 
+ Alice Ryhl <aliceryhl@google.com>, Trevor Gross <tmgross@umich.edu>, 
+ David Airlie <airlied@gmail.com>, Simona Vetter <simona@ffwll.ch>, 
+ Maarten Lankhorst <maarten.lankhorst@linux.intel.com>,
+ Maxime Ripard <mripard@kernel.org>, 
+ Thomas Zimmermann <tzimmermann@suse.de>, John Hubbard <jhubbard@nvidia.com>,
+ Timur Tabi <ttabi@nvidia.com>, 
+ joel@joelfernandes.org, Elle Rhumsaa <elle@weathered-steel.dev>, 
+ Daniel Almeida <daniel.almeida@collabora.com>, nouveau@lists.freedesktop.org
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+X-Mailman-Approved-At: Sat, 13 Dec 2025 12:40:48 +0000
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -100,168 +100,125 @@ List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-Hi Alexandre,
+Hi Joel,
 
-Thanks for your comments!
+A few nits below (I do sometimes this kind of docs review to try to
+keep a consistent style across all Rust code).
 
+On Mon, Oct 20, 2025 at 8:56=E2=80=AFPM Joel Fernandes <joelagnelf@nvidia.c=
+om> wrote:
+>
+> +//!     .set_table_frame_number(new_table.frame_number());
+> +//! // Call a function to write PDE to VRAM address
 
+Newline between these. Period ad the end.
 
-On 10/17/25 03:36, Alexandre Courbot wrote:
-> On Thu Oct 16, 2025 at 4:49 AM JST, Daniel del Castillo wrote:
->> This patch solves the existing mentions of COHA, a task
->> in the Nova task list about improving the `CoherentAllocation` API.
->> I confirmed by talking to Alexandre Courbot, that the reading/writing
->> methods in `CoherentAllocation` can never be safe, so
->> this patch doesn't actually change `CoherentAllocation`, but rather
->> tries to solve the existing references to [COHA].
-> 
-> This mention of background discussions should be in the comment part of
-> your commit (below the `---`).
+> +//! ## Given a PTE, Get or allocate a PFN (page frame number).
 
-Noted, will do for the next version of the patch.
+In headers, no period at the end. Also, is "Get" intended to be capitalized=
+?
 
->>
->> Signed-off-by: Daniel del Castillo <delcastillodelarosadaniel@gmail.com>
->> ---
->>  drivers/gpu/nova-core/dma.rs            |  20 ++---
->>  drivers/gpu/nova-core/firmware/fwsec.rs | 104 ++++++++++--------------
->>  2 files changed, 50 insertions(+), 74 deletions(-)
->>
->> diff --git a/drivers/gpu/nova-core/dma.rs b/drivers/gpu/nova-core/dma.rs
->> index 94f44bcfd748..639a99cf72c4 100644
->> --- a/drivers/gpu/nova-core/dma.rs
->> +++ b/drivers/gpu/nova-core/dma.rs
->> @@ -25,21 +25,11 @@ pub(crate) fn new(dev: &device::Device<device::Bound>, len: usize) -> Result<Sel
->>      }
->>  
->>      pub(crate) fn from_data(dev: &device::Device<device::Bound>, data: &[u8]) -> Result<Self> {
->> -        Self::new(dev, data.len()).map(|mut dma_obj| {
->> -            // TODO[COHA]: replace with `CoherentAllocation::write()` once available.
->> -            // SAFETY:
->> -            // - `dma_obj`'s size is at least `data.len()`.
->> -            // - We have just created this object and there is no other user at this stage.
->> -            unsafe {
->> -                core::ptr::copy_nonoverlapping(
->> -                    data.as_ptr(),
->> -                    dma_obj.dma.start_ptr_mut(),
->> -                    data.len(),
->> -                );
->> -            }
->> -
->> -            dma_obj
->> -        })
->> +        let mut dma_obj = Self::new(dev, data.len())?;
->> +        // SAFETY: We have just created this object and there is no other user at this stage.
->> +        unsafe { dma_obj.write(data, 0)? };
->> +
->> +        Ok(dma_obj)
-> 
-> Can you preserve the use of `map`? This removes the need for the
-> temporary variable.
-> 
+> +//!     // Call a function to read 64-bit PTE value from VRAM address
 
-Sure.> <snip>
->>  /// The FWSEC microcode, extracted from the BIOS and to be run on the GSP falcon.
->> @@ -260,32 +245,38 @@ fn new_fwsec(dev: &Device<device::Bound>, bios: &Vbios, cmd: FwsecCommand) -> Re
->>  
->>          // Find the DMEM mapper section in the firmware.
->>          for i in 0..hdr.entry_count as usize {
->> -            let app: &FalconAppifV1 =
->>              // SAFETY: we have exclusive access to `dma_object`.
->> -            unsafe {
->> +            let app: &FalconAppifV1 = unsafe {
->>                  transmute(
->>                      &dma_object,
->> -                    hdr_offset + hdr.header_size as usize + i * hdr.entry_size as usize
->> +                    hdr_offset + hdr.header_size as usize + i * hdr.entry_size as usize,
->>                  )
->>              }?;
->>  
->>              if app.id != NVFW_FALCON_APPIF_ID_DMEMMAPPER {
->>                  continue;
->>              }
->> +            let dmem_base = app.dmem_base;
->>  
->>              // SAFETY: we have exclusive access to `dma_object`.
->>              let dmem_mapper: &mut FalconAppifDmemmapperV3 = unsafe {
->> -                transmute_mut(
->> -                    &mut dma_object,
->> -                    (desc.imem_load_size + app.dmem_base) as usize,
->> -                )
->> +                transmute_mut(&mut dma_object, (desc.imem_load_size + dmem_base) as usize)
->>              }?;
->>  
->> +            dmem_mapper.init_cmd = match cmd {
->> +                FwsecCommand::Frts {
->> +                    frts_addr: _,
->> +                    frts_size: _,
-> 
-> Can the `{ .. }` syntax be used here?
-> 
-Yes! I didn't remember that syntax.
+Period at the end too (more of these elsewhere).
 
+> +//!     if pte.valid() {
+> +//!         // Return physical frame number from existing mapping
+> +//!         Ok(Pfn::new(pte.frame_number()))
 
->> +                } => NVFW_FALCON_APPIF_DMEMMAPPER_CMD_FRTS,
->> +                FwsecCommand::Sb => NVFW_FALCON_APPIF_DMEMMAPPER_CMD_SB,
->> +            };
->> +            let cmd_in_buffer_offset = dmem_mapper.cmd_in_buffer_offset;
->> +
->>              // SAFETY: we have exclusive access to `dma_object`.
->>              let frts_cmd: &mut FrtsCmd = unsafe {
->>                  transmute_mut(
->>                      &mut dma_object,
->> -                    (desc.imem_load_size + dmem_mapper.cmd_in_buffer_offset) as usize,
->> +                    (desc.imem_load_size + cmd_in_buffer_offset) as usize,
->>                  )
->>              }?;
->>  
->> @@ -296,24 +287,19 @@ fn new_fwsec(dev: &Device<device::Bound>, bios: &Vbios, cmd: FwsecCommand) -> Re
->>                  size: 0,
->>                  flags: 2,
->>              };
->> -
->> -            dmem_mapper.init_cmd = match cmd {
->> -                FwsecCommand::Frts {
->> -                    frts_addr,
->> -                    frts_size,
->> -                } => {
->> -                    frts_cmd.frts_region = FrtsRegion {
->> -                        ver: 1,
->> -                        hdr: size_of::<FrtsRegion>() as u32,
->> -                        addr: (frts_addr >> 12) as u32,
->> -                        size: (frts_size >> 12) as u32,
->> -                        ftype: NVFW_FRTS_CMD_REGION_TYPE_FB,
->> -                    };
->> -
->> -                    NVFW_FALCON_APPIF_DMEMMAPPER_CMD_FRTS
->> -                }
->> -                FwsecCommand::Sb => NVFW_FALCON_APPIF_DMEMMAPPER_CMD_SB,
->> -            };
->> +            if let FwsecCommand::Frts {
->> +                frts_addr,
->> +                frts_size,
->> +            } = cmd
->> +            {
->> +                frts_cmd.frts_region = FrtsRegion {
->> +                    ver: 1,
->> +                    hdr: size_of::<FrtsRegion>() as u32,
->> +                    addr: (frts_addr >> 12) as u32,
->> +                    size: (frts_size >> 12) as u32,
->> +                    ftype: NVFW_FRTS_CMD_REGION_TYPE_FB,
->> +                };
->> +            }
-> 
-> I liked that the original code updated both `init_cmd` and `frts_region`
-> in the same match block. I understand it might be difficult to preserve
-> due to the borrowing rules, but can you try to preserve it if that's
-> possible at all?
+Early returns where possible, like in C, i.e. to avoid indentation on
+big `else` branches.
 
-I agree it was nicer. I tried to preserve it, but I don't see a way to
-do it cleanly, as I can't keep both mutable references at the same time.
-What I could do is only check `cmd` once, set `init_cmd` and store an
-`Option<FrtsRegion>` that I will later use to set `frts_region` if it's
-not `None`. Let me know if you prefer that.
+> +/// Memory size constants
+> +pub(crate) const KB: usize =3D 1024;
+> +pub(crate) const MB: usize =3D KB * 1024;
+
+The docs will only apply to the first item, so this probably was meant
+to be a `//` instead of a `///`.
+
+Or you could use a module to contain these (and then possibly `use`
+them outside), and then you can have docs in the module itself, but
+that is heavier.
+
+> +/// Page size: 4 KiB
+> +pub(crate) const PAGE_SIZE: usize =3D 4 * KB;
+
+`rustdoc` would eventually render the value and the non-evaluated
+expression, and in the source code it already says `4 * KB`, so I
+think repeating the value isn't needed, unless you mean to show it is
+really a multiple of 2.
+
+> +pub(crate) enum PageTableLevel {
+> +    Pdb, // Level 0 - Page Directory Base
+> +    L1,  // Level 1
+> +    L2,  // Level 2
+> +    L3,  // Level 3 - Dual PDE (128-bit entries)
+> +    L4,  // Level 4 - PTEs
+
+In this case, I think you meant the other way around, i.e. actual
+docs: `///` instead of `//`.
+
+(Also, unless there is a particular reason (e.g. it is a big table),
+please generally put comments on top of things, not at the side, which
+matches closer to what is needed for docs.)
+
+> +    /// Convert an Address to a frame number.
+
+These should eventually be intra-doc links, but at least please use
+for the moment backticks when referring to Rust items like types etc.
+
+> +    /// # Example
+
+We always use the plural for these section headers, even if there is a
+single item (e.g. single example).
+
+> +    /// ```no_run
+> +    /// let va =3D VirtualAddress::default();
+> +    /// let pte_idx =3D va.level_index(PageTableLevel::L4);
+> +    /// ```
+
+This will need some `use` lines -- not needed now, but just as a
+reminder that these will get actually built eventually.
+
+> +    /// Get raw u64 value.
+
+Intra-doc link or at least backticks.
+
+> +    /// The valid bit is inverted so add an accessor to flip it.
+> +    pub(crate) fn set_valid(&self, value: bool) -> Pde {
+
+This docs string sounds like a commit message.
+
+> +/// Dual PDE at Level 3 - 128-bit entry containing both LPT and SPT poin=
+ters.
+> +/// Lower 64 bits =3D big/large page, upper 64 bits =3D small page.
+
+It sounds like a few of these details should be on its own paragraph
+to avoid having them in the short description (title).
+
+> +/// // Call a function to read dual PDE from VRAM address
+> +/// let mut dual_pde: DualPde =3D read_dual_pde(dpde_addr)?;
+> +/// // Call a function to allocate a page table and return its VRAM addr=
+ess
+> +/// let spt_addr =3D allocate_page_table()?;
+> +/// dual_pde.set_spt(Pfn::from(spt_addr), AperturePde::VideoMemory);
+> +/// // Call a function to write dual PDE to VRAM address
+> +/// write_dual_pde(dpde_addr, dual_pde)?;
+
+Newlines before the comments, i.e. between "conceptual blocks".
+
+> +    pub lpt: Pde, // Large/Big Page Table pointer (2MB pages) - bits 63:=
+0 (lower)
+> +    pub spt: Pde, // Small Page Table pointer (4KB pages) - bits 127:64 =
+(upper)
+
+Docs instead of comments.
+
+> +    /// Check if has valid Small Page Table.
+
+Missing word?
+
+Thanks!
 
 Cheers,
-Daniel
-
+Miguel
