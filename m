@@ -2,68 +2,68 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id BB2BFBF9A14
-	for <lists+nouveau@lfdr.de>; Wed, 22 Oct 2025 03:44:08 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 3944FBF9AD2
+	for <lists+nouveau@lfdr.de>; Wed, 22 Oct 2025 04:09:17 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 84FCB10E35B;
-	Wed, 22 Oct 2025 01:44:04 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 75D0010E68D;
+	Wed, 22 Oct 2025 02:09:12 +0000 (UTC)
 Authentication-Results: gabe.freedesktop.org;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="QwPTvd7L";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="c26vvOMh";
 	dkim-atps=neutral
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from mail-pf1-f169.google.com (mail-pf1-f169.google.com
- [209.85.210.169])
- by gabe.freedesktop.org (Postfix) with ESMTPS id D423B10E35B
- for <nouveau@lists.freedesktop.org>; Wed, 22 Oct 2025 01:44:02 +0000 (UTC)
-Received: by mail-pf1-f169.google.com with SMTP id
- d2e1a72fcca58-796f9a8a088so5657363b3a.1
- for <nouveau@lists.freedesktop.org>; Tue, 21 Oct 2025 18:44:02 -0700 (PDT)
+Received: from mail-pl1-f172.google.com (mail-pl1-f172.google.com
+ [209.85.214.172])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 3DDFA10E0C4
+ for <nouveau@lists.freedesktop.org>; Wed, 22 Oct 2025 02:09:11 +0000 (UTC)
+Received: by mail-pl1-f172.google.com with SMTP id
+ d9443c01a7336-279e2554c8fso58987585ad.2
+ for <nouveau@lists.freedesktop.org>; Tue, 21 Oct 2025 19:09:11 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1761097442; x=1761702242; darn=lists.freedesktop.org;
+ d=gmail.com; s=20230601; t=1761098951; x=1761703751; darn=lists.freedesktop.org;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=S9onf5CBmbSk29wszlhfpjcFikIXhbvWOl4PnOQkDlo=;
- b=QwPTvd7LisXYt3pV28Yv81gnIIYQtGBM7hM1V7G8sSYpf5PuDbLqHgzJTI+YRNzGkp
- DZgh+It+HuJ1TNETrDdVjtbC0+an1TAf/TxCpsBFRWfuf4SXJUQEA6q8/4EJZlIAtkLo
- AImTu/zX0hd4qCEfaDWqpBa+lfskYXu256+FNnoTReYZV+DF6Lc7Ax6I4xbGmXNPXLl1
- LXYviGQQ3l+kd3tkK2p+K/RkbDV6h3EvGM7q9L4uhhMyV3X2zR520zKI21YdzoieT7oO
- OrE2iKU3DvIibEYFB39/gOzp9E5xMwUHAWIUuJwH78OQJcE3wXl20xGvBLwaUz+ZViQs
- FlRA==
+ bh=af9vNF4/pOmtn3q/j2U/NQMJF3YjAHP3FBPyaTm2ZTY=;
+ b=c26vvOMhu5d7gvx9Gg5sKzAX4ZNFTR7HLJhDmRPtvamZ0D9674pu+mqr3e3oZtqvay
+ OdRLLzgPv/XfzLLCui7MduiS694A9sPTJnmdb5ajCiqV5Jgfgn4TZ1m0a/jQuj7O0Tk6
+ t3kYol6qczfh9a4xjpq+p9RYrT83baEhI97oDg9GpCNUQ0HEw6FI7AZSEr22O9dtLe/j
+ oB8A9GLBcKY33WD2sZShUV6bumPnl2ktkJjyuh2GQzg2g2kbQ+7He+9AKzetr5vCHrzE
+ FBORrV0og9Mf7dQC0DqzMNzJfCnXz04hEXq2esW9VmCCp3KOTtZb1hxFHdUOP3lUOC4L
+ 7smA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1761097442; x=1761702242;
+ d=1e100.net; s=20230601; t=1761098951; x=1761703751;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to;
- bh=S9onf5CBmbSk29wszlhfpjcFikIXhbvWOl4PnOQkDlo=;
- b=f9R3NMupXmwzwq6d6rJUSuHYFoZElWHHAga7qqWBcoWn+PW49WhHcUljp+HRfCgfvQ
- F8LV6P2TGVGHWe2ctc5oKHRzL6wcz4xIgH49TqQ38Ofuslpri1Rtg5rO4XRALtKIW6lP
- h5I2YogzxJ6dLLEHs2Wr9Gv5lmzycUIqS1PVhwfmwxtI1GyD/8QVtz9bqdqeJ1H8sSYM
- 633N0HWNJQlibsmth0q99rRMjc2Qzluhxvx6k/hL4cTfBr7eryCS88yTYWLRXjfigQ8K
- r7NAny4o8HtSzwr9/gz9rMamFaHmhnkckXL5y52TVwPHqsMXKzroeuSiuC0eT14DsMY6
- oQSQ==
+ bh=af9vNF4/pOmtn3q/j2U/NQMJF3YjAHP3FBPyaTm2ZTY=;
+ b=WQu3A/+LVXmLsoKd5cEPU23e7Fn2aOmFqKFHkBWQnWglPp6FbW+xcoIAAc50w12alz
+ jmnLSa0xeyhm1Hip24/kH+3mdN89SWZ2UkmfEPYeJeyzE+FBQI7By3A4ENLlv1P3uFbs
+ ZTty/WexbjPjI/hrQHnqhGufUtcILcxJq4DmBnSH6n2C+jGIx6sdyHHpMSNYPvdvCvka
+ WxnGRO/P9w+IIFjl+eXnrOd1xKNI/KTIbpk962525q1m4XAdJfBIRINM/cLE2Xjpqnow
+ Fh6gAzr5Wxp7nOErjav3cuFr5b4wpTmd7/vnXtIrfT8ERzmrJOeBgIdwdcrehHxR63MN
+ bR8Q==
 X-Forwarded-Encrypted: i=1;
- AJvYcCXdj4ml3GB8mTZS5Fa5eMM1sdz3Fl4Lh2EYopNsrta7EqPwHmsr1Aedp5YYAyxz8Vt05twTWGcG@lists.freedesktop.org
-X-Gm-Message-State: AOJu0YxcsbITO0xfPQESxc+5y7u3QuGQKLohYDVzE1I2TdSCam7o4+m0
- KsR4TY29uTJ2t5Ds/jnlnDcWv1UQlhW+FVO2fq+RnxdmypZpUEOccH02RfiBpXFv
-X-Gm-Gg: ASbGncuSOHcXHqzsXsoqDiMUrKr2jwa+SMUs6eDKlZ5oPOMKu7Vt4kD/vbku/138LYE
- DHEvMd76md/9j7geMT25limeCyrDyM1bWgWZ/pRYLFyrG+Fzj80l1pXOT7wtbC5ub9rZzePwOkv
- /reeTeGuxJxUCzrbpTTXsmv8Rd+ofW8T6R5AROgxngbvOjFi9VbyYuinD7HKikIvNja2tv4h4kh
- 2XJ77Z8Z9m1Y6U9ZMdEgFocfSgQbKkRu4JvXXX4b1wrZPYHaa+GA/cUyZAipDXF4uwZ/lY7hu59
- Z5EgYkOhbrCPNrRwIXYayRPoTk/v30UYY5ZJ88EAnfXr1N2aKKiBVXeTe6MZQlvdwI+ls+RAqt2
- aAX72gkkHStllDHnIk7nVsybXy8eHRBAipnr3gCWiz9o08Q56OZ92XigAZv9njNfIXi8GHNDrFz
- +khGU/NbNf0wmM
-X-Google-Smtp-Source: AGHT+IHulmK78/tDjF6qU3+kx2KCP7ODYLsRFIvylR8jvaOVGxcaG7BUiBMgRTf0SD5dvUFXuEiNXg==
-X-Received: by 2002:a05:6a20:5493:b0:334:84f7:5646 with SMTP id
- adf61e73a8af0-334a8650262mr27706829637.58.1761097442076; 
- Tue, 21 Oct 2025 18:44:02 -0700 (PDT)
+ AJvYcCU7pRN5sQXCr5lCRJTK+M7sotKRlVG3mcalpXw34UKnBgGQvsc+fR8H7yHMybKdBhSV6HdWmvqc@lists.freedesktop.org
+X-Gm-Message-State: AOJu0YxvYYN3dxU3J8lqjF1Pl+CAGGAwHZy3fJysRP2hjwg29YcMGWVn
+ g+IUAImCpL25T8ABEURCIB3aY2URwxdA2s+i2vR5Xd7yigXjZzArJXFg
+X-Gm-Gg: ASbGncuVf30FGVY/M64n4pj/UWsnarliE+AcfG/3e9l5ZVMhd/BmdoV1mmwuz9v2tEn
+ e0Dgx4mwy0AeBoKG7d4UewSGrPy445RIb0wG3Yngz9mIdAvpJYIOyi1kFQsXXqu1UmktG1ccYzP
+ xAYDB/cLRB4eYdMt2p2MaB96S41UnH9GjGHgEpe14OenCL4fW89DBV2rKBTLhU3LKUR8TkIS9Ge
+ 3Pu2PzGHGXo3nUdqCgvLt/VAMK/D7/eyjfCiA/zBn6Pg3kdbS7rKicRNZFdfsmQi3HBzkEP52zq
+ uce2mZLCKx1SH8nVrqjgK+gvLxAOE02vsIjWIVzFzVO3hvWyYk7vfHwinb8ZVwLQf0waFntDfkI
+ kwlDKpqg51naWTg8wD6EDgp1MYHjbOSUDKr54Wq6S/pUMAnutnqb0GLbvNPkxpwpmLnfs6NO3y6
+ sXAgtZIZDud8Ki
+X-Google-Smtp-Source: AGHT+IGoV41dxt0PTAHkgRAIyZFYB8ISFOdcqUyCiizLarhiL6pLGFIW2lB0KpZYTkg47fD50y0GNw==
+X-Received: by 2002:a17:903:b90:b0:276:d3e:6844 with SMTP id
+ d9443c01a7336-290ca1218cbmr205757685ad.33.1761098950545; 
+ Tue, 21 Oct 2025 19:09:10 -0700 (PDT)
 Received: from archie.me ([103.124.138.80]) by smtp.gmail.com with ESMTPSA id
- d2e1a72fcca58-7a2301211besm12631232b3a.68.2025.10.21.18.43.59
+ d9443c01a7336-292471feb99sm123086345ad.87.2025.10.21.19.09.08
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 21 Oct 2025 18:44:00 -0700 (PDT)
+ Tue, 21 Oct 2025 19:09:09 -0700 (PDT)
 Received: by archie.me (Postfix, from userid 1000)
- id DA1874209E4B; Wed, 22 Oct 2025 08:43:57 +0700 (WIB)
-Date: Wed, 22 Oct 2025 08:43:57 +0700
+ id EB4D34209E4B; Wed, 22 Oct 2025 09:09:06 +0700 (WIB)
+Date: Wed, 22 Oct 2025 09:09:06 +0700
 From: Bagas Sanjaya <bagasdotme@gmail.com>
 To: Joel Fernandes <joelagnelf@nvidia.com>, linux-kernel@vger.kernel.org,
  rust-for-linux@vger.kernel.org, dri-devel@lists.freedesktop.org,
@@ -82,16 +82,16 @@ Cc: Alistair Popple <apopple@nvidia.com>, Miguel Ojeda <ojeda@kernel.org>,
  joel@joelfernandes.org, Elle Rhumsaa <elle@weathered-steel.dev>,
  Daniel Almeida <daniel.almeida@collabora.com>,
  nouveau@lists.freedesktop.org
-Subject: Re: [PATCH 3/7] docs: gpu: nova-core: Document GSP RPC message queue
- architecture
-Message-ID: <aPg23d8wF6iVaWmv@archie.me>
+Subject: Re: [PATCH 4/7] docs: gpu: nova-core: Document the PRAMIN aperture
+ mechanism
+Message-ID: <aPg8wuF5ZodLxOH0@archie.me>
 References: <20251020185539.49986-1-joelagnelf@nvidia.com>
- <20251020185539.49986-4-joelagnelf@nvidia.com>
+ <20251020185539.49986-5-joelagnelf@nvidia.com>
 MIME-Version: 1.0
 Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="iAC4hEmvDvNxfLM9"
+ protocol="application/pgp-signature"; boundary="WWOwYHGjzVps0pxd"
 Content-Disposition: inline
-In-Reply-To: <20251020185539.49986-4-joelagnelf@nvidia.com>
+In-Reply-To: <20251020185539.49986-5-joelagnelf@nvidia.com>
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -107,34 +107,108 @@ Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
 
---iAC4hEmvDvNxfLM9
+--WWOwYHGjzVps0pxd
 Content-Type: text/plain; charset=utf-8
 Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
 
-On Mon, Oct 20, 2025 at 02:55:35PM -0400, Joel Fernandes wrote:
-> +The split read/write pointer design allows bidirectional communication b=
-etween the
-> +CPU and GSP without synchronization (if it were a shared queue), for exa=
-mple, the
-                                        as if it is
-> +following diagram illustrates pointer updates, when CPU sends message to=
- GSP::
+On Mon, Oct 20, 2025 at 02:55:36PM -0400, Joel Fernandes wrote:
+> +The window position is controlled via the PBUS BAR0_WINDOW register::
+> +
+> +    NV_PBUS_BAR0_WINDOW Register
+> +    +-----+-----+--------------------------------------+
+> +    |31-26|25-24|           23-0                       |
+> +    |     |TARG |         BASE_ADDR                    |
+> +    |     | ET  |        (bits 39:16 of VRAM address)  |
+> +    +-----+-----+--------------------------------------+
+
+Shouldn't the TARGET field cell above be fitted (extended)?
+
+> +
+> +    TARGET field values:
+> +    - 0x0: VID_MEM (Video Memory / VRAM)
+> +    - 0x1: SYS_MEM_COHERENT (Coherent system memory)
+> +    - 0x2: SYS_MEM_NONCOHERENT (Non-coherent system memory)
+> +
+> +64KB Alignment Requirement
+> +---------------------------
+> +
+> +The PRAMIN window must be aligned to 64KB boundaries in VRAM. This is en=
+forced
+> +by the BASE_ADDR field representing bits [39:16] of the target address::
+> +
+> +    VRAM Address Calculation:
+> +    actual_vram_addr =3D (BASE_ADDR << 16) + pramin_offset
+> +    Where:
+> +    - BASE_ADDR: 24-bit value from NV_PBUS_BAR0_WINDOW[23:0]
+> +    - pramin_offset: 20-bit offset within PRAMIN window [0x00000-0xFFFFF]
+> +    Example Window Positioning:
+
+Move the supplementary explanation out of respective literal code blocks,
+like::
+
+---- >8 ----
+diff --git a/Documentation/gpu/nova/core/pramin.rst b/Documentation/gpu/nov=
+a/core/pramin.rst
+index 19615e504db9d5..47abe539e32a81 100644
+--- a/Documentation/gpu/nova/core/pramin.rst
++++ b/Documentation/gpu/nova/core/pramin.rst
+@@ -70,23 +70,28 @@ The window position is controlled via the PBUS BAR0_WIN=
+DOW register::
+     |     | ET  |        (bits 39:16 of VRAM address)  |
+     +-----+-----+--------------------------------------+
 =20
-Thanks.
+-    TARGET field values:
+-    - 0x0: VID_MEM (Video Memory / VRAM)
+-    - 0x1: SYS_MEM_COHERENT (Coherent system memory)
+-    - 0x2: SYS_MEM_NONCOHERENT (Non-coherent system memory)
++where TARGET field values are:
++
++  - 0x0: VID_MEM (Video Memory / VRAM)
++  - 0x1: SYS_MEM_COHERENT (Coherent system memory)
++  - 0x2: SYS_MEM_NONCOHERENT (Non-coherent system memory)
+=20
+ 64KB Alignment Requirement
+ ---------------------------
+=20
+ The PRAMIN window must be aligned to 64KB boundaries in VRAM. This is enfo=
+rced
+-by the BASE_ADDR field representing bits [39:16] of the target address::
++by the BASE_ADDR field representing bits [39:16] of the target address. The
++VRAM address calculation is determined by::
+=20
+-    VRAM Address Calculation:
+     actual_vram_addr =3D (BASE_ADDR << 16) + pramin_offset
+-    Where:
+-    - BASE_ADDR: 24-bit value from NV_PBUS_BAR0_WINDOW[23:0]
+-    - pramin_offset: 20-bit offset within PRAMIN window [0x00000-0xFFFFF]
+-    Example Window Positioning:
++
++where:
++
++  - BASE_ADDR: 24-bit value from NV_PBUS_BAR0_WINDOW[23:0]
++  - pramin_offset: 20-bit offset within PRAMIN window [0x00000-0xFFFFF]
++
++Example window positioning::
++
+     +---------------------------------------------------------+
+     |                    VRAM Space                           |
+     |                                                         |
+
+Thanks.=20
 
 --=20
 An old man doll... just what I always wanted! - Clara
 
---iAC4hEmvDvNxfLM9
+--WWOwYHGjzVps0pxd
 Content-Type: application/pgp-signature; name=signature.asc
 
 -----BEGIN PGP SIGNATURE-----
 
-iHUEABYKAB0WIQSSYQ6Cy7oyFNCHrUH2uYlJVVFOowUCaPg22QAKCRD2uYlJVVFO
-o7HnAP4u7KGRLbe+oCN/YmXK+pEcCGjInjoec1YU6PfZzmPKqQD9E7LICAzFtTAr
-gFlcqzOanE9DrhfypJiAcTm9yVs4rA0=
-=gCXr
+iHUEABYKAB0WIQSSYQ6Cy7oyFNCHrUH2uYlJVVFOowUCaPg8vgAKCRD2uYlJVVFO
+oyuoAP9SK55E2tSNnoxS1S+ANBUsz0CHN3jIoOgeS9ZQB8q9dgD/diBfYDATtQIi
+6xSU72ZYmtPwjX3snJKLeHqpNqruDgk=
+=zVnz
 -----END PGP SIGNATURE-----
 
---iAC4hEmvDvNxfLM9--
+--WWOwYHGjzVps0pxd--
