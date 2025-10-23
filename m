@@ -2,82 +2,66 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id 577FFC0069B
-	for <lists+nouveau@lfdr.de>; Thu, 23 Oct 2025 12:15:02 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id C558CC01A34
+	for <lists+nouveau@lfdr.de>; Thu, 23 Oct 2025 16:07:38 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 9564010E3A9;
-	Thu, 23 Oct 2025 10:14:56 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 8CC1510E0DD;
+	Thu, 23 Oct 2025 14:07:32 +0000 (UTC)
 Authentication-Results: gabe.freedesktop.org;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="aKvEXBY3";
+	dkim=pass (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="OjZSsazL";
 	dkim-atps=neutral
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from mail-lf1-f50.google.com (mail-lf1-f50.google.com
- [209.85.167.50])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 980AA10E3A9
- for <nouveau@lists.freedesktop.org>; Thu, 23 Oct 2025 10:14:55 +0000 (UTC)
-Received: by mail-lf1-f50.google.com with SMTP id
- 2adb3069b0e04-592f5fe03dcso613111e87.2
- for <nouveau@lists.freedesktop.org>; Thu, 23 Oct 2025 03:14:55 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1761214494; x=1761819294; darn=lists.freedesktop.org;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=kCE2z4wkYGzvbLAc/K6W1fc+2osskFtUXN3TNkuq9e0=;
- b=aKvEXBY3WiViV3yCbznOPjxWn86Y3a0zROFwxtR4WAuP1uUW6dinctBAXIK8FqhiyU
- JmXsGuj5jBRxgAWWWIXWKpOZzPbqjFyvz5aFxKeenSB1+lzzaUTeKsdOthc68EmC5ckd
- vqMTAKKPZV6heYwiaLiT09p4W+jks8lbn5ARVJeNEpu3QjRYmatU1Qh+NE1fx+lum/e/
- ez5RMaVOTEtj99+jeonRkFADoxFcxx/Er5rAl6SNCKknlsK/TWZBXEib0MJe0wSf1GIJ
- JxlJbko++6vm1BDfB782g5JkZpyNGYy0++h1fdcAWcaD83M3kLJecgA25Zz/KXVQdwMx
- h1Ew==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1761214494; x=1761819294;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=kCE2z4wkYGzvbLAc/K6W1fc+2osskFtUXN3TNkuq9e0=;
- b=VrRbtqxMtyKJ6w/+QSlP9WPaGLZL8B67nmEi1izLxviO+NlprFHCelM9ViDgxBlGAO
- 1wq4XdBjri8/v+x6GXVFgDUMpnTUZa6uDv26vP1X9T/8RGKE5UWp2ms5g+fAjvLHOivs
- GPsqHynXahjYkj+fxRVh1rH0VUc8tvvMsEP/jrU4nH33rKJ5+ax9K8Sntelm8cOE/FjA
- BCxO7ca+t+9pUnuf8UOx/wpzmyLgku+1UPgZZAYraVGfvMab2tCnioGP7Xbk4jKzZrhA
- IQbB9zVmvLYWU2FFqCggpJQ3DYwhUE+tcAVXxc6hvMYphifHnKkKfYfXU3JPTqFQNlmi
- FbTA==
-X-Forwarded-Encrypted: i=1;
- AJvYcCWUwWkuq0fIBLGsTTRhmd9n9nBpRB20RNfZx6ayzHRDPKS5gGbRxuyf6sxsfk0yOmSIVQsw+t2r@lists.freedesktop.org
-X-Gm-Message-State: AOJu0Ywd+z+deYdmcyRgE+o3J2swy6qnRkzAKbMCo1xkt4y6pvGQLDir
- Uum3kPPwt9KgwA+HzjaMNgvwDEqfxpP9iCdR152KEEzxRFHcoS9NRWRTZScF1Sby8QcF+YCQ2A2
- pPY1NqlhfU8Jm2pdexh9wVnV6Y7DOwpw=
-X-Gm-Gg: ASbGnctJRZcMd4OCxLLMAr0GKCJms+wPLwbs8cMPEh4xQSV3RTw+7zTPNGpzrFw8Bd8
- hXV8A2wtI3+1BD+l4ux/qx3tsMkYEXEsZ2gKN3bqv2C5cf1lwXKIRlEbTaNlrvccS+DutlaWCd6
- KPAVgIiLNCMPjv6QZbZnlzPMMIdCT+U8VC/biR3o28OdBhoGLfADwshrEQ36afoRnuXYQywDnfL
- 15wTQ8eibxXZ5YGMXg70sO4wOn5xH+s0NTk9BQX3x6zAiVYPsRJlOEOrfoGYA==
-X-Google-Smtp-Source: AGHT+IE78l4zjJijoLwVzewdgQkLJWS54jIN7RllyKzp4Mq+f0mmNw/Ii8gOTYnEGn18nRcwOV/Glk3RuLed1KICQ4Y=
-X-Received: by 2002:a05:6512:b11:b0:55f:6adb:b867 with SMTP id
- 2adb3069b0e04-591d859984bmr7477224e87.45.1761214493617; Thu, 23 Oct 2025
- 03:14:53 -0700 (PDT)
-MIME-Version: 1.0
-References: <20251009233837.10283-1-mohamedahmedegypt2001@gmail.com>
- <20251009233837.10283-3-mohamedahmedegypt2001@gmail.com>
- <CAA+WOBvVasy2wRP_wmP-R6Q8y5B4sN08jNYfHuDVjiWXV+m23Q@mail.gmail.com>
- <904ba70f-b1bf-4745-8e92-d27a6c903673@kernel.org>
- <CAPv6GL2DQ_wY=r4eV_V=nBGaj20HtYzRfJg==rQJtuO8Fo+HAg@mail.gmail.com>
-In-Reply-To: <CAPv6GL2DQ_wY=r4eV_V=nBGaj20HtYzRfJg==rQJtuO8Fo+HAg@mail.gmail.com>
-From: Mohamed Ahmed <mohamedahmedegypt2001@gmail.com>
-Date: Thu, 23 Oct 2025 13:14:36 +0300
-X-Gm-Features: AWmQ_bnwiEKbYnJwbZXRCmBHVtFK5pPcT6vg0cz54jq0PEpcBMa2utOihxE5H34
-Message-ID: <CAA+WOBvfStqh+HTXYrrD_=YUXPYNaKLgHPLQ9g07gfQmAXKAWA@mail.gmail.com>
-Subject: Re: [PATCH 2/5] drm/nouveau/uvmm: Allow larger pages
-To: Mary Guillemard <mary@mary.zone>
-Cc: Danilo Krummrich <dakr@kernel.org>, linux-kernel@vger.kernel.org, 
- dri-devel@lists.freedesktop.org, 
- Faith Ekstrand <faith.ekstrand@collabora.com>, Lyude Paul <lyude@redhat.com>, 
- Maarten Lankhorst <maarten.lankhorst@linux.intel.com>,
- Maxime Ripard <mripard@kernel.org>, 
- Thomas Zimmermann <tzimmermann@suse.de>, David Airlie <airlied@gmail.com>,
- Simona Vetter <simona@ffwll.ch>, nouveau@lists.freedesktop.org
-Content-Type: text/plain; charset="UTF-8"
+Received: from tor.source.kernel.org (tor.source.kernel.org [172.105.4.254])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 2DAC810E04F;
+ Thu, 23 Oct 2025 14:07:31 +0000 (UTC)
+Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
+ by tor.source.kernel.org (Postfix) with ESMTP id 28DC160252;
+ Thu, 23 Oct 2025 14:07:30 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 95487C4CEE7;
+ Thu, 23 Oct 2025 14:07:23 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+ s=k20201202; t=1761228449;
+ bh=JwQLpCZil+iYyJLg+5cxLrOGFlc3x7C3P699NLnVNAw=;
+ h=Date:Subject:Cc:To:From:References:In-Reply-To:From;
+ b=OjZSsazLdapyeGKSNIxvnmSbyxj+os64UIaKEolDqwd/vD0Gp7AAi3ut/9LJ4wrE7
+ cP77hQlMkP41nBf5j+s+H2pfeJFTTnkEW0hXQjy1HaQPJ3hz9+6drP7Gnn7BiYWYr4
+ COUDWwbpUW+TNokbHzqmnHZGENHn2XX3SLf14Yv/SPKeA725IvzK7aSv1eITi+jJR1
+ QMGzRuT2AzuyyxuXrPl/UymzOOWE0qXBjysaQfwaZjDVQfZqOHiU4x8AxYjp/aRjgl
+ jVchVZDx88HuoGLSxRn7gZyqVpFImTw+PTQABisSkUjreWCr8CZAFo/JisxpR8q1d7
+ TeNYiNnyOX4WA==
+Mime-Version: 1.0
 Content-Transfer-Encoding: quoted-printable
+Content-Type: text/plain; charset=UTF-8
+Date: Thu, 23 Oct 2025 16:07:21 +0200
+Message-Id: <DDPRDKFEK3H3.2CE3YMXRTLGTI@kernel.org>
+Subject: Re: [PATCH v6 4/5] rust: Move register and bitfield macros out of Nova
+Cc: "Joel Fernandes" <joelagnelf@nvidia.com>, "linux-kernel@vger.kernel.org"
+ <linux-kernel@vger.kernel.org>, "rust-for-linux@vger.kernel.org"
+ <rust-for-linux@vger.kernel.org>, "dri-devel@lists.freedesktop.org"
+ <dri-devel@lists.freedesktop.org>, "Alexandre Courbot"
+ <acourbot@nvidia.com>, "Alistair Popple" <apopple@nvidia.com>, "Miguel
+ Ojeda" <ojeda@kernel.org>, "Alex Gaynor" <alex.gaynor@gmail.com>, "Boqun
+ Feng" <boqun.feng@gmail.com>, "Gary Guo" <gary@garyguo.net>,
+ "bjorn3_gh@protonmail.com" <bjorn3_gh@protonmail.com>, "Benno Lossin"
+ <lossin@kernel.org>, "Andreas Hindborg" <a.hindborg@kernel.org>, "Alice
+ Ryhl" <aliceryhl@google.com>, "Trevor Gross" <tmgross@umich.edu>, "David
+ Airlie" <airlied@gmail.com>, "Simona Vetter" <simona@ffwll.ch>, "Maarten
+ Lankhorst" <maarten.lankhorst@linux.intel.com>, "Maxime Ripard"
+ <mripard@kernel.org>, "Thomas Zimmermann" <tzimmermann@suse.de>, "John
+ Hubbard" <jhubbard@nvidia.com>, "Timur Tabi" <ttabi@nvidia.com>,
+ "joel@joelfernandes.org" <joel@joelfernandes.org>, "Elle Rhumsaa"
+ <elle@weathered-steel.dev>, "Yury Norov" <yury.norov@gmail.com>, "Daniel
+ Almeida" <daniel.almeida@collabora.com>, "Andrea Righi"
+ <arighi@nvidia.com>, "nouveau@lists.freedesktop.org"
+ <nouveau@lists.freedesktop.org>
+To: "Beata Michalska" <beata.michalska@arm.com>
+From: "Danilo Krummrich" <dakr@kernel.org>
+References: <20251003154748.1687160-1-joelagnelf@nvidia.com>
+ <20251003154748.1687160-5-joelagnelf@nvidia.com> <aPklNydcTdOeXtdU@arm.com>
+ <ACAA327A-AE2B-4D21-B8C5-C66BB5E09B7C@nvidia.com>
+ <aPozw8TGp85YdmNU@arm.com>
+In-Reply-To: <aPozw8TGp85YdmNU@arm.com>
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -92,47 +76,18 @@ List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-The other thing making me hesitant of depending on
-nouveau_bo_fixup_align() is that VM_BIND is entirely client controlled
-and there isn't really (at least as far as I understand) way for the
-bo_fixup_align() path to have enough info to e.g. work around the
-"client allocates size and binds to address not aligned to that size"
-issue (likely the reason for hitting the mismatch case. this didn't
-show in the older kernel versions because everything was forced to 4K
-anyways).
+On Thu Oct 23, 2025 at 3:55 PM CEST, Beata Michalska wrote:
+> I guess everything that would use IoRequest::iomap(self), which generates
+> Io<SIZE=3D0> which is a game over for the macro.
 
-On Thu, Oct 23, 2025 at 12:39=E2=80=AFAM Mary Guillemard <mary@mary.zone> w=
-rote:
->
-> On Wed, Oct 22, 2025 at 10:56=E2=80=AFPM Danilo Krummrich <dakr@kernel.or=
-g> wrote:
-> >
-> > On 10/22/25 12:16 PM, Mohamed Ahmed wrote:
-> > > Pinging again re: review and also was asking if we can revert the
-> > > select_page_shift() handling back to v1 behavior with a fall-back
-> > > path, as it looks like there are some cases where
-> > > nouveau_bo_fixup_align() isn't enough;
-> > > https://gitlab.freedesktop.org/mesa/mesa/-/merge_requests/36450#note_=
-3159199.
-> >
-> > I don't think we should add a fallback for something that is expected t=
-o be
-> > sufficient.
-> >
-> > Instead we should figure out in which exact case the WARN_ON() was hit =
-and why.
->
-> The reason I wrote this code initially was to handle addresses
-> provided by userspace that aren't aligned to the page size selected
-> during BO creation.
-> This is something I did trigger when typing this patch initially with
-> my distro provided version of mesa (likely 25.0.x but it has been a
-> while)
-> Thomas Andersen also confirmed on nouveau irc channel that he did hit
-> this case with an old version of NVK and this patchset.
->
-> I think we could just remove the WARN_ON and properly document that
-> this was previously allowed and is there for backward compatibility.
->
-> Regards,
-> Mary Guillemard
+To be honest, we may just want to remove this API. A driver that requires a=
+ zero
+sized MMIO region with only optional runtime derived access offsets seems a=
+ bit
+too exotic.
+
+That doesn't mean that occasionally we'll have drivers needing runtime offs=
+ets,
+so eventually we want to support that with the register!() macro, but it's =
+not
+*that* urgent.
