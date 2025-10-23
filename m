@@ -2,71 +2,71 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id C6463C005A4
-	for <lists+nouveau@lfdr.de>; Thu, 23 Oct 2025 11:53:27 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 4BDBBC005B3
+	for <lists+nouveau@lfdr.de>; Thu, 23 Oct 2025 11:55:28 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 06A4D10E389;
-	Thu, 23 Oct 2025 09:53:26 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id D655810E39C;
+	Thu, 23 Oct 2025 09:55:25 +0000 (UTC)
 Authentication-Results: gabe.freedesktop.org;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="mBJDZqn4";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="f8+IDKic";
 	dkim-atps=neutral
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from mail-pl1-f179.google.com (mail-pl1-f179.google.com
- [209.85.214.179])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 14A6810E38C
- for <nouveau@lists.freedesktop.org>; Thu, 23 Oct 2025 09:53:24 +0000 (UTC)
-Received: by mail-pl1-f179.google.com with SMTP id
- d9443c01a7336-290b48e09a7so7729195ad.0
- for <nouveau@lists.freedesktop.org>; Thu, 23 Oct 2025 02:53:24 -0700 (PDT)
+Received: from mail-lf1-f45.google.com (mail-lf1-f45.google.com
+ [209.85.167.45])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id E29F810E39C
+ for <nouveau@lists.freedesktop.org>; Thu, 23 Oct 2025 09:55:24 +0000 (UTC)
+Received: by mail-lf1-f45.google.com with SMTP id
+ 2adb3069b0e04-592f5736693so612628e87.1
+ for <nouveau@lists.freedesktop.org>; Thu, 23 Oct 2025 02:55:24 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1761213203; x=1761818003; darn=lists.freedesktop.org;
+ d=gmail.com; s=20230601; t=1761213323; x=1761818123; darn=lists.freedesktop.org;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:from:to:cc:subject:date
  :message-id:reply-to;
- bh=5d1nguyliO2Rn9t5P8n0bu1X7n3dz38sWFo23meacAU=;
- b=mBJDZqn4L4N1Ho85QYae9duF8RZLC7lI/Yd0jZ+6+Zi8JpkpI5WcpTrPYsdAKSn36x
- CvkggQpNgRfH8BbQQmF4cxBGCAqvu5gSRQ97sleDVWv65cEnlUzV3msM6NGu5NcOUTmd
- +JggVgjkIpU4d5q4tg1SgLxHrKK2aFIlVJklr2dh7giDiCiWUVwLie/1c6hNnx6gc5AJ
- gJOVf01wJyBbFmWu2XzBU53QC5us9TOfJtVduRpKBc3D9YwQo6j10W5y1oAtNcVqR5Qo
- ZwAUYCtIsgkJKKUiwfwu7dMu9j1WdDuddYd2XZorkhN7r+sncJIE5c2L0rNSXZGC0kx5
- s+Iw==
+ bh=XWJTaCx/RDKTIXdpm0jexQ+Pz8vfi2r6o06zoLAcC7g=;
+ b=f8+IDKicUYkpX2aicPR9YRHLvhkkIFJdEn0wacYrRuQ/VhasZ2viLscqVJwp9TGdY9
+ xR542RA8a+Uvv806Z0tcJfYAytZMW4KuW/XJrrHb+Ybw9va5aYgHh+1JXeEV9NNP+9jQ
+ ZtOCUAP+1CsvAR6SpUXwtY3po7noI3hB78YS21Awh2NI0MOpt7qn/Tt8EBQbDzOC5FhZ
+ /kjywJIDYYu3CsTWGDen+DG5XEMze9He8bH9nVyucragPPxWxH389U3pVi14cJHTJyw1
+ 1yHomtFCBO30mDujS1fsQqh/YrSC3bRygrEpl/Lxfj1jEckR5BCa1KS4cBf9TLcn+JKt
+ QP/g==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1761213203; x=1761818003;
+ d=1e100.net; s=20230601; t=1761213323; x=1761818123;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=5d1nguyliO2Rn9t5P8n0bu1X7n3dz38sWFo23meacAU=;
- b=n6mPns4lucmxzoqyvDcqH5M9m5vQqo6mI0WerTlzOssu6pt4Y1fFDVNZ7d4LqNFNeL
- Y2NeQMJQU1xKaKU0P0i8gXzVluV6yz+MM1FkNwTbnQ+leaNEsniOadr6vCENBMiF5ey8
- nK99Szd3BoS50SkBiPnlugxRcKkHSyvDB+WZnQDib3AmrLMADm5zKaXTbUXN1VK1HK7h
- bhYrwVou6VbFgnNstO4aFA/gDA1lhOPFmAcpG4DJFQvKxisKJKGIqj/AmVYS3YbSQrMj
- wuv4sWI9ye9l2bu4ZPXbAIDU3za2vA03egb4RLxCMdCc7eH1EWPKNTASJtjBHs++MxrE
- O/ng==
+ bh=XWJTaCx/RDKTIXdpm0jexQ+Pz8vfi2r6o06zoLAcC7g=;
+ b=ZAzmvfU7RLw1Pxp8+wSuTpFg6O+44Y0l+02aeweWZQxGssymxdJqZsp+FQZkVXdI5i
+ 4aNovORoHETxuPDUOULeluMoZSlkLLjD3S5QmZmAS2B+GH7/fLD7CiBJQW0CHfop8tlt
+ PJ0wccwy4tpS+OJNg2daoL/QAdGQ/+cB2XgCHRB8rpPy2WphenZS6yqc2jhMQQBjoZ5V
+ ug8yNqsQ9ouZN5VPSnUnlKlyMujpBwJkul8V2bBVRcKCnwZqUeZxGEjhKxQ/3yVMPqev
+ gqwvc57PqaMzkYPWUj007iK13g8oOVEglkj289vW6BD7HKaCDIo7yC9ZfcSCtHMEKjlt
+ Z6wQ==
 X-Forwarded-Encrypted: i=1;
- AJvYcCXBh5ZsQZCvOu5Mueb5Z6C+uH80BuREh1yR/jYpfmE7n70dDRQCgaJjX5mgIXTO+Fsb93kiBBpv@lists.freedesktop.org
-X-Gm-Message-State: AOJu0YyjO5JaD2r0C/D01DxcOxulLyUnRRSD6lsMkmGIFt0URpEOdG+U
- OSoRSTbox55gZEtaQkiEaoPpFLdCDzvWknr1ubiOH6RPYLFVeX/d1ZZQuFgl6dPfASV8+0G4tNy
- updSxFMjG/8/C5mmTCHJ+C5t1gNGqrFg=
-X-Gm-Gg: ASbGnctVytXTooPIPY0QCvex889/wnstg1coIVPmALI4sXftkwC+mZnCVxYXNAiP3fw
- D3qCtZqx+ISggIdyhRp5v24gLbIcxOqaMRQzLGbmJPK+8vs/cWG+rmTgAcS/dqt1BqFFhz91pg+
- ++cYKwfwt2UgetBpN7FsUBQQTs6fyaaiPfnnxQyKYX1YJUY4F/LcPdThxKhh2KUx8HEgKJROFZX
- trPelxqu2Fw1DNz+8uuYE2DVSabfwOIkOqWMrRN2ej2nN9gE0Rc0o390udfhg==
-X-Google-Smtp-Source: AGHT+IF8cWvQmLz0nDtj3PgM9L/uBGgA8d6YWkh53aCZ3lvBL/S+MLjCVIchSu0u2IH3S2qFW8gRGF1Ve2jswMeamLk=
-X-Received: by 2002:a17:902:e944:b0:262:9ac8:610f with SMTP id
- d9443c01a7336-290c9cdee1cmr257015035ad.22.1761213203505; Thu, 23 Oct 2025
- 02:53:23 -0700 (PDT)
+ AJvYcCXLtWGUGi0SqQwM/5bG9HF0ssu8phPu+G/hcOSOJRkFOHQmUDlQdeHysDy/gw/HBT4Cgmkp6xoG@lists.freedesktop.org
+X-Gm-Message-State: AOJu0YwUSTZu5EE0sWgHSIh03FJgVpc6MG42jJwDdwzd9Rypyz+V502i
+ UIAITvmhoAYaasrkh4ml7ec7ck8AhvTBl3ssN6IFAWMuhbvuYn1ePORQE8OqeOnyZCan6M+T5tH
+ UsyaT2qoOb3un/7LcUwQVQPPaLXQ4N20=
+X-Gm-Gg: ASbGncswqcLVwcQZ7HP8UEciejtByzCGmPiGAxW5XEu5IC03d5IZdlvQP0eyglFBMq+
+ KipfW1NicaBMitIOfmj83qaUIuRCWgCf6bjyrveLpRXNdA+o7RFCGbvRU+ENJSqytNDRjoA13cG
+ kMvl/hz2AZI4DHppN8BbNAFTXX5Rhl+AzEfNoEP6iDgH2gZ7NWnVqLtqB6H75XJC+RL38+HF+Fm
+ TmXQg+Qa4Qq2BTCN/WifpRhG1qHuMUx/x+RgWIBu7TdR/tFaIEzin42OQlCdor1ao9I8Ykh
+X-Google-Smtp-Source: AGHT+IHKTEkCIVmZqQp4SfK5VTsECEfe0zrklFVhloZJFuyT+bxQgyKAneoprCpbk9gfHMwslGoGfO1Z5akr+80R5WA=
+X-Received: by 2002:a05:6512:638c:20b0:592:f015:30da with SMTP id
+ 2adb3069b0e04-592f01531aemr1659432e87.46.1761213322833; Thu, 23 Oct 2025
+ 02:55:22 -0700 (PDT)
 MIME-Version: 1.0
 References: <20251009233837.10283-1-mohamedahmedegypt2001@gmail.com>
- <20251009233837.10283-6-mohamedahmedegypt2001@gmail.com>
- <1b84bba6a45e8f835108e75c788f09c75f075d8c.camel@redhat.com>
-In-Reply-To: <1b84bba6a45e8f835108e75c788f09c75f075d8c.camel@redhat.com>
+ <fb24b7b3a9ed6305cb210ec7c9aed6ca5390049d.camel@redhat.com>
+ <42f0dd58670b4c39141ed229e8169842b96cb861.camel@redhat.com>
+In-Reply-To: <42f0dd58670b4c39141ed229e8169842b96cb861.camel@redhat.com>
 From: Mohamed Ahmed <mohamedahmedegypt2001@gmail.com>
-Date: Thu, 23 Oct 2025 12:53:08 +0300
-X-Gm-Features: AWmQ_bm08M3OfDpfIMncCGOKKMtFQ01Xlqgm0Xk1rhMaWMtmhKBu2wer3LHmD8M
-Message-ID: <CAA+WOBu_L48r6PZuTGG+55rT6D4iFJ20gtFhnuLfTGtobocReg@mail.gmail.com>
-Subject: Re: [PATCH 5/5] drm/nouveau/drm: Bump the driver version to 1.4.1 to
- report new features
+Date: Thu, 23 Oct 2025 12:55:06 +0300
+X-Gm-Features: AWmQ_bln5vLH6WDca3bcBEiXeqDTj_3m5vuYcckdydUIU-kjpnwj3QJHXXDPr10
+Message-ID: <CAA+WOBvkur+W8KB0uJfaEkvhh-ZkRQLj9SchZhtPfhepj8pHUw@mail.gmail.com>
+Subject: Re: [PATCH 0/5 v2] drm/nouveau: Enable variable page sizes and
+ compression
 To: Lyude Paul <lyude@redhat.com>
 Cc: linux-kernel@vger.kernel.org, dri-devel@lists.freedesktop.org, 
  Mary Guillemard <mary@mary.zone>, Faith Ekstrand <faith.ekstrand@collabora.com>,
@@ -91,69 +91,74 @@ List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-Heyy,
-We're actually going from 1.4.0 to 1.4.1; it's just when the version
-bump was done to 1.4.0, it wasn't documented back then. 1.4.0 was
-VM_BIND so it was a pretty big change as well.
+Yeah really sorry about that, it's a format patch mistake. I thought
+it appended the v2 on all but it only did it on the cover letter.
+Regarding the changelog, noted, thanks! I didn't know what the
+convention was and figured to keep it brief inline with how commits
+are named.
 
-On Thu, Oct 23, 2025 at 12:20=E2=80=AFAM Lyude Paul <lyude@redhat.com> wrot=
+On Wed, Oct 22, 2025 at 11:40=E2=80=AFPM Lyude Paul <lyude@redhat.com> wrot=
 e:
 >
-> Wow, I think this might be the first time I've gotten to witness someone =
-bump
-> the DRM driver version! I think this is a fine reason to do so though.
+> Oh - also, definitely a more granular changelog would help too (e.g.
+> mentioning what exactly you changed).
 >
-> One change we should do though: we're going from 1.3.1 to 1.4.1 even thou=
-gh
-> there's no 1.4.0. So, I think using 1.4.0 would probably be a better vers=
-ion
-> (unless there's some explicit reason for the .1 that I'm not seeing here)=
-.
->
-> On Fri, 2025-10-10 at 02:38 +0300, Mohamed Ahmed wrote:
-> > The HW can only do compression on large and huge pages, and enabling it=
- on
-> > 4K pages leads to a MMU fault. Compression also needs kernel support fo=
-r
-> > handling the compressed kinds and managing the compression tags.
+> On Wed, 2025-10-22 at 16:37 -0400, Lyude Paul wrote:
+> > BTW - I'm still looking through this series, but it probably wouldn't h=
+urt in
+> > the future to make sure the version in the patch header gets applied to=
+ all
+> > patches in the series and not just the cover letter (just since this
+> > definitely confused me for a moment).
 > >
-> > This increments the nouveau version number which allows NVK to enable i=
-t
-> > only when the kernel actually supports both features and avoid breaking
-> > the system if a newer mesa version is paired with an older kernel versi=
-on.
-> >
-> > For the associated userspace MR, please see !36450:
-> > https://gitlab.freedesktop.org/mesa/mesa/-/merge_requests/36450
-> >
-> > Signed-off-by: Mohamed Ahmed <mohamedahmedegypt2001@gmail.com>
-> > ---
-> >  drivers/gpu/drm/nouveau/nouveau_drv.h | 4 +++-
-> >  1 file changed, 3 insertions(+), 1 deletion(-)
-> >
-> > diff --git a/drivers/gpu/drm/nouveau/nouveau_drv.h b/drivers/gpu/drm/no=
-uveau/nouveau_drv.h
-> > index 55abc510067b..e5de4367e2cc 100644
-> > --- a/drivers/gpu/drm/nouveau/nouveau_drv.h
-> > +++ b/drivers/gpu/drm/nouveau/nouveau_drv.h
-> > @@ -10,7 +10,7 @@
-> >
-> >  #define DRIVER_MAJOR         1
-> >  #define DRIVER_MINOR         4
-> > -#define DRIVER_PATCHLEVEL    0
-> > +#define DRIVER_PATCHLEVEL    1
-> >
-> >  /*
-> >   * 1.1.1:
-> > @@ -35,6 +35,8 @@
-> >   *        programs that get directly linked with NVKM.
-> >   * 1.3.1:
-> >   *      - implemented limited ABI16/NVIF interop
-> > + * 1.4.1:
-> > + *      - add variable page sizes and compression for Turing+
-> >   */
-> >
-> >  #include <linux/notifier.h>
+> > On Fri, 2025-10-10 at 02:38 +0300, Mohamed Ahmed wrote:
+> > > The new VM_BIND interface only supported 4K pages. This was problemat=
+ic as
+> > > it left performance on the table because GPUs don't have sophisticate=
+d TLB
+> > > and page walker hardware.
+> > >
+> > > Additionally, the HW can only do compression on large (64K) and huge =
+(2M)
+> > > pages, which is a major performance booster (>50% in some cases).
+> > >
+> > > This patchset sets out to add support for larger page sizes and also
+> > > enable compression and set the compression tags when userspace binds =
+with
+> > > the corresponding PTE kinds and alignment. It also increments the nou=
+veau
+> > > version number which allows userspace to use compression only when th=
+e
+> > > kernel actually supports both features and avoid breaking the system =
+if a
+> > > newer mesa version is paired with an older kernel version.
+> > >
+> > > For the associated userspace MR, please see !36450:
+> > > https://gitlab.freedesktop.org/mesa/mesa/-/merge_requests/36450
+> > >
+> > > - v2: Implement review comments.
+> > > - v1: Initial implementation.
+> > >
+> > > Ben Skeggs (2):
+> > >   drm/nouveau/mmu/gp100: Remove unused/broken support for compression
+> > >   drm/nouveau/mmu/tu102: Add support for compressed kinds
+> > >
+> > > Mary Guillemard (2):
+> > >   drm/nouveau/uvmm: Prepare for larger pages
+> > >   drm/nouveau/uvmm: Allow larger pages
+> > >
+> > > Mohamed Ahmed (1):
+> > >   drm/nouveau/drm: Bump the driver version to 1.4.1 to report new
+> > >     features
+> > >
+> > >  drivers/gpu/drm/nouveau/nouveau_drv.h         |  4 +-
+> > >  drivers/gpu/drm/nouveau/nouveau_uvmm.c        | 71 ++++++++++++++---=
+--
+> > >  drivers/gpu/drm/nouveau/nouveau_uvmm.h        |  1 +
+> > >  .../drm/nouveau/nvkm/subdev/mmu/vmmgp100.c    | 69 ++++++++++-------=
+-
+> > >  .../drm/nouveau/nvkm/subdev/mmu/vmmgp10b.c    |  4 +-
+> > >  5 files changed, 100 insertions(+), 49 deletions(-)
 >
 > --
 > Cheers,
