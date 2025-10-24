@@ -2,49 +2,43 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id AF6ADC072BB
-	for <lists+nouveau@lfdr.de>; Fri, 24 Oct 2025 18:08:34 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 2F15BC07390
+	for <lists+nouveau@lfdr.de>; Fri, 24 Oct 2025 18:13:13 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 4B6B310EAC5;
-	Fri, 24 Oct 2025 16:08:25 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id AD65210EAD3;
+	Fri, 24 Oct 2025 16:13:11 +0000 (UTC)
 Authentication-Results: gabe.freedesktop.org;
-	dkim=fail reason="signature verification failed" (2048-bit key; unprotected) header.d=igalia.com header.i=@igalia.com header.b="iD2YNzlS";
+	dkim=pass (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="ATwP4xz9";
 	dkim-atps=neutral
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from fanzine2.igalia.com (fanzine2.igalia.com [213.97.179.56])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 905AB10EAC6;
- Fri, 24 Oct 2025 16:08:20 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=igalia.com; 
- s=20170329;
- h=Content-Transfer-Encoding:MIME-Version:References:In-Reply-To:
- Message-ID:Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:Content-ID:
- Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
- :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
- List-Post:List-Owner:List-Archive;
- bh=u1pLd5zbnLq3vxr3JdzJVkZpiOg492v1Javh0g8O128=; b=iD2YNzlS8JfLkqcM70K6o8xnUZ
- caYJSB35cqrLMuuGEHh0yjH/XoUiVPC0HphLlira3Ovx+21tcsxrkJRwaZs4ynDlYo8kCgkuvj6Zp
- qwrSCNXcKUqBmls2bdBYofSbeb8W6HEwckXXL5eVRTnh7b2OvccyEheyHitk5E1Tgzyd959KSnA3m
- UR1r90hrqYcG8hw4xuy3mexT6Y1/9lUaYemKc+dorFRRWR1/TcihToouYvAYKJ3PAcZ5BSo4tRvMg
- IOH0IoeKAt1LGkqyosJd0r5gbQQWC308jeZf4/qQBXjkNdoHCk+xh2bvdhm2CUZhot1wtQwSoswCT
- T/30YjfA==;
-Received: from [90.242.12.242] (helo=localhost)
- by fanzine2.igalia.com with esmtpsa 
- (Cipher TLS1.3:ECDHE_SECP256R1__RSA_PSS_RSAE_SHA256__AES_256_GCM:256) (Exim)
- id 1vCKKw-00Ep9a-J7; Fri, 24 Oct 2025 18:08:18 +0200
-From: Tvrtko Ursulin <tvrtko.ursulin@igalia.com>
-To: amd-gfx@lists.freedesktop.org,
-	dri-devel@lists.freedesktop.org
-Cc: kernel-dev@igalia.com, Tvrtko Ursulin <tvrtko.ursulin@igalia.com>,
- Lyude Paul <lyude@redhat.com>, Danilo Krummrich <dakr@kernel.org>,
- nouveau@lists.freedesktop.org
-Subject: [PATCH v3 21/27] drm/nouveau: Remove drm_sched_init_args->num_rqs
- usage
-Date: Fri, 24 Oct 2025 17:07:54 +0100
-Message-ID: <20251024160800.79836-22-tvrtko.ursulin@igalia.com>
-X-Mailer: git-send-email 2.48.0
-In-Reply-To: <20251024160800.79836-1-tvrtko.ursulin@igalia.com>
-References: <20251024160800.79836-1-tvrtko.ursulin@igalia.com>
+Received: from sea.source.kernel.org (sea.source.kernel.org [172.234.252.31])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id B40F510EAD3;
+ Fri, 24 Oct 2025 16:13:10 +0000 (UTC)
+Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
+ by sea.source.kernel.org (Postfix) with ESMTP id 70B8C43251;
+ Fri, 24 Oct 2025 16:13:10 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id BAF2CC4CEF1;
+ Fri, 24 Oct 2025 16:13:08 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+ s=k20201202; t=1761322390;
+ bh=JMZUnKEbpoPUX+U/rG/NykTr6Ws1kr0EDZQvo0uV/rw=;
+ h=From:To:Cc:Subject:Date:From;
+ b=ATwP4xz9SabBVxqeUCMoNU79ZHQ7FBdKYroJ/cFnsPC70pbsKVC5/rYu9pyHT8yzC
+ 6csGcRsAc7z4npfT8e+jn3ectNP4m1bxq7GdQGQBOlEgkxCiS5MPLEB6SelY8UFZL2
+ al5Vz7YDB3qoCOeq19YHj1re9+EWQImE5l3unp9gh8WwzGiEmwYWInUNkj/Xrtz0MU
+ Pmk4VtlSiCIQpaQQlzN3mRP5wcXnfCtI/k3l+rODxnFPeBuzuMXKpoSAmC8MBpyXDe
+ CPjHf2J2OPPHm5/NNQvWrnLLWHdd+2WkoRH2/MthAkjDcKCDui1IybS8gNjnOcsd3B
+ LJAeapP++aZMw==
+From: Philipp Stanner <phasta@kernel.org>
+To: Danilo Krummrich <dakr@kernel.org>
+Cc: dri-devel@lists.freedesktop.org, nouveau@lists.freedesktop.org,
+ linux-kernel@vger.kernel.org, Philipp Stanner <phasta@kernel.org>,
+ stable@vger.kernel.org
+Subject: [PATCH] drm/nouveau: Fix race in nouveau_sched_fini()
+Date: Fri, 24 Oct 2025 18:12:22 +0200
+Message-ID: <20251024161221.196155-2-phasta@kernel.org>
+X-Mailer: git-send-email 2.49.0
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 X-BeenThere: nouveau@lists.freedesktop.org
@@ -61,29 +55,52 @@ List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-Remove member no longer used by the scheduler core.
+nouveau_sched_fini() uses a memory barrier before wait_event().
+wait_event(), however, is a macro which expands to a loop which might
+check the passed condition several times. The barrier would only take
+effect for the first check.
 
-Signed-off-by: Tvrtko Ursulin <tvrtko.ursulin@igalia.com>
-Cc: Lyude Paul <lyude@redhat.com>
-Cc: Danilo Krummrich <dakr@kernel.org>
-Cc: nouveau@lists.freedesktop.org
-Reviewed-by: Lyude Paul <lyude@redhat.com>
+Replace the barrier with a function which takes the spinlock.
+
+Cc: stable@vger.kernel.org # v6.8+
+Fixes: 5f03a507b29e ("drm/nouveau: implement 1:1 scheduler - entity relationship")
+Signed-off-by: Philipp Stanner <phasta@kernel.org>
 ---
- drivers/gpu/drm/nouveau/nouveau_sched.c | 1 -
- 1 file changed, 1 deletion(-)
+ drivers/gpu/drm/nouveau/nouveau_sched.c | 14 ++++++++++++--
+ 1 file changed, 12 insertions(+), 2 deletions(-)
 
 diff --git a/drivers/gpu/drm/nouveau/nouveau_sched.c b/drivers/gpu/drm/nouveau/nouveau_sched.c
-index e60f7892f5ce..d00e0f8dcfda 100644
+index e60f7892f5ce..a7bf539e5d86 100644
 --- a/drivers/gpu/drm/nouveau/nouveau_sched.c
 +++ b/drivers/gpu/drm/nouveau/nouveau_sched.c
-@@ -407,7 +407,6 @@ nouveau_sched_init(struct nouveau_sched *sched, struct nouveau_drm *drm,
+@@ -482,6 +482,17 @@ nouveau_sched_create(struct nouveau_sched **psched, struct nouveau_drm *drm,
+ 	return 0;
+ }
+ 
++static bool
++nouveau_sched_job_list_empty(struct nouveau_sched *sched)
++{
++	bool empty;
++
++	spin_lock(&sched->job.list.lock);
++	empty = list_empty(&sched->job.list.head);
++	spin_unlock(&sched->job.list.lock);
++
++	return empty;
++}
+ 
+ static void
+ nouveau_sched_fini(struct nouveau_sched *sched)
+@@ -489,8 +500,7 @@ nouveau_sched_fini(struct nouveau_sched *sched)
+ 	struct drm_gpu_scheduler *drm_sched = &sched->base;
  	struct drm_sched_entity *entity = &sched->entity;
- 	struct drm_sched_init_args args = {
- 		.ops = &nouveau_sched_ops,
--		.num_rqs = DRM_SCHED_PRIORITY_COUNT,
- 		.credit_limit = credit_limit,
- 		.timeout = msecs_to_jiffies(NOUVEAU_SCHED_JOB_TIMEOUT_MS),
- 		.name = "nouveau_sched",
+ 
+-	rmb(); /* for list_empty to work without lock */
+-	wait_event(sched->job.wq, list_empty(&sched->job.list.head));
++	wait_event(sched->job.wq, nouveau_sched_job_list_empty(sched));
+ 
+ 	drm_sched_entity_fini(entity);
+ 	drm_sched_fini(drm_sched);
 -- 
-2.48.0
+2.49.0
 
