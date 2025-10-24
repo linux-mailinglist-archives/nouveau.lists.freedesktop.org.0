@@ -2,45 +2,48 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id 2F15BC07390
-	for <lists+nouveau@lfdr.de>; Fri, 24 Oct 2025 18:13:13 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 69E88C073E3
+	for <lists+nouveau@lfdr.de>; Fri, 24 Oct 2025 18:17:48 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id AD65210EAD3;
-	Fri, 24 Oct 2025 16:13:11 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id D8F0310EB03;
+	Fri, 24 Oct 2025 16:17:44 +0000 (UTC)
 Authentication-Results: gabe.freedesktop.org;
-	dkim=pass (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="ATwP4xz9";
+	dkim=pass (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="rM6yYU1E";
 	dkim-atps=neutral
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
 Received: from sea.source.kernel.org (sea.source.kernel.org [172.234.252.31])
- by gabe.freedesktop.org (Postfix) with ESMTPS id B40F510EAD3;
- Fri, 24 Oct 2025 16:13:10 +0000 (UTC)
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 7C72910EAFF;
+ Fri, 24 Oct 2025 16:17:43 +0000 (UTC)
 Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by sea.source.kernel.org (Postfix) with ESMTP id 70B8C43251;
- Fri, 24 Oct 2025 16:13:10 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id BAF2CC4CEF1;
- Fri, 24 Oct 2025 16:13:08 +0000 (UTC)
+ by sea.source.kernel.org (Postfix) with ESMTP id 60D5640655;
+ Fri, 24 Oct 2025 16:17:43 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 3EBF3C4CEF1;
+ Fri, 24 Oct 2025 16:17:42 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1761322390;
- bh=JMZUnKEbpoPUX+U/rG/NykTr6Ws1kr0EDZQvo0uV/rw=;
- h=From:To:Cc:Subject:Date:From;
- b=ATwP4xz9SabBVxqeUCMoNU79ZHQ7FBdKYroJ/cFnsPC70pbsKVC5/rYu9pyHT8yzC
- 6csGcRsAc7z4npfT8e+jn3ectNP4m1bxq7GdQGQBOlEgkxCiS5MPLEB6SelY8UFZL2
- al5Vz7YDB3qoCOeq19YHj1re9+EWQImE5l3unp9gh8WwzGiEmwYWInUNkj/Xrtz0MU
- Pmk4VtlSiCIQpaQQlzN3mRP5wcXnfCtI/k3l+rODxnFPeBuzuMXKpoSAmC8MBpyXDe
- CPjHf2J2OPPHm5/NNQvWrnLLWHdd+2WkoRH2/MthAkjDcKCDui1IybS8gNjnOcsd3B
- LJAeapP++aZMw==
-From: Philipp Stanner <phasta@kernel.org>
-To: Danilo Krummrich <dakr@kernel.org>
-Cc: dri-devel@lists.freedesktop.org, nouveau@lists.freedesktop.org,
- linux-kernel@vger.kernel.org, Philipp Stanner <phasta@kernel.org>,
- stable@vger.kernel.org
-Subject: [PATCH] drm/nouveau: Fix race in nouveau_sched_fini()
-Date: Fri, 24 Oct 2025 18:12:22 +0200
-Message-ID: <20251024161221.196155-2-phasta@kernel.org>
-X-Mailer: git-send-email 2.49.0
+ s=k20201202; t=1761322663;
+ bh=H7diD6T2VvAt22VMSasAL/ILfy7efjFZ2iYWqCWT09o=;
+ h=Date:Subject:To:Cc:References:From:In-Reply-To:From;
+ b=rM6yYU1E8iOOQFjtTl8Jo/klRzEi/E7UdXUyUShksymBBkz62ajzVmiwH2hDRoWe/
+ TWYb86RW7fuVBGrfSEdBmHD6wTOYzHIBK4PEd9ME/Oe7JDepUAm8DaT2GhsquVKQED
+ l2tRabtgzE2sUyr0EhTX0ibxhaurpxolrDN0TajBYVBloJpD1aRCCFC2a1I7dwwDha
+ zapx9uwQ0XTmi+JLu+M5J+Kc68ytFK4LQ/f69kv8BkqNMfjI3qV4z8TCI12Em7W0PV
+ N4ZiTfGsTeK8/EnwNOxxEqSuNDUPl7dC6xQReyPz4RctRziT9rTR2c4BNmzJKl6VmR
+ jvNAunAwOiuTg==
+Message-ID: <25c97722-e05d-467c-908e-baa31e636a44@kernel.org>
+Date: Fri, 24 Oct 2025 18:17:40 +0200
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH] drm/nouveau: Fix race in nouveau_sched_fini()
+To: Philipp Stanner <phasta@kernel.org>
+Cc: dri-devel@lists.freedesktop.org, nouveau@lists.freedesktop.org,
+ linux-kernel@vger.kernel.org, stable@vger.kernel.org
+References: <20251024161221.196155-2-phasta@kernel.org>
+From: Danilo Krummrich <dakr@kernel.org>
+Content-Language: en-US
+In-Reply-To: <20251024161221.196155-2-phasta@kernel.org>
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -55,52 +58,16 @@ List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-nouveau_sched_fini() uses a memory barrier before wait_event().
-wait_event(), however, is a macro which expands to a loop which might
-check the passed condition several times. The barrier would only take
-effect for the first check.
+On 10/24/25 6:12 PM, Philipp Stanner wrote:
+> nouveau_sched_fini() uses a memory barrier before wait_event().
+> wait_event(), however, is a macro which expands to a loop which might
+> check the passed condition several times. The barrier would only take
+> effect for the first check.
+> 
+> Replace the barrier with a function which takes the spinlock.
+> 
+> Cc: stable@vger.kernel.org # v6.8+
+> Fixes: 5f03a507b29e ("drm/nouveau: implement 1:1 scheduler - entity relationship")
+> Signed-off-by: Philipp Stanner <phasta@kernel.org>
 
-Replace the barrier with a function which takes the spinlock.
-
-Cc: stable@vger.kernel.org # v6.8+
-Fixes: 5f03a507b29e ("drm/nouveau: implement 1:1 scheduler - entity relationship")
-Signed-off-by: Philipp Stanner <phasta@kernel.org>
----
- drivers/gpu/drm/nouveau/nouveau_sched.c | 14 ++++++++++++--
- 1 file changed, 12 insertions(+), 2 deletions(-)
-
-diff --git a/drivers/gpu/drm/nouveau/nouveau_sched.c b/drivers/gpu/drm/nouveau/nouveau_sched.c
-index e60f7892f5ce..a7bf539e5d86 100644
---- a/drivers/gpu/drm/nouveau/nouveau_sched.c
-+++ b/drivers/gpu/drm/nouveau/nouveau_sched.c
-@@ -482,6 +482,17 @@ nouveau_sched_create(struct nouveau_sched **psched, struct nouveau_drm *drm,
- 	return 0;
- }
- 
-+static bool
-+nouveau_sched_job_list_empty(struct nouveau_sched *sched)
-+{
-+	bool empty;
-+
-+	spin_lock(&sched->job.list.lock);
-+	empty = list_empty(&sched->job.list.head);
-+	spin_unlock(&sched->job.list.lock);
-+
-+	return empty;
-+}
- 
- static void
- nouveau_sched_fini(struct nouveau_sched *sched)
-@@ -489,8 +500,7 @@ nouveau_sched_fini(struct nouveau_sched *sched)
- 	struct drm_gpu_scheduler *drm_sched = &sched->base;
- 	struct drm_sched_entity *entity = &sched->entity;
- 
--	rmb(); /* for list_empty to work without lock */
--	wait_event(sched->job.wq, list_empty(&sched->job.list.head));
-+	wait_event(sched->job.wq, nouveau_sched_job_list_empty(sched));
- 
- 	drm_sched_entity_fini(entity);
- 	drm_sched_fini(drm_sched);
--- 
-2.49.0
-
+Acked-by: Danilo Krummrich <dakr@kernel.org>
