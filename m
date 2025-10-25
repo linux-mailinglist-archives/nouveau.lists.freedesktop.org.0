@@ -2,42 +2,40 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id A62D9C08EB4
-	for <lists+nouveau@lfdr.de>; Sat, 25 Oct 2025 12:01:37 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id F3865C08EBA
+	for <lists+nouveau@lfdr.de>; Sat, 25 Oct 2025 12:01:44 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 6594810E25B;
-	Sat, 25 Oct 2025 10:01:35 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 7723110E25D;
+	Sat, 25 Oct 2025 10:01:43 +0000 (UTC)
 Authentication-Results: gabe.freedesktop.org;
-	dkim=pass (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="Ym4RSbc3";
+	dkim=pass (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="HX/iBvtl";
 	dkim-atps=neutral
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from tor.source.kernel.org (tor.source.kernel.org [172.105.4.254])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 164E210E25B
- for <nouveau@lists.freedesktop.org>; Sat, 25 Oct 2025 10:01:34 +0000 (UTC)
+Received: from sea.source.kernel.org (sea.source.kernel.org [172.234.252.31])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 2981810E25D
+ for <nouveau@lists.freedesktop.org>; Sat, 25 Oct 2025 10:01:42 +0000 (UTC)
 Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by tor.source.kernel.org (Postfix) with ESMTP id 14BDA601AD;
- Sat, 25 Oct 2025 10:01:33 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 5D3F5C4CEF5;
- Sat, 25 Oct 2025 10:01:28 +0000 (UTC)
+ by sea.source.kernel.org (Postfix) with ESMTP id AE425439FF;
+ Sat, 25 Oct 2025 10:01:41 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 7352EC4CEFF;
+ Sat, 25 Oct 2025 10:01:37 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1761386492;
- bh=exaezNJbwCRy7/a3GSg00pdq1sFZuuQu+e000B45S1Y=;
- h=Date:To:From:Subject:Cc:References:In-Reply-To:From;
- b=Ym4RSbc3ADDOpHv1struL2v3muUXzUhNR0dPS+sv4e+YAw2zcNzJxNOUNbIss70PZ
- YU0A5ufafJ3xGGiuPOp95ObuqXePVAweyHhzUy9J2Dnq9rmsVAaO1EeZ2ysbgWg80h
- ivPtQZd0B3s6BZ16cKkYdOyiGUPtWCu7nhUL3wEmcZ+FrWZkdYg+F/5WFSS2qaq+LY
- GCm313JcAtrrcSsOmY4iU+2FHN/Ve4n/+2rGeZNnnUGHBIirwyqi/OB9wdjXhMMN78
- mPwavLA+vDsOaWUYOxWjXqgdlBvFiVcVmimEufP3PiKvxrhbOv1x/ljz96Gy0baZXD
- ubcWKrphwDoiw==
+ s=k20201202; t=1761386501;
+ bh=3E7nHw8V7OYWwjNd0Xu+uiIJixZZRRqw5azWYjFeTZE=;
+ h=Date:Subject:Cc:To:From:References:In-Reply-To:From;
+ b=HX/iBvtleCf1FBOOrjFnSbkSXc03KfQ6PgjFCCUoTRVb81LQQuOZff8TZCR6ELHjZ
+ xxIQNjAvEwEo9HyjO7ecC3FqWP1NMz0lwW+u3thfVpbUH6OqFwIcO8aHF1nn6vIcXR
+ WoFZIOJYbMW8oI0Le8+VQfOTEKRrfjdBdO/1HC4QpEO4cp7fUovdI1mppeMYbRwos1
+ VAwIliZQPL6FIy0JiV5TSCVQwxCpEQT7j2sNWstMu/E26AvF+70vXooGnDuw5Lwor0
+ mGdwiakNZ5qUthPK02oGRkFI57Qodc3vZmFBqby+/N1fDQBg7KFDtFVMC9+cste767
+ VIWbVqZkrZdxg==
 Mime-Version: 1.0
 Content-Transfer-Encoding: quoted-printable
 Content-Type: text/plain; charset=UTF-8
-Date: Sat, 25 Oct 2025 12:01:26 +0200
-Message-Id: <DDRBED7J0QGR.2LOZZJOYYONIS@kernel.org>
-To: "John Hubbard" <jhubbard@nvidia.com>
-From: "Danilo Krummrich" <dakr@kernel.org>
-Subject: Re: [PATCH 1/2] gpu: nova: remove Spec and Revision types
+Date: Sat, 25 Oct 2025 12:01:35 +0200
+Message-Id: <DDRBEHGSMDFM.X7RQC8XCC7C8@kernel.org>
+Subject: Re: [PATCH 2/2] gpu: nova: add boot42 support for next-gen GPUs
 Cc: "Alexandre Courbot" <acourbot@nvidia.com>, "Joel Fernandes"
  <joelagnelf@nvidia.com>, "Timur Tabi" <ttabi@nvidia.com>, "Alistair Popple"
  <apopple@nvidia.com>, "Edwin Peer" <epeer@nvidia.com>, "Zhi Wang"
@@ -50,9 +48,11 @@ Cc: "Alexandre Courbot" <acourbot@nvidia.com>, "Joel Fernandes"
  Ryhl" <aliceryhl@google.com>, "Trevor Gross" <tmgross@umich.edu>,
  <nouveau@lists.freedesktop.org>, <rust-for-linux@vger.kernel.org>, "LKML"
  <linux-kernel@vger.kernel.org>
+To: "John Hubbard" <jhubbard@nvidia.com>
+From: "Danilo Krummrich" <dakr@kernel.org>
 References: <20251025001459.491983-1-jhubbard@nvidia.com>
- <20251025001459.491983-2-jhubbard@nvidia.com>
-In-Reply-To: <20251025001459.491983-2-jhubbard@nvidia.com>
+ <20251025001459.491983-3-jhubbard@nvidia.com>
+In-Reply-To: <20251025001459.491983-3-jhubbard@nvidia.com>
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -68,62 +68,91 @@ Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
 On Sat Oct 25, 2025 at 2:14 AM CEST, John Hubbard wrote:
-> In the fullness of time, it has become clear that these two types are
-> not actually needed for anything, after all. Remove them both, and use
-> boot0.chipset directly, instead.
-
-What has become clear is that we don't use the spec field in struct Gpu so =
-far,
-which is not a surprise given that all efforts focus on the initialization =
-path.
-
-But even if we forsee that we do not have a reason to store the spec field =
-in
-struct Gpu, it doesn't mean that the structure itself is useless, see more
-below.
-
->  /// Structure holding the resources required to operate the GPU.
->  #[pin_data]
->  pub(crate) struct Gpu {
-> -    spec: Spec,
-> +    chipset: Chipset,
->      /// MMIO mapping of PCI BAR 0
->      bar: Arc<Devres<Bar0>>,
->      /// System memory page required for flushing all pending GPU-side me=
-mory writes done through
-> @@ -191,16 +153,21 @@ pub(crate) fn new<'a>(
->          devres_bar: Arc<Devres<Bar0>>,
->          bar: &'a Bar0,
->      ) -> impl PinInit<Self, Error> + 'a {
-> +        let boot0 =3D regs::NV_PMC_BOOT_0::read(bar);
+> +        // "next-gen" GPUs (some time after Blackwell) will zero out boo=
+t0, and put the architecture
+> +        // details in boot42 instead. Avoid reading boot42 unless we are=
+ in that case.
+> +        let boot42 =3D if boot0.is_next_gen() {
+> +            Some(regs::NV_PMC_BOOT_42::read(bar))
+> +        } else {
+> +            None
+> +        };
 > +
 >          try_pin_init!(Self {
-> -            spec: Spec::new(bar).inspect(|spec| {
-> +            chipset: {
-> +                let chipset =3D boot0.chipset()?;
->                  dev_info!(
->                      pdev.as_ref(),
-> -                    "NVIDIA (Chipset: {}, Architecture: {:?}, Revision: =
-{})\n",
-> -                    spec.chipset,
-> -                    spec.chipset.arch(),
-> -                    spec.revision
-> +                    "NVIDIA (Chipset: {}, Architecture: {:?}, Revision: =
-{:x}.{:x})\n",
-> +                    chipset,
-> +                    chipset.arch(),
-> +                    boot0.major_revision(),
-> +                    boot0.minor_revision()
+>              chipset: {
+> -                let chipset =3D boot0.chipset()?;
+> +                // Some brief notes about boot0 and boot42, in chronolog=
+ical order:
+> +                //
+> +                // NV04 through Volta:
+> +                //
+> +                //    Not supported by Nova. boot0 is necessary and suff=
+icient to identify these
+> +                //    GPUs. boot42 may not even exist on some of these G=
+PUs.
+> +                //
+> +                // Turing through Blackwell:
+> +                //
+> +                //     Supported by both Nouveau and Nova. boot0 is stil=
+l necessary and sufficient
+> +                //     to identify these GPUs. boot42 exists on these GP=
+Us but we don't need to use
+> +                //     it.
+> +                //
+> +                // Future "next-gen" GPUs:
+> +                //
+> +                //    Only supported by Nova. Boot42 has the architectur=
+e details, boot0 is zeroed
+> +                //    out.
+> +
+> +                // NV04, the very first NVIDIA GPU to be supported on Li=
+nux, is identified by a
+> +                // specific bit pattern in boot0. Although Nova does not=
+ support NV04 (see above),
+> +                // it is possible to confuse NV04 with a "next-gen" GPU.=
+ Therefore, return early if
+> +                // we specifically detect NV04, thus simplifying the rem=
+aining selection logic.
+> +                if boot0.is_nv04() {
+> +                    Err(ENODEV)?
+> +                }
+> +
+> +                // Now that we know it is something more recent than NV0=
+4, use boot42 if we
+> +                // previously determined that boot42 was both valid and =
+relevant, and boot0
+> +                // otherwise.
+> +                let (chipset, major_rev, minor_rev) =3D if let Some(boot=
+42) =3D boot42 {
+> +                    (
+> +                        boot42.chipset()?,
+> +                        boot42.major_revision(),
+> +                        boot42.minor_revision(),
+> +                    )
+> +                } else {
+> +                    // Current/older GPU: use BOOT0
+> +                    (
+> +                        boot0.chipset()?,
+> +                        boot0.major_revision(),
+> +                        boot0.minor_revision(),
+> +                    )
+> +                };
 
-Now you have to open code reading the register, get the Chipset instance an=
-d
-manually format the revision, which was previously done through a Display i=
-mpl
-of Revision. And the subsequent patch introduces even more open coded logic=
- in
-the constructor of struct Gpu.
+Why open code all of the above in the struct Gpu constructor? This could al=
+l
+happen within Spec::new().
 
-Instead of removing Spec, we should improve it by giving it its own Display
-impl, such that this code can become:
+If we *really* don't want to store the Spec, but only the Chipset, you can =
+also
+do:
 
-	dev_info!(pdev.as_ref(), "{}\n", spec);
+	try_pin_init!(Self {
+	    chipset: {
+	        let spec =3D Spec::new(bar);
+
+	        dev_info!(pdev.as_ref(), "{}\n", spec);
+
+	        spec.chipset
+	    },
+	    [...],
+	}
