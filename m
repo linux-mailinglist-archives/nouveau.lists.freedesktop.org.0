@@ -2,57 +2,55 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id F3865C08EBA
-	for <lists+nouveau@lfdr.de>; Sat, 25 Oct 2025 12:01:44 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id EA5F2C09581
+	for <lists+nouveau@lfdr.de>; Sat, 25 Oct 2025 18:21:32 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 7723110E25D;
-	Sat, 25 Oct 2025 10:01:43 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 6C63110E2E4;
+	Sat, 25 Oct 2025 16:21:31 +0000 (UTC)
 Authentication-Results: gabe.freedesktop.org;
-	dkim=pass (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="HX/iBvtl";
+	dkim=pass (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="Pw8gVxDp";
 	dkim-atps=neutral
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from sea.source.kernel.org (sea.source.kernel.org [172.234.252.31])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 2981810E25D
- for <nouveau@lists.freedesktop.org>; Sat, 25 Oct 2025 10:01:42 +0000 (UTC)
+Received: from tor.source.kernel.org (tor.source.kernel.org [172.105.4.254])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 74FD010E2E0
+ for <nouveau@lists.freedesktop.org>; Sat, 25 Oct 2025 16:21:29 +0000 (UTC)
 Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by sea.source.kernel.org (Postfix) with ESMTP id AE425439FF;
- Sat, 25 Oct 2025 10:01:41 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 7352EC4CEFF;
- Sat, 25 Oct 2025 10:01:37 +0000 (UTC)
+ by tor.source.kernel.org (Postfix) with ESMTP id 7CF0E61106;
+ Sat, 25 Oct 2025 16:21:28 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id E9F7EC19422;
+ Sat, 25 Oct 2025 16:21:26 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1761386501;
- bh=3E7nHw8V7OYWwjNd0Xu+uiIJixZZRRqw5azWYjFeTZE=;
- h=Date:Subject:Cc:To:From:References:In-Reply-To:From;
- b=HX/iBvtleCf1FBOOrjFnSbkSXc03KfQ6PgjFCCUoTRVb81LQQuOZff8TZCR6ELHjZ
- xxIQNjAvEwEo9HyjO7ecC3FqWP1NMz0lwW+u3thfVpbUH6OqFwIcO8aHF1nn6vIcXR
- WoFZIOJYbMW8oI0Le8+VQfOTEKRrfjdBdO/1HC4QpEO4cp7fUovdI1mppeMYbRwos1
- VAwIliZQPL6FIy0JiV5TSCVQwxCpEQT7j2sNWstMu/E26AvF+70vXooGnDuw5Lwor0
- mGdwiakNZ5qUthPK02oGRkFI57Qodc3vZmFBqby+/N1fDQBg7KFDtFVMC9+cste767
- VIWbVqZkrZdxg==
-Mime-Version: 1.0
-Content-Transfer-Encoding: quoted-printable
+ s=k20201202; t=1761409288;
+ bh=CNuXg6T1FBt0H9ahAPfbDf9MKjLact3hI0yEzcJrYmU=;
+ h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
+ b=Pw8gVxDpTN1qibdprIeko6/I+bPcQOWkBqR6ikQmD1JSwUXA8KEy6YFTD241QF2ly
+ YmFamDoSpBY3gA4qKj8uWNBYKpd9RdpM729bPc2yIZTBDAIdasF1p3QoxDzrDC1esu
+ NZyXLdHocobY7s8v7tdJuOYH4yzD3S75PIyA4fhuYLC0SMBJ0I3Gn9RT+xVgOOb2V1
+ mlgtqh14R+xUrYf0pYywABgqMy81FBcN4Hv0FZg2i0zI+rQfmcC9pmhfLdGozADQn7
+ TbmUHpo4XvE7hyaKmJ0i6fzGLDq/ctU3khh8qmoQnEdVCfUzOO5MZKjth1dFU5wpzi
+ KnyHybbtuJ6oQ==
+From: Sasha Levin <sashal@kernel.org>
+To: patches@lists.linux.dev,
+	stable@vger.kernel.org
+Cc: Alexandre Courbot <acourbot@nvidia.com>, Timur Tabi <ttabi@nvidia.com>,
+ Daniel Almeida <daniel.almeida@collabora.com>,
+ Lyude Paul <lyude@redhat.com>, Sasha Levin <sashal@kernel.org>,
+ dakr@kernel.org, aliceryhl@google.com, tamird@gmail.com,
+ nouveau@lists.freedesktop.org
+Subject: [PATCH AUTOSEL 6.17] gpu: nova-core: register: allow fields named
+ `offset`
+Date: Sat, 25 Oct 2025 11:58:13 -0400
+Message-ID: <20251025160905.3857885-262-sashal@kernel.org>
+X-Mailer: git-send-email 2.51.0
+In-Reply-To: <20251025160905.3857885-1-sashal@kernel.org>
+References: <20251025160905.3857885-1-sashal@kernel.org>
+MIME-Version: 1.0
+X-stable: review
+X-Patchwork-Hint: Ignore
+X-stable-base: Linux 6.17.5
 Content-Type: text/plain; charset=UTF-8
-Date: Sat, 25 Oct 2025 12:01:35 +0200
-Message-Id: <DDRBEHGSMDFM.X7RQC8XCC7C8@kernel.org>
-Subject: Re: [PATCH 2/2] gpu: nova: add boot42 support for next-gen GPUs
-Cc: "Alexandre Courbot" <acourbot@nvidia.com>, "Joel Fernandes"
- <joelagnelf@nvidia.com>, "Timur Tabi" <ttabi@nvidia.com>, "Alistair Popple"
- <apopple@nvidia.com>, "Edwin Peer" <epeer@nvidia.com>, "Zhi Wang"
- <zhiw@nvidia.com>, "David Airlie" <airlied@gmail.com>, "Simona Vetter"
- <simona@ffwll.ch>, "Bjorn Helgaas" <bhelgaas@google.com>, "Miguel Ojeda"
- <ojeda@kernel.org>, "Alex Gaynor" <alex.gaynor@gmail.com>, "Boqun Feng"
- <boqun.feng@gmail.com>, "Gary Guo" <gary@garyguo.net>,
- =?utf-8?q?Bj=C3=B6rn_Roy_Baron?= <bjorn3_gh@protonmail.com>, "Benno Lossin"
- <lossin@kernel.org>, "Andreas Hindborg" <a.hindborg@kernel.org>, "Alice
- Ryhl" <aliceryhl@google.com>, "Trevor Gross" <tmgross@umich.edu>,
- <nouveau@lists.freedesktop.org>, <rust-for-linux@vger.kernel.org>, "LKML"
- <linux-kernel@vger.kernel.org>
-To: "John Hubbard" <jhubbard@nvidia.com>
-From: "Danilo Krummrich" <dakr@kernel.org>
-References: <20251025001459.491983-1-jhubbard@nvidia.com>
- <20251025001459.491983-3-jhubbard@nvidia.com>
-In-Reply-To: <20251025001459.491983-3-jhubbard@nvidia.com>
+Content-Transfer-Encoding: 8bit
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -67,92 +65,149 @@ List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-On Sat Oct 25, 2025 at 2:14 AM CEST, John Hubbard wrote:
-> +        // "next-gen" GPUs (some time after Blackwell) will zero out boo=
-t0, and put the architecture
-> +        // details in boot42 instead. Avoid reading boot42 unless we are=
- in that case.
-> +        let boot42 =3D if boot0.is_next_gen() {
-> +            Some(regs::NV_PMC_BOOT_42::read(bar))
-> +        } else {
-> +            None
-> +        };
-> +
->          try_pin_init!(Self {
->              chipset: {
-> -                let chipset =3D boot0.chipset()?;
-> +                // Some brief notes about boot0 and boot42, in chronolog=
-ical order:
-> +                //
-> +                // NV04 through Volta:
-> +                //
-> +                //    Not supported by Nova. boot0 is necessary and suff=
-icient to identify these
-> +                //    GPUs. boot42 may not even exist on some of these G=
-PUs.
-> +                //
-> +                // Turing through Blackwell:
-> +                //
-> +                //     Supported by both Nouveau and Nova. boot0 is stil=
-l necessary and sufficient
-> +                //     to identify these GPUs. boot42 exists on these GP=
-Us but we don't need to use
-> +                //     it.
-> +                //
-> +                // Future "next-gen" GPUs:
-> +                //
-> +                //    Only supported by Nova. Boot42 has the architectur=
-e details, boot0 is zeroed
-> +                //    out.
-> +
-> +                // NV04, the very first NVIDIA GPU to be supported on Li=
-nux, is identified by a
-> +                // specific bit pattern in boot0. Although Nova does not=
- support NV04 (see above),
-> +                // it is possible to confuse NV04 with a "next-gen" GPU.=
- Therefore, return early if
-> +                // we specifically detect NV04, thus simplifying the rem=
-aining selection logic.
-> +                if boot0.is_nv04() {
-> +                    Err(ENODEV)?
-> +                }
-> +
-> +                // Now that we know it is something more recent than NV0=
-4, use boot42 if we
-> +                // previously determined that boot42 was both valid and =
-relevant, and boot0
-> +                // otherwise.
-> +                let (chipset, major_rev, minor_rev) =3D if let Some(boot=
-42) =3D boot42 {
-> +                    (
-> +                        boot42.chipset()?,
-> +                        boot42.major_revision(),
-> +                        boot42.minor_revision(),
-> +                    )
-> +                } else {
-> +                    // Current/older GPU: use BOOT0
-> +                    (
-> +                        boot0.chipset()?,
-> +                        boot0.major_revision(),
-> +                        boot0.minor_revision(),
-> +                    )
-> +                };
+From: Alexandre Courbot <acourbot@nvidia.com>
 
-Why open code all of the above in the struct Gpu constructor? This could al=
-l
-happen within Spec::new().
+[ Upstream commit c5aeb264b6b27c52fc6c9ef3b50eaaebff5d9b60 ]
 
-If we *really* don't want to store the Spec, but only the Chipset, you can =
-also
-do:
+`offset` is a common field name, yet using it triggers a build error due
+to the conflict between the uppercased field constant (which becomes
+`OFFSET` in this case) containing the bitrange of the field, and the
+`OFFSET` constant constaining the offset of the register.
 
-	try_pin_init!(Self {
-	    chipset: {
-	        let spec =3D Spec::new(bar);
+Fix this by adding `_RANGE` the field's range constant to avoid the
+name collision.
 
-	        dev_info!(pdev.as_ref(), "{}\n", spec);
+[acourbot@nvidia.com: fix merge conflict due to switch from `as u32` to
+`u32::from`.]
 
-	        spec.chipset
-	    },
-	    [...],
-	}
+Reported-by: Timur Tabi <ttabi@nvidia.com>
+Reviewed-by: Daniel Almeida <daniel.almeida@collabora.com>
+Reviewed-by: Lyude Paul <lyude@redhat.com>
+Link: https://lore.kernel.org/r/20250718-nova-regs-v2-3-7b6a762aa1cd@nvidia.com
+Signed-off-by: Alexandre Courbot <acourbot@nvidia.com>
+Signed-off-by: Sasha Levin <sashal@kernel.org>
+---
+
+LLM Generated explanations, may be completely bogus:
+
+YES
+
+- What it fixes
+  - Resolves a hard build error when a register defines a field named
+    `offset`. The `register!` macro currently generates an associated
+    constant for the field’s bit range named after the field uppercased
+    (e.g., `OFFSET`), which collides with the register’s own associated
+    constant `OFFSET` that holds the register’s offset (introduced
+    earlier). This creates a duplicate associated constant in the same
+    type.
+  - Root cause: `pub(crate) const OFFSET: usize = $offset;` is emitted
+    for every register type (drivers/gpu/nova-core/regs/macros.rs:147),
+    while the field bitrange constant is currently emitted as `const
+    OFFSET: RangeInclusive<u8> = ...` when the field is named `offset`
+    (see below).
+
+- Code changes
+  - Rename the generated bitrange constant to avoid collision:
+    - Old: `const [<$field:upper>]: RangeInclusive<u8> = $lo..=$hi;`
+    - New: `const [<$field:upper _RANGE>]: RangeInclusive<u8> =
+      $lo..=$hi;`
+    - Location: drivers/gpu/nova-core/regs/macros.rs:281 (change to add
+      `_RANGE` suffix).
+  - Update call sites that used the old constant name for `.len()`:
+    - Change `Self::ARCHITECTURE_0.len()` to
+      `Self::ARCHITECTURE_0_RANGE.len()` in NV_PMC_BOOT_0::architecture
+      - Location: drivers/gpu/nova-core/regs.rs:31
+    - Change `Self::IMPLEMENTATION.len()` to
+      `Self::IMPLEMENTATION_RANGE.len()` in NV_PMC_BOOT_0::chipset
+      - Location: drivers/gpu/nova-core/regs.rs:39
+  - The register offset constant remains unchanged and is still
+    available as `pub(crate) const OFFSET: usize = ...`
+    (drivers/gpu/nova-core/regs/macros.rs:147). This preserves existing
+    uses like `regs::NV_FUSE_OPT_FPF_*::OFFSET` (e.g., drivers/gpu/nova-
+    core/falcon/hal/ga102.rs:58, :60, :62).
+
+- Why it matters
+  - The register offset constant `OFFSET` (drivers/gpu/nova-
+    core/regs/macros.rs:147) was added by commit “gpu: nova-core: expose
+    the offset of each register as a type constant.” Without this patch,
+    any field named `offset` would generate another associated constant
+    `OFFSET` for the field’s bit range, causing a compile-time name
+    collision in the same type.
+  - Even if current in-tree fields avoid the name `offset` (e.g., use
+    `offs` in drivers/gpu/nova-core/regs.rs:250, :265), this is a latent
+    build bug that blocks legitimate and common field naming. The commit
+    unblocks this and aligns with typical hardware field naming
+    conventions.
+
+- Risk and side effects
+  - Minimal and contained:
+    - Only renames the generated field-bitrange associated constant to
+      `<FIELD>_RANGE`.
+    - Updates the two in-tree references that used `.len()` on the old
+      constant name (drivers/gpu/nova-core/regs.rs:31, :39).
+    - No runtime behavior changes; constants are used purely at compile
+      time.
+  - API stability:
+    - This affects only internal, per-register associated constants
+      generated by a private macro used within `drivers/gpu/nova-core`.
+      No external kernel API/ABI is touched.
+    - Tree-wide search shows no other in-tree usage of the old `<FIELD>`
+      bitrange associated constant name beyond the two places updated.
+
+- Stable backport criteria
+  - Fixes a real (and easy-to-hit) build failure class introduced when
+    the `OFFSET` associated constant was added for registers. It is a
+    correctness fix, not a new feature.
+  - Small, straightforward, and self-contained; no architectural
+    changes.
+  - Low regression risk; confined to `drivers/gpu/nova-core`.
+  - No functional side effects beyond eliminating the name collision and
+    updating the two references to the renamed constant.
+
+Conclusion: Suitable for stable. The change is a small macro-level bug
+fix eliminating a compile-time name collision, with trivial call-site
+updates and no runtime impact.
+
+ drivers/gpu/nova-core/regs.rs        | 5 +++--
+ drivers/gpu/nova-core/regs/macros.rs | 2 +-
+ 2 files changed, 4 insertions(+), 3 deletions(-)
+
+diff --git a/drivers/gpu/nova-core/regs.rs b/drivers/gpu/nova-core/regs.rs
+index d49fddf6a3c6e..c8f8adb24f6e4 100644
+--- a/drivers/gpu/nova-core/regs.rs
++++ b/drivers/gpu/nova-core/regs.rs
+@@ -28,7 +28,7 @@ impl NV_PMC_BOOT_0 {
+     /// Combines `architecture_0` and `architecture_1` to obtain the architecture of the chip.
+     pub(crate) fn architecture(self) -> Result<Architecture> {
+         Architecture::try_from(
+-            self.architecture_0() | (self.architecture_1() << Self::ARCHITECTURE_0.len()),
++            self.architecture_0() | (self.architecture_1() << Self::ARCHITECTURE_0_RANGE.len()),
+         )
+     }
+ 
+@@ -36,7 +36,8 @@ pub(crate) fn architecture(self) -> Result<Architecture> {
+     pub(crate) fn chipset(self) -> Result<Chipset> {
+         self.architecture()
+             .map(|arch| {
+-                ((arch as u32) << Self::IMPLEMENTATION.len()) | u32::from(self.implementation())
++                ((arch as u32) << Self::IMPLEMENTATION_RANGE.len())
++                    | u32::from(self.implementation())
+             })
+             .and_then(Chipset::try_from)
+     }
+diff --git a/drivers/gpu/nova-core/regs/macros.rs b/drivers/gpu/nova-core/regs/macros.rs
+index a3e6de1779d41..00b398522ea18 100644
+--- a/drivers/gpu/nova-core/regs/macros.rs
++++ b/drivers/gpu/nova-core/regs/macros.rs
+@@ -278,7 +278,7 @@ impl $name {
+             { $process:expr } $to_type:ty => $res_type:ty $(, $comment:literal)?;
+     ) => {
+         ::kernel::macros::paste!(
+-        const [<$field:upper>]: ::core::ops::RangeInclusive<u8> = $lo..=$hi;
++        const [<$field:upper _RANGE>]: ::core::ops::RangeInclusive<u8> = $lo..=$hi;
+         const [<$field:upper _MASK>]: u32 = ((((1 << $hi) - 1) << 1) + 1) - ((1 << $lo) - 1);
+         const [<$field:upper _SHIFT>]: u32 = Self::[<$field:upper _MASK>].trailing_zeros();
+         );
+-- 
+2.51.0
+
