@@ -2,71 +2,72 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id 90F2ACBACEF
-	for <lists+nouveau@lfdr.de>; Sat, 13 Dec 2025 13:44:31 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 20533CBAEB8
+	for <lists+nouveau@lfdr.de>; Sat, 13 Dec 2025 13:46:24 +0100 (CET)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 5522E10EBB5;
-	Sat, 13 Dec 2025 12:41:10 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 78D1910EC3C;
+	Sat, 13 Dec 2025 12:42:16 +0000 (UTC)
 Authentication-Results: gabe.freedesktop.org;
-	dkim=permerror (0-bit key) header.d=gmail.com header.i=@gmail.com header.b="lCjY8R+t";
+	dkim=permerror (0-bit key) header.d=gmail.com header.i=@gmail.com header.b="iQopb7Px";
 	dkim-atps=neutral
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from mail-pl1-f176.google.com (mail-pl1-f176.google.com
- [209.85.214.176])
- by gabe.freedesktop.org (Postfix) with ESMTPS id E894310E303
- for <nouveau@lists.freedesktop.org>; Sun, 26 Oct 2025 16:11:15 +0000 (UTC)
-Received: by mail-pl1-f176.google.com with SMTP id
- d9443c01a7336-28d18e933a9so5136325ad.3
- for <nouveau@lists.freedesktop.org>; Sun, 26 Oct 2025 09:11:15 -0700 (PDT)
+Received: from mail-pl1-f171.google.com (mail-pl1-f171.google.com
+ [209.85.214.171])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 100A710E2F5
+ for <nouveau@lists.freedesktop.org>; Sun, 26 Oct 2025 16:44:22 +0000 (UTC)
+Received: by mail-pl1-f171.google.com with SMTP id
+ d9443c01a7336-290aaff26c1so10930625ad.3
+ for <nouveau@lists.freedesktop.org>; Sun, 26 Oct 2025 09:44:22 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1761495075; x=1762099875; darn=lists.freedesktop.org;
+ d=gmail.com; s=20230601; t=1761497061; x=1762101861; darn=lists.freedesktop.org;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:from:to:cc:subject:date
  :message-id:reply-to;
- bh=AQau2nuAPBGeqn7nXR606yrFTjooTnZ5gmJ89ZW511o=;
- b=lCjY8R+tE1vtQQ2xzH6BMxRC10J1SeS4wXL1PBGfTWffhiu5Mr37eO62YowBqF/Yqw
- DtYPhlXuhQYrnJeqMMWzp8+/HK9hB8ew4OHnuXmN3DXVyyqcIvbFClucEKwpePzvLgQu
- 7oP2viLZge46XS+VzBMcqPTIHypqQKhZUshbzhuxblH9+bYrnMa0EsrsEGgUcNlRePZB
- lAgwygTJ1374hDNAJjWI7XB0Ijx6z775dCWs6oDcP/B4+/0lnIOMlPWqB2o14+TQgbNJ
- hmTXbLLDxH/Jr3J5nk6ano66xgZ7XCHaRDXhCxhacU2Rfqxv4hauTLl4YUj4vOll8iW2
- sl7Q==
+ bh=6wILLtfeNYO6vlF1lVdjizAOVshwGgLXWHD0xoxegrM=;
+ b=iQopb7Pxq6WRRzM3OsLEQjas3/zNqDcyH1QRoSyrymxfy3stBir16az+fcBoQJr+oG
+ FUFVZNCa0Da0XTUb1LJ+zsCx1O/whlxqod46SJRDA0L0Z3IVm/piLg0xNKooJ8iTJM7A
+ 1LdWZj2ScqlxZU4QSVYI8gEmqHV/XWmYjlbKwjSg311G2uromNa00imhI97k2mGh7txp
+ KYoPQREJ6b/qYKbgf1GoS8EZ7QHcG88747WtcxBEr8GBmMldjSm8bp/qq7PhingzVqz6
+ xrSCzn9gJ3j0qJurNCjU3vN48NeV+Erk/QkvoMkFUH/OkplfeM3l9VvZf88oxVFpT2Xh
+ yO0A==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1761495075; x=1762099875;
+ d=1e100.net; s=20230601; t=1761497061; x=1762101861;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=AQau2nuAPBGeqn7nXR606yrFTjooTnZ5gmJ89ZW511o=;
- b=ZmMgo4o06xqzltuXzPacQ1ILAURHcZETxC/PdYpCX0XXAR7jY/TpPvlrzgc7Vm2EhO
- QOcihRBfR7hXjY64MCFMm3GCi3noDKOijAq5crXl/MxQBe9BfbvYl9tEXtufIn3KzFM2
- 4OpbvEfT+hKWIkLnk9C48TBbYNqPicWSY61eQtZSB3qU+E30Fir1jIO2xWIKzh8sTPZI
- FaoX5fNmgafhr9wURgY73CaTYLt0Xnt3t+bLhc0x0JTdk8UtksRqRRX05TqjljVUFWXt
- lcr+SNuYfo4TcMaPOIHxG1dLg1IXwnbWYOrwOHQGNpXmUtGmQ6c5LD7bDfXYc9QcHZso
- a5/g==
+ bh=6wILLtfeNYO6vlF1lVdjizAOVshwGgLXWHD0xoxegrM=;
+ b=qVo+sV56LqCdRu52MdcmwcuX7/NGJkjSRXFxyMPaIZaW/Vj2F6BAEjTlx55re89Juo
+ VrFjuYApRl9tEZcgfZ4sxcIRH8VZJDLIxwdVWLVChh8leP81h5SGqnlow0Ysbdi0QbHV
+ 5Bbs9+3xgvKMHFinGPjjENeQTykCOkQtB18Iqg5Rta30BpsSN0x+jaSuhXRgbSYFQJGD
+ 9H7K/NfREp66AOqme5NKMinEmCs2zEGhv4hrhavDZ0aHbOKZ4YXFJ3arpCODMO4FLcy7
+ 1DW7MTMv2tyczz4TqmEyugHfeEaNiYGlSTuSh64u5zLMjp4hUVms6ecfapylFu26UOyo
+ 1vbQ==
 X-Forwarded-Encrypted: i=1;
- AJvYcCV9vhkNQ3j3eHuSZhbgynKwq6t5d6mgnWeF71ujuUyIjsKhC3l8+9Mz7KNe6qJQI6H9eqavXqEc@lists.freedesktop.org
-X-Gm-Message-State: AOJu0YwrkoZ6LHKA34Dmq+eVK+tLJpYGgLhKoAAGMt5EGh6jm14Yt5Tr
- L6JczC4bUPSTJ7WAeuSlFZe05RUlOreDHXM1uCEdxZvBD1op+F2RKWv8zsyoftM5Xy3lApyBMZ3
- I1Uulsb2mHBT6O6IcCEnOsofen8ocXRQ=
-X-Gm-Gg: ASbGnctiZC1PrLGxsvAkccwrUUCZUMCnA9lxYb1S0REW2TFgXVTaNpNtO/t68SY+038
- DmBtReuQvgewBKlNz7NtpylzyOH5UsmNSSl85CI/+8b8hYtY8khNppkYlhJIkxj99y5uB3k+w2f
- kOBImMAPwr7ubtDF3CIBANjUUgEcrlZGG75gshJtzbIPXvLwJC61fA7a47Oh2YFz5PbXuI+hsjL
- qZvpyOlSArzvwhAXMretoh3+6eIqNeyqgxgd4DvV0KAFjdXcxzCABbeJ4HWAuO0Hk9CxY4UQ40h
- acOVuyNSBIFZMHw3Byp2B99hmVbaG0qldYTJDQ+wbFFfuRSj0UyTWWFpQGMok9Q0t2WwX4klfOQ
- t0/k=
-X-Google-Smtp-Source: AGHT+IFI6sg3xeU/Y+7ewS/quTbjQS82OqC83SGue3QsM3IMT+1H7kuNPGEtqVWO3pz2NXoXOmWS4q2L435vkLC65I8=
-X-Received: by 2002:a17:903:1a0b:b0:27e:eb9b:b80f with SMTP id
- d9443c01a7336-292d3e50f14mr137740975ad.2.1761495075335; Sun, 26 Oct 2025
- 09:11:15 -0700 (PDT)
+ AJvYcCX1rmo5PISWlN6RDMVZVrTWGu/fKmhhtbRwv5xela/zt52mVgar0ZZuWKb/j3vxKrqDtWkA+HPb@lists.freedesktop.org
+X-Gm-Message-State: AOJu0Yzn4sEtRh1SXWF6oQ8u/eyX9DPBvS/XcZwOGyhau9F6HDVjEL3M
+ WS/XR6k+Ztjjn4GpqkHoiW9sALpqsE5HcL6WWgcfRj2jz4t7l9tIIKNP3qlPjdYSQvKalVz1k8k
+ DwthPVeoifIY2tJ9feN1GC4ebx1+x9nsAOd0q+gg=
+X-Gm-Gg: ASbGncsTBUbgynmERhN/dRYVsmDCsUqmcD06EIGc78bAo9ZaXnkgMqN1ntb8mE84mJW
+ PWFS9VOh7oJPl4S+AUy5KqbXtHtunAY25/M6bzq5gOe+dcp2C3gomgGkQjV+N/rXa2uvF0I9aj4
+ /39YZjxipyjfBP5xKQquv8BkwbJRPQfLfiQ8MNqCTuhr3gz1461S+RICR4X+2RkSbi4Zbd++okx
+ z2nZ161Xxiw0Hdsbya6urq9IJzGAs9vKrrDHIhn++3PUgj5ylfI7SG9Ks/bLIxdOCmnhI3dByiY
+ JDmKZLTwEgnO6JNeVGQODp1O7Ii4TewJPVGojrBu1rEPtDjXF5vMN4Ak2+Exan+CTEJJEyO44gc
+ nTwHdtvlU+JwllwQakukmjtVw
+X-Google-Smtp-Source: AGHT+IGcKNBiOeJRVxt2uo6Hqt2C6o0CYIe4RfW4BEVkfN4Gc0z8gi+UAYPMQz7pRTqkzl3cw39cqdYTdggHuWXBRN4=
+X-Received: by 2002:a17:903:1ac8:b0:267:8b4f:df1f with SMTP id
+ d9443c01a7336-292d3e5084dmr130371015ad.1.1761497061350; Sun, 26 Oct 2025
+ 09:44:21 -0700 (PDT)
 MIME-Version: 1.0
 References: <20251026-nova-as-v1-0-60c78726462d@nvidia.com>
- <20251026-nova-as-v1-7-60c78726462d@nvidia.com>
-In-Reply-To: <20251026-nova-as-v1-7-60c78726462d@nvidia.com>
+ <20251026-nova-as-v1-5-60c78726462d@nvidia.com>
+In-Reply-To: <20251026-nova-as-v1-5-60c78726462d@nvidia.com>
 From: Miguel Ojeda <miguel.ojeda.sandonis@gmail.com>
-Date: Sun, 26 Oct 2025 17:11:03 +0100
-X-Gm-Features: AWmQ_blYJsh-bUnlNpdDu-je1LAAZ23ehLx8sNiiMWM4JI3qmhDsJ4Jmtvqb2i4
-Message-ID: <CANiq72m9ms-OznWQ5+4_JvAs4yruwgBRcm1u0gCAnasqO8uJOA@mail.gmail.com>
-Subject: Re: [PATCH 7/7] gpu: nova-core: justify remaining uses of `as`
+Date: Sun, 26 Oct 2025 17:44:08 +0100
+X-Gm-Features: AWmQ_bkdt-5-XZk5dwhGctE3nBdh_GyjtSn8Bs5HCiaG241yBI4aSb7WE_0r3tU
+Message-ID: <CANiq72mgoW_TyWf9Nv=5t3Qij_dsDjicNpGsa=F1t+sg23vxSA@mail.gmail.com>
+Subject: Re: [PATCH 5/7] gpu: nova-core: add extra conversion functions and
+ traits
 To: Alexandre Courbot <acourbot@nvidia.com>
 Cc: Alice Ryhl <aliceryhl@google.com>, David Airlie <airlied@gmail.com>, 
  Simona Vetter <simona@ffwll.ch>, Miguel Ojeda <ojeda@kernel.org>,
@@ -79,7 +80,8 @@ Cc: Alice Ryhl <aliceryhl@google.com>, David Airlie <airlied@gmail.com>,
  Timur Tabi <ttabi@nvidia.com>, Edwin Peer <epeer@nvidia.com>,
  nouveau@lists.freedesktop.org, 
  dri-devel@lists.freedesktop.org, linux-kernel@vger.kernel.org, 
- rust-for-linux@vger.kernel.org, Danilo Krummrich <dakr@kernel.org>
+ rust-for-linux@vger.kernel.org, Danilo Krummrich <dakr@kernel.org>, 
+ Matthew Wilcox <willy@infradead.org>
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
 X-Mailman-Approved-At: Sat, 13 Dec 2025 12:40:48 +0000
@@ -100,15 +102,57 @@ Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 On Sun, Oct 26, 2025 at 3:40=E2=80=AFPM Alexandre Courbot <acourbot@nvidia.=
 com> wrote:
 >
-> +            // `as u32` is used on purpose since we do want to strip the=
- upper bits, which will be
-> +            // written to `NV_PFALCON_FALCON_DMATRFBASE1`.
->              .set_base((dma_start >> 8) as u32)
->              .write(bar, &E::ID);
+> +/// Infallibly converts a `usize` to `u64`.
+> +///
+> +/// This conversion is always lossless as Linux only supports 32-bit and=
+ 64-bit platforms, thus a
+> +/// `usize` is always smaller than or of the same size as a `u64`.
+> +///
+> +/// Prefer this over the `as` keyword to ensure no lossy conversions are=
+ performed.
+> +///
+> +/// This is for use from a `const` context. For non `const` use, prefer =
+the [`FromAs`] and
+> +/// [`IntoAs`] traits.
+> +pub(crate) const fn usize_as_u64(value: usize) -> u64 {
+> +    kernel::static_assert!(size_of::<u64>() >=3D size_of::<usize>());
+> +
+> +    value as u64
+> +}
 
-We are not very consistent on this yet, but I would suggest using `//
-CAST:`. We are working on getting `// PANIC:` in Clippy, and we could
-get others like this one eventually.
+Since you have the static asserts, this is fine today.
+
+However, we may actually get 128-bit architectures in the
+not-so-distant future -- Matthew suggests to be ready by 2035:
+
+    https://lwn.net/Articles/908026/
+
+So this one in particular may actually not be true "soon" -- we also
+had related discussions about these assumptions, e.g.:
+
+    https://lore.kernel.org/rust-for-linux/CANiq72m9AeqFKHrRniQ5Nr9vPv2MmUM=
+HFTuuj5ydmqo+OYn60A@mail.gmail.com/
+
+So we should consider having the `cfg` already to prevent people from
+assuming it will be always available, and likely a note in its docs,
+i.e. we may introducing trouble to port later on to new architectures.
+Similarly, the docs of the trait may need rewording.
+
+What do you think?
+
+Regarding the `.into_as()` name, it makes sense, but it can be a bit
+surprising when reading out of context... The standalone functions are
+super clear, in comparison. But I am not sure what could be better.
+`into_in_this_arch()` or similar could emphasize that this will only
+work in certain architectures, i.e. it is "an `into()` for this arch"
+rather than the general one.
+That would go well with the idea that you didn't implement it for
+other obvious types, which I guess was to avoid developers using this
+instead of `into()` by mistake, right?
+
+(By the way, please use intra-doc links on the primitives too.)
+
+Thanks!
 
 Cheers,
 Miguel
