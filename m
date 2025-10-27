@@ -2,166 +2,96 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id 648BDC0DB62
-	for <lists+nouveau@lfdr.de>; Mon, 27 Oct 2025 13:55:20 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id D400BC0DF04
+	for <lists+nouveau@lfdr.de>; Mon, 27 Oct 2025 14:15:12 +0100 (CET)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id D067F10E47D;
-	Mon, 27 Oct 2025 12:55:18 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 7854F10E48A;
+	Mon, 27 Oct 2025 13:15:05 +0000 (UTC)
 Authentication-Results: gabe.freedesktop.org;
-	dkim=pass (2048-bit key; unprotected) header.d=Nvidia.com header.i=@Nvidia.com header.b="VoRsN8dR";
+	dkim=pass (2048-bit key; unprotected) header.d=intel.com header.i=@intel.com header.b="cbbLkbCr";
 	dkim-atps=neutral
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from SN4PR0501CU005.outbound.protection.outlook.com
- (mail-southcentralusazon11011018.outbound.protection.outlook.com
- [40.93.194.18])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 688CE10E482;
- Mon, 27 Oct 2025 12:55:17 +0000 (UTC)
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=tjWmAXPoZ6M2Eid/Knbhhe4Do/j9JFfAJSkLUeB30KcQjSix47rP/XEHZjMEX8sP4UvEm7ZbqK0koPm5ai5g7xja8T0stbdhjP6HLgPvbg8gAasfAfvZqtiS8RHdEVqVdNT8MbnQpiNIwChZWko91Qn0ftCo2fQ6R6M4erE1Es2hzHtYqIM23v7R3JbmSlAQnzK5ABTjy/gXE0bcSdSLQ17W358mXENQK03sDl/UovI4rnKtd2mn6iL+adErAJrb5Ei5vs2wC+RIYVeavg941O7EcNeXf2OhfYaQq+h7b4l4vFkric+NjpzSWElIi1v/6smaSCM29o9tIgKP4pT+/g==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=V9YB/L9umpfdeblimmxbATO3ZlBhPkAdSQPbCw1mLF4=;
- b=LJaaiUXL2z/Fq05CAoykn4pLibrB1PUq+tcAKJhBp+WNOCjFom8OOb11ZYGBy8FLOpe1dfHT0zkdNuuFSF5v+gU1slfVmJKd45WEUZfjTThLjd+CpZcnmXXN0vkWyYk4/cjJ+0OLTeeCJm5Aameyw+jlqf3/efeO8O7D37UorKlhFXzpOGBEVvdbs6XbUxdpWMXHYimVNy9h5TsPodt8UD6fxMUxis86EeV54GScrqO9e0aedbUuCFQKObpWYgms/AXr+6ujQRei5QhWLPt0P3PYiX/rPIAJktEmJZQLyHmKDMsM3Uo8yLwsusy2qe0WTtvM4CIQLv2RzqyBHjMVYA==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=nvidia.com; dmarc=pass action=none header.from=nvidia.com;
- dkim=pass header.d=nvidia.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=Nvidia.com;
- s=selector2;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=V9YB/L9umpfdeblimmxbATO3ZlBhPkAdSQPbCw1mLF4=;
- b=VoRsN8dRDvbVnlAWY6dvs12TjXS60crNcIH1LSmCNyTrP0C2vO08a6o9i2ti4fxjbRDUJ2u6WyoX6JBahXraaK7gXOSNlSQ7z17h540D99jU5+5jkz+r4VF/fpw1yvv+r6UmrJFpGijK/IYeoV3NYpeLjUryNg5DlQ2Jqexsm4/MI5Xbg4i/fKrWdBiF5PExoqWPf/9BAPdQUdS2hic8D68MOYnEyYYMaiJXdJxDw6ISj7swIuz8F8BsSeiVUpbv3PBHyFX8cMUOAgcfAC4f/n4fed0ge5Xtb8R9bw3QcjKajceutEqluZJat2TTUsn2sseMTz2bbBZDfAho60+0CA==
-Authentication-Results: dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=nvidia.com;
-Received: from CH2PR12MB3990.namprd12.prod.outlook.com (2603:10b6:610:28::18)
- by DS7PR12MB5863.namprd12.prod.outlook.com (2603:10b6:8:7a::18) with
- Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9253.18; Mon, 27 Oct
- 2025 12:55:12 +0000
-Received: from CH2PR12MB3990.namprd12.prod.outlook.com
- ([fe80::7de1:4fe5:8ead:5989]) by CH2PR12MB3990.namprd12.prod.outlook.com
- ([fe80::7de1:4fe5:8ead:5989%6]) with mapi id 15.20.9253.017; Mon, 27 Oct 2025
- 12:55:12 +0000
-From: Alexandre Courbot <acourbot@nvidia.com>
-Date: Mon, 27 Oct 2025 21:54:47 +0900
-Subject: [PATCH v2 7/7] gpu: nova-core: justify remaining uses of `as`
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 7bit
-Message-Id: <20251027-nova-as-v2-7-a26bd1d067a4@nvidia.com>
-References: <20251027-nova-as-v2-0-a26bd1d067a4@nvidia.com>
-In-Reply-To: <20251027-nova-as-v2-0-a26bd1d067a4@nvidia.com>
-To: Alice Ryhl <aliceryhl@google.com>, David Airlie <airlied@gmail.com>, 
- Simona Vetter <simona@ffwll.ch>, Miguel Ojeda <ojeda@kernel.org>, 
- Alex Gaynor <alex.gaynor@gmail.com>, Boqun Feng <boqun.feng@gmail.com>, 
- Gary Guo <gary@garyguo.net>, 
- =?utf-8?q?Bj=C3=B6rn_Roy_Baron?= <bjorn3_gh@protonmail.com>, 
- Benno Lossin <lossin@kernel.org>, Andreas Hindborg <a.hindborg@kernel.org>, 
- Trevor Gross <tmgross@umich.edu>
-Cc: John Hubbard <jhubbard@nvidia.com>, Alistair Popple <apopple@nvidia.com>, 
- Joel Fernandes <joelagnelf@nvidia.com>, Timur Tabi <ttabi@nvidia.com>, 
- Edwin Peer <epeer@nvidia.com>, nouveau@lists.freedesktop.org, 
- dri-devel@lists.freedesktop.org, linux-kernel@vger.kernel.org, 
- rust-for-linux@vger.kernel.org, Danilo Krummrich <dakr@kernel.org>, 
- Alexandre Courbot <acourbot@nvidia.com>
-X-Mailer: b4 0.14.3
-X-ClientProxiedBy: TYWPR01CA0021.jpnprd01.prod.outlook.com
- (2603:1096:400:aa::8) To CH2PR12MB3990.namprd12.prod.outlook.com
- (2603:10b6:610:28::18)
+Received: from mgamail.intel.com (mgamail.intel.com [192.198.163.17])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 12BC010E48B;
+ Mon, 27 Oct 2025 13:15:04 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
+ d=intel.com; i=@intel.com; q=dns/txt; s=Intel;
+ t=1761570904; x=1793106904;
+ h=from:to:cc:subject:date:message-id:mime-version:
+ content-transfer-encoding;
+ bh=KV+S7DQVMRgQhXR5566C5VHaHELI2KQeRBROKhQ7meQ=;
+ b=cbbLkbCrB9LdPvJzL0jcFhvKC+SOcQVAoBEJsOAGz2zdXORKBR5D45ym
+ A0aicULNcgQYCsFWccxxS88TQdjdxsf1lHXqN5LuGtG6Po1dOsGsDcWG1
+ UQaJzGjAd4yf9lAnwNEqVI/G6F1HpM660ZDuKrXq4Ws6tr5uBRMZnHt8g
+ P9d/adrpiIJgVWsZKWR6ZrQojWgV9fQhpSGWl0uDKLzi2SeOoaab/i3CB
+ hgXTgGlidFkRDXkUpOugvyQ0Yvu2WyEvQR/jSdWAKkzr2UURTNGi81yg3
+ 7jXQaBNWBCuw5NMcHS5moLsXJP3COq95GeipwbgADytgVaKYMXnL82AQs Q==;
+X-CSE-ConnectionGUID: 1D2OanYbSZ6vTLpSEv7Vdw==
+X-CSE-MsgGUID: 11oe72+4Rs6ot1X/FPwEhw==
+X-IronPort-AV: E=McAfee;i="6800,10657,11586"; a="63553388"
+X-IronPort-AV: E=Sophos;i="6.19,258,1754982000"; d="scan'208";a="63553388"
+Received: from fmviesa002.fm.intel.com ([10.60.135.142])
+ by fmvoesa111.fm.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
+ 27 Oct 2025 06:15:03 -0700
+X-CSE-ConnectionGUID: tBvuOvuHRTWN96M4eYAokw==
+X-CSE-MsgGUID: wF9Uh/6aQBSfcuYXSvkYGQ==
+X-ExtLoop1: 1
+X-IronPort-AV: E=Sophos;i="6.19,258,1754982000"; d="scan'208";a="208654471"
+Received: from klitkey1-mobl1.ger.corp.intel.com (HELO kekkonen.fi.intel.com)
+ ([10.245.244.31])
+ by fmviesa002-auth.fm.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
+ 27 Oct 2025 06:14:54 -0700
+Received: from punajuuri.localdomain (unknown [192.168.240.130])
+ by kekkonen.fi.intel.com (Postfix) with ESMTP id BA9D111FADA;
+ Mon, 27 Oct 2025 15:14:51 +0200 (EET)
+Received: from sailus by punajuuri.localdomain with local (Exim 4.98.2)
+ (envelope-from <sakari.ailus@linux.intel.com>)
+ id 1vDN3Y-00000001dzg-2ri4; Mon, 27 Oct 2025 15:14:40 +0200
+Organization: Intel Finland Oy - BIC 0357606-4 - c/o Alberga Business Park,
+ 6 krs, Bertel Jungin Aukio 5, 02600 Espoo
+From: Sakari Ailus <sakari.ailus@linux.intel.com>
+To: dri-devel@lists.freedesktop.org
+Cc: Alex Deucher <alexander.deucher@amd.com>,
+ =?UTF-8?q?Christian=20K=C3=B6nig?= <christian.koenig@amd.com>,
+ David Airlie <airlied@gmail.com>, Simona Vetter <simona@ffwll.ch>,
+ Felix Kuehling <Felix.Kuehling@amd.com>,
+ Kenneth Feng <kenneth.feng@amd.com>, Lyude Paul <lyude@redhat.com>,
+ Danilo Krummrich <dakr@kernel.org>,
+ Maarten Lankhorst <maarten.lankhorst@linux.intel.com>,
+ Maxime Ripard <mripard@kernel.org>,
+ Thomas Zimmermann <tzimmermann@suse.de>,
+ Mario Limonciello <mario.limonciello@amd.com>,
+ Alex Hung <alex.hung@amd.com>, Antonio Quartulli <antonio@mandelbit.com>,
+ Pratap Nirujogi <pratap.nirujogi@amd.com>, Lijo Lazar <lijo.lazar@amd.com>,
+ Dmitry Baryshkov <lumag@kernel.org>,
+ Srinivasan Shanmugam <srinivasan.shanmugam@amd.com>,
+ Yang Wang <kevinyang.wang@amd.com>, Sunil Khatri <sunil.khatri@amd.com>,
+ Jesse Zhang <jesse.zhang@amd.com>,
+ =?UTF-8?q?Ville=20Syrj=C3=A4l=C3=A4?= <ville.syrjala@linux.intel.com>,
+ Liviu Dudau <liviu.dudau@arm.com>,
+ Laurent Pinchart <laurent.pinchart+renesas@ideasonboard.com>,
+ Hawking Zhang <Hawking.Zhang@amd.com>,
+ Vitaly Prosyak <vitaly.prosyak@amd.com>, Arnd Bergmann <arnd@arndb.de>,
+ Thomas Gleixner <tglx@linutronix.de>, Ingo Molnar <mingo@kernel.org>,
+ Liao Yuanhong <liaoyuanhong@vivo.com>,
+ Rodrigo Siqueira <siqueira@igalia.com>, Prike Liang <Prike.Liang@amd.com>,
+ Shashank Sharma <shashank.sharma@amd.com>,
+ Arunpravin Paneer Selvam <Arunpravin.PaneerSelvam@amd.com>,
+ Tao Zhou <tao.zhou1@amd.com>, YiPeng Chai <YiPeng.Chai@amd.com>,
+ ganglxie <ganglxie@amd.com>, Xiang Liu <xiang.liu@amd.com>,
+ Victor Skvortsov <victor.skvortsov@amd.com>, Ce Sun <cesun102@amd.com>,
+ Dave Airlie <airlied@redhat.com>, Jani Nikula <jani.nikula@intel.com>,
+ "Gustavo A. R. Silva" <gustavoars@kernel.org>,
+ Imre Deak <imre.deak@intel.com>, Ben Skeggs <bskeggs@nvidia.com>,
+ nouveau@lists.freedesktop.org, amd-gfx@lists.freedesktop.org
+Subject: [PATCH 1/3] drm/amd: Remove redundant pm_runtime_mark_last_busy()
+ calls
+Date: Mon, 27 Oct 2025 15:14:38 +0200
+Message-ID: <20251027131440.392052-1-sakari.ailus@linux.intel.com>
+X-Mailer: git-send-email 2.47.3
 MIME-Version: 1.0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: CH2PR12MB3990:EE_|DS7PR12MB5863:EE_
-X-MS-Office365-Filtering-Correlation-Id: 91d9bac6-3183-44b3-7321-08de1558113b
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0;
- ARA:13230040|7416014|376014|1800799024|10070799003|366016|921020; 
-X-Microsoft-Antispam-Message-Info: =?utf-8?B?YWxLcFhiODZhOWhadW90alRvYURXWWwrNGdQWnV4Z3ZVYmI0eTFEdmdkR3g4?=
- =?utf-8?B?dk1pQzJBMStSRjFsNDVGREc5T1l0OEYrMXBucG1rL3BCUlFDSmE0VTdsWE5p?=
- =?utf-8?B?UzViZkZQdGhzMWdQa0REK3hRTmxuVTJpTTgxaUdUSE9IaTNWYlVtT2RncENY?=
- =?utf-8?B?TWF5SGdrTC85a3Avb1VDMEg3TUdkK2VvTncxNU5WeTI3ejArd2Nva2RMc2V1?=
- =?utf-8?B?NTJSR1FCRTJOSytaRWNHVk5JS0JTUDBValJUbjA3SGtMS3hJM2hwWTRoQVR0?=
- =?utf-8?B?Ynl3WmtEandOb3RWai9qYkJuc25QYkFBVkRMa3B3VXA0YUM2djJNeUo2VGZk?=
- =?utf-8?B?dUk1aS9sMjc0Y3MrVUtuNUgxVDhNczdiUklxTHhyU0IvRUNYZmpqZ1hkOElV?=
- =?utf-8?B?K2JMakZZNlVJVWZrOVh2NEx2b3I0OHlXbGNPYnZadmd0NVpkdE9NRjNqSzdr?=
- =?utf-8?B?cWZhbHdSUEM1YTRlemovcEEyY0ZyRklyU3dxdzBQNk1PM2s1M3N3bXdUQkQ2?=
- =?utf-8?B?OXF0dHRPQ0tVTnl4ZHp2Z3A0Vzl1cVlINjZZZkM4SG5wMlFXemtwN1F4eWJ3?=
- =?utf-8?B?UWgvNnl4clFMMFZvZWg2MVhRMFBQSGlzMTlqVS9jS0I3R0x6ejVoRHNzV3Ji?=
- =?utf-8?B?VjZrTlhjYXliWkw1UnlGVWVDaHM3ZTU5SnRVa25lOWFGalpzQm1ZT2kzb3B5?=
- =?utf-8?B?RU8yY01nSTgxTGJTV3lMRktJM1pSekxQUitZdHgvUzlpb3ZuVjc4VkNrcjM0?=
- =?utf-8?B?anB5OGpjTzlpakNNMHByY0lVL21yWVNsNWVJNkh4NHdEemJLbUNWWkNOYWFN?=
- =?utf-8?B?Uk1MSmsvYlUwUWhkMHIva0p0bThqdUpnTjh4Ukd6T1JTcUZ5UXhtaXBvUmtB?=
- =?utf-8?B?a1F0b01pRGVzK29CUk5YOTljUDV3LzJQNXVnZGE5dUtHZmYyTXpPUDNEUFZ0?=
- =?utf-8?B?ZkRvd3J2RUV2TmhsNmpoUmQzcnM5dlduU21yTDFNM2pMR3Y1UkNhbnJEMFMr?=
- =?utf-8?B?QzFvM1ZUNmpvQTVaektubzF4TW1jR3NNSlpubk5YRXZCRzVPTjNRSGdnM1Ba?=
- =?utf-8?B?RDNEN0VRZ3oxRzBndlBlZWdBN3dsUzY5bFpMcEdYNnp5ZllDTVBobFR4Uk9K?=
- =?utf-8?B?UENsRi95K1NWWEpLcVVRNnN5WGFGR2ZITVBQRVZFdWNMMWZlc0dSd05XZSs5?=
- =?utf-8?B?Z2VicmhiQUxOSzNjSzVNMXZpSkZkUXBGR3dHUjN5ZXBkL0trd3pVY3pLV0JQ?=
- =?utf-8?B?M0R1aWFoS2V6OGQ1d3dpc3NFSmpFMmJGQ3JYeW5mSGQ1Qk5iSTVTMzQ4T3Zi?=
- =?utf-8?B?K3hiZTR5SXBBNWcrcE5xL2VmK1hSbWt3YVphUERhU1V2b0hSTVdtaUdvaUo1?=
- =?utf-8?B?YmVPbUJCbzZGUDg0aVVndFYwWjlGWUlNL2xvTVpNWWhHakNkaW5zMDNCNHQ5?=
- =?utf-8?B?LzVBV2tVNldSdWVub1BHUzB2SnliTDRiSWp4NGhMeUZCazVKcm10OHVWTmFM?=
- =?utf-8?B?dkkvVXN6a3ZsTmpXNjJGMkozSTlSSEtwQW9JUyszRW9hTk1Ib0ptR2djT3FM?=
- =?utf-8?B?WWwzd1lFWVZrRm9lL1pKYk5LWHYvMitsK25hTU9PSXJzanNGMmRDTHJrSWdX?=
- =?utf-8?B?cEdua1VXT1I3VzBuNlloZnhuRDBITVdOOVEwN2xjYTQrK2N6a1dndnpXSHlr?=
- =?utf-8?B?cktvWjRFT0NBMm8rbGFzU0xpa0dRZUNJbjdjUWJyWk04MUIxb09GaFJ4T3RW?=
- =?utf-8?B?a3dnZEdNR203Z0c0NTh1blFDMW5meVE4RHhEdFNLd2NIS3Npd0haZFovTlU0?=
- =?utf-8?B?aHJVTXl5U1ZUNk5LSno0aTFqeDczZFhzMXJBVVlOYTNnelpEMWtPdGt6TU9S?=
- =?utf-8?B?VGZqWEU2Tzlib0h2eUZUOUpsejFPZVlXQXRscUdMUkNtYjNBUUtKTUsvWTB4?=
- =?utf-8?B?VERiSjF2UTJMRmhuTkJjM1VveGd6UDEydXhseGtiQWtoZUdRUEtTbWtIc1RW?=
- =?utf-8?Q?0yByFH7L38EA3FbOFDYMjWT7aXLL1M=3D?=
-X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
- IPV:NLI; SFV:NSPM; H:CH2PR12MB3990.namprd12.prod.outlook.com; PTR:; CAT:NONE;
- SFS:(13230040)(7416014)(376014)(1800799024)(10070799003)(366016)(921020);
- DIR:OUT; SFP:1101; 
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?YlNmMWd6UzRGdE12NGh4Sk9PQlY2NVA3cjBFZnRrbDJMOVlEZTkyRVBRTnZn?=
- =?utf-8?B?YjEyNU5XK2k5TWQ2ZG43VWM3ejJlb2psU2ZzUDh5SmZFSmg2ZFg3aFlrS0N6?=
- =?utf-8?B?dWc0YnR5L2tZVFVzQmhVSU96cmtORVJyS0pPeVhHYVhoZUhwUWhMQ09HMnpY?=
- =?utf-8?B?QjI4V296ZG50OXg2dGIzS3hzdXNsZDdHN1FiVXJPdG5yRXA2Rk82Z3hubXh1?=
- =?utf-8?B?dXVoZkpFbEpENlFaTDBhMFpwa2xhTEVlQ013aWRWNXo1SmYzVEVKODZoMFEz?=
- =?utf-8?B?ZUsxbkhlM1htRUZQakJsQU15dmoxSUFTSWNsNUszb1ZrWDBnOUpKUldlTFc3?=
- =?utf-8?B?Y0tubUx0NWNuYUhDRnFyOExKZWJHZWtzWmExckFFQjJKNVcvWTJzWW96eTdQ?=
- =?utf-8?B?Y1YxckNWV01WZDRjQ25NdTM0QUNzV3dYOWpxRkxzS2xLdjNxbnExZ2I3L1NH?=
- =?utf-8?B?R2J2TTc3blVsWWVLeHpnRXRPcnJGQmdpVVc2TjVQSjk0QUF0U0ltRTZ3U2Fh?=
- =?utf-8?B?UVcyaWQ0UmZjNG4yWlpRTklzaFY4ZlVSUFhEWUpvSmN6aDkvS1F4d0NKUmJG?=
- =?utf-8?B?QThsZ3RiSWd3b1o4Q2UxdDVGWlpBZ3ZKWFZmM2FXMlFWbDB6TWlhMWdKSk9n?=
- =?utf-8?B?blVwUzF3TGMrN2Q2YmcyKzFsZTcxWWNaN1AyNkRQTTUzVDdNa1JRUWdEd0po?=
- =?utf-8?B?QllPeEVIbGc2U3BIeW5UVDNRTlV2Mmpubk1uYXU0U0ZrN1o0WUI3UGVSYXdE?=
- =?utf-8?B?bzdRNDd2SkhBdDBPN204Ym9kOGczTmNXTWdrOE1WSzhtb1owNEdTRTIrT3ps?=
- =?utf-8?B?TW80a2RWR0k5cHpuRXZrbFAwdHhGb3ZHZ0NQNEhHVHQxcmtYTFhZVzNmcmp2?=
- =?utf-8?B?UHNuaXg5VVQ1YlEya3l1VHZWeFQxU1M3bEFvNndVYm5KbUh1UFppRmFhZDM3?=
- =?utf-8?B?WW5meWFQbU9QTkhNaDB5V1UvUjRCdTBnWXJXY0h0UXlYSFc0MmJReDUwQ3Mr?=
- =?utf-8?B?KzhxcDBkMnpyMkY1ekNvb3RvbzdkMitCYTlTZVR6Ti9mWWlKV2x0dXZsM0dK?=
- =?utf-8?B?Qm4wdy9NUXBCRUIxa2t5NjRzNjF5Tkx6NHRNR3FMeUhoZUdsWG1BNUNIZ0FF?=
- =?utf-8?B?dW1ra2s2Ni9PTXN0ejJWNisvUVlFMkwwNXowTENPeHVxNkFNcGlNVW83MGV3?=
- =?utf-8?B?YTlVeTZJT09BbmpHWGo2ekpldEM3Q2JRKzRFR2hUNHMxYjFmaEQzN0NpaDhN?=
- =?utf-8?B?ZGh2S0plZzRsTWpnK29sYkIwNTJnbko3TWMxTzNMUGpmZ2Vra1BSYTVVRXpr?=
- =?utf-8?B?QnNSZEZYc282NUpqY3g2NmRvcVBzbnpDMWlGdi9Dc2R6VTJXcDlFUjJQZnEy?=
- =?utf-8?B?SzNtRER4NDFVendkdVM1M2U0RnlwTUQraTdCYlQ5d3BQZGxSVzVab1JyNFhw?=
- =?utf-8?B?Rnlyd3RFMVNTdEdYbHl1MFhiL3loTngyNldHRG16eXA2K1pybVhQVkxDWWVM?=
- =?utf-8?B?YUlWV3o4NjRETzQ2TzNVNUlNRmhxS2tUekNFVGN0VTl5NFZpTHZJWTdnTHlP?=
- =?utf-8?B?SVgrSTdiMlBaYThQSEdML0NvaFdGbVhGakxHK2hFQVRpbXRzR3c5bGh5ZzI4?=
- =?utf-8?B?amJDVG9zc2tiNU1NYmhCSTd3cHdOcW4rMXhUZlBIMDFvamZiaDhNakRxdFdF?=
- =?utf-8?B?b21qY243TmdkMGFtNHhLREVFMDVnUFR4dk5zeHRCTS84blI1UGNZU09pTVNU?=
- =?utf-8?B?N2FEMmRrU0MycWk0R2RkTUdnU3ZBdW4zVVlib0FyYVBzU2xTeGh6KzNKOVo0?=
- =?utf-8?B?MGY4dnRrUGRYVEV2aEFHVlRGZ1lzY21LZ1JtOExRK2d4WU1WeVZiRzlwOG52?=
- =?utf-8?B?YjF1NTJxRzFoK21YTm16NUIyS1kyNjFqT0JIaDBmOU8rZ0p2MW5MaUhTeDJj?=
- =?utf-8?B?OHVsd3ZqWVpGZFNvaExJMFlEU2EwZHZZU1dqRTVUUDh6azlCdFAyMjZ3M1FX?=
- =?utf-8?B?ZjcvbFlvbCs1THYzelFvRThBQUhoQ0t0Qm1aSzVLamsxeFhWR0h2QjJpcHV6?=
- =?utf-8?B?VHM5VDhtV1MxbTZ0WkpTajJKWVhleTV1c05KUTdpbzRDRXRrUGpiTXZxUHB3?=
- =?utf-8?B?cHY2Y3d5a3pUdlFCLzZ0VWJkRW1JTDloT1VGSjR1SUFsczlxWWJrWFN1SDV6?=
- =?utf-8?Q?YteA27aQp6zSLhn/eLmkJ04U5df46+bWT4kecZgYrP7Z?=
-X-OriginatorOrg: Nvidia.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 91d9bac6-3183-44b3-7321-08de1558113b
-X-MS-Exchange-CrossTenant-AuthSource: CH2PR12MB3990.namprd12.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 27 Oct 2025 12:55:12.5573 (UTC)
-X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
-X-MS-Exchange-CrossTenant-Id: 43083d15-7273-40c1-b7db-39efd9ccc17a
-X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: oIbNBOr4LYhqKzR8+BUDjqB8Ef9u2hTlasAfMGOk7LKScjcatQAWd5GzrOhT6qZpcaDsvKUwvsar9WE3kTBzpg==
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: DS7PR12MB5863
+Content-Transfer-Encoding: 8bit
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -176,76 +106,470 @@ List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-There are a few remaining cases where we *do* want to use `as`,
-because we specifically want to strip the data that does not fit into
-the destination type. Comment these uses to clear confusion about the
-intent.
+pm_runtime_put_autosuspend(), pm_runtime_put_sync_autosuspend(),
+pm_runtime_autosuspend() and pm_request_autosuspend() now include a call
+to pm_runtime_mark_last_busy(). Remove the now-reduntant explicit call to
+pm_runtime_mark_last_busy().
 
-Acked-by: Danilo Krummrich <dakr@kernel.org>
-Signed-off-by: Alexandre Courbot <acourbot@nvidia.com>
+Signed-off-by: Sakari Ailus <sakari.ailus@linux.intel.com>
 ---
- drivers/gpu/nova-core/falcon.rs         | 4 ++++
- drivers/gpu/nova-core/fb/hal/ga100.rs   | 4 ++++
- drivers/gpu/nova-core/firmware/fwsec.rs | 2 ++
- 3 files changed, 10 insertions(+)
+ drivers/gpu/drm/amd/amdgpu/amdgpu_acpi.c      |  1 -
+ .../gpu/drm/amd/amdgpu/amdgpu_connectors.c    | 16 +++---------
+ drivers/gpu/drm/amd/amdgpu/amdgpu_debugfs.c   | 25 -------------------
+ drivers/gpu/drm/amd/amdgpu/amdgpu_display.c   |  2 --
+ drivers/gpu/drm/amd/amdgpu/amdgpu_drv.c       |  4 ---
+ drivers/gpu/drm/amd/amdgpu/amdgpu_fence.c     |  2 --
+ drivers/gpu/drm/amd/amdgpu/amdgpu_gfx.c       |  1 -
+ drivers/gpu/drm/amd/amdgpu/amdgpu_kms.c       |  2 --
+ drivers/gpu/drm/amd/amdgpu/amdgpu_rap.c       |  1 -
+ drivers/gpu/drm/amd/amdgpu/amdgpu_ras.c       |  1 -
+ .../gpu/drm/amd/amdgpu/amdgpu_securedisplay.c |  1 -
+ drivers/gpu/drm/amd/amdgpu/amdgpu_userq.c     |  1 -
+ drivers/gpu/drm/amd/amdkfd/kfd_process.c      |  1 -
+ drivers/gpu/drm/amd/pm/amdgpu_pm.c            |  1 -
+ 14 files changed, 4 insertions(+), 55 deletions(-)
 
-diff --git a/drivers/gpu/nova-core/falcon.rs b/drivers/gpu/nova-core/falcon.rs
-index a44df1ac8873..7f6c7091c9c3 100644
---- a/drivers/gpu/nova-core/falcon.rs
-+++ b/drivers/gpu/nova-core/falcon.rs
-@@ -479,9 +479,13 @@ fn dma_wr<F: FalconFirmware<Target = E>>(
-         // Set up the base source DMA address.
+diff --git a/drivers/gpu/drm/amd/amdgpu/amdgpu_acpi.c b/drivers/gpu/drm/amd/amdgpu/amdgpu_acpi.c
+index 6c62e27b9800..d31460a9e958 100644
+--- a/drivers/gpu/drm/amd/amdgpu/amdgpu_acpi.c
++++ b/drivers/gpu/drm/amd/amdgpu/amdgpu_acpi.c
+@@ -507,7 +507,6 @@ static int amdgpu_atif_handler(struct amdgpu_device *adev,
+ 				pm_runtime_get_sync(adev_to_drm(adev)->dev);
+ 				/* Just fire off a uevent and let userspace tell us what to do */
+ 				drm_helper_hpd_irq_event(adev_to_drm(adev));
+-				pm_runtime_mark_last_busy(adev_to_drm(adev)->dev);
+ 				pm_runtime_put_autosuspend(adev_to_drm(adev)->dev);
+ 			}
+ 		}
+diff --git a/drivers/gpu/drm/amd/amdgpu/amdgpu_connectors.c b/drivers/gpu/drm/amd/amdgpu/amdgpu_connectors.c
+index 47e9bfba0642..9f96d568acf2 100644
+--- a/drivers/gpu/drm/amd/amdgpu/amdgpu_connectors.c
++++ b/drivers/gpu/drm/amd/amdgpu/amdgpu_connectors.c
+@@ -734,10 +734,8 @@ amdgpu_connector_lvds_detect(struct drm_connector *connector, bool force)
  
-         regs::NV_PFALCON_FALCON_DMATRFBASE::default()
-+            // CAST: `as u32` is used on purpose since we do want to strip the upper bits, which
-+            // will be written to `NV_PFALCON_FALCON_DMATRFBASE1`.
-             .set_base((dma_start >> 8) as u32)
-             .write(bar, &E::ID);
-         regs::NV_PFALCON_FALCON_DMATRFBASE1::default()
-+            // CAST: `as u16` is used on purpose since the remaining bits are guaranteed to fit
-+            // within a `u16`.
-             .set_base((dma_start >> 40) as u16)
-             .write(bar, &E::ID);
+ 	amdgpu_connector_update_scratch_regs(connector, ret);
  
-diff --git a/drivers/gpu/nova-core/fb/hal/ga100.rs b/drivers/gpu/nova-core/fb/hal/ga100.rs
-index 871c42bf033a..b9389fa382e5 100644
---- a/drivers/gpu/nova-core/fb/hal/ga100.rs
-+++ b/drivers/gpu/nova-core/fb/hal/ga100.rs
-@@ -18,9 +18,13 @@ pub(super) fn read_sysmem_flush_page_ga100(bar: &Bar0) -> u64 {
+-	if (!drm_kms_helper_is_poll_worker()) {
+-		pm_runtime_mark_last_busy(connector->dev->dev);
++	if (!drm_kms_helper_is_poll_worker())
+ 		pm_runtime_put_autosuspend(connector->dev->dev);
+-	}
  
- pub(super) fn write_sysmem_flush_page_ga100(bar: &Bar0, addr: u64) {
-     regs::NV_PFB_NISO_FLUSH_SYSMEM_ADDR_HI::default()
-+        // CAST: `as u32` is used on purpose since the remaining bits are guaranteed to fit within
-+        // a `u32`.
-         .set_adr_63_40((addr >> FLUSH_SYSMEM_ADDR_SHIFT_HI) as u32)
-         .write(bar);
-     regs::NV_PFB_NISO_FLUSH_SYSMEM_ADDR::default()
-+        // CAST: `as u32` is used on purpose since we want to strip the upper bits that have been
-+        // written to `NV_PFB_NISO_FLUSH_SYSMEM_ADDR_HI`.
-         .set_adr_39_08((addr >> FLUSH_SYSMEM_ADDR_SHIFT) as u32)
-         .write(bar);
+ 	return ret;
  }
-diff --git a/drivers/gpu/nova-core/firmware/fwsec.rs b/drivers/gpu/nova-core/firmware/fwsec.rs
-index ed82e74ccdc9..ecef4cc78942 100644
---- a/drivers/gpu/nova-core/firmware/fwsec.rs
-+++ b/drivers/gpu/nova-core/firmware/fwsec.rs
-@@ -161,6 +161,7 @@ unsafe fn transmute<'a, 'b, T: Sized + FromBytes>(
-     if offset + size_of::<T>() > fw.size() {
-         return Err(EINVAL);
-     }
-+    // CAST: `usize` has the same size as pointers.
-     if (fw.start_ptr() as usize + offset) % align_of::<T>() != 0 {
-         return Err(EINVAL);
-     }
-@@ -184,6 +185,7 @@ unsafe fn transmute_mut<'a, 'b, T: Sized + FromBytes>(
-     if offset + size_of::<T>() > fw.size() {
-         return Err(EINVAL);
-     }
-+    // CAST: `usize` has the same size as pointers.
-     if (fw.start_ptr_mut() as usize + offset) % align_of::<T>() != 0 {
-         return Err(EINVAL);
-     }
-
+@@ -919,10 +917,8 @@ amdgpu_connector_vga_detect(struct drm_connector *connector, bool force)
+ 	amdgpu_connector_update_scratch_regs(connector, ret);
+ 
+ out:
+-	if (!drm_kms_helper_is_poll_worker()) {
+-		pm_runtime_mark_last_busy(connector->dev->dev);
++	if (!drm_kms_helper_is_poll_worker())
+ 		pm_runtime_put_autosuspend(connector->dev->dev);
+-	}
+ 
+ 	return ret;
+ }
+@@ -1146,10 +1142,8 @@ amdgpu_connector_dvi_detect(struct drm_connector *connector, bool force)
+ 	amdgpu_connector_update_scratch_regs(connector, ret);
+ 
+ exit:
+-	if (!drm_kms_helper_is_poll_worker()) {
+-		pm_runtime_mark_last_busy(connector->dev->dev);
++	if (!drm_kms_helper_is_poll_worker())
+ 		pm_runtime_put_autosuspend(connector->dev->dev);
+-	}
+ 
+ 	return ret;
+ }
+@@ -1486,10 +1480,8 @@ amdgpu_connector_dp_detect(struct drm_connector *connector, bool force)
+ 
+ 	amdgpu_connector_update_scratch_regs(connector, ret);
+ out:
+-	if (!drm_kms_helper_is_poll_worker()) {
+-		pm_runtime_mark_last_busy(connector->dev->dev);
++	if (!drm_kms_helper_is_poll_worker())
+ 		pm_runtime_put_autosuspend(connector->dev->dev);
+-	}
+ 
+ 	if (connector->connector_type == DRM_MODE_CONNECTOR_DisplayPort ||
+ 	    connector->connector_type == DRM_MODE_CONNECTOR_eDP)
+diff --git a/drivers/gpu/drm/amd/amdgpu/amdgpu_debugfs.c b/drivers/gpu/drm/amd/amdgpu/amdgpu_debugfs.c
+index d3a5189bd512..62d43b8cbe58 100644
+--- a/drivers/gpu/drm/amd/amdgpu/amdgpu_debugfs.c
++++ b/drivers/gpu/drm/amd/amdgpu/amdgpu_debugfs.c
+@@ -129,7 +129,6 @@ static int  amdgpu_debugfs_process_reg_op(bool read, struct file *f,
+ 	if (use_bank) {
+ 		if ((sh_bank != 0xFFFFFFFF && sh_bank >= adev->gfx.config.max_sh_per_se) ||
+ 		    (se_bank != 0xFFFFFFFF && se_bank >= adev->gfx.config.max_shader_engines)) {
+-			pm_runtime_mark_last_busy(adev_to_drm(adev)->dev);
+ 			pm_runtime_put_autosuspend(adev_to_drm(adev)->dev);
+ 			amdgpu_virt_disable_access_debugfs(adev);
+ 			return -EINVAL;
+@@ -179,7 +178,6 @@ static int  amdgpu_debugfs_process_reg_op(bool read, struct file *f,
+ 	if (pm_pg_lock)
+ 		mutex_unlock(&adev->pm.mutex);
+ 
+-	pm_runtime_mark_last_busy(adev_to_drm(adev)->dev);
+ 	pm_runtime_put_autosuspend(adev_to_drm(adev)->dev);
+ 
+ 	amdgpu_virt_disable_access_debugfs(adev);
+@@ -255,7 +253,6 @@ static ssize_t amdgpu_debugfs_regs2_op(struct file *f, char __user *buf, u32 off
+ 	if (rd->id.use_grbm) {
+ 		if ((rd->id.grbm.sh != 0xFFFFFFFF && rd->id.grbm.sh >= adev->gfx.config.max_sh_per_se) ||
+ 		    (rd->id.grbm.se != 0xFFFFFFFF && rd->id.grbm.se >= adev->gfx.config.max_shader_engines)) {
+-			pm_runtime_mark_last_busy(adev_to_drm(adev)->dev);
+ 			pm_runtime_put_autosuspend(adev_to_drm(adev)->dev);
+ 			amdgpu_virt_disable_access_debugfs(adev);
+ 			mutex_unlock(&rd->lock);
+@@ -310,7 +307,6 @@ static ssize_t amdgpu_debugfs_regs2_op(struct file *f, char __user *buf, u32 off
+ 
+ 	mutex_unlock(&rd->lock);
+ 
+-	pm_runtime_mark_last_busy(adev_to_drm(adev)->dev);
+ 	pm_runtime_put_autosuspend(adev_to_drm(adev)->dev);
+ 
+ 	amdgpu_virt_disable_access_debugfs(adev);
+@@ -446,7 +442,6 @@ static ssize_t amdgpu_debugfs_gprwave_read(struct file *f, char __user *buf, siz
+ 	amdgpu_gfx_select_se_sh(adev, 0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, rd->id.xcc_id);
+ 	mutex_unlock(&adev->grbm_idx_mutex);
+ 
+-	pm_runtime_mark_last_busy(adev_to_drm(adev)->dev);
+ 	pm_runtime_put_autosuspend(adev_to_drm(adev)->dev);
+ 
+ 	if (!x) {
+@@ -557,7 +552,6 @@ static ssize_t amdgpu_debugfs_regs_pcie_read(struct file *f, char __user *buf,
+ 
+ 	r = result;
+ out:
+-	pm_runtime_mark_last_busy(adev_to_drm(adev)->dev);
+ 	pm_runtime_put_autosuspend(adev_to_drm(adev)->dev);
+ 	amdgpu_virt_disable_access_debugfs(adev);
+ 	return r;
+@@ -617,7 +611,6 @@ static ssize_t amdgpu_debugfs_regs_pcie_write(struct file *f, const char __user
+ 
+ 	r = result;
+ out:
+-	pm_runtime_mark_last_busy(adev_to_drm(adev)->dev);
+ 	pm_runtime_put_autosuspend(adev_to_drm(adev)->dev);
+ 	amdgpu_virt_disable_access_debugfs(adev);
+ 	return r;
+@@ -676,7 +669,6 @@ static ssize_t amdgpu_debugfs_regs_didt_read(struct file *f, char __user *buf,
+ 
+ 	r = result;
+ out:
+-	pm_runtime_mark_last_busy(adev_to_drm(adev)->dev);
+ 	pm_runtime_put_autosuspend(adev_to_drm(adev)->dev);
+ 	amdgpu_virt_disable_access_debugfs(adev);
+ 	return r;
+@@ -736,7 +728,6 @@ static ssize_t amdgpu_debugfs_regs_didt_write(struct file *f, const char __user
+ 
+ 	r = result;
+ out:
+-	pm_runtime_mark_last_busy(adev_to_drm(adev)->dev);
+ 	pm_runtime_put_autosuspend(adev_to_drm(adev)->dev);
+ 	amdgpu_virt_disable_access_debugfs(adev);
+ 	return r;
+@@ -795,7 +786,6 @@ static ssize_t amdgpu_debugfs_regs_smc_read(struct file *f, char __user *buf,
+ 
+ 	r = result;
+ out:
+-	pm_runtime_mark_last_busy(adev_to_drm(adev)->dev);
+ 	pm_runtime_put_autosuspend(adev_to_drm(adev)->dev);
+ 	amdgpu_virt_disable_access_debugfs(adev);
+ 	return r;
+@@ -855,7 +845,6 @@ static ssize_t amdgpu_debugfs_regs_smc_write(struct file *f, const char __user *
+ 
+ 	r = result;
+ out:
+-	pm_runtime_mark_last_busy(adev_to_drm(adev)->dev);
+ 	pm_runtime_put_autosuspend(adev_to_drm(adev)->dev);
+ 	amdgpu_virt_disable_access_debugfs(adev);
+ 	return r;
+@@ -1003,7 +992,6 @@ static ssize_t amdgpu_debugfs_sensor_read(struct file *f, char __user *buf,
+ 
+ 	r = amdgpu_dpm_read_sensor(adev, idx, &values[0], &valuesize);
+ 
+-	pm_runtime_mark_last_busy(adev_to_drm(adev)->dev);
+ 	pm_runtime_put_autosuspend(adev_to_drm(adev)->dev);
+ 
+ 	if (r) {
+@@ -1094,7 +1082,6 @@ static ssize_t amdgpu_debugfs_wave_read(struct file *f, char __user *buf,
+ 	amdgpu_gfx_select_se_sh(adev, 0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0);
+ 	mutex_unlock(&adev->grbm_idx_mutex);
+ 
+-	pm_runtime_mark_last_busy(adev_to_drm(adev)->dev);
+ 	pm_runtime_put_autosuspend(adev_to_drm(adev)->dev);
+ 
+ 	if (!x) {
+@@ -1192,7 +1179,6 @@ static ssize_t amdgpu_debugfs_gpr_read(struct file *f, char __user *buf,
+ 	amdgpu_gfx_select_se_sh(adev, 0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0);
+ 	mutex_unlock(&adev->grbm_idx_mutex);
+ 
+-	pm_runtime_mark_last_busy(adev_to_drm(adev)->dev);
+ 	pm_runtime_put_autosuspend(adev_to_drm(adev)->dev);
+ 
+ 	while (size) {
+@@ -1266,7 +1252,6 @@ static ssize_t amdgpu_debugfs_gfxoff_residency_read(struct file *f, char __user
+ 
+ 	r = result;
+ out:
+-	pm_runtime_mark_last_busy(adev_to_drm(adev)->dev);
+ 	pm_runtime_put_autosuspend(adev_to_drm(adev)->dev);
+ 
+ 	return r;
+@@ -1315,7 +1300,6 @@ static ssize_t amdgpu_debugfs_gfxoff_residency_write(struct file *f, const char
+ 
+ 	r = result;
+ out:
+-	pm_runtime_mark_last_busy(adev_to_drm(adev)->dev);
+ 	pm_runtime_put_autosuspend(adev_to_drm(adev)->dev);
+ 
+ 	return r;
+@@ -1365,7 +1349,6 @@ static ssize_t amdgpu_debugfs_gfxoff_count_read(struct file *f, char __user *buf
+ 
+ 	r = result;
+ out:
+-	pm_runtime_mark_last_busy(adev_to_drm(adev)->dev);
+ 	pm_runtime_put_autosuspend(adev_to_drm(adev)->dev);
+ 
+ 	return r;
+@@ -1414,7 +1397,6 @@ static ssize_t amdgpu_debugfs_gfxoff_write(struct file *f, const char __user *bu
+ 
+ 	r = result;
+ out:
+-	pm_runtime_mark_last_busy(adev_to_drm(adev)->dev);
+ 	pm_runtime_put_autosuspend(adev_to_drm(adev)->dev);
+ 
+ 	return r;
+@@ -1460,7 +1442,6 @@ static ssize_t amdgpu_debugfs_gfxoff_read(struct file *f, char __user *buf,
+ 
+ 	r = result;
+ out:
+-	pm_runtime_mark_last_busy(adev_to_drm(adev)->dev);
+ 	pm_runtime_put_autosuspend(adev_to_drm(adev)->dev);
+ 
+ 	return r;
+@@ -1501,7 +1482,6 @@ static ssize_t amdgpu_debugfs_gfxoff_status_read(struct file *f, char __user *bu
+ 
+ 	r = result;
+ out:
+-	pm_runtime_mark_last_busy(adev_to_drm(adev)->dev);
+ 	pm_runtime_put_autosuspend(adev_to_drm(adev)->dev);
+ 
+ 	return r;
+@@ -1701,7 +1681,6 @@ static int amdgpu_debugfs_test_ib_show(struct seq_file *m, void *unused)
+ 
+ 	up_write(&adev->reset_domain->sem);
+ 
+-	pm_runtime_mark_last_busy(dev->dev);
+ 	pm_runtime_put_autosuspend(dev->dev);
+ 
+ 	return 0;
+@@ -1721,7 +1700,6 @@ static int amdgpu_debugfs_evict_vram(void *data, u64 *val)
+ 
+ 	*val = amdgpu_ttm_evict_resources(adev, TTM_PL_VRAM);
+ 
+-	pm_runtime_mark_last_busy(dev->dev);
+ 	pm_runtime_put_autosuspend(dev->dev);
+ 
+ 	return 0;
+@@ -1742,7 +1720,6 @@ static int amdgpu_debugfs_evict_gtt(void *data, u64 *val)
+ 
+ 	*val = amdgpu_ttm_evict_resources(adev, TTM_PL_TT);
+ 
+-	pm_runtime_mark_last_busy(dev->dev);
+ 	pm_runtime_put_autosuspend(dev->dev);
+ 
+ 	return 0;
+@@ -1762,7 +1739,6 @@ static int amdgpu_debugfs_benchmark(void *data, u64 val)
+ 
+ 	r = amdgpu_benchmark(adev, val);
+ 
+-	pm_runtime_mark_last_busy(dev->dev);
+ 	pm_runtime_put_autosuspend(dev->dev);
+ 
+ 	return r;
+@@ -2014,7 +1990,6 @@ static int amdgpu_debugfs_sclk_set(void *data, u64 val)
+ 		ret = -EINVAL;
+ 
+ out:
+-	pm_runtime_mark_last_busy(adev_to_drm(adev)->dev);
+ 	pm_runtime_put_autosuspend(adev_to_drm(adev)->dev);
+ 
+ 	return ret;
+diff --git a/drivers/gpu/drm/amd/amdgpu/amdgpu_display.c b/drivers/gpu/drm/amd/amdgpu/amdgpu_display.c
+index 51bab32fd8c6..eca8443d9256 100644
+--- a/drivers/gpu/drm/amd/amdgpu/amdgpu_display.c
++++ b/drivers/gpu/drm/amd/amdgpu/amdgpu_display.c
+@@ -332,8 +332,6 @@ int amdgpu_display_crtc_set_config(struct drm_mode_set *set,
+ 		if (crtc->enabled)
+ 			active = true;
+ 
+-	pm_runtime_mark_last_busy(dev->dev);
+-
+ 	adev = drm_to_adev(dev);
+ 	/* if we have active crtcs and we don't have a power ref,
+ 	 * take the current one
+diff --git a/drivers/gpu/drm/amd/amdgpu/amdgpu_drv.c b/drivers/gpu/drm/amd/amdgpu/amdgpu_drv.c
+index a36e15beafeb..f159515b7d95 100644
+--- a/drivers/gpu/drm/amd/amdgpu/amdgpu_drv.c
++++ b/drivers/gpu/drm/amd/amdgpu/amdgpu_drv.c
+@@ -2228,7 +2228,6 @@ static void amdgpu_get_secondary_funcs(struct amdgpu_device *adev)
+ 						adev->pdev->bus->number, i);
+ 		if (p) {
+ 			pm_runtime_get_sync(&p->dev);
+-			pm_runtime_mark_last_busy(&p->dev);
+ 			pm_runtime_put_autosuspend(&p->dev);
+ 			pci_dev_put(p);
+ 		}
+@@ -2474,7 +2473,6 @@ static int amdgpu_pci_probe(struct pci_dev *pdev,
+ 
+ 		pm_runtime_allow(ddev->dev);
+ 
+-		pm_runtime_mark_last_busy(ddev->dev);
+ 		pm_runtime_put_autosuspend(ddev->dev);
+ 
+ 		pci_wake_from_d3(pdev, TRUE);
+@@ -2934,7 +2932,6 @@ static int amdgpu_pmops_runtime_idle(struct device *dev)
+ 
+ 	ret = amdgpu_runtime_idle_check_userq(dev);
+ done:
+-	pm_runtime_mark_last_busy(dev);
+ 	pm_runtime_autosuspend(dev);
+ 	return ret;
+ }
+@@ -2970,7 +2967,6 @@ long amdgpu_drm_ioctl(struct file *filp,
+ 
+ 	ret = drm_ioctl(filp, cmd, arg);
+ 
+-	pm_runtime_mark_last_busy(dev->dev);
+ out:
+ 	pm_runtime_put_autosuspend(dev->dev);
+ 	return ret;
+diff --git a/drivers/gpu/drm/amd/amdgpu/amdgpu_fence.c b/drivers/gpu/drm/amd/amdgpu/amdgpu_fence.c
+index 1fe31d2f2706..c7843e336310 100644
+--- a/drivers/gpu/drm/amd/amdgpu/amdgpu_fence.c
++++ b/drivers/gpu/drm/amd/amdgpu/amdgpu_fence.c
+@@ -250,7 +250,6 @@ bool amdgpu_fence_process(struct amdgpu_ring *ring)
+ 		drv->signalled_wptr = am_fence->wptr;
+ 		dma_fence_signal(fence);
+ 		dma_fence_put(fence);
+-		pm_runtime_mark_last_busy(adev_to_drm(adev)->dev);
+ 		pm_runtime_put_autosuspend(adev_to_drm(adev)->dev);
+ 	} while (last_seq != seq);
+ 
+@@ -928,7 +927,6 @@ static int gpu_recover_get(void *data, u64 *val)
+ 
+ 	*val = atomic_read(&adev->reset_domain->reset_res);
+ 
+-	pm_runtime_mark_last_busy(dev->dev);
+ 	pm_runtime_put_autosuspend(dev->dev);
+ 
+ 	return 0;
+diff --git a/drivers/gpu/drm/amd/amdgpu/amdgpu_gfx.c b/drivers/gpu/drm/amd/amdgpu/amdgpu_gfx.c
+index 29c927f4d6df..8b118c53f351 100644
+--- a/drivers/gpu/drm/amd/amdgpu/amdgpu_gfx.c
++++ b/drivers/gpu/drm/amd/amdgpu/amdgpu_gfx.c
+@@ -1670,7 +1670,6 @@ static ssize_t amdgpu_gfx_set_run_cleaner_shader(struct device *dev,
+ 
+ 	ret = amdgpu_gfx_run_cleaner_shader(adev, value);
+ 
+-	pm_runtime_mark_last_busy(ddev->dev);
+ 	pm_runtime_put_autosuspend(ddev->dev);
+ 
+ 	if (ret)
+diff --git a/drivers/gpu/drm/amd/amdgpu/amdgpu_kms.c b/drivers/gpu/drm/amd/amdgpu/amdgpu_kms.c
+index b3e6b3fcdf2c..6ee77f431d56 100644
+--- a/drivers/gpu/drm/amd/amdgpu/amdgpu_kms.c
++++ b/drivers/gpu/drm/amd/amdgpu/amdgpu_kms.c
+@@ -1471,7 +1471,6 @@ int amdgpu_driver_open_kms(struct drm_device *dev, struct drm_file *file_priv)
+ 	kfree(fpriv);
+ 
+ out_suspend:
+-	pm_runtime_mark_last_busy(dev->dev);
+ pm_put:
+ 	pm_runtime_put_autosuspend(dev->dev);
+ 
+@@ -1539,7 +1538,6 @@ void amdgpu_driver_postclose_kms(struct drm_device *dev,
+ 	kfree(fpriv);
+ 	file_priv->driver_priv = NULL;
+ 
+-	pm_runtime_mark_last_busy(dev->dev);
+ 	pm_runtime_put_autosuspend(dev->dev);
+ }
+ 
+diff --git a/drivers/gpu/drm/amd/amdgpu/amdgpu_rap.c b/drivers/gpu/drm/amd/amdgpu/amdgpu_rap.c
+index 123bcf5c2bb1..bacf888735db 100644
+--- a/drivers/gpu/drm/amd/amdgpu/amdgpu_rap.c
++++ b/drivers/gpu/drm/amd/amdgpu/amdgpu_rap.c
+@@ -101,7 +101,6 @@ static ssize_t amdgpu_rap_debugfs_write(struct file *f, const char __user *buf,
+ 	}
+ 
+ 	amdgpu_gfx_off_ctrl(adev, true);
+-	pm_runtime_mark_last_busy(dev->dev);
+ 	pm_runtime_put_autosuspend(dev->dev);
+ 
+ 	return size;
+diff --git a/drivers/gpu/drm/amd/amdgpu/amdgpu_ras.c b/drivers/gpu/drm/amd/amdgpu/amdgpu_ras.c
+index ff34e1c0d9e2..c806d4af8c05 100644
+--- a/drivers/gpu/drm/amd/amdgpu/amdgpu_ras.c
++++ b/drivers/gpu/drm/amd/amdgpu/amdgpu_ras.c
+@@ -4099,7 +4099,6 @@ static void amdgpu_ras_counte_dw(struct work_struct *work)
+ 		atomic_set(&con->ras_ue_count, ue_count);
+ 	}
+ 
+-	pm_runtime_mark_last_busy(dev->dev);
+ Out:
+ 	pm_runtime_put_autosuspend(dev->dev);
+ }
+diff --git a/drivers/gpu/drm/amd/amdgpu/amdgpu_securedisplay.c b/drivers/gpu/drm/amd/amdgpu/amdgpu_securedisplay.c
+index 41ebe690eeff..3739be1b71e0 100644
+--- a/drivers/gpu/drm/amd/amdgpu/amdgpu_securedisplay.c
++++ b/drivers/gpu/drm/amd/amdgpu/amdgpu_securedisplay.c
+@@ -159,7 +159,6 @@ static ssize_t amdgpu_securedisplay_debugfs_write(struct file *f, const char __u
+ 		dev_err(adev->dev, "Invalid input: %s\n", str);
+ 	}
+ 
+-	pm_runtime_mark_last_busy(dev->dev);
+ 	pm_runtime_put_autosuspend(dev->dev);
+ 
+ 	return size;
+diff --git a/drivers/gpu/drm/amd/amdgpu/amdgpu_userq.c b/drivers/gpu/drm/amd/amdgpu/amdgpu_userq.c
+index 9d4751a39c20..3f75d5daa5a8 100644
+--- a/drivers/gpu/drm/amd/amdgpu/amdgpu_userq.c
++++ b/drivers/gpu/drm/amd/amdgpu/amdgpu_userq.c
+@@ -479,7 +479,6 @@ amdgpu_userq_destroy(struct drm_file *filp, int queue_id)
+ 	amdgpu_userq_cleanup(uq_mgr, queue, queue_id);
+ 	mutex_unlock(&uq_mgr->userq_mutex);
+ 
+-	pm_runtime_mark_last_busy(adev_to_drm(adev)->dev);
+ 	pm_runtime_put_autosuspend(adev_to_drm(adev)->dev);
+ 
+ 	return r;
+diff --git a/drivers/gpu/drm/amd/amdkfd/kfd_process.c b/drivers/gpu/drm/amd/amdkfd/kfd_process.c
+index ddfe30c13e9d..9e30b9df6d53 100644
+--- a/drivers/gpu/drm/amd/amdkfd/kfd_process.c
++++ b/drivers/gpu/drm/amd/amdkfd/kfd_process.c
+@@ -1083,7 +1083,6 @@ static void kfd_process_destroy_pdds(struct kfd_process *p)
+ 		 * for auto suspend
+ 		 */
+ 		if (pdd->runtime_inuse) {
+-			pm_runtime_mark_last_busy(adev_to_drm(pdd->dev->adev)->dev);
+ 			pm_runtime_put_autosuspend(adev_to_drm(pdd->dev->adev)->dev);
+ 			pdd->runtime_inuse = false;
+ 		}
+diff --git a/drivers/gpu/drm/amd/pm/amdgpu_pm.c b/drivers/gpu/drm/amd/pm/amdgpu_pm.c
+index c83d69994380..c88a76cce401 100644
+--- a/drivers/gpu/drm/amd/pm/amdgpu_pm.c
++++ b/drivers/gpu/drm/amd/pm/amdgpu_pm.c
+@@ -174,7 +174,6 @@ static int amdgpu_pm_get_access_if_active(struct amdgpu_device *adev)
+  */
+ static inline void amdgpu_pm_put_access(struct amdgpu_device *adev)
+ {
+-	pm_runtime_mark_last_busy(adev->dev);
+ 	pm_runtime_put_autosuspend(adev->dev);
+ }
+ 
 -- 
-2.51.0
+2.47.3
 
