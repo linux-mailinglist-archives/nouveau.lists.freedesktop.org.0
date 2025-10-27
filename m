@@ -2,57 +2,60 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id 67F7BCBAC46
-	for <lists+nouveau@lfdr.de>; Sat, 13 Dec 2025 13:43:51 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 798DCC87220
+	for <lists+nouveau@lfdr.de>; Tue, 25 Nov 2025 21:48:26 +0100 (CET)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 536A210EAB1;
-	Sat, 13 Dec 2025 12:41:08 +0000 (UTC)
-Authentication-Results: gabe.freedesktop.org;
-	dkim=pass (2048-bit key; secure) header.d=mailbox.org header.i=@mailbox.org header.b="jBA31kvc";
-	dkim-atps=neutral
+	by gabe.freedesktop.org (Postfix) with ESMTP id EFF8610E50B;
+	Tue, 25 Nov 2025 20:47:35 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-X-Greylist: delayed 312 seconds by postgrey-1.36 at gabe;
- Mon, 27 Oct 2025 13:05:40 UTC
-Received: from mout-p-103.mailbox.org (mout-p-103.mailbox.org [80.241.56.161])
- by gabe.freedesktop.org (Postfix) with ESMTPS id AC48510E485
- for <nouveau@lists.freedesktop.org>; Mon, 27 Oct 2025 13:05:40 +0000 (UTC)
-Received: from smtp202.mailbox.org (smtp202.mailbox.org
- [IPv6:2001:67c:2050:b231:465::202])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
- (No client certificate requested)
- by mout-p-103.mailbox.org (Postfix) with ESMTPS id 4cwDBc5hb1z9str;
- Mon, 27 Oct 2025 14:00:24 +0100 (CET)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
- s=mail20150812; 
- t=1761570024; h=from:from:reply-to:reply-to:subject:subject:date:date:
- message-id:message-id:to:to:cc:cc:mime-version:mime-version:
- content-type:content-type:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references;
- bh=5788PWM/VBgk1tGTTY2kWxTv5vFa3dzGCv9B4Lw0uE0=;
- b=jBA31kvc5mDtFmdGEQ/0gMKqXWZI5B3jOZpTnCIzzdlnOK2i9w4bYVF4vCiCdoP/FLcmzA
- kLdB03QzkgKDb2rJt+PeEoiffmkTcsbXaMz7Y1pAwiDW+pHzO9A3g1hUrGva46WUhn7yzK
- lZFdfqpLxTyD4XcJ+hqCNkpN8DkmNwdjaBoy/Pzu1ks94NZJKPkkuhltGUdYAsNwDbuL0t
- M4ZxgcqMme5UasmeV1iF0784ST9VdAiMAhEfyHR1uS31C2/Gvx0HrNteRUpqdaQ4f5kOC4
- hiUgqT8oJeuFzT5HnGwo4b5QQVeHJmj6LRx9CZBByYdcVSeqG4iH558CPdOxRw==
-Message-ID: <5b22257b90d5df1c4a6b02f9472f11588208c4b5.camel@mailbox.org>
-Subject: Re: [PATCH] drm/nouveau: Fix race in nouveau_sched_fini()
-From: Philipp Stanner <phasta@mailbox.org>
-To: Danilo Krummrich <dakr@kernel.org>, Philipp Stanner <phasta@kernel.org>
-Cc: dri-devel@lists.freedesktop.org, nouveau@lists.freedesktop.org, 
- linux-kernel@vger.kernel.org, stable@vger.kernel.org
-Date: Mon, 27 Oct 2025 14:00:15 +0100
-In-Reply-To: <25c97722-e05d-467c-908e-baa31e636a44@kernel.org>
-References: <20251024161221.196155-2-phasta@kernel.org>
- <25c97722-e05d-467c-908e-baa31e636a44@kernel.org>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+Received: from foss.arm.com (foss.arm.com [217.140.110.172])
+ by gabe.freedesktop.org (Postfix) with ESMTP id 58D6010E4CB;
+ Mon, 27 Oct 2025 15:05:17 +0000 (UTC)
+Received: from usa-sjc-imap-foss1.foss.arm.com (unknown [10.121.207.14])
+ by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id 18DB4169E;
+ Mon, 27 Oct 2025 08:05:09 -0700 (PDT)
+Received: from arm.com (usa-sjc-imap-foss1.foss.arm.com [10.121.207.14])
+ by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id 31C583F673;
+ Mon, 27 Oct 2025 08:05:11 -0700 (PDT)
+Date: Mon, 27 Oct 2025 16:05:11 +0100
+From: Beata Michalska <beata.michalska@arm.com>
+To: Danilo Krummrich <dakr@kernel.org>
+Cc: Joel Fernandes <joelagnelf@nvidia.com>,
+ "linux-kernel@vger.kernel.org" <linux-kernel@vger.kernel.org>,
+ "rust-for-linux@vger.kernel.org" <rust-for-linux@vger.kernel.org>,
+ "dri-devel@lists.freedesktop.org" <dri-devel@lists.freedesktop.org>,
+ Alexandre Courbot <acourbot@nvidia.com>,
+ Alistair Popple <apopple@nvidia.com>, Miguel Ojeda <ojeda@kernel.org>,
+ Alex Gaynor <alex.gaynor@gmail.com>,
+ Boqun Feng <boqun.feng@gmail.com>, Gary Guo <gary@garyguo.net>,
+ "bjorn3_gh@protonmail.com" <bjorn3_gh@protonmail.com>,
+ Benno Lossin <lossin@kernel.org>, Andreas Hindborg <a.hindborg@kernel.org>,
+ Alice Ryhl <aliceryhl@google.com>, Trevor Gross <tmgross@umich.edu>,
+ David Airlie <airlied@gmail.com>, Simona Vetter <simona@ffwll.ch>,
+ Maarten Lankhorst <maarten.lankhorst@linux.intel.com>,
+ Maxime Ripard <mripard@kernel.org>,
+ Thomas Zimmermann <tzimmermann@suse.de>,
+ John Hubbard <jhubbard@nvidia.com>, Timur Tabi <ttabi@nvidia.com>,
+ "joel@joelfernandes.org" <joel@joelfernandes.org>,
+ Elle Rhumsaa <elle@weathered-steel.dev>, Yury Norov <yury.norov@gmail.com>,
+ Daniel Almeida <daniel.almeida@collabora.com>,
+ Andrea Righi <arighi@nvidia.com>,
+ "nouveau@lists.freedesktop.org" <nouveau@lists.freedesktop.org>
+Subject: Re: [PATCH v6 4/5] rust: Move register and bitfield macros out of Nova
+Message-ID: <aP-KJ0bGAWO7AVO_@arm.com>
+References: <20251003154748.1687160-1-joelagnelf@nvidia.com>
+ <20251003154748.1687160-5-joelagnelf@nvidia.com>
+ <aPklNydcTdOeXtdU@arm.com>
+ <ACAA327A-AE2B-4D21-B8C5-C66BB5E09B7C@nvidia.com>
+ <aPozw8TGp85YdmNU@arm.com>
+ <47d6ab72-1526-457d-990a-928088ba7022@nvidia.com>
+ <aP82DHvLC7zAEojN@arm.com> <DDT0JTP91GO3.1EHF6L8MX4I3T@kernel.org>
 MIME-Version: 1.0
-X-MBO-RS-META: t19ydhdbzc3pnxf3frk84k717hbxabab
-X-MBO-RS-ID: ad959cffc22c1f1fbba
-X-Mailman-Approved-At: Sat, 13 Dec 2025 12:40:51 +0000
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <DDT0JTP91GO3.1EHF6L8MX4I3T@kernel.org>
+X-Mailman-Approved-At: Tue, 25 Nov 2025 20:47:23 +0000
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -64,27 +67,46 @@ List-Post: <mailto:nouveau@lists.freedesktop.org>
 List-Help: <mailto:nouveau-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
  <mailto:nouveau-request@lists.freedesktop.org?subject=subscribe>
-Reply-To: phasta@kernel.org
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-On Fri, 2025-10-24 at 18:17 +0200, Danilo Krummrich wrote:
-> On 10/24/25 6:12 PM, Philipp Stanner wrote:
-> > nouveau_sched_fini() uses a memory barrier before wait_event().
-> > wait_event(), however, is a macro which expands to a loop which might
-> > check the passed condition several times. The barrier would only take
-> > effect for the first check.
-> >=20
-> > Replace the barrier with a function which takes the spinlock.
-> >=20
-> > Cc: stable@vger.kernel.org=C2=A0# v6.8+
-> > Fixes: 5f03a507b29e ("drm/nouveau: implement 1:1 scheduler - entity rel=
-ationship")
-> > Signed-off-by: Philipp Stanner <phasta@kernel.org>
->=20
-> Acked-by: Danilo Krummrich <dakr@kernel.org>
+On Mon, Oct 27, 2025 at 10:56:41AM +0100, Danilo Krummrich wrote:
+> On Mon Oct 27, 2025 at 10:06 AM CET, Beata Michalska wrote:
+> > It's more theoretical at this point, but there are drivers that do rely on
+> > information from either DT or ACPI tables for the base address and size of the
+> > MMIO region: anything that uses devm_platform_ioremap_resource() or
+> > devm_platform_ioremap_resource_byname() I guess.
+> 
+> Don't get confused, those are two different things: The size of the MMIO region
+> (or a PCI BAR) and the const SIZE generic in Io<SIZE> are two different things.
+> 
+> The former is the actual size of an MMIO region, whereas the latter is the
+> minimum size requested by a driver for proper operation.
+> 
+> For instance, let's assume your driver requests ten contiguous 32-bit registers
+> starting at offset zero of an MMIO region.
+> 
+> In this case you can call req.iomap_sized<0x28>(), because you know that your
+> driver is not able to properly work without an MMIO region with at least a width
+> of 0x28 bytes.
+> 
+> The actual size of the MMIO region returned by req.iomap_sized<0x28>() may
+> indeed be smaller or larger than that, depending on what is defined in the DT,
+> ACPI or PCI BAR.
+> 
+> If smaller than the const SIZE generic, the call to req.iomap_sized<0x28>() will
+> fail, otherwise it will be successful. The actual size of the MMIO region is not
+> influenced by the const SIZE generic.
+I appreciate the explanation.
+I think my confusion here comes from the fact that I was assuming there is an
+intent to accommodate different MMIO regions sizes for various device revisions,
+and not expecting all drivers to explicitly call the iomap_sized in all cases.
+My bad then.
+Again, thanks for clarifying that.
 
-Applied to drm-misc-fixes
+
+---
+Best Regards
+Beata
 
 
-P.
