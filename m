@@ -2,176 +2,144 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id CDE84C0F0ED
-	for <lists+nouveau@lfdr.de>; Mon, 27 Oct 2025 16:52:41 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 9C520C0FB2C
+	for <lists+nouveau@lfdr.de>; Mon, 27 Oct 2025 18:38:06 +0100 (CET)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id EF1FC10E4DD;
-	Mon, 27 Oct 2025 15:52:38 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 1A51210E523;
+	Mon, 27 Oct 2025 17:38:04 +0000 (UTC)
 Authentication-Results: gabe.freedesktop.org;
-	dkim=pass (1024-bit key; unprotected) header.d=amd.com header.i=@amd.com header.b="PgzPstt1";
+	dkim=pass (2048-bit key; unprotected) header.d=Nvidia.com header.i=@Nvidia.com header.b="M/UQn/v3";
 	dkim-atps=neutral
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from BYAPR05CU005.outbound.protection.outlook.com
- (mail-westusazon11010041.outbound.protection.outlook.com [52.101.85.41])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 4850310E0DC;
- Mon, 27 Oct 2025 15:52:37 +0000 (UTC)
+Received: from DM1PR04CU001.outbound.protection.outlook.com
+ (mail-centralusazon11010033.outbound.protection.outlook.com [52.101.61.33])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 2582B10E521;
+ Mon, 27 Oct 2025 17:38:02 +0000 (UTC)
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=Hx59h/cmtzk9Ts1M3Zuwfb/+ehsIA2E4kh2dx4xu9CifxtiH6Cjpd4WWxS/VDVHPy2e/seZplgi90vcWxJtRNE1D2bqCzFEje8fgfdkClBjyt2hN057e61ucnPhR452dysL9do6CfWjxrfgdUQS3mgAetckpIxPyGay8ElBcWEpe12wlvt0GXzqXEYSSw0ymmtcDw4Zs4K96Bb9UHGWGHY3ynrelq0YbMRxs+yR66VLo50wpRRZ5s+oyXvZWkOFFwJPHso9Rwsmvytb27GX+fBdqthip0/5ALUW/eLo2YmADCFHIttcNruuEvA/oTPyDs7hKQMZU+zihqMq4YMjusA==
+ b=QNbrTwS1JiXQuBTl+UfuZoapIS77LRDYv3MFZ25Fg68xjHrgZtkXYGKsg91FlspXFPMTekzQETRmCkNXg7eeJED5tFVh39lb15YEK4M57vZxU+6/aDapGb4KGd2++XBEutikd+6IZxOG3nQmE6+uBqdCDxbBWtw05Y6J2+qFX7QIVGZw/fVuyHma3f3LSAAEppcLAavv06E+oP5BWbmD3YYbhyQPpz+Y0jRxnw7Oi77+VrXUJOLHO5qum93kMStpc80xKSQ7uSJimDe6+0c8iNze/v2VyEFk7zeXuztt842xcyis2CfBBobaocezcFiiSgp52FY3GMpNcd1jY5917Q==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
  s=arcselector10001;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=NDBU/Ck+cVKGmmRC9bq/IXW3SZ4QriYaDjTIkPEhNOo=;
- b=PT4W95QEaFo53XuMq3EUbgw29wy+lrNyZo1aNVcV9s8+97k7jqu9n9YB2E79HmU9WtUyRuEfHdPXvQ8FPFmdA9IqX3GGDY5OIK3/PVnX4iUOqVxDZoMzXj6BYgi4nCe2pCuLPM1DwURS40jIWP/7GzxmEAnA7AzpmeW628YGeyPxwLvpmas1/fLHnlGT+xjxbeM0waKFA3OetMQUR9fajpTeK31BS5C3qKqvJTx2NlBudd3Zk5ODAVRo9X979/yf+w2DgbIBG9+ZKrv8b/7+MGcKgTQnzpLj82EP+LJ+sDI6O5xlSWC3ZmENr+EZiLyVbbq8zxTQQ5nzmF0Zf9oDVw==
+ bh=t0LESYIu5Xu2BoZEen3TsmF3SRKu6EQEA4H4XSJplNU=;
+ b=HsS8aDrw8oMLEn27EgTNzQ1D/F9A/8WzBau/bJqAKYIbyoy/TW7ylp7zu/838/NpYiM/gbzTtoFJKFPAUpZO4dAqFoi38OkJIUxebcIuewobz3sTqWxgm2sxEFWtgVseR6L7adNutJYRvSbhN1F+4TbRT2zp4SHTshKzi3RPfuYWjFOD8Mh1aS0xFCrULLoSQ24EbMOoWI8LD6kr//FUcnptDHg9OenMiSRKDratWzFdHsR4O7zCz7pgcl4MIm0+orPJS0SIPX3SuPn2WUapWC2MrcRJZxY6tLafc2fOsfvjWTw1jYIPzNsOPadebtJ5H+Pg+/w2m6DGQIVClezSbA==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=amd.com; dmarc=pass action=none header.from=amd.com; dkim=pass
- header.d=amd.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1; 
+ smtp.mailfrom=nvidia.com; dmarc=pass action=none header.from=nvidia.com;
+ dkim=pass header.d=nvidia.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=Nvidia.com;
+ s=selector2;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=NDBU/Ck+cVKGmmRC9bq/IXW3SZ4QriYaDjTIkPEhNOo=;
- b=PgzPstt1rPZqkTMab9NTKjh/2/yXuyqfExf1caAQ4U8mUOxmw38/0TYV1UsQrUWDH3IbSZ+b9wSNVw8Ap4pUSe0+quv9fLdfhLLPq7bpBN9ksJpzaWYZNvafFL331e2IR7rryjfA1stplqfuf6pVKaQJw0Vrq8duzFaoVUPlIaE=
-Received: from BL1PR12MB5144.namprd12.prod.outlook.com (2603:10b6:208:316::6)
- by PH7PR12MB6586.namprd12.prod.outlook.com (2603:10b6:510:212::21)
+ bh=t0LESYIu5Xu2BoZEen3TsmF3SRKu6EQEA4H4XSJplNU=;
+ b=M/UQn/v3uz9RMZRg1z90itPAXrk1XAjQr/jVxrEuYh1hfmMZJsr86V/Jh2C2bIfoQQmCQ4/HvJ2T+BuiyIF7prcytHFKu4DMf5lB+VEdzppbKSjCf60kro8O81NztSQjJnqaPrv0NDK1FDsBmM7I4kGaZ4fLtsr6Bn9rNOVI2YtLu+mEwqCnrByOWfx4K00CVR1aAnwxlyVPG04WiFFexmLgYupWflq3Grdf5THNCihBoE2E86rkHKWdxdzCI8cfcXXXnV2+TxodBBF+DzR9MOhyrOM8IGQVxysoV2Toc0wQ5N17GPIERhpRUMTcvTVLGzZ3JGQdNbUgTpWXlagVOw==
+Authentication-Results: dkim=none (message not signed)
+ header.d=none;dmarc=none action=none header.from=nvidia.com;
+Received: from SN7PR12MB8059.namprd12.prod.outlook.com (2603:10b6:806:32b::7)
+ by MN0PR12MB6003.namprd12.prod.outlook.com (2603:10b6:208:37f::17)
  with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9253.18; Mon, 27 Oct
- 2025 15:52:28 +0000
-Received: from BL1PR12MB5144.namprd12.prod.outlook.com
- ([fe80::491a:cce3:e531:3c42]) by BL1PR12MB5144.namprd12.prod.outlook.com
- ([fe80::491a:cce3:e531:3c42%4]) with mapi id 15.20.9253.018; Mon, 27 Oct 2025
- 15:52:28 +0000
-From: "Deucher, Alexander" <Alexander.Deucher@amd.com>
-To: Sakari Ailus <sakari.ailus@linux.intel.com>,
- "dri-devel@lists.freedesktop.org" <dri-devel@lists.freedesktop.org>
-CC: "Koenig, Christian" <Christian.Koenig@amd.com>, David Airlie
- <airlied@gmail.com>, Simona Vetter <simona@ffwll.ch>, "Kuehling, Felix"
- <Felix.Kuehling@amd.com>, "Feng, Kenneth" <Kenneth.Feng@amd.com>, Lyude Paul
- <lyude@redhat.com>, Danilo Krummrich <dakr@kernel.org>, Maarten Lankhorst
- <maarten.lankhorst@linux.intel.com>, Maxime Ripard <mripard@kernel.org>,
- Thomas Zimmermann <tzimmermann@suse.de>, "Limonciello, Mario"
- <Mario.Limonciello@amd.com>, "Hung, Alex" <Alex.Hung@amd.com>, Antonio
- Quartulli <antonio@mandelbit.com>, "Nirujogi, Pratap"
- <Pratap.Nirujogi@amd.com>, "Lazar, Lijo" <Lijo.Lazar@amd.com>, Dmitry
- Baryshkov <lumag@kernel.org>, "SHANMUGAM, SRINIVASAN"
- <SRINIVASAN.SHANMUGAM@amd.com>, "Wang, Yang(Kevin)" <KevinYang.Wang@amd.com>, 
- "Khatri, Sunil" <Sunil.Khatri@amd.com>, "Zhang, Jesse(Jie)"
- <Jesse.Zhang@amd.com>, =?iso-8859-1?Q?Ville_Syrj=E4l=E4?=
- <ville.syrjala@linux.intel.com>, Liviu Dudau <liviu.dudau@arm.com>, Laurent
- Pinchart <laurent.pinchart+renesas@ideasonboard.com>, "Zhang, Hawking"
- <Hawking.Zhang@amd.com>, "Prosyak, Vitaly" <Vitaly.Prosyak@amd.com>, Arnd
- Bergmann <arnd@arndb.de>, Thomas Gleixner <tglx@linutronix.de>, Ingo Molnar
- <mingo@kernel.org>, Liao Yuanhong <liaoyuanhong@vivo.com>, Rodrigo Siqueira
- <siqueira@igalia.com>, "Liang, Prike" <Prike.Liang@amd.com>, "Sharma,
- Shashank" <Shashank.Sharma@amd.com>, "Paneer Selvam, Arunpravin"
- <Arunpravin.PaneerSelvam@amd.com>, "Zhou1, Tao" <Tao.Zhou1@amd.com>, "Chai,
- Thomas" <YiPeng.Chai@amd.com>, "Xie, Patrick" <Gangliang.Xie@amd.com>, "Liu,
- Xiang(Dean)" <Xiang.Liu@amd.com>, "Skvortsov, Victor"
- <Victor.Skvortsov@amd.com>, "Sun, Ce(Overlord)" <Ce.Sun@amd.com>, Dave Airlie
- <airlied@redhat.com>, Jani Nikula <jani.nikula@intel.com>, "Gustavo A. R.
- Silva" <gustavoars@kernel.org>, Imre Deak <imre.deak@intel.com>, Ben Skeggs
- <bskeggs@nvidia.com>, "nouveau@lists.freedesktop.org"
- <nouveau@lists.freedesktop.org>, "amd-gfx@lists.freedesktop.org"
- <amd-gfx@lists.freedesktop.org>
-Subject: RE: [PATCH 1/3] drm/amd: Remove redundant pm_runtime_mark_last_busy()
- calls
-Thread-Topic: [PATCH 1/3] drm/amd: Remove redundant
- pm_runtime_mark_last_busy() calls
-Thread-Index: AQHcR0O4f4fFeL6wWE2A1XIJtLj0/rTWJDNw
-Date: Mon, 27 Oct 2025 15:52:28 +0000
-Message-ID: <BL1PR12MB514490DCB870F296D1554C14F7FCA@BL1PR12MB5144.namprd12.prod.outlook.com>
-References: <20251027131440.392052-1-sakari.ailus@linux.intel.com>
-In-Reply-To: <20251027131440.392052-1-sakari.ailus@linux.intel.com>
-Accept-Language: en-US
-Content-Language: en-US
-X-MS-Has-Attach: 
-X-MS-TNEF-Correlator: 
-msip_labels: MSIP_Label_f265efc6-e181-49d6-80f4-fae95cf838a0_Enabled=True;
- MSIP_Label_f265efc6-e181-49d6-80f4-fae95cf838a0_SiteId=3dd8961f-e488-4e60-8e11-a82d994e183d;
- MSIP_Label_f265efc6-e181-49d6-80f4-fae95cf838a0_SetDate=2025-10-27T15:50:12.0000000Z;
- MSIP_Label_f265efc6-e181-49d6-80f4-fae95cf838a0_Name=Open
- Source; MSIP_Label_f265efc6-e181-49d6-80f4-fae95cf838a0_ContentBits=3;
- MSIP_Label_f265efc6-e181-49d6-80f4-fae95cf838a0_Method=Privileged
-authentication-results: dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=amd.com;
-x-ms-publictraffictype: Email
-x-ms-traffictypediagnostic: BL1PR12MB5144:EE_|PH7PR12MB6586:EE_
-x-ms-office365-filtering-correlation-id: 06a75bbf-55c6-4301-9d1e-08de1570d4c4
-x-ms-exchange-senderadcheck: 1
-x-ms-exchange-antispam-relay: 0
-x-microsoft-antispam: BCL:0;
- ARA:13230040|376014|7416014|1800799024|366016|38070700021; 
-x-microsoft-antispam-message-info: =?iso-8859-1?Q?h74wJ4u0yIqRNXV6AGVzzVAxQ+RgtptnySsow/kXliZNp/kbHnEDc2i8Gc?=
- =?iso-8859-1?Q?8Ii2RrCXsfGoyEhqJkx41Rx3e8tE9AirCdJtJLrVQzPAs2qxUvKKrXjcYc?=
- =?iso-8859-1?Q?nduF7KHyvFtr7nsDEj8uzqCUONj1sgU6kiOB/S6hu6fuIi1jRWBqm4X/XB?=
- =?iso-8859-1?Q?UQh9n6URw9eMbJ/l+txoo+ss86SkuMhjixgUaq53hLYMyeB+HwzN9qfstu?=
- =?iso-8859-1?Q?aey4febxwvlAxzCJTPVeN/bL2Y5eukMmUXr2EoG5eJw1Vtv1eV8hKvi/4v?=
- =?iso-8859-1?Q?GdjPZCLDluwxHYORVEuQASka8yVWFXSFg7wTFKMKQSOwky6njZJMNX7jbm?=
- =?iso-8859-1?Q?UrmGrS7lf47XYhEUCURhz5Z6LxurRlHjuFYRcCFGBfDniUXXDB9SSqQIng?=
- =?iso-8859-1?Q?mCy6LxFsRsOOWM9flYY4n5AfCrLkLMYJGB6uYAKePJZpGwrf73c7dzIahl?=
- =?iso-8859-1?Q?OnvQXgRAqSnNVA7NgqSxa7H+Jg+O1RJ0OSLwybEDsb5UuK+XV0Fpioe/Ff?=
- =?iso-8859-1?Q?oBz96739R+Tp0B+6LNfCu7MrURP8wku0iAyiDnGiGLX3CIoGfsx6bZUR6J?=
- =?iso-8859-1?Q?pyFgoRfh0d4vGB2jzu7NX6+4m2qXIPEeNqrlAtcZOfYBHh7yTpadsLtdFl?=
- =?iso-8859-1?Q?+xrzPkAzjJMpLJko0B4X62tDW6P3XJvHiOsnc+jGUL2f3JC+rY3N++uZXG?=
- =?iso-8859-1?Q?lLPnMrAlTKd3WcOptqSgRs5eugMUdkRuq5to51zgJjRn0I+kcRibh9dSBF?=
- =?iso-8859-1?Q?CDzaRkRURynd24pK+BXJ48l965ttDyd2TtOG4xW3SY5vYHQgAKMautPkkm?=
- =?iso-8859-1?Q?EFrbwD6rTrY6JaV09kvctzZz37luKIRNWCFDBxkW43aOuHZDJ/GAa/KfQd?=
- =?iso-8859-1?Q?cHxD/j1qE7Yzp/6NObFzJvTt/p+TORs9ArypL7RtOk8ERy4QCoKjiJe57X?=
- =?iso-8859-1?Q?6Lm2PvziaTPw3C0A6pE7I9v+0NuVIUQaMZGFBv214nLpAp9h/SH3ECiSjK?=
- =?iso-8859-1?Q?sZUs3Yxb/RfiG/dpOrNaWX7hiWJ4JXvuEMd1hx7iSFUKqTt+bZ8lQoU2hN?=
- =?iso-8859-1?Q?e8I5wlJsTosi5FqLkflXm/trNuGDkVSaefIiP/41m8RwkCj7V3UXeVuAOa?=
- =?iso-8859-1?Q?BuyrMtFTeqlD1QTnlzASpDS0SLUvgukpwnyMHdZvKqguRvpXB9Otv1Smga?=
- =?iso-8859-1?Q?kDTbpKtiVZs3wY82PohdT91WL9ufbWRi7JGSr7qn4MWF0eGA4RArpRLIBT?=
- =?iso-8859-1?Q?gM7rp84OgMBHwQFsIipaMURP9f42g7iYDMt3bYh0bb5+PhhPZCMzWheEQv?=
- =?iso-8859-1?Q?Eds0kR96FXXsy21c07Y96air0/Pa8E0wYU2mHepHdZ5FXHzVG3Jcebcawi?=
- =?iso-8859-1?Q?xE1poEibTjQ4nta1JN+DyJJtB7H33E5cI1JPWiytQoh6RyxDmd8VL1O51J?=
- =?iso-8859-1?Q?WhToD02CWtZ2Ya1Y7OLKF76uRnSXR/7Vyv6yd2/NWxxBA8umY4P05UOh3J?=
- =?iso-8859-1?Q?IUYhze83dl4WTQVyoy+wGMdDWUYBVij7p76f05OGu1QvGYS3TItX9molH2?=
- =?iso-8859-1?Q?cwif6XbwpYweO5KrsZebuAzZHGYU?=
-x-forefront-antispam-report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
- IPV:NLI; SFV:NSPM; H:BL1PR12MB5144.namprd12.prod.outlook.com; PTR:; CAT:NONE;
- SFS:(13230040)(376014)(7416014)(1800799024)(366016)(38070700021); DIR:OUT;
- SFP:1101; 
-x-ms-exchange-antispam-messagedata-chunkcount: 1
-x-ms-exchange-antispam-messagedata-0: =?iso-8859-1?Q?9ykJgahVaIJ/2ZffZdZvzwsXwo4gf4MXQychjcf5s87c5EqLBOwr1L4eap?=
- =?iso-8859-1?Q?lqezNS3xJ/PYWvONj4dkU+0rDBQFc+I5/zyFKsthwwj1QytbrZ7SbZbynp?=
- =?iso-8859-1?Q?fyxvcg1/a/McUS3KNMLK0UASO4kquIY+wmFTGnqy8ePJ4WXTMkQFnyxhJ0?=
- =?iso-8859-1?Q?zWNWSxOwjZ/FIwdYM71k1MTtKEWLmTBJzkmRHodTed2k3eY8zjFghav15j?=
- =?iso-8859-1?Q?J+SzTjap2krL72QToSAyJBq1YkyaxthRn9x4i5IBDc5W6yNgnvUNxfHC3W?=
- =?iso-8859-1?Q?jeb0QU05UyeLCvy5Mh/7oPLkr7ZoSAcVuBi9dmGXrxY5NxfytTebv0bVQr?=
- =?iso-8859-1?Q?yU73V9225SGhFMnKSX12+giCRFEGLNZLBVKnLIQ/DL+lACEyzXjXtqIsRJ?=
- =?iso-8859-1?Q?skDISzAEXdHbz1TZpP8iHdjt/5BQNH6cHfhqohVmb+Fv+AgEGtoW9iGzbl?=
- =?iso-8859-1?Q?O4QZyz3UMfK+s70KPFC6TpexPtNO6tRBRUoWfEhSq+rk1U4kQ2k2i499Fp?=
- =?iso-8859-1?Q?xIolcbgXkpO8x/Gd3xoTgblAl4/CI1MlDnvcq0dYL9nJScSEMswK+Gndz0?=
- =?iso-8859-1?Q?bGAE0CWDszDQcIY7BCkwezZRJ0dCvqc6R9zDnajMDawPeMuyhaEdrS9Igi?=
- =?iso-8859-1?Q?8zKOywuyd0izFdjfSlUqduq9oJCSPFHtvO6HHE7NkF5jJ8Se5rrMZ4Aiye?=
- =?iso-8859-1?Q?RCHvvGx9JkBjPDZXkdn7Y+9XXlkWh/XXMdHAyCgd2n1Qh6Ir027WNbl3Nk?=
- =?iso-8859-1?Q?sU5JdXEWVbmUfASrbXLAbIBGC4F8wjoW+N4NbuPrph6JshjxpLPOpy+xPz?=
- =?iso-8859-1?Q?8yIh6bz+jsY4bcHho9+0YQbf3W3jAb45Z0M8Ms+Zs/vbTSnzyfrT6F86wo?=
- =?iso-8859-1?Q?1xDDOKd7KwvB3mWxt+fO7NQ3iaAIWASnGZjcarcQ7N57JpF71zesN4eCcR?=
- =?iso-8859-1?Q?XJtRyA7v/PzUg4r8htnAUznKokMoTDB02ZwNkgj/GmcmKTi2W74/x+s5mt?=
- =?iso-8859-1?Q?vw9G8OwgEz9YXUrTGanoQDD4TY1Nh2WYBoqBsmRQ8ELVp3lU7+3EzYjMax?=
- =?iso-8859-1?Q?nlmMXJtlle2czsy40PjfleyYnYWXZRa8MgPgTRVcNElcSrCkVjCDY1Op0V?=
- =?iso-8859-1?Q?JFvU2CRZFjuw1rZAWPxSrLWpzz5WUwgIVsFTCTpePAGr3XxKATcKBeIOUi?=
- =?iso-8859-1?Q?ZVhVPsq/6NAOMyL1rm8QYLZqH4Cuacd2JQaLXHrpXM8LPCJ7iX9/tquaAa?=
- =?iso-8859-1?Q?NrtjJifLp314+P5b3NM+Pj3Pu82doKPEe06bjXBKHKkO+05sSgjlUxOQ5e?=
- =?iso-8859-1?Q?3bQkJzIieK+5lT0UGTNR4Ue2VjvKWYLveFoQ0EqVnzIyS3q7C/c0wozQdQ?=
- =?iso-8859-1?Q?hjgZuqtYMC4u/oZgdpuAqeQEuyc+ISXzVjKggd91NM0xZc9q5g1gA81Y26?=
- =?iso-8859-1?Q?USSP6lA1t0gyjv/R/6nx+pdd7Tvh/ivOh7emoqCGXpNt2hoLFmgt27KI68?=
- =?iso-8859-1?Q?bOnc+YllqZ8zPmc0Q6mWsurdm5hFhisIRzh/IjCNx53PrwX+xJiolq8rbP?=
- =?iso-8859-1?Q?nn2txecGxlbaXkuWZ7bICrc04rY4okImQ5u2uds2HUXVdoD9CLiVeCCeDo?=
- =?iso-8859-1?Q?9yDnNB49K1/ZI=3D?=
-Content-Type: text/plain; charset="iso-8859-1"
-Content-Transfer-Encoding: quoted-printable
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9253.12; Mon, 27 Oct
+ 2025 17:37:57 +0000
+Received: from SN7PR12MB8059.namprd12.prod.outlook.com
+ ([fe80::4ee2:654e:1fe8:4b91]) by SN7PR12MB8059.namprd12.prod.outlook.com
+ ([fe80::4ee2:654e:1fe8:4b91%2]) with mapi id 15.20.9228.015; Mon, 27 Oct 2025
+ 17:37:57 +0000
+Date: Mon, 27 Oct 2025 13:37:56 -0400
+From: Joel Fernandes <joelagnelf@nvidia.com>
+To: Alexandre Courbot <acourbot@nvidia.com>
+Cc: Alice Ryhl <aliceryhl@google.com>, David Airlie <airlied@gmail.com>,
+ Simona Vetter <simona@ffwll.ch>, Miguel Ojeda <ojeda@kernel.org>,
+ Alex Gaynor <alex.gaynor@gmail.com>,
+ Boqun Feng <boqun.feng@gmail.com>, Gary Guo <gary@garyguo.net>,
+ =?iso-8859-1?Q?Bj=F6rn?= Roy Baron <bjorn3_gh@protonmail.com>,
+ Benno Lossin <lossin@kernel.org>, Andreas Hindborg <a.hindborg@kernel.org>,
+ Trevor Gross <tmgross@umich.edu>, John Hubbard <jhubbard@nvidia.com>,
+ Alistair Popple <apopple@nvidia.com>, Timur Tabi <ttabi@nvidia.com>,
+ Edwin Peer <epeer@nvidia.com>, nouveau@lists.freedesktop.org,
+ dri-devel@lists.freedesktop.org, linux-kernel@vger.kernel.org,
+ rust-for-linux@vger.kernel.org, Danilo Krummrich <dakr@kernel.org>
+Subject: Re: [PATCH v2 3/7] gpu: nova-core: vbios: add conversion to u8 for
+ BiosImageType
+Message-ID: <20251027173756.GA3188703@joelbox2>
+References: <20251027-nova-as-v2-0-a26bd1d067a4@nvidia.com>
+ <20251027-nova-as-v2-3-a26bd1d067a4@nvidia.com>
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <20251027-nova-as-v2-3-a26bd1d067a4@nvidia.com>
+X-ClientProxiedBy: BL0PR02CA0066.namprd02.prod.outlook.com
+ (2603:10b6:207:3d::43) To SN7PR12MB8059.namprd12.prod.outlook.com
+ (2603:10b6:806:32b::7)
 MIME-Version: 1.0
-X-OriginatorOrg: amd.com
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: SN7PR12MB8059:EE_|MN0PR12MB6003:EE_
+X-MS-Office365-Filtering-Correlation-Id: e5e46d80-bbaa-4505-b034-08de157f9127
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: BCL:0;ARA:13230040|7416014|376014|1800799024|366016;
+X-Microsoft-Antispam-Message-Info: =?us-ascii?Q?dkI93bn8eNR5bjE7X/tjC1qd95Cj+nodYUFXxKTGuC+0aPQSJYUpG6yEH54/?=
+ =?us-ascii?Q?af4TPsub/k6HmGI4ZzOOgnPaBwA8Fazg2UNF03qrDeNlqBU8l4jDvEX5g6RU?=
+ =?us-ascii?Q?xKkAwR+wFJ/kzBHFxu8ajbnXtmjABpvyMlZTUokCME7BcGo/j+MntjqvUpZj?=
+ =?us-ascii?Q?HrPUSKKeyexS4Ha4AZkgOkg3UdqlywELU6DdtlYveElQ6xAQAuR39Y2kD4Fa?=
+ =?us-ascii?Q?4wrmfgcoFMLyI2g3xlqdu5JL9cB+KF3YFCtH8NO+IV6TnQGtJGgdPrbVHjuH?=
+ =?us-ascii?Q?oUaq8j9y4qdTG1oolNkBD9UXIJHeSzHoBxWNhsWPRdvN4xygASo70oS/nkp+?=
+ =?us-ascii?Q?bTab4WB9Tkz19L1/RlIAUl1ukx6BNth7hp4+d08Y7Oo4jf+7bdp8Vrl0TxaF?=
+ =?us-ascii?Q?FIFr7n/kE+mteAHXS6KLVKHnoWiuLAdkDZaezlVIeTfUmbi1k/dYrBl9rZof?=
+ =?us-ascii?Q?+GDR1deFKetOXCJxgT9UlfdJ8KweIn7k4nPDdvCXcQC8H9wB2gk/Sbdc4whS?=
+ =?us-ascii?Q?MHKFDYRYYZkARQN1NQKGh8U8QrwgqXzewDr2uYMc8BQ6e3nqHEIL22TomTzV?=
+ =?us-ascii?Q?Bph7Svxg+UpZb26XeZuRGWsabXm+ppfQPbOdytA6w3aGE3seiKFz7K73cedi?=
+ =?us-ascii?Q?WqPoA+lEdgsSOD4ErqUW6hUMCEOTBBG4cbO3R97XD2XqQz6F26x6gFa3r2z2?=
+ =?us-ascii?Q?ere1dZdMOu65gACAyjZExCAvNQQ7orJgb4xt4r6URNDoHo39POB1TWP6kEH/?=
+ =?us-ascii?Q?69zcmJuzw8zo0DeSZtqhuAybf2jjTkRjglB8+ps8O7nZU88JlgtaiUibFBUf?=
+ =?us-ascii?Q?eB0vUN/M41w0WezA7mP3RXzJgOaQVOfEqDXxqRUlprTYYzSnZSDDJpCOmw74?=
+ =?us-ascii?Q?nt/4cNvjFqYSvyb/KC/CPD58KXQDkjgSknYk+A4U8VgjLWIZ7Xfwfxytdj8W?=
+ =?us-ascii?Q?ae0+YjIE475eFIf1TFEiuPiyA3C5mqamZKPt3mrA3X1ZFLOztToRLgQzeQ98?=
+ =?us-ascii?Q?L/moTINW9KMyOcvgdVMsPj5LoKgZmUXAqjKldwWuI8BMls6ABxbsHJAtTxLK?=
+ =?us-ascii?Q?+5Fm1StswdcHprALCZqjqBSCciNf6kxFH/JXz0AoBF3p7eJ04bRD6WxB21RO?=
+ =?us-ascii?Q?9cPEUxrvSyUUT8cw60yCkOfM/w/nBdFmsBlbul9RsGlbTqCTcIdLmQMOCqnI?=
+ =?us-ascii?Q?UklbJwPwNH0v2/xMW1O8TahDlWdoNaqrrpY+K8hM7efCmklEsxiE5fGAoI1T?=
+ =?us-ascii?Q?r2VSOcshScZyandJTOpXsCq5RDyd0lKSCLtl9SKBBmFo9/pqG1Y0NKfgPJEl?=
+ =?us-ascii?Q?rHIpAI1zHXPmU77hqMNm31820RHijjCE3CpeTyPPi1IgyAHaV8/QX3+RQiMv?=
+ =?us-ascii?Q?t5hZ9xQI2SjHObb4gZAsfnVbc0yiNFup+ORyvGXpz8eOcxeSVmnsAecB5byM?=
+ =?us-ascii?Q?qNtOfb4U8T4RH5aoMr2bVWo+JzDxaMVb?=
+X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
+ IPV:NLI; SFV:NSPM; H:SN7PR12MB8059.namprd12.prod.outlook.com; PTR:; CAT:NONE;
+ SFS:(13230040)(7416014)(376014)(1800799024)(366016); DIR:OUT; SFP:1101; 
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0: =?us-ascii?Q?o4Hvs2lVMCG9JBNPBkaCYIlB0UHe2XgyQcjZ+CSJSNNgDvUR1s4TeP0HqVSp?=
+ =?us-ascii?Q?5VzlSadRuTb9aqzqXrRGIWOq91AO/72x6CwE37epsFsQ2MKKWEON5j1eANap?=
+ =?us-ascii?Q?I9Z3myvMEDfxxHHyGtVwapPjHXleko0Yo9yYSs6TC6KeHbxz4lYhvDfMviky?=
+ =?us-ascii?Q?bvKPBGIokgh5v3VDkBhHjxs4NLa90HV9/vFWTqPwjefkStM+xG6qhoRyURDX?=
+ =?us-ascii?Q?dZaA7uGAfwjez/qrpTKwrhJ2Jx30SG20HwhbDH6aotc5VaHi9Lp7PaGLLnlc?=
+ =?us-ascii?Q?zysLi3BBvIfdYqx6sRLAku2Ghvl/F9teohCl6NGCZnWMQFS/V93T67gGZdwd?=
+ =?us-ascii?Q?oVf2lEwWC3IkgkI2i59Cl0N5r3K7bF+S8+wd8uqRPd/fG9D05uztOE60gGra?=
+ =?us-ascii?Q?5mXsgsxBqs9o3YUW/e1E//oJA/onrKAN2Jic/WxI3CiADZAcYEShRyWLP+R+?=
+ =?us-ascii?Q?+XiN30K/rWOe+zLfbmt7iHiSXcy15z9guwa7bmhemHDxJ351Ci+Ur6Bdq59M?=
+ =?us-ascii?Q?ecZiUvhCKqKQlMCttVi5bZnCF1QOVizF3/o8qQVvaw00MQTYN+5/cboQAqho?=
+ =?us-ascii?Q?PRcRNxNPdZNQ01+BpsjlMGRHLuXidKB4ID8wmD9Cb5xfdzeDDqg60QVng6P2?=
+ =?us-ascii?Q?DVEQCbgsdKUgyCRvkHF8IrrdocsXi8R9bw3eO9iXjacnh3VEPd/cGrMxbbDo?=
+ =?us-ascii?Q?qQBCvjJ0CJTwzS+ggwRfDxQQJy5p0tyPFJY2/NuLzsnQ0zZyIseZCpUoGHpq?=
+ =?us-ascii?Q?85cDMx1OheLPwj66UaNpWv9jJddx35/SVPuQ5gfrxJOSQdwH7RlbGtQ5l8wC?=
+ =?us-ascii?Q?4bUle/NwGQ4R5TVCKPJ/AJ5lnK5+R26AGnNFq+oI2MH2LInHhSnvNCTtNNHi?=
+ =?us-ascii?Q?dA9gEHhBhYL/Ft857sf+0PmZPojvwhqdIAl8z65fPKlyI5RfCYBx3QfEsGiB?=
+ =?us-ascii?Q?Mn44G3Qx+H8sIBbmRpUGXhuaXlV/4jIWzl9casKyjJLXuce6QAW/AKRwgS7p?=
+ =?us-ascii?Q?gn9ndOeDuKlrYM6cCQXWqJgiO4BJXJnf/88YXMjCJxEC4gyD7zpa3vPRGSmU?=
+ =?us-ascii?Q?wD9icnL/WaOCn8KempUB8ZDeD4btKDTvkPxj+m/WRiuKOa+H9sAcyxcs2Ags?=
+ =?us-ascii?Q?OyJKTR8jhAaGGjOEg1WO55CCGMSq8Q1X8SHa2Sit1QPwrqpMDnqFekMYS9Yq?=
+ =?us-ascii?Q?8Z5tW2fT7RjKb6z06dWD1GMTfPnNL59SYnAJAeqV5FCfTo2cgK7VAbNaSuDD?=
+ =?us-ascii?Q?/3EVGTsdz+F1ymLQc3hAE+EUBQxC2mn5/We6u10jp2W0XnnOw0N+dBtoi1sK?=
+ =?us-ascii?Q?iVWEqFqYUZYENO1jEfKmZnmoG1X28Jf0o3+QbuthIq63bLcRmBDsIUlJWkho?=
+ =?us-ascii?Q?1tNKQJLZSA+qWX0RbEkX6QEixteGvSkJozTCrHiYkYJmpeO9btnTkoSHOhFq?=
+ =?us-ascii?Q?6KywavMchnk8VRT0c+/k6ogr0XchVE3SGEuEH/XwneQtvNLk0sv3InQPqXSs?=
+ =?us-ascii?Q?3ENzBGKTgkMNJ9rvBI60bFuE/A/6AQsXDUAh8bldItammH10/hEi8Ueh+z7T?=
+ =?us-ascii?Q?6gr3+llcnqbGFuv3Y/eNdozo259aVNqz+1PzMyy3?=
+X-OriginatorOrg: Nvidia.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: e5e46d80-bbaa-4505-b034-08de157f9127
+X-MS-Exchange-CrossTenant-AuthSource: SN7PR12MB8059.namprd12.prod.outlook.com
 X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-AuthSource: BL1PR12MB5144.namprd12.prod.outlook.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 06a75bbf-55c6-4301-9d1e-08de1570d4c4
-X-MS-Exchange-CrossTenant-originalarrivaltime: 27 Oct 2025 15:52:28.3205 (UTC)
-X-MS-Exchange-CrossTenant-fromentityheader: Hosted
-X-MS-Exchange-CrossTenant-id: 3dd8961f-e488-4e60-8e11-a82d994e183d
-X-MS-Exchange-CrossTenant-mailboxtype: HOSTED
-X-MS-Exchange-CrossTenant-userprincipalname: zK1E/2pYSj4Ujn6AemHvTrRSN8V/T6SwpBk6gKiE2vzGpTjGT5iWQbxt/FK+YFbGWk7o9W3T8VlsyehLMei1gg==
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: PH7PR12MB6586
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 27 Oct 2025 17:37:57.5483 (UTC)
+X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
+X-MS-Exchange-CrossTenant-Id: 43083d15-7273-40c1-b7db-39efd9ccc17a
+X-MS-Exchange-CrossTenant-MailboxType: HOSTED
+X-MS-Exchange-CrossTenant-UserPrincipalName: 2Sb24q0hQ0wptkWu4nth9PAKsW0dn4KhhCZvjvOFLXm3M1txVkspkaFtyq2D1b4nri+CUE5sZxWgwTuK/qf5GQ==
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: MN0PR12MB6003
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -186,631 +154,58 @@ List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-[Public]
+Hello Alex,
 
-> -----Original Message-----
-> From: Sakari Ailus <sakari.ailus@linux.intel.com>
-> Sent: Monday, October 27, 2025 9:15 AM
-> To: dri-devel@lists.freedesktop.org
-> Cc: Deucher, Alexander <Alexander.Deucher@amd.com>; Koenig, Christian
-> <Christian.Koenig@amd.com>; David Airlie <airlied@gmail.com>; Simona Vett=
-er
-> <simona@ffwll.ch>; Kuehling, Felix <Felix.Kuehling@amd.com>; Feng, Kennet=
-h
-> <Kenneth.Feng@amd.com>; Lyude Paul <lyude@redhat.com>; Danilo Krummrich
-> <dakr@kernel.org>; Maarten Lankhorst <maarten.lankhorst@linux.intel.com>;
-> Maxime Ripard <mripard@kernel.org>; Thomas Zimmermann
-> <tzimmermann@suse.de>; Limonciello, Mario <Mario.Limonciello@amd.com>;
-> Hung, Alex <Alex.Hung@amd.com>; Antonio Quartulli <antonio@mandelbit.com>=
-;
-> Nirujogi, Pratap <Pratap.Nirujogi@amd.com>; Lazar, Lijo <Lijo.Lazar@amd.c=
-om>;
-> Dmitry Baryshkov <lumag@kernel.org>; SHANMUGAM, SRINIVASAN
-> <SRINIVASAN.SHANMUGAM@amd.com>; Wang, Yang(Kevin)
-> <KevinYang.Wang@amd.com>; Khatri, Sunil <Sunil.Khatri@amd.com>; Zhang,
-> Jesse(Jie) <Jesse.Zhang@amd.com>; Ville Syrj=E4l=E4 <ville.syrjala@linux.=
-intel.com>;
-> Liviu Dudau <liviu.dudau@arm.com>; Laurent Pinchart
-> <laurent.pinchart+renesas@ideasonboard.com>; Zhang, Hawking
-> <Hawking.Zhang@amd.com>; Prosyak, Vitaly <Vitaly.Prosyak@amd.com>; Arnd
-> Bergmann <arnd@arndb.de>; Thomas Gleixner <tglx@linutronix.de>; Ingo Moln=
-ar
-> <mingo@kernel.org>; Liao Yuanhong <liaoyuanhong@vivo.com>; Rodrigo Siquei=
-ra
-> <siqueira@igalia.com>; Liang, Prike <Prike.Liang@amd.com>; Sharma, Shasha=
-nk
-> <Shashank.Sharma@amd.com>; Paneer Selvam, Arunpravin
-> <Arunpravin.PaneerSelvam@amd.com>; Zhou1, Tao <Tao.Zhou1@amd.com>;
-> Chai, Thomas <YiPeng.Chai@amd.com>; Xie, Patrick <Gangliang.Xie@amd.com>;
-> Liu, Xiang(Dean) <Xiang.Liu@amd.com>; Skvortsov, Victor
-> <Victor.Skvortsov@amd.com>; Sun, Ce(Overlord) <Ce.Sun@amd.com>; Dave
-> Airlie <airlied@redhat.com>; Jani Nikula <jani.nikula@intel.com>; Gustavo=
- A. R.
-> Silva <gustavoars@kernel.org>; Imre Deak <imre.deak@intel.com>; Ben Skegg=
-s
-> <bskeggs@nvidia.com>; nouveau@lists.freedesktop.org; amd-
-> gfx@lists.freedesktop.org
-> Subject: [PATCH 1/3] drm/amd: Remove redundant pm_runtime_mark_last_busy(=
-)
-> calls
->
-> pm_runtime_put_autosuspend(), pm_runtime_put_sync_autosuspend(),
-> pm_runtime_autosuspend() and pm_request_autosuspend() now include a call =
-to
-> pm_runtime_mark_last_busy(). Remove the now-reduntant explicit call to
-> pm_runtime_mark_last_busy().
-
-
-Typo: should be "now-redundant"
-
->
-> Signed-off-by: Sakari Ailus <sakari.ailus@linux.intel.com>
-
-Patches 1, 3 are:
-Acked-by: Alex Deucher <alexander.deucher@amd.com>
-
-When did mark_last_busy get pulled into the other runtime_pm functions?  Di=
-d you want me to pick these up or did you want to send them via some other =
-tree?
-
-Thanks,
-
-Alex
-
-
+On Mon, Oct 27, 2025 at 09:54:43PM +0900, Alexandre Courbot wrote:
+> Since `BiosImageType` is `repr(u8)`, if can safely be converted into a
+> `u8` but this is not obvious when doing this in the code.
+> 
+> Instead, implement `From<BiosImageType>` for `u8` so the cast can be
+> done in a single place, with a justifying comment.
+> 
+> Acked-by: Danilo Krummrich <dakr@kernel.org>
+> Signed-off-by: Alexandre Courbot <acourbot@nvidia.com>
 > ---
->  drivers/gpu/drm/amd/amdgpu/amdgpu_acpi.c      |  1 -
->  .../gpu/drm/amd/amdgpu/amdgpu_connectors.c    | 16 +++---------
->  drivers/gpu/drm/amd/amdgpu/amdgpu_debugfs.c   | 25 -------------------
->  drivers/gpu/drm/amd/amdgpu/amdgpu_display.c   |  2 --
->  drivers/gpu/drm/amd/amdgpu/amdgpu_drv.c       |  4 ---
->  drivers/gpu/drm/amd/amdgpu/amdgpu_fence.c     |  2 --
->  drivers/gpu/drm/amd/amdgpu/amdgpu_gfx.c       |  1 -
->  drivers/gpu/drm/amd/amdgpu/amdgpu_kms.c       |  2 --
->  drivers/gpu/drm/amd/amdgpu/amdgpu_rap.c       |  1 -
->  drivers/gpu/drm/amd/amdgpu/amdgpu_ras.c       |  1 -
->  .../gpu/drm/amd/amdgpu/amdgpu_securedisplay.c |  1 -
->  drivers/gpu/drm/amd/amdgpu/amdgpu_userq.c     |  1 -
->  drivers/gpu/drm/amd/amdkfd/kfd_process.c      |  1 -
->  drivers/gpu/drm/amd/pm/amdgpu_pm.c            |  1 -
->  14 files changed, 4 insertions(+), 55 deletions(-)
->
-> diff --git a/drivers/gpu/drm/amd/amdgpu/amdgpu_acpi.c
-> b/drivers/gpu/drm/amd/amdgpu/amdgpu_acpi.c
-> index 6c62e27b9800..d31460a9e958 100644
-> --- a/drivers/gpu/drm/amd/amdgpu/amdgpu_acpi.c
-> +++ b/drivers/gpu/drm/amd/amdgpu/amdgpu_acpi.c
-> @@ -507,7 +507,6 @@ static int amdgpu_atif_handler(struct amdgpu_device
-> *adev,
->                               pm_runtime_get_sync(adev_to_drm(adev)->dev)=
-;
->                               /* Just fire off a uevent and let userspace=
- tell us what
-> to do */
->                               drm_helper_hpd_irq_event(adev_to_drm(adev))=
-;
-> -                             pm_runtime_mark_last_busy(adev_to_drm(adev)=
--
-> >dev);
->                               pm_runtime_put_autosuspend(adev_to_drm(adev=
-)-
-> >dev);
->                       }
->               }
-> diff --git a/drivers/gpu/drm/amd/amdgpu/amdgpu_connectors.c
-> b/drivers/gpu/drm/amd/amdgpu/amdgpu_connectors.c
-> index 47e9bfba0642..9f96d568acf2 100644
-> --- a/drivers/gpu/drm/amd/amdgpu/amdgpu_connectors.c
-> +++ b/drivers/gpu/drm/amd/amdgpu/amdgpu_connectors.c
-> @@ -734,10 +734,8 @@ amdgpu_connector_lvds_detect(struct drm_connector
-> *connector, bool force)
->
->       amdgpu_connector_update_scratch_regs(connector, ret);
->
-> -     if (!drm_kms_helper_is_poll_worker()) {
-> -             pm_runtime_mark_last_busy(connector->dev->dev);
-> +     if (!drm_kms_helper_is_poll_worker())
->               pm_runtime_put_autosuspend(connector->dev->dev);
-> -     }
->
->       return ret;
+>  drivers/gpu/nova-core/vbios.rs | 9 ++++++++-
+>  1 file changed, 8 insertions(+), 1 deletion(-)
+> 
+> diff --git a/drivers/gpu/nova-core/vbios.rs b/drivers/gpu/nova-core/vbios.rs
+> index dbe0d6e4a015..a521c0a4df0f 100644
+> --- a/drivers/gpu/nova-core/vbios.rs
+> +++ b/drivers/gpu/nova-core/vbios.rs
+> @@ -50,6 +50,13 @@ fn try_from(code: u8) -> Result<Self> {
+>      }
 >  }
-> @@ -919,10 +917,8 @@ amdgpu_connector_vga_detect(struct drm_connector
-> *connector, bool force)
->       amdgpu_connector_update_scratch_regs(connector, ret);
->
->  out:
-> -     if (!drm_kms_helper_is_poll_worker()) {
-> -             pm_runtime_mark_last_busy(connector->dev->dev);
-> +     if (!drm_kms_helper_is_poll_worker())
->               pm_runtime_put_autosuspend(connector->dev->dev);
-> -     }
->
->       return ret;
->  }
-> @@ -1146,10 +1142,8 @@ amdgpu_connector_dvi_detect(struct drm_connector
-> *connector, bool force)
->       amdgpu_connector_update_scratch_regs(connector, ret);
->
->  exit:
-> -     if (!drm_kms_helper_is_poll_worker()) {
-> -             pm_runtime_mark_last_busy(connector->dev->dev);
-> +     if (!drm_kms_helper_is_poll_worker())
->               pm_runtime_put_autosuspend(connector->dev->dev);
-> -     }
->
->       return ret;
->  }
-> @@ -1486,10 +1480,8 @@ amdgpu_connector_dp_detect(struct drm_connector
-> *connector, bool force)
->
->       amdgpu_connector_update_scratch_regs(connector, ret);
->  out:
-> -     if (!drm_kms_helper_is_poll_worker()) {
-> -             pm_runtime_mark_last_busy(connector->dev->dev);
-> +     if (!drm_kms_helper_is_poll_worker())
->               pm_runtime_put_autosuspend(connector->dev->dev);
-> -     }
->
->       if (connector->connector_type =3D=3D
-> DRM_MODE_CONNECTOR_DisplayPort ||
->           connector->connector_type =3D=3D DRM_MODE_CONNECTOR_eDP) diff -=
--
-> git a/drivers/gpu/drm/amd/amdgpu/amdgpu_debugfs.c
-> b/drivers/gpu/drm/amd/amdgpu/amdgpu_debugfs.c
-> index d3a5189bd512..62d43b8cbe58 100644
-> --- a/drivers/gpu/drm/amd/amdgpu/amdgpu_debugfs.c
-> +++ b/drivers/gpu/drm/amd/amdgpu/amdgpu_debugfs.c
-> @@ -129,7 +129,6 @@ static int  amdgpu_debugfs_process_reg_op(bool read,
-> struct file *f,
->       if (use_bank) {
->               if ((sh_bank !=3D 0xFFFFFFFF && sh_bank >=3D adev-
-> >gfx.config.max_sh_per_se) ||
->                   (se_bank !=3D 0xFFFFFFFF && se_bank >=3D adev-
-> >gfx.config.max_shader_engines)) {
-> -                     pm_runtime_mark_last_busy(adev_to_drm(adev)->dev);
->                       pm_runtime_put_autosuspend(adev_to_drm(adev)->dev);
->                       amdgpu_virt_disable_access_debugfs(adev);
->                       return -EINVAL;
-> @@ -179,7 +178,6 @@ static int  amdgpu_debugfs_process_reg_op(bool read,
-> struct file *f,
->       if (pm_pg_lock)
->               mutex_unlock(&adev->pm.mutex);
->
-> -     pm_runtime_mark_last_busy(adev_to_drm(adev)->dev);
->       pm_runtime_put_autosuspend(adev_to_drm(adev)->dev);
->
->       amdgpu_virt_disable_access_debugfs(adev);
-> @@ -255,7 +253,6 @@ static ssize_t amdgpu_debugfs_regs2_op(struct file *f=
-,
-> char __user *buf, u32 off
->       if (rd->id.use_grbm) {
->               if ((rd->id.grbm.sh !=3D 0xFFFFFFFF && rd->id.grbm.sh >=3D =
-adev-
-> >gfx.config.max_sh_per_se) ||
->                   (rd->id.grbm.se !=3D 0xFFFFFFFF && rd->id.grbm.se >=3D =
-adev-
-> >gfx.config.max_shader_engines)) {
-> -                     pm_runtime_mark_last_busy(adev_to_drm(adev)->dev);
->                       pm_runtime_put_autosuspend(adev_to_drm(adev)->dev);
->                       amdgpu_virt_disable_access_debugfs(adev);
->                       mutex_unlock(&rd->lock);
-> @@ -310,7 +307,6 @@ static ssize_t amdgpu_debugfs_regs2_op(struct file *f=
-,
-> char __user *buf, u32 off
->
->       mutex_unlock(&rd->lock);
->
-> -     pm_runtime_mark_last_busy(adev_to_drm(adev)->dev);
->       pm_runtime_put_autosuspend(adev_to_drm(adev)->dev);
->
->       amdgpu_virt_disable_access_debugfs(adev);
-> @@ -446,7 +442,6 @@ static ssize_t amdgpu_debugfs_gprwave_read(struct fil=
-e
-> *f, char __user *buf, siz
->       amdgpu_gfx_select_se_sh(adev, 0xFFFFFFFF, 0xFFFFFFFF,
-> 0xFFFFFFFF, rd->id.xcc_id);
->       mutex_unlock(&adev->grbm_idx_mutex);
->
-> -     pm_runtime_mark_last_busy(adev_to_drm(adev)->dev);
->       pm_runtime_put_autosuspend(adev_to_drm(adev)->dev);
->
->       if (!x) {
-> @@ -557,7 +552,6 @@ static ssize_t amdgpu_debugfs_regs_pcie_read(struct f=
-ile
-> *f, char __user *buf,
->
->       r =3D result;
->  out:
-> -     pm_runtime_mark_last_busy(adev_to_drm(adev)->dev);
->       pm_runtime_put_autosuspend(adev_to_drm(adev)->dev);
->       amdgpu_virt_disable_access_debugfs(adev);
->       return r;
-> @@ -617,7 +611,6 @@ static ssize_t amdgpu_debugfs_regs_pcie_write(struct =
-file
-> *f, const char __user
->
->       r =3D result;
->  out:
-> -     pm_runtime_mark_last_busy(adev_to_drm(adev)->dev);
->       pm_runtime_put_autosuspend(adev_to_drm(adev)->dev);
->       amdgpu_virt_disable_access_debugfs(adev);
->       return r;
-> @@ -676,7 +669,6 @@ static ssize_t amdgpu_debugfs_regs_didt_read(struct f=
-ile
-> *f, char __user *buf,
->
->       r =3D result;
->  out:
-> -     pm_runtime_mark_last_busy(adev_to_drm(adev)->dev);
->       pm_runtime_put_autosuspend(adev_to_drm(adev)->dev);
->       amdgpu_virt_disable_access_debugfs(adev);
->       return r;
-> @@ -736,7 +728,6 @@ static ssize_t amdgpu_debugfs_regs_didt_write(struct =
-file
-> *f, const char __user
->
->       r =3D result;
->  out:
-> -     pm_runtime_mark_last_busy(adev_to_drm(adev)->dev);
->       pm_runtime_put_autosuspend(adev_to_drm(adev)->dev);
->       amdgpu_virt_disable_access_debugfs(adev);
->       return r;
-> @@ -795,7 +786,6 @@ static ssize_t amdgpu_debugfs_regs_smc_read(struct fi=
-le
-> *f, char __user *buf,
->
->       r =3D result;
->  out:
-> -     pm_runtime_mark_last_busy(adev_to_drm(adev)->dev);
->       pm_runtime_put_autosuspend(adev_to_drm(adev)->dev);
->       amdgpu_virt_disable_access_debugfs(adev);
->       return r;
-> @@ -855,7 +845,6 @@ static ssize_t amdgpu_debugfs_regs_smc_write(struct f=
-ile
-> *f, const char __user *
->
->       r =3D result;
->  out:
-> -     pm_runtime_mark_last_busy(adev_to_drm(adev)->dev);
->       pm_runtime_put_autosuspend(adev_to_drm(adev)->dev);
->       amdgpu_virt_disable_access_debugfs(adev);
->       return r;
-> @@ -1003,7 +992,6 @@ static ssize_t amdgpu_debugfs_sensor_read(struct fil=
-e
-> *f, char __user *buf,
->
->       r =3D amdgpu_dpm_read_sensor(adev, idx, &values[0], &valuesize);
->
-> -     pm_runtime_mark_last_busy(adev_to_drm(adev)->dev);
->       pm_runtime_put_autosuspend(adev_to_drm(adev)->dev);
->
->       if (r) {
-> @@ -1094,7 +1082,6 @@ static ssize_t amdgpu_debugfs_wave_read(struct file=
- *f,
-> char __user *buf,
->       amdgpu_gfx_select_se_sh(adev, 0xFFFFFFFF, 0xFFFFFFFF,
-> 0xFFFFFFFF, 0);
->       mutex_unlock(&adev->grbm_idx_mutex);
->
-> -     pm_runtime_mark_last_busy(adev_to_drm(adev)->dev);
->       pm_runtime_put_autosuspend(adev_to_drm(adev)->dev);
->
->       if (!x) {
-> @@ -1192,7 +1179,6 @@ static ssize_t amdgpu_debugfs_gpr_read(struct file =
-*f,
-> char __user *buf,
->       amdgpu_gfx_select_se_sh(adev, 0xFFFFFFFF, 0xFFFFFFFF,
-> 0xFFFFFFFF, 0);
->       mutex_unlock(&adev->grbm_idx_mutex);
->
-> -     pm_runtime_mark_last_busy(adev_to_drm(adev)->dev);
->       pm_runtime_put_autosuspend(adev_to_drm(adev)->dev);
->
->       while (size) {
-> @@ -1266,7 +1252,6 @@ static ssize_t
-> amdgpu_debugfs_gfxoff_residency_read(struct file *f, char __user
->
->       r =3D result;
->  out:
-> -     pm_runtime_mark_last_busy(adev_to_drm(adev)->dev);
->       pm_runtime_put_autosuspend(adev_to_drm(adev)->dev);
->
->       return r;
-> @@ -1315,7 +1300,6 @@ static ssize_t
-> amdgpu_debugfs_gfxoff_residency_write(struct file *f, const char
->
->       r =3D result;
->  out:
-> -     pm_runtime_mark_last_busy(adev_to_drm(adev)->dev);
->       pm_runtime_put_autosuspend(adev_to_drm(adev)->dev);
->
->       return r;
-> @@ -1365,7 +1349,6 @@ static ssize_t
-> amdgpu_debugfs_gfxoff_count_read(struct file *f, char __user *buf
->
->       r =3D result;
->  out:
-> -     pm_runtime_mark_last_busy(adev_to_drm(adev)->dev);
->       pm_runtime_put_autosuspend(adev_to_drm(adev)->dev);
->
->       return r;
-> @@ -1414,7 +1397,6 @@ static ssize_t amdgpu_debugfs_gfxoff_write(struct f=
-ile
-> *f, const char __user *bu
->
->       r =3D result;
->  out:
-> -     pm_runtime_mark_last_busy(adev_to_drm(adev)->dev);
->       pm_runtime_put_autosuspend(adev_to_drm(adev)->dev);
->
->       return r;
-> @@ -1460,7 +1442,6 @@ static ssize_t amdgpu_debugfs_gfxoff_read(struct fi=
-le *f,
-> char __user *buf,
->
->       r =3D result;
->  out:
-> -     pm_runtime_mark_last_busy(adev_to_drm(adev)->dev);
->       pm_runtime_put_autosuspend(adev_to_drm(adev)->dev);
->
->       return r;
-> @@ -1501,7 +1482,6 @@ static ssize_t
-> amdgpu_debugfs_gfxoff_status_read(struct file *f, char __user *bu
->
->       r =3D result;
->  out:
-> -     pm_runtime_mark_last_busy(adev_to_drm(adev)->dev);
->       pm_runtime_put_autosuspend(adev_to_drm(adev)->dev);
->
->       return r;
-> @@ -1701,7 +1681,6 @@ static int amdgpu_debugfs_test_ib_show(struct seq_f=
-ile
-> *m, void *unused)
->
->       up_write(&adev->reset_domain->sem);
->
-> -     pm_runtime_mark_last_busy(dev->dev);
->       pm_runtime_put_autosuspend(dev->dev);
->
->       return 0;
-> @@ -1721,7 +1700,6 @@ static int amdgpu_debugfs_evict_vram(void *data, u6=
-4
-> *val)
->
->       *val =3D amdgpu_ttm_evict_resources(adev, TTM_PL_VRAM);
->
-> -     pm_runtime_mark_last_busy(dev->dev);
->       pm_runtime_put_autosuspend(dev->dev);
->
->       return 0;
-> @@ -1742,7 +1720,6 @@ static int amdgpu_debugfs_evict_gtt(void *data, u64
-> *val)
->
->       *val =3D amdgpu_ttm_evict_resources(adev, TTM_PL_TT);
->
-> -     pm_runtime_mark_last_busy(dev->dev);
->       pm_runtime_put_autosuspend(dev->dev);
->
->       return 0;
-> @@ -1762,7 +1739,6 @@ static int amdgpu_debugfs_benchmark(void *data, u64
-> val)
->
->       r =3D amdgpu_benchmark(adev, val);
->
-> -     pm_runtime_mark_last_busy(dev->dev);
->       pm_runtime_put_autosuspend(dev->dev);
->
->       return r;
-> @@ -2014,7 +1990,6 @@ static int amdgpu_debugfs_sclk_set(void *data, u64 =
-val)
->               ret =3D -EINVAL;
->
->  out:
-> -     pm_runtime_mark_last_busy(adev_to_drm(adev)->dev);
->       pm_runtime_put_autosuspend(adev_to_drm(adev)->dev);
->
->       return ret;
-> diff --git a/drivers/gpu/drm/amd/amdgpu/amdgpu_display.c
-> b/drivers/gpu/drm/amd/amdgpu/amdgpu_display.c
-> index 51bab32fd8c6..eca8443d9256 100644
-> --- a/drivers/gpu/drm/amd/amdgpu/amdgpu_display.c
-> +++ b/drivers/gpu/drm/amd/amdgpu/amdgpu_display.c
-> @@ -332,8 +332,6 @@ int amdgpu_display_crtc_set_config(struct drm_mode_se=
-t
-> *set,
->               if (crtc->enabled)
->                       active =3D true;
->
-> -     pm_runtime_mark_last_busy(dev->dev);
-> -
->       adev =3D drm_to_adev(dev);
->       /* if we have active crtcs and we don't have a power ref,
->        * take the current one
-> diff --git a/drivers/gpu/drm/amd/amdgpu/amdgpu_drv.c
-> b/drivers/gpu/drm/amd/amdgpu/amdgpu_drv.c
-> index a36e15beafeb..f159515b7d95 100644
-> --- a/drivers/gpu/drm/amd/amdgpu/amdgpu_drv.c
-> +++ b/drivers/gpu/drm/amd/amdgpu/amdgpu_drv.c
-> @@ -2228,7 +2228,6 @@ static void amdgpu_get_secondary_funcs(struct
-> amdgpu_device *adev)
->                                               adev->pdev->bus->number, i)=
-;
->               if (p) {
->                       pm_runtime_get_sync(&p->dev);
-> -                     pm_runtime_mark_last_busy(&p->dev);
->                       pm_runtime_put_autosuspend(&p->dev);
->                       pci_dev_put(p);
->               }
-> @@ -2474,7 +2473,6 @@ static int amdgpu_pci_probe(struct pci_dev *pdev,
->
->               pm_runtime_allow(ddev->dev);
->
-> -             pm_runtime_mark_last_busy(ddev->dev);
->               pm_runtime_put_autosuspend(ddev->dev);
->
->               pci_wake_from_d3(pdev, TRUE);
-> @@ -2934,7 +2932,6 @@ static int amdgpu_pmops_runtime_idle(struct device
-> *dev)
->
->       ret =3D amdgpu_runtime_idle_check_userq(dev);
->  done:
-> -     pm_runtime_mark_last_busy(dev);
->       pm_runtime_autosuspend(dev);
->       return ret;
->  }
-> @@ -2970,7 +2967,6 @@ long amdgpu_drm_ioctl(struct file *filp,
->
->       ret =3D drm_ioctl(filp, cmd, arg);
->
-> -     pm_runtime_mark_last_busy(dev->dev);
->  out:
->       pm_runtime_put_autosuspend(dev->dev);
->       return ret;
-> diff --git a/drivers/gpu/drm/amd/amdgpu/amdgpu_fence.c
-> b/drivers/gpu/drm/amd/amdgpu/amdgpu_fence.c
-> index 1fe31d2f2706..c7843e336310 100644
-> --- a/drivers/gpu/drm/amd/amdgpu/amdgpu_fence.c
-> +++ b/drivers/gpu/drm/amd/amdgpu/amdgpu_fence.c
-> @@ -250,7 +250,6 @@ bool amdgpu_fence_process(struct amdgpu_ring *ring)
->               drv->signalled_wptr =3D am_fence->wptr;
->               dma_fence_signal(fence);
->               dma_fence_put(fence);
-> -             pm_runtime_mark_last_busy(adev_to_drm(adev)->dev);
->               pm_runtime_put_autosuspend(adev_to_drm(adev)->dev);
->       } while (last_seq !=3D seq);
->
-> @@ -928,7 +927,6 @@ static int gpu_recover_get(void *data, u64 *val)
->
->       *val =3D atomic_read(&adev->reset_domain->reset_res);
->
-> -     pm_runtime_mark_last_busy(dev->dev);
->       pm_runtime_put_autosuspend(dev->dev);
->
->       return 0;
-> diff --git a/drivers/gpu/drm/amd/amdgpu/amdgpu_gfx.c
-> b/drivers/gpu/drm/amd/amdgpu/amdgpu_gfx.c
-> index 29c927f4d6df..8b118c53f351 100644
-> --- a/drivers/gpu/drm/amd/amdgpu/amdgpu_gfx.c
-> +++ b/drivers/gpu/drm/amd/amdgpu/amdgpu_gfx.c
-> @@ -1670,7 +1670,6 @@ static ssize_t
-> amdgpu_gfx_set_run_cleaner_shader(struct device *dev,
->
->       ret =3D amdgpu_gfx_run_cleaner_shader(adev, value);
->
-> -     pm_runtime_mark_last_busy(ddev->dev);
->       pm_runtime_put_autosuspend(ddev->dev);
->
->       if (ret)
-> diff --git a/drivers/gpu/drm/amd/amdgpu/amdgpu_kms.c
-> b/drivers/gpu/drm/amd/amdgpu/amdgpu_kms.c
-> index b3e6b3fcdf2c..6ee77f431d56 100644
-> --- a/drivers/gpu/drm/amd/amdgpu/amdgpu_kms.c
-> +++ b/drivers/gpu/drm/amd/amdgpu/amdgpu_kms.c
-> @@ -1471,7 +1471,6 @@ int amdgpu_driver_open_kms(struct drm_device *dev,
-> struct drm_file *file_priv)
->       kfree(fpriv);
->
->  out_suspend:
-> -     pm_runtime_mark_last_busy(dev->dev);
->  pm_put:
->       pm_runtime_put_autosuspend(dev->dev);
->
-> @@ -1539,7 +1538,6 @@ void amdgpu_driver_postclose_kms(struct drm_device
-> *dev,
->       kfree(fpriv);
->       file_priv->driver_priv =3D NULL;
->
-> -     pm_runtime_mark_last_busy(dev->dev);
->       pm_runtime_put_autosuspend(dev->dev);
->  }
->
-> diff --git a/drivers/gpu/drm/amd/amdgpu/amdgpu_rap.c
-> b/drivers/gpu/drm/amd/amdgpu/amdgpu_rap.c
-> index 123bcf5c2bb1..bacf888735db 100644
-> --- a/drivers/gpu/drm/amd/amdgpu/amdgpu_rap.c
-> +++ b/drivers/gpu/drm/amd/amdgpu/amdgpu_rap.c
-> @@ -101,7 +101,6 @@ static ssize_t amdgpu_rap_debugfs_write(struct file *=
-f,
-> const char __user *buf,
->       }
->
->       amdgpu_gfx_off_ctrl(adev, true);
-> -     pm_runtime_mark_last_busy(dev->dev);
->       pm_runtime_put_autosuspend(dev->dev);
->
->       return size;
-> diff --git a/drivers/gpu/drm/amd/amdgpu/amdgpu_ras.c
-> b/drivers/gpu/drm/amd/amdgpu/amdgpu_ras.c
-> index ff34e1c0d9e2..c806d4af8c05 100644
-> --- a/drivers/gpu/drm/amd/amdgpu/amdgpu_ras.c
-> +++ b/drivers/gpu/drm/amd/amdgpu/amdgpu_ras.c
-> @@ -4099,7 +4099,6 @@ static void amdgpu_ras_counte_dw(struct work_struct
-> *work)
->               atomic_set(&con->ras_ue_count, ue_count);
->       }
->
-> -     pm_runtime_mark_last_busy(dev->dev);
->  Out:
->       pm_runtime_put_autosuspend(dev->dev);
->  }
-> diff --git a/drivers/gpu/drm/amd/amdgpu/amdgpu_securedisplay.c
-> b/drivers/gpu/drm/amd/amdgpu/amdgpu_securedisplay.c
-> index 41ebe690eeff..3739be1b71e0 100644
-> --- a/drivers/gpu/drm/amd/amdgpu/amdgpu_securedisplay.c
-> +++ b/drivers/gpu/drm/amd/amdgpu/amdgpu_securedisplay.c
-> @@ -159,7 +159,6 @@ static ssize_t
-> amdgpu_securedisplay_debugfs_write(struct file *f, const char __u
->               dev_err(adev->dev, "Invalid input: %s\n", str);
->       }
->
-> -     pm_runtime_mark_last_busy(dev->dev);
->       pm_runtime_put_autosuspend(dev->dev);
->
->       return size;
-> diff --git a/drivers/gpu/drm/amd/amdgpu/amdgpu_userq.c
-> b/drivers/gpu/drm/amd/amdgpu/amdgpu_userq.c
-> index 9d4751a39c20..3f75d5daa5a8 100644
-> --- a/drivers/gpu/drm/amd/amdgpu/amdgpu_userq.c
-> +++ b/drivers/gpu/drm/amd/amdgpu/amdgpu_userq.c
-> @@ -479,7 +479,6 @@ amdgpu_userq_destroy(struct drm_file *filp, int queue=
-_id)
->       amdgpu_userq_cleanup(uq_mgr, queue, queue_id);
->       mutex_unlock(&uq_mgr->userq_mutex);
->
-> -     pm_runtime_mark_last_busy(adev_to_drm(adev)->dev);
->       pm_runtime_put_autosuspend(adev_to_drm(adev)->dev);
->
->       return r;
-> diff --git a/drivers/gpu/drm/amd/amdkfd/kfd_process.c
-> b/drivers/gpu/drm/amd/amdkfd/kfd_process.c
-> index ddfe30c13e9d..9e30b9df6d53 100644
-> --- a/drivers/gpu/drm/amd/amdkfd/kfd_process.c
-> +++ b/drivers/gpu/drm/amd/amdkfd/kfd_process.c
-> @@ -1083,7 +1083,6 @@ static void kfd_process_destroy_pdds(struct
-> kfd_process *p)
->                * for auto suspend
->                */
->               if (pdd->runtime_inuse) {
-> -                     pm_runtime_mark_last_busy(adev_to_drm(pdd->dev-
-> >adev)->dev);
->                       pm_runtime_put_autosuspend(adev_to_drm(pdd->dev-
-> >adev)->dev);
->                       pdd->runtime_inuse =3D false;
->               }
-> diff --git a/drivers/gpu/drm/amd/pm/amdgpu_pm.c
-> b/drivers/gpu/drm/amd/pm/amdgpu_pm.c
-> index c83d69994380..c88a76cce401 100644
-> --- a/drivers/gpu/drm/amd/pm/amdgpu_pm.c
-> +++ b/drivers/gpu/drm/amd/pm/amdgpu_pm.c
-> @@ -174,7 +174,6 @@ static int amdgpu_pm_get_access_if_active(struct
-> amdgpu_device *adev)
->   */
->  static inline void amdgpu_pm_put_access(struct amdgpu_device *adev)  {
-> -     pm_runtime_mark_last_busy(adev->dev);
->       pm_runtime_put_autosuspend(adev->dev);
->  }
->
-> --
-> 2.47.3
+>  
+> +impl From<BiosImageType> for u8 {
+> +    fn from(value: BiosImageType) -> Self {
+> +        // `BiosImageType` is `repr(u8)` and thus convertible without loss.
+> +        value as u8
+> +    }
+> +}
+> +
+>  // PMU lookup table entry types. Used to locate PMU table entries
+>  // in the Fwsec image, corresponding to falcon ucodes.
+>  #[expect(dead_code)]
+> @@ -711,7 +718,7 @@ fn image_type(&self) -> Result<BiosImageType> {
+>      fn is_last(&self) -> bool {
+>          // For NBSI images (type == 0x70), return true as they're
+>          // considered the last image
+> -        if self.pcir.code_type == BiosImageType::Nbsi as u8 {
+> +        if self.pcir.code_type == BiosImageType::Nbsi.into() {
 
+I strongly prefer u8::from(BiosImageType::Nbsi) here so there is no loss of
+readability of the type. Can we please use ::from()?
+
+thanks,
+
+ - Joel
+
+
+>              return true;
+>          }
+>  
+> 
+> -- 
+> 2.51.0
+> 
