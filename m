@@ -2,87 +2,90 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id 68957CBABB6
-	for <lists+nouveau@lfdr.de>; Sat, 13 Dec 2025 13:43:17 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 219E2CBAF73
+	for <lists+nouveau@lfdr.de>; Sat, 13 Dec 2025 13:47:10 +0100 (CET)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 90BA310EB10;
-	Sat, 13 Dec 2025 12:41:05 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 8634310EC97;
+	Sat, 13 Dec 2025 12:42:22 +0000 (UTC)
 Authentication-Results: gabe.freedesktop.org;
-	dkim=permerror (0-bit key) header.d=gmail.com header.i=@gmail.com header.b="deYdM41s";
+	dkim=permerror (0-bit key) header.d=gmail.com header.i=@gmail.com header.b="FukL4cc6";
 	dkim-atps=neutral
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from mail-pl1-f176.google.com (mail-pl1-f176.google.com
- [209.85.214.176])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 178CF10E5CD
- for <nouveau@lists.freedesktop.org>; Tue, 28 Oct 2025 14:46:01 +0000 (UTC)
-Received: by mail-pl1-f176.google.com with SMTP id
- d9443c01a7336-290aaff26c1so16759145ad.3
- for <nouveau@lists.freedesktop.org>; Tue, 28 Oct 2025 07:46:01 -0700 (PDT)
+Received: from mail-pg1-f171.google.com (mail-pg1-f171.google.com
+ [209.85.215.171])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id BAD3410E5E7
+ for <nouveau@lists.freedesktop.org>; Tue, 28 Oct 2025 15:12:44 +0000 (UTC)
+Received: by mail-pg1-f171.google.com with SMTP id
+ 41be03b00d2f7-b63e5da0fdeso609838a12.0
+ for <nouveau@lists.freedesktop.org>; Tue, 28 Oct 2025 08:12:44 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1761662760; x=1762267560; darn=lists.freedesktop.org;
+ d=gmail.com; s=20230601; t=1761664364; x=1762269164; darn=lists.freedesktop.org;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:from:to:cc:subject:date
  :message-id:reply-to;
- bh=JcaJkvlevrlFiqDWQaxlxV75MgJ3OQA9Phd19FF0hYw=;
- b=deYdM41s1t6LJAlhggxCymJ+hBqxL+NHwS49vkHB/rWJMAMo2agpcJGTH+2jvAgSCO
- ygVEz/t/U3d871be/UGJRRE268bgVZiqAf2eAJjeSnMXg/V+Zf699WSdgQQqoGFwfzQN
- 9jFERMYpP2FCwarXF7LWV9/YjcbG6AoooiaU+vAKSkJWquD9dHcL+ipB1NLWM6SBOXps
- MDOzo3+5mUnQDFhLCE6mvo2CkAEd3tFt4+YK9XFKrCJVYZniLMMmZzbHkhhSNPfWuK6L
- 1Ajgn1N6hcyPrpalz78rcvnxzR+eKdVo6n3e6DjT50O0qIVr/FI8nGa4EMWUlLWEPjpD
- EAXQ==
+ bh=5snQUvhRWkb9C2jeab2EsORSQy/NoakHLRvzEAR046k=;
+ b=FukL4cc6FuL+wglYe9k3OxWIgW+PfCksR0a+z1H8YU1zoHee44E8ogQoasMD0sFf8t
+ EVb1FIXWjJqllJ9fQNlfVw+PTw1AGaZcqyCm/Xa35bMmLCL1aLt34CJUqG1+ynIf/uK8
+ IqG+dKsPO3VK0zNrfCF2KNEaukxNfLwIUjp8uLu3lJjkRGiZ4ifXWEueE3aoaCbjoQe6
+ htjNU58myKGIHvpxZAEc0EI1f/G6wQRUiPqS7GgP+aEl6xhnl6PlV3jMalUvtADAoDQn
+ i0HbiwSZ8TqW61DtAPW6Qcn2JNcGYTUgl7oDh1N0tt7NRMpzW75Pyvqk4xJ2kFKuiPVN
+ Kzhg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1761662760; x=1762267560;
+ d=1e100.net; s=20230601; t=1761664364; x=1762269164;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=JcaJkvlevrlFiqDWQaxlxV75MgJ3OQA9Phd19FF0hYw=;
- b=AcBRYKaMt1D2BN8f9bC+ojCIwYkQ8Qk37tWgdbW+qs/42ofy/IBhBtFN8UubkUSwRO
- Q5/6sjS/oYjTPa3kJVyofF3H6JDfvqYIAQXgfJwc/X/ZicW69em/qdxhaYJX4pVatHTh
- EOnXO6amZsa9+KV82ExXgJwEa8uy/EE2DBr2Rc9ZEA9DeabaL8q+RPEAE37KicZ9kRLn
- +Z13UR5OYDhh+EteN57Xb3XajjZUTta09tuXWdJvaSFaeMRiUQxD1jY5Go8g+y7Ckw/2
- cS9MUwEP5k/au8L0Us24kiwB2Sp+KeNCC6CCuSOHUxPmFMq03coCQAWL2G0zZip0OO7A
- zUNQ==
+ bh=5snQUvhRWkb9C2jeab2EsORSQy/NoakHLRvzEAR046k=;
+ b=T6W6fSu8hvaPxnGr4RN12yVfoFDf34O3kMYhJ8hxfIVNWNp9vls2rlaPl9A83gvSpF
+ XzvFF+hZvYVhwewrEwXdBATpUzocmUbb0y7PWNs5sG+RJIdOVjXlSw0mXMiVDf5SA+F+
+ Tem8YIiFksiUTGn+v5HSG+AhXgoVzY6ovb2r4KmSyHwn9pYtvUFGmOnXNLoINplHE90d
+ micitgIdQYF3I2NJ18CpA9/TFrlj/V96i7KEpDnLsy+NoOldmySdMKZQFCrgmACzFBgH
+ HLYjRtsUNlv2RmA8HrvUf/vac0b8HJA0AMq1HReAZtzuOLMF8uvwxSkJFizjyTF+/iws
+ wDQw==
 X-Forwarded-Encrypted: i=1;
- AJvYcCUv7AcGnSAmbkYCA6Xk2lZseJ96x07RfkemEENZJBWlv9sa+FhQob83dpj+2Pj+7ZUeIfghXIRD@lists.freedesktop.org
-X-Gm-Message-State: AOJu0Yymc7KEfhVQQZPTS+5JakPEDU6O5s6d2GojcXady6GglC6/cOCi
- wjRIkGTh7fbACa/ZJUglfLbkePms2YytPvoLs84EDXxM5vjHj56d3dbQGTY90WPCzwj091hnxsa
- pbi+e7ge/houROXnAZCHtS4ZiQcFdxy8=
-X-Gm-Gg: ASbGncvAisPB5ZjiJkYZKtsFsBx2JJpSirWfeQmSHgsUX+E05E9BKv8yej4O7NiDvF2
- jPHUTElfJNKIjI6bcEKsPry+gs00xkxTpbjFvuwv0db7m3fCY0Hacn9nBOZCN5ksTUjsL118g73
- YCfgfGdLNDFTryS4tFDu8ozsJz8Vv6bVA08bvikUkuf8AVxYCcUYgNJFOxW9vkaUrN3FizVYfns
- Mk5GhYpXLj+tncvpB4C8eBbBNabpty6CTRiPLX9196rgTF47LYMawJfhnS5Hn4wOaK4FGxb4taJ
- oIPaUShCKVhvrFtT/PG9HmDvjXggkQtlnpOIVcSiTeDCVUJ7PR1m4UtKIAa8WBCpFvC/p5t+I9v
- wOqg8ndDMPTrZnQ==
-X-Google-Smtp-Source: AGHT+IFfY89QqiTl3UPAk6WKNc6WSfg9maX4CslBrwsb+ya7LyhSlvq0HWbjx5qGqAFL/1tDdaDG4249vNygIfHTzN0=
-X-Received: by 2002:a17:903:3c4d:b0:27e:eee6:6df2 with SMTP id
- d9443c01a7336-294cb3e8bb7mr26098245ad.7.1761662760526; Tue, 28 Oct 2025
- 07:46:00 -0700 (PDT)
+ AJvYcCUEP7BA0Y9PyLfXWcrRzukkfwyUZkYxLq6sv9a08SlsHuYpifIm+YkpfRnOGk5V1GTqU+odD/eJ@lists.freedesktop.org
+X-Gm-Message-State: AOJu0YwkAghO98YmHcP/0G3D3BTU96vAKbTI+QxF8nKNaB+E/mjJzfQ/
+ axrrQuu+MrqsIZgeH1UwS1GYmtsH7+h0mgNtfTNZRmvoIbBTu52oMYTAQ/jMX+k3E0nscwG3tXK
+ L20RPFvgWmMM5lPuSJQ6hGOTMWTI8nJg=
+X-Gm-Gg: ASbGncsL8wdCpI2/gG6uvLb1RSCYYOjRyE+svGBLgn1PSIpx3mCYhZWw3lG9oo2QChp
+ Lu0uCtYc8Ywj71rnZF7bX5TEcU2wBasznCwPqITjAxZ2+vsFdAAsZyMMoU5FmZ/FMWeuNcAQdLq
+ IrlnAIKU59t1KAoY9MrdYSMewlt5gdtBob0SJX1juU3Is28rhPiCfTLkJ+3l17Hz2eqhxoFYhy8
+ rL84ioJ4aWA6LJSU7bceKL0tIN/24NAhrC4C1XzJJrdSKyx8y0Pt79p+42SP4MCRgp+nXcEs2XO
+ 5yYIvTyzWkbomZxKMVovIiJgeb11Ni4ifx8DeOeKayL6dlk+v3uY71sKuV32tf2oKtOE/ZDjqpB
+ +O2k=
+X-Google-Smtp-Source: AGHT+IFYPGiAfq6Bkpv4VIZbnQ2eB25p+ZAfZMrF5Pziev/2opSXlTlA+Qb2DBeslIA+t2R0h3bM5akBnOcG/++7Z0U=
+X-Received: by 2002:a17:903:8cb:b0:27e:da7d:32d2 with SMTP id
+ d9443c01a7336-294cb500277mr27314415ad.7.1761664364153; Tue, 28 Oct 2025
+ 08:12:44 -0700 (PDT)
 MIME-Version: 1.0
 References: <20251026-nova-as-v1-0-60c78726462d@nvidia.com>
- <20251026-nova-as-v1-7-60c78726462d@nvidia.com>
- <CANiq72m9ms-OznWQ5+4_JvAs4yruwgBRcm1u0gCAnasqO8uJOA@mail.gmail.com>
- <DDT3BTI26XFE.1Z5E9QZZJCPHQ@nvidia.com>
-In-Reply-To: <DDT3BTI26XFE.1Z5E9QZZJCPHQ@nvidia.com>
+ <20251026-nova-as-v1-5-60c78726462d@nvidia.com>
+ <CANiq72mgoW_TyWf9Nv=5t3Qij_dsDjicNpGsa=F1t+sg23vxSA@mail.gmail.com>
+ <de796658-ed1d-41f1-b153-f3d1089656ba@nvidia.com>
+ <DDU1AQDW78QI.1CBHEW03926H0@nvidia.com>
+In-Reply-To: <DDU1AQDW78QI.1CBHEW03926H0@nvidia.com>
 From: Miguel Ojeda <miguel.ojeda.sandonis@gmail.com>
-Date: Tue, 28 Oct 2025 15:45:47 +0100
-X-Gm-Features: AWmQ_bkouzgy_TlroPyjfTyhvmFTe0497ZQoaOPqA8hULwK1yxqY9ku9pkOIYX4
-Message-ID: <CANiq72kUDtc+6hrJ_=bbVfAjsWOYzSjVvUiT_GOBKHWQRaLDMA@mail.gmail.com>
-Subject: Re: [PATCH 7/7] gpu: nova-core: justify remaining uses of `as`
+Date: Tue, 28 Oct 2025 16:12:32 +0100
+X-Gm-Features: AWmQ_bma5_85Uxd8PIaUq6SaqwUjakaAH7XUFCSDVLctaYXwoFO8A3BqGERgpOk
+Message-ID: <CANiq72nbYiwFO6Vqc+yoW1-qT_uMN-CftgOpPe8Mqn56b1Fq9g@mail.gmail.com>
+Subject: Re: [PATCH 5/7] gpu: nova-core: add extra conversion functions and
+ traits
 To: Alexandre Courbot <acourbot@nvidia.com>
-Cc: Alice Ryhl <aliceryhl@google.com>, David Airlie <airlied@gmail.com>, 
- Simona Vetter <simona@ffwll.ch>, Miguel Ojeda <ojeda@kernel.org>,
- Alex Gaynor <alex.gaynor@gmail.com>, 
- Boqun Feng <boqun.feng@gmail.com>, Gary Guo <gary@garyguo.net>, 
+Cc: John Hubbard <jhubbard@nvidia.com>, Alice Ryhl <aliceryhl@google.com>, 
+ David Airlie <airlied@gmail.com>, Simona Vetter <simona@ffwll.ch>,
+ Miguel Ojeda <ojeda@kernel.org>, 
+ Alex Gaynor <alex.gaynor@gmail.com>, Boqun Feng <boqun.feng@gmail.com>, 
+ Gary Guo <gary@garyguo.net>,
  =?UTF-8?Q?Bj=C3=B6rn_Roy_Baron?= <bjorn3_gh@protonmail.com>, 
  Benno Lossin <lossin@kernel.org>, Andreas Hindborg <a.hindborg@kernel.org>, 
- Trevor Gross <tmgross@umich.edu>, John Hubbard <jhubbard@nvidia.com>, 
- Alistair Popple <apopple@nvidia.com>, Joel Fernandes <joelagnelf@nvidia.com>, 
- Timur Tabi <ttabi@nvidia.com>, Edwin Peer <epeer@nvidia.com>,
- nouveau@lists.freedesktop.org, 
- dri-devel@lists.freedesktop.org, linux-kernel@vger.kernel.org, 
- rust-for-linux@vger.kernel.org, Danilo Krummrich <dakr@kernel.org>, 
- dri-devel <dri-devel-bounces@lists.freedesktop.org>
+ Trevor Gross <tmgross@umich.edu>, Alistair Popple <apopple@nvidia.com>, 
+ Joel Fernandes <joelagnelf@nvidia.com>, Timur Tabi <ttabi@nvidia.com>,
+ Edwin Peer <epeer@nvidia.com>, 
+ nouveau@lists.freedesktop.org, dri-devel@lists.freedesktop.org, 
+ linux-kernel@vger.kernel.org, rust-for-linux@vger.kernel.org, 
+ Danilo Krummrich <dakr@kernel.org>, Matthew Wilcox <willy@infradead.org>, 
+ Nouveau <nouveau-bounces@lists.freedesktop.org>
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
 X-Mailman-Approved-At: Sat, 13 Dec 2025 12:40:48 +0000
@@ -100,21 +103,38 @@ List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-On Mon, Oct 27, 2025 at 1:07=E2=80=AFPM Alexandre Courbot <acourbot@nvidia.=
+On Tue, Oct 28, 2025 at 3:44=E2=80=AFPM Alexandre Courbot <acourbot@nvidia.=
 com> wrote:
 >
-> Sounds great, will do!
+> intent with the latter was to say "I would normally have done an `as`,
+> but instead here is a method that attests that this operations is indeed
+> lossless and safe".
 
-Thanks!
+Yeah, so you want that, when we see `_as`, we are reminded that this
+is the equivalent but lossless of that, which sounds OK. Though I
+wouldn't say "I would normally have done ...", but rather turn it
+around and say "Since we want to avoid `as`, here is a method ...".
 
-For reference, the other day I opened a couple issues for this on Clippy:
+Now, I suggested a change because typically I would expect names to
+mention what they are about/do, rather than how they are implemented.
+The implementation in this case also doesn't say much, i.e. a type
+cast expression can be used for many things, and worse, the operator
+may or may not be lossless, so it isn't a big hint.
 
-    https://github.com/rust-lang/rust-clippy/issues/15963
-    https://github.com/rust-lang/rust-clippy/issues/15964
+But, yeah, I understand that you want to evoke the relationship above.
 
-and added them to our usual list:
+I also suggested it because when I wrote the message I was thinking
+about the `cfg`s message, i.e. most of these depend on the
+architecture, and thus having an `arch` or similar does evoke a
+"careful, my code may not be portable anymore".
 
-    https://github.com/Rust-for-Linux/linux/issues/349
+On the other hand, it is true that the `u32_as_usize` case will most
+likely always be available, in practice, unlike the others. So an
+`arch` for that one isn't great (but I guess it could still matter for
+someone wanting to reuse the code in a different project/domain).
+
+In any case, personally I don't mind it too much either way --
+whatever looks best for most.
 
 Cheers,
 Miguel
