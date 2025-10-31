@@ -2,82 +2,86 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id 4376DC48302
-	for <lists+nouveau@lfdr.de>; Mon, 10 Nov 2025 18:05:36 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 97144C48323
+	for <lists+nouveau@lfdr.de>; Mon, 10 Nov 2025 18:05:43 +0100 (CET)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id BC1FC10E443;
-	Mon, 10 Nov 2025 17:05:34 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id B409310E482;
+	Mon, 10 Nov 2025 17:05:41 +0000 (UTC)
 Authentication-Results: gabe.freedesktop.org;
-	dkim=permerror (0-bit key) header.d=mary.zone header.i=@mary.zone header.b="burPOSjm";
+	dkim=permerror (0-bit key) header.d=mary.zone header.i=@mary.zone header.b="A+Erj3Kl";
 	dkim-atps=neutral
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from mail-yw1-f180.google.com (mail-yw1-f180.google.com
- [209.85.128.180])
- by gabe.freedesktop.org (Postfix) with ESMTPS id E779810E858
- for <nouveau@lists.freedesktop.org>; Wed, 22 Oct 2025 21:39:52 +0000 (UTC)
-Received: by mail-yw1-f180.google.com with SMTP id
- 00721157ae682-7815092cd0bso716277b3.2
- for <nouveau@lists.freedesktop.org>; Wed, 22 Oct 2025 14:39:52 -0700 (PDT)
+Received: from mail-ej1-f54.google.com (mail-ej1-f54.google.com
+ [209.85.218.54])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 508D610EBCD
+ for <nouveau@lists.freedesktop.org>; Fri, 31 Oct 2025 14:18:12 +0000 (UTC)
+Received: by mail-ej1-f54.google.com with SMTP id
+ a640c23a62f3a-b4736e043f9so397129266b.0
+ for <nouveau@lists.freedesktop.org>; Fri, 31 Oct 2025 07:18:12 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=mary.zone; s=google; t=1761169191; x=1761773991; darn=lists.freedesktop.org; 
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=XY/fVzl28BJXNG49hJlcZcehSDNURMQ7FS8BdFDQScQ=;
- b=burPOSjm6sv+2rTFzfgP48VuAYtJ9Dkmd4jhLdfMD0u6BZWV0IGde08xtqFi3xuCln
- EsK1W0l1XWah50nk+Cx2SDba262Cd/5mRmAzi7SlECS5U4o2aDTCsC4/azJa3bcdIbnQ
- 0zGGG2uVGtqT1Q7Ov6eS/DxvZ1iVww5yY6laOw0rRxodCPXx/fhqNvCs/42iSifpxEDn
- bihUBP5kTrxzrHukxDKq63LeKs4bd18X3K6iS0xZ9F6w8hp9hnB7t2n1cpVKxg+3kfOX
- oSLbTwxNm2q9sWEWg2TA4Ms79dYNfnOYXtb9UO7BCT0H3Fk678HrNC4oH/CVlesAaJRf
- FILA==
+ d=mary.zone; s=google; t=1761920291; x=1762525091; darn=lists.freedesktop.org; 
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=dpOwsW4OaXt3IO+YhE8vGcbgUYzLvgd4DmQgy491Rb8=;
+ b=A+Erj3Kl6+O8Qmf58MKPu+cb5A762bKJoTAeVfIHLTd4AqWJbepdUGpqwM9ic+TJfI
+ cWYrXRxyc9IoRkcsN1CmzSapWWeWcUXZ5tp5+CKiJHno9xLehU/DEeRv68dzyAZbgUsI
+ uKgMJO1YYEfyFzL/UpOO/UAAUSBiLiuAzW7JgeKwvVA5eiujbwYX3e5MOOcSa3QkTkKL
+ 5VV556PtjQ/NV+d+KbloTpdcVvR+S2qfl2n4+55Z6LaD8L3paUteK44DYa0B9NfObePE
+ uGz3+4WfJqA4m3BEvnh9rDOSoPKXTmY2bNGPNrLLa6+wJhyhd3pw8LSVVFXBq69OhAao
+ PLLw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1761169191; x=1761773991;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=XY/fVzl28BJXNG49hJlcZcehSDNURMQ7FS8BdFDQScQ=;
- b=c6psZlY4fTViTl1yZXRj9tc7VxZ6ItChJ/E9MovugCUpM3UWQmZwLyESZVqhicE8Ms
- HQWQrxYm7wUjYL5XX05BJw0D4J260wzWiBcfUNydFE3bfaxSI+vTsiUkKCB8U22iWQqq
- empyQa06Sg6rSQLNflf8IaEAUzIuRdD4+z35wcHbslR4QXzX7NLdZaP8Agm+fDYMAgkB
- 9EBpACqGMDhKLrOb9o936F+O4w2lj/vFnFuOeXh1ew8nKNGeV1cprShRkol+D2eyqBot
- IYAyTPykcSeHDZaLzEhrCi008wbKS5sxwkn+Rv4GyGEUax/g9mIi5Nfv2+ij/pFy8tu3
- QgZw==
+ d=1e100.net; s=20230601; t=1761920291; x=1762525091;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=dpOwsW4OaXt3IO+YhE8vGcbgUYzLvgd4DmQgy491Rb8=;
+ b=VN7qmGVlipR3nZLbTf6Fbnu4RXFlugHdEw+TzgL3YMZZPNev6bIWtHWtDVzlkkG6DG
+ +vx06xqeJ++/KY1Ry6IjzsIk5+lrkBAD8V393q8s5TmePkg87y6EBvnisjyflxocjz5o
+ XPIwVVX59++A8wbv5Krif+1ffhixVKwYI9UVY9uiJZnbmrP0JRNzSUK83t6TrbuPWbuM
+ Eu6W26YWcD1owedFUTWb4uEaEmJmI8TFH65UJ5ueTzqfVNVnIMNIx/6AajaIghhh43yj
+ rDrQHbVdkftPMqnZbaze2ilxXub6mwWGKufmDyAAGGmR7NG8KGS8hxTePnnlbEDBaili
+ 84Rg==
 X-Forwarded-Encrypted: i=1;
- AJvYcCUYZc3Weu3MKHWM8nz16HUIlnVWUOV1791b6qoqtxblquriBnJr4M8q0LcdAVe+d0GECD3/7D4t@lists.freedesktop.org
-X-Gm-Message-State: AOJu0Yylhb58XkstMaL4b6ADZs7cFCJ1CSWl1srMb03W7kKqZetUJTwe
- s9MU/FTREMjZrmN0oi2NGs3NUv7wp96NhLcDm/y8v44D0qtF6WVleFqiVH0KzmZav7ib5Keqlj7
- 4CGI4hVTCMKLESrFNrv7KGezcUnDUJONXHLmcyutcrA==
-X-Gm-Gg: ASbGnctx9bIpsTOm5TMdUZaQ03Fm1NePwP2XE+RSWPFlYhrkhVcuw5kseCXprl6Ft5y
- 4yaW6NVofwZOejxObh4zxVP8TXcenntZU2+q9QG0OGYu9Jm2zbgwvSeSaN4Fh4xA6OeDiwASYCS
- LqWRo0BSYUsXIOQqTNOecaxdtByu+XVW+5TgQlCf2QiMwgEAABn7I62czQyKCeDIosHTAWjoGm2
- ehzzmBXYPQV8P7kbA9yAfaMi04NFQXdd8q+MaK1Usm9JQSOtOsZxhyXTCBwWDXnRlZkIghkkG0Y
- ixNqVvkqgFRH6brIIuqfpdLvIONG
-X-Google-Smtp-Source: AGHT+IHLticEoUHzz+5YlBnUoC99gaUTyPszn1BD+u/JBN5hlfiJhQmAcF37pUbO0+8+V7Ij2JZoZtpIzB/MD40J78o=
-X-Received: by 2002:a05:690c:25c6:b0:780:fdbb:5265 with SMTP id
- 00721157ae682-7836d1c62b1mr345947707b3.19.1761169191371; Wed, 22 Oct 2025
- 14:39:51 -0700 (PDT)
-MIME-Version: 1.0
-References: <20251009233837.10283-1-mohamedahmedegypt2001@gmail.com>
- <20251009233837.10283-3-mohamedahmedegypt2001@gmail.com>
- <CAA+WOBvVasy2wRP_wmP-R6Q8y5B4sN08jNYfHuDVjiWXV+m23Q@mail.gmail.com>
- <904ba70f-b1bf-4745-8e92-d27a6c903673@kernel.org>
-In-Reply-To: <904ba70f-b1bf-4745-8e92-d27a6c903673@kernel.org>
+ AJvYcCW2Fm+ks6nl4M43J0WindorkaAQqW6k483pJUjWAutEjimhpynUmE6ozlNpDEFlKIRfzuuG0TRK@lists.freedesktop.org
+X-Gm-Message-State: AOJu0YwuyfuIqyTOIMcMcBZ4e0xlFCFqoKkmxXuFqxsZwDPzT5c8ow6a
+ GP0Z+f0VOxjH5gTulH7xuakhmVkz5N8W9w2W6hVkXF5bhe/3hR38VOjKrT/mj3glhEs=
+X-Gm-Gg: ASbGncv0726bGyG7Ho6MYrbdtKIde4nyZJkO+toXlc299Be6mxuNb3m/6LLYP63p/o/
+ VQH4zoA5RiinivrPfwmxQYUXgHRwvAqvU8aKC4ungtJ1rKgcWRs39e7eB7ZtJ/cmVSU0j27Q63I
+ v6u1cE4UaF7qgchbk5c449K46hBLslCDfk1Dkr8EF9BoqVdKWaESlm17K3xCkBnb/12vmV/EKxm
+ iJTF7j7cN0wwxfjAzj/nmsIiW7KeKFtZ4ssB/RFxlLis9R33jSMZyShj5EoP5Jx1HgUX1V4alpt
+ SgiyaYeN0DTvhrgkEj/tVShk5gWzdus4EIWUDAwO6X0mowDD2YkM2JHkG9XNaI9cnk5tNP1yfdy
+ WEQqSE/yAddHAksaNhjEyAhYwT01V3i7yKdOPSBYlO5rz1vch5zAYTOAvLZHy/BZWNpmMAdvMoI
+ 6ogPQm3nnRa/+fbyp0b3P2js506RPJTwFrVJ2nfpqkOfNduSxzg0/v
+X-Google-Smtp-Source: AGHT+IG/on2h4t3AE4tA/aWcwth5JN9h8ZraeYNLOQDKECZbI1ZJ38z/033kuQ3rG2khwd8SssYwHQ==
+X-Received: by 2002:a17:907:1c93:b0:b04:9ad9:5b29 with SMTP id
+ a640c23a62f3a-b707082f754mr437109266b.54.1761920290566; 
+ Fri, 31 Oct 2025 07:18:10 -0700 (PDT)
+Received: from caroline (2a01cb0405e83a000cb38cfe29807c1e.ipv6.abo.wanadoo.fr.
+ [2a01:cb04:5e8:3a00:cb3:8cfe:2980:7c1e])
+ by smtp.gmail.com with ESMTPSA id
+ a640c23a62f3a-b70779a92c9sm185644766b.22.2025.10.31.07.18.09
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Fri, 31 Oct 2025 07:18:10 -0700 (PDT)
+Date: Fri, 31 Oct 2025 15:18:08 +0100
 From: Mary Guillemard <mary@mary.zone>
-Date: Wed, 22 Oct 2025 23:39:40 +0200
-X-Gm-Features: AS18NWBm422X6XetKOPBkLZPJQB9QiYJm8O_YbBTYHKPk9yZbZPBR3qyH8LezJU
-Message-ID: <CAPv6GL2DQ_wY=r4eV_V=nBGaj20HtYzRfJg==rQJtuO8Fo+HAg@mail.gmail.com>
-Subject: Re: [PATCH 2/5] drm/nouveau/uvmm: Allow larger pages
-To: Danilo Krummrich <dakr@kernel.org>
-Cc: Mohamed Ahmed <mohamedahmedegypt2001@gmail.com>,
- linux-kernel@vger.kernel.org, dri-devel@lists.freedesktop.org, 
- Faith Ekstrand <faith.ekstrand@collabora.com>, Lyude Paul <lyude@redhat.com>, 
+To: Mohamed Ahmed <mohamedahmedegypt2001@gmail.com>
+Cc: linux-kernel@vger.kernel.org, dri-devel@lists.freedesktop.org,
+ Faith Ekstrand <faith.ekstrand@collabora.com>,
+ Lyude Paul <lyude@redhat.com>, Danilo Krummrich <dakr@kernel.org>,
  Maarten Lankhorst <maarten.lankhorst@linux.intel.com>,
- Maxime Ripard <mripard@kernel.org>, 
- Thomas Zimmermann <tzimmermann@suse.de>, David Airlie <airlied@gmail.com>,
- Simona Vetter <simona@ffwll.ch>, nouveau@lists.freedesktop.org
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+ Maxime Ripard <mripard@kernel.org>,
+ Thomas Zimmermann <tzimmermann@suse.de>,
+ David Airlie <airlied@gmail.com>, Simona Vetter <simona@ffwll.ch>,
+ nouveau@lists.freedesktop.org
+Subject: Re: [PATCH v4 0/5] drm/nouveau: Enable variable page sizes and
+ compression
+Message-ID: <aQTFIN1dPHVtL4NR@caroline>
+References: <20251031104924.10631-1-mohamedahmedegypt2001@gmail.com>
+MIME-Version: 1.0
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <20251031104924.10631-1-mohamedahmedegypt2001@gmail.com>
 X-Mailman-Approved-At: Mon, 10 Nov 2025 17:05:26 +0000
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
@@ -93,35 +97,11 @@ List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-On Wed, Oct 22, 2025 at 10:56=E2=80=AFPM Danilo Krummrich <dakr@kernel.org>=
- wrote:
->
-> On 10/22/25 12:16 PM, Mohamed Ahmed wrote:
-> > Pinging again re: review and also was asking if we can revert the
-> > select_page_shift() handling back to v1 behavior with a fall-back
-> > path, as it looks like there are some cases where
-> > nouveau_bo_fixup_align() isn't enough;
-> > https://gitlab.freedesktop.org/mesa/mesa/-/merge_requests/36450#note_31=
-59199.
->
-> I don't think we should add a fallback for something that is expected to =
-be
-> sufficient.
->
-> Instead we should figure out in which exact case the WARN_ON() was hit an=
-d why.
 
-The reason I wrote this code initially was to handle addresses
-provided by userspace that aren't aligned to the page size selected
-during BO creation.
-This is something I did trigger when typing this patch initially with
-my distro provided version of mesa (likely 25.0.x but it has been a
-while)
-Thomas Andersen also confirmed on nouveau irc channel that he did hit
-this case with an old version of NVK and this patchset.
+Series is working fine on older versions of NVK and with compression
+patches on mesa side (tested on Ada and Ampere):
 
-I think we could just remove the WARN_ON and properly document that
-this was previously allowed and is there for backward compatibility.
+Tested-by: Mary Guillemard <mary@mary.zone>
 
 Regards,
-Mary Guillemard
+Mary
