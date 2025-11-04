@@ -2,96 +2,92 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id A220CCBAF07
-	for <lists+nouveau@lfdr.de>; Sat, 13 Dec 2025 13:46:43 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id A3ED0CBAEEF
+	for <lists+nouveau@lfdr.de>; Sat, 13 Dec 2025 13:46:37 +0100 (CET)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 6C08A10EC07;
-	Sat, 13 Dec 2025 12:42:18 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 9BBEA10EC4D;
+	Sat, 13 Dec 2025 12:42:17 +0000 (UTC)
 Authentication-Results: gabe.freedesktop.org;
-	dkim=permerror (0-bit key) header.d=gmail.com header.i=@gmail.com header.b="EL2KtXge";
+	dkim=permerror (0-bit key) header.d=gmail.com header.i=@gmail.com header.b="lU/6HIqF";
 	dkim-atps=neutral
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from mail-ot1-f51.google.com (mail-ot1-f51.google.com
- [209.85.210.51])
- by gabe.freedesktop.org (Postfix) with ESMTPS id B7B2D10E60F
- for <nouveau@lists.freedesktop.org>; Tue,  4 Nov 2025 14:35:50 +0000 (UTC)
-Received: by mail-ot1-f51.google.com with SMTP id
- 46e09a7af769-7c69476dd8cso3063162a34.2
- for <nouveau@lists.freedesktop.org>; Tue, 04 Nov 2025 06:35:50 -0800 (PST)
+Received: from mail-pl1-f175.google.com (mail-pl1-f175.google.com
+ [209.85.214.175])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id B13B710E29A
+ for <nouveau@lists.freedesktop.org>; Tue,  4 Nov 2025 17:54:13 +0000 (UTC)
+Received: by mail-pl1-f175.google.com with SMTP id
+ d9443c01a7336-2951e58fa43so3932055ad.1
+ for <nouveau@lists.freedesktop.org>; Tue, 04 Nov 2025 09:54:13 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1762266950; x=1762871750; darn=lists.freedesktop.org;
+ d=gmail.com; s=20230601; t=1762278853; x=1762883653; darn=lists.freedesktop.org;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:from:to:cc:subject:date
  :message-id:reply-to;
- bh=zOvuDFw8E3IMboZLcv+wNk+hwh0bnRBGIEk5JfF2cuE=;
- b=EL2KtXge8/KRzy0tGa1tYMtE46iLjXusA/h4n50xPhNQNtNfW9/SHTlzi8pocQFecs
- /VRR8rAwrCOoZslL9+H5ekpNaOKqTpoGiouLvFlVymqO7VCjW4GZdKGMFGoEzcTg41vD
- pmW/gB4culqNBMcBuusgtmJXyUmSQA9o4R13KFGuj+xkFtAeHBZtWjGAkIwnFCrfXiB1
- O8KCX+CrzzuX3VcZXPke9JgcJ/EK+e2wlAtkyqlIOgQv4b5VUxcBavxtbVyldoO+AjzM
- dYcG2L0KiAcoirqAUomYbALu0YbiXpBnptK+ix+Pro0bqWPZOUISlG/0EdnNV5PvJGAE
- H6rQ==
+ bh=agzzRtsZV6+laamcHgGvEzr1fnC64LJg6bvadj96D6A=;
+ b=lU/6HIqF9hOGh3UCUcj+UbBOr8qML9l5gZkZUQLqg0WSFBROoKEoh5f4Ukxl8ChNZF
+ UxrzHg5Vq6Jeg4sVbk/qWnJ8EVFK8swcze44Mw0VJAp+nPqKN4OXNMzKZ4kkTWF4HUgI
+ kRIweMsmqzGQfWdTk4JP3+QWotMHz0uWfFRwiJ9MiuioojyNOT3B+QjTddH4F1lgCUJq
+ 4FYSp67Xks6E0AVHC8gZfpCSrzqE2K37DlHDipcIdjRBI/BSYBBNpcIcbeAqKR1SEgZJ
+ 3Nim1AEqwaqDUjqekCM1iaLy4nrBDOhdC+Rq6YK/keLLi7bEidQ/cza1BlZ/RTPwU9pU
+ pAsg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1762266950; x=1762871750;
+ d=1e100.net; s=20230601; t=1762278853; x=1762883653;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=zOvuDFw8E3IMboZLcv+wNk+hwh0bnRBGIEk5JfF2cuE=;
- b=CzbY88ubD97Nm22XILsRR+omjmY8wIAOmXYdrtTm0FvYPHVL56cKK8RQE0dLuJHOpp
- irRYln+trnvBZ6lY40BaxPKlrcNTkygjThvEDCz3e8bng4ZqwdooGU/DpjAkfiv/xsyo
- BP0l4sDUQFYAxm6XPwon44r7s3k+d/aU7dzQxxzS5Tum9oOEoMkYBDDo+d1AqWG+AhYM
- /i+oMQR9zew41i85LsrfUCFTEvr7UZ1zAdFbejO+VgkhajUc1rS5HZGno5BcQGlfz4Lx
- EoMMT4Yn4ezuGCavtzuiLXqkZvsJZElTo5G1F0OoSMr0mY7fhRoMCRcHIolcXooh+O6N
- 6vKg==
+ bh=agzzRtsZV6+laamcHgGvEzr1fnC64LJg6bvadj96D6A=;
+ b=jsbokUawQQgPvmRQNHIbbNp3q5qEv3nI0mHF1M1odL2Rr3yy8o6z5EIEwRn72S9HuS
+ fkCXDqqlXGrN9YPEZoXKez53SNmgFdVgKDM94xMewBIUyranOsLPdfwN7EgZ++QG4ntZ
+ zgMdNPVERcehZ5M52tP8LtdBOAJ5VMuYRurdnZfuoH+joU5tL+YyBKDUELrGVvkmOm92
+ jVOgESRSrex03jdfyl9LVS9X2CL7HAejjAhNV5Gs7YGA/OkazgvUu+uCs3Z7+uHb99TR
+ hV/bQropudWkoTd/2f4CXrwEtMsm7IV5HsbvKlmZDzmvasBt8mkE2YCAEM7SOSynKtRp
+ OjNQ==
 X-Forwarded-Encrypted: i=1;
- AJvYcCXzv3pnSRy75a24JK0N5f/+6TK0hl11FeAE95P7kAksa6HTeS/1tny0lCt1tBylDGZnD/xhGau5@lists.freedesktop.org
-X-Gm-Message-State: AOJu0YxkFwHapddCR+tdqRQuykrLqp9ClQoFUP4w1UH8rA4Qyc7KrMRA
- QVr9r2K/yEyjMX8ex3N9fptRM//TSupPkOUEjlPXhKk1Hj3ptwZ+EPOYe3frsJ5C6LIpYqE3YXv
- B6mARsCw6MZPxDQQENJEK+dRAELfxY5s=
-X-Gm-Gg: ASbGncvIlnMpqm/3GUnRBi4AQSzti1wstfg4PffUGYk9e8a2ZEhnanTAicfLZvpnq5z
- FUpqvXcC56aIS6Dw5lUAksIbxsi8IVDjztqJRidQRVJi+Nw8qqhMi9SFGE94bpVGGknPrRwUvK3
- m2RY9hjOKmulvQUOzYM9siKJLGBl0/PFdFt2qwWAbWBvNw1WyIRaRahHV/t4i7QNDDM9UE4BVmj
- QKx5KqEbZgBD9o0WjTPVWpfRkTRq+PXJvgsZ3nUvqeJ3bleDQNhsaztQ+Kb
-X-Google-Smtp-Source: AGHT+IH4OCkFruz7BGxua5FpIyeWRlYQkDUOWfGwgmmxmCKwpvX6Z4Dm1zHFn09KPDIAh4UKGSRMn0mdbsaJbqb/nak=
-X-Received: by 2002:a05:6808:1791:b0:44d:a99e:45c7 with SMTP id
- 5614622812f47-44f95fe6b3dmr6712173b6e.61.1762266949648; Tue, 04 Nov 2025
- 06:35:49 -0800 (PST)
+ AJvYcCWzfMMblCFRHef+MTuVopQZkua/d3aHJN5dWlioAJla5TXV/vQD62hLuLsPtwN6cFiZyC6qhNR0@lists.freedesktop.org
+X-Gm-Message-State: AOJu0YyUR8PZqrv3S9ChzzpEbsXYjJq/HiKfnqgpPsl3/NbOxSerDDI7
+ y2+4LhfYRw0EIn5xHN0sMRi6CQMuYZuggfYaeSTwzjF0nA7kdeO3b1bz+kRisGDJ7ISYs+ErA4K
+ DHbBeEK78STdY5BZuVBl93OGKgTFcmow=
+X-Gm-Gg: ASbGnct/q72eauqUIrVKZJ96a7jyPgQr05unmImnWb5dvvcg3WcC91wYAzKdeJLyZkZ
+ 93YYzG3/F9FkRfD5UyQ9QpwTAaID31j54luhYy9Vi1/JX/3OlEXWSYYrHN1fKfv6wgfGY3RxH4a
+ fOddnreLjsAv+ND0dlOHc+kk+jseQehCDy+jePnmSoXVqALG1IOG77zWa6tyTUte7RqNYwkUTHz
+ Iwp2+14+oHW5ydRNkcwUbmSZUSmErHkWVECjFiD+po3HOWRNhVfK/UVAa2zAZ0vn7C7XibDRlpl
+ s15sfGxWkkeBxWC9exN7lPGg/inaEmIdV3e6vM0MqCjaulDMeFG/GGBaG2H2IhkrI+mLOIA1/cR
+ feLc=
+X-Google-Smtp-Source: AGHT+IFMtgciB6QONB6VxZCG1myoQ/OF5p9zSByGfEAwuejN7MO6VmvweNifh8ze36q1bb6i4v+fU3wfRfdXIBYH7Vo=
+X-Received: by 2002:a17:903:32d1:b0:295:a1a5:baf6 with SMTP id
+ d9443c01a7336-2962ae52bc0mr2728245ad.6.1762278853136; Tue, 04 Nov 2025
+ 09:54:13 -0800 (PST)
 MIME-Version: 1.0
-References: <20251030190613.1224287-1-joelagnelf@nvidia.com>
- <20251030190613.1224287-2-joelagnelf@nvidia.com>
- <DDX1WYWQNTAB.BBEICMO8NM30@nvidia.com>
- <20251104005812.GA2101511@joelbox2> <DDZYCRCPYMOL.RMTIF0R404Q4@nvidia.com>
- <CANiq72=Cj_gJ27+EAiytxYGYk1dMwu7M3xQpLGByD4QstgDsHw@mail.gmail.com>
-In-Reply-To: <CANiq72=Cj_gJ27+EAiytxYGYk1dMwu7M3xQpLGByD4QstgDsHw@mail.gmail.com>
-From: Guillaume Gomez <guillaume1.gomez@gmail.com>
-Date: Tue, 4 Nov 2025 15:35:38 +0100
-X-Gm-Features: AWmQ_bkVG2efaCRVFs-QREr4TF_4XAydKse4BHYewSEAhSr6252jH2iQIzSA-jQ
-Message-ID: <CAAOQCfQ_d_C7oZ9uq2siJHn1+m+j059qYUMBvTWOnQ5Etk91ug@mail.gmail.com>
-Subject: Re: [PATCH RFC 1/4] rust: clist: Add abstraction for iterating over C
- linked lists
-To: Miguel Ojeda <miguel.ojeda.sandonis@gmail.com>
-Cc: Alexandre Courbot <acourbot@nvidia.com>,
- Joel Fernandes <joelagnelf@nvidia.com>, 
- linux-kernel@vger.kernel.org, rust-for-linux@vger.kernel.org, 
- dri-devel@lists.freedesktop.org, dakr@kernel.org, 
- David Airlie <airlied@gmail.com>, Alistair Popple <apopple@nvidia.com>,
- Miguel Ojeda <ojeda@kernel.org>, 
+References: <20251020185539.49986-1-joelagnelf@nvidia.com>
+ <20251020185539.49986-8-joelagnelf@nvidia.com>
+ <CANiq72=SSQ5nSjt9yzX_A3Tgo2ByGM5CV0VqFnF1cTOzrZ-pbg@mail.gmail.com>
+ <226d7dcb-26c3-4477-b1e9-2b837dc17cd1@nvidia.com>
+In-Reply-To: <226d7dcb-26c3-4477-b1e9-2b837dc17cd1@nvidia.com>
+From: Miguel Ojeda <miguel.ojeda.sandonis@gmail.com>
+Date: Tue, 4 Nov 2025 18:54:00 +0100
+X-Gm-Features: AWmQ_bnlFTvkhYxQQsxRU1wVA_rAcYxAjX9HSQxCVZanIDspjsve6Q_H0_KRQ5Q
+Message-ID: <CANiq72mqDWrLp9EjXHUgeODh1zh-9XaUnmgHWGgX2Awqs4G=cw@mail.gmail.com>
+Subject: Re: [PATCH 7/7] nova-core: mm: Add data structures for page table
+ management
+To: Joel Fernandes <joelagnelf@nvidia.com>
+Cc: linux-kernel@vger.kernel.org, rust-for-linux@vger.kernel.org, 
+ dri-devel@lists.freedesktop.org, dakr@kernel.org, acourbot@nvidia.com, 
+ Alistair Popple <apopple@nvidia.com>, Miguel Ojeda <ojeda@kernel.org>, 
  Alex Gaynor <alex.gaynor@gmail.com>, Boqun Feng <boqun.feng@gmail.com>, 
  Gary Guo <gary@garyguo.net>, bjorn3_gh@protonmail.com, 
  Benno Lossin <lossin@kernel.org>, Andreas Hindborg <a.hindborg@kernel.org>, 
  Alice Ryhl <aliceryhl@google.com>, Trevor Gross <tmgross@umich.edu>, 
- Simona Vetter <simona@ffwll.ch>,
- Maarten Lankhorst <maarten.lankhorst@linux.intel.com>, 
- Maxime Ripard <mripard@kernel.org>, Thomas Zimmermann <tzimmermann@suse.de>, 
- John Hubbard <jhubbard@nvidia.com>, Timur Tabi <ttabi@nvidia.com>,
- joel@joelfernandes.org, Elle Rhumsaa <elle@weathered-steel.dev>,
- Daniel Almeida <daniel.almeida@collabora.com>, 
- Andrea Righi <arighi@nvidia.com>, Philipp Stanner <phasta@kernel.org>,
- nouveau@lists.freedesktop.org, 
- Nouveau <nouveau-bounces@lists.freedesktop.org>
+ David Airlie <airlied@gmail.com>, Simona Vetter <simona@ffwll.ch>, 
+ Maarten Lankhorst <maarten.lankhorst@linux.intel.com>,
+ Maxime Ripard <mripard@kernel.org>, 
+ Thomas Zimmermann <tzimmermann@suse.de>, John Hubbard <jhubbard@nvidia.com>,
+ Timur Tabi <ttabi@nvidia.com>, 
+ joel@joelfernandes.org, Elle Rhumsaa <elle@weathered-steel.dev>, 
+ Daniel Almeida <daniel.almeida@collabora.com>, nouveau@lists.freedesktop.org
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
-X-Mailman-Approved-At: Sat, 13 Dec 2025 12:40:45 +0000
+X-Mailman-Approved-At: Sat, 13 Dec 2025 12:40:48 +0000
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -106,34 +102,52 @@ List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-You can use `cfg(doc)` and `cfg(doctest)` to only include parts of the
-docs when running doctests (if that's what this is about).
+On Mon, Nov 3, 2025 at 8:21=E2=80=AFPM Joel Fernandes <joelagnelf@nvidia.co=
+m> wrote:
+>
+> Thanks a lot for these, I studied all of the suggestions and agree with t=
+hem.
+> May I also suggest to add some of these suggestions to the kernel rust co=
+ding
+> guidelines document, that way others new to sending rust kernel patches d=
+on't
+> miss it (example not adding a period at the end of a markdown doc header.=
+). But
 
-Le mar. 4 nov. 2025 =C3=A0 15:07, Miguel Ojeda
-<miguel.ojeda.sandonis@gmail.com> a =C3=A9crit :
->
-> On Tue, Nov 4, 2025 at 2:42=E2=80=AFPM Alexandre Courbot <acourbot@nvidia=
-.com> wrote:
-> >
-> > What I'm more worried about is that it might be a PITA to write. :/ But
-> > maybe the core folks have an example for how this could be done cleanly
-> > and in a reusable way (i.e. we don't want to duplicate the dummy list
-> > creation code for every example).
->
-> Using a shared module/file may be good enough, as long as the `#[path
-> =3D ...] mod ...;` or `include!(...)` is hidden with `#`, i.e. as long
-> as the user does not need to see that to understand the example.
->
-> But, yeah, we have already a few places in the tree with fake `mod
-> bindings` for doctests and things like that.
->
-> Cc'ing Guillaume in case there is a better way to do this. The "have
-> something applied to several parts of docs" has come up before for
-> references too (the "external references map" I proposed).
->
-> In any case, even if the example does not run, it is still way better
-> to have it at least build instead of completely ignored, because that
-> means it will not become stale.
->
-> Cheers,
-> Miguel
+You're welcome!
+
+I don't think everyone reads the documentation, and one issue is that
+the longer it is, the less people may read it. For instance, the note
+about using "Examples" as the section name is already explicitly there
+and other bits can be inferred from the examples' style.
+
+Now, in 2025, thanks to AI, you actually have a point, in the sense
+that I assume people may be able to point a patch to an AI to ask it
+to apply the guidelines from such a document.
+
+So a good way forward may be best to have a list of "short
+rules/examples" in a separate section or document, where I can easily
+add entries with a simple example without too much explanation. Yeah,
+I think I will do that.
+
+> Also a lot of your suggestions are related to how it looks it rustdoc, so=
+ I will
+> try to build rustdoc and see what it looks like as well, to get an idea o=
+f when
+> things in my patches could be improved.
+
+Definitely, please do!
+
+We all should be doing it, especially so when the changes aren't
+trivial (e.g. adding an entire new feature/API).
+
+I have it in the "Subsystem Profile" document from `MAINTAINERS`:
+
+    https://rust-for-linux.com/contributing#submit-checklist-addendum
+
+    "When submitting changes to Rust code documentation, please render
+them using the `rustdoc` target and ensure the result looks as
+expected."
+
+Cheers,
+Miguel
