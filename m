@@ -2,76 +2,76 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id EC535CBAC82
-	for <lists+nouveau@lfdr.de>; Sat, 13 Dec 2025 13:44:04 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 70BD5CBAF8B
+	for <lists+nouveau@lfdr.de>; Sat, 13 Dec 2025 13:47:15 +0100 (CET)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 62CBB10EB86;
-	Sat, 13 Dec 2025 12:41:09 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 0C33410ECA2;
+	Sat, 13 Dec 2025 12:42:23 +0000 (UTC)
 Authentication-Results: gabe.freedesktop.org;
-	dkim=permerror (0-bit key) header.d=gmail.com header.i=@gmail.com header.b="L1ztI35s";
+	dkim=permerror (0-bit key) header.d=gmail.com header.i=@gmail.com header.b="HYpO5of7";
 	dkim-atps=neutral
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from mail-pg1-f182.google.com (mail-pg1-f182.google.com
- [209.85.215.182])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 02A6810E5DB
- for <nouveau@lists.freedesktop.org>; Tue,  4 Nov 2025 13:52:16 +0000 (UTC)
-Received: by mail-pg1-f182.google.com with SMTP id
- 41be03b00d2f7-b62e55af64aso389575a12.1
- for <nouveau@lists.freedesktop.org>; Tue, 04 Nov 2025 05:52:16 -0800 (PST)
+Received: from mail-pg1-f176.google.com (mail-pg1-f176.google.com
+ [209.85.215.176])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 3890910E60A
+ for <nouveau@lists.freedesktop.org>; Tue,  4 Nov 2025 14:07:28 +0000 (UTC)
+Received: by mail-pg1-f176.google.com with SMTP id
+ 41be03b00d2f7-b997ae045b7so255257a12.2
+ for <nouveau@lists.freedesktop.org>; Tue, 04 Nov 2025 06:07:28 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1762264336; x=1762869136; darn=lists.freedesktop.org;
+ d=gmail.com; s=20230601; t=1762265248; x=1762870048; darn=lists.freedesktop.org;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:from:to:cc:subject:date
  :message-id:reply-to;
- bh=WgxSC2aKqxilandHAezVm5gKzGGQcz0P4+qV+dri/oU=;
- b=L1ztI35sVSOx+hFlHTBdwSkV6fYmyA7jTo0io5W3EV7SiLVDrnmq1D8+6wPs4fCy5F
- SAwdZdAvob8l3j6y3du0l8WAguilj5RW+emiE6zSsLY9lul+uVIFdKBXWUclP8028Y4A
- dlC4P0fd9X2TmqEfBf5/FzVtUN4F4HpiZ99aKSNYsXEgXLD9Ixv3hj7vOaYuYSIIqCUG
- ff7HtYRWT+NruF0S2dJF9seajxGaSrse7yhKbdCCVxbJ+JVFKmAYZVU1CdqdegXErQxm
- NYUPWeM+Zv+G2sHBstyuPjwPD1k9XW/nZJPKtmKBtU5YRzYzFnqaBVzGv58nOTZZqfaX
- V/ug==
+ bh=PEGyLJUT+zzSFJ95q6Pkl8/xdguEfP2nRB1yIszhyZY=;
+ b=HYpO5of7+ChUFiFxcq0BpEVvNZh0YfW8ct8uyHSU+j3MchH8r7fx2gXBZLYrPzo4+y
+ Cl++etFLgDL6PpZFLaa5FSzeTzluMEQzi2NZ5LuNNxBzdeNh6j644NUtNbM5QlhkIASh
+ FXZYRDoQXnwmHd+wNIuMKDL6L7RDeEGSKhGjlM8C0p3gyV4Vm6AyxFUnoQhMw88O5olh
+ fDngacDftzcON7kk1TGLLnW8SWm6Yd0+esPEpFyv3OKjTXQ2nDVhG+tX+jmvBJYsHhj7
+ +96P97Thao9Wk2C/11JzFqMZYEzEP66fR9pQqRxsJD09oelvsX+vULocAFgirIsxCvnu
+ 2e1w==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1762264336; x=1762869136;
+ d=1e100.net; s=20230601; t=1762265248; x=1762870048;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=WgxSC2aKqxilandHAezVm5gKzGGQcz0P4+qV+dri/oU=;
- b=h8URhHGONfXnOGDGkmvJq678hE2jh+Kos18qLzGIoFYax7M5LXjw3xGGNmXVtQVLYb
- SbCdjbH6iL6VlhGZh2xv9y393JThuH7bpwrBo+jG28fbklH1FmU3VV5Yj5fB9Chbpfh/
- owz3STW4KSWa8xuFxIn0dlSSnY0bKSwdjx24r7JnUWiwfnRVUHPMs4z2OGJ2Ap/HjOId
- GV8SKEC5dFrLHQbocXWcB3OQK4VHYwpznZVvF0GkWPeSuPWhXKcDF1iNY/8fQDFE0JiG
- YM46VjC7gqkWDSdX+cvb002cbpeYt5MhhYOcJVAMOyUOK8uRRlmQLRKV830eMf3kvc3W
- 6ktA==
+ bh=PEGyLJUT+zzSFJ95q6Pkl8/xdguEfP2nRB1yIszhyZY=;
+ b=mutTtLBtUxK+/xSdEUJzsvOS9noSPRmg6h+Qq19L0HkSCENg7Hz/E/GnE+7BrD+W/k
+ h3Jvn01tiFRGHtYenW6KDViqNVTIS9eO7qy+Wkf/JIyMt8RMc9j7D+KEcJE6m2LhmDVd
+ KiOmwFDbZAb2WmqGnYtDRkn4KaGCdUvNiTRTaCQUgYp4JE+OBHXIF2EfHbOpqIaS4HN5
+ Wv/bD9lbBi2PYvz5STlXhuNhfPBMh3i0VR60ZRzlpvkf74C46F9/6JNiXijxN+lvU7wR
+ DX6+62blt+I9g22JZ3qw1I40q+o2IBC7Pnk1U1lhG3UeyiIBcEzB5XNS4nHigwRNfWwC
+ BjHQ==
 X-Forwarded-Encrypted: i=1;
- AJvYcCX+Vk+SRP4WOa2WitMEDNqx/xeCSrO1uMX/YhUF8T2YcQOB/7UGJMDGkOC0Rw6qk+r+xVtPyTn4@lists.freedesktop.org
-X-Gm-Message-State: AOJu0YxsxJEM+AL/ShZHnrx01Fg7Ho3pVnUPv5YZylLDDjTkQJkLemwO
- fBzcUUGanwoZ/wRl5KFl6Z65P8W4IJaXjoy/I0MKD4XGhMUwu26IhmLQZ5cBwCOa5KOkuAjIqJ2
- UO7XA71PP+N1yCY/kLKyN+9i4RJR18y4=
-X-Gm-Gg: ASbGncvZZ4EaJAWV6QmP9BhENBkNZrX7L+0RvEj7IggcwfEFEGk3MCIy20/Tf2QI9Fq
- HAC+0M7D2qPxM9uMW4ROd6s716Apbcz1tee7whkDCgErMkvr/Z7pL3aU1QU9/Trs4Xe78cSptuF
- Uc06QqNNSpQz7CWFuPBId78F7vTgSyBRCJAWRHCVm86/KfW0j39X7yQ0Q+Vtnnl+0uUfRQHZ7oL
- ZSH82CyYqpb1VZ0akp+b8E+YXVz24X7cSvF8yqwhq4iCv9W1s4fSGJ1d32kcXZbyWgezwAZ2sRm
- JnUbRTB28cNb7g28mUif9xQcSwGtMNiir2lFFNLFBsooVB5jBLY1oEh5zLcYlwZjRZdjMj8W1eE
- qzkI=
-X-Google-Smtp-Source: AGHT+IEHIHWibqjAZGWyvY0H8m2w47BvrG2lZbXh2UQMD9AI1DeCBy/GvhFpcB4QhflEwGDTQ3v2/JNfuI82Byb03zs=
-X-Received: by 2002:a17:90b:3b87:b0:340:b8f2:250c with SMTP id
- 98e67ed59e1d1-340b8f22df9mr9464706a91.1.1762264336293; Tue, 04 Nov 2025
- 05:52:16 -0800 (PST)
+ AJvYcCWmoqCUUrIiXe8VTel3ieeG3FJZofEhInAUAYMoq85K1PWv+gI2aIJLTROz3dAdEut6Kf9nIsZt@lists.freedesktop.org
+X-Gm-Message-State: AOJu0YyAhWOIDq2nJDtgv5HlkWEzZ/9ujn0Bon1UvYPGrabsKAmQYUdi
+ B5fFlumU8jhiemD1TwDfK4D7XtbSObfP8lBZj8TO0nEeGAWGg/ctc11zmz6qOQk2kvP0pvgrodQ
+ sr5WqU7URfS4RmwWlNE/HaWCu/vji/1Q=
+X-Gm-Gg: ASbGncsjtnNKDTClcu96GpBfXMSdLU+HLxkXwSJqQf9ZkEBQjo9/YUVIUwnApZAVinz
+ bSIOi7WNnE89phkEBKSNbrJIEUPstx4GSmR8rnJz/ba6R6Q/3BevUOOVJxKWZJY77dZ62Fr/+qq
+ lv1NoUQ1aJfoBXMKXQxAxeQh2MB2LfehKMTJFpeoqIvhEOfxSl+AUOGh33cr/KTJrh4xXh+vxgt
+ Y5DGrjU0Gtz146ifPH0uii1JJbvtBl+ph1uyb1Hju8PueXydDixwEJUrcypUz2cXmj3eA++PS8Y
+ QLTY+OLAVyAk0iZ00yPQU3R9NW7LkNWUkiNtkB2iFol2meshLmBW8tFjx7NKN0YrA/dydk1kUQ8
+ sll2cwpM6BdO+Ow==
+X-Google-Smtp-Source: AGHT+IEoQt7wc4QhveCREcNLj59n0mc2+WwtyT6a1zVCHIjoX1thJlflh/bTa19DZhwmYOUd1dkkOIBrsDu+HwIpQfs=
+X-Received: by 2002:a05:6a21:a44:b0:2df:b68d:f7e with SMTP id
+ adf61e73a8af0-348cd411b8cmr11613230637.5.1762265245767; Tue, 04 Nov 2025
+ 06:07:25 -0800 (PST)
 MIME-Version: 1.0
 References: <20251030190613.1224287-1-joelagnelf@nvidia.com>
  <20251030190613.1224287-2-joelagnelf@nvidia.com>
  <DDX1WYWQNTAB.BBEICMO8NM30@nvidia.com>
- <20251104005812.GA2101511@joelbox2>
-In-Reply-To: <20251104005812.GA2101511@joelbox2>
+ <20251104005812.GA2101511@joelbox2> <DDZYCRCPYMOL.RMTIF0R404Q4@nvidia.com>
+In-Reply-To: <DDZYCRCPYMOL.RMTIF0R404Q4@nvidia.com>
 From: Miguel Ojeda <miguel.ojeda.sandonis@gmail.com>
-Date: Tue, 4 Nov 2025 14:52:03 +0100
-X-Gm-Features: AWmQ_blJ7jEt0nl7CKtiOJzaUdItBJ90fhDQUgIcURkC12jl_69-w8beSolcQvU
-Message-ID: <CANiq72m692bb+W32QN1G+LJa7sHs=gU8k6dri3mu95Smj7GiRw@mail.gmail.com>
+Date: Tue, 4 Nov 2025 15:07:12 +0100
+X-Gm-Features: AWmQ_bnRfHv_8j6zHrslJDNBWq9rDs6IM9lMFZ907aXIc2-_3edh4KvJlGf8RU8
+Message-ID: <CANiq72=Cj_gJ27+EAiytxYGYk1dMwu7M3xQpLGByD4QstgDsHw@mail.gmail.com>
 Subject: Re: [PATCH RFC 1/4] rust: clist: Add abstraction for iterating over C
  linked lists
-To: Joel Fernandes <joelagnelf@nvidia.com>
-Cc: Alexandre Courbot <acourbot@nvidia.com>, linux-kernel@vger.kernel.org, 
+To: Alexandre Courbot <acourbot@nvidia.com>
+Cc: Joel Fernandes <joelagnelf@nvidia.com>, linux-kernel@vger.kernel.org, 
  rust-for-linux@vger.kernel.org, dri-devel@lists.freedesktop.org, 
  dakr@kernel.org, David Airlie <airlied@gmail.com>,
  Alistair Popple <apopple@nvidia.com>, 
@@ -88,7 +88,8 @@ Cc: Alexandre Courbot <acourbot@nvidia.com>, linux-kernel@vger.kernel.org,
  Daniel Almeida <daniel.almeida@collabora.com>, 
  Andrea Righi <arighi@nvidia.com>, Philipp Stanner <phasta@kernel.org>,
  nouveau@lists.freedesktop.org, 
- Nouveau <nouveau-bounces@lists.freedesktop.org>
+ Nouveau <nouveau-bounces@lists.freedesktop.org>, 
+ Guillaume Gomez <guillaume1.gomez@gmail.com>
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
 X-Mailman-Approved-At: Sat, 13 Dec 2025 12:40:48 +0000
@@ -106,17 +107,28 @@ List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-On Tue, Nov 4, 2025 at 1:58=E2=80=AFAM Joel Fernandes <joelagnelf@nvidia.co=
-m> wrote:
+On Tue, Nov 4, 2025 at 2:42=E2=80=AFPM Alexandre Courbot <acourbot@nvidia.c=
+om> wrote:
 >
-> Perhaps wrapping it is #cfg is sufficient.
+> What I'm more worried about is that it might be a PITA to write. :/ But
+> maybe the core folks have an example for how this could be done cleanly
+> and in a reusable way (i.e. we don't want to duplicate the dummy list
+> creation code for every example).
 
-`cfg` attributes and the `cfg!` macro should work in doctests -- we
-have already a few instances, e.g. this hidden one:
+Using a shared module/file may be good enough, as long as the `#[path
+=3D ...] mod ...;` or `include!(...)` is hidden with `#`, i.e. as long
+as the user does not need to see that to understand the example.
 
-    /// ```
-    /// # #![cfg(CONFIG_OF)]
-    /// use kernel::clk::Hertz;
+But, yeah, we have already a few places in the tree with fake `mod
+bindings` for doctests and things like that.
+
+Cc'ing Guillaume in case there is a better way to do this. The "have
+something applied to several parts of docs" has come up before for
+references too (the "external references map" I proposed).
+
+In any case, even if the example does not run, it is still way better
+to have it at least build instead of completely ignored, because that
+means it will not become stale.
 
 Cheers,
 Miguel
