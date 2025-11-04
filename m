@@ -2,64 +2,64 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id D7243C32977
-	for <lists+nouveau@lfdr.de>; Tue, 04 Nov 2025 19:18:45 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 7BC39C32F20
+	for <lists+nouveau@lfdr.de>; Tue, 04 Nov 2025 21:41:46 +0100 (CET)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 2B67C10E661;
-	Tue,  4 Nov 2025 18:18:42 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 750E010E66B;
+	Tue,  4 Nov 2025 20:41:42 +0000 (UTC)
 Authentication-Results: gabe.freedesktop.org;
-	dkim=pass (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="GUv3mfeO";
+	dkim=pass (1024-bit key; unprotected) header.d=collabora.com header.i=deborah.brouwer@collabora.com header.b="BET+yYbf";
 	dkim-atps=neutral
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from sea.source.kernel.org (sea.source.kernel.org [172.234.252.31])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 643AC10E089;
- Tue,  4 Nov 2025 18:18:40 +0000 (UTC)
-Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by sea.source.kernel.org (Postfix) with ESMTP id 0C68A44391;
- Tue,  4 Nov 2025 18:18:40 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id BB74CC4CEF7;
- Tue,  4 Nov 2025 18:18:34 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1762280319;
- bh=yGRnsBbb5Du0szO4BPlFV4TodS9lEiUCQrYF+bOx4vY=;
- h=Date:Subject:Cc:To:From:References:In-Reply-To:From;
- b=GUv3mfeOHDGSrgJUzJs9qVbo0p0dJU6bJ3d3FdiooDni+U0RK+SDizQkkR9iEsSc2
- yCiee8rVDxAfRAfRW5Hm8VU2YE5P9inYoRB5EG7J/FKeaV+b2ZFQTQoWKzwj07brWW
- 6QWyCshNGNYEMeiORj+FIlUjyuAsxUntV0cubbpDUQaqwoNKwN2s8UZ5MZbLpTtqzn
- 1GOXMpZAKrIM/LwmqTa7Jr4kIh6cVFQcXtG0YrykfLfO5wj69GR9nIUApG0KZHxjsT
- lDopn9GkN8ubdtA7/UWqCtz6V/pNRrW0HLhqs1e0sj2IL6Acu93MGyZfC5laBz4Dxv
- GBd7KsinxeLvA==
-Mime-Version: 1.0
-Content-Transfer-Encoding: quoted-printable
-Content-Type: text/plain; charset=UTF-8
-Date: Tue, 04 Nov 2025 19:18:32 +0100
-Message-Id: <DE048FD96PHV.2SXSVEHPD9ZOP@kernel.org>
-Subject: Re: [PATCH 7/7] nova-core: mm: Add data structures for page table
- management
-Cc: "Miguel Ojeda" <miguel.ojeda.sandonis@gmail.com>,
- <linux-kernel@vger.kernel.org>, <rust-for-linux@vger.kernel.org>,
- <dri-devel@lists.freedesktop.org>, <acourbot@nvidia.com>, "Alistair Popple"
- <apopple@nvidia.com>, "Miguel Ojeda" <ojeda@kernel.org>, "Alex Gaynor"
- <alex.gaynor@gmail.com>, "Boqun Feng" <boqun.feng@gmail.com>, "Gary Guo"
- <gary@garyguo.net>, <bjorn3_gh@protonmail.com>, "Benno Lossin"
- <lossin@kernel.org>, "Andreas Hindborg" <a.hindborg@kernel.org>, "Alice
- Ryhl" <aliceryhl@google.com>, "Trevor Gross" <tmgross@umich.edu>, "David
- Airlie" <airlied@gmail.com>, "Simona Vetter" <simona@ffwll.ch>, "Maarten
- Lankhorst" <maarten.lankhorst@linux.intel.com>, "Maxime Ripard"
- <mripard@kernel.org>, "Thomas Zimmermann" <tzimmermann@suse.de>, "John
- Hubbard" <jhubbard@nvidia.com>, "Timur Tabi" <ttabi@nvidia.com>,
- <joel@joelfernandes.org>, "Elle Rhumsaa" <elle@weathered-steel.dev>,
- "Daniel Almeida" <daniel.almeida@collabora.com>,
- <nouveau@lists.freedesktop.org>
-To: "Joel Fernandes" <joelagnelf@nvidia.com>
-From: "Danilo Krummrich" <dakr@kernel.org>
-References: <20251020185539.49986-1-joelagnelf@nvidia.com>
- <20251020185539.49986-8-joelagnelf@nvidia.com>
- <CANiq72=SSQ5nSjt9yzX_A3Tgo2ByGM5CV0VqFnF1cTOzrZ-pbg@mail.gmail.com>
- <226d7dcb-26c3-4477-b1e9-2b837dc17cd1@nvidia.com>
- <CANiq72mqDWrLp9EjXHUgeODh1zh-9XaUnmgHWGgX2Awqs4G=cw@mail.gmail.com>
-In-Reply-To: <CANiq72mqDWrLp9EjXHUgeODh1zh-9XaUnmgHWGgX2Awqs4G=cw@mail.gmail.com>
+Received: from sender4-op-o15.zoho.com (sender4-op-o15.zoho.com
+ [136.143.188.15])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id DD0BC10E668;
+ Tue,  4 Nov 2025 20:41:40 +0000 (UTC)
+ARC-Seal: i=1; a=rsa-sha256; t=1762288891; cv=none; 
+ d=zohomail.com; s=zohoarc; 
+ b=ipq8PWB3GgNQMZAmxyUQBtCYrvC1OR4VmMKYFK5oVoZV5sYq9uUjVb5Bj4UK/4XSi526AZrP97T6GXg0Qi3ivK68/0ySblWOgBoO4k8mxhptLw+lxKJUlnEVz+Aiy++TLmNJbjGmcbp92YEwpo7hAWzshNbX5jOeXT5k8kiVG5Q=
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=zohomail.com;
+ s=zohoarc; t=1762288891;
+ h=Content-Type:Cc:Cc:Date:Date:From:From:In-Reply-To:MIME-Version:Message-ID:References:Subject:Subject:To:To:Message-Id:Reply-To;
+ bh=UdNE52py5w5GbF1Vmt3kzvD/+HZJJNr5pY7ZeT6RQeo=; 
+ b=CwmkK1TbEtK1poXQs7bT07nCJQX8GvIx6hj5BD7v/5zemhHs/QTcjTYJP379NX9W79FN4iVMYX5qfY91R3PMv55Kor6o1RUGMybyjvtaTMhi461NGeFNNEk00LaH6vOO9TJpLC7mf90MGwCgkfMhQDEMFyCOn6mAn7ZKId5TvXg=
+ARC-Authentication-Results: i=1; mx.zohomail.com;
+ dkim=pass  header.i=collabora.com;
+ spf=pass  smtp.mailfrom=deborah.brouwer@collabora.com;
+ dmarc=pass header.from=<deborah.brouwer@collabora.com>
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; t=1762288891; 
+ s=zohomail; d=collabora.com; i=deborah.brouwer@collabora.com; 
+ h=Date:Date:From:From:To:To:Cc:Cc:Subject:Subject:Message-ID:References:MIME-Version:Content-Type:In-Reply-To:Message-Id:Reply-To;
+ bh=UdNE52py5w5GbF1Vmt3kzvD/+HZJJNr5pY7ZeT6RQeo=;
+ b=BET+yYbfWgo+EJbuuxNlMXMu8LGS3T8Zg8XnTuqdbu8XK9qRRUfNrTc1hmAeE+kT
+ l1BSocmWMSf69v1Bu6cn+7l4cKf8zhvpsxDrzNprpRbuwJP8Ef8hU8CzlRr58ZMXx4c
+ zmmqqymtTPmzY764nZ3ZVQ4/GtAWueYJo/4s1Ewk=
+Received: by mx.zohomail.com with SMTPS id 1762288888762838.1883086250991;
+ Tue, 4 Nov 2025 12:41:28 -0800 (PST)
+Date: Tue, 4 Nov 2025 12:41:27 -0800
+From: Deborah Brouwer <deborah.brouwer@collabora.com>
+To: Lyude Paul <lyude@redhat.com>
+Cc: dri-devel@lists.freedesktop.org, rust-for-linux@vger.kernel.org,
+ Alice Ryhl <aliceryhl@google.com>,
+ Daniel Almeida <daniel.almeida@collabora.com>,
+ Danilo Krummrich <dakr@kernel.org>, linux-kernel@vger.kernel.org,
+ David Airlie <airlied@gmail.com>, Simona Vetter <simona@ffwll.ch>,
+ Miguel Ojeda <ojeda@kernel.org>, Alex Gaynor <alex.gaynor@gmail.com>,
+ Boqun Feng <boqun.feng@gmail.com>, Gary Guo <gary@garyguo.net>,
+ =?iso-8859-1?Q?Bj=F6rn?= Roy Baron <bjorn3_gh@protonmail.com>,
+ Benno Lossin <lossin@kernel.org>, Andreas Hindborg <a.hindborg@kernel.org>,
+ Trevor Gross <tmgross@umich.edu>, Asahi Lina <lina+kernel@asahilina.net>,
+ Shankari Anand <shankari.ak0208@gmail.com>,
+ "open list:DRM DRIVER FOR NVIDIA GPUS [RUST]" <nouveau@lists.freedesktop.org>
+Subject: Re: [PATCH v5 4/8] rust: gem: Introduce DriverObject::Args
+Message-ID: <aQpk98pvsZUdk3xa@um790>
+References: <20251023212540.1141999-1-lyude@redhat.com>
+ <20251023212540.1141999-5-lyude@redhat.com>
+MIME-Version: 1.0
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <20251023212540.1141999-5-lyude@redhat.com>
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -74,24 +74,88 @@ List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-On Tue Nov 4, 2025 at 6:54 PM CET, Miguel Ojeda wrote:
-> On Mon, Nov 3, 2025 at 8:21=E2=80=AFPM Joel Fernandes <joelagnelf@nvidia.=
-com> wrote:
->> Also a lot of your suggestions are related to how it looks it rustdoc, s=
-o I will
->> try to build rustdoc and see what it looks like as well, to get an idea =
-of when
->> things in my patches could be improved.
+On Thu, Oct 23, 2025 at 05:22:06PM -0400, Lyude Paul wrote:
+> This is an associated type that may be used in order to specify a data-type
+> to pass to gem objects when construction them, allowing for drivers to more
+> easily initialize their private-data for gem objects.
+> 
+> Signed-off-by: Lyude Paul <lyude@redhat.com>
+> Reviewed-by: Alice Ryhl <aliceryhl@google.com>
+> 
+> ---
+> V3:
+> * s/BaseDriverObject/DriverObject/
+> V4:
+> * Fix leftover reference to BaseObjectDriver in rustdoc for
+>   DriverObject::Args
+> 
+>  drivers/gpu/drm/nova/gem.rs |  5 +++--
+>  rust/kernel/drm/gem/mod.rs  | 13 ++++++++++---
+>  2 files changed, 13 insertions(+), 5 deletions(-)
+> 
+> diff --git a/drivers/gpu/drm/nova/gem.rs b/drivers/gpu/drm/nova/gem.rs
+> index 2760ba4f3450b..173077eeb2def 100644
+> --- a/drivers/gpu/drm/nova/gem.rs
+> +++ b/drivers/gpu/drm/nova/gem.rs
+> @@ -18,8 +18,9 @@ pub(crate) struct NovaObject {}
+>  
+>  impl gem::DriverObject for NovaObject {
+>      type Driver = NovaDriver;
+> +    type Args = ();
+>  
+> -    fn new(_dev: &NovaDevice, _size: usize) -> impl PinInit<Self, Error> {
+> +    fn new(_dev: &NovaDevice, _size: usize, _args: Self::Args) -> impl PinInit<Self, Error> {
+>          try_pin_init!(NovaObject {})
+>      }
+>  }
 
-For the drm-rust tree we also have a summary [1] of things committers are
-expected to check (including a link to the generic kernel and Rust checklis=
-t).
+Hi Lyude - could you please add the same changes for Tyr so it will
+compile too
 
-> Definitely, please do!
-
-@Joel: Just be aware that for leaf crates no documentation is built yet, on=
-ly
-the kernel crate is built.
-
-[1] https://drm.pages.freedesktop.org/maintainer-tools/committer/committer-=
-drm-rust.html#submit-checklist
+> @@ -33,7 +34,7 @@ pub(crate) fn new(dev: &NovaDevice, size: usize) -> Result<ARef<gem::Object<Self
+>              return Err(EINVAL);
+>          }
+>  
+> -        gem::Object::new(dev, aligned_size)
+> +        gem::Object::new(dev, aligned_size, ())
+>      }
+>  
+>      /// Look up a GEM object handle for a `File` and return an `ObjectRef` for it.
+> diff --git a/rust/kernel/drm/gem/mod.rs b/rust/kernel/drm/gem/mod.rs
+> index 67813cfb0db42..d448c65fe5e13 100644
+> --- a/rust/kernel/drm/gem/mod.rs
+> +++ b/rust/kernel/drm/gem/mod.rs
+> @@ -65,8 +65,15 @@ pub trait DriverObject: Sync + Send + Sized {
+>      /// Parent `Driver` for this object.
+>      type Driver: drm::Driver;
+>  
+> +    /// The data type to use for passing arguments to [`DriverObject::new`].
+> +    type Args;
+> +
+>      /// Create a new driver data object for a GEM object of a given size.
+> -    fn new(dev: &drm::Device<Self::Driver>, size: usize) -> impl PinInit<Self, Error>;
+> +    fn new(
+> +        dev: &drm::Device<Self::Driver>,
+> +        size: usize,
+> +        args: Self::Args,
+> +    ) -> impl PinInit<Self, Error>;
+>  
+>      /// Open a new handle to an existing object, associated with a File.
+>      fn open(_obj: &<Self::Driver as drm::Driver>::Object, _file: &DriverFile<Self>) -> Result {
+> @@ -247,11 +254,11 @@ impl<T: DriverObject> Object<T> {
+>      };
+>  
+>      /// Create a new GEM object.
+> -    pub fn new(dev: &drm::Device<T::Driver>, size: usize) -> Result<ARef<Self>> {
+> +    pub fn new(dev: &drm::Device<T::Driver>, size: usize, args: T::Args) -> Result<ARef<Self>> {
+>          let obj: Pin<KBox<Self>> = KBox::pin_init(
+>              try_pin_init!(Self {
+>                  obj: Opaque::new(bindings::drm_gem_object::default()),
+> -                data <- T::new(dev, size),
+> +                data <- T::new(dev, size, args),
+>                  // INVARIANT: The drm subsystem guarantees that the `struct drm_device` will live
+>                  // as long as the GEM object lives.
+>                  dev: dev.into(),
+> -- 
+> 2.51.0
+> 
