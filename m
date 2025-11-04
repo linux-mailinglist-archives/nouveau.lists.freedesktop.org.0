@@ -2,61 +2,64 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id 57C29C319AB
-	for <lists+nouveau@lfdr.de>; Tue, 04 Nov 2025 15:48:22 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id D7243C32977
+	for <lists+nouveau@lfdr.de>; Tue, 04 Nov 2025 19:18:45 +0100 (CET)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 8C71110E615;
-	Tue,  4 Nov 2025 14:48:20 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 2B67C10E661;
+	Tue,  4 Nov 2025 18:18:42 +0000 (UTC)
 Authentication-Results: gabe.freedesktop.org;
-	dkim=pass (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="SIMn1mOQ";
+	dkim=pass (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="GUv3mfeO";
 	dkim-atps=neutral
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from tor.source.kernel.org (tor.source.kernel.org [172.105.4.254])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 2479C10E615;
- Tue,  4 Nov 2025 14:48:19 +0000 (UTC)
+Received: from sea.source.kernel.org (sea.source.kernel.org [172.234.252.31])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 643AC10E089;
+ Tue,  4 Nov 2025 18:18:40 +0000 (UTC)
 Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by tor.source.kernel.org (Postfix) with ESMTP id 222A3601EC;
- Tue,  4 Nov 2025 14:48:18 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 6F802C116B1;
- Tue,  4 Nov 2025 14:48:12 +0000 (UTC)
+ by sea.source.kernel.org (Postfix) with ESMTP id 0C68A44391;
+ Tue,  4 Nov 2025 18:18:40 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id BB74CC4CEF7;
+ Tue,  4 Nov 2025 18:18:34 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1762267697;
- bh=xCBxlDXzIhVQ/B7058fyymHUafvIparv+hEqSxtneH0=;
+ s=k20201202; t=1762280319;
+ bh=yGRnsBbb5Du0szO4BPlFV4TodS9lEiUCQrYF+bOx4vY=;
  h=Date:Subject:Cc:To:From:References:In-Reply-To:From;
- b=SIMn1mOQrQQxcwiBwuWqP29ydZ+FP6EcFaa3okcvWYTrLLh4dqx1Aat7xwUVxgxP0
- auydmpD+uvywmyro/TOJ9RZhvxObN1EV6F83xQErcgMXXiRUc2Uwl4SQDZE+kIQItk
- bdVmf3q3inpKZN3kfVXj06HMZAYUfhzGptBS36PkdxxrGaIBWjgkrKpRMVHhRlHX0d
- E2QCMTyie6s5pamvD/LI5E4V8QktSmB7hH7sB0v+HDD1MyWns7fHxF05+izv/ZK/Lg
- HP3m4oD3DqawLom/Qt8t+yXEPUPfxdO0RgXv2csT0YxvTNkgEM/A6orgH+LfIRcH4x
- ut3EPx4B99UXQ==
+ b=GUv3mfeOHDGSrgJUzJs9qVbo0p0dJU6bJ3d3FdiooDni+U0RK+SDizQkkR9iEsSc2
+ yCiee8rVDxAfRAfRW5Hm8VU2YE5P9inYoRB5EG7J/FKeaV+b2ZFQTQoWKzwj07brWW
+ 6QWyCshNGNYEMeiORj+FIlUjyuAsxUntV0cubbpDUQaqwoNKwN2s8UZ5MZbLpTtqzn
+ 1GOXMpZAKrIM/LwmqTa7Jr4kIh6cVFQcXtG0YrykfLfO5wj69GR9nIUApG0KZHxjsT
+ lDopn9GkN8ubdtA7/UWqCtz6V/pNRrW0HLhqs1e0sj2IL6Acu93MGyZfC5laBz4Dxv
+ GBd7KsinxeLvA==
 Mime-Version: 1.0
 Content-Transfer-Encoding: quoted-printable
 Content-Type: text/plain; charset=UTF-8
-Date: Tue, 04 Nov 2025 15:48:10 +0100
-Message-Id: <DDZZRCRHBLVI.MGWBUONLZ94K@kernel.org>
-Subject: Re: [PATCH] firmware_loader: make RUST_FW_LOADER_ABSTRACTIONS
- select FW_LOADER
-Cc: "Alexandre Courbot" <acourbot@nvidia.com>, "Luis Chamberlain"
- <mcgrof@kernel.org>, "Russ Weight" <russ.weight@linux.dev>, "Rafael J.
- Wysocki" <rafael@kernel.org>, "Alice Ryhl" <aliceryhl@google.com>, "David
- Airlie" <airlied@gmail.com>, "Simona Vetter" <simona@ffwll.ch>, "Andrew
- Lunn" <andrew@lunn.ch>, "Heiner Kallweit" <hkallweit1@gmail.com>, "Russell
- King" <linux@armlinux.org.uk>, "David S. Miller" <davem@davemloft.net>,
- "Eric Dumazet" <edumazet@google.com>, "Jakub Kicinski" <kuba@kernel.org>,
- "Paolo Abeni" <pabeni@redhat.com>, "Miguel Ojeda" <ojeda@kernel.org>, "Alex
- Gaynor" <alex.gaynor@gmail.com>, "Boqun Feng" <boqun.feng@gmail.com>, "Gary
- Guo" <gary@garyguo.net>, =?utf-8?q?Bj=C3=B6rn_Roy_Baron?=
- <bjorn3_gh@protonmail.com>, "Benno Lossin" <lossin@kernel.org>, "Andreas
- Hindborg" <a.hindborg@kernel.org>, "Trevor Gross" <tmgross@umich.edu>,
- <linux-kernel@vger.kernel.org>, <nouveau@lists.freedesktop.org>,
- <dri-devel@lists.freedesktop.org>, <netdev@vger.kernel.org>,
- <rust-for-linux@vger.kernel.org>
-To: "Greg Kroah-Hartman" <gregkh@linuxfoundation.org>
+Date: Tue, 04 Nov 2025 19:18:32 +0100
+Message-Id: <DE048FD96PHV.2SXSVEHPD9ZOP@kernel.org>
+Subject: Re: [PATCH 7/7] nova-core: mm: Add data structures for page table
+ management
+Cc: "Miguel Ojeda" <miguel.ojeda.sandonis@gmail.com>,
+ <linux-kernel@vger.kernel.org>, <rust-for-linux@vger.kernel.org>,
+ <dri-devel@lists.freedesktop.org>, <acourbot@nvidia.com>, "Alistair Popple"
+ <apopple@nvidia.com>, "Miguel Ojeda" <ojeda@kernel.org>, "Alex Gaynor"
+ <alex.gaynor@gmail.com>, "Boqun Feng" <boqun.feng@gmail.com>, "Gary Guo"
+ <gary@garyguo.net>, <bjorn3_gh@protonmail.com>, "Benno Lossin"
+ <lossin@kernel.org>, "Andreas Hindborg" <a.hindborg@kernel.org>, "Alice
+ Ryhl" <aliceryhl@google.com>, "Trevor Gross" <tmgross@umich.edu>, "David
+ Airlie" <airlied@gmail.com>, "Simona Vetter" <simona@ffwll.ch>, "Maarten
+ Lankhorst" <maarten.lankhorst@linux.intel.com>, "Maxime Ripard"
+ <mripard@kernel.org>, "Thomas Zimmermann" <tzimmermann@suse.de>, "John
+ Hubbard" <jhubbard@nvidia.com>, "Timur Tabi" <ttabi@nvidia.com>,
+ <joel@joelfernandes.org>, "Elle Rhumsaa" <elle@weathered-steel.dev>,
+ "Daniel Almeida" <daniel.almeida@collabora.com>,
+ <nouveau@lists.freedesktop.org>
+To: "Joel Fernandes" <joelagnelf@nvidia.com>
 From: "Danilo Krummrich" <dakr@kernel.org>
-References: <20251104-b4-select-rust-fw-v1-1-afea175dba22@nvidia.com>
- <2025110407-scouting-unpiloted-39f4@gregkh>
-In-Reply-To: <2025110407-scouting-unpiloted-39f4@gregkh>
+References: <20251020185539.49986-1-joelagnelf@nvidia.com>
+ <20251020185539.49986-8-joelagnelf@nvidia.com>
+ <CANiq72=SSQ5nSjt9yzX_A3Tgo2ByGM5CV0VqFnF1cTOzrZ-pbg@mail.gmail.com>
+ <226d7dcb-26c3-4477-b1e9-2b837dc17cd1@nvidia.com>
+ <CANiq72mqDWrLp9EjXHUgeODh1zh-9XaUnmgHWGgX2Awqs4G=cw@mail.gmail.com>
+In-Reply-To: <CANiq72mqDWrLp9EjXHUgeODh1zh-9XaUnmgHWGgX2Awqs4G=cw@mail.gmail.com>
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -71,46 +74,24 @@ List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-On Tue Nov 4, 2025 at 3:35 PM CET, Greg Kroah-Hartman wrote:
-> On Tue, Nov 04, 2025 at 11:04:49PM +0900, Alexandre Courbot wrote:
->> diff --git a/drivers/base/firmware_loader/Kconfig b/drivers/base/firmwar=
-e_loader/Kconfig
->> index 752b9a9bea03..15eff8a4b505 100644
->> --- a/drivers/base/firmware_loader/Kconfig
->> +++ b/drivers/base/firmware_loader/Kconfig
->> @@ -38,7 +38,7 @@ config FW_LOADER_DEBUG
->>  config RUST_FW_LOADER_ABSTRACTIONS
->>  	bool "Rust Firmware Loader abstractions"
->>  	depends on RUST
->> -	depends on FW_LOADER=3Dy
->> +	select FW_LOADER
->
-> Please no, select should almost never be used, it causes hard-to-debug
-> issues.
+On Tue Nov 4, 2025 at 6:54 PM CET, Miguel Ojeda wrote:
+> On Mon, Nov 3, 2025 at 8:21=E2=80=AFPM Joel Fernandes <joelagnelf@nvidia.=
+com> wrote:
+>> Also a lot of your suggestions are related to how it looks it rustdoc, s=
+o I will
+>> try to build rustdoc and see what it looks like as well, to get an idea =
+of when
+>> things in my patches could be improved.
 
-I agree that select can be very annoying at times, but in this case it seem=
-s to
-be the correct thing to do?
+For the drm-rust tree we also have a summary [1] of things committers are
+expected to check (including a link to the generic kernel and Rust checklis=
+t).
 
-For instance for something like:
+> Definitely, please do!
 
-	config MY_DRIVER
-		depends on PCI
-		depends on DRM
-		select AUXILIARY_BUS
-		select FW_LOADER
+@Joel: Just be aware that for leaf crates no documentation is built yet, on=
+ly
+the kernel crate is built.
 
-In this case MY_DRIVER is only available if PCI and DRM is enabled, which m=
-akes
-sense, there is no reason to show users PCI and DRM drivers if both are
-disabled.
-
-However, for things like AUXILIARY_BUS and FW_LOADER, I'd argue that they a=
-re
-implementation details of the driver and should be selected if the driver i=
-s
-selected.
-
-Otherwise, wouldn't we expect users to know implementation details of drive=
-rs
-before being able to select them?
+[1] https://drm.pages.freedesktop.org/maintainer-tools/committer/committer-=
+drm-rust.html#submit-checklist
