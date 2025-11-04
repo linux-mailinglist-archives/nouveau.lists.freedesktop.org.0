@@ -2,59 +2,58 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id 82431C31745
-	for <lists+nouveau@lfdr.de>; Tue, 04 Nov 2025 15:16:43 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id E0915C318AE
+	for <lists+nouveau@lfdr.de>; Tue, 04 Nov 2025 15:35:13 +0100 (CET)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 03D6B10E611;
-	Tue,  4 Nov 2025 14:16:42 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 090E610E26E;
+	Tue,  4 Nov 2025 14:35:12 +0000 (UTC)
 Authentication-Results: gabe.freedesktop.org;
-	dkim=pass (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="Fx4ECpUY";
+	dkim=pass (1024-bit key; unprotected) header.d=linuxfoundation.org header.i=@linuxfoundation.org header.b="BJdGB6yv";
 	dkim-atps=neutral
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
 Received: from sea.source.kernel.org (sea.source.kernel.org [172.234.252.31])
- by gabe.freedesktop.org (Postfix) with ESMTPS id E751F10E611;
- Tue,  4 Nov 2025 14:16:40 +0000 (UTC)
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 54A3D10E278;
+ Tue,  4 Nov 2025 14:35:09 +0000 (UTC)
 Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by sea.source.kernel.org (Postfix) with ESMTP id 9EDD740121;
- Tue,  4 Nov 2025 14:16:40 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 3CDDFC4CEF7;
- Tue,  4 Nov 2025 14:16:35 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1762265800;
- bh=LLH6LMsUoW83OgwHn4Eb7C7d3t9QxE00ZT++B0K2C6c=;
- h=Date:Subject:Cc:To:From:References:In-Reply-To:From;
- b=Fx4ECpUYVm71v3CRagzLhvmjDKBOecwkunXFsn2pQTuEEoSEf+K4kyWXyGwQKQwf8
- xArw3A1/tF9hV4GZam7wbH8k3PX1vNM96gFdbw47GeS0UJovsoZZUsM6Y8x4ms9zTq
- fuo158aeAKMP+rxd7q8AkO1/UOM8U9eilv2FtTLJSKljszVEJ9ww18shEZt4db/lrF
- uQlYIRUDwb1AN3jeclvRrlrHQ6NmqL6zJgOwBnFN3ZlmQn/28lDxUXlZ9PISPpVcAK
- LNKyh/6UKufTc5cP2Snm6VbXvGgiYy1pGsWSuyMc7IkoEnqbv0t7nCAxBQL0oG1+dm
- p6sa+O7dnKqbA==
-Mime-Version: 1.0
-Content-Transfer-Encoding: quoted-printable
-Content-Type: text/plain; charset=UTF-8
-Date: Tue, 04 Nov 2025 15:16:33 +0100
-Message-Id: <DDZZ356YT8HY.S8G709WO4MD3@kernel.org>
-Subject: Re: [PATCH] firmware_loader: make RUST_FW_LOADER_ABSTRACTIONS
- select FW_LOADER
-Cc: "Luis Chamberlain" <mcgrof@kernel.org>, "Russ Weight"
- <russ.weight@linux.dev>, "Greg Kroah-Hartman" <gregkh@linuxfoundation.org>,
- "Rafael J. Wysocki" <rafael@kernel.org>, "Alice Ryhl"
- <aliceryhl@google.com>, "David Airlie" <airlied@gmail.com>, "Simona Vetter"
- <simona@ffwll.ch>, "Andrew Lunn" <andrew@lunn.ch>, "Heiner Kallweit"
- <hkallweit1@gmail.com>, "Russell King" <linux@armlinux.org.uk>, "David S.
- Miller" <davem@davemloft.net>, "Eric Dumazet" <edumazet@google.com>, "Jakub
- Kicinski" <kuba@kernel.org>, "Paolo Abeni" <pabeni@redhat.com>, "Miguel
- Ojeda" <ojeda@kernel.org>, "Alex Gaynor" <alex.gaynor@gmail.com>, "Boqun
- Feng" <boqun.feng@gmail.com>, "Gary Guo" <gary@garyguo.net>,
- =?utf-8?q?Bj=C3=B6rn_Roy_Baron?= <bjorn3_gh@protonmail.com>, "Benno Lossin"
- <lossin@kernel.org>, "Andreas Hindborg" <a.hindborg@kernel.org>, "Trevor
- Gross" <tmgross@umich.edu>, <linux-kernel@vger.kernel.org>,
- <nouveau@lists.freedesktop.org>, <dri-devel@lists.freedesktop.org>,
- <netdev@vger.kernel.org>, <rust-for-linux@vger.kernel.org>
-To: "Alexandre Courbot" <acourbot@nvidia.com>
-From: "Danilo Krummrich" <dakr@kernel.org>
+ by sea.source.kernel.org (Postfix) with ESMTP id D6C20437A0;
+ Tue,  4 Nov 2025 14:35:08 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 1C021C116B1;
+ Tue,  4 Nov 2025 14:35:08 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=linuxfoundation.org;
+ s=korg; t=1762266908;
+ bh=780Lu7Vk+L7OEz1zpmgzeoNUJ51QqPpcyt599aDv/jI=;
+ h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
+ b=BJdGB6yvX4Vbe5yrzv+YHesKh8NPm4vP2fWyWddFgPRpFv2veGF+wXvy9ddQU+/w8
+ bGKPWhgvqOsa3dPrsKDHmV0iaV2Hqbs5+Aki/rDp/qxxaoNmGeUvMDFApLYIWoA7J9
+ 72XTUlA4u6wMB5MThXh4cHcxglNanfe93OVFbq5Y=
+Date: Tue, 4 Nov 2025 23:35:03 +0900
+From: Greg Kroah-Hartman <gregkh@linuxfoundation.org>
+To: Alexandre Courbot <acourbot@nvidia.com>
+Cc: Luis Chamberlain <mcgrof@kernel.org>, Russ Weight <russ.weight@linux.dev>,
+ Danilo Krummrich <dakr@kernel.org>,
+ "Rafael J. Wysocki" <rafael@kernel.org>,
+ Alice Ryhl <aliceryhl@google.com>, David Airlie <airlied@gmail.com>,
+ Simona Vetter <simona@ffwll.ch>, Andrew Lunn <andrew@lunn.ch>,
+ Heiner Kallweit <hkallweit1@gmail.com>,
+ Russell King <linux@armlinux.org.uk>,
+ "David S. Miller" <davem@davemloft.net>,
+ Eric Dumazet <edumazet@google.com>,
+ Jakub Kicinski <kuba@kernel.org>, Paolo Abeni <pabeni@redhat.com>,
+ Miguel Ojeda <ojeda@kernel.org>, Alex Gaynor <alex.gaynor@gmail.com>,
+ Boqun Feng <boqun.feng@gmail.com>, Gary Guo <gary@garyguo.net>,
+ =?iso-8859-1?Q?Bj=F6rn?= Roy Baron <bjorn3_gh@protonmail.com>,
+ Benno Lossin <lossin@kernel.org>, Andreas Hindborg <a.hindborg@kernel.org>,
+ Trevor Gross <tmgross@umich.edu>, linux-kernel@vger.kernel.org,
+ nouveau@lists.freedesktop.org, dri-devel@lists.freedesktop.org,
+ netdev@vger.kernel.org, rust-for-linux@vger.kernel.org
+Subject: Re: [PATCH] firmware_loader: make RUST_FW_LOADER_ABSTRACTIONS select
+ FW_LOADER
+Message-ID: <2025110407-scouting-unpiloted-39f4@gregkh>
 References: <20251104-b4-select-rust-fw-v1-1-afea175dba22@nvidia.com>
+MIME-Version: 1.0
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
 In-Reply-To: <20251104-b4-select-rust-fw-v1-1-afea175dba22@nvidia.com>
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
@@ -70,38 +69,56 @@ List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-On Tue Nov 4, 2025 at 3:04 PM CET, Alexandre Courbot wrote:
+On Tue, Nov 04, 2025 at 11:04:49PM +0900, Alexandre Courbot wrote:
 > I have noticed that build will fail when doing the following:
->
+> 
 > - Start with the x86 defconfig,
 > - Using nconfig, enable `CONFIG_RUST` and `CONFIG_DRM_NOVA`,
 > - Start building.
->
+> 
 > The problem is that `CONFIG_RUST_FW_LOADER_ABSTRACTIONS` remains
 > unselected, despite it being a dependency of `CONFIG_NOVA_CORE`. This
 > seems to happen because `CONFIG_DRM_NOVA` selects `CONFIG_NOVA_CORE`.
->
+> 
 > Fix this by making `CONFIG_RUST_FW_LOADER_ABSTRACTIONS` select
 > `CONFIG_FW_LOADER`, and by transition make all users of
 > `CONFIG_RUST_FW_LOADER_ABSTRACTIONS` (so far, nova-core and net/phy)
 > select it as well.
->
+> 
 > `CONFIG_FW_LOADER` is more often selected than depended on, so this
 > seems to make sense generally speaking.
->
+> 
 > Signed-off-by: Alexandre Courbot <acourbot@nvidia.com>
 > ---
 > I am not 100% percent confident that this is the proper fix, but the
-> problem is undeniable. :) I guess the alternative would be to make nova-d=
-rm
+> problem is undeniable. :) I guess the alternative would be to make nova-drm
 > depend on nova-core instead of selecting it, but I suspect that the
 > `select` behavior is correct in this case - after all, firmware loading
 > does not make sense without any user.
+> ---
+>  drivers/base/firmware_loader/Kconfig | 2 +-
+>  drivers/gpu/nova-core/Kconfig        | 2 +-
+>  drivers/net/phy/Kconfig              | 2 +-
+>  3 files changed, 3 insertions(+), 3 deletions(-)
+> 
+> diff --git a/drivers/base/firmware_loader/Kconfig b/drivers/base/firmware_loader/Kconfig
+> index 752b9a9bea03..15eff8a4b505 100644
+> --- a/drivers/base/firmware_loader/Kconfig
+> +++ b/drivers/base/firmware_loader/Kconfig
+> @@ -38,7 +38,7 @@ config FW_LOADER_DEBUG
+>  config RUST_FW_LOADER_ABSTRACTIONS
+>  	bool "Rust Firmware Loader abstractions"
+>  	depends on RUST
+> -	depends on FW_LOADER=y
+> +	select FW_LOADER
 
-This patch is the correct approach.
+Please no, select should almost never be used, it causes hard-to-debug
+issues.
 
-However, I think this should be three separate patches, so they can go thro=
-ugh
-different trees.
+As something is failing, perhaps another "depends" needs to be added
+somewhere instead?
 
-Also, please add a Fixes: tag.
+
+thanks,
+
+greg k-h
