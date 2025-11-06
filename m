@@ -2,52 +2,51 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id DBC6AC3D752
-	for <lists+nouveau@lfdr.de>; Thu, 06 Nov 2025 22:12:22 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id DB17CC3D7FC
+	for <lists+nouveau@lfdr.de>; Thu, 06 Nov 2025 22:28:30 +0100 (CET)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 87F3E10E252;
-	Thu,  6 Nov 2025 21:12:21 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 908DB10E9DE;
+	Thu,  6 Nov 2025 21:28:29 +0000 (UTC)
 Authentication-Results: gabe.freedesktop.org;
-	dkim=pass (2048-bit key; unprotected) header.d=Nvidia.com header.i=@Nvidia.com header.b="a5ibXJDb";
+	dkim=pass (2048-bit key; unprotected) header.d=Nvidia.com header.i=@Nvidia.com header.b="UZQIBwkW";
 	dkim-atps=neutral
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from CY3PR05CU001.outbound.protection.outlook.com
- (mail-westcentralusazon11013034.outbound.protection.outlook.com
- [40.93.201.34])
- by gabe.freedesktop.org (Postfix) with ESMTPS id D9E6410E252;
- Thu,  6 Nov 2025 21:12:19 +0000 (UTC)
+Received: from SJ2PR03CU001.outbound.protection.outlook.com
+ (mail-westusazon11012032.outbound.protection.outlook.com [52.101.43.32])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id BCFE110E9DE;
+ Thu,  6 Nov 2025 21:28:28 +0000 (UTC)
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=E+GtEEhILYPHFNxrk+VRmBhOFEqJxZr83fXEq6RE+wde8lNC+UEclW4RGqd1MQQfIalL4JcdVcxOQ+hXezkV0k11GgPp6cEUOlyzQUZAaC/u/12D/gQcOvL9iabpq6eGga1c7MJ6NSia/WYk96AtUUKvonNrDret7ZWCvdQ9xBxJZfMo6Dla/bvQTNHNGtRH3FOR4NdFqpCXZK4g9Jv2h/ACWYy5uAf0yx8wGLNNjfyW1uQGkGbsZxWnP1oIvQadVIgEMPAgfzQMxHxmGXoTnZ/RCBZZ0eEGsQwZ/9wthfL1ycbt60udJ2SzKoZllUKdUHDsVHYzWyvSwTkY45Wm3w==
+ b=eufhL2yBuynUDdrv2h7YwJvUwEoq2CY82SqAXavMMjEs0dom3DcFOrFznYHi4GskQHlHK7SEsD2BKu7G7egrISOey5RbO/IHxR7S1WxbSJqX3Fl+rsGXIdJd3GJCWSM0e2oDV+nO2Qycvr9lqfTBZdruyC53pwDdBEGiDZi8oy6s4ruINey6IWs9IyngbP/5F9hMGCsbeVuokrRLVmQnl/KCpFf/tsfzuHku02BrxEcHbdU+pYdKvPX3gmUA73mn8wXr9S7D9ASEvqKp+CFFgdnTmtN8PvYplJ1WywxPTvVX7PwgQS01HwSD+k2D4pOOeChHKZusi8rBVWSCKVJTNw==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
  s=arcselector10001;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=sECWeo6pOVkYgPrIYDTIP6Y1Y7akMeediyWM55U3+gQ=;
- b=RDiu+LKf4PWX8gvHiGwjZvC88OMW58uZ1qaT0L05+rwlJdTWpQAULrsz0exb1Cx/6F/Advttr0LifNyvjQktBCUQ0LyljDJOERaaag8QImLBsfx0bSn2ehY6wVj9Vi0cyeWiSUzhZUMNJv+bNndlJDZV9WjoSkI5PpC2xDWNoANDm3yt1OP9OPciINg22DG3caZCSNKXisBggrct2kstg9iutvlsbbOchQ2jeYH0npwB+cD3gpV5nIOl+XoSIRvgwmHR1AA+o8AhKFN2EDP3VB991s658JX/sJuwJzz4ndRB1/WTT3ktKrTZyqza1/wSPFa7ADJcKg53T+W/uNwoTQ==
+ bh=YpciNXXDLsL05UdzUqE3O9Mh8vL38ksZt8mM/fnJ0ms=;
+ b=FoOJXimodYbkzFmfQQInRXefGJ63jzyR0tVQZJloa4SrK8M1szexqu5NuydEKZ3k2jkEGrMVvYyOeGxP8+Zyrl1m1iJirr7L85zBnXze1EBVkySOwRnPpSvvjzwZYSRW1euu0oHpchVZX45F+DlceXrKd6MrZUaeZvIuzisQsCOQxkJnt8bL7iCWZHADdxJeDRnMkmn6YdSVttMXIk4qxzwn54wtiZhIt3N3wtj8/v8Z4pB1hj4xnrvNRd2d2e6D4hFVJ4HfoZ+BEzea8wLPLe/Id2d6orGXq3F5o6jS4GdPYEY45h+N4c95yVoY9WQQ7MZ84eioDDOYTcSjrvQC4g==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
  smtp.mailfrom=nvidia.com; dmarc=pass action=none header.from=nvidia.com;
  dkim=pass header.d=nvidia.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=Nvidia.com;
  s=selector2;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=sECWeo6pOVkYgPrIYDTIP6Y1Y7akMeediyWM55U3+gQ=;
- b=a5ibXJDbTY4K3Wnc8mfqL2aXIQrrmPUxLd7vHiH3N2xIJt+Ul7geUo3cCJ8VrMojQIpsnGKSr55Dn6UiDnh7Jfh7/vZLqepGrFuZj1Ul0j+iTRmP2ymqjFw8W3+IwnLQRu88/OZ7UBFVL7Jddu9xuuDM712qP6vNFeWtQNN3uNCUzytPKus0J+IfU9Mwcc0NTTTCUcjh60pwvH/6YIaerVhy6bgyNxR3/kI7KStfv8PnQIaomfVwMsMVLQcvn+8BdzTIaeD8ufjOiBAB2wAPnnF3ry3nJu5dhlVrSYREs52feyoosOqu5VtJeGUdTCtMPUcIQhJw94BqXSr5UgLI8g==
+ bh=YpciNXXDLsL05UdzUqE3O9Mh8vL38ksZt8mM/fnJ0ms=;
+ b=UZQIBwkWuAoPevow3aS7t8Facw0tWb4T0/44qElpJpZ7bzWxZ++xNSBG0RizaHszce/fi7R+Cl2FjmLQ5ttqxD3EH/KkWyu/6WhK0URDuOZm4MF7JHrUtBQ7pP8hffFS3kk7PvawE5lj4/lUtE6pdwj9Pyaiy7F/8fRoFZ7ZAqw7y8vwfXcRRRpfa1K+ASHhBxgLMN/y0GWex7uKruNTgnDKZq+S3PnBMQgZpaB1On/1Np7It8UDolj8M6793hjfuX/DmXTwalOGehRaz4Q8VbUrYq26/ylkphs45mGtdZrKietoU4YenP/mdusLHIrrZwrEvTuOptJn7cVVAcp5oQ==
 Authentication-Results: dkim=none (message not signed)
  header.d=none;dmarc=none action=none header.from=nvidia.com;
 Received: from BY5PR12MB4116.namprd12.prod.outlook.com (2603:10b6:a03:210::13)
- by BL3PR12MB6403.namprd12.prod.outlook.com (2603:10b6:208:3b3::11)
+ by IA0PR12MB7775.namprd12.prod.outlook.com (2603:10b6:208:431::19)
  with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9298.12; Thu, 6 Nov
- 2025 21:12:15 +0000
+ 2025 21:28:25 +0000
 Received: from BY5PR12MB4116.namprd12.prod.outlook.com
  ([fe80::81b6:1af8:921b:3fb4]) by BY5PR12MB4116.namprd12.prod.outlook.com
  ([fe80::81b6:1af8:921b:3fb4%4]) with mapi id 15.20.9298.010; Thu, 6 Nov 2025
- 21:12:15 +0000
-Message-ID: <2c381df5-de8c-4f2b-ad2d-9cce9569a956@nvidia.com>
-Date: Thu, 6 Nov 2025 13:12:12 -0800
+ 21:28:25 +0000
+Message-ID: <c64e59cc-6a09-4107-8b98-f5f40a4b95c7@nvidia.com>
+Date: Thu, 6 Nov 2025 13:27:24 -0800
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v5 1/3] gpu: nova-core: prepare Spec and Revision types
- for boot0/boot42
+Subject: Re: [PATCH v5 3/3] gpu: nova-core: add boot42 support for next-gen
+ GPUs
 To: Alexandre Courbot <acourbot@nvidia.com>, Danilo Krummrich <dakr@kernel.org>
 Cc: Joel Fernandes <joelagnelf@nvidia.com>, Timur Tabi <ttabi@nvidia.com>,
  Alistair Popple <apopple@nvidia.com>, Edwin Peer <epeer@nvidia.com>,
@@ -62,108 +61,108 @@ Cc: Joel Fernandes <joelagnelf@nvidia.com>, Timur Tabi <ttabi@nvidia.com>,
  LKML <linux-kernel@vger.kernel.org>,
  Nouveau <nouveau-bounces@lists.freedesktop.org>
 References: <20251106012754.139713-1-jhubbard@nvidia.com>
- <20251106012754.139713-2-jhubbard@nvidia.com>
- <DE1G0R9W3JS9.INLIKG0AXGES@nvidia.com>
+ <20251106012754.139713-4-jhubbard@nvidia.com>
+ <DE1FKDK4YMH2.31M2ZHUOKEC1I@nvidia.com>
 Content-Language: en-US
 From: John Hubbard <jhubbard@nvidia.com>
-In-Reply-To: <DE1G0R9W3JS9.INLIKG0AXGES@nvidia.com>
+In-Reply-To: <DE1FKDK4YMH2.31M2ZHUOKEC1I@nvidia.com>
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 7bit
-X-ClientProxiedBy: BYAPR08CA0014.namprd08.prod.outlook.com
- (2603:10b6:a03:100::27) To BY5PR12MB4116.namprd12.prod.outlook.com
+X-ClientProxiedBy: SJ0PR05CA0202.namprd05.prod.outlook.com
+ (2603:10b6:a03:330::27) To BY5PR12MB4116.namprd12.prod.outlook.com
  (2603:10b6:a03:210::13)
 MIME-Version: 1.0
 X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: BY5PR12MB4116:EE_|BL3PR12MB6403:EE_
-X-MS-Office365-Filtering-Correlation-Id: 3d86630c-5a49-402f-d09d-08de1d79294f
+X-MS-TrafficTypeDiagnostic: BY5PR12MB4116:EE_|IA0PR12MB7775:EE_
+X-MS-Office365-Filtering-Correlation-Id: 12e4ac1e-11d0-47b4-4a1e-08de1d7b6b59
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
 X-Microsoft-Antispam: BCL:0;
- ARA:13230040|1800799024|7416014|376014|366016|7053199007; 
-X-Microsoft-Antispam-Message-Info: =?utf-8?B?c29Fdi9KRGFEeTBiQ2JOb2QwQnJTMzZvSlZId2FkN3MrNG9MaGdXNXgyeGY5?=
- =?utf-8?B?K1BSeWdsTDNCU0wwQWszdFY1TEtVRVZFdnozMDZPVEdGekJ6NmZ5N2c3S3NV?=
- =?utf-8?B?YjJ4N0JLMVQvL2o5Ri9QSDY1SHJFQjZPaTZIc3dSMFJMa1ZOSzZFV2dGT0lq?=
- =?utf-8?B?eUlhK296L0I2MFA1MGNGdFRNOElPREQwcG5OTmExM2wwTnpUZStuMk9JRnFT?=
- =?utf-8?B?a1FjRTI5NTdEMmRuWU5qeGp3SlpxQzg0Wk5uTENoUFd5L056eS9MbFV0TFZa?=
- =?utf-8?B?ejF1eFJ1MkxlT0FsMjB4eUFabGVuVkI5SlBCSVAyTzJrY0NTV3VDVzdzYWpV?=
- =?utf-8?B?bkVhaDFyUEpSazFSclJNcFBielZ2ZGtSWmJXSlpQTUJQZUN1di8zRTBpUDY1?=
- =?utf-8?B?elpaaWtGRkNjNWdXWlFQVEtsSGZORkRmNndxdzRhajFObW1OUG1RZmZHLzZv?=
- =?utf-8?B?MzJ6T3BLZXZWWFRvRjNvZHB5NHlxTEdXUEhYV2dRTlJNd3pyVTZIQzZENGpT?=
- =?utf-8?B?cDZMaHlReVFrVjNkbkZ3Nm54aFlpYmh6WkRwU3pCVEN0QkNud1dKUGlGcWlo?=
- =?utf-8?B?VEt6TG9SNDl3TGtSVFB3a0JjNXRZVlZzeFFhNldjdThZOEFlUVJvY0xWTW5L?=
- =?utf-8?B?RUVJRGpJY1FTRENPSGpKNFlnZ2FoZS96eFV1VE1TK0J1NSt1ZDk4T3F5S2Q5?=
- =?utf-8?B?dUtWYnVxdWlhY2tFRXhXanNvdFBNWm5UYWJNQW0vVEtHL3VkajlkQjZ1SVlt?=
- =?utf-8?B?RjNxWFVhWFp2SVo3ZDN0OExtcEhISlROeU11dzVvbmpLem9kcHhwUzZkeUtK?=
- =?utf-8?B?ZDh4d1R2SEhwYU93VlNFSDF4MHZ4eW9QdCt5ZCtCU2VDcGhYeHFlMzE1bVYy?=
- =?utf-8?B?WXFPOTJLckxETm1uQXU4NnlOWWJqL1ZaYnVjV0ZCU0ZoL0pEeXd3cXUxOWFq?=
- =?utf-8?B?MEEyT3VJNk9adG1RSzZ4cEE2bVY4ckdzQVRLdTdEV1JDMS85TWV2UWl6TUFV?=
- =?utf-8?B?eXJrd0JXdGpOQXpORkk1TUwxRnppR0p5N3crQmM3bmNMOUczU010Z2xNZEVQ?=
- =?utf-8?B?Z1BlNXM2SjR1N2ZvR2hGT0F4M1U3S2xTeUw2TTI3eWNjYzRPVWtjQ0w1b29L?=
- =?utf-8?B?VTVlYUUxb3piSWNRLzJ2K1krL0hZZE40UVBYMFcrV2VWTXpjQXRpVmRGdFF5?=
- =?utf-8?B?eHVaYlNTNlZaYWVIelNVMXhiVDQzUjJZa3JnZkd5VExqdHBicHJiRFo1eHV0?=
- =?utf-8?B?cjE2NVA1a28vVWs0YlphQmdXR2lwNzF3S1NFek5jOTFOYm1KZWRxRG9SeEhI?=
- =?utf-8?B?WURtcnp4SGVQN3hPcmdjQ0pmTjdXaUNBSFVGV1hOUEhZRmlsWDJXYkRIR0dr?=
- =?utf-8?B?Q09VemNtSWFKSWR5RldQTE42ejRHRlVvV3EvTHdmdHllS2s1d0JUd01LWk5G?=
- =?utf-8?B?QUtpbkNtWW51cjhWMFo3SEJyTjZuaWFqeVpQM2RMR3UzMkZJRXIwUmI3U2VK?=
- =?utf-8?B?eXZmUUN5bXI4amVEWFFGMTdFV3liZHQ4bEVvZklaS2hIUDVJaFp2RjlpSlUv?=
- =?utf-8?B?ODl0WVljVzU3d01zRTBIT3lGVGhhTzJaOGlTa1djN1lzVFA2WGc4M1JSOGRL?=
- =?utf-8?B?eE9abHZsdDBMSzZpMjRhSkFLWEtzQVpnamozQlhySmRQWTBSYXlCMWtjckdw?=
- =?utf-8?B?aUNWTzhkZmhLc2xzNkhSYzJWM25RTFI3R0g4R2R4dEdHTFowMTZzU0NsVXZ2?=
- =?utf-8?B?a29GNkRST0N3UkV1R253aXBOY0N6WEpld1lqUkdMcUViNUdJY0lOUlhmQ0ZJ?=
- =?utf-8?B?WTFKVjdlb3JrTTBubXJIbGJxVFpaK2FPNkpSMGVjZUw0Z0pZUmY5VGxZOW1Y?=
- =?utf-8?B?Q1NYRSticHU1YUQwR2p2cjlPVGVPNlBzcjNUbVpWUXM2QVNHbUtPeWxwYUpu?=
- =?utf-8?Q?kJ/EeLXQl4bqwynhEiFBk7ypC+SwFvyR?=
+ ARA:13230040|1800799024|366016|376014|7416014|7053199007; 
+X-Microsoft-Antispam-Message-Info: =?utf-8?B?TllEbjdhZmQ3MGNESktGMVRWRlI3RzFiNVpscGYwNXI5cEkvNWlSZjdlU2di?=
+ =?utf-8?B?dyt1ckdpb1UyTURFYUJsU0N5bjdROTRQc08xVmxxdnBDNTZrd3NETjhYM3NC?=
+ =?utf-8?B?aVhOd3VkQ3VEMzkwSGYvUWpQSW5hZG9KaHJid0hRTWRMMjRqM2FiSlFWQWkx?=
+ =?utf-8?B?blA0dG5DU3dCSjVwNE5HcS9rMm5RUVdSZjdlVFFMRlY1RUVyczlWVllNWm9L?=
+ =?utf-8?B?MlVHM1hTa0NmdUdNVUxvaVp2S2x6MWhMTHgxM0JHY2JjaUVjaHFmSkQwUm9p?=
+ =?utf-8?B?T2FwR3NGekVKZEhQSm5pdFpoeExObURMU0dHZ1d5OU5DWE9XMk5NMzhFcXZW?=
+ =?utf-8?B?YUV1NTBlalpUNnhTY1RSNjhkVXZSc0IzVWYyYjloekFOTlE1UGFWTTcyaVIw?=
+ =?utf-8?B?NlhseFhlazRuZHFYajVqRnhPZ2doejVkSWErV3ZVZ1JaZFRrUEpkSVJrL2kv?=
+ =?utf-8?B?WUNkVzBTYVFNVDNPQm94K0RiTHRibG95dWQ0Qm1zaHcwQXNkT1VNQlpqMVRl?=
+ =?utf-8?B?eWFic3ZzTDRFMUE0YXVqT01sZWdidmJVMlhpRnhUaHdrQUloSFJZd3crK0xX?=
+ =?utf-8?B?SHd0N3l1Y1hENTg4YkFiU21NWWM3TzFzU0RrTVlHakxmVk1abyt2NlhwZFFS?=
+ =?utf-8?B?YmlpdHFlRFdMZ050SHd3NXN5V0VqUlZlMGJqUVJycGcyU3JNVys0STdNM3FV?=
+ =?utf-8?B?UGEwUmo5amZDTTdnTGtiWGtoTWhIemhDQVAxOWswVXRlM3diWU40OUM1NGtI?=
+ =?utf-8?B?V2xFckNpdlpEeERWNjNaUmplVWhtOU1rOUVFc0VOaDF6RlB2dThRMXNiSGVI?=
+ =?utf-8?B?RmR4NFcvQ1VPdkhwR1lvN3FlZ0pvNTk3OXllb0Nvblo2aS9VaUFMcTd5MmlN?=
+ =?utf-8?B?RnVWK2NDZ2h0MWdjaUIwQUxZUkxselk0ZE55MVZLK2l0YjR1MGJCbS9OZEM4?=
+ =?utf-8?B?aWRCWFVmaUZUdDR5bWNlRWRVRUxIZzNsZXg2RGtzM2ZmRGU3Z1l2Y0RHTmxG?=
+ =?utf-8?B?QkpWZEVrMXJuNDdteWhha3Y3Rm1jYmpNUloxeWlFRDIzUVpMYUliVG5zWExw?=
+ =?utf-8?B?UmdHWkVsRTBjUXVsZDNKamFWeWNGaHMvcEl5d2lvWTR4VWN2eHF1WGdGbHBL?=
+ =?utf-8?B?QmFxWUpweFBmeVhYaVRQdVEzZERMc2VCcWdsc05SNDJVSUdrR1kxSGg3bWhY?=
+ =?utf-8?B?RHdKTGdxZVRPc2tzU1NRZDFYWUtlVXRTTEhEbmRVRitQdE5KQ2NvUWMrSmVG?=
+ =?utf-8?B?eVlQVUFRaGY3b0hBaklnYzVSWGtCdUc1S2U5VUdzeHB3c3dnOCs0c3diMkM2?=
+ =?utf-8?B?YjVYTlJ1VUR0em1vdFpJSHVPWmxjSTJGMXdIanlVbndMczJtM1N2S1JXZEI1?=
+ =?utf-8?B?VTVZZzdMdFBvaW9WeVdEbHo1aU11RFh5RnlTeWZtQ1hnbzcvbk1HWlBsRncy?=
+ =?utf-8?B?K2J6UGd1UVFYVW55Q1lCUEUxUFFaY0Fzd0RtTWI4NzZPeE9PdUg2cEZiWUY3?=
+ =?utf-8?B?SEh1NHBwcnl3MDJYbk1tYTlsbGZpY0NWblBUWnM4Y2VoVlhPRVF3WC9YRVY2?=
+ =?utf-8?B?aCtEL0sraFZtektNU3l1M0JRVXQ0YkN3WVdDcWNPQy9zUDh2RHcwTTJhMVRz?=
+ =?utf-8?B?Z3FRc0IxUW1pMzVlMGgxY2lTQU8zWUlTN1dYWFdYdHEyTXVGcHZHSTBsem9s?=
+ =?utf-8?B?NUdlaFd0Q1RYVFNWUXlaUUtqcDRBUTVWaTlGb3RVSUFta3pGSDNTSG5wV01n?=
+ =?utf-8?B?U2xiVWIzOFBWRkhQczNZYnBSSVMwSGZJVE1qaXNJZ0JFUkYyWFp1MHZubnZP?=
+ =?utf-8?B?UTVoR1dVeEtOM3NIbldxcnpOWURHY3dDWFdNRXpqMWJzWElvYW9ZR25EN3py?=
+ =?utf-8?B?MVltMkU0ZDdOQ2piTjhMK2FqMWdGV3p3M1NRbjhzOWVJWERoU2VTY0gvRmNj?=
+ =?utf-8?Q?V0yXk57DUR2IWVcjddxVk3oblttKjrw2?=
 X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
  IPV:NLI; SFV:NSPM; H:BY5PR12MB4116.namprd12.prod.outlook.com; PTR:; CAT:NONE;
- SFS:(13230040)(1800799024)(7416014)(376014)(366016)(7053199007); DIR:OUT;
+ SFS:(13230040)(1800799024)(366016)(376014)(7416014)(7053199007); DIR:OUT;
  SFP:1101; 
 X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?TW1KMEtuMWhiWkpZVnZaSnZkYnBJaHlvUjR5RVZIUks1WUVtTVlLMS84ZFA5?=
- =?utf-8?B?NG4yL2xMTDBkZHBIblBxNWJFcVdjb2xPTE1GU3JrTDRQcGdNUE1pTEtPZnRT?=
- =?utf-8?B?YXB2Y1pvRkd4Y2lSTU11Wm9COER2SERvYTZsdFptMkNVdDNVSTZraFg1ZnVH?=
- =?utf-8?B?RUxJVndQL2hBM0NNa2VQcHJZL2x3TjRqS3c5VmsybForMVlGYVFDU0VIMk1L?=
- =?utf-8?B?ZFR0OGJDQVRPZ3QyS281TXFDRkczOWlLVHNrU1NHdDZKMlFXN3JWbWRFRU03?=
- =?utf-8?B?dmlzeXlpQ0JoNnJtNkUzYXpiYzRsUm1SaWVBdlAxQi80alUvK0JTT3YvUGxW?=
- =?utf-8?B?RjJ5WURPK1dEdEdCTzNXMlRoWEtxMWloY3VxOXN1WUprYlp4VERSa1BRVnZu?=
- =?utf-8?B?WDJHTWVUVStZOFhJS2VSY291VWRwU2w1TVkvT29HY2pHQUo2cTlCVkhlYytH?=
- =?utf-8?B?NHIrSWpKRWpLYnFheVJMMmhlZVZTKzNhaUhQamo3Q0V1NzZqMWQrd21LQ3k5?=
- =?utf-8?B?SzRaU0YrRFZoM0RSTUEwWnFVQlI0eVFxQWFmMVpsaWZmU1NDYjhZa1U2M1N0?=
- =?utf-8?B?TUR4Q2w1YlNBYkMxRjdvN0MxVmtJZTNEWVpCVXNicGpBa2R3MTNBSG5mWlBl?=
- =?utf-8?B?WFRLVDNjTHZhbHh4SFZaNUZtU3lvL0gzM083Z0dWaTBmdENvZlk0b1NuYzRG?=
- =?utf-8?B?cWJsNnJIaG9VSmJWZjY4V29qYzhuVHdOeldXcWs1aHppYUdBSEZsNVVxckk0?=
- =?utf-8?B?aStPdFM4TUZ2akQwYkd2aE9JOUxOM2IrTW9qMjdxNXVDajk4b3BTTWw2eGVR?=
- =?utf-8?B?QzdpYzdaVkFJZ1g2ai9FZjJidVZIdk9CZG0vR3NFUGFPVTlkcXZ0UlFEemJD?=
- =?utf-8?B?cThjVXprK3FWSG1aSStnOXFNWUdhN0ZoMjU4bEdhZ2xQV1BFK0tONFZDTjNG?=
- =?utf-8?B?OFhXVWk0MjJuSlAvM01hUFRPY2RVVXlWL2tlTngvSEhvbUlDWERwTTcyOU1y?=
- =?utf-8?B?eW5kVklXM2dnVEV2N0czMTE3d0VnREpmYitHTWU2NUdkbUpRUU1FZjdnd2pW?=
- =?utf-8?B?TXJlRmJwRHlCSnBaMjJlSndqWFdWMEtUbFJzbG9ROUVOdVBIanFpYmhnWVJl?=
- =?utf-8?B?TkxuZ2xtME9tNTRCUWRNRnFSQjBLbnl1aDRLRmxrSEhMZXE4Sm9MbVU4cXVH?=
- =?utf-8?B?YWhPWDBhUGN6QW8xelB4S2Jyb2xaQStxWktJQWpYc2xTcTJrRU1iS3Npd1hW?=
- =?utf-8?B?OGZmcTNYeitDY3IxZ29XMWQ2WHd1TFhoSkF0Y2RORWxaQXRXc2FLUmlMa2tT?=
- =?utf-8?B?ckwzbk5LSGc5OTBsZDdoVkp0VFgvbUFMYmtLQnBlekZUK2o3ano0WHB4ZElT?=
- =?utf-8?B?Rm9Nbkk0cE1kQ0lXOG0wdjQrNWhIMVJYNTdtRE5WU1BraWFYZmdSWm5URjIy?=
- =?utf-8?B?ZE9zSDMzVTIrSWJZMXpYdEFGaWFqZCtSVTZMbzUvb2ZxVHg0Snk1dGcxTktx?=
- =?utf-8?B?MnJIY1k3LzFRc1UzdEVRdzZQK1g1N1FnTmZObVA0RXkyK0VreWRvSThxSjFt?=
- =?utf-8?B?QlgyYkcrNThmeFZHV2U0YnhXNjdtamVTM2lhcjNxcERpbmN1K25pT05yaGU1?=
- =?utf-8?B?bUNLUmZJMjRrY0NlWHFVKzI3bUVPRFlka1hvUWpKNXB6N0hocmVkZVg2ejN6?=
- =?utf-8?B?UUdDQUVWazFzQ3ZNZnlGazVVZ3ZMUENhSkZwK2YzUnE4MW1wcHZlayt1azdW?=
- =?utf-8?B?U2JRaVYrV1RacjUvVDdXYmRQT0dJNWd5TEZtZFRQUTI5bEVud0lEcFNmYnl6?=
- =?utf-8?B?OTNGL3k5YzNMYzVVSndML25qbDJyRXZxQUd1QnFrU21PL2NpaWdGSk5qRUtT?=
- =?utf-8?B?RXFmUjAwM2JuQTlPazRySHNDV3JXRGsrZVNRWGVZeGFYUUw5SnhHaUFXYTRB?=
- =?utf-8?B?VXBOM3oyT1lnNnNQeXBEQ1lrSXlyeXM4Q0RkeHkyaWZiYXRSeTdEa3J3VDJC?=
- =?utf-8?B?cWc4QUtCdHdlY1FJSFZUOEc4VXBoMWQyTkxyMmEza1Z0NnZGRGhhS0R4NGpl?=
- =?utf-8?B?RDhhZlVvQjNIVldEVEg2UGo3LzZhWTMxK0Fyb0V3anBua1YyZlNsemVta0tQ?=
- =?utf-8?Q?tOvTUfrKFdlx2upOQuT1/f4e9?=
+X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?QVdnYStHTHZZUmxQWW9vMmhud0oxbGRCTzY3TC95cHdSUms5YThCRVJia3ZJ?=
+ =?utf-8?B?WGNRbHhlWXVlM2x3b1htZVM1eFYydEZNcFBwRENFdWkvMXJ2QUZ6ZjRFeFdZ?=
+ =?utf-8?B?TmNndE13cGJpYmo3cUR2cTBJZGdpdUZTZWYvbkVjSHMxNGk3N3pCc21DRi9h?=
+ =?utf-8?B?TFF0cG5rS20yS0VDc3hZMlhWSWtRQzlNK21OcjJKYVphc2R6TktzdXJBc1Fv?=
+ =?utf-8?B?TjdWWUJiVlFtNUhXMFBKWU9DYnN6M1dNSXNuS3RPV3c2L2ZpSmt4dVdlTHVr?=
+ =?utf-8?B?RkM1OUtTZTE1SC84ZzJtU0QxSmNOUWR3dWZjVGxSd20zdUtmTEJ2aWJvSjFK?=
+ =?utf-8?B?bDVScHFIeVo5OXBVUE53bHQ5QlQ1c2NLVHBCWmJHNE1vQ2ZVWDdjeHNkYTB5?=
+ =?utf-8?B?cFBkZ0VpSEI0TVcrdy9kcW03ZTM0NktJQit4WW5wa1BDMVRCWlloYm54SjVC?=
+ =?utf-8?B?RS9HYjFYTjh4VkEyaUtTbEZERFNtUXdIWWRUUGZKZU9KMmxzSlRqNnJrQkhT?=
+ =?utf-8?B?a21RRi9IM2tOSU83N1RZK1dWT1NnN0IrWkdnUVNYdXZZcUZySmYzdGwzZDR0?=
+ =?utf-8?B?YjV0MzAwaWE0NUdFSXc0aG9IbDh3dTFvUkwvbnNCR2JpbzhCOE1TbVZESGZ1?=
+ =?utf-8?B?b1hrclVXeEQ2RXdlYzdSUzJNL2o0L0VhR2ExWjlBN28yNEk4NW8wcFMyRTQ4?=
+ =?utf-8?B?aFl3ZHF5Y0U0bEY4a3VpRHMrOEpzQThpb2MwUFRPcWVrSVk1K2Q1QWdUY0hZ?=
+ =?utf-8?B?N09YcExkQ3BiZ3I2OUpEakU0dkhxRUozaEVNbzM4WXk4aEJBcFdYMVFQa05B?=
+ =?utf-8?B?RkpqL3FZQkVXUGNYdDNPc3hBM0lLMHJpRDdUYjVaT2FqWHh6NXBqb0p4ZW9t?=
+ =?utf-8?B?ejAyQzhldVRWNSsrUWZJQm9LZko2R3hvZ3JaTWd0dzE4VGVabkF6OFMrUG5T?=
+ =?utf-8?B?ckFwcCt1Yy9Oa3plMUk3NG5DZm9EczZzV2VvMHlpcnFZenY3UGJRRlVzMzln?=
+ =?utf-8?B?WDlkQzVxekNmRzdRb0s0ZkNZZkIyanNrSy9OREJFUWNXakVHeWV3dytHaGl6?=
+ =?utf-8?B?Sm93bDRUejJvY0lnQk5qam9HSjRrUWF5dWpkdjN6R2hYUU5yd0VjSnpXT2dm?=
+ =?utf-8?B?UWNRcFJMQ3I5dkg0WWNzcmR2cVJBM3IyTEdKWFZSVnBnSzJJNXp5am02VjlO?=
+ =?utf-8?B?WDlmbFVJTWNSaDQrOUF2dGNQb2NYZmYrWkFoZGpkQXZRSXFiUXV1NjZsaXl4?=
+ =?utf-8?B?MXdaUFE0NWNUVytlczcxcldwZWl5Q3JnWllzMlVhMm9xYk1Ba25VY1VBS0Ra?=
+ =?utf-8?B?YkQ3ZjJsNkZNdDJKVWlrVitoOWxzbGgxL25tVjJyYnE3aW9YdHd2QXhrc002?=
+ =?utf-8?B?T2lSdzhtenFzUCtoczdqam9neXc3RktMZ0FQYUNXd3FiYUdKbStyY2ppQkFo?=
+ =?utf-8?B?YzhSVkxjTEJ4a0Z0RVl2NmV3Q1dsWm1DOCtpMVBSRWJCS2thMmhab3hFemZa?=
+ =?utf-8?B?bzAzejdYOGFuWEMxZzQyWjdmT3N2QVJWc1ZLZUJYaUFlWmZJL3g0TVYzTGNH?=
+ =?utf-8?B?bmpCdFkyeWFoc0Uyb21XNThUckRXVGMrbmVoODlmdkdiZVhEOXh2c1FYMDNZ?=
+ =?utf-8?B?K2QrQTV1b3pXKzkzb2ozL2phVVl2RGVKazJjVWtnZTNwL3EzVmV6S2Y5TEFZ?=
+ =?utf-8?B?a1ZtY20zVklnZUx3akhvRTRBRmc0MitrOEdXOWhsNmZuU0RhYlRhcU9lcEUw?=
+ =?utf-8?B?TUlFc1Bibi9MMy81MUlkaG9Vam5pdHZUWTBkYTJ6T3NROFh5c0E5SHRZZDFO?=
+ =?utf-8?B?Zkp5RWJVS3o3L3NQSTJLVGRoQk1ES0dRSjJ0Y0p6YnZnZ1RzUHp5V012dHF6?=
+ =?utf-8?B?WndPTFR3YjBYd1JhSnVMK1IwczFVbHdERnNtMXpnQnpna3YwRXFmcTFNNytn?=
+ =?utf-8?B?ME4yVXdsakU4RWFwUU9NaDJ3VnlOMGRZZnozcllnVnpQdnR0Y2N3YTZNSEpi?=
+ =?utf-8?B?UTRyWHZzZmg3QVZ2TTZBY0h0UWZGMml3c09MZ1dNUUE3YVVMOFJnY2xST1p5?=
+ =?utf-8?B?SnZxbUFpV01ZYzRuSENwUFZHeGNNUUYwUmtVbVNIK3YvNGx6NGV6U1BBcVhm?=
+ =?utf-8?Q?RqyJBuu8IcrChPtPQydBugrVX?=
 X-OriginatorOrg: Nvidia.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 3d86630c-5a49-402f-d09d-08de1d79294f
+X-MS-Exchange-CrossTenant-Network-Message-Id: 12e4ac1e-11d0-47b4-4a1e-08de1d7b6b59
 X-MS-Exchange-CrossTenant-AuthSource: BY5PR12MB4116.namprd12.prod.outlook.com
 X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 06 Nov 2025 21:12:15.5916 (UTC)
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 06 Nov 2025 21:28:25.3776 (UTC)
 X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
 X-MS-Exchange-CrossTenant-Id: 43083d15-7273-40c1-b7db-39efd9ccc17a
 X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: 6XMX9YpzzvEp40maIFTfPuPDDdU8rCuTIwbDeXvSpTO93iwhwHWSfw3JGFTQzyZPL+nBFlo57bC25L5jz1DTgw==
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: BL3PR12MB6403
+X-MS-Exchange-CrossTenant-UserPrincipalName: zVKhP8JkNeQzhGayTMG1eJHdHiGXlXv8uQzqDICR6XjKLlLpapaeJZ3zaZL+Kjip/E2nHKnrdCP6GKNiC771pA==
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: IA0PR12MB7775
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -178,156 +177,123 @@ List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-On 11/5/25 11:45 PM, Alexandre Courbot wrote:
+On 11/5/25 11:24 PM, Alexandre Courbot wrote:
 > On Thu Nov 6, 2025 at 10:27 AM JST, John Hubbard wrote:
->> 1) Implement Display for Spec. This simplifies the dev_info!() code for
->>    printing banners such as:
+>> NVIDIA GPUs are moving away from using NV_PMC_BOOT_0 to contain
+>> architecture and revision details, and will instead use NV_PMC_BOOT_42
+>> in the future. NV_PMC_BOOT_0 will contain a specific set of values
+>> that will mean "go read NV_PMC_BOOT_42 instead".
 >>
->>     NVIDIA (Chipset: GA104, Architecture: Ampere, Revision: a.1)
+>> Change the selection logic in Nova so that it will claim Turing and
+>> later GPUs. This will work for the foreseeable future, without any
+>> further code changes here, because all NVIDIA GPUs are considered, from
+>> the oldest supported on Linux (NV04), through the future GPUs.
 >>
->> 2) Decouple Revision from boot0.
->>
->> 3) Enhance Revision, which in turn simplifies Spec::new().
->>
->> 4) Also, slightly enhance the comment about Spec, to be more precise.
-> 
-> A bullet-list in a patch description is a sure sign you will be asked to
-> split things up. :)
-
-Yes. That is an eternal truth, which I foolishly ignored here. haha
-
-> 
-> And in this case I think it makes all the more sense, since all these
-> things taken separately ought to be simple, but having them in the same
-> diff makes it confusing to review.
-> 
-> Although it's mostly the `Display` implementation that at the very least
-> should be its own patch, the rest can probably be kept together as it is
-> related, and adding an intermediate patch would require temporary code
-> to build Revision. The diff becomes much clearer once the impl blocks
-> are moved where they should be (please see below).
-> 
-> The comment update can be squashed together with the Revision/Spec
-> patch.
-> 
-
-Will do.
-
+>> Add some comment documentation to explain, chronologically, how boot0
+>> and boot42 change with the GPU eras, and how that affects the selection
+>> logic.
 >>
 >> Cc: Alexandre Courbot <acourbot@nvidia.com>
 >> Cc: Danilo Krummrich <dakr@kernel.org>
 >> Cc: Timur Tabi <ttabi@nvidia.com>
 >> Signed-off-by: John Hubbard <jhubbard@nvidia.com>
 >> ---
->>  drivers/gpu/nova-core/gpu.rs  | 45 +++++++++++++++++++----------------
->>  drivers/gpu/nova-core/regs.rs |  8 +++++++
->>  2 files changed, 33 insertions(+), 20 deletions(-)
+>>  drivers/gpu/nova-core/gpu.rs  | 38 ++++++++++++++++++++++++++++++++++-
+>>  drivers/gpu/nova-core/regs.rs | 33 ++++++++++++++++++++++++++++++
+>>  2 files changed, 70 insertions(+), 1 deletion(-)
 >>
 >> diff --git a/drivers/gpu/nova-core/gpu.rs b/drivers/gpu/nova-core/gpu.rs
->> index 9d182bffe8b4..8173cdcd8378 100644
+>> index 27b8926977da..8d2bad0e27d1 100644
 >> --- a/drivers/gpu/nova-core/gpu.rs
 >> +++ b/drivers/gpu/nova-core/gpu.rs
->> @@ -130,16 +130,18 @@ fn try_from(value: u8) -> Result<Self> {
+>> @@ -154,6 +154,17 @@ fn try_from(boot0: regs::NV_PMC_BOOT_0) -> Result<Self> {
+>>      }
 >>  }
 >>  
->>  pub(crate) struct Revision {
->> -    major: u8,
->> -    minor: u8,
->> +    pub(crate) major: u8,
->> +    pub(crate) minor: u8,
->>  }
->>  
->> -impl Revision {
->> -    fn from_boot0(boot0: regs::NV_PMC_BOOT_0) -> Self {
->> -        Self {
->> -            major: boot0.major_revision(),
->> -            minor: boot0.minor_revision(),
->> -        }
->> +impl TryFrom<regs::NV_PMC_BOOT_0> for Spec {
+>> +impl TryFrom<regs::NV_PMC_BOOT_42> for Spec {
 >> +    type Error = Error;
 >> +
->> +    fn try_from(boot0: regs::NV_PMC_BOOT_0) -> Result<Self> {
+>> +    fn try_from(boot42: regs::NV_PMC_BOOT_42) -> Result<Self> {
 >> +        Ok(Self {
->> +            chipset: boot0.chipset()?,
->> +            revision: boot0.revision(),
+>> +            chipset: boot42.chipset()?,
+>> +            revision: boot42.revision(),
 >> +        })
-> 
-> This impl block for `Revision` gets replaced by a block for `Spec`,
-> which is only declared later. Can you move it (and the one for BOOT_42
-> in the third patch) to the right place, next to the other impl blocks
-> for `Spec`?
-
-Yes.
-
-> 
->>      }
->>  }
->>  
->> @@ -149,7 +151,7 @@ fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
->>      }
->>  }
->>  
->> -/// Structure holding the metadata of the GPU.
->> +/// Structure holding a basic description of the GPU: Architecture, Chipset and Revision.
->>  pub(crate) struct Spec {
->>      chipset: Chipset,
->>      /// The revision of the chipset.
->> @@ -160,10 +162,19 @@ impl Spec {
->>      fn new(bar: &Bar0) -> Result<Spec> {
->>          let boot0 = regs::NV_PMC_BOOT_0::read(bar);
->>  
->> -        Ok(Self {
->> -            chipset: boot0.chipset()?,
->> -            revision: Revision::from_boot0(boot0),
->> -        })
->> +        Spec::try_from(boot0)
 >> +    }
 >> +}
 >> +
->> +impl fmt::Display for Spec {
->> +    fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
->> +        write!(
->> +            f,
->> +            "Chipset: {}, Architecture: {:?}, Revision: {}",
->> +            self.chipset,
->> +            self.chipset.arch(),
->> +            self.revision
->> +        )
+>>  impl fmt::Display for Revision {
+>>      fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
+>>          write!(f, "{:x}.{:x}", self.major, self.minor)
+>> @@ -169,9 +180,34 @@ pub(crate) struct Spec {
+>>  
+>>  impl Spec {
+>>      fn new(bar: &Bar0) -> Result<Spec> {
+>> +        // Some brief notes about boot0 and boot42, in chronological order:
+>> +        //
+>> +        // NV04 through Volta:
+>> +        //
+>> +        //    Not supported by Nova. boot0 is necessary and sufficient to identify these GPUs.
+>> +        //    boot42 may not even exist on some of these GPUs.
+>> +        //
+>> +        // Turing through Blackwell:
+>> +        //
+>> +        //     Supported by both Nouveau and Nova. boot0 is still necessary and sufficient to
+>> +        //     identify these GPUs. boot42 exists on these GPUs but we don't need to use it.
+>> +        //
+>> +        // Rubin:
+>> +        //
+>> +        //     Only supported by Nova. Need to use boot42 to fully identify these GPUs.
+
+Ohh, I scrambled the comment when I added Rubin to the discussion. Actually,
+the first sentence is correct, but the second is dead wrong. :)
+
+Rubin will still key off of boot0.
+
+I'll fix this up.
+
+>> +        //
+>> +        // "Future" (after Rubin) GPUs:
+>> +        //
+>> +        //    Only supported by Nova. NV_PMC_BOOT's ARCH_0 (bits 28:24) will be zeroed out, and
+>> +        //    ARCH_1 (bit 8:8) will be set to 1, which will mean, "refer to NV_PMC_BOOT_42".
+> 
+> From the code it looks like Rubin and "Future" GPUs are handled exactly
+> the same - do we need two paragraphs to describe them, or can we just
+> have one for "Rubing and future GPUs"?
+
+They are not. The code is correct but the comment is wrong. 
+
+> 
+>> +
+>>          let boot0 = regs::NV_PMC_BOOT_0::read(bar);
+>>  
+>> -        Spec::try_from(boot0)
+>> +        if boot0.use_boot42_instead() {
+>> +            Spec::try_from(regs::NV_PMC_BOOT_42::read(bar))
+>> +        } else {
+>> +            Spec::try_from(boot0)
+>> +        }
 >>      }
 >>  }
 >>  
->> @@ -193,13 +204,7 @@ pub(crate) fn new<'a>(
->>      ) -> impl PinInit<Self, Error> + 'a {
->>          try_pin_init!(Self {
->>              spec: Spec::new(bar).inspect(|spec| {
->> -                dev_info!(
->> -                    pdev.as_ref(),
->> -                    "NVIDIA (Chipset: {}, Architecture: {:?}, Revision: {})\n",
->> -                    spec.chipset,
->> -                    spec.chipset.arch(),
->> -                    spec.revision
->> -                );
->> +                dev_info!(pdev.as_ref(),"NVIDIA ({})\n", spec);
->>              })?,
->>  
->>              // We must wait for GFW_BOOT completion before doing any significant setup on the GPU.
 >> diff --git a/drivers/gpu/nova-core/regs.rs b/drivers/gpu/nova-core/regs.rs
->> index 206dab2e1335..207b865335af 100644
+>> index 207b865335af..8b5ff3858210 100644
 >> --- a/drivers/gpu/nova-core/regs.rs
 >> +++ b/drivers/gpu/nova-core/regs.rs
->> @@ -41,6 +41,14 @@ pub(crate) fn chipset(self) -> Result<Chipset> {
->>              })
->>              .and_then(Chipset::try_from)
->>      }
->> +
->> +    /// Returns the revision information of the chip.
->> +    pub(crate) fn revision(self) -> crate::gpu::Revision {
->> +        crate::gpu::Revision {
+>> @@ -25,6 +25,13 @@
+>>  });
+>>  
+>>  impl NV_PMC_BOOT_0 {
+>> +    pub(crate) fn use_boot42_instead(self) -> bool {
+>> +        // "Future" GPUs (some time after Rubin) will set `architecture_0`
+>> +        // to 0, and `architecture_1` to 1, and put the architecture details in
+>> +        // boot42 instead.
 > 
-> nit: let's import `Revision`, or at least `gpu`, to align with what we
-> do with the other structures.
+> If this is "some time after Rubin", how do we infer that we must use
+> boot42 for Rubin, as the previous comment suggests?
 
-Yes.
+Right, we will actually use boot0 for Rubin. Thanks for catching
+the inconsistency! 
 
 thanks,
 -- 
