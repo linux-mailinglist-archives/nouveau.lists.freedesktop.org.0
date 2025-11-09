@@ -2,92 +2,96 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id F27DBCBAFD3
-	for <lists+nouveau@lfdr.de>; Sat, 13 Dec 2025 13:47:32 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 17EF2CBAFDC
+	for <lists+nouveau@lfdr.de>; Sat, 13 Dec 2025 13:47:36 +0100 (CET)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id BCBBD10ECC9;
-	Sat, 13 Dec 2025 12:42:24 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 25F6710ECDA;
+	Sat, 13 Dec 2025 12:42:25 +0000 (UTC)
 Authentication-Results: gabe.freedesktop.org;
-	dkim=permerror (0-bit key) header.d=gmail.com header.i=@gmail.com header.b="CnQrDaOy";
+	dkim=permerror (0-bit key) header.d=gmail.com header.i=@gmail.com header.b="L7+8tlVO";
 	dkim-atps=neutral
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from mail-wm1-f52.google.com (mail-wm1-f52.google.com
- [209.85.128.52])
- by gabe.freedesktop.org (Postfix) with ESMTPS id EFAA510E9DA
- for <nouveau@lists.freedesktop.org>; Thu,  6 Nov 2025 21:25:02 +0000 (UTC)
-Received: by mail-wm1-f52.google.com with SMTP id
- 5b1f17b1804b1-47754b9b050so330675e9.2
- for <nouveau@lists.freedesktop.org>; Thu, 06 Nov 2025 13:25:02 -0800 (PST)
+Received: from mail-pj1-f44.google.com (mail-pj1-f44.google.com
+ [209.85.216.44])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 03ACB10E23B
+ for <nouveau@lists.freedesktop.org>; Sun,  9 Nov 2025 09:48:10 +0000 (UTC)
+Received: by mail-pj1-f44.google.com with SMTP id
+ 98e67ed59e1d1-34159ccb610so270677a91.2
+ for <nouveau@lists.freedesktop.org>; Sun, 09 Nov 2025 01:48:10 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1762464301; x=1763069101; darn=lists.freedesktop.org;
- h=content-transfer-encoding:in-reply-to:from:content-language
- :references:cc:to:subject:user-agent:mime-version:date:message-id
- :from:to:cc:subject:date:message-id:reply-to;
- bh=YKes0XVjNGJ2FggkAmqRR788Mxk3TjUGRm3n1mueSWg=;
- b=CnQrDaOyC3tkAso3tecfhttGehls4MispX2XH6/Q+VLIeE1XTZP0NzKMxUbBFClU7v
- pNaQDAevtX75LXlC7KL/AmUjX43V8CPfxMfvnRPFm5yaWkGOfBdjEsHdWDkjgPW9iW76
- kz9SBcV047cW5fz87jd9MRWtYBLu8N82DA32uJ3m/HbL7s5U3sd4oEn6WL6278fj67Zf
- nB3HLvixc7XEn7YOTfMRn6VU7jXlplkRHqxYA7PqcfoMhM53nn8GlaZKRY/tHw3KTOfl
- Rrkkm9DW0TkMvG0th5Nzzqnh89RpR710e9hANgfyyaOUR0Y3L9RbbjKbsxpe44kAynUn
- RvJQ==
+ d=gmail.com; s=20230601; t=1762681690; x=1763286490; darn=lists.freedesktop.org;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=7UbbWu4YJEt2N5oFO0yvfHfoZZvWupJp9/gMRHzUkU4=;
+ b=L7+8tlVORg4tPyMs/KM6tDNzyDhkPs3yWAHTPUScW9zQDmcvCcLYM5BHOEXa6/QBT5
+ a65byNXGB4+GgSTyYMphrdHNajJpEci+japtR/cLKqwd9+cIBjOXSSU/FRxcvXLDTtGB
+ N0Jz3M93zrbDmgQhcz+sz2p8kw7PFElww0xcc/MfdVDcE6wiCchuaCLn4Ihok3EN14fR
+ zNt7i3z0iZaursglUIyVfbwCd0ZntypBZ6/rfilpBNLDY8Pd7K2lWtBtzCTQT7kR/26c
+ gCL8JvtpRLD37dKD1pgc6lxsvOjiAOunkrwlW/IVg6C1AD5+YWJjy5pO66+/7UP2FXg+
+ yrtQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1762464301; x=1763069101;
- h=content-transfer-encoding:in-reply-to:from:content-language
- :references:cc:to:subject:user-agent:mime-version:date:message-id
- :x-gm-gg:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=YKes0XVjNGJ2FggkAmqRR788Mxk3TjUGRm3n1mueSWg=;
- b=YELQxmXtbc+1j9s7dAbJ25S30USJYUAZrW5E6ByLAQ3MIjfaP3upwoxA8nyoFaBBw2
- Arbjc+VwBvDHYrYUzxWaCSAB1DTWyj9b+6je1D3kn/aDYzzCdOUKRLrpm41IE0xqg/XG
- An/tiI9pC0KDFH00ujGGDL2Pv1nD/4cKql+hV9GuQU024PQ3UL58Ftsco+PsUrMjxSmg
- h+YelwXMcOA+PhXCNIPoog4LGFejqyu3dg0vHpm1F6TtIQ2TiY3uxkawn1nozBRS9L+T
- L9vval+YqXDoM7ag5dSbWJ5gYWPsfxPuBa/u98WTTVQj8B9lWPWqJ58jLTNlA0SA6n/f
- dlZg==
-X-Gm-Message-State: AOJu0YxR0p5IfofI5l9izAd4ebJaDNm40FyHMi2XoUTtf0TUBcUIvmjl
- dtAKLsGVCU/CdKTX+CFbV7UqV7jo/LLtOb92lAIKQUnKtjFHl+1fs5ZX
-X-Gm-Gg: ASbGncv1hCRnD0SBMUcsnyR59Rg9w0F+Pq/iC9HBK94Q4dV0WT8zIV3z6V+fMBQRhSy
- WL+1kuTaLP9cl/TFd/ywZEgum7IsxpmPipHz+8Bb28Uge3pXMnpvxYfP1HuJSiMAiWsgibROH7j
- 6rgaW6Bmm/x8uv0ooy0YVUoA7VQD9HS/+si4laIVYps9JuqBbAex+J9jIs9felt76sruWbOfcEU
- YmOrQ9XLHAv5twD/bVB3PG9GoJQ9STOrgPQg/FBvUm7ZLTdV85Ru64Pb93VATHzXy9KmI7pnjIb
- 5D8np0xV2i71FzbJk64/Y26uXtgzXAByGlPv+9kz18NUvLFvxjOw5A6p7atUjcem2aRm8wsMJZ2
- NSFJeuWpXYsS/UTuvvbVWAg3Tigx8kd1Rh2DxrARuzRGXYLDHEZgazWj9daVLgRcTqKLRYhB5ft
- FzmJO+zYrzH9BljLnNltIpSlixfppigclxhB/FWQOhk4LaWf7eCy2rmNg9WP+LNx+wLWw=
-X-Google-Smtp-Source: AGHT+IFRtleD8p3GDaRn7y4cLlgvtrJ8k9u0N/dFUXsYAq553rRak+Diry9dTEA+SBjhoD9RJ2Xd8A==
-X-Received: by 2002:a05:600c:1384:b0:46f:aac5:daf with SMTP id
- 5b1f17b1804b1-4776bcfd091mr7371805e9.35.1762464301183; 
- Thu, 06 Nov 2025 13:25:01 -0800 (PST)
-Received: from ?IPV6:2a01:e0a:acc:bb60:756b:64e3:20ef:1d08?
- ([2a01:e0a:acc:bb60:756b:64e3:20ef:1d08])
- by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-42ac67920fcsm1257502f8f.39.2025.11.06.13.24.59
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Thu, 06 Nov 2025 13:25:00 -0800 (PST)
-Message-ID: <ff95096e-83de-433c-9048-55a35dab3dde@gmail.com>
-Date: Thu, 6 Nov 2025 22:24:59 +0100
+ d=1e100.net; s=20230601; t=1762681690; x=1763286490;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-gg:x-gm-message-state:from
+ :to:cc:subject:date:message-id:reply-to;
+ bh=7UbbWu4YJEt2N5oFO0yvfHfoZZvWupJp9/gMRHzUkU4=;
+ b=T0ar5hu013dUXZPkYMW95B9vOWM3EjfGTPHLo/jzTebLBL79AIzf2QZ67ii11D8bzx
+ ctS0I4Y7/seIPgTzAw521pcTJJ8jvi7XEpVQaqeQU4eQPPoigJVCWYhrocOo3ckI/95g
+ oQqZsdMy2eUT5QFDtk6Du4HTKv6v2/4HB0ebbPCgvKkRqMEoBKejjIvYws921mGfScWk
+ 8QjF2YQOVqrRjGTJhDRjTeCmy9D60nZVN7M4DEb0wRMlFdGIm+cixRRg+DcfBtJ0XBFP
+ 0DCO8JhMebrMw61xOzQK9t0eyKFVbrsUox8gGAZlWn7jaYwt/+4Nq337sXKjjSXx3l4W
+ KIjg==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCWQXF0DfpHmccxs4wASiG12iPIL52XAp8G7Nu7MN+rr4N3s/+kKng9oeghmbIaox8V9gTZMuvDM@lists.freedesktop.org
+X-Gm-Message-State: AOJu0YxXf5a/Qaq4hD2ANotj1BtS0iQ3bkixJg3VhaK+3xyBemIsYARv
+ 3mtMAStHMedEy1pqsXeFYmTr/C0T/x9/EKYN5P/10oK53gimTafJsPQEhN6lMkLacwrV+CNCRsv
+ Z8t0IHIqP+8z3a1AlXz0++cnUXaUTW64=
+X-Gm-Gg: ASbGnctD3vEe85+VAo0KIVFciX/r8TcleZ0iYrH9UuxrFnKBAHqC9XmtafI/SxJGUJ6
+ TI1bgh0cwEQJiu5FXwOAqJaoIRQ5gCwn1zeZNnlzse/91xrUIeLETX1c3gtV4QU76pLB6y85AyI
+ SpZimhMBSzmQRcAbd21jgZvwV6aER98zdswXtnBws1N77m1aJ8vwt8durXzpOfcSPUrwfz89Rsl
+ EJbmD3KmCb+FSD7b0QUFRyl0wNo6l55y4IyDWjM/eWSZIeU9NhLiUfyVb6EfmIIaHe2hj50Dk4G
+ AFQuiEaVtTXeEKim/DCAfW1470JJsHYQpcPEfQhClThPi1mr/Zc5FGSHC+w6MG2hVB3x+jOk8I/
+ cq1g=
+X-Google-Smtp-Source: AGHT+IHJ3X970Fz+WZG6aqfSKGTdXxfzPaNAG0irWW2OKqnIbo7IoDwLMSbVP8viSAFnVGTRp05nHQrCuUons0eLXmA=
+X-Received: by 2002:a17:902:ea09:b0:295:511d:534 with SMTP id
+ d9443c01a7336-297e5731561mr32609445ad.10.1762681690341; Sun, 09 Nov 2025
+ 01:48:10 -0800 (PST)
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v3 1/4] nova-core: Simplify `transmute` and
- `transmute_mut` in fwsec.rs
-To: Alexandre Courbot <acourbot@nvidia.com>,
- Danilo Krummrich <dakr@kernel.org>, David Airlie <airlied@gmail.com>,
- Simona Vetter <simona@ffwll.ch>, Miguel Ojeda <ojeda@kernel.org>,
- Alex Gaynor <alex.gaynor@gmail.com>
-Cc: nouveau@lists.freedesktop.org, dri-devel@lists.freedesktop.org,
- linux-kernel@vger.kernel.org, Boqun Feng <boqun.feng@gmail.com>,
- Gary Guo <gary@garyguo.net>, =?UTF-8?Q?Bj=C3=B6rn_Roy_Baron?=
- <bjorn3_gh@protonmail.com>, Benno Lossin <lossin@kernel.org>,
- Andreas Hindborg <a.hindborg@kernel.org>, Alice Ryhl <aliceryhl@google.com>,
- Trevor Gross <tmgross@umich.edu>, rust-for-linux@vger.kernel.org,
- dri-devel <dri-devel-bounces@lists.freedesktop.org>
-References: <20251104193756.57726-1-delcastillodelarosadaniel@gmail.com>
- <DE1H0USFAGNU.FFRA802H95RG@nvidia.com>
-Content-Language: en-US
-From: Daniel del Castillo <delcastillodelarosadaniel@gmail.com>
-In-Reply-To: <DE1H0USFAGNU.FFRA802H95RG@nvidia.com>
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
-X-Mailman-Approved-At: Sat, 13 Dec 2025 12:40:46 +0000
+References: <20251108043945.571266-1-jhubbard@nvidia.com>
+ <20251108043945.571266-2-jhubbard@nvidia.com>
+ <673640f6b26617bc5e1f4962bc2f9f7257346efb.camel@nvidia.com>
+ <46c4877e-2af3-440b-b8c5-fa9078a5cf9c@nvidia.com>
+ <DE3AAYKKI0HN.2QTWD76BN3LMO@nvidia.com>
+In-Reply-To: <DE3AAYKKI0HN.2QTWD76BN3LMO@nvidia.com>
+From: Miguel Ojeda <miguel.ojeda.sandonis@gmail.com>
+Date: Sun, 9 Nov 2025 10:47:58 +0100
+X-Gm-Features: AWmQ_blUxjf3ArTwjKKrEFU9NX1RDrwQAlazu89gcX-vqWpEmM0esqgYqA4hVRU
+Message-ID: <CANiq72k3gkVnkW4_A47FzAD8CwYLHj3qDUhNsT27P71=XppRdA@mail.gmail.com>
+Subject: Re: [PATCH v6 1/4] gpu: nova-core: implement Display for Spec
+To: Alexandre Courbot <acourbot@nvidia.com>
+Cc: John Hubbard <jhubbard@nvidia.com>, Timur Tabi <ttabi@nvidia.com>, 
+ "dakr@kernel.org" <dakr@kernel.org>, "lossin@kernel.org" <lossin@kernel.org>, 
+ "a.hindborg@kernel.org" <a.hindborg@kernel.org>,
+ "boqun.feng@gmail.com" <boqun.feng@gmail.com>, 
+ "aliceryhl@google.com" <aliceryhl@google.com>, Zhi Wang <zhiw@nvidia.com>, 
+ "simona@ffwll.ch" <simona@ffwll.ch>,
+ "alex.gaynor@gmail.com" <alex.gaynor@gmail.com>, 
+ "ojeda@kernel.org" <ojeda@kernel.org>, "tmgross@umich.edu" <tmgross@umich.edu>,
+ "nouveau@lists.freedesktop.org" <nouveau@lists.freedesktop.org>, 
+ "linux-kernel@vger.kernel.org" <linux-kernel@vger.kernel.org>, 
+ "rust-for-linux@vger.kernel.org" <rust-for-linux@vger.kernel.org>, 
+ "bjorn3_gh@protonmail.com" <bjorn3_gh@protonmail.com>,
+ Edwin Peer <epeer@nvidia.com>, 
+ "airlied@gmail.com" <airlied@gmail.com>, Joel Fernandes <joelagnelf@nvidia.com>,
+ "bhelgaas@google.com" <bhelgaas@google.com>,
+ "gary@garyguo.net" <gary@garyguo.net>, 
+ Alistair Popple <apopple@nvidia.com>,
+ Nouveau <nouveau-bounces@lists.freedesktop.org>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+X-Mailman-Approved-At: Sat, 13 Dec 2025 12:40:48 +0000
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -102,24 +106,19 @@ List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-Hi Alexandre,
+On Sat, Nov 8, 2025 at 12:42=E2=80=AFPM Alexandre Courbot <acourbot@nvidia.=
+com> wrote:
+>
+> I think this is the correct way to do; `Spec` should be the one to
+> decide how it is displayed, and from a maintainability perspective this
+> ensures that other sites that will want to print a `Spec` in the future
+> will reuse this implementation, instead of either rewriting one
+> themselves or having to figure out that there was already an existing
+> site and factor it out.
+>
+> Iow, this code is proactively doing the right thing.
 
-On 11/6/25 09:32, Alexandre Courbot wrote:
-> On Wed Nov 5, 2025 at 4:37 AM JST, Daniel del Castillo wrote:
->> This patch solves one of the existing mentions of COHA, a task
->> in the Nova task list about improving the `CoherentAllocation` API.
->> It uses the new `from_bytes` method from the `FromBytes` trait as
->> well as the `as_slice` and `as_slice_mut` methods from
->> `CoherentAllocation`.
->>
->> Signed-off-by: Daniel del Castillo <delcastillodelarosadaniel@gmail.com>
-> 
-> Thanks, this looks great so I am staging this series for pushing after a
-> short grace period (probably tomorrow if nobody screams).
+Yes, please, avoid hardcoding inlined display code.
 
-Perfect. Thanks for all the help!
-
-> One nit, the prefix for Nova patches is typically "gpu: nova-core:", but
-> I will fix it when pushing.
-
-I'll keep it in mind for the next time ;)
+Cheers,
+Miguel
