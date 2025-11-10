@@ -2,84 +2,89 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id 04667C48305
-	for <lists+nouveau@lfdr.de>; Mon, 10 Nov 2025 18:05:38 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 59A94C48311
+	for <lists+nouveau@lfdr.de>; Mon, 10 Nov 2025 18:05:40 +0100 (CET)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id C227910E450;
-	Mon, 10 Nov 2025 17:05:34 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 9EA6210E46C;
+	Mon, 10 Nov 2025 17:05:35 +0000 (UTC)
 Authentication-Results: gabe.freedesktop.org;
-	dkim=pass (2048-bit key; secure) header.d=mary.zone header.i=@mary.zone header.b="MlqUYMJs";
+	dkim=pass (2048-bit key; secure) header.d=mary.zone header.i=@mary.zone header.b="R09fVWj4";
 	dkim-atps=neutral
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from mail-yw1-f174.google.com (mail-yw1-f174.google.com
- [209.85.128.174])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 8DB8710E1AB
- for <nouveau@lists.freedesktop.org>; Sat,  8 Nov 2025 19:30:21 +0000 (UTC)
-Received: by mail-yw1-f174.google.com with SMTP id
- 00721157ae682-787cc9de986so13585677b3.2
- for <nouveau@lists.freedesktop.org>; Sat, 08 Nov 2025 11:30:20 -0800 (PST)
+Received: from mail-ej1-f44.google.com (mail-ej1-f44.google.com
+ [209.85.218.44])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 14B4710E3F8
+ for <nouveau@lists.freedesktop.org>; Mon, 10 Nov 2025 15:33:03 +0000 (UTC)
+Received: by mail-ej1-f44.google.com with SMTP id
+ a640c23a62f3a-b72cbc24637so584685566b.0
+ for <nouveau@lists.freedesktop.org>; Mon, 10 Nov 2025 07:33:03 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=mary.zone; s=google; t=1762630220; x=1763235020; darn=lists.freedesktop.org; 
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=KyRJZiWrQiGWx3CFD7wgOdd2jyZ0NCxb1AABBCZa0vs=;
- b=MlqUYMJsRW3e5jAGnvyAAk2ElqnqFdd/7HI9zWE3MzScZLew2Qxw+XYhOxdsn6Qrvp
- qa73AkvPT9J04konvL537ReuObFu6g71NGwIsO7hjMgrAevY1ESuT1sIZIQURJ0eDjNU
- O+ucI4cz/HQMUQVz/u7Gp0ljQ2GAVpWGJm0Ccy5LSp73JZBVMXaEH5kE0o/OJk4g8K35
- A/jHFe9onbo0NEwMCko0pwqPHROWIijn40cu725EajuCNTmikSrX60/36n4LT/qgKMe7
- 6QRTHiINpeNuZKAxvbrhmkpbuHtjSFY2fllh+yHBQpAlnp+eADg/OamM/Y/7q7msIXpQ
- YGew==
+ d=mary.zone; s=google; t=1762788782; x=1763393582; darn=lists.freedesktop.org; 
+ h=cc:to:content-transfer-encoding:mime-version:message-id:date
+ :subject:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=QZt1eoNmJghXxK3OzFUBWP+UZk12kwPAzm9DvMX3M0s=;
+ b=R09fVWj490o3wMUuapQLBR7LAX4amdwriNFgfiGs7GPUgbCowfSLyaQ3R8a6OdQzK/
+ 4VzUk7fOYLfYxrbMYsCpQ9rGhIrNcUu2hzHkX6u9cJV7PGJbuqoiMH1yVZMK1XnE0m5y
+ 9N67Zz4p7/IKsJb9Lvny4sR6Aap5x6S6Ca5ODnJ8KIZBhbAuhU5FtNjKcleDciGmNhlH
+ 1iZmKVLwjvP58jwf8l0wDvY0IcMd1bGoNgfJUSDiJY44vqbZs2qyzhHs6sHyLmd3z5M7
+ LHYs8i4rKiEki925FvNVeIavXrVW/xfGm/hgWfp+94larywSOAQ9ejOjZBd2pIxadesJ
+ vAEg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1762630220; x=1763235020;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-gg:x-gm-message-state:from
- :to:cc:subject:date:message-id:reply-to;
- bh=KyRJZiWrQiGWx3CFD7wgOdd2jyZ0NCxb1AABBCZa0vs=;
- b=viJ9MhXOvWk1q/BlTI+iRrGR/Ch/35tKopJT0Uu9pHHB7iqdpIAqNgTQ41JJYnN1ji
- Lvm4uQBVf2rza+hUNS3PjgtsDcdOLB5wt6K4VRn4poxzKY0ogty8s+GFKg9zz4DEvsTG
- vQ400f5G+vEFmsutoqGWA9W7efSBjcn5TVmcDlnepsxFGvOqoc0p8FkhOPwgePu1LXXQ
- IfTYhgXlv+u0pS/3r335WgcYfGFX4/T2327NMYXSAgoTtxJ82pjLyPzqxUPOlj7NLnXw
- Ag64AQOd0f7KCucx2RMrGviGJi9mKm472sC+MnyiKOEaKYjYoeVjuaYu2+C6NfTZ0WhY
- iZcg==
+ d=1e100.net; s=20230601; t=1762788782; x=1763393582;
+ h=cc:to:content-transfer-encoding:mime-version:message-id:date
+ :subject:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=QZt1eoNmJghXxK3OzFUBWP+UZk12kwPAzm9DvMX3M0s=;
+ b=mS1bHOJI/6kQTYqKPEPoFCgwfYkm+utbjXBl0YEfIiZcJlUD+qhQOTTdmKI8n2B9sH
+ +dSjFjKYyEf6lmPRWCqEIkFteJFWxO9pIJUxfqxLk1euSkhsw3x0YbJ2hMrISZ+JwwrX
+ FN0Wq3pocDvN1IivVcS6v4PWUxojxDcivJmvEJdELFuC2ORrJnMW9CdLhOdPGIE+B0/N
+ 9Wq2isrD2emQ9kg0zYG697mCQPEQGy4I2L7zfnh1rEfT+XpEmZQM0SqMfDIQHFBusLDl
+ PoxGJwwOrd+jkjwpGfs88ApMpsJBvbEgrXxEiSJlC0wSWvXEQS3yE9v3NKdEAJUEYNnq
+ LEsQ==
 X-Forwarded-Encrypted: i=1;
- AJvYcCXJO9JLnC1R7v6AD/NK2m3B2BjW5AA3tn1LIZ02bdOgN4sScOKGdRH55BroTuQ+jGrpSJFURA+a@lists.freedesktop.org
-X-Gm-Message-State: AOJu0YxyjKz9nPSIJ24l8ig7LoACDcETUCneAicVN15mpM/m72fYyUow
- qWc+BOVpnx6MwMSiFz72Z7TPkdzdNBitxX8AMmeAegtrhYbuE7kGHa5tRgvq8ox6rrgy4bXHOo1
- OX5YsVapanOiAljxv01bJiGvnPoAMKjgjObRUdFho0g==
-X-Gm-Gg: ASbGncvhgLvza/Kg4Dvgu4EJKZibSNnDgVMNSBeGfqlVQfzvbPkwGCoFioVE8i5jaVK
- l4VLrqHfLonyNsPOjJiMspe1qveJ3D+/urwpw4p6aei+7icAwVv7wcj5WDW8uNR7Bzlv5DV7z02
- ZZwhhxm3D0KneCOiMNuEHGulMjKwS88oHv/ZobuGW1KAoqbJS3ZR20sSXQ5bJzsJWV+roqquRU8
- qB/An9S8AA/Pqu9DqfRtaCFZe5eNjzU0VpS3mZ5vyvmVFfQ0Wq9xCemy33cl+ZOKdU2XJG/ZC5R
- p9oeK+fipkH45czcWNErXaUVDvI=
-X-Google-Smtp-Source: AGHT+IGIYT+SUHEWS8jwXTJD4hh40k1duU3pvKoIO6/tM9I7kWkKHb17WkBAF0kaIdPn4lajaFC8l3EQAoBHjvEIEk4=
-X-Received: by 2002:a05:690c:a4c1:10b0:785:fd34:a355 with SMTP id
- 00721157ae682-787d53fccf1mr27702217b3.40.1762630219745; Sat, 08 Nov 2025
- 11:30:19 -0800 (PST)
-MIME-Version: 1.0
-References: <20251031104924.10631-1-mohamedahmedegypt2001@gmail.com>
- <20251031104924.10631-3-mohamedahmedegypt2001@gmail.com>
- <0bffd718-3659-4add-90fc-fb0e098f2897@nvidia.com>
- <CAA+WOBtmbPHigscFQCFgDo=9WSM6V-JMXGCO7orP=01XOqTPHQ@mail.gmail.com>
- <4d07932e-8b53-4ee3-8d08-6f49d433f005@kernel.org>
-In-Reply-To: <4d07932e-8b53-4ee3-8d08-6f49d433f005@kernel.org>
+ AJvYcCUu3tsQ7Q6GPY0guxDxPOhl9JmSnLX5mjqXotoK5+8oibyhLidz0IPM+qdSFe+lTptNOyvGSOtS@lists.freedesktop.org
+X-Gm-Message-State: AOJu0YybNPhOycl2MKHxfY0EBKq9tFWQRhM+H27eh5G41xHQyWRfY6sc
+ aGIgMWM4aHMCCTzphCEYwsLH4sCPlUhspSIdPsvD8Yyz7WSMvUjs2z40/jAuli1STDM=
+X-Gm-Gg: ASbGncvbt7ZaR74zFqB/dH4yipbcHGrA/z8bG0zbGNHfUnn3ROM7mUGas4QaMGmWPLt
+ qnXpCX3JZtlyZGAyHbWWE/Vu/tiVqw/YA5hElHDqElKlX7i5XLLZccxNz6Zj8MrKs57otBd4OFn
+ qv4rADqSwyPMkGUggoABgLUl7IxVyHOhfSdMjpeHgHYgvyxMBWVQXqRBvsryJRFPAUTvRlETkv8
+ kS5P9wnekksgur5Yn4ujbfj6/DKYhBJ284YyG0/nzJitJ5DFkRFcoQwrRaCE4lPbiCSucdkkc5z
+ yXcS0CDZa8xrWsQyfYsD8pJOU/1zp/cvqELgZemVFK8Ql3Y1c8r2SuDN/hMhNOTsY3ZrQcS6hfI
+ XmWbCuUgshz/cpdyLC+TDcnxr2XVIh43tGvaJO0sP/0Nvbr/c8Nt6sUYcHNIEgd7ZbzgURj7KaL
+ c0NFHSpmU4mm8biTV8875ic62tK5yUgE/z86HD5YV+6sCVXp3u5cB2ZnwRRQh2
+X-Google-Smtp-Source: AGHT+IGL96zs748BVkStlBplObt6x+GOYGDHlU+lHOEWktwEy6wmWPMpV0MLGfLrCfASxr+Q4IKQYQ==
+X-Received: by 2002:a17:907:3e9e:b0:b53:e871:f0ea with SMTP id
+ a640c23a62f3a-b72e058a6d9mr938783966b.56.1762788781394; 
+ Mon, 10 Nov 2025 07:33:01 -0800 (PST)
+Received: from [192.168.1.42]
+ (2a01cb0405e83a000cb38cfe29807c1e.ipv6.abo.wanadoo.fr.
+ [2a01:cb04:5e8:3a00:cb3:8cfe:2980:7c1e])
+ by smtp.gmail.com with ESMTPSA id
+ a640c23a62f3a-b72bf7231dcsm1115978466b.31.2025.11.10.07.33.00
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Mon, 10 Nov 2025 07:33:00 -0800 (PST)
 From: Mary Guillemard <mary@mary.zone>
-Date: Sat, 8 Nov 2025 20:30:09 +0100
-X-Gm-Features: AWmQ_bmUShDzVgDbCjXaRk8KzGqVzibLvo1soC_Ryl9pqm71yycsphufLLwaE8g
-Message-ID: <CAPv6GL3+Fs-7DCHGgk-rBpJjNHBLYvubbcBK-0U_Ew93_ka3Og@mail.gmail.com>
-Subject: Re: [PATCH v4 2/5] drm/nouveau/uvmm: Allow larger pages
-To: Danilo Krummrich <dakr@kernel.org>
-Cc: Mohamed Ahmed <mohamedahmedegypt2001@gmail.com>,
- James Jones <jajones@nvidia.com>, 
- linux-kernel@vger.kernel.org, dri-devel@lists.freedesktop.org, 
- Faith Ekstrand <faith.ekstrand@collabora.com>, Lyude Paul <lyude@redhat.com>, 
- Maarten Lankhorst <maarten.lankhorst@linux.intel.com>,
- Maxime Ripard <mripard@kernel.org>, 
- Thomas Zimmermann <tzimmermann@suse.de>, David Airlie <airlied@gmail.com>,
- Simona Vetter <simona@ffwll.ch>, nouveau@lists.freedesktop.org
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+Subject: [PATCH v6 0/5] drm/nouveau: Enable variable page sizes and compression
+Date: Mon, 10 Nov 2025 16:32:55 +0100
+Message-Id: <20251110-nouveau-compv6-v6-0-83b05475f57c@mary.zone>
+MIME-Version: 1.0
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+X-B4-Tracking: v=1; b=H4sIAAAAAAAC/6tWKk4tykwtVrJSqFYqSi3LLM7MzwNyzHQUlJIzE
+ vPSU3UzU4B8JSMDI1NDQ0MD3bz80rLUxFLd5PzcgjIz3WRzI+NES+OkZGPjJCWgpoKi1LTMCrC
+ B0bG1tQB1XZ50YAAAAA==
+X-Change-ID: 20251110-nouveau-compv6-c723a93bc33b
+To: Mohamed Ahmed <mohamedahmedegypt2001@gmail.com>, 
+ James Jones <jajones@nvidia.com>, Lyude Paul <lyude@redhat.com>, 
+ Danilo Krummrich <dakr@kernel.org>, 
+ Maarten Lankhorst <maarten.lankhorst@linux.intel.com>, 
+ Maxime Ripard <mripard@kernel.org>, Thomas Zimmermann <tzimmermann@suse.de>, 
+ David Airlie <airlied@gmail.com>, Simona Vetter <simona@ffwll.ch>
+Cc: dri-devel@lists.freedesktop.org, nouveau@lists.freedesktop.org, 
+ linux-kernel@vger.kernel.org, Mary Guillemard <mary@mary.zone>, 
+ Ben Skeggs <bskeggs@nvidia.com>
+X-Mailer: b4 0.14.3
 X-Mailman-Approved-At: Mon, 10 Nov 2025 17:05:26 +0000
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
@@ -95,34 +100,54 @@ List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-Hi,
+The new VM_BIND interface only supported 4K pages. This was problematic as
+it left performance on the table because GPUs don't have sophisticated TLB
+and page walker hardware. 
 
-On Wed, Nov 5, 2025 at 11:50=E2=80=AFPM Danilo Krummrich <dakr@kernel.org> =
-wrote:
->
-> On 11/4/25 12:53 AM, Mohamed Ahmed wrote:
-> > Thanks a lot for the shout out! Looking more at things, the logic here
-> > is actually redundant. It was originally copied over directly from the
-> > bo allocation code to stay on the safer side (basically the idea back
-> > then was to make both the bo and vmm sides match exactly). We aren't
-> > at risk of having an aligned address that is in the wrong memory type
-> > because the bo allocation code (nouveau_bo.c:321) forces anything that
-> > has the GART flag to have a page size of 4K. Anything getting a page
-> > size higher than that is exclusively VRAM only. Additionally,
-> > currently things marked VRAM only don't get evicted to host memory
-> > except under high memory pressure and in that case, the context is
-> > paused until the objects in question are paged back in, so we also
-> > don't have to worry about memory placement there.
-> >
-> > The memory placement check in the vmm code could be removed but I am
-> > leaning more towards leaving it as is just to stay on the safer side.
->
-> If it is not necessary, please remove it. We should not carry dead code.
->
+Additionally, the HW can only do compression on large (64K) and huge (2M)
+pages, which is a major performance booster (>50% in some cases).
 
-For correctness, this code path needs to refuse incompatible domains
-to decide the appropriate page size.
-As such those checks should remain.
+This patchset sets out to add support for larger page sizes and also
+enable compression and set the compression tags when userspace binds with
+the corresponding PTE kinds and alignment. It also increments the nouveau
+version number which allows userspace to use compression only when the
+kernel actually supports both features and avoid breaking the system if a
+newer mesa version is paired with an older kernel version.
 
-Regards,
-Mary
+For the associated userspace MR, please see !36450:
+https://gitlab.freedesktop.org/mesa/mesa/-/merge_requests/36450
+
+- v6: Use drm_WARN_ONCE instead of dev_warn_once.
+- v5: Add reviewed-by tags, use dev_warn_once() instead of WARN_ON().
+- v4: Fix missing parenthesis in second patch in the series.
+- v3: Add reviewed-by tags, revert page selection logic to v1 behavior.
+- v2: Implement review comments, change page selection logic.
+- v1: Initial implementation.
+
+Signed-off-by: Mary Guillemard <mary@mary.zone>
+---
+Ben Skeggs (2):
+      drm/nouveau/mmu/gp100: Remove unused/broken support for compression
+      drm/nouveau/mmu/tu102: Add support for compressed kinds
+
+Mary Guillemard (2):
+      drm/nouveau/uvmm: Prepare for larger pages
+      drm/nouveau/uvmm: Allow larger pages
+
+Mohamed Ahmed (1):
+      drm/nouveau/drm: Bump the driver version to 1.4.1 to report new features
+
+ drivers/gpu/drm/nouveau/nouveau_drv.h              |   4 +-
+ drivers/gpu/drm/nouveau/nouveau_uvmm.c             | 102 +++++++++++++++++----
+ drivers/gpu/drm/nouveau/nouveau_uvmm.h             |   1 +
+ drivers/gpu/drm/nouveau/nvkm/subdev/mmu/vmmgp100.c |  69 ++++++++------
+ drivers/gpu/drm/nouveau/nvkm/subdev/mmu/vmmgp10b.c |   4 +-
+ 5 files changed, 131 insertions(+), 49 deletions(-)
+---
+base-commit: a2b0c33e9423cd06133304e2f81c713849059b10
+change-id: 20251110-nouveau-compv6-c723a93bc33b
+
+Best regards,
+-- 
+Mary Guillemard <mary@mary.zone>
+
