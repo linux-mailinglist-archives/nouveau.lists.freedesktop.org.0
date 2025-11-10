@@ -2,49 +2,54 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id 4005BC46FC3
-	for <lists+nouveau@lfdr.de>; Mon, 10 Nov 2025 14:43:47 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 172CBC47053
+	for <lists+nouveau@lfdr.de>; Mon, 10 Nov 2025 14:50:59 +0100 (CET)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id DE1D010E3D3;
-	Mon, 10 Nov 2025 13:43:45 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 5D9AC10E3BF;
+	Mon, 10 Nov 2025 13:50:57 +0000 (UTC)
 Authentication-Results: gabe.freedesktop.org;
-	dkim=pass (2048-bit key; unprotected) header.d=Nvidia.com header.i=@Nvidia.com header.b="W/5XgENX";
+	dkim=pass (2048-bit key; unprotected) header.d=Nvidia.com header.i=@Nvidia.com header.b="XusxzQb5";
 	dkim-atps=neutral
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from DM1PR04CU001.outbound.protection.outlook.com
- (mail-centralusazon11010009.outbound.protection.outlook.com [52.101.61.9])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 77D0310E3DE;
- Mon, 10 Nov 2025 13:43:44 +0000 (UTC)
+Received: from CO1PR03CU002.outbound.protection.outlook.com
+ (mail-westus2azon11010051.outbound.protection.outlook.com [52.101.46.51])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 3D11210E3BF;
+ Mon, 10 Nov 2025 13:50:56 +0000 (UTC)
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=KDNF/TUxzZqUzFNur92Rsq1zKQtlhO5J4DVueuB4mxLYU3KFB/aQsw2Jf17vG/h55dnFhRoEN/5ZUF1jBCzCJn4HSyxyXEGWav2+YfgQAtSR8Pnvjxsgc8eWbkksNQc7u/EHNssnffAz/zqPMDbO6Yf5bdIEd9Q40ZtUM4DID22LzEatuR+h7QG7lQg4SZjjLbCNaGz5JKlZzrQRkCOm36Kj6Zz+OGbDqhx5vZNQcXo4dnBGvgw7eq9FDc2v8CScXAlWBULX11Twf7O8laOWe/qK7mCGHd64hiF9OHVZPSGi5sWFNRjBPaf9bpTxvC7ZZIIVGBUlrNDg01Y7BsNCKA==
+ b=t44IGI4tIev5C3QiWlQ6v+AtvUlLtwuhQOGg8Y0EddbcXJ9I61xBJTiV+XGRPV+mHiz3KWbWLXC0x5aBGs9cxrx/qXP7IglWNrqjnLC6Td9BoHMMD2ycGO5hvMEPDJ5BDD1zePg69Cqp17Hpref5WSWzm+/T5Zr9RKBr8FTYMUN2fk19fYBqXunJw7le7XtLJhpGIe/ABz1ZKC9VagYWdnCwShIzhymP6088FrU/1XBn73x0HbECDhfDHoXFqeBYL0ePBOwKEDzZrc6LpqJR7uYAreRcZqUvkYHuapazxh3RlTCWu899JGtUAH9T1R/2X/AcHSlA+OpHy3dYG3AiNA==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
  s=arcselector10001;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=Fa+uDcmeS38N/xQ2jdxuFWwZdeghyJx8d6Gs+8++eCM=;
- b=eRfjxB7B/uHF1j20Ro4pItG+aKx0UMHtA1cobRIlsIEde3uj4c45WPIyUVl9qZ1858iwAPBiLez3llfUEBEHGW2QXLxmHIjiWMU7VaAXlB0YtI1D44y0IIj0QSGCKTLr+fOJTBG+DjwgPaFHhGlrDKGYRSC2y30UGh1feArCIrN75+ZGKhfnnAazMV1iXsQDOSoIGCeVwz5ycSh3z2suKrf2KkxJQjBSAkaz4aTs7Q52Wlusuf8Acs1uBXBu2wb1nB8bWxOYXz0cQvxAC9DS4fNqHdG25dqrLjoiUWEl3is1g6uuDYQUzr6TNuiZo7WrkiwCN9eGEPzYd0DBFukvXw==
+ bh=ovMUDQqSeHdh760JkrTKanAkv/mFk06JJe0zKOD3oao=;
+ b=X4lalc24pRGvh+oOQRiB6jybA8fNuZMY3s9JdZFbAx2R1aT2v3WAkYdVM5aHLd5/bXngU8PYsMxYF9iaMFLVQRZvpx6q/PlpynuduHVjTXXR2x6WXM7qfwoTzUV9JZOPZU/egbdOUQEC5BCxTHmP6oJuEbSbIVgixofJr4pDpgn+a9l8R0web4Tjxy1+vtzoBX93LodGyGJPcGEm8STVQ+1N8zS3vUBSxy9pNpRjDmfE800/8r0Hj0Gyvlwyn2MI8BVxQPUK4PN9BUvptmxf6uY0+rWtkJuoxgi41hGiChF9zO3qMPh8iODG69meD+z8C6d1Lll6xLstmiaAY8BlWw==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
  smtp.mailfrom=nvidia.com; dmarc=pass action=none header.from=nvidia.com;
  dkim=pass header.d=nvidia.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=Nvidia.com;
  s=selector2;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=Fa+uDcmeS38N/xQ2jdxuFWwZdeghyJx8d6Gs+8++eCM=;
- b=W/5XgENXLN+kSox9W56kcJhHX8jPUffEhuie+AgPaBSze7qryA1UGJR8l91DhtKUYDYYrzuOpDXYawvqqT6vKivtyPNwpM9ZH7qO3XtvrOr0u5+97e0GAvlc/l45mqU75uGOkosFnTS7BxVRz+efOWSmOerirTQs5QOCKHyelCwB6twcTJc4m6NbSdmpfUbeFcHOu4ZehOHH9qETvp26bBLIEjAC426oTcdMCwL/icWRJEwdSHooiN2BKLkRBaDHSUgmGi2y1XETRd/NkmdbBGkO8zNgpTrXxOKsGLpOaD7RvlRRCH/SYFwZRTXG3uGnhF+VTVUnJ7EILmYVAL5EQg==
+ bh=ovMUDQqSeHdh760JkrTKanAkv/mFk06JJe0zKOD3oao=;
+ b=XusxzQb5DcHRWs621Ue+/J8qXr2IXF+bvG23XNG6p6mxuKZDti662p0Tkesa6PasIgPSfyx+tc1JVlFn5Cyhc3fZOYOBgmrFmd1m/JUEsLYcU6wUZtHkiNCHBz1cQXCjKVoGqZjEwsXWaSgDHAkezAiIL73Iu1GyKBzDLk0WmkorY0Sj26G3d0ob3unTiswtJI1WmDMC8O4QYYymsW49awIeqsB+IZ0yuP4dSvbtULtJyzGnjqdP4NoNgTkUDRYV6KwU1wq+oQgfkeLfc/RQX/gkIhAciJq23n2nymb96vSDGCUToJfps197pj/WQWFwBAEJMlrga9RjybPlDel0Sg==
 Authentication-Results: dkim=none (message not signed)
  header.d=none;dmarc=none action=none header.from=nvidia.com;
 Received: from CH2PR12MB3990.namprd12.prod.outlook.com (2603:10b6:610:28::18)
  by CYXPR12MB9340.namprd12.prod.outlook.com (2603:10b6:930:e4::20)
  with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9298.16; Mon, 10 Nov
- 2025 13:43:40 +0000
+ 2025 13:50:53 +0000
 Received: from CH2PR12MB3990.namprd12.prod.outlook.com
  ([fe80::7de1:4fe5:8ead:5989]) by CH2PR12MB3990.namprd12.prod.outlook.com
  ([fe80::7de1:4fe5:8ead:5989%6]) with mapi id 15.20.9298.015; Mon, 10 Nov 2025
- 13:43:40 +0000
+ 13:50:53 +0000
+Content-Transfer-Encoding: quoted-printable
 Content-Type: text/plain; charset=UTF-8
-Date: Mon, 10 Nov 2025 22:43:36 +0900
-Message-Id: <DE5256UCJHXU.27RS8A445Z1XN@nvidia.com>
+Date: Mon, 10 Nov 2025 22:50:49 +0900
+Message-Id: <DE52APJTD9NN.A41RA78NMNIE@nvidia.com>
+From: "Alexandre Courbot" <acourbot@nvidia.com>
+To: "Joel Fernandes" <joelagnelf@nvidia.com>,
+ <linux-kernel@vger.kernel.org>, <rust-for-linux@vger.kernel.org>,
+ <dri-devel@lists.freedesktop.org>, <dakr@kernel.org>, <acourbot@nvidia.com>
 Cc: "Alistair Popple" <apopple@nvidia.com>, "Miguel Ojeda"
  <ojeda@kernel.org>, "Alex Gaynor" <alex.gaynor@gmail.com>, "Boqun Feng"
  <boqun.feng@gmail.com>, "Gary Guo" <gary@garyguo.net>,
@@ -57,111 +62,106 @@ Cc: "Alistair Popple" <apopple@nvidia.com>, "Miguel Ojeda"
  <jhubbard@nvidia.com>, "Timur Tabi" <ttabi@nvidia.com>,
  <joel@joelfernandes.org>, <nouveau@lists.freedesktop.org>, "Nouveau"
  <nouveau-bounces@lists.freedesktop.org>
-Subject: Re: [PATCH v2 07/12] nova-core: Implement the GSP sequencer
-From: "Alexandre Courbot" <acourbot@nvidia.com>
-To: "Joel Fernandes" <joelagnelf@nvidia.com>,
- <linux-kernel@vger.kernel.org>, <rust-for-linux@vger.kernel.org>,
- <dri-devel@lists.freedesktop.org>, <dakr@kernel.org>, <acourbot@nvidia.com>
-Content-Transfer-Encoding: quoted-printable
+Subject: Re: [PATCH v2 08/12] nova-core: sequencer: Add register opcodes
 X-Mailer: aerc 0.21.0-0-g5549850facc2
 References: <20251102235920.3784592-1-joelagnelf@nvidia.com>
- <20251102235920.3784592-8-joelagnelf@nvidia.com>
-In-Reply-To: <20251102235920.3784592-8-joelagnelf@nvidia.com>
-X-ClientProxiedBy: TYCPR01CA0208.jpnprd01.prod.outlook.com
- (2603:1096:405:7a::16) To CH2PR12MB3990.namprd12.prod.outlook.com
+ <20251102235920.3784592-9-joelagnelf@nvidia.com>
+In-Reply-To: <20251102235920.3784592-9-joelagnelf@nvidia.com>
+X-ClientProxiedBy: TYCP286CA0344.JPNP286.PROD.OUTLOOK.COM
+ (2603:1096:400:38e::16) To CH2PR12MB3990.namprd12.prod.outlook.com
  (2603:10b6:610:28::18)
 MIME-Version: 1.0
 X-MS-PublicTrafficType: Email
 X-MS-TrafficTypeDiagnostic: CH2PR12MB3990:EE_|CYXPR12MB9340:EE_
-X-MS-Office365-Filtering-Correlation-Id: 4f7aad33-8ab7-4776-945a-08de205f280b
+X-MS-Office365-Filtering-Correlation-Id: 4a40cb8d-b292-4cd1-0f6a-08de20602a69
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
 X-Microsoft-Antispam: BCL:0;
  ARA:13230040|366016|7416014|376014|1800799024|10070799003; 
-X-Microsoft-Antispam-Message-Info: =?utf-8?B?M1RmREN3TDI0cFhpWUZWNHYxOW9URSsrK1UzY0hsaXk1Sm1zUmZIMTlXNHVo?=
- =?utf-8?B?ZmZiOFR0b1YvVTBnSVlLdUh1dG9qaENNd0xwTERESXhqeWlYNzExMTA0QVkz?=
- =?utf-8?B?TXppK1M2UktvWTJYUzZ5bW55eG1KSHVnWVVmWU9zZk1qNSs0MWVKOFAyV0VR?=
- =?utf-8?B?UitIak5CeEcxazZlL0Q1bzdGd3AzT0FsMXNQeU10UlNJVmhHdDJPaENYejhm?=
- =?utf-8?B?Wm9ZMEtLYWxPRUQ4L1JXMUF3ZTVoeTE4b21wU0hOU1lzd0Rxemp0QklPT1ll?=
- =?utf-8?B?cjRSVEdCTEEvREE2YWovd2tHejVGTmpPU0VpemRkbHcrRWJxWTJwL1ovOFlr?=
- =?utf-8?B?MlhEaGRJQ0dnc3dBK3hpbCtUc2ZqUE5jMHNncE9rQklvc0NJZFQ5MzBmajN6?=
- =?utf-8?B?SmlxYTRIZzlPVG5maUdUcTJsQXBMSkFNTkZmVzBTbEp3VzhLK05VMkxNeldE?=
- =?utf-8?B?N3Z6dFE3S0I3OTdnVjNtSGhUWkR6cHAzODF6dC9Wb2lJKzYvZXQvUjdqeWl1?=
- =?utf-8?B?eGJVYmpTaEFCQmN4RVFtYTdndHlxcjFhMHVZblR4c1o0WFZ2ZEdQem9KNW1O?=
- =?utf-8?B?Rk1VRVo5V2g4cWdQVDdQVFJBMlZza3N0Qm9ud1E5MTBiaWd4bHNpTWQ5dFJL?=
- =?utf-8?B?TVBOcUg0TlNUdll2OU1DOGNJNEwwUjQ0dGU5SWlHQmxUSGZ3Z1JaTEk2dUJw?=
- =?utf-8?B?ZlhldEtMdlNOV2E5a2xZWUgxMzlqY1lScjRJNEEwVUhFbUErVzhEUXUyTzFu?=
- =?utf-8?B?QWxmblpFbzBSUzF0U1NKVnpobVJnZUtpd1NnRUNCWUVyOTBEMDhOeE1HMHdh?=
- =?utf-8?B?NEJ6WnY0cnNnWWVRZ0p5Vi91Q1FVU3RGSW5janlPSGNXckFScndNOXZyeVZK?=
- =?utf-8?B?cXMzUytvdTZGYTJjMXNFeWNURjBVODVQbHN0M0RQTDEyVjdCenM3bnBINXZ6?=
- =?utf-8?B?dlBxZWxkWDVES29EdzRvOE93a0t3eVpHd1FJL3dVQkJoRnNzblNjZmFtTTN4?=
- =?utf-8?B?eXpoY2FrWlBPY2FWM2VRZE0wTlZwOFk1RDVyQytkZENtN2RMMXQwUUE5N2lW?=
- =?utf-8?B?Z29Cc1Naa05CMXVVY3RDWDYwNVozdk9Gb2ZGVldUSkZnR2oybU5IeFgxZ3ZV?=
- =?utf-8?B?M25yUWJWOVZ1d3pZOEF4N0krUkdlaFRyQkl1aHh2SkEwRTh4RStyS3VZb3Y4?=
- =?utf-8?B?TUZXQ3d0bHNkK1liK21pcFFYWDY5SFI2WXFFeXhEYXIwTzJ5ZlV6UmxSdGFv?=
- =?utf-8?B?YWwvRkRUUHBRZ2NEazVRV1lMVDdDblZEeEF6Y2psSWZScDZpdlJWUlgyQWtr?=
- =?utf-8?B?UGlCenFTSEpyS3Q0UlppN3E0Qkd2V3dJeFhnQjBkZVZGN09LcnpsRmM3V3Nt?=
- =?utf-8?B?MzNrNEF3aktwNm1DR2JyUVdPNktCRmJjTEE4WkNzdUU2M25XZjJtYXBuMW1N?=
- =?utf-8?B?NjZvUFVySXc4Vk50V0NyRmtkVDdvZExqYm5yQnMvUTVoUEg5OFNnZFUzNGxT?=
- =?utf-8?B?TWZ6aWlpZVdDZGF0V2ZzSDFqcGN2ZVg2b1ZBRGxTY2Z2VGdGMFZ3aUFTR2o3?=
- =?utf-8?B?enVnQ2RVYWtTRHhja3FYWlhwV05KOGN5Qk51NmVhV0o3M1h6M2tnRGh5dXlO?=
- =?utf-8?B?WGc4cHdMbUxNbVJ5SnYxNWdEVFIvVkViVFJaWjBzTW9LeVRwSkpOaTNiUUxC?=
- =?utf-8?B?QlV5RkNza0FKWnJQYWxmWUVOU2xSb0c5V3J6QkthKzNkWnU3dlR6bzNvaDJn?=
- =?utf-8?B?S01QbjJXNkVsNXQ3eXlNVWNUeGtTR2dMc01oa2FnM0lYYU00ZmdwNndKZTBI?=
- =?utf-8?B?TnlFOVFBWTM3SjhHaEplaEgxcFo1UkVMemxWT1hUa04zTEg0a0hMRlFHcDJO?=
- =?utf-8?B?UDRZd2hrWFB3NnZ5UDFVZnhZWkVmTXZVTTV3TTRmbWVTcHdDTjI5a1ZCY1VJ?=
- =?utf-8?Q?0ZCjuHiHIXzM4t7ZD6Y+BlfPiqecqq6U?=
+X-Microsoft-Antispam-Message-Info: =?utf-8?B?eStOMnZqc1ZETUZDUVRudHYzT2ZXMU5DQ2I4R2U2bXBOV0Roc1h0STJ0TUtx?=
+ =?utf-8?B?ellrdWFjMWNFUTZKazk5Z0RPR0o0aTdHejQ3YUFqM3RVRVBtbkM1S052VU50?=
+ =?utf-8?B?L3JrVkFiWUw2cGhnZy96RnhnbWQzTkJSYXY4a0dFaDVXbzFleDF1cFdhandu?=
+ =?utf-8?B?dzl5Qm04VEkzSVBqMlRTZjd5Nm5HTXUrVW5PVnhZU1ltOU83a1VNZmxZY1dn?=
+ =?utf-8?B?OU1BYkxIS3oxNGRzRjRYT2xFcDduVko1QnQ5SVRGR2ZhTnhRSncrSHFEaVV5?=
+ =?utf-8?B?R1dYTGQ4KzZkR0dTcXlrUXV3V3lXUXB4amVkWUh0Rkt2RHdzYlZFaWF3TVJ4?=
+ =?utf-8?B?Rm1selFySzRlNmFidkY1MDNqZ0ZoNnJGMVRJaEUyeHlKNi9Bb0pMQ1QzZTNF?=
+ =?utf-8?B?elFwMnc4MVBoRjBSQlNJeXhvZGtYaDQ5ZkUrTnFRSlJjRGprdkdZeW40eHBK?=
+ =?utf-8?B?ZVh4K0tsQ0dQblBxNEhMQXA3VjJjR2pVOEJWcGVlQ0tVOVV2cW1EUnFMb3dE?=
+ =?utf-8?B?bGI2MkJFTHdjdDVaZGM2cGd5YTUrSXNpZ1N1RGhLSWpMY2lJQ21XOXNIdzl0?=
+ =?utf-8?B?citJTjRsbm4welJtZzhKbEk2UjQyZStzR2NKY2JVbjdGY2xIYjVvZWFoUkp3?=
+ =?utf-8?B?WlVhRW9ZTGt5V3IwYVkzT1dlTE0vMnpleUp0aldWRVJHU2Q0RFJpcytERk05?=
+ =?utf-8?B?ckdHYUVQVnBDQ2RPUW5XeGNJRWQ4NkU0OEpKZUZZMnJCTGdRZ3NZanl3eWdV?=
+ =?utf-8?B?NzZtMnlBMXFaZ3hjSlQweW8wOGpoeHZ5UkQ3UjhvK2dTaFhFMzAveCt5SEhs?=
+ =?utf-8?B?ZisyS1RRNzdLb3p6cU8yZjJVdWhOeXdMR3lqQnpUM2NaRWlqOGRTZ0s0V21H?=
+ =?utf-8?B?REZ1d0VNd284eU9iQ3hZcnF1Wkc2dEJ6S1hnOG5uaTlGcnA2bXp5c2twVmQ0?=
+ =?utf-8?B?QWF5alcxNWdBbHIvbkxlbWZDVnBtOFhTWC9INnpmcE9QT0d0elJKbytJUjJ3?=
+ =?utf-8?B?b1dWL2NlUko3Nm1kVGNTOXNSY2s1ODE1T2xoRDdPeVdaU0RmczJ3TlpjUVJx?=
+ =?utf-8?B?Z0p0UjhVVkhOZkxKOHByWkx4Y3orRXh2bnozWVRiT2QwSFZBWHZ5aUJoVDdJ?=
+ =?utf-8?B?eUNoeVg2NHk0QWFRMWtOR2hMYXh3MGtmVnpLRUd2emx3SFovb1JFaEVoc3FZ?=
+ =?utf-8?B?b21ldit4L0lRNldZWTJQejhkdVZwd1V6RVg2ckc1dVFNRGRuTmx1TzJCQXBE?=
+ =?utf-8?B?RUh5SHBDQ29vMTRpRkV1ZGN6WngwUXFrRHA4L2hSWFpDVWw1NE41UWFWQ1hE?=
+ =?utf-8?B?bGZ6T2tNWGNDUzBUNSt6L01iMXg1dytYZnBmLytCb3hQWEM2NTZtVU9ZbWpr?=
+ =?utf-8?B?VVoxWWpuL1hpV09qV1dneVZOT2IyMUNyTlZlK3k1dk9SRU52aVhWbnNaV0ta?=
+ =?utf-8?B?QnpJNW1GS09rSVJXZ0RBWjB3K1ZtMjJyeDM3ZnQ2bW5ocm8vZi8wV3BIcjFz?=
+ =?utf-8?B?aGFxb0xkYlVCc3A0aWFQekloRVNvR2dTYmdyRTBWenI1MUpuWVljV2ZaMDVz?=
+ =?utf-8?B?cXBsNi9zcitPYUNWM2FIWnBtMzRQUGVRLytaNlEzOWRLYitpanpPVmpONlp1?=
+ =?utf-8?B?SVhhNUFuUzJONE5lNlVKZTVPd1pYL0RaanQzRitpTU1yaXpwV01qZ1JlZU42?=
+ =?utf-8?B?WXRtdTZhbmZNM1VLYkdDQWl2OE4vQzlPaGE3VWU4L2wrWnRYQnkzcEdSSkhk?=
+ =?utf-8?B?YW5YSFVUTnZUVUZsQmp1WmExNDNSRGRSYnhYcDVzQStycVR5bUg5UStXNU5C?=
+ =?utf-8?B?T3NzMWRNamRQMnc2cThlSlNyQjQ1TzZ1d2h5SC9yYlhUTkZRUTZkQnBKelhP?=
+ =?utf-8?B?RXFITFJaZVY1YzJacjFiY050dHg4N2hXV0xEUTBjZDdsTkFNWnpHZUNDZzdM?=
+ =?utf-8?Q?/D82G5kU0UwLXxDIXn/YF1/Q9EVFAqmX?=
 X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
  IPV:NLI; SFV:NSPM; H:CH2PR12MB3990.namprd12.prod.outlook.com; PTR:; CAT:NONE;
  SFS:(13230040)(366016)(7416014)(376014)(1800799024)(10070799003); DIR:OUT;
  SFP:1101; 
 X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?MFowWjZFN2pqZTBxZzJOeE9vdW45ZmZ0bG1xUVJGdmdQMU1yZFZNMVhpMTZN?=
- =?utf-8?B?V24vRmJ1S0VvY3hFazF1L3FuajR6KytNWVZyQTNGNVROUnliRVFzd05ITzJp?=
- =?utf-8?B?aVNQekowK0t1ZnZldmVxM0NEV2VLYVhlM2UyRzB0cE1mK0VNcFpWazVUcncv?=
- =?utf-8?B?NWl4NVRSd0liSnhyZHZFQ3V0a2xuUjh2MEhlTWVMQ3hzME1XRGJscGVJY0RJ?=
- =?utf-8?B?R1ZVTnFrN1lRWVN4bERvUHNQVEF5T3dMRTY5MWVsSTE5clFkNGFSOGJwNDlz?=
- =?utf-8?B?UW1lTmJzaEgrNktKcHdWc3g1cit6RUo1Q3FIcFZWd2F0aEhZME1PY0dGYlBa?=
- =?utf-8?B?ZVRJOVJiUEVONXJaVGowMDQwVTVQa1VGS2RpYzZVb2lrcFdJVUphQ3lvOHFz?=
- =?utf-8?B?VWVlZVdVWURmaVRRUk5QTEw2SGszOE5TZ3VNSE1BRVlHU0p4V1hTZzRBWDR0?=
- =?utf-8?B?NTV2SjlXQkkwR29jNm1yQUxGMFZPU2huNStvS2hoR1VOdjdjeWRuTEQ1SUJH?=
- =?utf-8?B?Vzl5TEtSRmhXUVptdllSWEZ1WkFLbmRXMDN6cDB6VjFHVjNpUkJ3NUJ3Sjhr?=
- =?utf-8?B?SUx2NFlWenhFYkZyS3ZhWGF1OERTNUJMb0FYOVFjUS82cjJ6bzlCbmFxNlBY?=
- =?utf-8?B?NTNJOENwWkQxN0lhQXFQK2lBc25SbGpZQXBudmZpNTVVWEgwS1YxL0RYcCtT?=
- =?utf-8?B?UGhjaEEydGZCME80eTJnVnNHRmxBci9udmFLQ29XSTBUcEM0V1NOdHRyaGQr?=
- =?utf-8?B?WFYxSUgxRGhDbmRKSnRDZlNPVEhseUxWODg3NFZiZm9qWis4SzNJTkZxQmJm?=
- =?utf-8?B?ZHdjZTlRQWdmbXp2UnNrbXZTc01lNGFwZERPdmxjWmkwZjU2WWx1cVhJZEdZ?=
- =?utf-8?B?Q0s0ci9HWWZEZGR3TVZpdE0xcTlhYk15OGdVejkwdm01T0p4cmYxaGhqbXpQ?=
- =?utf-8?B?QkpJRk8wN2pWV3Q1VjB5Qi91djNTWXJpZUZadjdhcUZOSG9mb0dxc1c3Yjhw?=
- =?utf-8?B?QnYyRU1CSzZpTkNUdEVUNjV1bmdsRGZtMGoxMjltNFZxRnBucEN5dWR2ZzlM?=
- =?utf-8?B?RkNmcHFIcWV2ckU5MmhIUlF5N0hEQlhJU1RRYzZwOVV0N2hpSzQ5bVJrK1VX?=
- =?utf-8?B?NldJNzU1eVpBSE5TRCsyUEJROGNzRkhHNUw0M2ZYblVCNWFjTzV0NmZkOUdQ?=
- =?utf-8?B?MGdBT05vZU1hSVJ5bkozNGtCZ1Q4U0hrT2ROeXZ3b3NpUkpFOHVRL29rb0lF?=
- =?utf-8?B?TXdzRm5TQjRiU0tTcU04SFdsSEFLWTNSNEF1dHdQK045ZzV1dHhZWHU4NjVV?=
- =?utf-8?B?VEJidSt6RHhJVkZ1T0pESVN3SHVzcGNvZ08rNVhDNHZBTmpmWXpoa1dnVjJ2?=
- =?utf-8?B?a0FBVWlFUUlrTnlOWFJXZGFhZXFON0UyN1NwZWtycGVEWHZtSDZOWUpVN2ky?=
- =?utf-8?B?NG5SSGFTajlzN2g5MTcxSmNnUzBJZTAyaVZaSnZlRFlZS1UzSHhVQXRWQ1Ns?=
- =?utf-8?B?UEI1NG83blBQWExlMUJEcGZGR3B0Nk1RRE0vVHJTMnd1VWE4bnAxSnpsVm80?=
- =?utf-8?B?enRiY1pIN1g3NW9TakRrc2kxdTZzNFRYNkE5WURDWk4xK21peENacVpYYW92?=
- =?utf-8?B?Z1FaWThIaTMrd3dHMVZLQVpRbys1T2xRdEloajRkdEFSVVVYdVVveFF2d1dw?=
- =?utf-8?B?YXZ5djZ1MVIyOUgyRU1EdURIQmlIeGcrcVlDVDVZUnpFcGw0bHYzVjA5WnA4?=
- =?utf-8?B?UHB1VGw3azc2NS9yUThRa1RocUI3UmEvVmlqaXlyVEdaNlU3eUZrRE5sOTlS?=
- =?utf-8?B?K3l5Y3NXaER5Mm1CYVhHMnFoSVBlVlpnNCtGbk04a0NnSDliWG5tb1VzelZy?=
- =?utf-8?B?L29vcEc0aU1xUFl3UG5kalhDUHRFM3Qwb1ZZdk4ramhFZUVXNkswbzdLWEk2?=
- =?utf-8?B?ODNOVzRSNzVxYmxUUk0wZjdJODBPY21Jb1poOXRnMW5oTjB4YVA0SVNVdnlj?=
- =?utf-8?B?S2dqWGhNQUVtK1g1VUtPN1R4K0tuck40NVErTk5DbEMwNkhEc1JUMm9kcjkw?=
- =?utf-8?B?QkpZTnBtb2N4UDdmbWJLY0VqMGNOL1gzelU0UEpPbVZYOWNYMkEzc0VnTEls?=
- =?utf-8?B?UFdMMEVONGZHL3RqL2lIcG9vOTRKcHEzSERDQ2VGQ2xPUkVValBNVDVOOUpC?=
- =?utf-8?Q?fbh9MUSC4wNaxo6kqQXYHRsnz8FIW1MocejhFLk0RziT?=
+X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?TmNJUHk3OTR5UWNPQjJ4M242T2tIZ3ppMU53djM3aEtYT2l3MVVGOHdoTTBh?=
+ =?utf-8?B?dXgrUkorVkF5WndhSGhEd2ErUXp3VkEvV3F6T2MxeUJ6QXNtb1VMcFc3ZndG?=
+ =?utf-8?B?ZDNpTlRTeUlyUFMzUFdNdDFsK2RndmpZOVVtWG1VdTlMTEFjTEFsd0I3bHM3?=
+ =?utf-8?B?MTA4dnA4MzBJamVwVURHdkVXS1RzeGtMZmtMQVcrR2ZqQWdYWkFIV1dYRUtq?=
+ =?utf-8?B?OFRVcVZaWDhNaitub2RZWm9RM2RpZmVacjhFL1llTmN5MHRsaXVuOW40dTUw?=
+ =?utf-8?B?NFNBVVZ4MVh5alVFM3BpL1hDVVVPUk5uVFVvSkJ4LzZya0JoMVlwQVcrNENV?=
+ =?utf-8?B?TXpWSG93OE1PWDlSek5KWmpSSG1VZzBIbmlQSVBEbEkvdEUrRnUxeGN6RGR3?=
+ =?utf-8?B?eThRU3N5SW1ONGl0d1J0bjl2QVBSeEJqR21GTTZXTlFQQkJHS0o4VG9tN2wv?=
+ =?utf-8?B?bXEvZVJ6WTIyZkJyblZZZjFNUmJpSTdmRVlGOFVvcUd3S0xaTjc5MUU4QmhV?=
+ =?utf-8?B?T254WGdqL0J3RFM2cXFWZDlQNUJVQS9ZbzVyWUJjdEpTVCswaEhGVUE0bGJq?=
+ =?utf-8?B?ekJMbEY5WUNodXY4d1NTTm5xdWhqSHAxSGN3bGdkd2FsRWpIeWEwM3dEbE9Q?=
+ =?utf-8?B?c0FBeHkvUnJ1dU44V2taWm5FaytJSEtBOXQ3eGJXdzBvVVlmY3dvdE5TZXlx?=
+ =?utf-8?B?eWM5TVRoNXE3Wm13Sk16R3YveEwydmlsNExDUWZ2K1ZSRHVhUjZjbEdNdjBp?=
+ =?utf-8?B?L3UrV292bGJXK2ZzK1lOWlBCeEVaQVhOZFNIemhNdHM2QlJSQlBXVGM1T2lv?=
+ =?utf-8?B?dE9LNVhvbG5mZElPTEJMc0x2RVpmb2xmdnBNUXZqcG13bk9vRFlwd3kzTGJQ?=
+ =?utf-8?B?OVV4RlplODlyT1RuTUFvRjhQUDBqY0ZMakJVQUN5bmNrbitjS1cxQ3pFVFdK?=
+ =?utf-8?B?SEtjV0VQK1praStSQnJvT2pnOEdLMVpYZWVlKzJlMVY0OGJqNjFvZlFRQUlv?=
+ =?utf-8?B?eGhEU3RNZjV2M0pEZXlxbGMwejA3K3B0dDhkLzNvWU5lcWdVRHJpY1N2VG5m?=
+ =?utf-8?B?My9wMDB3WUs2QmJwK211d1c1MTl6Tk9CNjRKVzZZelU5RldGOUVIYmoybGdJ?=
+ =?utf-8?B?cWxuMEFWMTBMUUlmbmZwcTdYN3lpeTVhT0w2T2w5ZWowQ3hYWWtaRW93SVlI?=
+ =?utf-8?B?czhiQWxWMUdQblE5TjRIT3VOKzI1bk5Pa1NvcElSbFBXLzdpSTN3ZVhGaFNV?=
+ =?utf-8?B?cFNRSWZuSGJRa3hKVmV5aXovekxtUkxJMHhZNS9lZllOVWRQNnJyVG9zNVJl?=
+ =?utf-8?B?cE9FSnRjVEdMVmhmeDhkSGNLNU1DTzZaZGZUWlNCWUZLQ2Y5d0lzbjYxZjdT?=
+ =?utf-8?B?UE9vN0pFNlNiLzRVTmozNll4UjF4RjllQ2MyaEd3VmlzOWJFaU1qOFBiUnEw?=
+ =?utf-8?B?NkwyQUVKZktPSzFmbzVyOTZjMGIzR0xmZ2tBbzZBWVVzRFIzaXp5VG5NazFD?=
+ =?utf-8?B?ejQ1RDY4UVdnay9BeGhzbFZ3eHlTcnVsZC9WMEFFZG43UkJJL1M5SmRCZlZo?=
+ =?utf-8?B?V2taYitITjVlRG5vU0pSU1cyazdnYWtFckJkdlhicmlhZFdBUWp3cGZpcTdi?=
+ =?utf-8?B?MnBQT2lNS3YrTzRIaUJkdjE5bjlMTk9laHY3dDk2K04vQVFsTGdlRmZ0MUdE?=
+ =?utf-8?B?Y0swWlc5WXFhMGMwVkRjZC9mV2FIS3JFY1FWeSsvQzQwWnMxQUxtRUN1TnU5?=
+ =?utf-8?B?RzkrcmRBSmQyVVFXaUdpQnNuaGJ1Mml2VEZtWDN2RzFpWURkdVFOSGNPRHRu?=
+ =?utf-8?B?Vk1CeUk5TTk1T05NWEgwVDRKMEh4K1pNaW4rRGp0YVZDUGtyb1hFU2lYNXNr?=
+ =?utf-8?B?RkEwVnB5SUdmQ3J5Qk1uU2p0aUhIaFZNMmxDeXJOeC9tODlIVmM5a29acjZv?=
+ =?utf-8?B?YlkwZ3VZZHg5ek1nVnc2clZxbVZXb3NTbjRDbkF6VWVjODZ3Y0VlYkNiN0s4?=
+ =?utf-8?B?QUNuQm5jV0xFd3pOazhXZWtVTFdqc043TzdwVU9NaVJrckE3NlF6c3oxMWpZ?=
+ =?utf-8?B?Z1psd0EvUW40Wk9sZmVDQTYyendDbUwvMnBITHdpbHpvSFJxOUVjTmtUVk0w?=
+ =?utf-8?B?V1dicWRENy9HS1YvZEloc2pBTk1rREpwTXVlSU1mZkhINjAvdjdGZy9waWg0?=
+ =?utf-8?Q?V+0rz2/lSq0XQ38bH8fzmLTSsIPGW1+dZtVgndMfJ/dD?=
 X-OriginatorOrg: Nvidia.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 4f7aad33-8ab7-4776-945a-08de205f280b
+X-MS-Exchange-CrossTenant-Network-Message-Id: 4a40cb8d-b292-4cd1-0f6a-08de20602a69
 X-MS-Exchange-CrossTenant-AuthSource: CH2PR12MB3990.namprd12.prod.outlook.com
 X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 10 Nov 2025 13:43:40.0671 (UTC)
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 10 Nov 2025 13:50:53.5196 (UTC)
 X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
 X-MS-Exchange-CrossTenant-Id: 43083d15-7273-40c1-b7db-39efd9ccc17a
 X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: cEfiMLzEf01Mp2t7+wscStij80Ru0U3BpdiQcB3l+5mxLuo9YXI1xYAa9R4mGh6AYhnHomVMl+G3ksmPA+pfeg==
+X-MS-Exchange-CrossTenant-UserPrincipalName: 7w+EM+D2Q7Rh5cRduLv1H8PiIOg2/ga/wuGU1hnQLCqGXilMOhddrT1dQiLsn6frwxJBSqf+fnT4Jq0kjZdvbA==
 X-MS-Exchange-Transport-CrossTenantHeadersStamped: CYXPR12MB9340
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
@@ -177,223 +177,224 @@ List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-Hi Joel,
-
-I guess you will want to rebase the series on top of the GSP boot v9,
-for fixing the conflicts with the imports, squash patch 13 where it
-should belong, and also because it adds a few things that should
-simplify this patch.
-
-As a general comment, the structures and their members could benefit
-from short doccomments (thankfully after this review there should be a
-few less :)).
-
 On Mon Nov 3, 2025 at 8:59 AM JST, Joel Fernandes wrote:
-<snip>
+> These opcodes are used for register write, modify, poll and store (save)
+> sequencer operations.
+>
+> Signed-off-by: Joel Fernandes <joelagnelf@nvidia.com>
+> ---
+>  drivers/gpu/nova-core/gsp/sequencer.rs | 138 +++++++++++++++++++++++--
+>  1 file changed, 131 insertions(+), 7 deletions(-)
+>
 > diff --git a/drivers/gpu/nova-core/gsp/sequencer.rs b/drivers/gpu/nova-co=
 re/gsp/sequencer.rs
-> new file mode 100644
-> index 000000000000..48c40140876b
-> --- /dev/null
+> index 48c40140876b..f429fee01f86 100644
+> --- a/drivers/gpu/nova-core/gsp/sequencer.rs
 > +++ b/drivers/gpu/nova-core/gsp/sequencer.rs
-> @@ -0,0 +1,208 @@
-> +// SPDX-License-Identifier: GPL-2.0
-> +
-> +//! GSP Sequencer implementation for Pre-hopper GSP boot sequence.
-> +
-> +use core::mem::size_of;
-> +use kernel::alloc::flags::GFP_KERNEL;
-> +use kernel::device;
-> +use kernel::prelude::*;
-> +use kernel::time::Delta;
-> +use kernel::transmute::FromBytes;
-> +
-> +use crate::driver::Bar0;
-> +use crate::falcon::{
-> +    gsp::Gsp,
-> +    sec2::Sec2,
-> +    Falcon, //
-> +};
-> +use crate::firmware::gsp::GspFirmware;
-> +use crate::gsp::cmdq::{
-> +    Cmdq,
-> +    MessageFromGsp, //
-> +};
-> +use crate::gsp::fw;
-> +
-> +use kernel::{
-> +    dev_dbg,
-> +    dev_err, //
-> +};
-> +
-> +impl MessageFromGsp for fw::rpc_run_cpu_sequencer_v17_00 {
-> +    const FUNCTION: fw::MsgFunction =3D fw::MsgFunction::GspRunCpuSequen=
-cer;
+> @@ -5,6 +5,7 @@
+>  use core::mem::size_of;
+>  use kernel::alloc::flags::GFP_KERNEL;
+>  use kernel::device;
+> +use kernel::io::poll::read_poll_timeout;
+>  use kernel::prelude::*;
+>  use kernel::time::Delta;
+>  use kernel::transmute::FromBytes;
+> @@ -40,13 +41,36 @@ struct GspSequencerInfo<'a> {
+> =20
+>  /// GSP Sequencer Command types with payload data.
+>  /// Commands have an opcode and a opcode-dependent struct.
+> -#[allow(dead_code)]
+> -pub(crate) enum GspSeqCmd {}
+> +#[allow(clippy::enum_variant_names)]
+> +pub(crate) enum GspSeqCmd {
+> +    RegWrite(fw::GSP_SEQ_BUF_PAYLOAD_REG_WRITE),
+> +    RegModify(fw::GSP_SEQ_BUF_PAYLOAD_REG_MODIFY),
+> +    RegPoll(fw::GSP_SEQ_BUF_PAYLOAD_REG_POLL),
+> +    RegStore(fw::GSP_SEQ_BUF_PAYLOAD_REG_STORE),
 > +}
-> +
-> +const CMD_SIZE: usize =3D size_of::<fw::GSP_SEQUENCER_BUFFER_CMD>();
-> +
-> +struct GspSequencerInfo<'a> {
-> +    info: &'a fw::rpc_run_cpu_sequencer_v17_00,
-> +    cmd_data: KVec<u8>,
-> +}
-> +
-> +/// GSP Sequencer Command types with payload data.
-> +/// Commands have an opcode and a opcode-dependent struct.
-> +#[allow(dead_code)]
-> +pub(crate) enum GspSeqCmd {}
-> +
-> +impl GspSeqCmd {
-> +    /// Creates a new GspSeqCmd from a firmware GSP_SEQUENCER_BUFFER_CMD=
+> =20
+>  impl GspSeqCmd {
+>      /// Creates a new GspSeqCmd from a firmware GSP_SEQUENCER_BUFFER_CMD=
 .
-> +    pub(crate) fn from_fw_cmd(_cmd: &fw::GSP_SEQUENCER_BUFFER_CMD) -> Re=
+> -    pub(crate) fn from_fw_cmd(_cmd: &fw::GSP_SEQUENCER_BUFFER_CMD) -> Re=
 sult<Self> {
-> +        Err(EINVAL)
-> +    }
-> +
-> +    pub(crate) fn new(data: &[u8], dev: &device::Device<device::Bound>) =
--> Result<Self> {
-> +        let fw_cmd =3D fw::GSP_SEQUENCER_BUFFER_CMD::from_bytes(data).ok=
-_or(EINVAL)?;
-> +        let cmd =3D Self::from_fw_cmd(fw_cmd)?;
-> +
-> +        if data.len() < cmd.size_bytes() {
-> +            dev_err!(dev, "data is not enough for command.\n");
-> +            return Err(EINVAL);
+> -        Err(EINVAL)
+> +    pub(crate) fn from_fw_cmd(cmd: &fw::GSP_SEQUENCER_BUFFER_CMD) -> Res=
+ult<Self> {
+> +        match cmd.opCode {
+> +            fw::GSP_SEQ_BUF_OPCODE_GSP_SEQ_BUF_OPCODE_REG_WRITE =3D> {
+> +                // SAFETY: We're using the union field that corresponds =
+to the opCode.
+> +                Ok(GspSeqCmd::RegWrite(unsafe { cmd.payload.regWrite }))
+> +            }
+> +            fw::GSP_SEQ_BUF_OPCODE_GSP_SEQ_BUF_OPCODE_REG_MODIFY =3D> {
+> +                // SAFETY: We're using the union field that corresponds =
+to the opCode.
+> +                Ok(GspSeqCmd::RegModify(unsafe { cmd.payload.regModify }=
+))
+> +            }
+> +            fw::GSP_SEQ_BUF_OPCODE_GSP_SEQ_BUF_OPCODE_REG_POLL =3D> {
+> +                // SAFETY: We're using the union field that corresponds =
+to the opCode.
+> +                Ok(GspSeqCmd::RegPoll(unsafe { cmd.payload.regPoll }))
+> +            }
+> +            fw::GSP_SEQ_BUF_OPCODE_GSP_SEQ_BUF_OPCODE_REG_STORE =3D> {
+> +                // SAFETY: We're using the union field that corresponds =
+to the opCode.
+> +                Ok(GspSeqCmd::RegStore(unsafe { cmd.payload.regStore }))
+> +            }
+
+I'd rather have these `unsafe` statements in the `fw` module - guess
+that's all he more reason to add an abstraction layer there.
+
+> +            _ =3D> Err(EINVAL),
 > +        }
-> +
-> +        Ok(cmd)
-> +    }
-> +
-> +    /// Get the size of this command in bytes, the command consists of
-> +    /// a 4-byte opcode, and a variable-sized payload.
-> +    pub(crate) fn size_bytes(&self) -> usize {
-> +        0
-> +    }
+>      }
+> =20
+>      pub(crate) fn new(data: &[u8], dev: &device::Device<device::Bound>) =
+-> Result<Self> {
+> @@ -64,7 +88,16 @@ pub(crate) fn new(data: &[u8], dev: &device::Device<de=
+vice::Bound>) -> Result<Se
+>      /// Get the size of this command in bytes, the command consists of
+>      /// a 4-byte opcode, and a variable-sized payload.
+>      pub(crate) fn size_bytes(&self) -> usize {
+> -        0
+> +        let opcode_size =3D size_of::<fw::GSP_SEQ_BUF_OPCODE>();
+> +        match self {
+> +            // For commands with payloads, add the payload size in bytes=
+.
+> +            GspSeqCmd::RegWrite(_) =3D> opcode_size + size_of::<fw::GSP_=
+SEQ_BUF_PAYLOAD_REG_WRITE>(),
+> +            GspSeqCmd::RegModify(_) =3D> {
+> +                opcode_size + size_of::<fw::GSP_SEQ_BUF_PAYLOAD_REG_MODI=
+FY>()
+> +            }
+> +            GspSeqCmd::RegPoll(_) =3D> opcode_size + size_of::<fw::GSP_S=
+EQ_BUF_PAYLOAD_REG_POLL>(),
+> +            GspSeqCmd::RegStore(_) =3D> opcode_size + size_of::<fw::GSP_=
+SEQ_BUF_PAYLOAD_REG_STORE>(),
+> +        }
+>      }
+>  }
+> =20
+> @@ -83,12 +116,103 @@ pub(crate) trait GspSeqCmdRunner {
+>      fn run(&self, sequencer: &GspSequencer<'_>) -> Result;
+>  }
+> =20
+> -impl GspSeqCmdRunner for GspSeqCmd {
+> -    fn run(&self, _seq: &GspSequencer<'_>) -> Result {
+> +impl GspSeqCmdRunner for fw::GSP_SEQ_BUF_PAYLOAD_REG_WRITE {
+> +    fn run(&self, sequencer: &GspSequencer<'_>) -> Result {
+> +        dev_dbg!(
+> +            sequencer.dev,
+> +            "RegWrite: addr=3D0x{:x}, val=3D0x{:x}\n",
+> +            self.addr,
+> +            self.val
+> +        );
 
-Instead of having this (which involves another dedicated match
-statement), how about having the `new` method return the size in bytes
-that are read, that the caller can add to its cursor?
+Per the other feedback I believe you are going to remove these `dev_dbg`
+anyway, but since the opcodes derive a `Debug` implementation, you could
+have just printed that from the caller for a similar result and no extra
+code.
 
-> +}
-> +
-> +#[expect(dead_code)]
-> +pub(crate) struct GspSequencer<'a> {
-> +    seq_info: GspSequencerInfo<'a>,
-> +    bar: &'a Bar0,
-> +    sec2_falcon: &'a Falcon<Sec2>,
-> +    gsp_falcon: &'a Falcon<Gsp>,
-> +    libos_dma_handle: u64,
-> +    gsp_fw: &'a GspFirmware,
-
-`gsp_fw` seems to be only needed to obtain the bootloader app version -
-let's store that information directly instead a reference to a whole
-structure we don't need.
-
-> +    dev: &'a device::Device<device::Bound>,
-
-Since this is only used for logging purposes, we don't need a bound
-device. This can be an `ARef<device::Device>`, which removes a
-reference.
-
-> +}
-> +
-> +pub(crate) trait GspSeqCmdRunner {
-> +    fn run(&self, sequencer: &GspSequencer<'_>) -> Result;
-> +}
-> +
-> +impl GspSeqCmdRunner for GspSeqCmd {
-> +    fn run(&self, _seq: &GspSequencer<'_>) -> Result {
+> +        let addr =3D self.addr as usize;
+> +        let val =3D self.val;
+> +        let _ =3D sequencer.bar.try_write32(val, addr);
 > +        Ok(())
 > +    }
 > +}
 > +
-> +pub(crate) struct GspSeqIter<'a> {
-> +    cmd_data: &'a [u8],
-> +    current_offset: usize, // Tracking the current position.
-> +    total_cmds: u32,
-> +    cmds_processed: u32,
-> +    dev: &'a device::Device<device::Bound>,
-> +}
+> +impl GspSeqCmdRunner for fw::GSP_SEQ_BUF_PAYLOAD_REG_MODIFY {
+> +    fn run(&self, sequencer: &GspSequencer<'_>) -> Result {
+> +        dev_dbg!(
+> +            sequencer.dev,
+> +            "RegModify: addr=3D0x{:x}, mask=3D0x{:x}, val=3D0x{:x}\n",
+> +            self.addr,
+> +            self.mask,
+> +            self.val
+> +        );
 > +
-> +impl<'a> Iterator for GspSeqIter<'a> {
-> +    type Item =3D Result<GspSeqCmd>;
-> +
-> +    fn next(&mut self) -> Option<Self::Item> {
-> +        // Stop if we've processed all commands or reached the end of da=
-ta.
-> +        if self.cmds_processed >=3D self.total_cmds || self.current_offs=
-et >=3D self.cmd_data.len() {
-> +            return None;
+> +        let addr =3D self.addr as usize;
+> +        if let Ok(temp) =3D sequencer.bar.try_read32(addr) {
+> +            let _ =3D sequencer
+> +                .bar
+> +                .try_write32((temp & !self.mask) | self.val, addr);
 > +        }
+>          Ok(())
+>      }
+>  }
+> =20
+> +impl GspSeqCmdRunner for fw::GSP_SEQ_BUF_PAYLOAD_REG_POLL {
+> +    fn run(&self, sequencer: &GspSequencer<'_>) -> Result {
+> +        dev_dbg!(
+> +            sequencer.dev,
+> +            "RegPoll: addr=3D0x{:x}, mask=3D0x{:x}, val=3D0x{:x}, timeou=
+t=3D0x{:x}, error=3D0x{:x}\n",
+> +            self.addr,
+> +            self.mask,
+> +            self.val,
+> +            self.timeout,
+> +            self.error
+> +        );
 > +
-> +        // Check if we have enough data for opcode.
-> +        let opcode_size =3D size_of::<fw::GSP_SEQ_BUF_OPCODE>();
-> +        if self.current_offset + opcode_size > self.cmd_data.len() {
-
-`opcode_size` looks superfluous as it is only used once.
-
-> +            return Some(Err(EINVAL));
-
-Should probably be `EIO` as the data is not the expected size.
-
-> +        }
+> +        let addr =3D self.addr as usize;
+> +        let mut timeout_us =3D i64::from(self.timeout);
 > +
-> +        let offset =3D self.current_offset;
-> +
-> +        // Handle command creation based on available data,
-> +        // zero-pad if necessary (since last command may not be full siz=
-e).
-> +        let mut buffer =3D [0u8; CMD_SIZE];
-> +        let copy_len =3D if offset + CMD_SIZE <=3D self.cmd_data.len() {
-> +            CMD_SIZE
-> +        } else {
-> +            self.cmd_data.len() - offset
-> +        };
-> +        buffer[..copy_len].copy_from_slice(&self.cmd_data[offset..offset=
- + copy_len]);
-> +        let cmd_result =3D GspSeqCmd::new(&buffer, self.dev);
-> +
-> +        cmd_result.map_or_else(
-> +            |_err| {
-> +                dev_err!(self.dev, "Error parsing command at offset {}",=
- offset);
-> +                None
-> +            },
+> +        // Default timeout to 4 seconds.
+> +        timeout_us =3D if timeout_us =3D=3D 0 { 4000000 } else { timeout=
+_us };
 
-This looks a bit redundant: we are processing errors here, but then we
-also have another error handler in the caller (the one that says "Error
-running command..."). I'm pretty sure there is room for simplification
-here.
+`let timeout_us =3D if self.timeout =3D=3D 0 { 4_000_000 } else {
+i64::from(self.timeout)`
 
-> +            |cmd| {
-> +                self.current_offset +=3D cmd.size_bytes();
-> +                self.cmds_processed +=3D 1;
-> +                Some(Ok(cmd))
-> +            },
+(removes the `mut` on `timeout_us`)
+
+> +
+> +        // First read.
+> +        sequencer.bar.try_read32(addr)?;
+> +
+> +        // Poll the requested register with requested timeout.
+> +        read_poll_timeout(
+> +            || sequencer.bar.try_read32(addr),
+> +            |current| (current & self.mask) =3D=3D self.val,
+> +            Delta::ZERO,
+> +            Delta::from_micros(timeout_us),
 > +        )
+> +        .map(|_| ())
 > +    }
 > +}
 > +
-> +impl<'a, 'b> IntoIterator for &'b GspSequencer<'a> {
-> +    type Item =3D Result<GspSeqCmd>;
-> +    type IntoIter =3D GspSeqIter<'b>;
+> +impl GspSeqCmdRunner for fw::GSP_SEQ_BUF_PAYLOAD_REG_STORE {
+> +    fn run(&self, sequencer: &GspSequencer<'_>) -> Result {
+> +        let addr =3D self.addr as usize;
+> +        let _index =3D self.index;
 > +
-> +    fn into_iter(self) -> Self::IntoIter {
-> +        let cmd_data =3D &self.seq_info.cmd_data[..];
+> +        let val =3D sequencer.bar.try_read32(addr)?;
 > +
-> +        GspSeqIter {
-> +            cmd_data,
-> +            current_offset: 0,
-> +            total_cmds: self.seq_info.info.cmdIndex,
-> +            cmds_processed: 0,
-> +            dev: self.dev,
+> +        dev_dbg!(
+> +            sequencer.dev,
+> +            "RegStore: addr=3D0x{:x}, index=3D0x{:x}, value=3D{:?}\n",
+> +            self.addr,
+> +            self.index,
+> +            val
+> +        );
+> +
+> +        Ok(())
+> +    }
+> +}
+> +
+> +impl GspSeqCmdRunner for GspSeqCmd {
+> +    fn run(&self, seq: &GspSequencer<'_>) -> Result {
+> +        match self {
+> +            GspSeqCmd::RegWrite(cmd) =3D> cmd.run(seq),
+> +            GspSeqCmd::RegModify(cmd) =3D> cmd.run(seq),
+> +            GspSeqCmd::RegPoll(cmd) =3D> cmd.run(seq),
+> +            GspSeqCmd::RegStore(cmd) =3D> cmd.run(seq),
 > +        }
 > +    }
 > +}
 
-You can do without this implementation by just having an `iter` method
-returning the iterator where appropriate (in the current version this
-would be `GspSequencer`, but I suggest moving that to the
-`GspSequencerInfo/GspSequence`).
-
+This makes me wonder: do we need to store the deserialized version of
+these operands, and make a second `match` on them? How about passing the
+`bar` to the deserialization command and have it run the operand
+immediately?
