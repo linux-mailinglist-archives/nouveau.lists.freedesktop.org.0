@@ -1,78 +1,78 @@
 Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
-Received: from gabe.freedesktop.org (unknown [IPv6:2610:10:20:722:a800:ff:fe36:1795])
-	by mail.lfdr.de (Postfix) with ESMTPS id 31162C4FE69
-	for <lists+nouveau@lfdr.de>; Tue, 11 Nov 2025 22:44:21 +0100 (CET)
+Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
+	by mail.lfdr.de (Postfix) with ESMTPS id 14A1AC4FE78
+	for <lists+nouveau@lfdr.de>; Tue, 11 Nov 2025 22:44:45 +0100 (CET)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 49D1510E167;
-	Tue, 11 Nov 2025 21:43:43 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id E109E10E657;
+	Tue, 11 Nov 2025 21:44:42 +0000 (UTC)
 Authentication-Results: gabe.freedesktop.org;
-	dkim=pass (1024-bit key; unprotected) header.d=redhat.com header.i=@redhat.com header.b="ixyJ/wt8";
+	dkim=pass (1024-bit key; unprotected) header.d=redhat.com header.i=@redhat.com header.b="d+MDjpue";
 	dkim-atps=neutral
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
 Received: from us-smtp-delivery-124.mimecast.com
- (us-smtp-delivery-124.mimecast.com [170.10.133.124])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 020C510E252
- for <nouveau@lists.freedesktop.org>; Tue, 11 Nov 2025 21:43:41 +0000 (UTC)
+ (us-smtp-delivery-124.mimecast.com [170.10.129.124])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id BFD2010E63D
+ for <nouveau@lists.freedesktop.org>; Tue, 11 Nov 2025 21:44:41 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1762897420;
+ s=mimecast20190719; t=1762897481;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:content-type:content-type:
  content-transfer-encoding:content-transfer-encoding:
  in-reply-to:in-reply-to:references:references;
- bh=LeAPggyIGNGJCCDqsMauv9CH2shf5PCenFNyORJUvvg=;
- b=ixyJ/wt8mmEdhMeyre1mDCOg+FWlDN7JVVZhYuVd/+vbaFl/74Yk09u71mx4vflZDV7TK+
- E7IeTe6dV855CsHQFUaYd0k80AXNwtll0IcLt4hRCsVzRo2gCZZg6Wph742oydiMjWxQJX
- m6p9RGWScU8v5GnxBx3GwJNKjCMSvB8=
-Received: from mail-qt1-f198.google.com (mail-qt1-f198.google.com
- [209.85.160.198]) by relay.mimecast.com with ESMTP with STARTTLS
+ bh=tPimV6fPwbeRqSxFcG5c+335+cGyjD9MT4vi1pRSrvM=;
+ b=d+MDjpue6LHztyi10Xqw9EE1Hv3wfctDuwBJ4ygT2eQVszz3vlbSVvAjsCfpg23uhbfGDj
+ 9oy++aVPduRkRi8UAI3FabV6MsGCZACEJVnIACWUff6mFO29LJK3IzRylib5Eg0OJ5k8QZ
+ LjC/dVSd/cGAIR0lCQaMYj31ORDysZo=
+Received: from mail-qv1-f70.google.com (mail-qv1-f70.google.com
+ [209.85.219.70]) by relay.mimecast.com with ESMTP with STARTTLS
  (version=TLSv1.3, cipher=TLS_AES_256_GCM_SHA384) id
- us-mta-574-WDaAxXx6POqyW5wThs5q1Q-1; Tue, 11 Nov 2025 16:43:39 -0500
-X-MC-Unique: WDaAxXx6POqyW5wThs5q1Q-1
-X-Mimecast-MFC-AGG-ID: WDaAxXx6POqyW5wThs5q1Q_1762897419
-Received: by mail-qt1-f198.google.com with SMTP id
- d75a77b69052e-4eda95d8809so4104241cf.3
- for <nouveau@lists.freedesktop.org>; Tue, 11 Nov 2025 13:43:39 -0800 (PST)
+ us-mta-659-QXh5fiONMrS5jdVez4tciA-1; Tue, 11 Nov 2025 16:44:39 -0500
+X-MC-Unique: QXh5fiONMrS5jdVez4tciA-1
+X-Mimecast-MFC-AGG-ID: QXh5fiONMrS5jdVez4tciA_1762897479
+Received: by mail-qv1-f70.google.com with SMTP id
+ 6a1803df08f44-88044215975so5987886d6.1
+ for <nouveau@lists.freedesktop.org>; Tue, 11 Nov 2025 13:44:39 -0800 (PST)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1762897419; x=1763502219;
+ d=1e100.net; s=20230601; t=1762897479; x=1763502279;
  h=mime-version:user-agent:content-transfer-encoding:organization
  :references:in-reply-to:date:cc:to:from:subject:message-id:x-gm-gg
  :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=LeAPggyIGNGJCCDqsMauv9CH2shf5PCenFNyORJUvvg=;
- b=mw37gOViUkH1Ytx2RLOfgz+GRxwFLpj392IuY6GyIMcqAVxwa+IB+V2ap3xSGdHDH+
- QeEjnZ+lyZ/qFudvMr9racri/F46T8mY0a9/6cYBsDVAgff63myjKl55Yky/Um2434gh
- oiHgXPFZdyqO4NXtHCgfPpa/To4oy6iXrF1H+7wHzfKdTHDZPPy/+OqUZz/JRgL5vkrA
- QDkMObP8zVdM6B5q3k3GUpzxmGNGU/Cwk8hsImYZOhiu78yNoXbjYs6rUPCWpRJfni5x
- FGP8xrCR75wNRPCYac6S/O2qwwoVBkku4GGMG+Kb+pPiyXEZJ/m4kaac5zDR/QticprQ
- cixg==
+ bh=tPimV6fPwbeRqSxFcG5c+335+cGyjD9MT4vi1pRSrvM=;
+ b=igWnwm9OBW3f6QoOSGlGrzdGw2Q8GbwE6Cex9h8DoCmd68E1ZlcrlsHZcUVk7Nnf1G
+ 9l2gt5ldVVmsWIOPQAZtJuef0K9/CrN88jJLJDnGWF+H/OUo2wWEKBkkAD7lvccgGB8u
+ Erm3aYxeLuNJnv8Iv0invh3r1B8aOlEXiLZa4+rg8UfToQ6mcZrG0Ii4wBuG9H5trJMD
+ cA6TslU6CvHZvexixsuXbmojc6CQt9j9IrNMLgVBUiJuTeVizbRhLVuFoqUpoUP72LCl
+ grxNAMeXaDhtuLcjUaTZFMJrh+6pizlCzCqc+/PzqgWm/VSDkYnD+BjOOL0IQG39QLQt
+ +QHg==
 X-Forwarded-Encrypted: i=1;
- AJvYcCVDwa3y/kU1ASAwNapgxHDa2G+aOElkWGCC17umaJMXYKYSkCZ5xrmuiPkmGDxVVl6vJotAx/W2@lists.freedesktop.org
-X-Gm-Message-State: AOJu0Yyk4dJSIwRnu8qDS1Cx6TrDlew993wNjQ5zOSGRlOMkNPXY1YA3
- Me6Iwu7cRs6A6A+sTa/HQBjp+STSLPvUZQiY5SkEM2ymW4x/7qcuz8M0XGW8swzkUseZm5CR9KN
- 46wAnAtT+0V7HT9h9ymA9iMBb+hvKEQfjoBlyVyOR2tenPDYY+1vocjDTF+duMqvJTH0=
-X-Gm-Gg: ASbGncut2/labyCjxGhJ+WFgOBfiP7wZ8RhXQ6sevXCNXXznTqgMt6tzkNCY0L5997s
- fEWm3Sg8xfQthTZX+arvpr8b7AXHwry1/SZtlAg2EEOcdchhotPS8yZscvqkAbnAtfGF0P8+y+Y
- 2pGJOmESkgKHaHfHoyLG9Vbl04HhPb0/kK/U8V0pQ4G2UQzTgiQ+CUe4v8gBsJFmdOlYdEMzRR6
- siEYDduAv6qRePPM1LsZc+dQ5hdd5YMk7dAqgwU+GY9bLykPE6T9X3jwAdGC2z3rxdtqHwoVtWn
- FD1cDYRNp2EEZ0OmfYheOGy34UHo9ZisVrOQM3Fvu0XgE3j95U5LV9PCiOvpBZN6z9zOd+dz/ou
- /+4POWVFseyOUcmPK85Eq3O7k8+TvpQi0TFLKsPcGvFuf
-X-Received: by 2002:a05:622a:3ca:b0:4ed:ae8e:cc73 with SMTP id
- d75a77b69052e-4eddbda79d2mr10764631cf.65.1762897419004; 
- Tue, 11 Nov 2025 13:43:39 -0800 (PST)
-X-Google-Smtp-Source: AGHT+IG7ktIGqcESwsF7qF9XsOM3yz3Wryo8ahiPWkNoo7TqNLuNbm3glbTIsZGj0QJzDr3MYMZbjw==
-X-Received: by 2002:a05:622a:3ca:b0:4ed:ae8e:cc73 with SMTP id
- d75a77b69052e-4eddbda79d2mr10764341cf.65.1762897418673; 
- Tue, 11 Nov 2025 13:43:38 -0800 (PST)
+ AJvYcCU4nLnC7YNK1TlNoVsEG2JnIuFUeYu7ERMwf0yrGtPGFjMY+YozSfu/P8J9afPVLeHfWvLmIJAF@lists.freedesktop.org
+X-Gm-Message-State: AOJu0YwCVGCLFuVqyrvDS3uQJg33QsbYpVgyA4kqtdMyqmVhSSgaRfjT
+ UvMC/gNuPqriPW0KkPdalNhxxsLv3jJXii/bBR+2pbW57x3jCXxCb1K5KGwAJsQNXCKsm577Vxn
+ hJk8X3VnIcKVOJ5J1qyv+nbKmt0Bx4rVzfcvY9V2NuVfsaXZK/givIastO+X6JiVmgbQ=
+X-Gm-Gg: ASbGncty6od10tZWRraAIe5EhfqQqysUfJrJnHZE8KBOBwUYMCEmdGB3UBUD+xr8x6h
+ QrhuZSQEY31wsJSeldbTKbfBD2yI8H8vm9nCe5n2VOZWubmKRYEdWAfKzDH3xQnUUE3zs2A5m/8
+ 1sXcI/ScM0QYifCn/UR2OasBgetp+VeR9YDuGqoURn0a8fY8a1/aJxpbe38IZzdeLqEilCtzf5Y
+ Wqhvd628gZVfGrcW9TIwzCJjp0WWqY/UYZyy5PPFzIMW7Aal/yxKjRMd8lp1nOWgSlUszlFAKYM
+ kdzV32C7Im+mxOFz8We30c2YbNy2fWgHyPkZgFP7bubo7A+8d5B7mgjCC7sFWuOq1XxmHR1WjyS
+ TnI1koFQWaFwsJWvioCv3k5ZpOavyEQ/VlBRIkmBIS+xv
+X-Received: by 2002:ad4:5b85:0:b0:880:53da:fcd9 with SMTP id
+ 6a1803df08f44-88271a4de06mr12695116d6.66.1762897479130; 
+ Tue, 11 Nov 2025 13:44:39 -0800 (PST)
+X-Google-Smtp-Source: AGHT+IHk0RXBB5Hr421BAcd9xmVGlLlVNU+RwGO3HlsG8wdg+yIHIhfDse760Q/IERHVHDu/P5diJw==
+X-Received: by 2002:ad4:5b85:0:b0:880:53da:fcd9 with SMTP id
+ 6a1803df08f44-88271a4de06mr12694696d6.66.1762897478647; 
+ Tue, 11 Nov 2025 13:44:38 -0800 (PST)
 Received: from [192.168.8.208] (pool-72-93-97-194.bstnma.fios.verizon.net.
  [72.93.97.194]) by smtp.gmail.com with ESMTPSA id
- d75a77b69052e-4eda57cea81sm71399481cf.35.2025.11.11.13.43.36
+ 6a1803df08f44-88263830feesm18017446d6.36.2025.11.11.13.44.37
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 11 Nov 2025 13:43:38 -0800 (PST)
-Message-ID: <633efc3cf216e31f17e448c64edb4f02a4317eb5.camel@redhat.com>
-Subject: Re: [PATCH v3 06/14] gpu: nova-core: Add bindings required by GSP
- sequencer
+ Tue, 11 Nov 2025 13:44:38 -0800 (PST)
+Message-ID: <77abdfd661cf4736cf78e87845cb1c7052589156.camel@redhat.com>
+Subject: Re: [PATCH v3 11/14] gpu: nova-core: sequencer: Implement core
+ resume operation
 From: Lyude Paul <lyude@redhat.com>
 To: Joel Fernandes <joelagnelf@nvidia.com>, linux-kernel@vger.kernel.org, 
  rust-for-linux@vger.kernel.org, dri-devel@lists.freedesktop.org,
@@ -88,16 +88,16 @@ Cc: Alistair Popple <apopple@nvidia.com>, Miguel Ojeda <ojeda@kernel.org>,
  <jhubbard@nvidia.com>,  Timur Tabi <ttabi@nvidia.com>,
  joel@joelfernandes.org, Daniel Almeida <daniel.almeida@collabora.com>, 
  nouveau@lists.freedesktop.org
-Date: Tue, 11 Nov 2025 16:43:36 -0500
-In-Reply-To: <20251106231153.2925637-7-joelagnelf@nvidia.com>
+Date: Tue, 11 Nov 2025 16:44:37 -0500
+In-Reply-To: <20251106231153.2925637-12-joelagnelf@nvidia.com>
 References: <3b0d776e50fc81797dec2e5d81c86390af78f848.camel@nvidia.com>
  <20251106231153.2925637-1-joelagnelf@nvidia.com>
- <20251106231153.2925637-7-joelagnelf@nvidia.com>
+ <20251106231153.2925637-12-joelagnelf@nvidia.com>
 Organization: Red Hat Inc.
 User-Agent: Evolution 3.56.2 (3.56.2-2.fc42)
 MIME-Version: 1.0
 X-Mimecast-Spam-Score: 0
-X-Mimecast-MFC-PROC-ID: imRw2Z3k65XO_yupT-7NRc9aFuE3viJtiWa15QN3AAM_1762897419
+X-Mimecast-MFC-PROC-ID: mwFTY2cr0EiFr7-Sht_eDV1pzwS2dUK5lrlMol-etnU_1762897479
 X-Mimecast-Originator: redhat.com
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
@@ -115,48 +115,155 @@ List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-Doesn't this still need to be abstracted out?
-
-vvvvvv
+Reviewed-by: Lyude Paul <lyude@redhat.com>
 
 On Thu, 2025-11-06 at 18:11 -0500, Joel Fernandes wrote:
-> =C2=A0
-> +#[expect(unused)]
-> +pub(crate) use r570_144::{
-> +=C2=A0=C2=A0=C2=A0 // GSP sequencer run structure with information on ho=
-w to run the sequencer.
-> +=C2=A0=C2=A0=C2=A0 rpc_run_cpu_sequencer_v17_00,
+> Implement core resume operation. This is the last step of the sequencer
+> resulting in resume of the GSP and proceeding to INIT_DONE stage of GSP
+> boot.
+>=20
+> Signed-off-by: Joel Fernandes <joelagnelf@nvidia.com>
+> ---
+>  drivers/gpu/nova-core/falcon/gsp.rs    |  1 -
+>  drivers/gpu/nova-core/gsp/fw.rs        |  1 -
+>  drivers/gpu/nova-core/gsp/sequencer.rs | 49 ++++++++++++++++++++++++--
+>  3 files changed, 47 insertions(+), 4 deletions(-)
+>=20
+> diff --git a/drivers/gpu/nova-core/falcon/gsp.rs b/drivers/gpu/nova-core/=
+falcon/gsp.rs
+> index e0c0b18ec5bf..391699dc3a8c 100644
+> --- a/drivers/gpu/nova-core/falcon/gsp.rs
+> +++ b/drivers/gpu/nova-core/falcon/gsp.rs
+> @@ -37,7 +37,6 @@ pub(crate) fn clear_swgen0_intr(&self, bar: &Bar0) {
+>      }
+> =20
+>      /// Checks if GSP reload/resume has completed during the boot proces=
+s.
+> -    #[expect(dead_code)]
+>      pub(crate) fn check_reload_completed(&self, bar: &Bar0, timeout: Del=
+ta) -> Result<bool> {
+>          read_poll_timeout(
+>              || Ok(regs::NV_PGC6_BSI_SECURE_SCRATCH_14::read(bar)),
+> diff --git a/drivers/gpu/nova-core/gsp/fw.rs b/drivers/gpu/nova-core/gsp/=
+fw.rs
+> index 53e28458cd7d..bb79f92432aa 100644
+> --- a/drivers/gpu/nova-core/gsp/fw.rs
+> +++ b/drivers/gpu/nova-core/gsp/fw.rs
+> @@ -543,7 +543,6 @@ pub(crate) fn element_count(&self) -> u32 {
+>      }
+>  }
+> =20
+> -#[expect(unused)]
+>  pub(crate) use r570_144::{
+>      // GSP sequencer run structure with information on how to run the se=
+quencer.
+>      rpc_run_cpu_sequencer_v17_00,
+> diff --git a/drivers/gpu/nova-core/gsp/sequencer.rs b/drivers/gpu/nova-co=
+re/gsp/sequencer.rs
+> index 0192ac61df4c..3b4796425d0b 100644
+> --- a/drivers/gpu/nova-core/gsp/sequencer.rs
+> +++ b/drivers/gpu/nova-core/gsp/sequencer.rs
+> @@ -52,6 +52,7 @@ pub(crate) enum GspSeqCmd {
+>      CoreReset,
+>      CoreStart,
+>      CoreWaitForHalt,
+> +    CoreResume,
+>  }
+> =20
+>  impl GspSeqCmd {
+> @@ -83,6 +84,7 @@ pub(crate) fn from_fw_cmd(cmd: &fw::GSP_SEQUENCER_BUFFE=
+R_CMD) -> Result<Self> {
+>              fw::GSP_SEQ_BUF_OPCODE_GSP_SEQ_BUF_OPCODE_CORE_WAIT_FOR_HALT=
+ =3D> {
+>                  Ok(GspSeqCmd::CoreWaitForHalt)
+>              }
+> +            fw::GSP_SEQ_BUF_OPCODE_GSP_SEQ_BUF_OPCODE_CORE_RESUME =3D> O=
+k(GspSeqCmd::CoreResume),
+>              _ =3D> Err(EINVAL),
+>          }
+>      }
+> @@ -105,7 +107,10 @@ pub(crate) fn size_bytes(&self) -> usize {
+>          let opcode_size =3D size_of::<fw::GSP_SEQ_BUF_OPCODE>();
+>          match self {
+>              // Each simple command type just adds 4 bytes (opcode_size) =
+for the header.
+> -            GspSeqCmd::CoreReset | GspSeqCmd::CoreStart | GspSeqCmd::Cor=
+eWaitForHalt =3D> opcode_size,
+> +            GspSeqCmd::CoreReset
+> +            | GspSeqCmd::CoreStart
+> +            | GspSeqCmd::CoreWaitForHalt
+> +            | GspSeqCmd::CoreResume =3D> opcode_size,
+> =20
+>              // For commands with payloads, add the payload size in bytes=
+.
+>              GspSeqCmd::RegWrite(_) =3D> opcode_size + size_of::<fw::GSP_=
+SEQ_BUF_PAYLOAD_REG_WRITE>(),
+> @@ -119,7 +124,6 @@ pub(crate) fn size_bytes(&self) -> usize {
+>      }
+>  }
+> =20
+> -#[expect(dead_code)]
+>  pub(crate) struct GspSequencer<'a> {
+>      seq_info: GspSequencerInfo<'a>,
+>      bar: &'a Bar0,
+> @@ -227,6 +231,47 @@ fn run(&self, seq: &GspSequencer<'_>) -> Result {
+>                  seq.gsp_falcon.wait_till_halted(seq.bar)?;
+>                  Ok(())
+>              }
+> +            GspSeqCmd::CoreResume =3D> {
+> +                dev_dbg!(seq.dev, "CoreResume\n");
+> +                // At this point, 'SEC2-RTOS' has been loaded into SEC2 =
+by the sequencer
+> +                // but neither SEC2-RTOS nor GSP-RM is running yet. This=
+ part of the
+> +                // sequencer will start both.
 > +
-> +=C2=A0=C2=A0=C2=A0 // GSP sequencer structures.
-> +=C2=A0=C2=A0=C2=A0 GSP_SEQUENCER_BUFFER_CMD,
-> +=C2=A0=C2=A0=C2=A0 GSP_SEQ_BUF_OPCODE,
+> +                // Reset the GSP to prepare it for resuming.
+> +                seq.gsp_falcon.reset(seq.bar)?;
 > +
-> +=C2=A0=C2=A0=C2=A0 // GSP sequencer core operation opcodes.
-> +=C2=A0=C2=A0=C2=A0 GSP_SEQ_BUF_OPCODE_GSP_SEQ_BUF_OPCODE_CORE_RESET,
-> +=C2=A0=C2=A0=C2=A0 GSP_SEQ_BUF_OPCODE_GSP_SEQ_BUF_OPCODE_CORE_RESUME,
-> +=C2=A0=C2=A0=C2=A0 GSP_SEQ_BUF_OPCODE_GSP_SEQ_BUF_OPCODE_CORE_START,
-> +=C2=A0=C2=A0=C2=A0 GSP_SEQ_BUF_OPCODE_GSP_SEQ_BUF_OPCODE_CORE_WAIT_FOR_H=
-ALT,
+> +                // Write the libOS DMA handle to GSP mailboxes.
+> +                seq.gsp_falcon.write_mailboxes(
+> +                    seq.bar,
+> +                    Some(seq.libos_dma_handle as u32),
+> +                    Some((seq.libos_dma_handle >> 32) as u32),
+> +                )?;
 > +
-> +=C2=A0=C2=A0=C2=A0 // GSP sequencer delay opcode and payload.
-> +=C2=A0=C2=A0=C2=A0 GSP_SEQ_BUF_OPCODE_GSP_SEQ_BUF_OPCODE_DELAY_US,
+> +                // Start the SEC2 falcon which will trigger GSP-RM to re=
+sume on the GSP.
+> +                seq.sec2_falcon.start(seq.bar)?;
 > +
-> +=C2=A0=C2=A0=C2=A0 // GSP sequencer register opcodes.
-> +=C2=A0=C2=A0=C2=A0 GSP_SEQ_BUF_OPCODE_GSP_SEQ_BUF_OPCODE_REG_MODIFY,
-> +=C2=A0=C2=A0=C2=A0 GSP_SEQ_BUF_OPCODE_GSP_SEQ_BUF_OPCODE_REG_POLL,
-> +=C2=A0=C2=A0=C2=A0 GSP_SEQ_BUF_OPCODE_GSP_SEQ_BUF_OPCODE_REG_STORE,
-> +=C2=A0=C2=A0=C2=A0 GSP_SEQ_BUF_OPCODE_GSP_SEQ_BUF_OPCODE_REG_WRITE,
+> +                // Poll until GSP-RM reload/resume has completed (up to =
+2 seconds).
+> +                seq.gsp_falcon
+> +                    .check_reload_completed(seq.bar, Delta::from_secs(2)=
+)?;
 > +
-> +=C2=A0=C2=A0=C2=A0 // GSP sequencer delay payload structure.
-> +=C2=A0=C2=A0=C2=A0 GSP_SEQ_BUF_PAYLOAD_DELAY_US,
+> +                // Verify SEC2 completed successfully by checking its ma=
+ilbox for errors.
+> +                let mbox0 =3D seq.sec2_falcon.read_mailbox0(seq.bar)?;
+> +                if mbox0 !=3D 0 {
+> +                    dev_err!(seq.dev, "Sequencer: sec2 errors: {:?}\n", =
+mbox0);
+> +                    return Err(EIO);
+> +                }
 > +
-> +=C2=A0=C2=A0=C2=A0 // GSP sequencer register payload structures.
-> +=C2=A0=C2=A0=C2=A0 GSP_SEQ_BUF_PAYLOAD_REG_MODIFY,
-> +=C2=A0=C2=A0=C2=A0 GSP_SEQ_BUF_PAYLOAD_REG_POLL,
-> +=C2=A0=C2=A0=C2=A0 GSP_SEQ_BUF_PAYLOAD_REG_STORE,
-> +=C2=A0=C2=A0=C2=A0 GSP_SEQ_BUF_PAYLOAD_REG_WRITE, //
-> +};
+> +                // Configure GSP with the bootloader version.
+> +                seq.gsp_falcon
+> +                    .write_os_version(seq.bar, seq.gsp_fw.bootloader.app=
+_version);
 > +
+> +                // Verify the GSP's RISC-V core is active indicating suc=
+cessful GSP boot.
+> +                if !seq.gsp_falcon.is_riscv_active(seq.bar) {
+> +                    dev_err!(seq.dev, "Sequencer: RISC-V core is not act=
+ive\n");
+> +                    return Err(EIO);
+> +                }
+> +                Ok(())
+> +            }
+>          }
+>      }
+>  }
 
 --=20
 Cheers,
