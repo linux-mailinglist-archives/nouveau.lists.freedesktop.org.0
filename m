@@ -2,83 +2,99 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id E8CD9CBABA7
-	for <lists+nouveau@lfdr.de>; Sat, 13 Dec 2025 13:43:13 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id D0895CBAE8E
+	for <lists+nouveau@lfdr.de>; Sat, 13 Dec 2025 13:46:14 +0100 (CET)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 28C2710EB01;
-	Sat, 13 Dec 2025 12:41:05 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id A171910EC2A;
+	Sat, 13 Dec 2025 12:42:15 +0000 (UTC)
 Authentication-Results: gabe.freedesktop.org;
-	dkim=permerror (0-bit key) header.d=gmail.com header.i=@gmail.com header.b="Mr4gAB5n";
+	dkim=permerror (0-bit key) header.d=gmail.com header.i=@gmail.com header.b="E1uMxzuf";
 	dkim-atps=neutral
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from mail-pl1-f175.google.com (mail-pl1-f175.google.com
- [209.85.214.175])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 893D510E640
- for <nouveau@lists.freedesktop.org>; Tue, 11 Nov 2025 19:54:30 +0000 (UTC)
-Received: by mail-pl1-f175.google.com with SMTP id
- d9443c01a7336-29800ac4ef3so147245ad.1
- for <nouveau@lists.freedesktop.org>; Tue, 11 Nov 2025 11:54:30 -0800 (PST)
+Received: from mail-pl1-f179.google.com (mail-pl1-f179.google.com
+ [209.85.214.179])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 420D310E64D
+ for <nouveau@lists.freedesktop.org>; Tue, 11 Nov 2025 20:32:19 +0000 (UTC)
+Received: by mail-pl1-f179.google.com with SMTP id
+ d9443c01a7336-297cf964774so116735ad.2
+ for <nouveau@lists.freedesktop.org>; Tue, 11 Nov 2025 12:32:19 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1762890870; x=1763495670; darn=lists.freedesktop.org;
+ d=gmail.com; s=20230601; t=1762893139; x=1763497939; darn=lists.freedesktop.org;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:from:to:cc:subject:date
  :message-id:reply-to;
- bh=s9+a/eFiDoDkgzy9Ul2SUezw6cD2/LMwGt4BI4jMuWE=;
- b=Mr4gAB5n2v/F+Y/lj4ZF/mfKu13Ilbz2CRLjMfHXt6/iSYNrZnUUv+R8Hp4lVUaZ4C
- 9cgDnq287WJaK71bI7nGMhMJyrooUzgTv2Cwl/SnOlToAlyKxRJY29DOdaVY+ULa+GcB
- BbjmrAGC2b0Y0vDLE89o4JdjjOgAjdUU41t37hHJprVg2pAb1MG8DRbTl1d0zDF/efTX
- UqC4W7c8FuYmp53vnVm/iTaPqal2v5gglgCO20OytjE+6u6cRWPBz9t0RFH+FCjkt+8x
- 6JedUVjo1e/CA1OfuA1/dnn6y2CjlvcERuhNxSFfejXaHz5gqkzFxbBeq1h/Hrk0H6Z0
- 5vtg==
+ bh=K0ITm4kaj7zgUCCm0JCFhPjRTKRmOjBpzfNcGnDqMnE=;
+ b=E1uMxzuf8E8Op2jwqhHkI2GvgCKr3Fa9xsaBYJOCspThGEZGO9ULHu3CZ7F5vFN8I7
+ vmJidW6mf2gtWoWMvKvL7tbelMPDRdfCmkJMpzXa7WxtqpCwLknzqWT/GXL8+IgyWUc3
+ urR8DmYTT91b4lrB/wgGt0uNE+5jvrFH3oCrlECWJX2nklHPVeV+llTazKJWOTqAiB6D
+ vbIL3ETpF0UsFHp7Q18b1O7v49PaQPgejI4GM498KkcPjkAKo+3Mz/Mnsq41V6a6vA92
+ 8AnQJXWDtBLsFe3JFgkNs+FP6zZFf7tPNpsPkvskVGNcjKReRf5Ai0L3RrqiFZy8ha6O
+ dqSQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1762890870; x=1763495670;
+ d=1e100.net; s=20230601; t=1762893139; x=1763497939;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:x-gm-gg:x-gm-message-state:from
  :to:cc:subject:date:message-id:reply-to;
- bh=s9+a/eFiDoDkgzy9Ul2SUezw6cD2/LMwGt4BI4jMuWE=;
- b=ic6QO8tQVRcxITI0QBOO9z/NoAne3TdMZbTdyaEjwjMBu8sDe/m/2hfMZ2VowIGa/C
- gyeM4eKWkVAi73jpuK8PFmKiVKiPAvZmrYN7LOi4fl+nzASy+KkVH92czgOySo+TcB70
- 3gduSR8ceJPkrxsvdh6W81dkDvPJLBz2A4Qwf4jrM9k7nmq7yMaovQ7tEsFpTe3YL0a+
- 9Hro7gtGjsP54W/UHoNvyv6wN++tcvXYAC0Hb/GJi5nsHzWgkS7PV+kn1Eh7OhbBpfhA
- 3T1zpC5gjhuLWCzSAJxxGegnnrITN8v4BpJiw6Kf6RQXnjU1tplzURIYsHdxTgcx6wu4
- xGLQ==
+ bh=K0ITm4kaj7zgUCCm0JCFhPjRTKRmOjBpzfNcGnDqMnE=;
+ b=bF0uABPx+zzPG9DimSZN5l/g1Mias9Hff87NC8cTB1RaPJXGI1UCMl156MlQtkz/GR
+ YkyN+GAzyBOwbyOoDQP70bifTO39bC9p1TeUlrdo8t3KGG8N/Esa/xrrotb/v9JjIIBe
+ yOzDX8EPnWl/evS2Jvdwh3nb+UF817eLYq+ax7bwrsOOtlUQmQpqJ9Kgzf602pCMhzDi
+ 2xEZCSOLH9MVx0lqnCNsCfBcMb1MBoHxUba66ojCPzDvip5RQTg/1UJr0zI/qUyxJnfx
+ fNAWTpVJq4tVkXWzcUbPm6/nw11fWJ7RldjLIT5B4apHrdsrUm6vYGBajCT0dmKMy5u5
+ n34w==
 X-Forwarded-Encrypted: i=1;
- AJvYcCVqCBQlXcZfxbjUCgeA49BZXzk5xi6oLDLQLNgvcSi4hcoxkgk8kjZ9GL+jLKfz/8NN5gcd7oXd@lists.freedesktop.org
-X-Gm-Message-State: AOJu0YwgMCas4USC3qU4wCUo0RgLZTlLtRKjgsuHFT8J5D5nXDR1uV10
- 0H8sJqcJUqo2uGQ1be7AxpJ7gR4b0a5ejxiKFCoH9OHNtpIR9r4z2u9rbN7R13nNzLxDumTJ+Tj
- LX80cHuWInBQyGJu7x7f1GJ2SHWVTp10z2aQN
-X-Gm-Gg: ASbGncsZ9aN1651aE5Xv2c1HV7svf+9//Nst62X63U2rVVpu3VPqW4dW6/SZnEWpkrQ
- wzF6cHnqEdoK+NIoFQZq/fjfBq6Mb5JyVoFsCCJyEFiFmIZ8ogrKxCfIWUce/tR00oB7RQkZZhW
- eTMZ6mDx9PTZQ2sgGrWNtdgkYxVVPgyAvxc0O3wz0i3pAp912jrH/m4VP/kcIMx62jXpEnldKMd
- VkhoDmHqENUpf+LcF5p6a9vMX79JKCNKJFN2NVnv4+R7my6wDLAfuLxWQGxjCQS+SQXwLnDrLoo
- bb/6PsDoW2TT2flM7niejAKaHK0vZt+tzMYOgpF1QoU55wxbPkmXaBDrbUlz8XtL4ZTnf3ccSvO
- 6QeQ=
-X-Google-Smtp-Source: AGHT+IFGIw0sPldyd+rtRft0su885bkTxqqUTUuhpd3lcLBUxXPnk/ZZeeLUF53/y6iwwN8RrfJVa1Wt8ImxuyYODE8=
-X-Received: by 2002:a17:902:d50f:b0:298:371:94f1 with SMTP id
- d9443c01a7336-2984ed2b38amr3798265ad.1.1762890870059; Tue, 11 Nov 2025
- 11:54:30 -0800 (PST)
+ AJvYcCVSrN0Pr/w+Ojr6nKClGhrRMIzJRZ3GOQQM6aWFQaW9UONNCoqej42IuBl8MUFt0qqM2tBROt1T@lists.freedesktop.org
+X-Gm-Message-State: AOJu0Yxhft3Kc/A73ZYQfOiK3ZSivL+3EV1SRl6BBnmeFwv/qs2e6zXL
+ DOBoBrXUvyCZaQyROQ8i4nS2QcGhFLTiFZSPh+mXG+olPtvXGpzF3JY3TrBVJsPOdP2QDlRVnZL
+ Hx1CtNfRo5s22SawoswAeU0Pxnp+TzJ0=
+X-Gm-Gg: ASbGnctShx8gMcDDA3bQxoQZVo2S7hMCPqUpyTFh6ah4hIqZRfauJgK/ew6PqqwAw6H
+ hnswJGa/QLOeNrCYASEUe0bqLLvYt9ZcWAIz30REPMqbn8KQuw0hBbdV4/x8wnmGTRaHa3Z2DsX
+ ooCqRSXEk6ejEK4uqu0vio4r49GylOwnF5CjAkJckQlaJKRMKcGi3KFrn8y85P3oiCgAg1fdCS7
+ AUDkJzJPODca4tejkahDDOLrKtZp2LNnoEC2mRRp9uBau2znY3Qdu6oV1qVnu3I8B51zqwbvr9J
+ f72CSCth1e4jCTl1HGx2yJtn0+lERKdBcM8PI/pXI6yzs1YK+7rHeOwkVoUQ/RB41czCiRnxOPx
+ rzFMjnj2JQ3FhhQ==
+X-Google-Smtp-Source: AGHT+IHkhivjJqX5b/37P8r79971KGp5/CtKc/qZSlE2EIFXEGP5n3HbQm7JyHmom9185URkqKimQum3m1tK5n6XgK8=
+X-Received: by 2002:a17:902:d2cb:b0:298:f0c:6d36 with SMTP id
+ d9443c01a7336-2984ed87089mr4321895ad.5.1762893138722; Tue, 11 Nov 2025
+ 12:32:18 -0800 (PST)
 MIME-Version: 1.0
-References: <20251111171315.2196103-1-joelagnelf@nvidia.com>
- <20251111171315.2196103-4-joelagnelf@nvidia.com>
-In-Reply-To: <20251111171315.2196103-4-joelagnelf@nvidia.com>
+References: <20251030190613.1224287-1-joelagnelf@nvidia.com>
+ <20251030190613.1224287-2-joelagnelf@nvidia.com>
+ <DDX1WYWQNTAB.BBEICMO8NM30@nvidia.com>
+ <20251104005812.GA2101511@joelbox2> <DDZYCRCPYMOL.RMTIF0R404Q4@nvidia.com>
+ <CANiq72=Cj_gJ27+EAiytxYGYk1dMwu7M3xQpLGByD4QstgDsHw@mail.gmail.com>
+ <CAAOQCfQ_d_C7oZ9uq2siJHn1+m+j059qYUMBvTWOnQ5Etk91ug@mail.gmail.com>
+ <CANiq72nLzuCXh0r5W0HMM36f9yTSQfP9yCxXbzH+wS7VxFM2Eg@mail.gmail.com>
+ <CANiq72kYYu9C94aY72HK1ELSmvktF3nq+G4+smdAW_Xaxw1kqw@mail.gmail.com>
+ <CAAOQCfSRVqFZAJN_m-kGLe6fnqKYyhLUf_WOKdHHMW-C6NShkA@mail.gmail.com>
+In-Reply-To: <CAAOQCfSRVqFZAJN_m-kGLe6fnqKYyhLUf_WOKdHHMW-C6NShkA@mail.gmail.com>
 From: Miguel Ojeda <miguel.ojeda.sandonis@gmail.com>
-Date: Tue, 11 Nov 2025 20:54:17 +0100
-X-Gm-Features: AWmQ_bl0L-0Cea_Wx26TMHEqrDOWgYHY0NBpoDZ7Qy4Vo4Y76uHd2eVw2Y9spcU
-Message-ID: <CANiq72nuHUFGMsEYr-KhCB4oMjX72YskG0s7uCB8dcVtTGW-jQ@mail.gmail.com>
-Subject: Re: [PATCH v2 0/3] rust: Introduce support for C linked list
- interfacing
-To: Joel Fernandes <joelagnelf@nvidia.com>
-Cc: linux-kernel@vger.kernel.org, rust-for-linux@vger.kernel.org, 
- dri-devel@lists.freedesktop.org, dakr@kernel.org, airlied@gmail.com, 
- acourbot@nvidia.com, apopple@nvidia.com, ojeda@kernel.org, 
- alex.gaynor@gmail.com, boqun.feng@gmail.com, gary@garyguo.net, 
- bjorn3_gh@protonmail.com, lossin@kernel.org, a.hindborg@kernel.org, 
- aliceryhl@google.com, tmgross@umich.edu, simona@ffwll.ch, 
- maarten.lankhorst@linux.intel.com, mripard@kernel.org, tzimmermann@suse.de, 
- jhubbard@nvidia.com, ttabi@nvidia.com, joel@joelfernandes.org, 
- elle@weathered-steel.dev, daniel.almeida@collabora.com, arighi@nvidia.com, 
- phasta@kernel.org, nouveau@lists.freedesktop.org
+Date: Tue, 11 Nov 2025 21:32:05 +0100
+X-Gm-Features: AWmQ_bkuC058fj8a17da0j-IGoO37yszAwGTtwPbytKgwIYY0ZLqmecqu3judng
+Message-ID: <CANiq72nU7LOSEv=RsewAwiEbeO4=pTqg_pm+WJGfum90BC43kQ@mail.gmail.com>
+Subject: Re: [PATCH RFC 1/4] rust: clist: Add abstraction for iterating over C
+ linked lists
+To: Guillaume Gomez <guillaume1.gomez@gmail.com>
+Cc: Alexandre Courbot <acourbot@nvidia.com>,
+ Joel Fernandes <joelagnelf@nvidia.com>, 
+ linux-kernel@vger.kernel.org, rust-for-linux@vger.kernel.org, 
+ dri-devel@lists.freedesktop.org, dakr@kernel.org, 
+ David Airlie <airlied@gmail.com>, Alistair Popple <apopple@nvidia.com>,
+ Miguel Ojeda <ojeda@kernel.org>, 
+ Alex Gaynor <alex.gaynor@gmail.com>, Boqun Feng <boqun.feng@gmail.com>, 
+ Gary Guo <gary@garyguo.net>, bjorn3_gh@protonmail.com, 
+ Benno Lossin <lossin@kernel.org>, Andreas Hindborg <a.hindborg@kernel.org>, 
+ Alice Ryhl <aliceryhl@google.com>, Trevor Gross <tmgross@umich.edu>, 
+ Simona Vetter <simona@ffwll.ch>,
+ Maarten Lankhorst <maarten.lankhorst@linux.intel.com>, 
+ Maxime Ripard <mripard@kernel.org>, Thomas Zimmermann <tzimmermann@suse.de>, 
+ John Hubbard <jhubbard@nvidia.com>, Timur Tabi <ttabi@nvidia.com>,
+ joel@joelfernandes.org, Elle Rhumsaa <elle@weathered-steel.dev>,
+ Daniel Almeida <daniel.almeida@collabora.com>, 
+ Andrea Righi <arighi@nvidia.com>, Philipp Stanner <phasta@kernel.org>,
+ nouveau@lists.freedesktop.org, 
+ Nouveau <nouveau-bounces@lists.freedesktop.org>
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
 X-Mailman-Approved-At: Sat, 13 Dec 2025 12:40:48 +0000
@@ -96,15 +112,25 @@ List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-On Tue, Nov 11, 2025 at 6:13=E2=80=AFPM Joel Fernandes <joelagnelf@nvidia.c=
-om> wrote:
+On Wed, Nov 5, 2025 at 11:54=E2=80=AFAM Guillaume Gomez
+<guillaume1.gomez@gmail.com> wrote:
 >
-> there. I rebased the patches on linux-next. I can also add MAINTAINER ent=
-ries
-> in a future version, if folks agree this should have its own MAINTAINER
-> record.
+> You can add your own tags in the doctests, and with our patch waiting
+> to use the new rustdoc doctests extraction, it should be pretty easy
+> to plug such a feature into it. We can check it together if you want
+> when the patch is merged to see if we already have everything needed
+> or if I need to add more things on rustdoc side.
 
-Yes, it sounds good to me to add one. Please do -- thanks!
+If you mean the `unknown` field (in the JSON) that I mentioned in my
+message, then yeah, I think that is good enough (though we should
+probably still prevent collisions with future `rustdoc` ones).
+
+If you mean something else that I may be missing, please let me know, of co=
+urse!
+
+And yeah, we can take a look together (likely after LPC).
+
+Thanks!
 
 Cheers,
 Miguel
