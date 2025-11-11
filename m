@@ -2,76 +2,76 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id 4987BC4FC06
-	for <lists+nouveau@lfdr.de>; Tue, 11 Nov 2025 21:57:43 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 71FD9C4FCCD
+	for <lists+nouveau@lfdr.de>; Tue, 11 Nov 2025 22:09:18 +0100 (CET)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 0D55410E64F;
-	Tue, 11 Nov 2025 20:57:40 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 7FCCE10E651;
+	Tue, 11 Nov 2025 21:09:16 +0000 (UTC)
 Authentication-Results: gabe.freedesktop.org;
-	dkim=pass (1024-bit key; unprotected) header.d=redhat.com header.i=@redhat.com header.b="dJckrzYY";
+	dkim=pass (1024-bit key; unprotected) header.d=redhat.com header.i=@redhat.com header.b="RdhHPsxg";
 	dkim-atps=neutral
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
 Received: from us-smtp-delivery-124.mimecast.com
  (us-smtp-delivery-124.mimecast.com [170.10.133.124])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 6E1D710E651
- for <nouveau@lists.freedesktop.org>; Tue, 11 Nov 2025 20:57:39 +0000 (UTC)
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 49B7810E651
+ for <nouveau@lists.freedesktop.org>; Tue, 11 Nov 2025 21:09:15 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1762894658;
+ s=mimecast20190719; t=1762895354;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:content-type:content-type:
  content-transfer-encoding:content-transfer-encoding:
  in-reply-to:in-reply-to:references:references;
- bh=bS+lVhyQTE5gzmSLdtgcTynWHQesjwlynmv4CAvackE=;
- b=dJckrzYY957j+rk4MXvgjVVVAse5IJlUNRW8WPmBA29sJ0vwv6uYu1sxyeV44yo8DYaDQC
- YlSaq8wI1djUu4WzqYZsAIT4ditODMBhNGrscCkYlnz1QbQBKXfCBkN4YVsbMy+3FFCtpE
- sjJj7J5r/GjG0kVtOaDqqMFkafptrVo=
-Received: from mail-qk1-f197.google.com (mail-qk1-f197.google.com
- [209.85.222.197]) by relay.mimecast.com with ESMTP with STARTTLS
+ bh=ucXPCSSZ/coslTKZ+lNNOEOOFTr27uSbStu8hPrLbq4=;
+ b=RdhHPsxg++MNWXoIxrP9EXWdQoS1dnGMPTLGLKLjOuvV5ubzPU3qArxvFrhSYQjg7T9x0r
+ mjCMasdKKZT6z3V64fc9QHN82iMXX3d8D+IMKltmPv30IHWMpDXlfnuM5m1HyIIqOC/YwZ
+ KZMaZv1AmuIbGwPhDq9Axs4L8pSHEcA=
+Received: from mail-qk1-f198.google.com (mail-qk1-f198.google.com
+ [209.85.222.198]) by relay.mimecast.com with ESMTP with STARTTLS
  (version=TLSv1.3, cipher=TLS_AES_256_GCM_SHA384) id
- us-mta-464-wMfXxyU9PcqaD6XX16L3TQ-1; Tue, 11 Nov 2025 15:57:35 -0500
-X-MC-Unique: wMfXxyU9PcqaD6XX16L3TQ-1
-X-Mimecast-MFC-AGG-ID: wMfXxyU9PcqaD6XX16L3TQ_1762894655
-Received: by mail-qk1-f197.google.com with SMTP id
- af79cd13be357-8b244ef3ed4so51706185a.0
- for <nouveau@lists.freedesktop.org>; Tue, 11 Nov 2025 12:57:35 -0800 (PST)
+ us-mta-156-8X5nuwM0ODGS3-WwYgtl9A-1; Tue, 11 Nov 2025 16:09:13 -0500
+X-MC-Unique: 8X5nuwM0ODGS3-WwYgtl9A-1
+X-Mimecast-MFC-AGG-ID: 8X5nuwM0ODGS3-WwYgtl9A_1762895352
+Received: by mail-qk1-f198.google.com with SMTP id
+ af79cd13be357-8b2217a9c60so146068785a.3
+ for <nouveau@lists.freedesktop.org>; Tue, 11 Nov 2025 13:09:13 -0800 (PST)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1762894655; x=1763499455;
+ d=1e100.net; s=20230601; t=1762895352; x=1763500152;
  h=mime-version:user-agent:content-transfer-encoding:organization
  :references:in-reply-to:date:cc:to:from:subject:message-id:x-gm-gg
  :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=bS+lVhyQTE5gzmSLdtgcTynWHQesjwlynmv4CAvackE=;
- b=VqnIMd1Q5dOO4kE7TH+4vfZwe1IznZZh1btrsANxNdAjv/JvsHqGE1ZhiatFIx+CmT
- uxstiLg2TNVOO7N/MZBnpOSXwtw/2wX4Dc+nSa8KQzaHGpBxjqEEP5U2GzlhXRv1+JKa
- +MWhPuEuEeIT1aELVLf/XjCb5QglB6a1O5FkdtrEuF4E+TsIterDhWCs8eOHzTm7FyO3
- GKldYgIMcVeaZ6CZj5uzx/G4cUCGRATNfOI4o6RKWg4sRKNg6zeiuB6nSRuoKERcicZH
- yXT4fzjFlkH81DPVDMWgfoZTtrIl0zGWA48tFVllP7HneOfiLyaDcusz6FuBo122JDSB
- +RVg==
+ bh=ucXPCSSZ/coslTKZ+lNNOEOOFTr27uSbStu8hPrLbq4=;
+ b=O2sAiaR0O0pFPqLLVWlZixMDEDkynjrv0Qc7vfnAFu/CkckJgT0FexlbhIhHBjYOxP
+ h9VN2Y90gzyEuZmsObKtZ7g53bUcwz9ZWeRrQhLtkfKbiHLmBQ0biZBnvW655MjAq0DU
+ akoYrj9jnrsSjUS1RHd3bdU0mBUExv6MOONgMlUMx2r/OeWGdMnI2qOco1sb1JHc0Q/B
+ yGIyLt9AjV9jAaOdZfnA9JR/NqLJY0BK2dedC+nqodpYISdIGSu2QF/NvYVUtnJriZe0
+ 8JYik2OaMF1NOQ8A0BmNZYouzW1kJHAQy4U+1tJa9D7tJlO2NfXGtTunrTSeK2qXB+d+
+ p62Q==
 X-Forwarded-Encrypted: i=1;
- AJvYcCV36ter45mReXsLtu+yGussXFL1j+IyC7AO+2if8KKyjkknRxL7U6E6Ew5gvXGThOTcniCTJA3H@lists.freedesktop.org
-X-Gm-Message-State: AOJu0YxriVqvV63mEn7xXp1Q5XuTeqJD9mDubDbLWDj5WKwNNdSPKgFQ
- n1oDsI90ViacYrxVjY6CUALj12/OHzSob4oCzne3ceo9MeGIVINFDii9TSe04Ax4SFeNgsP8NC3
- uIBtJpunXLTKIFQCHqsTcgTlT8AexBek/4rSB3GvCra187Ap/Wp9HUufkYZZ7vvQ/L4E=
-X-Gm-Gg: ASbGncuq+iI2fnBRBVJVGrzsqedjlGlZRu2WsDUskFI4dYxXXdd5xHqjn1PtYTdc5+A
- vn6Rd1aFnl0hzRkWli+jh5Zb2CccpUVnkTUjGfkhu+SBwvKoaDxkQQtdUMPSo4mSZLbxoqR1wHP
- qluIxaVTvnos9eEWAXbNuNnNUsDgrJsuiXHN2t9I3Fqo6pkEQjORWXis1bZjAy27cMXc8waSYfV
- l/aR4zeE8vZo5mOcwdBNABbd2bnVU4OBTwJ9k0+aBcDGgw8hN1Kgresr7zrjptHKssbWQj0g7yL
- D6z8dL4W6FWfSZ0J8AZf9mVHgAf0+fRPA7l7s0iMAvSdfe9eZVOLzvTGSsPghNyt5M9kRLRQjMZ
- M1PXygWw6ORq0a26yFmSt9ZCljupiOEL+RJPlbxtKcwa6
-X-Received: by 2002:a05:620a:1982:b0:8b2:71dd:5887 with SMTP id
- af79cd13be357-8b29b8491d4mr88340785a.80.1762894654654; 
- Tue, 11 Nov 2025 12:57:34 -0800 (PST)
-X-Google-Smtp-Source: AGHT+IH+TPpQrgF58DWq9kY9pVn83cPATCihZMrezIO6+B5IUJeddFnfxvFrEZoBTte3C+LbF3eEAw==
-X-Received: by 2002:a05:620a:1982:b0:8b2:71dd:5887 with SMTP id
- af79cd13be357-8b29b8491d4mr88336385a.80.1762894654108; 
- Tue, 11 Nov 2025 12:57:34 -0800 (PST)
+ AJvYcCWaVlIPar/SRGeAeLwoWbKLyfgXliL8BaHVwkMA9QkEyP7t7PyYFxYzbqAjLg/imin28w40akk2@lists.freedesktop.org
+X-Gm-Message-State: AOJu0Yy5nKLN+FTw1vX361Hkf8ELoHBlOJfULKKEp5Q/0EZarGGuxQZs
+ lOJwSgaP9flqLrIMd8MBOVbzPyIizwYVGK0NH4gJH5ChMS4U18dNBX+w5QDmXq6C1hWJ/c8Tf8l
+ b8+P4OKYtsCzy0mbYK27z+2PgqG0o0SWow2emGONcLRxVFXIN47HVrm9duUzOvIFroXQ=
+X-Gm-Gg: ASbGncvANNhIAhkc61HyEIefkKui+d+UWs0GGwDVi4KIUT2vDwZf4mtqhZQJJLFkT0q
+ oE//bJkAfBOfLfX5rRakf1XNbHecQkg91FnqC/DLjlnEb18MGO2IfegDdrzOh6rYGzQdEzmoe2O
+ r6fJ9UAB+PwxXb2YdrTNF1JS5ukt+mxbyrrG2DKIqBX2u+GeEjk8fnkIpJy82kKumhBvr2m215u
+ xPpfH4c/lV0UyKAp1YEA4Az9ly1sKkAnHEKVxftJ6JQHizhmeZ3K7wbszEscFuPfYZ+Q7C0BEdE
+ +3/SLUMSEZUcxKdfvZYDWKtS2u4IKLY6L40kJVur7dAXIxl5zfrrnW0upCnSdafKLalJVWrptie
+ HgZbyHyU+SUZEcT2JsB9/qQ1JfO2NOrOSCxjcmw9J9XZz
+X-Received: by 2002:a05:620a:1a94:b0:86e:21a4:473e with SMTP id
+ af79cd13be357-8b29b764467mr99801485a.13.1762895352572; 
+ Tue, 11 Nov 2025 13:09:12 -0800 (PST)
+X-Google-Smtp-Source: AGHT+IHk7rAtcon2gVvUnAjO1mlCbpD1/zQit/Tdrgq6kuUwHUsKS4E+VdNghFbRTNhAshOpAfJjdw==
+X-Received: by 2002:a05:620a:1a94:b0:86e:21a4:473e with SMTP id
+ af79cd13be357-8b29b764467mr99796885a.13.1762895352086; 
+ Tue, 11 Nov 2025 13:09:12 -0800 (PST)
 Received: from [192.168.8.208] (pool-72-93-97-194.bstnma.fios.verizon.net.
  [72.93.97.194]) by smtp.gmail.com with ESMTPSA id
- af79cd13be357-8b29a9e6c95sm53083485a.29.2025.11.11.12.57.32
+ af79cd13be357-8b29a84c6b3sm58948285a.10.2025.11.11.13.09.10
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 11 Nov 2025 12:57:33 -0800 (PST)
-Message-ID: <912e319f6d5d4d4c1261a02242c1b74b838e5692.camel@redhat.com>
-Subject: Re: [PATCH v3 07/14] gpu: nova-core: Implement the GSP sequencer
+ Tue, 11 Nov 2025 13:09:11 -0800 (PST)
+Message-ID: <c0bcb3fc003ae3c2416a0b3981f9b773023342d0.camel@redhat.com>
+Subject: Re: [PATCH v3 08/14] gpu: nova-core: sequencer: Add register opcodes
 From: Lyude Paul <lyude@redhat.com>
 To: Joel Fernandes <joelagnelf@nvidia.com>, linux-kernel@vger.kernel.org, 
  rust-for-linux@vger.kernel.org, dri-devel@lists.freedesktop.org,
@@ -87,16 +87,16 @@ Cc: Alistair Popple <apopple@nvidia.com>, Miguel Ojeda <ojeda@kernel.org>,
  <jhubbard@nvidia.com>,  Timur Tabi <ttabi@nvidia.com>,
  joel@joelfernandes.org, Daniel Almeida <daniel.almeida@collabora.com>, 
  nouveau@lists.freedesktop.org
-Date: Tue, 11 Nov 2025 15:57:32 -0500
-In-Reply-To: <20251106231153.2925637-8-joelagnelf@nvidia.com>
+Date: Tue, 11 Nov 2025 16:09:10 -0500
+In-Reply-To: <20251106231153.2925637-9-joelagnelf@nvidia.com>
 References: <3b0d776e50fc81797dec2e5d81c86390af78f848.camel@nvidia.com>
  <20251106231153.2925637-1-joelagnelf@nvidia.com>
- <20251106231153.2925637-8-joelagnelf@nvidia.com>
+ <20251106231153.2925637-9-joelagnelf@nvidia.com>
 Organization: Red Hat Inc.
 User-Agent: Evolution 3.56.2 (3.56.2-2.fc42)
 MIME-Version: 1.0
 X-Mimecast-Spam-Score: 0
-X-Mimecast-MFC-PROC-ID: SZH4IAScY1CpAbZhNF-1ZkZMZv2o45plOM5OH_1b4nc_1762894655
+X-Mimecast-MFC-PROC-ID: kLd2KAFI2OFFRGu2GgUjQc5fPdlMHFd_9bCJbwjWEHs_1762895352
 X-Mimecast-Originator: redhat.com
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
@@ -114,338 +114,196 @@ List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
+With the issues below fixed:
+
+Reviewed-by: Lyude Paul <lyude@redhat.com>
+
 On Thu, 2025-11-06 at 18:11 -0500, Joel Fernandes wrote:
-> Implement the GSP sequencer which culminates in INIT_DONE message being
-> received from the GSP indicating that the GSP has successfully booted.
->=20
-> This is just initial sequencer support, the actual commands will be
-> added in the next patches.
+> These opcodes are used for register write, modify, poll and store (save)
+> sequencer operations.
 >=20
 > Signed-off-by: Joel Fernandes <joelagnelf@nvidia.com>
 > ---
->  drivers/gpu/nova-core/gsp.rs           |   1 +
->  drivers/gpu/nova-core/gsp/boot.rs      |  19 ++-
->  drivers/gpu/nova-core/gsp/cmdq.rs      |   1 -
->  drivers/gpu/nova-core/gsp/sequencer.rs | 205 +++++++++++++++++++++++++
->  drivers/gpu/nova-core/sbuffer.rs       |   1 -
->  5 files changed, 224 insertions(+), 3 deletions(-)
->  create mode 100644 drivers/gpu/nova-core/gsp/sequencer.rs
+>  drivers/gpu/nova-core/gsp/sequencer.rs | 106 +++++++++++++++++++++++--
+>  1 file changed, 99 insertions(+), 7 deletions(-)
 >=20
-> diff --git a/drivers/gpu/nova-core/gsp.rs b/drivers/gpu/nova-core/gsp.rs
-> index 36175eafaf2e..9d62aea3c782 100644
-> --- a/drivers/gpu/nova-core/gsp.rs
-> +++ b/drivers/gpu/nova-core/gsp.rs
-> @@ -16,6 +16,7 @@
->  pub(crate) mod cmdq;
->  pub(crate) mod commands;
->  mod fw;
-> +mod sequencer;
-> =20
->  use fw::GspArgumentsCached;
->  use fw::LibosMemoryRegionInitArgument;
-> diff --git a/drivers/gpu/nova-core/gsp/boot.rs b/drivers/gpu/nova-core/gs=
-p/boot.rs
-> index 649c758eda70..761020a11153 100644
-> --- a/drivers/gpu/nova-core/gsp/boot.rs
-> +++ b/drivers/gpu/nova-core/gsp/boot.rs
-> @@ -19,7 +19,13 @@
->  };
->  use crate::gpu::Chipset;
->  use crate::gsp::commands::{build_registry, set_system_info};
-> -use crate::gsp::GspFwWprMeta;
-> +use crate::gsp::{
-> +    sequencer::{
-> +        GspSequencer,
-> +        GspSequencerParams, //
-> +    },
-> +    GspFwWprMeta, //
-> +};
->  use crate::regs;
->  use crate::vbios::Vbios;
-> =20
-> @@ -204,6 +210,17 @@ pub(crate) fn boot(
->              gsp_falcon.is_riscv_active(bar),
->          );
-> =20
-> +        // Create and run the GSP sequencer.
-> +        let seq_params =3D GspSequencerParams {
-> +            gsp_fw: &gsp_fw,
-> +            libos_dma_handle: libos_handle,
-> +            gsp_falcon,
-> +            sec2_falcon,
-> +            dev: pdev.as_ref(),
-> +            bar,
-> +        };
-> +        GspSequencer::run(&mut self.cmdq, seq_params, Delta::from_secs(1=
-0))?;
-> +
->          Ok(())
->      }
->  }
-> diff --git a/drivers/gpu/nova-core/gsp/cmdq.rs b/drivers/gpu/nova-core/gs=
-p/cmdq.rs
-> index 0fb8ff26ba2f..0185629a3b5c 100644
-> --- a/drivers/gpu/nova-core/gsp/cmdq.rs
-> +++ b/drivers/gpu/nova-core/gsp/cmdq.rs
-> @@ -418,7 +418,6 @@ struct FullCommand<M> {
->          Ok(())
->      }
-> =20
-> -    #[expect(unused)]
->      pub(crate) fn receive_msg_from_gsp<M: MessageFromGsp, R>(
->          &mut self,
->          timeout: Delta,
 > diff --git a/drivers/gpu/nova-core/gsp/sequencer.rs b/drivers/gpu/nova-co=
 re/gsp/sequencer.rs
-> new file mode 100644
-> index 000000000000..ee096c04d9eb
-> --- /dev/null
+> index ee096c04d9eb..32a0446b8c75 100644
+> --- a/drivers/gpu/nova-core/gsp/sequencer.rs
 > +++ b/drivers/gpu/nova-core/gsp/sequencer.rs
-> @@ -0,0 +1,205 @@
-> +// SPDX-License-Identifier: GPL-2.0
-> +
-> +//! GSP Sequencer implementation for Pre-hopper GSP boot sequence.
-
-Any way we could get a brief explanation in the docs here for what the
-sequencer is?
-
-> +
-> +use core::mem::size_of;
-> +use kernel::alloc::flags::GFP_KERNEL;
-> +use kernel::device;
-> +use kernel::prelude::*;
-> +use kernel::time::Delta;
-> +use kernel::transmute::FromBytes;
-> +
-> +use crate::driver::Bar0;
-> +use crate::falcon::{
-> +    gsp::Gsp,
-> +    sec2::Sec2,
-> +    Falcon, //
-> +};
-> +use crate::firmware::gsp::GspFirmware;
-> +use crate::gsp::cmdq::{
-> +    Cmdq,
-> +    MessageFromGsp, //
-> +};
-> +use crate::gsp::fw;
-> +
-> +use kernel::{
-> +    dev_dbg,
-> +    dev_err, //
-> +};
-> +
-> +impl MessageFromGsp for fw::rpc_run_cpu_sequencer_v17_00 {
-> +    const FUNCTION: fw::MsgFunction =3D fw::MsgFunction::GspRunCpuSequen=
-cer;
+> @@ -5,6 +5,7 @@
+>  use core::mem::size_of;
+>  use kernel::alloc::flags::GFP_KERNEL;
+>  use kernel::device;
+> +use kernel::io::poll::read_poll_timeout;
+>  use kernel::prelude::*;
+>  use kernel::time::Delta;
+>  use kernel::transmute::FromBytes;
+> @@ -40,13 +41,36 @@ struct GspSequencerInfo<'a> {
+> =20
+>  /// GSP Sequencer Command types with payload data.
+>  /// Commands have an opcode and a opcode-dependent struct.
+> -#[allow(dead_code)]
+> -pub(crate) enum GspSeqCmd {}
+> +#[allow(clippy::enum_variant_names)]
+> +pub(crate) enum GspSeqCmd {
+> +    RegWrite(fw::GSP_SEQ_BUF_PAYLOAD_REG_WRITE),
+> +    RegModify(fw::GSP_SEQ_BUF_PAYLOAD_REG_MODIFY),
+> +    RegPoll(fw::GSP_SEQ_BUF_PAYLOAD_REG_POLL),
+> +    RegStore(fw::GSP_SEQ_BUF_PAYLOAD_REG_STORE),
 > +}
-> +
-> +const CMD_SIZE: usize =3D size_of::<fw::GSP_SEQUENCER_BUFFER_CMD>();
-> +
-> +struct GspSequencerInfo<'a> {
-> +    info: &'a fw::rpc_run_cpu_sequencer_v17_00,
-> +    cmd_data: KVec<u8>,
-> +}
-> +
-> +/// GSP Sequencer Command types with payload data.
-> +/// Commands have an opcode and a opcode-dependent struct.
-> +#[allow(dead_code)]
-> +pub(crate) enum GspSeqCmd {}
-> +
-> +impl GspSeqCmd {
-> +    /// Creates a new GspSeqCmd from a firmware GSP_SEQUENCER_BUFFER_CMD=
+> =20
+>  impl GspSeqCmd {
+>      /// Creates a new GspSeqCmd from a firmware GSP_SEQUENCER_BUFFER_CMD=
 .
-> +    pub(crate) fn from_fw_cmd(_cmd: &fw::GSP_SEQUENCER_BUFFER_CMD) -> Re=
+> -    pub(crate) fn from_fw_cmd(_cmd: &fw::GSP_SEQUENCER_BUFFER_CMD) -> Re=
 sult<Self> {
-> +        Err(EINVAL)
-
-Is this just because this is a TODO? If so, it might be better to use todo!=
-()
-or unimplemented!() for spots like this instead of returning an error.
-
-> +    }
-> +
-> +    pub(crate) fn new(data: &[u8], dev: &device::Device<device::Bound>) =
--> Result<Self> {
-> +        let fw_cmd =3D fw::GSP_SEQUENCER_BUFFER_CMD::from_bytes(data).ok=
-_or(EINVAL)?;
-> +        let cmd =3D Self::from_fw_cmd(fw_cmd)?;
-> +
-> +        if data.len() < cmd.size_bytes() {
-> +            dev_err!(dev, "data is not enough for command");
-> +            return Err(EINVAL);
+> -        Err(EINVAL)
+> +    pub(crate) fn from_fw_cmd(cmd: &fw::GSP_SEQUENCER_BUFFER_CMD) -> Res=
+ult<Self> {
+> +        match cmd.opCode {
+> +            fw::GSP_SEQ_BUF_OPCODE_GSP_SEQ_BUF_OPCODE_REG_WRITE =3D> {
+> +                // SAFETY: We're using the union field that corresponds =
+to the opCode.
+> +                Ok(GspSeqCmd::RegWrite(unsafe { cmd.payload.regWrite }))
+> +            }
+> +            fw::GSP_SEQ_BUF_OPCODE_GSP_SEQ_BUF_OPCODE_REG_MODIFY =3D> {
+> +                // SAFETY: We're using the union field that corresponds =
+to the opCode.
+> +                Ok(GspSeqCmd::RegModify(unsafe { cmd.payload.regModify }=
+))
+> +            }
+> +            fw::GSP_SEQ_BUF_OPCODE_GSP_SEQ_BUF_OPCODE_REG_POLL =3D> {
+> +                // SAFETY: We're using the union field that corresponds =
+to the opCode.
+> +                Ok(GspSeqCmd::RegPoll(unsafe { cmd.payload.regPoll }))
+> +            }
+> +            fw::GSP_SEQ_BUF_OPCODE_GSP_SEQ_BUF_OPCODE_REG_STORE =3D> {
+> +                // SAFETY: We're using the union field that corresponds =
+to the opCode.
+> +                Ok(GspSeqCmd::RegStore(unsafe { cmd.payload.regStore }))
+> +            }
+> +            _ =3D> Err(EINVAL),
 > +        }
-> +
-> +        Ok(cmd)
-> +    }
-> +
-> +    /// Get the size of this command in bytes, the command consists of
-> +    /// a 4-byte opcode, and a variable-sized payload.
-> +    pub(crate) fn size_bytes(&self) -> usize {
-> +        0
-> +    }
-> +}
-> +
-> +#[expect(dead_code)]
-> +pub(crate) struct GspSequencer<'a> {
-> +    seq_info: GspSequencerInfo<'a>,
-> +    bar: &'a Bar0,
-> +    sec2_falcon: &'a Falcon<Sec2>,
-> +    gsp_falcon: &'a Falcon<Gsp>,
-> +    libos_dma_handle: u64,
-> +    gsp_fw: &'a GspFirmware,
-> +    dev: &'a device::Device<device::Bound>,
-> +}
-> +
-> +pub(crate) trait GspSeqCmdRunner {
-> +    fn run(&self, sequencer: &GspSequencer<'_>) -> Result;
-> +}
-> +
-> +impl GspSeqCmdRunner for GspSeqCmd {
-> +    fn run(&self, _seq: &GspSequencer<'_>) -> Result {
+>      }
+> =20
+>      pub(crate) fn new(data: &[u8], dev: &device::Device<device::Bound>) =
+-> Result<Self> {
+> @@ -64,7 +88,16 @@ pub(crate) fn new(data: &[u8], dev: &device::Device<de=
+vice::Bound>) -> Result<Se
+>      /// Get the size of this command in bytes, the command consists of
+>      /// a 4-byte opcode, and a variable-sized payload.
+>      pub(crate) fn size_bytes(&self) -> usize {
+> -        0
+> +        let opcode_size =3D size_of::<fw::GSP_SEQ_BUF_OPCODE>();
+> +        match self {
+> +            // For commands with payloads, add the payload size in bytes=
+.
+> +            GspSeqCmd::RegWrite(_) =3D> opcode_size + size_of::<fw::GSP_=
+SEQ_BUF_PAYLOAD_REG_WRITE>(),
+> +            GspSeqCmd::RegModify(_) =3D> {
+> +                opcode_size + size_of::<fw::GSP_SEQ_BUF_PAYLOAD_REG_MODI=
+FY>()
+> +            }
+> +            GspSeqCmd::RegPoll(_) =3D> opcode_size + size_of::<fw::GSP_S=
+EQ_BUF_PAYLOAD_REG_POLL>(),
+> +            GspSeqCmd::RegStore(_) =3D> opcode_size + size_of::<fw::GSP_=
+SEQ_BUF_PAYLOAD_REG_STORE>(),
+> +        }
+>      }
+>  }
+> =20
+> @@ -83,12 +116,71 @@ pub(crate) trait GspSeqCmdRunner {
+>      fn run(&self, sequencer: &GspSequencer<'_>) -> Result;
+>  }
+> =20
+> -impl GspSeqCmdRunner for GspSeqCmd {
+> -    fn run(&self, _seq: &GspSequencer<'_>) -> Result {
+> +impl GspSeqCmdRunner for fw::GSP_SEQ_BUF_PAYLOAD_REG_WRITE {
+> +    fn run(&self, sequencer: &GspSequencer<'_>) -> Result {
+> +        let addr =3D self.addr as usize;
+> +        let val =3D self.val;
+> +        let _ =3D sequencer.bar.try_write32(val, addr);
+
+We're papering over the error here, this should be (without the lower Ok(()=
+)):
+
+sequencer.bar.try_write32(val, addr)
+
 > +        Ok(())
 > +    }
 > +}
 > +
-> +pub(crate) struct GspSeqIter<'a> {
-> +    cmd_data: &'a [u8],
-> +    current_offset: usize, // Tracking the current position.
-> +    total_cmds: u32,
-> +    cmds_processed: u32,
-> +    dev: &'a device::Device<device::Bound>,
-> +}
-> +
-> +impl<'a> Iterator for GspSeqIter<'a> {
-> +    type Item =3D Result<GspSeqCmd>;
-> +
-> +    fn next(&mut self) -> Option<Self::Item> {
-> +        // Stop if we've processed all commands or reached the end of da=
-ta.
-> +        if self.cmds_processed >=3D self.total_cmds || self.current_offs=
-et >=3D self.cmd_data.len() {
-> +            return None;
-> +        }
-> +
-> +        // Check if we have enough data for opcode.
-> +        let opcode_size =3D size_of::<fw::GSP_SEQ_BUF_OPCODE>();
-> +        if self.current_offset + opcode_size > self.cmd_data.len() {
-> +            return Some(Err(EINVAL));
-> +        }
-> +
-> +        let offset =3D self.current_offset;
-> +
-> +        // Handle command creation based on available data,
-> +        // zero-pad if necessary (since last command may not be full siz=
-e).
-> +        let mut buffer =3D [0u8; CMD_SIZE];
-> +        let copy_len =3D if offset + CMD_SIZE <=3D self.cmd_data.len() {
-> +            CMD_SIZE
-> +        } else {
-> +            self.cmd_data.len() - offset
-> +        };
-> +        buffer[..copy_len].copy_from_slice(&self.cmd_data[offset..offset=
- + copy_len]);
-> +        let cmd_result =3D GspSeqCmd::new(&buffer, self.dev);
-> +
-> +        cmd_result.map_or_else(
-> +            |_err| {
-> +                dev_err!(self.dev, "Error parsing command at offset {}",=
- offset);
-> +                None
-> +            },
-> +            |cmd| {
-> +                self.current_offset +=3D cmd.size_bytes();
-> +                self.cmds_processed +=3D 1;
-> +                Some(Ok(cmd))
-> +            },
-> +        )
-> +    }
-> +}
-> +
-> +impl<'a, 'b> IntoIterator for &'b GspSequencer<'a> {
-> +    type Item =3D Result<GspSeqCmd>;
-> +    type IntoIter =3D GspSeqIter<'b>;
-> +
-> +    fn into_iter(self) -> Self::IntoIter {
-> +        let cmd_data =3D &self.seq_info.cmd_data[..];
+> +impl GspSeqCmdRunner for fw::GSP_SEQ_BUF_PAYLOAD_REG_MODIFY {
+> +    fn run(&self, sequencer: &GspSequencer<'_>) -> Result {
+> +        let addr =3D self.addr as usize;
+> +        if let Ok(temp) =3D sequencer.bar.try_read32(addr) {
+> +            let _ =3D sequencer
+> +                .bar
+> +                .try_write32((temp & !self.mask) | self.val, addr);
 
-I think just using .as_slice() would be clearer here
+Looks like we're making the same mistake here
 
-> +
-> +        GspSeqIter {
-> +            cmd_data,
-> +            current_offset: 0,
-> +            total_cmds: self.seq_info.info.cmdIndex,
-> +            cmds_processed: 0,
-> +            dev: self.dev,
 > +        }
-> +    }
-> +}
-> +
-> +/// Parameters for running the GSP sequencer.
-> +pub(crate) struct GspSequencerParams<'a> {
-> +    pub(crate) gsp_fw: &'a GspFirmware,
-> +    pub(crate) libos_dma_handle: u64,
-> +    pub(crate) gsp_falcon: &'a Falcon<Gsp>,
-> +    pub(crate) sec2_falcon: &'a Falcon<Sec2>,
-> +    pub(crate) dev: &'a device::Device<device::Bound>,
-> +    pub(crate) bar: &'a Bar0,
-> +}
-> +
-> +impl<'a> GspSequencer<'a> {
-> +    pub(crate) fn run(cmdq: &mut Cmdq, params: GspSequencerParams<'a>, t=
-imeout: Delta) -> Result {
-> +        cmdq.receive_msg_from_gsp(timeout, |info, mut sbuf| {
-> +            let cmd_data =3D sbuf.flush_into_kvec(GFP_KERNEL)?;
-> +            let seq_info =3D GspSequencerInfo { info, cmd_data };
-> +
-> +            let sequencer =3D GspSequencer {
-> +                seq_info,
-> +                bar: params.bar,
-> +                sec2_falcon: params.sec2_falcon,
-> +                gsp_falcon: params.gsp_falcon,
-> +                libos_dma_handle: params.libos_dma_handle,
-> +                gsp_fw: params.gsp_fw,
-> +                dev: params.dev,
-> +            };
-> +
-> +            dev_dbg!(params.dev, "Running CPU Sequencer commands");
-> +
-> +            for cmd_result in &sequencer {
-> +                match cmd_result {
-> +                    Ok(cmd) =3D> cmd.run(&sequencer)?,
-> +                    Err(e) =3D> {
-> +                        dev_err!(
-> +                            params.dev,
-> +                            "Error running command at index {}",
-> +                            sequencer.seq_info.info.cmdIndex
-> +                        );
-> +                        return Err(e);
-> +                    }
-> +                }
-> +            }
-> +
-> +            dev_dbg!(params.dev, "CPU Sequencer commands completed succe=
-ssfully");
-> +            Ok(())
-> +        })
-> +    }
-> +}
-> diff --git a/drivers/gpu/nova-core/sbuffer.rs b/drivers/gpu/nova-core/sbu=
-ffer.rs
-> index 4d7cbc4bd060..36890c8610c2 100644
-> --- a/drivers/gpu/nova-core/sbuffer.rs
-> +++ b/drivers/gpu/nova-core/sbuffer.rs
-> @@ -162,7 +162,6 @@ pub(crate) fn read_exact(&mut self, mut dst: &mut [u8=
-]) -> Result {
->      /// Read all the remaining data into a [`KVec`].
->      ///
->      /// `self` will be empty after this operation.
-> -    #[expect(unused)]
->      pub(crate) fn flush_into_kvec(&mut self, flags: kernel::alloc::Flags=
-) -> Result<KVec<u8>> {
->          let mut buf =3D KVec::<u8>::new();
+>          Ok(())
+>      }
+>  }
 > =20
+> +impl GspSeqCmdRunner for fw::GSP_SEQ_BUF_PAYLOAD_REG_POLL {
+> +    fn run(&self, sequencer: &GspSequencer<'_>) -> Result {
+> +        let addr =3D self.addr as usize;
+> +        let mut timeout_us =3D i64::from(self.timeout);
+> +
+> +        // Default timeout to 4 seconds.
+> +        timeout_us =3D if timeout_us =3D=3D 0 { 4000000 } else { timeout=
+_us };
+> +
+> +        // First read.
+> +        sequencer.bar.try_read32(addr)?;
+> +
+> +        // Poll the requested register with requested timeout.
+> +        read_poll_timeout(
+> +            || sequencer.bar.try_read32(addr),
+> +            |current| (current & self.mask) =3D=3D self.val,
+> +            Delta::ZERO,
+> +            Delta::from_micros(timeout_us),
+> +        )
+> +        .map(|_| ())
+> +    }
+> +}
+> +
+> +impl GspSeqCmdRunner for fw::GSP_SEQ_BUF_PAYLOAD_REG_STORE {
+> +    fn run(&self, sequencer: &GspSequencer<'_>) -> Result {
+> +        let addr =3D self.addr as usize;
+> +        let _index =3D self.index;
+
+^ this variable doesn't seem necessary
+
+> +
+> +        let _val =3D sequencer.bar.try_read32(addr)?;
+
+Any reason we don't just drop the _val and ? and return this directly?
+
+> +
+> +        Ok(())
+> +    }
+> +}
+> +
+> +impl GspSeqCmdRunner for GspSeqCmd {
+> +    fn run(&self, seq: &GspSequencer<'_>) -> Result {
+> +        match self {
+> +            GspSeqCmd::RegWrite(cmd) =3D> cmd.run(seq),
+> +            GspSeqCmd::RegModify(cmd) =3D> cmd.run(seq),
+> +            GspSeqCmd::RegPoll(cmd) =3D> cmd.run(seq),
+> +            GspSeqCmd::RegStore(cmd) =3D> cmd.run(seq),
+> +        }
+> +    }
+> +}
+> +
+>  pub(crate) struct GspSeqIter<'a> {
+>      cmd_data: &'a [u8],
+>      current_offset: usize, // Tracking the current position.
 
 --=20
 Cheers,
