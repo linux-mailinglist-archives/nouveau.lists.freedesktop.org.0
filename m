@@ -2,87 +2,94 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id 1B1F8C53C73
-	for <lists+nouveau@lfdr.de>; Wed, 12 Nov 2025 18:48:28 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 0A206C53CF1
+	for <lists+nouveau@lfdr.de>; Wed, 12 Nov 2025 18:56:39 +0100 (CET)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id AD79810E793;
-	Wed, 12 Nov 2025 17:48:26 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 9653610E790;
+	Wed, 12 Nov 2025 17:56:37 +0000 (UTC)
 Authentication-Results: gabe.freedesktop.org;
-	dkim=pass (1024-bit key; unprotected) header.d=redhat.com header.i=@redhat.com header.b="i5MugXnt";
+	dkim=pass (1024-bit key; unprotected) header.d=redhat.com header.i=@redhat.com header.b="QoP96tvW";
 	dkim-atps=neutral
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
 Received: from us-smtp-delivery-124.mimecast.com
  (us-smtp-delivery-124.mimecast.com [170.10.129.124])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 1719D10E79B
- for <nouveau@lists.freedesktop.org>; Wed, 12 Nov 2025 17:48:24 +0000 (UTC)
+ by gabe.freedesktop.org (Postfix) with ESMTPS id E970410E78C
+ for <nouveau@lists.freedesktop.org>; Wed, 12 Nov 2025 17:56:36 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1762969704;
+ s=mimecast20190719; t=1762970196;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:mime-version:mime-version:content-type:content-type:
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
  content-transfer-encoding:content-transfer-encoding:
  in-reply-to:in-reply-to:references:references;
- bh=BkJF7MlDICIrTRPUpHB+dOgLiaCiZfAOD4OlGVrplr0=;
- b=i5MugXntmSEjooouamqhln/QM9X4UYx+GckBEAtEx6HmqyoORef+V2WPLBSrFHzUWJTORE
- MG9kU5ByxUSsW0k/R3FeTI4DxLQEEYdp59nxUrcFa26kp4pbRaPA9GG4um2Vj8Gz6m7sTO
- 7/YmMHxM8wzD4id1tVr+k2xG4khpH7Y=
-Received: from mail-qk1-f200.google.com (mail-qk1-f200.google.com
- [209.85.222.200]) by relay.mimecast.com with ESMTP with STARTTLS
+ bh=gIrPUhgK0I6zKFV60UVcEmti3ynlNhVqxbNNxcnX40o=;
+ b=QoP96tvW8veRWx55uz+RBtkR1bfngpxK8/ccfJ4VsnsadYhsdaCDip1vbMRJbu2bZyNprA
+ Q0XwQLZL4FHydA6MkcFWH0X0yU0F64QoVwXLuKxsT8G9h/G+vgaUIeU0BMWXF+aXCG4hKI
+ I1swM/WXBFoFHg269NbwyXy0GfAe6b0=
+Received: from mail-qt1-f197.google.com (mail-qt1-f197.google.com
+ [209.85.160.197]) by relay.mimecast.com with ESMTP with STARTTLS
  (version=TLSv1.3, cipher=TLS_AES_256_GCM_SHA384) id
- us-mta-615-TqUD_azZPRaHFQtSXXOMzQ-1; Wed, 12 Nov 2025 12:48:22 -0500
-X-MC-Unique: TqUD_azZPRaHFQtSXXOMzQ-1
-X-Mimecast-MFC-AGG-ID: TqUD_azZPRaHFQtSXXOMzQ_1762969702
-Received: by mail-qk1-f200.google.com with SMTP id
- af79cd13be357-8b286006ffaso317259385a.2
- for <nouveau@lists.freedesktop.org>; Wed, 12 Nov 2025 09:48:22 -0800 (PST)
+ us-mta-77-Hpd8zKXlNbmh3y0W6LNDeg-1; Wed, 12 Nov 2025 12:56:05 -0500
+X-MC-Unique: Hpd8zKXlNbmh3y0W6LNDeg-1
+X-Mimecast-MFC-AGG-ID: Hpd8zKXlNbmh3y0W6LNDeg_1762970164
+Received: by mail-qt1-f197.google.com with SMTP id
+ d75a77b69052e-4ed74ab4172so30986321cf.1
+ for <nouveau@lists.freedesktop.org>; Wed, 12 Nov 2025 09:56:05 -0800 (PST)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1762969702; x=1763574502;
+ d=1e100.net; s=20230601; t=1762970164; x=1763574964;
  h=mime-version:user-agent:content-transfer-encoding:organization
- :references:in-reply-to:date:to:from:subject:message-id:x-gm-gg
+ :references:in-reply-to:date:cc:to:from:subject:message-id:x-gm-gg
  :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=Xt8k7TbpxzW00aJUUL4tji+byeIeMeyz+RC5QteLjhk=;
- b=DSXZg+XqJ6DQXrHUigdqD3bOVz7K3xvKig6arAxP2UrIn2Ubo7fHpaGce+M9XLgbM0
- KLBgKix4KxewHAzCn9WQ3V/+/pmCM9RqdG4B4F+Lalduw2CuVxkSs0T2vqLALlf6rIuJ
- 6lno0jnebEq0k8aerTqS/ch6D8L7eYuh4XyWyZhTz7BRX1GnkR/0FeMk54rzM6GiXQVv
- 8VE/ZD0LGv9dx2AOKKMQXnYguwDoc5aKWAxWg54dew/7lV0CYZAUXEsRPJxbVT3r2Nlo
- UXjqneNuysQgTZwi25NSfWXnVcHF1GgeDj5R4QY0TDK1qUkf4HUvGD/lsqFok6BsVyn4
- cc6Q==
+ bh=gIrPUhgK0I6zKFV60UVcEmti3ynlNhVqxbNNxcnX40o=;
+ b=xIg0UnCTVXNfvd/IbWZ47q3Utv8IUMeZWE2+t7ccydiJPiVABxiJDBKBlioqkYRbrs
+ dQBT8LhgenaPjpt+CyNzUhYQqQDRWxSou7j+aYf180m/wEiuf1kLnhYxKbH0TC1/Hf79
+ l6h0EGLZdWxB8X8NDVya+EJKbVRVPsrtLTuIeqfUDZ40nXWT3fx7wwPX6AK8Vy7MBQtf
+ YtzQH8k0uSFQuxjKQXIgt07Ipu0xUolTCwSNg6vZvFyiPSPOXvWNfExuKy/AiGlA5Lr4
+ SpY7yWHaLengjhoO/EnycJGPyeLNscdKxgihWxPtGWnCRMcg92XKpLVqAfP539AbDxy6
+ UbKw==
 X-Forwarded-Encrypted: i=1;
- AJvYcCWR+eZXjDC6H4VABpFovdsadCRXobfXHkCoMTd643JSyoOqBYPVfFTeqHEh3L16k18O6fMb/LU3@lists.freedesktop.org
-X-Gm-Message-State: AOJu0YyEXktqKufmK5dJxtKxtBp2d80tvbv0NO63fxqk2iSaWUV8dn/0
- jNRgAaS/2775uh+muKuyPryzIjxBIBwMsPgjYYWGZd1ijaseP1L8MCCuZF8rAJUwkFbvRRzJ+67
- GnW3QtYjnN+cMosVreHDEKi9jIzSCyZO+8+7bVdfFdyzp9xjpk4rkZYCV3VILunam5jA=
-X-Gm-Gg: ASbGncub6OrFFZ43KguTN7MEXsWDr1PBH6vZ0Xq6NxRrbnBSqfOPBEwsAhF7wYiboot
- n6JfZgrydh1g8qLffsXgUpg9WYN7ifG0jEn3FylFmk6V5q3/xlIZe+Mpby9getInrIeVPPSSGzl
- FLV+Xx9uv2cWltR8thh5sSXUCrTQvimz2Oza92tWMG5oFSHYoda6O2q+AT0spLBcDwVFbupbrp+
- ejKU9IgiT/wdUIf82nM8D6HYZTyviyvfMAZaahpMMsMMZi+aCkED1e9NsdGmqlWgjn12GCAmmp0
- xOOWLVM8xs2FvAz0IYIuFoAh4fvGd2NLT0WCB4T+TOPkuPARxr3KbWIktZIP0cQ31B+lYGpZHrG
- 4TGtWz+7u/CsWdRy4NrX1tHw5QNWJh/YiLullcN9qiKLl
-X-Received: by 2002:a05:620a:1712:b0:8b2:9741:ca68 with SMTP id
- af79cd13be357-8b29b7c1fa9mr502181785a.22.1762969702324; 
- Wed, 12 Nov 2025 09:48:22 -0800 (PST)
-X-Google-Smtp-Source: AGHT+IEPZO0/tDl7p9hgg1RLe5hzBGVmh6Loxta9L5MJnkUHesT2CL2+wL5Csp4zoWfTiUHBvjvqkw==
-X-Received: by 2002:a05:620a:1712:b0:8b2:9741:ca68 with SMTP id
- af79cd13be357-8b29b7c1fa9mr502178585a.22.1762969701871; 
- Wed, 12 Nov 2025 09:48:21 -0800 (PST)
+ AJvYcCX8LcCZ8tTOuFaiBGf9+RhTa9nmz/revhJNQvAtB/DqbGp8prncOevZApmr/OqSkWtOcXb4z0Y2@lists.freedesktop.org
+X-Gm-Message-State: AOJu0Yx+vEevKms2zEu8yBUu6C19HI76Dl9O/DezHQQC3JpTlv9LVS+W
+ 2ZacSJHltbwS6eHYWyXhM6gUCyc1WwtZd/9jqBsCK/b0e/kH6N1tvD+k6waS/QBh+xWpdvVo1C0
+ R4Q38PgRdsLRFqjOQBiVy2diMIJKl4EkwcZMJaHleAspWznmIcS+94YDqCyLMoPaLyV4=
+X-Gm-Gg: ASbGnct0psNilIae0ZGeUKIJ50YDlyx4lY0MQbf8nPPXSfALm3nTORpxM5RkVpc6NBY
+ w3N4pAHyoWk4SNlPMv/GBw0TjwPBwWrrrHtOb5R07vd7XIIy09BUMGdDqTcLb6dfHfWlwWHu7AS
+ agL+sAJdAzL47cf3FHgdZ6sa3Vo1WGKUrkdkr3Br82VKrjMbjwE9H35KA02P040Btg9jS+Q4dp2
+ NbYYoQF26t4BP+xIwdS4QBSAa3y4XyBN3/je4+YRuM8lhvfSbXC9YKN4cwaSrzM5g8lcNTrVK+m
+ G+0nvMECp4AFCZB9EFGTLErrlSNjQkHZkPwW9OOTaymdX/qKMUz5t0Rz8st7VxTyCQvENzwmZmK
+ KSc3APVzGDnvd+F5PkRnNuoatCM7SSlqgDotFeLAoI1GT
+X-Received: by 2002:ad4:5f49:0:b0:882:4f53:ed41 with SMTP id
+ 6a1803df08f44-882719e6978mr55139896d6.39.1762970164594; 
+ Wed, 12 Nov 2025 09:56:04 -0800 (PST)
+X-Google-Smtp-Source: AGHT+IFXK9dMib1KaSPw8mvExZq5Kc0KpFkeltwKQA+VZJSIky3G2xOvZQe+W/bXlHGXY3JmudO1vQ==
+X-Received: by 2002:ad4:5f49:0:b0:882:4f53:ed41 with SMTP id
+ 6a1803df08f44-882719e6978mr55139336d6.39.1762970164168; 
+ Wed, 12 Nov 2025 09:56:04 -0800 (PST)
 Received: from [192.168.8.208] (pool-72-93-97-194.bstnma.fios.verizon.net.
  [72.93.97.194]) by smtp.gmail.com with ESMTPSA id
- af79cd13be357-8b29a9e6c95sm232571885a.29.2025.11.12.09.48.21
+ 6a1803df08f44-88238b75896sm95253236d6.49.2025.11.12.09.56.03
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 12 Nov 2025 09:48:21 -0800 (PST)
-Message-ID: <7697dc302cb41d550ed3bd18443df517de0ae466.camel@redhat.com>
-Subject: Re: [PATCH] drm/nouveau: fully define nvfw_hs_load_header_v2
+ Wed, 12 Nov 2025 09:56:03 -0800 (PST)
+Message-ID: <0258c7b5cf7adb78708be86de50a39815b6a4982.camel@redhat.com>
+Subject: Re: [PATCH v6 0/5] drm/nouveau: Enable variable page sizes and
+ compression
 From: Lyude Paul <lyude@redhat.com>
-To: Timur Tabi <ttabi@nvidia.com>, Danilo Krummrich <dakr@kernel.org>, David
- Airlie <airlied@gmail.com>, nouveau@lists.freedesktop.org
-Date: Wed, 12 Nov 2025 12:48:20 -0500
-In-Reply-To: <20251010223957.1078525-1-ttabi@nvidia.com>
-References: <20251010223957.1078525-1-ttabi@nvidia.com>
+To: Mary Guillemard <mary@mary.zone>, Mohamed Ahmed	
+ <mohamedahmedegypt2001@gmail.com>, James Jones <jajones@nvidia.com>, Danilo
+ Krummrich <dakr@kernel.org>, Maarten Lankhorst
+ <maarten.lankhorst@linux.intel.com>, Maxime Ripard	 <mripard@kernel.org>,
+ Thomas Zimmermann <tzimmermann@suse.de>, David Airlie	 <airlied@gmail.com>,
+ Simona Vetter <simona@ffwll.ch>
+Cc: dri-devel@lists.freedesktop.org, nouveau@lists.freedesktop.org, 
+ linux-kernel@vger.kernel.org, Ben Skeggs <bskeggs@nvidia.com>
+Date: Wed, 12 Nov 2025 12:56:02 -0500
+In-Reply-To: <20251110-nouveau-compv6-v6-0-83b05475f57c@mary.zone>
+References: <20251110-nouveau-compv6-v6-0-83b05475f57c@mary.zone>
 Organization: Red Hat Inc.
 User-Agent: Evolution 3.56.2 (3.56.2-2.fc42)
 MIME-Version: 1.0
 X-Mimecast-Spam-Score: 0
-X-Mimecast-MFC-PROC-ID: CPKX35tFCLB3dUYb3m2gFhLcUsHkuwcJ6WM-qdzMeLg_1762969702
+X-Mimecast-MFC-PROC-ID: WmlkuUI7xgZXJOfm5JkGy-n0h0fTUNLgkPyef9pUqD4_1762970164
 X-Mimecast-Originator: redhat.com
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
@@ -100,47 +107,73 @@ List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-Just noticed that it looks like this patch got missed!
+Enumerating objects: 56, done.
+Counting objects: 100% (56/56), done.
+Delta compression using up to 20 threads
+Compressing objects: 100% (43/43), done.
+Writing objects: 100% (43/43), 6.83 KiB | 2.28 MiB/s, done.
+Total 43 (delta 39), reused 0 (delta 0), pack-reused 0 (from 0)
+remote: Checking connectivity: 43, done.
+To ssh://ssh.gitlab.freedesktop.org/drm/misc/kernel.git
+   86db652fc22f..85ce566b3624  drm-misc-next -> drm-misc-next
+Pushing drm-misc-fixes to for-linux-next-fixes... Everything up-to-date
+Done.
 
-Reviewed-by: Lyude Paul <lyude@redhat.com>
+Thanks!
 
-Will push in a moment
-
-On Fri, 2025-10-10 at 17:39 -0500, Timur Tabi wrote:
-> Add the missing fields of the nvfw_hs_load_header_v2 struct, so that the
-> struct matches the actual contents of the firmware images.
+On Mon, 2025-11-10 at 16:32 +0100, Mary Guillemard wrote:
+> The new VM_BIND interface only supported 4K pages. This was problematic a=
+s
+> it left performance on the table because GPUs don't have sophisticated TL=
+B
+> and page walker hardware.=20
 >=20
-> nvfw_hs_load_header_v2 is a struct that defines a header for some firmwar=
-e
-> images used by Nouveau.  The current structure definition is incomplete;
-> it omits the last two fields because they are unused.
+> Additionally, the HW can only do compression on large (64K) and huge (2M)
+> pages, which is a major performance booster (>50% in some cases).
 >=20
-> To maintain consistency between Nouveau, OpenRM, and Nova, and to
-> make it easier to support possible future images, we should fully define
-> the struct.  Also add a __counted_by tag for the flex array.
+> This patchset sets out to add support for larger page sizes and also
+> enable compression and set the compression tags when userspace binds with
+> the corresponding PTE kinds and alignment. It also increments the nouveau
+> version number which allows userspace to use compression only when the
+> kernel actually supports both features and avoid breaking the system if a
+> newer mesa version is paired with an older kernel version.
 >=20
-> Signed-off-by: Timur Tabi <ttabi@nvidia.com>
+> For the associated userspace MR, please see !36450:
+> https://gitlab.freedesktop.org/mesa/mesa/-/merge_requests/36450
+>=20
+> - v6: Use drm_WARN_ONCE instead of dev_warn_once.
+> - v5: Add reviewed-by tags, use dev_warn_once() instead of WARN_ON().
+> - v4: Fix missing parenthesis in second patch in the series.
+> - v3: Add reviewed-by tags, revert page selection logic to v1 behavior.
+> - v2: Implement review comments, change page selection logic.
+> - v1: Initial implementation.
+>=20
+> Signed-off-by: Mary Guillemard <mary@mary.zone>
 > ---
->  drivers/gpu/drm/nouveau/include/nvfw/hs.h | 4 +++-
->  1 file changed, 3 insertions(+), 1 deletion(-)
+> Ben Skeggs (2):
+>       drm/nouveau/mmu/gp100: Remove unused/broken support for compression
+>       drm/nouveau/mmu/tu102: Add support for compressed kinds
 >=20
-> diff --git a/drivers/gpu/drm/nouveau/include/nvfw/hs.h b/drivers/gpu/drm/=
-nouveau/include/nvfw/hs.h
-> index 8b58b668fc0c..c78ab11ec3ac 100644
-> --- a/drivers/gpu/drm/nouveau/include/nvfw/hs.h
-> +++ b/drivers/gpu/drm/nouveau/include/nvfw/hs.h
-> @@ -52,7 +52,9 @@ struct nvfw_hs_load_header_v2 {
->  =09struct {
->  =09=09u32 offset;
->  =09=09u32 size;
-> -=09} app[];
-> +=09=09u32 data_offset;
-> +=09=09u32 data_size;
-> +=09} app[] __counted_by(num_apps);
->  };
-> =20
->  const struct nvfw_hs_load_header_v2 *nvfw_hs_load_header_v2(struct nvkm_=
-subdev *, const void *);
+> Mary Guillemard (2):
+>       drm/nouveau/uvmm: Prepare for larger pages
+>       drm/nouveau/uvmm: Allow larger pages
+>=20
+> Mohamed Ahmed (1):
+>       drm/nouveau/drm: Bump the driver version to 1.4.1 to report new fea=
+tures
+>=20
+>  drivers/gpu/drm/nouveau/nouveau_drv.h              |   4 +-
+>  drivers/gpu/drm/nouveau/nouveau_uvmm.c             | 102 +++++++++++++++=
+++----
+>  drivers/gpu/drm/nouveau/nouveau_uvmm.h             |   1 +
+>  drivers/gpu/drm/nouveau/nvkm/subdev/mmu/vmmgp100.c |  69 ++++++++------
+>  drivers/gpu/drm/nouveau/nvkm/subdev/mmu/vmmgp10b.c |   4 +-
+>  5 files changed, 131 insertions(+), 49 deletions(-)
+> ---
+> base-commit: a2b0c33e9423cd06133304e2f81c713849059b10
+> change-id: 20251110-nouveau-compv6-c723a93bc33b
+>=20
+> Best regards,
 
 --=20
 Cheers,
