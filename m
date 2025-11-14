@@ -2,76 +2,77 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id 0C2C8C5F767
-	for <lists+nouveau@lfdr.de>; Fri, 14 Nov 2025 23:04:19 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id F0150C5F785
+	for <lists+nouveau@lfdr.de>; Fri, 14 Nov 2025 23:06:29 +0100 (CET)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 5EC4110EB28;
-	Fri, 14 Nov 2025 22:04:16 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id AB6B810EB2A;
+	Fri, 14 Nov 2025 22:06:26 +0000 (UTC)
 Authentication-Results: gabe.freedesktop.org;
-	dkim=pass (1024-bit key; unprotected) header.d=redhat.com header.i=@redhat.com header.b="LH0Bn9VC";
+	dkim=pass (1024-bit key; unprotected) header.d=redhat.com header.i=@redhat.com header.b="O7LacDkz";
 	dkim-atps=neutral
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
 Received: from us-smtp-delivery-124.mimecast.com
  (us-smtp-delivery-124.mimecast.com [170.10.133.124])
- by gabe.freedesktop.org (Postfix) with ESMTPS id A783E10EB28
- for <nouveau@lists.freedesktop.org>; Fri, 14 Nov 2025 22:04:14 +0000 (UTC)
+ by gabe.freedesktop.org (Postfix) with ESMTPS id AD18E10EB2A
+ for <nouveau@lists.freedesktop.org>; Fri, 14 Nov 2025 22:06:24 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1763157853;
+ s=mimecast20190719; t=1763157983;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:content-type:content-type:
  content-transfer-encoding:content-transfer-encoding:
  in-reply-to:in-reply-to:references:references;
- bh=Q1EI0PhM8/HWv59NBQR758dpbGnZnv9kh6Hf3K7GYYU=;
- b=LH0Bn9VC1fuligWg93e6ReFAPXshgs4Wuk1/jMQFY6o2g/72UkaiL2flaQEvkXgbkFpZsQ
- KLDanpcm1+0OG272szRdT+R4hRVqqfWP96TqFvxDa7LmTmmIiIlozbHsLxgPeVebufYsk+
- nNgqgIbgpJhsCTB56TbbMBhvYbMb4Jg=
-Received: from mail-qv1-f71.google.com (mail-qv1-f71.google.com
- [209.85.219.71]) by relay.mimecast.com with ESMTP with STARTTLS
+ bh=X7DA1Pg+DEqjF/j906sT6U3Z4mtZPqy62AJsh2PEoqc=;
+ b=O7LacDkz9l6nLb9n9vpCItZq8c7SkT8RDg9C0xBxP4yLnWGMLDtDbiXozTZ0KiDwE36UmT
+ /3BHZuux8NFQV9MkKXX9DnM2zfLc7smKGGibmYPYqKr5PQymvmj8fdywSJQzBae03Ior2M
+ hXwaXbKvsC7ndXHjisrwqfq4TCEZKpY=
+Received: from mail-qv1-f72.google.com (mail-qv1-f72.google.com
+ [209.85.219.72]) by relay.mimecast.com with ESMTP with STARTTLS
  (version=TLSv1.3, cipher=TLS_AES_256_GCM_SHA384) id
- us-mta-684-K-OpS8XnPl6O51c1XCNTxQ-1; Fri, 14 Nov 2025 17:04:10 -0500
-X-MC-Unique: K-OpS8XnPl6O51c1XCNTxQ-1
-X-Mimecast-MFC-AGG-ID: K-OpS8XnPl6O51c1XCNTxQ_1763157850
-Received: by mail-qv1-f71.google.com with SMTP id
- 6a1803df08f44-8823acf4db3so70452196d6.3
- for <nouveau@lists.freedesktop.org>; Fri, 14 Nov 2025 14:04:10 -0800 (PST)
+ us-mta-84-6AzzLRFSMTGOG0xZd_OyFw-1; Fri, 14 Nov 2025 17:06:20 -0500
+X-MC-Unique: 6AzzLRFSMTGOG0xZd_OyFw-1
+X-Mimecast-MFC-AGG-ID: 6AzzLRFSMTGOG0xZd_OyFw_1763157980
+Received: by mail-qv1-f72.google.com with SMTP id
+ 6a1803df08f44-882381f2092so113987936d6.1
+ for <nouveau@lists.freedesktop.org>; Fri, 14 Nov 2025 14:06:20 -0800 (PST)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1763157850; x=1763762650;
+ d=1e100.net; s=20230601; t=1763157980; x=1763762780;
  h=mime-version:user-agent:content-transfer-encoding:organization
  :references:in-reply-to:date:cc:to:from:subject:message-id:x-gm-gg
  :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=Q1EI0PhM8/HWv59NBQR758dpbGnZnv9kh6Hf3K7GYYU=;
- b=s9ecgacezj7Ci2BhAsWWL7Q73BfZLx4oEpCAmkKJ2MuuwH1nNqmaH2PH2XhlEMwCzI
- BM82ZcjtWWwWMzgG1BcUHVKmnpBo+/zyeoH43QJohdiUPYKu3gRlYUKpunseEg5Df7ua
- 3u/3XMrCENfOQQDXjbAZmsVPKyvM08/ujpGIt6Oc/HlwKPlfY7A3gcjvchheZsjJGiVB
- evcDk2tN/g632LF4I5j0q64gfm8dQvp1PX8VuT48y8lkIA84DxI0WyJt9fa2yF+GqkHR
- k4EX6Bbcv8t6aeNK9pRoLLGNdXe+G84X51yPPlbKltQCgLraRdLIDt7qxh9no7eIoBis
- nswQ==
+ bh=X7DA1Pg+DEqjF/j906sT6U3Z4mtZPqy62AJsh2PEoqc=;
+ b=YFqDDKcVko5lq1yT2lnwD2/H3/8ul0agLbH/tm0BswU+EV0Xd4gw+lzeWLRGO2wKvt
+ 09y4jxBReJivy+OziYhF+DNU6Z/mL0R0KJSDgmqhwYXBdVjSHpSS5Uzckdmm9klMsW/0
+ AeOHy7ZYkJ9WIzEaMyNkV8pNEvl8vb90yFnNUrVVmLLvYZZiQhwoGOJ9GHDa1h4MiiPx
+ AjGZk5ZzFdKlbk1kuOuQd8bq2GjPcK+qLIOdkyolB7OD7n768qBg/HQ2QSxqV4fwqYFl
+ yyQRtUt/88q5pmRR2AWPCtAldskC4s1b5DNXtasbarlMVmvUOXYK4wLUhgfayU8jR13k
+ vfDg==
 X-Forwarded-Encrypted: i=1;
- AJvYcCVjRclhfrbophdWLbr8XE2V9aR7XWHJ4E87yNuXxo12Hj6ozQwU/8rYTSFSvo25He+ohCUjNir/@lists.freedesktop.org
-X-Gm-Message-State: AOJu0YytIaD3fC16cu0qbgHQby3MTGxNw68CJaLBosQR6GPPx8vdg0CX
- SLVnBiRWgZgnK6ADAJiiRacmoCshxy1hJnV/FpYzs3r/sDgFlnJ4i4H1Ov+Y7zkd7NfnrBCLOKC
- 9iyCTtuSz0hVKgKLq/jsGzecVC4diirfU54gCBS2Z7bMv0PqP6DZ54wBBGhlFPKViu+I=
-X-Gm-Gg: ASbGnct849648RGotNtwbuPlBNduDwNyTnDyKxZKDJdSVIET+uD9P0DqxzFDZWCWiqA
- nDNzgOUyLGMRrUgS27DSq7NeguHPapZQefcG2UWq4n4n9r5w85He/Tci7mz9b3TSnZGK7fzzCuY
- prAL0GPIiALC69bD6tFpsY4hcHvjZTtgf0DXprx5Lw1zdoCWifQ6aIRzSnj2Ii2Q7P7eydYhSZf
- yYrAq9elCUXqKopB6kWFk0ykG9yC1FgNEMbxq6xFuW0YF5whhlYXq86kBiAEadhuJofepGmGEKD
- 2/Cvd9yM4Ibmx21jOSiht8dX++M7Nms0Tq45O7q1xK47NZ3c/dX8equeay9rT5oYqrn+KrdovtL
- 5GTVGbDj9OlCpWRQpR2jSDfqByahIqzHY2QFVbHetSDjH
-X-Received: by 2002:a05:6214:cab:b0:880:5001:17d3 with SMTP id
- 6a1803df08f44-88292646ed9mr70139496d6.40.1763157849983; 
- Fri, 14 Nov 2025 14:04:09 -0800 (PST)
-X-Google-Smtp-Source: AGHT+IHA/W8cYUDpMFVjf/nVhU4XkqfQMw+hSio9zPnaOKVy9mhtlwSYUVFiFFIEr7u093YTXa+uYA==
-X-Received: by 2002:a05:6214:cab:b0:880:5001:17d3 with SMTP id
- 6a1803df08f44-88292646ed9mr70138626d6.40.1763157849369; 
- Fri, 14 Nov 2025 14:04:09 -0800 (PST)
+ AJvYcCXQ4L1nTVHr8w/xoChjLJthMyMNW+UBgK4emyYtj9md9T1DumRTHyFRJcKAg08ylQa2oOLLV3d/@lists.freedesktop.org
+X-Gm-Message-State: AOJu0YxlvuQmm6gErlrRTr30wTUUR0kFGKVTUYWzECqfCboGka/ftjAm
+ eKq7x8x8eU/hDN8ffO8+7H5lJZJdStLrQVhRLgM7WIWBNIenA51h0CvbtVdnG9QJRjnIt0wg8jV
+ NoMkZaE8Fhb3ASKMrTbteIglwu5qr5tFjsXJAkH/cZgFCRKPRltFR2C2fG4r5jZjwZos=
+X-Gm-Gg: ASbGnct6VYnWg6O+CgkA+dHEOvOoKisf287/SqQONEJFJJ/ajPgLg98J/FnL3S7u7hs
+ iNK0ENtczymm/njUCdKY3o5uD8T4UYARhO0+bdWbAU4J1Bf7/Jps9mpltolLtWvV2JIidR/D2RW
+ WM+KuUL/Sbur1O99gvBvhudbCEoCe2VUxW5fJWcZgqvGJR3nY59uRNKBAQZO1zXbvBV2aEs9a/t
+ esbHZ6qMQ3xrukn670CaR1dFdr0vdkI6PkTuYBDnXbEau/AQ20agzgewPbQxY/HDGfwd5TXgKWl
+ uDbG+2Yp4ArmqDbENaNfld0v5VGRyxEZrGH7B67kf6j9cUcHEPoOIr0v2xe+mA54rX7w5bpM/N4
+ gv5jlSKJ1v0WLe8Ea3Q1EEOb7yjRMPiNTaQFFT0y5MpWM
+X-Received: by 2002:ad4:4ea5:0:b0:882:4632:cf7e with SMTP id
+ 6a1803df08f44-882925bdb7amr65250136d6.12.1763157979659; 
+ Fri, 14 Nov 2025 14:06:19 -0800 (PST)
+X-Google-Smtp-Source: AGHT+IGWzAPVXV2rm1Kym+xtSpF8YbGKJzsOH0nqpNrGKbnh1a6y/aT9RrVipt20igeRzUaGKoqUvQ==
+X-Received: by 2002:ad4:4ea5:0:b0:882:4632:cf7e with SMTP id
+ 6a1803df08f44-882925bdb7amr65249566d6.12.1763157979186; 
+ Fri, 14 Nov 2025 14:06:19 -0800 (PST)
 Received: from [192.168.8.208] (pool-72-93-97-194.bstnma.fios.verizon.net.
  [72.93.97.194]) by smtp.gmail.com with ESMTPSA id
- 6a1803df08f44-8828656ba3dsm39273116d6.45.2025.11.14.14.04.08
+ 6a1803df08f44-8828656ba3dsm39308836d6.45.2025.11.14.14.06.17
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 14 Nov 2025 14:04:08 -0800 (PST)
-Message-ID: <85e360f569c3dadefdc07b631d14d18e749bd89c.camel@redhat.com>
-Subject: Re: [PATCH v5 07/13] gpu: nova-core: Implement the GSP sequencer
+ Fri, 14 Nov 2025 14:06:18 -0800 (PST)
+Message-ID: <87f890dc40f8c2b569194da0c0386ff8933de918.camel@redhat.com>
+Subject: Re: [PATCH v5 13/13] gpu: nova-core: gsp: Retrieve GSP static info
+ to gather GPU information
 From: Lyude Paul <lyude@redhat.com>
 To: Joel Fernandes <joelagnelf@nvidia.com>, linux-kernel@vger.kernel.org, 
  rust-for-linux@vger.kernel.org, dri-devel@lists.freedesktop.org, Danilo
@@ -87,16 +88,15 @@ Cc: Alistair Popple <apopple@nvidia.com>, Miguel Ojeda <ojeda@kernel.org>,
  <jhubbard@nvidia.com>,  Timur Tabi <ttabi@nvidia.com>,
  joel@joelfernandes.org, Daniel Almeida <daniel.almeida@collabora.com>, 
  nouveau@lists.freedesktop.org
-Date: Fri, 14 Nov 2025 17:04:07 -0500
-In-Reply-To: <62432fb574396993edd9e277255d59b3f599403f.camel@redhat.com>
+Date: Fri, 14 Nov 2025 17:06:17 -0500
+In-Reply-To: <20251114195552.739371-14-joelagnelf@nvidia.com>
 References: <20251114195552.739371-1-joelagnelf@nvidia.com>
- <20251114195552.739371-8-joelagnelf@nvidia.com>
- <62432fb574396993edd9e277255d59b3f599403f.camel@redhat.com>
+ <20251114195552.739371-14-joelagnelf@nvidia.com>
 Organization: Red Hat Inc.
 User-Agent: Evolution 3.56.2 (3.56.2-2.fc42)
 MIME-Version: 1.0
 X-Mimecast-Spam-Score: 0
-X-Mimecast-MFC-PROC-ID: bsYUteVT0mOVsn2AdeOK-81RLHp9rTgPutHk5DwyZ8g_1763157850
+X-Mimecast-MFC-PROC-ID: hYfjMEzvPTOjBK1SIFMO1VGEz3JYF07-7zRILAuwA4g_1763157980
 X-Mimecast-Originator: redhat.com
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
@@ -114,384 +114,411 @@ List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-On Fri, 2025-11-14 at 16:41 -0500, Lyude Paul wrote:
-> I've got one minor change I'd like to see  down below, at least if you th=
-ink
-> it makes sense. But otherwise:
+Reviewed-by: Lyude Paul <lyude@redhat.com>
 
-Ignore the minor change - I noticed I missed an earlier response from you
-around the todo!() bits, so it's no big deal to me either way.
-
+On Fri, 2025-11-14 at 14:55 -0500, Joel Fernandes wrote:
+> From: Alistair Popple <apopple@nvidia.com>
 >=20
-> Reviewed-by: Lyude Paul <lyude@redhat.com>
+> After GSP initialization is complete, retrieve the static configuration
+> information from GSP-RM. This information includes GPU name, capabilities=
+,
+> memory configuration, and other properties. On some GPU variants, it is
+> also required to do this for initialization to complete.
 >=20
-> On Fri, 2025-11-14 at 14:55 -0500, Joel Fernandes wrote:
-> > Implement the GSP sequencer which culminates in INIT_DONE message being
-> > received from the GSP indicating that the GSP has successfully booted.
-> >=20
-> > This is just initial sequencer support, the actual commands will be
-> > added in the next patches.
-> >=20
-> > Signed-off-by: Joel Fernandes <joelagnelf@nvidia.com>
-> > ---
-> >  drivers/gpu/nova-core/gsp.rs           |   1 +
-> >  drivers/gpu/nova-core/gsp/boot.rs      |  15 ++
-> >  drivers/gpu/nova-core/gsp/cmdq.rs      |   1 -
-> >  drivers/gpu/nova-core/gsp/fw.rs        |   1 -
-> >  drivers/gpu/nova-core/gsp/sequencer.rs | 231 +++++++++++++++++++++++++
-> >  drivers/gpu/nova-core/sbuffer.rs       |   1 -
-> >  6 files changed, 247 insertions(+), 3 deletions(-)
-> >  create mode 100644 drivers/gpu/nova-core/gsp/sequencer.rs
-> >=20
-> > diff --git a/drivers/gpu/nova-core/gsp.rs b/drivers/gpu/nova-core/gsp.r=
+> Signed-off-by: Alistair Popple <apopple@nvidia.com>
+> Co-developed-by: Joel Fernandes <joelagnelf@nvidia.com>
+> Signed-off-by: Joel Fernandes <joelagnelf@nvidia.com>
+> ---
+>  drivers/gpu/nova-core/gsp/boot.rs             |   7 +
+>  drivers/gpu/nova-core/gsp/commands.rs         |  65 +++++++
+>  drivers/gpu/nova-core/gsp/fw.rs               |   5 +
+>  .../gpu/nova-core/gsp/fw/r570_144/bindings.rs | 163 ++++++++++++++++++
+>  drivers/gpu/nova-core/nova_core.rs            |   1 +
+>  drivers/gpu/nova-core/util.rs                 |  16 ++
+>  6 files changed, 257 insertions(+)
+>  create mode 100644 drivers/gpu/nova-core/util.rs
+>=20
+> diff --git a/drivers/gpu/nova-core/gsp/boot.rs b/drivers/gpu/nova-core/gs=
+p/boot.rs
+> index c0afafbf35f6..42a3abb9243d 100644
+> --- a/drivers/gpu/nova-core/gsp/boot.rs
+> +++ b/drivers/gpu/nova-core/gsp/boot.rs
+> @@ -40,6 +40,7 @@
+>          GspFwWprMeta, //
+>      },
+>      regs,
+> +    util, //
+>      vbios::Vbios,
+>  };
+> =20
+> @@ -237,6 +238,12 @@ pub(crate) fn boot(
+>          GspSequencer::run(&mut self.cmdq, seq_params, Delta::from_secs(1=
+0))?;
+> =20
+>          commands::gsp_init_done(&mut self.cmdq, Delta::from_secs(10))?;
+> +        let info =3D commands::get_gsp_info(&mut self.cmdq, bar)?;
+> +        dev_info!(
+> +            pdev.as_ref(),
+> +            "GPU name: {}\n",
+> +            util::str_from_null_terminated(&info.gpu_name)
+> +        );
+> =20
+>          Ok(())
+>      }
+> diff --git a/drivers/gpu/nova-core/gsp/commands.rs b/drivers/gpu/nova-cor=
+e/gsp/commands.rs
+> index 07abfb54f9d7..6cb32e7d3436 100644
+> --- a/drivers/gpu/nova-core/gsp/commands.rs
+> +++ b/drivers/gpu/nova-core/gsp/commands.rs
+> @@ -17,6 +17,7 @@
+>  };
+> =20
+>  use crate::{
+> +    driver::Bar0,
+>      gsp::{
+>          cmdq::{
+>              Cmdq,
+> @@ -25,12 +26,25 @@
+>          },
+>          fw::{
+>              commands::*,
+> +            GspStaticConfigInfo_t,
+>              MsgFunction, //
+>          },
+>      },
+>      sbuffer::SBufferIter,
+> +    util,
+>  };
+> =20
+> +// SAFETY: Padding is explicit and will not contain uninitialized data.
+> +unsafe impl AsBytes for GspStaticConfigInfo_t {}
+> +
+> +// SAFETY: This struct only contains integer types for which all bit pat=
+terns
+> +// are valid.
+> +unsafe impl FromBytes for GspStaticConfigInfo_t {}
+> +
+> +pub(crate) struct GspStaticConfigInfo {
+> +    pub gpu_name: [u8; 40],
+> +}
+> +
+>  /// Message type for GSP initialization done notification.
+>  struct GspInitDone {}
+> =20
+> @@ -62,6 +76,57 @@ pub(crate) fn gsp_init_done(cmdq: &mut Cmdq, timeout: =
+Delta) -> Result {
+>      }
+>  }
+> =20
+> +impl MessageFromGsp for GspStaticConfigInfo {
+> +    const FUNCTION: MsgFunction =3D MsgFunction::GetGspStaticInfo;
+> +    type InitError =3D Infallible;
+> +    type Message =3D GspStaticConfigInfo_t;
+> +
+> +    fn read(
+> +        msg: &Self::Message,
+> +        _sbuffer: &mut SBufferIter<array::IntoIter<&[u8], 2>>,
+> +    ) -> Result<Self, Self::InitError> {
+> +        let gpu_name_str =3D util::str_from_null_terminated(&msg.gpuName=
+String);
+> +
+> +        let mut gpu_name =3D [0u8; 40];
+> +        let bytes =3D gpu_name_str.as_bytes();
+> +        let copy_len =3D core::cmp::min(bytes.len(), gpu_name.len());
+> +        gpu_name[..copy_len].copy_from_slice(&bytes[..copy_len]);
+> +        gpu_name[copy_len] =3D b'\0';
+> +
+> +        Ok(GspStaticConfigInfo { gpu_name })
+> +    }
+> +}
+> +
+> +// SAFETY: This struct only contains integer types and fixed-size arrays=
+ for which
+> +// all bit patterns are valid.
+> +unsafe impl Zeroable for GspStaticConfigInfo_t {}
+> +
+> +struct GetGspInfo;
+> +
+> +impl CommandToGsp for GetGspInfo {
+> +    const FUNCTION: MsgFunction =3D MsgFunction::GetGspStaticInfo;
+> +    type Command =3D GspStaticConfigInfo_t;
+> +    type InitError =3D Infallible;
+> +
+> +    fn init(&self) -> impl Init<Self::Command, Self::InitError> {
+> +        init!(GspStaticConfigInfo_t {
+> +            ..Zeroable::init_zeroed()
+> +        })
+> +    }
+> +}
+> +
+> +pub(crate) fn get_gsp_info(cmdq: &mut Cmdq, bar: &Bar0) -> Result<GspSta=
+ticConfigInfo> {
+> +    cmdq.send_command(bar, GetGspInfo)?;
+> +
+> +    loop {
+> +        match cmdq.receive_msg::<GspStaticConfigInfo>(Delta::from_secs(5=
+)) {
+> +            Ok(info) =3D> return Ok(info),
+> +            Err(ERANGE) =3D> continue,
+> +            Err(e) =3D> return Err(e),
+> +        }
+> +    }
+> +}
+> +
+>  /// The `GspSetSystemInfo` command.
+>  pub(crate) struct SetSystemInfo<'a> {
+>      pdev: &'a pci::Device<device::Bound>,
+> diff --git a/drivers/gpu/nova-core/gsp/fw.rs b/drivers/gpu/nova-core/gsp/=
+fw.rs
+> index 0cce54310c35..5b6a906ff5dc 100644
+> --- a/drivers/gpu/nova-core/gsp/fw.rs
+> +++ b/drivers/gpu/nova-core/gsp/fw.rs
+> @@ -882,6 +882,11 @@ pub(crate) fn element_count(&self) -> u32 {
+>      }
+>  }
+> =20
+> +pub(crate) use r570_144::{
+> +    // GSP static configuration information.
+> +    GspStaticConfigInfo_t, //
+> +};
+> +
+>  // SAFETY: Padding is explicit and will not contain uninitialized data.
+>  unsafe impl AsBytes for GspMsgElement {}
+> =20
+> diff --git a/drivers/gpu/nova-core/gsp/fw/r570_144/bindings.rs b/drivers/=
+gpu/nova-core/gsp/fw/r570_144/bindings.rs
+> index c5c589c1e2ac..f081ac1708e6 100644
+> --- a/drivers/gpu/nova-core/gsp/fw/r570_144/bindings.rs
+> +++ b/drivers/gpu/nova-core/gsp/fw/r570_144/bindings.rs
+> @@ -320,6 +320,77 @@ fn fmt(&self, fmt: &mut ::core::fmt::Formatter<'_>) =
+-> ::core::fmt::Result {
+>  pub const NV_VGPU_MSG_EVENT_NUM_EVENTS: _bindgen_ty_3 =3D 4131;
+>  pub type _bindgen_ty_3 =3D ffi::c_uint;
+>  #[repr(C)]
+> +#[derive(Debug, Default, Copy, Clone)]
+> +pub struct NV0080_CTRL_GPU_GET_SRIOV_CAPS_PARAMS {
+> +    pub totalVFs: u32_,
+> +    pub firstVfOffset: u32_,
+> +    pub vfFeatureMask: u32_,
+> +    pub FirstVFBar0Address: u64_,
+> +    pub FirstVFBar1Address: u64_,
+> +    pub FirstVFBar2Address: u64_,
+> +    pub bar0Size: u64_,
+> +    pub bar1Size: u64_,
+> +    pub bar2Size: u64_,
+> +    pub b64bitBar0: u8_,
+> +    pub b64bitBar1: u8_,
+> +    pub b64bitBar2: u8_,
+> +    pub bSriovEnabled: u8_,
+> +    pub bSriovHeavyEnabled: u8_,
+> +    pub bEmulateVFBar0TlbInvalidationRegister: u8_,
+> +    pub bClientRmAllocatedCtxBuffer: u8_,
+> +    pub bNonPowerOf2ChannelCountSupported: u8_,
+> +    pub bVfResizableBAR1Supported: u8_,
+> +}
+> +#[repr(C)]
+> +#[derive(Debug, Default, Copy, Clone)]
+> +pub struct NV2080_CTRL_BIOS_GET_SKU_INFO_PARAMS {
+> +    pub BoardID: u32_,
+> +    pub chipSKU: [ffi::c_char; 9usize],
+> +    pub chipSKUMod: [ffi::c_char; 5usize],
+> +    pub skuConfigVersion: u32_,
+> +    pub project: [ffi::c_char; 5usize],
+> +    pub projectSKU: [ffi::c_char; 5usize],
+> +    pub CDP: [ffi::c_char; 6usize],
+> +    pub projectSKUMod: [ffi::c_char; 2usize],
+> +    pub businessCycle: u32_,
+> +}
+> +pub type NV2080_CTRL_CMD_FB_GET_FB_REGION_SURFACE_MEM_TYPE_FLAG =3D [u8_=
+; 17usize];
+> +#[repr(C)]
+> +#[derive(Debug, Default, Copy, Clone)]
+> +pub struct NV2080_CTRL_CMD_FB_GET_FB_REGION_FB_REGION_INFO {
+> +    pub base: u64_,
+> +    pub limit: u64_,
+> +    pub reserved: u64_,
+> +    pub performance: u32_,
+> +    pub supportCompressed: u8_,
+> +    pub supportISO: u8_,
+> +    pub bProtected: u8_,
+> +    pub blackList: NV2080_CTRL_CMD_FB_GET_FB_REGION_SURFACE_MEM_TYPE_FLA=
+G,
+> +}
+> +#[repr(C)]
+> +#[derive(Debug, Default, Copy, Clone)]
+> +pub struct NV2080_CTRL_CMD_FB_GET_FB_REGION_INFO_PARAMS {
+> +    pub numFBRegions: u32_,
+> +    pub fbRegion: [NV2080_CTRL_CMD_FB_GET_FB_REGION_FB_REGION_INFO; 16us=
+ize],
+> +}
+> +#[repr(C)]
+> +#[derive(Debug, Copy, Clone)]
+> +pub struct NV2080_CTRL_GPU_GET_GID_INFO_PARAMS {
+> +    pub index: u32_,
+> +    pub flags: u32_,
+> +    pub length: u32_,
+> +    pub data: [u8_; 256usize],
+> +}
+> +impl Default for NV2080_CTRL_GPU_GET_GID_INFO_PARAMS {
+> +    fn default() -> Self {
+> +        let mut s =3D ::core::mem::MaybeUninit::<Self>::uninit();
+> +        unsafe {
+> +            ::core::ptr::write_bytes(s.as_mut_ptr(), 0, 1);
+> +            s.assume_init()
+> +        }
+> +    }
+> +}
+> +#[repr(C)]
+>  #[derive(Debug, Default, Copy, Clone, Zeroable)]
+>  pub struct DOD_METHOD_DATA {
+>      pub status: u32_,
+> @@ -367,6 +438,19 @@ pub struct ACPI_METHOD_DATA {
+>      pub capsMethodData: CAPS_METHOD_DATA,
+>  }
+>  #[repr(C)]
+> +#[derive(Debug, Default, Copy, Clone)]
+> +pub struct VIRTUAL_DISPLAY_GET_MAX_RESOLUTION_PARAMS {
+> +    pub headIndex: u32_,
+> +    pub maxHResolution: u32_,
+> +    pub maxVResolution: u32_,
+> +}
+> +#[repr(C)]
+> +#[derive(Debug, Default, Copy, Clone)]
+> +pub struct VIRTUAL_DISPLAY_GET_NUM_HEADS_PARAMS {
+> +    pub numHeads: u32_,
+> +    pub maxNumHeads: u32_,
+> +}
+> +#[repr(C)]
+>  #[derive(Debug, Default, Copy, Clone, Zeroable)]
+>  pub struct BUSINFO {
+>      pub deviceID: u16_,
+> @@ -395,6 +479,85 @@ pub struct GSP_PCIE_CONFIG_REG {
+>      pub linkCap: u32_,
+>  }
+>  #[repr(C)]
+> +#[derive(Debug, Default, Copy, Clone)]
+> +pub struct EcidManufacturingInfo {
+> +    pub ecidLow: u32_,
+> +    pub ecidHigh: u32_,
+> +    pub ecidExtended: u32_,
+> +}
+> +#[repr(C)]
+> +#[derive(Debug, Default, Copy, Clone)]
+> +pub struct FW_WPR_LAYOUT_OFFSET {
+> +    pub nonWprHeapOffset: u64_,
+> +    pub frtsOffset: u64_,
+> +}
+> +#[repr(C)]
+> +#[derive(Debug, Copy, Clone)]
+> +pub struct GspStaticConfigInfo_t {
+> +    pub grCapsBits: [u8_; 23usize],
+> +    pub gidInfo: NV2080_CTRL_GPU_GET_GID_INFO_PARAMS,
+> +    pub SKUInfo: NV2080_CTRL_BIOS_GET_SKU_INFO_PARAMS,
+> +    pub fbRegionInfoParams: NV2080_CTRL_CMD_FB_GET_FB_REGION_INFO_PARAMS=
+,
+> +    pub sriovCaps: NV0080_CTRL_GPU_GET_SRIOV_CAPS_PARAMS,
+> +    pub sriovMaxGfid: u32_,
+> +    pub engineCaps: [u32_; 3usize],
+> +    pub poisonFuseEnabled: u8_,
+> +    pub fb_length: u64_,
+> +    pub fbio_mask: u64_,
+> +    pub fb_bus_width: u32_,
+> +    pub fb_ram_type: u32_,
+> +    pub fbp_mask: u64_,
+> +    pub l2_cache_size: u32_,
+> +    pub gpuNameString: [u8_; 64usize],
+> +    pub gpuShortNameString: [u8_; 64usize],
+> +    pub gpuNameString_Unicode: [u16_; 64usize],
+> +    pub bGpuInternalSku: u8_,
+> +    pub bIsQuadroGeneric: u8_,
+> +    pub bIsQuadroAd: u8_,
+> +    pub bIsNvidiaNvs: u8_,
+> +    pub bIsVgx: u8_,
+> +    pub bGeforceSmb: u8_,
+> +    pub bIsTitan: u8_,
+> +    pub bIsTesla: u8_,
+> +    pub bIsMobile: u8_,
+> +    pub bIsGc6Rtd3Allowed: u8_,
+> +    pub bIsGc8Rtd3Allowed: u8_,
+> +    pub bIsGcOffRtd3Allowed: u8_,
+> +    pub bIsGcoffLegacyAllowed: u8_,
+> +    pub bIsMigSupported: u8_,
+> +    pub RTD3GC6TotalBoardPower: u16_,
+> +    pub RTD3GC6PerstDelay: u16_,
+> +    pub bar1PdeBase: u64_,
+> +    pub bar2PdeBase: u64_,
+> +    pub bVbiosValid: u8_,
+> +    pub vbiosSubVendor: u32_,
+> +    pub vbiosSubDevice: u32_,
+> +    pub bPageRetirementSupported: u8_,
+> +    pub bSplitVasBetweenServerClientRm: u8_,
+> +    pub bClRootportNeedsNosnoopWAR: u8_,
+> +    pub displaylessMaxHeads: VIRTUAL_DISPLAY_GET_NUM_HEADS_PARAMS,
+> +    pub displaylessMaxResolution: VIRTUAL_DISPLAY_GET_MAX_RESOLUTION_PAR=
+AMS,
+> +    pub displaylessMaxPixels: u64_,
+> +    pub hInternalClient: u32_,
+> +    pub hInternalDevice: u32_,
+> +    pub hInternalSubdevice: u32_,
+> +    pub bSelfHostedMode: u8_,
+> +    pub bAtsSupported: u8_,
+> +    pub bIsGpuUefi: u8_,
+> +    pub bIsEfiInit: u8_,
+> +    pub ecidInfo: [EcidManufacturingInfo; 2usize],
+> +    pub fwWprLayoutOffset: FW_WPR_LAYOUT_OFFSET,
+> +}
+> +impl Default for GspStaticConfigInfo_t {
+> +    fn default() -> Self {
+> +        let mut s =3D ::core::mem::MaybeUninit::<Self>::uninit();
+> +        unsafe {
+> +            ::core::ptr::write_bytes(s.as_mut_ptr(), 0, 1);
+> +            s.assume_init()
+> +        }
+> +    }
+> +}
+> +#[repr(C)]
+>  #[derive(Debug, Default, Copy, Clone, Zeroable)]
+>  pub struct GspSystemInfo {
+>      pub gpuPhysAddr: u64_,
+> diff --git a/drivers/gpu/nova-core/nova_core.rs b/drivers/gpu/nova-core/n=
+ova_core.rs
+> index c1121e7c64c5..b98a1c03f13d 100644
+> --- a/drivers/gpu/nova-core/nova_core.rs
+> +++ b/drivers/gpu/nova-core/nova_core.rs
+> @@ -16,6 +16,7 @@
+>  mod num;
+>  mod regs;
+>  mod sbuffer;
+> +mod util;
+>  mod vbios;
+> =20
+>  pub(crate) const MODULE_NAME: &kernel::str::CStr =3D <LocalModule as ker=
+nel::ModuleMetadata>::NAME;
+> diff --git a/drivers/gpu/nova-core/util.rs b/drivers/gpu/nova-core/util.r=
 s
-> > index e40354c47608..fb6f74797178 100644
-> > --- a/drivers/gpu/nova-core/gsp.rs
-> > +++ b/drivers/gpu/nova-core/gsp.rs
-> > @@ -17,6 +17,7 @@
-> >  pub(crate) mod cmdq;
-> >  pub(crate) mod commands;
-> >  mod fw;
-> > +mod sequencer;
-> > =20
-> >  pub(crate) use fw::{
-> >      GspFwWprMeta,
-> > diff --git a/drivers/gpu/nova-core/gsp/boot.rs b/drivers/gpu/nova-core/=
-gsp/boot.rs
-> > index eb0ee4f66f0c..e9be10374c51 100644
-> > --- a/drivers/gpu/nova-core/gsp/boot.rs
-> > +++ b/drivers/gpu/nova-core/gsp/boot.rs
-> > @@ -33,6 +33,10 @@
-> >      gpu::Chipset,
-> >      gsp::{
-> >          commands,
-> > +        sequencer::{
-> > +            GspSequencer,
-> > +            GspSequencerParams, //
-> > +        },
-> >          GspFwWprMeta, //
-> >      },
-> >      regs,
-> > @@ -221,6 +225,17 @@ pub(crate) fn boot(
-> >              gsp_falcon.is_riscv_active(bar),
-> >          );
-> > =20
-> > +        // Create and run the GSP sequencer.
-> > +        let seq_params =3D GspSequencerParams {
-> > +            bootloader_app_version: gsp_fw.bootloader.app_version,
-> > +            libos_dma_handle: libos_handle,
-> > +            gsp_falcon,
-> > +            sec2_falcon,
-> > +            dev: pdev.as_ref().into(),
-> > +            bar,
-> > +        };
-> > +        GspSequencer::run(&mut self.cmdq, seq_params, Delta::from_secs=
-(10))?;
-> > +
-> >          Ok(())
-> >      }
-> >  }
-> > diff --git a/drivers/gpu/nova-core/gsp/cmdq.rs b/drivers/gpu/nova-core/=
-gsp/cmdq.rs
-> > index c0f3218f2980..6f946d14868a 100644
-> > --- a/drivers/gpu/nova-core/gsp/cmdq.rs
-> > +++ b/drivers/gpu/nova-core/gsp/cmdq.rs
-> > @@ -645,7 +645,6 @@ fn wait_for_msg(&self, timeout: Delta) -> Result<Gs=
-pMessage<'_>> {
-> >      /// - `EIO` if there was some inconsistency (e.g. message shorter =
-than advertised) on the
-> >      ///   message queue.
-> >      /// - `EINVAL` if the function of the message was unrecognized.
-> > -    #[expect(unused)]
-> >      pub(crate) fn receive_msg<M: MessageFromGsp>(&mut self, timeout: D=
-elta) -> Result<M>
-> >      where
-> >          // This allows all error types, including `Infallible`, to be =
-used for `M::InitError`.
-> > diff --git a/drivers/gpu/nova-core/gsp/fw.rs b/drivers/gpu/nova-core/gs=
-p/fw.rs
-> > index 69c5996742f3..6d58042bc9e8 100644
-> > --- a/drivers/gpu/nova-core/gsp/fw.rs
-> > +++ b/drivers/gpu/nova-core/gsp/fw.rs
-> > @@ -621,7 +621,6 @@ unsafe impl AsBytes for SequencerBufferCmd {}
-> >  #[repr(transparent)]
-> >  pub(crate) struct RunCpuSequencer(r570_144::rpc_run_cpu_sequencer_v17_=
-00);
-> > =20
-> > -#[expect(unused)]
-> >  impl RunCpuSequencer {
-> >      /// Returns the command index.
-> >      pub(crate) fn cmd_index(&self) -> u32 {
-> > diff --git a/drivers/gpu/nova-core/gsp/sequencer.rs b/drivers/gpu/nova-=
-core/gsp/sequencer.rs
-> > new file mode 100644
-> > index 000000000000..c5ef3a33466a
-> > --- /dev/null
-> > +++ b/drivers/gpu/nova-core/gsp/sequencer.rs
-> > @@ -0,0 +1,231 @@
-> > +// SPDX-License-Identifier: GPL-2.0
-> > +
-> > +//! GSP Sequencer implementation for Pre-hopper GSP boot sequence.
-> > +
-> > +use core::{
-> > +    array,
-> > +    mem::size_of, //
-> > +};
-> > +use kernel::device;
-> > +use kernel::prelude::*;
-> > +use kernel::time::Delta;
-> > +use kernel::transmute::FromBytes;
-> > +use kernel::types::ARef;
-> > +
-> > +use crate::driver::Bar0;
-> > +use crate::falcon::{
-> > +    gsp::Gsp,
-> > +    sec2::Sec2,
-> > +    Falcon, //
-> > +};
-> > +use crate::gsp::{
-> > +    cmdq::{
-> > +        Cmdq,
-> > +        MessageFromGsp, //
-> > +    },
-> > +    fw,
-> > +};
-> > +use crate::sbuffer::SBufferIter;
-> > +
-> > +impl MessageFromGsp for GspSequencerInfo {
-> > +    const FUNCTION: fw::MsgFunction =3D fw::MsgFunction::GspRunCpuSequ=
-encer;
-> > +    type InitError =3D Error;
-> > +    type Message =3D fw::RunCpuSequencer;
-> > +
-> > +    fn read(
-> > +        msg: &Self::Message,
-> > +        sbuffer: &mut SBufferIter<array::IntoIter<&[u8], 2>>,
-> > +    ) -> Result<Self, Self::InitError> {
-> > +        let cmd_data =3D sbuffer.flush_into_kvec(GFP_KERNEL)?;
-> > +        Ok(GspSequencerInfo {
-> > +            cmd_index: msg.cmd_index(),
-> > +            cmd_data,
-> > +        })
-> > +    }
-> > +}
-> > +
-> > +const CMD_SIZE: usize =3D size_of::<fw::SequencerBufferCmd>();
-> > +
-> > +/// GSP Sequencer information containing the command sequence and data=
-.
-> > +struct GspSequencerInfo {
-> > +    /// Current command index for error reporting.
-> > +    cmd_index: u32,
-> > +    /// Command data buffer containing the sequence of commands.
-> > +    cmd_data: KVec<u8>,
-> > +}
-> > +
-> > +/// GSP Sequencer Command types with payload data.
-> > +/// Commands have an opcode and an opcode-dependent struct.
-> > +#[allow(dead_code)]
-> > +pub(crate) enum GspSeqCmd {}
-> > +
-> > +impl GspSeqCmd {
-> > +    /// Creates a new `GspSeqCmd` from raw data returning the command =
-and its size in bytes.
-> > +    pub(crate) fn new(data: &[u8], _dev: &device::Device) -> Result<(S=
-elf, usize)> {
-> > +        let _fw_cmd =3D fw::SequencerBufferCmd::from_bytes(data).ok_or=
-(EINVAL)?;
-> > +        let _opcode_size =3D core::mem::size_of::<u32>();
-> > +
-> > +        // NOTE: At this commit, NO opcodes exist yet, so just return =
-error.
-> > +        // Later commits will add match arms here.
-> > +        Err(EINVAL)
->=20
-> Maybe just use todo!() here?
->=20
-> > +    }
-> > +}
-> > +
-> > +/// GSP Sequencer for executing firmware commands during boot.
-> > +#[expect(dead_code)]
-> > +pub(crate) struct GspSequencer<'a> {
-> > +    /// Sequencer information with command data.
-> > +    seq_info: GspSequencerInfo,
-> > +    /// `Bar0` for register access.
-> > +    bar: &'a Bar0,
-> > +    /// SEC2 falcon for core operations.
-> > +    sec2_falcon: &'a Falcon<Sec2>,
-> > +    /// GSP falcon for core operations.
-> > +    gsp_falcon: &'a Falcon<Gsp>,
-> > +    /// LibOS DMA handle address.
-> > +    libos_dma_handle: u64,
-> > +    /// Bootloader application version.
-> > +    bootloader_app_version: u32,
-> > +    /// Device for logging.
-> > +    dev: ARef<device::Device>,
-> > +}
-> > +
-> > +/// Trait for running sequencer commands.
-> > +pub(crate) trait GspSeqCmdRunner {
-> > +    fn run(&self, sequencer: &GspSequencer<'_>) -> Result;
-> > +}
-> > +
-> > +impl GspSeqCmdRunner for GspSeqCmd {
-> > +    fn run(&self, _seq: &GspSequencer<'_>) -> Result {
-> > +        Ok(())
-> > +    }
-> > +}
-> > +
-> > +/// Iterator over GSP sequencer commands.
-> > +pub(crate) struct GspSeqIter<'a> {
-> > +    /// Command data buffer.
-> > +    cmd_data: &'a [u8],
-> > +    /// Current position in the buffer.
-> > +    current_offset: usize,
-> > +    /// Total number of commands to process.
-> > +    total_cmds: u32,
-> > +    /// Number of commands processed so far.
-> > +    cmds_processed: u32,
-> > +    /// Device for logging.
-> > +    dev: ARef<device::Device>,
-> > +}
-> > +
-> > +impl<'a> Iterator for GspSeqIter<'a> {
-> > +    type Item =3D Result<GspSeqCmd>;
-> > +
-> > +    fn next(&mut self) -> Option<Self::Item> {
-> > +        // Stop if we've processed all commands or reached the end of =
-data.
-> > +        if self.cmds_processed >=3D self.total_cmds || self.current_of=
-fset >=3D self.cmd_data.len() {
-> > +            return None;
-> > +        }
-> > +
-> > +        // Check if we have enough data for opcode.
-> > +        if self.current_offset + core::mem::size_of::<u32>() > self.cm=
-d_data.len() {
-> > +            return Some(Err(EIO));
-> > +        }
-> > +
-> > +        let offset =3D self.current_offset;
-> > +
-> > +        // Handle command creation based on available data,
-> > +        // zero-pad if necessary (since last command may not be full s=
-ize).
-> > +        let mut buffer =3D [0u8; CMD_SIZE];
-> > +        let copy_len =3D if offset + CMD_SIZE <=3D self.cmd_data.len()=
- {
-> > +            CMD_SIZE
-> > +        } else {
-> > +            self.cmd_data.len() - offset
-> > +        };
-> > +        buffer[..copy_len].copy_from_slice(&self.cmd_data[offset..offs=
-et + copy_len]);
-> > +        let cmd_result =3D GspSeqCmd::new(&buffer, &self.dev);
-> > +
-> > +        cmd_result.map_or_else(
-> > +            |_err| {
-> > +                dev_err!(self.dev, "Error parsing command at offset {}=
-", offset);
-> > +                None
-> > +            },
-> > +            |(cmd, size)| {
-> > +                self.current_offset +=3D size;
-> > +                self.cmds_processed +=3D 1;
-> > +                Some(Ok(cmd))
-> > +            },
-> > +        )
-> > +    }
-> > +}
-> > +
-> > +impl<'a> GspSequencer<'a> {
-> > +    fn iter(&self) -> GspSeqIter<'_> {
-> > +        let cmd_data =3D &self.seq_info.cmd_data[..];
-> > +
-> > +        GspSeqIter {
-> > +            cmd_data,
-> > +            current_offset: 0,
-> > +            total_cmds: self.seq_info.cmd_index,
-> > +            cmds_processed: 0,
-> > +            dev: self.dev.clone(),
-> > +        }
-> > +    }
-> > +}
-> > +
-> > +/// Parameters for running the GSP sequencer.
-> > +pub(crate) struct GspSequencerParams<'a> {
-> > +    /// Bootloader application version.
-> > +    pub(crate) bootloader_app_version: u32,
-> > +    /// LibOS DMA handle address.
-> > +    pub(crate) libos_dma_handle: u64,
-> > +    /// GSP falcon for core operations.
-> > +    pub(crate) gsp_falcon: &'a Falcon<Gsp>,
-> > +    /// SEC2 falcon for core operations.
-> > +    pub(crate) sec2_falcon: &'a Falcon<Sec2>,
-> > +    /// Device for logging.
-> > +    pub(crate) dev: ARef<device::Device>,
-> > +    /// BAR0 for register access.
-> > +    pub(crate) bar: &'a Bar0,
-> > +}
-> > +
-> > +impl<'a> GspSequencer<'a> {
-> > +    pub(crate) fn run(cmdq: &mut Cmdq, params: GspSequencerParams<'a>,=
- timeout: Delta) -> Result {
-> > +        let seq_info =3D loop {
-> > +            match cmdq.receive_msg::<GspSequencerInfo>(timeout) {
-> > +                Ok(seq_info) =3D> break seq_info,
-> > +                Err(ERANGE) =3D> continue,
-> > +                Err(e) =3D> return Err(e),
-> > +            }
-> > +        };
-> > +
-> > +        let sequencer =3D GspSequencer {
-> > +            seq_info,
-> > +            bar: params.bar,
-> > +            sec2_falcon: params.sec2_falcon,
-> > +            gsp_falcon: params.gsp_falcon,
-> > +            libos_dma_handle: params.libos_dma_handle,
-> > +            bootloader_app_version: params.bootloader_app_version,
-> > +            dev: params.dev,
-> > +        };
-> > +
-> > +        dev_dbg!(sequencer.dev, "Running CPU Sequencer commands");
-> > +
-> > +        for cmd_result in sequencer.iter() {
-> > +            match cmd_result {
-> > +                Ok(cmd) =3D> cmd.run(&sequencer)?,
-> > +                Err(e) =3D> {
-> > +                    dev_err!(
-> > +                        sequencer.dev,
-> > +                        "Error running command at index {}",
-> > +                        sequencer.seq_info.cmd_index
-> > +                    );
-> > +                    return Err(e);
-> > +                }
-> > +            }
-> > +        }
-> > +
-> > +        dev_dbg!(
-> > +            sequencer.dev,
-> > +            "CPU Sequencer commands completed successfully"
-> > +        );
-> > +        Ok(())
-> > +    }
-> > +}
-> > diff --git a/drivers/gpu/nova-core/sbuffer.rs b/drivers/gpu/nova-core/s=
-buffer.rs
-> > index 7a5947b8be19..64758b7fae56 100644
-> > --- a/drivers/gpu/nova-core/sbuffer.rs
-> > +++ b/drivers/gpu/nova-core/sbuffer.rs
-> > @@ -168,7 +168,6 @@ pub(crate) fn read_exact(&mut self, mut dst: &mut [=
-u8]) -> Result {
-> >      /// Read all the remaining data into a [`KVec`].
-> >      ///
-> >      /// `self` will be empty after this operation.
-> > -    #[expect(unused)]
-> >      pub(crate) fn flush_into_kvec(&mut self, flags: kernel::alloc::Fla=
-gs) -> Result<KVec<u8>> {
-> >          let mut buf =3D KVec::<u8>::new();
-> > =20
+> new file mode 100644
+> index 000000000000..f1a4dea44c10
+> --- /dev/null
+> +++ b/drivers/gpu/nova-core/util.rs
+> @@ -0,0 +1,16 @@
+> +// SPDX-License-Identifier: GPL-2.0
+> +
+> +/// Converts a null-terminated byte array to a string slice.
+> +///
+> +/// Returns "invalid" if the bytes are not valid UTF-8 or not null-termi=
+nated.
+> +pub(crate) fn str_from_null_terminated(bytes: &[u8]) -> &str {
+> +    use kernel::str::CStr;
+> +
+> +    // Find the first null byte, then create a slice that includes it.
+> +    bytes
+> +        .iter()
+> +        .position(|&b| b =3D=3D 0)
+> +        .and_then(|null_pos| CStr::from_bytes_with_nul(&bytes[..=3Dnull_=
+pos]).ok())
+> +        .and_then(|cstr| cstr.to_str().ok())
+> +        .unwrap_or("invalid")
+> +}
 
 --=20
 Cheers,
