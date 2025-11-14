@@ -2,77 +2,77 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id CD924C5F6F2
-	for <lists+nouveau@lfdr.de>; Fri, 14 Nov 2025 22:56:32 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 51DCDC5F6FB
+	for <lists+nouveau@lfdr.de>; Fri, 14 Nov 2025 22:57:02 +0100 (CET)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 89BB610EB45;
-	Fri, 14 Nov 2025 21:56:31 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id DE66010EB48;
+	Fri, 14 Nov 2025 21:57:00 +0000 (UTC)
 Authentication-Results: gabe.freedesktop.org;
-	dkim=pass (1024-bit key; unprotected) header.d=redhat.com header.i=@redhat.com header.b="bKnG+NUn";
+	dkim=pass (1024-bit key; unprotected) header.d=redhat.com header.i=@redhat.com header.b="KUVCs3Cv";
 	dkim-atps=neutral
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
 Received: from us-smtp-delivery-124.mimecast.com
- (us-smtp-delivery-124.mimecast.com [170.10.133.124])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 4A32D10EB42
- for <nouveau@lists.freedesktop.org>; Fri, 14 Nov 2025 21:56:30 +0000 (UTC)
+ (us-smtp-delivery-124.mimecast.com [170.10.129.124])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 12A6C10EB4C
+ for <nouveau@lists.freedesktop.org>; Fri, 14 Nov 2025 21:56:59 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1763157389;
+ s=mimecast20190719; t=1763157419;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:content-type:content-type:
  content-transfer-encoding:content-transfer-encoding:
  in-reply-to:in-reply-to:references:references;
- bh=wrmvEvsjp/v/fGg9AksLtxzBTx39F6EWYUPSMCp9fsY=;
- b=bKnG+NUnz2HHYym6gNi9xMVg4tEFCk6mupCwMBHJvsU2yF9c9nSP4axxX9zl54Ji630Y+G
- PDeIR0pjPim7JSyPlXEinqA6a0SUgtaPbrakROauKUTcbozAf2hKnlRGbhN7g8dBpiu49d
- uiWeCNY6OnUPv4Epo5qWzV3XS9oMibk=
-Received: from mail-qt1-f197.google.com (mail-qt1-f197.google.com
- [209.85.160.197]) by relay.mimecast.com with ESMTP with STARTTLS
+ bh=h6CvyPJgSgR8dlf/QsARtc6sDpy/gZqzzgAxEGauoE0=;
+ b=KUVCs3CvEh62p/8I+lB6yGb3MABe0XwpGez+co3Izuyl9tQvX94eYMgWvskiBWdoisVsIM
+ oRxwdMradMrxHIvCGbVj/soCBFbAzfb6SdjZY1wz7tonBZ0R5mulCXekUzc8R8e8ayagN8
+ bzS9knkklLQohXaW4ELh/Y8nuxb/hcI=
+Received: from mail-qv1-f71.google.com (mail-qv1-f71.google.com
+ [209.85.219.71]) by relay.mimecast.com with ESMTP with STARTTLS
  (version=TLSv1.3, cipher=TLS_AES_256_GCM_SHA384) id
- us-mta-14-sK7Ety_oNoeWlCyeMb4mKA-1; Fri, 14 Nov 2025 16:56:28 -0500
-X-MC-Unique: sK7Ety_oNoeWlCyeMb4mKA-1
-X-Mimecast-MFC-AGG-ID: sK7Ety_oNoeWlCyeMb4mKA_1763157388
-Received: by mail-qt1-f197.google.com with SMTP id
- d75a77b69052e-4e884663b25so60398251cf.0
- for <nouveau@lists.freedesktop.org>; Fri, 14 Nov 2025 13:56:28 -0800 (PST)
+ us-mta-441-KoawSFchNY6SHOBVDWvD-g-1; Fri, 14 Nov 2025 16:56:57 -0500
+X-MC-Unique: KoawSFchNY6SHOBVDWvD-g-1
+X-Mimecast-MFC-AGG-ID: KoawSFchNY6SHOBVDWvD-g_1763157417
+Received: by mail-qv1-f71.google.com with SMTP id
+ 6a1803df08f44-8824292911cso96547196d6.1
+ for <nouveau@lists.freedesktop.org>; Fri, 14 Nov 2025 13:56:57 -0800 (PST)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1763157388; x=1763762188;
+ d=1e100.net; s=20230601; t=1763157417; x=1763762217;
  h=mime-version:user-agent:content-transfer-encoding:organization
  :references:in-reply-to:date:cc:to:from:subject:message-id:x-gm-gg
  :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=wrmvEvsjp/v/fGg9AksLtxzBTx39F6EWYUPSMCp9fsY=;
- b=rZipfj1Tc+PpvR/hhIHVKPLpi9Sp29gT3T0NTxpzo+1+BGJQlx2QrN/o1o+loBvrIu
- jjL7dRPhVWxN7nLo/7dVn/lcJKvkB7wCSqk6EVMuhBnoufAA8rQluHfUMtz161K/Rmwk
- E9a0uDKJW3MYYt5xblKTqf49cY7MSm8Na82L4xH+FRuGLg6HvRxrfcwYASu9tAypB7+p
- y7dc9xvmJf7xnJxxDhH79ZX2Wp11HM2uKQDK5Af3ZBP7GSvklFqRXARYdSQikNFYWoNX
- velg+3sOf0T+55mt9qckOcmiKgD89KfZBSLWnyb/ZWNAclL2Vbf4U+sMdFU4oRXUWjnS
- SdoA==
+ bh=h6CvyPJgSgR8dlf/QsARtc6sDpy/gZqzzgAxEGauoE0=;
+ b=op464sIWittBprnsWI5aB3zfoTWouoTnrEIvyNXBCf0jAct/NdAT3BbQ2/tQjxh70J
+ 8+6ibqNdd/PtkJE70iQxyiK2zMqeHBh7OPEDgYj7FutcTNm0d9S3+FP2hDdR5d9OJgtE
+ TrM0xRQAkxWvNWF3hHCi7szDRr/AgcukPidg1CCUhcAcEUq5X0KJvQVEn/bRFPtXdGke
+ DFSqhiy1DAOSojnl/UtfwFG81Y04HxtWB8RYd4H1SZ5EaFxRmeddE78vK0u3LuxvLhwJ
+ GcYOzJ9dbNfWwAnKAh9bkx7j2M+HjWz7wF8qSz/NpHZ6iEo/AFfEFboKIgy6CJ1FlQO4
+ xqRQ==
 X-Forwarded-Encrypted: i=1;
- AJvYcCWJRvmObZCle4P4yW+vKiaLGgzUVV9vDC/osva1I3tztxtVQYsWcyxNtSD0VNBn0GWGGos6m0XO@lists.freedesktop.org
-X-Gm-Message-State: AOJu0Yy5NfwIDutY7Lgwx7mI0mX2T36thkeMb3hcBPDBGetVIHtaN94x
- Nuo4MCwmrb7bOA7sISG1gT0tDewaqXn3my0u+TqdfAJbvwjxblA2h5tbZaTLwXHs7NMwuQhF/F3
- zSLIOkO07y3Zlqc0DLcOXVY5SMjm6ZmwqtRPCRA1Ql/Aiidi7zTcyIa88Eajif2Pe42s=
-X-Gm-Gg: ASbGncvVGb8YIL03ZBSfsOt/d6QvBoJv+FxryRHz48nYzZNlykzTjBoaCRcwbhyO/t2
- OcZET7YLwguuQ2OGXsBZiLOosbfASxgmEHSG9HQIpHCPTI+BTCvwWbZSUOOS2S7J0SeEjcRGrOK
- 7M3msG+gMY11SObMMI5grJanWM3UNes5ZYPCcadN7HcSfPEDIvn1KegZRDR0nXst9vIouhFr72G
- BM4Ed2aMug5c6VceA28xoPsrVgE+EFMiFpU7ID8Xu19iaWiN7AAk3mV83nAo32jEj+kbNxHixE3
- yW28KUh+TDuQ7mDiQFZwwa0vQL7iCdV6thKme/x3weAcsw0rVCiWiiFB2H2wygufbItFNTsXr9r
- K5Otlr5BQjCV39yf8WUiNUT/BCxUo8/EohirRHsOhhJ1t
-X-Received: by 2002:a05:620a:1aa5:b0:8b1:fa2a:7032 with SMTP id
- af79cd13be357-8b2c315d1ddmr599253585a.20.1763157387669; 
- Fri, 14 Nov 2025 13:56:27 -0800 (PST)
-X-Google-Smtp-Source: AGHT+IFc6D7qZGJdGbJvQqmEng/ENUWvj/7p9u4WvaXC5BOdCCQwjfrKJ1AcqrMYViPmgj6fFgWjvg==
-X-Received: by 2002:a05:620a:1aa5:b0:8b1:fa2a:7032 with SMTP id
- af79cd13be357-8b2c315d1ddmr599249285a.20.1763157387249; 
- Fri, 14 Nov 2025 13:56:27 -0800 (PST)
+ AJvYcCVOOMmXdgH861qyIW08nKrqyu82NJDfpbLnK+6El6E6DuMEEYWVGGp8FAEN02NuwwR/FgCM/qZR@lists.freedesktop.org
+X-Gm-Message-State: AOJu0YwWwTsl5V+8lU5X1IP9om+G/UmdXh7+FyEu9AaXO64jbvEws0f/
+ 3Dyvxun8xzb0I0kDKj+pXceb2usc4HfLwArt+bsI4/BrCs++utVhdZNGjl2cidsKCtL34vDavsj
+ /55UpT/os+KlB5uGlWMThHT92dCg2DoM+attcuE4v8aQHs6N6CjMRcQ8/tlZ3RcjiLh0=
+X-Gm-Gg: ASbGncv5GRKtESheRKuCIIMBb7WJcVJ42GZSCIQNf8fO4EDvdBJnNEvkeMGYvJGM9fw
+ 36ivF8Dv6sx6nMKqzVlIRQ45aoZRx3ikDbAJPKGAI8FnE8lQGfsxSgZR59qWxEdUJ15LQ20xvXE
+ Vp1VnSsVgnuvKKk0J1X3NOzaOI8to10DVsDn6U5Pj5LQFRjlFUVpxs2/JCK3i29F5wI/a9Y1jgS
+ eXxLejw/O1/3f1EV5NQaQD6tBFoegcLIz1NFsUK6HLkY9kdgenhi1obK7oygJqYu/GR4ccN6uT2
+ N3w0cRxDQoIpH41M4tco5QTBBm6Jmd74H5mO4/U7gKr+LGuQZlRSVhBexvaypwMzTKpGeeeQ4I5
+ K2Iz74ig3IliEmCI2WiiwNqTPKLKXAZ0Ba1B12c/AGcPm
+X-Received: by 2002:ad4:5f06:0:b0:880:5249:be4b with SMTP id
+ 6a1803df08f44-88290e3f067mr71480836d6.12.1763157417258; 
+ Fri, 14 Nov 2025 13:56:57 -0800 (PST)
+X-Google-Smtp-Source: AGHT+IF2AYYD3CLcmWmhIOiqNf0nJ10BiVGF2nC9ZjRDTSW0yclbti/6aXWgcip5coxto7ZOiBSGUw==
+X-Received: by 2002:ad4:5f06:0:b0:880:5249:be4b with SMTP id
+ 6a1803df08f44-88290e3f067mr71480446d6.12.1763157416901; 
+ Fri, 14 Nov 2025 13:56:56 -0800 (PST)
 Received: from [192.168.8.208] (pool-72-93-97-194.bstnma.fios.verizon.net.
  [72.93.97.194]) by smtp.gmail.com with ESMTPSA id
- af79cd13be357-8b2aee9e519sm421022085a.5.2025.11.14.13.56.25
+ 6a1803df08f44-882865342c4sm39116726d6.28.2025.11.14.13.56.55
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 14 Nov 2025 13:56:26 -0800 (PST)
-Message-ID: <3ce68e1400ba73100f60f85796acff6c9058c43d.camel@redhat.com>
-Subject: Re: [PATCH v5 09/13] gpu: nova-core: sequencer: Add delay opcode
- support
+ Fri, 14 Nov 2025 13:56:56 -0800 (PST)
+Message-ID: <0aa30352fc8676bba92ac6bf0f5144b6cc3c25e9.camel@redhat.com>
+Subject: Re: [PATCH v5 10/13] gpu: nova-core: sequencer: Implement basic
+ core operations
 From: Lyude Paul <lyude@redhat.com>
 To: Joel Fernandes <joelagnelf@nvidia.com>, linux-kernel@vger.kernel.org, 
  rust-for-linux@vger.kernel.org, dri-devel@lists.freedesktop.org, Danilo
@@ -88,15 +88,15 @@ Cc: Alistair Popple <apopple@nvidia.com>, Miguel Ojeda <ojeda@kernel.org>,
  <jhubbard@nvidia.com>,  Timur Tabi <ttabi@nvidia.com>,
  joel@joelfernandes.org, Daniel Almeida <daniel.almeida@collabora.com>, 
  nouveau@lists.freedesktop.org
-Date: Fri, 14 Nov 2025 16:56:25 -0500
-In-Reply-To: <20251114195552.739371-10-joelagnelf@nvidia.com>
+Date: Fri, 14 Nov 2025 16:56:55 -0500
+In-Reply-To: <20251114195552.739371-11-joelagnelf@nvidia.com>
 References: <20251114195552.739371-1-joelagnelf@nvidia.com>
- <20251114195552.739371-10-joelagnelf@nvidia.com>
+ <20251114195552.739371-11-joelagnelf@nvidia.com>
 Organization: Red Hat Inc.
 User-Agent: Evolution 3.56.2 (3.56.2-2.fc42)
 MIME-Version: 1.0
 X-Mimecast-Spam-Score: 0
-X-Mimecast-MFC-PROC-ID: JHp-ZKyJo480xYAd7G8PScAwffJG_5z_7ZTEQYVSULQ_1763157388
+X-Mimecast-MFC-PROC-ID: Am-hSn3g8fQx18wstXipLd5uKQIBUyhy_Dhihv5jX2g_1763157417
 X-Mimecast-Originator: redhat.com
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
@@ -117,95 +117,63 @@ Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 Reviewed-by: Lyude Paul <lyude@redhat.com>
 
 On Fri, 2025-11-14 at 14:55 -0500, Joel Fernandes wrote:
-> Implement a sequencer opcode for delay operations.
+> These opcodes implement various falcon-related boot operations: reset,
+> start, wait-for-halt.
 >=20
 > Signed-off-by: Joel Fernandes <joelagnelf@nvidia.com>
 > ---
->  drivers/gpu/nova-core/gsp/fw.rs        |  2 --
->  drivers/gpu/nova-core/gsp/sequencer.rs | 15 +++++++++++++++
->  2 files changed, 15 insertions(+), 2 deletions(-)
+>  drivers/gpu/nova-core/gsp/sequencer.rs | 19 +++++++++++++++++++
+>  1 file changed, 19 insertions(+)
 >=20
-> diff --git a/drivers/gpu/nova-core/gsp/fw.rs b/drivers/gpu/nova-core/gsp/=
-fw.rs
-> index 376c10cc8003..0cce54310c35 100644
-> --- a/drivers/gpu/nova-core/gsp/fw.rs
-> +++ b/drivers/gpu/nova-core/gsp/fw.rs
-> @@ -473,7 +473,6 @@ unsafe impl AsBytes for RegPollPayload {}
->  #[derive(Copy, Clone)]
->  pub(crate) struct DelayUsPayload(r570_144::GSP_SEQ_BUF_PAYLOAD_DELAY_US)=
-;
-> =20
-> -#[expect(unused)]
->  impl DelayUsPayload {
->      /// Returns the delay value in microseconds.
->      pub(crate) fn val(&self) -> u32 {
-> @@ -514,7 +513,6 @@ unsafe impl AsBytes for RegStorePayload {}
->  #[repr(transparent)]
->  pub(crate) struct SequencerBufferCmd(r570_144::GSP_SEQUENCER_BUFFER_CMD)=
-;
-> =20
-> -#[expect(unused)]
->  impl SequencerBufferCmd {
->      /// Returns the opcode as a `SeqBufOpcode` enum, or error if invalid=
-.
->      pub(crate) fn opcode(&self) -> Result<SeqBufOpcode> {
 > diff --git a/drivers/gpu/nova-core/gsp/sequencer.rs b/drivers/gpu/nova-co=
 re/gsp/sequencer.rs
-> index b564523b64e7..19bde9b8bf1d 100644
+> index 19bde9b8bf1d..8d996e5e71c3 100644
 > --- a/drivers/gpu/nova-core/gsp/sequencer.rs
 > +++ b/drivers/gpu/nova-core/gsp/sequencer.rs
-> @@ -12,6 +12,7 @@
->  use kernel::device;
->  use kernel::io::poll::read_poll_timeout;
->  use kernel::prelude::*;
-> +use kernel::time::delay::fsleep;
->  use kernel::time::Delta;
->  use kernel::transmute::FromBytes;
->  use kernel::types::ARef;
-> @@ -65,6 +66,7 @@ pub(crate) enum GspSeqCmd {
->      RegWrite(fw::RegWritePayload),
->      RegModify(fw::RegModifyPayload),
+> @@ -68,6 +68,9 @@ pub(crate) enum GspSeqCmd {
 >      RegPoll(fw::RegPollPayload),
-> +    DelayUs(fw::DelayUsPayload),
+>      DelayUs(fw::DelayUsPayload),
 >      RegStore(fw::RegStorePayload),
+> +    CoreReset,
+> +    CoreStart,
+> +    CoreWaitForHalt,
 >  }
 > =20
-> @@ -90,6 +92,11 @@ pub(crate) fn new(data: &[u8], dev: &device::Device) -=
-> Result<(Self, usize)> {
+>  impl GspSeqCmd {
+> @@ -102,6 +105,9 @@ pub(crate) fn new(data: &[u8], dev: &device::Device) =
+-> Result<(Self, usize)> {
 >                  let size =3D opcode_size + size_of_val(&payload);
->                  (GspSeqCmd::RegPoll(payload), size)
+>                  (GspSeqCmd::RegStore(payload), size)
 >              }
-> +            fw::SeqBufOpcode::DelayUs =3D> {
-> +                let payload =3D fw_cmd.delay_us_payload()?;
-> +                let size =3D opcode_size + size_of_val(&payload);
-> +                (GspSeqCmd::DelayUs(payload), size)
-> +            }
->              fw::SeqBufOpcode::RegStore =3D> {
->                  let payload =3D fw_cmd.reg_store_payload()?;
->                  let size =3D opcode_size + size_of_val(&payload);
-> @@ -177,6 +184,13 @@ fn run(&self, sequencer: &GspSequencer<'_>) -> Resul=
-t {
->      }
->  }
+> +            fw::SeqBufOpcode::CoreReset =3D> (GspSeqCmd::CoreReset, opco=
+de_size),
+> +            fw::SeqBufOpcode::CoreStart =3D> (GspSeqCmd::CoreStart, opco=
+de_size),
+> +            fw::SeqBufOpcode::CoreWaitForHalt =3D> (GspSeqCmd::CoreWaitF=
+orHalt, opcode_size),
+>              _ =3D> return Err(EINVAL),
+>          };
 > =20
-> +impl GspSeqCmdRunner for fw::DelayUsPayload {
-> +    fn run(&self, _sequencer: &GspSequencer<'_>) -> Result {
-> +        fsleep(Delta::from_micros(i64::from(self.val())));
-> +        Ok(())
-> +    }
-> +}
-> +
->  impl GspSeqCmdRunner for fw::RegStorePayload {
->      fn run(&self, sequencer: &GspSequencer<'_>) -> Result {
->          let addr =3D self.addr() as usize;
-> @@ -194,6 +208,7 @@ fn run(&self, seq: &GspSequencer<'_>) -> Result {
->              GspSeqCmd::RegWrite(cmd) =3D> cmd.run(seq),
->              GspSeqCmd::RegModify(cmd) =3D> cmd.run(seq),
+> @@ -210,6 +216,19 @@ fn run(&self, seq: &GspSequencer<'_>) -> Result {
 >              GspSeqCmd::RegPoll(cmd) =3D> cmd.run(seq),
-> +            GspSeqCmd::DelayUs(cmd) =3D> cmd.run(seq),
+>              GspSeqCmd::DelayUs(cmd) =3D> cmd.run(seq),
 >              GspSeqCmd::RegStore(cmd) =3D> cmd.run(seq),
+> +            GspSeqCmd::CoreReset =3D> {
+> +                seq.gsp_falcon.reset(seq.bar)?;
+> +                seq.gsp_falcon.dma_reset(seq.bar);
+> +                Ok(())
+> +            }
+> +            GspSeqCmd::CoreStart =3D> {
+> +                seq.gsp_falcon.start(seq.bar)?;
+> +                Ok(())
+> +            }
+> +            GspSeqCmd::CoreWaitForHalt =3D> {
+> +                seq.gsp_falcon.wait_till_halted(seq.bar)?;
+> +                Ok(())
+> +            }
 >          }
 >      }
+>  }
 
 --=20
 Cheers,
