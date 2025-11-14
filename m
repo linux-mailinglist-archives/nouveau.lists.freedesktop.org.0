@@ -2,100 +2,99 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id C5ECAC5F673
-	for <lists+nouveau@lfdr.de>; Fri, 14 Nov 2025 22:42:07 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id CD102C5F6E0
+	for <lists+nouveau@lfdr.de>; Fri, 14 Nov 2025 22:53:34 +0100 (CET)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id B677F10EB22;
-	Fri, 14 Nov 2025 21:42:04 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id C142910EB35;
+	Fri, 14 Nov 2025 21:53:30 +0000 (UTC)
 Authentication-Results: gabe.freedesktop.org;
-	dkim=pass (1024-bit key; unprotected) header.d=redhat.com header.i=@redhat.com header.b="I6Mwk7KF";
+	dkim=pass (1024-bit key; unprotected) header.d=redhat.com header.i=@redhat.com header.b="HMVHQBZJ";
 	dkim-atps=neutral
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
 Received: from us-smtp-delivery-124.mimecast.com
- (us-smtp-delivery-124.mimecast.com [170.10.129.124])
- by gabe.freedesktop.org (Postfix) with ESMTPS id C1B0C10EB22
- for <nouveau@lists.freedesktop.org>; Fri, 14 Nov 2025 21:42:02 +0000 (UTC)
+ (us-smtp-delivery-124.mimecast.com [170.10.133.124])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 138B510EB28
+ for <nouveau@lists.freedesktop.org>; Fri, 14 Nov 2025 21:53:29 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1763156521;
+ s=mimecast20190719; t=1763157208;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:content-type:content-type:
  content-transfer-encoding:content-transfer-encoding:
  in-reply-to:in-reply-to:references:references;
- bh=qhiLT2+Q6KWLg5cdjt5oCTA5/a6/ybH+IHhZg4qiJk8=;
- b=I6Mwk7KFTyQ6JlA5jAl92Um1hRfZP1ROrjGg4WznsWqFBnMuDgtHn30WlbL6YfCI7lOGaa
- kdeL/UWqXkUiiAI/jOULuQ4p4c3r/PMuOYdZBuRqRdtlKo+DwJk4I7LXyyLUvSt01LIr6K
- ccwGo3S9uzfTCJ3Q9E4v7hErh107dd0=
-Received: from mail-qt1-f199.google.com (mail-qt1-f199.google.com
- [209.85.160.199]) by relay.mimecast.com with ESMTP with STARTTLS
+ bh=R8XUW4/O4wdIzo7CiLFWrLf19OnwRylp4FM5cMjuabY=;
+ b=HMVHQBZJTEjjZqaZlv3Azcx2MAC+YC99gZBSMfY0NFaK7gnPPH+yrN7Dhxmr+pJ3FvyNz7
+ 1H0ePE9sZkgP7aOa1+uSunXOPpR01Z+M32dWW9rKur3I5GNjv4yf/sZ18UAgKuhZ+otKAn
+ ecnZ11rIjjwpw7mMwUBivSRPE8GKwMs=
+Received: from mail-qk1-f199.google.com (mail-qk1-f199.google.com
+ [209.85.222.199]) by relay.mimecast.com with ESMTP with STARTTLS
  (version=TLSv1.3, cipher=TLS_AES_256_GCM_SHA384) id
- us-mta-593-kX3TUPGsPl2dsuBIJg9rmw-1; Fri, 14 Nov 2025 16:41:58 -0500
-X-MC-Unique: kX3TUPGsPl2dsuBIJg9rmw-1
-X-Mimecast-MFC-AGG-ID: kX3TUPGsPl2dsuBIJg9rmw_1763156518
-Received: by mail-qt1-f199.google.com with SMTP id
- d75a77b69052e-4ed79dd4a47so72827961cf.3
- for <nouveau@lists.freedesktop.org>; Fri, 14 Nov 2025 13:41:58 -0800 (PST)
+ us-mta-246-0ySoUM-uPPyePxaGuFo82Q-1; Fri, 14 Nov 2025 16:53:26 -0500
+X-MC-Unique: 0ySoUM-uPPyePxaGuFo82Q-1
+X-Mimecast-MFC-AGG-ID: 0ySoUM-uPPyePxaGuFo82Q_1763157206
+Received: by mail-qk1-f199.google.com with SMTP id
+ af79cd13be357-8b29fabd8bfso586107385a.3
+ for <nouveau@lists.freedesktop.org>; Fri, 14 Nov 2025 13:53:26 -0800 (PST)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1763156518; x=1763761318;
+ d=1e100.net; s=20230601; t=1763157206; x=1763762006;
  h=mime-version:user-agent:content-transfer-encoding:organization
  :references:in-reply-to:date:cc:to:from:subject:message-id:x-gm-gg
  :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=qhiLT2+Q6KWLg5cdjt5oCTA5/a6/ybH+IHhZg4qiJk8=;
- b=Lx1azOnXCNCSXzjIXFMo7o6P4O8RtSZ7qu8eS1VbKRNBSOixW82/dZgos8WnRidGKl
- h8tRMcE9y3pAQHSFQ6ooIm0zSIfXp5Jg1/M6kznsEOOGAirfmgsEzXMaP8j0ZXNdQiWT
- Aq6lREJ9Giq1xx6OkaEZMvkoJI1/niCTIAV9jsjB0/6+5nU9P9ayEwAOlxCDVEaM1AlK
- WEdVjmF1DNrvA1O+TmtLhoTlLtvzATkpuJwCuonrmNFqs4wx77iZ/NZHWsJeuiGM+rDq
- svdxj2fd2W1pVH66kOX17UEXRa4sDpJBv1BeDZU4IiK0QQA0KL6NiE4u4uRaupqy8/n1
- 5L/w==
+ bh=R8XUW4/O4wdIzo7CiLFWrLf19OnwRylp4FM5cMjuabY=;
+ b=Z+xTUIeAPF/NS8i/tynA9e9QFqW8esAC7tvIssHBA5TFmXbF6O1DaRWRwCwB9hp9s0
+ CWxFEF686WM3X7Z4d8n1hoVeTevHRkHaqwKE4Mf8EyrkPGsIxeLj+q7fhQlYZX0xlHQk
+ QZ48vVdhvjVgnl19MlTKu9x3UffH1l4jdQR1DKQWIzWuh0KyAIeVNA0HlbNYwtKzKEqs
+ QUzQSGrGOokXHDUCzCZN4iYwdeymcXDaRx3edpCWM7zkJFmkYRl2GowI8wrXKOPFV1di
+ UWa9Ta3CfmNS550GN8QhxVtw2jc+pIGIS87WC7rOEeiDdlU3Q36ZAu+KspXw8pH4yDM6
+ JXxQ==
 X-Forwarded-Encrypted: i=1;
- AJvYcCX3BNvyZNQvUYPcNwRFcTxtYf/eN6q5IPKDGFU0zsnmh5RTzAAw2TEDWt9TTLoRi51cODx50ObI@lists.freedesktop.org
-X-Gm-Message-State: AOJu0YwD846sDk4jrj3GKZ218bgVkGnjf8GVNjvhYhYqh3b9Jg29L/Q+
- 93zXQo1JiOv/Wg3p0VYDzHbIuOrp/BFyndPoQ1i50n6wI9LYi2a3uoRjOwLv2Babc32NrDfsGKI
- FJf4/FkugpOvg4Jy/kHP9YR+PMNzMSgGaAc0wmf2rUSVlZ3fG2NLvousPNxguI+czHwA=
-X-Gm-Gg: ASbGncujt1RLi9SG4E1BNHrk7/3920zDkyci9C4bnnrp6AveiKPVcFqt5qFythB56Fn
- TgF/EM8x75qPOFFydYC+9mbLV5drFfL3e6qm4yuxOsxgZe2WQb4URTXqzoLG+rtc0NrRTDnqFFw
- /braYBRO4QshLT9p/8woHQSNG5vlgIi7Jm+dP8sUB5saMSvTwjss4WFZ/Gnt543VJ0vzSs/hOYQ
- 1rmmzuLRgDvk7xQp8qb0s78ov0Bln64DHBHd5gTupvbmVrKLK+nuTMXrBkWSq36hfx699+M2waV
- sGvtyMpjntiCTyOy++YyxoAKtuII0YrLiDp971WO56mHsjV78JcMofJo9arU/eIaB+8ZoouC/WT
- +map2BvT/xoyOTrlzaZvZM1Z6HY0WgWaLFu/Tmf+ECeOs
-X-Received: by 2002:a05:622a:130d:b0:4ed:aeca:dcc8 with SMTP id
- d75a77b69052e-4edf20a3e0amr74949301cf.22.1763156518028; 
- Fri, 14 Nov 2025 13:41:58 -0800 (PST)
-X-Google-Smtp-Source: AGHT+IGDeMAJRifIQKIhqvj6a9i0UW7Q8XY2OSFkq6Bdeg1lEMpXD6BTKK58APq+MBLiSdybAKiqEw==
-X-Received: by 2002:a05:622a:130d:b0:4ed:aeca:dcc8 with SMTP id
- d75a77b69052e-4edf20a3e0amr74948361cf.22.1763156516730; 
- Fri, 14 Nov 2025 13:41:56 -0800 (PST)
+ AJvYcCWWWKw+4wee2Q/9AuieKRY5ZxLYcmUWN0zYmpGivAoQ8K/Bez/dwNX/txejsuTU2U6Qj8mPxmi5@lists.freedesktop.org
+X-Gm-Message-State: AOJu0Yw6q4D+1wK0t0JPtbCb6cF5l9XeFwnFmVe6xJaZ4dF7Cqatm5xh
+ syoWOsACnU4dp8ciabbDBme0X4Zkd+zoIXPqivaZHnm/QkviJCIx/2W8RcNcvQDNQ+StT91OT3z
+ g+qx+oXdDPMKMtg55Ew1G5Jk4Y0KIl12vyeVjWr5JIveOZUMG5Ys7Kfr4gyZRqQofOHo=
+X-Gm-Gg: ASbGncudalUEQdWUA6ptKtY3QEVUMI0LDH4t5vVA0HDcVGXavXkfJ0sSolIkAXrWfjc
+ 2H+oqaH5OscBxGi/rMFjqzb7WYh8WwYeGbMVn7iUlUZGTBtZJmvbQVF76NN7oh903mieLk5VJqV
+ 2UdL0xMpabXd7Zl+aOx5JdlEC7jW+UZOvlxwiaT0wz6D0iFLbCV8OmqzPmWO7YzKOFaqUn0b/SK
+ oKCzHX6rkXRfj7X+rOCIwENOBnoRq1PFpo1eOkU9FbkYYbEXd0duMRMaY+mEe59fZ/7orz20K94
+ +Ledy59cna/bzEFjt8xJFyRtFYf8VpcnY0BVaCNOp5PlcO9Hi0MbQQ2bInSyznMwCeJZ4Pvn9mL
+ FjdRG5/KOUinxKItEjg10q+babzIVH1QrgcHK66f6zQHV
+X-Received: by 2002:a05:620a:44d3:b0:8a6:fcff:4f96 with SMTP id
+ af79cd13be357-8b2c3162774mr675954785a.31.1763157205592; 
+ Fri, 14 Nov 2025 13:53:25 -0800 (PST)
+X-Google-Smtp-Source: AGHT+IFangmuHVts3aYarN7RowED4NYOh9U+tNJDsbhiHMKh0kNdOLIJPmwpyAOTMVqvE19cZVx0Cg==
+X-Received: by 2002:a05:620a:44d3:b0:8a6:fcff:4f96 with SMTP id
+ af79cd13be357-8b2c3162774mr675950385a.31.1763157205087; 
+ Fri, 14 Nov 2025 13:53:25 -0800 (PST)
 Received: from [192.168.8.208] (pool-72-93-97-194.bstnma.fios.verizon.net.
  [72.93.97.194]) by smtp.gmail.com with ESMTPSA id
- 6a1803df08f44-8828659e0fcsm39351006d6.53.2025.11.14.13.41.55
+ af79cd13be357-8b2aee9e519sm420524285a.5.2025.11.14.13.53.23
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 14 Nov 2025 13:41:55 -0800 (PST)
-Message-ID: <62432fb574396993edd9e277255d59b3f599403f.camel@redhat.com>
-Subject: Re: [PATCH v5 07/13] gpu: nova-core: Implement the GSP sequencer
+ Fri, 14 Nov 2025 13:53:24 -0800 (PST)
+Message-ID: <23d72ccb35a87640720746ba0849eea5a45a85b1.camel@redhat.com>
+Subject: Re: [PATCH v8 01/16] gpu: nova-core: compute layout of more
+ framebuffer regions required for GSP
 From: Lyude Paul <lyude@redhat.com>
-To: Joel Fernandes <joelagnelf@nvidia.com>, linux-kernel@vger.kernel.org, 
- rust-for-linux@vger.kernel.org, dri-devel@lists.freedesktop.org, Danilo
- Krummrich <dakr@kernel.org>, Alexandre Courbot <acourbot@nvidia.com>
-Cc: Alistair Popple <apopple@nvidia.com>, Miguel Ojeda <ojeda@kernel.org>, 
- Alex Gaynor <alex.gaynor@gmail.com>, Boqun Feng <boqun.feng@gmail.com>,
- Gary Guo <gary@garyguo.net>, 	bjorn3_gh@protonmail.com, Benno Lossin
- <lossin@kernel.org>, Andreas Hindborg	 <a.hindborg@kernel.org>, Alice Ryhl
- <aliceryhl@google.com>, Trevor Gross	 <tmgross@umich.edu>, David Airlie
- <airlied@gmail.com>, Simona Vetter	 <simona@ffwll.ch>, Maarten Lankhorst
- <maarten.lankhorst@linux.intel.com>,  Maxime Ripard <mripard@kernel.org>,
- Thomas Zimmermann <tzimmermann@suse.de>, John Hubbard
- <jhubbard@nvidia.com>,  Timur Tabi <ttabi@nvidia.com>,
- joel@joelfernandes.org, Daniel Almeida <daniel.almeida@collabora.com>, 
- nouveau@lists.freedesktop.org
-Date: Fri, 14 Nov 2025 16:41:54 -0500
-In-Reply-To: <20251114195552.739371-8-joelagnelf@nvidia.com>
-References: <20251114195552.739371-1-joelagnelf@nvidia.com>
- <20251114195552.739371-8-joelagnelf@nvidia.com>
+To: Alexandre Courbot <acourbot@nvidia.com>, Danilo Krummrich
+ <dakr@kernel.org>,  Alice Ryhl <aliceryhl@google.com>, David Airlie
+ <airlied@gmail.com>, Simona Vetter <simona@ffwll.ch>,  Benno Lossin
+ <lossin@kernel.org>, Miguel Ojeda <ojeda@kernel.org>, Boqun Feng
+ <boqun.feng@gmail.com>, Gary Guo <gary@garyguo.net>,
+ =?ISO-8859-1?Q?Bj=F6rn?= Roy Baron <bjorn3_gh@protonmail.com>,  Andreas
+ Hindborg <a.hindborg@kernel.org>, Trevor Gross <tmgross@umich.edu>
+Cc: John Hubbard <jhubbard@nvidia.com>, Alistair Popple
+ <apopple@nvidia.com>,  Joel Fernandes <joelagnelf@nvidia.com>, Timur Tabi
+ <ttabi@nvidia.com>, Edwin Peer <epeer@nvidia.com>, 
+ nouveau@lists.freedesktop.org, dri-devel@lists.freedesktop.org, 
+ linux-kernel@vger.kernel.org, rust-for-linux@vger.kernel.org
+Date: Fri, 14 Nov 2025 16:53:23 -0500
+In-Reply-To: <20251108-gsp_boot-v8-1-70b762eedd50@nvidia.com>
+References: <20251108-gsp_boot-v8-0-70b762eedd50@nvidia.com>
+ <20251108-gsp_boot-v8-1-70b762eedd50@nvidia.com>
 Organization: Red Hat Inc.
 User-Agent: Evolution 3.56.2 (3.56.2-2.fc42)
 MIME-Version: 1.0
 X-Mimecast-Spam-Score: 0
-X-Mimecast-MFC-PROC-ID: rmsFb9eETyAPgpZzO_o4Efb7Vsis7DZDoAEFwgi0ekE_1763156518
+X-Mimecast-MFC-PROC-ID: QCTYxhiIvRS22_Q3DacCXCan0riRpk2Udk6kWSYfw-M_1763157206
 X-Mimecast-Originator: redhat.com
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
@@ -113,376 +112,523 @@ List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-I've got one minor change I'd like to see  down below, at least if you thin=
-k
-it makes sense. But otherwise:
+Does this need review from RH's side btw? Figured I should ask since I see
+Danilo's acked-by there but not on any of the individual patches=E2=80=A6
 
-Reviewed-by: Lyude Paul <lyude@redhat.com>
+If so, I'll be happy to review it next week
 
-On Fri, 2025-11-14 at 14:55 -0500, Joel Fernandes wrote:
-> Implement the GSP sequencer which culminates in INIT_DONE message being
-> received from the GSP indicating that the GSP has successfully booted.
+On Sat, 2025-11-08 at 08:43 +0900, Alexandre Courbot wrote:
+> Compute more of the required FB layout information to boot the GSP
+> firmware.
 >=20
-> This is just initial sequencer support, the actual commands will be
-> added in the next patches.
+> This information is dependent on the firmware itself, so first we need
+> to import and abstract the required firmware bindings in the `nvfw`
+> module.
 >=20
-> Signed-off-by: Joel Fernandes <joelagnelf@nvidia.com>
+> Then, a new FB HAL method is introduced in `fb::hal` that uses these
+> bindings and hardware information to compute the correct layout
+> information.
+>=20
+> This information is then used in `fb` and the result made visible in
+> `FbLayout`.
+>=20
+> These 3 things are grouped into the same patch to avoid lots of unused
+> warnings that would be tedious to work around. As they happen in
+> different files, they should not be too difficult to track separately.
+>=20
+> Acked-by: Danilo Krummrich <dakr@kernel.org>
+> Signed-off-by: Alexandre Courbot <acourbot@nvidia.com>
 > ---
->  drivers/gpu/nova-core/gsp.rs           |   1 +
->  drivers/gpu/nova-core/gsp/boot.rs      |  15 ++
->  drivers/gpu/nova-core/gsp/cmdq.rs      |   1 -
->  drivers/gpu/nova-core/gsp/fw.rs        |   1 -
->  drivers/gpu/nova-core/gsp/sequencer.rs | 231 +++++++++++++++++++++++++
->  drivers/gpu/nova-core/sbuffer.rs       |   1 -
->  6 files changed, 247 insertions(+), 3 deletions(-)
->  create mode 100644 drivers/gpu/nova-core/gsp/sequencer.rs
+>  drivers/gpu/nova-core/fb.rs                       |  71 +++++++++++-
+>  drivers/gpu/nova-core/firmware/gsp.rs             |   4 +-
+>  drivers/gpu/nova-core/firmware/riscv.rs           |   2 +-
+>  drivers/gpu/nova-core/gsp.rs                      |   2 +
+>  drivers/gpu/nova-core/gsp/boot.rs                 |   4 +-
+>  drivers/gpu/nova-core/gsp/fw.rs                   | 113 ++++++++++++++++=
+++-
+>  drivers/gpu/nova-core/gsp/fw/r570_144.rs          |   1 -
+>  drivers/gpu/nova-core/gsp/fw/r570_144/bindings.rs | 125 ++++++++++++++++=
+++++++
+>  8 files changed, 311 insertions(+), 11 deletions(-)
 >=20
-> diff --git a/drivers/gpu/nova-core/gsp.rs b/drivers/gpu/nova-core/gsp.rs
-> index e40354c47608..fb6f74797178 100644
-> --- a/drivers/gpu/nova-core/gsp.rs
-> +++ b/drivers/gpu/nova-core/gsp.rs
-> @@ -17,6 +17,7 @@
->  pub(crate) mod cmdq;
->  pub(crate) mod commands;
->  mod fw;
-> +mod sequencer;
-> =20
->  pub(crate) use fw::{
->      GspFwWprMeta,
-> diff --git a/drivers/gpu/nova-core/gsp/boot.rs b/drivers/gpu/nova-core/gs=
-p/boot.rs
-> index eb0ee4f66f0c..e9be10374c51 100644
-> --- a/drivers/gpu/nova-core/gsp/boot.rs
-> +++ b/drivers/gpu/nova-core/gsp/boot.rs
-> @@ -33,6 +33,10 @@
+> diff --git a/drivers/gpu/nova-core/fb.rs b/drivers/gpu/nova-core/fb.rs
+> index a99223f73367..156d9bf1f191 100644
+> --- a/drivers/gpu/nova-core/fb.rs
+> +++ b/drivers/gpu/nova-core/fb.rs
+> @@ -16,9 +16,14 @@
+>  use crate::{
+>      dma::DmaObject,
+>      driver::Bar0,
+> +    firmware::gsp::GspFirmware,
 >      gpu::Chipset,
->      gsp::{
->          commands,
-> +        sequencer::{
-> +            GspSequencer,
-> +            GspSequencerParams, //
-> +        },
->          GspFwWprMeta, //
->      },
->      regs,
-> @@ -221,6 +225,17 @@ pub(crate) fn boot(
->              gsp_falcon.is_riscv_active(bar),
->          );
+> -    num::usize_as_u64,
+> -    regs, //
+> +    gsp,
+> +    num::{
+> +        usize_as_u64,
+> +        FromSafeCast, //
+> +    },
+> +    regs,
+>  };
 > =20
-> +        // Create and run the GSP sequencer.
-> +        let seq_params =3D GspSequencerParams {
-> +            bootloader_app_version: gsp_fw.bootloader.app_version,
-> +            libos_dma_handle: libos_handle,
-> +            gsp_falcon,
-> +            sec2_falcon,
-> +            dev: pdev.as_ref().into(),
-> +            bar,
-> +        };
-> +        GspSequencer::run(&mut self.cmdq, seq_params, Delta::from_secs(1=
-0))?;
+>  mod hal;
+> @@ -95,14 +100,27 @@ pub(crate) fn unregister(&self, bar: &Bar0) {
+>  #[derive(Debug)]
+>  #[expect(dead_code)]
+>  pub(crate) struct FbLayout {
+> +    /// Range of the framebuffer. Starts at `0`.
+>      pub(crate) fb: Range<u64>,
+> +    /// VGA workspace, small area of reserved memory at the end of the f=
+ramebuffer.
+>      pub(crate) vga_workspace: Range<u64>,
+> +    /// FRTS range.
+>      pub(crate) frts: Range<u64>,
+> +    /// Memory area containing the GSP bootloader image.
+> +    pub(crate) boot: Range<u64>,
+> +    /// Memory area containing the GSP firmware image.
+> +    pub(crate) elf: Range<u64>,
+> +    /// WPR2 heap.
+> +    pub(crate) wpr2_heap: Range<u64>,
+> +    /// WPR2 region range, starting with an instance of `GspFwWprMeta`.
+> +    pub(crate) wpr2: Range<u64>,
+> +    pub(crate) heap: Range<u64>,
+> +    pub(crate) vf_partition_count: u8,
+>  }
+> =20
+>  impl FbLayout {
+> -    /// Computes the FB layout.
+> -    pub(crate) fn new(chipset: Chipset, bar: &Bar0) -> Result<Self> {
+> +    /// Computes the FB layout for `chipset` required to run the `gsp_fw=
+` GSP firmware.
+> +    pub(crate) fn new(chipset: Chipset, bar: &Bar0, gsp_fw: &GspFirmware=
+) -> Result<Self> {
+>          let hal =3D hal::fb_hal(chipset);
+> =20
+>          let fb =3D {
+> @@ -146,10 +164,55 @@ pub(crate) fn new(chipset: Chipset, bar: &Bar0) -> =
+Result<Self> {
+>              frts_base..frts_base + FRTS_SIZE
+>          };
+> =20
+> +        let boot =3D {
+> +            const BOOTLOADER_DOWN_ALIGN: Alignment =3D Alignment::new::<=
+SZ_4K>();
+> +            let bootloader_size =3D u64::from_safe_cast(gsp_fw.bootloade=
+r.ucode.size());
+> +            let bootloader_base =3D (frts.start - bootloader_size).align=
+_down(BOOTLOADER_DOWN_ALIGN);
 > +
->          Ok(())
+> +            bootloader_base..bootloader_base + bootloader_size
+> +        };
+> +
+> +        let elf =3D {
+> +            const ELF_DOWN_ALIGN: Alignment =3D Alignment::new::<SZ_64K>=
+();
+> +            let elf_size =3D u64::from_safe_cast(gsp_fw.size);
+> +            let elf_addr =3D (boot.start - elf_size).align_down(ELF_DOWN=
+_ALIGN);
+> +
+> +            elf_addr..elf_addr + elf_size
+> +        };
+> +
+> +        let wpr2_heap =3D {
+> +            const WPR2_HEAP_DOWN_ALIGN: Alignment =3D Alignment::new::<S=
+Z_1M>();
+> +            let wpr2_heap_size =3D
+> +                gsp::LibosParams::from_chipset(chipset).wpr_heap_size(ch=
+ipset, fb.end);
+> +            let wpr2_heap_addr =3D (elf.start - wpr2_heap_size).align_do=
+wn(WPR2_HEAP_DOWN_ALIGN);
+> +
+> +            wpr2_heap_addr..(elf.start).align_down(WPR2_HEAP_DOWN_ALIGN)
+> +        };
+> +
+> +        let wpr2 =3D {
+> +            const WPR2_DOWN_ALIGN: Alignment =3D Alignment::new::<SZ_1M>=
+();
+> +            let wpr2_addr =3D (wpr2_heap.start - u64::from_safe_cast(siz=
+e_of::<gsp::GspFwWprMeta>()))
+> +                .align_down(WPR2_DOWN_ALIGN);
+> +
+> +            wpr2_addr..frts.end
+> +        };
+> +
+> +        let heap =3D {
+> +            const HEAP_SIZE: u64 =3D usize_as_u64(SZ_1M);
+> +
+> +            wpr2.start - HEAP_SIZE..wpr2.start
+> +        };
+> +
+>          Ok(Self {
+>              fb,
+>              vga_workspace,
+>              frts,
+> +            boot,
+> +            elf,
+> +            wpr2_heap,
+> +            wpr2,
+> +            heap,
+> +            vf_partition_count: 0,
+>          })
 >      }
 >  }
-> diff --git a/drivers/gpu/nova-core/gsp/cmdq.rs b/drivers/gpu/nova-core/gs=
-p/cmdq.rs
-> index c0f3218f2980..6f946d14868a 100644
-> --- a/drivers/gpu/nova-core/gsp/cmdq.rs
-> +++ b/drivers/gpu/nova-core/gsp/cmdq.rs
-> @@ -645,7 +645,6 @@ fn wait_for_msg(&self, timeout: Delta) -> Result<GspM=
-essage<'_>> {
->      /// - `EIO` if there was some inconsistency (e.g. message shorter th=
-an advertised) on the
->      ///   message queue.
->      /// - `EINVAL` if the function of the message was unrecognized.
-> -    #[expect(unused)]
->      pub(crate) fn receive_msg<M: MessageFromGsp>(&mut self, timeout: Del=
-ta) -> Result<M>
->      where
->          // This allows all error types, including `Infallible`, to be us=
-ed for `M::InitError`.
+> diff --git a/drivers/gpu/nova-core/firmware/gsp.rs b/drivers/gpu/nova-cor=
+e/firmware/gsp.rs
+> index 72766feae36e..471ace238f62 100644
+> --- a/drivers/gpu/nova-core/firmware/gsp.rs
+> +++ b/drivers/gpu/nova-core/firmware/gsp.rs
+> @@ -143,11 +143,11 @@ pub(crate) struct GspFirmware {
+>      /// Level 0 page table (single 4KB page) with one entry: DMA address=
+ of first level 1 page.
+>      level0: DmaObject,
+>      /// Size in bytes of the firmware contained in [`Self::fw`].
+> -    size: usize,
+> +    pub(crate) size: usize,
+>      /// Device-mapped GSP signatures matching the GPU's [`Chipset`].
+>      signatures: DmaObject,
+>      /// GSP bootloader, verifies the GSP firmware before loading and run=
+ning it.
+> -    bootloader: RiscvFirmware,
+> +    pub(crate) bootloader: RiscvFirmware,
+>  }
+> =20
+>  impl GspFirmware {
+> diff --git a/drivers/gpu/nova-core/firmware/riscv.rs b/drivers/gpu/nova-c=
+ore/firmware/riscv.rs
+> index 270b2c7dc219..3838fab8f1c0 100644
+> --- a/drivers/gpu/nova-core/firmware/riscv.rs
+> +++ b/drivers/gpu/nova-core/firmware/riscv.rs
+> @@ -68,7 +68,7 @@ pub(crate) struct RiscvFirmware {
+>      /// Application version.
+>      app_version: u32,
+>      /// Device-mapped firmware image.
+> -    ucode: DmaObject,
+> +    pub(crate) ucode: DmaObject,
+>  }
+> =20
+>  impl RiscvFirmware {
+> diff --git a/drivers/gpu/nova-core/gsp.rs b/drivers/gpu/nova-core/gsp.rs
+> index 64e472e7a9d3..aa2a9e6654e4 100644
+> --- a/drivers/gpu/nova-core/gsp.rs
+> +++ b/drivers/gpu/nova-core/gsp.rs
+> @@ -6,6 +6,8 @@
+> =20
+>  mod fw;
+> =20
+> +pub(crate) use fw::{GspFwWprMeta, LibosParams};
+> +
+>  pub(crate) const GSP_PAGE_SHIFT: usize =3D 12;
+>  pub(crate) const GSP_PAGE_SIZE: usize =3D 1 << GSP_PAGE_SHIFT;
+> =20
+> diff --git a/drivers/gpu/nova-core/gsp/boot.rs b/drivers/gpu/nova-core/gs=
+p/boot.rs
+> index 19dddff929da..979d3391e58c 100644
+> --- a/drivers/gpu/nova-core/gsp/boot.rs
+> +++ b/drivers/gpu/nova-core/gsp/boot.rs
+> @@ -127,12 +127,12 @@ pub(crate) fn boot(
+> =20
+>          let bios =3D Vbios::new(dev, bar)?;
+> =20
+> -        let _gsp_fw =3D KBox::pin_init(
+> +        let gsp_fw =3D KBox::pin_init(
+>              GspFirmware::new(dev, chipset, FIRMWARE_VERSION)?,
+>              GFP_KERNEL,
+>          )?;
+> =20
+> -        let fb_layout =3D FbLayout::new(chipset, bar)?;
+> +        let fb_layout =3D FbLayout::new(chipset, bar, &gsp_fw)?;
+>          dev_dbg!(dev, "{:#x?}\n", fb_layout);
+> =20
+>          Self::run_fwsec_frts(dev, gsp_falcon, bar, &bios, &fb_layout)?;
 > diff --git a/drivers/gpu/nova-core/gsp/fw.rs b/drivers/gpu/nova-core/gsp/=
 fw.rs
-> index 69c5996742f3..6d58042bc9e8 100644
+> index 34226dd00982..436c00d07b16 100644
 > --- a/drivers/gpu/nova-core/gsp/fw.rs
 > +++ b/drivers/gpu/nova-core/gsp/fw.rs
-> @@ -621,7 +621,6 @@ unsafe impl AsBytes for SequencerBufferCmd {}
->  #[repr(transparent)]
->  pub(crate) struct RunCpuSequencer(r570_144::rpc_run_cpu_sequencer_v17_00=
-);
+> @@ -3,5 +3,116 @@
+>  mod r570_144;
 > =20
+>  // Alias to avoid repeating the version number with every use.
 > -#[expect(unused)]
->  impl RunCpuSequencer {
->      /// Returns the command index.
->      pub(crate) fn cmd_index(&self) -> u32 {
-> diff --git a/drivers/gpu/nova-core/gsp/sequencer.rs b/drivers/gpu/nova-co=
-re/gsp/sequencer.rs
-> new file mode 100644
-> index 000000000000..c5ef3a33466a
-> --- /dev/null
-> +++ b/drivers/gpu/nova-core/gsp/sequencer.rs
-> @@ -0,0 +1,231 @@
-> +// SPDX-License-Identifier: GPL-2.0
+>  use r570_144 as bindings;
 > +
-> +//! GSP Sequencer implementation for Pre-hopper GSP boot sequence.
+> +use core::ops::Range;
 > +
-> +use core::{
-> +    array,
-> +    mem::size_of, //
-> +};
-> +use kernel::device;
-> +use kernel::prelude::*;
-> +use kernel::time::Delta;
-> +use kernel::transmute::FromBytes;
-> +use kernel::types::ARef;
-> +
-> +use crate::driver::Bar0;
-> +use crate::falcon::{
-> +    gsp::Gsp,
-> +    sec2::Sec2,
-> +    Falcon, //
-> +};
-> +use crate::gsp::{
-> +    cmdq::{
-> +        Cmdq,
-> +        MessageFromGsp, //
+> +use kernel::{
+> +    ptr::{
+> +        Alignable,
+> +        Alignment, //
 > +    },
-> +    fw,
+> +    sizes::SZ_1M,
 > +};
-> +use crate::sbuffer::SBufferIter;
 > +
-> +impl MessageFromGsp for GspSequencerInfo {
-> +    const FUNCTION: fw::MsgFunction =3D fw::MsgFunction::GspRunCpuSequen=
-cer;
-> +    type InitError =3D Error;
-> +    type Message =3D fw::RunCpuSequencer;
+> +use crate::{
+> +    gpu::Chipset,
+> +    num::{
+> +        self,
+> +        FromSafeCast, //
+> +    },
+> +};
 > +
-> +    fn read(
-> +        msg: &Self::Message,
-> +        sbuffer: &mut SBufferIter<array::IntoIter<&[u8], 2>>,
-> +    ) -> Result<Self, Self::InitError> {
-> +        let cmd_data =3D sbuffer.flush_into_kvec(GFP_KERNEL)?;
-> +        Ok(GspSequencerInfo {
-> +            cmd_index: msg.cmd_index(),
-> +            cmd_data,
-> +        })
+> +/// Empty type to group methods related to heap parameters for running t=
+he GSP firmware.
+> +enum GspFwHeapParams {}
+> +
+> +/// Minimum required alignment for the GSP heap.
+> +const GSP_HEAP_ALIGNMENT: Alignment =3D Alignment::new::<{ 1 << 20 }>();
+> +
+> +impl GspFwHeapParams {
+> +    /// Returns the amount of GSP-RM heap memory used during GSP-RM boot=
+ and initialization (up to
+> +    /// and including the first client subdevice allocation).
+> +    fn base_rm_size(_chipset: Chipset) -> u64 {
+> +        // TODO: this needs to be updated to return the correct value fo=
+r Hopper+ once support for
+> +        // them is added:
+> +        // u64::from(bindings::GSP_FW_HEAP_PARAM_BASE_RM_SIZE_GH100)
+> +        u64::from(bindings::GSP_FW_HEAP_PARAM_BASE_RM_SIZE_TU10X)
+> +    }
+> +
+> +    /// Returns the amount of heap memory required to support a single c=
+hannel allocation.
+> +    fn client_alloc_size() -> u64 {
+> +        u64::from(bindings::GSP_FW_HEAP_PARAM_CLIENT_ALLOC_SIZE)
+> +            .align_up(GSP_HEAP_ALIGNMENT)
+> +            .unwrap_or(u64::MAX)
+> +    }
+> +
+> +    /// Returns the amount of memory to reserve for management purposes =
+for a framebuffer of size
+> +    /// `fb_size`.
+> +    fn management_overhead(fb_size: u64) -> u64 {
+> +        let fb_size_gb =3D fb_size.div_ceil(u64::from_safe_cast(kernel::=
+sizes::SZ_1G));
+> +
+> +        u64::from(bindings::GSP_FW_HEAP_PARAM_SIZE_PER_GB_FB)
+> +            .saturating_mul(fb_size_gb)
+> +            .align_up(GSP_HEAP_ALIGNMENT)
+> +            .unwrap_or(u64::MAX)
 > +    }
 > +}
 > +
-> +const CMD_SIZE: usize =3D size_of::<fw::SequencerBufferCmd>();
-> +
-> +/// GSP Sequencer information containing the command sequence and data.
-> +struct GspSequencerInfo {
-> +    /// Current command index for error reporting.
-> +    cmd_index: u32,
-> +    /// Command data buffer containing the sequence of commands.
-> +    cmd_data: KVec<u8>,
+> +/// Heap memory requirements and constraints for a given version of the =
+GSP LIBOS.
+> +pub(crate) struct LibosParams {
+> +    /// The base amount of heap required by the GSP operating system, in=
+ bytes.
+> +    carveout_size: u64,
+> +    /// The minimum and maximum sizes allowed for the GSP FW heap, in by=
+tes.
+> +    allowed_heap_size: Range<u64>,
 > +}
 > +
-> +/// GSP Sequencer Command types with payload data.
-> +/// Commands have an opcode and an opcode-dependent struct.
-> +#[allow(dead_code)]
-> +pub(crate) enum GspSeqCmd {}
+> +impl LibosParams {
+> +    /// Version 2 of the GSP LIBOS (Turing and GA100)
+> +    const LIBOS2: LibosParams =3D LibosParams {
+> +        carveout_size: num::u32_as_u64(bindings::GSP_FW_HEAP_PARAM_OS_SI=
+ZE_LIBOS2),
+> +        allowed_heap_size: num::u32_as_u64(bindings::GSP_FW_HEAP_SIZE_OV=
+ERRIDE_LIBOS2_MIN_MB)
+> +            * num::usize_as_u64(SZ_1M)
+> +            ..num::u32_as_u64(bindings::GSP_FW_HEAP_SIZE_OVERRIDE_LIBOS2=
+_MAX_MB)
+> +                * num::usize_as_u64(SZ_1M),
+> +    };
 > +
-> +impl GspSeqCmd {
-> +    /// Creates a new `GspSeqCmd` from raw data returning the command an=
-d its size in bytes.
-> +    pub(crate) fn new(data: &[u8], _dev: &device::Device) -> Result<(Sel=
-f, usize)> {
-> +        let _fw_cmd =3D fw::SequencerBufferCmd::from_bytes(data).ok_or(E=
-INVAL)?;
-> +        let _opcode_size =3D core::mem::size_of::<u32>();
+> +    /// Version 3 of the GSP LIBOS (GA102+)
+> +    const LIBOS3: LibosParams =3D LibosParams {
+> +        carveout_size: num::u32_as_u64(bindings::GSP_FW_HEAP_PARAM_OS_SI=
+ZE_LIBOS3_BAREMETAL),
+> +        allowed_heap_size: num::u32_as_u64(
+> +            bindings::GSP_FW_HEAP_SIZE_OVERRIDE_LIBOS3_BAREMETAL_MIN_MB,
+> +        ) * num::usize_as_u64(SZ_1M)
+> +            ..num::u32_as_u64(bindings::GSP_FW_HEAP_SIZE_OVERRIDE_LIBOS3=
+_BAREMETAL_MAX_MB)
+> +                * num::usize_as_u64(SZ_1M),
+> +    };
 > +
-> +        // NOTE: At this commit, NO opcodes exist yet, so just return er=
-ror.
-> +        // Later commits will add match arms here.
-> +        Err(EINVAL)
-
-Maybe just use todo!() here?
-
-> +    }
-> +}
-> +
-> +/// GSP Sequencer for executing firmware commands during boot.
-> +#[expect(dead_code)]
-> +pub(crate) struct GspSequencer<'a> {
-> +    /// Sequencer information with command data.
-> +    seq_info: GspSequencerInfo,
-> +    /// `Bar0` for register access.
-> +    bar: &'a Bar0,
-> +    /// SEC2 falcon for core operations.
-> +    sec2_falcon: &'a Falcon<Sec2>,
-> +    /// GSP falcon for core operations.
-> +    gsp_falcon: &'a Falcon<Gsp>,
-> +    /// LibOS DMA handle address.
-> +    libos_dma_handle: u64,
-> +    /// Bootloader application version.
-> +    bootloader_app_version: u32,
-> +    /// Device for logging.
-> +    dev: ARef<device::Device>,
-> +}
-> +
-> +/// Trait for running sequencer commands.
-> +pub(crate) trait GspSeqCmdRunner {
-> +    fn run(&self, sequencer: &GspSequencer<'_>) -> Result;
-> +}
-> +
-> +impl GspSeqCmdRunner for GspSeqCmd {
-> +    fn run(&self, _seq: &GspSequencer<'_>) -> Result {
-> +        Ok(())
-> +    }
-> +}
-> +
-> +/// Iterator over GSP sequencer commands.
-> +pub(crate) struct GspSeqIter<'a> {
-> +    /// Command data buffer.
-> +    cmd_data: &'a [u8],
-> +    /// Current position in the buffer.
-> +    current_offset: usize,
-> +    /// Total number of commands to process.
-> +    total_cmds: u32,
-> +    /// Number of commands processed so far.
-> +    cmds_processed: u32,
-> +    /// Device for logging.
-> +    dev: ARef<device::Device>,
-> +}
-> +
-> +impl<'a> Iterator for GspSeqIter<'a> {
-> +    type Item =3D Result<GspSeqCmd>;
-> +
-> +    fn next(&mut self) -> Option<Self::Item> {
-> +        // Stop if we've processed all commands or reached the end of da=
-ta.
-> +        if self.cmds_processed >=3D self.total_cmds || self.current_offs=
-et >=3D self.cmd_data.len() {
-> +            return None;
-> +        }
-> +
-> +        // Check if we have enough data for opcode.
-> +        if self.current_offset + core::mem::size_of::<u32>() > self.cmd_=
-data.len() {
-> +            return Some(Err(EIO));
-> +        }
-> +
-> +        let offset =3D self.current_offset;
-> +
-> +        // Handle command creation based on available data,
-> +        // zero-pad if necessary (since last command may not be full siz=
-e).
-> +        let mut buffer =3D [0u8; CMD_SIZE];
-> +        let copy_len =3D if offset + CMD_SIZE <=3D self.cmd_data.len() {
-> +            CMD_SIZE
+> +    /// Returns the libos parameters corresponding to `chipset`.
+> +    pub(crate) fn from_chipset(chipset: Chipset) -> &'static LibosParams=
+ {
+> +        if chipset < Chipset::GA102 {
+> +            &Self::LIBOS2
 > +        } else {
-> +            self.cmd_data.len() - offset
-> +        };
-> +        buffer[..copy_len].copy_from_slice(&self.cmd_data[offset..offset=
- + copy_len]);
-> +        let cmd_result =3D GspSeqCmd::new(&buffer, &self.dev);
+> +            &Self::LIBOS3
+> +        }
+> +    }
 > +
-> +        cmd_result.map_or_else(
-> +            |_err| {
-> +                dev_err!(self.dev, "Error parsing command at offset {}",=
- offset);
-> +                None
-> +            },
-> +            |(cmd, size)| {
-> +                self.current_offset +=3D size;
-> +                self.cmds_processed +=3D 1;
-> +                Some(Ok(cmd))
-> +            },
-> +        )
+> +    /// Returns the amount of memory (in bytes) to allocate for the WPR =
+heap for a framebuffer size
+> +    /// of `fb_size` (in bytes) for `chipset`.
+> +    pub(crate) fn wpr_heap_size(&self, chipset: Chipset, fb_size: u64) -=
+> u64 {
+> +        // The WPR heap will contain the following:
+> +        // LIBOS carveout,
+> +        self.carveout_size
+> +            // RM boot working memory,
+> +            .saturating_add(GspFwHeapParams::base_rm_size(chipset))
+> +            // One RM client,
+> +            .saturating_add(GspFwHeapParams::client_alloc_size())
+> +            // Overhead for memory management.
+> +            .saturating_add(GspFwHeapParams::management_overhead(fb_size=
+))
+> +            // Clamp to the supported heap sizes.
+> +            .clamp(self.allowed_heap_size.start, self.allowed_heap_size.=
+end - 1)
 > +    }
 > +}
 > +
-> +impl<'a> GspSequencer<'a> {
-> +    fn iter(&self) -> GspSeqIter<'_> {
-> +        let cmd_data =3D &self.seq_info.cmd_data[..];
+> +/// Structure passed to the GSP bootloader, containing the framebuffer l=
+ayout as well as the DMA
+> +/// addresses of the GSP bootloader and firmware.
+> +#[repr(transparent)]
+> +pub(crate) struct GspFwWprMeta(bindings::GspFwWprMeta);
+> diff --git a/drivers/gpu/nova-core/gsp/fw/r570_144.rs b/drivers/gpu/nova-=
+core/gsp/fw/r570_144.rs
+> index 35cb0370a7c9..82a973cd99c3 100644
+> --- a/drivers/gpu/nova-core/gsp/fw/r570_144.rs
+> +++ b/drivers/gpu/nova-core/gsp/fw/r570_144.rs
+> @@ -12,7 +12,6 @@
+>  #![cfg_attr(test, allow(unsafe_op_in_unsafe_fn))]
+>  #![allow(
+>      dead_code,
+> -    unused_imports,
+>      clippy::all,
+>      clippy::undocumented_unsafe_blocks,
+>      clippy::ptr_as_ptr,
+> diff --git a/drivers/gpu/nova-core/gsp/fw/r570_144/bindings.rs b/drivers/=
+gpu/nova-core/gsp/fw/r570_144/bindings.rs
+> index cec594032515..0407000cca22 100644
+> --- a/drivers/gpu/nova-core/gsp/fw/r570_144/bindings.rs
+> +++ b/drivers/gpu/nova-core/gsp/fw/r570_144/bindings.rs
+> @@ -1 +1,126 @@
+>  // SPDX-License-Identifier: GPL-2.0
 > +
-> +        GspSeqIter {
-> +            cmd_data,
-> +            current_offset: 0,
-> +            total_cmds: self.seq_info.cmd_index,
-> +            cmds_processed: 0,
-> +            dev: self.dev.clone(),
+> +pub const GSP_FW_HEAP_PARAM_OS_SIZE_LIBOS2: u32 =3D 0;
+> +pub const GSP_FW_HEAP_PARAM_OS_SIZE_LIBOS3_BAREMETAL: u32 =3D 23068672;
+> +pub const GSP_FW_HEAP_PARAM_BASE_RM_SIZE_TU10X: u32 =3D 8388608;
+> +pub const GSP_FW_HEAP_PARAM_SIZE_PER_GB_FB: u32 =3D 98304;
+> +pub const GSP_FW_HEAP_PARAM_CLIENT_ALLOC_SIZE: u32 =3D 100663296;
+> +pub const GSP_FW_HEAP_SIZE_OVERRIDE_LIBOS2_MIN_MB: u32 =3D 64;
+> +pub const GSP_FW_HEAP_SIZE_OVERRIDE_LIBOS2_MAX_MB: u32 =3D 256;
+> +pub const GSP_FW_HEAP_SIZE_OVERRIDE_LIBOS3_BAREMETAL_MIN_MB: u32 =3D 88;
+> +pub const GSP_FW_HEAP_SIZE_OVERRIDE_LIBOS3_BAREMETAL_MAX_MB: u32 =3D 280=
+;
+> +pub type __u8 =3D ffi::c_uchar;
+> +pub type __u16 =3D ffi::c_ushort;
+> +pub type __u32 =3D ffi::c_uint;
+> +pub type __u64 =3D ffi::c_ulonglong;
+> +pub type u8_ =3D __u8;
+> +pub type u16_ =3D __u16;
+> +pub type u32_ =3D __u32;
+> +pub type u64_ =3D __u64;
+> +#[repr(C)]
+> +#[derive(Copy, Clone)]
+> +pub struct GspFwWprMeta {
+> +    pub magic: u64_,
+> +    pub revision: u64_,
+> +    pub sysmemAddrOfRadix3Elf: u64_,
+> +    pub sizeOfRadix3Elf: u64_,
+> +    pub sysmemAddrOfBootloader: u64_,
+> +    pub sizeOfBootloader: u64_,
+> +    pub bootloaderCodeOffset: u64_,
+> +    pub bootloaderDataOffset: u64_,
+> +    pub bootloaderManifestOffset: u64_,
+> +    pub __bindgen_anon_1: GspFwWprMeta__bindgen_ty_1,
+> +    pub gspFwRsvdStart: u64_,
+> +    pub nonWprHeapOffset: u64_,
+> +    pub nonWprHeapSize: u64_,
+> +    pub gspFwWprStart: u64_,
+> +    pub gspFwHeapOffset: u64_,
+> +    pub gspFwHeapSize: u64_,
+> +    pub gspFwOffset: u64_,
+> +    pub bootBinOffset: u64_,
+> +    pub frtsOffset: u64_,
+> +    pub frtsSize: u64_,
+> +    pub gspFwWprEnd: u64_,
+> +    pub fbSize: u64_,
+> +    pub vgaWorkspaceOffset: u64_,
+> +    pub vgaWorkspaceSize: u64_,
+> +    pub bootCount: u64_,
+> +    pub __bindgen_anon_2: GspFwWprMeta__bindgen_ty_2,
+> +    pub gspFwHeapVfPartitionCount: u8_,
+> +    pub flags: u8_,
+> +    pub padding: [u8_; 2usize],
+> +    pub pmuReservedSize: u32_,
+> +    pub verified: u64_,
+> +}
+> +#[repr(C)]
+> +#[derive(Copy, Clone)]
+> +pub union GspFwWprMeta__bindgen_ty_1 {
+> +    pub __bindgen_anon_1: GspFwWprMeta__bindgen_ty_1__bindgen_ty_1,
+> +    pub __bindgen_anon_2: GspFwWprMeta__bindgen_ty_1__bindgen_ty_2,
+> +}
+> +#[repr(C)]
+> +#[derive(Debug, Default, Copy, Clone)]
+> +pub struct GspFwWprMeta__bindgen_ty_1__bindgen_ty_1 {
+> +    pub sysmemAddrOfSignature: u64_,
+> +    pub sizeOfSignature: u64_,
+> +}
+> +#[repr(C)]
+> +#[derive(Debug, Default, Copy, Clone)]
+> +pub struct GspFwWprMeta__bindgen_ty_1__bindgen_ty_2 {
+> +    pub gspFwHeapFreeListWprOffset: u32_,
+> +    pub unused0: u32_,
+> +    pub unused1: u64_,
+> +}
+> +impl Default for GspFwWprMeta__bindgen_ty_1 {
+> +    fn default() -> Self {
+> +        let mut s =3D ::core::mem::MaybeUninit::<Self>::uninit();
+> +        unsafe {
+> +            ::core::ptr::write_bytes(s.as_mut_ptr(), 0, 1);
+> +            s.assume_init()
 > +        }
 > +    }
 > +}
-> +
-> +/// Parameters for running the GSP sequencer.
-> +pub(crate) struct GspSequencerParams<'a> {
-> +    /// Bootloader application version.
-> +    pub(crate) bootloader_app_version: u32,
-> +    /// LibOS DMA handle address.
-> +    pub(crate) libos_dma_handle: u64,
-> +    /// GSP falcon for core operations.
-> +    pub(crate) gsp_falcon: &'a Falcon<Gsp>,
-> +    /// SEC2 falcon for core operations.
-> +    pub(crate) sec2_falcon: &'a Falcon<Sec2>,
-> +    /// Device for logging.
-> +    pub(crate) dev: ARef<device::Device>,
-> +    /// BAR0 for register access.
-> +    pub(crate) bar: &'a Bar0,
+> +#[repr(C)]
+> +#[derive(Copy, Clone)]
+> +pub union GspFwWprMeta__bindgen_ty_2 {
+> +    pub __bindgen_anon_1: GspFwWprMeta__bindgen_ty_2__bindgen_ty_1,
+> +    pub __bindgen_anon_2: GspFwWprMeta__bindgen_ty_2__bindgen_ty_2,
 > +}
-> +
-> +impl<'a> GspSequencer<'a> {
-> +    pub(crate) fn run(cmdq: &mut Cmdq, params: GspSequencerParams<'a>, t=
-imeout: Delta) -> Result {
-> +        let seq_info =3D loop {
-> +            match cmdq.receive_msg::<GspSequencerInfo>(timeout) {
-> +                Ok(seq_info) =3D> break seq_info,
-> +                Err(ERANGE) =3D> continue,
-> +                Err(e) =3D> return Err(e),
-> +            }
-> +        };
-> +
-> +        let sequencer =3D GspSequencer {
-> +            seq_info,
-> +            bar: params.bar,
-> +            sec2_falcon: params.sec2_falcon,
-> +            gsp_falcon: params.gsp_falcon,
-> +            libos_dma_handle: params.libos_dma_handle,
-> +            bootloader_app_version: params.bootloader_app_version,
-> +            dev: params.dev,
-> +        };
-> +
-> +        dev_dbg!(sequencer.dev, "Running CPU Sequencer commands");
-> +
-> +        for cmd_result in sequencer.iter() {
-> +            match cmd_result {
-> +                Ok(cmd) =3D> cmd.run(&sequencer)?,
-> +                Err(e) =3D> {
-> +                    dev_err!(
-> +                        sequencer.dev,
-> +                        "Error running command at index {}",
-> +                        sequencer.seq_info.cmd_index
-> +                    );
-> +                    return Err(e);
-> +                }
-> +            }
+> +#[repr(C)]
+> +#[derive(Debug, Default, Copy, Clone)]
+> +pub struct GspFwWprMeta__bindgen_ty_2__bindgen_ty_1 {
+> +    pub partitionRpcAddr: u64_,
+> +    pub partitionRpcRequestOffset: u16_,
+> +    pub partitionRpcReplyOffset: u16_,
+> +    pub elfCodeOffset: u32_,
+> +    pub elfDataOffset: u32_,
+> +    pub elfCodeSize: u32_,
+> +    pub elfDataSize: u32_,
+> +    pub lsUcodeVersion: u32_,
+> +}
+> +#[repr(C)]
+> +#[derive(Debug, Default, Copy, Clone)]
+> +pub struct GspFwWprMeta__bindgen_ty_2__bindgen_ty_2 {
+> +    pub partitionRpcPadding: [u32_; 4usize],
+> +    pub sysmemAddrOfCrashReportQueue: u64_,
+> +    pub sizeOfCrashReportQueue: u32_,
+> +    pub lsUcodeVersionPadding: [u32_; 1usize],
+> +}
+> +impl Default for GspFwWprMeta__bindgen_ty_2 {
+> +    fn default() -> Self {
+> +        let mut s =3D ::core::mem::MaybeUninit::<Self>::uninit();
+> +        unsafe {
+> +            ::core::ptr::write_bytes(s.as_mut_ptr(), 0, 1);
+> +            s.assume_init()
 > +        }
-> +
-> +        dev_dbg!(
-> +            sequencer.dev,
-> +            "CPU Sequencer commands completed successfully"
-> +        );
-> +        Ok(())
 > +    }
 > +}
-> diff --git a/drivers/gpu/nova-core/sbuffer.rs b/drivers/gpu/nova-core/sbu=
-ffer.rs
-> index 7a5947b8be19..64758b7fae56 100644
-> --- a/drivers/gpu/nova-core/sbuffer.rs
-> +++ b/drivers/gpu/nova-core/sbuffer.rs
-> @@ -168,7 +168,6 @@ pub(crate) fn read_exact(&mut self, mut dst: &mut [u8=
-]) -> Result {
->      /// Read all the remaining data into a [`KVec`].
->      ///
->      /// `self` will be empty after this operation.
-> -    #[expect(unused)]
->      pub(crate) fn flush_into_kvec(&mut self, flags: kernel::alloc::Flags=
-) -> Result<KVec<u8>> {
->          let mut buf =3D KVec::<u8>::new();
-> =20
+> +impl Default for GspFwWprMeta {
+> +    fn default() -> Self {
+> +        let mut s =3D ::core::mem::MaybeUninit::<Self>::uninit();
+> +        unsafe {
+> +            ::core::ptr::write_bytes(s.as_mut_ptr(), 0, 1);
+> +            s.assume_init()
+> +        }
+> +    }
+> +}
 
 --=20
 Cheers,
