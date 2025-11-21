@@ -2,68 +2,69 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id 53AF8CBA8C7
-	for <lists+nouveau@lfdr.de>; Sat, 13 Dec 2025 13:17:15 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 54D9FC7851C
+	for <lists+nouveau@lfdr.de>; Fri, 21 Nov 2025 11:06:36 +0100 (CET)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 957EC10E403;
-	Sat, 13 Dec 2025 12:17:09 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 1ABEE10E80C;
+	Fri, 21 Nov 2025 10:06:34 +0000 (UTC)
 Authentication-Results: gabe.freedesktop.org;
-	dkim=pass (2048-bit key; unprotected) header.d=bne-home.net header.i=@bne-home.net header.b="biLsnQJM";
+	dkim=pass (2048-bit key; unprotected) header.d=google.com header.i=@google.com header.b="EB7P9ZGl";
 	dkim-atps=neutral
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-X-Greylist: delayed 939 seconds by postgrey-1.36 at gabe;
- Fri, 21 Nov 2025 04:20:28 UTC
-Received: from outbound.pv.icloud.com
- (p-west1-cluster1-host2-snip4-2.eps.apple.com [57.103.64.75])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 2B74D10E0FE
- for <nouveau@lists.freedesktop.org>; Fri, 21 Nov 2025 04:20:28 +0000 (UTC)
-Received: from outbound.pv.icloud.com (unknown [127.0.0.2])
- by p00-icloudmta-asmtp-us-west-1a-100-percent-10 (Postfix) with ESMTPS id
- 85A6E180012B; Fri, 21 Nov 2025 04:04:44 +0000 (UTC)
-Dkim-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=bne-home.net; s=sig1;
- bh=KgRL+95kZnPXAu5ZQLyBzJnkyzaBgtcdyqPhF199Ueg=;
- h=From:Content-Type:Mime-Version:Subject:Message-Id:Date:To:x-icloud-hme;
- b=biLsnQJMxQlj6KV366WkJzEbDOhAfiKBEpVnveSvHaw6EPRI0RRVlqDI68YRm1zwESYaFhpA9xUtuK9qRzSGls95l+lr+5gxfFwpADpnkdRlokZIgKpMAa4TlhssGekCn7Dxl8VbnoBz7/9d4wunE31vc/ogQt3HbCsx9X7ur6F4elybDslRzs504VeWfUdBDO7PJ/vJr0Nm40otKw8Fcet6yfG+RkXrF+JI8ImHaKuLp1fQHwvlL2YGUw3XNjVpHFmUe3tzdLF8qKztlKLjrh4H4txJEGRezxjTH9YhqTpuGySFk9Y2KTipEM2adTI5iqfEr672D6CCFv/e+ppqeA==
-mail-alias-created-date: 1746336505199
-Received: from smtpclient.apple (unknown [17.56.9.36])
- by p00-icloudmta-asmtp-us-west-1a-100-percent-10 (Postfix) with ESMTPSA id
- 582BC18000A3; Fri, 21 Nov 2025 04:04:41 +0000 (UTC)
-From: bshephar@bne-home.net
-Content-Type: text/plain;
-	charset=us-ascii
-Content-Transfer-Encoding: quoted-printable
-Mime-Version: 1.0 (Mac OS X Mail 16.0 \(3864.100.1.1.5\))
-Subject: [PATCH 1/1] drm: nova: Align GEM memory allocation to system page size
-Message-Id: <98227EBD-92F7-40FC-A5A4-3FF3780FB2CB@bne-home.net>
-Date: Fri, 21 Nov 2025 14:04:28 +1000
-Cc: rust-for-linux@vger.kernel.org, nouveau@lists.freedesktop.org,
- brendan.shephard@gmail.com
-To: dakr@kernel.org, acourbot@nvidia.com, joelagnelf@nvidia.com,
- jhubbard@nvidia.com, airlied@gmail.com
-X-Mailer: Apple Mail (2.3864.100.1.1.5)
-X-Proofpoint-ORIG-GUID: 4-scDofsmCQXDjcgd3FrXkb231N6wEoi
-X-Authority-Info: v=2.4 cv=G/IR0tk5 c=1 sm=1 tr=0 ts=691fe4dd cx=c_apl:c_pps
- a=azHRBMxVc17uSn+fyuI/eg==:117 a=azHRBMxVc17uSn+fyuI/eg==:17
- a=kj9zAlcOel0A:10 a=6UeiqGixMTsA:10 a=VkNPw1HP01LnGYTKEx00:22
- a=JppZAXPjAAAA:8 a=a2W8XFUYhzryu76BgXoA:9 a=CjuIK1q_8ugA:10
- a=mTXuAFqUwmiQvsSFmwXH:22
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjUxMTIxMDAyOSBTYWx0ZWRfXyAVcKxbE3roB
- BCGegLr/MNh2dVeNzup/3kdIsEtJMvVNdVp1a3t7qB8fNVd92DnNrgHx23NmgXF5k5BFMFqWb8T
- 8iCFxWnx/1+2SzFH/m4xVx2jhGfSvzpjKiRHEBB9B7iMwkwOfj6H+eciHTMH8TCUG3wV2bWf6Q4
- Zjp7T/iMsLgUq1nmYjPxp1EM+EVYL/l8/ykQ4qHlqdJSxMLCaK05aJpPoUNOMNaaHIC161Mt5dJ
- hk7AaTdYDbduLXrzBR2PemeDjiORZ/ItCgq6+d/Q+SRqvbAuD8NxkiupIH3T3ko6dA1uEMXQML9
- eJk99Ln85SlA9EtygvA
-X-Proofpoint-GUID: 4-scDofsmCQXDjcgd3FrXkb231N6wEoi
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.293,Aquarius:18.0.1121,Hydra:6.1.9,FMLib:17.12.100.49
- definitions=2025-11-21_01,2025-11-20_01,2025-10-01_01
-X-Proofpoint-Spam-Details: rule=notspam policy=default score=0 adultscore=0
- bulkscore=0 suspectscore=0 mlxscore=0 spamscore=0 phishscore=0 clxscore=1030
- malwarescore=0 mlxlogscore=999 classifier=spam authscore=0 adjust=0
- reason=mlx scancount=1 engine=8.22.0-2510240001 definitions=main-2511210029
-X-JNJ: AAAAAAABPhMs/i7Ev0WhhMd4VFc2iuEJ6Bdh5rQ21jVcuWg8trYiFxmDjZeC8GKd9YzPtljeI24MkoBH953xSKz5Hz3neHOdeNU34hC1Hh4pB5Z8erxfTNLsHDROC85mg4F5v1W9B/CXrDpMoKbsn6cCiIbC2dYEeCQCb3c+c4Tzp1t++fEs7gIqD5OxZaA11V9+krRFhFkSh0LrUs2Jk1dhC/2ers0lec/5YrK6jMDgSYAjn7rZJvWgnxkEm76QkIVEAGqZCYYF0VaNf8rIcWSL3Psb6alYAxPAwG7kovZCg9heWIFo+ofo8tEFsquCgIQ+CQfY0yAYEAV+K3vs5Cpm3iEen5xogN3YbEvPPUQdzD6OToAzHC0l3aZvb3ic7WmbAehml6b4OLfYbnFvFy9mNj3M5fSqUji/EPN4bZbTJEqdbnAVuVsD9qatiFlkA0CCUrn/7G0Ol1OsIkevmmxlVqbxIZ1y+teOHQTfkiznDvZtNwDmb0i6VFe3OhyjmRLdpjrxNmJy7RoFTdo1UnXrFVkl0HAOnZ6I3z5oxgu+GOn7d59xBfDyLf44MIiSK5oSNYbhlIr/raSgsGT7RfG3kaM4/6IocsUHMaByTZ8P/Ka60BMJSA9/vrsntAvgFl3ZlowyuvrYQHrbqYHn77wA0+VN4pL8JCmdEgBdJXK1ysjE2Q1X78x0kkN0phn9s/0q8KDuoCAItIq0HP/x7g==
-X-Mailman-Approved-At: Sat, 13 Dec 2025 12:17:03 +0000
+Received: from mail-wr1-f74.google.com (mail-wr1-f74.google.com
+ [209.85.221.74])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 8872610E80A
+ for <nouveau@lists.freedesktop.org>; Fri, 21 Nov 2025 10:06:33 +0000 (UTC)
+Received: by mail-wr1-f74.google.com with SMTP id
+ ffacd0b85a97d-42b3ed2c3e3so2047159f8f.1
+ for <nouveau@lists.freedesktop.org>; Fri, 21 Nov 2025 02:06:33 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=google.com; s=20230601; t=1763719592; x=1764324392;
+ darn=lists.freedesktop.org; 
+ h=cc:to:from:subject:message-id:mime-version:date:from:to:cc:subject
+ :date:message-id:reply-to;
+ bh=cl2MKw8tab6Mtz1FgEqrovn666OZWtYzaeQDzUi1X/I=;
+ b=EB7P9ZGlvi9DtS2k+qj1JXCUlRE2AJzCF2PxB7H+3BIHMMrRDQRtgVLK4CiakYpOJW
+ wIZZYOKR8KARJufnj8KK8O0gwdDHFHGohzwv8zeD+qbvbx+iwjsTYMbk9hh4hjHHapR0
+ RhzOF6+tPIgAAlYRYP5ilzCk7HKNMzVMiA1FLkVJqXh4S0Uf0uuXfVtDwmAcFqj8A6Fy
+ P6l4Bbmvzsrnm2JGgogc0urBQMcyAzTW5LHP89nri0F3PzcBiENkVYOvXcwXNQ3/kMeo
+ m7Sg4iXXdaaK71e67dHtqTIVomyALy6Hh8QlYttMkbSi9FONkgrcEGzDsqJo4GxjH0P6
+ 55yA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1763719592; x=1764324392;
+ h=cc:to:from:subject:message-id:mime-version:date:x-gm-message-state
+ :from:to:cc:subject:date:message-id:reply-to;
+ bh=cl2MKw8tab6Mtz1FgEqrovn666OZWtYzaeQDzUi1X/I=;
+ b=pn29emyxaFhHeqPXmykjJz63YessjMLHRVMFz1+HnPjrrdUx3GJhflDyidl/AA8D36
+ t9KoXsk+Ajd70atVFOexZYmZh23ScOA2w8Z1/oQLjgKmxrkLSbVc3fjCcf9xed5GIKIn
+ VQEf6tYMk8oFLjuedYCfQbBZOjiwJWXT/AF58kk9/F/he7BLCtq7CvofO4+Z/aoTzddw
+ 981Hcq0/PXxFOEDLBHu/Q8aTvz5Ke2fYCfQj0nTS//m51qgThX35pVk2wEjYyiavyYj7
+ gGSuaV6E1Pu9r0H0HmVubz6kNT3Uti8xxg1aXSRmaUV790/UzUXS2Om30UgnnpStTPdK
+ cDOg==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCWDIvxYN5uKrFUnmLtKTNNBdmNVhxQc4Qk2s3uNK2C/WNs2TSBO29vtujpf2jSMFCaiMZM5xXne@lists.freedesktop.org
+X-Gm-Message-State: AOJu0YxNYOflFs+2+7uOkfLwoohZUwHFpisiNUsOkVaPvamHOTYSmldo
+ Im2M6H5N3yfuWfbzE61snBK7UQFilKDz+dX4vMvvi60FSrDTTZiD0OM7RG7f7K4y5d5oNnm+Dik
+ Vl/B6Dl9tXm9bHaIa1g==
+X-Google-Smtp-Source: AGHT+IFRCpnui5X/hdHVF+GN9/3IwNDrRnkzekQdAdU4QEDBAj7wm7oIR1v0hrBczQVblLlGTSnUTYy18xsQNyg=
+X-Received: from wroe1.prod.google.com ([2002:adf:ef01:0:b0:42b:b28a:6748])
+ (user=aliceryhl job=prod-delivery.src-stubby-dispatcher) by
+ 2002:a5d:5f44:0:b0:429:d350:802d with SMTP id
+ ffacd0b85a97d-42cc1d34848mr1592512f8f.45.1763719592117; 
+ Fri, 21 Nov 2025 02:06:32 -0800 (PST)
+Date: Fri, 21 Nov 2025 10:06:30 +0000
+Mime-Version: 1.0
+Message-ID: <aSA5pshsJ7TeJIbu@google.com>
+Subject: [PULL] DRM Rust changes for v6.19 (2nd)
+From: Alice Ryhl <aliceryhl@google.com>
+To: Dave Airlie <airlied@gmail.com>, Simona Vetter <simona.vetter@ffwll.ch>
+Cc: Danilo Krummrich <dakr@kernel.org>, Alexandre Courbot <acourbot@nvidia.com>,
+ Daniel Almeida <daniel.almeida@collabora.com>, Miguel Ojeda <ojeda@kernel.org>,
+ nouveau@lists.freedesktop.org, dri-devel@lists.freedesktop.org, 
+ rust-for-linux@vger.kernel.org, linux-kernel@vger.kernel.org, 
+ dim-tools@lists.freedesktop.org
+Content-Type: text/plain; charset="utf-8"
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -78,50 +79,36 @@ List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-Use page::page_align for GEM object memory allocation to ensure the
-allocation is page aligned. This ensures that the allocation is page
-aligned with the system in cases where 4096 is not the default.
-For example on 16k or 64k aarch64 systems this allocation should be
-aligned accordingly.
+Hi Dave and Sima,
 
-Signed-off-by: Brendan Shephard <bshephar@bne-home.net>
----
- drivers/gpu/drm/nova/gem.rs | 11 ++++++++---
- 1 file changed, 8 insertions(+), 3 deletions(-)
+Please pull the following DRM Rust changes. This PR fixes a warning and
+broken link in the Rust documentation build when building with rustc
+prior to 1.80.0.
 
-diff --git a/drivers/gpu/drm/nova/gem.rs b/drivers/gpu/drm/nova/gem.rs
-index 2760ba4f3450..a07e922e25ef 100644
---- a/drivers/gpu/drm/nova/gem.rs
-+++ b/drivers/gpu/drm/nova/gem.rs
-@@ -3,6 +3,10 @@
- use kernel::{
-     drm,
-     drm::{gem, gem::BaseObject},
-+    page::{
-+        page_align,
-+        PAGE_SIZE, //
-+    },
-     prelude::*,
-     sync::aref::ARef,
- };
-@@ -27,12 +31,13 @@ fn new(_dev: &NovaDevice, _size: usize) -> impl =
-PinInit<Self, Error> {
- impl NovaObject {
-     /// Create a new DRM GEM object.
-     pub(crate) fn new(dev: &NovaDevice, size: usize) -> =
-Result<ARef<gem::Object<Self>>> {
--        let aligned_size =3D size.next_multiple_of(1 << 12);
--
--        if size =3D=3D 0 || size > aligned_size {
-+        // Check for 0 size or potential usize overflow before calling =
-page_align
-+        if size =3D=3D 0 || size > usize::MAX - PAGE_SIZE + 1 {
-             return Err(EINVAL);
-         }
+The commit has been in linux-next for one round.
 
-+        let aligned_size =3D page_align(size);
-+
-         gem::Object::new(dev, aligned_size)
-     }
+- Alice
 
---=
+The following changes since commit f0ded972d37150f9f889de75c9eecc5cb0730013:
+
+  Merge tag 'drm-rust-next-2025-11-18' of https://gitlab.freedesktop.org/drm/rust/kernel into drm-next (2025-11-20 10:44:50 +1000)
+
+are available in the Git repository at:
+
+  https://gitlab.freedesktop.org/drm/rust/kernel.git tags/drm-rust-next-2025-11-21
+
+for you to fetch changes up to 57dc2ea0b7bdb828c5d966d9135c28fe854933a4:
+
+  rust: slice: fix broken intra-doc links (2025-11-20 10:13:35 +0000)
+
+----------------------------------------------------------------
+Core Changes:
+
+- Fix warning in documentation builds on older rustc versions.
+
+----------------------------------------------------------------
+Miguel Ojeda (1):
+      rust: slice: fix broken intra-doc links
+
+ rust/kernel/slice.rs | 8 ++++----
+ 1 file changed, 4 insertions(+), 4 deletions(-)
