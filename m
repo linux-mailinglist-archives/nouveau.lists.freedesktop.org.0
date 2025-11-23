@@ -2,67 +2,67 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id C957BCBACFB
-	for <lists+nouveau@lfdr.de>; Sat, 13 Dec 2025 13:44:34 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id F1988CBAFB5
+	for <lists+nouveau@lfdr.de>; Sat, 13 Dec 2025 13:47:24 +0100 (CET)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 93BA110EBC2;
-	Sat, 13 Dec 2025 12:41:10 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id D37A210ECAC;
+	Sat, 13 Dec 2025 12:42:23 +0000 (UTC)
 Authentication-Results: gabe.freedesktop.org;
-	dkim=permerror (0-bit key) header.d=gmail.com header.i=@gmail.com header.b="caYype7d";
+	dkim=permerror (0-bit key) header.d=gmail.com header.i=@gmail.com header.b="Md7aJjHR";
 	dkim-atps=neutral
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from mail-pl1-f180.google.com (mail-pl1-f180.google.com
- [209.85.214.180])
- by gabe.freedesktop.org (Postfix) with ESMTPS id A1E6610E126
- for <nouveau@lists.freedesktop.org>; Sun, 23 Nov 2025 09:26:53 +0000 (UTC)
-Received: by mail-pl1-f180.google.com with SMTP id
- d9443c01a7336-2957850c63bso23976405ad.0
- for <nouveau@lists.freedesktop.org>; Sun, 23 Nov 2025 01:26:53 -0800 (PST)
+Received: from mail-pl1-f175.google.com (mail-pl1-f175.google.com
+ [209.85.214.175])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 71DFA10E126
+ for <nouveau@lists.freedesktop.org>; Sun, 23 Nov 2025 09:27:06 +0000 (UTC)
+Received: by mail-pl1-f175.google.com with SMTP id
+ d9443c01a7336-297e264528aso37046435ad.2
+ for <nouveau@lists.freedesktop.org>; Sun, 23 Nov 2025 01:27:06 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1763890013; x=1764494813; darn=lists.freedesktop.org;
+ d=gmail.com; s=20230601; t=1763890026; x=1764494826; darn=lists.freedesktop.org;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=jcsZ1pYdc/lZZufwkk7hmx3zrC9Zk2tE9eYLDhtARFw=;
- b=caYype7docGKKeNGLCfHaCbmWIKZZMGXvon554YMwnO0mK8JkZOAzCw9pkGA7O+Trt
- 6PT3ZBSPXTOehRmYFOhQ2GaNGuWfPp5gAXYB5HulJHQJ7g4nrxHn93a/nTettbKzipF4
- iHuYfq2PpWAIEZLhhwDo4TXFNqjQGYr0AK8Ba7UYjc5mA94HfSVar44+prs4QLYgdejK
- +l0lWbVa2mekfRS4VQKnjxG8jbFUFLK/Xyyl+ilwsVn6p7k8aZcLSfQPEZX9ChEs3tvG
- YaFsJroRUlMJp+Zd1wcMMlDq2EQ3Dpa8h50vUqrVRU7t8P7JgfEF6EUE/HtHKLtBovdv
- cbUw==
+ bh=SxofK3PIJmJGptGWmPl6GxImW1KehJK8Ra0bi1cA/KY=;
+ b=Md7aJjHRSntyC/Aeih3tkhnJvOH2CyI2ZiTLJP4BPZDIl+XWb1HzKGUSIK1mQIqciO
+ JZwdw9nTFDBo6hvU4oadQFecECYobI5bx28vpPTdzNq0fI/KX+tSy+/S1Uv/oSAhcyjK
+ /irYQgITECxlgWtp30zHFUMYSR1SWQ9KBQYV9LXLrHp39CXuNdMYr9SGIUlsi5YIvQr8
+ 5i8ekom5/93YCAK74wmsgBiFnWshTtXYV86x7N2mk9bVDvkvQv/WlInn1yI/iNz5n2qj
+ qbfgtqzpVuFfEJuAbDee1uNU2CMA91bRjufJdWLSqGYGH93bH7VRWvQo/C2rx7XQgnIW
+ /ONw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1763890013; x=1764494813;
+ d=1e100.net; s=20230601; t=1763890026; x=1764494826;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
  :to:cc:subject:date:message-id:reply-to;
- bh=jcsZ1pYdc/lZZufwkk7hmx3zrC9Zk2tE9eYLDhtARFw=;
- b=J55HM8vjjGEiOOCCy3bNaAi8cQYncRRO8gbGZFaAiobPpZ3FN2w1xp0ciztNJC5oCu
- GBsqkGiIIQYkBdEbEC86mfvIuGLJOxwBWA3Z1FArfwbHWQ943rQHvwlk7ckBW4uqvwdk
- b06Dkp8CEx0nKdp6fzjxSLkFznbHTQJnRzCcidGzSYL5OpQsYZ0cN8ew5AukH5AvIphH
- g00lZR6JWQp0wgRr0ggaoMgXl4LCejBTs1Rd/rAy9Khaoz1dkXdipH2+Lk8k5o8AeUHl
- 1tQlCI9zqVqTyS1UrxQGNXgv7u8U7L9jT7o1I2+8gxhZXa7YfGvgxz1AZpIjT6OUZ83K
- E08Q==
+ bh=SxofK3PIJmJGptGWmPl6GxImW1KehJK8Ra0bi1cA/KY=;
+ b=mdYTrfohD78nlh0pdB+9c3BjGuZqLwQxW4Tl9rBhK1Ln7yoCyb1bbME0qF0y376Ul6
+ XUhsDkUJ73xNgcNQeIUev9TzlaN50cUAuSYpcmLkxTnFtPjXxIyOkd/3618FWHqJLmEw
+ zgpaZrwZUerzSY6+c7WUyJvda4rZZk5UurKEQeJ5Ca2oWFaTE+FXHLz/DsP9F+V9FnI7
+ 0t1z8lv0Lrdioo34KuwzbpfY4vU+KD78mcpRoAZd9Mh2+wCS4Nj2APHf4FA/KdwIQejO
+ 8aaOGB4rOBnUOsggKA5zrjZqMRlEEMPwZsR1rSc36xKulU6WIttUyVjRRoKoyVtVa/Pp
+ LT6Q==
 X-Forwarded-Encrypted: i=1;
- AJvYcCUzFFMs+4ZDzeVAK52PzWNW7TmlCrwmv0BzNOqLs4NfPd4mvquptY5U1OGUbbIy9O9gxkHrVwLi@lists.freedesktop.org
-X-Gm-Message-State: AOJu0YwwTUTfis46vPW+8jNLpfZjubZk8WY0Qh2t/HoPAPVJB0VwHbKN
- DzV5fxLhrTRbw1HVfrkw7jf5L+KrNVexN9q90325xSx2TMGlugbFjL88
-X-Gm-Gg: ASbGncvb72ax9ttObZ4S0VMu1HV6euseu85aPgr2LX+J7dQscB8FAKmWuvcuxFUULaY
- FippE7BgBwA9dlElNiFk6F7giYLxErM2Ww7owZRzXpMJE79vj7/cyfM/nn7nIEnrbnicpElAjyT
- anYtyjWvWLvK1ZwccNiFCcQOVP3ye+P4tmPoYW/vk9B95ETkTzwvnnbjL411lYz8o7fHXh3EGot
- iFMeYzWEIXDqW6aQBaIhM2VO6ehYaaAG5UjRxIe+albfZ5q+QwjPYzBTOZEDtDrw2/0iPrv11dE
- GJjNXWKAhTUfu/m5w/ZEKujwIPquPDHnr437IcWAZ/6k4qg8lDMWlFiViJ/Lr7QveYCTXGD5jG6
- tinpET/7JMQVPLtWYlmZCEg2xt3qFpeCh2ij6MezPz5quigYSclkghYe0/n03lfmAtGVFxow15i
- OuirwPiAzu2iu5OBHdzdb+acfRDQ==
-X-Google-Smtp-Source: AGHT+IEPaSiAglOPtRohHhMD3F7poU82nQz/JA+b9mPjFhoImXk6hT3H7zPq8hH/JIUpP2uJO5DptA==
-X-Received: by 2002:a17:902:ef4f:b0:295:82d0:9baa with SMTP id
- d9443c01a7336-29b6bfa8cd3mr100768505ad.17.1763890013033; 
- Sun, 23 Nov 2025 01:26:53 -0800 (PST)
+ AJvYcCVZScIHsuAF01w9JFQzQjkD5V7TtiOknVm4ooIo06YQzbkz6OzB8rFDwrpzcVkW3o/mZgpECQog@lists.freedesktop.org
+X-Gm-Message-State: AOJu0Ywk8sidNbkbYHAhq9JnRGr54Rs5wjZZJslQ2WT1wFPwXVGmfvfz
+ Ed88+iyZYqJuNvpLLI70D9JVT1XMD4a09haipmoibaZS2hbWMIocoWkg
+X-Gm-Gg: ASbGnct5J1bgX6JgXtoYEWbVyCYUh/c8soav1pXswFiiXIzz03YPcouisX9C1wFsnbx
+ 4fkNYzB72INBvMHk2S0adi40AbdfwtaKnX4mC+pnclHn31mRowsEvk9BASMDWgIUhRvy0AuIxx+
+ LPOaegZ0BLZHlVpQK5a0dvMJVXWeZBmAOXw1oX5gPsUE2x68CJm288toGDf+2zYguV0K2Jkp3dQ
+ gllzGO+H45l/a8KFBwTdXgzunH7B2GT/VAxWjRIc4RKV71c5FZruagiGvtOtqBWR2TnG1okO7D7
+ XHzkEuPikrBn9OQW7P5eJPry7EuGhVn+zPCJAKHa8zHacA8H7CABWNq0S4gDI0injpGCI/fmuq1
+ uqoeLs3UJ2eKWaugNdgOeGwHMrKcdqIOUhMEPbIwsGiRmlT5Se2+6mTJjn4f9VIxP7QlElHsR8/
+ TwuZ7iWf5vufFpCS4zm84CFkSBxQ==
+X-Google-Smtp-Source: AGHT+IH1U8t8hCw2WDyvXF/0DPfy18rrujnj6Em/QND/b9i4osv8+SLy39cyAfSRsaedSvrbycJTtA==
+X-Received: by 2002:a17:903:290:b0:297:c048:fb60 with SMTP id
+ d9443c01a7336-29b6bedf343mr95210775ad.25.1763890025910; 
+ Sun, 23 Nov 2025 01:27:05 -0800 (PST)
 Received: from shankari-IdeaPad.. ([103.24.60.188])
  by smtp.gmail.com with ESMTPSA id
- d9443c01a7336-29b5b138c08sm100811105ad.25.2025.11.23.01.26.41
+ d9443c01a7336-29b5b138c08sm100811105ad.25.2025.11.23.01.26.54
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sun, 23 Nov 2025 01:26:52 -0800 (PST)
+ Sun, 23 Nov 2025 01:27:05 -0800 (PST)
 From: Shankari Anand <shankari.ak0208@gmail.com>
 To: Greg Kroah-Hartman <gregkh@linuxfoundation.org>,
  =?UTF-8?q?Arve=20Hj=C3=B8nnev=C3=A5g?= <arve@android.com>,
@@ -90,10 +90,9 @@ Cc: Boqun Feng <boqun.feng@gmail.com>, Gary Guo <gary@garyguo.net>,
  dri-devel@lists.freedesktop.org, nouveau@lists.freedesktop.org,
  rust-for-linux@vger.kernel.org, linux-pwm@vger.kernel.org,
  Shankari Anand <shankari.ak0208@gmail.com>
-Subject: [PATCH 06/10] rust: kernel: Update ARef and AlwaysRefCounted imports
- to use sync::aref
-Date: Sun, 23 Nov 2025 14:54:34 +0530
-Message-Id: <20251123092438.182251-7-shankari.ak0208@gmail.com>
+Subject: [PATCH 07/10] rust: kernel: Update ARef imports to use sync::aref
+Date: Sun, 23 Nov 2025 14:54:35 +0530
+Message-Id: <20251123092438.182251-8-shankari.ak0208@gmail.com>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <20251123092438.182251-1-shankari.ak0208@gmail.com>
 References: <20251123092438.182251-1-shankari.ak0208@gmail.com>
@@ -114,9 +113,8 @@ List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-Update call sites in `pwm.rs` to import `ARef`
-and `AlwaysRefCounted` from `sync::aref`
-instead of `types`.
+Update call sites in `scatterlist.rs` to import `ARef`
+from `sync::aref` instead of `types`.
 
 This aligns with the ongoing effort to move `ARef` and
 `AlwaysRefCounted` to sync.
@@ -125,22 +123,22 @@ Suggested-by: Benno Lossin <lossin@kernel.org>
 Link: https://github.com/Rust-for-Linux/linux/issues/1173
 Signed-off-by: Shankari Anand <shankari.ak0208@gmail.com>
 ---
- rust/kernel/pwm.rs | 3 ++-
+ rust/kernel/scatterlist.rs | 3 ++-
  1 file changed, 2 insertions(+), 1 deletion(-)
 
-diff --git a/rust/kernel/pwm.rs b/rust/kernel/pwm.rs
-index cb00f8a8765c..1605d13d5d64 100644
---- a/rust/kernel/pwm.rs
-+++ b/rust/kernel/pwm.rs
-@@ -13,7 +13,8 @@
-     devres,
-     error::{self, to_result},
+diff --git a/rust/kernel/scatterlist.rs b/rust/kernel/scatterlist.rs
+index 196fdb9a75e7..b83c468b5c63 100644
+--- a/rust/kernel/scatterlist.rs
++++ b/rust/kernel/scatterlist.rs
+@@ -38,7 +38,8 @@
+     io::ResourceSize,
+     page,
      prelude::*,
--    types::{ARef, AlwaysRefCounted, Opaque}, //
-+    sync::aref::{ARef, AlwaysRefCounted},
-+    types::Opaque, //
+-    types::{ARef, Opaque},
++    sync::aref::ARef,
++    types::Opaque,
  };
- use core::{marker::PhantomData, ptr::NonNull};
+ use core::{ops::Deref, ptr::NonNull};
  
 -- 
 2.34.1
