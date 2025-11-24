@@ -2,50 +2,49 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id 6BFF3C7EE9B
-	for <lists+nouveau@lfdr.de>; Mon, 24 Nov 2025 04:48:08 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 26877C7F236
+	for <lists+nouveau@lfdr.de>; Mon, 24 Nov 2025 08:01:17 +0100 (CET)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 22C8610E1C7;
-	Mon, 24 Nov 2025 03:48:04 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 2A90410E1D1;
+	Mon, 24 Nov 2025 07:01:15 +0000 (UTC)
 Authentication-Results: gabe.freedesktop.org;
-	dkim=pass (2048-bit key; unprotected) header.d=Nvidia.com header.i=@Nvidia.com header.b="dODsilFe";
+	dkim=pass (2048-bit key; unprotected) header.d=Nvidia.com header.i=@Nvidia.com header.b="euvDcV+i";
 	dkim-atps=neutral
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from PH7PR06CU001.outbound.protection.outlook.com
- (mail-westus3azon11010065.outbound.protection.outlook.com [52.101.201.65])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 3AE0510E0B8;
- Mon, 24 Nov 2025 03:48:02 +0000 (UTC)
+Received: from CO1PR03CU002.outbound.protection.outlook.com
+ (mail-westus2azon11010059.outbound.protection.outlook.com [52.101.46.59])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 45DFF10E1D1;
+ Mon, 24 Nov 2025 07:01:13 +0000 (UTC)
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=hZAw7w0HtPJUhf8oY6SmidAHWCTxpfrOtAOJPriWc9+7EVAzQ02f+3onSl7nPNaVHCoAB7ZdRccXGeSmD1FYIEvgEHHeJPSGPFXedJrIezJRdJBrU0D692vIsENDFgR3SavAEtsUv8ubSp5FC2qB/nc2D3sbWsND+LZIu+X2d5AILQ7SPvP5SFJCc3tIR7jrHXTKEAPl4YAQ7PPylDAwLHql6lerSfuVGvVd9D79q/Z1k4pIXelz4OxlEZ6KIA+nD8VYOuWrDdJOGJYPwq1bhzu6uFMxNt9QK+DvesfT8E+BjUNrU2QEpojkA9EV/qQ4u5iEAtzm7Papveg4Po9e2w==
+ b=LZcKtu/PtVIJ9UqZPGDwA+OEqU43wEmqzJCN8X5ia+URDKzb21KKkIXB8z17iH59WO+R0+mgzR6kZQPzB3VH6d6IPkF0k5RDt7hke9uE4qC8vETP3RCQ1U9WJiNW2QqbKSPrMZ9El4gLqVDMv2vr+H3xDHb1qUBYmD26v4sHWwlYV7TEBsBNtmVH2IyRToVTlQqOmOexzILAPWj2zbqWc6ny+WLOfI8Y0/X/V3syLh0pt6MrsuswlJ/+juax1JJ2fJGurUbyYpqyWRkP2/ZQeokzD3WwY5yOMV0L3SePTeiy1fyEVpvfElD+8cLeFKP3RxHmmRDnJ+Ek53N/cL2kvw==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
  s=arcselector10001;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=uDlcEHngXxMxt+syJlISMtr1QNvTSzw9a+1gv7jXIdM=;
- b=nBca3p/jfVL2YVIo00fGXH9u3Gl5SP1TOrJ2iydl9Np3SkG5H3F4vDde26cejx4YGGiVHWp+8qHQNgRTu61e2CxhBRnFj+Ld5NIKM3jqUfCEWfOvrcVQnSmg2Vzn2Mr/Q5EI6IeHu0+kLnOg0qsDb1tDMnzVciMS/OMR4ogIHwyL48SGkpZ0BwXMabKqXiuQczKzpiq7YP5b0larLDf/GKtt9GdgRuI+bs9aQ6bvruRgLyJh0ukrXude7ivWtzW4Zv/g/qBOkw/cGFFRelA75pLFKVYqph8kV+cmfrTc45gFDMQpXzFBiyf7QEHDhK8nCDrw8srZ4b/a3uMZZ9Gmzw==
+ bh=V14oUz5k7iCKu4HSvDRk9UsDBRvxu+aorQBun2uDqJY=;
+ b=apH/NUuxOxI1FgG2h7GAeJMD4FfbKrYWQ4nN29S+MjDgwJIVe19c6MzMSoIWFqlyBKWUlJSsu8gB8o9kztPcDkdLOkdcnkwBVqW06U848IOSCb36uK3zboGGBjB4bx/YZgCygnSGCjeJHfkS0gb3w9/X1ihj1biUTXwGMrNJDcZ/LQyTM9cvyairLrtE5CqYfswWDqYlWis0NVFmRFPV+xtP9cqppRhqG5710KcSch3PpHuWDWtnpRFI//2gmiK2dvV2RLDWnNLmtQRwMV/hUmwhnzBUDPpZvYBqOFNCGAqU9g24ulreD9IpIWo8pyP1hFxm/+o0mxoRTFVY1eIFRA==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
  smtp.mailfrom=nvidia.com; dmarc=pass action=none header.from=nvidia.com;
  dkim=pass header.d=nvidia.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=Nvidia.com;
  s=selector2;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=uDlcEHngXxMxt+syJlISMtr1QNvTSzw9a+1gv7jXIdM=;
- b=dODsilFeMgnd4eApeB8bV5QE7rWr/ppG0/S92x+vWkIXNMSduJmUrNvtBu7AzlnQO+UOPMn/jP0RbqkOdNedyunmne3s+ueP5iMOIo+NX7IrNOyErAYS6Dc1nt7Q286QQ4sINZByxSxJ192S3iAR8i9pgs2qmBS93CsVWNz+E5yHMd0pgxlO+5jKxOAzmrmU0tl59xIF6GIcOL8M72lG0yFgbX5SdCc+lLxl6WjRzrlRwdwao9C4pGV7XCPUojRDfg9xxm8GemeeQRolzFtpgyhJ+sqFkwfzEg5UQwb4AVntU8gccNi/emlA2CoxJOKqxHeSdpDRFyuFteaZHabw6A==
+ bh=V14oUz5k7iCKu4HSvDRk9UsDBRvxu+aorQBun2uDqJY=;
+ b=euvDcV+iwCIpvN6sQ3++UbUugLsY1jrlMsR1e7A6XI5HIbdH7H5aXn1RF/OX2IVfch5/69JRHsq5gaEffnU3Di+o3oUnFc/gFW6wKexQACEY1VLRJ2EJPxygy9w2S3w+FmMsg5xlslHoRzffCs/8/x5N9m+6JCEvaKOvIGqc0jOwkIkxqHFgrnT5k3dQ5YXi1dTh68jMeDlft+JZxknbGcJqGRm/hD0GsgGHNO8AuYKC8TsmZfcFw3qzdOmA5/mo21OOlu65jCYwE6UhTvpzPpIiO3x56uu4TaP5ZxSRk06zGb4eKESIIdgzmykMRnxzih+wEynfiIaWq916N3KDNg==
 Authentication-Results: dkim=none (message not signed)
  header.d=none;dmarc=none action=none header.from=nvidia.com;
 Received: from CH2PR12MB3990.namprd12.prod.outlook.com (2603:10b6:610:28::18)
- by SN7PR12MB8148.namprd12.prod.outlook.com (2603:10b6:806:351::17)
+ by MW4PR12MB7483.namprd12.prod.outlook.com (2603:10b6:303:212::13)
  with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9343.17; Mon, 24 Nov
- 2025 03:47:58 +0000
+ 2025 07:01:10 +0000
 Received: from CH2PR12MB3990.namprd12.prod.outlook.com
  ([fe80::7de1:4fe5:8ead:5989]) by CH2PR12MB3990.namprd12.prod.outlook.com
  ([fe80::7de1:4fe5:8ead:5989%6]) with mapi id 15.20.9343.016; Mon, 24 Nov 2025
- 03:47:57 +0000
-Content-Transfer-Encoding: quoted-printable
+ 07:01:10 +0000
 Content-Type: text/plain; charset=UTF-8
-Date: Mon, 24 Nov 2025 12:47:53 +0900
-Message-Id: <DEGM8P88O2MV.3D4XL17AMWHJ4@nvidia.com>
+Date: Mon, 24 Nov 2025 16:01:06 +0900
+Message-Id: <DEGQCMSX1SGZ.2NQDPG5KUNA9D@nvidia.com>
 Cc: <acourbot@nvidia.com>, <apopple@nvidia.com>, <ojeda@kernel.org>,
  <alex.gaynor@gmail.com>, <boqun.feng@gmail.com>, <gary@garyguo.net>,
  <bjorn3_gh@protonmail.com>, <lossin@kernel.org>, <a.hindborg@kernel.org>,
@@ -56,112 +55,113 @@ Cc: <acourbot@nvidia.com>, <apopple@nvidia.com>, <ojeda@kernel.org>,
  <daniel.almeida@collabora.com>, <arighi@nvidia.com>, <phasta@kernel.org>,
  <nouveau@lists.freedesktop.org>, "Nouveau"
  <nouveau-bounces@lists.freedesktop.org>
-Subject: Re: [PATCH v2 2/3] rust: clist: Add basic list infrastructure and
- head iterator
+Subject: Re: [PATCH v2 3/3] rust: clist: Add typed iteration with
+ FromListHead trait
 From: "Alexandre Courbot" <acourbot@nvidia.com>
 To: "Joel Fernandes" <joelagnelf@nvidia.com>,
  <linux-kernel@vger.kernel.org>, <rust-for-linux@vger.kernel.org>,
  <dri-devel@lists.freedesktop.org>, <dakr@kernel.org>, <airlied@gmail.com>
+Content-Transfer-Encoding: quoted-printable
 X-Mailer: aerc 0.21.0-0-g5549850facc2
 References: <20251111171315.2196103-1-joelagnelf@nvidia.com>
- <20251111171315.2196103-2-joelagnelf@nvidia.com>
-In-Reply-To: <20251111171315.2196103-2-joelagnelf@nvidia.com>
-X-ClientProxiedBy: TY4P301CA0053.JPNP301.PROD.OUTLOOK.COM
- (2603:1096:405:36b::17) To CH2PR12MB3990.namprd12.prod.outlook.com
+ <20251111171315.2196103-3-joelagnelf@nvidia.com>
+In-Reply-To: <20251111171315.2196103-3-joelagnelf@nvidia.com>
+X-ClientProxiedBy: TYCPR01CA0002.jpnprd01.prod.outlook.com (2603:1096:405::14)
+ To CH2PR12MB3990.namprd12.prod.outlook.com
  (2603:10b6:610:28::18)
 MIME-Version: 1.0
 X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: CH2PR12MB3990:EE_|SN7PR12MB8148:EE_
-X-MS-Office365-Filtering-Correlation-Id: 65bba69e-9d7f-47e4-dca6-08de2b0c413a
+X-MS-TrafficTypeDiagnostic: CH2PR12MB3990:EE_|MW4PR12MB7483:EE_
+X-MS-Office365-Filtering-Correlation-Id: 368ce577-c815-429f-22bd-08de2b273f27
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
 X-Microsoft-Antispam: BCL:0;
- ARA:13230040|366016|1800799024|7416014|10070799003|376014; 
-X-Microsoft-Antispam-Message-Info: =?utf-8?B?Y0tJcC9WMHhoUjArdUlwK3BHTTZYU2pqLzdpMVFpaEtXOHZwb0tKNHE0UVpT?=
- =?utf-8?B?WENKU1pWWllkQ3NyaE9BcHdFZEQvSkJ4QWhWMW1Wb1RnWTVsdzl2dnIxeWpz?=
- =?utf-8?B?QjJWQmFydFNYQS9BeGl1Rk94T1NaSDVxVEtCOWQxaTRvbElxK1lmcHBoWXhz?=
- =?utf-8?B?YkphRFJwTHpPV0dXM3RKcHhSaWNvd2xPUXlXN2NBb0ZGS0NnN3NscWdnM3p2?=
- =?utf-8?B?SHZyQ3VSQ3I1YmRjTkVmUlZvZ0lITWpQTm5xeTdjbW9MTGxURWQ5QmhQWkU5?=
- =?utf-8?B?Z1psUVpNM0taZThnM0JJWXkrMU9CYXQwa2U4RThoVjU4dFp1NVNQREVMZDk3?=
- =?utf-8?B?S3E5TFRsVHdCZjNDRzNONlhGZmdOZHc4dGk5T2R4MnJocURTSE9NSVRuMWp4?=
- =?utf-8?B?b015UWM5OEd2dXRrRG5BWURTZG9EMGQySnZnaXJCZzl5VnQ0azNsbCsxTmVC?=
- =?utf-8?B?Y29tcHhJS2dGSzM3TzM1Z1dDZENQVGV0Tk5HOHdqL2c1bWgweVoyc21Ba2RM?=
- =?utf-8?B?VjNWMDFEM1N6QTZEYm9UUDYwOFNHQzB0NDhjYTFSQzVLZitTMVpQZ1hkdCto?=
- =?utf-8?B?dTVydkNYR0tmbWdjdnVueE5Zd2hPSW8wRVY2RmtGUXV3M3lRK0dPL292NTJl?=
- =?utf-8?B?ZkRWckdGUDU4QVoyQVRBWTdGNUxqSm5lNWVJNmViU0swZXdsYmZkTXlCaXU0?=
- =?utf-8?B?a0JmSzFwY2grOExBdE5JblAvR05GSVNkTXZXNGgvL3hiOGtJcUN5NnF0bmpt?=
- =?utf-8?B?WHo1N2lUT2xEenpjVEFXNTlzb0VMWVdaRENoNGNmTUhXdHlKbzRIZzNLdysx?=
- =?utf-8?B?dzl6QUZXS2dOSVJQTWorMS9qV0UxdDRwQ0ZlRlN0V1NqZlZkM0dLdlJaZE1I?=
- =?utf-8?B?UVpic2podEkzRUhtWGQ0akUxOUI4SDA3M054WUpMa2I3U09yOHFGbmZLcm5y?=
- =?utf-8?B?WHc5THRpUTRvazY2UHk3UGxxeWprV0ZVclBIYk42RHNVVWUvQWJ0YVJwcGVE?=
- =?utf-8?B?WGs2TkJPOHVvTWRiaTNlbVFUa3lwdFowL0lYdHFWLzdOam4rYk12LzdDRjZE?=
- =?utf-8?B?aEV1alRXbE1Ub3F3N3ZVbHc5VTdXSUFBVDFxRHR0TGhWWlF1ZTY5NFhEVHB4?=
- =?utf-8?B?SXBNZUt2QkFYbVVsUFJFOWpwdWo5M0RudXRFSG5PalpiYXNyVGcyQjBHaXkv?=
- =?utf-8?B?ZkMrUzhGRWhCVC9Jb3JWcVl6dUdmREtsaDRwN2RNR3dNejFzekxZeXlPS2xF?=
- =?utf-8?B?QU9rRHZHSFlNLzlBV0E0WDZSVDI5cDE3cDk3SmFBRUIvUVZIMzhMYTZnQzEv?=
- =?utf-8?B?T1BVVG1ZWExYMGsrZVhrYzNweGVmb2lNcFlKV3NrcGZFaTNNSDlpRXpGd1JX?=
- =?utf-8?B?aGJBSWQxbWJKZ1dXWTl3R01XblpWcVI5UmY5MjFzVG9yS2JXYjBjbXkySERB?=
- =?utf-8?B?ZW1QOWZZV0o3NWNtMXo2alZmQlAvN2lCU0J0MjNTY1NVM1ZxWXh4dkg1NFRM?=
- =?utf-8?B?QzZLeStPc0N5UFd2L2w2bjM2R2J4eEMvRW4wQW9XTHM2N21XdXE3YXdaQm93?=
- =?utf-8?B?WGVBNXlrUHdjblp0bnpHZnlHMjgrQ1h6TnpzR2h2cklEaGZnTWoyMXIvWEh3?=
- =?utf-8?B?MEl3aE1iN3o1Q28wdTFDRjBqdmFuMkh3SWlQU2ErbU9mbXF1R3JDZTZKVC90?=
- =?utf-8?B?VnA1NE10N0VJeStGczBIWTdOdjEzcGZqZzdxekVVdnJmV2FNR21XQTNWTlho?=
- =?utf-8?B?Vk5NeVpFRUVINmpMWmxoZ21WK2M0R1BpSkl2L1VucnJJbld4dFdNei9YVDdh?=
- =?utf-8?B?a2ZZSmNOVEtzSm1pZ3FFbGljNk9NZ2JtZ0dxQm5iWkExbUo5TDAzWUpyYVVp?=
- =?utf-8?B?R3c1RUlLbThKSHo4RVV6eXpQd1NzYVZsdS93aG1kaU4yTDZMVlk5Y1pJZlFM?=
- =?utf-8?Q?T9hi7rANj29Lj10u6x8E2GNtAjReG632?=
+ ARA:13230040|366016|7416014|376014|10070799003|1800799024; 
+X-Microsoft-Antispam-Message-Info: =?utf-8?B?NkM1VTFiZEZ5emtUZDJ2Q3Y5WllTSFNINFQ3RHJ0OGlMdWdDL3JkRkVSYStV?=
+ =?utf-8?B?UEZ3N2dBN1I0aUxxWFNaZThlUlVJSThwaVYwQVVBSTJ6UmwyK0Q4Wm5BUG5l?=
+ =?utf-8?B?OUNpSXpRdUpTb0psMjRFZHJwVnBZSXNEMVdocUVmUk5acjF6VzhRMzVVZXRI?=
+ =?utf-8?B?Q0t1ajVkVEo3UVFaNXVHaDRZYXpPWmVwR24vY2hsM2x5Y0hLK1ltamc3RE1U?=
+ =?utf-8?B?QmMvU3I2OHpUbktyaFdtSkVpUzR2MnVGV2VBbzZTSXY0R1ZlNUxYM203dGxI?=
+ =?utf-8?B?b245NEJwaWhCZ1UyNnhDUVdpRG9KeEh4ZFRtV1kxWklzRVZCS2pWQkVjelEr?=
+ =?utf-8?B?NU5HZktmbXM4TkhMK0MzdVBYU1hZQzFFYk4xZTl3R1dFOU5tNXltdi85cG9U?=
+ =?utf-8?B?cEVkNzNVSkNIRmNqRlA5SENPMXd5M1pMeTZTNXQxNEsvWll6bTdXMk1XNHd5?=
+ =?utf-8?B?K1FDVTNtNnUxRHhNblc2KyttSTc5cEdLaXNtc3BUc1U4YlNCYTA2L09XYkY0?=
+ =?utf-8?B?Z3NxV2tmcnB0UTJIRnJIUEtFbUdUNHZQc1k5NXNmaTkwWnE5dG9aeHpEMWpP?=
+ =?utf-8?B?Mm9iK0RNcG1sd0JsNy9iKzhPSEhrVFFKY0pPTUM5eG5hQXBjdHBJbkZUWW93?=
+ =?utf-8?B?N2p2WU1XR2E2MjgyL3BlVHJRc0xOd1BwNGdnbXhrY3VoNFdnVVQ4VnI2TFVP?=
+ =?utf-8?B?N1RMK1dldVBvM09maVNqNXp6YkZ3bC93Wk1MNWNTNDRTSkp1d3ZRek1ycWZ4?=
+ =?utf-8?B?OGQydjN6ZUk2eXIyTU80aXlvSzE1QzJZYy9OTnRSRXFvaHErY2hEbTdPS0k3?=
+ =?utf-8?B?LzVaSHBTbnRVaDhCRGF4aUhyTWZqdldMTkJZZkR0TWtoWXF2eXpaVGs5VGlF?=
+ =?utf-8?B?MDhVVVZWSHo5YS9KOEtrK1k3anlBSWsvQkMyTzREWkxrd2h0bWU0MHUzaVlw?=
+ =?utf-8?B?RFREZ1dpMmk2bDN3a1RWVmZRTW0vdUxPbVJuRHBFeWlFblAzRmxKWWVnQlpC?=
+ =?utf-8?B?SXRMdHdXWHFDRElocGFQcUlLOUtlY3N1OXdWZWI1N1lwYm9UcjUySWxxamRZ?=
+ =?utf-8?B?Vkhvb0lGYnFKc1U5QlE2bnpKOUY5Z2hTUHBTVE5CRnNaTjVuczUrVVhvWUUx?=
+ =?utf-8?B?eE40elV5NW0wbzlXN0U5SHJyRUtiVGlnL1NPbGNnYWg0Ty9PRWRHK2I1NEwz?=
+ =?utf-8?B?MFZhTUcvKzE0dmdSV212S1h1YjVOejFVMkdRTGY3ajZCc3A4U3lIb2VOelJm?=
+ =?utf-8?B?emtpb2FzVU5jUWNvVlZ3UDVIdkd3ZjBYUjJwTEVjTlFTNW12RVUrNGpmWmVp?=
+ =?utf-8?B?aE5Rd0xVK1RPelYxekl1NkEySGFhTHhTVTR0ZlNEWkVSbndaNGlCVWV2bk5Q?=
+ =?utf-8?B?THJMZTIya0xRRnpyVUFkMnZENk1PRDQ3TUZScmR5eEdXUTdsaHErcktnTmUr?=
+ =?utf-8?B?cE1HdXphNnJIcno0TXpmbzV2YTdpanpnVndCeXQycERvUWNkYUZaTm0xM2ho?=
+ =?utf-8?B?c0tMS0h1M3FBNGQzLzRoQXFTQS94WEozUEdoN3VYcFRHa3ZHbkcyMGFMcWE5?=
+ =?utf-8?B?anNqblgyY29pcFF5QW5FZWU5ME85R0x3VGgvUUZUTDB1SkZSUXpLVng4NENO?=
+ =?utf-8?B?d3hYTFBYdEpxZEljVnhGNytYQmVRczBGVmhWNVU0TEZwczA1UVR0YjBMSmJ2?=
+ =?utf-8?B?MmJEU0gxWVhKdGQ5YjNrZ3RQaTY3OUhLcDFaVW9DRjhuMExzMEQ3K1ZJUEth?=
+ =?utf-8?B?djRjSFJUdzBTVXFxZ0pYVmRHNmhwRkhEWDY2MkVoeWlkdzBxUnRzbDdkZkFm?=
+ =?utf-8?B?WCt2UzYxYjZJSVk2M3ZGZDVsb05DVzF6YVlyeDNZTGxYVWFiMHdxQ0JOc1B2?=
+ =?utf-8?B?eXU2S0pyblJMM0NFNEtlMng3Y3lXT0s0MlI4eVRLc09RWHd6T09uYmNuOFVW?=
+ =?utf-8?Q?nPzty5ZAsYErqJdmzM+6CF+N42ijBXMx?=
 X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
  IPV:NLI; SFV:NSPM; H:CH2PR12MB3990.namprd12.prod.outlook.com; PTR:; CAT:NONE;
- SFS:(13230040)(366016)(1800799024)(7416014)(10070799003)(376014); DIR:OUT;
+ SFS:(13230040)(366016)(7416014)(376014)(10070799003)(1800799024); DIR:OUT;
  SFP:1101; 
 X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?QUdLOVFvNDd5MHJNZER0eElseUNZZ2hrOXk1RHhuQkNkdmlsS2o5MHB5dkc4?=
- =?utf-8?B?aklEMDEwNkZDblVOSFFRTVgxTHluZ3NENFROZ1YvYTZuQXE1cmc0ZFBjUUNC?=
- =?utf-8?B?QTU5UHFkdHo2bDc2cy9rbGg4MlhKdHJKa2NOS3hxa2Vta2N5NjcrUWNNdld4?=
- =?utf-8?B?bVdQQStlNFJFN05Ib2YrZlFoelhScmNPbGsxaDdxYXNmR0NHc2pqcVhlL3Z6?=
- =?utf-8?B?bFVucGx1NGdBOUhuTlF4WWRuZUkrcnM0QmYyK09MS292cEc2ZS9hRHEwYmFx?=
- =?utf-8?B?emkvOUY3VDhzYTNQa2RyUEV4eVh6bWEwQVlwNHMxQ3c2Z21FNitrRDRkZld5?=
- =?utf-8?B?dFpFR3VwY0tMNjk4akZhYjh0UXBvdmtiNjhuaG9uTGtzTU5uZ2I0ZDRFYUlM?=
- =?utf-8?B?VWNPTFdGdndEQ2JUQzZZYWtoK3Fkczlzd2lRMUNPNnhNNlZGZERmT0RJeG9z?=
- =?utf-8?B?KzE1eEpEL3lESVg0QlVLcFgwL1Q1akM2N2NTTUpvSW44YTV6NTU0Zy81M3Vz?=
- =?utf-8?B?OU52aUVoemZiMTliSnQycGlEWVNTWlUzbEtHWlZXVjRlVHpkeEF2OHEvTGh4?=
- =?utf-8?B?TEZuQTZGNnlSTXo0THFSNVpoQTh1SVUrejJncC8xZ3BGR21oNWlzanpuV1Uy?=
- =?utf-8?B?YzlIWkkwMnZ0SFBPS0UwNWR6NU41WkxiOVE1Wm9VRitsb3V2ekhIaHBOZ1FC?=
- =?utf-8?B?Y0p6c1FNQ3I3SGc1dmFLeHB1V2dZVENIV1lsK3k2RzZQd0tyY3pLeHVnZEg3?=
- =?utf-8?B?ZmlBU2w0UjNIYVZ3bTdTc0tIYVNqMjZxdHNZekhLbFB0RlllemtpRXp1K1Fi?=
- =?utf-8?B?b09WRUFXL2RTVnBobm43VmdCQldSV1ZoOFYzOWp3OWIyS0tnL3hzWWlFZytv?=
- =?utf-8?B?UUFGNkhONnR0Skd1VExGbW1HUFRyUTNFSkxlc241NXFRa3FhTXVrQStYMy9K?=
- =?utf-8?B?MTlXcU5wT01oOTlYT2NsdmtPR0lRa1d6TjNCMU1heGhYOUk3M2s3V0c4UkdQ?=
- =?utf-8?B?N2pSZXk0VzAyL1MvNTllWmN2V3VWT0NuOXVmMXEvWmpkMFhYSG5xMjRVNzQv?=
- =?utf-8?B?R1J5YjVrU2xTS2xtSUV1YXdGVlFjQ3ZMWXFQdnZ5c01ZVUtYUmhOdW5laU9R?=
- =?utf-8?B?N04zTWhJR1crNTduQUQ3dVRBcFJlNWxwWjdGdkNoY0Rqa1lsQ1JCV0MzS2Ry?=
- =?utf-8?B?MzZGdVhhYm5UcjZuOXM1bEl2cDBXMVZvY3FPdWhUL050Z01sREplY2cwRElE?=
- =?utf-8?B?bS9QQkxEQ3NCL0Q5djZrMTFld096YzZZSXBMRG0wNjNvTjZjNDdabUptMTN6?=
- =?utf-8?B?R0NVbndQcWxic1JGcFk1Z3pWTURZR0syUXk2ZHBPK1NObmRFK1paY0FxSUx4?=
- =?utf-8?B?dzlPVVc2SUhZZjhOb0NiU0wvcytxMlVxWXlLcmtkR2psbk54NTFLTlcxUXJ1?=
- =?utf-8?B?V2FVaFl4WGo5Z2Z6TnV3SGZyL2gveEQzTkliR0h6bTRIRlNFbGNrcWVUcS82?=
- =?utf-8?B?TklNckxRMyt2Zk9BeEVpb2g3K3FvWGZrMlVDM1h0Yk5pV0FhNEtUTkZVRjNO?=
- =?utf-8?B?Zzg3SnppTnNESVhQV0Y1em81U1R3M3lZUnovSVAxdVBPeU4rQ0VSd3N5N2lF?=
- =?utf-8?B?aldXNFppYUZTSHpFWDhjbFA0TlJTVzdGaGhQTVNDYzJWazc4OVZpaGNpMVlB?=
- =?utf-8?B?ZWxyZHNjVVZQRWwyTHZKczNhMFNjNGVTRzFKdnFOb3lKNEU0MjRuYXpIRGNG?=
- =?utf-8?B?SCtwamQ2SDZKUVpFbXlQZ0RDdmlYdUdYd1E0YXhVSGNHSHZVS3ZEQ0dBSTY1?=
- =?utf-8?B?aXZXN0NSbmUxeUJIZUFPU0hwM2ltTlg0cTk1S2dpQ0lmMWtwV1g5RXpNM1RU?=
- =?utf-8?B?NGlPVFVsbzdXbUJPSFd1WDd2Z0xNOW9NTENJYUQ4elV4eERtM1YvTFMrenha?=
- =?utf-8?B?R1YyK0YyRmpDK0pGYkJwVDgrZVZkYVRxQlFWNkIwcjJoQ3RKVTJhUm0vVTBp?=
- =?utf-8?B?Z3ZsRTZsQ0dYNUdiNXVwUnhtSUVXTHN5MXYwNldNVllySHRwMVNGMjZ0TWNO?=
- =?utf-8?B?VUxJQ05JK1ZYNmR2T3lvNmVxYVVvQ2pPcXhNeCsvbWdDaTljblhNWUVIVnVQ?=
- =?utf-8?B?aWNuK0MxeDhHOUlkTFRVV1dFUFFQNUdITjMrUU9BQWhLVFgwek9KbHRBOXlt?=
- =?utf-8?Q?2CWVnlY8uMpDw/+SmpMpRWnO4o0reTtHT3w27FSUoR6F?=
+X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?U2Nqd0FXZzNpSzA1cGg5dEtIRnh2NXJldFZnTWtOaVhscHdUUUNHRmxKS01X?=
+ =?utf-8?B?UDJ3anFkd21Ga04rT1drSzFaaWtmRFVLYzdDSmtwRmZ3VGdVcnBKTHFHS1o3?=
+ =?utf-8?B?Z0FsWVM4ZG9lcEhKRnRUaWo1MVNGa3NzdVNCZnBYT0V3WXBSbXB5Tm9EUGJ5?=
+ =?utf-8?B?MTMzQjE1ak9wUTFCcnVHangxRW1rdnYzSnkxUWFwS0xrWndsWFN1allkWGtE?=
+ =?utf-8?B?SzJFdXcxTVozZzdLRThUL2pjQmJFbmRzaVc4OWZCb1VocGxaT3h0VFZqZ1E4?=
+ =?utf-8?B?ZEYyKzc0b0lvT3Y5ZmUwcGxWR3dCNlMzbXByejV1c3FEZVNtdzBqem5Db0Jh?=
+ =?utf-8?B?NlBqTlV5K3hhNlJFd0g2czZYTitqQ0srdTR4MlFEYlgvYUdIeXVYU2tVMURU?=
+ =?utf-8?B?OXZnSEZSNGltSVpidGVIakkyd0tYM015RFM5L0hoZDF6c2xvMGk1YStSQWpX?=
+ =?utf-8?B?cElXenBhUHppZFkwd0xvRTkvYitocjFhZVNtSDEvSWNXVXNTL1IwWVEvMTNx?=
+ =?utf-8?B?N3piRmREKzI2UkZ2U0tGUTMxU2hhKytrSTQrbVNKbTdvR2cwTHpkR01BS0hM?=
+ =?utf-8?B?VXFKM1lCV2JhVWZuR1RNSW43VjN6ejlIc2RidENKeU1NTFFqMmlBdi9OdEd6?=
+ =?utf-8?B?ZDRyTlpCNmJwZ1FBZENKT09rVHdyanhFVm5qd2NNMUtnTUZpNy9pNHhoOSts?=
+ =?utf-8?B?b0JFUXpySlRpSDg5TjQ5M2lOVWUyUDNucWE3dGdmNXJicmw1NitsUyt1bEt5?=
+ =?utf-8?B?b1E2ZHgxZkZKMGp3K0xnMk0xMHFoNVVhY3NJRURNbkRvSHZIZEZ3VVNaZmc0?=
+ =?utf-8?B?TTFSVElTdzRyS3VOWTZvMEwzY0hKRzNTeWlGbHB2UlBtN0ZDOHplQjdDTFRy?=
+ =?utf-8?B?cGlDeW9IWkgyUk9VanRDb3I5REZTVlI4b0xFbW9oeDdYQk1VdnZRYnViVm52?=
+ =?utf-8?B?T0RCbFd3UTdUWlFURWpQNytSMXlSWmt6Y2pxdXFueXJPaUZoVC9iVTc0ckg1?=
+ =?utf-8?B?Qy9iQnR0emNGNGR0MDBSaDFnejNjMEd0QjZBTGlHQUxZaGdXT0JKd0J2Wnha?=
+ =?utf-8?B?N1BBdEo0U0tGa0dpNnFGTEFjYkRtaW1rZHBQbkVuM2R6dVprT2tvcjJQV0ND?=
+ =?utf-8?B?MFRTU0FZODRDN0xGSzkxOFhnVUI1YU9ZOWwzTGJWcEpJUldQZzFkamNQN1RX?=
+ =?utf-8?B?dlV6OXJsbC9TOFdLZGQ5TXlPVGYvby9mcExkNjYra0RXU1ZDdExvTGZoUGdj?=
+ =?utf-8?B?MWpUaURJVmtWNDVYU1B2UXRucWhGbWp6aEcrNjg5dzh1RGVTS1lJb21aTUN3?=
+ =?utf-8?B?TnZidzh2NXZnTU1sRGpNOU5MR1V1WmNXSEhJNlNUNjcvYjRLNThQaWx0M0o4?=
+ =?utf-8?B?aXNNYVJaQ0xYVTBRdUVlMkFDZ0s3cWpucXViTzN5eHBoaXUvSVNQdHB2VTZM?=
+ =?utf-8?B?VURDZFdyb2tJRXdTK3plVmdYK1FZdXJ5TnNaZkYzWlFXSzVmL2RsRGIrUnN5?=
+ =?utf-8?B?TmJ0ME9EVFZmczJueW1LZU9OTjQ0dmxSeURCUktiVVh3MEJ4eTEzdG5XSnBs?=
+ =?utf-8?B?MjN5N1hKOFVUYjFIYllsYWJtOGNVZmtaZzZ2SmcwTzl4TG9XSFM2TCtYWUxP?=
+ =?utf-8?B?dTBPTXh6Q0xVb3g1dzcxVS92ZVNKbVIwOElndFI5TkJRMkVYdFV6WDJFVHhl?=
+ =?utf-8?B?Ums0N2pEanpXaEthZmptbFNOeXg1WUhPNVFOWG1IZ0FacTI2WkpkaldHSXVo?=
+ =?utf-8?B?ME5ieStvZ3N3STlWSC82WGszRnRFOFpPYURPQ1BmamlvLzRNa29pbFZOSEpq?=
+ =?utf-8?B?ZWtoMHhpTkQ4WE9VVmNhUndpSHpnY3d6dGZyRkNYd0RiZDh0VGJqbnJQcmlF?=
+ =?utf-8?B?Slc3RGppeXJSQUVBQWpVRDRTaU45TnlmYTFrbUNDRzBlVUdMWTA2ZEMyK2Qx?=
+ =?utf-8?B?QlJXcE4wVHdVWWhHL0J3a2JacmpvL3B6R1hhcnh4VFk3ZExMU0d5c3FOUXU0?=
+ =?utf-8?B?Q1kyU2pJdHNmbDVqaDNEN090REdENWdqd1BXSThxa0JhM1lxUk1NWk45UU45?=
+ =?utf-8?B?VHNBVjRYZE9DUDVEMVpXNXZwMUljNWZJbVRlaGwzMHFNaXFvZitFQzZFQ0s5?=
+ =?utf-8?B?QWk2L0p4blgvV3AwTHVoNWE5T0pKMUtJbmNEVm5ETFgzclM2ckJaQzA0dmlO?=
+ =?utf-8?Q?/FcMyvTs9+CJaopLGmTCFROGHQLx+GVC3lA7QRdjVzxW?=
 X-OriginatorOrg: Nvidia.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 65bba69e-9d7f-47e4-dca6-08de2b0c413a
+X-MS-Exchange-CrossTenant-Network-Message-Id: 368ce577-c815-429f-22bd-08de2b273f27
 X-MS-Exchange-CrossTenant-AuthSource: CH2PR12MB3990.namprd12.prod.outlook.com
 X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 24 Nov 2025 03:47:57.2463 (UTC)
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 24 Nov 2025 07:01:09.9943 (UTC)
 X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
 X-MS-Exchange-CrossTenant-Id: 43083d15-7273-40c1-b7db-39efd9ccc17a
 X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: m1VCKsepVl5q6D9386lj15wSAWpcmdkycyLzTL58ECuGTJUYrYseMQYjALuhtbCbD9TQ2orml3GTky2kRbAnNA==
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: SN7PR12MB8148
+X-MS-Exchange-CrossTenant-UserPrincipalName: yM3zTmpBbls4/1+UQCUY9Modjyl7bAEm9SPB1FGkK6ct8ZPAYKl/GuKLgU21ibbYrqqB3nZE37oB1g/b9CX3MQ==
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: MW4PR12MB7483
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -176,278 +176,271 @@ List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-Hi Joel,
-
-This low-level layer looks mostly ok to me, I will have more comments on
-the higher layer though.
-
 On Wed Nov 12, 2025 at 2:13 AM JST, Joel Fernandes wrote:
-> Add foundational types for working with C's doubly circular linked
-> lists (list_head). Provide low-level iteration over list nodes.
+> Add an iteration layer on top of the basic list infrastructure,
+> enabling iteration over the actual container items.
 >
-> Typed iteration over actual items will be added in a follow-up
-> commit using the FromListHead trait and ClistLink mechanism.
+> Enables users to iterate over actual items without manually performing
+> container_of operations. Provide macros to make caller's life easier.
 >
 > Signed-off-by: Joel Fernandes <joelagnelf@nvidia.com>
 > ---
->  rust/kernel/clist.rs | 190 +++++++++++++++++++++++++++++++++++++++++++
->  rust/kernel/lib.rs   |   1 +
->  2 files changed, 191 insertions(+)
->  create mode 100644 rust/kernel/clist.rs
+>  rust/kernel/clist.rs | 210 ++++++++++++++++++++++++++++++++++++++++++-
+>  1 file changed, 207 insertions(+), 3 deletions(-)
 >
 > diff --git a/rust/kernel/clist.rs b/rust/kernel/clist.rs
-> new file mode 100644
-> index 000000000000..5ea505d463ad
-> --- /dev/null
+> index 5ea505d463ad..01b78ba157a1 100644
+> --- a/rust/kernel/clist.rs
 > +++ b/rust/kernel/clist.rs
-> @@ -0,0 +1,190 @@
-> +// SPDX-License-Identifier: GPL-2.0
-> +
-> +//! A C doubly circular intrusive linked list interface for rust code.
-> +//!
-> +//! TODO: Doctest example will be added in later commit in series due to=
+> @@ -2,17 +2,104 @@
+> =20
+>  //! A C doubly circular intrusive linked list interface for rust code.
+>  //!
+> -//! TODO: Doctest example will be added in later commit in series due to=
  dependencies.
+> +//! # Examples
+> +//!
+> +//! ```
+> +//! use kernel::{bindings, clist::Clist, clist_iterate, impl_from_list_h=
+ead, types::Opaque};
+> +//! # // Create test list with values (0, 10, 20) - normally done by C c=
+ode but it is
+> +//! # // emulated here for doctests using the C bindings.
+> +//! # use core::mem::MaybeUninit;
+> +//! #
+> +//! # /// C struct with embedded list_head (typically will be allocated =
+by C code).
+> +//! # #[repr(C)]
+> +//! # pub(crate) struct SampleItemC {
+> +//! #     pub value: i32,
+> +//! #     pub link: bindings::list_head,
+> +//! # }
+> +//! #
+> +//! # let mut head =3D MaybeUninit::<bindings::list_head>::uninit();
+> +//! #
+> +//! # // SAFETY: head and all the items are test objects allocated in th=
+is scope.
+> +//! # unsafe { bindings::INIT_LIST_HEAD(head.as_mut_ptr()) };
+> +//! # // SAFETY: head is a test object allocated in this scope.
+> +//! # let mut head =3D unsafe { head.assume_init() };
+> +//! # let mut items =3D [
+> +//! #     MaybeUninit::<SampleItemC>::uninit(),
+> +//! #     MaybeUninit::<SampleItemC>::uninit(),
+> +//! #     MaybeUninit::<SampleItemC>::uninit(),
+> +//! # ];
+> +//! #
+> +//! # for (i, item) in items.iter_mut().enumerate() {
+> +//! #     let ptr =3D item.as_mut_ptr();
+> +//! #     // SAFETY: pointers are to allocated test objects with a list_=
+head field.
+> +//! #     unsafe {
+> +//! #         (*ptr).value =3D i as i32 * 10;
+> +//! #         bindings::INIT_LIST_HEAD(&mut (*ptr).link);
+> +//! #         bindings::list_add_tail(&mut (*ptr).link, &mut head);
+> +//! #     }
+> +//! # }
+> +//!
+> +//! // Rust wrapper for the C struct.
+> +//! // The list item struct in this example is defined in C code as:
+> +//! //   struct SampleItemC {
+> +//! //       int value;
+> +//! //       struct list_head link;
+> +//! //   };
+> +//! //
+> +//! #[repr(transparent)]
+> +//! pub(crate) struct Item(Opaque<SampleItemC>);
+> +//!
+> +//! // Generate the link type.
+> +//! impl_from_list_head!(pub(crate), Item, SampleItemC, link);
+> +//!
+> +//! impl Item {
+> +//!     pub(crate) fn value(&self) -> i32 {
+> +//!         // SAFETY: Item has same layout as SampleItemC.
+> +//!         unsafe { (*self.0.get()).value }
+> +//!     }
+> +//! }
+> +//!
+> +//! // Create Clist (from a sentinel head).
+> +//! // SAFETY: head is allocated by test code and Clist has the same lay=
+out.
+> +//! let list =3D unsafe { Clist::from_raw(&mut head) };
+> +//!
+> +//! // Now iterate using clist_iterate! macro.
+> +//! let mut found_0 =3D false;
+> +//! let mut found_10 =3D false;
+> +//! let mut found_20 =3D false;
+> +//!
+> +//! for item in clist_iterate!(list, Item, link) {
+> +//!     let val =3D item.value();
+> +//!     if val =3D=3D 0 { found_0 =3D true; }
+> +//!     if val =3D=3D 10 { found_10 =3D true; }
+> +//!     if val =3D=3D 20 { found_20 =3D true; }
+> +//! }
+> +//!
+> +//! assert!(found_0 && found_10 && found_20);
+> +//! ```
+> =20
+>  use crate::{
+>      bindings,
+>      types::Opaque, //
+>  };
+> +use core::marker::PhantomData;
 
-Since it is added in the following patch, I guess we can do without this
-very temporary TODO. :)
+IIUC the typical order of imports is `core`, then `kernel`, then=20
+`crate` (here crate =3D=3D kernel though), with a space between them.
 
 > +
-> +use crate::{
-> +    bindings,
-> +    types::Opaque, //
-> +};
-> +
-> +/// A C linked list with a sentinel head
-
-Nit: '.' at end of sentence.
-
+> +/// Trait for associating a link type with its container item type.
 > +///
-> +/// A sentinel head is one which is not embedded in an item. It represen=
+> +/// Implemented by "field link types" that are `list_head` links embedde=
+d in intrusive
+> +/// C linked lists. Each link type is unique to a specific item type and=
+ its `list_head` field,
+> +/// making it possible for an item to be added to multiple lists.
+> +pub trait ClistLink {
+> +    /// The item type that contains the `list_head` field linking to oth=
+er items in the list.
+> +    type Item: FromListHead<Self>
+> +    where
+> +        Self: Sized;
+> +}
+> =20
+>  /// A C linked list with a sentinel head
+>  ///
+> -/// A sentinel head is one which is not embedded in an item. It represen=
 ts the entire
-> +/// linked list and can be used for add, remove, empty operations etc.
-> +///
-> +/// # Invariants
-> +///
-> +/// - `Clist` wraps an allocated and valid C list_head structure that is=
- the sentinel of a list.
-> +/// - All the `list_head` nodes in the list are allocated and have valid=
- next/prev pointers.
-> +/// - The underlying `list_head` (and entire list) is not modified by C.
+> -/// linked list and can be used for add, remove, empty operations etc.
+> +/// Represents the entire linked list and can be used for add, remove, e=
+mpty operations etc.
+> +/// A sentinel head is one which is not embedded in an item.
 
-These last two ones look more like safety requirements to maintain for
-the life of a Clist than invariants.
+This comment changes, but its substance remains the same - let's get its
+final form in the previous patch?
 
-> +#[repr(transparent)]
-> +pub struct Clist(ClistHead);
-
-`ClistHead`'s definition should come before `Clist` for clarity.
-
+>  ///
+>  /// # Invariants
+>  ///
+> @@ -69,6 +156,15 @@ pub fn iter_heads(&self) -> ClistHeadIter<'_> {
+>              head: &self.0,
+>          }
+>      }
 > +
-> +// SAFETY: `Clist` can be sent to any thread.
-> +unsafe impl Send for Clist {}
-> +// SAFETY: `Clist` can be shared among threads as it is not modified by =
-C per type invariants.
-> +unsafe impl Sync for Clist {}
-
-These explicit impls should not be needed - as `ClistHead` implements
-`Send` and `Sync`, they will be automatically derived for `Clist` which
-just wraps it.
-
-> +
-> +impl Clist {
-> +    /// Create a `&Clist` from a raw sentinel `list_head` pointer.
-> +    ///
-> +    /// # Safety
-> +    ///
-> +    /// `ptr` must be a valid pointer to an allocated and initialized `l=
-ist_head` structure
-> +    /// representing a list sentinel, and it must remain valid for the l=
-ifetime `'a`.
+> +    /// Create a high-level iterator over typed items.
 > +    #[inline]
-> +    pub unsafe fn from_raw<'a>(ptr: *mut bindings::list_head) -> &'a Sel=
-f {
-> +        // SAFETY:
-> +        // - `ClistHead` has same layout as `list_head`.
-> +        // - `ptr` is valid for 'a.
-> +        unsafe { &*ptr.cast() }
-
-Let's reuse `ClistHead::from_raw` here.
-
-> +    }
-> +
-> +    /// Get the raw sentinel `list_head` pointer.
-> +    #[inline]
-> +    pub fn as_raw(&self) -> *mut bindings::list_head {
-> +        self.0.as_raw()
-> +    }
-> +
-> +    /// Access the underlying `ClistHead`.
-> +    #[inline]
-> +    pub fn head(&self) -> &ClistHead {
-> +        &self.0
-> +    }
-> +
-> +    /// Check if the list is empty.
-> +    #[inline]
-> +    pub fn is_empty(&self) -> bool {
-> +        self.0.is_empty()
-> +    }
-> +
-> +    /// Create a low-level iterator over `ClistHead` nodes. Caller conve=
-rts the returned
-> +    /// heads into items.
-> +    #[inline]
-> +    pub fn iter_heads(&self) -> ClistHeadIter<'_> {
-> +        ClistHeadIter {
-> +            current: &self.0,
-> +            head: &self.0,
+> +    pub fn iter<L: ClistLink>(&self) -> ClistIter<'_, L> {
+> +        ClistIter {
+> +            head_iter: self.iter_heads(),
+> +            _phantom: PhantomData,
 > +        }
 > +    }
-> +}
-> +
-> +/// Wraps a non-sentinel C `list_head` node for use in intrusive linked =
+
+This looks very dangerous, as it gives any caller the freedom to specify
+the type they want to upcast the `Clist` to, without using unsafe code.
+One could easily invoke this with the wrong type and get no build error
+or warning whatsoever.
+
+A safer version would have the `Clist` generic over the kind of
+conversion that needs to be performed, using e.g. a closure:
+
+  pub struct Clist<'a, T, C: Fn(*mut bindings::list_head) -> *mut T> {
+      head: &'a ClistHead,
+      conv: C,
+  }
+
+`from_raw` would also take the closure as argument, which forces the
+creator of the list to both specify what that list is for, and use an
+`unsafe` statement for unsafe code. Here is a dummy example:
+
+    let head: bindings::list_head =3D ...;
+
+    // SAFETY: list_head always corresponds to the `list` member of
+    // `type_embedding_list_head`.
+    let conv =3D |head: *mut bindings::list_head| unsafe {
+        crate::container_of!(head, type_embedding_list_head, list)
+    };
+
+    // SAFETY: ...
+    unsafe { Clist::from_raw(head, conv) }
+
+Then `conv` would be passed down to the `ClistIter` so it can return
+references to the correct type.
+
+By doing so you can remove the `ClinkList` and `FromListHead` traits,
+the `impl_from_list_head` and `clist_iterate` macros, as well as the
+hidden ad-hoc types these create. And importantly, all unsafe code must
+be explicitly specified in an `unsafe` block, nothing is hidden by
+macros.
+
+This approach works better imho because each `list_head` is unique in
+how it has to be iterated: there is no benefit in implementing things
+using types and traits that will only ever be used in a single place
+anyway. And if there was, we could always create a newtype for that.
+
+Also as I suspected in v1 `Clist` appears to do very little apart from
+providing an iterator, so I'm more convinced that the front type for
+this should be `ClistHead`.
+
+>  }
+> =20
+>  /// Wraps a non-sentinel C `list_head` node for use in intrusive linked =
 lists.
-
-This says "non-sentinel", but `Clist` embeds a `ClistHead` which wraps a
-sentinel node, so that statement does not seem to be true.
-
-> +///
-> +/// # Invariants
-> +///
-> +/// - `ClistHead` represents an allocated and valid non-sentinel `list_h=
-ead` structure.
-> +/// - The underlying `list_head` (and entire list) is not modified by C.
-> +#[repr(transparent)]
-> +pub struct ClistHead(Opaque<bindings::list_head>);
+> @@ -188,3 +284,111 @@ fn next(&mut self) -> Option<Self::Item> {
+>          Some(self.current)
+>      }
+>  }
 > +
-> +// SAFETY: `ClistHead` can be sent to any thread.
-> +unsafe impl Send for ClistHead {}
-> +// SAFETY: `ClistHead` can be shared among threads as it is not modified=
- by C per type invariants.
-> +unsafe impl Sync for ClistHead {}
+> +/// High-level iterator over typed list items.
+> +pub struct ClistIter<'a, L: ClistLink> {
+> +    head_iter: ClistHeadIter<'a>,
 > +
-> +impl ClistHead {
-> +    /// Create a `&ClistHead` reference from a raw `list_head` pointer.
-> +    ///
-> +    /// # Safety
-> +    ///
-> +    /// `ptr` must be a valid pointer to an allocated and initialized `l=
-ist_head` structure,
-> +    /// and it must remain valid for the lifetime `'a`.
-> +    #[inline]
-> +    pub unsafe fn from_raw<'a>(ptr: *mut bindings::list_head) -> &'a Sel=
-f {
-> +        // SAFETY:
-> +        // - `ClistHead` has same layout as `list_head`.
-> +        // - `ptr` is valid for 'a.
-> +        unsafe { &*ptr.cast() }
-> +    }
-> +
-> +    /// Get the raw `list_head` pointer.
-> +    #[inline]
-> +    pub fn as_raw(&self) -> *mut bindings::list_head {
-> +        self.0.get()
-> +    }
-> +
-> +    /// Get the next `ClistHead` in the list.
-> +    #[inline]
-> +    pub fn next(&self) -> &Self {
-> +        // SAFETY:
-> +        // - `self.as_raw()` is valid per type invariants.
-> +        // - The `next` pointer is guaranteed to be non-NULL.
-> +        unsafe {
-> +            let raw =3D self.as_raw();
-
-This line doesn't need to be in the `unsafe` block (also applies to
-other methods).
-
-> +            Self::from_raw((*raw).next)
-> +        }
-> +    }
-> +
-> +    /// Get the previous `ClistHead` in the list.
-> +    #[inline]
-> +    pub fn prev(&self) -> &Self {
-> +        // SAFETY:
-> +        // - self.as_raw() is valid per type invariants.
-> +        // - The `prev` pointer is guaranteed to be non-NULL.
-> +        unsafe {
-> +            let raw =3D self.as_raw();
-> +            Self::from_raw((*raw).prev)
-> +        }
-> +    }
-> +
-> +    /// Check if this node is linked in a list (not isolated).
-> +    #[inline]
-> +    pub fn is_in_list(&self) -> bool {
-> +        // SAFETY: self.as_raw() is valid per type invariants.
-> +        unsafe {
-> +            let raw =3D self.as_raw();
-> +            (*raw).next !=3D raw && (*raw).prev !=3D raw
-> +        }
-> +    }
-> +
-> +    /// Check if the list is empty.
-> +    #[inline]
-> +    pub fn is_empty(&self) -> bool {
-> +        // SAFETY: self.as_raw() is valid per type invariants.
-> +        unsafe {
-> +            let raw =3D self.as_raw();
-> +            (*raw).next =3D=3D raw
-> +        }
-> +    }
-
-Does this method also apply to non-sentinel nodes? If not, should we
-move it to `Clist`?
-
-I am also wondering what the difference is with `is_in_list`. If
-`raw.next =3D=3D raw`, then on a valid list `raw.prev =3D=3D raw` as well, =
-so
-it seems to be that `is_in_list()` is equivalent to `!is_empty()`.
-
+> +    /// The iterator yields immutable references to `L::Item`.
+> +    _phantom: PhantomData<&'a L::Item>,
 > +}
 > +
-> +/// Low-level iterator over `list_head` nodes.
-> +///
-> +/// An iterator used to iterate over a C intrusive linked list (`list_he=
-ad`). Caller has to
-> +/// perform conversion of returned `ClistHead` to an item (typically usi=
-ng `container_of` macro).
-> +///
-> +/// # Invariants
-> +///
-> +/// `ClistHeadIter` is iterating over an allocated, initialized and vali=
-d `Clist`.
-> +pub struct ClistHeadIter<'a> {
-> +    current: &'a ClistHead,
-> +    head: &'a ClistHead,
-
-IIUC `head` should probably be a `Clist`?
-
-> +}
+> +// SAFETY: ClistIter yields `&L::Item`, which is Send when `L::Item: Sen=
+d`.
+> +unsafe impl<L: ClistLink> Send for ClistIter<'_, L> where L::Item: Send =
+{}
 > +
-> +// SAFETY: ClistHeadIter gives out immutable references to ClistHead,
-> +// which is Send.
-> +unsafe impl Send for ClistHeadIter<'_> {}
-> +
-> +// SAFETY: ClistHeadIter gives out immutable references to ClistHead,
-> +// which is Sync.
-> +unsafe impl Sync for ClistHeadIter<'_> {}
+> +// SAFETY: ClistIter yields &L::Item, which is Sync when `L::Item: Sync`=
+.
+> +unsafe impl<L: ClistLink> Sync for ClistIter<'_, L> where L::Item: Sync =
+{}
 
-`Send` and `Sync` will also be auto-implemented here.
+These implementations should also be automatic.
 
 > +
-> +impl<'a> Iterator for ClistHeadIter<'a> {
-> +    type Item =3D &'a ClistHead;
+> +impl<'a, L: ClistLink> Iterator for ClistIter<'a, L>
+> +where
+> +    L::Item: 'a,
+> +{
+> +    type Item =3D &'a L::Item;
+
+This is going to work well when we want to parse lists read-only. But
+I've also seen in some comments that you were considering supporting
+addition and deletion of items?
+
+In that case we will probably want to return some sort of guard type
+that derefs to `Item` (similar to a mutex guard), while also providing
+list management operations. We will probably also want distinct types
+for read-only and read-modify behavior. I think this can be done later,
+but better to keep this in mind when designing things.
+
 > +
-> +    #[inline]
 > +    fn next(&mut self) -> Option<Self::Item> {
-> +        // Advance to next node.
-> +        self.current =3D self.current.next();
+> +        // Get next ClistHead.
+> +        let head =3D self.head_iter.next()?;
 > +
-> +        // Check if we've circled back to HEAD.
-> +        if self.current.as_raw() =3D=3D self.head.as_raw() {
+> +        // Convert to item using trait.
+> +        // SAFETY: FromListHead impl guarantees valid conversion.
+> +        Some(unsafe { L::Item::from_list_head(head) })
 
-Maybe derive/implement `PartialEq` so we can avoid calling `as_raw`
-when comparing nodes.
+More idiomatic proposal:
 
+    self.head_iter.next().map(|head| {
+        // SAFETY: The FromListHead impl guarantees valid conversion.
+        unsafe { L::Item::from_list_head(head) }
+    })
+
+Note that since kernel lists are bi-directional, you can also implement
+`DoubleEndedIterator`!
