@@ -2,58 +2,68 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id 4F94AC812CA
-	for <lists+nouveau@lfdr.de>; Mon, 24 Nov 2025 15:55:52 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 6892BC81649
+	for <lists+nouveau@lfdr.de>; Mon, 24 Nov 2025 16:40:54 +0100 (CET)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 0607F10E2D7;
-	Mon, 24 Nov 2025 14:55:51 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 3C3B789220;
+	Mon, 24 Nov 2025 15:40:52 +0000 (UTC)
 Authentication-Results: gabe.freedesktop.org;
-	dkim=fail reason="signature verification failed" (2048-bit key; secure) header.d=infradead.org header.i=@infradead.org header.b="hvTwx4nD";
+	dkim=pass (1024-bit key; unprotected) header.d=collabora.com header.i=daniel.almeida@collabora.com header.b="Cu2ATwBE";
 	dkim-atps=neutral
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from casper.infradead.org (casper.infradead.org [90.155.50.34])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 2A8BE10E2D1
- for <nouveau@lists.freedesktop.org>; Mon, 24 Nov 2025 14:55:48 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=infradead.org; s=casper.20170209; h=In-Reply-To:Content-Transfer-Encoding:
- Content-Type:MIME-Version:References:Message-ID:Subject:Cc:To:From:Date:
- Sender:Reply-To:Content-ID:Content-Description;
- bh=Ecx5UUb338upKmBZxHmlmJZBMGzHH+jrv0oSxjw0ZtU=; b=hvTwx4nD6yYb+g61F27bX3YTgu
- NFD5WP828tU2N5T3xFVRtK4tpUKtd2PENwcNHxGwdHKWoOtfTuPinLcVjx7C+M5mX+PJuQtJdTDn8
- A4JRYWAxiV30aFBbMLVnRy5zdKrxWHO4UpOBlFAe9/X5/JN4DKDJjsieu/CO9s9FTn4AeNWCa8McF
- R95B72D8qDMe1Po6OumdtvDBvOhUByXURENaIw5hMD+nfjfcHqb+EhFjYIIzQ2WeVIdyIdt8Wel09
- z1palUcWjkcPVVDIfPd92MicRnFtlnAwmqRXoL5SehoRYwxLi3bB5hafA0sNYpO4VRe74ZI9bLaKH
- CsksPiMg==;
-Received: from 77-249-17-252.cable.dynamic.v4.ziggo.nl ([77.249.17.252]
- helo=noisy.programming.kicks-ass.net)
- by casper.infradead.org with esmtpsa (Exim 4.98.2 #2 (Red Hat Linux))
- id 1vNXyj-000000078Mi-01oN; Mon, 24 Nov 2025 14:55:45 +0000
-Received: by noisy.programming.kicks-ass.net (Postfix, from userid 1000)
- id 80C1D3002A6; Mon, 24 Nov 2025 15:55:44 +0100 (CET)
-Date: Mon, 24 Nov 2025 15:55:44 +0100
-From: Peter Zijlstra <peterz@infradead.org>
-To: Miguel Ojeda <miguel.ojeda.sandonis@gmail.com>
-Cc: Boqun Feng <boqun.feng@gmail.com>, Stephen Rothwell <sfr@canb.auug.org.au>,
- Thomas Gleixner <tglx@linutronix.de>,
- Ingo Molnar <mingo@kernel.org>, "H. Peter Anvin" <hpa@zytor.com>,
- Linux Kernel Mailing List <linux-kernel@vger.kernel.org>,
- Linux Next Mailing List <linux-next@vger.kernel.org>,
- ojeda@kernel.org, Danilo Krummrich <dakr@kernel.org>,
- Alexandre Courbot <acourbot@nvidia.com>,
- nouveau@lists.freedesktop.org, Alice Ryhl <aliceryhl@google.com>
-Subject: Re: linux-next: build failure after merge of the tip tree
-Message-ID: <20251124145544.GU3245006@noisy.programming.kicks-ass.net>
-References: <20251124231644.38d0303b@canb.auug.org.au>
- <20251124123249.GP4067720@noisy.programming.kicks-ass.net>
- <aSRlFB9PoOcZVmvt@tardis.local>
- <20251124144714.GT3245006@noisy.programming.kicks-ass.net>
- <CANiq72kN_QjYSCdzs9UCx2sHdR9Q2g_7_h-ZZ2y0qLZjhUxX6g@mail.gmail.com>
-MIME-Version: 1.0
-Content-Type: text/plain; charset=utf-8
-Content-Disposition: inline
-Content-Transfer-Encoding: 8bit
-In-Reply-To: <CANiq72kN_QjYSCdzs9UCx2sHdR9Q2g_7_h-ZZ2y0qLZjhUxX6g@mail.gmail.com>
+X-Greylist: delayed 904 seconds by postgrey-1.36 at gabe;
+ Mon, 24 Nov 2025 15:40:51 UTC
+Received: from sender3-pp-f112.zoho.com (sender3-pp-f112.zoho.com
+ [136.143.184.112])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 8C08189220
+ for <nouveau@lists.freedesktop.org>; Mon, 24 Nov 2025 15:40:51 +0000 (UTC)
+ARC-Seal: i=1; a=rsa-sha256; t=1763997941; cv=none; 
+ d=zohomail.com; s=zohoarc; 
+ b=UI1hfli3Q69C3/K6yBopCQ7ESXI2e2Nd7mDdMIRqXoDT5+UJdqOt1EljS9gT6wGIcGNsSUN6j5YpJRlRPw4Cbcccvs7aEfZjRpy8hUxTNGS6rv8tCoiwZ0P5uKsZhgd2kcOJsTK4XCJ5Pm2mpWJkSiwWeDisG2LweuEpRukD5Ts=
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=zohomail.com;
+ s=zohoarc; t=1763997941;
+ h=Content-Type:Content-Transfer-Encoding:Cc:Cc:Date:Date:From:From:In-Reply-To:MIME-Version:Message-ID:References:Subject:Subject:To:To:Message-Id:Reply-To;
+ bh=zvAP0rCzyafXkjCBmJbox5x2Ji8oWWUm5n8q37B7Clk=; 
+ b=TvehLIeBHZVDTbd+PHqKKfR3oxPO18QbGPVBH8AgQPgAH5HA4z/DGFFH1+9AyRax7ZkSUhHeVZAwM4JDChUzox/GMpv04VjKelzV7LV5hyip3MQuFoOJgB0akjV7n/iLhqY3VEJgJAA18waXkOloUCToFeT+rEu9nWngQ/a0tXk=
+ARC-Authentication-Results: i=1; mx.zohomail.com;
+ dkim=pass  header.i=collabora.com;
+ spf=pass  smtp.mailfrom=daniel.almeida@collabora.com;
+ dmarc=pass header.from=<daniel.almeida@collabora.com>
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; t=1763997941; 
+ s=zohomail; d=collabora.com; i=daniel.almeida@collabora.com;
+ h=Content-Type:Mime-Version:Subject:Subject:From:From:In-Reply-To:Date:Date:Cc:Cc:Content-Transfer-Encoding:Message-Id:Message-Id:References:To:To:Reply-To;
+ bh=zvAP0rCzyafXkjCBmJbox5x2Ji8oWWUm5n8q37B7Clk=;
+ b=Cu2ATwBEL/ND0jjLi5JELDGDQ54hE8CdVQxodV1a8MfUsXE/Fo2e7g0YEtNrZF/A
+ gbf1+zwdZHCQDh3xULF1XutbbaHKbcYeeRt92x5J0tY1syNIP3K3jHmiwr3HYltBW7k
+ W2PCzjV9gfLEYSywB+cU8D2UlNN/X7owyxmXD+bA=
+Received: by mx.zohomail.com with SMTPS id 1763997939655515.524856708236;
+ Mon, 24 Nov 2025 07:25:39 -0800 (PST)
+Content-Type: text/plain;
+	charset=us-ascii
+Mime-Version: 1.0 (Mac OS X Mail 16.0 \(3826.700.81\))
+Subject: Re: [PATCH v5 4/8] rust: gem: Introduce DriverObject::Args
+From: Daniel Almeida <daniel.almeida@collabora.com>
+In-Reply-To: <20251023212540.1141999-5-lyude@redhat.com>
+Date: Mon, 24 Nov 2025 12:25:23 -0300
+Cc: dri-devel@lists.freedesktop.org, rust-for-linux@vger.kernel.org,
+ Alice Ryhl <aliceryhl@google.com>, Danilo Krummrich <dakr@kernel.org>,
+ linux-kernel@vger.kernel.org, David Airlie <airlied@gmail.com>,
+ Simona Vetter <simona@ffwll.ch>, Miguel Ojeda <ojeda@kernel.org>,
+ Alex Gaynor <alex.gaynor@gmail.com>, Boqun Feng <boqun.feng@gmail.com>,
+ Gary Guo <gary@garyguo.net>,
+ =?utf-8?Q?Bj=C3=B6rn_Roy_Baron?= <bjorn3_gh@protonmail.com>,
+ Benno Lossin <lossin@kernel.org>, Andreas Hindborg <a.hindborg@kernel.org>,
+ Trevor Gross <tmgross@umich.edu>, Asahi Lina <lina+kernel@asahilina.net>,
+ Shankari Anand <shankari.ak0208@gmail.com>,
+ "open list:DRM DRIVER FOR NVIDIA GPUS [RUST]" <nouveau@lists.freedesktop.org>
+Content-Transfer-Encoding: quoted-printable
+Message-Id: <799528A2-B13E-4F32-9EDE-504CE5D97E63@collabora.com>
+References: <20251023212540.1141999-1-lyude@redhat.com>
+ <20251023212540.1141999-5-lyude@redhat.com>
+To: Lyude Paul <lyude@redhat.com>
+X-Mailer: Apple Mail (2.3826.700.81)
+X-ZohoMailClient: External
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -68,14 +78,104 @@ List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-On Mon, Nov 24, 2025 at 03:51:46PM +0100, Miguel Ojeda wrote:
-> On Mon, Nov 24, 2025 at 3:47 PM Peter Zijlstra <peterz@infradead.org> wrote:
 
-> By the way, I have had this patch around for RANDSTRUCT a long time:
-> 
->     https://lore.kernel.org/rust-for-linux/20241119185747.862544-1-ojeda@kernel.org/
-> 
-> More than glad if someone confirms it works for them...
 
-/me mumbles something about using clang to inject C IR into the Rust
-thing and kicking bindgen to the curb :-)
+> On 23 Oct 2025, at 18:22, Lyude Paul <lyude@redhat.com> wrote:
+>=20
+> This is an associated type that may be used in order to specify a =
+data-type
+> to pass to gem objects when construction them, allowing for drivers to =
+more
+> easily initialize their private-data for gem objects.
+>=20
+> Signed-off-by: Lyude Paul <lyude@redhat.com>
+> Reviewed-by: Alice Ryhl <aliceryhl@google.com>
+>=20
+> ---
+> V3:
+> * s/BaseDriverObject/DriverObject/
+> V4:
+> * Fix leftover reference to BaseObjectDriver in rustdoc for
+>  DriverObject::Args
+>=20
+> drivers/gpu/drm/nova/gem.rs |  5 +++--
+> rust/kernel/drm/gem/mod.rs  | 13 ++++++++++---
+> 2 files changed, 13 insertions(+), 5 deletions(-)
+>=20
+> diff --git a/drivers/gpu/drm/nova/gem.rs b/drivers/gpu/drm/nova/gem.rs
+> index 2760ba4f3450b..173077eeb2def 100644
+> --- a/drivers/gpu/drm/nova/gem.rs
+> +++ b/drivers/gpu/drm/nova/gem.rs
+> @@ -18,8 +18,9 @@ pub(crate) struct NovaObject {}
+>=20
+> impl gem::DriverObject for NovaObject {
+>     type Driver =3D NovaDriver;
+> +    type Args =3D ();
+>=20
+> -    fn new(_dev: &NovaDevice, _size: usize) -> impl PinInit<Self, =
+Error> {
+> +    fn new(_dev: &NovaDevice, _size: usize, _args: Self::Args) -> =
+impl PinInit<Self, Error> {
+>         try_pin_init!(NovaObject {})
+>     }
+> }
+> @@ -33,7 +34,7 @@ pub(crate) fn new(dev: &NovaDevice, size: usize) -> =
+Result<ARef<gem::Object<Self
+>             return Err(EINVAL);
+>         }
+>=20
+> -        gem::Object::new(dev, aligned_size)
+> +        gem::Object::new(dev, aligned_size, ())
+>     }
+>=20
+>     /// Look up a GEM object handle for a `File` and return an =
+`ObjectRef` for it.
+> diff --git a/rust/kernel/drm/gem/mod.rs b/rust/kernel/drm/gem/mod.rs
+> index 67813cfb0db42..d448c65fe5e13 100644
+> --- a/rust/kernel/drm/gem/mod.rs
+> +++ b/rust/kernel/drm/gem/mod.rs
+> @@ -65,8 +65,15 @@ pub trait DriverObject: Sync + Send + Sized {
+>     /// Parent `Driver` for this object.
+>     type Driver: drm::Driver;
+>=20
+> +    /// The data type to use for passing arguments to =
+[`DriverObject::new`].
+> +    type Args;
+> +
+>     /// Create a new driver data object for a GEM object of a given =
+size.
+> -    fn new(dev: &drm::Device<Self::Driver>, size: usize) -> impl =
+PinInit<Self, Error>;
+> +    fn new(
+> +        dev: &drm::Device<Self::Driver>,
+> +        size: usize,
+> +        args: Self::Args,
+> +    ) -> impl PinInit<Self, Error>;
+>=20
+>     /// Open a new handle to an existing object, associated with a =
+File.
+>     fn open(_obj: &<Self::Driver as drm::Driver>::Object, _file: =
+&DriverFile<Self>) -> Result {
+> @@ -247,11 +254,11 @@ impl<T: DriverObject> Object<T> {
+>     };
+>=20
+>     /// Create a new GEM object.
+> -    pub fn new(dev: &drm::Device<T::Driver>, size: usize) -> =
+Result<ARef<Self>> {
+> +    pub fn new(dev: &drm::Device<T::Driver>, size: usize, args: =
+T::Args) -> Result<ARef<Self>> {
+>         let obj: Pin<KBox<Self>> =3D KBox::pin_init(
+>             try_pin_init!(Self {
+>                 obj: Opaque::new(bindings::drm_gem_object::default()),
+> -                data <- T::new(dev, size),
+> +                data <- T::new(dev, size, args),
+>                 // INVARIANT: The drm subsystem guarantees that the =
+`struct drm_device` will live
+>                 // as long as the GEM object lives.
+>                 dev: dev.into(),
+> --=20
+> 2.51.0
+>=20
+>=20
+
+Reviewed-by: Daniel Almeida <daniel.almeida@collabora.com>=
