@@ -2,95 +2,80 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id B3DDBC85C9A
-	for <lists+nouveau@lfdr.de>; Tue, 25 Nov 2025 16:33:27 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 9E2AFCBAE3F
+	for <lists+nouveau@lfdr.de>; Sat, 13 Dec 2025 13:45:56 +0100 (CET)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 63B6610E421;
-	Tue, 25 Nov 2025 15:33:26 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id F388010EBED;
+	Sat, 13 Dec 2025 12:42:13 +0000 (UTC)
 Authentication-Results: gabe.freedesktop.org;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="jE/3c8sZ";
+	dkim=permerror (0-bit key) header.d=gmail.com header.i=@gmail.com header.b="SxdtE+mo";
 	dkim-atps=neutral
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from mail-ej1-f42.google.com (mail-ej1-f42.google.com
- [209.85.218.42])
- by gabe.freedesktop.org (Postfix) with ESMTPS id A15BA10E421
- for <nouveau@lists.freedesktop.org>; Tue, 25 Nov 2025 15:33:24 +0000 (UTC)
-Received: by mail-ej1-f42.google.com with SMTP id
- a640c23a62f3a-b737502f77bso814580066b.2
- for <nouveau@lists.freedesktop.org>; Tue, 25 Nov 2025 07:33:24 -0800 (PST)
+Received: from mail-oo1-f42.google.com (mail-oo1-f42.google.com
+ [209.85.161.42])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 06C3B10E437
+ for <nouveau@lists.freedesktop.org>; Tue, 25 Nov 2025 15:47:40 +0000 (UTC)
+Received: by mail-oo1-f42.google.com with SMTP id
+ 006d021491bc7-657230e45e8so2140866eaf.1
+ for <nouveau@lists.freedesktop.org>; Tue, 25 Nov 2025 07:47:39 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1764084803; x=1764689603;
- darn=lists.freedesktop.org; 
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=wCZdld6CYrWFXkrUxJ5abCqUL/Pa1DX9edqJLOysax8=;
- b=jE/3c8sZDi01KZmUPQyCNFxN2nsByHjowKkCU9dQcBhksmgb1JHrX6TyjhJ2b7IgGB
- qSR/dnBCTTjKmXQ19Wubkqrg+nMiL89TLsPTZD5h2EWAjbTyERctxhfyb/8cAKphwhNN
- sg4GK4wrg/xq5xeqZEdQZEuoRoJK6Wl+3rWmA=
+ d=gmail.com; s=20230601; t=1764085659; x=1764690459; darn=lists.freedesktop.org;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=vwd7GiN0LhHHn+1+8fCmutdytRAkrux2QdVf0iABeVI=;
+ b=SxdtE+moJwAhGbNnxnltRQoGXs+x9vyE77cpjUT0Z2lSWuBJTJdDrrCbhG2cVSUR87
+ w/hel1gvSdIQqUyx2lIhxXalwEE/LEtCXRPESocZ/Hf+1KSJQCHmrzC7VujxZnmeD9+G
+ SPz39f5TxqfsM3AS0TgGcAw+87NItrpwBrhEnRjuHIiY/F6JGnsxDzMjvHKGLXOKW39g
+ ggrTtGsJ4/EbWFxxcWzZJzAaHXXSNVGjb6gfQ1sNcfM64c06ztXqvmFwSnPLgNi4aOrc
+ B0250+lZnpg1pukfXizRXvv+B/eFBFrQDFaYdrnZ5lSRMVN8LdwWfO/8osafGPmhnSQX
+ 0J3g==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1764084803; x=1764689603;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-gg:x-gm-message-state:from
- :to:cc:subject:date:message-id:reply-to;
- bh=wCZdld6CYrWFXkrUxJ5abCqUL/Pa1DX9edqJLOysax8=;
- b=BiEEDAsUFQ+tjiN0vAgaLs7TXDV9HTEYkSXtWuj3qfHPZ3dkphkrK54Js+K/HS3JxY
- IHSCOIaNHB4hMpTElfiKJRSw76Dvk6C+9mcG7u+b36t43TCfPrPCJ195c2d3OALLzu+X
- 6IYfwrdhRx8Hta1MO3bAmVLvya1AI05TBT+mIRjS9rabSEH5tJx5Zn2NNQrYMyXKKXKP
- 7aYNE0sT9ZCNk09X7NSHECQWu0ayvBhY7gkkpDPXx88L+ehRi0DrtPT34MRfBByy3han
- fy8ifYDCpuTzr05E2nzXUI+XACO0ot8wXca3S6aRefbowMi88wMyGA5wnEhKvP7AoqvA
- lZQQ==
+ d=1e100.net; s=20230601; t=1764085659; x=1764690459;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=vwd7GiN0LhHHn+1+8fCmutdytRAkrux2QdVf0iABeVI=;
+ b=Hm1tEIg1I+S/UZQwcA+0BJobpoxJCll+XIFekrSduOL8TUpY0JV1D3HJSO+bALyiwT
+ Q29LqCB9OWsTY7rtU0/32QnmtuLehlHE1gFX4VSq0o1qQAKdhx8IYSrmlvTOWWCdKzEP
+ JkIXvN3KF70fLSVdWODDE9uXZhoVgrAEGlP5W8rnlZX732a2X/9MudEVTO2Q81IAsjLH
+ 76rEpYfO87plMag1AJapek9az2G30OVaKEiYv9MS1Ix2dzwySWHIuHtthImOy006Q8qC
+ P2/UlTK0XEHfH2fkHQHNIL0XjvKWEO0DjrEv0b4fFWblWYb+T9D7lJJltoA4IfLeNRMX
+ nUAg==
 X-Forwarded-Encrypted: i=1;
- AJvYcCVQPA7WXW+PIXYFaQClVJfFB/Og/llqbVjLAzfS06xs/bi5gAYepdv80ASkL/hEmaTWoxxED7de@lists.freedesktop.org
-X-Gm-Message-State: AOJu0YwfsH4SAnVjKXEikGlL1Se/bYT94AAARsmM1rnm88rHG2LYEaTV
- TjX4wlHgveqRSlX7nk+trju5+bd88gvyZ0SCp14rt89vMuI7QcS7+LEVM7n48YeWWxhuV9VTq5q
- 8aBGA8Bcz
-X-Gm-Gg: ASbGncsMKSkR2lj92pkoERLX8xhz39JqePBBZYUCcTkGteuJccSrt1fiimusjTrkjv5
- xk0NbC7x1AqFvDeuzUkBkPH7MC9XrHlXM1sXO1peD+Hx0Dqf5vNkliQZTAefUqmQ1slezuFHC85
- tz/KKdhgMtmYh0p7u8cHGDRu/oRiGCIj17YEJItFmrz81o3nAccwpP+mvS6yDvDvGotaEAzKkEm
- FRRY4guv+lHXuhLf/vwUGCQhaboQydKWUnL06OFouZGkTyVVOj+QpEJLbCBmaGL0ZcO0evZ8D0K
- qBXT2shnKo+6nUBqfQKJhgZgkMphtbOsClADxEcaNJveWQ0ZOkZoh1PnvCgJNaSBrWO7uf5x2BG
- S5XHGCMqWwgn2Hr08VEiEJOzd9I1E2fkkwc4+eD94c8PuuacjBCad1D1pdXE8X75xa5kQGeaPA/
- TQa5eF9vMDGeV5R7QysvupMHTesQ0q5KyPApghDD9+hW2wqZ81AQ==
-X-Google-Smtp-Source: AGHT+IF1DHcMDH4yphLqRfcGwJxX/gDPrZT7chUGkgTGOK4gSLmYQUtA3CVeE1dvEyA93a0FPF4Kqw==
-X-Received: by 2002:a17:906:c142:b0:b70:b700:df98 with SMTP id
- a640c23a62f3a-b76c5356501mr326394366b.5.1764084802442; 
- Tue, 25 Nov 2025 07:33:22 -0800 (PST)
-Received: from mail-ed1-f52.google.com (mail-ed1-f52.google.com.
- [209.85.208.52]) by smtp.gmail.com with ESMTPSA id
- a640c23a62f3a-b7654d56a70sm1624457766b.22.2025.11.25.07.33.22
- for <nouveau@lists.freedesktop.org>
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Tue, 25 Nov 2025 07:33:22 -0800 (PST)
-Received: by mail-ed1-f52.google.com with SMTP id
- 4fb4d7f45d1cf-6408f9cb1dcso1836864a12.3
- for <nouveau@lists.freedesktop.org>; Tue, 25 Nov 2025 07:33:22 -0800 (PST)
-X-Forwarded-Encrypted: i=1;
- AJvYcCV6sX9Fw/756qOx2yiq3K0fsgJlnSyNNy43/MjuC/y+zMf0Ez6azFJRIgpg3RfjR0a6DP3ODwO1@lists.freedesktop.org
-X-Received: by 2002:a05:6000:381:b0:42b:3ad7:fdd3 with SMTP id
- ffacd0b85a97d-42e0f21e953mr3395597f8f.18.1764084405547; Tue, 25 Nov 2025
- 07:26:45 -0800 (PST)
+ AJvYcCWPQIAODtzj9dV7+rIwbevOsQ1C3w2TPOOZPgPVH00DaRwXlI26xa7ViUBYCOrzssPyQ2PawGBm@lists.freedesktop.org
+X-Gm-Message-State: AOJu0YxOK4GVJUV/LF/H7Vcv8BDMbF0BK8qBn1HwaHce59HmGqShfyL9
+ Ay0PUxqKOxxCnWt0A0BWC3DV3em9b0W92pvUehownIREbfcIWWx4r0A2
+X-Gm-Gg: ASbGncsPUOv4s8FG4xR540GR0b90gkB37/sErJEQJOZtuJpMy/NlB1pgzKjn4HQ2tlr
+ Y86mBQvp+AUdjJ20Imb+w6MtTlaGvaYrA7QA64ukn5P8m+Wi+awKltMLEuHmJaVFsUp8tvbLnID
+ JdUZq0QbXYxaBWRiKqhtbxkFWof5ftPfKBSZJRBSbfT4efrkU7vytN9s0LqDfu6N87k8q0b/qpP
+ lbzYA3e2bpTQgGeQaFwrSGTT7nTsbBKa1C0yNXhPgkStIsL9rwQQRGAa8GUHVuGuv3EeCKckZ58
+ iM5rt/rcu0mSqya0t8m0pAdkzgwGLS2aeKYDc79jIHp1SwJ24o01c4dJnR+rEL11EAAII91TRes
+ okUEijVthRw+lra4VqUdcGXQUff7umRojFCRxLsp9UFY+FUgGp+YFrhsGgwb/ztrcQwkwB++4qP
+ Oxjny0IUI9G4abaXDzzv4Kukgvyj1Tig4=
+X-Google-Smtp-Source: AGHT+IHiuoQZzYWwy314lRsUMafz3cwaDnTm31WJbXtW7FkNI3HiSFHTqV00n0ZzdvjwbdNNHFnnig==
+X-Received: by 2002:a05:6808:1926:b0:450:cd83:80d6 with SMTP id
+ 5614622812f47-45112af3534mr7396381b6e.16.1764085659162; 
+ Tue, 25 Nov 2025 07:47:39 -0800 (PST)
+Received: from SyzRHEL1.fyre.ibm.com ([170.225.223.18])
+ by smtp.gmail.com with ESMTPSA id
+ 5614622812f47-450fffed315sm4633108b6e.21.2025.11.25.07.47.37
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Tue, 25 Nov 2025 07:47:38 -0800 (PST)
+From: Chelsy Ratnawat <chelsyratnawat2001@gmail.com>
+To: lyude@redhat.com, dakr@kernel.org, mripard@kernel.org, airlied@gmail.com,
+ maarten.lankhorst@linux.intel.com
+Cc: tzimmermann@suse.de, simona@ffwll.ch, dri-devel@lists.freedesktop.org,
+ nouveau@lists.freedesktop.org,
+ Chelsy Ratnawat <chelsyratnawat2001@gmail.com>
+Subject: [PATCH] drm/nouveau/mmu: add NULL check for args in
+ nouveau_uvmm_sm_prepare()
+Date: Tue, 25 Nov 2025 07:47:29 -0800
+Message-ID: <20251125154729.434072-1-chelsyratnawat2001@gmail.com>
+X-Mailer: git-send-email 2.47.3
 MIME-Version: 1.0
-References: <20251125130634.1080966-1-tzimmermann@suse.de>
-In-Reply-To: <20251125130634.1080966-1-tzimmermann@suse.de>
-From: Doug Anderson <dianders@chromium.org>
-Date: Tue, 25 Nov 2025 07:26:33 -0800
-X-Gmail-Original-Message-ID: <CAD=FV=X_-t2AF5osp7Hamoe7WYE_2YWJZCaPaOj=9seSbnwwVA@mail.gmail.com>
-X-Gm-Features: AWmQ_bldhiBpRCqVYkj0GufunmE0LiqT8gw4vCTv4PiT8j1h28du9Cx4NWXFEj8
-Message-ID: <CAD=FV=X_-t2AF5osp7Hamoe7WYE_2YWJZCaPaOj=9seSbnwwVA@mail.gmail.com>
-Subject: Re: [PATCH 0/5] drm: Remove remaining support for kdb
-To: Thomas Zimmermann <tzimmermann@suse.de>
-Cc: simona@ffwll.ch, airlied@gmail.com, alexander.deucher@amd.com, 
- christian.koenig@amd.com, lyude@redhat.com, dakr@kernel.org, deller@gmx.de, 
- mripard@kernel.org, maarten.lankhorst@linux.intel.com, 
- jason.wessel@windriver.com, danielt@kernel.org, 
- dri-devel@lists.freedesktop.org, amd-gfx@lists.freedesktop.org, 
- nouveau@lists.freedesktop.org, linux-fbdev@vger.kernel.org, 
- linux-doc@vger.kernel.org, linux-kernel@vger.kernel.org, 
- Nir Lichtman <nir@lichtman.org>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+Content-Transfer-Encoding: 8bit
+X-Mailman-Approved-At: Sat, 13 Dec 2025 12:40:43 +0000
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -105,53 +90,30 @@ List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-Hi,
+nouveau_uvmm_sm_prepare() passes the uvmm_map_args pointer (args) to
+op_map_prepare() without checking for NULL.
+Prevent NULL deref in op_map_prepare() by checking args before use.
 
-On Tue, Nov 25, 2025 at 5:06=E2=80=AFAM Thomas Zimmermann <tzimmermann@suse=
-.de> wrote:
->
-> Remove the rest of the kbd support from DRM. Driver support has been
-> broken for years without anyone complaining.
->
-> Kdb cannot use regular DRM mode setting, so DRM drivers have to
-> implement an additional hook to make it work (in theory). As outlined
-> by Sima in commit 9c79e0b1d096 ("drm/fb-helper: Give up on kgdb for
-> atomic drivers") from 2017, kdb is not compatible with DRM atomic mode
-> setting. Non-atomic mode setting meanwhile has become rare.
->
-> Only 3 DRM drivers implement the hooks for kdb support. Amdgpu and
-> nouveau use non-atomic mode setting on older devices. But both drivers
-> have switched to generic fbdev emulation, which isn't compatible with
-> kdb. Radeon still runs kdb, but it doesn't work in practice. See the
-> commits in this series for details
->
-> Therefore remove the remaining support for kdb from the DRM drivers
-> and from DRM fbdev emulation. Also remove the hooks from fbdev, as
-> there are no fbdev drivers with kdb support.
->
-> If we ever want to address kdb support within DRM drivers, a place to
-> start would be the scanout buffers used by DRM's panic screen. These
-> use the current display mode. They can be written and flushed without
-> mode setting involved.
->
-> Note: kdb over serial lines is not affected by this series and continues
-> to work as before.
->
-> Thomas Zimmermann (5):
->   drm/amdgpu: Do not implement mode_set_base_atomic callback
->   drm/nouveau: Do not implement mode_set_base_atomic callback
->   drm/radeon: Do not implement mode_set_base_atomic callback
->   drm/fbdev-helper: Remove drm_fb_helper_debug_enter/_leave()
->   fbcon: Remove fb_debug_enter/_leave from struct fb_ops
+Signed-off-by: Chelsy Ratnawat <chelsyratnawat2001@gmail.com>
+---
+ drivers/gpu/drm/nouveau/nouveau_uvmm.c | 4 ++++
+ 1 file changed, 4 insertions(+)
 
-Personally, I've never worked with kdb over anything other than
-serial, so this won't bother any of my normal workflows. That being
-said, at least as of a year ago someone on the lists was talking about
-using kdb with a keyboard and (presumably) a display. You can see a
-thread here:
+diff --git a/drivers/gpu/drm/nouveau/nouveau_uvmm.c b/drivers/gpu/drm/nouveau/nouveau_uvmm.c
+index 79eefdfd08a2..7a33ce63770c 100644
+--- a/drivers/gpu/drm/nouveau/nouveau_uvmm.c
++++ b/drivers/gpu/drm/nouveau/nouveau_uvmm.c
+@@ -627,6 +627,10 @@ nouveau_uvmm_sm_prepare(struct nouveau_uvmm *uvmm,
+ 		case DRM_GPUVA_OP_MAP: {
+ 			u64 vmm_get_range = vmm_get_end - vmm_get_start;
+ 
++			if (!args) {
++				ret = -EINVAL;
++				goto unwind;
++			}
+ 			ret = op_map_prepare(uvmm, &new->map, &op->map, args);
+ 			if (ret)
+ 				goto unwind;
+-- 
+2.47.3
 
-http://lore.kernel.org/r/20241031192350.GA26688@lichtman.org
-
-Daniel may also have comments here?
-
--Doug
