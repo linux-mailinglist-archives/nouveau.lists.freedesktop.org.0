@@ -2,69 +2,90 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id 5B6B8C84345
-	for <lists+nouveau@lfdr.de>; Tue, 25 Nov 2025 10:24:04 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 6B0BEC84F48
+	for <lists+nouveau@lfdr.de>; Tue, 25 Nov 2025 13:24:49 +0100 (CET)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id B994010E396;
-	Tue, 25 Nov 2025 09:24:02 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 82C2D10E3B4;
+	Tue, 25 Nov 2025 12:24:45 +0000 (UTC)
 Authentication-Results: gabe.freedesktop.org;
-	dkim=pass (2048-bit key; unprotected) header.d=google.com header.i=@google.com header.b="DdqXD3HA";
+	dkim=pass (2048-bit key; unprotected) header.d=google.com header.i=@google.com header.b="H+yFPGgv";
 	dkim-atps=neutral
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from mail-wm1-f73.google.com (mail-wm1-f73.google.com
- [209.85.128.73])
- by gabe.freedesktop.org (Postfix) with ESMTPS id DE29610E396
- for <nouveau@lists.freedesktop.org>; Tue, 25 Nov 2025 09:24:01 +0000 (UTC)
-Received: by mail-wm1-f73.google.com with SMTP id
- 5b1f17b1804b1-477a11d9e67so35841295e9.2
- for <nouveau@lists.freedesktop.org>; Tue, 25 Nov 2025 01:24:01 -0800 (PST)
+Received: from mail-wr1-f74.google.com (mail-wr1-f74.google.com
+ [209.85.221.74])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 21D6810E3B0
+ for <nouveau@lists.freedesktop.org>; Tue, 25 Nov 2025 12:24:44 +0000 (UTC)
+Received: by mail-wr1-f74.google.com with SMTP id
+ ffacd0b85a97d-429ca3e7245so2645321f8f.3
+ for <nouveau@lists.freedesktop.org>; Tue, 25 Nov 2025 04:24:44 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=google.com; s=20230601; t=1764062640; x=1764667440;
+ d=google.com; s=20230601; t=1764073482; x=1764678282;
  darn=lists.freedesktop.org; 
  h=cc:to:from:subject:message-id:references:mime-version:in-reply-to
  :date:from:to:cc:subject:date:message-id:reply-to;
- bh=Gdct6hRNMC2a33F1SDQTUemoosYNL7hA0Cpixkq+5aE=;
- b=DdqXD3HA9o6hl9YHlqKyAujZrj4bmkOvNOqWd6ePGXtKTFO5QG1QQyPF2w/T9ma5wc
- MgTbt4NlZe3hRsqya9sv4Zqj8ey6mAhOkw6nxBV3Ucds/wY7qkATIg1uDlYRXZbRTV47
- VPbHAVBwta43Jp+E4+UAZe+qbASPyUeK2HmGiCFstJwcPieM4akSfdFN2VnQJB2hqnGp
- DvfbSF4519IShTWZhVQllOp1rGNdaWh9MubL/Y/hSJ3v9ZC+cugm9SBkKFHI3QaeL1iZ
- 0xQ/jgKR4JpkT8gXjHHES7kp5CjBSQ1XG8bllVWMiF66IIZWQiojdOvqkIkqehFTA64t
- vdGQ==
+ bh=UWqCGf4yniNYnv+0gGu8q0Azun9cQVkGzauYt4WzdGE=;
+ b=H+yFPGgvH/L+sjMg1anS+DuT0uB+LHpbbmhxO3NrdnMwQOozthuptV6niVfkgI+NOM
+ jAkcnHz1kP3A5zQkqFPgBCZcpijWTvlI5AhlE/5tOArHTjKm/aPdeuPEMIjRcmwA57Sj
+ A+XXDF5iSERN1RJqRqAYuHOzw2GyriwFaRTKZeOK9GMgs0IoGwk2MhRHs3sz7jQFJlvs
+ DvG97MIkCMfcOoRWcsSEt7psNBFzyv0i4gzvZthJQ2p9bTkbZ2YcOFKMfU2onrjRqsdX
+ UphAXdVi6bxl+EzEsLmY8Gkqjp1LOiqWWCslfYrxRUH2vTV8ubT2yT10dzxHC5kQ40UT
+ Q68A==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1764062640; x=1764667440;
+ d=1e100.net; s=20230601; t=1764073482; x=1764678282;
  h=cc:to:from:subject:message-id:references:mime-version:in-reply-to
  :date:x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=Gdct6hRNMC2a33F1SDQTUemoosYNL7hA0Cpixkq+5aE=;
- b=saRswVtdCieUzNHFvt57XpeIKF3g17qPs5JGhBnZULBYVL5H33U2bV/zftMxEhSffX
- N9tr7U4BP2sG8tYAvUd6tOOFoUeUVlkoFUuJIokCWfOATRuAJaCiNxKr7WbN9B7un2jd
- 8tYof2otvtLAJEjUQOUMwbVkJ3MVxXhSCYeDKwXMWTgKCddCrUqv9uZ6oZT2SQJUNFs2
- 41KAiqAqL6cS7QJvan0LsDm/CW1raWxnyDOq8YMb7a5NqinJKLvRtS4XPttlj2C8DWWS
- kmlo5rhQ0EDckWJozpuGnxu5aG+S2hmdJknitbtdGUhZlP73HBSt+BhN34Voe9fZ5B94
- sMDg==
+ bh=UWqCGf4yniNYnv+0gGu8q0Azun9cQVkGzauYt4WzdGE=;
+ b=eY3q7DeL1JyH7k0E129Wa+o/pE1H1P57emr906hAbWpAEV7HCxgGCt817n6ZZLZgox
+ 6jt8DzdtXOfL/F4LJPw3iNZExOFIL35TAaKQsUFFbM2MxqQF7KkcpIxwoTpeIfJc9Cfn
+ w31Yc0qhnI1wwV9SEZ7CrfBYedQElsj5Lll/c5mASkWTMMcOWQrTC85wfjxP3QKSG6UH
+ AtyHJxq4XRenYbzyzVwmrITf5n939D0s8ITsZ1buB/F8bCCVM9i3Plhn7U0tQ1PdqwgY
+ nypzsOyhRDmX0aIgPUd4AmkJ1xkVssc5T3Ue76OHVnOjKxCoeEV+aB+wZBaTpRIW6byJ
+ 5NWw==
 X-Forwarded-Encrypted: i=1;
- AJvYcCXG7ct4hBMLJtPppA5c4CVD7jTwmEyLaGalgBka8z3PJJmQCtqzDPeBjKRf/HAtSbgv+I+ouvmR@lists.freedesktop.org
-X-Gm-Message-State: AOJu0Yw2+eVBr1rO1bIanXckBdU+g8oZWD0dwrHFrC39DnoOH4VCFpWF
- DuvTLn8JCdrkLB73ac3QVYPIMV2dMMIZcouvfPw63Plw2tdZOU1Goh7B0RDif5MSPcgN5yHJZy+
- PTHigYCsk1bIkdCJa4A==
-X-Google-Smtp-Source: AGHT+IGgXo8y5EZjUDnBVwTOnyAZJVGtwWGypNxUeeXb63lWRcPTjmeoWUCMdN3xat5RPemCnmCh9NC4gbF2QE0=
-X-Received: from wmih8.prod.google.com ([2002:a05:600c:1448:b0:477:a2ad:bddc])
+ AJvYcCWCKIyTCAzNSIip7f6768t+cr8wnc/sXn4X3PMfzZ87REQYcQeUhsa2j7IGYn1iPsl/Qhl4yTTU@lists.freedesktop.org
+X-Gm-Message-State: AOJu0Yw2UHvu/qbKGeVmcSV9yciAFstdvTj4KhKwrbAEYBtc9ZisYz1y
+ qvsE/jwe8R4qSXbTbBNkv0s0FakYq9y9nTdufJNiDs4ibhMlUdtJkr9n8UOJC5HncBWBczJNluJ
+ nIZS4sNg7SOsKkL8JNA==
+X-Google-Smtp-Source: AGHT+IG2G97KKRtl5QTLxOePIordMgMh99WR16j540538wZ8wcvVCkUBTwb1GuKCnER5wu5hmB/vT2jtUiJeEds=
+X-Received: from wrrt17.prod.google.com ([2002:a5d:42d1:0:b0:42b:29df:cc2c])
  (user=aliceryhl job=prod-delivery.src-stubby-dispatcher) by
- 2002:a05:600c:3588:b0:477:bcb:24cd with SMTP id
- 5b1f17b1804b1-477c11179ffmr162794335e9.22.1764062640310; 
- Tue, 25 Nov 2025 01:24:00 -0800 (PST)
-Date: Tue, 25 Nov 2025 09:23:59 +0000
-In-Reply-To: <98227EBD-92F7-40FC-A5A4-3FF3780FB2CB@bne-home.net>
+ 2002:a5d:5d02:0:b0:42b:3339:c7ff with SMTP id
+ ffacd0b85a97d-42cc1d19a16mr16939785f8f.43.1764073482439; 
+ Tue, 25 Nov 2025 04:24:42 -0800 (PST)
+Date: Tue, 25 Nov 2025 12:24:41 +0000
+In-Reply-To: <20251123092438.182251-2-shankari.ak0208@gmail.com>
 Mime-Version: 1.0
-References: <98227EBD-92F7-40FC-A5A4-3FF3780FB2CB@bne-home.net>
-Message-ID: <aSV1rxXq4KuInexy@google.com>
-Subject: Re: [PATCH 1/1] drm: nova: Align GEM memory allocation to system page
- size
+References: <20251123092438.182251-1-shankari.ak0208@gmail.com>
+ <20251123092438.182251-2-shankari.ak0208@gmail.com>
+Message-ID: <aSWgCT0beyqaD4jE@google.com>
+Subject: Re: [PATCH 01/10] drivers: android: binder: Update ARef imports from
+ sync::aref
 From: Alice Ryhl <aliceryhl@google.com>
-To: bshephar@bne-home.net
-Cc: dakr@kernel.org, acourbot@nvidia.com, joelagnelf@nvidia.com, 
- jhubbard@nvidia.com, airlied@gmail.com, rust-for-linux@vger.kernel.org, 
- nouveau@lists.freedesktop.org, brendan.shephard@gmail.com
+To: Greg Kroah-Hartman <gregkh@linuxfoundation.org>
+Cc: Shankari Anand <shankari.ak0208@gmail.com>, 
+ "Arve =?utf-8?B?SGrDuG5uZXbDpWc=?=" <arve@android.com>,
+ Todd Kjos <tkjos@android.com>, Martijn Coenen <maco@android.com>, 
+ Joel Fernandes <joelagnelf@nvidia.com>, Christian Brauner <brauner@kernel.org>,
+ Carlos Llamas <cmllamas@google.com>, Suren Baghdasaryan <surenb@google.com>, 
+ Danilo Krummrich <dakr@kernel.org>,
+ Maarten Lankhorst <maarten.lankhorst@linux.intel.com>, 
+ Maxime Ripard <mripard@kernel.org>, Thomas Zimmermann <tzimmermann@suse.de>, 
+ David Airlie <airlied@gmail.com>, Simona Vetter <simona@ffwll.ch>, 
+ Alexandre Courbot <acourbot@nvidia.com>,
+ "Rafael J . Wysocki" <rafael@kernel.org>, Miguel Ojeda <ojeda@kernel.org>, 
+ Alex Gaynor <alex.gaynor@gmail.com>,
+ Igor Korotin <igor.korotin.linux@gmail.com>, 
+ Michal Wilczynski <m.wilczynski@samsung.com>, Boqun Feng <boqun.feng@gmail.com>,
+ Gary Guo <gary@garyguo.net>, 
+ "=?utf-8?B?QmrDtnJu?= Roy Baron" <bjorn3_gh@protonmail.com>,
+ Benno Lossin <lossin@kernel.org>, 
+ Andreas Hindborg <a.hindborg@kernel.org>, Trevor Gross <tmgross@umich.edu>, 
+ Daniel Almeida <daniel.almeida@collabora.com>,
+ Abdiel Janulgue <abdiel.janulgue@gmail.com>, 
+ Robin Murphy <robin.murphy@arm.com>, linux-kernel@vger.kernel.org, 
+ dri-devel@lists.freedesktop.org, nouveau@lists.freedesktop.org, 
+ rust-for-linux@vger.kernel.org, linux-pwm@vger.kernel.org
 Content-Type: text/plain; charset="utf-8"
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
@@ -80,55 +101,18 @@ List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-On Fri, Nov 21, 2025 at 02:04:28PM +1000, bshephar@bne-home.net wrote:
-> Use page::page_align for GEM object memory allocation to ensure the
-> allocation is page aligned. This ensures that the allocation is page
-> aligned with the system in cases where 4096 is not the default.
-> For example on 16k or 64k aarch64 systems this allocation should be
-> aligned accordingly.
+On Sun, Nov 23, 2025 at 02:54:29PM +0530, Shankari Anand wrote:
+> Update call sites in binder files to import `ARef`
+> from `sync::aref` instead of `types`.
 > 
-> Signed-off-by: Brendan Shephard <bshephar@bne-home.net>
-> ---
->  drivers/gpu/drm/nova/gem.rs | 11 ++++++++---
->  1 file changed, 8 insertions(+), 3 deletions(-)
+> This aligns with the ongoing effort to move `ARef` and
+> `AlwaysRefCounted` to sync.
 > 
-> diff --git a/drivers/gpu/drm/nova/gem.rs b/drivers/gpu/drm/nova/gem.rs
-> index 2760ba4f3450..a07e922e25ef 100644
-> --- a/drivers/gpu/drm/nova/gem.rs
-> +++ b/drivers/gpu/drm/nova/gem.rs
-> @@ -3,6 +3,10 @@
->  use kernel::{
->      drm,
->      drm::{gem, gem::BaseObject},
-> +    page::{
-> +        page_align,
-> +        PAGE_SIZE, //
-> +    },
->      prelude::*,
->      sync::aref::ARef,
->  };
-> @@ -27,12 +31,13 @@ fn new(_dev: &NovaDevice, _size: usize) -> impl PinInit<Self, Error> {
->  impl NovaObject {
->      /// Create a new DRM GEM object.
->      pub(crate) fn new(dev: &NovaDevice, size: usize) -> Result<ARef<gem::Object<Self>>> {
-> -        let aligned_size = size.next_multiple_of(1 << 12);
-> -
-> -        if size == 0 || size > aligned_size {
-> +        // Check for 0 size or potential usize overflow before calling page_align
-> +        if size == 0 || size > usize::MAX - PAGE_SIZE + 1 {
+> Suggested-by: Benno Lossin <lossin@kernel.org>
+> Link: https://github.com/Rust-for-Linux/linux/issues/1173
+> Signed-off-by: Shankari Anand <shankari.ak0208@gmail.com>
 
-Maybe this should use isize::MAX as the maximum size instead? That's a
-pretty common maximum size for allocations in Rust and big enough for
-everyone.
+Greg, please go ahead and pick up this one, thanks!
 
-Alice
+Acked-by: Alice Ryhl <aliceryhl@google.com>
 
->              return Err(EINVAL);
->          }
-> 
-> +        let aligned_size = page_align(size);
-> +
->          gem::Object::new(dev, aligned_size)
->      }
-> 
-> --
