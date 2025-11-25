@@ -2,119 +2,146 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id A0424C85189
-	for <lists+nouveau@lfdr.de>; Tue, 25 Nov 2025 14:06:55 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id A46C1C851E9
+	for <lists+nouveau@lfdr.de>; Tue, 25 Nov 2025 14:11:02 +0100 (CET)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id A6C3E10E3E6;
-	Tue, 25 Nov 2025 13:06:53 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id B390C10E3F7;
+	Tue, 25 Nov 2025 13:11:00 +0000 (UTC)
 Authentication-Results: gabe.freedesktop.org;
-	dkim=pass (1024-bit key; unprotected) header.d=suse.de header.i=@suse.de header.b="qNzN4Noz";
-	dkim=permerror (0-bit key) header.d=suse.de header.i=@suse.de header.b="B9H8Zq0m";
-	dkim=pass (1024-bit key) header.d=suse.de header.i=@suse.de header.b="qNzN4Noz";
-	dkim=permerror (0-bit key) header.d=suse.de header.i=@suse.de header.b="B9H8Zq0m";
+	dkim=pass (1024-bit key; unprotected) header.d=suse.de header.i=@suse.de header.b="CtCvQfaN";
+	dkim=permerror (0-bit key) header.d=suse.de header.i=@suse.de header.b="U0dwF6b/";
+	dkim=pass (1024-bit key) header.d=suse.de header.i=@suse.de header.b="CtCvQfaN";
+	dkim=permerror (0-bit key) header.d=suse.de header.i=@suse.de header.b="U0dwF6b/";
 	dkim-atps=neutral
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
 Received: from smtp-out2.suse.de (smtp-out2.suse.de [195.135.223.131])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 532B210E3EC
- for <nouveau@lists.freedesktop.org>; Tue, 25 Nov 2025 13:06:52 +0000 (UTC)
+ by gabe.freedesktop.org (Postfix) with ESMTPS id D609710E3E0
+ for <nouveau@lists.freedesktop.org>; Tue, 25 Nov 2025 13:10:58 +0000 (UTC)
 Received: from imap1.dmz-prg2.suse.org (imap1.dmz-prg2.suse.org
  [IPv6:2a07:de40:b281:104:10:150:64:97])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
  (No client certificate requested)
- by smtp-out2.suse.de (Postfix) with ESMTPS id BBBEB5BD82;
- Tue, 25 Nov 2025 13:06:43 +0000 (UTC)
+ by smtp-out2.suse.de (Postfix) with ESMTPS id 6DCE35BD12;
+ Tue, 25 Nov 2025 13:10:57 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.de; s=susede2_rsa;
- t=1764076003; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
- mime-version:mime-version:
+ t=1764076257; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
+ mime-version:mime-version:content-type:content-type:
  content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references;
- bh=ZgLD8DsaagC7UeXGC8JVSdO0+73pCjrNj616EWect5k=;
- b=qNzN4NozQ48J/X/RGWafXBsH3FZCXYhtd9Wcqzt1u5FWKN52GDI1EoR3pxSuCW094TeXtY
- g99guH1xVpriDikcpR+TBOe2s9JXIhLAh6le/NpF8dRx2LYrogZ7eNNkZOWaxKUw/vguOY
- mNXcfN7S7In/Ucj5mu8A1xUMiwN6aNM=
+ in-reply-to:in-reply-to:references:references:autocrypt:autocrypt;
+ bh=SU4Jg/dD5WoZXzs8WKG18kFR1gP37G36Wp8wI+XfWqs=;
+ b=CtCvQfaN7av2wok3vHBhCq+07UIL2rqJMw8yHMOTrQn8xkZvQ+FMJBsqkHU9ZIKmxl9sBP
+ 2I5wK0gK5dYSn5uXgPKMwegUOhqeGaSKBdsBkCaxi8Y9WUUcKSJAFvSNbOntZmi7PjAehB
+ Yvv4G5TQdc7APuEFDInazUbiBMOlo5M=
 DKIM-Signature: v=1; a=ed25519-sha256; c=relaxed/relaxed; d=suse.de;
- s=susede2_ed25519; t=1764076003;
+ s=susede2_ed25519; t=1764076257;
  h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
- mime-version:mime-version:
+ mime-version:mime-version:content-type:content-type:
  content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references;
- bh=ZgLD8DsaagC7UeXGC8JVSdO0+73pCjrNj616EWect5k=;
- b=B9H8Zq0miuo0RFANZ6NN+/eePEWVWH7dy+haPXL3Aaic+KZMpzf9JXje/yjo52BuoMWXs/
- S2jFzif/dstS69DA==
+ in-reply-to:in-reply-to:references:references:autocrypt:autocrypt;
+ bh=SU4Jg/dD5WoZXzs8WKG18kFR1gP37G36Wp8wI+XfWqs=;
+ b=U0dwF6b/GoNQ1iqx1LuYTLSb9EyOgAnoguXOMt/DLUlUFcoA6OM2VNYajx5WHsgpo7CGa1
+ CvpSORy114Xf5XBQ==
 Authentication-Results: smtp-out2.suse.de;
- dkim=pass header.d=suse.de header.s=susede2_rsa header.b=qNzN4Noz;
- dkim=pass header.d=suse.de header.s=susede2_ed25519 header.b=B9H8Zq0m
+ dkim=pass header.d=suse.de header.s=susede2_rsa header.b=CtCvQfaN;
+ dkim=pass header.d=suse.de header.s=susede2_ed25519 header.b="U0dwF6b/"
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.de; s=susede2_rsa;
- t=1764076003; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
- mime-version:mime-version:
+ t=1764076257; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
+ mime-version:mime-version:content-type:content-type:
  content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references;
- bh=ZgLD8DsaagC7UeXGC8JVSdO0+73pCjrNj616EWect5k=;
- b=qNzN4NozQ48J/X/RGWafXBsH3FZCXYhtd9Wcqzt1u5FWKN52GDI1EoR3pxSuCW094TeXtY
- g99guH1xVpriDikcpR+TBOe2s9JXIhLAh6le/NpF8dRx2LYrogZ7eNNkZOWaxKUw/vguOY
- mNXcfN7S7In/Ucj5mu8A1xUMiwN6aNM=
+ in-reply-to:in-reply-to:references:references:autocrypt:autocrypt;
+ bh=SU4Jg/dD5WoZXzs8WKG18kFR1gP37G36Wp8wI+XfWqs=;
+ b=CtCvQfaN7av2wok3vHBhCq+07UIL2rqJMw8yHMOTrQn8xkZvQ+FMJBsqkHU9ZIKmxl9sBP
+ 2I5wK0gK5dYSn5uXgPKMwegUOhqeGaSKBdsBkCaxi8Y9WUUcKSJAFvSNbOntZmi7PjAehB
+ Yvv4G5TQdc7APuEFDInazUbiBMOlo5M=
 DKIM-Signature: v=1; a=ed25519-sha256; c=relaxed/relaxed; d=suse.de;
- s=susede2_ed25519; t=1764076003;
+ s=susede2_ed25519; t=1764076257;
  h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
- mime-version:mime-version:
+ mime-version:mime-version:content-type:content-type:
  content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references;
- bh=ZgLD8DsaagC7UeXGC8JVSdO0+73pCjrNj616EWect5k=;
- b=B9H8Zq0miuo0RFANZ6NN+/eePEWVWH7dy+haPXL3Aaic+KZMpzf9JXje/yjo52BuoMWXs/
- S2jFzif/dstS69DA==
+ in-reply-to:in-reply-to:references:references:autocrypt:autocrypt;
+ bh=SU4Jg/dD5WoZXzs8WKG18kFR1gP37G36Wp8wI+XfWqs=;
+ b=U0dwF6b/GoNQ1iqx1LuYTLSb9EyOgAnoguXOMt/DLUlUFcoA6OM2VNYajx5WHsgpo7CGa1
+ CvpSORy114Xf5XBQ==
 Received: from imap1.dmz-prg2.suse.org (localhost [127.0.0.1])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
  (No client certificate requested)
- by imap1.dmz-prg2.suse.org (Postfix) with ESMTPS id 3044F3EA65;
- Tue, 25 Nov 2025 13:06:43 +0000 (UTC)
+ by imap1.dmz-prg2.suse.org (Postfix) with ESMTPS id DA5173EA63;
+ Tue, 25 Nov 2025 13:10:55 +0000 (UTC)
 Received: from dovecot-director2.suse.de ([2a07:de40:b281:106:10:150:64:167])
- by imap1.dmz-prg2.suse.org with ESMTPSA id MOiWCuOpJWkDFAAAD6G6ig
- (envelope-from <tzimmermann@suse.de>); Tue, 25 Nov 2025 13:06:43 +0000
-From: Thomas Zimmermann <tzimmermann@suse.de>
+ by imap1.dmz-prg2.suse.org with ESMTPSA id DJTtM9+qJWkaGAAAD6G6ig
+ (envelope-from <tzimmermann@suse.de>); Tue, 25 Nov 2025 13:10:55 +0000
+Message-ID: <d1decb2e-ce22-47db-9e17-2492364e5886@suse.de>
+Date: Tue, 25 Nov 2025 14:10:55 +0100
+MIME-Version: 1.0
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH 0/5] drm: Remove remaining support for kdb
 To: simona@ffwll.ch, airlied@gmail.com, alexander.deucher@amd.com,
  christian.koenig@amd.com, lyude@redhat.com, dakr@kernel.org, deller@gmx.de,
  mripard@kernel.org, maarten.lankhorst@linux.intel.com,
  jason.wessel@windriver.com, danielt@kernel.org, dianders@chromium.org
 Cc: dri-devel@lists.freedesktop.org, amd-gfx@lists.freedesktop.org,
  nouveau@lists.freedesktop.org, linux-fbdev@vger.kernel.org,
- linux-doc@vger.kernel.org, linux-kernel@vger.kernel.org,
- Thomas Zimmermann <tzimmermann@suse.de>
-Subject: [PATCH 5/5] fbcon: Remove fb_debug_enter/_leave from struct fb_ops
-Date: Tue, 25 Nov 2025 13:52:17 +0100
-Message-ID: <20251125130634.1080966-6-tzimmermann@suse.de>
-X-Mailer: git-send-email 2.51.1
-In-Reply-To: <20251125130634.1080966-1-tzimmermann@suse.de>
+ linux-doc@vger.kernel.org, linux-kernel@vger.kernel.org
 References: <20251125130634.1080966-1-tzimmermann@suse.de>
-MIME-Version: 1.0
+Content-Language: en-US
+From: Thomas Zimmermann <tzimmermann@suse.de>
+Autocrypt: addr=tzimmermann@suse.de; keydata=
+ xsBNBFs50uABCADEHPidWt974CaxBVbrIBwqcq/WURinJ3+2WlIrKWspiP83vfZKaXhFYsdg
+ XH47fDVbPPj+d6tQrw5lPQCyqjwrCPYnq3WlIBnGPJ4/jreTL6V+qfKRDlGLWFjZcsrPJGE0
+ BeB5BbqP5erN1qylK9i3gPoQjXGhpBpQYwRrEyQyjuvk+Ev0K1Jc5tVDeJAuau3TGNgah4Yc
+ hdHm3bkPjz9EErV85RwvImQ1dptvx6s7xzwXTgGAsaYZsL8WCwDaTuqFa1d1jjlaxg6+tZsB
+ 9GluwvIhSezPgnEmimZDkGnZRRSFiGP8yjqTjjWuf0bSj5rUnTGiyLyRZRNGcXmu6hjlABEB
+ AAHNJ1Rob21hcyBaaW1tZXJtYW5uIDx0emltbWVybWFubkBzdXNlLmRlPsLAjgQTAQgAOAIb
+ AwULCQgHAgYVCgkICwIEFgIDAQIeAQIXgBYhBHIX+6yM6c9jRKFo5WgNwR1TC3ojBQJftODH
+ AAoJEGgNwR1TC3ojx1wH/0hKGWugiqDgLNXLRD/4TfHBEKmxIrmfu9Z5t7vwUKfwhFL6hqvo
+ lXPJJKQpQ2z8+X2vZm/slsLn7J1yjrOsoJhKABDi+3QWWSGkaGwRJAdPVVyJMfJRNNNIKwVb
+ U6B1BkX2XDKDGffF4TxlOpSQzdtNI/9gleOoUA8+jy8knnDYzjBNOZqLG2FuTdicBXblz0Mf
+ vg41gd9kCwYXDnD91rJU8tzylXv03E75NCaTxTM+FBXPmsAVYQ4GYhhgFt8S2UWMoaaABLDe
+ 7l5FdnLdDEcbmd8uLU2CaG4W2cLrUaI4jz2XbkcPQkqTQ3EB67hYkjiEE6Zy3ggOitiQGcqp
+ j//OwE0EWznS4AEIAMYmP4M/V+T5RY5at/g7rUdNsLhWv1APYrh9RQefODYHrNRHUE9eosYb
+ T6XMryR9hT8XlGOYRwKWwiQBoWSDiTMo/Xi29jUnn4BXfI2px2DTXwc22LKtLAgTRjP+qbU6
+ 3Y0xnQN29UGDbYgyyK51DW3H0If2a3JNsheAAK+Xc9baj0LGIc8T9uiEWHBnCH+RdhgATnWW
+ GKdDegUR5BkDfDg5O/FISymJBHx2Dyoklv5g4BzkgqTqwmaYzsl8UxZKvbaxq0zbehDda8lv
+ hFXodNFMAgTLJlLuDYOGLK2AwbrS3Sp0AEbkpdJBb44qVlGm5bApZouHeJ/+n+7r12+lqdsA
+ EQEAAcLAdgQYAQgAIAIbDBYhBHIX+6yM6c9jRKFo5WgNwR1TC3ojBQJftOH6AAoJEGgNwR1T
+ C3ojVSkIALpAPkIJPQoURPb1VWjh34l0HlglmYHvZszJWTXYwavHR8+k6Baa6H7ufXNQtThR
+ yIxJrQLW6rV5lm7TjhffEhxVCn37+cg0zZ3j7zIsSS0rx/aMwi6VhFJA5hfn3T0TtrijKP4A
+ SAQO9xD1Zk9/61JWk8OysuIh7MXkl0fxbRKWE93XeQBhIJHQfnc+YBLprdnxR446Sh8Wn/2D
+ Ya8cavuWf2zrB6cZurs048xe0UbSW5AOSo4V9M0jzYI4nZqTmPxYyXbm30Kvmz0rYVRaitYJ
+ 4kyYYMhuULvrJDMjZRvaNe52tkKAvMevcGdt38H4KSVXAylqyQOW5zvPc4/sq9c=
+In-Reply-To: <20251125130634.1080966-1-tzimmermann@suse.de>
+Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 8bit
-X-Rspamd-Queue-Id: BBBEB5BD82
+X-Rspamd-Queue-Id: 6DCE35BD12
 X-Rspamd-Server: rspamd2.dmz-prg2.suse.org
-X-Spamd-Result: default: False [-3.01 / 50.00]; BAYES_HAM(-3.00)[100.00%];
- MID_CONTAINS_FROM(1.00)[]; NEURAL_HAM_LONG(-1.00)[-1.000];
- R_MISSING_CHARSET(0.50)[]; NEURAL_HAM_SHORT(-0.20)[-1.000];
+X-Spamd-Result: default: False [-4.51 / 50.00]; BAYES_HAM(-3.00)[100.00%];
+ NEURAL_HAM_LONG(-1.00)[-1.000];
+ NEURAL_HAM_SHORT(-0.20)[-1.000];
  R_DKIM_ALLOW(-0.20)[suse.de:s=susede2_rsa,suse.de:s=susede2_ed25519];
  MIME_GOOD(-0.10)[text/plain]; MX_GOOD(-0.01)[];
- TO_MATCH_ENVRCPT_ALL(0.00)[]; MIME_TRACE(0.00)[0:+];
  DKIM_SIGNED(0.00)[suse.de:s=susede2_rsa,suse.de:s=susede2_ed25519];
- RCPT_COUNT_TWELVE(0.00)[19];
- FREEMAIL_TO(0.00)[ffwll.ch,gmail.com,amd.com,redhat.com,kernel.org,gmx.de,linux.intel.com,windriver.com,chromium.org];
+ TO_MATCH_ENVRCPT_ALL(0.00)[];
+ FREEMAIL_ENVRCPT(0.00)[gmail.com,gmx.de];
  RBL_SPAMHAUS_BLOCKED_OPENRESOLVER(0.00)[2a07:de40:b281:104:10:150:64:97:from]; 
- FUZZY_RATELIMITED(0.00)[rspamd.com]; ARC_NA(0.00)[];
+ MIME_TRACE(0.00)[0:+];
+ FREEMAIL_TO(0.00)[ffwll.ch,gmail.com,amd.com,redhat.com,kernel.org,gmx.de,linux.intel.com,windriver.com,chromium.org];
+ ARC_NA(0.00)[]; FUZZY_RATELIMITED(0.00)[rspamd.com];
  RCVD_TLS_ALL(0.00)[]; DKIM_TRACE(0.00)[suse.de:+];
- RCVD_COUNT_TWO(0.00)[2]; FROM_EQ_ENVFROM(0.00)[];
- FROM_HAS_DN(0.00)[]; TO_DN_SOME(0.00)[];
- DBL_BLOCKED_OPENRESOLVER(0.00)[imap1.dmz-prg2.suse.org:helo,imap1.dmz-prg2.suse.org:rdns];
- RECEIVED_SPAMHAUS_BLOCKED_OPENRESOLVER(0.00)[2a07:de40:b281:106:10:150:64:167:received];
+ RCVD_VIA_SMTP_AUTH(0.00)[]; RCVD_COUNT_TWO(0.00)[2];
+ FROM_EQ_ENVFROM(0.00)[]; FROM_HAS_DN(0.00)[];
+ RCPT_COUNT_TWELVE(0.00)[18]; TO_DN_NONE(0.00)[];
+ MID_RHS_MATCH_FROM(0.00)[];
  DNSWL_BLOCKED(0.00)[2a07:de40:b281:104:10:150:64:97:from];
- R_RATELIMIT(0.00)[to_ip_from(RLgosu6qu4h11rje89ht7rjgg5)];
- RCVD_VIA_SMTP_AUTH(0.00)[];
- FREEMAIL_ENVRCPT(0.00)[gmail.com,gmx.de]
+ RECEIVED_SPAMHAUS_BLOCKED_OPENRESOLVER(0.00)[2a07:de40:b281:106:10:150:64:167:received];
+ DWL_DNSWL_BLOCKED(0.00)[suse.de:dkim];
+ DBL_BLOCKED_OPENRESOLVER(0.00)[suse.com:url, imap1.dmz-prg2.suse.org:helo,
+ imap1.dmz-prg2.suse.org:rdns, suse.de:mid, suse.de:dkim]
 X-Rspamd-Action: no action
 X-Spam-Flag: NO
-X-Spam-Score: -3.01
+X-Spam-Score: -4.51
 X-Spam-Level: 
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
@@ -130,128 +157,71 @@ List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-There are no implementations of fb_debug_enter and fb_debug_leave.
-Remove the callbacks from struct fb_ops and clean up the caller.
 
-The field save_graphics in fbcon_par is also no longer required.
-Remove it as well.
 
-Signed-off-by: Thomas Zimmermann <tzimmermann@suse.de>
----
- Documentation/process/debugging/kgdb.rst | 28 ------------------------
- drivers/video/fbdev/core/fbcon.c         | 24 --------------------
- drivers/video/fbdev/core/fbcon.h         |  1 -
- include/linux/fb.h                       |  4 ----
- 4 files changed, 57 deletions(-)
+Am 25.11.25 um 13:52 schrieb Thomas Zimmermann:
+> Remove the rest of the kbd support from DRM. Driver support has been
 
-diff --git a/Documentation/process/debugging/kgdb.rst b/Documentation/process/debugging/kgdb.rst
-index b29b0aac2717..773b19aa1382 100644
---- a/Documentation/process/debugging/kgdb.rst
-+++ b/Documentation/process/debugging/kgdb.rst
-@@ -889,34 +889,6 @@ in the virtual console layer. On resuming kernel execution, the kernel
- debugger calls kgdboc_post_exp_handler() which in turn calls
- con_debug_leave().
- 
--Any video driver that wants to be compatible with the kernel debugger
--and the atomic kms callbacks must implement the ``mode_set_base_atomic``,
--``fb_debug_enter`` and ``fb_debug_leave operations``. For the
--``fb_debug_enter`` and ``fb_debug_leave`` the option exists to use the
--generic drm fb helper functions or implement something custom for the
--hardware. The following example shows the initialization of the
--.mode_set_base_atomic operation in
--drivers/gpu/drm/i915/intel_display.c::
--
--
--    static const struct drm_crtc_helper_funcs intel_helper_funcs = {
--    [...]
--            .mode_set_base_atomic = intel_pipe_set_base_atomic,
--    [...]
--    };
--
--
--Here is an example of how the i915 driver initializes the
--fb_debug_enter and fb_debug_leave functions to use the generic drm
--helpers in ``drivers/gpu/drm/i915/intel_fb.c``::
--
--
--    static struct fb_ops intelfb_ops = {
--    [...]
--           .fb_debug_enter = drm_fb_helper_debug_enter,
--           .fb_debug_leave = drm_fb_helper_debug_leave,
--    [...]
--    };
- 
- 
- Credits
-diff --git a/drivers/video/fbdev/core/fbcon.c b/drivers/video/fbdev/core/fbcon.c
-index 7be9e865325d..34ea14412ace 100644
---- a/drivers/video/fbdev/core/fbcon.c
-+++ b/drivers/video/fbdev/core/fbcon.c
-@@ -2289,28 +2289,6 @@ static bool fbcon_blank(struct vc_data *vc, enum vesa_blank_mode blank,
- 	return false;
- }
- 
--static void fbcon_debug_enter(struct vc_data *vc)
--{
--	struct fb_info *info = fbcon_info_from_console(vc->vc_num);
--	struct fbcon_par *par = info->fbcon_par;
--
--	par->save_graphics = par->graphics;
--	par->graphics = 0;
--	if (info->fbops->fb_debug_enter)
--		info->fbops->fb_debug_enter(info);
--	fbcon_set_palette(vc, color_table);
--}
--
--static void fbcon_debug_leave(struct vc_data *vc)
--{
--	struct fb_info *info = fbcon_info_from_console(vc->vc_num);
--	struct fbcon_par *par = info->fbcon_par;
--
--	par->graphics = par->save_graphics;
--	if (info->fbops->fb_debug_leave)
--		info->fbops->fb_debug_leave(info);
--}
--
- static int fbcon_get_font(struct vc_data *vc, struct console_font *font, unsigned int vpitch)
- {
- 	u8 *fontdata = vc->vc_font.data;
-@@ -3214,8 +3192,6 @@ static const struct consw fb_con = {
- 	.con_set_palette 	= fbcon_set_palette,
- 	.con_invert_region 	= fbcon_invert_region,
- 	.con_resize             = fbcon_resize,
--	.con_debug_enter	= fbcon_debug_enter,
--	.con_debug_leave	= fbcon_debug_leave,
- };
- 
- static ssize_t rotate_store(struct device *device,
-diff --git a/drivers/video/fbdev/core/fbcon.h b/drivers/video/fbdev/core/fbcon.h
-index 44ea4ae4bba0..1cd10a7faab0 100644
---- a/drivers/video/fbdev/core/fbcon.h
-+++ b/drivers/video/fbdev/core/fbcon.h
-@@ -79,7 +79,6 @@ struct fbcon_par {
- 	int    cursor_reset;
- 	int    blank_state;
- 	int    graphics;
--	int    save_graphics; /* for debug enter/leave */
- 	bool   initialized;
- 	int    rotate;
- 	int    cur_rotate;
-diff --git a/include/linux/fb.h b/include/linux/fb.h
-index 05cc251035da..65fb70382675 100644
---- a/include/linux/fb.h
-+++ b/include/linux/fb.h
-@@ -304,10 +304,6 @@ struct fb_ops {
- 
- 	/* teardown any resources to do with this framebuffer */
- 	void (*fb_destroy)(struct fb_info *info);
--
--	/* called at KDB enter and leave time to prepare the console */
--	int (*fb_debug_enter)(struct fb_info *info);
--	int (*fb_debug_leave)(struct fb_info *info);
- };
- 
- #ifdef CONFIG_FB_TILEBLITTING
+s/kbd/kdb/g  as in 'kernel debugger'
+
+> broken for years without anyone complaining.
+>
+> Kdb cannot use regular DRM mode setting, so DRM drivers have to
+> implement an additional hook to make it work (in theory). As outlined
+> by Sima in commit 9c79e0b1d096 ("drm/fb-helper: Give up on kgdb for
+> atomic drivers") from 2017, kdb is not compatible with DRM atomic mode
+> setting. Non-atomic mode setting meanwhile has become rare.
+>
+> Only 3 DRM drivers implement the hooks for kdb support. Amdgpu and
+> nouveau use non-atomic mode setting on older devices. But both drivers
+> have switched to generic fbdev emulation, which isn't compatible with
+> kdb. Radeon still runs kdb, but it doesn't work in practice. See the
+> commits in this series for details
+>
+> Therefore remove the remaining support for kdb from the DRM drivers
+> and from DRM fbdev emulation. Also remove the hooks from fbdev, as
+> there are no fbdev drivers with kdb support.
+>
+> If we ever want to address kdb support within DRM drivers, a place to
+> start would be the scanout buffers used by DRM's panic screen. These
+> use the current display mode. They can be written and flushed without
+> mode setting involved.
+>
+> Note: kdb over serial lines is not affected by this series and continues
+> to work as before.
+>
+> Thomas Zimmermann (5):
+>    drm/amdgpu: Do not implement mode_set_base_atomic callback
+>    drm/nouveau: Do not implement mode_set_base_atomic callback
+>    drm/radeon: Do not implement mode_set_base_atomic callback
+>    drm/fbdev-helper: Remove drm_fb_helper_debug_enter/_leave()
+>    fbcon: Remove fb_debug_enter/_leave from struct fb_ops
+>
+>   Documentation/process/debugging/kgdb.rst    |  28 -----
+>   drivers/gpu/drm/amd/amdgpu/dce_v10_0.c      |  35 ++-----
+>   drivers/gpu/drm/amd/amdgpu/dce_v6_0.c       |  35 ++-----
+>   drivers/gpu/drm/amd/amdgpu/dce_v8_0.c       |  35 ++-----
+>   drivers/gpu/drm/drm_fb_helper.c             | 108 --------------------
+>   drivers/gpu/drm/nouveau/dispnv04/crtc.c     |  24 +----
+>   drivers/gpu/drm/radeon/atombios_crtc.c      |  74 ++++----------
+>   drivers/gpu/drm/radeon/radeon_legacy_crtc.c |  23 ++---
+>   drivers/gpu/drm/radeon/radeon_mode.h        |  10 +-
+>   drivers/video/fbdev/core/fbcon.c            |  24 -----
+>   drivers/video/fbdev/core/fbcon.h            |   1 -
+>   include/drm/drm_fb_helper.h                 |  21 ----
+>   include/drm/drm_modeset_helper_vtables.h    |  23 -----
+>   include/linux/fb.h                          |   4 -
+>   14 files changed, 63 insertions(+), 382 deletions(-)
+>
+>
+> base-commit: 0a21e96e0b6840d2a4e0b45a957679eeddeb4362
+
 -- 
-2.51.1
+--
+Thomas Zimmermann
+Graphics Driver Developer
+SUSE Software Solutions Germany GmbH
+Frankenstr. 146, 90461 Nürnberg, Germany, www.suse.com
+GF: Jochen Jaser, Andrew McDonald, Werner Knoblich, (HRB 36809, AG Nürnberg)
+
 
