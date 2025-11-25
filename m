@@ -2,171 +2,72 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id C8B71C82F85
-	for <lists+nouveau@lfdr.de>; Tue, 25 Nov 2025 02:03:05 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id BBE8CCBA8EB
+	for <lists+nouveau@lfdr.de>; Sat, 13 Dec 2025 13:17:20 +0100 (CET)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 00D5910E332;
-	Tue, 25 Nov 2025 01:02:35 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 46AAD10E416;
+	Sat, 13 Dec 2025 12:17:15 +0000 (UTC)
 Authentication-Results: gabe.freedesktop.org;
-	dkim=pass (2048-bit key; unprotected) header.d=Nvidia.com header.i=@Nvidia.com header.b="p/OdQUq/";
+	dkim=pass (2048-bit key; unprotected) header.d=bne-home.net header.i=@bne-home.net header.b="KjPJFeS0";
 	dkim-atps=neutral
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from PH7PR06CU001.outbound.protection.outlook.com
- (mail-westus3azon11010060.outbound.protection.outlook.com [52.101.201.60])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 14BC810E332;
- Tue, 25 Nov 2025 01:02:33 +0000 (UTC)
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=G3ELbw8A0pePoUWDbT59Lp6YERxlx4OfSBHc/NKfXJ/cFfCOVuxMzvHH3SBHXxjLJERDT/gONIKMiihlBXgCt5qGDMdVHPbym5VbcqyYEP3M4y2lmNLZ+WgrlTzoAOdM9ZKU6aJfS6BcOi6BaBdbex6khqHeaBMbvXYkLNyBOFv7A+6bXtiks4lSosZKcUhDPsTTkfZT5R6sufCCelIm1uSTETTDJQXMF1fioDXhO8BIA6iJiHnF7XCiPnV4mzom9scIeFmkKHPY1uUor+Lx+6Y9sxgxSMNsGnKv3S/mHdFvsANroZGUEczsHKCQBFPjWo5iWO0iyDoHu0l1jBDmWg==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=pGCPbSIre9tF4wgFUYHZ42fNKZTPAAryy94PGvhZcsQ=;
- b=Y3VFswt4YtSzAXyZmKQrc6sbGxoF0TkTViCE/sn2c9L3BKTS9qDOOoh9uybO2bFccLB1UydW1Ak+WoEUeZdsa/gxVPcpFGD83lz0obXN9dD5C/d7SRt782ocDl0e1bgI5IdM5wFeANXCPa27A4DMawesGbiu2r1WrrEsdNcx9NjYrVo11GkSb4sI6IjUrGRlMUV6bVzwKaBTlKpnt/9Mzk4x9u8MogfvqDrFm9gnoKAkXBvpTswzTkXojOy/D1lk6UsR44DcNITxVSUUJfm99uYh6d+iP8zw5h9O2mxXr5gzLrGjeK8Lkkv3LzKWJ1qSo4bX+fbDC8K4EtWE7ENZ9A==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=nvidia.com; dmarc=pass action=none header.from=nvidia.com;
- dkim=pass header.d=nvidia.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=Nvidia.com;
- s=selector2;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=pGCPbSIre9tF4wgFUYHZ42fNKZTPAAryy94PGvhZcsQ=;
- b=p/OdQUq/DJ1eTftqUr3P5o6ABl8hc5hxT+KZD8Hcyo4s3qkvxg3HI5f9XBuFFCzBabFxdcrJJibK/wwuOdAFDj/Hl2wNHV9hX8PT5tNmeLIhSLg9WbzLlarZYqB8B15+2zuHsvQI0SY6ClA++Eq1W8QhkSWCDpGUTlLP2gSJNoaEfqyGNtm/Iey1ayEwXOqtqD58YXVCTwCvwwTMAj9H8+ZQ1lBxJAUuGHy/TWKCHJTm9I3N50uAcx/S2uS9el403LSMmTyH4/Lm6ATLuqAcBC4ztqp5GGLMXMEy8GoH1wmVWal0Ln79g6PPdRbGKpKiCeXK+o/lkXnKqKAVzkwa9w==
-Received: from SJ2PR12MB7943.namprd12.prod.outlook.com (2603:10b6:a03:4c8::10)
- by MW4PR12MB7120.namprd12.prod.outlook.com (2603:10b6:303:222::10)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9253.12; Tue, 25 Nov
- 2025 01:02:30 +0000
-Received: from SJ2PR12MB7943.namprd12.prod.outlook.com
- ([fe80::6a18:df97:8d1a:5d50]) by SJ2PR12MB7943.namprd12.prod.outlook.com
- ([fe80::6a18:df97:8d1a:5d50%4]) with mapi id 15.20.9343.016; Tue, 25 Nov 2025
- 01:02:29 +0000
-From: Timur Tabi <ttabi@nvidia.com>
-To: "nouveau@lists.freedesktop.org" <nouveau@lists.freedesktop.org>, Alexandre
- Courbot <acourbot@nvidia.com>, Joel Fernandes <joelagnelf@nvidia.com>,
- "dakr@kernel.org" <dakr@kernel.org>, "lyude@redhat.com" <lyude@redhat.com>,
- John Hubbard <jhubbard@nvidia.com>, "rust-for-linux@vger.kernel.org"
- <rust-for-linux@vger.kernel.org>
-CC: "nouveau-bounces@lists.freedesktop.org"
- <nouveau-bounces@lists.freedesktop.org>
-Subject: Re: [PATCH 03/11] gpu: nova-core: support header parsing on
- Turing/GA100
-Thread-Topic: [PATCH 03/11] gpu: nova-core: support header parsing on
- Turing/GA100
-Thread-Index: AQHcVb7G2n7lcTwiZ0ixsrXV3K+7w7T5U1aAgAAocQCAAB4wgIAA25SAgAgYPwCAAAJ5gIAAESeAgAABbYA=
-Date: Tue, 25 Nov 2025 01:02:29 +0000
-Message-ID: <02641bc01fd806509221782bec1550e0ae6eacbe.camel@nvidia.com>
-References: <20251114233045.2512853-1-ttabi@nvidia.com>
- <20251114233045.2512853-4-ttabi@nvidia.com>
- <DECBWUFEHV5D.3O0TH2AL775C0@nvidia.com>
- <fb673d50111ed0989ec8ba2a245e89eecaeb1864.camel@nvidia.com>
- <272631b2-77d9-461d-ba24-1df218afdc10@nvidia.com>
- <d900795e-bc56-44f9-9768-c22527e67f0f@nvidia.com>
- <4bd83208dad65786b386002e501bdcad36d76da3.camel@nvidia.com>
- <569b40c6-c234-437e-a894-fd3dbe9669a7@nvidia.com>
- <DEHD8O2SS763.2YWSUIA9JICGN@nvidia.com>
-In-Reply-To: <DEHD8O2SS763.2YWSUIA9JICGN@nvidia.com>
-Accept-Language: en-US
-Content-Language: en-US
-X-MS-Has-Attach: 
-X-MS-TNEF-Correlator: 
-user-agent: Evolution 3.52.3-0ubuntu1 
-authentication-results: dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=nvidia.com;
-x-ms-publictraffictype: Email
-x-ms-traffictypediagnostic: SJ2PR12MB7943:EE_|MW4PR12MB7120:EE_
-x-ms-office365-filtering-correlation-id: 12ac7a9d-1f79-4154-d604-08de2bbe4ec2
-x-ms-exchange-senderadcheck: 1
-x-ms-exchange-antispam-relay: 0
-x-microsoft-antispam: BCL:0; ARA:13230040|366016|1800799024|376014|38070700021;
-x-microsoft-antispam-message-info: =?utf-8?B?WjlBbjZ4bTVaNHhtVHRmWVY0c2t4akJCTytqbWRSZ2J4NmljYmFuTXBMYXBW?=
- =?utf-8?B?SmQyMTJCd0RENDNLLzZMRXFWZkVvaGV3cEdqS0QzL3ByNjA3MmdDNUFvTjIr?=
- =?utf-8?B?VTdrQUpxRDYxK3p4N0hic29uQXk0V0gySTJ6L09ZV24xK2tEZGNHVlp1T1Qy?=
- =?utf-8?B?SVBOWVptZkRpSGNQTTZoa2R2M1BIa1lWQ3NKbGlFdWRaQ1h0dXF4d2FJbTUw?=
- =?utf-8?B?RW5kS01jTTdBRzVDaEgyTjJFRzVjd3FpSXp5NDgzb3RWRTNCcGxkcmF0ZGd5?=
- =?utf-8?B?M2hPQUU1MlRVeTFwVmlzeUM4K24yUE1TdGhoajFvS1BnL2lsc1RSS1NSdTJR?=
- =?utf-8?B?U3FzcWhQWncxV0JpNVRpdU9CRlBxM2I1ajNZS2lCalM3UjJQQUNpeE5sM2RH?=
- =?utf-8?B?aTlDcU4yYXR4aWpKL3JIQktlcld1bHpyN3FwL2kxMkk1YTV4NGxHcTJvV2Fk?=
- =?utf-8?B?TWxKTC9wR0RodkYwL0wyTStqZVNKb2xkYW12bldFeVliZmRtQnlWeVFMOHBt?=
- =?utf-8?B?amJBd0lRLzkrM0Z4VDhQVXRQc2RJU3dNMUpjUk5OaHozRGJhNlgwMzNvU0Z5?=
- =?utf-8?B?dndtazl1enptMTZZdGxKenJoU25iZlJZM3lTTHdvdlZ3bE5WSkFhdkFrbDR5?=
- =?utf-8?B?ZXN5TUFzRHZLZDRIZFhreFFXQTBuWi9JTGoyM3E5akZ2NXE0dW1CR3V4RzE4?=
- =?utf-8?B?bzdwRFhyNndsTDU4N2NWMHZmUkltcTR4ZmdtVTRJQ3hWczVZK2c1OXlJL25G?=
- =?utf-8?B?eFh3Rlo1alBhMXcwK2IrZmlZOHRCbGltUldmaG1FbEtYckw1aFN4SHNWUFJz?=
- =?utf-8?B?WVlmQWFvRTI2OWh3WFRIZGs5YWltRnBiU1A5OU45NHloZ1pIY21paHZnUy9G?=
- =?utf-8?B?elJTS1paWEhEWTI1ck5sdW43dGFCQUlsOHJ3bDBPZ0gyWlhRcXZZM014QjUv?=
- =?utf-8?B?YzZDNzVYSFdtMmFsWW9uQktqNElkV0dTYkprYkJmbnhFcGt1T3NuZ28yeUlY?=
- =?utf-8?B?SHpvR1dUSVRHZGhjcEV5c0NiNHQwMElVQnhwTk5uT3JycndUYWxNL0ZBbTMr?=
- =?utf-8?B?V2wzbytZODUzS2Nyd2ZRcDJFLzhySjZVRkY3S1MvMVZiSUd3YlFINFlvNGhQ?=
- =?utf-8?B?V1NFZklVR3QvUUFMY09ZSjVLY01USW5QdUN3RTNhMThXTEsya0dyb21tYmRI?=
- =?utf-8?B?VnZjaFgyR0tYZWpZUVZoUDkwSGQ2aytWQ3U1SmdXYWR1SlFVNW5MUkFBcXpj?=
- =?utf-8?B?S0tjZ3pMZ0lZQW80M01SbzFmU1VIazRBQ2RET2wzL01Ec0s5YTZpTk94elRV?=
- =?utf-8?B?a2JaTHI5MzV3TjlId1N5eWJjS2dIcTB2Tm5Nb2d5ZXM2Zlh2eVhMaGNUT2Jq?=
- =?utf-8?B?RGkxSFVBbGdpM2R2YStudm9nMHRYWTlEVXBVM0o2bUlodHdRMmJCUjU2Uk50?=
- =?utf-8?B?dE9JbFJFdVN0VThCNzVZRzNxeVplaHZveGZoTHRmZW94QlVsU0dsN2VOeGVU?=
- =?utf-8?B?WDdXM1VoMHpQdDUvazhRZGNHVUZGaVFLdjcvTTBCb2tXVXNaenU0YzFiQmds?=
- =?utf-8?B?NGxHTE5CdHgxbE00VmFiek53Nk1NYWcvaVhrdkxNZ3lLSHNVZ3l1d0p0QmRt?=
- =?utf-8?B?R1cwTnZBNUc3VjBzRHdNc1d1TDQyMjBzU1d4SmFDRGlCeVFLd1NrY3p3MHpM?=
- =?utf-8?B?VUlBN3NFM3lnSmlEZ0hoOGhRWlNzWjU5amhhdFhCTXVFNC9jd0ZKS016ZjZt?=
- =?utf-8?B?NUQ1dW91R3c3ZE9ieVdkSC8wVm5uNFlVd1NHL2tGNE9SR2tjT05EZEJ5SzQy?=
- =?utf-8?B?VUQ0Y0NmVmIwelVzOTNxcDRsT20xQ0RxZmxBUWxnQXd0MHpkcnJzcjdQNUo2?=
- =?utf-8?B?SUR4Z0EwbUxkVGJPei9sRHFpWTBwWDhXQ0Y1cnU3WnVQMXhITkFFYkVYdmtL?=
- =?utf-8?B?WURxOWZRWlFOSjZrVGsySWh5cUI1WFovWk5veFFXYVl4QTRZNklHVTdxWUtv?=
- =?utf-8?B?QS9oSk1YTGloZ1cwVmsrdW1GS0JJM1lpM2g2L2Mrc1BhZG4ycm1ERUkzcVpT?=
- =?utf-8?Q?/sSi82?=
-x-forefront-antispam-report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
- IPV:NLI; SFV:NSPM; H:SJ2PR12MB7943.namprd12.prod.outlook.com; PTR:; CAT:NONE;
- SFS:(13230040)(366016)(1800799024)(376014)(38070700021); DIR:OUT; SFP:1101; 
-x-ms-exchange-antispam-messagedata-chunkcount: 1
-x-ms-exchange-antispam-messagedata-0: =?utf-8?B?WWIwaFd0SzhYRFlUb2ptRDBNR2JXVGlFanlWc3JMSWhDMEk1bGVQWnJUcUY2?=
- =?utf-8?B?SWVPRHBXT0UxODkvWi9VYU1YeWdpR2tRU1NYMGxxd3ZyUVNSWjVPOXhDNE9m?=
- =?utf-8?B?VVBlQlZzUElNRUJxRlRObGRmUmR3dGQ4ZUIyRDlPK01sT05UWTUyUm1pRUZQ?=
- =?utf-8?B?a0NYZkNtdkhsUHNMby8xQnFIVjZzZ2NSWjNaSUUycTY0TkRQclVhbXB1L09y?=
- =?utf-8?B?TzVqem9pdG1Mb2JqNEsxcXdYQ2JwcDRET2YzUDVoR3FxaCswMC80WXkvVVpY?=
- =?utf-8?B?c3FtR0lJeXN2RTR0eUZ0dVpYV0dNS1RDVWNkREVzU0lBbEVZdURlazlCTmxS?=
- =?utf-8?B?cWdKcmMvcWN3SmdvRWM3K3llVmJ0YU1iVGNoSHJsMFVHbkU3ejgrdWRFYUtZ?=
- =?utf-8?B?WWJ0NVhHU2ExeVVjRUY4TGI2QVo2emR1ZzZLOHl5NnJzblpBNDRXaWxIT3BW?=
- =?utf-8?B?YXBkZHJkVkcwQ1dLWklXVHZsaUFxRXNDWlhCRlBxT2ZqODRLZUQ1ZSs5TTRS?=
- =?utf-8?B?Z1NlbGI2UmJ2RWJTbC9JQitWa3hDOE5ZMGlrN3Y5YUU4Vk0reGtGNkxOYXQ2?=
- =?utf-8?B?SXVGUVdUWE95UnpNcXFOSW5sbHNnR3Avblp5cWFIT2YyOVRvK3lZWmNtWDIv?=
- =?utf-8?B?eU03bjBnT2hjTnpXcHhRR3NhbG03ZGJnSE5DQXJiYTQzSUl4SUdpb25PU0No?=
- =?utf-8?B?aVYzMGd4THVmWmhTbmdJSkxhbzc5dmViYm5GOWZLSHBNaGx6SERjbUdjeUtN?=
- =?utf-8?B?enhRcXZSaGFPS2lBd0ZqMm9BR2xUTUJKZFJlYUxVUWkvYVBFYnpoOStKRWRm?=
- =?utf-8?B?MlIrNjFyL0hLUGI3bUcxR1I4S2NPNTQwODJ2STc1TUJoNmRudzFUanNsUXkv?=
- =?utf-8?B?aVBrOXZqZWMvejlaSlJ2b0lDN2VUZlRNY285emhqbXI2S04zMmZSK3BzL0pP?=
- =?utf-8?B?YTVtZVgwWHM1M1FHZG5wcURLSFJWQmJ1MU5XcVYxKzhaNm9zSU5ib2U0dDV4?=
- =?utf-8?B?N1pqQjlPQlp3dnlmTjQ4TDhaY3lybW9LZ2FpL0FZcS9IYmh0dHpPaDFFZGt1?=
- =?utf-8?B?eGpWcm0wbXV5alJNWUZtOGlKWm1MVVBvWE5lU1BVU2NhTUJkMitURnJiV0sv?=
- =?utf-8?B?cEpDcjlFRDZDZFFwR1lGb0NRM3NiZ0FUSG5pNXRHWlBZWCtQdWVvbHk5OXBi?=
- =?utf-8?B?Z1RMbURXL3ppems5Nkk2NnQvWWFjWWx6VjNTLzJxS1pTRlRXNTdnU0dDUEt2?=
- =?utf-8?B?dDdwbkJHclZJTGNoTHk3cnFReFNXU2hVRVZ2M3JibWVJUzFTc1lUaE9lN01h?=
- =?utf-8?B?YU1nbEZ2UmQvNXk4b2ZUR3FTTUJlM2lJN3JFZzRtNDNldCtZMERpcnRkT2JK?=
- =?utf-8?B?dHFCNmtGVEg5a1d6bEk0RHJvZnpaeEFnejVWcTByVFJHOHJrQkpZNTZ3OERW?=
- =?utf-8?B?YW9tODZoeUo0TDQ1MU1yNnllM2VXTUNnOFM1VmVxaU9BS0hsQUd2bzNrUHNP?=
- =?utf-8?B?M1Qxa3QwWmNuMEV4N3NkcUFGRXY4Y3N0ZzBlblNuam41clZRdFpHZTNMTnZW?=
- =?utf-8?B?OWozUTlncG9KWlA2dUdYS3E1NDhTcDRwbU11WTd2c29ZSWJjQTNWcWlJTjFY?=
- =?utf-8?B?cm5wOEs5OGp4aisvY1VkUlFBcWhsUC9tdVJLZUxuSXB3cXVsdnQvUEM5WHRO?=
- =?utf-8?B?ZWtqeW5ScGVhaC9SeVRKRFB2dUxsL3JSZnBweit3ME5vWWRVNG4wTUM2MCtN?=
- =?utf-8?B?cDg1L3hVN0VSd3phSE5DNXRxVEowTlcvNUZSOCsydDRLbTNLSjFadlZ4dUdX?=
- =?utf-8?B?ZjdxeVRXK051dkNUMUppS3hjc1BzWkFqcG5ZVG1vVVJreTRvUzhiTG96dEkz?=
- =?utf-8?B?bWdBWmdoSFUzSVdZN21KTWp1WWN2QUM2K3VPSjBSU2dJZkRiTUZNaXpUSmlq?=
- =?utf-8?B?YXA0QmduL3VpRGpabU1QTUxmOGdIRkdyY011ckM3dEZKakJUaytuck9lV2Va?=
- =?utf-8?B?azhDNjVpWktYSmRJYzdBb1VEUVhGUnhtdHJTRFlvRnNZb0YwUHVkMFptUmNs?=
- =?utf-8?B?bEljUlp6TkpYRVQzNEtEQjFGRFZzckdFR3NMV3M1bzNrSmFPTGtObVc3UjJZ?=
- =?utf-8?Q?ZQnSaAwqoJj4nJyKrf3KzH0s7?=
-Content-Type: text/plain; charset="utf-8"
-Content-ID: <74D2FBF8E274DF4E8358EBB3E2FAF04B@namprd12.prod.outlook.com>
-Content-Transfer-Encoding: base64
-MIME-Version: 1.0
-X-OriginatorOrg: Nvidia.com
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-AuthSource: SJ2PR12MB7943.namprd12.prod.outlook.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 12ac7a9d-1f79-4154-d604-08de2bbe4ec2
-X-MS-Exchange-CrossTenant-originalarrivaltime: 25 Nov 2025 01:02:29.7769 (UTC)
-X-MS-Exchange-CrossTenant-fromentityheader: Hosted
-X-MS-Exchange-CrossTenant-id: 43083d15-7273-40c1-b7db-39efd9ccc17a
-X-MS-Exchange-CrossTenant-mailboxtype: HOSTED
-X-MS-Exchange-CrossTenant-userprincipalname: KGGyzJK8qmUYXvlh5JzARWcefOF3HTjq5J7TSC9HhqzITm+a0bfE0zhlhkGxjic2trU26rKXWAagFLc+i1NXkQ==
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: MW4PR12MB7120
+X-Greylist: delayed 424 seconds by postgrey-1.36 at gabe;
+ Tue, 25 Nov 2025 07:49:15 UTC
+Received: from outbound.pv.icloud.com
+ (p-west1-cluster5-host11-snip4-10.eps.apple.com [57.103.66.221])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 37C0110E108
+ for <nouveau@lists.freedesktop.org>; Tue, 25 Nov 2025 07:49:15 +0000 (UTC)
+Received: from outbound.pv.icloud.com (unknown [127.0.0.2])
+ by p00-icloudmta-asmtp-us-west-1a-20-percent-2 (Postfix) with ESMTPS id
+ 344091800102; Tue, 25 Nov 2025 07:42:09 +0000 (UTC)
+Dkim-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=bne-home.net; s=sig1;
+ bh=u4e/PfZ0WZtkbNYIgZhHCSb30ylSjvq0fvJRAjJUeqs=;
+ h=Content-Type:Mime-Version:Subject:From:Date:Message-Id:To:x-icloud-hme;
+ b=KjPJFeS0gTfy2hKb98gJKEjQK5zaPjyNX51WUG8QSqYW9Uwc6XPfKfi7sH6lM8GrEyi5leyWrB+SJVFkx8eRxngDMiP6kT2WxTA08QAn65PneTWgQgsCaJDN+6kUYOQmHZJ36FuI4/3sJH9OHgy7sZ8NYNlHyJZFBt0zJH1UXluQdo03Vu8UIT84H5GqXhyM6my/ueFMGBlF1c8Sl1YuoUI/iOsdgNMK10oSpoF5jmzKRBNZnwzIvr+heGv8xfglfI1NnEU6l8fD0hfbvQLd/oHPdd5oxC2uGPCHaCRBCJw5J37jMm45dFjbpgFaajWG05dkGXVe+Vqm8+wLZsZX7Q==
+mail-alias-created-date: 1746336505199
+Received: from smtpclient.apple (unknown [17.56.9.36])
+ by p00-icloudmta-asmtp-us-west-1a-20-percent-2 (Postfix) with ESMTPSA id
+ 919721800160; Tue, 25 Nov 2025 07:42:06 +0000 (UTC)
+Content-Type: text/plain;
+	charset=utf-8
+Mime-Version: 1.0 (Mac OS X Mail 16.0 \(3864.100.1.1.5\))
+Subject: Re: [PATCH 1/1] drm: nova: Align GEM memory allocation to system page
+ size
+From: bshephar@bne-home.net
+In-Reply-To: <98227EBD-92F7-40FC-A5A4-3FF3780FB2CB@bne-home.net>
+Date: Tue, 25 Nov 2025 17:41:53 +1000
+Cc: rust-for-linux@vger.kernel.org, nouveau@lists.freedesktop.org,
+ brendan.shephard@gmail.com
+Content-Transfer-Encoding: quoted-printable
+Message-Id: <29983389-7D74-4BA4-87A4-C42A8E433957@bne-home.net>
+References: <98227EBD-92F7-40FC-A5A4-3FF3780FB2CB@bne-home.net>
+To: dakr@kernel.org, acourbot@nvidia.com, joelagnelf@nvidia.com,
+ jhubbard@nvidia.com, airlied@gmail.com
+X-Mailer: Apple Mail (2.3864.100.1.1.5)
+X-Authority-Info: v=2.4 cv=YfewJgRf c=1 sm=1 tr=0 ts=69255dd1 cx=c_apl:c_pps
+ a=azHRBMxVc17uSn+fyuI/eg==:117 a=azHRBMxVc17uSn+fyuI/eg==:17
+ a=IkcTkHD0fZMA:10 a=6UeiqGixMTsA:10 a=VkNPw1HP01LnGYTKEx00:22
+ a=JppZAXPjAAAA:8 a=LfVoDZclgERIsXc5TQwA:9 a=QEXdDO2ut3YA:10
+ a=mTXuAFqUwmiQvsSFmwXH:22
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjUxMTI1MDA2MyBTYWx0ZWRfX7DbQkYX5bt1b
+ 0AjAokFAbzXJ18vqjDWJkrP/IJ/w+B+bZZCGHDJDCW9fvAzEz9h7ibqdLeioHswDu2N+fk7Z5a3
+ DgLdJKtps5YW1r/0u1DIaMZXOpNLfTQ4D0elaOjR/SAEt8RdB0/Xc+I+AaK2A4gfPs2nHwrV9wC
+ wlc8K+vyFl+OrRjnhP8EfXh4k3xmp8v73e1vTbZumRc+4VVB2lOErBSQVnWxUeHj8ZYHz2T0pEz
+ 16fO9c666zpEwKPidZwiG4/s59efVyUqpPdCk5pSag7e8QqYADpXVozyfvOLBapW53zFjFGsLqc
+ Zk3nNNUStZ7qh3Hv4IW
+X-Proofpoint-GUID: fhfd3o-vMZCQRrBt_pdm0dnx59urNVCE
+X-Proofpoint-ORIG-GUID: fhfd3o-vMZCQRrBt_pdm0dnx59urNVCE
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.293,Aquarius:18.0.1121,Hydra:6.1.9,FMLib:17.12.100.49
+ definitions=2025-11-25_02,2025-11-24_02,2025-10-01_01
+X-Proofpoint-Spam-Details: rule=notspam policy=default score=0 suspectscore=0
+ mlxlogscore=999 spamscore=0 malwarescore=0
+ clxscore=1030 adultscore=0
+ phishscore=0 bulkscore=0 mlxscore=0 classifier=spam authscore=0 adjust=0
+ reason=mlx scancount=1 engine=8.22.0-2510240001 definitions=main-2511250063
+X-JNJ: AAAAAAABmanG5DlIGI6oUKm5uYYZHXfknaeJWfR93N77TfxG2vAv4nrr31ItIkQtbhtTDjazv9CZcByTPUqhzGIfUIpvWwgwmjIFXOgvH/v6Zh9PYYotOoXCThZGZXtPlWVVsy4TrdWW/NpOC+k6q1AleS9ec8whCqztD+TRf6M6TYqlOc3AcWBpCAW53tqGM2dShEOgdWNo3Tm7vQLBaxHW8UsG45DDTJ/I+ulpg2NyHycY4TKNo+xgG0g6yQVeSDgCe/lDj4xX03zcRSUDMM4gOuhuihhL6Zw41rrDAyLmT3gXUn90ic6XR6onN0N7ozARRJZW6W7INFG5jmGYOTnCb9X+bjJE936U9FWqaYrRglygLh7ChXDgWLEtxvb6TpYGTfKHVnA2ZrLkAituUdGCsmZK8LbB4au76IxeD1nZ3UQiItK56wpMYNuAUrHdDs79uC69EHmLMHFpQ8cfEW0u2ZNYI9APaFAaLZQD3aXy0UTnkhy69Nid8ldq35TNA7/UHQD51hXL58WNA3q7BRJIFvMLIlr/bgWtbo0pzSNZyLQlGhcouJc+Wi3hY0s6P/Fq146QO/Kj00jvgW0waPhg5zWqElwhqBBuA0I7hoEqd1pgBVsBiVpbf3V2qVbn73NUDQ7eAWp6itrD3upHqWXLSZsqPLdIVrlPL268ua/AGUQcQ8S0HVC27VKI0SB1MIAgi3LuEF53S8x8HwsquA==
+X-Mailman-Approved-At: Sat, 13 Dec 2025 12:17:03 +0000
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -181,10 +82,64 @@ List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-T24gVHVlLCAyMDI1LTExLTI1IGF0IDA5OjU3ICswOTAwLCBBbGV4YW5kcmUgQ291cmJvdCB3cm90
-ZToNCj4gPiBIb3BwZXIvQmxhY2t3ZWxsKyB1c2UgUElPIHRvby4gU28gdGhlIGNvbmZsYXRpbmcg
-Y291bGQgYmUgYSByZWFsDQo+ID4gY29uY2Vybi4NCj4gDQo+IE9rLCBzbyB3ZSByZWFsbHkgd2Fu
-dCB0byBoYXZlIHRoaXMgaGFuZGxlZCBieSB0aGUgZmFsY29uIEhBTCBhcyBUaW11cg0KPiBzdWdn
-ZXN0ZWQuDQoNCkkgd2lsbCB0cnkgdG8gaW5jb3Jwb3JhdGUgc29tZSBtb3JlIEhBTCBmdW5jdGlv
-bnMgaW4gdjIsIGJ1dCBpdCB3aWxsIHByb2JhYmx5IG5lZWQgYWRkaXRpb25hbCB3b3JrDQpsYXRl
-ciB0byBpbmNsdWRlIHRoZSBFTUVNIFBJTyBzdHVmZiBmb3IgSG9wcGVyKy4NCg0K
+Should also note that it=E2=80=99s currently possible to overflow =
+usize::MAX here which causes a panic. This patch is also addressing
+that by moving the overflow check to before the page alignment. If a =
+request from user-space is made for a size that is
+Within one PAGE_SIZE of usize::MAX, then it will panic when we try to =
+use size.next_multiple_of().
+
+So even if we want to keep the 4k page alignments regardless of the =
+underlying CPU architecture, we should at least do the
+Overflow check, and use page_align() instead of next_multiple_of().
+
+> On 21 Nov 2025, at 2:04=E2=80=AFpm, bshephar@bne-home.net wrote:
+>=20
+> Use page::page_align for GEM object memory allocation to ensure the
+> allocation is page aligned. This ensures that the allocation is page
+> aligned with the system in cases where 4096 is not the default.
+> For example on 16k or 64k aarch64 systems this allocation should be
+> aligned accordingly.
+>=20
+> Signed-off-by: Brendan Shephard <bshephar@bne-home.net>
+> ---
+> drivers/gpu/drm/nova/gem.rs | 11 ++++++++---
+> 1 file changed, 8 insertions(+), 3 deletions(-)
+>=20
+> diff --git a/drivers/gpu/drm/nova/gem.rs b/drivers/gpu/drm/nova/gem.rs
+> index 2760ba4f3450..a07e922e25ef 100644
+> --- a/drivers/gpu/drm/nova/gem.rs
+> +++ b/drivers/gpu/drm/nova/gem.rs
+> @@ -3,6 +3,10 @@
+> use kernel::{
+>     drm,
+>     drm::{gem, gem::BaseObject},
+> +    page::{
+> +        page_align,
+> +        PAGE_SIZE, //
+> +    },
+>     prelude::*,
+>     sync::aref::ARef,
+> };
+> @@ -27,12 +31,13 @@ fn new(_dev: &NovaDevice, _size: usize) -> impl =
+PinInit<Self, Error> {
+> impl NovaObject {
+>     /// Create a new DRM GEM object.
+>     pub(crate) fn new(dev: &NovaDevice, size: usize) -> =
+Result<ARef<gem::Object<Self>>> {
+> -        let aligned_size =3D size.next_multiple_of(1 << 12);
+> -
+> -        if size =3D=3D 0 || size > aligned_size {
+> +        // Check for 0 size or potential usize overflow before =
+calling page_align
+> +        if size =3D=3D 0 || size > usize::MAX - PAGE_SIZE + 1 {
+>             return Err(EINVAL);
+>         }
+>=20
+> +        let aligned_size =3D page_align(size);
+> +
+>         gem::Object::new(dev, aligned_size)
+>     }
+>=20
+> --
+
