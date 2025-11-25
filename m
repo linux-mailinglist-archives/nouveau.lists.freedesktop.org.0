@@ -2,139 +2,156 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id A42F4C85669
-	for <lists+nouveau@lfdr.de>; Tue, 25 Nov 2025 15:24:41 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id D5002C856B4
+	for <lists+nouveau@lfdr.de>; Tue, 25 Nov 2025 15:28:40 +0100 (CET)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id CB13D10E29E;
-	Tue, 25 Nov 2025 14:24:39 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 8868610E40B;
+	Tue, 25 Nov 2025 14:28:39 +0000 (UTC)
 Authentication-Results: gabe.freedesktop.org;
-	dkim=pass (1024-bit key; unprotected) header.d=suse.de header.i=@suse.de header.b="U/WHjsnH";
-	dkim=permerror (0-bit key) header.d=suse.de header.i=@suse.de header.b="xJ9SruwN";
-	dkim=pass (1024-bit key) header.d=suse.de header.i=@suse.de header.b="U/WHjsnH";
-	dkim=permerror (0-bit key) header.d=suse.de header.i=@suse.de header.b="xJ9SruwN";
+	dkim=pass (2048-bit key; unprotected) header.d=Nvidia.com header.i=@Nvidia.com header.b="h6fx2Auh";
 	dkim-atps=neutral
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from smtp-out1.suse.de (smtp-out1.suse.de [195.135.223.130])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 9A4AD10E406
- for <nouveau@lists.freedesktop.org>; Tue, 25 Nov 2025 14:24:38 +0000 (UTC)
-Received: from imap1.dmz-prg2.suse.org (unknown [10.150.64.97])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
- (No client certificate requested)
- by smtp-out1.suse.de (Postfix) with ESMTPS id 3D6DA2276F;
- Tue, 25 Nov 2025 14:24:37 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.de; s=susede2_rsa;
- t=1764080677; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
- mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references:autocrypt:autocrypt;
- bh=jia8pVww9G5Os5zZTQnNTApemZw81+rV+px5cNZ5ZT8=;
- b=U/WHjsnH+afIORjtiy3MCuLJBsEZ7E+VhnWzvpb5SxERIWYBeKPttoKXfLFy/vZhNyQ8LC
- n1JEzZHyMH3lXPjhASx2QR/IY51j9xLtv0RZuKe3YZuecwxYdmZ24Cv4YOu0NlaLJJ72We
- NVSv6K/11Qsz83Uh/NIGnxHfry+cB9U=
-DKIM-Signature: v=1; a=ed25519-sha256; c=relaxed/relaxed; d=suse.de;
- s=susede2_ed25519; t=1764080677;
- h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
- mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references:autocrypt:autocrypt;
- bh=jia8pVww9G5Os5zZTQnNTApemZw81+rV+px5cNZ5ZT8=;
- b=xJ9SruwNBWzd+iCOGYcDt7SsUQQ0inj/JhP1y5iHoJcb0jZx55P5KXeCoZTrrSYkpDmg4d
- TPATDMcH18ht7iAQ==
-Authentication-Results: smtp-out1.suse.de;
-	none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.de; s=susede2_rsa;
- t=1764080677; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
- mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references:autocrypt:autocrypt;
- bh=jia8pVww9G5Os5zZTQnNTApemZw81+rV+px5cNZ5ZT8=;
- b=U/WHjsnH+afIORjtiy3MCuLJBsEZ7E+VhnWzvpb5SxERIWYBeKPttoKXfLFy/vZhNyQ8LC
- n1JEzZHyMH3lXPjhASx2QR/IY51j9xLtv0RZuKe3YZuecwxYdmZ24Cv4YOu0NlaLJJ72We
- NVSv6K/11Qsz83Uh/NIGnxHfry+cB9U=
-DKIM-Signature: v=1; a=ed25519-sha256; c=relaxed/relaxed; d=suse.de;
- s=susede2_ed25519; t=1764080677;
- h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
- mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references:autocrypt:autocrypt;
- bh=jia8pVww9G5Os5zZTQnNTApemZw81+rV+px5cNZ5ZT8=;
- b=xJ9SruwNBWzd+iCOGYcDt7SsUQQ0inj/JhP1y5iHoJcb0jZx55P5KXeCoZTrrSYkpDmg4d
- TPATDMcH18ht7iAQ==
-Received: from imap1.dmz-prg2.suse.org (localhost [127.0.0.1])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
- (No client certificate requested)
- by imap1.dmz-prg2.suse.org (Postfix) with ESMTPS id B1BA03EA63;
- Tue, 25 Nov 2025 14:24:36 +0000 (UTC)
-Received: from dovecot-director2.suse.de ([2a07:de40:b281:106:10:150:64:167])
- by imap1.dmz-prg2.suse.org with ESMTPSA id jUAtKiS8JWk2YAAAD6G6ig
- (envelope-from <tzimmermann@suse.de>); Tue, 25 Nov 2025 14:24:36 +0000
-Message-ID: <975c648c-07d7-4809-9edd-784af9781dc8@suse.de>
-Date: Tue, 25 Nov 2025 15:24:36 +0100
+Received: from PH0PR06CU001.outbound.protection.outlook.com
+ (mail-westus3azon11011049.outbound.protection.outlook.com [40.107.208.49])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 3394810E40A
+ for <nouveau@lists.freedesktop.org>; Tue, 25 Nov 2025 14:28:38 +0000 (UTC)
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=iWVrAKodA9BgvHSSc5xQKlhm2z37VVZza3t/BmsYpwts/torF1twS/Rq7MKE8yAHrGD03Bjgem2RV9y2yhS9p4dU8fzymlzlEwVhb4bv/Ir6IxpeAFOfxMPT0aYKj6Ll+pbaPEhn65RZXz6jX2ZM3QGmK2XPTaExtgljOxqrnb2BJJ920fvRBrARUtcusosAjFk6LrZ+tUVTCbEI/KkXozhobfSg2/5+Z0My4m4QrnWC/cXBmY+QuIX0Yxcasrnd+UGebt9PR/DTU68OaI1FlNd4bfYk18ueUKrY4nduD6VQkNQvmhwitqY2xwuBjf7zhGh4Tekz68VbHqaLuraKLw==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=tGt6KQoXgJBdeTaYjrnRyrayEotuDx8QZj88Lz3EA/8=;
+ b=mFpGgauYnXsTGDCIzgeXHoYgPWbwQTLVWnP9uKs6lXT55mSztjpCaQ5ReYsmw7sqGkPA5TFqnxI02aalqt9Gdtc5zqwbaG1SXoGMog+4rzgoFJNxVnfiulzbzKAxZ/m063m/+Z91KORlZqq686HjLt0mONGiKjq7IcJF8+TjG8RiSLaj3jedKUlj6lRoijO7neBNEHV2IxhhU7Q2apFOrALR8rvJyBjIPd8ZcAN0/W7E+UA2t5TdkjD8dQTHiB4UuO0rGfeG7ynhDNQmOPm/+VlRIJBdo6LkJgVKti17WrEWcZainnN0Ubz83bE5t3WYFQ3fP6mfe9UwFLk+W2/BoA==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=nvidia.com; dmarc=pass action=none header.from=nvidia.com;
+ dkim=pass header.d=nvidia.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=Nvidia.com;
+ s=selector2;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=tGt6KQoXgJBdeTaYjrnRyrayEotuDx8QZj88Lz3EA/8=;
+ b=h6fx2AuheDAEsFvuGZ40hKUaq1qWTJRDg5o4UvbKJlMd3CO+fgPXlUIc++A23qaAYl/Z+P2ZomTaVrapoqikLNXiFyT2b8jD/mdSDdw/h5+J8ijuuKB1K1kacuHHGTV6fyRsmZjN7F0opfuyrkv6afkz8wCqkUc4MqP13sbnkBLmzQfdM5aHy6vNnVkO326DNsufWRN7BWbVa1PGfVq8rihQPdSjDcta9pwOH21a7T3pkWclU0SjOccth5u02+0CYYMpk3O6nH/ffg/Y/ZFrnPF5h81HsUTL5zQl3SmZVoW5/mAxrApDXausfZefznDvjcE94/1upUj0iWFCqLC2TA==
+Authentication-Results: dkim=none (message not signed)
+ header.d=none;dmarc=none action=none header.from=nvidia.com;
+Received: from CH2PR12MB3990.namprd12.prod.outlook.com (2603:10b6:610:28::18)
+ by CY5PR12MB6034.namprd12.prod.outlook.com (2603:10b6:930:2e::12)
+ with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9366.11; Tue, 25 Nov
+ 2025 14:28:33 +0000
+Received: from CH2PR12MB3990.namprd12.prod.outlook.com
+ ([fe80::7de1:4fe5:8ead:5989]) by CH2PR12MB3990.namprd12.prod.outlook.com
+ ([fe80::7de1:4fe5:8ead:5989%6]) with mapi id 15.20.9343.016; Tue, 25 Nov 2025
+ 14:28:32 +0000
+Content-Transfer-Encoding: quoted-printable
+Content-Type: text/plain; charset=UTF-8
+Date: Tue, 25 Nov 2025 23:28:29 +0900
+Message-Id: <DEHUHPU6WQ1E.J19KGDPIHN09@nvidia.com>
+Cc: <rust-for-linux@vger.kernel.org>, <nouveau@lists.freedesktop.org>,
+ <brendan.shephard@gmail.com>
+Subject: Re: [PATCH 1/1] drm: nova: Align GEM memory allocation to system
+ page size
+From: "Alexandre Courbot" <acourbot@nvidia.com>
+To: <bshephar@bne-home.net>, <dakr@kernel.org>, <acourbot@nvidia.com>,
+ <joelagnelf@nvidia.com>, <jhubbard@nvidia.com>, <airlied@gmail.com>
+X-Mailer: aerc 0.21.0-0-g5549850facc2
+References: <98227EBD-92F7-40FC-A5A4-3FF3780FB2CB@bne-home.net>
+In-Reply-To: <98227EBD-92F7-40FC-A5A4-3FF3780FB2CB@bne-home.net>
+X-ClientProxiedBy: TYCP286CA0352.JPNP286.PROD.OUTLOOK.COM
+ (2603:1096:405:7c::19) To CH2PR12MB3990.namprd12.prod.outlook.com
+ (2603:10b6:610:28::18)
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 0/5] drm: Remove remaining support for kdb
-To: =?UTF-8?Q?Christian_K=C3=B6nig?= <christian.koenig@amd.com>,
- simona@ffwll.ch, airlied@gmail.com, alexander.deucher@amd.com,
- lyude@redhat.com, dakr@kernel.org, deller@gmx.de, mripard@kernel.org,
- maarten.lankhorst@linux.intel.com, jason.wessel@windriver.com,
- danielt@kernel.org, dianders@chromium.org
-Cc: dri-devel@lists.freedesktop.org, amd-gfx@lists.freedesktop.org,
- nouveau@lists.freedesktop.org, linux-fbdev@vger.kernel.org,
- linux-doc@vger.kernel.org, linux-kernel@vger.kernel.org,
- =?UTF-8?Q?Timur_Krist=C3=B3f?= <timur.kristof@gmail.com>
-References: <20251125130634.1080966-1-tzimmermann@suse.de>
- <11ac809d-0432-4c9f-8279-7df318c9a448@amd.com>
-Content-Language: en-US
-From: Thomas Zimmermann <tzimmermann@suse.de>
-Autocrypt: addr=tzimmermann@suse.de; keydata=
- xsBNBFs50uABCADEHPidWt974CaxBVbrIBwqcq/WURinJ3+2WlIrKWspiP83vfZKaXhFYsdg
- XH47fDVbPPj+d6tQrw5lPQCyqjwrCPYnq3WlIBnGPJ4/jreTL6V+qfKRDlGLWFjZcsrPJGE0
- BeB5BbqP5erN1qylK9i3gPoQjXGhpBpQYwRrEyQyjuvk+Ev0K1Jc5tVDeJAuau3TGNgah4Yc
- hdHm3bkPjz9EErV85RwvImQ1dptvx6s7xzwXTgGAsaYZsL8WCwDaTuqFa1d1jjlaxg6+tZsB
- 9GluwvIhSezPgnEmimZDkGnZRRSFiGP8yjqTjjWuf0bSj5rUnTGiyLyRZRNGcXmu6hjlABEB
- AAHNJ1Rob21hcyBaaW1tZXJtYW5uIDx0emltbWVybWFubkBzdXNlLmRlPsLAjgQTAQgAOAIb
- AwULCQgHAgYVCgkICwIEFgIDAQIeAQIXgBYhBHIX+6yM6c9jRKFo5WgNwR1TC3ojBQJftODH
- AAoJEGgNwR1TC3ojx1wH/0hKGWugiqDgLNXLRD/4TfHBEKmxIrmfu9Z5t7vwUKfwhFL6hqvo
- lXPJJKQpQ2z8+X2vZm/slsLn7J1yjrOsoJhKABDi+3QWWSGkaGwRJAdPVVyJMfJRNNNIKwVb
- U6B1BkX2XDKDGffF4TxlOpSQzdtNI/9gleOoUA8+jy8knnDYzjBNOZqLG2FuTdicBXblz0Mf
- vg41gd9kCwYXDnD91rJU8tzylXv03E75NCaTxTM+FBXPmsAVYQ4GYhhgFt8S2UWMoaaABLDe
- 7l5FdnLdDEcbmd8uLU2CaG4W2cLrUaI4jz2XbkcPQkqTQ3EB67hYkjiEE6Zy3ggOitiQGcqp
- j//OwE0EWznS4AEIAMYmP4M/V+T5RY5at/g7rUdNsLhWv1APYrh9RQefODYHrNRHUE9eosYb
- T6XMryR9hT8XlGOYRwKWwiQBoWSDiTMo/Xi29jUnn4BXfI2px2DTXwc22LKtLAgTRjP+qbU6
- 3Y0xnQN29UGDbYgyyK51DW3H0If2a3JNsheAAK+Xc9baj0LGIc8T9uiEWHBnCH+RdhgATnWW
- GKdDegUR5BkDfDg5O/FISymJBHx2Dyoklv5g4BzkgqTqwmaYzsl8UxZKvbaxq0zbehDda8lv
- hFXodNFMAgTLJlLuDYOGLK2AwbrS3Sp0AEbkpdJBb44qVlGm5bApZouHeJ/+n+7r12+lqdsA
- EQEAAcLAdgQYAQgAIAIbDBYhBHIX+6yM6c9jRKFo5WgNwR1TC3ojBQJftOH6AAoJEGgNwR1T
- C3ojVSkIALpAPkIJPQoURPb1VWjh34l0HlglmYHvZszJWTXYwavHR8+k6Baa6H7ufXNQtThR
- yIxJrQLW6rV5lm7TjhffEhxVCn37+cg0zZ3j7zIsSS0rx/aMwi6VhFJA5hfn3T0TtrijKP4A
- SAQO9xD1Zk9/61JWk8OysuIh7MXkl0fxbRKWE93XeQBhIJHQfnc+YBLprdnxR446Sh8Wn/2D
- Ya8cavuWf2zrB6cZurs048xe0UbSW5AOSo4V9M0jzYI4nZqTmPxYyXbm30Kvmz0rYVRaitYJ
- 4kyYYMhuULvrJDMjZRvaNe52tkKAvMevcGdt38H4KSVXAylqyQOW5zvPc4/sq9c=
-In-Reply-To: <11ac809d-0432-4c9f-8279-7df318c9a448@amd.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 8bit
-X-Spam-Level: 
-X-Spamd-Result: default: False [-2.80 / 50.00]; BAYES_HAM(-3.00)[100.00%];
- SUSPICIOUS_RECIPS(1.50)[]; NEURAL_HAM_LONG(-1.00)[-1.000];
- NEURAL_HAM_SHORT(-0.20)[-1.000]; MIME_GOOD(-0.10)[text/plain];
- TO_MATCH_ENVRCPT_ALL(0.00)[];
- DKIM_SIGNED(0.00)[suse.de:s=susede2_rsa,suse.de:s=susede2_ed25519];
- FREEMAIL_TO(0.00)[amd.com,ffwll.ch,gmail.com,redhat.com,kernel.org,gmx.de,linux.intel.com,windriver.com,chromium.org];
- FUZZY_RATELIMITED(0.00)[rspamd.com]; MIME_TRACE(0.00)[0:+];
- ARC_NA(0.00)[]; RCPT_COUNT_TWELVE(0.00)[19];
- FREEMAIL_ENVRCPT(0.00)[gmail.com,gmx.de];
- FREEMAIL_CC(0.00)[lists.freedesktop.org,vger.kernel.org,gmail.com];
- RCVD_TLS_ALL(0.00)[]; FROM_EQ_ENVFROM(0.00)[];
- FROM_HAS_DN(0.00)[]; TO_DN_SOME(0.00)[];
- RCVD_COUNT_TWO(0.00)[2]; TAGGED_RCPT(0.00)[];
- MID_RHS_MATCH_FROM(0.00)[]; RCVD_VIA_SMTP_AUTH(0.00)[];
- DBL_BLOCKED_OPENRESOLVER(0.00)[suse.com:url, imap1.dmz-prg2.suse.org:helo,
- suse.de:mid]
-X-Spam-Flag: NO
-X-Spam-Score: -2.80
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: CH2PR12MB3990:EE_|CY5PR12MB6034:EE_
+X-MS-Office365-Filtering-Correlation-Id: ccf5a514-ae14-4009-2fbb-08de2c2ee933
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: BCL:0;
+ ARA:13230040|1800799024|366016|376014|10070799003|7053199007; 
+X-Microsoft-Antispam-Message-Info: =?utf-8?B?eXdCNnlqd0w2ZEI5NzE5c0hDTnh1VVlRQVpUMDBrNEhuTm1lcTg0REc5V2xP?=
+ =?utf-8?B?bzZxdWd6SHhYeHNaemtHTWZZODdWWmd2clV5WkVPdjBnVnRSRHY4eVZkQ201?=
+ =?utf-8?B?cW5jRkJsRFBiWms1Qm04SjhoTVRKazFnTm5UZ2N1MXZMaERqUHkyclhKOUl2?=
+ =?utf-8?B?cWNXUjFhQkRCWGlRWm03ZitYaVBMdWlWQUJxd0JSYzczTnhCUlJXT2kxQmht?=
+ =?utf-8?B?SVYwcElQWTQrSXVndHVsam91YS8wM3dqVnp4MlFKODc2ampTcUkyVU9CZnhm?=
+ =?utf-8?B?NG9wZldSQUgyUTJ3U0N2VmtueTN0TUh2a3lWZk5vTUFGUTJ2bDNmZ2laODQ5?=
+ =?utf-8?B?WWc4T3Rkenh3eWl0Q2dIdWpEeEJLYXNHR3NkaG5WY1BSVUNiV2VjanN2REZ4?=
+ =?utf-8?B?RzV4dmRnbndmemE4YUJrZjZNRDg3eFVwa3U5dEx0SzAxSTZoamJqdk5YNkFr?=
+ =?utf-8?B?aE9vVFFBQ0UyRUJsTVFEdmVGUWZqU0FBbWV1M1N2TXZld0JaZitXOEQ4VUp1?=
+ =?utf-8?B?cEtCY3M0Zll2bXpwRTNWL1pEbnFPUzd2bzZVR2thRnBESCtlOVhWL2JZMk1B?=
+ =?utf-8?B?MGF5djdpREtVd1V6alRMenNjWDJUZTNBWVFIUC9qZWdQbndRSWx1d0M3NkF1?=
+ =?utf-8?B?ZlRzTlpuVW9KMFZuUjlNTGtOUEJJRk1RaGNULzI4dndYU3FkSHJIRkh3Vk92?=
+ =?utf-8?B?OVNyYWpPRXhvSEdmbU96aXlVS2RqTDNkd2lpaUtWU2pTN2E5bGwzNUtlY05n?=
+ =?utf-8?B?SDRzYndxdzVqSUpma3orZ2hzQ2dBcUVzNFF2SlcwYlVTVGZ3VjQ4bmQ1OTFN?=
+ =?utf-8?B?VGtxa3VDSEdqWHZyWjBIR1Jjc3hpbkloWVZhOHRBbE9tTm04U2NwYm1QZ2l4?=
+ =?utf-8?B?clQyUzJTS3BheGZFNWhTZGRqTGVVK0lxN05NUDN5N3BBNXowUVhOU2EyOGJQ?=
+ =?utf-8?B?bHIrMUowdm0zN0ZPbHJ2dTcwOUZZSzVFMElHaWRRUUViMGNmWWtJNlNNdmVR?=
+ =?utf-8?B?cTQ4Wnk4V0ZTN2hiRHFpV0xvU2RXTllIUlBGVWp5NmFRdHFPVzdwU2dFeEZN?=
+ =?utf-8?B?MUJaVktoYjBrZ0JBWGNIcGpQUWJQU0g1VDB3SGN5VkdSbTJydmRIRWVncDFa?=
+ =?utf-8?B?U1RkdWgrdFNXWjVtcGxsN1h6NEJ0dEt1VXN5ckg4NnNRelFXZXREWjRpaW1k?=
+ =?utf-8?B?K2pIWGV2Wk1kOGw1enpPTk5OeXRwQUg4RFZZNjlad1NDd0hCbktyOTdyRjNa?=
+ =?utf-8?B?T3hvbVZHWHA2SXZDK2c1VlpCMmtlcWxTUVAyU3kyMFk0K3VRdlVubmVZRWRG?=
+ =?utf-8?B?Mkgwd1FscGhEYkxJTmNZNHMrYkJXczh5M0ZHdzg5WDd3ZnZaZldRQlRZa3c3?=
+ =?utf-8?B?ajNxbURyMnpRbEZhS1Y1UWVLY3RaMDMrckRsWkJtbzhaZk8zREFxQUFsbEt0?=
+ =?utf-8?B?bmZuSmtrN3VleVZ2NXJrZjhwTnpjK3VVUHE2bk5ZWjk1dnhTdzcvOVlKYm1k?=
+ =?utf-8?B?cUdjcU1LeUVOMnpNYWVUNjZOSE9hVFdlYTlHa1JLOGRTdHdtMXdYcmxTUW1R?=
+ =?utf-8?B?ZEZ6aHVQSkxFbDRkdHA2Y04yRnlPdTlpdEdSdmJQS0xndWdBTkIxZkQrazlD?=
+ =?utf-8?B?QXdOaXhYKzdyUThQc2xYampudm5ld2gvQjdYK1dGR1hNSFZyTmtGNlFhRExS?=
+ =?utf-8?B?cEpicUNHVWJ5VTc5VWFodTdONkpKYlk4cTBIK05sN1dWY0RXMWFGM2R1YTdx?=
+ =?utf-8?B?YVVQVjVJRzB2ZThjVmtHcDAwZk1vc3dwMmdINmMyZTlwaGZObmR6SFlpRTNE?=
+ =?utf-8?B?aEZvcnNWVjNjN2kwVitsNHUzTlVJSW5WNy91ZmkyOEs2UXhLYXYxQ1Y1NUZ2?=
+ =?utf-8?B?TXJtcW03bWV1MlFmdm8vZzJRQjZhMjc0cTV5RzN3SzZaL2N0aTRobkI0STlj?=
+ =?utf-8?Q?emjS680UtrY5wVAMlBtgAiOapENQFLgy?=
+X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
+ IPV:NLI; SFV:NSPM; H:CH2PR12MB3990.namprd12.prod.outlook.com; PTR:; CAT:NONE;
+ SFS:(13230040)(1800799024)(366016)(376014)(10070799003)(7053199007); DIR:OUT;
+ SFP:1101; 
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?aFV1bWdsYlBaZUJuV3Jjb3J2QWNJaFhhYnE1Zk1POW80U1hDUUZORGVVLzc2?=
+ =?utf-8?B?eUpHelVPbE0zbnFZbGtYVkdlTmhueEMyeUVZSk5sZGM3TTdpa2MzS3ZuNnFh?=
+ =?utf-8?B?ZHZJWXhLN2lRSGtzeEpER2N0SnQzd1FtSXRkREZrNG9DRDN2Um9YV3dkcGg4?=
+ =?utf-8?B?d2JxNTVBV2R2SWpZa3BiVXphL1hpNEFTdXZxMHhNd25PSVUyZEtuVGpkSWF6?=
+ =?utf-8?B?TERHS1BaSXg1Wk84VWlQQmxiQ21zcWVTMlRrUXNPanZPb2VMWUpiSFdvaUtU?=
+ =?utf-8?B?OG1ZaU10R1NwOFBkaW00Z05XaUJ0aEliR0QzcWs2MWp0KzdUbUlqSTJDOUZt?=
+ =?utf-8?B?L2NhOWJBeFg1TjJ4VGkvUzdjZDB2RmZjVDdIcWtYTFlIRTRCemp4UHV5N2Jz?=
+ =?utf-8?B?aXVCalZlaG1BMnhHMkVLazdia1FuTVFrdzFtcmtUQm5hUTk3MTNZRStlVjVY?=
+ =?utf-8?B?QmZyNmU1YXNzcVNrTVF6bnFWTkVIWU41bExkR2wxYlJ2b0FSbUZ6WFF1NlAw?=
+ =?utf-8?B?R1JJMXdtUTU0eGliektTMEhrV0s1NUVQK3Uyb2tyYlVaWjJvMGsxaERiazVQ?=
+ =?utf-8?B?OG4zWngxZ3VuY0xQZDRYc2lJYU1zMDhybVVoYTNOdVFOUlZIMjRoMmRpZDBa?=
+ =?utf-8?B?QWM2bERoTzJRVnlxTnNsZHhENTRJWUxveUhZM1EzeU5HV3JLVEtTdHBXbUpV?=
+ =?utf-8?B?MkhaZkhScnhHZ3IvWUYzb3NtbXM0d3lqVUFEWWhJVzJyMGcxNVVNWGp6blFp?=
+ =?utf-8?B?M2hNSWVWWTZEU1dSYTdtaTI5Y3FOc3hTNFVWUHFBbHVwNCtEUGxDeFlIVTAy?=
+ =?utf-8?B?SWgvT25RUXVNUDQrdWQ1Y2F3MFNTRm1QMndNUnBxVVMwMElJRzVrOEZSUFgr?=
+ =?utf-8?B?dFFkemxzK3psakhqemEyR3BPYjRueStuS0FzeC9NSzNjOHFDdlVLemhValVx?=
+ =?utf-8?B?cm54Sm42Zi9LNVA1WjFKMHpseVlPSVFOMWlOL3ZOVEVtNHB4eks0TCtTMTl6?=
+ =?utf-8?B?c0pUbTlrNDAwV0JrT0ltcXdady9yUlNRYnhOdUtPQlkrQWVwOEhIUERqT2JO?=
+ =?utf-8?B?ZDhFNjVlUDluVDYwdWVTN21uWk1STjY5V3RjVmR5dVVJYWJvMDh2TkdTU3Rt?=
+ =?utf-8?B?M0xLSjd4cVRUV1NiSHZ4Z1NJbDMxUWdXeC9KRUpuNVRqQVJISElRWFBvb1d3?=
+ =?utf-8?B?aXNuUE1WdXQ1RXFIZjdSK2ZNeEViWUlUdW4rTis4dWNkNUNQVHZ3TFVPRmF0?=
+ =?utf-8?B?RUhuQkhCL2IySXJNVTBaOFB4bkJQdE9KakNOUzlYaXo3QmpQZmhuMmZ1VTE4?=
+ =?utf-8?B?Yll1bzBaa3Y4OURNd05jS2ZmTFdLRkMvajNWZzRnQjV5eE5GMGxEQVJJWG95?=
+ =?utf-8?B?cDV3OHpwVHZ5Qlg5Z01YWGFRWUdETDVmeVdPRjltRVFCd3JkVWNyNUxmSkJM?=
+ =?utf-8?B?clhZRExvM3lld08vY1dId1VjZnJ0OHRVTzNzR2hQSm9wS0tuZ1pnUUpQMWwv?=
+ =?utf-8?B?NEFodHdHNlJUNEo2by9CbDFnaW5tMlFqdEVwQ3Y3K0pxVmRaeU9YYmxad1g3?=
+ =?utf-8?B?TGUrSlhDRzVJVzNUOWt6NVF1bWh3MlZOZ2VlL0o1MnNrSWJtN0pSVUFrYXkz?=
+ =?utf-8?B?SE94aFhnbmRkc2ZUYVRsQXUrYmxRaytuYjFkZE9BSG5LZXdMRTErSC9CanVG?=
+ =?utf-8?B?Rm5xcGZLNlZCaWpjQWVjWUVYVW5rQmJ4dGZYN0JpRUtzcTYvbUZVTHMwaWlh?=
+ =?utf-8?B?RHpJek9WQzdGcFd5QlU5NVBNaXhzV21oaFlkeStzYk1hempCUStVc21QMnlX?=
+ =?utf-8?B?OHh4UlBBWlN2OWxhVHZFUlJYOEc5ZVBRK0dSY0NSelZXZ0JVZEdpa2x2TW5z?=
+ =?utf-8?B?NzVJcTQ4L25xZmpySEorc1VYRUFjVjRGSEowdFFuVE1TbjRYWENCN0ZraUx1?=
+ =?utf-8?B?OTNMaXB2dlNQMzVIVFUybUZ4M0pJb2dlWXFyb0JUcktRSW9DeTFPQzJrY0VN?=
+ =?utf-8?B?NTRJRUh4YW83ZzhoMEdkK010aS8rUC9ldExQbFNRYnpnblhZdE1PVGVTN1Vs?=
+ =?utf-8?B?MVBya1Yxd0J1R0U5MWVZZ2EyVE91QjV4QzB6MDA1ZEpWUzQ4VzBJOGpveWlM?=
+ =?utf-8?B?M01rQTFOUXozWU9YTVo5VktGU1NJemlSSW1UYXdZR0F6Y2U5WXZZYWVreVoz?=
+ =?utf-8?Q?HqYBoR0Gk+nRmrO/Zq/H5qldYauDhiktp6btzguo6uiB?=
+X-OriginatorOrg: Nvidia.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: ccf5a514-ae14-4009-2fbb-08de2c2ee933
+X-MS-Exchange-CrossTenant-AuthSource: CH2PR12MB3990.namprd12.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 25 Nov 2025 14:28:32.8030 (UTC)
+X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
+X-MS-Exchange-CrossTenant-Id: 43083d15-7273-40c1-b7db-39efd9ccc17a
+X-MS-Exchange-CrossTenant-MailboxType: HOSTED
+X-MS-Exchange-CrossTenant-UserPrincipalName: ue8gbSTTJT6erw/EEHanM+4pmhqR7D0IMsexFesvWlzJ6l7edBaIi3DSPzonTbHQmQ8+e+wNgSbiBehAI/n1Mw==
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: CY5PR12MB6034
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -149,84 +166,55 @@ List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-Hi
-
-Am 25.11.25 um 14:16 schrieb Christian König:
-> On 11/25/25 13:52, Thomas Zimmermann wrote:
->> Remove the rest of the kbd support from DRM. Driver support has been
->> broken for years without anyone complaining.
->>
->> Kdb cannot use regular DRM mode setting, so DRM drivers have to
->> implement an additional hook to make it work (in theory). As outlined
->> by Sima in commit 9c79e0b1d096 ("drm/fb-helper: Give up on kgdb for
->> atomic drivers") from 2017, kdb is not compatible with DRM atomic mode
->> setting. Non-atomic mode setting meanwhile has become rare.
->>
->> Only 3 DRM drivers implement the hooks for kdb support. Amdgpu and
->> nouveau use non-atomic mode setting on older devices. But both drivers
->> have switched to generic fbdev emulation, which isn't compatible with
->> kdb. Radeon still runs kdb, but it doesn't work in practice. See the
->> commits in this series for details
-> Amdgpu is heavily pushing on switching to atomic for older GPUs as well. Timur and our DC guys have made quite some progress on that recently.
-
- From what I've seen, I really like the work they are doing there.
-
+On Fri Nov 21, 2025 at 1:04 PM JST, bshephar wrote:
+> Use page::page_align for GEM object memory allocation to ensure the
+> allocation is page aligned. This ensures that the allocation is page
+> aligned with the system in cases where 4096 is not the default.
+> For example on 16k or 64k aarch64 systems this allocation should be
+> aligned accordingly.
 >
-> Feel free to add Acked-by: Christian König <christian.koenig@amd.com> to the amdgpu and radeon changes.
-
-Thanks.
-
-Best regards
-Thomas
-
+> Signed-off-by: Brendan Shephard <bshephar@bne-home.net>
+> ---
+>  drivers/gpu/drm/nova/gem.rs | 11 ++++++++---
+>  1 file changed, 8 insertions(+), 3 deletions(-)
 >
-> Regards,
-> Christian.
+> diff --git a/drivers/gpu/drm/nova/gem.rs b/drivers/gpu/drm/nova/gem.rs
+> index 2760ba4f3450..a07e922e25ef 100644
+> --- a/drivers/gpu/drm/nova/gem.rs
+> +++ b/drivers/gpu/drm/nova/gem.rs
+> @@ -3,6 +3,10 @@
+>  use kernel::{
+>      drm,
+>      drm::{gem, gem::BaseObject},
+> +    page::{
+> +        page_align,
+> +        PAGE_SIZE, //
+> +    },
+>      prelude::*,
+>      sync::aref::ARef,
+>  };
+> @@ -27,12 +31,13 @@ fn new(_dev: &NovaDevice, _size: usize) -> impl PinIn=
+it<Self, Error> {
+>  impl NovaObject {
+>      /// Create a new DRM GEM object.
+>      pub(crate) fn new(dev: &NovaDevice, size: usize) -> Result<ARef<gem:=
+:Object<Self>>> {
+> -        let aligned_size =3D size.next_multiple_of(1 << 12);
+> -
+> -        if size =3D=3D 0 || size > aligned_size {
+> +        // Check for 0 size or potential usize overflow before calling p=
+age_align
+> +        if size =3D=3D 0 || size > usize::MAX - PAGE_SIZE + 1 {
+
+`PAGE_SIZE` here is no more correct than the hardcoded `1 << 12` - well,
+I'll admit it looks better as a placeholder. :) But the actual alignment
+will eventually be provided elsewhere.
+
+>              return Err(EINVAL);
+>          }
 >
->> Therefore remove the remaining support for kdb from the DRM drivers
->> and from DRM fbdev emulation. Also remove the hooks from fbdev, as
->> there are no fbdev drivers with kdb support.
->>
->> If we ever want to address kdb support within DRM drivers, a place to
->> start would be the scanout buffers used by DRM's panic screen. These
->> use the current display mode. They can be written and flushed without
->> mode setting involved.
->>
->> Note: kdb over serial lines is not affected by this series and continues
->> to work as before.
->>
->> Thomas Zimmermann (5):
->>    drm/amdgpu: Do not implement mode_set_base_atomic callback
->>    drm/nouveau: Do not implement mode_set_base_atomic callback
->>    drm/radeon: Do not implement mode_set_base_atomic callback
->>    drm/fbdev-helper: Remove drm_fb_helper_debug_enter/_leave()
->>    fbcon: Remove fb_debug_enter/_leave from struct fb_ops
->>
->>   Documentation/process/debugging/kgdb.rst    |  28 -----
->>   drivers/gpu/drm/amd/amdgpu/dce_v10_0.c      |  35 ++-----
->>   drivers/gpu/drm/amd/amdgpu/dce_v6_0.c       |  35 ++-----
->>   drivers/gpu/drm/amd/amdgpu/dce_v8_0.c       |  35 ++-----
->>   drivers/gpu/drm/drm_fb_helper.c             | 108 --------------------
->>   drivers/gpu/drm/nouveau/dispnv04/crtc.c     |  24 +----
->>   drivers/gpu/drm/radeon/atombios_crtc.c      |  74 ++++----------
->>   drivers/gpu/drm/radeon/radeon_legacy_crtc.c |  23 ++---
->>   drivers/gpu/drm/radeon/radeon_mode.h        |  10 +-
->>   drivers/video/fbdev/core/fbcon.c            |  24 -----
->>   drivers/video/fbdev/core/fbcon.h            |   1 -
->>   include/drm/drm_fb_helper.h                 |  21 ----
->>   include/drm/drm_modeset_helper_vtables.h    |  23 -----
->>   include/linux/fb.h                          |   4 -
->>   14 files changed, 63 insertions(+), 382 deletions(-)
->>
->>
->> base-commit: 0a21e96e0b6840d2a4e0b45a957679eeddeb4362
+> +        let aligned_size =3D page_align(size);
 
--- 
---
-Thomas Zimmermann
-Graphics Driver Developer
-SUSE Software Solutions Germany GmbH
-Frankenstr. 146, 90461 Nürnberg, Germany, www.suse.com
-GF: Jochen Jaser, Andrew McDonald, Werner Knoblich, (HRB 36809, AG Nürnberg)
-
-
+`page_align` won't panic on overflow, but it will still return an
+invalid size. This is a job for `kernel::ptr::Alignment`, which let's
+you return an error when an overflow occurs.
