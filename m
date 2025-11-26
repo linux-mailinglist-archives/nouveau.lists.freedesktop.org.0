@@ -2,82 +2,101 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id 5CE13CBAE2A
-	for <lists+nouveau@lfdr.de>; Sat, 13 Dec 2025 13:45:51 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 89D79CBAEFE
+	for <lists+nouveau@lfdr.de>; Sat, 13 Dec 2025 13:46:41 +0100 (CET)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 3AF8110EBC1;
-	Sat, 13 Dec 2025 12:42:13 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 19BD010EC59;
+	Sat, 13 Dec 2025 12:42:18 +0000 (UTC)
 Authentication-Results: gabe.freedesktop.org;
-	dkim=permerror (0-bit key) header.d=gmail.com header.i=@gmail.com header.b="XU07FPJm";
+	dkim=permerror (0-bit key) header.d=gmail.com header.i=@gmail.com header.b="Ox4nF6vF";
 	dkim-atps=neutral
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from mail-pf1-f170.google.com (mail-pf1-f170.google.com
- [209.85.210.170])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 57BB510E59C
- for <nouveau@lists.freedesktop.org>; Wed, 26 Nov 2025 09:57:53 +0000 (UTC)
-Received: by mail-pf1-f170.google.com with SMTP id
- d2e1a72fcca58-7b8ba3c8ca1so885860b3a.2
- for <nouveau@lists.freedesktop.org>; Wed, 26 Nov 2025 01:57:53 -0800 (PST)
+Received: from mail-pl1-f178.google.com (mail-pl1-f178.google.com
+ [209.85.214.178])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 93B5C10E599
+ for <nouveau@lists.freedesktop.org>; Wed, 26 Nov 2025 10:07:02 +0000 (UTC)
+Received: by mail-pl1-f178.google.com with SMTP id
+ d9443c01a7336-297cf964774so9678575ad.2
+ for <nouveau@lists.freedesktop.org>; Wed, 26 Nov 2025 02:07:02 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1764151073; x=1764755873; darn=lists.freedesktop.org;
+ d=gmail.com; s=20230601; t=1764151622; x=1764756422; darn=lists.freedesktop.org;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:from:to:cc:subject:date
  :message-id:reply-to;
- bh=7mHQ1VRdjTsfmUz5G2DWe71KnbFXKlmtSzGNdzBPt3M=;
- b=XU07FPJm0JEFrlRMraqSrzXkgdbTRbiuLjoBniTj4s2V/oyqaGVI4ETu2+TOZW5vM1
- MGgkshy5b17640Jbxrhi8+uWEEX4HM+NdFXubeJYwpQbrGKgBdvMCbK2TzPQz28NkdEz
- +CLS13pKXTEk4r9sm04FY31igp6CsTrvlvmma6HoLClZesUZxNargxePZaYXqwxphJ7v
- RLT6q9Mq1Gjg/zpLKseEcVnRM0j8c5aUj4iGFl+/CspLXCeuQGUAV8GzlSBYnSEN5cHZ
- r6yvlX6FfXPLA5HItT/RxOyQnDgtS7KBE/5hUotG97GHn/jPL+yUeIU1kEUrSGTnmrm0
- h5ww==
+ bh=e2P97JqJJgrSTofOE6L0Vqzh5vWI3dfXbDRlEdNGUic=;
+ b=Ox4nF6vFIU1SFiA+ulQbztcjUdRgx6ug80zflZQ7zXolKc/UvudWlp2TKkva14enYK
+ cAH18rKKK6a7h2RWr0jw45uZHpPs2/RGRpJGiS9wjC5l5awiE8xadJsNReINvw9DDS07
+ nRsM7ilyTwg+UQZVopmoV0kJVU4ujKhUW6MRKot7uRrtyMGhmDSf78jqKXtXXCQio5It
+ aueLzGTKy+i4jKf5ZHbp80ZvzuMnNIPeARb8LII1oi+J/H9HExTI6lxgk0RTiCn0zKwJ
+ CR6vdFZriDFbKojUggbbPzVUNa6En2xyZeJKf3BmQqs31XJhYLFQRPlsEochLszwJKJ2
+ OXnw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1764151073; x=1764755873;
+ d=1e100.net; s=20230601; t=1764151622; x=1764756422;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:x-gm-gg:x-gm-message-state:from
  :to:cc:subject:date:message-id:reply-to;
- bh=7mHQ1VRdjTsfmUz5G2DWe71KnbFXKlmtSzGNdzBPt3M=;
- b=GDcroy4EhCbUx0Nj+ZkvMS4WboYREOdcyc5gzhcz3SP08OTwSvL9w52yQxZAOS1q62
- XMx5ZsDKIy96V4v4w+ptUr08wqPXli038uYwlwM4t9CdviZ1RlIFuP349afXTWrE5PhA
- HsI0DQCWI0ofse442SGj8+9OyJwopz/lnFoB3R4SFXFlFr+rlbpVoHMhbDT5g6SQoIlq
- WfZXohUE69nnvH1ZtGpC9aYFXfZl0LMWmn4imp0nOkjits2O1Gv2UN+yaebjC+ZkKKJH
- Wg/DUfMe4dQDOFBLzcSg1qK4a8hSXpzww9cYDf+nzk+9AzI1LXMHKgBl7Q9140pwpaXL
- JoKw==
+ bh=e2P97JqJJgrSTofOE6L0Vqzh5vWI3dfXbDRlEdNGUic=;
+ b=xLE3/9euAtTZYpnKNO2cXfbp3W4fYI51v+1JUehckDmBDt7OOtdE6sGhwmOdoY7AEY
+ tdG+LgbReNSp5zwrW/q+Oed3K671nJoxQY4TrzCS/LelCVeQm9oBxRSTi8DHbztYYw09
+ 6V9WIsC+u28UXjuaJnTAhJZNc9jxSvcNs9RNze6Xld0oc87iGNkMbvs98qKc6n4pAdND
+ NyO0ah4ErXndaIlWD2eF3OZNsV55VifRJUJr9CMlafzZpQOwcuhtuh/S+rHL9WveGNhm
+ KaucBl5yglSZEZvXsDp+mVUibJix1jyPaRcPrUBxcvWRfZdHwe9gnd6B/kl5HmfvxTEb
+ dI9Q==
 X-Forwarded-Encrypted: i=1;
- AJvYcCXBJ48gjBVH4HPPSI0YJu6uZt1Uuf/oEOWKC82jAfaCjDtI/EFG3gDNcnOvf+7MLpIxYWxK0KX8@lists.freedesktop.org
-X-Gm-Message-State: AOJu0Yz6/pcsqp363rxhvQSeI0i+LLZ2b6f+jxMo+4AAdN509208SKLS
- xyIXB7J63vXS1gUEuyDWOmJDp1eXmY4PfNOroVWgTwdccQbiU0r4JSaoH7cP3YAYrzhyGqETPtI
- LFnJu1rqi4x0g7JIlQqxWnycmIr4Ak7o=
-X-Gm-Gg: ASbGncv4ppnoj+Cmva4qEaso+rod9cdPKQ9q0Nohw73p5WfxcBlPjA5KHsDW5BSF1b3
- jrqnB+5VMZ+lN6Sx8cbPCsgOlY9Y4xzL5eXo7XjeVW7jBvBpn/PSy97uFJEwvjYLXhH9Kd/XEm1
- d/wVYIZbXUMO8VyWi9CvLvYgfAqBpA2D1ZoYfkabJzilR0vwSykV/7/ei38xgy+i2walOWpZGYv
- XijTqheDewEtRhgCqrT7dh2+l3+nijhxpHNg0eah5JVvaW2KTWya5YipAix1VJmnyuFna/5x/Nw
- 0pFc0KcrD0oneIwBOOUOcLGomaGB+YF98di1fHnuYChFaktIMRWAtrpZRvQObOE2pSPmnQenWQG
- c5Ry5CMShfIxlAg==
-X-Google-Smtp-Source: AGHT+IFWUJD/OFJsIi7ionp3U86q+wmuQeZBPMs00ZPJQzBu76WJ8YVwfw1gF+sDPGVltKQOGoQnZvvegokGD9/vJig=
-X-Received: by 2002:a05:7300:7b01:b0:2a4:3593:2c08 with SMTP id
- 5a478bee46e88-2a7249fec39mr7449116eec.1.1764151072733; Wed, 26 Nov 2025
- 01:57:52 -0800 (PST)
+ AJvYcCVt4O/h0qUNc6pc/hFWUmdG3EHesTCUUlsCltsSTc0EtLDglwaXSQeJ8raha9l8OC0uMG305P3U@lists.freedesktop.org
+X-Gm-Message-State: AOJu0YynokzuI7GaQp8qT3NgLIhBa6gbubkQYUEaU96igfnhhZhnvBTS
+ 4tP+mf/G/I1Ph9P+AIXAfkEVvmLu802Gl2iZ4YJM91HG64Mr84foCb5IloJLj8QxQhRJSYu9K3g
+ NP9bdaVNysNhITRU5uDBY6bKvfh5eQ8Y=
+X-Gm-Gg: ASbGnctktkpsBUy6bqKh9fR62WEizfEEqPFOzgI0bTt0Ob1ms0Fn6PDqzk2N/1zpPhW
+ 0rCFeSToDdD0K0WHzI0MnWIeSawTRHJiSLugaH1XnJeABzen/hEbnS1nfCUXDAv7vK7RpKrdz8Z
+ OvRDlQjT7Z/35PIREwJbdud4jd5itYcdT4p+ojnXytaB+tWcRDmIheuPTGe54KhkBMorOJiue3I
+ 6dReJ2iePY62wcv6Y2PDuw5C55rAAnQNJmJbQWzwmuhD+OFHz2q4Llm+jAbRHo+num+Y5D8j3m0
+ AEWk1w+PlBGJ4vBIOYX1tj1fPBTXZnr/sR1VztTNeHlHf8PhtE0VDlOlRYdsLVchGrbpTVuK2ug
+ 8YLzN7daGGS1GPA==
+X-Google-Smtp-Source: AGHT+IH2u/p6uuejiQdBn2FdTVRunkAVdZufiIm+sEmpf2szKbImscQ5SyGn12xniGpqStrNxFPmWHVbL4VJexNgqJw=
+X-Received: by 2002:a05:7300:ec16:b0:2a4:5129:fe99 with SMTP id
+ 5a478bee46e88-2a724bc5450mr11325693eec.2.1764151622004; Wed, 26 Nov 2025
+ 02:07:02 -0800 (PST)
 MIME-Version: 1.0
-References: <20251114233045.2512853-1-ttabi@nvidia.com>
- <20251114233045.2512853-10-ttabi@nvidia.com>
- <20251117231028.GA1095236@joelbox2>
- <0808b509a969458003accdc3be7c262500b305f7.camel@nvidia.com>
- <054d9c84-4231-4662-8847-4028228cd290@nvidia.com>
- <DEI81MO6OJNB.180OOZADPPCV3@nvidia.com>
-In-Reply-To: <DEI81MO6OJNB.180OOZADPPCV3@nvidia.com>
+References: <20251111171315.2196103-1-joelagnelf@nvidia.com>
+ <DEHV08MPF9CH.1GZAWEGC4AVF3@nvidia.com>
+ <095D38BD-A8AA-4BC3-8C24-9454964EB8F8@nvidia.com>
+ <DEI89VUEYXAJ.1IQQPC3QRLITP@nvidia.com>
+ <540391dc-caaf-4ca9-9729-e3147bed3100@nvidia.com>
+In-Reply-To: <540391dc-caaf-4ca9-9729-e3147bed3100@nvidia.com>
 From: Miguel Ojeda <miguel.ojeda.sandonis@gmail.com>
-Date: Wed, 26 Nov 2025 10:57:40 +0100
-X-Gm-Features: AWmQ_bntZ2P7XIQ-a76ZdHb1powt_8RzB70VcFKn6vPRZzYBlZID5TO9jCwn_OA
-Message-ID: <CANiq72mEE7DCPNgJ2FS_c7A9C36GgjkD8G-7nV1oLC9RvSbAjw@mail.gmail.com>
-Subject: Re: [PATCH 09/11] gpu: nova-core: add FalconUCodeDescV2 support
-To: Alexandre Courbot <acourbot@nvidia.com>
-Cc: John Hubbard <jhubbard@nvidia.com>, Timur Tabi <ttabi@nvidia.com>, 
+Date: Wed, 26 Nov 2025 11:06:49 +0100
+X-Gm-Features: AWmQ_bkhJWTAVJBxKsZu1t81P67sTZ90hu6KhDzqOUDEKCI0FkxUuBERQ_mEKds
+Message-ID: <CANiq72n0mW6wSWvk4=R41BK=RWbpeXXjea-c1FZMs8y3sE6bug@mail.gmail.com>
+Subject: Re: [PATCH v2 1/3] rust: helpers: Add list helpers for C linked list
+ operations
+To: John Hubbard <jhubbard@nvidia.com>
+Cc: Alexandre Courbot <acourbot@nvidia.com>,
  Joel Fernandes <joelagnelf@nvidia.com>, 
- "nouveau@lists.freedesktop.org" <nouveau@lists.freedesktop.org>,
- "dakr@kernel.org" <dakr@kernel.org>, 
- "lyude@redhat.com" <lyude@redhat.com>, 
+ "linux-kernel@vger.kernel.org" <linux-kernel@vger.kernel.org>, 
  "rust-for-linux@vger.kernel.org" <rust-for-linux@vger.kernel.org>, 
+ "dri-devel@lists.freedesktop.org" <dri-devel@lists.freedesktop.org>,
+ "dakr@kernel.org" <dakr@kernel.org>, 
+ "airlied@gmail.com" <airlied@gmail.com>, Alistair Popple <apopple@nvidia.com>, 
+ "ojeda@kernel.org" <ojeda@kernel.org>,
+ "alex.gaynor@gmail.com" <alex.gaynor@gmail.com>, 
+ "boqun.feng@gmail.com" <boqun.feng@gmail.com>,
+ "gary@garyguo.net" <gary@garyguo.net>, 
+ "bjorn3_gh@protonmail.com" <bjorn3_gh@protonmail.com>,
+ "lossin@kernel.org" <lossin@kernel.org>, 
+ "a.hindborg@kernel.org" <a.hindborg@kernel.org>,
+ "aliceryhl@google.com" <aliceryhl@google.com>, 
+ "tmgross@umich.edu" <tmgross@umich.edu>, "simona@ffwll.ch" <simona@ffwll.ch>, 
+ "maarten.lankhorst@linux.intel.com" <maarten.lankhorst@linux.intel.com>, 
+ "mripard@kernel.org" <mripard@kernel.org>,
+ "tzimmermann@suse.de" <tzimmermann@suse.de>, Timur Tabi <ttabi@nvidia.com>, 
+ "joel@joelfernandes.org" <joel@joelfernandes.org>, 
+ "elle@weathered-steel.dev" <elle@weathered-steel.dev>, 
+ "daniel.almeida@collabora.com" <daniel.almeida@collabora.com>,
+ Andrea Righi <arighi@nvidia.com>, 
+ "phasta@kernel.org" <phasta@kernel.org>, 
+ "nouveau@lists.freedesktop.org" <nouveau@lists.freedesktop.org>, 
  Nouveau <nouveau-bounces@lists.freedesktop.org>
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
@@ -96,17 +115,18 @@ List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-On Wed, Nov 26, 2025 at 2:06=E2=80=AFAM Alexandre Courbot <acourbot@nvidia.=
-com> wrote:
+On Wed, Nov 26, 2025 at 2:39=E2=80=AFAM John Hubbard <jhubbard@nvidia.com> =
+wrote:
 >
-> IIUC Timur's proposal would not require an Option as a field, just that
-> the method returns one. I tend to agree that this is more idiomatic.
+> Yes. I am increasingly uneasy with the Rust for Linux approach, and
+> now the Nova approach, of adding in "things we might need".
 
-+1, please avoid encoding "states" within integer types and use the
-type system instead.
+Excuse me, what "Rust for Linux approach"?
 
-In fact, where reasonable, please consider defining newtypes around
-certain integers uses as well.
+No, we do not add dead code unless justified, just like everywhere
+else in the Linux kernel.
+
+Yes, there are a few exceptional cases, but it is just that, exceptional.
 
 Cheers,
 Miguel
