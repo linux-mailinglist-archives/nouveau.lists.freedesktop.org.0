@@ -2,105 +2,88 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id 89D79CBAEFE
-	for <lists+nouveau@lfdr.de>; Sat, 13 Dec 2025 13:46:41 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 28E7ECBAF04
+	for <lists+nouveau@lfdr.de>; Sat, 13 Dec 2025 13:46:43 +0100 (CET)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 19BD010EC59;
-	Sat, 13 Dec 2025 12:42:18 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id D596110EC40;
+	Sat, 13 Dec 2025 12:42:16 +0000 (UTC)
 Authentication-Results: gabe.freedesktop.org;
-	dkim=permerror (0-bit key) header.d=gmail.com header.i=@gmail.com header.b="Ox4nF6vF";
+	dkim=pass (1024-bit key; unprotected) header.d=samsung.com header.i=@samsung.com header.b="tiRnR90C";
 	dkim-atps=neutral
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from mail-pl1-f178.google.com (mail-pl1-f178.google.com
- [209.85.214.178])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 93B5C10E599
- for <nouveau@lists.freedesktop.org>; Wed, 26 Nov 2025 10:07:02 +0000 (UTC)
-Received: by mail-pl1-f178.google.com with SMTP id
- d9443c01a7336-297cf964774so9678575ad.2
- for <nouveau@lists.freedesktop.org>; Wed, 26 Nov 2025 02:07:02 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1764151622; x=1764756422; darn=lists.freedesktop.org;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=e2P97JqJJgrSTofOE6L0Vqzh5vWI3dfXbDRlEdNGUic=;
- b=Ox4nF6vFIU1SFiA+ulQbztcjUdRgx6ug80zflZQ7zXolKc/UvudWlp2TKkva14enYK
- cAH18rKKK6a7h2RWr0jw45uZHpPs2/RGRpJGiS9wjC5l5awiE8xadJsNReINvw9DDS07
- nRsM7ilyTwg+UQZVopmoV0kJVU4ujKhUW6MRKot7uRrtyMGhmDSf78jqKXtXXCQio5It
- aueLzGTKy+i4jKf5ZHbp80ZvzuMnNIPeARb8LII1oi+J/H9HExTI6lxgk0RTiCn0zKwJ
- CR6vdFZriDFbKojUggbbPzVUNa6En2xyZeJKf3BmQqs31XJhYLFQRPlsEochLszwJKJ2
- OXnw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1764151622; x=1764756422;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-gg:x-gm-message-state:from
- :to:cc:subject:date:message-id:reply-to;
- bh=e2P97JqJJgrSTofOE6L0Vqzh5vWI3dfXbDRlEdNGUic=;
- b=xLE3/9euAtTZYpnKNO2cXfbp3W4fYI51v+1JUehckDmBDt7OOtdE6sGhwmOdoY7AEY
- tdG+LgbReNSp5zwrW/q+Oed3K671nJoxQY4TrzCS/LelCVeQm9oBxRSTi8DHbztYYw09
- 6V9WIsC+u28UXjuaJnTAhJZNc9jxSvcNs9RNze6Xld0oc87iGNkMbvs98qKc6n4pAdND
- NyO0ah4ErXndaIlWD2eF3OZNsV55VifRJUJr9CMlafzZpQOwcuhtuh/S+rHL9WveGNhm
- KaucBl5yglSZEZvXsDp+mVUibJix1jyPaRcPrUBxcvWRfZdHwe9gnd6B/kl5HmfvxTEb
- dI9Q==
-X-Forwarded-Encrypted: i=1;
- AJvYcCVt4O/h0qUNc6pc/hFWUmdG3EHesTCUUlsCltsSTc0EtLDglwaXSQeJ8raha9l8OC0uMG305P3U@lists.freedesktop.org
-X-Gm-Message-State: AOJu0YynokzuI7GaQp8qT3NgLIhBa6gbubkQYUEaU96igfnhhZhnvBTS
- 4tP+mf/G/I1Ph9P+AIXAfkEVvmLu802Gl2iZ4YJM91HG64Mr84foCb5IloJLj8QxQhRJSYu9K3g
- NP9bdaVNysNhITRU5uDBY6bKvfh5eQ8Y=
-X-Gm-Gg: ASbGnctktkpsBUy6bqKh9fR62WEizfEEqPFOzgI0bTt0Ob1ms0Fn6PDqzk2N/1zpPhW
- 0rCFeSToDdD0K0WHzI0MnWIeSawTRHJiSLugaH1XnJeABzen/hEbnS1nfCUXDAv7vK7RpKrdz8Z
- OvRDlQjT7Z/35PIREwJbdud4jd5itYcdT4p+ojnXytaB+tWcRDmIheuPTGe54KhkBMorOJiue3I
- 6dReJ2iePY62wcv6Y2PDuw5C55rAAnQNJmJbQWzwmuhD+OFHz2q4Llm+jAbRHo+num+Y5D8j3m0
- AEWk1w+PlBGJ4vBIOYX1tj1fPBTXZnr/sR1VztTNeHlHf8PhtE0VDlOlRYdsLVchGrbpTVuK2ug
- 8YLzN7daGGS1GPA==
-X-Google-Smtp-Source: AGHT+IH2u/p6uuejiQdBn2FdTVRunkAVdZufiIm+sEmpf2szKbImscQ5SyGn12xniGpqStrNxFPmWHVbL4VJexNgqJw=
-X-Received: by 2002:a05:7300:ec16:b0:2a4:5129:fe99 with SMTP id
- 5a478bee46e88-2a724bc5450mr11325693eec.2.1764151622004; Wed, 26 Nov 2025
- 02:07:02 -0800 (PST)
+X-Greylist: delayed 369 seconds by postgrey-1.36 at gabe;
+ Wed, 26 Nov 2025 11:40:36 UTC
+Received: from mailout2.w1.samsung.com (mailout2.w1.samsung.com
+ [210.118.77.12])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 2B86A10E545
+ for <nouveau@lists.freedesktop.org>; Wed, 26 Nov 2025 11:40:36 +0000 (UTC)
+Received: from eucas1p2.samsung.com (unknown [182.198.249.207])
+ by mailout2.w1.samsung.com (KnoxPortal) with ESMTP id
+ 20251126113425euoutp0207410ed3fde7d7fb681922cd80c86f37~7i1KQG6Df3162131621euoutp02_;
+ Wed, 26 Nov 2025 11:34:25 +0000 (GMT)
+DKIM-Filter: OpenDKIM Filter v2.11.0 mailout2.w1.samsung.com
+ 20251126113425euoutp0207410ed3fde7d7fb681922cd80c86f37~7i1KQG6Df3162131621euoutp02_
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=samsung.com;
+ s=mail20170921; t=1764156865;
+ bh=Mlk/8cVuM1r8cgr34kGmewo0VCLvDAclx64Kzq7IU10=;
+ h=Date:Subject:To:Cc:From:In-Reply-To:References:From;
+ b=tiRnR90C/z2zgZPKygxThBoTiu4KqlPU0OaQwH6dp6i76ubEfSiAM9znavX/GF7Rb
+ RAFCNSTuOurGjRXsJvkb8/G0My+M92lJmm6hMlawYDQO2TxN8UKncGYm6UuLhBWRpA
+ P0cee2QTEJo4ppVsAjcc2gTALBB+yYyV4JExx53Y=
+Received: from eusmtip1.samsung.com (unknown [203.254.199.221]) by
+ eucas1p2.samsung.com (KnoxPortal) with ESMTPA id
+ 20251126113425eucas1p20472c28098c08344e4348a1ee22407ae~7i1J8Jf2K2271922719eucas1p2R;
+ Wed, 26 Nov 2025 11:34:25 +0000 (GMT)
+Received: from [192.168.1.44] (unknown [106.210.136.40]) by
+ eusmtip1.samsung.com (KnoxPortal) with ESMTPA id
+ 20251126113423eusmtip1f3fa48d667a8b110b0790a7b70bca88e~7i1Ij3pon2329423294eusmtip1h;
+ Wed, 26 Nov 2025 11:34:23 +0000 (GMT)
+Message-ID: <cca5c7e8-d9c4-4e28-8da2-62dd521ceea3@samsung.com>
+Date: Wed, 26 Nov 2025 12:34:23 +0100
 MIME-Version: 1.0
-References: <20251111171315.2196103-1-joelagnelf@nvidia.com>
- <DEHV08MPF9CH.1GZAWEGC4AVF3@nvidia.com>
- <095D38BD-A8AA-4BC3-8C24-9454964EB8F8@nvidia.com>
- <DEI89VUEYXAJ.1IQQPC3QRLITP@nvidia.com>
- <540391dc-caaf-4ca9-9729-e3147bed3100@nvidia.com>
-In-Reply-To: <540391dc-caaf-4ca9-9729-e3147bed3100@nvidia.com>
-From: Miguel Ojeda <miguel.ojeda.sandonis@gmail.com>
-Date: Wed, 26 Nov 2025 11:06:49 +0100
-X-Gm-Features: AWmQ_bkhJWTAVJBxKsZu1t81P67sTZ90hu6KhDzqOUDEKCI0FkxUuBERQ_mEKds
-Message-ID: <CANiq72n0mW6wSWvk4=R41BK=RWbpeXXjea-c1FZMs8y3sE6bug@mail.gmail.com>
-Subject: Re: [PATCH v2 1/3] rust: helpers: Add list helpers for C linked list
- operations
-To: John Hubbard <jhubbard@nvidia.com>
-Cc: Alexandre Courbot <acourbot@nvidia.com>,
- Joel Fernandes <joelagnelf@nvidia.com>, 
- "linux-kernel@vger.kernel.org" <linux-kernel@vger.kernel.org>, 
- "rust-for-linux@vger.kernel.org" <rust-for-linux@vger.kernel.org>, 
- "dri-devel@lists.freedesktop.org" <dri-devel@lists.freedesktop.org>,
- "dakr@kernel.org" <dakr@kernel.org>, 
- "airlied@gmail.com" <airlied@gmail.com>, Alistair Popple <apopple@nvidia.com>, 
- "ojeda@kernel.org" <ojeda@kernel.org>,
- "alex.gaynor@gmail.com" <alex.gaynor@gmail.com>, 
- "boqun.feng@gmail.com" <boqun.feng@gmail.com>,
- "gary@garyguo.net" <gary@garyguo.net>, 
- "bjorn3_gh@protonmail.com" <bjorn3_gh@protonmail.com>,
- "lossin@kernel.org" <lossin@kernel.org>, 
- "a.hindborg@kernel.org" <a.hindborg@kernel.org>,
- "aliceryhl@google.com" <aliceryhl@google.com>, 
- "tmgross@umich.edu" <tmgross@umich.edu>, "simona@ffwll.ch" <simona@ffwll.ch>, 
- "maarten.lankhorst@linux.intel.com" <maarten.lankhorst@linux.intel.com>, 
- "mripard@kernel.org" <mripard@kernel.org>,
- "tzimmermann@suse.de" <tzimmermann@suse.de>, Timur Tabi <ttabi@nvidia.com>, 
- "joel@joelfernandes.org" <joel@joelfernandes.org>, 
- "elle@weathered-steel.dev" <elle@weathered-steel.dev>, 
- "daniel.almeida@collabora.com" <daniel.almeida@collabora.com>,
- Andrea Righi <arighi@nvidia.com>, 
- "phasta@kernel.org" <phasta@kernel.org>, 
- "nouveau@lists.freedesktop.org" <nouveau@lists.freedesktop.org>, 
- Nouveau <nouveau-bounces@lists.freedesktop.org>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-X-Mailman-Approved-At: Sat, 13 Dec 2025 12:40:48 +0000
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH 06/10] rust: kernel: Update ARef and AlwaysRefCounted
+ imports to use sync::aref
+To: Miguel Ojeda <miguel.ojeda.sandonis@gmail.com>,
+ =?UTF-8?Q?Uwe_Kleine-K=C3=B6nig?= <u.kleine-koenig@baylibre.com>
+Cc: Shankari Anand <shankari.ak0208@gmail.com>, Greg Kroah-Hartman
+ <gregkh@linuxfoundation.org>, =?UTF-8?Q?Arve_Hj=C3=B8nnev=C3=A5g?=
+ <arve@android.com>, Todd Kjos <tkjos@android.com>, Martijn Coenen
+ <maco@android.com>, Joel Fernandes <joelagnelf@nvidia.com>, Christian
+ Brauner <brauner@kernel.org>, Carlos Llamas <cmllamas@google.com>, Suren
+ Baghdasaryan <surenb@google.com>, Danilo Krummrich <dakr@kernel.org>, Alice
+ Ryhl <aliceryhl@google.com>, Maarten Lankhorst
+ <maarten.lankhorst@linux.intel.com>, Maxime Ripard <mripard@kernel.org>,
+ Thomas Zimmermann <tzimmermann@suse.de>, David Airlie <airlied@gmail.com>,
+ Simona Vetter <simona@ffwll.ch>, Alexandre Courbot <acourbot@nvidia.com>,
+ "Rafael J . Wysocki" <rafael@kernel.org>, Miguel Ojeda <ojeda@kernel.org>,
+ Alex Gaynor <alex.gaynor@gmail.com>, Igor Korotin
+ <igor.korotin.linux@gmail.com>, Boqun Feng <boqun.feng@gmail.com>, Gary Guo
+ <gary@garyguo.net>, =?UTF-8?Q?Bj=C3=B6rn_Roy_Baron?=
+ <bjorn3_gh@protonmail.com>, Benno Lossin <lossin@kernel.org>, Andreas
+ Hindborg <a.hindborg@kernel.org>, Trevor Gross <tmgross@umich.edu>, Daniel
+ Almeida <daniel.almeida@collabora.com>, Abdiel Janulgue
+ <abdiel.janulgue@gmail.com>, Robin Murphy <robin.murphy@arm.com>,
+ linux-kernel@vger.kernel.org, dri-devel@lists.freedesktop.org,
+ nouveau@lists.freedesktop.org, rust-for-linux@vger.kernel.org,
+ linux-pwm@vger.kernel.org
+Content-Language: en-US
+From: Michal Wilczynski <m.wilczynski@samsung.com>
+In-Reply-To: <CANiq72mQ4cu9wehGKxS92EK2H3kcX8XPpRmv2DdYmn6Ve9iDAw@mail.gmail.com>
+Content-Transfer-Encoding: 8bit
+X-CMS-MailID: 20251126113425eucas1p20472c28098c08344e4348a1ee22407ae
+X-Msg-Generator: CA
+Content-Type: text/plain; charset="utf-8"
+X-RootMTR: 20251125123134eucas1p230415281df788e787f4b71e4d7b3ac3f
+X-EPHeader: CA
+X-CMS-RootMailID: 20251125123134eucas1p230415281df788e787f4b71e4d7b3ac3f
+References: <20251123092438.182251-1-shankari.ak0208@gmail.com>
+ <20251123092438.182251-7-shankari.ak0208@gmail.com>
+ <44gv3fhqppn4fyg5fnxkhhanlbbxr2slqq7k3kr3owx7frpnxw@idgwxlcv4otn>
+ <CGME20251125123134eucas1p230415281df788e787f4b71e4d7b3ac3f@eucas1p2.samsung.com>
+ <CANiq72mQ4cu9wehGKxS92EK2H3kcX8XPpRmv2DdYmn6Ve9iDAw@mail.gmail.com>
+X-Mailman-Approved-At: Sat, 13 Dec 2025 12:40:45 +0000
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -115,18 +98,38 @@ List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-On Wed, Nov 26, 2025 at 2:39=E2=80=AFAM John Hubbard <jhubbard@nvidia.com> =
-wrote:
->
-> Yes. I am increasingly uneasy with the Rust for Linux approach, and
-> now the Nova approach, of adding in "things we might need".
 
-Excuse me, what "Rust for Linux approach"?
 
-No, we do not add dead code unless justified, just like everywhere
-else in the Linux kernel.
+On 11/25/25 13:31, Miguel Ojeda wrote:
+> On Mon, Nov 24, 2025 at 5:10 PM Uwe Kleine-König
+> <u.kleine-koenig@baylibre.com> wrote:
+>>
+>> having no clue about Rust:
+>>
+>> Can this patch be applied independent of the others via the pwm tree? If
+>> I understand correctly it's only patch #10 that depends on the previous
+>> patches, right?
+>>
+>> Is there already a merge plan for this series?
+> 
+> Yeah, if subsystems pick the independent patches at their own pace,
+> then that is great, so please do!
+> 
+> Then, after 1 or 2 cycles, we can do the flag day change on the Rust
+> tree (with any last changes needed Ack'd, but ideally there will be
+> none remaining).
+> 
+> It is what did in similar cases for renaming (or moving across the
+> path hierarchy) things in Rust. For simple things that get Ack'd quick
+> enough by everyone, sometimes we may be able to take everything in the
+> Rust tree.
+> 
+> Thanks!
+> 
+> Cheers,
+> Miguel
+> 
 
-Yes, there are a few exceptional cases, but it is just that, exceptional.
+I think code wise it's fine, provided the subject is fixed like Uwe suggested.
 
-Cheers,
-Miguel
+Acked-by: Michal Wilczynski <m.wilczynski@samsung.com>
