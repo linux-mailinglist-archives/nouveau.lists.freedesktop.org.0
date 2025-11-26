@@ -2,71 +2,79 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id 37F33C891E4
-	for <lists+nouveau@lfdr.de>; Wed, 26 Nov 2025 10:53:10 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 1D2C5C8920E
+	for <lists+nouveau@lfdr.de>; Wed, 26 Nov 2025 10:54:39 +0100 (CET)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id D0BEC10E594;
-	Wed, 26 Nov 2025 09:53:08 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id BA5CC10E597;
+	Wed, 26 Nov 2025 09:54:37 +0000 (UTC)
 Authentication-Results: gabe.freedesktop.org;
-	dkim=pass (2048-bit key; unprotected) header.d=google.com header.i=@google.com header.b="E8sEroEi";
+	dkim=pass (2048-bit key; unprotected) header.d=google.com header.i=@google.com header.b="oXD97pSb";
 	dkim-atps=neutral
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from mail-wm1-f73.google.com (mail-wm1-f73.google.com
- [209.85.128.73])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 5166710E594
- for <nouveau@lists.freedesktop.org>; Wed, 26 Nov 2025 09:53:08 +0000 (UTC)
-Received: by mail-wm1-f73.google.com with SMTP id
- 5b1f17b1804b1-477563a0c75so34728475e9.1
- for <nouveau@lists.freedesktop.org>; Wed, 26 Nov 2025 01:53:08 -0800 (PST)
+Received: from mail-wm1-f74.google.com (mail-wm1-f74.google.com
+ [209.85.128.74])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 80B6E10E599
+ for <nouveau@lists.freedesktop.org>; Wed, 26 Nov 2025 09:54:36 +0000 (UTC)
+Received: by mail-wm1-f74.google.com with SMTP id
+ 5b1f17b1804b1-4779981523fso63172065e9.2
+ for <nouveau@lists.freedesktop.org>; Wed, 26 Nov 2025 01:54:36 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=google.com; s=20230601; t=1764150787; x=1764755587;
+ d=google.com; s=20230601; t=1764150875; x=1764755675;
  darn=lists.freedesktop.org; 
- h=cc:to:from:subject:message-id:references:mime-version:in-reply-to
- :date:from:to:cc:subject:date:message-id:reply-to;
- bh=jhEHhAF1sFWBdc1QzDdCrjT0zY8oot45leW9hxEVcLk=;
- b=E8sEroEicaVxtWiqrT4kH+kUWI049c0LBD9h22yhLUUdwby8CVFgx9FjqqqP0/BwTC
- 4XcUAGYYlAVizYQbAg1rtSDZEAH1ne9mxwpQfEN3bmhtWfIR04gVJIwj4ppViBCG2HUv
- nY6eDTx5BsqMM1J85bozI5vX1zfTUAD085nLSqcSyYRQirZ3ZutZ8YC2P51VAmZUfCRa
- 6vmK2jmDD2PF0SQ9aWhVG5cBZ5zxLVtatAvhLmgVypjGZ5ACpEgT5hK4DXspcQu3rKgS
- jDhMl/Tcdxn/10DwewC8qY3F5Aw+HP2pgnsV2sjwpLMv1fbenaa59dmYWTAkgG66hh5l
- 9jZA==
+ h=content-transfer-encoding:cc:to:from:subject:message-id:references
+ :mime-version:in-reply-to:date:from:to:cc:subject:date:message-id
+ :reply-to; bh=P4pWV52Y/VlAYshTv/rppE52D3hyLd2Ys7b3DAPCZVk=;
+ b=oXD97pSblzFcpySZZISFonpqw++FcC3kQoqU6E4tolPCnkk3QGsKLMEF5QNrccZ3be
+ p0V41kZ81NGR6sKMIEAH7IKCKAkZ5jnXff+oSrrCzMhUNTEl9sCTRIe21zlSFZH2j/39
+ Itln5ReeaOG57zs+QDx2vLiatRpNXtap/kh8YvsOQ/xZA9B5NZAWRadAtwa+0dPDDlur
+ 1qQ+Molfgbq/di7I0mmFpu8IKkYrDXI/l1QFPB9Ocdq1MFgWAaDDetyJ2z7g/PBL0/m5
+ mmuJkkyHpV8fMockXeeB1EP67uQbwJhtPmMhrNvMJS/r/fVLLQoB7yUg3U9daUFOboYY
+ ANEg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1764150787; x=1764755587;
- h=cc:to:from:subject:message-id:references:mime-version:in-reply-to
- :date:x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=jhEHhAF1sFWBdc1QzDdCrjT0zY8oot45leW9hxEVcLk=;
- b=KlzIJL6GrUfhj/F//x3TlY/NR8MvGj0jol9kdWojkrCI3CEwkhL0nTRbuCv6q55xYu
- GzSHT5ipJKI65uvfHkOX1B8+Y42Zhw3/sXeF98M2D85jc5092tTigQ7Qt3Yf7pUsMCDw
- ssIsklge9Z3tKsixbZwgh+QJO4AgkSG9J++PhpK5rKbVfCwBgO4Jl2VpLhaQsthvwnXj
- cGkNyHKAOnNwWzoVjIyMVXzaAn4CdzNFziJb6vsnfcaj6HDXFHNOnB9s2wjV9DDs6LDy
- ncGQscICkTYgHgQwPdKciLSl5LOc25ExI1ljwJTwdedcobDXg6fIaOm51DqckMP/m6/l
- aTzw==
+ d=1e100.net; s=20230601; t=1764150875; x=1764755675;
+ h=content-transfer-encoding:cc:to:from:subject:message-id:references
+ :mime-version:in-reply-to:date:x-gm-message-state:from:to:cc:subject
+ :date:message-id:reply-to;
+ bh=P4pWV52Y/VlAYshTv/rppE52D3hyLd2Ys7b3DAPCZVk=;
+ b=e2BgmCcGttpuNpeHzBB8l+xkPx/cH9J/ef6vtjpX4LFs3LiQeQj+ahApPp1QxdfIk0
+ zA5rH3mfA0+GEypaNwl+/Zjn8nfRg9FnZTOh48fs0ZlNxRbiOAZLluS/gwE8MJobq+Tl
+ 3QGYUiFO1BhwCYAZym83lFJPoDDgraA5ee24WLEs+Eug+7/7vhXjASXoqsPxCvSslYsI
+ baKiueKN25AOVZTrwnPhGKHSwKRJSMLYMY08aHJrtSJvNslEZvN/a8ZF0Yt1brhZtKrA
+ /XO3eA+0eF6pdZlJvLsGnjnO0mXxIQxrYiOAG2+nHl7yqiPAh83WCBnM+rJZ2dJaw0LB
+ qxcA==
 X-Forwarded-Encrypted: i=1;
- AJvYcCUZyLjL0jT0LHxgz4tNDdjLex3Oj2ptw4YAaJv5N9jTFg3p3yBnu/3Bx7T86/2gR9X8ZJscmAwE@lists.freedesktop.org
-X-Gm-Message-State: AOJu0YzwhwQxRe0xSyx58KycdB2ybOvYzmjlsJS7eP45k6BJIlJwzE8/
- xwB8fua+v52M77D2F51XkmwHG8wklbSnm9xlk5QjQJ+huFDtZq8d1puQX6k3jbUIlIH3sWL00Ac
- 8WHjdxTe6i3Jm00N60w==
-X-Google-Smtp-Source: AGHT+IE+qKOTlNOP6qk4XcA7FZuJhhCVo9nCRh/d2GGRWB4YahgXOtDPJUzXQ11aXHlXjufKyykmptnJ4oEGLdo=
-X-Received: from wmkz11.prod.google.com ([2002:a7b:c7cb:0:b0:477:9654:b44c])
+ AJvYcCUF+pXyBQA5+BEADikvm//9Fs4+3LieTODkOCk5up6D+CbPfvsExnMiU/fSbXqwWuLQ4cdoroWC@lists.freedesktop.org
+X-Gm-Message-State: AOJu0YxX3MSRu5VDVIhLWCdlPxHDacXWnPHFptypyt3dat875H/QXtCP
+ asU98vhQDThFrOuN716qN7fJpCRj3RkjLCo8/6Ays7VYN8kDJ0zeHa2SYWQDQBLyaGqUAeTGHAd
+ yKzjMCpCfPR0npsNJ0A==
+X-Google-Smtp-Source: AGHT+IG/3B9kpEdz3dehtGK7evQWMTHrI4wGty5GonhDLixPcoHZ9HaKZwpzZ8t04fw05yHSRgs2R0qwKzxHGLg=
+X-Received: from wmri27-n2.prod.google.com
+ ([2002:a05:600c:8a1b:20b0:477:9d5d:3b50])
  (user=aliceryhl job=prod-delivery.src-stubby-dispatcher) by
- 2002:a05:600c:3b9c:b0:477:af07:dd22 with SMTP id
- 5b1f17b1804b1-47904b24243mr56076495e9.28.1764150786911; 
- Wed, 26 Nov 2025 01:53:06 -0800 (PST)
-Date: Wed, 26 Nov 2025 09:53:06 +0000
-In-Reply-To: <aSaU5lSmtD17U0kT@fedora>
+ 2002:a05:600c:1f85:b0:477:7b30:a6fe with SMTP id
+ 5b1f17b1804b1-477c1116013mr170632525e9.18.1764150875157; 
+ Wed, 26 Nov 2025 01:54:35 -0800 (PST)
+Date: Wed, 26 Nov 2025 09:54:34 +0000
+In-Reply-To: <DEI7BMSG3JTC.1Q0OZIUHCK4ZM@nvidia.com>
 Mime-Version: 1.0
 References: <98227EBD-92F7-40FC-A5A4-3FF3780FB2CB@bne-home.net>
- <aSV1rxXq4KuInexy@google.com> <aSaU5lSmtD17U0kT@fedora>
-Message-ID: <aSbOAsOJbhtkJACJ@google.com>
+ <DEHUHPU6WQ1E.J19KGDPIHN09@nvidia.com>
+ <CAH5fLgipNtk7=ad1dFYMDEdKL5b4LxnewU1w+WgAU0QLa-3C6w@mail.gmail.com>
+ <DEHV24KY55H3.16CA6ALYGJ68A@nvidia.com>
+ <CAH5fLgjUzryZubjfUPfNc_beE80iiptebAcTyFi25OzZkTKR8g@mail.gmail.com>
+ <DEI7BMSG3JTC.1Q0OZIUHCK4ZM@nvidia.com>
+Message-ID: <aSbOWhKIpCBm0NKL@google.com>
 Subject: Re: [PATCH 1/1] drm: nova: Align GEM memory allocation to system page
  size
 From: Alice Ryhl <aliceryhl@google.com>
-To: Brendan Shephard <bshephar@bne-home.net>
-Cc: dakr@kernel.org, acourbot@nvidia.com, joelagnelf@nvidia.com, 
+To: Alexandre Courbot <acourbot@nvidia.com>
+Cc: bshephar@bne-home.net, dakr@kernel.org, joelagnelf@nvidia.com, 
  jhubbard@nvidia.com, airlied@gmail.com, rust-for-linux@vger.kernel.org, 
- nouveau@lists.freedesktop.org, brendan.shephard@gmail.com
+ nouveau@lists.freedesktop.org, brendan.shephard@gmail.com, 
+ Nouveau <nouveau-bounces@lists.freedesktop.org>
 Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: quoted-printable
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -81,41 +89,100 @@ List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-On Wed, Nov 26, 2025 at 03:49:26PM +1000, Brendan Shephard wrote:
-> On Tue, Nov 25, 2025 at 09:23:59AM +0000, Alice Ryhl wrote:
-> > On Fri, Nov 21, 2025 at 02:04:28PM +1000, bshephar@bne-home.net wrote:
-> > >  impl NovaObject {
-> > >      /// Create a new DRM GEM object.
-> > >      pub(crate) fn new(dev: &NovaDevice, size: usize) -> Result<ARef<gem::Object<Self>>> {
-> > > -        let aligned_size = size.next_multiple_of(1 << 12);
-> > > -
-> > > -        if size == 0 || size > aligned_size {
-> > > +        // Check for 0 size or potential usize overflow before calling page_align
-> > > +        if size == 0 || size > usize::MAX - PAGE_SIZE + 1 {
-> > 
-> > Maybe this should use isize::MAX as the maximum size instead? That's a
-> > pretty common maximum size for allocations in Rust and big enough for
-> > everyone.
-> > 
-> > Alice
-> 
-> Thanks for the review Alice. I used usize here because the page_align()
-> function specifically mentions that the provided value should not
-> overflow a ['usize'].
-> https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/tree/rust/kernel/page.rs#n30
-> 
-> I don't think that alone needs to be the deciding factor, but it's worth
-> expressing why I made that decision to begin with. Happy to hear your
-> thoughts, and if you still feel isize::MAX is more appropriate given
-> this information.
+On Wed, Nov 26, 2025 at 09:31:46AM +0900, Alexandre Courbot wrote:
+> On Tue Nov 25, 2025 at 11:59 PM JST, Alice Ryhl wrote:
+> > On Tue, Nov 25, 2025 at 3:55=E2=80=AFPM Alexandre Courbot <acourbot@nvi=
+dia.com> wrote:
+> >>
+> >> On Tue Nov 25, 2025 at 11:41 PM JST, Alice Ryhl wrote:
+> >> > On Tue, Nov 25, 2025 at 3:29=E2=80=AFPM Alexandre Courbot <acourbot@=
+nvidia.com> wrote:
+> >> >>
+> >> >> On Fri Nov 21, 2025 at 1:04 PM JST, bshephar wrote:
+> >> >> > Use page::page_align for GEM object memory allocation to ensure t=
+he
+> >> >> > allocation is page aligned. This ensures that the allocation is p=
+age
+> >> >> > aligned with the system in cases where 4096 is not the default.
+> >> >> > For example on 16k or 64k aarch64 systems this allocation should =
+be
+> >> >> > aligned accordingly.
+> >> >> >
+> >> >> > Signed-off-by: Brendan Shephard <bshephar@bne-home.net>
+> >> >> > ---
+> >> >> >  drivers/gpu/drm/nova/gem.rs | 11 ++++++++---
+> >> >> >  1 file changed, 8 insertions(+), 3 deletions(-)
+> >> >> >
+> >> >> > diff --git a/drivers/gpu/drm/nova/gem.rs b/drivers/gpu/drm/nova/g=
+em.rs
+> >> >> > index 2760ba4f3450..a07e922e25ef 100644
+> >> >> > --- a/drivers/gpu/drm/nova/gem.rs
+> >> >> > +++ b/drivers/gpu/drm/nova/gem.rs
+> >> >> > @@ -3,6 +3,10 @@
+> >> >> >  use kernel::{
+> >> >> >      drm,
+> >> >> >      drm::{gem, gem::BaseObject},
+> >> >> > +    page::{
+> >> >> > +        page_align,
+> >> >> > +        PAGE_SIZE, //
+> >> >> > +    },
+> >> >> >      prelude::*,
+> >> >> >      sync::aref::ARef,
+> >> >> >  };
+> >> >> > @@ -27,12 +31,13 @@ fn new(_dev: &NovaDevice, _size: usize) -> im=
+pl PinInit<Self, Error> {
+> >> >> >  impl NovaObject {
+> >> >> >      /// Create a new DRM GEM object.
+> >> >> >      pub(crate) fn new(dev: &NovaDevice, size: usize) -> Result<A=
+Ref<gem::Object<Self>>> {
+> >> >> > -        let aligned_size =3D size.next_multiple_of(1 << 12);
+> >> >> > -
+> >> >> > -        if size =3D=3D 0 || size > aligned_size {
+> >> >> > +        // Check for 0 size or potential usize overflow before c=
+alling page_align
+> >> >> > +        if size =3D=3D 0 || size > usize::MAX - PAGE_SIZE + 1 {
+> >> >>
+> >> >> `PAGE_SIZE` here is no more correct than the hardcoded `1 << 12` - =
+well,
+> >> >> I'll admit it looks better as a placeholder. :) But the actual alig=
+nment
+> >> >> will eventually be provided elsewhere.
+> >> >
+> >> > What about kernels with 16k pages?
+> >>
+> >> The actual alignment should IIUC be a mix of the GPU and kernel's
+> >> requirements (GPU can also use a different page size). So no matter wh=
+at
+> >> we pick right now, it won't be great but you are right that PAGE_SIZE
+> >> will at least accomodate the kernel.
+> >
+> > In that case, is PAGE_SIZE not the wrong constant? What's the actually
+> > correct constant here?
+> >
+> >> >> >              return Err(EINVAL);
+> >> >> >          }
+> >> >> >
+> >> >> > +        let aligned_size =3D page_align(size);
+> >> >>
+> >> >> `page_align` won't panic on overflow, but it will still return an
+> >> >> invalid size. This is a job for `kernel::ptr::Alignment`, which let=
+'s
+> >> >> you return an error when an overflow occurs.
+> >> >
+> >> > The Rust implementation of page_align() is implemented as (addr +
+> >> > (PAGE_SIZE - 1)) & PAGE_MASK, which definitely will panic on overflo=
+w
+> >> > if the appropriate config options are enabled.
+> >>
+> >> That's right, I skimmed its code too fast. ^_^; All the more reason to
+> >> use `Alignment`.
+> >
+> > Alignment stores values that are powers of two, not multiples of PAGE_S=
+IZE.
+>=20
+> Isn't PAGE_SIZE always a power of two though?
 
-I know that you picked this particular limit to avoid integer overflow.
-
-I think picking a lower limit makes sense because isize::MAX is a
-relatively standard choice for maximum allocation sizes. I think it is a
-nice choice because it means you can always compute 2*x for any index or
-size x without risk of overflow.
-
-But it's up to the nova folks, not me.
+Yes it is. Maybe you can elaborate on how you wanted to use Alignment?
+It sounds like you have something different in mind than what I thought.
 
 Alice
