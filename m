@@ -2,180 +2,76 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id BC407C8CDAC
-	for <lists+nouveau@lfdr.de>; Thu, 27 Nov 2025 06:10:59 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 38CE8C8CE94
+	for <lists+nouveau@lfdr.de>; Thu, 27 Nov 2025 07:25:08 +0100 (CET)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 6355D10E66F;
-	Thu, 27 Nov 2025 05:10:58 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 43DAF10E04D;
+	Thu, 27 Nov 2025 06:25:06 +0000 (UTC)
 Authentication-Results: gabe.freedesktop.org;
-	dkim=pass (2048-bit key; unprotected) header.d=Nvidia.com header.i=@Nvidia.com header.b="DOuYPjhZ";
+	dkim=pass (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="dVjoN0WF";
 	dkim-atps=neutral
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from MW6PR02CU001.outbound.protection.outlook.com
- (mail-westus2azon11012038.outbound.protection.outlook.com [52.101.48.38])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 837D010E66F;
- Thu, 27 Nov 2025 05:10:57 +0000 (UTC)
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=DfbWflOUCnMvpIMm5y8Fm29VcunrDLtXO46VDx7J5v8cCxlsKCy/1ZrCAwbReeEDifYkBeIBC/MgGKLSEiS8t0kc6aRDPrPL2Orssov9V/Y0JtlNY0UzKq0gz9LmBYqEuRM71/UotRD3+++wzyQfXa4YpWpPyvTcBiQuGJiHfyQbQ1sj/DMeUwFGRPHg8uChIlm5aUaSdNE9mAK0gG/7wrtP/Vyztj2FzTJeER2kzNnItlxKojBwRLMd2pvFdHVrNiY0nrLZJHXL34L53JjXaTu8koWxoBkwgo58hvNpyjCALipWXL8EYxumzOZiJEU+P3Hat+XQwb6rmVU8P4/2ZA==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=/NlngqrtHJSW9GwTpLVhipAsYtBlMMKCM/2i4OeUtis=;
- b=H4RSG3haUWjgnQaZdzonmG6Fa//mRTAveg5Z/oGg45/x5PP1yDi59dSc/7Z1LCkN5x6dk8RNM/TtrTXMoXXcVrTGUWEzfIIisEiSG9m69ZMYgNDilHx3mVizGD3QjU+qmw+zwko+lX0XPLavyHMyzTJBGonOUNl8LwqVRHKictLNacVSrbmsZoLGx3bVPLbQdU84gohgJYU05mBWhIrPnnjG910131ImWZx1CB1YG8RPJ+LgpOPMsQfL/nrkqePKVBQ+F03qqWdAzD5ROz0ppNovnk0TOhqD0G50CDvz17b529l9MDsIyGHvr7gMjTdzIOAVUzE4peFQH0qM+UjAUg==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=nvidia.com; dmarc=pass action=none header.from=nvidia.com;
- dkim=pass header.d=nvidia.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=Nvidia.com;
- s=selector2;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=/NlngqrtHJSW9GwTpLVhipAsYtBlMMKCM/2i4OeUtis=;
- b=DOuYPjhZ4rZSEv5WuzgmN4rTmx9kfuqqWbOLpnxeaylHexqyUivWalZrcIQxqA4x0eJMAOsqhrWGDAmyDJ4vhSRhpoJos91Mj1TuMH64Cl9+XRWsVXD92WZZRNESbLDzENMnVLkGH+N+KOaASqNERgWmiZl/fme1xa6KGj8bIhBVBKX+k+Hak9WHMd7MQz7O8Fik9Ec1jeP+o9Wcf7xLtnmZbJ+9YEo8FGkOoKOstLuOVbgIB+K/Y/A1lW42Oh53cz2PjRuzP/WLrqrpSb7RYcaFtXxxKEFPqcfoJ4RDNwRFLUHGxUgqNHegXg4w0IU5S+nhS/495iwzxGO6o+jo/w==
-Authentication-Results: dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=nvidia.com;
-Received: from SN7PR12MB8059.namprd12.prod.outlook.com (2603:10b6:806:32b::7)
- by DS2PR12MB9590.namprd12.prod.outlook.com (2603:10b6:8:279::19) with
- Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9366.12; Thu, 27 Nov
- 2025 05:10:53 +0000
-Received: from SN7PR12MB8059.namprd12.prod.outlook.com
- ([fe80::4ee2:654e:1fe8:4b91]) by SN7PR12MB8059.namprd12.prod.outlook.com
- ([fe80::4ee2:654e:1fe8:4b91%2]) with mapi id 15.20.9366.009; Thu, 27 Nov 2025
- 05:10:53 +0000
-Message-ID: <7529a7b1-b204-44cb-bb34-57161e6b7b8c@nvidia.com>
-Date: Thu, 27 Nov 2025 00:10:49 -0500
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v2 1/3] rust: helpers: Add list helpers for C linked list
- operations
-To: John Hubbard <jhubbard@nvidia.com>, Alexandre Courbot <acourbot@nvidia.com>
-Cc: "linux-kernel@vger.kernel.org" <linux-kernel@vger.kernel.org>,
- "rust-for-linux@vger.kernel.org" <rust-for-linux@vger.kernel.org>,
- "dri-devel@lists.freedesktop.org" <dri-devel@lists.freedesktop.org>,
- "dakr@kernel.org" <dakr@kernel.org>, "airlied@gmail.com"
- <airlied@gmail.com>, Alistair Popple <apopple@nvidia.com>,
- "ojeda@kernel.org" <ojeda@kernel.org>,
- "alex.gaynor@gmail.com" <alex.gaynor@gmail.com>,
- "boqun.feng@gmail.com" <boqun.feng@gmail.com>,
- "gary@garyguo.net" <gary@garyguo.net>,
- "bjorn3_gh@protonmail.com" <bjorn3_gh@protonmail.com>,
- "lossin@kernel.org" <lossin@kernel.org>,
- "a.hindborg@kernel.org" <a.hindborg@kernel.org>,
- "aliceryhl@google.com" <aliceryhl@google.com>,
- "tmgross@umich.edu" <tmgross@umich.edu>, "simona@ffwll.ch"
- <simona@ffwll.ch>,
- "maarten.lankhorst@linux.intel.com" <maarten.lankhorst@linux.intel.com>,
- "mripard@kernel.org" <mripard@kernel.org>,
- "tzimmermann@suse.de" <tzimmermann@suse.de>, Timur Tabi <ttabi@nvidia.com>,
- "joel@joelfernandes.org" <joel@joelfernandes.org>,
- "elle@weathered-steel.dev" <elle@weathered-steel.dev>,
- "daniel.almeida@collabora.com" <daniel.almeida@collabora.com>,
- Andrea Righi <arighi@nvidia.com>, "phasta@kernel.org" <phasta@kernel.org>,
- "nouveau@lists.freedesktop.org" <nouveau@lists.freedesktop.org>,
- Nouveau <nouveau-bounces@lists.freedesktop.org>
-References: <20251111171315.2196103-1-joelagnelf@nvidia.com>
- <DEHV08MPF9CH.1GZAWEGC4AVF3@nvidia.com>
- <095D38BD-A8AA-4BC3-8C24-9454964EB8F8@nvidia.com>
- <DEI89VUEYXAJ.1IQQPC3QRLITP@nvidia.com>
- <F3A7E1BB-883C-4EF4-B245-8E9DD329131F@nvidia.com>
- <03003f10-00c0-44dd-b9df-5763cc1e715f@nvidia.com>
-Content-Language: en-US
-From: Joel Fernandes <joelagnelf@nvidia.com>
-In-Reply-To: <03003f10-00c0-44dd-b9df-5763cc1e715f@nvidia.com>
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
-X-ClientProxiedBy: MN2PR06CA0014.namprd06.prod.outlook.com
- (2603:10b6:208:23d::19) To SN7PR12MB8059.namprd12.prod.outlook.com
- (2603:10b6:806:32b::7)
+Received: from sea.source.kernel.org (sea.source.kernel.org [172.234.252.31])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id BEC4910E16A;
+ Thu, 27 Nov 2025 06:25:05 +0000 (UTC)
+Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
+ by sea.source.kernel.org (Postfix) with ESMTP id E8C52401EF;
+ Thu, 27 Nov 2025 06:25:04 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 2F896C4CEF8;
+ Thu, 27 Nov 2025 06:25:04 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+ s=k20201202; t=1764224704;
+ bh=R4j/+SfWFPfTOjJJhvG8UmzZTElqDhpfnL+sCjoX5ro=;
+ h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
+ b=dVjoN0WFXDayuYp5cxV3lmaSDCsS8/DR5DXmZxjr9SYfUo89CcCyb9A2VkkqU19Ix
+ 1Vo+7H73aAIS4dtrRkZXC+Mk1Hp5Kc4We+YumTsTsmsLoJEDy6g5zkpHsUmNrGfh9V
+ YCEH90Z8IupSR1i57GG1/6cs/aNl3egSRW/hmZJJjNN7mjwD8c84+PULfyEOwCZZci
+ XExXDRNf4g/P9T2Z2OLviian/+3PnoJVBmeNY+2XZz4rN5BkN0lXCJBwSFGHCPdhjv
+ Z/GCJFQsCylPBvzz0QV/WQPqFSuEQS9Fju60FfTIxkw4ouRgZHQqOh3NNLKCAGyY50
+ v+ubILpjzZjLQ==
+Date: Thu, 27 Nov 2025 07:25:01 +0100
+From: Uwe =?utf-8?Q?Kleine-K=C3=B6nig?= <ukleinek@kernel.org>
+To: Michal Wilczynski <m.wilczynski@samsung.com>
+Cc: Miguel Ojeda <miguel.ojeda.sandonis@gmail.com>, 
+ Shankari Anand <shankari.ak0208@gmail.com>,
+ Greg Kroah-Hartman <gregkh@linuxfoundation.org>, 
+ Arve =?utf-8?B?SGrDuG5uZXbDpWc=?= <arve@android.com>,
+ Todd Kjos <tkjos@android.com>, Martijn Coenen <maco@android.com>, 
+ Joel Fernandes <joelagnelf@nvidia.com>, Christian Brauner <brauner@kernel.org>,
+ Carlos Llamas <cmllamas@google.com>, Suren Baghdasaryan <surenb@google.com>, 
+ Danilo Krummrich <dakr@kernel.org>, Alice Ryhl <aliceryhl@google.com>, 
+ Maarten Lankhorst <maarten.lankhorst@linux.intel.com>,
+ Maxime Ripard <mripard@kernel.org>, 
+ Thomas Zimmermann <tzimmermann@suse.de>, David Airlie <airlied@gmail.com>, 
+ Simona Vetter <simona@ffwll.ch>, Alexandre Courbot <acourbot@nvidia.com>, 
+ "Rafael J . Wysocki" <rafael@kernel.org>, Miguel Ojeda <ojeda@kernel.org>, 
+ Alex Gaynor <alex.gaynor@gmail.com>,
+ Igor Korotin <igor.korotin.linux@gmail.com>, 
+ Boqun Feng <boqun.feng@gmail.com>, Gary Guo <gary@garyguo.net>, 
+ =?utf-8?B?QmrDtnJu?= Roy Baron <bjorn3_gh@protonmail.com>,
+ Benno Lossin <lossin@kernel.org>, 
+ Andreas Hindborg <a.hindborg@kernel.org>, Trevor Gross <tmgross@umich.edu>, 
+ Daniel Almeida <daniel.almeida@collabora.com>,
+ Abdiel Janulgue <abdiel.janulgue@gmail.com>, 
+ Robin Murphy <robin.murphy@arm.com>, linux-kernel@vger.kernel.org,
+ dri-devel@lists.freedesktop.org, 
+ nouveau@lists.freedesktop.org, rust-for-linux@vger.kernel.org,
+ linux-pwm@vger.kernel.org
+Subject: Re: [PATCH 06/10] rust: kernel: Update ARef and AlwaysRefCounted
+ imports to use sync::aref
+Message-ID: <5p3nstyadh6txzo22eoerryjhegzuoeods7mscr663ipo4bi5u@ixpxt25lv5qc>
+References: <20251123092438.182251-1-shankari.ak0208@gmail.com>
+ <20251123092438.182251-7-shankari.ak0208@gmail.com>
+ <44gv3fhqppn4fyg5fnxkhhanlbbxr2slqq7k3kr3owx7frpnxw@idgwxlcv4otn>
+ <CGME20251125123134eucas1p230415281df788e787f4b71e4d7b3ac3f@eucas1p2.samsung.com>
+ <CANiq72mQ4cu9wehGKxS92EK2H3kcX8XPpRmv2DdYmn6Ve9iDAw@mail.gmail.com>
+ <cca5c7e8-d9c4-4e28-8da2-62dd521ceea3@samsung.com>
 MIME-Version: 1.0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: SN7PR12MB8059:EE_|DS2PR12MB9590:EE_
-X-MS-Office365-Filtering-Correlation-Id: 0c9a156b-6839-418e-f69d-08de2d7356dd
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0;ARA:13230040|366016|376014|7416014|1800799024;
-X-Microsoft-Antispam-Message-Info: =?utf-8?B?Z3gxMElXdk1nNXBtR0laWlBtVHhnR3dUdmxOT0lCVnVwdFpmS0xhbFF1dkIz?=
- =?utf-8?B?ejhnWlhnWGQzdU93MWc4UjUxaGtjd1o3SVlIRDJNdU1RMlZTMzhQTVJmejVC?=
- =?utf-8?B?TXZ6YVpPTElVdDNKM3ZtbjJQUDJYaURKYXFVZ0ZFbkJ4WmsyeXZXckpDR2Vh?=
- =?utf-8?B?cE9uTWNuZkRqUllMVnp3ei9GV3liT3ZMVzlpNkh0WHlJY2RKQTZyc0o1VlAx?=
- =?utf-8?B?NDBaMlBMRG91dGpGV0pRMEphbENRWERwMjNacFZRV1loY2dNWmEzY3JVcEF5?=
- =?utf-8?B?RHl3MGNDR1FvUThKUG5jbE9yWU8xcUsyK1gwRlR3MlRyNkg0STZPZjdTR2g3?=
- =?utf-8?B?L1lSclgzbzNnN0lLVGhyQzU2T3NBUVdNYWFNcTA4MEI2NEF4TFRkM3lkc0V2?=
- =?utf-8?B?RnFXaHRHMlZRUzcrL0tyb1NLQTVUZlB0Z2JIeCsyRlF4UnRkUEFBYUcwanZZ?=
- =?utf-8?B?N09vUDBoT1dheHp4MXgzR0o0RWN1VmdFSlZ2NDVoU3cxK3pxcG02QjE1ZEZ5?=
- =?utf-8?B?bFNwd3JGa0FpYzNHOUZOckJvalI0cm9vYTFGV2R3SW9YSjFnM25sMnZSSC95?=
- =?utf-8?B?amcxVnhmZHovWTVZUWQwSGN4WnhEWE0vVzdSMzdobStZSlVWMUR3cWp6a0xB?=
- =?utf-8?B?Rm4vVnBPd01CbGlqL2hxbWJhODF6OXIrWGpBUWZtdmxLVDFkbjBOdE9NOVVs?=
- =?utf-8?B?S0ErZVh6cnZlWGhYNTN3UWV6UGVRdVlGeXlqd0VSd0YraHBqU1RJMWd6NUVR?=
- =?utf-8?B?N2twYk9LUjVOSGRwYWhiQzBzY1pZbm0vV0g4bzFUZWw5cjJEQVpPS09IWXJ5?=
- =?utf-8?B?bFo2RUJqSmRrKzF1aDJMcy9WTCt0ZjRUMVZNVlQ4SjZZN0VNeXM2dW5EUzRU?=
- =?utf-8?B?Ykxpb1FKUmlTdTVnd01USnE3dENlM2FXWGloU2RlUndHM2NrYUJhWms1TXZ3?=
- =?utf-8?B?L21GNkRjKzJuRkZ3RmNrNU9DUk5pcTEzUithTnIzanBSRWRnMnAxV3NaUDJT?=
- =?utf-8?B?eTdCaVpyTWNGZFVNUG1UemxzcEU4bmhTTC90MWhEcWFndXhmcEQzTk1ENno3?=
- =?utf-8?B?Y213ZHJwem5zdW5NZFBSSFE5ajJoS0hUbTJxZFBQUkh2d2o2NTB2czZ4Zk9N?=
- =?utf-8?B?OXhwWFpoMWJiTHVycG55ZmVjUnpaaUcyWW9ua1M4bDJZQUtoT2VRY0FaNi9U?=
- =?utf-8?B?ck1xWFk4Uk5YQ2svQnVZWUNRSkZEaEV3bFZrVjMvenV4N1ZxYWNmZlNYQmRl?=
- =?utf-8?B?V2xGWlVjUVVpYURZdEdQeVArSysySTRtNnpyMTNFb05VMUZUeFpHczJCN0FV?=
- =?utf-8?B?NGh0eTN3emtpeVA1SmdNNWVWOUVYSVNNUTZrcXpEd2ZnaCtDVlFPRDVXZ29S?=
- =?utf-8?B?TUVpdkpoVWVzbkNZUzhDbVIwdXBQYnpaTEpEMkNoYXFkRUZzM3BjaG9JaWg4?=
- =?utf-8?B?TThZeHVrZzFFanFPcDV1aE1pU3h1cEx5Smh2WGtmeFpLb3orODlrU3BVTzg2?=
- =?utf-8?B?SWFISm1sTThPRUNJUXNSMEtESkFRUEhyM21LM1VoR3hzQ0dXMENid1hDSDFR?=
- =?utf-8?B?NEVhS0NvMEhBL2NjcFhWNVo0Sm1LTnJqTERCTGpjWEdTUFc1cFZpTThjSmdm?=
- =?utf-8?B?d09wUFNMaFFacTl0UC81aURvdG9wRVRwU2tNT3dZV0t2bURxdnZXYXBKcG9P?=
- =?utf-8?B?ajkxejU4OTJod01SczNRNTZBYTI1eFE5bStYczQ2MTMxZXlha1p1dnh3NTJt?=
- =?utf-8?B?UWlITk1TM3pJOEl3QzBWaExvZklqMlJySGh2cW13cDBDcHlSTjZGSlZJMG9F?=
- =?utf-8?B?T3ZJUHBSbm9vSzNrVkZYK3FBTHJPYzM3czlFWkZBMmpjZHZFYWxMcnhXZVZ4?=
- =?utf-8?B?allaYVYrdHZBV0hFVHZXMVpDeXhpUktrZ2w3REtudU5lSi9zcXRzQXUwNkFF?=
- =?utf-8?Q?31DvKQpdu0IONRvs5he/+hhxoArLmneg?=
-X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
- IPV:NLI; SFV:NSPM; H:SN7PR12MB8059.namprd12.prod.outlook.com; PTR:; CAT:NONE;
- SFS:(13230040)(366016)(376014)(7416014)(1800799024); DIR:OUT; SFP:1101; 
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?YmpRWTRXQlpWQyt6eU9neGtSTW5RS0ZiK2ZkTjlNVUtrdzhpVkozSVh3TU00?=
- =?utf-8?B?NXpNaXQwMGpKRWJuYWRpdjJNTkJ1SW83bm02dWhsRElXN1QxUWl4SVA0bG90?=
- =?utf-8?B?K21Nd1l2dDNTNjZrSWF1VWI3OTFKSTZCN0ZTNlV4VlRDYi80aEJzYkNQZEJh?=
- =?utf-8?B?UTRnM2pVZmtmbnVmS3FVVU1tbFZsM3hDeGpOaE5hdjFLRDZCU054S0h0WHZF?=
- =?utf-8?B?UkY5Qzd1WldpdUcyWEZVTk8vR3Z5T3lIazVNdDV5enlzTTRQcHU0WTJUNVZO?=
- =?utf-8?B?YlRmcGNwc0YwZldGcFVTZjNEWHIzYVdqNGVzQ000SWpkbEJoZTEwcU9xWU44?=
- =?utf-8?B?MVdFL1BmNUJLaDhabGJDVjFrR29PVXVQTWtOTmFIekRTZ1FHZFloc3ZxVTJO?=
- =?utf-8?B?MzByd2c4S21xWnlaVitCZHJnM3BxSEZwUzhrY3lEV3VtWmpKTkozWkFMSlBa?=
- =?utf-8?B?OHdCcVB3eGFnQmZvRVNxMmFDUVNaZmNrL0Y5UUxRbFZXcXRMRktWQ1BIdWg5?=
- =?utf-8?B?ZkgyYXQxbUJPOG1vWnVvMmtjZURhN3dCdGo2OWM5UGVNYUtzc2JzOW1MSytP?=
- =?utf-8?B?dTdudnREeHczUk5MK1VObDZQaEQ2bTZqUXd1MVY5TTl2b2prMTY4cGtpZWV3?=
- =?utf-8?B?RXRjZmVVS2dRMG5uMjRNSFR1UVhnYVlsUFVaWTJqZkVHKzRySk9MakczWjl1?=
- =?utf-8?B?bVRZMitydWpkUTRPc1B6eVZKRGU3TVJmY3hLdG5rUzZhY2hRQkdUSmZ5SDlT?=
- =?utf-8?B?TnRKWmRYMGtNYUVPQUNFL1RIVDdSeVZGSCtQcElPcGhBZjBacG5kbHNQZlg2?=
- =?utf-8?B?cTJ0bk1nOGV1bDJXRFJyR1Jac2hWV2hGWVJLSEFCNWhqTkhXZndIei8zUGlP?=
- =?utf-8?B?M2FHWWQzZWVLRDREY2dtQ01YbWNIanVoeUIydlIra0hzR2d3VHErcXNETmNR?=
- =?utf-8?B?R1Y2N3pBMEk1aFladzUzNll3bFpCOVNHZVkxZlYrM0x1NURlajlvd0UwT3Fu?=
- =?utf-8?B?MHNXR05sRElzUFVNNnAwRWMxVkRIOCtzRnJWbkhTcEw1YWNnMXZhMG8xOE9V?=
- =?utf-8?B?RTlmOVNNcmhmMUFRVmQ4Q2lrN2UzN082Z2hOZldrbWNGSWovSVFxQ1VlQnlR?=
- =?utf-8?B?WEY1eGk4R2x2dVR1aHdKVjREZjFYRkFrc0ttUVdVQVRHdU9Jd1FKd0tVY3dQ?=
- =?utf-8?B?eVpXM3hkbmg2TlliN3A0RG1nMTE4cXRYSkNQZ3AzcitEWXVTTzFnOXpibmV4?=
- =?utf-8?B?VUgrREhtK2E3MHNGaENRK2tML1lRSEE3eEkrNW1JY1dXU2NEdHZXTzZCek8x?=
- =?utf-8?B?cWhzTXNWR0poaDFGbGJsS2ZPN1RTWFloNlI5aGRKakc4NXNnMElXUTRGQWRT?=
- =?utf-8?B?NE9PVkhFcWxkeVdzNUNyVHRTeFFRZEQ3NmhMbWV0UWtDYTViUSsxcE1jSnUr?=
- =?utf-8?B?N3ZsR250VHpsRDV2NUg2d3VEWXNXZ2YyL0dpWG9samhjbVEvcnVmYml0Vnhx?=
- =?utf-8?B?NXo1T3R3WjF5NGZUWmh6N0RYT3hlMkxzUXkyQURYcGppWjRpblVyeFQxdCt3?=
- =?utf-8?B?cGh3dElLTUFTOXhKSS8zTWtRdFI1b2RiQ1VPTDVjTmx1QU0wUEJubThlMmdl?=
- =?utf-8?B?anprajBDL2JGQkRpL1BFT29nOXVHbDNBcERxWi9RQXlGYU0vRk9KTlFJREZH?=
- =?utf-8?B?NDcvdCswS1UxcjVzazloYkhwQ1d6dHpwZFJhbGp0ZXBMS0lpRWFhdnVpQ1gw?=
- =?utf-8?B?Rk5Ucjc3MEJCVTBnQmZhMGJjQ1JnWWJCdjFzTmUwaFFWMWR2N1I3cHF0RFhU?=
- =?utf-8?B?TTNoNFRYc2dVSWQ3SU93eEdHVjFBbEY0cnNnaVdFbEd4bTRWS0Z3S3BvckJt?=
- =?utf-8?B?UGNvRUIvTzFiQ3AzSUhkL2kzQ1p2ZFQ2MklEbDl4WkNqa2NSa3hpYUVsQWxw?=
- =?utf-8?B?Q1dkdzdQRkhpN296Q3RTMFMxbmNiMEtBQUZNNGlKdEFpTGlUK3dHUDVtWllk?=
- =?utf-8?B?L3hFYkVYZjEyWjhCVXJOR3RqL1hWcjRlbHBlMloyeDRONGNKSzB1U2xDa1R0?=
- =?utf-8?B?ZGl0SjJwQ3VnRnU4WkRPaWtyOHQ4d0ZqeW1COHpXMlVOUEdPTk1vaWhNUUkx?=
- =?utf-8?Q?knKChIxV6OQNklUpWUDR79w0/?=
-X-OriginatorOrg: Nvidia.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 0c9a156b-6839-418e-f69d-08de2d7356dd
-X-MS-Exchange-CrossTenant-AuthSource: SN7PR12MB8059.namprd12.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 27 Nov 2025 05:10:53.7119 (UTC)
-X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
-X-MS-Exchange-CrossTenant-Id: 43083d15-7273-40c1-b7db-39efd9ccc17a
-X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: N2SkjAa66N2uq3fhO9bomh3NAG/FbtzI4jGYPz6vH92TNeW0wBUdj2hi9UQncAlh2DSh/OzjVqB/pBqXszrCew==
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: DS2PR12MB9590
+Content-Type: multipart/signed; micalg=pgp-sha512;
+ protocol="application/pgp-signature"; boundary="vfuv755wwcx3lvvj"
+Content-Disposition: inline
+In-Reply-To: <cca5c7e8-d9c4-4e28-8da2-62dd521ceea3@samsung.com>
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -191,29 +87,77 @@ Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
 
+--vfuv755wwcx3lvvj
+Content-Type: text/plain; protected-headers=v1; charset=utf-8
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
+Subject: Re: [PATCH 06/10] rust: kernel: Update ARef and AlwaysRefCounted
+ imports to use sync::aref
+MIME-Version: 1.0
 
-On 11/26/2025 3:57 PM, John Hubbard wrote:
->  
->> I am torn on this. On the one hand, if someone changes how list_head api works, then the rust side breaks 
-> OK, this is not going to happen, at list not without a truly epic, long-term
-> effort, accompanied by *lots* of publicity. The list_head API is just too
-> foundational to change easily.
-> 
-> It's been stable since *at least* 2006. The only change since then has been
-> to add WRITE_ONCE() wrappers to the INIT_LIST_HEAD implementation--and that
-> is not an API change.
-> 
-> Anything is possible, but this is sufficiently far out there that it should
-> not count for much here.
-> 
-> (though that is easy to flag though via doc tests). On the other hand, we have the function call overhead you pointed and we are dealing with the pointers in rust directly anyway in some cases.
-> 
-> Whereas this is very significant! We really, really do not want to accept
-> a performance loss vs. C, without an excellent justification.
-> 
-> So I think you've made the right decision. The above is just to help
-> solidify the reasons why.
+Hello,
 
-Yeah, these are good points. Thanks John.
+On Wed, Nov 26, 2025 at 12:34:23PM +0100, Michal Wilczynski wrote:
+> On 11/25/25 13:31, Miguel Ojeda wrote:
+> > On Mon, Nov 24, 2025 at 5:10=E2=80=AFPM Uwe Kleine-K=C3=B6nig
+> > <u.kleine-koenig@baylibre.com> wrote:
+> >>
+> >> having no clue about Rust:
+> >>
+> >> Can this patch be applied independent of the others via the pwm tree? =
+If
+> >> I understand correctly it's only patch #10 that depends on the previous
+> >> patches, right?
+> >>
+> >> Is there already a merge plan for this series?
+> >=20
+> > Yeah, if subsystems pick the independent patches at their own pace,
+> > then that is great, so please do!
+> >=20
+> > Then, after 1 or 2 cycles, we can do the flag day change on the Rust
+> > tree (with any last changes needed Ack'd, but ideally there will be
+> > none remaining).
+> >=20
+> > It is what did in similar cases for renaming (or moving across the
+> > path hierarchy) things in Rust. For simple things that get Ack'd quick
+> > enough by everyone, sometimes we may be able to take everything in the
+> > Rust tree.
+>=20
+> I think code wise it's fine, provided the subject is fixed like Uwe sugge=
+sted.
+>=20
+> Acked-by: Michal Wilczynski <m.wilczynski@samsung.com>
 
- - Joel
+OK, I applied it to
+
+	https://git.kernel.org/pub/scm/linux/kernel/git/ukleinek/linux.git pwm/for=
+-nexxt
+
+=2E I will rebase this branch to v6.19-rc1 once that's released and then
+send it to Linus for v6.20-rc1 (assuming he has so many fingers and toes
+to not switch to 7.0 before :-).
+
+If it turns out to go in via the rust tree, tell me, then I'll drop it.
+In that case take my
+
+Acked-by: Uwe Kleine-K=C3=B6nig <ukleinek@kernel.org>
+
+Best regards and thanks for the patch and the reviews,
+Uwe
+
+--vfuv755wwcx3lvvj
+Content-Type: application/pgp-signature; name="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iQEzBAABCgAdFiEEP4GsaTp6HlmJrf7Tj4D7WH0S/k4FAmkn7roACgkQj4D7WH0S
+/k6ZHwf+Noz5chJYLoR5w2W8NQkWrDZTPRSGfLRgyvS2Ips8wejkfM7vURYuz3d4
+uxK4jTwvI8zJhG3Y6yDSgjZqAjPq1wX5xOy1AGKOJvBUNn+T6P4vgxkhbNOG8o1R
+NU5jowT5s1Kg15tbR7yBxCkHUiJlBSgMHHYiRNZyl/i/RtjgUzDKELZq7bF2WyF0
+LTdzLQrDUm1MwnMAEjJLOsavVruTRiSuPhx/DeknD56cASrCzieJENj0nrFlYQac
+whEs9Yey9+fXN1xV/LJFqQnWKnzBERchqxNNjSA7NuV1eQcNpBO8Oiobtm5nCmR0
+G3b2Qc7jMdTphZ2eYtG/GoiFK1RPMA==
+=OFiN
+-----END PGP SIGNATURE-----
+
+--vfuv755wwcx3lvvj--
