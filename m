@@ -2,74 +2,84 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id 42F06C92528
-	for <lists+nouveau@lfdr.de>; Fri, 28 Nov 2025 15:27:23 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 7BA51C92E3C
+	for <lists+nouveau@lfdr.de>; Fri, 28 Nov 2025 19:17:32 +0100 (CET)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 2BB0710E8F0;
-	Fri, 28 Nov 2025 14:27:21 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id AFCE410E78A;
+	Fri, 28 Nov 2025 18:17:29 +0000 (UTC)
 Authentication-Results: gabe.freedesktop.org;
-	dkim=pass (2048-bit key; unprotected) header.d=collabora.com header.i=@collabora.com header.b="VWeWGmEY";
+	dkim=pass (1024-bit key; unprotected) header.d=collabora.com header.i=daniel.almeida@collabora.com header.b="Pl3GZYY+";
 	dkim-atps=neutral
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from bali.collaboradmins.com (bali.collaboradmins.com
- [148.251.105.195])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 8A99610E8E5;
- Fri, 28 Nov 2025 14:27:19 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=collabora.com;
- s=mail; t=1764340038;
- bh=MCNZ7/JOKVOKMS2Ye0Z5CGLQlCRGTTYsDLTxzMvltaE=;
- h=Date:From:To:Cc:Subject:In-Reply-To:References:From;
- b=VWeWGmEYeGIgOvnLOSv8vEZiGfLixdNRBrF3Bgr0AQUVMMk6cw7rC3fmfJScOHhk0
- dq3yDCG0wySHJ0aZbKRoxq0re1kYfYMGz3whg8KFAuKb5XNE9DLT5nB71E51SK/Cf2
- nU88JdaCMFOf/JFtsbIkvVK/L4VXruBPjCG4JH+y31ngZIHhAqW8x/WXC5RaGIiwIz
- ys2oaPzY/4viwi7a5+jNUkoheY6zfcvJSf+O49BorhP0pEa/0c+Mp/VcXdioCRFuRR
- zAelT7RVIaYa9P/7f4yeLE3FDFRXQD8ExFh2rZc7tqfsDgRgBQiJBEP2wg5bE0Nm1G
- S3cnWYoaDhB2g==
-Received: from fedora (unknown [IPv6:2a01:e0a:2c:6930:d919:a6e:5ea1:8a9f])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange ECDHE (prime256v1) server-signature RSA-PSS (4096 bits)
- server-digest SHA256) (No client certificate requested)
- (Authenticated sender: bbrezillon)
- by bali.collaboradmins.com (Postfix) with ESMTPSA id A7BC717E0EDB;
- Fri, 28 Nov 2025 15:27:16 +0100 (CET)
-Date: Fri, 28 Nov 2025 15:27:13 +0100
-From: Boris Brezillon <boris.brezillon@collabora.com>
-To: Alice Ryhl <aliceryhl@google.com>
-Cc: Danilo Krummrich <dakr@kernel.org>, Daniel Almeida
- <daniel.almeida@collabora.com>, Matthew Brost <matthew.brost@intel.com>,
- "Thomas =?UTF-8?B?SGVsbHN0csO2bQ==?=" <thomas.hellstrom@linux.intel.com>,
- Maarten Lankhorst <maarten.lankhorst@linux.intel.com>, Maxime Ripard
- <mripard@kernel.org>, Thomas Zimmermann <tzimmermann@suse.de>, David Airlie
- <airlied@gmail.com>, Simona Vetter <simona@ffwll.ch>, Steven Price
- <steven.price@arm.com>, Liviu Dudau <liviu.dudau@arm.com>, Miguel Ojeda
- <ojeda@kernel.org>, Boqun Feng <boqun.feng@gmail.com>, Gary Guo
- <gary@garyguo.net>, "=?UTF-8?B?QmrDtnJu?= Roy Baron"
- <bjorn3_gh@protonmail.com>, Benno Lossin <lossin@kernel.org>, Andreas
- Hindborg <a.hindborg@kernel.org>, Trevor Gross <tmgross@umich.edu>, Frank
- Binns <frank.binns@imgtec.com>, Matt Coster <matt.coster@imgtec.com>, Rob
- Clark <robin.clark@oss.qualcomm.com>, Dmitry Baryshkov <lumag@kernel.org>,
- Abhinav Kumar <abhinav.kumar@linux.dev>, Jessica Zhang
- <jessica.zhang@oss.qualcomm.com>, Sean Paul <sean@poorly.run>, Marijn
- Suijten <marijn.suijten@somainline.org>, Lyude Paul <lyude@redhat.com>,
- Lucas De Marchi <lucas.demarchi@intel.com>, Rodrigo Vivi
- <rodrigo.vivi@intel.com>, Sumit Semwal <sumit.semwal@linaro.org>,
- "Christian =?UTF-8?B?S8O2bmln?=" <christian.koenig@amd.com>,
- dri-devel@lists.freedesktop.org, linux-kernel@vger.kernel.org,
- rust-for-linux@vger.kernel.org, linux-arm-msm@vger.kernel.org,
- freedreno@lists.freedesktop.org, nouveau@lists.freedesktop.org,
- intel-xe@lists.freedesktop.org, linux-media@vger.kernel.org,
- linaro-mm-sig@lists.linaro.org
-Subject: Re: [PATCH 3/4] drm/gpuvm: use const for drm_gpuva_op_* ptrs
-Message-ID: <20251128152713.15bf1c37@fedora>
-In-Reply-To: <20251128-gpuvm-rust-v1-3-ebf66bf234e0@google.com>
-References: <20251128-gpuvm-rust-v1-0-ebf66bf234e0@google.com>
- <20251128-gpuvm-rust-v1-3-ebf66bf234e0@google.com>
-Organization: Collabora
-X-Mailer: Claws Mail 4.3.1 (GTK 3.24.51; x86_64-redhat-linux-gnu)
-MIME-Version: 1.0
-Content-Type: text/plain; charset=US-ASCII
-Content-Transfer-Encoding: 7bit
+Received: from sender3-pp-f112.zoho.com (sender3-pp-f112.zoho.com
+ [136.143.184.112])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 2439C10E78A;
+ Fri, 28 Nov 2025 18:17:28 +0000 (UTC)
+ARC-Seal: i=1; a=rsa-sha256; t=1764353846; cv=none; 
+ d=zohomail.com; s=zohoarc; 
+ b=Jox1fFDdDRfcOoaUgQo3oiYvtsKKyp/YmElZftXBiNabSoJDMwjAeZ8QCxGMVjAc4KOLw0WaxhklQDsQt8rSajaMg4RAhi+ZXarYcT8FwyULXgvdbcj4WxP8NbpmDel9q0q+dlHbBTZgVPBR/xjImt6sQlF4dZzDIf1fBj8Iu7U=
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=zohomail.com;
+ s=zohoarc; t=1764353846;
+ h=Content-Type:Content-Transfer-Encoding:Cc:Cc:Date:Date:From:From:In-Reply-To:MIME-Version:Message-ID:References:Subject:Subject:To:To:Message-Id:Reply-To;
+ bh=j4ivFqigThk49301zG4PXOGvB2HvqPMCvI/Ch9oE6HM=; 
+ b=BuS1PoU0dfPkp4tWlSJ5l50GqoWc8lALMKL/6XCHaNkVF0o+jg9dgksFBUdQUnca6LjnA41fIJJjW3hFqYTGxXXkYTjaP9z5ER0Eht6ZdYtW0JpodVBAptOG3yx3QIkxEWjqXy8mARDZ6uwi/1tWXyIwtMfqwSvsbLvDnvR03ug=
+ARC-Authentication-Results: i=1; mx.zohomail.com;
+ dkim=pass  header.i=collabora.com;
+ spf=pass  smtp.mailfrom=daniel.almeida@collabora.com;
+ dmarc=pass header.from=<daniel.almeida@collabora.com>
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; t=1764353846; 
+ s=zohomail; d=collabora.com; i=daniel.almeida@collabora.com;
+ h=Content-Type:Mime-Version:Subject:Subject:From:From:In-Reply-To:Date:Date:Cc:Cc:Content-Transfer-Encoding:Message-Id:Message-Id:References:To:To:Reply-To;
+ bh=j4ivFqigThk49301zG4PXOGvB2HvqPMCvI/Ch9oE6HM=;
+ b=Pl3GZYY+Ovwc5F3PMyeD3yvPF1/f3kJCS8Av5PgSmlwKTg11xBIaD/g1eWjGdcE5
+ viCH5seUu2P6NrKPv/h3v6AVMEsi32WUrbSFFC1HGpsaYlhRztN26MZ3XSJyzLoUVWm
+ QM+nFM7x5XKLljDuPFPUW9spJ0bgc0U31Z2femyM=
+Received: by mx.zohomail.com with SMTPS id 1764353845000735.4598349893454;
+ Fri, 28 Nov 2025 10:17:25 -0800 (PST)
+Content-Type: text/plain;
+	charset=utf-8
+Mime-Version: 1.0 (Mac OS X Mail 16.0 \(3826.700.81\))
+Subject: Re: [PATCH v2 1/3] rust: helpers: Add list helpers for C linked list
+ operations
+From: Daniel Almeida <daniel.almeida@collabora.com>
+In-Reply-To: <DEI89VUEYXAJ.1IQQPC3QRLITP@nvidia.com>
+Date: Fri, 28 Nov 2025 15:17:07 -0300
+Cc: Joel Fernandes <joelagnelf@nvidia.com>,
+ "linux-kernel@vger.kernel.org" <linux-kernel@vger.kernel.org>,
+ "rust-for-linux@vger.kernel.org" <rust-for-linux@vger.kernel.org>,
+ "dri-devel@lists.freedesktop.org" <dri-devel@lists.freedesktop.org>,
+ "dakr@kernel.org" <dakr@kernel.org>,
+ "airlied@gmail.com" <airlied@gmail.com>,
+ Alistair Popple <apopple@nvidia.com>,
+ "ojeda@kernel.org" <ojeda@kernel.org>,
+ "alex.gaynor@gmail.com" <alex.gaynor@gmail.com>,
+ "boqun.feng@gmail.com" <boqun.feng@gmail.com>,
+ "gary@garyguo.net" <gary@garyguo.net>,
+ "bjorn3_gh@protonmail.com" <bjorn3_gh@protonmail.com>,
+ "lossin@kernel.org" <lossin@kernel.org>,
+ "a.hindborg@kernel.org" <a.hindborg@kernel.org>,
+ "aliceryhl@google.com" <aliceryhl@google.com>,
+ "tmgross@umich.edu" <tmgross@umich.edu>,
+ "simona@ffwll.ch" <simona@ffwll.ch>,
+ "maarten.lankhorst@linux.intel.com" <maarten.lankhorst@linux.intel.com>,
+ "mripard@kernel.org" <mripard@kernel.org>,
+ "tzimmermann@suse.de" <tzimmermann@suse.de>,
+ John Hubbard <jhubbard@nvidia.com>, Timur Tabi <ttabi@nvidia.com>,
+ "joel@joelfernandes.org" <joel@joelfernandes.org>,
+ "elle@weathered-steel.dev" <elle@weathered-steel.dev>,
+ Andrea Righi <arighi@nvidia.com>, "phasta@kernel.org" <phasta@kernel.org>,
+ "nouveau@lists.freedesktop.org" <nouveau@lists.freedesktop.org>,
+ Nouveau <nouveau-bounces@lists.freedesktop.org>
+Content-Transfer-Encoding: quoted-printable
+Message-Id: <5F21F7D7-D0E7-4B25-AC3E-D21331EE4A1F@collabora.com>
+References: <20251111171315.2196103-1-joelagnelf@nvidia.com>
+ <DEHV08MPF9CH.1GZAWEGC4AVF3@nvidia.com>
+ <095D38BD-A8AA-4BC3-8C24-9454964EB8F8@nvidia.com>
+ <DEI89VUEYXAJ.1IQQPC3QRLITP@nvidia.com>
+To: Alexandre Courbot <acourbot@nvidia.com>
+X-Mailer: Apple Mail (2.3826.700.81)
+X-ZohoMailClient: External
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -84,83 +94,119 @@ List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-On Fri, 28 Nov 2025 14:14:17 +0000
-Alice Ryhl <aliceryhl@google.com> wrote:
 
-> These methods just read the values stored in the op pointers without
-> modifying them, so it is appropriate to use const ptrs here.
-> 
-> This allows us to avoid const -> mut pointer casts in Rust.
-> 
-> Signed-off-by: Alice Ryhl <aliceryhl@google.com>
 
-Reviewed-by: Boris Brezillon <boris.brezillon@collabora.com>
+> On 25 Nov 2025, at 22:16, Alexandre Courbot <acourbot@nvidia.com> =
+wrote:
+>=20
+> On Wed Nov 26, 2025 at 3:16 AM JST, Joel Fernandes wrote:
+>>=20
+>>=20
+>>> On Nov 25, 2025, at 9:52=E2=80=AFAM, Alexandre Courbot =
+<acourbot@nvidia.com> wrote:
+>>>=20
+>>> =EF=BB=BFOn Wed Nov 12, 2025 at 2:13 AM JST, Joel Fernandes wrote:
+>>>> Add Rust helper functions for common C linked list operations
+>>>> that are implemented as macros or inline functions and thus not
+>>>> directly accessible from Rust.
+>>>>=20
+>>>> Signed-off-by: Joel Fernandes <joelagnelf@nvidia.com>
+>>>> ---
+>>>> rust/helpers/helpers.c |  1 +
+>>>> rust/helpers/list.c    | 32 ++++++++++++++++++++++++++++++++
+>>>> 2 files changed, 33 insertions(+)
+>>>> create mode 100644 rust/helpers/list.c
+>>>>=20
+>>>> diff --git a/rust/helpers/helpers.c b/rust/helpers/helpers.c
+>>>> index 79c72762ad9c..634fa2386bbb 100644
+>>>> --- a/rust/helpers/helpers.c
+>>>> +++ b/rust/helpers/helpers.c
+>>>> @@ -32,6 +32,7 @@
+>>>> #include "io.c"
+>>>> #include "jump_label.c"
+>>>> #include "kunit.c"
+>>>> +#include "list.c"
+>>>> #include "maple_tree.c"
+>>>> #include "mm.c"
+>>>> #include "mutex.c"
+>>>> diff --git a/rust/helpers/list.c b/rust/helpers/list.c
+>>>> new file mode 100644
+>>>> index 000000000000..fea2a18621da
+>>>> --- /dev/null
+>>>> +++ b/rust/helpers/list.c
+>>>> @@ -0,0 +1,32 @@
+>>>> +// SPDX-License-Identifier: GPL-2.0
+>>>> +
+>>>> +/*
+>>>> + * Helpers for C Circular doubly linked list implementation.
+>>>> + */
+>>>> +
+>>>> +#include <linux/list.h>
+>>>> +
+>>>> +bool rust_helper_list_empty(const struct list_head *head)
+>>>> +{
+>>>> +    return list_empty(head);
+>>>> +}
+>>>> +
+>>>> +void rust_helper_list_del(struct list_head *entry)
+>>>> +{
+>>>> +    list_del(entry);
+>>>> +}
+>>>> +
+>>>> +void rust_helper_INIT_LIST_HEAD(struct list_head *list)
+>>>> +{
+>>>> +    INIT_LIST_HEAD(list);
+>>>> +}
+>>>> +
+>>>> +void rust_helper_list_add(struct list_head *new, struct list_head =
+*head)
+>>>> +{
+>>>> +    list_add(new, head);
+>>>> +}
+>>>> +
+>>>> +void rust_helper_list_add_tail(struct list_head *new, struct =
+list_head *head)
+>>>> +{
+>>>> +    list_add_tail(new, head);
+>>>> +}
+>>>=20
+>>> Just noticed, but of these helpers only `INIT_LIST_HEAD` and
+>>> `list_add_tail` seem to be used (in doccomments).
+>>=20
+>> Correct, but it makes sense to add the most obvious/common ones (also =
+to make it clear that using these are supported).
+>=20
+> "It makes sense" is subjective, and in this case I am confident it is
+> not the right intuition to add dead code just for the sake of it.
+>=20
+> Each of these helpers adds a potential breakage point from the C API
+> should the latter change, so we should only add them if they are =
+indeed
+> necessary.
+>=20
+> Actually, some of these helpers are not used when they could have been =
+-
+> you have a `is_empty` method that rewrites the C function instead of
+> calling the helper. The only helpers that are unjustified as of now as
+> `list_add` and `list_del`, and these are easy to add when they become
+> necessary.
+>=20
+> But this raises an interesting dilemma: these helpers cannot be =
+inlined
+> and add the overhead of a function call. On the other hand, the
+> definition of `list_head` is so excessively simple that manipulating =
+it
+> directly is virtually as intuitive as invoking the helper - and =
+doesn't
+> bear the overhead. So should we double-down on these helpers, or just
+> drop them completely and re-implement the list functionality we need =
+for
+> increased performance?
 
-> ---
->  drivers/gpu/drm/drm_gpuvm.c | 6 +++---
->  include/drm/drm_gpuvm.h     | 8 ++++----
->  2 files changed, 7 insertions(+), 7 deletions(-)
-> 
-> diff --git a/drivers/gpu/drm/drm_gpuvm.c b/drivers/gpu/drm/drm_gpuvm.c
-> index 9cd06c7600dc32ceee0f0beb5e3daf31698a66b3..e06b58aabb8ea6ebd92c625583ae2852c9d2caf1 100644
-> --- a/drivers/gpu/drm/drm_gpuvm.c
-> +++ b/drivers/gpu/drm/drm_gpuvm.c
-> @@ -2283,7 +2283,7 @@ EXPORT_SYMBOL_GPL(drm_gpuvm_interval_empty);
->  void
->  drm_gpuva_map(struct drm_gpuvm *gpuvm,
->  	      struct drm_gpuva *va,
-> -	      struct drm_gpuva_op_map *op)
-> +	      const struct drm_gpuva_op_map *op)
->  {
->  	drm_gpuva_init_from_op(va, op);
->  	drm_gpuva_insert(gpuvm, va);
-> @@ -2303,7 +2303,7 @@ EXPORT_SYMBOL_GPL(drm_gpuva_map);
->  void
->  drm_gpuva_remap(struct drm_gpuva *prev,
->  		struct drm_gpuva *next,
-> -		struct drm_gpuva_op_remap *op)
-> +		const struct drm_gpuva_op_remap *op)
->  {
->  	struct drm_gpuva *va = op->unmap->va;
->  	struct drm_gpuvm *gpuvm = va->vm;
-> @@ -2330,7 +2330,7 @@ EXPORT_SYMBOL_GPL(drm_gpuva_remap);
->   * Removes the &drm_gpuva associated with the &drm_gpuva_op_unmap.
->   */
->  void
-> -drm_gpuva_unmap(struct drm_gpuva_op_unmap *op)
-> +drm_gpuva_unmap(const struct drm_gpuva_op_unmap *op)
->  {
->  	drm_gpuva_remove(op->va);
->  }
-> diff --git a/include/drm/drm_gpuvm.h b/include/drm/drm_gpuvm.h
-> index 0d3fc1f6cac9966a42f3bc82b0b491bfefaf5b96..655bd9104ffb24170fca14dfa034ee79f5400930 100644
-> --- a/include/drm/drm_gpuvm.h
-> +++ b/include/drm/drm_gpuvm.h
-> @@ -1121,7 +1121,7 @@ void drm_gpuva_ops_free(struct drm_gpuvm *gpuvm,
->  			struct drm_gpuva_ops *ops);
->  
->  static inline void drm_gpuva_init_from_op(struct drm_gpuva *va,
-> -					  struct drm_gpuva_op_map *op)
-> +					  const struct drm_gpuva_op_map *op)
->  {
->  	va->va.addr = op->va.addr;
->  	va->va.range = op->va.range;
-> @@ -1265,13 +1265,13 @@ int drm_gpuvm_sm_unmap_exec_lock(struct drm_gpuvm *gpuvm, struct drm_exec *exec,
->  
->  void drm_gpuva_map(struct drm_gpuvm *gpuvm,
->  		   struct drm_gpuva *va,
-> -		   struct drm_gpuva_op_map *op);
-> +		   const struct drm_gpuva_op_map *op);
->  
->  void drm_gpuva_remap(struct drm_gpuva *prev,
->  		     struct drm_gpuva *next,
-> -		     struct drm_gpuva_op_remap *op);
-> +		     const struct drm_gpuva_op_remap *op);
->  
-> -void drm_gpuva_unmap(struct drm_gpuva_op_unmap *op);
-> +void drm_gpuva_unmap(const struct drm_gpuva_op_unmap *op);
->  
->  /**
->   * drm_gpuva_op_remap_to_unmap_range() - Helper to get the start and range of
-> 
+IIRC, there is someone working to fix this overhead by working on LTO =
+support, or at
+least I remember this talk at some iteration of Kangrejos.
 
+If you use the helpers, you=E2=80=99ll be covered in the future.
+
+=E2=80=94 Daniel=
