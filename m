@@ -2,108 +2,80 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id 201C3CBA9D2
-	for <lists+nouveau@lfdr.de>; Sat, 13 Dec 2025 13:41:37 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 22040CBA8EE
+	for <lists+nouveau@lfdr.de>; Sat, 13 Dec 2025 13:17:21 +0100 (CET)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id A4B2410EA15;
-	Sat, 13 Dec 2025 12:40:57 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id A032E10E40D;
+	Sat, 13 Dec 2025 12:17:15 +0000 (UTC)
 Authentication-Results: gabe.freedesktop.org;
-	dkim=permerror (0-bit key) header.d=gmail.com header.i=@gmail.com header.b="TithUnsS";
+	dkim=permerror (0-bit key) header.d=gmail.com header.i=@gmail.com header.b="AgH1xA/m";
 	dkim-atps=neutral
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from mail-wm1-f53.google.com (mail-wm1-f53.google.com
- [209.85.128.53])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 8FA1110E033
- for <nouveau@lists.freedesktop.org>; Sat, 29 Nov 2025 12:21:12 +0000 (UTC)
-Received: by mail-wm1-f53.google.com with SMTP id
- 5b1f17b1804b1-477bf34f5f5so16704925e9.0
- for <nouveau@lists.freedesktop.org>; Sat, 29 Nov 2025 04:21:12 -0800 (PST)
+Received: from mail-lf1-f41.google.com (mail-lf1-f41.google.com
+ [209.85.167.41])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 5699D10E117
+ for <nouveau@lists.freedesktop.org>; Sat, 29 Nov 2025 14:16:05 +0000 (UTC)
+Received: by mail-lf1-f41.google.com with SMTP id
+ 2adb3069b0e04-5957ac0efc2so2974919e87.1
+ for <nouveau@lists.freedesktop.org>; Sat, 29 Nov 2025 06:16:05 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1764418871; x=1765023671; darn=lists.freedesktop.org;
- h=content-transfer-encoding:in-reply-to:from:content-language
- :references:cc:to:subject:user-agent:mime-version:date:message-id
- :from:to:cc:subject:date:message-id:reply-to;
- bh=KcVPfmTekyLiABGhJu4xmxadfb6FIwZsqQzyLFSkQjE=;
- b=TithUnsSi2tCCtGltPh1k3Tw3WMhWtAjlhtnC2k0NKLPdnxUBQ+JRNskqzrD4NR/LC
- GN3xBYpwOP7ejbe1VhHknJAudRIupo3L11bJFkJkMxIikI7niCwE1x1SYsmC8XLIW+Os
- iDL6KfIG3R15p1Si/vy1Gt++wewOms3gAgy1It2Dfx5UHOfD+OqP5CFjRHD2O0FAxVxL
- MwJEQ1tLSG+NBpqt2a7twBS5ukhF0VtPa8r8aVDXpvBc133Spj6QeIE1GnoUB6cbB0r5
- owWkUvGNsBNKpwAKQr5WhOv5TR1ThY6f7d+tQmTrl78iXC1SeFVR1THXKMwiweWsEaAB
- KY1g==
+ d=gmail.com; s=20230601; t=1764425763; x=1765030563; darn=lists.freedesktop.org;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=CCb0Eqo5GqhxN4l/mvqQ6jrTkxIuERyWVn+iJxuMgs0=;
+ b=AgH1xA/mmxpYX8GQhQFVZEWLWj1fvBJw/nCHWOj6sW7OLfiARU6eZjDcKVhyCE9oJN
+ xgjE2qxzh2KW4MneLWuzrZcBvhxWUbo7Klobol51s9Z/nEgTQjsjPnXYiC+DwRsK+z/j
+ aeDsvf3zs/eZ21DQwkUyaXG5vVWOc6NrRa1RgDPbgYu7wEvvADtCsnhgv0NvtJHK3ObZ
+ xdBNIKbJmNkwEehYCrvPW90TqoutBUdl2dB6Mt9E5wHsK8L+4iZRMLnitmXFv9WINmQy
+ C8bRW1O93vWycaW7wAICesA9wsYeCq04M1GRjWUdYsPQqzmVl/t/wqBuRMtzVlP5Na/U
+ 4Cuw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1764418871; x=1765023671;
- h=content-transfer-encoding:in-reply-to:from:content-language
- :references:cc:to:subject:user-agent:mime-version:date:message-id
- :x-gm-gg:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=KcVPfmTekyLiABGhJu4xmxadfb6FIwZsqQzyLFSkQjE=;
- b=pYSoF7m8WjYc1v13Xuu1fggyL51h91PrxDdh7wfbsiaaoRA0xNJyGmjbpETgLDzhdy
- Drl8mZG6fNc2FkYlAGgPqgmUlYhGSopPO5a5krJK8kx7eVH9t85onFX+XRfw+QrIbkgR
- A4haNXCqyZi6XN7gybgHlRvgNH01Yj5W5Cr1TWBbUxaehMuuit1k7aQjyx9GnhH3qR4H
- d4toyFMUo6oBXyf+UmS04hbc699NwN2IsyJDNyQrOAVm2dqLSSWZfKXfiAIMKBJl7D0t
- k0nh/mqO7waXAL9RW6QfSdvKkL/MalIbHHp8ioBI3e/ukJqSM2TmG+GlbYzsoI2Cjtjx
- ofdQ==
+ d=1e100.net; s=20230601; t=1764425763; x=1765030563;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=CCb0Eqo5GqhxN4l/mvqQ6jrTkxIuERyWVn+iJxuMgs0=;
+ b=vy+jw9V78QCA8LogjhBG+nmQZF0RmuKVo/gWwuFVerPz0+6eu+IHcZGYtHEEAhkeH7
+ TXOeRZOag5jiwpLgnCi73xL1dGUBv+r/piWc6kxrMGSnv9PaJP1qpyxIGqHbyWDMAR7s
+ 6qxmtXGKHfQwQt2+Fh/w+/rfE0/Vk9bpbHx26eOYoC8FIoCA4b1RDA/qI/zu9ziLnwma
+ 0OQSSDW3dCdpJ++mdp91BofOrnd8bkwxdgSSqQrxI9FsiQ/jITPjP2JXPreMAMH1CZB4
+ gZeuScdS4d5NakisOdV3oql6h3pgmVpPRvjHbdFIfq6w+JaV4gmFaVAZrSNGXjPchEVz
+ rMvQ==
 X-Forwarded-Encrypted: i=1;
- AJvYcCW2UbMYtGl41cVmOAjN43mzmnTxUpWDBWHLKJFktFKpVKC78xJGfKFmHzgqY5+7oT6d3lM2sul1@lists.freedesktop.org
-X-Gm-Message-State: AOJu0Yy6lwKmUXy6su0nxcVlFtQ5Q8plz3vdWi5ikXWCZAKc7xePfZyg
- /efWhz8PNp0zM+w1lPzojKRdo6y4aHRDKXEqZ2WmmcuoY4PyAxdU1EzO
-X-Gm-Gg: ASbGncsxGVeFJxDFXLp6cFFdK8tYZIC1Dtfu9cR6c01ejwiCDtj5khvAkG/0ihTxWqH
- lqyY1ZU0VmjAcbyFEIhhxqQjvazu73PF3RPxtNJABpDqNFspHBJaJHwOuY9l6xkcWFWtBvzB1mE
- NUM3A4X7yeEdXCaGA0em9FBzbswn+NgqGvt0g+Esipe2pfVCDc1hlMljYDcR4cjHAZDT+c7ZaMB
- 8KRTbTQm74woOq5ZSnnv99pnJcIQGZecdlf4Q7UYsGSeUlkU16gwbn3qsjRbjqcqlqUyMpqStdi
- o24EkQ7bAA2czbJdGVC66UAs+8bG8EZbmbAvTf34Iy7uGfBm/zWKl7wyQNCuAGE18jg86bsd/Js
- lEAjLlFB3eedq98d9EEkJ0gGzjAaJ2h4lumkMxjas5F/iV1gd57SVMegn84QljzzUUud7DIgrf/
- 2yqPNmE+cfBouFBSn8wwRsftCY5B9DIhnaHcmNWv/9dOS+nxSpWErfX9QCfsoC8uIHPwfk3RDc4
- g9Zvq0PYlNnPjAE
-X-Google-Smtp-Source: AGHT+IHPdRho1zaUXZGS4ozcekK0LR1lA9bfnMYzOaD4j+9k0x7QM6vylSP8/9z2op9t+DSRd2h1Jw==
-X-Received: by 2002:a05:600c:3b96:b0:477:5c58:3d42 with SMTP id
- 5b1f17b1804b1-47904ad907amr211433865e9.10.1764418870809; 
- Sat, 29 Nov 2025 04:21:10 -0800 (PST)
-Received: from ?IPV6:2a06:5906:2618:cb00:ddd6:3141:6a4a:f8d8?
- ([2a06:5906:2618:cb00:ddd6:3141:6a4a:f8d8])
- by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-42e1ca1a3f1sm15343627f8f.28.2025.11.29.04.21.09
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Sat, 29 Nov 2025 04:21:09 -0800 (PST)
-Message-ID: <1b7408c5-64a8-42f1-92ab-dd90a883c1a4@gmail.com>
-Date: Sat, 29 Nov 2025 12:21:09 +0000
-MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 05/10] rust: kernel: Update ARef and AlwaysRefCounted
- imports to use sync::aref
-To: Shankari Anand <shankari.ak0208@gmail.com>,
- Greg Kroah-Hartman <gregkh@linuxfoundation.org>,
- =?UTF-8?Q?Arve_Hj=C3=B8nnev=C3=A5g?= <arve@android.com>,
- Todd Kjos <tkjos@android.com>, Martijn Coenen <maco@android.com>,
- Joel Fernandes <joelagnelf@nvidia.com>,
- Christian Brauner <brauner@kernel.org>, Carlos Llamas <cmllamas@google.com>,
- Suren Baghdasaryan <surenb@google.com>, Danilo Krummrich <dakr@kernel.org>,
- Alice Ryhl <aliceryhl@google.com>,
- Maarten Lankhorst <maarten.lankhorst@linux.intel.com>,
- Maxime Ripard <mripard@kernel.org>, Thomas Zimmermann <tzimmermann@suse.de>,
- David Airlie <airlied@gmail.com>, Simona Vetter <simona@ffwll.ch>,
- Alexandre Courbot <acourbot@nvidia.com>,
- "Rafael J . Wysocki" <rafael@kernel.org>, Miguel Ojeda <ojeda@kernel.org>,
- Alex Gaynor <alex.gaynor@gmail.com>,
- Michal Wilczynski <m.wilczynski@samsung.com>
-Cc: Boqun Feng <boqun.feng@gmail.com>, Gary Guo <gary@garyguo.net>,
- =?UTF-8?Q?Bj=C3=B6rn_Roy_Baron?= <bjorn3_gh@protonmail.com>,
- Benno Lossin <lossin@kernel.org>, Andreas Hindborg <a.hindborg@kernel.org>,
- Trevor Gross <tmgross@umich.edu>,
- Daniel Almeida <daniel.almeida@collabora.com>,
- Abdiel Janulgue <abdiel.janulgue@gmail.com>,
- Robin Murphy <robin.murphy@arm.com>, linux-kernel@vger.kernel.org,
+ AJvYcCX5kq0TKmFGhqzzPRW+a0d0CFZdsExl185sNrkmSOeRdLH0BzKaEIwCjyu8UA5TYa3Vco97sA2W@lists.freedesktop.org
+X-Gm-Message-State: AOJu0YxNytekgm8rj/XWh7GxhQAlUMyCfDId0gv/xow9QIXEaZiMHsPt
+ NcwZBVFYNtS/moamv85CHwkzX+RA7jXQjTrHmwNnt6rIlX2qHl4921B8
+X-Gm-Gg: ASbGncvsHpAaA8yhuQCew+reXRcNikhTuGZoyFo++rLrCZf/BRTfUn7gYLP/Lu4A9Ql
+ LthNVM+h9/CT/Lwz6l9k+np2VTXqm4/dzdOX4H9D3pw4T2laDeZaTD7jotw09ne0t0Dx1hspsKh
+ uHQcoO+3hDo7gflnLlk5jL8+WrDTrGeSbvZDZFoJ4/PSCs2wDimtLg8wS13DwMUcFRnxqV4H7uf
+ i3UIikOZbwk3rGY9MRSbYFCQVAhDEL8Jpwr83KWxRPqfjMG5aoDdvIW5PFX2R23uSwbyOb1oF0Q
+ luIfdNItz96g9l8R4CaDLcpgDWAu0ea8jcJ1r8agEAxyp5DMd/hz7HEJCxeBfzI4aTeG7n5Syyq
+ wCZ2kXPSWJp1z+6UDqt+P93rBbtGYQ0fm7CV1LZEns37ezOVOWy35tIHdcS5iGm5hrNhgnGiNEo
+ 9CLc2WbVyt0gvUkLaDP6/JMy+BvOXt4C7WY7wRhWNiTOdY1DTx8fbMPomxxRY=
+X-Google-Smtp-Source: AGHT+IEA3WrHgp5ecEMKNm9JiVdtpzxk9v/x2/vTeR8RniWcj0S+d7R5TzjjaIhv5WRyeSx0oFzvMg==
+X-Received: by 2002:a05:6512:23a1:b0:594:36b3:d1fa with SMTP id
+ 2adb3069b0e04-596a3ed471fmr11203155e87.29.1764425763064; 
+ Sat, 29 Nov 2025 06:16:03 -0800 (PST)
+Received: from home-server.lan (89-109-48-215.dynamic.mts-nn.ru.
+ [89.109.48.215]) by smtp.gmail.com with ESMTPSA id
+ 2adb3069b0e04-596bfa43f33sm1945600e87.49.2025.11.29.06.16.02
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Sat, 29 Nov 2025 06:16:02 -0800 (PST)
+From: Alexey Simakov <bigalex934@gmail.com>
+To: bskeggs@redhat.com
+Cc: Alexey Simakov <bigalex934@gmail.com>, David Airlie <airlied@linux.ie>,
+ Daniel Vetter <daniel@ffwll.ch>, Francisco Jerez <currojerez@riseup.net>,
  dri-devel@lists.freedesktop.org, nouveau@lists.freedesktop.org,
- rust-for-linux@vger.kernel.org, linux-pwm@vger.kernel.org
-References: <20251123092438.182251-1-shankari.ak0208@gmail.com>
- <20251123092438.182251-6-shankari.ak0208@gmail.com>
-Content-Language: en-US
-From: Igor Korotin <igor.korotin.linux@gmail.com>
-In-Reply-To: <20251123092438.182251-6-shankari.ak0208@gmail.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
-X-Mailman-Approved-At: Sat, 13 Dec 2025 12:40:43 +0000
+ linux-kernel@vger.kernel.org, lvc-project@linuxtesting.org,
+ Alexandr Sapozhnikov <alsp705@gmail.com>
+Subject: 
+Date: Sat, 29 Nov 2025 17:14:40 +0300
+Message-Id: <20251129141438.8789-1-bigalex934@gmail.com>
+X-Mailer: git-send-email 2.34.1
+MIME-Version: 1.0
+Content-Transfer-Encoding: 8bit
+X-Mailman-Approved-At: Sat, 13 Dec 2025 12:17:04 +0000
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -118,58 +90,49 @@ List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-On 11/23/2025 9:24 AM, Shankari Anand wrote:
-> Update call sites in `i2c.rs` to import `ARef` and
-> `AlwaysRefCounted` from `sync::aref` instead of `types`.
-> 
-> This aligns with the ongoing effort to move `ARef` and
-> `AlwaysRefCounted` to sync.
-> 
-> Suggested-by: Benno Lossin <lossin@kernel.org>
-> Link: https://github.com/Rust-for-Linux/linux/issues/1173
-> Signed-off-by: Shankari Anand <shankari.ak0208@gmail.com>
-> ---
->   rust/kernel/i2c.rs | 10 ++++------
->   1 file changed, 4 insertions(+), 6 deletions(-)
-> 
-> diff --git a/rust/kernel/i2c.rs b/rust/kernel/i2c.rs
-> index 1aee46f59460..c50ca464d87c 100644
-> --- a/rust/kernel/i2c.rs
-> +++ b/rust/kernel/i2c.rs
-> @@ -17,10 +17,8 @@
->       of,
->       prelude::*,
->       str::CStrExt as _,
-> -    types::{
-> -        AlwaysRefCounted,
-> -        Opaque, //
-> -    }, //
-> +    sync::aref::AlwaysRefCounted,
-> +    types::Opaque, //
->   };
->   
->   use core::{
-> @@ -32,7 +30,7 @@
->       }, //
->   };
->   
-> -use kernel::types::ARef;
-> +use kernel::sync::aref::ARef;
->   
->   /// An I2C device id table.
->   #[repr(transparent)]
-> @@ -408,7 +406,7 @@ pub fn get(index: i32) -> Result<ARef<Self>> {
->   kernel::impl_device_context_into_aref!(I2cAdapter);
->   
->   // SAFETY: Instances of `I2cAdapter` are always reference-counted.
-> -unsafe impl crate::types::AlwaysRefCounted for I2cAdapter {
-> +unsafe impl crate::sync::aref::AlwaysRefCounted for I2cAdapter {
->       fn inc_ref(&self) {
->           // SAFETY: The existence of a shared reference guarantees that the refcount is non-zero.
->           unsafe { bindings::i2c_get_adapter(self.index()) };
+Date: Sat, 29 Nov 2025 17:06:57 +0300
+Subject: [PATCH v2] drm/nouveau: fix div-by-zero in nouveau_bo_fixup_align
 
-I'm fine with this going through either tree.
+The expression 64 * nvbo->mode can be zero when nvbo->mode equals
+U32_MAX / 64, causing a division by zero in do_div(). Values greater
+than U32_MAX / 64 cause a u32 overflow, leading to incorrect results.
 
-Acked-by: Igor Korotin <igor.korotin.linux@gmail.com>
+Since nvbo->mode comes from userspace via ioctl, it must be validated
+to prevent crashes or undefined behavior.
 
-Thanks
+Add a check to ensure nvbo->mode is less than U32_MAX / 64
+before use in multiplication.
+
+Found by Linux Verification Center (linuxtesting.org) with Svace.
+
+Fixes: a0af9add499c ("drm/nouveau: Make the MM aware of pre-G80 tiling.")
+Co-developed-by: Alexandr Sapozhnikov <alsp705@gmail.com>
+Signed-off-by: Alexandr Sapozhnikov <alsp705@gmail.com>
+Signed-off-by: Alexey Simakov <bigalex934@gmail.com>
+---
+
+v2 - move value check at the begining of nouveau_bo_alloc for
+preventing execution of function for case, when tile_mode is too large
+
+link to v1: https://lore.kernel.org/dri-devel/20251022041302.13-1-alsp705@gmail.com/
+
+ drivers/gpu/drm/nouveau/nouveau_bo.c | 3 +++
+ 1 file changed, 3 insertions(+)
+
+diff --git a/drivers/gpu/drm/nouveau/nouveau_bo.c b/drivers/gpu/drm/nouveau/nouveau_bo.c
+index 96a8b7b1215e..774888ffa4a8 100644
+--- a/drivers/gpu/drm/nouveau/nouveau_bo.c
++++ b/drivers/gpu/drm/nouveau/nouveau_bo.c
+@@ -207,6 +207,9 @@ nouveau_bo_alloc(struct nouveau_cli *cli, u64 *size, int *align, u32 domain,
+ 	struct nvif_vmm *vmm = cli->svm.cli ? &cli->svm.vmm : &cli->vmm.vmm;
+ 	int i, pi = -1;
+ 
++	if (tile_mode > U32_MAX / 64)
++		return ERR_PTR(-EINVAL);
++
+ 	if (!*size) {
+ 		NV_WARN(drm, "skipped size %016llx\n", *size);
+ 		return ERR_PTR(-EINVAL);
+-- 
+2.34.1
+
