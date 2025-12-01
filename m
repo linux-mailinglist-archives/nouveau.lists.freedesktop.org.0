@@ -2,146 +2,96 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id 22485C96066
-	for <lists+nouveau@lfdr.de>; Mon, 01 Dec 2025 08:36:30 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 8768FC967D6
+	for <lists+nouveau@lfdr.de>; Mon, 01 Dec 2025 10:55:05 +0100 (CET)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 0A5A110E0F9;
-	Mon,  1 Dec 2025 07:36:28 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 379E210E350;
+	Mon,  1 Dec 2025 09:55:04 +0000 (UTC)
 Authentication-Results: gabe.freedesktop.org;
-	dkim=pass (1024-bit key; unprotected) header.d=suse.de header.i=@suse.de header.b="rV+2pFwy";
-	dkim=permerror (0-bit key) header.d=suse.de header.i=@suse.de header.b="RQR5KnYi";
-	dkim=pass (1024-bit key) header.d=suse.de header.i=@suse.de header.b="yYPopba8";
-	dkim=permerror (0-bit key) header.d=suse.de header.i=@suse.de header.b="hqjI78Ue";
+	dkim=pass (2048-bit key; unprotected) header.d=google.com header.i=@google.com header.b="DgaehzF0";
 	dkim-atps=neutral
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from smtp-out1.suse.de (smtp-out1.suse.de [195.135.223.130])
- by gabe.freedesktop.org (Postfix) with ESMTPS id E232E10E2DC
- for <nouveau@lists.freedesktop.org>; Mon,  1 Dec 2025 07:36:26 +0000 (UTC)
-Received: from imap1.dmz-prg2.suse.org (imap1.dmz-prg2.suse.org
- [IPv6:2a07:de40:b281:104:10:150:64:97])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
- (No client certificate requested)
- by smtp-out1.suse.de (Postfix) with ESMTPS id 1721A33786;
- Mon,  1 Dec 2025 07:36:23 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.de; s=susede2_rsa;
- t=1764574584; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
- mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references:autocrypt:autocrypt;
- bh=jwoiflGaPGb4aptDyzEhu+zESeg/E9YtC3j9ThSCO2s=;
- b=rV+2pFwy7CjDfi3SH0c45ACKeW9bT9Qbw62S8FgXGcN/yQ5eOaMhhnJdzuQ7f5yXKsDWQz
- 7LkFkmAsirWa00vLk6vApSXSra3uBiQelWCNZRV4pXBX5KYbmUP+ZhNy0NLDwwjQSSpmfd
- l6kvnx2x9t0KURSXDGc/PeK1n6MW3us=
-DKIM-Signature: v=1; a=ed25519-sha256; c=relaxed/relaxed; d=suse.de;
- s=susede2_ed25519; t=1764574584;
- h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
- mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references:autocrypt:autocrypt;
- bh=jwoiflGaPGb4aptDyzEhu+zESeg/E9YtC3j9ThSCO2s=;
- b=RQR5KnYiDfjoJpOM33HRsnPgeiXWqF9oZKyz80qWZesppPnBeV6s8t1g/gawc/wjNkkKqe
- f4sTfzxuRFd42eDQ==
-Authentication-Results: smtp-out1.suse.de;
- dkim=pass header.d=suse.de header.s=susede2_rsa header.b=yYPopba8;
- dkim=pass header.d=suse.de header.s=susede2_ed25519 header.b=hqjI78Ue
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.de; s=susede2_rsa;
- t=1764574583; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
- mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references:autocrypt:autocrypt;
- bh=jwoiflGaPGb4aptDyzEhu+zESeg/E9YtC3j9ThSCO2s=;
- b=yYPopba8JIcBY3r1DLtiwAu+72Ry4OjSI2rOJlsoTNcAB+mdYQm8UNaui2zYZ0jQlGCdEt
- nNrYwfHTHo5OxK7RVqh5/xTgnjOnS9lWrKTrq52zR9vyNWAHEewDxG9ifEgBfPapTvyrNX
- J+sLkeQ0ZqjArwdTUGOrwMrJZeZtr6g=
-DKIM-Signature: v=1; a=ed25519-sha256; c=relaxed/relaxed; d=suse.de;
- s=susede2_ed25519; t=1764574583;
- h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
- mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references:autocrypt:autocrypt;
- bh=jwoiflGaPGb4aptDyzEhu+zESeg/E9YtC3j9ThSCO2s=;
- b=hqjI78UeXuwcuqBIRBZK8I1ODg+ZYdMy6+0itDD/aAd29v/4YwYj/VbFKBPMNkBuQWWUSD
- auo9X3wWgw1TzJAw==
-Received: from imap1.dmz-prg2.suse.org (localhost [127.0.0.1])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
- (No client certificate requested)
- by imap1.dmz-prg2.suse.org (Postfix) with ESMTPS id BC2953EA63;
- Mon,  1 Dec 2025 07:36:22 +0000 (UTC)
-Received: from dovecot-director2.suse.de ([2a07:de40:b281:106:10:150:64:167])
- by imap1.dmz-prg2.suse.org with ESMTPSA id V8rZK3ZFLWkHcgAAD6G6ig
- (envelope-from <tzimmermann@suse.de>); Mon, 01 Dec 2025 07:36:22 +0000
-Message-ID: <252b8c75-ed9b-42c9-bcfe-0ceae14f664f@suse.de>
-Date: Mon, 1 Dec 2025 08:36:22 +0100
-MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH] drm/nouveau: Resolve the issue of VGA not detecting
- disconnection
-To: 2564278112@qq.com, Lyude Paul <lyude@redhat.com>,
- Danilo Krummrich <dakr@kernel.org>,
+Received: from mail-wm1-f73.google.com (mail-wm1-f73.google.com
+ [209.85.128.73])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 73C9510E35A
+ for <nouveau@lists.freedesktop.org>; Mon,  1 Dec 2025 09:55:03 +0000 (UTC)
+Received: by mail-wm1-f73.google.com with SMTP id
+ 5b1f17b1804b1-477bf8c1413so24834995e9.1
+ for <nouveau@lists.freedesktop.org>; Mon, 01 Dec 2025 01:55:03 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=google.com; s=20230601; t=1764582902; x=1765187702;
+ darn=lists.freedesktop.org; 
+ h=cc:to:from:subject:message-id:references:mime-version:in-reply-to
+ :date:from:to:cc:subject:date:message-id:reply-to;
+ bh=72s8cxP8m32nLOQlBnrTppnRNNSnWx6bZ8vmeua9AuM=;
+ b=DgaehzF0NZWlB5rV+2Zs/z4QLmoK+HwRQ2n2zgGo7b36o3hdCi0CLJ8WxxXqvQsfeQ
+ P/gP5GwEXfrzljGtLL8jsocM5FdZ5EQbPyGVjWJrx97C3HRG4xl5FMwmc9DWnDYeRqST
+ wAeCqXUxmOBxp8us4KizBI3UtXQygGdDV/79ilJ8C/ig8f1G5Fm1IixSZCcxMzshbej0
+ FPPElt5uQIVE8K3hALNamir9/JKOf/7feP2Sh9E+T9zNy7wYYrw34KBgo8NtBu5QVldu
+ eTM5QXYrDSoOBSMJeFq4tQkr1pOyECUNdZ/oLfgSQ1g09arFK+/iHSc8Sm5xtBAvqucW
+ 1OEQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1764582902; x=1765187702;
+ h=cc:to:from:subject:message-id:references:mime-version:in-reply-to
+ :date:x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+ bh=72s8cxP8m32nLOQlBnrTppnRNNSnWx6bZ8vmeua9AuM=;
+ b=eMf/gR0AgsfoHR7wlKsLnsYokgC0mxrsBR72JoisG2a4JmR5URDdfDFdbsNl7bQunS
+ QdT5h9C6Vt62V9g8E36BsvWBs+L2qWLNH7axnjPlOs6JGTcHGXYDx1Cg4Z/CHDzGBDp4
+ YndY/ITLAr35WjbpVBSwjCWNLQwQizymLx3le5D/XHmZb9MzSKFdjgp7lNJHMou+2L3R
+ MJ5ZCtLj3J7h++0gMTExpd/MvL1imoZM3WHL89cnVDOv1TZdYy+jylUlk486vrPreC7s
+ WwkGQ4xD2qwkH08SgS66xvqtxzceXd/SFGDAn9xH24t7IwnOy/tAxTdU75cWPpp4r+Mh
+ 8eRw==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCUOYbiHfFw1wTmfVMlRnZ76OEM1t1YuHdUMwOS70kuJ7P5I59ijKU/U2R8P06fur8J6B+gidqWB@lists.freedesktop.org
+X-Gm-Message-State: AOJu0YycNKyXoP+kM8uQwLE72sUWPbsUvO+JFSG8RZCvj6FlnFkdj4n/
+ TbIoKBYsgDgi2DtvXg+XOvwm4/IRmhsHa/oo58pU8fyiBOOX8dhfSGoYDhWDr/j4syN8hU7lWGn
+ SgouojRCjjrWajWh06g==
+X-Google-Smtp-Source: AGHT+IHR/gzeFh7+KeD1MsGLOFVqoY8R7VwUnjkirrmR28Kdsu+0Qy8DFoIl1J3N86VCTwEGoZO2EDfdb0ODTEY=
+X-Received: from wmba22.prod.google.com ([2002:a05:600c:6dd6:b0:477:7ad9:2aa])
+ (user=aliceryhl job=prod-delivery.src-stubby-dispatcher) by
+ 2002:a05:600c:4f4c:b0:475:da1a:53f9 with SMTP id
+ 5b1f17b1804b1-477c0184b1emr414720285e9.14.1764582901820; 
+ Mon, 01 Dec 2025 01:55:01 -0800 (PST)
+Date: Mon, 1 Dec 2025 09:55:00 +0000
+In-Reply-To: <20251128152403.72aedafa@fedora>
+Mime-Version: 1.0
+References: <20251128-gpuvm-rust-v1-0-ebf66bf234e0@google.com>
+ <20251128-gpuvm-rust-v1-1-ebf66bf234e0@google.com>
+ <20251128152403.72aedafa@fedora>
+Message-ID: <aS1l9Mm9smUzAJ3A@google.com>
+Subject: Re: [PATCH 1/4] drm/gpuvm: take GEM lock inside
+ drm_gpuvm_bo_obtain_prealloc()
+From: Alice Ryhl <aliceryhl@google.com>
+To: Boris Brezillon <boris.brezillon@collabora.com>
+Cc: Danilo Krummrich <dakr@kernel.org>,
+ Daniel Almeida <daniel.almeida@collabora.com>, 
+ Matthew Brost <matthew.brost@intel.com>, 
+ "Thomas =?utf-8?Q?Hellstr=C3=B6m?=" <thomas.hellstrom@linux.intel.com>, 
  Maarten Lankhorst <maarten.lankhorst@linux.intel.com>,
- Maxime Ripard <mripard@kernel.org>, David Airlie <airlied@gmail.com>,
- Simona Vetter <simona@ffwll.ch>
-Cc: dri-devel@lists.freedesktop.org, nouveau@lists.freedesktop.org,
- linux-kernel@vger.kernel.org, jiangwang@kylinos.cn
-References: <tencent_7431C42BA1F206D1FAF305FB068550884605@qq.com>
-Content-Language: en-US
-From: Thomas Zimmermann <tzimmermann@suse.de>
-Autocrypt: addr=tzimmermann@suse.de; keydata=
- xsBNBFs50uABCADEHPidWt974CaxBVbrIBwqcq/WURinJ3+2WlIrKWspiP83vfZKaXhFYsdg
- XH47fDVbPPj+d6tQrw5lPQCyqjwrCPYnq3WlIBnGPJ4/jreTL6V+qfKRDlGLWFjZcsrPJGE0
- BeB5BbqP5erN1qylK9i3gPoQjXGhpBpQYwRrEyQyjuvk+Ev0K1Jc5tVDeJAuau3TGNgah4Yc
- hdHm3bkPjz9EErV85RwvImQ1dptvx6s7xzwXTgGAsaYZsL8WCwDaTuqFa1d1jjlaxg6+tZsB
- 9GluwvIhSezPgnEmimZDkGnZRRSFiGP8yjqTjjWuf0bSj5rUnTGiyLyRZRNGcXmu6hjlABEB
- AAHNJ1Rob21hcyBaaW1tZXJtYW5uIDx0emltbWVybWFubkBzdXNlLmRlPsLAjgQTAQgAOAIb
- AwULCQgHAgYVCgkICwIEFgIDAQIeAQIXgBYhBHIX+6yM6c9jRKFo5WgNwR1TC3ojBQJftODH
- AAoJEGgNwR1TC3ojx1wH/0hKGWugiqDgLNXLRD/4TfHBEKmxIrmfu9Z5t7vwUKfwhFL6hqvo
- lXPJJKQpQ2z8+X2vZm/slsLn7J1yjrOsoJhKABDi+3QWWSGkaGwRJAdPVVyJMfJRNNNIKwVb
- U6B1BkX2XDKDGffF4TxlOpSQzdtNI/9gleOoUA8+jy8knnDYzjBNOZqLG2FuTdicBXblz0Mf
- vg41gd9kCwYXDnD91rJU8tzylXv03E75NCaTxTM+FBXPmsAVYQ4GYhhgFt8S2UWMoaaABLDe
- 7l5FdnLdDEcbmd8uLU2CaG4W2cLrUaI4jz2XbkcPQkqTQ3EB67hYkjiEE6Zy3ggOitiQGcqp
- j//OwE0EWznS4AEIAMYmP4M/V+T5RY5at/g7rUdNsLhWv1APYrh9RQefODYHrNRHUE9eosYb
- T6XMryR9hT8XlGOYRwKWwiQBoWSDiTMo/Xi29jUnn4BXfI2px2DTXwc22LKtLAgTRjP+qbU6
- 3Y0xnQN29UGDbYgyyK51DW3H0If2a3JNsheAAK+Xc9baj0LGIc8T9uiEWHBnCH+RdhgATnWW
- GKdDegUR5BkDfDg5O/FISymJBHx2Dyoklv5g4BzkgqTqwmaYzsl8UxZKvbaxq0zbehDda8lv
- hFXodNFMAgTLJlLuDYOGLK2AwbrS3Sp0AEbkpdJBb44qVlGm5bApZouHeJ/+n+7r12+lqdsA
- EQEAAcLAdgQYAQgAIAIbDBYhBHIX+6yM6c9jRKFo5WgNwR1TC3ojBQJftOH6AAoJEGgNwR1T
- C3ojVSkIALpAPkIJPQoURPb1VWjh34l0HlglmYHvZszJWTXYwavHR8+k6Baa6H7ufXNQtThR
- yIxJrQLW6rV5lm7TjhffEhxVCn37+cg0zZ3j7zIsSS0rx/aMwi6VhFJA5hfn3T0TtrijKP4A
- SAQO9xD1Zk9/61JWk8OysuIh7MXkl0fxbRKWE93XeQBhIJHQfnc+YBLprdnxR446Sh8Wn/2D
- Ya8cavuWf2zrB6cZurs048xe0UbSW5AOSo4V9M0jzYI4nZqTmPxYyXbm30Kvmz0rYVRaitYJ
- 4kyYYMhuULvrJDMjZRvaNe52tkKAvMevcGdt38H4KSVXAylqyQOW5zvPc4/sq9c=
-In-Reply-To: <tencent_7431C42BA1F206D1FAF305FB068550884605@qq.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 8bit
-X-Spamd-Result: default: False [-4.51 / 50.00]; BAYES_HAM(-3.00)[100.00%];
- NEURAL_HAM_LONG(-1.00)[-1.000];
- R_DKIM_ALLOW(-0.20)[suse.de:s=susede2_rsa,suse.de:s=susede2_ed25519];
- NEURAL_HAM_SHORT(-0.20)[-1.000]; MIME_GOOD(-0.10)[text/plain];
- MX_GOOD(-0.01)[];
- URIBL_BLOCKED(0.00)[qq.com:email,kylinos.cn:email,imap1.dmz-prg2.suse.org:rdns,imap1.dmz-prg2.suse.org:helo,suse.de:mid,suse.de:dkim,suse.de:email,suse.com:url];
- DKIM_SIGNED(0.00)[suse.de:s=susede2_rsa,suse.de:s=susede2_ed25519];
- FUZZY_RATELIMITED(0.00)[rspamd.com]; ARC_NA(0.00)[];
- FREEMAIL_TO(0.00)[qq.com,redhat.com,kernel.org,linux.intel.com,gmail.com,ffwll.ch];
- TO_DN_SOME(0.00)[]; MIME_TRACE(0.00)[0:+];
- TO_MATCH_ENVRCPT_ALL(0.00)[];
- FREEMAIL_ENVRCPT(0.00)[gmail.com,qq.com]; RCVD_TLS_ALL(0.00)[];
- RCVD_COUNT_TWO(0.00)[2]; FROM_EQ_ENVFROM(0.00)[];
- FROM_HAS_DN(0.00)[];
- SPAMHAUS_XBL(0.00)[2a07:de40:b281:104:10:150:64:97:from];
- MID_RHS_MATCH_FROM(0.00)[]; RCVD_VIA_SMTP_AUTH(0.00)[];
- RCPT_COUNT_SEVEN(0.00)[11]; DKIM_TRACE(0.00)[suse.de:+];
- DBL_BLOCKED_OPENRESOLVER(0.00)[imap1.dmz-prg2.suse.org:rdns,
- imap1.dmz-prg2.suse.org:helo, suse.de:mid, suse.de:dkim, suse.de:email,
- kylinos.cn:email, suse.com:url]
-X-Spam-Level: 
-X-Spam-Score: -4.51
-X-Rspamd-Server: rspamd2.dmz-prg2.suse.org
-X-Rspamd-Queue-Id: 1721A33786
-X-Rspamd-Action: no action
-X-Spam-Flag: NO
+ Maxime Ripard <mripard@kernel.org>, 
+ Thomas Zimmermann <tzimmermann@suse.de>, David Airlie <airlied@gmail.com>,
+ Simona Vetter <simona@ffwll.ch>, 
+ Steven Price <steven.price@arm.com>, Liviu Dudau <liviu.dudau@arm.com>, 
+ Miguel Ojeda <ojeda@kernel.org>, Boqun Feng <boqun.feng@gmail.com>,
+ Gary Guo <gary@garyguo.net>, 
+ "=?utf-8?B?QmrDtnJu?= Roy Baron" <bjorn3_gh@protonmail.com>,
+ Benno Lossin <lossin@kernel.org>, 
+ Andreas Hindborg <a.hindborg@kernel.org>, Trevor Gross <tmgross@umich.edu>, 
+ Frank Binns <frank.binns@imgtec.com>, Matt Coster <matt.coster@imgtec.com>, 
+ Rob Clark <robin.clark@oss.qualcomm.com>, Dmitry Baryshkov <lumag@kernel.org>, 
+ Abhinav Kumar <abhinav.kumar@linux.dev>,
+ Jessica Zhang <jessica.zhang@oss.qualcomm.com>, 
+ Sean Paul <sean@poorly.run>, Marijn Suijten <marijn.suijten@somainline.org>, 
+ Lyude Paul <lyude@redhat.com>, Lucas De Marchi <lucas.demarchi@intel.com>, 
+ Rodrigo Vivi <rodrigo.vivi@intel.com>, Sumit Semwal <sumit.semwal@linaro.org>, 
+ "Christian =?utf-8?B?S8O2bmln?=" <christian.koenig@amd.com>,
+ dri-devel@lists.freedesktop.org, 
+ linux-kernel@vger.kernel.org, rust-for-linux@vger.kernel.org, 
+ linux-arm-msm@vger.kernel.org, freedreno@lists.freedesktop.org, 
+ nouveau@lists.freedesktop.org, intel-xe@lists.freedesktop.org, 
+ linux-media@vger.kernel.org, linaro-mm-sig@lists.linaro.org
+Content-Type: text/plain; charset="utf-8"
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -156,48 +106,34 @@ List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-Hi
+On Fri, Nov 28, 2025 at 03:24:03PM +0100, Boris Brezillon wrote:
+> On Fri, 28 Nov 2025 14:14:15 +0000
+> Alice Ryhl <aliceryhl@google.com> wrote:
+> 
+> > When calling drm_gpuvm_bo_obtain_prealloc() and using immediate mode,
+> > this may result in a call to ops->vm_bo_free(vm_bo) while holding the
+> > GEMs gpuva mutex. This is a problem if ops->vm_bo_free(vm_bo) performs
+> > any operations that are not safe in the fence signalling critical path,
+> > and it turns out that Panthor (the only current user of the method)
+> > calls drm_gem_shmem_unpin() which takes a resv lock internally.
+> > 
+> > This constitutes both a violation of signalling safety and lock
+> > inversion. To fix this, we modify the method to internally take the GEMs
+> > gpuva mutex so that the mutex can be unlocked before freeing the
+> > preallocated vm_bo.
+> > 
+> > Note that this modification introduces a requirement that the driver
+> > uses immediate mode to call drm_gpuvm_bo_obtain_prealloc() as it would
+> > otherwise take the wrong lock.
+> > 
+> > Signed-off-by: Alice Ryhl <aliceryhl@google.com>
+> 
+> Reviewed-by: Boris Brezillon <boris.brezillon@collabora.com>
+> 
+> Should we add a Fixes tag?
 
-Am 01.12.25 um 02:41 schrieb 2564278112@qq.com:
-> From: Wang Jiang <jiangwang@kylinos.cn>
->
-> When using the GT730, I found that the VGA could recognize when it was plugged in,
-> but could not detect when it was disconnected.
-> The reason is that the polled flag for the connector is missing DRM_CONNECTOR_POLL_DISCONNECT.
->
-> Signed-off-by: Wang Jiang <jiangwang@kylinos.cn>
-> Reviewed-by: Thomas Zimmermann <tzimmermann@suse.de>
+Yeah, let's add:
 
-I'm surprised that there is a new patch and I already reviewed it. Has 
-this change been posted elsewhere already?
+Fixes: 63e919a31625 ("panthor: use drm_gpuva_unlink_defer()")
 
-Best regards
-Thomas
-
-> ---
->   drivers/gpu/drm/nouveau/nouveau_connector.c | 2 +-
->   1 file changed, 1 insertion(+), 1 deletion(-)
->
-> diff --git a/drivers/gpu/drm/nouveau/nouveau_connector.c b/drivers/gpu/drm/nouveau/nouveau_connector.c
-> index 63621b1510f6..dfff01edf65a 100644
-> --- a/drivers/gpu/drm/nouveau/nouveau_connector.c
-> +++ b/drivers/gpu/drm/nouveau/nouveau_connector.c
-> @@ -1421,7 +1421,7 @@ nouveau_connector_create(struct drm_device *dev, int index)
->   	connector->doublescan_allowed = false;
->   
->   	drm_connector_helper_add(connector, &nouveau_connector_helper_funcs);
-> -	connector->polled = DRM_CONNECTOR_POLL_CONNECT;
-> +	connector->polled = DRM_CONNECTOR_POLL_CONNECT | DRM_CONNECTOR_POLL_DISCONNECT;
->   
->   	if (nvif_object_constructed(&nv_connector->conn.object)) {
->   		ret = nvif_conn_event_ctor(&nv_connector->conn, "kmsHotplug",
-
--- 
---
-Thomas Zimmermann
-Graphics Driver Developer
-SUSE Software Solutions Germany GmbH
-Frankenstr. 146, 90461 Nürnberg, Germany, www.suse.com
-GF: Jochen Jaser, Andrew McDonald, Werner Knoblich, (HRB 36809, AG Nürnberg)
-
-
+Alice
