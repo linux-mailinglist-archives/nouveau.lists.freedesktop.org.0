@@ -2,72 +2,62 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id B9B07C985CE
-	for <lists+nouveau@lfdr.de>; Mon, 01 Dec 2025 17:51:50 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id CEFF7C98A09
+	for <lists+nouveau@lfdr.de>; Mon, 01 Dec 2025 18:57:14 +0100 (CET)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 92CCE10E3F1;
-	Mon,  1 Dec 2025 16:51:48 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 0845B10E445;
+	Mon,  1 Dec 2025 17:57:13 +0000 (UTC)
 Authentication-Results: gabe.freedesktop.org;
-	dkim=pass (1024-bit key; unprotected) header.d=collabora.com header.i=daniel.almeida@collabora.com header.b="epV3uwMB";
+	dkim=pass (1024-bit key; unprotected) header.d=redhat.com header.i=@redhat.com header.b="jJ3Wwfc4";
 	dkim-atps=neutral
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from sender4-pp-f112.zoho.com (sender4-pp-f112.zoho.com
- [136.143.188.112])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 9CADC10E42B;
- Mon,  1 Dec 2025 16:51:46 +0000 (UTC)
-ARC-Seal: i=1; a=rsa-sha256; t=1764607905; cv=none; 
- d=zohomail.com; s=zohoarc; 
- b=O2FLxExRltdZ308GFqeNE9is4NtIlPDhrWXRIuoqb4lKvTeNC4sdoQn//4R2UD67oSlDFqxwM4an5sKiz5rpCEOCZollckly6wEEqhSg1kYtlX4GbLKVcn6xXtuVW03Z64KE0aQR+U/qfoYxi6sID1yZaUN0Ozkb9jwtbOejuvU=
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=zohomail.com;
- s=zohoarc; t=1764607905;
- h=Content-Type:Content-Transfer-Encoding:Cc:Cc:Date:Date:From:From:In-Reply-To:MIME-Version:Message-ID:References:Subject:Subject:To:To:Message-Id:Reply-To;
- bh=tvJUQZN8AEjscK+m0bZuqDra4rXoJ/xrQ5lwzRW/qII=; 
- b=cFe4I+YbOiUo7kty6meKQ2HG5SmyVrijvqfYWgrs1R5dXv3jfp5qJa66M3mcpXet+rGPzqL5nxiv8qGKSPOkuLJ/faGlOb6RNXDIgRBBVQPu3yIjEz2XT6v7oIUkp2GdNblVQHOG8pHhOQjBkq/DWb7xgIEVn2+4tTZAA7IeYwU=
-ARC-Authentication-Results: i=1; mx.zohomail.com;
- dkim=pass  header.i=collabora.com;
- spf=pass  smtp.mailfrom=daniel.almeida@collabora.com;
- dmarc=pass header.from=<daniel.almeida@collabora.com>
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; t=1764607905; 
- s=zohomail; d=collabora.com; i=daniel.almeida@collabora.com;
- h=Content-Type:Mime-Version:Subject:Subject:From:From:In-Reply-To:Date:Date:Cc:Cc:Content-Transfer-Encoding:Message-Id:Message-Id:References:To:To:Reply-To;
- bh=tvJUQZN8AEjscK+m0bZuqDra4rXoJ/xrQ5lwzRW/qII=;
- b=epV3uwMBKpD0St6TBSLqTN+Fc4l0mM463CbMFQE302esiv24R/UuyHD3fhniT/60
- uvOLQ0cT/z1EQYepd8Tjc9eOrb738u4kmqKS9Uv9wM31LwENDaJnaoatjWdJ39Jk9Kp
- rJ9HP5SBQ9Bx8l1bw56N7PhGj8M3VmVX7wOPObhc=
-Received: by mx.zohomail.com with SMTPS id 176460790270219.939236032084295;
- Mon, 1 Dec 2025 08:51:42 -0800 (PST)
-Content-Type: text/plain;
-	charset=us-ascii
-Mime-Version: 1.0 (Mac OS X Mail 16.0 \(3826.700.81\))
-Subject: Re: [PATCH v3] rust: clist: Add support to interface with C linked
- lists
-From: Daniel Almeida <daniel.almeida@collabora.com>
-In-Reply-To: <20251129213056.4021375-1-joelagnelf@nvidia.com>
-Date: Mon, 1 Dec 2025 13:51:24 -0300
-Cc: linux-kernel@vger.kernel.org, rust-for-linux@vger.kernel.org,
- dri-devel@lists.freedesktop.org, nouveau@lists.freedesktop.org,
- Danilo Krummrich <dakr@kernel.org>, Dave Airlie <airlied@gmail.com>,
- Alexandre Courbot <acourbot@nvidia.com>,
- Alistair Popple <apopple@nvidia.com>, Miguel Ojeda <ojeda@kernel.org>,
- Alex Gaynor <alex.gaynor@gmail.com>, Boqun Feng <boqun.feng@gmail.com>,
- Gary Guo <gary@garyguo.net>, bjorn3_gh@protonmail.com,
- Benno Lossin <lossin@kernel.org>, Andreas Hindborg <a.hindborg@kernel.org>,
- Alice Ryhl <aliceryhl@google.com>, Trevor Gross <tmgross@umich.edu>,
- Simona Vetter <simona@ffwll.ch>,
+Received: from us-smtp-delivery-124.mimecast.com
+ (us-smtp-delivery-124.mimecast.com [170.10.129.124])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id EDA2710E445
+ for <nouveau@lists.freedesktop.org>; Mon,  1 Dec 2025 17:57:10 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
+ s=mimecast20190719; t=1764611830;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:
+ content-transfer-encoding:content-transfer-encoding;
+ bh=F2paQXFbFxGwpmccgXBJ2jOZ/qHBAktMJ04FeN3x5rs=;
+ b=jJ3Wwfc4BTP6SQ35jC3duuDzA5PA3Z/BGQkHif2JiDT68ZlUmLIjAzrytznNZulJjMKlO2
+ /k833B6aagyRFBj0E2o4wEzAw8aO9UehB7iRGNmSP2f/1+0lyn0hyrffMIQy5sGmRwpEDD
+ 81FWGKqslAv/JZb5+CG2yw7WDNeJcG8=
+Received: from mx-prod-mc-05.mail-002.prod.us-west-2.aws.redhat.com
+ (ec2-54-186-198-63.us-west-2.compute.amazonaws.com [54.186.198.63]) by
+ relay.mimecast.com with ESMTP with STARTTLS (version=TLSv1.3,
+ cipher=TLS_AES_256_GCM_SHA384) id us-mta-101-zj45U-_kP8CQJ9QCIKwe3w-1; Mon,
+ 01 Dec 2025 12:57:08 -0500
+X-MC-Unique: zj45U-_kP8CQJ9QCIKwe3w-1
+X-Mimecast-MFC-AGG-ID: zj45U-_kP8CQJ9QCIKwe3w_1764611826
+Received: from mx-prod-int-01.mail-002.prod.us-west-2.aws.redhat.com
+ (mx-prod-int-01.mail-002.prod.us-west-2.aws.redhat.com [10.30.177.4])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
+ (No client certificate requested)
+ by mx-prod-mc-05.mail-002.prod.us-west-2.aws.redhat.com (Postfix) with ESMTPS
+ id 490C4195609F; Mon,  1 Dec 2025 17:57:05 +0000 (UTC)
+Received: from chopper.redhat.com (unknown [10.22.88.42])
+ by mx-prod-int-01.mail-002.prod.us-west-2.aws.redhat.com (Postfix) with ESMTP
+ id 6EBBC30001A4; Mon,  1 Dec 2025 17:57:01 +0000 (UTC)
+From: Lyude Paul <lyude@redhat.com>
+To: dri-devel@lists.freedesktop.org, nouveau@lists.freedesktop.org,
+ linux-kernel@vger.kernel.org
+Cc: stable@vger.kernel.org, Danilo Krummrich <dakr@kernel.org>,
  Maarten Lankhorst <maarten.lankhorst@linux.intel.com>,
  Maxime Ripard <mripard@kernel.org>,
- Thomas Zimmermann <tzimmermann@suse.de>,
- John Hubbard <jhubbard@nvidia.com>, Timur Tabi <ttabi@nvidia.com>,
- Joel Fernandes <joel@joelfernandes.org>,
- Lyude Paul <elle@weathered-steel.dev>, Andrea Righi <arighi@nvidia.com>,
- Philipp Stanner <phasta@kernel.org>
-Content-Transfer-Encoding: quoted-printable
-Message-Id: <5B89D953-BB52-4E8F-AC40-1FA33C016780@collabora.com>
-References: <20251129213056.4021375-1-joelagnelf@nvidia.com>
-To: Joel Fernandes <joelagnelf@nvidia.com>
-X-Mailer: Apple Mail (2.3826.700.81)
-X-ZohoMailClient: External
+ Thomas Zimmermann <tzimmermann@suse.de>, David Airlie <airlied@gmail.com>,
+ Simona Vetter <simona@ffwll.ch>, Dave Airlie <airlied@redhat.com>,
+ Timur Tabi <ttabi@nvidia.com>, Ben Skeggs <bskeggs@nvidia.com>,
+ Zhi Wang <zhiw@nvidia.com>, Mel Henning <mhenning@darkrefraction.com>
+Subject: [PATCH] drm/nouveau/gsp: Prepare fwsec-sb and fwsec-frts at boot
+Date: Mon,  1 Dec 2025 12:56:28 -0500
+Message-ID: <20251201175634.248900-1-lyude@redhat.com>
+MIME-Version: 1.0
+Content-Transfer-Encoding: 8bit
+X-Scanned-By: MIMEDefang 3.4.1 on 10.30.177.4
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -82,530 +72,307 @@ List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
+At the moment - the memory allocations for fwsec-sb and fwsec-frts are
+created as needed and released after being used. This can cause
+runtime suspend/resume to initially work on driver load, but then later
+fail on a machine that has been running for long enough with sufficiently
+high enough memory pressure:
 
+  kworker/7:1: page allocation failure: order:5, mode:0xcc0(GFP_KERNEL),
+  nodemask=(null),cpuset=/,mems_allowed=0
+  CPU: 7 UID: 0 PID: 875159 Comm: kworker/7:1 Not tainted
+  6.17.8-300.fc43.x86_64 #1 PREEMPT(lazy)
+  Hardware name: SLIMBOOK Executive/Executive, BIOS N.1.10GRU06 02/02/2024
+  Workqueue: pm pm_runtime_work
+  Call Trace:
+   <TASK>
+   dump_stack_lvl+0x5d/0x80
+   warn_alloc+0x163/0x190
+   ? __alloc_pages_direct_compact+0x1b3/0x220
+   __alloc_pages_slowpath.constprop.0+0x57a/0xb10
+   __alloc_frozen_pages_noprof+0x334/0x350
+   __alloc_pages_noprof+0xe/0x20
+   __dma_direct_alloc_pages.isra.0+0x1eb/0x330
+   dma_direct_alloc_pages+0x3c/0x190
+   dma_alloc_pages+0x29/0x130
+   nvkm_firmware_ctor+0x1ae/0x280 [nouveau]
+   nvkm_falcon_fw_ctor+0x3e/0x60 [nouveau]
+   nvkm_gsp_fwsec+0x10e/0x2c0 [nouveau]
+   ? sysvec_apic_timer_interrupt+0xe/0x90
+   nvkm_gsp_fwsec_sb+0x27/0x70 [nouveau]
+   tu102_gsp_fini+0x65/0x110 [nouveau]
+   ? ktime_get+0x3c/0xf0
+   nvkm_subdev_fini+0x67/0xc0 [nouveau]
+   nvkm_device_fini+0x94/0x140 [nouveau]
+   nvkm_udevice_fini+0x50/0x70 [nouveau]
+   nvkm_object_fini+0xb1/0x140 [nouveau]
+   nvkm_object_fini+0x70/0x140 [nouveau]
+   ? __pfx_pci_pm_runtime_suspend+0x10/0x10
+   nouveau_do_suspend+0xe4/0x170 [nouveau]
+   nouveau_pmops_runtime_suspend+0x3e/0xb0 [nouveau]
+   pci_pm_runtime_suspend+0x67/0x1a0
+   ? __pfx_pci_pm_runtime_suspend+0x10/0x10
+   __rpm_callback+0x45/0x1f0
+   ? __pfx_pci_pm_runtime_suspend+0x10/0x10
+   rpm_callback+0x6d/0x80
+   rpm_suspend+0xe5/0x5e0
+   ? finish_task_switch.isra.0+0x99/0x2c0
+   pm_runtime_work+0x98/0xb0
+   process_one_work+0x18f/0x350
+   worker_thread+0x25a/0x3a0
+   ? __pfx_worker_thread+0x10/0x10
+   kthread+0xf9/0x240
+   ? __pfx_kthread+0x10/0x10
+   ? __pfx_kthread+0x10/0x10
+   ret_from_fork+0xf1/0x110
+   ? __pfx_kthread+0x10/0x10
+   ret_from_fork_asm+0x1a/0x30
+   </TASK>
 
-> On 29 Nov 2025, at 18:30, Joel Fernandes <joelagnelf@nvidia.com> =
-wrote:
->=20
-> Add a new module `clist` for working with C's doubly circular linked
-> lists. Provide low-level iteration over list_head nodes and high-level
-> iteration over typed list items.
->=20
-> Provide a `clist_create` macro to assist in creation of the `Clist` =
-type.
->=20
-> Signed-off-by: Joel Fernandes <joelagnelf@nvidia.com>
-> ---
-> Thanks to Alex, Daniel, Danilo, John, and Miguel for reviewing v1/v2!
->=20
-> Changes since v2:
->  - Squashed the 3 patches into a single patch due to dependencies and =
-reducing helpers.
->  - Changed Clist to Clist<'a, T> using const generic offset (Alex).
->  - Simplified C helpers to only list_add_tail (Alex, John).
->  - Added init_list_head() for INIT_LIST_HEAD functionality and dropped =
-it from C helpers (Alex).
->  - Added FusedIterator impl for both ClistHeadIter and ClistIter.
->  - Added PartialEq/Eq for ClistHead (Alex)
->  - Rust style improvements, comment improvements (Daniel).
->  - Added MAINTAINERS entry (Miguel).
->=20
-> Link to v2: =
-https://lore.kernel.org/all/20251111171315.2196103-2-joelagnelf@nvidia.com=
-/
-> Link to v1 (RFC): =
-https://lore.kernel.org/all/20251030190613.1224287-2-joelagnelf@nvidia.com=
-/
->=20
-> MAINTAINERS            |   7 +
-> rust/helpers/helpers.c |   1 +
-> rust/helpers/list.c    |  12 ++
-> rust/kernel/clist.rs   | 349 +++++++++++++++++++++++++++++++++++++++++
-> rust/kernel/lib.rs     |   1 +
-> 5 files changed, 370 insertions(+)
-> create mode 100644 rust/helpers/list.c
-> create mode 100644 rust/kernel/clist.rs
->=20
-> diff --git a/MAINTAINERS b/MAINTAINERS
-> index 5f7aa6a8a9a1..fb2ff877b6d1 100644
-> --- a/MAINTAINERS
-> +++ b/MAINTAINERS
-> @@ -22666,6 +22666,13 @@ F: rust/kernel/init.rs
-> F: rust/pin-init/
-> K: \bpin-init\b|pin_init\b|PinInit
->=20
-> +RUST TO C LIST INTERFACES
-> +M: Joel Fernandes <joelagnelf@nvidia.com>
-> +M: Alexandre Courbot <acourbot@nvidia.com>
-> +L: rust-for-linux@vger.kernel.org
-> +S: Maintained
-> +F: rust/kernel/clist.rs
-> +
-> RXRPC SOCKETS (AF_RXRPC)
-> M: David Howells <dhowells@redhat.com>
-> M: Marc Dionne <marc.dionne@auristor.com>
-> diff --git a/rust/helpers/helpers.c b/rust/helpers/helpers.c
-> index 79c72762ad9c..634fa2386bbb 100644
-> --- a/rust/helpers/helpers.c
-> +++ b/rust/helpers/helpers.c
-> @@ -32,6 +32,7 @@
-> #include "io.c"
-> #include "jump_label.c"
-> #include "kunit.c"
-> +#include "list.c"
-> #include "maple_tree.c"
-> #include "mm.c"
-> #include "mutex.c"
-> diff --git a/rust/helpers/list.c b/rust/helpers/list.c
-> new file mode 100644
-> index 000000000000..6044979c7a2e
-> --- /dev/null
-> +++ b/rust/helpers/list.c
-> @@ -0,0 +1,12 @@
-> +// SPDX-License-Identifier: GPL-2.0
-> +
-> +/*
-> + * Helpers for C Circular doubly linked list implementation.
-> + */
-> +
-> +#include <linux/list.h>
-> +
-> +void rust_helper_list_add_tail(struct list_head *new, struct =
-list_head *head)
-> +{
-> + list_add_tail(new, head);
-> +}
-> diff --git a/rust/kernel/clist.rs b/rust/kernel/clist.rs
-> new file mode 100644
-> index 000000000000..361a6132299b
-> --- /dev/null
-> +++ b/rust/kernel/clist.rs
-> @@ -0,0 +1,349 @@
-> +// SPDX-License-Identifier: GPL-2.0
-> +
-> +//! A C doubly circular intrusive linked list interface for rust =
-code.
-> +//!
-> +//! # Examples
-> +//!
-> +//! ```
-> +//! use kernel::{
-> +//!     bindings,
-> +//!     clist::init_list_head,
-> +//!     clist_create,
-> +//!     types::Opaque, //
-> +//! };
-> +//! # // Create test list with values (0, 10, 20) - normally done by =
-C code but it is
-> +//! # // emulated here for doctests using the C bindings.
-> +//! # use core::mem::MaybeUninit;
-> +//! #
-> +//! # /// C struct with embedded `list_head` (typically will be =
-allocated by C code).
-> +//! # #[repr(C)]
-> +//! # pub(crate) struct SampleItemC {
-> +//! #     pub value: i32,
-> +//! #     pub link: bindings::list_head,
-> +//! # }
-> +//! #
-> +//! # let mut head =3D MaybeUninit::<bindings::list_head>::uninit();
-> +//! #
-> +//! # // SAFETY: head and all the items are test objects allocated in =
-this scope.
-> +//! # unsafe { init_list_head(head.as_mut_ptr()) };
-> +//! # // SAFETY: head is a test object allocated in this scope.
-> +//! # let mut head =3D unsafe { head.assume_init() };
-> +//! # let mut items =3D [
-> +//! #     MaybeUninit::<SampleItemC>::uninit(),
-> +//! #     MaybeUninit::<SampleItemC>::uninit(),
-> +//! #     MaybeUninit::<SampleItemC>::uninit(),
-> +//! # ];
-> +//! #
-> +//! # for (i, item) in items.iter_mut().enumerate() {
-> +//! #     let ptr =3D item.as_mut_ptr();
-> +//! #     // SAFETY: pointers are to allocated test objects with a =
-list_head field.
-> +//! #     unsafe {
-> +//! #         (*ptr).value =3D i as i32 * 10;
-> +//! #         // addr_of_mut!() computes address of link directly as =
-link is uninitialized.
-> +//! #         init_list_head(core::ptr::addr_of_mut!((*ptr).link));
-> +//! #         bindings::list_add_tail(&mut (*ptr).link, &mut head);
-> +//! #     }
-> +//! # }
-> +//!
-> +//! // Rust wrapper for the C struct.
-> +//! // The list item struct in this example is defined in C code as:
-> +//! //   struct SampleItemC {
-> +//! //       int value;
-> +//! //       struct list_head link;
-> +//! //   };
-> +//! //
-> +//! #[repr(transparent)]
-> +//! pub(crate) struct Item(Opaque<SampleItemC>);
-> +//!
-> +//! impl Item {
-> +//!     pub(crate) fn value(&self) -> i32 {
-> +//!         // SAFETY: `Item` has same layout as `SampleItemC`.
-> +//!         unsafe { (*self.0.get()).value }
-> +//!     }
-> +//! }
-> +//!
-> +//! // Create typed Clist from sentinel head.
-> +//! // SAFETY: head is valid, items are `SampleItemC` with embedded =
-`link` field.
-> +//! let list =3D unsafe { clist_create!(&mut head, Item, SampleItemC, =
-link) };
-> +//!
-> +//! // Iterate directly over typed items.
-> +//! let mut found_0 =3D false;
-> +//! let mut found_10 =3D false;
-> +//! let mut found_20 =3D false;
-> +//!
-> +//! for item in list.iter() {
-> +//!     let val =3D item.value();
-> +//!     if val =3D=3D 0 { found_0 =3D true; }
-> +//!     if val =3D=3D 10 { found_10 =3D true; }
-> +//!     if val =3D=3D 20 { found_20 =3D true; }
-> +//! }
-> +//!
-> +//! assert!(found_0 && found_10 && found_20);
-> +//! ```
-> +
-> +use core::{
-> +    iter::FusedIterator,
-> +    marker::PhantomData, //
-> +};
-> +
-> +use crate::{
-> +    bindings,
-> +    types::Opaque, //
-> +};
-> +
-> +/// Initialize a `list_head` object to point to itself.
-> +///
-> +/// # Safety
-> +///
-> +/// `list` must be a valid pointer to a `list_head` object.
-> +#[inline]
-> +pub unsafe fn init_list_head(list: *mut bindings::list_head) {
-> +    // SAFETY: Caller guarantees `list` is a valid pointer to a =
-`list_head`.
-> +    unsafe {
-> +        (*list).next =3D list;
-> +        (*list).prev =3D list;
-> +    }
-> +}
-> +
-> +/// Wraps a `list_head` object for use in intrusive linked lists.
-> +///
-> +/// # Invariants
-> +///
-> +/// - `ClistHead` represents an allocated and valid `list_head` =
-structure.
-> +///
-> +/// # Safety
-> +///
-> +/// - All `list_head` nodes must not be modified by C code for the =
-lifetime of `ClistHead`.
-> +#[repr(transparent)]
-> +pub struct ClistHead(Opaque<bindings::list_head>);
+The reason this happens is because the fwsec-sb and fwsec-frts firmware
+images only support being booted from a contiguous coherent sysmem
+allocation. If a system runs into enough memory fragmentation from memory
+pressure, such as what can happen on systems with low amounts of memory,
+this can lead to a situation where it later becomes impossible to find
+space for a large enough contiguous allocation to hold each firmware image.
+As such, we fail to allocate memory for the falcon firmware images - fail
+to boot the GPU, and the driver falls over.
 
-I still think we should call this CList. IMHO, it does not make sense to =
-have a
-Clist, and a ClistHead (notice the capitalization). CList and CListHead =
-are
-easier to read and reason about.
+Since this firmware can't use non-contiguous allocations, the best solution
+to avoid this issue is to simply allocate the memory for both fwsec-sb and
+fwsec-frts during initial driver load, and reuse said allocations whenever
+either firmware image needs to be used. We then release the memory
+allocations on driver unload.
 
-Did anyone push back on this?
+Signed-off-by: Lyude Paul <lyude@redhat.com>
+Fixes: 594766ca3e53 ("drm/nouveau/gsp: move booter handling to GPU-specific code")
+Cc: <stable@vger.kernel.org> # v6.16+
+---
+ .../gpu/drm/nouveau/include/nvkm/subdev/gsp.h |  5 ++
+ .../gpu/drm/nouveau/nvkm/subdev/gsp/fwsec.c   | 56 ++++++++++++++-----
+ .../gpu/drm/nouveau/nvkm/subdev/gsp/priv.h    |  8 ++-
+ .../drm/nouveau/nvkm/subdev/gsp/rm/r535/gsp.c | 11 +++-
+ .../gpu/drm/nouveau/nvkm/subdev/gsp/tu102.c   |  4 ++
+ 5 files changed, 68 insertions(+), 16 deletions(-)
 
+diff --git a/drivers/gpu/drm/nouveau/include/nvkm/subdev/gsp.h b/drivers/gpu/drm/nouveau/include/nvkm/subdev/gsp.h
+index 226c7ec56b8ed..608ef5189eddb 100644
+--- a/drivers/gpu/drm/nouveau/include/nvkm/subdev/gsp.h
++++ b/drivers/gpu/drm/nouveau/include/nvkm/subdev/gsp.h
+@@ -73,6 +73,11 @@ struct nvkm_gsp {
+ 
+ 		const struct firmware *bl;
+ 		const struct firmware *rm;
++
++		struct {
++			struct nvkm_falcon_fw sb;
++			struct nvkm_falcon_fw frts;
++		} falcon;
+ 	} fws;
+ 
+ 	struct nvkm_firmware fw;
+diff --git a/drivers/gpu/drm/nouveau/nvkm/subdev/gsp/fwsec.c b/drivers/gpu/drm/nouveau/nvkm/subdev/gsp/fwsec.c
+index 5b721bd9d7994..be9a0b103aa1f 100644
+--- a/drivers/gpu/drm/nouveau/nvkm/subdev/gsp/fwsec.c
++++ b/drivers/gpu/drm/nouveau/nvkm/subdev/gsp/fwsec.c
+@@ -259,18 +259,16 @@ nvkm_gsp_fwsec_v3(struct nvkm_gsp *gsp, const char *name,
+ }
+ 
+ static int
+-nvkm_gsp_fwsec(struct nvkm_gsp *gsp, const char *name, u32 init_cmd)
++nvkm_gsp_fwsec_init(struct nvkm_gsp *gsp, struct nvkm_falcon_fw *fw, const char *name, u32 init_cmd)
+ {
+ 	struct nvkm_subdev *subdev = &gsp->subdev;
+ 	struct nvkm_device *device = subdev->device;
+ 	struct nvkm_bios *bios = device->bios;
+ 	const union nvfw_falcon_ucode_desc *desc;
+ 	struct nvbios_pmuE flcn_ucode;
+-	u8 idx, ver, hdr;
+ 	u32 data;
+ 	u16 size, vers;
+-	struct nvkm_falcon_fw fw = {};
+-	u32 mbox0 = 0;
++	u8 idx, ver, hdr;
+ 	int ret;
+ 
+ 	/* Lookup in VBIOS. */
+@@ -291,8 +289,8 @@ nvkm_gsp_fwsec(struct nvkm_gsp *gsp, const char *name, u32 init_cmd)
+ 	vers = (desc->v2.Hdr & 0x0000ff00) >> 8;
+ 
+ 	switch (vers) {
+-	case 2: ret = nvkm_gsp_fwsec_v2(gsp, name, &desc->v2, size, init_cmd, &fw); break;
+-	case 3: ret = nvkm_gsp_fwsec_v3(gsp, name, &desc->v3, size, init_cmd, &fw); break;
++	case 2: ret = nvkm_gsp_fwsec_v2(gsp, name, &desc->v2, size, init_cmd, fw); break;
++	case 3: ret = nvkm_gsp_fwsec_v3(gsp, name, &desc->v3, size, init_cmd, fw); break;
+ 	default:
+ 		nvkm_error(subdev, "%s(v%d): version unknown\n", name, vers);
+ 		return -EINVAL;
+@@ -303,15 +301,19 @@ nvkm_gsp_fwsec(struct nvkm_gsp *gsp, const char *name, u32 init_cmd)
+ 		return ret;
+ 	}
+ 
+-	/* Boot. */
+-	ret = nvkm_falcon_fw_boot(&fw, subdev, true, &mbox0, NULL, 0, 0);
+-	nvkm_falcon_fw_dtor(&fw);
+-	if (ret)
+-		return ret;
+-
+ 	return 0;
+ }
+ 
++static int
++nvkm_gsp_fwsec_boot(struct nvkm_gsp *gsp, struct nvkm_falcon_fw *fw)
++{
++	struct nvkm_subdev *subdev = &gsp->subdev;
++	u32 mbox0 = 0;
++
++	/* Boot */
++	return nvkm_falcon_fw_boot(fw, subdev, true, &mbox0, NULL, 0, 0);
++}
++
+ int
+ nvkm_gsp_fwsec_sb(struct nvkm_gsp *gsp)
+ {
+@@ -320,7 +322,7 @@ nvkm_gsp_fwsec_sb(struct nvkm_gsp *gsp)
+ 	int ret;
+ 	u32 err;
+ 
+-	ret = nvkm_gsp_fwsec(gsp, "fwsec-sb", NVFW_FALCON_APPIF_DMEMMAPPER_CMD_SB);
++	ret = nvkm_gsp_fwsec_boot(gsp, &gsp->fws.falcon.sb);
+ 	if (ret)
+ 		return ret;
+ 
+@@ -334,6 +336,19 @@ nvkm_gsp_fwsec_sb(struct nvkm_gsp *gsp)
+ 	return 0;
+ }
+ 
++int
++nvkm_gsp_fwsec_sb_ctor(struct nvkm_gsp *gsp)
++{
++	return nvkm_gsp_fwsec_init(gsp, &gsp->fws.falcon.sb, "fwsec-sb",
++				   NVFW_FALCON_APPIF_DMEMMAPPER_CMD_SB);
++}
++
++void
++nvkm_gsp_fwsec_sb_dtor(struct nvkm_gsp *gsp)
++{
++	nvkm_falcon_fw_dtor(&gsp->fws.falcon.sb);
++}
++
+ int
+ nvkm_gsp_fwsec_frts(struct nvkm_gsp *gsp)
+ {
+@@ -342,7 +357,7 @@ nvkm_gsp_fwsec_frts(struct nvkm_gsp *gsp)
+ 	int ret;
+ 	u32 err, wpr2_lo, wpr2_hi;
+ 
+-	ret = nvkm_gsp_fwsec(gsp, "fwsec-frts", NVFW_FALCON_APPIF_DMEMMAPPER_CMD_FRTS);
++	ret = nvkm_gsp_fwsec_boot(gsp, &gsp->fws.falcon.frts);
+ 	if (ret)
+ 		return ret;
+ 
+@@ -358,3 +373,16 @@ nvkm_gsp_fwsec_frts(struct nvkm_gsp *gsp)
+ 	nvkm_debug(subdev, "fwsec-frts: WPR2 @ %08x - %08x\n", wpr2_lo, wpr2_hi);
+ 	return 0;
+ }
++
++int
++nvkm_gsp_fwsec_frts_ctor(struct nvkm_gsp *gsp)
++{
++	return nvkm_gsp_fwsec_init(gsp, &gsp->fws.falcon.frts, "fwsec-frts",
++				   NVFW_FALCON_APPIF_DMEMMAPPER_CMD_FRTS);
++}
++
++void
++nvkm_gsp_fwsec_frts_dtor(struct nvkm_gsp *gsp)
++{
++	nvkm_falcon_fw_dtor(&gsp->fws.falcon.frts);
++}
+diff --git a/drivers/gpu/drm/nouveau/nvkm/subdev/gsp/priv.h b/drivers/gpu/drm/nouveau/nvkm/subdev/gsp/priv.h
+index c3494b7ac572b..d0ce34b5806c2 100644
+--- a/drivers/gpu/drm/nouveau/nvkm/subdev/gsp/priv.h
++++ b/drivers/gpu/drm/nouveau/nvkm/subdev/gsp/priv.h
+@@ -5,8 +5,14 @@
+ #include <rm/gpu.h>
+ enum nvkm_acr_lsf_id;
+ 
+-int nvkm_gsp_fwsec_frts(struct nvkm_gsp *);
++
++int nvkm_gsp_fwsec_sb_ctor(struct nvkm_gsp *);
+ int nvkm_gsp_fwsec_sb(struct nvkm_gsp *);
++void nvkm_gsp_fwsec_sb_dtor(struct nvkm_gsp *);
++
++int nvkm_gsp_fwsec_frts_ctor(struct nvkm_gsp *);
++int nvkm_gsp_fwsec_frts(struct nvkm_gsp *);
++void nvkm_gsp_fwsec_frts_dtor(struct nvkm_gsp *);
+ 
+ struct nvkm_gsp_fwif {
+ 	int version;
+diff --git a/drivers/gpu/drm/nouveau/nvkm/subdev/gsp/rm/r535/gsp.c b/drivers/gpu/drm/nouveau/nvkm/subdev/gsp/rm/r535/gsp.c
+index 32e6a065d6d7a..33db4bad44ef5 100644
+--- a/drivers/gpu/drm/nouveau/nvkm/subdev/gsp/rm/r535/gsp.c
++++ b/drivers/gpu/drm/nouveau/nvkm/subdev/gsp/rm/r535/gsp.c
+@@ -1817,12 +1817,16 @@ r535_gsp_rm_boot_ctor(struct nvkm_gsp *gsp)
+ 	RM_RISCV_UCODE_DESC *desc;
+ 	int ret;
+ 
++	ret = nvkm_gsp_fwsec_sb_ctor(gsp);
++	if (ret)
++		return ret;
++
+ 	hdr = nvfw_bin_hdr(&gsp->subdev, fw->data);
+ 	desc = (void *)fw->data + hdr->header_offset;
+ 
+ 	ret = nvkm_gsp_mem_ctor(gsp, hdr->data_size, &gsp->boot.fw);
+ 	if (ret)
+-		return ret;
++		goto dtor_fwsec;
+ 
+ 	memcpy(gsp->boot.fw.data, fw->data + hdr->data_offset, hdr->data_size);
+ 
+@@ -1831,6 +1835,9 @@ r535_gsp_rm_boot_ctor(struct nvkm_gsp *gsp)
+ 	gsp->boot.manifest_offset = desc->manifestOffset;
+ 	gsp->boot.app_version = desc->appVersion;
+ 	return 0;
++dtor_fwsec:
++	nvkm_gsp_fwsec_sb_dtor(gsp);
++	return ret;
+ }
+ 
+ static const struct nvkm_firmware_func
+@@ -2087,6 +2094,7 @@ r535_gsp_dtor(struct nvkm_gsp *gsp)
+ 	nvkm_gsp_radix3_dtor(gsp, &gsp->radix3);
+ 	nvkm_gsp_mem_dtor(&gsp->sig);
+ 	nvkm_firmware_dtor(&gsp->fw);
++	nvkm_gsp_fwsec_sb_dtor(gsp);
+ 
+ 	nvkm_falcon_fw_dtor(&gsp->booter.unload);
+ 	nvkm_falcon_fw_dtor(&gsp->booter.load);
+@@ -2105,6 +2113,7 @@ r535_gsp_dtor(struct nvkm_gsp *gsp)
+ 	nvkm_gsp_mem_dtor(&gsp->rmargs);
+ 	nvkm_gsp_mem_dtor(&gsp->wpr_meta);
+ 	nvkm_gsp_mem_dtor(&gsp->shm.mem);
++	nvkm_gsp_fwsec_frts_dtor(gsp);
+ 
+ 	r535_gsp_libos_debugfs_fini(gsp);
+ 
+diff --git a/drivers/gpu/drm/nouveau/nvkm/subdev/gsp/tu102.c b/drivers/gpu/drm/nouveau/nvkm/subdev/gsp/tu102.c
+index 81e56da0474a1..b9047da609b81 100644
+--- a/drivers/gpu/drm/nouveau/nvkm/subdev/gsp/tu102.c
++++ b/drivers/gpu/drm/nouveau/nvkm/subdev/gsp/tu102.c
+@@ -331,6 +331,10 @@ tu102_gsp_oneinit(struct nvkm_gsp *gsp)
+ 	if (ret)
+ 		return ret;
+ 
++	ret = nvkm_gsp_fwsec_frts_ctor(gsp);
++	if (WARN_ON(ret))
++		return ret;
++
+ 	ret = nvkm_gsp_fwsec_frts(gsp);
+ 	if (WARN_ON(ret))
+ 		return ret;
 
-> +
-> +impl ClistHead {
-> +    /// Create a `&ClistHead` reference from a raw `list_head` =
-pointer.
-> +    ///
-> +    /// # Safety
-> +    ///
-> +    /// - `ptr` must be a valid pointer to an allocated and =
-initialized `list_head` structure.
-> +    /// - `ptr` must remain valid and unmodified for the lifetime =
-`'a`.
-> +    #[inline]
-> +    pub unsafe fn from_raw<'a>(ptr: *mut bindings::list_head) -> &'a =
-Self {
-> +        // SAFETY:
-> +        // - `ClistHead` has same layout as `list_head`.
-> +        // - `ptr` is valid and unmodified for 'a.
-> +        unsafe { &*ptr.cast() }
-> +    }
-> +
-> +    /// Get the raw `list_head` pointer.
-> +    #[inline]
-> +    pub fn as_raw(&self) -> *mut bindings::list_head {
-> +        self.0.get()
-> +    }
-> +
-> +    /// Get the next `ClistHead` in the list.
-> +    #[inline]
-> +    pub fn next(&self) -> &Self {
-
-> +        let raw =3D self.as_raw();
-> +        // SAFETY:
-> +        // - `self.as_raw()` is valid per type invariants.
-> +        // - The `next` pointer is guaranteed to be non-NULL.
-> +        unsafe { Self::from_raw((*raw).next) }
-> +    }
-> +
-> +    /// Get the previous `ClistHead` in the list.
-> +    #[inline]
-> +    pub fn prev(&self) -> &Self {
-
-> +        let raw =3D self.as_raw();
-> +        // SAFETY:
-> +        // - self.as_raw() is valid per type invariants.
-> +        // - The `prev` pointer is guaranteed to be non-NULL.
-> +        unsafe { Self::from_raw((*raw).prev) }
-> +    }
-> +
-> +    /// Check if this node is linked in a list (not isolated).
-> +    #[inline]
-> +    pub fn is_linked(&self) -> bool {
-> +        let raw =3D self.as_raw();
-> +        // SAFETY: self.as_raw() is valid per type invariants.
-> +        unsafe { (*raw).next !=3D raw && (*raw).prev !=3D raw }
-> +    }
-> +}
-> +
-> +// SAFETY: `ClistHead` can be sent to any thread.
-> +unsafe impl Send for ClistHead {}
-> +
-> +// SAFETY: `ClistHead` can be shared among threads as it is not =
-modified by C per type invariants.
-> +unsafe impl Sync for ClistHead {}
-> +
-> +impl PartialEq for ClistHead {
-> +    fn eq(&self, other: &Self) -> bool {
-> +        self.as_raw() =3D=3D other.as_raw()
-> +    }
-> +}
-> +
-> +impl Eq for ClistHead {}
-> +
-> +/// Low-level iterator over `list_head` nodes.
-> +///
-> +/// An iterator used to iterate over a C intrusive linked list =
-(`list_head`). Caller has to
-> +/// perform conversion of returned `ClistHead` to an item (using =
-`container_of` macro or similar).
-> +///
-> +/// # Invariants
-> +///
-> +/// `ClistHeadIter` is iterating over an allocated, initialized and =
-valid list.
-> +struct ClistHeadIter<'a> {
-> +    current_head: &'a ClistHead,
-> +    list_head: &'a ClistHead,
-> +    exhausted: bool,
-> +}
-> +
-> +impl<'a> Iterator for ClistHeadIter<'a> {
-> +    type Item =3D &'a ClistHead;
-> +
-> +    #[inline]
-> +    fn next(&mut self) -> Option<Self::Item> {
-> +        if self.exhausted {
-> +            return None;
-> +        }
-> +
-> +        // Advance to next node.
-> +        self.current_head =3D self.current_head.next();
-
-> +
-> +        // Check if we've circled back to the sentinel head.
-> +        if self.current_head =3D=3D self.list_head {
-> +            self.exhausted =3D true;
-> +            return None;
-> +        }
-> +
-> +        Some(self.current_head)
-> +    }
-> +}
-> +
-> +impl<'a> FusedIterator for ClistHeadIter<'a> {}
-> +
-> +/// A typed C linked list with a sentinel head.
-> +///
-> +/// A sentinel head represents the entire linked list and can be used =
-for
-> +/// iteration over items of type `T`, it is not associated with a =
-specific item.
-> +///
-> +/// # Invariants
-> +///
-> +/// - `head` is an allocated and valid C `list_head` structure that =
-is the list's sentinel.
-> +/// - `offset` is the byte offset of the `list_head` field within the =
-C struct that `T` wraps.
-> +///
-> +/// # Safety
-> +///
-> +/// - All the list's `list_head` nodes must be allocated and have =
-valid next/prev pointers.
-> +/// - The underlying `list_head` (and entire list) must not be =
-modified by C for the
-> +///   lifetime 'a of `Clist`.
-> +pub struct Clist<'a, T> {
-> +    head: &'a ClistHead,
-> +    offset: usize,
-> +    _phantom: PhantomData<&'a T>,
-> +}
-> +
-> +impl<'a, T> Clist<'a, T> {
-> +    /// Create a typed `Clist` from a raw sentinel `list_head` =
-pointer.
-> +    ///
-> +    /// The const generic `OFFSET` specifies the byte offset of the =
-`list_head` field within
-> +    /// the C struct that `T` wraps.
-> +    ///
-> +    /// # Safety
-> +    ///
-> +    /// - `ptr` must be a valid pointer to an allocated and =
-initialized `list_head` structure
-> +    ///   representing a list sentinel.
-> +    /// - `ptr` must remain valid and unmodified for the lifetime =
-`'a`.
-> +    /// - The list must contain items where the `list_head` field is =
-at byte offset `OFFSET`.
-> +    /// - `T` must be `#[repr(transparent)]` over the C struct.
-> +    #[inline]
-> +    pub unsafe fn from_raw_and_offset<const OFFSET: usize>(ptr: *mut =
-bindings::list_head) -> Self {
-> +        Self {
-> +            // SAFETY: Caller guarantees `ptr` is a valid, sentinel =
-`list_head` object.
-> +            head: unsafe { ClistHead::from_raw(ptr) },
-> +            offset: OFFSET,
-> +            _phantom: PhantomData,
-> +        }
-> +    }
-> +
-> +    /// Get the raw sentinel `list_head` pointer.
-> +    #[inline]
-> +    pub fn as_raw(&self) -> *mut bindings::list_head {
-> +        self.head.as_raw()
-> +    }
-> +
-> +    /// Check if the list is empty.
-> +    #[inline]
-> +    pub fn is_empty(&self) -> bool {
-> +        let raw =3D self.as_raw();
-> +        // SAFETY: self.as_raw() is valid per type invariants.
-> +        unsafe { (*raw).next =3D=3D raw }
-> +    }
-> +
-> +    /// Create an iterator over typed items.
-> +    #[inline]
-> +    pub fn iter(&self) -> ClistIter<'a, T> {
-> +        ClistIter {
-> +            head_iter: ClistHeadIter {
-> +                current_head: self.head,
-> +                list_head: self.head,
-> +                exhausted: false,
-> +            },
-> +            offset: self.offset,
-> +            _phantom: PhantomData,
-> +        }
-> +    }
-> +}
-> +
-> +/// High-level iterator over typed list items.
-> +pub struct ClistIter<'a, T> {
-> +    head_iter: ClistHeadIter<'a>,
-> +    offset: usize,
-> +    _phantom: PhantomData<&'a T>,
-> +}
-> +
-> +impl<'a, T> Iterator for ClistIter<'a, T> {
-> +    type Item =3D &'a T;
-> +
-> +    fn next(&mut self) -> Option<Self::Item> {
-> +        let head =3D self.head_iter.next()?;
-> +
-> +        // Convert to item using offset.
-> +        // SAFETY:
-> +        // - `item_ptr` calculation from `offset` (calculated using =
-offset_of!)
-> +        //    is valid per invariants.
-> +        Some(unsafe { =
-&*head.as_raw().cast::<u8>().sub(self.offset).cast::<T>() })
-> +    }
-> +}
-> +
-> +impl<'a, T> FusedIterator for ClistIter<'a, T> {}
-> +
-> +/// Create a C doubly-circular linked list interface `Clist` from a =
-raw `list_head` pointer.
-> +///
-> +/// This macro creates a `Clist<T>` that can iterate over items of =
-type `$rust_type` linked
-> +/// via the `$field` field in the underlying C struct `$c_type`.
-> +///
-> +/// # Arguments
-> +///
-> +/// - `$head`: Raw pointer to the sentinel `list_head` object (`*mut =
-bindings::list_head`).
-> +/// - `$rust_type`: Each item's rust wrapper type.
-> +/// - `$c_type`: Each item's C struct type that contains the embedded =
-`list_head`.
-> +/// - `$field`: The name of the `list_head` field within the C =
-struct.
-> +///
-> +/// # Safety
-> +///
-> +/// The caller must ensure:
-> +/// - `$head` is a valid, initialized sentinel `list_head` pointing =
-to a list that remains
-> +///   unmodified for the lifetime of the rust `Clist`.
-> +/// - The list contains items of type `$c_type` linked via an =
-embedded `$field`.
-> +/// - `$rust_type` is `#[repr(transparent)]` over `$c_type` or has =
-compatible layout.
-> +/// - The macro is called from an unsafe block.
-> +///
-> +/// # Examples
-> +///
-> +/// Refer to the examples in the [crate::clist] module documentation.
-
-Missing backticks?
-
-> +#[macro_export]
-> +macro_rules! clist_create {
-> +    ($head:expr, $rust_type:ty, $c_type:ty, $field:ident) =3D> {
-
-I think this needs a SAFETY comment, or otherwise the linter will =
-complain.
-
-> +        $crate::clist::Clist::<$rust_type>::from_raw_and_offset::<
-> +            { ::core::mem::offset_of!($c_type, $field) },
-> +        >($head)
-> +    };
-> +}
-> diff --git a/rust/kernel/lib.rs b/rust/kernel/lib.rs
-> index c2eea9a2a345..b69cc5ed3b59 100644
-> --- a/rust/kernel/lib.rs
-> +++ b/rust/kernel/lib.rs
-> @@ -72,6 +72,7 @@
-> pub mod bug;
-> #[doc(hidden)]
-> pub mod build_assert;
-> +pub mod clist;
-> pub mod clk;
-> #[cfg(CONFIG_CONFIGFS_FS)]
-> pub mod configfs;
-> --=20
-> 2.34.1
->=20
-
+base-commit: 62433efe0b06042d8016ba0713d801165a939229
+-- 
+2.52.0
 
