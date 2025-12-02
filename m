@@ -2,102 +2,156 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id 84F1CC9CE9A
-	for <lists+nouveau@lfdr.de>; Tue, 02 Dec 2025 21:28:19 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 6BF78C9D117
+	for <lists+nouveau@lfdr.de>; Tue, 02 Dec 2025 22:23:34 +0100 (CET)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 0B26410E6D2;
-	Tue,  2 Dec 2025 20:28:17 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id E13BF10E6D6;
+	Tue,  2 Dec 2025 21:23:18 +0000 (UTC)
 Authentication-Results: gabe.freedesktop.org;
-	dkim=pass (2048-bit key; unprotected) header.d=google.com header.i=@google.com header.b="c+L8QnBB";
+	dkim=pass (2048-bit key; unprotected) header.d=Nvidia.com header.i=@Nvidia.com header.b="stM/0rMd";
 	dkim-atps=neutral
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from mail-wm1-f73.google.com (mail-wm1-f73.google.com
- [209.85.128.73])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 3D75610E6BD
- for <nouveau@lists.freedesktop.org>; Tue,  2 Dec 2025 20:28:16 +0000 (UTC)
-Received: by mail-wm1-f73.google.com with SMTP id
- 5b1f17b1804b1-47775585257so41256715e9.1
- for <nouveau@lists.freedesktop.org>; Tue, 02 Dec 2025 12:28:16 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=google.com; s=20230601; t=1764707295; x=1765312095;
- darn=lists.freedesktop.org; 
- h=cc:to:from:subject:message-id:references:mime-version:in-reply-to
- :date:from:to:cc:subject:date:message-id:reply-to;
- bh=Id46d5Vmg/QweH1w+t+fx2ST+00n7i1ciKT4MxLQ6Gk=;
- b=c+L8QnBBc59yI0fSEjtseAI7Vof/yW1jZ1CdyuZNp3W2nlPXAQBJH3VMkIom2Mb62x
- KtWmKgQDI+iaWk6t/1pdtZRad0c8mj6ezjBTCx18RrrqjQPuV7ShwNRwx312ROr+Hohc
- 2PozHsovNqiETlKuHgrXkXEbRnNWeKFkTHVgOo9zqdS6hzB4zcnL6hi3a5pTafsxxqzt
- 6gDCbc0hqHyKUtvN6qM7ktzFocCM413SLifvyoLQ0TKMtdx2SdFXn8Zew6Wj6kh/BIjy
- 9q3z4aUJXSNotB9koyvxZudV34d3q4KkoRmFj1/Hjtj3e0AoetsIMHAUn/zE3ujJHti0
- pVcA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1764707295; x=1765312095;
- h=cc:to:from:subject:message-id:references:mime-version:in-reply-to
- :date:x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=Id46d5Vmg/QweH1w+t+fx2ST+00n7i1ciKT4MxLQ6Gk=;
- b=wCNjPG5ML1rhaKia0A6ZcL4m+7WWkJk3UkOyTo9PIXPvy532d/cIeGeuicMGlrck4T
- eM+aEu/NtuPWpIOymI/ErRL1GhnYzegRPN2fpNp2+BQbxLMVjPECZ1Qe7Q+WktOZt41a
- xDDnEZ2pnn7wDkZlcPRUeUEaM6m639Spaw7/aCNMQ/RJZo9FXkVKIHH1Vm6W5RyckL3M
- 9ou2WWy0p74vN4wL1F2O4Kd/BV/sMnPjhmBXSEpcnHRyPVcHIkoU6nlMdJHtwjNq1QuA
- G0/JWlgwMlVzZmIPvNG3B1ETu7kM3r9GBosfNcx0FH0dVe8mV9S1JXQO74rl+nLGfuw8
- KqIQ==
-X-Forwarded-Encrypted: i=1;
- AJvYcCW+v2C4bukVj2I6vgsJJrDbwAq17dDyl0APEzsSpRAU7U2KPoxjpo8TR88E1TuDyzc3qJj0QL74@lists.freedesktop.org
-X-Gm-Message-State: AOJu0YxceCIKARwwkXk+C4ma81GLgC8Auc5zAiHeNPWv7CbNBa1CmOH8
- zN2EejlFKNf9Gmdkh/W14mmMpg3RaRogjpWuObnJ3iBFJv1/6uaT4B6ysJQdUn2SVEN22d2+oAE
- N95OgA7TU9otpUA0gDA==
-X-Google-Smtp-Source: AGHT+IEV8MdqGcyCgbe2mt3hk2i0zy9sL5yMlrGz8Wfzitbo0qZDeAoS7Bz5wRmT2BDTK8lUXG2WtOVPXNGQznc=
-X-Received: from wmqg19.prod.google.com ([2002:a05:600c:4ed3:b0:477:a1f9:138c])
- (user=aliceryhl job=prod-delivery.src-stubby-dispatcher) by
- 2002:a05:600c:4e91:b0:477:7ae0:cd6e with SMTP id
- 5b1f17b1804b1-4792a5ddcc9mr8270815e9.5.1764707294808; 
- Tue, 02 Dec 2025 12:28:14 -0800 (PST)
-Date: Tue, 02 Dec 2025 20:27:59 +0000
-In-Reply-To: <20251202-inline-helpers-v1-0-879dae33a66a@google.com>
-Mime-Version: 1.0
-References: <20251202-inline-helpers-v1-0-879dae33a66a@google.com>
-X-Developer-Key: i=aliceryhl@google.com; a=openpgp;
- fpr=49F6C1FAA74960F43A5B86A1EE7A392FDE96209F
-X-Developer-Signature: v=1; a=openpgp-sha256; l=8979; i=aliceryhl@google.com; 
- h=from:subject:message-id;
- bh=ZnZgTS3QcWRawBw++AAPhDFQtHAEQIZjfTFyfZ+xDmk=; 
- b=owEBbQKS/ZANAwAKAQRYvu5YxjlGAcsmYgBpL0vY58X0j2N0y6zci+722T9v5vmhEw8pSHYzy
- bBoMvTYi1uJAjMEAAEKAB0WIQSDkqKUTWQHCvFIvbIEWL7uWMY5RgUCaS9L2AAKCRAEWL7uWMY5
- RgpGD/0fasxYXiW6xVDDz8y4znLsMtXtDdRWNS+6bJ+27GT03cNM49SunHDvdbd1REYSO2YPMBz
- kPaPyVggZHDWnyck1v+MiaG+x4LW+ZRIkW8vaUrh+aymRIXxt76FsCU9rUOcgAZ16qMAGGpu6N+
- phlcZRw3rBj1By8r+yuXf8PdJKxCF4DbMGLkzT41x5F1+oHfjrHV4azKoBtDZzOLfrQf14dJ+wE
- MXz5NrtQdnDi8+fGcMM6T2TA4rimlfzl817O9Ho/Z4sbqYoYciomv8XvLM3z5hS9pzvjfB8UYF5
- u5m/OyCU61eDcrbiyQJbjny4mgxknTjmeUmsF5u1ihqApi8vbB/ZlYHyZL9MgJEkFKqHAyZKga2
- qEGd/jKKrArjdJwDk4TLcMwofyvdezUNx56N+IwbaQ8nKUWxV01veHHnkhvHWBCrkKPP5LvnemU
- woHsvvPGxiX3D6uXJDgzNM2ZaO4uNVFBDnjOkWEUCRvzPFg4muptJlGYfXtrbLGar7KWHu+0scl
- +2UMIdbTQV7p5t32aiJn3k4MV+FSMnPlbBEFJohWVT0dFSUgOeB1jnuJHp6oFzzhJtevrHVJ5iD
- N2Q7FYIYgHL3/LwM4YB/7bDJs6WhgzHaAsvSbU71oiP9t2Fmzvrx0ndD1YMaaBeWrcRhhwR+AH9
- PlvCH9Zp+KU5/LA==
-X-Mailer: b4 0.14.2
-Message-ID: <20251202-inline-helpers-v1-4-879dae33a66a@google.com>
-Subject: [PATCH 4/4] build: rust: provide an option to inline C helpers into
- Rust
-From: Alice Ryhl <aliceryhl@google.com>
-To: Miguel Ojeda <ojeda@kernel.org>
-Cc: Boqun Feng <boqun.feng@gmail.com>, Gary Guo <gary@garyguo.net>, 
- "=?utf-8?q?Bj=C3=B6rn_Roy_Baron?=" <bjorn3_gh@protonmail.com>,
- Benno Lossin <lossin@kernel.org>, 
- Andreas Hindborg <a.hindborg@kernel.org>, Trevor Gross <tmgross@umich.edu>, 
- Danilo Krummrich <dakr@kernel.org>, Alexandre Courbot <acourbot@nvidia.com>,
- Will Deacon <will@kernel.org>, 
- Peter Zijlstra <peterz@infradead.org>, Mark Rutland <mark.rutland@arm.com>, 
- Nathan Chancellor <nathan@kernel.org>,
- Nick Desaulniers <nick.desaulniers+lkml@gmail.com>, 
- Bill Wendling <morbo@google.com>, Justin Stitt <justinstitt@google.com>, 
- Nicolas Schier <nicolas.schier@linux.dev>,
- Andrew Morton <akpm@linux-foundation.org>, 
- Uladzislau Rezki <urezki@gmail.com>, rust-for-linux@vger.kernel.org, 
- linux-kernel@vger.kernel.org, llvm@lists.linux.dev, 
- linux-kbuild@vger.kernel.org, linux-mm@kvack.org, 
- nouveau@lists.freedesktop.org, Alice Ryhl <aliceryhl@google.com>, 
- Matthew Maurer <mmaurer@google.com>
-Content-Type: text/plain; charset="utf-8"
+Received: from SN4PR0501CU005.outbound.protection.outlook.com
+ (mail-southcentralusazon11011054.outbound.protection.outlook.com
+ [40.93.194.54])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 8E50410E6D3
+ for <nouveau@lists.freedesktop.org>; Tue,  2 Dec 2025 21:23:17 +0000 (UTC)
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=ysTIdOCwy5qTlQdxB8pfMSMoIz+Fkswif2w93LKjMMln5awiLkGpPPyb+QE+NbVsx6zLXuVmEMv5SSczwWNt8zQcDevWN+KA2ktW/74pHyE0VZJAGyfimHlUodvTvwxaCygiVcr7e+nmb6ATZrjH6iwnSc5N2T6KVTUyW3McR8bdhTwL/xOoo0By+yuYS1q53fLQoPCeJ7ZqTi5xBfGT4pJl8b4r99pgpl+x6zuR3BtjnC2o30d43C2a/SoRlzBhZ7KRbHw6lkeds4x6Mqg/LPEFfuTaTwTUS95z59bXNM0VNbNjDWatof3sH4DOeahViAGjQg1Ji2gYFoj10bpLgg==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=bN0CnYUkUxs1SdpaUctUJb+T+NqiXxwRhOZaaZJMnYs=;
+ b=CWjH9RzxjbtBbq7lTFUczw4DzJNdCJIOjsQDWvddJmYYYXbfms/cCyjKpHIhxvzkBxoUFhY9+/wW4/60NPwelEhydJemnZvnLq55Rr6po9/6FRSXyvN0eLNt+i/Ig2XMUoU0sHFF1PvuL5mOPMWTfnW5TOeThM9m376cGuNSFYennwWjgB49sb+3UV9ceAGiNIQDQfmqtWLQTYfZgvRajU8jN3O/xXqyNW38RExO2ywURObhKp7XoVIwZa69SA9uFMzha14JSbxoTWQKCSphpSkJioTvEa65765TzVULnZSCtM4awDtWC9CA4Ac3wwLy8BjG4SCSenMhNUOCMj6SGQ==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=nvidia.com; dmarc=pass action=none header.from=nvidia.com;
+ dkim=pass header.d=nvidia.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=Nvidia.com;
+ s=selector2;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=bN0CnYUkUxs1SdpaUctUJb+T+NqiXxwRhOZaaZJMnYs=;
+ b=stM/0rMdo99lcF3bstVed0pk3arU3H1Zc1ZxAWirq+RoCJHmgGQZFj1QGndegISLSwQUk2SKCiVCLsU7IsszuPdfg9QV+rB8mkgaZQ8ZTi+/6+JtlVOT3UsiWXFaRvJi1gl6JGLEjM7lADSk+jOx2n61BDNrxpWMZGAQer6D5hLYF1FTOuw+H2ToPLrt1imOX7JgSi06bCH5UiyVqTYDPFrxQ1MEcrggHnV1tdPjp0pcS3Wl3U/a719xHDJUSna87BvYe5zVMNExxsxkxksnWIheW7EnPHjvgtLr8tbxn1/DGbAnpEscfnxWmJ4LHzI2f5nR9Fa1uv0F/CanED7tsA==
+Authentication-Results: dkim=none (message not signed)
+ header.d=none;dmarc=none action=none header.from=nvidia.com;
+Received: from SN7PR12MB8059.namprd12.prod.outlook.com (2603:10b6:806:32b::7)
+ by DM6PR12MB4356.namprd12.prod.outlook.com (2603:10b6:5:2aa::8) with
+ Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9366.17; Tue, 2 Dec
+ 2025 21:23:13 +0000
+Received: from SN7PR12MB8059.namprd12.prod.outlook.com
+ ([fe80::4ee2:654e:1fe8:4b91]) by SN7PR12MB8059.namprd12.prod.outlook.com
+ ([fe80::4ee2:654e:1fe8:4b91%2]) with mapi id 15.20.9366.012; Tue, 2 Dec 2025
+ 21:23:13 +0000
+Message-ID: <581a1e44-e6a7-4ce1-8254-a92392d80cbd@nvidia.com>
+Date: Tue, 2 Dec 2025 16:23:12 -0500
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v2 12/13] gpu: nova-core: add PIO support for loading
+ firmware images
+To: Timur Tabi <ttabi@nvidia.com>, Danilo Krummrich <dakr@kernel.org>,
+ Alexandre Courbot <acourbot@nvidia.com>, Lyude Paul <lyude@redhat.com>,
+ John Hubbard <jhubbard@nvidia.com>, nouveau@lists.freedesktop.org,
+ rust-for-linux@vger.kernel.org
+References: <20251201233922.27218-1-ttabi@nvidia.com>
+ <20251201233922.27218-13-ttabi@nvidia.com>
+Content-Language: en-US
+From: Joel Fernandes <joelagnelf@nvidia.com>
+In-Reply-To: <20251201233922.27218-13-ttabi@nvidia.com>
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
+X-ClientProxiedBy: BL0PR1501CA0014.namprd15.prod.outlook.com
+ (2603:10b6:207:17::27) To SN7PR12MB8059.namprd12.prod.outlook.com
+ (2603:10b6:806:32b::7)
+MIME-Version: 1.0
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: SN7PR12MB8059:EE_|DM6PR12MB4356:EE_
+X-MS-Office365-Filtering-Correlation-Id: 31640494-68c1-4510-f0e9-08de31e90059
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: BCL:0;ARA:13230040|366016|1800799024|376014;
+X-Microsoft-Antispam-Message-Info: =?utf-8?B?RzNQYXZwY2dKcDk2YTZaSW9ZTFN2cFQ3OWIzbGlQd0hoNnlYTThaM0xIcXNK?=
+ =?utf-8?B?Rk0wMjB5YkN1UjNaNVFGOUNFL3FBL0dVdWkvQ1hRa24yL0g1c3IwZ3J1Wkkr?=
+ =?utf-8?B?dmdiZ0lsdWVRMEtrSkNscTNQNzhjVlhvZVNmL3BuSkdicmg0bnQ2OHRxbk4x?=
+ =?utf-8?B?cnAySVdlVWRTQlFJc3pVSnIrMHhqUjNBVE9CQnFRZmZiVDljS0M3VnRrZ1lL?=
+ =?utf-8?B?UWpNUUphWlBlbkE1c0djelluZGp6SDhOZkU5clI4YUxpMHh2ZUE5ZG8zUEVi?=
+ =?utf-8?B?bVZ2a055YUZNdUhWOTFwLzk0Nm92TE1Wa2FjSVBEVzdNa0NkN0doUlRSN3lW?=
+ =?utf-8?B?cTVOdGZSVXVvVktUcWpRT21CVTR3cVVXUVBWNDJtWUlFQkt2LzJUekdhMXVQ?=
+ =?utf-8?B?UzFLcUlhSXIrOGNPMlNwUElkZ2ZRSGloTVdJa0NnMkk1NGVmSlYzTHc2TVpQ?=
+ =?utf-8?B?ODZxQnNHY0VQWEp2aHRjLy9kL2xmQnc0TVZESC9VaW9lMnR1K0U1OFFabnlq?=
+ =?utf-8?B?NFFGNUttSnJrV1d0Y2tHZzh2WUlqZ2huSU1IU3NoQzdMUVlmTzRGTVIzZGlV?=
+ =?utf-8?B?bi91TW9jK3dCNzA4VWVSZnhGY1A2NTJGK2Myd3BZTVB5c1M2ZmhId0wwd3FR?=
+ =?utf-8?B?UHFoN2F0ZUYyVHdIcmViM2t4VC80aUZIZmNoSWtLMm5IOUpwZWRveDBJQ2xv?=
+ =?utf-8?B?eDZhU242Wk8wU2FqVzNKYmhNQkkzanI2QVpoMzhNblFnUTNjMjJTVWtWQktH?=
+ =?utf-8?B?OHVDZHF4ZGtQbUFhMXd3VjRabWtINkZ1aVlkMWdLQWhpNlZKaTVDMlBlMElE?=
+ =?utf-8?B?bEszZUU1cHZmdngveDV5T1YyYll6U2RoWEtVaDBRNXhjUkYzbmJNWWwrSE9C?=
+ =?utf-8?B?VnBkMXU0TkFwS0hqS1BmalVaRVZadmZTZkFOUzMySk1BS05oVFBYNmcwN0gx?=
+ =?utf-8?B?TmtWSk94bzRCNzUybHg4Si9JcEhYMkpmZkJpS3l2L2g4dWcrdmFOemVHSGFF?=
+ =?utf-8?B?dE51MUh2cVpabHgrK1RKeVd0Qmp2WkxXM0FQWlhZV1VBZ3JrT0pKdE5TOGF5?=
+ =?utf-8?B?ZWt0N1U4anc2S1lwcWIvOWhySlhUNXNYY2NRdkYwWDZaQ3Q2MHhRLzJ3SDhK?=
+ =?utf-8?B?dXpZWUdiV0ZyZEhpc2IydXZkbkYyQjdDS2o3VmFnVFppTURRTjhYVE9CUGgr?=
+ =?utf-8?B?T2krd1VBTnFURGJ1OEJnUlRFdDJsVmdacmEzVEhqUmtvTkZoVjNuSEJPV1Fl?=
+ =?utf-8?B?b2xrOUp1ZDk4Qnowc1lPL3JEbUVqNmNXNUE1VmdMZ2R5TkswYk1CVTd2NW9O?=
+ =?utf-8?B?OWVLL2FCZ1JFV2RPNnhiQ081ckQ3SVowZkIrRWJ6OGIvSUJidUVIcElidVRr?=
+ =?utf-8?B?OFIzVzhlNngvNmoySmUxc3MybVBFSkxCd3NVK0VOdm8vWUVoc1pMODdhc1Na?=
+ =?utf-8?B?ZnZFcXJuZmErc2V3eFVyb1NzQklwVjZuZElQU2gwai9ra2Yrb0Q3c1pyNUxn?=
+ =?utf-8?B?VkFWYStuZkl0a2tQZWx5RjMyaVFtVmFvVC9zdlFtenBFNDZQcFl1Z1VFazNx?=
+ =?utf-8?B?azR3WHlIS3Q0S05VRm5ha0hGbzY0MGhNMk4zQzB5OTJqTnlQUUpXK3ZVV0Zi?=
+ =?utf-8?B?WnFwOW1DaWlELzdkN1MrbENRc0pDM1A1dmR0SmlFM2luM0dsQXQzOWpQOGl2?=
+ =?utf-8?B?VWlrY3hNMi9tSCtGWUhib1pUU2M0L2VMa3RiL2ZFc0kzWG1XdGVmcGRySXJk?=
+ =?utf-8?B?b2s0Z2orN0xSSnAzMTdvS3JQTzFjVjByV0F4UkR2OVI2TEY0ZjU4VnNZcnlp?=
+ =?utf-8?B?TTBRY0I1MHd4RVhSSkEwM3I1UXdxcFEvaEJmbnZzZXdNMVdDaW5WWkNBMmR6?=
+ =?utf-8?B?VldnaTdTS3ZCd2p5SzNzT1VxMDlzbEhzVkx1RzJlWVNsNDlQVXJ5NDJMaWtr?=
+ =?utf-8?Q?v31LZ9FM8SGwzUIpXYG4XeC7rspPd38d?=
+X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
+ IPV:NLI; SFV:NSPM; H:SN7PR12MB8059.namprd12.prod.outlook.com; PTR:; CAT:NONE;
+ SFS:(13230040)(366016)(1800799024)(376014); DIR:OUT; SFP:1101; 
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?d3A3SlI0aG1DRVJqSFhHbW1UZEMvd0hTeDg1SnczZ0cza1Y2U2h6N0FIcExj?=
+ =?utf-8?B?QkszT3VlTURDeUsxVWh1QjVuRW50aldoanZVeDNJM1cwYTJWangrOFFzb2lo?=
+ =?utf-8?B?OGptWlBGTWlUUVdjbjBmWmdwclNDQ2dROVhqVU9NRVNPODJrUFY3WlZlSUs4?=
+ =?utf-8?B?RXhydWFDSmlDQ2pxNzAzc0cxc0tyQ1JEbkFPV3lCd3F6UXRLeFVKZithOUZt?=
+ =?utf-8?B?VFQyVEFLdWQwT050VnVEOS9hcnQ2SGpQNmNHTk56YVZUbmVIN3ltUlZCdVl1?=
+ =?utf-8?B?RWsydDlMSlVoSk5HSmZYbTQzOEg2cmIybzJ0MTF3ZFNGZjZucGQzY2hCcHNR?=
+ =?utf-8?B?Z3RicHMrUzh5YzAxMndTWE83UVQ1dERTQ3NaYkhjbmFPOHgvTkNhRHFQVVpR?=
+ =?utf-8?B?ajhUYmQrSmNudGgzWGE2K2hmbnpKNVlESDZld0drMG5wbVN6WFlITU5oWmRY?=
+ =?utf-8?B?ay84dEtIekJoNXhsQzJRSUZzdndxb2dRY1c2ZnFQUndic3ZYejdscG9ERGov?=
+ =?utf-8?B?U0FnT1BtNzdMVXRXMFdDemxmQk5SY1g1NjNYWTN6by9CNkJrUmR3OENIc0Rq?=
+ =?utf-8?B?QlZDeVhvNUUvYkJFKzlWRlpwWEZ2YW1vdCtyOTlrMWhQbG8zRHdQMElVUWl5?=
+ =?utf-8?B?MDB1RTFaVEFEM1lEd2lWTHNjZHQ1OU1hMjhURHVsaWgvNmRUSEc3SzVvR05s?=
+ =?utf-8?B?ZEZ3eUJFcFFDWi9Bb01sT1lDS21BbWtSTTFhbWQxaGxCVHozdWl3cE1hRXFK?=
+ =?utf-8?B?b2t0OUo3R0NkUTl5amQ2ZitjUEd3TXp3aG41bk1vNVErUzF4cWNwQWtpRmJ2?=
+ =?utf-8?B?bDVVa1VEeFYyRmIzb292Z2hTajBaRjhyQ3p5NWFxQitXSHdKMmdMTWo4MUVX?=
+ =?utf-8?B?SFVWWlBiWlRxOU1qV0Izd2tCbXZVWGdQd2pxOXBmbU1leENrZ0h5NDJHRkdW?=
+ =?utf-8?B?MHdmL0dXam1JQ3NwRDhFUTcvbHVkWmh6SUV4bkl2UVVzT3QxVEswOTNVK3g4?=
+ =?utf-8?B?aUNyZE5CQW45bEg0TjlwWm1OV1lkbHI4ZHM1TmFSTTVOMVBOQXdmUDZ1dWd0?=
+ =?utf-8?B?WjZhNnpYMnF6a3JtZ0Q2bDFSVUVnVVRSVlJ6MlBtUWQ3SUc0M2J3K1haanVz?=
+ =?utf-8?B?UVFQOHp1TjF3RmwrRUJmb1drc0cyVUszeWhEYUdsL1hXR2E1RTdDODFCbkdR?=
+ =?utf-8?B?UGQ0ZnVJb21DSHhQYXhFb0xHdmhObTVGdGxoa1Uxbm1LMlpXMVBoMUNQTklS?=
+ =?utf-8?B?MFIzejZWMHN1WG03SWVkMTNvL0k5dE9CYlR6NXBrSmsza3M1bytOY3BSNGhN?=
+ =?utf-8?B?bDhKbit1REtacVBOVDVUaGtIb3NvZ1kzVmVhaXFIUFliRFNvcUl4UlRGbVNh?=
+ =?utf-8?B?YTFWUU5heEhFOFBuY2pzYzhGRkhtQklmd3BDNGw4MlBpaGNGd2l6S1puNUFY?=
+ =?utf-8?B?NVVjblR3RTZ4aUtVdVFHVGNtdGV0WklLU3NnalI5N0dibzIvcHFVYXYxQ3g2?=
+ =?utf-8?B?eU43MWpybGJHTXlmbjgyMHNhSHZxZDh1bS9JR2M1VXhDSkJNbVpxbjB6RGR2?=
+ =?utf-8?B?RHJ3ZHNiOXd4alUzcTZyM3VHVHR2TU9Tbm1zK1E0Si9xbTJvYjlPcjVRZFl3?=
+ =?utf-8?B?L2pxbzZIWTY2bDlEVmZwZkt5SisxWmJ4KzJjUGZ4SGxvSjYwbXRqcFc5V2Z1?=
+ =?utf-8?B?ZnVXYTZ5bThWQlM0VEVjVEVERDBHOEUyaTVsaWZnTFI1dncrb3JObDZDY0Z2?=
+ =?utf-8?B?cHU1NmpBYWk1THA0bnBnRXVMVThTMnVDekhxOGJIWUYvSzRPem1FR0dNUlV2?=
+ =?utf-8?B?c0srUmVVL01NdDdwUkVMSW5aMEljNTdVSnREdVlGelZqZ2pZUzFucFQyMDZl?=
+ =?utf-8?B?c3BmTWlqaGV3eS9UWC9FWGtwYlBGTDRRTjhOM3V3NWU0QVI0UDZCN05zWkhV?=
+ =?utf-8?B?M0NEMDZOeWtEZVRybVpjeElLbFN2OGN5cWlYMVB6WEpYY1NtbGJuY0FMV2I0?=
+ =?utf-8?B?VXJnM05qaW9tcCtidzhxWjNOV1h2V1lLbnNtOFB5MUpnM29LUHRzdnVJWVVB?=
+ =?utf-8?B?enhWT2xLcHBWR2pFc0NYWkxqVnV0R20wUnJvM2N1dDNTMExkVTJiYVBuUFpB?=
+ =?utf-8?Q?+GYP1T/xRo7WPtV0OkGvVLlKf?=
+X-OriginatorOrg: Nvidia.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: 31640494-68c1-4510-f0e9-08de31e90059
+X-MS-Exchange-CrossTenant-AuthSource: SN7PR12MB8059.namprd12.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 02 Dec 2025 21:23:13.7385 (UTC)
+X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
+X-MS-Exchange-CrossTenant-Id: 43083d15-7273-40c1-b7db-39efd9ccc17a
+X-MS-Exchange-CrossTenant-MailboxType: HOSTED
+X-MS-Exchange-CrossTenant-UserPrincipalName: q9I9Xa7ZVEoykisMm+aBxMS4gxvP0wwedKCS+BK3Ubiuj/1+gb17zEex7nXq0T0zYx2Ruz1uN4wpwW7R9n9r+g==
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: DM6PR12MB4356
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -112,203 +166,61 @@ List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-From: Gary Guo <gary@garyguo.net>
 
-A new experimental Kconfig option, `RUST_INLINE_HELPERS` is added to
-allow C helpers (which were created to allow Rust to call into
-inline/macro C functions without having to re-implement the logic in
-Rust) to be inlined into Rust crates without performing global LTO.
 
-If the option is enabled, the following is performed:
-* For helpers, instead of compiling them to an object file to be linked
-  into vmlinux, they're compiled to LLVM IR.
-* The LLVM IR is compiled to bitcode (This is step is not necessary, but
-  is a performance optimisation to prevent LLVM from always have to
-  reparse the same IR).
-* When a Rust crate is compiled, instead of generating an object file, we
-  ask LLVM bitcode to be generated.
-* llvm-link is invoked with --internalize to combine the helper bitcode
-  with the crate bitcode. This step is similar to LTO, but this is much
-  faster since it only needs to inline the helpers.
-* clang is invoked to turn the combined bitcode into a final object file.
+On 12/1/2025 6:39 PM, Timur Tabi wrote:
+>  
+> +
+> +    /// See nvkm_falcon_pio_wr - takes a byte array instead of a FalconFirmware
+> +    fn pio_wr_bytes(
+> +        &self,
+> +        bar: &Bar0,
+> +        img: &[u8],
+> +        mem_base: u16,
+> +        target_mem: FalconMem,
+> +        port: u8,
+> +        tag: u16
+> +    ) {
+> +        let port = usize::from(port);
+> +
+> +        match target_mem {
+> +            FalconMem::ImemSecure | FalconMem::ImemNonSecure => {
+> +                regs::NV_PFALCON_FALCON_IMEMC::default()
+> +                    .set_secure(target_mem == FalconMem::ImemSecure)
+> +                    .set_aincw(true)
+> +                    .set_offs(mem_base)
+> +                    .write(bar, &E::ID, port);
+> +
+> +                let mut tag = tag;
+> +                for block in img.chunks(256) {
+> +                    regs::NV_PFALCON_FALCON_IMEMT::default()
+> +                        .set_tag(tag)
+> +                        .write(bar, &E::ID, port);
+> +                    for word in block.chunks(4) {
+> +                        let w = u32::from_le_bytes(word.try_into().unwrap());
 
-The --internalize flag tells llvm-link to treat all symbols in
-helpers.bc using `internal` linkage. This matches the behavior of
-`clang` on `static inline` functions, and avoids exporting the symbol
-from the object file.
+If img.size is not a multiple of 4 bytes, this can panic right?
 
-To ensure that RUST_INLINE_HELPERS is not incompatible with BTF, we pass
-the -g0 flag when building helpers. See commit 5daa0c35a1f0 ("rust:
-Disallow BTF generation with Rust + LTO") for details.
+Even if it is unlikely, unwrap() is quite frowned up due to possibility of
+panic. I'd recommend something like the following since the function cannot
+return an error:
 
-We have an intended triple mismatch of `aarch64-unknown-none` vs
-`aarch64-unknown-linux-gnu`, so we suppress the warning.
+                        let w = if let Ok(bytes) = word.try_into() {
+                            u32::from_le_bytes(bytes)
+                        } else {
+			    // can print a warning here too if needed.
+                            let mut buf = [0u8; 4];
+                            buf[..word.len()].copy_from_slice(word);
+                            u32::from_le_bytes(buf)
+                        };
 
-Co-developed-by: Boqun Feng <boqun.feng@gmail.com>
-Signed-off-by: Boqun Feng <boqun.feng@gmail.com>
-Co-developed-by: Matthew Maurer <mmaurer@google.com>
-Signed-off-by: Matthew Maurer <mmaurer@google.com>
-Signed-off-by: Gary Guo <gary@garyguo.net>
-Co-developed-by: Alice Ryhl <aliceryhl@google.com>
-Signed-off-by: Alice Ryhl <aliceryhl@google.com>
----
- Makefile               |  4 +++-
- lib/Kconfig.debug      | 15 +++++++++++++++
- rust/Makefile          | 26 ++++++++++++++++++++++----
- rust/exports.c         |  5 ++++-
- scripts/Makefile.build |  5 ++++-
- 5 files changed, 48 insertions(+), 7 deletions(-)
+Btw, I wish we could encode the slice length constraint in the slice type itself
+(i.e., the slice length ought to be a certain multiple). But I think there's no
+way to do that without introducing a new type.
 
-diff --git a/Makefile b/Makefile
-index 96ddbaae7e12de71bcfabef4639de3a13a6e4815..5834bfd568548d1bee34b328dccce5d60f85526f 100644
---- a/Makefile
-+++ b/Makefile
-@@ -517,6 +517,8 @@ OBJCOPY		= $(LLVM_PREFIX)llvm-objcopy$(LLVM_SUFFIX)
- OBJDUMP		= $(LLVM_PREFIX)llvm-objdump$(LLVM_SUFFIX)
- READELF		= $(LLVM_PREFIX)llvm-readelf$(LLVM_SUFFIX)
- STRIP		= $(LLVM_PREFIX)llvm-strip$(LLVM_SUFFIX)
-+LLVM_LINK	= $(LLVM_PREFIX)llvm-link$(LLVM_SUFFIX)
-+LLVM_AS		= $(LLVM_PREFIX)llvm-as$(LLVM_SUFFIX)
- else
- CC		= $(CROSS_COMPILE)gcc
- LD		= $(CROSS_COMPILE)ld
-@@ -625,7 +627,7 @@ export RUSTC_BOOTSTRAP := 1
- export CLIPPY_CONF_DIR := $(srctree)
- 
- export ARCH SRCARCH CONFIG_SHELL BASH HOSTCC KBUILD_HOSTCFLAGS CROSS_COMPILE LD CC HOSTPKG_CONFIG
--export RUSTC RUSTDOC RUSTFMT RUSTC_OR_CLIPPY_QUIET RUSTC_OR_CLIPPY BINDGEN
-+export RUSTC RUSTDOC RUSTFMT RUSTC_OR_CLIPPY_QUIET RUSTC_OR_CLIPPY BINDGEN LLVM_LINK LLVM_AS
- export HOSTRUSTC KBUILD_HOSTRUSTFLAGS
- export CPP AR NM STRIP OBJCOPY OBJDUMP READELF PAHOLE RESOLVE_BTFIDS LEX YACC AWK INSTALLKERNEL
- export PERL PYTHON3 CHECK CHECKFLAGS MAKE UTS_MACHINE HOSTCXX
-diff --git a/lib/Kconfig.debug b/lib/Kconfig.debug
-index 3034e294d50df55c4003c5fa5df442f59e711bd8..e63c5eb57b049aff988419ccd12dfd99d59f5080 100644
---- a/lib/Kconfig.debug
-+++ b/lib/Kconfig.debug
-@@ -3427,6 +3427,21 @@ config RUST_KERNEL_DOCTESTS
- 
- 	  If unsure, say N.
- 
-+config RUST_INLINE_HELPERS
-+    bool "Inline C helpers into Rust crates (EXPERIMENTAL)"
-+    depends on RUST && RUSTC_CLANG_LLVM_COMPATIBLE
-+    depends on EXPERT
-+    help
-+        Links C helpers into Rust crates through LLVM IR.
-+
-+        If this option is enabled, instead of generating object files directly,
-+        rustc is asked to produce LLVM IR, which is then linked together with
-+        the LLVM IR of C helpers, before object file is generated.
-+
-+        This requires a matching LLVM version for Clang and rustc.
-+
-+        If unsure, say N.
-+
- endmenu # "Rust"
- 
- endmenu # Kernel hacking
-diff --git a/rust/Makefile b/rust/Makefile
-index d7d19c21b671dea10242b1772a8bcf0bf5dcc1cd..2344e2662ce29280582215954132c09f63cd8c9d 100644
---- a/rust/Makefile
-+++ b/rust/Makefile
-@@ -6,15 +6,19 @@ rustdoc_output := $(objtree)/Documentation/output/rust/rustdoc
- obj-$(CONFIG_RUST) += core.o compiler_builtins.o ffi.o
- always-$(CONFIG_RUST) += exports_core_generated.h
- 
-+ifdef CONFIG_RUST_INLINE_HELPERS
-+always-$(CONFIG_RUST) += helpers/helpers.bc
-+else
-+obj-$(CONFIG_RUST) += helpers/helpers.o
-+always-$(CONFIG_RUST) += exports_helpers_generated.h
-+endif
- # Missing prototypes are expected in the helpers since these are exported
- # for Rust only, thus there is no header nor prototypes.
--obj-$(CONFIG_RUST) += helpers/helpers.o
- CFLAGS_REMOVE_helpers/helpers.o = -Wmissing-prototypes -Wmissing-declarations
- 
- always-$(CONFIG_RUST) += bindings/bindings_generated.rs bindings/bindings_helpers_generated.rs
- obj-$(CONFIG_RUST) += bindings.o pin_init.o kernel.o
--always-$(CONFIG_RUST) += exports_helpers_generated.h \
--    exports_bindings_generated.h exports_kernel_generated.h
-+always-$(CONFIG_RUST) += exports_bindings_generated.h exports_kernel_generated.h
- 
- always-$(CONFIG_RUST) += uapi/uapi_generated.rs
- obj-$(CONFIG_RUST) += uapi.o
-@@ -468,6 +472,13 @@ $(obj)/bindings/bindings_helpers_generated.rs: private bindgen_target_extra = ;
- $(obj)/bindings/bindings_helpers_generated.rs: $(src)/helpers/helpers.c FORCE
- 	$(call if_changed_dep,bindgen)
- 
-+quiet_cmd_rust_helper = HELPER  $@
-+      cmd_rust_helper = \
-+	$(CC) $(filter-out $(CFLAGS_REMOVE_helpers/helpers.o), $(c_flags)) -c -g0 $< -emit-llvm -o $@
-+
-+$(obj)/helpers/helpers.bc: $(obj)/helpers/helpers.c FORCE
-+	+$(call if_changed_dep,rust_helper)
-+
- rust_exports = $(NM) -p --defined-only $(1) | awk '$$2~/(T|R|D|B)/ && $$3!~/__(pfx|cfi|odr_asan)/ { printf $(2),$$3 }'
- 
- quiet_cmd_exports = EXPORTS $@
-@@ -547,11 +558,13 @@ quiet_cmd_rustc_library = $(if $(skip_clippy),RUSTC,$(RUSTC_OR_CLIPPY_QUIET)) L
- 	OBJTREE=$(abspath $(objtree)) \
- 	$(if $(skip_clippy),$(RUSTC),$(RUSTC_OR_CLIPPY)) \
- 		$(filter-out $(skip_flags),$(rust_flags)) $(rustc_target_flags) \
--		--emit=dep-info=$(depfile) --emit=obj=$@ \
-+		--emit=dep-info=$(depfile) --emit=$(if $(link_helper),llvm-bc=$(patsubst %.o,%.bc,$@),obj=$@) \
- 		--emit=metadata=$(dir $@)$(patsubst %.o,lib%.rmeta,$(notdir $@)) \
- 		--crate-type rlib -L$(objtree)/$(obj) \
- 		--crate-name $(patsubst %.o,%,$(notdir $@)) $< \
- 		--sysroot=/dev/null \
-+	$(if $(link_helper),;$(LLVM_LINK) --internalize --suppress-warnings $(patsubst %.o,%.bc,$@) $(obj)/helpers/helpers.bc -o $(patsubst %.o,%.m.bc,$@); \
-+		$(CC) $(CLANG_FLAGS) $(KBUILD_CFLAGS) -Wno-override-module -c $(patsubst %.o,%.m.bc,$@) -o $@) \
- 	$(if $(rustc_objcopy),;$(OBJCOPY) $(rustc_objcopy) $@) \
- 	$(cmd_objtool)
- 
-@@ -678,4 +691,9 @@ $(obj)/kernel.o: $(obj)/kernel/generated_arch_warn_asm.rs $(obj)/kernel/generate
- endif
- endif
- 
-+ifdef CONFIG_RUST_INLINE_HELPERS
-+$(obj)/kernel.o: private link_helper = 1
-+$(obj)/kernel.o: $(obj)/helpers/helpers.bc
-+endif
-+
- endif # CONFIG_RUST
-diff --git a/rust/exports.c b/rust/exports.c
-index 587f0e776aba52854080f15aa91094b55996c072..1b52460b0f4eeef6df9081abb9b7e054a28c3c21 100644
---- a/rust/exports.c
-+++ b/rust/exports.c
-@@ -16,10 +16,13 @@
- #define EXPORT_SYMBOL_RUST_GPL(sym) extern int sym; EXPORT_SYMBOL_GPL(sym)
- 
- #include "exports_core_generated.h"
--#include "exports_helpers_generated.h"
- #include "exports_bindings_generated.h"
- #include "exports_kernel_generated.h"
- 
-+#ifndef CONFIG_RUST_INLINE_HELPERS
-+#include "exports_helpers_generated.h"
-+#endif
-+
- // For modules using `rust/build_error.rs`.
- #ifdef CONFIG_RUST_BUILD_ASSERT_ALLOW
- EXPORT_SYMBOL_RUST_GPL(rust_build_error);
-diff --git a/scripts/Makefile.build b/scripts/Makefile.build
-index d0ee33a487be95f8ba9a5c964ebecfbebc6c4bf8..04eaf2b4fbca2245f904a6dc7875cb3275aa7df6 100644
---- a/scripts/Makefile.build
-+++ b/scripts/Makefile.build
-@@ -343,7 +343,10 @@ rust_common_cmd = \
- # would not match each other.
- 
- quiet_cmd_rustc_o_rs = $(RUSTC_OR_CLIPPY_QUIET) $(quiet_modtag) $@
--      cmd_rustc_o_rs = $(rust_common_cmd) --emit=obj=$@ $< $(cmd_objtool)
-+      cmd_rustc_o_rs = $(rust_common_cmd) --emit=$(if $(CONFIG_RUST_INLINE_HELPERS),llvm-bc=$(patsubst %.o,%.bc,$@),obj=$@) $< \
-+	$(if $(CONFIG_RUST_INLINE_HELPERS),;$(LLVM_LINK) --internalize --suppress-warnings $(patsubst %.o,%.bc,$@) $(objtree)/rust/helpers/helpers.bc -o $(patsubst %.o,%.m.bc,$@); \
-+		$(CC) $(CLANG_FLAGS) $(KBUILD_CFLAGS) -Wno-override-module -c $(patsubst %.o,%.m.bc,$@) -o $@) \
-+	$(cmd_objtool)
- 
- define rule_rustc_o_rs
- 	$(call cmd_and_fixdep,rustc_o_rs)
+Thanks.
 
--- 
-2.52.0.158.g65b55ccf14-goog
+
+
+
 
