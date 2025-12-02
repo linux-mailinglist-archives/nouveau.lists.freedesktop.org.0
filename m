@@ -2,133 +2,97 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id 64CB0C9A84F
-	for <lists+nouveau@lfdr.de>; Tue, 02 Dec 2025 08:42:58 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id CD295C9AB80
+	for <lists+nouveau@lfdr.de>; Tue, 02 Dec 2025 09:39:49 +0100 (CET)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 10AFB10E5B7;
-	Tue,  2 Dec 2025 07:42:57 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id B4E4010E5BE;
+	Tue,  2 Dec 2025 08:39:47 +0000 (UTC)
 Authentication-Results: gabe.freedesktop.org;
-	dkim=pass (1024-bit key; unprotected) header.d=suse.de header.i=@suse.de header.b="v54KINoS";
-	dkim=permerror (0-bit key) header.d=suse.de header.i=@suse.de header.b="scoE9VZQ";
-	dkim=pass (1024-bit key) header.d=suse.de header.i=@suse.de header.b="WfUz/mA6";
-	dkim=permerror (0-bit key) header.d=suse.de header.i=@suse.de header.b="4zmcd5S2";
+	dkim=pass (2048-bit key; unprotected) header.d=google.com header.i=@google.com header.b="nw8PdnTn";
 	dkim-atps=neutral
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from smtp-out2.suse.de (smtp-out2.suse.de [195.135.223.131])
- by gabe.freedesktop.org (Postfix) with ESMTPS id D5E5510E5B6
- for <nouveau@lists.freedesktop.org>; Tue,  2 Dec 2025 07:42:55 +0000 (UTC)
-Received: from imap1.dmz-prg2.suse.org (unknown [10.150.64.97])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
- (No client certificate requested)
- by smtp-out2.suse.de (Postfix) with ESMTPS id 5110F5BD0D;
- Tue,  2 Dec 2025 07:42:53 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.de; s=susede2_rsa;
- t=1764661374; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
- mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references:autocrypt:autocrypt;
- bh=WifntVVqvVe83okeYRsRA2wAUvOIcrEaXyp19dXJ1vI=;
- b=v54KINoSSeCZEmdVVCh8jGCEvJiWl50LEoHcoT8E9FVvWFCWVZGYukvpvy72HQ6VDWbKiy
- hBi4kIizteoUVfuDVno4obJU8HciEQwNZqBJm3R3mgcQmiXmeToOAOGMuLCB9Wu40823ZN
- kLIjtG5Dk7xHgS/hxrXRgj+ZdgyPnqI=
-DKIM-Signature: v=1; a=ed25519-sha256; c=relaxed/relaxed; d=suse.de;
- s=susede2_ed25519; t=1764661374;
- h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
- mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references:autocrypt:autocrypt;
- bh=WifntVVqvVe83okeYRsRA2wAUvOIcrEaXyp19dXJ1vI=;
- b=scoE9VZQSdTvSPBLtfFceEJMi+J51wTrrNOfa/EdSD/K3381tpEEymEyPrLEcMvtG5n5xX
- 4Zz4v7puJ8j6tkDQ==
-Authentication-Results: smtp-out2.suse.de;
-	none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.de; s=susede2_rsa;
- t=1764661373; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
- mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references:autocrypt:autocrypt;
- bh=WifntVVqvVe83okeYRsRA2wAUvOIcrEaXyp19dXJ1vI=;
- b=WfUz/mA6uH0scWlh+FIIDCY8mEjy+ZGzNag/CTiDlKT5fE8NJ8O+hH6fPvblv3vD1O5yk+
- 6oC9lXGh116BC1Nk9S0q2XsObBn1UyzRulXI6ew/hOwqVuMyksQfGv9rBcBu0w3HJHIBz5
- k5n1uIiKdNR/b71l7FMZkPvQEg7TLdI=
-DKIM-Signature: v=1; a=ed25519-sha256; c=relaxed/relaxed; d=suse.de;
- s=susede2_ed25519; t=1764661373;
- h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
- mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references:autocrypt:autocrypt;
- bh=WifntVVqvVe83okeYRsRA2wAUvOIcrEaXyp19dXJ1vI=;
- b=4zmcd5S2jYLQWfKNODmfN2vr7chNoLGU8sJSuXZr5cuizCsYJ6cjqW4nHkYdrXTg9dTj4/
- lxaypuJr+YpKOYAQ==
-Received: from imap1.dmz-prg2.suse.org (localhost [127.0.0.1])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
- (No client certificate requested)
- by imap1.dmz-prg2.suse.org (Postfix) with ESMTPS id 0213F3EA63;
- Tue,  2 Dec 2025 07:42:52 +0000 (UTC)
-Received: from dovecot-director2.suse.de ([2a07:de40:b281:106:10:150:64:167])
- by imap1.dmz-prg2.suse.org with ESMTPSA id C5bhOHyYLmnQAQAAD6G6ig
- (envelope-from <tzimmermann@suse.de>); Tue, 02 Dec 2025 07:42:52 +0000
-Message-ID: <250b44b3-e75b-4f8d-af44-d3a985ea554c@suse.de>
-Date: Tue, 2 Dec 2025 08:42:52 +0100
-MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 6.6.y] drm, fbcon, vga_switcheroo: Avoid race condition in
- fbcon setup
-To: Sasha Levin <sashal@kernel.org>, stable@vger.kernel.org
-Cc: Javier Martinez Canillas <javierm@redhat.com>,
- Alex Deucher <alexander.deucher@amd.com>, dri-devel@lists.freedesktop.org,
- nouveau@lists.freedesktop.org, amd-gfx@lists.freedesktop.org,
- linux-fbdev@vger.kernel.org
-References: <2025120119-quake-universal-d896@gregkh>
- <20251201225123.1298682-1-sashal@kernel.org>
-Content-Language: en-US
-From: Thomas Zimmermann <tzimmermann@suse.de>
-Autocrypt: addr=tzimmermann@suse.de; keydata=
- xsBNBFs50uABCADEHPidWt974CaxBVbrIBwqcq/WURinJ3+2WlIrKWspiP83vfZKaXhFYsdg
- XH47fDVbPPj+d6tQrw5lPQCyqjwrCPYnq3WlIBnGPJ4/jreTL6V+qfKRDlGLWFjZcsrPJGE0
- BeB5BbqP5erN1qylK9i3gPoQjXGhpBpQYwRrEyQyjuvk+Ev0K1Jc5tVDeJAuau3TGNgah4Yc
- hdHm3bkPjz9EErV85RwvImQ1dptvx6s7xzwXTgGAsaYZsL8WCwDaTuqFa1d1jjlaxg6+tZsB
- 9GluwvIhSezPgnEmimZDkGnZRRSFiGP8yjqTjjWuf0bSj5rUnTGiyLyRZRNGcXmu6hjlABEB
- AAHNJ1Rob21hcyBaaW1tZXJtYW5uIDx0emltbWVybWFubkBzdXNlLmRlPsLAjgQTAQgAOAIb
- AwULCQgHAgYVCgkICwIEFgIDAQIeAQIXgBYhBHIX+6yM6c9jRKFo5WgNwR1TC3ojBQJftODH
- AAoJEGgNwR1TC3ojx1wH/0hKGWugiqDgLNXLRD/4TfHBEKmxIrmfu9Z5t7vwUKfwhFL6hqvo
- lXPJJKQpQ2z8+X2vZm/slsLn7J1yjrOsoJhKABDi+3QWWSGkaGwRJAdPVVyJMfJRNNNIKwVb
- U6B1BkX2XDKDGffF4TxlOpSQzdtNI/9gleOoUA8+jy8knnDYzjBNOZqLG2FuTdicBXblz0Mf
- vg41gd9kCwYXDnD91rJU8tzylXv03E75NCaTxTM+FBXPmsAVYQ4GYhhgFt8S2UWMoaaABLDe
- 7l5FdnLdDEcbmd8uLU2CaG4W2cLrUaI4jz2XbkcPQkqTQ3EB67hYkjiEE6Zy3ggOitiQGcqp
- j//OwE0EWznS4AEIAMYmP4M/V+T5RY5at/g7rUdNsLhWv1APYrh9RQefODYHrNRHUE9eosYb
- T6XMryR9hT8XlGOYRwKWwiQBoWSDiTMo/Xi29jUnn4BXfI2px2DTXwc22LKtLAgTRjP+qbU6
- 3Y0xnQN29UGDbYgyyK51DW3H0If2a3JNsheAAK+Xc9baj0LGIc8T9uiEWHBnCH+RdhgATnWW
- GKdDegUR5BkDfDg5O/FISymJBHx2Dyoklv5g4BzkgqTqwmaYzsl8UxZKvbaxq0zbehDda8lv
- hFXodNFMAgTLJlLuDYOGLK2AwbrS3Sp0AEbkpdJBb44qVlGm5bApZouHeJ/+n+7r12+lqdsA
- EQEAAcLAdgQYAQgAIAIbDBYhBHIX+6yM6c9jRKFo5WgNwR1TC3ojBQJftOH6AAoJEGgNwR1T
- C3ojVSkIALpAPkIJPQoURPb1VWjh34l0HlglmYHvZszJWTXYwavHR8+k6Baa6H7ufXNQtThR
- yIxJrQLW6rV5lm7TjhffEhxVCn37+cg0zZ3j7zIsSS0rx/aMwi6VhFJA5hfn3T0TtrijKP4A
- SAQO9xD1Zk9/61JWk8OysuIh7MXkl0fxbRKWE93XeQBhIJHQfnc+YBLprdnxR446Sh8Wn/2D
- Ya8cavuWf2zrB6cZurs048xe0UbSW5AOSo4V9M0jzYI4nZqTmPxYyXbm30Kvmz0rYVRaitYJ
- 4kyYYMhuULvrJDMjZRvaNe52tkKAvMevcGdt38H4KSVXAylqyQOW5zvPc4/sq9c=
-In-Reply-To: <20251201225123.1298682-1-sashal@kernel.org>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 8bit
-X-Spamd-Result: default: False [-4.27 / 50.00]; BAYES_HAM(-3.00)[100.00%];
- NEURAL_HAM_LONG(-1.00)[-1.000];
- NEURAL_HAM_SHORT(-0.17)[-0.858]; MIME_GOOD(-0.10)[text/plain];
- MIME_TRACE(0.00)[0:+]; TO_MATCH_ENVRCPT_ALL(0.00)[];
- ARC_NA(0.00)[];
- DKIM_SIGNED(0.00)[suse.de:s=susede2_rsa,suse.de:s=susede2_ed25519];
- FUZZY_RATELIMITED(0.00)[rspamd.com]; RCVD_TLS_ALL(0.00)[];
- FROM_HAS_DN(0.00)[]; RCVD_VIA_SMTP_AUTH(0.00)[];
- FROM_EQ_ENVFROM(0.00)[]; TO_DN_SOME(0.00)[];
- RCVD_COUNT_TWO(0.00)[2]; RCPT_COUNT_SEVEN(0.00)[8];
- MID_RHS_MATCH_FROM(0.00)[];
- DBL_BLOCKED_OPENRESOLVER(0.00)[amd.com:email, lists.freedesktop.org:email,
- suse.de:mid, suse.de:email, msgid.link:url, bootlin.com:url, suse.com:url]
-X-Spam-Level: 
-X-Spam-Flag: NO
-X-Spam-Score: -4.27
+Received: from mail-ej1-f74.google.com (mail-ej1-f74.google.com
+ [209.85.218.74])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id F33E510E0F3
+ for <nouveau@lists.freedesktop.org>; Tue,  2 Dec 2025 08:39:45 +0000 (UTC)
+Received: by mail-ej1-f74.google.com with SMTP id
+ a640c23a62f3a-b70bca184ccso503133966b.2
+ for <nouveau@lists.freedesktop.org>; Tue, 02 Dec 2025 00:39:45 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=google.com; s=20230601; t=1764664784; x=1765269584;
+ darn=lists.freedesktop.org; 
+ h=content-transfer-encoding:cc:to:from:subject:message-id:references
+ :mime-version:in-reply-to:date:from:to:cc:subject:date:message-id
+ :reply-to; bh=dQk6tHmJTUqAiCtnsgjTJG63u9eDINxbLO7NMykMICA=;
+ b=nw8PdnTnx1uY+U2Hovn29iq5RT6rXvg2cTbrDw32EmoJYosCQoZCklygmr1PFZoWTl
+ rZMmwcOGRvIjrYBvIWd2GxbtrLYomif/PZwEmLgQMw+Cca5VVSJH/Je3+1xlUz2q3KW3
+ NYvnqLCrHsFfXxkIgP/dLFUZrH7KhpoXAxwUAIlcI2YRo7y6VWi51mZC8ul6j6c2AkH9
+ UmB1ZDXgGyjosiEBqtwgM8PBnJnXCN743EyJ3k16+jMcCx/cxivH67f1CS71DJrllCCL
+ 4vu1DXytwvvbCG50WLTXZ2CiLM7puaF5F+jKqtE4bb+z0bklcJwLRl/AVKzwFps9tayg
+ BdKQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1764664784; x=1765269584;
+ h=content-transfer-encoding:cc:to:from:subject:message-id:references
+ :mime-version:in-reply-to:date:x-gm-message-state:from:to:cc:subject
+ :date:message-id:reply-to;
+ bh=dQk6tHmJTUqAiCtnsgjTJG63u9eDINxbLO7NMykMICA=;
+ b=D/8Sm734/S/wmKUec8DGhylrFPzWITStx42nQJlqS5ZfTx8ToR6sbnRXWLv2XH/Xik
+ z57hrQG5oNJaVCvwzyUfLFyDkVQLgKQv2+wxx85jghgogk9NKVgq95AiVHCZKLueoP2G
+ Rgq81e+4ozPQEuBjXol88AJRpNyUQ7SAJLhI9fQeyqS/qq78yC4KZLR1MnB1sgCwIxm/
+ LcvoN9e99SgL+TGwVcv6PVBDBTxQXcLftu+xS9Tvdg3JdGWSInmTzWAezWeZ0Ymvb0KW
+ u2+074gHXIXDn7/75Y2mG9SrtlyXnI1Ri06pt5KeDG/CbUbhIyXopj4tmGKOX1QtPw23
+ xX5Q==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCU4rx1LoIDCJ/OPQDy1Z245DfT6rYvTPRR8/RD8PjUxbGVlfINviow/+m7WU+fSvVtSdjFOVQay@lists.freedesktop.org
+X-Gm-Message-State: AOJu0YwnQ5csbOnWirhDx9vncqkLrNs47kF2mRROC+Ue7SpwH53unzcS
+ qlewpLweGYX2Ij0s1bZuvnhPm8ROxLGz6tuyjMEqXpZaqRT1iCPRuMsLtUpV0SXrmmMMVG3lGkU
+ DcW9GvLr4ykCZ7DX/+A==
+X-Google-Smtp-Source: AGHT+IEc/TxQUgIpfEK5sufEIaSnr0GleDnpyvkysthlI+sYkIIqMQnKrFBu1nj0yiVqQjAh/i5hvFwh+Kb6vzw=
+X-Received: from ejcvt4.prod.google.com ([2002:a17:907:a604:b0:b73:5918:6cd0])
+ (user=aliceryhl job=prod-delivery.src-stubby-dispatcher) by
+ 2002:a17:907:6eaa:b0:b6d:6f46:9047 with SMTP id
+ a640c23a62f3a-b76718b4dcbmr4682286966b.59.1764664784573; 
+ Tue, 02 Dec 2025 00:39:44 -0800 (PST)
+Date: Tue, 2 Dec 2025 08:39:43 +0000
+In-Reply-To: <3727982A-91A4-447C-B53C-B6037DA02FF9@collabora.com>
+Mime-Version: 1.0
+References: <20251128-gpuvm-rust-v1-0-ebf66bf234e0@google.com>
+ <20251128-gpuvm-rust-v1-4-ebf66bf234e0@google.com>
+ <3727982A-91A4-447C-B53C-B6037DA02FF9@collabora.com>
+Message-ID: <aS6lz12BIysBVHSV@google.com>
+Subject: Re: [PATCH 4/4] rust: drm: add GPUVM immediate mode abstraction
+From: Alice Ryhl <aliceryhl@google.com>
+To: Daniel Almeida <daniel.almeida@collabora.com>
+Cc: Danilo Krummrich <dakr@kernel.org>, Matthew Brost <matthew.brost@intel.com>,
+ "Thomas =?utf-8?Q?Hellstr=C3=B6m?=" <thomas.hellstrom@linux.intel.com>, 
+ Maarten Lankhorst <maarten.lankhorst@linux.intel.com>,
+ Maxime Ripard <mripard@kernel.org>, 
+ Thomas Zimmermann <tzimmermann@suse.de>, David Airlie <airlied@gmail.com>,
+ Simona Vetter <simona@ffwll.ch>, 
+ Boris Brezillon <boris.brezillon@collabora.com>,
+ Steven Price <steven.price@arm.com>, 
+ Liviu Dudau <liviu.dudau@arm.com>, Miguel Ojeda <ojeda@kernel.org>, 
+ Boqun Feng <boqun.feng@gmail.com>, Gary Guo <gary@garyguo.net>, 
+ "=?utf-8?B?QmrDtnJu?= Roy Baron" <bjorn3_gh@protonmail.com>,
+ Benno Lossin <lossin@kernel.org>, 
+ Andreas Hindborg <a.hindborg@kernel.org>, Trevor Gross <tmgross@umich.edu>, 
+ Frank Binns <frank.binns@imgtec.com>, Matt Coster <matt.coster@imgtec.com>, 
+ Rob Clark <robin.clark@oss.qualcomm.com>, Dmitry Baryshkov <lumag@kernel.org>, 
+ Abhinav Kumar <abhinav.kumar@linux.dev>,
+ Jessica Zhang <jessica.zhang@oss.qualcomm.com>, 
+ Sean Paul <sean@poorly.run>, Marijn Suijten <marijn.suijten@somainline.org>, 
+ Lyude Paul <lyude@redhat.com>, Lucas De Marchi <lucas.demarchi@intel.com>, 
+ Rodrigo Vivi <rodrigo.vivi@intel.com>, Sumit Semwal <sumit.semwal@linaro.org>, 
+ "Christian =?utf-8?B?S8O2bmln?=" <christian.koenig@amd.com>,
+ dri-devel@lists.freedesktop.org, 
+ linux-kernel@vger.kernel.org, rust-for-linux@vger.kernel.org, 
+ linux-arm-msm@vger.kernel.org, freedreno@lists.freedesktop.org, 
+ nouveau@lists.freedesktop.org, intel-xe@lists.freedesktop.org, 
+ linux-media@vger.kernel.org, linaro-mm-sig@lists.linaro.org, 
+ Asahi Lina <lina+kernel@asahilina.net>
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: quoted-printable
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -143,150 +107,297 @@ List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-Hi,
+On Mon, Dec 01, 2025 at 12:16:09PM -0300, Daniel Almeida wrote:
+> Hi Alice,
+>=20
+> I find it a bit weird that we reverted to v1, given that the previous gpu=
+vm
+> attempt was v3. No big deal though.
+>=20
+>=20
+> > On 28 Nov 2025, at 11:14, Alice Ryhl <aliceryhl@google.com> wrote:
+> >=20
+> > Add a GPUVM abstraction to be used by Rust GPU drivers.
+> >=20
+> > GPUVM keeps track of a GPU's virtual address (VA) space and manages the
+> > corresponding virtual mappings represented by "GPU VA" objects. It also
+> > keeps track of the gem::Object<T> used to back the mappings through
+> > GpuVmBo<T>.
+> >=20
+> > This abstraction is only usable by drivers that wish to use GPUVM in
+> > immediate mode. This allows us to build the locking scheme into the API
+> > design. It means that the GEM mutex is used for the GEM gpuva list, and
+> > that the resv lock is used for the extobj list. The evicted list is not
+> > yet used in this version.
+> >=20
+> > This abstraction provides a special handle called the GpuVmCore, which
+> > is a wrapper around ARef<GpuVm> that provides access to the interval
+> > tree. Generally, all changes to the address space requires mutable
+> > access to this unique handle.
+> >=20
+> > Some of the safety comments are still somewhat WIP, but I think the API
+> > should be sound as-is.
+> >=20
+> > Co-developed-by: Asahi Lina <lina+kernel@asahilina.net>
+> > Signed-off-by: Asahi Lina <lina+kernel@asahilina.net>
+> > Co-developed-by: Daniel Almeida <daniel.almeida@collabora.com>
+> > Signed-off-by: Daniel Almeida <daniel.almeida@collabora.com>
+> > Signed-off-by: Alice Ryhl <aliceryhl@google.com>
 
-thanks for backporting.
+> > +//! DRM GPUVM in immediate mode
+> > +//!
+> > +//! Rust abstractions for using GPUVM in immediate mode. This is when =
+the GPUVM state is updated
+> > +//! during `run_job()`, i.e., in the DMA fence signalling critical pat=
+h, to ensure that the GPUVM
+>=20
+> IMHO: We should initially target synchronous VM_BINDS, which are the oppo=
+site
+> of what you described above.
 
-You also have to remove the calls to vga_switcheroo_client_fb_set() from 
-these files
+Immediate mode is a locking scheme. We have to pick one of them
+regardless of whether we do async VM_BIND yet.
 
-https://elixir.bootlin.com/linux/v6.6/source/drivers/gpu/drm/i915/display/intel_fbdev.c 
+(Well ok immediate mode is not just a locking scheme: it also determines
+whether vm_bo cleanup is postponed or not.)
 
-https://elixir.bootlin.com/linux/v6.6/source/drivers/gpu/drm/radeon/radeon_fbdev.c 
+> > +/// A DRM GPU VA manager.
+> > +///
+> > +/// This object is refcounted, but the "core" is only accessible using=
+ a special unique handle. The
+>=20
+> I wonder if `Owned<T>` is a good fit here? IIUC, Owned<T> can be refcount=
+ed,
+> but there is only ever one handle on the Rust side? If so, this seems to =
+be
+> what we want here?
 
+Yes, Owned<T> is probably a good fit.
 
-Best regards
-Thomas
+> > +/// core consists of the `core` field and the GPUVM's interval tree.
+> > +#[repr(C)]
+> > +#[pin_data]
+> > +pub struct GpuVm<T: DriverGpuVm> {
+> > +    #[pin]
+> > +    vm: Opaque<bindings::drm_gpuvm>,
+> > +    /// Accessed only through the [`GpuVmCore`] reference.
+> > +    core: UnsafeCell<T>,
+>=20
+> This UnsafeCell has been here since Lina=E2=80=99s version. I must say I =
+never
+> understood why, and perhaps now is a good time to clarify it given the ch=
+anges
+> we=E2=80=99re making w.r.t to the =E2=80=9Cunique handle=E2=80=9D thing.
+>=20
+> This is just some driver private data. It=E2=80=99s never shared with C. =
+I am not
+> sure why we need this wrapper.
 
-Am 01.12.25 um 23:51 schrieb Sasha Levin:
-> From: Thomas Zimmermann <tzimmermann@suse.de>
->
-> [ Upstream commit eb76d0f5553575599561010f24c277cc5b31d003 ]
->
-> Protect vga_switcheroo_client_fb_set() with console lock. Avoids OOB
-> access in fbcon_remap_all(). Without holding the console lock the call
-> races with switching outputs.
->
-> VGA switcheroo calls fbcon_remap_all() when switching clients. The fbcon
-> function uses struct fb_info.node, which is set by register_framebuffer().
-> As the fb-helper code currently sets up VGA switcheroo before registering
-> the framebuffer, the value of node is -1 and therefore not a legal value.
-> For example, fbcon uses the value within set_con2fb_map() [1] as an index
-> into an array.
->
-> Moving vga_switcheroo_client_fb_set() after register_framebuffer() can
-> result in VGA switching that does not switch fbcon correctly.
->
-> Therefore move vga_switcheroo_client_fb_set() under fbcon_fb_registered(),
-> which already holds the console lock. Fbdev calls fbcon_fb_registered()
-> from within register_framebuffer(). Serializes the helper with VGA
-> switcheroo's call to fbcon_remap_all().
->
-> Although vga_switcheroo_client_fb_set() takes an instance of struct fb_info
-> as parameter, it really only needs the contained fbcon state. Moving the
-> call to fbcon initialization is therefore cleaner than before. Only amdgpu,
-> i915, nouveau and radeon support vga_switcheroo. For all other drivers,
-> this change does nothing.
->
-> Signed-off-by: Thomas Zimmermann <tzimmermann@suse.de>
-> Link: https://elixir.bootlin.com/linux/v6.17/source/drivers/video/fbdev/core/fbcon.c#L2942 # [1]
-> Fixes: 6a9ee8af344e ("vga_switcheroo: initial implementation (v15)")
-> Acked-by: Javier Martinez Canillas <javierm@redhat.com>
-> Acked-by: Alex Deucher <alexander.deucher@amd.com>
-> Cc: dri-devel@lists.freedesktop.org
-> Cc: nouveau@lists.freedesktop.org
-> Cc: amd-gfx@lists.freedesktop.org
-> Cc: linux-fbdev@vger.kernel.org
-> Cc: <stable@vger.kernel.org> # v2.6.34+
-> Link: https://patch.msgid.link/20251105161549.98836-1-tzimmermann@suse.de
-> [ drm_fb_helper_unregister_info() lacks vga_switcheroo code ]
-> Signed-off-by: Sasha Levin <sashal@kernel.org>
-> ---
->   drivers/gpu/drm/drm_fb_helper.c  | 7 -------
->   drivers/video/fbdev/core/fbcon.c | 9 +++++++++
->   2 files changed, 9 insertions(+), 7 deletions(-)
->
-> diff --git a/drivers/gpu/drm/drm_fb_helper.c b/drivers/gpu/drm/drm_fb_helper.c
-> index b507c1c008a3e..3891837a78414 100644
-> --- a/drivers/gpu/drm/drm_fb_helper.c
-> +++ b/drivers/gpu/drm/drm_fb_helper.c
-> @@ -30,9 +30,7 @@
->   #define pr_fmt(fmt) KBUILD_MODNAME ": " fmt
->   
->   #include <linux/console.h>
-> -#include <linux/pci.h>
->   #include <linux/sysrq.h>
-> -#include <linux/vga_switcheroo.h>
->   
->   #include <drm/drm_atomic.h>
->   #include <drm/drm_drv.h>
-> @@ -1668,7 +1666,6 @@ static int drm_fb_helper_find_sizes(struct drm_fb_helper *fb_helper,
->   static int drm_fb_helper_single_fb_probe(struct drm_fb_helper *fb_helper)
->   {
->   	struct drm_client_dev *client = &fb_helper->client;
-> -	struct drm_device *dev = fb_helper->dev;
->   	struct drm_fb_helper_surface_size sizes;
->   	int ret;
->   
-> @@ -1687,10 +1684,6 @@ static int drm_fb_helper_single_fb_probe(struct drm_fb_helper *fb_helper)
->   
->   	strcpy(fb_helper->fb->comm, "[fbcon]");
->   
-> -	/* Set the fb info for vgaswitcheroo clients. Does nothing otherwise. */
-> -	if (dev_is_pci(dev->dev))
-> -		vga_switcheroo_client_fb_set(to_pci_dev(dev->dev), fb_helper->info);
-> -
->   	return 0;
->   }
->   
-> diff --git a/drivers/video/fbdev/core/fbcon.c b/drivers/video/fbdev/core/fbcon.c
-> index 78a5b22c8d150..8b2c3065c0c26 100644
-> --- a/drivers/video/fbdev/core/fbcon.c
-> +++ b/drivers/video/fbdev/core/fbcon.c
-> @@ -64,6 +64,7 @@
->   #include <linux/console.h>
->   #include <linux/string.h>
->   #include <linux/kd.h>
-> +#include <linux/pci.h>
->   #include <linux/slab.h>
->   #include <linux/fb.h>
->   #include <linux/fbcon.h>
-> @@ -75,6 +76,7 @@
->   #include <linux/interrupt.h>
->   #include <linux/crc32.h> /* For counting font checksums */
->   #include <linux/uaccess.h>
-> +#include <linux/vga_switcheroo.h>
->   #include <asm/irq.h>
->   
->   #include "fbcon.h"
-> @@ -2913,6 +2915,9 @@ void fbcon_fb_unregistered(struct fb_info *info)
->   
->   	console_lock();
->   
-> +	if (info->device && dev_is_pci(info->device))
-> +		vga_switcheroo_client_fb_set(to_pci_dev(info->device), NULL);
-> +
->   	fbcon_registered_fb[info->node] = NULL;
->   	fbcon_num_registered_fb--;
->   
-> @@ -3046,6 +3051,10 @@ static int do_fb_registered(struct fb_info *info)
->   		}
->   	}
->   
-> +	/* Set the fb info for vga_switcheroo clients. Does nothing otherwise. */
-> +	if (info->device && dev_is_pci(info->device))
-> +		vga_switcheroo_client_fb_set(to_pci_dev(info->device), info);
-> +
->   	return ret;
->   }
->   
+The sm_step_* methods receive a `&mut T`. This is UB if other code has
+an `&GpuVm<T>` and the `T` is not wrapped in an `UnsafeCell` because
+`&GpuVm<T>` implies that the data is not modified.
 
--- 
---
-Thomas Zimmermann
-Graphics Driver Developer
-SUSE Software Solutions Germany GmbH
-Frankenstr. 146, 90461 Nürnberg, Germany, www.suse.com
-GF: Jochen Jaser, Andrew McDonald, Werner Knoblich, (HRB 36809, AG Nürnberg)
+> > +    /// Shared data not protected by any lock.
+> > +    #[pin]
+> > +    shared_data: T::SharedData,
+>=20
+> Should we deref to this?
 
+We can do that.
 
+> > +    /// Creates a GPUVM instance.
+> > +    #[expect(clippy::new_ret_no_self)]
+> > +    pub fn new<E>(
+> > +        name: &'static CStr,
+> > +        dev: &drm::Device<T::Driver>,
+> > +        r_obj: &T::Object,
+>=20
+> Can we call this =E2=80=9Creservation_object=E2=80=9D, or similar?
+>=20
+> We should probably briefly explain what it does, perhaps linking to the C=
+ docs.
+
+Yeah agreed, more docs are probably warranted here.
+
+> I wonder if we should expose the methods below at this moment. We will no=
+t need
+> them in Tyr until we start submitting jobs. This is still a bit in the fu=
+ture.
+>=20
+> I say this for a few reasons:
+>=20
+> a) Philipp is still working on the fence abstractions,
+>=20
+> b) As a result from the above, we are taking raw fence pointers,
+>=20
+> c) Onur is working on a WW Mutex abstraction [0] that includes a Rust
+> implementation of drm_exec (under another name, and useful in other conte=
+xts
+> outside of DRM). Should we use them here?
+>=20
+> I think your current design with the ExecToken is also ok and perhaps we =
+should
+> stick to it, but it's good to at least discuss this with the others.
+
+I don't think we can postpone adding the "obtain" method. It's required
+to call sm_map, which is needed for VM_BIND.
+
+> > +    /// Returns a [`GpuVmBoObtain`] for the provided GEM object.
+> > +    #[inline]
+> > +    pub fn obtain(
+> > +        &self,
+> > +        obj: &T::Object,
+> > +        data: impl PinInit<T::VmBoData>,
+> > +    ) -> Result<GpuVmBoObtain<T>, AllocError> {
+>=20
+> Perhaps this should be called GpuVmBo? That=E2=80=99s what you want to =
+=E2=80=9Cobtain=E2=80=9D in the first place.
+>=20
+> This is indeed a question, by the way.
+
+One could possibly use Owned<_> here.
+
+> > +/// A lock guard for the GPUVM's resv lock.
+> > +///
+> > +/// This guard provides access to the extobj and evicted lists.
+>=20
+> Should we bother with evicted objects at this stage?
+
+The abstractions don't actually support them right now. The resv lock is
+currently only here because it's used internally in these abstractions.
+It won't be useful to drivers until we add evicted objects.
+
+> > +///
+> > +/// # Invariants
+> > +///
+> > +/// Holds the GPUVM resv lock.
+> > +pub struct GpuvmResvLockGuard<'a, T: DriverGpuVm>(&'a GpuVm<T>);
+> > +
+> > +impl<T: DriverGpuVm> GpuVm<T> {
+> > +    /// Lock the VM's resv lock.
+>=20
+> More docs here would be nice.
+>=20
+> > +    #[inline]
+> > +    pub fn resv_lock(&self) -> GpuvmResvLockGuard<'_, T> {
+> > +        // SAFETY: It's always ok to lock the resv lock.
+> > +        unsafe { bindings::dma_resv_lock(self.raw_resv_lock(), ptr::nu=
+ll_mut()) };
+> > +        // INVARIANTS: We took the lock.
+> > +        GpuvmResvLockGuard(self)
+> > +    }
+>=20
+> You can call this more than once and deadlock. Perhaps we should warn abo=
+ut this, or forbid it?
+
+Same as any other lock. I don't think we need to do anything special.
+
+> > +    /// Use the pre-allocated VA to carry out this map operation.
+> > +    pub fn insert(self, va: GpuVaAlloc<T>, va_data: impl PinInit<T::Va=
+Data>) -> OpMapped<'op, T> {
+> > +        let va =3D va.prepare(va_data);
+> > +        // SAFETY: By the type invariants we may access the interval t=
+ree.
+> > +        unsafe { bindings::drm_gpuva_map(self.vm_bo.gpuvm().as_raw(), =
+va, self.op) };
+> > +        // SAFETY: The GEM object is valid, so the mutex is properly i=
+nitialized.
+>=20
+> > +        unsafe { bindings::mutex_lock(&raw mut (*self.op.gem.obj).gpuv=
+a.lock) };
+>=20
+> Should we use Fujita=E2=80=99s might_sleep() support here?
+
+Could make sense yeah.
+
+> > +/// ```
+> > +/// struct drm_gpuva_op_unmap {
+> > +/// /**
+> > +/// * @va: the &drm_gpuva to unmap
+> > +/// */
+> > +/// struct drm_gpuva *va;
+> > +///
+> > +/// /**
+> > +/// * @keep:
+> > +/// *
+> > +/// * Indicates whether this &drm_gpuva is physically contiguous with =
+the
+> > +/// * original mapping request.
+> > +/// *
+> > +/// * Optionally, if &keep is set, drivers may keep the actual page ta=
+ble
+> > +/// * mappings for this &drm_gpuva, adding the missing page table entr=
+ies
+> > +/// * only and update the &drm_gpuvm accordingly.
+> > +/// */
+> > +/// bool keep;
+> > +/// };
+> > +/// ```
+>=20
+> I think the docs could improve here ^
+
+Yeah I can look at it.
+
+> > +impl<T: DriverGpuVm> GpuVmCore<T> {
+> > +    /// Create a mapping, removing or remapping anything that overlaps=
+.
+> > +    #[inline]
+> > +    pub fn sm_map(&mut self, req: OpMapRequest<'_, T>) -> Result {
+>=20
+> I wonder if we should keep this =E2=80=9Csm=E2=80=9D prefix. Perhaps
+> =E2=80=9Cmap_region=E2=80=9D or =E2=80=9Cmap_range=E2=80=9D would be bett=
+er names IMHO.
+
+I'll wait for Danilo to weigh in on this. I'm not sure where "sm"
+actually comes from.
+
+> > +/// Represents that a given GEM object has at least one mapping on thi=
+s [`GpuVm`] instance.
+> > +///
+> > +/// Does not assume that GEM lock is held.
+> > +#[repr(C)]
+> > +#[pin_data]
+> > +pub struct GpuVmBo<T: DriverGpuVm> {
+>=20
+> Oh, we already have GpuVmBo, and GpuVmBoObtain. I see.
+
+Yeah, GpuVmBoObtain and GpuVmBoAlloc are pointers to GpuVmBo.
+
+> > +    #[pin]
+> > +    inner: Opaque<bindings::drm_gpuvm_bo>,
+> > +    #[pin]
+> > +    data: T::VmBoData,
+> > +}
+> > +
+> > +impl<T: DriverGpuVm> GpuVmBo<T> {
+> > +    pub(super) const ALLOC_FN: Option<unsafe extern "C" fn() -> *mut b=
+indings::drm_gpuvm_bo> =3D {
+> > +        use core::alloc::Layout;
+> > +        let base =3D Layout::new::<bindings::drm_gpuvm_bo>();
+> > +        let rust =3D Layout::new::<Self>();
+> > +        assert!(base.size() <=3D rust.size());
+>=20
+> We should default to something else instead of panicking IMHO.
+
+This is const context, which makes it a build assertion.
+
+> My overall opinion is that we=E2=80=99re adding a lot of things that will=
+ only be
+> relevant when we=E2=80=99re more advanced on the job submission front. Th=
+is
+> includes the things that Phillip is working on (i.e.: Fences + JobQueue).
+>=20
+> Perhaps we should keep this iteration downstream (so we=E2=80=99re sure i=
+t works
+> when the time comes) and focus on synchronous VM_BINDS upstream.
+> The Tyr demo that you=E2=80=99ve tested this on is very helpful for this =
+purpose.
+
+Yeah let's split out the prepare, GpuVmExec, and resv_add_fence stuff to
+a separate patch.
+
+I don't think sync vs async VM_BIND changes much in which methods or
+structs are required here. Only difference is whether you call the
+methods from a workqueue or not.
+
+Alice
