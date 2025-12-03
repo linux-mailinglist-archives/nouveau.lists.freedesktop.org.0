@@ -2,46 +2,46 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id 6F550C9DD5E
-	for <lists+nouveau@lfdr.de>; Wed, 03 Dec 2025 06:59:31 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 2EF4CC9DD61
+	for <lists+nouveau@lfdr.de>; Wed, 03 Dec 2025 06:59:33 +0100 (CET)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 3DFF110E07C;
-	Wed,  3 Dec 2025 05:59:29 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 42FEA10E0DD;
+	Wed,  3 Dec 2025 05:59:30 +0000 (UTC)
 Authentication-Results: gabe.freedesktop.org;
-	dkim=pass (2048-bit key; unprotected) header.d=Nvidia.com header.i=@Nvidia.com header.b="e91dRldI";
+	dkim=pass (2048-bit key; unprotected) header.d=Nvidia.com header.i=@Nvidia.com header.b="Si5iJY8x";
 	dkim-atps=neutral
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
 Received: from SJ2PR03CU001.outbound.protection.outlook.com
- (mail-westusazon11012044.outbound.protection.outlook.com [52.101.43.44])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 210B010E07C
+ (mail-westusazon11012060.outbound.protection.outlook.com [52.101.43.60])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id C8F2B10E07C
  for <nouveau@lists.freedesktop.org>; Wed,  3 Dec 2025 05:59:28 +0000 (UTC)
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=Z/RE9c6EZvKUXHFaI6OZ+99TB5lqePS6jb4RHMWcQUcitY+NGfQJTMwnhETc1B92M/KRX1CpPeWoARySyGP+FNzs7axmkOc13PWyo6ZThZrDqRPih9KJCp3jlMo4Wm6Fpa1xINIGmu17ToKslEeeDTzpIxTFlBWvfbhOe7z5NtTQqiCvJDLrIoc5opbZ2GRVQbVOslPH3ATY3jkeoGYqhO6T99QoJsdWTMY5X/pNkis7SlR41VnJ5Z/9AgKRPyoxJKAGIkjEfByi6tDOlfOjGScIFe/KAhqaIR2XP199O4v+q52vtWMpr8iFmFI7bDfmTSc2Qnwqsaq3Bed5r2tBdg==
+ b=aj6XocLN0IrSzfTNr//KWI/qtQXSt0qc3I7jWoUsIxAEXxr5k22/sbQY5obQQtge7trDaaaJXk3G0YRNjPt4NzDPxKKmpKEVfmdYoW6wOL1Ax97EUJSlilKMmyz/eT79bc8oeBRsJl9OBqLJNc3VFLpy87bG2IBtN7O3veJcmUy7gyvXzP+5rmqku5PfKPJCHgt8QXFmX9rU/KACvn3Y5iZ0BoO0odqIf1s+ODVsU/DARv5TBvAiQBNhtxWkEwRC4OHI1mWEQf8ql1k2uzdYurOSzphq/SqGQc3/wcIxK5zm7AueddugXa9rOQxAflv+2ltzDQHT0TgZR93BYjte3Q==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
  s=arcselector10001;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=Lmz+3xFe3/aI2Lvtcz+K6B+Zjp++J0cYESzT9SN4Z6U=;
- b=Y0MkQajUIw81e2g+cnxnlnfcW5z86JNOd4o36oS3JvHeCfpF1wB/e0Ym/0ByGxptrgn4HvwvuJeI3b9gq2K0/Z6SrMCxn856th1uh2tY3O/2uvzgXmbGgtPYXmGB3YBdZOX0YYMuTWww/8zvk0w/YmYzklGjU7r7hYy8346dxZVjMuA/NQfqC6AeCTcPLJuX0E0lDCJoCjZLsnxdiWvIrItqvo2+/z1SwYiBErkCgw5UtmWwgY7KG2OnnH1C9BPtDoR3YKvEl1yryRyAa0tAOX/l29zXfrLqA7LMNGLxsqKuA73Wn+f+LignIXybayYT5RecRIogmmbKubM6rvo1TA==
+ bh=nI+puBWEO5bDNmyCHBKbHQ2EaZj291ZuJoePuOZekOk=;
+ b=GvNagLr9csyvrr2WyT11CY76zH5K54UGtNJX1uU1sCamVXixk9aOARUokX47BPH+0fEJDGhZHJJD4iccldvIq1CUFsLsP++lCu9KfQs4eLqS85EtIwf3CIYNGwh6TJusNVQxNLY3O11sRaypGs5G2YIeZHb2A2JQdPDzANr1651NL/VhtL5Zyz6xto9IMvAwCUZ7p1jW7B4MTWRdMdC4ASNnS/wSNMn4v5nzPA45Yd/fRj5wv7kfnQKAszAthd2SKFwsvbA3+AgghMcvBOXkrtw8RwVb0l4Xsrl/Cbvdhw655hcJv8wE6UQz0Mnt5Ewzm1+B0dujQbtXHXYYEVntFQ==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
  smtp.mailfrom=nvidia.com; dmarc=pass action=none header.from=nvidia.com;
  dkim=pass header.d=nvidia.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=Nvidia.com;
  s=selector2;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=Lmz+3xFe3/aI2Lvtcz+K6B+Zjp++J0cYESzT9SN4Z6U=;
- b=e91dRldI0xKSwtH+3tp5+sH+njrDcupoPNAU3N9/cwrtiFQGtuBhEc9YCjPyvOJ3c2jTDBEjrqbEw1yyQ2Plpridy+d8lNxglBwcdfsYCO62LG4PqqouAs/ZobdGs/DA5RLd/MKT/GU7unahvESJqv2z8455/Uv4OJ7A0pJOardYNDr2mctCHi4s4FIIj3a3+vXCCdBiNIGiOqAgAvDOmejW/CRtjNyTZwC1DDJr2yxv/Oiub2ZlKP39LXeN6Aq3beLnyGCStW0VF7uE1FR90l4GyfL7pYWDxchuNhyoGS3WJYeUlzWOFenaIj0VS4DSCvqKULGqJzQ7Nto4GCJ0Sg==
+ bh=nI+puBWEO5bDNmyCHBKbHQ2EaZj291ZuJoePuOZekOk=;
+ b=Si5iJY8xQEh7/9LsvICY5z/ijAQPLHvL7e0jEuJumWCzw5cvkxyqqEXqAL2t30dNrLjfx1sAXqZIS+KwALOeK/44uIu8lRwV1nwkuK7lricNxcvpW2phVAO7Bf26+uvURPEqesungzp0AR0ubzqrTtIMMbpEXAlQf4W4cYZElhzQnXz701kZZgfvLPc/tBb5fQ1CmSRkp6Uv2ZWPvQun8K6xfGcUZ+WYaaOh5bPzBJLdpckn8787pS+lfG117Lavw251U3E8Tks8IBPSZNgA8SErVJbGtYM9W9RkOeIpEFIG3YBBSZKCpfq/hrdAFzcjiO9TXqVYneZ3ubRDfmDrzw==
 Authentication-Results: dkim=none (message not signed)
  header.d=none;dmarc=none action=none header.from=nvidia.com;
 Received: from DM3PR12MB9416.namprd12.prod.outlook.com (2603:10b6:0:4b::8) by
  PH7PR12MB8180.namprd12.prod.outlook.com (2603:10b6:510:2b6::7) with
  Microsoft
  SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.20.9388.9; Wed, 3 Dec 2025 05:59:25 +0000
+ 15.20.9388.9; Wed, 3 Dec 2025 05:59:26 +0000
 Received: from DM3PR12MB9416.namprd12.prod.outlook.com
  ([fe80::8cdd:504c:7d2a:59c8]) by DM3PR12MB9416.namprd12.prod.outlook.com
  ([fe80::8cdd:504c:7d2a:59c8%7]) with mapi id 15.20.9366.012; Wed, 3 Dec 2025
- 05:59:25 +0000
+ 05:59:26 +0000
 From: John Hubbard <jhubbard@nvidia.com>
 To: Danilo Krummrich <dakr@kernel.org>
 Cc: Alexandre Courbot <acourbot@nvidia.com>,
@@ -56,88 +56,90 @@ Cc: Alexandre Courbot <acourbot@nvidia.com>,
  Alice Ryhl <aliceryhl@google.com>, Trevor Gross <tmgross@umich.edu>,
  nouveau@lists.freedesktop.org, rust-for-linux@vger.kernel.org,
  LKML <linux-kernel@vger.kernel.org>, John Hubbard <jhubbard@nvidia.com>
-Subject: [PATCH 00/31] gpu: nova-core: firmware: Hopper/Blackwell support
-Date: Tue,  2 Dec 2025 21:58:52 -0800
-Message-ID: <20251203055923.1247681-1-jhubbard@nvidia.com>
+Subject: [PATCH 01/31] gpu: nova-core: print FB sizes, along with ranges
+Date: Tue,  2 Dec 2025 21:58:53 -0800
+Message-ID: <20251203055923.1247681-2-jhubbard@nvidia.com>
 X-Mailer: git-send-email 2.52.0
+In-Reply-To: <20251203055923.1247681-1-jhubbard@nvidia.com>
+References: <20251203055923.1247681-1-jhubbard@nvidia.com>
 X-NVConfidentiality: public
 Content-Transfer-Encoding: 8bit
 Content-Type: text/plain
-X-ClientProxiedBy: SJ0PR13CA0109.namprd13.prod.outlook.com
- (2603:10b6:a03:2c5::24) To DM3PR12MB9416.namprd12.prod.outlook.com
+X-ClientProxiedBy: SJ0PR03CA0138.namprd03.prod.outlook.com
+ (2603:10b6:a03:33c::23) To DM3PR12MB9416.namprd12.prod.outlook.com
  (2603:10b6:0:4b::8)
 MIME-Version: 1.0
 X-MS-PublicTrafficType: Email
 X-MS-TrafficTypeDiagnostic: DM3PR12MB9416:EE_|PH7PR12MB8180:EE_
-X-MS-Office365-Filtering-Correlation-Id: 0fa5cc04-f365-4617-b890-08de32311cde
+X-MS-Office365-Filtering-Correlation-Id: cf78079f-66c0-4ba8-94eb-08de32311d90
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
 X-Microsoft-Antispam: BCL:0;ARA:13230040|7416014|376014|366016|1800799024;
-X-Microsoft-Antispam-Message-Info: =?us-ascii?Q?gzGes+d4VogO8mTBMYdfgpbH5YbXWQ10j6ppjcPcMQR2E1vsJgPM4wX0g6EL?=
- =?us-ascii?Q?0dONiy5Rp2ufcUHrprTXZWmKr8KLUjqL6Bx90qjqsLXbyxryJ1KwpjG4ZAsH?=
- =?us-ascii?Q?mpMseLs5bTP3wLyQyiZhIwZubdcal18l1NfGP/mU5rOM86yc6rVIh1eaOP5T?=
- =?us-ascii?Q?7smPRdv5gj31K6vG9l3tP6zF36Vuph6VGNxbUy9nreN6GO16Wo5SdjioMPoY?=
- =?us-ascii?Q?oWL477yEF48Mnocy8kKdL4+9+BSaXuve6iAIcLNhbq+s02MngvrBEo0mauU4?=
- =?us-ascii?Q?jHMDjThuVZ7f1SxdfAE7t4P6AzS9U1bD4MvPqm9gEq2mXvdRuGHioeWmWRBM?=
- =?us-ascii?Q?V6O67cSUxqpvLHzxH97cu7W1CxfxoZmOvTcVAFIjKS4BP9Z8svIIA5MHPbP6?=
- =?us-ascii?Q?TBPWxBjOFLHVL/LzN4lGCNlS7pvNAne7OOUnD4zEBgRnXlJwGeLE8oH2hL+M?=
- =?us-ascii?Q?Bs3U7QMr+aSXrQCpjAo2yQnEOZbi+sV5y/i0KVuLoqVBCZjg1EjsbtnfyiEi?=
- =?us-ascii?Q?p/esAjGAOT7/6m4wcYkyrchx5nghcrI6FAl9gIicD1B/5+Nd/Zbc8GstKMH0?=
- =?us-ascii?Q?sJi//QVsWtNfhoEOKC4cLVsrSVaMKgpO2tBIB/iSioIKCUIDf9G3IqUc4nj+?=
- =?us-ascii?Q?xO44LyLa7frr69Atk9wS7KU0BdjJIE+iM4J2d6x/+uQYxachoKnArkDCN4d1?=
- =?us-ascii?Q?D2K0trjsrd+ZcIEQdYn1wlsZ3a84ztscY9ej+PcuSvqZZxLgPofk8sCwIfxj?=
- =?us-ascii?Q?M+yt0YFJfcq50e/GM/6pzMhWfYNmiD/b733DdSwagc/e3DoxGWaQm5AIn8Vr?=
- =?us-ascii?Q?V4PQm//ac1tz2++zkFf9exQARYSpALVpnsAVpcImeXyI/mglLA9rpPVl9eQh?=
- =?us-ascii?Q?uQeoLPN/ZI/Fb9bYWRVm5QMhGr2Juc8Y72GpMO+PD4dbCYnX/8ARPcL6miOI?=
- =?us-ascii?Q?20rz17K6Yp0FCFV8+U0QKMKF1FKi5B9Rbc1BrwP423SMnuzxyibAh3y8o/+e?=
- =?us-ascii?Q?NsWKp+kNw+As1PdH/XEyt5z/8u1S8zaoUmz4Agcl1PXfFxXaiDOve04hTM2Y?=
- =?us-ascii?Q?TGLwdLs5mvgS49DdvhF36S7gsbwsNjY8JV3/rbEthRrCGT1DCAM2EwD+XtUe?=
- =?us-ascii?Q?wzc3p14pqkskP7gCQiNjnnwMiTmdLMtVc9csv5tSOLgk6Y2ndcCmamgMiPfe?=
- =?us-ascii?Q?RQ0pLFkouRzDQVFg9hg8ueoAeJWCwNzF1G3w/8nPeZgfg3b74hvUgF4OOWLs?=
- =?us-ascii?Q?fkD9MGRX86PE/kXPhIPsi1FLKhzhW8GkqsNkTgN1gRxKsjw5HOk7L3AizFXn?=
- =?us-ascii?Q?Gepsh5RviQFjh+0qW/AecoO4DjyGeWZsVvsiP/y/9NNc8Ul2AIYNyA4B+4Pq?=
- =?us-ascii?Q?ImYqVSZ3CfJe46potq9lNshANqVL7GwShs48mehI/LH6Nf3uUqMcbeqXG3oM?=
- =?us-ascii?Q?FVnepFjM+eJNts1Ay6XNcOsq8V79J6TD41bdrEc6+8fJSl9fAJb4cg=3D=3D?=
+X-Microsoft-Antispam-Message-Info: =?us-ascii?Q?vEyKNDLYMMoWqHnbjd+6gtvlWFx8vFGJa6TsXvj1n15x/TBWgFp2FHng+7BV?=
+ =?us-ascii?Q?9khaMqKtTzZkzwnZERS+D7U2txASuvG/fx6MHKKdDaceThNnTg6/RTKUwbnq?=
+ =?us-ascii?Q?c9WpFs57LHHyaDcS4YJmpeZx03nz3rlRZe1Unz6dBXt3JBoENYfORpSgtA1A?=
+ =?us-ascii?Q?XbzDBGi0Go/J4wDhlXi1ZbCAMJrnf7147RgqzHbdy9lbpcIZ45MdIBE2FJT0?=
+ =?us-ascii?Q?lYX0Aakt9FUAdhhbqqgj89tcv9QZjlIiCvmRBxjA/pz7C9Gvnm2djoTsrlfn?=
+ =?us-ascii?Q?Izktx/8Tpac0JNFu5l4llpkniV6RxZes+dCcCCV8Vkezx3+P8wJy59pvsS/K?=
+ =?us-ascii?Q?jvQbAcpQQ/K/HRExRTCEIMkZ+k5Bq9znLF14DaEGHpKVY77x6M3+Dq41E1WM?=
+ =?us-ascii?Q?Y7QAeuMuEhYlcLLzoKAuUEokCQdE2elLzfRKb2hSSBJ/JWs6C/qUKYwWqGr1?=
+ =?us-ascii?Q?gSq2SapF1K3pD8EavEYq9dYazl9sDPVBvMDnYqL678cXDzOr0RxkFlJO0/3u?=
+ =?us-ascii?Q?8zWQeM4y/zdeOOhJVQCHV/j9XVQb8CYHws1fH2tkvBSRfPn5uC2LJWAtJoxN?=
+ =?us-ascii?Q?L26vozIY79iI7ZIRGMXl7FU1MRQXoWei4auz7G7A8TbsfY4GSrlq+cQURCRT?=
+ =?us-ascii?Q?uTSe8XLn0vuUiDU3HgYVRSrjimEs+1a1avi48oBdJ9w35SK+tcjHPlOtPlHf?=
+ =?us-ascii?Q?j61MgtwvMzbSLcDQ2ilc7uHaD+3x366t0MD5n2aDYxt31OXRhVPT9Hg2F0C2?=
+ =?us-ascii?Q?NPKOcGR8fo4xhgQt2C1X1Np04DJUWKKmOrhMqa0JWq6L8vzpGs64H0xm7Nsp?=
+ =?us-ascii?Q?uHVikIZi8MCcE8qkPOHq1bEtIwhWyQyscMMLdRVcHN+5h1lD03powFSyCwbx?=
+ =?us-ascii?Q?ciSuPr+4xDxhslGdi/prWKIjT2asIHgCsioETDZO1N+arg7Geq8fUYL5ZyOL?=
+ =?us-ascii?Q?NCGECVtalmkdnbAjm7So00bEI8b16AF9S9xdAFw30Rjacg9ZhCvUPwCUM+ww?=
+ =?us-ascii?Q?dDGCQiEYEfRc9dJ7uURl+hGwTV0D95DnXxX0TRfSyQq+E4OsjfhciF8e89Da?=
+ =?us-ascii?Q?M9Cc0pNfr5jyEEnfdmGT+41Os9Ng4DhdpvaXo6in3P2/qoncYsp07ENXpj8G?=
+ =?us-ascii?Q?/4zM+ANIMasfBclsK9HYwT5StVOqJRbqd2rTR7JrBdKbq4ycpGUvKikvWRn2?=
+ =?us-ascii?Q?qB6iXipB22dv6zohImEM6C+4TIZ3Id8MiLvIqkl3cQw6aWVcfN37A4bM8ebh?=
+ =?us-ascii?Q?swVf5DMAiw9JNmmwJUG3wdFJdcD7+ZESnDEAeQKUAV6SBrEN2rg4s0ky5vLZ?=
+ =?us-ascii?Q?jD438Hi/fGrZv7mZsG0SljXs8r7/e2j7hCtcJhArowAgtkpUfqT3f8W+F4A8?=
+ =?us-ascii?Q?DR/oGALauVnL+AHacUgwXt5N1mInmIehP/k/3RkTtUEJyKWhuUfDigM+0+75?=
+ =?us-ascii?Q?d/u26utHKNUFhMZkGE3HAgFP9gtnp5Yz?=
 X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
  IPV:NLI; SFV:NSPM; H:DM3PR12MB9416.namprd12.prod.outlook.com; PTR:; CAT:NONE;
  SFS:(13230040)(7416014)(376014)(366016)(1800799024); DIR:OUT; SFP:1101; 
 X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: =?us-ascii?Q?Mw+g05Goj7H4rR1ob3HuJnj3CmZMNCJU+uTKscgFAvXF0/DFFIPLNjjB6OHH?=
- =?us-ascii?Q?qeQQ2oYV1Dk+z5XWsMxbBt6xHvGlEvB7f22U/v7gqX/3oNSA1sRx2JWcedaE?=
- =?us-ascii?Q?ptkiqAKF1shh8atIlexsdQMReR2vP59NNbadKcJBQUkMxt6GJ7Jw+OaftQpi?=
- =?us-ascii?Q?d4okj6pJ0xXOjg2qi6N1hQJN5ZJiaYGMR9A65Yxk4WcejUiIkJvQwrtTk5RU?=
- =?us-ascii?Q?0hmW+MnwqIs3+TM/GSD8+l3APDXzus2et1hDa5ow/dsBz7Un47qOtvQf+GRB?=
- =?us-ascii?Q?1t67qEWMWq2Ceu6mesCqUzQheZ1KCU6f2GS/JkGTdA3MTqWaRfpfbT+Q7HXW?=
- =?us-ascii?Q?73Xh28oYgF3/sri7SZIZ7v6sub8ujutVuq9pOA73IbCIU/Vfiokhb22dkABa?=
- =?us-ascii?Q?q6pwhpH05eLHYIVufPrjMAoNVzHHIuaXX3uBs7CJv0XPRxeQQDwmxJBVuq3h?=
- =?us-ascii?Q?nNrCjSkMZ9aH/SJ9Vkk0rJTDLv+P/xmaR9qJio9sPdOF9S1f58787VFiocg8?=
- =?us-ascii?Q?Qjtzgj16j6eC3PbXPQrG45xz+syP+GKQDUDhG37702Zjo9/pFNW0zwil9J3e?=
- =?us-ascii?Q?Tepk2LcAZD54mMUFSwIYGkpcqzLl3CrCAV5Ih0EbWMHSFwGW/LLoot3k0yPJ?=
- =?us-ascii?Q?o5SVOfhjw1VbZvxoc7R9fGwRD743x4QDN5Kc/vTgR3qC3tmcxKAbqb4MEKrB?=
- =?us-ascii?Q?2o7KWzB7QsweXn2u9oH59UY86w4MEFoNVoJEaI5XjSa+tnC9WFuscd+f5LS3?=
- =?us-ascii?Q?beL1/yNXhAIWgnJ+2OY0ZJGui2x8dDOIxnZLEa9jEj6IzDPRgG8R/DqGWGga?=
- =?us-ascii?Q?cJ5uoFcZn7m0avJtThVPj1iUdhAqJqOON8XShOTr6EjR/2kOtlHlO9y7+hMH?=
- =?us-ascii?Q?oLK5/2s2A1Yiab+jumL+CWhIwXMAG4DkjJxy/4xfaO6aFDwCL3eGElZFvVrq?=
- =?us-ascii?Q?IAHkiZ46qB/4k/3YBsEgn54mXe089bzvLzUJggeqEslvccFHShc/6TT1nX7+?=
- =?us-ascii?Q?kN4cvfEl+DAWskAFDPVQIY0mRrVk3rgOPCneOq9gWGNNVVwdqsgoBrMhox48?=
- =?us-ascii?Q?MXxJElITngEc+uben4tRtnq7waIc8P9h5j9xg3cSrDMIpQDP2tbJmiUwT3f4?=
- =?us-ascii?Q?ENHdJXgUQh2+LmxJbLnbLshow1Ra+5iKh/HzxDWNiGUuw0PFoRCOAkJop0nB?=
- =?us-ascii?Q?gCq8Cr3Ial2dELP8s0pjwYKj6pyDmL/K9Ixdebj8ATH+4rdopg3a+vYxG4W1?=
- =?us-ascii?Q?xlNy+PCagTOT27kGrxGmrp+etApcq2Q5YPw4B913LjcLPvi/29V+7rgmDxL7?=
- =?us-ascii?Q?RhQe0e2Y9FAGXl/mNV12ycfXDIdlqn+rmSxj/DlBQhq6Gwme6zrOvEkHKtnz?=
- =?us-ascii?Q?NZAu/QzeR5xXh38enuTqoKUqn9p302/tnGl2mZpa4CpC/bVQSgsQ/fns2yt0?=
- =?us-ascii?Q?PZ8j1ogqm0JRSnPY9xGq8BFJSPMyS9sWokXiph3HoY+ujsAIu5ICFjUjp4X0?=
- =?us-ascii?Q?ZTCHepiIFyp67vnBlLfVZxCiAWWa4A+e4riNALp4sBAwYZFlB0qwmWeJ+qOo?=
- =?us-ascii?Q?elDVs6AVvPnjyXF/8T+HJNZkw5disBh/Bss6lM++?=
+X-MS-Exchange-AntiSpam-MessageData-0: =?us-ascii?Q?iQFxqJisAYQWk/o8UHEV+Uo+CEwZyjJCaJnoUSqN5DVKh0eRc2S8AbFqucIT?=
+ =?us-ascii?Q?G35B9rzc1dveeZLyZKDS14c+l+gh+wtbj2t6vhSC39p/ogIrAIk/Oho7ULeI?=
+ =?us-ascii?Q?x6N1JThkHu/XvFOc0OLRFAhLnb7yzHRhbe3jwzzuVU07t+CWmigsVIpkvlqT?=
+ =?us-ascii?Q?dRmOacx7Jwqzj300hdeHGmHilB+jjirJXDSlyxUuyJidyl+FkiiitnszqP0+?=
+ =?us-ascii?Q?a8SDeVIxZkn/pE2BobPl011NPz9AW7CqaIb2M0Fm6uhr5xNsxn7c/WcYIcqL?=
+ =?us-ascii?Q?k2VDpLyPV83f2hq4luif+Fmod7VMSYMODo6gLykjZ7mIXlSwxgviKVGx3T38?=
+ =?us-ascii?Q?wD+JIGD63e1YCAIod0dLAZt2xipElnyW8blnu9XHt7Yy31ASUcYt+/DBrBpm?=
+ =?us-ascii?Q?/gq8bLCwtbOnbkkWDoRljWlEV2qVY4ROgH+HQ+medEtuJ6o6ClR8nPLXs1n4?=
+ =?us-ascii?Q?u1C2mCHG6v54cYHSbsyLheeECnu7JX7okDCLJOY800bDLQDTIzH+fXA61Plp?=
+ =?us-ascii?Q?Zcbo2rLMpYNZMvieyJ+z90t832c+uZXVjttwy11ly/Exc2Z21n/PX5HBYVgV?=
+ =?us-ascii?Q?gpgI7wopXxCzwQpCz4uwMugJnVBIgoDCJqu9oh4BkuXfAQKN8PRJ4Ep+I8rd?=
+ =?us-ascii?Q?QRrVHfWz/OLMebbTWjS7vP6MZosTURsm2cu9QFsIRkUl9NyeQ9ZMv0X12fM/?=
+ =?us-ascii?Q?WtFe8j0XLhAMeBFw3z+Zuz37k3yPCZn9cU9F6qPnzy/OEw8dQ5ydZ10Jl9A5?=
+ =?us-ascii?Q?9Vr63Yk/0xBwSrWRz4OP0vNxHnSWqP5c2EwyEPB+K3ErYs0iP141y9AD+05V?=
+ =?us-ascii?Q?Jp6Id/tSlModc6HVFglsmfKCZOmwLrvVG6C3aOr9iOVaLTBrWpEPDy6o4127?=
+ =?us-ascii?Q?iILdYxVW/YUdTBqfAUtY3oq98vw1gBc+DCHK6QUjq4IURcIeZA0u1fTnXqcc?=
+ =?us-ascii?Q?Sx2LAhFrx92Maozny3gZAe6HpNeL5qUZvzZHBkyOiXPDfrnMY9NKhPhFF2Gp?=
+ =?us-ascii?Q?7qFQJSTp8wFgHsA09z5DA9GbkGp0ONoWxOsoOgfz61hCkhaqTpUiz4JEB78x?=
+ =?us-ascii?Q?lX2enIJt4iTxdAmRf2w/7asZuFd8WfbjmNvmD60u46eFTGkEHrhRNvcjuNAO?=
+ =?us-ascii?Q?sUXJd1baZB+ErKvZEHxEu5sfKHz+WpZAhp/A7VFBCUR9AeJlh1rQqLJknjhk?=
+ =?us-ascii?Q?jVpYFJbah8VojuKCK1vuaS8UY6b7t+liva6wOR0w0hCYjJc9MOrkyIIjk9V1?=
+ =?us-ascii?Q?6EQJjbetWHZ37itMsAoG+Y6khMrBxZUJxLxtf7rJ8E5O8QnufoT8NkVcKHEN?=
+ =?us-ascii?Q?D9fNPjsRc+nTb1BPqmpWLRYHFKi7Mk71KkMjPBQsHuSFsPlB/Sv/FKO2/DPA?=
+ =?us-ascii?Q?Qxbf2/4CqA6THYVj2oodbagq6HyQE9ZO1PCTMds9aqtNYCdGXsJPo2piVhyS?=
+ =?us-ascii?Q?7S00sG3YubHzynCcT8OPMdRdIt/91c22t9RQxk92W1+ylpZyM83UU+5fXtoz?=
+ =?us-ascii?Q?QzHIPwY2eZYR9alJE4W35W2UI9uh6XAy7hQxRnOUTmlFSNtgi1htcLMPmQs5?=
+ =?us-ascii?Q?TPE5Jw/WjeQ+tXDBs2DKOXsI/wfGdSIeBtjB9DDk?=
 X-OriginatorOrg: Nvidia.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 0fa5cc04-f365-4617-b890-08de32311cde
+X-MS-Exchange-CrossTenant-Network-Message-Id: cf78079f-66c0-4ba8-94eb-08de32311d90
 X-MS-Exchange-CrossTenant-AuthSource: DM3PR12MB9416.namprd12.prod.outlook.com
 X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 03 Dec 2025 05:59:25.3820 (UTC)
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 03 Dec 2025 05:59:26.5481 (UTC)
 X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
 X-MS-Exchange-CrossTenant-Id: 43083d15-7273-40c1-b7db-39efd9ccc17a
 X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: E4JSAHxl36kWPuIghQFiSzTTnKpdIECaWaEtbO1ZdtFTklWtTUkYEO3EwwDxrNY9bZJledEsbQLAleQ8iKVlkg==
+X-MS-Exchange-CrossTenant-UserPrincipalName: A6nyStbaxaNdO/0uQ9NXGQ8HZ9pn+dMrcIq6hNdGRf93YpDSOYA4E0O9ypMWkET9PKthNcU504X+QHd2WAUQIg==
 X-MS-Exchange-Transport-CrossTenantHeadersStamped: PH7PR12MB8180
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
@@ -153,93 +155,180 @@ List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-Hi,
+For convenience of the reader: now you can directly see the sizes of
+each range. It is suprising just how much this helps.
 
-This series adds firmware support for Hopper and Blackwell GPUs. By
-that I mean: Hopper and Blackwell can now get just as far as Ampere and
-Ada do: they can receive a GET_GSP_STATIC_INFO message from the GPU's
-GSP firmware, and print the resulting GPU marketing name to dmesg.
+Sample output (using an Ampere GA104):
 
-Having made that claim, note that I've only actually tested the new
-functionality on a single Blackwell GPU, so far: GB202. For Ampere, I've
-tested on GA104, and it still works as before.
+NovaCore 0000:e1:00.0: FbLayout {
+    fb: 0x0..0x3ff800000 (16376 MB),
+    vga_workspace: 0x3ff700000..0x3ff800000 (1 MB),
+    frts: 0x3ff600000..0x3ff700000 (1 MB),
+    boot: 0x3ff5fa000..0x3ff600000 (0 MB),
+    elf: 0x3fb960000..0x3ff5f9000 (60 MB),
+    wpr2_heap: 0x3f3900000..0x3fb900000 (128 MB),
+    wpr2: 0x3f3800000..0x3ff700000 (191 MB),
+    heap: 0x3f3700000..0x3f3800000 (1 MB),
+    vf_partition_count: 0x0,
+}
 
-The doctests are all passing.
+Signed-off-by: John Hubbard <jhubbard@nvidia.com>
+---
+ drivers/gpu/nova-core/fb.rs | 66 +++++++++++++++++++++++++++----------
+ 1 file changed, 49 insertions(+), 17 deletions(-)
 
-This is based on today's drm-rust-next. For reviewer convenience, there
-is also a git branch that has this series applied:
-
-    https://github.com/johnhubbard/linux/tree/nova-core-blackwell-complete-v0
-
-Note: I've merged in the earlier "[PATCH v2 0/5] gpu: nova-core:
-Hopper/Blackwell prerequisites" [1], because it is no longer useful by
-itself. That makes for a large series, but now it is entirely
-self-contained, so it's easy to apply.
-
-[1] https://lore.kernel.org/20251126013936.650678-1-jhubbard@nvidia.com
-
-John Hubbard (31):
-  gpu: nova-core: print FB sizes, along with ranges
-  gpu: nova-core: add FbRange.len() and use it in boot.rs
-  gpu: nova-core: Hopper/Blackwell: basic GPU identification
-  nova-core: factor .fwsignature* selection into a new
-    get_gsp_sigs_section()
-  gpu: nova-core: use GPU Architecture to simplify HAL selections
-  gpu: nova-core: apply the one "use" item per line policy to
-    commands.rs
-  gpu: nova-core: set DMA mask width based on GPU architecture
-  gpu: nova-core: move firmware image parsing code to firmware.rs
-  gpu: nova-core: factor out a section_name_eq() function
-  gpu: nova-core: don't assume 64-bit firmware images
-  gpu: nova-core: add support for 32-bit firmware images
-  gpu: nova-core: add auto-detection of 32-bit, 64-bit firmware images
-  gpu: nova-core: Hopper/Blackwell: add FMC firmware image, in support
-    of FSP
-  gpu: nova-core: Hopper/Blackwell: add FSP falcon engine stub
-  gpu: nova-core: Hopper/Blackwell: add FSP falcon EMEM operations
-  gpu: nova-core: Hopper/Blackwell: add FSP message infrastructure
-  gpu: nova-core: Hopper/Blackwell: calculate reserved FB heap size
-  gpu: nova-core: Hopper/Blackwell: add needs_large_reserved_mem()
-  gpu: nova-core: Hopper/Blackwell: add FSP secure boot completion
-    waiting
-  gpu: nova-core: Hopper/Blackwell: add FSP message structures
-  gpu: nova-core: Hopper/Blackwell: add FMC signature extraction
-  gpu: nova-core: Hopper/Blackwell: add FSP send/receive messaging
-  gpu: nova-core: Hopper/Blackwell: add FSP Chain of Trust boot
-  gpu: nova-core: Hopper/Blackwell: larger non-WPR heap
-  gpu: nova-core: Hopper/Blackwell: larger WPR2 (GSP) heap
-  gpu: nova-core: refactor SEC2 booter loading into run_booter() helper
-  gpu: nova-core: Hopper/Blackwell: skip GFW boot waiting
-  gpu: nova-core: Hopper/Blackwell: add GSP lockdown release polling
-  gpu: nova-core: Hopper/Blackwell: add FSP Chain of Trust boot path
-  gpu: nova-core: Hopper/Blackwell: new location for PCI config mirror
-  gpu: nova-core: clarify the GPU firmware boot steps
-
- drivers/gpu/nova-core/driver.rs          |  33 +-
- drivers/gpu/nova-core/falcon.rs          |   1 +
- drivers/gpu/nova-core/falcon/fsp.rs      | 167 ++++++
- drivers/gpu/nova-core/falcon/hal.rs      |  19 +-
- drivers/gpu/nova-core/fb.rs              | 101 +++-
- drivers/gpu/nova-core/fb/hal.rs          |  18 +-
- drivers/gpu/nova-core/firmware.rs        | 193 +++++++
- drivers/gpu/nova-core/firmware/fsp.rs    |  42 ++
- drivers/gpu/nova-core/firmware/gsp.rs    | 128 ++---
- drivers/gpu/nova-core/fsp.rs             | 617 +++++++++++++++++++++++
- drivers/gpu/nova-core/gpu.rs             |  64 ++-
- drivers/gpu/nova-core/gsp/boot.rs        | 342 ++++++++++---
- drivers/gpu/nova-core/gsp/commands.rs    |   8 +-
- drivers/gpu/nova-core/gsp/fw.rs          |  55 +-
- drivers/gpu/nova-core/gsp/fw/commands.rs |  32 +-
- drivers/gpu/nova-core/nova_core.rs       |   1 +
- drivers/gpu/nova-core/num.rs             |  10 +
- drivers/gpu/nova-core/regs.rs            |  59 +++
- 18 files changed, 1642 insertions(+), 248 deletions(-)
- create mode 100644 drivers/gpu/nova-core/falcon/fsp.rs
- create mode 100644 drivers/gpu/nova-core/firmware/fsp.rs
- create mode 100644 drivers/gpu/nova-core/fsp.rs
-
-
-base-commit: 57dc2ea0b7bdb828c5d966d9135c28fe854933a4
+diff --git a/drivers/gpu/nova-core/fb.rs b/drivers/gpu/nova-core/fb.rs
+index 3c9cf151786c..333e952400e6 100644
+--- a/drivers/gpu/nova-core/fb.rs
++++ b/drivers/gpu/nova-core/fb.rs
+@@ -1,9 +1,13 @@
+ // SPDX-License-Identifier: GPL-2.0
+ 
+-use core::ops::Range;
++use core::ops::{
++    Deref,
++    Range, //
++};
+ 
+ use kernel::{
+     device,
++    fmt,
+     prelude::*,
+     ptr::{
+         Alignable,
+@@ -94,26 +98,54 @@ pub(crate) fn unregister(&self, bar: &Bar0) {
+     }
+ }
+ 
++pub(crate) struct FbRange(Range<u64>);
++
++impl From<Range<u64>> for FbRange {
++    fn from(range: Range<u64>) -> Self {
++        Self(range)
++    }
++}
++
++impl Deref for FbRange {
++    type Target = Range<u64>;
++
++    fn deref(&self) -> &Self::Target {
++        &self.0
++    }
++}
++
++impl fmt::Debug for FbRange {
++    fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
++        let size_mb = (self.0.end - self.0.start) >> 20;
++        f.write_fmt(fmt!(
++            "{:#x}..{:#x} ({} MB)",
++            self.0.start,
++            self.0.end,
++            size_mb
++        ))
++    }
++}
++
+ /// Layout of the GPU framebuffer memory.
+ ///
+ /// Contains ranges of GPU memory reserved for a given purpose during the GSP boot process.
+ #[derive(Debug)]
+ pub(crate) struct FbLayout {
+     /// Range of the framebuffer. Starts at `0`.
+-    pub(crate) fb: Range<u64>,
++    pub(crate) fb: FbRange,
+     /// VGA workspace, small area of reserved memory at the end of the framebuffer.
+-    pub(crate) vga_workspace: Range<u64>,
++    pub(crate) vga_workspace: FbRange,
+     /// FRTS range.
+-    pub(crate) frts: Range<u64>,
++    pub(crate) frts: FbRange,
+     /// Memory area containing the GSP bootloader image.
+-    pub(crate) boot: Range<u64>,
++    pub(crate) boot: FbRange,
+     /// Memory area containing the GSP firmware image.
+-    pub(crate) elf: Range<u64>,
++    pub(crate) elf: FbRange,
+     /// WPR2 heap.
+-    pub(crate) wpr2_heap: Range<u64>,
++    pub(crate) wpr2_heap: FbRange,
+     /// WPR2 region range, starting with an instance of `GspFwWprMeta`.
+-    pub(crate) wpr2: Range<u64>,
+-    pub(crate) heap: Range<u64>,
++    pub(crate) wpr2: FbRange,
++    pub(crate) heap: FbRange,
+     pub(crate) vf_partition_count: u8,
+ }
+ 
+@@ -125,7 +157,7 @@ pub(crate) fn new(chipset: Chipset, bar: &Bar0, gsp_fw: &GspFirmware) -> Result<
+         let fb = {
+             let fb_size = hal.vidmem_size(bar);
+ 
+-            0..fb_size
++            FbRange(0..fb_size)
+         };
+ 
+         let vga_workspace = {
+@@ -152,7 +184,7 @@ pub(crate) fn new(chipset: Chipset, bar: &Bar0, gsp_fw: &GspFirmware) -> Result<
+                 }
+             };
+ 
+-            vga_base..fb.end
++            FbRange(vga_base..fb.end)
+         };
+ 
+         let frts = {
+@@ -160,7 +192,7 @@ pub(crate) fn new(chipset: Chipset, bar: &Bar0, gsp_fw: &GspFirmware) -> Result<
+             const FRTS_SIZE: u64 = usize_as_u64(SZ_1M);
+             let frts_base = vga_workspace.start.align_down(FRTS_DOWN_ALIGN) - FRTS_SIZE;
+ 
+-            frts_base..frts_base + FRTS_SIZE
++            FbRange(frts_base..frts_base + FRTS_SIZE)
+         };
+ 
+         let boot = {
+@@ -168,7 +200,7 @@ pub(crate) fn new(chipset: Chipset, bar: &Bar0, gsp_fw: &GspFirmware) -> Result<
+             let bootloader_size = u64::from_safe_cast(gsp_fw.bootloader.ucode.size());
+             let bootloader_base = (frts.start - bootloader_size).align_down(BOOTLOADER_DOWN_ALIGN);
+ 
+-            bootloader_base..bootloader_base + bootloader_size
++            FbRange(bootloader_base..bootloader_base + bootloader_size)
+         };
+ 
+         let elf = {
+@@ -176,7 +208,7 @@ pub(crate) fn new(chipset: Chipset, bar: &Bar0, gsp_fw: &GspFirmware) -> Result<
+             let elf_size = u64::from_safe_cast(gsp_fw.size);
+             let elf_addr = (boot.start - elf_size).align_down(ELF_DOWN_ALIGN);
+ 
+-            elf_addr..elf_addr + elf_size
++            FbRange(elf_addr..elf_addr + elf_size)
+         };
+ 
+         let wpr2_heap = {
+@@ -185,7 +217,7 @@ pub(crate) fn new(chipset: Chipset, bar: &Bar0, gsp_fw: &GspFirmware) -> Result<
+                 gsp::LibosParams::from_chipset(chipset).wpr_heap_size(chipset, fb.end);
+             let wpr2_heap_addr = (elf.start - wpr2_heap_size).align_down(WPR2_HEAP_DOWN_ALIGN);
+ 
+-            wpr2_heap_addr..(elf.start).align_down(WPR2_HEAP_DOWN_ALIGN)
++            FbRange(wpr2_heap_addr..(elf.start).align_down(WPR2_HEAP_DOWN_ALIGN))
+         };
+ 
+         let wpr2 = {
+@@ -193,13 +225,13 @@ pub(crate) fn new(chipset: Chipset, bar: &Bar0, gsp_fw: &GspFirmware) -> Result<
+             let wpr2_addr = (wpr2_heap.start - u64::from_safe_cast(size_of::<gsp::GspFwWprMeta>()))
+                 .align_down(WPR2_DOWN_ALIGN);
+ 
+-            wpr2_addr..frts.end
++            FbRange(wpr2_addr..frts.end)
+         };
+ 
+         let heap = {
+             const HEAP_SIZE: u64 = usize_as_u64(SZ_1M);
+ 
+-            wpr2.start - HEAP_SIZE..wpr2.start
++            FbRange(wpr2.start - HEAP_SIZE..wpr2.start)
+         };
+ 
+         Ok(Self {
 -- 
 2.52.0
 
