@@ -2,90 +2,90 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id 686C5CA0227
-	for <lists+nouveau@lfdr.de>; Wed, 03 Dec 2025 17:50:27 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 67F4BCA04CB
+	for <lists+nouveau@lfdr.de>; Wed, 03 Dec 2025 18:15:44 +0100 (CET)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 9751110E855;
-	Wed,  3 Dec 2025 16:50:24 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id F2BD910E7FB;
+	Wed,  3 Dec 2025 17:15:42 +0000 (UTC)
 Authentication-Results: gabe.freedesktop.org;
-	dkim=pass (1024-bit key; unprotected) header.d=suse.de header.i=@suse.de header.b="y3mDrJMc";
-	dkim=permerror (0-bit key) header.d=suse.de header.i=@suse.de header.b="BxJ6PImA";
-	dkim=pass (1024-bit key) header.d=suse.de header.i=@suse.de header.b="0MS1+5mg";
-	dkim=permerror (0-bit key) header.d=suse.de header.i=@suse.de header.b="qL2ruM1s";
+	dkim=pass (1024-bit key; unprotected) header.d=suse.de header.i=@suse.de header.b="0RON9zjQ";
+	dkim=permerror (0-bit key) header.d=suse.de header.i=@suse.de header.b="6E4NoMFW";
+	dkim=pass (1024-bit key) header.d=suse.de header.i=@suse.de header.b="zIZbpQdU";
+	dkim=permerror (0-bit key) header.d=suse.de header.i=@suse.de header.b="03816KMm";
 	dkim-atps=neutral
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
 Received: from smtp-out2.suse.de (smtp-out2.suse.de [195.135.223.131])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 8117D10E814
- for <nouveau@lists.freedesktop.org>; Wed,  3 Dec 2025 16:50:22 +0000 (UTC)
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 5299810E802
+ for <nouveau@lists.freedesktop.org>; Wed,  3 Dec 2025 17:15:41 +0000 (UTC)
 Received: from imap1.dmz-prg2.suse.org (imap1.dmz-prg2.suse.org
  [IPv6:2a07:de40:b281:104:10:150:64:97])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
  (No client certificate requested)
- by smtp-out2.suse.de (Postfix) with ESMTPS id D51655BDC3;
- Wed,  3 Dec 2025 16:50:19 +0000 (UTC)
+ by smtp-out2.suse.de (Postfix) with ESMTPS id 047F85BDC4;
+ Wed,  3 Dec 2025 17:15:37 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.de; s=susede2_rsa;
- t=1764780621; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
+ t=1764782138; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
  mime-version:mime-version:content-type:content-type:
  content-transfer-encoding:content-transfer-encoding:
  in-reply-to:in-reply-to:references:references:autocrypt:autocrypt;
- bh=+ObqllStQrLiiew5Hkt5u4NBs6lXTVMlRH2zc8Gliio=;
- b=y3mDrJMcrZ/PlRkDeWf70+rVGdl9PQWPG9yoQ75XVdt9yJUXMXIrVW+lcGvoIviyrTxWEZ
- V2QgJrOKHRMRbtzhDUJiCR5Bri9mZoM2Q0SguSw8g+oKSLWwRgx5h/VmyPai4pqJR4dDqm
- FqQ9mB6rde10gLvK6Lo3OoLsO4DOjho=
+ bh=qfaRP1TVSlb2FrbK+FspbEIhwCAz7AGdQqxTllry70g=;
+ b=0RON9zjQQUcyXkzcSd6PcezDf1yKgK/Ut8/ALOylDcZudnwhE5ZMLgJZymPwMHJXs0tYby
+ 7sNIznibOSxqKloedwLgr8mTAGhy19x18EPgxi3L38sAOU1dyo5Y+gonSwlAvYjhRMXTTQ
+ LQev7uTJR0W/2+/UG32QtTXm4WU6JOw=
 DKIM-Signature: v=1; a=ed25519-sha256; c=relaxed/relaxed; d=suse.de;
- s=susede2_ed25519; t=1764780621;
+ s=susede2_ed25519; t=1764782138;
  h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
  mime-version:mime-version:content-type:content-type:
  content-transfer-encoding:content-transfer-encoding:
  in-reply-to:in-reply-to:references:references:autocrypt:autocrypt;
- bh=+ObqllStQrLiiew5Hkt5u4NBs6lXTVMlRH2zc8Gliio=;
- b=BxJ6PImAO6YgTUq2TeLbqREgrVhlX6LctCEq8L+lgq1u1gRQiqnl5YAjkgpJTtuRp4+O+b
- xEOeRCNspVoILjAQ==
+ bh=qfaRP1TVSlb2FrbK+FspbEIhwCAz7AGdQqxTllry70g=;
+ b=6E4NoMFWK/Q7NquC4XU+Dte2OMgsAnbLIfujK8CZexshhlu0GrI3oz+gqAL0KuQSOS4q/y
+ TviK4z0Dr0+xrKCg==
 Authentication-Results: smtp-out2.suse.de;
- dkim=pass header.d=suse.de header.s=susede2_rsa header.b=0MS1+5mg;
- dkim=pass header.d=suse.de header.s=susede2_ed25519 header.b=qL2ruM1s
+ dkim=pass header.d=suse.de header.s=susede2_rsa header.b=zIZbpQdU;
+ dkim=pass header.d=suse.de header.s=susede2_ed25519 header.b=03816KMm
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.de; s=susede2_rsa;
- t=1764780619; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
+ t=1764782137; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
  mime-version:mime-version:content-type:content-type:
  content-transfer-encoding:content-transfer-encoding:
  in-reply-to:in-reply-to:references:references:autocrypt:autocrypt;
- bh=+ObqllStQrLiiew5Hkt5u4NBs6lXTVMlRH2zc8Gliio=;
- b=0MS1+5mg7KQaW38DsIPStdGvumDJnE1XnQQnfS+YxLfQkDE5/lPL1p0u9PexdeFgK+YLhX
- ZzyP2yFAJM1+aZBGN+0/h6MmuYXfW0GHjTju3z9AJgeU7uRamonZSb21O5FZ+7hWXDSULj
- mj82pQs4s7esP6qCVuqhwrQZf+6Qy3A=
+ bh=qfaRP1TVSlb2FrbK+FspbEIhwCAz7AGdQqxTllry70g=;
+ b=zIZbpQdUqtP8kTwuXgwTUatYT4Tmdiq76Nq7HtrkjnfndThzVjgmcyTyRz/XUUWTP/U6DA
+ S1/EaH727Ps+2emEri2IVTszHSjPM+9+baoDbWroYI57CIMt4da3sn9Zhg/KIlN3k0pNYd
+ Up4+JXt7lKphpKPsz7ILVjTw7MyhAQ0=
 DKIM-Signature: v=1; a=ed25519-sha256; c=relaxed/relaxed; d=suse.de;
- s=susede2_ed25519; t=1764780619;
+ s=susede2_ed25519; t=1764782137;
  h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
  mime-version:mime-version:content-type:content-type:
  content-transfer-encoding:content-transfer-encoding:
  in-reply-to:in-reply-to:references:references:autocrypt:autocrypt;
- bh=+ObqllStQrLiiew5Hkt5u4NBs6lXTVMlRH2zc8Gliio=;
- b=qL2ruM1sBk/onf85WIhI7ihrQ0P2MJBashUYZ90CPnN1PfvQUFd0GSfFjEd0x37Xon8Hmq
- ksvvTQaRV2WnNTAQ==
+ bh=qfaRP1TVSlb2FrbK+FspbEIhwCAz7AGdQqxTllry70g=;
+ b=03816KMmF5c5LOgA6u+PX//aDEaeuQLO7R7Z7tH5LY27zJRTzrC0pQCW/GNXgAvVP+LnGC
+ EjjYdDFZIZPz6iBw==
 Received: from imap1.dmz-prg2.suse.org (localhost [127.0.0.1])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
  (No client certificate requested)
- by imap1.dmz-prg2.suse.org (Postfix) with ESMTPS id 8F6D63EA63;
- Wed,  3 Dec 2025 16:50:19 +0000 (UTC)
+ by imap1.dmz-prg2.suse.org (Postfix) with ESMTPS id AAB453EA63;
+ Wed,  3 Dec 2025 17:15:36 +0000 (UTC)
 Received: from dovecot-director2.suse.de ([2a07:de40:b281:106:10:150:64:167])
- by imap1.dmz-prg2.suse.org with ESMTPSA id lwRSIUtqMGkRKAAAD6G6ig
- (envelope-from <tzimmermann@suse.de>); Wed, 03 Dec 2025 16:50:19 +0000
-Message-ID: <347972d0-66f7-4c5c-9244-72150f0081c9@suse.de>
-Date: Wed, 3 Dec 2025 17:50:18 +0100
+ by imap1.dmz-prg2.suse.org with ESMTPSA id 8AvlJzhwMGmBPgAAD6G6ig
+ (envelope-from <tzimmermann@suse.de>); Wed, 03 Dec 2025 17:15:36 +0000
+Message-ID: <64a09b88-5fe2-46ab-861e-9330a66a0459@suse.de>
+Date: Wed, 3 Dec 2025 18:15:35 +0100
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 6.12.y] drm, fbcon, vga_switcheroo: Avoid race condition
- in fbcon setup
-To: Sasha Levin <sashal@kernel.org>, stable@vger.kernel.org
-Cc: Javier Martinez Canillas <javierm@redhat.com>,
+Subject: Re: [PATCH 6.12 126/132] drm, fbcon, vga_switcheroo: Avoid race
+ condition in fbcon setup
+To: Greg Kroah-Hartman <gregkh@linuxfoundation.org>, stable@vger.kernel.org
+Cc: patches@lists.linux.dev, Javier Martinez Canillas <javierm@redhat.com>,
  Alex Deucher <alexander.deucher@amd.com>, dri-devel@lists.freedesktop.org,
  nouveau@lists.freedesktop.org, amd-gfx@lists.freedesktop.org,
- linux-fbdev@vger.kernel.org
-References: <2025120119-edgy-recycled-bcfe@gregkh>
- <20251202202312.2505097-1-sashal@kernel.org>
+ linux-fbdev@vger.kernel.org, Sasha Levin <sashal@kernel.org>
+References: <20251203152343.285859633@linuxfoundation.org>
+ <20251203152347.982336576@linuxfoundation.org>
 Content-Language: en-US
 From: Thomas Zimmermann <tzimmermann@suse.de>
 Autocrypt: addr=tzimmermann@suse.de; keydata=
@@ -112,29 +112,32 @@ Autocrypt: addr=tzimmermann@suse.de; keydata=
  SAQO9xD1Zk9/61JWk8OysuIh7MXkl0fxbRKWE93XeQBhIJHQfnc+YBLprdnxR446Sh8Wn/2D
  Ya8cavuWf2zrB6cZurs048xe0UbSW5AOSo4V9M0jzYI4nZqTmPxYyXbm30Kvmz0rYVRaitYJ
  4kyYYMhuULvrJDMjZRvaNe52tkKAvMevcGdt38H4KSVXAylqyQOW5zvPc4/sq9c=
-In-Reply-To: <20251202202312.2505097-1-sashal@kernel.org>
+In-Reply-To: <20251203152347.982336576@linuxfoundation.org>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 8bit
 X-Spamd-Result: default: False [-4.51 / 50.00]; BAYES_HAM(-3.00)[100.00%];
  NEURAL_HAM_LONG(-1.00)[-1.000];
  R_DKIM_ALLOW(-0.20)[suse.de:s=susede2_rsa,suse.de:s=susede2_ed25519];
  NEURAL_HAM_SHORT(-0.20)[-0.999]; MIME_GOOD(-0.10)[text/plain];
- MX_GOOD(-0.01)[]; FUZZY_RATELIMITED(0.00)[rspamd.com];
- RCVD_VIA_SMTP_AUTH(0.00)[]; ARC_NA(0.00)[];
- RCPT_COUNT_SEVEN(0.00)[8]; TO_DN_SOME(0.00)[];
- MIME_TRACE(0.00)[0:+]; MID_RHS_MATCH_FROM(0.00)[];
- RCVD_TLS_ALL(0.00)[];
+ MX_GOOD(-0.01)[];
+ URIBL_BLOCKED(0.00)[suse.com:url,bootlin.com:url,imap1.dmz-prg2.suse.org:helo,imap1.dmz-prg2.suse.org:rdns,amd.com:email,lists.freedesktop.org:email,suse.de:email,suse.de:dkim,suse.de:mid,linuxfoundation.org:email];
+ FROM_HAS_DN(0.00)[]; FUZZY_RATELIMITED(0.00)[rspamd.com];
+ ARC_NA(0.00)[];
  DKIM_SIGNED(0.00)[suse.de:s=susede2_rsa,suse.de:s=susede2_ed25519];
- FROM_EQ_ENVFROM(0.00)[]; FROM_HAS_DN(0.00)[];
+ TO_DN_SOME(0.00)[]; MIME_TRACE(0.00)[0:+];
+ TO_MATCH_ENVRCPT_ALL(0.00)[]; RCVD_TLS_ALL(0.00)[];
+ DKIM_TRACE(0.00)[suse.de:+]; RCVD_COUNT_TWO(0.00)[2];
+ FROM_EQ_ENVFROM(0.00)[];
  SPAMHAUS_XBL(0.00)[2a07:de40:b281:104:10:150:64:97:from];
- RCVD_COUNT_TWO(0.00)[2]; TO_MATCH_ENVRCPT_ALL(0.00)[];
- DBL_BLOCKED_OPENRESOLVER(0.00)[msgid.link:url,imap1.dmz-prg2.suse.org:helo,imap1.dmz-prg2.suse.org:rdns,suse.com:url,suse.de:email,suse.de:dkim,suse.de:mid,bootlin.com:url,amd.com:email,lists.freedesktop.org:email];
  DNSWL_BLOCKED(0.00)[2a07:de40:b281:106:10:150:64:167:received];
- DKIM_TRACE(0.00)[suse.de:+]
+ RCPT_COUNT_SEVEN(0.00)[10]; MID_RHS_MATCH_FROM(0.00)[];
+ RCVD_VIA_SMTP_AUTH(0.00)[];
+ DBL_BLOCKED_OPENRESOLVER(0.00)[bootlin.com:url, linuxfoundation.org:email,
+ imap1.dmz-prg2.suse.org:helo, imap1.dmz-prg2.suse.org:rdns, msgid.link:url]
 X-Rspamd-Action: no action
 X-Rspamd-Server: rspamd2.dmz-prg2.suse.org
 X-Spam-Level: 
-X-Rspamd-Queue-Id: D51655BDC3
+X-Rspamd-Queue-Id: 047F85BDC4
 X-Spam-Flag: NO
 X-Spam-Score: -4.51
 X-BeenThere: nouveau@lists.freedesktop.org
@@ -153,9 +156,13 @@ Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
 Hi,
 
-thank you for providing an updated patch.
+thank you for making the updated patch.
 
-Am 02.12.25 um 21:23 schrieb Sasha Levin:
+Am 03.12.25 um 16:30 schrieb Greg Kroah-Hartman:
+> 6.12-stable review patch.  If anyone has any objections, please let me know.
+>
+> ------------------
+>
 > From: Thomas Zimmermann <tzimmermann@suse.de>
 >
 > [ Upstream commit eb76d0f5553575599561010f24c277cc5b31d003 ]
@@ -197,18 +204,17 @@ Am 02.12.25 um 21:23 schrieb Sasha Levin:
 > Cc: <stable@vger.kernel.org> # v2.6.34+
 > Link: https://patch.msgid.link/20251105161549.98836-1-tzimmermann@suse.de
 > Signed-off-by: Sasha Levin <sashal@kernel.org>
+> Signed-off-by: Greg Kroah-Hartman <gregkh@linuxfoundation.org>
 
 Reviewed-by: Thomas Zimmermann <tzimmermann@suse.de>
 
 > ---
->   drivers/gpu/drm/drm_fb_helper.c            | 6 ------
->   drivers/gpu/drm/i915/display/intel_fbdev.c | 6 ------
->   drivers/gpu/drm/radeon/radeon_fbdev.c      | 5 -----
->   drivers/video/fbdev/core/fbcon.c           | 9 +++++++++
+>   drivers/gpu/drm/drm_fb_helper.c            |    6 ------
+>   drivers/gpu/drm/i915/display/intel_fbdev.c |    6 ------
+>   drivers/gpu/drm/radeon/radeon_fbdev.c      |    5 -----
+>   drivers/video/fbdev/core/fbcon.c           |    9 +++++++++
 >   4 files changed, 9 insertions(+), 17 deletions(-)
 >
-> diff --git a/drivers/gpu/drm/drm_fb_helper.c b/drivers/gpu/drm/drm_fb_helper.c
-> index b15ddbd65e7b5..a8971c4eb9f05 100644
 > --- a/drivers/gpu/drm/drm_fb_helper.c
 > +++ b/drivers/gpu/drm/drm_fb_helper.c
 > @@ -30,9 +30,7 @@
@@ -221,7 +227,7 @@ Reviewed-by: Thomas Zimmermann <tzimmermann@suse.de>
 >   
 >   #include <drm/drm_atomic.h>
 >   #include <drm/drm_drv.h>
-> @@ -1637,10 +1635,6 @@ static int drm_fb_helper_single_fb_probe(struct drm_fb_helper *fb_helper)
+> @@ -1637,10 +1635,6 @@ static int drm_fb_helper_single_fb_probe
 >   
 >   	strcpy(fb_helper->fb->comm, "[fbcon]");
 >   
@@ -232,11 +238,9 @@ Reviewed-by: Thomas Zimmermann <tzimmermann@suse.de>
 >   	return 0;
 >   }
 >   
-> diff --git a/drivers/gpu/drm/i915/display/intel_fbdev.c b/drivers/gpu/drm/i915/display/intel_fbdev.c
-> index 49a1ac4f54919..337cc9fc31b19 100644
 > --- a/drivers/gpu/drm/i915/display/intel_fbdev.c
 > +++ b/drivers/gpu/drm/i915/display/intel_fbdev.c
-> @@ -589,11 +589,8 @@ static int intel_fbdev_restore_mode(struct drm_i915_private *dev_priv)
+> @@ -589,11 +589,8 @@ static int intel_fbdev_restore_mode(stru
 >   static void intel_fbdev_client_unregister(struct drm_client_dev *client)
 >   {
 >   	struct drm_fb_helper *fb_helper = drm_fb_helper_from_client(client);
@@ -248,7 +252,7 @@ Reviewed-by: Thomas Zimmermann <tzimmermann@suse.de>
 >   		drm_fb_helper_unregister_info(fb_helper);
 >   	} else {
 >   		drm_fb_helper_unprepare(fb_helper);
-> @@ -620,7 +617,6 @@ static int intel_fbdev_client_hotplug(struct drm_client_dev *client)
+> @@ -620,7 +617,6 @@ static int intel_fbdev_client_hotplug(st
 >   {
 >   	struct drm_fb_helper *fb_helper = drm_fb_helper_from_client(client);
 >   	struct drm_device *dev = client->dev;
@@ -256,7 +260,7 @@ Reviewed-by: Thomas Zimmermann <tzimmermann@suse.de>
 >   	int ret;
 >   
 >   	if (dev->fb_helper)
-> @@ -634,8 +630,6 @@ static int intel_fbdev_client_hotplug(struct drm_client_dev *client)
+> @@ -634,8 +630,6 @@ static int intel_fbdev_client_hotplug(st
 >   	if (ret)
 >   		goto err_drm_fb_helper_fini;
 >   
@@ -265,11 +269,9 @@ Reviewed-by: Thomas Zimmermann <tzimmermann@suse.de>
 >   	return 0;
 >   
 >   err_drm_fb_helper_fini:
-> diff --git a/drivers/gpu/drm/radeon/radeon_fbdev.c b/drivers/gpu/drm/radeon/radeon_fbdev.c
-> index fb70de29545c6..a197ba2f2717b 100644
 > --- a/drivers/gpu/drm/radeon/radeon_fbdev.c
 > +++ b/drivers/gpu/drm/radeon/radeon_fbdev.c
-> @@ -300,10 +300,8 @@ static void radeon_fbdev_client_unregister(struct drm_client_dev *client)
+> @@ -300,10 +300,8 @@ static void radeon_fbdev_client_unregist
 >   {
 >   	struct drm_fb_helper *fb_helper = drm_fb_helper_from_client(client);
 >   	struct drm_device *dev = fb_helper->dev;
@@ -280,7 +282,7 @@ Reviewed-by: Thomas Zimmermann <tzimmermann@suse.de>
 >   		drm_helper_force_disable_all(dev);
 >   		drm_fb_helper_unregister_info(fb_helper);
 >   	} else {
-> @@ -325,7 +323,6 @@ static int radeon_fbdev_client_hotplug(struct drm_client_dev *client)
+> @@ -325,7 +323,6 @@ static int radeon_fbdev_client_hotplug(s
 >   {
 >   	struct drm_fb_helper *fb_helper = drm_fb_helper_from_client(client);
 >   	struct drm_device *dev = client->dev;
@@ -288,7 +290,7 @@ Reviewed-by: Thomas Zimmermann <tzimmermann@suse.de>
 >   	int ret;
 >   
 >   	if (dev->fb_helper)
-> @@ -342,8 +339,6 @@ static int radeon_fbdev_client_hotplug(struct drm_client_dev *client)
+> @@ -342,8 +339,6 @@ static int radeon_fbdev_client_hotplug(s
 >   	if (ret)
 >   		goto err_drm_fb_helper_fini;
 >   
@@ -297,8 +299,6 @@ Reviewed-by: Thomas Zimmermann <tzimmermann@suse.de>
 >   	return 0;
 >   
 >   err_drm_fb_helper_fini:
-> diff --git a/drivers/video/fbdev/core/fbcon.c b/drivers/video/fbdev/core/fbcon.c
-> index 1fc1e47ae2b49..e681066736dea 100644
 > --- a/drivers/video/fbdev/core/fbcon.c
 > +++ b/drivers/video/fbdev/core/fbcon.c
 > @@ -65,6 +65,7 @@
@@ -317,7 +317,7 @@ Reviewed-by: Thomas Zimmermann <tzimmermann@suse.de>
 >   #include <asm/irq.h>
 >   
 >   #include "fbcon.h"
-> @@ -2894,6 +2896,9 @@ void fbcon_fb_unregistered(struct fb_info *info)
+> @@ -2894,6 +2896,9 @@ void fbcon_fb_unregistered(struct fb_inf
 >   
 >   	console_lock();
 >   
@@ -327,7 +327,7 @@ Reviewed-by: Thomas Zimmermann <tzimmermann@suse.de>
 >   	fbcon_registered_fb[info->node] = NULL;
 >   	fbcon_num_registered_fb--;
 >   
-> @@ -3027,6 +3032,10 @@ static int do_fb_registered(struct fb_info *info)
+> @@ -3027,6 +3032,10 @@ static int do_fb_registered(struct fb_in
 >   		}
 >   	}
 >   
@@ -338,6 +338,9 @@ Reviewed-by: Thomas Zimmermann <tzimmermann@suse.de>
 >   	return ret;
 >   }
 >   
+>
+>
+>
 
 -- 
 --
