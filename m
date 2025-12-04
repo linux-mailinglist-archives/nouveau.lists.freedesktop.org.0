@@ -2,163 +2,100 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id DF11FCA411A
-	for <lists+nouveau@lfdr.de>; Thu, 04 Dec 2025 15:43:29 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 33FE9CA51E3
+	for <lists+nouveau@lfdr.de>; Thu, 04 Dec 2025 20:29:31 +0100 (CET)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 96B3310E1F5;
-	Thu,  4 Dec 2025 14:43:28 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id A3D1F10E9B2;
+	Thu,  4 Dec 2025 19:29:29 +0000 (UTC)
 Authentication-Results: gabe.freedesktop.org;
-	dkim=pass (2048-bit key; unprotected) header.d=Nvidia.com header.i=@Nvidia.com header.b="jUs5xYLV";
+	dkim=pass (2048-bit key; unprotected) header.d=google.com header.i=@google.com header.b="1dtV8V26";
 	dkim-atps=neutral
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from PH7PR06CU001.outbound.protection.outlook.com
- (mail-westus3azon11010027.outbound.protection.outlook.com [52.101.201.27])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 0704B10E1F5;
- Thu,  4 Dec 2025 14:43:28 +0000 (UTC)
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=K9iXxSpXHRvergH2BWKGzFnE5SvM3RhgB7SKrOPzNrVvDbLM91h5UdNoSOA4PS2TY+XkmhxPMfB5eLuGtMH68KCK3UjwruYgSjAmhqU5lL27Ik+OKBKSUohdyWuk2JLrH406nfdMLm9VxAVHpTzr2ILHpak1AJ7om4lu7P+O5EECLOZi2qeGuT6zvjbkAJZg+k/O8Fu7aG004TWiuYb5aqUDsVPTID19gGlPk/o9mHyjbSNe0UW44j/NDdN5L/11syQrYIxhPvYh84urugSUseXQhbVNZd2RaN+58pqfNsr37C5UI/c0ia7miU+jWi4oynzodGlwBgWN13yojQVLjQ==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=EafrRPsEV/jPeTX6dXG0UnZR7uVfoaGEVRm+De5Mn6g=;
- b=xIn/vO94Mm4NNeyZ8AFk4ngEzTCCNBYYeRN80rFmzAUvjCDnHKbvXljk9LAUNquvLwRjVMpPdmqMQWPzb5wqSaEMAif78rfItIqWG1/0BGZCTRm7tbaNiT7qrQyxjhDxTiYAD18CWr154+y1bn+tS6OzL/N6XTz4xg4H7yAjjuBmuvs5H6Gy4GmtRZe+k05BcPPPd4keNk7W19CK5iDEJu/B+Ci1EemmGjCtQsWYYM2hHfZLqU0POoEQJXd6+KuBEjtnTljtRjW2bW9wG2pZqRRswRQOKDEmQOdqYj52nzH8Ma5FBMrj+zBvpZeXicJkkER9860Wffsh/4YwvP4i6g==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=nvidia.com; dmarc=pass action=none header.from=nvidia.com;
- dkim=pass header.d=nvidia.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=Nvidia.com;
- s=selector2;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=EafrRPsEV/jPeTX6dXG0UnZR7uVfoaGEVRm+De5Mn6g=;
- b=jUs5xYLVcAGpbtlPlFrsv1GJ9qHl9D4daax0kIeVcWaXvp3+Czd2to1TTXMWEjTNy/LnLvjQvh/Xh5uOwJfwXMupHuE1qBxBylnOC7oNesRpcGxFQdXVAixxgMbvXuxZmV85Mm7XJxzF/T29MOqwVr6Wvr+c5bMZ6DW3YdHiS6Amn9eQdNJQtX6SPRcwbKPTN5mBbNR+6cqErNIT/HnhS8QDnuTNQWql4y223UTgyRmauGL2bzeIEKri6s6XSQlPF3kgtGknvH4SSF1yjJSR52j2wsnl9yl4lmLZLFAr8k2ko2gLwdc+pflj7hajTEg9d90RmjGdiN4zmsVX6PP5Aw==
-Authentication-Results: dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=nvidia.com;
-Received: from CH2PR12MB3990.namprd12.prod.outlook.com (2603:10b6:610:28::18)
- by DS0PR12MB7769.namprd12.prod.outlook.com (2603:10b6:8:138::14) with
- Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9388.11; Thu, 4 Dec
- 2025 14:43:24 +0000
-Received: from CH2PR12MB3990.namprd12.prod.outlook.com
- ([fe80::7de1:4fe5:8ead:5989]) by CH2PR12MB3990.namprd12.prod.outlook.com
- ([fe80::7de1:4fe5:8ead:5989%6]) with mapi id 15.20.9366.012; Thu, 4 Dec 2025
- 14:43:23 +0000
-Content-Transfer-Encoding: quoted-printable
-Content-Type: text/plain; charset=UTF-8
-Date: Thu, 04 Dec 2025 23:43:19 +0900
-Message-Id: <DEPIFZFMH34K.31NETCKSPOIEL@nvidia.com>
-Subject: Re: [PATCH 10/11] gpu: nova-core: LibosMemoryRegionInitArgument
- size must be page aligned
-From: "Alexandre Courbot" <acourbot@nvidia.com>
-To: "Timur Tabi" <ttabi@nvidia.com>, "nouveau@lists.freedesktop.org"
- <nouveau@lists.freedesktop.org>, "Alexandre Courbot" <acourbot@nvidia.com>,
- "dakr@kernel.org" <dakr@kernel.org>, "lyude@redhat.com" <lyude@redhat.com>,
- "Joel Fernandes" <joelagnelf@nvidia.com>, "John Hubbard"
- <jhubbard@nvidia.com>, "rust-for-linux@vger.kernel.org"
- <rust-for-linux@vger.kernel.org>
-Cc: "nouveau-bounces@lists.freedesktop.org"
- <nouveau-bounces@lists.freedesktop.org>
-X-Mailer: aerc 0.21.0-0-g5549850facc2
-References: <20251114233045.2512853-1-ttabi@nvidia.com>
- <20251114233045.2512853-11-ttabi@nvidia.com>
- <DECCV8XB5U56.1NBFD1KFJ59LU@nvidia.com>
- <b28cff274d79de78496c7f0fcc3627b2f816d3dc.camel@nvidia.com>
- <DEOK871CSNZB.W94R3SDUDZ22@nvidia.com>
- <df975795b0dbe58214ad302d7182ce6fe92e5fd8.camel@nvidia.com>
-In-Reply-To: <df975795b0dbe58214ad302d7182ce6fe92e5fd8.camel@nvidia.com>
-X-ClientProxiedBy: TY4P301CA0095.JPNP301.PROD.OUTLOOK.COM
- (2603:1096:405:37a::17) To CH2PR12MB3990.namprd12.prod.outlook.com
- (2603:10b6:610:28::18)
+Received: from mail-qt1-f180.google.com (mail-qt1-f180.google.com
+ [209.85.160.180])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id D2B5210E9B2
+ for <nouveau@lists.freedesktop.org>; Thu,  4 Dec 2025 19:29:28 +0000 (UTC)
+Received: by mail-qt1-f180.google.com with SMTP id
+ d75a77b69052e-4edb8d6e98aso83731cf.0
+ for <nouveau@lists.freedesktop.org>; Thu, 04 Dec 2025 11:29:28 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=google.com; s=20230601; t=1764876568; x=1765481368;
+ darn=lists.freedesktop.org; 
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=li2jOPCpnZmjfOxkVB/u3Ntjt/9n1Mv+93gAuK1nZY4=;
+ b=1dtV8V262sIsscTxrek85PKZwAiSXM9HvBWIXorHccvpRmebTCQxUTneJ0qzei4ESR
+ lZK4vnbaBLsev4VzyuGY3cwriluek7HGtgcqJNO15Pcpcdyit9752ijpYoFcKEsWeF/Z
+ LxPQIMztiGTpbO7PC921zIHtmeVHYT0zN6O5xTwHs5NxIJf1lst+NKNgfh0U9nkRogaw
+ nzHy/wUCsZ88mUluyjLsQ0HVr6TQPX+cxm0IS7I+seOb6N+m0230uwepq8/IOcjJfl9V
+ jq661lOVSPUIWFNnR7c/an8iLz11AQltjZ3bAyQlJX5FIh+rx0tvri6Dj+56ewFikWSZ
+ X5Bg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1764876568; x=1765481368;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-gg:x-gm-message-state:from
+ :to:cc:subject:date:message-id:reply-to;
+ bh=li2jOPCpnZmjfOxkVB/u3Ntjt/9n1Mv+93gAuK1nZY4=;
+ b=LchXPm7RGFGgNhr3GoW1Ue0Ait98yy2JkL1/njtsnAq5M1BVdluC0emp+ymWGikuRO
+ 3nyXB/Ict8/z8AGqf4eQCrNhRVXDrhiYDIVZEitO2UnWXJp6V6EULhtN+9V4ReNOVg+P
+ dlBlz8UQrHOtQL+ZzzMF7NFbVcx+gc/Q1IfBEHqFgNJwNxToG361gbhnBzWfMMl3nngi
+ tYrse/ZZuU8rQbO174FjoE+WiNCJU2jkD29KR0I8mrj/W3NjjfeLRvRI5RKP4HVQalyB
+ KjRMx/kWSyAWHiSe7Nd/gNWqzKscLpqK68RK0QiLJm9w/chwd2/ohWsyGrPuomxdD8ar
+ MKTw==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCWeqgCyZM+QaSTCGeQZgqUU0P1Mwty/yjw76EAaw3syak6qnSz6+Jzl1HhZM9AnDoZNhYVO5aoh@lists.freedesktop.org
+X-Gm-Message-State: AOJu0YzDoB1SfUThgLd0aPIo8z2FCZI9uXQB9w+iE92yEcgq382LR61k
+ PubaafNld7h4Rd0ZNvs4AoixX5PNE+4Tu6AsrunpD+xftJzeTfK/Tz8umTt5ynkAktR3I6XLG4B
+ RqHAcBz9Pnhobp48lbrwGq1Se/6uDBD791+jRhAzR
+X-Gm-Gg: ASbGncvveesZ8EAmtyC/02MfXUE6qh8HDM9JPygy/YqsDmOpDcUzEvhhUXiPbPUbax0
+ ob+bpmSpTLEnINPxXd2hZ0UYco4RuRCAlAKjrXp9qko73bAH8ldPY2WXHg/CXKH+CncstR0vWQ1
+ GpR+DOWWZDlnghN6M0eS1qoavZjrW5nX6cFa1V7/FUCa0ldZy0F/Vz8uXySgo4WGjhIOJRdaBO3
+ sH/+jOpVI69n8u/mjHFXjQZQVGaWR5bxpDO4ZHHdz+YV9TqrEhOQu1kYbM7vIzU9mduG176HCB4
+ ZCqVb/Ow+pHMjRGjftKzCJfs1Q==
+X-Google-Smtp-Source: AGHT+IG/7kUZxd/9UMd9RxOWK7oRJw6LsWkyhbSwzHRq9dv3XGK3gE0ZwwYu8Q59dnHZWlQ+QWACJNmSaDdEdt4GFj0=
+X-Received: by 2002:ac8:7d91:0:b0:4ed:ff77:1a87 with SMTP id
+ d75a77b69052e-4f0310036bbmr1019101cf.19.1764876567093; Thu, 04 Dec 2025
+ 11:29:27 -0800 (PST)
 MIME-Version: 1.0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: CH2PR12MB3990:EE_|DS0PR12MB7769:EE_
-X-MS-Office365-Filtering-Correlation-Id: 19f6c2f1-a70b-4abf-aae3-08de3343797c
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0; ARA:13230040|376014|366016|1800799024|10070799003;
-X-Microsoft-Antispam-Message-Info: =?utf-8?B?OG9yazdaQzNkRDAvTUFRdGZyWG5OWTVuT0FRd0tLelQ1dmE2N3dUWkVOVHda?=
- =?utf-8?B?ZytYYWZOeTd0a1JGaDRFeks1M1Z1UGpQY2RJTDVyVDRxbW8vVUlGMUZHaXRK?=
- =?utf-8?B?V3hZVHlKL3RCZ1pBZFBaK2MwdmhTdnB1ZCtFNCtSVFc0dU1aNGZDQ0NwRGlT?=
- =?utf-8?B?UTVicndZNVV4YndTLy8vSXZBaEErL3Z3TlRWR1pDeVNEelZHV3lsT1d6L25N?=
- =?utf-8?B?V29aMEd0VktOMi9rbGdJRWw0bkdGQm9nU0Q2eS95VXRjY1dIM3dpSmZ6WkYv?=
- =?utf-8?B?ZHdzeG1OdFZ3b21qSWJ0TjROMjNlRmYrTDZ3SVN0WVNwaEJGWDIyTlVKcVRh?=
- =?utf-8?B?K1hrdFFBUU5QR3RPaUlHeU5tT2Y1RFRERWhac0ZkMFJSZHRKUUhtSjZDNGsw?=
- =?utf-8?B?RGF4OW85dzRqVTNUV2xCL3NhSmRTZ0tRaWQ5TVBUT3pnUXpZWVBXZldheUxG?=
- =?utf-8?B?QzNWY3VweGFzVGR4VXJpUmtCMGtvL0tEclVWQ1ZIWXB1c09WL3pIN1NyWElB?=
- =?utf-8?B?RHg2MGZRZXF3VGNSR0lmcEpXa2ViN203NGJxUU9qNzVDUWNScXRWQzlLWDlB?=
- =?utf-8?B?Um9nekptY3RLMUVXNDdSOUVLdDZGdUJ1S0ljWFgzaFJ1WHNFSnRxODhFU2Y1?=
- =?utf-8?B?WGZKa3htVEtKRHdIVUd3M3NoS1hwRzQrM0F4TWp5WVVUWmIxN1lnU2luM3RJ?=
- =?utf-8?B?N0dwczZHTS9QbEZJYkxjT3lRVm1SWnZIZjBoWDNRbWdkcWxtNkRSTUpVUEJy?=
- =?utf-8?B?RmsvM2lML09WejFHT3ZDVWI2K2xDL3lFMHFkVmJoVERnY3VtSXh1Mmo4V2g0?=
- =?utf-8?B?Q2xWdzFTYW9EdkZUV3I5cnBoNW9vS1dPVXNBSndZajJyNk1KTDRTb3cza3Vq?=
- =?utf-8?B?Uk5xbnZEQUZIN2VLdWtjS0pDM01Md0hHOWNLQlM1ckZ0dGJYNXhjYXkzN0xv?=
- =?utf-8?B?ZXZ5M01vRjR1R3JvUE5FNVVuNzJyTFNsNGwwZGxkVVZsWmFHZ09DZUZOK3NB?=
- =?utf-8?B?dkdQMGM3ZGlscHp4OE0xaWF3bll0TktiSlMrL095WnV0TnJGUEZTdUNYcGRO?=
- =?utf-8?B?MVNYTUxRY0lGQ0tvQTVIdURrVTFsOFpaajdiNmhQNDArcGZML0R3THVseVhD?=
- =?utf-8?B?MHBvYVByTk1lWFdFT3hlN0s2WEhyS0MzbkUxVjZTSnNQZlNYS0tsRmJpMFVJ?=
- =?utf-8?B?T0lUQnVZL1BHQytVT1NkNlhDMDh3dGJ1T0NDTy9jb05yU1VxRGNwWFNUeHRS?=
- =?utf-8?B?TjBlL1d4YUptck52b2dFQmRqMHRRMlQzb2lrN1puOVNKU3oycVg4UzVUR0d0?=
- =?utf-8?B?S29SQ0xXRlZTaXlWS2RnallPNW1mNmVFSE5EUkdIQ3I3SldJa3JGVUdrbldP?=
- =?utf-8?B?dW5pNzByWVRSamJlcHBqbUluSjJRMzd3YnpTNmxnNGV1ZU5xYkU2SFE1NGVH?=
- =?utf-8?B?NEJ1UWdrdXpzUGlxTCs1dHlFVE1JWTU0MW82TXBNVzZCbjZta2tNeVN5TGN5?=
- =?utf-8?B?c2dPZisweGZXZ1h2K251bjVuWUdNMzRWTFRMcWwwQ09PaWd3M2dJdEhwYUxt?=
- =?utf-8?B?ZjlhVDJVZ01qOW83bmVsaWxiZG1tNmJ2ajVRaXRNTHFHL0NzdDZoamtuU0ov?=
- =?utf-8?B?WCtLMjFFTGZiaHN2bklhWjF0czB5YzRDT1c4bmFzZlJNaklocWpKekliZmtI?=
- =?utf-8?B?MDNRTWdtMzg5Ym91c0oxdENCMEJFekdybnV4UnJsOXlDQUtrcTVGNjRoRnF2?=
- =?utf-8?B?dWs3a2diK3V5SGtlNXpwajVUOThHU3hxWFNFZ2VuaUdvbUJ5cjZMNllQTmFV?=
- =?utf-8?B?OVhxcFdhcCtQYXRWaEJETURtTW00Ty83NzRXOHU3UGk4RVdWQVhHSm1JZ0NP?=
- =?utf-8?B?VUwrSDNwaU05TnBQekVOMlB0dzJTNGJCNDdwRjhObzNKc2pybWdnTEoyNmhO?=
- =?utf-8?Q?SdoZcXAZmtPJ/wd3hSRI94VTWW1/9fY+?=
-X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
- IPV:NLI; SFV:NSPM; H:CH2PR12MB3990.namprd12.prod.outlook.com; PTR:; CAT:NONE;
- SFS:(13230040)(376014)(366016)(1800799024)(10070799003); DIR:OUT; SFP:1101; 
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?TTZtMnZWWDFxUDRYZ0RrTkxFQk9GWStHbWNVb014VDYrMCtVR3gzNHgrdEwx?=
- =?utf-8?B?bjlkdGxxMlo3NzRGekFvb1ErY1loT1huMjJGYnZ4VGF3eUhldVQ1c0NORmg5?=
- =?utf-8?B?U3o1eXVETk5uR3hqUW9GSHVUNUhNb0lwM1FCNVgyWENyVHluRURXQ3l0bG16?=
- =?utf-8?B?T1VtT1JEYVB6L3U4bGVSMk5jZUtyM1RKcHlHUnpiSkJEYWtOYjNkZkFkd2tI?=
- =?utf-8?B?elVrSEJLRm1zOEk5VEdpcE1ZY2Zsa1ZJai9MRk5xUmRnV0ozc2psbURQQ1Y4?=
- =?utf-8?B?bm4ydzJJaGNkNmd5Y0l0WkthNUVSNzNaVTZaN2o2REFPTFJoYlJFZVFqcEdk?=
- =?utf-8?B?VjAzU1krcnhPY3RnMEtjc1RHRWZ2eEl1dzRuOW9ROGxRZlVMSTVxc0prRDMz?=
- =?utf-8?B?d3dscGh4clhjUis3Y3d0UEs1Z1RkRHl3ZDJ6Q3FFY2g3YkYwQ1JKQkU4eTlQ?=
- =?utf-8?B?anZ6cWE5MWhaclR6dEhtY3BycFY3SGd3ekRGM29JT25LeW84S0JXMTV1OUts?=
- =?utf-8?B?ajNkak9veENXN2xSTDc3TWtGdURvamF1MUtTR0RKOVBjMUVsT01NVlQwbEZh?=
- =?utf-8?B?VmVjMlRjUGZHTW03SURvSmhLOG1LYjc1QzAxZ2kyVEExL1gyWFU2NE15dDVx?=
- =?utf-8?B?c0pQSzNqeFhINjhFSmFtTmlzRXZIdUVwd3AzQjZNbUJQU0lvL0V0VEJzVG9l?=
- =?utf-8?B?VEZlSkVyakFUaXBXTEVXclpHVXpUa0FncXdOM0wzbEZoUFpZTzFKeE53cktT?=
- =?utf-8?B?cGltSDFISVBldmZwQzZnZndNRmhXMkg2d3JBei9ucGFGc2pmOVFvNDl3b29L?=
- =?utf-8?B?SkVCd1VDVTlMZ1VOdGlCSTRXYlNON08vWGdPRTYzUWpWQk5lOTJidlgxZU9V?=
- =?utf-8?B?OHZpSkZjOXY4SXlZQ2hkZFcyMCtPMUNnOURhVTRmZnNJbUpOVHRuNUxrclF5?=
- =?utf-8?B?WldENEtGNDB6Mmt6VGtRSEN1WHh0STU1RWtQY21QOHI5OWlBYzk1eFllRzA4?=
- =?utf-8?B?SW1ZOU9jQnZFKzNjSkxxc0tsSE5FZmh1cjdTWHlxVXlkTkFJS1pzbjNjbGVK?=
- =?utf-8?B?NFM5VXBscVFCVHBhS0pRQzhRUlpwdFAyV0FDdGZrOFlYcG5BK1J0bGtzWk5q?=
- =?utf-8?B?Yjh6QVNWRUFDZ0ZtaFVFcFJDaWhxZlh3VzdqdFlVQ3dXeGRzM1BZV0VPQkRZ?=
- =?utf-8?B?UUF2RmUvbWs5dHl5dUJ3OStja0J2UnBuZFV1UXkwaHV3WVJ2WW90cW1wZzh2?=
- =?utf-8?B?dmw2OWNFWTZyOUJNdWhzdVAya1Q0MTVBUG1icHNCbDdIZUJ5Vm96TTVydWMy?=
- =?utf-8?B?aGFGS1hHVnV6dlFsV052SUozSWhuVXY4REFzZzRkRFJUWURPbWJyTlJ5cUxG?=
- =?utf-8?B?d3A0TlBwYi82ZHBHZTdRRzhhYklDUVFrVDlNQzRyekY5NWZJSnU3cnRDZGF3?=
- =?utf-8?B?RCthN01BeU1iSUcxcFpLSlNCeEtwYm9hajhGZ2F6RjYrSXdvK2pIQytiRHBK?=
- =?utf-8?B?NWs3UHluWjRiMjY3ZUtxa3JWZnVvRkNOa3U0YVJNT2prb3d5NXFKakN6bFhu?=
- =?utf-8?B?OXBsclg4VWpJTG5XZzJya1JNU3Y1SDFOWDNTUFFyY1MzcEcxMUNJS3E1MitH?=
- =?utf-8?B?VUNVemMyUVhqclhmZEgrVFJoY05JeTlQNWdkT0tsbUFJTW53ZHpVKzFXUDcv?=
- =?utf-8?B?eDh3TTZEM2FkbVh6S2VUVWRBVXc2dHFYeDBIK09CL1l3N3lGcmNETFNUZmRJ?=
- =?utf-8?B?WjRsbjVQRklqYXlVeE1VY0RUQk9scTFyUENxUVZwak04UkQ1NEt3WnhjMFY0?=
- =?utf-8?B?MXZIZ3VXdkdtQzUxZ2VKQ3ByRGZIenFqMUI5WlB2cE14emk3TlBjMmgyYVUy?=
- =?utf-8?B?TGhpMmVuYjdVR1c2TUpaVHRrQ1BtakwzMEZOMGl6L0l0Um4yWTdPbDQ2bkpS?=
- =?utf-8?B?ZEY3ZFMycmRDdmszSTdNWktKUTFNdlZPcTdXakdHekIza2Fqb1dYMldhV3BB?=
- =?utf-8?B?eVV0cXFZWEI1SFAzNEIybmkxT0IrbVdWOTBkaWZYZkQvQmdINGdVamRWL3ZY?=
- =?utf-8?B?S0dtdFZCM0xwZmpsU2lZejB4K2xJeVUwc1oxMnVVRU1BYU9QK1FvYitMWSt1?=
- =?utf-8?B?eVJUREcyZkVyL1ZEeTBjc0lXVVYrYS9qbm1UeDhISHJHbkxncnVRKzN3T3BK?=
- =?utf-8?Q?BnjhGgCA0aAPhEgeaiCDFsQi6XGturyY6ML5U75i1aLS?=
-X-OriginatorOrg: Nvidia.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 19f6c2f1-a70b-4abf-aae3-08de3343797c
-X-MS-Exchange-CrossTenant-AuthSource: CH2PR12MB3990.namprd12.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 04 Dec 2025 14:43:22.9590 (UTC)
-X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
-X-MS-Exchange-CrossTenant-Id: 43083d15-7273-40c1-b7db-39efd9ccc17a
-X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: N96iarhf/hZSw9KvB5YLZyqM/8Q46gW0mOEVLUKyy3/2Znk8WSl2RQGjPV7Dw5142TeEqCW3dGzdAonvc5F4Ww==
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: DS0PR12MB7769
+References: <20251202-inline-helpers-v1-0-879dae33a66a@google.com>
+ <20251202-inline-helpers-v1-4-879dae33a66a@google.com>
+ <20251204100725.GF2528459@noisy.programming.kicks-ass.net>
+ <aTFhFXCqvy7nmDOp@google.com>
+ <20251204111124.GJ2528459@noisy.programming.kicks-ass.net>
+ <CANiq72=r+Fmu0uuNF=6x36GWWQZGZk9gApnMZxakJavviwG+ug@mail.gmail.com>
+ <dd5856a8-e120-4884-8828-9d0c9edc60f0@crisal.io> <aTGJdlwMRxGg2iZ1@google.com>
+ <20251204142742.GM2528459@noisy.programming.kicks-ass.net>
+In-Reply-To: <20251204142742.GM2528459@noisy.programming.kicks-ass.net>
+From: Matthew Maurer <mmaurer@google.com>
+Date: Thu, 4 Dec 2025 11:29:13 -0800
+X-Gm-Features: AWmQ_blF4lJt3BfO2o2NOJRf3_Ss0kAS-vrqLdfp0qFcfHcQVmwUbXFySwWbsjc
+Message-ID: <CAGSQo01Am_rNeZqnqZU3hY7SwWG=dTHtzcksPSHUTiasgex+cA@mail.gmail.com>
+Subject: Re: [PATCH 4/4] build: rust: provide an option to inline C helpers
+ into Rust
+To: Peter Zijlstra <peterz@infradead.org>
+Cc: Alice Ryhl <aliceryhl@google.com>,
+ =?UTF-8?Q?Emilio_Cobos_=C3=81lvarez?= <emilio@crisal.io>, 
+ Miguel Ojeda <miguel.ojeda.sandonis@gmail.com>,
+ Antoni Boucher <bouanto@zoho.com>, 
+ Arthur Cohen <arthur.cohen@embecosm.com>, Gary Guo <gary@garyguo.net>, 
+ Josh Triplett <josh@joshtriplett.org>, Miguel Ojeda <ojeda@kernel.org>, 
+ Boqun Feng <boqun.feng@gmail.com>,
+ =?UTF-8?Q?Bj=C3=B6rn_Roy_Baron?= <bjorn3_gh@protonmail.com>, 
+ Benno Lossin <lossin@kernel.org>, Andreas Hindborg <a.hindborg@kernel.org>, 
+ Trevor Gross <tmgross@umich.edu>, Danilo Krummrich <dakr@kernel.org>, 
+ Alexandre Courbot <acourbot@nvidia.com>, Will Deacon <will@kernel.org>, 
+ Mark Rutland <mark.rutland@arm.com>, Nathan Chancellor <nathan@kernel.org>, 
+ Nick Desaulniers <nick.desaulniers+lkml@gmail.com>,
+ Bill Wendling <morbo@google.com>, Justin Stitt <justinstitt@google.com>,
+ Nicolas Schier <nicolas.schier@linux.dev>, 
+ Andrew Morton <akpm@linux-foundation.org>, Uladzislau Rezki <urezki@gmail.com>,
+ rust-for-linux@vger.kernel.org, linux-kernel@vger.kernel.org, 
+ llvm@lists.linux.dev, linux-kbuild@vger.kernel.org, linux-mm@kvack.org, 
+ nouveau@lists.freedesktop.org
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -173,91 +110,98 @@ List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-On Thu Dec 4, 2025 at 3:31 AM JST, Timur Tabi wrote:
-> On Wed, 2025-12-03 at 20:54 +0900, Alexandre Courbot wrote:
->> On Tue Dec 2, 2025 at 8:25 AM JST, Timur Tabi wrote:
->> > On Wed, 2025-11-19 at 12:36 +0900, Alexandre Courbot wrote:
->> > > You can use the `Alignment` type here, as the rest of the code does:
->> > >=20
->> > > =C2=A0=C2=A0=C2=A0 let size =3D num::usize_as_u64(obj.size())
->> > > =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 .align_up(Alignment::new:=
-:<GSP_PAGE_SIZE>())?;
->> > >=20
->> > > Now `align_up` returns an error in case of overflow, that we will ne=
-ed
->> > > to pass down to the caller by changing the return type of `new`. It =
-is a
->> > > bit annoying, but better than the behavior of `next_mutiple_of` in s=
-uch
->> > > a case, which is to panic. :)
->> >=20
->> > I see your point, but these are u64s that we're talking about.=C2=A0 T=
-he only way next_mutiple_of()
->> > can
->> > panic is if obj.size() is greater than 0xFFFFFFFFFFFFF000, which is no=
-t possible.=C2=A0=20
->> >=20
->> > I would say in this case, a panic is preferable to a convoluted error =
-return that will never be
->> > exercised, because failure here indicates a coding error, not an input=
- error.
->>=20
->> The input data is a usize, so technically we could get an input that
->> triggers that error.
+On Thu, Dec 4, 2025 at 6:27=E2=80=AFAM Peter Zijlstra <peterz@infradead.org=
+> wrote:
 >
-> Actually, I still say it's not possible. =20
+> On Thu, Dec 04, 2025 at 01:15:34PM +0000, Alice Ryhl wrote:
+> > On Thu, Dec 04, 2025 at 01:49:28PM +0100, Emilio Cobos =C3=81lvarez wro=
+te:
+> > > On 12/4/25 12:57 PM, Miguel Ojeda wrote:
+> > > > On Thu, Dec 4, 2025 at 12:11=E2=80=AFPM Peter Zijlstra <peterz@infr=
+adead.org> wrote:
+> > > > >
+> > > > > Right. Earlier I also proposed using libclang to parse the C head=
+er and
+> > > > > inject that. This might be a little simpler, in that..
+> > > >
+> > > > Yeah, that would be closer to the `bindgen` route in that `libclang=
+`
+> > > > gets already involved.
+> > >
+> > > Yeah, so... there are existing tools (c2rust [0] being the actively
+> > > maintained one IIUC) that in theory could do something like that (tra=
+nslate
+> > > the bodies of the functions from C to Rust so that rustc could consum=
+e them
+> > > directly rather than via LLVM LTO).
+> > >
+> > > I think the intended use case is more "translate a whole C project in=
+to
+> > > rust", but it could be interesting to test how well / poorly it perfo=
+rms
+> > > with the kernel helpers / with a single header translated to Rust.
+> > >
+> > > I personally haven't tried it because for work I need to deal with C+=
++,
+> > > which means that automatic translation to Rust is a lot harder / prob=
+ably
+> > > impossible in general. So for Firefox we end up relying on bindgen +
+> > > cross-language LTO for this kind of thing, and it works well for us.
+> > >
+> > > If I'm understanding correctly, it seems the kernel needs this extra =
+bit of
+> > > help (__always_inline) to push LLVM to inline C functions into rust, =
+which
+> > > is a bit unfortunate... But this approach seems sensible to me, for n=
+ow at
+> > > least.
+> > >
+> > > FWIW Bindgen recently gained an option to generate inline functions [=
+1],
+> > > which could help avoid at least the bindgen ifdef in the patch series=
+?
+> > >
+> > > Anyways, it might be interesting to give c2rust a go on the kernel he=
+lpers
+> > > if nobody has done so, and see how well / poorly it works in practice=
+? Of
+> > > course probably introducing a new dependency would be kind of a pain,=
+ but
+> > > could be a good data point for pushing into adding something like it =
+built
+> > > into rustc...
+> >
+> > I already tried c2rust as an alternative to this patch. It works okay
+> > for many functions, but it's missing support for some features such as
+> > asm goto, though this is fixable. But a larger issue is that some thing=
+s
+> > simply do not translate to Rust right now. For example:
+> >
+> > * Atomics use the Ir operand.
+> > * static_branch uses the i operand.
+> >
+> > neither of which translate directly to Rust.
+
+I took a shot at `c2rust` as well, the summary was that `c2rust` was missin=
+g:
+* Asm goto support
+* __builtin_types_compatible_p
+* Deduced types
+* __count
+* _Generic
+
+I was adding hacky implementations along the way to see if things
+could be made to work, but the %l and %i missing in Rust itself that
+Alice pointed out were not things that could really be worked around.
+
+I also think that the bitcode-based approach is more future proof -
+the kernel may pick up new C features that `c2rust` hasn't yet learned
+about. If `clang` is in charge of generating the bitcode for the
+to-be-inlined helpers, we don't risk any desync in terms of what
+features are supported either by `c2rust` or by `rustc` relative to
+what's in use by the rest of the kernel.
+
 >
-> Say I change the code to this, so that .next_multiple_of is called on a u=
-64 instead of a usize:
->
-> 	let size =3D num::usize_as_u64(obj.size()).next_multiple_of(GSP_PAGE_SIZ=
-E);
->
-> Again, the only way this can fail is if the allocated object being passed=
- in is almost 16 exabytes
-> in size, which is physically impossible.
->
->> I know it's a very edge case, and clearly indicates a bug, but the
->> general rule is: don't panic the kernel. And in Rust, if possible, don't
->> even let me compiler insert panic-handling code. If you don't want to
->> change the return type of the method, then maybe use `unwrap_or` and
->> `inspect_err` to print an error before returning e.g. `0`.
->
-> How about this: if .next_multiple_of(GSP_PAGE_SIZE) does return an error,=
- I'll just assign size to
-> obj.size() as-is?  After all, at about 16GB/second for DMA, it will take =
-about 31 years to DMA all
-> that memory, so I will have long since retired before that bug shows up.
-
-Please allow me to commend you for doing the computation, that really
-cracked me up. :D Maybe we need a `ECAREEROVERFLOW` error code for cases
-like this.
-
-And yeah, you are abolutely right, but my point was more about not
-having the code to handle panic conditions generated. Maybe I am
-thinking too much ahead, but I dream of a future where we could make
-guarantees like "this function never panics" and have the compiler
-complain if it does. So as a matter of principle I like to avoid having
-these, especially when they cannot happen in practice.
-
-So something like using `pr_warn` looks reasonable to me as a last
-resort.
-
-... or maybe we can address the problem differently. Reading your commit
-log again:
-
-  GSP-RM insists that the 'size' parameter of the
-  LibosMemoryRegionInitArgument struct be aligned to 4KB.     =20
-
-sounds to me like "it is a bug if `size` is not aligned to 4KB to begin
-with". Could that be a correct interpretation?
-
-Because if we align up past the valid data of the object, then what are
-we copying? Granted, `CoherentAllocation` will likely have an aligned
-size, but that's a lucky implementation detail. So maybe we can just
-downright return an error if the size is not aligned, which would solve
-the panic problem.
-
-Or we fix the problem when allocating the `CoherentAllocation`, making
-sure the filler data exists and is zeroes, and providing a valid `size`
-from the beginning.
+> Right this. AFAIK Rust simply does not have feature parity with inline
+> asm. Them having picked a wildly different syntax for inline asm didn't
+> help either of course. But Rust is Rust, must have terrible syntax :-)
