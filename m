@@ -2,160 +2,94 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id E1A8BCBAF3D
-	for <lists+nouveau@lfdr.de>; Sat, 13 Dec 2025 13:46:57 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id D5526CA3B45
+	for <lists+nouveau@lfdr.de>; Thu, 04 Dec 2025 14:03:39 +0100 (CET)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 9217F10EC82;
-	Sat, 13 Dec 2025 12:42:21 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 89B2C10E954;
+	Thu,  4 Dec 2025 13:03:38 +0000 (UTC)
 Authentication-Results: gabe.freedesktop.org;
-	dkim=permerror (0-bit key) header.d=crisal.io header.i=@crisal.io header.b="QWmZQmQ8";
-	dkim=permerror (0-bit key) header.d=messagingengine.com header.i=@messagingengine.com header.b="d4LUKr5P";
+	dkim=pass (2048-bit key; unprotected) header.d=google.com header.i=@google.com header.b="WSCYtdvk";
 	dkim-atps=neutral
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-X-Greylist: delayed 693 seconds by postgrey-1.36 at gabe;
- Thu, 04 Dec 2025 13:01:09 UTC
-Received: from fhigh-a6-smtp.messagingengine.com
- (fhigh-a6-smtp.messagingengine.com [103.168.172.157])
- by gabe.freedesktop.org (Postfix) with ESMTPS id C3D6A10E93D
- for <nouveau@lists.freedesktop.org>; Thu,  4 Dec 2025 13:01:09 +0000 (UTC)
-Received: from phl-compute-06.internal (phl-compute-06.internal [10.202.2.46])
- by mailfhigh.phl.internal (Postfix) with ESMTP id 991E11400224;
- Thu,  4 Dec 2025 07:49:35 -0500 (EST)
-Received: from phl-mailfrontend-01 ([10.202.2.162])
- by phl-compute-06.internal (MEProxy); Thu, 04 Dec 2025 07:49:35 -0500
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=crisal.io; h=cc
- :cc:content-transfer-encoding:content-type:content-type:date
- :date:from:from:in-reply-to:in-reply-to:message-id:mime-version
- :references:reply-to:subject:subject:to:to; s=fm3; t=1764852575;
- x=1764938975; bh=bT7FHjsbQ8DOCUyp+kexyJRmQz7YtubohaLbP21dgus=; b=
- QWmZQmQ8drjAUhtM3EKvi9IGmEYwlgKHmD6DEeMNgU1cDITtkm36or/GKRANaoSO
- ldYx9isB/WQ4SZXIerr5uQo+UxQYmmh/PJG6AXetuvXIoH07o0SDg4YUkdn0yR4+
- 1OnQpHI2je4URQ40n6B3dLaoWnB/o008x8JaKfDUn7TrJRCDLtewnPFyBmKSUFS2
- ZOQl/zlrwFYab0Ve67HfSmoS29BlXzSWYaQxBMtlFC8jKw/dfjQ/wxKFGp4v4Pay
- NWU7TQLKGT8B+wsa3s/bSqkMwwCqbKZHhIaS3Q5DNDEb3foa0oWd7G5sRREhKkMZ
- 8dq1SFoEIz0kWvxuRfalVA==
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=
- messagingengine.com; h=cc:cc:content-transfer-encoding
- :content-type:content-type:date:date:feedback-id:feedback-id
- :from:from:in-reply-to:in-reply-to:message-id:mime-version
- :references:reply-to:subject:subject:to:to:x-me-proxy
- :x-me-sender:x-me-sender:x-sasl-enc; s=fm1; t=1764852575; x=
- 1764938975; bh=bT7FHjsbQ8DOCUyp+kexyJRmQz7YtubohaLbP21dgus=; b=d
- 4LUKr5Pp/AGMgk3O3ccRP4nFv4Io7xt6Yczuf7gA4oWo1kiWLWr7PQ9kDT/pG0Pk
- HM2MWOGHqfjtswp8SVvu0LG4Nb4fRm21E+/iG6elpHLVYM8YIXGb4G8ntt9S24WB
- XTgi15cJAKr+QS/7EdUStOb1gOb1emBxGgjWRb7F+rlsKOEDvn1pd8KepUyyLoro
- 4C/XBFbXQM6IpoyFHLAaGANyvlxFW3ZduI3qT06GMX9VwaiV7Z6LXEiN87/bA9S2
- MeCDqCiAWvyOSQ0EnG197hSFQqQwHugp/S2JBAD5DeQRwPuW/rrltrlMBoLAE6TP
- Xly7EjxYU5YgnWddZy0bQ==
-X-ME-Sender: <xms:XoMxaftIg9lrhKoIsI9yLzV99-PYFh6m5AK3y1GkUt051fQ6pfxc0g>
- <xme:XoMxaXZPsINg-X6_SpHYviYJ4t0xaxgJwE-o_NHkbfsQGUfZziOxUMo4omiiY9762
- AKGPXJ6TVr58smEizAy1cVxbzZwwD5w6L-8ZcKkVfvrFEvHkf7azUU>
-X-ME-Received: <xmr:XoMxabsOsdheTnf3G4xTEk0PswJW9moz6ytx3ZYLJYQg5IdWKx_sr3rOm2qP-iF00UcAUJGcxEF1ndCSM3PnF3iYfM1mzW1o_oI>
-X-ME-Proxy-Cause: gggruggvucftvghtrhhoucdtuddrgeefgedrtddtgdehiedvucetufdoteggodetrfdotf
- fvucfrrhhofhhilhgvmecuhfgrshhtofgrihhlpdfurfetoffkrfgpnffqhgenuceurghi
- lhhouhhtmecufedttdenucesvcftvggtihhpihgvnhhtshculddquddttddmnecujfgurh
- epkfffgggfuffvvehfhfgjtgfgsehtkeertddtudejnecuhfhrohhmpefgmhhilhhiohcu
- vehosghoshculmhlvhgrrhgviicuoegvmhhilhhiohestghrihhsrghlrdhioheqnecugg
- ftrfgrthhtvghrnhepheeuieejvefhkeekffeklefhfeevteetueethedvudelieeuveev
- ffejfefgfedvnecuffhomhgrihhnpehgihhthhhusgdrtghomhdpughotghsrdhrshenuc
- evlhhushhtvghrufhiiigvpedtnecurfgrrhgrmhepmhgrihhlfhhrohhmpegvmhhilhhi
- ohestghrihhsrghlrdhiohdpnhgspghrtghpthhtohepfedupdhmohguvgepshhmthhpoh
- huthdprhgtphhtthhopehmihhguhgvlhdrohhjvggurgdrshgrnhguohhnihhssehgmhgr
- ihhlrdgtohhmpdhrtghpthhtohepphgvthgvrhiisehinhhfrhgruggvrggurdhorhhgpd
- hrtghpthhtohepsghouhgrnhhtohesiihohhhordgtohhmpdhrtghpthhtoheprghrthhh
- uhhrrdgtohhhvghnsegvmhgsvggtohhsmhdrtghomhdprhgtphhtthhopehgrghrhiesgh
- grrhihghhuohdrnhgvthdprhgtphhtthhopegrlhhitggvrhihhhhlsehgohhoghhlvgdr
- tghomhdprhgtphhtthhopehjohhshhesjhhoshhhthhrihhplhgvthhtrdhorhhgpdhrtg
- hpthhtohepohhjvggurgeskhgvrhhnvghlrdhorhhgpdhrtghpthhtohepsghoqhhunhdr
- fhgvnhhgsehgmhgrihhlrdgtohhm
-X-ME-Proxy: <xmx:XoMxaWA_0XGjWUyj_omVPnW4Dam6xBxCotJNmgzJmPJ3qtDD2osQjg>
- <xmx:XoMxaaMeFf-Cwgb1A2pglnMdApsgjs1BngwagP-9o2gnEr-PzItVWg>
- <xmx:XoMxaY6-KS1B4Ffc8pO7e9EuUPJVxSPDC1857Pwst1BJTdjw6ODvrg>
- <xmx:XoMxac3U4poM50Z6o2Wd1oal5GRpfXfVWeXWEVSl9yFtxXjBu7b5kg>
- <xmx:X4Mxae_ro2UZcjWQsPKA-TMcEQ9dSlR2xZk6FPrIbaiE5NxqtEzhotki>
-Feedback-ID: i2e3c46c1:Fastmail
-Received: by mail.messagingengine.com (Postfix) with ESMTPA; Thu,
- 4 Dec 2025 07:49:31 -0500 (EST)
-Message-ID: <dd5856a8-e120-4884-8828-9d0c9edc60f0@crisal.io>
-Date: Thu, 4 Dec 2025 13:49:28 +0100
-MIME-Version: 1.0
-User-Agent: Thunderbird Daily
-Subject: Re: [PATCH 4/4] build: rust: provide an option to inline C helpers
- into Rust
-To: Miguel Ojeda <miguel.ojeda.sandonis@gmail.com>,
- Peter Zijlstra <peterz@infradead.org>, Antoni Boucher <bouanto@zoho.com>,
- Arthur Cohen <arthur.cohen@embecosm.com>, Gary Guo <gary@garyguo.net>
-Cc: Alice Ryhl <aliceryhl@google.com>, Josh Triplett <josh@joshtriplett.org>, 
- Miguel Ojeda <ojeda@kernel.org>, Boqun Feng <boqun.feng@gmail.com>,
- =?UTF-8?Q?Bj=C3=B6rn_Roy_Baron?= <bjorn3_gh@protonmail.com>,
- Benno Lossin <lossin@kernel.org>, Andreas Hindborg <a.hindborg@kernel.org>,
- Trevor Gross <tmgross@umich.edu>, Danilo Krummrich <dakr@kernel.org>,
- Alexandre Courbot <acourbot@nvidia.com>, Will Deacon <will@kernel.org>,
- Mark Rutland <mark.rutland@arm.com>, Nathan Chancellor <nathan@kernel.org>,
- Nick Desaulniers <nick.desaulniers+lkml@gmail.com>,
- Bill Wendling <morbo@google.com>, Justin Stitt <justinstitt@google.com>,
- Nicolas Schier <nicolas.schier@linux.dev>,
- Andrew Morton <akpm@linux-foundation.org>,
- Uladzislau Rezki <urezki@gmail.com>, rust-for-linux@vger.kernel.org,
- linux-kernel@vger.kernel.org, llvm@lists.linux.dev,
- linux-kbuild@vger.kernel.org, linux-mm@kvack.org,
- nouveau@lists.freedesktop.org, Matthew Maurer <mmaurer@google.com>
+Received: from mail-wm1-f74.google.com (mail-wm1-f74.google.com
+ [209.85.128.74])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 4C7C710E954
+ for <nouveau@lists.freedesktop.org>; Thu,  4 Dec 2025 13:03:37 +0000 (UTC)
+Received: by mail-wm1-f74.google.com with SMTP id
+ 5b1f17b1804b1-4775e00b16fso6158495e9.2
+ for <nouveau@lists.freedesktop.org>; Thu, 04 Dec 2025 05:03:37 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=google.com; s=20230601; t=1764853416; x=1765458216;
+ darn=lists.freedesktop.org; 
+ h=content-transfer-encoding:cc:to:from:subject:message-id:references
+ :mime-version:in-reply-to:date:from:to:cc:subject:date:message-id
+ :reply-to; bh=XHv3hl5kxLsYbFyLkQO+405gPeY3rXV12cSRgU/67FU=;
+ b=WSCYtdvkaGoISc8l8tibX31/9Fi3yAYHAClHP2qb766KnZvby/2JUm8voLP2gXw9YS
+ E1wGZlpC9NQG536ib2nrnv6m5rM/Bmw1Cx02p7iTH9ajZ5a9pj5zJOP4bkCqYNaZ7KYD
+ s5tQGhKSP2bvAjfjLSzWd++4aMK/fH+4NwfAxrLolCoPL6NB3foHLaa40aq8EY79C3Wx
+ LIkaXNOjCKOLSExxjOJwexfzT25ceNlB5FB1+5UkpvQDTkm6sZucBueTARdxEDq4fQ4j
+ raBKQt/eVzR8A9VWRCl0P2TY9jiyU0o06MLXGDaN+GtKgOFNLrMbElCEZbuawxI+HyDa
+ 4MnA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1764853416; x=1765458216;
+ h=content-transfer-encoding:cc:to:from:subject:message-id:references
+ :mime-version:in-reply-to:date:x-gm-message-state:from:to:cc:subject
+ :date:message-id:reply-to;
+ bh=XHv3hl5kxLsYbFyLkQO+405gPeY3rXV12cSRgU/67FU=;
+ b=CLPuPbEmKOorA1Ml0ub92aKGe4gR3NVJAofx4B3D+9AVvo0IEt0uRXWeprv0JVWYYh
+ GCC3ayHhfZUXZ1gdhGOZ8GdOY3ZTNJEjwCuuIq5ZGvE7crdT+D9OdG7+9+AJFEFDTwRT
+ P7Bh2KGTwPd3+SR5Kyhf7RSOrtvzPfQLGUyUuD1QF1ITz/lV5wblJDL9q02ikuo1B+iw
+ zdJOYMVHDWfwTClDXGml7kfXU034miYM4+68L1CRJFCiULreDGIOCEqBrQRMomigetgA
+ he0y4STDlBQCy/UWJO05cchFOWlZn7VNsl8CbCzPM9bTHtI3pWRzh0hAUQnVGOO63wSR
+ s4pg==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCUyWoIPFqBYya8ZMNz0o5wDhQQzWKMiMyZ3cIksZICvra54ZwG3LUhDQ+6O1tCuYIzY2kdlKDfC@lists.freedesktop.org
+X-Gm-Message-State: AOJu0Yx62mgHMTzckbv36ZMpdVxJppgZ5gxmGWtOgmMuL2rmdKGlGxRA
+ pSEuH9vuEV0rXzkUZsQg3mvoO6d+Nl4f3WUptRAlER75TNlCL8jSYWPBiy6aLOAkKwhnPSXOC3f
+ Bc4rr9a76pktanALHwQ==
+X-Google-Smtp-Source: AGHT+IHesTuadwDk2buktyr5KdT759hnUgQEo1wC+McdN7/pwalBTRVnkgrSBeIn+Q+0wMXJFuvSYefcIW+twrM=
+X-Received: from wmlu6.prod.google.com ([2002:a05:600c:2106:b0:477:5c35:1b95])
+ (user=aliceryhl job=prod-delivery.src-stubby-dispatcher) by
+ 2002:a05:600c:5246:b0:477:641a:1402 with SMTP id
+ 5b1f17b1804b1-4792f244c5fmr28025045e9.4.1764853415686; 
+ Thu, 04 Dec 2025 05:03:35 -0800 (PST)
+Date: Thu, 4 Dec 2025 13:03:34 +0000
+In-Reply-To: <20251204123906.GL2528459@noisy.programming.kicks-ass.net>
+Mime-Version: 1.0
 References: <20251202-inline-helpers-v1-0-879dae33a66a@google.com>
  <20251202-inline-helpers-v1-4-879dae33a66a@google.com>
  <20251204100725.GF2528459@noisy.programming.kicks-ass.net>
  <aTFhFXCqvy7nmDOp@google.com>
  <20251204111124.GJ2528459@noisy.programming.kicks-ass.net>
  <CANiq72=r+Fmu0uuNF=6x36GWWQZGZk9gApnMZxakJavviwG+ug@mail.gmail.com>
-Content-Language: en-US
-From: =?UTF-8?Q?Emilio_Cobos_=C3=81lvarez?= <emilio@crisal.io>
-Autocrypt: addr=emilio@crisal.io; keydata=
- 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
-In-Reply-To: <CANiq72=r+Fmu0uuNF=6x36GWWQZGZk9gApnMZxakJavviwG+ug@mail.gmail.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 8bit
-X-Mailman-Approved-At: Sat, 13 Dec 2025 12:40:52 +0000
+ <20251204123906.GL2528459@noisy.programming.kicks-ass.net>
+Message-ID: <aTGGpsbIYm1tXMDY@google.com>
+Subject: Re: [PATCH 4/4] build: rust: provide an option to inline C helpers
+ into Rust
+From: Alice Ryhl <aliceryhl@google.com>
+To: Peter Zijlstra <peterz@infradead.org>
+Cc: Miguel Ojeda <miguel.ojeda.sandonis@gmail.com>,
+ Antoni Boucher <bouanto@zoho.com>, 
+ "Emilio Cobos =?utf-8?Q?=C3=81lvarez?=" <emilio@crisal.io>,
+ Arthur Cohen <arthur.cohen@embecosm.com>, 
+ Gary Guo <gary@garyguo.net>, Josh Triplett <josh@joshtriplett.org>, 
+ Miguel Ojeda <ojeda@kernel.org>, Boqun Feng <boqun.feng@gmail.com>, 
+ "=?utf-8?B?QmrDtnJu?= Roy Baron" <bjorn3_gh@protonmail.com>,
+ Benno Lossin <lossin@kernel.org>, 
+ Andreas Hindborg <a.hindborg@kernel.org>, Trevor Gross <tmgross@umich.edu>, 
+ Danilo Krummrich <dakr@kernel.org>, Alexandre Courbot <acourbot@nvidia.com>,
+ Will Deacon <will@kernel.org>, 
+ Mark Rutland <mark.rutland@arm.com>, Nathan Chancellor <nathan@kernel.org>, 
+ Nick Desaulniers <nick.desaulniers+lkml@gmail.com>,
+ Bill Wendling <morbo@google.com>, Justin Stitt <justinstitt@google.com>,
+ Nicolas Schier <nicolas.schier@linux.dev>, 
+ Andrew Morton <akpm@linux-foundation.org>, Uladzislau Rezki <urezki@gmail.com>,
+ rust-for-linux@vger.kernel.org, linux-kernel@vger.kernel.org, 
+ llvm@lists.linux.dev, linux-kbuild@vger.kernel.org, linux-mm@kvack.org, 
+ nouveau@lists.freedesktop.org, Matthew Maurer <mmaurer@google.com>
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: quoted-printable
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -170,47 +104,61 @@ List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-On 12/4/25 12:57 PM, Miguel Ojeda wrote:
-> On Thu, Dec 4, 2025 at 12:11 PM Peter Zijlstra <peterz@infradead.org> wrote:
->>
->> Right. Earlier I also proposed using libclang to parse the C header and
->> inject that. This might be a little simpler, in that..
-> 
-> Yeah, that would be closer to the `bindgen` route in that `libclang`
-> gets already involved.
+On Thu, Dec 04, 2025 at 01:39:06PM +0100, Peter Zijlstra wrote:
+> On Thu, Dec 04, 2025 at 12:57:31PM +0100, Miguel Ojeda wrote:
+> > On Thu, Dec 4, 2025 at 12:11=E2=80=AFPM Peter Zijlstra <peterz@infradea=
+d.org> wrote:
+> > >
+> > > Right. Earlier I also proposed using libclang to parse the C header a=
+nd
+> > > inject that. This might be a little simpler, in that..
+> >=20
+> > Yeah, that would be closer to the `bindgen` route in that `libclang`
+> > gets already involved.
+> >=20
+> > > ... if you build rustc against libclang they are necessarily from the
+> > > same LLVM build.
+> >=20
+> > So currently there are 3 "LLVMs" that get involved:
+> >=20
+> >   - The one Clang uses (in LLVM=3D1 builds).
+>=20
+> Well, being on Debian, I'm more likely to be using LLVM=3D-22 (or whateve=
+r
+> actual version is required, 22 just being the latest shipped by Debian
+> at this point in time).
+>=20
+> >   - The one `rustc` uses (the LLVM backend).
+> >   - The one `bindgen` uses (via libclang).
+>=20
+> These are not necessarily the same? That is, is not bindgen part of the
+> rustc project and so would be built against the same LLVM?
 
-Yeah, so... there are existing tools (c2rust [0] being the actively 
-maintained one IIUC) that in theory could do something like that 
-(translate the bodies of the functions from C to Rust so that rustc 
-could consume them directly rather than via LLVM LTO).
+Rustc and bindgen are both part of the Rust project, but they're two
+different repos:
+https://github.com/rust-lang/rust
+https://github.com/rust-lang/rust-bindgen
 
-I think the intended use case is more "translate a whole C project into 
-rust", but it could be interesting to test how well / poorly it performs 
-with the kernel helpers / with a single header translated to Rust.
+Generally you need to ensure that bindgen matches clang. This ensures
+that bindgen and clang agree on the interpretation of C headers.
 
-I personally haven't tried it because for work I need to deal with C++, 
-which means that automatic translation to Rust is a lot harder / 
-probably impossible in general. So for Firefox we end up relying on 
-bindgen + cross-language LTO for this kind of thing, and it works well 
-for us.
+> > If that is all done within `rustc` (so no `bindgen`), then there may
+> > still be `rustc` vs. Clang mismatches, which are harder to resolve in
+> > the Rust side at least (it is easier to pick another Clang version to
+> > match).
+> >=20
+> > For those using builds from distros, that shouldn't be a problem.
+> > Others using external `rustc` builds, e.g. from `rustup` (e.g. for
+> > testing different Rust versions) it would be harder.
+>=20
+> Make rust part of LLVM and get them all built and distributed
+> together... such that LLVM=3D-23 will get me a coherent set of tools.
+>=20
+> /me runs like crazeh ;-)
 
-If I'm understanding correctly, it seems the kernel needs this extra bit 
-of help (__always_inline) to push LLVM to inline C functions into rust, 
-which is a bit unfortunate... But this approach seems sensible to me, 
-for now at least.
+Maybe clang itself should have an option to emit Rust headers, taking
+over the role of bindgen?
 
-FWIW Bindgen recently gained an option to generate inline functions [1], 
-which could help avoid at least the bindgen ifdef in the patch series?
+/me runs like crazeh ;-)
 
-Anyways, it might be interesting to give c2rust a go on the kernel 
-helpers if nobody has done so, and see how well / poorly it works in 
-practice? Of course probably introducing a new dependency would be kind 
-of a pain, but could be a good data point for pushing into adding 
-something like it built into rustc...
-
-Thanks,
-  -- Emilio
-
-[0]: https://github.com/immunant/c2rust
-[1]: 
-https://docs.rs/bindgen/latest/bindgen/struct.Builder.html#method.generate_inline_functions
+Alice
