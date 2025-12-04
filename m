@@ -2,65 +2,79 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id B03DBCA3651
-	for <lists+nouveau@lfdr.de>; Thu, 04 Dec 2025 12:11:35 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 2690FCBAFD0
+	for <lists+nouveau@lfdr.de>; Sat, 13 Dec 2025 13:47:32 +0100 (CET)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 670D610E96B;
-	Thu,  4 Dec 2025 11:11:34 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id CB45510ECCA;
+	Sat, 13 Dec 2025 12:42:24 +0000 (UTC)
 Authentication-Results: gabe.freedesktop.org;
-	dkim=fail reason="signature verification failed" (2048-bit key; secure) header.d=infradead.org header.i=@infradead.org header.b="pSckmItV";
+	dkim=permerror (0-bit key) header.d=gmail.com header.i=@gmail.com header.b="cXKYHKCB";
 	dkim-atps=neutral
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from casper.infradead.org (casper.infradead.org [90.155.50.34])
- by gabe.freedesktop.org (Postfix) with ESMTPS id D18CC10E964
- for <nouveau@lists.freedesktop.org>; Thu,  4 Dec 2025 11:11:31 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=infradead.org; s=casper.20170209; h=In-Reply-To:Content-Type:MIME-Version:
- References:Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:
- Content-Transfer-Encoding:Content-ID:Content-Description;
- bh=Vs7IhsUdSawXMOrWf5f71JxGpFUjZulrktZ1Qm8Q2v8=; b=pSckmItVUmdbVyusV0O0TfiwUY
- WLEioelO4DKGDd2BeLrPn03kKXhorOAL18yBqgatV/WrvupIb+SeLl/jVYIf7YyVn9tdpumdAf3XO
- v1L3ZKwMUYsApXPAEl7saGJq0Uc6SoSCq8tXizZ/VE3MZ9qLaeWPqwe0q8bSeaXVgeDzjgqUBnIDF
- L+w02J8EK0BsOFt+Ja1MizLg+TbFRyqe+mliXx4e2jbDE/aAi5xpFI0lsf81zE0cBkQg7y4zrKh89
- MQCsixAsQO4lW6rgp10bnayICypIt2TtsY6rNnrhfvd0ppat9BBV1D7K62OI3cP6vRmwXWjnpf74h
- RtUugM5A==;
-Received: from 77-249-17-252.cable.dynamic.v4.ziggo.nl ([77.249.17.252]
- helo=noisy.programming.kicks-ass.net)
- by casper.infradead.org with esmtpsa (Exim 4.98.2 #2 (Red Hat Linux))
- id 1vR7F7-000000045pY-0kUI; Thu, 04 Dec 2025 11:11:25 +0000
-Received: by noisy.programming.kicks-ass.net (Postfix, from userid 1000)
- id 5415B3004B8; Thu, 04 Dec 2025 12:11:24 +0100 (CET)
-Date: Thu, 4 Dec 2025 12:11:24 +0100
-From: Peter Zijlstra <peterz@infradead.org>
-To: Alice Ryhl <aliceryhl@google.com>
-Cc: Josh Triplett <josh@joshtriplett.org>, Miguel Ojeda <ojeda@kernel.org>,
- Boqun Feng <boqun.feng@gmail.com>, Gary Guo <gary@garyguo.net>,
- =?iso-8859-1?Q?Bj=F6rn?= Roy Baron <bjorn3_gh@protonmail.com>,
- Benno Lossin <lossin@kernel.org>, Andreas Hindborg <a.hindborg@kernel.org>,
- Trevor Gross <tmgross@umich.edu>, Danilo Krummrich <dakr@kernel.org>,
- Alexandre Courbot <acourbot@nvidia.com>,
- Will Deacon <will@kernel.org>, Mark Rutland <mark.rutland@arm.com>,
- Nathan Chancellor <nathan@kernel.org>,
- Nick Desaulniers <nick.desaulniers+lkml@gmail.com>,
- Bill Wendling <morbo@google.com>, Justin Stitt <justinstitt@google.com>,
- Nicolas Schier <nicolas.schier@linux.dev>,
- Andrew Morton <akpm@linux-foundation.org>,
- Uladzislau Rezki <urezki@gmail.com>, rust-for-linux@vger.kernel.org,
- linux-kernel@vger.kernel.org, llvm@lists.linux.dev,
- linux-kbuild@vger.kernel.org, linux-mm@kvack.org,
- nouveau@lists.freedesktop.org, Matthew Maurer <mmaurer@google.com>
-Subject: Re: [PATCH 4/4] build: rust: provide an option to inline C helpers
- into Rust
-Message-ID: <20251204111124.GJ2528459@noisy.programming.kicks-ass.net>
-References: <20251202-inline-helpers-v1-0-879dae33a66a@google.com>
- <20251202-inline-helpers-v1-4-879dae33a66a@google.com>
- <20251204100725.GF2528459@noisy.programming.kicks-ass.net>
- <aTFhFXCqvy7nmDOp@google.com>
+Received: from mail-pl1-f179.google.com (mail-pl1-f179.google.com
+ [209.85.214.179])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 2ACA910E086
+ for <nouveau@lists.freedesktop.org>; Thu,  4 Dec 2025 11:40:30 +0000 (UTC)
+Received: by mail-pl1-f179.google.com with SMTP id
+ d9443c01a7336-29555b384acso8659805ad.1
+ for <nouveau@lists.freedesktop.org>; Thu, 04 Dec 2025 03:40:30 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=gmail.com; s=20230601; t=1764848429; x=1765453229; darn=lists.freedesktop.org;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=VOLP0XruPd1QOq3grXNaxKngGKdOYC2kF7NcMiuxQlI=;
+ b=cXKYHKCBEjlXy7HJVjoNREJ43Zy+K/sBT5pLnqb5qzvzrxjSVhVfHhpkxWY6jxpbnU
+ xuviJrnrkCAPMvK4r8z3DiF/FnClVDK5fasEnoUsnKd6+KIujKK8dBJ1EtBHF2xWeBqs
+ LYkfUSRjYCetYcWIzuj6iDtiaQoA5qWxE2kmjdpVWWaFgWhwh+qyLyIRqV66+Wtbw46C
+ UGgUM0BppWSu8NPr96VCp+HVoARa6nBFIWwDiXBwTeM9sk/u8B11UEjvrguvj1D4BCrX
+ GVygc2lAAZvsdDKq92UMZNzzZCalthw9ufIoh8N/E3A3JAeVK6VnyDuAKoED97qOpXQb
+ Ofwg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1764848429; x=1765453229;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=VOLP0XruPd1QOq3grXNaxKngGKdOYC2kF7NcMiuxQlI=;
+ b=tHZUTjYbTUIpPv/btTtW7+JZjuh26YJzVdpbyCUsKWwZN9Da0kd8SObsTiBe7Wh5/W
+ nSmo97hAJYthYJ2D1iumvC37mJU0LXqaZCilj7VWl1BUB1UNPnaMpxu4uTyIuZwoylQz
+ ZL4hh9rGAZ5y/4NoO8xt3y6fZ6yVJMgOgcB6fYFJt78tWwb4DUUPYNNunFUjogZeDlej
+ doZiWQUdNrHYapDG0+cn+yG8+xPhn3I6chEg4SuKtJO4czbNjbyMBgUWXJUydzrEyQY3
+ t3Xe8M75ZP1svLbcEyhCoRo449mEmj0h73lTz1C/l1GsrVWYONA6zXWmKkf+UGxFI/mN
+ PoDA==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCXWj01Ssont1uY7FD9OK7rLZrOetL/WPUppYdY7a6Z2U19OWkLQwicgA+XXjCj3Ilv+QtHbWW0j@lists.freedesktop.org
+X-Gm-Message-State: AOJu0YzSFYnbA0b01HH9pY5Hq/dYs6JTxd5OVLBWHWCVZ+sM1EzN9/5K
+ KIROa+NB07bpybbF87mBaBw4ae9uCZhiwNvsOBFO/2/4XjddccChxRkK
+X-Gm-Gg: ASbGncsc/1IQ9nZ2sRhn78ZKjXnBK9iGZot0OEwLcaOQRClKolWpAmYyO8P/LpCzZ0c
+ Rp9t4/C50X182rPUxN/e4CBA9MIN2t1efTzC6sPAb2wnhoiLIm+YUPdvsDnL8ho3F6GHMs1FYrD
+ BCY6XbARP92DokuxakYNGTt6p5zXEs4GIT0i8hiSKoNW4HyjvEZ26dSC8BMy1EUMCIOK3sj1O3c
+ a/bU6ymunB8SaJbwPm5Mfh04HN9OSgrwMWfoBPPIK5vP4grzTpwRJdtcUaIv002EKpT8I3BwgBp
+ tUBh/V06w1rs7puvDtA8Vaq6AovNXNNsADWXiMIMpNZXDiZEjIKh3FTXmEeqL2g/YMCJE5e7MHB
+ UexYkX5Qk/1W5nt9ngYn+bkE9uG2Jyn4kzytii4c4YWNiiOpd/GIPGq4AbVHx/mwQ5mgekkTCG9
+ xSZCXtIJbpsqxcGk8B0yBu9tM=
+X-Google-Smtp-Source: AGHT+IEOyFNQpZDBuG6E+IFuy81iiipGlnmTigN6oxFceckZ0M6BWW7ltYQKjSJV9ixoVX2TZKIuZQ==
+X-Received: by 2002:a17:903:2d0:b0:298:60d5:d272 with SMTP id
+ d9443c01a7336-29d682f4b2amr84735045ad.17.1764848429504; 
+ Thu, 04 Dec 2025 03:40:29 -0800 (PST)
+Received: from archlinux ([36.255.84.59]) by smtp.gmail.com with ESMTPSA id
+ d9443c01a7336-29daeae6ad1sm17734215ad.90.2025.12.04.03.40.25
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Thu, 04 Dec 2025 03:40:28 -0800 (PST)
+From: Madhur Kumar <madhurkumar004@gmail.com>
+To: lyude@redhat.com,
+	dakr@kernel.org
+Cc: maarten.lankhorst@linux.intel.com, mripard@kernel.org, tzimmermann@suse.de,
+ airlied@gmail.com, simona@ffwll.ch, dri-devel@lists.freedesktop.org,
+ linux-kernel@vger.kernel.org, nouveau@lists.freedesktop.org,
+ Madhur Kumar <madhurkumar004@gmail.com>
+Subject: [PATCH] drm/nouveau : refactor deprecated strcpy
+Date: Thu,  4 Dec 2025 17:10:21 +0530
+Message-ID: <20251204114021.36719-1-madhurkumar004@gmail.com>
+X-Mailer: git-send-email 2.52.0
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <aTFhFXCqvy7nmDOp@google.com>
+Content-Transfer-Encoding: 8bit
+X-Mailman-Approved-At: Sat, 13 Dec 2025 12:40:48 +0000
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -75,41 +89,34 @@ List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-On Thu, Dec 04, 2025 at 10:23:17AM +0000, Alice Ryhl wrote:
+strcpy() has been deprecated because it performs no bounds checking on the
+destination buffer, which can lead to buffer overflows. Use the safer
+strscpy() instead.
 
-> > The other day [*] I proposed extending Rust such that it would be able
-> > to consume a clang precompiled header directly, this would allow doing
-> > away with most of all this. No more helpers and no more bindgen.
-> > 
-> > Would that not be a much saner approach to all this?
-> > 
-> > [*] https://lkml.kernel.org/r/20251124163315.GL4068168@noisy.programming.kicks-ass.net
-> 
-> I have actually discussed similar ideas in the past with Josh Triplett,
-> so you are not the only one who thinks it is a good idea. Unfortunately,
-> the road to get there is long.
+Signed-off-by: Madhur Kumar <madhurkumar004@gmail.com>
+---
+ drivers/gpu/drm/nouveau/nouveau_fence.c | 6 +++---
+ 1 file changed, 3 insertions(+), 3 deletions(-)
 
-Right. Earlier I also proposed using libclang to parse the C header and
-inject that. This might be a little simpler, in that..
+diff --git a/drivers/gpu/drm/nouveau/nouveau_fence.c b/drivers/gpu/drm/nouveau/nouveau_fence.c
+index 869d4335c0f4..100c7dff4ff8 100644
+--- a/drivers/gpu/drm/nouveau/nouveau_fence.c
++++ b/drivers/gpu/drm/nouveau/nouveau_fence.c
+@@ -183,11 +183,11 @@ nouveau_fence_context_new(struct nouveau_channel *chan, struct nouveau_fence_cha
+ 	fctx->context = drm->runl[chan->runlist].context_base + chan->chid;
+ 
+ 	if (chan == drm->cechan)
+-		strcpy(fctx->name, "copy engine channel");
++		strscpy(fctx->name, "copy engine channel", sizeof(fctx->name));
+ 	else if (chan == drm->channel)
+-		strcpy(fctx->name, "generic kernel channel");
++		strscpy(fctx->name, "generic kernel channel", sizeof(fctx->name));
+ 	else
+-		strcpy(fctx->name, cli->name);
++		strscpy(fctx->name, cli->name, sizeof(fctx->name));
+ 
+ 	kref_init(&fctx->fence_ref);
+ 	if (!priv->uevent)
+-- 
+2.52.0
 
-> Another option to get rid of the helpers is that bindgen is working on a
-> --wrap-static-fns flag, which would generate the helpers for us.
-> However, that route would still require this patch for them to be
-> inlined.
-> 
-> One detail that makes the precompiled clang header really tricky is
-> that IMO we should not require RUSTC_CLANG_LLVM_COMPATIBLE for the
-> build. With bindgen, you just need bindgen and clang to match LLVMs.
-> That's easy since bindgen loads a dylib from your clang install. But if
-> you build this logic into rustc, then you need to be really careful to
-> get rustc and clang from the same source, and that same source must use
-> the same LLVM to build both.
-
-... if you build rustc against libclang they are necessarily from the
-same LLVM build.
-
-But that might be more tricky in that you might need ways to specify C
-specific build flags.
-
-Anyway, good to know people are in fact pondering this, because IMO the
-whole interoperability thing with C is quite terrible.
