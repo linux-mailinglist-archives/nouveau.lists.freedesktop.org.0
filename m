@@ -2,91 +2,90 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id 0DDBECA9345
-	for <lists+nouveau@lfdr.de>; Fri, 05 Dec 2025 21:08:09 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id F170BCA9378
+	for <lists+nouveau@lfdr.de>; Fri, 05 Dec 2025 21:12:31 +0100 (CET)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 8277710E283;
-	Fri,  5 Dec 2025 20:08:07 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 1C87410EBA9;
+	Fri,  5 Dec 2025 20:12:30 +0000 (UTC)
 Authentication-Results: gabe.freedesktop.org;
-	dkim=pass (1024-bit key; unprotected) header.d=redhat.com header.i=@redhat.com header.b="DYamhynt";
+	dkim=pass (1024-bit key; unprotected) header.d=redhat.com header.i=@redhat.com header.b="EYj/8J8h";
 	dkim-atps=neutral
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
 Received: from us-smtp-delivery-124.mimecast.com
- (us-smtp-delivery-124.mimecast.com [170.10.133.124])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 3926410E283
- for <nouveau@lists.freedesktop.org>; Fri,  5 Dec 2025 20:08:06 +0000 (UTC)
+ (us-smtp-delivery-124.mimecast.com [170.10.129.124])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 346DB10EBA9
+ for <nouveau@lists.freedesktop.org>; Fri,  5 Dec 2025 20:12:29 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1764965285;
+ s=mimecast20190719; t=1764965548;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:content-type:content-type:
  content-transfer-encoding:content-transfer-encoding:
  in-reply-to:in-reply-to:references:references;
- bh=oferca5GtQDZsZCE321m5hZLlsvSF/5vytw4gHg/ZJI=;
- b=DYamhyntTs0trF0IZdeaNYSW6KF4fGu+P9xICS0kay/DWgnwnFv/HMzOiBvNkRH5IvEdmd
- nDJiOM46Pows00WkA/QrYLeLaPkmeFrf0/MPPu+5SgqYVoqH6xIvRN3KNMqvQqA/prAcii
- prvzVOPKBPp7wvl4+I/rw5CZzxNPDCQ=
-Received: from mail-qv1-f71.google.com (mail-qv1-f71.google.com
- [209.85.219.71]) by relay.mimecast.com with ESMTP with STARTTLS
+ bh=2Qro+Z0Ij9XN8qZymy7AAyo7XKpVKKRgGLlfJASPpck=;
+ b=EYj/8J8hRZhecICgSJ/euhUzjoX6yTS87vkjkbHi+j70NfGQhFydQ/ckOLbQmbfKEqUo7y
+ txqB7RkGilLH4eakQwXl3pQPoJ53fMWy50FkioKy+1LQ0Kt6OtrYCQnVUfmUw8sOiyRhGM
+ lfdB2eJDp6UsttiyTphrapZrljq3MJg=
+Received: from mail-qv1-f70.google.com (mail-qv1-f70.google.com
+ [209.85.219.70]) by relay.mimecast.com with ESMTP with STARTTLS
  (version=TLSv1.3, cipher=TLS_AES_256_GCM_SHA384) id
- us-mta-382-j4GNB4hhNGe3DSsk1XBJSg-1; Fri, 05 Dec 2025 15:08:04 -0500
-X-MC-Unique: j4GNB4hhNGe3DSsk1XBJSg-1
-X-Mimecast-MFC-AGG-ID: j4GNB4hhNGe3DSsk1XBJSg_1764965283
-Received: by mail-qv1-f71.google.com with SMTP id
- 6a1803df08f44-8823f71756dso33608466d6.3
- for <nouveau@lists.freedesktop.org>; Fri, 05 Dec 2025 12:08:04 -0800 (PST)
+ us-mta-213-UqFEn2R-MxaljvuE4QGLHg-1; Fri, 05 Dec 2025 15:12:27 -0500
+X-MC-Unique: UqFEn2R-MxaljvuE4QGLHg-1
+X-Mimecast-MFC-AGG-ID: UqFEn2R-MxaljvuE4QGLHg_1764965547
+Received: by mail-qv1-f70.google.com with SMTP id
+ 6a1803df08f44-8823a371984so48724636d6.1
+ for <nouveau@lists.freedesktop.org>; Fri, 05 Dec 2025 12:12:27 -0800 (PST)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1764965283; x=1765570083;
+ d=1e100.net; s=20230601; t=1764965547; x=1765570347;
  h=mime-version:user-agent:content-transfer-encoding:organization
  :references:in-reply-to:date:cc:to:from:subject:message-id:x-gm-gg
  :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=08eXbkJH9KNZBaHNyUOh5fV4bm9q4CUJHnCXd6KVPSU=;
- b=DjE5gc2gy2RjUSqiCWMAoao4U7s8INV5CI4MpD6o5md5oTnBQPhzXCZrFo6F2nCTE5
- s1wboHQFe56tO2m/1iUUb/f71FGiCJtPBlG6TUdDkkBw1xZg7A777Konr2ydFhwwMVKR
- upJK/6Tca1dPrFh+c/EmMY6pA/SagPuySGbAbmCTu5S9CpInNKV7gohAG2XVsEHI6n35
- qiukFV9uwiiyYrxtKA34hWuAsql3kZNcJ1dT3Z1HBGI5VWTHun262BEusXnwF/ORU5ke
- yPSHxXzZg3d5tXCCSgTlStPo5bU1uVqN8nU+a/Zac6McvAS9YfgjCu1WevwvwJv0g4iL
- FJVw==
+ bh=GNM2BEQmAQN22v8zKt4qJnXzm+diZv/C8TCpdB4Tcd8=;
+ b=M4zp7gQSG8wg0HhUr1klQD+cQsB2m1WaELsQLhX359zc3D7yabQOjw48XuCHJc835E
+ 1YVGUncZ0P4Arg9AP53CXANclwkF4yPlxaH7uzhYMPD5zwiMzuiOTkliFfKF/UUPdRe7
+ IO0DT88LNscRM8O13XdxBD4ZNkjaqkm/yGpXDNINt+kL+E+h7hxDV1nm/17KNbeh5B0y
+ zwvGZaGwcbNYQapFlKnFNMyn6pgLPbHGshj3Iyh+tSOW8YISaq960dPo2d7EhM1eZ5NI
+ SUQv/42WmSQWvH3Kor8yee0gF5PKjL0LJuB34fNAGHgnCY35JMvR4vipF5uzJU9H6X8i
+ y/hw==
 X-Forwarded-Encrypted: i=1;
- AJvYcCVnJA9vFh5dG+8YxFMwLrEgRux7ZPar6xPnwWI7lc03HWgqliKexAVjdHyIcSuNSFI2bUYMEqrm@lists.freedesktop.org
-X-Gm-Message-State: AOJu0YwwPlYqjG7CMXo+vOENpSpfCxoQZL2/ngbYOydyHxjR8StwToos
- wM2oCQvApfXqEmh7uE3eWq2J11W6f3mlf6N1pSNphZIaUo5DryEY9V6FFDggAVn8xkHH3LGOXxk
- TUKwOvAOrY2T/LncajXstt4iGrq3RG7OaaUCH9zo7QUvAOjvulYU1ElAKO3i8crKOsX4=
-X-Gm-Gg: ASbGnctl6W0jamIAkiuleGK2D2kVtJDNpCHxwwLAqF7rjRsXGF9GNtoU6OPVXQNdM37
- wtY8RTl/czEDV1dv/dGYsDFsXcfr/nOqbs5s/ZhUkHWUdi9oIiZ4x1BWxFBG2nG3yWE+Dvk1Xnr
- LYO1Brkbx5L5n3wKefTdjYzla4o2XsvV4C7FkQ1m/8KVGkYsxDWZzbWZnb6Iu9aHYzNOSIjFuJ6
- 2kdJTvoiY7dmttRGSuR0yLgvNikZeZ+ELt1/xHXEtu0xf/4Du7BKPJ8wqHQLsfz/ItoycfQVIo8
- /XVjF/ccc96uYU7Fe1mRIXPJdVTA6NI3EZdc/pXwVz9XOMAm5YAGaSmR8HUhVk+3lTBJjdi09h7
- KN2zRHHft43hOSuMAuOR7NLa/TW61zSO0YYTrREFHWEC6GmdhCruO9LY=
-X-Received: by 2002:a05:6214:e48:b0:880:4b29:d96f with SMTP id
- 6a1803df08f44-8883dbef940mr4355326d6.39.1764965283434; 
- Fri, 05 Dec 2025 12:08:03 -0800 (PST)
-X-Google-Smtp-Source: AGHT+IHAJvqsSGMlcemG+5UcZidDolljRUHm91FelsS27MAF+MKtfikZ0DLF9BnOIXMIjDCHdy4mNw==
-X-Received: by 2002:a05:6214:e48:b0:880:4b29:d96f with SMTP id
- 6a1803df08f44-8883dbef940mr4354876d6.39.1764965282946; 
- Fri, 05 Dec 2025 12:08:02 -0800 (PST)
+ AJvYcCWm8/f0EGF2cE0Z1gAceF7AxAlFoYhjQtbKCQV5XXh69OJD5oRd+YGMOAw61+ZfWtuH1Tarmsc1@lists.freedesktop.org
+X-Gm-Message-State: AOJu0Yx32I/MXsLbHTTajPYatiBtPM34uW/Bd+0LffnzM+J7yfbVC7Xs
+ H2UvkanNdoVlPrO9UDc218w2xfPQSTSQ9NWEvYJoh+1IjAGBXRqUJQkKzlMVn/quxZeMgw7hxfR
+ 8hpYDJ/b6+Ku+D80caMZRr7zXEWZJVupWObZ0uXcCnxPXQ7cJvn5SugmBwE+PJW6zeL0=
+X-Gm-Gg: ASbGncvdfUlctJqr3/dOkE6YxM6oXXIVxCAVlRt+OBCB9ga6/Qm9pW8+R5gy39E9Vr2
+ huMGIsFCPwbPvNk6iWnwBvFkUgxbDhAysaGO+gIYY6FsXrcHBhvvXMfunAVlrMVHj+YdIiYuSzF
+ GFpcTEPgacvM5cUrkY227lYcOGqMeADW+iUyMROuFE8FHYhIOp78rZl7LdtLR6ZB0njM0yg8rdJ
+ wGmd1vxci/5DXEe+6jJ5RCaipElDMiEO9GduMOkGpiBIvJOQzeZdku1wrt9/mFk0K4cH9NFR3n9
+ bSMnjc1SJhCKsDRcTX9t1C3XvRUY/NRWtadL7kodZ9yy14DW1kKT98PPDkfHaArOGtegRw3z3Vu
+ Mty7Q5ApQeym/t93Uj5410hztcYrwypEWvYsdwvsRtbTAkbjUeLJrLAw=
+X-Received: by 2002:a05:6214:4119:b0:880:4f33:4666 with SMTP id
+ 6a1803df08f44-8883dae5d00mr4119616d6.20.1764965546780; 
+ Fri, 05 Dec 2025 12:12:26 -0800 (PST)
+X-Google-Smtp-Source: AGHT+IGRwxiaUWh4ReR9v0J2Gfuxr+ukXQC4ygZWAbh8oKLAklX5Y3Vw5TAnnMQwmkslj2X9wxfnpQ==
+X-Received: by 2002:a05:6214:4119:b0:880:4f33:4666 with SMTP id
+ 6a1803df08f44-8883dae5d00mr4119316d6.20.1764965546412; 
+ Fri, 05 Dec 2025 12:12:26 -0800 (PST)
 Received: from [192.168.8.208] (pool-100-0-77-142.bstnma.fios.verizon.net.
  [100.0.77.142]) by smtp.gmail.com with ESMTPSA id
- 6a1803df08f44-88828800a62sm41266376d6.57.2025.12.05.12.08.02
+ 6a1803df08f44-88827f33d83sm40549776d6.3.2025.12.05.12.12.25
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 05 Dec 2025 12:08:02 -0800 (PST)
-Message-ID: <e4e60a307cf9e6cec0dce90eb0059ce7485b4060.camel@redhat.com>
-Subject: Re: [PATCH RESEND] drm/nouveau: fix circular dep oops from vendored
- i2c encoder
+ Fri, 05 Dec 2025 12:12:25 -0800 (PST)
+Message-ID: <eb44bd6d75630cb091f6b2c30d5ccc29fef62285.camel@redhat.com>
+Subject: Re: [PATCH] drm: nouveau: Replace sprintf() with sysfs_emit()
 From: Lyude Paul <lyude@redhat.com>
-To: =?ISO-8859-1?Q?Ren=E9?= Rebe <rene@exactco.de>, 
- dri-devel@lists.freedesktop.org, nouveau@lists.freedesktop.org, 
- linux-kernel@vger.kernel.org
-Cc: Dmitry Baryshkov <dmitry.baryshkov@linaro.org>, Danilo Krummrich
- <dakr@kernel.org>
-Date: Fri, 05 Dec 2025 15:08:01 -0500
-In-Reply-To: <20251202.164952.2216481867721531616.rene@exactco.de>
-References: <20251202.164952.2216481867721531616.rene@exactco.de>
+To: Madhur Kumar <madhurkumar004@gmail.com>, dakr@kernel.org
+Cc: maarten.lankhorst@linux.intel.com, mripard@kernel.org,
+ tzimmermann@suse.de, 	airlied@gmail.com, simona@ffwll.ch,
+ dri-devel@lists.freedesktop.org, 	linux-kernel@vger.kernel.org,
+ nouveau@lists.freedesktop.org
+Date: Fri, 05 Dec 2025 15:12:25 -0500
+In-Reply-To: <20251205091804.317801-1-madhurkumar004@gmail.com>
+References: <20251205091804.317801-1-madhurkumar004@gmail.com>
 Organization: Red Hat Inc.
 User-Agent: Evolution 3.58.2 (3.58.2-1.fc43)
 MIME-Version: 1.0
 X-Mimecast-Spam-Score: 0
-X-Mimecast-MFC-PROC-ID: QHi-rqQgdZhm-P_zCgWT68axe2OWGWoKAdPMgjVgGtc_1764965283
+X-Mimecast-MFC-PROC-ID: OInfWFJ7WFGB2QH9yCILCizhNOGnlH4UoYX2Tnc2a0A_1764965547
 X-Mimecast-Originator: redhat.com
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
@@ -104,217 +103,45 @@ List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-oh whoops - I don't think patchwork understood the r-b in the response I ju=
-st
-sent to you.
-
 Reviewed-by: Lyude Paul <lyude@redhat.com>
 
-hopefully that should fix it
+Will push in a moment
 
-On Tue, 2025-12-02 at 16:49 +0100, Ren=C3=A9 Rebe wrote:
-> Since a73583107af9 ("drm/nouveau: vendor in drm_encoder_slave API")
-> nouveau appears to be broken for all dispnv04 GPUs (before NV50).
-> Depending on the kernel version, either having no display output and
-> hanging in kernel for a long time, or even oopsing in the cleanup
-> path like:
+On Fri, 2025-12-05 at 14:48 +0530, Madhur Kumar wrote:
+> Replace sprintf() calls with sysfs_emit() to follow current kernel
+> coding standards.
 >=20
-> Hardware name: PowerMac11,2 PPC970MP 0x440101 PowerMac
-> ...
-> nouveau 0000:0a:00.0: drm: 0x14C5: Parsing digital output script table
-> BUG: Unable to handle kernel data access on read at 0x00041520
-> Faulting instruction address: 0xc0003d0001be0844
-> Oops: Kernel access of bad area, sig: 11 [#1]
-> BE PAGE_SIZE=3D4K MMU=3DHash=C2=A0 SMP NR_CPUS=3D8 NUMA PowerMac
-> Modules linked in: windfarm_cpufreq_clamp windfarm_smu_sensors windfarm_s=
-mu_controls windfarm_pm112 snd_aoa_codec_onyx snd_aoa_fabric_layout snd_aoa=
- windfarm_pid jo
-> =C2=A0apple_mfi_fastcharge rndis_host cdc_ether usbnet mii snd_aoa_i2sbus=
- snd_aoa_soundbus snd_pcm snd_timer snd soundcore rack_meter windfarm_smu_s=
-at windfarm_max6690_s
-> m75_sensor windfarm_core gpu_sched drm_gpuvm drm_exec drm_client_lib drm_=
-ttm_helper ttm drm_display_helper drm_kms_helper drm drm_panel_orientation_=
-quirks syscopyar
-> _sys_fops i2c_algo_bit backlight uio_pdrv_genirq uio uninorth_agp agpgart=
- zram dm_mod dax ipv6 nfsv4 dns_resolver nfs lockd grace sunrpc offb cfbfil=
-lrect cfbimgblt
-> ont input_leds sr_mod cdrom sd_mod uas ata_generic hid_apple hid_generic =
-usbhid hid usb_storage pata_macio sata_svw libata firewire_ohci scsi_mod fi=
-rewire_core ohci
-> ehci_pci ehci_hcd tg3 ohci_hcd libphy usbcore usb_common nls_base
-> =C2=A0led_class
-> CPU: 0 UID: 0 PID: 245 Comm: (udev-worker) Not tainted 6.14.0-09584-g7d06=
-015d936c #7 PREEMPTLAZY
-> Hardware name: PowerMac11,2 PPC970MP 0x440101 PowerMac
-> NIP:=C2=A0 c0003d0001be0844 LR: c0003d0001be0830 CTR: 0000000000000000
-> REGS: c0000000053f70e0 TRAP: 0300=C2=A0=C2=A0 Not tainted=C2=A0 (6.14.0-0=
-9584-g7d06015d936c)
-> MSR:=C2=A0 9000000000009032 <SF,HV,EE,ME,IR,DR,RI>=C2=A0 CR: 24222220=C2=
-=A0 XER: 00000000
-> DAR: 0000000000041520 DSISR: 40000000 IRQMASK: 0 \x0aGPR00: c0003d0001be0=
-830 c0000000053f7380 c0003d0000911900 c000000007bc6800 \x0aGPR04: 000000000=
-0000000 0000000000000000 c000000007bc6e70 0000000000000001 \x0aGPR08: 01f30=
-40000000000 0000000000041520 0000000000000000 c0003d0000813958 \x0aGPR12: c=
-000000000071a48 c000000000e28000 0000000000000020 0000000000000000 \x0aGPR1=
-6: 0000000000000000 0000000000f52630 0000000000000000 0000000000000000 \x0a=
-GPR20: 0000000000000000 0000000000000000 0000000000000001 c0003d0000928528 =
-\x0aGPR24: c0003d0000928598 0000000000000000 c000000007025480 c000000007025=
-480 \x0aGPR28: c0000000010b4000 0000000000000000 c000000007bc1800 c00000000=
-7bc6800
-> NIP [c0003d0001be0844] nv_crtc_destroy+0x44/0xd4 [nouveau]
-> LR [c0003d0001be0830] nv_crtc_destroy+0x30/0xd4 [nouveau]
-> Call Trace:
-> [c0000000053f7380] [c0003d0001be0830] nv_crtc_destroy+0x30/0xd4 [nouveau]=
- (unreliable)
-> [c0000000053f73c0] [c0003d00007f7bf4] drm_mode_config_cleanup+0x27c/0x30c=
- [drm]
-> [c0000000053f7490] [c0003d0001bdea50] nouveau_display_create+0x1cc/0x550 =
-[nouveau]
-> [c0000000053f7500] [c0003d0001bcc29c] nouveau_drm_device_init+0x1c8/0x844=
- [nouveau]
-> [c0000000053f75e0] [c0003d0001bcc9ec] nouveau_drm_probe+0xd4/0x1e0 [nouve=
-au]
-> [c0000000053f7670] [c000000000557d24] local_pci_probe+0x50/0xa8
-> [c0000000053f76f0] [c000000000557fa8] pci_device_probe+0x22c/0x240
-> [c0000000053f7760] [c0000000005fff3c] really_probe+0x188/0x31c
-> [c0000000053f77e0] [c000000000600204] __driver_probe_device+0x134/0x13c
-> [c0000000053f7860] [c0000000006002c0] driver_probe_device+0x3c/0xb4
-> [c0000000053f78a0] [c000000000600534] __driver_attach+0x118/0x128
-> [c0000000053f78e0] [c0000000005fe038] bus_for_each_dev+0xa8/0xf4
-> [c0000000053f7950] [c0000000005ff460] driver_attach+0x2c/0x40
-> [c0000000053f7970] [c0000000005fea68] bus_add_driver+0x130/0x278
-> [c0000000053f7a00] [c00000000060117c] driver_register+0x9c/0x1a0
-> [c0000000053f7a80] [c00000000055623c] __pci_register_driver+0x5c/0x70
-> [c0000000053f7aa0] [c0003d0001c058a0] nouveau_drm_init+0x254/0x278 [nouve=
-au]
-> [c0000000053f7b10] [c00000000000e9bc] do_one_initcall+0x84/0x268
-> [c0000000053f7bf0] [c0000000001a0ba0] do_init_module+0x70/0x2d8
-> [c0000000053f7c70] [c0000000001a42bc] init_module_from_file+0xb4/0x108
-> [c0000000053f7d50] [c0000000001a4504] sys_finit_module+0x1ac/0x478
-> [c0000000053f7e10] [c000000000023230] system_call_exception+0x1a4/0x20c
-> [c0000000053f7e50] [c00000000000c554] system_call_common+0xf4/0x258
-> =C2=A0--- interrupt: c00 at 0xfd5f988
-> NIP:=C2=A0 000000000fd5f988 LR: 000000000ff9b148 CTR: 0000000000000000
-> REGS: c0000000053f7e80 TRAP: 0c00=C2=A0=C2=A0 Not tainted=C2=A0 (6.14.0-0=
-9584-g7d06015d936c)
-> MSR:=C2=A0 100000000000d032 <HV,EE,PR,ME,IR,DR,RI>=C2=A0 CR: 28222244=C2=
-=A0 XER: 00000000
-> IRQMASK: 0 \x0aGPR00: 0000000000000161 00000000ffcdc2d0 00000000405db160 =
-0000000000000020 \x0aGPR04: 000000000ffa2c9c 0000000000000000 0000000000000=
-01f 0000000000000045 \x0aGPR08: 0000000011a13770 0000000000000000 000000000=
-0000000 0000000000000000 \x0aGPR12: 0000000000000000 0000000010249d8c 00000=
-00000000020 0000000000000000 \x0aGPR16: 0000000000000000 0000000000f52630 0=
-000000000000000 0000000000000000 \x0aGPR20: 0000000000000000 00000000000000=
-00 0000000000000000 0000000011a11a70 \x0aGPR24: 0000000011a13580 0000000011=
-a11950 0000000011a11a70 0000000000020000 \x0aGPR28: 000000000ffa2c9c 000000=
-0000000000 000000000ffafc40 0000000011a11a70
-> NIP [000000000fd5f988] 0xfd5f988
-> LR [000000000ff9b148] 0xff9b148
-> =C2=A0--- interrupt: c00
-> Code: f821ffc1 418200ac e93f0000 e9290038 e9291468 eba90000 48026c0d e841=
-0018 e93f06aa 3d290001 392982a4 79291f24 <7fdd482a> 2c3e0000 41820030 7fc3f=
-378
-> =C2=A0---[ end trace 0000000000000000 ]---
+> sysfs_emit() is the preferred method for formatting sysfs output as it
+> provides better bounds checking and is more secure.
 >=20
-> This is caused by the i2c encoder modules vendored into nouveau/ now
-> depending on the equally vendored nouveau_i2c_encoder_destroy
-> function. Trying to auto-load this modules hangs on nouveau
-> initialization until timeout, and nouveau continues without i2c video
-> encoders.
->=20
-> Fix by avoiding nouveau dependency by __always_inlining that helper
-> functions into those i2c video encoder modules.
->=20
-> Fixes: a73583107af9 ("drm/nouveau: vendor in drm_encoder_slave API")
-> Signed-off-by: Ren=C3=A9 Rebe <rene@exactco.de>
+> Signed-off-by: Madhur Kumar <madhurkumar004@gmail.com>
 > ---
-> Tested on NV43 [GeForce 6600], PPC64 PowerMac11,2 runing T2/Linux=20
-> ---
-> =C2=A0.../nouveau/dispnv04/nouveau_i2c_encoder.c=C2=A0=C2=A0=C2=A0 | 20 -=
-------------------
-> =C2=A0.../include/dispnv04/i2c/encoder_i2c.h=C2=A0=C2=A0=C2=A0=C2=A0=C2=
-=A0=C2=A0=C2=A0 | 19 +++++++++++++++++-
-> =C2=A02 files changed, 18 insertions(+), 21 deletions(-)
+>  drivers/gpu/drm/nouveau/nouveau_hwmon.c | 4 ++--
+>  1 file changed, 2 insertions(+), 2 deletions(-)
 >=20
-> diff --git a/drivers/gpu/drm/nouveau/dispnv04/nouveau_i2c_encoder.c b/dri=
-vers/gpu/drm/nouveau/dispnv04/nouveau_i2c_encoder.c
-> index e2bf99c43336..a60209097a20 100644
-> --- a/drivers/gpu/drm/nouveau/dispnv04/nouveau_i2c_encoder.c
-> +++ b/drivers/gpu/drm/nouveau/dispnv04/nouveau_i2c_encoder.c
-> @@ -94,26 +94,6 @@ int nouveau_i2c_encoder_init(struct drm_device *dev,
-> =C2=A0=09return err;
-> =C2=A0}
-> =C2=A0
-> -/**
-> - * nouveau_i2c_encoder_destroy - Unregister the I2C device backing an en=
-coder
-> - * @drm_encoder:=09Encoder to be unregistered.
-> - *
-> - * This should be called from the @destroy method of an I2C slave
-> - * encoder driver once I2C access is no longer needed.
-> - */
-> -void nouveau_i2c_encoder_destroy(struct drm_encoder *drm_encoder)
-> -{
-> -=09struct nouveau_i2c_encoder *encoder =3D to_encoder_i2c(drm_encoder);
-> -=09struct i2c_client *client =3D nouveau_i2c_encoder_get_client(drm_enco=
-der);
-> -=09struct module *module =3D client->dev.driver->owner;
-> -
-> -=09i2c_unregister_device(client);
-> -=09encoder->i2c_client =3D NULL;
-> -
-> -=09module_put(module);
-> -}
-> -EXPORT_SYMBOL(nouveau_i2c_encoder_destroy);
-> -
-> =C2=A0/*
-> =C2=A0 * Wrapper fxns which can be plugged in to drm_encoder_helper_funcs=
-:
-> =C2=A0 */
-> diff --git a/drivers/gpu/drm/nouveau/include/dispnv04/i2c/encoder_i2c.h b=
-/drivers/gpu/drm/nouveau/include/dispnv04/i2c/encoder_i2c.h
-> index 31334aa90781..869820701a56 100644
-> --- a/drivers/gpu/drm/nouveau/include/dispnv04/i2c/encoder_i2c.h
-> +++ b/drivers/gpu/drm/nouveau/include/dispnv04/i2c/encoder_i2c.h
-> @@ -202,7 +202,24 @@ static inline struct i2c_client *nouveau_i2c_encoder=
-_get_client(struct drm_encod
-> =C2=A0=09return to_encoder_i2c(encoder)->i2c_client;
-> =C2=A0}
-> =C2=A0
-> -void nouveau_i2c_encoder_destroy(struct drm_encoder *encoder);
-> +/**
-> + * nouveau_i2c_encoder_destroy - Unregister the I2C device backing an en=
-coder
-> + * @drm_encoder:=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 Encoder to be=
- unregistered.
-> + *
-> + * This should be called from the @destroy method of an I2C slave
-> + * encoder driver once I2C access is no longer needed.
-> + */
-> +static __always_inline void nouveau_i2c_encoder_destroy(struct drm_encod=
-er *drm_encoder)
-> +{
-> +=09struct nouveau_i2c_encoder *encoder =3D to_encoder_i2c(drm_encoder);
-> +=09struct i2c_client *client =3D nouveau_i2c_encoder_get_client(drm_enco=
-der);
-> +=09struct module *module =3D client->dev.driver->owner;
-> +
-> +=09i2c_unregister_device(client);
-> +=09encoder->i2c_client =3D NULL;
-> +
-> +=09module_put(module);
-> +}
-> =C2=A0
-> =C2=A0/*
-> =C2=A0 * Wrapper fxns which can be plugged in to drm_encoder_helper_funcs=
-:
-> --=20
-> 2.46.0
->=20
-> --=20
-> Ren=C3=A9 Rebe, ExactCODE GmbH, Berlin, Germany
-> https://exactco.de=C2=A0=E2=80=A2 https://t2linux.com=C2=A0=E2=80=A2 http=
-s://patreon.com/renerebe
+> diff --git a/drivers/gpu/drm/nouveau/nouveau_hwmon.c b/drivers/gpu/drm/no=
+uveau/nouveau_hwmon.c
+> index 5c07a9ee8b77..34effe6d86ad 100644
+> --- a/drivers/gpu/drm/nouveau/nouveau_hwmon.c
+> +++ b/drivers/gpu/drm/nouveau/nouveau_hwmon.c
+> @@ -125,7 +125,7 @@ nouveau_hwmon_get_pwm1_max(struct device *d,
+>  =09if (ret < 0)
+>  =09=09return ret;
+> =20
+> -=09return sprintf(buf, "%i\n", ret);
+> +=09return sysfs_emit(buf, "%i\n", ret);
+>  }
+> =20
+>  static ssize_t
+> @@ -141,7 +141,7 @@ nouveau_hwmon_get_pwm1_min(struct device *d,
+>  =09if (ret < 0)
+>  =09=09return ret;
+> =20
+> -=09return sprintf(buf, "%i\n", ret);
+> +=09return sysfs_emit(buf, "%i\n", ret);
+>  }
+> =20
+>  static ssize_t
 
 --=20
 Cheers,
