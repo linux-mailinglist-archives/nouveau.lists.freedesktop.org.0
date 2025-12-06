@@ -2,128 +2,137 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id 0B83BCAA32A
-	for <lists+nouveau@lfdr.de>; Sat, 06 Dec 2025 10:09:49 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 3053CCAA64E
+	for <lists+nouveau@lfdr.de>; Sat, 06 Dec 2025 13:42:31 +0100 (CET)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 9A03010E2AA;
-	Sat,  6 Dec 2025 09:09:36 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 06F8D10E0A0;
+	Sat,  6 Dec 2025 12:42:28 +0000 (UTC)
 Authentication-Results: gabe.freedesktop.org;
-	dkim=pass (2048-bit key; secure) header.d=gmx.de header.i=efault@gmx.de header.b="nBPtTMt1";
+	dkim=pass (2048-bit key; unprotected) header.d=Nvidia.com header.i=@Nvidia.com header.b="XFS2P6FN";
 	dkim-atps=neutral
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-X-Greylist: delayed 323 seconds by postgrey-1.36 at gabe;
- Sat, 06 Dec 2025 09:09:35 UTC
-Received: from mout.gmx.net (mout.gmx.net [212.227.15.19])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 5356410E2C9
- for <nouveau@lists.freedesktop.org>; Sat,  6 Dec 2025 09:09:35 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmx.de;
- s=s31663417; t=1765012171; x=1765616971; i=efault@gmx.de;
- bh=1frAXqR7H+A6suX3VXpHFW5Zd5fw2S+O38mIhVqR9OE=;
- h=X-UI-Sender-Class:Message-ID:Subject:From:To:Cc:Date:
- Content-Type:Content-Transfer-Encoding:MIME-Version:cc:
- content-transfer-encoding:content-type:date:from:message-id:
- mime-version:reply-to:subject:to;
- b=nBPtTMt1Xz32CZKd4tPIg2H3ZwGPQ5D+ofSWHf0rQTwlntmPu2RMxuILELULNCVl
- o0Pxtphvd5XMY3hytzwxC/kJP0djLISJI6f3d1/bbVg0S2DPmyL5pbz51DD+nNeG1
- QZMTCfZxDEbiYn1uusdi6e9NOF4zObdcMM9Qw8PF/S/Vc4KoXKIz+AUCYHxOCCr00
- CcPGvG7HUw8hMg0FKktErySOVC3SrW3M20bCpxPr5rUD8ICisXqiwQ5NeFJSeuVls
- Yu3VldrkLJ/CA76lvbwsYUN5xALkNh/FkjROtG20AIZqSJoskJAq2XfuNWG6XJ6fN
- ctn21WHeH3sLR1jh4w==
-X-UI-Sender-Class: 724b4f7f-cbec-4199-ad4e-598c01a50d3a
-Received: from homer.fritz.box ([185.146.50.108]) by mail.gmx.net (mrgmx004
- [212.227.17.190]) with ESMTPSA (Nemesis) id 1MEUzA-1vGDdc2EXK-006NTM; Sat, 06
- Dec 2025 10:04:06 +0100
-Message-ID: <1515cc8a9fcb4abbf86c88ce99ff8900ec19f499.camel@gmx.de>
-Subject: nouveau: endless drm_WARN_ON(state->checked) spew beginning at 6.19
- merge window
-From: Mike Galbraith <efault@gmx.de>
-To: lkml <linux-kernel@vger.kernel.org>
-Cc: Lyude Paul <lyude@redhat.com>, Danilo Krummrich <dakr@kernel.org>,
- nouveau	 <nouveau@lists.freedesktop.org>
-Date: Sat, 06 Dec 2025 10:04:05 +0100
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-User-Agent: Evolution 3.56.2 
+Received: from BN1PR04CU002.outbound.protection.outlook.com
+ (mail-eastus2azon11010022.outbound.protection.outlook.com [52.101.56.22])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 0E28D10E2CD
+ for <nouveau@lists.freedesktop.org>; Sat,  6 Dec 2025 12:42:27 +0000 (UTC)
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=XAIyMu072RKoG0MLD3UIknviKCBeki1It8bV4Fzubvb7NUyQGlOdsGdbzrbTgeep8F9Jilthz2mpyxZMjI2Sle3y0y2td6XVG8uOS4Itg6JuUTdgA5EkrR/lL4K2BUb6mZHDy8/i2KPYzvTmZzYoqxDq8gDo/oZ9wPP6RwRDEl7zNXvjTH2th18k31guZgKzH2bemO1b6UBMBTPwRqnajiWikhp9GCswmruERyI8+7W647nDj2UyW96lYhhY1MLfYTJFBaEGLqwwDVaRBwhPVkj+FT2jj9ye/OYaJ3ZDe+1ry3Cpb7sWQoF6Ar0RD0oE0k3u/8UwsvN9bZXcUIUc4g==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=8WrgadsETTOF2eZX3HMMjobUFVUF4mJ/pc7Mx1O9j68=;
+ b=jIXv0bAXAklYoYQGZHaGvIsuApxuMI21OgT48X2Of8N8fvi4V8Kl9Wh30b6bQuEx1Qc/ZxiIC5CpZLOetxFXE1CssP1ib8jLgVOk87H4y1/5NMtgVOuolB18fIx6ankCMeE7G0Dazp3dSYrjWKEiKaOHuIOHK6jesKQ0tuZattcKz2uaOr/HmU1Nb/gn6oXLxQ1/lWyPxHVvOEu9HS+Cu8cU62WZJcRkYNAG9S33q1MX6xHJ9OJlHMAx1E0FysmsS6GPBXwewFhqgDj9wpsHlcxvFuNJA/nCKQ0iYtGlzxspshczyUrX1kAnf8ElG5xGAnSyriZ3x/ly8qouFlO4cQ==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
+ 216.228.118.233) smtp.rcpttodomain=vger.kernel.org smtp.mailfrom=nvidia.com;
+ dmarc=pass (p=reject sp=reject pct=100) action=none header.from=nvidia.com;
+ dkim=none (message not signed); arc=none (0)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=Nvidia.com;
+ s=selector2;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=8WrgadsETTOF2eZX3HMMjobUFVUF4mJ/pc7Mx1O9j68=;
+ b=XFS2P6FNYSIf6+kJSC2KrXzLqo6qaHWkBVneblB8x8s1CbP3qt5+AXll6EXDk0j/xjwqW5r1WUy5R3UcM9ecXZ7fMBNlQGoqWSS9EzZVdGXdy5S5NRCAurnvmTnygKjfPRmY1dq1JHaKTNM131cI3U4ZvuvLzdbqLRrB/QC42QVBchSfT/2shTZLJyGyqKtAjQUq35QVAZr2ZV+szYRvW5nLr4TDgD6g29cYZ9Kxu7l6vVaJtcmxMgVGs+ygcW9aSYo8H75EbqERqXWVCpAPR/Z1JLywRXAJznwL7t53/GdgngMnoB4yr9GgRDXCJslSOIp8TLXLVgX6KOQfu35tKw==
+Received: from CH2PR07CA0046.namprd07.prod.outlook.com (2603:10b6:610:5b::20)
+ by PH7PR12MB7164.namprd12.prod.outlook.com (2603:10b6:510:203::13)
+ with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9320.18; Sat, 6 Dec
+ 2025 12:42:19 +0000
+Received: from CH1PEPF0000AD7F.namprd04.prod.outlook.com
+ (2603:10b6:610:5b:cafe::11) by CH2PR07CA0046.outlook.office365.com
+ (2603:10b6:610:5b::20) with Microsoft SMTP Server (version=TLS1_3,
+ cipher=TLS_AES_256_GCM_SHA384) id 15.20.9388.9 via Frontend Transport; Sat, 6
+ Dec 2025 12:42:09 +0000
+X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 216.228.118.233)
+ smtp.mailfrom=nvidia.com;
+ dkim=none (message not signed)
+ header.d=none;dmarc=pass action=none header.from=nvidia.com;
+Received-SPF: Pass (protection.outlook.com: domain of nvidia.com designates
+ 216.228.118.233 as permitted sender) receiver=protection.outlook.com;
+ client-ip=216.228.118.233; helo=mail.nvidia.com; pr=C
+Received: from mail.nvidia.com (216.228.118.233) by
+ CH1PEPF0000AD7F.mail.protection.outlook.com (10.167.244.88) with Microsoft
+ SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ 15.20.9412.4 via Frontend Transport; Sat, 6 Dec 2025 12:42:18 +0000
+Received: from drhqmail201.nvidia.com (10.126.190.180) by mail.nvidia.com
+ (10.127.129.6) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.20; Sat, 6 Dec
+ 2025 04:42:11 -0800
+Received: from drhqmail201.nvidia.com (10.126.190.180) by
+ drhqmail201.nvidia.com (10.126.190.180) with Microsoft SMTP Server
+ (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ 15.2.2562.20; Sat, 6 Dec 2025 04:42:11 -0800
+Received: from ipp2-0489.nvidia.com (10.127.8.12) by mail.nvidia.com
+ (10.126.190.180) with Microsoft SMTP Server id 15.2.2562.20 via Frontend
+ Transport; Sat, 6 Dec 2025 04:42:11 -0800
+From: Zhi Wang <zhiw@nvidia.com>
+To: <rust-for-linux@vger.kernel.org>, <linux-pci@vger.kernel.org>,
+ <nouveau@lists.freedesktop.org>, <linux-kernel@vger.kernel.org>
+CC: <airlied@gmail.com>, <dakr@kernel.org>, <aliceryhl@google.com>,
+ <bhelgaas@google.com>, <kwilczynski@kernel.org>, <ojeda@kernel.org>,
+ <alex.gaynor@gmail.com>, <boqun.feng@gmail.com>, <gary@garyguo.net>,
+ <bjorn3_gh@protonmail.com>, <lossin@kernel.org>, <a.hindborg@kernel.org>,
+ <tmgross@umich.edu>, <markus.probst@posteo.de>, <helgaas@kernel.org>,
+ <cjia@nvidia.com>, <alex@shazbot.org>, <smitra@nvidia.com>,
+ <ankita@nvidia.com>, <aniketa@nvidia.com>, <kwankhede@nvidia.com>,
+ <targupta@nvidia.com>, <acourbot@nvidia.com>, <joelagnelf@nvidia.com>,
+ <jhubbard@nvidia.com>, <zhiwang@kernel.org>, Zhi Wang <zhiw@nvidia.com>
+Subject: [RFC 0/7] gpu: nova-core: Enable booting GSP with vGPU enabled
+Date: Sat, 6 Dec 2025 12:42:01 +0000
+Message-ID: <20251206124208.305963-1-zhiw@nvidia.com>
+X-Mailer: git-send-email 2.51.0
 MIME-Version: 1.0
-X-Provags-ID: V03:K1:3qTM15n0Uu3+A0/CPq1uwvD1xpBFRD2uea6U5cuscRIkkyXvyUr
- jSTyX7fizEFIim/Zr2+NEeCoLXzDWpOTwenbpBf1LCLFWyoy+BKZuFJ/09MnxgQ+SZTG27O
- 9vj3oMB+TqAvP+ujaaxvD3Z9+D88dU/+5w07lvH37koaVqkMcz1kvS3R7mBvBFl4nlFFGJD
- PIpQxTmIrsEiH7A+f6yYQ==
-X-Spam-Flag: NO
-UI-OutboundReport: notjunk:1;M01:P0:V5GZF+iYf5c=;bV5rxdFvU6LA+AJq5KPeG7o/JK3
- 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
- QXs2W4N1Xxl1YfHSPNE/WxGG9jnYko3xM6cF9x
+Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
+X-NV-OnPremToCloud: ExternallySecured
+X-EOPAttributedMessage: 0
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: CH1PEPF0000AD7F:EE_|PH7PR12MB7164:EE_
+X-MS-Office365-Filtering-Correlation-Id: 3f309ce5-5500-4405-9159-08de34c4e4d6
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: BCL:0;
+ ARA:13230040|36860700013|1800799024|82310400026|376014|7416014|13003099007; 
+X-Microsoft-Antispam-Message-Info: =?us-ascii?Q?P+4RDPeYb2H1hkhLNqQHovyN8Mk/bri4iKxFXiYw6POY+NSbgJzX98mCHnRZ?=
+ =?us-ascii?Q?ABWZFeEEEmFV4klbYYjAOmsphHGja6oqWztmpq+9X9IcjOOhS+agLEd3bBez?=
+ =?us-ascii?Q?RtBhasRNU7oQ1W4dO6oArmFrBSaAmYaPIzxGWYWtL4WiZu2hbxjg3V6tT8Jk?=
+ =?us-ascii?Q?kUYcWM6eZnfRFPqCNK7KoJ0XQ2t+ftQ2zS4sblHzAxZzyq8vlFZKoDjKssQ/?=
+ =?us-ascii?Q?XEzR1EGlui8Qvn+pcgl/SfAm6xrOpIMHwa71Ln0k2dbL6NuVEl/ycxSCkNJK?=
+ =?us-ascii?Q?RRjP6J19lW41zh9zVzpBpBD8vNBnum0gLFdmTgygy5imTIy+KBgXz3Fp4dPp?=
+ =?us-ascii?Q?/DblKSU7ptMhwGvwkgmlzcO7f5ly4GN2G3fxHwJLl2uaLJlZeb9KeUIb2OBy?=
+ =?us-ascii?Q?nb+V4wF7WUG93xMlHykdjNYt2gnfMM5eHOZOAu98QBkCJjOfT37ev34Lppsx?=
+ =?us-ascii?Q?4jAY0oPnKOCvDMdu1ozOqqtBktrQ7cVG0R3onkEJRSJ9hv8A0g2Zpw96ZvdN?=
+ =?us-ascii?Q?GXUf59cIObxFPF68Tl5CM2KSc6a1dwb+zLrtyoYfainiq6b0b7uS6/wEPMQa?=
+ =?us-ascii?Q?XAA0UlFZKaqN8C4x5VZB2Q60l/fu9OvsSD768uo6CXirDKA7NIVY90uMaBhR?=
+ =?us-ascii?Q?SHij5fcQlsGrIXbkc36k4LHpkcvnnsnyq1qKC6QW/za2O33nC5Pc0Zt+s7q6?=
+ =?us-ascii?Q?+ZDzJ9xKzh75t7DHZb2qsJ/UQNfS1+gUULuIAaL64K0YnvFbmbnc2FBn/2dD?=
+ =?us-ascii?Q?UCKVt1+b6M6agv/tBtiIOovUC/NKZWCHTabRkWwq0KNZcu3tt6Fz0OSO9ATS?=
+ =?us-ascii?Q?na3YveitJuiIvAK4MQDdr6WL/wKY+kgPNDFxT3pWYz/UkXuJDo3ojNlCOVpZ?=
+ =?us-ascii?Q?1cq+qOD8MdH8SJFXT1YUF1G2ePFPBsaRFn+inSI31ludrHBYRmEzXBaXUVp/?=
+ =?us-ascii?Q?9AY3ibR7IgjiPairV5GNV9sK6D02lsCmuQZHnO4sH7dTA7O2U1qlBVANmaTo?=
+ =?us-ascii?Q?SpwQV49ZFTxzot/V8VN5gf6ryGe34sZwC5yV7vJZo4vy0l89WcqmAFGQeWee?=
+ =?us-ascii?Q?xGgPc7D2AC+4H0Z8pElNUjIKZBQDZzNMEIqS67zf2sbRig4BemE9W/fItKIj?=
+ =?us-ascii?Q?QPTuuCDRUTkt9Tf99d6SnYzJNnrcH1AmM3MoCa7k0N4hmEdCpYOuQ3pPRorw?=
+ =?us-ascii?Q?7DN7IuLb3jl9QLXmqoJjqlbyW2ZUIL7xNfF5ZYyRP36k/oeeGofo7GQV6apT?=
+ =?us-ascii?Q?cm0gQ4Q0OxoOxX6CqMDJ91Fv5X8iHpRbN037+zsKi7ktEbZVNCLQMivGK7IZ?=
+ =?us-ascii?Q?R0ooVGC4PoQecwBZglW8teoutzvsbDMx1RwfikXHrFRv9XGerHkAs51+9qfw?=
+ =?us-ascii?Q?knVf6c00nWKmSLKSyg132yO+Q4eTPcTAQBiEbczsEIpifk+EZTsfxHLv/ChW?=
+ =?us-ascii?Q?A47U1uu21HMj934+KEme4PlJb0OrrSCgc6JTCPcTNA34uM8D/TB+BaCv87v4?=
+ =?us-ascii?Q?fhN/O7ch4IEaZidK1sGF8nlLOiQAe6sExaeMKhRRQ3Uz41oBFR16KUDWUFIi?=
+ =?us-ascii?Q?e0Zu/nRXGtaQRm5CW83CAJeAbbCzILAA/+e3N3jM?=
+X-Forefront-Antispam-Report: CIP:216.228.118.233; CTRY:US; LANG:en; SCL:1; SRV:;
+ IPV:NLI; SFV:NSPM; H:mail.nvidia.com; PTR:dc7edge2.nvidia.com; CAT:NONE;
+ SFS:(13230040)(36860700013)(1800799024)(82310400026)(376014)(7416014)(13003099007);
+ DIR:OUT; SFP:1101; 
+X-OriginatorOrg: Nvidia.com
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 06 Dec 2025 12:42:18.9312 (UTC)
+X-MS-Exchange-CrossTenant-Network-Message-Id: 3f309ce5-5500-4405-9159-08de34c4e4d6
+X-MS-Exchange-CrossTenant-Id: 43083d15-7273-40c1-b7db-39efd9ccc17a
+X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=43083d15-7273-40c1-b7db-39efd9ccc17a; Ip=[216.228.118.233];
+ Helo=[mail.nvidia.com]
+X-MS-Exchange-CrossTenant-AuthSource: CH1PEPF0000AD7F.namprd04.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Anonymous
+X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: PH7PR12MB7164
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -138,92 +147,47 @@ List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-Greetings,
+The GSP boot support [1][2] has now been fully merged into drm-rust-next,
+which puts us in a good position to start discussing the requirements for
+bringing up GSP with vGPU enabled.
 
-GM204 equipped box began spewing the below endlessly, reproducer is..
-boot box.
+Booting up GSP with vGPU enabled is a key short-term milestone for upstream
+vGPU support, allowing us to validate the basic GSP boot flow with vGPU
+enabled even before the remaining nova-core dependencies are ready.
 
-[   44.953586] nouveau 0000:01:00.0: [drm] drm_WARN_ON(state->checked)
-[   44.953588] WARNING: drivers/gpu/drm/drm_atomic.c:373 at 0x0, CPU#3: kwi=
-n_wayland/2217
-[   44.953592] Modules linked in: af_packet nft_fib_inet nft_fib_ipv4 nft_f=
-ib_ipv6 nft_fib nft_reject_inet nf_reject_ipv4 nf_reject_ipv6 nft_reject nf=
-t_ct nft_chain_nat nf_nat nf_conntrack nf_defrag_ipv6 nf_defrag_ipv4 bridge=
- stp llc iscsi_ibft iscsi_boot_sysfs rfkill nf_tables binfmt_misc nls_iso88=
-59_1 nls_cp437 usblp joydev snd_hda_codec_alc882 snd_hda_codec_realtek_lib =
-snd_hda_codec_generic snd_hda_codec_hdmi intel_rapl_msr intel_rapl_common x=
-86_pkg_temp_thermal snd_hda_intel intel_powerclamp snd_intel_dspcfg coretem=
-p snd_hda_codec kvm_intel r8169 snd_hwdep snd_hda_core iTCO_wdt realtek int=
-el_pmc_bxt at24 regmap_i2c iTCO_vendor_support mdio_devres mei_hdcp snd_pcm=
- libphy snd_timer kvm snd i2c_i801 lpc_ich mei_me irqbypass pcspkr i2c_smbu=
-s mdio_bus soundcore mei mfd_core thermal fan intel_smartconnect uas usb_st=
-orage nfsd auth_rpcgss nfs_acl lockd grace sch_fq_codel sunrpc fuse dm_mod =
-configfs nfnetlink dmi_sysfs nouveau hid_generic usbhid drm_ttm_helper ttm =
-drm_client_lib gpu_sched i2c_algo_bit drm_gpuvm drm_exec
-[   44.953639]  drm_display_helper drm_kms_helper xhci_pci drm ehci_pci xhc=
-i_hcd ehci_hcd ahci video libahci ghash_clmulni_intel usbcore wmi libata bu=
-tton usb_common sd_mod scsi_dh_emc scsi_dh_rdac scsi_dh_alua sg scsi_mod sc=
-si_common vfat fat ext4 crc16 mbcache jbd2 loop msr efivarfs autofs4 aesni_=
-intel gf128mul
-[   44.953659] CPU: 3 UID: 1000 PID: 2217 Comm: kwin_wayland Kdump: loaded =
-Tainted: G        W           6.18.0.g3af870ae-master #4 PREEMPT(lazy)=20
-[   44.953662] Tainted: [W]=3DWARN
-[   44.953663] Hardware name: MEDION MS-7848/MS-7848, BIOS M7848W08.20C 09/=
-23/2013
-[   44.953665] RIP: 0010:drm_atomic_get_crtc_state+0x152/0x170 [drm]
-[   44.953698] Code: 04 48 8b 7f 08 4c 8b 6f 50 4d 85 ed 75 03 4c 8b 2f e8 =
-22 ff 37 e1 48 89 c6 48 8d 3d 18 5b 17 00 48 c7 c1 50 91 71 a0 4c 89 ea <67=
-> 48 0f b9 3a 8b 95 90 00 00 00 e9 d6 fe ff ff 48 c7 c0 f4 ff ff
-[   44.953700] RSP: 0018:ffff888140797ad8 EFLAGS: 00010282
-[   44.953703] RAX: ffffffffa0ae90f1 RBX: ffff888238fbea80 RCX: ffffffffa07=
-19150
-[   44.953704] RDX: ffff888100e4d740 RSI: ffffffffa0ae90f1 RDI: ffffffffa06=
-cd040
-[   44.953705] RBP: ffff888100d07010 R08: 00000000000000c0 R09: 00000000000=
-00000
-[   44.953706] R10: ffff888140797b00 R11: 0000000001000000 R12: 00000000000=
-00000
-[   44.953708] R13: ffff888100e4d740 R14: ffff8881093d1038 R15: ffff888238f=
-bea80
-[   44.953709] FS:  00007fc3cf8efb00(0000) GS:ffff88849c2d8000(0000) knlGS:=
-0000000000000000
-[   44.953711] CS:  0010 DS: 0000 ES: 0000 CR0: 0000000080050033
-[   44.953712] CR2: 00007fc3a7700000 CR3: 0000000163103005 CR4: 00000000001=
-726f0
-[   44.953713] Call Trace:
-[   44.953715]  <TASK>
-[   44.953718]  nv50_wndw_prepare_fb+0xac/0x120 [nouveau]
-[   44.953801]  drm_atomic_helper_prepare_planes.part.0+0x2a/0x1b0 [drm_kms=
-_helper]
-[   44.953815]  nv50_disp_atomic_commit.part.0+0x7d/0x1b0 [nouveau]
-[   44.953876]  drm_atomic_commit+0x9e/0xb0 [drm]
-[   44.953895]  ? drm_plane_create_color_pipeline_property.cold+0x24/0x24 [=
-drm]
-[   44.953916]  drm_atomic_helper_update_plane+0xf1/0x150 [drm_kms_helper]
-[   44.953924]  drm_mode_cursor_universal+0xe7/0x270 [drm]
-[   44.953948]  drm_mode_cursor_common.part.0+0x94/0x1b0 [drm]
-[   44.953968]  ? drm_mode_cursor_ioctl+0x80/0x80 [drm]
-[   44.953986]  drm_ioctl_kernel+0x7f/0xe0 [drm]
-[   44.954008]  drm_ioctl+0x1ea/0x470 [drm]
-[   44.954027]  ? drm_mode_cursor_ioctl+0x80/0x80 [drm]
-[   44.954047]  nouveau_drm_ioctl+0x56/0xb0 [nouveau]
-[   44.954110]  __x64_sys_ioctl+0x7a/0xc0
-[   44.954114]  do_syscall_64+0x61/0xfc0
-[   44.954118]  entry_SYSCALL_64_after_hwframe+0x4b/0x53
-[   44.954121] RIP: 0033:0x7fc3d351453f
-[   44.954122] Code: 00 48 89 44 24 18 31 c0 48 8d 44 24 60 c7 04 24 10 00 =
-00 00 48 89 44 24 08 48 8d 44 24 20 48 89 44 24 10 b8 10 00 00 00 0f 05 <89=
-> c2 3d 00 f0 ff ff 77 18 48 8b 44 24 18 64 48 2b 04 25 28 00 00
-[   44.954124] RSP: 002b:00007ffd4ea49ba0 EFLAGS: 00000246 ORIG_RAX: 000000=
-0000000010
-[   44.954126] RAX: ffffffffffffffda RBX: 00005569076a4010 RCX: 00007fc3d35=
-1453f
-[   44.954127] RDX: 00007ffd4ea49c60 RSI: 00000000c02464bb RDI: 00000000000=
-00013
-[   44.954128] RBP: 00007ffd4ea49c60 R08: 00007fc3d7328010 R09: 00000000000=
-00000
-[   44.954130] R10: 00007fc3d7328000 R11: 0000000000000246 R12: 00000000c02=
-464bb
-[   44.954131] R13: 0000000000000013 R14: 0000556908538f00 R15: 00005569078=
-46250
-[   44.954133]  </TASK>
+This RFC series builds on top of the latest drm-rust-next with kernel
+module param support from [3]. A tree can be found [4].
+
+[1] https://lore.kernel.org/all/20251114195552.739371-1-joelagnelf@nvidia.com/
+[2] https://lore.kernel.org/all/20250827082015.959430-1-apopple@nvidia.com/
+[3] https://lore.kernel.org/all/20250924-module-params-v3-v18-0-bf512c35d910@kernel.org/
+[4] https://github.com/zhiwang-nvidia/nova-core/tree/zhi/rfc-boot-gsp-with-vgpu-enabled
+
+Zhi Wang (7):
+  rust: pci: expose sriov_get_totalvfs() helper
+  [!UPSTREAM] rust: pci: support configuration space access
+  gpu: nova-core: introduce vgpu_support module param.
+  gpu: nova-core: populate GSP_VF_INFO when vGPU is enabled
+  gpu: nova-core: set RMSetSriovMode when NVIDIA vGPU is enabled
+  gpu: nova-core: reserve a larger GSP WPR2 heap when vGPU is enabled.
+  gpu: nova-core: load the scrubber ucode when vGPU support is enabled
+
+ drivers/gpu/nova-core/fb.rs              | 19 ++++--
+ drivers/gpu/nova-core/firmware.rs        |  1 +
+ drivers/gpu/nova-core/firmware/booter.rs |  2 +
+ drivers/gpu/nova-core/gpu.rs             |  6 +-
+ drivers/gpu/nova-core/gsp.rs             |  8 ++-
+ drivers/gpu/nova-core/gsp/boot.rs        | 38 +++++++++++-
+ drivers/gpu/nova-core/gsp/commands.rs    | 31 ++++++----
+ drivers/gpu/nova-core/gsp/fw.rs          | 75 ++++++++++++++++++++++++
+ drivers/gpu/nova-core/gsp/fw/commands.rs | 11 +++-
+ drivers/gpu/nova-core/nova_core.rs       | 15 +++++
+ drivers/gpu/nova-core/regs.rs            | 11 ++++
+ drivers/gpu/nova-core/vgpu.rs            | 26 ++++++++
+ rust/kernel/pci.rs                       | 46 +++++++++++++++
+ 13 files changed, 267 insertions(+), 22 deletions(-)
+ create mode 100644 drivers/gpu/nova-core/vgpu.rs
+
+-- 
+2.51.0
+
