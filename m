@@ -2,147 +2,162 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id 98766CAADF3
-	for <lists+nouveau@lfdr.de>; Sat, 06 Dec 2025 22:36:25 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 4D46BCAB06E
+	for <lists+nouveau@lfdr.de>; Sun, 07 Dec 2025 03:26:21 +0100 (CET)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id BD4D210E306;
-	Sat,  6 Dec 2025 21:36:22 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id AB0A010E09C;
+	Sun,  7 Dec 2025 02:26:19 +0000 (UTC)
 Authentication-Results: gabe.freedesktop.org;
-	dkim=pass (2048-bit key; unprotected) header.d=Nvidia.com header.i=@Nvidia.com header.b="onEHySvc";
+	dkim=pass (2048-bit key; unprotected) header.d=Nvidia.com header.i=@Nvidia.com header.b="TSb9blvm";
 	dkim-atps=neutral
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from CH4PR04CU002.outbound.protection.outlook.com
- (mail-northcentralusazon11013028.outbound.protection.outlook.com
- [40.107.201.28])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 60E0010E2C2
- for <nouveau@lists.freedesktop.org>; Sat,  6 Dec 2025 21:36:20 +0000 (UTC)
+Received: from SJ2PR03CU001.outbound.protection.outlook.com
+ (mail-westusazon11012013.outbound.protection.outlook.com [52.101.43.13])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id DAACD10E09C
+ for <nouveau@lists.freedesktop.org>; Sun,  7 Dec 2025 02:26:18 +0000 (UTC)
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=PzUOu+p1MEHP7EISdkzgf0mCTctMeGPKIZJMTEKHfbTJwgVFHMukjnVhI4VTG7ejSrcYvOXmJCSMJRpnKfH3qwRVyDr/KsGfQtTJ9fGHDTg1sr4Z39n0BKwFQgmvTY5t3BGGIv+eU3L1bQxzAhFHXCo6egSdvH8jeaKM/kkDHs8Voit/8PAzr2a7CVLt5BPz1PeHF65em/6ENe9Ihxba+6/nxVcr6lEvxZmGGbKTJyh9Dyi0zCYCG0jpOwg2ifUeEBmBC9ChnUaqP0+Amarg6eKdn4Ho7ooBJ7yag6qEuy1JYeB5DqvyzKQbhsra01cll89BP18qWxomD5fcNZPd6Q==
+ b=oIZiDbBOP+ziAOxWMLWDjYm+mEHVNI/vOqji1yPOR/VKzc02eF0oZNgLgUUvhhneWb2hQC7iulHfQNJXIfyTn6H34zIEfiPvoVYQCD9xo4dIV1EDS/wkWa4AUw9tG3fp8UVgIa0wxmkIzgxqokKNBCoZMryBM97nV5CijaJRRyfITPdJNVBgb0TjsQ+NlZ1gQck31vp+4HttyuVaCE9pPTGmIXqqImky0cbW8dDw66eo7zeWfJ+LmJ8v9MyWU0oaYUIYL6Y0IEjI/fwd8lVQpd+/GvsX1YAfRgEPq/nbn0W7MrCWr8SbR6xl9Jmle9NVVLtg2zcNeuO69LglzFSm4A==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
  s=arcselector10001;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=IpUn3YCpzxaEe5WTDI5bdNs3wpplPJDEJZFSwJHCS6M=;
- b=ibwd2JpLkRxSRxl7q6sRJ80HxTk2HPnv1BsLRCCWrqniJDXvgpuchvzBCgB+USBl+O7kXvYchNjL09FACiAEIvgHHZN+hN554noT1AAkJN4NDbBv1WloXKHy3lgJ7mGErmGalUcho88TQpdG8pOgnoBKG6yZDqcUq1G1h/gKuPG15Mf4sZ4UGcxCaBLmjwjeeli+Su3mR58REwmyILFJbS5CYBhRqTxBypMgiAP/LGdJGUuk6GVX/ciePXc/KaKP7wP9pesteqlB34VfydUc8NHLCsT2XZ7WWX0xnLPGdUfFM6QVDsnDK6fnVV+ExA3qQNlDx2woj0u3wBOfiC8wAA==
+ bh=/AAdmxC7KjFa/ReBa6p2XrwF9R1uVmXUsq4cqqOYfR4=;
+ b=SMUvUjkcBn2iKDREvNSFS5vG9G6B8Om0MRh8VACZ419R7UDNj+y0dCSCVTY59YrduktIv2XC2yQJTXca5MgwC6yR/x8BjZ/xLddWGazXrfK7WnCd9/67e/ae0Kbu3tbbnO2ssuIHXBHPDyN/D5BCBvDDLEWmxhukDhwSO4RfEM16NX1lzsBpfkS/+wQL4zVYqdNrzp3PYVEA8oogWmcVD5kCebXGaa8FF5O2YPiHoDc035WYURJ6bZcD7+Nk95f5KS2mKvVGgt1AWPZCWd0dWLuaqNBjlUYiE/hP+/Ra6x8/Oh72wZP0M4Q6mD8ImYyhjeP0klSl0jXS3enLIGdyQA==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
  smtp.mailfrom=nvidia.com; dmarc=pass action=none header.from=nvidia.com;
  dkim=pass header.d=nvidia.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=Nvidia.com;
  s=selector2;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=IpUn3YCpzxaEe5WTDI5bdNs3wpplPJDEJZFSwJHCS6M=;
- b=onEHySvcRdX3MktmlMe1hbUCBF1ELmueSHe99zRWpKbBJKyYkWkNc+w8+k27h090YeBchMkSJirfIlsO4zg32Q753qyw+yZX7R3gIqWi8wMGI2bqK84BNMz89t3UmqB4Ful/IzSREZ0S476Zo8QnS4iBylx86+QZuO4QJUnr5F4rRApjXQAFxSMquH1JiIgSKdgphEj+rQNAssFBhfRMdvT5b0z4dwy/84J1ofjLatlCHjRaeBc8tCIhyv5BFUdgWm3jHdHltYCHzWSIy3WX1whg7aGkOjLdij1YBjt1P6/KjNggpBXK4wyOYTN0U9WVFCO1eiKhrRZV0WkuFi8l0g==
+ bh=/AAdmxC7KjFa/ReBa6p2XrwF9R1uVmXUsq4cqqOYfR4=;
+ b=TSb9blvmtb8VjXPTMHbCV+MzizhoG9AHk2h/SPxJ2K0DXk4/NrLYICudT1k4JjZdSk0XQBThWwex5EFxrS2vpyqpYf8qCJDtE7cdiU5qcWsarydwk23ZiN30I0D3CmN22MRQzMLYbcU7uILuIHbg5doUHDgLMLZGtNgZ8zFNE/c1NoM/xz3pJj7VLgq9+igp0xbB1kq1GwvzYn6RDt3N1wcuPMYh4xPVVQdvZNvjBEm9spC/xRFRwHmLa940X1s0umuOvFSXXuUfBkG5U3ZSa5vUShnX/UC5qnlRTq3JWmq0rS2HHEgCM62llCp6EKzAj54wOZ27dDOyeEdBTsJwAw==
 Authentication-Results: dkim=none (message not signed)
  header.d=none;dmarc=none action=none header.from=nvidia.com;
-Received: from PH7PR12MB8056.namprd12.prod.outlook.com (2603:10b6:510:269::21)
- by DM4PR12MB8451.namprd12.prod.outlook.com (2603:10b6:8:182::7) with
- Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9388.13; Sat, 6 Dec
- 2025 21:36:16 +0000
-Received: from PH7PR12MB8056.namprd12.prod.outlook.com
- ([fe80::5682:7bec:7be0:cbd6]) by PH7PR12MB8056.namprd12.prod.outlook.com
- ([fe80::5682:7bec:7be0:cbd6%4]) with mapi id 15.20.9388.003; Sat, 6 Dec 2025
- 21:36:16 +0000
-Date: Sat, 6 Dec 2025 16:36:14 -0500
+Received: from SN7PR12MB8059.namprd12.prod.outlook.com (2603:10b6:806:32b::7)
+ by PH7PR12MB7258.namprd12.prod.outlook.com (2603:10b6:510:206::5)
+ with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9388.9; Sun, 7 Dec
+ 2025 02:26:15 +0000
+Received: from SN7PR12MB8059.namprd12.prod.outlook.com
+ ([fe80::4ee2:654e:1fe8:4b91]) by SN7PR12MB8059.namprd12.prod.outlook.com
+ ([fe80::4ee2:654e:1fe8:4b91%2]) with mapi id 15.20.9388.012; Sun, 7 Dec 2025
+ 02:26:15 +0000
+Message-ID: <47c05bcf-7591-4148-8783-0c107b0c3c9d@nvidia.com>
+Date: Sat, 6 Dec 2025 21:26:12 -0500
+User-Agent: Mozilla Thunderbird
+Subject: Re: [RFC 7/7] gpu: nova-core: load the scrubber ucode when vGPU
+ support is enabled
+To: Zhi Wang <zhiw@nvidia.com>, rust-for-linux@vger.kernel.org,
+ linux-pci@vger.kernel.org, nouveau@lists.freedesktop.org,
+ linux-kernel@vger.kernel.org
+Cc: airlied@gmail.com, dakr@kernel.org, aliceryhl@google.com,
+ bhelgaas@google.com, kwilczynski@kernel.org, ojeda@kernel.org,
+ alex.gaynor@gmail.com, boqun.feng@gmail.com, gary@garyguo.net,
+ bjorn3_gh@protonmail.com, lossin@kernel.org, a.hindborg@kernel.org,
+ tmgross@umich.edu, markus.probst@posteo.de, helgaas@kernel.org,
+ cjia@nvidia.com, alex@shazbot.org, smitra@nvidia.com, ankita@nvidia.com,
+ aniketa@nvidia.com, kwankhede@nvidia.com, targupta@nvidia.com,
+ acourbot@nvidia.com, jhubbard@nvidia.com, zhiwang@kernel.org
+References: <20251206124208.305963-1-zhiw@nvidia.com>
+ <20251206124208.305963-8-zhiw@nvidia.com>
+Content-Language: en-US
 From: Joel Fernandes <joelagnelf@nvidia.com>
-To: John Hubbard <jhubbard@nvidia.com>
-Cc: Danilo Krummrich <dakr@kernel.org>,
- Alexandre Courbot <acourbot@nvidia.com>,
- Timur Tabi <ttabi@nvidia.com>, Alistair Popple <apopple@nvidia.com>,
- Edwin Peer <epeer@nvidia.com>, Zhi Wang <zhiw@nvidia.com>,
- David Airlie <airlied@gmail.com>, Simona Vetter <simona@ffwll.ch>,
- Bjorn Helgaas <bhelgaas@google.com>, Miguel Ojeda <ojeda@kernel.org>,
- Alex Gaynor <alex.gaynor@gmail.com>,
- Boqun Feng <boqun.feng@gmail.com>, Gary Guo <gary@garyguo.net>,
- =?iso-8859-1?Q?Bj=F6rn?= Roy Baron <bjorn3_gh@protonmail.com>,
- Benno Lossin <lossin@kernel.org>, Andreas Hindborg <a.hindborg@kernel.org>,
- Alice Ryhl <aliceryhl@google.com>, Trevor Gross <tmgross@umich.edu>,
- nouveau@lists.freedesktop.org, rust-for-linux@vger.kernel.org,
- LKML <linux-kernel@vger.kernel.org>
-Subject: Re: [PATCH 23/31] gpu: nova-core: Hopper/Blackwell: add FSP Chain of
- Trust boot
-Message-ID: <20251206213614.GA177930@joelbox2>
-References: <20251203055923.1247681-1-jhubbard@nvidia.com>
- <20251203055923.1247681-24-jhubbard@nvidia.com>
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <20251203055923.1247681-24-jhubbard@nvidia.com>
-X-ClientProxiedBy: BL0PR1501CA0005.namprd15.prod.outlook.com
- (2603:10b6:207:17::18) To PH7PR12MB8056.namprd12.prod.outlook.com
- (2603:10b6:510:269::21)
+In-Reply-To: <20251206124208.305963-8-zhiw@nvidia.com>
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
+X-ClientProxiedBy: BL1PR13CA0438.namprd13.prod.outlook.com
+ (2603:10b6:208:2c3::23) To SN7PR12MB8059.namprd12.prod.outlook.com
+ (2603:10b6:806:32b::7)
 MIME-Version: 1.0
 X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: PH7PR12MB8056:EE_|DM4PR12MB8451:EE_
-X-MS-Office365-Filtering-Correlation-Id: 660f77e5-f7c5-4f52-0047-08de350f7c81
+X-MS-TrafficTypeDiagnostic: SN7PR12MB8059:EE_|PH7PR12MB7258:EE_
+X-MS-Office365-Filtering-Correlation-Id: e00227bf-46a4-477b-feb4-08de3537ff1e
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0;ARA:13230040|1800799024|376014|7416014|366016;
-X-Microsoft-Antispam-Message-Info: =?us-ascii?Q?eMlKOFKl+9SAq1KzBZ15PS/sCGXibT/5/BS0dS/E63Cu4gyVX2rO4TehcMwU?=
- =?us-ascii?Q?iZ1XolOt3HWsc7pdQymEBkc3VcB0sLEtC6/vPlnZVaTXrj3L92UDiUYoxtTH?=
- =?us-ascii?Q?BKJ6RsEtGi/9lgxWaBTSPEmSeRWv2aHWd+1c5slpbLWcO//pB08//4Q9AL7i?=
- =?us-ascii?Q?MKAsNjG9GBtaz381t4yzoQNEKs1xCEkYDO8cE5MiSORYVsQ5WFr/o0ScnsF4?=
- =?us-ascii?Q?YkLBcLmbDgBq/NvdEtzH+zZjeUN1n2m9kI6C5nsRQOgjzAlzD2wrkjf1uOyO?=
- =?us-ascii?Q?vMCGP91t3gk1lDHa0RBynwaNmeibHJxhD3snOgg9+zkix0RAjVwFldVM1Fu4?=
- =?us-ascii?Q?b3POz8RONACZci1l6bhKntLpkGAJWYprtEXv162z5xDx7zp6if8WzJhxGmbI?=
- =?us-ascii?Q?k7jwpflV00YpknYEYcwf76KCXHsIvNqNK4iLcw9TXcOwAsNEofIdDDHDNvEH?=
- =?us-ascii?Q?bJ1pVDSeBIxW5YJ87peIBrEq1b90/GhXeYAiAw5qdsNHfZ5Pg3Iyi5dPydk/?=
- =?us-ascii?Q?664BKLFsfYrPNGPSdESCh9x/Hj4xCCArkBIAYi7xEWHQNzP8N4kf6SK0S6eH?=
- =?us-ascii?Q?GxYUIz2mTxVX8+qDKbqv8cgFcifCLCWSFsQsX2jnh6cp+MB3Nxh5EyGMPzeJ?=
- =?us-ascii?Q?srDdT0u4hmiD1xucgLaS0pg4FvLjvV4ockBjmxhzzs8YsylHxqlFLfxTPr2C?=
- =?us-ascii?Q?+V43Jd/AErxLw52hjGSHLR0+zouZG3dTEKg5X/YulI9gTn/3JMBKTJkjlVmT?=
- =?us-ascii?Q?A7oHWeU1/2Ks1tVYBHMAh7mVouVPG9WC7OKVvUSFFSh2inPWNrmM69SN0c5D?=
- =?us-ascii?Q?k+ry5Wcp6RhVYGiuXdzrDuplgg30OJGDEkZj/F4Tkzt9ELLqXHMln5ls0Ms8?=
- =?us-ascii?Q?6PcAFaArgOeUCOTijmgiyrbXvLwD8omu9xtRLQIo3Xrp3+Z/NLre0Cbrbczl?=
- =?us-ascii?Q?P29f1o1GflNsUa8ASyiCUnMuMp+batqHNywElwa4rqeThJ81aqLgc0MeIiH3?=
- =?us-ascii?Q?QTvPcZ40NYE46q9m849r/riDP8//rmlR3c7TzpTQkIg83i8pKm4kNCu4E52C?=
- =?us-ascii?Q?tV2FOK0S6OkyMEh4U/O6EebwTC6LMaKraJJuy8m7uOl0195rcaKvHMYIBf5G?=
- =?us-ascii?Q?jSe4kSUwqBW5VHNwTPnvQHPrMHUDkBrXoN+loO4fPgIv5Kh3T+KdFNVZufx0?=
- =?us-ascii?Q?hpOGwGKlebswRqr/2BV29W8jWgxtbBvgxXssDQ5VvnCwWqEEXgoqvuEzTgKa?=
- =?us-ascii?Q?3/wlTtmYwGX8hTCz7HV1s+EncQ+08vWboW1jdW7r/mCMTJOC+y5yrPrj5Jp3?=
- =?us-ascii?Q?aIp6G0k6T3buAUfd2Ch69w7VVpD+Ge9FPWvwGjTCVAuDqJW4jrLZbL9FGd+d?=
- =?us-ascii?Q?yVWqgWFthiNcOHoTT6LVPDFPt4YdEXhQvpT90zqLJ9ORUVKR7oeWK4nWoglX?=
- =?us-ascii?Q?1lbNJ1LiiqNIUzB2dVkEyU/fXniFkahg?=
+X-Microsoft-Antispam: BCL:0;ARA:13230040|1800799024|366016|376014|7416014;
+X-Microsoft-Antispam-Message-Info: =?utf-8?B?QVBHSVR4UVRvaDJqc3E4M3JTZGt6RHZ1Z2VwSklSeVN0eG1tU1F2enY1anVR?=
+ =?utf-8?B?N3llRjNtU1lFT1pkRlBFWG12Wi9jOE1KNC9xb3BGTWhzTkhuVjE1Y0FWdVFC?=
+ =?utf-8?B?d2gvWXdJYUJyMWhNdFNWNXBvS3JNeURVYWFsaFBZa0g0ODVpc3NDQzBuZ1ly?=
+ =?utf-8?B?VFRmM1YwUnRNQXNkekdNank2SVdLaXY0WmcxU2xnYTM1RkhYSkIyZkJpc1BH?=
+ =?utf-8?B?OTViK3N3SGhMRjJTa0dld0Z6V291QXYwclNySUR4dDRQMk1OOXVMdWd2VnU5?=
+ =?utf-8?B?Z0x3alprditHeU1SRHJwbC9VK0VRbXNMYjV1bUlmL3hJeURHdFFST2U0WUEz?=
+ =?utf-8?B?S2pFYVAxNkcvYlRUeTJockhRVmt2ck94T050c3pPQTJZdC92SENFY0gwOVN5?=
+ =?utf-8?B?S091aERpQ1ZhR0l6NjlodFNvRktrNmdIc1djZEpRbEp5dlBhMVJnaVdjNEhk?=
+ =?utf-8?B?eDI2R1hrVUViQVNrYVhHNGZsOG1qck40M1VFcWoxaGtCUmVzQU9JbG1OMHd6?=
+ =?utf-8?B?TUkxa2NKNVplK0p3UFpRTEFQem9pTkcyMVRQdDlKbHJxSDZ5Nkx6VlBPSWRW?=
+ =?utf-8?B?ZU1JMnhRcWpvemxtMHl0cVpyR2RQNStNUDhlZWd3U3lpTVFWSFp4THhFV29L?=
+ =?utf-8?B?UUluZC9jWUc5dDB4OEVPY2ZwL0dKY0k3MUgyODh1bnJOY2pIa1JSUXVWa3Jn?=
+ =?utf-8?B?Wkp0VEd6bGFtanNhejBvN1Z4eXhIQm4vYm9uS1pxaUN5amVzNEVwVnZWVWpk?=
+ =?utf-8?B?a0NsRk9nWDRvZUtPb2pRSmRXbnJSOEJUdlZ2dUZiWEc3OTdZOEkrOE5vWFc0?=
+ =?utf-8?B?YTczL3ByWlNsVm1uNU9pNndzVnpxMGdaOXpVcWtKS2NGUDdXd25VdTlMYThj?=
+ =?utf-8?B?VE9qMm1rZldnaW5TVUwyQXhQNjM4UkloNUF2YmkwRllYd1BOaGo0RlJJS3V1?=
+ =?utf-8?B?U3dwSXBZRHFiK0Qzd2RSbUtibkFuRGhPd1ZuRXVyQnlCS05aaGk4TmgyRDNX?=
+ =?utf-8?B?SndnL3NUdG5DY0dXUFhFbFFIR3NacHVydnIvQm9qRUMyeWxQN2o3U0JiSWdz?=
+ =?utf-8?B?U1pseU1Fa3Q4R0Uvd0ZLZ1lXbk5nT3NXMkJaNitCVUo1YmxYUCtvMXNVRjVk?=
+ =?utf-8?B?blRLMjBMeEg5SXVMREFBeFplMWpnVWQweithNFhqcjJ3eWtDT1pMYWR2Ykpn?=
+ =?utf-8?B?NmtKZWZNQVBLZ3lBaUp0Z2h5dVlDa3ZHRVdiaVl5L3M0Zk9wNVVERjFBTTl5?=
+ =?utf-8?B?Q1dGVDF5VHRMQTVyOFB1MHQyWTNTaUkzS001bWRSeVVVOWtIMnhtaG1rREFk?=
+ =?utf-8?B?TGVYTTNvb0xMNUpnUXFDMlNCYkc2TDNySGlVOENhWW1MV3g3S3BBNXRDSURy?=
+ =?utf-8?B?UC9TSVY2Z0R6SE0zWkJmaWo0bkFIdjMrZXNnZktzQm1ZbWtuaWprUGJ0V0ZJ?=
+ =?utf-8?B?N2k5TjZHZmZjTkJjR1EyL1ZCaUhnNkpIalJIaGszNG41eFo3c3BreUZycER3?=
+ =?utf-8?B?QnhqZStsNzUzcHdtbTBEUys5US8wZ0ZtN1U1TGVjRW9oeVVsdlp2OUk1WFB1?=
+ =?utf-8?B?SE50YU1hMUhJNmlhVHFMT0s1TDh0NVJnSXpoQUY3ay83SUpuWXc4Z2x3Kzdo?=
+ =?utf-8?B?S3dFL1NPU3UvNkhEd2ZEdlZyQjNYTDJzNWdWTkpZaGFmSStaVkZMRWVpK0FP?=
+ =?utf-8?B?dzF5cUNmQjhaMEY4WkRUOExIM0ZGU0gwOTgySXU0OTJXTmxOS05hZG95b3Jm?=
+ =?utf-8?B?T2ZyUU9EL3d1OUVpTFhTelR2MkJNdGJ2TXpZaFFWMlZGQkJpaWJjT0VJMWpC?=
+ =?utf-8?B?Rkw5QmFnTHMrdDl2YWlNSEc4Q01IVEgyS3llMHRZZE9yd2tOdnZocXlWdlZz?=
+ =?utf-8?B?dy9HUFpBVVpPbVNmSTBBT293bC9hMXNYZXg2TDB6YStVMzFGZWJuUXNZZTRC?=
+ =?utf-8?Q?TXiGK0yXU7FZhzlJGva5Wsrx3Ye3KVmy?=
 X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
- IPV:NLI; SFV:NSPM; H:PH7PR12MB8056.namprd12.prod.outlook.com; PTR:; CAT:NONE;
- SFS:(13230040)(1800799024)(376014)(7416014)(366016); DIR:OUT; SFP:1101; 
+ IPV:NLI; SFV:NSPM; H:SN7PR12MB8059.namprd12.prod.outlook.com; PTR:; CAT:NONE;
+ SFS:(13230040)(1800799024)(366016)(376014)(7416014); DIR:OUT; SFP:1101; 
 X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: =?us-ascii?Q?AGXxLIGPjtIkucAxOm82MmRHl8yhxGqGfLw6JNRn3+e4S4J24cUz/DIlSR2k?=
- =?us-ascii?Q?09szjsorXT5v8xgeEgMJa9V1FW0MNJm0eeujmzBHJpBH6CZShu1mGrAlO22s?=
- =?us-ascii?Q?s5tgPBivYOjuZ5yz8MEQ7OlUr8sNosHkq1Vv3uFOTvKw0BaLmDGQAkk04OMq?=
- =?us-ascii?Q?qCxBGSqszo3P//VoD4ai+CZ87v4xGkF0i4MmlqjIfsY7YdBDmFVINYZEcnfD?=
- =?us-ascii?Q?sqYh8r25qNQkq+w9uNVUSRL5RdPRdfdhsMQaciIkqpPf5HoJBbsP0oEumud4?=
- =?us-ascii?Q?A3mXTDGDrTVlt9RMMQYHqWZTJuP8J+fTR4LSgPaECUDgOJLvfAjEpusMmvQB?=
- =?us-ascii?Q?/LbnPNowSyB6x+Ca3gR4beefDpF1hCJL/9Tigj2G3SPh12rggiojy1e1FIhA?=
- =?us-ascii?Q?xFwO92KxaIGK5jn68Loo7bNvnTcbBQiAduQy90dcNCUQwH0xpB68rBNVVCCK?=
- =?us-ascii?Q?EBvT95B9tqUo2o1QKTCUZ9L61yN9OZs/S2eREwYD8xIQBiSZqBLAk6Bd3K/f?=
- =?us-ascii?Q?ohz+Knn6WzFM+syCgkDp5KQQ7qo4xMmAiB4U2ZPf1u3C/J8Q4Lxnu7B06nPr?=
- =?us-ascii?Q?fwySM1jXDiCmEcJcsMCk4T7faF1fa2RuOqci3JPQjBCslBN6glA4ItgyJkJm?=
- =?us-ascii?Q?+kgswlLlAjAzcjryI3iE/K3Vr7MV/P4KrChvsz+4f2KdUchSj++9aMe5GEgv?=
- =?us-ascii?Q?MBSOYRdhJR76m0cKa0ebI0hrxnxetHjWr0He5b+6/uUQ0F8DZKec9dUc4EPG?=
- =?us-ascii?Q?k0yav5KiDWvCT6nLMlQjwkCH4AHtkzJSZp5ti4W7tbBzHQ5+c3JieAugACEt?=
- =?us-ascii?Q?d6MipHNAlQB5l2VhKM41htSZ/bWKaZg+zBf8NetxjmuEyIQ7yuSvTmHt7KJJ?=
- =?us-ascii?Q?lZm398AhEQtsMq7T0KkyY1X1lND43Fe6vZxxria64s6M5Fq73fKeJrFv7Ts3?=
- =?us-ascii?Q?rdo1bBrn+ZEqTVIXO+vqkCC1YdstvLiCZr71AM3204bTkIth4or9NW7WA4Up?=
- =?us-ascii?Q?+ruhO7lnzkY83jj2OVSeYFDrr1vfgw26jiXHS+r3uLI0gx6IfnWSx3ooTFXQ?=
- =?us-ascii?Q?HtNbtqOmT5oKqKBfIttr5pru2HC/R4PJqRjqiiw/5poNJbi90zO+h1kL5BGr?=
- =?us-ascii?Q?eKPbJBDqRoSlUVV6b6kFOP5IdmJxOhjjs7UFSvGRqui/GB0enp4YviTAvmy8?=
- =?us-ascii?Q?qMx0WwBK8ara4UyFqKOXLup3BHMBySYtWhDlxhUJS0G2XPHmfND9UIDi3Tah?=
- =?us-ascii?Q?lFS8ymkTQTIhsUIe9BzeqCzLlHTGSFQegG6qrlGCTRQLr7zzNs1vXPnfd7Ki?=
- =?us-ascii?Q?SJVQLK4DOYpNvYVe+qCa1NNzxTgULnrvGR5kwdFfB8bqrtdiqXOnXl2MlELh?=
- =?us-ascii?Q?ckbcMxgNyBVDRIXNaEQiKvEMg+iQfest1pOe3bFniqtsJJbFa6yY/ODEZS5O?=
- =?us-ascii?Q?xybyHX41HrMFpjuB0Sw5KJaX5xa7XIDjnWbW2IH6LP1mqVxd8dFNUbY/oWka?=
- =?us-ascii?Q?txzIxL5aEF4lEXkp6abLcsGMHV8Kon9geePyokjMX3IpsDNWxxpumyksmMbF?=
- =?us-ascii?Q?1MG22VmYAq/UadIokMLpC7wa7Swa265dxOLB/paO?=
+X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?MmdvOU5iaThRQjZiZ2FPMkRWMUJ2NDR0L0drMklCSU1GdUFiTk1ZTFJOY05O?=
+ =?utf-8?B?SjhybE1JSk9LbEdFK0t4TTVhb0JaSDhTeWs3YzViZ3FwMSs1dGJMTFl6U0hv?=
+ =?utf-8?B?Y2hHandqQStQc0dWdXJCcEM1TXdzU2IvTnN5SHYwaGp3dForbzJTdjlJQzdS?=
+ =?utf-8?B?MkJyckFEQnAyNGFkK3V1Y1NkT01YeUxiVVlaNWZCdGltbUgwQTh0STFwV0dn?=
+ =?utf-8?B?ZWFZWU1tRVk0MWpaZktxbWVlS2k0R0l0Z1lWWWRNZ1hDeHlQZ2dMZUtoUFJX?=
+ =?utf-8?B?dmpBV28rK3JsdUNIM2dlNnR3YUFuT0pycS91b0hBWkVpU1NLR09jc2hwWTRR?=
+ =?utf-8?B?Z0NFbDhQRDhsbjN4UDVZTlQ3SkZFbkFDalBMT1FGRHBodjAwN1NQYnNuRUsz?=
+ =?utf-8?B?SjU3WTFEWHpuVlpFaUhPelhlNWpvQ2F6WXMrclQ1bFl2aGU1WnBCa0ExMFRR?=
+ =?utf-8?B?VHNueWYzQnUvSGlsb0pIczhVTE04d1lmdXJoV3J0eFN5cWpZN0VoaXVDbUJv?=
+ =?utf-8?B?T1hyV0RJUHE0NVNBdkxsSEZ2NjlMLzNjV2FWNUNPRVAvWDNHTkl5azN4b1VY?=
+ =?utf-8?B?bFNGYVJ4RUQ4ZC9LVXN3R0Z1OTBRNStxZWJwZlhaRjRqY3E2VzNnb3hkSUpR?=
+ =?utf-8?B?cWlxUDJYVWVtVHJBZnlFaElTb1FZT0NqVDhmQnJkRjBublZJbHlmcFYxOVlS?=
+ =?utf-8?B?UDZUeVNEc2U4aUhTY2JrK3A5TldycGF4Rk9BWWh4SFdKbXE2THV4c085MGJq?=
+ =?utf-8?B?VkhheGdJR1J1OE81TlozOHNGUHpxeURvTCtwQWVueWRSWnpSNnpoS1dxcWJN?=
+ =?utf-8?B?NkY2a0xicXpOa0x5VS9DSzRwMXlqekZRRUpDalpjTERoYkMySStVTURVanpm?=
+ =?utf-8?B?azBFTndWNWhiQkhHR1VUMSt2cDZtdGpjZWt3QWUrZE1udXhuWFNnVUZBTy90?=
+ =?utf-8?B?eElCN0NLZmJqK1NIRnd3eWhUblRMcDJ1aEtaSy9pSnl5VWdlenpLZDFKZWxh?=
+ =?utf-8?B?Q1YyTE1IWnRlVVc5eUxUTnkzek9teXprMlJTRjJMU3BXWHhQV0txZkl2aGJE?=
+ =?utf-8?B?ZW5ibS92bjBzdE1FMkhqWWJKUHE5ZGpBVmo1d2JIREsrdzNrOWgxZUU1aHZ5?=
+ =?utf-8?B?Y3pnY1dvY0xCS2xtL0tjeGNGSC9JN2NPTllPK1plSG83eDY3ZUE0d0hVU21s?=
+ =?utf-8?B?SEdqS1FYMzY5Rk9ZbEhnUnZUOW11T0crenljUUFhdkxVckNSdCsvVFcvUDk2?=
+ =?utf-8?B?V3YvWjFpOVJhcXIvNldCbGtqUE5vQVUydUJVZDZjUGVKcTAycDRuMGlwb1Yy?=
+ =?utf-8?B?NWt6cGl4QlRBdnFmWlc3UkcxRUlrbWVXU0VieEduMW51aE9BVDF0RHBwcUlC?=
+ =?utf-8?B?TkI1ekYxa0pDUHVJclU2OTVVL0NNa2l5Q0dDQ2NsdjF6S0xNQ1JFOWRPSjdh?=
+ =?utf-8?B?Tm5udDFBM2NBbVk5RkZ3Ni8vcStFaC9BYzFRMzhpS3JWcFpQUWVhRmRVQUVW?=
+ =?utf-8?B?cWdDQnErekExd01NUnN0R3hRanRHdnZXalhwLzNZQTRjRnpzN05aMzRCQTh4?=
+ =?utf-8?B?WjRWLzJMRXFBREZZeGlLNGc1MkFGUHhaQmdKcTdVeXZJMEljMUlFTVF5dHo2?=
+ =?utf-8?B?RmVnZWVtWmh2YUM2WU1ZSUdEMmZleU1FeW9odEhYQ09GaFMrTDA5Mzl3eUV4?=
+ =?utf-8?B?T0l5TWF4WmIxQVBwUHFrQ0xEcEZyOGlzenpXUTRzU2JCMU9KcXF6MXRDbjJG?=
+ =?utf-8?B?ZEp2dGxzVlZWRjlxZTJWL1BvdmFOdis5QW1xQWczWjdNdXRhblN5ZEwraEtj?=
+ =?utf-8?B?SytiTmJoOW9GeERSL1IvVEJHZGtDYWQzeVhmMHErQWJuSzNkWGJKRkdNbHRB?=
+ =?utf-8?B?bk5xSHBaWGt5U2RFeXlJc1JMd3VSMndvUGdoMVp6a2sxNkpSVnA0ZUJvY0tn?=
+ =?utf-8?B?VnBtSlBtV1ZqV2dheUdrTGZ1TmFzSUNRWUVxVlBHeHpyOVVmcHM0UmxYYmYx?=
+ =?utf-8?B?UkhKd3I3Z1plSldoWlBOTmxjOGxpY2pLU3RFYzd1Q2laTkZTb3RYTVdCcGt2?=
+ =?utf-8?B?Mmo3bk5pcU5nbzRsZzQ0MkIzcCszS2cySlYwK25JTW5VQ0lVQkE4QnZmTSth?=
+ =?utf-8?Q?we8DOJBLlmaVokgV59HDZ29De?=
 X-OriginatorOrg: Nvidia.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 660f77e5-f7c5-4f52-0047-08de350f7c81
-X-MS-Exchange-CrossTenant-AuthSource: PH7PR12MB8056.namprd12.prod.outlook.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: e00227bf-46a4-477b-feb4-08de3537ff1e
+X-MS-Exchange-CrossTenant-AuthSource: SN7PR12MB8059.namprd12.prod.outlook.com
 X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 06 Dec 2025 21:36:16.4252 (UTC)
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 07 Dec 2025 02:26:15.4385 (UTC)
 X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
 X-MS-Exchange-CrossTenant-Id: 43083d15-7273-40c1-b7db-39efd9ccc17a
 X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: qHZKmtswCAACevEPnpwjXNkQesVj/97PRlVphWvdex2aBC/eGAwUQ3XRWpHyvPAU/p3ahOTA+hzc+4f/PKFMvA==
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: DM4PR12MB8451
+X-MS-Exchange-CrossTenant-UserPrincipalName: B9CP3/A6Ihm1Ale7wefttMh00bSG3PaiZg4IO/Jfs6eLhoE56kR/qzYc4GfgNB2BSQ8RcAC3F1Jgsk+vN3ACOg==
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: PH7PR12MB7258
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -157,226 +172,98 @@ List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-On Tue, Dec 02, 2025 at 09:59:15PM -0800, John Hubbard wrote:
-> Add the boot functions that construct FMC boot parameters and send the
-> Chain of Trust message to FSP. This completes the FSP communication
-> infrastructure needed to boot GSP firmware on Hopper/Blackwell GPUs.
+Hi Zhi,
+
+On 12/6/2025 7:42 AM, Zhi Wang wrote:
+> To support the maximum vGPUs on the device that support vGPU, a larger
+> WPR2 heap size is required. By setting the WPR2 heap size larger than 256MB
+> the scrubber ucode image is required to scrub the FB memory before any
+> other ucode image is executed.
 > 
-> Signed-off-by: John Hubbard <jhubbard@nvidia.com>
-> ---
->  drivers/gpu/nova-core/fsp.rs | 156 +++++++++++++++++++++++++++++++++++
->  drivers/gpu/nova-core/gpu.rs |   1 -
->  2 files changed, 156 insertions(+), 1 deletion(-)
+> If not, the GSP firmware hangs when booting.
 > 
-> diff --git a/drivers/gpu/nova-core/fsp.rs b/drivers/gpu/nova-core/fsp.rs
-> index bb1e19c03c30..5840ab78e79f 100644
-> --- a/drivers/gpu/nova-core/fsp.rs
-> +++ b/drivers/gpu/nova-core/fsp.rs
-> @@ -13,6 +13,10 @@
->      device,
->      io::poll::read_poll_timeout,
->      prelude::*,
-> +    ptr::{
-> +        Alignable,
-> +        Alignment, //
-> +    },
->      time::Delta,
->      transmute::{
->          AsBytes,
-> @@ -22,6 +26,10 @@
->  
->  use crate::regs::FSP_BOOT_COMPLETE_SUCCESS;
->  
-> +/// FSP Chain of Trust (COT) version for Blackwell.
-> +/// GB202 uses version 2 (not 1 like GH100)
-> +const FSP_COT_VERSION: u16 = 2;
-
-the comment says that Hopper needs this to be version 1 so how does this
-series boot on Hopper? maybe we need to add a new function to return a
-different version number for Hopper versus Blackwell?
-
-edit: I just noticed in the cover letter that you mentioned this is tested
-only on Blackwell. I think perhaps we should drop the claim that the series
-works on hopper in the patches / cover letter.
-
-thanks,
-
- - Joel
-
-
-
-
-> +
->  /// FSP message timeout in milliseconds.
->  const FSP_MSG_TIMEOUT_MS: i64 = 2000;
->  
-> @@ -364,6 +372,154 @@ pub(crate) fn extract_fmc_signatures_static(
->          Ok(signatures)
->      }
->  
-> +    /// Creates FMC boot parameters structure for FSP.
-> +    ///
-> +    /// This structure tells FSP how to boot GSP-RM with the correct memory layout.
-> +    pub(crate) fn create_fmc_boot_params(
-> +        dev: &device::Device<device::Bound>,
-> +        wpr_meta_addr: u64,
-> +        wpr_meta_size: u32,
-> +        libos_addr: u64,
-> +    ) -> Result<kernel::dma::CoherentAllocation<GspFmcBootParams>> {
-> +        use kernel::dma::CoherentAllocation;
-> +
-> +        const GSP_DMA_TARGET_COHERENT_SYSTEM: u32 = 1;
-> +        const GSP_DMA_TARGET_NONCOHERENT_SYSTEM: u32 = 2;
-> +
-> +        let fmc_boot_params = CoherentAllocation::<GspFmcBootParams>::alloc_coherent(
-> +            dev,
-> +            1,
-> +            GFP_KERNEL | __GFP_ZERO,
-> +        )?;
-> +
-> +        // Configure ACR boot parameters (WPR metadata location) using dma_write! macro
-> +        kernel::dma_write!(
-> +            fmc_boot_params[0].boot_gsp_rm_params.target = GSP_DMA_TARGET_COHERENT_SYSTEM
-> +        )?;
-> +        kernel::dma_write!(
-> +            fmc_boot_params[0].boot_gsp_rm_params.gsp_rm_desc_offset = wpr_meta_addr
-> +        )?;
-> +        kernel::dma_write!(fmc_boot_params[0].boot_gsp_rm_params.gsp_rm_desc_size = wpr_meta_size)?;
-> +
-> +        // Blackwell FSP expects wpr_carveout_offset and wpr_carveout_size to be zero;
-> +        // it obtains WPR info from other sources.
-> +
-> +        kernel::dma_write!(fmc_boot_params[0].boot_gsp_rm_params.b_is_gsp_rm_boot = 1)?;
-> +
-> +        // Configure RM parameters (libos location) using dma_write! macro
-> +        kernel::dma_write!(
-> +            fmc_boot_params[0].gsp_rm_params.target = GSP_DMA_TARGET_NONCOHERENT_SYSTEM
-> +        )?;
-> +        kernel::dma_write!(fmc_boot_params[0].gsp_rm_params.boot_args_offset = libos_addr)?;
-> +
-> +        dev_dbg!(
-> +            dev,
-> +            "FMC Boot Params (addr={:#x}):\n  target={}\n  desc_size={:#x}\n  \
-> +             desc_offset={:#x}\n  rm_target={}\n  boot_args_offset={:#x} \
-> +             (libos_addr passed in: {:#x})\n",
-> +            fmc_boot_params.dma_handle(),
-> +            GSP_DMA_TARGET_COHERENT_SYSTEM,
-> +            wpr_meta_size,
-> +            wpr_meta_addr,
-> +            GSP_DMA_TARGET_NONCOHERENT_SYSTEM,
-> +            libos_addr,
-> +            libos_addr
-> +        );
-> +
-> +        Ok(fmc_boot_params)
-> +    }
-> +
-> +    /// Boot GSP FMC with pre-extracted signatures.
-> +    ///
-> +    /// This version takes pre-extracted signatures and FMC image data.
-> +    /// Used when signatures are extracted separately from the full ELF file.
-> +    #[allow(clippy::too_many_arguments)]
-> +    pub(crate) fn boot_gsp_fmc_with_signatures(
-> +        dev: &device::Device<device::Bound>,
-> +        bar: &crate::driver::Bar0,
-> +        chipset: crate::gpu::Chipset,
-> +        fmc_image_fw: &crate::dma::DmaObject, // Contains only the image section
-> +        fmc_boot_params: &kernel::dma::CoherentAllocation<GspFmcBootParams>,
-> +        total_reserved_size: u64,
-> +        resume: bool,
-> +        fsp_falcon: &crate::falcon::Falcon<crate::falcon::fsp::Fsp>,
-> +        signatures: &FmcSignatures,
-> +    ) -> Result<()> {
-> +        dev_dbg!(dev, "Starting FSP boot sequence for {}\n", chipset);
-> +
-> +        // Build FSP Chain of Trust message
-> +        let fmc_addr = fmc_image_fw.dma_handle(); // Now points to image data only
-> +        let fmc_boot_params_addr = fmc_boot_params.dma_handle();
-> +
-> +        // frts_offset is relative to FB end: FRTS_location = FB_END - frts_offset
-> +        let frts_offset = if !resume {
-> +            let mut frts_reserved_size = if chipset.needs_large_reserved_mem() {
-> +                0x220000 // heap_size_non_wpr for Hopper/Blackwell+
-> +            } else {
-> +                total_reserved_size
-> +            };
-> +
-> +            // Add PMU reserved size
-> +            frts_reserved_size += u64::from(crate::fb::PMU_RESERVED_SIZE);
-> +
-> +            frts_reserved_size
-> +                .align_up(Alignment::new::<0x200000>())
-> +                .unwrap_or(frts_reserved_size)
-> +        } else {
-> +            0
-> +        };
-> +        let frts_size = if !resume { 0x100000 } else { 0 }; // 1MB FRTS size
-> +
-> +        // Build the FSP message
-> +        let msg = KBox::new(
-> +            FspMessage {
-> +                mctp_header: (mctp::HEADER_SOM << 31)
-> +                    | (mctp::HEADER_EOM << 30)
-> +                    | (mctp::HEADER_SEID << 16)
-> +                    | (mctp::HEADER_SEQ << 28),
-> +
-> +                nvdm_header: (mctp::MSG_TYPE_VENDOR_PCI)
-> +                    | (mctp::VENDOR_ID_NV << 8)
-> +                    | (mctp::NVDM_TYPE_COT << 24),
-> +
-> +                cot: NvdmPayloadCot {
-> +                    version: FSP_COT_VERSION,
-> +                    size: core::mem::size_of::<NvdmPayloadCot>() as u16,
-> +                    gsp_fmc_sysmem_offset: fmc_addr,
-> +                    frts_sysmem_offset: 0,
-> +                    frts_sysmem_size: 0,
-> +                    frts_vidmem_offset: frts_offset,
-> +                    frts_vidmem_size: frts_size,
-> +                    hash384: signatures.hash384,
-> +                    public_key: signatures.public_key,
-> +                    signature: signatures.signature,
-> +                    gsp_boot_args_sysmem_offset: fmc_boot_params_addr,
-> +                },
-> +            },
-> +            GFP_KERNEL,
-> +        )?;
-> +
-> +        // Convert message to bytes for sending
-> +        let msg_bytes = msg.as_bytes();
-> +
-> +        dev_dbg!(
-> +            dev,
-> +            "FSP COT Message:\n  size={} bytes\n  fmc_addr={:#x}\n  boot_params={:#x}\n  \
-> +             frts_offset={:#x}\n  frts_size={:#x}\n",
-> +            msg_bytes.len(),
-> +            fmc_addr,
-> +            fmc_boot_params_addr,
-> +            frts_offset,
-> +            frts_size
-> +        );
-> +
-> +        // Send COT message to FSP and wait for response
-> +        Self::send_sync_fsp(dev, bar, fsp_falcon, mctp::NVDM_TYPE_COT, msg_bytes)?;
-> +
-> +        dev_dbg!(dev, "FSP Chain of Trust completed successfully\n");
-> +        Ok(())
-> +    }
-> +
->      /// Send message to FSP and wait for response.
->      fn send_sync_fsp(
->          dev: &device::Device<device::Bound>,
-> diff --git a/drivers/gpu/nova-core/gpu.rs b/drivers/gpu/nova-core/gpu.rs
-> index c0473ef8ac47..8fdce488612a 100644
-> --- a/drivers/gpu/nova-core/gpu.rs
-> +++ b/drivers/gpu/nova-core/gpu.rs
-> @@ -124,7 +124,6 @@ pub(crate) const fn arch(&self) -> Architecture {
->          }
->      }
->  
-> -    #[expect(dead_code)]
->      pub(crate) fn needs_large_reserved_mem(&self) -> bool {
->          matches!(self.arch(), Architecture::Hopper | Architecture::Blackwell)
->      }
-> -- 
-> 2.52.0
+> When vGPU support is enabled, execute the scrubber ucode image to scrub the
+> FB memory before executing any other ucode images.
 > 
+[..]
+>      pub(crate) const fn create(
+> diff --git a/drivers/gpu/nova-core/firmware/booter.rs b/drivers/gpu/nova-core/firmware/booter.rs
+> index f107f753214a..f622c9b960de 100644
+> --- a/drivers/gpu/nova-core/firmware/booter.rs
+> +++ b/drivers/gpu/nova-core/firmware/booter.rs
+> @@ -269,6 +269,7 @@ fn new_booter(dev: &device::Device<device::Bound>, data: &[u8]) -> Result<Self>
+>  
+>  #[derive(Copy, Clone, Debug, PartialEq)]
+>  pub(crate) enum BooterKind {
+> +    Scrubber,
+>      Loader,
+>      #[expect(unused)]
+>      Unloader,
+> @@ -286,6 +287,7 @@ pub(crate) fn new(
+>          bar: &Bar0,
+>      ) -> Result<Self> {
+>          let fw_name = match kind {
+> +            BooterKind::Scrubber => "scrubber",
+>              BooterKind::Loader => "booter_load",
+>              BooterKind::Unloader => "booter_unload",
+>          };
+> diff --git a/drivers/gpu/nova-core/gsp/boot.rs b/drivers/gpu/nova-core/gsp/boot.rs
+> index ec006c26f19f..8ef79433f017 100644
+> --- a/drivers/gpu/nova-core/gsp/boot.rs
+> +++ b/drivers/gpu/nova-core/gsp/boot.rs
+> @@ -151,6 +151,33 @@ pub(crate) fn boot(
+>  
+>          Self::run_fwsec_frts(dev, gsp_falcon, bar, &bios, &fb_layout)?;
+
+Could you elaborate on how the timeout below works? See comment below.
+
+>  
+> +        if vgpu_support {
+> +            let scrubber = BooterFirmware::new(
+> +                dev,
+> +                BooterKind::Scrubber,
+> +                chipset,
+> +                FIRMWARE_VERSION,
+> +                sec2_falcon,
+> +                bar,
+> +            )?;
+> +
+> +            sec2_falcon.reset(bar)?;
+> +            sec2_falcon.dma_load(bar, &scrubber)?;
+> +
+> +            let (mbox0, mbox1) = sec2_falcon.boot(bar, None, None)?;
+
+boot() already returns -ETIMEDOUT via wait_till_halted()->read_poll_timeout().
+
+The wait there is 2 seconds. I assume the scrubber would have completed by then.
+
+> +
+> +            dev_dbg!(
+> +                pdev.as_ref(),
+> +                "SEC2 MBOX0: {:#x}, MBOX1{:#x}\n",
+> +                mbox0,
+> +                mbox1
+> +            );
+> +
+> +            if !regs::NV_PGC6_BSI_SECURE_SCRATCH_15::read(bar).scrubber_completed() {
+> +                return Err(ETIMEDOUT);
+
+So under which situation do you get to this point (!scrubber_completed) ?
+Basically I am not sure if ETIMEDOUT is the right error to return here, because
+boot() already returns ETIMEDOUT by waiting for the halt.
+
+If you still want return ETIMEDOUT here, then it sounds like you're waiting for
+scrubbing beyond the waiting already done by boot(). If so, then shouldn't you
+need to use read_poll_timeout() here?
+
+perhaps something like:
+
+ read_poll_timeout(
+     || Ok(regs::NV_PGC6_BSI_SECURE_SCRATCH_15::read(bar).scrubber_completed()),
+     |val: &bool| *val,
+     Delta::from_millis(10),
+     Delta::from_secs(5),
+ )?;
+
+Thanks.
+
