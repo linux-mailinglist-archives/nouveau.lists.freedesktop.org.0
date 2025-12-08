@@ -2,169 +2,65 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id 9310ACAC1E8
-	for <lists+nouveau@lfdr.de>; Mon, 08 Dec 2025 07:09:32 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id B6685CBA8DC
+	for <lists+nouveau@lfdr.de>; Sat, 13 Dec 2025 13:17:18 +0100 (CET)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 7D13D10E0D7;
-	Mon,  8 Dec 2025 06:09:30 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id E069010E40A;
+	Sat, 13 Dec 2025 12:17:14 +0000 (UTC)
 Authentication-Results: gabe.freedesktop.org;
-	dkim=pass (2048-bit key; unprotected) header.d=Nvidia.com header.i=@Nvidia.com header.b="SBmqcACx";
+	dkim=pass (2048-bit key; unprotected) header.d=bne-home.net header.i=@bne-home.net header.b="lCGuFgni";
 	dkim-atps=neutral
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from CY3PR05CU001.outbound.protection.outlook.com
- (mail-westcentralusazon11013045.outbound.protection.outlook.com
- [40.93.201.45])
- by gabe.freedesktop.org (Postfix) with ESMTPS id F2ACB10E0DF
- for <nouveau@lists.freedesktop.org>; Mon,  8 Dec 2025 06:09:28 +0000 (UTC)
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=aPWgEXZEvscOnN5pT3Xoq/57z46oZLT5OXn2SZ3lQKK8ihdIzTf+c6eoBfNwiiyex8VIEwyYpvFtz4tI4lvbFzjIYr+yUdoyBTQ7omr1CdRrVJKZ1Q1I7flqEwzcSgF7ccf9NQIR6mBzdkH+vShHaZ/6rHFHuOcWZJzLaWgSCS6nuTwe82jSI6oPzLTJs4CUO33BRtjX6b3CGKgdnrqQdOvQEZuR5t3xMjbRsV9n/+AWb/G5cE89rWn6D/tcRE8Zm4G55LOVfFB1+r+C7YiR27kyQOLFIDLz4cthMFiZPF63iCvw2qMWNi7bWmHOkDFlaBc2o4bEUbNYc9FjBpMR9g==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=ZvTvthd5FWkeXDhav1di00NK/fhAPL7rLPPmrjLo6dg=;
- b=TjXC9vpOYBBpT0GIXdBa2udUyAozftgwVbo6hI6KuJO12lxvuVEIOx7kZp7xV/PBqEHQGmcQ6UCvZaT4kUIC4OtRP7NHC223se6fh27y9gVWJxMgomI1QdBMYEkIn5Yvrm35KpYHdw/mKL/rTyy94rT85BRtaKhCpQgWI7NfL3m1gbR5s8iToBedh23cT8FvxwYxar77XrYAffGHeEB+poc/xvqtUqjzBoPyM3qVClHbV8nkApVhwiMlrrqrdOoSg3+yslNWhyPg9XwkpHBSujsOZCm7z/uyo6WCZpdOzyfK44VIu151+18jBM23JhuDbPh3VbuO/nKrq1ws69X1iQ==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=nvidia.com; dmarc=pass action=none header.from=nvidia.com;
- dkim=pass header.d=nvidia.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=Nvidia.com;
- s=selector2;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=ZvTvthd5FWkeXDhav1di00NK/fhAPL7rLPPmrjLo6dg=;
- b=SBmqcACxlVjhbsErFDFZqj7eCZOxnXdDKxuuE8svqNTnyjD89aQJO9kktce9tyr8VJ68M4TMA0rXQhxnTougsQSnive4mEOdu8lAMJQa/hHi0meDrcSnJ7kVOVGlVEKb4trzgygE2+Ir/Kt+AszZUCAzs/WBWXqbONb6d4tL6RdBirZtvmDmDnmtnuyZnUOl2RDHryoL2AAWtU6rS81GyvgmEYXRqAuPGmr+Pm4rTaEY7ZCufweyXuIwpQxZEOhXbQS1GADV0huCWkjB07cVcYHe/XDtEbROn97J32VgD+s40FVFDTk3FBM9JbgzljqrRHFp3olQLQlJTh3uaykN9Q==
-Authentication-Results: dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=nvidia.com;
-Received: from DM3PR12MB9416.namprd12.prod.outlook.com (2603:10b6:0:4b::8) by
- MN2PR12MB4357.namprd12.prod.outlook.com (2603:10b6:208:262::19) with
- Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9388.14; Mon, 8 Dec
- 2025 06:09:24 +0000
-Received: from DM3PR12MB9416.namprd12.prod.outlook.com
- ([fe80::8cdd:504c:7d2a:59c8]) by DM3PR12MB9416.namprd12.prod.outlook.com
- ([fe80::8cdd:504c:7d2a:59c8%7]) with mapi id 15.20.9388.013; Mon, 8 Dec 2025
- 06:09:24 +0000
-Message-ID: <d9ca3708-8192-4897-9608-33232be14c20@nvidia.com>
-Date: Sun, 7 Dec 2025 22:09:20 -0800
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 23/31] gpu: nova-core: Hopper/Blackwell: add FSP Chain of
- Trust boot
-To: Joel Fernandes <joelagnelf@nvidia.com>
-Cc: Danilo Krummrich <dakr@kernel.org>,
- Alexandre Courbot <acourbot@nvidia.com>, Timur Tabi <ttabi@nvidia.com>,
- Alistair Popple <apopple@nvidia.com>, Edwin Peer <epeer@nvidia.com>,
- Zhi Wang <zhiw@nvidia.com>, David Airlie <airlied@gmail.com>,
- Simona Vetter <simona@ffwll.ch>, Bjorn Helgaas <bhelgaas@google.com>,
- Miguel Ojeda <ojeda@kernel.org>, Alex Gaynor <alex.gaynor@gmail.com>,
- Boqun Feng <boqun.feng@gmail.com>, Gary Guo <gary@garyguo.net>,
- =?UTF-8?Q?Bj=C3=B6rn_Roy_Baron?= <bjorn3_gh@protonmail.com>,
- Benno Lossin <lossin@kernel.org>, Andreas Hindborg <a.hindborg@kernel.org>,
- Alice Ryhl <aliceryhl@google.com>, Trevor Gross <tmgross@umich.edu>,
- nouveau@lists.freedesktop.org, rust-for-linux@vger.kernel.org,
- LKML <linux-kernel@vger.kernel.org>
-References: <20251203055923.1247681-1-jhubbard@nvidia.com>
- <20251203055923.1247681-24-jhubbard@nvidia.com>
- <20251206213614.GA177930@joelbox2>
-Content-Language: en-US
-From: John Hubbard <jhubbard@nvidia.com>
-In-Reply-To: <20251206213614.GA177930@joelbox2>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
-X-ClientProxiedBy: BY5PR20CA0035.namprd20.prod.outlook.com
- (2603:10b6:a03:1f4::48) To DM3PR12MB9416.namprd12.prod.outlook.com
- (2603:10b6:0:4b::8)
+X-Greylist: delayed 600 seconds by postgrey-1.36 at gabe;
+ Mon, 08 Dec 2025 07:04:19 UTC
+Received: from outbound.mr.icloud.com
+ (p-west2-cluster4-host10-snip4-8.eps.apple.com [57.103.69.189])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 4209810E0E4
+ for <nouveau@lists.freedesktop.org>; Mon,  8 Dec 2025 07:04:19 +0000 (UTC)
+Received: from outbound.mr.icloud.com (unknown [127.0.0.2])
+ by p00-icloudmta-asmtp-us-west-2a-60-percent-0 (Postfix) with ESMTPS id
+ D00D71800191; Mon,  8 Dec 2025 06:44:27 +0000 (UTC)
+Dkim-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=bne-home.net; s=sig1;
+ bh=zkYFu2V1ACrqhCXdzvEsiMc0nIxkYl+fHDMyoPJps5M=;
+ h=From:To:Subject:Date:Message-ID:MIME-Version:x-icloud-hme;
+ b=lCGuFgni2nYzmevzu3Bt7bv8I+89Zj673Gs3YkeT0jgDflMZaEoqFRddTCtps89jgWPGZg8U2hY1CUUgCQjV5B0jV574ZlqknFN8ZfdyIOcYVwTCrfuaxiwCJsyDHc53VSH/8DQRYQjo9xapfPowFAgYUgqD8aKKVfmiCaZmgUC0wpBZzrZJf9DW0beO+W0ixbFzT1VhzoGzzL7aCVuZabpjO7edClpBVbnQiHhivDCcn8bY6yo+shjlKF7AxdW7vi95HjB3LhoMNqBnbNj0nOdGf3VqibNQmox268qyfgxZ+YLzNTxCoBTY7MxAnQHJ3duk5JRu9OKy2Xvn7yQWzg==
+mail-alias-created-date: 1746336505199
+Received: from fedora (unknown [17.57.152.38])
+ by p00-icloudmta-asmtp-us-west-2a-60-percent-0 (Postfix) with ESMTPSA id
+ A9BD018000B3; Mon,  8 Dec 2025 06:44:25 +0000 (UTC)
+From: Brendan Shephard <bshephar@bne-home.net>
+To: aliceryhl@google.com, joelagnelf@nvidia.com, acourbot@nvidia.com,
+ airlied@redhat.com
+Cc: rust-for-linux@vger.kernel.org, nouveau@lists.freedesktop.org,
+ Brendan Shephard <bshephar@bne-home.net>
+Subject: [PATCH v2] drm: nova: Align GEM memory allocation to system page size
+Date: Mon,  8 Dec 2025 16:44:05 +1000
+Message-ID: <20251208064405.573026-1-bshephar@bne-home.net>
+X-Mailer: git-send-email 2.52.0
 MIME-Version: 1.0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: DM3PR12MB9416:EE_|MN2PR12MB4357:EE_
-X-MS-Office365-Filtering-Correlation-Id: 46fddbe4-5c68-4054-a585-08de3620561a
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0;
- ARA:13230040|10070799003|1800799024|366016|376014|7416014; 
-X-Microsoft-Antispam-Message-Info: =?utf-8?B?dnRHREgrUXBNS0JPQjJ3eFV3VWJ4eXU3QjE5MUVoUHY3Y1FPeUMrSllsTW1x?=
- =?utf-8?B?SndnZGJoekFkZHFMa251eVVzNVNvbytqQmNTZno1NjI4TU1MNjVoUS82K25W?=
- =?utf-8?B?dFlQd3FpZDBoNTREa2FSUXU1SlpYZ1hEYSs2azhEejA4aGN3dWxDVStFOEV1?=
- =?utf-8?B?cWVXWXMvSjJqNjJWUlJMN2svVjgxbiswOHVPQzBTNUtMVzBiS21iRURNdlRi?=
- =?utf-8?B?VUthaVhQZVJwUitOczNPZWhuSUI2ekNrOGZTcnYzZ1U0OHFGVGZCWGR2a01C?=
- =?utf-8?B?a0tzNHBXTTQ5RjRSbU5oOGUxTVpKdDZMSVRSdWZtSFFibkJ4M3ZWN3RUQWxO?=
- =?utf-8?B?SkVVZW42ODNvZlBOa0pnUFJYYWd6T1plS25ZS21WWDB6YVhVazJhMG1jZjJS?=
- =?utf-8?B?K0hzUTgyQVkyN2xiSG9MY3htalV0TE1YbUQvR0tIeVNpTHVWVldWeUlMQVZl?=
- =?utf-8?B?N3g3QlFsUEwzZ2FqcmVjT2NYaFlzbnFiWFI4eU9mME0vSENUYmtpOVc5UUNx?=
- =?utf-8?B?MUl5bWVyM0JGSldEU2hiMTFQYzFmQUZuRTUzclNubldENExCNGdBQ04ySW1l?=
- =?utf-8?B?ZEJWZFJURHV5NEpiNXBPbkt0STBMbm1JSGZzSHdzS3dnMTBBVUNKTVh3YkVQ?=
- =?utf-8?B?UW5sQ3NMYk9xazZ2M1lRcE12UVpWN0hYN2VvWktLZnlNQUNDWml0N1BzcTNo?=
- =?utf-8?B?RXM2RGpnUVdCMk05L3V4dDZxNG1QTXRlM24ycFJpbzlsNE5QYlVsUHJGWEVX?=
- =?utf-8?B?VytNTWYyMG1lMGRvM3U3WEwxNDl2aWx1a0lqZWxVbEFIU1NTYnR0NUd3RlZt?=
- =?utf-8?B?YjNGaUd0bTJzZmdjZEgzejlVK3NFU1RjbWFYL2tJSVNidXJLOHR4NGJrNFlK?=
- =?utf-8?B?b2lqNFRadENBSFA4Y2pJa1YwY1NnTFgrS3dvWmV1SHpSM29qejNlN1YyNm1C?=
- =?utf-8?B?aGNqRjdGTHRSVmJsTE9TcVI3aS85OTMwWnR0RUV5UkZHa2lNQzF2SjBNbDFl?=
- =?utf-8?B?bmF4NGhsa3A2d3lzcEc1T0E0RGJobW84QStWWCsrZnZOYmFTR01PV2s5ZlFF?=
- =?utf-8?B?cUdhMXV3QUVmeDZFV2h1WjVHN0ZuMllpbGdYVVRmZlJ6UnFQUHpwbGw4djBh?=
- =?utf-8?B?UmZMenNYRklhK3ZqVVVDVzhvSmg3czJUSXZhZjl6WTIwKzFwRzBSMm9LM2VU?=
- =?utf-8?B?U3piUGZ5ZlJxNGN3UC9MWEdzSWMvR1NKL3ZhN21uSkt2cGZYVzZ3Mjc2SVpT?=
- =?utf-8?B?TjJKWVpYRzR1dFEzd3JPMHlLdDBTZ1pBUEc5VFRZUGRlWXUrbFd6cE5SREhM?=
- =?utf-8?B?Nm5kdDZvUmZ0eU01K0FLSWdpWExQNXJ1cmZvR1krN3U5N2ROSVdFb2FBdHpP?=
- =?utf-8?B?VmF5UWxwVGxYdGN0d2MxZWJUZVF3dlhCUzZtSFBnemZuRjJXVXFiODViMjc3?=
- =?utf-8?B?dElZR2RFT2IvSHcvQ0EwZnRuZTY1aWlpS2tXRWp6ZXl4VlhQVEZnT3pXTXlk?=
- =?utf-8?B?TFBsM0R1Rm80WkZvZ2RMRDA3UHRTTzlIUi9KNDVkUVY0NWZya3hEbGN3dzkr?=
- =?utf-8?B?ZUlva1p4THhLUkptT3cwaGd1YUx4OEM2eW82eEFBV1JFemRWM290aW5BeFd2?=
- =?utf-8?B?VTNZUGpQSWJDWXdjOGhETXFlOUdsZTFaN0w0WjV5c2V4V0szWkN1blFBTlFx?=
- =?utf-8?B?dk41TTRROHVUWEFQZlpMbkJtcldkbU1ENy9zQzNMd3hYWFVsVmZlSnUxdm1T?=
- =?utf-8?B?cGRCR1JIaS9BcUZtTW5aTUFTV01KY0tMVVVEM3BNQUY5T3EzRUc4amVMbUln?=
- =?utf-8?B?VEp4bDBzelZnRnRVVVkzRWpmQWorMUxmRno5dTQ3Rk5nQVZ4MmVsRDYvOHhU?=
- =?utf-8?B?cHlmbDRXaEVtdW1CdEtKd2EreGxaQ2FwVTdKcXBWTGpNeHRhZ1p3dS9kZ0VY?=
- =?utf-8?Q?S3TLgnJ4MSEGw+pN/axk+tVgLHnUZZ3j?=
-X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
- IPV:NLI; SFV:NSPM; H:DM3PR12MB9416.namprd12.prod.outlook.com; PTR:; CAT:NONE;
- SFS:(13230040)(10070799003)(1800799024)(366016)(376014)(7416014); DIR:OUT;
- SFP:1101; 
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?dzlON3VkeXpES3hlWWppblJmazQwMG5JYlNsNG5xckxzSGxzYmx5WWt2TWMy?=
- =?utf-8?B?dWpPTjZMbEwyZ2FFL1lVZ0VVQWQ3WmVubTFERUV6dFpoVzNoK2pSNFdsbmlU?=
- =?utf-8?B?SmxzWEt3eDNMSVB3U0RGM1o0ODExR1dONmpFN2RrZzltbUsxTWorWERYeEJk?=
- =?utf-8?B?UTJ1WkptaUJYSjYvWXFKNUNFcUIwRFBrT3VlSFBpTFBLUHZHemMvcjVYb2sy?=
- =?utf-8?B?anBscG1vYUpYNkRwN3JZWWdVblNoZlJ4ZEFTcGJCV21pUWhacHdqT0NEVGo2?=
- =?utf-8?B?TExyZGJwWS9FUy9uQ0hQOE00UnpjUVpsTTlrRmsvQVNzbGRUdmNsUnhWeFMy?=
- =?utf-8?B?akdHdGNTYms3Qll6MEsyOFZyUEtxamxJUDI1MGRrTlhIQ2o0TjRydXpMUkRp?=
- =?utf-8?B?S3lGN2p3R0hEVUtzeDdHZk5CU2RGY2MwSHF1cXZKREQ3ZnRrekwrYitodGli?=
- =?utf-8?B?SkFiVGZsbDJYc2J5YVlVN2hucDlnZEpLRWF3NmRLVXlUQ25LZG9rTlJObDVZ?=
- =?utf-8?B?QjRoVWR2SVVIaWdYSWdoaFVrVGs5aDVqQ3N5bFJhNVRKMmVhR3ZYYWxOcXVN?=
- =?utf-8?B?amVmekNqVGhLSGh0aDZoZG1Rd3NXaHVyQ0VSZndCQ2ZFWGhicVF0cGZwSzFR?=
- =?utf-8?B?VmtyTVh3eHljZlR2SkF0a2NNd3ROcVlxQUc2dFdBL1VWbXRIcHE4SVRRUXdi?=
- =?utf-8?B?T1FzSHUvVHM5bkVUSENjY0VJWHJ5RENXYWgvZHg0TUlpeHFpOXpHRUxwY3kx?=
- =?utf-8?B?aHhoRVgxL0JCclU1MFFiekpTOEVJVHpEQk5NRHJlUmwvb2NuR0xsNnVwVmt0?=
- =?utf-8?B?OGVyV0w0L05VV29Nc08wM3JZcC9WcGtUTThMOHorVHpsQzZLL0pkaDFGYm1j?=
- =?utf-8?B?WHhJRDNXQ3YvMENqVXdsSzgxcUN6UmV4SHBWVDFTcUxHU0d3bVBYYmI4UUlr?=
- =?utf-8?B?Mm4xTnY3RjNOUXFoOWVpYndkZmxjMkZmMDJvWElQdE14QytjT3FtMWtlVWRm?=
- =?utf-8?B?L3lMUy94akIvWmMyQS9nUDV0SG5jb3h1MjV2ZFlkRHI1R25qQlVtS2Q3bUp0?=
- =?utf-8?B?dEVFaHRmMU9LZXVLSmk0MTQ3eUVManRIS3lBMTIreXkxR2NlSHZjaFI1QXZP?=
- =?utf-8?B?Q0xOY2Z4eGpNT2JtdE5LNEIwM1F0MlhhYW5jVjR4eVh4VlQ0NWx2WVlXeXdF?=
- =?utf-8?B?UVE2UkdHeFVFNk9OUmpudUhMMmNReXduVUlNNVQ5WG9SVUNUekxYN3NrTFFI?=
- =?utf-8?B?Q0FWelp1YjNHUFIrcy9zWGpEZzMrZTVRczV2WkR3MFRvV21pcUt1MjFFUWRD?=
- =?utf-8?B?Q2JNbXhxQ1RNVzh4QmRDaHFTaS80bkV1RXFZbjBFOFp0TmkvSVNpaldud0JH?=
- =?utf-8?B?NzliOURxbEk3VUtFaGNpeWFLZWlZKzZnTkRNM0Q2ZC9VbFJBR0t1RE5YTkE3?=
- =?utf-8?B?T3F0d0JyNTRMU2JsWDd6Nm1oRFg5eDZwQ1hvL0U4ZzZEVUtjTnJyU3NIdHIx?=
- =?utf-8?B?UHlJSVQ1U0xrS21GSW5ZRHJaTWtwQ3dEMjB0MFExcTI0MHB6VGFSdVhCSGlL?=
- =?utf-8?B?R3FjdU81dkhIaU1MQ0ZmWmV0emRuUDRTdW10OUJSU0pxampiNUNoTml6clNK?=
- =?utf-8?B?aTYwcU9vQjBOVHFVMVgxRDBPUVlkalVvVE9nNVg2RjhJTUtLRWZNalkwUDd4?=
- =?utf-8?B?RzJLbGFzR0ZKMzhQQmRnTGxGYU5OVXFyS25jMzJlN1pOaWJRbnZCRDVrU0k4?=
- =?utf-8?B?Zy9UWFBvQlhqcWFyVklQYXlhdWxhd0NKb3ZTMVJkb0Vuenk1d3VVVU1keTJF?=
- =?utf-8?B?SVdIVUZPRVNUei9QWDNrOFlFZGlZY0VzWkc2Y2lLMUcxY203V0RrMDlkZzcz?=
- =?utf-8?B?TDJLdVlNU01wMEl6U0toY1o1Q3Y1Z3RMQmtNOVovZHJpdGM3dndkNkg3Vkd0?=
- =?utf-8?B?QW5RVm9CaG1kOEM3ZmRiaWpUZUNBTUExRGZTTVpwcEFlSEdtdnpRdUlMVWpz?=
- =?utf-8?B?K2lYaytEMDc2RHJUSHBSaDBZdnRRenJ0V0VUdVI5cGJQT1JSbmxZenkwTjhQ?=
- =?utf-8?B?a1pjSm14ZDdKT0ZlNlZkZmNTU0tUZ3JKd3B3V2JVTjBSSFJWdGJNeWlZeXEy?=
- =?utf-8?B?SWswaVVlaHZmK0F3ZnRBTkhPdWRJR0hFbGhXWjF5OHp5WEh6U1FRRmNodFBS?=
- =?utf-8?Q?8PxXP2vwFU9Ge7Uh5uoi5WU=3D?=
-X-OriginatorOrg: Nvidia.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 46fddbe4-5c68-4054-a585-08de3620561a
-X-MS-Exchange-CrossTenant-AuthSource: DM3PR12MB9416.namprd12.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 08 Dec 2025 06:09:24.6123 (UTC)
-X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
-X-MS-Exchange-CrossTenant-Id: 43083d15-7273-40c1-b7db-39efd9ccc17a
-X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: ZZGKkNjFvS53WmLZnuF3DqZlbA8wyJEk8J/3nKcKZLoaiOy/G4Fi+GmX/u+qhAkPsuYpjstToKWucKbi0DYqmQ==
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: MN2PR12MB4357
+Content-Transfer-Encoding: 8bit
+X-Proofpoint-ORIG-GUID: uKk1vmXC8Np_kz_mwKuC94ybQZH3fT03
+X-Authority-Info: v=2.4 cv=MLhtWcZl c=1 sm=1 tr=0 ts=693673cc cx=c_apl:c_pps
+ a=9OgfyREA4BUYbbCgc0Y0oA==:117 a=9OgfyREA4BUYbbCgc0Y0oA==:17
+ a=wP3pNCr1ah4A:10 a=VkNPw1HP01LnGYTKEx00:22 a=VwQbUJbxAAAA:8 a=JppZAXPjAAAA:8
+ a=a2W8XFUYhzryu76BgXoA:9 a=mTXuAFqUwmiQvsSFmwXH:22
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjUxMjA4MDA1NiBTYWx0ZWRfX/WgfiVLktDgc
+ Al9tJofbK2kG2HjR3x+aiS46gw9aP6AYEig/TQ8iCQk7xhlLnKuxLUaqKw2bNVYpQ9lF7YTDlWq
+ uE520Uh2OWK9moDo5/x88+f/N8FCH+T94BOajtyGSINyVO/SrvNKXXveEbnViEXWsEDTIn1oagt
+ g56KkKd0XG/veetcX7psZ6BFJeudJMYRfIYLqXJfAXNaJ0LQSo31naeTW6RgoNO4ZDhOr8UBIMP
+ +DJKYfG+W1a3L6EtcfE8eRxSUzDeF9JnsVFzWRHqDFrVTOPUJRAgLQpRHFnU2tBK/JFxW2WVShx
+ lT4cn4Y+hiHDzjeUBG/
+X-Proofpoint-GUID: uKk1vmXC8Np_kz_mwKuC94ybQZH3fT03
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.293,Aquarius:18.0.1121,Hydra:6.1.9,FMLib:17.12.100.49
+ definitions=2025-12-06_02,2025-12-04_04,2025-10-01_01
+X-Proofpoint-Spam-Details: rule=notspam policy=default score=0 bulkscore=0
+ mlxlogscore=717 mlxscore=0 spamscore=0 malwarescore=0 suspectscore=0
+ clxscore=1030 phishscore=0 adultscore=0 classifier=spam authscore=0 adjust=0
+ reason=mlx scancount=1 engine=8.22.0-2510240001 definitions=main-2512080056
+X-JNJ: AAAAAAABW7y03TPmhTExObnEYfir4eGrX6PStdqBl/8zgZY4eSZBv5kyBGnJL92XRYkHgRX3YQ06BfWeQgSbYhGcNVGD7othFDjbR00f35IC9FgNz3XxIkADCMhRLpHMr9JiznnyqBLgqOJ+0tGpQdBq96nzkLZ9OV95uloJV0PjE2QxepPnyaNn9+IEJsXRl2OsScagnRXZoKDCZRX2fYCUm07pkaJ4d5+lwWUxlFu3u45fKmOxMzPR914T361DMCzpYl+GK1NsP2SDKuzTGy3XCmw6eXE+9BXW1kPj5gpQ4RsgVro8YqkE/KlDGYDI2mr9SaFt2T4uEpJJiA9UgA3HebfpN1R6ViupFHDM0XLdm7iIqI3IsIQDwceOrCnqNvBqU+xCjANXAlbXYo8xFxMWwsaRk5adrYv+3QxpUIBRb/v6Gb9VHY23P1H4cte8AI8buGo7Id70TdcDzs/2VyacrGzNVvvfkxnFNykAraUDcS/P4yZ2NH4Vb/AeN8tgrfOHyBFvcS1QdQMZX0JtEWLIkYzKsH5hXPm9cmgv//PkTCZ8TOh50OIZlhEprrkrUCB3vtR5+1WY6p2LeYZGZ66MPgH/HSVhfZQYNcux+E0/g0RFl0v1+pEj9W2UUynQgzZeUWO3MvosD8jQWrOShodI5z3FDsof2n2o5EQbdOdEgMlFol5jU954I2J257RuCAoSQqz5NX3GNEdbvAPUxS2GEA==
+X-Mailman-Approved-At: Sat, 13 Dec 2025 12:17:03 +0000
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -179,36 +75,53 @@ List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-On 12/6/25 1:36 PM, Joel Fernandes wrote:
-> On Tue, Dec 02, 2025 at 09:59:15PM -0800, John Hubbard wrote:
-...
->> +/// FSP Chain of Trust (COT) version for Blackwell.
->> +/// GB202 uses version 2 (not 1 like GH100)
->> +const FSP_COT_VERSION: u16 = 2;
-> 
-> the comment says that Hopper needs this to be version 1 so how does this
-> series boot on Hopper? maybe we need to add a new function to return a
-> different version number for Hopper versus Blackwell?
+Use page::page_align for GEM object memory allocation to ensure the
+allocation is page aligned. This ensures that the allocation is page
+aligned with the system in cases where 4096 is not the default.
+For example on 16k or 64k aarch64 systems this allocation should be
+aligned accordingly.
 
-That's correct. And the signature size is also different between
-them, I'll fix that up too.
+This change uses the updated page_align() function from commit:
+"rust: Return Option from page_align and ensure no usize overflow"
+Which returns an Option<usize> for overflow safety.
 
-I'll work on getting the Hopper testing done, to shake out any
-other issues.
+Signed-off-by: Brendan Shephard <bshephar@bne-home.net>
+---
+Changes in v2:
+- Updated to use the new page_align() Option<usize> return value from:
+  Commit: "rust: Return Option from page_align and ensure no usize overflow"
+  https://lore.kernel.org/rust-for-linux/20251204224006.353646-2-bshephar@bne-home.net/T/#u
 
-> 
-> edit: I just noticed in the cover letter that you mentioned this is tested
-> only on Blackwell. I think perhaps we should drop the claim that the series
-> works on hopper in the patches / cover letter.
-> 
-Yes, the cover letter mentions not tested on Hopper, because it
-hasn't been. I don't recall any hard claims that it works on Hopper,
-only that "support" has been added (code complete, not tested).
+ drivers/gpu/drm/nova/gem.rs | 7 ++-----
+ 1 file changed, 2 insertions(+), 5 deletions(-)
 
-But hopefully I'll get a Hopper test run finished soon, to fortify
-the v2 posting of this series.
+diff --git a/drivers/gpu/drm/nova/gem.rs b/drivers/gpu/drm/nova/gem.rs
+index 2760ba4f3450..41439f3b9361 100644
+--- a/drivers/gpu/drm/nova/gem.rs
++++ b/drivers/gpu/drm/nova/gem.rs
+@@ -3,6 +3,7 @@
+ use kernel::{
+     drm,
+     drm::{gem, gem::BaseObject},
++    page::page_align,
+     prelude::*,
+     sync::aref::ARef,
+ };
+@@ -27,11 +28,7 @@ fn new(_dev: &NovaDevice, _size: usize) -> impl PinInit<Self, Error> {
+ impl NovaObject {
+     /// Create a new DRM GEM object.
+     pub(crate) fn new(dev: &NovaDevice, size: usize) -> Result<ARef<gem::Object<Self>>> {
+-        let aligned_size = size.next_multiple_of(1 << 12);
+-
+-        if size == 0 || size > aligned_size {
+-            return Err(EINVAL);
+-        }
++        let aligned_size = page_align(size).ok_or(EINVAL)?
+ 
+         gem::Object::new(dev, aligned_size)
+     }
 
-thanks,
+base-commit: 37bb2e7217b01404e2abf9d90d8e5705a5603b52
 -- 
-John Hubbard
+2.52.0
 
