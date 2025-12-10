@@ -2,162 +2,78 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id B0953CB0494
-	for <lists+nouveau@lfdr.de>; Tue, 09 Dec 2025 15:29:22 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 1AF31CB1852
+	for <lists+nouveau@lfdr.de>; Wed, 10 Dec 2025 01:40:44 +0100 (CET)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 5912D10E62F;
-	Tue,  9 Dec 2025 14:29:21 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 18D3E10E646;
+	Wed, 10 Dec 2025 00:40:42 +0000 (UTC)
 Authentication-Results: gabe.freedesktop.org;
-	dkim=pass (2048-bit key; unprotected) header.d=Nvidia.com header.i=@Nvidia.com header.b="CkTWTrsR";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="dMUSespG";
 	dkim-atps=neutral
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from BL0PR03CU003.outbound.protection.outlook.com
- (mail-eastusazon11012071.outbound.protection.outlook.com [52.101.53.71])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 885A910E62F
- for <nouveau@lists.freedesktop.org>; Tue,  9 Dec 2025 14:29:20 +0000 (UTC)
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=cPkNsugdQCAdv5ei2IbJadjWwvQFaYsPhz28UAw8PTwr82UY1BZYjPhbeQA0CJMU9+COtGnxiFXmBWqlOU604dhYKDQdw89XrNui69WrS4L/3ZXL1skR8ssGZ4sRSBdIgjqLVoMiGOPeNom7PwaRD8MuTuFUymF8xBvpTLDjb3flQqmbnkkAKqyUf8B0OQX1NC3fUZ7yP+fnKdwVZHWV+1E5Bhm7zbwcuNXdKA3W4Lc7e7eTwOoAu4XN9fVZuQHwi/w+L8ls9r5+Ue57xmUvyM746j+6vA6XlkaiaKoHfDRCeG4PzX39ZdaSumrrfaYRuwT4rjijqNp3S0BVwq7qQw==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=Lb+qqanzNhVZL1mSY4OKmFOHZ3bi9xP/28e5MRBummM=;
- b=j0hXd26j57G7WL+75klGeXkC2kYwjHGvP4i0hYWmmTQpLVmrihdrNP/2Y8SF6xiddc8reTAcjIq2M2Hc/a/XXdnqqDwPG7JJyVhCsM/E/Sr+NLNpX2QJRf6NeBHiA0MuItSGs+xRW6VnSAlNfRgFftr1uSOBcCgmHu4O7gkbtPhBpF5iBYljdI9EXyE6B9YLhs+JFKaxfHtFg9XjI0KI7Ba8uDR3DydIQZ5PQ/76dW1PLBRpZfBqk/+ashfc4IuJOnoDmd0ytmGC9OCJLNqGmVgGPPifGnl5TRjLAQKyJfnpZsN/gxlOnop6tUpT4pPAWmeiAe9UokXBtNsZ24A5ZA==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
- 216.228.117.160) smtp.rcpttodomain=google.com smtp.mailfrom=nvidia.com;
- dmarc=pass (p=reject sp=reject pct=100) action=none header.from=nvidia.com;
- dkim=none (message not signed); arc=none (0)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=Nvidia.com;
- s=selector2;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=Lb+qqanzNhVZL1mSY4OKmFOHZ3bi9xP/28e5MRBummM=;
- b=CkTWTrsRn6lvdljdOlZ9/2v4PdgIH4WHhvkvMOMU9M7CFFjlZ1xeR50G5c6RT4fbJU15RTox9RJ99zjQVuka3C5tjiUVIsxG39Yx/3eZ2z1qz1VSlNy5hZRl+k7/a9qEKKSCAfLlVbyt4s/1xfxoy5PgeVHl6i50U87QLFWaA+vqH2qEygMvylVWr1Tv9rzwoXQw0KNvrJgXyfqS1SktpqWJ8cM1B61naIC7afUYYCBssBhU3w/lFSoE5ndTD8PxmtEZUvUAPe96UlbE4uVeJGaE/efi07LF5AIRrwymwxSxr0eaIlQJINZjbDNIm5lbk06co3QxrAh1NrE6JuL31g==
-Received: from PH7P222CA0008.NAMP222.PROD.OUTLOOK.COM (2603:10b6:510:33a::35)
- by CYXPR12MB9318.namprd12.prod.outlook.com (2603:10b6:930:de::22)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9388.14; Tue, 9 Dec
- 2025 14:29:11 +0000
-Received: from CY4PEPF0000E9DA.namprd05.prod.outlook.com
- (2603:10b6:510:33a:cafe::a8) by PH7P222CA0008.outlook.office365.com
- (2603:10b6:510:33a::35) with Microsoft SMTP Server (version=TLS1_3,
- cipher=TLS_AES_256_GCM_SHA384) id 15.20.9412.7 via Frontend Transport; Tue, 9
- Dec 2025 14:29:11 +0000
-X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 216.228.117.160)
- smtp.mailfrom=nvidia.com;
- dkim=none (message not signed)
- header.d=none;dmarc=pass action=none header.from=nvidia.com;
-Received-SPF: Pass (protection.outlook.com: domain of nvidia.com designates
- 216.228.117.160 as permitted sender) receiver=protection.outlook.com;
- client-ip=216.228.117.160; helo=mail.nvidia.com; pr=C
-Received: from mail.nvidia.com (216.228.117.160) by
- CY4PEPF0000E9DA.mail.protection.outlook.com (10.167.241.73) with Microsoft
- SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.20.9412.4 via Frontend Transport; Tue, 9 Dec 2025 14:29:11 +0000
-Received: from rnnvmail203.nvidia.com (10.129.68.9) by mail.nvidia.com
- (10.129.200.66) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.20; Tue, 9 Dec
- 2025 06:28:52 -0800
-Received: from rnnvmail202.nvidia.com (10.129.68.7) by rnnvmail203.nvidia.com
- (10.129.68.9) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.20; Tue, 9 Dec
- 2025 06:28:52 -0800
-Received: from inno-ThinkPad-X280 (10.127.8.14) by mail.nvidia.com
- (10.129.68.7) with Microsoft SMTP Server id 15.2.2562.20 via Frontend
- Transport; Tue, 9 Dec 2025 06:28:44 -0800
-Date: Tue, 9 Dec 2025 16:28:39 +0200
-From: Zhi Wang <zhiw@nvidia.com>
-To: Joel Fernandes <joelagnelf@nvidia.com>
-CC: Timur Tabi <ttabi@nvidia.com>, "linux-pci@vger.kernel.org"
- <linux-pci@vger.kernel.org>, "nouveau@lists.freedesktop.org"
- <nouveau@lists.freedesktop.org>, "linux-kernel@vger.kernel.org"
- <linux-kernel@vger.kernel.org>, "rust-for-linux@vger.kernel.org"
- <rust-for-linux@vger.kernel.org>, Kirti Wankhede <kwankhede@nvidia.com>,
- "a.hindborg@kernel.org" <a.hindborg@kernel.org>, "markus.probst@posteo.de"
- <markus.probst@posteo.de>, "boqun.feng@gmail.com" <boqun.feng@gmail.com>,
- "Neo Jia" <cjia@nvidia.com>, "ojeda@kernel.org" <ojeda@kernel.org>, Aniket
- Agashe <aniketa@nvidia.com>, "tmgross@umich.edu" <tmgross@umich.edu>,
- "alex.gaynor@gmail.com" <alex.gaynor@gmail.com>, "helgaas@kernel.org"
- <helgaas@kernel.org>, "lossin@kernel.org" <lossin@kernel.org>,
- "alex@shazbot.org" <alex@shazbot.org>, Surath Mitra <smitra@nvidia.com>,
- "John Hubbard" <jhubbard@nvidia.com>, Ankit Agrawal <ankita@nvidia.com>,
- "Alexandre Courbot" <acourbot@nvidia.com>, "bjorn3_gh@protonmail.com"
- <bjorn3_gh@protonmail.com>, "Tarun Gupta (SW-GPU)" <targupta@nvidia.com>,
- "zhiwang@kernel.org" <zhiwang@kernel.org>, "airlied@gmail.com"
- <airlied@gmail.com>, "aliceryhl@google.com" <aliceryhl@google.com>,
- "kwilczynski@kernel.org" <kwilczynski@kernel.org>, "bhelgaas@google.com"
- <bhelgaas@google.com>, "gary@garyguo.net" <gary@garyguo.net>,
- "dakr@kernel.org" <dakr@kernel.org>
-Subject: Re: [RFC 5/7] gpu: nova-core: set RMSetSriovMode when NVIDIA vGPU
- is enabled
-Message-ID: <20251209162839.51e2cf0e@inno-ThinkPad-X280>
-In-Reply-To: <26FAD9BC-9CFC-4BFE-9985-DD660BCD840A@nvidia.com>
-References: <20251206124208.305963-1-zhiw@nvidia.com>
- <20251206124208.305963-6-zhiw@nvidia.com>
- <6c2e13d934c11170edba603fb88e8f2d67a2a049.camel@nvidia.com>
- <26FAD9BC-9CFC-4BFE-9985-DD660BCD840A@nvidia.com>
-X-Mailer: Claws Mail 4.0.0 (GTK+ 3.24.33; x86_64-pc-linux-gnu)
+Received: from mail-qt1-f177.google.com (mail-qt1-f177.google.com
+ [209.85.160.177])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id A660E10E5D1
+ for <nouveau@lists.freedesktop.org>; Wed, 10 Dec 2025 00:40:40 +0000 (UTC)
+Received: by mail-qt1-f177.google.com with SMTP id
+ d75a77b69052e-4ee1fca7a16so52158751cf.3
+ for <nouveau@lists.freedesktop.org>; Tue, 09 Dec 2025 16:40:40 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=gmail.com; s=20230601; t=1765327239; x=1765932039; darn=lists.freedesktop.org;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=6wymOcLk7grT72mfA5h3N8IHYwLlfL5lz9NpBSo3BMM=;
+ b=dMUSespG2rDCVyWgDgLAu+6EmOxtz4eFQKDuhiVzGI6/QtoObh6TMjykZ0jatAoA4V
+ qP0CoS3GC/7pgX3w68eufT0aoDdkeQWwHLyZBAPetrXg4+eI11KwWENAt2Ibup58jm5o
+ aUVvpkW56ED/uqCdrQHMScbS/57ZDoNnbJlV1HkY1uNevMOOUBC4wKSYG2qblixlfkBU
+ c12g5NW4Kx+bcVcjrnyUBGZ13ngaDRnksOLGVdYYNPkeTV+PizmdFR1G8rkYhBi0O9I4
+ 5e2LXmUiVHnj0/d+u+j7nloSUUSoCPr71lEIQ8q5YZ0zA+BDtyXxjHTNVFzDaLG1BnIZ
+ ovTQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1765327239; x=1765932039;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=6wymOcLk7grT72mfA5h3N8IHYwLlfL5lz9NpBSo3BMM=;
+ b=E90XLx30Xt6ruukj2T5J00zL5LB5IZN7rKTS6AjFpk8eV6lU+ReW+oiFs4rNpyPCqq
+ CT+r0iimm4SuQcJR1fxE5VgW3hBe9XTMYP91PtNjgamjPLjR0jCaFUaI6BrWkH91dkc1
+ GcqZzczauMhpWBeIsDlAhpoJmAujRKQ/QdcRIwOh//e+fUmfj4258BJtDyHTEf44WmNR
+ I+eAW5JOXfW/eMLgdAbDFYRMcq5RZurPbM4+wFw+nul687gy2SuVW0lvhCA86qPF60El
+ 2/y7SgooX/wLMXcb5G1YCnMox+xSXY79uGT/jmDELPd6+xwDj4a5MkD3zQD9URtGgHU2
+ PU1Q==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCVFd8mih5uhyXu9xT7/Zm8292yPPvqOP4CwAGIiB72NUbFo7f0sd5q2mGn31bBwJHcUYbcUhSJ4@lists.freedesktop.org
+X-Gm-Message-State: AOJu0Yzkis1TZB/hR5oPOi39W8uncOMu+u7XK+mWLeYuNXnr1MKWaoPj
+ OjKFtDhCqBlQrV358pwF6hZyc1r9Svp+uFrNODZ6kKTy1cu1WTAyGf89NIc7iNB4SB69qxyiCV+
+ mFckxPpJUQIbRWmegjJewz1/H1pzST6I=
+X-Gm-Gg: ASbGnctjwrUg+P7o9yaY4fzlktqFb3yEmcoAf++xdeMnbRlRGcKq/oiNu9lzTGS80v+
+ l+gNsK5qHCq7JpQplEPChjSvFP8Morftiyt29kYGpblLhASxcyOrL2NaMJzKBvDCEDNsFDoADqu
+ sqeJcKjvKMFdNg4pWc1cX3UMebaBPb3ZqDaXRFypRDh6ZhiEjXtWQBF8sW0hQ9cPP+siaH1c2VY
+ pqPAQcBCNSwuaJtf4XURXAXuc0UuZ/m1JUEk+26SwJ7bnceHX9L7r4qHrm4T0y0wLrHEICk2w==
+X-Google-Smtp-Source: AGHT+IF/YC0wH4HTdXv6pBm0higZhgIr6sri+RQProT90pYcXmiv4UEnt1bnDECpeUGNAkSQJpp1ZNSu2G91t4JCDtM=
+X-Received: by 2002:a05:622a:4814:b0:4ed:e0c1:44d5 with SMTP id
+ d75a77b69052e-4f1b1a071ccmr9294931cf.19.1765327239484; Tue, 09 Dec 2025
+ 16:40:39 -0800 (PST)
 MIME-Version: 1.0
+References: <20251205213156.2847867-1-lyude@redhat.com>
+In-Reply-To: <20251205213156.2847867-1-lyude@redhat.com>
+From: Dave Airlie <airlied@gmail.com>
+Date: Wed, 10 Dec 2025 10:40:28 +1000
+X-Gm-Features: AQt7F2olu1ewz5U3w0AuR9qHG-FpMcQsFdcic-uQjr_AUIrpcOyV2fiEy8XZ48c
+Message-ID: <CAPM=9txpeYNrGEd=KbHe0mLbrG+vucwdQYRMfmcXcXwWoeCkWA@mail.gmail.com>
+Subject: Re: [PATCH] drm/nouveau/dispnv50: Don't call
+ drm_atomic_get_crtc_state() in prepare_fb
+To: Lyude Paul <lyude@redhat.com>
+Cc: dri-devel@lists.freedesktop.org, linux-kernel@vger.kernel.org, 
+ stable@vger.kernel.org, nouveau@lists.freedesktop.org, 
+ Faith Ekstrand <faith.ekstrand@collabora.com>, Dave Airlie <airlied@redhat.com>,
+ Maarten Lankhorst <maarten.lankhorst@linux.intel.com>,
+ Ben Skeggs <bskeggs@nvidia.com>, 
+ Simona Vetter <simona@ffwll.ch>, Thomas Zimmermann <tzimmermann@suse.de>, 
+ Maxime Ripard <mripard@kernel.org>, Danilo Krummrich <dakr@kernel.org>,
+ James Jones <jajones@nvidia.com>
 Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-X-NV-OnPremToCloud: ExternallySecured
-X-EOPAttributedMessage: 0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: CY4PEPF0000E9DA:EE_|CYXPR12MB9318:EE_
-X-MS-Office365-Filtering-Correlation-Id: e9e1dcd8-e3a8-488f-b228-08de372f51ff
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0;
- ARA:13230040|376014|36860700013|7416014|82310400026|1800799024; 
-X-Microsoft-Antispam-Message-Info: =?utf-8?B?T0pjQTZJWDQrVXFGSFJjaTFYZ0dqdHNvcDVmb3BFOWVtcGhaYnFXNFA1SlUx?=
- =?utf-8?B?K3VrdXoxazB6RDhjMkJvYndPZnZyMEtwakdDekJvaUNUNFU2UGxUUElPWVJr?=
- =?utf-8?B?V2FUNjN5dGNVSklkVFhTLzJmQzEyWk1lVVhUZHZrcFJ4VUM3Z1JUWVdSYlZ3?=
- =?utf-8?B?RWJyVi84dzExbDlwL1Ixci83SXNxQWRHVDZtbWlIMUZDN2Q3dk1tSHZFOVlT?=
- =?utf-8?B?OEFNNW1meUw3V1Bqc1VXYU9uenF4NkFuQlB3WG80alpBbTIwQ3hWS3JvTVk3?=
- =?utf-8?B?OGo5WTN6UUlRSVpNeStJZTA0YVR3Rk82a0tZMVE4d1V3VWsrSzNUcmNXdTVF?=
- =?utf-8?B?OS8yR1NwNGlha1hDLzk4QjFkSUhUblFKbnArV0Nvd3JsR3pYNDhJRzdaMXM3?=
- =?utf-8?B?NFlvR3pyMVpCNWFYb3l1c3JFMGwzNzFVUDJtWTMyVkFlc3lRc3dQYk9OK281?=
- =?utf-8?B?SDV2VGxMSWVjNzNLck9tTlBlTURKcGRrelVITy9PdmgwTHEvcUVTWDV1Y0lQ?=
- =?utf-8?B?NU95WmZRVTc2bmcweHZ4cmRacENSU3FrOWFBYWhieWlpTm1ZaHgvVHpVRFR4?=
- =?utf-8?B?Mk9uMys2UDNJUk9Dc0ZuTmhBQkU5dVlJd3owSHUyNjlhN1ZaMnN5c1hxSjc3?=
- =?utf-8?B?dFFEZ1RWQ1d5MmpaSm0rV1E4Q3g5RFBWS3owTkVnMnB1TUxaRExrTWtOWnAz?=
- =?utf-8?B?Y2RwSFl2SDdTdTlyMDhQaWY4ZWJrWWdWWVhxM2lLdm9JVEV6bTdxZ1RPTEJC?=
- =?utf-8?B?SVV6R3EvUjkwWGpnWU94c05nZTNsYlNLa0JpVE1UOHFlQi9zQk8xUWtMaW4w?=
- =?utf-8?B?WmxJR2ZFV2JtK0RZNnFOak9lKzlGRlZNQXJ0MWlVSndoUTBqZ1J3NnhRQVFN?=
- =?utf-8?B?amhFNXZ3cmVjS1JQOXE1Vzluc3Z1VUhIbDlmaThWNG9aTVpMSHFkQ21hRnp0?=
- =?utf-8?B?QU1rdW1PeURSVElKT0RucnRnYzFrSjdJeHUzbnZrZTU1QlNES01qcHR1M29V?=
- =?utf-8?B?MHZyYWJveTYyd0tISXdpS1Z2eFRVdldEazc0ZDdXR3VRMWwxS256MHBnb1lk?=
- =?utf-8?B?NlBWbURYczdUREI2SlZCWEp6eEVvRVlxTXJSRnJ3WXBSVTJESUgxU2pLS3Q5?=
- =?utf-8?B?Z0JJZDVhVmF0b2RYeXVPN2NxZEsyZzB1WFVOZmhxYk5sQ0YrTzh2Nmx1Y09D?=
- =?utf-8?B?OWdyVzdWQkZqak8vSFJwKzBzZDk3cHVhSXc1LzQrT2ZOMk9OM3NrQW5xSVRp?=
- =?utf-8?B?bUY0aWg3SXNFcmtKYWhJS25Id2toWDNUbUdJdHFXV25qZTl6RFJ6Q3dxVU9Q?=
- =?utf-8?B?c1dtMFY5QUF1ZGtFMEx3ZDYzTkVuK2orTWhDQXBQUXlRMTlCR0tSSEp4OVZG?=
- =?utf-8?B?ZmtYYVIvVWVSL0xDRHAzSjRIeG5TampoZnBIZGFsQU5DZGdGRW5udllEQzN6?=
- =?utf-8?B?RXgxdUNON05Ha1ZsMlRibHk5T1dDT29id1V1RzFWS1IyVkZvM0ptenB5Z0U5?=
- =?utf-8?B?a3RVYWNkdnlQNHBxamtSblVINVFaOVQyUFhOMUg0dFZLTlFNdG8rblZPM2ZG?=
- =?utf-8?B?L2hDMHI4NGJmMFh2N1BKMGVpNlBaYytaTmJYc2hGRXcvWFFIR1JpWURxZFhm?=
- =?utf-8?B?YkZuK3dCNGFFdS84L1NGSWVEeUtyN2JQaXVSOUtvZDFSWEZQZ2ttWjZBczhF?=
- =?utf-8?B?VnVKVzlHMXVjWWJQQXZpdmhtYmo2YU9sL1ZqL2cvYlBIRURYalpMTTJOc3Ri?=
- =?utf-8?B?Q1NDWU9lY1FEODBzSmhWeXVHQTRSaFA3ek1SMVpXZlF6TEJJV1dQY1F1TkxW?=
- =?utf-8?B?NGJTdTNZMzFkM2wvOHp3YmJoblNEdHE5aTVQVy9iQmJQRG9IaVNxU3Z5Vis1?=
- =?utf-8?B?eklvckErVHc1RkpNU1l5bllGU2ZFUEtMd2JuMy9WNTZuaFl4REhrbWFaa2E3?=
- =?utf-8?B?MTN0cW1ab3pzWW0xRVVVSmFuQzdkdzZQcWo2YkFsT3FBendDSktrWmk0a1ZS?=
- =?utf-8?B?VTJBb0pQaGZQaWJYQ1JSRklPREJ5aDZMcjJRbUVGVVVVS0pESzUrWCtWeUdw?=
- =?utf-8?B?SnpVN2dFYTRJMnRnOTFvUkhRbCtobkw3MW0rUVFZQ3RWTGZjMTd4MzBuUDdP?=
- =?utf-8?Q?SUKY=3D?=
-X-Forefront-Antispam-Report: CIP:216.228.117.160; CTRY:US; LANG:en; SCL:1; SRV:;
- IPV:NLI; SFV:NSPM; H:mail.nvidia.com; PTR:dc6edge1.nvidia.com; CAT:NONE;
- SFS:(13230040)(376014)(36860700013)(7416014)(82310400026)(1800799024); DIR:OUT;
- SFP:1101; 
-X-OriginatorOrg: Nvidia.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 09 Dec 2025 14:29:11.0816 (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: e9e1dcd8-e3a8-488f-b228-08de372f51ff
-X-MS-Exchange-CrossTenant-Id: 43083d15-7273-40c1-b7db-39efd9ccc17a
-X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=43083d15-7273-40c1-b7db-39efd9ccc17a; Ip=[216.228.117.160];
- Helo=[mail.nvidia.com]
-X-MS-Exchange-CrossTenant-AuthSource: CY4PEPF0000E9DA.namprd05.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Anonymous
-X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: CYXPR12MB9318
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -172,44 +88,54 @@ List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-On Sun, 7 Dec 2025 16:57:01 +0000
-Joel Fernandes <joelagnelf@nvidia.com> wrote:
+On Sat, 6 Dec 2025 at 07:32, Lyude Paul <lyude@redhat.com> wrote:
+>
+> Since we recently started warning about uses of this function after the
+> atomic check phase completes, we've started getting warnings about this in
+> nouveau. It appears a misplaced drm_atomic_get_crtc_state() call has been
+> hiding in our .prepare_fb callback for a while.
+>
+> So, fix this by adding a new nv50_head_atom_get_new() function and use that
+> in our .prepare_fb callback instead.
+>
+> Signed-off-by: Lyude Paul <lyude@redhat.com>
+>
+> Fixes: 1590700d94ac ("drm/nouveau/kms/nv50-: split each resource type into their own source files")
+> Cc: <stable@vger.kernel.org> # v4.18+
+> Signed-off-by: Lyude Paul <lyude@redhat.com>
+> ---
+>  drivers/gpu/drm/nouveau/dispnv50/atom.h | 13 +++++++++++++
+>  drivers/gpu/drm/nouveau/dispnv50/wndw.c |  2 +-
+>  2 files changed, 14 insertions(+), 1 deletion(-)
+>
+> diff --git a/drivers/gpu/drm/nouveau/dispnv50/atom.h b/drivers/gpu/drm/nouveau/dispnv50/atom.h
+> index 93f8f4f645784..85b7cf70d13c4 100644
+> --- a/drivers/gpu/drm/nouveau/dispnv50/atom.h
+> +++ b/drivers/gpu/drm/nouveau/dispnv50/atom.h
+> @@ -152,8 +152,21 @@ static inline struct nv50_head_atom *
+>  nv50_head_atom_get(struct drm_atomic_state *state, struct drm_crtc *crtc)
+>  {
+>         struct drm_crtc_state *statec = drm_atomic_get_crtc_state(state, crtc);
+> +
+>         if (IS_ERR(statec))
+>                 return (void *)statec;
+> +
+> +       return nv50_head_atom(statec);
+> +}
+> +
+> +static inline struct nv50_head_atom *
+> +nv50_head_atom_get_new(struct drm_atomic_state *state, struct drm_crtc *crtc)
+> +{
+> +       struct drm_crtc_state *statec = drm_atomic_get_new_crtc_state(state, crtc);
+> +
+> +       if (IS_ERR(statec))
+> +               return (void*)statec;
+> +
 
->=20
->=20
-> > On Dec 7, 2025, at 10:55=E2=80=AFAM, Timur Tabi <ttabi@nvidia.com> wrot=
-e:
-> >=20
-> >> On Sat, 2025-12-06 at 12:42 +0000, Zhi Wang wrote:
-> >> -    pub(crate) fn new() -> Self {
-> >> +    pub(crate) fn new(vgpu_support: bool) -> Self {
-> >> +        let num_entries =3D if vgpu_support { 4 } else { 3 };
-> >=20
-> > Instead of passing a bool, and then hard-coding the length based on
-> > that bool (which would require that RMSetSriovMode always be the
-> > last entry in the array), you need to do what Nouveau does: if VGPU
-> > is enabled, then dynamically append the entry to the array.
->=20
-> Yeah, I agree with Timur.=20
->=20
+So I was at kernel summit and someone was talking about AI review
+prompts so I threw this patch at it, and it we shouldn't use IS_ERR
+here, and I think it is correct.
 
-Hey Timur and Joe:
+get_new_crtc_state only returns NULL not an error.
 
-Let me see how this could be solved dynamically. Probably need more
-changes on other items as well.
-
-Apart from this, I felt that we might need a struct GspBootConfig to
-pass around the GSP booting path, while writing these patches. As we
-already had coming items, like reserved memory size when vGPU is
-enabled or not, vGPU enabled switch, also reserved memory size on
-Hopper/Blackwell in John's patch.
-
-It seems we need a central object to host these tuning for GSP booting
-up.=20
-
-Z.
-
-> Thanks.
->=20
->=20
-
+Dave.
