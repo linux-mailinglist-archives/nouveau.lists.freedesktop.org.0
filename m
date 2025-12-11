@@ -2,77 +2,77 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id 125EFCB7414
-	for <lists+nouveau@lfdr.de>; Thu, 11 Dec 2025 23:06:42 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 4B285CB742C
+	for <lists+nouveau@lfdr.de>; Thu, 11 Dec 2025 23:07:24 +0100 (CET)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id C3C2A10E305;
-	Thu, 11 Dec 2025 22:06:40 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 071D310E7A1;
+	Thu, 11 Dec 2025 22:07:23 +0000 (UTC)
 Authentication-Results: gabe.freedesktop.org;
-	dkim=pass (1024-bit key; unprotected) header.d=redhat.com header.i=@redhat.com header.b="aNMtnJU8";
+	dkim=pass (1024-bit key; unprotected) header.d=redhat.com header.i=@redhat.com header.b="WTJkE8pA";
 	dkim-atps=neutral
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
 Received: from us-smtp-delivery-124.mimecast.com
  (us-smtp-delivery-124.mimecast.com [170.10.129.124])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 6CE3C10E305
- for <nouveau@lists.freedesktop.org>; Thu, 11 Dec 2025 22:06:39 +0000 (UTC)
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 9ACD110E7A1
+ for <nouveau@lists.freedesktop.org>; Thu, 11 Dec 2025 22:07:21 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1765490798;
+ s=mimecast20190719; t=1765490840;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:content-type:content-type:
  content-transfer-encoding:content-transfer-encoding:
  in-reply-to:in-reply-to:references:references;
- bh=FQD4zZ9at3sElDktWK9m7mDr3xTunsjTrPR6SORxQuY=;
- b=aNMtnJU8Yg1TIcQ2vtztqfcTUS0CX5YIYdgk9LxJCNs2+8WqKH4TKA6BrW2ZJwqoRObKV+
- Qek+XZSdt2igZma026pZYVHKPPJIfiW5oOJMk24tJd90rhQo9QumqU+nirO9JaH6wV0/1L
- IVUbFExk9uCDPizADXpoNRk9di13idU=
-Received: from mail-qt1-f198.google.com (mail-qt1-f198.google.com
- [209.85.160.198]) by relay.mimecast.com with ESMTP with STARTTLS
+ bh=S/yt3h0LA2CQSgeXoj4ym7AxrOljIdTgGQSxKRVOCsQ=;
+ b=WTJkE8pAQNJNuoW7hYIX4QDDGO3WHL2oZlh/iOGVZkTvpq2XTATS6mdJjaKJqbaPvWZumm
+ WmxUWHnTMtiOx1ygocNmVJqzW44dREZRElZ30uZy/AfwzrNQOse6a1cOOSLRm+s+EpbuAZ
+ B4eZ/xw8yzWN8CKM2aMM8m7uJ1WvLpo=
+Received: from mail-qv1-f72.google.com (mail-qv1-f72.google.com
+ [209.85.219.72]) by relay.mimecast.com with ESMTP with STARTTLS
  (version=TLSv1.3, cipher=TLS_AES_256_GCM_SHA384) id
- us-mta-613-pHddOX1EM6qtKvRpoOTbgA-1; Thu, 11 Dec 2025 17:06:35 -0500
-X-MC-Unique: pHddOX1EM6qtKvRpoOTbgA-1
-X-Mimecast-MFC-AGG-ID: pHddOX1EM6qtKvRpoOTbgA_1765490795
-Received: by mail-qt1-f198.google.com with SMTP id
- d75a77b69052e-4ee09211413so15984131cf.2
- for <nouveau@lists.freedesktop.org>; Thu, 11 Dec 2025 14:06:35 -0800 (PST)
+ us-mta-317-SOiTQGbHNxuCT88sbqkRIg-1; Thu, 11 Dec 2025 17:07:17 -0500
+X-MC-Unique: SOiTQGbHNxuCT88sbqkRIg-1
+X-Mimecast-MFC-AGG-ID: SOiTQGbHNxuCT88sbqkRIg_1765490837
+Received: by mail-qv1-f72.google.com with SMTP id
+ 6a1803df08f44-882485f2984so11050716d6.0
+ for <nouveau@lists.freedesktop.org>; Thu, 11 Dec 2025 14:07:17 -0800 (PST)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1765490795; x=1766095595;
+ d=1e100.net; s=20230601; t=1765490837; x=1766095637;
  h=mime-version:user-agent:content-transfer-encoding:references
  :in-reply-to:date:cc:to:from:subject:message-id:x-gm-gg
  :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=FQD4zZ9at3sElDktWK9m7mDr3xTunsjTrPR6SORxQuY=;
- b=Y7RfGzqNTRZQt9+vx73Mb1wxWZ4/P+8tYdPEVYhR4gW8jhlYJKVErlNDiqqRL68Gyo
- eBzePxCWklQzseRU07cKewdUDpUYn9O6Wgq89fHnH/MwHItMZlEM3FPjjKUenS8nWipn
- UjjhYdZ+JyePjLWmxXFGY91D0qYqmg2mW9QgEfseGzF/MDy02edtpG/QMgHkV5c3+FAG
- 1THJIadNXpj2+n0MftDXMuazAAf5ksVQbmFOz9C76b1/Gu+tUQfMZX2I2RVIgpawdat6
- bWXZ6NTnKXqwma/7PbJD88NCNzJcDpHO8yG0W4ipVYgrm3KFzHoKo5+aVT/kBbHpR+2t
- BGyw==
+ bh=S/yt3h0LA2CQSgeXoj4ym7AxrOljIdTgGQSxKRVOCsQ=;
+ b=r9QD0OuMmnnb+g4EaOyHvCGxA3pOcim2VN82YhmMVQSptEZt68Rm0ivR3TupC4soDo
+ TCt4nIE6qKtZUDJMZkJBAr4c97YzbVAwYPwsgNAoP3SPvLqr5rlnrL48xJhURHl0+Etq
+ nV9ew8xa9kFSpdpooDqLYjHqw517ScUaeXvWTeaLGb7AW8Fxb6wlkpgc4x8bJARJKO0z
+ vakADcaGOGIISrqfsgOkawjiEmcYMRIZhgb+IbAoEZDsCUPlsGJYjK3pWPJW/fVI+3HW
+ ZAtDeqQC0RbWEFL6Iq/O9oS6L+zlGk3Zqaz0FoNmZErQZjmcyROwrA/vJNuq7s7HfiHt
+ vOcQ==
 X-Forwarded-Encrypted: i=1;
- AJvYcCWbSUPOJtmnoXXHBm1S5XuAmdThXr9JnLSR9AzeQWTy+iG+02fZnbvnODHzmwqNiiM+m0ccbU3i@lists.freedesktop.org
-X-Gm-Message-State: AOJu0YybAdEzisFmvNPV8pcTItHPjm6tf9W1uiNRxu1BDvPjSuWyLcYU
- j2j9sKzwa/W7PVWYI3QuATgHxdrGvMt9rJGltN8tPuUgXmHEzYvk5uOGSfrf7XsL7ndGr9jJ8Ot
- 3QOdjy7pi6s64LKy34PDUApVDWJajnM5elh4Y8zHrDCmb9Bw4Qp+HZceIbp302At9Mp8=
-X-Gm-Gg: AY/fxX6mC3J+89Zr+xjOS+5EQLS4uMm2DvPjtbC5u87T629/MPYovZGDl0XqBjUHiSk
- fkl3SyedRPh+n/auk8U3cIUuYAgy3jY63tbFUwtj3qRYKYRKE+EEVQeDCKiKEycFnoKaUREc5Wy
- +XD9RgqtFhkG39eqzniDp2+0m19ne/IyFC1XZ72qbi2dRtuuXWjCE/gRO+wmR0/W1RUzwmvwhuX
- VM/jzSxTLgRokXBRpGJGqljtq9bVAMaHU0TejfQCqPif57/ml6tcdAIWvLl0iN8kgOPn50+GekN
- 3K7J4to9ZlLZ8GCoU/QTRslqsZzGUQ44xqxrI7TLnBeQ4s77U2IovZzk8Op3WJZenhFf0IFZJ3l
- 53HSAyeN/xTbooi175ZXezt10itKgRNNiX/socWL248Pb9eycNXDZulU=
-X-Received: by 2002:a05:622a:4208:b0:4ed:6e79:acf7 with SMTP id
- d75a77b69052e-4f1b1a7e143mr102089911cf.41.1765490795209; 
- Thu, 11 Dec 2025 14:06:35 -0800 (PST)
-X-Google-Smtp-Source: AGHT+IFaqeBiuM6CsFwruI5tizpjX8j7kpXn5KxhwmEige7pYuP2pDesrOgqZ9YYEKxErZ2GWsjRPA==
-X-Received: by 2002:a05:622a:4208:b0:4ed:6e79:acf7 with SMTP id
- d75a77b69052e-4f1b1a7e143mr102089381cf.41.1765490794825; 
- Thu, 11 Dec 2025 14:06:34 -0800 (PST)
+ AJvYcCU7sBXWmxtP0HA3NEA9LrrusddktWHwrSpNo1tUjo7Ti795SIm6YffHI3cjMEIzWC5GOmBctxyq@lists.freedesktop.org
+X-Gm-Message-State: AOJu0Yx3DjkoH/6tK/wFJTMWv7G+Ilp2HmusepaeaQlKRUIWUvmq3dpi
+ sADW03oiPyU/wNHJbJ0RnUSu7agK5/wTyJns3oMK5OTB5xBK029lurNUaXqT7/PUUiaoudtjcYb
+ K1o44JHX0RXKejuy+MdgUo6R7SPjoJKvTe2qECEpPe/XSwsCeWdKkZ/wvsw6xJZvXzkk=
+X-Gm-Gg: AY/fxX4dHJPLdQqI3byXfBLQGhNa669cdIwAy7JPceDnpBrv4kstSKVssoBJSKV7Z9p
+ /KPdsKeVpZ6tXPQc7OmFY+GywFxQzbfLL/dRq/yrVE+4RxxMPtJDaOaICwGM4gfs3SDttRvD1qO
+ 5MMbubRdYf+DF9iFLamAVDDuImIhpUISOHnJLiSf/EPO2r7iBzykl7s36FvYaQIVDj4KZUnKpTr
+ Ua18YByC3L3+vAHjXJKdKmc4FfmPdgGU4vzD/jsI/nQS6Gh3+7R8YNNE2yfAFwe62RXRd24bEYv
+ ucR86o+Xv64o/CHaxoEO9lB3GNbhR9rXRQ2dlltYJ8amDrSxXtIaeB47gnBVA+dsS7dhs997jsV
+ j4tFno3oSBgcioYBt2/M4X6G5P40nE863ZCwynyd4IlObvCbwE2iNITg=
+X-Received: by 2002:a05:6214:1247:b0:87c:27c2:2c0e with SMTP id
+ 6a1803df08f44-8887e7f4717mr2002896d6.59.1765490836917; 
+ Thu, 11 Dec 2025 14:07:16 -0800 (PST)
+X-Google-Smtp-Source: AGHT+IFpL7P109j0TrrJ6OMch/eU/9skpG1csWeSXfbkzBfpFzWr1R23nHPE1F9w7iK8jbzWzXkOng==
+X-Received: by 2002:a05:6214:1247:b0:87c:27c2:2c0e with SMTP id
+ 6a1803df08f44-8887e7f4717mr2002536d6.59.1765490836603; 
+ Thu, 11 Dec 2025 14:07:16 -0800 (PST)
 Received: from [192.168.8.198] (pool-100-0-77-142.bstnma.fios.verizon.net.
  [100.0.77.142]) by smtp.gmail.com with ESMTPSA id
- d75a77b69052e-4f1bd5c5e17sm27572841cf.14.2025.12.11.14.06.33
+ 6a1803df08f44-8886ec56964sm31777496d6.21.2025.12.11.14.07.15
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 11 Dec 2025 14:06:34 -0800 (PST)
-Message-ID: <2a80f215aafcc39fad8eaab5a84ca499d8c40500.camel@redhat.com>
-Subject: Re: [PATCH 5/9] gpu: nova-core: gsp: derive `Debug` on more
- sequencer types
+ Thu, 11 Dec 2025 14:07:16 -0800 (PST)
+Message-ID: <a8276c36fe1638cc584262d0d722623987deb1ae.camel@redhat.com>
+Subject: Re: [PATCH 6/9] gpu: nova-core: gsp: derive Zeroable for
+ GspStaticConfigInfo
 From: lyude@redhat.com
 To: Alexandre Courbot <acourbot@nvidia.com>, Danilo Krummrich
  <dakr@kernel.org>,  Alice Ryhl <aliceryhl@google.com>, David Airlie
@@ -82,14 +82,14 @@ Cc: John Hubbard <jhubbard@nvidia.com>, Alistair Popple
  <ttabi@nvidia.com>, Edwin Peer <epeer@nvidia.com>, 
  nouveau@lists.freedesktop.org, dri-devel@lists.freedesktop.org, 
  linux-kernel@vger.kernel.org, rust-for-linux@vger.kernel.org
-Date: Thu, 11 Dec 2025 17:06:33 -0500
-In-Reply-To: <20251208-nova-misc-v1-5-a3ce01376169@nvidia.com>
+Date: Thu, 11 Dec 2025 17:07:15 -0500
+In-Reply-To: <20251208-nova-misc-v1-6-a3ce01376169@nvidia.com>
 References: <20251208-nova-misc-v1-0-a3ce01376169@nvidia.com>
- <20251208-nova-misc-v1-5-a3ce01376169@nvidia.com>
+ <20251208-nova-misc-v1-6-a3ce01376169@nvidia.com>
 User-Agent: Evolution 3.58.2 (3.58.2-1.fc43)
 MIME-Version: 1.0
 X-Mimecast-Spam-Score: 0
-X-Mimecast-MFC-PROC-ID: 50M0U8yllo3DUNmhkl7lXBWemfUxy4au_Nx8XE4Q2dw_1765490795
+X-Mimecast-MFC-PROC-ID: M3WiOVqD2nVOO-qmMfdkbCudDYimQtwQwmkFn8ucCdE_1765490837
 X-Mimecast-Originator: redhat.com
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
@@ -110,81 +110,52 @@ Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 Reviewed-by: Lyude Paul <lyude@redhat.com>
 
 On Mon, 2025-12-08 at 18:26 +0900, Alexandre Courbot wrote:
-> Being able to print these is useful when debugging the sequencer.
+> We can derive `Zeroable` automatically instead of implementing it
+> ourselves if we convert it from a tuple struct into a regular one.
+> This
+> removes an `unsafe` statement.
 >=20
 > Signed-off-by: Alexandre Courbot <acourbot@nvidia.com>
 > ---
-> =C2=A0drivers/gpu/nova-core/gsp/fw.rs=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=
-=C2=A0 | 10 +++++-----
-> =C2=A0drivers/gpu/nova-core/gsp/sequencer.rs |=C2=A0 1 +
-> =C2=A02 files changed, 6 insertions(+), 5 deletions(-)
+> =C2=A0drivers/gpu/nova-core/gsp/fw/commands.rs | 11 +++++------
+> =C2=A01 file changed, 5 insertions(+), 6 deletions(-)
 >=20
-> diff --git a/drivers/gpu/nova-core/gsp/fw.rs b/drivers/gpu/nova-
-> core/gsp/fw.rs
-> index d06c0fdd6154..d1fc8f111db1 100644
-> --- a/drivers/gpu/nova-core/gsp/fw.rs
-> +++ b/drivers/gpu/nova-core/gsp/fw.rs
-> @@ -330,7 +330,7 @@ fn from(value: SeqBufOpcode) -> Self {
+> diff --git a/drivers/gpu/nova-core/gsp/fw/commands.rs
+> b/drivers/gpu/nova-core/gsp/fw/commands.rs
+> index 21be44199693..85465521de32 100644
+> --- a/drivers/gpu/nova-core/gsp/fw/commands.rs
+> +++ b/drivers/gpu/nova-core/gsp/fw/commands.rs
+> @@ -107,12 +107,15 @@ unsafe impl FromBytes for PackedRegistryTable
+> {}
 > =C2=A0
-> =C2=A0/// Wrapper for GSP sequencer register write payload.
+> =C2=A0/// Payload of the `GetGspStaticInfo` command and message.
 > =C2=A0#[repr(transparent)]
-> -#[derive(Copy, Clone)]
-> +#[derive(Copy, Clone, Debug)]
-> =C2=A0pub(crate) struct
-> RegWritePayload(bindings::GSP_SEQ_BUF_PAYLOAD_REG_WRITE);
+> -pub(crate) struct
+> GspStaticConfigInfo(bindings::GspStaticConfigInfo_t);
+> +#[derive(Zeroable)]
+> +pub(crate) struct GspStaticConfigInfo {
+> +=C2=A0=C2=A0=C2=A0 inner: bindings::GspStaticConfigInfo_t,
+> +}
 > =C2=A0
-> =C2=A0impl RegWritePayload {
-> @@ -353,7 +353,7 @@ unsafe impl AsBytes for RegWritePayload {}
+> =C2=A0impl GspStaticConfigInfo {
+> =C2=A0=C2=A0=C2=A0=C2=A0 /// Returns a bytes array containing the (hopefu=
+lly) zero-
+> terminated name of this GPU.
+> =C2=A0=C2=A0=C2=A0=C2=A0 pub(crate) fn gpu_name_str(&self) -> [u8; 64] {
+> -=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 self.0.gpuNameString
+> +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 self.inner.gpuNameString
+> =C2=A0=C2=A0=C2=A0=C2=A0 }
+> =C2=A0}
 > =C2=A0
-> =C2=A0/// Wrapper for GSP sequencer register modify payload.
-> =C2=A0#[repr(transparent)]
-> -#[derive(Copy, Clone)]
-> +#[derive(Copy, Clone, Debug)]
-> =C2=A0pub(crate) struct
-> RegModifyPayload(bindings::GSP_SEQ_BUF_PAYLOAD_REG_MODIFY);
-> =C2=A0
-> =C2=A0impl RegModifyPayload {
-> @@ -381,7 +381,7 @@ unsafe impl AsBytes for RegModifyPayload {}
-> =C2=A0
-> =C2=A0/// Wrapper for GSP sequencer register poll payload.
-> =C2=A0#[repr(transparent)]
-> -#[derive(Copy, Clone)]
-> +#[derive(Copy, Clone, Debug)]
-> =C2=A0pub(crate) struct
-> RegPollPayload(bindings::GSP_SEQ_BUF_PAYLOAD_REG_POLL);
-> =C2=A0
-> =C2=A0impl RegPollPayload {
-> @@ -414,7 +414,7 @@ unsafe impl AsBytes for RegPollPayload {}
-> =C2=A0
-> =C2=A0/// Wrapper for GSP sequencer delay payload.
-> =C2=A0#[repr(transparent)]
-> -#[derive(Copy, Clone)]
-> +#[derive(Copy, Clone, Debug)]
-> =C2=A0pub(crate) struct
-> DelayUsPayload(bindings::GSP_SEQ_BUF_PAYLOAD_DELAY_US);
-> =C2=A0
-> =C2=A0impl DelayUsPayload {
-> @@ -432,7 +432,7 @@ unsafe impl AsBytes for DelayUsPayload {}
-> =C2=A0
-> =C2=A0/// Wrapper for GSP sequencer register store payload.
-> =C2=A0#[repr(transparent)]
-> -#[derive(Copy, Clone)]
-> +#[derive(Copy, Clone, Debug)]
-> =C2=A0pub(crate) struct
-> RegStorePayload(bindings::GSP_SEQ_BUF_PAYLOAD_REG_STORE);
-> =C2=A0
-> =C2=A0impl RegStorePayload {
-> diff --git a/drivers/gpu/nova-core/gsp/sequencer.rs
-> b/drivers/gpu/nova-core/gsp/sequencer.rs
-> index 4efa048b9d93..5eead7ad4cbd 100644
-> --- a/drivers/gpu/nova-core/gsp/sequencer.rs
-> +++ b/drivers/gpu/nova-core/gsp/sequencer.rs
-> @@ -70,6 +70,7 @@ fn read(
-> =C2=A0/// GSP Sequencer Command types with payload data.
-> =C2=A0/// Commands have an opcode and an opcode-dependent struct.
-> =C2=A0#[allow(clippy::enum_variant_names)]
-> +#[derive(Debug)]
-> =C2=A0pub(crate) enum GspSeqCmd {
-> =C2=A0=C2=A0=C2=A0=C2=A0 RegWrite(fw::RegWritePayload),
-> =C2=A0=C2=A0=C2=A0=C2=A0 RegModify(fw::RegModifyPayload),
+> @@ -122,7 +125,3 @@ unsafe impl AsBytes for GspStaticConfigInfo {}
+> =C2=A0// SAFETY: This struct only contains integer types for which all bi=
+t
+> patterns
+> =C2=A0// are valid.
+> =C2=A0unsafe impl FromBytes for GspStaticConfigInfo {}
+> -
+> -// SAFETY: This struct only contains integer types and fixed-size
+> arrays for which
+> -// all bit patterns are valid.
+> -unsafe impl Zeroable for GspStaticConfigInfo {}
 
