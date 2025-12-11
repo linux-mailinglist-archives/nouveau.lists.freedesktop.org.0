@@ -2,146 +2,94 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id 45FB6CB51D4
-	for <lists+nouveau@lfdr.de>; Thu, 11 Dec 2025 09:36:29 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 4BFD8CB6DE4
+	for <lists+nouveau@lfdr.de>; Thu, 11 Dec 2025 19:07:59 +0100 (CET)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id BA1BA10E771;
-	Thu, 11 Dec 2025 08:36:27 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 4ACC110E84E;
+	Thu, 11 Dec 2025 18:07:57 +0000 (UTC)
 Authentication-Results: gabe.freedesktop.org;
-	dkim=pass (2048-bit key; unprotected) header.d=Nvidia.com header.i=@Nvidia.com header.b="XlKhj0CW";
+	dkim=pass (1024-bit key; unprotected) header.d=redhat.com header.i=@redhat.com header.b="gP/L8NXE";
 	dkim-atps=neutral
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from SJ2PR03CU001.outbound.protection.outlook.com
- (mail-westusazon11012028.outbound.protection.outlook.com [52.101.43.28])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 4BB4D10E771
- for <nouveau@lists.freedesktop.org>; Thu, 11 Dec 2025 08:36:26 +0000 (UTC)
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=qy2Uqjc2TS7iD/KOTg6F7e3/FtUlrIPJ4J92YKJ1GmDoiYqh0tIzX4Wk7Wspf2U2ZadamrmabUnYnbwRb2ExBak4gS5b4BmorpVNWF1rYhdlgH5aoOHuVxOaRBSG2bLXBU70uYrtBV4pCy/esxKAKBki8zO9biI3Ik494lRq+Kh1/JZqxIr81FqIEbz2inkrSgNrQCG/KBpa/NEgQlevImzvvyffpMbZTrPNl0gt1xc/Hc1JChYxVv4pgzZmCX5N2PHiJWkY4i6aqk0uqjxfh8l/8NeU63oC5xtkbnpPYnxKTDpGe4REVtnzfeA51sO1zN7JJJXv4WmfOXrnXy+2tQ==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=9YANu5ybYhFpriQKXcITk/v3sya667BZ9GMDtQivTsY=;
- b=p0Iu7e0B8PugLXDWCaIBWfoQ8u8OnsM63Fhl1JJd5GB9NRSsl0+zW97kctz8uxN6N7X7TmM18X9nMsj4hWadwOFXjPRVy8sTlZkAqpcqFWwJAwqhGYsw3kvyKQHn2RrJPfFx7xRX3vIMsjfVJGToLL4/HO86KpAgXee1EiUKtB1YUTK+IEWI7k4WG6+UW5nZ6ZELLMMa0JrIomkr1btGHjkIgul0z6O06arNxJ1HxDRe3yst8XfqSTP9yHvXf/fxS3PpuvipgDGXA+/qLo2eGVdiyaFOJLugV1sT2lPHHr3cw/pHmN5jKNcrjv/0R/oUHyHQczOKqRdxAh34bAy2EA==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=nvidia.com; dmarc=pass action=none header.from=nvidia.com;
- dkim=pass header.d=nvidia.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=Nvidia.com;
- s=selector2;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=9YANu5ybYhFpriQKXcITk/v3sya667BZ9GMDtQivTsY=;
- b=XlKhj0CWvmRafQ5/yd9VzJ8Fd209a4FIUoCsGmfhu3DyKT3Z9LgzW7Tsdwxl+Q8s/X0lARavgHq9qI/6Aduk/UvBUEQMR0rxdE2YrvXSL6bBZvQkEreCPT0Wn4eHPerSu3u5pMXoeRRDe3FOtqanKYzdMfp/AeKuGR05eVjIJbmD+eBt8BOF6jl+pHMAcLmcnzcEVnBkw3IyJMMwxwRzU8kiNR9HoeVEJa1JwLoWJfoT6xjVVSX4rvjFCwNMr9SFZdDY5ll/zr82SMlT3FJ1YGD/T/syWLTZLyL0NY/7iJD5hN/pIiFWZv8gCvCG7TEBalYIbpyKnTrzWq4jE9Qp9A==
-Authentication-Results: dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=nvidia.com;
-Received: from SN7PR12MB8059.namprd12.prod.outlook.com (2603:10b6:806:32b::7)
- by DM4PR12MB6423.namprd12.prod.outlook.com (2603:10b6:8:bd::8) with
- Microsoft
- SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.20.9412.10; Thu, 11 Dec 2025 08:36:20 +0000
-Received: from SN7PR12MB8059.namprd12.prod.outlook.com
- ([fe80::4ee2:654e:1fe8:4b91]) by SN7PR12MB8059.namprd12.prod.outlook.com
- ([fe80::4ee2:654e:1fe8:4b91%2]) with mapi id 15.20.9412.005; Thu, 11 Dec 2025
- 08:36:20 +0000
-Date: Thu, 11 Dec 2025 03:36:18 -0500
-From: Joel Fernandes <joelagnelf@nvidia.com>
-To: Zhi Wang <zhiw@nvidia.com>
-Cc: rust-for-linux@vger.kernel.org, linux-pci@vger.kernel.org,
- nouveau@lists.freedesktop.org, linux-kernel@vger.kernel.org,
- airlied@gmail.com, dakr@kernel.org, aliceryhl@google.com,
- bhelgaas@google.com, kwilczynski@kernel.org, ojeda@kernel.org,
- alex.gaynor@gmail.com, boqun.feng@gmail.com, gary@garyguo.net,
- bjorn3_gh@protonmail.com, lossin@kernel.org, a.hindborg@kernel.org,
- tmgross@umich.edu, markus.probst@posteo.de, helgaas@kernel.org,
- cjia@nvidia.com, alex@shazbot.org, smitra@nvidia.com,
- ankita@nvidia.com, aniketa@nvidia.com, kwankhede@nvidia.com,
- targupta@nvidia.com, acourbot@nvidia.com, jhubbard@nvidia.com,
- zhiwang@kernel.org
-Subject: Re: [RFC 4/7] gpu: nova-core: populate GSP_VF_INFO when vGPU is
- enabled
-Message-ID: <20251211083618.GA2144309@joelbox2>
-References: <20251206124208.305963-1-zhiw@nvidia.com>
- <20251206124208.305963-5-zhiw@nvidia.com>
- <9cf6135e-43c4-4c31-acf5-03fbe32e2bae@nvidia.com>
- <20251209154114.09cf245b@inno-ThinkPad-X280>
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <20251209154114.09cf245b@inno-ThinkPad-X280>
-X-ClientProxiedBy: BL1PR13CA0302.namprd13.prod.outlook.com
- (2603:10b6:208:2c1::7) To SN7PR12MB8059.namprd12.prod.outlook.com
- (2603:10b6:806:32b::7)
+Received: from us-smtp-delivery-124.mimecast.com
+ (us-smtp-delivery-124.mimecast.com [170.10.129.124])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id E08BC10E87A
+ for <nouveau@lists.freedesktop.org>; Thu, 11 Dec 2025 18:07:55 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
+ s=mimecast20190719; t=1765476474;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ content-transfer-encoding:content-transfer-encoding:
+ in-reply-to:in-reply-to:references:references;
+ bh=O7irhg/JwAW5/F1aTbRfW04m9593znXbFECl/NNZdaE=;
+ b=gP/L8NXETgrsEisBlEaO8jQfagMXuIa0Pw/48vqvIi0sxtvqToNgXQojMx255vYAFuIT9k
+ zmpjcz/BN945yIE/wT7+Dn3+tr9mEfspqsZly2WuJSiS0cBYpZvg1A9b9fX+U9nbwKOHLD
+ 2SEIccolZ/uvl0WKTaMZZ437tqENvCw=
+Received: from mail-pj1-f70.google.com (mail-pj1-f70.google.com
+ [209.85.216.70]) by relay.mimecast.com with ESMTP with STARTTLS
+ (version=TLSv1.3, cipher=TLS_AES_256_GCM_SHA384) id
+ us-mta-117-UjuOMw7ENiOGkOR94fqLpQ-1; Thu, 11 Dec 2025 13:07:43 -0500
+X-MC-Unique: UjuOMw7ENiOGkOR94fqLpQ-1
+X-Mimecast-MFC-AGG-ID: UjuOMw7ENiOGkOR94fqLpQ_1765476462
+Received: by mail-pj1-f70.google.com with SMTP id
+ 98e67ed59e1d1-343bf6ded5cso618524a91.0
+ for <nouveau@lists.freedesktop.org>; Thu, 11 Dec 2025 10:07:43 -0800 (PST)
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1765476462; x=1766081262;
+ h=mime-version:user-agent:content-transfer-encoding:references
+ :in-reply-to:date:cc:to:from:subject:message-id:x-gm-gg
+ :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+ bh=O7irhg/JwAW5/F1aTbRfW04m9593znXbFECl/NNZdaE=;
+ b=L8COTojcjywtP+7Zvd6PhMRWn9cgK74SnPgl06ahBCjCnmw38hy3DDRpmMCnZ+XL6J
+ qYE0wXcVzx9tfUtAaXw94aNuBcaRYEWf4/aY2js4TIc+vy6DoyPL8+erRNwJkQgq7YDh
+ k3bJIbFSDYuw9mmELV1xMViueA3fKMjazJu5cPPb1+pbajXP62ppzOgtwMBUdU/yrEPH
+ +kIRlYkuetp6UxqbeXiJ5BD4MgPrJaquWfVDmSqrL5ZtSqEbp6qaGomYVQ4xkeBjEIqY
+ b2qYKW8ON2LjfBA6aNED+FqS9Dn6xy9EZy+jT31rvb3M9gG4MW/LEiVLbb8rWjTrvflj
+ UODA==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCWh0ViAKvmDK17mqbdfqcl0vI7ZGlDWRuq99w2pJS30e1K0aa/uJU7nv3fo95puvnpFcxWSjZHX@lists.freedesktop.org
+X-Gm-Message-State: AOJu0Yzcx2HRCXGiJ5kbK72q4qmysJtSA3RfGaw1ha3fsndoLXzM2C3X
+ xUrjTRzKjExZndDAqbC7p1kll/uCCCvzjFKjghSsL8eQ5Wg6k8WOpMGAvujIO/SFjES8T3Q7NzA
+ sVD9pFhrKD5nNs+hkMKBWbHAHOnOhUain/HJ0p5h72op7jv5fgOThUX3ndW8r+R3H3b09JyEdT6
+ g=
+X-Gm-Gg: AY/fxX7r741kfrOF5okm+mNXtNGYcbxpA+BRzXXAaNsa9efOYYAkc9AxFL8btdwKsPO
+ aoZu2Vs3cf4aIC78QU4wHrUhxzHhRaKzGsjcTZNE14/4/x7UAZvPY7mO5uHP9GoYiBeCfX97Hli
+ Z+5F7aB9541e8zs/vDf5HVBAy6J5YwAk53CY1FpdG1rMZmR0RR+W6flIx/zMBkv+F2ASo2CQsuF
+ Yqmt4ajgupuZdVYAcz3R/lWq3ftPQfIaVT7qvWf856PQch0Cn84JZVetGQtvQZwcBifuNNwzkzn
+ MuwfLBR0QQYatFAvcKLVP52UQHNSQTReAzUN7UIwwVN6PIEWIpt003n95v2cGjPO2Xt837k3xII
+ x3RMqgSND3EvdAUZ9sq40PemiqnHHjMfIuygAeBaA+b7YohGQXXQ0Lbc=
+X-Received: by 2002:a17:90b:3e4c:b0:34a:8c77:d386 with SMTP id
+ 98e67ed59e1d1-34a8c77d70dmr3987193a91.9.1765476462186; 
+ Thu, 11 Dec 2025 10:07:42 -0800 (PST)
+X-Google-Smtp-Source: AGHT+IELiQGhJH0gktf4xurL+5qfd46HuxTMS3qJeDhGcKDf7m/Dud2gzHsF0CHIlKO2OQBV0M+Nww==
+X-Received: by 2002:a17:90b:3e4c:b0:34a:8c77:d386 with SMTP id
+ 98e67ed59e1d1-34a8c77d70dmr3987165a91.9.1765476461726; 
+ Thu, 11 Dec 2025 10:07:41 -0800 (PST)
+Received: from [192.168.8.198] (pool-100-0-77-142.bstnma.fios.verizon.net.
+ [100.0.77.142]) by smtp.gmail.com with ESMTPSA id
+ 98e67ed59e1d1-34a9283819dsm2526919a91.4.2025.12.11.10.07.38
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Thu, 11 Dec 2025 10:07:41 -0800 (PST)
+Message-ID: <282972afc7d20facacedc0a81810daff1bbaa885.camel@redhat.com>
+Subject: Re: nouveau: endless drm_WARN_ON(state->checked) spew beginning at
+ 6.19 merge window
+From: lyude@redhat.com
+To: Mike Galbraith <efault@gmx.de>, lkml <linux-kernel@vger.kernel.org>
+Cc: Danilo Krummrich <dakr@kernel.org>, nouveau
+ <nouveau@lists.freedesktop.org>,  Ville =?ISO-8859-1?Q?Syrj=E4l=E4?=	
+ <ville.syrjala@linux.intel.com>
+Date: Thu, 11 Dec 2025 13:07:36 -0500
+In-Reply-To: <dbd16cb10f0b3d7747491796e41305ed0cea5a3b.camel@gmx.de>
+References: <1515cc8a9fcb4abbf86c88ce99ff8900ec19f499.camel@gmx.de>
+ <dbd16cb10f0b3d7747491796e41305ed0cea5a3b.camel@gmx.de>
+User-Agent: Evolution 3.58.2 (3.58.2-1.fc43)
 MIME-Version: 1.0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: SN7PR12MB8059:EE_|DM4PR12MB6423:EE_
-X-MS-Office365-Filtering-Correlation-Id: aeb6429e-08f2-4da9-6431-08de38905bfb
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0;ARA:13230040|366016|7416014|376014|1800799024;
-X-Microsoft-Antispam-Message-Info: =?us-ascii?Q?paFrz4hlbBEpNuwUj51GlErfJ7Q09wnCfBH5esVHx6KN4AQQtCJ85sONdfUc?=
- =?us-ascii?Q?P3haryvNFi5+/uk5saTYLMniaNDHXeVF72hRZP17pTc9WKibXaI6FfNCL6lw?=
- =?us-ascii?Q?/qe7DJbj4g05GHl5LvnZGUCzqz4K6pWbEAfBNaUZEh8CEcLX9csk1bvqvByG?=
- =?us-ascii?Q?H7JTMubRjQwMvKaqyT7HFUW5CVGfcfFcheMepVUJkN9pJ3tLgcdmWTlmf7X+?=
- =?us-ascii?Q?gzJ40oH7P0j8gi2Dw/OqVn1XS5aWDN4zPqgY4QWW+hZQEmILuzNFEDDpEMSm?=
- =?us-ascii?Q?nzn9Xiy1lRdh2O0kCqeaKaobjEoRO1H8elhQjdP3EqdwKQm7J1pLOUm9Tgt9?=
- =?us-ascii?Q?vKc00/j5d+bp93f8usNn0eM76TaGA/w3boyg/yfQ573vSxkB0TxQL/bdZEkV?=
- =?us-ascii?Q?gIhXJTAxHzFXLHYFD6CYgljss4XSg8H0pPnM148Si0ayyeNfz/oHtrYsCbxB?=
- =?us-ascii?Q?clL4waGt2/wf4LLZMwdENzyob8T7Umba/6NTTY94zXWaWHdK1gCw8jgGy06p?=
- =?us-ascii?Q?V1u3QpXfW5vrxaONfuWQRAC9FCoYYREx26/6uP5sUJOXfY5tJN/raVjybG43?=
- =?us-ascii?Q?VRginihh/0xiPaUng3Qf3IrdGgM+z/u+nIQ2Pz5JrdoEUKocCPnfcpdumqcZ?=
- =?us-ascii?Q?roLzs67aqJ7chHDj4SG1W1e1Aiut8kLicmEsUmgj7jKG7x3mIrtJdmz0oSv/?=
- =?us-ascii?Q?llBEJVFbjCtxnS7SIMo5y8x6pwIE3sBHlNfvKMk0um0tIw7e3OsCr9KclfDa?=
- =?us-ascii?Q?Q+pKTqA9l36gYfseEm86qR+VDmxMvzBVVfFftoW/p1EI2lcFV+ZTBgGG3e/Z?=
- =?us-ascii?Q?Dcp2ynCjEVQaCogV+/2ZqE63S5Nw8vPr3WfA3D34we8KT+GR0kVuhoVJnqqj?=
- =?us-ascii?Q?D+H9OZmNf7Mg3Su7Rmwo7DLhsa2oTZ9i/rIjMk/3mOrLYu3jFLJy/JHas0xO?=
- =?us-ascii?Q?MacXeY9ugVHMvVXZQrJHaKBh3lJbC6KOZCUlFmIUSe0xoz09fk5T6KtLUCL/?=
- =?us-ascii?Q?V4CVInRGMbbQjbQmC4H9xWIu3HlxllRuiFGrhE243oF8JRpRZnUHyWHlxyOC?=
- =?us-ascii?Q?yydzr182ALrhRYnfU3VFIGboop10whuL25cyRaAKNwGl+HD65trIM7iubLBn?=
- =?us-ascii?Q?Y4VMVpttUxOdL13q271lXhSN+Ah6ovHXUh6AmCjHqXo/AEBbldgBz8Snjw2h?=
- =?us-ascii?Q?6ivCdMQUlWZsJnUi34g1KPM1gKuj7I+cBownlraZ6fqovXOGG/Bqoigsu5pd?=
- =?us-ascii?Q?41VsQigEA2nPJUnSUdE+MgQRaNq6punWkI8PcM8tCVFXsQxvl3KmsIrKfu1U?=
- =?us-ascii?Q?VTKLySqVfjwl6w/TAiHWuaXJHNHJlnFNCZdOBH1gX3TQMu1lXgVz2ddOR25z?=
- =?us-ascii?Q?QdmnJmaoJGuGmO0EHeI+BjPbYQqpdBQPz7lcUSImWS+JKp37YB90ocf8SPtD?=
- =?us-ascii?Q?2+53wnBGLuuKAoExK/E8iqTmZ78ejp9I?=
-X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
- IPV:NLI; SFV:NSPM; H:SN7PR12MB8059.namprd12.prod.outlook.com; PTR:; CAT:NONE;
- SFS:(13230040)(366016)(7416014)(376014)(1800799024); DIR:OUT; SFP:1101; 
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: =?us-ascii?Q?CtFIfuzLLMKHYtZoDisfFTwkxIvrM7Ou7B6Bajrwry84Wv935FFWXjQHrEU0?=
- =?us-ascii?Q?LqqbdtavwdB0nbSu+6/oLHT0yhV84esJg6GpnAbGiffG0m4JLggV/Wv3Syqm?=
- =?us-ascii?Q?p3aDvrAB486ybPxFlnjNM/tOcnDBzWe2HC8sV1LFv80msTiH6MzAl1T7HFro?=
- =?us-ascii?Q?wlt8i8yhZFVgAATpyLWW+09x0tl2lbg7tFDpiYTDuW/+YDz5/6E+HjDTusOr?=
- =?us-ascii?Q?Lq9s4liobyyYHifxTdPx8FaR87FfpCaXsKsiQABuXtveAJETJMtlniaHjX5E?=
- =?us-ascii?Q?A0ZIjglQ4LFY5R/7egGcG/BLDCsBvWOlb2231Xstybg6UdJYiqbmhCVCfZoS?=
- =?us-ascii?Q?QXEWmFhzaLuhYcClFWAuShWPYAFVUXZIRQ12KYk/UJKLidRk9xraHVcCEWBA?=
- =?us-ascii?Q?BtAy1Dw5rWXoG65OvLB9taVVmfyXB44oLdnZqVOwjBXYqYuxuZValgpzz6q1?=
- =?us-ascii?Q?AGG6lIGBzL7R/MZtmENTewPC896b0ajdFiW7uMjx2H9Eu1jyZt5VvTc0d2dZ?=
- =?us-ascii?Q?gixEGluV4ipqQ1mCI6HdMND3jOpq1mKu5XxXO2dS/Zqu6DA2pCM3QE8JhtTf?=
- =?us-ascii?Q?H+K88hQvpvtnKBymgTcPMQpFQYi6oIyHe4Y35F5ez/+NN776oaVAOLXzVOfb?=
- =?us-ascii?Q?cZNEaKaqnO4E9L0xPI5WirDUuwvG4TFAM/acMJrG9gcZUBm6mmus9IphqGIL?=
- =?us-ascii?Q?z2AzwvWm9JiF/x4aNh2FqyG9Vu1X1tOY+grxD2owl8z79snSkxZO3DYszFP0?=
- =?us-ascii?Q?v+ZR92Gwn3oa+VHAExkWdS0INPxfLFJJMiP2yYuM4FwX/5YMFpDxoZjrDbj1?=
- =?us-ascii?Q?Yh986fSGQ/vjlMwE2Ifg7derHQ9GFqU+YrgRAkewbRqL4TpWE2LQv48wjyHY?=
- =?us-ascii?Q?S0/6ItG/Shpkca7m/dtUvFXGfIMTGPW00cOmj09rT/PzUXG70Oo5g15t3gc9?=
- =?us-ascii?Q?/kGr7TlxIpJPoneEx2MDzaxHeKB7rWciXQKNHA06F1hrJtUmtkbxgo9UK7MQ?=
- =?us-ascii?Q?HgOSTRdYQjXGs4LChYktrpnyK5DOr2c2riwtBA8M1bdbtrMNyEdTRdJwYMQ0?=
- =?us-ascii?Q?4E0GxE1npL/Ekwnb8rhVOUOrCPNvjP96Vj6bOJE2FNwrQ/zV6AcwHOcSy3y1?=
- =?us-ascii?Q?V9NukAXrSDFSqpgSSvZeyZlrcgSzbjvX1TuclgzvmNewOb+EybVEmCemILSE?=
- =?us-ascii?Q?GQH4Ki5AXkzIw2fOtofMA6lR/h5/83XwJCMvSuAjwQXZZrNTpQJ4y0F7H6+/?=
- =?us-ascii?Q?ODjUqRbTEHmCIeCvHsgAZHJT32gfoy7bmldCjCw4RnEhGyZwJHkQk3mWhTIk?=
- =?us-ascii?Q?ciVdczAZqsM3ZEOwpFdXHgrVi3g8kD9XODJSsbnIuoDlADOPEEXPS85rATxf?=
- =?us-ascii?Q?9rC/qtYT8g1hXO0KfPyG8F+m7PhGaikyfekU9ZCLTKhtE9VvaFDmmKTCATvA?=
- =?us-ascii?Q?poC9YsWfog9Myr7nXqgygl5t8y07YKnVjF3/EeZCPDy9RMhWcKmvszRKerg4?=
- =?us-ascii?Q?4vS1gm8YFtE2dqFgjQzmGwIu60TDcj+QrYOMsbsAOhzXtZ3yYPHfu9PNTFDs?=
- =?us-ascii?Q?I5eP+mmEZmgjzhBdJWB/M/g56pYIhUUODca/Jt9M?=
-X-OriginatorOrg: Nvidia.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: aeb6429e-08f2-4da9-6431-08de38905bfb
-X-MS-Exchange-CrossTenant-AuthSource: SN7PR12MB8059.namprd12.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 11 Dec 2025 08:36:20.5068 (UTC)
-X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
-X-MS-Exchange-CrossTenant-Id: 43083d15-7273-40c1-b7db-39efd9ccc17a
-X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: 972WRqPOMCJfAZp5ea9UIeu6AhHB+KvrBwSbXqv1Z4vNtqGnl+Vxr34ToTzbbs8rbsE93qnGtaeRuKzoW8VBOg==
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: DM4PR12MB6423
+X-Mimecast-Spam-Score: 0
+X-Mimecast-MFC-PROC-ID: 6UOXH_wnOaakGpwAyAhSg0frnjhr1SOs9yuJGE7iWOw_1765476462
+X-Mimecast-Originator: redhat.com
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -156,83 +104,136 @@ List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-Hi Zhi,
+Yep - I'm going to be sending out a respin of the patch that fixes this
+issue today
 
-On Tue, Dec 09, 2025 at 03:41:14PM +0200, Zhi Wang wrote:
-> On Sat, 6 Dec 2025 21:32:51 -0500
-> Joel Fernandes <joelagnelf@nvidia.com> wrote:
-[..]
-> > > 0x00000004); +
-> > > +            let val = bar.read32(0x88000 + 0xbfc);
-> > > +            info.b64bitBar2 = u8::from((val & 0x00000006) ==
-> > > 0x00000004);
-> > 
-> > Please no magic numbers, please use proper named constants with
-> > documentation comments explaining the values.
-> > 
-> > Also BAR reads here need proper register macro definitions/access.
-> > 
-> 
-> That is true. :) But this is because there is no register definition in
-> the OpenRM code/non OpenRM code as well. I have no idea about the name
-> and bit definitions of this register.
-> 
-> Suppose I will have to find some clues from some folks then document
-> them here when going to patches request for merged. :)
-
-
-I think these magic numbers are PCIe config space related. I found a couple of references [1] [2] [3]
-
-[1]
-In Open GPU docs, I see 0x00088000 is NV_PCFG but this is on Turing, lets
-confirm what it is on other architectures (if not common, should it go
-through a HAL?).
-
-https://github.com/NVIDIA/open-gpu-kernel-modules/blob/a5bfb10e75a4046c5d991c65f49b5d29151e68cf/src/common/inc/swref/published/turing/tu102/dev_nv_xve.h#L4
-
-and 0xbf4 is SRIOV capability headers, per the same header file:
-NV_XVE_SRIOV_CAP_HDR10
-
-Also the bit definition is not documented in that public header, but I find
-from internal sources that what you're trying to do with the "& 0x6" is
-determine whether the VF BAR is capable of 64-bit addressing:
-
- Bits [2:1] is VF_BAR1_ADR_TYPE and = 2 means the BAR is capable of 64-bit
- addressing, and = 0 means 32-bit.
-
-I wonder if the format of these capability headers are present in the PCI
-specification? It is worth checking, I find some very similar mentions of the
-value 2 being 64-bit in https://wiki.osdev.org/PCI as well.
-
-[2]
-In Nouveau I found the 0x88000
-  drivers/gpu/drm/nouveau/nouveau_reg.h +684
-
-With a bunch of ids and such which is typical of what is in config space:
-
-#    define NV50_PBUS_PCI_ID                                0x00088000
-#        define NV50_PBUS_PCI_ID_VENDOR_ID                  0x0000ffff
-#        define NV50_PBUS_PCI_ID_VENDOR_ID__SHIFT                    0
-#        define NV50_PBUS_PCI_ID_DEVICE_ID                  0xffff0000
-#        define NV50_PBUS_PCI_ID_DEVICE_ID__SHIFT                   16
-
-Perhaps this is something pdev.config_read_dword() should be giving?
-
-[3] This one I am not sure off, but the link
-https://envytools.readthedocs.io/en/latest/hw/bus/pci.html says that on NV40+
-cards, all 0x1000 bytes of PCIE config space are mapped to MMIO register
-space at addresses 0x88000-0x88fff. This matches exactly the magic number in
-your patch.
-
-Also, I wonder if we need to determine if the BARs can be 64-bit addressed, do
-we have requirements for BAR sizes > 4GB for vGPU and if not, do we need to
-determine the BAR size addressability?
-
-Also, shouldn't the PCI core subsystem be automatically determining if the
-BARs are 64-bit addressable? Not sure if that belongs in the driver. It would
-be good to understand how this is supposed to work.
-
-thanks,
-
- - Joel
+On Tue, 2025-12-09 at 09:38 +0100, Mike Galbraith wrote:
+> CC
+>=20
+> On Sat, 2025-12-06 at 10:04 +0100, Mike Galbraith wrote:
+> > Greetings,
+> >=20
+> > GM204 equipped box began spewing the below endlessly, reproducer
+> > is..
+> > boot box.
+> >=20
+> > [=C2=A0=C2=A0 44.953586] nouveau 0000:01:00.0: [drm] drm_WARN_ON(state-
+> > >checked)
+> > [=C2=A0=C2=A0 44.953588] WARNING: drivers/gpu/drm/drm_atomic.c:373 at 0=
+x0,
+> > CPU#3: kwin_wayland/2217
+> > [=C2=A0=C2=A0 44.953592] Modules linked in: af_packet nft_fib_inet
+> > nft_fib_ipv4 nft_fib_ipv6 nft_fib nft_reject_inet nf_reject_ipv4
+> > nf_reject_ipv6 nft_reject nft_ct nft_chain_nat nf_nat nf_conntrack
+> > nf_defrag_ipv6 nf_defrag_ipv4 bridge stp llc iscsi_ibft
+> > iscsi_boot_sysfs rfkill nf_tables binfmt_misc nls_iso8859_1
+> > nls_cp437 usblp joydev snd_hda_codec_alc882
+> > snd_hda_codec_realtek_lib snd_hda_codec_generic snd_hda_codec_hdmi
+> > intel_rapl_msr intel_rapl_common x86_pkg_temp_thermal snd_hda_intel
+> > intel_powerclamp snd_intel_dspcfg coretemp snd_hda_codec kvm_intel
+> > r8169 snd_hwdep snd_hda_core iTCO_wdt realtek intel_pmc_bxt at24
+> > regmap_i2c iTCO_vendor_support mdio_devres mei_hdcp snd_pcm libphy
+> > snd_timer kvm snd i2c_i801 lpc_ich mei_me irqbypass pcspkr
+> > i2c_smbus mdio_bus soundcore mei mfd_core thermal fan
+> > intel_smartconnect uas usb_storage nfsd auth_rpcgss nfs_acl lockd
+> > grace sch_fq_codel sunrpc fuse dm_mod configfs nfnetlink dmi_sysfs
+> > nouveau hid_generic usbhid drm_ttm_helper ttm drm_client_lib
+> > gpu_sched i2c_algo_bit drm_gpuvm drm_exec
+> > [=C2=A0=C2=A0 44.953639]=C2=A0 drm_display_helper drm_kms_helper xhci_p=
+ci drm
+> > ehci_pci xhci_hcd ehci_hcd ahci video libahci ghash_clmulni_intel
+> > usbcore wmi libata button usb_common sd_mod scsi_dh_emc
+> > scsi_dh_rdac scsi_dh_alua sg scsi_mod scsi_common vfat fat ext4
+> > crc16 mbcache jbd2 loop msr efivarfs autofs4 aesni_intel gf128mul
+> > [=C2=A0=C2=A0 44.953659] CPU: 3 UID: 1000 PID: 2217 Comm: kwin_wayland =
+Kdump:
+> > loaded Tainted: G=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 W=C2=A0=C2=
+=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 6.18.0.g3af870ae-master=
+ #4
+> > PREEMPT(lazy)=20
+> > [=C2=A0=C2=A0 44.953662] Tainted: [W]=3DWARN
+> > [=C2=A0=C2=A0 44.953663] Hardware name: MEDION MS-7848/MS-7848, BIOS
+> > M7848W08.20C 09/23/2013
+> > [=C2=A0=C2=A0 44.953665] RIP: 0010:drm_atomic_get_crtc_state+0x152/0x17=
+0
+> > [drm]
+> > [=C2=A0=C2=A0 44.953698] Code: 04 48 8b 7f 08 4c 8b 6f 50 4d 85 ed 75 0=
+3 4c
+> > 8b 2f e8 22 ff 37 e1 48 89 c6 48 8d 3d 18 5b 17 00 48 c7 c1 50 91
+> > 71 a0 4c 89 ea <67> 48 0f b9 3a 8b 95 90 00 00 00 e9 d6 fe ff ff 48
+> > c7 c0 f4 ff ff
+> > [=C2=A0=C2=A0 44.953700] RSP: 0018:ffff888140797ad8 EFLAGS: 00010282
+> > [=C2=A0=C2=A0 44.953703] RAX: ffffffffa0ae90f1 RBX: ffff888238fbea80 RC=
+X:
+> > ffffffffa0719150
+> > [=C2=A0=C2=A0 44.953704] RDX: ffff888100e4d740 RSI: ffffffffa0ae90f1 RD=
+I:
+> > ffffffffa06cd040
+> > [=C2=A0=C2=A0 44.953705] RBP: ffff888100d07010 R08: 00000000000000c0 R0=
+9:
+> > 0000000000000000
+> > [=C2=A0=C2=A0 44.953706] R10: ffff888140797b00 R11: 0000000001000000 R1=
+2:
+> > 0000000000000000
+> > [=C2=A0=C2=A0 44.953708] R13: ffff888100e4d740 R14: ffff8881093d1038 R1=
+5:
+> > ffff888238fbea80
+> > [=C2=A0=C2=A0 44.953709] FS:=C2=A0 00007fc3cf8efb00(0000)
+> > GS:ffff88849c2d8000(0000) knlGS:0000000000000000
+> > [=C2=A0=C2=A0 44.953711] CS:=C2=A0 0010 DS: 0000 ES: 0000 CR0: 00000000=
+80050033
+> > [=C2=A0=C2=A0 44.953712] CR2: 00007fc3a7700000 CR3: 0000000163103005 CR=
+4:
+> > 00000000001726f0
+> > [=C2=A0=C2=A0 44.953713] Call Trace:
+> > [=C2=A0=C2=A0 44.953715]=C2=A0 <TASK>
+> > [=C2=A0=C2=A0 44.953718]=C2=A0 nv50_wndw_prepare_fb+0xac/0x120 [nouveau=
+]
+> > [=C2=A0=C2=A0 44.953801]=C2=A0 drm_atomic_helper_prepare_planes.part.0+=
+0x2a/0x1b0
+> > [drm_kms_helper]
+> > [=C2=A0=C2=A0 44.953815]=C2=A0 nv50_disp_atomic_commit.part.0+0x7d/0x1b=
+0 [nouveau]
+> > [=C2=A0=C2=A0 44.953876]=C2=A0 drm_atomic_commit+0x9e/0xb0 [drm]
+> > [=C2=A0=C2=A0 44.953895]=C2=A0 ?
+> > drm_plane_create_color_pipeline_property.cold+0x24/0x24 [drm]
+> > [=C2=A0=C2=A0 44.953916]=C2=A0 drm_atomic_helper_update_plane+0xf1/0x15=
+0
+> > [drm_kms_helper]
+> > [=C2=A0=C2=A0 44.953924]=C2=A0 drm_mode_cursor_universal+0xe7/0x270 [dr=
+m]
+> > [=C2=A0=C2=A0 44.953948]=C2=A0 drm_mode_cursor_common.part.0+0x94/0x1b0=
+ [drm]
+> > [=C2=A0=C2=A0 44.953968]=C2=A0 ? drm_mode_cursor_ioctl+0x80/0x80 [drm]
+> > [=C2=A0=C2=A0 44.953986]=C2=A0 drm_ioctl_kernel+0x7f/0xe0 [drm]
+> > [=C2=A0=C2=A0 44.954008]=C2=A0 drm_ioctl+0x1ea/0x470 [drm]
+> > [=C2=A0=C2=A0 44.954027]=C2=A0 ? drm_mode_cursor_ioctl+0x80/0x80 [drm]
+> > [=C2=A0=C2=A0 44.954047]=C2=A0 nouveau_drm_ioctl+0x56/0xb0 [nouveau]
+> > [=C2=A0=C2=A0 44.954110]=C2=A0 __x64_sys_ioctl+0x7a/0xc0
+> > [=C2=A0=C2=A0 44.954114]=C2=A0 do_syscall_64+0x61/0xfc0
+> > [=C2=A0=C2=A0 44.954118]=C2=A0 entry_SYSCALL_64_after_hwframe+0x4b/0x53
+> > [=C2=A0=C2=A0 44.954121] RIP: 0033:0x7fc3d351453f
+> > [=C2=A0=C2=A0 44.954122] Code: 00 48 89 44 24 18 31 c0 48 8d 44 24 60 c=
+7 04
+> > 24 10 00 00 00 48 89 44 24 08 48 8d 44 24 20 48 89 44 24 10 b8 10
+> > 00 00 00 0f 05 <89> c2 3d 00 f0 ff ff 77 18 48 8b 44 24 18 64 48 2b
+> > 04 25 28 00 00
+> > [=C2=A0=C2=A0 44.954124] RSP: 002b:00007ffd4ea49ba0 EFLAGS: 00000246
+> > ORIG_RAX: 0000000000000010
+> > [=C2=A0=C2=A0 44.954126] RAX: ffffffffffffffda RBX: 00005569076a4010 RC=
+X:
+> > 00007fc3d351453f
+> > [=C2=A0=C2=A0 44.954127] RDX: 00007ffd4ea49c60 RSI: 00000000c02464bb RD=
+I:
+> > 0000000000000013
+> > [=C2=A0=C2=A0 44.954128] RBP: 00007ffd4ea49c60 R08: 00007fc3d7328010 R0=
+9:
+> > 0000000000000000
+> > [=C2=A0=C2=A0 44.954130] R10: 00007fc3d7328000 R11: 0000000000000246 R1=
+2:
+> > 00000000c02464bb
+> > [=C2=A0=C2=A0 44.954131] R13: 0000000000000013 R14: 0000556908538f00 R1=
+5:
+> > 0000556907846250
+> > [=C2=A0=C2=A0 44.954133]=C2=A0 </TASK>
 
