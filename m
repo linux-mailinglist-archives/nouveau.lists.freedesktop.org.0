@@ -2,197 +2,150 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id 0C08ACBA233
-	for <lists+nouveau@lfdr.de>; Sat, 13 Dec 2025 01:54:11 +0100 (CET)
-Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id B936E10E99C;
-	Sat, 13 Dec 2025 00:54:09 +0000 (UTC)
+	by mail.lfdr.de (Postfix) with ESMTPS id 993B2CBB082
+	for <lists+nouveau@lfdr.de>; Sat, 13 Dec 2025 15:45:56 +0100 (CET)
+Received: from kara.freedesktop.org (unknown [131.252.210.166])
+	by gabe.freedesktop.org (Postfix) with ESMTPS id 261ED10E3CC;
+	Sat, 13 Dec 2025 14:45:54 +0000 (UTC)
 Authentication-Results: gabe.freedesktop.org;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="MTigQRU3";
+	dkim=pass (2048-bit key; unprotected) header.d=intel.com header.i=@intel.com header.b="MFUxfOQE";
 	dkim-atps=neutral
-X-Original-To: nouveau@lists.freedesktop.org
-Delivered-To: nouveau@lists.freedesktop.org
-Received: from mail-qv1-f47.google.com (mail-qv1-f47.google.com
- [209.85.219.47])
- by gabe.freedesktop.org (Postfix) with ESMTPS id DCA0D10E99C
- for <nouveau@lists.freedesktop.org>; Sat, 13 Dec 2025 00:54:07 +0000 (UTC)
-Received: by mail-qv1-f47.google.com with SMTP id
- 6a1803df08f44-8824888ce97so25184086d6.2
- for <nouveau@lists.freedesktop.org>; Fri, 12 Dec 2025 16:54:07 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1765587247; x=1766192047; darn=lists.freedesktop.org;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:from:to:cc:subject:date
- :message-id:reply-to;
- bh=vQtFCKqn/Vy0CrF2DeD/KfL/1h1ZSMpG0XzEYRrFseY=;
- b=MTigQRU3eM4wFVEUtIjK6sxla8pnR7YNwP4rMHdCmWTpsLzHTWleLqpdeb+DjzVtov
- XgMTg50XbrPUWpe3Y5dVObQDgVH7fY/OhPAdz9hEsypff8BAVTYUbjgfbVRUwKHJw0iN
- XI035if3NbwRBaBbC9R75CSQF9SeMmkpUwX1/noITdntGg9PA+yMArUMKewzQOgUEdjy
- fOW/KxXWrKwOKwUzUZyaaZSS9VaE4BZrSKFhAmXHAcTv2UNmEhaU/W3a7yshvlsezgST
- SUtEqpwnytU0ZmaLC2II+JPwxhMyDtlOR7030CNqi7hqaqSdMtsusy+lrnDxH3sK9coa
- E+zQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1765587247; x=1766192047;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
- :to:cc:subject:date:message-id:reply-to;
- bh=vQtFCKqn/Vy0CrF2DeD/KfL/1h1ZSMpG0XzEYRrFseY=;
- b=fln2ZM1KyRGa3j3tVJM5z3PYF/GQN1vAaTxHKcojrjKXBxkAi3qfXg4x8/T6uz4gcE
- y2Zjj1KyZ25853T+JpmePPxH48dmhLLW6F58Mvm09ptSnjkMFrvjBO+CRYja6NO1++iq
- BVCFvBt2+NS/9zNCYjrsW5kE0bizmcqXEWBWDrRSNMBu9FKtgpeBRR9aF/8oAo1MVdgC
- HWzKUqnbXSPQyn0oBgKDerCf2dgA3FPpfrPLHEtXqf66eEWMjgWgjK97ZdF2TuBCpu9q
- XJSHMMUIkwtwY923fR3TH9vbNtmi7EUQr+Jmy5bf5UF+/ULxfWVVoJWLbnDB4PceuXpj
- 9/xQ==
-X-Gm-Message-State: AOJu0Ywocv6xcZu8RG+RIq3Ook0TT5OQ/4pRFFMZRVenhUaqlWLCrxYP
- jDokkPwTVqZ5jYowpGyxAxKRCbDlcx6syoShT9huiETidU6f9FCo8vVI2S01I9N8
-X-Gm-Gg: AY/fxX7PKxggRSBGGqV3xbSZEmkZlsyAEoH8ByC6IqgQRRZe411d6wOSeJ6vC3xvGqe
- 7cViwdosEdJaQnrd2YGMQ2rbjWFynT5r4GQef00TIUxRFhKQiSFxZl3S3ghydo9eEOecD/56QJY
- FCeyai3v+n+5ZXYbnmypL2+eezjIlbnMifsfc1TRIN0/oVaImrzWSPSDU5Zef/WonYMOzBXwmqQ
- R4yr3edlkorzFzDhC7kz8MbbO2dwan8GRqFL3U5dGdfYj1AyQ+kahFbFXiWtEyMVNsMQd87Lj8i
- tHylUGGboPCW1vZT2kHNP1rnClJIsh+fMcBwa+Z0kIfq7JGs3qBXjvSvKq89X4/7URJzO+Z4iTI
- G1Rnp+VQoi5MfBxYL6xGA4CWb61WOyokqde0+GJ5IGJEa8mkyn+ZHxNDYZ2v6/oM8Xk8aOoObyO
- xwOSZn
-X-Google-Smtp-Source: AGHT+IFJZ2xHJNMgM/kPIULCkqd8a2VMuys0w04agmaID4F2zTOJT/VezhDgU0Ky6BQZNfPmvHEZww==
-X-Received: by 2002:a05:6214:2e8f:b0:888:7f91:e276 with SMTP id
- 6a1803df08f44-8887f91e805mr47157006d6.30.1765587246932; 
- Fri, 12 Dec 2025 16:54:06 -0800 (PST)
-Received: from kunkbox.lan ([2601:18a:8300:336d::6c2])
- by smtp.gmail.com with ESMTPSA id
- 6a1803df08f44-88993c61ff0sm4452176d6.21.2025.12.12.16.54.06
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 12 Dec 2025 16:54:06 -0800 (PST)
-From: lxrmrz732@gmail.com
-To: lyude@redhat.com,
-	dakr@kernel.org,
-	airlied@gmail.com
-Cc: nouveau@lists.freedesktop.org, lxrmrz732@rocketmail.com,
- Alex Ramirez <lxrmrz732@gmail.com>
-Subject: [PATCH v3 2/2][RESEND 2] drm/nouveau: implement missing DCB connector
- types; gracefully handle unknown connectors
-Date: Fri, 12 Dec 2025 19:53:27 -0500
-Message-ID: <20251213005327.9495-3-lxrmrz732@gmail.com>
-X-Mailer: git-send-email 2.52.0
-In-Reply-To: <20251213005327.9495-1-lxrmrz732@gmail.com>
-References: <20251213005327.9495-1-lxrmrz732@gmail.com>
+Received: from kara.freedesktop.org (localhost [127.0.0.1])
+	by kara.freedesktop.org (Postfix) with ESMTP id 4FBB144EA5;
+	Sat, 13 Dec 2025 14:38:34 +0000 (UTC)
+ARC-Seal: i=1; cv=none; a=rsa-sha256; d=lists.freedesktop.org;
+ s=20240201; t=1765636714;
+ b=VPpgy9LstkwNoWKoJA12EdXCy+gcd7utZtK2fy2KdItqHtlWf4YAtsAqjFFLOD8sJVEW1
+ tskVhsULLUVbfCstOPh7sAGSuY63YiDl3uz1aNyHMrbmup5rOPwOZVCVRx1dQ2x99Pz4gJE
+ omWwBJarsU05BPz7iVYBn3nrNk2p6oyBxbrZTw8FsizE6J9n1JCPO9BOqGSyBRVOerSx8Nj
+ sNmKNJVZvxRA3FQxqSVISUpEJ8mLtQ2Gdf1AVXRnkl6UN2Uj0+Cl8EeFOEqr82L1RMEm6Y/
+ M2KbjlhFrRb6AF6v0DIeLHG5yGL+VAsrdiEmrerRsfaQrUnQ3satMrvil/6Q==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=lists.freedesktop.org; s=20240201; t=1765636714; h=from : sender :
+ reply-to : subject : date : message-id : to : cc : mime-version :
+ content-type : content-transfer-encoding : content-id :
+ content-description : resent-date : resent-from : resent-sender :
+ resent-to : resent-cc : resent-message-id : in-reply-to : references :
+ list-id : list-help : list-unsubscribe : list-subscribe : list-post :
+ list-owner : list-archive;
+ bh=uJLWCuraazYVNYvdbBRPhuMviLXMQA3f4GQx3Gx5EeA=;
+ b=a3lVanbvt8iWfTWCqS8lNd3iMkRFiZDDxMRHhFwcBXn8sk+nUGKiFOr7FXIOTb6kwhrT5
+ bvi0cULU3uH1/5aL+OeI7roYI/ZrYi7/sBdSnpyNwDl1yItxoen8zh53D8uPH5Fg6TQC8pU
+ IVxBa+mkVzpxeM54AWstsuK1C+TqOMAGPxZo3bwJ2fx97IOr/JC+FVq3VaODCxEI5lHDDE4
+ AqecCAah83/BfrDLb5RPLFbML+RM770I0OeOQNNsY8cbEi+81kKD1k2ixMIh7vqsm5VPFws
+ nsOYVcvYK4eVJ9DU5bUBMI8T8W0aAsQ/5RvN2qxAGPohoXH4QbRoBnacdSCw==
+ARC-Authentication-Results: i=1; mail.freedesktop.org;
+ dkim=pass header.d=intel.com header.i=@intel.com;
+  arc=none (Message is not ARC signed);
+  dmarc=pass (Used From Domain Record) header.from=intel.com policy.dmarc=none
+Authentication-Results: mail.freedesktop.org;
+ dkim=pass header.d=intel.com header.i=@intel.com;
+ arc=none (Message is not ARC signed);
+ dmarc=pass (Used From Domain Record) header.from=intel.com policy.dmarc=none
+Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
+	by kara.freedesktop.org (Postfix) with ESMTPS id D6B5444E20
+	for <nouveau@lists.freedesktop.org>; Sat, 13 Dec 2025 14:38:31 +0000 (UTC)
+Received: from mgamail.intel.com (mgamail.intel.com [198.175.65.13])
+	by gabe.freedesktop.org (Postfix) with ESMTPS id 0F64D10E15E
+	for <nouveau@lists.freedesktop.org>; Sat, 13 Dec 2025 14:45:51 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
+  d=intel.com; i=@intel.com; q=dns/txt; s=Intel;
+  t=1765637152; x=1797173152;
+  h=date:from:to:cc:subject:message-id:references:
+   mime-version:in-reply-to;
+  bh=x3O7UystAmu0laPnZukWplU+jTS2X0j4gWkEiv+zu7M=;
+  b=MFUxfOQEL4v61VWsLUof/rRrVBwfqUaBpg5vAAlwoLFWm9s02rCyzLYL
+   KxvOO4n10v1ZDeGEjM7Hgv602wiSq/QHydFnqoQBMZrgnrMa26oBhlGhB
+   peKRS32ZZPSJbV+64qEnNyef5poEhFsOoCBc6tFl0fl5otIUzZZz6Dh8m
+   GHf+OnpduxjxChYqEty7OW0npoywoWFriMRxPbsk2O0pt6uYPGWKQFRCF
+   Ypg7oOg/O18jUi+xudgVt2RsOu/hp8kvdQnekLJpBulkvfXzcj1Pw9O/g
+   YfMLM5Ycf0i6Tc8ntKyb5VCOdBDbxXg1p2XTIXtDWnKxw2SFbTplsVW96
+   Q==;
+X-CSE-ConnectionGUID: XZtW6agBQsSw9vZQBl8dnQ==
+X-CSE-MsgGUID: KW9MhGFLSyq0q4mUsL5ihA==
+X-IronPort-AV: E=McAfee;i="6800,10657,11641"; a="78727492"
+X-IronPort-AV: E=Sophos;i="6.21,146,1763452800";
+   d="scan'208";a="78727492"
+Received: from orviesa003.jf.intel.com ([10.64.159.143])
+  by orvoesa105.jf.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
+ 13 Dec 2025 06:45:51 -0800
+X-CSE-ConnectionGUID: Pv9s2lbRQmSJaXuB0ktrRw==
+X-CSE-MsgGUID: r3LA0x/jQp2Xk2n+5OlajA==
+X-ExtLoop1: 1
+X-IronPort-AV: E=Sophos;i="6.21,146,1763452800";
+   d="scan'208";a="201502891"
+Received: from lkp-server01.sh.intel.com (HELO d335e3c6db51) ([10.239.97.150])
+  by orviesa003.jf.intel.com with ESMTP; 13 Dec 2025 06:45:48 -0800
+Received: from kbuild by d335e3c6db51 with local (Exim 4.98.2)
+	(envelope-from <lkp@intel.com>)
+	id 1vUQsU-000000007kV-0nSD;
+	Sat, 13 Dec 2025 14:45:46 +0000
+Date: Sat, 13 Dec 2025 22:45:18 +0800
+From: kernel test robot <lkp@intel.com>
+To: Brendan Shephard <bshephar@bne-home.net>, aliceryhl@google.com,
+	joelagnelf@nvidia.com, acourbot@nvidia.com, airlied@redhat.com
+Subject: Re: [PATCH v3] drm/nova: Align GEM memory allocation to system page
+ size
+Message-ID: <202512132208.bhsQf8d8-lkp@intel.com>
+References: <20251208071810.653223-1-bshephar@bne-home.net>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
-X-BeenThere: nouveau@lists.freedesktop.org
-X-Mailman-Version: 2.1.29
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <20251208071810.653223-1-bshephar@bne-home.net>
+Message-ID-Hash: E555BXSPRIHMVDRKEN5L2E75RBZW5GMA
+X-Message-ID-Hash: E555BXSPRIHMVDRKEN5L2E75RBZW5GMA
+X-MailFrom: lkp@intel.com
+X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency;
+ loop; banned-address; member-moderation; nonmember-moderation; administrivia;
+ implicit-dest; max-recipients; max-size; news-moderation; no-subject;
+ digests; suspicious-header
+CC: llvm@lists.linux.dev, oe-kbuild-all@lists.linux.dev,
+ rust-for-linux@vger.kernel.org, nouveau@lists.freedesktop.org,
+ Brendan Shephard <bshephar@bne-home.net>
+X-Mailman-Version: 3.3.8
 Precedence: list
 List-Id: Nouveau development list <nouveau.lists.freedesktop.org>
-List-Unsubscribe: <https://lists.freedesktop.org/mailman/options/nouveau>,
- <mailto:nouveau-request@lists.freedesktop.org?subject=unsubscribe>
-List-Archive: <https://lists.freedesktop.org/archives/nouveau>
-List-Post: <mailto:nouveau@lists.freedesktop.org>
+Archived-At: 
+ <https://lists.freedesktop.org/hyperkitty/list/nouveau@lists.freedesktop.org/message/E555BXSPRIHMVDRKEN5L2E75RBZW5GMA/>
+Archived-At: 
+ <https://lore.freedesktop.org/202512132208.bhsQf8d8-lkp@intel.com/>
+List-Archive: 
+ <https://lists.freedesktop.org/hyperkitty/list/nouveau@lists.freedesktop.org/>
+List-Archive: <https://lore.freedesktop.org/nouveau>
 List-Help: <mailto:nouveau-request@lists.freedesktop.org?subject=help>
-List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
- <mailto:nouveau-request@lists.freedesktop.org?subject=subscribe>
-Errors-To: nouveau-bounces@lists.freedesktop.org
-Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
+List-Owner: <mailto:nouveau-owner@lists.freedesktop.org>
+List-Post: <mailto:nouveau@lists.freedesktop.org>
+List-Subscribe: <mailto:nouveau-join@lists.freedesktop.org>
+List-Unsubscribe: <mailto:nouveau-leave@lists.freedesktop.org>
 
-From: Alex Ramirez <lxrmrz732@gmail.com>
+Hi Brendan,
 
-* Implement missing DCB connectors in uconn.c previously defined in conn.h.
-* Replace kernel WARN_ON macro with printk message to more gracefully signify
-  an unknown connector was encountered.
+kernel test robot noticed the following build errors:
 
-With this patch, unknown connectors are explicitly marked with value 0
-(DCB_CONNECTOR_VGA) to match the tested current behavior. Although 0xff
-(DCB_CONNECTOR_NONE) may be more suitable, I don't want to introduce a breaking change.
+[auto build test ERROR on 37bb2e7217b01404e2abf9d90d8e5705a5603b52]
 
-Fixes: 8b7d92cad953 ("drm/nouveau/kms/nv50-: create connectors based on nvkm info")
-Link: https://download.nvidia.com/open-gpu-doc/DCB/1/DCB-4.0-Specification.html#_connector_table_entry
-Signed-off-by: Alex Ramírez <lxrmrz732@rocketmail.com>
----
- .../gpu/drm/nouveau/nvkm/engine/disp/uconn.c  | 73 ++++++++++++++-----
- 1 file changed, 53 insertions(+), 20 deletions(-)
+url:    https://github.com/intel-lab-lkp/linux/commits/Brendan-Shephard/drm-nova-Align-GEM-memory-allocation-to-system-page-size/20251208-153603
+base:   37bb2e7217b01404e2abf9d90d8e5705a5603b52
+patch link:    https://lore.kernel.org/r/20251208071810.653223-1-bshephar%40bne-home.net
+patch subject: [PATCH v3] drm/nova: Align GEM memory allocation to system page size
+config: x86_64-buildonly-randconfig-002-20251213 (https://download.01.org/0day-ci/archive/20251213/202512132208.bhsQf8d8-lkp@intel.com/config)
+compiler: clang version 20.1.8 (https://github.com/llvm/llvm-project 87f0227cb60147a26a1eeb4fb06e3b505e9c7261)
+rustc: rustc 1.88.0 (6b00bc388 2025-06-23)
+reproduce (this is a W=1 build): (https://download.01.org/0day-ci/archive/20251213/202512132208.bhsQf8d8-lkp@intel.com/reproduce)
 
-diff --git a/drivers/gpu/drm/nouveau/nvkm/engine/disp/uconn.c b/drivers/gpu/drm/nouveau/nvkm/engine/disp/uconn.c
-index 2dab6612c4fc..d1fed2beee63 100644
---- a/drivers/gpu/drm/nouveau/nvkm/engine/disp/uconn.c
-+++ b/drivers/gpu/drm/nouveau/nvkm/engine/disp/uconn.c
-@@ -191,27 +191,60 @@ nvkm_uconn_new(const struct nvkm_oclass *oclass, void *argv, u32 argc, struct nv
- 	spin_lock(&disp->client.lock);
- 	if (!conn->object.func) {
- 		switch (conn->info.type) {
--		case DCB_CONNECTOR_VGA      : args->v0.type = NVIF_CONN_V0_VGA; break;
--		case DCB_CONNECTOR_TV_0     :
--		case DCB_CONNECTOR_TV_1     :
--		case DCB_CONNECTOR_TV_3     : args->v0.type = NVIF_CONN_V0_TV; break;
--		case DCB_CONNECTOR_DMS59_0  :
--		case DCB_CONNECTOR_DMS59_1  :
--		case DCB_CONNECTOR_DVI_I    : args->v0.type = NVIF_CONN_V0_DVI_I; break;
--		case DCB_CONNECTOR_DVI_D    : args->v0.type = NVIF_CONN_V0_DVI_D; break;
--		case DCB_CONNECTOR_LVDS     : args->v0.type = NVIF_CONN_V0_LVDS; break;
--		case DCB_CONNECTOR_LVDS_SPWG: args->v0.type = NVIF_CONN_V0_LVDS_SPWG; break;
--		case DCB_CONNECTOR_DMS59_DP0:
--		case DCB_CONNECTOR_DMS59_DP1:
--		case DCB_CONNECTOR_DP       :
--		case DCB_CONNECTOR_mDP      :
--		case DCB_CONNECTOR_USB_C    : args->v0.type = NVIF_CONN_V0_DP; break;
--		case DCB_CONNECTOR_eDP      : args->v0.type = NVIF_CONN_V0_EDP; break;
--		case DCB_CONNECTOR_HDMI_0   :
--		case DCB_CONNECTOR_HDMI_1   :
--		case DCB_CONNECTOR_HDMI_C   : args->v0.type = NVIF_CONN_V0_HDMI; break;
-+		/* VGA */
-+		case DCB_CONNECTOR_DVI_A	:
-+		case DCB_CONNECTOR_POD_VGA	:
-+		case DCB_CONNECTOR_VGA		: args->v0.type = NVIF_CONN_V0_VGA; break;
-+
-+		/* TV */
-+		case DCB_CONNECTOR_TV_0		:
-+		case DCB_CONNECTOR_TV_1		:
-+		case DCB_CONNECTOR_TV_2		:
-+		case DCB_CONNECTOR_TV_SCART	:
-+		case DCB_CONNECTOR_TV_SCART_D	:
-+		case DCB_CONNECTOR_TV_DTERM	:
-+		case DCB_CONNECTOR_POD_TV_3	:
-+		case DCB_CONNECTOR_POD_TV_1	:
-+		case DCB_CONNECTOR_POD_TV_0	:
-+		case DCB_CONNECTOR_TV_3		: args->v0.type = NVIF_CONN_V0_TV; break;
-+
-+		/* DVI */
-+		case DCB_CONNECTOR_DVI_I_TV_1	:
-+		case DCB_CONNECTOR_DVI_I_TV_0	:
-+		case DCB_CONNECTOR_DVI_I_TV_2	:
-+		case DCB_CONNECTOR_DVI_ADC	:
-+		case DCB_CONNECTOR_DMS59_0	:
-+		case DCB_CONNECTOR_DMS59_1	:
-+		case DCB_CONNECTOR_DVI_I	: args->v0.type = NVIF_CONN_V0_DVI_I; break;
-+		case DCB_CONNECTOR_TMDS		:
-+		case DCB_CONNECTOR_DVI_D	: args->v0.type = NVIF_CONN_V0_DVI_D; break;
-+
-+		/* LVDS */
-+		case DCB_CONNECTOR_LVDS		: args->v0.type = NVIF_CONN_V0_LVDS; break;
-+		case DCB_CONNECTOR_LVDS_SPWG	: args->v0.type = NVIF_CONN_V0_LVDS_SPWG; break;
-+
-+		/* DP */
-+		case DCB_CONNECTOR_DMS59_DP0	:
-+		case DCB_CONNECTOR_DMS59_DP1	:
-+		case DCB_CONNECTOR_DP		:
-+		case DCB_CONNECTOR_mDP		:
-+		case DCB_CONNECTOR_USB_C	: args->v0.type = NVIF_CONN_V0_DP; break;
-+		case DCB_CONNECTOR_eDP		: args->v0.type = NVIF_CONN_V0_EDP; break;
-+
-+		/* HDMI */
-+		case DCB_CONNECTOR_HDMI_0	:
-+		case DCB_CONNECTOR_HDMI_1	:
-+		case DCB_CONNECTOR_HDMI_C	: args->v0.type = NVIF_CONN_V0_HDMI; break;
-+
-+		/*
-+		 * Dock & unused outputs.
-+		 * BNC, SPDIF, WFD, and detached LVDS go here.
-+		 */
- 		default:
--			WARN_ON(1);
-+			nvkm_warn(&(disp->engine.subdev),
-+				  "unimplemented connector type 0x%02x\n",
-+				  conn->info.type);
-+			args->v0.type = NVIF_CONN_V0_VGA;
- 			ret = -EINVAL;
- 			break;
- 		}
+If you fix the issue in a separate patch/commit (i.e. not just a new version of
+the same patch/commit), kindly add following tags
+| Reported-by: kernel test robot <lkp@intel.com>
+| Closes: https://lore.kernel.org/oe-kbuild-all/202512132208.bhsQf8d8-lkp@intel.com/
+
+All errors (new ones prefixed by >>):
+
+>> error[E0599]: no method named `ok_or` found for type `usize` in the current scope
+   --> drivers/gpu/drm/nova/gem.rs:31:45
+   |
+   31 |         let aligned_size = page_align(size).ok_or(EINVAL)?;
+   |                                             ^^^^^ method not found in `usize`
+
 -- 
-2.52.0
-
+0-DAY CI Kernel Test Service
+https://github.com/intel/lkp-tests/wiki
