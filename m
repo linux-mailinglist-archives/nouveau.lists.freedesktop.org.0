@@ -2,24 +2,24 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id C28F5CCC57A
-	for <lists+nouveau@lfdr.de>; Thu, 18 Dec 2025 15:54:08 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id BE592CCC577
+	for <lists+nouveau@lfdr.de>; Thu, 18 Dec 2025 15:54:07 +0100 (CET)
 Received: from kara.freedesktop.org (unknown [131.252.210.166])
-	by gabe.freedesktop.org (Postfix) with ESMTPS id B4E9310EA24;
+	by gabe.freedesktop.org (Postfix) with ESMTPS id 563EB10EA18;
 	Thu, 18 Dec 2025 14:54:05 +0000 (UTC)
 Authentication-Results: gabe.freedesktop.org;
-	dkim=pass (2048-bit key; unprotected) header.d=Nvidia.com header.i=@Nvidia.com header.b="QilvktSX";
+	dkim=pass (2048-bit key; unprotected) header.d=Nvidia.com header.i=@Nvidia.com header.b="SuxoKAQV";
 	dkim-atps=neutral
 Received: from kara.freedesktop.org (localhost [127.0.0.1])
-	by kara.freedesktop.org (Postfix) with ESMTP id C109C44B90;
+	by kara.freedesktop.org (Postfix) with ESMTP id 6AED444B98;
 	Thu, 18 Dec 2025 14:46:34 +0000 (UTC)
 ARC-Seal: i=2; cv=pass; a=rsa-sha256; d=lists.freedesktop.org;
  s=20240201; t=1766069194;
- b=yC5s3DMrOKPGrF96hK9Qn/6+gYb4c00N7LhpbwCIJCdBsEJ/xQ+o6lHTjpXgDR3Ht+64a
- 0zHuCODes3qnZyjB6k9YvZ98oNzwq6FI1JZ3lO4TBDraJeL92asFI/dq/HXhrmx98Bueej9
- pOYOAt77AumV4TkiSRi9XKJa3lMBAM9F01U+t8ha0rjgbJJJ0IsZTcW6rLFB2aW4yyjnyBq
- qzRHN15FQVaqLBEk6QB5nmwi8tyerePEu38QGJtvmKD3wJB7UpVeMj36TK85YCXelpXwWE5
- kYERm4i/RkJYgfhPZ8eYTfRs7JwKgOPeBcXhKz5pF3FP6/b9milvV123TmtQ==
+ b=lIyDPHm+oPLhnNcA+c2hSDWkHtbgZc2/U+QudJMeZ0Vv/dzon5Q8qGs13y743+GxfiujS
+ ryeSHtuO5G0SNsBP9nuuFknj0R9tqo1D+nsEah8PFsHP2+ymaBEMnj3pq3H4nEOnLFGGgz4
+ oPZxF554r21+oAWLiOuiHxHN57WUi0NvJuf25e1AQCxGibpeGNRAPxp41bVs8ejVvGWWCaV
+ 0BV6Hu9OI6ymencfeyA0ykf3lqL1TEjP4RQpGcPKccAZQJcT60Ayc9pi8WG6IuoRWKmPX/I
+ Ysy0qGx4cu+lUiIDO3BcFv9N9DfmiYWyaAElG/G/2khsedruprCn/lRvVn6A==
 ARC-Message-Signature: i=2; a=rsa-sha256; c=relaxed/relaxed;
  d=lists.freedesktop.org; s=20240201; t=1766069194; h=from : sender :
  reply-to : subject : date : message-id : to : cc : mime-version :
@@ -28,12 +28,12 @@ ARC-Message-Signature: i=2; a=rsa-sha256; c=relaxed/relaxed;
  resent-to : resent-cc : resent-message-id : in-reply-to : references :
  list-id : list-help : list-unsubscribe : list-subscribe : list-post :
  list-owner : list-archive;
- bh=QVoXg2/ZavM81yf0V0bSoV+t63hyCcSWXkY8GTKzVEA=;
- b=uEy6fPkD7hjqOq5HHtRVkev+p+fORUmq5p52onQ5/vWfUmthm8VhIMbNaVWTcDTfH+GUY
- jJaGkc9miOcN/Jr9XCVp7RIUMibK+rkBPz2sVHoURPqeqjGCpbfA42qpBXsXHf+66n4PtfX
- 5WskN9pDCruFQ9r7vq2GXumsetet4hedqj1WuPXAZls9h/yUVTxNZak9045eDpOYP3Vga3y
- sD4YF+1ssfTLWIpYcKnaHZow/7n3acEaWC2hF7qXs7RR8G4FFgNyrrTXStw9cyi7Nu8KrPH
- 4sAFKu67JrepDQmwlOTh2huxXtq+sjD54BHFQNiXL3kglEuYNMKGMb/v99Ag==
+ bh=X/z5tc2V39dPCkLdQS/dPXCXDwjZbVrqtdIe2B6COuk=;
+ b=0DNTdKjkD1Xc8vU2e87pMJTewwQ+YhW1wyu8U4q5ZWXCx+LRzqEq4cGaJJJYCjoBsGRLu
+ IcxGHr3ttoNzdUcbZINbCHRtSe7Eu3lTmw7mb5ijeA3Byh8+I0WOePGQKTuwFyF1wefHbnN
+ 0y3fQ3H8yYy9vAywtR1LE3qVEPHR2QT5J+0z0XEJ8aOgvcC36dpIUUSjsFJcG9AIL62Rt/X
+ u4lE39koQt91CyywEd3C5skwd2XYijwPM1jGxEkQI4dokO5zT35WBUNoaEKNBLNbKdHKFBa
+ u+J1VwYbD2uRniA1E2lCCa3DKUxY6aTN/C8hH0nOg6mZAcazArsT5LhHsogA==
 ARC-Authentication-Results: i=2; mail.freedesktop.org;
  dkim=pass header.d=Nvidia.com;
   arc=pass;
@@ -43,19 +43,19 @@ Authentication-Results: mail.freedesktop.org; dkim=pass header.d=Nvidia.com;
  arc=pass;
  dmarc=pass (Used From Domain Record) header.from=nvidia.com policy.dmarc=reject
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by kara.freedesktop.org (Postfix) with ESMTPS id 0EF414562A
-	for <nouveau@lists.freedesktop.org>; Thu, 18 Dec 2025 01:32:15 +0000 (UTC)
-Received: from PH0PR06CU001.outbound.protection.outlook.com
- (mail-westus3azon11011034.outbound.protection.outlook.com [40.107.208.34])
-	by gabe.freedesktop.org (Postfix) with ESMTPS id 85A8F10E414
-	for <nouveau@lists.freedesktop.org>; Thu, 18 Dec 2025 01:39:44 +0000 (UTC)
+	by kara.freedesktop.org (Postfix) with ESMTPS id 457A14562A
+	for <nouveau@lists.freedesktop.org>; Thu, 18 Dec 2025 01:32:14 +0000 (UTC)
+Received: from DM5PR21CU001.outbound.protection.outlook.com
+ (mail-centralusazon11011040.outbound.protection.outlook.com [52.101.62.40])
+	by gabe.freedesktop.org (Postfix) with ESMTPS id C096910E414
+	for <nouveau@lists.freedesktop.org>; Thu, 18 Dec 2025 01:39:43 +0000 (UTC)
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=r3s9CQIv3BKc6pUYGjcP6OJqaBoT6gpulzOOdX0PA6Ig8kGlQ4yS/gqkZBozybSkaRi1xsJm9ELeJWjMjc+YrSp7ObtwfQrlpZZBU9sPsM6r759CmxsoWJLUaB1DjTlyDOOczgc2a9VUx/N+O7rSmxHNcZTCQkV8X598boJ5CpEs85+QTggoejGSSg2Ic1WxaBcQIcQx3PqZCM383eun/4BxoZnGDmsd0+jXIUDq+NSmgbL85rfTQBL/Sa3WidZqQgIclRLCaqBJv8rxUsfUalcZGjC5UGGKuS47FYvxLQH5v/EALFnjx9KU8345F2yZUov4ibqjrq3wfFnQiTNdPw==
+ b=wXGf6czCEkpP6Gc2tJ9o0BvBYXpHRDzc/gqytxd8ctKXz8bnCERr/bWZC0zo62yIscT+DQb5TBHxmdqPQW7opWPM7vONoO21x/QSH+KEYOkN+GxvkJC5rxUPNzlkan99oSfueQDwGuDtEQkY23Sy9BVT6DOMX/NNcdw0hLxcUQpB2dUDw3pIw1Dh0IeNgTFuGp7xvB2XHQCa3E4J8McgWSZWypSPqB9pXuJ7hXVHF44wDb8fv2YRwFVR9PXiXwhz/lf4xikySpNFxWj98DIKutU6vZxh2xJE7P+CyNtAqVsUB5XvoHr0Br17+bNtRc9abFkXqUp2XLFryVd622JlZw==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
  s=arcselector10001;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=QVoXg2/ZavM81yf0V0bSoV+t63hyCcSWXkY8GTKzVEA=;
- b=RLlNRbqrQMpWWmzKvGDTDiSSxiV4ys+1hp85Fh0gG0PrF+oNc2c7me9HwamEh94jcB2Hld8+spTsXVIzl3MLfQWSmXkdITXWNyr7dFh+9/sl7CuI8yRw2pDK7EV5+M5gML+r2hZ54Nl8Ah7a6N9UnLZdhfbFaQQgLu4Qw+oh122HHEUt2OLsMbwQPmrrevB7fUG/R6lbxxdyW52F53S+4atSUdskDkAFW0R5WlFypqW68eJmJWOSSRtJgDJU6wX7kACP+YQuVOwGSUm45LAaeUuQeTYcmj7y8UvY4EzverEnjKM8MFmUs24FpDFno88P8Jsjx5WW4xRzOBkbtIYlxA==
+ bh=X/z5tc2V39dPCkLdQS/dPXCXDwjZbVrqtdIe2B6COuk=;
+ b=CZwJHDnmb8f2Qc17i8bQ7PduUPuYYIZ0cRYWHTUIq0i0zmtjS+E4Fn82J0y5wAyc2dUIH59HUS6mp5+1s9sOq83GlC7MR3qzjwie3uKDRbIDJVE7YhpcUaTsIZPhT7KgI/QftKlssDs0kChQ5V/QXZ2vdpcmRtHKrl2+q85rOx2hvqZIfq3NWYXUpYOFSrC5IuHfExnKS0+QH+qSKCWVcROB8URInLcwO7KsMoLiodwbc6VIrUOYd/Be+Ny5Ax6pEuTK9GN2oDAkOW/M8EYjJt0EjzlUpylcYZJIZ4luSkTVxB5ufSur/P/fk13Jgo8eA58CgYXFEoNO4DyQ9HOsQw==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
  216.228.117.161) smtp.rcpttodomain=garyguo.net smtp.mailfrom=nvidia.com;
  dmarc=pass (p=reject sp=reject pct=100) action=none header.from=nvidia.com;
@@ -63,18 +63,18 @@ ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=Nvidia.com;
  s=selector2;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=QVoXg2/ZavM81yf0V0bSoV+t63hyCcSWXkY8GTKzVEA=;
- b=QilvktSXLjkls4gjJRIHjhe4YZM55uZKlxXz0cO5qYRTTergUuGRluqkfnFNYo7nKAt+m5J0sTbKwwBoNFku7kyIkHbIBkZKQwyie6IL3Ke6vOJw7bV3Ba4f7Dj9baQc+MVfdwER0zugJcYTMrvGWXBHSwhdlBGI1NXBJhdFcMZmpVzzvHrR6ZZQHc91f79JPhrDPT6JESfBzEK6nw5Nov22jTxNjFiqKEAP7AlV7K9PKTN5trQeQaYIJPC4bVSrSSU9uL9ZEYN0+ikv0z8U7UlWhYH/Dhf/ZM3AefyqTTvTOTgZBXARVbXiuXYG388D+C6i4W5iEvx6ujUxirU8rg==
-Received: from CH3P221CA0004.NAMP221.PROD.OUTLOOK.COM (2603:10b6:610:1e7::35)
- by SJ1PR12MB6121.namprd12.prod.outlook.com (2603:10b6:a03:45c::6) with
+ bh=X/z5tc2V39dPCkLdQS/dPXCXDwjZbVrqtdIe2B6COuk=;
+ b=SuxoKAQVIm70jFcihJwcSOGqD2CLQVIxblRw6VkD7PLK1CI5WbKbenHHJzr8ud68zoJ+d4mfuL/7ml8TBB9mhCiUMf3ekZ3XX29ZTdL74umxCmVLz54PmywkE6UeHLhVNSOUjGlTTygJD6NXxWBhgsFbopcV1LT74ACckfuiJkzSwV3Q8ilTP18ncR1B6roSj+TgZXWEUMR7X2j14FX6ChRqYL3CmNaEcrvX0eDqnoh1Gyfl2cnbpbxHmjVgO3IdLfUpjHn0JZawF0Lpkra+npusoErzI++FBw6F3bqaRcXeklNgnLPHLNyJaBDIWkC9E/ChsUAgZMh05s0L/K2yeQ==
+Received: from CH3P221CA0021.NAMP221.PROD.OUTLOOK.COM (2603:10b6:610:1e7::10)
+ by CH3PR12MB8934.namprd12.prod.outlook.com (2603:10b6:610:17a::10) with
  Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9434.6; Thu, 18 Dec
- 2025 01:39:38 +0000
+ 2025 01:39:40 +0000
 Received: from CH2PEPF00000143.namprd02.prod.outlook.com
- (2603:10b6:610:1e7:cafe::b0) by CH3P221CA0004.outlook.office365.com
- (2603:10b6:610:1e7::35) with Microsoft SMTP Server (version=TLS1_3,
+ (2603:10b6:610:1e7:cafe::c9) by CH3P221CA0021.outlook.office365.com
+ (2603:10b6:610:1e7::10) with Microsoft SMTP Server (version=TLS1_3,
  cipher=TLS_AES_256_GCM_SHA384) id 15.20.9434.7 via Frontend Transport; Thu,
- 18 Dec 2025 01:39:37 +0000
+ 18 Dec 2025 01:39:41 +0000
 X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 216.228.117.161)
  smtp.mailfrom=nvidia.com; dkim=none (message not signed)
  header.d=none;dmarc=pass action=none header.from=nvidia.com;
@@ -84,11 +84,11 @@ Received-SPF: Pass (protection.outlook.com: domain of nvidia.com designates
 Received: from mail.nvidia.com (216.228.117.161) by
  CH2PEPF00000143.mail.protection.outlook.com (10.167.244.100) with Microsoft
  SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.20.9434.6 via Frontend Transport; Thu, 18 Dec 2025 01:39:37 +0000
+ 15.20.9434.6 via Frontend Transport; Thu, 18 Dec 2025 01:39:40 +0000
 Received: from rnnvmail201.nvidia.com (10.129.68.8) by mail.nvidia.com
  (10.129.200.67) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.20; Wed, 17 Dec
- 2025 17:39:20 -0800
+ 2025 17:39:22 -0800
 Received: from ttabi.nvidia.com (10.126.231.35) by rnnvmail201.nvidia.com
  (10.129.68.8) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.20; Wed, 17 Dec
@@ -98,9 +98,10 @@ To: Gary Guo <gary@garyguo.net>, Danilo Krummrich <dakr@kernel.org>,
 	<rust-for-linux@vger.kernel.org>, John Hubbard <jhubbard@nvidia.com>, "Joel
  Fernandes" <joelagnelf@nvidia.com>, Alexandre Courbot <acourbot@nvidia.com>,
 	Lyude Paul <lyude@redhat.com>, <nouveau@lists.freedesktop.org>
-Subject: [PATCH v3 2/9] rust: debugfs: add lookup contructor
-Date: Wed, 17 Dec 2025 19:39:03 -0600
-Message-ID: <20251218013910.459045-3-ttabi@nvidia.com>
+Subject: [PATCH v3 3/9] rust: debugfs: add Dir::empty() for no-op directory
+ handle
+Date: Wed, 17 Dec 2025 19:39:04 -0600
+Message-ID: <20251218013910.459045-4-ttabi@nvidia.com>
 X-Mailer: git-send-email 2.52.0
 In-Reply-To: <20251218013910.459045-1-ttabi@nvidia.com>
 References: <20251218013910.459045-1-ttabi@nvidia.com>
@@ -113,47 +114,47 @@ X-ClientProxiedBy: rnnvmail202.nvidia.com (10.129.68.7) To
  rnnvmail201.nvidia.com (10.129.68.8)
 X-EOPAttributedMessage: 0
 X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: CH2PEPF00000143:EE_|SJ1PR12MB6121:EE_
-X-MS-Office365-Filtering-Correlation-Id: a52c8c61-dabc-4b27-ff0e-08de3dd64e52
+X-MS-TrafficTypeDiagnostic: CH2PEPF00000143:EE_|CH3PR12MB8934:EE_
+X-MS-Office365-Filtering-Correlation-Id: 5ea2a0f1-c0a1-444f-b455-08de3dd64fd9
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
 X-Microsoft-Antispam: 
-	BCL:0;ARA:13230040|36860700013|376014|82310400026|1800799024;
+	BCL:0;ARA:13230040|1800799024|36860700013|82310400026|376014;
 X-Microsoft-Antispam-Message-Info: 
-	=?us-ascii?Q?WTV2SvMudeRi5EH0jjrIzsKmOda7AON2XJSK9NhbFx0xXiR4JKmwXyPaz18s?=
- =?us-ascii?Q?fh4MRUH+7ly66OddUL62ACwHZb4MBBf9OoCUvkXUcpSPzP3GNu/3qlaJKIhL?=
- =?us-ascii?Q?4onuEJkEJfTQL28Lle7isPWwljjXdS7r4bS1+Ihu8fzMT7ygF+a4Xetc+QE2?=
- =?us-ascii?Q?TOtgPgb4O8n/WRYduIuY4VSF2pIbJHbrR/UzooMMEAvv9YFwHUPkYLlA24jI?=
- =?us-ascii?Q?87Wx9+xrUei2OEoAh0ffzCwGB72eLfysOcQJhiBfiroX6fidr83dE/WgrZCf?=
- =?us-ascii?Q?98yA6e1/eaifLRupDMnhM/DIjfRk7HEmj/Te+qs/plmSrjpSukmkZ0ZTO5DE?=
- =?us-ascii?Q?D1YVDENo4DsTc4FPzyQLyCZfreIiWUowD08Mc8pRUGplbiEsaqc5cHAgUHBi?=
- =?us-ascii?Q?Re7/kDYhJ2jJF7ce/ugGleHBIB2fMrMsqxKVsQN2CM42Lhap5ThHFbYkaceO?=
- =?us-ascii?Q?6ptPyfbRIlUslGnad7mavBOmiScUaNYcbS+IFO8O6cMUHW9QYAw90LD1i6ej?=
- =?us-ascii?Q?LYmUKjzG2Ei9xw6UpdpU4VB6QscVGY3QCuCbrefumoE00aUjoa+moVlXGwM6?=
- =?us-ascii?Q?qO/S+GnsRevV7CFbquwXfsd8K8gEHBEQEPhvAmKbzP2uxiCeE7pPUPtxmWX/?=
- =?us-ascii?Q?coe/4dR+Un8B3EQWovxonHx4E3LevLRMlZE4Btr1N+tJt4BXVUr6OxQ05JoN?=
- =?us-ascii?Q?9ML262CBk6Af/G0yBSSOP1GhU1OS6ZA5GugbBx7zFjZq4TaMutL/bGtcMXhn?=
- =?us-ascii?Q?lGv6jM9dnh0CXDP3y5n/XL6xPmTuCkD2ZkdQG5dmK1dMz3Ik7zMIWCCWdoBg?=
- =?us-ascii?Q?6wmAOS7p4Aerwl/C3reklurUkAzoqUjjKpZs4pXGHFEQFaZpVolj0YqsbEMC?=
- =?us-ascii?Q?qI7rH34U4xSybzNJvuMz5zUeJIz930MImtw0F4zFGXkWnRPK8kiOHCNu9hjH?=
- =?us-ascii?Q?1C8N2BHmMlZWoYxi42+9XorKs+B7vZW/tKM87MUXLI8R0jRyvyIVndGPzvdx?=
- =?us-ascii?Q?S17YGp8fYXAYN5uc0hCnbgfDjJj7ehn6mLgdb5ASy/dU8U6NYJZ4lPzCtR9c?=
- =?us-ascii?Q?Ef2LQPWO2JNUJ8Nw6/Mcl7vxLsupHJK4+aqTrOruUx6jys4zkBH0KZQh/Kcr?=
- =?us-ascii?Q?TfBYqqC+hdGxraIAQBrd/CZvix/3uraBOuskF24JJBvKgHinM4BdqYrklqy7?=
- =?us-ascii?Q?gWAJRzGfQNT8ax9dHo/mMde+obtA2+ZK/tsJaeCm8rLBSNFGmgUdQcboYEa6?=
- =?us-ascii?Q?mam73vkvseaYvTrNVxOb9GOUUBnjzpHZa55evYxVjHKvxRdLp7V43sVcfify?=
- =?us-ascii?Q?FPg4nmdhac3kTZiUqbD52I0nsvCJFqgnj48rhc2z7jZSK077ohBUKTYCktbn?=
- =?us-ascii?Q?aM1OpnX9fxNm5ijAkd2uTSJ3pyg43OeT4Eqg3qSy/lgSaDXJy1RXnSnw+XTE?=
- =?us-ascii?Q?lDrmW38pvubIqEP6gpWC0/ESbGrGXHLrB81hFEIWhS8iP76eZ3Br2PMbumTk?=
- =?us-ascii?Q?BZ/a8YuO9ge5jyt/J/F50VBWb4jbBm+cMC90yi4H6LCawp5oL5mD0jPJNhwF?=
- =?us-ascii?Q?JslmeiViOt8O0eCcvQE=3D?=
+	=?us-ascii?Q?ANGJSkQsRxkCixF3VZw4ZgOpwKX+hM2WmaQzccMOnDgba1qpz8KGRRa74LNR?=
+ =?us-ascii?Q?jImalL8A33McP9ZPy7S2fahXS5TGYacaoKbEz+suVmwZ8JDvGdQqs9I6qWHt?=
+ =?us-ascii?Q?/qnJwcAtoGxzox67oqZK3Co6emPITH9enMtyh7zXaZfJO5+65+CgUBGk2jGO?=
+ =?us-ascii?Q?Lrj2pFCHz83Y1ixomfjBnTYUMtY1BSOpRqq1ykpg3ZJhE7aPmuTYPp7v3ojf?=
+ =?us-ascii?Q?Q2Ly8AUy5l2bJcYBfNqoHxASD4gOsDCqcjVkx+7/9Xh0fhJ2IKRl4hcSoo+4?=
+ =?us-ascii?Q?xznLObSuAECwNm2mDQPa1thRGSp9QHo1yM1ROT0vuslclN2n/bjcr4UIXVEU?=
+ =?us-ascii?Q?xx3/BZtX1Ab4yhehWMN/UCdTlPKrHJTY1UKqUIilduW7NzccCDFR3CdURCKP?=
+ =?us-ascii?Q?7kMEWweyFZk0SWky5VSDoKGseDJjlBlSuIlzNtMWApyiuhzGETWUB31JzH1r?=
+ =?us-ascii?Q?kUGW56xgLBQh3Dsajgq0MfgGiHM3lR9Zy0EMB7m0pz22V/MIxGGIGYghMbWh?=
+ =?us-ascii?Q?/XByXDDVDBFasRRSxQOZBRo2Y5kk47spvL0ZCl8IhpvzCSUvIsmeizGdCpTc?=
+ =?us-ascii?Q?yL/zuOvdFPElN21QOP2BafieTWpP079BApMTGtMT+sYdnIzE+uvMi/YtZz4b?=
+ =?us-ascii?Q?7MJRfoChzsEYLNVffRKPrk404AISNiJQbGtdnEAQdL6h3yyEYDTz5/E6f0ts?=
+ =?us-ascii?Q?RRN9iqM6F8JOLCkMbZJllCnR7xamGcAVIRv/a6dySPJIg5iT2MIyxPSjQxIi?=
+ =?us-ascii?Q?Fkhea6vU/eD3CI7ZpyL9IUbBG82UpDP4On3L9AcGt8W56XbwnPFcaBpmmQVB?=
+ =?us-ascii?Q?UjFYpdNhT7nmzZqxhlCYjDHWiQ28ZTwXkJnN7l34vdnT4qcd0sPXSHliEsS6?=
+ =?us-ascii?Q?y3nbfbSM5JyydC7u+FzTksFadr61q054bGnfb7fzR7qbUex5cKTkWUE4sA9F?=
+ =?us-ascii?Q?eBh6AN3BEjZkcnrKBNrtSDntFM7Am9++vSzeJcieG17ksf9L7EyoZ0IDzway?=
+ =?us-ascii?Q?G6COzxrywO3aP9bZLqq/gTZfeJf9KgEGgu1w0TiY3UBpW8PFJUDtV5yTzAnj?=
+ =?us-ascii?Q?0poeQLSnp/PM2as8XBdjG8cQMroWAT4YAlgwc2C3W2hD1XBSxNvGNPu5SxMI?=
+ =?us-ascii?Q?VQVdqoVe/k3YnMHd6Cw+T1AlI5P4x3w6dy/Wyh8wL8sSAwRE25FHDklXL8m0?=
+ =?us-ascii?Q?ob50zjWjBT3AzsDzpzjfjK691zniMvhgNKi/Gj9lfAmAibA+0Lg91QPkqaiM?=
+ =?us-ascii?Q?WDO92NAn6YWKSBIQmbtx4koc0JblQNFHyk1nXpyrHfejaZsFtLBgFVxeUfVM?=
+ =?us-ascii?Q?k8D2fi9tGdhQtJEuagpTwresXmXRwF4LQgT6k3AvUNoNnPkhJdrAbRwAQY8F?=
+ =?us-ascii?Q?W+sqR69tfC77tR9wtDCuKyeUWxMd9g6KcsTBoDSdsrzap8L8bDkCIWcBc5Jb?=
+ =?us-ascii?Q?B/E62B0AVWl4Bfyyc+OOXzv5Zb677BDTRowfdegXe72cGLIBb6C3DWMfZYKo?=
+ =?us-ascii?Q?SNF5YLIS9StGmvm0kEaUnF1IxqkNBzyFa8g9HYc8vpqvTKSTBPiCw6L+kSrJ?=
+ =?us-ascii?Q?ux+bZRlmqK1rzXGlqWg=3D?=
 X-Forefront-Antispam-Report: 
-	CIP:216.228.117.161;CTRY:US;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:mail.nvidia.com;PTR:dc6edge2.nvidia.com;CAT:NONE;SFS:(13230040)(36860700013)(376014)(82310400026)(1800799024);DIR:OUT;SFP:1101;
+	CIP:216.228.117.161;CTRY:US;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:mail.nvidia.com;PTR:dc6edge2.nvidia.com;CAT:NONE;SFS:(13230040)(1800799024)(36860700013)(82310400026)(376014);DIR:OUT;SFP:1101;
 X-OriginatorOrg: Nvidia.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 18 Dec 2025 01:39:37.8019
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 18 Dec 2025 01:39:40.3568
  (UTC)
 X-MS-Exchange-CrossTenant-Network-Message-Id: 
- a52c8c61-dabc-4b27-ff0e-08de3dd64e52
+ 5ea2a0f1-c0a1-444f-b455-08de3dd64fd9
 X-MS-Exchange-CrossTenant-Id: 43083d15-7273-40c1-b7db-39efd9ccc17a
 X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: 
  TenantId=43083d15-7273-40c1-b7db-39efd9ccc17a;Ip=[216.228.117.161];Helo=[mail.nvidia.com]
@@ -161,23 +162,23 @@ X-MS-Exchange-CrossTenant-AuthSource:
 	CH2PEPF00000143.namprd02.prod.outlook.com
 X-MS-Exchange-CrossTenant-AuthAs: Anonymous
 X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: SJ1PR12MB6121
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: CH3PR12MB8934
 X-MailFrom: ttabi@nvidia.com
 X-Mailman-Rule-Hits: implicit-dest
 X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency;
  loop; banned-address; member-moderation; nonmember-moderation; administrivia;
  max-recipients; max-size; news-moderation; no-subject; digests;
  suspicious-header
-Message-ID-Hash: ZKGFBNQLMWZK72ASAA57AFMVNG2CMX5Q
-X-Message-ID-Hash: ZKGFBNQLMWZK72ASAA57AFMVNG2CMX5Q
+Message-ID-Hash: XTBDX7NK4ZHOSPOHY2RW67V4KJ5Q6XNR
+X-Message-ID-Hash: XTBDX7NK4ZHOSPOHY2RW67V4KJ5Q6XNR
 X-Mailman-Approved-At: Thu, 18 Dec 2025 14:46:30 +0000
 X-Mailman-Version: 3.3.8
 Precedence: list
 List-Id: Nouveau development list <nouveau.lists.freedesktop.org>
 Archived-At: 
- <https://lists.freedesktop.org/hyperkitty/list/nouveau@lists.freedesktop.org/message/ZKGFBNQLMWZK72ASAA57AFMVNG2CMX5Q/>
+ <https://lists.freedesktop.org/hyperkitty/list/nouveau@lists.freedesktop.org/message/XTBDX7NK4ZHOSPOHY2RW67V4KJ5Q6XNR/>
 Archived-At: 
- <https://lore.freedesktop.org/20251218013910.459045-3-ttabi@nvidia.com/>
+ <https://lore.freedesktop.org/20251218013910.459045-4-ttabi@nvidia.com/>
 List-Archive: 
  <https://lists.freedesktop.org/hyperkitty/list/nouveau@lists.freedesktop.org/>
 List-Archive: <https://lore.freedesktop.org/nouveau>
@@ -187,182 +188,59 @@ List-Post: <mailto:nouveau@lists.freedesktop.org>
 List-Subscribe: <mailto:nouveau-join@lists.freedesktop.org>
 List-Unsubscribe: <mailto:nouveau-leave@lists.freedesktop.org>
 
-Add a new constructor for Dir that uses the debugfs_lookup() API to
-obtain a reference to an existing debugfs directory entry.
+Add a Dir::empty() constructor that returns a Dir representing no
+directory. Operations on this directory (creating files, subdirectories)
+become no-ops, but the data is still stored.
 
-The key difference from Dir::new() and Dir::subdir() is the cleanup
-semantics: when a Dir obtained via lookup() is dropped, it calls
-dput() to release the reference rather than debugfs_remove() which
-would delete the directory.
+This is useful as a fallback when a directory lookup fails but you still
+need a Dir value to pass to APIs like Dir::scope(). For example:
 
-To implement this cleanup distinction, the Entry class now includes
-an is_lookup boolean that specifies how the entry was created and
-therefore how it should be dropped.
+    let dir = Dir::lookup(c_str!("parent"), None)
+        .unwrap_or_else(Dir::empty);
+
+When CONFIG_DEBUG_FS is enabled, returns Dir(None). When disabled,
+returns the empty tuple struct Dir().
 
 Signed-off-by: Timur Tabi <ttabi@nvidia.com>
 ---
- rust/kernel/debugfs.rs       | 43 +++++++++++++++++++++++++++++++
- rust/kernel/debugfs/entry.rs | 49 +++++++++++++++++++++++++++++++++---
- 2 files changed, 89 insertions(+), 3 deletions(-)
+ rust/kernel/debugfs.rs | 24 ++++++++++++++++++++++++
+ 1 file changed, 24 insertions(+)
 
 diff --git a/rust/kernel/debugfs.rs b/rust/kernel/debugfs.rs
-index facad81e8290..eee799f64f79 100644
+index eee799f64f79..b0cfe22982d6 100644
 --- a/rust/kernel/debugfs.rs
 +++ b/rust/kernel/debugfs.rs
-@@ -110,6 +110,49 @@ pub fn new(name: &CStr) -> Self {
+@@ -110,6 +110,30 @@ pub fn new(name: &CStr) -> Self {
          Dir::create(name, None)
      }
  
-+    /// Looks up an existing directory in DebugFS.
++    /// Creates an empty [`Dir`] that represents no directory.
 +    ///
-+    /// If `parent` is [`None`], the lookup is performed from the root of the debugfs filesystem.
-+    ///
-+    /// Returns [`Some(Dir)`] representing the looked-up directory if found, or [`None`] if the
-+    /// directory does not exist or if debugfs is not enabled. When dropped, the [`Dir`] will
-+    /// release its reference to the dentry without removing the directory from the filesystem.
++    /// Operations on this directory (such as creating files or subdirectories) will be no-ops.
++    /// This is useful as a fallback when a directory lookup fails but you still need a [`Dir`]
++    /// value.
 +    ///
 +    /// # Examples
 +    ///
 +    /// ```
 +    /// # use kernel::c_str;
 +    /// # use kernel::debugfs::Dir;
-+    /// // Look up a top-level directory
-+    /// let nova_core = Dir::lookup(c_str!("nova_core"), None);
-+    ///
-+    /// // Look up a subdirectory within a parent
-+    /// let parent = Dir::new(c_str!("parent"));
-+    /// let child = parent.subdir(c_str!("child"));
-+    /// let looked_up = Dir::lookup(c_str!("child"), Some(&parent));
-+    /// // `looked_up` now refers to the same directory as `child`.
-+    /// // Dropping `looked_up` will not remove the directory.
++    /// let dir = Dir::lookup(c_str!("maybe_exists"), None)
++    ///     .unwrap_or_else(Dir::empty);
++    /// // If lookup failed, file creation becomes a no-op
 +    /// ```
-+    pub fn lookup(name: &CStr, parent: Option<&Dir>) -> Option<Self> {
++    pub fn empty() -> Self {
 +        #[cfg(CONFIG_DEBUG_FS)]
 +        {
-+            let parent_entry = match parent {
-+                // If the parent couldn't be allocated, just early-return
-+                Some(Dir(None)) => return None,
-+                Some(Dir(Some(entry))) => Some(entry.clone()),
-+                None => None,
-+            };
-+            let entry = Entry::lookup(name, parent_entry)?;
-+            Some(Self(
-+                // If Arc creation fails, the `Entry` will be dropped, so the reference will be
-+                // released.
-+                Arc::new(entry, GFP_KERNEL).ok(),
-+            ))
++            Self(None)
 +        }
 +        #[cfg(not(CONFIG_DEBUG_FS))]
-+        None
++        Self()
 +    }
 +
-     /// Creates a subdirectory within this directory.
+     /// Looks up an existing directory in DebugFS.
      ///
-     /// # Examples
-diff --git a/rust/kernel/debugfs/entry.rs b/rust/kernel/debugfs/entry.rs
-index 706cb7f73d6c..455d7bbb8036 100644
---- a/rust/kernel/debugfs/entry.rs
-+++ b/rust/kernel/debugfs/entry.rs
-@@ -18,6 +18,9 @@ pub(crate) struct Entry<'a> {
-     _parent: Option<Arc<Entry<'static>>>,
-     // If we were created with a non-owning parent, this prevents us from outliving it
-     _phantom: PhantomData<&'a ()>,
-+    // If true, this entry was obtained via debugfs_lookup and should be released
-+    // with dput() instead of debugfs_remove().
-+    is_lookup: bool,
- }
- 
- // SAFETY: [`Entry`] is just a `dentry` under the hood, which the API promises can be transferred
-@@ -43,9 +46,38 @@ pub(crate) fn dynamic_dir(name: &CStr, parent: Option<Arc<Self>>) -> Self {
-             entry,
-             _parent: parent,
-             _phantom: PhantomData,
-+            is_lookup: false,
-         }
-     }
- 
-+    /// Looks up an existing entry in debugfs.
-+    ///
-+    /// Returns [`Some(Entry)`] representing the looked-up dentry if the entry exists, or [`None`]
-+    /// if the entry was not found. When dropped, the entry will release its reference via `dput()`
-+    /// instead of removing the directory.
-+    pub(crate) fn lookup(name: &CStr, parent: Option<Arc<Self>>) -> Option<Self> {
-+        let parent_ptr = match &parent {
-+            Some(entry) => entry.as_ptr(),
-+            None => core::ptr::null_mut(),
-+        };
-+        // SAFETY: The invariants of this function's arguments ensure the safety of this call.
-+        // * `name` is a valid C string by the invariants of `&CStr`.
-+        // * `parent_ptr` is either `NULL` (if `parent` is `None`), or a pointer to a valid
-+        //   `dentry` by our invariant. `debugfs_lookup` handles `NULL` pointers correctly.
-+        let entry = unsafe { bindings::debugfs_lookup(name.as_char_ptr(), parent_ptr) };
-+
-+        if entry.is_null() {
-+            return None;
-+        }
-+
-+        Some(Entry {
-+            entry,
-+            _parent: parent,
-+            _phantom: PhantomData,
-+            is_lookup: true,
-+        })
-+    }
-+
-     /// # Safety
-     ///
-     /// * `data` must outlive the returned `Entry`.
-@@ -76,6 +108,7 @@ pub(crate) unsafe fn dynamic_file<T>(
-             entry,
-             _parent: Some(parent),
-             _phantom: PhantomData,
-+            is_lookup: false,
-         }
-     }
- }
-@@ -97,6 +130,7 @@ pub(crate) fn dir(name: &CStr, parent: Option<&'a Entry<'_>>) -> Self {
-             entry,
-             _parent: None,
-             _phantom: PhantomData,
-+            is_lookup: false,
-         }
-     }
- 
-@@ -129,6 +163,7 @@ pub(crate) fn file<T>(
-             entry,
-             _parent: None,
-             _phantom: PhantomData,
-+            is_lookup: false,
-         }
-     }
- }
-@@ -140,6 +175,7 @@ pub(crate) fn empty() -> Self {
-             entry: core::ptr::null_mut(),
-             _parent: None,
-             _phantom: PhantomData,
-+            is_lookup: false,
-         }
-     }
- 
-@@ -157,8 +193,15 @@ pub(crate) fn as_ptr(&self) -> *mut bindings::dentry {
- 
- impl Drop for Entry<'_> {
-     fn drop(&mut self) {
--        // SAFETY: `debugfs_remove` can take `NULL`, error values, and legal DebugFS dentries.
--        // `as_ptr` guarantees that the pointer is of this form.
--        unsafe { bindings::debugfs_remove(self.as_ptr()) }
-+        if self.is_lookup {
-+            // SAFETY: `dput` can take `NULL` and legal dentries.
-+            // `as_ptr` guarantees that the pointer is of this form.
-+            // This entry was obtained via `debugfs_lookup`, so we release the reference.
-+            unsafe { bindings::dput(self.as_ptr()) }
-+        } else {
-+            // SAFETY: `debugfs_remove` can take `NULL`, error values, and legal DebugFS dentries.
-+            // `as_ptr` guarantees that the pointer is of this form.
-+            unsafe { bindings::debugfs_remove(self.as_ptr()) }
-+        }
-     }
- }
+     /// If `parent` is [`None`], the lookup is performed from the root of the debugfs filesystem.
 -- 
 2.52.0
 
