@@ -2,149 +2,207 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id F1754CCD115
-	for <lists+nouveau@lfdr.de>; Thu, 18 Dec 2025 19:00:23 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 9102BCCD954
+	for <lists+nouveau@lfdr.de>; Thu, 18 Dec 2025 21:53:09 +0100 (CET)
 Received: from kara.freedesktop.org (unknown [131.252.210.166])
-	by gabe.freedesktop.org (Postfix) with ESMTPS id C722310EA66;
-	Thu, 18 Dec 2025 18:00:22 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTPS id 6DE2710EB7F;
+	Thu, 18 Dec 2025 20:53:08 +0000 (UTC)
 Authentication-Results: gabe.freedesktop.org;
-	dkim=fail reason="signature verification failed" (2048-bit key; unprotected) header.d=google.com header.i=@google.com header.b="B/QTYXIY";
+	dkim=pass (2048-bit key; unprotected) header.d=Nvidia.com header.i=@Nvidia.com header.b="Gq7AwIS1";
 	dkim-atps=neutral
 Received: from kara.freedesktop.org (localhost [127.0.0.1])
-	by kara.freedesktop.org (Postfix) with ESMTP id 76B6844B96;
-	Thu, 18 Dec 2025 17:52:51 +0000 (UTC)
+	by kara.freedesktop.org (Postfix) with ESMTP id DAF0044B9C;
+	Thu, 18 Dec 2025 20:45:36 +0000 (UTC)
 ARC-Seal: i=2; cv=pass; a=rsa-sha256; d=lists.freedesktop.org;
- s=20240201; t=1766080371;
- b=q3wBFBcKHlKmeqmVBNlu1MsqrYKBbrY9GfgG7vZknnNhXhmlwdL5Svtat5hVygmAgfqC9
- 7YNGEyQCMeTgrNXwPW1X5cE9ClLHhvNLoQ2qKEdcY1/R/+CXQcRY8K9mjXmBbyeNQN9iCGj
- n77qUYiJJeWU9C0CNmi9fnL4CR/kMCq4z5QolkeUK6/Bs9VZjVjXirm/l9iBWWXyATpQg0T
- U846TE6w7gqGMQO8SNRXXwd8jtZLOzwNXXNO15d68pCqDNEMTC4oSPpYWijO368UAigbSHZ
- 97pf0AggSznadzxLafUWyODiBg1nwKzXCbhRESWjfJKbIheU+X5C6lqu2OKw==
+ s=20240201; t=1766090736;
+ b=n5MaPGFLj87COk8kPL2HbU7ab5K0sEGCxcs0zNu3MlFq6XFa+XVOZs3Duc3DUPz1tmX2r
+ IhTMktd+lO44xxCdQYWcXcf3NiDxUpxsUnKNMD8V0l5bNyHgJPGItG1IAZ6Ejn7NjAA00hX
+ 48TqUp0c71Sh0S6qwjcj3oAhI0nrdEQOo+JUV0sw3DodXv4hHDqg8Ju9agoFAoMmHc7F56V
+ EjJFIBZcvuur/Rp5cJZZdQW9SUX3n1g2fjAnbYfv9l3EgIq5zBHkI49bgcih5TT8OT6ACHv
+ fFL+DLgrlEOfwtAJ13EWGUXvGz5u+MrU7DWf+wuHNbcfwDZOYCsemFxQjs+g==
 ARC-Message-Signature: i=2; a=rsa-sha256; c=relaxed/relaxed;
- d=lists.freedesktop.org; s=20240201; t=1766080371; h=from : sender :
+ d=lists.freedesktop.org; s=20240201; t=1766090736; h=from : sender :
  reply-to : subject : date : message-id : to : cc : mime-version :
  content-type : content-transfer-encoding : content-id :
  content-description : resent-date : resent-from : resent-sender :
  resent-to : resent-cc : resent-message-id : in-reply-to : references :
  list-id : list-help : list-unsubscribe : list-subscribe : list-post :
  list-owner : list-archive;
- bh=RkOFOrNDQ6sl7Mqdc1VhggmfNaVju147chi0D9kqqyk=;
- b=Z93Wa/LFCFMHV6/wz7gKu2SXX8ZtgQYaszosnuhdt+ECsu6wCPN7r6/cBBT/xR0IRDvHB
- CiApvUhed9ouzQPNrEBPc5I7ZPpwGhirNFAgfhs4X/YZlOQVf+tUsCRZVFgAOgtNf0aaV7D
- RyDd6Ttvnrez6iLg66fCHLYfhdW45YVb7OFxLE+rKEPlS09xU53SDrIQZ+gpgnSbGMOeYcT
- 7ozcz5GjgE2XgLJ+zIUhbliQ2Cw0FyiveMOXx6YwNcbk6FAfMJGmf1TnTSIfNVfpSRJcet4
- nYqWfYbYdtf5hlOig+K3MG1+8RO/ARym6ih09WTx5F9lvIBEMe8EgYTRMZ8A==
+ bh=t8msRAfbeSwbeG8wMD41E5TnAsqCK3eJAiCVeTCXhlw=;
+ b=IvYjLXkclAPTHC09bvtPgTPR1Cgd/bDyzzXlSaZAbk3su5aIojV0KQYIyylwQ2RNZIJ6e
+ KNt9AyRqPa9oKf55GQAY5lhzQ3/TuIfZJMezMiCgPDkP85Xals/hQ5bFx+qA51KHXA7GFWl
+ CBIfOblEQ7O0B/IlI/W1GJmFQdOKuzCc/abZfdsZae6XLA51N2fWcplvkQr8WohI59DF9no
+ DXgYaRB41CNSMSf+CWjHLDK6Q1pp/Ej8qidLrQvgBwLMUpYojofHSRA5ULQdMa1dwqlDRQ2
+ V0agY7gdfCK8ER4hOgb3OHnKsFT9zf1DysuRazolcCyzHtJ34r0FRZpxgvIw==
 ARC-Authentication-Results: i=2; mail.freedesktop.org;
- dkim=pass header.d=google.com;
+ dkim=pass header.d=Nvidia.com;
   arc=pass;
-  dmarc=pass (Used From Domain Record) header.from=google.com
+  dmarc=pass (Used From Domain Record) header.from=nvidia.com
  policy.dmarc=reject
-Authentication-Results: mail.freedesktop.org; dkim=pass header.d=google.com;
+Authentication-Results: mail.freedesktop.org; dkim=pass header.d=Nvidia.com;
  arc=pass;
- dmarc=pass (Used From Domain Record) header.from=google.com policy.dmarc=reject
+ dmarc=pass (Used From Domain Record) header.from=nvidia.com policy.dmarc=reject
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by kara.freedesktop.org (Postfix) with ESMTPS id 471CE44B91
-	for <nouveau@lists.freedesktop.org>; Thu, 18 Dec 2025 17:52:49 +0000 (UTC)
-Received: from mail-ed1-f51.google.com (mail-ed1-f51.google.com
- [209.85.208.51])
-	by gabe.freedesktop.org (Postfix) with ESMTPS id 4BFB510EA52
-	for <nouveau@lists.freedesktop.org>; Thu, 18 Dec 2025 18:00:20 +0000 (UTC)
-Received: by mail-ed1-f51.google.com with SMTP id
- 4fb4d7f45d1cf-64b66d427e9so328a12.1
-        for <nouveau@lists.freedesktop.org>;
- Thu, 18 Dec 2025 10:00:20 -0800 (PST)
-ARC-Seal: i=1; a=rsa-sha256; t=1766080819; cv=none;
-        d=google.com; s=arc-20240605;
-        b=kGU2YQGQN3KoKhAd4M8ltPTZg/mKT7KnK+oAWG9p2Cg7JgdjVI4LYNaEcusii8UvGH
-         szdFzwomldXnBf6JgABJMiCAxfLK5rpjhahsUay4wV2sYG4LWjY94sqyWffbr02vlnmh
-         2LA6VzHJ7zDT24YWfmZU7q5vfPfnu2u5ghlLZeZORYNp4/98PlZUf6UsRe0tK68jxpTa
-         rIVZ19MMp25X9RiF7uWxQA2KW98TeUfSHepC7CDpUCXb9QoX13Au1O14R91Gfh01/h2P
-         rIAkXurNpYJYf3gyxgu9F8VHm4dCeuc20z3PmzHMEOySqKaLevGZDQVrtobll4WK38B6
-         VkZg==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
- s=arc-20240605;
-        h=content-transfer-encoding:cc:to:subject:message-id:date:from
-         :in-reply-to:references:mime-version:dkim-signature;
-        bh=RkOFOrNDQ6sl7Mqdc1VhggmfNaVju147chi0D9kqqyk=;
-        fh=z6E4OLfh5kjkYFiXmrsTwZUJdtDSkbGfJmdfFMAFUNY=;
-        b=PxbBn7nlo5Ej+Zlk8eIxDqs+zzLkRb1AVNTBk9QLJTbvLC7FsQj30DIzqAs3MiZ5iA
-         bgZqdW8st8ihtSe6cic4TiBDc6r9wVuh3vpGXMiiYrbiotQADCCqNKtE+vuzHyTp2ybY
-         +ktz6S3nd7O/ab7kniQZqO2nPO4wMAbyI7d/PWmpKGyQEtPTlcwfs0C/IoHLQgqL7J2l
-         NdMEfuKOdRKvfKKHPyG9r+D9is6IlXsk1HTE7kSi3hm6ZxB41UUCHok5lDavykqQOkR1
-         QEgFaCuOUKr50lgMLNRivwGC7RpPD75/i4GJiH7tWK2niD6hiWQ9GG8r7Ty6tsceC9VX
-         YoNw==;
-        darn=lists.freedesktop.org
-ARC-Authentication-Results: i=1; mx.google.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=google.com; s=20230601; t=1766080819; x=1766685619;
- darn=lists.freedesktop.org;
-        h=content-transfer-encoding:cc:to:subject:message-id:date:from
-         :in-reply-to:references:mime-version:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=RkOFOrNDQ6sl7Mqdc1VhggmfNaVju147chi0D9kqqyk=;
-        b=B/QTYXIYOofesDCMK5Njz9pSZanSitFRuzp0TbMZ/uK3TWJCwJJsKVbjeQBb0MB6Oy
-         BRnzawO6uenjB4327duGXx2qh0B7QBwO9OcJ92hAIeoxArErNb03Z0tlQrDJrMY4Mzil
-         S2eQSTziEOmwtPpfxnaIsmj/Y8TRu2Dt+PcpQA7sYfonPq1KWGJHukw4fM9a7b9dPbMC
-         32IZhNXH9A8I+/S4EL1L9J2CsfWBHXKLteVq4acs51XvWzeRp7/4Ky1NRaf4NoWM8cmD
-         0jwLhGFuRpdJBVk4cynPrlL0+KilNW2HsZLeeiHUNfqujLPfPWPcGXu9MYhOeIN6sTfK
-         awWg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1766080819; x=1766685619;
-        h=content-transfer-encoding:cc:to:subject:message-id:date:from
-         :in-reply-to:references:mime-version:x-gm-gg:x-gm-message-state:from
-         :to:cc:subject:date:message-id:reply-to;
-        bh=RkOFOrNDQ6sl7Mqdc1VhggmfNaVju147chi0D9kqqyk=;
-        b=nacp/4+rld8Mcr/Kqzk/3SqCukhr/ci9gYydLOT5kJOoGELW42LgO9J81VmReE2tb/
-         hs/FiE+gNCS0ON6D78tkL1Shvu99iq5RLGtW5JCwkWbhWfzovlfYGJTiOKqTodqHYn+3
-         GtL3v6qFNhCTzXp6HaqPbsieYhRFbSRdou87M18tIcKN0a7WGkHQIkeVXg2DFE68D6BK
-         LHbeMyPsj8ErbQrIFNeCCictf0R6dyiaKiiwb0zRsQ+1LKmLmO4rBHKECQgXamM3/Vja
-         XHtdQ3qwzD3r0n+VwpdHA9wxa9ilnhr1ThvklzMuuhGHz+dEMYgiJKQWS3p3DFRSShas
-         di5Q==
-X-Forwarded-Encrypted: i=1;
- AJvYcCU4VmeoPFNRXgFO7m+poT5ZsFh8XAVlY96XpqNh2SuC9N9ee6GXg1j3k2AtDqGqvmgNoGY9W8az@lists.freedesktop.org
-X-Gm-Message-State: AOJu0YxFcfBZEbJKJOCqYwyGTgHlaK2UThb9ivj0k/uhREtPj1pe8tTB
-	3JbOoJVtxECCyzz/tad1uLe1FhXFUcxMyl25Uvv1/4RrO5yCggS/Crmw2UXel2XhoSpzq9/ugHw
-	q+ORkoN0Y7qfELjOWVcWI8VwWBGmIv/rp4x9PEudz
-X-Gm-Gg: AY/fxX4vB51/D7H1SfxIHrdizWAPhfarlg90Cy0q3RsMh2TvrwuhZfH1n/NQVb+XL67
-	88M5g2xla1Zbk+IesgVbqsunP6c7jjc17kJPOpHbk2lFgKaMmqNm5TgwL9HNNmg3Fk55tsV04T6
-	kVJ37jiPJkL6ThL1oGt4zm0/XX3SlAaRw8+d65o5gALS0+W0KES/MzgqrSxkLX8wZA+4SQZOrrL
-	Zq6yuQWy/joCz8/NILmFRL0mpC7k5F0/lgHRRY2iQr1YpmXBR7A1SQw3a0I25NqLCgKvlThJsAN
-	PuLCgqSph0LYBGnVvN89EuuK1g==
-X-Google-Smtp-Source: 
- AGHT+IHLrlyaCiPiXB+zoeHL1JoVQY7quXpfW6ET/ferqEfqVPExNhRL6m+Qn/OACk5JrhhmtH9Dy6ybDE2MOA7b1A8=
-X-Received: by 2002:aa7:d991:0:b0:64b:4a02:f726 with SMTP id
- 4fb4d7f45d1cf-64b6049edeemr37436a12.10.1766080818459; Thu, 18 Dec 2025
- 10:00:18 -0800 (PST)
-MIME-Version: 1.0
-References: <20251218013910.459045-1-ttabi@nvidia.com>
- <20251218013910.459045-3-ttabi@nvidia.com>
-In-Reply-To: <20251218013910.459045-3-ttabi@nvidia.com>
-From: Matthew Maurer <mmaurer@google.com>
-Date: Thu, 18 Dec 2025 10:00:06 -0800
-X-Gm-Features: AQt7F2pc-7ddV47KGcSn-HvKuZIO6w4T0qZbwJ2Xn-u1d3wDsWJuBl-RQHd8pYY
-Message-ID: 
- <CAGSQo03HVquX1Bc7tsFjWgA-=BX=1eefXt=r-Rdtxca81QPXgA@mail.gmail.com>
-Subject: Re: [PATCH v3 2/9] rust: debugfs: add lookup contructor
-To: Timur Tabi <ttabi@nvidia.com>
-Content-Type: text/plain; charset="UTF-8"
+	by kara.freedesktop.org (Postfix) with ESMTPS id 88AAC44B95
+	for <nouveau@lists.freedesktop.org>; Thu, 18 Dec 2025 20:45:33 +0000 (UTC)
+Received: from BL0PR03CU003.outbound.protection.outlook.com
+ (mail-eastusazon11012041.outbound.protection.outlook.com [52.101.53.41])
+	by gabe.freedesktop.org (Postfix) with ESMTPS id A337F10E5A8;
+	Thu, 18 Dec 2025 20:53:04 +0000 (UTC)
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=rFFeZsByLa1x1IeMRw7r9GiVQErJ5GpI5EYIc40CZXVi4yqn1Ydt8JyH+XYsSo489a5lDYkKMLXpeFSZ+adTZmK4h27EJM+49GVo1/+WR6oe4q+x8vu96ZJLAcGUb0u/+m2Uce/drzYEoixWt0onJePXHCkDvO+sfRAwNpbnEb47vkzrbR0IDIQdbWQWqyjqnkvUYcv+pTJE14vU8x55aKVMw9rFFRtO2mZANMGk25n3XkTAtMxOpDBtdqGTUelQAhFs8LHw5PeqhkEoJ3dmbKnt+L8cuAk6vTRmt36B0KUvjqYDhwsIEnIl6UqaTur9zh5nf+k7NGZwaF6QotEaZw==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=t8msRAfbeSwbeG8wMD41E5TnAsqCK3eJAiCVeTCXhlw=;
+ b=mtj3Amfas4qHSPGfHCJp+a3+EdOyUvqWfang6Ox0l2aNOZ7RaYo5TAl6yUXoevBPBvPzJeyThWjeekjx4WzMVW57vKqD7tyh6iOa/nGY/V+F6hM83Adllt3tS7R23beaBEuUxp07ujMW0unoNpK7IhGkXBGPtob8p67uwOjVOv7KBjr2RMxEnZzniuFucKN2hxmHyE/mURxzLPsYM3rgvMCQxk8VSrBgoFNPzm2JGdSaWNhjN+jLBK10tWuY2LzfexPfg2wiN2HlIuZ2koxMRQB78fhooLa9Yb9OKuresaZ8e7mwdwgJAmZHwOnN0er0ewWshJKY6w9l41OsPIY9vA==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=nvidia.com; dmarc=pass action=none header.from=nvidia.com;
+ dkim=pass header.d=nvidia.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=Nvidia.com;
+ s=selector2;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=t8msRAfbeSwbeG8wMD41E5TnAsqCK3eJAiCVeTCXhlw=;
+ b=Gq7AwIS1C3u/FRPzAs/ZZ9CNi3cuHHnq6uyITqc6tSYin1trqOciZ/dUhauTgVd8rj37mYVI+kXs+fhoTaUfaOGfEAJGFVvOkO8c7XshQgS8cHhy+2E1UIA4T6Wgf+TXqV+HgIT4cN7xG6SiCZ0caKHsbqCWRIh0ZQHxaBFq1rVexGPA0taJNfDHKj3v9yEN5p2o5ifv2/0F5i1mh22Bqp86xetgk4l1c3cIHB0N3IVwmgNUl8m9wAOmzXIlHEbZ7tatUAcEbhll3O6nXMUCfMa+ssKGaxCBm9D9LOZIomDEjJHMseClkjjsmOi5dQDm6ZIktUK/3l5/z7qSQKldtQ==
+Received: from SN7PR12MB8059.namprd12.prod.outlook.com (2603:10b6:806:32b::7)
+ by SJ0PR12MB6854.namprd12.prod.outlook.com (2603:10b6:a03:47c::13) with
+ Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9434.8; Thu, 18 Dec
+ 2025 20:53:00 +0000
+Received: from SN7PR12MB8059.namprd12.prod.outlook.com
+ ([fe80::4ee2:654e:1fe8:4b91]) by SN7PR12MB8059.namprd12.prod.outlook.com
+ ([fe80::4ee2:654e:1fe8:4b91%2]) with mapi id 15.20.9434.001; Thu, 18 Dec 2025
+ 20:53:00 +0000
+From: Joel Fernandes <joelagnelf@nvidia.com>
+To: Alexandre Courbot <acourbot@nvidia.com>
+Subject: Re: [PATCH 6/7] gpu: nova-core: send UNLOADING_GUEST_DRIVER GSP
+ command GSP upon unloading
+Thread-Topic: [PATCH 6/7] gpu: nova-core: send UNLOADING_GUEST_DRIVER GSP
+ command GSP upon unloading
+Thread-Index: AQHcbkrHLZgrNHAX9U+MOO9nREKCZ7UkZ8A6gAL/6ICAAHxZSA==
+Date: Thu, 18 Dec 2025 20:52:59 +0000
+Message-ID: <47F9A9AB-42B5-4A5C-90CA-8A00DD253DA7@nvidia.com>
+References: <20251216-nova-unload-v1-0-6a5d823be19d@nvidia.com>
+ <20251216-nova-unload-v1-6-6a5d823be19d@nvidia.com>
+ <C890CCBB-76C0-4E70-A7B8-846E34DABECE@nvidia.com>
+ <DF1DLWE9OOR6.2P43ATQYNAU3A@nvidia.com>
+In-Reply-To: <DF1DLWE9OOR6.2P43ATQYNAU3A@nvidia.com>
+Accept-Language: en-US
+Content-Language: en-US
+X-MS-Has-Attach: 
+X-MS-TNEF-Correlator: 
+x-ms-publictraffictype: Email
+x-ms-traffictypediagnostic: SN7PR12MB8059:EE_|SJ0PR12MB6854:EE_
+x-ms-office365-filtering-correlation-id: b9404543-e028-4338-a89c-08de3e776dfd
+x-ms-exchange-senderadcheck: 1
+x-ms-exchange-antispam-relay: 0
+x-microsoft-antispam: 
+ BCL:0;ARA:13230040|376014|7416014|366016|1800799024|38070700021;
+x-microsoft-antispam-message-info: 
+ =?iso-8859-2?Q?8RbyI0R6zoxHM7C9ehzv/RdqQhFkDP3i6t4WGFhTzgYIsthJJPKBn02DSL?=
+ =?iso-8859-2?Q?0k4l3h3P8hievE2fR299YnRNKEwqOfw45vZ8120UOiNJ0uUbg8b5ZSTu+6?=
+ =?iso-8859-2?Q?1g5KOuD/LRnRv7UyZ2pzjP9YxhqKF+PRtvnTVJ0a06wMyZeAEICUcjaEpd?=
+ =?iso-8859-2?Q?/kqL622ikWDWmPdDP4NmI1YaiDf6MDz9X9mk8JAbhEWvWpmbqXlQqQNcQX?=
+ =?iso-8859-2?Q?svB2xJglo5xGUMFLwMcCDK4ak9G0dbcsdjrWc4SlrExF3tPnDOk1HQ8ioN?=
+ =?iso-8859-2?Q?oYvjcyH9s5Gl3niK6lLEj9dAzehL0YD33N+zK4tWXRASft+R06fLxh0D7l?=
+ =?iso-8859-2?Q?/3mFX2GqW93vR6eiPawoWg49dJHv8yeNO99gUR8l8tASFhgxQq7LsPbeeR?=
+ =?iso-8859-2?Q?Q63M33VrlU6+LhqY4azjx1aVn5sy0rFCeJm8cvi11amcrt5cY+2UDQ5w/f?=
+ =?iso-8859-2?Q?AfGF/j6Ym0ror8VI3MxMWvK42Dw+FUf9+0hG/GLyjL4XEEKdm+gJHQbdRX?=
+ =?iso-8859-2?Q?cTpkN7Sl5I80TJKATJFHpu/otQk5L9tUf7a4AZHzi5DZI4bzvVNivYs4Zt?=
+ =?iso-8859-2?Q?vZxON59sfn723Ol8ZjZfUwJQ028FP6T3mShMRW1gQwDoyI8yd7ZpbcI9dj?=
+ =?iso-8859-2?Q?/1sYsOwcBxixq6VU6vxUlfVKPyzqcRQvItiWkmlZ5ggAfJq/ezeSS3Aq7C?=
+ =?iso-8859-2?Q?cMJjhPDdESXrg0q7J/l6FL9zB3lomQJZDRmmpCsr2OCpB5VpODUMLraGsR?=
+ =?iso-8859-2?Q?9teCG/SfpKl3mVdHQzMYlPUk8ZXnMIMRNLe1K4v6NDNJn5x50PyvNJEW6x?=
+ =?iso-8859-2?Q?ttWqqo6EJMISYufH/px1Wk4Ax4BNyouUt8Otv03pIpGhVPZ2j4bgmEIGZw?=
+ =?iso-8859-2?Q?AFtsKhtSg4s2mTF0fYrCP1bENXWhUie5vyp4LQPS0zP+8TREJGSauFeYnt?=
+ =?iso-8859-2?Q?AoKm3rRV4S336cNjvab4YlU19HGz3gCM2E6BWIHaliXt750RjvFe4+g3Ny?=
+ =?iso-8859-2?Q?SXmeF3sJgcs9WlwROJrSZ6ppvAXQRQ3jCjeyrbKIBu4PDLo9NosgWv2hXh?=
+ =?iso-8859-2?Q?kCrCpNDLaPLsSpluj56S0PILULzlOVJAOqNr3n97DoQaof9DYGayK++/hO?=
+ =?iso-8859-2?Q?tzmDe6xXgnbojCo3QIEegqOjIF6kvnPrgawSNWAKa7GzTlFNpRvdm3NP2b?=
+ =?iso-8859-2?Q?WN2sBesj3qo+pc8rSnZHbJpIRoROh9HM+CQmtgaGntqRshQIg7+fxc4Q8k?=
+ =?iso-8859-2?Q?E4Gn/xwxxAMVzz3JOO6NmoB9Y+nm1TKpJ8yfqNd+wymE1Kzc8vdkwkN2OW?=
+ =?iso-8859-2?Q?g659WCdGAiC+meNOkf/1GRaj6ON/mZlf5TJLRnZFqCKCW3eYI0sMLkHBYD?=
+ =?iso-8859-2?Q?+YYrcTO+4ZrwHz+Qu6wactRUobY4tDiZfhcK2vEiI2C/Q8UtBHl5zMnpnj?=
+ =?iso-8859-2?Q?aR/CWLvgbACwgUY6vgMQ5jA01FcDIlv3x56JyR+UfPYmFIVFMi0Bo3UcSG?=
+ =?iso-8859-2?Q?fVyH8y/a1On/i5WJNPkSb1+ziyGxjYeWcIAFq0e+JGyNMai2tYMjctmLNx?=
+ =?iso-8859-2?Q?Nr+slY/BHYODYtf0Aqt6jmjykLcA?=
+x-forefront-antispam-report: 
+ CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:SN7PR12MB8059.namprd12.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230040)(376014)(7416014)(366016)(1800799024)(38070700021);DIR:OUT;SFP:1101;
+x-ms-exchange-antispam-messagedata-chunkcount: 1
+x-ms-exchange-antispam-messagedata-0: 
+ =?iso-8859-2?Q?TmkSaMbJ/qLlXu7gbSCxOTRBn75R2337wSMPld54xb5xcKf4KsiArKXU9p?=
+ =?iso-8859-2?Q?CERHhTxV5gnY0lScFcpkKvfo1oOxa+UthsgKlrqs66VmIoAU6M0AgUSQ+1?=
+ =?iso-8859-2?Q?evR0o6ARAs0AmjSbOosBBO3e4klWKJ/KQZQDHAALhgchNRclili6K6g8Rb?=
+ =?iso-8859-2?Q?8AHj1PWaBlAflzr6107NCGmfmwtZk0CyGerskRj2aC1xd4XG5ONg7836tz?=
+ =?iso-8859-2?Q?4B0bnaCZqLfY8kPglTckAg9UT9kAsibq+FiWdyjapN6mRbSEJMXI5cgzhN?=
+ =?iso-8859-2?Q?wp/XGWy19PmCy2m+1ULXqR1uafp+R2dSRMcXJ5VcmzHPj7nLs2vzKPc+uw?=
+ =?iso-8859-2?Q?UDu4iLPo309eWq3DyQptc0LfT+rY1QcWwp9AD7vRVFWawnvWXvttfq24o0?=
+ =?iso-8859-2?Q?0uifWojB4Ui4C8g+BWEVrX8WwbQe1mCpn/5wU6WbZwESsvwDyl74rRqMKu?=
+ =?iso-8859-2?Q?SO17faHR7uo2nmXmtPYuXkkgAdQGWwDhX7pB4TkyKtUbAW+xEwnTwQhJrh?=
+ =?iso-8859-2?Q?XquW6A+wVz0PJGXHNoFxgAkkMOf3ShvB1hikMZCMp/CkRHb9VMKhcdrU+N?=
+ =?iso-8859-2?Q?dLWHteydu9ToxIukajZWVPCGRDYkpfm8dJTvVqCgtQOOF8ndb/wmN+87f8?=
+ =?iso-8859-2?Q?r/KArt3L36q1SNjjOghry2YWtABTSVEHGTHVlkZ4FMiLtdgGtsvsul1AlE?=
+ =?iso-8859-2?Q?KroI9rvEh6DmWC01Z+Qottlagk9Jmjtf79eYICJvppIZKVF5ACtxDaV9ka?=
+ =?iso-8859-2?Q?j5+z8wWi3Mkl19RvNL9stE+STsSqFjA3+MSCAfByvJYBsxNX3BPdIzWHBy?=
+ =?iso-8859-2?Q?ZWLLArRlvABAp6iWTFCOu0q8D3vV96jAh15gxNeAtvzp6wsho97jXtdhGo?=
+ =?iso-8859-2?Q?gYfnBESUHku7uFJtlKNx1Jj50CVRJnnSJ4e68Gux9IiGIi2G1Tt4atZvok?=
+ =?iso-8859-2?Q?89ET98HUP+tH0xkUei9LAkF1UiJDPz8+nNiGFJEcWXp15ejLECWl5PIvaQ?=
+ =?iso-8859-2?Q?UsrRuEcYzo/qjJTIJoeel7RBGjLh1s9nHQ3oogFpoacWqUhW2+0sGAuXNH?=
+ =?iso-8859-2?Q?EhsQI4hcaGdXDcd+zqTuLsa9qA31z3yYUGUYyJtfVeLbw+9rE5Ik+G42JF?=
+ =?iso-8859-2?Q?6odIPcwMv/8/T9E/Pi/nROTH/o25HKFC3VrIuVf5mWpmxOfJAoAuIgPL40?=
+ =?iso-8859-2?Q?uQIqJnpiVG4vES+PzCt7iUs+tpxGoglgxC5kqgUUB7SbCmDv+00EOpp1JM?=
+ =?iso-8859-2?Q?BWJYwNNzGAIVeX2fDR6B4aIpai0114kOEcuyWtSZcigpurBItuZ2X5VEIC?=
+ =?iso-8859-2?Q?jTp7eoSdabNgKYL/fReOWViUnEp6dyfTsX4Rf7TRYvVdIhSjzu60LHISyh?=
+ =?iso-8859-2?Q?8YE0Xalp9tKoKc1wIKk/AD3oPU1LFJLemU783ObvcKXKwkJjxRdXbY+BBE?=
+ =?iso-8859-2?Q?wfB8WXrjbpZHgH28XJPI9qfSeq01TLfeku6aCcaL8Tj8+zOOGnbfKJyjAk?=
+ =?iso-8859-2?Q?xL1vAXsbosHEj/kr8crgDpK3glP8oKYGBM+/bJDSed8AeA2q5uZjQM/G2c?=
+ =?iso-8859-2?Q?eKgN1zaqsvfbkWS+4yzQLskPkMcMaWNBXnJoLH7ChkoIzgBuu55hOvrH/2?=
+ =?iso-8859-2?Q?MLe5lVFytMAshALUyf+X6g9R+tVQnel53A?=
+Content-Type: text/plain; charset="iso-8859-2"
 Content-Transfer-Encoding: quoted-printable
-Message-ID-Hash: IVL3LQPLGCAJCKNKHGZEHYFSMJFJ2OIF
-X-Message-ID-Hash: IVL3LQPLGCAJCKNKHGZEHYFSMJFJ2OIF
-X-MailFrom: mmaurer@google.com
+MIME-Version: 1.0
+X-OriginatorOrg: Nvidia.com
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-AuthSource: SN7PR12MB8059.namprd12.prod.outlook.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: 
+ b9404543-e028-4338-a89c-08de3e776dfd
+X-MS-Exchange-CrossTenant-originalarrivaltime: 18 Dec 2025 20:53:00.0096
+ (UTC)
+X-MS-Exchange-CrossTenant-fromentityheader: Hosted
+X-MS-Exchange-CrossTenant-id: 43083d15-7273-40c1-b7db-39efd9ccc17a
+X-MS-Exchange-CrossTenant-mailboxtype: HOSTED
+X-MS-Exchange-CrossTenant-userprincipalname: 
+ 8tbGfNt0l3WC/EiUwlXATYf00EIWeQrl7RR2pKjJlsU99HPwSrNLFLkJDzrYn43WgzJ6FhuxFGKB8B6kxBfReQ==
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: SJ0PR12MB6854
+Message-ID-Hash: CG3MCFWWRI6O7PMZWI7J7XNSESNYBV3E
+X-Message-ID-Hash: CG3MCFWWRI6O7PMZWI7J7XNSESNYBV3E
+X-MailFrom: joelagnelf@nvidia.com
 X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency;
  loop; banned-address; member-moderation; nonmember-moderation; administrivia;
  implicit-dest; max-recipients; max-size; news-moderation; no-subject;
  digests; suspicious-header
-CC: Gary Guo <gary@garyguo.net>, Danilo Krummrich <dakr@kernel.org>,
- rust-for-linux@vger.kernel.org, Joel Fernandes <joelagnelf@nvidia.com>,
- Alexandre Courbot <acourbot@nvidia.com>, nouveau@lists.freedesktop.org
+CC: Danilo Krummrich <dakr@kernel.org>, Alice Ryhl <aliceryhl@google.com>,
+ Simona Vetter <simona@ffwll.ch>, Bjorn Helgaas <bhelgaas@google.com>,
+ =?iso-8859-2?Q?Krzysztof_Wilczy=F1ski?= <kwilczynski@kernel.org>,
+ Miguel Ojeda <ojeda@kernel.org>, Boqun Feng <boqun.feng@gmail.com>,
+ Gary Guo <gary@garyguo.net>,
+ =?iso-8859-2?Q?Bj=F6rn_Roy_Baron?= <bjorn3_gh@protonmail.com>,
+ Benno Lossin <lossin@kernel.org>, Andreas Hindborg <a.hindborg@kernel.org>,
+ Trevor Gross <tmgross@umich.edu>, Alistair Popple <apopple@nvidia.com>,
+ Eliot Courtney <ecourtney@nvidia.com>,
+ "nouveau@lists.freedesktop.org" <nouveau@lists.freedesktop.org>,
+ "dri-devel@lists.freedesktop.org" <dri-devel@lists.freedesktop.org>,
+ "linux-kernel@vger.kernel.org" <linux-kernel@vger.kernel.org>,
+ "linux-pci@vger.kernel.org" <linux-pci@vger.kernel.org>,
+ "rust-for-linux@vger.kernel.org" <rust-for-linux@vger.kernel.org>,
+ Alexandre Courbot <acourbot@nvidia.com>
 X-Mailman-Version: 3.3.8
 Precedence: list
 List-Id: Nouveau development list <nouveau.lists.freedesktop.org>
 Archived-At: 
- <https://lists.freedesktop.org/hyperkitty/list/nouveau@lists.freedesktop.org/message/IVL3LQPLGCAJCKNKHGZEHYFSMJFJ2OIF/>
+ <https://lists.freedesktop.org/hyperkitty/list/nouveau@lists.freedesktop.org/message/CG3MCFWWRI6O7PMZWI7J7XNSESNYBV3E/>
 Archived-At: 
- <https://lore.freedesktop.org/CAGSQo03HVquX1Bc7tsFjWgA-=BX=1eefXt=r-Rdtxca81QPXgA@mail.gmail.com/>
+ <https://lore.freedesktop.org/47F9A9AB-42B5-4A5C-90CA-8A00DD253DA7@nvidia.com/>
 List-Archive: 
  <https://lists.freedesktop.org/hyperkitty/list/nouveau@lists.freedesktop.org/>
 List-Archive: <https://lore.freedesktop.org/nouveau>
@@ -154,255 +212,94 @@ List-Post: <mailto:nouveau@lists.freedesktop.org>
 List-Subscribe: <mailto:nouveau-join@lists.freedesktop.org>
 List-Unsubscribe: <mailto:nouveau-leave@lists.freedesktop.org>
 
-On Wed, Dec 17, 2025 at 5:40=E2=80=AFPM Timur Tabi <ttabi@nvidia.com> wrote=
-:
->
-> Add a new constructor for Dir that uses the debugfs_lookup() API to
-> obtain a reference to an existing debugfs directory entry.
->
-> The key difference from Dir::new() and Dir::subdir() is the cleanup
-> semantics: when a Dir obtained via lookup() is dropped, it calls
-> dput() to release the reference rather than debugfs_remove() which
-> would delete the directory.
->
-> To implement this cleanup distinction, the Entry class now includes
-> an is_lookup boolean that specifies how the entry was created and
-> therefore how it should be dropped.
->
-> Signed-off-by: Timur Tabi <ttabi@nvidia.com>
-> ---
->  rust/kernel/debugfs.rs       | 43 +++++++++++++++++++++++++++++++
->  rust/kernel/debugfs/entry.rs | 49 +++++++++++++++++++++++++++++++++---
->  2 files changed, 89 insertions(+), 3 deletions(-)
->
-> diff --git a/rust/kernel/debugfs.rs b/rust/kernel/debugfs.rs
-> index facad81e8290..eee799f64f79 100644
-> --- a/rust/kernel/debugfs.rs
-> +++ b/rust/kernel/debugfs.rs
-> @@ -110,6 +110,49 @@ pub fn new(name: &CStr) -> Self {
->          Dir::create(name, None)
->      }
->
-> +    /// Looks up an existing directory in DebugFS.
-> +    ///
-> +    /// If `parent` is [`None`], the lookup is performed from the root o=
-f the debugfs filesystem.
-> +    ///
-> +    /// Returns [`Some(Dir)`] representing the looked-up directory if fo=
-und, or [`None`] if the
-> +    /// directory does not exist or if debugfs is not enabled. When drop=
-ped, the [`Dir`] will
-> +    /// release its reference to the dentry without removing the directo=
-ry from the filesystem.
-> +    ///
-> +    /// # Examples
-> +    ///
-> +    /// ```
-> +    /// # use kernel::c_str;
-> +    /// # use kernel::debugfs::Dir;
-> +    /// // Look up a top-level directory
-> +    /// let nova_core =3D Dir::lookup(c_str!("nova_core"), None);
-> +    ///
-> +    /// // Look up a subdirectory within a parent
-> +    /// let parent =3D Dir::new(c_str!("parent"));
-> +    /// let child =3D parent.subdir(c_str!("child"));
-> +    /// let looked_up =3D Dir::lookup(c_str!("child"), Some(&parent));
-> +    /// // `looked_up` now refers to the same directory as `child`.
-> +    /// // Dropping `looked_up` will not remove the directory.
-> +    /// ```
+Hi Alex,
 
-This also breaks the assumption people were able to have with `Dir`
-previously that if they have a `Dir` and debugfs is enabled, it's
-usable for creating subdirs/files.
-
-This might be considered an issue, but at minimum it needs to be documented=
-.
-
-> +    pub fn lookup(name: &CStr, parent: Option<&Dir>) -> Option<Self> {
-
-We were explicitly asked by Greg *not* to expose error conditions in
-directory constructors. I would expect that to extend to `lookup` as
-well, so this would return a `Self`, not allowing the caller to find
-out if the file was actually there. This might be a bit of a grey area
-as the comment he cited on `debugfs_create_file` and friends has
-explicit verbiage about it being bad form to check errors here and
-`debugfs_lookup` mentions explicitly a null return for the file not
-being there.
-
-Another point in favor of just returning `Self` rather than
-`Option<Self>` is that in your proposed real-world usage of this, you
-create a dummy directory in the `None` case.
-
-> +        #[cfg(CONFIG_DEBUG_FS)]
-> +        {
-
-We shouldn't need to track a parent entry here, and so shouldn't need
-to do the whole cloning dance.
-
-> +            let parent_entry =3D match parent {
-> +                // If the parent couldn't be allocated, just early-retur=
-n
-> +                Some(Dir(None)) =3D> return None,
-> +                Some(Dir(Some(entry))) =3D> Some(entry.clone()),
-> +                None =3D> None,
-> +            };
-> +            let entry =3D Entry::lookup(name, parent_entry)?;
-
-There's no guarantee that this lookup has returned a directory - a
-lookup can return files too afaict
-
-> +            Some(Self(
-> +                // If Arc creation fails, the `Entry` will be dropped, s=
-o the reference will be
-> +                // released.
-> +                Arc::new(entry, GFP_KERNEL).ok(),
-> +            ))
-> +        }
-> +        #[cfg(not(CONFIG_DEBUG_FS))]
-> +        None
-> +    }
-> +
->      /// Creates a subdirectory within this directory.
->      ///
->      /// # Examples
-> diff --git a/rust/kernel/debugfs/entry.rs b/rust/kernel/debugfs/entry.rs
-> index 706cb7f73d6c..455d7bbb8036 100644
-> --- a/rust/kernel/debugfs/entry.rs
-> +++ b/rust/kernel/debugfs/entry.rs
-> @@ -18,6 +18,9 @@ pub(crate) struct Entry<'a> {
->      _parent: Option<Arc<Entry<'static>>>,
->      // If we were created with a non-owning parent, this prevents us fro=
-m outliving it
->      _phantom: PhantomData<&'a ()>,
-> +    // If true, this entry was obtained via debugfs_lookup and should be=
- released
-> +    // with dput() instead of debugfs_remove().
-> +    is_lookup: bool,
-
-I agree with Danilo - I think this would be cleaner as a different
-type (or at least an enum variant) rather than adding another field
-(if we need it). Notably:
-
-1. `_parent` is not required for a lookup entry - the lookup doesn't
-need to keep it alive, because it's not using the "If I have the
-directory handle, I can create real files in it" semantics we had
-before.
-2. The `_phantom` is irrelevant for a lookup entry because they can't be sc=
-oped
-3. The drop behavior is different (which you're gating with `is_lookup`).
-
-Basically the only part that is the same is the presence of a dentry
-pointer under the hood.
-
-
->  }
->
->  // SAFETY: [`Entry`] is just a `dentry` under the hood, which the API pr=
-omises can be transferred
-> @@ -43,9 +46,38 @@ pub(crate) fn dynamic_dir(name: &CStr, parent: Option<=
-Arc<Self>>) -> Self {
->              entry,
->              _parent: parent,
->              _phantom: PhantomData,
-> +            is_lookup: false,
->          }
->      }
->
-> +    /// Looks up an existing entry in debugfs.
-> +    ///
-> +    /// Returns [`Some(Entry)`] representing the looked-up dentry if the=
- entry exists, or [`None`]
-> +    /// if the entry was not found. When dropped, the entry will release=
- its reference via `dput()`
-> +    /// instead of removing the directory.
-> +    pub(crate) fn lookup(name: &CStr, parent: Option<Arc<Self>>) -> Opti=
-on<Self> {
-> +        let parent_ptr =3D match &parent {
-> +            Some(entry) =3D> entry.as_ptr(),
-> +            None =3D> core::ptr::null_mut(),
-> +        };
-> +        // SAFETY: The invariants of this function's arguments ensure th=
-e safety of this call.
-> +        // * `name` is a valid C string by the invariants of `&CStr`.
-> +        // * `parent_ptr` is either `NULL` (if `parent` is `None`), or a=
- pointer to a valid
-> +        //   `dentry` by our invariant. `debugfs_lookup` handles `NULL` =
-pointers correctly.
-> +        let entry =3D unsafe { bindings::debugfs_lookup(name.as_char_ptr=
-(), parent_ptr) };
-> +
-> +        if entry.is_null() {
-> +            return None;
-> +        }
-> +
-> +        Some(Entry {
-> +            entry,
-> +            _parent: parent,
-> +            _phantom: PhantomData,
-> +            is_lookup: true,
-> +        })
-> +    }
-> +
->      /// # Safety
->      ///
->      /// * `data` must outlive the returned `Entry`.
-> @@ -76,6 +108,7 @@ pub(crate) unsafe fn dynamic_file<T>(
->              entry,
->              _parent: Some(parent),
->              _phantom: PhantomData,
-> +            is_lookup: false,
->          }
->      }
->  }
-> @@ -97,6 +130,7 @@ pub(crate) fn dir(name: &CStr, parent: Option<&'a Entr=
-y<'_>>) -> Self {
->              entry,
->              _parent: None,
->              _phantom: PhantomData,
-> +            is_lookup: false,
->          }
->      }
->
-> @@ -129,6 +163,7 @@ pub(crate) fn file<T>(
->              entry,
->              _parent: None,
->              _phantom: PhantomData,
-> +            is_lookup: false,
->          }
->      }
->  }
-> @@ -140,6 +175,7 @@ pub(crate) fn empty() -> Self {
->              entry: core::ptr::null_mut(),
->              _parent: None,
->              _phantom: PhantomData,
-> +            is_lookup: false,
->          }
->      }
->
-> @@ -157,8 +193,15 @@ pub(crate) fn as_ptr(&self) -> *mut bindings::dentry=
+>>> +    }
+>>> +}
+>>> diff --git a/drivers/gpu/nova-core/gsp/fw.rs b/drivers/gpu/nova-core/gs=
+p/fw.rs
+>>> index 09549f7db52d..228464fd47a0 100644
+>>> --- a/drivers/gpu/nova-core/gsp/fw.rs
+>>> +++ b/drivers/gpu/nova-core/gsp/fw.rs
+>>> @@ -209,6 +209,7 @@ pub(crate) enum MsgFunction {
+>>>    GspInitPostObjGpu =3D bindings::NV_VGPU_MSG_FUNCTION_GSP_INIT_POST_O=
+BJGPU,
+>>>    GspRmControl =3D bindings::NV_VGPU_MSG_FUNCTION_GSP_RM_CONTROL,
+>>>    GetStaticInfo =3D bindings::NV_VGPU_MSG_FUNCTION_GET_STATIC_INFO,
+>>> +    UnloadingGuestDriver =3D bindings::NV_VGPU_MSG_FUNCTION_UNLOADING_=
+GUEST_DRIVER,
+>>>=20
+>>>    // Event codes
+>>>    GspInitDone =3D bindings::NV_VGPU_MSG_EVENT_GSP_INIT_DONE,
+>>> @@ -249,6 +250,9 @@ fn try_from(value: u32) -> Result<MsgFunction> {
+>>>            }
+>>>            bindings::NV_VGPU_MSG_FUNCTION_GSP_RM_CONTROL =3D> Ok(MsgFun=
+ction::GspRmControl),
+>>>            bindings::NV_VGPU_MSG_FUNCTION_GET_STATIC_INFO =3D> Ok(MsgFu=
+nction::GetStaticInfo),
+>>> +            bindings::NV_VGPU_MSG_FUNCTION_UNLOADING_GUEST_DRIVER =3D>=
  {
->
->  impl Drop for Entry<'_> {
->      fn drop(&mut self) {
-> -        // SAFETY: `debugfs_remove` can take `NULL`, error values, and l=
-egal DebugFS dentries.
-> -        // `as_ptr` guarantees that the pointer is of this form.
-> -        unsafe { bindings::debugfs_remove(self.as_ptr()) }
-> +        if self.is_lookup {
-> +            // SAFETY: `dput` can take `NULL` and legal dentries.
-> +            // `as_ptr` guarantees that the pointer is of this form.
-> +            // This entry was obtained via `debugfs_lookup`, so we relea=
-se the reference.
-> +            unsafe { bindings::dput(self.as_ptr()) }
-> +        } else {
-> +            // SAFETY: `debugfs_remove` can take `NULL`, error values, a=
-nd legal DebugFS dentries.
-> +            // `as_ptr` guarantees that the pointer is of this form.
-> +            unsafe { bindings::debugfs_remove(self.as_ptr()) }
-> +        }
->      }
->  }
-> --
-> 2.52.0
->
->
+>>> +                Ok(MsgFunction::UnloadingGuestDriver)
+>>> +            }
+>>>            bindings::NV_VGPU_MSG_EVENT_GSP_INIT_DONE =3D> Ok(MsgFunctio=
+n::GspInitDone),
+>>>            bindings::NV_VGPU_MSG_EVENT_GSP_RUN_CPU_SEQUENCER =3D> {
+>>>                Ok(MsgFunction::GspRunCpuSequencer)
+>>> diff --git a/drivers/gpu/nova-core/gsp/fw/commands.rs b/drivers/gpu/nov=
+a-core/gsp/fw/commands.rs
+>>> index 85465521de32..c7df4783ad21 100644
+>>> --- a/drivers/gpu/nova-core/gsp/fw/commands.rs
+>>> +++ b/drivers/gpu/nova-core/gsp/fw/commands.rs
+>>> @@ -125,3 +125,30 @@ unsafe impl AsBytes for GspStaticConfigInfo {}
+>>> // SAFETY: This struct only contains integer types for which all bit pa=
+tterns
+>>> // are valid.
+>>> unsafe impl FromBytes for GspStaticConfigInfo {}
+>>> +
+>>> +/// Payload of the `UnloadingGuestDriver` command and message.
+>>> +#[repr(transparent)]
+>>> +#[derive(Clone, Copy, Debug, Zeroable)]
+>>> +pub(crate) struct UnloadingGuestDriver {
+>>> +    inner: bindings::rpc_unloading_guest_driver_v1F_07,
+>>> +}
+>>> +
+>>> +impl UnloadingGuestDriver {
+>>> +    pub(crate) fn new(suspend: bool) -> Self {
+>>> +        Self {
+>>> +            inner: bindings::rpc_unloading_guest_driver_v1F_07 {
+>>=20
+>> We should go through intermediate firmware representation than direct bi=
+ndings access?
+>=20
+> Only if the size of the bindings justifies it - here having an opaque
+> wrapper just just well, and spares us some code down the line as we
+> would have to initialize the bindings anyway.
+
+I am not sure about that, it sounds like a layering violation. It would be =
+good not to keep the rules fuzzy about this, because then we could do it ei=
+ther way in all cases.
+
+Another reason is that we cannot anticipate in advance which specific helpe=
+r functions we will need to add in the future. Down the line, we may need t=
+o add some helper functions to the struct as well.  Also having V1F07 in th=
+e name sounds very magic number-ish. It would be good to abstract that out =
+with a better-named struct anyway.
+
+Thanks,
+
+- Joel
+
+
+
+>=20
+>>=20
+>>=20
+>>> +                bInPMTransition: if suspend { 1 } else { 0 },
+>>=20
+>> Then this can just be passed as a bool.
+>>=20
+>>> +                bGc6Entering: 0,
+>>> +                newLevel: if suspend { 3 } else { 0 },
+>=20
+> Note to self to figure out these magic numbers. :)
+>=20
