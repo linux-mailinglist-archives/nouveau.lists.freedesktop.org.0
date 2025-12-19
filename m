@@ -2,38 +2,38 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id DFB69CD0ABD
-	for <lists+nouveau@lfdr.de>; Fri, 19 Dec 2025 16:59:50 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 2F2C0CD0AC3
+	for <lists+nouveau@lfdr.de>; Fri, 19 Dec 2025 16:59:52 +0100 (CET)
 Received: from kara.freedesktop.org (unknown [131.252.210.166])
-	by gabe.freedesktop.org (Postfix) with ESMTPS id 50B3910F042;
-	Fri, 19 Dec 2025 15:59:49 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTPS id B135F10F047;
+	Fri, 19 Dec 2025 15:59:50 +0000 (UTC)
 Authentication-Results: gabe.freedesktop.org;
-	dkim=fail reason="signature verification failed" (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="GZI+KIIM";
+	dkim=fail reason="signature verification failed" (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="kDXoTy4J";
 	dkim-atps=neutral
 Received: from kara.freedesktop.org (localhost [127.0.0.1])
-	by kara.freedesktop.org (Postfix) with ESMTP id 09993455C6;
-	Fri, 19 Dec 2025 15:52:16 +0000 (UTC)
+	by kara.freedesktop.org (Postfix) with ESMTP id 6FD0C454F4;
+	Fri, 19 Dec 2025 15:52:17 +0000 (UTC)
 ARC-Seal: i=1; cv=none; a=rsa-sha256; d=lists.freedesktop.org;
- s=20240201; t=1766159535;
- b=efGi1Soie1O4YfMu3JP8hUBN99jMa/kDQYKInMJG8WnNvX2NpR35DDskjSGXuO0ObyxlV
- /0QBLbILdnzN2P1/9HIsXsivzzg6v3ayWLD96ozGCMw9sVjnj6z4BdHXGNsAWKus5/pzzwd
- E68TEvKNM6dO7WTobC5EWGev3MADf4pwo+ObkerRrV3lSGryHaNwT0vX+IZS8UAmoyd1t6i
- wJIfqDhi/lG0wWYk2DB6a3UVU+ljTQbB9NQre3GQMNpsKksadxIaAphMeIGRFP0ATlXlJat
- LICPDtSRG4+f7O78ys/MnlWo5bb9l4UX3ek824c4R+xxSES/7Y7buHgY8gHA==
+ s=20240201; t=1766159537;
+ b=liEHA7sMMhuAiosMKynfgtNcPu1LsTVv14UxMqfs2gWA7hGUNQVt3LKsDsuQUSrZcOl0R
+ aNSeAoIYSTj0CQ8fEJnB+kFgTflgNKiRxMht3eI8RCfQ1s9l3UTiNHyjlo0lCNSGLC6BVhs
+ LOHzShbGvun7YEvQx8SPG+gwTAFgmUGVudGdJh+T/prQMozia5g7DTOFy6cTLMOz7g40mG8
+ SxCCOotum20O+toIQMn9TEvfF13Gz++NpbTZGaqaiM5Lrwzg6ca8zfT7zabQgH3X5swfl/j
+ Lvk48i29P6PinDNtsFKq2/OsnLDNoar7SwBZI9X0/wszs4YFcdu3KA9M1RAA==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed;
- d=lists.freedesktop.org; s=20240201; t=1766159535; h=from : sender :
+ d=lists.freedesktop.org; s=20240201; t=1766159537; h=from : sender :
  reply-to : subject : date : message-id : to : cc : mime-version :
  content-type : content-transfer-encoding : content-id :
  content-description : resent-date : resent-from : resent-sender :
  resent-to : resent-cc : resent-message-id : in-reply-to : references :
  list-id : list-help : list-unsubscribe : list-subscribe : list-post :
  list-owner : list-archive;
- bh=aQA972iONaPUTTbgnIz+iSoWSorbh2pPa9/pzbiC86E=;
- b=ygCieHv2SD2giBDK6IBzdEVoE7MEIzJ0MycmG/hbG1uBEm1uP3GSj8Pa5u/2SOTqaRAuL
- XuOrK/e6cqLP87XQCOkW3gCPfkqqAobEsE+WjfQq05ehjFp/GevCN+PeZO2jpauec06z5OJ
- eFYMLcgLnTnYYBfxIxDHOzGjusS8U+2NdxtYVqa+9OosZ5XTuuO7IcLOsYQTNpmJ/RFCbgU
- KB9XJLju9yf3g1onek8wAAfzyKc8yTLk84iqOV8eBl/6b3qjn48GRCEUHi7UTesFTKxB3al
- j9Vv5KQ/grNjlmIN5F0N6RiZk2XcgVTXT0LJnrxT9iRtuvp6VaFIk1pjFC2Q==
+ bh=IKABffyNvPjVM+RzIL5ZAgHEXRXD7t+eDtpJ1JycBW0=;
+ b=urNucG89U5DZ8dDAGLFzxRlxChAVRLGO3pJcLtO+JxqHZq+kZnZp8zbgmNtrZ24BCg80S
+ O40uJePtiuIOWFVY5//SFUNrbmFJEsp073Hw1rc2Cn3ouq1U7mJggkVo+ql63FfL+/sWawX
+ rTSk8cwZyoGKIv/CvFLF8sqNXSvm9FgE0MHAK6JEznpreoKqPGyeOEcxfZa+6MP5UrMCjSF
+ glGcu3fmObfqafr6es9MDg+c1ZTu7HRW/+diKEuSHya28RPtykXGxmOyrN5Fv/6MAMq07vT
+ n6hUUZwpce0YjoOGwLzBhfdOcP0NtaYJyckWjIXeM1k8I1YHlBSikgKiNHig==
 ARC-Authentication-Results: i=1; mail.freedesktop.org;
  dkim=pass header.d=kernel.org;
   arc=none (Message is not ARC signed);
@@ -44,46 +44,46 @@ Authentication-Results: mail.freedesktop.org; dkim=pass header.d=kernel.org;
  dmarc=pass (Used From Domain Record) header.from=kernel.org
  policy.dmarc=quarantine
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by kara.freedesktop.org (Postfix) with ESMTPS id 0D3AD44B96
-	for <nouveau@lists.freedesktop.org>; Fri, 19 Dec 2025 12:07:42 +0000 (UTC)
-Received: from sea.source.kernel.org (sea.source.kernel.org [172.234.252.31])
-	by gabe.freedesktop.org (Postfix) with ESMTPS id C037E10E3F7;
-	Fri, 19 Dec 2025 12:15:14 +0000 (UTC)
+	by kara.freedesktop.org (Postfix) with ESMTPS id F215F44B96
+	for <nouveau@lists.freedesktop.org>; Fri, 19 Dec 2025 12:17:43 +0000 (UTC)
+Received: from tor.source.kernel.org (tor.source.kernel.org [172.105.4.254])
+	by gabe.freedesktop.org (Postfix) with ESMTPS id 9C0EF10E481;
+	Fri, 19 Dec 2025 12:25:16 +0000 (UTC)
 Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
-	by sea.source.kernel.org (Postfix) with ESMTP id 53C5940651;
-	Fri, 19 Dec 2025 12:15:14 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id A36E2C4CEF1;
-	Fri, 19 Dec 2025 12:15:06 +0000 (UTC)
+	by tor.source.kernel.org (Postfix) with ESMTP id 5651560018;
+	Fri, 19 Dec 2025 12:25:15 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 7DEE8C4CEF1;
+	Fri, 19 Dec 2025 12:25:07 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
-	s=k20201202; t=1766146514;
-	bh=zr3MOIdRIiLo5rQVA/Ls8ftqQmh9k+HKygN/fGUhHUM=;
-	h=Date:Subject:Cc:To:From:References:In-Reply-To:From;
-	b=GZI+KIIMKdrldmwo7anW9rvr4aLsQBZAC9pHRgRsTbVfoUDi8BU6ovBSAJYDNojJh
-	 4AYAUZonScKOOogC43EkXDdgB04ocA8/I5WdYaWRnXC8I6s6hlfcjVZrZOmk0glcjQ
-	 iPgk0U6tK4L20VCTNJbufSlESIsU620vyTVv/beEcIAlqx1m/rD8o2RM228EyXbNiZ
-	 SDBQgev8wOx9x0nh0FR1geOg+/5LPLtX1dOYq7Sevx09h/yPEn8K5XoCwW9UwIVKHl
-	 fuKOEaTs33EyjO4TMdIoTR0BvTGHRMJrgHgQ1rHBQT/rIyqGZzr+qbMfvwOcuHZHyT
-	 GmcaQve3a1qGg==
+	s=k20201202; t=1766147115;
+	bh=IKABffyNvPjVM+RzIL5ZAgHEXRXD7t+eDtpJ1JycBW0=;
+	h=Date:To:From:Subject:Cc:References:In-Reply-To:From;
+	b=kDXoTy4JgoCQtYGg5/UHAbHNxZs3nuql9kLRBlRL08h4OgY6WohVAyq+6n5wjjjN4
+	 ZZ7BAsk+IxUf1OAJjfMLqsezJMiZTEDLMokOj+3p+oBqXBpbXSgX/PHtilfEzw0blp
+	 hI2uxR66pgVguorKq8YwmkyNG+YJG6ntsL7+PVOPC7iiav7mLXlrZCEYPzpNzwglj3
+	 LtPOVO5vSqBa06DClUFoH9b/rDV+mK9q3/3hxSbYNNEaKu+VQftOBZpinqYnnaPBwT
+	 5O4vVWnTHYIEwcwdw47DpyJQ2jk04fUUqn/U+WPbVnna0WAAaaMD7NYx91omtEqNg+
+	 CM2oilI8Y6E0g==
 Mime-Version: 1.0
 Content-Transfer-Encoding: quoted-printable
 Content-Type: text/plain; charset=UTF-8
-Date: Fri, 19 Dec 2025 13:15:04 +0100
-Message-Id: <DF26ONGZ03KH.31FVI22UBGJFX@kernel.org>
-Subject: Re: [PATCH 1/4] drm/gpuvm: take GEM lock inside
- drm_gpuvm_bo_obtain_prealloc()
+Date: Fri, 19 Dec 2025 13:25:05 +0100
+Message-Id: <DF26WBIDPMPU.3E6XTUPMZTHW1@kernel.org>
 To: "Alice Ryhl" <aliceryhl@google.com>
 From: "Danilo Krummrich" <dakr@kernel.org>
+Subject: Re: [PATCH 2/4] drm/gpuvm: drm_gpuvm_bo_obtain() requires lock and
+ staged mode
 References: <20251128-gpuvm-rust-v1-0-ebf66bf234e0@google.com>
- <20251128-gpuvm-rust-v1-1-ebf66bf234e0@google.com>
-In-Reply-To: <20251128-gpuvm-rust-v1-1-ebf66bf234e0@google.com>
+ <20251128-gpuvm-rust-v1-2-ebf66bf234e0@google.com>
+In-Reply-To: <20251128-gpuvm-rust-v1-2-ebf66bf234e0@google.com>
 X-MailFrom: dakr@kernel.org
 X-Mailman-Rule-Hits: implicit-dest
 X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency;
  loop; banned-address; member-moderation; nonmember-moderation; administrivia;
  max-recipients; max-size; news-moderation; no-subject; digests;
  suspicious-header
-Message-ID-Hash: MRMXRKE5UJXGQ7AO4BV6SUTR4S345WXD
-X-Message-ID-Hash: MRMXRKE5UJXGQ7AO4BV6SUTR4S345WXD
+Message-ID-Hash: LIAW4Y7IHI344QAOTEE76FKKN3LQTTSY
+X-Message-ID-Hash: LIAW4Y7IHI344QAOTEE76FKKN3LQTTSY
 X-Mailman-Approved-At: Fri, 19 Dec 2025 15:52:12 +0000
 CC: Daniel Almeida <daniel.almeida@collabora.com>,
  Matthew Brost <matthew.brost@intel.com>,
@@ -115,9 +115,9 @@ X-Mailman-Version: 3.3.8
 Precedence: list
 List-Id: Nouveau development list <nouveau.lists.freedesktop.org>
 Archived-At: 
- <https://lists.freedesktop.org/hyperkitty/list/nouveau@lists.freedesktop.org/message/MRMXRKE5UJXGQ7AO4BV6SUTR4S345WXD/>
+ <https://lists.freedesktop.org/hyperkitty/list/nouveau@lists.freedesktop.org/message/LIAW4Y7IHI344QAOTEE76FKKN3LQTTSY/>
 Archived-At: 
- <https://lore.freedesktop.org/DF26ONGZ03KH.31FVI22UBGJFX@kernel.org/>
+ <https://lore.freedesktop.org/DF26WBIDPMPU.3E6XTUPMZTHW1@kernel.org/>
 List-Archive: 
  <https://lists.freedesktop.org/hyperkitty/list/nouveau@lists.freedesktop.org/>
 List-Archive: <https://lore.freedesktop.org/nouveau>
@@ -128,24 +128,27 @@ List-Subscribe: <mailto:nouveau-join@lists.freedesktop.org>
 List-Unsubscribe: <mailto:nouveau-leave@lists.freedesktop.org>
 
 On Fri Nov 28, 2025 at 3:14 PM CET, Alice Ryhl wrote:
-> +static void
-> +drm_gpuvm_bo_destroy_not_in_lists(struct drm_gpuvm_bo *vm_bo)
-> +{
-> +	struct drm_gpuvm *gpuvm =3D vm_bo->vm;
-> +	const struct drm_gpuvm_ops *ops =3D gpuvm->ops;
-> +	struct drm_gem_object *obj =3D vm_bo->obj;
-> +
-> +	if (ops && ops->vm_bo_free)
-> +		ops->vm_bo_free(vm_bo);
-> +	else
-> +		kfree(vm_bo);
-> +
-> +	drm_gpuvm_put(gpuvm);
-> +	drm_gem_object_put(obj);
-> +}
+> In the previous commit we updated drm_gpuvm_bo_obtain_prealloc() to take
+> locks internally, which means that it's only usable in immediate mode.
+> In this commit, we notice that drm_gpuvm_bo_obtain() requires you to use
+> staged mode. This means that we now have one variant of obtain for each
+> mode you might use gpuvm in.
+>
+> To reflect this information, we add a warning about using it in
+> immediate mode, and to make the distinction clearer we rename the method
+> with a _locked() suffix so that it's clear that it requires the caller
+> to take the locks.
+>
+> Signed-off-by: Alice Ryhl <aliceryhl@google.com>
 
-I think to us it seems obvious, but I think for new people it might not be.=
- Can
-you please add a comment that mentions that this is about the evict and ext=
-obj
-lists and explains how this is related to locking?
+Ultimately, the two different approaches of obtaining a VM_BO have always b=
+een
+desinged for the two different modes of operation -- great to see this refi=
+ned!
+
+Given that, I think it would be great to update the "Locking" section of th=
+e
+GPUVM's documentation and expand it with a new section "Modes of Operation"=
+.
+
+Mind sending a follow-up patch / series for this?
