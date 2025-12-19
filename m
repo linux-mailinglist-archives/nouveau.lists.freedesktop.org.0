@@ -2,121 +2,216 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id BFF8DCD0AC7
-	for <lists+nouveau@lfdr.de>; Fri, 19 Dec 2025 16:59:52 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 1B60BCD1C4C
+	for <lists+nouveau@lfdr.de>; Fri, 19 Dec 2025 21:38:23 +0100 (CET)
 Received: from kara.freedesktop.org (unknown [131.252.210.166])
-	by gabe.freedesktop.org (Postfix) with ESMTPS id 4C82810F052;
-	Fri, 19 Dec 2025 15:59:51 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTPS id 42E0F10F0B5;
+	Fri, 19 Dec 2025 20:38:21 +0000 (UTC)
 Authentication-Results: gabe.freedesktop.org;
-	dkim=fail reason="signature verification failed" (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="WUSPcwLH";
+	dkim=pass (2048-bit key; unprotected) header.d=Nvidia.com header.i=@Nvidia.com header.b="NHiYD59q";
 	dkim-atps=neutral
 Received: from kara.freedesktop.org (localhost [127.0.0.1])
-	by kara.freedesktop.org (Postfix) with ESMTP id 08B6F45509;
-	Fri, 19 Dec 2025 15:52:18 +0000 (UTC)
-ARC-Seal: i=1; cv=none; a=rsa-sha256; d=lists.freedesktop.org;
- s=20240201; t=1766159537;
- b=iGnfhJxb9VUQ1SGukceNki4lod0gGS7H3BpIVGmgH5hG9faHlBr6br2nHHz5Wez3sBag7
- el3uDnkwSNmoRjihmyc8mMKSgNuU7nLnBhKD8JzapF12fbKPXeQeqGvvEVDT9P5iNmuCGXR
- jZy7uSsDm+sHLxcPqWB6qgWuyhO7Qp1AW4MjLtuDzywpb/YHCsqIUgl78bcNAcDPx0S4COQ
- 3Fej0O/FqUuMlVi813IXbEOnKPwVqJOc3ZfvFiWoMFV/I0fAI/tQX5UQ1cH54WcHw7bUjJ2
- mFsWltN0zqHXsmo9d500N58zkDgAGyvgPpxlptPQTblUU5V10q47b9NtM7ig==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed;
- d=lists.freedesktop.org; s=20240201; t=1766159537; h=from : sender :
+	by kara.freedesktop.org (Postfix) with ESMTP id 755E04563F;
+	Fri, 19 Dec 2025 20:30:47 +0000 (UTC)
+ARC-Seal: i=2; cv=pass; a=rsa-sha256; d=lists.freedesktop.org;
+ s=20240201; t=1766176247;
+ b=BSabMpBomhkD0ui1HxlpTWcKik74Le1NZNGQ88aq38wIJKgkxnS1dAV28kVXQaGtNzta7
+ HhcS4UVUAFD5vmg5YqDP7MRyxCosQC5t3GmUTz8dp8OHnPKTGf7dk6D1Mgx5q2v5FlrpCJk
+ UPo468ug61Pvcu3vupeHgJkBcfHJ5Gkbc7gM7aGPlhhxYV2O7xCya0HR3VOqrVIpSOdBuH3
+ mMxUiiSHJF9e9fdAhEi78CCC8Sk241js9oFVCHVM8b5lxkntTNddiXM5V52VlRtSLj0k/WB
+ HhVv4EmqQMrrj1+TbmmyBLAG62t95lNOb5UoOB4WrNub+8Stpk/bjY3omNGw==
+ARC-Message-Signature: i=2; a=rsa-sha256; c=relaxed/relaxed;
+ d=lists.freedesktop.org; s=20240201; t=1766176247; h=from : sender :
  reply-to : subject : date : message-id : to : cc : mime-version :
  content-type : content-transfer-encoding : content-id :
  content-description : resent-date : resent-from : resent-sender :
  resent-to : resent-cc : resent-message-id : in-reply-to : references :
  list-id : list-help : list-unsubscribe : list-subscribe : list-post :
  list-owner : list-archive;
- bh=uii0Z1vac2UxVUKM349pIs+E0vg8jKpH7cJR0ebiZek=;
- b=uaHDARda0DcUN3Gw6CDyCUK90CqvFAQMhe3OLT2oQnYZuafmwm9bjGCifMCfj9LftjTRG
- ZRl48CJx4+GAr4SMkxPM5ZIUMbIA9aAjX5ENOC7n1gccjMfrS3vgyn/Dkqoo6eT478u8MDK
- BwWxLfIfwXlF+lUnZ2kGfYXwWm5HU3ug4XfVi+4UeArQEo4RHyGPtI/9id+RjJ8KoLOEsTv
- qh26hRzUCKDVtXGvlJ/nQf58ZdKqanhWpfADn33nx3baXeZVE7j404i3KhE+q6WAnWZNROU
- VCGjPwyNbjblYPhyhBWgqPz75b1ALp/0gzyfJnXJAzFlNcSwxsvr1pqVWiYA==
-ARC-Authentication-Results: i=1; mail.freedesktop.org;
- dkim=pass header.d=kernel.org;
-  arc=none (Message is not ARC signed);
-  dmarc=pass (Used From Domain Record) header.from=kernel.org
- policy.dmarc=quarantine
-Authentication-Results: mail.freedesktop.org; dkim=pass header.d=kernel.org;
- arc=none (Message is not ARC signed);
- dmarc=pass (Used From Domain Record) header.from=kernel.org
- policy.dmarc=quarantine
+ bh=g5vpq9kAsPE8M4dr8GKMjVgztODwSuR62pZ8lOOp6LE=;
+ b=hMoAu3CBXyeW9QlFwn3vqPHngiTnVQKmqR/vrKXFHGEqSUJcAXRPoyxZfE3HaICBLZbjQ
+ a+ROaTqImBFDThs+xPGdJbxoRcCDulz4bMc2mL8zxshCAXQKn2LTT8g7nBYRThmSRgfAKf3
+ R1Gp/vl168L74sXnv/c1vxa5gGWuEhfMRDcLMNxwv4I4506wDymUr/o5UgdM9YytWXc68Kc
+ 797VHynPzwrjt+fBEosfSbrXYRTtagv1NcD2WVNEhLL1V/hZ4oyoFddBz8Oz+1shyVobzrn
+ bc9/+wirEwlrWWVct3PH27gQFxWze69rW9smGbga1nkU9xWrMgq1l8GCLn/g==
+ARC-Authentication-Results: i=2; mail.freedesktop.org;
+ dkim=pass header.d=Nvidia.com;
+  arc=pass;
+  dmarc=pass (Used From Domain Record) header.from=nvidia.com
+ policy.dmarc=reject
+Authentication-Results: mail.freedesktop.org; dkim=pass header.d=Nvidia.com;
+ arc=pass;
+ dmarc=pass (Used From Domain Record) header.from=nvidia.com policy.dmarc=reject
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by kara.freedesktop.org (Postfix) with ESMTPS id DFD7E43F91
-	for <nouveau@lists.freedesktop.org>; Fri, 19 Dec 2025 15:27:37 +0000 (UTC)
-Received: from sea.source.kernel.org (sea.source.kernel.org [172.234.252.31])
-	by gabe.freedesktop.org (Postfix) with ESMTPS id DAC7710F02A;
-	Fri, 19 Dec 2025 15:35:10 +0000 (UTC)
-Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
-	by sea.source.kernel.org (Postfix) with ESMTP id 3A84F42B80;
-	Fri, 19 Dec 2025 15:35:10 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 3FC39C4CEF1;
-	Fri, 19 Dec 2025 15:35:02 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
-	s=k20201202; t=1766158510;
-	bh=XqVFVdT5Lvfd9WE1C2Ab+JTQaZ16Qoe9Aw4jzm+ggtQ=;
-	h=Date:Subject:Cc:To:From:References:In-Reply-To:From;
-	b=WUSPcwLH89aHug94e7Pg+8gwdqqZ5uL2uioQmOjI/sVZaQ0rVvtk4cJIk7qrSUclY
-	 liiCbCJkmNxwl1lhn9Zch2VvFeJv/hRK9MiDqRkydFA7dQ3UwjVi9Zcf5d+uG4GzhO
-	 zThGF9IhZyMgQ60lFLe8Q33e2fJpxlHCCGoGykDoj51EwXfl3vNlcAa4TykJYG7DLi
-	 ogOn1OU4jhva1xEntIYjijHFHGV+9hwvA/g/+FPKpWjvYi6OMDCuEhdALjK7zUcDUw
-	 2K3a+93dyyzCr3nYCa7MP0zdRJTrgTToTvVbO4VQVtv9ArRwmubObdjUCjmgfGGaUG
-	 DHPC826vXNtWw==
-Mime-Version: 1.0
-Content-Transfer-Encoding: quoted-printable
-Content-Type: text/plain; charset=UTF-8
-Date: Fri, 19 Dec 2025 16:35:00 +0100
-Message-Id: <DF2AXQ67412G.33JOX2CF0VFCK@kernel.org>
-Subject: Re: [PATCH 4/4] rust: drm: add GPUVM immediate mode abstraction
-To: "Alice Ryhl" <aliceryhl@google.com>
-From: "Danilo Krummrich" <dakr@kernel.org>
-References: <20251128-gpuvm-rust-v1-0-ebf66bf234e0@google.com>
- <20251128-gpuvm-rust-v1-4-ebf66bf234e0@google.com>
-In-Reply-To: <20251128-gpuvm-rust-v1-4-ebf66bf234e0@google.com>
-X-MailFrom: dakr@kernel.org
-X-Mailman-Rule-Hits: implicit-dest
+	by kara.freedesktop.org (Postfix) with ESMTPS id 2687743F91
+	for <nouveau@lists.freedesktop.org>; Fri, 19 Dec 2025 20:30:44 +0000 (UTC)
+Received: from CH1PR05CU001.outbound.protection.outlook.com
+ (mail-northcentralusazon11010060.outbound.protection.outlook.com
+ [52.101.193.60])
+	by gabe.freedesktop.org (Postfix) with ESMTPS id 72D4610E053;
+	Fri, 19 Dec 2025 20:38:17 +0000 (UTC)
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=AsuGWw9XgRunBdmEMiHEjrcd5ephnWyqqYPD6ITwXZQHfQ8HOGCiOsAR+Ps0uNHffObxjfnD9dMQQgxIR8k3pLf5EDRrMVmAKFrp6KMuQra4i40FWB3RiqyYhrfjD23wEY7OZco4r4mnJNBK0DE94C+UCYdfz39mg8bQne3IjofbnI7gdy5Cukna637Bt5EVm/XggaKCq1pufNW5Wwnrb/w84avlNsE875m8+ShESu7pviD0FKVVaIBnZ3q+y7fi2hbtipjQN8y7U/GNqV4E0VFVXkVzmdEHsx3q6M4GoZIyRVUHa+W87XcTm3dieqw+4VdrXS1uO+qaN6o6OolCaA==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=g5vpq9kAsPE8M4dr8GKMjVgztODwSuR62pZ8lOOp6LE=;
+ b=uIGTetOh7j/zX/HN4NVxP9D2yOwZxLfPHPBvY3R8o7iWIwtfFZB+CINb0GMVpDPaayohjPBELvZakJK1rxInmMaZfvfB5TtPptln6d7ETCfTy5GUVI+D7aeqoYaZcpf5/4OfANGMkt/nAfdAF5RaHmagZcvfNhmF+5bUrNmdWR0+0+B544bCGcnGIM/4oFZCYK/G5FOr8NV8JciL0yjqszwh4o4UyCuA8+dJsBuWgBUBP9PFH9YmBDkZFJOuejCwwU9F4Dvk2Viu9lHEt3XHx5W9qC2s93MxUyBsCir9YS9TmbPblz4eAkuNFJRtM9QjFIfYgXCUN9A4UEqm9eY9zg==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=nvidia.com; dmarc=pass action=none header.from=nvidia.com;
+ dkim=pass header.d=nvidia.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=Nvidia.com;
+ s=selector2;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=g5vpq9kAsPE8M4dr8GKMjVgztODwSuR62pZ8lOOp6LE=;
+ b=NHiYD59q0qf+5BqgQEf2h8eT73aP1FrVZeeDeRGl687O2po2VeGixmAmQspTDmsb15yqAfPKW9/NZS5poYmLwv5GYW6d7AhrMF5L+VWJUHPdYGx+i4AwMsW3jS9tXw4OhPzzSbqL0cwFJZVPT01vGSQrC/6u26eigqy7W3lQaFL0icSb4n9LsSeiWdWYzLFhFpm3ajxUcIPEuqVsv7SpoXA6qxDL7vJjEKu+6YW6Eo2to8rdorDPqeoD/MNNUE5vP7lGofqmU1/S2rbdz1QMGvtCMrgGQLrHXMuVWhejM5Rbg5Tmb1Wgooz1jZNiSpBYAG39ZHMw1PUk9X8kujQnSw==
+Received: from SN7PR12MB8059.namprd12.prod.outlook.com (2603:10b6:806:32b::7)
+ by CH2PR12MB4248.namprd12.prod.outlook.com (2603:10b6:610:7a::23) with
+ Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9434.6; Fri, 19 Dec
+ 2025 20:38:09 +0000
+Received: from SN7PR12MB8059.namprd12.prod.outlook.com
+ ([fe80::4ee2:654e:1fe8:4b91]) by SN7PR12MB8059.namprd12.prod.outlook.com
+ ([fe80::4ee2:654e:1fe8:4b91%2]) with mapi id 15.20.9434.009; Fri, 19 Dec 2025
+ 20:38:09 +0000
+From: Joel Fernandes <joelagnelf@nvidia.com>
+To: Maarten Lankhorst <maarten.lankhorst@linux.intel.com>,
+	Maxime Ripard <mripard@kernel.org>,
+	Thomas Zimmermann <tzimmermann@suse.de>,
+	David Airlie <airlied@gmail.com>,
+	Simona Vetter <simona@ffwll.ch>,
+	Jonathan Corbet <corbet@lwn.net>,
+	Alex Deucher <alexander.deucher@amd.com>,
+	=?UTF-8?q?Christian=20K=C3=B6nig?= <christian.koenig@amd.com>,
+	Jani Nikula <jani.nikula@linux.intel.com>,
+	Joonas Lahtinen <joonas.lahtinen@linux.intel.com>,
+	Rodrigo Vivi <rodrigo.vivi@intel.com>,
+	Tvrtko Ursulin <tursulin@ursulin.net>,
+	Huang Rui <ray.huang@amd.com>,
+	Matthew Auld <matthew.auld@intel.com>,
+	Matthew Brost <matthew.brost@intel.com>,
+	Lucas De Marchi <lucas.demarchi@intel.com>,
+	=?UTF-8?q?Thomas=20Hellstr=C3=B6m?= <thomas.hellstrom@linux.intel.com>,
+	Helge Deller <deller@gmx.de>
+Subject: [PATCH RFC v5 0/6] nova-core: Memory management initial patches
+Date: Fri, 19 Dec 2025 15:37:59 -0500
+Message-Id: <20251219203805.1246586-1-joelagnelf@nvidia.com>
+X-Mailer: git-send-email 2.34.1
+Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
+X-ClientProxiedBy: IA4P220CA0006.NAMP220.PROD.OUTLOOK.COM
+ (2603:10b6:208:558::7) To SN7PR12MB8059.namprd12.prod.outlook.com
+ (2603:10b6:806:32b::7)
+MIME-Version: 1.0
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: SN7PR12MB8059:EE_|CH2PR12MB4248:EE_
+X-MS-Office365-Filtering-Correlation-Id: 20ba80d7-1b87-4ecd-8ee7-08de3f3e8580
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: 
+	BCL:0;ARA:13230040|7416014|366016|376014|1800799024|921020;
+X-Microsoft-Antispam-Message-Info: 
+	=?us-ascii?Q?Iu8cYFQs918VyX08wfS+mLJO7zdXRKeOogFR5C0hMzQZfDm8Vj0zf7/grZjX?=
+ =?us-ascii?Q?VdT4t3hb7VWDZki58G1Eq0lV6keJBDBYmFvqOYSvj1w8ryCoZMXZEd25szK1?=
+ =?us-ascii?Q?YevSpaCXV7h8mPl/P46FnqppAHQxZDUlsECYh08LvyPCJ4FHDw1g4ITti5kD?=
+ =?us-ascii?Q?PDy0WLfFb8qhsSSUI/belbgfgxwIO5DGGfeC81rYj0qBUflH9KBkNdAqzeav?=
+ =?us-ascii?Q?sQxMqpLcuAEz/l5Ww7R57CHqC+ty95uo7Ry4/uPRJuAOlcQyiemARi88Fa4b?=
+ =?us-ascii?Q?zTMakFXiqtQp3DZrR9HVc7sXj+D5cn1gkJHpjVw7jzZ/JOlnnt3ueehv2/In?=
+ =?us-ascii?Q?zUUTW49yeH0zWm2610/II1rCqSjNwSamHl2b26CAIBdK2dwXnU2CbFER5BDK?=
+ =?us-ascii?Q?S08e0YWt5uID9lrskTkr+k/oKQBxnzc+/PXXxbKbpzZsAXVaLRqHcyDsL3OC?=
+ =?us-ascii?Q?KcNu92lED/Pm73cQjxTbUjpudm/JXLMfSOLVwPQGRY6zlEkMx8vVDtvevwfg?=
+ =?us-ascii?Q?K9CPsGLzg1/+kZId2wkcE677VwA18w89uGm9leYDvG9wmxZ9DMz7d9vdOh75?=
+ =?us-ascii?Q?zir/4YCEwuFY/DNwvo6bT7FZR9g6t86cxZGmQCQZMTUx9sbR1t0mVbyS4vUa?=
+ =?us-ascii?Q?O9vVsSl38IO4h8P29GB7Pc+hoAOumgqlAxtmfndt2cQt/k86z52KXKNKfHFR?=
+ =?us-ascii?Q?L+BCNREuD3qhFDkLBte+la/he07wJfMzqUYnrktOjdQOiOROknUUAW4Sxoo/?=
+ =?us-ascii?Q?frS0R2EB9ZxTAmDHEraxZ/EFKSOACaxGQ/1A9iSab6vTP5adjSN/bVutCl0s?=
+ =?us-ascii?Q?K9Gbvm+Cr9A3gZx9hsQcX8IcX3fIlX/5ZYuGJiq0+juSWST3sHZFzBmFX4aU?=
+ =?us-ascii?Q?TTijvKIk76yowubHdCXgEAmHTzYo/CMKvpMNl9k8YRLEGSVNEzZF88Q7/P7i?=
+ =?us-ascii?Q?PyuWRGq83r3gQkiVu7oAFhDiOWuSS/rMgybeNiTnlHFFr0GK6DPhTRyJMaZO?=
+ =?us-ascii?Q?wXU3JTug56Vm4Btks0I86cnzaxN2d8hEL60grIPvsp6hUwU5j0NmHKhiUZDp?=
+ =?us-ascii?Q?RZjSnbNGReG7Lh6a6JIoGhqjN+iSKY3+n2hWwdr0k1cJdoreY3+H2aPmmz8R?=
+ =?us-ascii?Q?0Bac5YU8PPcGHsl30/Mi9wC6Pk9xDT23+zz8N47UPxfu1EycS2jlxlbrt0yw?=
+ =?us-ascii?Q?0vyAi/+4PIZoWhlVLuobJijBrZpPzAaD4YYLh7xmWOHC2Drx4Rmlqxwu6xb3?=
+ =?us-ascii?Q?8aH2hX8BFfTV63j/MgnRcAEuv+S57jn2XCf99IpP7zpupi+Boo2KzF7TeoA3?=
+ =?us-ascii?Q?GZ2he4T3y8hIN7843KtwM4CKgSXa7Ytn/t38FkW+wruhMOfr+2JBM9+63zdm?=
+ =?us-ascii?Q?RipjAs56xgxHpKms2RA+UZg8mdLpqm04qKmaec2gveHg3HkiPBAsgyiCwLM4?=
+ =?us-ascii?Q?/ShKKfL3/LEbMcKiFzuaamvTkiYTWHa6XCto3G8Nl0Vg8qkuys9SrztYCNHo?=
+ =?us-ascii?Q?+vV+bGg+AbRZ0FONHLiHpk42QzqW6uve8qPJ?=
+X-Forefront-Antispam-Report: 
+	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:SN7PR12MB8059.namprd12.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230040)(7416014)(366016)(376014)(1800799024)(921020);DIR:OUT;SFP:1101;
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0: 
+	=?us-ascii?Q?TvTW6UlduMUJndQTMtpAxhGASHJRzxCJmREGfi0KIMetrjlvjNfyGCWdH5UV?=
+ =?us-ascii?Q?dpGVz8HSnnsAyI502/iitmuSPhYD8435QzTyClUTcPebfPu0WsdEbrKAofGq?=
+ =?us-ascii?Q?pDpu1CAl8lHJhtLvb6whlpoP60K/dSJBTv8vzQO1FzBR0QB+tFE4wO2FzDhT?=
+ =?us-ascii?Q?gzjUaCYtkDbAAeFTf7oONTtuM3Rvbd4kZdpLpTw5lfI5YmNnn+3a1duwLu1o?=
+ =?us-ascii?Q?iGrKmUFUq1f3bBTfqUPW8CquUzeVm2AK0Qta25ZL4SPthDMHNYKn+zm+hAKX?=
+ =?us-ascii?Q?cWcNBBuMED2cHeS7ZBV+SoDF4GB9iK0WBpZmxlfslmZYic3EFIEaXhA2wPPi?=
+ =?us-ascii?Q?gvx5geEr74tva1ASLhA6HdG3LSAuxwn5ny/Z8/qofyiyaB3cHW4UuJ7kcRZD?=
+ =?us-ascii?Q?eUsL+gpG6taYNTyqhMfdXVwGsjWM0QLoPmH/amwxaVPFKldO7z0+EW3Z+vos?=
+ =?us-ascii?Q?slka28HONSw41vkHaRZvyOnxXnS1dW2aw8Weix75ohaClmrBlG8sEaM+OSf0?=
+ =?us-ascii?Q?HX3fTb7YmsXb2a5QzG88bHvSfdJ63IXyXzlNDBJcD7BkzexC83pW4tMcXWAk?=
+ =?us-ascii?Q?Jg9KxMNFOYcYxXSTT1CtWtN4iI5xZoCNVSd3hRltYC1Y7eCb9+M/Bxx5qUF4?=
+ =?us-ascii?Q?LTKE50SvKHTpB0hmhrbfaPlKIhSA+/HPfFwDWF2x3n4aYvSmFUCyVw6+VHnA?=
+ =?us-ascii?Q?MJIl+9uI60FUUboOGfg2IMMXPMu1975jBwzVivASJEckmSqqgCYFpFab9Erf?=
+ =?us-ascii?Q?Gl6ILni66IrRHlJGEQbLebU8GCkkVNItfTG8kV/FNrbdwqwZyLLrxmKZMbvk?=
+ =?us-ascii?Q?hbd+XD0j+J/YkTzc+3g0VCVivur5Ep3m8LBbQB5gCYQcUEUXZOLiV1ZO7BtL?=
+ =?us-ascii?Q?qBYMBeMUIRPTD1THbVoABPTCVJHLoZ1g8pY23baho4BJT3pQksJf1NXG67+Q?=
+ =?us-ascii?Q?Jhn5TWoIiLIEa6de0brkMYbuLsIjX67k2sri9nx68aktvo1qlnF37qB81KOD?=
+ =?us-ascii?Q?pseaWP78w7oon0CjlWGrWPz6padSSgfiLeg+K8veptHj4cOmj5FFnFFSiULr?=
+ =?us-ascii?Q?3He/4GgOa+dtdjrzN+XR2cGoG63spvTDC816ix9eHHKh5BJC+KngRjxim8Sa?=
+ =?us-ascii?Q?+kteduQ+qNneIMEyPDRfAexnfrEqccwisGUt9nDT5E61fzs73gbRaRvk7Iaf?=
+ =?us-ascii?Q?Beg1kLnR6WIVCOmlB9y5RMzUnvup+QQpxBi0Ug9MCeC/SZBHTtGyutCwqZJ5?=
+ =?us-ascii?Q?MfHvSnCMBXcmNbFaQ2T6+E5NhXFTAt7tnQDqGOhgHSWDgX1e42N1759MqCbN?=
+ =?us-ascii?Q?KJZEVNwZJfC90fcgCDFOxG9QmzMmeIi+Ciy1K7+Y3hxXDPd/0c1vc1wLw/2R?=
+ =?us-ascii?Q?nIOYnIqSzRbuC/3Mv1chVrOaAApGCPUTxG0nJoF2fkHcW1TsYNnQ2Zrcu+8O?=
+ =?us-ascii?Q?i7xgWsSAs32zQvVuVmpe4tKSS1WyVwhGfPShcNAhGKVoNYOGF1fpFaK3sGyi?=
+ =?us-ascii?Q?S/NfFen5lhThGtPeRjQJTdFlqwZXuxPEcO89mdMTCNLMHyv7mJNpCtRoIAwE?=
+ =?us-ascii?Q?91HwBZbHeKoD26gqHa1IXeS/U/TibVcB2v7qlG6ADZpaRA4C8kBoyXWkM5uG?=
+ =?us-ascii?Q?ZSh1KfkDZUBzH9GLmqAODK2CoV6oH3me2HiD7mvdsonureVG69EZeTVdiO16?=
+ =?us-ascii?Q?k5Jl5E8E9qSHyAPN1xzMaYzA/fVjc+6uNmtdD929skjAuJ8CS2kypD5K1tqd?=
+ =?us-ascii?Q?O4lOvIGG5g=3D=3D?=
+X-OriginatorOrg: Nvidia.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: 
+ 20ba80d7-1b87-4ecd-8ee7-08de3f3e8580
+X-MS-Exchange-CrossTenant-AuthSource: SN7PR12MB8059.namprd12.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 19 Dec 2025 20:38:09.5085
+ (UTC)
+X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
+X-MS-Exchange-CrossTenant-Id: 43083d15-7273-40c1-b7db-39efd9ccc17a
+X-MS-Exchange-CrossTenant-MailboxType: HOSTED
+X-MS-Exchange-CrossTenant-UserPrincipalName: 
+ wMzFItwkBH5Piz2An0rQR1m/qV0U21KA12s1FddNnY177OOGwARcmuMPavXg2vMfzsPJaJMZyryqB8KTDhhMUw==
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: CH2PR12MB4248
+Message-ID-Hash: OTRIUBPQ5OJDA277TDXVLH5MLSRL7D5G
+X-Message-ID-Hash: OTRIUBPQ5OJDA277TDXVLH5MLSRL7D5G
+X-MailFrom: joelagnelf@nvidia.com
 X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency;
  loop; banned-address; member-moderation; nonmember-moderation; administrivia;
- max-recipients; max-size; news-moderation; no-subject; digests;
- suspicious-header
-Message-ID-Hash: LTLSYKJFD72PBG7OTY2HPEJ6ZBXHJIRW
-X-Message-ID-Hash: LTLSYKJFD72PBG7OTY2HPEJ6ZBXHJIRW
-X-Mailman-Approved-At: Fri, 19 Dec 2025 15:52:12 +0000
-CC: Daniel Almeida <daniel.almeida@collabora.com>,
- Matthew Brost <matthew.brost@intel.com>,
- =?utf-8?q?Thomas_Hellstr=C3=B6m?= <thomas.hellstrom@linux.intel.com>,
- Maarten Lankhorst <maarten.lankhorst@linux.intel.com>,
- Maxime Ripard <mripard@kernel.org>, Simona Vetter <simona@ffwll.ch>,
- Boris Brezillon <boris.brezillon@collabora.com>,
- Steven Price <steven.price@arm.com>, Liviu Dudau <liviu.dudau@arm.com>,
- Miguel Ojeda <ojeda@kernel.org>, Boqun Feng <boqun.feng@gmail.com>,
- Gary Guo <gary@garyguo.net>,
- =?utf-8?q?Bj=C3=B6rn_Roy_Baron?= <bjorn3_gh@protonmail.com>,
+ implicit-dest; max-recipients; max-size; news-moderation; no-subject;
+ digests; suspicious-header
+CC: Danilo Krummrich <dakr@kernel.org>, Alice Ryhl <aliceryhl@google.com>,
+ Miguel Ojeda <ojeda@kernel.org>, Alex Gaynor <alex.gaynor@gmail.com>,
+ Boqun Feng <boqun.feng@gmail.com>, Gary Guo <gary@garyguo.net>,
+ =?UTF-8?q?Bj=C3=B6rn=20Roy=20Baron?= <bjorn3_gh@protonmail.com>,
  Benno Lossin <lossin@kernel.org>, Andreas Hindborg <a.hindborg@kernel.org>,
- Trevor Gross <tmgross@umich.edu>, Frank Binns <frank.binns@imgtec.com>,
- Matt Coster <matt.coster@imgtec.com>,
- Rob Clark <robin.clark@oss.qualcomm.com>,
- Dmitry Baryshkov <lumag@kernel.org>, Abhinav Kumar <abhinav.kumar@linux.dev>,
- Jessica Zhang <jessica.zhang@oss.qualcomm.com>, Sean Paul <sean@poorly.run>,
- Marijn Suijten <marijn.suijten@somainline.org>,
- Lucas De Marchi <lucas.demarchi@intel.com>,
- Rodrigo Vivi <rodrigo.vivi@intel.com>,
- Sumit Semwal <sumit.semwal@linaro.org>,
- =?utf-8?q?Christian_K=C3=B6nig?= <christian.koenig@amd.com>,
- dri-devel@lists.freedesktop.org, linux-kernel@vger.kernel.org,
- rust-for-linux@vger.kernel.org, linux-arm-msm@vger.kernel.org,
- freedreno@lists.freedesktop.org, nouveau@lists.freedesktop.org,
- intel-xe@lists.freedesktop.org, linux-media@vger.kernel.org,
- linaro-mm-sig@lists.linaro.org, Asahi Lina <lina+kernel@asahilina.net>
+ Trevor Gross <tmgross@umich.edu>, Alistair Popple <apopple@nvidia.com>,
+ Alexandre Courbot <acourbot@nvidia.com>, Andrea Righi <arighi@nvidia.com>,
+ Philipp Stanner <phasta@kernel.org>, Elle Rhumsaa <elle@weathered-steel.dev>,
+ Daniel Almeida <daniel.almeida@collabora.com>, joel@joelfernandes.org,
+ nouveau@lists.freedesktop.org, dri-devel@lists.freedesktop.org,
+ rust-for-linux@vger.kernel.org, linux-kernel@vger.kernel.org,
+ linux-doc@vger.kernel.org, amd-gfx@lists.freedesktop.org,
+ intel-gfx@lists.freedesktop.org, intel-xe@lists.freedesktop.org,
+ linux-fbdev@vger.kernel.org, Joel Fernandes <joelagnelf@nvidia.com>
 X-Mailman-Version: 3.3.8
 Precedence: list
 List-Id: Nouveau development list <nouveau.lists.freedesktop.org>
 Archived-At: 
- <https://lists.freedesktop.org/hyperkitty/list/nouveau@lists.freedesktop.org/message/LTLSYKJFD72PBG7OTY2HPEJ6ZBXHJIRW/>
+ <https://lists.freedesktop.org/hyperkitty/list/nouveau@lists.freedesktop.org/message/OTRIUBPQ5OJDA277TDXVLH5MLSRL7D5G/>
 Archived-At: 
- <https://lore.freedesktop.org/DF2AXQ67412G.33JOX2CF0VFCK@kernel.org/>
+ <https://lore.freedesktop.org/20251219203805.1246586-1-joelagnelf@nvidia.com/>
 List-Archive: 
  <https://lists.freedesktop.org/hyperkitty/list/nouveau@lists.freedesktop.org/>
 List-Archive: <https://lore.freedesktop.org/nouveau>
@@ -126,875 +221,119 @@ List-Post: <mailto:nouveau@lists.freedesktop.org>
 List-Subscribe: <mailto:nouveau-join@lists.freedesktop.org>
 List-Unsubscribe: <mailto:nouveau-leave@lists.freedesktop.org>
 
-On Fri Nov 28, 2025 at 3:14 PM CET, Alice Ryhl wrote:
-> diff --git a/rust/helpers/drm_gpuvm.c b/rust/helpers/drm_gpuvm.c
-> new file mode 100644
-> index 0000000000000000000000000000000000000000..18b7dbd2e32c3162455b344e7=
-2ec2940c632cc6b
-> --- /dev/null
-> +++ b/rust/helpers/drm_gpuvm.c
-> @@ -0,0 +1,43 @@
-> +// SPDX-License-Identifier: GPL-2.0 or MIT
-> +
-> +#ifdef CONFIG_DRM_GPUVM
-> +
-> +#include <drm/drm_gpuvm.h>
-> +
-> +struct drm_gpuvm *rust_helper_drm_gpuvm_get(struct drm_gpuvm *obj)
-> +{
-> +     return drm_gpuvm_get(obj);
-> +}
-> +
-> +void rust_helper_drm_gpuva_init_from_op(struct drm_gpuva *va, struct drm=
-_gpuva_op_map *op)
-> +{
-> +     drm_gpuva_init_from_op(va, op);
-> +}
-> +
-> +struct drm_gpuvm_bo *rust_helper_drm_gpuvm_bo_get(struct drm_gpuvm_bo *v=
-m_bo)
-> +{
-> +     return drm_gpuvm_bo_get(vm_bo);
-> +}
-> +
-> +void rust_helper_drm_gpuvm_exec_unlock(struct drm_gpuvm_exec *vm_exec)
-> +{
-> +     return drm_gpuvm_exec_unlock(vm_exec);
-> +}
-> +
-> +bool rust_helper_drm_gpuvm_is_extobj(struct drm_gpuvm *gpuvm,
-> +                                  struct drm_gem_object *obj)
-> +{
-> +     return drm_gpuvm_is_extobj(gpuvm, obj);
-> +}
-> +
-> +int rust_helper_dma_resv_lock(struct dma_resv *obj, struct ww_acquire_ct=
-x *ctx)
-> +{
-> +     return dma_resv_lock(obj, ctx);
-> +}
-> +
-> +void rust_helper_dma_resv_unlock(struct dma_resv *obj)
-> +{
-> +     dma_resv_unlock(obj);
-> +}
+This series is based on the latest drm-rust-next tree and provides initial memory management infrastructure for the nova-core
+GPU driver. It combines and builds upon several previous series and provides a foundation for nova GPU memory management.
 
-The dma_resv_*() helpers should go into their own file and should not depen=
-d on
-CONFIG_DRM_GPUVM.
+The RFC series includes:
+- A Rust module (CList) to interface with C circular linked lists, required
+  for iterating over buddy allocator block lists.
+- Movement of the DRM buddy allocator up to drivers/gpu/ level, renamed to GPU
+  buddy, making it available for GPU drivers with non-DRM use cases (e.g., vGPU).
+- Rust bindings for the GPU buddy allocator.
+- PRAMIN aperture support for direct VRAM access before page tables are initialized.
+- Documentation for the PRAMIN mechanism.
+- VRAM read/write self-tests for PRAMIN (disabled by default via Kconfig).
 
-> +
-> +#endif // CONFIG_DRM_GPUVM
-> diff --git a/rust/helpers/helpers.c b/rust/helpers/helpers.c
-> index 551da6c9b5064c324d6f62bafcec672c6c6f5bee..91f45155eb9c2c4e92b56ee1a=
-bf7d45188873f3c 100644
-> --- a/rust/helpers/helpers.c
-> +++ b/rust/helpers/helpers.c
-> @@ -26,6 +26,7 @@
->  #include "device.c"
->  #include "dma.c"
->  #include "drm.c"
-> +#include "drm_gpuvm.c"
->  #include "err.c"
->  #include "irq.c"
->  #include "fs.c"
-> diff --git a/rust/kernel/drm/gpuvm/mod.rs b/rust/kernel/drm/gpuvm/mod.rs
-> new file mode 100644
-> index 0000000000000000000000000000000000000000..9834dbb938a3622e46048e9b8=
-e06bc6bf03aa0d2
-> --- /dev/null
-> +++ b/rust/kernel/drm/gpuvm/mod.rs
-> @@ -0,0 +1,394 @@
-> +// SPDX-License-Identifier: GPL-2.0 OR MIT
-> +
-> +//! DRM GPUVM in immediate mode
-> +//!
-> +//! Rust abstractions for using GPUVM in immediate mode. This is when th=
-e GPUVM state is updated
-> +//! during `run_job()`, i.e., in the DMA fence signalling critical path,=
- to ensure that the GPUVM
-> +//! and the GPU's virtual address space has the same state at all times.
+The series combines various previous series since all the patches are related.
+Moving forward I will only send one coherent series with the mm patches.
 
-Just a note: once we got the modes of operation section in place on the C s=
-ide,
-we should refer to it from here.
+Next steps:
+Page table types and page table mapping support will be added on top of this
+foundation extracted from the original PRAMIN series. I need to make several
+changes there such as to support multiple page table formats, as well as
+updating it to use the new PRAMIN and buddy APIs.
 
-> +//!
-> +//! C header: [`include/drm/drm_gpuvm.h`](srctree/include/drm/drm_gpuvm.=
-h)
-> +
-> +use kernel::{
-> +    alloc::{AllocError, Flags as AllocFlags},
-> +    bindings, drm,
-> +    drm::gem::IntoGEMObject,
-> +    error::to_result,
-> +    prelude::*,
-> +    sync::aref::{ARef, AlwaysRefCounted},
-> +    types::Opaque,
-> +};
-> +
-> +use core::{
-> +    cell::UnsafeCell,
-> +    marker::PhantomData,
-> +    mem::{ManuallyDrop, MaybeUninit},
-> +    ops::{Deref, DerefMut, Range},
-> +    ptr::{self, NonNull},
-> +};
+Changes from v4 to v5:
+- Added PRAMIN aperture support for bootstrapping memory management.
+- Added documentation for the PRAMIN aperture mechanism.
+- Added PRAMIN self-tests for VRAM read/write verification (disabled by default).
+- Improved buddy allocator bindings a bit (fewer lines of code).
 
-Kernel vertical style.
+The patches on based on drm-rust-next commit:
+97cf6bc0abd3 ("rust: drm: use `pin_init::zeroed()` for file operations initialization")
 
-> +mod sm_ops;
-> +pub use self::sm_ops::*;
-> +
-> +mod vm_bo;
-> +pub use self::vm_bo::*;
-> +
-> +mod va;
-> +pub use self::va::*;
-> +
-> +/// A DRM GPU VA manager.
-> +///
-> +/// This object is refcounted, but the "core" is only accessible using a=
- special unique handle. The
-> +/// core consists of the `core` field and the GPUVM's interval tree.
+Previous series that are combined:
+- v4 (clist + buddy): https://lore.kernel.org/all/20251204215129.2357292-1-joelagnelf@nvidia.com/
+- v3 (clist only): https://lore.kernel.org/all/20251129213056.4021375-1-joelagnelf@nvidia.com/
+- v2 (clist only): https://lore.kernel.org/all/20251111171315.2196103-4-joelagnelf@nvidia.com/
+- clist RFC (original with buddy): https://lore.kernel.org/all/20251030190613.1224287-1-joelagnelf@nvidia.com/
+- DRM buddy move: https://lore.kernel.org/all/20251124234432.1988476-1-joelagnelf@nvidia.com/
+- PRAMIN series: https://lore.kernel.org/all/20251020185539.49986-1-joelagnelf@nvidia.com/
 
-I think this is a bit confusing, the 'core' field seems to be the drivers
-private data that is protected with the same lock as the GPUVM's interval t=
-ree,
-so I'd just call it 'data', or 'protected_data', etc.
+Joel Fernandes (6):
+  rust: clist: Add support to interface with C linked lists
+  gpu: Move DRM buddy allocator one level up
+  rust: gpu: Add GPU buddy allocator bindings
+  nova-core: mm: Add support to use PRAMIN windows to write to VRAM
+  docs: gpu: nova-core: Document the PRAMIN aperture mechanism
+  nova-core: Add PRAMIN aperture self-tests
 
-Establishing the term 'core' as a state to refer to the private data and th=
-e
-interval tree being accessible makes sense to me.
+ Documentation/gpu/drm-mm.rst                  |   10 +-
+ Documentation/gpu/nova/core/pramin.rst        |  125 ++
+ Documentation/gpu/nova/index.rst              |    1 +
+ MAINTAINERS                                   |    7 +
+ drivers/gpu/Kconfig                           |   13 +
+ drivers/gpu/Makefile                          |    2 +
+ drivers/gpu/buddy.c                           | 1310 +++++++++++++++++
+ drivers/gpu/drm/Kconfig                       |    1 +
+ drivers/gpu/drm/Kconfig.debug                 |    4 +-
+ drivers/gpu/drm/amd/amdgpu/Kconfig            |    1 +
+ drivers/gpu/drm/amd/amdgpu/amdgpu_ras.c       |    2 +-
+ .../gpu/drm/amd/amdgpu/amdgpu_res_cursor.h    |   12 +-
+ drivers/gpu/drm/amd/amdgpu/amdgpu_vram_mgr.c  |   80 +-
+ drivers/gpu/drm/amd/amdgpu/amdgpu_vram_mgr.h  |   20 +-
+ drivers/gpu/drm/drm_buddy.c                   | 1287 +---------------
+ drivers/gpu/drm/i915/Kconfig                  |    1 +
+ drivers/gpu/drm/i915/i915_scatterlist.c       |   10 +-
+ drivers/gpu/drm/i915/i915_ttm_buddy_manager.c |   55 +-
+ drivers/gpu/drm/i915/i915_ttm_buddy_manager.h |    6 +-
+ .../drm/i915/selftests/intel_memory_region.c  |   20 +-
+ drivers/gpu/drm/tests/Makefile                |    1 -
+ .../gpu/drm/ttm/tests/ttm_bo_validate_test.c  |    5 +-
+ drivers/gpu/drm/ttm/tests/ttm_mock_manager.c  |   18 +-
+ drivers/gpu/drm/ttm/tests/ttm_mock_manager.h  |    4 +-
+ drivers/gpu/drm/xe/Kconfig                    |    1 +
+ drivers/gpu/drm/xe/xe_res_cursor.h            |   34 +-
+ drivers/gpu/drm/xe/xe_svm.c                   |   12 +-
+ drivers/gpu/drm/xe/xe_ttm_vram_mgr.c          |   73 +-
+ drivers/gpu/drm/xe/xe_ttm_vram_mgr_types.h    |    4 +-
+ drivers/gpu/nova-core/Kconfig                 |   11 +
+ drivers/gpu/nova-core/gsp/boot.rs             |    4 +
+ drivers/gpu/nova-core/mm/mod.rs               |    5 +
+ drivers/gpu/nova-core/mm/pramin.rs            |  298 ++++
+ drivers/gpu/nova-core/nova_core.rs            |    1 +
+ drivers/gpu/nova-core/regs.rs                 |    5 +
+ drivers/gpu/tests/Makefile                    |    3 +
+ .../gpu_buddy_test.c}                         |  390 ++---
+ drivers/gpu/tests/gpu_random.c                |   48 +
+ drivers/gpu/tests/gpu_random.h                |   28 +
+ drivers/video/Kconfig                         |    2 +
+ include/drm/drm_buddy.h                       |  163 +-
+ include/linux/gpu_buddy.h                     |  177 +++
+ rust/bindings/bindings_helper.h               |   11 +
+ rust/helpers/gpu.c                            |   23 +
+ rust/helpers/helpers.c                        |    2 +
+ rust/helpers/list.c                           |   12 +
+ rust/kernel/clist.rs                          |  357 +++++
+ rust/kernel/gpu/buddy.rs                      |  518 +++++++
+ rust/kernel/gpu/mod.rs                        |    5 +
+ rust/kernel/lib.rs                            |    3 +
+ 50 files changed, 3385 insertions(+), 1800 deletions(-)
+ create mode 100644 Documentation/gpu/nova/core/pramin.rst
+ create mode 100644 drivers/gpu/Kconfig
+ create mode 100644 drivers/gpu/buddy.c
+ create mode 100644 drivers/gpu/nova-core/mm/mod.rs
+ create mode 100644 drivers/gpu/nova-core/mm/pramin.rs
+ create mode 100644 drivers/gpu/tests/Makefile
+ rename drivers/gpu/{drm/tests/drm_buddy_test.c => tests/gpu_buddy_test.c} (68%)
+ create mode 100644 drivers/gpu/tests/gpu_random.c
+ create mode 100644 drivers/gpu/tests/gpu_random.h
+ create mode 100644 include/linux/gpu_buddy.h
+ create mode 100644 rust/helpers/gpu.c
+ create mode 100644 rust/helpers/list.c
+ create mode 100644 rust/kernel/clist.rs
+ create mode 100644 rust/kernel/gpu/buddy.rs
+ create mode 100644 rust/kernel/gpu/mod.rs
+-- 
+2.34.1
 
-> +#[repr(C)]
-> +#[pin_data]
-> +pub struct GpuVm<T: DriverGpuVm> {
-> +    #[pin]
-> +    vm: Opaque<bindings::drm_gpuvm>,
-> +    /// Accessed only through the [`GpuVmCore`] reference.
-> +    core: UnsafeCell<T>,
-> +    /// Shared data not protected by any lock.
-> +    #[pin]
-> +    shared_data: T::SharedData,
-
-I think it deserves some documentation to have two separate driver private =
-data
-fields.
-
-> +}
-> +
-> +// SAFETY: dox
-> +unsafe impl<T: DriverGpuVm> AlwaysRefCounted for GpuVm<T> {
-> +    fn inc_ref(&self) {
-> +        // SAFETY: dox
-> +        unsafe { bindings::drm_gpuvm_get(self.vm.get()) };
-> +    }
-> +
-> +    unsafe fn dec_ref(obj: NonNull<Self>) {
-> +        // SAFETY: dox
-> +        unsafe { bindings::drm_gpuvm_put((*obj.as_ptr()).vm.get()) };
-> +    }
-> +}
-> +
-> +impl<T: DriverGpuVm> GpuVm<T> {
-> +    const fn vtable() -> &'static bindings::drm_gpuvm_ops {
-> +        &bindings::drm_gpuvm_ops {
-> +            vm_free: Some(Self::vm_free),
-> +            op_alloc: None,
-> +            op_free: None,
-> +            vm_bo_alloc: GpuVmBo::<T>::ALLOC_FN,
-> +            vm_bo_free: GpuVmBo::<T>::FREE_FN,
-> +            vm_bo_validate: None,
-> +            sm_step_map: Some(Self::sm_step_map),
-> +            sm_step_unmap: Some(Self::sm_step_unmap),
-> +            sm_step_remap: Some(Self::sm_step_remap),
-> +        }
-> +    }
-> +
-> +    /// Creates a GPUVM instance.
-> +    #[expect(clippy::new_ret_no_self)]
-> +    pub fn new<E>(
-> +        name: &'static CStr,
-> +        dev: &drm::Device<T::Driver>,
-> +        r_obj: &T::Object,
-> +        range: Range<u64>,
-> +        reserve_range: Range<u64>,
-> +        core: T,
-> +        shared: impl PinInit<T::SharedData, E>,
-> +    ) -> Result<GpuVmCore<T>, E>
-> +    where
-> +        E: From<AllocError>,
-> +        E: From<core::convert::Infallible>,
-> +    {
-> +        let obj =3D KBox::try_pin_init::<E>(
-> +            try_pin_init!(Self {
-> +                core <- UnsafeCell::new(core),
-> +                shared_data <- shared,
-> +                vm <- Opaque::ffi_init(|vm| {
-> +                    // SAFETY: These arguments are valid. `vm` is valid =
-until refcount drops to
-> +                    // zero.
-> +                    unsafe {
-> +                        bindings::drm_gpuvm_init(
-> +                            vm,
-> +                            name.as_char_ptr(),
-> +                            bindings::drm_gpuvm_flags_DRM_GPUVM_IMMEDIAT=
-E_MODE
-> +                                | bindings::drm_gpuvm_flags_DRM_GPUVM_RE=
-SV_PROTECTED,
-> +                            dev.as_raw(),
-> +                            r_obj.as_raw(),
-> +                            range.start,
-> +                            range.end - range.start,
-> +                            reserve_range.start,
-> +                            reserve_range.end - reserve_range.start,
-> +                            const { Self::vtable() },
-> +                        )
-> +                    }
-> +                }),
-> +            }? E),
-> +            GFP_KERNEL,
-> +        )?;
-> +        // SAFETY: This transfers the initial refcount to the ARef.
-> +        Ok(GpuVmCore(unsafe {
-> +            ARef::from_raw(NonNull::new_unchecked(KBox::into_raw(
-> +                Pin::into_inner_unchecked(obj),
-> +            )))
-> +        }))
-
-There are some other intentionally incomplete safety comments that just say
-"dox" as mentioned in the commit message. Given that this has a comment, ju=
-st a
-quick reminder to rework this one as well.
-
-> +    }
-> +
-> +    /// Access this [`GpuVm`] from a raw pointer.
-> +    ///
-> +    /// # Safety
-> +    ///
-> +    /// For the duration of `'a`, the pointer must reference a valid [`G=
-puVm<T>`].
-
-The pointer must reference a valid struct drm_gpuvm that is embedded withti=
-n a
-GpuVm<T>.
-
-> +    #[inline]
-> +    pub unsafe fn from_raw<'a>(ptr: *mut bindings::drm_gpuvm) -> &'a Sel=
-f {
-> +        // SAFETY: `drm_gpuvm` is first field and `repr(C)`.
-
-Reminder: This needs some expansion.
-
-> +        unsafe { &*ptr.cast() }
-> +    }
-> +
-> +    /// Get a raw pointer.
-
-I assume you intend to expand some of the comments a bit, here I'd say some=
-thing
-like "Returns a raw pointer to the embedded `struct drm_gpuvm`.
-
-> +    #[inline]
-> +    pub fn as_raw(&self) -> *mut bindings::drm_gpuvm {
-> +        self.vm.get()
-> +    }
-> +
-> +    /// Access the shared data.
-> +    #[inline]
-> +    pub fn shared(&self) -> &T::SharedData {
-> +        &self.shared_data
-> +    }
-> +
-> +    /// The start of the VA space.
-> +    #[inline]
-> +    pub fn va_start(&self) -> u64 {
-> +        // SAFETY: Safe by the type invariant of `GpuVm<T>`.
-> +        unsafe { (*self.as_raw()).mm_start }
-> +    }
-> +
-> +    /// The length of the address space
-
-Missing period. I'd also say "The length of the GPU's virtual address space=
-.".
-
-> +    #[inline]
-> +    pub fn va_length(&self) -> u64 {
-> +        // SAFETY: Safe by the type invariant of `GpuVm<T>`.
-> +        unsafe { (*self.as_raw()).mm_range }
-> +    }
-> +
-> +    /// Returns the range of the GPU virtual address space.
-> +    #[inline]
-> +    pub fn va_range(&self) -> Range<u64> {
-> +        let start =3D self.va_start();
-> +        let end =3D start + self.va_length();
-> +        Range { start, end }
-> +    }
-> +
-> +    /// Returns a [`GpuVmBoObtain`] for the provided GEM object.
-> +    #[inline]
-> +    pub fn obtain(
-> +        &self,
-> +        obj: &T::Object,
-> +        data: impl PinInit<T::VmBoData>,
-> +    ) -> Result<GpuVmBoObtain<T>, AllocError> {
-> +        Ok(GpuVmBoAlloc::new(self, obj, data)?.obtain())
-> +    }
-
-Does this method make sense? We usually preallocate a VM_BO, then enter the
-fence signalling critical path and then obtain the VM_BO.
-
-> +
-> +    /// Prepare this GPUVM.
-> +    #[inline]
-> +    pub fn prepare(&self, num_fences: u32) -> impl PinInit<GpuVmExec<'_,=
- T>, Error> {
-> +        try_pin_init!(GpuVmExec {
-> +            exec <- Opaque::try_ffi_init(|exec: *mut bindings::drm_gpuvm=
-_exec| {
-> +                // SAFETY: exec is valid but unused memory, so we can wr=
-ite.
-> +                unsafe {
-> +                    ptr::write_bytes(exec, 0u8, 1usize);
-> +                    ptr::write(&raw mut (*exec).vm, self.as_raw());
-> +                    ptr::write(&raw mut (*exec).flags, bindings::DRM_EXE=
-C_INTERRUPTIBLE_WAIT);
-> +                    ptr::write(&raw mut (*exec).num_fences, num_fences);
-> +                }
-> +
-> +                // SAFETY: We can prepare the GPUVM.
-> +                to_result(unsafe { bindings::drm_gpuvm_exec_lock(exec) }=
-)
-> +            }),
-> +            _gpuvm: PhantomData,
-> +        })
-> +    }
-> +
-> +    /// Clean up buffer objects that are no longer used.
-> +    #[inline]
-> +    pub fn deferred_cleanup(&self) {
-> +        // SAFETY: Always safe to perform deferred cleanup.
-> +        unsafe { bindings::drm_gpuvm_bo_deferred_cleanup(self.as_raw()) =
-}
-> +    }
-> +
-> +    /// Check if this GEM object is an external object for this GPUVM.
-> +    #[inline]
-> +    pub fn is_extobj(&self, obj: &T::Object) -> bool {
-> +        // SAFETY: We may call this with any GPUVM and GEM object.
-> +        unsafe { bindings::drm_gpuvm_is_extobj(self.as_raw(), obj.as_raw=
-()) }
-> +    }
-> +
-> +    /// Free this GPUVM.
-> +    ///
-> +    /// # Safety
-> +    ///
-> +    /// Called when refcount hits zero.
-> +    unsafe extern "C" fn vm_free(me: *mut bindings::drm_gpuvm) {
-> +        // SAFETY: GPUVM was allocated with KBox and can now be freed.
-> +        drop(unsafe { KBox::<Self>::from_raw(me.cast()) })
-> +    }
-> +}
-> +
-> +/// The manager for a GPUVM.
-> +pub trait DriverGpuVm: Sized {
-> +    /// Parent `Driver` for this object.
-> +    type Driver: drm::Driver;
-> +
-> +    /// The kind of GEM object stored in this GPUVM.
-> +    type Object: IntoGEMObject;
-> +
-> +    /// Data stored in the [`GpuVm`] that is fully shared.
-> +    type SharedData;
-> +
-> +    /// Data stored with each `struct drm_gpuvm_bo`.
-> +    type VmBoData;
-> +
-> +    /// Data stored with each `struct drm_gpuva`.
-> +    type VaData;
-> +
-> +    /// The private data passed to callbacks.
-> +    type SmContext;
-> +
-> +    /// Indicates that a new mapping should be created.
-> +    fn sm_step_map<'op>(
-> +        &mut self,
-> +        op: OpMap<'op, Self>,
-> +        context: &mut Self::SmContext,
-> +    ) -> Result<OpMapped<'op, Self>, Error>;
-> +
-> +    /// Indicates that an existing mapping should be removed.
-> +    fn sm_step_unmap<'op>(
-> +        &mut self,
-> +        op: OpUnmap<'op, Self>,
-> +        context: &mut Self::SmContext,
-> +    ) -> Result<OpUnmapped<'op, Self>, Error>;
-> +
-> +    /// Indicates that an existing mapping should be split up.
-> +    fn sm_step_remap<'op>(
-> +        &mut self,
-> +        op: OpRemap<'op, Self>,
-> +        context: &mut Self::SmContext,
-> +    ) -> Result<OpRemapped<'op, Self>, Error>;
-> +}
-> +
-> +/// The core of the DRM GPU VA manager.
-> +///
-> +/// This object is the reference to the GPUVM that
-
-I think you forgot to complete the sentence.
-
-> +///
-> +/// # Invariants
-> +///
-> +/// This object owns the core.
-> +pub struct GpuVmCore<T: DriverGpuVm>(ARef<GpuVm<T>>);
-> +
-> +impl<T: DriverGpuVm> GpuVmCore<T> {
-> +    /// Get a reference without access to `core`.
-> +    #[inline]
-> +    pub fn gpuvm(&self) -> &GpuVm<T> {
-> +        &self.0
-> +    }
-> +}
-> +
-> +impl<T: DriverGpuVm> Deref for GpuVmCore<T> {
-> +    type Target =3D T;
-> +    #[inline]
-> +    fn deref(&self) -> &T {
-> +        // SAFETY: By the type invariants we may access `core`.
-> +        unsafe { &*self.0.core.get() }
-> +    }
-> +}
-> +
-> +impl<T: DriverGpuVm> DerefMut for GpuVmCore<T> {
-> +    #[inline]
-> +    fn deref_mut(&mut self) -> &mut T {
-> +        // SAFETY: By the type invariants we may access `core`.
-> +        unsafe { &mut *self.0.core.get() }
-> +    }
-> +}
-
-Hm..it seems more natural to me to deref to &GpuVm<T> and provide data() an=
-d
-data_mut().
-
-> +
-> +/// The exec token for preparing the objects.
-> +#[pin_data(PinnedDrop)]
-> +pub struct GpuVmExec<'a, T: DriverGpuVm> {
-> +    #[pin]
-> +    exec: Opaque<bindings::drm_gpuvm_exec>,
-> +    _gpuvm: PhantomData<&'a mut GpuVm<T>>,
-> +}
-> +
-> +impl<'a, T: DriverGpuVm> GpuVmExec<'a, T> {
-> +    /// Add a fence.
-> +    ///
-> +    /// # Safety
-> +    ///
-> +    /// `fence` arg must be valid.
-> +    pub unsafe fn resv_add_fence(
-> +        &self,
-> +        // TODO: use a safe fence abstraction
-> +        fence: *mut bindings::dma_fence,
-> +        private_usage: DmaResvUsage,
-> +        extobj_usage: DmaResvUsage,
-> +    ) {
-> +        // SAFETY: Caller ensures fence is ok.
-> +        unsafe {
-> +            bindings::drm_gpuvm_resv_add_fence(
-> +                (*self.exec.get()).vm,
-> +                &raw mut (*self.exec.get()).exec,
-> +                fence,
-> +                private_usage as u32,
-> +                extobj_usage as u32,
-> +            )
-> +        }
-> +    }
-> +}
-> +
-> +#[pinned_drop]
-> +impl<'a, T: DriverGpuVm> PinnedDrop for GpuVmExec<'a, T> {
-> +    fn drop(self: Pin<&mut Self>) {
-> +        // SAFETY: We hold the lock, so it's safe to unlock.
-> +        unsafe { bindings::drm_gpuvm_exec_unlock(self.exec.get()) };
-> +    }
-> +}
-> +
-> +/// How the fence will be used.
-> +#[repr(u32)]
-> +pub enum DmaResvUsage {
-> +    /// For in kernel memory management only (e.g. copying, clearing mem=
-ory).
-> +    Kernel =3D bindings::dma_resv_usage_DMA_RESV_USAGE_KERNEL,
-> +    /// Implicit write synchronization for userspace submissions.
-> +    Write =3D bindings::dma_resv_usage_DMA_RESV_USAGE_WRITE,
-> +    /// Implicit read synchronization for userspace submissions.
-> +    Read =3D bindings::dma_resv_usage_DMA_RESV_USAGE_READ,
-> +    /// No implicit sync (e.g. preemption fences, page table updates, TL=
-B flushes).
-> +    Bookkeep =3D bindings::dma_resv_usage_DMA_RESV_USAGE_BOOKKEEP,
-> +}
-
-That belongs into a dma_resv abstraction instead.
-
-> +
-> +/// A lock guard for the GPUVM's resv lock.
-> +///
-> +/// This guard provides access to the extobj and evicted lists.
-> +///
-> +/// # Invariants
-> +///
-> +/// Holds the GPUVM resv lock.
-> +pub struct GpuvmResvLockGuard<'a, T: DriverGpuVm>(&'a GpuVm<T>);
-> +
-> +impl<T: DriverGpuVm> GpuVm<T> {
-> +    /// Lock the VM's resv lock.
-> +    #[inline]
-> +    pub fn resv_lock(&self) -> GpuvmResvLockGuard<'_, T> {
-> +        // SAFETY: It's always ok to lock the resv lock.
-> +        unsafe { bindings::dma_resv_lock(self.raw_resv_lock(), ptr::null=
-_mut()) };
-> +        // INVARIANTS: We took the lock.
-> +        GpuvmResvLockGuard(self)
-> +    }
-> +
-> +    #[inline]
-> +    fn raw_resv_lock(&self) -> *mut bindings::dma_resv {
-> +        // SAFETY: `r_obj` is immutable and valid for duration of GPUVM.
-> +        unsafe { (*(*self.as_raw()).r_obj).resv }
-> +    }
-> +}
-> +
-> +impl<'a, T: DriverGpuVm> Drop for GpuvmResvLockGuard<'a, T> {
-> +    #[inline]
-> +    fn drop(&mut self) {
-> +        // SAFETY: We hold the lock so we can release it.
-> +        unsafe { bindings::dma_resv_unlock(self.0.raw_resv_lock()) };
-> +    }
-> +}
-> diff --git a/rust/kernel/drm/gpuvm/sm_ops.rs b/rust/kernel/drm/gpuvm/sm_o=
-ps.rs
-> new file mode 100644
-> index 0000000000000000000000000000000000000000..c0dbd4675de644a3b1cbe7d52=
-8194ca7fb471848
-> --- /dev/null
-> +++ b/rust/kernel/drm/gpuvm/sm_ops.rs
-> @@ -0,0 +1,469 @@
-> +// SPDX-License-Identifier: GPL-2.0 OR MIT
-> +#![allow(clippy::tabs_in_doc_comments)]
-> +
-> +use super::*;
-> +
-> +struct SmData<'a, T: DriverGpuVm> {
-> +    gpuvm: &'a mut GpuVmCore<T>,
-> +    user_context: &'a mut T::SmContext,
-> +}
-> +
-> +#[repr(C)]
-> +struct SmMapData<'a, T: DriverGpuVm> {
-> +    sm_data: SmData<'a, T>,
-> +    vm_bo: GpuVmBoObtain<T>,
-> +}
-> +
-> +/// The argument for [`GpuVmCore::sm_map`].
-> +pub struct OpMapRequest<'a, T: DriverGpuVm> {
-> +    /// Address in GPU virtual address space.
-> +    pub addr: u64,
-> +    /// Length of mapping to create.
-> +    pub range: u64,
-> +    /// Offset in GEM object.
-> +    pub offset: u64,
-> +    /// The GEM object to map.
-> +    pub vm_bo: GpuVmBoObtain<T>,
-> +    /// The user-provided context type.
-> +    pub context: &'a mut T::SmContext,
-> +}
-> +
-> +impl<'a, T: DriverGpuVm> OpMapRequest<'a, T> {
-> +    fn raw_request(&self) -> bindings::drm_gpuvm_map_req {
-> +        bindings::drm_gpuvm_map_req {
-> +            map: bindings::drm_gpuva_op_map {
-> +                va: bindings::drm_gpuva_op_map__bindgen_ty_1 {
-> +                    addr: self.addr,
-> +                    range: self.range,
-> +                },
-> +                gem: bindings::drm_gpuva_op_map__bindgen_ty_2 {
-> +                    offset: self.offset,
-> +                    obj: self.vm_bo.obj().as_raw(),
-> +                },
-> +            },
-> +        }
-> +    }
-> +}
-> +
-> +/// ```
-> +/// struct drm_gpuva_op_map {
-> +///  /**
-> +///   * @va: structure containing address and range of a map
-> +///   * operation
-> +///   */
-> +///  struct {
-> +///          /**
-> +///           * @va.addr: the base address of the new mapping
-> +///           */
-> +///          u64 addr;
-> +///
-> +///          /**
-> +///           * @va.range: the range of the new mapping
-> +///           */
-> +///          u64 range;
-> +///  } va;
-> +///
-> +///  /**
-> +///   * @gem: structure containing the &drm_gem_object and it's offset
-> +///   */
-> +///  struct {
-> +///          /**
-> +///           * @gem.offset: the offset within the &drm_gem_object
-> +///           */
-> +///          u64 offset;
-> +///
-> +///          /**
-> +///           * @gem.obj: the &drm_gem_object to map
-> +///           */
-> +///          struct drm_gem_object *obj;
-> +///  } gem;
-> +/// };
-> +/// ```
-> +pub struct OpMap<'op, T: DriverGpuVm> {
-> +    op: &'op bindings::drm_gpuva_op_map,
-> +    // Since these abstractions are designed for immediate mode, the VM =
-BO needs to be
-> +    // pre-allocated, so we always have it available when we reach this =
-point.
-> +    vm_bo: &'op GpuVmBo<T>,
-> +    _invariant: PhantomData<*mut &'op mut T>,
-> +}
-> +
-> +impl<'op, T: DriverGpuVm> OpMap<'op, T> {
-> +    /// The base address of the new mapping.
-> +    pub fn addr(&self) -> u64 {
-> +        self.op.va.addr
-> +    }
-> +
-> +    /// The length of the new mapping.
-> +    pub fn length(&self) -> u64 {
-> +        self.op.va.range
-> +    }
-> +
-> +    /// The offset within the [`drm_gem_object`](crate::gem::Object).
-> +    pub fn gem_offset(&self) -> u64 {
-> +        self.op.gem.offset
-> +    }
-> +
-> +    /// The [`drm_gem_object`](crate::gem::Object) to map.
-> +    pub fn obj(&self) -> &T::Object {
-> +        // SAFETY: The `obj` pointer is guaranteed to be valid.
-> +        unsafe { <T::Object as IntoGEMObject>::from_raw(self.op.gem.obj)=
- }
-> +    }
-> +
-> +    /// The [`GpuVmBo`] that the new VA will be associated with.
-> +    pub fn vm_bo(&self) -> &GpuVmBo<T> {
-> +        self.vm_bo
-> +    }
-> +
-> +    /// Use the pre-allocated VA to carry out this map operation.
-> +    pub fn insert(self, va: GpuVaAlloc<T>, va_data: impl PinInit<T::VaDa=
-ta>) -> OpMapped<'op, T> {
-> +        let va =3D va.prepare(va_data);
-> +        // SAFETY: By the type invariants we may access the interval tre=
-e.
-> +        unsafe { bindings::drm_gpuva_map(self.vm_bo.gpuvm().as_raw(), va=
-, self.op) };
-> +        // SAFETY: The GEM object is valid, so the mutex is properly ini=
-tialized.
-> +        unsafe { bindings::mutex_lock(&raw mut (*self.op.gem.obj).gpuva.=
-lock) };
-
-This seems to be used at least twice, maybe a helper that takes a closure
-between the raw mutex_lock() and mutex_unlock() is appropriate?
-
-> +        // SAFETY: The va is prepared for insertion, and we hold the GEM=
- lock.
-> +        unsafe { bindings::drm_gpuva_link(va, self.vm_bo.as_raw()) };
-> +        // SAFETY: We took the mutex above, so we may unlock it.
-> +        unsafe { bindings::mutex_unlock(&raw mut (*self.op.gem.obj).gpuv=
-a.lock) };
-> +        OpMapped {
-> +            _invariant: self._invariant,
-> +        }
-> +    }
-> +}
-> +
-> +/// Represents a completed [`OpMap`] operation.
-
-Can you please add a brief comment what this type is used for?
-
-Also, we have lots of new types to represent a certain state. Can you pleas=
-e
-list all of them in a global documentation section explaining the states?
-
-I think it would be nice if we could use the type state pattern, but it see=
-ms
-it would be quite unergonomic.
-
-> +pub struct OpMapped<'op, T> {
-> +    _invariant: PhantomData<*mut &'op mut T>,
-> +}
-
-<snip>
-
-> +/// A pre-allocated [`GpuVmBo`] object.
-> +///
-> +/// # Invariants
-> +///
-> +/// Points at a `drm_gpuvm_bo` that contains a valid `T::VmBoData`, has =
-a refcount of one, and is
-> +/// absent from any gem, extobj, or evict lists.
-> +pub(super) struct GpuVmBoAlloc<T: DriverGpuVm>(NonNull<GpuVmBo<T>>);
-> +
-> +impl<T: DriverGpuVm> GpuVmBoAlloc<T> {
-> +    /// Create a new pre-allocated [`GpuVmBo`].
-> +    ///
-> +    /// It's intentional that the initializer is infallible because `drm=
-_gpuvm_bo_put` will call
-> +    /// drop on the data, so we don't have a way to free it when the dat=
-a is missing.
-> +    #[inline]
-> +    pub(super) fn new(
-> +        gpuvm: &GpuVm<T>,
-> +        gem: &T::Object,
-> +        value: impl PinInit<T::VmBoData>,
-> +    ) -> Result<GpuVmBoAlloc<T>, AllocError> {
-> +        // SAFETY: The provided gpuvm and gem ptrs are valid for the dur=
-ation of this call.
-> +        let raw_ptr =3D unsafe {
-> +            bindings::drm_gpuvm_bo_create(gpuvm.as_raw(), gem.as_raw()).=
-cast::<GpuVmBo<T>>()
-> +        };
-> +        // CAST: `GpuVmBoAlloc::vm_bo_alloc` ensures that this memory wa=
-s allocated with the layout
-> +        // of `GpuVmBo<T>`.
-> +        let ptr =3D NonNull::new(raw_ptr).ok_or(AllocError)?;
-> +        // SAFETY: `ptr->data` is a valid pinned location.
-> +        let Ok(()) =3D unsafe { value.__pinned_init(&raw mut (*raw_ptr).=
-data) };
-> +        // INVARIANTS: We just created the vm_bo so it's absent from lis=
-ts, and the data is valid
-> +        // as we just initialized it.
-> +        Ok(GpuVmBoAlloc(ptr))
-> +    }
-> +
-> +    /// Returns a raw pointer to underlying C value.
-> +    #[inline]
-> +    pub(super) fn as_raw(&self) -> *mut bindings::drm_gpuvm_bo {
-> +        // SAFETY: The pointer references a valid `drm_gpuvm_bo`.
-> +        unsafe { (*self.0.as_ptr()).inner.get() }
-> +    }
-> +
-> +    /// Look up whether there is an existing [`GpuVmBo`] for this gem ob=
-ject.
-> +    #[inline]
-> +    pub(super) fn obtain(self) -> GpuVmBoObtain<T> {
-> +        let me =3D ManuallyDrop::new(self);
-> +        // SAFETY: Valid `drm_gpuvm_bo` not already in the lists.
-> +        let ptr =3D unsafe { bindings::drm_gpuvm_bo_obtain_prealloc(me.a=
-s_raw()) };
-> +
-> +        // If the vm_bo does not already exist, ensure that it's in the =
-extobj list.
-> +        if ptr::eq(ptr, me.as_raw()) && me.gpuvm().is_extobj(me.obj()) {
-> +            let _resv_lock =3D me.gpuvm().resv_lock();
-> +            // SAFETY: We hold the GPUVMs resv lock.
-> +            unsafe { bindings::drm_gpuvm_bo_extobj_add(ptr) };
-> +        }
-> +
-> +        // INVARIANTS: Valid `drm_gpuvm_bo` in the GEM list.
-> +        // SAFETY: `drm_gpuvm_bo_obtain_prealloc` always returns a non-n=
-ull ptr
-> +        GpuVmBoObtain(unsafe { NonNull::new_unchecked(ptr.cast()) })
-> +    }
-> +}
-> +
-> +impl<T: DriverGpuVm> Deref for GpuVmBoAlloc<T> {
-> +    type Target =3D GpuVmBo<T>;
-> +    #[inline]
-> +    fn deref(&self) -> &GpuVmBo<T> {
-> +        // SAFETY: By the type invariants we may deref while `Self` exis=
-ts.
-> +        unsafe { self.0.as_ref() }
-> +    }
-> +}
-> +
-> +impl<T: DriverGpuVm> Drop for GpuVmBoAlloc<T> {
-> +    #[inline]
-> +    fn drop(&mut self) {
-> +        // SAFETY: It's safe to perform a deferred put in any context.
-> +        unsafe { bindings::drm_gpuvm_bo_put_deferred(self.as_raw()) };
-
-This does not need to be deferred, no?
-
-> +    }
-> +}
-> +
-> +/// A [`GpuVmBo`] object in the GEM list.
-> +///
-> +/// # Invariants
-> +///
-> +/// Points at a `drm_gpuvm_bo` that contains a valid `T::VmBoData` and i=
-s present in the gem list.
-> +pub struct GpuVmBoObtain<T: DriverGpuVm>(NonNull<GpuVmBo<T>>);
-
-How is this different from GpuVmBo? The only object that is not in the GEM =
-list
-should be GpuVmBoAlloc, i.e. the preallocated one.
-
-> +impl<T: DriverGpuVm> GpuVmBoObtain<T> {
-> +    /// Returns a raw pointer to underlying C value.
-> +    #[inline]
-> +    pub fn as_raw(&self) -> *mut bindings::drm_gpuvm_bo {
-> +        // SAFETY: The pointer references a valid `drm_gpuvm_bo`.
-> +        unsafe { (*self.0.as_ptr()).inner.get() }
-> +    }
-> +}
-> +
-> +impl<T: DriverGpuVm> Deref for GpuVmBoObtain<T> {
-> +    type Target =3D GpuVmBo<T>;
-> +    #[inline]
-> +    fn deref(&self) -> &GpuVmBo<T> {
-> +        // SAFETY: By the type invariants we may deref while `Self` exis=
-ts.
-> +        unsafe { self.0.as_ref() }
-> +    }
-> +}
-> +
-> +impl<T: DriverGpuVm> Drop for GpuVmBoObtain<T> {
-> +    #[inline]
-> +    fn drop(&mut self) {
-> +        // SAFETY: It's safe to perform a deferred put in any context.
-> +        unsafe { bindings::drm_gpuvm_bo_put_deferred(self.as_raw()) };
-> +    }
-> +}
-> diff --git a/rust/kernel/drm/mod.rs b/rust/kernel/drm/mod.rs
-> index 1b82b6945edf25b947afc08300e211bd97150d6b..a4b6c5430198571ec701af2ef=
-452cc9ac55870e6 100644
-> --- a/rust/kernel/drm/mod.rs
-> +++ b/rust/kernel/drm/mod.rs
-> @@ -6,6 +6,7 @@
->  pub mod driver;
->  pub mod file;
->  pub mod gem;
-> +pub mod gpuvm;
->  pub mod ioctl;
-> =20
->  pub use self::device::Device;
->
-> --=20
-> 2.52.0.487.g5c8c507ade-goog
