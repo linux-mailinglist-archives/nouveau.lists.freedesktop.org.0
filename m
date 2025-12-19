@@ -2,217 +2,113 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id 94231CD1C7F
-	for <lists+nouveau@lfdr.de>; Fri, 19 Dec 2025 21:38:32 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 3056CCD20F6
+	for <lists+nouveau@lfdr.de>; Fri, 19 Dec 2025 22:54:00 +0100 (CET)
 Received: from kara.freedesktop.org (unknown [131.252.210.166])
-	by gabe.freedesktop.org (Postfix) with ESMTPS id 1CA5410F0DC;
-	Fri, 19 Dec 2025 20:38:31 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTPS id 0B55C10F0E4;
+	Fri, 19 Dec 2025 21:53:59 +0000 (UTC)
 Authentication-Results: gabe.freedesktop.org;
-	dkim=pass (2048-bit key; unprotected) header.d=Nvidia.com header.i=@Nvidia.com header.b="WPxhpFWx";
+	dkim=fail reason="signature verification failed" (1024-bit key; unprotected) header.d=redhat.com header.i=@redhat.com header.b="cit+AVP6";
 	dkim-atps=neutral
 Received: from kara.freedesktop.org (localhost [127.0.0.1])
-	by kara.freedesktop.org (Postfix) with ESMTP id 6AE9C45627;
-	Fri, 19 Dec 2025 20:30:57 +0000 (UTC)
-ARC-Seal: i=2; cv=pass; a=rsa-sha256; d=lists.freedesktop.org;
- s=20240201; t=1766176257;
- b=eQd2zFRF6QLbTK+HUprQ2PM+yg0wyNaP7nQjmry8McuwiHJJvb0TcNY8r8bqSBJC6N0KD
- F1QZVK3LnMW1/1Gr0yQJgDK9qdpCkU9uXAZFYJ4tlsQ+p6t0IdyYbedp9KKBwS5WWYM0A+W
- 1gSprSZsakh6yQuFlW9TX/Q1LehYQzHJQTlAjDfqmKWaD+Xt03P2rzMwO1dgTzTCrzWHdg9
- t3XYL5tgugCbX8aUV8LsCbrIG89w9aO6vuED7nL79C/ncO2Hmr4RvduxFqPTi7RpAXBE7E4
- z3rK3Y0IcgTWwD7vlnC8iid6StDV+SL5qSIMlEixgHgoRpoYC5OzgigOlY6g==
-ARC-Message-Signature: i=2; a=rsa-sha256; c=relaxed/relaxed;
- d=lists.freedesktop.org; s=20240201; t=1766176257; h=from : sender :
+	by kara.freedesktop.org (Postfix) with ESMTP id 1F4D14563F;
+	Fri, 19 Dec 2025 21:46:25 +0000 (UTC)
+ARC-Seal: i=1; cv=none; a=rsa-sha256; d=lists.freedesktop.org;
+ s=20240201; t=1766180785;
+ b=KeI5Z7z7tcrzIZtEPukFldmYnzKnDR69pxaNOwCdMbPgtERlvv+j8NYOeg3qULnvk5Wp4
+ BYJ86/BWNsu1yxCHkSGVQvKr5DQTkIKhGsuWDZEeufwEWZar+2RNt/6iG0+2CpxDwqGa5eX
+ FVxenR58z65tLaDBk8u/KcyRm7oMN/xu7LIjA6EezND19qAGceptFbfZcVUidofo41LtmbO
+ fPxWZOv8Bt1jCdYEATp9i9H+Lb4VkWBpBxwGmLG10DKjpketnFNObgConlrHaocB+YdaYPp
+ O6CMJPeaSh27Ln1vMKqgTijDsqoZGb38gdLiYODZrGkjwsDOU49qc+ADpm+Q==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=lists.freedesktop.org; s=20240201; t=1766180785; h=from : sender :
  reply-to : subject : date : message-id : to : cc : mime-version :
  content-type : content-transfer-encoding : content-id :
  content-description : resent-date : resent-from : resent-sender :
  resent-to : resent-cc : resent-message-id : in-reply-to : references :
  list-id : list-help : list-unsubscribe : list-subscribe : list-post :
  list-owner : list-archive;
- bh=6Bw9Y9t81RX85yPCVF1AILpQnKQkeDIUks3h8hK944w=;
- b=akD4+tUT5OAr8m5ohgyJqiR9mtJVynXMvx1J0/B2WtRe6x6bdErCJdfw7zyagKgGUAd7P
- 7534u0xiH36Qs5j85HtOxYzKmmoKbwNt7UHna5xOH2op4kl1UFZ5s8sc53n0mFC0eF1LiT8
- 77qX1NIfKQS8dYjuGFJcuhl9xkNJMKU+fACVDIL699G4hX0mFnx3f1+g3Y+/HNG7zbxYRbl
- nZlb628eC3WDNXFsJuIf/yF+9tpJjF3a47f173bqBsSUtZj20UrrdHFtnFbOs0pdUNIirfI
- L8XcP5Bo/6BVhIecksP9qGW+WXZHOYZw2wdjDqCWf+tTkpN9g3NtYBr0OyAw==
-ARC-Authentication-Results: i=2; mail.freedesktop.org;
- dkim=pass header.d=Nvidia.com;
-  arc=pass;
-  dmarc=pass (Used From Domain Record) header.from=nvidia.com
- policy.dmarc=reject
-Authentication-Results: mail.freedesktop.org; dkim=pass header.d=Nvidia.com;
- arc=pass;
- dmarc=pass (Used From Domain Record) header.from=nvidia.com policy.dmarc=reject
+ bh=EAePM3QMKVvKj521+eJkpi020bYlRB7Q4CCT8RGJeHk=;
+ b=OL64LTZFKY19W8O8TvwapQN+AljfhWcaLSufs0pfU1TC6Gqbub77got2uzBIxRpJisrke
+ ueAXnJaxCl8oN9ud15Mk/na2S/9gVAg6KHg2ahrTxxrN1QFXz+hMX6RlyjBhSoEI9UUW9wQ
+ GlVE2PInus1QWbyTlCK/NgeWba4wWNBfzhktlggjOyat8NhjsjCzQFb1EyV5KRdGg3/nnsU
+ r6F4doD7WQkhJQw6nqMH+BwUjLfBss2/7gvf+QaQkbozSJqIgHDdV5LyuXtJqV3KucJ9Hzz
+ kMszZ992AP09DufKAFOMRVcnTxK0sISjCbtscZqw1H32gWMG7VIX2P2IhIGw==
+ARC-Authentication-Results: i=1; mail.freedesktop.org;
+ dkim=pass header.d=redhat.com;
+  arc=none (Message is not ARC signed);
+  dmarc=pass (Used From Domain Record) header.from=redhat.com
+ policy.dmarc=quarantine
+Authentication-Results: mail.freedesktop.org; dkim=pass header.d=redhat.com;
+ arc=none (Message is not ARC signed);
+ dmarc=pass (Used From Domain Record) header.from=redhat.com
+ policy.dmarc=quarantine
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by kara.freedesktop.org (Postfix) with ESMTPS id 6DD7743F91
-	for <nouveau@lists.freedesktop.org>; Fri, 19 Dec 2025 20:30:54 +0000 (UTC)
-Received: from SJ2PR03CU001.outbound.protection.outlook.com
- (mail-westusazon11012060.outbound.protection.outlook.com [52.101.43.60])
-	by gabe.freedesktop.org (Postfix) with ESMTPS id B08BD10F0C3;
-	Fri, 19 Dec 2025 20:38:27 +0000 (UTC)
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=M8fJC1Neg1ClxahSjT2n1eAf2N/Rz5XooPFalCC05hUiNWF1x0rRrbGEpy3yAqy/J2n+lBlhoXPcnv5IVMgb2JYr1pQwrrB70J8wU5K25vg8+3P8wfTgoV8DiM7iZs8/vRKgmZo1iEI4ctlLeLj5Q0VBfw5jelLDJuvZTeWJuDbEy6RZoEAbeyfidVQyxDzJq4LifTPUT0cDF+DIFHaW4WcusORElVYQuOpbCGCmqsNr2oc+9DJ5VZA91x7sJjINVjqEFKc8fskLfXw+sQ0TBxjcGNQ+pn42dBye9k+7+b88Mt7po69flc2V/ox2ttMifTey8gIaUcwZqSDLXxp4jg==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=6Bw9Y9t81RX85yPCVF1AILpQnKQkeDIUks3h8hK944w=;
- b=yOHWcdLr/dkBE1ikEHjN6J4t35B0ssKFBsSj8e9IZ24zlq1nRCY4lNBw2tc5uADgGG75fAuvM5r8Zlg30Hc7uH+m7PwEP45Y968ldWSLxndHgwNbj5byNfVtmFd9A8qwp7hTD3gccEfphIEoDV113DkD+IHRp2IsY80jU5HjvFPJlCc5XyiDUq38SBXuhNXIVMkFCmXmNNPUrIisM+iHAmlJp2xaZFYXoL0J/2JxOnXcT5aE7VoC9xPBsx3tCO/GUjvJcyt4wdY0w2+sMMVCuUMCyc61qL/qObtHi+mpTa59XLO6Hxs3l/Ex2rL5DD7IjdcFzwk89rvLu9B1ebyuRg==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=nvidia.com; dmarc=pass action=none header.from=nvidia.com;
- dkim=pass header.d=nvidia.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=Nvidia.com;
- s=selector2;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=6Bw9Y9t81RX85yPCVF1AILpQnKQkeDIUks3h8hK944w=;
- b=WPxhpFWxEioqbxSfBT85pXGoLVnmdN6aro41ywpEpP9N5DZVvj1bkfQKOqJY0j6jv8iHYcdCiMMuBTYqOEBnBZKSr7V/OlZLkANKUEZArfjxHcVY3abVA3TAFFsDsc73PGDesGtFexfq+EImxOMcDMFxIeUbeb3q2EQXjGSqB+7jfvWbCZGTAzqiMFeAnE/zOlfAkIHhVcWDH+hgVS0P55+pFVLjd6XYseSj7RgMiN7fkkv/3nBDR1XsWB52UC3TIWBkUW9cyReP9zS6iEyM562xkc0WC9qUj3iKQoKWWD26OSrrarP/JKeKoJEOex9kEs0B/YsYYBA8jKuUcSd6QQ==
-Received: from SN7PR12MB8059.namprd12.prod.outlook.com (2603:10b6:806:32b::7)
- by CH2PR12MB4248.namprd12.prod.outlook.com (2603:10b6:610:7a::23) with
- Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9434.6; Fri, 19 Dec
- 2025 20:38:22 +0000
-Received: from SN7PR12MB8059.namprd12.prod.outlook.com
- ([fe80::4ee2:654e:1fe8:4b91]) by SN7PR12MB8059.namprd12.prod.outlook.com
- ([fe80::4ee2:654e:1fe8:4b91%2]) with mapi id 15.20.9434.009; Fri, 19 Dec 2025
- 20:38:22 +0000
-From: Joel Fernandes <joelagnelf@nvidia.com>
-To: Maarten Lankhorst <maarten.lankhorst@linux.intel.com>,
-	Maxime Ripard <mripard@kernel.org>,
-	Thomas Zimmermann <tzimmermann@suse.de>,
-	David Airlie <airlied@gmail.com>,
-	Simona Vetter <simona@ffwll.ch>,
-	Jonathan Corbet <corbet@lwn.net>,
-	Alex Deucher <alexander.deucher@amd.com>,
-	=?UTF-8?q?Christian=20K=C3=B6nig?= <christian.koenig@amd.com>,
-	Jani Nikula <jani.nikula@linux.intel.com>,
-	Joonas Lahtinen <joonas.lahtinen@linux.intel.com>,
-	Rodrigo Vivi <rodrigo.vivi@intel.com>,
-	Tvrtko Ursulin <tursulin@ursulin.net>,
-	Huang Rui <ray.huang@amd.com>,
-	Matthew Auld <matthew.auld@intel.com>,
-	Matthew Brost <matthew.brost@intel.com>,
-	Lucas De Marchi <lucas.demarchi@intel.com>,
-	=?UTF-8?q?Thomas=20Hellstr=C3=B6m?= <thomas.hellstrom@linux.intel.com>,
-	Helge Deller <deller@gmx.de>
-Subject: [PATCH RFC v5 6/6] nova-core: Add PRAMIN aperture self-tests
-Date: Fri, 19 Dec 2025 15:38:05 -0500
-Message-Id: <20251219203805.1246586-7-joelagnelf@nvidia.com>
-X-Mailer: git-send-email 2.34.1
-In-Reply-To: <20251219203805.1246586-1-joelagnelf@nvidia.com>
-References: <20251219203805.1246586-1-joelagnelf@nvidia.com>
-Content-Transfer-Encoding: 8bit
-Content-Type: text/plain
-X-ClientProxiedBy: MN0PR05CA0009.namprd05.prod.outlook.com
- (2603:10b6:208:52c::29) To SN7PR12MB8059.namprd12.prod.outlook.com
- (2603:10b6:806:32b::7)
+	by kara.freedesktop.org (Postfix) with ESMTPS id C06F643F91
+	for <nouveau@lists.freedesktop.org>; Fri, 19 Dec 2025 21:46:21 +0000 (UTC)
+Received: from us-smtp-delivery-124.mimecast.com
+ (us-smtp-delivery-124.mimecast.com [170.10.133.124])
+	by gabe.freedesktop.org (Postfix) with ESMTPS id 47AFF10F0E0
+	for <nouveau@lists.freedesktop.org>; Fri, 19 Dec 2025 21:53:55 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
+	s=mimecast20190719; t=1766181234;
+	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+	 to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+	 content-transfer-encoding:content-transfer-encoding;
+	bh=EAePM3QMKVvKj521+eJkpi020bYlRB7Q4CCT8RGJeHk=;
+	b=cit+AVP6rykfp18Y/8QmkUQrwZPScLH4y7NSw/az63lGaW/tKG9Az4wes3hOzubI+3Eug8
+	6XapwC0rBKPaXMyaobThEbJbnBlE/33bBGcPXR/uLUNSR1gbTY9fekAX1R71WB0GhPZeBi
+	l+y8QqwUlHcuWXRJxwzfV9if2Hpyxfs=
+Received: from mx-prod-mc-03.mail-002.prod.us-west-2.aws.redhat.com
+ (ec2-54-186-198-63.us-west-2.compute.amazonaws.com [54.186.198.63]) by
+ relay.mimecast.com with ESMTP with STARTTLS (version=TLSv1.3,
+ cipher=TLS_AES_256_GCM_SHA384) id us-mta-392-6PqoTe58OLiqfFYR7RLvIQ-1; Fri,
+ 19 Dec 2025 16:53:50 -0500
+X-MC-Unique: 6PqoTe58OLiqfFYR7RLvIQ-1
+X-Mimecast-MFC-AGG-ID: 6PqoTe58OLiqfFYR7RLvIQ_1766181228
+Received: from mx-prod-int-01.mail-002.prod.us-west-2.aws.redhat.com
+ (mx-prod-int-01.mail-002.prod.us-west-2.aws.redhat.com [10.30.177.4])
+	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+	 key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest
+ SHA256)
+	(No client certificate requested)
+	by mx-prod-mc-03.mail-002.prod.us-west-2.aws.redhat.com (Postfix) with ESMTPS
+ id 61CB91955E7F;
+	Fri, 19 Dec 2025 21:53:48 +0000 (UTC)
+Received: from GoldenWind.redhat.com (unknown [10.22.80.166])
+	by mx-prod-int-01.mail-002.prod.us-west-2.aws.redhat.com (Postfix) with ESMTP
+ id D3CAB30001A2;
+	Fri, 19 Dec 2025 21:53:45 +0000 (UTC)
+From: Lyude Paul <lyude@redhat.com>
+To: dri-devel@lists.freedesktop.org,
+	nouveau@lists.freedesktop.org,
+	linux-kernel@vger.kernel.org
+Subject: [PATCH 0/2] drm/nouveau: Fix cursor-related display hang
+Date: Fri, 19 Dec 2025 16:52:01 -0500
+Message-ID: <20251219215344.170852-1-lyude@redhat.com>
 MIME-Version: 1.0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: SN7PR12MB8059:EE_|CH2PR12MB4248:EE_
-X-MS-Office365-Filtering-Correlation-Id: e2fcdb99-dc15-4f5f-12a7-08de3f3e8d0b
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: 
-	BCL:0;ARA:13230040|7416014|366016|376014|1800799024|921020;
-X-Microsoft-Antispam-Message-Info: 
-	=?us-ascii?Q?r7Jzjxzgs2hlHEU3My2f+/9tcKBQQmA7e/UVwG9+oMxVue5oCBq8yKX7nNC8?=
- =?us-ascii?Q?ZxGJDbt6wv4U1PjKRIuSgFF8TNiZjEEiGDdB7TBY5rpt8AjyoKJb+2W1uITT?=
- =?us-ascii?Q?XCf8lb/Ehx+xXClQ8q9DuBIx+yiC5OiLPWt/XBxjDsQfZBtSQww1dl28SL0/?=
- =?us-ascii?Q?9rMqed2cEjKq9YrLBKeJC8Aew+qVYfYmXHHwVF1wFVJ0sDtc9rd7chcs6p4P?=
- =?us-ascii?Q?A8hik7KJXNr3buKIo1KH0952LOrnT1WEZ1e4cJ9GvXpGk/u1kjeYnDJap6mE?=
- =?us-ascii?Q?udmeOpDN+sqHfF8zCyTYNAev2fRoMkafQnLuzxX+Ta87OkS9gKLlABItrRrb?=
- =?us-ascii?Q?m0UD2Zo5FsII2aB3XyziieRP0AEquIQLrkETIUKJDj+zgg09QXK6aZ9EKLE3?=
- =?us-ascii?Q?FK7S64QpxK3SFqrxhK2ka3nwI0TT6OibrNvq5sZ9SUQH9wwkyRC6IKsP9Kzc?=
- =?us-ascii?Q?beAZ+G/8BcvukWi1X00pBXXKWHYPAtJnbZfVI94jHsSvopk7rpPZvx8HGMEZ?=
- =?us-ascii?Q?SYsKiqkO9I6z1MF3jhNQKa8LYLC2sc5KIDIsiFZlYk6cEPw1HHnrVpM1MPgC?=
- =?us-ascii?Q?S2zPVx5B8rDY7cQ5PpROzbgOcBE53afDS1qTM8bLF320V2vqY731Sldg+Wi6?=
- =?us-ascii?Q?IsjE9vDLKKQtL22wwwzzUvHGmN84wQGSgG0lwN4eEpfSVLQFDzxyOaXK4xoP?=
- =?us-ascii?Q?oxdYhzIH5aqKHDMSZaKgSh5fziJ6A8F7wtLlZJN6rpP62gQzGf2m8xIkYjHU?=
- =?us-ascii?Q?+nsQIGpV+3L7KHZnnw/A2btBpI9Eebdz4v/EBzPWuVI+LGe7myoMdEZvUrj+?=
- =?us-ascii?Q?Gr+IsYVtnBxyomyzfiQMfRym6s/dK8vbIlz/OvYjTzIJtI1TuQjzsl8PZZx8?=
- =?us-ascii?Q?LDHaZPV73PXGRmtTcWnVgaGylqy4Go5e1W6JOdrxQ4PoJiZB9XwbSRPbn1qX?=
- =?us-ascii?Q?Wla0dgJwg12/L1a0d9ZM6MkM+ecQO/TN3HWrVjEJj1a29Kt3I52kwA/SisJc?=
- =?us-ascii?Q?1itdL4VtGxg+NmBEf6+FejxeaTP3U2scEFSoZED9hJk7p4MZvSk8GYtUa4mz?=
- =?us-ascii?Q?vM/2e19/hhw9IE6MM4f+bIx9DTyOhQRGnkzUb4CB4LhkPn0u95aKA2ETO+pd?=
- =?us-ascii?Q?KXGl2UiNPBQ9XNbPBsR62ZYq1fuXspM+usdLZPqIo/7XeVe6Lb314xb5h2mV?=
- =?us-ascii?Q?nFlgodlFhNEomnIGhIu1q5wzcHxBCeRqFPtmIR2abCd97bVMmaTi60hzFVCA?=
- =?us-ascii?Q?HbCj6NEZB1rz3DhGglt5eLugSNUI4g9lk0Q8AM+vfHtjojERFfuaX0jsBR0G?=
- =?us-ascii?Q?URRDX1X/7f2HcGjPMqHC5yL9Ac5t6fd7jgMj8upjdW/A9NdeTfdWZKka8CEu?=
- =?us-ascii?Q?RDLlyFwuXhI0pUL9TSXRXwPQ8dY1B2YOrx1HMn0/yeEhC2hkjVTEbTQIurPG?=
- =?us-ascii?Q?aUNevEfdQXccvzG/Q9MUAFA6NHUt0/dqz3qlhMQyeW8Y/dguxgOo8BZQtgRq?=
- =?us-ascii?Q?rcE1T7dH9w6QZRs=3D?=
-X-Forefront-Antispam-Report: 
-	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:SN7PR12MB8059.namprd12.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230040)(7416014)(366016)(376014)(1800799024)(921020);DIR:OUT;SFP:1101;
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: 
-	=?us-ascii?Q?ynfgHgSTbU2F5W6H5CbnueZMjQ/byZA95sGwjDUR10/xl/qfpRhhUz0zbEFS?=
- =?us-ascii?Q?zSnu6uv4+Gfotly4J7+Si74TTeupmq6cYMBX351/I7QlESeyAMTduu9hNfum?=
- =?us-ascii?Q?HB486OxBwPnVZehB2oead4KkGjACTdWAbgBuH7ITOVAZKNvBrSN/n9kwl6ZX?=
- =?us-ascii?Q?1167NIIY3Ti2rJHmChEY4ZuZf4tq5qqKHqwe89/XnTs4kNUEMLqVUNrqKp21?=
- =?us-ascii?Q?MaJRw/s3a+doty9auTsy5zvdSn/rCgXJLfPjTP83L2QyvZt6OobajSJ4sfw6?=
- =?us-ascii?Q?L3O3l4MIfnaaCGzJS4Bmbms2SGIRwdvKb/MyTDTEZ/pylYA8MlloMsB8kfE3?=
- =?us-ascii?Q?+jL0nvNWQbUFxULv5Vf8nx2cBfU4X3qTgbAwn3aG0PuVQM3+8FMCS8OtaCVh?=
- =?us-ascii?Q?J2crUS0dAbmA7notQHgqVs8G7fV/qNBY9RkU7Kpv2UzOpClfYHqEKwDiNeGt?=
- =?us-ascii?Q?yOzR7UU3zIuW6zQOERXCjntCADy0nTXyqZjtP7za2P5g+yUcyTSvlh/gBWRT?=
- =?us-ascii?Q?r4SBub6A6juzF5SwXKnpVkzaw2V6xnASPOGN/rcjode4MYF/wqo6uy3MtCf5?=
- =?us-ascii?Q?ThC2N+P8V2rMYGak5ibERdLrHfI+/8HCAJ2mmYRqAC6I45pmTjvZKUgEK/bA?=
- =?us-ascii?Q?Fhvv8OiE9ec0JIHXshMfEua/ic1t+SAV+0lyJ8F8I04p8IcsHkxAIW+a/T92?=
- =?us-ascii?Q?LXG0CFSJvnaiGseQH4+BHx0xES011WY2NlN6xrnIADCayMfkymvxE6H+m26j?=
- =?us-ascii?Q?hpQzPfR5obuDDFsUXctL8Srizd/ht0AILEpL/ihGww/Nv/ysnlmMZdmoNURy?=
- =?us-ascii?Q?vMQmuXJUQDeY2IADiQynx5zK7rd6ND+/sHEI7JuK0YNMa9kLy5+w1ki+y9Oe?=
- =?us-ascii?Q?PrFzD/l+F+qC+Pu6UnrxCuuPR5xiUueEcvVA16f19zRo8S85iSKofw42LIMS?=
- =?us-ascii?Q?DgzZMhLkUqmFPispNrZ/HMw7qdqdJX25mRSpaQ+Qjp0XcNXBLvMrvExSSA1r?=
- =?us-ascii?Q?OZY5/n3ZrGLpmUWC8TaU+pP98DMFxUKm5s2hJplhSlCHLH2r9miogwULMuDd?=
- =?us-ascii?Q?vqKp2RMqkvB4I+9+3JpBZPne6uv7mBy2bbIb1rHkJyIcAF1VsfS56ZxzcARy?=
- =?us-ascii?Q?KvjeUyd/kirO0E/CILfFdjq9IR8zAGEfJWe87SthfJEh/SM+DyMW4xgExA2v?=
- =?us-ascii?Q?+8v6OlViiyEMy1hThei0IFpKMgOr/gAVC0u7Hej1mvQToc9h+CRvlb185xwl?=
- =?us-ascii?Q?xccwEO5kVB/uzXV3ncLutDCLfDpcKC/3zqj1454CRJHFkV0Ado6RBXtXHYXs?=
- =?us-ascii?Q?5DAtmtYQr22xXw6IWG8jPPVr8knk19HYCsnKqd332z6VFKExWT/CvMw1uRmG?=
- =?us-ascii?Q?C/CyR8dN8z0gS1OkvGZTK9rIWOf0BQHHMekhmKtuSJIczzh8FHpubnqS9aq6?=
- =?us-ascii?Q?XuAXyUu8h59ZVYD4OcaxvNJvRwa8uxT1Xvsw4KbeWhZzwCokLOeZLn8muf4g?=
- =?us-ascii?Q?Ex0MtOJdsqQbmwgFP98r732m9DT+M/7+TICJi+FfH6nC0Xs4kklFEfdZkuBp?=
- =?us-ascii?Q?gtddjWVlOiSfj9ZKRAUMpeXiv8+M8/K/0lAS7RFeCwWFFiWNYlpM0uWmPYRE?=
- =?us-ascii?Q?Ya9qEvELi4FQZojvUpzKFIJ95GHwlrxizIU8i695gCy1BDTun3DXpkgQsSTi?=
- =?us-ascii?Q?MWca2lHIKZEBzT5mOvxoWEgzhmyrM+OUuoxgNUPwD6h336Ud1QIrOO/i8SsW?=
- =?us-ascii?Q?3n/ZZrVd1g=3D=3D?=
-X-OriginatorOrg: Nvidia.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 
- e2fcdb99-dc15-4f5f-12a7-08de3f3e8d0b
-X-MS-Exchange-CrossTenant-AuthSource: SN7PR12MB8059.namprd12.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 19 Dec 2025 20:38:22.1143
- (UTC)
-X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
-X-MS-Exchange-CrossTenant-Id: 43083d15-7273-40c1-b7db-39efd9ccc17a
-X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: 
- Uyq8tAIDvH49o64Q6xU2vKpaHKkVbFAhnXclh3HRuPBJ10l8WoqXDWda609ESfG5HiIZbOyakzfKa2wB1VDP+Q==
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: CH2PR12MB4248
-Message-ID-Hash: BPGS72DSRW5GYHK4THKC7TJQYODBPSB6
-X-Message-ID-Hash: BPGS72DSRW5GYHK4THKC7TJQYODBPSB6
-X-MailFrom: joelagnelf@nvidia.com
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+X-Scanned-By: MIMEDefang 3.4.1 on 10.30.177.4
+Message-ID-Hash: GH7JPGVWY7C5HQL3TCR25QGCAX7GF3CS
+X-Message-ID-Hash: GH7JPGVWY7C5HQL3TCR25QGCAX7GF3CS
+X-MailFrom: lyude@redhat.com
 X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency;
  loop; banned-address; member-moderation; nonmember-moderation; administrivia;
  implicit-dest; max-recipients; max-size; news-moderation; no-subject;
  digests; suspicious-header
-CC: Danilo Krummrich <dakr@kernel.org>, Alice Ryhl <aliceryhl@google.com>,
- Miguel Ojeda <ojeda@kernel.org>, Alex Gaynor <alex.gaynor@gmail.com>,
- Boqun Feng <boqun.feng@gmail.com>, Gary Guo <gary@garyguo.net>,
- =?UTF-8?q?Bj=C3=B6rn=20Roy=20Baron?= <bjorn3_gh@protonmail.com>,
- Benno Lossin <lossin@kernel.org>, Andreas Hindborg <a.hindborg@kernel.org>,
- Trevor Gross <tmgross@umich.edu>, Alistair Popple <apopple@nvidia.com>,
- Alexandre Courbot <acourbot@nvidia.com>, Andrea Righi <arighi@nvidia.com>,
- Philipp Stanner <phasta@kernel.org>, Elle Rhumsaa <elle@weathered-steel.dev>,
- Daniel Almeida <daniel.almeida@collabora.com>, joel@joelfernandes.org,
- nouveau@lists.freedesktop.org, dri-devel@lists.freedesktop.org,
- rust-for-linux@vger.kernel.org, linux-kernel@vger.kernel.org,
- linux-doc@vger.kernel.org, amd-gfx@lists.freedesktop.org,
- intel-gfx@lists.freedesktop.org, intel-xe@lists.freedesktop.org,
- linux-fbdev@vger.kernel.org, Joel Fernandes <joelagnelf@nvidia.com>
+CC: Dave Airlie <airlied@redhat.com>,
+ Maarten Lankhorst <maarten.lankhorst@linux.intel.com>,
+ Ben Skeggs <bskeggs@nvidia.com>, Simona Vetter <simona@ffwll.ch>,
+ Ben Skeggs <bskeggs@redhat.com>, Maxime Ripard <mripard@kernel.org>,
+ Danilo Krummrich <dakr@kernel.org>
 X-Mailman-Version: 3.3.8
 Precedence: list
 List-Id: Nouveau development list <nouveau.lists.freedesktop.org>
 Archived-At: 
- <https://lists.freedesktop.org/hyperkitty/list/nouveau@lists.freedesktop.org/message/BPGS72DSRW5GYHK4THKC7TJQYODBPSB6/>
+ <https://lists.freedesktop.org/hyperkitty/list/nouveau@lists.freedesktop.org/message/GH7JPGVWY7C5HQL3TCR25QGCAX7GF3CS/>
 Archived-At: 
- <https://lore.freedesktop.org/20251219203805.1246586-7-joelagnelf@nvidia.com/>
+ <https://lore.freedesktop.org/20251219215344.170852-1-lyude@redhat.com/>
 List-Archive: 
  <https://lists.freedesktop.org/hyperkitty/list/nouveau@lists.freedesktop.org/>
 List-Archive: <https://lore.freedesktop.org/nouveau>
@@ -222,184 +118,23 @@ List-Post: <mailto:nouveau@lists.freedesktop.org>
 List-Subscribe: <mailto:nouveau-join@lists.freedesktop.org>
 List-Unsubscribe: <mailto:nouveau-leave@lists.freedesktop.org>
 
-Add self-tests for the PRAMIN aperture mechanism to verify correct
-operation during GPU probe. The tests validate:
+This is a fix for one of the many issues I've been finding on my brand
+new desktop. This one in particular is easy to hit if you have a cursor
+with a continously updating surface between two displays, what fun!
 
-- Byte-level read/write at odd-aligned locations
-- Word write followed by byte-level readback (endianness verification)
-- Window repositioning across 1MB boundaries
+Reminds me of a another bug from long ago…
 
-The tests are gated behind CONFIG_NOVA_PRAMIN_SELFTESTS which is
-disabled by default. When enabled, tests run after GSP boot during
-probe.
+Lyude Paul (2):
+  drm/nouveau/disp/nv50-: Set lock_core in curs507a_prepare
+  drm/nouveau/kms/nv50-: Assert we hold nv50_disp->lock in
+    nv50_head_flush_*
 
-Also remove the unused lint suppression at the module level since the
-PRAMIN code is now being actively used.
+ drivers/gpu/drm/nouveau/dispnv50/curs507a.c | 1 +
+ drivers/gpu/drm/nouveau/dispnv50/head.c     | 5 +++++
+ 2 files changed, 6 insertions(+)
 
-Signed-off-by: Joel Fernandes <joelagnelf@nvidia.com>
----
- drivers/gpu/nova-core/Kconfig      |  11 ++++
- drivers/gpu/nova-core/gsp/boot.rs  |   4 ++
- drivers/gpu/nova-core/mm/pramin.rs | 102 ++++++++++++++++++++++++++++-
- 3 files changed, 115 insertions(+), 2 deletions(-)
 
-diff --git a/drivers/gpu/nova-core/Kconfig b/drivers/gpu/nova-core/Kconfig
-index 20d3e6d0d796..a37335e3381c 100644
---- a/drivers/gpu/nova-core/Kconfig
-+++ b/drivers/gpu/nova-core/Kconfig
-@@ -14,3 +14,14 @@ config NOVA_CORE
- 	  This driver is work in progress and may not be functional.
- 
- 	  If M is selected, the module will be called nova_core.
-+
-+config NOVA_PRAMIN_SELFTESTS
-+	bool "PRAMIN self-tests"
-+	depends on NOVA_CORE
-+	default n
-+	help
-+	  Enable self-tests for the PRAMIN aperture mechanism. When enabled,
-+	  basic tests are run during GPU probe after GSP boot to
-+	  verify PRAMIN functionality.
-+
-+	  This is a testing option and should normally be disabled.
-diff --git a/drivers/gpu/nova-core/gsp/boot.rs b/drivers/gpu/nova-core/gsp/boot.rs
-index 54937606b5b0..b9750c86b6ed 100644
---- a/drivers/gpu/nova-core/gsp/boot.rs
-+++ b/drivers/gpu/nova-core/gsp/boot.rs
-@@ -239,6 +239,10 @@ pub(crate) fn boot(
-         // Wait until GSP is fully initialized.
-         commands::wait_gsp_init_done(&mut self.cmdq)?;
- 
-+        // Run PRAMIN aperture self-tests (disabled by default).
-+        #[cfg(CONFIG_NOVA_PRAMIN_SELFTESTS)]
-+        crate::mm::pramin::run_self_test(pdev.as_ref(), bar)?;
-+
-         // Obtain and display basic GPU information.
-         let info = commands::get_gsp_info(&mut self.cmdq, bar)?;
-         dev_info!(
-diff --git a/drivers/gpu/nova-core/mm/pramin.rs b/drivers/gpu/nova-core/mm/pramin.rs
-index 5878a3f80b9c..483832b8f87e 100644
---- a/drivers/gpu/nova-core/mm/pramin.rs
-+++ b/drivers/gpu/nova-core/mm/pramin.rs
-@@ -1,7 +1,5 @@
- // SPDX-License-Identifier: GPL-2.0
- 
--#![expect(unused)]
--
- //! Direct VRAM access through the PRAMIN aperture.
- //!
- //! PRAMIN provides a 1MB sliding window into VRAM through BAR0, allowing the CPU to access
-@@ -56,6 +54,8 @@
- //! }
- //! ```
- 
-+#![allow(unused)]
-+
- use crate::{
-     driver::Bar0,
-     regs, //
-@@ -198,3 +198,101 @@ unsafe impl Send for Window<'_> {}
- 
- // SAFETY: `Window` requires `&mut self` for all accessors.
- unsafe impl Sync for Window<'_> {}
-+
-+/// Run PRAMIN self-tests during probe.
-+#[cfg(CONFIG_NOVA_PRAMIN_SELFTESTS)]
-+pub(crate) fn run_self_test(dev: &kernel::device::Device, bar: &Bar0) -> Result {
-+    dev_info!(dev, "PRAMIN: Starting self-test...\n");
-+
-+    let mut win = Window::new(bar);
-+
-+    // Use offset 0x1000 as test area.
-+    let base: usize = 0x1000;
-+
-+    // Test 1: Read/write at odd-aligned locations.
-+    dev_info!(dev, "PRAMIN: Test 1 - Odd-aligned u8 read/write\n");
-+    for i in 0u8..4 {
-+        let offset = base + 1 + i as usize; // Offsets 0x1001, 0x1002, 0x1003, 0x1004
-+        let val = 0xA0 + i;
-+        win.try_write8(offset, val)?;
-+        let read_val = win.try_read8(offset)?;
-+        if read_val != val {
-+            dev_err!(
-+                dev,
-+                "PRAMIN: FAIL - offset {:#x}: wrote {:#x}, read {:#x}\n",
-+                offset,
-+                val,
-+                read_val
-+            );
-+            return Err(EIO);
-+        }
-+    }
-+    dev_info!(dev, "PRAMIN: Test 1 PASSED\n");
-+
-+    // Test 2: Write u32 and read back as u8s.
-+    dev_info!(dev, "PRAMIN: Test 2 - Write u32, read as u8s\n");
-+    let test2_offset = base + 0x10;
-+    let test2_val: u32 = 0xDEADBEEF;
-+    win.try_write32(test2_offset, test2_val)?;
-+
-+    // Read back as individual bytes (little-endian: EF BE AD DE).
-+    let expected_bytes: [u8; 4] = [0xEF, 0xBE, 0xAD, 0xDE];
-+    for (i, &expected) in expected_bytes.iter().enumerate() {
-+        let read_val = win.try_read8(test2_offset + i)?;
-+        if read_val != expected {
-+            dev_err!(
-+                dev,
-+                "PRAMIN: FAIL - offset {:#x}: expected {:#x}, read {:#x}\n",
-+                test2_offset + i,
-+                expected,
-+                read_val
-+            );
-+            return Err(EIO);
-+        }
-+    }
-+    dev_info!(dev, "PRAMIN: Test 2 PASSED\n");
-+
-+    // Test 3: Window repositioning across 1MB boundaries.
-+    // Write to offset > 1MB to trigger window slide, then verify.
-+    dev_info!(dev, "PRAMIN: Test 4 - Window repositioning\n");
-+    let test4_offset_a = base; // First 1MB region
-+    let test4_offset_b = 0x200000 + base; // 2MB + base (different 1MB region)
-+    let val_a: u32 = 0x11111111;
-+    let val_b: u32 = 0x22222222;
-+
-+    // Write to first region.
-+    win.try_write32(test4_offset_a, val_a)?;
-+
-+    // Write to second region (triggers window reposition).
-+    win.try_write32(test4_offset_b, val_b)?;
-+
-+    // Read back from second region.
-+    let read_b = win.try_read32(test4_offset_b)?;
-+    if read_b != val_b {
-+        dev_err!(
-+            dev,
-+            "PRAMIN: FAIL - offset {:#x}: expected {:#x}, read {:#x}\n",
-+            test4_offset_b,
-+            val_b,
-+            read_b
-+        );
-+        return Err(EIO);
-+    }
-+
-+    // Read back from first region (triggers window reposition again).
-+    let read_a = win.try_read32(test4_offset_a)?;
-+    if read_a != val_a {
-+        dev_err!(
-+            dev,
-+            "PRAMIN: FAIL - offset {:#x}: expected {:#x}, read {:#x}\n",
-+            test4_offset_a,
-+            val_a,
-+            read_a
-+        );
-+        return Err(EIO);
-+    }
-+    dev_info!(dev, "PRAMIN: Test 3 PASSED\n");
-+
-+    dev_info!(dev, "PRAMIN: All self-tests PASSED\n");
-+    Ok(())
-+}
+base-commit: 8e7460eac786c72f48c4e04ce9be692b939428ce
 -- 
-2.34.1
+2.52.0
 
