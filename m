@@ -2,38 +2,38 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id B1545CD2C77
-	for <lists+nouveau@lfdr.de>; Sat, 20 Dec 2025 10:48:26 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 2518BCD2CC8
+	for <lists+nouveau@lfdr.de>; Sat, 20 Dec 2025 11:01:55 +0100 (CET)
 Received: from kara.freedesktop.org (unknown [131.252.210.166])
-	by gabe.freedesktop.org (Postfix) with ESMTPS id 6258C10E214;
-	Sat, 20 Dec 2025 09:48:24 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTPS id F2B6610E222;
+	Sat, 20 Dec 2025 10:01:51 +0000 (UTC)
 Authentication-Results: gabe.freedesktop.org;
-	dkim=fail reason="signature verification failed" (2048-bit key; unprotected) header.d=google.com header.i=@google.com header.b="CGcab/LD";
+	dkim=fail reason="signature verification failed" (2048-bit key; unprotected) header.d=google.com header.i=@google.com header.b="LlFWCAG8";
 	dkim-atps=neutral
 Received: from kara.freedesktop.org (localhost [127.0.0.1])
-	by kara.freedesktop.org (Postfix) with ESMTP id 5ADF34563F;
-	Sat, 20 Dec 2025 09:40:49 +0000 (UTC)
+	by kara.freedesktop.org (Postfix) with ESMTP id E2F3945649;
+	Sat, 20 Dec 2025 09:54:16 +0000 (UTC)
 ARC-Seal: i=1; cv=none; a=rsa-sha256; d=lists.freedesktop.org;
- s=20240201; t=1766223649;
- b=MDXCL+WRsIHdMFnDmrQKL2sqogDQrkDPJDOPlGldzcO4VrM6o95nyTbY5sSHy0UJ1ZhQI
- EkXblS4aE0/iC3TGNkD9De2IlKidayhnyKty5WTWsfwLWyevX0KLN0mmzLxGCO2tWh3Suw+
- Jkdol7jfcONygGaHIXWU05lBLTIcCsM+E5yGws6yfEEWW1PV0DY6VIUtAPjEOkueOT+u7sO
- R+UpKvFYDDZMWywnr/DvDfmcS0iSIiGEH0gXjm+qKyNiD7GtlQ9q+oIcUm+L4kUTfQZ4pC8
- p4B9FYGBvT/t8iRtF7ndZkO97+xfOYnrirAhmgIaFBwEQwAevh0LJHrXrQQg==
+ s=20240201; t=1766224456;
+ b=O9WDgDYAcQhYX40YMZQLEPcCABFN4fNcCUjqqeAyytUyphI+bjbonEBiwhb2M8gXd8A3l
+ p4w/MoDmbX/jkVSmJQFdeh9N73zlcqzDWGqVJoPxvzqH2Q5gLUtRQrscWe5Z5gaazR4KleR
+ c6uWCEKJqB4ZLQTq2E65FU7/g/GL258DWEkyl7GesUtt6sRPFigN4q+/XZo0JeIutRewsgr
+ Q6FeIJKMdcAT+0s/MQIgbcPWeR/6gVjz8nbTVQYuzEeHBOHgFD2Czsy8nGzIkkzgk6ZyGPk
+ t83qvpkw9M3TafF4EWgbknlPyQfUng7EIDNqoXbeJKX6bR3mwaO/B2+YrFLA==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed;
- d=lists.freedesktop.org; s=20240201; t=1766223649; h=from : sender :
+ d=lists.freedesktop.org; s=20240201; t=1766224456; h=from : sender :
  reply-to : subject : date : message-id : to : cc : mime-version :
  content-type : content-transfer-encoding : content-id :
  content-description : resent-date : resent-from : resent-sender :
  resent-to : resent-cc : resent-message-id : in-reply-to : references :
  list-id : list-help : list-unsubscribe : list-subscribe : list-post :
  list-owner : list-archive;
- bh=qOW4PnpVwJ1a1ow90wBbPY5V5qFqMGNXJlCYoRRToZ8=;
- b=uCmILFdyMsTBOods/7PFJ2yROvVksM8OWEVry97Ev22zwq1sdGNtZzjCPquJA7/WylikY
- k74NajB7//4SmD6NKJUWXQpPI7oFsm6nEDyM54yb9C4/zvg9CU4PvDd1e/COG5EnhuVlrSL
- A7NYf5f6eXujavcAlyFbLFl8GeFmmuWeSozP/j5G5E4nGk+QPmx87TB7zifjm9mfcJOayvg
- ck1DQIDE+BoPmaPr9X6i6T6Gvt1DTp06LwWAgj4ed+8qc1eQgjj//JKJmTjpYNjwdhGVy3r
- /8EUIJp25CZ0FeLb9MyJTa2L/7lX10sLSFGLk1673VDQKr2/UJQVTZbJK1bQ==
+ bh=ocwPq1u4g2mzhV09irHynQ5ZI4NxkFIUPpevQXULN2g=;
+ b=nfp6QdbGtgcPuDN2JpF8pjTvxQm/Bf0FU7rf6ogk5zLS7Gfb6bgyRSrareTrrXEaKx6AF
+ GYZVqIC1OoeSq4DtvhhFVjAqYfPNs+lcfSvVmvsVdbJLeknFi1FdjjR91CQ9qjW+13mUvfE
+ 3ZKJ+PZLUS9374GtTZEGe3c9pbtoYiE4DyQahiJ/+75Ly+DMLDJ0BExwLdauh6aQHkWxkGp
+ kQ7dLHrnNe1yY6hhAxydfS5rX1WEWYGQKJAShNg9/oDTgejYzn+b4QpjXxly0ZSWpmxY8VJ
+ hcCSXdMxRNkzcWlzqEhJN59sAOEvYusDeyGZQNsDMJCmWn2yorHbmb/a6IsA==
 ARC-Authentication-Results: i=1; mail.freedesktop.org;
  dkim=pass header.d=google.com;
   arc=none (Message is not ARC signed);
@@ -44,67 +44,67 @@ Authentication-Results: mail.freedesktop.org; dkim=pass header.d=google.com;
  dmarc=pass (Used From Domain Record) header.from=google.com
  policy.dmarc=reject
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by kara.freedesktop.org (Postfix) with ESMTPS id D522944B89
-	for <nouveau@lists.freedesktop.org>; Sat, 20 Dec 2025 09:40:45 +0000 (UTC)
-Received: from mail-wm1-f73.google.com (mail-wm1-f73.google.com
- [209.85.128.73])
-	by gabe.freedesktop.org (Postfix) with ESMTPS id 8463A10E20C
-	for <nouveau@lists.freedesktop.org>; Sat, 20 Dec 2025 09:48:20 +0000 (UTC)
-Received: by mail-wm1-f73.google.com with SMTP id
- 5b1f17b1804b1-477c49f273fso32938095e9.3
+	by kara.freedesktop.org (Postfix) with ESMTPS id 3CF32440A9
+	for <nouveau@lists.freedesktop.org>; Sat, 20 Dec 2025 09:54:14 +0000 (UTC)
+Received: from mail-ed1-f73.google.com (mail-ed1-f73.google.com
+ [209.85.208.73])
+	by gabe.freedesktop.org (Postfix) with ESMTPS id 0083410E20E
+	for <nouveau@lists.freedesktop.org>; Sat, 20 Dec 2025 10:01:48 +0000 (UTC)
+Received: by mail-ed1-f73.google.com with SMTP id
+ 4fb4d7f45d1cf-64b5aff9566so3025723a12.3
         for <nouveau@lists.freedesktop.org>;
- Sat, 20 Dec 2025 01:48:20 -0800 (PST)
+ Sat, 20 Dec 2025 02:01:48 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=google.com; s=20230601; t=1766224099; x=1766828899;
+        d=google.com; s=20230601; t=1766224907; x=1766829707;
  darn=lists.freedesktop.org;
         h=cc:to:from:subject:message-id:references:mime-version:in-reply-to
          :date:from:to:cc:subject:date:message-id:reply-to;
-        bh=qOW4PnpVwJ1a1ow90wBbPY5V5qFqMGNXJlCYoRRToZ8=;
-        b=CGcab/LD1Tewn2zawoyvHJwlHbVvwkW0if6k+AmAansyAJ7+m8MzZUexgSTdBaDnKa
-         QidWwIebPowtugFgromhZvqwN9SyrwdNYnY3aIQgfVsggCMZC4ZFjXo01QB61m2+lJRa
-         rVbEGt4RTFAHGL9HeeQa51sr5++RccC7FOPigH7X1ckLec4yXEsI/m9VJbLEM9Z1Rmh+
-         i2b3GRKPtwubdppIC9wSkEyb7fmnndkGF6uitC+SPAnPaVXY6QJwSFPT11Vsfhj41B0t
-         /a2sgWUaFGtdT/w5rSoxlA4CvXMaWUJMWkVgoCcOlzVpH8is1c3ipnUdVJMLksoseTCk
-         AZwg==
+        bh=ocwPq1u4g2mzhV09irHynQ5ZI4NxkFIUPpevQXULN2g=;
+        b=LlFWCAG8llx83AYbiqgbw3sb3twEXpKJHaZrOHgfPqD0FbukGfTPlfvHxWBM10Hs8G
+         lxKyPoszc82PMrpdpCKYmydRDfaRXjZA4S6CrHgFNdefOW+57iTVz6xxvTWiJLFcE6wP
+         //YEe1UA/WQgcVp5aYjPFWfaM4ifpcdlyBEVneQCHNXaB0hjGwdMs7RwBrzPMgZwyVHi
+         6NvMP7HHlNmxDLsF6jCv2Rem7CT+CCNg8tgetNmv0iDSxyK1mSzBEW9rMRqlGtV9Whad
+         WTjXipTBKvfOQ32U7C4QKpnykUNf0xVKaq5iXnDQl/Y2hvHnE1ej5Yuq1OKk52jA/CvW
+         1law==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1766224099; x=1766828899;
+        d=1e100.net; s=20230601; t=1766224907; x=1766829707;
         h=cc:to:from:subject:message-id:references:mime-version:in-reply-to
          :date:x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
-        bh=qOW4PnpVwJ1a1ow90wBbPY5V5qFqMGNXJlCYoRRToZ8=;
-        b=HVfGNY6Kxkt4FIC/xPHsNVAYQgSoW+HDKksAKXP5sf9qCaevTRA9JKAZXVaziLAdmP
-         30iIxatTG8VCoZahWQYSiR/IwC8iSgz5yhUc94+00JFGqjd/jxhDAdymzFBYaZfnUi/c
-         ZsY5Mz/8hLfPL6bfUJ7SLDeLRB2kc6F9j0qds3Yp9vjAd9Fp3h5d+Wa/+sIHW/3eymse
-         ru97MZMJj8I5NGpE93fn+kzEqgqXYXu/KHp3+qwAlBehQhJOZKvQzakqKbcTv2Kdgny0
-         lBft1PK/Aag/1U72kHsUV2GwRXkjK93INoy3+07m6IN4x9ZaYQ9RScGkeqjAqow4gZvG
-         ouKw==
+        bh=ocwPq1u4g2mzhV09irHynQ5ZI4NxkFIUPpevQXULN2g=;
+        b=v3/3z6dvUcPi6eVEyYpMFeXf7pjQzIol9uZ42/odixmBjp5S9Y5wzIGctib9oaihIa
+         OLxHUwrBDGuwlo2w31I3dcnJKH52dChcMmOTxYMFFKuhWh7LbHaRlFAWqafZwQkGsKJ/
+         3YQX+cPS9tcyQfS+j7wap/TYC7risc18tGgf7XW/1b1EnR567XxgBPWxEZM5+Jucgm0a
+         m4qcZlHNR0zj7EEnMrVLXq63WzRZyJb8n7Q0CeFs+LLWMJ0/lqLmxtDS+LKL2LstBgUM
+         CikAf2NqFP818uZ+BopaTw6bgjy/QxsSFlpOGScn/WGRunD40SZ88ZMfe9fGNdlBphjs
+         Puvw==
 X-Forwarded-Encrypted: i=1;
- AJvYcCUuB/F9Uumk8234oP0ivjy13g873qD8jYcvEesQBnw9pi/2jm3thibE/zx9gCPsHtf2E8TjtnB6@lists.freedesktop.org
-X-Gm-Message-State: AOJu0Yx9LmlxHUmBCReFGQIDciYO6iwmmuVhf1zTwczLGPmUJTpW1Zcc
-	Rij8GC4dfHv2XQFg+Eep/NWmC6llewzjy/GT1sa+VSSJptlSF/LtnHL80E/XL9SKRprUilZvbfJ
-	VkRlo5AgC7ljYH1zCJw==
+ AJvYcCVNQweM/OA+xPq2eNZYBP1iLzdEsx3qfrQDjtnywwuyR4AXCvQR4ojCx8UFeULZiPL0kotpZnop@lists.freedesktop.org
+X-Gm-Message-State: AOJu0YzgP1R+BsNFuOovtEaty/zQqS8XHO7+GxV45CAXqAXDhCmHz0uh
+	dWmHVIeDUq/5T4IRTHtn96/7qbeBFrV3mg24Zkeovt9PNCCePpgbmwRu1lEP+BGw6S7ZH5uMmo5
+	nWWh/dMgUFJh12HJ/kg==
 X-Google-Smtp-Source: 
- AGHT+IF/wwyCbmZKrb9+OJuirDYtRZw2m8SWoZaJ0QqeIqy0vt7I3G/xdsnBsD2ylGONwHmPG8Ly7PYUfnT9IJg=
-X-Received: from wmbjp12.prod.google.com
- ([2002:a05:600c:558c:b0:475:decb:4c4d])
+ AGHT+IG5pJx6M7iv4XX9yaURjf8mepTlu7YYJc3wOo7y0QcuEDT1u5dJwGmGqq3CfkKzGEqd1szxRNtAfdZCVwY=
+X-Received: from ejdcw8.prod.google.com ([2002:a17:907:1608:b0:b72:41e4:7557])
  (user=aliceryhl job=prod-delivery.src-stubby-dispatcher) by
- 2002:a05:600c:608d:b0:477:93f7:bbc5 with SMTP id
- 5b1f17b1804b1-47d195667d6mr53518855e9.10.1766224098608;
- Sat, 20 Dec 2025 01:48:18 -0800 (PST)
-Date: Sat, 20 Dec 2025 09:48:17 +0000
-In-Reply-To: <DF2AXQ67412G.33JOX2CF0VFCK@kernel.org>
+ 2002:a17:907:7e85:b0:b73:4006:1875 with SMTP id
+ a640c23a62f3a-b803719ef9amr511534366b.38.1766224907016;
+ Sat, 20 Dec 2025 02:01:47 -0800 (PST)
+Date: Sat, 20 Dec 2025 10:01:46 +0000
+In-Reply-To: <aUZw4fpWRUWFsb9r@google.com>
 Mime-Version: 1.0
 References: <20251128-gpuvm-rust-v1-0-ebf66bf234e0@google.com>
  <20251128-gpuvm-rust-v1-4-ebf66bf234e0@google.com>
  <DF2AXQ67412G.33JOX2CF0VFCK@kernel.org>
-Message-ID: <aUZw4fpWRUWFsb9r@google.com>
+ <aUZw4fpWRUWFsb9r@google.com>
+Message-ID: <aUZ0CsLrHjP3wMac@google.com>
 Subject: Re: [PATCH 4/4] rust: drm: add GPUVM immediate mode abstraction
 From: Alice Ryhl <aliceryhl@google.com>
 To: Danilo Krummrich <dakr@kernel.org>
 Content-Type: text/plain; charset="utf-8"
-Message-ID-Hash: LTRWHJ6KTJUHIXNZMZBYQBTBIQMA4VSS
-X-Message-ID-Hash: LTRWHJ6KTJUHIXNZMZBYQBTBIQMA4VSS
+Message-ID-Hash: SOC67UFSVL7NY5WGTDLLQYZIS7UQJD3Z
+X-Message-ID-Hash: SOC67UFSVL7NY5WGTDLLQYZIS7UQJD3Z
 X-MailFrom: 
- 34nBGaQkKBy8LWTNPcjSWRZZRWP.NZXYZfgPLfWTded.QcPPOPdVeZa.ZcR@flex--aliceryhl.bounces.google.com
+ 3C3RGaQkKB146HE8ANUDHCKKCHA.8KIJKQRA6QHEOPO.BNAA9AOGPKL.KNC@flex--aliceryhl.bounces.google.com
 X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency;
  loop; banned-address; member-moderation; nonmember-moderation; administrivia;
  implicit-dest; max-recipients; max-size; news-moderation; no-subject;
@@ -124,9 +124,7 @@ CC: Daniel Almeida <daniel.almeida@collabora.com>,
  Matt Coster <matt.coster@imgtec.com>,
  Rob Clark <robin.clark@oss.qualcomm.com>,
  Dmitry Baryshkov <lumag@kernel.org>, Abhinav Kumar <abhinav.kumar@linux.dev>,
- Jessica Zhang <jessica.zhang@oss.qualcomm.com>, Sean Paul <sean@poorly.run>,
- Marijn Suijten <marijn.suijten@somainline.org>,
- Lucas De Marchi <lucas.demarchi@intel.com>,
+ Sean Paul <sean@poorly.run>, Marijn Suijten <marijn.suijten@somainline.org>,
  Rodrigo Vivi <rodrigo.vivi@intel.com>,
  Sumit Semwal <sumit.semwal@linaro.org>,
  Christian =?utf-8?B?S8O2bmln?= <christian.koenig@amd.com>,
@@ -134,13 +132,13 @@ CC: Daniel Almeida <daniel.almeida@collabora.com>,
  rust-for-linux@vger.kernel.org, linux-arm-msm@vger.kernel.org,
  freedreno@lists.freedesktop.org, nouveau@lists.freedesktop.org,
  intel-xe@lists.freedesktop.org, linux-media@vger.kernel.org,
- linaro-mm-sig@lists.linaro.org, Asahi Lina <lina+kernel@asahilina.net>
+ Asahi Lina <lina+kernel@asahilina.net>
 X-Mailman-Version: 3.3.8
 Precedence: list
 List-Id: Nouveau development list <nouveau.lists.freedesktop.org>
 Archived-At: 
- <https://lists.freedesktop.org/hyperkitty/list/nouveau@lists.freedesktop.org/message/LTRWHJ6KTJUHIXNZMZBYQBTBIQMA4VSS/>
-Archived-At: <https://lore.freedesktop.org/aUZw4fpWRUWFsb9r@google.com/>
+ <https://lists.freedesktop.org/hyperkitty/list/nouveau@lists.freedesktop.org/message/SOC67UFSVL7NY5WGTDLLQYZIS7UQJD3Z/>
+Archived-At: <https://lore.freedesktop.org/aUZ0CsLrHjP3wMac@google.com/>
 List-Archive: 
  <https://lists.freedesktop.org/hyperkitty/list/nouveau@lists.freedesktop.org/>
 List-Archive: <https://lore.freedesktop.org/nouveau>
@@ -150,76 +148,6 @@ List-Post: <mailto:nouveau@lists.freedesktop.org>
 List-Subscribe: <mailto:nouveau-join@lists.freedesktop.org>
 List-Unsubscribe: <mailto:nouveau-leave@lists.freedesktop.org>
 
-On Fri, Dec 19, 2025 at 04:35:00PM +0100, Danilo Krummrich wrote:
-> On Fri Nov 28, 2025 at 3:14 PM CET, Alice Ryhl wrote:
-> > +    /// Returns a [`GpuVmBoObtain`] for the provided GEM object.
-> > +    #[inline]
-> > +    pub fn obtain(
-> > +        &self,
-> > +        obj: &T::Object,
-> > +        data: impl PinInit<T::VmBoData>,
-> > +    ) -> Result<GpuVmBoObtain<T>, AllocError> {
-> > +        Ok(GpuVmBoAlloc::new(self, obj, data)?.obtain())
-> > +    }
-> 
-> Does this method make sense? We usually preallocate a VM_BO, then enter the
-> fence signalling critical path and then obtain the VM_BO.
+On Sat, Dec 20, 2025 at 09:48:17AM +0000, Alice Ryhl wrote:
 
-Hmm, but there is something tricky here. When do we add it to the extobj
-list, then? If we add it before starting the critical path, then we must
-also call drm_gpuvm_bo_obtain_prealloc() before starting the critical
-path because obtain must happen before drm_gpuvm_bo_extobj_add(). And
-adding it to extobj after signalling the fence seems error prone.
-
-And besides, adding it to the extobj list before the critical path
-means that we can have drm_gpuvm_exec_lock() lock the new BO without
-having to do anything special - it's simply in the extobj list by the
-time we call drm_gpuvm_exec_lock().
-
-> > +impl<T: DriverGpuVm> DerefMut for GpuVmCore<T> {
-> > +    #[inline]
-> > +    fn deref_mut(&mut self) -> &mut T {
-> > +        // SAFETY: By the type invariants we may access `core`.
-> > +        unsafe { &mut *self.0.core.get() }
-> > +    }
-> > +}
-> 
-> Hm..it seems more natural to me to deref to &GpuVm<T> and provide data() and
-> data_mut().
-
-That's fair.
-
-> > +impl<T: DriverGpuVm> Drop for GpuVmBoAlloc<T> {
-> > +    #[inline]
-> > +    fn drop(&mut self) {
-> > +        // SAFETY: It's safe to perform a deferred put in any context.
-> > +        unsafe { bindings::drm_gpuvm_bo_put_deferred(self.as_raw()) };
-> 
-> This does not need to be deferred, no?
-
-I think what I *actually* want to call here is
-
-	kref_put(&self->kref, drm_gpuvm_bo_destroy_not_in_lists_kref);
-
-like what drm_gpuvm_bo_obtain_prealloc() does as of the first patch in
-this series.
-
-> > +    }
-> > +}
-> > +
-> > +/// A [`GpuVmBo`] object in the GEM list.
-> > +///
-> > +/// # Invariants
-> > +///
-> > +/// Points at a `drm_gpuvm_bo` that contains a valid `T::VmBoData` and is present in the gem list.
-> > +pub struct GpuVmBoObtain<T: DriverGpuVm>(NonNull<GpuVmBo<T>>);
-> 
-> How is this different from GpuVmBo? The only object that is not in the GEM list
-> should be GpuVmBoAlloc, i.e. the preallocated one.
-
-The difference is whether there is pointer indirection or not.
-
-This type is morally an ARef<GpuVm<T>>, except I don't expose any way
-to increment the refcount.
-
-Alice
+Test email
