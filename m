@@ -2,129 +2,112 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id 6F7FACD7085
-	for <lists+nouveau@lfdr.de>; Mon, 22 Dec 2025 21:04:28 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 01114CD9EA6
+	for <lists+nouveau@lfdr.de>; Tue, 23 Dec 2025 17:15:41 +0100 (CET)
 Received: from kara.freedesktop.org (unknown [131.252.210.166])
-	by gabe.freedesktop.org (Postfix) with ESMTPS id 99FE510E29C;
-	Mon, 22 Dec 2025 20:04:25 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTPS id 9B9FA10E282;
+	Tue, 23 Dec 2025 16:15:39 +0000 (UTC)
 Authentication-Results: gabe.freedesktop.org;
-	dkim=pass (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="Ks4sEbD4";
+	dkim=pass (2048-bit key; unprotected) header.d=bne-home.net header.i=@bne-home.net header.b="dkPNA7ix";
 	dkim-atps=neutral
 Received: from kara.freedesktop.org (localhost [127.0.0.1])
-	by kara.freedesktop.org (Postfix) with ESMTP id 2B9C144C4E;
-	Mon, 22 Dec 2025 19:56:45 +0000 (UTC)
+	by kara.freedesktop.org (Postfix) with ESMTP id 69C3444C56;
+	Tue, 23 Dec 2025 16:07:57 +0000 (UTC)
 ARC-Seal: i=1; cv=none; a=rsa-sha256; d=lists.freedesktop.org;
- s=20240201; t=1766433405;
- b=Kk+cbT/tWFPBxjnWvIQVjr0aUXGl1ZQKgCYrgsCZH7Yj5Ccy9lwZw2XZrvIeL+8rwURiO
- LS8M0AHn0s3/HFvvQ0q5sXcQVdzgNWhRigS8Z8eH6sue/llSfhDqpsc/NBnZcj/OJyWiedf
- Pddig39VslErN6vSrKVyZMWxzsq9Nwm2dh7P6scqFtwr9dBv8ujo34AuUu9y0exo2AGbH6V
- 6+zYPUOPaV3JfkDz49yKTR87I9WCRVe7EY4W3mam5R13L0wpYKShYst4PzG2Ezr/n/HNJ69
- vZpgslcLUd7ecETnHbG9Lto7EX/6dBrnSnq/eY0Y2UWJtbOLIyuteSlQwC8Q==
+ s=20240201; t=1766506077;
+ b=rShxxEE7XN3FatTuhNfwUj33SagVp1C5hWD5XwFbxzDMvFKFWxx75Z8CC3reO1Pd+J6oH
+ uikmMfDXzFM6wNXhXUDQ9zUrXplX2QBl1CxBmY45yqT19KoXND3fLcY/UYVQcnOLAk95h7m
+ pY4mdkciUboP/Qe2y0eaU+64W3fPV3I4yt1MvUIOvpJsethivmuvyL7gntQLHIEB3Voi0fh
+ jAvNdza3V7ZjLjUbgmmDWiqkjCqwJOJobNn0P4TFGlzkWvwvclLQyOjw7Xaj9R6HpWAE34F
+ QWgHIOXlFVuOpeZ+tQkXoLiZrPLAPYkYrd7D71PdPpQzGu8VgBEZtoflI1Nw==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed;
- d=lists.freedesktop.org; s=20240201; t=1766433405; h=from : sender :
+ d=lists.freedesktop.org; s=20240201; t=1766506077; h=from : sender :
  reply-to : subject : date : message-id : to : cc : mime-version :
  content-type : content-transfer-encoding : content-id :
  content-description : resent-date : resent-from : resent-sender :
  resent-to : resent-cc : resent-message-id : in-reply-to : references :
  list-id : list-help : list-unsubscribe : list-subscribe : list-post :
  list-owner : list-archive;
- bh=MsNw3QANNzXGCC+wfU8B5+Ncwkor4a1kPh5rqbsQfSI=;
- b=IllDE9Byc81Y+xUZPQ3OBe5KELpAHzJxOchf8XR49ov9seTaLjJkGGtO51BEjNNkZqBS3
- lKfFiNZn+BQ0v2OeBC0R2VsyciEHMwXnIm/JAclRYr7nWagqQ44LbPqGqiUeas9dUy3r0EG
- uYonr0BMUpA6gB9RKUmfGZ/VuCm9KfUPuzXbUUyjnn/eMUVVQQTyVCXvr4uXRhqPkUWnpS/
- aUbmo4pZjyHtyQx1Gq3DZ7ZdkyT6Tb0DwSIbcrgYBei3DVgSw9K0EdQUIRwxm/Lb88dflvD
- TiasVJPsizCTDSo3wuXDlD5HN7PqfU9hmWfhL5SaMAPSHD9j9nuupAzpZlGw==
+ bh=PgFncF/RAuPmSd/ndbWFGHlEySnfTyAhpN6Jo23lMt0=;
+ b=GEABJKjtpinkzKnEVE7vFZECpJ3vGHWpUitsr/9h75ar76nPGwLIg0HhzBcWNW95ol1xC
+ VRfzRAb6SoxdQzK4Kv8qMNjUevQj6cTS3tXQynMM5KBMkInFb2CXC5KTV1b3pz9wRiS+JC0
+ EGFghWvPwJCAag3hDfdrTI4H8v+g7u2YEMXAlp13V2HSJ6TMEpLMCk/hjggX5psSH49QDyx
+ iNR2SPcDe+0rzpYQ1/bUv784c/zPtq5q1IkaXITkzLNTguQvE8iNlq9Ms20+Ef7+++Efdr9
+ 5nXU2ozzIvkIwB9u+7fX3j5eldS5KESKiYVtnPvpZjAoQA53FE79GGhqfDMA==
 ARC-Authentication-Results: i=1; mail.freedesktop.org;
- dkim=pass header.d=kernel.org;
+ dkim=pass header.d=bne-home.net;
   arc=none (Message is not ARC signed);
-  dmarc=pass (Used From Domain Record) header.from=kernel.org
- policy.dmarc=quarantine
-Authentication-Results: mail.freedesktop.org; dkim=pass header.d=kernel.org;
- arc=none (Message is not ARC signed);
- dmarc=pass (Used From Domain Record) header.from=kernel.org
- policy.dmarc=quarantine
+  dmarc=none
+Authentication-Results: mail.freedesktop.org; dkim=pass header.d=bne-home.net;
+ arc=none (Message is not ARC signed); dmarc=none
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by kara.freedesktop.org (Postfix) with ESMTPS id EFBC6440AB
-	for <nouveau@lists.freedesktop.org>; Mon, 22 Dec 2025 19:56:41 +0000 (UTC)
-Received: from sea.source.kernel.org (sea.source.kernel.org [172.234.252.31])
-	by gabe.freedesktop.org (Postfix) with ESMTPS id 11D5010E07C;
-	Mon, 22 Dec 2025 20:04:22 +0000 (UTC)
-Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
-	by sea.source.kernel.org (Postfix) with ESMTP id 2B9BE40DB7;
-	Mon, 22 Dec 2025 20:04:21 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 5FB36C4CEF1;
-	Mon, 22 Dec 2025 20:04:11 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
-	s=k20201202; t=1766433861;
-	bh=zwpPZI3aCzU701r+bt49CUPkrH2uvexax+yCoGFo4dk=;
-	h=From:To:Cc:In-Reply-To:References:Subject:Date:From;
-	b=Ks4sEbD4BmEIL+iZbfylQlhQIi6pN3LrZ83VQb9hSJU3r7XUizrxcsW6e/FeWfUvd
-	 gUHvKlGB9e7kpSWLMwSsxLIajsEJesvz+egvwY9KfQKhXq5lWNSDo7ad5p76ERuwYn
-	 nx733ghtCo2Vv0USO877gmZtEIAvFFkMMf4O5yXdUVX8g1KzsKgmEYf13snZfFswn2
-	 UzB43OXM0N2SIksoQEeMUYVUD9pc+B9Qd24TzWGVxk7U11h1w87whOpqfCRkCfjgCG
-	 trJawH2puCyAErsYIAFuNf7WoKp1zQJIft2VjIy4xRgaq9BOtNkaBPi2FfphiVKZ71
-	 5RKGWht8ECTkQ==
-From: Mark Brown <broonie@kernel.org>
-To: "Rafael J. Wysocki" <rafael@kernel.org>,
- Viresh Kumar <viresh.kumar@linaro.org>, Miguel Ojeda <ojeda@kernel.org>,
- Alex Gaynor <alex.gaynor@gmail.com>, Boqun Feng <boqun.feng@gmail.com>,
- Gary Guo <gary@garyguo.net>,
- =?utf-8?q?Bj=C3=B6rn_Roy_Baron?= <bjorn3_gh@protonmail.com>,
- Benno Lossin <lossin@kernel.org>, Andreas Hindborg <a.hindborg@kernel.org>,
- Alice Ryhl <aliceryhl@google.com>, Trevor Gross <tmgross@umich.edu>,
- Danilo Krummrich <dakr@kernel.org>,
- Maarten Lankhorst <maarten.lankhorst@linux.intel.com>,
- Maxime Ripard <mripard@kernel.org>, Thomas Zimmermann <tzimmermann@suse.de>,
- David Airlie <airlied@gmail.com>, Simona Vetter <simona@ffwll.ch>,
- FUJITA Tomonori <fujita.tomonori@gmail.com>, Andrew Lunn <andrew@lunn.ch>,
- Heiner Kallweit <hkallweit1@gmail.com>,
- Russell King <linux@armlinux.org.uk>,
- "David S. Miller" <davem@davemloft.net>, Eric Dumazet <edumazet@google.com>,
- Jakub Kicinski <kuba@kernel.org>, Paolo Abeni <pabeni@redhat.com>,
- Michael Turquette <mturquette@baylibre.com>,
- Stephen Boyd <sboyd@kernel.org>, Breno Leitao <leitao@debian.org>,
- Greg Kroah-Hartman <gregkh@linuxfoundation.org>,
- Luis Chamberlain <mcgrof@kernel.org>, Russ Weight <russ.weight@linux.dev>,
- Dave Ertman <david.m.ertman@intel.com>, Ira Weiny <ira.weiny@intel.com>,
- Leon Romanovsky <leon@kernel.org>, Bjorn Helgaas <bhelgaas@google.com>,
- =?utf-8?q?Krzysztof_Wilczy=C5=84ski?= <kwilczynski@kernel.org>,
- Arnd Bergmann <arnd@arndb.de>, Brendan Higgins <brendan.higgins@linux.dev>,
- David Gow <davidgow@google.com>, Jens Axboe <axboe@kernel.dk>,
- Alexandre Courbot <acourbot@nvidia.com>,
- Alexander Viro <viro@zeniv.linux.org.uk>,
- Christian Brauner <brauner@kernel.org>, Jan Kara <jack@suse.cz>,
- Liam Girdwood <lgirdwood@gmail.com>, Rae Moar <raemoar63@gmail.com>,
- Tamir Duberstein <tamird@gmail.com>
-In-Reply-To: <20250925-core-cstr-cstrings-v2-0-78e0aaace1cd@gmail.com>
-References: <20250925-core-cstr-cstrings-v2-0-78e0aaace1cd@gmail.com>
-Subject: Re: (subset) [PATCH v2 00/19] rust: replace `kernel::c_str!` with
- C-Strings
-Message-Id: <176643385114.959021.16173066477128119135.b4-ty@kernel.org>
-Date: Mon, 22 Dec 2025 20:04:11 +0000
+	by kara.freedesktop.org (Postfix) with ESMTPS id DA3754030D
+	for <nouveau@lists.freedesktop.org>; Tue, 23 Dec 2025 06:11:46 +0000 (UTC)
+Received: from outbound.st.icloud.com
+ (p-east2-cluster2-host6-snip4-10.eps.apple.com [57.103.78.43])
+	by gabe.freedesktop.org (Postfix) with ESMTPS id BB74C10E0DC
+	for <nouveau@lists.freedesktop.org>; Tue, 23 Dec 2025 06:19:27 +0000 (UTC)
+Received: from outbound.st.icloud.com (unknown [127.0.0.2])
+	by p00-icloudmta-asmtp-us-east-1a-60-percent-15 (Postfix) with ESMTPS id
+ 7285118000A0;
+	Tue, 23 Dec 2025 06:11:01 +0000 (UTC)
+Dkim-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=bne-home.net; s=sig1;
+ bh=PgFncF/RAuPmSd/ndbWFGHlEySnfTyAhpN6Jo23lMt0=;
+ h=Date:From:To:Subject:Message-ID:MIME-Version:Content-Type:x-icloud-hme;
+ b=dkPNA7ixGNjp6V5Mf3oPEYh6bIgPuETaNIcRLNKqGPLfXL1/WlYAksqTjp3El6gfil25yHPM+jzlJQJaLs1HYAAAuaHDWuoYm6b5NguMsEsuYuOTEVD7n2vmziM+nzaOJ6IW3pfQIztJLgD3k0lN9RxU9aldHIzi4ZOyUOZP/lEw3q3C/rP83LXI4nX2xcdTKuAjeM5SHpJm0LI1JIpZ+PuIRLbrhVyUVP/fEuYlCIZm1uePevW1oapw3RzeqJzVsLxsf/NZpnse+3NBKd7QGG8DMvWfjkUdDy+NSmA5eO3lmPm99vC8paYX0JJRcOZs+k+KkKucRiojGs+KmEQhjw==
+mail-alias-created-date: 1746336505199
+Received: from fedora (unknown [17.42.251.67])
+	by p00-icloudmta-asmtp-us-east-1a-60-percent-15 (Postfix) with ESMTPSA id
+ 003DE180009F;
+	Tue, 23 Dec 2025 06:10:58 +0000 (UTC)
+Date: Tue, 23 Dec 2025 16:10:55 +1000
+From: Brendan Shephard <bshephar@bne-home.net>
+To: Alexandre Courbot <acourbot@nvidia.com>
+Subject: Re: [PATCH v4] drm/nova: Align GEM memory allocation to system page
+ size
+Message-ID: <aUoyb9BcnYS0xp8f@fedora>
+References: <20251215083416.266469-1-bshephar@bne-home.net>
+ <DF1DDD8BUIYQ.1YCAA8T6557NP@nvidia.com>
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 7bit
-X-Mailer: b4 0.15-dev-47773
-Message-ID-Hash: PVOAQGQYQIY2JJJ2YV3ZJY54FPJG2QM7
-X-Message-ID-Hash: PVOAQGQYQIY2JJJ2YV3ZJY54FPJG2QM7
-X-MailFrom: broonie@kernel.org
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <DF1DDD8BUIYQ.1YCAA8T6557NP@nvidia.com>
+X-Proofpoint-GUID: qrFTykA8JDHO5cXb2BsBDRPj8ldWf9Iv
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjUxMjIzMDA1MCBTYWx0ZWRfX9/eoxI1WLkk8
+ SRzMXAOA3mK5OdYUW0I5MYgeNffdMLh6X3Uuo6yb94o5hBn9u5wpNaAd1emZDzfpXNERZNu5yTo
+ Lvn9OHqh4tZQ0svCJS8N3QalBFj1bZJqISvLjiKdFvt57SjX72v11sVwcvqmmKcmaZ6DoTXfwf4
+ l+l6NbJfe1XlCZkbfS/Tvl6nDyWjajMYeVc2X1CEpQ3ahy10FWo/xVzkf/UEBIxTB7FRaBecCOl
+ pX/dc0cAkUzc6iBXBCNj5tqFHrWKIXF/QzC117lfQYeUf2JwpgNQrFsrA+N32zKIX/GzZfQGvuT
+ DpVFISwDg1LKicXnj4b
+X-Authority-Info: v=2.4 cv=BJG+bVQG c=1 sm=1 tr=0 ts=694a3276 cx=c_apl:c_pps
+ a=YrL12D//S6tul8v/L+6tKg==:117 a=YrL12D//S6tul8v/L+6tKg==:17
+ a=kj9zAlcOel0A:10 a=wP3pNCr1ah4A:10 a=VkNPw1HP01LnGYTKEx00:22
+ a=Tqo27WzTpzf5rUx77aUA:9 a=CjuIK1q_8ugA:10
+X-Proofpoint-ORIG-GUID: qrFTykA8JDHO5cXb2BsBDRPj8ldWf9Iv
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.293,Aquarius:18.0.1121,Hydra:6.1.9,FMLib:17.12.100.49
+ definitions=2025-12-23_02,2025-12-22_01,2025-10-01_01
+X-Proofpoint-Spam-Details: rule=notspam policy=default score=0 phishscore=0
+ mlxscore=0 clxscore=1030 mlxlogscore=714 suspectscore=0 adultscore=0
+ spamscore=0 malwarescore=0 bulkscore=0 classifier=spam authscore=0 adjust=0
+ reason=mlx scancount=1 engine=8.22.0-2510240001 definitions=main-2512230050
+X-JNJ: 
+ AAAAAAABrBUh0yJo2WecKsw9Hv3boXtZQNEIRW4PhSyfeYiRT8qVuab8LUmVdCsRfjA1SWwhz+kAi9d2GfcZy1oQxF0AgF5nLnwwDxGYMj9UJufxAj/2RA6V4zXbfk1yDPZcY2rEudqjhH+btUbf0Nr+d8mFa2mGR/y0NHjB0vJgO9aM8mcoPlj3SvM46gi8Q7gBq33xqQxrD+qspyQW8Na/hHiGcA0h/TCJaHlUBsctrK2TTqIlPNCPAjLuggR87MJU4KDs7dxz8UIK3Rn3BpSB56ggs3ls1CAekOi+3AgjNyl6z6ZzlCxM03UKrsPqSXk4oLYOl3B5zJDJCxMYa9L+WOhX0cvOcaLjCND+3DAOFjvh/3e5mkps6/5cAYtWP9qVsyLRF+bjQqBlqDh+Qoi6SHuLN9VdaJ8nX+1ByKn52KsDNxX907rqgJA2A1vA46LvuAf0zXLCZS4twlebskemMsa/XdcHRPiT2uea1Z4MgSy71Wl4D8/xM2VnlBo++J2kbozqV4x9RvnrS5UVZv80A/AqojIpbRL6jS4Zvjn5jEESbyNJtIAS1B+FXe/pq6Sv5+llzztd8c4bmXtPS3etG1jg+USziuU0FrnLjWXZllYKLojLBva+4naVvQgSWEGSmiSj5L2rgzW8c/SuI66H/WmEQrmo8z01w8bYeSRi
+X-MailFrom: bshephar@bne-home.net
+X-Mailman-Rule-Hits: nonmember-moderation
 X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency;
- loop; banned-address; member-moderation; nonmember-moderation; administrivia;
- implicit-dest; max-recipients; max-size; news-moderation; no-subject;
- digests; suspicious-header
-CC: linux-pm@vger.kernel.org, linux-kernel@vger.kernel.org,
- rust-for-linux@vger.kernel.org, nouveau@lists.freedesktop.org,
- dri-devel@lists.freedesktop.org, netdev@vger.kernel.org,
- linux-clk@vger.kernel.org, linux-pci@vger.kernel.org,
- linux-kselftest@vger.kernel.org, kunit-dev@googlegroups.com,
- linux-block@vger.kernel.org, linux-fsdevel@vger.kernel.org
+ loop; banned-address; member-moderation
+Message-ID-Hash: SSQWHKGVQ5YBUNQYJICRZBBLMYDYPI5W
+X-Message-ID-Hash: SSQWHKGVQ5YBUNQYJICRZBBLMYDYPI5W
+X-Mailman-Approved-At: Tue, 23 Dec 2025 16:07:55 +0000
+CC: aliceryhl@google.com, joelagnelf@nvidia.com, airlied@redhat.com,
+ rust-for-linux@vger.kernel.org, nouveau@lists.freedesktop.org
 X-Mailman-Version: 3.3.8
 Precedence: list
 List-Id: Nouveau development list <nouveau.lists.freedesktop.org>
 Archived-At: 
- <https://lists.freedesktop.org/hyperkitty/list/nouveau@lists.freedesktop.org/message/PVOAQGQYQIY2JJJ2YV3ZJY54FPJG2QM7/>
-Archived-At: 
- <https://lore.freedesktop.org/176643385114.959021.16173066477128119135.b4-ty@kernel.org/>
+ <https://lists.freedesktop.org/hyperkitty/list/nouveau@lists.freedesktop.org/message/SSQWHKGVQ5YBUNQYJICRZBBLMYDYPI5W/>
+Archived-At: <https://lore.freedesktop.org/aUoyb9BcnYS0xp8f@fedora/>
 List-Archive: 
  <https://lists.freedesktop.org/hyperkitty/list/nouveau@lists.freedesktop.org/>
 List-Archive: <https://lore.freedesktop.org/nouveau>
@@ -134,41 +117,34 @@ List-Post: <mailto:nouveau@lists.freedesktop.org>
 List-Subscribe: <mailto:nouveau-join@lists.freedesktop.org>
 List-Unsubscribe: <mailto:nouveau-leave@lists.freedesktop.org>
 
-On Thu, 25 Sep 2025 09:53:48 -0400, Tamir Duberstein wrote:
-> This series depends on step 3[0].
+On Thu, Dec 18, 2025 at 10:16:48PM +0900, Alexandre Courbot wrote:
+> On Mon Dec 15, 2025 at 5:34 PM JST, Brendan Shephard wrote:
+> >  impl NovaObject {
+> >      /// Create a new DRM GEM object.
+> >      pub(crate) fn new(dev: &NovaDevice, size: usize) -> Result<ARef<gem::Object<Self>>> {
+> > -        let aligned_size = size.next_multiple_of(1 << 12);
+> > -
+> > -        if size == 0 || size > aligned_size {
+> > +        if size == 0 {
+> >              return Err(EINVAL);
+> >          }
+> > +        let aligned_size = page_align(size).ok_or(EINVAL)?;
 > 
-> Subsystem maintainers: I would appreciate your `Acked-by`s so that this
-> can be taken through Miguel's tree (where the previous series must go).
+> nit, but it's a good practice to always leave an empty line before a
+> block of variable declarations.
 > 
-> Link: https://lore.kernel.org/all/20250925-cstr-core-v16-0-5cdcb3470ec2@gmail.com/ [0]
+> >  
+> >          gem::Object::new(dev, aligned_size)
 > 
-> [...]
+> ... or if you prefer to avoid the variable altogether:
+> 
+>     page_align(size)
+>         .ok_or(EINVAL)
+>         .and_then(|size| gem::Object::new(dev, size))
+> 
 
-Applied to
-
-   https://git.kernel.org/pub/scm/linux/kernel/git/broonie/regulator.git for-next
+Sounds good, I'll use `and_then`. I like the idea of not unnecessarily
+assigning variables just to use them once. I'll make that change, re-test
+and send a new revision of this one.
 
 Thanks!
-
-[19/19] rust: regulator: replace `kernel::c_str!` with C-Strings
-        commit: b0655377aa5a410df02d89170c20141a1a5bbc28
-
-All being well this means that it will be integrated into the linux-next
-tree (usually sometime in the next 24 hours) and sent to Linus during
-the next merge window (or sooner if it is a bug fix), however if
-problems are discovered then the patch may be dropped or reverted.
-
-You may get further e-mails resulting from automated or manual testing
-and review of the tree, please engage with people reporting problems and
-send followup patches addressing any issues that are reported if needed.
-
-If any updates are required or you are submitting further changes they
-should be sent as incremental updates against current git, existing
-patches will not be replaced.
-
-Please add any relevant lists and maintainers to the CCs when replying
-to this mail.
-
-Thanks,
-Mark
-
