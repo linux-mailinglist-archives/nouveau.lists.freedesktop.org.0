@@ -2,123 +2,212 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id 110D0CDDF65
-	for <lists+nouveau@lfdr.de>; Thu, 25 Dec 2025 18:11:32 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id BD915CDD701
+	for <lists+nouveau@lfdr.de>; Thu, 25 Dec 2025 08:32:28 +0100 (CET)
 Received: from kara.freedesktop.org (unknown [131.252.210.166])
-	by gabe.freedesktop.org (Postfix) with ESMTPS id C238411BF95;
-	Thu, 25 Dec 2025 17:11:30 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTPS id 4AB9910EAA8;
+	Thu, 25 Dec 2025 07:32:26 +0000 (UTC)
 Authentication-Results: gabe.freedesktop.org;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="Ayyhxi39";
+	dkim=pass (2048-bit key; unprotected) header.d=Nvidia.com header.i=@Nvidia.com header.b="kJ+mP3NW";
 	dkim-atps=neutral
 Received: from kara.freedesktop.org (localhost [127.0.0.1])
-	by kara.freedesktop.org (Postfix) with ESMTP id E38C944037;
-	Thu, 25 Dec 2025 17:03:43 +0000 (UTC)
-ARC-Seal: i=1; cv=none; a=rsa-sha256; d=lists.freedesktop.org;
- s=20240201; t=1766682223;
- b=bY+cD5pkejk+Vr5ojePIPzhG/K4C2nUwacqfi03JLyDXXMc5f97ePEmMb/8CoD1pa2T0l
- X/m+cuOJtK5b0ayRkSP+doEsPjXq9ufUcISdW61OuIYZiGpKabuDilClt0urEhdmRNBJEOu
- arBR7hsEvF3dVKVak/pYL73++Ac9aO+ktDILM6jy2P9dMZ/u+raGE32c7hy3WwcKPMHjOhl
- QmGQxw/Pix9jiXgYI6yhOLlL4hyHSjVJZBPk34sULcvgnYb2tB8weNBdH7iHGfCnAwqUEPv
- pjGdbpWEeaBTJhpMZIOBaLZZrhYA/pAZk3+19K5rBEbVHMconmJJHKn32T9w==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed;
- d=lists.freedesktop.org; s=20240201; t=1766682223; h=from : sender :
+	by kara.freedesktop.org (Postfix) with ESMTP id 560A944C68;
+	Thu, 25 Dec 2025 07:24:40 +0000 (UTC)
+ARC-Seal: i=2; cv=pass; a=rsa-sha256; d=lists.freedesktop.org;
+ s=20240201; t=1766647480;
+ b=frDol5BQO7edx+w6rlVxlwgMgK2V214z8u2UAHumT7m0kAm3cTzEbjjCh31hzbW7Tl95Y
+ 2vUzOytvPrKGuqyD4m/iTJ+aTtmzNLoQpabu0dUgFPTc/W4VQtwUpOvt4cVcL1kosWP+9cx
+ GFB90ImStqKW7hk/NwVDWH6WkgAqze8Aw6XB6xF/6aXWwCuRu42pnv0IjgQidA8+6GjSAQV
+ U7W025LUDYlfgoM1in99pLKchA4o2jOT5euekgP3A1vWJe0j9//MO3zKnDJ1Yu/f5l7UorV
+ ZEBQbLhImfX5GBGD0/AayyhnNAcJpuNIylpvaZha4rsDPuyxRSug+uR1qnqw==
+ARC-Message-Signature: i=2; a=rsa-sha256; c=relaxed/relaxed;
+ d=lists.freedesktop.org; s=20240201; t=1766647480; h=from : sender :
  reply-to : subject : date : message-id : to : cc : mime-version :
  content-type : content-transfer-encoding : content-id :
  content-description : resent-date : resent-from : resent-sender :
  resent-to : resent-cc : resent-message-id : in-reply-to : references :
  list-id : list-help : list-unsubscribe : list-subscribe : list-post :
  list-owner : list-archive;
- bh=suWHoCdjES5o4GWEkjKVrlTNOfdwujoGI0MclaECRlk=;
- b=LFGlYMBRGoJlj/a3mbPHOokHDvVFh+agjLWAsjSXepIUxPwG2ZFHm0RgqvdwzrVRWsBaZ
- PmOQeen6V8kE5T+kChVkINKtJOZ00hkw2lc0zgYkjEOKlfGOS33FiKgvLYR27RPcwB9C22k
- Jpptiqbren5ZZWiBU8AAsvPCSgCcKB34J+QfxXY4+BF5aWfzRmmSnQe6Y+w3oSTm21GWO1l
- zS1q0q1KOLKc7SHStCQ/oUvymGpfzYe8DNBKh7RTjeHPtbp6g8PhhqmrUgSHAkpz5+f0Mdr
- UQr3WhhcFwajVjRUSofhEVyt0v8RTx+N40x3eobE7ZykCjNwHNURCR29/HGg==
-ARC-Authentication-Results: i=1; mail.freedesktop.org;
- dkim=pass header.d=gmail.com;
-  arc=none (Message is not ARC signed);
-  dmarc=pass (Used From Domain Record) header.from=gmail.com
- policy.dmarc=quarantine
-Authentication-Results: mail.freedesktop.org; dkim=pass header.d=gmail.com;
- arc=none (Message is not ARC signed);
- dmarc=pass (Used From Domain Record) header.from=gmail.com
- policy.dmarc=quarantine
+ bh=nFDoCw5va9hfHYbiXTy2ObVs/zCwUqosyxW9JHqCX38=;
+ b=ABkjOCRXZdEMxOY9qo34LqUedFUxgzI/Ldnqs7A1pI/0QhnAPd1AUs+tTTeQNthG+wr2A
+ OOMUJSr6lVd6yO772VI6BVo8RHqSjcQ9NZx0HU3CCgctLLoGWlbqAfH56qoBK9oB2YY8kyt
+ 3EYC8hLxR5kOflO8mFagPdvJ813Q0SSf4vynuCZX+zv19bIZg0EtpQB8zYHhk3wCWWFtsg9
+ dSXBj5LDydaKDLGj7i/+Fre5NdHgQiQccLgB4hjNOv2CbzniU3gOMBfh5EwiAmPH0twdIzR
+ to+PKpT23AFIjnFJnVtZVnngKuKuvfNOBEyovqbZwHsDjVWXV0UjeybJoOWw==
+ARC-Authentication-Results: i=2; mail.freedesktop.org;
+ dkim=pass header.d=Nvidia.com;
+  arc=pass;
+  dmarc=pass (Used From Domain Record) header.from=nvidia.com
+ policy.dmarc=reject
+Authentication-Results: mail.freedesktop.org; dkim=pass header.d=Nvidia.com;
+ arc=pass;
+ dmarc=pass (Used From Domain Record) header.from=nvidia.com policy.dmarc=reject
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by kara.freedesktop.org (Postfix) with ESMTPS id 377FB44C4E
-	for <nouveau@lists.freedesktop.org>; Wed, 24 Dec 2025 19:51:30 +0000 (UTC)
-Received: from mail-qv1-f44.google.com (mail-qv1-f44.google.com
- [209.85.219.44])
-	by gabe.freedesktop.org (Postfix) with ESMTPS id BCB8910E09D
-	for <nouveau@lists.freedesktop.org>; Wed, 24 Dec 2025 19:59:14 +0000 (UTC)
-Received: by mail-qv1-f44.google.com with SMTP id
- 6a1803df08f44-88a2ad13c24so58890316d6.1
-        for <nouveau@lists.freedesktop.org>;
- Wed, 24 Dec 2025 11:59:14 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1766606353; x=1767211153;
- darn=lists.freedesktop.org;
-        h=to:subject:message-id:date:from:mime-version:from:to:cc:subject
-         :date:message-id:reply-to;
-        bh=suWHoCdjES5o4GWEkjKVrlTNOfdwujoGI0MclaECRlk=;
-        b=Ayyhxi39Jo3nJI4twlKdH2IjxLQO/1SDco9tvsTBR0/uFIbeL7H/jGq1jf6nau8lnh
-         Cg5C/6K+yhFUAorRJxBlXZ3x+iZMvZlIoAn0KVRsV4jmmbR2J0kHDKSwKh7cR0ULr3CA
-         uoMZ0ZzwmBpIkaPT8W5v4/UwNqRLb/HcxdHSWM1Sa/daRMI19cv+WlLOT8KTtIkvaok6
-         qEhrFfZ4esTLTmbBOTlSH6mjHBoUc3apBmIMWb5b9v6pMvtQ+TfEhgNmxGKI2XwGzJrP
-         nS/irkhAwZjSBlg7bNeJZKwCRhFG4+Z2wyD4TRp21ggUgPynig6ez/osUNKSr7ml6RkO
-         KZ2w==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1766606353; x=1767211153;
-        h=to:subject:message-id:date:from:mime-version:x-gm-gg
-         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
-        bh=suWHoCdjES5o4GWEkjKVrlTNOfdwujoGI0MclaECRlk=;
-        b=afcrPgeIwuEZMUplJTX1LmpGLCQ/+45+zHM85XgzBqs2e5TZRpHowTXx7zXQsGGWxf
-         fgLDSAelo4/M1ORbFaSNUt8w9B/YdZvt5qZNIXai82EvufGupgnoVvP5y5kIP3Yxz6lt
-         sXKyz6+Y3oOenoA6CZeJrPMg9iWz392NMoLqZqbxBmoO7YrSkl97r5BEc9Q3YrVS0VJd
-         MtRMoQqiBBub+ePD5xDFuS/jpbfDZ6X4x3UGvn+GD7rhSujkK5lMnFuwl9hOQngo39tZ
-         iYYOZUamq+YL4PqgU0/uZSTLFFJ4IbCmkS/1ACbzNcuInMckWarlvUQCtKbwxLe9ue6T
-         nTZg==
-X-Forwarded-Encrypted: i=1;
- AJvYcCVyn9+xemo1SVsMmyNcoeWBEdv9ZECQfzfa7xKsljriSQ39xoCwUwiRFmr6PKJEn0AnU8cdCLli@lists.freedesktop.org
-X-Gm-Message-State: AOJu0YwdNjB1N7MnL5IvNMGI5mt9m1GnPEut4ABLQtJg360GYnQ7PssT
-	eIMpn5Psxbf44x6zwattWGPaMUtXiSg8owfm49/TjIQ6oBQGKJRPqgiBYKRzs7msdjgWiMLWTLo
-	C1FxK3/ZTi/bMxClWMykYYB5AdjJEU7s=
-X-Gm-Gg: AY/fxX4hJJRDkM33dW82luNrnp+Km9vZqobXOmweTh6p7KihkNb6AXzmrRK2f5Rc2qA
-	tYfap+NKleyV4CcoJF+LDAyXv2058GLkRlCjCwKacYnc/K9XDGmvocJUC+5G9ET+i2F5NP1/aeT
-	pIyxB9JUEil7OIpSpve5dfyUSBQAGlP7EwniklCf91fr+RhkrkSilkTkkpTc1UVt4qi4rja0i4+
-	AV+impQi0or/Ndv7qbpInOGtNUlA2daCxw+YSL7nbTAmXC32xi7/idiH7pi74pTlF8BkBohfmf5
-	Pi7j2nwy1BkmfEP/DATsm13oZ3VYOvMMshO985PJ6224Q0ISESCOFKachwQiUT2/yfzGRaB7UxM
-	3lOtrKvgaqRX7fJxikoJQ0I/bpJJ8kY4gDlLTWOgwkMzuCsMr05rTS50NdXFy
-X-Google-Smtp-Source: 
- AGHT+IHfCwHjKpq8B5d2cyOzWcyvnq2tt5eboEpwn9ZY7qdyGeLdVLLo3Jho0y1o836vVE9y+uFXlsJoearAj0wRCLM=
-X-Received: by 2002:ad4:5c68:0:b0:88f:caa1:ae21 with SMTP id
- 6a1803df08f44-88fcaa1aecbmr184313216d6.32.1766606353470; Wed, 24 Dec 2025
- 11:59:13 -0800 (PST)
+	by kara.freedesktop.org (Postfix) with ESMTPS id DFDE6400C5
+	for <nouveau@lists.freedesktop.org>; Thu, 25 Dec 2025 07:24:36 +0000 (UTC)
+Received: from CH4PR04CU002.outbound.protection.outlook.com
+ (mail-northcentralusazon11013031.outbound.protection.outlook.com
+ [40.107.201.31])
+	by gabe.freedesktop.org (Postfix) with ESMTPS id 6898010E08F
+	for <nouveau@lists.freedesktop.org>; Thu, 25 Dec 2025 07:32:22 +0000 (UTC)
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=IhhBHDamY9WJaOQY3VGtlno9Y9fDdHQX5rHqc3mYXdBc8T5Qlx7XZSCxgP+JkpBT7a1VWfbj+cJPhkDeKwXVor/83eBZTMTWHp15hifGjknip/CLWXca7yIC7saA0F0yJpFDxI+L8SfF6NIPbBUjOzkr/fSwwZsFQ0ADwN5K3tOOPvln5pjGw49RjskdI7XptEseXcUY7KuhMZ+sMFWGNKxqJcIleDQaQZWqGgjJB+Wiw5S3bHKV8mNbDYPA+6JZFU2dBBEBVbnLjnNv20YCG+aIvckWdXHZ4g9Sicn8NcG5JPxhINR/m72wO6dJCJRuj6aScoND1av9WEU2azethg==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=nFDoCw5va9hfHYbiXTy2ObVs/zCwUqosyxW9JHqCX38=;
+ b=jNgVgRORkkxAVkqRMV1Ifs+B7AxEOH+5/xDLbHEfNZZ5w/igJMduoszTD+lC7FBGXjLRlP2TD/fRZtp2YZE07jdfXONnetCRvco4+BP1VUbQhUmJQNxwrc+cHXuRXr+HeRyPJdM2elB3Zyq44gwhMHqOmBP913ekZe01dgX4wyfl4m4Z27BImAkNQh1SxwmV8K4PA2v4tnAa23ZKA1xF2F2FANBfPU2jbIq+nx2lJRTgrvTz4lTwKlDe70BXcFXm0w9mFDpxXcOMVJOZC3w47QJIXzUrrcWbx86I8Rd7yY3HKSbhUDPBLOdGi6RxB0GyO51w8e83CjioGbD9dm4iCQ==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=nvidia.com; dmarc=pass action=none header.from=nvidia.com;
+ dkim=pass header.d=nvidia.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=Nvidia.com;
+ s=selector2;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=nFDoCw5va9hfHYbiXTy2ObVs/zCwUqosyxW9JHqCX38=;
+ b=kJ+mP3NWyhjGoToxKSwR8hf65QsNIPwvk7NS4LltDNKIKc87doqYIggD+yTeQEacx6nPnDPEMeXSvw/QNrFTYIRGIox7nJNoZbQYvXBEyH2fym+zl/z5iHYU80sXvyXq6i3U8H+0rUSSDJBwcHteGwY7gTA+6x5+HQ91XGSxQwLwr8Pr0gAQlNLdZBe1PlcUbNzm/UM/QgqYndATY+44tq06jaZDrcJdzAhmquijhhLDB3GtAFLwCTuT6IuCU83erTnBVaHuBfu4ECSD6AuPVo7xDAz9CShA4Q9PLbcNHNwsSgmb2IR5FVrBcCYvfZ3N4KD1gGdYxbfmGAdAOT3bKw==
+Received: from CH2PR12MB3990.namprd12.prod.outlook.com (2603:10b6:610:28::18)
+ by IA0PR12MB9045.namprd12.prod.outlook.com (2603:10b6:208:406::18) with
+ Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9456.11; Thu, 25 Dec
+ 2025 07:32:19 +0000
+Received: from CH2PR12MB3990.namprd12.prod.outlook.com
+ ([fe80::7de1:4fe5:8ead:5989]) by CH2PR12MB3990.namprd12.prod.outlook.com
+ ([fe80::7de1:4fe5:8ead:5989%6]) with mapi id 15.20.9456.008; Thu, 25 Dec 2025
+ 07:32:19 +0000
+Content-Transfer-Encoding: quoted-printable
+Content-Type: text/plain; charset=UTF-8
+Date: Thu, 25 Dec 2025 16:32:18 +0900
+Message-Id: <DF74FEXHESCV.3L0KB1DLDMFTV@nvidia.com>
+Subject: Re: [PATCH v3 0/4] rust: add `TryFrom` and `Into` derive macros
+From: "Alexandre Courbot" <acourbot@nvidia.com>
+To: "Jesung Yang" <y.j3ms.n@gmail.com>, "Alexandre Courbot"
+ <acourbot@nvidia.com>, "Miguel Ojeda" <ojeda@kernel.org>, "Boqun Feng"
+ <boqun.feng@gmail.com>, "Gary Guo" <gary@garyguo.net>,
+ =?utf-8?q?Bj=C3=B6rn_Roy_Baron?= <bjorn3_gh@protonmail.com>, "Benno Lossin"
+ <lossin@kernel.org>, "Andreas Hindborg" <a.hindborg@kernel.org>, "Alice
+ Ryhl" <aliceryhl@google.com>, "Trevor Gross" <tmgross@umich.edu>, "Danilo
+ Krummrich" <dakr@kernel.org>
+X-Mailer: aerc 0.21.0-0-g5549850facc2
+References: <cover.1766544407.git.y.j3ms.n@gmail.com>
+In-Reply-To: <cover.1766544407.git.y.j3ms.n@gmail.com>
+X-ClientProxiedBy: LO2P265CA0508.GBRP265.PROD.OUTLOOK.COM
+ (2603:10a6:600:13b::15) To CH2PR12MB3990.namprd12.prod.outlook.com
+ (2603:10b6:610:28::18)
 MIME-Version: 1.0
-From: Steve French <smfrench@gmail.com>
-Date: Wed, 24 Dec 2025 13:59:02 -0600
-X-Gm-Features: AQt7F2oXcnv96Cgf1Gx1spIHuWR7s-nnxt45R2cfxdKNyVZzWOMUqpbGH0ZF6sg
-Message-ID: 
- <CAH2r5muA=vzdVeK=-6Du7NdbeWs5xyxZt7AYYKKLoaGNHPW6Ng@mail.gmail.com>
-Subject: Nouveau driver warn on most xfstests in current mainline (6.19-rc2)
-To: LKML <linux-kernel@vger.kernel.org>, robdclark@gmail.com,
-	Daniel Vetter <daniel.vetter@ffwll.ch>, nouveau@lists.freedesktop.org,
-	Lyude Paul <lyude@redhat.com>, "M: Danilo Krummrich" <dakr@kernel.org>,
- dri-devel@lists.freedesktop.org
-Content-Type: text/plain; charset="UTF-8"
-X-MailFrom: smfrench@gmail.com
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: CH2PR12MB3990:EE_|IA0PR12MB9045:EE_
+X-MS-Office365-Filtering-Correlation-Id: f2e9cbe3-548c-4eba-660d-08de4387bba3
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: 
+	BCL:0;ARA:13230040|1800799024|366016|376014|7416014|7053199007|921020;
+X-Microsoft-Antispam-Message-Info: 
+	=?utf-8?B?RXlxd2V4eHlWeVY0eFNNOWhQNU1DTG5kcjNaZk5lWjNTa2Z6SktkY0NuOE9M?=
+ =?utf-8?B?V3BubFk0UTE3cm8zUWZRWkJ6SjAxTU15bXUxV3dFVWo0a2lEak5nYnVnMmxL?=
+ =?utf-8?B?UEJFZFJlMVB1ZWdyUzhWS21NZEE4M0J5MFlZaEtVay8xZmNjYjNUR0U3aUlx?=
+ =?utf-8?B?WFhhUElHMGtFZS9PcDRnaXdha2xxM0VDZW00REhFZy96cUsrdXVyYWZPQ3hq?=
+ =?utf-8?B?bjRQSERmYXp4SjBJamJaeVFoUnc5MkJBUUVLeEpPdlZTakRVRFNhRDlqQVU2?=
+ =?utf-8?B?STRYVTNEaHRKQVFoUUc2d2N5ck9zWWpnVG1uVW1VcnA4eGVBcnVTbXFkRWpG?=
+ =?utf-8?B?dlFiVkFNTWlrNTJIajNXL2Y4Wk1tMERaYXpHVm91RCtRZkNxZ1dLZ0d3U2Fm?=
+ =?utf-8?B?WFZBYlN5cHpDTk4rMWVHVXdpS1JLaUFsTzV1cGwrZENkaEJqSEFVZjRkUWZ5?=
+ =?utf-8?B?SUtDWE1KRW9odGs5dTN3aWhuMzJsajRkTElGWVpZeFo2cWlKbnpnLzAwWDZ6?=
+ =?utf-8?B?SHhpeFF5NVNiUi9oMS9sNHhGRTk4U0NtWEJhb1E5eFNaZjB3L1o4YTZhZ3JC?=
+ =?utf-8?B?TmRvbW1VaVpST0hENXNHR1ZLc0gzbmkwUGIzellyZmlWTHZTa3lJSmN1R3pE?=
+ =?utf-8?B?VDAyejl1NjhZUFhmRnV2bFNnbnJSaUk2M3djMHVobU9sL3ZNMStvbG1GSzZI?=
+ =?utf-8?B?RHhQUXl5b0k1VU82Y3hrdi9hUzhWWXd3THgvekU5SWdlK3hJWFYxbDZRY29W?=
+ =?utf-8?B?YnAzN1lMS0FrU2hNYUJrUW0zaWU0dVZscU5kd1QyM2hvU3h6ajZWelduRjNl?=
+ =?utf-8?B?RjhEMXJMb0llb3FMTlE4TnpFMVlMUlVhbExaVU1sd2svR0FrNFE5ZGdKWVV1?=
+ =?utf-8?B?U01OUzRRSmwzcGVscU5HVEc1ODlhQlN0bE5aeldvdFRHL2VxSkZ1M080eVpK?=
+ =?utf-8?B?eExzZjE5NFpjdk5BZktpak9nRCtkTXpCZnV6alZVdXBTUyt5S3ROcGhMemw5?=
+ =?utf-8?B?dzdYcW0xTUlTaS9BODlpWmtXcVdMM0JPQjJpOGhRU3JqUjN5Y1FsWmZJdXpk?=
+ =?utf-8?B?WEV5S0RJR2ZpRXFlSVI1Y1M2dWR5dU95QVduSUQ2SDkrUFdUZ0NmUytmUE5S?=
+ =?utf-8?B?aEVjQThOTlpJS2FCRmZyRHExOFdQQmR6Mzh1a0xCT296K2FXd3FuekVUKy9W?=
+ =?utf-8?B?bW9aVHBQaUdaR09ZSXl5d0IxS212ZjFuRG9PcithOGpVSmg1ejE0K2ZEYU55?=
+ =?utf-8?B?RU5nWmk2ZU5rZmVDQnd0YU9USXVZU2UrSFhub2djdkVMV01YUGI3SjBjcUdD?=
+ =?utf-8?B?VEQxeVYvdDA0TGpCV2FsalN3OVhwSG5VN3N6VEU3VHVxeDdXZEhrUUJpTWdy?=
+ =?utf-8?B?L0tabklZS2FVSnplV3c2RXNiLzRneWtuZDRZenltOXlCN21xUW9sYzJsc1dK?=
+ =?utf-8?B?dThhM3lSdzh0K1BOdXF5dkE2NnFNdEVpcWN1bzRJOHF3bmcrNVZGOHlneU84?=
+ =?utf-8?B?NVE0b2lvbUU2Vk1pRGl5WXZDVmY2RWVKbDlqMlI5YXRDSnZDUE51NXdSZHVJ?=
+ =?utf-8?B?dDU0MUlCMjUwblN0aFhNaG16RFVCR0JxK1J6TTU0aWs0RVhzSUFjNHVuTGZr?=
+ =?utf-8?B?a0NEcjFSZ1QvS2RvbkFMYVlFWGF2cEJrTldqL1BreWhpdnAwV0hMbUpyMUFz?=
+ =?utf-8?B?SnBYSWovMXgyVjVTSjQyMVhnU1hsc1V0Y3hWWTZWcVRTMUhWbWJiYTcwWml3?=
+ =?utf-8?B?UExjTEJleGhqQmluNlMxYWtHcGZzaXFoUjRsVHFjcEwyajR5TklvWm1tajVF?=
+ =?utf-8?B?T3pXZ1FzcXZtQjhsdEhmb1prQ3hBd3h2ek1SWXJtTmpvelJOQTVaU3VFbS95?=
+ =?utf-8?B?T2F1NDErZFJhdW5qNTBha2ZRdkFnejJXdFJIYktaS29wSGJmbk81QWNkYjJs?=
+ =?utf-8?B?b0NTbHA2NGVEdEFIT1hNay9kUnIwTjdHZ3JULzdMQnlGckhubDhLWVhRdS9r?=
+ =?utf-8?B?N0RYZ3JERmQwMVlSdkllTUwvb2pZVGNHSFZ2VVBjSmhBYVNUbmhMQTZYZW1t?=
+ =?utf-8?Q?k1m42q?=
+X-Forefront-Antispam-Report: 
+	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:CH2PR12MB3990.namprd12.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230040)(1800799024)(366016)(376014)(7416014)(7053199007)(921020);DIR:OUT;SFP:1101;
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0: 
+	=?utf-8?B?Z04wbFlYUit5UExtNlhJV0Y4YUZqdnI2M2ExbndsU0tJSm5jVkUzcUtmS05j?=
+ =?utf-8?B?eW0rbTFiMzFQV2ZOWDU1YTE0NHJOK20yN0p5WGRQd0FROEVlVU1pWEhOcGRL?=
+ =?utf-8?B?UVZSTVdVRHNLbkdWZzBUUHRSdm1iVlBXMjB0d1cyUFV0ZlFIUEQxNUxrV0ph?=
+ =?utf-8?B?L1VxT3JOSlRTMTVYdTk5eFZpeElRRyttUWk1WGZBL1pXK3A1UUtFRGR5U1h2?=
+ =?utf-8?B?Zm5ObU5yd0VKejBYc3F2WUVwaW9OZVVHSlRPbUs3UHREaDV3Mi9hcTRxcHlz?=
+ =?utf-8?B?aDZqL2J0UGo2c2UveHpDc2pvSVFVOVhrVDdJeHlSalQxZXVzMVV1NlFJRzlw?=
+ =?utf-8?B?NjBObGtZeWVJOXFTL3VwMU5tZ1ZVdnJqL0tqVC9FaVp3c051WnhITi9tOUVr?=
+ =?utf-8?B?ejJhNFRMZEpjRGRKcVRUcnZ6RnRDRXNwajNoKzdkSHhlVkNjenZtL2pvNzdJ?=
+ =?utf-8?B?Zm5vT3llc0pSWnJjZVZxWG9WMnlGM1dFMHhwWktVbGdySkE3d3UzR0RSanN5?=
+ =?utf-8?B?MmxOL09sRWFNSjhVMDl3UVJBRDRnRzNqRGRPWDdvNWI4aEprTUd1UW1RNHlH?=
+ =?utf-8?B?djdialNlNnpFSk1IcVZFSjR6ZXYzNzViNFBBdzQrbTdyRk5Nd0Nzbk1VMlIx?=
+ =?utf-8?B?UkxlYXRVMStxUzdwbG1icjhlVUxUMUF2ak8vOVhwTG1zZ1JQOTBzWlFtdHVX?=
+ =?utf-8?B?UEU2anpFSDdFYy82NzBXOG9hSjRYRCtuK25mSXJUUUY2c2VvaDdSL0VVNXhx?=
+ =?utf-8?B?OE44ekljM3FVclFSWmR2bUpqMkllWUZqbWlPVUsxVTNvaXh6M2MwaHRpdG9v?=
+ =?utf-8?B?WUtycytIMy9qMUsveXBQQTRQbU80bm9sLzl6RCtNMVpZTFdrUWtFczErRXo2?=
+ =?utf-8?B?blpDdmpCWTl2bEtoLy84UytwYlE3ejYyQ1k4M3REdXUrZm85R21zemtMYWF6?=
+ =?utf-8?B?Sk5BVnNNM3pFUjhmeEVVQTlVUG1DNWpob2RjdVB1SHgrWG1rblNKcmJvcXZZ?=
+ =?utf-8?B?dWhBeXFlUVhuWFZXdzFTeVRDTWx4OXIyQlVtYThRUVdDUEZhS0R5bkduS0Ri?=
+ =?utf-8?B?djRlZ25IdllZOTZ4MjMwWGpGYWt4cjVVeW1BSEtJYTRxa1hHVFpta0FTbzhG?=
+ =?utf-8?B?MjNVVW5Od1Z2SEUxTjNwQ1RhOUppdFFMTzkxS1pOODhKOGNTcWJCY0NIT3Rn?=
+ =?utf-8?B?VTRodVVuSTl1Qlk4OU9senlVRlZXOWk0UXNYazJHRmN4YTRFUVFCNDJ2c0Jp?=
+ =?utf-8?B?a0VpaFhObmhxSFUxTHZGSFZncWhBZTJ1NjVpRFBKdXdJMDZOMlNJbzRiOFI0?=
+ =?utf-8?B?ZFoybXIzajJ3bjNreDEwQkwyVlYxclNWQ1pQWk9FazRjTmxmRFEzOHZWWXVh?=
+ =?utf-8?B?SUxpYmFTU3d3N1hVbnd5eHBXVmI4eTAvQnV5c2hja1NBTVZmMTFNSkFwSDZ6?=
+ =?utf-8?B?Zk9DQWdVZzgxRGRPTWQ3WE1ucFVFTGVYcjc3dCsrcUVZR3RoY0dKbWlrRUhk?=
+ =?utf-8?B?bldUck1ibHcxTHVXVkhTZFczWjhFRmY3ZSt1NXJmamM2VVd0UkpRUXJtRXJJ?=
+ =?utf-8?B?ME54K1lObVcwc2JpTGkzYjFUY01qdjMzKzIyNktyR1VoN21zc3pweTkybWdv?=
+ =?utf-8?B?SU01SVNBM1ppZWsvdnhXei9sU1ZldU1vNGpiaEhDREkyWkdVWVQ1dUxwcnRm?=
+ =?utf-8?B?c1N6ZXZJRzVHRmIrZmw1WGFuSEFtNHFvMXMzaDJVa2hpdjY5QnVsUmtyMnVO?=
+ =?utf-8?B?a3N0VFpTTU90RUVBNkM5RXhmalBFZlNpNjJ4K3JjT25rbmR6bmVrUHIzbm5Z?=
+ =?utf-8?B?N2pyUWsvVWxiTGVuSnZnZkJrRm5UMXRiSGFEV0hrdlhPNTdybTFaWEhWb083?=
+ =?utf-8?B?NTdkSW9DMTJUR0ViT2FhVHRRUlJ6K3lsVkdXcCsxTlJncUtNK2FITytyWm90?=
+ =?utf-8?B?M2xhbWZWU0Jqb3c3cGdPbzRnMHNJbThhUzRhaFpVc3NCaDVSM1FrYWt4anhr?=
+ =?utf-8?B?a3Jqei92ZmNESnZoTGo1V3k3Q0NWaEp6QWZpTDFtTEFHMVIxdmMzNEZHL1d2?=
+ =?utf-8?B?YlNtZllBQU02d0I5M0o3WHF3RHFuNS8zR0dtbTZLL2xWdW16R09RL2xkK2lu?=
+ =?utf-8?B?SXc3OFNPNWdRN2RVUlFEeXoxaVpPRTVPUHF4d1k3ZVhJVG53d1VlbWVmSFZI?=
+ =?utf-8?B?bHVnODR1alh0KzJUQ21ReDVDODRZRGtMNzhXUTlqVEoxUHl2eEdhNGVVOGJN?=
+ =?utf-8?B?UVozdkdLM2ZkMVNacm5vT1V2L3RhWGpXRUpQNGJzZDlKWGxYNlczUUFqZFI3?=
+ =?utf-8?B?MEV4VTNzdkJWbnhrWktlMHo2aTBkR3lYY2tEVTlBdndVT0lSUGpvdz09?=
+X-OriginatorOrg: Nvidia.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: 
+ f2e9cbe3-548c-4eba-660d-08de4387bba3
+X-MS-Exchange-CrossTenant-AuthSource: CH2PR12MB3990.namprd12.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 25 Dec 2025 07:32:19.0688
+ (UTC)
+X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
+X-MS-Exchange-CrossTenant-Id: 43083d15-7273-40c1-b7db-39efd9ccc17a
+X-MS-Exchange-CrossTenant-MailboxType: HOSTED
+X-MS-Exchange-CrossTenant-UserPrincipalName: 
+ AvnfE7W+5AKRuhIeLt7H003mtQ15yYKfjYgVXNblCSWi4rTMERPWxkqdYDZf31Nnjhwdlxwte2gbfWNv/Jh17A==
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: IA0PR12MB9045
+Message-ID-Hash: BRS7FGDSDTPMUP6MY7JDCQNV5NSIIBTH
+X-Message-ID-Hash: BRS7FGDSDTPMUP6MY7JDCQNV5NSIIBTH
+X-MailFrom: acourbot@nvidia.com
 X-Mailman-Rule-Hits: nonmember-moderation
 X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency;
  loop; banned-address; member-moderation
-Message-ID-Hash: 5HR4FZU33QWHBFZQGJPTWW655LG6XBVO
-X-Message-ID-Hash: 5HR4FZU33QWHBFZQGJPTWW655LG6XBVO
-X-Mailman-Approved-At: Thu, 25 Dec 2025 17:03:42 +0000
+CC: rust-for-linux@vger.kernel.org, nouveau@lists.freedesktop.org,
+ linux-kernel@vger.kernel.org
 X-Mailman-Version: 3.3.8
 Precedence: list
 List-Id: Nouveau development list <nouveau.lists.freedesktop.org>
 Archived-At: 
- <https://lists.freedesktop.org/hyperkitty/list/nouveau@lists.freedesktop.org/message/5HR4FZU33QWHBFZQGJPTWW655LG6XBVO/>
+ <https://lists.freedesktop.org/hyperkitty/list/nouveau@lists.freedesktop.org/message/BRS7FGDSDTPMUP6MY7JDCQNV5NSIIBTH/>
 Archived-At: 
- <https://lore.freedesktop.org/CAH2r5muA=vzdVeK=-6Du7NdbeWs5xyxZt7AYYKKLoaGNHPW6Ng@mail.gmail.com/>
+ <https://lore.freedesktop.org/DF74FEXHESCV.3L0KB1DLDMFTV@nvidia.com/>
 List-Archive: 
  <https://lists.freedesktop.org/hyperkitty/list/nouveau@lists.freedesktop.org/>
 List-Archive: <https://lore.freedesktop.org/nouveau>
@@ -128,136 +217,33 @@ List-Post: <mailto:nouveau@lists.freedesktop.org>
 List-Subscribe: <mailto:nouveau-join@lists.freedesktop.org>
 List-Unsubscribe: <mailto:nouveau-leave@lists.freedesktop.org>
 
-WARN_ON in drivers/gpu/drm/drm_atomic.c
+On Wed Dec 24, 2025 at 12:59 PM JST, Jesung Yang wrote:
+> This patch series introduces derive macros for the `TryFrom` and `Into`
+> traits.
+>
+> Primary updates in v3:
+> - Adopt `syn` for improved macro parsing.
+> - Allow `kernel::num::Bounded` to be specified in helper attributes,
+>   enabling the generation of `TryFrom` and `Into` implementations for
+>   types with restricted bit ranges as required by the nova-core [1].
+> - Add compile-time overflow assertion to ensure that enum discriminants
+>   fit within the types being converted to or from, preventing silent
+>   overflows.
+>
+> Note: 1015+ insertions are purely from doctests. Most of them are kept
+> private to keep the public API documentation clean and simple for
+> users. This might not be the usual way of doing things, but for now I
+> don't think I have a better option. Feedback and suggestions are always
+> appreciated.
+>
+> [1] https://lore.kernel.org/rust-for-linux/DDHU4LL4GGIY.16OJMIL7ZK58P@nvi=
+dia.com/
+>
+> Best regards,
+> Jesung
 
-struct drm_crtc_state *drm_atomic_get_crtc_state(struct drm_atomic_state *state,
-                          struct drm_crtc *crtc)
-{
-        int ret, index = drm_crtc_index(crtc);
-        struct drm_crtc_state *crtc_state;
+Hi Jesung,
 
-        WARN_ON(!state->acquire_ctx);
-        drm_WARN_ON(state->dev, state->checked);
-
-
-I don't see this on my other laptop (presumably because it isn't using
-the Nouveau driver) but do see it repeatedly on my older laptop when
-running most xfstests, causing most xfstests to fail.
-
-[  303.098179] ------------[ cut here ]------------
-[  303.098183] nouveau 0000:01:00.0: [drm] drm_WARN_ON(state->checked)
-[  303.098188] WARNING: drivers/gpu/drm/drm_atomic.c:373 at
-drm_atomic_get_crtc_state+0x17b/0x1b0, CPU#5: KMS thread/2513
-[  303.098203] Modules linked in: rfcomm snd_seq_dummy snd_hrtimer
-snd_seq_midi snd_seq_midi_event snd_rawmidi snd_seq snd_seq_device
-xt_conntrack nft_chain_nat xt_MASQUERADE nf_nat nf_conntrack
-nf_defrag_ipv6 nf_defrag_ipv4 bridge stp llc xfrm_user xfrm_algo
-xt_addrtype nft_compat nf_tables cifs nls_ucs2_utils rdma_cm iw_cm
-ib_cm ib_core cachefiles cifs_md4 netfs vxlan ip6_udp_tunnel
-udp_tunnel overlay qrtr algif_hash algif_skcipher af_alg bnep
-sch_fq_codel binfmt_misc intel_uncore_frequency
-intel_uncore_frequency_common snd_sof_pci_intel_cnl intel_tcc_cooling
-snd_sof_intel_hda_generic x86_pkg_temp_thermal soundwire_intel
-intel_powerclamp iwlmvm snd_sof_intel_hda_sdw_bpt
-snd_sof_intel_hda_common elan_i2c btusb cmdlinepart snd_soc_hdac_hda
-btmtk snd_sof_intel_hda_mlink spi_nor btrtl snd_sof_intel_hda
-soundwire_cadence btbcm snd_sof_pci snd_sof_xtensa_dsp btintel
-coretemp nls_iso8859_1 mei_hdcp mei_pxp ee1004 mtd intel_rapl_msr
-think_lmi mac80211 snd_sof snd_sof_utils snd_soc_acpi_intel_match
-nouveau
-[  303.098414]  snd_soc_acpi_intel_sdca_quirks
-soundwire_generic_allocation snd_soc_sdw_utils snd_soc_acpi
-soundwire_bus kvm_intel snd_ctl_led snd_soc_sdca snd_hda_codec_alc269
-snd_hda_scodec_component libarc4 crc8 snd_hda_codec_realtek_lib kvm
-snd_soc_avs snd_hda_codec_nvhdmi snd_hda_codec_generic iwlwifi
-snd_hda_codec_hdmi snd_soc_hda_codec snd_hda_intel snd_hda_ext_core
-uvcvideo snd_hda_codec snd_soc_core
-processor_thermal_device_pci_legacy snd_hda_core
-processor_thermal_device videobuf2_vmalloc irqbypass
-processor_thermal_wt_hint uvc platform_temperature_control
-snd_compress ghash_clmulni_intel videobuf2_memops snd_intel_dspcfg
-processor_thermal_soc_slider aesni_intel ac97_bus videobuf2_v4l2
-processor_thermal_rfim snd_intel_sdw_acpi rapl snd_hwdep
-snd_pcm_dmaengine videobuf2_common processor_thermal_rapl cfg80211
-intel_cstate bluetooth firmware_attributes_class wmi_bmof
-intel_wmi_thunderbolt videodev snd_pcm intel_rapl_common i2c_i801
-mei_me nvidiafb i2c_smbus processor_thermal_wt_req spi_intel_pci
-i2c_mux spi_intel
-[  303.098580]  mei mc processor_thermal_power_floor
-processor_thermal_mbox vgastate snd_timer fb_ddc intel_soc_dts_iosf
-intel_pch_thermal intel_pmc_core thinkpad_acpi int3403_thermal
-pmt_telemetry nvram int340x_thermal_zone pmt_discovery pmt_class
-intel_pmc_ssram_telemetry int3400_thermal acpi_pad acpi_thermal_rel
-intel_vsec joydev input_leds mac_hid serio_raw nfsd mxm_wmi drm_gpuvm
-gpu_sched drm_ttm_helper auth_rpcgss ttm nfs_acl drm_exec lockd
-drm_display_helper grace cec rc_core i2c_algo_bit sunrpc msr
-parport_pc ppdev lp parport nvme_fabrics efi_pstore nfnetlink
-dmi_sysfs ip_tables x_tables autofs4 xfs btrfs blake2b libblake2b
-raid10 raid456 async_raid6_recov async_memcpy async_pq async_xor
-async_tx xor raid6_pq raid1 raid0 linear ucsi_acpi wacom typec_ucsi
-hid_microsoft ff_memless typec hid_generic rtsx_pci_sdmmc nvme 8250_dw
-e1000e thunderbolt nvme_core usbhid psmouse rtsx_pci hid snd
-nvme_keyring nvme_auth intel_lpss_pci hkdf intel_lpss idma64 soundcore
-platform_profile video sparse_keymap wmi pinctrl_cannonlake
-[  303.098833] CPU: 5 UID: 1000 PID: 2513 Comm: KMS thread Tainted: G
-      W           6.19.0-rc2+ #77 PREEMPT(voluntary)
-[  303.098845] Tainted: [W]=WARN
-[  303.098849] Hardware name: LENOVO 20MAS08500/20MAS08500, BIOS
-N2CET70W (1.53 ) 03/11/2024
-[  303.098854] RIP: 0010:drm_atomic_get_crtc_state+0x185/0x1b0
-[  303.098863] Code: 04 48 8b 7f 08 4c 8b 77 50 4d 85 f6 75 03 4c 8b
-37 e8 ff 3e 07 00 48 89 c6 48 8d 3d 15 24 5d 01 48 c7 c1 a8 7b b4 94
-4c 89 f2 <67> 48 0f b9 3a 41 8b 94 24 90 00 00 00 e9 a2 fe ff ff 48 c7
-c0 f4
-[  303.098870] RSP: 0018:ffffceb241ac7920 EFLAGS: 00010246
-[  303.098878] RAX: ffffffffc227c10e RBX: ffff88aecbba3900 RCX: ffffffff94b47ba8
-[  303.098884] RDX: ffff88a742985430 RSI: ffffffffc227c10e RDI: ffffffff952b6070
-[  303.098889] RBP: ffffceb241ac7948 R08: 0000000000000000 R09: 0000000000000000
-[  303.098894] R10: 0000000000000000 R11: 0000000000000000 R12: ffff88aec75fd010
-[  303.098898] R13: 0000000000000000 R14: ffff88a742985430 R15: 0000000000000002
-[  303.098903] FS:  00007176c72066c0(0000) GS:ffff88af018e1000(0000)
-knlGS:0000000000000000
-[  303.098910] CS:  0010 DS: 0000 ES: 0000 CR0: 0000000080050033
-[  303.098916] CR2: 000009ec01590000 CR3: 000000088791e005 CR4: 00000000003726f0
-[  303.098922] Call Trace:
-[  303.098926]  <TASK>
-[  303.098933]  nv50_wndw_prepare_fb+0xd3/0x370 [nouveau]
-[  303.099332]  ? drm_atomic_helper_setup_commit+0x752/0x7c0
-[  303.099346]  drm_atomic_helper_prepare_planes+0x7c/0x230
-[  303.099357]  nv50_disp_atomic_commit+0xad/0x1d0 [nouveau]
-[  303.099748]  drm_atomic_commit+0xaf/0xf0
-[  303.099758]  ? __pfx___drm_printfn_info+0x10/0x10
-[  303.099773]  drm_atomic_helper_update_plane+0xfc/0x180
-[  303.099785]  __setplane_atomic+0xcb/0x140
-[  303.099798]  drm_mode_cursor_universal+0x13d/0x2a0
-[  303.099816]  drm_mode_cursor_common+0x10e/0x250
-[  303.099829]  ? __pfx_drm_mode_cursor_ioctl+0x10/0x10
-[  303.099839]  drm_mode_cursor_ioctl+0x47/0x70
-[  303.099850]  drm_ioctl_kernel+0xb7/0x110
-[  303.099862]  drm_ioctl+0x2ec/0x5b0
-[  303.099870]  ? __pfx_drm_mode_cursor_ioctl+0x10/0x10
-[  303.099890]  nouveau_drm_ioctl+0x5d/0xd0 [nouveau]
-[  303.100308]  __x64_sys_ioctl+0xa5/0x100
-[  303.100321]  x64_sys_call+0x1243/0x26b0
-[  303.100332]  do_syscall_64+0x81/0x500
-[  303.100340]  ? x64_sys_call+0x11b9/0x26b0
-[  303.100350]  ? do_syscall_64+0xbf/0x500
-[  303.100359]  entry_SYSCALL_64_after_hwframe+0x76/0x7e
-[  303.100366] RIP: 0033:0x7176ef924e1d
-[  303.100374] Code: 04 25 28 00 00 00 48 89 45 c8 31 c0 48 8d 45 10
-c7 45 b0 10 00 00 00 48 89 45 b8 48 8d 45 d0 48 89 45 c0 b8 10 00 00
-00 0f 05 <89> c2 3d 00 f0 ff ff 77 1a 48 8b 45 c8 64 48 2b 04 25 28 00
-00 00
-[  303.100381] RSP: 002b:00007176c7204b20 EFLAGS: 00000246 ORIG_RAX:
-0000000000000010
-[  303.100390] RAX: ffffffffffffffda RBX: 00007176c002a100 RCX: 00007176ef924e1d
-[  303.100396] RDX: 00007176c7204bb0 RSI: 00000000c01c64a3 RDI: 000000000000000c
-[  303.100401] RBP: 00007176c7204b70 R08: 0000000000000100 R09: 0000000000000014
-[  303.100407] R10: 0000000000000110 R11: 0000000000000246 R12: 00007176c7204bb0
-[  303.100412] R13: 00000000c01c64a3 R14: 000000000000000c R15: 00007176c0029c00
-[  303.100426]  </TASK>
-[  303.100430] ---[ end trace 0000000000000000 ]---
--- 
-Thanks,
-
-Steve
+I'm really looking forward to reviewing this one, but for some reason
+patches 1 and 2 appear to not have been sent. They don't even appear on
+lore: https://lore.kernel.org/all/cover.1766544407.git.y.j3ms.n@gmail.com/
