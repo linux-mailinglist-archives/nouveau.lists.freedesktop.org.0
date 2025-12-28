@@ -2,106 +2,94 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id 90BF4CE0299
-	for <lists+nouveau@lfdr.de>; Sat, 27 Dec 2025 23:25:37 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id B5F2BCE6495
+	for <lists+nouveau@lfdr.de>; Mon, 29 Dec 2025 10:24:34 +0100 (CET)
 Received: from kara.freedesktop.org (unknown [131.252.210.166])
-	by gabe.freedesktop.org (Postfix) with ESMTPS id 55F47113A6A;
-	Sat, 27 Dec 2025 22:25:36 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTPS id B2A17113FEA;
+	Mon, 29 Dec 2025 09:24:32 +0000 (UTC)
 Authentication-Results: gabe.freedesktop.org;
-	dkim=fail reason="signature verification failed" (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="AyQvmqNv";
+	dkim=pass (1024-bit key; secure) header.d=ik.me header.i=@ik.me header.b="lEt2ztti";
 	dkim-atps=neutral
 Received: from kara.freedesktop.org (localhost [127.0.0.1])
-	by kara.freedesktop.org (Postfix) with ESMTP id 8C01344C6E;
-	Sat, 27 Dec 2025 22:17:44 +0000 (UTC)
+	by kara.freedesktop.org (Postfix) with ESMTP id A372C44C6C;
+	Mon, 29 Dec 2025 09:16:37 +0000 (UTC)
 ARC-Seal: i=1; cv=none; a=rsa-sha256; d=lists.freedesktop.org;
- s=20240201; t=1766873864;
- b=Mbq54R786MoijjMSPSYDB6WoRCT3Q5V0DYUioeksmjw/t4S1ISR3CEuWAoXHWgF1+zM9Y
- JI5yHXF/+3BPALCTjBP0oJ8+f1nBGAmpMc/wmmJbdYuwDQEfVOaot0yVpMLy1JJfqQczFGl
- hZTC4vGWZCrMlytMumopN/yDSPPDL4EJPehh/L01ruxsmW1zeCYyeK1KM/sY2DXbhv3Ov2s
- u1v5uH6kB2h6LBraBoWXD0Iwf75uangjMIGs2osy3pwSDf2sOJYZQw6lhk/PwmcH4BZL6uj
- weC0Q5+DE3+Bhl+RepSrFgQhfeg0EUEFwAum4zcSvUXJX4+1y9d3o6Zes8sQ==
+ s=20240201; t=1766999797;
+ b=H9JzmhJ0rz+AiSlPIaFemJNPEslSx3CiiboCUrVzz97tUsJ+UAtdRhLiG9sDM4xZTDlQY
+ LbkebaQJ9pXjPKoX4KZGjoV7Rct9z3hJIpq18PDfM8PI0Pgk2Pff0t8CcKKzylIKwJervf9
+ bJ9AvpQiCwBLheAGMSt4r0AaJUDmRxYS/jzo3Ru+K/NUHQDSAmGWpk7SH3lnL4pmds5XlKH
+ KZUssn9lglJhxqBaQfWu4bgFqiHBUrzYntrEcA5q8rZx8I3GMQNbpknJEl2VMDP25FIWTON
+ oo2GCJnoAYeU3c1lVfrJw9+UmWUJq1NqTl09oIp6G5ZWXH0mGDOKbFoa3Cng==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed;
- d=lists.freedesktop.org; s=20240201; t=1766873864; h=from : sender :
+ d=lists.freedesktop.org; s=20240201; t=1766999797; h=from : sender :
  reply-to : subject : date : message-id : to : cc : mime-version :
  content-type : content-transfer-encoding : content-id :
  content-description : resent-date : resent-from : resent-sender :
  resent-to : resent-cc : resent-message-id : in-reply-to : references :
  list-id : list-help : list-unsubscribe : list-subscribe : list-post :
  list-owner : list-archive;
- bh=Xy3RQdM6OLRr8Nyts+LLw5Iqr9Ocpy+EJ/pQF7/vWrU=;
- b=Kpen0bJEiTKmBo1ecNmIJWXFm/Ead4k/2Hf/P+bSiu9XwPAyu2zOWqUbw0OnxR3h3eyu9
- uHmqv7ahh3VYZr+bUjeuOll7F0mIGunpw2VhRRafv6Gih1/6WQHEK2xGva0YP/7mzVmhz/L
- 3ZlDl7ukYVcV0W+vI5HtgWgjmF/pw3YI//th4650ieXEiWAB67eVga1Dy9NL6uzGP0IPI3m
- WYdgsRzedQr5CmQBdyRCXz97qKdeosgP6XJ9kV1xTSwl9SpFe1gIuYoB+cgIHmo2mopiaq/
- SUKKbXBy3MaJpZTyqiTUOf1lcCgnNkVwunBcFlcBZ/prR3+j+TJZAqSAEmKQ==
+ bh=r42BM5PvPixDLRp4sXlUhKr0FhxwTxRFCpYTPDnxwMs=;
+ b=YOUMSqKhLe2Zqh/s55PqjJfxSAFkIqh5njPMaxRQ0TU+ZT/LvAUEIfd1JXFIAMc4ww56f
+ E4eHhukT0Gv/qjFvnNmx5jI3gWXjoL8IfgFuEqrA+eUYSpnSCQ7aD3VJ/HiuYMWTat0CrzW
+ pSTj0cp56S2y2wgbyKnXUdDQHJLwrAWd1kW4z1awOgpFyOiv/zcp5p0EjpPRbRNvve0VM6m
+ tymf2JGiGds6X7c2+7ZloKLZEUpmuX5EUqmqNaYMbMt90iBnGjcLpNljE2zL+sS39RcKfjK
+ Z/HBrH85cUIwZcLLpEFKZSrfAJ0ni2BU+Y9a/6dR2FuzkuUrVyO6zwbgRo8g==
 ARC-Authentication-Results: i=1; mail.freedesktop.org;
- dkim=pass header.d=kernel.org;
+ dkim=pass header.d=ik.me;
   arc=none (Message is not ARC signed);
-  dmarc=pass (Used From Domain Record) header.from=kernel.org
- policy.dmarc=quarantine
-Authentication-Results: mail.freedesktop.org; dkim=pass header.d=kernel.org;
+  dmarc=pass (Used From Domain Record) header.from=ik.me policy.dmarc=reject
+Authentication-Results: mail.freedesktop.org; dkim=pass header.d=ik.me;
  arc=none (Message is not ARC signed);
- dmarc=pass (Used From Domain Record) header.from=kernel.org
- policy.dmarc=quarantine
+ dmarc=pass (Used From Domain Record) header.from=ik.me policy.dmarc=reject
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by kara.freedesktop.org (Postfix) with ESMTPS id 20CE9401CB
-	for <nouveau@lists.freedesktop.org>; Sat, 27 Dec 2025 22:17:42 +0000 (UTC)
-Received: from tor.source.kernel.org (tor.source.kernel.org [172.105.4.254])
-	by gabe.freedesktop.org (Postfix) with ESMTPS id 876C0113A2C
-	for <nouveau@lists.freedesktop.org>; Sat, 27 Dec 2025 22:25:33 +0000 (UTC)
-Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
-	by tor.source.kernel.org (Postfix) with ESMTP id 8C60760010;
-	Sat, 27 Dec 2025 22:25:32 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id A5A6DC4CEF1;
-	Sat, 27 Dec 2025 22:25:29 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
-	s=k20201202; t=1766874332;
-	bh=ve418wM/XyEWbfmF9fZaylARcLvP8lDozBBpjRZ5o+8=;
-	h=Date:Cc:Subject:From:To:References:In-Reply-To:From;
-	b=AyQvmqNvp7aFQkxu9SD9KvqD0VPsY4RmdEyFYtNitIJA85tSgEOywKmb0jorw0lxS
-	 IjpVlVP9LPMRay+Sec3vC3A2AkCG8ydTk+EL7v5/Rvbgy92vXOCxmp4AnxnUzsDgcO
-	 Jf3ipoz5wiJvSNAeLP2N8LtwbR9BJHnhNVa7YBuDEXNYGFjtgZzNmQMNNpuIk8XkgL
-	 Vr6b69aJIulzkcnfZIHt2KyLLUyA7pee51MsvXVSXYIskVTmpFlkET4Oo8zsg6feEb
-	 i+ZT0v0mPlqtqFG9/Erz5tLI9V2JGKahlDqs0C3ChjjcutYSaNv+wsN5C6CwRPVFDF
-	 UnjE7r2+m4c8Q==
+	by kara.freedesktop.org (Postfix) with ESMTPS id 3EB1F4040D
+	for <nouveau@lists.freedesktop.org>; Sun, 28 Dec 2025 17:38:04 +0000 (UTC)
+Received: from smtp-8fa8.mail.infomaniak.ch (smtp-8fa8.mail.infomaniak.ch
+ [83.166.143.168])
+	by gabe.freedesktop.org (Postfix) with ESMTPS id 4C36C10E228
+	for <nouveau@lists.freedesktop.org>; Sun, 28 Dec 2025 17:45:56 +0000 (UTC)
+Received: from smtp-3-0000.mail.infomaniak.ch (smtp-3-0000.mail.infomaniak.ch
+ [10.4.36.107])
+	by smtp-3-3000.mail.infomaniak.ch (Postfix) with ESMTPS id 4dfRbR40kczVP0;
+	Sun, 28 Dec 2025 18:45:55 +0100 (CET)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ik.me; s=20200325;
+	t=1766943955; bh=r42BM5PvPixDLRp4sXlUhKr0FhxwTxRFCpYTPDnxwMs=;
+	h=Date:Subject:From:To:References:In-Reply-To:From;
+	b=lEt2zttijovlUw1jkQ7vKR1YtKWCTklNXnT8ee4d61fnfV+N/zFfmkaxUHJ/8b/I7
+	 FyTrFOAvO9RlYQdWPQdq5o8qkPuLHqF9LF37iT0xGKiqe1IQ3A6fY7KS+C1HBU+J8W
+	 0nKC/XipY64kilQrxve+k3KVQ/CKvOFnBzIkrARo=
+Received: from unknown by smtp-3-0000.mail.infomaniak.ch (Postfix) with ESMTPA
+ id 4dfRbQ5TK7z1Bms;
+	Sun, 28 Dec 2025 18:45:54 +0100 (CET)
 Mime-Version: 1.0
 Content-Transfer-Encoding: quoted-printable
 Content-Type: text/plain; charset=UTF-8
-Date: Sat, 27 Dec 2025 23:25:27 +0100
-Message-Id: <DF9COCLM7VEQ.11RH8SIO59PMU@kernel.org>
-Subject: Re: [PATCH v4 1/4] rust: macros: add derive macro for `Into`
-From: "Benno Lossin" <lossin@kernel.org>
-To: "Jesung Yang" <y.j3ms.n@gmail.com>
+Date: Sun, 28 Dec 2025 18:45:54 +0100
+Message-Id: <DFA1CUMND2ME.1D3PAJW641QHM@ik.me>
+Subject: Re: [PATCH v4 00/11] gpu: nova-core: add Turing support
+From: "Ewan Chorynski" <ewan.chorynski@ik.me>
+To: "Timur Tabi" <ttabi@nvidia.com>, "Danilo Krummrich" <dakr@kernel.org>,
+ "Alexandre Courbot" <acourbot@nvidia.com>, "Joel Fernandes"
+ <joelagnelf@nvidia.com>, "John Hubbard" <jhubbard@nvidia.com>,
+ <nouveau@lists.freedesktop.org>, <rust-for-linux@vger.kernel.org>
 X-Mailer: aerc 0.21.0
-References: <20251225-try-from-into-macro-v4-0-4a563d597836@gmail.com>
- <20251225-try-from-into-macro-v4-1-4a563d597836@gmail.com>
- <DF7HDE1T2BOS.33WUHP49WWO1M@kernel.org>
- <CA+tqQ4JPMg7CGq7YiN2EwzzQBC2grRE5OFgRQTws+xh8UbzqEw@mail.gmail.com>
- <DF8QDONK951M.10NYLJ40UNNY1@kernel.org>
- <CA+tqQ4Kyy1re209kjBvtJU037MEcv+jQzEt=E9CMS4d2iuFR5g@mail.gmail.com>
-In-Reply-To: 
- <CA+tqQ4Kyy1re209kjBvtJU037MEcv+jQzEt=E9CMS4d2iuFR5g@mail.gmail.com>
-Message-ID-Hash: 7D5HQD7P5PVGBG3CDQPFZ6CUMV3HLNB3
-X-Message-ID-Hash: 7D5HQD7P5PVGBG3CDQPFZ6CUMV3HLNB3
-X-MailFrom: lossin@kernel.org
+References: <20251218032955.979623-1-ttabi@nvidia.com>
+In-Reply-To: <20251218032955.979623-1-ttabi@nvidia.com>
+Feedback-ID: :52330b22a40e583:ham:e74197f626dda86
+X-Infomaniak-Routing: alpha
+X-MailFrom: ewan.chorynski@ik.me
+X-Mailman-Rule-Hits: nonmember-moderation
 X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency;
- loop; banned-address; member-moderation; nonmember-moderation; administrivia;
- implicit-dest; max-recipients; max-size; news-moderation; no-subject;
- digests; suspicious-header
-CC: Miguel Ojeda <ojeda@kernel.org>, Boqun Feng <boqun.feng@gmail.com>,
- Gary Guo <gary@garyguo.net>,
- =?utf-8?q?Bj=C3=B6rn_Roy_Baron?= <bjorn3_gh@protonmail.com>,
- Andreas Hindborg <a.hindborg@kernel.org>, Alice Ryhl <aliceryhl@google.com>,
- Trevor Gross <tmgross@umich.edu>, Danilo Krummrich <dakr@kernel.org>,
- Alexandre Courbot <acourbot@nvidia.com>, linux-kernel@vger.kernel.org,
- rust-for-linux@vger.kernel.org, nouveau@lists.freedesktop.org
+ loop; banned-address; member-moderation
+Message-ID-Hash: 2OLO3QNQWKTI44RALDW2AKFR7XJMFABM
+X-Message-ID-Hash: 2OLO3QNQWKTI44RALDW2AKFR7XJMFABM
+X-Mailman-Approved-At: Mon, 29 Dec 2025 09:16:34 +0000
 X-Mailman-Version: 3.3.8
 Precedence: list
 List-Id: Nouveau development list <nouveau.lists.freedesktop.org>
 Archived-At: 
- <https://lists.freedesktop.org/hyperkitty/list/nouveau@lists.freedesktop.org/message/7D5HQD7P5PVGBG3CDQPFZ6CUMV3HLNB3/>
-Archived-At: 
- <https://lore.freedesktop.org/DF9COCLM7VEQ.11RH8SIO59PMU@kernel.org/>
+ <https://lists.freedesktop.org/hyperkitty/list/nouveau@lists.freedesktop.org/message/2OLO3QNQWKTI44RALDW2AKFR7XJMFABM/>
+Archived-At: <https://lore.freedesktop.org/DFA1CUMND2ME.1D3PAJW641QHM@ik.me/>
 List-Archive: 
  <https://lists.freedesktop.org/hyperkitty/list/nouveau@lists.freedesktop.org/>
 List-Archive: <https://lore.freedesktop.org/nouveau>
@@ -111,52 +99,45 @@ List-Post: <mailto:nouveau@lists.freedesktop.org>
 List-Subscribe: <mailto:nouveau-join@lists.freedesktop.org>
 List-Unsubscribe: <mailto:nouveau-leave@lists.freedesktop.org>
 
-On Sat Dec 27, 2025 at 11:45 AM CET, Jesung Yang wrote:
-> On Sat, Dec 27, 2025 at 1:57=E2=80=AFPM Benno Lossin <lossin@kernel.org> =
-wrote:
->> On Fri Dec 26, 2025 at 10:36 AM CET, Jesung Yang wrote:
->> > On Fri, Dec 26, 2025 at 2:40=E2=80=AFAM Benno Lossin <lossin@kernel.or=
-g> wrote:
->> >> On Thu Dec 25, 2025 at 9:37 AM CET, Jesung Yang via B4 Relay wrote:
->> >> > +    fn emit_overflow_assert(
->> >> > +        enum_ident: &Ident,
->> >> > +        variants: &[Ident],
->> >> > +        repr_ty: &syn::Path,
->> >> > +        input_ty: &ValidTy,
->> >> > +    ) -> TokenStream {
->> >>
->> >> I feel like we should track this via traits rather than using a const
->> >> assert. That approach will require & generate much less code.
->> >
->> > Sorry, but could you elaborate? A small example of what you have in
->> > mind would help a lot.
->>
->> Oh yeah sorry, I had something different in mind compared to what I'll
->> describe now, but it achieves the same thing without introducing new
->> traits:
->>
->> We have two options:
->> 1) We use `<input_ty as TryFrom<repr_ty>>::try_from` instead of writing
->>    the `fits` function ourself.
->> 2) We require `input_ty: From<repr_ty>`.
->>
->> The first option would still check every variant and should behave the
->> same as your current code.
->>
->> Option 2 allows us to avoid the const altogether, but requires us to
->> choose the smallest integer as the representation (and if we want to be
->> able to use both `i8` and `u8`, we can't). I missed this before, so
->> using option 1 might be the only way to allow conversions of this kind.
+Hello
+
+On Thu Dec 18, 2025 at 4:29 AM CET, Timur Tabi wrote:
+> This patch set adds basic support for pre-booting GSP-RM
+> on Turing.
 >
-> AFAIK, `<input_ty as TryFrom<repr_ty>>::try_from` cannot be called in
-> const contexts without `#![feature(const_trait_impl, const_convert)]`.
-> I assume we want to keep this validation at compile-time? If so, we
-> might need to stick with the custom `fits` check for now. Please let me
-> know if I misunderstood you.
+> There is also partial support for GA100, but it's currently not
+> fully implemented.  GA100 is considered experimental in Nouveau,
+> and so it hasn't been tested with NovaCore either.
+>
+> That latest linux-firmware.git is required because it contains the
+> Generic Bootloader image that has not yet been propogated to
+> distros.
 
-Oh yeah that doesn't work (yet) :(
+I was curious to see Nova probe on my laptop equipped with a TU117M
+GeForce GTX 1650 Mobile. I compiled with your patchset applied on drm-next
+and downloaded the latest linux-firmware.git.
 
-I'll take another look at the function itself then.
+However, NovaCore fails to probe my device with the following logs :
 
-Cheers,
-Benno
+[    3.497672] NovaCore 0000:01:00.0: FbLayout {
+                   fb: 0x0..0x100000000,
+                   vga_workspace: 0xfff00000..0x100000000,
+                   frts: 0xffe00000..0xfff00000,
+                   boot: 0xffdff000..0xffe00000,
+                   elf: 0xfe2c0000..0xffdf4ea0,
+                   wpr2_heap: 0xf7900000..0xfe200000,
+                   wpr2: 0xf7800000..0xfff00000,
+                   heap: 0xf7700000..0xf7800000,
+                   vf_partition_count: 0x0,
+               }
+[    3.623000] NovaCore 0000:01:00.0: GSP MBOX0: 0xffffe000, MBOX1: 0x0
+[    3.623026] NovaCore 0000:01:00.0: Using SEC2 to load and run the booter=
+_load firmware...
+[    3.626236] NovaCore 0000:01:00.0: SEC2 MBOX0: 0x31, MBOX10x0
+[    3.626265] NovaCore 0000:01:00.0: Booter-load failed with error 0x31
+
+Is this expected to happen ? Here is the full device description from
+lspci :
+
+01:00.0 VGA compatible controller: NVIDIA Corporation TU117M [GeForce GTX 1=
+650 Mobile / Max-Q] (rev a1)
