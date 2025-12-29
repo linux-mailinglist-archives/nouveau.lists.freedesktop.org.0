@@ -2,142 +2,134 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id 564C8CE6498
-	for <lists+nouveau@lfdr.de>; Mon, 29 Dec 2025 10:24:43 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 0C7CECE6AF3
+	for <lists+nouveau@lfdr.de>; Mon, 29 Dec 2025 13:30:06 +0100 (CET)
 Received: from kara.freedesktop.org (unknown [131.252.210.166])
-	by gabe.freedesktop.org (Postfix) with ESMTPS id D356311B373;
-	Mon, 29 Dec 2025 09:24:41 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTPS id D660D10E442;
+	Mon, 29 Dec 2025 12:30:04 +0000 (UTC)
 Authentication-Results: gabe.freedesktop.org;
-	dkim=fail reason="signature verification failed" (2048-bit key; unprotected) header.d=kode54.net header.i=@kode54.net header.b="x8QN9Y1D";
-	dkim=fail reason="signature verification failed" (2048-bit key; unprotected) header.d=messagingengine.com header.i=@messagingengine.com header.b="guv5/iEp";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="WznmjLYV";
 	dkim-atps=neutral
 Received: from kara.freedesktop.org (localhost [127.0.0.1])
-	by kara.freedesktop.org (Postfix) with ESMTP id E037B44C6C;
-	Mon, 29 Dec 2025 09:16:46 +0000 (UTC)
+	by kara.freedesktop.org (Postfix) with ESMTP id 87D9844BAD;
+	Mon, 29 Dec 2025 12:22:09 +0000 (UTC)
 ARC-Seal: i=1; cv=none; a=rsa-sha256; d=lists.freedesktop.org;
- s=20240201; t=1766999806;
- b=uly1UUOiPUFtwANcEenPR4im1ueL/myrngP6Qwd/oCzJ2gFKinu6PRzrIeSQ2v1b5swzC
- +nN/sK4AJNsMJP+D7vhvUcu3zR4umbTop22A71NT5ph62dhD+Mtb1LXml++5L3Xe+anbD1H
- /bATQgCh8986+Oy6KZbtUe3Nc3YO5hUGpBf61ssYI9h2XcE4XXab4KqXpXu3zwnacQwNDKn
- eGejfGtI2CwR0m09TR8mr9Jkc+GxDYBDr3/RDseoPvE86XYl+nZNfraXqsM9o0t+ZKFydBE
- lfvVVPual0r/70jm/SEd7C5YL8iHx5M0ENLz7AXUoZsWG05tC0OrNnESXDrA==
+ s=20240201; t=1767010929;
+ b=Xbci57yYqrGbkGsFUTe7Vn2xBDRa5ParbVjGjl1HzoQm9TrDUtUxX1NDbToKFM7tBVJbt
+ lvhdA4OTNHhLv1VaQ5yq2Ju7X7WJfPksGbZWCPWs4PH9YDkcg4XUmVkAiK6Lma6Hhh1SpI0
+ oiFX0lOIuzJhhEEZJQHOyEtdoGOJ7WFFWgvm+4JOr30XoD1oKtiruRIRWnRa6PaoOIgbyyU
+ uIq6Hk2TAsscl398BgfXSRrn/blNuvpNF4Ss3uQkNrnOiB1mrjknk/w13jtmq21h6T9YwSI
+ aDrSkkakUo3paGhDDZNkZpiteGj0rOiI3DFsKrR0B1+folP1pWHO9yaZnP4A==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed;
- d=lists.freedesktop.org; s=20240201; t=1766999806; h=from : sender :
+ d=lists.freedesktop.org; s=20240201; t=1767010929; h=from : sender :
  reply-to : subject : date : message-id : to : cc : mime-version :
  content-type : content-transfer-encoding : content-id :
  content-description : resent-date : resent-from : resent-sender :
  resent-to : resent-cc : resent-message-id : in-reply-to : references :
  list-id : list-help : list-unsubscribe : list-subscribe : list-post :
  list-owner : list-archive;
- bh=x+Sdey2ZtEqDYnxlQ6PLSaOnjlfGA29n6eujAw52uJk=;
- b=Z+CviIIUjwjZbCaY8WRBYfbt1b9SfnXZZ4uCeLqO+Dx/Wj2FUE4TdwXjx/7lrXlPjDkTT
- 80Px3DVE9GU+jposfe3ZOh2PW+r8e95f+uDsd7heNbuAl8y7g7KZDuIEny74HlO0hVKnGjV
- sCTCGBCo84eauDE/0kcrlQa3n6Lk1IvUR6p1+0eDnLaJu/C8eb15MI4zRi+7Q37+aZDXYmA
- 4LSNs09P0Eqxsf92WjTctKcPkfkoKmqVxKqr5PAdF5Ns+yctXWj5t7MTFvfi6J7+C2xHbaF
- akg9+TuNJIf24Mbj+JJcfNwqHvHY2ngiiWYgbqRcZeWv36kAxH7B6DPIoH2w==
+ bh=nNlRh+FneH00PSxZ8P4vqxaIgbthTMHFAwc5+WdXwbg=;
+ b=UA0r2JLzTrmL+CwEfDm/eKYFgn1cZboJUuhhOJkbqv5tFJfl3IzvMnMHE9rdyge9qCoTf
+ txu5X5k1QGh1JQenZgXERZIb6IEeT+kSjxHG7BIR3heGRV8LQ4rr8YqmySFvrgDE9EVS0Wx
+ 524RKJeXSEHovT2ZKSYF7HWo8BUWyhMNLiOQ980XOFgQmhRZiRg04x8gKWOOY7mJhE2j5iT
+ 5j9jQDxltRE3h6qYsJ1uW35kTBuxtwL+9d8NlrK/lHBkgOuESkQrpPP6GRbjVSCVubAtUfq
+ 0LLeV9oRn3D3k0Tu/NDwuPIJLePq7cx50vKU9utdkjQT0J2glaO9Msz7ApLA==
 ARC-Authentication-Results: i=1; mail.freedesktop.org;
- dkim=pass header.d=kode54.net;
+ dkim=pass header.d=gmail.com;
   arc=none (Message is not ARC signed);
-  dmarc=pass (Used From Domain Record) header.from=kode54.net
+  dmarc=pass (Used From Domain Record) header.from=gmail.com
  policy.dmarc=quarantine
-Authentication-Results: mail.freedesktop.org; dkim=pass header.d=kode54.net;
+Authentication-Results: mail.freedesktop.org; dkim=pass header.d=gmail.com;
  arc=none (Message is not ARC signed);
- dmarc=pass (Used From Domain Record) header.from=kode54.net
+ dmarc=pass (Used From Domain Record) header.from=gmail.com
  policy.dmarc=quarantine
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by kara.freedesktop.org (Postfix) with ESMTPS id 0F41A43DB2
-	for <nouveau@lists.freedesktop.org>; Mon, 29 Dec 2025 05:53:30 +0000 (UTC)
-X-Greylist: delayed 166225 seconds by postgrey-1.36 at gabe;
- Mon, 29 Dec 2025 06:01:24 UTC
-Received: from fhigh-b8-smtp.messagingengine.com
- (fhigh-b8-smtp.messagingengine.com [202.12.124.159])
-	by gabe.freedesktop.org (Postfix) with ESMTPS id 25AA111277D;
-	Mon, 29 Dec 2025 06:01:24 +0000 (UTC)
-Received: from phl-compute-04.internal (phl-compute-04.internal [10.202.2.44])
-	by mailfhigh.stl.internal (Postfix) with ESMTP id 34EA77A0074;
-	Mon, 29 Dec 2025 01:01:23 -0500 (EST)
-Received: from phl-frontend-04 ([10.202.2.163])
-  by phl-compute-04.internal (MEProxy); Mon, 29 Dec 2025 01:01:23 -0500
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kode54.net; h=cc
-	:cc:content-type:content-type:date:date:from:from:in-reply-to
-	:in-reply-to:message-id:mime-version:references:reply-to:subject
-	:subject:to:to; s=fm1; t=1766988083; x=1767074483; bh=x+Sdey2ZtE
-	qDYnxlQ6PLSaOnjlfGA29n6eujAw52uJk=; b=x8QN9Y1DhIPoh4HdT0mKnRa4Ux
-	8iqVbMRDNvVOoWwjkJ+/YzPXC7CNoJdU9OM+TLtwVelW9xGgoQTG1S6G1k0XcRIA
-	GhqDOq1nQrjqQ42MNqtV+qlqWZxm75XXglap2ZehG8vATQOxNiUrkZNvkQs4jZBr
-	EqHQ9JgcduCYA+KTeXepY8pTmrCIJcOAKFePFI9es1vPdyfhTFCVOv8OIpzYsi1s
-	iuiHjpAzHt7tQrXkCPCo0aopuw2Bv5WQJ95ed7rYg3xHoOlVhxrr4ZcNAyA4I9Uc
-	BXjY94MCuWDHQyEcPHeupEPDwbQlifDSxpVVLhJc3JS1areXJ+zHPKWGK/qA==
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=
-	messagingengine.com; h=cc:cc:content-type:content-type:date:date
-	:feedback-id:feedback-id:from:from:in-reply-to:in-reply-to
-	:message-id:mime-version:references:reply-to:subject:subject:to
-	:to:x-me-proxy:x-me-sender:x-me-sender:x-sasl-enc; s=fm2; t=
-	1766988083; x=1767074483; bh=x+Sdey2ZtEqDYnxlQ6PLSaOnjlfGA29n6eu
-	jAw52uJk=; b=guv5/iEp7togl9NaSGF9DiggdgegY6Oe6M5U6b5sHV1B0vbJ1zM
-	zoTSzbuZ3YBtLpxlu9GGH4NU7wVyuF5N+nYbjZwQr06CqAckNChiR1WawnW1Uf3A
-	+dy1jJgQCEG2SLOWBYMXgP1pZp4/whQBlqKNhU5zvKAOcIn98Ev6XcWyiWXldSvR
-	kNZZrhg3aAXSU9Yl/rMRrOuoa3weqZ2MrQQPBOlCaUx8pHw5Tr9S2rFKMSV4kHXT
-	xb6zZPOvuurQxUGp94VC2TAJUFFaetlLEz6B4sVeqNq1Y1lsUPCJ+eNl65zjXnuC
-	dpWApkguA7KwVQFUZfQjkdsw5O2kwXotYvA==
-X-ME-Sender: <xms:MhlSadEYw8rLfoBuzGumvQEaT9VqDYz1oFQPuXIOyWxcdhH8dckftw>
-    <xme:MhlSaSwNq82LuXaExfDrf7i3nDOW8hQ6l9pOKu8vSSl3D2jSPhDCyITHexpg-YdjU
-    RYzAu-kuCkqOkk3OmfJSqRaOy7RcRJGTeN3EXkxNHbKjHDxYy2TizE>
-X-ME-Received: 
- <xmr:MhlSaf0fQVXq6xKMOKcZx3pyj4hL6cdWpZlk3hODHyZlFTcg35G_BQ5CbRA>
-X-ME-Proxy-Cause: 
- gggruggvucftvghtrhhoucdtuddrgeefgedrtddtgdejieefjecutefuodetggdotefrod
-    ftvfcurfhrohhfihhlvgemucfhrghsthforghilhdpuffrtefokffrpgfnqfghnecuuegr
-    ihhlohhuthemuceftddtnecusecvtfgvtghiphhivghnthhsucdlqddutddtmdenucfjug
-    hrpefhvfevuffkfgffjghfgggtsehgtderredtreejnecuhfhrohhmpeevhhhrihhsthho
-    phhhvghrucfunhhofihhihhllhcuoegthhhrihhssehkohguvgehgedrnhgvtheqnecugg
-    ftrfgrthhtvghrnhepjedvteevfeekgefgueevueekteffuddtvdeuvdeukedtkeeffeff
-    jeefjedtgfetnecuvehluhhsthgvrhfuihiivgeptdenucfrrghrrghmpehmrghilhhfrh
-    homheptghhrhhisheskhhouggvheegrdhnvghtpdhnsggprhgtphhtthhopeelpdhmohgu
-    vgepshhmthhpohhuthdprhgtphhtthhopehnohhuvhgvrghusehlihhsthhsrdhfrhgvvg
-    guvghskhhtohhprdhorhhgpdhrtghpthhtohepughrihdquggvvhgvlheslhhishhtshdr
-    fhhrvggvuggvshhkthhophdrohhrghdprhgtphhtthhopehlihhnuhigqdhkvghrnhgvlh
-    esvhhgvghrrdhkvghrnhgvlhdrohhrghdprhgtphhtthhopehlhihuuggvsehrvgguhhgr
-    thdrtghomhdprhgtphhtthhopegurghkrheskhgvrhhnvghlrdhorhhgpdhrtghpthhtoh
-    epmhhrihhprghrugeskhgvrhhnvghlrdhorhhgpdhrtghpthhtohepthiiihhmmhgvrhhm
-    rghnnhesshhushgvrdguvgdprhgtphhtthhopegrihhrlhhivggusehgmhgrihhlrdgtoh
-    hmpdhrtghpthhtohepshhimhhonhgrsehffhiflhhlrdgthh
-X-ME-Proxy: <xmx:MhlSaarTfyqdzxtyLE-ZrDea1fsjO6bbtHgZnRNxGczBmr9UGHmlsg>
-    <xmx:MhlSaUUU9vAYHhu_gpV1Z0ao3wSi9QDaFekrTJZXkFUhDTLWQqoBRg>
-    <xmx:MhlSabqgDWU4h5Yr9lkVwPF0rmXSo1BAPJqxAFHPtKawNnY6IwmWdg>
-    <xmx:MhlSaTBjyhiSCIBCtaiAbMu2hVHumxsMAondIM2pCfsSpmp2xek89Q>
-    <xmx:MxlSaXZJ8LAp4qtuHP_HRUTQJ3aSbI-w6xgjhcVHHL7guW6olJhMiuJa>
-Feedback-ID: i9ec6488d:Fastmail
-Received: by mail.messagingengine.com (Postfix) with ESMTPA; Mon,
- 29 Dec 2025 01:01:22 -0500 (EST)
-From: Christopher Snowhill <chris@kode54.net>
-To: nouveau@lists.freedesktop.org
-Subject: [BUG] NULL pointer dereference in Nouveau in 6.19 rc3 on boot
-Message-ID: <176698808133.6372.2408917375327107249@copycat>
-User-Agent: Dodo
-Date: Sun, 28 Dec 2025 22:01:21 -0800
-In-Reply-To: <176682185563.8256.115798774340102079@copycat>
-References: <176682185563.8256.115798774340102079@copycat>
+	by kara.freedesktop.org (Postfix) with ESMTPS id 979F641B4D
+	for <nouveau@lists.freedesktop.org>; Mon, 29 Dec 2025 12:22:06 +0000 (UTC)
+Received: from mail-oa1-f41.google.com (mail-oa1-f41.google.com
+ [209.85.160.41])
+	by gabe.freedesktop.org (Postfix) with ESMTPS id AA2E810E43A
+	for <nouveau@lists.freedesktop.org>; Mon, 29 Dec 2025 12:30:01 +0000 (UTC)
+Received: by mail-oa1-f41.google.com with SMTP id
+ 586e51a60fabf-3e0f19a38d0so6505389fac.0
+        for <nouveau@lists.freedesktop.org>;
+ Mon, 29 Dec 2025 04:30:01 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20230601; t=1767011401; x=1767616201;
+ darn=lists.freedesktop.org;
+        h=content-transfer-encoding:cc:to:subject:message-id:date:from
+         :in-reply-to:references:mime-version:from:to:cc:subject:date
+         :message-id:reply-to;
+        bh=nNlRh+FneH00PSxZ8P4vqxaIgbthTMHFAwc5+WdXwbg=;
+        b=WznmjLYVt6uAamN5oaRvOF/3JADDg/Ny7DTiXsgC3JSC41cmrCUd/pTl7OEyuf8e/m
+         y9aCPy5TtD2vvnaYfZIIuj8o+zjH9D5p3r5EMyBlCntca6Q4Oo3Z7l6j8SFIhd+pTMac
+         AewWtKO3fl4Kyxg1DyMh2R5MkMPtxZX3KAWb3QCnBDRV8DwMBSvk2qQ9bKT/FASC969Q
+         6LmoVsMDxAWoSoKMwhBLeG7HyGa5hf5L7AdyDWkzn5ZrUW4VTZRPdw2mMx2ASUFjNxJE
+         uFT0UeZ9tT5kBbSXjcGLqSEH+N/HsS68BmWzItx3tvqj6d7Ze1diUINZ23zgk16vOR+M
+         atpQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20230601; t=1767011401; x=1767616201;
+        h=content-transfer-encoding:cc:to:subject:message-id:date:from
+         :in-reply-to:references:mime-version:x-gm-gg:x-gm-message-state:from
+         :to:cc:subject:date:message-id:reply-to;
+        bh=nNlRh+FneH00PSxZ8P4vqxaIgbthTMHFAwc5+WdXwbg=;
+        b=o3UX7pxrBHIlbH8xrux1xpvDM2urtMn3yO5GK0U+wMCkJvUDbPBURyI5poXJmRFwqo
+         8f+FO7+JLUocU/1zNY6zxsD2+Y0GIMuRkC+X2mWfPcBXMKGdPwaUHINpKl0Ks0EHzb1r
+         OCda8RP7BYds8d1HD/ekmKqyXFGcNYLrBtECVHHSYbfQYw78qmePgUNWBc/5eNBM0oKF
+         Pxh1GAgbQbIDK0iiNzlTTNr5zBelkLQZnUCkrpz0DIzSSJ6TviixYe7ZGdqWresQ5OVf
+         Etl03fm4QQg0JOuT4QkFwyIhcxxKRhIGrnGUahs+TLAbTx1RW8iWQqDvXnNxJy3juCuC
+         gJ4Q==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCWGEEePMnT+YOF6Q77u6zC0euYcZWan4KcnEWRcV6tK+4t1DM+YIwOwVCXLTSe4phk1MlO2VK7I@lists.freedesktop.org
+X-Gm-Message-State: AOJu0YwnPHslu/XMLK2tRtNXjK0CQKSf7pVda5STcH/4gNmIDVUk2ndQ
+	keHne3X/fonZOjTrlSHIM1/XI3iHFmA67u61ITBXrSZfyJVtZX9UnULDjlKS320B8v/Ul8SLpYn
+	wG930TK8pciAjF9rb+Hvc2gIf4WFtPo8=
+X-Gm-Gg: AY/fxX4ZL2S79DY6/1i6UbOvmJwVSGi/2UhBlQ319DrksMNsU7I3fCX8p4tJlhSQgGW
+	+YB+ZAo+YqeiSvw4kOw9lABMuDSN972oXpRnKR6N/URH4S2DKAxXdpL9I6gT9l2AKnIGRLDN1FZ
+	ilO7Uy0pfnfudpW0GNsklHL/EDDmXPUy/fvmQ+2BY1Awk5KAaQPW9bit0xyrNATcEQ7yRYaXVB6
+	iiS+I2ZKp8pxw1rDHbx7iavQ6Ce5R5PJE+WDKva1UZ5VNqG2V4zH3UvEHDsomqFjIHfbmw=
+X-Google-Smtp-Source: 
+ AGHT+IFv9e/7aJqcQPz+g/ACAA2KWN58Q5VLbp7DW/p83i8XMHNJzhEzH4BHF62jWLN8bcWxLDB36ri/VDXl2M9P27Q=
+X-Received: by 2002:a05:6820:22a6:b0:657:48ac:99f4 with SMTP id
+ 006d021491bc7-65d0e94d523mr11981668eaf.1.1767011400613; Mon, 29 Dec 2025
+ 04:30:00 -0800 (PST)
 MIME-Version: 1.0
-Content-Type: multipart/signed; protocol="application/pgp-signature";
- micalg="pgp-sha512"; boundary="===============0628149434855852146=="
-X-MailFrom: chris@kode54.net
-X-Mailman-Rule-Hits: nonmember-moderation
+References: <20251225-try-from-into-macro-v4-0-4a563d597836@gmail.com>
+ <20251225-try-from-into-macro-v4-1-4a563d597836@gmail.com>
+ <DF7HDE1T2BOS.33WUHP49WWO1M@kernel.org>
+ <CA+tqQ4JPMg7CGq7YiN2EwzzQBC2grRE5OFgRQTws+xh8UbzqEw@mail.gmail.com>
+ <DF8QDONK951M.10NYLJ40UNNY1@kernel.org>
+In-Reply-To: <DF8QDONK951M.10NYLJ40UNNY1@kernel.org>
+From: Jesung Yang <y.j3ms.n@gmail.com>
+Date: Mon, 29 Dec 2025 21:29:49 +0900
+X-Gm-Features: AQt7F2oq3PqcyMSgNLEMYRMylRuI_V-ZWEZMGEC6qCrS17Ex_bVyXrrTY8Xfgh0
+Message-ID: 
+ <CA+tqQ4+Xp_Uv+O32JgCyN0vB-AJEaJdUWoWDOx0nTogeiDbj6w@mail.gmail.com>
+Subject: Re: [PATCH v4 1/4] rust: macros: add derive macro for `Into`
+To: Benno Lossin <lossin@kernel.org>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+Message-ID-Hash: DOC6ZP3NCOALZRTUYMEK4DTBTT356EO2
+X-Message-ID-Hash: DOC6ZP3NCOALZRTUYMEK4DTBTT356EO2
+X-MailFrom: y.j3ms.n@gmail.com
 X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency;
- loop; banned-address; member-moderation
-Message-ID-Hash: CISHCEDKFKEGCMMQX4W7SBKFZHQTUGY5
-X-Message-ID-Hash: CISHCEDKFKEGCMMQX4W7SBKFZHQTUGY5
-X-Mailman-Approved-At: Mon, 29 Dec 2025 09:16:44 +0000
-CC: dri-devel@lists.freedesktop.org, linux-kernel@vger.kernel.org,
- Danilo Krummrich <dakr@kernel.org>, Maxime Ripard <mripard@kernel.org>,
- Simona Vetter <simona@ffwll.ch>
+ loop; banned-address; member-moderation; nonmember-moderation; administrivia;
+ implicit-dest; max-recipients; max-size; news-moderation; no-subject;
+ digests; suspicious-header
+CC: Miguel Ojeda <ojeda@kernel.org>, Boqun Feng <boqun.feng@gmail.com>,
+ Gary Guo <gary@garyguo.net>,
+ =?UTF-8?Q?Bj=C3=B6rn_Roy_Baron?= <bjorn3_gh@protonmail.com>,
+ Andreas Hindborg <a.hindborg@kernel.org>, Alice Ryhl <aliceryhl@google.com>,
+ Trevor Gross <tmgross@umich.edu>, Danilo Krummrich <dakr@kernel.org>,
+ Alexandre Courbot <acourbot@nvidia.com>, linux-kernel@vger.kernel.org,
+ rust-for-linux@vger.kernel.org, nouveau@lists.freedesktop.org
 X-Mailman-Version: 3.3.8
 Precedence: list
 List-Id: Nouveau development list <nouveau.lists.freedesktop.org>
 Archived-At: 
- <https://lists.freedesktop.org/hyperkitty/list/nouveau@lists.freedesktop.org/message/CISHCEDKFKEGCMMQX4W7SBKFZHQTUGY5/>
+ <https://lists.freedesktop.org/hyperkitty/list/nouveau@lists.freedesktop.org/message/DOC6ZP3NCOALZRTUYMEK4DTBTT356EO2/>
 Archived-At: 
- <https://lore.freedesktop.org/176698808133.6372.2408917375327107249@copycat/>
+ <https://lore.freedesktop.org/CA+tqQ4+Xp_Uv+O32JgCyN0vB-AJEaJdUWoWDOx0nTogeiDbj6w@mail.gmail.com/>
 List-Archive: 
  <https://lists.freedesktop.org/hyperkitty/list/nouveau@lists.freedesktop.org/>
 List-Archive: <https://lore.freedesktop.org/nouveau>
@@ -147,357 +139,105 @@ List-Post: <mailto:nouveau@lists.freedesktop.org>
 List-Subscribe: <mailto:nouveau-join@lists.freedesktop.org>
 List-Unsubscribe: <mailto:nouveau-leave@lists.freedesktop.org>
 
---===============0628149434855852146==
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: quoted-printable
+On Sat, Dec 27, 2025 at 1:57=E2=80=AFPM Benno Lossin <lossin@kernel.org> wr=
+ote:
+> On Fri Dec 26, 2025 at 10:36 AM CET, Jesung Yang wrote:
+> > On Fri, Dec 26, 2025 at 2:40=E2=80=AFAM Benno Lossin <lossin@kernel.org=
+> wrote:
+> >> On Thu Dec 25, 2025 at 9:37 AM CET, Jesung Yang via B4 Relay wrote:
 
+[...]
 
+> >> > +    // Note on field-less `repr(C)` enums (quote from [1]):
+> >> > +    //
+> >> > +    //   In C, enums with discriminants that do not all fit into an=
+ `int` or all fit into an
+> >> > +    //   `unsigned int` are a portability hazard: such enums are on=
+ly permitted since C23, and not
+> >> > +    //   supported e.g. by MSVC.
+> >> > +    //
+> >> > +    //   Furthermore, Rust interprets the discriminant values of `r=
+epr(C)` enums as expressions of
+> >> > +    //   type `isize`. This makes it impossible to implement the C2=
+3 behavior of enums where the
+> >> > +    //   enum discriminants have no predefined type and instead the=
+ enum uses a type large enough
+> >> > +    //   to hold all discriminants.
+> >> > +    //
+> >> > +    //   Therefore, `repr(C)` enums in Rust require that either all=
+ discriminants to fit into a C
+> >> > +    //   `int` or they all fit into an `unsigned int`.
+> >> > +    //
+> >> > +    // As such, `isize` is a reasonable representation for `repr(C)=
+` enums, as it covers the range
+> >> > +    //  of both `int` and `unsigned int`.
+> >> > +    //
+> >> > +    // For more information, see:
+> >> > +    // - https://github.com/rust-lang/rust/issues/124403
+> >> > +    // - https://github.com/rust-lang/rust/pull/147017
+> >> > +    // - https://github.com/rust-lang/rust/blob/2ca7bcd03b87b52f705=
+5a59b817443b0ac4a530d/compiler/rustc_lint_defs/src/builtin.rs#L5251-L5263 [=
+1]
+> >> > +
+> >> > +    // Extract the representation passed by `#[repr(...)]` if prese=
+nt. If nothing is
+> >> > +    // specified, the default is `Rust` representation, which uses =
+`isize` for its
+> >> > +    // discriminant type.
+> >> > +    // See: https://doc.rust-lang.org/reference/items/enumerations.=
+html#r-items.enum.discriminant.repr-rust
+> >>
+> >> I think we should error when no `#[repr({integer})]` attribute is
+> >> specified.
+> >
+> > Not a blocker but just out of curiosity: are you concerned that the
+> > default size might change in the future, leading to silent side
+> > effects?
+>
+> `isize` already changes size when you switch between 64 and 32 bit
+> architectures. I think the author of an enum they want to convert into
+> integers should think about which size the enum should be.
+>
+> They already can choose `repr(isize)` if that is correct in that case.
+> As a default, I would have choosen `i32` (but that conflicts with Rust's
+> default, so we can't do it).
 
-On Fri 26 Dec 2025 11:50:55 PM , Christopher Snowhill wrote:
-> I get the following NULL pointer dereference on boot, shortly before it
-> would be showing me my LUKS password prompt on a graphical screen. I had
-> to trust that there was a prompt and log into it blindly to boot and
-> recover this kernel log snippet.
->=20
-> This kernel is built using the linux-cachyos-rc package, and only has
-> minor patches unrelated to DRM code, except that I also applied the
-> Nouveau ZCULL patch set on top, as well as some downstream sched-ext
-> patches from Andrea Righi's tree.
->=20
-> Using latest stable linux-firmware packages from CachyOS, so
-> 1:20251125-2.
->=20
-> Should I also have CC'd Maarten Lankhorst? I recall he was retiring from
-> the maintainer position due to leaving Intel, but get_maintainers.pl
-> still returns his contact name and address.
->=20
-> Dec 26 22:52:57 cachyos kernel: nouveau 0000:01:00.0: vgaarb: deactivate vga
-> console
-> Dec 26 22:52:57 cachyos kernel: BUG: kernel NULL pointer dereference, addre=
-ss:
-> 00000000000000cc
-> Dec 26 22:52:57 cachyos kernel: #PF: supervisor read access in kernel mode
-> Dec 26 22:52:57 cachyos kernel: #PF: error_code(0x0000) - not-present page
-> Dec 26 22:52:57 cachyos kernel: PGD 0 P4D 0
-> Dec 26 22:52:57 cachyos kernel: Oops: Oops: 0000 [#1] SMP NOPTI
-> Dec 26 22:52:57 cachyos kernel: CPU: 3 UID: 0 PID: 398 Comm: (udev-worker) =
-Not
-> tainted 6.19.0-rc2-1-cachyos-rc #1 PREEMPT(full)
-> 71029b2e9fcfeb4957f998851dc3b8eefd7c60f1
-> Dec 26 22:52:57 cachyos kernel: Hardware name: Micro-Star International Co.,
-> Ltd. MS-7E16/X670E GAMING PLUS WIFI (MS-7E16), BIOS 1.C7 10/22/2025
-> Dec 26 22:52:57 cachyos kernel: RIP: 0010:bit_entry+0x14/0xf0 [nouveau]
-> Dec 26 22:52:57 cachyos kernel: Code: 48 88 f2 0f 1f 00 90 90 90 90 90 90 90
-> 90 90 90 90 90 90 90 90 90 0f 1f 40 d6 0f 1f 44 00 00 41 56 41 55 41 89 f5 =
-41
-> 54 55 53 <8b> b7 cc 00 00 00 85 f6 0f 84 b0 00 00 00 83 c6 0a 49 89 d6 48 89
-> Dec 26 22:52:57 cachyos kernel: RSP: 0018:ffffd13900b73568 EFLAGS: 00010282
-> Dec 26 22:52:57 cachyos kernel: RAX: ffff8ef7a5429000 RBX: 0000000000000000
-> RCX: ffffd13900b735ff
-> Dec 26 22:52:57 cachyos kernel: RDX: ffffd13900b7359a RSI: 0000000000000070
-> RDI: 0000000000000000
-> Dec 26 22:52:57 cachyos kernel: RBP: ffff8ef79305d000 R08: ffffd13900b73608
-> R09: 000000000000001f
-> Dec 26 22:52:57 cachyos kernel: R10: 0000000000000002 R11: 0000000000010000
-> R12: ffffd13900b735ff
-> Dec 26 22:52:57 cachyos kernel: R13: 0000000000000070 R14: ffffd13900b73608
-> R15: ffffd13900b735fe
-> Dec 26 22:52:57 cachyos kernel: FS:  00007f830f677840(0000)
-> GS:ffff8f0ec8730000(0000) knlGS:0000000000000000
-> Dec 26 22:52:57 cachyos kernel: CS:  0010 DS: 0000 ES: 0000 CR0:
-> 0000000080050033
-> Dec 26 22:52:57 cachyos kernel: CR2: 00000000000000cc CR3: 0000000117521000
-> CR4: 0000000000f50ef0
-> Dec 26 22:52:57 cachyos kernel: PKRU: 55555554
-> Dec 26 22:52:57 cachyos kernel: Call Trace:
-> Dec 26 22:52:57 cachyos kernel:  <TASK>
-> Dec 26 22:52:57 cachyos kernel:  nvbios_pmuEp+0x51/0x130 [nouveau
-> 92367f81003504f1f8c63f31342b6d203ebdc5d1]
-> Dec 26 22:52:57 cachyos kernel:  nvkm_gsp_fwsec_init+0x76/0x3c0 [nouveau
-> 92367f81003504f1f8c63f31342b6d203ebdc5d1]
-> Dec 26 22:52:57 cachyos kernel:  r535_gsp_oneinit+0x2e4/0x1060 [nouveau
-> 92367f81003504f1f8c63f31342b6d203ebdc5d1]
-> Dec 26 22:52:57 cachyos kernel:  gh100_gsp_oneinit+0x33b/0x4d0 [nouveau
-> 92367f81003504f1f8c63f31342b6d203ebdc5d1]
-> Dec 26 22:52:57 cachyos kernel:  nvkm_subdev_init_+0x63/0x100 [nouveau
-> 92367f81003504f1f8c63f31342b6d203ebdc5d1]
-> Dec 26 22:52:57 cachyos kernel:  nvkm_subdev_init+0x46/0x60 [nouveau
-> 92367f81003504f1f8c63f31342b6d203ebdc5d1]
-> Dec 26 22:52:57 cachyos kernel:  nvkm_device_init+0x163/0x1e0 [nouveau
-> 92367f81003504f1f8c63f31342b6d203ebdc5d1]
-> Dec 26 22:52:57 cachyos kernel:  nvkm_udevice_init+0x45/0x70 [nouveau
-> 92367f81003504f1f8c63f31342b6d203ebdc5d1]
-> Dec 26 22:52:57 cachyos kernel:  nvkm_object_init+0x42/0x120 [nouveau
-> 92367f81003504f1f8c63f31342b6d203ebdc5d1]
-> Dec 26 22:52:57 cachyos kernel:  nvkm_ioctl_new+0x1d8/0x290 [nouveau
-> 92367f81003504f1f8c63f31342b6d203ebdc5d1]
-> Dec 26 22:52:57 cachyos kernel:  ? __pfx_nvkm_client_child_new+0x10/0x10
-> [nouveau 92367f81003504f1f8c63f31342b6d203ebdc5d1]
-> Dec 26 22:52:57 cachyos kernel:  ? __pfx_nvkm_udevice_new+0x10/0x10 [nouveau
-> 92367f81003504f1f8c63f31342b6d203ebdc5d1]
-> Dec 26 22:52:57 cachyos kernel:  nvkm_ioctl+0xba/0x130 [nouveau
-> 92367f81003504f1f8c63f31342b6d203ebdc5d1]
-> Dec 26 22:52:57 cachyos systemd-udevd[363]: 0000:01:00.0: Worker [398]
-> terminated by signal 9 (KILL).
-> Dec 26 22:52:57 cachyos kernel:  nvif_object_ctor+0x114/0x190 [nouveau
-> 92367f81003504f1f8c63f31342b6d203ebdc5d1]
-> Dec 26 22:52:57 cachyos kernel:  nvif_device_ctor+0x2e/0x70 [nouveau
-> 92367f81003504f1f8c63f31342b6d203ebdc5d1]
-> Dec 26 22:52:57 cachyos kernel:  nouveau_drm_device_new+0x15c/0x320 [nouveau
-> 92367f81003504f1f8c63f31342b6d203ebdc5d1]
-> Dec 26 22:52:57 cachyos kernel:  nouveau_drm_probe+0xbb/0x210 [nouveau
-> 92367f81003504f1f8c63f31342b6d203ebdc5d1]
-> Dec 26 22:52:57 cachyos kernel:  ? __pm_runtime_resume+0x59/0x80
-> Dec 26 22:52:57 cachyos kernel:  pci_device_probe+0x112/0x2d0
-> Dec 26 22:52:57 cachyos kernel:  really_probe+0xde/0x400
-> Dec 26 22:52:57 cachyos kernel:  ? __pfx___driver_attach+0x10/0x10
-> Dec 26 22:52:57 cachyos kernel:  ? __pfx___driver_attach+0x10/0x10
-> Dec 26 22:52:57 cachyos kernel:  __driver_probe_device+0x78/0x150
-> Dec 26 22:52:57 cachyos kernel:  __driver_attach+0xa0/0x340
-> Dec 26 22:52:57 cachyos kernel:  bus_for_each_dev+0x10b/0x160
-> Dec 26 22:52:57 cachyos kernel:  bus_add_driver+0x131/0x280
-> Dec 26 22:52:57 cachyos kernel:  ? __pfx_nouveau_drm_init+0x10/0x10 [nouveau
-> 92367f81003504f1f8c63f31342b6d203ebdc5d1]
-> Dec 26 22:52:57 cachyos kernel:  driver_register+0x75/0xe0
-> Dec 26 22:52:57 cachyos kernel:  nouveau_drm_init+0x1b3/0xff0 [nouveau
-> 92367f81003504f1f8c63f31342b6d203ebdc5d1]
-> Dec 26 22:52:57 cachyos kernel:  do_one_initcall+0x5b/0x300
-> Dec 26 22:52:57 cachyos kernel:  do_init_module+0x62/0x250
-> Dec 26 22:52:57 cachyos kernel:  ? init_module_from_file+0xd6/0x140
-> Dec 26 22:52:57 cachyos kernel:  init_module_from_file+0xd6/0x140
-> Dec 26 22:52:57 cachyos kernel:  idempotent_init_module+0x118/0x310
-> Dec 26 22:52:57 cachyos kernel:  __x64_sys_finit_module+0x71/0xe0
-> Dec 26 22:52:57 cachyos kernel:  ? syscall_trace_enter+0x91/0x1e0
-> Dec 26 22:52:57 cachyos kernel:  do_syscall_64+0x81/0x630
-> Dec 26 22:52:57 cachyos kernel:  ? __x64_sys_pread64+0x9c/0xd0
-> Dec 26 22:52:57 cachyos kernel:  ? do_syscall_64+0x81/0x630
-> Dec 26 22:52:57 cachyos kernel:  ? __do_sys_newfstatat+0xe0/0x170
-> Dec 26 22:52:57 cachyos kernel:  ? do_syscall_64+0x81/0x630
-> Dec 26 22:52:57 cachyos kernel:  ? irq_exit_rcu+0x55/0x100
-> Dec 26 22:52:57 cachyos kernel:  entry_SYSCALL_64_after_hwframe+0x79/0x81
-> Dec 26 22:52:57 cachyos kernel: RIP: 0033:0x7f830ff3c79d
-> Dec 26 22:52:57 cachyos kernel: Code: ff c3 66 2e 0f 1f 84 00 00 00 00 00 90
-> f3 0f 1e fa 48 89 f8 48 89 f7 48 89 d6 48 89 ca 4d 89 c2 4d 89 c8 4c 8b 4c =
-24
-> 08 0f 05 <48> 3d 01 f0 ff ff 73 01 c3 48 8b 0d 3b 15 0f 00 f7 d8 64 89 01 48
-> Dec 26 22:52:57 cachyos kernel: RSP: 002b:00007ffc68e73f08 EFLAGS: 00000246
-> ORIG_RAX: 0000000000000139
-> Dec 26 22:52:57 cachyos kernel: RAX: ffffffffffffffda RBX: 0000558c285bb2a0
-> RCX: 00007f830ff3c79d
-> Dec 26 22:52:57 cachyos kernel: RDX: 0000000000000004 RSI: 00007f830f6222f2
-> RDI: 000000000000003f
-> Dec 26 22:52:57 cachyos kernel: RBP: 00007ffc68e73fa0 R08: 0000000000000000
-> R09: 0000558c285bc240
-> Dec 26 22:52:57 cachyos kernel: R10: 0000000000000000 R11: 0000000000000246
-> R12: 00007f830f6222f2
-> Dec 26 22:52:57 cachyos kernel: R13: 0000000000020000 R14: 0000558c2853b7a0
-> R15: 0000558c285bb2a0
-> Dec 26 22:52:57 cachyos kernel:  </TASK>
-> Dec 26 22:52:57 cachyos kernel: Modules linked in: dm_mod nouveau(+)
-> drm_ttm_helper ttm gpu_sched hid_playstation(+) i2c_algo_bit uas nvme
-> ghash_clmulni_intel drm_gpuvm led_class_multicolor usb_storage aesni_intel
-> drm_exec ff_memless nvme_core mxm_wmi ccp nvme_keyring drm_display_helper
-> nvme_auth hid_multitouch hid_logitech_dj(+) video hkdf cec wmi
-> Dec 26 22:52:57 cachyos kernel: CR2: 00000000000000cc
-> Dec 26 22:52:57 cachyos kernel: ---[ end trace 0000000000000000 ]---
-> Dec 26 22:52:57 cachyos kernel: RIP: 0010:bit_entry+0x14/0xf0 [nouveau]
-> Dec 26 22:52:57 cachyos kernel: Code: 48 88 f2 0f 1f 00 90 90 90 90 90 90 90
-> 90 90 90 90 90 90 90 90 90 0f 1f 40 d6 0f 1f 44 00 00 41 56 41 55 41 89 f5 =
-41
-> 54 55 53 <8b> b7 cc 00 00 00 85 f6 0f 84 b0 00 00 00 83 c6 0a 49 89 d6 48 89
-> Dec 26 22:52:57 cachyos kernel: RSP: 0018:ffffd13900b73568 EFLAGS: 00010282
-> Dec 26 22:52:57 cachyos kernel: RAX: ffff8ef7a5429000 RBX: 0000000000000000
-> RCX: ffffd13900b735ff
-> Dec 26 22:52:57 cachyos kernel: RDX: ffffd13900b7359a RSI: 0000000000000070
-> RDI: 0000000000000000
-> Dec 26 22:52:57 cachyos kernel: RBP: ffff8ef79305d000 R08: ffffd13900b73608
-> R09: 000000000000001f
-> Dec 26 22:52:57 cachyos kernel: R10: 0000000000000002 R11: 0000000000010000
-> R12: ffffd13900b735ff
-> Dec 26 22:52:57 cachyos kernel: R13: 0000000000000070 R14: ffffd13900b73608
-> R15: ffffd13900b735fe
-> Dec 26 22:52:57 cachyos kernel: FS:  00007f830f677840(0000)
-> GS:ffff8f0ec8730000(0000) knlGS:0000000000000000
-> Dec 26 22:52:57 cachyos kernel: CS:  0010 DS: 0000 ES: 0000 CR0:
-> 0000000080050033
-> Dec 26 22:52:57 cachyos kernel: CR2: 00000000000000cc CR3: 0000000117521000
-> CR4: 0000000000f50ef0
-> Dec 26 22:52:57 cachyos kernel: PKRU: 55555554
-> Dec 26 22:52:57 cachyos kernel: note: (udev-worker)[398] exited with irqs
-> disabled
->=20
+On second thought, I've realized that enforcing an error when
+`#[repr({integer})]` is missing would prevent users from deriving
+traits for `#[repr(C)]` enums. This is because rustc currently rejects
+the combined `#[repr(C, {integer})]` syntax. For example, a user might
+want to do this:
 
-Still crashing with 6.19 rc3. I have to use the proprietary drivers to
-have a desktop, but I probably should be using those anyway.
+    #[derive(Into)]
+    #[into(u8)]
+    #[repr(C)]
+    enum Foo {
+        A,
+        B,
+    }
 
-Dec 28 21:47:18 cachyos kernel: BUG: kernel NULL pointer dereference, address:
-00000000000000cc
-Dec 28 21:47:18 cachyos kernel: #PF: supervisor read access in kernel mode
-Dec 28 21:47:18 cachyos kernel: #PF: error_code(0x0000) - not-present page
-Dec 28 21:47:18 cachyos kernel: PGD 0 P4D 0
-Dec 28 21:47:18 cachyos kernel: Oops: Oops: 0000 [#1] SMP NOPTI
-Dec 28 21:47:18 cachyos kernel: CPU: 3 UID: 0 PID: 410 Comm: (udev-worker) Not
-tainted 6.19.0-rc3-1-cachyos-rc #1 PREEMPT(full)
-048c9ac8e7cc8ed3d1ec452c3a62bf8817030490
-Dec 28 21:47:18 cachyos kernel: Hardware name: Micro-Star International Co.,
-Ltd. MS-7E16/X670E GAMING PLUS WIFI (MS-7E16), BIOS 1.C7 10/22/2025
-Dec 28 21:47:18 cachyos kernel: RIP: 0010:bit_entry+0x14/0xf0 [nouveau]
-Dec 28 21:47:18 cachyos kernel: Code: 48 08 f4 0f 1f 00 90 90 90 90 90 90 90
-90 90 90 90 90 90 90 90 90 0f 1f 40 d6 0f 1f 44 00 00 41 56 41 55 41 89 f5 41
-54 55 53 <8b> b7 cc 00 00 00 85 f6 0f 84 b0 00 00 00 83 c6 0a 49 89 d6 48 89
-Dec 28 21:47:18 cachyos kernel: RSP: 0018:ffffd1e280bdb6f8 EFLAGS: 00010286
-Dec 28 21:47:18 cachyos kernel: RAX: ffff8bec90f54800 RBX: 0000000000000000
-RCX: ffffd1e280bdb78f
-Dec 28 21:47:18 cachyos kernel: RDX: ffffd1e280bdb72a RSI: 0000000000000070
-RDI: 0000000000000000
-Dec 28 21:47:18 cachyos kernel: RBP: ffff8beca75a1000 R08: ffffd1e280bdb798
-R09: 000000000000001f
-Dec 28 21:47:18 cachyos kernel: R10: 0000000000000002 R11: 0000000000010000
-R12: ffffd1e280bdb78f
-Dec 28 21:47:18 cachyos kernel: R13: 0000000000000070 R14: ffffd1e280bdb798
-R15: ffffd1e280bdb78e
-Dec 28 21:47:18 cachyos kernel: FS:  00007f1ad28a2840(0000)
-GS:ffff8c03c7130000(0000) knlGS:0000000000000000
-Dec 28 21:47:18 cachyos kernel: CS:  0010 DS: 0000 ES: 0000 CR0:
-0000000080050033
-Dec 28 21:47:18 cachyos kernel: CR2: 00000000000000cc CR3: 00000001184a6000
-CR4: 0000000000f50ef0
-Dec 28 21:47:18 cachyos kernel: PKRU: 55555554
-Dec 28 21:47:18 cachyos kernel: Call Trace:
-Dec 28 21:47:18 cachyos kernel:  <TASK>
-Dec 28 21:47:18 cachyos kernel:  nvbios_pmuEp+0x51/0x130 [nouveau
-52ba080e4b7b95996467b34d4d25c4c6ce5aa54d]
-Dec 28 21:47:18 cachyos kernel:  nvkm_gsp_fwsec_init+0x76/0x3c0 [nouveau
-52ba080e4b7b95996467b34d4d25c4c6ce5aa54d]
-Dec 28 21:47:18 cachyos kernel:  r535_gsp_oneinit+0x2e4/0x1060 [nouveau
-52ba080e4b7b95996467b34d4d25c4c6ce5aa54d]
-Dec 28 21:47:18 cachyos kernel:  gh100_gsp_oneinit+0x33b/0x4d0 [nouveau
-52ba080e4b7b95996467b34d4d25c4c6ce5aa54d]
-Dec 28 21:47:18 cachyos kernel:  nvkm_subdev_init_+0x63/0x100 [nouveau
-52ba080e4b7b95996467b34d4d25c4c6ce5aa54d]
-Dec 28 21:47:18 cachyos kernel:  nvkm_subdev_init+0x46/0x60 [nouveau
-52ba080e4b7b95996467b34d4d25c4c6ce5aa54d]
-Dec 28 21:47:18 cachyos kernel:  nvkm_device_init+0x163/0x1e0 [nouveau
-52ba080e4b7b95996467b34d4d25c4c6ce5aa54d]
-Dec 28 21:47:18 cachyos kernel:  nvkm_udevice_init+0x45/0x70 [nouveau
-52ba080e4b7b95996467b34d4d25c4c6ce5aa54d]
-Dec 28 21:47:18 cachyos kernel:  nvkm_object_init+0x42/0x120 [nouveau
-52ba080e4b7b95996467b34d4d25c4c6ce5aa54d]
-Dec 28 21:47:18 cachyos kernel:  nvkm_ioctl_new+0x1d8/0x290 [nouveau
-52ba080e4b7b95996467b34d4d25c4c6ce5aa54d]
-Dec 28 21:47:18 cachyos kernel:  ? __pfx_nvkm_client_child_new+0x10/0x10
-[nouveau 52ba080e4b7b95996467b34d4d25c4c6ce5aa54d]
-Dec 28 21:47:18 cachyos kernel:  ? __pfx_nvkm_udevice_new+0x10/0x10 [nouveau
-52ba080e4b7b95996467b34d4d25c4c6ce5aa54d]
-Dec 28 21:47:18 cachyos kernel:  nvkm_ioctl+0xba/0x130 [nouveau
-52ba080e4b7b95996467b34d4d25c4c6ce5aa54d]
-Dec 28 21:47:18 cachyos kernel:  nvif_object_ctor+0x114/0x190 [nouveau
-52ba080e4b7b95996467b34d4d25c4c6ce5aa54d]
-Dec 28 21:47:18 cachyos kernel:  nvif_device_ctor+0x2e/0x70 [nouveau
-52ba080e4b7b95996467b34d4d25c4c6ce5aa54d]
-Dec 28 21:47:18 cachyos kernel:  nouveau_drm_device_new+0x15c/0x320 [nouveau
-52ba080e4b7b95996467b34d4d25c4c6ce5aa54d]
-Dec 28 21:47:18 cachyos kernel:  nouveau_drm_probe+0xbb/0x210 [nouveau
-52ba080e4b7b95996467b34d4d25c4c6ce5aa54d]
-Dec 28 21:47:18 cachyos kernel:  ? __pm_runtime_resume+0x59/0x80
-Dec 28 21:47:18 cachyos kernel:  pci_device_probe+0x112/0x2d0
-Dec 28 21:47:18 cachyos kernel:  really_probe+0xde/0x400
-Dec 28 21:47:18 cachyos kernel:  ? __pfx___driver_attach+0x10/0x10
-Dec 28 21:47:18 cachyos kernel:  ? __pfx___driver_attach+0x10/0x10
-Dec 28 21:47:18 cachyos kernel:  __driver_probe_device+0x78/0x150
-Dec 28 21:47:18 cachyos kernel:  __driver_attach+0xa0/0x340
-Dec 28 21:47:18 cachyos kernel:  bus_for_each_dev+0x10b/0x160
-Dec 28 21:47:18 cachyos kernel:  bus_add_driver+0x131/0x280
-Dec 28 21:47:18 cachyos kernel:  ? __pfx_nouveau_drm_init+0x10/0x10 [nouveau
-52ba080e4b7b95996467b34d4d25c4c6ce5aa54d]
-Dec 28 21:47:18 cachyos kernel:  driver_register+0x75/0xe0
-Dec 28 21:47:18 cachyos kernel:  nouveau_drm_init+0x1b3/0xff0 [nouveau
-52ba080e4b7b95996467b34d4d25c4c6ce5aa54d]
-Dec 28 21:47:18 cachyos kernel:  do_one_initcall+0x5b/0x300
-Dec 28 21:47:18 cachyos kernel:  do_init_module+0x62/0x250
-Dec 28 21:47:18 cachyos kernel:  ? init_module_from_file+0xd6/0x140
-Dec 28 21:47:18 cachyos kernel:  init_module_from_file+0xd6/0x140
-Dec 28 21:47:18 cachyos kernel:  idempotent_init_module+0x118/0x310
-Dec 28 21:47:18 cachyos kernel:  __x64_sys_finit_module+0x71/0xe0
-Dec 28 21:47:18 cachyos systemd-udevd[360]: 0000:01:00.0: Worker [410]
-terminated by signal 9 (KILL).
-Dec 28 21:47:18 cachyos kernel:  ? syscall_trace_enter+0x91/0x1e0
-Dec 28 21:47:18 cachyos kernel:  do_syscall_64+0x81/0x630
-Dec 28 21:47:18 cachyos kernel:  ? do_syscall_64+0x81/0x630
-Dec 28 21:47:18 cachyos kernel:  ? irq_exit_rcu+0x55/0x100
-Dec 28 21:47:18 cachyos kernel:  entry_SYSCALL_64_after_hwframe+0x79/0x81
-Dec 28 21:47:18 cachyos kernel: RIP: 0033:0x7f1ad316779d
-Dec 28 21:47:18 cachyos kernel: Code: ff c3 66 2e 0f 1f 84 00 00 00 00 00 90
-f3 0f 1e fa 48 89 f8 48 89 f7 48 89 d6 48 89 ca 4d 89 c2 4d 89 c8 4c 8b 4c 24
-08 0f 05 <48> 3d 01 f0 ff ff 73 01 c3 48 8b 0d 3b 15 0f 00 f7 d8 64 89 01 48
-Dec 28 21:47:18 cachyos kernel: RSP: 002b:00007ffe71df2278 EFLAGS: 00000246
-ORIG_RAX: 0000000000000139
-Dec 28 21:47:18 cachyos kernel: RAX: ffffffffffffffda RBX: 000055cb0eb476a0
-RCX: 00007f1ad316779d
-Dec 28 21:47:18 cachyos kernel: RDX: 0000000000000004 RSI: 00007f1ad284d2f2
-RDI: 000000000000005d
-Dec 28 21:47:18 cachyos kernel: RBP: 00007ffe71df2310 R08: 0000000000000000
-R09: 000055cb0eb49a70
-Dec 28 21:47:18 cachyos kernel: R10: 0000000000000000 R11: 0000000000000246
-R12: 00007f1ad284d2f2
-Dec 28 21:47:18 cachyos kernel: R13: 0000000000020000 R14: 000055cb0eadd7c0
-R15: 000055cb0eb476a0
-Dec 28 21:47:18 cachyos kernel:  </TASK>
-Dec 28 21:47:18 cachyos kernel: Modules linked in: dm_mod nouveau(+)
-drm_ttm_helper ttm gpu_sched uas i2c_algo_bit hid_playstation
-ghash_clmulni_intel drm_gpuvm nvme usb_storage led_class_multicolor drm_exec
-aesni_intel ff_memless mxm_wmi nvme_core ccp nvme_keyring drm_display_helper
-nvme_auth hid_logitech_dj hid_multitouch cec hkdf video wmi
-Dec 28 21:47:18 cachyos kernel: CR2: 00000000000000cc
-Dec 28 21:47:18 cachyos kernel: ---[ end trace 0000000000000000 ]---
-Dec 28 21:47:18 cachyos kernel: RIP: 0010:bit_entry+0x14/0xf0 [nouveau]
-Dec 28 21:47:18 cachyos kernel: Code: 48 08 f4 0f 1f 00 90 90 90 90 90 90 90
-90 90 90 90 90 90 90 90 90 0f 1f 40 d6 0f 1f 44 00 00 41 56 41 55 41 89 f5 41
-54 55 53 <8b> b7 cc 00 00 00 85 f6 0f 84 b0 00 00 00 83 c6 0a 49 89 d6 48 89
-Dec 28 21:47:18 cachyos kernel: RSP: 0018:ffffd1e280bdb6f8 EFLAGS: 00010286
-Dec 28 21:47:18 cachyos kernel: RAX: ffff8bec90f54800 RBX: 0000000000000000
-RCX: ffffd1e280bdb78f
-Dec 28 21:47:18 cachyos kernel: RDX: ffffd1e280bdb72a RSI: 0000000000000070
-RDI: 0000000000000000
-Dec 28 21:47:18 cachyos kernel: RBP: ffff8beca75a1000 R08: ffffd1e280bdb798
-R09: 000000000000001f
-Dec 28 21:47:18 cachyos kernel: R10: 0000000000000002 R11: 0000000000010000
-R12: ffffd1e280bdb78f
-Dec 28 21:47:18 cachyos kernel: R13: 0000000000000070 R14: ffffd1e280bdb798
-R15: ffffd1e280bdb78e
-Dec 28 21:47:18 cachyos kernel: FS:  00007f1ad28a2840(0000)
-GS:ffff8c03c7130000(0000) knlGS:0000000000000000
-Dec 28 21:47:18 cachyos kernel: CS:  0010 DS: 0000 ES: 0000 CR0:
-0000000080050033
-Dec 28 21:47:18 cachyos kernel: CR2: 00000000000000cc CR3: 00000001184a6000
-CR4: 0000000000f50ef0
-Dec 28 21:47:18 cachyos kernel: PKRU: 55555554
-Dec 28 21:47:18 cachyos kernel: note: (udev-worker)[410] exited with irqs
-disabled
+In this case, the code wouldn't compile if we strictly require
+`#[repr({integer})]`, even if the user carefully picked `u8`, keeping
+the enum's size (more precisely, the discriminant range) in mind.
 
-Does this new kernel require bleeding edge linux-firmware for nvidia?
+Since we already perform a compile-time check to ensure all
+discriminants fit within the types specified in the helper attributes,
+I believe `#[repr({integer})]` isn't strictly required. Even with
+`isize` changing size across architectures, our compile-time check
+remains effective and will catch any overflows.
 
---===============0628149434855852146==
-Content-Type: application/pgp-signature
-Content-Transfer-Encoding: 7bit
-Content-Disposition: attachment; filename="signature.asc"
-MIME-Version: 1.0
+To sum up, I see three options:
 
------BEGIN PGP SIGNATURE-----
+    1. Drop support for `#[repr(C)]` enums entirely.
+    2. Special-case `#[repr(C)]` enums: allow them to default to
+       `isize`, otherwise require `#[repr({integer})]`.
+    3. Permit missing `#[repr({integer})]` generally.
 
-iQIzBAABCgAdFiEEdiLr51NrDwQ29PFjjWyYR59K3nEFAmlSGTEACgkQjWyYR59K
-3nEX3g/9EXJDxtnWf7VKlGoi/s192VYSAfJZkFsDdpw7s4cXVANrE0lIqniTQfMq
-oDIWJ5LWrS81KGTGMSXa8Iw6HPHO/k6K5jdg2ByoPCQyTolDC/+YfJCweVTvJk6l
-aSATI/svrMGb47u/3Ld4okYv2bQSXScHdidRylCuWjF4U0REOv0uh6ZA6nZHmR4c
-1BGnvEeH5VTyMLItJUfT3/W00diD6Io31So4vMKVVDXDJMVqqvzxVFkDmXyoXYh9
-05V6uzPhRz0kWaJybLTkBnSniTiVhIQ11hiQsx8iNn71w9ALpFzbh0RI5MWf/7nC
-jjqeiH5ILH/FStYbq898rcBptZ4gGrFuZyzivm4MlqWV4jgyvm6v6UlFFmthTRxj
-vLc5SyIc8yOfxiOT3+xnDYIo7jKDk9D+UP623T3+fFNDN46C88FfphOzS2sJeiOl
-U7zbLTWyydORXTF+m/B8M2CTbBom35a46719Z0IkIaTU3nUdkQlcMhXsOX8YlktD
-VEFVDkmEddxgEzTk7648P7Nv+3JGHCY/NVxMqQTuKWluphCnudhJC3Ilne/QDKA6
-8t0uce26g7FljWcjGCk+zu5uqO7KyZOQ1VmZTjDqeJxjiwv25MfrDJcEqX8OntEL
-8dW3RjaQl391Yjc83mdkdgTgKEGCiCcFJV6/bgj+Y3t1AMbwQDs=
-=pl5o
------END PGP SIGNATURE-----
+I am personally leaning toward Option 3, since our existing
+compile-time check provides a sufficient safety margin to allow this
+flexibility.
 
---===============0628149434855852146==--
+Thoughts on these?
+
+Best regards,
+Jesung
