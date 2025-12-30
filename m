@@ -2,106 +2,212 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id 9E173CE927A
-	for <lists+nouveau@lfdr.de>; Tue, 30 Dec 2025 10:10:03 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 2F8D4CEABC1
+	for <lists+nouveau@lfdr.de>; Tue, 30 Dec 2025 22:42:55 +0100 (CET)
 Received: from kara.freedesktop.org (unknown [131.252.210.166])
-	by gabe.freedesktop.org (Postfix) with ESMTPS id 67ECA10E880;
-	Tue, 30 Dec 2025 09:10:02 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTPS id 0A4D610E95E;
+	Tue, 30 Dec 2025 21:42:54 +0000 (UTC)
 Authentication-Results: gabe.freedesktop.org;
-	dkim=fail reason="signature verification failed" (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="N1qiO14G";
+	dkim=pass (2048-bit key; unprotected) header.d=Nvidia.com header.i=@Nvidia.com header.b="FGQ4oHJx";
 	dkim-atps=neutral
 Received: from kara.freedesktop.org (localhost [127.0.0.1])
-	by kara.freedesktop.org (Postfix) with ESMTP id 1D52244C67;
-	Tue, 30 Dec 2025 09:02:05 +0000 (UTC)
-ARC-Seal: i=1; cv=none; a=rsa-sha256; d=lists.freedesktop.org;
- s=20240201; t=1767085325;
- b=IBJnBfieeVw1MF5lNjtZzSRE+7/nk1gXGM/9PXHzuhKfLQBbZfuSlG7JVOShB2YI4XHbn
- Mekoi1GX4OS/6vV2hK6Wvel/TvHkckaFo+Q4h9ibYLgHKeuFYFinpscHG0BRr/5OgrIPJ6D
- NGSpRDu3739VpVjoz1hzVDL4Z6TQslodhM1cf7jBiKblWveYMNzzPwieA5yhgVk5z9LpN4I
- uXOv8l0RMhXHZDh1rU7YKG1Wsb+ID+0IuBMzdDktvJOyFFZuq8L9FGGFkyiKuhvCkeSvMV+
- NLJ19UDYhNJ1PX9xz/Ukz+uC52tBrLfYM5U1HG5RSOCGeg1B5+kBdgvMgs8Q==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed;
- d=lists.freedesktop.org; s=20240201; t=1767085325; h=from : sender :
+	by kara.freedesktop.org (Postfix) with ESMTP id 8DABE44C66;
+	Tue, 30 Dec 2025 21:34:55 +0000 (UTC)
+ARC-Seal: i=2; cv=pass; a=rsa-sha256; d=lists.freedesktop.org;
+ s=20240201; t=1767130495;
+ b=C1rPrmaF0c3nw9jxAfzdfcT/csMx0nQYdW6w4BMLLk6JKZ+PhEgTrXit9TwpzBUTaR5td
+ mgB9atgUTjQvTUL3ZJV/GKu7lsM+gCTBUpC2Td+dDraC4hDZfLrNrCrp2lzfIPIbbFTXnIc
+ BlvXbDTLH2CNvynzmYcRlQ8e+dmvzMpNRZ5DCKgLS8ruoRsTZSVsdxs0Cq7xohl7+FFSzXW
+ 0x03h1gfV+BkPD/WraOOJKK0leoB8HWuGftMEEN7U94NuiUak30iaQ8SaAQmqa6iOYJiQo9
+ ZPEQUqfZ4knKWmHfNsNavlx2eGk4JgQDz6lu9Z7mXOmeEc3A7f0ZC6jtMZMg==
+ARC-Message-Signature: i=2; a=rsa-sha256; c=relaxed/relaxed;
+ d=lists.freedesktop.org; s=20240201; t=1767130495; h=from : sender :
  reply-to : subject : date : message-id : to : cc : mime-version :
  content-type : content-transfer-encoding : content-id :
  content-description : resent-date : resent-from : resent-sender :
  resent-to : resent-cc : resent-message-id : in-reply-to : references :
  list-id : list-help : list-unsubscribe : list-subscribe : list-post :
  list-owner : list-archive;
- bh=lL8t8M+yuhjNdkA0uVGgtgwTc3OP6ShE8qN6rQRiB2U=;
- b=wL+/lvgKqrF4Bu1RbQD+3MgJZDqbO0opyACI9VwyzWdwwDZILYco/bTPhjDh2uJVnQ52B
- ZGD/y5l5K2/NtvVINtLvEjaL8fpKJpyddD8jt//o1hsPwgASYEfvEXO03+PZ5ts3qYCYleP
- NlFJtuFCFqaX3BD5JwN59PqJnJ40VnMMJbLhyBH4dSywNl99LV3PEvtkWVkyApUypcnkWbw
- oU5tIsMf34VD3g1GYakWIc9PKax8Dku/+7FVU0dUcAIOyI+0Wi6kWZmhsOJ0odI7l9YHxDa
- HpWs4P+xsXqP+zXonEn31BeFMcmm6/Bsdit+d12RiR13dcC8A4hBKMcuNI5w==
-ARC-Authentication-Results: i=1; mail.freedesktop.org;
- dkim=pass header.d=kernel.org;
-  arc=none (Message is not ARC signed);
-  dmarc=pass (Used From Domain Record) header.from=kernel.org
- policy.dmarc=quarantine
-Authentication-Results: mail.freedesktop.org; dkim=pass header.d=kernel.org;
- arc=none (Message is not ARC signed);
- dmarc=pass (Used From Domain Record) header.from=kernel.org
- policy.dmarc=quarantine
+ bh=Oo4jvBL/G12DPsaOMC7/wKZ5+LX3OelIjcXH4ZOKalY=;
+ b=KYgEgXqycwxYUkLnOzbI5lX3jV08z1ciIwG49XHDOU7zLeN+DIrbm7+3kaY/qHmU34BgG
+ T0gLiJnfddqk+TCPPDS2MqyCwrFLAbzO/zpT4LfZ2h9WQZ+qsUk8JdeZVIr+dr7dFNgKdA+
+ Rl0julAZp3RqiA6l8bBw/ipLRzhAqWA8Jmv8roSAysZvAjIbrtiQOpuxErkKcgjubQ5R1np
+ OzGrBUDCII5hE7hU3CAqXn7we7V5qJ1owonHWknje+CqTli4ZP6v7uEPG4G8QLUJE/tbgNg
+ evkcMBWR7W8G2omMbbtJ9yYMOUU1tJ/K07YLkpQqR/zhEBs2Am2jgZyQfW/A==
+ARC-Authentication-Results: i=2; mail.freedesktop.org;
+ dkim=pass header.d=Nvidia.com;
+  arc=pass;
+  dmarc=pass (Used From Domain Record) header.from=nvidia.com
+ policy.dmarc=reject
+Authentication-Results: mail.freedesktop.org; dkim=pass header.d=Nvidia.com;
+ arc=pass;
+ dmarc=pass (Used From Domain Record) header.from=nvidia.com policy.dmarc=reject
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by kara.freedesktop.org (Postfix) with ESMTPS id ADD0E43E41
-	for <nouveau@lists.freedesktop.org>; Tue, 30 Dec 2025 09:02:01 +0000 (UTC)
-Received: from tor.source.kernel.org (tor.source.kernel.org [172.105.4.254])
-	by gabe.freedesktop.org (Postfix) with ESMTPS id 9487A10E87B
-	for <nouveau@lists.freedesktop.org>; Tue, 30 Dec 2025 09:09:58 +0000 (UTC)
-Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
-	by tor.source.kernel.org (Postfix) with ESMTP id B849060051;
-	Tue, 30 Dec 2025 09:09:56 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id E8A59C4CEFB;
-	Tue, 30 Dec 2025 09:09:53 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
-	s=k20201202; t=1767085796;
-	bh=7KdJALN0K+r9nZo/WfD49aKuvWF+zMNEeTAc2yOuSFc=;
-	h=Date:Cc:Subject:From:To:References:In-Reply-To:From;
-	b=N1qiO14Gvf5WrZiBFb39OFVVnCvtMz/+32LHFDuhzVXPUG6COb2/MPRt2/bEVfIWD
-	 StPrjqG5qUQWUAQgU9C81zjcdCxv7XVnEv3TX9Mgj/PR0zc8MiAtazm8eJjPoyB387
-	 vlWGVelYlHyICRkLJgrj9ivtkaovNbOPkOCfUAkE1UIOKCsKC3JArAmyQtQt2gj21Q
-	 q3E7axxwRM+hGGIMKnhr7AKCp2tuuDXqjMlgEpEi2bpKUkeajFz0bSnnWH05F6R3Yo
-	 u+qQ5Vlmon4x6Df3I6Nxs6QdY1LCUxNp59GN+xrqythc+blU6Y5HlwKuf0Y+qLWuac
-	 NazMhPjbeUefg==
-Mime-Version: 1.0
-Content-Transfer-Encoding: quoted-printable
-Content-Type: text/plain; charset=UTF-8
-Date: Tue, 30 Dec 2025 10:09:51 +0100
-Message-Id: <DFBFMTS0ZRDB.30O3L4GMYW4XJ@kernel.org>
-Subject: Re: [PATCH v4 1/4] rust: macros: add derive macro for `Into`
-From: "Benno Lossin" <lossin@kernel.org>
-To: "Jesung Yang" <y.j3ms.n@gmail.com>
-X-Mailer: aerc 0.21.0
-References: <20251225-try-from-into-macro-v4-0-4a563d597836@gmail.com>
- <20251225-try-from-into-macro-v4-1-4a563d597836@gmail.com>
- <DF7HDE1T2BOS.33WUHP49WWO1M@kernel.org>
- <CA+tqQ4JPMg7CGq7YiN2EwzzQBC2grRE5OFgRQTws+xh8UbzqEw@mail.gmail.com>
- <DF8QDONK951M.10NYLJ40UNNY1@kernel.org>
- <CA+tqQ4+Xp_Uv+O32JgCyN0vB-AJEaJdUWoWDOx0nTogeiDbj6w@mail.gmail.com>
-In-Reply-To: 
- <CA+tqQ4+Xp_Uv+O32JgCyN0vB-AJEaJdUWoWDOx0nTogeiDbj6w@mail.gmail.com>
-Message-ID-Hash: CSEB47OOHQLE6KP7ISUJWPLCDGXUIYRS
-X-Message-ID-Hash: CSEB47OOHQLE6KP7ISUJWPLCDGXUIYRS
-X-MailFrom: lossin@kernel.org
+	by kara.freedesktop.org (Postfix) with ESMTPS id 341D043E41
+	for <nouveau@lists.freedesktop.org>; Tue, 30 Dec 2025 21:34:52 +0000 (UTC)
+Received: from PH8PR06CU001.outbound.protection.outlook.com
+ (mail-westus3azon11012024.outbound.protection.outlook.com [40.107.209.24])
+	by gabe.freedesktop.org (Postfix) with ESMTPS id 3DD9410E95B
+	for <nouveau@lists.freedesktop.org>; Tue, 30 Dec 2025 21:42:50 +0000 (UTC)
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=KzfNXV/9eTtFdwNC4aNpXjai16T16m7H+DTN71PtEAUxDuptmzEYpfJEBcYSBtfTI/h1/DMLrpjZcRcMrbmLLTwX8iZ3vcX+KRrmirvbYR6o49hQA1v+Ux/ITsYGreTM/td/H6o+DXsg2OhUl1CRwZUfyQnYV0/ZcAcdFPXpJleFq1GzBbaR4RlW45yY+zRvQ7t4Z2sI+Z207dNYolZMVffy4VQofGeIaSYyXX+BqIAnJ5zopB/2Rup2JwMU31mjsPgzXVgNkTdZmAfjlfD0z2hPov/Br9+8/aqIELBNt8/PabBW1racHDyNUFQ8b5rNt2Fp0axmslx10Zgu6k+V5Q==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=Oo4jvBL/G12DPsaOMC7/wKZ5+LX3OelIjcXH4ZOKalY=;
+ b=g1A3KgIhx7CmKDE838FgJZiGyHXRenmVUMJ9aZ2v6ScmfjcUgFf48R+TX+GgYxNwXzUCTVQhKEJvhPWS3Kd/+W0UzuimslWEozGtm0/kaWu07cpyh5d8/FHb8pbpGGyJTY+hx6S5MrXoTloJ8k4G4Nfspzxz1UFH4WfbUwt/KnLC/HzpVu7rUKFGfLYfWixtYNJLgGQ0NTEqUWkZIQFshu1mPD+gwOA8443qFYQJZgjgolvb9VIoG3XDIfTv5+HuaTLo38nNfmd12Ex3FQix9FBZ4lGgV0yJoV87Eip9SxTyo3/+Ozums1EAnYTz20RtDGhc1b9pKwpYcGCTDRgInw==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=nvidia.com; dmarc=pass action=none header.from=nvidia.com;
+ dkim=pass header.d=nvidia.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=Nvidia.com;
+ s=selector2;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=Oo4jvBL/G12DPsaOMC7/wKZ5+LX3OelIjcXH4ZOKalY=;
+ b=FGQ4oHJxn3KJW7YJa1QkDMb3O7rGx6KWg0a5v7H2s9mJOQWd4XyLJ66HoiV6iHZF8klGt2O0RJTMtuXmJiFWAHI2kGqqbVqO/0FWw/fmTFZbdXWq6aoc7YSiDKqFxW5MTFCqXeXRdNn6VY76KaUgX7OVEdWEag9vTbBkXWU4Ys0CLQrTaQWvwgPqWC6IIMv6S0x9Z75E3HRJ6lWrEVqKET/OZlzhIwmPp4xhylNr08i/sPUs/QcLf4s4lWlFnR3iMglVYF1Y1oh416yniyBS88gYAymdvFRmHaumAZ8c9GkfFTVH/4JydIYMORFNGe0/nGTs5z1+IbaTwdOTisz/SA==
+Received: from SJ2PR12MB7943.namprd12.prod.outlook.com (2603:10b6:a03:4c8::10)
+ by DS0PR12MB6440.namprd12.prod.outlook.com (2603:10b6:8:c8::18) with
+ Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9478.4; Tue, 30 Dec
+ 2025 21:42:47 +0000
+Received: from SJ2PR12MB7943.namprd12.prod.outlook.com
+ ([fe80::6a18:df97:8d1a:5d50]) by SJ2PR12MB7943.namprd12.prod.outlook.com
+ ([fe80::6a18:df97:8d1a:5d50%4]) with mapi id 15.20.9478.004; Tue, 30 Dec 2025
+ 21:42:46 +0000
+From: Timur Tabi <ttabi@nvidia.com>
+To: "ewan.chorynski@ik.me" <ewan.chorynski@ik.me>, Alexandre Courbot
+	<acourbot@nvidia.com>, "dakr@kernel.org" <dakr@kernel.org>,
+	"nouveau@lists.freedesktop.org" <nouveau@lists.freedesktop.org>, Joel
+ Fernandes <joelagnelf@nvidia.com>, John Hubbard <jhubbard@nvidia.com>,
+	"rust-for-linux@vger.kernel.org" <rust-for-linux@vger.kernel.org>
+Subject: Re: [PATCH v4 00/11] gpu: nova-core: add Turing support
+Thread-Topic: [PATCH v4 00/11] gpu: nova-core: add Turing support
+Thread-Index: AQHcb86jUh4zxo0ySUOi4HmApuhn2LU3ZAMAgANm14A=
+Date: Tue, 30 Dec 2025 21:42:46 +0000
+Message-ID: <802504957624510a92a4b028a2d5c4d41f1ee6e1.camel@nvidia.com>
+References: <20251218032955.979623-1-ttabi@nvidia.com>
+	 <DFA1CUMND2ME.1D3PAJW641QHM@ik.me>
+In-Reply-To: <DFA1CUMND2ME.1D3PAJW641QHM@ik.me>
+Accept-Language: en-US
+Content-Language: en-US
+X-MS-Has-Attach: 
+X-MS-TNEF-Correlator: 
+user-agent: Evolution 3.52.3-0ubuntu1.1 
+x-ms-publictraffictype: Email
+x-ms-traffictypediagnostic: SJ2PR12MB7943:EE_|DS0PR12MB6440:EE_
+x-ms-office365-filtering-correlation-id: 2192db10-675b-4294-ba6b-08de47ec5f07
+x-ms-exchange-senderadcheck: 1
+x-ms-exchange-antispam-relay: 0
+x-microsoft-antispam: BCL:0;ARA:13230040|376014|366016|1800799024|38070700021;
+x-microsoft-antispam-message-info: 
+ =?utf-8?B?b2ovb2Y5TXZpK1RyZjY0cUJhMUp1b0NSWlgvSzMvdWhqS3QyeitGZnNxL3hl?=
+ =?utf-8?B?bHRnZGpDR09nYTdCalRpVW5Ebk1yenJ6S2JHcUpWM0JjazFNTnJldktiVXoy?=
+ =?utf-8?B?UmNrZzlzbHdFZFBNSHV5NEtQaUJXWDgydmNjU3RYa25VVkpzMlJtUndnRlA3?=
+ =?utf-8?B?V2lFejhSUlhDMm9UcHBOWWFoeGlUcVlHU09udGk1N05EUzMrVC9EeVJDN1F6?=
+ =?utf-8?B?eFV1VW91bC9aOTF6OEozU1dsaUJicDBkSmtqWnM2ZENraEpRNEd4ZFh5MWhw?=
+ =?utf-8?B?RkV2Qmpxd0lQVEI4QVZ5OXM0OEpDdEdpUndTOXBZYzBJdjkwVW9NZUMrTkZS?=
+ =?utf-8?B?bnBqUGc4bWRQdFJLMS9hYkRVNG9ENFhTa3JzUXZxMmJZSUdnbVpVbjMvSXJJ?=
+ =?utf-8?B?RkhneVVOdFgwcFEzUVdFZHZZVTgzZUFiV0U2N1IzZlZQT2JoTjNrQjJQSzJh?=
+ =?utf-8?B?Q1NUQmVld0g3NUVpZEQwL2h0V053ZjZnRWtLWDdaV011VC82bmZXUE1RUE5Y?=
+ =?utf-8?B?d3VjdCtob0s5VGliYVp6U2o3RTQ1UHVsYXZ1aVVMT1hpMGxSR1lIczJxbGVM?=
+ =?utf-8?B?a0J3RkJDU1RSd0t1UXBCbjhROWlsMFg4bnNnN3YvS0VZMm0zK2xEbXI5dDVp?=
+ =?utf-8?B?SVRlRm5wNjVVU2NVTjJJdkJ0ZThjOGJCcTNWdnh3NnZRRkZtVzI3b1o2akJT?=
+ =?utf-8?B?aVREWDU5NGVEcGxmd3FUZXdjcXpIMTFkZlFvSUYrdjZHZzFUQjhqL1YxSVZ1?=
+ =?utf-8?B?VTI2NUNqd21WNkpVZHAwOWtRc2k1U1hQVUJMUHNzWTZuVVR4RGlSUVpXT0kw?=
+ =?utf-8?B?YXhyMWFGOHJWMXhDY1MyUVhPRlQwa2ErUk8yUFYzT2VTUXZSdjVWZ3dJMFdI?=
+ =?utf-8?B?NTJMOVZkblhkemRHejI2L213djJmdlpIM0tzK095Y21zcVVoRWtPMXpzRUZG?=
+ =?utf-8?B?QmJTMm9NR092UUNwZWNXQ1BtZEJ5SitFZ1M1YlFVRlhscWFpL0hrVzB6dUIw?=
+ =?utf-8?B?OGU4U3NSYWFqNVZKVVgyTmx2UGxuaVR4N21xbEpoeHJHMEJ2NnNhNkxQamtI?=
+ =?utf-8?B?UXFMTElDTllSQmEyUzhnTEpsYVY1blN2QXJrVzh0ZThmSHhrWmNOeWZDYzZK?=
+ =?utf-8?B?Sng2TTNINGtGa1FXc21LZ0RZbEpLaVBVMUNUcWdBV1M2K0NyMEZkTXc4VUgz?=
+ =?utf-8?B?K1JvQ2FOdWFhcklOOU9Zdis3dENqMVEyTXJwQWtBamNNcy8vOHorZEZMRVBr?=
+ =?utf-8?B?OTBmU2ZwVmMvMlRBVmY1bnl3YytaNXZOZXRwVEd4RTUvVHA3d3VSZHlzb2dF?=
+ =?utf-8?B?NHR5aXF4b1VQSVN0Y0dRd0hZZjlvQWNMRmlSaDNqcVQ5dThrSTU0WG40ZXVz?=
+ =?utf-8?B?QThuUjFCcjMweThNTFJtMWgxc0V5VmNGbFFDQUxUZjlyd2NvZmtlaHZvTE1q?=
+ =?utf-8?B?bHdQcHZTaWRSb1A4MXBHTXZROG1DVEtTT2JZazVPTFIwckZMdUFMZHlXMTdp?=
+ =?utf-8?B?YmZXTHExQ2RKM05vSW15TDlKWTZQWkFNYUsvU1dnNS9CVjR5OUhpbk5IUjBO?=
+ =?utf-8?B?TXRaQ2VLb1lHYUNJQjdGMldnV0R5SWw2cFRpY29SaUh5TERsS1ZhdlRieGZl?=
+ =?utf-8?B?MDh6ZXk0OGduVGdFKzlVS0ZzRDBob3FQdDVrRDNhZWdJYUhWd3pmVDRkaEpt?=
+ =?utf-8?B?cmxhNjMxSWZXQWJoUWpnZllBMTY3MnVsS2VsMXErUDFKY2RsVVkwcURJOTBZ?=
+ =?utf-8?B?d1hERUw3YkZ0SE1sQU5hNGxkQ09KdVNtSzlqY2J3RUh0VE9taTVYWDZxdjdQ?=
+ =?utf-8?B?dFRBMU9RY0FLN0FMWEFHK3JpNHdsck5lTXo0K2p6cnFYd1ZjZ3N3WHZtV01U?=
+ =?utf-8?B?Uko5L2c3WVh3bVFPU3ovUG9OYkdIK2xid3NGd3A4SGYzMXluU3B1aTdyajdX?=
+ =?utf-8?B?V2FBSWtEekxoMkNQQ3NTWmJBb1M2R1BRWndwZGtWTEJTZU95K0hOamxMZTBO?=
+ =?utf-8?B?UzVDbmNmY3FaTUtPY0J4VVFweEF3dHczSXo5c0h5TWVqcU83cWM0T2U2RCtR?=
+ =?utf-8?Q?0KGd7f?=
+x-forefront-antispam-report: 
+ CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:SJ2PR12MB7943.namprd12.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230040)(376014)(366016)(1800799024)(38070700021);DIR:OUT;SFP:1101;
+x-ms-exchange-antispam-messagedata-chunkcount: 1
+x-ms-exchange-antispam-messagedata-0: 
+ =?utf-8?B?L3ErZnBnOVpyWXZCNWlPZTRicWM1RkM4VkhVZWo1QmNFa09GUC8rSytJVCt5?=
+ =?utf-8?B?blVEaXpPLzBCY0hLblZJdFREOEFkK2FFWEc3Q0cxNTc2alVTcEtUNVZQWCtj?=
+ =?utf-8?B?RGN5aGtvSWY4dUQ4QmVWb3hzb05YYkoxTjlYRWswQkpkd3VtWXhQdm5USnMw?=
+ =?utf-8?B?Zkc2cDArLy9wWEV1UCt5V081dHpmOXBzOVA0THQyRVpIeFhueEJZeWpaZGdQ?=
+ =?utf-8?B?RUdqV1VTNGp4WHpWeU5ZOTJVOU11TUVLeVJ6Y2NmZ1BjNmQ2S1FuR0xJSkxN?=
+ =?utf-8?B?RTR5U0Q1Rmk2TzlUazU5U252SmNRRWljZ0YzNG9kcHVyRk1vdzZDQlNZaHp0?=
+ =?utf-8?B?SEw4cDdqOVpLMmprVTY4T0U3eWkvZUdoVVJ3a3h4RVRTd1VEYzdiV3lmSXBv?=
+ =?utf-8?B?V3U5UUtDMEM0NTN6dFVXV0EydTlGMXYzTVRmTmZleFFEOGZhV08wMmdDREhQ?=
+ =?utf-8?B?S2k1cmsveG9SVTg0ckJ5OERJMGZjMGthd1prNkNrQzk5MGxvOUpic29JRU1T?=
+ =?utf-8?B?VitwSjlpK0Y4bnVESHE5b1JpWG9iblEveDBCdHR3b1E4NGF6K3o2UmZ5V0Ni?=
+ =?utf-8?B?aS8rb0dCQWcrVk1JSFUyVDQ0eFlJcTAzQzZjVGl4S2lWcUJzd041aktIWjRw?=
+ =?utf-8?B?dTVac0Jia0R2bXl3UGdMVHRyQU5EUkhtK2tpVFRBakhYL1NVeHR3N0IwSUI2?=
+ =?utf-8?B?amdDc3Y0NnZPbHZiampFWGU0ZHNmZnB3ZHRiN1BsL25yUGNTbVZ0bGozYlFX?=
+ =?utf-8?B?SUhPRFdSdEJ5VlVYSmRJMm4zWG9JUHpzTXlzVGEwcW9kR25DdVpTYjcrSnNs?=
+ =?utf-8?B?YmNITWNZVW1RUHpkU2FFL0JaWG0rZ254VmRVK2VQbnJxZGFJWU8xaGtlU01h?=
+ =?utf-8?B?YVZnVUx5THd6QmdYWlhNd2dTVzJpaVFiZVMyYjN3RUtUS0dUWmUyT050UFhl?=
+ =?utf-8?B?Y2FrM3VMZTJEd0R4Nmc3dzRqWVJiZENaMTVFbGxxN25aS3NKTjlNM0haa2Z3?=
+ =?utf-8?B?RCtkVk5kRmFHaFhGRTRsMUg4Rlo5NjdhNW5xL0VCSnlxU0xvSEJVVzBoR21M?=
+ =?utf-8?B?TUtYcXdadUpYNVZmcHMveEZ0dkg2V1ZjMGgrdkthZ0RkMVA3eFJsWWg3VG5l?=
+ =?utf-8?B?azlFdlRMYjZxb2VMcnRPbmhtMzRKeU5hdDVpbzJTbjFyOVJ6L3lYaWh5bVNJ?=
+ =?utf-8?B?c0FqUzcwRTVaMnhhcnhtNGZiVUY0MFYzeW1sdlFIaTR5bVprbnhuWkpjOUJQ?=
+ =?utf-8?B?K2F1NDlYMklmUnIvMlNtbXhLV3lvdG5zZHY5Uk0wRjdTVHJBL3JEbUhSbG50?=
+ =?utf-8?B?R3lvbktTcncvcDF1QlcrQUNNN2E4bzdYWFVSeGZBVnU3dllyYklhc2pkTUgw?=
+ =?utf-8?B?YzUyb1pOTWhMY3k5d2VKUmpzVjRKNFRCaGdWT3VvMCswYmk2QkxXWHcvRGxN?=
+ =?utf-8?B?ZWNMVmpid0QxbDlJbW1yVlNCM0h3MTN5c0hkQmtqeC9OS3Z2ZjAxM3ZpMUxp?=
+ =?utf-8?B?NlZmK0o5RVAvSmN1dXFYMmo3bVJEcnVEblI1ZXlEaXZlL1NwKzNudmc0dW51?=
+ =?utf-8?B?d2pTT2tmaTBVUGlFSzdmbFR1bXdhV0hBQnhBK2kwYzNkVVl6Ymc4ZGtKVkNP?=
+ =?utf-8?B?WmdtY2ptSXk2ZGJjZWxOSjdNK2huTVY1MWJxemZxajJzdjRWMWQraXU4MGo3?=
+ =?utf-8?B?T3dGT1FKTmpmMVpVenpwU1Z1Nzh0ZVBxdGxIYXorUDBNNHF3NUg1WDBINDdF?=
+ =?utf-8?B?cHhncDFrMjZPNXl2dkQrNk9wa25ZS0tOTkxadXdCdjFHMi9NMDVlUXNqbUM4?=
+ =?utf-8?B?NlRMdStmZGNIY2g2THRVdEpjZ1FWUkFXZzVWMTlreGdIMXFhaEljSmxSdzZO?=
+ =?utf-8?B?LzJxQzFuRTdsdVphYmRSeUViT2doVy9nYnlRNFBYSkEwdHp4cEVmbnlxUXl2?=
+ =?utf-8?B?eTFvNHA1UXZ0VGI1ZEpPL2QyeFo5SmllYUVHM2hXSFdVOTZVQjgrQnhMTGZ2?=
+ =?utf-8?B?OHQ0UjlnNVNySjZDbDljVUlJMW9XTERkdDg4bUhYYysvWHlHVkwyb1BPRWM3?=
+ =?utf-8?B?eXRlTllrcnlDV3o0cVp0b0h4NVRuUlVHZ3d6ZWVESkRwSVcwVmw0SDRkTXVM?=
+ =?utf-8?B?anVCTEkxSUxGMGlHQ0cxWlh3K0o4NXY3dXZpTEIycnRjZ1FtNDRmSEJpR2Rs?=
+ =?utf-8?B?ZFpKck44eDR6R3RhUjA2R2E0SnkreUZBdUxMRVcxRkgzVklVcGNvTGVseEhD?=
+ =?utf-8?B?bTJIYndLT2lBZmg1OGc3Y0NBZFJTdStaUnZ0UmNEckdzbDhCd0hTRDVCVnBa?=
+ =?utf-8?B?MzlBS21GTTA1S2VDM2JwNjR2NVRlcUxJbC9WTG0xK0ZpZWxmWmJ4Zz09?=
+Content-Type: text/plain; charset="utf-8"
+Content-ID: <2C012332550C7944AEDA40E04487EF1F@namprd12.prod.outlook.com>
+Content-Transfer-Encoding: base64
+MIME-Version: 1.0
+X-OriginatorOrg: Nvidia.com
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-AuthSource: SJ2PR12MB7943.namprd12.prod.outlook.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: 
+ 2192db10-675b-4294-ba6b-08de47ec5f07
+X-MS-Exchange-CrossTenant-originalarrivaltime: 30 Dec 2025 21:42:46.5323
+ (UTC)
+X-MS-Exchange-CrossTenant-fromentityheader: Hosted
+X-MS-Exchange-CrossTenant-id: 43083d15-7273-40c1-b7db-39efd9ccc17a
+X-MS-Exchange-CrossTenant-mailboxtype: HOSTED
+X-MS-Exchange-CrossTenant-userprincipalname: 
+ vGDIiuu3HAweY89SMev82XlSTD1b+6qoAofcAmD6APqEA9cHG/g5ne6CQQ4nodVgtGufsc8dlG29Qaph4FNg8g==
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: DS0PR12MB6440
+Message-ID-Hash: QMB54GGYO2ZQPXAVFN2Q3AWWC2DKORRT
+X-Message-ID-Hash: QMB54GGYO2ZQPXAVFN2Q3AWWC2DKORRT
+X-MailFrom: ttabi@nvidia.com
 X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency;
  loop; banned-address; member-moderation; nonmember-moderation; administrivia;
  implicit-dest; max-recipients; max-size; news-moderation; no-subject;
  digests; suspicious-header
-CC: Miguel Ojeda <ojeda@kernel.org>, Boqun Feng <boqun.feng@gmail.com>,
- Gary Guo <gary@garyguo.net>,
- =?utf-8?q?Bj=C3=B6rn_Roy_Baron?= <bjorn3_gh@protonmail.com>,
- Andreas Hindborg <a.hindborg@kernel.org>, Alice Ryhl <aliceryhl@google.com>,
- Trevor Gross <tmgross@umich.edu>, Danilo Krummrich <dakr@kernel.org>,
- Alexandre Courbot <acourbot@nvidia.com>, linux-kernel@vger.kernel.org,
- rust-for-linux@vger.kernel.org, nouveau@lists.freedesktop.org
 X-Mailman-Version: 3.3.8
 Precedence: list
 List-Id: Nouveau development list <nouveau.lists.freedesktop.org>
 Archived-At: 
- <https://lists.freedesktop.org/hyperkitty/list/nouveau@lists.freedesktop.org/message/CSEB47OOHQLE6KP7ISUJWPLCDGXUIYRS/>
+ <https://lists.freedesktop.org/hyperkitty/list/nouveau@lists.freedesktop.org/message/QMB54GGYO2ZQPXAVFN2Q3AWWC2DKORRT/>
 Archived-At: 
- <https://lore.freedesktop.org/DFBFMTS0ZRDB.30O3L4GMYW4XJ@kernel.org/>
+ <https://lore.freedesktop.org/802504957624510a92a4b028a2d5c4d41f1ee6e1.camel@nvidia.com/>
 List-Archive: 
  <https://lists.freedesktop.org/hyperkitty/list/nouveau@lists.freedesktop.org/>
 List-Archive: <https://lore.freedesktop.org/nouveau>
@@ -111,126 +217,30 @@ List-Post: <mailto:nouveau@lists.freedesktop.org>
 List-Subscribe: <mailto:nouveau-join@lists.freedesktop.org>
 List-Unsubscribe: <mailto:nouveau-leave@lists.freedesktop.org>
 
-On Mon Dec 29, 2025 at 1:29 PM CET, Jesung Yang wrote:
-> On Sat, Dec 27, 2025 at 1:57=E2=80=AFPM Benno Lossin <lossin@kernel.org> =
-wrote:
->> On Fri Dec 26, 2025 at 10:36 AM CET, Jesung Yang wrote:
->> > On Fri, Dec 26, 2025 at 2:40=E2=80=AFAM Benno Lossin <lossin@kernel.or=
-g> wrote:
->> >> On Thu Dec 25, 2025 at 9:37 AM CET, Jesung Yang via B4 Relay wrote:
->> >> > +    // Note on field-less `repr(C)` enums (quote from [1]):
->> >> > +    //
->> >> > +    //   In C, enums with discriminants that do not all fit into a=
-n `int` or all fit into an
->> >> > +    //   `unsigned int` are a portability hazard: such enums are o=
-nly permitted since C23, and not
->> >> > +    //   supported e.g. by MSVC.
->> >> > +    //
->> >> > +    //   Furthermore, Rust interprets the discriminant values of `=
-repr(C)` enums as expressions of
->> >> > +    //   type `isize`. This makes it impossible to implement the C=
-23 behavior of enums where the
->> >> > +    //   enum discriminants have no predefined type and instead th=
-e enum uses a type large enough
->> >> > +    //   to hold all discriminants.
->> >> > +    //
->> >> > +    //   Therefore, `repr(C)` enums in Rust require that either al=
-l discriminants to fit into a C
->> >> > +    //   `int` or they all fit into an `unsigned int`.
->> >> > +    //
->> >> > +    // As such, `isize` is a reasonable representation for `repr(C=
-)` enums, as it covers the range
->> >> > +    //  of both `int` and `unsigned int`.
->> >> > +    //
->> >> > +    // For more information, see:
->> >> > +    // - https://github.com/rust-lang/rust/issues/124403
->> >> > +    // - https://github.com/rust-lang/rust/pull/147017
->> >> > +    // - https://github.com/rust-lang/rust/blob/2ca7bcd03b87b52f70=
-55a59b817443b0ac4a530d/compiler/rustc_lint_defs/src/builtin.rs#L5251-L5263 =
-[1]
->> >> > +
->> >> > +    // Extract the representation passed by `#[repr(...)]` if pres=
-ent. If nothing is
->> >> > +    // specified, the default is `Rust` representation, which uses=
- `isize` for its
->> >> > +    // discriminant type.
->> >> > +    // See: https://doc.rust-lang.org/reference/items/enumerations=
-.html#r-items.enum.discriminant.repr-rust
->> >>
->> >> I think we should error when no `#[repr({integer})]` attribute is
->> >> specified.
->> >
->> > Not a blocker but just out of curiosity: are you concerned that the
->> > default size might change in the future, leading to silent side
->> > effects?
->>
->> `isize` already changes size when you switch between 64 and 32 bit
->> architectures. I think the author of an enum they want to convert into
->> integers should think about which size the enum should be.
->>
->> They already can choose `repr(isize)` if that is correct in that case.
->> As a default, I would have choosen `i32` (but that conflicts with Rust's
->> default, so we can't do it).
->
-> On second thought, I've realized that enforcing an error when
-> `#[repr({integer})]` is missing would prevent users from deriving
-> traits for `#[repr(C)]` enums. This is because rustc currently rejects
-> the combined `#[repr(C, {integer})]` syntax. For example, a user might
-
-It's only rejected for field-less enums, but those are what we're
-interested here.
-
-> want to do this:
->
->     #[derive(Into)]
->     #[into(u8)]
->     #[repr(C)]
->     enum Foo {
->         A,
->         B,
->     }
->
-> In this case, the code wouldn't compile if we strictly require
-> `#[repr({integer})]`, even if the user carefully picked `u8`, keeping
-> the enum's size (more precisely, the discriminant range) in mind.
->
-> Since we already perform a compile-time check to ensure all
-> discriminants fit within the types specified in the helper attributes,
-> I believe `#[repr({integer})]` isn't strictly required. Even with
-> `isize` changing size across architectures, our compile-time check
-> remains effective and will catch any overflows.
-
-Hmm that's true.
-
-> To sum up, I see three options:
->
->     1. Drop support for `#[repr(C)]` enums entirely.
->     2. Special-case `#[repr(C)]` enums: allow them to default to
->        `isize`, otherwise require `#[repr({integer})]`.
->     3. Permit missing `#[repr({integer})]` generally.
->
-> I am personally leaning toward Option 3, since our existing
-> compile-time check provides a sufficient safety margin to allow this
-> flexibility.
->
-> Thoughts on these?
-
-Looking at the nomicon documentation [1] again, I found the following:
-
-    repr(C) is equivalent to one of repr(u*) (see the next section) for
-    fieldless enums. The chosen size and sign is the default enum size
-    and sign for the target platform's C application binary interface
-    (ABI). Note that enum representation in C is implementation defined,
-    so this is really a "best guess". In particular, this may be
-    incorrect when the C code of interest is compiled with certain
-    flags.
-
-Which to me reads as "don't use `repr(C)`, if you want to know which
-repr the enum gets". Especially the last part is concerning to me, as
-the kernel uses lots of (bespoke) compiler flags. So I'm thinking we
-should just drop `repr(C)` enum support. Any thoughts from others?
-
-[1]: https://doc.rust-lang.org/nomicon/other-reprs.html
-
-Cheers,
-Benno
+T24gU3VuLCAyMDI1LTEyLTI4IGF0IDE4OjQ1ICswMTAwLCBFd2FuIENob3J5bnNraSB3cm90ZToN
+Cj4gDQo+IFvCoMKgwqAgMy42MjMwMDBdIE5vdmFDb3JlIDAwMDA6MDE6MDAuMDogR1NQIE1CT1gw
+OiAweGZmZmZlMDAwLCBNQk9YMTogMHgwDQo+IFvCoMKgwqAgMy42MjMwMjZdIE5vdmFDb3JlIDAw
+MDA6MDE6MDAuMDogVXNpbmcgU0VDMiB0byBsb2FkIGFuZCBydW4gdGhlIGJvb3Rlcl9sb2FkIGZp
+cm13YXJlLi4uDQo+IFvCoMKgwqAgMy42MjYyMzZdIE5vdmFDb3JlIDAwMDA6MDE6MDAuMDogU0VD
+MiBNQk9YMDogMHgzMSwgTUJPWDEweDANCj4gW8KgwqDCoCAzLjYyNjI2NV0gTm92YUNvcmUgMDAw
+MDowMTowMC4wOiBCb290ZXItbG9hZCBmYWlsZWQgd2l0aCBlcnJvciAweDMxDQo+IA0KPiBJcyB0
+aGlzIGV4cGVjdGVkIHRvIGhhcHBlbiA/IEhlcmUgaXMgdGhlIGZ1bGwgZGV2aWNlIGRlc2NyaXB0
+aW9uIGZyb20NCj4gbHNwY2kgOg0KPiANCj4gMDE6MDAuMCBWR0EgY29tcGF0aWJsZSBjb250cm9s
+bGVyOiBOVklESUEgQ29ycG9yYXRpb24gVFUxMTdNIFtHZUZvcmNlIEdUWCAxNjUwIE1vYmlsZSAv
+IE1heC1RXQ0KPiAocmV2IGExKQ0KDQpUaGlzIHNob3VsZCB3b3JrIG9uIHlvdXIgR1BVIHdpdGgg
+bXkgcGF0Y2hlcy4gIEVycm9yIDB4MzEgaXMgYSBnZW5lcmljIGZhaWx1cmUgZXJyb3IgY29kZSB0
+aGF0DQppbmRpY2F0ZXMgdGhhdCBib290ZXJfbG9hZCBmYWlsZWQgdG8gaW5pdGlhbGl6ZSwgYW5k
+IHRoYXQgY291bGQgYmUgZm9yIGFueSBudW1iZXIgb2YgcmVhc29ucy4gDQpVbmZvcnR1bmF0ZWx5
+LCB0aGUgb25seSB3YXkgSSd2ZSBiZWVuIGFibGUgdG8gZGVidWcgc3VjaCBpc3N1ZXMgaXMgdG8g
+cmVwcm9kdWNlIHRoZW0gaW4taG91c2Ugd2l0aCBhDQpjdXN0b20gYnVpbGQgb2YgYm9vdGVyX2xv
+YWQuDQoNCkkgc3VnZ2VzdCB0aGF0IGZvciBub3csIHlvdSBob2xkIG9mZiB1bnRpbCB0aGVzZSBj
+b21taXRzIGFyZSBtZXJnZWQsIGFsb25nIHdpdGggbXkgZGVidWdmcyBwYXRjaGVzLA0KYW5kIHRo
+ZW4gSSBjYW4gdHJ5IHRvIGZpbmQgYSBzaW1pbGFyIEdQVSBpbnRlcm5hbGx5IHRoYXQgZXhoaWJp
+dHMgdGhlIGZhaWx1cmUgYW5kIHNlZSBpZiB0aGVyZSdzDQpzb21ldGhpbmcgZWxzZSBtaXNzaW5n
+LiAgVHVyaW5nIGlzIHRoZSBtb3N0IGNvbXBsaWNhdGVkIG9mIGFsbCBHU1AtY2FwYWJsZSBHUFVz
+IHRvIGJvb3QsIHBhcnRseQ0KYmVjYXVzZSB0aGUgZmlybXdhcmUgZG9lcyBhIHRlcnJpYmxlIGpv
+YiBvZiByZXBvcnRpbmcgZXJyb3JzLg0KDQpJJ20gYXNzdW1pbmcgdGhhdCBOb3V2ZWF1IGJvb3Rz
+IGp1c3QgZmluZSB3aXRoIHRoZSBzYW1lIGZpcm13YXJlIGltYWdlcz8gIElmIHlvdSB0dXJuIG9u
+IGRlYnVnDQpsb2dnaW5nIGluIE5vdXZlYXUsIGl0IHNob3VsZCBzYXkgdGhhdCBpdCdzIGJvb3Rp
+bmcgd2l0aCA1NzAuMTQ0LiAgWW91IGNhbiBmb3JjZSBpdCBieSBkZWxldGluZyBhbGwNCnRoZSAq
+NTM1LjExMy4wMSogaW1hZ2VzIGluIC9saWIvZmlybXdhcmUvbnZpZGlhLw0K
