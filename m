@@ -2,119 +2,139 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id 91165CEB8D7
-	for <lists+nouveau@lfdr.de>; Wed, 31 Dec 2025 09:38:01 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 86143CEB837
+	for <lists+nouveau@lfdr.de>; Wed, 31 Dec 2025 09:17:44 +0100 (CET)
 Received: from kara.freedesktop.org (unknown [131.252.210.166])
-	by gabe.freedesktop.org (Postfix) with ESMTPS id 6260E10E67D;
-	Wed, 31 Dec 2025 08:38:00 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTPS id 9EB5510E995;
+	Wed, 31 Dec 2025 08:17:41 +0000 (UTC)
 Authentication-Results: gabe.freedesktop.org;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="WcJoGzRD";
+	dkim=fail reason="signature verification failed" (2048-bit key; unprotected) header.d=kode54.net header.i=@kode54.net header.b="28SGkhZI";
+	dkim=fail reason="signature verification failed" (2048-bit key; unprotected) header.d=messagingengine.com header.i=@messagingengine.com header.b="iIA3royF";
 	dkim-atps=neutral
 Received: from kara.freedesktop.org (localhost [127.0.0.1])
-	by kara.freedesktop.org (Postfix) with ESMTP id E66D344C7F;
-	Wed, 31 Dec 2025 08:30:00 +0000 (UTC)
+	by kara.freedesktop.org (Postfix) with ESMTP id 3896144C7C;
+	Wed, 31 Dec 2025 08:09:42 +0000 (UTC)
 ARC-Seal: i=1; cv=none; a=rsa-sha256; d=lists.freedesktop.org;
- s=20240201; t=1767169800;
- b=Pk09PTWHgRAQKUvVG2NDpfXT1ZQawgrpq6xbbnjvy5f/Op8Yi1V1ZhjZa50LxL4XFBRVP
- ZX4VzxgnM6nLVROZKKJ23CdMtSpKEzl4Sqpm+ClKG7nXGUtrRcVLgwrMBsj/ybJF04Ad7ak
- M2M2DrbW6O9sysSj5gS/y0h8Q7kZFFZ6qQ0I+KqMqz32QFiYd1Y89Bwe/przh5p1lyfb/qv
- mt6MN0m5JoQqvFohE4PwA/m17sdqtANzT36faHbnOzVE/b2OiS+GpdZpZ1KYzaj0bnoZh8e
- EcZfLHG3tHQUgYH3CuKIRVgC2yA1zY+apAAd6Vf8H79ix3Z+tYSu1TspyHOw==
+ s=20240201; t=1767168582;
+ b=LyvFvwn44CMy3ESfgNIbinq1YImEcUY7iSnA5hLpUEBUSm/463LQ35WtG92XyAJIoe5de
+ 4jvPPo6/irQkjOEp4FZfA3eBlAedqpBgn7KLUdxBJ4eaFozh6opyLoPJS7rrrjDJX8K91Ei
+ 28TmvDMS0dmmDKSn64eVjG+RyoKVeTMiSnpvZTNrqsIV6mUjs1cURTWhCCoLqbpSvrvHgZ0
+ 7Cam/Ec6AdiSVfXjXCagHqPuF9V+xeFzXEku5+t7/qm20l8oz5dKAsmTh4FADukxty3ST7w
+ QwS33Bqem06u2UN54mP+D+x8D7Urj28gYGR6siIhwjLoBfkFPWe2YXhRU5xw==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed;
- d=lists.freedesktop.org; s=20240201; t=1767169800; h=from : sender :
+ d=lists.freedesktop.org; s=20240201; t=1767168582; h=from : sender :
  reply-to : subject : date : message-id : to : cc : mime-version :
  content-type : content-transfer-encoding : content-id :
  content-description : resent-date : resent-from : resent-sender :
  resent-to : resent-cc : resent-message-id : in-reply-to : references :
  list-id : list-help : list-unsubscribe : list-subscribe : list-post :
  list-owner : list-archive;
- bh=cgPj4GmV/3EpBx43SG2F3zNXxdHzXlOKwZZPcptoQD0=;
- b=p7jISTFHUkBuvcpPoJB80x0mbl01w1+aZtGPOWhMew17lzZ2DzCCFhF+uREsBbO+JqlTy
- vuGdAD6zv4I1s60VozZicz2Y+mNuLfJSOCMz1A9rpRevdn7cXmBm1BcZuXACR9GP0BvKWkc
- 6+I/SWERaS9Ut7TktjVLiRH33j3KbIhLY4zLnsQvvpZB6XmURXKAtI/tG2XXzZYapi2bBem
- h0ZsCU+PE6guNE9hMK+kQdV5qBJVcXc7utWOdXRLI8sj6K56KZEFM8ZN74DQUWkpql3uNhU
- rqqUnYDz+UEZ3H9p93OV2a+sdOi8jbB9jytoatoM8gS2X8iT7wC+ol0dUieg==
+ bh=vfxorXJXtroycbRN6IUJ+dzctWvz+cPTc2VwPUJGtvM=;
+ b=krwA3sG0TWIf5jf1mEECd6W25U+bp5XOzXdlmP4sgjqsv8occYTperdwnaW3bQnzJffwe
+ U9rE+76C/vCXtYdxWqr/lJuJoSrkHMSURlxMigfi8j7Lk5LAStcmIFJ39zDmEJLt/Z1keRW
+ wXDsGV9R+z07IrrNXYDrhq2GrRL6SWczjPYmJ7Y3g6Rkr5qLjHFFciLp/ChbGIDEejIyEGf
+ VttL1P7vLUaqoXAh3UlknvWVGwxQ+9g0w6CW40X6GipuKiJYKzBSuUNY/yJV+OlzEQ4UN4y
+ rvkuw8EGGreZmYWeVdtRzV27Q+w0Mnk+MSo9HyrBEjOMQOTirLTDKEveviIg==
 ARC-Authentication-Results: i=1; mail.freedesktop.org;
- dkim=pass header.d=gmail.com;
+ dkim=pass header.d=kode54.net;
   arc=none (Message is not ARC signed);
-  dmarc=pass (Used From Domain Record) header.from=gmail.com
+  dmarc=pass (Used From Domain Record) header.from=kode54.net
  policy.dmarc=quarantine
-Authentication-Results: mail.freedesktop.org; dkim=pass header.d=gmail.com;
+Authentication-Results: mail.freedesktop.org; dkim=pass header.d=kode54.net;
  arc=none (Message is not ARC signed);
- dmarc=pass (Used From Domain Record) header.from=gmail.com
+ dmarc=pass (Used From Domain Record) header.from=kode54.net
  policy.dmarc=quarantine
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by kara.freedesktop.org (Postfix) with ESMTPS id 16B2E43E41
-	for <nouveau@lists.freedesktop.org>; Tue, 30 Dec 2025 09:15:42 +0000 (UTC)
-Received: from mail-yw1-f196.google.com (mail-yw1-f196.google.com
- [209.85.128.196])
-	by gabe.freedesktop.org (Postfix) with ESMTPS id 1D81110E62B
-	for <nouveau@lists.freedesktop.org>; Tue, 30 Dec 2025 09:23:39 +0000 (UTC)
-Received: by mail-yw1-f196.google.com with SMTP id
- 00721157ae682-787eb2d8663so124280387b3.0
-        for <nouveau@lists.freedesktop.org>;
- Tue, 30 Dec 2025 01:23:39 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1767086618; x=1767691418;
- darn=lists.freedesktop.org;
-        h=to:subject:message-id:date:from:mime-version:from:to:cc:subject
-         :date:message-id:reply-to;
-        bh=cgPj4GmV/3EpBx43SG2F3zNXxdHzXlOKwZZPcptoQD0=;
-        b=WcJoGzRDYReCytZVN88Ct5xAoWUjzHGA/gfMwQ9lEXNbjBWhVOmh96v/TAsDrU8eqq
-         HRINRUgP8TijuJF2NTquF0TE+i4AdEdJAzU6wSNSw7X3SjBwJTeZAr/ARDBcDBJo6fal
-         C75+oWSjTNZv9CH4M9j0X0XpwsABo20+ZoKa/V6JICYPUTt14/2m9XiJT3ZOoUV2traE
-         /mj5zAmnu0VWwJRm14Vmer/qCCryNonlvlU8CB8nZC3y295OiRowmH0lvSaJanROnbME
-         Hk9gqFRr6+TYfMyH0bqa03VTIvwJ2GhfECTVLyJQ2FmctQEKa93uHY93dEsHmabkkkCR
-         hUQg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1767086618; x=1767691418;
-        h=to:subject:message-id:date:from:mime-version:x-gm-gg
-         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
-        bh=cgPj4GmV/3EpBx43SG2F3zNXxdHzXlOKwZZPcptoQD0=;
-        b=OG+Av4n8aIeDInLhXfJj5761tM2FacwRwi9t1dTMcoDEDJXcAzdRD09ZSSiRwm6rgl
-         gRktgcXR1Bw/YayNxudMK/skKEt/R5XeKWj42Eh3kCORg4BW6R77cc4u+FH99DhGOr0t
-         tW+kmr19i7wkiYL5wwWJvwuqQg19iqm0Ofx5z/OYt62E1GtysAC4oyg/9T9coVmW/N5J
-         kcVv6bhkaspzcoF13JSKVxM7f7gWLPa9u0x/Uv+IB+Q0jjLPKYPwNNTBr/lspdnDsnYt
-         RTbEvYO2KvIUFqPTjYth7rVsXQq3VEsqKEaA16/f4lanLnaIkkdP1MLdT6X34NeRUMSp
-         qwQw==
-X-Forwarded-Encrypted: i=1;
- AJvYcCVGVtvtjDNAGYW9lHHDOnuiwK2smqWTXD63hIGtA+aWy0cJmXyIQvNqBW0aa5v/CX5XhVD/pjnm@lists.freedesktop.org
-X-Gm-Message-State: AOJu0YxS4Ud5Wzukipt1m2KxmabkjK6yVqKVSg8X6Ryb+GUr5SjYaVRo
-	lcnof1zZyGMJSnqeRO0Ir+THNCrfVDeNX/M2wvkipyX8qOdAZM87TakaKGcQtP3Y9Q7ScawjKaL
-	tkBWZdRUGx0cVgDdnFbv+2gbkmgqZr00=
-X-Gm-Gg: AY/fxX56ghDNGOiN3fJtpaMqUv2HL57EyL9TEk/GSuRLm922dSsphyTGfgeh5adYFPA
-	P1hc8357tScZb9coxn+yMqTPZIhFWAjh6+0CMzFLAHm/R+OusNHXgeTDiJYyjucp8eZLLiHi/oJ
-	MDLaH2FTsIvH45vU453RryzfFR4MbsyZslrHgHxYbLEN8OInc3rUSjWqg+wB75zn5jTSsE6hxMD
-	HQlgyzup35RjGzljF5+04xqeTXBAim10QfAWFOoXDzGhb61sFlOiSjC97kDNI17V4CJmRj3odl+
-	Zjy4F9oUQTp23B/ivl4SsMmVnKVkNMs=
-X-Google-Smtp-Source: 
- AGHT+IF+xA9eHpMgGjR0M99hI+1fVr8JqG8TRCy7ICg6HqCKQl6Un8/FwyPCufYLFjB3CSqS0OxEKWme2WO6raUGor0=
-X-Received: by 2002:a05:690c:6610:b0:78f:f30f:e74b with SMTP id
- 00721157ae682-78ff310623bmr159318587b3.25.1767086617819; Tue, 30 Dec 2025
- 01:23:37 -0800 (PST)
+	by kara.freedesktop.org (Postfix) with ESMTPS id 64F34400F9
+	for <nouveau@lists.freedesktop.org>; Wed, 31 Dec 2025 08:09:39 +0000 (UTC)
+Received: from fout-a7-smtp.messagingengine.com
+ (fout-a7-smtp.messagingengine.com [103.168.172.150])
+	by gabe.freedesktop.org (Postfix) with ESMTPS id 1AC2810E20B;
+	Wed, 31 Dec 2025 08:17:38 +0000 (UTC)
+Received: from phl-compute-06.internal (phl-compute-06.internal [10.202.2.46])
+	by mailfout.phl.internal (Postfix) with ESMTP id 4831BEC0199;
+	Wed, 31 Dec 2025 03:17:37 -0500 (EST)
+Received: from phl-frontend-04 ([10.202.2.163])
+  by phl-compute-06.internal (MEProxy); Wed, 31 Dec 2025 03:17:37 -0500
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kode54.net; h=cc
+	:cc:content-type:content-type:date:date:from:from:in-reply-to
+	:in-reply-to:message-id:mime-version:references:reply-to:subject
+	:subject:to:to; s=fm1; t=1767169057; x=1767255457; bh=vfxorXJXtr
+	oycbRN6IUJ+dzctWvz+cPTc2VwPUJGtvM=; b=28SGkhZIJahUk5flwTZxZVs3mn
+	Zzz/35ATuhrE6dgj+9UKjGtHEfR+GUv1nt/EI6Ad5SO3wyHeIy6Nm/RTVaFb64hF
+	XpXPsvBU+p2XWx9gt+wpJoTnQTVP9wbU+I1Uu7fJjPiQX7wssdOW7wZiGbyHGf5I
+	OkStmdWlK6xpvQboAzfcmoTWBCcjcSTrzpCXANG7swrjsbnsI3t/Vqbxu95NnGli
+	tMpqfFo54JtRL0vzm2pJJR2N3Q8X/dRJwk1HZnOitL/WTQjDFgjWyrqrNPGP5Vdz
+	wP6RAbNWpduhMD44AuTUhwnhFW2kxVZgfrXbCTzAeg7dXvDKstdv1m2z6NUQ==
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=
+	messagingengine.com; h=cc:cc:content-type:content-type:date:date
+	:feedback-id:feedback-id:from:from:in-reply-to:in-reply-to
+	:message-id:mime-version:references:reply-to:subject:subject:to
+	:to:x-me-proxy:x-me-sender:x-me-sender:x-sasl-enc; s=fm2; t=
+	1767169057; x=1767255457; bh=vfxorXJXtroycbRN6IUJ+dzctWvz+cPTc2V
+	wPUJGtvM=; b=iIA3royFLYu7Hf4vbGqsM+ALVZcBD94ALeuiW0UP4RcXTc+pcpr
+	1JSrmW0pVfvLw5CZVfy8fqlg6kP1M2w5MrtiFvm8i4TH0ppOnK3BfE/pqgVx+DwX
+	oFtCvkFuBb5G2OLuanqO0u9MulKJfTX6SmD9gqBDB7qlKiSZkjvbWHsWoMMjLb4H
+	hCfmJRLXEKZyOIYShztwvZLuY+qbZqFePz12FE42uXo9sMCpmY7TyMKx0a4uljfD
+	rsJZV4Q7nzRXWs8i3UlSiEuY4qo/ulS8TJBUodeLhmsLMIDlxmbh9Vq36ElAfC26
+	830rihbz2ll1ir2MQvX6eIzd8TtIHd65AQQ==
+X-ME-Sender: <xms:IdxUaXTqxCqgCz9of-Qko-BHbpLgnVUt3KbXjOzKqbxC3-hKhnE-Dg>
+    <xme:IdxUaS1ruS0h9VIKPG-FxQRPnps1ULSfrsI3yGsNQLU_JgeGqTFyucO2tYD9uQsNv
+    F1YmT0H5zRDTBLI51QYmzn-ideHFZEgTRkFCW1ztC7n-d4jQhnrlKo>
+X-ME-Received: 
+ <xmr:IdxUactrk1VnxVyWZFQjc5IMUyUNMPBN2XhwiEVJcsPpIvgOtvP7ELOPCZ0>
+X-ME-Proxy-Cause: 
+ gggruggvucftvghtrhhoucdtuddrgeefgedrtddtgdekvdegtdcutefuodetggdotefrod
+    ftvfcurfhrohhfihhlvgemucfhrghsthforghilhdpuffrtefokffrpgfnqfghnecuuegr
+    ihhlohhuthemuceftddtnecusecvtfgvtghiphhivghnthhsucdlqddutddtmdenucfjug
+    hrpefhvfevuffkfgffjghfgggtsehgtderredtreejnecuhfhrohhmpeevhhhrihhsthho
+    phhhvghrucfunhhofihhihhllhcuoegthhhrihhssehkohguvgehgedrnhgvtheqnecugg
+    ftrfgrthhtvghrnhepvdeuffffvdekudeludeukeevudetiedvtefgffeivdeuieekkeel
+    ueejteeuhfehnecuffhomhgrihhnpehkvghrnhgvlhdrohhrghenucevlhhushhtvghruf
+    hiiigvpedtnecurfgrrhgrmhepmhgrihhlfhhrohhmpegthhhrihhssehkohguvgehgedr
+    nhgvthdpnhgspghrtghpthhtohepjedpmhhouggvpehsmhhtphhouhhtpdhrtghpthhtoh
+    epmhgrthhthhgvfidrshgthhifrghrthiisehlihhnuhigrdguvghvpdhrtghpthhtohep
+    lhihuhguvgesrhgvughhrghtrdgtohhmpdhrtghpthhtohepuggrkhhrsehkvghrnhgvlh
+    drohhrghdprhgtphhtthhopehtthgrsghisehnvhhiughirgdrtghomhdprhgtphhtthho
+    pehrvghgrhgvshhsihhonhhssehlihhsthhsrdhlihhnuhigrdguvghvpdhrtghpthhtoh
+    epnhhouhhvvggruheslhhishhtshdrfhhrvggvuggvshhkthhophdrohhrghdprhgtphht
+    thhopegurhhiqdguvghvvghlsehlihhsthhsrdhfrhgvvgguvghskhhtohhprdhorhhg
+X-ME-Proxy: <xmx:IdxUaYhCKtpDdHC8CyKtpt5LZf13xpYNFazda4PILxu5jbCievySLg>
+    <xmx:IdxUad9BsbQQ_67XzYPTR5sAeRN1dMm_sJaSUOKMUDT1w0V3l8hZZA>
+    <xmx:IdxUabuDJMGGJYh3hl4rRCGJSZPeC_DlFoqjiL9MnrUHYvcUMid9Dw>
+    <xmx:IdxUaRqniM1AbSNqyfHxH0wTzZzW9wxTvnOWGkF3KPVPAToKxsnyhA>
+    <xmx:IdxUaYVB1wU8cwFzMky4UkhYDZfJvl7t8G1xBRYMOV6XVlQ3_DbX4jY4>
+Feedback-ID: i9ec6488d:Fastmail
+Received: by mail.messagingengine.com (Postfix) with ESMTPA; Wed,
+ 31 Dec 2025 03:17:36 -0500 (EST)
+From: Christopher Snowhill <chris@kode54.net>
+To: Matthew Schwartz <matthew.schwartz@linux.dev>
+Subject: RE: [REGRESSION][BISECTED] Freeze when nouveau loads GSP firmware
+ during boot on Blackwell
+Message-ID: <176716905502.167194.1676368663909086723@copycat>
+User-Agent: Dodo
+Date: Wed, 31 Dec 2025 00:17:35 -0800
+In-Reply-To: <59736756-d81b-41bb-84ba-a1b51057cdd4@linux.dev>
+References: <59736756-d81b-41bb-84ba-a1b51057cdd4@linux.dev>
 MIME-Version: 1.0
-From: Philip Mill <philipmill86@gmail.com>
-Date: Tue, 30 Dec 2025 10:23:25 +0100
-X-Gm-Features: AQt7F2pcPbnd93TQJYFxHvTLepWUcoLs4V72840ga5DHuuX6P1BLCaGKnYL14e8
-Message-ID: 
- <CAKRF1bQHjZzRFn3t_mcUC=OkgK-7F0XDMvgpzmCOpJSjEPuAmA@mail.gmail.com>
-Subject: Your product is needed
-To: undisclosed-recipients:;
-Content-Type: multipart/alternative; boundary="000000000000247dfa064727eaed"
-X-MailFrom: philipmill86@gmail.com
+Content-Type: multipart/signed; protocol="application/pgp-signature";
+ micalg="pgp-sha512"; boundary="===============5313257699487410381=="
+Message-ID-Hash: HKET7OG3XCXVVLHX6343J3MMQ4PRSWI4
+X-Message-ID-Hash: HKET7OG3XCXVVLHX6343J3MMQ4PRSWI4
+X-MailFrom: chris@kode54.net
 X-Mailman-Rule-Hits: nonmember-moderation
 X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency;
  loop; banned-address; member-moderation
-Message-ID-Hash: F6545TJAARQ6LA4NJFARUUJEPVL7LRH6
-X-Message-ID-Hash: F6545TJAARQ6LA4NJFARUUJEPVL7LRH6
-X-Mailman-Approved-At: Wed, 31 Dec 2025 08:29:58 +0000
+CC: dakr@kernel.org, regressions@lists.linux.dev,
+ nouveau@lists.freedesktop.org,
+ "dri-devel@lists.freedesktop.org" <dri-devel@lists.freedesktop.org>
 X-Mailman-Version: 3.3.8
 Precedence: list
 List-Id: Nouveau development list <nouveau.lists.freedesktop.org>
 Archived-At: 
- <https://lists.freedesktop.org/hyperkitty/list/nouveau@lists.freedesktop.org/message/F6545TJAARQ6LA4NJFARUUJEPVL7LRH6/>
+ <https://lists.freedesktop.org/hyperkitty/list/nouveau@lists.freedesktop.org/message/HKET7OG3XCXVVLHX6343J3MMQ4PRSWI4/>
 Archived-At: 
- <https://lore.freedesktop.org/CAKRF1bQHjZzRFn3t_mcUC=OkgK-7F0XDMvgpzmCOpJSjEPuAmA@mail.gmail.com/>
+ <https://lore.freedesktop.org/176716905502.167194.1676368663909086723@copycat/>
 List-Archive: 
  <https://lists.freedesktop.org/hyperkitty/list/nouveau@lists.freedesktop.org/>
 List-Archive: <https://lore.freedesktop.org/nouveau>
@@ -124,29 +144,69 @@ List-Post: <mailto:nouveau@lists.freedesktop.org>
 List-Subscribe: <mailto:nouveau-join@lists.freedesktop.org>
 List-Unsubscribe: <mailto:nouveau-leave@lists.freedesktop.org>
 
---000000000000247dfa064727eaed
-Content-Type: text/plain; charset="UTF-8"
-
-Hello,
-
-We are looking for steady suppliers of your products  to our company which
-will be on a monthly basis.
-
-Kindly respond for details through: phillipsmills0@gmail.com
-
-Regards,
-
-Philip Mill
-
---000000000000247dfa064727eaed
-Content-Type: text/html; charset="UTF-8"
+--===============5313257699487410381==
+Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: quoted-printable
 
-<div dir=3D"ltr">Hello,<br><br>We are looking for steady suppliers of your =
-products =C2=A0to our company which will be on a monthly basis.<br><br>Kind=
-ly respond for details through:=C2=A0<a href=3D"mailto:phillipsmills0@gmail=
-.com" target=3D"_blank">phillipsmills0@gmail.com</a><br><br>Regards, =C2=A0=
-<font color=3D"#888888"><font color=3D"#888888"><br>=C2=A0<br>Philip Mill</=
-font></font></div>
 
---000000000000247dfa064727eaed--
+
+On Tue 30 Dec 2025 10:11:34 PM , Matthew Schwartz wrote:
+> Hello,
+>=20
+> On the 6.19-rc kernel series with linux-firmware 20251125, I have been unab=
+le to boot into the kernel while using nouveau on my RTX 5090 rig.=20
+>=20
+> It appears to freeze right after "nouveau 0000:01:00.0: gsp: RM version: 57=
+0.144" appears in my dmesg, and it locks up at this point. It works fine if I=
+ blacklist nouveau or use nomodeset.
+>=20
+> After bisecting, the first bad commit is da67179e5538 ("drm/nouveau/gsp: Al=
+locate fwsec-sb at boot"). As it's a Blackwell card, I cannot test with GSP d=
+isabled.
+>=20
+> Still trying to figure out the best way to provide complete logs of the fre=
+eze, as it's too early to go into my journal and sysrq keys don't work when i=
+t freezes...=20
+>=20
+> Thanks,
+> Matt
+
+I encountered the same bug possibly, except in my case, it resulted in
+an OOPS, and the total failure of video output. However, I was able to
+log into LUKS and pull some kernel logs:
+
+https://lore.kernel.org/all/176698808133.6372.2408917375327107249@copycat/
+
+The commonality here seems to be crashing dereferencing offset 0xCC in a
+structure from bit_entry(struct nvkm_bios *bios, u8 id, struct bit_entry *bit)
+
+Nearest I can guess without doing further proper examination is that
+it's dereferencing a NULL nvkm_bios pointer right at the top of the
+function. Maybe something isn't initializing the BIOS member before this
+ctor is called on Blackwell? Race conditions are really fun to deal
+with.
+
+--===============5313257699487410381==
+Content-Type: application/pgp-signature
+Content-Transfer-Encoding: 7bit
+Content-Disposition: attachment; filename="signature.asc"
+MIME-Version: 1.0
+
+-----BEGIN PGP SIGNATURE-----
+
+iQIzBAABCgAdFiEEdiLr51NrDwQ29PFjjWyYR59K3nEFAmlU3B8ACgkQjWyYR59K
+3nG3hRAAoVDhI3L0HPj+JQ24NB4gR2CEHw/LCnWByyiNKBDfGGNl5MCm8rDQl630
+SiznK6Zk0VRbqIenPxODjl2v57n9uLOH8HGM/OPYmPTXvnemV4LpQpwHAsJYDJ2d
+K9/otPRSHQvi3NHrJnyorHLAgZ8yqDEukKTvxj9TsSiFSy7jbubAoCGDP76oisPP
+PrNVTb8xkdbAL7yrFkGJh4tRBsfZOFJAPTKnS4QwHF6VHCqRhSEY3Dv3xU9pm1FC
+w0kGk9ZfuJt+CQw1QiIQIAP6qiUx2lRyGd1IvK8qdEW3slZjkSZaSqmm0tTW9ZJz
+Dgd80n5wqKS/fJPm35dAhcm73JNFtcZQb0K8oD0twGUwyIGtfj9/WmDcobCs7tlf
+LYCsjf682YY/QqlLGdxY3slpwfy9eRoEriIRT4b6NxnP/Ze6ryVwXL/0Sql3xQp9
+cxJu9Ipv4lHt0m9zT2u1zRPYG9HMgCjWnL2do7iT3kYtvqDmGJymEolU3NBYU7V5
+v9Uq1+ZnMwVShTPF/qFRzz0636O8ckqWZqIlRLeMtouDKU8ave8HZvzF9j5EqIfC
+D+ikDB2c/UbJGKYg0VdY+qPIKF0ZIKKQ+UsrmlTLiR0NnlX6SXVb3CT7yHjL9GG5
+bG7tPGFXTGQhSW7VTFyZ5QO9koh0tmVj63hhhIV3TMyFpWwCbbI=
+=EZjI
+-----END PGP SIGNATURE-----
+
+--===============5313257699487410381==--
