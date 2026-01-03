@@ -2,131 +2,177 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id 99FA4CEEF5A
-	for <lists+nouveau@lfdr.de>; Fri, 02 Jan 2026 17:21:02 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id E1642CEF818
+	for <lists+nouveau@lfdr.de>; Sat, 03 Jan 2026 01:08:34 +0100 (CET)
 Received: from kara.freedesktop.org (unknown [131.252.210.166])
-	by gabe.freedesktop.org (Postfix) with ESMTPS id 7699A10E2B2;
-	Fri,  2 Jan 2026 16:21:01 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTPS id 892C810E2F5;
+	Sat,  3 Jan 2026 00:08:33 +0000 (UTC)
 Authentication-Results: gabe.freedesktop.org;
-	dkim=fail reason="signature verification failed" (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="jKKYwXAy";
+	dkim=pass (2048-bit key; unprotected) header.d=Nvidia.com header.i=@Nvidia.com header.b="UNHcVphi";
 	dkim-atps=neutral
 Received: from kara.freedesktop.org (localhost [127.0.0.1])
-	by kara.freedesktop.org (Postfix) with ESMTP id E3C3544C8B;
-	Fri,  2 Jan 2026 16:12:56 +0000 (UTC)
-ARC-Seal: i=1; cv=none; a=rsa-sha256; d=lists.freedesktop.org;
- s=20240201; t=1767370376;
- b=SRFAW571RN2vH3LKL938KaI5d9/3iF6PCAh5i3t2IJA/DEV2s/aMeQP6M+5w0LmbJPdMo
- L4/gPzd40NQ5/wNNr4fb3iL6/IM8VHbcVpYCjo0H/AI2R/ynP3yV0gsZzOHXiADzWJJwh8j
- QPMRi9EiKd9pkYAfYaj1OQF57yWP3n8aqcoPWOBAg7Vw8Zr5g0IrvryVOMXMnNpIDz1Ac+U
- upWe72lgPvv17xfv11YXkEti4zXeAGqyp2s/GPPmruDPrufj5VqMoc0CYHZqilIiI59iggd
- O4qQBY1vQo6BO24H9rUqIyroSL2jUUonZ2Aum/Vxn9C11TxmTs4+6YmeyzXA==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed;
- d=lists.freedesktop.org; s=20240201; t=1767370376; h=from : sender :
+	by kara.freedesktop.org (Postfix) with ESMTP id 3B92A44C81;
+	Sat,  3 Jan 2026 00:00:28 +0000 (UTC)
+ARC-Seal: i=2; cv=pass; a=rsa-sha256; d=lists.freedesktop.org;
+ s=20240201; t=1767398428;
+ b=GXFxbyTViTK9HjRhG+NcvCA807M3iG+gzcBqUxLrEb5lbKNrA1kDWaYBSWBf7oUeWPHb9
+ /rVD4Y2HFbJHssqoeHOnNvnh/KTooII/8jQ8GU80YroVptcjeJEBZEA/Y91DexZTgmZF0u6
+ 00eSMm0ZtU+qbKgDJ24H9L0Dx0Z7LToZeDbEHWVlMJHlnoEOHshoTQh/glLGhcw3mwMSUbL
+ Nz7G3IW81zAHsr57NTb2vT+UC0Py7mrTOEPlv3ro5Uaa4c+1H2TZ3Z4X4SWiPyjEUmiDjO9
+ gbU5Y7qPEHlUDfYzG+DiFWM2GvJi7WvTyGiEIxR5CMGhaD7wBtSfA/fVQWuA==
+ARC-Message-Signature: i=2; a=rsa-sha256; c=relaxed/relaxed;
+ d=lists.freedesktop.org; s=20240201; t=1767398428; h=from : sender :
  reply-to : subject : date : message-id : to : cc : mime-version :
  content-type : content-transfer-encoding : content-id :
  content-description : resent-date : resent-from : resent-sender :
  resent-to : resent-cc : resent-message-id : in-reply-to : references :
  list-id : list-help : list-unsubscribe : list-subscribe : list-post :
  list-owner : list-archive;
- bh=9tu4+qvE4HVhlD3XFHpS0OFSs6sZmg8C8rk5ZdNmyzE=;
- b=V7dMXasq5QlXSOjAEW/bZCi2xjVBoRYh45QwfbjrRjNmtdbrC4jBVpeSLNH5Ntb2VGiDU
- dU91TBOlKDgr91wme3s4A73GGPr/8gtixRTAYjPccCk30faZlflVuA4rFxRoqkjm8qW3Kpi
- yX3UU6uPFX/JIVxBb7vVepKxptr3jkpneVVKcE+yt3SEOjN8L4JTgYx9P7Tfo8OggSkCeuC
- ryfenE1bhc7UVnRgdU3KLBWTV4S6I0cyrSt9wKtmcYUiStRO5DzDG5vpmBH4p+WRXaD/D+0
- 3CS4SbWbMgMOc2BO5JT03T7jUq2rPESxosZ0841mrfSLqpDvU0qkdAPTQPJg==
-ARC-Authentication-Results: i=1; mail.freedesktop.org;
- dkim=pass header.d=gmail.com;
-  arc=none (Message is not ARC signed);
-  dmarc=pass (Used From Domain Record) header.from=gmail.com
- policy.dmarc=quarantine
-Authentication-Results: mail.freedesktop.org; dkim=pass header.d=gmail.com;
- arc=none (Message is not ARC signed);
- dmarc=pass (Used From Domain Record) header.from=gmail.com
- policy.dmarc=quarantine
+ bh=GXXjcpKbsQ7PkUgisjX+bHYjyZ3pPJNkZMMC0EVLMPQ=;
+ b=BqBKaxBJ3a4V+RVz82HKu4azSdzFISr8Pn8xF2Nuws/fr/MuvgNmgnNgAanluX+yiyHTO
+ GU2W/yKysYgmKjtMV/eGwdklSW+6WJvqN82Thhz4rLCXr2GofNf7d0fDvafjar0VJESMGig
+ nWW6jmXCo5S3i5V09nj5D2kwe2DeSIr2Gx8AAJ9WqqCZlbhkxBuJAXJxvMYxvwovoNyXwXW
+ W9NwlfAepFJVQsbcWfg5pTfKwiLRlTBfH7YhBVDM0hPL96FY6gdlffruEmpgXjOfTWYmtTY
+ joEdXJPSnH+HPOgKskJXTa1YGgDnihd/e5W6Hp1OAWKf7DnqEmMIQKD9+dAg==
+ARC-Authentication-Results: i=2; mail.freedesktop.org;
+ dkim=pass header.d=Nvidia.com;
+  arc=pass;
+  dmarc=pass (Used From Domain Record) header.from=nvidia.com
+ policy.dmarc=reject
+Authentication-Results: mail.freedesktop.org; dkim=pass header.d=Nvidia.com;
+ arc=pass;
+ dmarc=pass (Used From Domain Record) header.from=nvidia.com policy.dmarc=reject
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by kara.freedesktop.org (Postfix) with ESMTPS id 9CE4D44C41
-	for <nouveau@lists.freedesktop.org>; Fri,  2 Jan 2026 06:09:20 +0000 (UTC)
-Received: from mail-pg1-f171.google.com (mail-pg1-f171.google.com
- [209.85.215.171])
-	by gabe.freedesktop.org (Postfix) with ESMTPS id EBD9F10E046
-	for <nouveau@lists.freedesktop.org>; Fri,  2 Jan 2026 06:17:23 +0000 (UTC)
-Received: by mail-pg1-f171.google.com with SMTP id
- 41be03b00d2f7-c2a9a9b43b1so5230035a12.2
-        for <nouveau@lists.freedesktop.org>;
- Thu, 01 Jan 2026 22:17:23 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1767334643; x=1767939443;
- darn=lists.freedesktop.org;
-        h=mime-version:references:in-reply-to:date:user-agent:message-id
-         :subject:cc:to:from:from:to:cc:subject:date:message-id:reply-to;
-        bh=9tu4+qvE4HVhlD3XFHpS0OFSs6sZmg8C8rk5ZdNmyzE=;
-        b=jKKYwXAyn0hEb5HkqOz94eDy+H/W1YuavH9hBqa4scsI7W+MCVeG1zTVv9LKSegprB
-         XUDVE3eqoWSCQVnSpa8XkMT4poJuCguQs5Xc6Nq4x6v567TWlLXVrdeuwlxdHLZNzHLa
-         doZF0j0ugpnI0BvjOqOj05dqMXHAfPBOH+PZv4CoGEepSDAJ7UicDfk9D1CDE7GYwSsE
-         Ae45UVqpRZM5Rs9strb9pkXFdgKKFNkgVmHolfDbc3QcwXS2DJh0Pkv/cYVRLEf4EboX
-         UKz9mVJHjKWecbrCUoP4idB50qc3FF/cUJbImlEgoTT9TQf1WpxQRSiSFkxnX4BM36vP
-         fjXA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1767334643; x=1767939443;
-        h=mime-version:references:in-reply-to:date:user-agent:message-id
-         :subject:cc:to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject
-         :date:message-id:reply-to;
-        bh=9tu4+qvE4HVhlD3XFHpS0OFSs6sZmg8C8rk5ZdNmyzE=;
-        b=nKh2x8PddGGeEyy85BMiQkIJ7uBffo9H0wjDqODp3CzGkURIKUEPM5ykm9Nw4nZybp
-         N+iNb1tVB/5XrTdoikpc4iFnclK+/q/AI/Mo0Q3XENWnPXyQKYd8wNwga0hURDRWKSK6
-         gp53IQX13NPFxFUghMuLtkaYxOzG/Qxrxq+2d75pAVYPPSID1LCswHjDWpnYPiKtbU/7
-         jprRo3ZstiEcGe0GZw1kGY7k+3M6PTfCemKOOMQXkvKksdvcYYZ8+i4HQlBssC/w0D7j
-         au+HBIyGR+7MRNKG8LSsK9jm4aPnodPRZbqr13q4y5UGB9peuRu2PADnmjInqOzx8U54
-         ggBw==
-X-Forwarded-Encrypted: i=1;
- AJvYcCVMf2bNZ0kdwxw8R6fXuQEEp6maKuT/2SuD10cb5rWnHRyyvRvfuiAkT7FPgXwKKWv1mvrof5pW@lists.freedesktop.org
-X-Gm-Message-State: AOJu0Yy8ejyTRdxqbw7kBPbRst1XIFbaHvjHlhxe+xQ830e3/aMoVclf
-	ZdagQAyZ4tuG3TWJyuDwqzJsE+R+bihP4kblSDNTZS5HzdaXKZhvtdkg
-X-Gm-Gg: AY/fxX6207RVgMje+8sMcOGOi2IiCrW0g+p7TZ3jp/2uD6/RKvfAVk+wpvmtkC+cJPR
-	ouwsSy1NRaBU1+0YuO5LyGdeoOx/FnbHzeD5HcI8YJvFqFP0bWI8zpvplbKnlkmbnSDtMJOjYV+
-	m8rRjbG1hb4vfM11iTBkrKjVJJ562px8qCTgFpkjJjx73E/i0qHo2kTBNXCAelEjEpr/PlD6tKF
-	sszsJHThoU5kAgv/ku3sVw2z0mHg3BopAU4S+vPUqpTYscYqMLy6koHHqbXBjtaeDjXcwwQyZ+7
-	K7qG5mC7I/BsJgLeFJ5HvJHxowbIlcGx98FkL1YrAtLjenld4TsSs6hZRqwtTdhxsBSRivMwlbd
-	Pj8tahNhCup5/GB4GtM4By1Wi/nPU9E75FwKB5HQhQFrA70w39uIVaE+0OH0UlqquIEB6lNtt7f
-	U=
-X-Google-Smtp-Source: 
- AGHT+IHFpVYh+rorOZKdQRWoZhugs0CHqY2P8dMbar8W2hgy3i7fuX7M+pBhDPEO+z8g5iSqn3uNwg==
-X-Received: by 2002:a05:7022:e80c:b0:11d:f44d:34db with SMTP id
- a92af1059eb24-121722ec1a5mr33889693c88.35.1767334643190;
-        Thu, 01 Jan 2026 22:17:23 -0800 (PST)
-Received: from localhost ([2600:6c51:4c3f:8e93::cef])
-        by smtp.gmail.com with ESMTPSA id
- a92af1059eb24-1217243bbe3sm159501293c88.0.2026.01.01.22.17.21
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Thu, 01 Jan 2026 22:17:22 -0800 (PST)
-From: Christopher Snowhill <kode54@gmail.com>
-To: Matthew Schwartz <matthew.schwartz@linux.dev>
-Subject: Re: [PATCH] nouveau: don't attempt fwsec on sb on newer platforms.
-Message-ID: <176733464054.3438.4631752218787568258@copycat>
-User-Agent: Dodo
-Date: Thu, 01 Jan 2026 22:17:20 -0800
-In-Reply-To: <4ba1b583-8ae3-4698-8fde-0084f7f9cbf9@linux.dev>
-References: <20260102041829.2748009-1-airlied@gmail.com>
- <4ba1b583-8ae3-4698-8fde-0084f7f9cbf9@linux.dev>
+	by kara.freedesktop.org (Postfix) with ESMTPS id 8FBDB44C45
+	for <nouveau@lists.freedesktop.org>; Sat,  3 Jan 2026 00:00:24 +0000 (UTC)
+Received: from SN4PR2101CU001.outbound.protection.outlook.com
+ (mail-southcentralusazon11012055.outbound.protection.outlook.com
+ [40.93.195.55])
+	by gabe.freedesktop.org (Postfix) with ESMTPS id 7AAEC10E2E6
+	for <nouveau@lists.freedesktop.org>; Sat,  3 Jan 2026 00:08:29 +0000 (UTC)
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=l5zHLMWqrRsPtg6c8Loe8pEO45DE2G8PoDXlj6Get1MtzPhZ80fFh2sFFosqaEvzfajxa1NuAkp7h6T5WvM2R9V12s4amjusbGGUVQ9RGZUk/hRCLU2w/RSjnd8GUTcYoStj1mBIWO/ueZynBQl9xUNjvKuIFT+BOFXAMBCpHlngDPZIVxREAxy3xAsWs+36IUQHghgqw/9npN8pf+gfCh/lq8wPsV3qz/oJNDhuuNUxoQNXYN+/+8xHwRX4uoTtaawsaJEGBupOtOrXsVLj0hYQ0JO0r9qKbYmWVPWlISscTFtuo+0xwWe0SwQeRSIV7cI3lEuyhvvmweUfBVeu2w==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=GXXjcpKbsQ7PkUgisjX+bHYjyZ3pPJNkZMMC0EVLMPQ=;
+ b=OcCvpeMiVva/+TbekqwsuMO0cd6tBdHQexEFtGHug9+SnDEHtIKgqBtnUtXl9MtnymnXl80SvVO1uACB94VIj4bgNMWjXK5SFbcLC3WPGUg1XFA4czxmUCaJoI3YmSIbscxV35plTc2M4Wy/2qHyx+cH/dwYtkku34+vCblaHzWc3Cw2giVXBppjQoVyu3stfjk7Vlqhj0rarf+FGWRxQrL9pYfk4pD/R8x97Am+cbPWqZWCe0lIuUDKS7JHrH6UfqkmHMpvmy5cYJyeHaELyTMxT1GXQjmnbrlvqNfDtZVclVmR1uluQt+vXTjrPYBl8ievh4kHfzU9Zrfxef31iA==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
+ 216.228.117.161) smtp.rcpttodomain=redhat.com smtp.mailfrom=nvidia.com;
+ dmarc=pass (p=reject sp=reject pct=100) action=none header.from=nvidia.com;
+ dkim=none (message not signed); arc=none (0)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=Nvidia.com;
+ s=selector2;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=GXXjcpKbsQ7PkUgisjX+bHYjyZ3pPJNkZMMC0EVLMPQ=;
+ b=UNHcVphiJQUIr3LoAruTZ5eJz5kIIVCv6KjmXEdHQAT/f2Qez7uUrdCrxXkB/o96v+Ajx/Qv/3RTYsNIpq1BuvFHjhjuajZwTW10+3C7TAyzUgFbvEpjcNs+yyRjdge3PSBsF+kmoDtVeW7iqQFOICiQFBV3wqgHFQJ5nfXaq75CIJ43XvQxco92f4F9XdUK5lRpegU2zUf0OPNkrEXMx1lOfDfw7O5W0Vf2x7bWB4mNCzaBE2YKdZgw1UL+WQqu7ukAyvnqzCvYEc2OmawBu0gAxOg2+hnbDz2PSU+IOaucli/AeLqjo2vxqhjy9LV4c8glf83Sn9JgJE35KfgFrg==
+Received: from MW4PR03CA0238.namprd03.prod.outlook.com (2603:10b6:303:b9::33)
+ by SA5PPF9BB0D8619.namprd12.prod.outlook.com (2603:10b6:80f:fc04::8d8) with
+ Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9478.4; Sat, 3 Jan
+ 2026 00:08:22 +0000
+Received: from MWH0EPF000A6735.namprd04.prod.outlook.com
+ (2603:10b6:303:b9:cafe::e2) by MW4PR03CA0238.outlook.office365.com
+ (2603:10b6:303:b9::33) with Microsoft SMTP Server (version=TLS1_3,
+ cipher=TLS_AES_256_GCM_SHA384) id 15.20.9478.4 via Frontend Transport; Sat, 3
+ Jan 2026 00:08:21 +0000
+X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 216.228.117.161)
+ smtp.mailfrom=nvidia.com; dkim=none (message not signed)
+ header.d=none;dmarc=pass action=none header.from=nvidia.com;
+Received-SPF: Pass (protection.outlook.com: domain of nvidia.com designates
+ 216.228.117.161 as permitted sender) receiver=protection.outlook.com;
+ client-ip=216.228.117.161; helo=mail.nvidia.com; pr=C
+Received: from mail.nvidia.com (216.228.117.161) by
+ MWH0EPF000A6735.mail.protection.outlook.com (10.167.249.27) with Microsoft
+ SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ 15.20.9499.1 via Frontend Transport; Sat, 3 Jan 2026 00:08:21 +0000
+Received: from rnnvmail201.nvidia.com (10.129.68.8) by mail.nvidia.com
+ (10.129.200.67) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.20; Fri, 2 Jan
+ 2026 16:08:07 -0800
+Received: from ubuntu (10.126.231.35) by rnnvmail201.nvidia.com (10.129.68.8)
+ with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.20; Fri, 2 Jan
+ 2026 16:08:07 -0800
+From: Timur Tabi <ttabi@nvidia.com>
+To: Lyude Paul <lyude@redhat.com>, Dave Airlie <airlied@redhat.com>,
+	<nouveau@lists.freedesktop.org>
+Subject: [PATCH] drm/nouveau: r535_gsp_msgq_recv_one_elem should not return
+ its inputs
+Date: Fri, 2 Jan 2026 18:07:56 -0600
+Message-ID: <20260103000756.1002890-1-ttabi@nvidia.com>
+X-Mailer: git-send-email 2.51.0
 MIME-Version: 1.0
-Content-Type: multipart/signed; protocol="application/pgp-signature";
- micalg="pgp-sha512"; boundary="===============8364432865010440589=="
-X-MailFrom: kode54@gmail.com
-X-Mailman-Rule-Hits: nonmember-moderation
+Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
+X-Originating-IP: [10.126.231.35]
+X-ClientProxiedBy: rnnvmail201.nvidia.com (10.129.68.8) To
+ rnnvmail201.nvidia.com (10.129.68.8)
+X-EOPAttributedMessage: 0
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: MWH0EPF000A6735:EE_|SA5PPF9BB0D8619:EE_
+X-MS-Office365-Filtering-Correlation-Id: a942108e-f345-49ec-a293-08de4a5c34da
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: 
+	BCL:0;ARA:13230040|1800799024|82310400026|376014|36860700013;
+X-Microsoft-Antispam-Message-Info: 
+	=?us-ascii?Q?TDQpUSh+JbGrUkd8nCJ0Qv9UDlGz2N2FMu3byY5VmZKmLKywTUtpXetdNFrT?=
+ =?us-ascii?Q?+L+siN4/vW3uPtsqD7ZRoDAu/5fYp+IhG+uB2vv7LZCrVxacUxw5CmhyNAH7?=
+ =?us-ascii?Q?Dhra7JuBPzI9Ad+nV/o0maHLVJJ+Y6L7khO4sVDarU8SG4b7XEW35RNYGWN9?=
+ =?us-ascii?Q?j0E8qKyQxgvOqOIvme9Rddk0Z75/lNyN2iNju+Iyek6nzV2HpZUeMyg1EZd2?=
+ =?us-ascii?Q?RqbdjoVLvOj1pOT1fiuXw8YKLIqoWlguLlPcX5nWIhp+Pi7+5r2fuo1Rts0p?=
+ =?us-ascii?Q?6nHXigcwY9C8VF/Gk8JY/RgtyWYjOAaFYcEMudK3tfdezyQ20vGsl1VQkJyx?=
+ =?us-ascii?Q?JLXI6JtVlNuFmyj4Iw0CL4cFFz+ljmXsmFUUOusUTqHnFf0bmKOEAg3+iVuL?=
+ =?us-ascii?Q?TnPvqjLjn1y7jWgXsNK9xRYIXCEWEZYwqi8Ta7xpuGovCpMNy06j/f25Zi8e?=
+ =?us-ascii?Q?qRUTuxQ7YAbTquMjjwyR1rbCHlWgiaJovNczbzYC6SyF6BqmFsM71+4DZsuM?=
+ =?us-ascii?Q?6hFENaWtj8J6QYDdYyElNVTE+6uQ6+h46PCnkES3VB3lM8Q5gFaHwZEJqnNE?=
+ =?us-ascii?Q?w0/M/mDkDvqgPVnZk9qcF3BioGI7V/iCPrQy2fW2pNPbunGRSxfKLiCPiZc+?=
+ =?us-ascii?Q?lXdTq42/a5nBGx0/Nn+J4kOaTQcC6xwpX6KDPV+ZF876U/JBT9Y3whMqqeuh?=
+ =?us-ascii?Q?pwxk/WV1h+1L2OO0DXydvw7jHXmj+Q7d1/WoX3cEv8jeo8tZAIkkbBtJdXqs?=
+ =?us-ascii?Q?fI5SsBvVsVtdfT7+i5cNxSpirdP0o/8/mIVGlZdX0L52ENUgzf+U68DVruUg?=
+ =?us-ascii?Q?3jZhkAnTR04D5mpXNoPZrVsPmgC7loMQE7Q4cQJw7LZ4Z3Y1WZ0vJbtdE2dc?=
+ =?us-ascii?Q?qArGa3hidDUkVWjQ5RQmPYlegJailvFkpyXaZgg3p2t+yTlwuM15UuS2oD8j?=
+ =?us-ascii?Q?JLPHz/qGQmuakthUirRJG96LdEST86F0FarmPkOVrwIIv/QeyHkyJGMYwsT0?=
+ =?us-ascii?Q?5wcO44S/iK2oOO5Nt+U3OTRj181B5ZDEqcafWib8birttek5smlCvqNMwInA?=
+ =?us-ascii?Q?FlJrDV6TqvJbi+7IzUkaGBhFRnBMHbva/ynDxCeVCR6U6Kz5uUHzb/9R7/P+?=
+ =?us-ascii?Q?qWzJbOU0HiwomhUgsXL6Wzc8/Hpv+h9y4bWPKXXRtMBU5MgvCIuwNFHQS9UE?=
+ =?us-ascii?Q?otBIFNqA/gYWlT+z0HduRfV2awNBgpy0D4x7pPkRIg3OVun1lXOLuRolVp11?=
+ =?us-ascii?Q?dBbtt55mqceemh5XWoiA88CqpEqX6VAvg73K93qZ4jhX2Y1QBpNEPZzLbOlt?=
+ =?us-ascii?Q?FS1X97LwGS19rgc25KHbRQ6RB6/MweEFeaWHUTQK7f4XIoFpn+K0T0ePeH7W?=
+ =?us-ascii?Q?iiScyuGgggMXVqaUFS6D9wRcOCbm7y0nwjmrtPELP87JUqMoT1BGeaqBlcKy?=
+ =?us-ascii?Q?/bJ/aznu2qm7xPeMgi4DyMkxV4bkPHSehGXIOfUHmdfbYIbeZqDs1THIJcPj?=
+ =?us-ascii?Q?zC6joNKfllKTwT5dlucB36KcrePK+LJdRaBqiCbQlJ+stTfQeapDbf8gGOUZ?=
+ =?us-ascii?Q?7znz91zRVaA2yuDmk7I=3D?=
+X-Forefront-Antispam-Report: 
+	CIP:216.228.117.161;CTRY:US;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:mail.nvidia.com;PTR:dc6edge2.nvidia.com;CAT:NONE;SFS:(13230040)(1800799024)(82310400026)(376014)(36860700013);DIR:OUT;SFP:1101;
+X-OriginatorOrg: Nvidia.com
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 03 Jan 2026 00:08:21.6499
+ (UTC)
+X-MS-Exchange-CrossTenant-Network-Message-Id: 
+ a942108e-f345-49ec-a293-08de4a5c34da
+X-MS-Exchange-CrossTenant-Id: 43083d15-7273-40c1-b7db-39efd9ccc17a
+X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: 
+ TenantId=43083d15-7273-40c1-b7db-39efd9ccc17a;Ip=[216.228.117.161];Helo=[mail.nvidia.com]
+X-MS-Exchange-CrossTenant-AuthSource: 
+	MWH0EPF000A6735.namprd04.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Anonymous
+X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: SA5PPF9BB0D8619
+Message-ID-Hash: HWY4LEZMSK7KTLAA45LQJPOO7RYYIASQ
+X-Message-ID-Hash: HWY4LEZMSK7KTLAA45LQJPOO7RYYIASQ
+X-MailFrom: ttabi@nvidia.com
 X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency;
- loop; banned-address; member-moderation
-Message-ID-Hash: ICYXDY3QBGSS3OEAABLRUDJDIBBS4SA7
-X-Message-ID-Hash: ICYXDY3QBGSS3OEAABLRUDJDIBBS4SA7
-X-Mailman-Approved-At: Fri, 02 Jan 2026 16:12:55 +0000
-CC: dri-devel@lists.freedesktop.org, nouveau@lists.freedesktop.org,
- Dave Airlie <airlied@redhat.com>, stable@vger.kernel.org
+ loop; banned-address; member-moderation; nonmember-moderation; administrivia;
+ implicit-dest; max-recipients; max-size; news-moderation; no-subject;
+ digests; suspicious-header
 X-Mailman-Version: 3.3.8
 Precedence: list
 List-Id: Nouveau development list <nouveau.lists.freedesktop.org>
 Archived-At: 
- <https://lists.freedesktop.org/hyperkitty/list/nouveau@lists.freedesktop.org/message/ICYXDY3QBGSS3OEAABLRUDJDIBBS4SA7/>
+ <https://lists.freedesktop.org/hyperkitty/list/nouveau@lists.freedesktop.org/message/HWY4LEZMSK7KTLAA45LQJPOO7RYYIASQ/>
 Archived-At: 
- <https://lore.freedesktop.org/176733464054.3438.4631752218787568258@copycat/>
+ <https://lore.freedesktop.org/20260103000756.1002890-1-ttabi@nvidia.com/>
 List-Archive: 
  <https://lists.freedesktop.org/hyperkitty/list/nouveau@lists.freedesktop.org/>
 List-Archive: <https://lore.freedesktop.org/nouveau>
@@ -136,252 +182,115 @@ List-Post: <mailto:nouveau@lists.freedesktop.org>
 List-Subscribe: <mailto:nouveau-join@lists.freedesktop.org>
 List-Unsubscribe: <mailto:nouveau-leave@lists.freedesktop.org>
 
---===============8364432865010440589==
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: quoted-printable
+Change function r535_gsp_msgq_recv_one_elem() return an error code
+instead of a pointer to the buffer that was passed as a parameter.
 
+r535_gsp_msgq_recv_one_elem() takes a struct r535_gsp_msg_info as
+one of its parameter.  This struct manages the receive buffer for
+incoming messages from GSP, and includes a pointer to that buffer.
+On success, this function returns that pointer.
 
+This behavior results in callers treating the returned pointer as
+a new value, even though it's already known to the caller.
+For example:
 
-On Thu 01 Jan 2026 09:21:26 PM , Matthew Schwartz wrote:
-> On 1/1/26 8:18 PM, Dave Airlie wrote:
-> > From: Dave Airlie <airlied@redhat.com>
-> >=20
-> > The changes to always loads fwsec sb causes problems on newer GPUs
-> > which don't use this path.
-> >=20
-> > Add hooks and pass through the device specific layers.
-> >=20
-> > Fixes: da67179e5538 ("drm/nouveau/gsp: Allocate fwsec-sb at boot")
->=20
-> Closes: https://lore.kernel.org/nouveau/59736756-d81b-41bb-84ba-a1b51057cdd=
-4@linux.dev/
-> Tested-by: Matthew Schwartz <matthew.schwartz@linux.dev>
->=20
-> Thanks,
-> Matt
+	buf = kvmalloc(max_t(u32, rpc->length, expected), GFP_KERNEL);
+	info.gsp_rpc_buf = buf;
+	buf = r535_gsp_msgq_recv_one_elem(gsp, &info);
+	if (IS_ERR(buf)) {
+		kvfree(info.gsp_rpc_buf);
+		info.gsp_rpc_buf = NULL;
 
-Closes:
-https://lore.kernel.org/all/176682185563.8256.115798774340102079@copycat/
-Tested-by: Christopher Snowhill <chris@kode54.net>
+It's not obvious, but 'buf' does not actually change its value,
+unless r535_gsp_msgq_recv_one_elem fails.  This is why the caller
+cannot do kvfree(buf).
 
-My thanks as well,
-Christopher
+Instead, r535_gsp_msgq_recv_one_elem() now returns an error code,
+and 'buf' never changes value.
 
->=20
-> > Cc: <stable@vger.kernel.org> # v6.16+
-> > Cc: Lyude Paul <lyude@redhat.com>
-> > Cc: Timur Tabi <ttabi@nvidia.com>
-> > Signed-off-by: Dave Airlie <airlied@redhat.com>
-> > ---
-> >  .../gpu/drm/nouveau/nvkm/subdev/gsp/ad102.c   |  3 +++
-> >  .../gpu/drm/nouveau/nvkm/subdev/gsp/fwsec.c   | 12 +++-------
-> >  .../gpu/drm/nouveau/nvkm/subdev/gsp/ga100.c   |  3 +++
-> >  .../gpu/drm/nouveau/nvkm/subdev/gsp/ga102.c   |  3 +++
-> >  .../gpu/drm/nouveau/nvkm/subdev/gsp/priv.h    | 23 +++++++++++++++++--
-> >  .../gpu/drm/nouveau/nvkm/subdev/gsp/tu102.c   | 15 ++++++++++++
-> >  .../gpu/drm/nouveau/nvkm/subdev/gsp/tu116.c   |  3 +++
-> >  7 files changed, 51 insertions(+), 11 deletions(-)
-> >=20
-> > diff --git a/drivers/gpu/drm/nouveau/nvkm/subdev/gsp/ad102.c b/drivers/gp=
-u/drm/nouveau/nvkm/subdev/gsp/ad102.c
-> > index 35d1fcef520bf..b3e994386334d 100644
-> > --- a/drivers/gpu/drm/nouveau/nvkm/subdev/gsp/ad102.c
-> > +++ b/drivers/gpu/drm/nouveau/nvkm/subdev/gsp/ad102.c
-> > @@ -29,6 +29,9 @@ ad102_gsp =3D {
-> >  	.sig_section =3D ".fwsignature_ad10x",
-> > =20
-> >  	.booter.ctor =3D ga102_gsp_booter_ctor,
-> > +=09
-> > +	.fwsec_sb.ctor =3D tu102_gsp_fwsec_sb_ctor,
-> > +	.fwsec_sb.dtor =3D tu102_gsp_fwsec_sb_dtor,
-> > =20
-> >  	.dtor =3D r535_gsp_dtor,
-> >  	.oneinit =3D tu102_gsp_oneinit,
-> > diff --git a/drivers/gpu/drm/nouveau/nvkm/subdev/gsp/fwsec.c b/drivers/gp=
-u/drm/nouveau/nvkm/subdev/gsp/fwsec.c
-> > index 5037602466604..8d4f40a443ce4 100644
-> > --- a/drivers/gpu/drm/nouveau/nvkm/subdev/gsp/fwsec.c
-> > +++ b/drivers/gpu/drm/nouveau/nvkm/subdev/gsp/fwsec.c
-> > @@ -337,16 +337,10 @@ nvkm_gsp_fwsec_sb(struct nvkm_gsp *gsp)
-> >  }
-> > =20
-> >  int
-> > -nvkm_gsp_fwsec_sb_ctor(struct nvkm_gsp *gsp)
-> > +nvkm_gsp_fwsec_sb_init(struct nvkm_gsp *gsp)
-> >  {
-> > -	return nvkm_gsp_fwsec_init(gsp, &gsp->fws.falcon.sb, "fwsec-sb",
-> > -				   NVFW_FALCON_APPIF_DMEMMAPPER_CMD_SB);
-> > -}
-> > -
-> > -void
-> > -nvkm_gsp_fwsec_sb_dtor(struct nvkm_gsp *gsp)
-> > -{
-> > -	nvkm_falcon_fw_dtor(&gsp->fws.falcon.sb);
-> > +       return nvkm_gsp_fwsec_init(gsp, &gsp->fws.falcon.sb, "fwsec-sb",
-> > +                                  NVFW_FALCON_APPIF_DMEMMAPPER_CMD_SB);
-> >  }
-> > =20
-> >  int
-> > diff --git a/drivers/gpu/drm/nouveau/nvkm/subdev/gsp/ga100.c b/drivers/gp=
-u/drm/nouveau/nvkm/subdev/gsp/ga100.c
-> > index d201e8697226b..27a13aeccd3cb 100644
-> > --- a/drivers/gpu/drm/nouveau/nvkm/subdev/gsp/ga100.c
-> > +++ b/drivers/gpu/drm/nouveau/nvkm/subdev/gsp/ga100.c
-> > @@ -47,6 +47,9 @@ ga100_gsp =3D {
-> > =20
-> >  	.booter.ctor =3D tu102_gsp_booter_ctor,
-> > =20
-> > +	.fwsec_sb.ctor =3D tu102_gsp_fwsec_sb_ctor,
-> > +	.fwsec_sb.dtor =3D tu102_gsp_fwsec_sb_dtor,
-> > +
-> >  	.dtor =3D r535_gsp_dtor,
-> >  	.oneinit =3D tu102_gsp_oneinit,
-> >  	.init =3D tu102_gsp_init,
-> > diff --git a/drivers/gpu/drm/nouveau/nvkm/subdev/gsp/ga102.c b/drivers/gp=
-u/drm/nouveau/nvkm/subdev/gsp/ga102.c
-> > index 917f7e2f6c466..a59fb74ef6315 100644
-> > --- a/drivers/gpu/drm/nouveau/nvkm/subdev/gsp/ga102.c
-> > +++ b/drivers/gpu/drm/nouveau/nvkm/subdev/gsp/ga102.c
-> > @@ -158,6 +158,9 @@ ga102_gsp_r535 =3D {
-> > =20
-> >  	.booter.ctor =3D ga102_gsp_booter_ctor,
-> > =20
-> > +	.fwsec_sb.ctor =3D tu102_gsp_fwsec_sb_ctor,
-> > +	.fwsec_sb.dtor =3D tu102_gsp_fwsec_sb_dtor,
-> > +=09
-> >  	.dtor =3D r535_gsp_dtor,
-> >  	.oneinit =3D tu102_gsp_oneinit,
-> >  	.init =3D tu102_gsp_init,
-> > diff --git a/drivers/gpu/drm/nouveau/nvkm/subdev/gsp/priv.h b/drivers/gpu=
-/drm/nouveau/nvkm/subdev/gsp/priv.h
-> > index 86bdd203bc107..9dd66a2e38017 100644
-> > --- a/drivers/gpu/drm/nouveau/nvkm/subdev/gsp/priv.h
-> > +++ b/drivers/gpu/drm/nouveau/nvkm/subdev/gsp/priv.h
-> > @@ -7,9 +7,8 @@ enum nvkm_acr_lsf_id;
-> > =20
-> >  int nvkm_gsp_fwsec_frts(struct nvkm_gsp *);
-> > =20
-> > -int nvkm_gsp_fwsec_sb_ctor(struct nvkm_gsp *);
-> >  int nvkm_gsp_fwsec_sb(struct nvkm_gsp *);
-> > -void nvkm_gsp_fwsec_sb_dtor(struct nvkm_gsp *);
-> > +int nvkm_gsp_fwsec_sb_init(struct nvkm_gsp *gsp);
-> > =20
-> >  struct nvkm_gsp_fwif {
-> >  	int version;
-> > @@ -52,6 +51,11 @@ struct nvkm_gsp_func {
-> >  			    struct nvkm_falcon *, struct nvkm_falcon_fw *);
-> >  	} booter;
-> > =20
-> > +	struct {
-> > +		int (*ctor)(struct nvkm_gsp *);
-> > +		void (*dtor)(struct nvkm_gsp *);
-> > +	} fwsec_sb;
-> > +
-> >  	void (*dtor)(struct nvkm_gsp *);
-> >  	int (*oneinit)(struct nvkm_gsp *);
-> >  	int (*init)(struct nvkm_gsp *);
-> > @@ -67,6 +71,8 @@ extern const struct nvkm_falcon_func tu102_gsp_flcn;
-> >  extern const struct nvkm_falcon_fw_func tu102_gsp_fwsec;
-> >  int tu102_gsp_booter_ctor(struct nvkm_gsp *, const char *, const struct =
-firmware *,
-> >  			  struct nvkm_falcon *, struct nvkm_falcon_fw *);
-> > +int tu102_gsp_fwsec_sb_ctor(struct nvkm_gsp *);
-> > +void tu102_gsp_fwsec_sb_dtor(struct nvkm_gsp *);
-> >  int tu102_gsp_oneinit(struct nvkm_gsp *);
-> >  int tu102_gsp_init(struct nvkm_gsp *);
-> >  int tu102_gsp_fini(struct nvkm_gsp *, bool suspend);
-> > @@ -91,5 +97,18 @@ int r535_gsp_fini(struct nvkm_gsp *, bool suspend);
-> >  int nvkm_gsp_new_(const struct nvkm_gsp_fwif *, struct nvkm_device *, en=
-um nvkm_subdev_type, int,
-> >  		  struct nvkm_gsp **);
-> > =20
-> > +static inline int nvkm_gsp_fwsec_sb_ctor(struct nvkm_gsp *gsp)
-> > +{
-> > +	if (gsp->func->fwsec_sb.ctor)
-> > +		return gsp->func->fwsec_sb.ctor(gsp);
-> > +	return 0;
-> > +}
-> > +
-> > +static inline void nvkm_gsp_fwsec_sb_dtor(struct nvkm_gsp *gsp)
-> > +{
-> > +	if (gsp->func->fwsec_sb.dtor)
-> > +		gsp->func->fwsec_sb.dtor(gsp);
-> > +}
-> > +
-> >  extern const struct nvkm_gsp_func gv100_gsp;
-> >  #endif
-> > diff --git a/drivers/gpu/drm/nouveau/nvkm/subdev/gsp/tu102.c b/drivers/gp=
-u/drm/nouveau/nvkm/subdev/gsp/tu102.c
-> > index 81e56da0474a1..04b642a1f7305 100644
-> > --- a/drivers/gpu/drm/nouveau/nvkm/subdev/gsp/tu102.c
-> > +++ b/drivers/gpu/drm/nouveau/nvkm/subdev/gsp/tu102.c
-> > @@ -30,6 +30,18 @@
-> >  #include <nvfw/fw.h>
-> >  #include <nvfw/hs.h>
-> > =20
-> > +int
-> > +tu102_gsp_fwsec_sb_ctor(struct nvkm_gsp *gsp)
-> > +{
-> > +	return nvkm_gsp_fwsec_sb_init(gsp);
-> > +}
-> > +
-> > +void
-> > +tu102_gsp_fwsec_sb_dtor(struct nvkm_gsp *gsp)
-> > +{
-> > +	nvkm_falcon_fw_dtor(&gsp->fws.falcon.sb);
-> > +}
-> > +
-> >  static int
-> >  tu102_gsp_booter_unload(struct nvkm_gsp *gsp, u32 mbox0, u32 mbox1)
-> >  {
-> > @@ -370,6 +382,9 @@ tu102_gsp =3D {
-> > =20
-> >  	.booter.ctor =3D tu102_gsp_booter_ctor,
-> > =20
-> > +	.fwsec_sb.ctor =3D tu102_gsp_fwsec_sb_ctor,
-> > +	.fwsec_sb.dtor =3D tu102_gsp_fwsec_sb_dtor,
-> > +
-> >  	.dtor =3D r535_gsp_dtor,
-> >  	.oneinit =3D tu102_gsp_oneinit,
-> >  	.init =3D tu102_gsp_init,
-> > diff --git a/drivers/gpu/drm/nouveau/nvkm/subdev/gsp/tu116.c b/drivers/gp=
-u/drm/nouveau/nvkm/subdev/gsp/tu116.c
-> > index 97eb046c25d07..58cf258424218 100644
-> > --- a/drivers/gpu/drm/nouveau/nvkm/subdev/gsp/tu116.c
-> > +++ b/drivers/gpu/drm/nouveau/nvkm/subdev/gsp/tu116.c
-> > @@ -30,6 +30,9 @@ tu116_gsp =3D {
-> > =20
-> >  	.booter.ctor =3D tu102_gsp_booter_ctor,
-> > =20
-> > +	.fwsec_sb.ctor =3D tu102_gsp_fwsec_sb_ctor,
-> > +	.fwsec_sb.dtor =3D tu102_gsp_fwsec_sb_dtor,
-> > +
-> >  	.dtor =3D r535_gsp_dtor,
-> >  	.oneinit =3D tu102_gsp_oneinit,
-> >  	.init =3D tu102_gsp_init,
->=20
+Signed-off-by: Timur Tabi <ttabi@nvidia.com>
+---
+ .../drm/nouveau/nvkm/subdev/gsp/rm/r535/rpc.c | 24 +++++++++----------
+ 1 file changed, 12 insertions(+), 12 deletions(-)
 
---===============8364432865010440589==
-Content-Type: application/pgp-signature
-Content-Transfer-Encoding: 7bit
-Content-Disposition: attachment; filename="signature.asc"
-MIME-Version: 1.0
+diff --git a/drivers/gpu/drm/nouveau/nvkm/subdev/gsp/rm/r535/rpc.c b/drivers/gpu/drm/nouveau/nvkm/subdev/gsp/rm/r535/rpc.c
+index 0dc4782df8c0..50bd8407180e 100644
+--- a/drivers/gpu/drm/nouveau/nvkm/subdev/gsp/rm/r535/rpc.c
++++ b/drivers/gpu/drm/nouveau/nvkm/subdev/gsp/rm/r535/rpc.c
+@@ -229,7 +229,7 @@ struct r535_gsp_msg_info {
+ static void
+ r535_gsp_msg_dump(struct nvkm_gsp *gsp, struct nvfw_gsp_rpc *msg, int lvl);
+ 
+-static void *
++static int
+ r535_gsp_msgq_recv_one_elem(struct nvkm_gsp *gsp,
+ 			    struct r535_gsp_msg_info *info)
+ {
+@@ -243,7 +243,7 @@ r535_gsp_msgq_recv_one_elem(struct nvkm_gsp *gsp,
+ 
+ 	ret = r535_gsp_msgq_wait(gsp, expected, info->retries);
+ 	if (ret < 0)
+-		return ERR_PTR(ret);
++		return ret;
+ 
+ 	mqe = r535_gsp_msgq_get_entry(gsp);
+ 
+@@ -254,7 +254,7 @@ r535_gsp_msgq_recv_one_elem(struct nvkm_gsp *gsp,
+ 			nvkm_error(&gsp->subdev,
+ 				   "Not a continuation of a large RPC\n");
+ 			r535_gsp_msg_dump(gsp, rpc, NV_DBG_ERROR);
+-			return ERR_PTR(-EIO);
++			return -EIO;
+ 		}
+ 	}
+ 
+@@ -280,7 +280,7 @@ r535_gsp_msgq_recv_one_elem(struct nvkm_gsp *gsp,
+ 
+ 	mb();
+ 	(*gsp->msgq.rptr) = rptr;
+-	return buf;
++	return 0;
+ }
+ 
+ static void *
+@@ -292,6 +292,7 @@ r535_gsp_msgq_recv(struct nvkm_gsp *gsp, u32 gsp_rpc_len, int *retries)
+ 	struct r535_gsp_msg_info info = {0};
+ 	u32 expected = gsp_rpc_len;
+ 	void *buf;
++	int ret;
+ 
+ 	mqe = r535_gsp_msgq_get_entry(gsp);
+ 	rpc = (struct nvfw_gsp_rpc *)mqe->data;
+@@ -307,11 +308,10 @@ r535_gsp_msgq_recv(struct nvkm_gsp *gsp, u32 gsp_rpc_len, int *retries)
+ 	info.retries = retries;
+ 	info.gsp_rpc_len = rpc->length;
+ 
+-	buf = r535_gsp_msgq_recv_one_elem(gsp, &info);
+-	if (IS_ERR(buf)) {
+-		kvfree(info.gsp_rpc_buf);
+-		info.gsp_rpc_buf = NULL;
+-		return buf;
++	ret = r535_gsp_msgq_recv_one_elem(gsp, &info);
++	if (ret) {
++		kvfree(buf);
++		return ERR_PTR(ret);
+ 	}
+ 
+ 	if (expected <= max_rpc_size)
+@@ -332,10 +332,10 @@ r535_gsp_msgq_recv(struct nvkm_gsp *gsp, u32 gsp_rpc_len, int *retries)
+ 		info.gsp_rpc_len = rpc->length;
+ 		info.continuation = true;
+ 
+-		rpc = r535_gsp_msgq_recv_one_elem(gsp, &info);
+-		if (IS_ERR_OR_NULL(rpc)) {
++		ret = r535_gsp_msgq_recv_one_elem(gsp, &info);
++		if (ret) {
+ 			kvfree(buf);
+-			return rpc;
++			return ERR_PTR(ret);
+ 		}
+ 
+ 		size = info.gsp_rpc_len - sizeof(*rpc);
+-- 
+2.51.0
 
------BEGIN PGP SIGNATURE-----
-
-iQIzBAABCgAdFiEEdiLr51NrDwQ29PFjjWyYR59K3nEFAmlXYvAACgkQjWyYR59K
-3nE1yQ/9EJVWTNypR4Qp9EdmQu8lGbilKZCbxy9izW/fLgrRyeZwT2NX7nDV67uC
-lDT/6jsgs6BeCeKKnJeEwoH15fEuRkh9CnXQ4R0dl9Zea8nXWpaGBf5SAhSpZxdP
-pYKTWN1XUUWDFrzEwiBkF9etrzQnEfnmY2SxO/fBXiQ0A4u94KxuWMZ3zEc6YoPQ
-Lp2r2/N2trJII7wlhSTPGsVf7+X0eYUxFyzEEAJ7TsOyu4U4rFBBMaSClHXmPHTV
-bVYIRyPtsRULdaNVxgrQQmbrstjUM7R9crBCo6WhIa7EAhOj7mRG/q+jRIyjr/g+
-bFG1K8EUAcC04eTuLFAjPMW2mfUwDh6HVzQ6+Lzqc1ljbcbxpNkN3PgiQ/e7CyYA
-fc8gPCYU0/yzpcIcriqH+Yu/t17Fxdr9EqVcLS5VcAUKifcGl++gauK0MO2R7UWq
-5L1DXk3u2Y+d9gmOdOyrt3f/7dZSJTXz0IlLdZWb71oM0Vu+UeIhM8zG5qtz1ejO
-ovMgReAoKwDc1tdIj5Uo9ERe6R6HAoJhEPQ2q7rPpKZO7+4MEoA1rRpssMEeRCtj
-S0us+sSpwg/udEO8QyBkyQ9LyGln3KUd6hH78k7WEoJQhU1ukS19TifV7RAHLIOq
-c47v0A68w2DI8txaU7N2tCDOkH0Ayce59RbVgzdT/hP0srJeMYY=
-=7N2B
------END PGP SIGNATURE-----
-
---===============8364432865010440589==--
