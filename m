@@ -2,105 +2,115 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id 6D376CEFE40
-	for <lists+nouveau@lfdr.de>; Sat, 03 Jan 2026 11:44:23 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 62621CEFEFF
+	for <lists+nouveau@lfdr.de>; Sat, 03 Jan 2026 13:54:26 +0100 (CET)
 Received: from kara.freedesktop.org (unknown [131.252.210.166])
-	by gabe.freedesktop.org (Postfix) with ESMTPS id 8170B10E33D;
-	Sat,  3 Jan 2026 10:44:21 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTPS id 71C8110E351;
+	Sat,  3 Jan 2026 12:54:24 +0000 (UTC)
 Authentication-Results: gabe.freedesktop.org;
-	dkim=fail reason="signature verification failed" (2048-bit key; secure) header.d=mailbox.org header.i=@mailbox.org header.b="fG6uFlDz";
+	dkim=pass (2048-bit key; unprotected) header.d=intel.com header.i=@intel.com header.b="D5Vlyitk";
 	dkim-atps=neutral
 Received: from kara.freedesktop.org (localhost [127.0.0.1])
-	by kara.freedesktop.org (Postfix) with ESMTP id 394E044C85;
-	Sat,  3 Jan 2026 10:36:15 +0000 (UTC)
+	by kara.freedesktop.org (Postfix) with ESMTP id ED8D644C85;
+	Sat,  3 Jan 2026 12:46:17 +0000 (UTC)
 ARC-Seal: i=1; cv=none; a=rsa-sha256; d=lists.freedesktop.org;
- s=20240201; t=1767436575;
- b=JSOLU2A0UjY5iladT6IAqWc/g48O+xrskVLdMIiyOqHkL2Z7XjC4nD2wfCIrhwycVcS49
- kVK4RYSkPCksOvMJeEfcE01zXhLEF+E77bd8U7FXGni0CyKOKXuSc21WOz7uoOPmgatJH/x
- m1UFnx7LgcUT6i+DfjrDltpcYP29sx2LAv6CijTdMIH5SsS4IjMuLwsJ7Wd0E3YmnDgQgho
- KzjAOSHf2/K+M6R2jqOXqU9ac3Lb6ozzMo+8KL4bqjxMPKiaOz04n+qeBz7Od+1oYtlwVM2
- r2Ecy+MCXvl3WX6XOTTavnwHGOOWnGBs0RLlA2J0b/9eXlLQaVgFK2uEA/lA==
+ s=20240201; t=1767444377;
+ b=O01SjHu37QXYV9Jus5UVSI+JyG+i/bpapmnfz5UvDo3HwqnlnUkkIFrvZaMi9eo3ta4Y7
+ 3JcDS4NS82Cn6Y359BzkXk+Wwj0dDu4PePy4+VoCYhC9U00mSpIwvzJzURJzEsnzwKLoz9i
+ x5UfGcTy+RVYMp7pWmPImJbxY9r+5GDaH6Y/Eo2+a3H5U/5C8osw40L3JgcX2OU1VaD9+F3
+ 6/5tbhPd2EZN7L/7CLXYyyzlilsvPyozSePqMXsvooXUk7WNfkpOCwdIqULFktI+raAGfMj
+ z0tczLcnbxe2i8epSPFFQL11oYZRXyygsdueQ8zJAEOiLKLb6cKnhoKGTphg==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed;
- d=lists.freedesktop.org; s=20240201; t=1767436575; h=from : sender :
+ d=lists.freedesktop.org; s=20240201; t=1767444377; h=from : sender :
  reply-to : subject : date : message-id : to : cc : mime-version :
  content-type : content-transfer-encoding : content-id :
  content-description : resent-date : resent-from : resent-sender :
  resent-to : resent-cc : resent-message-id : in-reply-to : references :
  list-id : list-help : list-unsubscribe : list-subscribe : list-post :
  list-owner : list-archive;
- bh=Q490h70nD1q9mLKhZrcgkHWBp8ifCWlFiPf83Y6LE9o=;
- b=A07x3I4nASm68VWisst9dO1xpjaWIfDfSZcu3/PHfW8Q7DMztPe9HGWKywriljux60rti
- LEpiEf+OT32g5E952kNunLgp//+8NzFRBn5cBb8VX13GfkdhHRLm3eyV3TKUOyyrYZ9rRHr
- mdwxTmFqFdKJlGLveFXFb0UI4gStGqaZ9fBsxC3Ow9Mr3UvkrIVU0bS9bU8JwsgsaryZlnU
- +SU11N0VVwPACWS3P/3i9jwYMklQdbI6rCLVvCzHnozSbVD6fUqygmHKcOxa1GDbYPVGJ9U
- rDCP1B8zUjZUOn7T9VM3rMwQ1hNDwlhfhQ12GRXR46tPZJnhvxTbZiG/RSdw==
+ bh=8fb8+89zs5BnaySh8ZDnShCSkOwVwpsEQtpIXdm0NuM=;
+ b=RL8WQPeiHvYrpE6I0Rc1eXOOYiugp9RzgFgXp8B42w2fPliU2Ujn1/h1dWnQ6nQ3L/pmH
+ Ms1xEoP6dAO+LxMGwe0LuSfcHq5hyPfNFAMfb2k7gev3cVN2Jd8Mo8eJMv+wWLQVEeTf56H
+ qX3dtGNYFfh47A8lrWI36gZQ+TAtykGf0z3U4kqp3EOpUfO+4SQO66bQ6fnMC+PCrLFlquT
+ 840fAX1cVA67+lVIFFjcNWJvoc1okZUCPhOQz9KKHKVbL/pNFGGs51+QhIoAVNDNJ7kMSPW
+ FB4mmZwyTOvkBXAE+Uki7aY2QmH6n7+S/NPu2dhUlBxXVvI7gml9jLIi9ERQ==
 ARC-Authentication-Results: i=1; mail.freedesktop.org;
- dkim=pass header.d=mailbox.org;
+ dkim=pass header.d=intel.com header.i=@intel.com;
   arc=none (Message is not ARC signed);
-  dmarc=pass (Used From Domain Record) header.from=mailbox.org
- policy.dmarc=reject
-Authentication-Results: mail.freedesktop.org; dkim=pass header.d=mailbox.org;
+  dmarc=pass (Used From Domain Record) header.from=intel.com policy.dmarc=none
+Authentication-Results: mail.freedesktop.org;
+ dkim=pass header.d=intel.com header.i=@intel.com;
  arc=none (Message is not ARC signed);
- dmarc=pass (Used From Domain Record) header.from=mailbox.org
- policy.dmarc=reject
+ dmarc=pass (Used From Domain Record) header.from=intel.com policy.dmarc=none
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by kara.freedesktop.org (Postfix) with ESMTPS id 414A344C4F
-	for <nouveau@lists.freedesktop.org>; Sat,  3 Jan 2026 10:36:12 +0000 (UTC)
-Received: from mout-p-102.mailbox.org (mout-p-102.mailbox.org [80.241.56.152])
-	by gabe.freedesktop.org (Postfix) with ESMTPS id CEFEC10E098;
-	Sat,  3 Jan 2026 10:44:16 +0000 (UTC)
-Received: from smtp102.mailbox.org (smtp102.mailbox.org
- [IPv6:2001:67c:2050:b231:465::102])
-	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
-	 key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest
- SHA256)
-	(No client certificate requested)
-	by mout-p-102.mailbox.org (Postfix) with ESMTPS id 4djxy54Y1bz9v6q;
-	Sat,  3 Jan 2026 11:44:13 +0100 (CET)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
- s=mail20150812;
-	t=1767437053;
-	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
-	 to:to:cc:cc:mime-version:mime-version:content-type:content-type:
-	 content-transfer-encoding:content-transfer-encoding:
-	 in-reply-to:in-reply-to:references:references;
-	bh=Q490h70nD1q9mLKhZrcgkHWBp8ifCWlFiPf83Y6LE9o=;
-	b=fG6uFlDzocisagfyyAB0++nE5/QjrSCGtrUY/4snWl01tEjYQbzp5OCldcmUhS6ZzrULuS
-	+BU6AvO6OpNWl58oKTFr505vxeprxzi2YLA9iT6OJ05ICk/kNvX2+RfgnnxP0dIhQMDtyd
-	nFlJUn4CKrHwIyPBYEAqj/6YwA86HFbVnx0gqoWEwG53WQDIekjJ3igH6NAJk/1P2z3By9
-	Ie6sJiGKiU50msFt1OQXn+trHJBE7HcT0GBviV+5UAP52Wvc+QQkPlAiRNDgiI20tib1mA
-	b1wFGw4KLaRVfbnJQdRG18eE8EivbCyPyBgZu0yngbBK1ZtosIgQgN05Qg6iVg==
-Message-ID: <fdaf272295d90d2d051d4997a99ee899c45d7b67.camel@mailbox.org>
-Subject: Re: [PATCH] gpu: nova-core: use stable name() method in Chipset
- Display impl
-From: Maurice Hieronymus <mhi@mailbox.org>
-To: Danilo Krummrich <dakr@kernel.org>
-Date: Sat, 03 Jan 2026 11:44:09 +0100
-In-Reply-To: <DFEV1P747QKG.3O75MCC6HFYK4@kernel.org>
-References: <20260101184137.80445-1-mhi@mailbox.org>
-	 <DFEV1P747QKG.3O75MCC6HFYK4@kernel.org>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+	by kara.freedesktop.org (Postfix) with ESMTPS id 98AD344B9B
+	for <nouveau@lists.freedesktop.org>; Sat,  3 Jan 2026 12:46:14 +0000 (UTC)
+Received: from mgamail.intel.com (mgamail.intel.com [198.175.65.9])
+	by gabe.freedesktop.org (Postfix) with ESMTPS id AAB2F10E2ED
+	for <nouveau@lists.freedesktop.org>; Sat,  3 Jan 2026 12:54:20 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
+  d=intel.com; i=@intel.com; q=dns/txt; s=Intel;
+  t=1767444861; x=1798980861;
+  h=date:from:to:cc:subject:message-id:references:
+   mime-version:in-reply-to;
+  bh=oK30coeQKfL/fVgDXIniWhU24jzI0TWms9wqUpCrdLM=;
+  b=D5Vlyitko9D2pLek0Fgzwbqdc7TBGUB3j0DIJowW1NiBjtmxyfnxtpsk
+   2vAl4BSD1bKVGpHJf+GAPuIme2jr8SYmcHG80kKDlaVUlHwnqe83DABue
+   n4xMIIZg6ApaYN6CNfn30mZ/inH/GOq3sUTMWYmdkWDXm+wz1UXGuUGox
+   2EBuiSNdWBeHbVyXTP9va84pYuUObsYvxnfklkSXWsJLI5Mgg8TicRyeH
+   nck81FOID/nu/F69eTLMXEZviq5/mnzUQ7JIl35x6LMO6pcErJM9zalaP
+   8BIjwpTNsknZ5mg26z+Nt1h+j0VNUWMM9agc43hqR9iMuFI7UOEJD8g4y
+   w==;
+X-CSE-ConnectionGUID: AfzV9ZLETSe2Wz/obc32iQ==
+X-CSE-MsgGUID: k8tEnSufSYmu2M9xrfvfDg==
+X-IronPort-AV: E=McAfee;i="6800,10657,11659"; a="91550616"
+X-IronPort-AV: E=Sophos;i="6.21,198,1763452800";
+   d="scan'208";a="91550616"
+Received: from fmviesa010.fm.intel.com ([10.60.135.150])
+  by orvoesa101.jf.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
+ 03 Jan 2026 04:54:20 -0800
+X-CSE-ConnectionGUID: fzJkLddPSuGrlf+nLBTUCQ==
+X-CSE-MsgGUID: 7GpofOlQQ/qWltUQ7b8BMQ==
+X-ExtLoop1: 1
+X-IronPort-AV: E=Sophos;i="6.21,198,1763452800";
+   d="scan'208";a="202956797"
+Received: from igk-lkp-server01.igk.intel.com (HELO 92b2e8bd97aa)
+ ([10.211.93.152])
+  by fmviesa010.fm.intel.com with ESMTP; 03 Jan 2026 04:54:18 -0800
+Received: from kbuild by 92b2e8bd97aa with local (Exim 4.98.2)
+	(envelope-from <lkp@intel.com>)
+	id 1vc195-000000000hV-417J;
+	Sat, 03 Jan 2026 12:54:15 +0000
+Date: Sat, 3 Jan 2026 13:53:34 +0100
+From: kernel test robot <lkp@intel.com>
+To: Timur Tabi <ttabi@nvidia.com>, Danilo Krummrich <dakr@kernel.org>,
+	Alexandre Courbot <acourbot@nvidia.com>,
+	Joel Fernandes <joelagnelf@nvidia.com>,
+	John Hubbard <jhubbard@nvidia.com>, nouveau@lists.freedesktop.org,
+	rust-for-linux@vger.kernel.org
+Subject: Re: [PATCH v5 11/11] gpu: nova-core: add PIO support for loading
+ firmware images
+Message-ID: <202601031330.EOufCyjz-lkp@intel.com>
+References: <20260103045934.64521-12-ttabi@nvidia.com>
 MIME-Version: 1.0
-X-MBO-RS-ID: 5c8225c05414e845f56
-X-MBO-RS-META: ms4ecxrcrreiq778guup4eppkrfkzd5b
-Message-ID-Hash: KSN4MYDGCNA4QPTFWWRVBCPWT5BAP2VD
-X-Message-ID-Hash: KSN4MYDGCNA4QPTFWWRVBCPWT5BAP2VD
-X-MailFrom: mhi@mailbox.org
-X-Mailman-Rule-Hits: nonmember-moderation
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <20260103045934.64521-12-ttabi@nvidia.com>
+Message-ID-Hash: H6CAZOVNLNPPSV3H47JOLSUB2YJBJO7L
+X-Message-ID-Hash: H6CAZOVNLNPPSV3H47JOLSUB2YJBJO7L
+X-MailFrom: lkp@intel.com
 X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency;
- loop; banned-address; member-moderation
-CC: Alice Ryhl <aliceryhl@google.com>,
- Alexandre Courbot <acourbot@nvidia.com>, Simona Vetter <simona@ffwll.ch>,
- nouveau@lists.freedesktop.org, dri-devel@lists.freedesktop.org,
- linux-kernel@vger.kernel.org
+ loop; banned-address; member-moderation; nonmember-moderation; administrivia;
+ implicit-dest; max-recipients; max-size; news-moderation; no-subject;
+ digests; suspicious-header
+CC: oe-kbuild-all@lists.linux.dev
 X-Mailman-Version: 3.3.8
 Precedence: list
 List-Id: Nouveau development list <nouveau.lists.freedesktop.org>
 Archived-At: 
- <https://lists.freedesktop.org/hyperkitty/list/nouveau@lists.freedesktop.org/message/KSN4MYDGCNA4QPTFWWRVBCPWT5BAP2VD/>
+ <https://lists.freedesktop.org/hyperkitty/list/nouveau@lists.freedesktop.org/message/H6CAZOVNLNPPSV3H47JOLSUB2YJBJO7L/>
 Archived-At: 
- <https://lore.freedesktop.org/fdaf272295d90d2d051d4997a99ee899c45d7b67.camel@mailbox.org/>
+ <https://lore.freedesktop.org/202601031330.EOufCyjz-lkp@intel.com/>
 List-Archive: 
  <https://lists.freedesktop.org/hyperkitty/list/nouveau@lists.freedesktop.org/>
 List-Archive: <https://lore.freedesktop.org/nouveau>
@@ -110,65 +120,208 @@ List-Post: <mailto:nouveau@lists.freedesktop.org>
 List-Subscribe: <mailto:nouveau-join@lists.freedesktop.org>
 List-Unsubscribe: <mailto:nouveau-leave@lists.freedesktop.org>
 
-On Sat, 2026-01-03 at 10:52 +0100, Danilo Krummrich wrote:
-> On Thu Jan 1, 2026 at 7:41 PM CET, Maurice Hieronymus wrote:
-> > Chipset's Display was using Debug formatting ("{self:?}"), which is
-> > not
-> > guaranteed to be stable. Use the existing name() method instead,
-> > which
-> > provides stable lowercase strings suitable for firmware path
-> > generation.
-> >=20
-> > Signed-off-by: Maurice Hieronymus <mhi@mailbox.org>
-> > ---
-> > =C2=A0drivers/gpu/nova-core/gpu.rs | 10 +---------
-> > =C2=A01 file changed, 1 insertion(+), 9 deletions(-)
-> >=20
-> > diff --git a/drivers/gpu/nova-core/gpu.rs b/drivers/gpu/nova-
-> > core/gpu.rs
-> > index 629c9d2dc994..be8c882338ea 100644
-> > --- a/drivers/gpu/nova-core/gpu.rs
-> > +++ b/drivers/gpu/nova-core/gpu.rs
-> > @@ -107,17 +107,9 @@ pub(crate) fn arch(&self) -> Architecture {
-> > =C2=A0=C2=A0=C2=A0=C2=A0 }
-> > =C2=A0}
-> > =C2=A0
-> > -// TODO
-> > -//
-> > -// The resulting strings are used to generate firmware paths,
-> > hence the
-> > -// generated strings have to be stable.
-> > -//
-> > -// Hence, replace with something like strum_macros
-> > derive(Display).
-> > -//
-> > -// For now, redirect to fmt::Debug for convenience.
-> > =C2=A0impl fmt::Display for Chipset {
-> > =C2=A0=C2=A0=C2=A0=C2=A0 fn fmt(&self, f: &mut fmt::Formatter<'_>) -> f=
-mt::Result {
-> > -=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 write!(f, "{self:?}")
-> > +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 write!(f, "{}", self.name()=
-)
-> > =C2=A0=C2=A0=C2=A0=C2=A0 }
-> > =C2=A0}
->=20
-> This also converts the printed string to lowercase. While this is not
-> that big a
-> deal, the solution we are looking for instead is what the TODO
-> comment says: be
-> able to derive a Display implementation (for enums).
->=20
-> Now that we have syn in the kernel, this seems quite straight forward
-> to
-> implement. Are you interested in working on this instead?
->=20
-Definitely!
+Hi Timur,
 
-The Display implementation should print the enum value as it is,
-without changing the case, correct?
+kernel test robot noticed the following build errors:
 
-I will have a look into that and send a new patch set in the next few
-days.
+[auto build test ERROR on 7acc70476f14661149774ab88d3fe23d83ba4249]
 
-> Thanks,
-> Danilo
+url:    https://github.com/intel-lab-lkp/linux/commits/Timur-Tabi/gpu-nova-core-rename-Imem-to-ImemSecure/20260103-130228
+base:   7acc70476f14661149774ab88d3fe23d83ba4249
+patch link:    https://lore.kernel.org/r/20260103045934.64521-12-ttabi%40nvidia.com
+patch subject: [PATCH v5 11/11] gpu: nova-core: add PIO support for loading firmware images
+config: x86_64-rhel-9.4-rust (https://download.01.org/0day-ci/archive/20260103/202601031330.EOufCyjz-lkp@intel.com/config)
+compiler: clang version 20.1.8 (https://github.com/llvm/llvm-project 87f0227cb60147a26a1eeb4fb06e3b505e9c7261)
+rustc: rustc 1.88.0 (6b00bc388 2025-06-23)
+reproduce (this is a W=1 build): (https://download.01.org/0day-ci/archive/20260103/202601031330.EOufCyjz-lkp@intel.com/reproduce)
+
+If you fix the issue in a separate patch/commit (i.e. not just a new version of
+the same patch/commit), kindly add following tags
+| Reported-by: kernel test robot <lkp@intel.com>
+| Closes: https://lore.kernel.org/oe-kbuild-all/202601031330.EOufCyjz-lkp@intel.com/
+
+All errors (new ones prefixed by >>):
+
+   PATH=/opt/cross/clang-20/bin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
+   INFO PATH=/opt/cross/rustc-1.88.0-bindgen-0.72.1/cargo/bin:/opt/cross/clang-20/bin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
+   /usr/bin/timeout -k 100 12h /usr/bin/make KCFLAGS= -fno-crash-diagnostics -Wno-error=return-type -Wreturn-type -funsigned-char -Wundef W=1 --keep-going LLVM=1 -j32 -C source O=/kbuild/obj/consumer/x86_64-rhel-9.4-rust ARCH=x86_64 SHELL=/bin/bash rustfmtcheck
+   make: Entering directory '/kbuild/src/consumer'
+   make[1]: Entering directory '/kbuild/obj/consumer/x86_64-rhel-9.4-rust'
+>> Diff in drivers/gpu/nova-core/falcon/hal/ga102.rs:13:
+    use crate::{
+        driver::Bar0,
+        falcon::{
+   +        hal::LoadMethod,
+            Falcon,
+            FalconBromParams,
+            FalconEngine,
+   Diff in drivers/gpu/nova-core/falcon/hal/ga102.rs:19:
+            FalconModSelAlgo,
+   -        hal::LoadMethod,
+            PeregrineCoreSelect, //
+        },
+        regs,
+>> Diff in drivers/gpu/nova-core/falcon/hal/tu102.rs:12:
+    use crate::{
+        driver::Bar0,
+        falcon::{
+   +        hal::LoadMethod, //
+            Falcon,
+            FalconBromParams,
+            FalconEngine,
+   Diff in drivers/gpu/nova-core/falcon/hal/tu102.rs:18:
+   -        hal::LoadMethod, //
+        },
+        regs, //
+    };
+   Diff in drivers/gpu/nova-core/falcon.rs:674:
+    
+        /// Perform a DMA load into `IMEM` and `DMEM` of `fw`, and prepare the falcon to run it.
+        pub(crate) fn dma_load<F: FalconFirmware<Target = E>>(&self, bar: &Bar0, fw: &F) -> Result {
+   -
+            // The Non-Secure section only exists on firmware used by Turing and GA100, and
+            // those platforms do not use DMA.
+            if fw.imem_ns_load_params().is_some() {
+>> Diff in drivers/gpu/nova-core/firmware/fwsec.rs:516:
+            // console error message on other platforms, only try to load it if it's
+            // supposed to be there.
+            let gbl_fw = if chipset < Chipset::GA102 {
+   -            Some(super::request_firmware(dev, chipset, "gen_bootloader", FIRMWARE_VERSION)?)
+   +            Some(super::request_firmware(
+   +                dev,
+   +                chipset,
+   +                "gen_bootloader",
+   +                FIRMWARE_VERSION,
+   +            )?)
+            } else {
+                None
+            };
+>> Diff in drivers/gpu/nova-core/firmware/fwsec.rs:516:
+            // console error message on other platforms, only try to load it if it's
+            // supposed to be there.
+            let gbl_fw = if chipset < Chipset::GA102 {
+   -            Some(super::request_firmware(dev, chipset, "gen_bootloader", FIRMWARE_VERSION)?)
+   +            Some(super::request_firmware(
+   +                dev,
+   +                chipset,
+   +                "gen_bootloader",
+   +                FIRMWARE_VERSION,
+   +            )?)
+            } else {
+                None
+            };
+>> Diff in drivers/gpu/nova-core/falcon/hal/ga102.rs:13:
+    use crate::{
+        driver::Bar0,
+        falcon::{
+   +        hal::LoadMethod,
+            Falcon,
+            FalconBromParams,
+            FalconEngine,
+   Diff in drivers/gpu/nova-core/falcon/hal/ga102.rs:19:
+            FalconModSelAlgo,
+   -        hal::LoadMethod,
+            PeregrineCoreSelect, //
+        },
+        regs,
+>> Diff in drivers/gpu/nova-core/falcon/hal/tu102.rs:12:
+    use crate::{
+        driver::Bar0,
+        falcon::{
+   +        hal::LoadMethod, //
+            Falcon,
+            FalconBromParams,
+            FalconEngine,
+   Diff in drivers/gpu/nova-core/falcon/hal/tu102.rs:18:
+   -        hal::LoadMethod, //
+        },
+        regs, //
+    };
+   Diff in drivers/gpu/nova-core/falcon.rs:674:
+    
+        /// Perform a DMA load into `IMEM` and `DMEM` of `fw`, and prepare the falcon to run it.
+        pub(crate) fn dma_load<F: FalconFirmware<Target = E>>(&self, bar: &Bar0, fw: &F) -> Result {
+   -
+            // The Non-Secure section only exists on firmware used by Turing and GA100, and
+            // those platforms do not use DMA.
+            if fw.imem_ns_load_params().is_some() {
+>> Diff in drivers/gpu/nova-core/firmware/fwsec.rs:516:
+            // console error message on other platforms, only try to load it if it's
+            // supposed to be there.
+            let gbl_fw = if chipset < Chipset::GA102 {
+   -            Some(super::request_firmware(dev, chipset, "gen_bootloader", FIRMWARE_VERSION)?)
+   +            Some(super::request_firmware(
+   +                dev,
+   +                chipset,
+   +                "gen_bootloader",
+   +                FIRMWARE_VERSION,
+   +            )?)
+            } else {
+                None
+            };
+>> Diff in drivers/gpu/nova-core/falcon/hal/ga102.rs:13:
+    use crate::{
+        driver::Bar0,
+        falcon::{
+   +        hal::LoadMethod,
+            Falcon,
+            FalconBromParams,
+            FalconEngine,
+   Diff in drivers/gpu/nova-core/falcon/hal/ga102.rs:19:
+            FalconModSelAlgo,
+   -        hal::LoadMethod,
+            PeregrineCoreSelect, //
+        },
+        regs,
+>> Diff in drivers/gpu/nova-core/falcon/hal/tu102.rs:12:
+    use crate::{
+        driver::Bar0,
+        falcon::{
+   +        hal::LoadMethod, //
+            Falcon,
+            FalconBromParams,
+            FalconEngine,
+   Diff in drivers/gpu/nova-core/falcon/hal/tu102.rs:18:
+   -        hal::LoadMethod, //
+        },
+        regs, //
+    };
+>> Diff in drivers/gpu/nova-core/falcon/hal/ga102.rs:13:
+    use crate::{
+        driver::Bar0,
+        falcon::{
+   +        hal::LoadMethod,
+            Falcon,
+            FalconBromParams,
+            FalconEngine,
+   Diff in drivers/gpu/nova-core/falcon/hal/ga102.rs:19:
+            FalconModSelAlgo,
+   -        hal::LoadMethod,
+            PeregrineCoreSelect, //
+        },
+        regs,
+>> Diff in drivers/gpu/nova-core/falcon/hal/tu102.rs:12:
+    use crate::{
+        driver::Bar0,
+        falcon::{
+   +        hal::LoadMethod, //
+            Falcon,
+            FalconBromParams,
+            FalconEngine,
+   Diff in drivers/gpu/nova-core/falcon/hal/tu102.rs:18:
+   -        hal::LoadMethod, //
+        },
+        regs, //
+    };
+   make[2]: *** [Makefile:1871: rustfmt] Error 123
+   make[2]: Target 'rustfmtcheck' not remade because of errors.
+   make[1]: Leaving directory '/kbuild/obj/consumer/x86_64-rhel-9.4-rust'
+   make[1]: *** [Makefile:248: __sub-make] Error 2
+   make[1]: Target 'rustfmtcheck' not remade because of errors.
+   make: *** [Makefile:248: __sub-make] Error 2
+   make: Target 'rustfmtcheck' not remade because of errors.
+   make: Leaving directory '/kbuild/src/consumer'
+
+-- 
+0-DAY CI Kernel Test Service
+https://github.com/intel/lkp-tests/wiki
