@@ -2,124 +2,102 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id 7632ACF424E
-	for <lists+nouveau@lfdr.de>; Mon, 05 Jan 2026 15:35:51 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id A0A65CF431D
+	for <lists+nouveau@lfdr.de>; Mon, 05 Jan 2026 15:43:02 +0100 (CET)
 Received: from kara.freedesktop.org (unknown [131.252.210.166])
-	by gabe.freedesktop.org (Postfix) with ESMTPS id 8B5A810E40E;
-	Mon,  5 Jan 2026 14:35:49 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTPS id EEC4D10E41C;
+	Mon,  5 Jan 2026 14:43:00 +0000 (UTC)
 Authentication-Results: gabe.freedesktop.org;
-	dkim=pass (1024-bit key; unprotected) header.d=joelfernandes.org header.i=@joelfernandes.org header.b="Q8wARWtG";
+	dkim=fail reason="signature verification failed" (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="tqZuT1CF";
 	dkim-atps=neutral
 Received: from kara.freedesktop.org (localhost [127.0.0.1])
-	by kara.freedesktop.org (Postfix) with ESMTP id 6AB1A44C95;
-	Mon,  5 Jan 2026 14:27:38 +0000 (UTC)
+	by kara.freedesktop.org (Postfix) with ESMTP id CBB2744C99;
+	Mon,  5 Jan 2026 14:34:49 +0000 (UTC)
 ARC-Seal: i=1; cv=none; a=rsa-sha256; d=lists.freedesktop.org;
- s=20240201; t=1767623258;
- b=PZnv/TjN9HTYNFuWgkR/LtdjaMKu+o/ijhHu73a1V2M8Aa2hgEB28LOlNnehWjCwkbuG/
- 10G2syAbx20dlMmX3YiGvFgz6MOJVefYQrUTN2z9Wb+OaqWQvbHBotUOatht/5ee9gh5u4y
- EpXV6APqkokCzDRvTN5iZUOV0aiaeXk50TNCUFub4TorLSmmARgONafeCnYsXEERI4XBK6X
- jnurQb+u1ZcLs2s0BN6aQDdi8dLPq1NPOS+iLArZbEpC5OCCBcgNCXxoPm9QEBZZHzfMGHU
- RsMbKPALNH+8Kb4lSKfvaxCZ34pTB9uA2VvpI0ATycNQLWzyzCL5/lZtufJw==
+ s=20240201; t=1767623689;
+ b=J2ArE363+F65JI9kF4b+FR3NFGJrWaGqm6Up1Aje4+1GWCDMdtZ+5xwUh40dx9jlP1kj7
+ 6Om+f33hLtIqrxpuFGWYmzOS8sLYnZWMdgC3FqEczo3yJ5fY0mQICrk++IjDYuw2Gk+trum
+ ROPc2V5gJltYHk6YiEvTMuZeyLU7zXz0NpiUiBTosvyM2cNWIBueGgJzllJH2uav3FWRx8V
+ 48+0q+H9845KlGmWdwqVo5CRlzFiQj3LsnC5xsb4aX0GFPpzReLpZdVZXt1lF1FEx7kPz0Q
+ TDUL+B9/FwrZN3OK0JV/9ELulCKii8yeJ1cAWpVmdc4oxWyE98dp7UhkSh9w==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed;
- d=lists.freedesktop.org; s=20240201; t=1767623258; h=from : sender :
+ d=lists.freedesktop.org; s=20240201; t=1767623689; h=from : sender :
  reply-to : subject : date : message-id : to : cc : mime-version :
  content-type : content-transfer-encoding : content-id :
  content-description : resent-date : resent-from : resent-sender :
  resent-to : resent-cc : resent-message-id : in-reply-to : references :
  list-id : list-help : list-unsubscribe : list-subscribe : list-post :
  list-owner : list-archive;
- bh=XCOUHvaAPVBQlsZFB5UXzqWiXysSXr09nQwBmvYSu6k=;
- b=dNnr/KDh44gM/n48ATK152Q6O2Rhc+VZP5UoM2pKvptUmDA7m3Q3jgzGNCjs2++Ljj1Ok
- l1TgDcTnT7Dpk3CVqr2uppuA7MfRb0B2ZX0/A5u2QVoUNDXiEPUKdExD4+7Wt9GUMRvemZ9
- ESZNrEDf8C9AXgEiC7i7jjMYnGrDLsmK19qyhAVWjC1aIjLlOVLImJqkh48jo59Z9IwJt8e
- wFyM/rcvNIbNK8pxjluMgdOjx+6CVde9axEvoQ3Yt7VPc3XVweHGQT0bBLj1N/5HfMxEQZ6
- ImRXWaa7fK/n87Ix50zF13DUG6hUeKUoraxNWZ4uxi2txwmaCaGM1vrqnAsg==
+ bh=IXdf0LXlC7LLmtOw3gD/Pm84JhncF0jbKrKJRTeRT5Q=;
+ b=SmvJ2Lo/HGUlnqBUr4DxsTGNLzwZKcFE6LqIiSxWJV0TyjQrIMBgZDStKNbPeceEB18v7
+ ixdqJTxsY137Hu4dm/Ican3UFtlMKIi5W6eJF9dZd/65wiagWACDLqqDXjwWIQvDODdTIRh
+ vlN74xPYRkfh7aZhaVeJVYt3mYR8cr+14vIdP/8toZMyIok4kEEAJpzesehKufMGvRMhviq
+ po7kgo+iFekkm6NhcgLc4lE6MfEGwasCw4tTc62s0qEKCuJPTOcVy4a5RB24Wm3aBSSDUeb
+ /EQ6Aw/gJTe5kjYJ+qgGxSGISG9MF4uj8rulyvKsGaMTOQp79L0vchVHx3uQ==
 ARC-Authentication-Results: i=1; mail.freedesktop.org;
- dkim=fail header.d=joelfernandes.org;
+ dkim=pass header.d=kernel.org;
   arc=none (Message is not ARC signed);
-  dmarc=none
-Authentication-Results: mail.freedesktop.org;
- dkim=fail header.d=joelfernandes.org; arc=none (Message is not ARC signed);
- dmarc=none
+  dmarc=pass (Used From Domain Record) header.from=kernel.org
+ policy.dmarc=quarantine
+Authentication-Results: mail.freedesktop.org; dkim=pass header.d=kernel.org;
+ arc=none (Message is not ARC signed);
+ dmarc=pass (Used From Domain Record) header.from=kernel.org
+ policy.dmarc=quarantine
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by kara.freedesktop.org (Postfix) with ESMTPS id 2437C446B8
-	for <nouveau@lists.freedesktop.org>; Mon,  5 Jan 2026 00:22:49 +0000 (UTC)
-Received: from mail-pg1-f176.google.com (mail-pg1-f176.google.com
- [209.85.215.176])
-	by gabe.freedesktop.org (Postfix) with ESMTPS id 8837C10E0A8
-	for <nouveau@lists.freedesktop.org>; Mon,  5 Jan 2026 00:30:58 +0000 (UTC)
-Received: by mail-pg1-f176.google.com with SMTP id
- 41be03b00d2f7-b553412a19bso12795999a12.1
-        for <nouveau@lists.freedesktop.org>;
- Sun, 04 Jan 2026 16:30:58 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=joelfernandes.org; s=google; t=1767573058; x=1768177858;
- darn=lists.freedesktop.org;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:from:to:cc:subject:date:message-id:reply-to;
-        bh=XCOUHvaAPVBQlsZFB5UXzqWiXysSXr09nQwBmvYSu6k=;
-        b=Q8wARWtGi6F0FJKKLduVpOgVDI+DE5GpcjDzaE2xitGeeWeuzSEreWxfRLgeepzwKu
-         ncBDuneW7E1hB5OPxXZFMgJ5mKJJWH1C64aWRLM//XZGJO0sMT5/8zEtvCzT24eD7aqE
-         S9Rf0FobHEVIq2wyu/asgAANMg69JY2uNnpsk=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1767573058; x=1768177858;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=XCOUHvaAPVBQlsZFB5UXzqWiXysSXr09nQwBmvYSu6k=;
-        b=TBkKvTLDAF5wBDwE0pEasPQWn9FKbyF20GgoGZ5AAc8Pcri20Y6oVM/iwJXHEKoamu
-         SZG0TZCLBUwK2XgCfwM+MgzJ/B99ut7lfPAbGmextGcrh6zOMO8AR49AhvBr+bq/2a85
-         9OLrO58Hq59Lev0eKum6lV23yqNMTCFSc79RBMIIAhBgyM7E7GF2hV8JEW6Y+s4kOJMA
-         dC9dd3ga+AGre/HYEG4F8ac3xF5lsGV61EBg43Hwt8vsvhPleKI5erhG77Uvr2Xpfqqh
-         oOgcigX1znYCdMNsYi+t+4CvJPIAMyU7yujx0ZytSdv3s5tqECp/j4CfHfKuNRT5PRYK
-         72CQ==
-X-Forwarded-Encrypted: i=1;
- AJvYcCWNTw/LJCr32l+w/VWURCz4hSM56EBSQKzkiMLaOtDHtwsZUKUWxl4YcpKJ2VqridM2n1dozDc2@lists.freedesktop.org
-X-Gm-Message-State: AOJu0YydvuffHRUuNR38icPrZu+zBv5boopTwfeFppOLPc/he9KlK+vD
-	jIiJ48H//cMCz3CuAzAsu8ihxBIPvn1RuQbscC4VLazoVd3FEiijx3hr0bEdKbhmwuc=
-X-Gm-Gg: AY/fxX7q7wVbJU+H7ugSSeBg3BuhS5Oc+gUpbRAhKM2TX4bPhG0xNjLjPlagAj/F5vV
-	IoMndUVagPgVsc+PWNsQltuwYZcc21SZzANkR4X5phBwtlFCsaM2jv9C7Yq+27qe4oweRPV0yCQ
-	M5JB3U9YU5gwnMEPrt8g3GdHgZ1KIxnJi+6zyVF3tufecApR0DcwR8aF1F2JtSxaNDjtNHw09Lk
-	h+kp2fSqCpqgfFp3aaDNYchRnrk4v2Xl8h2rb9iIC2yURwbrEKRcGnKymhCQZ48G7WcaRd5G6KW
-	mpgRnDG8lExZXrfqi2Zqx4yVfkd5h8vrNtWPsa67Fe18GzA+guStdmTMyQnkyI0OT65wmQLzenD
-	PzF3zVP0lkfCHoGRlzp0knODVDsDC/BXuwkzbpv+eNHBhutDh9bislIoVgC6EzFYu42cKSDDt3f
-	EjIKUOPktJ
-X-Google-Smtp-Source: 
- AGHT+IE9449FQ7FOHazIKXgDJtnuRLaIjG3nv4UMuI5rLRSQ8cHnSvTHqKM2sCHKw//28dbTJ7gQJA==
-X-Received: by 2002:a05:7300:fb0f:b0:2b0:5b8f:1c5a with SMTP id
- 5a478bee46e88-2b05eca8ba2mr37694992eec.31.1767573057787;
-        Sun, 04 Jan 2026 16:30:57 -0800 (PST)
-Received: from localhost ([71.219.3.177])
-        by smtp.gmail.com with ESMTPSA id
- 5a478bee46e88-2b140c42d9esm9551321eec.11.2026.01.04.16.30.56
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Sun, 04 Jan 2026 16:30:57 -0800 (PST)
-From: Joel Fernandes <joel@joelfernandes.org>
-To: linux-kernel@vger.kernel.org
-Subject: [PATCH] MAINTAINERS: Update email address for Joel Fernandes
-Date: Sun,  4 Jan 2026 19:30:51 -0500
-Message-Id: <20260105003051.122076-1-joel@joelfernandes.org>
-X-Mailer: git-send-email 2.34.1
-MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-X-MailFrom: joel@joelfernandes.org
-X-Mailman-Rule-Hits: nonmember-moderation
+	by kara.freedesktop.org (Postfix) with ESMTPS id 175E4404B1
+	for <nouveau@lists.freedesktop.org>; Mon,  5 Jan 2026 14:34:46 +0000 (UTC)
+Received: from tor.source.kernel.org (tor.source.kernel.org [172.105.4.254])
+	by gabe.freedesktop.org (Postfix) with ESMTPS id E4D5910E284;
+	Mon,  5 Jan 2026 14:42:56 +0000 (UTC)
+Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
+	by tor.source.kernel.org (Postfix) with ESMTP id 2C59860010;
+	Mon,  5 Jan 2026 14:42:56 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id B3D77C116D0;
+	Mon,  5 Jan 2026 14:42:52 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+	s=k20201202; t=1767624175;
+	bh=6+8f2BT3Z4bZnc2ROvMYTb+LPX7mFTDLfErvycYF72o=;
+	h=Date:To:Cc:Subject:From:References:In-Reply-To:From;
+	b=tqZuT1CFfHbPqkdofgWoAvVTM9Y9mwz2Manjn2sjc5klHUPgD5zKtW9tepNdXObTE
+	 lj5zcF5jCiAY/gFx+xhfP4EfRXuo8tYtKXcYtKr0aOx+zh9LPGRtyeJ5mdC0JEpWz+
+	 OnO4sXQINU+07aXMSjgNxUGDU/yfqxNLMlWwPLcSUPhqGp5QTOa70m6yfyU1FgB5V3
+	 KXminCeHSMOsPzTS8IHAqbTDk4lZ2fnffQXsWLhCpmfmedeywpDSIiJRbIM92aBPf9
+	 7EMb+2QjfFZ7HpifIJIOAR+aDgiZpQsB3yWCxvnpRGmcFZI4YPm9OjhxKK07LKMglq
+	 CWICg+IlM1R4g==
+Mime-Version: 1.0
+Content-Transfer-Encoding: quoted-printable
+Content-Type: text/plain; charset=UTF-8
+Date: Mon, 05 Jan 2026 15:42:50 +0100
+Message-Id: <DFGQH1FOS007.3IG8XIBOBWTZI@kernel.org>
+To: "Danilo Krummrich" <dakr@kernel.org>
+Subject: Re: [PATCH v2 1/2] rust: macros: Add derive Display for enums
+From: "Benno Lossin" <lossin@kernel.org>
+X-Mailer: aerc 0.21.0
+References: <20260104200733.190494-1-mhi@mailbox.org>
+ <20260104200733.190494-2-mhi@mailbox.org>
+ <DFGJ8UBULO54.NRW84R2DTHIK@kernel.org>
+ <DFGL2QTNH7FE.93EN71L7BXFM@kernel.org>
+In-Reply-To: <DFGL2QTNH7FE.93EN71L7BXFM@kernel.org>
+Message-ID-Hash: KO2TD5SU46IJEDE5NBKT2WRZX4Y63CS4
+X-Message-ID-Hash: KO2TD5SU46IJEDE5NBKT2WRZX4Y63CS4
+X-MailFrom: lossin@kernel.org
 X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency;
- loop; banned-address; member-moderation
-Message-ID-Hash: OJH3KAJU2FF7VZ5R247UXDRY2RHUCLRI
-X-Message-ID-Hash: OJH3KAJU2FF7VZ5R247UXDRY2RHUCLRI
-X-Mailman-Approved-At: Mon, 05 Jan 2026 14:27:35 +0000
-CC: rcu@vger.kernel.org, rust-for-linux <rust-for-linux@vger.kernel.org>,
- "nouveau @ lists . freedesktop . org" <nouveau@lists.freedesktop.org>,
- Boqun Feng <boqun.feng@gmail.com>, "Paul E . McKenney" <paulmck@kernel.org>,
- Joel Fernandes <joel@joelfernandes.org>
+ loop; banned-address; member-moderation; nonmember-moderation; administrivia;
+ implicit-dest; max-recipients; max-size; news-moderation; no-subject;
+ digests; suspicious-header
+CC: Maurice Hieronymus <mhi@mailbox.org>, aliceryhl@google.com,
+ acourbot@nvidia.com, simona@ffwll.ch, nouveau@lists.freedesktop.org,
+ dri-devel@lists.freedesktop.org, linux-kernel@vger.kernel.org,
+ ojeda@kernel.org, boqun.feng@gmail.com, gary@garyguo.net,
+ bjorn3_gh@protonmail.com, a.hindborg@kernel.org, tmgross@umich.edu,
+ rust-for-linux@vger.kernel.org
 X-Mailman-Version: 3.3.8
 Precedence: list
 List-Id: Nouveau development list <nouveau.lists.freedesktop.org>
 Archived-At: 
- <https://lists.freedesktop.org/hyperkitty/list/nouveau@lists.freedesktop.org/message/OJH3KAJU2FF7VZ5R247UXDRY2RHUCLRI/>
+ <https://lists.freedesktop.org/hyperkitty/list/nouveau@lists.freedesktop.org/message/KO2TD5SU46IJEDE5NBKT2WRZX4Y63CS4/>
 Archived-At: 
- <https://lore.freedesktop.org/20260105003051.122076-1-joel@joelfernandes.org/>
+ <https://lore.freedesktop.org/DFGQH1FOS007.3IG8XIBOBWTZI@kernel.org/>
 List-Archive: 
  <https://lists.freedesktop.org/hyperkitty/list/nouveau@lists.freedesktop.org/>
 List-Archive: <https://lore.freedesktop.org/nouveau>
@@ -129,53 +107,59 @@ List-Post: <mailto:nouveau@lists.freedesktop.org>
 List-Subscribe: <mailto:nouveau-join@lists.freedesktop.org>
 List-Unsubscribe: <mailto:nouveau-leave@lists.freedesktop.org>
 
-From: Joel Fernandes (NVIDIA) <joel@joelfernandes.org>
+On Mon Jan 5, 2026 at 11:29 AM CET, Danilo Krummrich wrote:
+> On Mon Jan 5, 2026 at 10:02 AM CET, Benno Lossin wrote:
+>> On Sun Jan 4, 2026 at 9:07 PM CET, Maurice Hieronymus wrote:
+>>> Add a derive macro that implements kernel::fmt::Display for enums.
+>>> The macro outputs the exact variant name as written, preserving case.
+>>>
+>>> This supports all enum variant types: unit, tuple, and struct variants.
+>>> For variants with data, only the variant name is displayed.
+>>
+>> I don't think we should be adding this. Display is designed for
+>> user-facing output and so it should always be carefully designed and no
+>> automation should exist for it.
+>
+> In general I agree, but simple stringification of an enum variant for a D=
+isplay
+> implementation is a very common use-case and it seems pretty unfortunate =
+to have
+> to fall back to either do the below (especially if there are a lot of enu=
+m
+> variants) or having to go the declarative path of doing something as in [=
+1].
+>
+> Especially in combination with things like FromPrimitive and ToPrimitive =
+it gets
+> us rid of the cases where we need such declarative macro mess.
+>
+> Eventually, drivers will most likely implement their own proc macro for t=
+his or
+> repeat the declarative macro pattern over and over again.
 
-Update my email address from joelagnelf@nvidia.com to joel@joelfernandes.org,
-which I will be using for community email going forward.
+When the definition already uses declarative macros, adding the Display
+impl there is the correct way to do it IMO. If it is just a normal
+definition, then a match is annoying when you have many variants.
 
-Signed-off-by: Joel Fernandes (NVIDIA) <joel@joelfernandes.org>
----
-Boqun, could we take it through the RCU tree for 7.0? Thanks!
+> Maybe we should just pick a more specific name for such a derive macro th=
+an
+> macros::Display.
+>
+> Maybe something along the lines of macros::EnumVariantDisplay? We could a=
+lso
+> have an optional argument indicating whether it should be converted to lo=
+wer /
+> upper case.
 
- .mailmap    | 1 +
- MAINTAINERS | 4 ++--
- 2 files changed, 3 insertions(+), 2 deletions(-)
+I'm still skeptical about having a derive macro for `Display`. What
+about adding & deriving the following trait instead:
 
-diff --git a/.mailmap b/.mailmap
-index 84309a39d329..279f8fb223e2 100644
---- a/.mailmap
-+++ b/.mailmap
-@@ -389,6 +389,7 @@ Jiri Slaby <jirislaby@kernel.org> <xslaby@fi.muni.cz>
- Jisheng Zhang <jszhang@kernel.org> <jszhang@marvell.com>
- Jisheng Zhang <jszhang@kernel.org> <Jisheng.Zhang@synaptics.com>
- Jishnu Prakash <quic_jprakash@quicinc.com> <jprakash@codeaurora.org>
-+Joel Fernandes <joel@joelfernandes.org> <joelagnelf@nvidia.com>
- Joel Granados <joel.granados@kernel.org> <j.granados@samsung.com>
- Johan Hovold <johan@kernel.org> <jhovold@gmail.com>
- Johan Hovold <johan@kernel.org> <johan@hovoldconsulting.com>
-diff --git a/MAINTAINERS b/MAINTAINERS
-index 12f49de7fe03..43bbf12e2c80 100644
---- a/MAINTAINERS
-+++ b/MAINTAINERS
-@@ -14558,7 +14558,7 @@ M:	Luc Maranget <luc.maranget@inria.fr>
- M:	"Paul E. McKenney" <paulmck@kernel.org>
- R:	Akira Yokosawa <akiyks@gmail.com>
- R:	Daniel Lustig <dlustig@nvidia.com>
--R:	Joel Fernandes <joelagnelf@nvidia.com>
-+R:	Joel Fernandes (NVIDIA) <joel@joelfernandes.org>
- L:	linux-kernel@vger.kernel.org
- L:	linux-arch@vger.kernel.org
- L:	lkmm@lists.linux.dev
-@@ -21895,7 +21895,7 @@ READ-COPY UPDATE (RCU)
- M:	"Paul E. McKenney" <paulmck@kernel.org>
- M:	Frederic Weisbecker <frederic@kernel.org> (kernel/rcu/tree_nocb.h)
- M:	Neeraj Upadhyay <neeraj.upadhyay@kernel.org> (kernel/rcu/tasks.h)
--M:	Joel Fernandes <joelagnelf@nvidia.com>
-+M:	Joel Fernandes (NVIDIA) <joel@joelfernandes.org>
- M:	Josh Triplett <josh@joshtriplett.org>
- M:	Boqun Feng <boqun.feng@gmail.com>
- M:	Uladzislau Rezki <urezki@gmail.com>
--- 
-2.34.1
+    pub trait EnumVariantName {
+        fn variant_name(&self) -> &'static str;
+    }
 
+To print this, you of course need to call the function, but it is much
+more self-descriptive than printing the `Chipset` directly.
+
+Cheers,
+Benno
