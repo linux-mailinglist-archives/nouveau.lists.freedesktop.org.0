@@ -2,193 +2,124 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id A461DCF498C
-	for <lists+nouveau@lfdr.de>; Mon, 05 Jan 2026 17:11:20 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 4BC8FCF59E8
+	for <lists+nouveau@lfdr.de>; Mon, 05 Jan 2026 22:11:58 +0100 (CET)
 Received: from kara.freedesktop.org (unknown [131.252.210.166])
-	by gabe.freedesktop.org (Postfix) with ESMTPS id 8424A10E4A2;
-	Mon,  5 Jan 2026 16:11:19 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTPS id 78F4810E460;
+	Mon,  5 Jan 2026 21:11:54 +0000 (UTC)
 Authentication-Results: gabe.freedesktop.org;
-	dkim=pass (1024-bit key; unprotected) header.d=garyguo.net header.i=@garyguo.net header.b="JOcwwgMA";
+	dkim=fail reason="signature verification failed" (2048-bit key; secure) header.d=mailbox.org header.i=@mailbox.org header.b="tefjr99v";
+	dkim=fail reason="signature verification failed" (2048-bit key) header.d=mailbox.org header.i=@mailbox.org header.b="q0o2Nukg";
 	dkim-atps=neutral
 Received: from kara.freedesktop.org (localhost [127.0.0.1])
-	by kara.freedesktop.org (Postfix) with ESMTP id 4135544C99;
-	Mon,  5 Jan 2026 16:03:08 +0000 (UTC)
-ARC-Seal: i=2; cv=pass; a=rsa-sha256; d=lists.freedesktop.org;
- s=20240201; t=1767628988;
- b=C9Tqi4mPPoJIhAw0r7RpFGuQLKufzSlBAKkEUItkh0rpYL0uo5vf3DMgudpZz2GfUtSGR
- FiI3AoFQulSuTUlXjBMmzzZl02k8lcl6GQ9Ua13srNxDIz9Esk0Q3e7indIuv8MzZqWR17y
- eOcH/Hh9J0WZrDp8FtmfWM2mkJulMf8sCSCjRnSLx1GwLVCHLngtJwHictPMyjR4ygz6t9V
- g3i/uIu7mFmBebgdU3QC6qkdSmcE5i4+aYgGltw0XFwO+83DKK6/cS6TdHiU73NR689kzaL
- VOhe20nyCr9PFH8xJndZfhtm+gJgYLbQWm5vLP+caSsenzRioizQFrELY7zQ==
-ARC-Message-Signature: i=2; a=rsa-sha256; c=relaxed/relaxed;
- d=lists.freedesktop.org; s=20240201; t=1767628988; h=from : sender :
+	by kara.freedesktop.org (Postfix) with ESMTP id B5B2B44C9B;
+	Mon,  5 Jan 2026 21:03:42 +0000 (UTC)
+ARC-Seal: i=1; cv=none; a=rsa-sha256; d=lists.freedesktop.org;
+ s=20240201; t=1767647022;
+ b=kzOOdQpGx4uooRBGozkopkHokz83Fze9ly+DHYthvImyVpmTzzZ2BeyD5oibODICfFFS5
+ m3AJLqtHAg2FW9Vd/lPjDveLqP8ijYRnoI7zYVdZZ7Bun5S61vxKV68txgg/sM8rsNJOsjK
+ c8wtiqc2YwpytXOo5cWaLICk7KG0yXIHsZr/pUHtrDWZ+owwWtJo8i/GN9yBnw8jzT7LlIG
+ BtLb/HFIImkf613KQfKr22sFWhnH0IwbEYw8j4ix3M0fe7BM1vr0PZhHENxeGp8Q1sOnaCa
+ 4njoWC5JeFIOMguYKrkSlFzxY9wFuW3CpQeZ70bINnKNhmA6XBuqMTj16iVg==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=lists.freedesktop.org; s=20240201; t=1767647022; h=from : sender :
  reply-to : subject : date : message-id : to : cc : mime-version :
  content-type : content-transfer-encoding : content-id :
  content-description : resent-date : resent-from : resent-sender :
  resent-to : resent-cc : resent-message-id : in-reply-to : references :
  list-id : list-help : list-unsubscribe : list-subscribe : list-post :
  list-owner : list-archive;
- bh=jpiTEAo/Wv4ppl4Rxv/TGckRIp+5dSDliQlERHSmGsI=;
- b=RXFXJDbbss+1hgzGPs7mJmCdVeXF3r6zPALGzeYGefWo69wETdWfc6F51xVD7bnQoQ3k+
- RMRwVZZ9W/5A2/BX/mFLlWbRbzc3UHOc0vLpHAuI5ppXoUIri/c2wFIwQWm9WTu5xZUyME6
- lv3g6EK3xkFD7vg7OCbyY35e1miTcuUrrC5Z2PxyixLgMYUiD/l9gezoyHi3JJj2f0bAbHF
- nCSsO+ryw6uGb71UNKl5DDqRJqiaYdCCzQYyNCBPLBB7ovu7xZxSn6s7fgHVjT213DQf3yV
- UUsWlhxf8TbLtJnSW1EwqHXDgwnK3yaVEh2v9VHTkEfPpyaur8G8qnFMUsTg==
-ARC-Authentication-Results: i=2; mail.freedesktop.org;
- dkim=pass header.d=garyguo.net;
-  arc=pass;
-  dmarc=pass (Used From Domain Record) header.from=garyguo.net
- policy.dmarc=none
-Authentication-Results: mail.freedesktop.org; dkim=pass header.d=garyguo.net;
- arc=pass;
- dmarc=pass (Used From Domain Record) header.from=garyguo.net policy.dmarc=none
+ bh=2HI5WpvrjxWjcJrI6UBSQlk6VzP6z9tGQtFytnWsSSk=;
+ b=HapXrGnjZ/7JTEV3SbgdVUbReluitvpMFnUUdElZ5BMF+pWxfhgth5rsQpnDb9UiHUJce
+ rGh+03rlUEMAEtRIqK3nn0riIG9yPWS9hk15mLDJ9TUJwvD7/LtVMOygzWkEGS7mORzoXPf
+ b/5XJsz1wXUSGDUezJ0JLkYetqgMvmAkvIQGBi8VWhfE76YeO7tqptD8XcY+gIy/yU73VQe
+ z24FVmsrhUuHLrTCHWHr7EJSDxJggVr92i6lNcA6oW0QRGyR8FwEXvIO3BM0TpFWZBobMs3
+ Dyzlt9RhXjOn7bdprGT/+0pU+32o29gBD0cNLx9slfdJigFRHn0fPBXrj3Sg==
+ARC-Authentication-Results: i=1; mail.freedesktop.org;
+ dkim=pass header.d=mailbox.org;
+  arc=none (Message is not ARC signed);
+  dmarc=pass (Used From Domain Record) header.from=mailbox.org
+ policy.dmarc=reject
+Authentication-Results: mail.freedesktop.org; dkim=pass header.d=mailbox.org;
+ arc=none (Message is not ARC signed);
+ dmarc=pass (Used From Domain Record) header.from=mailbox.org
+ policy.dmarc=reject
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by kara.freedesktop.org (Postfix) with ESMTPS id E69B544C96
-	for <nouveau@lists.freedesktop.org>; Mon,  5 Jan 2026 16:03:04 +0000 (UTC)
-Received: from CWXP265CU010.outbound.protection.outlook.com
- (mail-ukwestazon11022141.outbound.protection.outlook.com [52.101.101.141])
-	by gabe.freedesktop.org (Postfix) with ESMTPS id B239410E14A;
-	Mon,  5 Jan 2026 16:11:15 +0000 (UTC)
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=S+z+pSWA6WFVbfFonj02y+ect/QAS3SEv/OeoRYTRvlnfNtanxpJxftf7xJ2+G2WS+OMnbKOXeiLx2YonIzT6arbHHEy7p/5Org99mUqgw5ziKcrx7jYC/MT06wLp63tFn9bB9M0k1lsWIn9fJBTXGtAHFz51h+ptha7tcA5KJ1OzRORZosXumz8pfAV62wYDP/0U+mhGd4w+CFO2gQitBGOq1ujhjMl8ZjxcCnJTJ31VTCsr0uP2fL83/SObZ146cLmjNbXjMEFWbW9B45ntZF9A7u36u1BPNsI7UH7PAspBF1OzHWtWe1rW4KSiKA/JSn93BUhm+xCYOb3PKE2YA==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=jpiTEAo/Wv4ppl4Rxv/TGckRIp+5dSDliQlERHSmGsI=;
- b=uHjlPIvGjz6t/8GywWvytJ7i8NRYaU65RTEtEfP5A9NU0chvp82g1eayD18TJwqnb9z32ryW4OhgTngiMman5s8YClxgj72ZjRsKGsGp7DUTGGhi5fgn1jiJJu32UjwAXiOVtISSQh8zMoAvbqZtXzADVfAvbzykh7wxcKYLj/X2zLnSPFm+MYDpt4H0WhUeUDdn56zdeA8aFTeB/PeJioJ9lRYi6Ebb2s4Dpn5vkktZE7OVQcpWGCdwkfChSdgAEM4xPh+nf6U/vgoRGnqVuUDARpz4QEB+zWRQySZVe/bOZ1fQsadC9XRFE+kWx2Q5AdLATVwH2uvpsjy0hY/B7w==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=garyguo.net; dmarc=pass action=none header.from=garyguo.net;
- dkim=pass header.d=garyguo.net; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=garyguo.net;
- s=selector1;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=jpiTEAo/Wv4ppl4Rxv/TGckRIp+5dSDliQlERHSmGsI=;
- b=JOcwwgMAjHUwz8I8ocgJtau518ALQ3kd4fnM/qI9zJlx6UlAau2oDY+fCfe/871sQFyevjGmjgsIoPTwOFknxEDPPxN4kiPekJsweb/m4esWicvB4Nh03f6J++U1jx18cRFhHuTb49TiAV1f+52BZKMCRViB4tR67YF8YgGGeNk=
-Received: from LOVP265MB8871.GBRP265.PROD.OUTLOOK.COM (2603:10a6:600:488::16)
- by CWLP265MB3058.GBRP265.PROD.OUTLOOK.COM (2603:10a6:400:d1::9) with
- Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9478.4; Mon, 5 Jan
- 2026 16:11:12 +0000
-Received: from LOVP265MB8871.GBRP265.PROD.OUTLOOK.COM
- ([fe80::ea6a:3ec2:375d:1ce0]) by LOVP265MB8871.GBRP265.PROD.OUTLOOK.COM
- ([fe80::ea6a:3ec2:375d:1ce0%7]) with mapi id 15.20.9478.004; Mon, 5 Jan 2026
- 16:11:12 +0000
-Date: Mon, 5 Jan 2026 16:11:10 +0000
-From: Gary Guo <gary@garyguo.net>
-To: "Danilo Krummrich" <dakr@kernel.org>
+	by kara.freedesktop.org (Postfix) with ESMTPS id 2024D44C95
+	for <nouveau@lists.freedesktop.org>; Mon,  5 Jan 2026 21:03:40 +0000 (UTC)
+Received: from mout-p-202.mailbox.org (mout-p-202.mailbox.org [80.241.56.172])
+	by gabe.freedesktop.org (Postfix) with ESMTPS id 393D110E448;
+	Mon,  5 Jan 2026 21:11:51 +0000 (UTC)
+Received: from smtp202.mailbox.org (smtp202.mailbox.org
+ [IPv6:2001:67c:2050:b231:465::202])
+	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+	 key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest
+ SHA256)
+	(No client certificate requested)
+	by mout-p-202.mailbox.org (Postfix) with ESMTPS id 4dlRnJ5WwYz9t7s;
+	Mon,  5 Jan 2026 22:11:48 +0100 (CET)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
+ s=mail20150812;
+	t=1767647508;
+	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+	 to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+	 content-transfer-encoding:content-transfer-encoding:
+	 in-reply-to:in-reply-to:references:references;
+	bh=2HI5WpvrjxWjcJrI6UBSQlk6VzP6z9tGQtFytnWsSSk=;
+	b=tefjr99vbWPESve1qc6HX83gNPDv/eemhfdaqSE0vbiJHdTXP1rehD4Ez8BX3Gpq1ZsDOg
+	/QNC+mU8WDZwoInNaJu39AqlK7kHQNtfP4DdFy5+zUea7xhzkUnU58HSe5yYZ3Qoq8+q+l
+	5Ub1J6wOpc2LLMg/uZgrW8LtzCXKTf5+yS8oimrRcnHHI81JsGaPsa+WrwL1YLWAwqjcAl
+	Iy3ZQ7R26v25bKgUIpe+Vmn2XYpeIdd4qH33apqiSg41193SjSorekqEME92L6S7m6w4m8
+	4E4/mOK7rPZr/lILHVwSUUCswAzy07bH1uMD4gG8NErtQ/2fQFHimtRXVvLZ3w==
+Message-ID: <cd9d7dd56e8191eb2d61dce1c3fd88ccffcff690.camel@mailbox.org>
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
+ s=mail20150812;
+	t=1767647506;
+	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+	 to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+	 content-transfer-encoding:content-transfer-encoding:
+	 in-reply-to:in-reply-to:references:references;
+	bh=2HI5WpvrjxWjcJrI6UBSQlk6VzP6z9tGQtFytnWsSSk=;
+	b=q0o2Nukg4efahLioZYLQvszxK/JkIcaoVvsr6SjQEj8aND8mNdSH4xd1dyoCFKg64V4ibs
+	X/nmgIx0S1kEG6oLjulz1NNvOwZN3FAKziywRssqf6ulEPMqVPJxTGUJRq5YGD264b10e6
+	NMLb9NjyApQL11U+RLFD7wz22KpB1OOqYzzJVUXdAnuEsZmPSMXjVLvL5G3HhDVfIOaXSf
+	QOU1JVvSUsOcI3vxXvAxbbaTzLxDFQJhMxv2/5J1o5/+QpbqeShzXUHho8hYMLwRAfyhCN
+	BY8L+YbY7dZt5KD4xS6o15vPY/h9epkM6RilQyXzODqbnB0dK4qfdjBOss+EoA==
 Subject: Re: [PATCH v2 1/2] rust: macros: Add derive Display for enums
-Message-ID: <20260105161110.5d1ab548.gary@garyguo.net>
-In-Reply-To: <DFGL2QTNH7FE.93EN71L7BXFM@kernel.org>
+From: Maurice Hieronymus <mhi@mailbox.org>
+To: Gary Guo <gary@garyguo.net>, Danilo Krummrich <dakr@kernel.org>, Benno
+ Lossin <lossin@kernel.org>
+Date: Mon, 05 Jan 2026 22:11:40 +0100
+In-Reply-To: <20260105161110.5d1ab548.gary@garyguo.net>
 References: <20260104200733.190494-1-mhi@mailbox.org>
-	<20260104200733.190494-2-mhi@mailbox.org>
-	<DFGJ8UBULO54.NRW84R2DTHIK@kernel.org>
-	<DFGL2QTNH7FE.93EN71L7BXFM@kernel.org>
-X-Mailer: Claws Mail 4.3.1 (GTK 3.24.51; x86_64-pc-linux-gnu)
-Content-Type: text/plain; charset=US-ASCII
-Content-Transfer-Encoding: 7bit
-X-ClientProxiedBy: LO2P123CA0074.GBRP123.PROD.OUTLOOK.COM
- (2603:10a6:600:138::7) To LOVP265MB8871.GBRP265.PROD.OUTLOOK.COM
- (2603:10a6:600:488::16)
+		<20260104200733.190494-2-mhi@mailbox.org>
+		<DFGJ8UBULO54.NRW84R2DTHIK@kernel.org>
+		<DFGL2QTNH7FE.93EN71L7BXFM@kernel.org>
+	 <20260105161110.5d1ab548.gary@garyguo.net>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 MIME-Version: 1.0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: LOVP265MB8871:EE_|CWLP265MB3058:EE_
-X-MS-Office365-Filtering-Correlation-Id: 587a6465-f759-4a9a-8a41-08de4c750bae
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: 
-	BCL:0;ARA:13230040|7416014|376014|366016|1800799024|10070799003|7053199007;
-X-Microsoft-Antispam-Message-Info: 
-	=?us-ascii?Q?Q862y3c3myUji1/KNfaz5cMydICT9Tpjla3rpuutLqiVlA3pwq9hAyVqDNZ3?=
- =?us-ascii?Q?ppj2n2ynd9hPOfkMdi5LsnaBzW+jTWZdc8ktq8npXdXv2UYoZSayBkNrCpt6?=
- =?us-ascii?Q?Ey8GXyiKZTMe165pnvXL63kjPRY5fjqtb8qZch6PPd43QnvCdjTGJaG+f2pN?=
- =?us-ascii?Q?HM8WpnK/FRfy17Cc07Yxe9OTpyhH4pbAdTsTbGT90ET4693BQZBzNGWm/kYh?=
- =?us-ascii?Q?GHoNQA47Ta+4qldrbjYPoH3M6p6KdmwdGdYtPMAptD61hacCdpWJyCdKqpK+?=
- =?us-ascii?Q?OYPZyaaeP6Umflp6zWZNRTy3wRcV8Jv16cpFTzVW0Ghr7yOa5Zf/cKrZsSBC?=
- =?us-ascii?Q?l0tecHcCG/Hk3vf1ocmRJ8lUlJlhiKWTgPpL138QZUgwU5t0B04i9rF4j/T+?=
- =?us-ascii?Q?1I24ryP1aGa/z6tdtkqF2QUcvzc3KQO4AFwxEM8n4ydEMhThXpYt7p6jwcB7?=
- =?us-ascii?Q?rcq6CIdj/IjanQxucjMXWPqPjNgUgiLWsgip/+QtiSMNumnyGZ5AwoM6hBo5?=
- =?us-ascii?Q?O66O+hdzSpOZ2W410D7qX7DxIzi5KE1iMSqJvg9T5wjSsAmy+YPSddNq0McZ?=
- =?us-ascii?Q?U2ZxKAHtK4GtI4MqVjfjEuvu2Cx3YThzc6ybtOIJ9P1JlgtyUpPU/120bajW?=
- =?us-ascii?Q?ukqS2tROl+pT6QiuhabElTVdI+NV/8eAUliAvwEQXDblpmrAuDenaFQCA5Qv?=
- =?us-ascii?Q?oEL/FU1fpxbSa+cC4LqrA3PWW3CGYAOpND1kiciXmstywXFsoVr7mRtJOonw?=
- =?us-ascii?Q?REWbvmEuwiJTS8UZGkUqv9cA7v/92/6klSVMiAaBjOj4nbokr6QD6Sp4ws5P?=
- =?us-ascii?Q?M05ImQ/nvT4JnHye6leZ7jIxMKkh3e514xNoamD5viiwFO1veM84I5o+WSDL?=
- =?us-ascii?Q?A04u1BvGt6BKt8n+LdM/8K9k2zUmbncVUGQ4POq68XXBS63IlAuCgU3Ji+sh?=
- =?us-ascii?Q?RhcqIvwyfIDkF8XlvqXU5mU3L72dy3FXAZWXYWvrz13GBMVEizTqXp+ZCOHp?=
- =?us-ascii?Q?63OI2+p/57P1GaYQHKIx64uspD81iYAAIu6eV/MPegUpKKL11zwb4zcYQhps?=
- =?us-ascii?Q?1FA05dywfTQ3D7Vy5FeLUK5pKXTlGU7tAoLIRK0RbzJzJu5KRW8YjHcbZmIo?=
- =?us-ascii?Q?q1Ue4OHo4EkUSPR0qpy+s7J8hq4FFpCesO93PQT6Wmw/GtNdqHzH6V541hl+?=
- =?us-ascii?Q?aX/N+Bsm1xFfoAE2lRHgIf37rodnB8jSEoaf69cbbyLTucVsX/2n9k7STb+B?=
- =?us-ascii?Q?IoN4jPhEsGSJYR3HcwIMDCzLiyuhCVYbQmz6jeKSSyrILdk2yKkLhHarD2BB?=
- =?us-ascii?Q?B1nKixyvXCal+ObT2Xn9VoscZtdpbD3kSfLE/LdlzIXfm2FdqrSv0lne2bXg?=
- =?us-ascii?Q?F4pb2VFPPMaSXX3Q9gGBN/SvPZjbVbVc7zhq+QFZJZf5NW2DVFCsngzEVPpl?=
- =?us-ascii?Q?vwte7khlrPxKvcdse3wmVFlEMnEsp+we?=
-X-Forefront-Antispam-Report: 
-	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:LOVP265MB8871.GBRP265.PROD.OUTLOOK.COM;PTR:;CAT:NONE;SFS:(13230040)(7416014)(376014)(366016)(1800799024)(10070799003)(7053199007);DIR:OUT;SFP:1102;
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: 
-	=?us-ascii?Q?VVk5pFF2iuuxwKEjbf7HE95sOglzgIjKG16eW5HkiCsTA2VXMYsMC8ne5LQq?=
- =?us-ascii?Q?Z5hDp9PerzU35UTah3s+bODu0Z/AVcOeHiOOCrXW34c9S6DB2axGVny82VdF?=
- =?us-ascii?Q?OhmXgveK6dsEypH+CAhWhmCNI+dq+zDjl2jjxsPepcdeW/UdEs72kzeDJ868?=
- =?us-ascii?Q?CIqMaMECdIc5LZmZoKiErbPaE6YAj39k3AIXG3Y9LsQuigrhb/Ci1mDxbjdE?=
- =?us-ascii?Q?jj9Ev3WNjlG+OBQ9nVV1ntaexrkxZWgvxUzcVyEy93wAfNgGnYo7nhIgQ+D4?=
- =?us-ascii?Q?zkI0jeiaYtDvujuCVKui2wgkY78WgNjlRNxcIfkyBMLhUwL1HxIzRDMJV/64?=
- =?us-ascii?Q?v/dZMeYv4NXpgUmU/keHAq1HPVzyVElMbuXaI9awHTe+8HlLYVUXwOyGBRtM?=
- =?us-ascii?Q?HkNwjLZVtUzpw3525MwsALVl1s6YXfKcDzrjBgfvcyEyWcxQE+NxxsdTtvTU?=
- =?us-ascii?Q?ftwI4xRuUP8mhYAKAZCk6aQ5uZRUX+YSd7aVYlG2bEk/lWnptai+LNRsRXUf?=
- =?us-ascii?Q?1tUWt0CTRqs6gwUCNHaRPXu50yq/IZGePK/RMfWkj0ft3uoocpM93WSDzo00?=
- =?us-ascii?Q?zeDJvZW48wY8uRloR0E63eimafHiEpMB7DAhqAQsRQXPcA5dozNoxVRf8jyJ?=
- =?us-ascii?Q?TXWik32CyJ6SCy4FMlCkXY5UjKp8877H+bfPHuQwFKWP9U8lv4diTrm1cQvb?=
- =?us-ascii?Q?C4rIt9tFbF9d8OXrClYZC4cCKDdOp1FYuiCrefFMus9VfifWXxtDq+St0Gno?=
- =?us-ascii?Q?sbzlOF95dm8kGq2C4VQcMIZ2I0R7h9ulVzbv+wcy+1w4jR9LaFGKRoEsUsdp?=
- =?us-ascii?Q?Px62xcQ1HcTgVxfZV08N/i3a0/JTo8J1MtXOBlATdFAwf/1cZAkIbupHwplB?=
- =?us-ascii?Q?fxcXYwo4DrI7RjyuPMxN4EjMYTqI4NfauqTRBLYMeBz9V2ODFDXdyMDvy9j0?=
- =?us-ascii?Q?9AvAc/5wOlWApT0tHirNVMlS1r+DMv+sf2G/hNbI33+SNpJmnJF4ETir73ZA?=
- =?us-ascii?Q?gqSozqZZ63t2MfV7xClCxYjom+Evm00CywV+wMbvjHIQ6rXKYkzLx7LSVCxe?=
- =?us-ascii?Q?BBCkWrLQQDdxh6+waM2TvBBAHTrvvcviAOVOiB7RmwV06wEHxKzDIuPZEVO2?=
- =?us-ascii?Q?+cORSTLAjzaAv91YKS2Q7IRf8E/tSsGDbC90/bFg9OtC++46UO/ZSSe95LTu?=
- =?us-ascii?Q?PUnM5M3VKe0bSlRAeVU4tY+vpFhZzwZQiXqNPYaxe2ZswAi41CEh+HKeeyVC?=
- =?us-ascii?Q?zjxJ2vhRoImV5iv80EvcJ/Y50FtGC2hI4n4S74IT3ljz2E9fHbBJvzLUJqXD?=
- =?us-ascii?Q?Fzaaj1BDAMxr+XmJJPXF/Fr9Ai4I23LPSsL2I+CNyNTIY1q+XV9qFLVEkkg+?=
- =?us-ascii?Q?6LBEQ70O/Knu9LjDfrgGQNzNShDDrzjyG3JKO0DbtECP8XzgUWCzYXxm30AL?=
- =?us-ascii?Q?0dRs5cdAKntzPbcEnp+sw54GKR3rjvchBH20U7G/ZJI3c0CKlcaYkUoiAkqV?=
- =?us-ascii?Q?t5c867Cmdtua/ms+InOy/LFgV1qwIYhmo7FXQXWd86QTQBVBDSmkUTFQzFOw?=
- =?us-ascii?Q?Dd319F62HTwjRzEnIQYDAuBkFKlVkVD4HfJm6Pr206S4ksbXDKyUCeQ9IGOg?=
- =?us-ascii?Q?z9qTHCVSGBDXC/NC2o5csk/cY5cIfXqyVLE36zOjZu0z7fop+gpyDT0FYwdI?=
- =?us-ascii?Q?K1N3yDd5gbqbN6JhxSVlWnBUk42sNAbmD+4bH6hYLHGslNo8qWpsaiTXlGW+?=
- =?us-ascii?Q?sgonozo7Sw=3D=3D?=
-X-OriginatorOrg: garyguo.net
-X-MS-Exchange-CrossTenant-Network-Message-Id: 
- 587a6465-f759-4a9a-8a41-08de4c750bae
-X-MS-Exchange-CrossTenant-AuthSource: LOVP265MB8871.GBRP265.PROD.OUTLOOK.COM
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 05 Jan 2026 16:11:12.4947
- (UTC)
-X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
-X-MS-Exchange-CrossTenant-Id: bbc898ad-b10f-4e10-8552-d9377b823d45
-X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: 
- nNxKXc2EGuSs95GasHp+I40NMmZ9+mPC+v81zZFAgAboUzGxA9J1pxtKkcdnx7yau2WOBa71IwML5Hd3r7yWDQ==
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: CWLP265MB3058
-Message-ID-Hash: QBB6SBBOBBCIBIFTLSGOQ2FHXHIAWCOK
-X-Message-ID-Hash: QBB6SBBOBBCIBIFTLSGOQ2FHXHIAWCOK
-X-MailFrom: gary@garyguo.net
+X-MBO-RS-ID: e3b37c8d848180c9f6d
+X-MBO-RS-META: q5k68eeri1785xog9na8rjnqh9reutb7
+X-Rspamd-Queue-Id: 4dlRnJ5WwYz9t7s
+Message-ID-Hash: QU2BVHFEROYZTSLFOFPMOBKE6FUJXTBN
+X-Message-ID-Hash: QU2BVHFEROYZTSLFOFPMOBKE6FUJXTBN
+X-MailFrom: mhi@mailbox.org
 X-Mailman-Rule-Hits: nonmember-moderation
 X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency;
  loop; banned-address; member-moderation
-CC: Benno Lossin <lossin@kernel.org>, Maurice Hieronymus <mhi@mailbox.org>,
- aliceryhl@google.com, acourbot@nvidia.com, simona@ffwll.ch,
- nouveau@lists.freedesktop.org, dri-devel@lists.freedesktop.org,
- linux-kernel@vger.kernel.org, ojeda@kernel.org, boqun.feng@gmail.com,
- bjorn3_gh@protonmail.com, a.hindborg@kernel.org, tmgross@umich.edu,
- rust-for-linux@vger.kernel.org
+CC: mhi@mailbox.org, aliceryhl@google.com, acourbot@nvidia.com,
+ simona@ffwll.ch, nouveau@lists.freedesktop.org,
+ dri-devel@lists.freedesktop.org, linux-kernel@vger.kernel.org,
+ ojeda@kernel.org, boqun.feng@gmail.com, bjorn3_gh@protonmail.com,
+ a.hindborg@kernel.org, tmgross@umich.edu, rust-for-linux@vger.kernel.org
 X-Mailman-Version: 3.3.8
 Precedence: list
 List-Id: Nouveau development list <nouveau.lists.freedesktop.org>
 Archived-At: 
- <https://lists.freedesktop.org/hyperkitty/list/nouveau@lists.freedesktop.org/message/QBB6SBBOBBCIBIFTLSGOQ2FHXHIAWCOK/>
+ <https://lists.freedesktop.org/hyperkitty/list/nouveau@lists.freedesktop.org/message/QU2BVHFEROYZTSLFOFPMOBKE6FUJXTBN/>
 Archived-At: 
- <https://lore.freedesktop.org/20260105161110.5d1ab548.gary@garyguo.net/>
+ <https://lore.freedesktop.org/cd9d7dd56e8191eb2d61dce1c3fd88ccffcff690.camel@mailbox.org/>
 List-Archive: 
  <https://lists.freedesktop.org/hyperkitty/list/nouveau@lists.freedesktop.org/>
 List-Archive: <https://lore.freedesktop.org/nouveau>
@@ -198,48 +129,82 @@ List-Post: <mailto:nouveau@lists.freedesktop.org>
 List-Subscribe: <mailto:nouveau-join@lists.freedesktop.org>
 List-Unsubscribe: <mailto:nouveau-leave@lists.freedesktop.org>
 
-On Mon, 05 Jan 2026 11:29:04 +0100
-"Danilo Krummrich" <dakr@kernel.org> wrote:
+On Mon, 2026-01-05 at 16:11 +0000, Gary Guo wrote:
+> On Mon, 05 Jan 2026 11:29:04 +0100
+> "Danilo Krummrich" <dakr@kernel.org> wrote:
+>=20
+> > On Mon Jan 5, 2026 at 10:02 AM CET, Benno Lossin wrote:
+> > > On Sun Jan 4, 2026 at 9:07 PM CET, Maurice Hieronymus wrote:=C2=A0=
+=20
+> > > > Add a derive macro that implements kernel::fmt::Display for
+> > > > enums.
+> > > > The macro outputs the exact variant name as written, preserving
+> > > > case.
+> > > >=20
+> > > > This supports all enum variant types: unit, tuple, and struct
+> > > > variants.
+> > > > For variants with data, only the variant name is displayed.=C2=A0=
+=20
+> > >=20
+> > > I don't think we should be adding this. Display is designed for
+> > > user-facing output and so it should always be carefully designed
+> > > and no
+> > > automation should exist for it.=C2=A0=20
+> >=20
+> > In general I agree, but simple stringification of an enum variant
+> > for a Display
+> > implementation is a very common use-case and it seems pretty
+> > unfortunate to have
+> > to fall back to either do the below (especially if there are a lot
+> > of enum
+> > variants) or having to go the declarative path of doing something
+> > as in [1].
+> >=20
+> > Especially in combination with things like FromPrimitive and
+> > ToPrimitive it gets
+> > us rid of the cases where we need such declarative macro mess.
+> >=20
+> > Eventually, drivers will most likely implement their own proc macro
+> > for this or
+> > repeat the declarative macro pattern over and over again.
+> >=20
+> > Maybe we should just pick a more specific name for such a derive
+> > macro than
+> > macros::Display.
+> >=20
+> > Maybe something along the lines of macros::EnumVariantDisplay? We
+> > could also
+> > have an optional argument indicating whether it should be converted
+> > to lower /
+> > upper case.
+>=20
+> I think the proposal is reasonable.
+> Being able to print enum name is very common and this is why crates
+> like
+> `strum` exist.
+>=20
+Before I start implementing, I want to reach common ground.
 
-> On Mon Jan 5, 2026 at 10:02 AM CET, Benno Lossin wrote:
-> > On Sun Jan 4, 2026 at 9:07 PM CET, Maurice Hieronymus wrote:  
-> >> Add a derive macro that implements kernel::fmt::Display for enums.
-> >> The macro outputs the exact variant name as written, preserving case.
-> >>
-> >> This supports all enum variant types: unit, tuple, and struct variants.
-> >> For variants with data, only the variant name is displayed.  
-> >
-> > I don't think we should be adding this. Display is designed for
-> > user-facing output and so it should always be carefully designed and no
-> > automation should exist for it.  
-> 
-> In general I agree, but simple stringification of an enum variant for a Display
-> implementation is a very common use-case and it seems pretty unfortunate to have
-> to fall back to either do the below (especially if there are a lot of enum
-> variants) or having to go the declarative path of doing something as in [1].
-> 
-> Especially in combination with things like FromPrimitive and ToPrimitive it gets
-> us rid of the cases where we need such declarative macro mess.
-> 
-> Eventually, drivers will most likely implement their own proc macro for this or
-> repeat the declarative macro pattern over and over again.
-> 
-> Maybe we should just pick a more specific name for such a derive macro than
-> macros::Display.
-> 
-> Maybe something along the lines of macros::EnumVariantDisplay? We could also
-> have an optional argument indicating whether it should be converted to lower /
-> upper case.
+In my opinion a derive macro which implements Display would be
+perfectly fine, as long as the name suggests what it does. So for
+example #[derive(DisplayEnumVariant)]. This would communicate the
+intent clearly to the user.
 
-I think the proposal is reasonable.
+Benno, would you be okay with that? If not, Gary and Danilo, are you
+fine with the proposed trait implementation (e.g. the variant_name
+function)?
+> Perhaps if we want to make user having a thought about what names to
+> expose to users, we can have the case conversion argument be
+> mandatory, so
+> they are forced to make a choice rather than blindly stuck
+> `#[derive(Display)]` onto their enum.
+>=20
+Are there any common use-cases where one wants to change the case of
+the enum variants? If not, I would not implement an argument and rather
+name the macro accordingly, so the intent is clear.
 
-Being able to print enum name is very common and this is why crates like
-`strum` exist.
+Thanks,
 
-Perhaps if we want to make user having a thought about what names to
-expose to users, we can have the case conversion argument be mandatory, so
-they are forced to make a choice rather than blindly stuck
-`#[derive(Display)]` onto their enum.
-
-Best,
-Gary
+Maurice
+> Best,
+> Gary
