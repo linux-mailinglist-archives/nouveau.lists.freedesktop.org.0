@@ -2,38 +2,38 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id A6A07CF8650
-	for <lists+nouveau@lfdr.de>; Tue, 06 Jan 2026 13:56:19 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id D3444CFAD7D
+	for <lists+nouveau@lfdr.de>; Tue, 06 Jan 2026 20:59:54 +0100 (CET)
 Received: from kara.freedesktop.org (unknown [131.252.210.166])
-	by gabe.freedesktop.org (Postfix) with ESMTPS id 1137910E507;
-	Tue,  6 Jan 2026 12:56:18 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTPS id 1EE8710E54E;
+	Tue,  6 Jan 2026 19:59:52 +0000 (UTC)
 Authentication-Results: gabe.freedesktop.org;
-	dkim=fail reason="signature verification failed" (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="kFxA1Exw";
+	dkim=pass (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="qlUBYoDX";
 	dkim-atps=neutral
 Received: from kara.freedesktop.org (localhost [127.0.0.1])
-	by kara.freedesktop.org (Postfix) with ESMTP id D64DA44C9B;
-	Tue,  6 Jan 2026 12:48:04 +0000 (UTC)
+	by kara.freedesktop.org (Postfix) with ESMTP id 3646F44C9B;
+	Tue,  6 Jan 2026 19:51:38 +0000 (UTC)
 ARC-Seal: i=1; cv=none; a=rsa-sha256; d=lists.freedesktop.org;
- s=20240201; t=1767703684;
- b=0Sx80FkPm028tQpz66DfPvfwo361jpEr7ccMZ9ChGkPdM32jskz+BeQmcS5J8ihHy3c9D
- KCzghOgprzaygwRPwtymNTVUOSIRXWQvzHryPgW6aWseNhzCy3bPtDuM8D/JY8S2nu8mub4
- QlAcyurKCWp7IkUy09MJzxvivzTP/igoIegEikt4GBcfg9b0fGyFNQaEq+jdgUXkGeGDm5x
- YdPcynqtXW1DozfrErUajKu3nv1WdPOdnWtL3hxBXgfrppmmPSfyFHo1Uh0ke095Nva2pUa
- BND3l4+FsmmqLNPVVQ2UBClMfGW6R9cVMf61LRZRH1SE0rzN0EcpPyAvgSGw==
+ s=20240201; t=1767729098;
+ b=u8an1U0MdcGgqik6ReOn5yE7XjcgHNwhpv7ytH/YhHx5EDzkohrycOz8WqRUApSMmLZJ8
+ 0w0tVikGRNfueDVkb6H/a0MfblnDTgEM+REjG21S7NPDYIcA7vnTuLmAKBKA9H75PTiqq7j
+ +XXd7xLvt8KRHNEe0sb31rYwgP0jMGa6Wb9TIOX/tJg0kLV8nMRWAzfr8vLeOESRvSBc197
+ g73OOit1iL/9P1cZ4UpZTjAqc410O9mnQ6kodmpPnsFeQDHdHinV5IMf+t1CpaBayuDoxVA
+ QoVpEr80knZl+WzoKEaKkPZWVrfEEREKe8zdkfTiKGp4qroZ6dCGWmHg3e4Q==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed;
- d=lists.freedesktop.org; s=20240201; t=1767703684; h=from : sender :
+ d=lists.freedesktop.org; s=20240201; t=1767729098; h=from : sender :
  reply-to : subject : date : message-id : to : cc : mime-version :
  content-type : content-transfer-encoding : content-id :
  content-description : resent-date : resent-from : resent-sender :
  resent-to : resent-cc : resent-message-id : in-reply-to : references :
  list-id : list-help : list-unsubscribe : list-subscribe : list-post :
  list-owner : list-archive;
- bh=r48+kBVXIaj5WBGqyEyie4xzCOgq/bpfJGXpiQuLkmI=;
- b=AKFODrGslAFdkz3aeeCUYyyrwBj9IbyPysrqB8Bwy6dJG72GWXxHKLVK9xSYMlkSDKheL
- Xpe4PAZp6qMrxmXNG/5piMpDfmx6GemST+0Z7geACarr2hB3yHpn47diXsZLbQg50/9hY7s
- 6fmCrl4YEdf+xqw9d5dYjkJfqfbG1OvRw6l87lnoxQHpjdnJoaBnj05wKVrlONWx/Q0xdbR
- 7kmpxPFwtU270CVDtKrQY1s3+WYLwJX316xi++CvZQ14vzmSkKo3uJWtUAsBFxuh+R7faYs
- +tj1kM9uGB3McaV9L3kbeOczjPBQPNlZDgbhEiR1647kXmAt1KfZcOeZOKyw==
+ bh=OYZUoBilJ+zVwGPiScFNKkatw8FFdVcCN0lW7sI6kA8=;
+ b=uYCvQxrgwjKk/xDS4yoy5MRpwJluD17eDuKTZIvWtLPrRI2VjBePc2v94ebLNPw27JVtt
+ aTd4mbYwtqUrxDeh2k1q4jUnLSnHz0OkYFR2YiBnZzlr7Jl9Zsvd8e+KYYfxHinTGMf2Ooo
+ 74hPy786VsJ3o1xNm8kBSn5cYsNdPDdntmdBi4fjHD0gpPfmKEinP+KjmKcq5VPQMwPgT8P
+ 9VOYc5taIjCb3kbPWBhW91cGH76XT8ibL/ZUgEfda8815tmhMaaLPovRW18exZomWaw3tk5
+ Xh+2qG0IzappCcBrn7DXVQTNFQNu8ubF+O5X2V4/TEjpoyUO52emnguR8olg==
 ARC-Authentication-Results: i=1; mail.freedesktop.org;
  dkim=pass header.d=kernel.org;
   arc=none (Message is not ARC signed);
@@ -44,64 +44,59 @@ Authentication-Results: mail.freedesktop.org; dkim=pass header.d=kernel.org;
  dmarc=pass (Used From Domain Record) header.from=kernel.org
  policy.dmarc=quarantine
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by kara.freedesktop.org (Postfix) with ESMTPS id 74B3944C81
-	for <nouveau@lists.freedesktop.org>; Tue,  6 Jan 2026 12:48:01 +0000 (UTC)
-Received: from sea.source.kernel.org (sea.source.kernel.org [172.234.252.31])
-	by gabe.freedesktop.org (Postfix) with ESMTPS id 66A7710E3A2;
-	Tue,  6 Jan 2026 12:56:14 +0000 (UTC)
+	by kara.freedesktop.org (Postfix) with ESMTPS id 1ACD944C5A
+	for <nouveau@lists.freedesktop.org>; Tue,  6 Jan 2026 19:51:35 +0000 (UTC)
+Received: from tor.source.kernel.org (tor.source.kernel.org [172.105.4.254])
+	by gabe.freedesktop.org (Postfix) with ESMTPS id A333510E549;
+	Tue,  6 Jan 2026 19:59:48 +0000 (UTC)
 Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
-	by sea.source.kernel.org (Postfix) with ESMTP id 25AD64389E;
-	Tue,  6 Jan 2026 12:56:14 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id DF333C116C6;
-	Tue,  6 Jan 2026 12:56:10 +0000 (UTC)
+	by tor.source.kernel.org (Postfix) with ESMTP id B4E0B60007;
+	Tue,  6 Jan 2026 19:59:46 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 6232DC116C6;
+	Tue,  6 Jan 2026 19:59:46 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
-	s=k20201202; t=1767704174;
-	bh=sWtryoRLOPWT/n5m9Ko/0M389f3WZbdEwizETVLZoPU=;
-	h=Date:Cc:Subject:From:To:References:In-Reply-To:From;
-	b=kFxA1ExwcPNw3IMSn2w193OfntXYYyMSr0GwCLycNwWYfb5vqfHqWQ5QjMAGJjR+5
-	 u2GooWBFoCibpcmx4lU24poJSS/skuiTv37yCrFLPgXjg6o9X3ApdLj85lkVowjOKE
-	 Zr9ti6o9kJUbI4AnBpIrVmhNfX2QrmUPLXdXLVwoH8V8hZdu4S9rez6jl1kYSUl+4J
-	 wBWhOQ3vksXlfCcF+onw60g78azpOLAl1CP/Rb/dgTwO7WqYjkluCfGGKdU06KIQw5
-	 sO4caRN+tnDbTk7N84CRz+48nLyitpZdpu9qbQBM+xTgDe8MFdmcbTbsBJMbHwJl6l
-	 eXI//XxsrhCbg==
-Mime-Version: 1.0
-Content-Transfer-Encoding: quoted-printable
-Content-Type: text/plain; charset=UTF-8
-Date: Tue, 06 Jan 2026 13:56:09 +0100
-Message-Id: <DFHITWGSEB4E.QV5DTPS816XI@kernel.org>
-Subject: Re: [PATCH v2 1/2] rust: macros: Add derive Display for enums
-From: "Benno Lossin" <lossin@kernel.org>
-To: "Maurice Hieronymus" <mhi@mailbox.org>, "Danilo Krummrich"
- <dakr@kernel.org>
-X-Mailer: aerc 0.21.0
-References: <20260104200733.190494-1-mhi@mailbox.org>
- <20260104200733.190494-2-mhi@mailbox.org>
- <DFGJ8UBULO54.NRW84R2DTHIK@kernel.org>
- <DFGL2QTNH7FE.93EN71L7BXFM@kernel.org>
- <20260105161110.5d1ab548.gary@garyguo.net>
- <cd9d7dd56e8191eb2d61dce1c3fd88ccffcff690.camel@mailbox.org>
- <DFGZUHLJ3ALF.EZDC85ZEFJA9@kernel.org>
- <90fac786f019f06765edb7c362e96f1a19801f26.camel@mailbox.org>
-In-Reply-To: <90fac786f019f06765edb7c362e96f1a19801f26.camel@mailbox.org>
-Message-ID-Hash: 7FFAAHUJYQOJY7ZTF6DXX7J6VSM6WXJV
-X-Message-ID-Hash: 7FFAAHUJYQOJY7ZTF6DXX7J6VSM6WXJV
-X-MailFrom: lossin@kernel.org
+	s=k20201202; t=1767729586;
+	bh=+uMYO8Zcxy/LKS7iUfEqcKI8uYdKCiFIFxLZuU6quyA=;
+	h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
+	b=qlUBYoDX2H5vGWPhhRP5iKMQNMSQFaSgK2LSocZgkXFoNlCCS1a4bXhawNCqOVQR5
+	 yNZ9TBZJTZL4PR7RI7Lav2FYx2JrIuv2LqtMgRFIKYbshtc9kxjFpBxTr9ViLP+L1B
+	 RJeSQuicpHAl2E5ENTalteggB0l2BuUGJJAuQ71g9uTBWR310CLQCfP1Ap869NQcTV
+	 pARBkjDOmpgFQMmF1dOUCRN0CPylEZTIhjwuOgIsut/3FClTe4GqOS6wgDToF0qdqT
+	 hCpBJvbmDx7fG+rHQ4SSNRPjfQqH8Vw9S3+uad0AE6x8E3YawazWhfXAvwCEeO8mkW
+	 bRny5qLWG86Uw==
+From: Kees Cook <kees@kernel.org>
+To: Lyude Paul <lyude@redhat.com>,
+	Danilo Krummrich <dakr@kernel.org>,
+	David Airlie <airlied@gmail.com>,
+	Simona Vetter <simona@ffwll.ch>,
+	"Gustavo A. R. Silva" <gustavoars@kernel.org>
+Subject: Re: [PATCH v3][next] drm/nouveau: fifo: Avoid
+ -Wflex-array-member-not-at-end warning
+Date: Tue,  6 Jan 2026 11:59:43 -0800
+Message-Id: <176772957954.1530485.4582284327428826161.b4-ty@kernel.org>
+X-Mailer: git-send-email 2.34.1
+In-Reply-To: <aJ17oxJYcqqr3946@kspp>
+References: <aJ17oxJYcqqr3946@kspp>
+MIME-Version: 1.0
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 8bit
+Message-ID-Hash: ZPRB3BHC2GWNL4U72FJIABMI7SBDYZ4Q
+X-Message-ID-Hash: ZPRB3BHC2GWNL4U72FJIABMI7SBDYZ4Q
+X-MailFrom: kees@kernel.org
 X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency;
  loop; banned-address; member-moderation; nonmember-moderation; administrivia;
  implicit-dest; max-recipients; max-size; news-moderation; no-subject;
  digests; suspicious-header
-CC: Gary Guo <gary@garyguo.net>, aliceryhl@google.com, acourbot@nvidia.com,
- simona@ffwll.ch, nouveau@lists.freedesktop.org,
- dri-devel@lists.freedesktop.org, linux-kernel@vger.kernel.org,
- ojeda@kernel.org, boqun.feng@gmail.com, bjorn3_gh@protonmail.com,
- a.hindborg@kernel.org, tmgross@umich.edu, rust-for-linux@vger.kernel.org
+CC: Kees Cook <kees@kernel.org>, dri-devel@lists.freedesktop.org,
+ nouveau@lists.freedesktop.org, linux-kernel@vger.kernel.org,
+ linux-hardening@vger.kernel.org
 X-Mailman-Version: 3.3.8
 Precedence: list
 List-Id: Nouveau development list <nouveau.lists.freedesktop.org>
 Archived-At: 
- <https://lists.freedesktop.org/hyperkitty/list/nouveau@lists.freedesktop.org/message/7FFAAHUJYQOJY7ZTF6DXX7J6VSM6WXJV/>
+ <https://lists.freedesktop.org/hyperkitty/list/nouveau@lists.freedesktop.org/message/ZPRB3BHC2GWNL4U72FJIABMI7SBDYZ4Q/>
 Archived-At: 
- <https://lore.freedesktop.org/DFHITWGSEB4E.QV5DTPS816XI@kernel.org/>
+ <https://lore.freedesktop.org/176772957954.1530485.4582284327428826161.b4-ty@kernel.org/>
 List-Archive: 
  <https://lists.freedesktop.org/hyperkitty/list/nouveau@lists.freedesktop.org/>
 List-Archive: <https://lore.freedesktop.org/nouveau>
@@ -111,58 +106,23 @@ List-Post: <mailto:nouveau@lists.freedesktop.org>
 List-Subscribe: <mailto:nouveau-join@lists.freedesktop.org>
 List-Unsubscribe: <mailto:nouveau-leave@lists.freedesktop.org>
 
-On Tue Jan 6, 2026 at 6:56 AM CET, Maurice Hieronymus wrote:
-> On Mon, 2026-01-05 at 23:03 +0100, Danilo Krummrich wrote:
->> On Mon Jan 5, 2026 at 10:11 PM CET, Maurice Hieronymus wrote:
->> > Before I start implementing, I want to reach common ground.
->> >=20
->> > In my opinion a derive macro which implements Display would be
->> > perfectly fine, as long as the name suggests what it does. So for
->> > example #[derive(DisplayEnumVariant)]. This would communicate the
->> > intent clearly to the user.
->> >=20
->> > Benno, would you be okay with that? If not, Gary and Danilo, are
+On Thu, 14 Aug 2025 15:01:07 +0900, Gustavo A. R. Silva wrote:
+> -Wflex-array-member-not-at-end was introduced in GCC-14, and we are
+> getting ready to enable it, globally.
+> 
+> Use the new TRAILING_OVERLAP() helper to fix the following warning:
+> 
+> drivers/gpu/drm/nouveau/nvif/fifo.c:29:42: warning: structure containing a flexible array member is not at the end of another structure [-Wflex-array-member-not-at-end]
+> 
+> [...]
 
-I'd prefer if we stay a bit more cautious about directly deriving
-`Display`. The trait with the variant name sounds like a very sensible
-idea.
+Applied to for-next/hardening, thanks!
 
-We can talk about this in the team in our weekly meeting, they might
-change my mind :)
+[1/1] drm/nouveau: fifo: Avoid -Wflex-array-member-not-at-end warning
+      https://git.kernel.org/kees/c/2d4909bae919
 
->> > you
->> > fine with the proposed trait implementation (e.g. the variant_name
->> > function)?
->>=20
->> Actually, it might even be reasonable to have both. In the Nova
->> driver we have
->> the case that we want to print the enum variant exactly as it is
->> defined in the
->> code and a lowercase version of the enum variant.
->>=20
->> > Are there any common use-cases where one wants to change the case
->> > of
->> > the enum variants? If not, I would not implement an argument and
->> > rather
->> > name the macro accordingly, so the intent is clear.
->>=20
->> As mentioned above, we do have a case in Nova where we also want a
->> lowercase
->> representation to construct a firmware path with.
->
-> So there would be the need to have two derive macros:
->
-> 1. #[derive(DisplayEnumVariant)]
-> Implements Display for all enum variants as they are (original case).
->
-> 2. #[derive(ImplementVariantName(Case::Lowercase))]
-> Implements the mentioned trait. Case could be an Enum where one could
-> choose between Case::Lowercase and Case::Original.
+Take care,
 
-You'll need to use a helper attribute, something like:
+-- 
+Kees Cook
 
-    #[derive(VariantName)]
-    #[variant_name(case =3D "lowercase")]
-
-Cheers,
-Benno
