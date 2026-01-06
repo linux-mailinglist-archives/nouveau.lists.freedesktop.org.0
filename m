@@ -2,138 +2,129 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id EA615CF6DCC
-	for <lists+nouveau@lfdr.de>; Tue, 06 Jan 2026 07:16:03 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 42FD5CF7D8F
+	for <lists+nouveau@lfdr.de>; Tue, 06 Jan 2026 11:42:20 +0100 (CET)
 Received: from kara.freedesktop.org (unknown [131.252.210.166])
-	by gabe.freedesktop.org (Postfix) with ESMTPS id BD0CE10E48E;
-	Tue,  6 Jan 2026 06:16:02 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTPS id 1DFF510E1EF;
+	Tue,  6 Jan 2026 10:42:19 +0000 (UTC)
 Authentication-Results: gabe.freedesktop.org;
-	dkim=fail reason="signature verification failed" (2048-bit key; unprotected) header.d=embeddedor.com header.i=@embeddedor.com header.b="pUw0IcUm";
+	dkim=pass (1024-bit key; unprotected) header.d=joelfernandes.org header.i=@joelfernandes.org header.b="DYrTrwa9";
 	dkim-atps=neutral
 Received: from kara.freedesktop.org (localhost [127.0.0.1])
-	by kara.freedesktop.org (Postfix) with ESMTP id 2B55A44C9B;
-	Tue,  6 Jan 2026 06:07:50 +0000 (UTC)
+	by kara.freedesktop.org (Postfix) with ESMTP id 0FCB144C98;
+	Tue,  6 Jan 2026 10:34:06 +0000 (UTC)
 ARC-Seal: i=1; cv=none; a=rsa-sha256; d=lists.freedesktop.org;
- s=20240201; t=1767679670;
- b=y9znq8TFe+g8scOzzSAccHQviTwNESX76XxtuMCBzqIen8KJhybBQXRX31j/E9jhsUu2/
- 6HNnZKn+AfuasrHc5HtF76fETtqtNDuw5I6brJo/EMvvqaE5vnosYxzduip55IVUKxugDOw
- /addH2ENBXhdSZMqlOv+uv6B1KyrIA5WfnBwgBuXISZVNEJEy3SuC6atNjX73TbJxE02BVV
- Hl2Dlo0cmwnQGlno+wdh4xbYQu1hsLb0i2IhSTEnENt3cSUPzn2339DwN/Az9TKs5nRGkII
- LtqqhWG9ksPRocn4+ZO4KdW7bEqnuu2ueKzPtGmUjPXpDAqrvVzkV9Wtb5lw==
+ s=20240201; t=1767695645;
+ b=z1YL3Fys239c0KB3HLSqlWz+DbwX920HEoktjkBjxW3UgFK3xHYfxsn1iEk02ak8cNPIQ
+ D0BJCokuqymRoDGFcRweEe296SiQ9UoxCxSt9laJOrrCqGmM4IGKAsi3+RX914KdJc1SxxD
+ /hyanvt+UZdd0LuQI1u9J2llzbNZibl5mxE7Te0f9noJFwJVlY36ZS+uigX5OSuxDA8Fv3i
+ IzOhGkO3ouOYStBS4Ci8MBoFMsG1y+6S+Cna2XYITGvgdxsJ7tjddDXkbcYLdbwzQdS6DlK
+ ryQCSeECRbhXS6OjcyPTbkvKiwbdlLMOjLeMpk810Jb5wn5QJKm+DiZdyYwg==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed;
- d=lists.freedesktop.org; s=20240201; t=1767679670; h=from : sender :
+ d=lists.freedesktop.org; s=20240201; t=1767695645; h=from : sender :
  reply-to : subject : date : message-id : to : cc : mime-version :
  content-type : content-transfer-encoding : content-id :
  content-description : resent-date : resent-from : resent-sender :
  resent-to : resent-cc : resent-message-id : in-reply-to : references :
  list-id : list-help : list-unsubscribe : list-subscribe : list-post :
  list-owner : list-archive;
- bh=T8hG9y1BZklptsV/xBAiq/b+CBwDpXaK8p7nFH8qK/k=;
- b=P0t8Q7hyJcIjpPr8mR5z2NW5W5mwwq3bEhS1P0ANJ/meQzeVYkC4F19Y+hq4816wBJ836
- et5XVG3nnKrYUVJ15i1AKBiCaUHIeOlYqPLtam9axLPP9q9/FklYYcBQtFgjWwdKXyS5txB
- JaLNWdFrSrWBQAf6/T+XR1gIwbngcczti569w6mtt3oI/H5JR+wm6/rLwyA9hLo9Ei9Mou1
- ZEPhvnXy+hj8gqBLqJ0SuZ0RqgIs6Ygwq0ifbD2AZF+JkMdQQT2pB6K59ERy1+UFwNPoNSF
- 8l8kfdfAn98WPpSEWlgq8oEne0Y3gWQ0yu/4HyXlxB3lUfSPKGZJLCDAW0xQ==
+ bh=m4DHnNlD64p5h6wOoVrrAqDFywUoVYTzLxl5WN2rbRU=;
+ b=V0m43XAGeMk8pQBNU/Siwt26FLxo6pm3CQEETF0R6L/V4ayYK2IX02sQBF7d7nGF3djkd
+ m5sIQVHbV1fMNPtNuFy5dZO02fpPHywuv01H6TnRSY3vnQ3WrqOBEcu+I68QCj+ibGTOVm8
+ UTUgBJ9lc0AA7nFDTDru28S6rDDl0atOtxno7D1j3nydBq3Gc5iqHOb2uTlSHVAO77Pfyg6
+ pZ1fvqRojsdkMSCkxNLFAc9FnN6DCPYJjgOmQHl7h2WUEWaAB+n9dGYFV1bHy2zZG7JSg0h
+ IzE7SDzENVOH16mdHUT45f2cSPbx3USZpbhdywdIEb2M1Q1D1Vm58T2qoyhg==
 ARC-Authentication-Results: i=1; mail.freedesktop.org;
- dkim=pass header.d=embeddedor.com;
+ dkim=pass header.d=joelfernandes.org;
   arc=none (Message is not ARC signed);
   dmarc=none
 Authentication-Results: mail.freedesktop.org;
- dkim=pass header.d=embeddedor.com; arc=none (Message is not ARC signed);
+ dkim=pass header.d=joelfernandes.org; arc=none (Message is not ARC signed);
  dmarc=none
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by kara.freedesktop.org (Postfix) with ESMTPS id 79C4544BB6
-	for <nouveau@lists.freedesktop.org>; Tue,  6 Jan 2026 06:07:47 +0000 (UTC)
-X-Greylist: delayed 427 seconds by postgrey-1.36 at gabe;
- Tue, 06 Jan 2026 06:15:59 UTC
-Received: from omta038.useast.a.cloudfilter.net
- (omta038.useast.a.cloudfilter.net [44.202.169.37])
-	by gabe.freedesktop.org (Postfix) with ESMTPS id A90EF10E48C
-	for <nouveau@lists.freedesktop.org>; Tue,  6 Jan 2026 06:15:59 +0000 (UTC)
-Received: from eig-obgw-6005b.ext.cloudfilter.net ([10.0.30.162])
-	by cmsmtp with ESMTPS
-	id cqHDvespISkcfd0FPvRZAa; Tue, 06 Jan 2026 06:08:51 +0000
-Received: from gator4166.hostgator.com ([108.167.133.22])
-	by cmsmtp with ESMTPS
-	id d0FLvy5RcHSQMd0FLv92ts; Tue, 06 Jan 2026 06:08:47 +0000
-X-Authority-Analysis: v=2.4 cv=GIQIEvNK c=1 sm=1 tr=0 ts=695ca6f2
- a=1YbLdUo/zbTtOZ3uB5T3HA==:117 a=Aea70ojWhvW6xI+oM0giEQ==:17
- a=IkcTkHD0fZMA:10 a=vUbySO9Y5rIA:10 a=7T7KSl7uo7wA:10 a=VwQbUJbxAAAA:8
- a=9vlq1VobPfUJAe141Q0A:9 a=QEXdDO2ut3YA:10 a=2aFnImwKRvkU0tJ3nQRT:22
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=embeddedor.com; s=default; h=Content-Transfer-Encoding:Content-Type:
-	In-Reply-To:From:References:Cc:To:Subject:MIME-Version:Date:Message-ID:Sender
-	:Reply-To:Content-ID:Content-Description:Resent-Date:Resent-From:
-	Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:
-	List-Unsubscribe:List-Subscribe:List-Post:List-Owner:List-Archive;
-	bh=T8hG9y1BZklptsV/xBAiq/b+CBwDpXaK8p7nFH8qK/k=; b=pUw0IcUmyudnHEzadV7E5DiBFg
-	NbxFokoAaw+dTAVWMOgnejpkK8g5Penu+9YGaRwrvUk3pN6HSR6U8CR0wP9HKSi6SROBuD39pHXKk
-	oWMLarjaq710D+WwgE2G3o0doo4nc9jXiEeXNjIpBpXmcB/Dkv6hpwn/yyCZUpTTDr7mw6EkPMCoY
-	9ae1pU31x35kKTk0QDqjuVfYs0Hp2bqfNpq5mLUG486O2d9A84bwTzCKM0goxDBC2N37l2SOqCLIf
-	sRX7RGJQMxg/H+rfufKCMQyCIAxrSl2acbH6BrE25L97lXIP9+wHW+Ur2iYnkcIs2uSSHkUNbko/u
-	2eBobKXQ==;
-Received: from flh4-122-130-137-161.osk.mesh.ad.jp ([122.130.137.161]:60510
- helo=[10.221.196.44])
-	by gator4166.hostgator.com with esmtpsa  (TLS1.2) tls
- TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256
-	(Exim 4.98.1)
-	(envelope-from <gustavo@embeddedor.com>)
-	id 1vd0FK-00000002wEp-24z5;
-	Tue, 06 Jan 2026 00:08:46 -0600
-Message-ID: <e1009d16-cadb-4446-aef5-4a52197551a4@embeddedor.com>
-Date: Tue, 6 Jan 2026 15:08:41 +0900
-MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v3][next] drm/nouveau: fifo: Avoid
- -Wflex-array-member-not-at-end warning
-To: "Gustavo A. R. Silva" <gustavoars@kernel.org>,
- Lyude Paul <lyude@redhat.com>, Danilo Krummrich <dakr@kernel.org>,
- David Airlie <airlied@gmail.com>, Simona Vetter <simona@ffwll.ch>
-References: <aJ17oxJYcqqr3946@kspp>
-Content-Language: en-US
-From: "Gustavo A. R. Silva" <gustavo@embeddedor.com>
-In-Reply-To: <aJ17oxJYcqqr3946@kspp>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
-X-AntiAbuse: This header was added to track abuse,
- please include it with any abuse report
-X-AntiAbuse: Primary Hostname - gator4166.hostgator.com
-X-AntiAbuse: Original Domain - lists.freedesktop.org
-X-AntiAbuse: Originator/Caller UID/GID - [47 12] / [47 12]
-X-AntiAbuse: Sender Address Domain - embeddedor.com
-X-BWhitelist: no
-X-Source-IP: 122.130.137.161
-X-Source-L: No
-X-Exim-ID: 1vd0FK-00000002wEp-24z5
-X-Source: 
-X-Source-Args: 
-X-Source-Dir: 
-X-Source-Sender: flh4-122-130-137-161.osk.mesh.ad.jp ([10.221.196.44])
- [122.130.137.161]:60510
-X-Source-Auth: gustavo@embeddedor.com
-X-Email-Count: 5
-X-Org: HG=hgshared;ORG=hostgator;
-X-Source-Cap: Z3V6aWRpbmU7Z3V6aWRpbmU7Z2F0b3I0MTY2Lmhvc3RnYXRvci5jb20=
-X-Local-Domain: yes
-X-CMAE-Envelope: 
- MS4xfI9FNMU/yo/dMSW0orld1VMRvqMQidlsRzKb7B1/gduEXUQWkayzfyZIfiIWpQS6COmPGImBXpX/FYe8q3A/AoMSPrCsectKyIKWjXvD+9VjWJRGWYgb
- +s/lAVSkTw9lKkayCLy9W7VQb9REJxLhhgkjqJLLf/v7BS/VeKacRsFbDWdi7KG7UhKvGrPDjbK20WhOSgaWsomHsnJjLxAoFmuFP3th3/8K1f6oef1esuCO
-Message-ID-Hash: GDAXTUFPB7TIHOAZJ7LGARE6YKUIUVHX
-X-Message-ID-Hash: GDAXTUFPB7TIHOAZJ7LGARE6YKUIUVHX
-X-MailFrom: gustavo@embeddedor.com
+	by kara.freedesktop.org (Postfix) with ESMTPS id 83C0B44BB6
+	for <nouveau@lists.freedesktop.org>; Tue,  6 Jan 2026 10:34:02 +0000 (UTC)
+Received: from mail-pg1-f175.google.com (mail-pg1-f175.google.com
+ [209.85.215.175])
+	by gabe.freedesktop.org (Postfix) with ESMTPS id 3444110E154
+	for <nouveau@lists.freedesktop.org>; Tue,  6 Jan 2026 10:42:15 +0000 (UTC)
+Received: by mail-pg1-f175.google.com with SMTP id
+ 41be03b00d2f7-c1cf2f0523eso614460a12.3
+        for <nouveau@lists.freedesktop.org>;
+ Tue, 06 Jan 2026 02:42:15 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=joelfernandes.org; s=google; t=1767696135; x=1768300935;
+ darn=lists.freedesktop.org;
+        h=to:in-reply-to:cc:references:message-id:date:subject:mime-version
+         :from:content-transfer-encoding:from:to:cc:subject:date:message-id
+         :reply-to;
+        bh=m4DHnNlD64p5h6wOoVrrAqDFywUoVYTzLxl5WN2rbRU=;
+        b=DYrTrwa9RDDPZ7t8WDRHouIPq3K1dpEFVeZWawG1WY6XM8TUwx0jNk6XtUWTBDdG1Z
+         Ml1psbQZDR0SauET+jRyCyOnpKIXOJ4ny/eFo9/IjHtUNZPdRQovtNJH2rlZKTAeQZl3
+         JNzTxtUtOqna3JT0qfpjf+49ihHPzylpCNupE=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20230601; t=1767696135; x=1768300935;
+        h=to:in-reply-to:cc:references:message-id:date:subject:mime-version
+         :from:content-transfer-encoding:x-gm-gg:x-gm-message-state:from:to
+         :cc:subject:date:message-id:reply-to;
+        bh=m4DHnNlD64p5h6wOoVrrAqDFywUoVYTzLxl5WN2rbRU=;
+        b=rLDDO02QFaHNT3Im0W/fguZsRqRJRFwVSrZePSGKD0Z+WDSkyKeCrqm4JURmj1Kb8x
+         EhguZPEZ7KtwVVhwmGCiSewusgWIJIFxe5uIbGr/KQwt73R8pevYO/9zNl404DWxipJY
+         y5h6ESwizxLxDaZ70wwRBLjK5CerscYqS29gK7tZWRFWN6la6nYzfExJLvhF0xyg/Qm5
+         56kc/C40My4YOQBJR13uCt7c1RJD6yl6TU4GvwzGDwK5ThFUvuZWDHAMtuugEWsSXndI
+         +VAAKCQBBtLEwRuNoGVzQ17+/qk+8T/Fl8IysS75Bh4x8DNI4hKb63D8DVXQh7S5aHQv
+         OrSA==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCXf9GGLScf5tK3QG7ZhU24dZSD67lgZbKS+U02W5THZWjpgSj4aeHaHrQm6mcfw2biA2a6ZnTp8@lists.freedesktop.org
+X-Gm-Message-State: AOJu0YwMk2C4f0j9IJPmBoPqyI+u/xxw2prti/+dkgq111/Ux9JmEZ1v
+	nHkmTKzADxoOEQT6mSTb6kF+OdCdfFE8zdK88DfaLlBZK1fD2dKmsr1fZjYLpE21C6A=
+X-Gm-Gg: AY/fxX6b3WgSDN3WCG53aXyaczG0DMiVArDuzGNNbhONM7KQLVYCUBBp9zNkplTBxRC
+	NEuj4NoxyzGBYOLdS8XvtFEspo2Rj28YcCbovsbTUofWuq+zHJoPXYvZ+AqVPZmQARAT0cLvYcv
+	JxQECo8e+d6Bcpha4zO2INkEPdMZUgLlhSJ6Jfhvm4fQiTfDEwswtTv6GFTadXnhty/79S+UiY7
+	UGkM93Tlxl151utVGkJzvhP7n8vm6VQpziu3AMADIUEXjHtpHsuUllZhcx4l7kMTN7Q6xJxYHDL
+	hPdP1fLSRAsqdzSd8f1POghYDwzXzyD01SAuf5UlzN6q43qPNBwRUNjz2oATxgRSTnN0+ct0vif
+	8WfgnVudpK4+zKgyNtZtdMD5oEOUe3AZcyuSL3s/zjGL157MI2wupuO1Utpmo/hnitrrsm6FnlW
+	jEdPRon2hL7PGvWcLPqjar8ED8h6zC5mlWag==
+X-Google-Smtp-Source: 
+ AGHT+IERN4NTuUg9631IoqFFmDFc+SSm8nsSJiPXRRuyNQlJRcMWfJpX1DUlLRv86z28+rD5rpiQ/Q==
+X-Received: by 2002:a05:693c:839c:10b0:2a4:7cb9:b7da with SMTP id
+ 5a478bee46e88-2b16f91adfamr1668838eec.25.1767696134508;
+        Tue, 06 Jan 2026 02:42:14 -0800 (PST)
+Received: from smtpclient.apple ([71.219.3.177])
+        by smtp.gmail.com with ESMTPSA id
+ 5a478bee46e88-2b1707d57aasm2365350eec.30.2026.01.06.02.42.13
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Tue, 06 Jan 2026 02:42:13 -0800 (PST)
+Content-Type: text/plain; charset=utf-8
+Content-Transfer-Encoding: quoted-printable
+From: Joel Fernandes <joel@joelfernandes.org>
+Mime-Version: 1.0 (1.0)
+Subject: Re: [PATCH] MAINTAINERS: Update email address for Joel Fernandes
+Date: Tue, 6 Jan 2026 05:42:02 -0500
+Message-Id: <8822A0A5-CD4C-403A-A001-F4E7A351D81B@joelfernandes.org>
+References: <c5c5c0a4-249f-41b0-b5f1-87a58514b120@nvidia.com>
+In-Reply-To: <c5c5c0a4-249f-41b0-b5f1-87a58514b120@nvidia.com>
+To: John Hubbard <jhubbard@nvidia.com>
+X-Mailer: iPhone Mail (23B85)
+Message-ID-Hash: RLXLZGZ2G3Y3VQ64IJBAUYEMVFDZ5UMM
+X-Message-ID-Hash: RLXLZGZ2G3Y3VQ64IJBAUYEMVFDZ5UMM
+X-MailFrom: joel@joelfernandes.org
+X-Mailman-Rule-Hits: nonmember-moderation
 X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency;
- loop; banned-address; member-moderation; nonmember-moderation; administrivia;
- implicit-dest; max-recipients; max-size; news-moderation; no-subject;
- digests; suspicious-header
-CC: dri-devel@lists.freedesktop.org, nouveau@lists.freedesktop.org,
- linux-kernel@vger.kernel.org, linux-hardening@vger.kernel.org
+ loop; banned-address; member-moderation
+CC: linux-kernel@vger.kernel.org, rcu@vger.kernel.org,
+ rust-for-linux <rust-for-linux@vger.kernel.org>,
+ nouveau@lists.freedesktop.org, Boqun Feng <boqun.feng@gmail.com>,
+ Paul E McKenney <paulmck@kernel.org>, Jason Gunthorpe <jgg@nvidia.com>,
+ Steven Rostedt <rostedt@goodmis.org>, rostedt@google.com,
+ Yury Norov <yury.norov@gmail.com>
 X-Mailman-Version: 3.3.8
 Precedence: list
 List-Id: Nouveau development list <nouveau.lists.freedesktop.org>
 Archived-At: 
- <https://lists.freedesktop.org/hyperkitty/list/nouveau@lists.freedesktop.org/message/GDAXTUFPB7TIHOAZJ7LGARE6YKUIUVHX/>
+ <https://lists.freedesktop.org/hyperkitty/list/nouveau@lists.freedesktop.org/message/RLXLZGZ2G3Y3VQ64IJBAUYEMVFDZ5UMM/>
 Archived-At: 
- <https://lore.freedesktop.org/e1009d16-cadb-4446-aef5-4a52197551a4@embeddedor.com/>
+ <https://lore.freedesktop.org/8822A0A5-CD4C-403A-A001-F4E7A351D81B@joelfernandes.org/>
 List-Archive: 
  <https://lists.freedesktop.org/hyperkitty/list/nouveau@lists.freedesktop.org/>
 List-Archive: <https://lore.freedesktop.org/nouveau>
@@ -143,55 +134,94 @@ List-Post: <mailto:nouveau@lists.freedesktop.org>
 List-Subscribe: <mailto:nouveau-join@lists.freedesktop.org>
 List-Unsubscribe: <mailto:nouveau-leave@lists.freedesktop.org>
 
-Hi all,
 
-Friendly ping: who can take this, please?
 
-Thanks
--Gustavo
+> On Jan 5, 2026, at 10:22=E2=80=AFPM, John Hubbard <jhubbard@nvidia.com> wr=
+ote:
+>=20
+> =EF=BB=BFOn 1/4/26 4:30 PM, Joel Fernandes wrote:
+>> From: Joel Fernandes (NVIDIA) <joel@joelfernandes.org>
+>>=20
+>> Update my email address from joelagnelf@nvidia.com to joel@joelfernandes.=
+org,
+>> which I will be using for community email going forward.
+>>=20
+>> Signed-off-by: Joel Fernandes (NVIDIA) <joel@joelfernandes.org>
+>> ---
+>> Boqun, could we take it through the RCU tree for 7.0? Thanks!
+>>=20
+>> .mailmap    | 1 +
+>> MAINTAINERS | 4 ++--
+>> 2 files changed, 3 insertions(+), 2 deletions(-)
+>>=20
+>> diff --git a/.mailmap b/.mailmap
+>> index 84309a39d329..279f8fb223e2 100644
+>> --- a/.mailmap
+>> +++ b/.mailmap
+>> @@ -389,6 +389,7 @@ Jiri Slaby <jirislaby@kernel.org> <xslaby@fi.muni.cz>=
 
-On 8/14/25 15:01, Gustavo A. R. Silva wrote:
-> -Wflex-array-member-not-at-end was introduced in GCC-14, and we are
-> getting ready to enable it, globally.
-> 
-> Use the new TRAILING_OVERLAP() helper to fix the following warning:
-> 
-> drivers/gpu/drm/nouveau/nvif/fifo.c:29:42: warning: structure containing a flexible array member is not at the end of another structure [-Wflex-array-member-not-at-end]
-> 
-> This helper creates a union between a flexible-array member (FAM)
-> and a set of members that would otherwise follow it. This overlays
-> the trailing members onto the FAM while preserving the original
-> memory layout.
-> 
-> Signed-off-by: Gustavo A. R. Silva <gustavoars@kernel.org>
-> ---
-> Changes in v3:
->   - Use the new TRAILING_OVERLAP() helper.
-> 
-> Changes in v2:
->   - Adjust heap allocation.
-> 
->   drivers/gpu/drm/nouveau/nvif/fifo.c | 5 ++---
->   1 file changed, 2 insertions(+), 3 deletions(-)
-> 
-> diff --git a/drivers/gpu/drm/nouveau/nvif/fifo.c b/drivers/gpu/drm/nouveau/nvif/fifo.c
-> index a463289962b2..b0ab80995d98 100644
-> --- a/drivers/gpu/drm/nouveau/nvif/fifo.c
-> +++ b/drivers/gpu/drm/nouveau/nvif/fifo.c
-> @@ -25,13 +25,12 @@ static int
->   nvif_fifo_runlists(struct nvif_device *device)
->   {
->   	struct nvif_object *object = &device->object;
-> -	struct {
-> -		struct nv_device_info_v1 m;
-> +	TRAILING_OVERLAP(struct nv_device_info_v1, m, data,
->   		struct {
->   			struct nv_device_info_v1_data runlists;
->   			struct nv_device_info_v1_data runlist[64];
->   		} v;
-> -	} *a;
-> +	) *a;
->   	int ret, i;
->   
->   	if (device->runlist)
+>> Jisheng Zhang <jszhang@kernel.org> <jszhang@marvell.com>
+>> Jisheng Zhang <jszhang@kernel.org> <Jisheng.Zhang@synaptics.com>
+>> Jishnu Prakash <quic_jprakash@quicinc.com> <jprakash@codeaurora.org>
+>> +Joel Fernandes <joel@joelfernandes.org> <joelagnelf@nvidia.com>
+>> Joel Granados <joel.granados@kernel.org> <j.granados@samsung.com>
+>> Johan Hovold <johan@kernel.org> <jhovold@gmail.com>
+>> Johan Hovold <johan@kernel.org> <johan@hovoldconsulting.com>
+>> diff --git a/MAINTAINERS b/MAINTAINERS
+>> index 12f49de7fe03..43bbf12e2c80 100644
+>> --- a/MAINTAINERS
+>> +++ b/MAINTAINERS
+>> @@ -14558,7 +14558,7 @@ M:    Luc Maranget <luc.maranget@inria.fr>
+>> M:    "Paul E. McKenney" <paulmck@kernel.org>
+>> R:    Akira Yokosawa <akiyks@gmail.com>
+>> R:    Daniel Lustig <dlustig@nvidia.com>
+>> -R:    Joel Fernandes <joelagnelf@nvidia.com>
+>> +R:    Joel Fernandes (NVIDIA) <joel@joelfernandes.org>
+>=20
+> Hi Joel,
+>=20
+> Can you please hold off on doing this for a few more days? We have both
+> NVIDIA and Microsoft involved in fixing the email issues, and it looks
+> like they may already be solved, in fact.
 
+John,
+Ok, thanks. It is common for corporate contributors to use company name in b=
+rackets though and I have been using this convention for a long time (as do O=
+racle, MS, Google etc and even some at Nvidia). Is there a real benefit to u=
+s? Tagging company in the name is in fact better for visibility IMO. Especia=
+lly in screaming caps ;-). It is more important that mailing list traffic do=
+es not have issues which unfortunately us and other company domains have exp=
+erienced. I have been using my domain for a long time without incident. In f=
+act I used it at Google for this exact reason (with proper attribution to Go=
+ogle).
+
+Boqun, Paul,
+Let us hold off on this patch for now while we are trying to resolve long-st=
+anding issues with the public mailing list software and policies related to o=
+ur mailing list conventions. Sorry for the confusion. thanks!
+
+thanks,
+
+ - Joel
+
+
+
+>=20
+> thanks,
+> --=20
+> John Hubbard
+>=20
+>> L:    linux-kernel@vger.kernel.org
+>> L:    linux-arch@vger.kernel.org
+>> L:    lkmm@lists.linux.dev
+>> @@ -21895,7 +21895,7 @@ READ-COPY UPDATE (RCU)
+>> M:    "Paul E. McKenney" <paulmck@kernel.org>
+>> M:    Frederic Weisbecker <frederic@kernel.org> (kernel/rcu/tree_nocb.h)
+>> M:    Neeraj Upadhyay <neeraj.upadhyay@kernel.org> (kernel/rcu/tasks.h)
+>> -M:    Joel Fernandes <joelagnelf@nvidia.com>
+>> +M:    Joel Fernandes (NVIDIA) <joel@joelfernandes.org>
+>> M:    Josh Triplett <josh@joshtriplett.org>
+>> M:    Boqun Feng <boqun.feng@gmail.com>
+>> M:    Uladzislau Rezki <urezki@gmail.com>
+>=20
+>=20
