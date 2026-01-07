@@ -2,38 +2,38 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id 258E6CFDF53
-	for <lists+nouveau@lfdr.de>; Wed, 07 Jan 2026 14:33:47 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 69D4BCFDDB1
+	for <lists+nouveau@lfdr.de>; Wed, 07 Jan 2026 14:12:33 +0100 (CET)
 Received: from kara.freedesktop.org (unknown [131.252.210.166])
-	by gabe.freedesktop.org (Postfix) with ESMTPS id 91FDF10E5D2;
-	Wed,  7 Jan 2026 13:33:45 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTPS id 9464810E5BB;
+	Wed,  7 Jan 2026 13:12:31 +0000 (UTC)
 Authentication-Results: gabe.freedesktop.org;
-	dkim=fail reason="signature verification failed" (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="dT5UdRQg";
+	dkim=pass (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="SMpNz00V";
 	dkim-atps=neutral
 Received: from kara.freedesktop.org (localhost [127.0.0.1])
-	by kara.freedesktop.org (Postfix) with ESMTP id 163D344CAB;
-	Wed,  7 Jan 2026 13:25:30 +0000 (UTC)
+	by kara.freedesktop.org (Postfix) with ESMTP id 20C0644CAB;
+	Wed,  7 Jan 2026 13:04:16 +0000 (UTC)
 ARC-Seal: i=1; cv=none; a=rsa-sha256; d=lists.freedesktop.org;
- s=20240201; t=1767792329;
- b=iNs6Np5kdMvqYYJWpKiFveWK8jt9X4DJm5FlrEa6NQxkXKGqXc3TSG3BGpEIEwcHsjPyy
- wb7bFyHpJTv41YjuHebHpHAlOCBGfTAVMoZNJro2Mv3RhU+zsyhpqcs4CHT7j2WyCUj8H4a
- g3GwJ7GWLl0dLgyPtTW7Ph8kj9KMlOyRNM/HC5j5je7fKNLuSTcIR2emJkm/pT92Oyk4E+N
- uQ7CCPS4PUwa2z9PjwnRJeNiLrCO80DJAalCoRFnDM8md3NSCdjXqXGxDoQSP7mYy9NGXVT
- IdXrHnlDM3JtqAccub4BtYWVyYeNOSaoKH3OKH/s0lKw1Yl9FtmyN3OeUR2A==
+ s=20240201; t=1767791056;
+ b=vIe5kHC0oYiGy0HW3LOkZe8Swkt58ESKP48NafqcvukcZ0ivPbIMKXbOjZRvdgvaiNtak
+ elsPlx7fYI4kqA2lrNeptlFp7n5sezAKXWFs9I82H20McJiobsElUr0QgIf9SaC23xdmXNS
+ g7mFmGWHbf/oi6v42vN9jDoDvGqcMNdwVmrGq62IZ1c348BSr3EKYwtSlyiShJqaU3zE56i
+ IF2rVtrZXqMeAEwZq2L02WkO4JJHhbeaK20Uk6H5EJChyKMki7qzPhC7xB5bdxafErswbzD
+ mdhB6wMv5R6unp7ZBSZTPZM9Ej2PFq7H76uA92HGhnW8DSP0RCBgxI5Ne84w==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed;
- d=lists.freedesktop.org; s=20240201; t=1767792329; h=from : sender :
+ d=lists.freedesktop.org; s=20240201; t=1767791056; h=from : sender :
  reply-to : subject : date : message-id : to : cc : mime-version :
  content-type : content-transfer-encoding : content-id :
  content-description : resent-date : resent-from : resent-sender :
  resent-to : resent-cc : resent-message-id : in-reply-to : references :
  list-id : list-help : list-unsubscribe : list-subscribe : list-post :
  list-owner : list-archive;
- bh=59Oo21/enRqCddzigs+wTzb1GNY5X/hahljFjen+ero=;
- b=qa19oqHvIxjGRBDa0JLY4qdCabnTj+tzChSXF8vtVQBZV9jvqk7B7APPAdneeBsP1OcFF
- Sint8LFag/16GXgvTp0pz88aZpp6Juac2vwT+Ci4uzcePnfuKn24m1KxhRiDVYiriEIjcFi
- 81geuDM/lYB+tfPux2bMR009GH8WjE2cNOE8quN269xi9HkcQS6ymig2x3vIcqk6EsOmrqk
- U9/k0fYNiUrI3A4L5XqxeqHk59WfHXrDFhqgCggsPgy4mEnvuixmRk+cNQsm6/AvZb+JkGF
- 5ZwPP2Ny58AJREoHSTDPY5oWgwJo2d8tySSLwg/APMNnFF9HbLHhl7UsdFnQ==
+ bh=nH1lIKowpY71IyFBqdjo2R6v53N3f0jy/DRCKOUdr3Q=;
+ b=jsPO6BpI2BbRSP2bBY5UyS7hP74eyo/HaalPm6WManiCJ4Y9BVxxl1YC2zt1jvkhAuMqM
+ UVFEZZeuTH4PTP+3HgUZ93Z9r+AqURtHIfP2EJ8cfg9TMva4McdD2cQsRVlkQVo7hC6HarD
+ RTIyCMr7WHyBpyJvlqXM9mM4l46nKTBzBZErIpiWB+I3BLcs0GZ93iN1D6Xb/WPCRHF1Tbv
+ PYtysZToiGOGDhoWmpNxFG+49b1d2a2rh9LfQP+2fgM3nuIGCadLiFxljB73IepTCOPENuX
+ Tn6VbxIrhQCeZs0z2uhOt9J1sxNUAsSjGXQDRULckAdkHgymw6ktxHIAJ1/Q==
 ARC-Authentication-Results: i=1; mail.freedesktop.org;
  dkim=pass header.d=kernel.org;
   arc=none (Message is not ARC signed);
@@ -44,64 +44,67 @@ Authentication-Results: mail.freedesktop.org; dkim=pass header.d=kernel.org;
  dmarc=pass (Used From Domain Record) header.from=kernel.org
  policy.dmarc=quarantine
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by kara.freedesktop.org (Postfix) with ESMTPS id 64C7E44BB6
-	for <nouveau@lists.freedesktop.org>; Tue,  6 Jan 2026 11:54:45 +0000 (UTC)
-Received: from sea.source.kernel.org (sea.source.kernel.org [172.234.252.31])
-	by gabe.freedesktop.org (Postfix) with ESMTPS id 3D3B710E0AE
-	for <nouveau@lists.freedesktop.org>; Tue,  6 Jan 2026 12:02:58 +0000 (UTC)
+	by kara.freedesktop.org (Postfix) with ESMTPS id B961344CA3
+	for <nouveau@lists.freedesktop.org>; Wed,  7 Jan 2026 13:04:13 +0000 (UTC)
+Received: from tor.source.kernel.org (tor.source.kernel.org [172.105.4.254])
+	by gabe.freedesktop.org (Postfix) with ESMTPS id D34ED10E0B9
+	for <nouveau@lists.freedesktop.org>; Wed,  7 Jan 2026 13:12:28 +0000 (UTC)
 Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
-	by sea.source.kernel.org (Postfix) with ESMTP id E899543495;
-	Tue,  6 Jan 2026 12:02:57 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 8139FC116C6;
-	Tue,  6 Jan 2026 12:02:53 +0000 (UTC)
+	by tor.source.kernel.org (Postfix) with ESMTP id ADD756001A;
+	Wed,  7 Jan 2026 13:12:27 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 04516C4CEF7;
+	Wed,  7 Jan 2026 13:12:20 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
-	s=k20201202; t=1767700977;
-	bh=RuR20ntLSihU7i4U/Z71FOOJsBvzHsUKXpYAf9QNo5k=;
-	h=Date:From:Subject:Cc:To:References:In-Reply-To:From;
-	b=dT5UdRQgmJpc3yEWySg1nUr+5EtLuryqgJyy9pbNyBaLQpno0fhxEhdzeIt4pN/ML
-	 w9ZF8E7JLB0/JB9yEcXOkRobNbwpKwhw6k03fNG93N5lDTUSTY/fnHMPU/hDPaq4DI
-	 nVc+pOhH+F935WDEJgQ3gFrYl7VTMrTEPC8vqXSZ6JkE8I/7elG78/psjuEqKFikBE
-	 DRE70jAe3Kwa2HXf4OnCFnsW6x3JPbKHOMnDljTV1jWYkI/EOABWLfo94LI+so71CV
-	 +j4dPogSIz/7hU0VXC/a574quUxWu0gAiPNgX1YjKDA4mvy6xsi6gx1gknsLaHtpNQ
-	 GmsJby6TeLrXA==
-Mime-Version: 1.0
-Content-Transfer-Encoding: quoted-printable
-Content-Type: text/plain; charset=UTF-8
-Date: Tue, 06 Jan 2026 13:02:51 +0100
-Message-Id: <DFHHP3LVYW43.247TW37BCGYHE@kernel.org>
-From: "Danilo Krummrich" <dakr@kernel.org>
-Subject: Re: [PATCH] gpu: nova-core: use CStr::from_bytes_until_nul() and
- remove util.rs
-To: "John Hubbard" <jhubbard@nvidia.com>
-References: <20260103013438.247759-1-jhubbard@nvidia.com>
-In-Reply-To: <20260103013438.247759-1-jhubbard@nvidia.com>
-X-MailFrom: dakr@kernel.org
-X-Mailman-Rule-Hits: implicit-dest
+	s=k20201202; t=1767791547;
+	bh=nH1lIKowpY71IyFBqdjo2R6v53N3f0jy/DRCKOUdr3Q=;
+	h=From:To:Cc:Subject:In-Reply-To:References:Date:From;
+	b=SMpNz00VTY3IuWA9a30byLgzg6Yh6ZcTskIv7FxF7xT2ePEReH5jjvCRfdAV+cLh5
+	 LwAzR/q1D8c/FAIqW0CctIwkKCcYV6SSZp/DKqTOsxpizdy5ADaYtVVgm3hwilByhW
+	 6Fz3VwIocRheTWtQhyXxMg7P7dM5WD9EXcnxEEM2eo9l7W6/S5Qms6cPOtnDtXX9J5
+	 VQh0/DfofvY8PKQQYfwzzs3swf0Yk+8tqNOpKKvQo2PzBoOFcbTvvimJ+onwZYWKIb
+	 B/tUp3pqY5pcDKygMahUQ+grzc1hNfzFT5Q/CkPIpGCm/dXEEJTXTTNOlB67ZEwOPV
+	 8nTNltf5UqWUw==
+From: Andreas Hindborg <a.hindborg@kernel.org>
+To: Peter Zijlstra <peterz@infradead.org>
+Subject: Re: [PATCH 0/4] Inline helpers into Rust without full LTO
+In-Reply-To: <20260107123528.GF2393663@noisy.programming.kicks-ass.net>
+References: <20251202-inline-helpers-v1-0-879dae33a66a@google.com>
+ <87y0m9har9.fsf@t14s.mail-host-address-is-not-set>
+ <QViERQV7XT0BjTfSSyP6vzQc4AYxosyF5TEZ5kRu8AVWjmGCP_5n5V2AV2hjqVza8-jvzyquH3JLJA1zvbRD9w==@protonmail.internalid>
+ <20260107123528.GF2393663@noisy.programming.kicks-ass.net>
+Date: Wed, 07 Jan 2026 14:12:10 +0100
+Message-ID: <87sechh8id.fsf@t14s.mail-host-address-is-not-set>
+MIME-Version: 1.0
+Content-Type: text/plain
+Message-ID-Hash: 446CK4Y7P35MZNERVKYDOAUFGLWLDI2Y
+X-Message-ID-Hash: 446CK4Y7P35MZNERVKYDOAUFGLWLDI2Y
+X-MailFrom: a.hindborg@kernel.org
 X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency;
  loop; banned-address; member-moderation; nonmember-moderation; administrivia;
- max-recipients; max-size; news-moderation; no-subject; digests;
- suspicious-header
-Message-ID-Hash: PU3FA7FSL7CBQ7FPUA7G6LCMXBL6V462
-X-Message-ID-Hash: PU3FA7FSL7CBQ7FPUA7G6LCMXBL6V462
-X-Mailman-Approved-At: Wed, 07 Jan 2026 13:25:27 +0000
-CC: Alexandre Courbot <acourbot@nvidia.com>,
- Joel Fernandes <joelagnelf@nvidia.com>, Alistair Popple <apopple@nvidia.com>,
- Zhi Wang <zhiw@nvidia.com>, Simona Vetter <simona@ffwll.ch>,
- Bjorn Helgaas <bhelgaas@google.com>, Miguel Ojeda <ojeda@kernel.org>,
- Alex Gaynor <alex.gaynor@gmail.com>, Boqun Feng <boqun.feng@gmail.com>,
- Gary Guo <gary@garyguo.net>,
- =?utf-8?q?Bj=C3=B6rn_Roy_Baron?= <bjorn3_gh@protonmail.com>,
- Benno Lossin <lossin@kernel.org>, Andreas Hindborg <a.hindborg@kernel.org>,
- Alice Ryhl <aliceryhl@google.com>, Trevor Gross <tmgross@umich.edu>,
- nouveau@lists.freedesktop.org, rust-for-linux@vger.kernel.org,
- LKML <linux-kernel@vger.kernel.org>
+ implicit-dest; max-recipients; max-size; news-moderation; no-subject;
+ digests; suspicious-header
+CC: Alice Ryhl <aliceryhl@google.com>, Miguel Ojeda <ojeda@kernel.org>,
+ Boqun Feng <boqun.feng@gmail.com>, Gary Guo <gary@garyguo.net>,
+ =?utf-8?Q?Bj=C3=B6rn?= Roy Baron <bjorn3_gh@protonmail.com>,
+ Benno Lossin <lossin@kernel.org>, Trevor Gross <tmgross@umich.edu>,
+ Danilo Krummrich <dakr@kernel.org>, Alexandre Courbot <acourbot@nvidia.com>,
+ Will Deacon <will@kernel.org>, Mark Rutland <mark.rutland@arm.com>,
+ Nathan Chancellor <nathan@kernel.org>,
+ Nick Desaulniers <nick.desaulniers+lkml@gmail.com>,
+ Bill Wendling <morbo@google.com>, Justin Stitt <justinstitt@google.com>,
+ Nicolas Schier <nicolas.schier@linux.dev>,
+ Andrew Morton <akpm@linux-foundation.org>,
+ Uladzislau Rezki <urezki@gmail.com>, rust-for-linux@vger.kernel.org,
+ linux-kernel@vger.kernel.org, llvm@lists.linux.dev,
+ linux-kbuild@vger.kernel.org, linux-mm@kvack.org,
+ nouveau@lists.freedesktop.org, Matthew Maurer <mmaurer@google.com>
 X-Mailman-Version: 3.3.8
 Precedence: list
 List-Id: Nouveau development list <nouveau.lists.freedesktop.org>
 Archived-At: 
- <https://lists.freedesktop.org/hyperkitty/list/nouveau@lists.freedesktop.org/message/PU3FA7FSL7CBQ7FPUA7G6LCMXBL6V462/>
+ <https://lists.freedesktop.org/hyperkitty/list/nouveau@lists.freedesktop.org/message/446CK4Y7P35MZNERVKYDOAUFGLWLDI2Y/>
 Archived-At: 
- <https://lore.freedesktop.org/DFHHP3LVYW43.247TW37BCGYHE@kernel.org/>
+ <https://lore.freedesktop.org/87sechh8id.fsf@t14s.mail-host-address-is-not-set/>
 List-Archive: 
  <https://lists.freedesktop.org/hyperkitty/list/nouveau@lists.freedesktop.org/>
 List-Archive: <https://lore.freedesktop.org/nouveau>
@@ -111,20 +114,63 @@ List-Post: <mailto:nouveau@lists.freedesktop.org>
 List-Subscribe: <mailto:nouveau-join@lists.freedesktop.org>
 List-Unsubscribe: <mailto:nouveau-leave@lists.freedesktop.org>
 
-On Sat Jan 3, 2026 at 2:34 AM CET, John Hubbard wrote:
-> @@ -209,7 +208,9 @@ impl GetGspStaticInfoReply {
->      /// Returns the name of the GPU as a string, or `None` if the string=
- given by the GSP was
->      /// invalid.
->      pub(crate) fn gpu_name(&self) -> Option<&str> {
-> -        util::str_from_null_terminated(&self.gpu_name)
-> +        CStr::from_bytes_until_nul(&self.gpu_name)
-> +            .ok()
-> +            .and_then(|cstr| cstr.to_str().ok())
->      }
->  }
+"Peter Zijlstra" <peterz@infradead.org> writes:
 
-Did you see my reply in [1]? The question is orthogonal to this change, but
-perhaps it can be addressed with a subsequent patch?
+> On Wed, Jan 07, 2026 at 01:23:38PM +0100, Andreas Hindborg wrote:
+>> Hi Alice,
+>>
+>> Alice Ryhl <aliceryhl@google.com> writes:
+>>
+>> > Currently the only way for Rust code to call a static inline function is
+>> > to go through a helper in rust/helpers/. This introduces performance
+>> > costs due to additional function calls and also clutters backtraces and
+>> > flame graphs with helper symbols.
+>> >
+>> > To get rid of these helper symbols, provide functionality to inline
+>> > helpers into Rust using llvm-link. This option complements full LTO, by
+>> > being much cheaper and avoiding incompatibility with BTF.
+>> >
+>> > I ran a microbenchmark showing the benefit of this. All the benchmark
+>> > does is call refcount_inc() in a loop. This was chosen since refcounting
+>> > is quite hot in Binder. The results are that Rust spends 6.35 ns per
+>> > call vs 5.73 ns per call in C. When enabling this option, the two
+>> > languages become equally fast, and disassembly confirms the exact same
+>> > machine code is used (in particular there is no call to
+>> > rust_helper_refcount_inc). Benchmarking Binder also results in an
+>> > improvement from this change.
+>> >
+>> > This patch is complementary to:
+>> > https://lore.kernel.org/all/20251202-define-rust-helper-v1-0-a2e13cbc17a6@google.com/
+>> >
+>> > Signed-off-by: Alice Ryhl <aliceryhl@google.com>
+>>
+>> I get the following modpost errors when building with this applied on top
+>> of v6.19-rc4:
+>>
+>> ERROR: modpost: "__SCK__WARN_trap" [drivers/gpu/drm/nova/nova.ko] undefined!
+>> ERROR: modpost: "__SCK__WARN_trap" [drivers/gpu/nova-core/nova_core.ko] undefined!
+>> ERROR: modpost: "__SCK__WARN_trap" [drivers/block/rnull/rnull_mod.ko] undefined!
+>> ERROR: modpost: "__SCK__WARN_trap" [samples/rust/rust_minimal.ko] undefined!
+>> ERROR: modpost: "__SCK__WARN_trap" [samples/rust/rust_misc_device.ko] undefined!
+>> ERROR: modpost: "__SCK__WARN_trap" [samples/rust/rust_print.ko] undefined!
+>> ERROR: modpost: "__SCK__WARN_trap" [samples/rust/rust_dma.ko] undefined!
+>> ERROR: modpost: "__SCK__WARN_trap" [samples/rust/rust_driver_pci.ko] undefined!
+>> ERROR: modpost: "__SCK__WARN_trap" [samples/rust/rust_driver_platform.ko] undefined!
+>> ERROR: modpost: "__SCK__WARN_trap" [samples/rust/rust_driver_faux.ko] undefined!
+>
+> Looks like it used the wrong static_call_mod() version, was MODULE
+> defined?
 
-[1] https://lore.kernel.org/lkml/DFEVITW4O9DW.P4ITE1PWIDY6@kernel.org/
+CONFIG_MODULES=y, yes
+
+I built without the patch first, then applied the series, enabled the
+option via menuconfig and ran the build. I thought maybe some dependency
+check is messed up so I retried the build from a clean state. Same
+result.
+
+
+Best regards,
+Andreas Hindborg
+
+
+
