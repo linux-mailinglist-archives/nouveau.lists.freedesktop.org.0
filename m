@@ -2,134 +2,101 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id 216A9CFF159
-	for <lists+nouveau@lfdr.de>; Wed, 07 Jan 2026 18:24:37 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id B2130CFF25B
+	for <lists+nouveau@lfdr.de>; Wed, 07 Jan 2026 18:39:27 +0100 (CET)
 Received: from kara.freedesktop.org (unknown [131.252.210.166])
-	by gabe.freedesktop.org (Postfix) with ESMTPS id 894A810E60D;
-	Wed,  7 Jan 2026 17:24:35 +0000 (UTC)
-Authentication-Results: gabe.freedesktop.org;
-	dkim=fail reason="signature verification failed" (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="E+rllcvr";
-	dkim-atps=neutral
+	by gabe.freedesktop.org (Postfix) with ESMTPS id 8445E10E60D;
+	Wed,  7 Jan 2026 17:39:26 +0000 (UTC)
 Received: from kara.freedesktop.org (localhost [127.0.0.1])
-	by kara.freedesktop.org (Postfix) with ESMTP id AD22444CA3;
-	Wed,  7 Jan 2026 17:16:19 +0000 (UTC)
+	by kara.freedesktop.org (Postfix) with ESMTP id B51D144CA4;
+	Wed,  7 Jan 2026 17:31:10 +0000 (UTC)
 ARC-Seal: i=1; cv=none; a=rsa-sha256; d=lists.freedesktop.org;
- s=20240201; t=1767806179;
- b=vEwGpZm7Dc15JBWH+yiIzcXiKQdmZfll1oDsZ+LqWdSwgRIM2ktn+Qttwz2E2xiwykKST
- qZw7iTQYiGzKxy0jKPoga1VD/yd3cxE/LZXamfbJteftR022izEeyUtpx84lWkqf3+kduZa
- DgmrXWzWW++X2maQHpTP3gJdR6WGACJ9beP51W2wyP0F3dCS497Tc4eUS2yDyxnvSWn24cg
- UiQbgOUTLFPuNDD3LoJM4UfqECPU4rK8GtgFx/dR5lh1Wfv+BdGMA/R9g5NhdXbJ5wBMQ4x
- jWCQbDlUkK1+daC2XY6Oi+RRIyi9QXq6U41+tTy2vYdrhRss/wdjsj0ATm8A==
+ s=20240201; t=1767807070;
+ b=eaZx43jT1WyPPGRbP9VE2q+NWuNUGCd9CYwcamN93XHsIc/vKvRgsxELIMNNW3sbzi+MS
+ GZ18WcHmezerdU5/WfrJ1hBLj1xR42pbNSN7EyHCu1nLFoGyxcHaMSUv1qqATUmsmjahyo7
+ HAh4TfqGsGVTgqowwXNr8GiG5p6R3yHtu3yyg95bnl9Pr4Dp2ShZ0tGMfZGSRL4OH4LdU/w
+ VCn8kUigImljMr0n5E48F57e4LagNyik8EhbRc+dXbhqeJMixY+IYJiVmq2d3KY/DzljCL7
+ ekSN2mpLuVZm7w83OKmTV8TkoiUXyIt8QdPJLcFFJb24w2tW4k/faxameG8g==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed;
- d=lists.freedesktop.org; s=20240201; t=1767806179; h=from : sender :
+ d=lists.freedesktop.org; s=20240201; t=1767807070; h=from : sender :
  reply-to : subject : date : message-id : to : cc : mime-version :
  content-type : content-transfer-encoding : content-id :
  content-description : resent-date : resent-from : resent-sender :
  resent-to : resent-cc : resent-message-id : in-reply-to : references :
  list-id : list-help : list-unsubscribe : list-subscribe : list-post :
  list-owner : list-archive;
- bh=XqdCPkDx31P+/88ZI9oqnb0Z6s4jrFfvs9pYpKRo6yA=;
- b=bK5Lghk1Vewq65WWt3hfLgocBUnoMUmCR5maMUuqiYKaKhYUqr1t1f/lYgaT+lqXYOqbJ
- /MbUSOlNkoBrZREDxcp4rWYOktlesYfSTDnZ8FC5nco3CPkyKRPaMyPnhA9QQZciCFjW29v
- tSqaK8FGNt58kNU5Kj91uz1apHXMjGoZ8jopkwBZ8eXzSJofHb0Eb5IibfQ+Ji4t3cYymOG
- CE+1Q3/I3eI7DWHMmvJobO0IbgWL3PCaw1ad01Jx1rKF8V8/D6pZM3N5hqxMoW0ro4V3+wL
- nfNETAHWjzn9cF1ydn6cel7k+nmSXyVZu44bpCqykhgUuuRyOGrkPjB53pjQ==
-ARC-Authentication-Results: i=1; mail.freedesktop.org;
- dkim=pass header.d=gmail.com;
+ bh=CD7lgNSYoAzLqjXnj6WV3liPCcj6fvibuJkQ1r6c5uA=;
+ b=j6g72FghkGtY6Lzzn2AMLUw64TiN7CWFdDZ5qUg4AMT4TVc3J2wIYMmZujeDgOJQdLSeJ
+ yU0YJtWdWu4ybQcs91hX8N3YI8Yomk+w0/tNANw9bueNq2jJ3ZuFN89Ag/mTZq60PMiQo9u
+ WOOK8c0QVr2GJdyNWViIWWxfH7s4PK8YfWtWsZivrTL/hlrd5E6E7L4n6YW4gPLM8OV+VNi
+ dD4k6DxSfEsGH1wZQqKqbZ24iPXioc8+FE812eb/pf/Gd5Un+IomHocPTBxnEvK5kyxJ9Hl
+ 5MIGVhnXIalYHW6j+jYy4F0YGtR+26L4o46dxsjL3fCYUoLM5CraBAco5wdw==
+ARC-Authentication-Results: i=1; mail.freedesktop.org; dkim=fail;
   arc=none (Message is not ARC signed);
-  dmarc=pass (Used From Domain Record) header.from=gmail.com
- policy.dmarc=quarantine
-Authentication-Results: mail.freedesktop.org; dkim=pass header.d=gmail.com;
+  dmarc=fail (Used From Domain Record) header.from=goodmis.org
+ policy.dmarc=none
+Authentication-Results: mail.freedesktop.org; dkim=fail;
  arc=none (Message is not ARC signed);
- dmarc=pass (Used From Domain Record) header.from=gmail.com
- policy.dmarc=quarantine
+ dmarc=fail (Used From Domain Record) header.from=goodmis.org
+ policy.dmarc=none
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by kara.freedesktop.org (Postfix) with ESMTPS id 16F7244C9E
-	for <nouveau@lists.freedesktop.org>; Wed,  7 Jan 2026 17:16:17 +0000 (UTC)
-Received: from mail-dy1-f175.google.com (mail-dy1-f175.google.com
- [74.125.82.175])
-	by gabe.freedesktop.org (Postfix) with ESMTPS id 98C6210E2B6
-	for <nouveau@lists.freedesktop.org>; Wed,  7 Jan 2026 17:24:32 +0000 (UTC)
-Received: by mail-dy1-f175.google.com with SMTP id
- 5a478bee46e88-2b07583340dso125907eec.3
-        for <nouveau@lists.freedesktop.org>;
- Wed, 07 Jan 2026 09:24:32 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1767806672; x=1768411472;
- darn=lists.freedesktop.org;
-        h=content-transfer-encoding:cc:to:subject:message-id:date:from
-         :in-reply-to:references:mime-version:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=XqdCPkDx31P+/88ZI9oqnb0Z6s4jrFfvs9pYpKRo6yA=;
-        b=E+rllcvrrS/IxN7TNbufXAxcLqOijWTVha4qTumO70VevlpavtB0XP3grQjH8tmLGR
-         MKAV+n/T3E7aY6YPCm/pJTQWV/ReGxFsSz24Dkv4q5P6uxoqOwzBhNY+aSrcCdnhWY16
-         e/eDGSRPzlZDPruzz7uGhmJnu7HP7XRbHS7Lnn8GvOyygomVebfZp4KnmBco7zq+AubF
-         FcdDWQI/0BnYNNEYN37Y3NbZr50++fdzA7WnZBww/qSsYytL4e1mVDrCKOraq0wRXSsS
-         On5ymqjuqebTKellCmrPSJG652vSV1L6H+RNqXfzpUrHAjqTXbMzciFSGe+OzMPadh9v
-         rCYg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1767806672; x=1768411472;
-        h=content-transfer-encoding:cc:to:subject:message-id:date:from
-         :in-reply-to:references:mime-version:x-gm-gg:x-gm-message-state:from
-         :to:cc:subject:date:message-id:reply-to;
-        bh=XqdCPkDx31P+/88ZI9oqnb0Z6s4jrFfvs9pYpKRo6yA=;
-        b=hh/joCjgL7p3D/cfH9VeuXfI0du97QWRg09oTTCnLu+Nzm9q6Jdrawy+QOJBUA5w1h
-         VixaYAZhnnqBJ1ArJ3GhjISdddIpH2etHPqV8JnJaR1+hWzLtVDLL9VY1cOGQpwUpCO2
-         l7VzVqT4jRM/LBVHnFxzd7OzMieEPviB24i3xPIMVCDPUn3eDMVOUQqBomw/FSIMN5MQ
-         gnD/4lij06+vbnoqxPMfJq017I3A41uA5r/tgTTis6oE5bnRClEKa2RjUNRDpRRWv58O
-         jf+nydLOf09xOMPlSbfNEN/RpNhCpdDBoxkXpRvT/xkv1HEEsKXzsMXhh3EefvWqQR5Z
-         zXnA==
-X-Forwarded-Encrypted: i=1;
- AJvYcCV/1SAIDaWla1XPPpYu2SCANCa1tFm8bNfSw/ZnuqUsNpSPpvHKEzSLxstY0De2MxeQvzxZ74iB@lists.freedesktop.org
-X-Gm-Message-State: AOJu0Ywex77F1dc1bR2qRFvpOEpyXTfy7zy4CMiWuaZINlSTIkNz3XQp
-	+JBCZKDM0M1hVEEChpyKIcVqybbRpaAOBdpVkes7cv6AGQchkto12pEAANFlV1Tnx76Ryt90c2/
-	QKYYMrjO0ZtG/0YIrUqeaZuAtmyOjc9g=
-X-Gm-Gg: AY/fxX5oFItHH28G1dkYmJ7q6DVE8HRnr5rFc2RgDvY9FvXhcgUc6sKInnhyrKj3X35
-	7ebEkZNQktHULlTxT+kU1dlc45cK9EMA8pC/EkdKfH8Pg4DKfCRGhYuTjMhXdCM60nAv96nnT1L
-	W0xSgWbPshC2Bod9Wt/nT3hcSPA4Lpgzev3Z2xvMpcQX5uxVPlZc0jI289oUHW0V3CS+hDZ6W+6
-	rhFgs8DRbUpLauK2BSHBY5ITTycefJblAsSxGJUUZwOHAOzdM9PrqFliHTVPJVLxTmg2HLSODjx
-	+JXkyBQ1lztposadIsXT4R+7Namp9/0uRRitFpSUeXG9Le0+aS+89e5IIBWE2g/ks85hgqzN9Kj
-	NwVfqaJ+OMibt
-X-Google-Smtp-Source: 
- AGHT+IEmNxe4H46v90z5Qsg81/iqvWHE2i419t6wujoy5EZQVIHlyBEXzgh5s/UfED7pXNr75mh1zoYiP0dchnOTKuI=
-X-Received: by 2002:a05:7300:e58b:b0:2ae:5bd5:c241 with SMTP id
- 5a478bee46e88-2b17d33c615mr1278675eec.7.1767806671760; Wed, 07 Jan 2026
- 09:24:31 -0800 (PST)
-MIME-Version: 1.0
-References: <c5c5c0a4-249f-41b0-b5f1-87a58514b120@nvidia.com>
- <8822A0A5-CD4C-403A-A001-F4E7A351D81B@joelfernandes.org>
- <CANiq72mUCGL3f=GAYSZfMV1=NXpOjz4vsV7B3Pd-=EG8tmWC_A@mail.gmail.com>
- <39e74621-aba6-47eb-9935-0d2321c56d6d@nvidia.com>
-In-Reply-To: <39e74621-aba6-47eb-9935-0d2321c56d6d@nvidia.com>
-From: Miguel Ojeda <miguel.ojeda.sandonis@gmail.com>
-Date: Wed, 7 Jan 2026 18:24:17 +0100
-X-Gm-Features: AQt7F2rzlYOZPcNPb5Y3stczaGAhwYq9zU0rJFqAE7X1RLdvvhtO7z7v_rYamrg
-Message-ID: 
- <CANiq72=vcYkfZtgDfSZaHY=0PMOwc+XiiJo74pciPOV7nrN6Nw@mail.gmail.com>
-Subject: Re: [PATCH] MAINTAINERS: Update email address for Joel Fernandes
+	by kara.freedesktop.org (Postfix) with ESMTPS id 0293D44C9E
+	for <nouveau@lists.freedesktop.org>; Wed,  7 Jan 2026 17:31:07 +0000 (UTC)
+X-Greylist: delayed 464 seconds by postgrey-1.36 at gabe;
+ Wed, 07 Jan 2026 17:39:22 UTC
+Received: from relay.hostedemail.com (smtprelay0012.hostedemail.com
+ [216.40.44.12])
+	by gabe.freedesktop.org (Postfix) with ESMTPS id 9331E10E2B1
+	for <nouveau@lists.freedesktop.org>; Wed,  7 Jan 2026 17:39:22 +0000 (UTC)
+Received: from omf06.hostedemail.com (a10.router.float.18 [10.200.18.1])
+	by unirelay07.hostedemail.com (Postfix) with ESMTP id 9F99A16048D;
+	Wed,  7 Jan 2026 17:31:35 +0000 (UTC)
+Received: from [HIDDEN] (Authenticated sender: rostedt@goodmis.org) by
+ omf06.hostedemail.com (Postfix) with ESMTPA id D68202000F;
+	Wed,  7 Jan 2026 17:31:32 +0000 (UTC)
+Date: Wed, 7 Jan 2026 12:31:59 -0500
+From: Steven Rostedt <rostedt@goodmis.org>
 To: Joel Fernandes <joelagnelf@nvidia.com>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-Message-ID-Hash: LTKITDWDPZRLDI7CWP6AF2O3EMNJEFJT
-X-Message-ID-Hash: LTKITDWDPZRLDI7CWP6AF2O3EMNJEFJT
-X-MailFrom: miguel.ojeda.sandonis@gmail.com
+Subject: Re: [PATCH] MAINTAINERS: Update email address for Joel Fernandes
+Message-ID: <20260107123159.7ac61d69@gandalf.local.home>
+In-Reply-To: <39e74621-aba6-47eb-9935-0d2321c56d6d@nvidia.com>
+References: <c5c5c0a4-249f-41b0-b5f1-87a58514b120@nvidia.com>
+	<8822A0A5-CD4C-403A-A001-F4E7A351D81B@joelfernandes.org>
+	<CANiq72mUCGL3f=GAYSZfMV1=NXpOjz4vsV7B3Pd-=EG8tmWC_A@mail.gmail.com>
+	<39e74621-aba6-47eb-9935-0d2321c56d6d@nvidia.com>
+X-Mailer: Claws Mail 3.20.0git84 (GTK+ 2.24.33; x86_64-pc-linux-gnu)
+MIME-Version: 1.0
+Content-Type: text/plain; charset=US-ASCII
+Content-Transfer-Encoding: 7bit
+X-Rspamd-Server: rspamout07
+X-Rspamd-Queue-Id: D68202000F
+X-Stat-Signature: iz1q955ux1j95575p3magymhwn1ocpdi
+X-Spam-Status: No, score=1.40
+X-Session-Marker: 726F737465647440676F6F646D69732E6F7267
+X-Session-ID: U2FsdGVkX1/BB/wLHRPf79Wd6nZwG8A6By8H7RvT6cw=
+X-HE-Tag: 1767807092-95633
+X-HE-Meta: 
+ U2FsdGVkX1+WGcNYiwZhZJzaeKHl+I/r5SspS9IyQbARG1Ivwm13yowxselsSjVF1Nn2WbQp8NrBzBz4vy2LctgZSMu+a4znAhiCXz0AKC3yNYbhLTTwOnJaBueduDzy6aKIXFkIJ9erK+Id0qWtwl9zlhindJFd+tElJLcugVwqcLZSkOxQUdnrzMasvZ57+vRakddUBF0B0cN1Nfe0SyYF6mXo0doBr8NJK9xzsx1TyLtf1GhygtV/zfBN+WgFlFtWSIr99x34PM4wJjlk/VgfEeIVC4TQhCfZUyw1U1ns1WjO1KOdOobqaavkLIFWGn/0XkhoRmPeYpqxDhevljJEwCmlGEN4oBgzE9vP2ucD7y9Qc3kIskoGh2H4up3D9P3PyRFM/HlGdWWd/tqV6t5RsPfwJtzQO9z3Jyhum0E=
+Message-ID-Hash: MVW4RJUN32GYGNEL5P4JHA2MCRSAWZHI
+X-Message-ID-Hash: MVW4RJUN32GYGNEL5P4JHA2MCRSAWZHI
+X-MailFrom: rostedt@goodmis.org
 X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency;
  loop; banned-address; member-moderation; nonmember-moderation; administrivia;
  implicit-dest; max-recipients; max-size; news-moderation; no-subject;
  digests; suspicious-header
-CC: Joel Fernandes <joel@joelfernandes.org>, linux-kernel@vger.kernel.org,
+CC: Miguel Ojeda <miguel.ojeda.sandonis@gmail.com>,
+ Joel Fernandes <joel@joelfernandes.org>, linux-kernel@vger.kernel.org,
  rcu@vger.kernel.org, rust-for-linux <rust-for-linux@vger.kernel.org>,
  nouveau@lists.freedesktop.org, Boqun Feng <boqun.feng@gmail.com>,
  Paul E McKenney <paulmck@kernel.org>, Jason Gunthorpe <jgg@nvidia.com>,
- Steven Rostedt <rostedt@goodmis.org>, rostedt@google.com,
- Yury Norov <yury.norov@gmail.com>
+ rostedt@google.com, Yury Norov <yury.norov@gmail.com>
 X-Mailman-Version: 3.3.8
 Precedence: list
 List-Id: Nouveau development list <nouveau.lists.freedesktop.org>
 Archived-At: 
- <https://lists.freedesktop.org/hyperkitty/list/nouveau@lists.freedesktop.org/message/LTKITDWDPZRLDI7CWP6AF2O3EMNJEFJT/>
+ <https://lists.freedesktop.org/hyperkitty/list/nouveau@lists.freedesktop.org/message/MVW4RJUN32GYGNEL5P4JHA2MCRSAWZHI/>
 Archived-At: 
- <https://lore.freedesktop.org/CANiq72=vcYkfZtgDfSZaHY=0PMOwc+XiiJo74pciPOV7nrN6Nw@mail.gmail.com/>
+ <https://lore.freedesktop.org/20260107123159.7ac61d69@gandalf.local.home/>
 List-Archive: 
  <https://lists.freedesktop.org/hyperkitty/list/nouveau@lists.freedesktop.org/>
 List-Archive: <https://lore.freedesktop.org/nouveau>
@@ -139,24 +106,35 @@ List-Post: <mailto:nouveau@lists.freedesktop.org>
 List-Subscribe: <mailto:nouveau-join@lists.freedesktop.org>
 List-Unsubscribe: <mailto:nouveau-leave@lists.freedesktop.org>
 
-On Wed, Jan 7, 2026 at 6:20=E2=80=AFPM Joel Fernandes <joelagnelf@nvidia.co=
-m> wrote:
->
+On Wed, 7 Jan 2026 12:20:42 -0500
+Joel Fernandes <joelagnelf@nvidia.com> wrote:
+
 > Thank you for the suggestion! Unfortunately, that would hide the company
-> attribution too. Or require it to be in brackets along with the name. The=
-re
-
-Yeah, I meant it only as a solution for the email trouble -- the
-attribution in parenthesis would of course still be needed if you /
-your company want that.
-
-> appears to be resistance to both these. I do feel fortunate to get compan=
-y time
+> attribution too. Or require it to be in brackets along with the name. There
+> appears to be resistance to both these. I do feel fortunate to get company time
 > to work upstream, so, on this matter, I have to go with the company's
-> preferences.;-).
+> preferences.;-). There also appears to be significant progress now to resolve
+> the email issues which looks promising (thanks Jason, John and everyone for the
+> efforts!).
 
-I suspected that given the thread... :) But happy to sign your key if
-you need it in the future, and happy new year too!
+The one issue I have with people using (or being forced to use) their work
+email address is that people switch companies all the time. I find it very
+annoying when Cc's suddenly get bounced because it is going to the old
+company email address. Worse yet when the developer is still involved with
+the upstream community and now they are simply not getting email that they
+should be.
 
-Cheers,
-Miguel
+This is why I prefer the "(company)" in the email name and not the address.
+It allows developers to maintain the same email while they move companies.
+I did this for Red Hat, VMware and now Google, and all with the same email
+address.
+
+Although I may need to switch to my kernel.org address because my
+goodmis.org is being blocked by gmail :-p
+
+> 
+> Happy New Year! Thanks,
+
+Happy New Year to you Joel!
+
+-- Steve
