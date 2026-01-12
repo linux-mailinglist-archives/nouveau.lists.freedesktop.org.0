@@ -2,142 +2,242 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id AEE97D15000
-	for <lists+nouveau@lfdr.de>; Mon, 12 Jan 2026 20:28:24 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 348A2D157A5
+	for <lists+nouveau@lfdr.de>; Mon, 12 Jan 2026 22:49:27 +0100 (CET)
 Received: from kara.freedesktop.org (unknown [131.252.210.166])
-	by gabe.freedesktop.org (Postfix) with ESMTPS id 7CFE310E2C7;
-	Mon, 12 Jan 2026 19:28:22 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTPS id 7A80E10E434;
+	Mon, 12 Jan 2026 21:49:23 +0000 (UTC)
 Authentication-Results: gabe.freedesktop.org;
-	dkim=fail reason="signature verification failed" (2048-bit key; secure) header.d=ziepe.ca header.i=@ziepe.ca header.b="Ccmkqi1S";
+	dkim=fail reason="signature verification failed" (2048-bit key; unprotected) header.d=intel.com header.i=@intel.com header.b="iVuiLgDo";
 	dkim-atps=neutral
 Received: from kara.freedesktop.org (localhost [127.0.0.1])
-	by kara.freedesktop.org (Postfix) with ESMTP id 4A0C544CA9;
-	Mon, 12 Jan 2026 19:19:55 +0000 (UTC)
-ARC-Seal: i=1; cv=none; a=rsa-sha256; d=lists.freedesktop.org;
- s=20240201; t=1768245595;
- b=BRivHbUpTpRn8Ot5QWHVa/lMb7vSKsPN1JUHI1rPe2m3r5GY06yH2l1xtIhqG+JO8Dner
- qjT6ZvY9tKFM/cWz2RNB6eVHtIXZC+y4BOJUb/6IIIb7h/O919je7BXpnq9BKLJiEAuf0Xx
- sfuwreKO/jqTj02qb24YTFJOJ/TWTpOTjvYDTc/EmnZ6lGb46ONL33NHrcI6gsq3W0+beDv
- S53UA1DTRTw4RqteQqBSY+HLnalrWBnHqYcZWe1pbxGahSkZDQSiIh9/I7Uq9gEjOjxncDq
- 7qsd23LqJQNcOFJO5TnOYd4yZPsUSkbuu3hfe/10Mj5ruJS5x/CG9rNmHeNg==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed;
- d=lists.freedesktop.org; s=20240201; t=1768245595; h=from : sender :
+	by kara.freedesktop.org (Postfix) with ESMTP id 1EF2A44CA2;
+	Mon, 12 Jan 2026 21:40:56 +0000 (UTC)
+ARC-Seal: i=2; cv=fail; a=rsa-sha256; d=lists.freedesktop.org;
+ s=20240201; t=1768254056;
+ b=FQiKf6I0JMFoFggAY5W7fQfV7tWCXsx47+rCi3mt8Enlc4UCn81lil7AActAHWlJCYb+c
+ fUVXFr8pWUJucn9BfQI0udK/TSNl0saIKtk/zrbqriYcdrc2sFQ6WT4+2NjcgdhVYH6gXpy
+ ssR+JFAVh6q7qd1Clf/8vhStXBexDJiPuk/LqNPamvWpzLoTrR2pIAajorVHnZnOAtauyum
+ 7dcm3HWSAlA3rSvcKQCbwf4BxYrS5eGSOg9Tx3s/b647CDAP/aVyTTH+Tv3SqWNUBbktqvm
+ P5KQ2PKZGicFExhopCyQOK0m+GT8/w9azE6fnFC0nafB2vfkFqkYSgwdqTLg==
+ARC-Message-Signature: i=2; a=rsa-sha256; c=relaxed/relaxed;
+ d=lists.freedesktop.org; s=20240201; t=1768254056; h=from : sender :
  reply-to : subject : date : message-id : to : cc : mime-version :
  content-type : content-transfer-encoding : content-id :
  content-description : resent-date : resent-from : resent-sender :
  resent-to : resent-cc : resent-message-id : in-reply-to : references :
  list-id : list-help : list-unsubscribe : list-subscribe : list-post :
  list-owner : list-archive;
- bh=a9AdLI7uJUYtOYd89GixDifcE7N5970uW2swaB6ncSw=;
- b=dg1jF+722ZvtVpH/lIXI11ctGSxkZXsUxvuMs0l42LVu3sTd2dedA6h571Hvn8gid5C7s
- DiLWopFcHNp9pp+L70+T/uItYcQB88m3EuUt67/BiSIxwR3zGDwB14W4dIJjLGKa1oCLnW1
- kndtjhLlFxUXQlHOuBeYaqGSPocZas7FkRPn00XoMQ3pDI/Ypw0wggOZ69zBW41CknfyLYZ
- a5etl4bdmWdaZ7gyC0lBrxZ+ixGydXIAvb7sn5+tKD+L3BpifCFMhUM3veHV3lwathHC/hK
- pFKrTc5sHYtA+SQrb5f1iTrFNKoQdjX1WiiiFw9KQzPDxD1DyXT2LR0khlfQ==
-ARC-Authentication-Results: i=1; mail.freedesktop.org;
- dkim=pass header.d=ziepe.ca;
-  arc=none (Message is not ARC signed);
-  dmarc=none
-Authentication-Results: mail.freedesktop.org; dkim=pass header.d=ziepe.ca;
- arc=none (Message is not ARC signed); dmarc=none
+ bh=3gf7gS8MN78DTwNkidfk8NCAjqjq7LgpocC4fEYsTWE=;
+ b=qohjtDvLPwdpWUGudzFqfsAvu4jq9OchSxORfh4gKH3S5SkGlVonDutWqOjxO4GgKmyDH
+ cRw9oGp1D71LK72n5IkOpKj0pbt/LTbDOXxHGjkT36V/f1/KYzOE7818Rcrf/skBXrOK10H
+ HQz6DNAuhJXmlcMEl3/zRYZh9jgHkRFRPaXx7bS2SaIJ/M/n2hLWWduefxxdiul9kIX3bSk
+ GrrWbtVxWKLRetvZzOLRcRKOgxkDN0Lfyw0O4pCYQ549vUxLt4O4apgPQBQtr/MAs5phdIG
+ n2XCAfUs2yxNd1yZ/x7gmDyg0KxqCfnLJb5nolG8UgZU5bOU5W4swAt813uA==
+ARC-Authentication-Results: i=2; mail.freedesktop.org;
+ dkim=pass header.d=intel.com header.i=@intel.com;
+  arc=fail (Most recent ARC-Message-Signature did not validate);
+  dmarc=pass (Used From Domain Record) header.from=intel.com policy.dmarc=none
+Authentication-Results: mail.freedesktop.org;
+ dkim=pass header.d=intel.com header.i=@intel.com;
+ arc=fail (Most recent ARC-Message-Signature did not validate);
+ dmarc=pass (Used From Domain Record) header.from=intel.com policy.dmarc=none
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by kara.freedesktop.org (Postfix) with ESMTPS id 20E7844C87
-	for <nouveau@lists.freedesktop.org>; Mon, 12 Jan 2026 19:19:52 +0000 (UTC)
-Received: from mail-qk1-f170.google.com (mail-qk1-f170.google.com
- [209.85.222.170])
-	by gabe.freedesktop.org (Postfix) with ESMTPS id 1A48310E2B6
-	for <nouveau@lists.freedesktop.org>; Mon, 12 Jan 2026 19:28:19 +0000 (UTC)
-Received: by mail-qk1-f170.google.com with SMTP id
- af79cd13be357-8b2d7c38352so584592285a.0
-        for <nouveau@lists.freedesktop.org>;
- Mon, 12 Jan 2026 11:28:18 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=ziepe.ca; s=google; t=1768246098; x=1768850898;
- darn=lists.freedesktop.org;
-        h=in-reply-to:content-transfer-encoding:content-disposition
-         :mime-version:references:message-id:subject:cc:to:from:date:from:to
-         :cc:subject:date:message-id:reply-to;
-        bh=a9AdLI7uJUYtOYd89GixDifcE7N5970uW2swaB6ncSw=;
-        b=Ccmkqi1SsEOtm3ZU7Ws11jAuKhWF/D0sLD5Hn2H58ZM+OktVgBJ6+CH+PmPrcm34TT
-         qoEfEP6dPxpWYw3+VCcB83NU8BoPJ30yUGNUsa42KnIK8pdX2ysoZzq2QkGVrFSW4S/+
-         EoUfbuloGWx5kmzvViEb0QTUePypfweEdIYbsu9jdkgxIRF6CLjmXvkKAF0RusP4d9Xj
-         DWhJXqBuzCnh1P7RqbQZzyBFeZNadxI/baj6zyKneT5Ihfz/RPRFoRKV2M83EjlIGvZO
-         2b+j5EggJAM9goErNaStya+xrhi+v6icfYEJINtTCtBjXJQaOp/7ZCXqC7i2PVHJe82q
-         bQbQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1768246098; x=1768850898;
-        h=in-reply-to:content-transfer-encoding:content-disposition
-         :mime-version:references:message-id:subject:cc:to:from:date:x-gm-gg
-         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
-        bh=a9AdLI7uJUYtOYd89GixDifcE7N5970uW2swaB6ncSw=;
-        b=o5HaaoAoA4/8xrMC2Ss2b0v6i9Ci9kAqigykoGiQnoq9xhGBs7oHNy6ZlzXMRHppwq
-         /FPXCoHYMsIWDsWdRZYSrtkvPt9VtvG3Trax2FahwMSO7VitxdcfimOquqv27KukGiqM
-         DcWs+CSY4oSLuY7sxrR311I+JgOoyALVWLVXZ22j49vK2x3C79a03ycqe/j6ZIhhEegM
-         onB+9WJmy/SbwcPHEZ18hlXysSz4ldTBDsDRYEt35QgJA3qrBbuu4IKFsSk3iVjkqlUd
-         3W+G/FV0d1eWITpXtrrOkd7muAzGwSQ5KwA2UuO3Lgkk2ScgynwV6o11JxFj+NB2cBIW
-         sf3g==
-X-Forwarded-Encrypted: i=1;
- AJvYcCVOEs7kUKW3ZWar2OouQa/ztzTwaS9deFZb1NzjLVmgepG3D0iPKpuFry+aaTi8heoVS7LnLrxk@lists.freedesktop.org
-X-Gm-Message-State: AOJu0YwWvPQNlK1iYONEYGCriBb9r0gfrDwZ/XAs0hMLrsqMV6WEXYZq
-	SeQex+FuRXvZ/CQpCLSCMrg0r8cwfqSXxyQd/KNWU1o0fjrN4x/nokoOzCn2Zk6YsII=
-X-Gm-Gg: AY/fxX4WheU8u7YZUCNoDBK5QdahX9emvwBxGULDbXWv6bcR+WA2Ncac9gb1t6N+By5
-	Qte/b0zdt+xmDnq2J7tKM8Wd1FAAqgjyA/xiYgCRbzgf6+u7VBfeqU+yqwMgbaytSixfuZODvSf
-	PT+AmoYkNFK+Wc/OKpM922IhdxYK5anaOr5I3kIBuVvmRp3w1AFoTFnqc5ZuYSkfXr4CW+ky0q2
-	R3VDiwB5nhhSxTp3KqSA8HgVNhAjUOMvI1FY4HadWCOIi+IXH2oAJwNtqGfFk725A0extsSobqJ
-	Gkm92N69i0rxYMC1xNmyYB+6PVKnFC8xIbyNnpnq7gpyFHnxrayyZnxjsVElSWVYoutBv+hrMRO
-	hFvlgOKoK6YZP3H8mvxJey7DTyja4TFztqsJs29O5xrqynfL+w70ouqn3Wn2WXDfi6LAF8bkhQq
-	HGvc5VCo//x0GVK92GJq/2KzKv7gld6hvGMQXdz2PEGkeHNFqH9R8k6zF3MPlC/lFr9O4=
-X-Received: by 2002:a05:620a:1726:b0:8b8:7f8d:c33b with SMTP id
- af79cd13be357-8c5208f18e3mr71372585a.43.1768246097807;
-        Mon, 12 Jan 2026 11:28:17 -0800 (PST)
-Received: from ziepe.ca
- (hlfxns017vw-142-162-112-119.dhcp-dynamic.fibreop.ns.bellaliant.net.
- [142.162.112.119])
-        by smtp.gmail.com with ESMTPSA id
- af79cd13be357-8c37f4cd7a3sm1609425185a.24.2026.01.12.11.28.16
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Mon, 12 Jan 2026 11:28:16 -0800 (PST)
-Received: from jgg by wakko with local (Exim 4.97)
-	(envelope-from <jgg@ziepe.ca>)
-	id 1vfNaK-00000003cxB-192v;
-	Mon, 12 Jan 2026 15:28:16 -0400
-Date: Mon, 12 Jan 2026 15:28:16 -0400
-From: Jason Gunthorpe <jgg@ziepe.ca>
-To: Zi Yan <ziy@nvidia.com>
+	by kara.freedesktop.org (Postfix) with ESMTPS id 5C2A544C7F
+	for <nouveau@lists.freedesktop.org>; Mon, 12 Jan 2026 21:40:53 +0000 (UTC)
+Received: from mgamail.intel.com (mgamail.intel.com [198.175.65.13])
+	by gabe.freedesktop.org (Postfix) with ESMTPS id 1FA3B10E176;
+	Mon, 12 Jan 2026 21:49:20 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
+  d=intel.com; i=@intel.com; q=dns/txt; s=Intel;
+  t=1768254561; x=1799790561;
+  h=date:from:to:cc:subject:message-id:references:
+   content-transfer-encoding:in-reply-to:mime-version;
+  bh=lJUDYuifFDOp0nTavawJ9jkmIRDNWv73e2nvefKaNIQ=;
+  b=iVuiLgDoAt0OnvUk36rhK2jRwik8Ym0B81ql9UedeSYt8ah6UMrKm2kV
+   l0sFdweSVQLtFCr37BncNDkAkbYl4cVnDpb2hEMSloqeXsSzsoP003oTl
+   DMKZF0DADTyf94QDjC9IaGS8HUVKEKwvsxYL0PPwvRd4CQeAH7emN7X5u
+   /3P/WoJ2muF3VfI2MHhxdEzSsuIOHFSmeQYjCFc6rd59EZ7vieyF7sjn9
+   x03+a3Oc1pif/mOQcR12/WeaVPdVhUfxM2DVg3k972IxoPIEkjR0QyGAZ
+   OZwbLb6tl3p83cVrYRXsAsv7exhH9q3sK4S9rBHSrRMxjGGfmDxuCZL/V
+   w==;
+X-CSE-ConnectionGUID: tRdY16aXRcy0fQ7k9azi6A==
+X-CSE-MsgGUID: yrJH5kxpQ/6b/jsiMrdbIA==
+X-IronPort-AV: E=McAfee;i="6800,10657,11669"; a="80644268"
+X-IronPort-AV: E=Sophos;i="6.21,222,1763452800";
+   d="scan'208";a="80644268"
+Received: from fmviesa008.fm.intel.com ([10.60.135.148])
+  by orvoesa105.jf.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
+ 12 Jan 2026 13:49:20 -0800
+X-CSE-ConnectionGUID: gWGb4r7gTDahwTxss8fvAQ==
+X-CSE-MsgGUID: j/CkvE4JQSO44HS5oDl9Sg==
+X-ExtLoop1: 1
+X-IronPort-AV: E=Sophos;i="6.21,222,1763452800";
+   d="scan'208";a="204488313"
+Received: from fmsmsx901.amr.corp.intel.com ([10.18.126.90])
+  by fmviesa008.fm.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
+ 12 Jan 2026 13:49:19 -0800
+Received: from FMSMSX901.amr.corp.intel.com (10.18.126.90) by
+ fmsmsx901.amr.corp.intel.com (10.18.126.90) with Microsoft SMTP Server
+ (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ 15.2.2562.29; Mon, 12 Jan 2026 13:49:18 -0800
+Received: from fmsedg901.ED.cps.intel.com (10.1.192.143) by
+ FMSMSX901.amr.corp.intel.com (10.18.126.90) with Microsoft SMTP Server
+ (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ 15.2.2562.29 via Frontend Transport; Mon, 12 Jan 2026 13:49:18 -0800
+Received: from SN4PR0501CU005.outbound.protection.outlook.com (40.93.194.44)
+ by edgegateway.intel.com (192.55.55.81) with Microsoft SMTP Server
+ (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ 15.2.2562.29; Mon, 12 Jan 2026 13:49:12 -0800
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=U/LByUaV83xF8WwvZ6BIn1nP3YADMEVr8YI+N7rQj0zXklN5XhjvxX39L0Y0qkPUEO5zBhUnIaX4rQWpXxHx4cVGvJdjKRTuHddeaAKiKgaLeNTlbG6nDMB9I6XqGFeuP1N966IU4S9e0HQzJLelCVdKk0qcvgDgLI3e4JsuovAlNAes1mF6qEkK2T//pmBo5jbYPFnTKcKzutkp42FiWlaBuiO7k9FBeIbYkltpozkm9fwLC2Spm4R+kUMav2kbqWy/2bG5RkR7q8/DsYjwbZpXfncxcLGBpymuz7U/OR+l826c9zTfgOLWZE2TGP/DGmCbOflUSggAVi8DIMScLQ==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=3gf7gS8MN78DTwNkidfk8NCAjqjq7LgpocC4fEYsTWE=;
+ b=i0ZNDuBzSTFOmyIT46lFMcWiodgttThGIrrE5ZjRXQ2ki31rfB8ORE2spTEaVtq+SB9WOIDM/Z4xjrByYcaMMoMV3SrcGMDXWvolh8dKaLEIyyRWGWUhp0QgTGWtxnG5cLNTmtq/2hnDyQhHjZZWj310yekPw+Yp3HeaVgmhELE4CYIcKJ5tHn8YyF3hDD7WoGJS4yx+pUKAWkvDh8oTDyzGJkrSksRNBhqvgogGhlynMLYI7uTg9v0Np0iUpNotBeLdzMjBg2noDoLMvVOp/BGCBFP35fuoaBD7Q/fL0gnwfZkt2GsZWnWLcg9Y+HChioUgQjLUfljqBXZKEEXd7Q==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=intel.com; dmarc=pass action=none header.from=intel.com;
+ dkim=pass header.d=intel.com; arc=none
+Received: from PH7PR11MB6522.namprd11.prod.outlook.com (2603:10b6:510:212::12)
+ by SJ0PR11MB5056.namprd11.prod.outlook.com (2603:10b6:a03:2d5::6) with
+ Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9499.2; Mon, 12 Jan
+ 2026 21:49:10 +0000
+Received: from PH7PR11MB6522.namprd11.prod.outlook.com
+ ([fe80::9e94:e21f:e11a:332]) by PH7PR11MB6522.namprd11.prod.outlook.com
+ ([fe80::9e94:e21f:e11a:332%7]) with mapi id 15.20.9456.015; Mon, 12 Jan 2026
+ 21:49:10 +0000
+Date: Mon, 12 Jan 2026 13:49:06 -0800
+From: Matthew Brost <matthew.brost@intel.com>
+To: Jason Gunthorpe <jgg@ziepe.ca>
 Subject: Re: [PATCH v4 1/7] mm/zone_device: Add order argument to folio_free
  callback
-Message-ID: <20260112192816.GL745888@ziepe.ca>
-References: <20260111205820.830410-2-francois.dugast@intel.com>
+Message-ID: <aWVsUu1RBKgn0VFH@lstrano-desk.jf.intel.com>
+References: <20260111205820.830410-1-francois.dugast@intel.com>
+ <20260111205820.830410-2-francois.dugast@intel.com>
  <aWQlsyIVVGpCvB3y@casper.infradead.org>
  <874d29da-2008-47e6-9c27-6c00abbf404a@nvidia.com>
  <0D532F80-6C4D-4800-9473-485B828B55EC@nvidia.com>
  <20260112134510.GC745888@ziepe.ca>
- <218D42B0-3E08-4ABC-9FB4-1203BB31E547@nvidia.com>
- <20260112165001.GG745888@ziepe.ca>
- <86D91C8B-C3EA-4836-8DC2-829499477618@nvidia.com>
- <20260112182500.GI745888@ziepe.ca>
- <6AFCEB51-8EE1-4AC9-8F39-FCA561BE8CB5@nvidia.com>
-MIME-Version: 1.0
-Content-Type: text/plain; charset=utf-8
+Content-Type: text/plain; charset="utf-8"
 Content-Disposition: inline
 Content-Transfer-Encoding: 8bit
-In-Reply-To: <6AFCEB51-8EE1-4AC9-8F39-FCA561BE8CB5@nvidia.com>
-Message-ID-Hash: OWHSKYGI7F4SEXCETV6OW7WEIE25K7QG
-X-Message-ID-Hash: OWHSKYGI7F4SEXCETV6OW7WEIE25K7QG
-X-MailFrom: jgg@ziepe.ca
+In-Reply-To: <20260112134510.GC745888@ziepe.ca>
+X-ClientProxiedBy: SJ0PR13CA0226.namprd13.prod.outlook.com
+ (2603:10b6:a03:2c1::21) To PH7PR11MB6522.namprd11.prod.outlook.com
+ (2603:10b6:510:212::12)
+MIME-Version: 1.0
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: PH7PR11MB6522:EE_|SJ0PR11MB5056:EE_
+X-MS-Office365-Filtering-Correlation-Id: e49691ec-661c-4b70-be61-08de52246b00
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: 
+ BCL:0;ARA:13230040|376014|7416014|1800799024|366016|19052099003;
+X-Microsoft-Antispam-Message-Info: 
+ =?utf-8?B?cU8vb1U2SFlHUk84RG12TUZHM3BUKzdkNUh1dnZEbVZZT01CNzVNZXQreFFY?=
+ =?utf-8?B?UmZNbXhsWm01dVpNYmdSbWprOE1RYlZaYlR2NlFiNWJKSWt4ZlY5cjRjOStY?=
+ =?utf-8?B?QzJ0MTZVOHpSUmEvWEE5Ri82QkJmbVhqSXN5Vy9xOWV1eEtqOURicGFVS1B4?=
+ =?utf-8?B?OVJFb2VETm1FZXQyOUs2Tjc2YkRoU3ZnSkdVeUZzRlR1cnQ0bFIrVjg5aEZw?=
+ =?utf-8?B?NGlXdUQ5U2NLd2NpKzlwVmZISjA5bUhOa3ZJa1pZQzBGYlpuUmFBbXZUdW84?=
+ =?utf-8?B?QkdwdFNLUkRZUnJBN3ZMbzJ4cy9qMWhWN1hXQSsxb2FlcTBMbXRhNWU0WE5p?=
+ =?utf-8?B?MlJmc0w0N2syVWRQU2k3bzNwU2lWZEY0Q0xLYnNIM3U4S2FDTlRVVmprK3R5?=
+ =?utf-8?B?a2crMlRyQkZkcEFNOVlOVU44c0dGREdVbHVPVkRMZUpmVG5XdkNtWkNyaHpS?=
+ =?utf-8?B?c2wyRDVFclhqbU1yVFJKNVVXY3ZtcWVLcllvSmZwSERDM1poYy9NWm9nSXQy?=
+ =?utf-8?B?RFNiMUlaOU1CMjJpMzNUOE5kS1lvN0xxeUZ3VUJIZVJwTTl5Mm80SloxNnc5?=
+ =?utf-8?B?VUhZeWMzWmlDV2pTeTVldGMxcVlQbllmakVDYUlSaFhyTndkUVkvWDloSlFJ?=
+ =?utf-8?B?bHFteGN4ZnNEaEZwN3FaK3c5NXZJQ1JBVS8yYjhmTnFValNMNXg5aTRrOUQx?=
+ =?utf-8?B?MVRWVGRMa2tYeEZiaytrUzFuNzZhbnMzQnlJaDZTcWF4a25RVWYzTVZnRVAy?=
+ =?utf-8?B?dFpJOTRGblVmZ21QcitNL0JnTE1mcysydS9Vd1MzSW54S1g1SG1CTGs0aFcw?=
+ =?utf-8?B?Z1d4cmdiN0d5ZHVET3VodTRoMVVYWkpMRlJqbTcrcjlCRFJXTEpmUGNER0JP?=
+ =?utf-8?B?UTJrSHBuclNrL2h4ZkUwMGtDMi9kcTF0QWwrNGg4MmFCZjNtejBHK3R2ckZ2?=
+ =?utf-8?B?ODBTL1JhYVFoMTBVQjl3R1BlYkJObTFNL2FJSXF1aVhpWHQ4OUg2SVRBVlZ3?=
+ =?utf-8?B?eS9RYXEyL1MyMXRBYy9VSEpkY0xKOWQwaFRVVnlwZVJUOWszT1hIdnAvdUNX?=
+ =?utf-8?B?R0lYS1hPUXM0c0VXUTQwcDRjVlNheXNlR3pJdmZMRGxjT1JFNHV6K3JQMFRv?=
+ =?utf-8?B?c3VLRGlJRFAwU1BURUpXZ28yWW9UL3QwWW5mVVBsbElNR2o4T1pFMEVGc2xJ?=
+ =?utf-8?B?YXlEQnpDZ3lxY2UxbGlNZHVLSVdubmhyK1BENXB2SFhZZHl1eHk3OXUrcm1Q?=
+ =?utf-8?B?NjEvRldjSTdpVmM2UmFVbUExYndwc1g3aHhnakZlZmZjSmdmaXlsRm5laHpt?=
+ =?utf-8?B?MUtBbm5aSFBtdXErWnpvL2RwOTZpbFJkU1NDR3poWmRlTExBd3llUk5LaVZ0?=
+ =?utf-8?B?QUsxRWlXeTB4RWJEejZ0bzZKYW5IUmhhQk1kM2VYRkx2c3hQNDB2T0NnRVpF?=
+ =?utf-8?B?NmNnaldpMFhOZnV0MVNpQ202cTl6K3dVZHVnaWZTNFdubzNWYkExQmtBcDhJ?=
+ =?utf-8?B?SVJWWHE0dkxWZmRPd2NGbXM3bUk0QlRUN3NQU2JRNEo3dm1zT1dSbG9qcXZn?=
+ =?utf-8?B?MVVOVlNDaFlMZ0toTU95UUl0ZDhLN1hnQW14VXJObStlNXc4d25lN01EYW1o?=
+ =?utf-8?B?OEcrOUlvTVJMdzFjdWpZbFdUZmxXMmtQaEJnK041NEcwM3RtK01vZnZoLzNC?=
+ =?utf-8?B?SGdQL1hlMDUrQWRpVTJsS2ltYkNnR2dCZTZFRVY3dUFHL3gzN2VwcFBhUW5X?=
+ =?utf-8?B?alBqUWFNbFNONGVuRW5zbmFiR1EzakxNbEdLc0NEdnlaalYyWHdXYVdaQlRX?=
+ =?utf-8?B?a2xJQk5DRnMvL2szK3J4TkpkNzN3MFkycjBvcjhEZEV2ZTR0enJqRzFSeFNa?=
+ =?utf-8?B?NWtyeFVmbHdZTGZEVTdySmhtT2k2M3ZUNWRvZ3Zyc21Qbnc9PQ==?=
+X-Forefront-Antispam-Report: 
+ CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:PH7PR11MB6522.namprd11.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230040)(376014)(7416014)(1800799024)(366016)(19052099003);DIR:OUT;SFP:1101;
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0: 
+ =?utf-8?B?bWpLczUxNzh0Q1llQm16c1BYdGd6alhia3RxbldyY21vMjU2Z1pIaUxCdmtZ?=
+ =?utf-8?B?QjJlcW54L0VmWkNoMDBEcTFZdllYUm16bDQzeDErazR3UGx2c04xTVRqckhD?=
+ =?utf-8?B?ODdUcExBRnN5U3NkcEJlODlXVjJISktrODVnblhMS05iM2h1SDFTckZ5dnkx?=
+ =?utf-8?B?a1BwWFJ5OTNoeHI0aVo1LzJxMWhkb0FqNEpLMENpbFY3cy94MDlsclptM1Rw?=
+ =?utf-8?B?OWJNWmhlMXk5UmpWdTRNVldyQ0tvc2N1bThOZUxjSkRhc1M3K09DTjd5MXpB?=
+ =?utf-8?B?ZmZoSUMzQjlJa2YxUG10Q1FTTm5mYTNvMXhaWE1YK05GSjRiZDlUODhCMllh?=
+ =?utf-8?B?alN5QmdTbE9veFFIWlpPam96dDZvUlF6bEd4ZXVJRlZDRDFYQTMxa1FBMUpx?=
+ =?utf-8?B?MDM4ZHVRMWFRWmdydFRYd1lOYUJ2cFZHWnRYWHR6Um44aDFEQzhDODdLcFFR?=
+ =?utf-8?B?MkdYL2ZQZU9jQWNKRU40SDNnektqeWhWbUVaWmdWV3JidE5lUUp2S2ZNcG9x?=
+ =?utf-8?B?UElDRzk2V093dmtiSmx2MGpVZWI0VmNlN3RJN2x5Uy9Ob1ZUcGZjektPcXRK?=
+ =?utf-8?B?SWw5bUVWTVJBeHkzbXRmNGRUb3RYcVgrR3FMY3N5K09hREFhUElpb1JGd296?=
+ =?utf-8?B?YlA5RFZxcjRwLzBYbHRVRFFoUjd4TXZINnNQUDBCTi9LR0xGczg1c1YvTFoy?=
+ =?utf-8?B?OVpHckM1RUEwbHBBTytkdGpQWno3UWxGdzJwY3Fya0hENE9xSnBNSmFxcFBU?=
+ =?utf-8?B?MERINjVWbE9renZQSmdYc1FIZ3NWUXhpTGR2TUp4QzM1VDdJZDJjU3VLMytq?=
+ =?utf-8?B?b2l4SkdSNVZnYitha0tXZi91Y1VTc1V4V0NNcEwvMDM4Qk5ZRWdoZElLWXF6?=
+ =?utf-8?B?RlMvc2FSRkRWbUl6TEhyY0wwYzVPRDZ3eTMxSVBlN29YUkYydThpbzFyaXky?=
+ =?utf-8?B?SkFVMWlXU21EMkVObjdmbUw5Y01KR1VsdnZJZGNJS1J5V1kwTU5GTC9KS21X?=
+ =?utf-8?B?b1ByQnBaRHNGSVFieWZxLzI0UFd2UitWTkE2dXNKdXVGbndlSHdEVGZvWjBm?=
+ =?utf-8?B?c3pqc0FwQzFQdmN1akIyNTQvbWFCOWdzdVhpMkorWHNaZmZkb2tBZURnVDda?=
+ =?utf-8?B?SWZ6amx4emswdzFwT1hqTTZMdC9GOW90b1dJU2F5L2FVclljR0czRkV3Q1RQ?=
+ =?utf-8?B?U2lFamUzYzVqZE9ibGdzQzVvU0VvZnp1amhQWkV3L1NPZ2EvYk1jTkFodmZa?=
+ =?utf-8?B?OWkwdzErYnFwSk1nUnl3OUtiMXJORWcvL0o4cHkvTERCQXNkTVIvWW1OUkVP?=
+ =?utf-8?B?MVF4d0NqM0NBdVM5QzRZVVA2eUI1MmoxdHBUOFB5aU5WLy9TdlVBRnlTUDR3?=
+ =?utf-8?B?b1RVQmIrbTVDWUlKZjR4aDdUU1UyUWFCNitwcGxpUGl4NmNtNFlhU3RvTC9p?=
+ =?utf-8?B?RjFOeHVIWklCWTFyN1pOU25RYkNWdVBjenVxbG5ieGg0cnNDRFh6Q0VjcTg4?=
+ =?utf-8?B?MSt6dTNMOHBnZWxPemhtbkxtbCszR1NwYjhzTlZwSXZCdWV4ZTBQaDhXa29B?=
+ =?utf-8?B?WG1zVW93MXhGV1pvTXZ5MDZNZS9JZDJpaUxRdnh3bkVLeGsxMUR0WHJZbkRY?=
+ =?utf-8?B?NXV2SDlyZUVJZ1E0WFZZUndRWlRCdWZkbmJzRVlDTzB5Vk9RSWV1Skt2bDdX?=
+ =?utf-8?B?ekc5WkpYOWhXcUZUVWx5UklkaGRLbFVnWWltVkI2TG85ZUUwNWphTGRUUlBE?=
+ =?utf-8?B?N2xZYkNqQ0pKUmFxOVNwcUQ5VVhwQldyd2VVRlpvRlhCdkNNeFV4UktzV1N6?=
+ =?utf-8?B?K3NNYnQySVhrY3lFTndocWVrb0lUZ1oyNE5kMHJxZFJWV0R4SUxYbVVrTC92?=
+ =?utf-8?B?ZnQwQXplQ3hKNENMdE91VlMvVi81NSs2QUdwT0lTRkovVDB2Q1hpQ2V4OXBj?=
+ =?utf-8?B?OFdZOXhOdDM2ZUdXV1VobXgvb3Z0YTNiTjE3UFdOKy90a29yeVR4SnIxVVdk?=
+ =?utf-8?B?SjFRV1ZmajBSMUFMR1gyT3Q1L2tNSWI4aVZnZGNvbHIvQXN6VkdqT1hQVmNo?=
+ =?utf-8?B?VHp6Uk5PTVplMUJPcjJyOWVYc25wK1dQei9HRVhpV3dPUHlBMHdzN2NmYlBt?=
+ =?utf-8?B?U0dNMk4vZmhyL0Q1ekV0Z1F3MHFnVEVRNlZKVFBVdU1zTk5LdzhlMkd6bDJE?=
+ =?utf-8?B?cUI5L2FPU3l6eWZsL0FUeTVlQzhvWTh4amFFSXBBd2xVeDBPaDJMcjIxMlRr?=
+ =?utf-8?B?QkhJY1FraDBjd0l4WE5wK3VaYi9aQjEvSjRUb3ZuZjY3b09VSndFWnRmK0Qy?=
+ =?utf-8?B?VWdLazRGTmk1L28ySkJLV0Iza3dodlVZOGJmV0dlVXNYM095TEdrQT09?=
+X-MS-Exchange-CrossTenant-Network-Message-Id: 
+ e49691ec-661c-4b70-be61-08de52246b00
+X-MS-Exchange-CrossTenant-AuthSource: PH7PR11MB6522.namprd11.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 12 Jan 2026 21:49:10.2517
+ (UTC)
+X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
+X-MS-Exchange-CrossTenant-Id: 46c98d88-e344-4ed4-8496-4ed7712e255d
+X-MS-Exchange-CrossTenant-MailboxType: HOSTED
+X-MS-Exchange-CrossTenant-UserPrincipalName: 
+ kDQvTYLPJYofYPPZOUw7s423yNg5zgwKhyJVMa1HYyhimEfbahqrW3USfvDyHV3hhuIQLgWCqowgPvkRPGLl4g==
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: SJ0PR11MB5056
+X-OriginatorOrg: intel.com
+Message-ID-Hash: 2NBGXZQM6WP5WXUQF7QEU74UWHCO44D4
+X-Message-ID-Hash: 2NBGXZQM6WP5WXUQF7QEU74UWHCO44D4
+X-MailFrom: matthew.brost@intel.com
+X-Mailman-Rule-Hits: nonmember-moderation
 X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency;
- loop; banned-address; member-moderation; nonmember-moderation; administrivia;
- implicit-dest; max-recipients; max-size; news-moderation; no-subject;
- digests; suspicious-header
-CC: Matthew Wilcox <willy@infradead.org>,
+ loop; banned-address; member-moderation
+CC: Zi Yan <ziy@nvidia.com>, Matthew Wilcox <willy@infradead.org>,
  Francois Dugast <francois.dugast@intel.com>, intel-xe@lists.freedesktop.org,
- dri-devel@lists.freedesktop.org, Matthew Brost <matthew.brost@intel.com>,
- Madhavan Srinivasan <maddy@linux.ibm.com>,
+ dri-devel@lists.freedesktop.org, Madhavan Srinivasan <maddy@linux.ibm.com>,
  Nicholas Piggin <npiggin@gmail.com>, Michael Ellerman <mpe@ellerman.id.au>,
  "Christophe Leroy (CS GROUP)" <chleroy@kernel.org>,
  Felix Kuehling <Felix.Kuehling@amd.com>,
  Alex Deucher <alexander.deucher@amd.com>,
- Christian =?utf-8?B?S8O2bmln?= <christian.koenig@amd.com>,
+ Christian =?iso-8859-1?Q?K=F6nig?= <christian.koenig@amd.com>,
  Simona Vetter <simona@ffwll.ch>,
  Maarten Lankhorst <maarten.lankhorst@linux.intel.com>,
  Maxime Ripard <mripard@kernel.org>, Danilo Krummrich <dakr@kernel.org>,
@@ -156,8 +256,9 @@ X-Mailman-Version: 3.3.8
 Precedence: list
 List-Id: Nouveau development list <nouveau.lists.freedesktop.org>
 Archived-At: 
- <https://lists.freedesktop.org/hyperkitty/list/nouveau@lists.freedesktop.org/message/OWHSKYGI7F4SEXCETV6OW7WEIE25K7QG/>
-Archived-At: <https://lore.freedesktop.org/20260112192816.GL745888@ziepe.ca/>
+ <https://lists.freedesktop.org/hyperkitty/list/nouveau@lists.freedesktop.org/message/2NBGXZQM6WP5WXUQF7QEU74UWHCO44D4/>
+Archived-At: 
+ <https://lore.freedesktop.org/aWVsUu1RBKgn0VFH@lstrano-desk.jf.intel.com/>
 List-Archive: 
  <https://lists.freedesktop.org/hyperkitty/list/nouveau@lists.freedesktop.org/>
 List-Archive: <https://lore.freedesktop.org/nouveau>
@@ -167,49 +268,99 @@ List-Post: <mailto:nouveau@lists.freedesktop.org>
 List-Subscribe: <mailto:nouveau-join@lists.freedesktop.org>
 List-Unsubscribe: <mailto:nouveau-leave@lists.freedesktop.org>
 
-On Mon, Jan 12, 2026 at 01:55:18PM -0500, Zi Yan wrote:
-> > That's different, I am talking about reaching 0 because it has been
-> > freed, meaning there are no external pointers to it.
-> >
-> > Further, when a page is frozen page_ref_freeze() takes in the number
-> > of references the caller has ownership over and it doesn't succeed if
-> > there are stray references elsewhere.
-> >
-> > This is very important because the entire operating model of split
-> > only works if it has exclusive locks over all the valid pointers into
-> > that page.
-> >
-> > Spurious refcount failures concurrent with split cannot be allowed.
-> >
-> > I don't see how pointing at __folio_freeze_and_split_unmapped() can
-> > justify this series.
-> >
+On Mon, Jan 12, 2026 at 09:45:10AM -0400, Jason Gunthorpe wrote:
+
+Hi, catching up here.
+
+> On Sun, Jan 11, 2026 at 07:51:01PM -0500, Zi Yan wrote:
+> > On 11 Jan 2026, at 19:19, Balbir Singh wrote:
+> > 
+> > > On 1/12/26 08:35, Matthew Wilcox wrote:
+> > >> On Sun, Jan 11, 2026 at 09:55:40PM +0100, Francois Dugast wrote:
+> > >>> The core MM splits the folio before calling folio_free, restoring the
+> > >>> zone pages associated with the folio to an initialized state (e.g.,
+> > >>> non-compound, pgmap valid, etc...). The order argument represents the
+> > >>> folio’s order prior to the split which can be used driver side to know
+> > >>> how many pages are being freed.
+> > >>
+> > >> This really feels like the wrong way to fix this problem.
+> > >>
+> > 
+> > Hi Matthew,
+> > 
+> > I think the wording is confusing, since the actual issue is that:
+> > 
+> > 1. zone_device_page_init() calls prep_compound_page() to form a large folio,
+> > 2. but free_zone_device_folio() never reverse the course,
+> > 3. the undo of prep_compound_page() in free_zone_device_folio() needs to
+> >    be done before driver callback ->folio_free(), since once ->folio_free()
+> >    is called, the folio can be reallocated immediately,
+> > 4. after the undo of prep_compound_page(), folio_order() can no longer provide
+> >    the original order information, thus, folio_free() needs that for proper
+> >    device side ref manipulation.
 > 
-> But from anyone looking at the folio state, refcount == 0, compound_head
-> is set, they cannot tell the difference.
-
-This isn't reliable, nothing correct can be doing it :\
-
-> If what you said is true, why is free_pages_prepare() needed? No one
-> should touch these free pages. Why bother resetting these states.
-
-? that function does alot of stuff, thinks like uncharging the cgroup
-should obviously happen at free time.
-
-What part of it are you looking at?
-
-> > You can't refcount a folio out of nothing. It has to come from a
-> > memory location that already is holding a refcount, and then you can
-> > incr it.
+> There is something wrong with the driver if the "folio can be
+> reallocated immediately".
 > 
-> Right. There is also no guarantee that all code is correct and follows
-> this.
+> The flow generally expects there to be a driver allocator linked to
+> folio_free()
+> 
+> 1) Allocator finds free memory
+> 2) zone_device_page_init() allocates the memory and makes refcount=1
+> 3) __folio_put() knows the recount 0.
+> 4) free_zone_device_folio() calls folio_free(), but it doesn't
+>    actually need to undo prep_compound_page() because *NOTHING* can
+>    use the page pointer at this point.
 
-Let's concretely point at things that have a problem please.
+Correct—nothing can use the folio prior to calling folio_free(). Once
+folio_free() returns, the driver side is free to immediately reallocate
+the folio (or a subset of its pages).
 
-> My point here is that calling prep_compound_page() on a compound page
-> does not follow core MM’s conventions.
+> 5) Driver puts the memory back into the allocator and now #1 can
+>    happen. It knows how much memory to put back because folio->order
+>    is valid from #2
+> 6) #1 happens again, then #2 happens again and the folio is in the
+>    right state for use. The successor #2 fully undoes the work of the
+>    predecessor #2.
+> 
+> If you have races where #1 can happen immediately after #3 then the
+> driver design is fundamentally broken and passing around order isn't
+> going to help anything.
+>
 
-Maybe, but that doesn't mean it isn't the right solution..
+The above race does not exist; if it did, I agree we’d be solving
+nothing here.
+ 
+> If the allocator is using the struct page memory then step #5 should
+> also clean up the struct page with the allocator data before returning
+> it to the allocator.
+> 
 
-Jason
+We could move the call to free_zone_device_folio_prepare() [1] into the
+driver-side implementation of ->folio_free() and drop the order argument
+here. Zi didn’t particularly like that; he preferred calling
+free_zone_device_folio_prepare() [2] before invoking ->folio_free(),
+which is why this patch exists.
+
+FWIW, I do not have a strong opinion here—either way works. Xe doesn’t
+actually need the order regardless of where
+free_zone_device_folio_prepare() is called, but Nouveau does need the
+order if free_zone_device_folio_prepare() is called before
+->folio_free().
+
+[1] https://patchwork.freedesktop.org/patch/697877/?series=159120&rev=4
+[2] https://patchwork.freedesktop.org/patch/697709/?series=159120&rev=3#comment_1282405
+
+> I vaugely remember talking about this before in the context of the Xe
+> driver.. You can't just take an existing VRAM allocator and layer it
+> on top of the folios and have it broadly ignore the folio_free
+> callback.
+> 
+
+We are definitely not ignoring the ->folio_free callback—that is the
+point at which we tell our VRAM allocator (DRM buddy) it is okay to
+release the allocation and make it available for reuse.
+
+Matt
+
+> Jsaon
