@@ -2,88 +2,190 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id BBA9DD1EEE8
-	for <lists+nouveau@lfdr.de>; Wed, 14 Jan 2026 13:59:32 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 9BEEFD1EEEB
+	for <lists+nouveau@lfdr.de>; Wed, 14 Jan 2026 13:59:47 +0100 (CET)
 Received: from kara.freedesktop.org (unknown [131.252.210.166])
-	by gabe.freedesktop.org (Postfix) with ESMTPS id 25ADC10E053;
-	Wed, 14 Jan 2026 12:59:31 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTPS id 70AFA10E605;
+	Wed, 14 Jan 2026 12:59:46 +0000 (UTC)
+Authentication-Results: gabe.freedesktop.org;
+	dkim=pass (2048-bit key; unprotected) header.d=Nvidia.com header.i=@Nvidia.com header.b="jx8jTjtu";
+	dkim-atps=neutral
 Received: from kara.freedesktop.org (localhost [127.0.0.1])
-	by kara.freedesktop.org (Postfix) with ESMTP id 21F4644CAE;
-	Wed, 14 Jan 2026 12:51:00 +0000 (UTC)
-ARC-Seal: i=1; cv=none; a=rsa-sha256; d=lists.freedesktop.org;
- s=20240201; t=1768395060;
- b=ks5CalYcu+o33Pw/VplYp3UM23qjBxgPI/EWUksKf0rqxtsZj5QOrOXbKlXxfa65UYxhb
- OHPbCqaBvy/NP1JpuIOj8rN8Jn8jWFCVuCYe6m/SKZxYoiNlYrNRZb0LwueTkMYkVn0qjct
- UAQI8gkWn2W55ZhSQT7+lGx4zJqZ7hjZNCehuxZzsyxyGCmqvUfB92puDjZ9I9uKVpPsH7y
- qfyPSumj0JL82mebgM/dYX7cmIvuY/vYLXtBPSkjj7MKCK/DMyRGwNlFU3ZNhWvjjC6NbFg
- PgZNbV6UHJQw4bCNSmyvd5CSEvc7HiAyo7pkzWOLNbsGyiZyadNA68VKravg==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed;
- d=lists.freedesktop.org; s=20240201; t=1768395060; h=from : sender :
+	by kara.freedesktop.org (Postfix) with ESMTP id 7A08144C87;
+	Wed, 14 Jan 2026 12:51:15 +0000 (UTC)
+ARC-Seal: i=2; cv=pass; a=rsa-sha256; d=lists.freedesktop.org;
+ s=20240201; t=1768395075;
+ b=okZ4AjqRxGgq+J/gjaudtipCKXE8hqc+7DzUYF0qo8xXP0+IG+aFoXSvTYeJ/8T4ZPR1z
+ LhiWck9GGitDdpFS+3JLNU5FPxp8ymKI/85+ZVFss6LBlYgD+Ukg8QtJJ6tx1qBh9d9lJ8M
+ sOoO08bbmVCT+TkueA2M6VYBmGcSe2vNholyx54lhT4j0zrdLk9DfV3loPjvLBld80DFeHE
+ OqYNzjWX3pSpW+JXUAp+6lUQUCOr2NbRP+KuQDlxLX/JR3hWeWSS26rsUqbZlDnCvCdh4hg
+ 4lpJzD3r9LrUG/TIxtqVqmztr872L9x5kafFuW3yX+SzKZ1viihDeuCwqUSg==
+ARC-Message-Signature: i=2; a=rsa-sha256; c=relaxed/relaxed;
+ d=lists.freedesktop.org; s=20240201; t=1768395075; h=from : sender :
  reply-to : subject : date : message-id : to : cc : mime-version :
  content-type : content-transfer-encoding : content-id :
  content-description : resent-date : resent-from : resent-sender :
  resent-to : resent-cc : resent-message-id : in-reply-to : references :
  list-id : list-help : list-unsubscribe : list-subscribe : list-post :
  list-owner : list-archive;
- bh=7OKjwNR0uZfHmXfDg5m4u3r7BEx2AX59i5SUtdbD6sA=;
- b=r3p/oMuFlMFuduQyp6T+NozIEuh0m4NPl4XMPsFERue0LHrS/4NCTup3pttkFGeaFh3es
- t/7VFqMEXvtI6hrFzF0Br7bP8jDV7SukmgjtKRk61isnnWvkNzdgPsO3chgNVv72cD8b7gl
- J7kteFdN8SuF5Zexa74uX/hFaKykB5qCPhzGlXdV+yabfUFncnu8X3W6UKNdBhPEhpTf/nt
- i+HPsY+Rc397qoddLzp+vJWP3LsAU2XKFLHhd/+Q5G3shpYlmGvCLIhA4FxyqnVdjkIcQ/9
- hF25e/f9XwYSKT2/pYgkozsNcGf3/53Gk0nNtIzDpw5FvaCfZGJ9gVM/+e8Q==
-ARC-Authentication-Results: i=1; mail.freedesktop.org; dkim=fail;
-  arc=none (Message is not ARC signed);
-  dmarc=fail (Used From Domain Record) header.from=tochlab.net
- policy.dmarc=none
-Authentication-Results: mail.freedesktop.org; dkim=fail;
- arc=none (Message is not ARC signed);
- dmarc=fail (Used From Domain Record) header.from=tochlab.net
- policy.dmarc=none
+ bh=+FKtdhYNgcdRX9177AKew5k1JnfBuiQSaznZQp8IAew=;
+ b=DVkoUVtbnYM40X8mo4pBx4jHwc1z6XeiKnYfz8Ti5KrBiqlfLKXIG7xFFBnvtWr4sl8Ys
+ iJB+d/CkEkokb7DMQZCzqwp60Fz4KP1jIBA88mv1M099tMl1RwfcQ09Tbl3AtyVIC3peDPi
+ R0zsEAOu59GVS4sEahGmXxqyhTw6KY7rxrhKfWFoUL659cjeqzvdkKZNEl7+mkTtsUzD74J
+ g5PTj1hFM+iYvCvcmPcteRhG/m7mWT/b0eP59uGqMjADDQV4zypeKaqERtjlGzd3Jcxy1tr
+ 57Z0calwFUKC8LHPV0DB8GnT0rY7UXIa0xmHQknwh/AG4uQP+zGdRk466aKg==
+ARC-Authentication-Results: i=2; mail.freedesktop.org;
+ dkim=pass header.d=Nvidia.com;
+  arc=pass;
+  dmarc=pass (Used From Domain Record) header.from=nvidia.com
+ policy.dmarc=reject
+Authentication-Results: mail.freedesktop.org; dkim=pass header.d=Nvidia.com;
+ arc=pass;
+ dmarc=pass (Used From Domain Record) header.from=nvidia.com policy.dmarc=reject
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by kara.freedesktop.org (Postfix) with ESMTPS id 2729B44C83
-	for <nouveau@lists.freedesktop.org>; Tue, 13 Jan 2026 09:41:04 +0000 (UTC)
-X-Greylist: delayed 2162 seconds by postgrey-1.36 at gabe;
- Tue, 13 Jan 2026 09:49:32 UTC
-Received: from mx.tochlab.net (mx.tochlab.net [86.110.194.181])
-	by gabe.freedesktop.org (Postfix) with ESMTPS id 1874D10E48D;
-	Tue, 13 Jan 2026 09:49:32 +0000 (UTC)
-Received: from ams.tochlab.net ([80.74.28.214] helo=[10.8.0.6])
-	by mx.tochlab.net with esmtpsa  (TLS1.3) tls TLS_AES_128_GCM_SHA256
-	(Exim 4.98.2 (FreeBSD))
-	(envelope-from <tochansky@tochlab.net>)
-	id 1vfaSr-00000000CUc-40DG;
-	Tue, 13 Jan 2026 12:13:26 +0300
-Message-ID: <2420af5b-492e-4ecd-a432-5904f097c581@tochlab.net>
-Date: Tue, 13 Jan 2026 12:13:23 +0300
+	by kara.freedesktop.org (Postfix) with ESMTPS id 54AFD44C87
+	for <nouveau@lists.freedesktop.org>; Tue, 13 Jan 2026 22:46:04 +0000 (UTC)
+Received: from SA9PR02CU001.outbound.protection.outlook.com
+ (mail-southcentralusazon11013011.outbound.protection.outlook.com
+ [40.93.196.11])
+	by gabe.freedesktop.org (Postfix) with ESMTPS id A7CE810E566
+	for <nouveau@lists.freedesktop.org>; Tue, 13 Jan 2026 22:54:33 +0000 (UTC)
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=lAn1KMtFLJ+VQIyXEjENMHMeYYTyl0iwTZbrvBJDchj0yMeqPLjP+FNbQNXBEvi79CmyjuHYKxB/ucGI6u6M5+++C0Raimp0cI4cWjNn64lBgFVEMnYlkYPJ1LjH/PGalow4NL0TQMdcLpiWRYvAuOEuKQI3xf9ntKSKQyhdmr+sl9lPAUbjF5lU47S8HF0sR2DM4UEGxnZbYAFMV+tAPkGP+S62Y9ZJ0HARn/mRvaDpY0HL3+cu5ghWyvkvHegKK23PoVo5x8esvFjV4ocX8i2IiM7+q4blEDv0F3e6y/hljT4XTv2vvXxBVLdMWhJGkeiZ3qjN6HmhoVCv3rfDCg==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=+FKtdhYNgcdRX9177AKew5k1JnfBuiQSaznZQp8IAew=;
+ b=MFbNervmHw2Y5TNEecY045W2MoO2zmpvOZIMI4qokroz7HuC0CSF5l2KCx/gXKhtlCxixQlk8P5r18kJ2ZP/RP5uKb325H4kNFqYnzfCx4zROVb3Sdfmkon8vkbdOSJ5QuS2F4HD2Vb2SThQnzQvBsyA6gG04KFIU/5u/VDDKQdkGT+aEZ8PEpOqg9GlaiVAvXNCCRBI3cyHT6yMfK/YF3mgyjugt1A9XtxMA0oBnFDWc1cSEJW2ukAOyzosNL8z24a6j4vmblA6k/6prLXhfwX7yDAJfqANVbc6O9xhcJNauNrDphEYEZGYu2LEVvHMKpsJIqk2ae/so4+z994KWQ==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
+ 216.228.117.161) smtp.rcpttodomain=google.com smtp.mailfrom=nvidia.com;
+ dmarc=pass (p=reject sp=reject pct=100) action=none header.from=nvidia.com;
+ dkim=none (message not signed); arc=none (0)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=Nvidia.com;
+ s=selector2;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=+FKtdhYNgcdRX9177AKew5k1JnfBuiQSaznZQp8IAew=;
+ b=jx8jTjtuXyJuiQxz8Dfd8gzpUIigjfqkIe2MlXX/JkEukonB15X5KeCGDnoU3CvlvsIIxo7794liurZyzF2B/Yg1LxFuQUvZnge2pOPyusYo/EPmmRpMx5NACXBKupqI7b6RgCP+yGzmc7D4Qg41EJ8kjKw4o8RsFZ/XYHoZUeU3sPs9E3KyuLZVIhYFrVqetum/LgmZoU6CppTQ7/hUWL7ctgxPdZETJIiVprN1ZHmfFtGRPRgKuRUlXWy07GTxG45P3Kz3mQO865ttIqqUzyUsKpYvCoce5WN/lwWPA7PhzsIy8QfB3dF96jebJQjl7uaufsOtpITZtFj1O/AR0w==
+Received: from IA1P220CA0018.NAMP220.PROD.OUTLOOK.COM (2603:10b6:208:464::9)
+ by DM4PR12MB5818.namprd12.prod.outlook.com (2603:10b6:8:62::15) with
+ Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9520.5; Tue, 13 Jan
+ 2026 22:54:29 +0000
+Received: from BL6PEPF0001AB78.namprd02.prod.outlook.com
+ (2603:10b6:208:464:cafe::c0) by IA1P220CA0018.outlook.office365.com
+ (2603:10b6:208:464::9) with Microsoft SMTP Server (version=TLS1_3,
+ cipher=TLS_AES_256_GCM_SHA384) id 15.20.9520.4 via Frontend Transport; Tue,
+ 13 Jan 2026 22:54:29 +0000
+X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 216.228.117.161)
+ smtp.mailfrom=nvidia.com; dkim=none (message not signed)
+ header.d=none;dmarc=pass action=none header.from=nvidia.com;
+Received-SPF: Pass (protection.outlook.com: domain of nvidia.com designates
+ 216.228.117.161 as permitted sender) receiver=protection.outlook.com;
+ client-ip=216.228.117.161; helo=mail.nvidia.com; pr=C
+Received: from mail.nvidia.com (216.228.117.161) by
+ BL6PEPF0001AB78.mail.protection.outlook.com (10.167.242.171) with Microsoft
+ SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ 15.20.9520.1 via Frontend Transport; Tue, 13 Jan 2026 22:54:29 +0000
+Received: from rnnvmail201.nvidia.com (10.129.68.8) by mail.nvidia.com
+ (10.129.200.67) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.20; Tue, 13 Jan
+ 2026 14:54:17 -0800
+Received: from ttabi.nvidia.com (10.126.230.35) by rnnvmail201.nvidia.com
+ (10.129.68.8) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.20; Tue, 13 Jan
+ 2026 14:54:16 -0800
+From: Timur Tabi <ttabi@nvidia.com>
+To: Matthew Maurer <mmaurer@google.com>, Danilo Krummrich <dakr@kernel.org>,
+	Gary Guo <gary@garyguo.net>, John Hubbard <jhubbard@nvidia.com>, "Joel
+ Fernandes" <joelagnelf@nvidia.com>, Alexandre Courbot <acourbot@nvidia.com>,
+	<rust-for-linux@vger.kernel.org>, <nouveau@lists.freedesktop.org>
+Subject: [PATCH v4 0/9] gpu: nova-core: expose the logging buffers via debugfs
+Date: Tue, 13 Jan 2026 16:53:59 -0600
+Message-ID: <20260113225408.671252-1-ttabi@nvidia.com>
+X-Mailer: git-send-email 2.52.0
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-From: Dmitrii Tochanskii <tochansky@tochlab.net>
-Subject: Re: [BUG] NULL pointer dereference in Nouveau in 6.19 rc3 on boot
-To: Christopher Snowhill <chris@kode54.net>, nouveau@lists.freedesktop.org
-References: <176682185563.8256.115798774340102079@copycat>
- <176698808133.6372.2408917375327107249@copycat>
- <176704843302.28863.16755724580325167330@copycat>
-Content-Language: en-US
-In-Reply-To: <176704843302.28863.16755724580325167330@copycat>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
-X-MailFrom: tochansky@tochlab.net
-X-Mailman-Rule-Hits: nonmember-moderation
+Content-Type: text/plain; charset="UTF-8"
+X-NVConfidentiality: public
+Content-Transfer-Encoding: 8bit
+X-Originating-IP: [10.126.230.35]
+X-ClientProxiedBy: rnnvmail202.nvidia.com (10.129.68.7) To
+ rnnvmail201.nvidia.com (10.129.68.8)
+X-EOPAttributedMessage: 0
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: BL6PEPF0001AB78:EE_|DM4PR12MB5818:EE_
+X-MS-Office365-Filtering-Correlation-Id: ffd0648d-9fa3-4d4b-4675-08de52f6b5be
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: 
+	BCL:0;ARA:13230040|82310400026|36860700013|1800799024|376014;
+X-Microsoft-Antispam-Message-Info: 
+	=?utf-8?B?ZlUwdUdaMDUyNHJoOWpyM1Btd2hydHI2V2M5RVFjTkppbm5aaFJ1MmVsdGpV?=
+ =?utf-8?B?VGNLL3RIL0xsWDBLQjBiUlJzTUk4TEdMUFI2aG5NeGErblBrV2poclcxZmRn?=
+ =?utf-8?B?c1dpeEV4dC9Ib2tXRFZFaHQxSlk5TGpiNUtydTlJRHVwUkpGTXoyekRERUNx?=
+ =?utf-8?B?Q2VhQzhTUVZtTk52SG5QRHkwaVkrL2h1UVNnc21nNHlyS0o0V1FCQTY3S0k3?=
+ =?utf-8?B?OGhNbFNVcWFTa1JtdUt4aTk5TUFjSmZ1YjRKZ1hMdDZvOGE0R0IzVitwQmVn?=
+ =?utf-8?B?Zm5jNHVXMDdicFJTS1MzSWNla0t0UUU0VVZPSHJPNFloS1RSUEZMeUpLb1hk?=
+ =?utf-8?B?MXZBRG1sM0NmWk0yK0VDTDVFMGY1akxFaGJLUUI2eVM3SDVSQnlUZUFUQkxU?=
+ =?utf-8?B?S2l5RElCdVcxcmpwWDNqK3lNUDZKRktiempCRjgxM1piNXRyZ2NxVDMvNG5w?=
+ =?utf-8?B?OUJoeGgrQkJuWGNpUXBhQUtLT3FZQ2NaYkFBVHFwZHQ4Q05xZmdrbVp1ZFgy?=
+ =?utf-8?B?TFMzYlN0dFFKclJySHVFanBKNTI2MmxHTkl0dFBRVUt0cWd3NTZtYkY2ck9a?=
+ =?utf-8?B?N21MSXhCTTB4TXlRUjkwVWVub1I4ak01dzZOSzNUNzVjQzV0NlliaGJzWU9i?=
+ =?utf-8?B?UTNYcXVhcUcycHhBLzlpbVdxcThTUHowSFlLcC9raDNla1BEcEdka21xUVlX?=
+ =?utf-8?B?MWhDUEJvQktHK2xYTG5MWlBJeEJvOXcreC9rSjdad3JEbkFCdUdYRGkvem8z?=
+ =?utf-8?B?M3FkV25Fek9adm5oRHlHQXpmaDFJemdIblJ0TWlUSHF4L1lKWlVRVjUrNTh2?=
+ =?utf-8?B?eHMvMHlndmRuZDM1RlZZRHpJVHBFUkEwSHJWbDlLN2hPczdhVUl1SmxPVXU5?=
+ =?utf-8?B?Q1ZBYmZZcEgxZ2IzQTZUblh6eDBLWks2OW9JL0xtYmJaVG0vTmliVVMyQ3dZ?=
+ =?utf-8?B?UjJkWmFidXJncHVkamxHcG5EdEVCNmpkV0tPWnVyTjFST2V5YURxaDlaR0kx?=
+ =?utf-8?B?OS9zSVVmV2hkWHdHNVBwYkp1aFJMRzhINU9mZ3lHRThBU2pVcjNRVDNlZHNk?=
+ =?utf-8?B?NVozZHc5RmdHUU84WWdJcjRld3U5QXVua3VXM3pnMlVQVkVocG9qeXVmRGxr?=
+ =?utf-8?B?WFBHeTBSa0UrSDRsMzhnekFaSkdzVEZVUHBUZGlGU3VnVzF2T0h4dDZRVWxk?=
+ =?utf-8?B?NGdKRjIrRG4vMS9zc3pjblpLQ3BZV1JPSDBrTlNWVjJ3eXdSL3NDd0wwdVl3?=
+ =?utf-8?B?WWhaTjJ0MHoxUzM3bis1anNPdUg3MVo4VktUNEliSnBpUUNTZytjbFZsM0Ir?=
+ =?utf-8?B?SDBTeE1vY1diRERwZ09hZGRhOHpKVTd6eHRkQ1o4Y0lMZTR0NytQRzdTcVpV?=
+ =?utf-8?B?ejFFYUF6SHk5UXRVSVNvcnFBWkZTVXNrYXlTdTRuSkFWMnBJU0Z2U2lPTmRi?=
+ =?utf-8?B?QmFoYnRuam1PQU53ZHAramErbDhTZjNyRnF5Um51R05uNkN4THdSUE9MTjlF?=
+ =?utf-8?B?Rk9mUlVHZ3BSc21VK3RLbjhCQ05rU0g4TXVJSy93V211d0dYL1VTVVluNmVB?=
+ =?utf-8?B?Sm42clEyb0tzUEpJNnZOUFpxbnRYNjJuWGpvc2ltNDNoQmZ0UkRXZXFHMlpy?=
+ =?utf-8?B?S2tmd2laNktjQlRsNG9zWEo4Njg1amFpeG5zU0FSejlSbUxVK3pmMWxDTUJo?=
+ =?utf-8?B?NGlHaUJhT1BCOURCcWwxaVJnSHJnN2tCZXUzbTVvNGNZZjlpb0k0Q3ZGV1Jr?=
+ =?utf-8?B?M2pjeGZud2F1Q2xjYktWRFVDdG5GQkk2U3JoVGQzZnhHdUFyV05qVHRCa3Ft?=
+ =?utf-8?B?RjF5VlVFNmc3dFBqT0lFWG1jdEp2MVpnRlBhWGlMbXNvamNQbE0wVHRBeU5V?=
+ =?utf-8?B?T3pjTDhWQWlmUHVhdlN2dUN3VDIyQWcwSWZEbHZWdnhhR00vZFI1K28wQWh1?=
+ =?utf-8?B?RkpET1VNQTFMSXZoUjBDN29LRkk5OWVJYXRYK2NsdXFwWW5OVnJiVG1aVXRE?=
+ =?utf-8?B?MlF5ZlJmMmhqOUJubm9VSVBnSnJpODl1UTc2cDdQWnZmdGRqYmF0aEtQTDdI?=
+ =?utf-8?B?dEJKZzF6ZVlvOFRubnVXYytySTVQNjZnbTdMWHV4WWljdFN0bEtvNmxEWVlY?=
+ =?utf-8?Q?u+40=3D?=
+X-Forefront-Antispam-Report: 
+	CIP:216.228.117.161;CTRY:US;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:mail.nvidia.com;PTR:dc6edge2.nvidia.com;CAT:NONE;SFS:(13230040)(82310400026)(36860700013)(1800799024)(376014);DIR:OUT;SFP:1101;
+X-OriginatorOrg: Nvidia.com
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 13 Jan 2026 22:54:29.4928
+ (UTC)
+X-MS-Exchange-CrossTenant-Network-Message-Id: 
+ ffd0648d-9fa3-4d4b-4675-08de52f6b5be
+X-MS-Exchange-CrossTenant-Id: 43083d15-7273-40c1-b7db-39efd9ccc17a
+X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: 
+ TenantId=43083d15-7273-40c1-b7db-39efd9ccc17a;Ip=[216.228.117.161];Helo=[mail.nvidia.com]
+X-MS-Exchange-CrossTenant-AuthSource: 
+	BL6PEPF0001AB78.namprd02.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Anonymous
+X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: DM4PR12MB5818
+X-MailFrom: ttabi@nvidia.com
+X-Mailman-Rule-Hits: implicit-dest
 X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency;
- loop; banned-address; member-moderation
-Message-ID-Hash: BU24DK6HJQZNZTN3VC62CNFXJ4ZYPERB
-X-Message-ID-Hash: BU24DK6HJQZNZTN3VC62CNFXJ4ZYPERB
-X-Mailman-Approved-At: Wed, 14 Jan 2026 12:50:58 +0000
-CC: dri-devel@lists.freedesktop.org, linux-kernel@vger.kernel.org,
- Danilo Krummrich <dakr@kernel.org>, Maxime Ripard <mripard@kernel.org>,
- Simona Vetter <simona@ffwll.ch>
+ loop; banned-address; member-moderation; nonmember-moderation; administrivia;
+ max-recipients; max-size; news-moderation; no-subject; digests;
+ suspicious-header
+Message-ID-Hash: BFREGTXWYXUENLCS7U5HERMXFLIB5XFW
+X-Message-ID-Hash: BFREGTXWYXUENLCS7U5HERMXFLIB5XFW
+X-Mailman-Approved-At: Wed, 14 Jan 2026 12:51:13 +0000
 X-Mailman-Version: 3.3.8
 Precedence: list
 List-Id: Nouveau development list <nouveau.lists.freedesktop.org>
 Archived-At: 
- <https://lists.freedesktop.org/hyperkitty/list/nouveau@lists.freedesktop.org/message/BU24DK6HJQZNZTN3VC62CNFXJ4ZYPERB/>
+ <https://lists.freedesktop.org/hyperkitty/list/nouveau@lists.freedesktop.org/message/BFREGTXWYXUENLCS7U5HERMXFLIB5XFW/>
 Archived-At: 
- <https://lore.freedesktop.org/2420af5b-492e-4ecd-a432-5904f097c581@tochlab.net/>
+ <https://lore.freedesktop.org/20260113225408.671252-1-ttabi@nvidia.com/>
 List-Archive: 
  <https://lists.freedesktop.org/hyperkitty/list/nouveau@lists.freedesktop.org/>
 List-Archive: <https://lore.freedesktop.org/nouveau>
@@ -93,511 +195,53 @@ List-Post: <mailto:nouveau@lists.freedesktop.org>
 List-Subscribe: <mailto:nouveau-join@lists.freedesktop.org>
 List-Unsubscribe: <mailto:nouveau-leave@lists.freedesktop.org>
 
+GSP-RM writes its printf message to "logging buffers", which are blocks
+memory allocated by the driver.  The messages are encoded, so exposing
+the buffers as debugfs entries allows the buffers to be extracted and
+decoded by a special application.
 
-On 12/30/25 1:47 AM, Christopher Snowhill wrote:
-> On Sun 28 Dec 2025 10:01:21 PM , Christopher Snowhill wrote:
->> On Fri 26 Dec 2025 11:50:55 PM , Christopher Snowhill wrote:
->>> I get the following NULL pointer dereference on boot, shortly before it
->>> would be showing me my LUKS password prompt on a graphical screen. I had
->>> to trust that there was a prompt and log into it blindly to boot and
->>> recover this kernel log snippet.
->>>
->>> This kernel is built using the linux-cachyos-rc package, and only has
->>> minor patches unrelated to DRM code, except that I also applied the
->>> Nouveau ZCULL patch set on top, as well as some downstream sched-ext
->>> patches from Andrea Righi's tree.
->>>
->>> Using latest stable linux-firmware packages from CachyOS, so
->>> 1:20251125-2.
->>>
->>> Should I also have CC'd Maarten Lankhorst? I recall he was retiring from
->>> the maintainer position due to leaving Intel, but get_maintainers.pl
->>> still returns his contact name and address.
->>>
->>> Dec 26 22:52:57 cachyos kernel: nouveau 0000:01:00.0: vgaarb: deactivate vga
->>> console
->>> Dec 26 22:52:57 cachyos kernel: BUG: kernel NULL pointer dereference, address:
->>> 00000000000000cc
->>> Dec 26 22:52:57 cachyos kernel: #PF: supervisor read access in kernel mode
->>> Dec 26 22:52:57 cachyos kernel: #PF: error_code(0x0000) - not-present page
->>> Dec 26 22:52:57 cachyos kernel: PGD 0 P4D 0
->>> Dec 26 22:52:57 cachyos kernel: Oops: Oops: 0000 [#1] SMP NOPTI
->>> Dec 26 22:52:57 cachyos kernel: CPU: 3 UID: 0 PID: 398 Comm: (udev-worker) Not
->>> tainted 6.19.0-rc2-1-cachyos-rc #1 PREEMPT(full)
->>> 71029b2e9fcfeb4957f998851dc3b8eefd7c60f1
->>> Dec 26 22:52:57 cachyos kernel: Hardware name: Micro-Star International Co.,
->>> Ltd. MS-7E16/X670E GAMING PLUS WIFI (MS-7E16), BIOS 1.C7 10/22/2025
->>> Dec 26 22:52:57 cachyos kernel: RIP: 0010:bit_entry+0x14/0xf0 [nouveau]
->>> Dec 26 22:52:57 cachyos kernel: Code: 48 88 f2 0f 1f 00 90 90 90 90 90 90 90
->>> 90 90 90 90 90 90 90 90 90 0f 1f 40 d6 0f 1f 44 00 00 41 56 41 55 41 89 f5 41
->>> 54 55 53 <8b> b7 cc 00 00 00 85 f6 0f 84 b0 00 00 00 83 c6 0a 49 89 d6 48 89
->>> Dec 26 22:52:57 cachyos kernel: RSP: 0018:ffffd13900b73568 EFLAGS: 00010282
->>> Dec 26 22:52:57 cachyos kernel: RAX: ffff8ef7a5429000 RBX: 0000000000000000
->>> RCX: ffffd13900b735ff
->>> Dec 26 22:52:57 cachyos kernel: RDX: ffffd13900b7359a RSI: 0000000000000070
->>> RDI: 0000000000000000
->>> Dec 26 22:52:57 cachyos kernel: RBP: ffff8ef79305d000 R08: ffffd13900b73608
->>> R09: 000000000000001f
->>> Dec 26 22:52:57 cachyos kernel: R10: 0000000000000002 R11: 0000000000010000
->>> R12: ffffd13900b735ff
->>> Dec 26 22:52:57 cachyos kernel: R13: 0000000000000070 R14: ffffd13900b73608
->>> R15: ffffd13900b735fe
->>> Dec 26 22:52:57 cachyos kernel: FS:  00007f830f677840(0000)
->>> GS:ffff8f0ec8730000(0000) knlGS:0000000000000000
->>> Dec 26 22:52:57 cachyos kernel: CS:  0010 DS: 0000 ES: 0000 CR0:
->>> 0000000080050033
->>> Dec 26 22:52:57 cachyos kernel: CR2: 00000000000000cc CR3: 0000000117521000
->>> CR4: 0000000000f50ef0
->>> Dec 26 22:52:57 cachyos kernel: PKRU: 55555554
->>> Dec 26 22:52:57 cachyos kernel: Call Trace:
->>> Dec 26 22:52:57 cachyos kernel:  <TASK>
->>> Dec 26 22:52:57 cachyos kernel:  nvbios_pmuEp+0x51/0x130 [nouveau
->>> 92367f81003504f1f8c63f31342b6d203ebdc5d1]
->>> Dec 26 22:52:57 cachyos kernel:  nvkm_gsp_fwsec_init+0x76/0x3c0 [nouveau
->>> 92367f81003504f1f8c63f31342b6d203ebdc5d1]
->>> Dec 26 22:52:57 cachyos kernel:  r535_gsp_oneinit+0x2e4/0x1060 [nouveau
->>> 92367f81003504f1f8c63f31342b6d203ebdc5d1]
->>> Dec 26 22:52:57 cachyos kernel:  gh100_gsp_oneinit+0x33b/0x4d0 [nouveau
->>> 92367f81003504f1f8c63f31342b6d203ebdc5d1]
->>> Dec 26 22:52:57 cachyos kernel:  nvkm_subdev_init_+0x63/0x100 [nouveau
->>> 92367f81003504f1f8c63f31342b6d203ebdc5d1]
->>> Dec 26 22:52:57 cachyos kernel:  nvkm_subdev_init+0x46/0x60 [nouveau
->>> 92367f81003504f1f8c63f31342b6d203ebdc5d1]
->>> Dec 26 22:52:57 cachyos kernel:  nvkm_device_init+0x163/0x1e0 [nouveau
->>> 92367f81003504f1f8c63f31342b6d203ebdc5d1]
->>> Dec 26 22:52:57 cachyos kernel:  nvkm_udevice_init+0x45/0x70 [nouveau
->>> 92367f81003504f1f8c63f31342b6d203ebdc5d1]
->>> Dec 26 22:52:57 cachyos kernel:  nvkm_object_init+0x42/0x120 [nouveau
->>> 92367f81003504f1f8c63f31342b6d203ebdc5d1]
->>> Dec 26 22:52:57 cachyos kernel:  nvkm_ioctl_new+0x1d8/0x290 [nouveau
->>> 92367f81003504f1f8c63f31342b6d203ebdc5d1]
->>> Dec 26 22:52:57 cachyos kernel:  ? __pfx_nvkm_client_child_new+0x10/0x10
->>> [nouveau 92367f81003504f1f8c63f31342b6d203ebdc5d1]
->>> Dec 26 22:52:57 cachyos kernel:  ? __pfx_nvkm_udevice_new+0x10/0x10 [nouveau
->>> 92367f81003504f1f8c63f31342b6d203ebdc5d1]
->>> Dec 26 22:52:57 cachyos kernel:  nvkm_ioctl+0xba/0x130 [nouveau
->>> 92367f81003504f1f8c63f31342b6d203ebdc5d1]
->>> Dec 26 22:52:57 cachyos systemd-udevd[363]: 0000:01:00.0: Worker [398]
->>> terminated by signal 9 (KILL).
->>> Dec 26 22:52:57 cachyos kernel:  nvif_object_ctor+0x114/0x190 [nouveau
->>> 92367f81003504f1f8c63f31342b6d203ebdc5d1]
->>> Dec 26 22:52:57 cachyos kernel:  nvif_device_ctor+0x2e/0x70 [nouveau
->>> 92367f81003504f1f8c63f31342b6d203ebdc5d1]
->>> Dec 26 22:52:57 cachyos kernel:  nouveau_drm_device_new+0x15c/0x320 [nouveau
->>> 92367f81003504f1f8c63f31342b6d203ebdc5d1]
->>> Dec 26 22:52:57 cachyos kernel:  nouveau_drm_probe+0xbb/0x210 [nouveau
->>> 92367f81003504f1f8c63f31342b6d203ebdc5d1]
->>> Dec 26 22:52:57 cachyos kernel:  ? __pm_runtime_resume+0x59/0x80
->>> Dec 26 22:52:57 cachyos kernel:  pci_device_probe+0x112/0x2d0
->>> Dec 26 22:52:57 cachyos kernel:  really_probe+0xde/0x400
->>> Dec 26 22:52:57 cachyos kernel:  ? __pfx___driver_attach+0x10/0x10
->>> Dec 26 22:52:57 cachyos kernel:  ? __pfx___driver_attach+0x10/0x10
->>> Dec 26 22:52:57 cachyos kernel:  __driver_probe_device+0x78/0x150
->>> Dec 26 22:52:57 cachyos kernel:  __driver_attach+0xa0/0x340
->>> Dec 26 22:52:57 cachyos kernel:  bus_for_each_dev+0x10b/0x160
->>> Dec 26 22:52:57 cachyos kernel:  bus_add_driver+0x131/0x280
->>> Dec 26 22:52:57 cachyos kernel:  ? __pfx_nouveau_drm_init+0x10/0x10 [nouveau
->>> 92367f81003504f1f8c63f31342b6d203ebdc5d1]
->>> Dec 26 22:52:57 cachyos kernel:  driver_register+0x75/0xe0
->>> Dec 26 22:52:57 cachyos kernel:  nouveau_drm_init+0x1b3/0xff0 [nouveau
->>> 92367f81003504f1f8c63f31342b6d203ebdc5d1]
->>> Dec 26 22:52:57 cachyos kernel:  do_one_initcall+0x5b/0x300
->>> Dec 26 22:52:57 cachyos kernel:  do_init_module+0x62/0x250
->>> Dec 26 22:52:57 cachyos kernel:  ? init_module_from_file+0xd6/0x140
->>> Dec 26 22:52:57 cachyos kernel:  init_module_from_file+0xd6/0x140
->>> Dec 26 22:52:57 cachyos kernel:  idempotent_init_module+0x118/0x310
->>> Dec 26 22:52:57 cachyos kernel:  __x64_sys_finit_module+0x71/0xe0
->>> Dec 26 22:52:57 cachyos kernel:  ? syscall_trace_enter+0x91/0x1e0
->>> Dec 26 22:52:57 cachyos kernel:  do_syscall_64+0x81/0x630
->>> Dec 26 22:52:57 cachyos kernel:  ? __x64_sys_pread64+0x9c/0xd0
->>> Dec 26 22:52:57 cachyos kernel:  ? do_syscall_64+0x81/0x630
->>> Dec 26 22:52:57 cachyos kernel:  ? __do_sys_newfstatat+0xe0/0x170
->>> Dec 26 22:52:57 cachyos kernel:  ? do_syscall_64+0x81/0x630
->>> Dec 26 22:52:57 cachyos kernel:  ? irq_exit_rcu+0x55/0x100
->>> Dec 26 22:52:57 cachyos kernel:  entry_SYSCALL_64_after_hwframe+0x79/0x81
->>> Dec 26 22:52:57 cachyos kernel: RIP: 0033:0x7f830ff3c79d
->>> Dec 26 22:52:57 cachyos kernel: Code: ff c3 66 2e 0f 1f 84 00 00 00 00 00 90
->>> f3 0f 1e fa 48 89 f8 48 89 f7 48 89 d6 48 89 ca 4d 89 c2 4d 89 c8 4c 8b 4c 24
->>> 08 0f 05 <48> 3d 01 f0 ff ff 73 01 c3 48 8b 0d 3b 15 0f 00 f7 d8 64 89 01 48
->>> Dec 26 22:52:57 cachyos kernel: RSP: 002b:00007ffc68e73f08 EFLAGS: 00000246
->>> ORIG_RAX: 0000000000000139
->>> Dec 26 22:52:57 cachyos kernel: RAX: ffffffffffffffda RBX: 0000558c285bb2a0
->>> RCX: 00007f830ff3c79d
->>> Dec 26 22:52:57 cachyos kernel: RDX: 0000000000000004 RSI: 00007f830f6222f2
->>> RDI: 000000000000003f
->>> Dec 26 22:52:57 cachyos kernel: RBP: 00007ffc68e73fa0 R08: 0000000000000000
->>> R09: 0000558c285bc240
->>> Dec 26 22:52:57 cachyos kernel: R10: 0000000000000000 R11: 0000000000000246
->>> R12: 00007f830f6222f2
->>> Dec 26 22:52:57 cachyos kernel: R13: 0000000000020000 R14: 0000558c2853b7a0
->>> R15: 0000558c285bb2a0
->>> Dec 26 22:52:57 cachyos kernel:  </TASK>
->>> Dec 26 22:52:57 cachyos kernel: Modules linked in: dm_mod nouveau(+)
->>> drm_ttm_helper ttm gpu_sched hid_playstation(+) i2c_algo_bit uas nvme
->>> ghash_clmulni_intel drm_gpuvm led_class_multicolor usb_storage aesni_intel
->>> drm_exec ff_memless nvme_core mxm_wmi ccp nvme_keyring drm_display_helper
->>> nvme_auth hid_multitouch hid_logitech_dj(+) video hkdf cec wmi
->>> Dec 26 22:52:57 cachyos kernel: CR2: 00000000000000cc
->>> Dec 26 22:52:57 cachyos kernel: ---[ end trace 0000000000000000 ]---
->>> Dec 26 22:52:57 cachyos kernel: RIP: 0010:bit_entry+0x14/0xf0 [nouveau]
->>> Dec 26 22:52:57 cachyos kernel: Code: 48 88 f2 0f 1f 00 90 90 90 90 90 90 90
->>> 90 90 90 90 90 90 90 90 90 0f 1f 40 d6 0f 1f 44 00 00 41 56 41 55 41 89 f5 41
->>> 54 55 53 <8b> b7 cc 00 00 00 85 f6 0f 84 b0 00 00 00 83 c6 0a 49 89 d6 48 89
->>> Dec 26 22:52:57 cachyos kernel: RSP: 0018:ffffd13900b73568 EFLAGS: 00010282
->>> Dec 26 22:52:57 cachyos kernel: RAX: ffff8ef7a5429000 RBX: 0000000000000000
->>> RCX: ffffd13900b735ff
->>> Dec 26 22:52:57 cachyos kernel: RDX: ffffd13900b7359a RSI: 0000000000000070
->>> RDI: 0000000000000000
->>> Dec 26 22:52:57 cachyos kernel: RBP: ffff8ef79305d000 R08: ffffd13900b73608
->>> R09: 000000000000001f
->>> Dec 26 22:52:57 cachyos kernel: R10: 0000000000000002 R11: 0000000000010000
->>> R12: ffffd13900b735ff
->>> Dec 26 22:52:57 cachyos kernel: R13: 0000000000000070 R14: ffffd13900b73608
->>> R15: ffffd13900b735fe
->>> Dec 26 22:52:57 cachyos kernel: FS:  00007f830f677840(0000)
->>> GS:ffff8f0ec8730000(0000) knlGS:0000000000000000
->>> Dec 26 22:52:57 cachyos kernel: CS:  0010 DS: 0000 ES: 0000 CR0:
->>> 0000000080050033
->>> Dec 26 22:52:57 cachyos kernel: CR2: 00000000000000cc CR3: 0000000117521000
->>> CR4: 0000000000f50ef0
->>> Dec 26 22:52:57 cachyos kernel: PKRU: 55555554
->>> Dec 26 22:52:57 cachyos kernel: note: (udev-worker)[398] exited with irqs
->>> disabled
->>>
->> Still crashing with 6.19 rc3. I have to use the proprietary drivers to
->> have a desktop, but I probably should be using those anyway.
->>
->> Dec 28 21:47:18 cachyos kernel: BUG: kernel NULL pointer dereference, address:
->> 00000000000000cc
->> Dec 28 21:47:18 cachyos kernel: #PF: supervisor read access in kernel mode
->> Dec 28 21:47:18 cachyos kernel: #PF: error_code(0x0000) - not-present page
->> Dec 28 21:47:18 cachyos kernel: PGD 0 P4D 0
->> Dec 28 21:47:18 cachyos kernel: Oops: Oops: 0000 [#1] SMP NOPTI
->> Dec 28 21:47:18 cachyos kernel: CPU: 3 UID: 0 PID: 410 Comm: (udev-worker) Not
->> tainted 6.19.0-rc3-1-cachyos-rc #1 PREEMPT(full)
->> 048c9ac8e7cc8ed3d1ec452c3a62bf8817030490
->> Dec 28 21:47:18 cachyos kernel: Hardware name: Micro-Star International Co.,
->> Ltd. MS-7E16/X670E GAMING PLUS WIFI (MS-7E16), BIOS 1.C7 10/22/2025
->> Dec 28 21:47:18 cachyos kernel: RIP: 0010:bit_entry+0x14/0xf0 [nouveau]
->> Dec 28 21:47:18 cachyos kernel: Code: 48 08 f4 0f 1f 00 90 90 90 90 90 90 90
->> 90 90 90 90 90 90 90 90 90 0f 1f 40 d6 0f 1f 44 00 00 41 56 41 55 41 89 f5 41
->> 54 55 53 <8b> b7 cc 00 00 00 85 f6 0f 84 b0 00 00 00 83 c6 0a 49 89 d6 48 89
->> Dec 28 21:47:18 cachyos kernel: RSP: 0018:ffffd1e280bdb6f8 EFLAGS: 00010286
->> Dec 28 21:47:18 cachyos kernel: RAX: ffff8bec90f54800 RBX: 0000000000000000
->> RCX: ffffd1e280bdb78f
->> Dec 28 21:47:18 cachyos kernel: RDX: ffffd1e280bdb72a RSI: 0000000000000070
->> RDI: 0000000000000000
->> Dec 28 21:47:18 cachyos kernel: RBP: ffff8beca75a1000 R08: ffffd1e280bdb798
->> R09: 000000000000001f
->> Dec 28 21:47:18 cachyos kernel: R10: 0000000000000002 R11: 0000000000010000
->> R12: ffffd1e280bdb78f
->> Dec 28 21:47:18 cachyos kernel: R13: 0000000000000070 R14: ffffd1e280bdb798
->> R15: ffffd1e280bdb78e
->> Dec 28 21:47:18 cachyos kernel: FS:  00007f1ad28a2840(0000)
->> GS:ffff8c03c7130000(0000) knlGS:0000000000000000
->> Dec 28 21:47:18 cachyos kernel: CS:  0010 DS: 0000 ES: 0000 CR0:
->> 0000000080050033
->> Dec 28 21:47:18 cachyos kernel: CR2: 00000000000000cc CR3: 00000001184a6000
->> CR4: 0000000000f50ef0
->> Dec 28 21:47:18 cachyos kernel: PKRU: 55555554
->> Dec 28 21:47:18 cachyos kernel: Call Trace:
->> Dec 28 21:47:18 cachyos kernel:  <TASK>
->> Dec 28 21:47:18 cachyos kernel:  nvbios_pmuEp+0x51/0x130 [nouveau
->> 52ba080e4b7b95996467b34d4d25c4c6ce5aa54d]
->> Dec 28 21:47:18 cachyos kernel:  nvkm_gsp_fwsec_init+0x76/0x3c0 [nouveau
->> 52ba080e4b7b95996467b34d4d25c4c6ce5aa54d]
->> Dec 28 21:47:18 cachyos kernel:  r535_gsp_oneinit+0x2e4/0x1060 [nouveau
->> 52ba080e4b7b95996467b34d4d25c4c6ce5aa54d]
->> Dec 28 21:47:18 cachyos kernel:  gh100_gsp_oneinit+0x33b/0x4d0 [nouveau
->> 52ba080e4b7b95996467b34d4d25c4c6ce5aa54d]
->> Dec 28 21:47:18 cachyos kernel:  nvkm_subdev_init_+0x63/0x100 [nouveau
->> 52ba080e4b7b95996467b34d4d25c4c6ce5aa54d]
->> Dec 28 21:47:18 cachyos kernel:  nvkm_subdev_init+0x46/0x60 [nouveau
->> 52ba080e4b7b95996467b34d4d25c4c6ce5aa54d]
->> Dec 28 21:47:18 cachyos kernel:  nvkm_device_init+0x163/0x1e0 [nouveau
->> 52ba080e4b7b95996467b34d4d25c4c6ce5aa54d]
->> Dec 28 21:47:18 cachyos kernel:  nvkm_udevice_init+0x45/0x70 [nouveau
->> 52ba080e4b7b95996467b34d4d25c4c6ce5aa54d]
->> Dec 28 21:47:18 cachyos kernel:  nvkm_object_init+0x42/0x120 [nouveau
->> 52ba080e4b7b95996467b34d4d25c4c6ce5aa54d]
->> Dec 28 21:47:18 cachyos kernel:  nvkm_ioctl_new+0x1d8/0x290 [nouveau
->> 52ba080e4b7b95996467b34d4d25c4c6ce5aa54d]
->> Dec 28 21:47:18 cachyos kernel:  ? __pfx_nvkm_client_child_new+0x10/0x10
->> [nouveau 52ba080e4b7b95996467b34d4d25c4c6ce5aa54d]
->> Dec 28 21:47:18 cachyos kernel:  ? __pfx_nvkm_udevice_new+0x10/0x10 [nouveau
->> 52ba080e4b7b95996467b34d4d25c4c6ce5aa54d]
->> Dec 28 21:47:18 cachyos kernel:  nvkm_ioctl+0xba/0x130 [nouveau
->> 52ba080e4b7b95996467b34d4d25c4c6ce5aa54d]
->> Dec 28 21:47:18 cachyos kernel:  nvif_object_ctor+0x114/0x190 [nouveau
->> 52ba080e4b7b95996467b34d4d25c4c6ce5aa54d]
->> Dec 28 21:47:18 cachyos kernel:  nvif_device_ctor+0x2e/0x70 [nouveau
->> 52ba080e4b7b95996467b34d4d25c4c6ce5aa54d]
->> Dec 28 21:47:18 cachyos kernel:  nouveau_drm_device_new+0x15c/0x320 [nouveau
->> 52ba080e4b7b95996467b34d4d25c4c6ce5aa54d]
->> Dec 28 21:47:18 cachyos kernel:  nouveau_drm_probe+0xbb/0x210 [nouveau
->> 52ba080e4b7b95996467b34d4d25c4c6ce5aa54d]
->> Dec 28 21:47:18 cachyos kernel:  ? __pm_runtime_resume+0x59/0x80
->> Dec 28 21:47:18 cachyos kernel:  pci_device_probe+0x112/0x2d0
->> Dec 28 21:47:18 cachyos kernel:  really_probe+0xde/0x400
->> Dec 28 21:47:18 cachyos kernel:  ? __pfx___driver_attach+0x10/0x10
->> Dec 28 21:47:18 cachyos kernel:  ? __pfx___driver_attach+0x10/0x10
->> Dec 28 21:47:18 cachyos kernel:  __driver_probe_device+0x78/0x150
->> Dec 28 21:47:18 cachyos kernel:  __driver_attach+0xa0/0x340
->> Dec 28 21:47:18 cachyos kernel:  bus_for_each_dev+0x10b/0x160
->> Dec 28 21:47:18 cachyos kernel:  bus_add_driver+0x131/0x280
->> Dec 28 21:47:18 cachyos kernel:  ? __pfx_nouveau_drm_init+0x10/0x10 [nouveau
->> 52ba080e4b7b95996467b34d4d25c4c6ce5aa54d]
->> Dec 28 21:47:18 cachyos kernel:  driver_register+0x75/0xe0
->> Dec 28 21:47:18 cachyos kernel:  nouveau_drm_init+0x1b3/0xff0 [nouveau
->> 52ba080e4b7b95996467b34d4d25c4c6ce5aa54d]
->> Dec 28 21:47:18 cachyos kernel:  do_one_initcall+0x5b/0x300
->> Dec 28 21:47:18 cachyos kernel:  do_init_module+0x62/0x250
->> Dec 28 21:47:18 cachyos kernel:  ? init_module_from_file+0xd6/0x140
->> Dec 28 21:47:18 cachyos kernel:  init_module_from_file+0xd6/0x140
->> Dec 28 21:47:18 cachyos kernel:  idempotent_init_module+0x118/0x310
->> Dec 28 21:47:18 cachyos kernel:  __x64_sys_finit_module+0x71/0xe0
->> Dec 28 21:47:18 cachyos systemd-udevd[360]: 0000:01:00.0: Worker [410]
->> terminated by signal 9 (KILL).
->> Dec 28 21:47:18 cachyos kernel:  ? syscall_trace_enter+0x91/0x1e0
->> Dec 28 21:47:18 cachyos kernel:  do_syscall_64+0x81/0x630
->> Dec 28 21:47:18 cachyos kernel:  ? do_syscall_64+0x81/0x630
->> Dec 28 21:47:18 cachyos kernel:  ? irq_exit_rcu+0x55/0x100
->> Dec 28 21:47:18 cachyos kernel:  entry_SYSCALL_64_after_hwframe+0x79/0x81
->> Dec 28 21:47:18 cachyos kernel: RIP: 0033:0x7f1ad316779d
->> Dec 28 21:47:18 cachyos kernel: Code: ff c3 66 2e 0f 1f 84 00 00 00 00 00 90
->> f3 0f 1e fa 48 89 f8 48 89 f7 48 89 d6 48 89 ca 4d 89 c2 4d 89 c8 4c 8b 4c 24
->> 08 0f 05 <48> 3d 01 f0 ff ff 73 01 c3 48 8b 0d 3b 15 0f 00 f7 d8 64 89 01 48
->> Dec 28 21:47:18 cachyos kernel: RSP: 002b:00007ffe71df2278 EFLAGS: 00000246
->> ORIG_RAX: 0000000000000139
->> Dec 28 21:47:18 cachyos kernel: RAX: ffffffffffffffda RBX: 000055cb0eb476a0
->> RCX: 00007f1ad316779d
->> Dec 28 21:47:18 cachyos kernel: RDX: 0000000000000004 RSI: 00007f1ad284d2f2
->> RDI: 000000000000005d
->> Dec 28 21:47:18 cachyos kernel: RBP: 00007ffe71df2310 R08: 0000000000000000
->> R09: 000055cb0eb49a70
->> Dec 28 21:47:18 cachyos kernel: R10: 0000000000000000 R11: 0000000000000246
->> R12: 00007f1ad284d2f2
->> Dec 28 21:47:18 cachyos kernel: R13: 0000000000020000 R14: 000055cb0eadd7c0
->> R15: 000055cb0eb476a0
->> Dec 28 21:47:18 cachyos kernel:  </TASK>
->> Dec 28 21:47:18 cachyos kernel: Modules linked in: dm_mod nouveau(+)
->> drm_ttm_helper ttm gpu_sched uas i2c_algo_bit hid_playstation
->> ghash_clmulni_intel drm_gpuvm nvme usb_storage led_class_multicolor drm_exec
->> aesni_intel ff_memless mxm_wmi nvme_core ccp nvme_keyring drm_display_helper
->> nvme_auth hid_logitech_dj hid_multitouch cec hkdf video wmi
->> Dec 28 21:47:18 cachyos kernel: CR2: 00000000000000cc
->> Dec 28 21:47:18 cachyos kernel: ---[ end trace 0000000000000000 ]---
->> Dec 28 21:47:18 cachyos kernel: RIP: 0010:bit_entry+0x14/0xf0 [nouveau]
->> Dec 28 21:47:18 cachyos kernel: Code: 48 08 f4 0f 1f 00 90 90 90 90 90 90 90
->> 90 90 90 90 90 90 90 90 90 0f 1f 40 d6 0f 1f 44 00 00 41 56 41 55 41 89 f5 41
->> 54 55 53 <8b> b7 cc 00 00 00 85 f6 0f 84 b0 00 00 00 83 c6 0a 49 89 d6 48 89
->> Dec 28 21:47:18 cachyos kernel: RSP: 0018:ffffd1e280bdb6f8 EFLAGS: 00010286
->> Dec 28 21:47:18 cachyos kernel: RAX: ffff8bec90f54800 RBX: 0000000000000000
->> RCX: ffffd1e280bdb78f
->> Dec 28 21:47:18 cachyos kernel: RDX: ffffd1e280bdb72a RSI: 0000000000000070
->> RDI: 0000000000000000
->> Dec 28 21:47:18 cachyos kernel: RBP: ffff8beca75a1000 R08: ffffd1e280bdb798
->> R09: 000000000000001f
->> Dec 28 21:47:18 cachyos kernel: R10: 0000000000000002 R11: 0000000000010000
->> R12: ffffd1e280bdb78f
->> Dec 28 21:47:18 cachyos kernel: R13: 0000000000000070 R14: ffffd1e280bdb798
->> R15: ffffd1e280bdb78e
->> Dec 28 21:47:18 cachyos kernel: FS:  00007f1ad28a2840(0000)
->> GS:ffff8c03c7130000(0000) knlGS:0000000000000000
->> Dec 28 21:47:18 cachyos kernel: CS:  0010 DS: 0000 ES: 0000 CR0:
->> 0000000080050033
->> Dec 28 21:47:18 cachyos kernel: CR2: 00000000000000cc CR3: 00000001184a6000
->> CR4: 0000000000f50ef0
->> Dec 28 21:47:18 cachyos kernel: PKRU: 55555554
->> Dec 28 21:47:18 cachyos kernel: note: (udev-worker)[410] exited with irqs
->> disabled
->>
->> Does this new kernel require bleeding edge linux-firmware for nvidia?
-> Replicated the issue on linux-mainline, so it's not cachyos patches
-> causing the problem. Another user has failed to replicate it on various
-> 6.19 versions (rc1, rc3) using a 3000 series GPU, so it's likely
-> Blackwell specific, as I have a 5070 Ti.
->
-> The crash on linux-mainline was complicated by the mt76 string overflow
-> issue that still isn't patched in RC3, though.
->
-> Dec 28 23:01:13 archlinux kernel: BUG: kernel NULL pointer dereference,
-> address: 00000000000000cc
-> Dec 28 23:01:13 archlinux kernel: #PF: supervisor read access in kernel mode
-> Dec 28 23:01:13 archlinux kernel: #PF: error_code(0x0000) - not-present page
-> Dec 28 23:01:13 archlinux kernel: PGD 0 P4D 0
-> Dec 28 23:01:13 archlinux kernel: Oops: Oops: 0000 [#1] SMP NOPTI
-> Dec 28 23:01:13 archlinux kernel: CPU: 3 UID: 0 PID: 432 Comm: (udev-worker)
-> Not tainted 6.19.0-rc3-1-mainline-dirty #1 PREEMPT(full)
-> 6f31553276eb8f2de91bc301e09f6c7cde02609a
-> Dec 28 23:01:13 archlinux kernel: Hardware name: Micro-Star International Co.,
-> Ltd. MS-7E16/X670E GAMING PLUS WIFI (MS-7E16), BIOS 1.C7 10/22/2025
-> Dec 28 23:01:13 archlinux kernel: RIP: 0010:bit_entry+0x14/0xf0 [nouveau]
-> Dec 28 23:01:13 archlinux kernel: Code: ff e8 80 0b 73 f8 90 90 90 90 90 90 90
-> 90 90 90 90 90 90 90 90 90 0f 1f 40 d6 0f 1f 44 00 00 41 56 41 55 41 89 f5 41
-> 54 55 53 <8b> b7 cc 00 00 00 85 f6 0f 84 b1 00 00 00 83 c6 0a 49 89 d6 48 89
-> Dec 28 23:01:13 archlinux kernel: RSP: 0018:ffffcccc815074b8 EFLAGS: 00010296
-> Dec 28 23:01:13 archlinux kernel: RAX: 0000000000000000 RBX: 0000000000000000
-> RCX: ffffcccc81507536
-> Dec 28 23:01:13 archlinux kernel: RDX: ffffcccc815074f2 RSI: 0000000000000070
-> RDI: 0000000000000000
-> Dec 28 23:01:13 archlinux kernel: RBP: ffffcccc81507536 R08: ffffcccc81507537
-> R09: 0000000000001000
-> Dec 28 23:01:13 archlinux kernel: R10: 000000009ffdf000 R11: 0000000000000002
-> R12: ffffcccc81507537
-> Dec 28 23:01:13 archlinux kernel: R13: 0000000000000070 R14: ffffcccc8150758e
-> R15: ffffcccc8150758f
-> Dec 28 23:01:13 archlinux kernel: FS:  00007f175c3b8840(0000)
-> GS:ffff8aef0298c000(0000) knlGS:0000000000000000
-> Dec 28 23:01:13 archlinux kernel: CS:  0010 DS: 0000 ES: 0000 CR0:
-> 0000000080050033
-> Dec 28 23:01:13 archlinux kernel: CR2: 00000000000000cc CR3: 0000000116f96000
-> CR4: 0000000000f50ef0
-> Dec 28 23:01:13 archlinux kernel: PKRU: 55555554
-> Dec 28 23:01:13 archlinux kernel: Call Trace:
-> Dec 28 23:01:13 archlinux kernel:  <TASK>
-> Dec 28 23:01:13 archlinux kernel:  nvbios_pmuTe+0x4f/0xf0 [nouveau
-> 1ced2b39f8fa9b515ea0f917e46ab5fde01df79e]
-> Dec 28 23:01:13 archlinux kernel:  nvbios_pmuEp+0x4d/0xc0 [nouveau
-> 1ced2b39f8fa9b515ea0f917e46ab5fde01df79e]
-> Dec 28 23:01:13 archlinux kernel:  nvkm_gsp_fwsec_init+0x77/0x3c0 [nouveau
-> 1ced2b39f8fa9b515ea0f917e46ab5fde01df79e]
-> Dec 28 23:01:13 archlinux kernel:  r535_gsp_oneinit+0x25e/0xf90 [nouveau
-> 1ced2b39f8fa9b515ea0f917e46ab5fde01df79e]
-> Dec 28 23:01:13 archlinux kernel:  ? gh100_gsp_oneinit+0x288/0x420 [nouveau
-> 1ced2b39f8fa9b515ea0f917e46ab5fde01df79e]
-> Dec 28 23:01:13 archlinux kernel:  gh100_gsp_oneinit+0x2bc/0x420 [nouveau
-> 1ced2b39f8fa9b515ea0f917e46ab5fde01df79e]
-> Dec 28 23:01:13 archlinux kernel:  nvkm_subdev_oneinit_+0x43/0x90 [nouveau
-> 1ced2b39f8fa9b515ea0f917e46ab5fde01df79e]
-> Dec 28 23:01:13 archlinux kernel:  ? ktime_get+0x3b/0xd0
-> Dec 28 23:01:13 archlinux kernel:  nvkm_subdev_init_+0x31/0xa0 [nouveau
-> 1ced2b39f8fa9b515ea0f917e46ab5fde01df79e]
-> Dec 28 23:01:13 archlinux kernel:  ? nvkm_intr_rearm+0xc4/0x1c0 [nouveau
-> 1ced2b39f8fa9b515ea0f917e46ab5fde01df79e]
-> Dec 28 23:01:13 archlinux kernel:  nvkm_subdev_init+0x46/0x60 [nouveau
-> 1ced2b39f8fa9b515ea0f917e46ab5fde01df79e]
-> Dec 28 23:01:13 archlinux kernel:  nvkm_device_init+0x163/0x1e0 [nouveau
-> 1ced2b39f8fa9b515ea0f917e46ab5fde01df79e]
-> Dec 28 23:01:13 archlinux kernel:  nvkm_udevice_init+0x45/0x70 [nouveau
-> 1ced2b39f8fa9b515ea0f917e46ab5fde01df79e]
-> Dec 28 23:01:13 archlinux kernel:  nvkm_object_init+0x42/0x120 [nouveau
-> 1ced2b39f8fa9b515ea0f917e46ab5fde01df79e]
-> Dec 28 23:01:13 archlinux kernel:  nvkm_ioctl_new+0x15c/0x220 [nouveau
-> 1ced2b39f8fa9b515ea0f917e46ab5fde01df79e]
-> Dec 28 23:01:13 archlinux kernel:  ? __pfx_nvkm_client_child_new+0x10/0x10
-> [nouveau 1ced2b39f8fa9b515ea0f917e46ab5fde01df79e]
-> Dec 28 23:01:13 archlinux kernel:  ? __pfx_nvkm_udevice_new+0x10/0x10 [nouveau
-> 1ced2b39f8fa9b515ea0f917e46ab5fde01df79e]
-> Dec 28 23:01:13 archlinux kernel:  nvkm_ioctl+0xba/0x130 [nouveau
-> 1ced2b39f8fa9b515ea0f917e46ab5fde01df79e]
-> Dec 28 23:01:13 archlinux kernel:  nvif_object_ctor+0x114/0x190 [nouveau
-> 1ced2b39f8fa9b515ea0f917e46ab5fde01df79e]
-> Dec 28 23:01:13 archlinux kernel:  nvif_device_ctor+0x2e/0x70 [nouveau
-> 1ced2b39f8fa9b515ea0f917e46ab5fde01df79e]
-> Dec 28 23:01:13 archlinux kernel:  nouveau_drm_device_new+0x15c/0x320 [nouveau
-> 1ced2b39f8fa9b515ea0f917e46ab5fde01df79e]
-> Dec 28 23:01:13 archlinux kernel:  ? __pci_set_master+0x5e/0xe0
-> Dec 28 23:01:13 archlinux kernel:  nouveau_drm_probe+0xb9/0x210 [nouveau
-> 1ced2b39f8fa9b515ea0f917e46ab5fde01df79e]
-> Dec 28 23:01:13 archlinux kernel:  ? __pm_runtime_resume+0x5f/0x90
-> Dec 28 23:01:13 archlinux kernel:  local_pci_probe+0x42/0x90
-> Dec 28 23:01:13 archlinux kernel:  pci_device_probe+0xda/0x280
-> Dec 28 23:01:13 archlinux kernel:  ? sysfs_do_create_link_sd+0x6d/0xd0
-> Dec 28 23:01:13 archlinux kernel:  really_probe+0xde/0x380
-> Dec 28 23:01:13 archlinux kernel:  __driver_probe_device+0x78/0x150
-> Dec 28 23:01:13 archlinux kernel:  driver_probe_device+0x1f/0xa0
-> Dec 28 23:01:13 archlinux kernel:  ? __pfx___driver_attach+0x10/0x10
-> Dec 28 23:01:13 archlinux kernel:  __driver_attach+0xcb/0x200
-> Dec 28 23:01:13 archlinux kernel:  bus_for_each_dev+0x85/0xd0
-> Dec 28 23:01:13 archlinux kernel:  bus_add_driver+0x118/0x200
-> Dec 28 23:01:13 archlinux kernel:  ? __pfx_nouveau_drm_init+0x10/0x10 [nouveau
-> 1ced2b39f8fa9b515ea0f917e46ab5fde01df79e]
-> Dec 28 23:01:13 archlinux kernel:  driver_register+0x75/0xe0
-> Dec 28 23:01:13 archlinux kernel:  nouveau_drm_init+0x1b3/0xff0 [nouveau
-> 1ced2b39f8fa9b515ea0f917e46ab5fde01df79e]
-> Dec 28 23:01:13 archlinux kernel:  do_one_initcall+0x5b/0x300
-> Dec 28 23:01:13 archlinux kernel:  do_init_module+0x62/0x250
-> Dec 28 23:01:13 archlinux systemd-udevd[359]: 0000:01:00.0: Worker [432]
-> terminated by signal 9 (KILL).
-> Dec 28 23:01:13 archlinux kernel:  init_module_from_file+0xd8/0x140
-> Dec 28 23:01:13 archlinux kernel:  idempotent_init_module+0x114/0x310
-> Dec 28 23:01:13 archlinux kernel:  __x64_sys_finit_module+0x71/0xe0
-> Dec 28 23:01:13 archlinux kernel:  ? syscall_trace_enter+0x8d/0x1d0
-> Dec 28 23:01:13 archlinux kernel:  do_syscall_64+0x81/0x610
-> Dec 28 23:01:13 archlinux kernel:  ? do_sys_openat2+0xac/0xf0
-> Dec 28 23:01:13 archlinux kernel:  ? __x64_sys_openat+0x61/0xa0
-> Dec 28 23:01:13 archlinux kernel:  ? do_syscall_64+0x81/0x610
-> Dec 28 23:01:13 archlinux kernel:  ? do_sys_openat2+0xac/0xf0
-> Dec 28 23:01:13 archlinux kernel:  ? __x64_sys_openat+0x61/0xa0
-> Dec 28 23:01:13 archlinux kernel:  ? do_syscall_64+0x81/0x610
-> Dec 28 23:01:13 archlinux kernel:  ? __x64_sys_openat+0x61/0xa0
-> Dec 28 23:01:13 archlinux kernel:  ? do_syscall_64+0x81/0x610
-> Dec 28 23:01:13 archlinux kernel:  ? sched_clock+0x10/0x30
-> Dec 28 23:01:13 archlinux kernel:  ? sched_clock_cpu+0xf/0x200
-> Dec 28 23:01:13 archlinux kernel:  ?
-> __flush_smp_call_function_queue+0xae/0x410
-> Dec 28 23:01:13 archlinux kernel:  ? sched_clock_cpu+0xf/0x200
-> Dec 28 23:01:13 archlinux kernel:  ? irqtime_account_irq+0x3c/0xc0
-> Dec 28 23:01:13 archlinux kernel:  ? __irq_exit_rcu+0x4c/0xf0
-> Dec 28 23:01:13 archlinux kernel:  entry_SYSCALL_64_after_hwframe+0x76/0x7e
-> Dec 28 23:01:13 archlinux kernel: RIP: 0033:0x7f175cc7d79d
-> Dec 28 23:01:13 archlinux kernel: Code: ff c3 66 2e 0f 1f 84 00 00 00 00 00 90
-> f3 0f 1e fa 48 89 f8 48 89 f7 48 89 d6 48 89 ca 4d 89 c2 4d 89 c8 4c 8b 4c 24
-> 08 0f 05 <48> 3d 01 f0 ff ff 73 01 c3 48 8b 0d 3b 15 0f 00 f7 d8 64 89 01 48
-> Dec 28 23:01:13 archlinux kernel: RSP: 002b:00007ffeea4f46a8 EFLAGS: 00000246
-> ORIG_RAX: 0000000000000139
-> Dec 28 23:01:13 archlinux kernel: RAX: ffffffffffffffda RBX: 0000561d180f9e90
-> RCX: 00007f175cc7d79d
-> Dec 28 23:01:13 archlinux kernel: RDX: 0000000000000004 RSI: 00007f175c3632f2
-> RDI: 000000000000008d
-> Dec 28 23:01:13 archlinux kernel: RBP: 00007ffeea4f4740 R08: 0000000000000000
-> R09: 0000561d180fd7d0
-> Dec 28 23:01:13 archlinux kernel: R10: 0000000000000000 R11: 0000000000000246
-> R12: 00007f175c3632f2
-> Dec 28 23:01:13 archlinux kernel: R13: 0000000000020000 R14: 0000561d180f9210
-> R15: 0000561d180f9e90
-> Dec 28 23:01:13 archlinux kernel:  </TASK>
-> Dec 28 23:01:13 archlinux kernel: Modules linked in: dm_mod nouveau(+)
-> drm_ttm_helper ttm gpu_sched uas hid_playstation i2c_algo_bit
-> ghash_clmulni_intel nvme usb_storage drm_gpuvm led_class_multicolor
-> aesni_intel ff_memless drm_exec nvme_core mxm_wmi ccp nvme_keyring
-> drm_display_helper nvme_auth hid_logitech_dj(+) video hkdf hid_multitouch cec
-> wmi
-> Dec 28 23:01:13 archlinux kernel: CR2: 00000000000000cc
-> Dec 28 23:01:13 archlinux kernel: ---[ end trace 0000000000000000 ]---
-> Dec 28 23:01:13 archlinux kernel: RIP: 0010:bit_entry+0x14/0xf0 [nouveau]
-> Dec 28 23:01:13 archlinux kernel: Code: ff e8 80 0b 73 f8 90 90 90 90 90 90 90
-> 90 90 90 90 90 90 90 90 90 0f 1f 40 d6 0f 1f 44 00 00 41 56 41 55 41 89 f5 41
-> 54 55 53 <8b> b7 cc 00 00 00 85 f6 0f 84 b1 00 00 00 83 c6 0a 49 89 d6 48 89
-> Dec 28 23:01:13 archlinux kernel: RSP: 0018:ffffcccc815074b8 EFLAGS: 00010296
-> Dec 28 23:01:13 archlinux kernel: RAX: 0000000000000000 RBX: 0000000000000000
-> RCX: ffffcccc81507536
-> Dec 28 23:01:13 archlinux kernel: RDX: ffffcccc815074f2 RSI: 0000000000000070
-> RDI: 0000000000000000
-> Dec 28 23:01:13 archlinux kernel: RBP: ffffcccc81507536 R08: ffffcccc81507537
-> R09: 0000000000001000
-> Dec 28 23:01:13 archlinux kernel: R10: 000000009ffdf000 R11: 0000000000000002
-> R12: ffffcccc81507537
-> Dec 28 23:01:13 archlinux kernel: R13: 0000000000000070 R14: ffffcccc8150758e
-> R15: ffffcccc8150758f
-> Dec 28 23:01:13 archlinux kernel: FS:  00007f175c3b8840(0000)
-> GS:ffff8aef0298c000(0000) knlGS:0000000000000000
-> Dec 28 23:01:13 archlinux kernel: CS:  0010 DS: 0000 ES: 0000 CR0:
-> 0000000080050033
-> Dec 28 23:01:13 archlinux kernel: CR2: 00000000000000cc CR3: 0000000116f96000
-> CR4: 0000000000f50ef0
-> Dec 28 23:01:13 archlinux kernel: PKRU: 55555554
-> Dec 28 23:01:13 archlinux kernel: note: (udev-worker)[432] exited with irqs
-> disabled
->
-I started having the same error when upgrading from 6.18.3 to 6.18.4 on 
-RTX 5080.
+When the driver loads, a /sys/kernel/debug/nova_core root entry is
+created.  To do this, the normal module_pci_driver! macro call is
+replaced with an explicit initialization function, as this allows
+that debugfs entry to be created once for all GPUs.
 
-Bug line is drivers/gpu/drm/nouveau/nvkm/subdev/bios/bit.c:30 because 
-'bios' is NULL.
+Then in each GPU's initialization, a subdirectory based on the PCI
+BDF name is created, and the logging buffer entries are created under
+that.
 
-Not sure where it has to be set but in 
-drivers/gpu/drm/nouveau/nvkm/subdev/gsp/fwsec.c:266 it's NULL.
+Note: the debugfs entry has a file size of 0, because debugfs defaults
+a 0 size and the Rust abstractions do not adjust it for the same of
+the object.  Nouveau makes this adjustment manually in the driver.
 
+Changes since v3:
+1. Implement a LookupDir struct instead of adding lookup methods to Dir.
+2. Adds a Directory trait that is implemented by both LookupDir and Dir.
+3. Creates DynParent enum to wrap both LookupDir and Dir.
+4. No longer tries to "fix" Scope or scoped_dir.
+
+Alexandre Courbot (1):
+  gpu: nova-core: implement BinaryWriter for LogBuffer
+
+Timur Tabi (8):
+  rust: pci: add PCI device name method
+  gpu: nova-core: Replace module_pci_driver! with explicit module init
+  gpu: nova-core: use pin projection in method boot()
+  rust: debugfs: implement Directory trait for Dir
+  rust: debugfs: wrap Entry in an enum to prep for LookupDir
+  rust: debugfs: add LookupDir
+  gpu: nova-core: create debugfs root when driver loads
+  gpu: nova-core: create GSP-RM logging buffers debugfs entries
+
+ drivers/gpu/nova-core/gsp.rs       |  68 +++++++++++--
+ drivers/gpu/nova-core/gsp/boot.rs  |  14 +--
+ drivers/gpu/nova-core/nova_core.rs |  32 ++++++-
+ rust/kernel/debugfs.rs             | 148 ++++++++++++++++++++++++++++-
+ rust/kernel/debugfs/entry.rs       | 100 ++++++++++++++++++-
+ rust/kernel/pci.rs                 |  37 ++++++++
+ 6 files changed, 377 insertions(+), 22 deletions(-)
+
+
+base-commit: 654826aa4a8f25cf825ad9254f37e6cb5092098f
+-- 
+2.52.0
 
