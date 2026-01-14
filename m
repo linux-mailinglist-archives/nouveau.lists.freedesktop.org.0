@@ -2,130 +2,180 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id 71C48D2101B
-	for <lists+nouveau@lfdr.de>; Wed, 14 Jan 2026 20:21:53 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id E44F2D21094
+	for <lists+nouveau@lfdr.de>; Wed, 14 Jan 2026 20:30:29 +0100 (CET)
 Received: from kara.freedesktop.org (unknown [131.252.210.166])
-	by gabe.freedesktop.org (Postfix) with ESMTPS id 0042110E680;
-	Wed, 14 Jan 2026 19:21:52 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTPS id C767010E681;
+	Wed, 14 Jan 2026 19:30:28 +0000 (UTC)
 Authentication-Results: gabe.freedesktop.org;
-	dkim=fail reason="signature verification failed" (2048-bit key; unprotected) header.d=intel.com header.i=@intel.com header.b="YBrX/0SP";
+	dkim=pass (2048-bit key; unprotected) header.d=Nvidia.com header.i=@Nvidia.com header.b="GTzoM5AE";
 	dkim-atps=neutral
 Received: from kara.freedesktop.org (localhost [127.0.0.1])
-	by kara.freedesktop.org (Postfix) with ESMTP id 6BEE144CB1;
-	Wed, 14 Jan 2026 19:13:20 +0000 (UTC)
-ARC-Seal: i=1; cv=none; a=rsa-sha256; d=lists.freedesktop.org;
- s=20240201; t=1768418000;
- b=X9tm/FkulxcQqbvv3CrQ3As+dD5vhZo6YaR/ZXKqECIjBfiQ2ze6Idnc1Y4mt66EdDS0/
- l7+PnH+pS7EhfXuMtkR80zuUFhpYpZnZYqwDG8auhxewy1Og+xMaYKQn2gJmw60ZBykpi+Z
- aHkcMhGh4dVp7e4W2N7IouRm6/CQcjsy0MVEc/gZfOm3mjlg0oDoCrUwzNiMhBts+3ycGSv
- hRTFF9o9IFDEc/uDe1kpscd7uiSbLXeSuXZ5frW6sQrD6s4MkORz/zIODuv7Ek08xcB6dlH
- geadlmtHICg2rvTixQ3NQT6sqaNSeoTDPK2zPubef1W84HmavTd45fKootBg==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed;
- d=lists.freedesktop.org; s=20240201; t=1768418000; h=from : sender :
+	by kara.freedesktop.org (Postfix) with ESMTP id 3ECB044CB3;
+	Wed, 14 Jan 2026 19:21:57 +0000 (UTC)
+ARC-Seal: i=2; cv=pass; a=rsa-sha256; d=lists.freedesktop.org;
+ s=20240201; t=1768418517;
+ b=bQXc/qQlSc86IIw7mWJY9Xavip2ZWPGXMITYqXkSOuAfqPPOEf0SKGQ6Bi1+Ltw51xtaB
+ QMHH/m6Sl3qQjk46i+vH7kK6OkMWNs4mFL9MQNbJSABFRDBcYeYau+Iku8RnJo9V4zo9QQ0
+ qHTW3TWjxGdXdWn4b7xTYWJViRFF4geM+63DG9j0AyF56Z7SfBuJbovuHB9lAiXrkCYa/XY
+ qWZJYi6P+jL8akVEdKlieNbHsdKzRB09FN0YtpZwqOMqi+qTMgUZlGCqd8AMhR66o4kwxx2
+ c83AhbBIWbg77V8p+X5Vzsa0PyEDHDwUHfWUSfXU/WkfOaw/Y7ZD7HG2Zorw==
+ARC-Message-Signature: i=2; a=rsa-sha256; c=relaxed/relaxed;
+ d=lists.freedesktop.org; s=20240201; t=1768418517; h=from : sender :
  reply-to : subject : date : message-id : to : cc : mime-version :
  content-type : content-transfer-encoding : content-id :
  content-description : resent-date : resent-from : resent-sender :
  resent-to : resent-cc : resent-message-id : in-reply-to : references :
  list-id : list-help : list-unsubscribe : list-subscribe : list-post :
  list-owner : list-archive;
- bh=JZwiE/35ZsqgkWDcAHtCrU2hUyIiBiBdqk8v0OUngik=;
- b=cI5I02dXfLdEqVIeNkTA41w/322OV6NNJhe6ecrbXNY0XPQkEoq7L+NYQTyG8Cp6ZhDAZ
- jD28i7YMIf5GaL/PceuOtcBOgPFMAleyrvLBWEomdAR6f3Oun+WYW5VcNERuvkakFQxhwzR
- eV6bsuzEbjKO3IIw3ATcjmUy+BsF5ohLYG3YM9mMrR4vFVkUGagEKOJX7Qw0AFod0ODfPfu
- cjmEFBCiTp2s/ymFgwVe/pyvgzTLEHKY3JNozgLBT/faAeHBCmr9LvikQfWBIS+/fXnMSCE
- +su0ZdoUifaYgo56TX25fq4951Q1B3DKsgK7+2IBJ5Poj6WqUb4PgWjaYj9w==
-ARC-Authentication-Results: i=1; mail.freedesktop.org;
- dkim=pass header.d=intel.com header.i=@intel.com;
-  arc=none (Message is not ARC signed);
-  dmarc=pass (Used From Domain Record) header.from=intel.com policy.dmarc=none
-Authentication-Results: mail.freedesktop.org;
- dkim=pass header.d=intel.com header.i=@intel.com;
- arc=none (Message is not ARC signed);
- dmarc=pass (Used From Domain Record) header.from=intel.com policy.dmarc=none
+ bh=u82tz22sFgXWhhTjdwDxdE9+o1w3WBSj7gyZneRWpTE=;
+ b=DfL2YIFv+IYAdNF33pEnwYblLscVnIL0UGGEoQlAeY7Yh9J/pAJYbV9wy0c1KFm/oLMEq
+ JPWGhf+g5NQGk/lmsoEPU+eXUE1hqgiaIPMWNnbsVfjcGuTsg3CqNOSAkMyQ0ZCIzpzDe4S
+ u9CjSrW1Hj/b7v8Ls+Gbix3sF/6vcHlX0O6OZDh6F4vy2d9HQ0oeoehiaVKgUHEw5rBIcR9
+ dexqe4HfT+t7+bdTBLRy7uEPOIaOWCzOV0Hdn9/EbNRb0/7C3/bvSiYaEkII266jRKqtJ//
+ f4dDlkq4ustRyB+DZuC52gUK+4LtTC3aulJRysCA9EeAV60gOUYjfM/jLarg==
+ARC-Authentication-Results: i=2; mail.freedesktop.org;
+ dkim=pass header.d=Nvidia.com;
+  arc=pass;
+  dmarc=pass (Used From Domain Record) header.from=nvidia.com
+ policy.dmarc=reject
+Authentication-Results: mail.freedesktop.org; dkim=pass header.d=Nvidia.com;
+ arc=pass;
+ dmarc=pass (Used From Domain Record) header.from=nvidia.com policy.dmarc=reject
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by kara.freedesktop.org (Postfix) with ESMTPS id EE185400E0
-	for <nouveau@lists.freedesktop.org>; Wed, 14 Jan 2026 19:13:17 +0000 (UTC)
-Received: from mgamail.intel.com (mgamail.intel.com [192.198.163.8])
-	by gabe.freedesktop.org (Postfix) with ESMTPS id 43CE510E672;
-	Wed, 14 Jan 2026 19:21:49 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
-  d=intel.com; i=@intel.com; q=dns/txt; s=Intel;
-  t=1768418509; x=1799954509;
-  h=from:to:cc:subject:date:message-id:in-reply-to:
-   references:mime-version:content-transfer-encoding;
-  bh=jiGWK05xuN192DYv+TPcEdDntEMizLdbArhfYH/lgMA=;
-  b=YBrX/0SP+QXYj4nR7EfYqJFq6vd3UkkW/UrZL26jZgqO+/0P00ASZxyj
-   70GBX+OQugynBvIb4OYzfcjBbjCLT96/YlxEKd37JnGuc5Tdj6GH1A/vp
-   8HTV1WhAFwBwkzioHpak3aeJtqafdQiKxNdV18SUe/nNiSMvhFKJ0feKB
-   wkWVGsx6FRq5CwZWrsjVQnkLgG6gt6w4RDvSNSz7z+9INluwaL8Li3Zk2
-   KcD4z8fdnHWeY9K90L9TlbYkaWyiunUQed5y+nesKIx+xkiBIcTMLpnPF
-   6wjZt7AtZB+VRa+SgnG17AUGMw/bHYyejvrLM7145Hv5mnCwsDT83fojW
-   A==;
-X-CSE-ConnectionGUID: Mgp2ndoJQjytGsu8ieX6Vg==
-X-CSE-MsgGUID: +nxyQhS3Sc+aTo1Z/SeMJw==
-X-IronPort-AV: E=McAfee;i="6800,10657,11671"; a="87305735"
-X-IronPort-AV: E=Sophos;i="6.21,226,1763452800";
-   d="scan'208";a="87305735"
-Received: from fmviesa001.fm.intel.com ([10.60.135.141])
-  by fmvoesa102.fm.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
- 14 Jan 2026 11:21:48 -0800
-X-CSE-ConnectionGUID: UrOFw46sSR+Opbvpw2+jpw==
-X-CSE-MsgGUID: /21BpcAaQ6GbBGCCIQN2Ow==
-X-ExtLoop1: 1
-X-IronPort-AV: E=Sophos;i="6.21,226,1763452800";
-   d="scan'208";a="236006831"
-Received: from smoticic-mobl1.ger.corp.intel.com (HELO fdugast-desk.intel.com)
- ([10.245.244.85])
-  by smtpauth.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
- 14 Jan 2026 11:21:42 -0800
-From: Francois Dugast <francois.dugast@intel.com>
-To: intel-xe@lists.freedesktop.org
-Subject: [PATCH v5 1/5] mm/zone_device: Reinitialize large zone device private
- folios
-Date: Wed, 14 Jan 2026 20:19:52 +0100
-Message-ID: <20260114192111.1267147-2-francois.dugast@intel.com>
-X-Mailer: git-send-email 2.43.0
-In-Reply-To: <20260114192111.1267147-1-francois.dugast@intel.com>
-References: <20260114192111.1267147-1-francois.dugast@intel.com>
+	by kara.freedesktop.org (Postfix) with ESMTPS id 53E5A44C87
+	for <nouveau@lists.freedesktop.org>; Wed, 14 Jan 2026 19:21:54 +0000 (UTC)
+Received: from SN4PR2101CU001.outbound.protection.outlook.com
+ (mail-southcentralusazon11012022.outbound.protection.outlook.com
+ [40.93.195.22])
+	by gabe.freedesktop.org (Postfix) with ESMTPS id AA4C110E0F0
+	for <nouveau@lists.freedesktop.org>; Wed, 14 Jan 2026 19:30:25 +0000 (UTC)
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=ZIZRCjnGJHrYMjlgpYRl6V7c80DJW7l2wCVc/qyHzBRoVxzSBVlGGMwEecak3sj9AxqNykbJMuvNE5PPEW0izal4OMHICGlqfEh71wwhDM17FSiUskIqklyK393N06nphIa4XO6AplwpEY8o5h8L3wc/fTMfI0SoDZ/XE510D1ZfXcLSsYfLD8Rbdhmbqc+a+/ckkpOZOTEAWvB04BmYVcChuQAcQtathdgxPsb6hiin8Uzyd2FcLRL2OE0gRzG70CHYx/J2kbyzcHV1foAWEtu0DcepCWvAShocMVtiXIeP2FGgVgfpn7pkiUUzXYRBv3MxcEVQvcq9o6W7KRNCnw==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=u82tz22sFgXWhhTjdwDxdE9+o1w3WBSj7gyZneRWpTE=;
+ b=skTKXTzx0t/cFSIg46FIIZ+VTu8l6mT66iHp3tLqsBhxMpFfzShuHhC4xWQ0wTimb+Sa3bPPXtuM/0VA7LADWGCpbMjf2DsY/aoXP2hCvT9eS7NbUysFkBV5Y8r1q7HX6uEe0ktoUoXhhDsesBz+TLs7HYjYT5yOOfQzlPMieBnmGDbgS9NqZQkYrapiUS7zcyRjnmqSIPlpcifoNeWliVAR366ZhgUI7MuyTvx8wW6tktdLmbGAY9s55WoxV+CpfxAsnTib+FY72xLDkKGqJLgsqdlgFwEckfLyo3L9ZYqzmeLYrYIm9QxhvbTYKqd98uFzEWqNBYTscpq1l/TH0g==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
+ 216.228.117.161) smtp.rcpttodomain=kernel.org smtp.mailfrom=nvidia.com;
+ dmarc=pass (p=reject sp=reject pct=100) action=none header.from=nvidia.com;
+ dkim=none (message not signed); arc=none (0)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=Nvidia.com;
+ s=selector2;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=u82tz22sFgXWhhTjdwDxdE9+o1w3WBSj7gyZneRWpTE=;
+ b=GTzoM5AEt3wUh/CbsZNwmyQi3PHyK2Vcyjb33ATUd+aVb3tLRRBXYd/+GIZNPBNgHQyX21HF6PdJTo96wGNo2pm+pGwiPj4Qs3f/GwCqdEl9XnumnZQh30BEUK+kCvlO63x+Ccr7BzJRCz8xUUBSVS0AAesftpTJSjX0f8zabAZc0LTenqh9YEaQknw2gzrH4tZIucMrjm/3qA8dfS6NN9z6WgzSM0f0r6MF4eeUh+0CQcEDYC81BCzyrTb20I9EiELQpBfyiEGDnXLskSJ4KCnaz9Fitneqsa0JW0BmLiDmEC548m25nC+bzEkfru8tl4J9/Bbc3nhKBwHS3U5QNw==
+Received: from PH5P222CA0009.NAMP222.PROD.OUTLOOK.COM (2603:10b6:510:34b::14)
+ by IA0PR12MB7579.namprd12.prod.outlook.com (2603:10b6:208:43c::14) with
+ Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9520.5; Wed, 14 Jan
+ 2026 19:30:21 +0000
+Received: from CO1PEPF000044FD.namprd21.prod.outlook.com
+ (2603:10b6:510:34b:cafe::e4) by PH5P222CA0009.outlook.office365.com
+ (2603:10b6:510:34b::14) with Microsoft SMTP Server (version=TLS1_3,
+ cipher=TLS_AES_256_GCM_SHA384) id 15.20.9520.4 via Frontend Transport; Wed,
+ 14 Jan 2026 19:30:21 +0000
+X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 216.228.117.161)
+ smtp.mailfrom=nvidia.com; dkim=none (message not signed)
+ header.d=none;dmarc=pass action=none header.from=nvidia.com;
+Received-SPF: Pass (protection.outlook.com: domain of nvidia.com designates
+ 216.228.117.161 as permitted sender) receiver=protection.outlook.com;
+ client-ip=216.228.117.161; helo=mail.nvidia.com; pr=C
+Received: from mail.nvidia.com (216.228.117.161) by
+ CO1PEPF000044FD.mail.protection.outlook.com (10.167.241.203) with Microsoft
+ SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ 15.20.9542.0 via Frontend Transport; Wed, 14 Jan 2026 19:30:20 +0000
+Received: from rnnvmail201.nvidia.com (10.129.68.8) by mail.nvidia.com
+ (10.129.200.67) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.20; Wed, 14 Jan
+ 2026 11:29:58 -0800
+Received: from ttabi.nvidia.com (10.126.230.35) by rnnvmail201.nvidia.com
+ (10.129.68.8) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.20; Wed, 14 Jan
+ 2026 11:29:57 -0800
+From: Timur Tabi <ttabi@nvidia.com>
+To: Alexandre Courbot <acourbot@nvidia.com>, John Hubbard
+	<jhubbard@nvidia.com>, Joel Fernandes <joelagnelf@nvidia.com>, "Danilo
+ Krummrich" <dakr@kernel.org>, <nouveau@lists.freedesktop.org>,
+	<rust-for-linux@vger.kernel.org>
+Subject: [PATCH v6 00/11] gpu: nova-core: add Turing support
+Date: Wed, 14 Jan 2026 13:29:39 -0600
+Message-ID: <20260114192950.1143002-1-ttabi@nvidia.com>
+X-Mailer: git-send-email 2.52.0
 MIME-Version: 1.0
-Content-Type: text/plain; charset=UTF-8
+X-NVConfidentiality: public
 Content-Transfer-Encoding: 8bit
-Message-ID-Hash: D7BJ2WPD3JQXXGQC4PGCPHCUSXWG6L5V
-X-Message-ID-Hash: D7BJ2WPD3JQXXGQC4PGCPHCUSXWG6L5V
-X-MailFrom: francois.dugast@intel.com
+Content-Type: text/plain
+X-Originating-IP: [10.126.230.35]
+X-ClientProxiedBy: rnnvmail202.nvidia.com (10.129.68.7) To
+ rnnvmail201.nvidia.com (10.129.68.8)
+X-EOPAttributedMessage: 0
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: CO1PEPF000044FD:EE_|IA0PR12MB7579:EE_
+X-MS-Office365-Filtering-Correlation-Id: 317e7695-11e9-47fd-62dc-08de53a35b40
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: 
+	BCL:0;ARA:13230040|1800799024|36860700013|376014|82310400026;
+X-Microsoft-Antispam-Message-Info: 
+	=?us-ascii?Q?bca+pZT0B6G3HzGun57Kj3n0AKwB+a1htpdXVCgfpmhCHhZEpv0E+Q2goCuE?=
+ =?us-ascii?Q?IunbPraBlsXB7yFWSIaAVaXG78p3FQAvjyciY9slYcovYfTqJK61mqjC3Iht?=
+ =?us-ascii?Q?W4WDHtNLC4i8PFnf0XYat4nXuMz2tKotiSVy4YoqdJN623Q5P1LQWa1R5goo?=
+ =?us-ascii?Q?rBpCHUk/HS3zv/jN1L6576nJy+SSmkoWhtC+AXjfCK17JQGZfmXU6Id6stOl?=
+ =?us-ascii?Q?cydwDRY83n70QUNZvlfKLHKvDUu9zpUDmHyet/6yB9FnW7f+A+nbprWfb8cX?=
+ =?us-ascii?Q?4RiVOGNMWJ89ihH65qlV03l4lUXQIDgB/s5OFC1htiIugXwHO9d1G1krF4hd?=
+ =?us-ascii?Q?0kgcQZHY+KiQeveM0W2rQozyVJq3/LQDg7fNYbNB2yhJoTn7Hmdcw2Ec0dpP?=
+ =?us-ascii?Q?Ky/FnicA7yAWcyQb76ae/wvvc9QJ+RUhZyB9K7AySD7PeglHPOeyLRj1Pu/C?=
+ =?us-ascii?Q?Trvqw7bOTc1jJq/wZdF+y4BaxheX4X43uv8eE4yE3NnMX8AuT+X66Jkyuk+A?=
+ =?us-ascii?Q?DOd/6GSsnlL6Ii0UbVU7lu/xW8aT9rCGDxbW9j3CmQ4euO5ud+WPJYXn8ZhO?=
+ =?us-ascii?Q?wjzt5y5BVhUhMFzaK7L4M4SpB4JRaP0EwUm1eBbNgvN405zoYv/rjE8UDP+E?=
+ =?us-ascii?Q?A9RK9lx9tIJmhLDFaWkM/acZPy5N27v9opDmaSWvPoLkz7czpzurCHHhYjbw?=
+ =?us-ascii?Q?ZK4tjw2OnfO1gzy7wZAbtC6qcimk8Vx0Pt76UEq6cvVtw8NSB5Y4awpTd+pT?=
+ =?us-ascii?Q?UWILtF7lLHAWi973WRZyK+NFeLZCfqIfugsxYPu4t6KrCpmPzsgXw+sW8h+l?=
+ =?us-ascii?Q?MwJCq01LaaKMl2QD3YKZD4O+g6rDraQ8jiVlxCGcp+CXEQ1wkkF6D3ifUTjU?=
+ =?us-ascii?Q?rN7GyPu1RqxLmzXQ/oNcm0VMyxo6uHMo6qK0PqULvYZ2CPrK5TLHRJ7o/Gi1?=
+ =?us-ascii?Q?EzrX9ZhREP9265YT3bqQC2zgViUqFmdMWgUdufU2ro1E6Ms95L/Gj0pX3JCz?=
+ =?us-ascii?Q?ZACJV5kMb8Lsq0SvBKZSTvsuXHFX7/WDIO8xIOjFqt5/l6uzVek++SJ7G0Sz?=
+ =?us-ascii?Q?PY2KBpqYkU8j5fBzLk7+OG/q2m3CXmAP2FMuuL2e+8fzCm4ojGatVvHqZGWB?=
+ =?us-ascii?Q?PbxuarRao4V2Au1p/N+6PDM7gl9mZRyI7TQCAzWK4wLd8j43QPAI0SSFXYbR?=
+ =?us-ascii?Q?kEOokCQ5QlMjz7ro+9eOG7qVektmMO2wFMO15pOMgbhHjwvAwbs0yjNDH+gL?=
+ =?us-ascii?Q?chqTef7tukFk6aUIKgfXCGuGQAAYHATG3gF/GJwIXaArUoW3vJMREEHXqGqh?=
+ =?us-ascii?Q?5CSJfI8Gtu+wZc2vqa2SW6b/Uqfpkx2ztRmsgj8m/Z1JjiloQlO4sNcnt0Tn?=
+ =?us-ascii?Q?m12b1cPzoOn7VKgkARnYn43oA+IPVkZAKLuCN3EXMok2JHCq8iZy4sZGoMdw?=
+ =?us-ascii?Q?0cSQsHCq6rJ2tvvfGxDVsQH3chYQ2H7Qa3S50JNi3oQS+rL++iNCA2cwGmY1?=
+ =?us-ascii?Q?jwzBtxwfKCsn1w+yfP0fS204bn6p15CGfP7lk7ryxMRZ0ezeOECGag9zH7ds?=
+ =?us-ascii?Q?3opVmFRiZxIOfmcEz8X4iDUjukapffe5HUfh6bqF8v6J6OhNQVJ9biRWcbCM?=
+ =?us-ascii?Q?voPRs0TX3ODrhLdIDM8RkeSqYTc9K4GaZdmFoK7aEPip+AbkbIRj0rc9Rt1R?=
+ =?us-ascii?Q?MYgpCA=3D=3D?=
+X-Forefront-Antispam-Report: 
+	CIP:216.228.117.161;CTRY:US;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:mail.nvidia.com;PTR:dc6edge2.nvidia.com;CAT:NONE;SFS:(13230040)(1800799024)(36860700013)(376014)(82310400026);DIR:OUT;SFP:1101;
+X-OriginatorOrg: Nvidia.com
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 14 Jan 2026 19:30:20.7493
+ (UTC)
+X-MS-Exchange-CrossTenant-Network-Message-Id: 
+ 317e7695-11e9-47fd-62dc-08de53a35b40
+X-MS-Exchange-CrossTenant-Id: 43083d15-7273-40c1-b7db-39efd9ccc17a
+X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: 
+ TenantId=43083d15-7273-40c1-b7db-39efd9ccc17a;Ip=[216.228.117.161];Helo=[mail.nvidia.com]
+X-MS-Exchange-CrossTenant-AuthSource: 
+	CO1PEPF000044FD.namprd21.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Anonymous
+X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: IA0PR12MB7579
+Message-ID-Hash: HDPRFDYNJW64LTBEKG2XAKRW634GDGWT
+X-Message-ID-Hash: HDPRFDYNJW64LTBEKG2XAKRW634GDGWT
+X-MailFrom: ttabi@nvidia.com
+X-Mailman-Rule-Hits: member-moderation
 X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency;
- loop; banned-address; member-moderation; nonmember-moderation; administrivia;
- implicit-dest; max-recipients; max-size; news-moderation; no-subject;
- digests; suspicious-header
-CC: dri-devel@lists.freedesktop.org, Matthew Brost <matthew.brost@intel.com>,
- Zi Yan <ziy@nvidia.com>, Alistair Popple <apopple@nvidia.com>,
- adhavan Srinivasan <maddy@linux.ibm.com>,
- Nicholas Piggin <npiggin@gmail.com>, Michael Ellerman <mpe@ellerman.id.au>,
- "Christophe Leroy (CS GROUP)" <chleroy@kernel.org>,
- Felix Kuehling <Felix.Kuehling@amd.com>,
- Alex Deucher <alexander.deucher@amd.com>,
- =?UTF-8?q?Christian=20K=C3=B6nig?= <christian.koenig@amd.com>,
- Simona Vetter <simona@ffwll.ch>,
- Maarten Lankhorst <maarten.lankhorst@linux.intel.com>,
- Maxime Ripard <mripard@kernel.org>, Danilo Krummrich <dakr@kernel.org>,
- David Hildenbrand <david@kernel.org>, Oscar Salvador <osalvador@suse.de>,
- Andrew Morton <akpm@linux-foundation.org>, Jason Gunthorpe <jgg@ziepe.ca>,
- Leon Romanovsky <leon@kernel.org>,
- Lorenzo Stoakes <lorenzo.stoakes@oracle.com>,
- "Liam R . Howlett" <Liam.Howlett@oracle.com>,
- Vlastimil Babka <vbabka@suse.cz>, Mike Rapoport <rppt@kernel.org>,
- Suren Baghdasaryan <surenb@google.com>, Michal Hocko <mhocko@suse.com>,
- linuxppc-dev@lists.ozlabs.org, kvm@vger.kernel.org,
- linux-kernel@vger.kernel.org, amd-gfx@lists.freedesktop.org,
- nouveau@lists.freedesktop.org, linux-mm@kvack.org, linux-cxl@vger.kernel.org,
- Francois Dugast <francois.dugast@intel.com>
+ loop; banned-address
 X-Mailman-Version: 3.3.8
 Precedence: list
 List-Id: Nouveau development list <nouveau.lists.freedesktop.org>
 Archived-At: 
- <https://lists.freedesktop.org/hyperkitty/list/nouveau@lists.freedesktop.org/message/D7BJ2WPD3JQXXGQC4PGCPHCUSXWG6L5V/>
+ <https://lists.freedesktop.org/hyperkitty/list/nouveau@lists.freedesktop.org/message/HDPRFDYNJW64LTBEKG2XAKRW634GDGWT/>
 Archived-At: 
- <https://lore.freedesktop.org/20260114192111.1267147-2-francois.dugast@intel.com/>
+ <https://lore.freedesktop.org/20260114192950.1143002-1-ttabi@nvidia.com/>
 List-Archive: 
  <https://lists.freedesktop.org/hyperkitty/list/nouveau@lists.freedesktop.org/>
 List-Archive: <https://lore.freedesktop.org/nouveau>
@@ -135,194 +185,77 @@ List-Post: <mailto:nouveau@lists.freedesktop.org>
 List-Subscribe: <mailto:nouveau-join@lists.freedesktop.org>
 List-Unsubscribe: <mailto:nouveau-leave@lists.freedesktop.org>
 
-From: Matthew Brost <matthew.brost@intel.com>
+Note: This patchset requires "[PATCH v3 2/7] rust: io: always inline
+functions using build_assert with arguments" in order to compile
+with CLIPPY.
 
-Reinitialize metadata for large zone device private folios in
-zone_device_page_init prior to creating a higher-order zone device
-private folio. This step is necessary when the folio’s order changes
-dynamically between zone_device_page_init calls to avoid building a
-corrupt folio. As part of the metadata reinitialization, the dev_pagemap
-must be passed in from the caller because the pgmap stored in the folio
-page may have been overwritten with a compound head.
+This patch set adds basic support for pre-booting GSP-RM
+on Turing.
 
-Cc: Zi Yan <ziy@nvidia.com>
-Cc: Alistair Popple <apopple@nvidia.com>
-Cc: adhavan Srinivasan <maddy@linux.ibm.com>
-Cc: Nicholas Piggin <npiggin@gmail.com>
-Cc: Michael Ellerman <mpe@ellerman.id.au>
-Cc: "Christophe Leroy (CS GROUP)" <chleroy@kernel.org>
-Cc: Felix Kuehling <Felix.Kuehling@amd.com>
-Cc: Alex Deucher <alexander.deucher@amd.com>
-Cc: "Christian König" <christian.koenig@amd.com>
-Cc: David Airlie <airlied@gmail.com>
-Cc: Simona Vetter <simona@ffwll.ch>
-Cc: Maarten Lankhorst <maarten.lankhorst@linux.intel.com>
-Cc: Maxime Ripard <mripard@kernel.org>
-Cc: Thomas Zimmermann <tzimmermann@suse.de>
-Cc: Lyude Paul <lyude@redhat.com>
-Cc: Danilo Krummrich <dakr@kernel.org>
-Cc: David Hildenbrand <david@kernel.org>
-Cc: Oscar Salvador <osalvador@suse.de>
-Cc: Andrew Morton <akpm@linux-foundation.org>
-Cc: Jason Gunthorpe <jgg@ziepe.ca>
-Cc: Leon Romanovsky <leon@kernel.org>
-Cc: Lorenzo Stoakes <lorenzo.stoakes@oracle.com>
-Cc: Liam R. Howlett <Liam.Howlett@oracle.com>
-Cc: Vlastimil Babka <vbabka@suse.cz>
-Cc: Mike Rapoport <rppt@kernel.org>
-Cc: Suren Baghdasaryan <surenb@google.com>
-Cc: Michal Hocko <mhocko@suse.com>
-Cc: Balbir Singh <balbirs@nvidia.com>
-Cc: linuxppc-dev@lists.ozlabs.org
-Cc: kvm@vger.kernel.org
-Cc: linux-kernel@vger.kernel.org
-Cc: amd-gfx@lists.freedesktop.org
-Cc: dri-devel@lists.freedesktop.org
-Cc: nouveau@lists.freedesktop.org
-Cc: linux-mm@kvack.org
-Cc: linux-cxl@vger.kernel.org
-Fixes: d245f9b4ab80 ("mm/zone_device: support large zone device private folios")
-Signed-off-by: Matthew Brost <matthew.brost@intel.com>
-Signed-off-by: Francois Dugast <francois.dugast@intel.com>
----
- arch/powerpc/kvm/book3s_hv_uvmem.c       |  2 +-
- drivers/gpu/drm/amd/amdkfd/kfd_migrate.c |  2 +-
- drivers/gpu/drm/drm_pagemap.c            |  2 +-
- drivers/gpu/drm/nouveau/nouveau_dmem.c   |  2 +-
- include/linux/memremap.h                 |  9 ++++++---
- lib/test_hmm.c                           |  4 +++-
- mm/memremap.c                            | 20 +++++++++++++++++++-
- 7 files changed, 32 insertions(+), 9 deletions(-)
+There is also partial support for GA100, but it's currently not
+fully implemented.  GA100 is considered experimental in Nouveau,
+and so it hasn't been tested with NovaCore either.
 
-diff --git a/arch/powerpc/kvm/book3s_hv_uvmem.c b/arch/powerpc/kvm/book3s_hv_uvmem.c
-index e5000bef90f2..7cf9310de0ec 100644
---- a/arch/powerpc/kvm/book3s_hv_uvmem.c
-+++ b/arch/powerpc/kvm/book3s_hv_uvmem.c
-@@ -723,7 +723,7 @@ static struct page *kvmppc_uvmem_get_page(unsigned long gpa, struct kvm *kvm)
- 
- 	dpage = pfn_to_page(uvmem_pfn);
- 	dpage->zone_device_data = pvt;
--	zone_device_page_init(dpage, 0);
-+	zone_device_page_init(dpage, &kvmppc_uvmem_pgmap, 0);
- 	return dpage;
- out_clear:
- 	spin_lock(&kvmppc_uvmem_bitmap_lock);
-diff --git a/drivers/gpu/drm/amd/amdkfd/kfd_migrate.c b/drivers/gpu/drm/amd/amdkfd/kfd_migrate.c
-index af53e796ea1b..6ada7b4af7c6 100644
---- a/drivers/gpu/drm/amd/amdkfd/kfd_migrate.c
-+++ b/drivers/gpu/drm/amd/amdkfd/kfd_migrate.c
-@@ -217,7 +217,7 @@ svm_migrate_get_vram_page(struct svm_range *prange, unsigned long pfn)
- 	page = pfn_to_page(pfn);
- 	svm_range_bo_ref(prange->svm_bo);
- 	page->zone_device_data = prange->svm_bo;
--	zone_device_page_init(page, 0);
-+	zone_device_page_init(page, page_pgmap(page), 0);
- }
- 
- static void
-diff --git a/drivers/gpu/drm/drm_pagemap.c b/drivers/gpu/drm/drm_pagemap.c
-index 03ee39a761a4..c497726b0147 100644
---- a/drivers/gpu/drm/drm_pagemap.c
-+++ b/drivers/gpu/drm/drm_pagemap.c
-@@ -201,7 +201,7 @@ static void drm_pagemap_get_devmem_page(struct page *page,
- 					struct drm_pagemap_zdd *zdd)
- {
- 	page->zone_device_data = drm_pagemap_zdd_get(zdd);
--	zone_device_page_init(page, 0);
-+	zone_device_page_init(page, zdd->dpagemap->pagemap, 0);
- }
- 
- /**
-diff --git a/drivers/gpu/drm/nouveau/nouveau_dmem.c b/drivers/gpu/drm/nouveau/nouveau_dmem.c
-index 58071652679d..3d8031296eed 100644
---- a/drivers/gpu/drm/nouveau/nouveau_dmem.c
-+++ b/drivers/gpu/drm/nouveau/nouveau_dmem.c
-@@ -425,7 +425,7 @@ nouveau_dmem_page_alloc_locked(struct nouveau_drm *drm, bool is_large)
- 			order = ilog2(DMEM_CHUNK_NPAGES);
- 	}
- 
--	zone_device_folio_init(folio, order);
-+	zone_device_folio_init(folio, page_pgmap(folio_page(folio, 0)), order);
- 	return page;
- }
- 
-diff --git a/include/linux/memremap.h b/include/linux/memremap.h
-index 713ec0435b48..e3c2ccf872a8 100644
---- a/include/linux/memremap.h
-+++ b/include/linux/memremap.h
-@@ -224,7 +224,8 @@ static inline bool is_fsdax_page(const struct page *page)
- }
- 
- #ifdef CONFIG_ZONE_DEVICE
--void zone_device_page_init(struct page *page, unsigned int order);
-+void zone_device_page_init(struct page *page, struct dev_pagemap *pgmap,
-+			   unsigned int order);
- void *memremap_pages(struct dev_pagemap *pgmap, int nid);
- void memunmap_pages(struct dev_pagemap *pgmap);
- void *devm_memremap_pages(struct device *dev, struct dev_pagemap *pgmap);
-@@ -234,9 +235,11 @@ bool pgmap_pfn_valid(struct dev_pagemap *pgmap, unsigned long pfn);
- 
- unsigned long memremap_compat_align(void);
- 
--static inline void zone_device_folio_init(struct folio *folio, unsigned int order)
-+static inline void zone_device_folio_init(struct folio *folio,
-+					  struct dev_pagemap *pgmap,
-+					  unsigned int order)
- {
--	zone_device_page_init(&folio->page, order);
-+	zone_device_page_init(&folio->page, pgmap, order);
- 	if (order)
- 		folio_set_large_rmappable(folio);
- }
-diff --git a/lib/test_hmm.c b/lib/test_hmm.c
-index 8af169d3873a..455a6862ae50 100644
---- a/lib/test_hmm.c
-+++ b/lib/test_hmm.c
-@@ -662,7 +662,9 @@ static struct page *dmirror_devmem_alloc_page(struct dmirror *dmirror,
- 			goto error;
- 	}
- 
--	zone_device_folio_init(page_folio(dpage), order);
-+	zone_device_folio_init(page_folio(dpage),
-+			       page_pgmap(folio_page(page_folio(dpage), 0)),
-+			       order);
- 	dpage->zone_device_data = rpage;
- 	return dpage;
- 
-diff --git a/mm/memremap.c b/mm/memremap.c
-index 63c6ab4fdf08..6f46ab14662b 100644
---- a/mm/memremap.c
-+++ b/mm/memremap.c
-@@ -477,10 +477,28 @@ void free_zone_device_folio(struct folio *folio)
- 	}
- }
- 
--void zone_device_page_init(struct page *page, unsigned int order)
-+void zone_device_page_init(struct page *page, struct dev_pagemap *pgmap,
-+			   unsigned int order)
- {
-+	struct page *new_page = page;
-+	unsigned int i;
-+
- 	VM_WARN_ON_ONCE(order > MAX_ORDER_NR_PAGES);
- 
-+	for (i = 0; i < (1UL << order); ++i, ++new_page) {
-+		struct folio *new_folio = (struct folio *)new_page;
-+
-+		new_page->flags.f &= ~0xffUL;	/* Clear possible order, page head */
-+#ifdef NR_PAGES_IN_LARGE_FOLIO
-+		((struct folio *)(new_page - 1))->_nr_pages = 0;
-+#endif
-+		new_folio->mapping = NULL;
-+		new_folio->pgmap = pgmap;	/* Also clear compound head */
-+		new_folio->share = 0;   /* fsdax only, unused for device private */
-+		VM_WARN_ON_FOLIO(folio_ref_count(new_folio), new_folio);
-+		VM_WARN_ON_FOLIO(!folio_is_zone_device(new_folio), new_folio);
-+	}
-+
- 	/*
- 	 * Drivers shouldn't be allocating pages after calling
- 	 * memunmap_pages().
+The latest linux-firmware.git is required because it contains the
+Generic Bootloader image that has not yet been propogated to
+distros.
+
+Summary of changes:
+
+1. Introduce non-secure IMEM support.  For GA102 and later, only secure IMEM
+is used.
+2. Because of non-secure IMEM, Turing booter firmware images need some of
+the headers parsed differently for stuff like the load target address.
+3. Add support the tu10x firmware signature section in the ELF image.
+4. Add several new registers used only on Turing.
+5. Some functions that were considered generic Falcon operations are
+actually different on Turing vs GA102+, so they are moved to the HAL.
+6. The FRTS FWSEC firmware in VBIOS uses a different version of the
+descriptor header.
+7. On Turing/GA100 LIBOS args struct needs to have its 'size' field
+aligned to 4KB.  So pad the struct to make it 4K.
+8. Turing Falcons do not support DMA, so PIO is used to copy images
+into IMEM/DMEM.
+
+Changes from v5:
+1. Fixed rustfmt complaints
+2. Fixed stray diff in Alex's patch
+3. Added checked_sub to imem_ns_load_params()
+
+Alexandre Courbot (1):
+  gpu: nova-core: align LibosMemoryRegionInitArgument size to page size
+
+Timur Tabi (10):
+  gpu: nova-core: rename Imem to ImemSecure
+  gpu: nova-core: add ImemNonSecure section infrastructure
+  gpu: nova-core: support header parsing on Turing/GA100
+  gpu: nova-core: add support for Turing/GA100 fwsignature
+  gpu: nova-core: add NV_PFALCON_FALCON_DMATRFCMD::with_falcon_mem()
+  gpu: nova-core: move some functions into the HAL
+  gpu: nova-core: Add basic Turing HAL
+  gpu: nova-core: add Falcon HAL method supports_dma()
+  gpu: nova-core: add FalconUCodeDescV2 support
+  gpu: nova-core: add PIO support for loading firmware images
+
+ drivers/gpu/nova-core/falcon.rs           | 251 +++++++++++++++++-----
+ drivers/gpu/nova-core/falcon/hal.rs       |  22 ++
+ drivers/gpu/nova-core/falcon/hal/ga102.rs |  46 ++++
+ drivers/gpu/nova-core/falcon/hal/tu102.rs |  84 ++++++++
+ drivers/gpu/nova-core/firmware.rs         | 149 ++++++++++++-
+ drivers/gpu/nova-core/firmware/booter.rs  |  43 +++-
+ drivers/gpu/nova-core/firmware/fwsec.rs   | 204 +++++++++++++++---
+ drivers/gpu/nova-core/firmware/gsp.rs     |   6 +-
+ drivers/gpu/nova-core/gsp.rs              |   8 +-
+ drivers/gpu/nova-core/gsp/boot.rs         |   6 +-
+ drivers/gpu/nova-core/gsp/fw.rs           |  14 +-
+ drivers/gpu/nova-core/regs.rs             |  53 +++++
+ drivers/gpu/nova-core/vbios.rs            |  75 ++++---
+ 13 files changed, 838 insertions(+), 123 deletions(-)
+ create mode 100644 drivers/gpu/nova-core/falcon/hal/tu102.rs
+
+
+base-commit: 654826aa4a8f25cf825ad9254f37e6cb5092098f
+prerequisite-patch-id: a3e23917ec535263604af95194422382f14c2f21
 -- 
-2.43.0
+2.52.0
 
