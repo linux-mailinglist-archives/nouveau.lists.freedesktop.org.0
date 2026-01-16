@@ -2,41 +2,41 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id 73F8ED2D54A
-	for <lists+nouveau@lfdr.de>; Fri, 16 Jan 2026 08:40:10 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 8945BD2D962
+	for <lists+nouveau@lfdr.de>; Fri, 16 Jan 2026 08:58:39 +0100 (CET)
 Received: from kara.freedesktop.org (unknown [131.252.210.166])
-	by gabe.freedesktop.org (Postfix) with ESMTPS id 1894C10E81E;
-	Fri, 16 Jan 2026 07:40:05 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTPS id CADFB10E825;
+	Fri, 16 Jan 2026 07:58:34 +0000 (UTC)
 Authentication-Results: gabe.freedesktop.org;
-	dkim=fail reason="signature verification failed" (1024-bit key; unprotected) header.d=suse.de header.i=@suse.de header.b="jw7e/ex2";
-	dkim=permerror (0-bit key) header.d=suse.de header.i=@suse.de header.b="MJtkUgZv";
-	dkim=fail reason="signature verification failed" (1024-bit key) header.d=suse.de header.i=@suse.de header.b="SmrxYqfV";
-	dkim=permerror (0-bit key) header.d=suse.de header.i=@suse.de header.b="hmXNtqMR";
+	dkim=fail reason="signature verification failed" (1024-bit key; unprotected) header.d=suse.de header.i=@suse.de header.b="R04uVWab";
+	dkim=permerror (0-bit key) header.d=suse.de header.i=@suse.de header.b="MZ1Ehz5Y";
+	dkim=fail reason="signature verification failed" (1024-bit key) header.d=suse.de header.i=@suse.de header.b="R04uVWab";
+	dkim=permerror (0-bit key) header.d=suse.de header.i=@suse.de header.b="MZ1Ehz5Y";
 	dkim-atps=neutral
 Received: from kara.freedesktop.org (localhost [127.0.0.1])
-	by kara.freedesktop.org (Postfix) with ESMTP id 17F9444C96;
-	Fri, 16 Jan 2026 07:31:30 +0000 (UTC)
+	by kara.freedesktop.org (Postfix) with ESMTP id C77D044C96;
+	Fri, 16 Jan 2026 07:49:59 +0000 (UTC)
 ARC-Seal: i=1; cv=none; a=rsa-sha256; d=lists.freedesktop.org;
- s=20240201; t=1768548690;
- b=l4coD5Lv2VwYaCVIEUBB+rtP9PVr4Urjr6ocSKKTmq0ayAswDMwPdyAsSh3SLpRbIr3H5
- UIR2mYBMw6kYB1PwZPNAmwSYnMExjT1wkT0JLiHiBuPxrv12ysNm39AykCt+3wJg2ntAO03
- Re838OCaZ9CKlqESV4ThmjMlQ/iq2ZNtU1uh7kyxjOH3OxuWABlMw08sFepxU/dJehbLYLu
- 3IcGipAN11Pyo9onxJQ2BhqTYnr8mxhBvo19hcOFwUm96PaIDmxpQTxnWsCuGfTZgHQzT1s
- ZSHEksMxx3VQOw4V8SuK+BfFK77BkCOtCEOTgiZjaJldri821jo4rsiSqg3g==
+ s=20240201; t=1768549799;
+ b=0/S7qFbA2qloQWjkxxP8abPIObOoG9rgwx0tiMPOGGA1x23DUFRG2eR5kok7nfTuqHnKB
+ BEau7R+sdRr5POzGUCp0cYM0OiU14r8yg/UU/Y4IbmmdkcpabI5WPNBr2uVmVkeimjgQcXW
+ phBiv4KVWSVs4SI3nhkJULyQPkdEFseeEc8STUSoJNVMgx8UHtF08PDWnpWE4SV2uhoLIG3
+ An9b8ws47UhJGxgmV6p3GpaQ0UbcNrbJr1q3rl7O3da6zgHEceOqOh9ihMgrzkqt6dKXUZT
+ 7BPdmtrDlIXVMd1vVBcdXGNY0KIHLtQbJNeYckUddEqfs2ZvEeNGCEUuuw3A==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed;
- d=lists.freedesktop.org; s=20240201; t=1768548690; h=from : sender :
+ d=lists.freedesktop.org; s=20240201; t=1768549799; h=from : sender :
  reply-to : subject : date : message-id : to : cc : mime-version :
  content-type : content-transfer-encoding : content-id :
  content-description : resent-date : resent-from : resent-sender :
  resent-to : resent-cc : resent-message-id : in-reply-to : references :
  list-id : list-help : list-unsubscribe : list-subscribe : list-post :
  list-owner : list-archive;
- bh=doC+gr/uKXnBI9fa1D1ITWlyxb9ov7FKbR1ka90ESNE=;
- b=LFKb2PfUJQ2tzn72EhofuLbxgb5v1rafZe+wY1sTX2dPK3U5e6rpCBmkUouIenteDKIT1
- VoDZxhcKUY0JxWiyiXP3JrK541TTW6cZt9aXhtKmeEf2kSYZHJAxkYLKoUyvXwtzIk2rEAe
- YR/OYw1JfRPHh+KM0TI0zf9n8EW4aPjIS6u4gRJrzoC9aFNv9Ti1BKdFL2J/mvhJsLTysgD
- kuRRp9mDXnUdt+ozPYc9R2w5kj2mJgX1YbiLc/TxmFOYOG56oVRWRY3YLlT4iZ6ANsJ+Jgv
- gM0EfhQiDy6X5/yHcSuvolDD1sGAezy9TuRUw8A0c8SJV5OqVcaGyfJsofJQ==
+ bh=tEBnbJXoSEVNx2d1sg+6yp9TJGIDCgDTADCnwPCP7K0=;
+ b=XMyjgi2jtjb24BtKNudbtqi2Tnb4XCyYFeMtnCJfa+H9ph8cJ2oDsWnSc8slkrihZ6jcq
+ H0gsZJ+CMFoxlS3QK9P3WsEtjudK6BuKPcmEjEIil2YlooolSonQ1d4hcMSvgZBIw0f6+CR
+ T/uJ1YCGTt82WlVPSZtEo/4+TUa5Q4r3KjCuXSrTmjfog9oESPilM8OQJjz4BWngsWRngKW
+ YwknWmWHhOlSKY6vvSKZEQ78p2sQ5RGztJUBs0F9IcYk3OzdOCEnSbpmzKm7KX9b2RANaqE
+ n+c4hQVL0cYn48Arub/Uuj+erhIq/SeGYNSikNWUuKXtOKsakn4Tz0OsoBaQ==
 ARC-Authentication-Results: i=1; mail.freedesktop.org;
  dkim=pass header.d=suse.de;
   arc=none (Message is not ARC signed);
@@ -45,82 +45,80 @@ Authentication-Results: mail.freedesktop.org; dkim=pass header.d=suse.de;
  arc=none (Message is not ARC signed);
  dmarc=pass (Used From Domain Record) header.from=suse.de policy.dmarc=none
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by kara.freedesktop.org (Postfix) with ESMTPS id 2B68F40744
-	for <nouveau@lists.freedesktop.org>; Fri, 16 Jan 2026 07:31:27 +0000 (UTC)
-Received: from smtp-out2.suse.de (smtp-out2.suse.de [195.135.223.131])
-	by gabe.freedesktop.org (Postfix) with ESMTPS id 87A1110E81B
-	for <nouveau@lists.freedesktop.org>; Fri, 16 Jan 2026 07:40:01 +0000 (UTC)
-Received: from imap1.dmz-prg2.suse.org (imap1.dmz-prg2.suse.org
- [IPv6:2a07:de40:b281:104:10:150:64:97])
+	by kara.freedesktop.org (Postfix) with ESMTPS id B795140635
+	for <nouveau@lists.freedesktop.org>; Fri, 16 Jan 2026 07:49:56 +0000 (UTC)
+Received: from smtp-out1.suse.de (smtp-out1.suse.de [195.135.223.130])
+	by gabe.freedesktop.org (Postfix) with ESMTPS id 3CEA210E820
+	for <nouveau@lists.freedesktop.org>; Fri, 16 Jan 2026 07:58:31 +0000 (UTC)
+Received: from imap1.dmz-prg2.suse.org (unknown [10.150.64.97])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest
  SHA256)
 	(No client certificate requested)
-	by smtp-out2.suse.de (Postfix) with ESMTPS id D48555BCC6;
-	Fri, 16 Jan 2026 07:39:59 +0000 (UTC)
+	by smtp-out1.suse.de (Postfix) with ESMTPS id BB3173368D;
+	Fri, 16 Jan 2026 07:58:29 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.de;
  s=susede2_rsa;
-	t=1768549200;
+	t=1768550309;
  h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
 	 mime-version:mime-version:content-type:content-type:
 	 content-transfer-encoding:content-transfer-encoding:
 	 in-reply-to:in-reply-to:references:references:autocrypt:autocrypt;
-	bh=doC+gr/uKXnBI9fa1D1ITWlyxb9ov7FKbR1ka90ESNE=;
-	b=jw7e/ex2X389f3AFhyAZnl2hvMJU508Bex8N7VeZX0CgSEvy+WJOgiZe1hpnYHuw9dU6pz
-	XGUL1L7UAjAeqVnO0c1kXceKw9QD9mcvCTeIBHEbxaDf1cijwITwT29u6J00f4qfi0iNG8
-	MEvZip3NY/altH/tBwCeubV3L4Vt9AY=
+	bh=tEBnbJXoSEVNx2d1sg+6yp9TJGIDCgDTADCnwPCP7K0=;
+	b=R04uVWabAymZykGlX+71SwYrLQ6fCzyjOgy+9ATKoaBXltpvMrjIlYpv5Q3yl4hyqJQqQk
+	ic0hgpJzRhcu/XCONdInAYct22wQf9B2hRKDGAhcBsOhViR6cCBFk0lM9YwDMZwWYtbOhZ
+	3CIEsweVt1ZK6QNpJiQvBRvHy9sHwyI=
 DKIM-Signature: v=1; a=ed25519-sha256; c=relaxed/relaxed; d=suse.de;
-	s=susede2_ed25519; t=1768549200;
+	s=susede2_ed25519; t=1768550309;
 	h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
 	 mime-version:mime-version:content-type:content-type:
 	 content-transfer-encoding:content-transfer-encoding:
 	 in-reply-to:in-reply-to:references:references:autocrypt:autocrypt;
-	bh=doC+gr/uKXnBI9fa1D1ITWlyxb9ov7FKbR1ka90ESNE=;
-	b=MJtkUgZv2krE16xoEQrTym0crZeD7+/Qb7fHCWOYzx0iZn0sRwUZ75tk8XMfCSOSpOLBbp
-	JuKYj155nHWlpSBw==
+	bh=tEBnbJXoSEVNx2d1sg+6yp9TJGIDCgDTADCnwPCP7K0=;
+	b=MZ1Ehz5YNpca9ytNX4G/92HJJlPCJPBDy2lqLRB9ZcbIoy5+YWZTdll3DfwqPiZkbmZXaV
+	ibH4XxwwepxK2qBA==
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.de;
  s=susede2_rsa;
-	t=1768549199;
+	t=1768550309;
  h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
 	 mime-version:mime-version:content-type:content-type:
 	 content-transfer-encoding:content-transfer-encoding:
 	 in-reply-to:in-reply-to:references:references:autocrypt:autocrypt;
-	bh=doC+gr/uKXnBI9fa1D1ITWlyxb9ov7FKbR1ka90ESNE=;
-	b=SmrxYqfVEJuy9QvBr5Of2Dj5QRAjsQ44DVAbry90cElHS2cFSe5XZyOnp5kf8dy879wYSE
-	u2uZB0mNlbDM+MZEbu7MebiLGkoyWMmfvRWfNjLnCa6sAz7svLv9e6GKUteIRUhgcyCNR3
-	RP3IqqTFHGnpVGmoDEy+tb8XVlzaS/o=
+	bh=tEBnbJXoSEVNx2d1sg+6yp9TJGIDCgDTADCnwPCP7K0=;
+	b=R04uVWabAymZykGlX+71SwYrLQ6fCzyjOgy+9ATKoaBXltpvMrjIlYpv5Q3yl4hyqJQqQk
+	ic0hgpJzRhcu/XCONdInAYct22wQf9B2hRKDGAhcBsOhViR6cCBFk0lM9YwDMZwWYtbOhZ
+	3CIEsweVt1ZK6QNpJiQvBRvHy9sHwyI=
 DKIM-Signature: v=1; a=ed25519-sha256; c=relaxed/relaxed; d=suse.de;
-	s=susede2_ed25519; t=1768549199;
+	s=susede2_ed25519; t=1768550309;
 	h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
 	 mime-version:mime-version:content-type:content-type:
 	 content-transfer-encoding:content-transfer-encoding:
 	 in-reply-to:in-reply-to:references:references:autocrypt:autocrypt;
-	bh=doC+gr/uKXnBI9fa1D1ITWlyxb9ov7FKbR1ka90ESNE=;
-	b=hmXNtqMR8Zq9Cj2K4bcjV8kVCy3TmC831+rvpW2syEmQSZx0DR9IkouSjTbqYLOrzKGxFG
-	jmAmCsW2MZK4eEDQ==
+	bh=tEBnbJXoSEVNx2d1sg+6yp9TJGIDCgDTADCnwPCP7K0=;
+	b=MZ1Ehz5YNpca9ytNX4G/92HJJlPCJPBDy2lqLRB9ZcbIoy5+YWZTdll3DfwqPiZkbmZXaV
+	ibH4XxwwepxK2qBA==
 Received: from imap1.dmz-prg2.suse.org (localhost [127.0.0.1])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest
  SHA256)
 	(No client certificate requested)
-	by imap1.dmz-prg2.suse.org (Postfix) with ESMTPS id B4FA23EA63;
-	Fri, 16 Jan 2026 07:39:58 +0000 (UTC)
+	by imap1.dmz-prg2.suse.org (Postfix) with ESMTPS id AF64F3EA63;
+	Fri, 16 Jan 2026 07:58:28 +0000 (UTC)
 Received: from dovecot-director2.suse.de ([2a07:de40:b281:106:10:150:64:167])
 	by imap1.dmz-prg2.suse.org with ESMTPSA
-	id slDoKk7raWmoUwAAD6G6ig
-	(envelope-from <tzimmermann@suse.de>); Fri, 16 Jan 2026 07:39:58 +0000
-Message-ID: <72e8c696-8cd7-4bf3-a1e8-d367f3addfe0@suse.de>
-Date: Fri, 16 Jan 2026 08:39:58 +0100
+	id gp4oKaTvaWk8ZAAAD6G6ig
+	(envelope-from <tzimmermann@suse.de>); Fri, 16 Jan 2026 07:58:28 +0000
+Message-ID: <f3643c19-c250-4927-b39d-37d2494c7c84@suse.de>
+Date: Fri, 16 Jan 2026 08:58:28 +0100
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
 Subject: Re: [PATCH 00/12] Recover sysfb after DRM probe failure
-To: =?UTF-8?B?VmlsbGUgU3lyasOkbMOk?= <ville.syrjala@linux.intel.com>,
- =?UTF-8?Q?Christian_K=C3=B6nig?= <christian.koenig@amd.com>
+To: Zack Rusin <zack.rusin@broadcom.com>
 References: <20251229215906.3688205-1-zack.rusin@broadcom.com>
  <c816f7ed-66e0-4773-b3d1-4769234bd30b@suse.de>
  <CABQX2QNQU4XZ1rJFqnJeMkz8WP=t9atj0BqXHbDQab7ZnAyJxg@mail.gmail.com>
  <97993761-5884-4ada-b345-9fb64819e02a@suse.de>
- <9058636d-cc18-4c8f-92cf-782fd8f771af@amd.com> <aWkDYO1o9T1BhvXj@intel.com>
+ <CABQX2QMn_dTh2h44LRwB7+RxGqK3Jn+QCx38xWrzpNJG5SZ9-Q@mail.gmail.com>
 Content-Language: en-US
 From: Thomas Zimmermann <tzimmermann@suse.de>
 Autocrypt: addr=tzimmermann@suse.de; keydata=
@@ -147,57 +145,50 @@ Autocrypt: addr=tzimmermann@suse.de; keydata=
  SAQO9xD1Zk9/61JWk8OysuIh7MXkl0fxbRKWE93XeQBhIJHQfnc+YBLprdnxR446Sh8Wn/2D
  Ya8cavuWf2zrB6cZurs048xe0UbSW5AOSo4V9M0jzYI4nZqTmPxYyXbm30Kvmz0rYVRaitYJ
  4kyYYMhuULvrJDMjZRvaNe52tkKAvMevcGdt38H4KSVXAylqyQOW5zvPc4/sq9c=
-In-Reply-To: <aWkDYO1o9T1BhvXj@intel.com>
+In-Reply-To: 
+ <CABQX2QMn_dTh2h44LRwB7+RxGqK3Jn+QCx38xWrzpNJG5SZ9-Q@mail.gmail.com>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 8bit
-X-Spam-Score: -3.01
-X-Spamd-Result: default: False [-3.01 / 50.00];
+X-Spam-Score: -2.80
+X-Spamd-Result: default: False [-2.80 / 50.00];
 	BAYES_HAM(-3.00)[100.00%];
 	SUSPICIOUS_RECIPS(1.50)[];
 	NEURAL_HAM_LONG(-1.00)[-1.000];
-	R_DKIM_ALLOW(-0.20)[suse.de:s=susede2_rsa,suse.de:s=susede2_ed25519];
 	NEURAL_HAM_SHORT(-0.20)[-1.000];
 	MIME_GOOD(-0.10)[text/plain];
-	MX_GOOD(-0.01)[];
-	TO_MATCH_ENVRCPT_ALL(0.00)[];
-	FREEMAIL_ENVRCPT(0.00)[gmail.com,gmx.de];
-	FUZZY_RATELIMITED(0.00)[rspamd.com];
-	RBL_SPAMHAUS_BLOCKED_OPENRESOLVER(0.00)[2a07:de40:b281:104:10:150:64:97:from];
-	RCPT_COUNT_TWELVE(0.00)[44];
-	DKIM_SIGNED(0.00)[suse.de:s=susede2_rsa,suse.de:s=susede2_ed25519];
-	MIME_TRACE(0.00)[0:+];
-	ARC_NA(0.00)[];
-	FREEMAIL_CC(0.00)[broadcom.com,lists.freedesktop.org,amd.com,kernel.org,gmail.com,redhat.com,collabora.com,chromium.org,gmx.de,linux.intel.com,vger.kernel.org,intel.com,ffwll.ch,ursulin.net,lists.linux.dev];
-	RCVD_TLS_ALL(0.00)[];
-	DKIM_TRACE(0.00)[suse.de:+];
-	RCVD_COUNT_TWO(0.00)[2];
-	DNSWL_BLOCKED(0.00)[2a07:de40:b281:104:10:150:64:97:from,2a07:de40:b281:106:10:150:64:167:received];
-	FROM_EQ_ENVFROM(0.00)[];
-	FROM_HAS_DN(0.00)[];
-	TO_DN_SOME(0.00)[];
-	MID_RHS_MATCH_FROM(0.00)[];
-	TAGGED_RCPT(0.00)[];
-	RECEIVED_SPAMHAUS_BLOCKED_OPENRESOLVER(0.00)[2a07:de40:b281:106:10:150:64:167:received];
-	R_RATELIMIT(0.00)[to_ip_from(RL516un6i87yts6oyas1exgued)];
 	RCVD_VIA_SMTP_AUTH(0.00)[];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[imap1.dmz-prg2.suse.org:rdns,imap1.dmz-prg2.suse.org:helo,suse.de:dkim,suse.de:mid,suse.de:email,suse.com:url]
+	ARC_NA(0.00)[];
+	FREEMAIL_ENVRCPT(0.00)[gmail.com,gmx.de];
+	MIME_TRACE(0.00)[0:+];
+	FUZZY_RATELIMITED(0.00)[rspamd.com];
+	TO_DN_SOME(0.00)[];
+	RCPT_COUNT_TWELVE(0.00)[43];
+	TAGGED_RCPT(0.00)[];
+	MID_RHS_MATCH_FROM(0.00)[];
+	R_RATELIMIT(0.00)[to_ip_from(RLxtqcp3yg5i7i9mi6syp13ijk)];
+	FROM_HAS_DN(0.00)[];
+	FREEMAIL_CC(0.00)[lists.freedesktop.org,amd.com,kernel.org,gmail.com,redhat.com,collabora.com,chromium.org,gmx.de,linux.intel.com,vger.kernel.org,intel.com,ffwll.ch,ursulin.net,lists.linux.dev];
+	RCVD_TLS_ALL(0.00)[];
+	FROM_EQ_ENVFROM(0.00)[];
+	RCVD_COUNT_TWO(0.00)[2];
+	TO_MATCH_ENVRCPT_ALL(0.00)[];
+	DKIM_SIGNED(0.00)[suse.de:s=susede2_rsa,suse.de:s=susede2_ed25519];
+	DBL_BLOCKED_OPENRESOLVER(0.00)[suse.com:url]
 X-Spam-Level: 
-X-Rspamd-Action: no action
-X-Rspamd-Queue-Id: D48555BCC6
-X-Rspamd-Server: rspamd1.dmz-prg2.suse.org
 X-Spam-Flag: NO
-Message-ID-Hash: Q32OXQZAG2VSV6UWABNQNB2ZLSKGLJ2K
-X-Message-ID-Hash: Q32OXQZAG2VSV6UWABNQNB2ZLSKGLJ2K
+Message-ID-Hash: F7TYVOAPU6TZ5FXCZFEUVKKKFTREUR6B
+X-Message-ID-Hash: F7TYVOAPU6TZ5FXCZFEUVKKKFTREUR6B
 X-MailFrom: tzimmermann@suse.de
 X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency;
  loop; banned-address; member-moderation; nonmember-moderation; administrivia;
  implicit-dest; max-recipients; max-size; news-moderation; no-subject;
  digests; suspicious-header
-CC: Zack Rusin <zack.rusin@broadcom.com>, dri-devel@lists.freedesktop.org,
- Alex Deucher <alexander.deucher@amd.com>, amd-gfx@lists.freedesktop.org,
- Ard Biesheuvel <ardb@kernel.org>, Ce Sun <cesun102@amd.com>,
- Chia-I Wu <olvaffe@gmail.com>, Danilo Krummrich <dakr@kernel.org>,
- Dave Airlie <airlied@redhat.com>, Deepak Rawat <drawat.floss@gmail.com>,
+CC: dri-devel@lists.freedesktop.org, Alex Deucher <alexander.deucher@amd.com>,
+ amd-gfx@lists.freedesktop.org, Ard Biesheuvel <ardb@kernel.org>,
+ Ce Sun <cesun102@amd.com>, Chia-I Wu <olvaffe@gmail.com>,
+ =?UTF-8?Q?Christian_K=C3=B6nig?= <christian.koenig@amd.com>,
+ Danilo Krummrich <dakr@kernel.org>, Dave Airlie <airlied@redhat.com>,
+ Deepak Rawat <drawat.floss@gmail.com>,
  Dmitry Osipenko <dmitry.osipenko@collabora.com>,
  Gerd Hoffmann <kraxel@redhat.com>,
  Gurchetan Singh <gurchetansingh@chromium.org>,
@@ -224,9 +215,9 @@ X-Mailman-Version: 3.3.8
 Precedence: list
 List-Id: Nouveau development list <nouveau.lists.freedesktop.org>
 Archived-At: 
- <https://lists.freedesktop.org/hyperkitty/list/nouveau@lists.freedesktop.org/message/Q32OXQZAG2VSV6UWABNQNB2ZLSKGLJ2K/>
+ <https://lists.freedesktop.org/hyperkitty/list/nouveau@lists.freedesktop.org/message/F7TYVOAPU6TZ5FXCZFEUVKKKFTREUR6B/>
 Archived-At: 
- <https://lore.freedesktop.org/72e8c696-8cd7-4bf3-a1e8-d367f3addfe0@suse.de/>
+ <https://lore.freedesktop.org/f3643c19-c250-4927-b39d-37d2494c7c84@suse.de/>
 List-Archive: 
  <https://lists.freedesktop.org/hyperkitty/list/nouveau@lists.freedesktop.org/>
 List-Archive: <https://lore.freedesktop.org/nouveau>
@@ -238,93 +229,73 @@ List-Unsubscribe: <mailto:nouveau-leave@lists.freedesktop.org>
 
 Hi
 
-Am 15.01.26 um 16:10 schrieb Ville Syrjälä:
-> On Thu, Jan 15, 2026 at 03:39:00PM +0100, Christian König wrote:
->> Sorry to being late, but I only now realized what you are doing here.
->>
->> On 1/15/26 12:02, Thomas Zimmermann wrote:
->>> Hi,
->>>
->>> apologies for the delay. I wanted to reply and then forgot about it.
->>>
->>> Am 10.01.26 um 05:52 schrieb Zack Rusin:
->>>> On Fri, Jan 9, 2026 at 5:34 AM Thomas Zimmermann <tzimmermann@suse.de> wrote:
->>>>> Hi
->>>>>
->>>>> Am 29.12.25 um 22:58 schrieb Zack Rusin:
->>>>>> Almost a rite of passage for every DRM developer and most Linux users
->>>>>> is upgrading your DRM driver/updating boot flags/changing some config
->>>>>> and having DRM driver fail at probe resulting in a blank screen.
->>>>>>
->>>>>> Currently there's no way to recover from DRM driver probe failure. PCI
->>>>>> DRM driver explicitly throw out the existing sysfb to get exclusive
->>>>>> access to PCI resources so if the probe fails the system is left without
->>>>>> a functioning display driver.
->>>>>>
->>>>>> Add code to sysfb to recever system framebuffer when DRM driver's probe
->>>>>> fails. This means that a DRM driver that fails to load reloads the system
->>>>>> framebuffer driver.
->>>>>>
->>>>>> This works best with simpledrm. Without it Xorg won't recover because
->>>>>> it still tries to load the vendor specific driver which ends up usually
->>>>>> not working at all. With simpledrm the system recovers really nicely
->>>>>> ending up with a working console and not a blank screen.
->>>>>>
->>>>>> There's a caveat in that some hardware might require some special magic
->>>>>> register write to recover EFI display. I'd appreciate it a lot if
->>>>>> maintainers could introduce a temporary failure in their drivers
->>>>>> probe to validate that the sysfb recovers and they get a working console.
->>>>>> The easiest way to double check it is by adding:
->>>>>>     /* XXX: Temporary failure to test sysfb restore - REMOVE BEFORE COMMIT */
->>>>>>     dev_info(&pdev->dev, "Testing sysfb restore: forcing probe failure\n");
->>>>>>     ret = -EINVAL;
->>>>>>     goto out_error;
->>>>>> or such right after the devm_aperture_remove_conflicting_pci_devices .
->>>>> Recovering the display like that is guess work and will at best work
->>>>> with simple discrete devices where the framebuffer is always located in
->>>>> a confined graphics aperture.
->>>>>
->>>>> But the problem you're trying to solve is a real one.
->>>>>
->>>>> What we'd want to do instead is to take the initial hardware state into
->>>>> account when we do the initial mode-setting operation.
->>>>>
->>>>> The first step is to move each driver's remove_conflicting_devices call
->>>>> to the latest possible location in the probe function. We usually do it
->>>>> first, because that's easy. But on most hardware, it could happen much
->>>>> later.
->>>> Well, some drivers (vbox, vmwgfx, bochs and currus-qemu) do it because
->>>> they request pci regions which is going to fail otherwise. Because
->>>> grabbining the pci resources is in general the very first thing that
->>>> those drivers need to do to setup anything, we
->>>> remove_conflicting_devices first or at least very early.
->>> To my knowledge, requesting resources is more about correctness than a hard requirement to use an I/O or memory range. Has this changed?
->> Nope that is not correct.
->>
->> At least for AMD GPUs remove_conflicting_devices() really early is necessary because otherwise some operations just result in a spontaneous system reboot.	
->>
->> For example resizing the PCIe BAR giving access to VRAM or disabling VGA emulation (which AFAIK is used for EFI as well) is only possible when the VGA or EFI framebuffer driver is kicked out first.
->>
->> And disabling VGA emulation is among the absolutely first steps you do to take over the scanout config.
-> It's similar for Intel. For us VGA emulation won't be used for
-> EFI boot, but we still can't have the previous driver poking
-> around in memory while the real driver is initializing. The
-> entire memory layout may get completely shuffled so there's
-> no telling where such memory accesses would land.
+Am 16.01.26 um 04:59 schrieb Zack Rusin:
+> On Thu, Jan 15, 2026 at 6:02 AM Thomas Zimmermann <tzimmermann@suse.de> wrote:
+>> That's really not going to work. For example, in the current series, you
+>> invoke devm_aperture_remove_conflicting_pci_devices_done() after
+>> drm_mode_reset(), drm_dev_register() and drm_client_setup().
+> That's perfectly fine,
+> devm_aperture_remove_conflicting_pci_devices_done is removing the
+> reload behavior not doing anything.
+>
+> This series, essentially, just adds a "defer" statement to
+> aperture_remove_conflicting_pci_devices that says
+>
+> "reload sysfb if this driver unloads".
+>
+> devm_aperture_remove_conflicting_pci_devices_done just cancels that defer.
 
-Isn't there code in display/intel_fbdev.c that reads back the old state 
-from hardware before initializing fbdev? [1] How does that work then? 
-Wouldn't the HW state be invalid already?
+Exactly. And if that reload happens after the hardware state has been 
+changed, the result is undefined.
+
+>
+> You could ask why have
+> devm_aperture_remove_conflicting_pci_devices_done at all then and it's
+> because I didn't want to change the default behavior of anything.
+>
+> There are three cases:
+> 1) Driver fails to load before
+> aperture_remove_conflicting_pci_devices, in which case sysfb is still
+> active and there's no problem,
+> 2) Driver fails to load after aperture_remove_conflicting_pci_devices,
+> in which case sysfb is gone and the screen is blank
+> 3) Driver is unloaded after the probe succeeded. igt tests this too.
+>
+> Without devm_aperture_remove_conflicting_pci_devices_done we'd try to
+> reload sysfb in #3, which, in general makes sense to me and I'd
+> probably remove it in my drivers, but there might be people or tests
+> (again, igt does it and we don't need to flip-flop between sysfb and
+> the driver there) that depend on specifically that behavior of not
+> having anything driving fb so I didn't want to change it.
+>
+> So with this series the worst case scenario is that the driver that
+> failed after aperture_remove_conflicting_pci_devices changed the
+> hardware state so much that sysfb can't recover and the fb is blank.
+> So it was blank before and this series can't fix it because the driver
+> in its cleanup routine will need to do more unwinding for sysfb to
+> reload (i.e. we'd need an extra patch to unwind the driver state).
+
+The current recovery/reload is not reliable in any case. A number of 
+high-profile devs have also said that it doesn't work with their driver. 
+The same is true for ast. So the current approach is not going to happen.
+
+> There also might be the case of some crazy behavior, e.g. pci bar
+> resize in the driver makes the vga hardware crash or something, in
+> which case, yea, we should definitely skip this patch, at least until
+> those drivers properly cleanup on exit.
+
+There's nothing crazy here. It's standard probing code.
+
+If you want to to move forward, my suggestion is to look at the proposal 
+with the aperture_funcs callbacks that control sysfb device access. And 
+from there, build a full prototype with one or two drivers.
 
 Best regards
 Thomas
 
-[1] 
-https://elixir.bootlin.com/linux/v6.18.5/source/drivers/gpu/drm/i915/display/intel_fbdev.c#L356
 
 >
-> And I suppose reBAR is a concern for us as well.
->
+> z
 
 -- 
 --
