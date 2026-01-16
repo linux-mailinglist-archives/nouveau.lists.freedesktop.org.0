@@ -2,115 +2,96 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id D7AF4D387F6
-	for <lists+nouveau@lfdr.de>; Fri, 16 Jan 2026 21:48:57 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 82EFED38820
+	for <lists+nouveau@lfdr.de>; Fri, 16 Jan 2026 22:05:29 +0100 (CET)
 Received: from kara.freedesktop.org (unknown [131.252.210.166])
-	by gabe.freedesktop.org (Postfix) with ESMTPS id AF2A210E944;
-	Fri, 16 Jan 2026 20:48:56 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTPS id 6795D10E948;
+	Fri, 16 Jan 2026 21:05:27 +0000 (UTC)
 Authentication-Results: gabe.freedesktop.org;
-	dkim=fail reason="signature verification failed" (1024-bit key; unprotected) header.d=redhat.com header.i=@redhat.com header.b="Gu7vJaUl";
+	dkim=fail reason="signature verification failed" (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="CZ5VmA+z";
 	dkim-atps=neutral
 Received: from kara.freedesktop.org (localhost [127.0.0.1])
-	by kara.freedesktop.org (Postfix) with ESMTP id 8E72844CAB;
-	Fri, 16 Jan 2026 20:40:20 +0000 (UTC)
+	by kara.freedesktop.org (Postfix) with ESMTP id 305A444B97;
+	Fri, 16 Jan 2026 20:56:51 +0000 (UTC)
 ARC-Seal: i=1; cv=none; a=rsa-sha256; d=lists.freedesktop.org;
- s=20240201; t=1768596020;
- b=wWzJXUcrV7w5FnRgs7PWKA2dCu01eVJYLtY4upeH/RQdJMPzfRnk//oCYoMFiycSpJp81
- JA4CG/RdgQetfnOnYrzCGzHPCuHDNqBNtTXsc7mN6hoxf2T/hCSBrCPHoVUZODZuZRFs6Iv
- BDfI6vK/rH4Kqg+a0Lt24QnXMC4+CNYSRQt5VfYZ4Vkj2DASHw2aPqg8SwZqJjfa72cf1Dq
- QuULW5sdor6NgYN+KrYRU13xP8z7qs/+KTOpmLD2ryOpjIG4VKVsB+7gI/rjkRGRiILFgTK
- WMfL+f44BIauFJGqMWRGSc4O8WWvR4PuTjQvbYhW2Wn501LuDsuS56ttexUA==
+ s=20240201; t=1768597011;
+ b=uiXMmgvmD4HxShBfsno+XxsrbIcR0tcnoxCJAGlvLGtz4C5r0GEi7MnFHx7ZYmB8Xycwy
+ B93MMuw7A5N/BGx6saDsifTHFh6U4pvQdQm5+PL+uPUuLwmR5ibR+O2P1IlsB5dD/OXFU0D
+ 0n42haDF2WIkK6dP+ZMRExHohA0HEPJ8bkNGsXVKK1CotpvCHiIs7DMcVVUoprVuYDzLjok
+ 1QTtvK5q5G3mSEyPa6f4uYuIQUBxlfrxvvubL2Gbn10CdDOFKSXcF+kNDndMMeZtzQ77nKe
+ QR3P+9gBpghtDkv6grGZbFIW9MO0cH9ZV9GYWDOl3fU63GNoej09U1HKRUwA==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed;
- d=lists.freedesktop.org; s=20240201; t=1768596020; h=from : sender :
+ d=lists.freedesktop.org; s=20240201; t=1768597011; h=from : sender :
  reply-to : subject : date : message-id : to : cc : mime-version :
  content-type : content-transfer-encoding : content-id :
  content-description : resent-date : resent-from : resent-sender :
  resent-to : resent-cc : resent-message-id : in-reply-to : references :
  list-id : list-help : list-unsubscribe : list-subscribe : list-post :
  list-owner : list-archive;
- bh=xBmlVfMkO+IoYEb83UmHg5x9NCktU7JsOGPTKXk0jk4=;
- b=c0ZhJWXaIGhKYck5A0+R6JhBvJARL5udWyG/AKoV+xbAQqQIpDVjlKc9TCky38LV+kyGM
- rkiFhVk8uk0ps7uVJhZLQ6cTlO3QgSuqmAQACqdxCqh9SWMVqMcFZz2ssA0M6dDJO/bYlfn
- 5EUfdVAjS2SkwqMpuHMqMVGNg2kOX6fXtKzXcr9CliB/Ox8Tlie+oNJVFyUXqGpY6MPXD4h
- m+XGDHphyROL1RbCu39vTAOhnEI2DlgdF5Zg/fVHlpWMRNrtSDWsVPcewHhLKMfiA+8/n++
- HdJmM25F9wXXvrpZ6xBJ1MKverkbSDHaqO4IcdFlhUDoMHGe4nHiwiz/Apvw==
+ bh=Q5SUvcu6ebpPM2PRaqXz5dpJgnteYnc26GMQ8gq1dP8=;
+ b=cMVzgL4mTEnv4OyudME+oJ2M2jScOf4e01DTE7ScMpp818MmdEJYsZLIIbSQn4mphKuUU
+ rGYn6/4p+QewlH5qyi4L+QMP3cb8DIla9RFxvkFLbfUj5JGKHViVadu9JAkLhMx7JU1Hw7l
+ qmsjRFmGrhAN30To8/JzKoceL95810WEaEzGZd4tdh838WVBd8u0i9+0Apo32rgAhxeEvTl
+ mYn8ybCJ3T1ba7k4/9cH0bnckFpGa+haecNh3usknIoyzLmB7eHdhFtLx6YUxSJaUxiXnaK
+ VuqQaNrXkiK9hgSBbbanzWXkQnRJBai1q6wnTtYdpHCdlDRtfyOGV/VB1hJQ==
 ARC-Authentication-Results: i=1; mail.freedesktop.org;
- dkim=pass header.d=redhat.com;
+ dkim=pass header.d=kernel.org;
   arc=none (Message is not ARC signed);
-  dmarc=pass (Used From Domain Record) header.from=redhat.com
+  dmarc=pass (Used From Domain Record) header.from=kernel.org
  policy.dmarc=quarantine
-Authentication-Results: mail.freedesktop.org; dkim=pass header.d=redhat.com;
+Authentication-Results: mail.freedesktop.org; dkim=pass header.d=kernel.org;
  arc=none (Message is not ARC signed);
- dmarc=pass (Used From Domain Record) header.from=redhat.com
+ dmarc=pass (Used From Domain Record) header.from=kernel.org
  policy.dmarc=quarantine
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by kara.freedesktop.org (Postfix) with ESMTPS id EF32540635
-	for <nouveau@lists.freedesktop.org>; Fri, 16 Jan 2026 20:40:18 +0000 (UTC)
-Received: from us-smtp-delivery-124.mimecast.com
- (us-smtp-delivery-124.mimecast.com [170.10.133.124])
-	by gabe.freedesktop.org (Postfix) with ESMTPS id BF88410E93C
-	for <nouveau@lists.freedesktop.org>; Fri, 16 Jan 2026 20:48:54 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
-	s=mimecast20190719; t=1768596534;
-	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
-	 to:to:cc:cc:mime-version:mime-version:
-	 content-transfer-encoding:content-transfer-encoding:
-	 in-reply-to:in-reply-to:references:references;
-	bh=xBmlVfMkO+IoYEb83UmHg5x9NCktU7JsOGPTKXk0jk4=;
-	b=Gu7vJaUl3DiHuHPdEFNlOdGh6xzyR/ERbrb+Oag6Q4lsX79upp4JGS5Lv6hQv/t1WrfBE5
-	CHYxQfLFgpLkkJf+tSI9/1Io0IbiOJ42xbVl1BT/Ku+7flLdHhF8/fpYFhbMkg8MZ/gBsh
-	D3dNFX/Mpn4pXp2TJ4XMXYa5IdjpKQs=
-Received: from mx-prod-mc-05.mail-002.prod.us-west-2.aws.redhat.com
- (ec2-54-186-198-63.us-west-2.compute.amazonaws.com [54.186.198.63]) by
- relay.mimecast.com with ESMTP with STARTTLS (version=TLSv1.3,
- cipher=TLS_AES_256_GCM_SHA384) id us-mta-642-2oB9LO3FP2KhW_YS1TejFA-1; Fri,
- 16 Jan 2026 15:48:49 -0500
-X-MC-Unique: 2oB9LO3FP2KhW_YS1TejFA-1
-X-Mimecast-MFC-AGG-ID: 2oB9LO3FP2KhW_YS1TejFA_1768596527
-Received: from mx-prod-int-03.mail-002.prod.us-west-2.aws.redhat.com
- (mx-prod-int-03.mail-002.prod.us-west-2.aws.redhat.com [10.30.177.12])
-	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
-	 key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest
- SHA256)
-	(No client certificate requested)
-	by mx-prod-mc-05.mail-002.prod.us-west-2.aws.redhat.com (Postfix) with ESMTPS
- id 96BB41956088;
-	Fri, 16 Jan 2026 20:48:47 +0000 (UTC)
-Received: from GoldenWind.redhat.com (unknown [10.22.88.63])
-	by mx-prod-int-03.mail-002.prod.us-west-2.aws.redhat.com (Postfix) with ESMTP
- id AEF4519560A7;
-	Fri, 16 Jan 2026 20:48:45 +0000 (UTC)
-From: Lyude Paul <lyude@redhat.com>
-To: dri-devel@lists.freedesktop.org,
-	nouveau@lists.freedesktop.org,
-	linux-kernel@vger.kernel.org
-Subject: [PATCH v2 3/3] rust/drm/gem: Use DeviceContext with GEM objects
-Date: Fri, 16 Jan 2026 15:41:43 -0500
-Message-ID: <20260116204728.725579-4-lyude@redhat.com>
-In-Reply-To: <20260116204728.725579-1-lyude@redhat.com>
-References: <20260116204728.725579-1-lyude@redhat.com>
-MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-X-Scanned-By: MIMEDefang 3.0 on 10.30.177.12
-Message-ID-Hash: CHLS3QZVH3IEY26HM5TDSTO3KYIRS334
-X-Message-ID-Hash: CHLS3QZVH3IEY26HM5TDSTO3KYIRS334
-X-MailFrom: lyude@redhat.com
+	by kara.freedesktop.org (Postfix) with ESMTPS id A860F40744
+	for <nouveau@lists.freedesktop.org>; Fri, 16 Jan 2026 20:56:47 +0000 (UTC)
+Received: from tor.source.kernel.org (tor.source.kernel.org [172.105.4.254])
+	by gabe.freedesktop.org (Postfix) with ESMTPS id 92FA410E94E
+	for <nouveau@lists.freedesktop.org>; Fri, 16 Jan 2026 21:05:23 +0000 (UTC)
+Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
+	by tor.source.kernel.org (Postfix) with ESMTP id 88B5060150;
+	Fri, 16 Jan 2026 21:05:22 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id F2CB7C116C6;
+	Fri, 16 Jan 2026 21:05:20 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+	s=k20201202; t=1768597522;
+	bh=OTWhNuwoA0ri1yi3waHmvj+OiuXWNzz5QrW5RdAqKB8=;
+	h=Date:Subject:Cc:To:From:References:In-Reply-To:From;
+	b=CZ5VmA+zS+KDi4Zg7zVZy4vtW1XXa9PrcY/JqR8FJ7DHZjlHyxMiCBMUx3RsJPzqa
+	 bx/ubZh+xu2ZLamEBHQLSqkExLgiaf5DxUGwIrWWbuJqOYMtym7HLnn/2ZlHWJbX0F
+	 lY+yB2tqU/sSeXxPt5LHRDrvralffRkV0N7z18y/CyV/Ws0uyOdFTF7hsp6GGSwqZm
+	 OvZznf0x4+TDznXCczzz8Zxf2t4mlrg1MFpMzlpPlqcBE0ggHIbrMEPF3De3VIBguM
+	 /wyM3yNnSFUI5cZKHpl9qO5LKnXWhfcdlS6/UUfxJK0gluRKzzw84Q4hCU4yUiGlS6
+	 f2no8R1V0VirQ==
+Mime-Version: 1.0
+Content-Transfer-Encoding: quoted-printable
+Content-Type: text/plain; charset=UTF-8
+Date: Fri, 16 Jan 2026 22:05:19 +0100
+Message-Id: <DFQBHVTTHZY8.13ASLCJ3FJP81@kernel.org>
+Subject: Re: [PATCH v6 11/11] gpu: nova-core: add PIO support for loading
+ firmware images
+To: "Timur Tabi" <ttabi@nvidia.com>
+From: "Danilo Krummrich" <dakr@kernel.org>
+References: <20260114192950.1143002-1-ttabi@nvidia.com>
+ <20260114192950.1143002-12-ttabi@nvidia.com>
+In-Reply-To: <20260114192950.1143002-12-ttabi@nvidia.com>
+Message-ID-Hash: NCI2HDRU4G2J7S4HEH7LI4CZOPHSPMD6
+X-Message-ID-Hash: NCI2HDRU4G2J7S4HEH7LI4CZOPHSPMD6
+X-MailFrom: dakr@kernel.org
+X-Mailman-Rule-Hits: nonmember-moderation
 X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency;
- loop; banned-address; member-moderation; nonmember-moderation; administrivia;
- implicit-dest; max-recipients; max-size; news-moderation; no-subject;
- digests; suspicious-header
-CC: rust-for-linux@vger.kernel.org, Miguel Ojeda <ojeda@kernel.org>,
- Simona Vetter <simona@ffwll.ch>, Alice Ryhl <aliceryhl@google.com>,
- Shankari Anand <shankari.ak0208@gmail.com>, Benno Lossin <lossin@kernel.org>,
- Danilo Krummrich <dakr@kernel.org>, Asahi Lina <lina+kernel@asahilina.net>,
- Daniel Almeida <daniel.almeida@collabora.com>
+ loop; banned-address; member-moderation
+CC: Alexandre Courbot <acourbot@nvidia.com>,
+ Joel Fernandes <joelagnelf@nvidia.com>, nouveau@lists.freedesktop.org,
+ rust-for-linux@vger.kernel.org
 X-Mailman-Version: 3.3.8
 Precedence: list
 List-Id: Nouveau development list <nouveau.lists.freedesktop.org>
 Archived-At: 
- <https://lists.freedesktop.org/hyperkitty/list/nouveau@lists.freedesktop.org/message/CHLS3QZVH3IEY26HM5TDSTO3KYIRS334/>
+ <https://lists.freedesktop.org/hyperkitty/list/nouveau@lists.freedesktop.org/message/NCI2HDRU4G2J7S4HEH7LI4CZOPHSPMD6/>
 Archived-At: 
- <https://lore.freedesktop.org/20260116204728.725579-4-lyude@redhat.com/>
+ <https://lore.freedesktop.org/DFQBHVTTHZY8.13ASLCJ3FJP81@kernel.org/>
 List-Archive: 
  <https://lists.freedesktop.org/hyperkitty/list/nouveau@lists.freedesktop.org/>
 List-Archive: <https://lore.freedesktop.org/nouveau>
@@ -120,354 +101,253 @@ List-Post: <mailto:nouveau@lists.freedesktop.org>
 List-Subscribe: <mailto:nouveau-join@lists.freedesktop.org>
 List-Unsubscribe: <mailto:nouveau-leave@lists.freedesktop.org>
 
-Now that we have the ability to represent the context in which a DRM device
-is in at compile-time, we can start carrying around this context with GEM
-object types in order to allow a driver to safely create GEM objects before
-a DRM device has registered with userspace.
+On Wed Jan 14, 2026 at 8:29 PM CET, Timur Tabi wrote:
+> +    /// Write a byte array to Falcon memory using programmed I/O (PIO).
+> +    ///
+> +    /// Writes `img` to the specified `target_mem` (IMEM or DMEM) starti=
+ng at `mem_base`.
+> +    /// For IMEM writes, tags are set for each 256-byte block starting f=
+rom `tag`.
+> +    ///
+> +    /// Returns `EINVAL` if `img.len()` is not a multiple of 4.
+> +    fn pio_wr_bytes(
+> +        &self,
+> +        bar: &Bar0,
+> +        img: &[u8],
+> +        mem_base: u16,
+> +        target_mem: FalconMem,
+> +        port: u8,
 
-Signed-off-by: Lyude Paul <lyude@redhat.com>
----
- drivers/gpu/drm/nova/driver.rs |  2 +-
- drivers/gpu/drm/nova/gem.rs    | 11 +++---
- drivers/gpu/drm/tyr/driver.rs  |  2 +-
- drivers/gpu/drm/tyr/gem.rs     |  3 +-
- rust/kernel/drm/device.rs      | 14 ++++----
- rust/kernel/drm/driver.rs      |  2 +-
- rust/kernel/drm/gem/mod.rs     | 66 ++++++++++++++++++++++------------
- 7 files changed, 63 insertions(+), 37 deletions(-)
+This looks like we should use the Bounded type instead.
 
-diff --git a/drivers/gpu/drm/nova/driver.rs b/drivers/gpu/drm/nova/driver.rs
-index 8cea5f68c3b04..2c13261450406 100644
---- a/drivers/gpu/drm/nova/driver.rs
-+++ b/drivers/gpu/drm/nova/driver.rs
-@@ -67,7 +67,7 @@ fn probe(adev: &auxiliary::Device<Core>, _info: &Self::IdInfo) -> impl PinInit<S
- impl drm::Driver for NovaDriver {
-     type Data = NovaData;
-     type File = File;
--    type Object = gem::Object<NovaObject>;
-+    type Object<Ctx: drm::DeviceContext> = gem::Object<NovaObject, Ctx>;
- 
-     const INFO: drm::DriverInfo = INFO;
- 
-diff --git a/drivers/gpu/drm/nova/gem.rs b/drivers/gpu/drm/nova/gem.rs
-index 6ccfa5da57617..f6e98b9db58d8 100644
---- a/drivers/gpu/drm/nova/gem.rs
-+++ b/drivers/gpu/drm/nova/gem.rs
-@@ -2,7 +2,7 @@
- 
- use kernel::{
-     drm,
--    drm::{gem, gem::BaseObject},
-+    drm::{gem, gem::BaseObject, DeviceContext},
-     page,
-     prelude::*,
-     sync::aref::ARef,
-@@ -20,20 +20,23 @@ pub(crate) struct NovaObject {}
- impl gem::DriverObject for NovaObject {
-     type Driver = NovaDriver;
- 
--    fn new(_dev: &NovaDevice, _size: usize) -> impl PinInit<Self, Error> {
-+    fn new<Ctx: DeviceContext>(_dev: &NovaDevice<Ctx>, _size: usize) -> impl PinInit<Self, Error> {
-         try_pin_init!(NovaObject {})
-     }
- }
- 
- impl NovaObject {
-     /// Create a new DRM GEM object.
--    pub(crate) fn new(dev: &NovaDevice, size: usize) -> Result<ARef<gem::Object<Self>>> {
-+    pub(crate) fn new<Ctx: DeviceContext>(
-+        dev: &NovaDevice<Ctx>,
-+        size: usize,
-+    ) -> Result<ARef<gem::Object<Self, Ctx>>> {
-         if size == 0 {
-             return Err(EINVAL);
-         }
-         let aligned_size = page::page_align(size).ok_or(EINVAL)?;
- 
--        gem::Object::new(dev, aligned_size)
-+        gem::Object::<Self, Ctx>::new(dev, aligned_size)
-     }
- 
-     /// Look up a GEM object handle for a `File` and return an `ObjectRef` for it.
-diff --git a/drivers/gpu/drm/tyr/driver.rs b/drivers/gpu/drm/tyr/driver.rs
-index 768d50bde929e..c94aa1f12ca61 100644
---- a/drivers/gpu/drm/tyr/driver.rs
-+++ b/drivers/gpu/drm/tyr/driver.rs
-@@ -183,7 +183,7 @@ fn drop(self: Pin<&mut Self>) {
- impl drm::Driver for TyrDriver {
-     type Data = TyrData;
-     type File = File;
--    type Object = drm::gem::Object<TyrObject>;
-+    type Object<R: drm::DeviceContext> = drm::gem::Object<TyrObject, R>;
- 
-     const INFO: drm::DriverInfo = INFO;
- 
-diff --git a/drivers/gpu/drm/tyr/gem.rs b/drivers/gpu/drm/tyr/gem.rs
-index 1273bf89dbd5d..00804f8c14bd4 100644
---- a/drivers/gpu/drm/tyr/gem.rs
-+++ b/drivers/gpu/drm/tyr/gem.rs
-@@ -3,6 +3,7 @@
- use crate::driver::TyrDevice;
- use crate::driver::TyrDriver;
- use kernel::drm::gem;
-+use kernel::drm::DeviceContext;
- use kernel::prelude::*;
- 
- /// GEM Object inner driver data
-@@ -12,7 +13,7 @@ pub(crate) struct TyrObject {}
- impl gem::DriverObject for TyrObject {
-     type Driver = TyrDriver;
- 
--    fn new(_dev: &TyrDevice, _size: usize) -> impl PinInit<Self, Error> {
-+    fn new<Ctx: DeviceContext>(_dev: &TyrDevice<Ctx>, _size: usize) -> impl PinInit<Self, Error> {
-         try_pin_init!(TyrObject {})
-     }
- }
-diff --git a/rust/kernel/drm/device.rs b/rust/kernel/drm/device.rs
-index 441ed7c94fcf5..0864bd10af339 100644
---- a/rust/kernel/drm/device.rs
-+++ b/rust/kernel/drm/device.rs
-@@ -140,13 +140,13 @@ impl<T: drm::Driver> UnregisteredDevice<T> {
-         master_set: None,
-         master_drop: None,
-         debugfs_init: None,
--        gem_create_object: T::Object::ALLOC_OPS.gem_create_object,
--        prime_handle_to_fd: T::Object::ALLOC_OPS.prime_handle_to_fd,
--        prime_fd_to_handle: T::Object::ALLOC_OPS.prime_fd_to_handle,
--        gem_prime_import: T::Object::ALLOC_OPS.gem_prime_import,
--        gem_prime_import_sg_table: T::Object::ALLOC_OPS.gem_prime_import_sg_table,
--        dumb_create: T::Object::ALLOC_OPS.dumb_create,
--        dumb_map_offset: T::Object::ALLOC_OPS.dumb_map_offset,
-+        gem_create_object: T::Object::<Uninit>::ALLOC_OPS.gem_create_object,
-+        prime_handle_to_fd: T::Object::<Uninit>::ALLOC_OPS.prime_handle_to_fd,
-+        prime_fd_to_handle: T::Object::<Uninit>::ALLOC_OPS.prime_fd_to_handle,
-+        gem_prime_import: T::Object::<Uninit>::ALLOC_OPS.gem_prime_import,
-+        gem_prime_import_sg_table: T::Object::<Uninit>::ALLOC_OPS.gem_prime_import_sg_table,
-+        dumb_create: T::Object::<Uninit>::ALLOC_OPS.dumb_create,
-+        dumb_map_offset: T::Object::<Uninit>::ALLOC_OPS.dumb_map_offset,
-         show_fdinfo: None,
-         fbdev_probe: None,
- 
-diff --git a/rust/kernel/drm/driver.rs b/rust/kernel/drm/driver.rs
-index 108d789e43759..b37c5685e8ad8 100644
---- a/rust/kernel/drm/driver.rs
-+++ b/rust/kernel/drm/driver.rs
-@@ -109,7 +109,7 @@ pub trait Driver {
-     type Data: Sync + Send;
- 
-     /// The type used to manage memory for this driver.
--    type Object: AllocImpl;
-+    type Object<Ctx: drm::DeviceContext>: AllocImpl;
- 
-     /// The type used to represent a DRM File (client)
-     type File: drm::file::DriverFile;
-diff --git a/rust/kernel/drm/gem/mod.rs b/rust/kernel/drm/gem/mod.rs
-index d49a9ba026356..1dd8681a5738b 100644
---- a/rust/kernel/drm/gem/mod.rs
-+++ b/rust/kernel/drm/gem/mod.rs
-@@ -7,13 +7,16 @@
- use crate::{
-     alloc::flags::*,
-     bindings, drm,
--    drm::driver::{AllocImpl, AllocOps},
-+    drm::{
-+        device::{DeviceContext, Registered},
-+        driver::{AllocImpl, AllocOps},
-+    },
-     error::{to_result, Result},
-     prelude::*,
-     sync::aref::{ARef, AlwaysRefCounted},
-     types::Opaque,
- };
--use core::{ops::Deref, ptr::NonNull};
-+use core::{marker::PhantomData, ops::Deref, ptr::NonNull};
- 
- /// A type alias for retrieving a [`Driver`]s [`DriverFile`] implementation from its
- /// [`DriverObject`] implementation.
-@@ -22,21 +25,30 @@
- /// [`DriverFile`]: drm::file::DriverFile
- pub type DriverFile<T> = drm::File<<<T as DriverObject>::Driver as drm::Driver>::File>;
- 
-+/// A type alias for retrieving the current [`AllocImpl`] for a given [`DriverObject`].
-+///
-+/// [`Driver`]: drm::Driver
-+pub type DriverAllocImpl<T, Ctx = Registered> =
-+    <<T as DriverObject>::Driver as drm::Driver>::Object<Ctx>;
-+
- /// GEM object functions, which must be implemented by drivers.
- pub trait DriverObject: Sync + Send + Sized {
-     /// Parent `Driver` for this object.
-     type Driver: drm::Driver;
- 
-     /// Create a new driver data object for a GEM object of a given size.
--    fn new(dev: &drm::Device<Self::Driver>, size: usize) -> impl PinInit<Self, Error>;
-+    fn new<Ctx: DeviceContext>(
-+        dev: &drm::Device<Self::Driver, Ctx>,
-+        size: usize,
-+    ) -> impl PinInit<Self, Error>;
- 
-     /// Open a new handle to an existing object, associated with a File.
--    fn open(_obj: &<Self::Driver as drm::Driver>::Object, _file: &DriverFile<Self>) -> Result {
-+    fn open(_obj: &DriverAllocImpl<Self>, _file: &DriverFile<Self>) -> Result {
-         Ok(())
-     }
- 
-     /// Close a handle to an existing object, associated with a File.
--    fn close(_obj: &<Self::Driver as drm::Driver>::Object, _file: &DriverFile<Self>) {}
-+    fn close(_obj: &DriverAllocImpl<Self>, _file: &DriverFile<Self>) {}
- }
- 
- /// Trait that represents a GEM object subtype
-@@ -62,9 +74,12 @@ extern "C" fn open_callback<T: DriverObject>(
-     // SAFETY: `open_callback` is only ever called with a valid pointer to a `struct drm_file`.
-     let file = unsafe { DriverFile::<T>::from_raw(raw_file) };
- 
--    // SAFETY: `open_callback` is specified in the AllocOps structure for `DriverObject<T>`,
--    // ensuring that `raw_obj` is contained within a `DriverObject<T>`
--    let obj = unsafe { <<T::Driver as drm::Driver>::Object as IntoGEMObject>::from_raw(raw_obj) };
-+    // SAFETY:
-+    // * `open_callback` is specified in the AllocOps structure for `DriverObject`, ensuring that
-+    //   `raw_obj` is contained within a `DriverAllocImpl<T>`
-+    // * It is only possible for `open_callback` to be called after device registration, ensuring
-+    //   that the object's device is in the `Registered` state.
-+    let obj: &DriverAllocImpl<T> = unsafe { IntoGEMObject::from_raw(raw_obj) };
- 
-     match T::open(obj, file) {
-         Err(e) => e.to_errno(),
-@@ -81,12 +96,12 @@ extern "C" fn close_callback<T: DriverObject>(
- 
-     // SAFETY: `close_callback` is specified in the AllocOps structure for `Object<T>`, ensuring
-     // that `raw_obj` is indeed contained within a `Object<T>`.
--    let obj = unsafe { <<T::Driver as drm::Driver>::Object as IntoGEMObject>::from_raw(raw_obj) };
-+    let obj: &DriverAllocImpl<T> = unsafe { IntoGEMObject::from_raw(raw_obj) };
- 
-     T::close(obj, file);
- }
- 
--impl<T: DriverObject> IntoGEMObject for Object<T> {
-+impl<T: DriverObject, Ctx: DeviceContext> IntoGEMObject for Object<T, Ctx> {
-     fn as_raw(&self) -> *mut bindings::drm_gem_object {
-         self.obj.get()
-     }
-@@ -94,7 +109,7 @@ fn as_raw(&self) -> *mut bindings::drm_gem_object {
-     unsafe fn from_raw<'a>(self_ptr: *mut bindings::drm_gem_object) -> &'a Self {
-         // SAFETY: `obj` is guaranteed to be in an `Object<T>` via the safety contract of this
-         // function
--        unsafe { &*crate::container_of!(Opaque::cast_from(self_ptr), Object<T>, obj) }
-+        unsafe { &*crate::container_of!(Opaque::cast_from(self_ptr), Object<T, Ctx>, obj) }
-     }
- }
- 
-@@ -111,7 +126,7 @@ fn size(&self) -> usize {
-     fn create_handle<D, F>(&self, file: &drm::File<F>) -> Result<u32>
-     where
-         Self: AllocImpl<Driver = D>,
--        D: drm::Driver<Object = Self, File = F>,
-+        D: drm::Driver<Object<Registered> = Self, File = F>,
-         F: drm::file::DriverFile<Driver = D>,
-     {
-         let mut handle: u32 = 0;
-@@ -126,7 +141,7 @@ fn create_handle<D, F>(&self, file: &drm::File<F>) -> Result<u32>
-     fn lookup_handle<D, F>(file: &drm::File<F>, handle: u32) -> Result<ARef<Self>>
-     where
-         Self: AllocImpl<Driver = D>,
--        D: drm::Driver<Object = Self, File = F>,
-+        D: drm::Driver<Object<Registered> = Self, File = F>,
-         F: drm::file::DriverFile<Driver = D>,
-     {
-         // SAFETY: The arguments are all valid per the type invariants.
-@@ -166,16 +181,18 @@ impl<T: IntoGEMObject> BaseObject for T {}
- ///
- /// # Invariants
- ///
--/// - `self.obj` is a valid instance of a `struct drm_gem_object`.
-+/// * `self.obj` is a valid instance of a `struct drm_gem_object`.
-+/// * Any type invariants of `Ctx` apply to the parent DRM device for this GEM object.
- #[repr(C)]
- #[pin_data]
--pub struct Object<T: DriverObject + Send + Sync> {
-+pub struct Object<T: DriverObject + Send + Sync, Ctx: DeviceContext = Registered> {
-     obj: Opaque<bindings::drm_gem_object>,
-     #[pin]
-     data: T,
-+    _ctx: PhantomData<Ctx>,
- }
- 
--impl<T: DriverObject> Object<T> {
-+impl<T: DriverObject, Ctx: DeviceContext> Object<T, Ctx> {
-     const OBJECT_FUNCS: bindings::drm_gem_object_funcs = bindings::drm_gem_object_funcs {
-         free: Some(Self::free_callback),
-         open: Some(open_callback::<T>),
-@@ -195,11 +212,12 @@ impl<T: DriverObject> Object<T> {
-     };
- 
-     /// Create a new GEM object.
--    pub fn new(dev: &drm::Device<T::Driver>, size: usize) -> Result<ARef<Self>> {
-+    pub fn new(dev: &drm::Device<T::Driver, Ctx>, size: usize) -> Result<ARef<Self>> {
-         let obj: Pin<KBox<Self>> = KBox::pin_init(
-             try_pin_init!(Self {
-                 obj: Opaque::new(bindings::drm_gem_object::default()),
-                 data <- T::new(dev, size),
-+                _ctx: PhantomData,
-             }),
-             GFP_KERNEL,
-         )?;
-@@ -208,6 +226,8 @@ pub fn new(dev: &drm::Device<T::Driver>, size: usize) -> Result<ARef<Self>> {
-         unsafe { (*obj.as_raw()).funcs = &Self::OBJECT_FUNCS };
- 
-         // SAFETY: The arguments are all valid per the type invariants.
-+        // INVARIANT: We use `dev` for creating the GEM object, which is known to be in state `Ctx` -
-+        // ensuring that the GEM object's pointer to the DRM device is always in the same state.
-         to_result(unsafe { bindings::drm_gem_object_init(dev.as_raw(), obj.obj.get(), size) })?;
- 
-         // SAFETY: We will never move out of `Self` as `ARef<Self>` is always treated as pinned.
-@@ -221,13 +241,15 @@ pub fn new(dev: &drm::Device<T::Driver>, size: usize) -> Result<ARef<Self>> {
-     }
- 
-     /// Returns the `Device` that owns this GEM object.
--    pub fn dev(&self) -> &drm::Device<T::Driver> {
-+    pub fn dev(&self) -> &drm::Device<T::Driver, Ctx> {
-         // SAFETY:
-         // - `struct drm_gem_object.dev` is initialized and valid for as long as the GEM
-         //   object lives.
-         // - The device we used for creating the gem object is passed as &drm::Device<T::Driver> to
-         //   Object::<T>::new(), so we know that `T::Driver` is the right generic parameter to use
-         //   here.
-+        // - Any type invariants of `Ctx` are upheld by using the same `Ctx` for the `Device` we
-+        //   return.
-         unsafe { drm::Device::from_raw((*self.as_raw()).dev) }
-     }
- 
-@@ -253,7 +275,7 @@ extern "C" fn free_callback(obj: *mut bindings::drm_gem_object) {
- }
- 
- // SAFETY: Instances of `Object<T>` are always reference-counted.
--unsafe impl<T: DriverObject> crate::sync::aref::AlwaysRefCounted for Object<T> {
-+unsafe impl<T: DriverObject, Ctx: DeviceContext> AlwaysRefCounted for Object<T, Ctx> {
-     fn inc_ref(&self) {
-         // SAFETY: The existence of a shared reference guarantees that the refcount is non-zero.
-         unsafe { bindings::drm_gem_object_get(self.as_raw()) };
-@@ -268,9 +290,9 @@ unsafe fn dec_ref(obj: NonNull<Self>) {
-     }
- }
- 
--impl<T: DriverObject> super::private::Sealed for Object<T> {}
-+impl<T: DriverObject, Ctx: DeviceContext> super::private::Sealed for Object<T, Ctx> {}
- 
--impl<T: DriverObject> Deref for Object<T> {
-+impl<T: DriverObject, Ctx: DeviceContext> Deref for Object<T, Ctx> {
-     type Target = T;
- 
-     fn deref(&self) -> &Self::Target {
-@@ -278,7 +300,7 @@ fn deref(&self) -> &Self::Target {
-     }
- }
- 
--impl<T: DriverObject> AllocImpl for Object<T> {
-+impl<T: DriverObject, Ctx: DeviceContext> AllocImpl for Object<T, Ctx> {
-     type Driver = T::Driver;
- 
-     const ALLOC_OPS: AllocOps = AllocOps {
--- 
-2.52.0
+> +        tag: u16,
+> +    ) -> Result {
+> +        // Rejecting misaligned images here allows us to avoid checking
+> +        // inside the loops.
+> +        if img.len() % 4 !=3D 0 {
+> +            return Err(EINVAL);
+> +        }
+> +
+> +        let port =3D usize::from(port);
+> +
+> +        match target_mem {
+> +            FalconMem::ImemSecure | FalconMem::ImemNonSecure =3D> {
+> +                regs::NV_PFALCON_FALCON_IMEMC::default()
+> +                    .set_secure(target_mem =3D=3D FalconMem::ImemSecure)
+> +                    .set_aincw(true)
+> +                    .set_offs(mem_base)
+> +                    .write(bar, &E::ID, port);
+> +
+> +                let mut tag =3D tag;
+> +                for block in img.chunks(256) {
 
+	for (n, block) in img.chunks(256).iter().enumerate() {
+	    regs::NV_PFALCON_FALCON_IMEMT::default()
+	        .set_tag(tag + n)
+	        .write(bar, &E::ID, port);
+	}
+
+This way you don't need the mutable shadow of tag. Besides that, how do we =
+know
+this doesn't overflow? Don't we need a checked_add()?
+
+> +                    regs::NV_PFALCON_FALCON_IMEMT::default()
+> +                        .set_tag(tag)
+> +                        .write(bar, &E::ID, port);
+> +                    for word in block.chunks_exact(4) {
+> +                        let w =3D [word[0], word[1], word[2], word[3]];
+> +                        regs::NV_PFALCON_FALCON_IMEMD::default()
+> +                            .set_data(u32::from_le_bytes(w))
+> +                            .write(bar, &E::ID, port);
+> +                    }
+> +                    tag +=3D 1;
+> +                }
+> +            }
+> +            FalconMem::Dmem =3D> {
+> +                regs::NV_PFALCON_FALCON_DMEMC::default()
+> +                    .set_aincw(true)
+> +                    .set_offs(mem_base)
+> +                    .write(bar, &E::ID, port);
+> +
+> +                for block in img.chunks(256) {
+> +                    for word in block.chunks_exact(4) {
+> +                        let w =3D [word[0], word[1], word[2], word[3]];
+> +                        regs::NV_PFALCON_FALCON_DMEMD::default()
+> +                            .set_data(u32::from_le_bytes(w))
+> +                            .write(bar, &E::ID, port);
+> +                    }
+> +                }
+> +            }
+> +        }
+> +
+> +        Ok(())
+> +    }
+> +
+> +    fn pio_wr<F: FalconFirmware<Target =3D E>>(
+> +        &self,
+> +        bar: &Bar0,
+> +        fw: &F,
+> +        target_mem: FalconMem,
+> +        load_offsets: &FalconLoadTarget,
+> +        port: u8,
+> +        tag: u16,
+> +    ) -> Result {
+> +        let start =3D usize::from_safe_cast(load_offsets.src_start);
+> +        let len =3D usize::from_safe_cast(load_offsets.len);
+> +        let mem_base =3D u16::try_from(load_offsets.dst_start)?;
+> +
+> +        // SAFETY: we are the only user of the firmware image at this st=
+age
+> +        let data =3D unsafe { fw.as_slice(start, len).map_err(|_| EINVAL=
+)? };
+
+Why do we need the firmware image to be backed by a DMA object at this poin=
+t
+when you load the firmware image through PIO anyways?
+
+> diff --git a/drivers/gpu/nova-core/falcon/hal.rs b/drivers/gpu/nova-core/=
+falcon/hal.rs
+> index 49501aa6ff7f..3a882b7d8aa8 100644
+> --- a/drivers/gpu/nova-core/falcon/hal.rs
+> +++ b/drivers/gpu/nova-core/falcon/hal.rs
+> @@ -15,6 +15,11 @@
+>  mod ga102;
+>  mod tu102;
+> =20
+> +pub(crate) enum LoadMethod {
+> +    Pio,
+> +    Dma,
+> +}
+
+Seems obvious, but still, please add some documentation explaining that thi=
+s is
+the load method for falcon firmware images, etc.
+
+> +pub(crate) struct GenericBootloader {
+> +    pub desc: BootloaderDesc,
+> +    pub ucode: Vec<u8, kernel::alloc::allocator::Kmalloc>,
+
+	pub ucode: KVec<u8>,
+
+Also, we may want to use KVVec<u8> or just VVec<u8> instead. What's the ima=
+ge
+size?
+
+> +}
+> +
+>  /// The FWSEC microcode, extracted from the BIOS and to be run on the GS=
+P falcon.
+>  ///
+>  /// It is responsible for e.g. carving out the WPR2 region as the first =
+step of the GSP bootflow.
+> @@ -221,6 +286,8 @@ pub(crate) struct FwsecFirmware {
+>      desc: FalconUCodeDesc,
+>      /// GPU-accessible DMA object containing the firmware.
+>      ucode: FirmwareDmaObject<Self, Signed>,
+> +    /// Generic bootloader
+> +    gen_bootloader: Option<GenericBootloader>,
+
+I'm not convinced this is a good idea. We probably want a HAL here and have
+different FwsecFirmware types:
+
+One with a DMA object and one with a system memory object when the architec=
+ture
+uses PIO. In the latter case the object can have a GenericBootloader field,=
+ i.e.
+this also gets us rid of the Option and all the subsequent 'if chipset <
+Chipset::GA102' checks and 'match gbl_fw' matches below.
+
+>  }
+> =20
+>  impl FalconLoadParams for FwsecFirmware {
+> @@ -275,7 +342,19 @@ fn brom_params(&self) -> FalconBromParams {
+>      }
+> =20
+>      fn boot_addr(&self) -> u32 {
+> -        0
+> +        match &self.desc {
+> +            FalconUCodeDesc::V2(_v2) =3D> {
+> +                // On V2 platforms, the boot address is extracted from t=
+he
+> +                // generic bootloader, because the gbl is what actually =
+copies
+> +                // FWSEC into memory, so that is what needs to be booted=
+.
+> +                if let Some(ref gbl) =3D self.gen_bootloader {
+> +                    gbl.desc.start_tag << 8
+> +                } else {
+> +                    0
+> +                }
+> +            }
+> +            FalconUCodeDesc::V3(_v3) =3D> 0,
+> +        }
+>      }
+>  }
+> =20
+> @@ -376,6 +455,7 @@ impl FwsecFirmware {
+>      /// command.
+>      pub(crate) fn new(
+>          dev: &Device<device::Bound>,
+> +        chipset: Chipset,
+>          falcon: &Falcon<Gsp>,
+>          bar: &Bar0,
+>          bios: &Vbios,
+> @@ -432,9 +512,54 @@ pub(crate) fn new(
+>              ucode_dma.no_patch_signature()
+>          };
+> =20
+> +        // The Generic Bootloader exists only on Turing and GA100.  To a=
+void a bogus
+> +        // console error message on other platforms, only try to load it=
+ if it's
+> +        // supposed to be there.
+> +        let gbl_fw =3D if chipset < Chipset::GA102 {
+> +            Some(super::request_firmware(
+> +                dev,
+> +                chipset,
+> +                "gen_bootloader",
+> +                FIRMWARE_VERSION,
+> +            )?)
+> +        } else {
+> +            None
+> +        };
+> +
+> +        let gbl =3D match gbl_fw {
+> +            Some(fw) =3D> {
+> +                let hdr =3D fw
+> +                    .data()
+> +                    .get(0..size_of::<BinHdr>())
+> +                    .and_then(BinHdr::from_bytes_copy)
+> +                    .ok_or(EINVAL)?;
+> +
+> +                let desc_offset =3D usize::from_safe_cast(hdr.header_off=
+set);
+> +                let desc =3D fw
+> +                    .data()
+> +                    .get(desc_offset..desc_offset + size_of::<Bootloader=
+Desc>())
+> +                    .and_then(BootloaderDesc::from_bytes_copy)
+> +                    .ok_or(EINVAL)?;
+> +
+> +                let ucode_start =3D usize::from_safe_cast(hdr.data_offse=
+t);
+> +                let ucode_size =3D usize::from_safe_cast(hdr.data_size);
+> +                let ucode_data =3D fw
+> +                    .data()
+> +                    .get(ucode_start..ucode_start + ucode_size)
+> +                    .ok_or(EINVAL)?;
+> +
+> +                let mut ucode =3D KVec::new();
+> +                ucode.extend_from_slice(ucode_data, GFP_KERNEL)?;
+> +
+> +                Some(GenericBootloader { desc, ucode })
+> +            }
+> +            None =3D> None,
+> +        };
+> +
+>          Ok(FwsecFirmware {
+>              desc,
+>              ucode: ucode_signed,
+> +            gen_bootloader: gbl,
+>          })
+>      }
