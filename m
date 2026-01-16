@@ -2,21 +2,27 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id DD663D38DB4
-	for <lists+nouveau@lfdr.de>; Sat, 17 Jan 2026 11:21:03 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id B3F08D38DB5
+	for <lists+nouveau@lfdr.de>; Sat, 17 Jan 2026 11:21:04 +0100 (CET)
 Received: from kara.freedesktop.org (unknown [131.252.210.166])
-	by gabe.freedesktop.org (Postfix) with ESMTPS id 8C19A10E2AD;
+	by gabe.freedesktop.org (Postfix) with ESMTPS id E5F1C10E2D0;
 	Sat, 17 Jan 2026 10:21:02 +0000 (UTC)
+Authentication-Results: gabe.freedesktop.org;
+	dkim=fail reason="signature verification failed" (1024-bit key; unprotected) header.d=suse.cz header.i=@suse.cz header.b="Mo+68MVr";
+	dkim=permerror (0-bit key) header.d=suse.cz header.i=@suse.cz header.b="Oj286jig";
+	dkim=fail reason="signature verification failed" (1024-bit key) header.d=suse.cz header.i=@suse.cz header.b="rTK0cGo1";
+	dkim=permerror (0-bit key) header.d=suse.cz header.i=@suse.cz header.b="fZ6A3sjl";
+	dkim-atps=neutral
 Received: from kara.freedesktop.org (localhost [127.0.0.1])
-	by kara.freedesktop.org (Postfix) with ESMTP id 24D1444CB3;
+	by kara.freedesktop.org (Postfix) with ESMTP id 74ED244CB3;
 	Sat, 17 Jan 2026 10:12:25 +0000 (UTC)
 ARC-Seal: i=1; cv=none; a=rsa-sha256; d=lists.freedesktop.org;
  s=20240201; t=1768644745;
- b=KSyLNdlyMyqu8NNzFu7l+Oz7vuRvEIC9Go73PCTj0RFhdUnGMW6ttdolx5KHIAKhqFFgG
- ZJJK4uYaZ0uNsjerSv77QaNZaaHpHSC7ASHzawKcEVzxuRSy5c6E7Su5q4WlNYp0WlT7X7J
- ATkW5aR/PfSyE71FV6k4o0nRIWWUZMZz7xMtzahG0yXP7lfjxMQTUmax7QEfpARtUKb5NrV
- TQe3lg9FJANfVKHfR1toTw0roEe1lDbZc3V9jDabKyr9z1n0jd0COxt7EMD+Ju5O9yvT8t6
- +sNCGOcLFHL5seAyfZXtul+/DsXPbWCd69MPJyiyR7mJ4PBBF6kSc6QSL/8w==
+ b=parbdTWj2gVq3BqbQxFOUnMh+wQ3e2HJRSWD9lcaZhD6eH8w/N2W/7auKSS6/JcL1lcW+
+ r73TNN/f3yBh5QQB7ritt2qZPEVaI8Tv4Vp4vNGeTfEPuHmw4GWBeJomvSjWCFEcyWd551j
+ e0QRLJ0ryC2vxPtOS6LM36sD8KVu9peRD/E1XRtn2iKaSKo+U9QH4jxGU9fynxh8Z41d120
+ R/HDN7c1R0VuVAB9cPMlWTeWxOn8+JE7Boho4/9PIfwsnPRGGebJsQXI/bjLXIzkYLsEjG3
+ u+rjZR7WWGAVu8xw62pBvv/BfgUj5TKs1BRvtefOXRJahbgrJxEfEIP1eAQg==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed;
  d=lists.freedesktop.org; s=20240201; t=1768644745; h=from : sender :
  reply-to : subject : date : message-id : to : cc : mime-version :
@@ -25,54 +31,94 @@ ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed;
  resent-to : resent-cc : resent-message-id : in-reply-to : references :
  list-id : list-help : list-unsubscribe : list-subscribe : list-post :
  list-owner : list-archive;
- bh=sOtTf9haEQ9bDW7hx4S6Kpvek/si/81/SSAc2MauChM=;
- b=xhXsryFlTFmDw1O155UNjPMiI9G/RglHoBivrroGIwJB+a0sqq/p6YN99ViVRXjOT3PP1
- NDO5WizgORgN1pVpM2ywadHtMjyvV48fUIkrtwPQFRMMBE5KrsJgKKlZOc2gXvyDNBCOLTk
- Td6xVxaT3FyPf7n93nlPjRMCSoswXd4yeTzwgjiBMUhS6gO5bZP+giHxAcj+Tv3dFXoMFQ0
- o2eL2lZ4KaD14KHkQQYyJn1lmPFKwMDtN3ufy8W4nSSXztt8J7ZQejMhx6V9oocSmeav5E4
- NzuQYP3weOoWpDJehInF7VDkO1Kfq9Y+5u0O0lLfjB8T8cD9VBqQWSry67kA==
-ARC-Authentication-Results: i=1; mail.freedesktop.org; dkim=fail;
+ bh=bisbCLm02jmO7kyrUXkvEcJg6kYp00MTdd1BdKawzFo=;
+ b=N5O1nL5TzDsO5Aeyg7md7UWsDdsunoNistSyD9Sy3XCC/v3Zznqc+Ysh7z2vGwzRjHuL4
+ ZWc2tymyI/c3kd3rOxSvyX11qFC48WYPVLOaAyvD0h1tPJSi9gPXVSl/XD0NGkF7mBolI5K
+ oSpOIkfollGpZMUEviVfvUtkKwv/sdKz5Kth20b2u66qkbIpP38wIztttk0p66+6O30jb2E
+ xM7hMUlQUdOTh9ctxhW2OUczQEEQPeyDNOInUI5yeMdBnZQ/b9Qahyho9UclKzo6ROZYZj9
+ MAwsF31jHuXIO+K4ihE+ffVuLa6ISQUILxxGLImBjoWm4NsGSeZhYri82atg==
+ARC-Authentication-Results: i=1; mail.freedesktop.org;
+ dkim=pass header.d=suse.cz;
   arc=none (Message is not ARC signed);
   dmarc=none
-Authentication-Results: mail.freedesktop.org; dkim=fail;
+Authentication-Results: mail.freedesktop.org; dkim=pass header.d=suse.cz;
  arc=none (Message is not ARC signed); dmarc=none
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by kara.freedesktop.org (Postfix) with ESMTPS id E0E4740635
-	for <nouveau@lists.freedesktop.org>; Fri, 16 Jan 2026 17:19:03 +0000 (UTC)
-Received: from smtp-out2.suse.de (smtp-out2.suse.de [195.135.223.131])
-	by gabe.freedesktop.org (Postfix) with ESMTPS id 6E45110E910
-	for <nouveau@lists.freedesktop.org>; Fri, 16 Jan 2026 17:27:39 +0000 (UTC)
-Received: from imap1.dmz-prg2.suse.org (imap1.dmz-prg2.suse.org
- [IPv6:2a07:de40:b281:104:10:150:64:97])
+	by kara.freedesktop.org (Postfix) with ESMTPS id D795E40744
+	for <nouveau@lists.freedesktop.org>; Fri, 16 Jan 2026 19:08:50 +0000 (UTC)
+Received: from smtp-out1.suse.de (smtp-out1.suse.de [195.135.223.130])
+	by gabe.freedesktop.org (Postfix) with ESMTPS id 6C24810E91D
+	for <nouveau@lists.freedesktop.org>; Fri, 16 Jan 2026 19:17:26 +0000 (UTC)
+Received: from imap1.dmz-prg2.suse.org (unknown [10.150.64.97])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest
  SHA256)
 	(No client certificate requested)
-	by smtp-out2.suse.de (Postfix) with ESMTPS id 26A185BCEE;
-	Fri, 16 Jan 2026 17:27:38 +0000 (UTC)
+	by smtp-out1.suse.de (Postfix) with ESMTPS id 8084C33699;
+	Fri, 16 Jan 2026 19:17:23 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.cz;
+ s=susede2_rsa;
+	t=1768591044;
+ h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
+	 mime-version:mime-version:content-type:content-type:
+	 content-transfer-encoding:content-transfer-encoding:
+	 in-reply-to:in-reply-to:references:references:autocrypt:autocrypt;
+	bh=bisbCLm02jmO7kyrUXkvEcJg6kYp00MTdd1BdKawzFo=;
+	b=Mo+68MVrcphyHUMmUlW76Ea+IsmX87ibhv7WIG7yqlPQbMBV6bacUF1uDNdefDYPXE5LtZ
+	NWFrlDlvXLchecXoIBohgRX0CtpRYvHwENNvD/NQ5JLxx+H89GoDT9MJHrJHbp75Kwv7yV
+	s8DTUjmNPC47SAG3Go3HG11sGVtN+p0=
+DKIM-Signature: v=1; a=ed25519-sha256; c=relaxed/relaxed; d=suse.cz;
+	s=susede2_ed25519; t=1768591044;
+	h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
+	 mime-version:mime-version:content-type:content-type:
+	 content-transfer-encoding:content-transfer-encoding:
+	 in-reply-to:in-reply-to:references:references:autocrypt:autocrypt;
+	bh=bisbCLm02jmO7kyrUXkvEcJg6kYp00MTdd1BdKawzFo=;
+	b=Oj286jigOR0MEqC+M/Sg6/yRSSNYgmTKItEDIVykS1qj8qDWAvzuxdd2jgg22+SAUnUt+F
+	xVlgq40gtnt/FgAw==
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.cz;
+ s=susede2_rsa;
+	t=1768591043;
+ h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
+	 mime-version:mime-version:content-type:content-type:
+	 content-transfer-encoding:content-transfer-encoding:
+	 in-reply-to:in-reply-to:references:references:autocrypt:autocrypt;
+	bh=bisbCLm02jmO7kyrUXkvEcJg6kYp00MTdd1BdKawzFo=;
+	b=rTK0cGo13Lnb3UHlVksaG/Tvwtp5cVmYRGk3/NxeEipVJk2HKo4DGENgtF6P4ohfHFgl24
+	nYqzuIJ3uepxhLKDkkgtMRvMC0YHa9qtv+6mlENtQODsN5FnNoA91JEZNKv33hagRw9MwM
+	8hIdlBl7xl4h98om58DpHaZA/tSZsAM=
+DKIM-Signature: v=1; a=ed25519-sha256; c=relaxed/relaxed; d=suse.cz;
+	s=susede2_ed25519; t=1768591043;
+	h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
+	 mime-version:mime-version:content-type:content-type:
+	 content-transfer-encoding:content-transfer-encoding:
+	 in-reply-to:in-reply-to:references:references:autocrypt:autocrypt;
+	bh=bisbCLm02jmO7kyrUXkvEcJg6kYp00MTdd1BdKawzFo=;
+	b=fZ6A3sjlOuoCcXiAId99hN+SdJvIBtJ9iF/7w7p/MGNiuyOUn2LXgyzUpzyrH/OhgGVRSa
+	Y4+YVjsFVyGZfZAg==
 Received: from imap1.dmz-prg2.suse.org (localhost [127.0.0.1])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest
  SHA256)
 	(No client certificate requested)
-	by imap1.dmz-prg2.suse.org (Postfix) with ESMTPS id D33633EA63;
-	Fri, 16 Jan 2026 17:27:37 +0000 (UTC)
+	by imap1.dmz-prg2.suse.org (Postfix) with ESMTPS id 334C03EA63;
+	Fri, 16 Jan 2026 19:17:23 +0000 (UTC)
 Received: from dovecot-director2.suse.de ([2a07:de40:b281:106:10:150:64:167])
 	by imap1.dmz-prg2.suse.org with ESMTPSA
-	id /QGJMAl1ammlHgAAD6G6ig
-	(envelope-from <vbabka@suse.cz>); Fri, 16 Jan 2026 17:27:37 +0000
-Message-ID: <4e100125-ed70-4ec9-a0fa-5214bccd7cf3@suse.cz>
-Date: Fri, 16 Jan 2026 18:27:37 +0100
+	id cWpiCsOOamnQBgAAD6G6ig
+	(envelope-from <vbabka@suse.cz>); Fri, 16 Jan 2026 19:17:23 +0000
+Message-ID: <8006ea5f-8845-436a-a2d7-125399428762@suse.cz>
+Date: Fri, 16 Jan 2026 20:17:22 +0100
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
 Subject: Re: [PATCH v6 1/5] mm/zone_device: Reinitialize large zone device
  private folios
 Content-Language: en-US
-To: Jason Gunthorpe <jgg@ziepe.ca>
+To: Jason Gunthorpe <jgg@nvidia.com>,
+ Francois Dugast <francois.dugast@intel.com>
 References: <20260116111325.1736137-1-francois.dugast@intel.com>
  <20260116111325.1736137-2-francois.dugast@intel.com>
- <ed6ca250-67ee-4f7a-bc3b-66169494549a@suse.cz>
- <20260116172052.GC961572@ziepe.ca>
+ <20260116174947.GA1134434@nvidia.com>
 From: Vlastimil Babka <vbabka@suse.cz>
 Autocrypt: addr=vbabka@suse.cz; keydata=
  xsFNBFZdmxYBEADsw/SiUSjB0dM+vSh95UkgcHjzEVBlby/Fg+g42O7LAEkCYXi/vvq31JTB
@@ -113,32 +159,42 @@ Autocrypt: addr=vbabka@suse.cz; keydata=
  rywqgzTUhHFKKF6/9L/lYtrNcHU8Z6Y4Ju/MLUiNYkmtrGIMnkjKCiRqlRrZE/v5YFHbayRD
  dJKXobXTtCBYpLJM4ZYRpGZXne/FAtWNe4KbNJJqxMvrTOrnIatPj8NhBVI0RSJRsbilh6TE
  m6M14QORSWTLRg==
-In-Reply-To: <20260116172052.GC961572@ziepe.ca>
+In-Reply-To: <20260116174947.GA1134434@nvidia.com>
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 7bit
-X-Rspamd-Pre-Result: action=no action;
-	module=replies;
-	Message is reply to one we originated
-X-Spamd-Result: default: False [-4.00 / 50.00];
-	REPLY(-4.00)[]
-X-Spam-Flag: NO
-X-Spam-Score: -4.00
-X-Rspamd-Queue-Id: 26A185BCEE
-X-Rspamd-Pre-Result: action=no action;
-	module=replies;
-	Message is reply to one we originated
-X-Rspamd-Action: no action
-X-Rspamd-Server: rspamd2.dmz-prg2.suse.org
+X-Spam-Score: -4.30
+X-Spamd-Result: default: False [-4.30 / 50.00];
+	BAYES_HAM(-3.00)[100.00%];
+	NEURAL_HAM_LONG(-1.00)[-1.000];
+	NEURAL_HAM_SHORT(-0.20)[-0.997];
+	MIME_GOOD(-0.10)[text/plain];
+	RCVD_VIA_SMTP_AUTH(0.00)[];
+	ARC_NA(0.00)[];
+	FREEMAIL_ENVRCPT(0.00)[gmail.com];
+	MIME_TRACE(0.00)[0:+];
+	FUZZY_RATELIMITED(0.00)[rspamd.com];
+	TO_DN_SOME(0.00)[];
+	RCPT_COUNT_TWELVE(0.00)[38];
+	RCVD_TLS_ALL(0.00)[];
+	MID_RHS_MATCH_FROM(0.00)[];
+	DKIM_SIGNED(0.00)[suse.cz:s=susede2_rsa,suse.cz:s=susede2_ed25519];
+	FROM_HAS_DN(0.00)[];
+	FREEMAIL_CC(0.00)[lists.freedesktop.org,intel.com,nvidia.com,linux.ibm.com,gmail.com,ellerman.id.au,kernel.org,amd.com,ffwll.ch,linux.intel.com,suse.de,redhat.com,linux-foundation.org,oracle.com,google.com,suse.com,lists.ozlabs.org,vger.kernel.org,kvack.org];
+	R_RATELIMIT(0.00)[to_ip_from(RLzhxcfrrwnfnqtbioy5kgo5ee)];
+	FROM_EQ_ENVFROM(0.00)[];
+	TO_MATCH_ENVRCPT_ALL(0.00)[];
+	RCVD_COUNT_TWO(0.00)[2];
+	DBL_BLOCKED_OPENRESOLVER(0.00)[imap1.dmz-prg2.suse.org:helo,suse.cz:mid]
 X-Spam-Level: 
+X-Spam-Flag: NO
 X-MailFrom: vbabka@suse.cz
 X-Mailman-Rule-Hits: nonmember-moderation
 X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency;
  loop; banned-address; member-moderation
-Message-ID-Hash: GFIVBHNDTSSS3Q36ADBNFNFCUBPR5BIS
-X-Message-ID-Hash: GFIVBHNDTSSS3Q36ADBNFNFCUBPR5BIS
+Message-ID-Hash: XWSAHHHMS7ICRK26QFIBBVZUJIOD4RSZ
+X-Message-ID-Hash: XWSAHHHMS7ICRK26QFIBBVZUJIOD4RSZ
 X-Mailman-Approved-At: Sat, 17 Jan 2026 10:12:22 +0000
-CC: Francois Dugast <francois.dugast@intel.com>,
- intel-xe@lists.freedesktop.org, dri-devel@lists.freedesktop.org,
+CC: intel-xe@lists.freedesktop.org, dri-devel@lists.freedesktop.org,
  Matthew Brost <matthew.brost@intel.com>, Zi Yan <ziy@nvidia.com>,
  Alistair Popple <apopple@nvidia.com>,
  adhavan Srinivasan <maddy@linux.ibm.com>,
@@ -163,9 +219,9 @@ X-Mailman-Version: 3.3.8
 Precedence: list
 List-Id: Nouveau development list <nouveau.lists.freedesktop.org>
 Archived-At: 
- <https://lists.freedesktop.org/hyperkitty/list/nouveau@lists.freedesktop.org/message/GFIVBHNDTSSS3Q36ADBNFNFCUBPR5BIS/>
+ <https://lists.freedesktop.org/hyperkitty/list/nouveau@lists.freedesktop.org/message/XWSAHHHMS7ICRK26QFIBBVZUJIOD4RSZ/>
 Archived-At: 
- <https://lore.freedesktop.org/4e100125-ed70-4ec9-a0fa-5214bccd7cf3@suse.cz/>
+ <https://lore.freedesktop.org/8006ea5f-8845-436a-a2d7-125399428762@suse.cz/>
 List-Archive: 
  <https://lists.freedesktop.org/hyperkitty/list/nouveau@lists.freedesktop.org/>
 List-Archive: <https://lore.freedesktop.org/nouveau>
@@ -175,74 +231,70 @@ List-Post: <mailto:nouveau@lists.freedesktop.org>
 List-Subscribe: <mailto:nouveau-join@lists.freedesktop.org>
 List-Unsubscribe: <mailto:nouveau-leave@lists.freedesktop.org>
 
-On 1/16/26 18:20, Jason Gunthorpe wrote:
-> On Fri, Jan 16, 2026 at 05:07:09PM +0100, Vlastimil Babka wrote:
->> On 1/16/26 12:10, Francois Dugast wrote:
->> > From: Matthew Brost <matthew.brost@intel.com>
->> > diff --git a/mm/memremap.c b/mm/memremap.c
->> > index 63c6ab4fdf08..ac7be07e3361 100644
->> > --- a/mm/memremap.c
->> > +++ b/mm/memremap.c
->> > @@ -477,10 +477,43 @@ void free_zone_device_folio(struct folio *folio)
->> >  	}
->> >  }
->> >  
->> > -void zone_device_page_init(struct page *page, unsigned int order)
->> > +void zone_device_page_init(struct page *page, struct dev_pagemap *pgmap,
->> > +			   unsigned int order)
->> >  {
->> > +	struct page *new_page = page;
->> > +	unsigned int i;
->> > +
->> >  	VM_WARN_ON_ONCE(order > MAX_ORDER_NR_PAGES);
->> >  
->> > +	for (i = 0; i < (1UL << order); ++i, ++new_page) {
->> > +		struct folio *new_folio = (struct folio *)new_page;
->> > +
->> > +		/*
->> > +		 * new_page could have been part of previous higher order folio
->> > +		 * which encodes the order, in page + 1, in the flags bits. We
->> > +		 * blindly clear bits which could have set my order field here,
->> > +		 * including page head.
->> > +		 */
->> > +		new_page->flags.f &= ~0xffUL;	/* Clear possible order, page head */
->> > +
->> > +#ifdef NR_PAGES_IN_LARGE_FOLIO
->> > +		/*
->> > +		 * This pointer math looks odd, but new_page could have been
->> > +		 * part of a previous higher order folio, which sets _nr_pages
->> > +		 * in page + 1 (new_page). Therefore, we use pointer casting to
->> > +		 * correctly locate the _nr_pages bits within new_page which
->> > +		 * could have modified by previous higher order folio.
->> > +		 */
->> > +		((struct folio *)(new_page - 1))->_nr_pages = 0;
->> > +#endif
->> > +
->> > +		new_folio->mapping = NULL;
->> > +		new_folio->pgmap = pgmap;	/* Also clear compound head */
->> > +		new_folio->share = 0;   /* fsdax only, unused for device private */
->> > +		VM_WARN_ON_FOLIO(folio_ref_count(new_folio), new_folio);
->> > +		VM_WARN_ON_FOLIO(!folio_is_zone_device(new_folio), new_folio);
->> > +	}
->> > +
->> >  	/*
->> >  	 * Drivers shouldn't be allocating pages after calling
->> >  	 * memunmap_pages().
->> 
->> Can't say I'm a fan of this. It probably works now (so I'm not nacking) but
->> seems rather fragile. It seems likely to me somebody will try to change some
->> implementation detail in the page allocator and not notice it breaks this,
->> for example. I hope we can eventually get to something more robust.
+On 1/16/26 18:49, Jason Gunthorpe wrote:
+> On Fri, Jan 16, 2026 at 12:10:16PM +0100, Francois Dugast wrote:
+>> -void zone_device_page_init(struct page *page, unsigned int order)
+>> +void zone_device_page_init(struct page *page, struct dev_pagemap *pgmap,
+>> +			   unsigned int order)
+>>  {
+>> +	struct page *new_page = page;
+>> +	unsigned int i;
+>> +
+>>  	VM_WARN_ON_ONCE(order > MAX_ORDER_NR_PAGES);
+>>  
+>> +	for (i = 0; i < (1UL << order); ++i, ++new_page) {
+>> +		struct folio *new_folio = (struct folio *)new_page;
+>> +
+>> +		/*
+>> +		 * new_page could have been part of previous higher order folio
+>> +		 * which encodes the order, in page + 1, in the flags bits. We
+>> +		 * blindly clear bits which could have set my order field here,
+>> +		 * including page head.
+>> +		 */
+>> +		new_page->flags.f &= ~0xffUL;	/* Clear possible order, page head */
+>> +
+>> +#ifdef NR_PAGES_IN_LARGE_FOLIO
+>> +		/*
+>> +		 * This pointer math looks odd, but new_page could have been
+>> +		 * part of a previous higher order folio, which sets _nr_pages
+>> +		 * in page + 1 (new_page). Therefore, we use pointer casting to
+>> +		 * correctly locate the _nr_pages bits within new_page which
+>> +		 * could have modified by previous higher order folio.
+>> +		 */
+>> +		((struct folio *)(new_page - 1))->_nr_pages = 0;
+>> +#endif
 > 
-> These pages shouldn't be in the buddy allocator at all? The driver
-> using the ZONE_DEVICE pages is responsible to provide its own
-> allocator.
+> This seems too weird, why is it in the loop?  There is only one
+> _nr_pages per folio.
+
+I suppose we could be getting say an order-9 folio that was previously used
+as two order-8 folios? And each of them had their _nr_pages in their head
+and we can't know that at this point so we have to reset everything?
+
+AFAIU this would not be a problem if the clearing of the previous state was
+done upon freeing, as e.g. v4 did, but I think you also argued it meant
+processing the pages when freeing and then again at reallocation, so it's
+now like this instead?
+
+Or maybe you mean that stray _nr_pages in some tail page from previous
+lifetimes can't affect the current lifetime in a wrong way for something
+looking at said page? I don't know immediately.
+
+> This is mostly zeroing some memory in the tail pages? Why?
 > 
-> Did you mean something else?
-
-Yeah sorry that was imprecise. I meant the struct page/folio layout
-implementation details (which may or may not be related to the page allocator).
-
+> Why can't this use the normal helpers, like memmap_init_compound()?
+> 
+>  struct folio *new_folio = page
+> 
+>  /* First 4 tail pages are part of struct folio */
+>  for (i = 4; i < (1UL << order); i++) {
+>      prep_compound_tail(..)
+>  }
+> 
+>  prep_comound_head(page, order)
+>  new_folio->_nr_pages = 0
+> 
+> ??
+> 
 > Jason
->  
 
