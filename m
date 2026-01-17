@@ -2,226 +2,96 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id B3F08D38DB5
-	for <lists+nouveau@lfdr.de>; Sat, 17 Jan 2026 11:21:04 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 3B1DDD38E06
+	for <lists+nouveau@lfdr.de>; Sat, 17 Jan 2026 12:09:49 +0100 (CET)
 Received: from kara.freedesktop.org (unknown [131.252.210.166])
-	by gabe.freedesktop.org (Postfix) with ESMTPS id E5F1C10E2D0;
-	Sat, 17 Jan 2026 10:21:02 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTPS id 6531A10E0C1;
+	Sat, 17 Jan 2026 11:09:47 +0000 (UTC)
 Authentication-Results: gabe.freedesktop.org;
-	dkim=fail reason="signature verification failed" (1024-bit key; unprotected) header.d=suse.cz header.i=@suse.cz header.b="Mo+68MVr";
-	dkim=permerror (0-bit key) header.d=suse.cz header.i=@suse.cz header.b="Oj286jig";
-	dkim=fail reason="signature verification failed" (1024-bit key) header.d=suse.cz header.i=@suse.cz header.b="rTK0cGo1";
-	dkim=permerror (0-bit key) header.d=suse.cz header.i=@suse.cz header.b="fZ6A3sjl";
+	dkim=fail reason="signature verification failed" (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="fem9nmkE";
 	dkim-atps=neutral
 Received: from kara.freedesktop.org (localhost [127.0.0.1])
-	by kara.freedesktop.org (Postfix) with ESMTP id 74ED244CB3;
-	Sat, 17 Jan 2026 10:12:25 +0000 (UTC)
+	by kara.freedesktop.org (Postfix) with ESMTP id D353E44CB2;
+	Sat, 17 Jan 2026 11:01:09 +0000 (UTC)
 ARC-Seal: i=1; cv=none; a=rsa-sha256; d=lists.freedesktop.org;
- s=20240201; t=1768644745;
- b=parbdTWj2gVq3BqbQxFOUnMh+wQ3e2HJRSWD9lcaZhD6eH8w/N2W/7auKSS6/JcL1lcW+
- r73TNN/f3yBh5QQB7ritt2qZPEVaI8Tv4Vp4vNGeTfEPuHmw4GWBeJomvSjWCFEcyWd551j
- e0QRLJ0ryC2vxPtOS6LM36sD8KVu9peRD/E1XRtn2iKaSKo+U9QH4jxGU9fynxh8Z41d120
- R/HDN7c1R0VuVAB9cPMlWTeWxOn8+JE7Boho4/9PIfwsnPRGGebJsQXI/bjLXIzkYLsEjG3
- u+rjZR7WWGAVu8xw62pBvv/BfgUj5TKs1BRvtefOXRJahbgrJxEfEIP1eAQg==
+ s=20240201; t=1768647669;
+ b=jL/P5YOG0lECwJf9VRUedHvW9yOnPuNqtM6Fdr2Uj7BuyzxxJALyIM4bzRIq+OLDvBHZx
+ VKKU+4MtSVDvk2m1MoOZsXMKlfo8ld5jUM20zU3FzK5wJBwqF6cCcGHxc0WVCIzq+WcvTcz
+ YdjynuoV3evmhDQj2o4PtkTaq2VvNnD6JX3t4oIwr9MpSWAIdNKcyHg6rNQ+pUYcITRki8j
+ SrC3FpZt9tf8A2iN8eS9+sWVOD6p+bNJ0CsWu5rC4k44C1CNploW+i8TxolZWykPz8FkgI+
+ F6jWDupDlOr/ynexyN8b4xmsysdnvZPMCW9aZ2ct5iBIhApYd+Ayqja9dMYA==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed;
- d=lists.freedesktop.org; s=20240201; t=1768644745; h=from : sender :
+ d=lists.freedesktop.org; s=20240201; t=1768647669; h=from : sender :
  reply-to : subject : date : message-id : to : cc : mime-version :
  content-type : content-transfer-encoding : content-id :
  content-description : resent-date : resent-from : resent-sender :
  resent-to : resent-cc : resent-message-id : in-reply-to : references :
  list-id : list-help : list-unsubscribe : list-subscribe : list-post :
  list-owner : list-archive;
- bh=bisbCLm02jmO7kyrUXkvEcJg6kYp00MTdd1BdKawzFo=;
- b=N5O1nL5TzDsO5Aeyg7md7UWsDdsunoNistSyD9Sy3XCC/v3Zznqc+Ysh7z2vGwzRjHuL4
- ZWc2tymyI/c3kd3rOxSvyX11qFC48WYPVLOaAyvD0h1tPJSi9gPXVSl/XD0NGkF7mBolI5K
- oSpOIkfollGpZMUEviVfvUtkKwv/sdKz5Kth20b2u66qkbIpP38wIztttk0p66+6O30jb2E
- xM7hMUlQUdOTh9ctxhW2OUczQEEQPeyDNOInUI5yeMdBnZQ/b9Qahyho9UclKzo6ROZYZj9
- MAwsF31jHuXIO+K4ihE+ffVuLa6ISQUILxxGLImBjoWm4NsGSeZhYri82atg==
+ bh=uLT57iVuc58koXZhJAPKpYJNplINGS977h2v/Yo8aBc=;
+ b=pcYbN6g9yYL2h0uEbwoq8DBTZzN94bHUdRbAV0J9XbmzPOZBzmX1fcdqq8qIvItZdJ31d
+ G2BD19UMnvrMRhu1zR2vc6mptFYIt89/5UWw16P2nX5Do0MzVO/dFLNiflpCXvTz0HnK44v
+ EbfwSiKAFabv/lAP135SKS9jm5gP2RVVVK44L+bOTZGdMBGOvAoG52kTNYqC0HslTPkdAs2
+ bm44/guTEZK9DPfaeSKf8czw37KI/6R83A2iic15dYUyAIsRhPdCQ/dKph3Vu4/NlBRTq1w
+ 60bFg3lGZ2JE+Or8sKPBV3fLxb+ite65kfUBYpJPCZRlUfOXBCsPWfDtGTbA==
 ARC-Authentication-Results: i=1; mail.freedesktop.org;
- dkim=pass header.d=suse.cz;
+ dkim=pass header.d=kernel.org;
   arc=none (Message is not ARC signed);
-  dmarc=none
-Authentication-Results: mail.freedesktop.org; dkim=pass header.d=suse.cz;
- arc=none (Message is not ARC signed); dmarc=none
+  dmarc=pass (Used From Domain Record) header.from=kernel.org
+ policy.dmarc=quarantine
+Authentication-Results: mail.freedesktop.org; dkim=pass header.d=kernel.org;
+ arc=none (Message is not ARC signed);
+ dmarc=pass (Used From Domain Record) header.from=kernel.org
+ policy.dmarc=quarantine
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by kara.freedesktop.org (Postfix) with ESMTPS id D795E40744
-	for <nouveau@lists.freedesktop.org>; Fri, 16 Jan 2026 19:08:50 +0000 (UTC)
-Received: from smtp-out1.suse.de (smtp-out1.suse.de [195.135.223.130])
-	by gabe.freedesktop.org (Postfix) with ESMTPS id 6C24810E91D
-	for <nouveau@lists.freedesktop.org>; Fri, 16 Jan 2026 19:17:26 +0000 (UTC)
-Received: from imap1.dmz-prg2.suse.org (unknown [10.150.64.97])
-	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
-	 key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest
- SHA256)
-	(No client certificate requested)
-	by smtp-out1.suse.de (Postfix) with ESMTPS id 8084C33699;
-	Fri, 16 Jan 2026 19:17:23 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.cz;
- s=susede2_rsa;
-	t=1768591044;
- h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
-	 mime-version:mime-version:content-type:content-type:
-	 content-transfer-encoding:content-transfer-encoding:
-	 in-reply-to:in-reply-to:references:references:autocrypt:autocrypt;
-	bh=bisbCLm02jmO7kyrUXkvEcJg6kYp00MTdd1BdKawzFo=;
-	b=Mo+68MVrcphyHUMmUlW76Ea+IsmX87ibhv7WIG7yqlPQbMBV6bacUF1uDNdefDYPXE5LtZ
-	NWFrlDlvXLchecXoIBohgRX0CtpRYvHwENNvD/NQ5JLxx+H89GoDT9MJHrJHbp75Kwv7yV
-	s8DTUjmNPC47SAG3Go3HG11sGVtN+p0=
-DKIM-Signature: v=1; a=ed25519-sha256; c=relaxed/relaxed; d=suse.cz;
-	s=susede2_ed25519; t=1768591044;
-	h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
-	 mime-version:mime-version:content-type:content-type:
-	 content-transfer-encoding:content-transfer-encoding:
-	 in-reply-to:in-reply-to:references:references:autocrypt:autocrypt;
-	bh=bisbCLm02jmO7kyrUXkvEcJg6kYp00MTdd1BdKawzFo=;
-	b=Oj286jigOR0MEqC+M/Sg6/yRSSNYgmTKItEDIVykS1qj8qDWAvzuxdd2jgg22+SAUnUt+F
-	xVlgq40gtnt/FgAw==
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.cz;
- s=susede2_rsa;
-	t=1768591043;
- h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
-	 mime-version:mime-version:content-type:content-type:
-	 content-transfer-encoding:content-transfer-encoding:
-	 in-reply-to:in-reply-to:references:references:autocrypt:autocrypt;
-	bh=bisbCLm02jmO7kyrUXkvEcJg6kYp00MTdd1BdKawzFo=;
-	b=rTK0cGo13Lnb3UHlVksaG/Tvwtp5cVmYRGk3/NxeEipVJk2HKo4DGENgtF6P4ohfHFgl24
-	nYqzuIJ3uepxhLKDkkgtMRvMC0YHa9qtv+6mlENtQODsN5FnNoA91JEZNKv33hagRw9MwM
-	8hIdlBl7xl4h98om58DpHaZA/tSZsAM=
-DKIM-Signature: v=1; a=ed25519-sha256; c=relaxed/relaxed; d=suse.cz;
-	s=susede2_ed25519; t=1768591043;
-	h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
-	 mime-version:mime-version:content-type:content-type:
-	 content-transfer-encoding:content-transfer-encoding:
-	 in-reply-to:in-reply-to:references:references:autocrypt:autocrypt;
-	bh=bisbCLm02jmO7kyrUXkvEcJg6kYp00MTdd1BdKawzFo=;
-	b=fZ6A3sjlOuoCcXiAId99hN+SdJvIBtJ9iF/7w7p/MGNiuyOUn2LXgyzUpzyrH/OhgGVRSa
-	Y4+YVjsFVyGZfZAg==
-Received: from imap1.dmz-prg2.suse.org (localhost [127.0.0.1])
-	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
-	 key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest
- SHA256)
-	(No client certificate requested)
-	by imap1.dmz-prg2.suse.org (Postfix) with ESMTPS id 334C03EA63;
-	Fri, 16 Jan 2026 19:17:23 +0000 (UTC)
-Received: from dovecot-director2.suse.de ([2a07:de40:b281:106:10:150:64:167])
-	by imap1.dmz-prg2.suse.org with ESMTPSA
-	id cWpiCsOOamnQBgAAD6G6ig
-	(envelope-from <vbabka@suse.cz>); Fri, 16 Jan 2026 19:17:23 +0000
-Message-ID: <8006ea5f-8845-436a-a2d7-125399428762@suse.cz>
-Date: Fri, 16 Jan 2026 20:17:22 +0100
-MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v6 1/5] mm/zone_device: Reinitialize large zone device
- private folios
-Content-Language: en-US
-To: Jason Gunthorpe <jgg@nvidia.com>,
- Francois Dugast <francois.dugast@intel.com>
-References: <20260116111325.1736137-1-francois.dugast@intel.com>
- <20260116111325.1736137-2-francois.dugast@intel.com>
- <20260116174947.GA1134434@nvidia.com>
-From: Vlastimil Babka <vbabka@suse.cz>
-Autocrypt: addr=vbabka@suse.cz; keydata=
- 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
- m6M14QORSWTLRg==
-In-Reply-To: <20260116174947.GA1134434@nvidia.com>
+	by kara.freedesktop.org (Postfix) with ESMTPS id CA5BF44C9B
+	for <nouveau@lists.freedesktop.org>; Sat, 17 Jan 2026 11:01:07 +0000 (UTC)
+Received: from tor.source.kernel.org (tor.source.kernel.org [172.105.4.254])
+	by gabe.freedesktop.org (Postfix) with ESMTPS id DADDC10E0AB
+	for <nouveau@lists.freedesktop.org>; Sat, 17 Jan 2026 11:09:44 +0000 (UTC)
+Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
+	by tor.source.kernel.org (Postfix) with ESMTP id BECA360127;
+	Sat, 17 Jan 2026 11:09:43 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id E746DC4CEF7;
+	Sat, 17 Jan 2026 11:09:41 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+	s=k20201202; t=1768648183;
+	bh=kbE1DSqN+rccLY1JWsgg75NViBt2CK/o9u0y2a8INzQ=;
+	h=Date:Subject:Cc:To:From:References:In-Reply-To:From;
+	b=fem9nmkEeoHe32FoOTZ7ThwNLLg1lks4gJLIj3E8dH0Cc4VaICGuihZkukhBl2AOO
+	 pCHfcNlf6PxmBOk9H7R2gXhEi9QzyVDdXkZe/W6IEoTScxpfuu8kGsbi5rhbCRgPy5
+	 EybTH280Yy26EKH/n+7NScvodYAjERPychBdGT1Fh60sahuc2rmiQNRiOrHq1bP1hB
+	 HDi9FlCTu4xE0Xs3EqQhccM1T4KijwcV4fd/jUM6s6lozK7Q7yfuVSx+C3K3grWj0X
+	 x+6pQ8gGmMjzYiCOVhiQBYNdycPrr7qldzYXaLuZfn0MI1SP7Dl4ugEAnYEqrWgk7Z
+	 qvoGa685HZYeQ==
+Mime-Version: 1.0
+Content-Transfer-Encoding: quoted-printable
 Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
-X-Spam-Score: -4.30
-X-Spamd-Result: default: False [-4.30 / 50.00];
-	BAYES_HAM(-3.00)[100.00%];
-	NEURAL_HAM_LONG(-1.00)[-1.000];
-	NEURAL_HAM_SHORT(-0.20)[-0.997];
-	MIME_GOOD(-0.10)[text/plain];
-	RCVD_VIA_SMTP_AUTH(0.00)[];
-	ARC_NA(0.00)[];
-	FREEMAIL_ENVRCPT(0.00)[gmail.com];
-	MIME_TRACE(0.00)[0:+];
-	FUZZY_RATELIMITED(0.00)[rspamd.com];
-	TO_DN_SOME(0.00)[];
-	RCPT_COUNT_TWELVE(0.00)[38];
-	RCVD_TLS_ALL(0.00)[];
-	MID_RHS_MATCH_FROM(0.00)[];
-	DKIM_SIGNED(0.00)[suse.cz:s=susede2_rsa,suse.cz:s=susede2_ed25519];
-	FROM_HAS_DN(0.00)[];
-	FREEMAIL_CC(0.00)[lists.freedesktop.org,intel.com,nvidia.com,linux.ibm.com,gmail.com,ellerman.id.au,kernel.org,amd.com,ffwll.ch,linux.intel.com,suse.de,redhat.com,linux-foundation.org,oracle.com,google.com,suse.com,lists.ozlabs.org,vger.kernel.org,kvack.org];
-	R_RATELIMIT(0.00)[to_ip_from(RLzhxcfrrwnfnqtbioy5kgo5ee)];
-	FROM_EQ_ENVFROM(0.00)[];
-	TO_MATCH_ENVRCPT_ALL(0.00)[];
-	RCVD_COUNT_TWO(0.00)[2];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[imap1.dmz-prg2.suse.org:helo,suse.cz:mid]
-X-Spam-Level: 
-X-Spam-Flag: NO
-X-MailFrom: vbabka@suse.cz
+Date: Sat, 17 Jan 2026 12:09:39 +0100
+Message-Id: <DFQTGD2X29SA.SFSXUTFX6CWQ@kernel.org>
+Subject: Re: [PATCH v5 1/8] rust: pci: add device name method
+To: "Timur Tabi" <ttabi@nvidia.com>
+From: "Danilo Krummrich" <dakr@kernel.org>
+References: <20260116214959.641032-1-ttabi@nvidia.com>
+ <20260116214959.641032-2-ttabi@nvidia.com>
+In-Reply-To: <20260116214959.641032-2-ttabi@nvidia.com>
+Message-ID-Hash: VDS5FPKLNVCMGNU4ZQZZ65WNNDIVJLB3
+X-Message-ID-Hash: VDS5FPKLNVCMGNU4ZQZZ65WNNDIVJLB3
+X-MailFrom: dakr@kernel.org
 X-Mailman-Rule-Hits: nonmember-moderation
 X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency;
  loop; banned-address; member-moderation
-Message-ID-Hash: XWSAHHHMS7ICRK26QFIBBVZUJIOD4RSZ
-X-Message-ID-Hash: XWSAHHHMS7ICRK26QFIBBVZUJIOD4RSZ
-X-Mailman-Approved-At: Sat, 17 Jan 2026 10:12:22 +0000
-CC: intel-xe@lists.freedesktop.org, dri-devel@lists.freedesktop.org,
- Matthew Brost <matthew.brost@intel.com>, Zi Yan <ziy@nvidia.com>,
- Alistair Popple <apopple@nvidia.com>,
- adhavan Srinivasan <maddy@linux.ibm.com>,
- Nicholas Piggin <npiggin@gmail.com>, Michael Ellerman <mpe@ellerman.id.au>,
- "Christophe Leroy (CS GROUP)" <chleroy@kernel.org>,
- Felix Kuehling <Felix.Kuehling@amd.com>,
- Alex Deucher <alexander.deucher@amd.com>,
- =?UTF-8?Q?Christian_K=C3=B6nig?= <christian.koenig@amd.com>,
- Simona Vetter <simona@ffwll.ch>,
- Maarten Lankhorst <maarten.lankhorst@linux.intel.com>,
- Maxime Ripard <mripard@kernel.org>, Danilo Krummrich <dakr@kernel.org>,
- David Hildenbrand <david@kernel.org>, Oscar Salvador <osalvador@suse.de>,
- Andrew Morton <akpm@linux-foundation.org>, Leon Romanovsky <leon@kernel.org>,
- Lorenzo Stoakes <lorenzo.stoakes@oracle.com>,
- "Liam R . Howlett" <Liam.Howlett@oracle.com>,
- Mike Rapoport <rppt@kernel.org>, Suren Baghdasaryan <surenb@google.com>,
- Michal Hocko <mhocko@suse.com>, linuxppc-dev@lists.ozlabs.org,
- kvm@vger.kernel.org, linux-kernel@vger.kernel.org,
- amd-gfx@lists.freedesktop.org, nouveau@lists.freedesktop.org,
- linux-mm@kvack.org, linux-cxl@vger.kernel.org
+CC: Matthew Maurer <mmaurer@google.com>, Gary Guo <gary@garyguo.net>,
+ Joel Fernandes <joelagnelf@nvidia.com>,
+ Alexandre Courbot <acourbot@nvidia.com>, nouveau@lists.freedesktop.org,
+ rust-for-linux@vger.kernel.org
 X-Mailman-Version: 3.3.8
 Precedence: list
 List-Id: Nouveau development list <nouveau.lists.freedesktop.org>
 Archived-At: 
- <https://lists.freedesktop.org/hyperkitty/list/nouveau@lists.freedesktop.org/message/XWSAHHHMS7ICRK26QFIBBVZUJIOD4RSZ/>
+ <https://lists.freedesktop.org/hyperkitty/list/nouveau@lists.freedesktop.org/message/VDS5FPKLNVCMGNU4ZQZZ65WNNDIVJLB3/>
 Archived-At: 
- <https://lore.freedesktop.org/8006ea5f-8845-436a-a2d7-125399428762@suse.cz/>
+ <https://lore.freedesktop.org/DFQTGD2X29SA.SFSXUTFX6CWQ@kernel.org/>
 List-Archive: 
  <https://lists.freedesktop.org/hyperkitty/list/nouveau@lists.freedesktop.org/>
 List-Archive: <https://lore.freedesktop.org/nouveau>
@@ -231,70 +101,70 @@ List-Post: <mailto:nouveau@lists.freedesktop.org>
 List-Subscribe: <mailto:nouveau-join@lists.freedesktop.org>
 List-Unsubscribe: <mailto:nouveau-leave@lists.freedesktop.org>
 
-On 1/16/26 18:49, Jason Gunthorpe wrote:
-> On Fri, Jan 16, 2026 at 12:10:16PM +0100, Francois Dugast wrote:
->> -void zone_device_page_init(struct page *page, unsigned int order)
->> +void zone_device_page_init(struct page *page, struct dev_pagemap *pgmap,
->> +			   unsigned int order)
->>  {
->> +	struct page *new_page = page;
->> +	unsigned int i;
->> +
->>  	VM_WARN_ON_ONCE(order > MAX_ORDER_NR_PAGES);
->>  
->> +	for (i = 0; i < (1UL << order); ++i, ++new_page) {
->> +		struct folio *new_folio = (struct folio *)new_page;
->> +
->> +		/*
->> +		 * new_page could have been part of previous higher order folio
->> +		 * which encodes the order, in page + 1, in the flags bits. We
->> +		 * blindly clear bits which could have set my order field here,
->> +		 * including page head.
->> +		 */
->> +		new_page->flags.f &= ~0xffUL;	/* Clear possible order, page head */
->> +
->> +#ifdef NR_PAGES_IN_LARGE_FOLIO
->> +		/*
->> +		 * This pointer math looks odd, but new_page could have been
->> +		 * part of a previous higher order folio, which sets _nr_pages
->> +		 * in page + 1 (new_page). Therefore, we use pointer casting to
->> +		 * correctly locate the _nr_pages bits within new_page which
->> +		 * could have modified by previous higher order folio.
->> +		 */
->> +		((struct folio *)(new_page - 1))->_nr_pages = 0;
->> +#endif
-> 
-> This seems too weird, why is it in the loop?  There is only one
-> _nr_pages per folio.
-
-I suppose we could be getting say an order-9 folio that was previously used
-as two order-8 folios? And each of them had their _nr_pages in their head
-and we can't know that at this point so we have to reset everything?
-
-AFAIU this would not be a problem if the clearing of the previous state was
-done upon freeing, as e.g. v4 did, but I think you also argued it meant
-processing the pages when freeing and then again at reallocation, so it's
-now like this instead?
-
-Or maybe you mean that stray _nr_pages in some tail page from previous
-lifetimes can't affect the current lifetime in a wrong way for something
-looking at said page? I don't know immediately.
-
-> This is mostly zeroing some memory in the tail pages? Why?
-> 
-> Why can't this use the normal helpers, like memmap_init_compound()?
-> 
->  struct folio *new_folio = page
-> 
->  /* First 4 tail pages are part of struct folio */
->  for (i = 4; i < (1UL << order); i++) {
->      prep_compound_tail(..)
+On Fri Jan 16, 2026 at 10:49 PM CET, Timur Tabi wrote:
+> Add a name() method to the `Device` type, which returns a CStr that
+> contains the device name, typically the BDF address for PCI devices.
+>
+> Signed-off-by: Timur Tabi <ttabi@nvidia.com>
+> ---
+>  rust/helpers/device.c |  5 +++++
+>  rust/kernel/device.rs | 16 ++++++++++++++++
+>  2 files changed, 21 insertions(+)
+>
+> diff --git a/rust/helpers/device.c b/rust/helpers/device.c
+> index 9a4316bafedf..4609b62f6a06 100644
+> --- a/rust/helpers/device.c
+> +++ b/rust/helpers/device.c
+> @@ -25,3 +25,8 @@ void rust_helper_dev_set_drvdata(struct device *dev, vo=
+id *data)
+>  {
+>  	dev_set_drvdata(dev, data);
 >  }
-> 
->  prep_comound_head(page, order)
->  new_folio->_nr_pages = 0
-> 
-> ??
-> 
-> Jason
+> +
+> +const char *rust_helper_dev_name(const struct device *dev)
+
+Please add the __rust_helper annotation.
+
+> +{
+> +	return dev_name(dev);
+> +}
+> diff --git a/rust/kernel/device.rs b/rust/kernel/device.rs
+> index c79be2e2bfe3..636c522a8374 100644
+> --- a/rust/kernel/device.rs
+> +++ b/rust/kernel/device.rs
+> @@ -483,6 +483,22 @@ pub fn fwnode(&self) -> Option<&property::FwNode> {
+>          // defined as a `#[repr(transparent)]` wrapper around `fwnode_ha=
+ndle`.
+>          Some(unsafe { &*fwnode_handle.cast() })
+>      }
+> +
+> +    /// Returns the name of the device.
+> +    ///
+> +    /// This is the kobject name of the device, or its initial name if t=
+he kobject is not yet
+> +    /// available.
+> +    ///
+> +    /// For PCI devices, the name in the format "DDDD:BB:DD.F" where:
+
+This is driver core code, please drop any details for PCI. Also, the subjec=
+t of
+the patch seems wrong.
+
+> +    /// - DDDD is the PCI domain (4 hex digits)
+> +    /// - BB is the bus number (2 hex digits)
+> +    /// - DD is the device number (2 hex digits)
+> +    /// - F is the function number (1 hex digit)
+> +    pub fn name(&self) -> &CStr {
+> +        // SAFETY: By its type invariant `self.as_raw()` is a valid poin=
+ter to a `struct device`.
+> +        // The returned string is valid for the lifetime of the device.
+> +        unsafe { CStr::from_char_ptr(bindings::dev_name(self.as_raw())) =
+}
+> +    }
+>  }
+> =20
+>  // SAFETY: `Device` is a transparent wrapper of a type that doesn't depe=
+nd on `Device`'s generic
+> --=20
+> 2.52.0
 
