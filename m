@@ -2,97 +2,121 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id 7BBDBD38E82
-	for <lists+nouveau@lfdr.de>; Sat, 17 Jan 2026 13:29:18 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 2E129D38EA5
+	for <lists+nouveau@lfdr.de>; Sat, 17 Jan 2026 14:24:05 +0100 (CET)
 Received: from kara.freedesktop.org (unknown [131.252.210.166])
-	by gabe.freedesktop.org (Postfix) with ESMTPS id 12E4410E0C4;
-	Sat, 17 Jan 2026 12:29:16 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTPS id 4035910E09B;
+	Sat, 17 Jan 2026 13:24:03 +0000 (UTC)
 Authentication-Results: gabe.freedesktop.org;
-	dkim=fail reason="signature verification failed" (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="s8r7Yvn3";
+	dkim=fail reason="signature verification failed" (2048-bit key; unprotected) header.d=google.com header.i=@google.com header.b="ZVTuO+/F";
 	dkim-atps=neutral
 Received: from kara.freedesktop.org (localhost [127.0.0.1])
-	by kara.freedesktop.org (Postfix) with ESMTP id 63A6144CB3;
-	Sat, 17 Jan 2026 12:20:38 +0000 (UTC)
+	by kara.freedesktop.org (Postfix) with ESMTP id 7E2D544CA5;
+	Sat, 17 Jan 2026 13:15:25 +0000 (UTC)
 ARC-Seal: i=1; cv=none; a=rsa-sha256; d=lists.freedesktop.org;
- s=20240201; t=1768652438;
- b=OqxOoOUQrFGko71WETe7wwpv3JjAKeAdgeglp3WA8aAL8i50Pvos9EeiJBJb30YLYTxmp
- 44mxv0X0Ags1W4No7KrsNxNpEwwatJuzBpDmmOq1xrVUSOCD0jo48kp1mVhsUKQ3VXCrzdm
- fMAR60Pt3rQCHLzkkqWHjYHmLNlwNyS1WUzpwXMrCNmOqJc176x2SgFb9WeiJVkaK3lZEe3
- iu0DIi0lrEEXSKNpteIKpOBCLoNKFHP2QPquKZmmrgfT1QTNHJgA2na8WdFHo8AAilyqK9W
- ZEy6P/QBOtxOxxSMtbaRXmBrjIZY06Ycjn1bYmCXH9zwHgbSTE46bO7D5elg==
+ s=20240201; t=1768655725;
+ b=j4TpjRTg0WqP3CnpEbDGFdIOGWbbu8LTy4GWCj3nWj7QB9nJRGGrlI2b0qHt6D4PZBavm
+ tL5xupjUnFrxm96y1wtOTY2Lp8S6l7qnq/4pABeqXN1WgjIrPmdOABmWl+oZOrzjTESIGpZ
+ NlvvSlbneTZdwjs0XxfIe/64ROnNrA4rIq/YB/vU16C23rTdBYfxnLfJn6cmUYKZqTa+ySC
+ RUXCwdtctt35RrsfQPCtd4IaMqsKK0kYYaravGXIji68+7Lkk71ji8ignyN2SSU5sO0DX+n
+ 1Tc4qlDwb3LhDEq1CudY88ZV+eeTjLBCISgeCaKTph4fybfw1NzA051BFPWw==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed;
- d=lists.freedesktop.org; s=20240201; t=1768652438; h=from : sender :
+ d=lists.freedesktop.org; s=20240201; t=1768655725; h=from : sender :
  reply-to : subject : date : message-id : to : cc : mime-version :
  content-type : content-transfer-encoding : content-id :
  content-description : resent-date : resent-from : resent-sender :
  resent-to : resent-cc : resent-message-id : in-reply-to : references :
  list-id : list-help : list-unsubscribe : list-subscribe : list-post :
  list-owner : list-archive;
- bh=32iUiC26EcXq1wj4PsiWzSl0d2c886R/zo+oH0Td6hQ=;
- b=RSiS85JzSdsvUfcwJRPmuR5RnSM6XmI4/lExqlwCRco2pLwrGCL6iijAtU6G9EDp4ysig
- +3wW73iah1cMNRxpo1YbTBbkP6paQmbBlnmStMZgYxBbPDBP34kFFvSG5mGgDhHmiZKIydJ
- 7mfB8nczcLBUOfpEI25dVOQIp7F4ZswKJKV69r+rMrIeCEB+VR5XqSVDuw3BkEtUf1e2zk9
- VQZQxo9aN/ZDNS2uc/BsYWwW1xP/6D8k07xaZGEzt4RzhRhG2K23W/O9Zs7zLG9L8cmBgRd
- Y9zgI/MO+9PWyfNIoXvBk/cWTFReP5rvxNP9ytNohjpAfhvNMhmdE4XV1cng==
+ bh=fP0C9/mdoawsiTgfKMSE2aqwxjrv7ADD8bBCZi3o7ok=;
+ b=WEGMH2Ov5fEM2wtY6RwC/4zj4+eYfPHgG5vjU/IHB687EngRrMyq697c2K6gNT7S09H8z
+ yYZawRXgHBs/ylyzjuSO+wI4v+cRNoqHGNt9A+461/ftyV9CUJZiy9rnEcsjwACNtGeFAlT
+ j/tSpsYMmr4jmzq0nj7RQ6ijdQxHvc8rvc+xlwgPqTdnjzNdj9zLz1UWJVnO3AwP5xUAcz/
+ o8YY66Qak7jna43n720sgdPV2+OcJaUFaAi0wtyUcgv0+LjsVxQx5RStmVtxyQec1yJcA+o
+ wswa/qBfYJav2IOKOtZVrFKy3QfOIuaaZrAyyAOz3Go+Ae1vXDK/omQGUBgg==
 ARC-Authentication-Results: i=1; mail.freedesktop.org;
- dkim=pass header.d=kernel.org;
+ dkim=pass header.d=google.com;
   arc=none (Message is not ARC signed);
-  dmarc=pass (Used From Domain Record) header.from=kernel.org
- policy.dmarc=quarantine
-Authentication-Results: mail.freedesktop.org; dkim=pass header.d=kernel.org;
+  dmarc=pass (Used From Domain Record) header.from=google.com
+ policy.dmarc=reject
+Authentication-Results: mail.freedesktop.org; dkim=pass header.d=google.com;
  arc=none (Message is not ARC signed);
- dmarc=pass (Used From Domain Record) header.from=kernel.org
- policy.dmarc=quarantine
+ dmarc=pass (Used From Domain Record) header.from=google.com
+ policy.dmarc=reject
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by kara.freedesktop.org (Postfix) with ESMTPS id 2095544C5E
-	for <nouveau@lists.freedesktop.org>; Sat, 17 Jan 2026 12:20:36 +0000 (UTC)
-Received: from tor.source.kernel.org (tor.source.kernel.org [172.105.4.254])
-	by gabe.freedesktop.org (Postfix) with ESMTPS id 62A9E10E051
-	for <nouveau@lists.freedesktop.org>; Sat, 17 Jan 2026 12:29:13 +0000 (UTC)
-Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
-	by tor.source.kernel.org (Postfix) with ESMTP id 8859860127;
-	Sat, 17 Jan 2026 12:29:12 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id A0386C4CEF7;
-	Sat, 17 Jan 2026 12:29:10 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
-	s=k20201202; t=1768652952;
-	bh=HG5hgAyjnHeCRKwT0pEgowcnSPcvb6xXyeze46219Ds=;
-	h=Date:To:From:Subject:Cc:References:In-Reply-To:From;
-	b=s8r7Yvn3xHVTo++zcQUou7S4ULij0ReQmIQdjc1xUgYxx3ph6gOkmrRVmirYG8CXP
-	 iRyYd4O525223VBAxmKoQC6+4YYyeG563Usjq8bF/M4EAaakf+47w87Ha9ilCQUlvm
-	 0ztMIq2OAfrCIs6SCl7udctAWWKquFjy2DXM0HHB081PnXN565lhvlKYAuS9soV8Ib
-	 X9qfRBNTNf1yhEKHZf66JCwwu6fFsEdJQbkLOWsQXEB2LzfS3ZS53TGz41l2WSALYW
-	 OL06EpySiQUlEr1vzx8G0aCk4YzQVV44ARYI6Mke7tSwzVno0p+CWvmPjSnjllDHK3
-	 j7jocZAJi7tJw==
+	by kara.freedesktop.org (Postfix) with ESMTPS id 1878B44024
+	for <nouveau@lists.freedesktop.org>; Sat, 17 Jan 2026 13:15:23 +0000 (UTC)
+Received: from mail-wm1-f74.google.com (mail-wm1-f74.google.com
+ [209.85.128.74])
+	by gabe.freedesktop.org (Postfix) with ESMTPS id 874C210E039
+	for <nouveau@lists.freedesktop.org>; Sat, 17 Jan 2026 13:24:00 +0000 (UTC)
+Received: by mail-wm1-f74.google.com with SMTP id
+ 5b1f17b1804b1-47ee056e5cfso29303025e9.1
+        for <nouveau@lists.freedesktop.org>;
+ Sat, 17 Jan 2026 05:24:00 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=google.com; s=20230601; t=1768656239; x=1769261039;
+ darn=lists.freedesktop.org;
+        h=cc:to:from:subject:message-id:references:mime-version:in-reply-to
+         :date:from:to:cc:subject:date:message-id:reply-to;
+        bh=fP0C9/mdoawsiTgfKMSE2aqwxjrv7ADD8bBCZi3o7ok=;
+        b=ZVTuO+/FB5tv2RQSJ1v4ymlfPiCvtx0kaF71WXqAfS5uXtdF5uP3CknjgbxNVwLncs
+         BH8Q4GVR3EwJoSBkMvBwndz8HUPyzoLYjco25yhBTDFj6vejiwOccEBeUq6gS14puGdH
+         iM5uxZIV9JIZi/EUgmFnqIRSWiNY72K/PEduOtGJebt6wVaN3sAOIPKKmICdwwJOpwqy
+         zu8dsjsOJj5kHfRNHPjyDM0W8VRIvJB9ytJiPW7HozVTUBmIFGVrr6ACayBM8mr+zM59
+         mzOLNs9SXypOJcogH9JASHYBM2UUxBgazXZBuQbxwpnGNN/MEhDh/b022CP7Tes5FVWg
+         JzFA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20230601; t=1768656239; x=1769261039;
+        h=cc:to:from:subject:message-id:references:mime-version:in-reply-to
+         :date:x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+        bh=fP0C9/mdoawsiTgfKMSE2aqwxjrv7ADD8bBCZi3o7ok=;
+        b=Lsh/xZoDTqWjnmVyvUN2jOws2ZHya7q7p8w3aUBL4Zf3bHBdQEUiSUQPZU+x8oHlYI
+         hjSJaV4UvVXhhkvcIMnkjjosEMRXouYPzBLv72Ue3r85JLnfobp2LZwj8rHa+cjNQk/I
+         iHaQaVHpuPFNc5BIaZ/dYiz8swADMt2aZ9xf4MRTSu1wJe5KfwlE97t6BplYGOQvOqOQ
+         gmRysYslu36piJvSKR6NRXEKMyaqnUj46y4tQF+FyRdsn2Bx2WkcDJZVfiPsCwcq1od1
+         j4NIqPImcrY9khpUiPvk9pt1JaMu6Zh/fJNldnmVOLPD1C5CPKTyRXzrkz9x9E7mxTiP
+         pmxg==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCWuIsaXy/Ies+NLw7/jZyAjTCuHFO8rNZcRikzmjRJtHuKywwbhkzZLzo9OxwRjKQ/vXi+zTHyE@lists.freedesktop.org
+X-Gm-Message-State: AOJu0Yw04bpEMJWlFXyVtMeNpngTDz2EgKBlYah5KoXLj8zXjcegKeza
+	IRu2hU1gyc00ggKTb80Aq4FmfJts0y9ofEtSKnNL3TeBEXWnUfgKhO+CgnOlAvSQQcS4iJRoPxu
+	CCOu3EcZ140j7reOPIQ==
+X-Received: from wmbej6.prod.google.com
+ ([2002:a05:600c:3e86:b0:47e:df88:7cfe])
+ (user=aliceryhl job=prod-delivery.src-stubby-dispatcher) by
+ 2002:a05:600c:8a1a:10b0:480:1f6b:d495 with SMTP id
+ 5b1f17b1804b1-4801f6bd602mr49343665e9.32.1768656239044;
+ Sat, 17 Jan 2026 05:23:59 -0800 (PST)
+Date: Sat, 17 Jan 2026 13:23:57 +0000
+In-Reply-To: <20260116214959.641032-4-ttabi@nvidia.com>
 Mime-Version: 1.0
-Content-Transfer-Encoding: quoted-printable
-Content-Type: text/plain; charset=UTF-8
-Date: Sat, 17 Jan 2026 13:29:08 +0100
-Message-Id: <DFQV57XCLMB6.1A0IW206EXE3H@kernel.org>
-To: "Timur Tabi" <ttabi@nvidia.com>
-From: "Danilo Krummrich" <dakr@kernel.org>
-Subject: Re: [PATCH v5 7/8] gpu: nova-core: create debugfs root in module
- init
 References: <20260116214959.641032-1-ttabi@nvidia.com>
- <20260116214959.641032-8-ttabi@nvidia.com>
-In-Reply-To: <20260116214959.641032-8-ttabi@nvidia.com>
-Message-ID-Hash: A22E6TIGK646KAPVGYTBEP4EBSPYBYQC
-X-Message-ID-Hash: A22E6TIGK646KAPVGYTBEP4EBSPYBYQC
-X-MailFrom: dakr@kernel.org
-X-Mailman-Rule-Hits: nonmember-moderation
+ <20260116214959.641032-4-ttabi@nvidia.com>
+Message-ID: <aWuNbUywGRH1zo-0@google.com>
+Subject: Re: [PATCH v5 3/8] rust: uaccess: add UserSliceWriter::write_buffer()
+ for raw pointer writes
+From: Alice Ryhl <aliceryhl@google.com>
+To: Timur Tabi <ttabi@nvidia.com>
+Content-Type: text/plain; charset="utf-8"
+Message-ID-Hash: NCTI6SZ4FNME75WA64SI2UFRYPYEJLBS
+X-Message-ID-Hash: NCTI6SZ4FNME75WA64SI2UFRYPYEJLBS
+X-MailFrom: 
+ 3b41raQkKB4oozwqs5Cvzu22uzs.q201289so8zw676.t5ssrs6y723.25u@flex--aliceryhl.bounces.google.com
 X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency;
- loop; banned-address; member-moderation
-CC: Matthew Maurer <mmaurer@google.com>, Gary Guo <gary@garyguo.net>,
- Joel Fernandes <joelagnelf@nvidia.com>,
+ loop; banned-address; member-moderation; nonmember-moderation; administrivia;
+ implicit-dest; max-recipients; max-size; news-moderation; no-subject;
+ digests; suspicious-header
+CC: Matthew Maurer <mmaurer@google.com>, Danilo Krummrich <dakr@kernel.org>,
+ Gary Guo <gary@garyguo.net>, Joel Fernandes <joelagnelf@nvidia.com>,
  Alexandre Courbot <acourbot@nvidia.com>, nouveau@lists.freedesktop.org,
  rust-for-linux@vger.kernel.org
 X-Mailman-Version: 3.3.8
 Precedence: list
 List-Id: Nouveau development list <nouveau.lists.freedesktop.org>
 Archived-At: 
- <https://lists.freedesktop.org/hyperkitty/list/nouveau@lists.freedesktop.org/message/A22E6TIGK646KAPVGYTBEP4EBSPYBYQC/>
-Archived-At: 
- <https://lore.freedesktop.org/DFQV57XCLMB6.1A0IW206EXE3H@kernel.org/>
+ <https://lists.freedesktop.org/hyperkitty/list/nouveau@lists.freedesktop.org/message/NCTI6SZ4FNME75WA64SI2UFRYPYEJLBS/>
+Archived-At: <https://lore.freedesktop.org/aWuNbUywGRH1zo-0@google.com/>
 List-Archive: 
  <https://lists.freedesktop.org/hyperkitty/list/nouveau@lists.freedesktop.org/>
 List-Archive: <https://lore.freedesktop.org/nouveau>
@@ -102,17 +126,66 @@ List-Post: <mailto:nouveau@lists.freedesktop.org>
 List-Subscribe: <mailto:nouveau-join@lists.freedesktop.org>
 List-Unsubscribe: <mailto:nouveau-leave@lists.freedesktop.org>
 
-On Fri Jan 16, 2026 at 10:49 PM CET, Timur Tabi wrote:
->  impl InPlaceModule for NovaCoreModule {
->      fn init(module: &'static kernel::ThisModule) -> impl PinInit<Self, E=
-rror> {
-> +        let dir =3D Dir::new(kernel::c_str!("nova_core"));
-> +
-> +        // SAFETY: we are the only driver code running, so there cannot =
-be any concurrent access to
-> +        // `DEBUGFS_ROOT`.
-> +        unsafe { DEBUGFS_ROOT =3D Some(dir) };
+On Fri, Jan 16, 2026 at 03:49:54PM -0600, Timur Tabi wrote:
+> Add a new method to UserSliceWriter that copies data from a raw kernel
+> pointer to userspace, without requiring a Rust slice reference.
+> 
+> The method takes:
+>   - data: raw pointer to the source buffer
+>   - len: total size of the source buffer (for bounds checking)
+>   - offset: byte offset into the source buffer to start copying from
+>   - count: number of bytes to copy
+> 
+> The method is marked unsafe because the caller must ensure the pointer
+> is valid for the specified length and that the memory is not mutated
+> during the call.
+> 
+> Signed-off-by: Timur Tabi <ttabi@nvidia.com>
+> ---
+>  rust/kernel/uaccess.rs | 50 ++++++++++++++++++++++++++++++++++++++++++
+>  1 file changed, 50 insertions(+)
+> 
+> diff --git a/rust/kernel/uaccess.rs b/rust/kernel/uaccess.rs
+> index f989539a31b4..8bbb0084abb1 100644
+> --- a/rust/kernel/uaccess.rs
+> +++ b/rust/kernel/uaccess.rs
+> @@ -481,6 +481,56 @@ pub fn write_slice(&mut self, data: &[u8]) -> Result {
+>          Ok(())
+>      }
+>  
+> +    /// Writes raw data to this user pointer from a raw kernel pointer.
+> +    ///
+> +    /// This is similar to [`Self::write_slice`] but takes a raw pointer instead of a slice,
+> +    /// along with a total buffer length, an offset into the that buffer, and a count of bytes
+> +    /// to copy.
+> +    ///
+> +    /// Returns error if the offset+count exceeds the buffer size.
+> +    ///
+> +    /// Fails with [`EFAULT`] if the write happens on a bad address, or if the write goes out of
+> +    /// bounds of this [`UserSliceWriter`]. This call may modify the associated userspace slice
+> +    /// even if it returns an error.
+> +    ///
+> +    /// # Safety
+> +    ///
+> +    /// - `data` must point to a valid memory region of at least `len` bytes that remains allocated
+> +    ///   for the duration of this call.
+> +    ///
+> +    /// Note: Unlike [`Self::write_slice`], this method does not require exclusive access to the
+> +    /// source memory. The memory may be concurrently modified by other threads or hardware (e.g.,
+> +    /// DMA buffers). In such cases, the copied data may be inconsistent, but this does not cause
+> +    /// undefined behavior.
+> +    pub unsafe fn write_buffer(
+> +        &mut self,
+> +        data: *const u8,
+> +        len: usize,
+> +        offset: usize,
+> +        count: usize,
+> +    ) -> Result {
 
-I think you forgot to add a new Kconfig to nova-core to enable this and in =
-case
-not set leave it as None.
+Why not this signature?
+
+	unsafe fn write_raw_slice(&mut self, data: *const [u8]) -> Result;
+
+You can implement `write_slice` in terms of it.
+
+Alice
