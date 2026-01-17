@@ -2,87 +2,87 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id 10462D39021
-	for <lists+nouveau@lfdr.de>; Sat, 17 Jan 2026 18:42:27 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 5932AD39022
+	for <lists+nouveau@lfdr.de>; Sat, 17 Jan 2026 18:42:30 +0100 (CET)
 Received: from kara.freedesktop.org (unknown [131.252.210.166])
-	by gabe.freedesktop.org (Postfix) with ESMTPS id 0665510E0F7;
-	Sat, 17 Jan 2026 17:42:25 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTPS id 3609F10E182;
+	Sat, 17 Jan 2026 17:42:29 +0000 (UTC)
 Received: from kara.freedesktop.org (localhost [127.0.0.1])
-	by kara.freedesktop.org (Postfix) with ESMTP id D449844CA7;
-	Sat, 17 Jan 2026 17:33:46 +0000 (UTC)
+	by kara.freedesktop.org (Postfix) with ESMTP id 22AC444CA7;
+	Sat, 17 Jan 2026 17:33:51 +0000 (UTC)
 ARC-Seal: i=1; cv=none; a=rsa-sha256; d=lists.freedesktop.org;
- s=20240201; t=1768671226;
- b=l0RaaGfy6i60FO+MsuZTGq96wRO+g/MT9I3MYrSn7oowHMzoZ12TdsrM1oT6JfE6dW+uS
- 7wo/tMa3tn2KaKtfdFC4DAsfuPp8zZX+rqawI/5Uvk3PwrVX61wbZqrUmwsyjGnCcLxfwFk
- cqHQ4u/+/ZZeXeEw/1XVQ4AxkpEyMmnZssAKn5X1z46l7SeRZktZcfwhxa5TLTY1SD/jIaf
- IsmpU/YPGy5mbwtQRYT9jh6bVJwAFIW8o75iXV9qVVw0Tjilx6FbQ8dKh5xSk3eI0PxcCrl
- Ni6h6DHdsNmQZ8YlI2yaVfYge3je4FLMDH5YkoXOXgUqvJ10FyYCImnkl/tw==
+ s=20240201; t=1768671231;
+ b=ZIl7P7+f2vt6Odue91FnzLU3XFOWc3lz9pQ6+0rjj60bT98A25A7ARV4fLnfZCfjFJn02
+ wjtBcMBgT+3XGNzIJVmY3uvxDi9dhLtBVNINeZlBPZQtPvjeKhC47TCCr46tvrw0cymOvQG
+ zXdtdL9BOCSw7mf82GRUggPjyWQvItA7QdtMVEEmN1IitX3wP7nLm+Ruz4iT/uiJnSBkkcT
+ foTUkaIfx/IyaphlQ0JDhL+zBPyZlrYVveHhvQ6Vi666jRRuEOn/HyDViZC97cHztc013FF
+ qIyhXxxLAm0Cr5ALaWBD+kLdsCcwTcDqlc+vXStWqDYsjg/R5+vauifpIDcA==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed;
- d=lists.freedesktop.org; s=20240201; t=1768671226; h=from : sender :
+ d=lists.freedesktop.org; s=20240201; t=1768671231; h=from : sender :
  reply-to : subject : date : message-id : to : cc : mime-version :
  content-type : content-transfer-encoding : content-id :
  content-description : resent-date : resent-from : resent-sender :
  resent-to : resent-cc : resent-message-id : in-reply-to : references :
  list-id : list-help : list-unsubscribe : list-subscribe : list-post :
  list-owner : list-archive;
- bh=xkMQUtuWqe+eERkT5Pu3V7ISmmNsJeHtvh3KWYxLyqE=;
- b=oRpi4mGN3SOe5Aq6JtbultSfIv7ZLC3h9cMBEpN2hfr7E5R/pOijFXwRZeQB1pt5ZkgJ8
- PH5g+CfqGHUGdIBoEKbjCopmq6Z3+EbXy7fRD4bb+mOdqVK8pMhiLYi9CVZaMEUJ06YVkRS
- ngaZPQmWXMY9Jm7R3H0tl/DUcQF0JoNj65XcZP3i2Fb8TzrdtiP21tzoUw6omougdbMQTJc
- J795a/O4SUdyrZ3imS0l/54AgjybnUmBczFvpYu8GgioPbz8in6IGKtQg16LUdZeXyLE0rr
- ApHtQodo3IqedZYJno0QVX1yQ+VfrJD856Ox97xbDh0qh+/7uiuYhhsQMn6Q==
+ bh=hzzcWuAbiEu6PFX9ynd2hGhDVM2kk3/QTVHWQqTdHXs=;
+ b=05zg9HV9DyVQhqa6ni1BM8wfdkjD4bjGTTVkHZr6F3aC9CMZKsl+ZDxXxo1fzicR82lsK
+ zkL0sXf1k3UBtlI6Xx4G4ToC1aZUbkEilmou8ic6LWeA0qbcIAb9Ej2s+o99fNhjthOyh6K
+ rD71Zs96AaLDO21UMHCPjBJH+p1jiXBE4m20yIVdfOCOe/oNWTq8D2fwmbAbF8mYd5k6RGl
+ LDFK9iJno+2AmRCnyUNCcaxwxSd2obTnX2zqPyc+hl33glYiDo50PvRoNqu4bzRwsBt3p1R
+ BPGIUYWUFBfbfpz9UPiCILnr/HC0QnJpSBO3aMvXtZCsJj3UAjDWQLiwpaCg==
 ARC-Authentication-Results: i=1; mail.freedesktop.org; dkim=fail;
   arc=none (Message is not ARC signed);
   dmarc=none
 Authentication-Results: mail.freedesktop.org; dkim=fail;
  arc=none (Message is not ARC signed); dmarc=none
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by kara.freedesktop.org (Postfix) with ESMTPS id 3FED244B97
-	for <nouveau@lists.freedesktop.org>; Sat, 17 Jan 2026 14:06:51 +0000 (UTC)
-Received: from mail-ej1-f42.google.com (mail-ej1-f42.google.com
- [209.85.218.42])
-	by gabe.freedesktop.org (Postfix) with ESMTPS id D4EFF10E0C2
-	for <nouveau@lists.freedesktop.org>; Sat, 17 Jan 2026 14:15:28 +0000 (UTC)
-Received: by mail-ej1-f42.google.com with SMTP id
- a640c23a62f3a-b802d5e9f06so405424366b.1
+	by kara.freedesktop.org (Postfix) with ESMTPS id 8167744B97
+	for <nouveau@lists.freedesktop.org>; Sat, 17 Jan 2026 14:51:57 +0000 (UTC)
+Received: from mail-ed1-f53.google.com (mail-ed1-f53.google.com
+ [209.85.208.53])
+	by gabe.freedesktop.org (Postfix) with ESMTPS id 38BC910E0C2
+	for <nouveau@lists.freedesktop.org>; Sat, 17 Jan 2026 15:00:35 +0000 (UTC)
+Received: by mail-ed1-f53.google.com with SMTP id
+ 4fb4d7f45d1cf-655ae329d6bso3054786a12.0
         for <nouveau@lists.freedesktop.org>;
- Sat, 17 Jan 2026 06:15:28 -0800 (PST)
+ Sat, 17 Jan 2026 07:00:35 -0800 (PST)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1768659327; x=1769264127;
+        d=1e100.net; s=20230601; t=1768662033; x=1769266833;
         h=content-transfer-encoding:content-disposition:mime-version
          :message-id:subject:to:from:date:x-gm-gg:x-gm-message-state:from:to
          :cc:subject:date:message-id:reply-to;
-        bh=xkMQUtuWqe+eERkT5Pu3V7ISmmNsJeHtvh3KWYxLyqE=;
-        b=N/Yt8X6lfAppxdZrfNf8BDb4f8yKfgHFB69mgk8iQtkFdztEVdK/JMwAK9dmnjfynm
-         JvTQavJWjJ7JS6VLWHX3EI9v6a/s5yQ0oTRYuVGc5QziEqiI+HaUr4wKxo+NCeYxA9iq
-         Y482mu7uinPcqwUayTCT8KUlEm15q3Za2jbvAuvt1ysy10bg8LHmMlKBWmV18bhjJIhF
-         T9gfaw70AkW1rgeCEHd6b3xDLVG43WTjmK3lP2bsQy46AIXk2pyyoSSckQ3c9no/dUQm
-         nSzqcarSSN30iwMkTfcHekXtFtU1mPR37VbrlhylASD36TPS9AhJBuUFcyYnxLcrGs6a
-         vHbA==
-X-Gm-Message-State: AOJu0YwPRxTjbBNgfXHyeecVb1rCaE8kiqCcV6VZEurNxpx/8mg+5BmL
-	NUDuwA8J9u+BQ8qs5DEKOXoNGwXgtVeef9GmulRwjDJW1QFqwITr315Ci4gP4JH92eI=
-X-Gm-Gg: AY/fxX73D9ZzKOVloJnh6qh8mCKcz67YtMhd5lP2qPOSxNdyJcMWNNUV1oFBUeYUFlY
-	uwEecT7x6/WHFZ0Qk60FELhK8xbK7odwm+GMeWVg43/Ekq+Jz0hcfzqGytyOCGtZaG0RMXVMUSZ
-	mIWy2/yed3gzmHA90o/yhfQCXxmuGSCiZFh+5r55RAQqqX1phZXn/FCZn4Zcx0YD/V8CQaqVTCo
-	TCqueKCMUYdw8qQGzZc6wxU+eISj/mLVP/Iwpk0/Dr2iSF95vveYm0NYVtgON4XEoXo/CsU/Fvo
-	hT73+3OLmFqY4HNhcUouwUgOm+r25wSPh2xlWn6hcSz98HXqAtd15vBIwxkhIfEex0KEHOR48N0
-	aVvnx4yZuXOXL0rYV7gweo9ovUPnj43IZOgPWsL4zY+GxGpxl3LdMVCrWXRDxAZi+Zf7btHPTOc
-	iqjbOk2YQURI+Swg==
-X-Received: by 2002:a17:907:74e:b0:b83:972c:77fe with SMTP id
- a640c23a62f3a-b8792d3be19mr504973266b.2.1768659326724;
-        Sat, 17 Jan 2026 06:15:26 -0800 (PST)
+        bh=hzzcWuAbiEu6PFX9ynd2hGhDVM2kk3/QTVHWQqTdHXs=;
+        b=EoauJjPIPUvrH+k0uUSsizlumBVfxS5UB93KX7IItMNEgiDqj/W4OPEHWyHcQVwu7t
+         yG7f28iCzgkxE6sI8wXtfRGy/5+BlioPyDa7GzaKaejrE/48fPcRtc6JpGBBO7NB70py
+         k9VQWTJQ7uL/SWGf/MDh+7H1XWPQxfNxi18VtbA48sYyhWC/uhuECkGWmJKcUqC2zKUL
+         LRNn3w6UuFdjbAYbRs7oE+RRuuBmP1KiboIhP4i08Ly3NNgb49aiNFAFKwravD/sHMwU
+         jxDwC3BA1W9b6R0y1Dz+Yv9D3oHhQui6aAWp6p/mRVR/pzsFBwGfTWr7VZx92nmlogVT
+         fF/g==
+X-Gm-Message-State: AOJu0Yw9BkIK2O13V/a4JI7Y9xbFXCXGnKHTycdzcsaylxJCgnMrSlDG
+	xgjNOqiY9z2IHgImcNyPKcbgZdHF0/bQofA0skhPZ+54a2rrnHov5mJzkWVJ3igYJvg=
+X-Gm-Gg: AY/fxX6cSrkUEg1MCCud/EnZ4gNBJCng4nXa9KhB6DNIy6U5WVJ+VNOvoymf+rfpYM7
+	nR0h+ubaUnZ8KdC9wzxUaw9r2qjUjH+59U8k06a1gdRcUG9Hf5d3yriP6BrHGDJIKW93hhcG/b6
+	OQg2Im30XVTSFPPNw/3TlunnilatikFslpFlHcLm3Y2y1QyU89v6rxNIDAZ7H8usWbRvJeYK6g9
+	Aw8hWlNGd8tZhomf9Vo5ztpSG62S23LbC+GTTwhd4ld3dYVIiqERFP7Yx58Fw7pCzayPFwtkmZn
+	5z9yIbMnwdwRktJGTuYeWItBLIs8f5lq63CENuD1aEC1yZ0dfy0WqFjIzxPsdnYRQwyPOPYp4rx
+	YzBBdcK7kuaMNk06MUoQZpu7i3yZF8OBSdKf39VneSQjaXDcqVCsYv4wGkwgHWjOdqmNkdO2R5t
+	4ewk+gUa8MxWramh7sY5KbV+0m
+X-Received: by 2002:a17:907:dac:b0:b87:15a7:85ee with SMTP id
+ a640c23a62f3a-b8796b7a7a0mr496819866b.47.1768662033021;
+        Sat, 17 Jan 2026 07:00:33 -0800 (PST)
 Received: from linux-gentoo ([158.47.224.235])
         by smtp.gmail.com with ESMTPSA id
- a640c23a62f3a-b87959fbb38sm533862466b.52.2026.01.17.06.15.25
+ a640c23a62f3a-b879516900csm594774666b.23.2026.01.17.07.00.32
         for <nouveau@lists.freedesktop.org>
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Sat, 17 Jan 2026 06:15:26 -0800 (PST)
-Date: Sat, 17 Jan 2026 15:15:24 +0100
+        Sat, 17 Jan 2026 07:00:32 -0800 (PST)
+Date: Sat, 17 Jan 2026 16:00:30 +0100
 From: Giuseppe Ranieri <giuseppe@ranieri.dev>
 To: nouveau@lists.freedesktop.org
-Subject: [PATCH] Fix scdc implementation missing in GK208B NVidia Card
- (gk104_sor_hdmi)
-Message-ID: <aWuZfMo5cMLwNRax@linux-gentoo>
+Subject: [PATCH] Fix broken initialization when SCDC is supported but not
+ implemented
+Message-ID: <aWukDouVtfiORRrn@linux-gentoo>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=iso-8859-1
 Content-Disposition: inline
@@ -91,15 +91,15 @@ X-MailFrom: rgiuse@gmail.com
 X-Mailman-Rule-Hits: nonmember-moderation
 X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency;
  loop; banned-address; member-moderation
-Message-ID-Hash: 3LUGKQNV5PFYSHS55GAKP4KWU46U5TTR
-X-Message-ID-Hash: 3LUGKQNV5PFYSHS55GAKP4KWU46U5TTR
-X-Mailman-Approved-At: Sat, 17 Jan 2026 17:33:44 +0000
+Message-ID-Hash: FTPID3X6YGGFWJBEZOVKYGASGNLRAW3Q
+X-Message-ID-Hash: FTPID3X6YGGFWJBEZOVKYGASGNLRAW3Q
+X-Mailman-Approved-At: Sat, 17 Jan 2026 17:33:49 +0000
 X-Mailman-Version: 3.3.8
 Precedence: list
 List-Id: Nouveau development list <nouveau.lists.freedesktop.org>
 Archived-At: 
- <https://lists.freedesktop.org/hyperkitty/list/nouveau@lists.freedesktop.org/message/3LUGKQNV5PFYSHS55GAKP4KWU46U5TTR/>
-Archived-At: <https://lore.freedesktop.org/aWuZfMo5cMLwNRax@linux-gentoo/>
+ <https://lists.freedesktop.org/hyperkitty/list/nouveau@lists.freedesktop.org/message/FTPID3X6YGGFWJBEZOVKYGASGNLRAW3Q/>
+Archived-At: <https://lore.freedesktop.org/aWukDouVtfiORRrn@linux-gentoo/>
 List-Archive: 
  <https://lists.freedesktop.org/hyperkitty/list/nouveau@lists.freedesktop.org/>
 List-Archive: <https://lore.freedesktop.org/nouveau>
@@ -109,35 +109,56 @@ List-Post: <mailto:nouveau@lists.freedesktop.org>
 List-Subscribe: <mailto:nouveau-join@lists.freedesktop.org>
 List-Unsubscribe: <mailto:nouveau-leave@lists.freedesktop.org>
 
+This patch fix the missing scdc implementation on scdc enabled card behaviour init call and add debug message on error:
 
-I fixed a problem for the GK208B NVidia Card (GT710): 
-the initialization was broken my card support scdc channel but the implementation was missing.
+ - FIX: when the scdc implementation is missing the call of nvkm_uoutp_mthd_hdmi don't return anymore an error code but emit a OUTP_DBG log message and continue the initialization process
 
-The problem was tracked by Mathias Anselmann in
-https://bugzilla.kernel.org/show_bug.cgi?id=219561 and https://gitlab.freedesktop.org/drm/nouveau/-/issues/402
+ - ADD: an NV_ERROR message where  error code is return by the nvif_outp_hdmi call in nv50_hdmi_enable method
 
-This patch fix the card initialization and fix audio problem on my card GK208B  
-the code path is shared by 
-nouveau/nvkm/engine/device/base.c- .name = "GK110",
-nouveau/nvkm/engine/device/base.c- .name = "GK110B",
-nouveau/nvkm/engine/device/base.c- .name = "GK208B",
-nouveau/nvkm/engine/device/base.c- .name = "GK208",
-
-I have done another patch so the code don´t broke anymore the initialization if the scdc implementation is missing when supported by the card. It will raise a DBG message instead.
-
+Solve problem with (scdc enabled) card that don´t had scdc implementation in nouveau driver.
 
 Signed-off-by: Giuseppe Ranieri <giuseppe@ranieri.dev>
 ---
 
-diff '--color=auto' -ur a/drivers/gpu/drm/nouveau/nvkm/engine/disp/gk104.c b/drivers/gpu/drm/nouveau/nvkm/engine/disp/gk104.c
---- a/drivers/gpu/drm/nouveau/nvkm/engine/disp/gk104.c	2025-11-30 23:42:10.000000000 +0100
-+++ b/drivers/gpu/drm/nouveau/nvkm/engine/disp/gk104.c	2026-01-16 19:03:51.175827296 +0100
-@@ -106,6 +106,7 @@
- const struct nvkm_ior_func_hdmi
- gk104_sor_hdmi = {
- 	.ctrl = gk104_sor_hdmi_ctrl,
-+	.scdc = gm200_sor_hdmi_scdc,
- 	.infoframe_avi = gk104_sor_hdmi_infoframe_avi,
- 	.infoframe_vsi = gk104_sor_hdmi_infoframe_vsi,
- };
+diff '--color=auto' -ur a/drivers/gpu/drm/nouveau/dispnv50/disp.c b/drivers/gpu/drm/nouveau/dispnv50/disp.c
+--- a/drivers/gpu/drm/nouveau/dispnv50/disp.c	2025-11-30 23:42:10.000000000 +0100
++++ b/drivers/gpu/drm/nouveau/dispnv50/disp.c	2026-01-17 01:27:34.150245394 +0100
+@@ -819,9 +819,11 @@
+ 	ret = nvif_outp_hdmi(&nv_encoder->outp, nv_crtc->index, true, max_ac_packet, rekey,
+ 			     mode->clock, hdmi->scdc.supported, hdmi->scdc.scrambling.supported,
+ 			     hdmi->scdc.scrambling.low_rates);
+-	if (ret)
++	if (ret < 0) {
++		NV_ERROR(drm, "Failure to set HDMI: %d\n", ret);
+ 		return;
+-
++	}
++	
+ 	/* AVI InfoFrame. */
+ 	args->version = 0;
+ 	args->head = nv_crtc->index;
+diff '--color=auto' -ur a/drivers/gpu/drm/nouveau/nvkm/engine/disp/uoutp.c b/drivers/gpu/drm/nouveau/nvkm/engine/disp/uoutp.c
+--- a/drivers/gpu/drm/nouveau/nvkm/engine/disp/uoutp.c	2025-11-30 23:42:10.000000000 +0100
++++ b/drivers/gpu/drm/nouveau/nvkm/engine/disp/uoutp.c	2026-01-17 01:20:03.670240977 +0100
+@@ -253,8 +253,7 @@
  
+ 	if (!ior->func->hdmi ||
+ 	    args->v0.max_ac_packet > 0x1f ||
+-	    args->v0.rekey > 0x7f ||
+-	    (args->v0.scdc && !ior->func->hdmi->scdc))
++	    args->v0.rekey > 0x7f)
+ 		return -EINVAL;
+ 
+ 	if (!args->v0.enable) {
+@@ -266,6 +265,11 @@
+ 
+ 	ior->func->hdmi->ctrl(ior, args->v0.head, args->v0.enable,
+ 			      args->v0.max_ac_packet, args->v0.rekey);
++	
++	if (args->v0.scdc && !ior->func->hdmi->scdc)
++		OUTP_DBG(outp, "SCDC enabled: %d, ior->func->hdmi->scdc not implemented (ior): %p", 
++				      args->v0.scdc, ior);
++
+ 	if (ior->func->hdmi->scdc)
+ 		ior->func->hdmi->scdc(ior, args->v0.khz, args->v0.scdc, args->v0.scdc_scrambling,
+ 				      args->v0.scdc_low_rates);
