@@ -2,38 +2,38 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id C107DD38E75
-	for <lists+nouveau@lfdr.de>; Sat, 17 Jan 2026 13:18:46 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id C36C3D38E77
+	for <lists+nouveau@lfdr.de>; Sat, 17 Jan 2026 13:21:12 +0100 (CET)
 Received: from kara.freedesktop.org (unknown [131.252.210.166])
-	by gabe.freedesktop.org (Postfix) with ESMTPS id 5C52D10E051;
-	Sat, 17 Jan 2026 12:18:45 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTPS id A77CB10E051;
+	Sat, 17 Jan 2026 12:21:10 +0000 (UTC)
 Authentication-Results: gabe.freedesktop.org;
-	dkim=fail reason="signature verification failed" (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="Z13Ic91S";
+	dkim=fail reason="signature verification failed" (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="BjlY7aZK";
 	dkim-atps=neutral
 Received: from kara.freedesktop.org (localhost [127.0.0.1])
-	by kara.freedesktop.org (Postfix) with ESMTP id AD86144CB3;
-	Sat, 17 Jan 2026 12:10:07 +0000 (UTC)
+	by kara.freedesktop.org (Postfix) with ESMTP id 085EB44CB3;
+	Sat, 17 Jan 2026 12:12:33 +0000 (UTC)
 ARC-Seal: i=1; cv=none; a=rsa-sha256; d=lists.freedesktop.org;
- s=20240201; t=1768651807;
- b=Ph3ObkG3tgNjew+EBNPKVud2ozDzv1ENuVoUpFVeRmtJ/iIrq7uUMCogxPbnxGBfpoXFe
- k4vmTytik+BPYBMJdQ6pSQUAZM0jnsDS21WQodzKhKyza/oAqNP1kxS+3gzhKgnzVOsLZzT
- hso3eEztUb0cpafvDA10TcwZ9g5YieVXqFX02uVZUi08T1N52x0DQFzqc+HnkHpK8gxmc6i
- HWs0hjlhp7m1Prpa3HDVRx7UpUvNg62EuWIn/GfayuXYMcXDnneVXOJdycbv6tWr9pXtxQb
- 637MAp/3Gw8aALOICWt8N3XplMlrHECKM60/TrZx1OOIHAGGGJSqlHSn9YoQ==
+ s=20240201; t=1768651952;
+ b=bih8spWjnCyIMXhMJzZ34zAFfG8nbaZfzsv68f8qzM0cZd6eLRvdn23CvEieCbxVhdqJ2
+ rKfI/zYzHqT4yrBo8jDhmhvnCY5EGwsuSywQpF6tAAMPfsWR7YMmh1EO8qaj3WCxt1DQUUq
+ pAitl2C/LnWHLyTzmwH/bp3RJ/I1fHE/zh2AyzmAGfr/FnsxbAx1V6ZHgazM0zF25RTe/hT
+ l7dqMbQ9NmFaqF8CdzRguaWXGz+O7F0T4wRuTZDmTPmcnwERN0rbzmAh4vy/j7quk6tqQ4u
+ v69OyxdggKvcY/JYRPa5pZia+ZSly5cmOvWsIIDv+rqGdIOAgo74nhVlHDBA==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed;
- d=lists.freedesktop.org; s=20240201; t=1768651807; h=from : sender :
+ d=lists.freedesktop.org; s=20240201; t=1768651952; h=from : sender :
  reply-to : subject : date : message-id : to : cc : mime-version :
  content-type : content-transfer-encoding : content-id :
  content-description : resent-date : resent-from : resent-sender :
  resent-to : resent-cc : resent-message-id : in-reply-to : references :
  list-id : list-help : list-unsubscribe : list-subscribe : list-post :
  list-owner : list-archive;
- bh=Zi8LCWryDhvntCih4btEEYmkuq5T1pxnHKiRq0WgCac=;
- b=gEPskIf/YSPnc779AiKdID5wjortQUO6SMpdAlR5XtRhr9ByYr6U3J4hT5eZ/3r/omhFX
- 4o3Fh81qwvuyG8b/t0ul02K3mgIrYFZN6kIG3yjvjm1x//ZjO0jhzvxr4VdzlDBenBWzkJW
- JckMct4v9qH6DBx5hJyMJxqmgJ3dGi+oRy2ESSIMzkvyLWXDowxYhxlQ3qqCT+j72Lmvl6K
- bYVy8vhgXhGYvAS3CZSSTR72d4/sBVUyY3vGnuTN/qsbGpkfSptLgomkYCBXJKfeuxr0A2+
- j9hElusceGZRl5GPyH8PM/upPdSGeDdDqrtVDNNkI7VDqp6xNO8t1QOxceJA==
+ bh=SH2DyTk9WG2cN4FDfXOj5bDhj3S0QO3qhALybBsb7qM=;
+ b=Y75pA3M/kAq12Wget89k/JdABGcb1J1IR2sCfVXWz3rPMWy4kAevjZmxpz5GSaiGEspTB
+ L2iYW+jnlceF2qUGWOOy0TntqW43bpN4zg+eayEOMx+UCkraT6spTPUCOq4vzFLrXJpOWDh
+ zGeONLTheGvJXhqE8xqL0vQls3X9XyrKywA8Wp1da+igfx4i7g5Q/WssQ4+cTf1TXhq49XC
+ kyaoJsfDujvg1/+8V3Xc0vqa61ekvlaMdaub7+yraPkazcQdCHrFl+lWoH8qW23iLwm3eE/
+ YH2AXzQBsueQ52lLWM6uNTLgAzmRfdF5lHy/AXYT9yeDhwymSUtX1uviyKCA==
 ARC-Authentication-Results: i=1; mail.freedesktop.org;
  dkim=pass header.d=kernel.org;
   arc=none (Message is not ARC signed);
@@ -44,40 +44,40 @@ Authentication-Results: mail.freedesktop.org; dkim=pass header.d=kernel.org;
  dmarc=pass (Used From Domain Record) header.from=kernel.org
  policy.dmarc=quarantine
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by kara.freedesktop.org (Postfix) with ESMTPS id 4FC8844C9B
-	for <nouveau@lists.freedesktop.org>; Sat, 17 Jan 2026 12:10:05 +0000 (UTC)
+	by kara.freedesktop.org (Postfix) with ESMTPS id 62E2344C9B
+	for <nouveau@lists.freedesktop.org>; Sat, 17 Jan 2026 12:12:29 +0000 (UTC)
 Received: from tor.source.kernel.org (tor.source.kernel.org [172.105.4.254])
-	by gabe.freedesktop.org (Postfix) with ESMTPS id 9E0C310E008
-	for <nouveau@lists.freedesktop.org>; Sat, 17 Jan 2026 12:18:42 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTPS id B25CC10E008
+	for <nouveau@lists.freedesktop.org>; Sat, 17 Jan 2026 12:21:06 +0000 (UTC)
 Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
-	by tor.source.kernel.org (Postfix) with ESMTP id DA9F560127;
-	Sat, 17 Jan 2026 12:18:41 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 0090CC4CEF7;
-	Sat, 17 Jan 2026 12:18:39 +0000 (UTC)
+	by tor.source.kernel.org (Postfix) with ESMTP id C580660127;
+	Sat, 17 Jan 2026 12:21:05 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id D4D6EC4CEF7;
+	Sat, 17 Jan 2026 12:21:03 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
-	s=k20201202; t=1768652321;
-	bh=1VFlYAb3J6PFjrajzHXUkRqFDo/2WFsWKu6N0B4R6lM=;
-	h=Date:Cc:To:From:Subject:References:In-Reply-To:From;
-	b=Z13Ic91SW1AoXurh8xqXxhjcjj3n0TfsMf/N1IwLVTcNzL4zaCxiNZY3wnYR2oxjR
-	 e/6hb1MGlTVMlBuwqbaTcpxbCwbzV8N66Rl1wVI8uH5dY5DFP1r6rBOUB7vH01pHJ7
-	 +0ERx0JE7swKrlFVacKqN8r59FtM/KOruYROIeDNNqHOXwBB7ogKPhOWUdUzcxl+QH
-	 YRa4R/mpcMc4gGEJy8pVW17QfFivipnWOv6JbAd51ngCPLwTRIwpfVaLvE0pPLJGEX
-	 gzchcUANyqz8t1lZ5I0Ylb3X/4/6zHicsKSOwsdEFvxEP5KXgog3WfoAsWcx2AMuN3
-	 LMsFES87JOjxw==
+	s=k20201202; t=1768652465;
+	bh=aTKgDt63RyfhxxV4HEUKvM9YGl8WmNS/R2HSy/ldFSo=;
+	h=Date:Subject:Cc:To:From:References:In-Reply-To:From;
+	b=BjlY7aZKzPmlIHTKY75wC43f0NCqxcl+Z0PZ6VPtcQ5iy+Lki2wglc8SOAZlmLAeF
+	 az/0tGtq4RonUAC8r1bIEedl8wkK/HLIaatIS2LagSTVdttLpdZ797JfzOA/YrmV0+
+	 nU5eAZYYueh4B18cPJTc31gBgGnaFSH0twPWowY+Vg976mjSYiXtbWOq6Vtn6Clm4W
+	 RYDcXpr8KeGpTqF6Bf85zMiSm4m0RrtLq5ixSXPXRjXz4lv9/9hOpAZwsDb/GrFdg+
+	 I64c0SRDo6rf2jLlqhGECa1JG7z4MdJu2NgIaxpm4gEKVeKSUdy8VzlsZABCaxXO8B
+	 ZD2szie8uccKA==
 Mime-Version: 1.0
 Content-Transfer-Encoding: quoted-printable
 Content-Type: text/plain; charset=UTF-8
-Date: Sat, 17 Jan 2026 13:18:38 +0100
-Message-Id: <DFQUX68AGU1T.1QSGMOBWK6YC6@kernel.org>
+Date: Sat, 17 Jan 2026 13:21:02 +0100
+Message-Id: <DFQUZ0DA9LJ5.2194XUZDLF0T2@kernel.org>
+Subject: Re: [PATCH v5 8/8] gpu: nova-core: create GSP-RM logging buffers
+ debugfs entries
 To: "Timur Tabi" <ttabi@nvidia.com>
 From: "Danilo Krummrich" <dakr@kernel.org>
-Subject: Re: [PATCH v5 7/8] gpu: nova-core: create debugfs root in module
- init
 References: <20260116214959.641032-1-ttabi@nvidia.com>
- <20260116214959.641032-8-ttabi@nvidia.com>
-In-Reply-To: <20260116214959.641032-8-ttabi@nvidia.com>
-Message-ID-Hash: WMKJZGOKFWV3AYJOW6YFE2THAG3XRBNM
-X-Message-ID-Hash: WMKJZGOKFWV3AYJOW6YFE2THAG3XRBNM
+ <20260116214959.641032-9-ttabi@nvidia.com>
+In-Reply-To: <20260116214959.641032-9-ttabi@nvidia.com>
+Message-ID-Hash: E5VCWFPCQQ4M2XQGBT4TDLSHVZDGN3QN
+X-Message-ID-Hash: E5VCWFPCQQ4M2XQGBT4TDLSHVZDGN3QN
 X-MailFrom: dakr@kernel.org
 X-Mailman-Rule-Hits: nonmember-moderation
 X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency;
@@ -90,9 +90,9 @@ X-Mailman-Version: 3.3.8
 Precedence: list
 List-Id: Nouveau development list <nouveau.lists.freedesktop.org>
 Archived-At: 
- <https://lists.freedesktop.org/hyperkitty/list/nouveau@lists.freedesktop.org/message/WMKJZGOKFWV3AYJOW6YFE2THAG3XRBNM/>
+ <https://lists.freedesktop.org/hyperkitty/list/nouveau@lists.freedesktop.org/message/E5VCWFPCQQ4M2XQGBT4TDLSHVZDGN3QN/>
 Archived-At: 
- <https://lore.freedesktop.org/DFQUX68AGU1T.1QSGMOBWK6YC6@kernel.org/>
+ <https://lore.freedesktop.org/DFQUZ0DA9LJ5.2194XUZDLF0T2@kernel.org/>
 List-Archive: 
  <https://lists.freedesktop.org/hyperkitty/list/nouveau@lists.freedesktop.org/>
 List-Archive: <https://lore.freedesktop.org/nouveau>
@@ -103,97 +103,136 @@ List-Subscribe: <mailto:nouveau-join@lists.freedesktop.org>
 List-Unsubscribe: <mailto:nouveau-leave@lists.freedesktop.org>
 
 On Fri Jan 16, 2026 at 10:49 PM CET, Timur Tabi wrote:
-> Create the 'nova_core' root debugfs entry when the driver loads.
+> Create read-only debugfs entries for LOGINIT, LOGRM, and LOGINTR, which
+> are the three primary printf logging buffers from GSP-RM.  LOGPMU will
+> be added at a later date, as it requires it support for its RPC message
+> first.
 >
-> Normally, non-const global variables need to be protected by a
-> mutex.  Instead, we use unsafe code, as we know the entry is never
-> modified after the driver is loaded.  This solves the lifetime
-> issue of the mutex guard, which would otherwise have required the
-> use of `pin_init_scope`.
+> This patch uses the `pin_init_scope` feature to create the entries.
+> `pin_init_scope` solves the lifetime issue over the `DEBUGFS_ROOT`
+> reference by delaying its acquisition until the time the entry is
+> actually initialized.
 >
+> Co-developed-by: Alexandre Courbot <acourbot@nvidia.com>
+> Signed-off-by: Alexandre Courbot <acourbot@nvidia.com>
 > Signed-off-by: Timur Tabi <ttabi@nvidia.com>
 > ---
->  drivers/gpu/nova-core/nova_core.rs | 20 +++++++++++++++++++-
->  1 file changed, 19 insertions(+), 1 deletion(-)
+>  drivers/gpu/nova-core/gsp.rs | 45 +++++++++++++++++++++++++++++-------
+>  1 file changed, 37 insertions(+), 8 deletions(-)
 >
-> diff --git a/drivers/gpu/nova-core/nova_core.rs b/drivers/gpu/nova-core/n=
-ova_core.rs
-> index d0df8db3693d..eceefa41cddc 100644
-> --- a/drivers/gpu/nova-core/nova_core.rs
-> +++ b/drivers/gpu/nova-core/nova_core.rs
+> diff --git a/drivers/gpu/nova-core/gsp.rs b/drivers/gpu/nova-core/gsp.rs
+> index 273327c33aa7..4b194bb805b4 100644
+> --- a/drivers/gpu/nova-core/gsp.rs
+> +++ b/drivers/gpu/nova-core/gsp.rs
 > @@ -3,6 +3,7 @@
->  //! Nova Core GPU Driver
+>  mod boot;
 > =20
 >  use kernel::{
-> +    debugfs::Dir,
->      error::Error,
->      pci,
->      prelude::*,
-> @@ -27,7 +28,9 @@
-> =20
->  pub(crate) const MODULE_NAME: &kernel::str::CStr =3D <LocalModule as ker=
-nel::ModuleMetadata>::NAME;
-> =20
-> -#[pin_data]
-> +static mut DEBUGFS_ROOT: Option<Dir> =3D None;
-
-Please add the FIXME comment that we talked about in the last revision and =
-use
-debugfs::Dir rather than just Dir.
-
-> +
-> +#[pin_data(PinnedDrop)]
->  struct NovaCoreModule {
->      #[pin]
->      _driver: kernel::driver::Registration<pci::Adapter<driver::NovaCore>=
->,
-> @@ -35,12 +38,27 @@ struct NovaCoreModule {
-> =20
->  impl InPlaceModule for NovaCoreModule {
->      fn init(module: &'static kernel::ThisModule) -> impl PinInit<Self, E=
-rror> {
-> +        let dir =3D Dir::new(kernel::c_str!("nova_core"));
-> +
-> +        // SAFETY: we are the only driver code running, so there cannot =
-be any concurrent access to
-> +        // `DEBUGFS_ROOT`.
-> +        unsafe { DEBUGFS_ROOT =3D Some(dir) };
-> +
->          try_pin_init!(Self {
->              _driver <- kernel::driver::Registration::new(MODULE_NAME, mo=
-dule),
->          })
+> +    c_str,
+>      debugfs,
+>      device,
+>      dma::{
+> @@ -101,17 +102,24 @@ fn new(dev: &device::Device<device::Bound>) -> Resu=
+lt<Self> {
 >      }
 >  }
 > =20
-> +#[pinned_drop]
-> +impl PinnedDrop for NovaCoreModule {
-> +    fn drop(self: Pin<&mut Self>) {
-> +        // SAFETY: we are the only driver code running, so there cannot =
-be any concurrent access to
-> +        // `DEBUGFS_ROOT`.
-
-The driver::Registration is not yet dropped at this point, so there might b=
-e
-other driver code running. You have to justify that this does not race with
-module_init() (which module_exit() never does) and that it does not race wi=
-th
-Gsp::new(), i.e. probe().
-
-Note that probe() may run async, so you have to drop the driver registratio=
-n
-manually before dropping the debugfs dir.
-
-> +        unsafe { DEBUGFS_ROOT =3D None };
-
-You also have to drop the debugfs::Dir.
-
-> +    }
+> -/// GSP runtime data.
+> -#[pin_data]
+> -pub(crate) struct Gsp {
+> -    /// Libos arguments.
+> -    pub(crate) libos: CoherentAllocation<LibosMemoryRegionInitArgument>,
+> +/// Log buffers used by GSP-RM for debug logging.
+> +struct LogBuffers {
+>      /// Init log buffer.
+>      loginit: LogBuffer,
+>      /// Interrupts log buffer.
+>      logintr: LogBuffer,
+>      /// RM log buffer.
+>      logrm: LogBuffer,
 > +}
 > +
->  module! {
->      type: NovaCoreModule,
->      name: "NovaCore",
+> +/// GSP runtime data.
+> +#[pin_data]
+> +pub(crate) struct Gsp {
+> +    /// Libos arguments.
+> +    pub(crate) libos: CoherentAllocation<LibosMemoryRegionInitArgument>,
+> +    /// Log buffers, optionally exposed via debugfs.
+> +    #[pin]
+> +    logs: debugfs::Scope<LogBuffers>,
+>      /// Command queue.
+>      pub(crate) cmdq: Cmdq,
+>      /// RM arguments.
+> @@ -163,15 +171,17 @@ pub(crate) fn new(pdev: &pci::Device<device::Bound>=
+) -> impl PinInit<Self, Error
+>          pin_init::pin_init_scope(move || {
+>              let dev =3D pdev.as_ref();
+> =20
+> +            // Create log buffers before try_pin_init! so they're access=
+ible throughout
+> +            let loginit =3D LogBuffer::new(dev)?;
+> +            let logintr =3D LogBuffer::new(dev)?;
+> +            let logrm =3D LogBuffer::new(dev)?;
+> +
+>              Ok(try_pin_init!(Self {
+>                  libos: CoherentAllocation::<LibosMemoryRegionInitArgumen=
+t>::alloc_coherent(
+>                      dev,
+>                      GSP_PAGE_SIZE / size_of::<LibosMemoryRegionInitArgum=
+ent>(),
+>                      GFP_KERNEL | __GFP_ZERO,
+>                  )?,
+> -                loginit: LogBuffer::new(dev)?,
+> -                logintr: LogBuffer::new(dev)?,
+> -                logrm: LogBuffer::new(dev)?,
+>                  cmdq: Cmdq::new(dev)?,
+>                  rmargs: CoherentAllocation::<GspArgumentsCached>::alloc_=
+coherent(
+>                      dev,
+> @@ -192,6 +202,25 @@ pub(crate) fn new(pdev: &pci::Device<device::Bound>)=
+ -> impl PinInit<Self, Error
+>                      dma_write!(rmargs[0] =3D fw::GspArgumentsCached::new=
+(cmdq))?;
+>                      dma_write!(libos[3] =3D LibosMemoryRegionInitArgumen=
+t::new("RMARGS", rmargs))?;
+>                  },
+> +                logs <- {
+> +                    let log_buffers =3D LogBuffers {
+> +                        loginit,
+> +                        logintr,
+> +                        logrm,
+> +                    };
+> +
+> +                    #[allow(static_mut_refs)]
+> +                    // SAFETY: `DEBUGFS_ROOT` is never modified after in=
+itialization, so it is
+> +                    // safe to create a shared reference to it.
+
+Well, it is modified in module_exit(), so you have to justify why this can'=
+t
+race with module_exit(). I.e. because you drop the driver registration firs=
+t.
+
+You also have to say that the debugfs dir is created before the driver
+registration.
+
+> +                    let debugfs_root =3D unsafe { crate::DEBUGFS_ROOT.as=
+_ref() }
+> +                        .unwrap_or_else(|| debugfs::Dir::empty());
+> +
+> +                    debugfs_root.scope(log_buffers, dev.name(), |logs, d=
+ir| {
+> +                        dir.read_binary_file(c_str!("loginit"), &logs.lo=
+ginit);
+> +                        dir.read_binary_file(c_str!("logintr"), &logs.lo=
+gintr);
+> +                        dir.read_binary_file(c_str!("logrm"), &logs.logr=
+m);
+> +                    })
+> +                },
+>              }))
+>          })
+>      }
 > --=20
 > 2.52.0
 
