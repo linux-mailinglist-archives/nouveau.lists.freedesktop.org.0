@@ -2,38 +2,38 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id 11011D3914B
-	for <lists+nouveau@lfdr.de>; Sat, 17 Jan 2026 23:00:23 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 45069D3971F
+	for <lists+nouveau@lfdr.de>; Sun, 18 Jan 2026 15:28:05 +0100 (CET)
 Received: from kara.freedesktop.org (unknown [131.252.210.166])
-	by gabe.freedesktop.org (Postfix) with ESMTPS id 44E4010E200;
-	Sat, 17 Jan 2026 22:00:21 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTPS id 1C04310E2CF;
+	Sun, 18 Jan 2026 14:28:02 +0000 (UTC)
 Authentication-Results: gabe.freedesktop.org;
-	dkim=fail reason="signature verification failed" (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="KOIfb8gb";
+	dkim=fail reason="signature verification failed" (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="fU2dVGeo";
 	dkim-atps=neutral
 Received: from kara.freedesktop.org (localhost [127.0.0.1])
-	by kara.freedesktop.org (Postfix) with ESMTP id B2AB244CB2;
-	Sat, 17 Jan 2026 21:51:42 +0000 (UTC)
+	by kara.freedesktop.org (Postfix) with ESMTP id EEF7D44037;
+	Sun, 18 Jan 2026 14:19:21 +0000 (UTC)
 ARC-Seal: i=1; cv=none; a=rsa-sha256; d=lists.freedesktop.org;
- s=20240201; t=1768686702;
- b=JJ8gWaqdQB6hY1D8vrw1chW/9DtIsdmsWJtwPZJxIIsg8x7XFV6DFnsGU4g58N3pucM8C
- SlBzI1jfDtA4LWpOfA+JvnXE1YFcg4G5XqVXLwOZ8zWf7By36GRRiur2KWVVifzudzwYVTx
- 1e/0P8VP5mJ6Gc9UaPQ3NncpeYSpZTAIHFJt3HjuEa8EzHYQnhEg9HntusnlzRThXwyWAEW
- pMBVkMkzCdGWJ7uZZZEk7D8CZDqNjOGMT8CLSNQws6DgSkEkKkPQ2jipDDHZsAeEYEiJ5/I
- lXyOnw6DxLYF3QZaPDnFjtVzhqVJMLKRQHv/GHsj2TcwEM3nCoxwp5G89VDw==
+ s=20240201; t=1768745961;
+ b=s/46EY5tLixIflayQDFKFshWa4yNQLbu4K4DuSk9rTeqOP+e0GzI3+EDSsyDAXONVbCDQ
+ I0j9N1biAwdvvm2IqjYuAQVEVp599veD8RNEqMtW81oCsQxLH7zGjF/p8cXh1EAvh/aprVZ
+ GKFl4F6WAkimqTyXE+vCWggNeW+04dUDKuP2Y02G3teql4L6A5JFS2MuWmMEe1OcvnHhhCT
+ pg9b9G5H19CgUoYXkKJgcdKQalhdCIKKFqQzzmNgSDsSx8lSKYf+uFcUd5SOJJpbybW0+jc
+ Xbw0QgRQjiptLr6lnK75IKLmCjFgAyullgCOhhCRkB3ODkQ3JWZXKiUemM1A==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed;
- d=lists.freedesktop.org; s=20240201; t=1768686702; h=from : sender :
+ d=lists.freedesktop.org; s=20240201; t=1768745961; h=from : sender :
  reply-to : subject : date : message-id : to : cc : mime-version :
  content-type : content-transfer-encoding : content-id :
  content-description : resent-date : resent-from : resent-sender :
  resent-to : resent-cc : resent-message-id : in-reply-to : references :
  list-id : list-help : list-unsubscribe : list-subscribe : list-post :
  list-owner : list-archive;
- bh=YBg0gFVsiUOlkpYv9c5NAJgoz6ORpXGBCkLZfyKcOyQ=;
- b=R4P30D9B+EtUvmq/QYfeeW4Ipq1BDYMArvM9q6Yg/oNsbBNl3v69DL413p8mzy8SJWw8k
- WtQXakeQJ3WdlHevV6UAsFzpLg81KnPDv4S1qa6VTwE5q8kYjQ5CvLBEhAEiH1dahTGZ3TC
- Pw8sT8xSCnABr1aJeiFjbuSo6qEMmT/xlpO2/9iq4yGBZzCbCI7JzOOCxJ3Imfa/AAFJTda
- mTdTC2+HCJuuZ1pWFLU4csW0idG22z82T8R6SNK6T6hSqeeFcxBA3/Hx4ipG6YZOTGR0Zo2
- YgIEKj0mHfoZJHBJeDWa3SYE8R6rGgiovLpho5fDfw+uo4idAiDlMSjiyWnQ==
+ bh=8/+pfuZjImzhCg/Ci0pyXhk33AdMxtAv0XvIfOh7aH8=;
+ b=wTJomK7KPnaQnj4jZYjK655qPLBH4/3BGkdlW1RjvnHEg0DNNbP7lwTdm0eST8Uqzxlze
+ UzoxFRT66devbR6l3eKY05wBctR0DNgtNMsZr57j5EaxJKxOCEnRaKn2L1fxF8z4bazu3N0
+ 58aHulesofEpAw+EdWyPyiHEcAkpYznh8VA7dt9fqkmXkBvEJ/Pob3BNJOIvq21YQicuNoy
+ x+SVs2m8VEZOpPaETxOFu7Yb+kv2DrRy/BlGnjVZN8dyfBuMV8Y+IRaAcsiGPGF+hOZiLRz
+ EgP2TvHGPYj2r1L7P6WiUyuyU63+qJdxfF9SUL97D/qbuyHlaJ19rF0WglZQ==
 ARC-Authentication-Results: i=1; mail.freedesktop.org;
  dkim=pass header.d=kernel.org;
   arc=none (Message is not ARC signed);
@@ -44,61 +44,57 @@ Authentication-Results: mail.freedesktop.org; dkim=pass header.d=kernel.org;
  dmarc=pass (Used From Domain Record) header.from=kernel.org
  policy.dmarc=quarantine
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by kara.freedesktop.org (Postfix) with ESMTPS id CBB254032A
-	for <nouveau@lists.freedesktop.org>; Sat, 17 Jan 2026 21:51:40 +0000 (UTC)
-Received: from sea.source.kernel.org (sea.source.kernel.org [172.234.252.31])
-	by gabe.freedesktop.org (Postfix) with ESMTPS id 25CD510E0EB
-	for <nouveau@lists.freedesktop.org>; Sat, 17 Jan 2026 22:00:19 +0000 (UTC)
+	by kara.freedesktop.org (Postfix) with ESMTPS id E4E7244037
+	for <nouveau@lists.freedesktop.org>; Sun, 18 Jan 2026 14:19:18 +0000 (UTC)
+Received: from tor.source.kernel.org (tor.source.kernel.org [172.105.4.254])
+	by gabe.freedesktop.org (Postfix) with ESMTPS id 8E4B210E2C9;
+	Sun, 18 Jan 2026 14:27:58 +0000 (UTC)
 Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
-	by sea.source.kernel.org (Postfix) with ESMTP id CAD89404B8;
-	Sat, 17 Jan 2026 22:00:18 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 232ADC4CEF7;
-	Sat, 17 Jan 2026 22:00:16 +0000 (UTC)
+	by tor.source.kernel.org (Postfix) with ESMTP id 947AD60010;
+	Sun, 18 Jan 2026 14:27:57 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 9603FC116D0;
+	Sun, 18 Jan 2026 14:27:54 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
-	s=k20201202; t=1768687218;
-	bh=zKdx7wffWw4P0xNqUBF0Sah1TphPqKlqGJeB7Pv9z1s=;
+	s=k20201202; t=1768746477;
+	bh=lS3NniEDt1TzzRXMVQeNkdK2mEEG0wZdHjgODHnn90A=;
 	h=Date:Subject:Cc:To:From:References:In-Reply-To:From;
-	b=KOIfb8gbUP3juNpqvh2IQ4Z2VzsTYXe8zCzn/+g/Yt1pPKJUGpRIauThylo6k8HlG
-	 sk8L4ndssq/EU24tDprcnZmg4NvCK0Rmg0ldbz38zaFnWo0B9VrrqG060DqUXhDUf+
-	 3U3NF0GCnJ+tjc+nSOgXqPfzdj0vMpyKnWweXa2ayqBdd/su0xeisq386KDCXQ+qN3
-	 5a2huI9RA5r98cbT15s2lPRVaLrZwKSCdFjY8DJkV0RYmK/kRBrcQDWV2SKF04KRZL
-	 XY7h21n5SBULJBDtaB5K5rAWV6FYv//nFV83dA3DMc0I4MvCrffvIjYo9Ey1dnE371
-	 eqlZ72WaZG6Dw==
+	b=fU2dVGeo/fBWPIi5TjXgHF/AQGhPgDfcqjPXxb3F7Yl/ctK2/LvymrYobZr4+MidQ
+	 FfiIn3Y0s3nVe1WtyQg2EqlpmhztArA66k7XT+JAH4HVO1VhlhcMssQGEzxaDjc4SH
+	 Y1jWBl+krS7cWXCRC9f5DsvCWz0+Dan+hYWwbHG6jkfD2srhM1J78G6qlKdokDcNhP
+	 3XsWHbNmba3chM7scsPq88/NpoWssGGjhWLuYOSAOxRx2JO+Cn3PuwD+73kxdk1jBy
+	 vl8skgbsX5O0wJhf/iKlG+SKy74PmnALHuVGaaTCj42RDDc9sdrAX2rr9MeLp5cdHD
+	 wyrG/qyoCuEHg==
 Mime-Version: 1.0
 Content-Transfer-Encoding: quoted-printable
 Content-Type: text/plain; charset=UTF-8
-Date: Sat, 17 Jan 2026 23:00:15 +0100
-Message-Id: <DFR7AHOX0T8G.2NB9VOS3IZRZE@kernel.org>
-Subject: Re: [PATCH v5 7/8] gpu: nova-core: create debugfs root in module
- init
-To: "Timur Tabi" <ttabi@nvidia.com>
+Date: Sun, 18 Jan 2026 15:27:52 +0100
+Message-Id: <DFRSAO9CXHZ7.2WD0GAOQUILUE@kernel.org>
+Subject: Re: [PATCH v2 1/3] rust/drm: Introduce DeviceContext
+To: "Lyude Paul" <lyude@redhat.com>
 From: "Danilo Krummrich" <dakr@kernel.org>
-References: <20260116214959.641032-1-ttabi@nvidia.com>
- <20260116214959.641032-8-ttabi@nvidia.com>
- <DFQV57XCLMB6.1A0IW206EXE3H@kernel.org>
- <656bfffe43ab220b387fb56bb6eeb829ff0bd1ef.camel@nvidia.com>
- <DFR6RWROWBYA.1Q9JKH8UDSXOX@kernel.org>
- <c5d5d3fe71f6cd8725b47435f5c75394cdc9d9fd.camel@nvidia.com>
-In-Reply-To: <c5d5d3fe71f6cd8725b47435f5c75394cdc9d9fd.camel@nvidia.com>
-Message-ID-Hash: 7UC4D7CYQQY3PR7FB5AHSCPN77R67DMH
-X-Message-ID-Hash: 7UC4D7CYQQY3PR7FB5AHSCPN77R67DMH
+References: <20260116204728.725579-1-lyude@redhat.com>
+ <20260116204728.725579-2-lyude@redhat.com>
+In-Reply-To: <20260116204728.725579-2-lyude@redhat.com>
+Message-ID-Hash: W4XFTH3EHR3CJD7HW7KDZFO3FMIEHAD2
+X-Message-ID-Hash: W4XFTH3EHR3CJD7HW7KDZFO3FMIEHAD2
 X-MailFrom: dakr@kernel.org
 X-Mailman-Rule-Hits: nonmember-moderation
 X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency;
  loop; banned-address; member-moderation
-CC: "gary@garyguo.net" <gary@garyguo.net>,
- "nouveau@lists.freedesktop.org" <nouveau@lists.freedesktop.org>,
- Joel Fernandes <joelagnelf@nvidia.com>,
- Alexandre Courbot <acourbot@nvidia.com>,
- "mmaurer@google.com" <mmaurer@google.com>,
- "rust-for-linux@vger.kernel.org" <rust-for-linux@vger.kernel.org>
+CC: dri-devel@lists.freedesktop.org, nouveau@lists.freedesktop.org,
+ linux-kernel@vger.kernel.org, rust-for-linux@vger.kernel.org,
+ Miguel Ojeda <ojeda@kernel.org>, Simona Vetter <simona@ffwll.ch>,
+ Alice Ryhl <aliceryhl@google.com>,
+ Shankari Anand <shankari.ak0208@gmail.com>, Benno Lossin <lossin@kernel.org>,
+ Asahi Lina <lina+kernel@asahilina.net>, Atharv Dubey <atharvd440@gmail.com>,
+ Daniel Almeida <daniel.almeida@collabora.com>
 X-Mailman-Version: 3.3.8
 Precedence: list
 List-Id: Nouveau development list <nouveau.lists.freedesktop.org>
 Archived-At: 
- <https://lists.freedesktop.org/hyperkitty/list/nouveau@lists.freedesktop.org/message/7UC4D7CYQQY3PR7FB5AHSCPN77R67DMH/>
+ <https://lists.freedesktop.org/hyperkitty/list/nouveau@lists.freedesktop.org/message/W4XFTH3EHR3CJD7HW7KDZFO3FMIEHAD2/>
 Archived-At: 
- <https://lore.freedesktop.org/DFR7AHOX0T8G.2NB9VOS3IZRZE@kernel.org/>
+ <https://lore.freedesktop.org/DFRSAO9CXHZ7.2WD0GAOQUILUE@kernel.org/>
 List-Archive: 
  <https://lists.freedesktop.org/hyperkitty/list/nouveau@lists.freedesktop.org/>
 List-Archive: <https://lore.freedesktop.org/nouveau>
@@ -108,32 +104,303 @@ List-Post: <mailto:nouveau@lists.freedesktop.org>
 List-Subscribe: <mailto:nouveau-join@lists.freedesktop.org>
 List-Unsubscribe: <mailto:nouveau-leave@lists.freedesktop.org>
 
-On Sat Jan 17, 2026 at 10:52 PM CET, Timur Tabi wrote:
-> On Sat, 2026-01-17 at 22:35 +0100, Danilo Krummrich wrote:
->> > You don't want the debugfs entries created by default?=C2=A0 That's ho=
-w it is in Nouveau.
->>=20
->> I think it's OK to always have the entries on keeping them beyond device=
- unbind
->> has to be behind a Kconfig option.
->>=20
->> I thought you want this behind a Kconfig in general, otherwise what is
->> debugfs::Dir::empty() for?
->
-> Oh, I see what you're saying.  Dir::empty() is for when CONFIGFS_DEBUG_FS=
- is disabled.  So
-> obviously, I should not default DEBUGFS_ROOT to Some(dir) if CONFIGFS_DEB=
-UG_FS is disabled.
+On Fri Jan 16, 2026 at 9:41 PM CET, Lyude Paul wrote:
+> diff --git a/rust/kernel/drm/device.rs b/rust/kernel/drm/device.rs
+> index 3ce8f62a00569..53ca71daf2f86 100644
+> --- a/rust/kernel/drm/device.rs
+> +++ b/rust/kernel/drm/device.rs
+> @@ -7,14 +7,20 @@
+>  use crate::{
+>      alloc::allocator::Kmalloc,
+>      bindings, device, drm,
+> -    drm::driver::AllocImpl,
+> +    drm::{driver::AllocImpl, private::Sealed},
 
-This case is already handled, look at how debugfs::Dir::create() [1] is
-implemented. I.e. it is fully transparent and you don't have to care about =
-this
-case.
+Please use kernel vertical style [1] when making changes.
 
-debugfs::Dir::empty() would be useful if you have an additional case where =
-you
-want to have a debugfs file tree conditionally though, which is why I assum=
-ed
-you wanted an additional Kconfig for nova-core.
+(If you want you can also add an additional patch converting the whole DRM
+module first for consistency.)
 
-[1] https://rust.docs.kernel.org/src/kernel/debugfs.rs.html#53
+[1] https://docs.kernel.org/rust/coding-guidelines.html#imports
+
+>      error::from_err_ptr,
+>      error::Result,
+>      prelude::*,
+>      sync::aref::{ARef, AlwaysRefCounted},
+> -    types::Opaque,
+> +    types::{NotThreadSafe, Opaque},
+> +};
+> +use core::{
+> +    alloc::Layout,
+> +    marker::PhantomData,
+> +    mem::{self},
+> +    ops::Deref,
+> +    ptr::{self, NonNull},
+>  };
+> -use core::{alloc::Layout, mem, ops::Deref, ptr, ptr::NonNull};
+> =20
+>  #[cfg(CONFIG_DRM_LEGACY)]
+>  macro_rules! drm_legacy_fields {
+> @@ -47,26 +53,88 @@ macro_rules! drm_legacy_fields {
+>      }
+>  }
+> =20
+> -/// A typed DRM device with a specific `drm::Driver` implementation.
+> +macro_rules! drm_dev_ctx {
+> +    (
+> +        $( #[$attrs:meta] )*
+> +        $name:ident
+> +    ) =3D> {
+> +        $( #[$attrs] )*
+> +        pub struct $name;
+> +
+> +        impl DeviceContext for $name {}
+> +        impl Sealed for $name {}
+> +
+> +        // SAFETY: All registration states are free of side-effects (e.g=
+. no Drop) and are ZSTs,
+> +        // thus they are always thread-safe.
+> +        unsafe impl Send for $name {}
+> +        // SAFETY: All registration states are free of side-effects (e.g=
+. no Drop) and are ZSTs,
+> +        // thus they are always thread-safe.
+> +        unsafe impl Sync for $name {}
+
+They are all ZSTs and should be Send + Sync by default, hence the impls are=
+ not
+needed.
+
+Also, I don't think this macro adds a lot of value when the Send and Sync i=
+mpls
+are removed. In the driver core it looks like this:
+
+	mod private {
+	    pub trait Sealed {}
+=09
+	    impl Sealed for super::Bound {}
+	    impl Sealed for super::Core {}
+	    impl Sealed for super::CoreInternal {}
+	    impl Sealed for super::Normal {}
+	}
+=09
+	impl DeviceContext for Bound {}
+	impl DeviceContext for Core {}
+	impl DeviceContext for CoreInternal {}
+	impl DeviceContext for Normal {}
+
+I think that's compact enough.
+
+> +    };
+> +}
+> +
+> +/// A trait implemented by all possible contexts a [`Device`] can be use=
+d in.
+
+I think this documentation should provide a rough overview of the different
+states a DRM device can have.
+
+> +pub trait DeviceContext: Sealed + Send + Sync {}
+> +
+> +drm_dev_ctx! {
+> +    /// The [`DeviceContext`] of a [`Device`] that was registered with u=
+serspace at some point.
+> +    ///
+> +    /// This represents a [`Device`] which is guaranteed to have been re=
+gistered with userspace at
+> +    /// some point in time. Such a DRM device is guaranteed to have been=
+ fully-initialized.
+> +    ///
+> +    /// Note: A device in this context is not guaranteed to remain regis=
+tered with userspace for its
+> +    /// entire lifetime, as this is impossible to guarantee at compile-t=
+ime. However, any
+> +    /// userspace-dependent operations performed with an unregistered de=
+vice in this [`DeviceContext`]
+> +    /// are guaranteed to be no-ops.
+> +    ///
+> +    /// # Invariants
+> +    ///
+> +    /// A [`Device`] in this [`DeviceContext`] is guaranteed to have cal=
+led `drm_dev_register` once.
+
+I'm not sure it makes sense for user facing documentation to menthion the
+corresponding C function here. I'd just say that it has been registered wit=
+h the
+DRM core.
+
+> +    Registered
+> +}
+> +
+> @@ -132,9 +202,40 @@ pub fn new(dev: &device::Device, data: impl PinInit<=
+T::Data, Error>) -> Result<A
+> =20
+>          // SAFETY: The reference count is one, and now we take ownership=
+ of that reference as a
+>          // `drm::Device`.
+> -        Ok(unsafe { ARef::from_raw(raw_drm) })
+> +        // INVARIANT: We just created the device above, but have yet to =
+call `drm_dev_register`.
+> +        // `Self` cannot be copied or sent to another thread - ensuring =
+that `drm_dev_register`
+> +        // won't be called during its lifetime and that the device is un=
+registered
+
+Please end with a period.
+
+> +        Ok(Self(unsafe { ARef::from_raw(raw_drm) }, NotThreadSafe))
+>      }
+> +}
+> =20
+> +/// A typed DRM device with a specific [`drm::Driver`] implementation an=
+d [`DeviceContext`].
+> +///
+> +/// Since DRM devices can be used before being fully initialized and reg=
+istered with userspace, `C`
+> +/// represents the furthest [`DeviceContext`] we can guarantee that this=
+ [`Device`] has reached.
+> +///
+> +/// Keep in mind: this means that an unregistered device can still have =
+the registration state
+> +/// [`Registered`] as long as it was registered with userspace once in t=
+he past, and that the
+> +/// behavior of such a device is still well-defined. In such a situation=
+, the behavior of any
+> +/// functions which interact with userspace will simply be no-ops. Addit=
+ionally, a device with the
+
+I don't think those are necessarily no-ops, in hot-unplug cases drivers mig=
+ht
+still receive DRM callbacks from userspace. But they won't be able to acces=
+s bus
+device resources anymore. In contrast to the DRM C implementation the
+corresponding synchronization happens at driver core level in Rust, whereas=
+ on
+the C side there is drm_dev_enter() / drm_dev_exit() for this.
+
+> +/// registration state [`Uninit`] simply does not have a guaranteed regi=
+stration state at compile
+> +/// time, and could be either registered or unregistered. Since there is=
+ no way to guarantee a
+> +/// long-lived reference to an unregistered device would remain unregist=
+ered, we do not provide a
+> +/// [`DeviceContext`] for this.
+> +///
+> +/// # Invariants
+> +///
+> +/// * `self.dev` is a valid instance of a `struct device`.
+> +/// * The data layout of `Self` remains the same across all implementati=
+ons of `C`.
+> +/// * Any invariants for `C` also apply.
+> +#[repr(C)]
+> +pub struct Device<T: drm::Driver, C: DeviceContext =3D Registered> {
+> +    dev: Opaque<bindings::drm_device>,
+> +    data: T::Data,
+> +    _ctx: PhantomData<C>,
+> +}
+> +
+> +impl<T: drm::Driver, C: DeviceContext> Device<T, C> {
+>      pub(crate) fn as_raw(&self) -> *mut bindings::drm_device {
+>          self.dev.get()
+>      }
+> @@ -160,13 +261,13 @@ unsafe fn into_drm_device(ptr: NonNull<Self>) -> *m=
+ut bindings::drm_device {
+>      ///
+>      /// # Safety
+>      ///
+> -    /// Callers must ensure that `ptr` is valid, non-null, and has a non=
+-zero reference count,
+> -    /// i.e. it must be ensured that the reference count of the C `struc=
+t drm_device` `ptr` points
+> -    /// to can't drop to zero, for the duration of this function call an=
+d the entire duration when
+> -    /// the returned reference exists.
+> -    ///
+> -    /// Additionally, callers must ensure that the `struct device`, `ptr=
+` is pointing to, is
+> -    /// embedded in `Self`.
+> +    /// * Callers must ensure that `ptr` is valid, non-null, and has a n=
+on-zero reference count,
+> +    ///   i.e. it must be ensured that the reference count of the C `str=
+uct drm_device` `ptr` points
+> +    ///   to can't drop to zero, for the duration of this function call =
+and the entire duration when
+> +    ///   the returned reference exists.
+> +    /// * Additionally, callers must ensure that the `struct device`, `p=
+tr` is pointing to, is
+
+I'd drop "additionally", it is a listing anyways.
+
+> +    ///   embedded in `Self`.
+> +    /// * Callers promise that any type invariants of `C` will be upheld=
+.
+
+What do you mean by "type invariants of C"?
+
+>  impl<T: Driver> Registration<T> {
+>      /// Creates a new [`Registration`] and registers it.
+> -    fn new(drm: &drm::Device<T>, flags: usize) -> Result<Self> {
+> +    fn new(drm: drm::UnregisteredDevice<T>, flags: usize) -> Result<Self=
+> {
+>          // SAFETY: `drm.as_raw()` is valid by the invariants of `drm::De=
+vice`.
+>          to_result(unsafe { bindings::drm_dev_register(drm.as_raw(), flag=
+s) })?;
+> =20
+> -        Ok(Self(drm.into()))
+> +        // SAFETY: We just called `drm_dev_register` above
+> +        let new =3D NonNull::from(unsafe { drm.assume_ctx() });
+> +
+> +        // Leak the ARef from UnregisteredDevice in preparation for tran=
+sferring its ownership.
+> +        mem::forget(drm);
+> +
+> +        // SAFETY: `drm`'s `Drop` constructor was never called, ensuring=
+ that there remains at least
+> +        // one reference to the device - which we take ownership over he=
+re.
+> +        let new =3D unsafe { ARef::from_raw(new) };
+> +
+> +        Ok(Self(new))
+>      }
+> =20
+> -    /// Same as [`Registration::new`}, but transfers ownership of the [`=
+Registration`] to
+> +    /// Same as [`Registration::new`], but transfers ownership of the [`=
+Registration`] to
+>      /// [`devres::register`].
+> -    pub fn new_foreign_owned(
+> -        drm: &drm::Device<T>,
+> -        dev: &device::Device<device::Bound>,
+> +    pub fn new_foreign_owned<'a>(
+> +        drm: drm::UnregisteredDevice<T>,
+> +        dev: &'a device::Device<device::Bound>,
+>          flags: usize,
+> -    ) -> Result
+> +    ) -> Result<&'a drm::Device<T>>
+>      where
+>          T: 'static,
+>      {
+> -        if drm.as_ref().as_raw() !=3D dev.as_raw() {
+> +        let this_dev: &device::Device =3D drm.as_ref();
+> +        if this_dev.as_raw() !=3D dev.as_raw() {
+
+this_dev is misleading, since it actually is the parent device. Besides tha=
+t,
+the change seems unnecessary, no?
+
+>              return Err(EINVAL);
+>          }
+> =20
+>          let reg =3D Registration::<T>::new(drm, flags)?;
+> +        let drm =3D NonNull::from(reg.device());
+> +
+> +        devres::register(dev, reg, GFP_KERNEL)?;
+> =20
+> -        devres::register(dev, reg, GFP_KERNEL)
+> +        // SAFETY: Since `reg` was passed to devres::register(), the dev=
+ice now owns the lifetime
+> +        // of the DRM registration - ensuring that this references lives=
+ for at least as long as 'a.
+> +        Ok(unsafe { drm.as_ref() })
+>      }
+
