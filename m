@@ -2,38 +2,38 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id C33C7D3BBD1
-	for <lists+nouveau@lfdr.de>; Tue, 20 Jan 2026 00:35:29 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 51EBAD3BBD3
+	for <lists+nouveau@lfdr.de>; Tue, 20 Jan 2026 00:35:31 +0100 (CET)
 Received: from kara.freedesktop.org (unknown [131.252.210.166])
-	by gabe.freedesktop.org (Postfix) with ESMTPS id AD78D10E54B;
-	Mon, 19 Jan 2026 23:35:26 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTPS id 0D2A810E554;
+	Mon, 19 Jan 2026 23:35:30 +0000 (UTC)
 Authentication-Results: gabe.freedesktop.org;
-	dkim=pass (2048-bit key; unprotected) header.d=collabora.com header.i=@collabora.com header.b="JPmB5bxS";
+	dkim=pass (2048-bit key; unprotected) header.d=collabora.com header.i=@collabora.com header.b="WPACwENQ";
 	dkim-atps=neutral
 Received: from kara.freedesktop.org (localhost [127.0.0.1])
-	by kara.freedesktop.org (Postfix) with ESMTP id 99D7A44CA1;
-	Mon, 19 Jan 2026 23:26:43 +0000 (UTC)
+	by kara.freedesktop.org (Postfix) with ESMTP id E4B3344CA1;
+	Mon, 19 Jan 2026 23:26:46 +0000 (UTC)
 ARC-Seal: i=1; cv=none; a=rsa-sha256; d=lists.freedesktop.org;
- s=20240201; t=1768865203;
- b=XDllW/RV+uSs4nSsNgyjQbQgFglkAsTtCXdMyJAdgh69mf+ZskXmfirxN/YZkkGRabM9U
- /SdeeqSqJlBii8aF8FZtJ/avKpEhBleDVboATh3NkBJ9cTdmDTCmkefL9tyN0tALOWxA2jT
- Ybvw2kGHbyAHWMqLxg8XNWUVLqxpoI0zhiWzAqr8P9yNksP+OULI6LRXTZ7PTCKxbsGFIEj
- K/0LgVJpBHzk1evXksDvFaXnaMAq1Q7kUvVwckzt++SUzz5RDWpTcZBnh8+hbwjm8o2PrHG
- vnQop17SqKPaUvb/BPKKrgF+0NAAjG0oMHkl/zaN2tjhVMa7oH0IBTaQu0yg==
+ s=20240201; t=1768865206;
+ b=XVN01mzfSkPTyJt831EBTctKOTlmFGzrhrYyel8ntvn/e6c6Yl5ACNQrniuFPZZr84z41
+ JC+kxDWNdB/ibFZclOYKX4hzgVWkyIFFQ90qBmvymJAeROw70lH7EdILBilO6G0vyLCTkxw
+ Etg/Qmjrc5FmZ+EYNm9MnbJzblcDpN9/9T7FmhNCGhalk7vbdDZnPlO16wRBJiGJjIqxFVs
+ zSsl6H+GKMCb6ht9WYHxbpjlNPzHnmbcAodZfAR3NfOjVbX7hXsnuknAH8aIFQE2NF2zVDY
+ AZee9GDkvGt5Z0ASTVvUgx/Uq9VRZsBJ2/Fe0cxYGfe6Y7LmhOKZoLZrTlyQ==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed;
- d=lists.freedesktop.org; s=20240201; t=1768865203; h=from : sender :
+ d=lists.freedesktop.org; s=20240201; t=1768865206; h=from : sender :
  reply-to : subject : date : message-id : to : cc : mime-version :
  content-type : content-transfer-encoding : content-id :
  content-description : resent-date : resent-from : resent-sender :
  resent-to : resent-cc : resent-message-id : in-reply-to : references :
  list-id : list-help : list-unsubscribe : list-subscribe : list-post :
  list-owner : list-archive;
- bh=STXhf7X2Ob2B0RgZTWLG65YaJxQNR/9yZs7aFqSGTWY=;
- b=LM/p/cyZNfhNjGwNoA3F/cEztcz+6sggCbyd3AcS9bujmZ6Dn0UZwld1juty3j/GBEuTD
- xPRSDhl8Cv5QR3u9CKX6FMYtBqRFaK0OmEv1LDvI9gN/bwmEPTVOpseKvEa9w40G1dfaqOY
- u4dr4OEf0CeDeSM7o0CN52g82g5uIumBm7uftHIc0NF8f6kRA4Op1CRGbiLzDaYbeSvU3Ka
- kQJ7wrwnzHLc7BH7Uzs7M7MV22iW+8wFTfC1Wt+in74jQBt2rVXR38W+VUC6NUtey5DqrCy
- T+FaCBhUWpGO7zZ3VVNK0ewMf9N2A1IgUtR4ZEfvdUW2pdbwcf4ShIiGNUiw==
+ bh=rXG/5GXrMMO52N9hznk/smvR/uCaCB9NhVxyJsh7NbY=;
+ b=KJnd+4D8zJtZ/dlhzAMCL0dBAVHdV+41h7qQ5v3D87cuPVulGtAB/8jlUEPwZBqgx6hp1
+ 6CpQoqRmRnsfoAyIZNzcXUWjsDAcTpt+hhLNQmf/qrUTv6fYW7JT0kzXrIfY0SxwG/0Si7t
+ veJAkR4ZzogyNBt+NnhyyRRSW2jtFvGXmZBSRNkp/6hDCHU2WS4uRltIwRaiYgabvdObMOP
+ MEO3Oys5L+knRYWwWgyAQUeB3UohnWL6OHROBkrs3MhOlzdM+3ZBcCaEr5C0KptTyQjlJI8
+ veRFcATYyutMbxplTx9wGUcWuRED2Qf6d2DOjQnWKraHtMA79thbIXRAwYnw==
 ARC-Authentication-Results: i=1; mail.freedesktop.org;
  dkim=pass header.d=collabora.com;
   arc=none (Message is not ARC signed);
@@ -44,22 +44,22 @@ Authentication-Results: mail.freedesktop.org;
  dmarc=pass (Used From Domain Record) header.from=collabora.com
  policy.dmarc=none
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by kara.freedesktop.org (Postfix) with ESMTPS id 3B65A44BDC
-	for <nouveau@lists.freedesktop.org>; Mon, 19 Jan 2026 23:26:41 +0000 (UTC)
+	by kara.freedesktop.org (Postfix) with ESMTPS id 36A6244BDC
+	for <nouveau@lists.freedesktop.org>; Mon, 19 Jan 2026 23:26:44 +0000 (UTC)
 Received: from bali.collaboradmins.com (bali.collaboradmins.com
  [148.251.105.195])
-	by gabe.freedesktop.org (Postfix) with ESMTPS id 051A410E25B;
-	Mon, 19 Jan 2026 23:35:24 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTPS id 0164D10E550;
+	Mon, 19 Jan 2026 23:35:27 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=collabora.com;
-	s=mail; t=1768865722;
-	bh=JvOYHt54V3wkz9XOQxonbU0lmdnTo5QUIcTkXnD3p28=;
+	s=mail; t=1768865725;
+	bh=EIDY6ukxUEx2jxZ91hlUz1UpHM1wcNP5YSPiCVbXIpY=;
 	h=From:Date:Subject:References:In-Reply-To:To:Cc:From;
-	b=JPmB5bxSwWlh3EqWQJgSR4eUG8eptyYivrLwW9pdq5g4QII9wkAuZw+MhISK8Lknq
-	 +Vyn4xy0zQUOZacPMnRQYMDCaSZlrW5fcqMCMIbSDHIiVNC4kCV0YCpyMfRubzYqIo
-	 2VaqVBbJJng5UGw9VP3U8AgwDuGKQW1DHTIgna64QqQ0R6hm6NXzYuBF2DQV3N1EHB
-	 elTiNwFcxLGhU3Mv4XrXxSF4/7CrBA6vePcQr7fG8wWxphHAxBEWomSWAzcS/EIkqv
-	 XIAbV5lol/ArTHsV6BkaV2TdVHWRdwyKo6JAEgrJlX6SL2L3caDW93crMB8b7BLo5I
-	 dCcayE3Gdxn+Q==
+	b=WPACwENQrJn3WLax62DYRlEEkSjznVzkFa+CO+Ru2XXDU6nrutxv/Yt5Sj2st5FGn
+	 rux1XlNr1livVuP8LOlq1VaiME27uNcZ4nUtu2b4CYbWYzmZZOEwjZ/NZ2Ay6NSgdd
+	 HsBn0VxB1GIndrkL4p82PoH6twHWDt40xwtuObIR+0JZxKYBtOCWh+SAEozhJ+sBu0
+	 LdRgKH8C0ozAy8htp3w0ysE9EaEHqinZQTLVYGKnqUf/rqLMJsF1URqJHSWRZMLAzB
+	 KLcV+xHLEEdLjsv/WbjXMw8fSnTDwc98R3Lmi8JJK5eZk2o2LWhVrekfFNrKkFOWmX
+	 sef/a4LfZrfhA==
 Received: from [192.168.0.79] (unknown
  [IPv6:2804:14d:72b4:81ae:67c:16ff:fe57:b5a3])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
@@ -67,15 +67,15 @@ Received: from [192.168.0.79] (unknown
  SHA256)
 	(No client certificate requested)
 	(Authenticated sender: dwlsalmeida)
-	by bali.collaboradmins.com (Postfix) with ESMTPSA id 1AA9217E0FDB;
-	Tue, 20 Jan 2026 00:35:19 +0100 (CET)
+	by bali.collaboradmins.com (Postfix) with ESMTPSA id 0BA6B17E0FFA;
+	Tue, 20 Jan 2026 00:35:22 +0100 (CET)
 From: Daniel Almeida <daniel.almeida@collabora.com>
-Date: Mon, 19 Jan 2026 20:34:46 -0300
-Subject: [PATCH 1/2] rust: drm: add support for driver features
+Date: Mon, 19 Jan 2026 20:34:47 -0300
+Subject: [PATCH 2/2] rust: drm: add FeatureRender
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20260119-drm-render-v1-1-8326e4d5cb44@collabora.com>
+Message-Id: <20260119-drm-render-v1-2-8326e4d5cb44@collabora.com>
 References: <20260119-drm-render-v1-0-8326e4d5cb44@collabora.com>
 In-Reply-To: <20260119-drm-render-v1-0-8326e4d5cb44@collabora.com>
 To: Danilo Krummrich <dakr@kernel.org>, Alice Ryhl <aliceryhl@google.com>,
@@ -88,8 +88,8 @@ To: Danilo Krummrich <dakr@kernel.org>, Alice Ryhl <aliceryhl@google.com>,
  Trevor Gross <tmgross@umich.edu>,
  Boris Brezillon <boris.brezillon@collabora.com>
 X-Mailer: b4 0.14.3
-Message-ID-Hash: GZBB4IRSLZ4C7XENDTXLMUU7HWM3YUBS
-X-Message-ID-Hash: GZBB4IRSLZ4C7XENDTXLMUU7HWM3YUBS
+Message-ID-Hash: AACZ66OBJHEY5EI4Z3FYZFCDQQN5FRBK
+X-Message-ID-Hash: AACZ66OBJHEY5EI4Z3FYZFCDQQN5FRBK
 X-MailFrom: daniel.almeida@collabora.com
 X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency;
  loop; banned-address; member-moderation; nonmember-moderation; administrivia;
@@ -101,9 +101,9 @@ X-Mailman-Version: 3.3.8
 Precedence: list
 List-Id: Nouveau development list <nouveau.lists.freedesktop.org>
 Archived-At: 
- <https://lists.freedesktop.org/hyperkitty/list/nouveau@lists.freedesktop.org/message/GZBB4IRSLZ4C7XENDTXLMUU7HWM3YUBS/>
+ <https://lists.freedesktop.org/hyperkitty/list/nouveau@lists.freedesktop.org/message/AACZ66OBJHEY5EI4Z3FYZFCDQQN5FRBK/>
 Archived-At: 
- <https://lore.freedesktop.org/20260119-drm-render-v1-1-8326e4d5cb44@collabora.com/>
+ <https://lore.freedesktop.org/20260119-drm-render-v1-2-8326e4d5cb44@collabora.com/>
 List-Archive: 
  <https://lists.freedesktop.org/hyperkitty/list/nouveau@lists.freedesktop.org/>
 List-Archive: <https://lore.freedesktop.org/nouveau>
@@ -113,156 +113,130 @@ List-Post: <mailto:nouveau@lists.freedesktop.org>
 List-Subscribe: <mailto:nouveau-join@lists.freedesktop.org>
 List-Unsubscribe: <mailto:nouveau-leave@lists.freedesktop.org>
 
-Add initial support for drm driver features via the DriverFeatures trait.
-This trait is unsafe, requiring the implementer to comply with the safety
-requirements of each feature individually if the feature is enabled.
+Add a feature for drivers willing to expose render nodes to userspace. This
+comes with an added safety requirement in the DriverFeatures trait. This,
+in turn, exposes /dev/dri/renderDXX nodes that can be used by userspace to
+control the device.
 
-New features can be described by adding separate ZSTs to encode them. The
-current design assumes two types, for example: FeatureFooSupported and
-NoFoo. As said above, this will require implementors to observe more safety
-requirements in their DriverFeatures trait implementation.
-
-A subsequent commit will build on this one to add support for FEAT_RENDER.
-This is required by Tyr and other drivers.
-
-Additionally, features can also require additional traits to be implemented
-when enabled. These traits can add their own safety requirements.
-
-This is roughly described below, with some boilerplate omitted:
-
-pub struct ModesetSupported;
-pub struct NoModeset;
-
-pub unsafe trait ModesetOps: Driver {
-    fn set_mode(&self, ...);
-}
-
-pub trait ModesetRequirement<F: ModesetFeature> {}
-impl<T: ModesetOps> ModesetRequirement<ModesetSupported> for T {}
-impl<T> ModesetRequirement<NoModeset> for T {}
-
-pub trait Driver:
-    DriverFeatures
-    + ModesetRequirement<Self::Modeset>
-{
-    // ...
-}
-
-// `driver::compute_features` is augmented to include the feature flag.
-const fn compute_features() -> u32 {
-  if T::Modeset::ENABLED {
-    features |= FEAT_MODESET;
-  }
-
-  features
-}
-
-// In driver code, `DriverFeatures` can enable the feature via
-// `ModesetSupported`.
-unsafe impl DriverFeatures for MyDriver {
-  type Modeset = ModesetSupported;
-}
-
-// Required because `Modeset = ModesetSupported`.
-unsafe impl ModesetOps for MyDriver {...}
-
-Feature support will soon be required by upcoming DRM drivers. This
-extensible model lets us describe them in terms of either additional safety
-requirements and/or traits.
+This is then enabled in the Tyr driver, while it's left as NoRender for
+Nova for the time being.
 
 Signed-off-by: Daniel Almeida <daniel.almeida@collabora.com>
 ---
- drivers/gpu/drm/nova/driver.rs |  5 +++++
- drivers/gpu/drm/tyr/driver.rs  |  5 +++++
- rust/kernel/drm/device.rs      |  6 +++++-
- rust/kernel/drm/driver.rs      | 17 ++++++++++++++++-
- 4 files changed, 31 insertions(+), 2 deletions(-)
+ drivers/gpu/drm/nova/driver.rs |  4 +++-
+ drivers/gpu/drm/tyr/driver.rs  | 12 +++++++++---
+ rust/kernel/drm/device.rs      | 10 +++++++++-
+ rust/kernel/drm/driver.rs      | 37 ++++++++++++++++++++++++++++++++++++-
+ 4 files changed, 57 insertions(+), 6 deletions(-)
 
 diff --git a/drivers/gpu/drm/nova/driver.rs b/drivers/gpu/drm/nova/driver.rs
-index 2246d8e104e0..247a05f7b3a7 100644
+index 247a05f7b3a7..4de1e4cfdc5d 100644
 --- a/drivers/gpu/drm/nova/driver.rs
 +++ b/drivers/gpu/drm/nova/driver.rs
-@@ -69,3 +69,8 @@ impl drm::Driver for NovaDriver {
-         (NOVA_GEM_INFO, drm_nova_gem_info, ioctl::AUTH | ioctl::RENDER_ALLOW, File::gem_info),
-     }
- }
-+
-+// SAFETY: This trait requires implementers to observe the safety requirements
-+// of each enabled feature. There are no features enabled, so this is safe by
-+// definition.
-+unsafe impl drm::driver::DriverFeatures for NovaDriver {}
+@@ -73,4 +73,6 @@ impl drm::Driver for NovaDriver {
+ // SAFETY: This trait requires implementers to observe the safety requirements
+ // of each enabled feature. There are no features enabled, so this is safe by
+ // definition.
+-unsafe impl drm::driver::DriverFeatures for NovaDriver {}
++unsafe impl drm::driver::DriverFeatures for NovaDriver {
++    type Render = drm::driver::NoRender;
++}
 diff --git a/drivers/gpu/drm/tyr/driver.rs b/drivers/gpu/drm/tyr/driver.rs
-index 0389c558c036..ec2aa30515a1 100644
+index ec2aa30515a1..c12ad8467605 100644
 --- a/drivers/gpu/drm/tyr/driver.rs
 +++ b/drivers/gpu/drm/tyr/driver.rs
-@@ -191,6 +191,11 @@ impl drm::Driver for TyrDriver {
-     }
+@@ -192,9 +192,15 @@ impl drm::Driver for TyrDriver {
  }
  
-+// SAFETY: This trait requires implementers to observe the safety requirements
-+// of each enabled feature. There are no features enabled, so this is safe by
-+// definition.
-+unsafe impl drm::driver::DriverFeatures for TyrDriver {}
-+
+ // SAFETY: This trait requires implementers to observe the safety requirements
+-// of each enabled feature. There are no features enabled, so this is safe by
+-// definition.
+-unsafe impl drm::driver::DriverFeatures for TyrDriver {}
++// of each enabled feature.
++//
++// For `FeatureRender`: we do not call modesetting APIs in our ioctls, and we do
++// not use any APIs requiring a DRM master. Furthermore, it is not possible for
++// a client to interfere in another client by design. This is enforced by the
++// `VM` layer and, at a lower level, by the system's IOMMU.
++unsafe impl drm::driver::DriverFeatures for TyrDriver {
++    type Render = drm::driver::RenderSupported;
++}
+ 
  #[pin_data]
  struct Clocks {
-     core: Clk,
 diff --git a/rust/kernel/drm/device.rs b/rust/kernel/drm/device.rs
-index 3ce8f62a0056..cfc2f34e8cc2 100644
+index cfc2f34e8cc2..b2c2e6c195af 100644
 --- a/rust/kernel/drm/device.rs
 +++ b/rust/kernel/drm/device.rs
-@@ -61,6 +61,10 @@ pub struct Device<T: drm::Driver> {
- }
+@@ -62,7 +62,15 @@ pub struct Device<T: drm::Driver> {
  
  impl<T: drm::Driver> Device<T> {
-+    const fn compute_features() -> u32 {
-+        drm::driver::FEAT_GEM
-+    }
+     const fn compute_features() -> u32 {
+-        drm::driver::FEAT_GEM
++        use crate::drm::driver::FeatureRender;
 +
-     const VTABLE: bindings::drm_driver = drm_legacy_fields! {
-         load: None,
-         open: Some(drm::File::<T::File>::open_callback),
-@@ -86,7 +90,7 @@ impl<T: drm::Driver> Device<T> {
-         name: crate::str::as_char_ptr_in_const_context(T::INFO.name).cast_mut(),
-         desc: crate::str::as_char_ptr_in_const_context(T::INFO.desc).cast_mut(),
++        let mut features = drm::driver::FEAT_GEM;
++
++        if T::Render::ENABLED {
++            features |= drm::driver::FEAT_RENDER;
++        }
++
++        features
+     }
  
--        driver_features: drm::driver::FEAT_GEM,
-+        driver_features: Self::compute_features(),
-         ioctls: T::IOCTLS.as_ptr(),
-         num_ioctls: T::IOCTLS.len() as i32,
-         fops: &Self::GEM_FOPS,
+     const VTABLE: bindings::drm_driver = drm_legacy_fields! {
 diff --git a/rust/kernel/drm/driver.rs b/rust/kernel/drm/driver.rs
-index f30ee4c6245c..fdfd083ba2b6 100644
+index fdfd083ba2b6..331a998e47e4 100644
 --- a/rust/kernel/drm/driver.rs
 +++ b/rust/kernel/drm/driver.rs
-@@ -98,7 +98,7 @@ pub trait AllocImpl: super::private::Sealed + drm::gem::IntoGEMObject {
- /// This trait must be implemented by drivers in order to create a `struct drm_device` and `struct
- /// drm_driver` to be registered in the DRM subsystem.
- #[vtable]
--pub trait Driver {
-+pub trait Driver: DriverFeatures {
-     /// Context data associated with the DRM driver
-     type Data: Sync + Send;
+@@ -15,6 +15,9 @@
+ /// Driver use the GEM memory manager. This should be set for all modern drivers.
+ pub(crate) const FEAT_GEM: u32 = bindings::drm_driver_feature_DRIVER_GEM;
  
-@@ -168,3 +168,18 @@ fn drop(&mut self) {
-         unsafe { bindings::drm_dev_unregister(self.0.as_raw()) };
-     }
- }
++/// Driver supports render nodes, i.e.: /dev/dri/renderDXX devices.
++pub(crate) const FEAT_RENDER: u32 = bindings::drm_driver_feature_DRIVER_RENDER;
 +
-+/// Marker trait for drivers supporting specific features.
+ /// Information data for a DRM Driver.
+ pub struct DriverInfo {
+     /// Driver major version.
+@@ -182,4 +185,36 @@ fn drop(&mut self) {
+ ///
+ /// Drivers implementing this trait must ensure they comply with the safety
+ /// requirements of each supported feature.
+-pub unsafe trait DriverFeatures {}
 +///
-+/// This trait is unsafe, and each feature might add its own safety
-+/// requirements. The safety requirements for this trait requires the caller to
-+/// comply with the safety requirements of each supported feature.
++/// - For drivers implementing `FeatureRender`:
 +///
-+/// Features might also require additional trait implementations to be present.
-+/// These additional traits may also be unsafe.
-+///
-+/// # Safety
-+///
-+/// Drivers implementing this trait must ensure they comply with the safety
-+/// requirements of each supported feature.
-+pub unsafe trait DriverFeatures {}
++/// The render-accessible subset of the driver's functionality must not allow
++/// clients to interfere with each other or require master privileges. In other
++/// words, any ioctl declared with [`drm::RENDER_ALLOW`] must not call any
++/// KMS/modesetting APIs or require `DRM_MASTER`.
++pub unsafe trait DriverFeatures {
++    /// Feature for render nodes.
++    type Render: FeatureRender;
++}
++
++/// Controls whether render nodes are supported via `Self::ENABLED`.
++pub trait FeatureRender: drm::private::Sealed {
++    /// Whether render nodes are enabled.
++    const ENABLED: bool;
++}
++
++/// A marker type indicating that the driver supports render nodes.
++pub struct RenderSupported;
++
++/// A marker type indicating that the driver does not support render nodes.
++pub struct NoRender;
++
++impl drm::private::Sealed for RenderSupported {}
++impl FeatureRender for RenderSupported {
++    const ENABLED: bool = true;
++}
++
++impl drm::private::Sealed for NoRender {}
++impl FeatureRender for NoRender {
++    const ENABLED: bool = false;
++}
 
 -- 
 2.52.0
