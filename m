@@ -2,241 +2,110 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id E4CBCD3BAA6
-	for <lists+nouveau@lfdr.de>; Mon, 19 Jan 2026 23:15:25 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 8B9B7D3BBCF
+	for <lists+nouveau@lfdr.de>; Tue, 20 Jan 2026 00:35:27 +0100 (CET)
 Received: from kara.freedesktop.org (unknown [131.252.210.166])
-	by gabe.freedesktop.org (Postfix) with ESMTPS id 99C9A10E53F;
-	Mon, 19 Jan 2026 22:15:22 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTPS id 9DA7910E547;
+	Mon, 19 Jan 2026 23:35:24 +0000 (UTC)
 Authentication-Results: gabe.freedesktop.org;
-	dkim=pass (2048-bit key; unprotected) header.d=Nvidia.com header.i=@Nvidia.com header.b="Qd7mmCOU";
+	dkim=pass (2048-bit key; unprotected) header.d=collabora.com header.i=@collabora.com header.b="kl6VCdx+";
 	dkim-atps=neutral
 Received: from kara.freedesktop.org (localhost [127.0.0.1])
-	by kara.freedesktop.org (Postfix) with ESMTP id 84D2044CA9;
-	Mon, 19 Jan 2026 22:06:39 +0000 (UTC)
-ARC-Seal: i=2; cv=pass; a=rsa-sha256; d=lists.freedesktop.org;
- s=20240201; t=1768860399;
- b=roH22uVeYTEum/i1JnUIW/ToU0bQMUOv0ikjvAAe1eJV7ysFNClcJXu+8rUySTeUMn9QX
- CnpsNoEBDFF+PXF43Iob312/S+KEe7lqmaoU3bD4Na0P+EZnOQvM+tugN9ruvASp7hB3RV5
- 4JRj/BWUmDRMdE2QfRQcoOq8WNJ2M+AM8sikf/cPt5Jogf7HrvHPbzUPGOznI68HG5yTJPa
- 4XO31hNyLHFa42cEcgbQBDENfJ8fL9sbaTH6YnI69PZORjUxHWTu3/PiOxsLmLNanVvukDw
- rHSUsxXyGdOzDBOqpee1Y/El26P7RZ1Sn2NYPLJnB7Zmk5/2AcXJg63kd/5A==
-ARC-Message-Signature: i=2; a=rsa-sha256; c=relaxed/relaxed;
- d=lists.freedesktop.org; s=20240201; t=1768860399; h=from : sender :
+	by kara.freedesktop.org (Postfix) with ESMTP id 6013C44CA9;
+	Mon, 19 Jan 2026 23:26:41 +0000 (UTC)
+ARC-Seal: i=1; cv=none; a=rsa-sha256; d=lists.freedesktop.org;
+ s=20240201; t=1768865201;
+ b=s4ffGov4o/NV8aNUx3GFfQtvhJrNVXOiJEXMR98a308WBkWkkSnc2VOW1SNq98sn2iZIR
+ 67h1XCQxgHDRQjEL4HWQ1zB8TpKg7Tc51oHT8SuXKduJo1THEPHwLyjL2Jhe2IlhMkc1C9w
+ L7RT1mG8kNDKlm36BACS4HpLodfpNxrFgafKK7FGgMv/j8ymVsaiI1fXyB5DzxpxhqGo4RN
+ g8Td1OuGPSVoZjETJic4+yeSWEB4ItfcmKolbirs/HGCXGUaaByJbBXsDeW7Q8dAR7uJRyM
+ Hk9EXpDLvA164rjGFY34gUcLLAq/blpmusNI5pBxaacGdKhmbERWTRp2NIFQ==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=lists.freedesktop.org; s=20240201; t=1768865201; h=from : sender :
  reply-to : subject : date : message-id : to : cc : mime-version :
  content-type : content-transfer-encoding : content-id :
  content-description : resent-date : resent-from : resent-sender :
  resent-to : resent-cc : resent-message-id : in-reply-to : references :
  list-id : list-help : list-unsubscribe : list-subscribe : list-post :
  list-owner : list-archive;
- bh=MtePjGeMXIYcWbegumVLN0ub1lFDw2T9sNzA+3cugIA=;
- b=0hacfhezTM/YtsliYvdsVOvJHxBGvkXD4bwjFvdtBnhf6uS+c/S6f2HaN2JZbIIhoU2lh
- j5ZmtPusIdxA/IFw+KRkFS/fRrC/ySfUZHmCnWh3QbyLnnYJ4GsKEM6/MGkdZ8e9T++fHmM
- yTMnQKczWMfvAxk7nXy22OjILf3R499gaX+5o+FKhOLZUeEeGfJ3P6qeQQWh7uHxHrWJRpt
- bW98tTa6TCrk3iWAo8taiL+HHBT6dC8jPYgulahtJmC2AdA7DPUOpSfYZJXVr16yywj7FQp
- /wOB0O/vx5N99ZI2FYDAhQhrXCx9SJo7rinJPA9TVtqldTHs/xOR4q0aZGnw==
-ARC-Authentication-Results: i=2; mail.freedesktop.org;
- dkim=pass header.d=Nvidia.com;
-  arc=pass;
-  dmarc=pass (Used From Domain Record) header.from=nvidia.com
- policy.dmarc=reject
-Authentication-Results: mail.freedesktop.org; dkim=pass header.d=Nvidia.com;
- arc=pass;
- dmarc=pass (Used From Domain Record) header.from=nvidia.com policy.dmarc=reject
+ bh=iyot5w4eoQUDKQ7nZAm+2EOtg4XiEeeqyf6CQsMsPrg=;
+ b=EqNA9nyVgOotWakxvFCgOe0T7TiBSfK9yQrt4Y+gLg/wlCYcbzKYLXWt8YNuZjBsMJHmj
+ WrqC64pMryKfN2xxniSLhgUGB9/rISYKRfIpxm16j0gVppj0CCUnfYcOdHaU7tvctiHQofT
+ 0TIhxJKc8drOCbZfTgkm1EmEZ5sm6NkRw7EnHso2FkroZpOd5TBkn/sAXy/oivXUkyUbKos
+ LHehIqAnfZ/nsdwacKB68R2hB5PvaU/dr/ktYWHK2czALVPOIiMZlTB7HFGFZpODIMwCwH5
+ a9DgJCSpqPBQuEtuLjutWChDQ5nWwfHNn3hASv2e5IsWRFHoB78MZ2g3f1ow==
+ARC-Authentication-Results: i=1; mail.freedesktop.org;
+ dkim=pass header.d=collabora.com;
+  arc=none (Message is not ARC signed);
+  dmarc=pass (Used From Domain Record) header.from=collabora.com
+ policy.dmarc=none
+Authentication-Results: mail.freedesktop.org;
+ dkim=pass header.d=collabora.com; arc=none (Message is not ARC signed);
+ dmarc=pass (Used From Domain Record) header.from=collabora.com
+ policy.dmarc=none
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by kara.freedesktop.org (Postfix) with ESMTPS id 2C00944C3F
-	for <nouveau@lists.freedesktop.org>; Mon, 19 Jan 2026 22:06:37 +0000 (UTC)
-Received: from CY3PR05CU001.outbound.protection.outlook.com
- (mail-westcentralusazon11013012.outbound.protection.outlook.com
- [40.93.201.12])
-	by gabe.freedesktop.org (Postfix) with ESMTPS id CA7E910E1C8;
-	Mon, 19 Jan 2026 22:15:19 +0000 (UTC)
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=VUkxwL1LBBv/3CaFKtHF/8nLS3tQmBk3sAeijUlJoBvyxQ7VZWoa0NgWVD7ocGzAd1WZS1Lgm7hR0C2LtcOj6mEn1T5lpclKCD5uJX3oTyaai+hiVUPwqoO7c5sRO3I345A63OkDYWWR9XtH3Jbjuzyq/yQxpsKIQWsScvzxLS608D1YZ8/iWzdhK8VHo3AjhmXmWP751RAjEgZ+SlGyz9VXVQ30o4Wue6VruhsfMicOARAHZbNl/CE/vko/EV4rjHbVkxzrreO3KuY6oJj6imBokNfxkisDqTBARidgIp0OlUyB/1BG9f2c05exM91aAwBnAJZ1bXojf4aDVHUUhg==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=MtePjGeMXIYcWbegumVLN0ub1lFDw2T9sNzA+3cugIA=;
- b=ZUtFaQemOCat0p4gzSzrWCZQ6uscI7jJG7Mt8SNlY263Jf0dNSf8cHkGi88LyMTtjxTizldMr41LBZvAE2FsP8JkzUwWYxTxUE+vzOxW3XrCbO+15ttctsh9a/pP24kfONrdRv/BjetPkB9qLlOLfBeJNH91NXbDoB2dnHv+BjzzuLWpIXpPS/3zvUOsStzomRYyz0290ZpTRsjhvkYJ8Y8o8aCdHzQSSjj4mesCo9JePU4fbeEttHX3vd7PDU+D018T+0LMhLsFkwYRoJtGaI1igF/oGOla+NoXhv1QqYjmkN0M0SnrD3dYD+zmDaOuVevjgzwkWDjZo8SFVlBGjg==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=nvidia.com; dmarc=pass action=none header.from=nvidia.com;
- dkim=pass header.d=nvidia.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=Nvidia.com;
- s=selector2;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=MtePjGeMXIYcWbegumVLN0ub1lFDw2T9sNzA+3cugIA=;
- b=Qd7mmCOUQyIYcTLH410TDHT+7e88BvgDLr8Tzx+F3vppGgLiAs6WvkuNu5EW/TL9QuaiCzPEHl9TWunhKnbBvmnZf8qoWHjGqCZbR3/qcBPF2Gh+Apm4WVz8XGcAOlrZE6DzuUu0mEjpUhrWOv5Y7muEpDKSCRwKOCUgHD01J4IDPLQMbkOn5L8xwL943CxtM6MrpO4rO9+BYHtzotL2VTwNuFB6zJAk0M8CaeLUy+htoGoKved2k8+NrjZYlyCqIaBtHj8QY0teeHNgvL0QljYrOac+o0r1KsX9bqbH6/Xj6lqfBUNLviXWLyMj3dpi6TwBed18SORXWwWzEAlW9w==
-Received: from PH8PR12MB7277.namprd12.prod.outlook.com (2603:10b6:510:223::13)
- by CH3PR12MB8880.namprd12.prod.outlook.com (2603:10b6:610:17b::18) with
- Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9520.12; Mon, 19 Jan
- 2026 22:15:14 +0000
-Received: from PH8PR12MB7277.namprd12.prod.outlook.com
- ([fe80::2920:e6d9:4461:e2b4]) by PH8PR12MB7277.namprd12.prod.outlook.com
- ([fe80::2920:e6d9:4461:e2b4%5]) with mapi id 15.20.9520.006; Mon, 19 Jan 2026
- 22:15:14 +0000
-Message-ID: <ef6ef1e2-25f1-4f1b-a8d4-98c0d7b4ad0c@nvidia.com>
-Date: Tue, 20 Jan 2026 09:15:04 +1100
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v6 1/5] mm/zone_device: Reinitialize large zone device
- private folios
-To: Jason Gunthorpe <jgg@nvidia.com>, Zi Yan <ziy@nvidia.com>
-References: <20260116174947.GA1134434@nvidia.com>
- <8006ea5f-8845-436a-a2d7-125399428762@suse.cz>
- <aWqgHTZ5hjlRvlKU@lstrano-desk.jf.intel.com>
- <20260117005114.GC1134360@nvidia.com>
- <aWsIT8A2dLciFvhj@lstrano-desk.jf.intel.com>
- <eb94d115-18a6-455b-b020-f18f372e283a@nvidia.com>
- <aWsdv6dX2RgqajFQ@lstrano-desk.jf.intel.com>
- <4k72r4n5poss2glrof5fsapczkpcrnpokposeikw5wjvtodbto@wpqsxoxzpvy6>
- <20260119142019.GG1134360@nvidia.com>
- <96926697-070C-45DE-AD26-559652625859@nvidia.com>
- <20260119203551.GQ1134360@nvidia.com>
-Content-Language: en-US
-From: Balbir Singh <balbirs@nvidia.com>
-In-Reply-To: <20260119203551.GQ1134360@nvidia.com>
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
-X-ClientProxiedBy: BY5PR17CA0068.namprd17.prod.outlook.com
- (2603:10b6:a03:167::45) To PH8PR12MB7277.namprd12.prod.outlook.com
- (2603:10b6:510:223::13)
+	by kara.freedesktop.org (Postfix) with ESMTPS id 7509244BDC
+	for <nouveau@lists.freedesktop.org>; Mon, 19 Jan 2026 23:26:38 +0000 (UTC)
+Received: from bali.collaboradmins.com (bali.collaboradmins.com
+ [148.251.105.195])
+	by gabe.freedesktop.org (Postfix) with ESMTPS id 2D0BC10E0F6;
+	Mon, 19 Jan 2026 23:35:21 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=collabora.com;
+	s=mail; t=1768865719;
+	bh=A88efyBerG2kFCEntsoGVcNKXAjR7S2vi2d1WI2tu5c=;
+	h=From:Subject:Date:To:Cc:From;
+	b=kl6VCdx+SzkUkLXxiyyYUFXyqRI4waoxC+qP91ZVSGdsGvuxIN0+3rFNLN6FB/LlR
+	 myHVS1S/f/LlW09DGFaye8SPQvGy4wBVFijbujjrFuQtwODrag6ajr8j2hJD9yconX
+	 WNC30g+1QeP5StywSrfC1kBMIZt75zmBSOgqVh5K1pxeSvBjp8QxXPSE5Yku+nCAy6
+	 iJcmWapwA1WjohduBnZP1XELn2ffhz5uIi5NDgsUrgVjv5Cod6QvAGx5rijPLLnHgi
+	 kvuu9s9zU3RJ6VMy3c7QGm2QwVNyroarWaBDrba+dV83a8V8Gsz/rrsKRyhE/niPk9
+	 rQuYGIEPyYqNw==
+Received: from [192.168.0.79] (unknown
+ [IPv6:2804:14d:72b4:81ae:67c:16ff:fe57:b5a3])
+	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+	 key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest
+ SHA256)
+	(No client certificate requested)
+	(Authenticated sender: dwlsalmeida)
+	by bali.collaboradmins.com (Postfix) with ESMTPSA id 31EED17E07FA;
+	Tue, 20 Jan 2026 00:35:17 +0100 (CET)
+From: Daniel Almeida <daniel.almeida@collabora.com>
+Subject: [PATCH 0/2] DRM 'feature' support for DRM drivers
+Date: Mon, 19 Jan 2026 20:34:45 -0300
+Message-Id: <20260119-drm-render-v1-0-8326e4d5cb44@collabora.com>
 MIME-Version: 1.0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: PH8PR12MB7277:EE_|CH3PR12MB8880:EE_
-X-MS-Office365-Filtering-Correlation-Id: bb93f5d7-21ae-4195-ba95-08de57a8384c
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: 
-	BCL:0;ARA:13230040|366016|376014|7416014|10070799003|1800799024;
-X-Microsoft-Antispam-Message-Info: 
-	=?utf-8?B?cENyZEd1YjdVMmtCa1F2b1lVQWlUQmlqcSt5amRpSmxTWU5mZnRZK3ZRakNP?=
- =?utf-8?B?K0tzWEpIb0tsZ3ZiTDYxWlFYMjBETXVGeEpEZVppbU1WRUI2dnJjUUtvK043?=
- =?utf-8?B?YXFqSHZDOHRwaFZpNEFmNnczZnk5TVltVlkxMWlKU0x2QkZ1MFQ2Z3FKMldN?=
- =?utf-8?B?cGtzM21nNXFvcmprclFSc0tKYjlxbmNaUG1JY1FGeFg5ZE10Vi9Yc0NhUmk1?=
- =?utf-8?B?Y0t3RjBwcmJNdXQ2NVNUb2FVeDdtR3ppU3FIRHBjUnBjVS9WT3pBdFpINkxP?=
- =?utf-8?B?OW9ZNkRuc0d4dTRlb0N6T0VlalhHZFFCU3cwZTJRdnEvRU5aSnhYWmRhV1Va?=
- =?utf-8?B?N0VvUnVQbzd5cFdSMmtDa1J5QVJHZ3NjdDNpRmhMVnhuRG0rY0lGclVIUnRt?=
- =?utf-8?B?TXNRV3ZyaGJDNHR5VGlIZnlYN0lXOXNCZnp0VUFNQVBuODFzY1BObzAvZzZ3?=
- =?utf-8?B?bnVMR2lMQzVzN1dtY3l1bktQM28rVFVwdU5LZHFPZVg5QllMWlF2YnNPZVA0?=
- =?utf-8?B?RTdKdU9BaWNreml6K3orV00xM0pkLzBveUdwd1JXSTJlRHNlYzc1T21NanBM?=
- =?utf-8?B?NTFMSkY3aituUHFGNVVsbkE3bXFvQWc1UytaV3RQVkdRQk04VU45Y295N2RE?=
- =?utf-8?B?WnVXY0ZUTFU1UnliVk5xc0lsdno5aGs5MWRFU2w0U2k3cE9mdXhIeTJXWmtO?=
- =?utf-8?B?cm90Z2tjc3RyWTFJbk8rcDFwbXZ2UlMwYXM3eE91WTJ1d0k3MmY1d1U2MFpB?=
- =?utf-8?B?YnhoWDgxVjNBSFdiZVRjMkk5SExZOUhuWVNNSWV6YXBGRGZ6K1BKYzhkYk1n?=
- =?utf-8?B?cktSYml5TWYvdFVsTDhoUXVLSWFsN3l6VGlEZis2VjlBSnRBYmloM25sdDNI?=
- =?utf-8?B?NHYvd3cxT2lxbDhWdmVpK3lzQVNkT1VhSnRPUDFSZGk2bkxTM05qVnowT3Q5?=
- =?utf-8?B?T2IzWGVIMFRKM0YxTm5jNEM2bXJrV2RJR1ZONFBhYndYcXF1ZTJCc1NJaFJm?=
- =?utf-8?B?d1RuWWY1bXZnNGRnenZQeGtEcFo5dlRqSjh2QVY4aE81OHV6bVhKYzV0M25v?=
- =?utf-8?B?a1VWa1hWeFB5cWZBOG9kb2tMc2hqandVd01aLytFVEFtMFU3OGUwR2oxMnBr?=
- =?utf-8?B?dFlZVThnVHI3RmhrMndUWG9TK3NndGtrWkJMMTl5R2lzaXRIeUU1MnJuOEJE?=
- =?utf-8?B?U1Bpb0FFSm4zV0haWlk1elhDU3pXU3MzeVpoQWdiL3I2Y3V2T2FVTVlSKzh4?=
- =?utf-8?B?UlIyVnVLRnJaN05nR0FRRWVoRGIrdjRCdUI0L2pHdmVCSmdnaHZYMFc1ODhR?=
- =?utf-8?B?Tm44ellpYTV6UnF3U3NITHA0MExsK3NuYkk0dE93TDJCUjhqREVlMW9uYWxy?=
- =?utf-8?B?QmM5eHMvUzVpUjg5U0Y4ZUpuUTdGb25ENWZzUm5LbnlHNGljZTM2WUJPWFUx?=
- =?utf-8?B?V1hBSDdud2d6VmNQMm1qb0htOHlIQVl6SDhVcEg4NmJsRmJUVnpoL05SRGdm?=
- =?utf-8?B?VW5OUUczSnA3TkNITXQ2YWM1NjdiS1V1NlRFQUhsL0VjUEVaTHA0VDhMM2da?=
- =?utf-8?B?bmxLamRMREhZaENUTS9yQnN3TGZWWHNaR2NwSDlNWUxXSVRlMkt1KzN2djlW?=
- =?utf-8?B?MW5wdW1KSHg1eERMSHg1d0xtcFJITmlRSHI1eUo2cVhQMlJTTWtjNlU5NjU1?=
- =?utf-8?B?YXpHNjNON1RDWXpWWElXZnN5NWhyTktkbHRtY0RWVmJOaHFXQUxtS1pEZlRz?=
- =?utf-8?B?SW5lTlVtd3RYNzlCKzNYN0RDbmNNYlVzWlRac1JmcVpMZDlSS0NKd2puTFZu?=
- =?utf-8?B?OWx5MnpTTm8wYVBUTWJWRVlmQjA2QzZSbFN0cmd5QUNTNUVxREFXL3RONGJz?=
- =?utf-8?B?eEVhQmhQWG42Rmt6aXpZTmhWN1BHVnJGckVpTjZ5SG9ROFBkbTB0YzRRZ2Zy?=
- =?utf-8?B?NGxJVHBKbmNhU3NGWXB3R1BvMjEyT1JUenhBaEtjYndtL0dLNUlWZDlselI0?=
- =?utf-8?B?aGVPckdsM1FWT0hJVi8vZmdhRFpEdCtxVzhCWnczOU5yQzdJRmhFdmdVQ2hW?=
- =?utf-8?B?Ti9tcE1LU1VnNHlMaFlwTHNwTDFvclpkdmhYVjMwSXQ5eGZYK2VKdUs0d200?=
- =?utf-8?Q?/zMk=3D?=
-X-Forefront-Antispam-Report: 
-	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:PH8PR12MB7277.namprd12.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230040)(366016)(376014)(7416014)(10070799003)(1800799024);DIR:OUT;SFP:1101;
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: 
-	=?utf-8?B?eHB0ZUZMSGprUllVVGV1dUEzR1ZMa1JseVdiTmFPa1RCNytoMXhiTjRPYUMw?=
- =?utf-8?B?T1piTzlwVC9UTFV1Z2l2ZHFaQUxKTWdYcmVDMHVFRDZkT1c4SmhjSFhjeDJz?=
- =?utf-8?B?cjJCTXM2b0lLejdSYUtTODZIeFJML1NXUHljT1p0M0JOMlFqanhsVHMzUFNZ?=
- =?utf-8?B?OTVKZGJaYXd0amlHYURWczN3OFZmMXBtRUt4clRvSFE0NmRYZnk5N2hpZ096?=
- =?utf-8?B?RFJWZkJDY0hFbjFSVmZvOHdoalNqQ2dNUnFHS2lOTHU1bEUxRkNKYzE1Tkp1?=
- =?utf-8?B?dXV6NVhLVWdpMzYyVlAyV3p2dnJrVk9tNU4xZk5XQTh0TWdVT1NndFg3cXp6?=
- =?utf-8?B?WmJkZUsycnVvbjk3RVgrT1dmK2JROVZoa0RmQUkwdFVqNUs1b0VGVzBaTzcv?=
- =?utf-8?B?Y1ZSbkZMYjU3Z05vY0k4QnpSc0dSRWpjQlBFWTV2d0JORHNncHE2NFkyMlBm?=
- =?utf-8?B?YnlhVjhzS1hOMDlPeEdTNVo0QUpsYU9QZ1V2ZTVGSFVlU0tyS0xZeUtTbExC?=
- =?utf-8?B?aXBsSW1kK1NvUTl0VDVDTzE3WjZGTktHSm1IcWs4STJ6bldJdTlQQUVZUzZB?=
- =?utf-8?B?eWlQclYxbWxCMVphdG1qdDF1bnduUXhwV3I3bDZUNXFwa0RiN1BKdllncFdx?=
- =?utf-8?B?NlZTL0NJY3ZMN3JsbUNzNUlPY3JWdlJaS2dCL0U4SURGSzZHcUl4QjJCbUov?=
- =?utf-8?B?MnVDRTBNMXpPQTJPa3dHN2JWUC93Z2ZCeERiemdRTTFTL3JsTERuM243cU5u?=
- =?utf-8?B?WlVOWEhJUlFkQzFZV09Va2dGa1lUaEQ4VkdDbkh2UXhESVkxbERxWC9HTTc4?=
- =?utf-8?B?Z0dTZW5kWUljcjhNeFBwZHRZczlYYnpMeC8yaFRuMWhNNEFraXA1ZWtMa2Zu?=
- =?utf-8?B?QjRmclpDTm4rRnp2d2w0TE1RK291Zm5KVGFUWmhGV3RZdWVuRXF6d2xaVUhW?=
- =?utf-8?B?eEpyQVM4eVJVczY3RktLK1k3dm1PWGJra0xEVjkrWFN0dzZ2ZGIxdSs2M0FE?=
- =?utf-8?B?KzIzQS81MndlaDBGcHgramwza3R1S0lsUmZ1SlNxQTMzNjZHNlI5eEh0NUxw?=
- =?utf-8?B?N0NFZ2tqdVUxS1ZrYzhSVHBUODd1a3hMaGhVc2VHdTlVNjlwdjFaM3ltY0pG?=
- =?utf-8?B?YkUxUUdiQU12K05sLzl5cWF0VlZlSGZjM0RxWGZMNjQrQXM0Z1BiT2J6cXM4?=
- =?utf-8?B?OFA3akQrSE9qYzc5ZEdwRTNJeHJXeFAxNThLNWhxNlNBaFQ0NzFWRnk3ajho?=
- =?utf-8?B?N1NTN2hiWkJwa0xZSE1PdTJEMFNHY0k2RHBhR1JZa3QwSW9pQ01jTXJTOWxk?=
- =?utf-8?B?UGlkaUJXMlNsQkE4dXJ5TVBkdFJvekt5WUJNdElrNHpQRWovdFhJWStaQnpw?=
- =?utf-8?B?RmF1VVRxYkxndGQrZ0drcVdGTE9kQTlwMVp0SmxYUlkrQ1ZiTUxCbzRHTXNR?=
- =?utf-8?B?a0NLb0VBb01ody9Xa2VscTc3aGw3SDNQUEpodFp5RGl5cTFBdWQ1NEw4SzJP?=
- =?utf-8?B?em0wLzZQaXpyMDVTazU4YS9EZ0V5WGlncWxUUng1Q1l6RmdNV3JCSTFZZll2?=
- =?utf-8?B?ZFBVMm9vTzEvNFJRejN1NDZsd24rZmt3MFZVeHMrNGE1R1dGMGk3SHBGWG9I?=
- =?utf-8?B?WSt3WXNpdWZNQjJ3eHZpZ3pxazZqUGt3WWdCWFJnc25WeGIxelNSNFdVdzIx?=
- =?utf-8?B?N25BMlVWK0lRT2hCMlBHMUEzSCtqQURFQVNEL1hvMnJlSHIrZWVQL3V1eGI5?=
- =?utf-8?B?R0o3a1A1MnA1YUNuZkZjbnE1L3MyOW5uaU5yWkhVUm5HTmZyUENCQnFtMTlT?=
- =?utf-8?B?YS8yUllid0xBQWtUQk5FS05xMTJqSHBIRlRiUnF1ai82cHlrVkNaWStJT2Fx?=
- =?utf-8?B?VVgzclV1cis5MVlmcXZNS002eWQ4UlErZzNEeXRCM1dwdVZ1R2xTcHF5VFk0?=
- =?utf-8?B?eDZCWUNoTWRGTXVDclk3SEg4Nzc1bnVEVkZCWElJdUNxWHllZHRoWXc2MWdS?=
- =?utf-8?B?ZERwcHJmUEI0eUFsL0doKzhoVHNIRkpOODNtVWVucFVjY0lJWUQxRFoyYnJi?=
- =?utf-8?B?M2VzNzFMS3kyWWxhamhzQzlqRW04NGt4WEprQ2NzUHVzYklIUmZrUGJMS3VR?=
- =?utf-8?B?NEwxSjF0dzVlWFRMTmtrYTRqSHFQUUl3YU5pS2ZnMlErOVNpeE96ZHdKak0z?=
- =?utf-8?B?dUg1WVZxRGQ1SDNtenJydTdEQ1V2NVE4UFBaVlFNNHc0c3lvSVdDcS9xRkty?=
- =?utf-8?B?bUszUms0UUtmcFdWMkNRVU44dkM3Y1dJNFdDTzZhMi9SL2NxR24wZlU1YXpF?=
- =?utf-8?B?akcxTU9pVFRwVm5SU1FFc1V0dWkwN3l0WHZ5MC9wd3dwTDd3bGxvR0hZQVdm?=
- =?utf-8?Q?QGSLUkEzon9HV+bobpiCxkxw79FLiAtxcpu8F?=
-X-OriginatorOrg: Nvidia.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 
- bb93f5d7-21ae-4195-ba95-08de57a8384c
-X-MS-Exchange-CrossTenant-AuthSource: PH8PR12MB7277.namprd12.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 19 Jan 2026 22:15:14.5436
- (UTC)
-X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
-X-MS-Exchange-CrossTenant-Id: 43083d15-7273-40c1-b7db-39efd9ccc17a
-X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: 
- x6yiW5ctcLv968C3EMbtZ48hs0UU5r8g/2yLV1CXPAdu5NYzeRi+N6cgwZMhkhIoDTphl/otUG7TCJApdut9CA==
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: CH3PR12MB8880
-Message-ID-Hash: Z6UFBBSDN3XFKLGCU6S33O2VKEEOCFO5
-X-Message-ID-Hash: Z6UFBBSDN3XFKLGCU6S33O2VKEEOCFO5
-X-MailFrom: balbirs@nvidia.com
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+X-B4-Tracking: v=1; b=H4sIAJW/bmkC/x3MMQqAMAxG4atIZguNaBCvIg5ifzWDVVIQQXp3i
+ +M3vPdSgikSDdVLhluTnrGA64qWfY4bnIZianwjnllcsMMZYoA59B2EO2l5FSrBZVj1+WfjlPM
+ HZtLWeVwAAAA=
+X-Change-ID: 20260116-drm-render-e85e615641f6
+To: Danilo Krummrich <dakr@kernel.org>, Alice Ryhl <aliceryhl@google.com>,
+ David Airlie <airlied@gmail.com>, Simona Vetter <simona@ffwll.ch>,
+ Daniel Almeida <daniel.almeida@collabora.com>,
+ Miguel Ojeda <ojeda@kernel.org>, Boqun Feng <boqun.feng@gmail.com>,
+ Gary Guo <gary@garyguo.net>,
+ =?utf-8?q?Bj=C3=B6rn_Roy_Baron?= <bjorn3_gh@protonmail.com>,
+ Benno Lossin <lossin@kernel.org>, Andreas Hindborg <a.hindborg@kernel.org>,
+ Trevor Gross <tmgross@umich.edu>,
+ Boris Brezillon <boris.brezillon@collabora.com>
+X-Mailer: b4 0.14.3
+Message-ID-Hash: 4L424TVDFWIYBNG2QXDMIZ5EFPGSZ3UF
+X-Message-ID-Hash: 4L424TVDFWIYBNG2QXDMIZ5EFPGSZ3UF
+X-MailFrom: daniel.almeida@collabora.com
 X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency;
  loop; banned-address; member-moderation; nonmember-moderation; administrivia;
  implicit-dest; max-recipients; max-size; news-moderation; no-subject;
  digests; suspicious-header
-CC: Matthew Wilcox <willy@infradead.org>,
- Alistair Popple <apopple@nvidia.com>,
- Matthew Brost <matthew.brost@intel.com>, Vlastimil Babka <vbabka@suse.cz>,
- Francois Dugast <francois.dugast@intel.com>, intel-xe@lists.freedesktop.org,
- dri-devel@lists.freedesktop.org, adhavan Srinivasan <maddy@linux.ibm.com>,
- Nicholas Piggin <npiggin@gmail.com>, Michael Ellerman <mpe@ellerman.id.au>,
- "Christophe Leroy (CS GROUP)" <chleroy@kernel.org>,
- Felix Kuehling <Felix.Kuehling@amd.com>,
- Alex Deucher <alexander.deucher@amd.com>,
- =?UTF-8?Q?Christian_K=C3=B6nig?= <christian.koenig@amd.com>,
- Simona Vetter <simona@ffwll.ch>,
- Maarten Lankhorst <maarten.lankhorst@linux.intel.com>,
- Maxime Ripard <mripard@kernel.org>, Danilo Krummrich <dakr@kernel.org>,
- David Hildenbrand <david@kernel.org>, Oscar Salvador <osalvador@suse.de>,
- Andrew Morton <akpm@linux-foundation.org>, Leon Romanovsky <leon@kernel.org>,
- Lorenzo Stoakes <lorenzo.stoakes@oracle.com>,
- "Liam R . Howlett" <Liam.Howlett@oracle.com>,
- Mike Rapoport <rppt@kernel.org>, Suren Baghdasaryan <surenb@google.com>,
- Michal Hocko <mhocko@suse.com>, linuxppc-dev@lists.ozlabs.org,
- kvm@vger.kernel.org, linux-kernel@vger.kernel.org,
- amd-gfx@lists.freedesktop.org, nouveau@lists.freedesktop.org,
- linux-mm@kvack.org, linux-cxl@vger.kernel.org
+CC: nouveau@lists.freedesktop.org, dri-devel@lists.freedesktop.org,
+ linux-kernel@vger.kernel.org, rust-for-linux@vger.kernel.org
 X-Mailman-Version: 3.3.8
 Precedence: list
 List-Id: Nouveau development list <nouveau.lists.freedesktop.org>
 Archived-At: 
- <https://lists.freedesktop.org/hyperkitty/list/nouveau@lists.freedesktop.org/message/Z6UFBBSDN3XFKLGCU6S33O2VKEEOCFO5/>
+ <https://lists.freedesktop.org/hyperkitty/list/nouveau@lists.freedesktop.org/message/4L424TVDFWIYBNG2QXDMIZ5EFPGSZ3UF/>
 Archived-At: 
- <https://lore.freedesktop.org/ef6ef1e2-25f1-4f1b-a8d4-98c0d7b4ad0c@nvidia.com/>
+ <https://lore.freedesktop.org/20260119-drm-render-v1-0-8326e4d5cb44@collabora.com/>
 List-Archive: 
  <https://lists.freedesktop.org/hyperkitty/list/nouveau@lists.freedesktop.org/>
 List-Archive: <https://lore.freedesktop.org/nouveau>
@@ -246,110 +115,56 @@ List-Post: <mailto:nouveau@lists.freedesktop.org>
 List-Subscribe: <mailto:nouveau-join@lists.freedesktop.org>
 List-Unsubscribe: <mailto:nouveau-leave@lists.freedesktop.org>
 
-On 1/20/26 07:35, Jason Gunthorpe wrote:
-> On Mon, Jan 19, 2026 at 03:09:00PM -0500, Zi Yan wrote:
->>> diff --git a/mm/internal.h b/mm/internal.h
->>> index e430da900430a1..a7d3f5e4b85e49 100644
->>> --- a/mm/internal.h
->>> +++ b/mm/internal.h
->>> @@ -806,14 +806,21 @@ static inline void prep_compound_head(struct page *page, unsigned int order)
->>>  		atomic_set(&folio->_pincount, 0);
->>>  		atomic_set(&folio->_entire_mapcount, -1);
->>>  	}
->>> -	if (order > 1)
->>> +	if (order > 1) {
->>>  		INIT_LIST_HEAD(&folio->_deferred_list);
->>> +	} else {
->>> +		folio->mapping = NULL;
->>> +#ifdef CONFIG_MEMCG
->>> +		folio->memcg_data = 0;
->>> +#endif
->>> +	}
->>
->> prep_compound_head() is only called on >0 order pages. The above
->> code means when order == 1, folio->mapping and folio->memcg_data are
->> assigned NULL.
-> 
-> OK, fair enough, the conditionals would have to change and maybe it
-> shouldn't be called "compound_head" if it also cleans up normal pages.
-> 
->>>  static inline void prep_compound_tail(struct page *head, int tail_idx)
->>>  {
->>>  	struct page *p = head + tail_idx;
->>>
->>> +	p->flags.f &= ~0xffUL;	/* Clear possible order, page head */
->>
->> No one cares about tail page flags if it is not checked in check_new_page()
->> from mm/page_alloc.c.
-> 
-> At least page_fixed_fake_head() does check PG_head in some
-> configurations. It does seem safer to clear it. Possibly order is
-> never used, but it is free to clear it.
-> 
->>> -	if (order)
->>> -		prep_compound_page(page, order);
->>> +	prep_compound_page(page, order);
->>
->> prep_compound_page() should only be called for >0 order pages. This creates
->> another weirdness in device pages by assuming all pages are
->> compound.
-> 
-> OK
-> 
->>> +	folio = page_folio(page);
->>> +	folio->pgmap = pgmap;
->>> +	folio_lock(folio);
->>> +	folio_set_count(folio, 1);
->>
->> /* clear possible previous page->mapping */
->> folio->mapping = NULL;
->>
->> /* clear possible previous page->_nr_pages */
->> #ifdef CONFIG_MEMCG
->> 	folio->memcg_data = 0;
->> #endif
-> 
-> This is reasonable too, but prep_compound_head() was doing more than
-> that, it is also clearing the order, and this needs to clear the head
-> bit.  That's why it was apppealing to reuse those functions, but you
-> are right they are not ideal.
-> 
-> I suppose we want some prep_single_page(page) and some reorg to share
-> code with the other prep function.
-> 
+This series introduces feature support for DRM drivers, as this will soon
+be needed by Tyr and rvkms.
 
-There is __init_zone_device_page() and __init_single_page(), 
-it does zero out the page and sets the zone, pfn, nid among other things.
-I propose we use the current version with zone_device_free_folio() as is.
+Patch 1 introduces the unsafe DriverFeatures trait. It underpins the design
+by forcing drivers to comply with its safety requirements when enabling
+features. It also introduces the compute_features() helper in order to
+centralize the decision of which features to enable based on the value of
+FeatureFoo::ENABLED.
 
-We can figure out if __init_zone_device_page() can be reused or refactored
-for the purposes to doing this with core MM API's
+Patch two showcases the design by implementing FEAT_RENDER. This adds a
+safety requirement to the DriverFeatures trait that applies when the
+corresponding feature is enabled. It is enabled on Tyr while Nova defaults
+to NoRender, as it's unclear whether it's something that they want to
+enable at the moment. This has the bonus of highlighting how features can
+be disabled in a given driver in a non-disruptive manner.
 
+Optionally, features can require that additional traits be implemented.
+These traits may come with their own safety requirements and the type
+system will ensure that they're indeed implemented if the feature is
+enabled by the driver.
 
->> This patch mixed the concept of page and folio together, thus
->> causing confusion. Core MM sees page and folio two separate things:
->> 1. page is the smallest internal physical memory management unit,
->> 2. folio is an abstraction on top of pages, and other abstractions can be
->>    slab, ptdesc, and more (https://kernelnewbies.org/MatthewWilcox/Memdescs).
-> 
-> I think the users of zone_device_page_init() are principally trying to
-> create something that can be installed in a non-special PTE. Meaning
-> the output is always a folio because it is going to be read as a folio
-> in the page walkers.
-> 
-> Thus, the job of this function is to take the memory range starting at
-> page for 2^order and turn it into a single valid folio with refcount
-> of 1.
-> 
->> If device pages have to initialize on top of pages with obsolete states,
->> at least it should be first initialized as pages, then as folios to avoid
->> confusion.
-> 
-> I don't think so. It should do the above job efficiently and iterate
-> over the page list exactly once.
-> 
-> Jason
+The commit message for patch one describes how this can be achieved in
+rough terms. It's not a reference, though, as a lot of the boilerplate was
+omitted for brevity. In any case, I tested an imaginary "ModesetOps" trait
+in both Tyr and Nova and everything seems to work from a type system's
+perspective.
 
-Agreed
+Finally, the current approach is extensible as new features can be
+described with traits and types without disrupting existing ones. They can
+also convey their own safety requirements and even their own API, as
+described above.
 
-Balbir
+Please feel free to suggest new names for any of the types or patterns
+used. They're somewhat illustrative and not intended as final.
+
+---
+Daniel Almeida (2):
+      rust: drm: add support for driver features
+      rust: drm: add FeatureRender
+
+ drivers/gpu/drm/nova/driver.rs |  7 ++++++
+ drivers/gpu/drm/tyr/driver.rs  | 11 +++++++++
+ rust/kernel/drm/device.rs      | 14 +++++++++++-
+ rust/kernel/drm/driver.rs      | 52 +++++++++++++++++++++++++++++++++++++++++-
+ 4 files changed, 82 insertions(+), 2 deletions(-)
+---
+base-commit: 0f61b1860cc3f52aef9036d7235ed1f017632193
+change-id: 20260116-drm-render-e85e615641f6
+
+Best regards,
+-- 
+Daniel Almeida <daniel.almeida@collabora.com>
+
