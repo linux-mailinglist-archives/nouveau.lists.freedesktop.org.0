@@ -2,100 +2,97 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id 4DAFAD3972D
-	for <lists+nouveau@lfdr.de>; Sun, 18 Jan 2026 15:36:24 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id EE3C8D39DDC
+	for <lists+nouveau@lfdr.de>; Mon, 19 Jan 2026 06:38:16 +0100 (CET)
 Received: from kara.freedesktop.org (unknown [131.252.210.166])
-	by gabe.freedesktop.org (Postfix) with ESMTPS id 7E65310E2D3;
-	Sun, 18 Jan 2026 14:36:21 +0000 (UTC)
-Authentication-Results: gabe.freedesktop.org;
-	dkim=fail reason="signature verification failed" (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="dpXshR4h";
-	dkim-atps=neutral
+	by gabe.freedesktop.org (Postfix) with ESMTPS id CDE4710E364;
+	Mon, 19 Jan 2026 05:38:15 +0000 (UTC)
 Received: from kara.freedesktop.org (localhost [127.0.0.1])
-	by kara.freedesktop.org (Postfix) with ESMTP id 68F7044CAB;
-	Sun, 18 Jan 2026 14:27:41 +0000 (UTC)
+	by kara.freedesktop.org (Postfix) with ESMTP id 2E86A44CB1;
+	Mon, 19 Jan 2026 05:29:34 +0000 (UTC)
 ARC-Seal: i=1; cv=none; a=rsa-sha256; d=lists.freedesktop.org;
- s=20240201; t=1768746461;
- b=RPa7T4Pe5G9C/+S2+otYCsaZJC/3Dgrwl8Z00MTmyiBUNR/2pvMrvJ4STMK3Bbau/KPWD
- KR90EDrDcbRHXVw58SQLJkwxFzSVlOjprVeEhxTEZlzQ1VVYZojwRbxlYJkbMuzS29vAjt7
- IQIug+CTfFYZpadanASce6KkCVFRzbc9/yahsJ0Ur34l/7I6yD+tIPcD5IVEQSITHoNB549
- 7PxC86DLv0BaXaneZzRSBGdp+qDR8TVuG1qdTy6R3dbmDumvKpFwC+hAqGAYu+LbKge/sl5
- ENodtpn9Er7CpmPaqi0vV9S6K2xJvHHQAA0N5yf2k3Ij8hxHbiECL1U8cz3A==
+ s=20240201; t=1768800574;
+ b=eyuysvot9pm5PCLAc42A41JASNxvfzsCGQYm5SZDNSdTkbntPBSIN3zRIRWRx6Kc736zQ
+ /O9G9A+WHoPGUjMqP/lSFPkbr6r+vSIGoPTqUybcam0i2Vj8Xhgj9nOUCuEbLxzm7PMkXuH
+ NMUwPh4dI2DfbcaajYiGIZnMpwXfhaP26YbQ3jgk7TxudBfIAy9wkkVv/u54Op5C6FtPOCx
+ n5wZS99jbmGne+UH9TSWGG1SnU/4TPReLWsoP+wZFHBDicoYYd4+CDttEUhpy+25KBtsTrG
+ mAT2xwVL8SCyNkDbb+4/BViNPTFjjS+EchTRK0C2SMR13l0Okvk9K43LLrQw==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed;
- d=lists.freedesktop.org; s=20240201; t=1768746461; h=from : sender :
+ d=lists.freedesktop.org; s=20240201; t=1768800574; h=from : sender :
  reply-to : subject : date : message-id : to : cc : mime-version :
  content-type : content-transfer-encoding : content-id :
  content-description : resent-date : resent-from : resent-sender :
  resent-to : resent-cc : resent-message-id : in-reply-to : references :
  list-id : list-help : list-unsubscribe : list-subscribe : list-post :
  list-owner : list-archive;
- bh=243XYxPD4Nr0yXcPAF9A5jUT1fmE6zGBiFFlMIvJxvw=;
- b=VVdDGS2I2e50PXreg1BM5vXts3TgctpqjeQD1AZN8SXVraOOYF8Y/54razMf3/AJYc+yL
- YaRuef0nNkGWAc9uDbe8TzArr+qCzvp25QWtsuWr+RJ60vbw6Lx54ut5WBiQNvpidIPaPwZ
- ywj65PLtbOKcy6/BtWcpK9xxI67s1za3xKf1+mwb/DGbX6IRJ2HMMQwbhamrdjEpPY4vFBj
- Plo57ZHzThk8Xb9SgTadit1uEUDgOZDomwX3hwBvlR5L5Gkuz2dufi/AivvMON0FWm/sIQP
- E0HfoQvPFXkBMjdu8qXx7FG4XQdOK2CNL17tSKct68I4aC8Nh6ENmF/4XHIQ==
-ARC-Authentication-Results: i=1; mail.freedesktop.org;
- dkim=pass header.d=kernel.org;
+ bh=ke3AztMpi41ndWna6VHGJ9u0Eqs/uZ7m0EG62mXRCoY=;
+ b=ZOVQG5/WTPJBup0o0Ei24Er36pBrt7qP50GAjBeOQOw6bngPW0Fy3hA+303QIkOHNoaMp
+ PjVgi78sh13CKY4Qw3pGTTwLltKjIsZl6fs3PBk8zB+1hugoDkYJAAxN6A/wJ8JCuBce2/s
+ dGiYQw3Fxj5OFnqalEftrypkejwkI1NIXwqC4NP2/hxdFk85+hEmwrM0ipyWFkUf1Ns9RMp
+ q+HiGWi/KAURKy2oLaXEUdumNxA2V3Na/GwQafw8sl7U4DgAxAyAXCaIFxi5wob3H5awPKp
+ 2Tg2ENTlzjCWY5hYr4D0dgueoH268IbhWTvDDPgus+gWcuk76v6AdTqKpjTQ==
+ARC-Authentication-Results: i=1; mail.freedesktop.org; dkim=fail;
   arc=none (Message is not ARC signed);
-  dmarc=pass (Used From Domain Record) header.from=kernel.org
+  dmarc=fail (Used From Domain Record) header.from=gmail.com
  policy.dmarc=quarantine
-Authentication-Results: mail.freedesktop.org; dkim=pass header.d=kernel.org;
+Authentication-Results: mail.freedesktop.org; dkim=fail;
  arc=none (Message is not ARC signed);
- dmarc=pass (Used From Domain Record) header.from=kernel.org
+ dmarc=fail (Used From Domain Record) header.from=gmail.com
  policy.dmarc=quarantine
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by kara.freedesktop.org (Postfix) with ESMTPS id 41A91439BD
-	for <nouveau@lists.freedesktop.org>; Sun, 18 Jan 2026 14:27:38 +0000 (UTC)
-Received: from sea.source.kernel.org (sea.source.kernel.org [172.234.252.31])
-	by gabe.freedesktop.org (Postfix) with ESMTPS id 1F9B510E2CB;
-	Sun, 18 Jan 2026 14:36:18 +0000 (UTC)
-Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
-	by sea.source.kernel.org (Postfix) with ESMTP id BCE3F43ABC;
-	Sun, 18 Jan 2026 14:36:17 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id E53DDC116D0;
-	Sun, 18 Jan 2026 14:36:14 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
-	s=k20201202; t=1768746977;
-	bh=33hSF7vZvBt9hpj11PH/qOK78BNtuiOFwFzHcWTHKGs=;
-	h=Date:Subject:Cc:To:From:References:In-Reply-To:From;
-	b=dpXshR4hP1Uedl3csIEZzc8pB6piBF2OUIe80AqEQbPSXr8U6nOJJTJgQo7q9J+oc
-	 txtdGHKW365ZRdZMsmTnCK1Wj4aDchYwxWWRgb2rc54N2Qd4tErlIX9LlR6xitKcN1
-	 eV8z8QL+tcVLJxRFQhwhLALUuRNTA+kk8StX9XCfAlTMDSchYUkYyScaIBt/KmnVIf
-	 W0bj0CVPVLbFlgT34tWVhYHnf+cm8FAcUfBVqq/ycGU9z7yUgJZKbx3PlpQqUhRHuN
-	 XbHpnt+Of98+DF1pBupltso1u/xqd8ZdqCIe0O5nr1dOyw1LtSZCVh03u30E2+8GT0
-	 /PbRrLBXvZJSg==
-Mime-Version: 1.0
+	by kara.freedesktop.org (Postfix) with ESMTPS id B49FB404B2
+	for <nouveau@lists.freedesktop.org>; Mon, 19 Jan 2026 05:29:32 +0000 (UTC)
+Received: from us-smtp-delivery-44.mimecast.com
+ (us-smtp-delivery-44.mimecast.com [205.139.111.44])
+	by gabe.freedesktop.org (Postfix) with ESMTPS id BAA9110E261
+	for <nouveau@lists.freedesktop.org>; Mon, 19 Jan 2026 05:38:13 +0000 (UTC)
+Received: from mx-prod-mc-03.mail-002.prod.us-west-2.aws.redhat.com
+ (ec2-54-186-198-63.us-west-2.compute.amazonaws.com [54.186.198.63]) by
+ relay.mimecast.com with ESMTP with STARTTLS (version=TLSv1.3,
+ cipher=TLS_AES_256_GCM_SHA384) id us-mta-583-TGy4wuIQMWWklk4sI1fKEw-1; Mon,
+ 19 Jan 2026 00:37:07 -0500
+X-MC-Unique: TGy4wuIQMWWklk4sI1fKEw-1
+X-Mimecast-MFC-AGG-ID: TGy4wuIQMWWklk4sI1fKEw_1768801026
+Received: from mx-prod-int-05.mail-002.prod.us-west-2.aws.redhat.com
+ (mx-prod-int-05.mail-002.prod.us-west-2.aws.redhat.com [10.30.177.17])
+	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+	 key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest
+ SHA256)
+	(No client certificate requested)
+	by mx-prod-mc-03.mail-002.prod.us-west-2.aws.redhat.com (Postfix) with ESMTPS
+ id 48DE9195606E;
+	Mon, 19 Jan 2026 05:37:06 +0000 (UTC)
+Received: from dreadlord.taild9177d.ts.net (unknown [10.67.32.125])
+	by mx-prod-int-05.mail-002.prod.us-west-2.aws.redhat.com (Postfix) with ESMTP
+ id 454181955F22;
+	Mon, 19 Jan 2026 05:37:03 +0000 (UTC)
+From: Dave Airlie <airlied@gmail.com>
+To: dri-devel@lists.freedesktop.org
+Subject: [PATCH] nouveau/gsp: use rpc sequence numbers properly.
+Date: Mon, 19 Jan 2026 15:37:01 +1000
+Message-ID: <20260119053701.181329-1-airlied@gmail.com>
+MIME-Version: 1.0
+X-Scanned-By: MIMEDefang 3.0 on 10.30.177.17
+X-Mimecast-Spam-Score: 0
+X-Mimecast-MFC-PROC-ID: 5GHNYpQ1GNcCSiuPVQJY62q2mTLDSQcF78psSOLiMH8_1768801026
+X-Mimecast-Originator: gmail.com
 Content-Transfer-Encoding: quoted-printable
-Content-Type: text/plain; charset=UTF-8
-Date: Sun, 18 Jan 2026 15:36:13 +0100
-Message-Id: <DFRSH2462TT2.RZBLN08KS0IW@kernel.org>
-Subject: Re: [PATCH v2 2/3] rust/drm: Don't setup private driver data until
- registration
-To: "Lyude Paul" <lyude@redhat.com>
-From: "Danilo Krummrich" <dakr@kernel.org>
-References: <20260116204728.725579-1-lyude@redhat.com>
- <20260116204728.725579-3-lyude@redhat.com>
-In-Reply-To: <20260116204728.725579-3-lyude@redhat.com>
-Message-ID-Hash: 6VIRZTERM3MT33K2RUMEEFHXWJOB4OIV
-X-Message-ID-Hash: 6VIRZTERM3MT33K2RUMEEFHXWJOB4OIV
-X-MailFrom: dakr@kernel.org
-X-Mailman-Rule-Hits: nonmember-moderation
+content-type: text/plain; charset=WINDOWS-1252; x-default=true
+Message-ID-Hash: ICUO2DTVYLSDWG3DI72JEBYKJM3WLSI6
+X-Message-ID-Hash: ICUO2DTVYLSDWG3DI72JEBYKJM3WLSI6
+X-MailFrom: airlied@gmail.com
 X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency;
- loop; banned-address; member-moderation
-CC: dri-devel@lists.freedesktop.org, nouveau@lists.freedesktop.org,
- linux-kernel@vger.kernel.org, rust-for-linux@vger.kernel.org,
- Miguel Ojeda <ojeda@kernel.org>, Simona Vetter <simona@ffwll.ch>,
- Alice Ryhl <aliceryhl@google.com>,
- Shankari Anand <shankari.ak0208@gmail.com>, Benno Lossin <lossin@kernel.org>,
- Asahi Lina <lina+kernel@asahilina.net>, Atharv Dubey <atharvd440@gmail.com>,
- Daniel Almeida <daniel.almeida@collabora.com>
+ loop; banned-address; member-moderation; nonmember-moderation; administrivia;
+ implicit-dest; max-recipients; max-size; news-moderation; no-subject;
+ digests; suspicious-header
+CC: nouveau@lists.freedesktop.org
 X-Mailman-Version: 3.3.8
 Precedence: list
 List-Id: Nouveau development list <nouveau.lists.freedesktop.org>
 Archived-At: 
- <https://lists.freedesktop.org/hyperkitty/list/nouveau@lists.freedesktop.org/message/6VIRZTERM3MT33K2RUMEEFHXWJOB4OIV/>
+ <https://lists.freedesktop.org/hyperkitty/list/nouveau@lists.freedesktop.org/message/ICUO2DTVYLSDWG3DI72JEBYKJM3WLSI6/>
 Archived-At: 
- <https://lore.freedesktop.org/DFRSH2462TT2.RZBLN08KS0IW@kernel.org/>
+ <https://lore.freedesktop.org/20260119053701.181329-1-airlied@gmail.com/>
 List-Archive: 
  <https://lists.freedesktop.org/hyperkitty/list/nouveau@lists.freedesktop.org/>
 List-Archive: <https://lore.freedesktop.org/nouveau>
@@ -105,84 +102,123 @@ List-Post: <mailto:nouveau@lists.freedesktop.org>
 List-Subscribe: <mailto:nouveau-join@lists.freedesktop.org>
 List-Unsubscribe: <mailto:nouveau-leave@lists.freedesktop.org>
 
-On Fri Jan 16, 2026 at 9:41 PM CET, Lyude Paul wrote:
-> @@ -118,7 +120,7 @@ pub trait DeviceContext: Sealed + Send + Sync {}
->  ///
->  /// The device in `self.0` is guaranteed to be a newly created [`Device`=
-] that has not yet been
->  /// registered with userspace until this type is dropped.
-> -pub struct UnregisteredDevice<T: drm::Driver>(ARef<Device<T, Uninit>>, N=
-otThreadSafe);
-> +pub struct UnregisteredDevice<T: drm::Driver>(pub(crate) ARef<Device<T, =
-Uninit>>, NotThreadSafe);
-> =20
->  impl<T: drm::Driver> Deref for UnregisteredDevice<T> {
->      type Target =3D Device<T, Uninit>;
-> @@ -165,7 +167,7 @@ impl<T: drm::Driver> UnregisteredDevice<T> {
->      /// Create a new `UnregisteredDevice` for a `drm::Driver`.
->      ///
->      /// This can be used to create a [`Registration`](kernel::drm::Regis=
-tration).
-> -    pub fn new(dev: &device::Device, data: impl PinInit<T::Data, Error>)=
- -> Result<Self> {
-> +    pub fn new(dev: &device::Device) -> Result<Self> {
->          // `__drm_dev_alloc` uses `kmalloc()` to allocate memory, hence =
-ensure a `kmalloc()`
->          // compatible `Layout`.
->          let layout =3D Kmalloc::aligned_layout(Layout::new::<Self>());
-> @@ -184,22 +186,6 @@ pub fn new(dev: &device::Device, data: impl PinInit<=
-T::Data, Error>) -> Result<S
->          .cast();
->          let raw_drm =3D NonNull::new(from_err_ptr(raw_drm)?).ok_or(ENOME=
-M)?;
-> =20
-> -        // SAFETY: `raw_drm` is a valid pointer to `Self`.
-> -        let raw_data =3D unsafe { ptr::addr_of_mut!((*raw_drm.as_ptr()).=
-data) };
-> -
-> -        // SAFETY:
-> -        // - `raw_data` is a valid pointer to uninitialized memory.
-> -        // - `raw_data` will not move until it is dropped.
-> -        unsafe { data.__pinned_init(raw_data) }.inspect_err(|_| {
-> -            // SAFETY: `raw_drm` is a valid pointer to `Self`, given tha=
-t `__drm_dev_alloc` was
-> -            // successful.
-> -            let drm_dev =3D unsafe { Device::into_drm_device(raw_drm) };
-> -
-> -            // SAFETY: `__drm_dev_alloc()` was successful, hence `drm_de=
-v` must be valid and the
-> -            // refcount must be non-zero.
-> -            unsafe { bindings::drm_dev_put(drm_dev) };
-> -        })?;
-> -
->          // SAFETY: The reference count is one, and now we take ownership=
- of that reference as a
->          // `drm::Device`.
->          // INVARIANT: We just created the device above, but have yet to =
-call `drm_dev_register`.
-> @@ -231,7 +217,15 @@ pub fn new(dev: &device::Device, data: impl PinInit<=
-T::Data, Error>) -> Result<S
->  #[repr(C)]
->  pub struct Device<T: drm::Driver, C: DeviceContext =3D Registered> {
->      dev: Opaque<bindings::drm_device>,
-> -    data: T::Data,
-> +
-> +    /// Keeps track of whether we've initialized the device data yet.
-> +    pub(crate) data_is_init: AtomicBool,
+From: Dave Airlie <airlied@redhat.com>
 
-Please use a kernel atomic, i.e. kernel::sync::atomic::Atomic<bool>. See al=
-so [1].
+There are two layers of sequence numbers, one at the msg level
+and one at the rpc level.
 
-[1] https://lore.kernel.org/all/20251230093718.1852322-1-fujita.tomonori@gm=
-ail.com/
+570 firmware started asserting on the sequence numbers being
+in the right order, and we would see nocat records with asserts
+in them.
 
-> +    /// The Driver's private data.
-> +    ///
-> +    /// This must only be written to from [`drm::Registration::new`].
-> +    pub(crate) data: UnsafeCell<MaybeUninit<T::Data>>,
+Add the rpc level sequence number support.
 
-Why not just Opaque<T::Data>?
+Fixes: 53dac0623853 ("drm/nouveau/gsp: add support for 570.144")
+Cc: <stable@vger.kernel.org>
+Signed-off-by: Dave Airlie <airlied@redhat.com>
+---
+ drivers/gpu/drm/nouveau/include/nvkm/subdev/gsp.h     | 6 ++++++
+ drivers/gpu/drm/nouveau/nvkm/subdev/gsp/rm/r535/gsp.c | 4 ++--
+ drivers/gpu/drm/nouveau/nvkm/subdev/gsp/rm/r535/rpc.c | 6 ++++++
+ drivers/gpu/drm/nouveau/nvkm/subdev/gsp/rm/r570/gsp.c | 2 +-
+ 4 files changed, 15 insertions(+), 3 deletions(-)
 
-> +
->      _ctx: PhantomData<C>,
->  }
+diff --git a/drivers/gpu/drm/nouveau/include/nvkm/subdev/gsp.h b/drivers/gp=
+u/drm/nouveau/include/nvkm/subdev/gsp.h
+index b8b97e10ae83..64fed208e4cf 100644
+--- a/drivers/gpu/drm/nouveau/include/nvkm/subdev/gsp.h
++++ b/drivers/gpu/drm/nouveau/include/nvkm/subdev/gsp.h
+@@ -44,6 +44,9 @@ typedef void (*nvkm_gsp_event_func)(struct nvkm_gsp_event=
+ *, void *repv, u32 rep
+  * NVKM_GSP_RPC_REPLY_NOWAIT - If specified, immediately return to the
+  * caller after the GSP RPC command is issued.
+  *
++ * NVKM_GSP_RPC_REPLY_NOSEQ - If specified, exactly like NOWAIT
++ * but don't emit RPC sequence number.
++ *
+  * NVKM_GSP_RPC_REPLY_RECV - If specified, wait and receive the entire GSP
+  * RPC message after the GSP RPC command is issued.
+  *
+@@ -53,6 +56,7 @@ typedef void (*nvkm_gsp_event_func)(struct nvkm_gsp_event=
+ *, void *repv, u32 rep
+  */
+ enum nvkm_gsp_rpc_reply_policy {
+ =09NVKM_GSP_RPC_REPLY_NOWAIT =3D 0,
++=09NVKM_GSP_RPC_REPLY_NOSEQ,
+ =09NVKM_GSP_RPC_REPLY_RECV,
+ =09NVKM_GSP_RPC_REPLY_POLL,
+ };
+@@ -242,6 +246,8 @@ struct nvkm_gsp {
+ =09/* The size of the registry RPC */
+ =09size_t registry_rpc_size;
+=20
++=09u32 rpc_seq;
++
+ #ifdef CONFIG_DEBUG_FS
+ =09/*
+ =09 * Logging buffers in debugfs. The wrapper objects need to remain
+diff --git a/drivers/gpu/drm/nouveau/nvkm/subdev/gsp/rm/r535/gsp.c b/driver=
+s/gpu/drm/nouveau/nvkm/subdev/gsp/rm/r535/gsp.c
+index 2a7e80c6d70f..6e7af2f737b7 100644
+--- a/drivers/gpu/drm/nouveau/nvkm/subdev/gsp/rm/r535/gsp.c
++++ b/drivers/gpu/drm/nouveau/nvkm/subdev/gsp/rm/r535/gsp.c
+@@ -704,7 +704,7 @@ r535_gsp_rpc_set_registry(struct nvkm_gsp *gsp)
+=20
+ =09build_registry(gsp, rpc);
+=20
+-=09return nvkm_gsp_rpc_wr(gsp, rpc, NVKM_GSP_RPC_REPLY_NOWAIT);
++=09return nvkm_gsp_rpc_wr(gsp, rpc, NVKM_GSP_RPC_REPLY_NOSEQ);
+=20
+ fail:
+ =09clean_registry(gsp);
+@@ -921,7 +921,7 @@ r535_gsp_set_system_info(struct nvkm_gsp *gsp)
+ =09info->pciConfigMirrorSize =3D device->pci->func->cfg.size;
+ =09r535_gsp_acpi_info(gsp, &info->acpiMethodData);
+=20
+-=09return nvkm_gsp_rpc_wr(gsp, info, NVKM_GSP_RPC_REPLY_NOWAIT);
++=09return nvkm_gsp_rpc_wr(gsp, info, NVKM_GSP_RPC_REPLY_NOSEQ);
+ }
+=20
+ static int
+diff --git a/drivers/gpu/drm/nouveau/nvkm/subdev/gsp/rm/r535/rpc.c b/driver=
+s/gpu/drm/nouveau/nvkm/subdev/gsp/rm/r535/rpc.c
+index 0dc4782df8c0..3ca3de8f4340 100644
+--- a/drivers/gpu/drm/nouveau/nvkm/subdev/gsp/rm/r535/rpc.c
++++ b/drivers/gpu/drm/nouveau/nvkm/subdev/gsp/rm/r535/rpc.c
+@@ -557,6 +557,7 @@ r535_gsp_rpc_handle_reply(struct nvkm_gsp *gsp, u32 fn,
+=20
+ =09switch (policy) {
+ =09case NVKM_GSP_RPC_REPLY_NOWAIT:
++=09case NVKM_GSP_RPC_REPLY_NOSEQ:
+ =09=09break;
+ =09case NVKM_GSP_RPC_REPLY_RECV:
+ =09=09reply =3D r535_gsp_msg_recv(gsp, fn, gsp_rpc_len);
+@@ -588,6 +589,11 @@ r535_gsp_rpc_send(struct nvkm_gsp *gsp, void *payload,
+ =09=09=09       rpc->data, rpc->length - sizeof(*rpc), true);
+ =09}
+=20
++=09if (policy =3D=3D NVKM_GSP_RPC_REPLY_NOSEQ)
++=09=09rpc->sequence =3D 0;
++=09else
++=09=09rpc->sequence =3D gsp->rpc_seq++;
++
+ =09ret =3D r535_gsp_cmdq_push(gsp, rpc);
+ =09if (ret)
+ =09=09return ERR_PTR(ret);
+diff --git a/drivers/gpu/drm/nouveau/nvkm/subdev/gsp/rm/r570/gsp.c b/driver=
+s/gpu/drm/nouveau/nvkm/subdev/gsp/rm/r570/gsp.c
+index 63102c52478d..d5a7d125cf50 100644
+--- a/drivers/gpu/drm/nouveau/nvkm/subdev/gsp/rm/r570/gsp.c
++++ b/drivers/gpu/drm/nouveau/nvkm/subdev/gsp/rm/r570/gsp.c
+@@ -181,7 +181,7 @@ r570_gsp_set_system_info(struct nvkm_gsp *gsp)
+ =09if (device->func->link_cap)
+ =09=09device->func->link_cap(device, &info->pcieConfigReg.linkCap);
+=20
+-=09return nvkm_gsp_rpc_wr(gsp, info, NVKM_GSP_RPC_REPLY_NOWAIT);
++=09return nvkm_gsp_rpc_wr(gsp, info, NVKM_GSP_RPC_REPLY_NOSEQ);
+ }
+=20
+ static void
+--=20
+2.52.0
+
